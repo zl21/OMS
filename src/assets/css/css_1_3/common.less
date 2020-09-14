@@ -1,0 +1,250 @@
+@import '~burgeon-ui/src/styles/index.less';
+
+
+//接收主题参数，设置变量
+  // Prefix
+
+  // Color
+  @primary-color          : rgba(253, 100, 66, 1);
+  @info-color             : #2db7f5;
+  @success-color          : #19be6b;
+  @processing-color       : @primary-color;
+  @warning-color          : #ff9900;
+  @error-color            : #fd6442;
+  @normal-color           : #e6ebf1;
+  @link-color             : #2D8cF0;  //a链接
+  @link-hover-color       : tint(@link-color, 20%);
+  @link-active-color      : shade(@link-color, 5%);
+  @selected-color         : fade(@primary-color, 90%);
+  @tooltip-color          : #fff;
+  @subsidiary-color       : #808695;
+  @rate-star-color        : #f5a623;
+
+  // Base
+  @body-background        : #fff;
+  @font-family            : "Microsoft YaHei",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  @code-family            : Consolas,Menlo,Courier,monospace;
+  @title-color            : #666;
+  @text-color             : rgba(87, 87, 87, 1);
+  @font-size-base         : 12px;
+  @font-size-small        : 12px;
+  @font-size-large        : 16px;
+  @line-height-base       : 1;
+  @line-height-computed   : floor((@font-size-base * @line-height-base));
+  @border-radius-base     : 6px;
+  @border-radius-small    : 4px;
+  @cursor-disabled        : not-allowed;
+  @modal-radius-base      : 6px;
+  @modal-pos-radius-base      : @modal-radius-base;
+  @modal-mask-background: rgba(0, 0, 0, 0.3);
+
+
+  @table-height-base: 28px;  //表行高
+  @table-th-height-base: 28px;//表头行高
+  @table-padding-base:8px;  //cell的padding值
+
+
+
+  // Border 配置
+  @border-color-base      : #dcdee2;  // outside
+  @border-color-split     : #e8eaec;  // inside
+  @border-width-base      : 1px;            // width of the border for a component
+  @border-style-base      : solid;          // style of a components border
+
+  // Background color
+  @background-color-base        : #f7f7f7;  // 全局背景色
+  @background-color-select-hover: @input-disabled-bg;  //默认选中背景颜色
+  @tooltip-bg                   : rgba(70, 76, 91, .9);
+  @head-bg                      : #f9fafc;
+  @table-thead-bg               : #f5f6fa;//表头背景色
+  @table-td-stripe-bg           : #f8f8f9;//斑马线颜色  
+  @table-td-hover-bg            : #B7E5F3;//hover颜色
+  @table-td-highlight-bg        : #B7E5F3;//选中色
+  @menu-dark-title              : #515a6e;
+  @menu-dark-active-bg          : #363e4f;
+  @menu-dark-subsidiary-color   : rgba(255,255,255,.7);
+  @menu-dark-group-title-color  : rgba(255,255,255,.36);
+  @date-picker-cell-hover-bg    : #e1f0fe;
+
+  // Shadow
+  @shadow-color           : rgba(0, 0, 0, .2);
+  @shadow-base            : @shadow-down;
+  @shadow-card            : 0 1px 1px 0 rgba(0,0,0,.1);
+  @shadow-up              : 0 -1px 6px @shadow-color;
+  @shadow-down            : 0 1px 6px @shadow-color;
+  @shadow-left            : -1px 0 6px @shadow-color;
+  @shadow-right           : 1px 0 6px @shadow-color;
+
+  // Button
+  @btn-font-weight        : normal;
+  @btn-padding-base       : 7px 21px;
+  @btn-padding-large      : 6px 15px 6px 15px;
+  @btn-padding-small      : 4px 7px 4px;
+  @btn-padding-base-icon  : 5px 15px 6px;
+  @btn-padding-large-icon : 6px 15px 6px 15px;
+  @btn-padding-small-icon : 4px 7px 4px;
+  @btn-font-size          : 12px;
+  @btn-font-size-large    : 14px;
+  @btn-border-radius      : 2px;
+  @btn-border-radius-small: 3px;
+  @btn-group-border       : shade(@primary-color, 5%);
+
+
+  //按钮禁用样式
+  @btn-disable-color      : #D8D8D8;
+  @btn-disable-bg         : #F4F4F4;
+  @btn-disable-border     : #D8D8D8;
+
+  @btn-default-color      : @text-color;
+  @btn-default-bg         : #fff;
+  @btn-default-border     : @border-color-base;
+
+  //fc default button
+  @btn-fcdefault-color: @primary-color;
+  @btn-fcdefault-bg         : #fff;
+  @btn-fcdefault-border     : @primary-color;
+  @btn-fcdefault-disabled     : #D8D8D8 ;
+  @btn-fcdefault-disabled-bg     : #F4F4F4 ;
+  @btn-fcdefault-disabled-color:#D8D8D8;
+  @btn-fcdefault-width:50px;
+
+  //pos default button
+  @btn-posdefault-color: #fff;
+  @btn-posdefault-bg         : @primary-color;
+  @btn-posdefault-border     : @btn-posdefault-bg  ;
+  @btn-posdefault-hover-bg     : rgba(230, 80, 47, 1);
+  @btn-posdefault-disabled     : #D8D8D8 ;
+  @btn-posdefault-disabled-bg     : #F4F4F4;
+  @btn-posdefault-disabled-color:#D8D8D8;
+
+  @btn-primary-color      : #fff;
+  @btn-primary-bg         : @primary-color;
+
+  @btn-ghost-color        : @text-color;
+  @btn-ghost-bg           : #fff;
+  @btn-ghost-border       : @border-color-base;
+
+  @btn-circle-size        : 28px;  //分页按钮大小
+  @btn-circle-size-large  : 36px;
+  @btn-circle-size-small  : 24px;
+
+  // Layout and grid
+  @grid-columns                : 24;
+  @grid-gutter-width           : 0;
+  @layout-body-background      : #f5f7f9;
+  @layout-header-background    : #515a6e;
+  @layout-header-height        : 64px;
+  @layout-header-padding       : 0 50px;
+  @layout-footer-padding       : 24px 50px;
+  @layout-footer-background    : @layout-body-background;
+  @layout-sider-background     : @layout-header-background;
+  @layout-trigger-height       : 48px;
+  @layout-trigger-color        : #fff;
+  @layout-zero-trigger-width   : 36px;
+  @layout-zero-trigger-height  : 42px;
+
+  // Legend   关闭按钮icon颜色
+  @legend-color           : #999;
+
+  // Input
+  @input-height-base           : 26px;
+  @input-height-large          : 36px;
+  @input-height-small          : 24px;
+
+  @input-padding-horizontal    : 10px;  //输入框左右padding
+  @input-padding-vertical-base : 5px; //输入框上下padding
+  @input-padding-vertical-small: 1px;
+  @input-padding-vertical-large: 6px;
+
+
+  @input-placeholder-color     : #aaa;
+  @input-color                 : @text-color;
+  @input-disabled-color        : @text-color;
+  @input-border-radius         : 2px;
+  @input-border-color          : rgba(216, 216, 216, 1);
+  @input-bg                    : #fff;
+  @input-group-bg              : #f8f8f9;
+
+  @input-hover-border-color    : rgba(15, 142, 233, 1);
+  @input-focus-border-color    : rgba(15, 142, 233, 1);
+  @input-disabled-bg           : rgba(244, 244, 244, 1);
+
+  // Tag
+  @tag-font-size          : 12px;
+
+  // Media queries breakpoints
+  // Extra small screen / phone
+  @screen-xs              : 480px;
+  @screen-xs-min          : @screen-xs;
+  @screen-xs-max          : (@screen-xs-min - 1);
+
+  // Small screen / tablet
+  @screen-sm              : 768px;
+  @screen-sm-min          : @screen-sm;
+  @screen-sm-max          : (@screen-sm-min - 1);
+
+  // Medium screen / desktop
+  @screen-md              : 992px;
+  @screen-md-min          : @screen-md;
+  @screen-md-max          : (@screen-md-min - 1);
+
+  // Large screen / wide desktop
+  @screen-lg              : 1200px;
+  @screen-lg-min          : @screen-lg;
+  @screen-lg-max          : (@screen-lg-min - 1);
+
+  // Z-index
+  @zindex-spin            : 8;
+  @zindex-affix           : 10;
+  @zindex-back-top        : 10;
+  @zindex-select          : 900;
+  @zindex-modal           : 3000;
+  @zindex-drawer          : 1000;
+  @zindex-message         : 1000000 !important;
+  @zindex-notification    : 1010;
+  @zindex-tooltip         : 1060;
+  @zindex-transfer        : 1060;
+  @zindex-loading-bar     : 2000;
+  @zindex-spin-fullscreen : 2010;
+
+  // Animation
+  @animation-time         : .3s;
+  @transition-time        : .2s;
+  @ease-in-out            : ease-in-out;
+
+  // Slider
+  @slider-color              : tint(@primary-color, 20%);
+  @slider-height             : 4px;
+  @slider-margin             : 16px 0;
+  @slider-button-wrap-size   : 18px;
+  @slider-button-wrap-offset : -4px;
+  @slider-disabled-color     : #ccc;
+
+  // Avatar
+  @avatar-size-base: 32px;
+  @avatar-size-lg: 40px;
+  @avatar-size-sm: 24px;
+  @avatar-font-size-base: 18px;
+  @avatar-font-size-lg: 24px;
+  @avatar-font-size-sm: 14px;
+  @avatar-bg: #ccc;
+  @avatar-color: #fff;
+  @avatar-border-radius: @border-radius-small;
+
+  // Anchor
+  @anchor-border-width: 2px;
+
+  //icon 字体大小
+  @icon-font:16px;
+
+
+  /**
+  * 提供公共样式
+  */
+  .no_favorite:before{
+    content: "\e62e";
+  }
+
+  .favorite:before {
+    content: "\e62b";
+  }

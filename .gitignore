@@ -1,0 +1,12 @@
+# folders
+node_modules
+.idea
+.history
+.vscode
+# files
+package-lock.json
+__test_script__/
+dist/
+*.tgz
+__ignore__/
+

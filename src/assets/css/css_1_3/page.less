@@ -1,0 +1,145 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Your Name (you@example.org)
+ * @date    2017-09-07 18:25:55
+ * @version $Id$
+ */
+.el-pagination{
+  color: #48576a;
+  flex: 1;
+  text-align: left;
+  padding: 0;
+  font-size: 12px!important;
+  &.el-pagination--small {
+    button {
+      border-width: 0;
+    }
+  }
+  button, span, span:not([class*=suffix]) {
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px!important;
+  }
+
+  .el-input{
+    font-size: 12px!important;
+  }
+
+  p{
+    font-size: 0;
+    margin-top: 0px;
+    vertical-align: top;
+    button{
+      margin: 0!important;
+      border: 1px solid #d1dbe5;
+      border-right: none;
+      border-radius: 0;
+      width: 24px;
+      padding: 0;
+      box-sizing: border-box;
+
+      &:hover{
+        border-color: #d1dbe5;
+      }
+      &:active{
+        border-color: #d1dbe5;
+      }
+      &:focus{
+        border-color: #d1dbe5;
+      }
+
+      span{
+        width: 24px;
+        line-height: 23px;
+
+        i{
+          font-size: 21px;
+        }
+      }
+    }
+
+    button:first-child{
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+    }
+
+    button:last-child{
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+      border-right: 1px solid #d1dbe5;
+    }
+  }
+
+  .el-pagination__total{
+    margin: 0 5px 0px 0px;
+  }
+
+  .el-pagination__sizes{
+    margin: 0 4px 0 0;
+    height: 24px !important;
+    line-height: 24px !important;
+    .el-select{
+      .el-input{
+        width: auto;
+        max-width: 80px;
+        height: 24px;
+        font-size: 12px;
+        .el-input__icon{
+          width: 19px;
+          height: 24px;
+          line-height: 24px;
+        }
+
+        input{
+          height: 24px;
+          padding: 0 18px 0 3px;
+          font-size: 12px!important;
+          color: #48576a!important;
+        }
+      }
+    }
+  }
+
+  .el-pager{
+    li.active{
+        border-color: #d4dade;
+        background-color: #d4dade;
+        color: #575757!important;
+    }
+
+    li{
+      height: 24px;
+      line-height: 23px;
+      font-size: 12px!important;
+      border: 1px solid #d1dbe5;
+      box-sizing: border-box;
+      min-width: 28px;
+      font-weight: normal;
+      margin-left: -1px;
+      &:hover{
+        color: #d4dade;
+      }
+    }
+  }
+  .btn-next, .btn-prev{
+    border: 1px solid #d1dbe5;
+    margin-left: -1px;
+    padding: 0;
+    min-width: 28px;
+  }
+
+  .el-pagination__jump{
+    margin-left: 5px;
+    .el-pagination__editor {
+      height: 24px;
+      width: 66px;
+      .el-input__inner{
+        width: 60px;
+        line-height: 14px;
+        margin: 0 2px;
+        height: 24px;
+      }
+    }
+  }
+}
