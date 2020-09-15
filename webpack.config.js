@@ -12,7 +12,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const projectConfig = require('./project.config');
 
 const target = projectConfig.target; // 框架研发网关开启环境
-const proxyLists = ["/p/c", "/p/cs", "/api"];
+const proxyLists = ['/p/c', '/p/cs', '/api'];
 
 const indexProHtml = path.posix.join('/', 'index.pro.html');
 const indexHtml = path.posix.join('/', 'index.html');
@@ -40,14 +40,14 @@ module.exports = env => ({
       rewrites: [{
         from: /.*/,
         to: env && env.production ? indexProHtml : indexHtml
-      }, ],
+      },],
     },
     publicPath: '/',
     proxy: [{
       context: proxyLists,
       target,
       changeOrigin: true,
-    }, ],
+    },],
   },
   target: 'web',
   devtool: env && env.production ? 'source-map' : 'cheap-module-eval-source-map',
@@ -62,7 +62,7 @@ module.exports = env => ({
       test: /\.vue$/,
       use: [{
         loader: 'vue-loader',
-      }, ],
+      },],
     },
     {
       test: /\.m?js$/,
@@ -70,22 +70,12 @@ module.exports = env => ({
       use: {
         loader: 'babel-loader',
       },
-      {
-        test: /\.(sa|sc|c|le)ss$/,
-        use: [{
-            loader: env && env.production ?
-              MiniCssExtractPlugin.loader : "style-loader",
-          },
-          {
-            loader: "css-loader",
-          },
-          {
-            loader: "less-loader",
-            options: {
-              javascriptEnabled: true
-            },
-          },
-        ],
+    },
+    {
+      test: /\.(sa|sc|c|le)ss$/,
+      use: [{
+        loader: env && env.production
+          ? MiniCssExtractPlugin.loader : 'style-loader',
       },
       {
         loader: 'css-loader',
@@ -106,7 +96,7 @@ module.exports = env => ({
           limit: 8192,
           name: '[path][name].[ext]',
         },
-      }, ],
+      },],
     },
     {
       test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
@@ -116,7 +106,7 @@ module.exports = env => ({
           name: '[path][name].[ext]',
           context: 'src',
         },
-      }, ],
+      },],
     },
     {
       test: /\.(mp3)(\?.*)?$/,
@@ -135,10 +125,10 @@ module.exports = env => ({
     new CleanWebpackPlugin([env && env.production ? 'dist' : 'devDist']),
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      chunksSortMode: "none",
-      title: env && env.production ?
-        projectConfig.projectsTitle : `Debug:${projectConfig.projectsTitle}`,
-      template: env && env.production ? "./index.pro.html" : "./index.html",
+      chunksSortMode: 'none',
+      title: env && env.production
+        ? projectConfig.projectsTitle : `Debug:${projectConfig.projectsTitle}`,
+      template: env && env.production ? './index.pro.html' : './index.html',
       inject: true,
       favicon: projectConfig.projectIconPath,
     }),
@@ -146,7 +136,7 @@ module.exports = env => ({
       from: path.resolve(__dirname, './static'),
       to: 'static',
       ignore: ['.*'],
-    }, ]),
+    },]),
 
     new webpack.ProvidePlugin({
       $: 'jquery',
