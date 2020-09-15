@@ -12,7 +12,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const projectConfig = require("./project.config");
 
 const target = projectConfig.target; // 框架研发网关开启环境
-const proxyLists = ["/p/c", "/p/cs"];
+const proxyLists = ["/p/c", "/p/cs", "/api"];
 
 const indexProHtml = path.posix.join("/", "index.pro.html");
 const indexHtml = path.posix.join("/", "index.html");
@@ -75,8 +75,7 @@ module.exports = (env) => ({
         test: /\.(sa|sc|c|le)ss$/,
         use: [{
             loader: env && env.production ?
-              MiniCssExtractPlugin.loader :
-              "style-loader",
+              MiniCssExtractPlugin.loader : "style-loader",
           },
           {
             loader: "css-loader",
@@ -120,8 +119,7 @@ module.exports = (env) => ({
     new HtmlWebpackPlugin({
       chunksSortMode: "none",
       title: env && env.production ?
-        projectConfig.projectsTitle :
-        `Debug:${projectConfig.projectsTitle}`,
+        projectConfig.projectsTitle : `Debug:${projectConfig.projectsTitle}`,
       template: env && env.production ? "./index.pro.html" : "./index.html",
       inject: true,
       favicon: projectConfig.projectIconPath,
