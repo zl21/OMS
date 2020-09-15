@@ -50,5 +50,9 @@ export default {
     component: () => import('@/views/modal/orderCenter/batchImport.vue'),
   },
   // 
-  
+
+  modifyWarehouse: {
+    component: () => import('@/views/modal/orderCenter/modifyWarehouse.vue')
+  }, //JIT配货单修改仓库测试弹框
+
 };

@@ -95,7 +95,7 @@ R3.launchApplication({
     CP_C_SUPPLIER: () => async () => {
       let data = [];
       let formdata = new FormData();
-      formdata.append('param','IN');
+      formdata.append('param', 'IN');
       await network.post('/p/c/cpCHrorgTree', formdata).then((res) => {
         console.log(res);
         // data = restructureMenuTreeData(res.data);
@@ -112,7 +112,7 @@ R3.launchApplication({
     CP_C_EMP: () => async () => {
       let data = [];
       let formdata = new FormData();
-      formdata.append('param','IN');
+      formdata.append('param', 'IN');
       await network.post('/p/c/cpCHrorgTree', formdata).then((res) => {
         console.log(res);
         // data = restructureMenuTreeData(res.data);
@@ -129,7 +129,7 @@ R3.launchApplication({
     CP_C_INORG: () => async () => {
       let data = [];
       let formdata = new FormData();
-      formdata.append('param','IN');
+      formdata.append('param', 'IN');
       await network.post('/p/c/cpCHrorgTree', formdata).then((res) => {
         console.log(res);
         // data = restructureMenuTreeData(res.data);

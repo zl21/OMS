@@ -12,7 +12,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const projectConfig = require('./project.config');
 
 const target = projectConfig.target; // 框架研发网关开启环境
-const proxyLists = ['/p/c', '/p/cs'];
+const proxyLists = ["/p/c", "/p/cs", "/api"];
 
 const indexProHtml = path.posix.join('/', 'index.pro.html');
 const indexHtml = path.posix.join('/', 'index.html');
@@ -70,13 +70,22 @@ module.exports = env => ({
       use: {
         loader: 'babel-loader',
       },
-    },
-    {
-      test: /\.(sa|sc|c|le)ss$/,
-      use: [{
-        loader: env && env.production
-          ? MiniCssExtractPlugin.loader
-          : 'style-loader',
+      {
+        test: /\.(sa|sc|c|le)ss$/,
+        use: [{
+            loader: env && env.production ?
+              MiniCssExtractPlugin.loader : "style-loader",
+          },
+          {
+            loader: "css-loader",
+          },
+          {
+            loader: "less-loader",
+            options: {
+              javascriptEnabled: true
+            },
+          },
+        ],
       },
       {
         loader: 'css-loader',
@@ -126,11 +135,10 @@ module.exports = env => ({
     new CleanWebpackPlugin([env && env.production ? 'dist' : 'devDist']),
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      chunksSortMode: 'none',
-      title: env && env.production
-        ? projectConfig.projectsTitle
-        : `Debug:${projectConfig.projectsTitle}`,
-      template: env && env.production ? './index.pro.html' : './index.html',
+      chunksSortMode: "none",
+      title: env && env.production ?
+        projectConfig.projectsTitle : `Debug:${projectConfig.projectsTitle}`,
+      template: env && env.production ? "./index.pro.html" : "./index.html",
       inject: true,
       favicon: projectConfig.projectIconPath,
     }),
