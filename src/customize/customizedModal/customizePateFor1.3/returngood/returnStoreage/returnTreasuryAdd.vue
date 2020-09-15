@@ -1392,7 +1392,7 @@
 </script>
 
 <style lang="less">
-@import "../css/theme.less";
+@import "~@/assets/css/css_1_3/theme.less";
 .returnTreasurys {
   position: relative;
   .fromLoading {

@@ -354,9 +354,9 @@
 </template>
 
 <script>
-  import buttons from '@/jordanComponent/jordanButton';
-  import Atable from '@/jordanComponent/jordanActionTable.vue';
+  import buttons from '@/jordanComponent/jordanButton.vue';
   import Aform from '@/jordanComponent/jordanForm.vue';
+  import Atable from '@/jordanComponent/jordanActionTable.vue';
   import jordanModal from '@/jordanComponent/JDialog';
   import axios from 'axios';
 
