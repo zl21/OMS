@@ -1,5 +1,7 @@
 const path = require("path");
-const { VueLoaderPlugin } = require("vue-loader");
+const {
+  VueLoaderPlugin
+} = require("vue-loader");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
@@ -31,26 +33,24 @@ module.exports = (env) => ({
   },
   devServer: {
     compress: true,
-    port: 8195,
-    host: "0.0.0.0",
+    port: 8080,
+    host: "localhost",
     open: true,
     historyApiFallback: {
-      rewrites: [
-        { from: /.*/, to: env && env.production ? indexProHtml : indexHtml },
-      ],
+      rewrites: [{
+        from: /.*/,
+        to: env && env.production ? indexProHtml : indexHtml
+      }, ],
     },
     publicPath: "/",
-    proxy: [
-      {
-        context: proxyLists,
-        target,
-        changeOrigin: true,
-      },
-    ],
+    proxy: [{
+      context: proxyLists,
+      target,
+      changeOrigin: true,
+    }, ],
   },
   target: "web",
-  devtool:
-    env && env.production ? "source-map" : "cheap-module-eval-source-map",
+  devtool: env && env.production ? "source-map" : "cheap-module-eval-source-map",
   output: {
     filename: "[name].js",
     chunkFilename: "[name].js",
@@ -58,14 +58,11 @@ module.exports = (env) => ({
     publicPath: "/",
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.vue$/,
-        use: [
-          {
-            loader: "vue-loader",
-          },
-        ],
+        use: [{
+          loader: "vue-loader",
+        }, ],
       },
       {
         test: /\.m?js$/,
@@ -76,45 +73,41 @@ module.exports = (env) => ({
       },
       {
         test: /\.(sa|sc|c|le)ss$/,
-        use: [
-          {
-            loader:
-              env && env.production
-                ? MiniCssExtractPlugin.loader
-                : "style-loader",
+        use: [{
+            loader: env && env.production ?
+              MiniCssExtractPlugin.loader :
+              "style-loader",
           },
           {
             loader: "css-loader",
           },
           {
             loader: "less-loader",
-            options: { javascriptEnabled: true },
+            options: {
+              javascriptEnabled: true
+            },
           },
         ],
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              limit: 8192,
-              name: "[path][name].[ext]",
-            },
+        use: [{
+          loader: "url-loader",
+          options: {
+            limit: 8192,
+            name: "[path][name].[ext]",
           },
-        ],
+        }, ],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[path][name].[ext]",
-              context: "src",
-            },
+        use: [{
+          loader: "file-loader",
+          options: {
+            name: "[path][name].[ext]",
+            context: "src",
           },
-        ],
+        }, ],
       },
     ],
   },
@@ -126,21 +119,18 @@ module.exports = (env) => ({
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       chunksSortMode: "none",
-      title:
-        env && env.production
-          ? projectConfig.projectsTitle
-          : `Debug:${projectConfig.projectsTitle}`,
+      title: env && env.production ?
+        projectConfig.projectsTitle :
+        `Debug:${projectConfig.projectsTitle}`,
       template: env && env.production ? "./index.pro.html" : "./index.html",
       inject: true,
       favicon: projectConfig.projectIconPath,
     }),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, "./static"),
-        to: "static",
-        ignore: [".*"],
-      },
-    ]),
+    new CopyWebpackPlugin([{
+      from: path.resolve(__dirname, "./static"),
+      to: "static",
+      ignore: [".*"],
+    }, ]),
 
     new webpack.ProvidePlugin({
       $: "jquery",
@@ -155,8 +145,8 @@ module.exports = (env) => ({
     alias: {
       "@": path.resolve(__dirname, "src"),
       "libs": path.resolve(__dirname, "node_modules"),
-      allpages: path.resolve(__dirname,"src/views/pages"),
-      "framework":path.resolve(__dirname,"node_modules/@syman/burgeon-r3-components/r3.publish/src"),
+      allpages: path.resolve(__dirname, "src/views/pages"),
+      "framework": path.resolve(__dirname, "node_modules/@syman/burgeon-r3-components/r3.publish/src"),
     },
   },
   optimization: {
