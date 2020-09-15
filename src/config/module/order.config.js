@@ -41,7 +41,7 @@ export default {
   // RETURNTREASURYADD: {
   //   component: returnTreasuryAdd,
   // },
-  // refundAfterShipment: {
-  //   component: refundAfterShipment,
-  // }
+  REFUNDAFTERSHIPMENT: {
+    component: refundAfterShipment,
+  }
 };
