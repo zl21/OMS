@@ -1,0 +1,37 @@
+{
+  "id": "1684403",
+  "name": "yishang-onlinepos",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "9397810",
+      "name": "活动",
+      "font_class": "huodong",
+      "unicode": "e76f",
+      "unicode_decimal": 59247
+    },
+    {
+      "icon_id": "298827",
+      "name": "赠品",
+      "font_class": "zengpin",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "6856906",
+      "name": "基本信息",
+      "font_class": "jibenxinxi",
+      "unicode": "e67c",
+      "unicode_decimal": 59004
+    },
+    {
+      "icon_id": "9499589",
+      "name": "流程条件",
+      "font_class": "liuchengtiaojian",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    }
+  ]
+}
