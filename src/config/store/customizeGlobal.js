@@ -1,9 +1,9 @@
 
 
-import R3 from '@syman/burgeon-r3'
-const {store,router,getKeepAliveModuleName}=R3
+import R3 from '@syman/burgeon-r3';
 import jordanstore from './jordanStore';
 
+const { store, router, getKeepAliveModuleName } = R3;
 
 export const globalStore = {// 1.3框架全局状态管理
   namespaced: true,
@@ -102,8 +102,25 @@ export const globalStore = {// 1.3框架全局状态管理
         }
       ]
     },
+    // 促销二类名称和描述
+    prom_type: {
+      prom_type_name: '',
+      prom_type_brief: ''
+    },
+    forginkeys: {
+      columnIds: {},
+      groups: {}
+    }
   },
   mutations: {
+    // 存储促销二类名称和描述
+    save_prom_type(state, n) {
+      state.prom_type.prom_type_name = n.prom_type_name;
+      state.prom_type.prom_type_brief = n.prom_type_brief;
+    },
+    forginkeys(state, data) {
+      state.forginkeys[data.key] = data.value;
+    },
     stateChange(state, data) {
       state = Object.assign(state, data);
     },

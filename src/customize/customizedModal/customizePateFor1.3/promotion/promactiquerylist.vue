@@ -392,6 +392,7 @@
   import myInputLd from 'framework/components/element/input.vue';
   import customTable from 'framework/components/table/P_customTable.vue';
   import '../../../../assets/css/css_1_3/datepicker.less';
+
   export default {
     // name: 'Promactiquerylist',
     data() {

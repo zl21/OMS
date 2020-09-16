@@ -454,6 +454,7 @@
           itemdata: {
             col: 1,
             // colid: this.$store.state.forginkeys.columnIds.shop || '1700805184',
+            colid: '1700805184',
             colname: 'CP_C_SHOP_ID', // 当前字段的名称
             datelimit: 'all',
             display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
@@ -711,6 +712,7 @@
           itemdata_xitong: {
             col: 1,
             // colid: this.$store.state.forginkeys.columnIds.sku || '1700806532',
+            colid: '1700806532',
             colname: 'PS_C_PRO_ID',
             datelimit: 'all',
             display: 'text',
@@ -1075,7 +1077,7 @@
         }
       },
       promotionClick() {
-        this.$store.commit('TabOpen', {
+        this.$store.commit('customize/TabOpen', {
           id: -1, // id
           type: 'action', // 类型action
           name: 'addOrEditActi', // 文件名
@@ -1088,7 +1090,7 @@
       },
       promotionBlukClick() {
         // 【批量新增】
-        this.$store.commit('TabOpen', {
+        this.$store.commit('customize/TabOpen', {
           id: -1, // id
           type: 'action', // 类型action
           name: 'batchActivity', // 文件名

@@ -1,72 +1,73 @@
 <template>
-  <div class="singleBox" >
-    <RadioGroup v-model="name" @on-change="checkChange" >
-      <Radio circle v-for="(item,index) in  options" :key="index" :label="item.title">
-        <span>{{item.title}}</span>
+  <div class="singleBox">
+    <RadioGroup
+      v-model="name"
+      @on-change="checkChange"
+    >
+      <Radio
+        v-for="(item,index) in options"
+        :key="index"
+        circle
+        :label="item.title"
+      >
+        <span>{{ item.title }}</span>
       </Radio>
     </RadioGroup>
   </div>
 </template>
 <script>
-export default {
-  name: "singleBox",
-  data() {
+  export default {
+    name: 'SingleBox',
+    data() {
       return {
-          name:'',
-          norefresh:true,
-      }
-  },
-  watch:{
-      value:function(val){
-          this.initData();
-      },
-      options:{
-         handler(val){
-            this.initData();
-         },
-         deep:true
-      }
-  },
-  props: {
-    value: {
-      type: String
+        name: '',
+        norefresh: true,
+      };
     },
-    options: {
-      type: Array
-    }
-  },
-  methods:{
+    watch: {
+      value(val) {
+        this.initData();
+      },
+      options: {
+        handler(val) {
+          this.initData();
+        },
+        deep: true
+      }
+    },
+    props: {
+      value: {
+        type: String
+      },
+      options: {
+        type: Array
+      }
+    },
+    methods: {
       /**
        * 初始化单选值
        */
-      initData(){
-         this.name ='';
-         this.$nextTick(() =>{
-           let obj = this.options.find((opt) =>{
-              return opt.value === this.value;
-          })
-          if(obj)
-              this.name = obj.title;
-
-         })
-         
+      initData() {
+        this.name = '';
+        this.$nextTick(() => {
+          const obj = this.options.find(opt => opt.value === this.value);
+          if (obj) this.name = obj.title;
+        });
       },
       /**
        * 单选值
        */
-      checkChange(name){
-         let obj = this.options.find((opt) =>{
-              return opt.title === name;
-         })
-         if(obj){
-            this.$emit("changeSingle",obj.value);
-         }
+      checkChange(name) {
+        const obj = this.options.find(opt => opt.title === name);
+        if (obj) {
+          this.$emit('changeSingle', obj.value);
+        }
       }
-  },
-  mounted(){
+    },
+    mounted() {
       this.initData();
-  }
-};
+    }
+  };
 </script>
 <style lang="less" scoped>
 .singleBox{

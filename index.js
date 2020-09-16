@@ -1,5 +1,5 @@
 // import arkUI from '@syman/ark-ui';
-import R3 from '@syman/burgeon-r3'
+import R3 from '@syman/burgeon-r3';
 
 
 // 企业Logo、Banner配置信息
@@ -15,27 +15,31 @@ import './static/theme/custom.less'; // 主题文件
 // import '@syman/ark-ui/dist/styles/ark-ui.css';
 import '@syman/burgeon-r3/r3.publish/r3.min.css';
 
-//老框架引入的 自定义界面内需要的css资源
+// 老框架引入的 自定义界面内需要的css资源
 import 'element-ui/lib/theme-chalk/index.css'; // customize-1.3
 import './static/iconfont/iconfont.css'; // customize-1.3自定义界面icon,下拉单选,此样式会影响框架样式，
 import '@/assets/css/css_1_3/index.less'; // customize-1.3自定义界面icon,下拉单选
 import '@/assets/css/css_1_3/common.less';
 import '@/assets/css/css_1_3/reset.less';
-//老框架引入的 自定义界面内需要的css资源
+// 老框架引入的 自定义界面内需要的css资源
 
 
-//老框架引入的 自定义界面内需要的js资源
+// 老框架引入的 自定义界面内需要的js资源
 import request, {
   httpFormdata,
 } from 'framework/__utils__/request';
 import ajax from 'framework/__utils__/ajax';
-import store from './src/config/store/store'; //将老框架公共状态注册为customize模块
-import connector from './src/views/pages/common/orderDetail/connector.js'
+import store from '@/config/store/store'; // 将老框架公共状态注册为customize模块
+import groups from '@/views/pages/promotionCenter/js/groups.js';// 促销需要
+import connector from './src/views/pages/common/orderDetail/connector.js';
 
+groups.load();
 Vue.prototype.$ajax = ajax;
 Vue.prototype.axios = request;
 Vue.prototype.request = request;
 Vue.prototype.httpForm = httpFormdata;
+
+Vue.prototype.$store = store;
 const {
   network,
   urlSearchParams
@@ -56,16 +60,16 @@ function restructureMenuTreeData(data) {
 
 function getTreeChildren(pnode, arr) {
   pnode.children = arr.filter(item => item.CP_C_ORGUP_ID === pnode.ID);
-  pnode.children.forEach(item => {
+  pnode.children.forEach((item) => {
     item.lastChild = false;
     item.ID = item.ENAME;
     // item.expand = true;
     pnode.children[pnode.children.length - 1].lastChild = true;
     getTreeChildren(item, arr);
-  })
+  });
 }
 
-//老框架引入的 自定义界面内需要的资源
+// 老框架引入的 自定义界面内需要的资源
 R3.launchApplication({
   image: {
     enterpriseLogo,
@@ -75,7 +79,7 @@ R3.launchApplication({
     Login,
     WelcomePage
   },
-  connector: connector,
+  connector,
   externalModules: customizedPageConfig, // 自定义界面
   externalModals: customizedModalConfig, // 自定义弹框
   Version: '1.3', // 版本号
@@ -94,7 +98,7 @@ R3.launchApplication({
     // 供应商档案
     CP_C_SUPPLIER: () => async () => {
       let data = [];
-      let formdata = new FormData();
+      const formdata = new FormData();
       formdata.append('param', 'IN');
       await network.post('/p/c/cpCHrorgTree', formdata).then((res) => {
         console.log(res);
@@ -111,7 +115,7 @@ R3.launchApplication({
     // 员工档案
     CP_C_EMP: () => async () => {
       let data = [];
-      let formdata = new FormData();
+      const formdata = new FormData();
       formdata.append('param', 'IN');
       await network.post('/p/c/cpCHrorgTree', formdata).then((res) => {
         console.log(res);
@@ -128,13 +132,13 @@ R3.launchApplication({
     // 组织中心
     CP_C_INORG: () => async () => {
       let data = [];
-      let formdata = new FormData();
+      const formdata = new FormData();
       formdata.append('param', 'IN');
       await network.post('/p/c/cpCHrorgTree', formdata).then((res) => {
         console.log(res);
         // data = restructureMenuTreeData(res.data);
         data = res.data;
-      })
+      });
       const treeData = {
         data,
         name: 'ID'
