@@ -24,7 +24,7 @@ export default {
   MANUALMATCHING: {
     component: MANUALMATCHING
   }, // 退货入库-手工匹配
-  halfOrderDetail: {
+  orderDetail2: {
     component: halfOrderDetail
   },
   // 以上为1.3定制界面配置

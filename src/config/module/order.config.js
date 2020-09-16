@@ -7,7 +7,7 @@ import returnGoodManagementList from 'allpages/OrdersCenter/returngood/returngoo
 import returnGood from 'allpages/OrdersCenter/returngood/returngoodmanagement.vue'; // 订单中心-退换货单详情
 // import returnStorageList from 'branchComponent/page/OrdersCenter/returngood/returnStorage/returnStorageList.vue' //退货入库-列表
 // import returnTreasuryAdd from 'branchComponent/page/OrdersCenter/returngood/returnStorage/returnTreasuryAdd.vue' //退货入库-新增 退货入库-新增
-// import refundAfterShipment from 'branchComponent/page/OrdersCenter/refundAfterShipment/refundAfterShipment.vue' //订单中心-已发货退款单-编辑 额外退款
+import refundAfterShipment from 'allpages/OrdersCenter/returngood/refundAfterShipment.vue' //订单中心-已发货退款单-编辑 额外退款
 export default {
   // 订单中心-扫描入库
   SCANIN: {
@@ -41,7 +41,7 @@ export default {
   // RETURNTREASURYADD: {
   //   component: returnTreasuryAdd,
   // },
-  // REFUNDAFTERSHIPMENT: {
-  //   component: refundAfterShipment,
-  // }
+  REFUNDAFTERSHIPMENT: {
+    component: refundAfterShipment,
+  }
 };
