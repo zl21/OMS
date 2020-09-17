@@ -1,6 +1,6 @@
 // 设置主题，以及变量
-.color(@color:#0f0,@fontColor:#444,@bgColor:#fff) {
-  // 订单中心按钮颜色
+// button
+.button(@color:#fd6442,@fontColor:#444,@bgColor:#fff) {
   .btn .one_button {
     .buttonBox {
       .buttonGroup button {
@@ -19,12 +19,25 @@
     }
   }
 }
+// tab
+.tab(@color:#fd6442){
+  .tab-list {
+    .active{
+      border-top: 2px solid @color !important;
+      color: @color !important;
+    }
+  }
+}
+
+
+//调用样式
 .blue{
-  .color(blue)
+  .button(blue);
+  // .active();
 }
 .Pink{
-  .color(Pink)
+  .button(Pink)
 }
 .CoralRed{
-  .color(red)
+  .button(red)
 }
