@@ -91,15 +91,13 @@
        */
       initData() {
         const self = this;
-        self.$nextTick(() => {
-          self.names = [];
-          self._options.forEach((opt) => {
-            if (self._values.includes(opt.value)) {
-              self.names.push(opt.title);
-            }
-          });
-          self.ensureCheckAll(self._values);
+        self.names = [];
+        self._options.forEach((opt) => {
+          if (self._values.includes(opt.value)) {
+            self.names.push(opt.title);
+          }
         });
+        self.ensureCheckAll(self._values);
       }
     },
     mounted() {

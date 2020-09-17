@@ -37,10 +37,12 @@
     },
     props: {
       value: {
-        type: String
+        type: String,
+        default: () => ''
       },
       options: {
-        type: Array
+        type: Array,
+        default: () => []
       }
     },
     methods: {
@@ -49,10 +51,8 @@
        */
       initData() {
         this.name = '';
-        this.$nextTick(() => {
-          const obj = this.options.find(opt => opt.value === this.value);
-          if (obj) this.name = obj.title;
-        });
+        const obj = this.options.find(opt => opt.value === this.value);
+        if (obj) this.name = obj.title;
       },
       /**
        * 单选值

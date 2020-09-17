@@ -420,7 +420,6 @@
         } catch (e) {}
       },
       groups() {
-        console.log('customize', this.$store.state.customize);
         return this.$store.state.customize.forginkeys.groups;
       },
       tableCols() {

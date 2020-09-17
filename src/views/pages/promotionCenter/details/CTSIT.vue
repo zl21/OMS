@@ -102,7 +102,7 @@
         return c_name == 'QTTY' ? '件' : '元';
       },
       groups() {
-        return this.$store.state.forginkeys.groups;
+        return this.$store.state.customize.forginkeys.groups;
       },
       filterPdtWayShow() {
         return this.rule.filterPdtWayShow && !this.onlyShowRules && this.rule.check;

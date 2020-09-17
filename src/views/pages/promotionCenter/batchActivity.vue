@@ -168,7 +168,7 @@
     },
     computed: {
       groups() {
-        return this.$store.state.forginkeys.groups;
+        return this.$store.state.customize.forginkeys.groups;
       },
       showSaveButton() {
         if (this.objid > 0 && (this.basic_info.status === '2' || this.basic_info.status === '3')) {

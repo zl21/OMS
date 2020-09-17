@@ -305,7 +305,7 @@
     },
     computed: {
       groups() {
-        return this.$store.state.forginkeys.groups;
+        return this.$store.state.customize.forginkeys.groups;
       },
       itemdataFk() {
         try {

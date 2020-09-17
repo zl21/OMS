@@ -261,26 +261,21 @@
       },
       timeTypes() {
         const self = this;
-        self.$nextTick(() => {
-          const preOrder = self.groups.orderTypes.find(item => item.title === '预售');
-          const flag = !!(preOrder && self.basicData.order_type.includes(preOrder.value));
-          console.log(self.groups);
-          let options = self.groups.timeTypes;
-          if (!flag) {
-            options = self.groups.timeTypes.filter(item => item.title != '定金时间');
-          }
-          return options;
-        });
+        const preOrder = self.groups.orderTypes.find(item => item.title === '预售');
+        const flag = !!(preOrder && self.basicData.order_type.includes(preOrder.value));
+        let options = self.groups.timeTypes;
+        if (!flag) {
+          options = self.groups.timeTypes.filter(item => item.title != '定金时间');
+        }
+        return options;
       },
       actiTypes() {
         const self = this;
-        self.$nextTick(() => {
-          let options = self.groups.actiTypes;
-          if (!self.basicData.gradient_gift) {
-            options = self.groups.actiTypes.filter(item => item.title != '全场买赠');
-          }
-          return options;
-        });
+        let options = self.groups.actiTypes;
+        if (!self.basicData.gradient_gift) {
+          options = self.groups.actiTypes.filter(item => item.title != '全场买赠');
+        }
+        return options;
       }
     },
     props: {
