@@ -9,7 +9,7 @@ const { store, router, getKeepAliveModuleName } = R3;
 export const globalStore = {// 1.3框架全局状态管理
   namespaced: true,
   state: {
-    theme: 'bule',
+    theme: '',
     mainContentLoading: false,
     pwTips: false,
     activeTabAddr: [],

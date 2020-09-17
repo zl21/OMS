@@ -66,9 +66,9 @@ function getTreeChildren(pnode, arr) {
   });
 }
 
-const theme = store.state.customize.theme;
+const theme = localStorage.getItem('theme');
 console.log(theme);
-document.getElementsByTagName('body')[0].className = `${theme}`;
+document.getElementsByTagName('body')[0].className = theme;
 // 老框架引入的 自定义界面内需要的资源
 R3.launchApplication({
   image: {

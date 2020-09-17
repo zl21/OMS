@@ -2399,14 +2399,14 @@
       //
       change(e) {
         if (e === 'blue') {
-          store.commit('customize/theme', 'blue');
-          // document.getElementsByTagName('body')[0].className = 'blue';
+          localStorage.setItem('theme', 'blue');
+          document.getElementsByTagName('body')[0].className = 'blue';
         } else if (e === 'Pink') {
-          store.commit('customize/theme', 'Pink');
-          // document.getElementsByTagName('body')[0].className = 'Pink';
+          localStorage.setItem('theme', 'Pink');
+          document.getElementsByTagName('body')[0].className = 'Pink';
         } else if (e === 'CoralRed') {
-          store.commit('customize/theme', 'CoralRed');
-          // document.getElementsByTagName('body')[0].className = 'CoralRed';
+          localStorage.setItem('theme', 'CoralRed');
+          document.getElementsByTagName('body')[0].className = 'CoralRed';
         }
       },
       // 获取高级查询&表头
