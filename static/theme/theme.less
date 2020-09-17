@@ -1,0 +1,30 @@
+// 设置主题，以及变量
+.color(@color:#0f0,@fontColor:#444,@bgColor:#fff) {
+  // 订单中心按钮颜色
+  .btn .one_button {
+    .buttonBox {
+      .buttonGroup button {
+        border-color: @color;
+        color: @color;
+      }
+    }
+  }
+  .ark-btn-fcdefault{
+    color:@color;
+    border-color: @color;
+    &:hover {
+        color: @color;
+        border-color:@color;
+        opacity: .6;
+    }
+  }
+}
+.blue{
+  .color(blue)
+}
+.Pink{
+  .color(Pink)
+}
+.CoralRed{
+  .color(red)
+}

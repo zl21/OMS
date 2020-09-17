@@ -1,13 +1,15 @@
 
 
-import R3 from '@syman/burgeon-r3'
-const {store,router,getKeepAliveModuleName}=R3
+import R3 from '@syman/burgeon-r3';
 import jordanstore from './jordanStore';
+
+const { store, router, getKeepAliveModuleName } = R3;
 
 
 export const globalStore = {// 1.3框架全局状态管理
   namespaced: true,
   state: {
+    theme: 'bule',
     mainContentLoading: false,
     pwTips: false,
     activeTabAddr: [],
@@ -104,6 +106,11 @@ export const globalStore = {// 1.3框架全局状态管理
     },
   },
   mutations: {
+    // 主题
+    theme(state, val) {
+      state.theme = val;
+      console.log(state, state.theme);
+    },
     stateChange(state, data) {
       state = Object.assign(state, data);
     },

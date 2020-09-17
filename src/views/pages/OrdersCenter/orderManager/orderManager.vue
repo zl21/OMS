@@ -1,5 +1,18 @@
 <template>
   <div class="orderManager-box">
+    <Select
+      v-model="model"
+      style="width:200px"
+      @on-change="change"
+    >
+      <Option
+        v-for="item in cityList"
+        :key="item.value"
+        :value="item.value"
+      >
+        {{ item.label }}
+      </Option>
+    </Select>
     <div class="btn">
       <jordanBtn :btn-config="btnConfig" />
     </div>
@@ -157,6 +170,8 @@
 </template>
 
 <script>
+  import R3 from '@syman/burgeon-r3';
+
   import axios from 'axios';
   import jordanActionTable from '@/jordanComponent/jordanActionTable';
   import jordanBtn from '@/jordanComponent/jordanButton';
@@ -172,6 +187,8 @@
   import publicDialogConfig from './publicConfig/publicDialog.js';
   import labelListConfig from './publicConfig/labelList.js';
   import orderLogo from './publicConfig/orderLogo.js';
+
+  const { store } = R3;
 
 
   export default {
@@ -191,6 +208,20 @@
     },
     data() {
       return {
+        model: '',
+        cityList: [
+          {
+            value: 'blue',
+            label: '经典蓝'
+          },
+          {
+            value: 'Pink',
+            label: '芭比粉'
+          },
+          {
+            value: 'CoralRed',
+            label: '珊瑚红'
+          }],
         // 弹框配置 导入
         importTable: {
           refFuns: 'confirmFun',
@@ -2365,6 +2396,19 @@
       self.setTableHeight();
     },
     methods: {
+      //
+      change(e) {
+        if (e === 'blue') {
+          store.commit('customize/theme', 'blue');
+          // document.getElementsByTagName('body')[0].className = 'blue';
+        } else if (e === 'Pink') {
+          store.commit('customize/theme', 'Pink');
+          // document.getElementsByTagName('body')[0].className = 'Pink';
+        } else if (e === 'CoralRed') {
+          store.commit('customize/theme', 'CoralRed');
+          // document.getElementsByTagName('body')[0].className = 'CoralRed';
+        }
+      },
       // 获取高级查询&表头
       getHeaderList() {
         const _this = this;
