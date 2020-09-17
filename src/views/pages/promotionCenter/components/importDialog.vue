@@ -3,7 +3,7 @@
   <div>
     <div class="content">
       <div class="iconclass">
-        <i class="burgeon-icon iconfont icondaoru"></i>
+        <Icon type="md-arrow-dropleft" />
       </div>
       <div class="text">
         <span
@@ -42,20 +42,19 @@
       </div>
     </div>
     <div class="footer">
-      <Button type="error" ghost size="small" @click="close">取消</Button>
-      <Button type="primary" size="small" @click="importDialog">确定</Button>
+      <Button type="primary" size="large" @click="importDialog">确定</Button>
+      <Button type="error" ghost size="large" @click="close">取消</Button>
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
-//import ChineseDictionary from "@/assets/js/ChineseDictionary.js"
 export default {
   props: {
     componentData: {
       type: Object,
-      default: {}
-    }
+      default: {},
+    },
   },
   data() {
     return {
@@ -64,7 +63,7 @@ export default {
       loading: false, // 导入中loading
       isError: false, // 是否导入失败
       errorMessage: "", // 导入失败原因
-      cover: "false" // 缺货备注单选默认选择
+      cover: "false", // 缺货备注单选默认选择
     };
   },
   methods: {
@@ -86,7 +85,7 @@ export default {
         this.componentData.tableName === "IP_C_TAOBAO_PRODUCT"
       ) {
         this.getDownloadTemp("/p/cs/pm/v1/getModuleUrl", {
-          mode: this.componentData.mode
+          mode: this.componentData.mode,
         });
         return;
       }
@@ -100,8 +99,8 @@ export default {
         axios({
           url: url,
           method: "post",
-          data: searchParam
-        }).then(res => {
+          data: searchParam,
+        }).then((res) => {
           if (res.data.code === 0) {
             this.downloadUrlFile("http://" + res.data.data);
           }
@@ -109,8 +108,8 @@ export default {
       } else {
         axios({
           url: url,
-          method: "get"
-        }).then(res => {
+          method: "get",
+        }).then((res) => {
           if (res.data.code === 0) {
             this.downloadUrlFile("http://" + res.data.data);
           }
@@ -168,10 +167,10 @@ export default {
       axios({
         url: url,
         method: "post",
-        cancelToken: true,
+        // cancelToken: true,
         headers: { "Content-Type": "multipart/form-data" },
-        data: param
-      }).then(res => {
+        data: param,
+      }).then((res) => {
         if (res.data.code === 0) {
           _this.$Message.success(res.data.message);
           _this.$emit("returnData", res.data.data);
@@ -226,7 +225,7 @@ export default {
     },
     close() {
       this.$parent.$parent.closeDialog();
-    }
+    },
   },
   created() {
     const _this = this;
@@ -243,7 +242,7 @@ export default {
   },
   destroyed() {
     window.removeEventListener("keydown", this, false);
-  }
+  },
 };
 </script>
 

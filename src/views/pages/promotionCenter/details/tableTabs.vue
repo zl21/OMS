@@ -32,9 +32,14 @@
     </tabList>
 
      <!--导入组件-->
-    <div  v-if="show_dialog">
+    <!-- <div  v-if="show_dialog">
       <Modal class="dialog" v-model="show_dialog" :footer-hide="dialogSet.footerHide"  :title="dialogSet.dialogTitle"   :mask="dialogSet.mask"  >
           <component :ref="popDialog"   :componentData="dialogModal"  v-bind:is="currentView"  @returnData="returnData"  ></component>
+      </Modal>
+    </div> -->
+    <div  v-if="show_dialog">
+      <Modal class="dialog" v-model="show_dialog" :footer-hide="dialogSet.footerHide"  :title="dialogSet.dialogTitle"   :mask="dialogSet.mask"  >
+        <importDialog :componentData="dialogModal" @returnData="returnData" ></importDialog>
       </Modal>
     </div>
   </div>
@@ -44,15 +49,17 @@ import detailTable from "./table";
 import CTSIT from "./CTSIT";
 import tabList from "./tab_list";
 import ButtonFkDialog from  "./../components/buttonFkDialog";
-const _import = file =>
-  require("@/jordanComponents/views/" + file + ".vue").default;
+// const _import = file =>
+//   require("@/jordanComponents/views/" + file + ".vue").default;
+import importDialog from "./../components/importDialog";
 export default {
   name: "detailTabs",
   components: {
     detailTable,
     CTSIT,
     tabList,
-    ButtonFkDialog
+    ButtonFkDialog,
+    importDialog
   },
   computed: {
     currentTab: {
@@ -95,8 +102,8 @@ export default {
   },
   data() {
     return {
-      currentView:'',  //弹框
-      popDialog:'',     
+      // currentView:'',  //弹框
+      // popDialog:'',     
       dialogModal:{},   //弹框传参
       show_dialog:false,   //弹框是否关闭
       dialogSet:{       //弹框层设置  标题、 隐藏底部 、是否遮罩
@@ -150,12 +157,12 @@ export default {
       this.dialogModal = {};
       this.dialogModal.tableName = this.itemdata.reftable||'PS_C_SKU';
       this.dialogModal.mode = this.moduleMode;
-      let  _component = "poptabdialog";
-      Vue.component(
-        _component,
-        Vue.extend(_import("onlinePromotion/components/importDialog"))
-      );
-      self.currentView = _component;
+      // let  _component = "poptabdialog";
+      // Vue.component(
+      //   _component,
+      //   Vue.extend(_import("onlinePromotion/components/importDialog"))
+      // );
+      // self.currentView = _component;
       self.dialogSet.dialogTitle = '导入';
       self.show_dialog = true;
     },

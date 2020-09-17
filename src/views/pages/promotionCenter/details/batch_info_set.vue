@@ -6,7 +6,7 @@
       <span>条件信息设置</span>
     </div>
     <!--商品来源-->
-    <div class="row">
+    <div class="info-row row">
       <div class="form_label">
         商品来源：
       </div>
@@ -19,7 +19,7 @@
       </div>
     </div>
     <!--赠品翻倍-->
-    <div class="row">
+    <div class="info-row row">
       <div class="form_label">
         赠品翻倍：
       </div>
@@ -42,7 +42,7 @@
       </div>
     </div>
     <!--选择商品方式-->
-    <div class="row">
+    <div class="info-row row">
       <div class="form_label">
         赠送方式：
       </div>
@@ -147,7 +147,7 @@
         // ], //表头
         itemdata_xitong: {
           col: 1,
-          // colid: this.$store.state.forginkeys.columnIds.sku||'1700806532',
+          colid: this.$store.state.customize.forginkeys.columnIds.sku || '1700806532',
           colid: '1700806532',
           colname: 'PS_C_PRO_ID',
           datelimit: 'all',
@@ -172,8 +172,7 @@
         },
         itemdata_channel: {
           col: 1,
-          // colid: this.$store.state.forginkeys.columnIds.plateform_sku || '1700806533',
-          colid: '1700806533',
+          colid: this.$store.state.customize.forginkeys.columnIds.plateform_sku || '1700806533',
           colname: 'SG_B_CHANNEL_PRODUCT_ID',
           datelimit: 'all',
           display: 'text',
@@ -196,8 +195,7 @@
         },
         itemdata_xitong_pro: {// 系统商品款号
           col: 1,
-          // colid: this.$store.state.forginkeys.columnIds.pro || '1700806532',
-          colid: '1700806532',
+          colid: this.$store.state.customize.forginkeys.columnIds.pro || '1700806532',
           colname: 'PS_C_PRO_ID',
           datelimit: 'all',
           display: 'text',
@@ -438,8 +436,10 @@
       font-weight: 600;
     }
   }
+.info-row.row{
+  display: flex;
+}
   .row {
-    display: flex;
     margin: 20px 0px;
     .form_label {
       text-align: center;

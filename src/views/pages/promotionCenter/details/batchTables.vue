@@ -110,9 +110,14 @@
     </div>
 
     <!--导入组件-->
-     <div  v-if="show_dialog">
+     <!-- <div  v-if="show_dialog">
       <Modal class="dialog" v-model="show_dialog" :footer-hide="dialogSet.footerHide"  :title="dialogSet.dialogTitle"   :mask="dialogSet.mask"  >
           <component :ref="popDialog"   :componentData="dialogModal"  v-bind:is="currentView"  @returnData="returnData"  ></component>
+      </Modal>
+     </div> -->
+      <div  v-if="show_dialog">
+      <Modal class="dialog" v-model="show_dialog" :footer-hide="dialogSet.footerHide"  :title="dialogSet.dialogTitle"   :mask="dialogSet.mask"  >
+        <importDialog :componentData="dialogModal" @returnData="returnData" ></importDialog>
       </Modal>
      </div>
 
@@ -123,15 +128,15 @@ import myInputLd from "./../components/tableinput";
 import detailtable from "./table.vue";
 import ButtonFkDialog from "../components/buttonFkDialog";
 import TableSku from "./../components/tableSku";
-const _import = file =>
-  require("@/jordanComponents/views/" + file + ".vue").default;
+import importDialog from "./../components/importDialog";
 export default {
   name: "batchTables",
   components: {
     myInputLd,
     detailtable,
     ButtonFkDialog,
-    TableSku
+    TableSku,
+    importDialog
   },
   props: {
     productList: { type: Array },
@@ -148,8 +153,8 @@ export default {
     return {
       currentTab: 0,
       list_index: "",
-      currentView:'',   //弹框展示模块
-      popDialog:'',  //弹框
+      // currentView:'',   //弹框展示模块
+      // popDialog:'',  //弹框
       dialogModal:{},
       show_dialog:false,
       dialogSet:{     //弹框设置
@@ -324,7 +329,7 @@ export default {
         if (obj.ALLSUM) obj.ALLSUM = "";
         if (obj.SG_PRO_ID) obj.SG_PRO_ID = "";
         if (obj.PRO_ECODE) obj.PRO_ECODE = "";
-        
+
       }else if(rs.reftable === 'IP_C_TAOBAO_PRODUCT'){
           if(obj.ENAME)  obj.PS_C_PRO_ENAME = '';
           if(obj.ECODE)  obj.PS_C_SKU_ECODE = '';
@@ -347,12 +352,12 @@ export default {
       this.dialogModal = {};
       this.dialogModal.tableName = this.itemdata.reftable||'PS_C_SKU';
       this.dialogModal.mode = this.moduleMode;   //区分模块 条件设置  赠品设置 还是批量设置
-      let  _component = "popdialog";
-      Vue.component(
-        _component,
-        Vue.extend(_import("onlinePromotion/components/importDialog"))
-      );
-      self.currentView = _component;
+      // let  _component = "popdialog";
+      // Vue.component(
+      //   _component,
+      //   Vue.extend(_import("onlinePromotion/components/importDialog"))
+      // );
+      // self.currentView = _component;
       self.dialogSet.dialogTitle = '导入';
       self.show_dialog = true;
     },

@@ -280,7 +280,8 @@
     },
     props: {
       basicData: {
-        type: Object
+        type: Object,
+        defaults: () => []
       }
     },
     methods: {
