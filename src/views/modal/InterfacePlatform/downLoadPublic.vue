@@ -8,13 +8,13 @@
       </template>
     </jordanForm>
     <div class="dialog-footer">
-      <Button type="primary" size="large" @click="downloadPublicAll"
+      <Button type="primary" size="" @click="downloadPublicAll"
         >确定</Button
       >
       <Button
         type="error"
         ghost
-        size="large"
+        size=""
         @click="
           () => {
             this.$emit('closeActionDialog');
