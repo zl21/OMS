@@ -1,5 +1,3 @@
-// import promactiquerylist from '../customize/customizedModal/customizePateFor1.3/promotion/promactiquerylist.vue';
-// import promotion from '../customize/customizedModal/customizePateFor1.3/promotion/promotion.vue';
 import RETURNSTOREAGELIST from '../customize/customizedModal/customizePateFor1.3/returngood/returnStoreage/returnStoreageList.vue';
 import RETURNTREASURYADD from '../customize/customizedModal/customizePateFor1.3/returngood/returnStoreage/returnTreasuryAdd.vue';
 import MANUALMATCHING from '../customize/customizedModal/customizePateFor1.3/returngood/returnStoreage/manualMatching.vue';
@@ -9,12 +7,6 @@ const customizedPage = require('./customized.page').default;
 
 export default {
   // 列表配置双击跳转定制界面，需在文档里维护对应的labelName属性
-  // promactiquerylist: {
-  //   component: promactiquerylist,
-  // },
-  // promotion: {
-  //   component: promotion
-  // }, // 促销活动编辑 乔丹线上
   RETURNSTOREAGELIST: {
     component: RETURNSTOREAGELIST
   }, // 退货入库

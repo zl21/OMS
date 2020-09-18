@@ -7,5 +7,7 @@
 			"path": "../../../../../../R3-Web-Senma-V1.3"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "r3-web-senmir-v1.4"
+	}
 }
