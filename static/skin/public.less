@@ -1,0 +1,111 @@
+// 设置公共样式方法
+// button
+.button(@color:#1989fa,@fontColor:#444,@bgColor:#fff) {
+  .btn .one_button {
+    .buttonBox {
+      .buttonGroup button {
+        border-color: @color;
+        color: @color;
+      }
+    }
+  }
+  .ark-btn-fcdefault {
+    color: @color;
+    border-color: @color;
+    &:hover {
+      color: @color;
+      border-color: @color;
+      opacity: 0.6;
+    }
+  }
+  .ark-btn-posdefault {
+    border-color: @color;
+    background: @color;
+  }
+  .buttonBox{
+    .buttonGroup{
+      button.ark-btn{
+        border-color: @color;
+        color: @color;
+      }
+    }
+  }
+}
+// tab
+.tab(@color:#1989fa) {
+  .tab-list {
+    .active {
+      border-top: 2px solid @color !important;
+      color: @color !important;
+    }
+  }
+  .table {
+    .jordan-label-box .colorStyle {
+      color: @color;
+    }
+  }
+}
+// checked
+.checked(@color:#1989fa) {
+  .ark-checkbox-checked {
+    .ark-checkbox-inner {
+      border-color: @color;
+    background-color: @color;
+    }
+  }
+}
+// page的命名空间
+#page {
+  .ark-page(@color:#1989fa) {
+    .ark-page-item,
+    .ark-page-prev,
+    .ark-page-next {
+      &:hover {
+        border-color: @color;
+        background-color: @color;
+      }
+    }
+    .ark-page-item-active {
+      border-color: @color;
+      background-color: @color;
+    }
+  }
+  // select 选择条数
+  .ark-select-dropdown-list(@color:#1989fa){
+    .ark-select-item-selected {
+      color: @color;
+    }
+    .ark-select-item:hover{
+      color: @color;
+    }
+  }
+  
+}
+
+// 模块的命名空间
+#nav{
+  
+}
+#menu{
+  .navigator(@bgColor:#1989fa,@fontColor:#444){
+    background: #1989fa
+  }
+}
+#table{
+
+}
+
+//调用样式
+.blue {
+  .button(#1989fa);
+  .tab(#1989fa);
+  .checked(#1989fa);
+  #page > .ark-page(#1989fa);
+  #page > .ark-select-dropdown-list(#1989fa)
+}
+.Pink {
+  .button(Pink);
+}
+.CoralRed {
+  .button(red);
+}
