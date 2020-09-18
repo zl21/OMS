@@ -1,7 +1,8 @@
 export default {
   //JIT配货单修改仓库测试弹框
   modifyWarehouse: {
-    component: () => import("@/views/modal/orderCenter/modifyWarehouse.vue"),
+    component: () => import("@/views/modal/InterfacePlatform/downLoadPublic.vue")
+    // component: () => import("@/views/modal/orderCenter/modifyWarehouse.vue"),
   },
   // 零售订单 批量导入
   salesOrderBatchImport: {
@@ -16,4 +17,5 @@ export default {
   purchasebatchImport: {
     component: () => import("@/views/modal/orderCenter/batchImport.vue"),
   },
+  
 };
