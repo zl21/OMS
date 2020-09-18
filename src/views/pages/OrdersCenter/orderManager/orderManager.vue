@@ -211,7 +211,7 @@
         model: '',
         cityList: [
           {
-            value: 'blue',
+            value: 'skyBlue',
             label: '经典蓝'
           },
           {
@@ -2398,16 +2398,23 @@
     methods: {
       //
       change(e) {
-        if (e === 'blue') {
-          localStorage.setItem('theme', 'blue');
-          document.getElementsByTagName('body')[0].className = 'blue';
-        } else if (e === 'Pink') {
-          localStorage.setItem('theme', 'Pink');
-          document.getElementsByTagName('body')[0].className = 'Pink';
-        } else if (e === 'CoralRed') {
-          localStorage.setItem('theme', 'CoralRed');
-          document.getElementsByTagName('body')[0].className = 'CoralRed';
-        }
+        // if (e === 'skyBlue') {
+        //   localStorage.setItem('theme', 'skyBlue');
+        //   document.getElementsByTagName('body')[0].className = 'skyBlue';
+        // } else if (e === 'Pink') {
+        //   localStorage.setItem('theme', 'Pink');
+        //   document.getElementsByTagName('body')[0].className = 'Pink';
+        // } else if (e === 'CoralRed') {
+        //   localStorage.setItem('theme', 'CoralRed');
+        //   document.getElementsByTagName('body')[0].className = 'CoralRed';
+        // }
+        // 节流防止疯狂点击
+        // if (change) {
+        //     clearTimeout(change)
+        // }
+        // setTimeout(() => {
+        //     document.head.querySelector('#skin').setAttribute('href', `/skin/${type}.css`)
+        // }, 100)
       },
       // 获取高级查询&表头
       getHeaderList() {

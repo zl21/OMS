@@ -11,8 +11,9 @@ import projectRouterConfig from './src/config/router.config';
 import customizedPageConfig from './src/config/customized.page.config';
 import customizedModalConfig from './src/config/customized.modal.config';
 
-import './static/theme/custom.less'; // 主题文件
-import './static/theme/theme.less'; // 自定义主题文件
+
+// import './static/theme/custom.less'; // 主题文件
+// import './static/theme/theme.less'; // 自定义主题文件
 // import '@syman/ark-ui/dist/styles/ark-ui.css';
 import '@syman/burgeon-r3/r3.publish/r3.min.css';
 
