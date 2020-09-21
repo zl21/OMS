@@ -40,14 +40,14 @@ module.exports = env => ({
       rewrites: [{
         from: /.*/,
         to: env && env.production ? indexProHtml : indexHtml
-      },],
+      }, ],
     },
     publicPath: '/',
     proxy: [{
       context: proxyLists,
       target,
       changeOrigin: true,
-    },],
+    }, ],
   },
   target: 'web',
   devtool: env && env.production ? 'source-map' : 'cheap-module-eval-source-map',
@@ -59,63 +59,63 @@ module.exports = env => ({
   },
   module: {
     rules: [{
-      test: /\.vue$/,
-      use: [{
-        loader: 'vue-loader',
-      },],
-    },
-    {
-      test: /\.m?js$/,
-      exclude: /(node_modules|bower_components)/,
-      use: {
-        loader: 'babel-loader',
-      },
-    },
-    {
-      test: /\.(sa|sc|c|le)ss$/,
-      use: [{
-        loader: env && env.production
-          ? MiniCssExtractPlugin.loader : 'style-loader',
+        test: /\.vue$/,
+        use: [{
+          loader: 'vue-loader',
+        }, ],
       },
       {
-        loader: 'css-loader',
-      },
-      {
-        loader: 'less-loader',
-        options: {
-          javascriptEnabled: true
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
         },
       },
-      ],
-    },
-    {
-      test: /\.(png|jpg|gif)$/,
-      use: [{
+      {
+        test: /\.(sa|sc|c|le)ss$/,
+        use: [{
+            loader: env && env.production ?
+              MiniCssExtractPlugin.loader : 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 8192,
+            name: '[path][name].[ext]',
+          },
+        }, ],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[path][name].[ext]',
+            context: 'src',
+          },
+        }, ],
+      },
+      {
+        test: /\.(mp3)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 8192,
-          name: '[path][name].[ext]',
-        },
-      },],
-    },
-    {
-      test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
-      use: [{
-        loader: 'file-loader',
-        options: {
-          name: '[path][name].[ext]',
-          context: 'src',
-        },
-      },],
-    },
-    {
-      test: /\.(mp3)(\?.*)?$/,
-      loader: 'url-loader',
-      options: {
-        name: 'audios/[name].[ext]',
-        limit: 10
+          name: 'audios/[name].[ext]',
+          limit: 10
+        }
       }
-    } 
     ],
   },
   plugins: [
@@ -126,8 +126,8 @@ module.exports = env => ({
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       chunksSortMode: 'none',
-      title: env && env.production
-        ? projectConfig.projectsTitle : `Debug:${projectConfig.projectsTitle}`,
+      title: env && env.production ?
+        projectConfig.projectsTitle : `Debug:${projectConfig.projectsTitle}`,
       template: env && env.production ? './index.pro.html' : './index.html',
       inject: true,
       favicon: projectConfig.projectIconPath,
@@ -136,7 +136,7 @@ module.exports = env => ({
       from: path.resolve(__dirname, './static'),
       to: 'static',
       ignore: ['.*'],
-    },]),
+    }, ]),
 
     new webpack.ProvidePlugin({
       $: 'jquery',
