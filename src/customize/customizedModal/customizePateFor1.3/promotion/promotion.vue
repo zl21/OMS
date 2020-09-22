@@ -90,8 +90,8 @@
   </div>
 </template>
 <script>
-  import { httpFormdata } from 'framework/__utils__/request';
-
+  import { httpFormdata } from 'framework/__utils__/request'
+  
   import procedDureOne from './procedure/procedureOne/procedureOne';
   import procedDureTwo from './procedure/procedureTwo/index';
   import procedDureThree from './procedure/procedureThree/procedureThree';

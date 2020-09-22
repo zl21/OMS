@@ -107,7 +107,8 @@
 // checked
 .checked(@color:#1989fa) {
   .ark-checkbox-checked {
-    &:hover .ark-checkbox-inner,.ark-checkbox-inner {
+    &:hover .ark-checkbox-inner,
+    .ark-checkbox-inner {
       border-color: @color;
       background-color: @color;
     }
@@ -237,6 +238,18 @@
       .steps-item {
         .steps-head {
           .step-finish[data-v-1cab84ca] {
+            color: @color;
+          }
+        }
+      }
+    }
+    .addOrEditActi {
+      .steps_content {
+        .footer[data-v-2698e3ce] {
+          color: @color;
+          & > button {
+            border: 1px solid @color;
+            font-size: 12px;
             color: @color;
           }
         }

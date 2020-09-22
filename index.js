@@ -52,7 +52,9 @@ Vue.prototype.$network = network;
 Vue.prototype.$urlSearchParams = urlSearchParams;
 Vue.prototype.$theme = customizedTheme;//将主题方法挂载到原型上
 
-document.head.querySelector('#skin').setAttribute('href', customizedTheme.skyBlue)//默认加载主题样式
+// 设置主题调用方法
+customizedTheme.appendLink(customizedTheme.skyBlue)
+
 function restructureMenuTreeData(data) {
   return data.map((item) => {
     item.NAME = item.ENAME;
