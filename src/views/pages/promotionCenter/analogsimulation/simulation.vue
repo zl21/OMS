@@ -189,7 +189,7 @@
   import MultipleBox from '../components/multipleBox';
   import SingleBox from '../components/singleBox';
   import ButtonFkDialog from '../components/buttonFkDialog';
-  import tabList from '../js/columns.js';
+  import tabList from '@/assets/js/promotion/columns.js';
 
   export default {
     data() {

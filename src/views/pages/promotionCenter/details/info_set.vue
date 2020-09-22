@@ -174,7 +174,7 @@
   </div>
 </template>
 <script>
-  import tableCols from '@/views/pages/promotionCenter/js/columns.js';
+  import tableCols from '@/assets/js/promotion/columns.js';
   import SingleBox from '@/views/pages/promotionCenter/components/singleBox.vue';
   import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDialog.vue';
   import detailtable from '@/views/pages/promotionCenter/details/table.vue';

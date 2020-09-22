@@ -73,7 +73,9 @@
   import detailtable from './table.vue';
   import batchTables from './batchTables';
   import SingleBox from '../components/singleBox';
-  import tableCols from '../js/columns.js';
+  import tableCols from '@/assets/js/promotion/columns.js';
+
+
 
   export default {
     name: 'InfoSet',

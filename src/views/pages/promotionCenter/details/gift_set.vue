@@ -170,7 +170,7 @@
   import detailtable from './table.vue';
   import detailtabs from './tableTabs.vue';
   import SingleBox from '../components/singleBox';
-  import tableCols from '../js/columns.js';
+  import tableCols from '@/assets/js/promotion/columns.js';
   import ButtonFkDialog from '../components/buttonFkDialog';
 
   const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
