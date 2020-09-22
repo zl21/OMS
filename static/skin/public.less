@@ -21,35 +21,66 @@
   .ark-btn-posdefault {
     border-color: @color;
     background: @color;
-    &:hover{
+    &:hover {
       color: @fontColor;
       background-color: @color;
       border-color: @color;
     }
   }
-  .one_button .buttonBox{
-    .buttonGroup{
-      button.ark-btn{
+  .one_button .buttonBox {
+    .buttonGroup {
+      button.ark-btn {
         border-color: @color;
         color: @color;
       }
     }
   }
   // 促销
-  .promactiquery{
-    .head_botton button{
+  .promactiquery,
+  .promactiqueryList {
+    .head_botton button,
+    div.favoriteForm {
       border: 1px solid @color;
       background: @fontColor;
       color: @color;
-      &.active{
+      &.active {
         background: @color;
         color: @fontColor;
       }
     }
-    .main_body .el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active{
+    .main_body
+      .el-tabs--border-card
+      > .el-tabs__header
+      .el-tabs__item.is-active {
       color: @color;
     }
-    .main_body .el-tabs--border-card > .el-tabs__header .el-tabs__item:not(.is-disabled):hover{
+    .main_body
+      .el-tabs--border-card
+      > .el-tabs__header
+      .el-tabs__item:not(.is-disabled):hover {
+      color: @color;
+    }
+  }
+  .buttonFk button[data-v-103544ac] {
+    border: 1px solid @color;
+    color: @color;
+  }
+  .row {
+    .add {
+      background: @color;
+    }
+    .import[data-v-39edb6c6] {
+      border: 1px solid @color;
+      background: @color;
+      color: @fontColor;
+    }
+  }
+  .basicInfo,
+  .batchInfoSet,
+  .infoSet,
+  .giftSet {
+    .row .form_button > button {
+      border: 1px solid @color;
       color: @color;
     }
   }
@@ -62,9 +93,9 @@
       color: @color !important;
     }
   }
-  .emptying{
-    i.iconfont{
-      color:@color !important;
+  .emptying {
+    i.iconfont {
+      color: @color !important;
     }
   }
   .table {
@@ -76,16 +107,22 @@
 // checked
 .checked(@color:#1989fa) {
   .ark-checkbox-checked {
-    .ark-checkbox-inner {
+    &:hover .ark-checkbox-inner,.ark-checkbox-inner {
       border-color: @color;
-    background-color: @color;
+      background-color: @color;
+    }
+  }
+  .ark-radio-checked .ark-radio-inner {
+    border-color: @color;
+    &:after {
+      background-color: @color;
     }
   }
 }
 // page的命名空间
 #page {
   // page 页码
-  .page(@color:#1989fa){
+  .page(@color:#1989fa) {
     .ark-page {
       .ark-page-item,
       .ark-page-prev,
@@ -102,83 +139,108 @@
     }
   }
   // select 选择条数
-  .selectList(@color:#1989fa){
-    .ark-select-dropdown-list{
+  .selectList(@color:#1989fa) {
+    .ark-select-dropdown-list {
       .ark-select-item-selected {
         color: @color;
       }
-      .ark-select-item:hover{
+      .ark-select-item:hover {
         color: @color;
       }
     }
   }
 }
 // 模块的命名空间#092750
-#nav{
-  .navBg(@color:#0f3365,@hoverColor:#092750,@liHoverBg:#0068b7){
-    .navigator{
+#nav {
+  .navBg(@color:#0f3365,@hoverColor:#092750,@liHoverBg:#0068b7) {
+    .navigator {
       background-color: @color;
-      .navigator-primary-menu{
-        &:hover{
+      .navigator-primary-menu {
+        &:hover {
           background-color: @hoverColor;
         }
       }
-      .navigator-sub-menu .menu-group{
-        li.item{
-          &:hover{
+      .navigator-sub-menu .menu-group {
+        li.item {
+          &:hover {
             background-color: @liHoverBg;
           }
         }
       }
-      .nav-search{
-         input{
+      .nav-search {
+        input {
           background-color: @color;
         }
       }
-      .tag:hover{
+      .tag:hover {
         background-color: @hoverColor;
       }
     }
   }
 }
-#menu{
-  .historyFavorite(@bgColor:#0f3365,@hoverColor:#173155,@fontColor:#fff){
-   .history-and-favorite{
-     .history-favorite-container{
-      background-color: @bgColor;
-      .favorite,.history{
-        div.label{
-          color: @fontColor;
-          background-color: @bgColor;
-        }
-        ul li{
-          color: @fontColor;
-          &:hover{
-            background-color: @hoverColor;
+#menu {
+  .historyFavorite(@bgColor:#0f3365,@hoverColor:#173155,@fontColor:#fff,@collectFontColor:#303133) {
+    .history-and-favorite {
+      //  background: @bgColor;
+      .history-favorite-container {
+        background-color: @bgColor;
+        .favorite,
+        .history {
+          div.label {
+            color: @fontColor;
+            background-color: @bgColor;
+          }
+          ul li {
+            color: @fontColor;
+            &:hover {
+              background-color: @hoverColor;
+            }
+          }
+          ul.onMouseOverShow li {
+            color: @collectFontColor;
           }
         }
       }
-     }
-   }
+    }
   }
 }
-#from{
-  .customizedFrom(@color:#0268b6){
-    #content{
-      .from-folding{
+#from {
+  .customizedFrom(@color:#0268b6) {
+    #content {
+      .from-folding {
         background-color: @color;
       }
     }
   }
-  .standardFrom(@bgcolor:#0268b6){
-    .downComponent-context{
-      .tag-close{
+  .standardFrom(@bgcolor:#0268b6) {
+    .downComponent-context {
+      .tag-close {
         background-color: @bgcolor;
       }
     }
   }
 }
-#table{
-
+#table {
 }
-
+#customized {
+  // 促销
+  .promotion (@color:#1989fa) {
+    .basicInfo,
+    .batchInfoSet,
+    .infoSet,
+    .giftSet {
+      .title i {
+        color: @color;
+      }
+    }
+    .stepsBars {
+      .steps-item {
+        .steps-head {
+          .step-finish[data-v-1cab84ca] {
+            color: @color;
+          }
+        }
+      }
+    }
+  }
+}
