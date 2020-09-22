@@ -1,18 +1,5 @@
 <template>
   <div class="orderManager-box">
-    <Select
-      v-model="model"
-      style="width:200px"
-      @on-change="change"
-    >
-      <Option
-        v-for="item in cityList"
-        :key="item.value"
-        :value="item.value"
-      >
-        {{ item.label }}
-      </Option>
-    </Select>
     <div class="btn">
       <jordanBtn :btn-config="btnConfig" />
     </div>
@@ -209,19 +196,6 @@
     data() {
       return {
         model: '',
-        cityList: [
-          {
-            value: 'skyBlue',
-            label: '经典蓝'
-          },
-          {
-            value: 'Pink',
-            label: '芭比粉'
-          },
-          {
-            value: 'CoralRed',
-            label: '珊瑚红'
-          }],
         // 弹框配置 导入
         importTable: {
           refFuns: 'confirmFun',
@@ -2396,26 +2370,6 @@
       self.setTableHeight();
     },
     methods: {
-      //
-      change(e) {
-        // if (e === 'skyBlue') {
-        //   localStorage.setItem('theme', 'skyBlue');
-        //   document.getElementsByTagName('body')[0].className = 'skyBlue';
-        // } else if (e === 'Pink') {
-        //   localStorage.setItem('theme', 'Pink');
-        //   document.getElementsByTagName('body')[0].className = 'Pink';
-        // } else if (e === 'CoralRed') {
-        //   localStorage.setItem('theme', 'CoralRed');
-        //   document.getElementsByTagName('body')[0].className = 'CoralRed';
-        // }
-        // 节流防止疯狂点击
-        // if (change) {
-        //     clearTimeout(change)
-        // }
-        // setTimeout(() => {
-        //     document.head.querySelector('#skin').setAttribute('href', `/skin/${type}.css`)
-        // }, 100)
-      },
       // 获取高级查询&表头
       getHeaderList() {
         const _this = this;
