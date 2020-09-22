@@ -152,6 +152,7 @@ export default {
           pinned: "left",
           resizable: false,
           suppressMovable: true, //禁止该列拖拽
+          suppressFilter: true,
           sort: "asc",
           maxWidth: 125 //最大宽度
         });
