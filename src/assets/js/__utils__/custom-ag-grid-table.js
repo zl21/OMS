@@ -48,7 +48,8 @@ const initializeAgTable = (container, opt, obj) => {
       agGridTableContainer.setAttribute('data-scroll-top', params.top)
     }), // 当表体发生滚动时候触发该事件
     options.floatingFilter = options && options.floatingFilter ? options.floatingFilter : true, // 是否显表头下方的浮动筛选框
-      new Grid(agGridTableContainer, options)
+      options.toolPanelSuppressSideButtons = true; //隐藏右侧工具栏
+    new Grid(agGridTableContainer, options)
     const {
       api,
       columnApi
