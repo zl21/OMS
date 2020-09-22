@@ -12,7 +12,7 @@ import customizedPageConfig from './src/config/customized.page.config';
 import customizedModalConfig from './src/config/customized.modal.config';
 
 import './static/theme/custom.less'; // 主题文件
-// import '@syman/ark-ui/dist/styles/ark-ui.css';
+import customizedTheme from './src/config/customized.theme.js';//主题配置
 import '@syman/burgeon-r3/r3.publish/r3.min.css';
 
 // 老框架引入的 自定义界面内需要的css资源
@@ -46,7 +46,9 @@ const {
 } = R3;
 Vue.prototype.$network = network;
 Vue.prototype.$urlSearchParams = urlSearchParams;
+Vue.prototype.$theme = customizedTheme;//将主题方法挂载到原型上
 
+document.head.querySelector('#skin').setAttribute('href', customizedTheme.skyBlue)//默认加载主题样式
 function restructureMenuTreeData(data) {
   return data.map((item) => {
     item.NAME = item.ENAME;
