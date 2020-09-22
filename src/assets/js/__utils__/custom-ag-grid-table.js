@@ -1,9 +1,15 @@
-import { Grid } from 'ag-grid'
+import {
+  Grid
+} from 'ag-grid'
 import 'libs/ag-grid/dist/styles/ag-grid.css'
 import 'libs/ag-grid/dist/styles/ag-theme-balham.css'
 import 'ag-grid-enterprise/main'
-import { LicenseManager } from 'ag-grid-enterprise/main'
-import { agGridEnterpriseLicenseKey } from '../constant'
+import {
+  LicenseManager
+} from 'ag-grid-enterprise/main'
+import {
+  agGridEnterpriseLicenseKey
+} from '../constant'
 
 // 设置enterprise key
 LicenseManager.setLicenseKey(agGridEnterpriseLicenseKey)
@@ -26,9 +32,12 @@ const initializeAgTable = (container, opt, obj) => {
     if (agGridTableContainer.agTable) {
       agGridTableContainer.agTable.customizeOptions = options
       return agGridTableContainer.agTable
-    }
-    ;(options.onBodyScroll = function(params) {
-      const { columnApi, direction } = params
+    };
+    (options.onBodyScroll = function (params) {
+      const {
+        columnApi,
+        direction
+      } = params
       clearTimeout(updateBodyScrollDelay)
       if (direction === 'horizontal') {
         updateBodyScrollDelay = setTimeout(() => {
@@ -38,8 +47,13 @@ const initializeAgTable = (container, opt, obj) => {
       agGridTableContainer.setAttribute('data-scroll-left', params.left)
       agGridTableContainer.setAttribute('data-scroll-top', params.top)
     }), // 当表体发生滚动时候触发该事件
-      new Grid(agGridTableContainer, options)
-    const { api, columnApi } = options
+    options.floatingFilter = options && options.floatingFilter ? options.floatingFilter : true, // 是否显表头下方的浮动筛选框
+      options.toolPanelSuppressSideButtons = true; //隐藏右侧工具栏
+    new Grid(agGridTableContainer, options)
+    const {
+      api,
+      columnApi
+    } = options
     agTable['api'] = api
     agTable['columnApi'] = columnApi
     //赋值表头数据

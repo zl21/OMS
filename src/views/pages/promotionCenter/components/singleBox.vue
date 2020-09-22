@@ -43,6 +43,9 @@
       options: {
         type: Array,
         default: () => []
+      },
+      options: {
+        type: Array
       }
     },
     methods: {
@@ -53,6 +56,10 @@
         this.name = '';
         const obj = this.options.find(opt => opt.value === this.value);
         if (obj) this.name = obj.title;
+        this.$nextTick(() => {
+          const obj = this.options.find(opt => opt.value === this.value);
+          if (obj) this.name = obj.title;
+        });
       },
       /**
        * 单选值

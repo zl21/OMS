@@ -4,10 +4,10 @@ import R3 from '@syman/burgeon-r3';
 import jordanstore from './jordanStore';
 
 const { store, router, getKeepAliveModuleName } = R3;
-
 export const globalStore = {// 1.3框架全局状态管理
   namespaced: true,
   state: {
+    theme: '',
     mainContentLoading: false,
     pwTips: false,
     activeTabAddr: [],
@@ -120,6 +120,10 @@ export const globalStore = {// 1.3框架全局状态管理
     },
     forginkeys(state, data) {
       state.forginkeys[data.key] = data.value;
+    },
+    // 主题
+    theme(state, val) {
+      state.theme = val;
     },
     stateChange(state, data) {
       state = Object.assign(state, data);
