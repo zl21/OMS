@@ -2402,13 +2402,14 @@ export default {
   padding-top: 50px;
 }
 .orderButtons {
-  display: block;
-  width: 100%;
-  z-index: 1000;
-  position: fixed;
-  top: 84px;
-  padding: 8px 0 0 0;
-  background: #fff;
+    display: block;
+    width: 100%;
+    z-index: 1000;
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    padding: 0;
+    background: #fff;
 }
 
 .order-add .table {
