@@ -77,8 +77,6 @@ function getTreeChildren(pnode, arr) {
   });
 }
 
-const theme = localStorage.getItem('theme');
-document.getElementsByTagName('body')[0].className = theme;
 // 老框架引入的 自定义界面内需要的资源
 R3.launchApplication({
   image: {

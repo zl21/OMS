@@ -1,6 +1,7 @@
-// 设置公共样式方法
-// button
-.button(@color: #1989fa, @fontColor: #fff) {
+// 设置公共变量
+@publicColor: #1989fa;
+// 所有button
+.button(@color: @publicColor, @fontColor: #fff) {
   .btn .one_button {
     .buttonBox {
       .buttonGroup button {
@@ -99,8 +100,8 @@
   }
 }
 
-// tab
-.tab(@color: #1989fa) {
+// 主表tab
+.tab(@color: @publicColor) {
   .tab-list {
     .active {
       border-top: 2px solid @color  !important;
@@ -121,8 +122,8 @@
   }
 }
 
-// checked
-.checked(@color: #1989fa) {
+// 所有checked
+.checked(@color: @publicColor) {
   .ark-checkbox-checked {
 
     &:hover .ark-checkbox-inner,
@@ -140,12 +141,12 @@
     }
   }
 }
-//以下分为模块
 
+// 页面page
 #page {
 
   // page 页码
-  .page(@color: #1989fa) {
+  .page(@color: @publicColor) {
     .ark-page {
 
       .ark-page-item,
@@ -165,7 +166,7 @@
   }
 
   // select 选择条数
-  .selectList(@color: #1989fa) {
+  .selectList(@color: @publicColor) {
     .ark-select-dropdown-list {
       .ark-select-item-selected {
         color: @color;
@@ -178,6 +179,7 @@
   }
 }
 
+// 头部导航
 #nav {
   .navBg(@color: #0f3365, @hoverColor: #092750, @liHoverBg: #0068b7) {
     .navigator {
@@ -210,6 +212,7 @@
   }
 }
 
+// 侧边栏菜单 收藏和历史
 #menu {
   .historyFavorite(@bgColor: #0f3365, @hoverColor: #173155, @fontColor: #fff, @collectFontColor: #303133) {
     .history-and-favorite {
@@ -246,8 +249,9 @@
   }
 }
 
+// 搜索from
 #from {
-  .customizedFrom(@color: #0268b6) {
+  .customizedFrom(@color: @publicColor) {
     #content {
       .from-folding {
         background-color: @color;
@@ -255,7 +259,7 @@
     }
   }
 
-  .standardFrom(@bgcolor: #0268b6) {
+  .standardFrom(@bgcolor: @publicColor) {
     .downComponent-context {
       .tag-close {
         background-color: @bgcolor;
@@ -263,11 +267,28 @@
     }
   }
 }
-
+// 弹框
+#modal{
+  .customized(@color:@publicColor){
+    .dialog-footer{
+      .ark-btn{
+        color: @color;
+        border-color:@color;
+        &:hover{
+          color: @color;
+          border-color:@color;
+          background:transparent;
+          opacity: .6;
+        }
+      }
+    }
+  }
+}
+// 定制界面
 #customized {
 
   // 订单管理
-  .orderAdd(@color: #0268b6) {
+  .orderAdd(@color: @publicColor) {
     .jordan-label-box {
       .jordan-label {
         &.colorStyle {
@@ -279,7 +300,7 @@
   }
 
   // 促销
-  .promotion (@color: #1989fa) {
+  .promotion (@color: @publicColor) {
 
     .basicInfo,
     .batchInfoSet,
@@ -316,32 +337,29 @@
   }
 
   // 系统配置
-
-}
-
-#standard {
-
-  // 单对象界面 上下结构
-  .tab(@color: #0268b6) {
-    .ark-tabs-panels.ark-tabs-panels-singleCard {
-      &>.ark-tabs-panels-bar {
-        .ark-tabs-panels-tab-active {
-          color: @color;
-        }
+  .system(@color:@publicColor){
+    .ark-spin{
+      color: @color;
+    }
+    .ark-tree-arrow i{
+      color: @color;
+    }
+    .rightware_table{ 
+      .el-tabs__item.is-active,.el-tabs__item:hover{
+        color: @color;
       }
     }
   }
 }
+// 标准界面
+#standard {
 
-#modal{
-  .customized(@color:#0268b6){
-    .dialog-footer{
-      .ark-btn{
-        color: @color;
-        border-color:@color;
-        &:hover{
+  // 单对象界面 上下结构
+  .tab(@color: @publicColor) {
+    .ark-tabs-panels.ark-tabs-panels-singleCard {
+      &>.ark-tabs-panels-bar {
+        .ark-tabs-panels-tab-active {
           color: @color;
-          border-color:@color;
         }
       }
     }

@@ -17,11 +17,6 @@
     </el-tabs>
   </div>
 </template>
-<style lang="less" scoped type="text/less">
-  .ff-number-card-detail {
-
-  }
-</style>
 <style lang="less" type="text/less">
   .ff-number-card-detail {
     .el-tabs__active-bar {

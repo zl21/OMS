@@ -176,6 +176,16 @@ body .addOrEditActi .steps_content .footer[data-v-2698e3ce] > button {
 body .jordan-label-box .jordan-label.colorStyle {
   color: #0068b7;
 }
+body .ark-spin {
+  color: #0068b7;
+}
+body .ark-tree-arrow i {
+  color: #0068b7;
+}
+body .rightware_table .el-tabs__item.is-active,
+body .rightware_table .el-tabs__item:hover {
+  color: #0068b7;
+}
 body .ark-tabs-panels.ark-tabs-panels-singleCard > .ark-tabs-panels-bar .ark-tabs-panels-tab-active {
   color: #0068b7;
 }
@@ -186,4 +196,6 @@ body .dialog-footer .ark-btn {
 body .dialog-footer .ark-btn:hover {
   color: #0068b7;
   border-color: #0068b7;
+  background: transparent;
+  opacity: 0.6;
 }
