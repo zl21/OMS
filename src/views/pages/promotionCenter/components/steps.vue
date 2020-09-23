@@ -5,7 +5,7 @@
       <div class="steps-head" @click="selectOneStep(index)">
         <div class="steps-head-inner">
           <span
-            :class="['iconfont','icon-item',showItem(index,item),showFinish(index,item),showActive(index,item)]"
+            :class="['iconfontPromotion','icon-item',showItem(index,item),showFinish(index,item),showActive(index,item)]"
           ></span>
         </div>
       </div>

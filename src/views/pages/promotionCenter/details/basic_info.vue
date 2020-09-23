@@ -2,7 +2,7 @@
 <template>
   <div class="basicInfo">
     <div class="title">
-      <i class="iconfont iconjibenxinxi" />
+      <i class="iconfontPromotion iconjibenxinxi" />
       <span>基础活动</span>
     </div>
     <div
