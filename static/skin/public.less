@@ -1,6 +1,6 @@
 // 设置公共样式方法
 // button
-.button(@color:#1989fa,@fontColor:#fff) {
+.button(@color: #1989fa, @fontColor: #fff) {
   .btn .one_button {
     .buttonBox {
       .buttonGroup button {
@@ -9,122 +9,145 @@
       }
     }
   }
+
   .ark-btn-fcdefault {
     color: @color;
     border-color: @color;
+
     &:hover {
       color: @color;
       border-color: @color;
       opacity: 0.6;
     }
   }
+
   .ark-btn-posdefault {
     border-color: @color;
     background: @color;
+
     &:hover {
       color: @fontColor;
       background-color: @color;
       border-color: @color;
     }
   }
+
   .one_button .buttonBox {
     .buttonGroup {
       button.ark-btn {
         border-color: @color;
         color: @color;
+
+        &:hover {
+          background: #fff;
+          opacity: 0.6;
+        }
       }
     }
   }
+
   // 促销
   .promactiquery,
   .promactiqueryList {
+
     .head_botton button,
     div.favoriteForm {
       border: 1px solid @color;
       background: @fontColor;
       color: @color;
+
       &.active {
         background: @color;
         color: @fontColor;
       }
     }
-    .main_body
-      .el-tabs--border-card
-      > .el-tabs__header
-      .el-tabs__item.is-active {
+
+    .main_body .el-tabs--border-card>.el-tabs__header .el-tabs__item.is-active {
       color: @color;
     }
-    .main_body
-      .el-tabs--border-card
-      > .el-tabs__header
-      .el-tabs__item:not(.is-disabled):hover {
+
+    .main_body .el-tabs--border-card>.el-tabs__header .el-tabs__item:not(.is-disabled):hover {
       color: @color;
     }
   }
+
   .buttonFk button[data-v-103544ac] {
     border: 1px solid @color;
     color: @color;
   }
+
   .row {
     .add {
       background: @color;
     }
+
     .import[data-v-39edb6c6] {
       border: 1px solid @color;
       background: @color;
       color: @fontColor;
     }
   }
+
   .basicInfo,
   .batchInfoSet,
   .infoSet,
   .giftSet {
-    .row .form_button > button {
+    .row .form_button>button {
       border: 1px solid @color;
       color: @color;
     }
   }
 }
+
 // tab
-.tab(@color:#1989fa) {
+.tab(@color: #1989fa) {
   .tab-list {
     .active {
-      border-top: 2px solid @color !important;
-      color: @color !important;
+      border-top: 2px solid @color  !important;
+      color: @color  !important;
     }
   }
+
   .emptying {
     i.iconfont {
-      color: @color !important;
+      color: @color  !important;
     }
   }
+
   .table {
     .jordan-label-box .colorStyle {
       color: @color;
     }
   }
 }
+
 // checked
-.checked(@color:#1989fa) {
+.checked(@color: #1989fa) {
   .ark-checkbox-checked {
+
     &:hover .ark-checkbox-inner,
     .ark-checkbox-inner {
       border-color: @color;
       background-color: @color;
     }
   }
+
   .ark-radio-checked .ark-radio-inner {
     border-color: @color;
+
     &:after {
       background-color: @color;
     }
   }
 }
-// page的命名空间
+//以下分为模块
+
 #page {
+
   // page 页码
-  .page(@color:#1989fa) {
+  .page(@color: #1989fa) {
     .ark-page {
+
       .ark-page-item,
       .ark-page-prev,
       .ark-page-next {
@@ -133,34 +156,39 @@
           background-color: @color;
         }
       }
+
       .ark-page-item-active {
         border-color: @color;
         background-color: @color;
       }
     }
   }
+
   // select 选择条数
-  .selectList(@color:#1989fa) {
+  .selectList(@color: #1989fa) {
     .ark-select-dropdown-list {
       .ark-select-item-selected {
         color: @color;
       }
+
       .ark-select-item:hover {
         color: @color;
       }
     }
   }
 }
-// 模块的命名空间#092750
+
 #nav {
-  .navBg(@color:#0f3365,@hoverColor:#092750,@liHoverBg:#0068b7) {
+  .navBg(@color: #0f3365, @hoverColor: #092750, @liHoverBg: #0068b7) {
     .navigator {
       background-color: @color;
+
       .navigator-primary-menu {
         &:hover {
           background-color: @hoverColor;
         }
       }
+
       .navigator-sub-menu .menu-group {
         li.item {
           &:hover {
@@ -168,52 +196,66 @@
           }
         }
       }
+
       .nav-search {
         input {
           background-color: @color;
         }
       }
+
       .tag:hover {
         background-color: @hoverColor;
       }
     }
   }
 }
+
 #menu {
-  .historyFavorite(@bgColor:#0f3365,@hoverColor:#173155,@fontColor:#fff,@collectFontColor:#303133) {
+  .historyFavorite(@bgColor: #0f3365, @hoverColor: #173155, @fontColor: #fff, @collectFontColor: #303133) {
     .history-and-favorite {
+
       //  background: @bgColor;
       .history-favorite-container {
         background-color: @bgColor;
+
         .favorite,
         .history {
           div.label {
             color: @fontColor;
             background-color: @bgColor;
           }
+
           ul li {
             color: @fontColor;
+
             &:hover {
               background-color: @hoverColor;
             }
           }
+
           ul.onMouseOverShow li {
             color: @collectFontColor;
+
+            &:hover {
+              color: @fontColor;
+            }
           }
         }
       }
     }
   }
 }
+
 #from {
-  .customizedFrom(@color:#0268b6) {
+  .customizedFrom(@color: #0268b6) {
     #content {
       .from-folding {
         background-color: @color;
       }
     }
   }
-  .standardFrom(@bgcolor:#0268b6) {
+
+  .standardFrom(@bgcolor: #0268b6) {
     .downComponent-context {
       .tag-close {
         background-color: @bgcolor;
@@ -221,11 +263,24 @@
     }
   }
 }
-#table {
-}
+
 #customized {
+
+  // 订单管理
+  .orderAdd(@color: #0268b6) {
+    .jordan-label-box {
+      .jordan-label {
+        &.colorStyle {
+          color: @color;
+        }
+      }
+
+    }
+  }
+
   // 促销
-  .promotion (@color:#1989fa) {
+  .promotion (@color: #1989fa) {
+
     .basicInfo,
     .batchInfoSet,
     .infoSet,
@@ -234,6 +289,7 @@
         color: @color;
       }
     }
+
     .stepsBars {
       .steps-item {
         .steps-head {
@@ -243,15 +299,49 @@
         }
       }
     }
+
     .addOrEditActi {
       .steps_content {
         .footer[data-v-2698e3ce] {
           color: @color;
-          & > button {
+
+          &>button {
             border: 1px solid @color;
             font-size: 12px;
             color: @color;
           }
+        }
+      }
+    }
+  }
+
+  // 系统配置
+
+}
+
+#standard {
+
+  // 单对象界面 上下结构
+  .tab(@color: #0268b6) {
+    .ark-tabs-panels.ark-tabs-panels-singleCard {
+      &>.ark-tabs-panels-bar {
+        .ark-tabs-panels-tab-active {
+          color: @color;
+        }
+      }
+    }
+  }
+}
+
+#modal{
+  .customized(@color:#0268b6){
+    .dialog-footer{
+      .ark-btn{
+        color: @color;
+        border-color:@color;
+        &:hover{
+          color: @color;
+          border-color:@color;
         }
       }
     }

@@ -28,6 +28,10 @@ body .one_button .buttonBox .buttonGroup button.ark-btn {
   border-color: #0068b7;
   color: #0068b7;
 }
+body .one_button .buttonBox .buttonGroup button.ark-btn:hover {
+  background: #fff;
+  opacity: 0.6;
+}
 body .promactiquery .head_botton button,
 body .promactiqueryList .head_botton button,
 body .promactiquery div.favoriteForm,
@@ -80,6 +84,7 @@ body .emptying i.iconfont {
 body .table .jordan-label-box .colorStyle {
   color: #0068b7;
 }
+body .ark-checkbox-checked:hover .ark-checkbox-inner,
 body .ark-checkbox-checked .ark-checkbox-inner {
   border-color: #0068b7;
   background-color: #0068b7;
@@ -141,6 +146,10 @@ body .history-and-favorite .history-favorite-container .favorite ul.onMouseOverS
 body .history-and-favorite .history-favorite-container .history ul.onMouseOverShow li {
   color: #303133 !important;
 }
+body .history-and-favorite .history-favorite-container .favorite ul.onMouseOverShow li:hover,
+body .history-and-favorite .history-favorite-container .history ul.onMouseOverShow li:hover {
+  color: #fff !important;
+}
 body #content .from-folding {
   background-color: #0068b7;
 }
@@ -155,4 +164,26 @@ body .giftSet .title i {
 }
 body .stepsBars .steps-item .steps-head .step-finish[data-v-1cab84ca] {
   color: #0068b7;
+}
+body .addOrEditActi .steps_content .footer[data-v-2698e3ce] {
+  color: #0068b7;
+}
+body .addOrEditActi .steps_content .footer[data-v-2698e3ce] > button {
+  border: 1px solid #0068b7;
+  font-size: 12px;
+  color: #0068b7;
+}
+body .jordan-label-box .jordan-label.colorStyle {
+  color: #0068b7;
+}
+body .ark-tabs-panels.ark-tabs-panels-singleCard > .ark-tabs-panels-bar .ark-tabs-panels-tab-active {
+  color: #0068b7;
+}
+body .dialog-footer .ark-btn {
+  color: #0068b7;
+  border-color: #0068b7;
+}
+body .dialog-footer .ark-btn:hover {
+  color: #0068b7;
+  border-color: #0068b7;
 }
