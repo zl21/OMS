@@ -1,5 +1,5 @@
 <template>
-  <div style="width:440px">
+  <div style="width:440px;padding-right:20px">
     <jordanForm :formConfig="downLoadTaobaoGoodsFormConfig"></jordanForm>
     <div class="timeBox">
       <label>修改时间:</label>
@@ -20,7 +20,8 @@
       </el-date-picker>
     </div>
     <div class="dialog-footer">
-      <Button
+      <Button type="primary" ghost size="small" @click="download">确定</Button>
+       <Button
         type="error"
         ghost
         size="small"
@@ -31,7 +32,6 @@
         "
         >取消</Button
       >
-      <Button type="primary" ghost size="small" @click="download">确定</Button>
     </div>
   </div>
 </template>
@@ -39,7 +39,6 @@
 <script>
 import axios from "axios";
 import jordanForm from "@/jordanComponent/jordanForm";
-
 
 export default {
   components: {
@@ -215,7 +214,7 @@ export default {
 .timeBox {
   display: flex;
   width: 100%;
-  padding-right: 28px;
+  // padding-right: 28px;
   align-items: center;
   height: 30px;
   margin-bottom: 10px;

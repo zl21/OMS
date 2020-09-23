@@ -402,7 +402,7 @@ import myInput from "framework/components/input/objinput_dz.vue";
   .orderManageEdit .item-input .add-input {
     /* border: none !important; */
     padding: 0 !important;
-    background-color: #F7F7F7 !important;
+    background-color: #d8d8d8 !important;
   }
 
   .orderManageEdit .item-input .table-input {

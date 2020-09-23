@@ -10,17 +10,17 @@
         class="requisitionButton"
       >
         <button
-          class="btn1"
-          @click="cancelButton"
-        >
-          取消
-        </button>
-        <button
           v-if="this.corfirmBtnFlag"
           class="btn1"
           @click="inventory"
         >
           确认
+        </button>
+        <button
+          class="btn1"
+          @click="cancelButton"
+        >
+          取消
         </button>
       </div>
       <div

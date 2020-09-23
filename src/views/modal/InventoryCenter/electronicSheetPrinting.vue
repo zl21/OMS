@@ -43,18 +43,18 @@
           loading: false, // 按钮组件是否有loading样式,值为true false
           buttons: [
             {
-              text: '取消', // 按钮文本
-              btnclick: () => {
-                this.$emit('closeActionDialog', false);
-              }, // 按钮点击事件
-            },
-            {
               text: '确定打印', // 按钮文本
               disabled: false,
               btnclick: () => {
                 this.print();
               },
             },
+            {
+              text: '取消', // 按钮文本
+              btnclick: () => {
+                this.$emit('closeActionDialog', false);
+              }, // 按钮点击事件
+            }
           ],
         },
         websock: null,
