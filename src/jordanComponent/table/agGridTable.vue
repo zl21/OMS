@@ -304,7 +304,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "table.less";
+@import "../common/css/table.less";
 .agTable {
   .page {
     padding: 10px 0;

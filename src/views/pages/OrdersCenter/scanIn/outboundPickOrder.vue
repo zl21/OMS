@@ -1672,7 +1672,7 @@
 </script>
 
 <style lang="less">
-@import "~@/jordanComponent/css/theme.less";
+@import "~@/jordanComponent/common/css/theme.less";
 .outboundPickOrder {
   position: relative;
   .watermark {
