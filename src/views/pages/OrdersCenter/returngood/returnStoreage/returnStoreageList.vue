@@ -65,14 +65,14 @@
   </div>
 </template>
 <script>
-import jordanButton from "@/jordanComponent/jordanButton";
-import jordanForm from "@/jordanComponent/jordanForm";
-import jordanTable from "@/jordanComponent/jordanActionTable";
-import JDialog from "@/jordanComponent/JDialog";
+import jordanButton from "professionalComponents/jordanButton";
+import jordanForm from "professionalComponents/jordanForm";
+import jordanTable from "professionalComponents/jordanActionTable";
+import JDialog from "professionalComponents/JDialog";
 import strUtil from "@/assets/js/__utils__/util";
 import DateUtil from "@/assets/js/__utils__/date";
 // import publicMethods from "@/assets/js/public/publicMethods";
-import jordanModal from "@/jordanComponent/JDialog";
+import jordanModal from "professionalComponents/JDialog";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
 import { isFavoriteMixin } from "@/assets/js/mixins/isFavorite";
 let getCurrentTime = (() => {

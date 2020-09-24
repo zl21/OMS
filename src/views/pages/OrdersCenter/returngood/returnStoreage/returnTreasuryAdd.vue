@@ -67,11 +67,11 @@
 
 <script>
 import axios from "axios";
-import jordanButton from "@/jordanComponent/jordanButton";
-import jordanForm from "@/jordanComponent/jordanForm";
-import jordanLabel from "@/jordanComponent/jordanLabel";
-import jordanActionTable from "@/jordanComponent/jordanActionTable";
-import jordanStatusFlag from "@/jordanComponent/jordanStatusFlag";
+import jordanButton from "professionalComponents/jordanButton";
+import jordanForm from "professionalComponents/jordanForm";
+import jordanLabel from "professionalComponents/jordanLabel";
+import jordanActionTable from "professionalComponents/jordanActionTable";
+import jordanStatusFlag from "professionalComponents/jordanStatusFlag";
 import OrderItem from "../../orderManageDetail/details/orderItem.vue";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
 import { dataAccessMixin } from "@/assets/js/mixins/dataAccess";

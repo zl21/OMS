@@ -19,7 +19,7 @@
 
 <script>
 import httpServer from 'framework/__utils__/request';
-import jordanForm from "@/jordanComponent/jordanForm";
+import jordanForm from "professionalComponents/jordanForm";
 export default {
   components: {
     jordanForm

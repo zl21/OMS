@@ -200,10 +200,10 @@
 </template>
 
 <script>
-import jordanButton from "@/jordanComponent/jordanButton";
-import jordanActionTable from "@/jordanComponent/jordanActionTable";
+import jordanButton from "professionalComponents/jordanButton";
+import jordanActionTable from "professionalComponents/jordanActionTable";
 const _importA = file => require(`${file}.vue`).default;
-import JDialog from "@/jordanComponent/JDialog";
+import JDialog from "professionalComponents/JDialog";
 import CusOrderItem from "./custOrderItem";
 // import publicMethodsUtil from "@/assets/js/publicMethods";
 // import { BILL_STATUS } from "./config.js";

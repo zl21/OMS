@@ -69,17 +69,17 @@ feature : 订单中心-零售发货单详情
 </template>
 
 <script>
-import jordanButton from "@/jordanComponent/jordanButton";
-import jordanForm from "@/jordanComponent/jordanForm";
-import jordanTable from "@/jordanComponent/jordanTable.vue";
-import jordanLabel from "@/jordanComponent/jordanLabel";
+import jordanButton from "professionalComponents/jordanButton";
+import jordanForm from "professionalComponents/jordanForm";
+import jordanTable from "professionalComponents/jordanTable.vue";
+import jordanLabel from "professionalComponents/jordanLabel";
 import myInput from "framework/components/element/input.vue";
 import OrderItem from "./details/orderItem";
 import EssentialInfo from "./details/essentialInfo";
 // import dictionary from "../../../assets/zh-CN.js";
 import axios from "axios";
-import jordanStatusFlag from "@/jordanComponent/jordanStatusFlag";
-import JDialog from "@/jordanComponent/JDialog";
+import jordanStatusFlag from "professionalComponents/jordanStatusFlag";
+import JDialog from "professionalComponents/JDialog";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
 import publicDialogConfig from "../orderManager/publicConfig/publicDialog.js";
 

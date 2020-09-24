@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import jordanActionTable from "@/jordanComponent/jordanActionTable.vue";
+import jordanActionTable from "professionalComponents/jordanActionTable.vue";
 import publicMethodsUtil from "@/assets/js/public/publicMethods";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
 import { dataAccessMixin } from "@/assets/js/mixins/dataAccess";

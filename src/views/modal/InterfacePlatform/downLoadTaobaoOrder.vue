@@ -23,8 +23,8 @@
 <script>
 import axios from "axios";
 import dateFuns from "@/assets/js/__utils__/date";
-import jordanForm from "@/jordanComponent/jordanForm";
-import jordanBtn from "@/jordanComponent/jordanButton";
+import jordanForm from "professionalComponents/jordanForm";
+import jordanBtn from "professionalComponents/jordanButton";
 
 export default {
   components: {

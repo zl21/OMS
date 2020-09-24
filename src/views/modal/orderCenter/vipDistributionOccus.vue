@@ -11,7 +11,7 @@
 </template>
 <script>
 import axios from "axios";
-import jordanBtn from "@/jordanComponent/jordanButton";
+import jordanBtn from "professionalComponents/jordanButton";
 export default {
   components: {
     jordanBtn

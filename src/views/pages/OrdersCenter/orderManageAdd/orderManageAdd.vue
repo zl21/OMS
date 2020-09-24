@@ -62,13 +62,13 @@
   </div>
 </template>
 <script>
-import jordanButton from "@/jordanComponent/jordanButton";
-import jordanForm from "@/jordanComponent/jordanForm";
-import jordanActionTable from "@/jordanComponent/jordanActionTable";
-import jordanLabel from "@/jordanComponent/jordanLabel";
+import jordanButton from "professionalComponents/jordanButton";
+import jordanForm from "professionalComponents/jordanForm";
+import jordanActionTable from "professionalComponents/jordanActionTable";
+import jordanLabel from "professionalComponents/jordanLabel";
 import publicMethodsUtil from "@/assets/js/public/publicMethods";
 import axios from "axios";
-import jordanModal from "@/jordanComponent/JDialog";
+import jordanModal from "professionalComponents/JDialog";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
 import { dataAccessMixin } from "@/assets/js/mixins/dataAccess";
 const areaList = require("@/assets/js/address/area-list");

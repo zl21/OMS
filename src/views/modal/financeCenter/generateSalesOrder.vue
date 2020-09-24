@@ -22,7 +22,7 @@
 
 <script>
 import axios from "axios";
-import jordanForm from "@/jordanComponent/jordanForm";
+import jordanForm from "professionalComponents/jordanForm";
 // import jordanBtn from "@/components/jordanButton";
 
 export default {

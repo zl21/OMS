@@ -153,11 +153,11 @@
 </template>
 
 <script>
-  import jordanButton from '@/jordanComponent/jordanButton.vue';
-  import jordanForm from '@/jordanComponent/jordanForm.vue';
-  import jordanLabel from '@/jordanComponent/jordanLabel.vue';
-  import jordanActionTable from '@/jordanComponent/jordanActionTable.vue';
-  import JDialog from '@/jordanComponent/JDialog';
+  import jordanButton from 'professionalComponents/jordanButton.vue';
+  import jordanForm from 'professionalComponents/jordanForm.vue';
+  import jordanLabel from 'professionalComponents/jordanLabel.vue';
+  import jordanActionTable from 'professionalComponents/jordanActionTable.vue';
+  import JDialog from 'professionalComponents/JDialog';
   import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
   import axios from 'axios';
   import { setTimeout } from 'timers';

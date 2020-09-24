@@ -35,9 +35,9 @@
 </template>
 <script>
 import axios from "axios";
-import jordanButton from "@/jordanComponent/jordanButton";
-import jordanForm from "@/jordanComponent/jordanForm";
-import jordanActionTable from "@/jordanComponent/jordanActionTable";
+import jordanButton from "professionalComponents/jordanButton";
+import jordanForm from "professionalComponents/jordanForm";
+import jordanActionTable from "professionalComponents/jordanActionTable";
 import { setTimeout } from 'timers';
 export default {
   components: {

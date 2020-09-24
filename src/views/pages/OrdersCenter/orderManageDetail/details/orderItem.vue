@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import jordanActionTable from "@/jordanComponent/jordanActionTable.vue";
+import jordanActionTable from "professionalComponents/jordanActionTable.vue";
 import config from "./config";
 import axios from "axios";
 export default {
