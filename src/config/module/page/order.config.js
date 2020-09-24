@@ -8,6 +8,7 @@ import returnGood from 'allpages/OrdersCenter/returngood/returngoodmanagement.vu
 // import returnStorageList from 'branchComponent/page/OrdersCenter/returngood/returnStorage/returnStorageList.vue' //退货入库-列表
 // import returnTreasuryAdd from 'branchComponent/page/OrdersCenter/returngood/returnStorage/returnTreasuryAdd.vue' //退货入库-新增 退货入库-新增
 import refundAfterShipment from 'allpages/OrdersCenter/returngood/refundAfterShipment.vue' //订单中心-已发货退款单-编辑 额外退款
+import combinedCommodity from 'allpages/commodityCenter/combinedCommodity' //商品中心-组合福袋商品-新增/详情
 export default {
   // 订单中心-扫描入库
   SCANIN: {
@@ -41,6 +42,10 @@ export default {
   // RETURNTREASURYADD: {
   //   component: returnTreasuryAdd,
   // },
+  // 商品中心-组合福袋商品-新增/详情
+  /* REFUNDAFTERSHIPMENT: {
+    component: combinedCommodity,
+  }, */
   REFUNDAFTERSHIPMENT: {
     component: refundAfterShipment,
   }
