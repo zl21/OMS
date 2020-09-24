@@ -7,7 +7,7 @@
 <script>
   import axios from 'axios';
   import jordanButton from 'framework/jordanComponents/jordanButton.vue';
-  import DateUtil from '@/customize/customizedModal/customizePateFor1.3/returngood/js/date.js';
+  // import DateUtil from '@/assets/js/__utils__/date';
   import { getLodop } from '@/jordanComponent/common/LodopFuncs';
 
   export default {

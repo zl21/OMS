@@ -10,7 +10,7 @@
 
 <script>
   import axios from 'axios';
-  import jordanActionTable from './jordanActionTable';
+  import jordanActionTable from '@/jordanComponent/jordanActionTable';
   import config from '../js/config';
 
   export default {

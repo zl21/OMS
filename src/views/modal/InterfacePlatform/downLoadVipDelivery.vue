@@ -7,7 +7,7 @@
 
 <script>
 import axios from "axios";
-import dateUtil from "@/customize/customizedModal/customizePateFor1.3/returngood/js/date.js";
+import dateUtil from "@/assets/js/__utils__/date";
 import jordanForm from "@/jordanComponent/jordanForm";
 import jordanBtn from "@/jordanComponent/jordanButton";
 export default {
