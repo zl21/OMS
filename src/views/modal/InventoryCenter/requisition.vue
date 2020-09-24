@@ -1,6 +1,6 @@
 <!-- 调拨单审核按钮 -->
 <template>
-  <div class="requisition">
+  <div class="requisition" style="width:400px;padding-right:20px">
     <div style="margin-bottom: 3px">
       <div class="requisitionText">
         <span style="font-weight: bold; color: #fd6442">{{ errTitle }}</span>

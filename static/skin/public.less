@@ -1,5 +1,6 @@
-// 设置公共变量
+// 设置公共变量以及常用的一些方法
 @publicColor: #1989fa;
+
 // 所有button
 .button(@color: @publicColor, @fontColor: #fff) {
   .btn .one_button {
@@ -122,7 +123,7 @@
   }
 }
 
-// 所有checked
+// checked
 .checked(@color: @publicColor) {
   .ark-checkbox-checked {
 
@@ -140,6 +141,11 @@
       background-color: @color;
     }
   }
+}
+
+// table
+.table{
+
 }
 
 // 页面page
@@ -177,10 +183,12 @@
       }
     }
   }
+
 }
 
 // 头部导航
 #nav {
+    /* 导航背景颜色/导航鼠标经过背景颜色/其他按钮鼠标经过颜色 */
   .navBg(@color: #0f3365, @hoverColor: #092750, @liHoverBg: #0068b7) {
     .navigator {
       background-color: @color;
@@ -214,6 +222,7 @@
 
 // 侧边栏菜单 收藏和历史
 #menu {
+  /* 菜单背景色/菜单背景色鼠标经过/字体颜色/收起菜单鼠标经过字体颜色 */
   .historyFavorite(@bgColor: #0f3365, @hoverColor: #173155, @fontColor: #fff, @collectFontColor: #303133) {
     .history-and-favorite {
 
@@ -267,26 +276,25 @@
     }
   }
 }
-// 弹框
-#modal{
-  .customized(@color:@publicColor){
+
+// 定制界面
+#customized {
+  // malda
+  .modal(@color:@publicColor,@bgColor:transparent){
     .dialog-footer{
       .ark-btn{
         color: @color;
         border-color:@color;
+        background: @bgColor;
         &:hover{
           color: @color;
           border-color:@color;
-          background:transparent;
+          background:@bgColor;
           opacity: .6;
         }
       }
     }
   }
-}
-// 定制界面
-#customized {
-
   // 订单管理
   .orderAdd(@color: @publicColor) {
     .jordan-label-box {

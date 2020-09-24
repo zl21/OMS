@@ -1,3 +1,14 @@
+@mixin center() {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+#nav {
+  /* 导航背景颜色/导航鼠标经过背景颜色/其他按钮鼠标经过颜色 */
+}
+#menu {
+  /* 菜单背景色/菜单背景色鼠标经过/字体颜色/收起菜单鼠标经过字体颜色 */
+}
 body {
   /* 导航背景颜色/导航鼠标经过背景颜色/其他按钮鼠标经过颜色 */
   /* 菜单背景色/菜单背景色鼠标经过/字体颜色/收起菜单鼠标经过字体颜色 */
@@ -156,6 +167,17 @@ body #content .from-folding {
 body .downComponent-context .tag-close {
   background-color: #0068b7;
 }
+body .dialog-footer .ark-btn {
+  color: #0068b7;
+  border-color: #0068b7;
+  background: transparent;
+}
+body .dialog-footer .ark-btn:hover {
+  color: #0068b7;
+  border-color: #0068b7;
+  background: transparent;
+  opacity: 0.6;
+}
 body .basicInfo .title i,
 body .batchInfoSet .title i,
 body .infoSet .title i,
@@ -188,14 +210,4 @@ body .rightware_table .el-tabs__item:hover {
 }
 body .ark-tabs-panels.ark-tabs-panels-singleCard > .ark-tabs-panels-bar .ark-tabs-panels-tab-active {
   color: #0068b7;
-}
-body .dialog-footer .ark-btn {
-  color: #0068b7;
-  border-color: #0068b7;
-}
-body .dialog-footer .ark-btn:hover {
-  color: #0068b7;
-  border-color: #0068b7;
-  background: transparent;
-  opacity: 0.6;
 }

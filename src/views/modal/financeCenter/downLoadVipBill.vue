@@ -1,6 +1,6 @@
 <template>
   <!-- 下载账单 -->
-  <div class="downLoadVipBill">
+  <div class="downLoadVipBill" style="width:430px;padding-right:20px">
     <jordanForm :formConfig="downLoadVipBillFormConfig"></jordanForm>
     <jordanBtn :btnConfig="downLoadVipBillBtnConfig"></jordanBtn>
   </div>

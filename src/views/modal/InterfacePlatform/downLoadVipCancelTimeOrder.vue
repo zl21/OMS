@@ -1,5 +1,5 @@
 <template>
-  <div style="width:400px">
+  <div style="width:400px;padding-right:20px">
     <jordanForm :formConfig="downLoadVipTimeOrderFormConfig"></jordanForm>
     <jordanBtn :btnConfig="downLoadVipTimeOrderBtnConfig"></jordanBtn>
   </div>

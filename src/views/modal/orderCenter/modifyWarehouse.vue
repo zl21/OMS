@@ -1,5 +1,5 @@
 <template>
-  <div class="stockOutWarehouse_box">
+  <div class="stockOutWarehouse_box" style="width:400px;padding-right:20px">
     <!-- 修改仓库 -->
     <div class="stockOutWarehouse">
       <label>修改仓库:</label>

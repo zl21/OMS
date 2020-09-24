@@ -1,4 +1,5 @@
 export default {
+  // 主题文件
   skyBlue: "/static/skin/skyBlue/index.min.css",
   coralRed: "/static/skin/coralRed/index.min.css",
   // 动态创建link标签

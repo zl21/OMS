@@ -1,6 +1,6 @@
 <template>
   <!-- // 淘宝退单下载 -->
-  <div class="taobao-return-list-download">
+  <div class="taobao-return-list-download"  style="width:400px;padding-right:20px">
     <jordanForm :formConfig="taoBaoReturnListFormConfig"></jordanForm>
     <jordanBtn :btnConfig="taoBaoReturnListBtnConfig"></jordanBtn>
   </div>

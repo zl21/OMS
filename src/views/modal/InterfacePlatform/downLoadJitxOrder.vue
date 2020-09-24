@@ -1,5 +1,5 @@
 <template>
-  <div class="downLoadTaobaoOrder" style="width:400px">
+  <div class="downLoadTaobaoOrder" style="width:400px;padding-right:20px">
     <jordanForm :formConfig="downLoadJitxOrderFormConfig"></jordanForm>
     <jordanBtn :btnConfig="downLoadJitxOrderBtnConfig"></jordanBtn>
     <!-- 确认下载弹框 -->

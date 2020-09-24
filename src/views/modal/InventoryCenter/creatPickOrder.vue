@@ -2,7 +2,7 @@
   <!-- 生成拣货单弹框 -->
   <div class="creatPickOrder">
     <p>确定生成出库拣货单?</p>
-    <div class="button">
+    <div class="dialog-footer">
       <Button
         ghost
         type="error"

@@ -68,9 +68,18 @@
         </el-form-item>
       </el-form>
     </div>
-    <div class="button-panel">
-      <el-button @click.stop="axiosInsertAction">{{ChineseDictionary.ENSURE}}</el-button>
-      <el-button @click.stop="closeDialog()">{{ChineseDictionary.CANCEL}}</el-button>
+    <div class="dialog-footer">
+      <Button
+        ghost
+        type="error"
+        style="marginLeft:10px;"
+        @click.stop="axiosInsertAction"
+      >
+        {{ChineseDictionary.ENSURE}}
+      </Button>
+      <Button  @click.stop="closeDialog()">
+        {{ChineseDictionary.CANCEL}}
+      </Button>
     </div>
   </div>
 </template>

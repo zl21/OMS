@@ -1,5 +1,5 @@
 <template>
-  <div style="width:450px">
+  <div style="width:400px;padding-right:15px">
     <jordanForm :formConfig="formConfig"></jordanForm>
     <div class="dialog-footer">
       <Button type="primary" ghost size="small" @click="confirmChange">确定</Button>

@@ -1,5 +1,5 @@
 <template>
-  <div class="public" style="width:400px">
+  <div class="public" style="width:400px;padding-right:20px">
     <jordanForm :formConfig="downLoadPublicFormConfig">
       <template #compile="{ rowData }">
         <div class="import-box" @click="importBoxOpen(rowData.item)">

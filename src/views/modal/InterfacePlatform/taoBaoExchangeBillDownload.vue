@@ -1,6 +1,6 @@
 <template>
   <!-- // 淘宝换货单下载 -->
-  <div class="taobao-exchange-bill-download">
+  <div class="taobao-exchange-bill-download" style="width:400px;padding-right:20px">
     <jordanForm :formConfig="taoBaoExchangeBillFormConfig"></jordanForm>
     <jordanBtn :btnConfig="taoBaoExchangeBillBtnConfig"></jordanBtn>
   </div>
