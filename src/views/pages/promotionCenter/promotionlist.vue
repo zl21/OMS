@@ -1316,7 +1316,7 @@
                 }) // 带的参数
               });
             } else {
-              this.$store.commit('TabOpen', {
+              this.$store.commit('customize/TabOpen', {
                 id: ACTI_ID, // id
                 type: 'action', // 类型action
                 name: 'addOrEditActi', // 文件名
