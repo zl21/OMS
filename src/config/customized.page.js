@@ -1,4 +1,4 @@
-import MarketCenter from './module/page/market.config.js'; // ------------促销中心
+import MarketCenter from './module/page/promotion.config.js'; // ------------促销中心
 import OrdersCenter from './module/page/order.config.js'; // ------------订单中心
 // import FinanceCenter from "branchConfig/module/finance.config.js"; //-----------财务中心
 // import CommodityCenter from "branchConfig/module/commodity.config.js"; //-----------商品中心
