@@ -181,7 +181,7 @@
   </div>
 </template>
 <script>
-  import dateUtil from '@/customize/customizedModal/customizePateFor1.3/returngood/js/date.js';
+  // import dateUtil from '@/assets/js/__utils__/date';
   import myInputLd from 'framework/components/element/input.vue';
   import MultipleBox from '../components/multipleBox';
   import SingleBox from '../components/singleBox';

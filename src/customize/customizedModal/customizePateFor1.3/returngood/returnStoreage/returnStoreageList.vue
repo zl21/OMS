@@ -79,11 +79,11 @@
 <script>
   import axios from 'axios';
   import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
-  import jordanButton from '../components/jordanButton';
-  import jordanForm from '../components/jordanForm.vue';
-  import jordanTable from '../components/jordanActionTable.vue';
-  import jordanModal from '../components/JDialog';
-  import { buttonPermissionsMixin } from '../mixins/buttonPermissions';
+  import jordanButton from '@/jordanComponent/jordanButton';
+  import jordanForm from '@/jordanComponent/jordanForm';
+  import jordanTable from '@/jordanComponent/jordanActionTable';
+  import jordanModal from '@/jordanComponent/JDialog';
+  import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
   // import util from './js/util';
   import strUtil from '../js/util';
   // import DateUtil from './js/date';

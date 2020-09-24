@@ -165,7 +165,7 @@
   import JDialog from '@/jordanComponent/JDialog';
   import axios from 'axios';
   import { setTimeout } from 'timers';
-  import { buttonPermissionsMixin } from '@/customize/customizedModal/customizePateFor1.3/returngood/mixins/buttonPermissions';
+  import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 
   export default {
     components: {

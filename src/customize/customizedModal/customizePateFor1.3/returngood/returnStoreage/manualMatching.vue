@@ -92,13 +92,13 @@
 
 <script>
   import axios from 'axios';
-  import jordanButton from '../components/jordanButton.vue';
-  import jordanForm from '../components/jordanForm.vue';
-  import jordanLabel from '../components/jordanLabel.vue';
-  import jordanActionTable from '../components/jordanActionTable.vue';
-  import jordanModal from '../components/JDialog.vue';
+  import jordanButton from '@/jordanComponent/jordanButton';
+  import jordanForm from '@/jordanComponent/jordanForm';
+  import jordanLabel from '@/jordanComponent/jordanLabel';
+  import jordanActionTable from '@/jordanComponent/jordanActionTable';
+  import jordanModal from '@/jordanComponent/JDialog';
   import OrderItem from '../components/orderItem.vue';
-  import { buttonPermissionsMixin } from '../mixins/buttonPermissions';
+  import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 
   export default {
     components: {

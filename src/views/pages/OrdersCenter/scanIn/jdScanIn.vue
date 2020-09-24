@@ -158,7 +158,7 @@
   import jordanLabel from '@/jordanComponent/jordanLabel.vue';
   import jordanActionTable from '@/jordanComponent/jordanActionTable.vue';
   import JDialog from '@/jordanComponent/JDialog';
-  import { buttonPermissionsMixin } from '@/customize/customizedModal/customizePateFor1.3/returngood/mixins/buttonPermissions';
+  import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
   import axios from 'axios';
   import { setTimeout } from 'timers';
 

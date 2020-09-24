@@ -482,14 +482,14 @@
         // 返回列表的
         const params = {
           id: 31460113, // id
-          type: 'action',
-          name: 'onlinepromotionlist',
+          type: 'CUSTOMIZED',
+          name: 'PROMACTIQUERYLIST',
           label: '促销活动',
           query: Object.assign({
             id: 31460113
           }) // 带的参数
         };
-        _self.$store.commit('TabClose', params);
+        _self.$store.commit('customize/TabClose', params);
       },
       /**
        * 滚动选中区域

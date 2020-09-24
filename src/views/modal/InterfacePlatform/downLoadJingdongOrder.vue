@@ -22,7 +22,7 @@
 
 <script>
 import axios from "axios";
-import dateFuns from "@/customize/customizedModal/customizePateFor1.3/returngood/js/date.js";
+// import dateFuns from "@/assets/js/__utils__/date";
 import jordanForm from "@/jordanComponent/jordanForm";
 import jordanBtn from "@/jordanComponent/jordanButton";
 
