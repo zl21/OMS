@@ -62,7 +62,7 @@
 </template>
 <script>
   import axios from 'axios';
-  // import DateUtil from '@/assets/js/__utils__/date';
+  import DateUtil from '@/assets/js/__utils__/date';
   import BasicInfo from './details/basic_info';
   import InfoSet from './details/info_set';
   import GiftSet from './details/gift_set';

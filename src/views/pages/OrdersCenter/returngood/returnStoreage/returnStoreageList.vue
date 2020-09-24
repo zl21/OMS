@@ -70,7 +70,7 @@ import jordanForm from "@/jordanComponent/jordanForm";
 import jordanTable from "@/jordanComponent/jordanActionTable";
 import JDialog from "@/jordanComponent/JDialog";
 import strUtil from "@/assets/js/__utils__/util";
-// import DateUtil from "@/assets/js/__utils__/date";
+import DateUtil from "@/assets/js/__utils__/date";
 // import publicMethods from "@/assets/js/public/publicMethods";
 import jordanModal from "@/jordanComponent/JDialog";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";

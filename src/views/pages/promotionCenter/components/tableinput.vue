@@ -334,7 +334,7 @@
   // import SelectDialog from '../../components/dialog/selectDialog.vue'
   import SelectDialog from 'framework/components/dialog/popDialog.vue';
   import fkdialog from 'framework/components/tablelist/fkdialog.vue';
-  import advancedSearch from '@/customize/customizedModal/customizePateFor1.3/crm/advancedSearch.vue';
+  import advancedSearch from 'framework/components/views/custompage/crm/advancedSearch.vue';
   import FkTable from 'framework/components/tablelist/fktable.vue';
   import ChineseDictionary from '@/assets/js/ChineseDictionary.js';
   import ImportDialog from './importDialog';
