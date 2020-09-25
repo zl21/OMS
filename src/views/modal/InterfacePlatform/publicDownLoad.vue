@@ -1,16 +1,64 @@
 <template>
-  <downLoadForm></downLoadForm>
+  <div class="downLoadTaobaoOrder" style="width:400px;padding-right:20px">
+    <jordanForm :formConfig="downLoadFormConfig"></jordanForm>
+    <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
+    <!-- 确认下载弹框 -->
+    <Modal
+      class="downLoadModal"
+      v-model="downLoadModal"
+      title="订单下载"
+      width="450"
+      @on-ok="downLoadOk"
+      @on-cancel="downLoadCancel"
+      :mask="true"
+    >
+      <p>
+        订单下载任务已经发送，任务ID：
+        <span class="taskID" @click="taskIDClick">{{taskId}}</span>，请前往接口下载任务表查看下载进度！
+      </p>
+    </Modal>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
+import httpServer from 'framework/__utils__/request';
+import jordanForm from "professionalComponents/jordanForm";
+import jordanBtn from "professionalComponents/jordanButton";
 import dateFuns from "@/assets/js/__utils__/date.js";
-import downLoadForm from "./publicDownLoad";
+
 export default {
   components: {
-    downLoadForm
+    jordanForm,
+    jordanBtn
   },
-   data() {
+  props: {
+    objList: {
+      type: Array,
+      defalut:() =>{
+        return []
+      }
+    },
+    idArr: {
+      type: Array,
+      defalut:() =>{
+        return []
+      }
+    },
+    webid: {
+      type: Number
+    },
+    tablename: {
+      type: String
+    },
+    rowData: {
+      type: Array,
+      defalut:() =>{
+        return []
+      }
+    }
+  },
+  data() {
     return {
       downLoadModal: false,
       taskId: "",
@@ -134,7 +182,7 @@ export default {
           {
             style: "radio", //单选框
             label: "订单状态", //前面字段
-            width: "6", //宽度
+            width: "24", //宽度
             value: "orderStatus", //绑定到formValue的值
             // radioChange: ()=>{alert('123')}, //切换时的方法
             // setRequired: "required", //必选标识,值不为required时无标识
