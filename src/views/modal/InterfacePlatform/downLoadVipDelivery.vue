@@ -1,7 +1,7 @@
 <template>
   <div style="width:430px;padding-right:20px">
-    <jordanForm :formConfig="downLoadVipDeliveryFormConfig"></jordanForm>
-    <jordanBtn :btnConfig="downLoadVipDeliveryBtnConfig"></jordanBtn>
+    <jordanForm :formConfig="downLoadFormConfig"></jordanForm>
+    <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
   </div>
 </template>
 
@@ -17,10 +17,16 @@ export default {
   },
   props: {
     objList: {
-      type: Array
+      type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     idArr: {
-      type: Array
+      type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     webid: {
       type: Number
@@ -29,12 +35,15 @@ export default {
       type: String
     },
     rowData: {
-      type: Array
+      type: Array,
+      defalut:() =>{
+        return []
+      }
     }
   },
   data() {
     return {
-      downLoadVipDeliveryBtnConfig: {
+      downLoadBtnConfig: {
         typeAll: "error", //按钮统一风格样式
         btnsite: "right", //按钮位置 (right , center , left)
         buttons: [
@@ -47,13 +56,13 @@ export default {
             btnclick: () => {
               let self = this;
               if (
-                !self.downLoadVipDeliveryFormConfig.formData[0].itemdata.pid
+                !self.downLoadFormConfig.formData[0].itemdata.pid
               ) {
                 self.$Message.warning("请选择需要下载的店铺");
                 return false;
               }
-              let startTime = self.downLoadVipDeliveryFormConfig.formValue.query_date[0];
-              let endTime = self.downLoadVipDeliveryFormConfig.formValue.query_date[1];
+              let startTime = self.downLoadFormConfig.formValue.query_date[0];
+              let endTime = self.downLoadFormConfig.formValue.query_date[1];
               if(startTime){
                 startTime = dateUtil.getFormatDate(startTime,'yyyy-MM-dd HH:mm:ss');
               }
@@ -61,8 +70,8 @@ export default {
                 endTime = dateUtil.getFormatDate(endTime,'yyyy-MM-dd HH:mm:ss');
               }
               let param = {
-                shop_id: self.downLoadVipDeliveryFormConfig.formData[0].itemdata.pid, // 店铺id 必传
-                order_status: self.downLoadVipDeliveryFormConfig.formValue.order_status,
+                shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
+                order_status: self.downLoadFormConfig.formValue.order_status,
                 start_time:startTime,
                 end_time:endTime
               };
@@ -95,7 +104,7 @@ export default {
           }
         ]
       },
-      downLoadVipDeliveryFormConfig: {
+      downLoadFormConfig: {
         formValue: {
           numNumber: ""
         },
@@ -182,7 +191,7 @@ export default {
   },
   mounted() {
     let self = this;
-    self.downLoadVipDeliveryFormConfig.formValue.order_status = "NEW";
+    self.downLoadFormConfig.formValue.order_status = "NEW";
   },
 };
 </script>

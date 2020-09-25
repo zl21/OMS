@@ -1,7 +1,7 @@
 <template>
   <div style="width:400px;padding-right:20px">
-    <jordanForm :formConfig="formConfig"></jordanForm>
-    <jordanBtn :btnConfig="btnConfig"></jordanBtn>
+    <jordanForm :formConfig="downLoadFormConfig"></jordanForm>
+    <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
   </div>
 </template>
 
@@ -16,10 +16,16 @@ export default {
   },
   props: {
     objList: {
-      type: Array
+      type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     idArr: {
-      type: Array
+      type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     webid: {
       type: Number
@@ -28,12 +34,15 @@ export default {
       type: String
     },
     rowData: {
-      type: Array
+      type: Array,
+      defalut:() =>{
+        return []
+      }
     }
   },
   data() {
     return {
-      btnConfig: {
+      downLoadBtnConfig: {
         typeAll: "error", //按钮统一风格样式
         btnsite: "right", //按钮位置 (right , center , left)
         buttons: [
@@ -60,7 +69,7 @@ export default {
           }
         ]
       },
-      formConfig: {
+      downLoadFormConfig: {
         formValue: {
           numNumber: ""
         },
@@ -123,8 +132,8 @@ export default {
   },
   methods: {
     confirmChange() {
-      let formValue = this.formConfig.formValue
-      let shopId = this.formConfig.formData[0].itemdata.pid
+      let formValue = this.downLoadFormConfig.formValue
+      let shopId = this.downLoadFormConfig.formData[0].itemdata.pid
       if (!shopId || !formValue.query_date[0]) {
         this.$message.error('店铺和平台时间不能为空')
         return

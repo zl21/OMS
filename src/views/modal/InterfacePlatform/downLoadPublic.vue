@@ -47,9 +47,15 @@ export default {
   props: {
     objList: {
       type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     idArr: {
       type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     webid: {
       type: Number,
@@ -59,6 +65,9 @@ export default {
     },
     rowData: {
       type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     SpecialTitle: {
       type: String,

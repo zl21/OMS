@@ -146,50 +146,8 @@ export default {
     };
   },
   methods: {
-    // // 数组标准时间转换成yyyy-mm-dd格式
-    // standardTimeConversiondateToStr(val) {
-    //   var dateTime = new Date(val);
-    //   var year = dateTime.getFullYear();
-    //   var month = dateTime.getMonth() + 1; //js从0开始取
-    //   var date = dateTime.getDate();
-    //   var hour = dateTime.getHours();
-    //   var minutes = dateTime.getMinutes();
-    //   var second = dateTime.getSeconds();
-    //   if (month < 10) {
-    //     month = "0" + month;
-    //   }
-    //   if (date < 10) {
-    //     date = "0" + date;
-    //   }
-    //   if (hour < 10) {
-    //     hour = "0" + hour;
-    //   }
-    //   if (minutes < 10) {
-    //     minutes = "0" + minutes;
-    //   }
-    //   if (second < 10) {
-    //     second = "0" + second;
-    //   }
-    //   return (
-    //     year +
-    //     "-" +
-    //     month +
-    //     "-" +
-    //     date +
-    //     " " +
-    //     hour +
-    //     ":" +
-    //     minutes +
-    //     ":" +
-    //     second
-    //   );
-    // },
     // 打印
     printData() {
-      // if (!this.downLoadVipBillFormConfig.formValue.vendorCode) {
-      //   this.$Message.warning("请输入需要下载的供应商编码!");
-      //   return false;
-      // }
       let formValue = this.downLoadVipBillFormConfig.formValue;
       let startTime = formValue.timerange[0];
       let endTime = formValue.timerange[1];

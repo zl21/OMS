@@ -1,8 +1,8 @@
 <template>
   <!-- // 淘宝退单下载 -->
   <div class="taobao-return-list-download"  style="width:400px;padding-right:20px">
-    <jordanForm :formConfig="taoBaoReturnListFormConfig"></jordanForm>
-    <jordanBtn :btnConfig="taoBaoReturnListBtnConfig"></jordanBtn>
+    <jordanForm :formConfig="downLoadFormConfig"></jordanForm>
+    <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
   </div>
 </template>
 <script>
@@ -16,7 +16,7 @@ export default {
   },
   data() {
     return {
-      taoBaoReturnListBtnConfig: {
+      downLoadBtnConfig: {
         typeAll: "error", //按钮统一风格样式
         btnsite: "right", //按钮位置 (right , center , left)
         buttons: [
@@ -42,7 +42,7 @@ export default {
           }
         ]
       },
-      taoBaoReturnListFormConfig: {
+      downLoadFormConfig: {
         formValue: {
           shop_id: "", //店铺id
           status: "", //状态
@@ -119,10 +119,6 @@ export default {
     };
   },
   methods: {
-    //输入框下拉多选的操作 店铺下拉时触发的事件
-    // mutipleSelect(val) {
-    //   this.taoBaoReturnListFormConfig.formValue.shop_id = val.pid;
-    // },
     // 数组标准时间转换成yyyy-mm-dd格式
    standardTimeConversiondateToStr(val) {
       var dateTime = new Date(val);
@@ -163,23 +159,23 @@ export default {
     },
     // 打印
     printData() {
-      if (!this.taoBaoReturnListFormConfig.formData[0].itemdata.pid) {
+      if (!this.downLoadFormConfig.formData[0].itemdata.pid) {
         this.$Message.warning("请选择需要下载的店铺");
         return false;
       }
       if (
-        this.taoBaoReturnListFormConfig.formValue.bill_no === "" &&
-        this.taoBaoReturnListFormConfig.formValue.timerange[0] === ""&& this.taoBaoReturnListFormConfig.formValue.timerange[1] === ""
+        this.downLoadFormConfig.formValue.bill_no === "" &&
+        this.downLoadFormConfig.formValue.timerange[0] === ""&& this.downLoadFormConfig.formValue.timerange[1] === ""
       ) {
         this.$Message.warning("退单修改时间和退单单号不能同时为空");
         return false;
       }
       let param = {
-        shop_id: this.taoBaoReturnListFormConfig.formData[0].itemdata.pid,
-        bill_no: this.taoBaoReturnListFormConfig.formValue.bill_no,
-        start_time:this.standardTimeConversiondateToStr(this.taoBaoReturnListFormConfig.formValue.timerange[0]),
-        end_time:this.standardTimeConversiondateToStr(this.taoBaoReturnListFormConfig.formValue.timerange[1]),
-        status: this.taoBaoReturnListFormConfig.formValue.status,
+        shop_id: this.downLoadFormConfig.formData[0].itemdata.pid,
+        bill_no: this.downLoadFormConfig.formValue.bill_no,
+        start_time:this.standardTimeConversiondateToStr(this.downLoadFormConfig.formValue.timerange[0]),
+        end_time:this.standardTimeConversiondateToStr(this.downLoadFormConfig.formValue.timerange[1]),
+        status: this.downLoadFormConfig.formValue.status,
         table: "IP_B_TAOBAO_REFUND"
       };
       let fromdata = new FormData();
