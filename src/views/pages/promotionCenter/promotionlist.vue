@@ -337,7 +337,7 @@
   // import { post } from '@/utils/request';
   // import myInputLd from 'framework/components/element/input';
   import TableInput from 'framework/components/element/input';
-  import aTable from '@/jordanComponent/table/agGridTable.vue';
+  import aTable from 'professionalComponents/table/agGridTable.vue';
   import dialogVisible from './setGroup';
   import Favorite from './components/favorite';
 
@@ -1316,7 +1316,7 @@
                 }) // 带的参数
               });
             } else {
-              this.$store.commit('TabOpen', {
+              this.$store.commit('customize/TabOpen', {
                 id: ACTI_ID, // id
                 type: 'action', // 类型action
                 name: 'addOrEditActi', // 文件名

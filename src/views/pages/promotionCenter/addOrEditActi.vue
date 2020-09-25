@@ -62,7 +62,7 @@
 </template>
 <script>
   import axios from 'axios';
-  import DateUtil from '@/customize/customizedModal/customizePateFor1.3/returngood/js/date.js';
+  import DateUtil from '@/assets/js/__utils__/date';
   import BasicInfo from './details/basic_info';
   import InfoSet from './details/info_set';
   import GiftSet from './details/gift_set';
@@ -436,10 +436,10 @@
        * 取消(关闭) 返回列表界面
        */
       close() {
-        this.$store.commit('TabClose', {
+        this.$store.commit('customize/TabClose', {
           id: 31460113, // id
-          type: 'action', // 类型action
-          name: 'onlinepromotionlist', // 文件名
+          type: 'CUSTOMIZED', // 类型action
+          name: 'PROMACTIQUERYLIST', // 文件名
           label: '促销活动', // tab中文名
           query: Object.assign({
             id: 31460113

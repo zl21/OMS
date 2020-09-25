@@ -354,10 +354,10 @@
 </template>
 
 <script>
-  import buttons from '@/jordanComponent/jordanButton.vue';
-  import Aform from '@/jordanComponent/jordanForm.vue';
-  import Atable from '@/jordanComponent/jordanActionTable.vue';
-  import jordanModal from '@/jordanComponent/JDialog';
+  import buttons from 'professionalComponents/jordanButton.vue';
+  import Aform from 'professionalComponents/jordanForm.vue';
+  import Atable from 'professionalComponents/jordanActionTable.vue';
+  import jordanModal from 'professionalComponents/JDialog';
   import axios from 'axios';
 
   export default {
@@ -1672,7 +1672,7 @@
 </script>
 
 <style lang="less">
-@import "~@/jordanComponent/css/theme.less";
+@import "~professionalComponents/common/css/theme.less";
 .outboundPickOrder {
   position: relative;
   .watermark {

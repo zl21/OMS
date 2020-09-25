@@ -14,8 +14,8 @@
 </template>
 
 <script>
-  import jordanTable from '@/jordanComponent/jordanActionTable.vue';
-  import jordanButton from '@/jordanComponent/jordanButton.vue';
+  import jordanTable from 'professionalComponents/jordanActionTable.vue';
+  import jordanButton from 'professionalComponents/jordanButton.vue';
 
   export default {
     components: {

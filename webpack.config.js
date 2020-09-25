@@ -153,6 +153,7 @@ module.exports = env => ({
       libs: path.resolve(__dirname, 'node_modules'),
       allpages: path.resolve(__dirname, 'src/views/pages'),
       framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
+      professionalComponents: path.resolve(__dirname, 'node_modules/@burgeon/burgeon-private-npm/jordanComponent'),
     },
   },
   optimization: {
