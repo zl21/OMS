@@ -8,17 +8,18 @@ import FinanceCenter from "./module/page/finance.config.js"; //-----------财务
 import SystemConfig from './module/page/system.config.js'; // -----------系统配置
 import InventoryConfig from './module/page/inventory.config.js';// -----------库存中心
 
-export default {
-  // 列表配置双击跳转定制界面，需在文档里维护对应的labelName属性
-  orderDetail2: {
-    component: halfOrderDetail
-  },
-  OrdersCenter,
+const all = Object.assign(OrdersCenter,
   MarketCenter,
   FinanceCenter,
   // CommodityCenter,
   // OrganizationCenter,
   // StrategyPlatform,
   SystemConfig,
-  InventoryConfig,
+  InventoryConfig);
+export default {
+  // 列表配置双击跳转定制界面，需在文档里维护对应的labelName属性
+  orderDetail2: {
+    component: halfOrderDetail
+  },
+  ...all
 };

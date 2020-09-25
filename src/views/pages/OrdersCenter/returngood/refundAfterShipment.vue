@@ -1,6 +1,6 @@
 <template>
   <div class="refundAfterShipment">
-    <h1>额外退款新增</h1>
+    <h1>额外退款新增!</h1>
     <Button @click="home">返回</Button>
   </div>
 </template>

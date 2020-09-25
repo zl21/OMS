@@ -42,7 +42,7 @@ export default {
   RETURNTREASURYADD: {
     component: returnTreasuryAdd,
   },
-  PAYABLEADJUSTMENTLIST: {
+  REFUNDAFTERSHIPMENT: {
     component: refundAfterShipment,
   }
 };
