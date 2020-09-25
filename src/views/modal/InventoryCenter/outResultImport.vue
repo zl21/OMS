@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import importTable from '@/jordanComponent/publicDialog/importTable';
+  import importTable from 'professionalComponents/publicDialog/importTable';
   // import importTable from "../../publicDialog/importTable";
   export default {
     components: {

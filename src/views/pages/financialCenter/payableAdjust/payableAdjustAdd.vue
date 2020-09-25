@@ -92,16 +92,16 @@
 </template>
 
 <script>
-import jordanButton from "@/jordanComponent/jordanButton";
-import jordanForm from "@/jordanComponent/jordanForm";
-import jordanActionTable from "@/jordanComponent/jordanActionTable";
-import jordanLabel from "@/jordanComponent/jordanLabel";
+import jordanButton from "professionalComponents/jordanButton";
+import jordanForm from "professionalComponents/jordanForm";
+import jordanActionTable from "professionalComponents/jordanActionTable";
+import jordanLabel from "professionalComponents/jordanLabel";
 import { customPagingMixins } from "@/assets/js/mixins/customPaging.js";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
 import axios from "axios";
-import jordanStatusFlag from "@/jordanComponent/jordanStatusFlag";
+import jordanStatusFlag from "professionalComponents/jordanStatusFlag";
 import dateUtil from "@/assets/js/__utils__/date.js";
-import tableInput from "@/jordanComponent/jordanTableInput.vue";
+import tableInput from "professionalComponents/jordanTableInput.vue";
 import publicMethodsUtil from "@/assets/js/public/publicMethods.js";
 export default {
   components: {
@@ -1869,7 +1869,7 @@ export default {
 };
 </script>
 <style lang="less">
-@import "~@/jordanComponent/css/theme.less";
+@import "~professionalComponents/common/css/theme.less";
 
 .buttons {
   padding: 8px 0 0 0;

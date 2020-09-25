@@ -160,12 +160,12 @@
   </div>
 </template>
 <script>
-import jordanButton from "@/jordanComponent/jordanButton";
-import jordanForm from "@/jordanComponent/jordanForm";
-import jordanLabel from "@/jordanComponent/jordanLabel";
-import jordanActionTable from "@/jordanComponent/jordanActionTable";
-import jordanStatusFlag from "@/jordanComponent/jordanStatusFlag";
-import jordanModal from "@/jordanComponent/JDialog";
+import jordanButton from "professionalComponents/jordanButton";
+import jordanForm from "professionalComponents/jordanForm";
+import jordanLabel from "professionalComponents/jordanLabel";
+import jordanActionTable from "professionalComponents/jordanActionTable";
+import jordanStatusFlag from "professionalComponents/jordanStatusFlag";
+import jordanModal from "professionalComponents/JDialog";
 import axios from "axios";
 export default {
   components: {

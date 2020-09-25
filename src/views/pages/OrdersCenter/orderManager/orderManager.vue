@@ -160,16 +160,16 @@
   import R3 from '@syman/burgeon-r3';
 
   import axios from 'axios';
-  import jordanActionTable from '@/jordanComponent/jordanActionTable';
-  import jordanBtn from '@/jordanComponent/jordanButton';
-  import jordanLabel from '@/jordanComponent/jordanLabel';
-  import jordanTable from '@/jordanComponent/jordanTable';
-  import jordanForm from '@/jordanComponent/jordanForm';
-  import jordanModal from '@/jordanComponent/JDialog';
+  import jordanActionTable from 'professionalComponents/jordanActionTable';
+  import jordanBtn from 'professionalComponents/jordanButton';
+  import jordanLabel from 'professionalComponents/jordanLabel';
+  import jordanTable from 'professionalComponents/jordanTable';
+  import jordanForm from 'professionalComponents/jordanForm';
+  import jordanModal from 'professionalComponents/JDialog';
   import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
   import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
   import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
-  import aTable from '@/jordanComponent/table/agGridTable.vue';
+  import aTable from 'professionalComponents/table/agGridTable.vue';
   import unzipXv from '@/assets/js/dataToSmall.js';
   import publicDialogConfig from './publicConfig/publicDialog.js';
   import labelListConfig from './publicConfig/labelList.js';

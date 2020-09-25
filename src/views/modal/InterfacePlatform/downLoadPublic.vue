@@ -36,8 +36,8 @@
 
 <script>
 import axios from "axios";
-import jordanForm from "@/jordanComponent/jordanForm";
-import jordanDialog from "@/jordanComponent/JDialog";
+import jordanForm from "professionalComponents/jordanForm";
+import jordanDialog from "professionalComponents/JDialog";
 
 export default {
   components: {

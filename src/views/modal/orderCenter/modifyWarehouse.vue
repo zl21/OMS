@@ -23,9 +23,9 @@
 </template>
 <script>
 import axios from "axios";
-import jordanForm from "../../../jordanComponent/jordanForm";
-import jordanBtn from "../../../jordanComponent/jordanButton";
-import jordanActionTable from "../../../jordanComponent/jordanActionTable";
+import jordanForm from "professionalComponents/jordanForm";
+import jordanBtn from "professionalComponents/jordanButton";
+import jordanActionTable from "professionalComponents/jordanActionTable.vue";
 import R3 from '@syman/burgeon-r3';
 const { getModuleName } = R3;
 export default {

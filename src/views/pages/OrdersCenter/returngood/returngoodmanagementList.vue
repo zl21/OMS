@@ -138,11 +138,11 @@
 </template>
 
 <script>
-import jordanButton from "@/jordanComponent/jordanButton.vue";
-import jordanForm from "@/jordanComponent/jordanForm.vue";
-import jordanLabel from "@/jordanComponent/jordanLabel.vue";
-import jordanActionTable from "@/jordanComponent/jordanActionTable.vue";
-import jordanModal from "@/jordanComponent/JDialog.vue";
+import jordanButton from "professionalComponents/jordanButton.vue";
+import jordanForm from "professionalComponents/jordanForm.vue";
+import jordanLabel from "professionalComponents/jordanLabel.vue";
+import jordanActionTable from "professionalComponents/jordanActionTable.vue";
+import jordanModal from "professionalComponents/JDialog.vue";
 import axios from "axios";
 import { isFavoriteMixin } from "@/assets/js/mixins/isFavorite.js";
 import publicMethodsUtil from "@/assets/js/public/publicMethods";

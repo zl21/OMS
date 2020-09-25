@@ -337,7 +337,7 @@
   // import { post } from '@/utils/request';
   // import myInputLd from 'framework/components/element/input';
   import TableInput from 'framework/components/element/input';
-  import aTable from '@/jordanComponent/table/agGridTable.vue';
+  import aTable from 'professionalComponents/table/agGridTable.vue';
   import dialogVisible from './setGroup';
   import Favorite from './components/favorite';
 
