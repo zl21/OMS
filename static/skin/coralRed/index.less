@@ -1,12 +1,30 @@
 @import './../public.less';
 body{
-  .button(#f00);
-  .tab(#f00 );
-  .checked(#f00);
+  .button(#16a1d6);
+  .tab(#16a1d6);
+  .checked(#16a1d6);
   &{
-    #page > .ark-page(#f00);
-  }
-  &{
-    #page > .ark-select-dropdown-list(#f00)
+    /* 导航背景颜色/导航鼠标经过背景颜色/其他按钮鼠标经过颜色 */
+    #nav > .navBg(#7365ba,#a59ccf,#a59ccf);
+    
+    #page > .page(#16a1d6);
+    
+    #page > .selectList(#16a1d6);
+    /* 菜单背景色/菜单背景色鼠标经过/字体颜色/收起菜单鼠标经过字体颜色 */
+    #menu > .historyFavorite(#1d2c36,#141f27,#fff,#303133) !important;
+    
+    #from > .customizedFrom(#16a1d6);
+    
+    #from > .standardFrom(#16a1d6);
+    
+    #customized > .promotion(#16a1d6);
+
+    #customized > .orderAdd(#16a1d6);
+
+    #customized > .system(#16a1d6);
+
+    #standard > .tab(#16a1d6);
+    
+    #modal > .customized(#16a1d6);
   }
 }

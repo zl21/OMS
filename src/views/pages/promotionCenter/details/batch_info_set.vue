@@ -2,7 +2,7 @@
 <template>
   <div class="batchInfoSet">
     <div class="title">
-      <i class="iconfont burgeon-iconliuchengtiaojian" />
+      <i class="iconfontPromotion burgeon-iconliuchengtiaojian" />
       <span>条件信息设置</span>
     </div>
     <!--商品来源-->

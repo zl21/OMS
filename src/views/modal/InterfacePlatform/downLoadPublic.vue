@@ -1,5 +1,5 @@
 <template>
-  <div class="public" style="width:400px">
+  <div class="public" style="width:400px;padding-right:20px">
     <jordanForm :formConfig="downLoadPublicFormConfig">
       <template #compile="{ rowData }">
         <div class="import-box" @click="importBoxOpen(rowData.item)">
@@ -47,9 +47,15 @@ export default {
   props: {
     objList: {
       type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     idArr: {
       type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     webid: {
       type: Number,
@@ -59,6 +65,9 @@ export default {
     },
     rowData: {
       type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     SpecialTitle: {
       type: String,

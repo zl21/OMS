@@ -1,8 +1,8 @@
 <template>
   <!-- // 淘宝换货单下载 -->
-  <div class="taobao-exchange-bill-download">
-    <jordanForm :formConfig="taoBaoExchangeBillFormConfig"></jordanForm>
-    <jordanBtn :btnConfig="taoBaoExchangeBillBtnConfig"></jordanBtn>
+  <div class="taobao-exchange-bill-download" style="width:400px;padding-right:20px">
+    <jordanForm :formConfig="downLoadFormConfig"></jordanForm>
+    <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
   </div>
 </template>
 <script>
@@ -16,7 +16,7 @@ export default {
   },
   data() {
     return {
-      taoBaoExchangeBillBtnConfig: {
+      downLoadBtnConfig: {
         typeAll: "error", //按钮统一风格样式
         btnsite: "right", //按钮位置 (right , center , left)
         buttons: [
@@ -42,7 +42,7 @@ export default {
           }
         ]
       },
-      taoBaoExchangeBillFormConfig: {
+      downLoadFormConfig: {
         formValue: {
           shop_id: "", //店铺id
           status: "", //状态
@@ -119,10 +119,6 @@ export default {
     };
   },
   methods: {
-    //输入框下拉多选的操作 店铺下拉时触发的事件
-    // mutipleSelect(val) {
-    //   this.taoBaoExchangeBillFormConfig.formValue.shop_id = val.pid;
-    // },
     standardTimeConversiondateToStr(val) {
       var dateTime = new Date(val);
       var year = dateTime.getFullYear();
@@ -162,23 +158,23 @@ export default {
     },
     // 打印
     printData() {
-      if (!this.taoBaoExchangeBillFormConfig.formData[0].itemdata.pid) {
+      if (!this.downLoadFormConfig.formData[0].itemdata.pid) {
         this.$Message.warning("请选择需要下载的店铺");
         return false;
       }
       if (
-        this.taoBaoExchangeBillFormConfig.formValue.bill_no === "" &&
-        this.taoBaoExchangeBillFormConfig.formValue.timerange[0] === ""&& this.taoBaoExchangeBillFormConfig.formValue.timerange[1] === ""
+        this.downLoadFormConfig.formValue.bill_no === "" &&
+        this.downLoadFormConfig.formValue.timerange[0] === ""&& this.downLoadFormConfig.formValue.timerange[1] === ""
       ) {
         this.$Message.warning("换单修改时间和换单单号不能同时为空");
         return false;
       }
       let param = {
-        shop_id: this.taoBaoExchangeBillFormConfig.formData[0].itemdata.pid,
-        bill_no: this.taoBaoExchangeBillFormConfig.formValue.bill_no,
-        start_time:this.standardTimeConversiondateToStr(this.taoBaoExchangeBillFormConfig.formValue.timerange[0]),
-        end_time:this.standardTimeConversiondateToStr(this.taoBaoExchangeBillFormConfig.formValue.timerange[1]),
-        status: this.taoBaoExchangeBillFormConfig.formValue.status,
+        shop_id: this.downLoadFormConfig.formData[0].itemdata.pid,
+        bill_no: this.downLoadFormConfig.formValue.bill_no,
+        start_time:this.standardTimeConversiondateToStr(this.downLoadFormConfig.formValue.timerange[0]),
+        end_time:this.standardTimeConversiondateToStr(this.downLoadFormConfig.formValue.timerange[1]),
+        status: this.downLoadFormConfig.formValue.status,
         table: "IP_B_TAOBAO_EXCHANGE"
       };
       let fromdata = new FormData();

@@ -2,7 +2,7 @@
 <template>
   <div class="giftSet">
     <div class="title">
-      <i class="iconfont iconzengpin" />
+      <i class="iconfontPromotion iconzengpin" />
       <span>赠品信息设置</span>
     </div>
     <!--阶梯类型-->

@@ -2,7 +2,7 @@
 <template>
   <div class="infoSet">
     <div class="title">
-      <i class="iconfont iconliuchengtiaojian" />
+      <i class="iconfontPromotion iconliuchengtiaojian" />
       <span>条件信息设置</span>
     </div>
     <div v-if="!onlyShowRules">

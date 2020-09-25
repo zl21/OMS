@@ -1,67 +1,20 @@
 <template>
-  <div class="downLoadTaobaoOrder" style="width:400px">
-    <jordanForm :formConfig="downLoadTaobaoOrderFormConfig"></jordanForm>
-    <jordanBtn :btnConfig="downLoadTaobaoOrderBtnConfig"></jordanBtn>
-    <!-- 确认下载弹框 -->
-    <Modal
-      class="downLoadModal"
-      v-model="downLoadModal"
-      title="订单下载"
-      width="450"
-      @on-ok="downLoadOk"
-      @on-cancel="downLoadCancel"
-      :mask="true"
-    >
-      <p>
-        订单下载任务已经发送，任务ID：
-        <span class="taskID" @click="taskIDClick">{{taskId}}</span>，请前往接口下载任务表查看下载进度！
-      </p>
-    </Modal>
-  </div>
+  <downLoadForm></downLoadForm>
 </template>
 
 <script>
 import axios from "axios";
-import dateFuns from "@/assets/js/__utils__/date";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
-
+import dateFuns from "@/customize/customizedModal/customizePateFor1.3/returngood/js/date.js";
+import downLoadForm from "./publicDownLoad";
 export default {
   components: {
-    jordanForm,
-    jordanBtn
+    downLoadForm
   },
-  props: {
-    objList: {
-      type: Array,
-      defalut:() =>{
-        return []
-      }
-    },
-    idArr: {
-      type: Array,
-      defalut:() =>{
-        return []
-      }
-    },
-    webid: {
-      type: Number
-    },
-    tablename: {
-      type: String
-    },
-    rowData: {
-      type: Array,
-      defalut:() =>{
-        return []
-      }
-    }
-  },
-  data() {
+   data() {
     return {
       downLoadModal: false,
       taskId: "",
-      downLoadTaobaoOrderBtnConfig: {
+      downLoadBtnConfig: {
         typeAll: "error", //按钮统一风格样式
         btnsite: "right", //按钮位置 (right , center , left)
         buttons: [
@@ -131,7 +84,7 @@ export default {
           }
         ]
       },
-      downLoadTaobaoOrderFormConfig: {
+      downLoadFormConfig: {
         formValue: {
           orderStatus: "WAIT_SELLER_SEND_GOODS",
           startEndTimes: [],
@@ -224,13 +177,13 @@ export default {
 
   methods: {
     standardTimeConversiondateToStr(val) {
-      var dateTime = new Date(val);
-      var year = dateTime.getFullYear();
-      var month = dateTime.getMonth() + 1; //js从0开始取
-      var date = dateTime.getDate();
-      var hour = dateTime.getHours();
-      var minutes = dateTime.getMinutes();
-      var second = dateTime.getSeconds();
+      let dateTime = new Date(val);
+      let year = dateTime.getFullYear();
+      let month = dateTime.getMonth() + 1; //js从0开始取
+      let date = dateTime.getDate();
+      let hour = dateTime.getHours();
+      let minutes = dateTime.getMinutes();
+      let second = dateTime.getSeconds();
       if (month < 10) {
         month = "0" + month;
       }
