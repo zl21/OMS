@@ -1,6 +1,6 @@
 <template>
   <div class="public" style="width:400px;padding-right:20px">
-    <jordanForm :formConfig="downLoadPublicFormConfig">
+    <jordanForm :formConfig="pulicdownLoadConfig">
       <template #compile="{ rowData }">
         <div class="import-box" @click="importBoxOpen(rowData.item)">
           [导入]
@@ -8,13 +8,12 @@
       </template>
     </jordanForm>
     <div class="dialog-footer">
-      <Button type="primary" size="" @click="downloadPublicAll"
+      <Button type="primary"  @click="downloadPublicAll"
         >确定</Button
       >
       <Button
         type="error"
-        ghost
-        size=""
+        ghost 
         @click="
           () => {
             this.$emit('closeActionDialog');
@@ -69,27 +68,27 @@ export default {
         return []
       }
     },
-    SpecialTitle: {
+    title: {
       type: String,
     },
   },
   mounted() {
     const childList = this.downLoadPublicFormConfig.formData[0].inputList[0]
       .childs[0];
-    if (this.SpecialTitle === "经销订单下载") {
+    if (this.$parent.title === "经销订单下载") {
       childList.refobjid = 77;
       childList.valuedata = 77;
       this.pulicUrl = "/p/cs/orderDownload";
-    } else if (this.SpecialTitle === "分销商品下载") {
+    } else if (this.$parent.title === "分销商品下载") {
       childList.refobjid = 3;
       childList.valuedata = 3;
       this.downLoadPublicFormConfig = this.downLoadDistributionGood;
       this.pulicUrl = "/p/cs/itemDownload";
-    } else if (this.SpecialTitle === "分销订单下载") {
+    } else if (this.$parent.title === "分销订单下载") {
       childList.refobjid = 3;
       childList.valuedata = 3;
       this.pulicUrl = "/p/cs/orderDownload";
-    } else if (this.SpecialTitle === "通用订单下载") {
+    } else if (this.$parent.title === "通用订单下载") {
       this.downLoadPublicFormConfig.formData[0].itemdata = {
         col: 1,
         colid: 167023,
@@ -114,10 +113,10 @@ export default {
       };
       this.downLoadPublicFormConfig.formData[1].style = "";
       this.pulicUrl = "/p/cs/stdp/order/get";
-    } else if (this.SpecialTitle === "通用商品下载") {
+    } else if (this.$parent.title === "通用商品下载") {
       this.downLoadPublicFormConfig = this.pulicdownLoadConfig;
       this.pulicUrl = "/p/cs/stdp/item/get";
-    } else if (this.SpecialTitle === "分销退单下载") {
+    } else if (this.$parent.title === "分销退单下载") {
       childList.refobjid = 3;
       childList.valuedata = 3;
       this.pulicUrl = "/p/cs/refundDownload";
@@ -125,7 +124,7 @@ export default {
         if (item.label === "订单状态")
           item.options = [{ label: "全部", value: "" }];
       });
-    } else if (this.tablename === "IP_B_STANDPLAT_REFUND") {
+    } else if (this.$route.params.tableName === "IP_B_STANDPLAT_REFUND") {
       this.downLoadPublicFormConfig.formData[0].itemdata = {
         col: 1,
         colid: 167023,
@@ -403,15 +402,15 @@ export default {
     // 下载
     downloadPublicAll() {
       if (
-        this.SpecialTitle === "经销订单下载" ||
-        this.SpecialTitle === "通用订单下载" ||
-        this.SpecialTitle === "分销订单下载" ||
-        this.SpecialTitle === "分销退单下载"
+        this.$parent.title === "经销订单下载" ||
+        this.$parent.title === "通用订单下载" ||
+        this.$parent.title === "分销订单下载" ||
+        this.$parent.title === "分销退单下载"
       ) {
         this.downloadPublic(this.pulicUrl);
-      } else if (this.SpecialTitle === "通用商品下载") {
+      } else if (this.$parent.title === "通用商品下载") {
         this.downloadPublicGoods(this.pulicUrl);
-      } else if (this.SpecialTitle === "分销商品下载") {
+      } else if (this.$parent.title === "分销商品下载") {
         this.downloadDisGood(this.pulicUrl);
       } else if (this.tablename === "IP_B_STANDPLAT_REFUND") {
         this.downloadRenterOrder(this.pulicUrl);
