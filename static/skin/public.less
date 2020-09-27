@@ -134,19 +134,26 @@
     }
   }
 
-  .ark-radio-checked .ark-radio-inner {
-    border-color: @color;
-
-    &:after {
-      background-color: @color;
+  .ark-radio-checked {
+    &:hover {
+      border-color: @color;
     }
+
+    .ark-radio-inner {
+      border-color: @color;
+
+      &:after {
+        background-color: @color;
+      }
+    }
+  }
+  .ark-radio-focus {
+    box-shadow: none;
   }
 }
 
 // table
-.table{
-
-}
+.table {}
 
 // 页面page
 #page {
@@ -188,7 +195,8 @@
 
 // 头部导航
 #nav {
-    /* 导航背景颜色/导航鼠标经过背景颜色/其他按钮鼠标经过颜色 */
+
+  /* 导航背景颜色/导航鼠标经过背景颜色/其他按钮鼠标经过颜色 */
   .navBg(@color: #0f3365, @hoverColor: #092750, @liHoverBg: #0068b7) {
     .navigator {
       background-color: @color;
@@ -222,6 +230,7 @@
 
 // 侧边栏菜单 收藏和历史
 #menu {
+
   /* 菜单背景色/菜单背景色鼠标经过/字体颜色/收起菜单鼠标经过字体颜色 */
   .historyFavorite(@bgColor: #0f3365, @hoverColor: #173155, @fontColor: #fff, @collectFontColor: #303133) {
     .history-and-favorite {
@@ -279,22 +288,36 @@
 
 // 定制界面
 #customized {
+
   // malda
-  .modal(@color:@publicColor,@bgColor:transparent){
-    .dialog-footer{
-      .ark-btn{
+  .modal(@color: @publicColor, @bgColor: transparent) {
+    .dialog-footer {
+      .ark-btn {
         color: @color;
-        border-color:@color;
+        border-color: @color;
         background: @bgColor;
-        &:hover{
+
+        &:hover {
           color: @color;
-          border-color:@color;
-          background:@bgColor;
+          border-color: @color;
+          background: @bgColor;
           opacity: .6;
         }
       }
     }
+
+    .downLoadModal {
+      .ark-btn-primary {
+        background-color: @color;
+        border-color: @color;
+      }
+
+      .ark-btn-text:hover {
+        color: @color;
+      }
+    }
   }
+
   // 订单管理
   .orderAdd(@color: @publicColor) {
     .jordan-label-box {
@@ -345,20 +368,25 @@
   }
 
   // 系统配置
-  .system(@color:@publicColor){
-    .ark-spin{
+  .system(@color: @publicColor) {
+    .ark-spin {
       color: @color;
     }
-    .ark-tree-arrow i{
+
+    .ark-tree-arrow i {
       color: @color;
     }
-    .rightware_table{ 
-      .el-tabs__item.is-active,.el-tabs__item:hover{
+
+    .rightware_table {
+
+      .el-tabs__item.is-active,
+      .el-tabs__item:hover {
         color: @color;
       }
     }
   }
 }
+
 // 标准界面
 #standard {
 
