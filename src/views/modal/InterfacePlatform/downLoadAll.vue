@@ -74,8 +74,8 @@ export default {
             size: "", //按钮大小
             disabled: false, //按钮禁用控制
             btnclick: () => {
-              formConfig(this.$route.params.tableName).determine(this)
-              // formConfig('IP_B_CANCEL_TIME_ORDER_VIP').determine(this)
+              // formConfig(this.$route.params.tableName).determine(this)
+              formConfig('IP_B_TAOBAO_ORDER').determine(this)
             } //按钮点击事件
           },
           {
@@ -98,8 +98,8 @@ export default {
     if(this.$route.params.tableName == 'IP_B_JITX_DELIVERY'){
       self.downLoadFormConfig.formValue.order_status = "NEW";
     }
-    this.downLoadFormConfig = formConfig(this.$route.params.tableName).formConfig
-    // self.downLoadFormConfig = formConfig('IP_B_CANCEL_TIME_ORDER_VIP').formConfig
+    // this.downLoadFormConfig = formConfig(this.$route.params.tableName).formConfig
+    self.downLoadFormConfig = formConfig('IP_B_TAOBAO_ORDER').formConfig
   },
   methods: {
     standardTimeConversiondateToStr(val) {

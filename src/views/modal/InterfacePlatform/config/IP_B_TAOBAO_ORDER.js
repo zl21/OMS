@@ -90,6 +90,7 @@ export default {
   },
   // 确定按钮
   determine: (self) => {
+    self.downLoadModal = true;
     console.log("淘宝订单接口列表界面,下载订单");
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
