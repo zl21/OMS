@@ -1,7 +1,7 @@
 <template>
-  <div style="width:400px">
-    <jordanForm :formConfig="downLoadVipTimeOrderFormConfig"></jordanForm>
-    <jordanBtn :btnConfig="downLoadVipTimeOrderBtnConfig"></jordanBtn>
+  <div style="width:400px;padding-right:20px">
+    <jordanForm :formConfig="downLoadFormConfig"></jordanForm>
+    <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
   </div>
 </template>
 
@@ -17,10 +17,16 @@ export default {
   },
   props: {
     objList: {
-      type: Array
+      type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     idArr: {
-      type: Array
+      type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     webid: {
       type: Number
@@ -29,12 +35,15 @@ export default {
       type: String
     },
     rowData: {
-      type: Array
+      type: Array,
+      defalut:() =>{
+        return []
+      }
     }
   },
   data() {
     return {
-      downLoadVipTimeOrderBtnConfig: {
+      downLoadBtnConfig: {
         typeAll: "error", //按钮统一风格样式
         btnsite: "right", //按钮位置 (right , center , left)
         buttons: [
@@ -46,16 +55,16 @@ export default {
             disabled: false, //按钮禁用控制
             btnclick: () => {
               let self = this;
-              if (!self.downLoadVipTimeOrderFormConfig.formData[0].itemdata.pid) {
+              if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
                 self.$Message.warning("请选择需要下载的店铺");
                 return
               }
-              if (!self.downLoadVipTimeOrderFormConfig.formValue.query_date[0]) {
+              if (!self.downLoadFormConfig.formValue.query_date[0]) {
                 self.$Message.warning("请选择需要下载的查询时间");
                 return
               }
-              let startTime = self.downLoadVipTimeOrderFormConfig.formValue.query_date[0];
-              let endTime = self.downLoadVipTimeOrderFormConfig.formValue.query_date[1];
+              let startTime = self.downLoadFormConfig.formValue.query_date[0];
+              let endTime = self.downLoadFormConfig.formValue.query_date[1];
               if(startTime){
                 startTime = dateUtil.getFormatDate(startTime,'yyyy-MM-dd HH:mm:ss');
               }
@@ -63,7 +72,7 @@ export default {
                 endTime = dateUtil.getFormatDate(endTime,'yyyy-MM-dd HH:mm:ss');
               }
               let param = {
-                shop_id: self.downLoadVipTimeOrderFormConfig.formData[0].itemdata.pid, // 店铺id 必传
+                shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
                 start_time:startTime,
                 end_time:endTime
               };
@@ -96,7 +105,7 @@ export default {
           }
         ]
       },
-      downLoadVipTimeOrderFormConfig: {
+      downLoadFormConfig: {
         formValue: {
           numNumber: ""
         },

@@ -1,5 +1,5 @@
 <template>
-  <div style="width:350px;">
+  <div style="width:350px;padding-right:20px">
     <div v-if="corfirmFlag">
       <p ref="corfirmMessage">
       {{corfirmMessage}}
