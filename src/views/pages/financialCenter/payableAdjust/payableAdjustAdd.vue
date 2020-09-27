@@ -1871,6 +1871,10 @@ export default {
 <style lang="less">
 @import "~professionalComponents/common/css/theme.less";
 
+.ark-table-wrapper {
+  margin-top: 8px;
+}
+
 .buttons {
   padding: 8px 0 0 0;
 }
