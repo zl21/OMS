@@ -1,22 +1,142 @@
 <template>
-  <downLoadForm :downLoadFormConfig="downLoadFormConfig"></downLoadForm>
+  <div class="downLoadTaobaoOrder" style="width:400px">
+    <jordanForm :formConfig="downLoadFormConfig"></jordanForm>
+    <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
+    <!-- 确认下载弹框 -->
+    <Modal
+      class="downLoadModal"
+      v-model="downLoadModal"
+      title="订单下载"
+      width="450"
+      @on-ok="downLoadOk"
+      @on-cancel="downLoadCancel"
+      :mask="true"
+    >
+      <p>
+        订单下载任务已经发送，任务ID：
+        <span class="taskID" @click="taskIDClick">{{taskId}}</span>，请前往接口下载任务表查看下载进度！
+      </p>
+    </Modal>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
-import downLoadForm from "./publicDownLoad";
+import dateFuns from "@/assets/js/__utils__/date";
+import jordanForm from "professionalComponents/jordanForm";
+import jordanBtn from "professionalComponents/jordanButton";
+
 export default {
   components: {
-    downLoadForm,
+    jordanForm,
+    jordanBtn
+  },
+  props: {
+    objList: {
+      type: Array,
+      defalut:() =>{
+        return []
+      }
+    },
+    idArr: {
+      type: Array,
+      defalut:() =>{
+        return []
+      }
+    },
+    webid: {
+      type: Number
+    },
+    tablename: {
+      type: String
+    },
+    rowData: {
+      type: Array,
+      defalut:() =>{
+        return []
+      }
+    }
   },
   data() {
     return {
+      downLoadModal: false,
+      taskId: "",
+      downLoadBtnConfig: {
+        typeAll: "error", //按钮统一风格样式
+        btnsite: "right", //按钮位置 (right , center , left)
+        buttons: [
+          {
+            type: "", //按钮类型
+            text: "下载", //按钮文本
+            icon: "", //按钮图标
+            size: "", //按钮大小
+            disabled: false, //按钮禁用控制
+            btnclick: () => {
+              let self = this;
+              if (
+                !self.downLoadFormConfig.formData[0].itemdata.pid
+              ) {
+                self.$Message.warning("请选择需要下载的店铺");
+                return false;
+              }
+              if (
+                self.downLoadFormConfig.formValue.startEndTimes
+                  .length === 0 &&
+                self.downLoadFormConfig.formValue.orderNum === ""
+              ) {
+                self.$Message.warning("请选择输入的日期或输入订单编号");
+                return false;
+              }
+              let param = {
+                shop_id:
+                  self.downLoadFormConfig.formData[0].itemdata.pid,
+                bill_no: self.downLoadFormConfig.formValue.orderNum, //订单编号
+                start_time: self.standardTimeConversiondateToStr(
+                  self.downLoadFormConfig.formValue.startEndTimes[0]
+                ), //开始时间
+                end_time: self.standardTimeConversiondateToStr(
+                  self.downLoadFormConfig.formValue.startEndTimes[1]
+                ), //结束时间
+                status:
+                  self.downLoadFormConfig.formValue.orderStatus, //状态 必传 给默认值
+                table: self.tablename //当前表名 必传
+              };
+              let fromdata = new FormData();
+              fromdata.append("param", JSON.stringify(param));
+              axios({
+                url: "/p/cs/orderDownload",
+                method: "post",
+                data: fromdata
+              }).then(function(res) {
+                console.log(res);
+                if (res.data.code === 0) {
+                  // self.$Message.success(res.data.message);
+                  self.taskId = res.data.message.match(/\d+/)[0];
+                  self.downLoadModal = true;
+                } else {
+                  self.$Message.error(res.data.message);
+                }
+              });
+            } //按钮点击事件
+          },
+          {
+            type: "", //按钮类型
+            text: "取消", //按钮文本
+            icon: "", //按钮图标
+            size: "", //按钮大小
+            disabled: false, //按钮禁用控制
+            btnclick: () => {
+              this.$emit("closeActionDialog");
+            } //按钮点击事件
+          }
+        ]
+      },
       downLoadFormConfig: {
         formValue: {
           orderStatus: "WAIT_SELLER_SEND_GOODS",
           startEndTimes: [],
           orderNum: "",
-          dta: "1",
+          dta: "1"
         },
         formData: [
           {
@@ -25,10 +145,8 @@ export default {
             value: "dta",
             inputList: [
               {
-                childs: [
-                  { colname: "CP_C_SHOP_ID", refobjid: 2, valuedata: 2 },
-                ],
-              },
+                childs: [{ colname: "CP_C_SHOP_ID", refobjid: 2, valuedata: 2 }]
+              }
             ],
             isActive: true,
             isdisabled: false,
@@ -40,7 +158,7 @@ export default {
               refcolval: {
                 fixcolumn: "CP_C_PLATFORM_ID",
                 expre: "equal",
-                srccol: "CP_C_SHOP_ID",
+                srccol: "CP_C_SHOP_ID"
               },
               display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: "drp", //外键关联类型
@@ -57,26 +175,26 @@ export default {
               row: 1,
               statsize: -1,
               type: "STRING",
-              valuedata: "", //这个是选择的值
-            },
+              valuedata: "" //这个是选择的值
+            }
           },
           {
             style: "radio", //单选框
             label: "订单状态", //前面字段
-            width: "24", //宽度
+            width: "6", //宽度
             value: "orderStatus", //绑定到formValue的值
             // radioChange: ()=>{alert('123')}, //切换时的方法
             // setRequired: "required", //必选标识,值不为required时无标识
             options: [
               {
                 label: "全部",
-                value: "",
+                value: ""
               },
               {
                 label: "待发货",
-                value: "WAIT_SELLER_SEND_GOODS",
-              },
-            ],
+                value: "WAIT_SELLER_SEND_GOODS"
+              }
+            ]
           },
           {
             style: "date",
@@ -85,7 +203,7 @@ export default {
             label: "平台修改时间",
             width: "24",
             format: "yyyy-MM-dd HH:mm:ss", //格式参照burgeonui
-            placeholder: "",
+            placeholder: ""
           },
           {
             style: "input", //输入框类型
@@ -96,62 +214,83 @@ export default {
             placeholder: "", //占位文本，默认为请输入
             ghost: false, //是否关闭幽灵按钮，默认开启
             inputenter: () => {}, //表单回车事件
-            iconclick: () => {}, //点击icon图标事件
+            iconclick: () => {} //点击icon图标事件
             // setRequired: "required" //必选标识,值不为required时无标识
-          },
-        ],
-      },
+          }
+        ]
+      }
     };
   },
-  props: {
-    tablename: {
-      type: String
-    }
-  },
+
   methods: {
-    determine() {
-      let self = this;
-      self.$children[0].downLoadModal = true;
-      if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
-        self.$Message.warning("请选择需要下载的店铺");
-        return false;
+    standardTimeConversiondateToStr(val) {
+      var dateTime = new Date(val);
+      var year = dateTime.getFullYear();
+      var month = dateTime.getMonth() + 1; //js从0开始取
+      var date = dateTime.getDate();
+      var hour = dateTime.getHours();
+      var minutes = dateTime.getMinutes();
+      var second = dateTime.getSeconds();
+      if (month < 10) {
+        month = "0" + month;
       }
-      if (
-        self.downLoadFormConfig.formValue.startEndTimes.length === 0 &&
-        self.downLoadFormConfig.formValue.orderNum === ""
-      ) {
-        self.$Message.warning("请选择输入的日期或输入订单编号");
-        return false;
+      if (date < 10) {
+        date = "0" + date;
       }
-      let param = {
-        shop_id: self.downLoadFormConfig.formData[0].itemdata.pid,
-        bill_no: self.downLoadFormConfig.formValue.orderNum, //订单编号
-        start_time: self.$children[0].standardTimeConversiondateToStr(
-          self.downLoadFormConfig.formValue.startEndTimes[0]
-        ), //开始时间
-        end_time: self.$children[0].standardTimeConversiondateToStr(
-          self.downLoadFormConfig.formValue.startEndTimes[1]
-        ), //结束时间
-        status: self.downLoadFormConfig.formValue.orderStatus, //状态 必传 给默认值
-        table: self.tablename, //当前表名 必传
-      };
-      let fromdata = new FormData();
-      fromdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/orderDownload",
-        method: "post",
-        data: fromdata,
-      }).then(function (res) {
-        if (res.data.code === 0) {
-          // self.$Message.success(res.data.message);
-          self.taskId = res.data.message.match(/\d+/)[0];
-          self.downLoadModal = true;
-        } else {
-          self.$Message.error(res.data.message);
+      if (hour < 10) {
+        hour = "0" + hour;
+      }
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+      if (second < 10) {
+        second = "0" + second;
+      }
+      return (
+        year +
+        "-" +
+        month +
+        "-" +
+        date +
+        " " +
+        hour +
+        ":" +
+        minutes +
+        ":" +
+        second
+      );
+    },
+    downLoadOk() {
+      const self = this;
+      self.$emit("confirmImport");
+      self.$emit("closeActionDialog");
+    },
+    downLoadCancel() {
+      const self = this;
+      self.$emit("confirmImport");
+      self.$emit("closeActionDialog");
+    },
+    taskIDClick() {
+      const self = this;
+      self.$emit("confirmImport");
+      self.$emit("closeActionDialog");
+      this.downLoadModal = false;
+      this.$store.commit("TabOpen", {
+        id: this.taskId,
+        type: "singleView", //类型action
+        name: "singleView",
+        label: "接口下载任务表编辑", //tab中文名
+        query: {
+          id: this.taskId,
+          pid: "24775",
+          ptitle: "接口下载任务表",
+          ptype: "table",
+          tabTitle: "接口下载任务表编辑",
+          tableName: "IP_T_CONSUMER_LOG"
         }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

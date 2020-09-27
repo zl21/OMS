@@ -57,7 +57,6 @@ export default {
       }
     }
   },
-
   data() {
     return {
       downLoadModal: false,
@@ -221,7 +220,6 @@ export default {
       }
     };
   },
-
   methods: {
     standardTimeConversiondateToStr(val) {
       let dateTime = new Date(val);

@@ -1,5 +1,5 @@
 <template>
-  <div class="downLoadTaobaoOrder" style="width:400px;padding-right:20px">
+  <div class="downLoadTaobaoOrder" style="width:430px;padding-right:20px">
     <jordanForm :formConfig="downLoadFormConfig"></jordanForm>
     <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
     <!-- 确认下载弹框 -->
@@ -26,17 +26,36 @@ import httpServer from 'framework/__utils__/request';
 import jordanForm from "professionalComponents/jordanForm";
 import jordanBtn from "professionalComponents/jordanButton";
 import dateFuns from "@/assets/js/__utils__/date.js";
-
+import R3 from '@syman/burgeon-r3'
+const formConfig = file => require(`./config/${file}.js`).default;
 export default {
   components: {
     jordanForm,
     jordanBtn
   },
   props: {
-    downLoadFormConfig: {
-      type: Object,
+    objList: {
+      type: Array,
       defalut:() =>{
-        return {}
+        return []
+      }
+    },
+    idArr: {
+      type: Array,
+      defalut:() =>{
+        return []
+      }
+    },
+    webid: {
+      type: Number
+    },
+    tablename: {
+      type: String
+    },
+    rowData: {
+      type: Array,
+      defalut:() =>{
+        return []
       }
     }
   },
@@ -55,7 +74,8 @@ export default {
             size: "", //按钮大小
             disabled: false, //按钮禁用控制
             btnclick: () => {
-             this.$parent.determine()
+              formConfig(this.$route.params.tableName).determine(this)
+              // formConfig('IP_B_CANCEL_TIME_ORDER_VIP').determine(this)
             } //按钮点击事件
           },
           {
@@ -65,14 +85,22 @@ export default {
             size: "", //按钮大小
             disabled: false, //按钮禁用控制
             btnclick: () => {
-              this.$parent.$emit("closeActionDialog");
+              this.$emit("closeActionDialog",false);
             } //按钮点击事件
           }
         ]
-      }
+      },
+      downLoadFormConfig: {}
     };
   },
-
+  mounted:function () {
+    let self = this;
+    if(this.$route.params.tableName == 'IP_B_JITX_DELIVERY'){
+      self.downLoadFormConfig.formValue.order_status = "NEW";
+    }
+    this.downLoadFormConfig = formConfig(this.$route.params.tableName).formConfig
+    // self.downLoadFormConfig = formConfig('IP_B_CANCEL_TIME_ORDER_VIP').formConfig
+  },
   methods: {
     standardTimeConversiondateToStr(val) {
       let dateTime = new Date(val);
