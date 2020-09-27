@@ -1,6 +1,13 @@
 <template>
   <div class="downLoadTaobaoOrder" style="width:430px;padding-right:20px">
-    <jordanForm :formConfig="downLoadFormConfig"></jordanForm>
+    <jordanForm :formConfig="downLoadFormConfig">
+      <!-- 如果内容全自定义脱离form时使用 则插入导入功能 -->
+      <template #compile="{ rowData }">
+        <div class="import-box" @click="importBoxOpen(rowData.item)">
+          [导入]
+        </div>
+      </template>
+    </jordanForm>
     <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
     <!-- 确认下载弹框 -->
     <Modal
@@ -168,7 +175,24 @@ export default {
           tableName: "IP_T_CONSUMER_LOG"
         }
       });
-    }
+    },
+     // 打开导入弹窗
+    importBoxOpen(item) {
+      let _this = this;
+      this.dialogConfig = {
+        title: "导入",
+        componentData: {
+          tableName: "IP_C_STANDPLAT_PRO",
+          returnData(data) {
+            _this.pulicdownLoadConfig.formValue.sp_ids = data;
+          },
+        },
+        name: "importTable",
+        url: "publicDialog/importTable",
+        width: 600,
+      };
+      this.$refs.dialog.openConfirm();
+    },
   }
 };
 </script>
