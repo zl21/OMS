@@ -1,6 +1,6 @@
 <template>
   <div v-loading="loadings" class="promactiqueryList">
-    <div style="height: 160px">
+    <div style="height: 132px">
       <!-- 按钮 -->
       <div class="head_botton">
         <button class="white" @click="getData">
