@@ -672,6 +672,7 @@ export default {
     }, //获取每个子节点的方法
     initTreeNodes() {
       let result = this.convertTree(this.treeData)
+      console.log(result);
       if (result.roots[0] !== undefined) {
         result.roots[0].clickNode = true
       }
@@ -679,13 +680,13 @@ export default {
       this.treeNodes = result.nodes
     }, //加载树的方法
     convertTree(datas) {
-      var begin = new Date().getTime()
-      var map = {}
-      var roots = []
-      var nodes = []
+      let begin = new Date().getTime()
+      let map = {}
+      let roots = []
+      let nodes = []
 
       function get(id) {
-        var n = map[id]
+        let n = map[id]
         if (n === undefined) {
           n = {
             ID: id,
@@ -707,7 +708,7 @@ export default {
       }
 
       function node(val) {
-        var n = get(val.ID)
+        let n = get(val.ID)
         n.CP_C_ORGUP_ID = val.CP_C_ORGUP_ID
         n.ID = val.ID
         n.MIXNAME = val.MIXNAME
@@ -727,14 +728,15 @@ export default {
         node(datas[index])
       }
       nodes = nodes.concat(roots)
-      for (var index = 0; index < nodes.length; index++) {
-        var node = nodes[index]
+      for (let index = 0; index < nodes.length; index++) {
+        let node = nodes[index]
         if (node.getChildren().length > 0) {
           node.getChildren()[node.getChildren().length - 1].lastChild = true
         }
       }
-      var end = new Date().getTime()
-      return (window.$test = { roots, map, nodes, vm: this })
+      let end = new Date().getTime()
+      // return (window.$test = { roots, map, nodes, vm: this })  //2020-09-27 为何要将参数挂载在windows对象？观察一段时间
+      return { roots, map, nodes, vm: this }
     }, //转化树节点数据
   },
   watch: {
