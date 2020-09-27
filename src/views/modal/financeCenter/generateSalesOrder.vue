@@ -1,6 +1,6 @@
 <template>
   <!-- 下载账单 -->
-  <div class="generateSalesOrder" v-loading="pageLoad">
+  <div class="generateSalesOrder" v-loading="pageLoad" style="width:400px;padding-right:20px">
     <jordanForm :formConfig="generateSalesOrderFormConfig"></jordanForm>
     <!-- <jordanBtn :btnConfig="generateSalesOrderBtnConfig"></jordanBtn> -->
     <div class="dialog-footer">

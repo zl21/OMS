@@ -1803,6 +1803,8 @@
 </script>
 
 <style lang='less'>
+// @import '../../../../../static/skin/public.less';
+@import '~@burgeon/oms-theme/skin/public.less';
 .scanIn {
   position: relative;
   .scan_button {
@@ -1818,42 +1820,16 @@
   .scan_search {
     padding: 10px 0 15px 37px;
   }
-  .scan_info .titles {
+
+  .scan_search .titles,.scan_info .titles,.scan_logg .titles,.scan_details .titles,.scan_returngood .titles{
     margin: 10px 0 10px 37px;
     font-size: 16px;
     font-weight: 600;
-    border-bottom: 3px solid #fd8368;
+    border-bottom: 3px solid #f00;
     width: 120px;
     padding-bottom: 5px;
   }
-  .scan_logg .titles {
-    margin: 10px 0 10px 37px;
-    font-size: 16px;
-    font-weight: 600;
-    border-bottom: 3px solid #fd8368;
-    width: 120px;
-    padding-bottom: 5px;
-  }
-  .scan_details {
-    margin-left: 37px;
-  }
-  .scan_details .titles {
-    margin: 10px 0;
-    font-size: 16px;
-    font-weight: 600;
-    border-bottom: 3px solid #fd8368;
-    width: 120px;
-    padding-bottom: 5px;
-  }
-  .scan_returngood .titles {
-    margin: 10px 0 10px 37px;
-    font-size: 16px;
-    font-weight: 600;
-    padding-top: 15px;
-    border-bottom: 3px solid #fd8368;
-    width: 120px;
-    padding-bottom: 5px;
-  }
+
 
   .yellow {
     background-color: yellow;

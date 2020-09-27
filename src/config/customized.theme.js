@@ -1,6 +1,7 @@
 export default {
-  skyBlue: "/static/skin/skyBlue/index.min.css",
-  coralRed: "/static/skin/coralRed/index.min.css",
+  // 主题文件
+  skyBlue: "omsTheme/skin/skyBlue/index.min.css",
+  coralRed: "omsTheme/skin/coralRed/index.min.css",
   // 动态创建link标签
   appendLink: (url) => {
     var link = document.createElement("link");

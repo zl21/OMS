@@ -1,8 +1,9 @@
 <template>
-  <div style="width:450px">
+  <div style="width:400px;padding-right:15px">
     <jordanForm :formConfig="formConfig"></jordanForm>
     <div class="dialog-footer">
-      <Button
+      <Button type="primary" ghost size="small" @click="confirmChange">确定</Button>
+        <Button
         type="error"
         size="small"
         @click="
@@ -12,7 +13,6 @@
         "
         >取消</Button
       >
-      <Button type="primary" ghost size="small" @click="confirmChange">确定</Button>
     </div>
   </div>
 </template>
