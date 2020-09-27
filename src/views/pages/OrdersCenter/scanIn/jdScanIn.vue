@@ -1522,7 +1522,8 @@
 </script>
 
 <style lang='less'>
-@import '../../../../../static/skin/public.less';
+// @import '../../../../../static/skin/public.less';
+@import '~@burgeon/oms-theme/skin/public.less';
 .scanIn {
   position: relative;
   .scan_button {
