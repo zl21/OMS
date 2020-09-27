@@ -17,10 +17,10 @@
         <Spin />
       </div>
       <IntegrateSearchFilter
-        id="IntegrateSearchFilter"
         v-if="isShowSeniorOrOrdinary"
-        :drop-down-list="dropList"
+        id="IntegrateSearchFilter"
         v-model="selectValue"
+        :drop-down-list="dropList"
         :search-method="searchMethod"
         :tag-list="tagList"
         class="IntegrateSearchFilter"
@@ -53,20 +53,6 @@
         class="jordanLabel"
         @labelClick="labelClick"
       />
-      <!-- <jordan-action-table
-              class="jordan-action-table"
-              :jordanTableConfig="jordanTableConfig"
-              @on-select="onSelect"
-              @on-select-cancel="onSelectCancel"
-              @on-select-all="onSelectAll"
-              @on-select-all-cancel="onSelectAllCancel"
-              @on-row-click="onRowClick"
-              @on-row-dblclick="onRowDblclick"
-              @on-page-change="pageChange"
-              @on-page-size-change="pageSizeChange"
-              @on-drag-drop="onDragDrop"
-              @table-refresh-detail="tableRefreshDetail"
-            ></jordan-action-table>-->
       <div class="aTable">
         <div
           v-show="agTableConfig.agLoading"
@@ -174,7 +160,6 @@
 </template>
 
 <script>
-  import axios from 'axios';
   import jordanBtn from 'professionalComponents/jordanButton';
   import jordanLabel from 'professionalComponents/jordanLabel';
   import jordanForm from 'professionalComponents/jordanForm';
@@ -232,7 +217,7 @@
             },
             ORDER_TAG: (params) => {
               const resultElement = document.createElement('div');
-              params.data.ORDERTAGLIST.map((item) => {
+              params.data.ORDERTAGLIST.forEach((item) => {
                 const tag = document.createElement('span');
                 tag.innerText = item.text;
                 tag.style.color = item.clr;
@@ -491,7 +476,7 @@
                       },
                     },
                     [
-                      params.row.ORDERTAGLIST.map(item => h(
+                      params.row.ORDERTAGLIST.forEach(item => h(
                         'Poptip',
                         {
                           props: {
@@ -540,7 +525,7 @@
                   const arrs = params.row.SOURCE_CODE.split(',');
                   const len = arrs.length;
                   let sourceCode = '';
-                  arrs.map((item, index) => {
+                  arrs.forEach((item, index) => {
                     sourceCode += item + (index + 1 === len ? '' : ' , ');
                   });
                   return h('div', [
@@ -662,48 +647,48 @@
                       data: dataArr,
                     };
                   });
-                  const goodsThead = [
-                    {
-                      key: 'image',
-                      render: (h, params) => {
-                        const imgSrc = params.row.image
-                          ? params.row.image
-                          : require('@/assets/image/img/defaultphoto.png');
-                        return h('div', [
-                          h('img', {
-                            attrs: {
-                              src: imgSrc,
-                            },
-                            style: {
-                              width: '20px',
-                              height: 'auto',
-                              cursor: 'pointer',
-                            },
-                          }),
-                        ]);
-                      },
-                    },
-                    {
-                      render: (h, params) => h('div', [
-                        h(
-                          'span',
-                          `${params.row.ecode},${params.row.sizes},${params.row.clrs}`
-                        ),
-                      ]),
-                    },
-                    {
-                      render: (h, params) => h('span', params.row.price.toFixed(2)),
-                    },
-                    {
-                      key: 'qty',
-                    },
-                    {
-                      render: (h, params) => h('span', params.row.realAmt.toFixed(2)),
-                    },
-                    {
-                      key: 'weight',
-                    },
-                  ];
+                  // const goodsThead = [
+                  //   {
+                  //     key: 'image',
+                  //     render: (h, params) => {
+                  //       const imgSrc = params.row.image
+                  //         ? params.row.image
+                  //         : require('@/assets/image/img/defaultphoto.png');
+                  //       return h('div', [
+                  //         h('img', {
+                  //           attrs: {
+                  //             src: imgSrc,
+                  //           },
+                  //           style: {
+                  //             width: '20px',
+                  //             height: 'auto',
+                  //             cursor: 'pointer',
+                  //           },
+                  //         }),
+                  //       ]);
+                  //     },
+                  //   },
+                  //   {
+                  //     render: (h, params) => h('div', [
+                  //       h(
+                  //         'span',
+                  //         `${params.row.ecode},${params.row.sizes},${params.row.clrs}`
+                  //       ),
+                  //     ]),
+                  //   },
+                  //   {
+                  //     render: (h, params) => h('span', params.row.price.toFixed(2)),
+                  //   },
+                  //   {
+                  //     key: 'qty',
+                  //   },
+                  //   {
+                  //     render: (h, params) => h('span', params.row.realAmt.toFixed(2)),
+                  //   },
+                  //   {
+                  //     key: 'weight',
+                  //   },
+                  // ];
                   return h(
                     'div',
                     {
@@ -1289,19 +1274,13 @@
                 if (self.selection.length > 0) {
                   self.btnConfig.loading = true;
                   const ids = [];
-                  self.selection.map((item, index) => {
+                  self.selection.forEach((item, index) => {
                     ids[index] = item.ID;
                   });
-                  // self.$network.post('/api/cs/oc/oms/v1/auditOrder', {
-                  //   ids: ids,
-                  //   type: "1",
-                  //   isCheck: 0
-                  // })
-                  axios({
-                    url: '/api/cs/oc/oms/v1/auditOrder',
-                    method: 'post',
-                    // cancelToken: true,
-                    data: { ids, type: '1', isCheck: 0 },
+                  self.$network.post('/api/cs/oc/oms/v1/auditOrder', {
+                    ids,
+                    type: '1',
+                    isCheck: 0
                   }).then((res) => {
                     if (res.data.code === 0) {
                       // self.$Message.success(res.data.message);
@@ -1357,13 +1336,7 @@
                   self.selection.map((item, index) => {
                     ids[index] = item.ID;
                   });
-                  // self.$network.post('/api/cs/oc/oms/v1/auditOrderReserve', {ids: ids, type: "1"})
-                  axios({
-                    url: '/api/cs/oc/oms/v1/auditOrderReserve',
-                    method: 'post',
-                    // cancelToken: true,
-                    data: { ids, type: '1' },
-                  }).then((res) => {
+                  self.$network.post('/api/cs/oc/oms/v1/auditOrderReserve', { ids, type: '1' }).then((res) => {
                     if (res.data.code === 0) {
                       self.$Message.success(res.data.message);
                       self.getData();
@@ -1401,7 +1374,7 @@
             //     if (self.selection.length > 0) {
             //       self.btnConfig.loading = true;
             //       let ids = [];
-            //       self.selection.map((item, index) => {
+            //       self.selection.forEach((item, index) => {
             //         ids[index] = item.ID;
             //       });
             //       axios({
@@ -1467,13 +1440,7 @@
                   const ids = self.sonList(self.selection, 'ID'); // 选中订单的单据号
                   const fromdata = new FormData();
                   fromdata.append('param', JSON.stringify({ IDS: ids }));
-                  // self.$network.post('/api/cs/oc/oms/v1/checkAddOrderInvoicing', fromdata)
-                  axios({
-                    url: '/api/cs/oc/oms/v1/checkAddOrderInvoicing',
-                    method: 'post',
-                    // cancelToken: true,
-                    data: fromdata,
-                  }).then((res) => {
+                  self.$network.post('/api/cs/oc/oms/v1/checkAddOrderInvoicing', fromdata).then((res) => {
                     if (res.data.code === 0) {
                       // self.$store.commit('TabOpen', {
                       //   id: -1,
@@ -1523,13 +1490,7 @@
                   const id = self.sonList(self.selection, 'ID').join(); // 选中订单的单据号
                   const fromdata = new FormData();
                   fromdata.append('param', JSON.stringify({ ID: id }));
-                  // self.$network.post('/api/cs/oc/oms/v1/checkRecordInvoicing', fromdata)
-                  axios({
-                    url: '/api/cs/oc/oms/v1/checkRecordInvoicing',
-                    method: 'post',
-                    // cancelToken: true,
-                    data: fromdata,
-                  }).then((res) => {
+                  self.$network.post('/api/cs/oc/oms/v1/checkRecordInvoicing', fromdata).then((res) => {
                     if (res.data.code === 0) {
                       self.publicBouncedConfig = Object.assign(
                         publicDialogConfig.makeOutInvoiceConfig,
@@ -1563,7 +1524,7 @@
                 if (self.selection.length > 0) {
                   self.btnConfig.loading = true;
                   const ids = [];
-                  self.selection.map((item, index) => {
+                  self.selection.forEach((item, index) => {
                     ids[index] = item.ID;
                   });
                   this.$Modal.info({
@@ -1574,13 +1535,7 @@
                     okText: '取消',
                     cancelText: '确定',
                     onCancel: () => {
-                      // self.$network.post("/api/cs/oc/oms/v1/cancelOrder", {ids: ids, type: "1"})
-                      axios({
-                        url: '/api/cs/oc/oms/v1/cancelOrder',
-                        method: 'post',
-                        // cancelToken: true,
-                        data: { ids, type: '1' },
-                      }).then((res) => {
+                      self.$network.post('/api/cs/oc/oms/v1/cancelOrder', { ids, type: '1' }).then((res) => {
                         if (res.data.code === 0) {
                           self.$Message.success(res.data.message);
                           self.getData();
@@ -1624,19 +1579,13 @@
                 if (self.selection.length > 0) {
                   self.btnConfig.loading = true;
                   const ids = [];
-                  self.selection.map((item, index) => {
+                  self.selection.forEach((item, index) => {
                     ids[index] = item.ID;
                   });
                   const param = {
                     ids,
                   };
-                  // self.$network.post("/api/cs/oc/oms/v1/orderInterception", param)
-                  axios({
-                    url: '/api/cs/oc/oms/v1/orderInterception',
-                    method: 'post',
-                    // cancelToken: true,
-                    data: param,
-                  }).then((res) => {
+                  self.$network.post('/api/cs/oc/oms/v1/orderInterception', param).then((res) => {
                     if (res.data.code === 0) {
                       self.$Message.success(res.data.message);
                       self.getData();
@@ -1758,7 +1707,7 @@
             //       self.btnConfig.loading = true;
             //       let ids = [];
             //       let isAddGit = true;
-            //       self.selection.map((item, index) => {
+            //       self.selection.forEach((item, index) => {
             //         ids[index] = item.ID;
             //         if (item.PLATFORM === 50) {
             //           isAddGit = false;
@@ -1911,16 +1860,10 @@
                 if (self.selection.length > 0) {
                   self.btnConfig.loading = true;
                   const ids = [];
-                  self.selection.map((item, index) => {
+                  self.selection.forEach((item, index) => {
                     ids[index] = item.ID;
                   });
-                  // self.$network.post('/api/cs/oc/oms/v1/queryshortagSearchOrder', {ids: ids})
-                  axios({
-                    url: '/api/cs/oc/oms/v1/queryshortagSearchOrder',
-                    method: 'post',
-                    // cancelToken: true,
-                    data: { ids },
-                  }).then((res) => {
+                  self.$network.post('/api/cs/oc/oms/v1/queryshortagSearchOrder', { ids }).then((res) => {
                     if (res.data.code === 0) {
                       self.$Message.success(res.data.message);
                       self.getData();
@@ -1959,16 +1902,10 @@
                 if (self.selection.length > 0) {
                   self.btnConfig.loading = true;
                   const ids = [];
-                  self.selection.map((item, index) => {
+                  self.selection.forEach((item, index) => {
                     ids[index] = item.ID;
                   });
-                  // self.$network.post("/api/cs/oc/oms/v1/queryFortuneBagShortage", {ids: ids})
-                  axios({
-                    url: '/api/cs/oc/oms/v1/queryFortuneBagShortage',
-                    method: 'post',
-                    // cancelToken: true,
-                    data: { ids },
-                  }).then((res) => {
+                  self.$network.post('/api/cs/oc/oms/v1/queryFortuneBagShortage', { ids }).then((res) => {
                     if (res.data.code === 0) {
                       self.$Message.success(res.data.message);
                       self.getData();
@@ -2073,19 +2010,13 @@
                 if (self.selection.length > 0) {
                   self.btnConfig.loading = true;
                   const ids = [];
-                  self.selection.map((item, index) => {
+                  self.selection.forEach((item, index) => {
                     ids[index] = item.ID;
                   });
                   const param = {
                     ids,
                   };
-                  // self.$network.post("/api/cs/oc/oms/v1/doManualDeliveryOrder", param)
-                  axios({
-                    url: '/api/cs/oc/oms/v1/doManualDeliveryOrder',
-                    method: 'post',
-                    // cancelToken: true,
-                    data: param,
-                  }).then((res) => {
+                  self.$network.post('/api/cs/oc/oms/v1/doManualDeliveryOrder', param).then((res) => {
                     if (res.data.code === 0) {
                       self.$Message.success(res.data.message);
                       self.getData();
@@ -2167,7 +2098,7 @@
                 let statusFlag = false;
                 self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
                 if (self.selection.length > 0) {
-                  self.selection.map((item, index) => {
+                  self.selection.forEach((item, index) => {
                     ids[index] = item.ID;
                     if (item.ORDER_STATUS != 1) {
                       statusFlag = true;
@@ -2190,13 +2121,7 @@
                     okText: '取消',
                     cancelText: '确定',
                     onCancel: () => {
-                      // self.$network.post("/p/cs/releaseInventory", {ids: ids})
-                      axios({
-                        url: '/p/cs/releaseInventory',
-                        method: 'post',
-                        // cancelToken: true,
-                        data: { ids },
-                      }).then((res) => {
+                      self.$network.post('/p/cs/releaseInventory', { ids }).then((res) => {
                         if (res.data.code === 0) {
                           self.$Message.success(res.data.message);
                           self.getData();
@@ -2328,7 +2253,6 @@
       // this.getSearchData();
       // 获取from数据
       // this.getFromData();
-      window.axios = axios;
       this.getHeaderList();
       this.$nextTick(() => {
         this.getPermissions('btnConfig', 'orderManager');
@@ -2378,49 +2302,44 @@
             self.btnConfig.loading = true;
             const ids = [];
             const CP_C_PHY_WAREHOUSE_ID = [];
-            self.selection.map((item, index) => {
+            self.selection.forEach((item, index) => {
               ids[index] = item.ID;
               CP_C_PHY_WAREHOUSE_ID[index] = item.CP_C_PHY_WAREHOUSE_ID;
             });
             const fromdata = new FormData();
             fromdata.append('ids', ids);
-            // self.$network.post("/api/cs/oc/oms/v1/checkOrderBeforeLogistics",fromdata)
-            axios({
-              url: '/api/cs/oc/oms/v1/checkOrderBeforeLogistics',
-              method: 'post',
-              // cancelToken: true,
-              data: fromdata,
-            }).then((res) => {
-              if (res.data.code === 0) {
-                self.publicBouncedConfig = publicDialogConfig.modifyLogisticsConfig;
-                self.publicBouncedConfig.componentData = {
-                  ids,
-                  cLogisticsId: 0,
-                  platform: self.selection[0].PLATFORM,
-                  CP_C_PHY_WAREHOUSE_ID: CP_C_PHY_WAREHOUSE_ID[0],
-                };
-                setTimeout(() => {
-                  self.$children
-                    .find(item => item.name === 'modifyLogistics')
-                    .openConfirm();
-                }, 100);
-              } else {
-                self.$Modal.error({
-                  title: '提示',
-                  content: res.data.message,
-                  cancelType: true,
-                  titleAlign: 'left',
-                  mask: true,
-                  draggable: true,
-                  keyDown: (event) => {
-                    if (event.keyCode == 27 || event.keyCode == 13) {
-                      self.$Modal.remove();
-                    }
-                  },
-                });
-              }
-              self.btnConfig.loading = false;
-            });
+            self.$network.post('/api/cs/oc/oms/v1/checkOrderBeforeLogistics', fromdata)
+              .then((res) => {
+                if (res.data.code === 0) {
+                  self.publicBouncedConfig = publicDialogConfig.modifyLogisticsConfig;
+                  self.publicBouncedConfig.componentData = {
+                    ids,
+                    cLogisticsId: 0,
+                    platform: self.selection[0].PLATFORM,
+                    CP_C_PHY_WAREHOUSE_ID: CP_C_PHY_WAREHOUSE_ID[0],
+                  };
+                  setTimeout(() => {
+                    self.$children
+                      .find(item => item.name === 'modifyLogistics')
+                      .openConfirm();
+                  }, 100);
+                } else {
+                  self.$Modal.error({
+                    title: '提示',
+                    content: res.data.message,
+                    cancelType: true,
+                    titleAlign: 'left',
+                    mask: true,
+                    draggable: true,
+                    keyDown: (event) => {
+                      if (event.keyCode == 27 || event.keyCode == 13) {
+                        self.$Modal.remove();
+                      }
+                    },
+                  });
+                }
+                self.btnConfig.loading = false;
+              });
           } else {
             self.$Message.warning({
               content: '请选择需要修改物流记录！',
@@ -2435,47 +2354,42 @@
             self.btnConfig.loading = true;
             const ids = [];
             const CP_C_SHOP_ID = [];
-            self.selection.map((item, index) => {
+            self.selection.forEach((item, index) => {
               ids[index] = item.ID;
               CP_C_SHOP_ID[index] = item.CP_C_SHOP_ID;
             });
             const fromdata = new FormData();
             fromdata.append('ids', ids);
-            // self.$network.post("/api/cs/oc/oms/v1/checkOrderBeforeWarehouse", fromdata)
-            axios({
-              url: '/api/cs/oc/oms/v1/checkOrderBeforeWarehouse',
-              method: 'post',
-              // cancelToken: true,
-              data: fromdata,
-            }).then((res) => {
-              if (res.data.code === 0) {
-                self.publicBouncedConfig = publicDialogConfig.changeWarehouseConfig;
-                self.publicBouncedConfig.componentData = {
-                  ids,
-                  CP_C_SHOP_ID: CP_C_SHOP_ID[0],
-                };
-                setTimeout(() => {
-                  self.$children
-                    .find(item => item.name === 'changeWarehouse')
-                    .openConfirm();
-                }, 100);
-              } else {
-                self.$Modal.error({
-                  title: '提示',
-                  content: res.data.message,
-                  cancelType: true,
-                  titleAlign: 'left',
-                  mask: true,
-                  draggable: true,
-                  keyDown: (event) => {
-                    if (event.keyCode == 27 || event.keyCode == 13) {
-                      self.$Modal.remove();
-                    }
-                  },
-                });
-              }
-              self.btnConfig.loading = false;
-            });
+            self.$network.post('/api/cs/oc/oms/v1/checkOrderBeforeWarehouse', fromdata)
+              .then((res) => {
+                if (res.data.code === 0) {
+                  self.publicBouncedConfig = publicDialogConfig.changeWarehouseConfig;
+                  self.publicBouncedConfig.componentData = {
+                    ids,
+                    CP_C_SHOP_ID: CP_C_SHOP_ID[0],
+                  };
+                  setTimeout(() => {
+                    self.$children
+                      .find(item => item.name === 'changeWarehouse')
+                      .openConfirm();
+                  }, 100);
+                } else {
+                  self.$Modal.error({
+                    title: '提示',
+                    content: res.data.message,
+                    cancelType: true,
+                    titleAlign: 'left',
+                    mask: true,
+                    draggable: true,
+                    keyDown: (event) => {
+                      if (event.keyCode == 27 || event.keyCode == 13) {
+                        self.$Modal.remove();
+                      }
+                    },
+                  });
+                }
+                self.btnConfig.loading = false;
+              });
           } else {
             self.$Message.warning({
               content: '请选择需要修改发货仓库记录！',
@@ -2489,7 +2403,7 @@
           if (self.selection.length > 0) {
             const ids = [];
             const ORDER_STATUS = [];
-            self.selection.map((item, index) => {
+            self.selection.forEach((item, index) => {
               ids[index] = item.ID;
               ORDER_STATUS[index] = item.ORDER_STATUS;
             });
@@ -2587,7 +2501,7 @@
           param.highSearch = self.highSearchData;
           // 列表勾选数据
           const ids = [];
-          self.selection.map((item, index) => {
+          self.selection.forEach((item, index) => {
             ids[index] = item.ID;
           });
 
@@ -2623,7 +2537,7 @@
           };
           // 列表勾选数据
           const ids = [];
-          self.selection.map((item, index) => {
+          self.selection.forEach((item, index) => {
             ids[index] = item.ID;
           });
           self.publicBouncedConfig.componentData = {
@@ -2661,7 +2575,7 @@
 
           // 列表勾选数据
           const ids = [];
-          self.selection.map((item, index) => {
+          self.selection.forEach((item, index) => {
             ids[index] = item.ID;
           });
           self.publicBouncedConfig.componentData = {
@@ -2684,18 +2598,13 @@
             // self.btnConfig.loading = true;
             const ids = [];
             this.pageLoad = true;
-            self.selection.map((item, index) => {
+            self.selection.forEach((item, index) => {
               ids[index] = item.ID;
               if (item.PLATFORM === 50) {
                 isAddGit = false;
               }
             });
-
-            axios({
-              url: '/api/cs/oc/oms/v1/splitOrder',
-              method: 'post',
-              data: { ids },
-            }).then((res) => {
+            this.$network.post('/api/cs/oc/oms/v1/splitOrder', { ids }).then((res) => {
               console.log(res);
               this.pageLoad = false;
               if (res.data.code == 0) {
@@ -2777,11 +2686,7 @@
             cancelText: '确定',
             onCancel: () => {
               self.btnConfig.loading = true;
-              axios({
-                url: '/api/cs/oc/oms/v1/manualUnHoldOrder',
-                method: 'post',
-                data,
-              })
+              self.$network.post('/api/cs/oc/oms/v1/manualUnHoldOrder', data)
                 .then((res) => {
                   self.btnConfig.loading = false;
                   if (res.data.code === 0) {
@@ -2878,7 +2783,7 @@
           //   return;
           // }
           const ids = [];
-          self.selection.map((item, index) => {
+          self.selection.forEach((item, index) => {
             ids[index] = item.ID;
           });
           // self.publicBouncedConfig.componentData = {
@@ -2946,13 +2851,7 @@
         };
         fromdata.append('param', JSON.stringify(param));
         self.pageLoad = true;
-        // self.$network.post('/api/cs/oc/oms/v1/mergeOrderOne', formdata)
-        axios({
-          url: '/api/cs/oc/oms/v1/mergeOrderOne',
-          method: 'post',
-          // cancelToken: true,
-          data: fromdata,
-        })
+        self.$network.post('/api/cs/oc/oms/v1/mergeOrderOne', formdata)
           .then((res) => {
             self.pageLoad = false;
             if (res.data.code === 0) {
@@ -2990,13 +2889,7 @@
         };
         fromdata.append('param', JSON.stringify(param));
         self.pageLoad = true;
-        // self.$network.post('/api/cs/oc/oms/v1/cancelMergeOrder', formdata)
-        axios({
-          url: '/api/cs/oc/oms/v1/cancelMergeOrder',
-          method: 'post',
-          // cancelToken: true,
-          data: fromdata,
-        })
+        self.$network.post('/api/cs/oc/oms/v1/cancelMergeOrder', formdata)
           .then((res) => {
             self.pageLoad = false;
             if (res.data.code === 0) {
@@ -3046,294 +2939,286 @@
         };
         fromdata.append('param', JSON.stringify(params));
         _this.jordanTableConfig.loading = true;
-        axios({
-          url: '/api/cs/oc/oms/v1/getSeniorQueryCondition',
-          // url: "/api/cs/oc/oms/v1/queryListConfig",
-          method: 'post',
-          data: fromdata,
-        }).then((res) => {
-          // 高级查询
-          const formData = [];
-          if (res.data.data) {
-            res.data.data.highSearch.map((item, index) => {
-              if (item.type === 'date') {
-                formData[index] = {
-                  style: item.tabth.isfilter ? 'date' : '', // 输入框类型
-                  type: 'datetimerange', // 文本框类型的input
-                  label: item.tabth.name, // 输入框前文字
-                  value: item.tabth.colname, // 输入框的值
-                  // format: "yyyy-MM-dd hh:mm:ss",
-                  width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-                  icon: 'md-alarm', // 输入框后带的图标,暂只有输入框支持
-                  placeholder: '', // 占位文本，默认为请输入
-                  ghost: false, // 是否关闭幽灵按钮，默认开启
-                  inputenter: () => {
-                    _this.loadData();
-                  }, // 表单回车事件
-                  iconclick: () => {
-                  }, // 点击icon图标事件
-                  clearable: true,
-                };
-                _this.formConfig.formValue[item.tabth.colname] = [];
-              }
-              if (item.type === 'propInput') {
-                formData[index] = {
-                  style: item.tabth.isfilter ? 'popInput' : '', // 输入框弹框单多选
-                  width: '6',
-                  itemdata: {
-                    col: 1,
-                    colid: item.tabth.colid,
-                    colname: item.tabth.colname, // 当前字段的名称
-                    datelimit: 'all',
-                    display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-                    fkdisplay: item.tabth.fkdisplay, // 外键关联类型
-                    fkdesc: item.tabth.fkdesc,
-                    inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
-                    isfk: true, // 是否有fk键
-                    isnotnull: false, // 是否必填
-                    isuppercase: false, // 是否转大写
-                    length: 65535, // 最大长度是多少
-                    name: item.tabth.name, // input前面显示的lable值
-                    readonly: false, // 是否可编辑，对应input   readonly属性
-                    reftable: item.tabth.reftable,
-                    reftableid: item.tabth.reftableid,
-                    row: 1,
-                    statsize: -1,
-                    type: item.tabth.type, // 这个是后台用的
-                    valuedata: '', // 这个是选择的值
-                  },
-                };
-                if (item.tabth.precolnameslist) {
-                  formData[index].itemdata.precolnameslist = item.tabth
-                    .precolnameslist
-                    ? item.tabth.precolnameslist
-                    : [];
+        _this.$network.post('/api/cs/oc/oms/v1/getSeniorQueryCondition', fromdata)
+          .then((res) => {
+            // 高级查询
+            const formData = [];
+            if (res.data.data) {
+              res.data.data.highSearch.forEach((item, index) => {
+                if (item.type === 'date') {
+                  formData[index] = {
+                    style: item.tabth.isfilter ? 'date' : '', // 输入框类型
+                    type: 'datetimerange', // 文本框类型的input
+                    label: item.tabth.name, // 输入框前文字
+                    value: item.tabth.colname, // 输入框的值
+                    // format: "yyyy-MM-dd hh:mm:ss",
+                    width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                    icon: 'md-alarm', // 输入框后带的图标,暂只有输入框支持
+                    placeholder: '', // 占位文本，默认为请输入
+                    ghost: false, // 是否关闭幽灵按钮，默认开启
+                    inputenter: () => {
+                      _this.loadData();
+                    }, // 表单回车事件
+                    iconclick: () => {
+                    }, // 点击icon图标事件
+                    clearable: true,
+                  };
+                  _this.formConfig.formValue[item.tabth.colname] = [];
                 }
-              }
-              if (item.type === 'text') {
-                formData[index] = {
-                  style: item.tabth.isfilter ? 'input' : '', // 输入框类型
-                  label: item.tabth.name, // 输入框前文字
-                  value: item.tabth.colname, // 输入框的值
-                  width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-                  icon: '', // 输入框后带的图标,暂只有输入框支持
-                  clearable: true,
-                  placeholder: '', // 占位文本，默认为请输入
-                  ghost: false, // 是否关闭幽灵按钮，默认开启
-                  inputenter: () => {
-                    _this.loadData();
-                  }, // 表单回车事件
-                  iconclick: () => {
-                  }, // 点击icon图标事件
-                };
-                _this.formConfig.formValue[item.tabth.colname] = '';
-              }
-              if (item.type === 'number') {
-                formData[index] = {
-                  // style: item.tabth.isfilter ? "input" : "", //输入框类型
-                  style: item.tabth.isfilter ? 'bothInput' : '', // 输入框类型
-                  label: item.tabth.name, // 输入框前文字
-                  value: item.tabth.colname, // 输入框的值
-                  clearable: true,
-                  regx: _this.determineTheRegular(item.tabth.colname),
-                  width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-                  icon: '', // 输入框后带的图标,暂只有输入框支持
-                  placeholder: '', // 占位文本，默认为请输入
-                  ghost: false, // 是否关闭幽灵按钮，默认开启
-                  inputenter: () => {
-                    _this.loadData();
-                  }, // 表单回车事件
-                  iconclick: () => {
-                  }, // 点击icon图标事件
-                };
-                _this.formConfig.formValue[item.tabth.colname] = {
-                  value1: '', // 第一个数字框绑定的值
-                  value2: '', // 第二个数字框绑定的值
-                };
-              }
-              if (item.type === 'select') {
-                formData[index] = {
-                  style: item.tabth.isfilter ? 'select' : '', // 下拉框类型
-                  label: item.tabth.name, // 下拉框前的值
-                  width: '6', // 所占宽度宽度
-                  placeholder: '', // 占位文本，默认为请输入
-                  value: item.tabth.colname, // 输入框的值
-                  multiple: true, // 布尔值,下拉框是否开启多选,默认为不开启
-                  selectChange: () => {
-                  }, // 选中事件，默认返回选中的值
-                  options: _this.converSelect(item.tabth.combobox),
-                };
-                _this.formConfig.formValue[item.tabth.colname] = [];
-              }
-            });
-            _this.formConfig.formData = formData;
-            const arr = [];
-            res.data.data.tableHeader.forEach((item) => {
-              const obj = {};
-              obj.headerName = item.title;
-              obj.field = item.key;
-              arr.push(obj);
-            });
-            _this.agTableConfig.columnDefs = arr;
-            _this.jordanTableConfig.loading = false;
-            if (this.$route.query.type === 'workID') {
-              this.searchMethod('workID');
-              this.selectValue = [];
-            } else {
-              this.searchMethod();
-            }
-
-            // 下拉数据 定义
-            const dropList = [];
-            res.data.data.queryInfo.forEach((item, index) => {
-              if (item.type === 'Select') {
-                dropList[index] = {
-                  label: item.displayName, // 字段名称
-                  column: item.queryName, // 字段
-                  placeholder: '', // 占位文本
-                  type: item.type === 'date' ? 'DatePicker' : item.type, // 类型
-                  componentAttribute: {
-                    multiple: true,
-                    'label-in-value': true,
-                  }, // 组件属性
-                  list: item.list, // 选项
-                  value: '', // 选中值
-                };
-              } else if (item.type === 'DropDownSelectFilter') {
-                dropList[index] = {
-                  label: item.displayName, // 字段名称
-                  column: item.queryName, // 字段
-                  placeholder: '', // 占位文本
-                  type: item.type, // 类型 item.type
-                  value: '',
-                  componentAttribute: {
-                    totalRowCount: 0,
-                    single: false, // 是否是单选
-                    data: {
-                      start: 0,
-                      tabth: [],
-                      row: [],
+                if (item.type === 'propInput') {
+                  formData[index] = {
+                    style: item.tabth.isfilter ? 'popInput' : '', // 输入框弹框单多选
+                    width: '6',
+                    itemdata: {
+                      col: 1,
+                      colid: item.tabth.colid,
+                      colname: item.tabth.colname, // 当前字段的名称
+                      datelimit: 'all',
+                      display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+                      fkdisplay: item.tabth.fkdisplay, // 外键关联类型
+                      fkdesc: item.tabth.fkdesc,
+                      inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
+                      isfk: true, // 是否有fk键
+                      isnotnull: false, // 是否必填
+                      isuppercase: false, // 是否转大写
+                      length: 65535, // 最大长度是多少
+                      name: item.tabth.name, // input前面显示的lable值
+                      readonly: false, // 是否可编辑，对应input   readonly属性
+                      reftable: item.tabth.reftable,
+                      reftableid: item.tabth.reftableid,
+                      row: 1,
+                      statsize: -1,
+                      type: item.tabth.type, // 这个是后台用的
+                      valuedata: '', // 这个是选择的值
                     },
-                    pageSize: 10,
-                    AutoData: [],
-                  }, // 组件属性
-                  componentEvent: {
-                    'on-popper-show': (e) => {
-                      let premtype = '';
-                      if (item.selectTab.tabth.name === '店铺') {
-                        premtype = 'CP_C_SHOP_PERMISSION_ID';
-                      } else if (item.selectTab.tabth.name === '发货仓库') {
-                        premtype = 'CP_C_WAREHOUSE_ID';
-                      }
-                      const params = {
-                        isdroplistsearch: true,
-                        refcolid: item.selectTab.tabth.colid,
-                        fixedcolumns: {},
-                        startindex: 0,
-                        range: 10,
-                        precolnameslist: [
-                          {
-                            iswrite: 'false',
-                            refcol: 'ID',
-                            premtype,
-                          },
-                        ],
-                      };
-                      const data = new URLSearchParams();
-                      data.append('searchdata', JSON.stringify(params));
-                      axios({
-                        url: '/p/cs/QueryList',
-                        method: 'post',
-                        data,
-                      }).then((res) => {
-                        dropList[index].componentAttribute.data = res.data.datas;
-                        dropList[index].componentAttribute.totalRowCount = res.data.datas.totalRowCount;
-                      });
-                    },
-                    'on-page-change': (e) => {
-                      let premtype = '';
-                      if (item.selectTab.tabth.name === '店铺') {
-                        premtype = 'CP_C_SHOP_PERMISSION_ID';
-                      } else if (item.selectTab.tabth.name === '发货仓库') {
-                        premtype = 'CP_C_WAREHOUSE_ID';
-                      }
-                      const params = {
-                        isdroplistsearch: true,
-                        refcolid: item.selectTab.tabth.colid,
-                        fixedcolumns: {},
-                        startindex: (e - 1) * 10,
-                        range: 10,
-                        precolnameslist: [
-                          {
-                            iswrite: 'false',
-                            refcol: 'ID',
-                            premtype,
-                          },
-                        ],
-                      };
-                      const data = new URLSearchParams();
-                      data.append('searchdata', JSON.stringify(params));
-                      axios({
-                        url: '/p/cs/QueryList',
-                        method: 'post',
-                        data,
-                      }).then((res) => {
-                        dropList[index].componentAttribute.data = res.data.datas;
-                        dropList[index].componentAttribute.totalRowCount = res.data.datas.totalRowCount;
-                      });
-                    },
-                  },
-                };
+                  };
+                  if (item.tabth.precolnameslist) {
+                    formData[index].itemdata.precolnameslist = item.tabth
+                      .precolnameslist
+                      ? item.tabth.precolnameslist
+                      : [];
+                  }
+                }
+                if (item.type === 'text') {
+                  formData[index] = {
+                    style: item.tabth.isfilter ? 'input' : '', // 输入框类型
+                    label: item.tabth.name, // 输入框前文字
+                    value: item.tabth.colname, // 输入框的值
+                    width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                    icon: '', // 输入框后带的图标,暂只有输入框支持
+                    clearable: true,
+                    placeholder: '', // 占位文本，默认为请输入
+                    ghost: false, // 是否关闭幽灵按钮，默认开启
+                    inputenter: () => {
+                      _this.loadData();
+                    }, // 表单回车事件
+                    iconclick: () => {
+                    }, // 点击icon图标事件
+                  };
+                  _this.formConfig.formValue[item.tabth.colname] = '';
+                }
+                if (item.type === 'number') {
+                  formData[index] = {
+                    // style: item.tabth.isfilter ? "input" : "", //输入框类型
+                    style: item.tabth.isfilter ? 'bothInput' : '', // 输入框类型
+                    label: item.tabth.name, // 输入框前文字
+                    value: item.tabth.colname, // 输入框的值
+                    clearable: true,
+                    regx: _this.determineTheRegular(item.tabth.colname),
+                    width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                    icon: '', // 输入框后带的图标,暂只有输入框支持
+                    placeholder: '', // 占位文本，默认为请输入
+                    ghost: false, // 是否关闭幽灵按钮，默认开启
+                    inputenter: () => {
+                      _this.loadData();
+                    }, // 表单回车事件
+                    iconclick: () => {
+                    }, // 点击icon图标事件
+                  };
+                  _this.formConfig.formValue[item.tabth.colname] = {
+                    value1: '', // 第一个数字框绑定的值
+                    value2: '', // 第二个数字框绑定的值
+                  };
+                }
+                if (item.type === 'select') {
+                  formData[index] = {
+                    style: item.tabth.isfilter ? 'select' : '', // 下拉框类型
+                    label: item.tabth.name, // 下拉框前的值
+                    width: '6', // 所占宽度宽度
+                    placeholder: '', // 占位文本，默认为请输入
+                    value: item.tabth.colname, // 输入框的值
+                    multiple: true, // 布尔值,下拉框是否开启多选,默认为不开启
+                    selectChange: () => {
+                    }, // 选中事件，默认返回选中的值
+                    options: _this.converSelect(item.tabth.combobox),
+                  };
+                  _this.formConfig.formValue[item.tabth.colname] = [];
+                }
+              });
+              _this.formConfig.formData = formData;
+              const arr = [];
+              res.data.data.tableHeader.forEach((item) => {
+                const obj = {};
+                obj.headerName = item.title;
+                obj.field = item.key;
+                arr.push(obj);
+              });
+              _this.agTableConfig.columnDefs = arr;
+              _this.jordanTableConfig.loading = false;
+              if (this.$route.query.type === 'workID') {
+                this.searchMethod('workID');
+                this.selectValue = [];
               } else {
-                dropList[index] = {
-                  label: item.displayName, // 字段名称
-                  column: item.queryName, // 字段
-                  placeholder: '', // 占位文本
-                  type: item.type === 'date' ? 'DatePicker' : item.type, // 类型
-                  componentAttribute:
-                    item.type === 'date'
-                      ? {
-                        type: 'datetimerange',
-                        value: _this.getCurrentTime(), // ["2018-09-07 09:09:09","2018-09-07 09:09:10"]
-                        isEmitOnChange: true,
-                      }
-                      : {}, // 组件属性
-                  componentEvent: {
-                    'on-enter': () => {
-                      setTimeout(() => {
-                        _this.searchMethod();
-                      }, 100);
+                this.searchMethod();
+              }
+
+              // 下拉数据 定义
+              const dropList = [];
+              res.data.data.queryInfo.forEach((item, index) => {
+                if (item.type === 'Select') {
+                  dropList[index] = {
+                    label: item.displayName, // 字段名称
+                    column: item.queryName, // 字段
+                    placeholder: '', // 占位文本
+                    type: item.type === 'date' ? 'DatePicker' : item.type, // 类型
+                    componentAttribute: {
+                      multiple: true,
+                      'label-in-value': true,
+                    }, // 组件属性
+                    list: item.list, // 选项
+                    value: '', // 选中值
+                  };
+                } else if (item.type === 'DropDownSelectFilter') {
+                  dropList[index] = {
+                    label: item.displayName, // 字段名称
+                    column: item.queryName, // 字段
+                    placeholder: '', // 占位文本
+                    type: item.type, // 类型 item.type
+                    value: '',
+                    componentAttribute: {
+                      totalRowCount: 0,
+                      single: false, // 是否是单选
+                      data: {
+                        start: 0,
+                        tabth: [],
+                        row: [],
+                      },
+                      pageSize: 10,
+                      AutoData: [],
+                    }, // 组件属性
+                    componentEvent: {
+                      'on-popper-show': (e) => {
+                        const self = this;
+                        let premtype = '';
+                        if (item.selectTab.tabth.name === '店铺') {
+                          premtype = 'CP_C_SHOP_PERMISSION_ID';
+                        } else if (item.selectTab.tabth.name === '发货仓库') {
+                          premtype = 'CP_C_WAREHOUSE_ID';
+                        }
+                        const params = {
+                          isdroplistsearch: true,
+                          refcolid: item.selectTab.tabth.colid,
+                          fixedcolumns: {},
+                          startindex: 0,
+                          range: 10,
+                          precolnameslist: [
+                            {
+                              iswrite: 'false',
+                              refcol: 'ID',
+                              premtype,
+                            },
+                          ],
+                        };
+                        const data = new URLSearchParams();
+                        data.append('searchdata', JSON.stringify(params));
+                        self.$network.post('/p/cs/QueryList', data)
+                          .then((res) => {
+                            dropList[index].componentAttribute.data = res.data.datas;
+                            dropList[index].componentAttribute.totalRowCount = res.data.datas.totalRowCount;
+                          });
+                      },
+                      'on-page-change': (e) => {
+                        const self = this;
+                        let premtype = '';
+                        if (item.selectTab.tabth.name === '店铺') {
+                          premtype = 'CP_C_SHOP_PERMISSION_ID';
+                        } else if (item.selectTab.tabth.name === '发货仓库') {
+                          premtype = 'CP_C_WAREHOUSE_ID';
+                        }
+                        const params = {
+                          isdroplistsearch: true,
+                          refcolid: item.selectTab.tabth.colid,
+                          fixedcolumns: {},
+                          startindex: (e - 1) * 10,
+                          range: 10,
+                          precolnameslist: [
+                            {
+                              iswrite: 'false',
+                              refcol: 'ID',
+                              premtype,
+                            },
+                          ],
+                        };
+                        const data = new URLSearchParams();
+                        data.append('searchdata', JSON.stringify(params));
+                        self.$network.post('/p/cs/QueryList', data)
+                          .then((res) => {
+                            dropList[index].componentAttribute.data = res.data.datas;
+                            dropList[index].componentAttribute.totalRowCount = res.data.datas.totalRowCount;
+                          });
+                      },
                     },
-                  }, // 组件事件
-                  list: item.list, // 选项
-                  value: '', // 选中值
-                };
-              }
-              if (item.queryName === 'PAY_TIME') {
-                dropList[index].value = `${_this.getCurrentTime()[0]}~${
-                  _this.getCurrentTime()[1]
-                }`;
-                if (_this.selectValue.length === 0) {
-                  _this.selectValue.push(dropList[index]);
+                  };
+                } else {
+                  dropList[index] = {
+                    label: item.displayName, // 字段名称
+                    column: item.queryName, // 字段
+                    placeholder: '', // 占位文本
+                    type: item.type === 'date' ? 'DatePicker' : item.type, // 类型
+                    componentAttribute:
+                      item.type === 'date'
+                        ? {
+                          type: 'datetimerange',
+                          value: _this.getCurrentTime(), // ["2018-09-07 09:09:09","2018-09-07 09:09:10"]
+                          isEmitOnChange: true,
+                        }
+                        : {}, // 组件属性
+                    componentEvent: {
+                      'on-enter': () => {
+                        setTimeout(() => {
+                          _this.searchMethod();
+                        }, 100);
+                      },
+                    }, // 组件事件
+                    list: item.list, // 选项
+                    value: '', // 选中值
+                  };
                 }
-              }
-            });
-            _this.dropList = dropList;
-            // 标签数据 定义
-            const tagList = [];
-            res.data.data.label.map((item, index) => {
-              tagList[index] = {
-                label: item.text,
-                value: `${item.val}`,
-                key: item.key,
-                sort: item.sort,
-                trigger: 'click',
-              };
-            });
-            _this.tagList[0].list = tagList;
-            _this.setSearchOption();
-          }
-        });
+                if (item.queryName === 'PAY_TIME') {
+                  dropList[index].value = `${_this.getCurrentTime()[0]}~${
+                    _this.getCurrentTime()[1]
+                  }`;
+                  if (_this.selectValue.length === 0) {
+                    _this.selectValue.push(dropList[index]);
+                  }
+                }
+              });
+              _this.dropList = dropList;
+              // 标签数据 定义
+              const tagList = [];
+              res.data.data.label.forEach((item, index) => {
+                tagList[index] = {
+                  label: item.text,
+                  value: `${item.val}`,
+                  key: item.key,
+                  sort: item.sort,
+                  trigger: 'click',
+                };
+              });
+              _this.tagList[0].list = tagList;
+              _this.setSearchOption();
+            }
+          });
       },
       // 展开 并获取from页面数据
       shutDownOrbounceOff() {
@@ -3492,7 +3377,7 @@
       // 字段选项组转换
       converSelect(val) {
         const list = [];
-        val.map((item, index) => {
+        val.forEach((item, index) => {
           list[index] = {
             label: item.limitdesc,
             value: item.limitval,
@@ -3546,7 +3431,7 @@
         // 取的标签值
         let label = [];
         const queryInfo = [];
-        this.selectValue.map((item, index) => {
+        this.selectValue.forEach((item, index) => {
           if (item.column === 'tag') {
             label = item.selectedList;
           } else if (item.type === 'DatePicker') {
@@ -3584,7 +3469,7 @@
           }
         });
         const labelData = [];
-        label.map((item, index) => {
+        label.forEach((item, index) => {
           labelData[index] = {
             val: item.value,
             text: item.label,
@@ -3619,14 +3504,10 @@
         };
         const fromdata = new FormData();
         fromdata.append('param', JSON.stringify(param));
-        axios({
-          url: '/api/cs/oc/oms/v1/reallocateLogistics',
-          method: 'post',
-          // cancelToken: true,
-          data: fromdata,
-        }).then((res) => {
+        self.$network.post('/api/cs/oc/oms/v1/reallocateLogistics', fromdata)
+          .then((res) => {
           // this.$Message.success("后台重新分配快递中...");
-        });
+          });
       },
       distributeWarehouse() {
         const self = this;
@@ -3644,19 +3525,14 @@
         };
         const fromdata = new FormData();
         fromdata.append('param', JSON.stringify(param));
-        // self.$network.post("/api/cs/oc/oms/v1/reallocateWarehouse", formdata)
-        axios({
-          url: '/api/cs/oc/oms/v1/reallocateWarehouse',
-          method: 'post',
-          // cancelToken: true,
-          data: fromdata,
-        }).then((res) => {
+        self.$network.post('/api/cs/oc/oms/v1/reallocateWarehouse', formdata)
+          .then((res) => {
           // this.$Message.success("后台重新分配快递中...");
-        });
+          });
       },
       loadData() {
         const arr = [];
-        this.formConfig.formData.map((item, index) => {
+        this.formConfig.formData.forEach((item, index) => {
           if (item.style === 'popInput') {
             arr[index] = {
               type: 'Select',
@@ -3667,7 +3543,7 @@
         });
         const keyArr = [];
         for (const key in this.formConfig.formValue) {
-          this.formConfig.formData.map((item, index) => {
+          this.formConfig.formData.forEach((item, index) => {
             if (item.style !== 'popInput') {
               if (key === item.value) {
                 if (item.style === 'date') {
@@ -3735,15 +3611,7 @@
         const fromdata = new FormData();
         fromdata.append('param', JSON.stringify(param));
         try {
-          // TODO 确定$network如何传canCalToken
-          // let res = self.$network.post('/api/cs/oc/oms/v1/getOrderList', fromdata);
-          const res = await axios({
-            // url: "/api/cs/oc/oms/v1/queryOrderList",
-            url: '/api/cs/oc/oms/v1/getOrderList',
-            method: 'post',
-            // cancelToken: true,
-            data: fromdata,
-          });
+          const res = await self.$network.post('/api/cs/oc/oms/v1/getOrderList', fromdata);
           self.agTableConfig.agLoading = false;
           if (!res.data.data) {
             self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
@@ -3841,7 +3709,7 @@
         const self = this;
         self.btnConfig.loading = true;
         const ids = [];
-        self.selection.map((item, index) => {
+        self.selection.forEach((item, index) => {
           ids[index] = item.ID;
         });
         const param = {
@@ -3859,63 +3727,58 @@
         fromdata.append('filetype', ' .xlsx');
         fromdata.append('showColumnName', true);
         fromdata.append('menu', '批量退单');
-        // self.$network.post("/api/cs/oc/oms/v1/doBatchReturnOrder", formdata)
-        axios({
-          url: '/api/cs/oc/oms/v1/doBatchReturnOrder',
-          method: 'post',
-          // cancelToken: true,
-          data: fromdata,
-        }).then((res) => {
-          self.batchReturnFormConfig.formValue.IS_BACK = false;
-          if (res.data.code === 0) {
-            self.$Message.success(res.data.message);
-            // self.selection = [];
-            // self.$store.commit("TabOpen", {
-            //   id: res.data.data,
-            //   type: 'singleView',
-            //   name: 'singleView',
-            //   label: '我的任务',
-            //   query: {
-            //     id: res.data.data,
-            //     pid: '10010',
-            //     ptitle: '我的任务',
-            //     ptype: 'table',
-            //     tabTitle: '我的任务',
-            //     tableName: 'CP_C_TASK',
-            //   },
-            // })
-            R3.store.commit('global/tabOpen', {
-              type: 'V',
-              tableName: 'CP_C_TASK',
-              label: '我的任务',
-              tableId: 24386,
-              id: res.data.data,
-              query: {
-                id: res.data.data,
-                pid: '10010',
-                ptitle: '我的任务',
-                ptype: 'table',
-                tabTitle: '我的任务',
+        self.$network.post('/api/cs/oc/oms/v1/doBatchReturnOrder', formdata)
+          .then((res) => {
+            self.batchReturnFormConfig.formValue.IS_BACK = false;
+            if (res.data.code === 0) {
+              self.$Message.success(res.data.message);
+              // self.selection = [];
+              // self.$store.commit("TabOpen", {
+              //   id: res.data.data,
+              //   type: 'singleView',
+              //   name: 'singleView',
+              //   label: '我的任务',
+              //   query: {
+              //     id: res.data.data,
+              //     pid: '10010',
+              //     ptitle: '我的任务',
+              //     ptype: 'table',
+              //     tabTitle: '我的任务',
+              //     tableName: 'CP_C_TASK',
+              //   },
+              // })
+              R3.store.commit('global/tabOpen', {
+                type: 'V',
                 tableName: 'CP_C_TASK',
-              },
-            });
-          } else {
-            self.$Modal.error({
-              title: '提示',
-              content: res.data.message,
-              cancelType: true,
-              titleAlign: 'left',
-              mask: true,
-              draggable: true,
-              keyDown: (event) => {
-                if (event.keyCode === 27 || event.keyCode === 13) {
-                  self.$Modal.remove();
-                }
-              },
-            });
-          }
-          self.btnConfig.loading = false;
-        });
+                label: '我的任务',
+                tableId: 24386,
+                id: res.data.data,
+                query: {
+                  id: res.data.data,
+                  pid: '10010',
+                  ptitle: '我的任务',
+                  ptype: 'table',
+                  tabTitle: '我的任务',
+                  tableName: 'CP_C_TASK',
+                },
+              });
+            } else {
+              self.$Modal.error({
+                title: '提示',
+                content: res.data.message,
+                cancelType: true,
+                titleAlign: 'left',
+                mask: true,
+                draggable: true,
+                keyDown: (event) => {
+                  if (event.keyCode === 27 || event.keyCode === 13) {
+                    self.$Modal.remove();
+                  }
+                },
+              });
+            }
+            self.btnConfig.loading = false;
+          });
       },
       //  获取页面数据
       async getData1() {
@@ -3951,13 +3814,7 @@
         const fromdata = new FormData();
         fromdata.append('param', JSON.stringify(param));
         try {
-          // let res = await self.$network.post('/api/cs/oc/oms/v1/queryOrderList', formdata);
-          const res = await axios({
-            url: '/api/cs/oc/oms/v1/queryOrderList',
-            method: 'post',
-            // cancelToken: true,
-            data: fromdata,
-          });
+          const res = await self.$network.post('/api/cs/oc/oms/v1/queryOrderList', formdata);
           self.jordanTableConfig.loading = false;
           self.agTableConfig.agLoading = false;
           if (res.data.code === 0) {
@@ -4054,12 +3911,6 @@
        */
       notempty(val) {
         const arr = val.filter(val => val !== '' && val !== undefined);
-        // val.map((val, index) => {
-        //   //过滤规则为，不为空串、不为null、不为undefined，也可自行修改
-        //   if (val !== "" && val != undefined) {
-        //     arr.push(val);
-        //   }
-        // });
         return arr;
       },
 
@@ -4090,22 +3941,19 @@
         const fromdata = new FormData();
         const idList = { idList: ids };
         fromdata.append('param', JSON.stringify(idList));
-        axios({
-          url: '/api/cs/oc/oms/v1/exportOcBOrder',
-          method: 'post',
-          data: fromdata,
-        }).then((res) => {
-          this.isExport = false;
-          if (res.data.code == 0 && res.data.data !== null) {
-            const mes = res.data.message || '导出成功！';
-            this.$Message.success(mes);
-            this.downloadUrlFile(res.data.data);
+        this.$network.post('/api/cs/oc/oms/v1/exportOcBOrder', fromdata)
+          .then((res) => {
+            this.isExport = false;
+            if (res.data.code == 0 && res.data.data !== null) {
+              const mes = res.data.message || '导出成功！';
+              this.$Message.success(mes);
+              this.downloadUrlFile(res.data.data);
             // return (window.location = res.data.data);
-          } else {
-            const err = res.data.message || '失败！';
-            this.$Message.error(err);
-          }
-        });
+            } else {
+              const err = res.data.message || '失败！';
+              this.$Message.error(err);
+            }
+          });
       },
       // 警告框确认
       warningOk() {
@@ -4124,27 +3972,24 @@
         };
         const fromdata = new FormData();
         fromdata.append('param', JSON.stringify(param));
-        axios({
-          url: '/api/cs/oc/oms/v1/exportOcBOrder',
-          method: 'post',
-          data: fromdata,
-        }).then((res) => {
-          this.isExport = false;
-          if (res.data.code == 0 && res.data.data !== null) {
-            const mes = res.data.message || '导出成功！';
-            _this.$Message.success(mes);
-            _this.downloadUrlFile(res.data.data);
+        self.$network.post('/api/cs/oc/oms/v1/exportOcBOrder', fromdata)
+          .then((res) => {
+            this.isExport = false;
+            if (res.data.code == 0 && res.data.data !== null) {
+              const mes = res.data.message || '导出成功！';
+              _this.$Message.success(mes);
+              _this.downloadUrlFile(res.data.data);
             // return (window.location = res.data.data);
-          } else {
-            const err = res.data.message || '失败！';
-            _this.$Message.error(err);
-          }
-        });
+            } else {
+              const err = res.data.message || '失败！';
+              _this.$Message.error(err);
+            }
+          });
       },
       // 数组对象根据子元素某各个key合并分组
       sonList(arr, key) {
         const obj = [];
-        arr.map((item) => {
+        arr.forEach((item) => {
           obj.push(item[key]);
         });
         return obj;
