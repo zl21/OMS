@@ -48,6 +48,7 @@ const {
   network,
   urlSearchParams
 } = R3;
+window.R3 = R3;
 Vue.prototype.$network = network;
 Vue.prototype.$urlSearchParams = urlSearchParams;
 Vue.prototype.$theme = customizedTheme;//将主题方法挂载到原型上
