@@ -7,7 +7,7 @@ export const buttonPermissionsMixin = {
       let independent = []
       axios({
         method: "get",
-        url: "/p/cs/fetchActionsInCustomizePage",
+        url: "/p/cs/v2/fetchActionsInCustomizePage",
         params: {
           param: {
             AD_ACTION_NAME: params
@@ -26,6 +26,9 @@ export const buttonPermissionsMixin = {
           console.log(a, 'a')
           let c = []
           result.forEach((element, index) => {
+            if (element.child) {
+              this.buttonChild(element, this[arrry].buttons, c);
+            }
             this[arrry].buttons.forEach((btn, btnIndex) => {
               if (element.webdesc && element.webdesc == btn.text) {
                 c.push(btn)
@@ -40,6 +43,21 @@ export const buttonPermissionsMixin = {
           }
         });
     },
+    buttonChild(ele, btns, arr) {
+      let obj = {};
+      let ar = [];
+      obj['menuText'] = ele.caption;
+      obj['dropDown'] = true;
+      ele.child.map(item => {
+        btns.map(s_item => {
+          if (item.webdesc == s_item.text) {
+            ar.push(s_item);
+          }
+        })
 
+      });
+      obj['menus'] = ar;
+      arr.push(obj);
+    }
   }
 };

@@ -1622,7 +1622,7 @@
     flex: 20;
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
     // margin-top: 20px;
     position: relative;
     overflow: inherit;

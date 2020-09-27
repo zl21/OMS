@@ -1803,7 +1803,8 @@
 </script>
 
 <style lang='less'>
-@import '../../../../../static/skin/public.less';
+// @import '../../../../../static/skin/public.less';
+@import '~@burgeon/oms-theme/skin/public.less';
 .scanIn {
   position: relative;
   .scan_button {
@@ -1824,7 +1825,7 @@
     margin: 10px 0 10px 37px;
     font-size: 16px;
     font-weight: 600;
-    border-bottom: 3px solid @publicColor;
+    border-bottom: 3px solid #f00;
     width: 120px;
     padding-bottom: 5px;
   }

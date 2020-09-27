@@ -316,78 +316,6 @@ export default {
               self.setFavorite();
             } //按钮点击事件
           }
-          // {
-          //   type: "", //按钮类型
-          //   text: "", //按钮文本
-          //   icon: "iconfont no_favorite", //按钮图标
-          //   size: "small", //按钮大小
-          //   isShow: false,
-          //   btnclick: () => {
-          //     let self = this;
-          //     let fromdata = new URLSearchParams();
-          //     fromdata.append("id", self.$route.query.id);
-          //     fromdata.append("type", "action");
-          //     if (!self.isFavorite) {
-          //       axios({
-          //         url: "/p/cs/addToFavorite",
-          //         method: "post",
-          //         data: fromdata
-          //       }).then(function(res) {
-          //         if (res.data.code === 0) {
-          //           let lists = res.data.data || [];
-          //           self.getisFavorite(lists);
-          //         }
-          //       });
-          //     } else {
-          //       axios({
-          //         url: "/p/cs/removeFromFavorite",
-          //         method: "post",
-          //         data: fromdata
-          //       }).then(function(res) {
-          //         if (res.data.code === 0) {
-          //           let lists = res.data.data || [];
-          //           self.getisFavorite(lists);
-          //         }
-          //       });
-          //     }
-          //   } //按钮点击事件
-          // },
-          // {
-          //   type: "", //按钮类型
-          //   text: "", //按钮文本
-          //   icon: "iconfont favorite", //按钮图标
-          //   size: "small", //按钮大小
-          //   isShow: false,
-          //   btnclick: () => {
-          //     let self = this;
-          //     let fromdata = new URLSearchParams();
-          //     fromdata.append("id", self.$route.query.id);
-          //     fromdata.append("type", "action");
-          //     if (!self.isFavorite) {
-          //       axios({
-          //         url: "/p/cs/addToFavorite",
-          //         method: "post",
-          //         data: fromdata
-          //       }).then(function(res) {
-          //         if (res.data.code === 0) {
-          //           let lists = res.data.data || [];
-          //           self.getisFavorite(lists);
-          //         }
-          //       });
-          //     } else {
-          //       axios({
-          //         url: "/p/cs/removeFromFavorite",
-          //         method: "post",
-          //         data: fromdata
-          //       }).then(function(res) {
-          //         if (res.data.code === 0) {
-          //           let lists = res.data.data || [];
-          //           self.getisFavorite(lists);
-          //         }
-          //       });
-          //     }
-          //   } //按钮点击事件
-          // }
         ]
       },
       formConfig: {
@@ -612,8 +540,9 @@ export default {
         // 高级查询
         let formData = [];
         res.data.data.search.date.map((item, index) => {
-          if (item.type === "date") {
-            formData[index] = {
+          switch (item.type) {
+            case "date":
+              formData[index] = {
               style: item.tabth.isfilter ? "date" : "", //输入框类型
               type: "datetimerange", //文本框类型的input
               label: item.tabth.name, //输入框前文字
@@ -630,12 +559,10 @@ export default {
               iconclick: () => { }, //点击icon图标事件
               clearable: true
             };
-            if (item.tabth.name === '创建时间') _this.formConfig.formValue[item.tabth.colname] = [addSevenDay, getCurrentTime]
-            else _this.formConfig.formValue[item.tabth.colname] = []
-
-          }
-          if (item.type === "propInput") {
-            formData[index] = {
+            item.tabth.name === '创建时间' ? _this.formConfig.formValue[item.tabth.colname] = [addSevenDay, getCurrentTime] : _this.formConfig.formValue[item.tabth.colname] = [];
+            break;
+            case "propInput" :
+              formData[index] = {
               style: item.tabth.isfilter ? "popInput" : "", //输入框弹框单多选
               width: "6",
               itemdata: {
@@ -666,10 +593,10 @@ export default {
                 _this.oneObjs(e);
               }
             };
-            if (item.tabth.precolnameslist) formData[index].itemdata.precolnameslist = item.tabth.precolnameslist ? item.tabth.precolnameslist : []
-          }
-          if (item.type === "text") {
-            formData[index] = {
+            if (item.tabth.precolnameslist) formData[index].itemdata.precolnameslist = item.tabth.precolnameslist ? item.tabth.precolnameslist : [];
+            break;
+            case "text":
+              formData[index] = {
               style: item.tabth.isfilter ? "input" : "", //输入框类型
               // type: "", //文本框类型的input
               label: item.tabth.name, //输入框前文字
@@ -685,9 +612,9 @@ export default {
               iconclick: () => { } //点击icon图标事件
             };
             _this.formConfig.formValue[item.tabth.colname] = "";
-          }
-          if (item.type === "number") {
-            formData[index] = {
+            break;
+            case "number":
+              formData[index] = {
               style: item.tabth.isfilter ? "input" : "", //输入框类型
               // type: "", //文本框类型的input
               label: item.tabth.name, //输入框前文字
@@ -703,9 +630,9 @@ export default {
               iconclick: () => { } //点击icon图标事件
             };
             _this.formConfig.formValue[item.tabth.colname] = "";
-          }
-          if (item.type === "select") {
-            formData[index] = {
+            break;
+            case "select":
+              formData[index] = {
               style: item.tabth.isfilter ? "select" : "", //下拉框类型
               label: item.tabth.name, //下拉框前的值
               width: "6", //所占宽度宽度
@@ -735,7 +662,8 @@ export default {
               options: _this.converSelect(item.tabth.combobox)
             };
             _this.formConfig.formValue[item.tabth.colname] = [];
-          }
+            break;
+          };
         });
         _this.formConfig.formData = formData;
         // 表头赋值
@@ -751,14 +679,18 @@ export default {
     oneObjs(e) {
       const _this = this;
       _this.formConfig.formData.forEach(item => {
-        if (item.itemdata) {
-          if (item.itemdata.name == e.name && item.itemdata.name == '物流公司') {
-            _this.formConfig.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid;
-          } else if (item.itemdata.name == e.name && item.itemdata.name == '入库仓库') {
-            _this.formConfig.formValue.IN_STORE_ID = item.itemdata.pid;
-          } else if (item.itemdata.name == e.name && item.itemdata.name == '批货编号') {
-            _this.formConfig.formValue.OC_B_REFUND_BATCH_ID = item.itemdata.pid;
-          }
+        if (item.itemdata && item.itemdata.name == e.name) {
+          switch (item.itemdata.name) {
+            case '物流公司':
+              _this.formConfig.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid;
+              break;
+            case '入库仓库':
+              _this.formConfig.formValue.IN_STORE_ID = item.itemdata.pid;
+              break;
+            case '批货编号':
+              _this.formConfig.formValue.OC_B_REFUND_BATCH_ID = item.itemdata.pid;
+              break;
+          };
         }
       })
     },
@@ -823,7 +755,6 @@ export default {
       axios({
         url: "/api/cs/oc/oms/v1/ReturnStorageList",
         method: "post",
-        cancelToken: true,
         data: params
       }).then(res => {
         //if (res.data.code === 1) {
@@ -850,8 +781,6 @@ export default {
     onSelectAllCancel(selection) {
       this.selection = selection;
     },
-    // 单击某一行时触发
-    onRowClick(row, index) { },
     // 单击某二行时触发
     onRowDblclick(row, index) {
       this.$store.commit("TabHref", {
@@ -866,7 +795,6 @@ export default {
         })
       });
     },
-    tableDeleteDetail() { },
     // 分页change 事件
     pageChange(val) {
       this.tableConfig.current = val;
@@ -877,31 +805,6 @@ export default {
       this.tableConfig.pageSize = val;
       this.request();
     },
-    // getisFavorite(lists) {
-    //   let self = this;
-    //   if (lists) {
-    //     let l = lists.find(l => {
-    //       return l.value === "returnStoreageList";
-    //     });
-    //     self.isFavorite = l && l.value ? true : false;
-    //     self.btnConfig.buttons[8].isShow = !self.isFavorite;
-    //     self.btnConfig.buttons[9].isShow = self.isFavorite;
-    //     self.$store.commit("updateFavoriteList", lists);
-    //     return;
-    //   }
-    //   let fromdata = new URLSearchParams();
-    //   fromdata.append("id", self.$route.query.id);
-    //   fromdata.append("type", "action");
-    //   axios({
-    //     url: "/p/cs/getUserConfig",
-    //     method: "post",
-    //     data: fromdata
-    //   }).then(function(res) {
-    //     self.isFavorite = res.data.data.isFavorite;
-    //     self.btnConfig.buttons[8].isShow = !self.isFavorite;
-    //     self.btnConfig.buttons[9].isShow = self.isFavorite;
-    //   });
-    // },
     setTableHeight() {
       let tableHeight = document.getElementsByClassName("jordan-table-box")[0]
         .clientHeight;

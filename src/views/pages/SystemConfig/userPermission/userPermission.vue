@@ -68,7 +68,7 @@
                 :class="{ 'ff-user-click-active': currentItem.ID === item.ID }"
                 :key="index"
               >
-                <td v-for="(list, i) of middleList.header">
+                <td v-for="(list, i) of middleList.header" :key="i">
                   {{ item[list.colname] }}
                 </td>
               </tr>
@@ -101,9 +101,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(list, index) of rightListBody">
+              <tr v-for="(list, index) of rightListBody" :key="index">
                 <td>{{ index + 1 }}</td>
-                <td v-for="(data, sub) of rightListHead[activeName]">
+                <td v-for="(data, sub) of rightListHead[activeName]" :key="sub">
                   <span
                     v-if="
                       data.name !== 'ISMAIN' &&
@@ -126,9 +126,9 @@
         <div class="rightware_table_center_M">
           <table>
             <tbody>
-              <tr v-for="(list, index) of rightListBody">
+              <tr v-for="(list, index) of rightListBody" :key="index">
                 <td>{{ index + 1 }}</td>
-                <td v-for="(data, sub) of rightListHead[activeName]">
+                <td v-for="(data, sub) of rightListHead[activeName]" :key="sub">
                   <span
                     v-if="
                       data.name !== 'ISMAIN' &&
@@ -161,7 +161,6 @@
 <script>
 import tree from 'framework/components/tree/tree2.vue'
 import axios from 'framework/__utils__/request'
-import { post } from 'framework/__utils__/request'
 export default {
   data() {
     return {
@@ -361,9 +360,6 @@ export default {
       this.getPermission(this.currentItem)
     }) //获取用户头部数据
     this.getCstoreorgload() //获取树节点
-    /*this.$nextTick(function () {
-        _this.sheetWidth = $(".table_first").width() + 17;
-      });*/
   },
   components: {
     tree,
@@ -384,15 +380,7 @@ export default {
         let data = res.data
         this.rightLoading = false
         if (data.code === 0) {
-          this.rightListBody =
-            data.data /*.map((obj) => {
-              return {
-                distribCenter: obj.CP_C_DISTRIB_ENAME,//配销中心
-                storehouse: obj.STOREENAME,//店仓
-                touching: obj.ISMAIN,//制单主店仓
-                examine: obj.ISREAD,//查看主店仓
-              }
-            })*/
+          this.rightListBody = data.data
         }
       })
     }, //获取最右边的数据
@@ -419,7 +407,7 @@ export default {
           if (data.code === 0) {
             let arr = data.datas.row.map((obj) => {
               let listData = {}
-              Object.keys(obj).map((label) => {
+              Object.keys(obj).forEach((label) => {
                 listData[label] = obj[label].val
               })
               return listData
@@ -441,7 +429,7 @@ export default {
       }).then((res) => {
         let data = res.data
         if (data.code === 0) {
-          data.datas['dataarry'].map((obj, index) => {
+          data.datas['dataarry'].forEach((obj, index) => {
             if (index > 1) return
             this.middleList.header.push(obj)
           })
@@ -684,6 +672,7 @@ export default {
     }, //获取每个子节点的方法
     initTreeNodes() {
       let result = this.convertTree(this.treeData)
+      console.log(result);
       if (result.roots[0] !== undefined) {
         result.roots[0].clickNode = true
       }
@@ -691,13 +680,13 @@ export default {
       this.treeNodes = result.nodes
     }, //加载树的方法
     convertTree(datas) {
-      var begin = new Date().getTime()
-      var map = {}
-      var roots = []
-      var nodes = []
+      let begin = new Date().getTime()
+      let map = {}
+      let roots = []
+      let nodes = []
 
       function get(id) {
-        var n = map[id]
+        let n = map[id]
         if (n === undefined) {
           n = {
             ID: id,
@@ -719,7 +708,7 @@ export default {
       }
 
       function node(val) {
-        var n = get(val.ID)
+        let n = get(val.ID)
         n.CP_C_ORGUP_ID = val.CP_C_ORGUP_ID
         n.ID = val.ID
         n.MIXNAME = val.MIXNAME
@@ -739,14 +728,15 @@ export default {
         node(datas[index])
       }
       nodes = nodes.concat(roots)
-      for (var index = 0; index < nodes.length; index++) {
-        var node = nodes[index]
+      for (let index = 0; index < nodes.length; index++) {
+        let node = nodes[index]
         if (node.getChildren().length > 0) {
           node.getChildren()[node.getChildren().length - 1].lastChild = true
         }
       }
-      var end = new Date().getTime()
-      return (window.$test = { roots, map, nodes, vm: this })
+      let end = new Date().getTime()
+      // return (window.$test = { roots, map, nodes, vm: this })  //2020-09-27 为何要将参数挂载在windows对象？观察一段时间
+      return { roots, map, nodes, vm: this }
     }, //转化树节点数据
   },
   watch: {
