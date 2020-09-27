@@ -68,7 +68,7 @@
                 :class="{ 'ff-user-click-active': currentItem.ID === item.ID }"
                 :key="index"
               >
-                <td v-for="(list, i) of middleList.header">
+                <td v-for="(list, i) of middleList.header" :key="i">
                   {{ item[list.colname] }}
                 </td>
               </tr>
@@ -101,9 +101,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(list, index) of rightListBody">
+              <tr v-for="(list, index) of rightListBody" :key="index">
                 <td>{{ index + 1 }}</td>
-                <td v-for="(data, sub) of rightListHead[activeName]">
+                <td v-for="(data, sub) of rightListHead[activeName]" :key="sub">
                   <span
                     v-if="
                       data.name !== 'ISMAIN' &&
@@ -126,9 +126,9 @@
         <div class="rightware_table_center_M">
           <table>
             <tbody>
-              <tr v-for="(list, index) of rightListBody">
+              <tr v-for="(list, index) of rightListBody" :key="index">
                 <td>{{ index + 1 }}</td>
-                <td v-for="(data, sub) of rightListHead[activeName]">
+                <td v-for="(data, sub) of rightListHead[activeName]" :key="sub">
                   <span
                     v-if="
                       data.name !== 'ISMAIN' &&
@@ -161,7 +161,6 @@
 <script>
 import tree from 'framework/components/tree/tree2.vue'
 import axios from 'framework/__utils__/request'
-import { post } from 'framework/__utils__/request'
 export default {
   data() {
     return {
@@ -361,9 +360,6 @@ export default {
       this.getPermission(this.currentItem)
     }) //获取用户头部数据
     this.getCstoreorgload() //获取树节点
-    /*this.$nextTick(function () {
-        _this.sheetWidth = $(".table_first").width() + 17;
-      });*/
   },
   components: {
     tree,
@@ -384,15 +380,7 @@ export default {
         let data = res.data
         this.rightLoading = false
         if (data.code === 0) {
-          this.rightListBody =
-            data.data /*.map((obj) => {
-              return {
-                distribCenter: obj.CP_C_DISTRIB_ENAME,//配销中心
-                storehouse: obj.STOREENAME,//店仓
-                touching: obj.ISMAIN,//制单主店仓
-                examine: obj.ISREAD,//查看主店仓
-              }
-            })*/
+          this.rightListBody = data.data
         }
       })
     }, //获取最右边的数据
@@ -419,7 +407,7 @@ export default {
           if (data.code === 0) {
             let arr = data.datas.row.map((obj) => {
               let listData = {}
-              Object.keys(obj).map((label) => {
+              Object.keys(obj).forEach((label) => {
                 listData[label] = obj[label].val
               })
               return listData
@@ -441,7 +429,7 @@ export default {
       }).then((res) => {
         let data = res.data
         if (data.code === 0) {
-          data.datas['dataarry'].map((obj, index) => {
+          data.datas['dataarry'].forEach((obj, index) => {
             if (index > 1) return
             this.middleList.header.push(obj)
           })
