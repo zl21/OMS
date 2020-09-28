@@ -8,19 +8,12 @@
       </template>
     </jordanForm>
     <div class="dialog-footer">
-      <Button type="primary"  @click="downloadPublicAll"
-        >确定</Button
-      >
+      <Button type="primary"  @click="downloadPublicAll">确定</Button>
       <Button
         type="error"
         ghost 
-        @click="
-          () => {
-            this.$emit('closeActionDialog');
-          }
-        "
-        >取消</Button
-      >
+        @click="() => {this.$emit('closeActionDialog');}"
+        >取消</Button>
     </div>
     <jordan-dialog
       ref="dialog"
@@ -416,8 +409,8 @@ export default {
         this.downloadRenterOrder(this.pulicUrl);
       }
     },
-    downloadRenterOrder(url) {
-      //通用退单下载方法
+    // 淘宝分销、淘宝经销、通用订单
+    downloadPublic(url) {
       const _this = this;
       const downData = _this.downLoadPublicFormConfig;
       if (!downData.formData[0].itemdata.pid) {
@@ -458,29 +451,26 @@ export default {
         }
       });
     },
-    // 淘宝分销、淘宝经销、通用订单
-    downloadPublic(url) {
-      const _this = this;
+     // 通用商品下载
+    downloadPublicGoods(url) {
+      let _this = this;
       const downData = _this.downLoadPublicFormConfig;
       if (!downData.formData[0].itemdata.pid) {
         return _this.$Message.warning("请选择需要下载的店铺");
       }
-      if (
-        downData.formValue.startEndTimes[0] === "" &&
-        downData.formValue.orderNum === ""
-      ) {
-        return _this.$Message.warning("请选择输入日期或输入订单编号");
-      }
       let param = {
         shop_id: downData.formData[0].itemdata.pid,
-        bill_no: downData.formValue.orderNum, //订单编号
-        start_time: _this.standardTimeConversiondateToStr(
-          downData.formValue.startEndTimes[0]
-        ), //开始时间
-        end_time: _this.standardTimeConversiondateToStr(
-          downData.formValue.startEndTimes[1]
-        ), //结束时间
-        status: downData.formValue.orderStatus, //状态 必传 给默认值
+        sp_ids: downData.formValue.sp_ids,
+        start_time: downData.formValue.startEndTimes[0]
+          ? _this.standardTimeConversiondateToStr(
+              downData.formValue.startEndTimes[0]
+            )
+          : undefined, //开始时间
+        end_time: downData.formValue.startEndTimes[1]
+          ? _this.standardTimeConversiondateToStr(
+              downData.formValue.startEndTimes[1]
+            )
+          : undefined, //结束时间
         table: _this.tablename, //当前表名 必传
       };
       let fromdata = new FormData();
@@ -493,8 +483,6 @@ export default {
         if (res.data.code === 0) {
           _this.$Message.success(res.data.message);
           _this.$emit("closeActionDialog");
-          // _this.taskId = res.data.message.match(/\d+/)[0];
-          // _this.downLoadModal = true;
         } else {
           _this.$Message.error(res.data.message);
         }
@@ -543,26 +531,30 @@ export default {
         }
       });
     },
-    // 通用商品下载
-    downloadPublicGoods(url) {
-      let _this = this;
+    //IP_B_STANDPLAT_REFUND
+    downloadRenterOrder(url) {
+      //通用退单下载方法
+      const _this = this;
       const downData = _this.downLoadPublicFormConfig;
       if (!downData.formData[0].itemdata.pid) {
         return _this.$Message.warning("请选择需要下载的店铺");
       }
+      if (
+        downData.formValue.startEndTimes[0] === "" &&
+        downData.formValue.orderNum === ""
+      ) {
+        return _this.$Message.warning("请选择输入日期或输入订单编号");
+      }
       let param = {
         shop_id: downData.formData[0].itemdata.pid,
-        sp_ids: downData.formValue.sp_ids,
-        start_time: downData.formValue.startEndTimes[0]
-          ? _this.standardTimeConversiondateToStr(
-              downData.formValue.startEndTimes[0]
-            )
-          : undefined, //开始时间
-        end_time: downData.formValue.startEndTimes[1]
-          ? _this.standardTimeConversiondateToStr(
-              downData.formValue.startEndTimes[1]
-            )
-          : undefined, //结束时间
+        bill_no: downData.formValue.orderNum, //订单编号
+        start_time: _this.standardTimeConversiondateToStr(
+          downData.formValue.startEndTimes[0]
+        ), //开始时间
+        end_time: _this.standardTimeConversiondateToStr(
+          downData.formValue.startEndTimes[1]
+        ), //结束时间
+        status: downData.formValue.orderStatus, //状态 必传 给默认值
         table: _this.tablename, //当前表名 必传
       };
       let fromdata = new FormData();
@@ -575,11 +567,14 @@ export default {
         if (res.data.code === 0) {
           _this.$Message.success(res.data.message);
           _this.$emit("closeActionDialog");
+          // _this.taskId = res.data.message.match(/\d+/)[0];
+          // _this.downLoadModal = true;
         } else {
           _this.$Message.error(res.data.message);
         }
       });
     },
+    // 时间格式化
     standardTimeConversiondateToStr(val) {
       var dateTime = new Date(val);
       var year = dateTime.getFullYear();
