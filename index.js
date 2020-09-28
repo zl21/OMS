@@ -35,7 +35,10 @@ import request, {
 import ajax from 'framework/__utils__/ajax';
 import store from '@/config/store/store'; // 将老框架公共状态注册为customize模块
 import groups from '@/assets/js/promotion/groups.js';// 促销需要
+
 import connector from './src/views/pages/common/orderDetail/connector.js';
+
+// import 'omsTheme/skin/skyBlue/index.min.css'
 
 groups.load();
 Vue.prototype.$ajax = ajax;
@@ -54,7 +57,8 @@ Vue.prototype.$urlSearchParams = urlSearchParams;
 Vue.prototype.$theme = customizedTheme;//将主题方法挂载到原型上
 
 // 设置主题调用方法
-customizedTheme.appendLink(customizedTheme.skyBlue)
+
+customizedTheme.appendLink('skyBlue')
 
 function restructureMenuTreeData(data) {
   return data.map((item) => {
