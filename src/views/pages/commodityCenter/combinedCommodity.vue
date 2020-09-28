@@ -1365,7 +1365,7 @@ export default {
           {
             text: "返回",
             btnclick: () => {
-              this.$store.commit("TabHref", {
+              this.$store.commit("customize/TabHref", {
                 id: 24525,
                 type: "table",
                 name: "PS_C_PRO_GROUP",
@@ -1390,7 +1390,7 @@ export default {
             size: "", //按钮大小
             disabled: false, //按钮禁用控制
             btnclick: () => {
-              this.$store.commit("TabHref", {
+              this.$store.commit("customize/TabHref", {
                 id: -1,
                 type: "action",
                 name: "combinedCommodity",
@@ -1445,7 +1445,7 @@ export default {
           {
             text: "返回",
             btnclick: () => {
-              this.$store.commit("TabHref", {
+              this.$store.commit("customize/TabHref", {
                 back: true,
                 id: 24525,
                 type: "table",
@@ -1920,7 +1920,7 @@ export default {
         if (data.code === 0) {
           this.$Message.success(data.message);
           if (type === "-1") {
-            this.$store.commit("TabHref", {
+            this.$store.commit("customize/TabHref", {
               //返回列表页面
               id: 24525,
               type: "table",

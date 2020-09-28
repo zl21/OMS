@@ -1282,7 +1282,7 @@ export default {
             disabled: false, //按钮禁用控制
             btnclick: () => {
               // this.$router.push({ path: "/m/action/returngoodList?id=2661" });
-              this.$store.commit("TabHref", {
+              this.$store.commit("customize/TabHref", {
                 id: 2661,
                 type: "action",
                 name: "returngoodList",
@@ -1353,7 +1353,7 @@ export default {
             disabled: false, //按钮禁用控制
             btnclick: () => {
               // this.$router.push({ path: "/m/action/returngoodList?id=2661" });
-              this.$store.commit("TabHref", {
+              this.$store.commit("customize/TabHref", {
                 id: 2661,
                 type: "action",
                 name: "returngoodList",
@@ -3624,7 +3624,7 @@ export default {
         _this.isSaveLoading = false;
         if (res.data.code === 0) {
           _this.$Message.success(res.data.message);
-          _this.$store.commit("TabHref", {
+          _this.$store.commit("customize/TabHref", {
             id: 2661,
             type: "action",
             name: "returngoodList",

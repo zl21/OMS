@@ -20,7 +20,7 @@
 
 <script>
 import jordanButton from "professionalComponents/jordanButton";
-import jordanActionTable from "../../../components/jordanActionTable";
+import jordanActionTable from "professionalComponents/jordanActionTable.vue";
 import EasyMatrix from "../../../components/combineMatrix/easyMatrix";
 import axios from "axios";
 import { listeningToKeydownMixin } from "../../../mixins/listeningToKeydown.js";

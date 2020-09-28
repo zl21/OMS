@@ -1,17 +1,16 @@
-
 <template>
   <div class="scanIn">
     <!-- 按钮 -->
     <div class="scan_button">
-      <jordan-button :btn-config="btnConfig" />
+      <jordan-button :btn-config="btnConfig"/>
     </div>
     <!-- 高级搜索 -->
     <div class="scan_search">
       <IntegrateSearchFilter
-        v-model="searchValue"
         :drop-down-list="dropList"
-        :search-method="searchMethod"
         :is-search-item-show="false"
+        :search-method="searchMethod"
+        v-model="searchValue"
       />
     </div>
     <!-- 扫描信息 -->
@@ -21,9 +20,10 @@
           size="18"
           style="margin-right: 5px;"
           type="md-paper"
-        />扫描信息
+        />
+        扫描信息
       </div>
-      <jordan-form :form-config="formConfig1" />
+      <jordan-form :form-config="formConfig1"/>
     </div>
     <!-- 录入信息 -->
     <div class="scan_logg">
@@ -32,13 +32,14 @@
           size="18"
           style="margin-right: 5px;"
           type="md-paper"
-        />录入信息
+        />
+        录入信息
       </div>
-      <jordan-form :form-config="formConfig2" />
+      <jordan-form :form-config="formConfig2"/>
     </div>
     <!-- 特殊处理 -->
     <div class="scan_special">
-      <jordan-form :form-config="formConfig3" />
+      <jordan-form :form-config="formConfig3"/>
     </div>
     <!-- 扫描明细 -->
     <div class="scan_details">
@@ -47,7 +48,8 @@
           size="18"
           style="margin-right: 5px;"
           type="md-paper"
-        />扫描明细
+        />
+        扫描明细
       </div>
       <jordan-action-table
         :jordan-table-config="jordanTableConfig"
@@ -61,53 +63,54 @@
           size="18"
           style="margin-right: 5px;"
           type="md-paper"
-        />退换货信息
+        />
+        退换货信息
       </div>
-      <jordan-form :form-config="formConfig4" />
+      <jordan-form :form-config="formConfig4"/>
     </div>
     <!-- 弹框 -->
     <div class="dilog">
       <JDialog
-        :title="changeWarehouseConfig.confirmTitle"
-        :title-align="changeWarehouseConfig.titleAlign"
-        :width="changeWarehouseConfig.width"
-        :scrollable="changeWarehouseConfig.scrollable"
         :closable="changeWarehouseConfig.closable"
+        :component-data="changeWarehouseConfig.componentData"
         :draggable="changeWarehouseConfig.draggable"
+        :exclude-string="changeWarehouseConfig.excludeString"
+        :keep-alive="changeWarehouseConfig.keepAlive"
         :mask="changeWarehouseConfig.mask"
         :mask-closable="changeWarehouseConfig.maskClosable"
-        :transfer="changeWarehouseConfig.transfer"
         :name="changeWarehouseConfig.name"
+        :scrollable="changeWarehouseConfig.scrollable"
+        :title="changeWarehouseConfig.confirmTitle"
+        :title-align="changeWarehouseConfig.titleAlign"
+        :transfer="changeWarehouseConfig.transfer"
         :url="changeWarehouseConfig.url"
-        :keep-alive="changeWarehouseConfig.keepAlive"
-        :exclude-string="changeWarehouseConfig.excludeString"
-        :component-data="changeWarehouseConfig.componentData"
+        :width="changeWarehouseConfig.width"
       />
     </div>
     <!-- 扫描发出条码无对应明细时提示弹框 -->
     <Modal
-      v-model="isModal"
-      title="提示"
-      @on-ok="ok1"
       @on-cancel="cancel1"
       @on-keydown="keydown1"
+      @on-ok="ok1"
+      title="提示"
+      v-model="isModal"
     >
       <p>条码不在列表中,是否继续添加?</p>
     </Modal>
     <!-- 退货单无头件提示 -->
     <Modal
-      v-model="isModal2"
-      title="提示"
-      @on-ok="ok2"
       @on-cancel="cancel2"
       @on-keydown="keydown2"
+      @on-ok="ok2"
+      title="提示"
+      v-model="isModal2"
     >
       <p>未能匹配相应的退换货单，是否继续?</p>
     </Modal>
     <!-- 失败提示 -->
     <Modal
-      v-model="isModal3"
       title="提示"
+      v-model="isModal3"
     >
       <p>{{ errModelTitle }}</p>
     </Modal>
@@ -116,43 +119,49 @@
       <source
         src="./MP3/fm01.mp3"
         type="audio/ogg"
-      >您的浏览器不支持 audio 与元素。
+      >
+      您的浏览器不支持 audio 与元素。
     </audio>
     <audio id="fm02">
       <source
         src="./MP3/fm02.mp3"
         type="audio/ogg"
-      >您的浏览器不支持 audio 与元素。
+      >
+      您的浏览器不支持 audio 与元素。
     </audio>
     <audio id="fm03">
       <source
         src="./MP3/fm03.mp3"
         type="audio/ogg"
-      >您的浏览器不支持 audio 与元素。
+      >
+      您的浏览器不支持 audio 与元素。
     </audio>
     <audio id="fm04">
       <source
         src="./MP3/fm04.mp3"
         type="audio/ogg"
-      >您的浏览器不支持 audio 与元素。
+      >
+      您的浏览器不支持 audio 与元素。
     </audio>
     <audio id="error01">
       <source
         src="./MP3/error01.mp3"
         type="audio/ogg"
-      >您的浏览器不支持 audio 与元素。
+      >
+      您的浏览器不支持 audio 与元素。
     </audio>
     <audio id="error02">
       <source
         src="./MP3/error02.mp3"
         type="audio/ogg"
-      >您的浏览器不支持 audio 与元素。
+      >
+      您的浏览器不支持 audio 与元素。
     </audio>
     <div
-      v-show="isSaveLoading"
       class="fromLoading"
+      v-show="isSaveLoading"
     >
-      <Spin />
+      <Spin/>
     </div>
   </div>
 </template>
@@ -160,19 +169,18 @@
 <script>
   import jordanButton from 'professionalComponents/jordanButton.vue';
   import jordanForm from 'professionalComponents/jordanForm.vue';
-  import jordanLabel from 'professionalComponents/jordanLabel.vue';
+  // import jordanLabel from 'professionalComponents/jordanLabel.vue';
   import jordanActionTable from 'professionalComponents/jordanActionTable.vue';
   import JDialog from 'professionalComponents/JDialog';
-  import axios from 'axios';
-  import { setTimeout } from 'timers';
-  import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
+  import {setTimeout} from 'timers';
+  import {buttonPermissionsMixin} from '@/assets/js/mixins/buttonPermissions';
 
   export default {
     components: {
       jordanButton,
       jordanForm,
       jordanActionTable,
-      jordanLabel,
+      // jordanLabel,
       JDialog
     },
     // inject: ['reload'],
@@ -209,17 +217,13 @@
         self.isSaveLoading = true;
         const pici = sessionStorage.getItem('status');
         self.formConfig2.formData[0].options = [];
-        axios({
-          url: '/api/cs/oc/oms/v1/getCurrentBatch',
-          method: 'post',
-          data: {
-            BATCH_TYPE: ''
-          }
+        this.$network.post('/api/cs/oc/oms/v1/getCurrentBatch', {
+          BATCH_TYPE: ''
         }).then((res) => {
           console.log(res);
           if (res.data.code === 0) {
             const options = JSON.parse(JSON.stringify(res.data.data));
-            options.map((item) => {
+            options.forEach((item) => {
               item.label = item.BATCH_NO;
               item.value = item.ID;
             });
@@ -260,36 +264,40 @@
         self.formConfig3.formValue.PS_C_SKU_ECODE = '';
       },
       keydown1(e) {
-        if (e.keyCode === 13) {
-          this.ok1();
-          this.isModal = false;
-        }
-        if (e.keyCode === 27) {
-          this.cancel1();
-          this.isModal = false;
+        switch (e.keyCode) {
+          case 13:
+            this.ok1();
+            this.isModal = false;
+            break;
+          case 27:
+            this.cancel1();
+            this.isModal = false;
+            break;
+          default:
+            console.log(e);
         }
       },
       keydown2(e) {
-        if (e.keyCode === 13) {
-          this.ok2();
-          this.isModal2 = false;
-          setTimeout(() => {
-            document.getElementById('toNo').focus();
-          }, 800);
-        }
-        if (e.keyCode === 27) {
-          this.cancel2();
-          this.isModal2 = false;
+        switch (e.keyCode) {
+          case 13:
+            this.ok2();
+            this.isModal2 = false;
+            setTimeout(() => {
+              document.getElementById('toNo').focus();
+            }, 800);
+            break;
+          case 27:
+            this.cancel2();
+            this.isModal2 = false;
+            break;
+          default:
+            console.log(e);
         }
       },
       ok1() {
         const self = this;
-        axios({
-          url: '/api/cs/oc/oms/v1/getOneRefundItem',
-          method: 'post',
-          data: {
-            PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE
-          }
+        this.$network.post('/api/cs/oc/oms/v1/getOneRefundItem', {
+          PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE
         }).then((res) => {
           // console.log(res);
           if (res.data.code === 0) {
@@ -345,7 +353,7 @@
         const self = this;
         // 录入信息赋值
         self.formConfig2.formValue.REMARK = data.REMARK; // 退换货备注赋值
-        self.formConfig2.formData.map((item) => {
+        self.formConfig2.formData.forEach((item) => {
           if (item.itemdata && item.itemdata.name === '物流公司') {
             item.itemdata.valuedata = data.CP_C_LOGISTICS_ENAME ? data.CP_C_LOGISTICS_ENAME : sessionStorage.getItem('companyName');
             item.itemdata.pid = data.CP_C_LOGISTICS_ID ? data.CP_C_LOGISTICS_ID : sessionStorage.getItem('companyId');
@@ -362,7 +370,7 @@
         self.formConfig2.formValue.CP_C_PHY_WAREHOUSE_ENAME = data.CP_C_PHY_WAREHOUSE_ENAME; // 原发货仓
         // 扫描明细赋值
         const itemList = [];
-        data.ITEM_LIST.map((item) => { // 每条明细新增ISFEONT属性
+        data.ITEM_LIST.forEach((item) => { // 每条明细新增ISFEONT属性
           item.ISFRONT = 0;
           // 转换是否无原单条码
           if (item.IS_WITHOUT_ORIG === 1) {
@@ -400,7 +408,7 @@
           self.formConfig4.formValue.RECEIVE_MOBILE = self.formConfig2.formValue.RECEIVE_MOBILE;
         }
         detailData = JSON.parse(detailData);
-        detailData.map((item) => {
+        detailData.forEach((item) => {
           if (item.IS_WITHOUT_ORIG === '是') {
             item.IS_WITHOUT_ORIG = 1;
           } else {
@@ -411,7 +419,7 @@
         allData.ITEM_LIST = detailData;
         allData.REAL_REMARK = self.formConfig2.formValue.REAL_REMARK; // 备注传值
         allData.SPECIAL_TYPE = Number(self.formConfig3.formValue.SPECIAL_TYPE); // 特殊处理类型传值
-        self.formConfig2.formData.map((item) => {
+        self.formConfig2.formData.forEach((item) => {
           if (item.itemdata && item.itemdata.name === '物流公司') {
             allData.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
             allData.CP_C_LOGISTICS_ID = item.itemdata.pid;
@@ -441,63 +449,59 @@
       // 获取销退入库仓以及批次类型方法
       getBatch(val) {
         const self = this;
-        axios({
-          url: '/api/cs/oc/oms/v1/cpStoreInfo',
-          method: 'post',
-          data: { BATCH_ID: val }
-        }).then((res) => {
-          console.log(res);
-          if (res.data.code === 0) {
-            self.formConfig2.formData.map((item) => {
-              if (item.value && item.value === 'BATCH_TYPE') {
-                self.$set(self.formConfig2.formValue, 'BATCH_TYPE', res.data.data.BATCH_TYPE === 1 ? '1' : '2');
-              }
-              if (item.itemdata && item.itemdata.colname === 'TRANSFER_STORE_ID') {
-                item.itemdata.pid = res.data.data.STORE_ID;
-                item.itemdata.valuedata = res.data.data.STORE_ENAME;
-                if (res.data.data.STORE_ID && res.data.data.STORE_ENAME) {
-                  item.itemdata.readonly = true;
-                } else {
-                  item.itemdata.readonly = false;
+        self.$network.post('/api/cs/oc/oms/v1/cpStoreInfo', {BATCH_ID: val})
+          .then((res) => {
+            console.log(res);
+            if (res.data.code === 0) {
+              self.formConfig2.formData.forEach((item) => {
+                if (item.value && item.value === 'BATCH_TYPE') {
+                  self.$set(self.formConfig2.formValue, 'BATCH_TYPE', res.data.data.BATCH_TYPE === 1 ? '1' : '2');
                 }
-              }
-            });
-          }
-        });
+                if (item.itemdata && item.itemdata.colname === 'TRANSFER_STORE_ID') {
+                  item.itemdata.pid = res.data.data.STORE_ID;
+                  item.itemdata.valuedata = res.data.data.STORE_ENAME;
+                  if (res.data.data.STORE_ID && res.data.data.STORE_ENAME) {
+                    item.itemdata.readonly = true;
+                  } else {
+                    item.itemdata.readonly = false;
+                  }
+                }
+              });
+            }
+          });
       },
 
       // 五选一查询方法
       fiveQuery(type, value) {
         const self = this;
-        let id; let receiver_phone; let receiver_name; let logistic_code; let 
-          orig_order_id;
+        let id;
+        let receiver_phone;
+        let receiver_name;
+        let logistic_code;
+        let orig_order_id;
         switch (type) {
-        case 'id':
-          id = value;
-          break;
-        case 'receiver_phone':
-          receiver_phone = value;
-          break;
-        case 'receiver_name':
-          receiver_name = value;
-          break;
-        case 'logistic_code':
-          logistic_code = value;
-          break;
-        case 'orig_order_id':
-          orig_order_id = value;
-          break;
+          case 'id':
+            id = value;
+            break;
+          case 'receiver_phone':
+            receiver_phone = value;
+            break;
+          case 'receiver_name':
+            receiver_name = value;
+            break;
+          case 'logistic_code':
+            logistic_code = value;
+            break;
+          case 'orig_order_id':
+            orig_order_id = value;
+            break;
         }
-        axios({
-          url: '/api/cs/oc/oms/v1/getScanIncomingInfo',
-          method: 'post',
-          data: {
-            ID: id, // 退单编号
-            RECEIVER_MOBILE: receiver_phone, // 手机号码
-            RECEIVER_NAME: receiver_name, // 收货人
-            LOGISTIC_CODE: logistic_code, // 物流单号
-            ORIG_ORDER_ID: orig_order_id, // 原单单号
-          }
+        this.$network.post('/api/cs/oc/oms/v1/getScanIncomingInfo', {
+          ID: id, // 退单编号
+          RECEIVER_MOBILE: receiver_phone, // 手机号码
+          RECEIVER_NAME: receiver_name, // 收货人
+          LOGISTIC_CODE: logistic_code, // 物流单号
+          ORIG_ORDER_ID: orig_order_id, // 原单单号
         }).then((res) => {
           // console.log(res);
           if (res.data.code === 0) {
@@ -511,7 +515,7 @@
               // 弹出弹框,展示多条退换货单
               // let obj = {};
               // obj.list = res.data.data;
-              self.changeWarehouseConfig.componentData = { list: res.data.data };
+              self.changeWarehouseConfig.componentData = {list: res.data.data};
               self.$children.find(item => item.name === 'dilog').openConfirm();
             }
             // 无头件标识改为否
@@ -525,35 +529,34 @@
       // 物流单号，原单单号查询方法
       fiveQuery1(type, value) {
         const self = this;
-        let id; let receiver_phone; let receiver_name; let logistic_code; let 
-          orig_order_id;
+        let id;
+        let receiver_phone;
+        let receiver_name;
+        let logistic_code;
+        let orig_order_id;
         switch (type) {
-        case 'id':
-          id = value;
-          break;
-        case 'receiver_phone':
-          receiver_phone = value;
-          break;
-        case 'receiver_name':
-          receiver_name = value;
-          break;
-        case 'logistic_code':
-          logistic_code = value;
-          break;
-        case 'orig_order_id':
-          orig_order_id = value;
-          break;
+          case 'id':
+            id = value;
+            break;
+          case 'receiver_phone':
+            receiver_phone = value;
+            break;
+          case 'receiver_name':
+            receiver_name = value;
+            break;
+          case 'logistic_code':
+            logistic_code = value;
+            break;
+          case 'orig_order_id':
+            orig_order_id = value;
+            break;
         }
-        axios({
-          url: '/api/cs/oc/oms/v1/getScanIncomingInfo',
-          method: 'post',
-          data: {
-            ID: id, // 退单编号
-            RECEIVER_MOBILE: receiver_phone, // 手机号码
-            RECEIVER_NAME: receiver_name, // 收货人
-            LOGISTIC_CODE: logistic_code, // 物流单号
-            ORIG_ORDER_ID: orig_order_id, // 原单单号
-          }
+        this.$network.post('/api/cs/oc/oms/v1/getScanIncomingInfo', {
+          ID: id, // 退单编号
+          RECEIVER_MOBILE: receiver_phone, // 手机号码
+          RECEIVER_NAME: receiver_name, // 收货人
+          LOGISTIC_CODE: logistic_code, // 物流单号
+          ORIG_ORDER_ID: orig_order_id, // 原单单号
         }).then((res) => {
           if (res.data.code === 0) {
             self.ID = res.data.data[0].ID; // 存储退单ID
@@ -567,7 +570,7 @@
             self.$Message.error(err);
             self.removeData();
             if (sessionStorage.getItem('companyId') !== null) {
-              this.formConfig2.formData.map((item) => {
+              this.formConfig2.formData.forEach((item) => {
                 if (item.itemdata && item.itemdata.name === '物流公司') {
                   item.itemdata.valuedata = sessionStorage.getItem('companyName');
                   item.itemdata.pid = sessionStorage.getItem('companyId');
@@ -585,7 +588,7 @@
       // 清除
       removeData() {
         if (this.$route.query.returnId) {
-          this.$store.commit('TabHref', {
+          this.$store.commit('customize/TabHref', {
             id: 2776, // 单据id
             type: 'action', // 类型action
             name: 'scanIn', // 文件名
@@ -636,8 +639,8 @@
         // 参数3  true逻辑处理 false定制页面自行处理  按钮权限
         // 逻辑处理则直接调用
         this.getPermissions('btnConfig', 'scanIn');
-      // 定制页面自行处理
-      // let buttonList = this.getPermissions("action", "btnConfig",true);
+        // 定制页面自行处理
+        // let buttonList = this.getPermissions("action", "btnConfig",true);
       });
 
       const _this = this;
@@ -661,7 +664,7 @@
         document.getElementById('orderNo').focus();
       });
       if (sessionStorage.getItem('companyId') !== null) {
-        _this.formConfig2.formData.map((item) => {
+        _this.formConfig2.formData.forEach((item) => {
           if (item.itemdata && item.itemdata.name === '物流公司') {
             item.itemdata.valuedata = sessionStorage.getItem('companyName');
             item.itemdata.pid = sessionStorage.getItem('companyId');
@@ -672,19 +675,19 @@
     watch: {
       // 监听是否为无头件
       isNoHeader(val) {
-        const self = this;
-      // if(val){
-      //   self.formConfig3.formData[2].options[1].disabled = true;
-      // }else {
-      //   self.formConfig3.formData[2].options[1].disabled = false;
-      // }
+        // const self = this;
+        // if(val){
+        //   self.formConfig3.formData[2].options[1].disabled = true;
+        // }else {
+        //   self.formConfig3.formData[2].options[1].disabled = false;
+        // }
       },
       dilogList() {
         const self = this;
         const arr = [];
-        self.dilogList.map((item, index) => {
+        self.dilogList.forEach((item, index) => {
           if (item.ITEM_LIST) {
-            item.ITEM_LIST.map((items) => {
+            item.ITEM_LIST.forEach((items) => {
               arr.push(items);
               self.fm_one();
             });
@@ -759,7 +762,7 @@
             //       self.$Message.warning('没有可匹配的明细');
             //       return;
             //     }
-            //     detailList.map(item=>{
+            //     detailList.forEach(item=>{
             //       if(item.QTY_SCAN !== ''){
             //         self.isSelfMotion = false;
             //         item.QTY_SCAN = item.QTY;
@@ -807,48 +810,44 @@
                 if (self.isSave) return;
                 self.isSave = true;
                 self.btnConfig.buttons[1].disabled = true;
-                axios({
-                  url: '/api/cs/oc/oms/v1/saveScanIncoming',
-                  method: 'post',
-                  cancelToken: true,
-                  data: a
-                }).then((res) => {
-                  // console.log(res);
-                  if (res.data.code === 0) {
-                    self.$Message.success(res.data.message);
-                    self.fm_four();
-                    if (this.$route.query.returnId) { // 如果是从退换货列表跳转过来的，入库完成后再调回去
-                      this.$store.commit('TabHref', {
-                        id: 2661,
-                        type: 'action',
-                        name: 'returngoodList',
-                        label: '退换货订单',
-                        query: Object.assign({
+                self.$network.post('/api/cs/oc/oms/v1/saveScanIncoming', a)
+                  .then((res) => {
+                    // console.log(res);
+                    if (res.data.code === 0) {
+                      self.$Message.success(res.data.message);
+                      self.fm_four();
+                      if (this.$route.query.returnId) { // 如果是从退换货列表跳转过来的，入库完成后再调回去
+                        this.$store.commit('customize/TabHref', {
                           id: 2661,
-                          tabTitle: '退换货订单'
-                        }),
-                        back: true
-                      });
-                      // 销毁当前实例
-                      this.$destroy();
+                          type: 'action',
+                          name: 'returngoodList',
+                          label: '退换货订单',
+                          query: Object.assign({
+                            id: 2661,
+                            tabTitle: '退换货订单'
+                          }),
+                          back: true
+                        });
+                        // 销毁当前实例
+                        this.$destroy();
+                      } else {
+                        // self.reload();
+                        self.formConfig2.formData.forEach((item) => {
+                          if (item.itemdata && item.itemdata.name === '物流公司') {
+                            item.itemdata.valuedata = sessionStorage.getItem('companyName');
+                            item.itemdata.pid = sessionStorage.getItem('companyId');
+                          }
+                        });
+                      }
+                      self.isSave = false;
                     } else {
-                      // self.reload();
-                      self.formConfig2.formData.map((item) => {
-                        if (item.itemdata && item.itemdata.name === '物流公司') {
-                          item.itemdata.valuedata = sessionStorage.getItem('companyName');
-                          item.itemdata.pid = sessionStorage.getItem('companyId');
-                        }
-                      });
+                      self.errModelTitle = res.data.message || '强制入库失败';
+                      self.isModal3 = true;
+                      self.error_one();
+                      self.btnConfig.buttons[1].disabled = false;
+                      self.isSave = false;
                     }
-                    self.isSave = false;
-                  } else {
-                    self.errModelTitle = res.data.message || '强制入库失败';
-                    self.isModal3 = true;
-                    self.error_one();
-                    self.btnConfig.buttons[1].disabled = false;
-                    self.isSave = false;
-                  }
-                });
+                  });
               }
             },
             {
@@ -1075,7 +1074,7 @@
                     }
                   }
                 },
-                this.product_mark_list.map(item => h('Option', {
+                this.product_mark_list.forEach(item => h('Option', {
                   props: {
                     value: item.value,
                     label: item.label,
@@ -1166,7 +1165,7 @@
                 // 判断扫描发出条码后是否为特殊处理流程
                 if (self.formConfig3.formValue.SPECIAL_TYPE === '1' || self.formConfig3.formValue.SPECIAL_TYPE === '2') {
                   // 判断发出条码在明细表中是否存在
-                  isDlog = detailist.some(item => 
+                  isDlog = detailist.some(item =>
                     // return self.formConfig3.formValue.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE;
                     self.formConfig3.formValue.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE || self.formConfig3.formValue.PS_C_SKU_ECODE === item.GBCODE // 2019/6/6 需求改动，同时匹配发出条码和国标码；
                   );
@@ -1179,12 +1178,8 @@
                     // 07/01版本优化项:不弹框,直接扫入,根据底色判断单据状态
 
                     const self = this;
-                    axios({
-                      url: '/api/cs/oc/oms/v1/getOneRefundItem',
-                      method: 'post',
-                      data: {
-                        PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE
-                      }
+                    self.$network.post('/api/cs/oc/oms/v1/getOneRefundItem', {
+                      PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE
                     }).then((res) => {
                       if (res.data.code === 0) {
                         res.data.data.IS_WITHOUT_ORIG = '是';
@@ -1193,7 +1188,18 @@
                         res.data.data.PRODUCT_MARK = '1';
                         // 增加底色
                         self.$set(res.data.data, 'cellClassName', {
-                          OC_B_RETURN_ORDER_ID: 'yellow', PS_C_PRO_ECODE: 'yellow', PS_C_PRO_ENAME: 'yellow', PRODUCT_MARK: 'yellow', PS_C_SKU_ECODE: 'yellow', REAL_SKU_ECODE: 'yellow', SKU_SPEC: 'yellow', QTY: 'yellow', QTY_SCAN: 'yellow', GBCODE: 'yellow', RESERVE_VARCHAR01: 'yellow', IS_WITHOUT_ORIG: 'yellow' 
+                          OC_B_RETURN_ORDER_ID: 'yellow',
+                          PS_C_PRO_ECODE: 'yellow',
+                          PS_C_PRO_ENAME: 'yellow',
+                          PRODUCT_MARK: 'yellow',
+                          PS_C_SKU_ECODE: 'yellow',
+                          REAL_SKU_ECODE: 'yellow',
+                          SKU_SPEC: 'yellow',
+                          QTY: 'yellow',
+                          QTY_SCAN: 'yellow',
+                          GBCODE: 'yellow',
+                          RESERVE_VARCHAR01: 'yellow',
+                          IS_WITHOUT_ORIG: 'yellow'
                         });
                         console.log(res.data.data);
                         self.jordanTableConfig.data.push(res.data.data);
@@ -1209,7 +1215,7 @@
                     });
                   } else {
                     let allScan = [];
-                    detailist.map((item) => {
+                    detailist.forEach((item) => {
                       if ((self.formConfig3.formValue.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE || self.formConfig3.formValue.PS_C_SKU_ECODE === item.GBCODE) && item.OC_B_RETURN_ORDER_ID) { // 条码相等且有退换货单号
                         if (item.QTY === item.QTY_SCAN) {
                           allScan.push(true);
@@ -1222,15 +1228,11 @@
                     });
                     allScan = allScan.every(item => item === true);
 
-                    // detailist.map(item=>{
+                    // detailist.forEach(item=>{
                     // if((self.formConfig3.formValue.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE || self.formConfig3.formValue.PS_C_SKU_ECODE === item.GBCODE) && !item.OC_B_RETURN_ORDER_ID){
                     if ((detailist.some(item => item.PS_C_SKU_ECODE === self.formConfig3.formValue.PS_C_SKU_ECODE) || detailist.some(item => item.GBCODE === self.formConfig3.formValue.PS_C_SKU_ECODE)) && !(detailist.some(item => item.OC_B_RETURN_ORDER_ID))) {
-                      axios({
-                        url: '/api/cs/oc/oms/v1/getOneRefundItem',
-                        method: 'post',
-                        data: {
-                          PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE
-                        }
+                      this.$network.post('/api/cs/oc/oms/v1/getOneRefundItem', {
+                        PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE
                       }).then((res) => {
                         // console.log(res);
                         if (res.data.code === 0) {
@@ -1261,7 +1263,18 @@
                         if ((self.formConfig3.formValue.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE || self.formConfig3.formValue.PS_C_SKU_ECODE === item.GBCODE) && item.QTY > item.QTY_SCAN) {
                           item.QTY_SCAN = Number(item.QTY_SCAN) + 1;
                           self.$set(item, 'cellClassName', {
-                            OC_B_RETURN_ORDER_ID: 'green', PS_C_PRO_ECODE: 'green', PS_C_PRO_ENAME: 'green', PRODUCT_MARK: 'green', PS_C_SKU_ECODE: 'green', REAL_SKU_ECODE: 'green', SKU_SPEC: 'green', QTY: 'green', QTY_SCAN: 'green', GBCODE: 'green', RESERVE_VARCHAR01: 'green', IS_WITHOUT_ORIG: 'green' 
+                            OC_B_RETURN_ORDER_ID: 'green',
+                            PS_C_PRO_ECODE: 'green',
+                            PS_C_PRO_ENAME: 'green',
+                            PRODUCT_MARK: 'green',
+                            PS_C_SKU_ECODE: 'green',
+                            REAL_SKU_ECODE: 'green',
+                            SKU_SPEC: 'green',
+                            QTY: 'green',
+                            QTY_SCAN: 'green',
+                            GBCODE: 'green',
+                            RESERVE_VARCHAR01: 'green',
+                            IS_WITHOUT_ORIG: 'green'
                           });
                           self.formConfig3.formValue.PS_C_SKU_ECODE = '';
                           self.fm_three();
@@ -1276,7 +1289,18 @@
                           arr.IS_WITHOUT_ORIG = '是';
                           arr.PRODUCT_MARK = '1';
                           self.$set(arr, 'cellClassName', {
-                            OC_B_RETURN_ORDER_ID: 'yellow', PS_C_PRO_ECODE: 'yellow', PS_C_PRO_ENAME: 'yellow', PRODUCT_MARK: 'yellow', PS_C_SKU_ECODE: 'yellow', REAL_SKU_ECODE: 'yellow', SKU_SPEC: 'yellow', QTY: 'yellow', QTY_SCAN: 'yellow', GBCODE: 'yellow', RESERVE_VARCHAR01: 'yellow', IS_WITHOUT_ORIG: 'yellow' 
+                            OC_B_RETURN_ORDER_ID: 'yellow',
+                            PS_C_PRO_ECODE: 'yellow',
+                            PS_C_PRO_ENAME: 'yellow',
+                            PRODUCT_MARK: 'yellow',
+                            PS_C_SKU_ECODE: 'yellow',
+                            REAL_SKU_ECODE: 'yellow',
+                            SKU_SPEC: 'yellow',
+                            QTY: 'yellow',
+                            QTY_SCAN: 'yellow',
+                            GBCODE: 'yellow',
+                            RESERVE_VARCHAR01: 'yellow',
+                            IS_WITHOUT_ORIG: 'yellow'
                           });
                           detailist.push(arr);
                           self.fm_three();
@@ -1289,7 +1313,7 @@
                   }
                 } else {
                   // 判断发出条码在明细表中是否存在
-                  isDlog = detailist.some(item => 
+                  isDlog = detailist.some(item =>
                     // return self.formConfig3.formValue.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE;
                     self.formConfig3.formValue.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE || self.formConfig3.formValue.PS_C_SKU_ECODE === item.GBCODE // 2019/6/6 需求改动，同时匹配发出条码和国标码；
                   );
@@ -1302,12 +1326,8 @@
                     // 07/01版本优化项:不弹框,直接扫入,根据底色判断单据状态
 
                     const self = this;
-                    axios({
-                      url: '/api/cs/oc/oms/v1/getOneRefundItem',
-                      method: 'post',
-                      data: {
-                        PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE
-                      }
+                    self.$network.post('/api/cs/oc/oms/v1/getOneRefundItem', {
+                      PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE
                     }).then((res) => {
                       if (res.data.code === 0) {
                         res.data.data.IS_WITHOUT_ORIG = '是';
@@ -1316,7 +1336,18 @@
                         res.data.data.PRODUCT_MARK = '1';
                         // 增加底色
                         self.$set(res.data.data, 'cellClassName', {
-                          OC_B_RETURN_ORDER_ID: 'yellow', PS_C_PRO_ECODE: 'yellow', PS_C_PRO_ENAME: 'yellow', PRODUCT_MARK: 'yellow', PS_C_SKU_ECODE: 'yellow', REAL_SKU_ECODE: 'yellow', SKU_SPEC: 'yellow', QTY: 'yellow', QTY_SCAN: 'yellow', GBCODE: 'yellow', RESERVE_VARCHAR01: 'yellow', IS_WITHOUT_ORIG: 'yellow' 
+                          OC_B_RETURN_ORDER_ID: 'yellow',
+                          PS_C_PRO_ECODE: 'yellow',
+                          PS_C_PRO_ENAME: 'yellow',
+                          PRODUCT_MARK: 'yellow',
+                          PS_C_SKU_ECODE: 'yellow',
+                          REAL_SKU_ECODE: 'yellow',
+                          SKU_SPEC: 'yellow',
+                          QTY: 'yellow',
+                          QTY_SCAN: 'yellow',
+                          GBCODE: 'yellow',
+                          RESERVE_VARCHAR01: 'yellow',
+                          IS_WITHOUT_ORIG: 'yellow'
                         });
                         console.log(res.data.data);
                         self.jordanTableConfig.data.push(res.data.data);
@@ -1332,7 +1363,7 @@
                     });
                   } else {
                     let allScan = [];
-                    detailist.map((item) => {
+                    detailist.forEach((item) => {
                       // if(self.formConfig3.formValue.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE && item.OC_B_RETURN_ORDER_ID){ //条码相等且有退换货单号
                       if ((self.formConfig3.formValue.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE || self.formConfig3.formValue.PS_C_SKU_ECODE === item.GBCODE) && item.OC_B_RETURN_ORDER_ID) { // 条码或国标码相等且有退换货单号
                         if (item.QTY === item.QTY_SCAN) {
@@ -1348,7 +1379,7 @@
 
                     for (let i = 0; i < detailist.length; i++) {
                       const items = detailist[i];
-                      // detailist.map(items=>{
+                      // detailist.forEach(items=>{
                       if ((self.formConfig3.formValue.PS_C_SKU_ECODE === items.PS_C_SKU_ECODE || self.formConfig3.formValue.PS_C_SKU_ECODE === items.GBCODE) && !items.OC_B_RETURN_ORDER_ID) {
                         // items.QTY_SCAN++;
                         // items.QTY++;
@@ -1361,7 +1392,18 @@
                         if ((self.formConfig3.formValue.PS_C_SKU_ECODE === items.PS_C_SKU_ECODE || self.formConfig3.formValue.PS_C_SKU_ECODE === items.GBCODE) && items.QTY > items.QTY_SCAN) {
                           items.QTY_SCAN = Number(items.QTY_SCAN) + 1;
                           self.$set(items, 'cellClassName', {
-                            OC_B_RETURN_ORDER_ID: 'green', PS_C_PRO_ECODE: 'green', PS_C_PRO_ENAME: 'green', PRODUCT_MARK: 'green', PS_C_SKU_ECODE: 'green', REAL_SKU_ECODE: 'green', SKU_SPEC: 'green', QTY: 'green', QTY_SCAN: 'green', GBCODE: 'green', RESERVE_VARCHAR01: 'green', IS_WITHOUT_ORIG: 'green' 
+                            OC_B_RETURN_ORDER_ID: 'green',
+                            PS_C_PRO_ECODE: 'green',
+                            PS_C_PRO_ENAME: 'green',
+                            PRODUCT_MARK: 'green',
+                            PS_C_SKU_ECODE: 'green',
+                            REAL_SKU_ECODE: 'green',
+                            SKU_SPEC: 'green',
+                            QTY: 'green',
+                            QTY_SCAN: 'green',
+                            GBCODE: 'green',
+                            RESERVE_VARCHAR01: 'green',
+                            IS_WITHOUT_ORIG: 'green'
                           });
                           self.formConfig3.formValue.PS_C_SKU_ECODE = '';
                           self.fm_three();
@@ -1376,7 +1418,18 @@
                           arr.IS_WITHOUT_ORIG = '是';
                           arr.PRODUCT_MARK = '1';
                           self.$set(arr, 'cellClassName', {
-                            OC_B_RETURN_ORDER_ID: 'yellow', PS_C_PRO_ECODE: 'yellow', PS_C_PRO_ENAME: 'yellow', PRODUCT_MARK: 'yellow', PS_C_SKU_ECODE: 'yellow', REAL_SKU_ECODE: 'yellow', SKU_SPEC: 'yellow', QTY: 'yellow', QTY_SCAN: 'yellow', GBCODE: 'yellow', RESERVE_VARCHAR01: 'yellow', IS_WITHOUT_ORIG: 'yellow' 
+                            OC_B_RETURN_ORDER_ID: 'yellow',
+                            PS_C_PRO_ECODE: 'yellow',
+                            PS_C_PRO_ENAME: 'yellow',
+                            PRODUCT_MARK: 'yellow',
+                            PS_C_SKU_ECODE: 'yellow',
+                            REAL_SKU_ECODE: 'yellow',
+                            SKU_SPEC: 'yellow',
+                            QTY: 'yellow',
+                            QTY_SCAN: 'yellow',
+                            GBCODE: 'yellow',
+                            RESERVE_VARCHAR01: 'yellow',
+                            IS_WITHOUT_ORIG: 'yellow'
                           });
                           detailist.push(arr);
                           self.fm_three();
@@ -1386,7 +1439,7 @@
                           return;
                         }
                       }
-                    // });
+                      // });
                     }
                   }
                 }
@@ -1417,37 +1470,34 @@
                     //   self.$Message.warning('收件人手机不能为空!');
                     //   return;
                     // }
-                    axios({
-                      url: '/api/cs/oc/oms/v1/saveScanIncoming',
-                      method: 'post',
-                      data: a
-                    }).then((res) => {
-                      console.log(res);
-                      if (res.data.code === 0) {
-                        self.$Message.success(res.data.message);
-                        if (this.$route.query.returnId) { // 如果是从退换货列表跳转过来的，入库完成后再调回去
-                          this.$store.commit('TabHref', {
-                            id: 2661,
-                            type: 'action',
-                            name: 'returngoodList',
-                            label: '退换货订单',
-                            query: Object.assign({
+                    this.$network.post('/api/cs/oc/oms/v1/saveScanIncoming', a)
+                      .then((res) => {
+                        console.log(res);
+                        if (res.data.code === 0) {
+                          self.$Message.success(res.data.message);
+                          if (this.$route.query.returnId) { // 如果是从退换货列表跳转过来的，入库完成后再调回去
+                            this.$store.commit('customize/TabHref', {
                               id: 2661,
-                              tabTitle: '退换货订单'
-                            }),
-                            back: true
-                          });
-                          // 销毁当前实例
-                          this.$destroy();
+                              type: 'action',
+                              name: 'returngoodList',
+                              label: '退换货订单',
+                              query: Object.assign({
+                                id: 2661,
+                                tabTitle: '退换货订单'
+                              }),
+                              back: true
+                            });
+                            // 销毁当前实例
+                            this.$destroy();
+                          } else {
+                            // self.reload();
+                          }
                         } else {
-                          // self.reload();
+                          self.$Message.error(res.data.message);
                         }
-                      } else {
-                        self.$Message.error(res.data.message);
-                      }
-                    });
-                  // console.log(a);
-                  // alert('自动入库');
+                      });
+                    // console.log(a);
+                    // alert('自动入库');
                   } // 如果数量全部等于扫描数量,则自动入库
                 }
               }
@@ -1471,15 +1521,15 @@
             //   selectChange: () => {
             //     let self = this;
             //     let val = self.formConfig3.formValue.SPECIAL_TYPE;
-            //     let data = self.formConfig3.formData.filter(
+            //     let data = self.formConfig3.formData.find(
             //       item => item.label === "实收条码"
             //     );
             //     if (val == "0") {
-            //       data[0].style = "";
+            //       data['style'] = "";
             //     } else {
-            //       data[0].style = "input";
+            //       data['style'] = "input";
             //       //处理拆单逻辑
-            //       self.jordanTableConfig.data.map(item=>{
+            //       self.jordanTableConfig.data.forEach(item=>{
             //         let twoQty = item.QTY;
             //         item.QTY = 1;
             //         item.QTY_SCAN = 0;
@@ -1518,15 +1568,15 @@
               radioChange: () => {
                 const self = this;
                 const val = self.formConfig3.formValue.SPECIAL_TYPE;
-                const data = self.formConfig3.formData.filter(
+                const data = self.formConfig3.formData.find(
                   item => item.label === '实收条码'
                 );
                 if (val == '0') {
-                  data[0].style = '';
+                  data.style = '';
                 } else {
-                  data[0].style = 'input';
+                  data.style = 'input';
                   // 处理拆单逻辑
-                  // self.jordanTableConfig.data.map(item=>{
+                  // self.jordanTableConfig.data.forEach(item=>{
                   //   let twoQty = item.QTY;
                   //   item.QTY = 1;
                   //   item.QTY_SCAN = 0;
@@ -1579,12 +1629,8 @@
                   }
                 } else if (self.jordanTableConfig.data.length === 1) { // 当扫描明细区只有一条数据时
                   const self = this;
-                  axios({
-                    url: '/api/cs/oc/oms/v1/getOneRefundItem',
-                    method: 'post',
-                    data: {
-                      PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE
-                    }
+                  self.$network.post('/api/cs/oc/oms/v1/getOneRefundItem', {
+                    PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE
                   }).then((res) => {
                     if (res.data.code === 0) {
                       const self = this;
@@ -1615,12 +1661,8 @@
                 // if(self.formConfig3.formValue.REAL_SKU_ECODE !== '') {
                 if (self.onRowClickData.OC_B_RETURN_ORDER_ID) { // 有退换货单号时
                   const self = this;
-                  axios({
-                    url: '/api/cs/oc/oms/v1/getOneRefundItem',
-                    method: 'post',
-                    data: {
-                      PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE
-                    }
+                  self.$network.post('/api/cs/oc/oms/v1/getOneRefundItem', {
+                    PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE
                   }).then((res) => {
                     if (res.data.code === 0) {
                       console.log(res);
@@ -1631,8 +1673,8 @@
                       self.jordanTableConfig.data[self.onRowClickIndex].QTY_SCAN = 1;
 
                       self.formConfig3.formValue.REAL_SKU_ECODE = '';
-                    // console.log(self.onRowClickIndex)
-                    // self.fm_three();
+                      // console.log(self.onRowClickIndex)
+                      // self.fm_three();
                     } else {
                       self.$Message.warning('本地条码档案中不存在此条码，请检查后重试');
                       self.formConfig3.formValue.REAL_SKU_ECODE = '';
@@ -1641,13 +1683,8 @@
                   });
                 } else if (!self.onRowClickData.OC_B_RETURN_ORDER_ID) { // 无头件
                   const self = this;
-
-                  axios({
-                    url: '/api/cs/oc/oms/v1/getOneRefundItem',
-                    method: 'post',
-                    data: {
-                      PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE
-                    }
+                  self.$network.post('/api/cs/oc/oms/v1/getOneRefundItem', {
+                    PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE
                   }).then((res) => {
                     if (res.data.code === 0) {
                       if (res.data.data.PS_C_SKU_ECODE == self.onRowClickData.PS_C_SKU_ECODE) {
@@ -1677,11 +1714,11 @@
                     }
                   });
                 }
-              // } else {
-              //   self.$Message.warning('实收条码不能为空');
-              //   self.error_two();
-              //   return;
-              // }
+                // } else {
+                //   self.$Message.warning('实收条码不能为空');
+                //   self.error_two();
+                //   return;
+                // }
               }
             }
           ]
@@ -1803,53 +1840,59 @@
 </script>
 
 <style lang='less'>
-// @import '../../../../../static/skin/public.less';
-@import '~@burgeon/oms-theme/skin/public.less';
-.scanIn {
-  position: relative;
-  .scan_button {
-    padding-left: 37px;
-    padding-top: 15px;
-    .one_button{
-      button{
-        min-height: 22px;
+  // @import '../../../../../static/skin/public.less';
+  @import '~@burgeon/oms-theme/skin/public.less';
+
+  .scanIn {
+    position: relative;
+
+    .scan_button {
+      padding-left: 37px;
+      padding-top: 15px;
+
+      .one_button {
+        button {
+          min-height: 22px;
+        }
       }
+
     }
 
-  }
-  .scan_search {
-    padding: 10px 0 15px 37px;
-  }
+    .scan_search {
+      padding: 10px 0 15px 37px;
+    }
 
-  .scan_search .titles,.scan_info .titles,.scan_logg .titles,.scan_details .titles,.scan_returngood .titles{
-    margin: 10px 0 10px 37px;
-    font-size: 16px;
-    font-weight: 600;
-    border-bottom: 3px solid #f00;
-    width: 120px;
-    padding-bottom: 5px;
-  }
+    .scan_search .titles, .scan_info .titles, .scan_logg .titles, .scan_details .titles, .scan_returngood .titles {
+      margin: 10px 0 10px 37px;
+      font-size: 16px;
+      font-weight: 600;
+      border-bottom: 3px solid #f00;
+      width: 120px;
+      padding-bottom: 5px;
+    }
 
 
-  .yellow {
-    background-color: yellow;
-    color: red;
+    .yellow {
+      background-color: yellow;
+      color: red;
+    }
+
+    .green {
+      background-color: green;
+      color: red;
+    }
+
+    .fromLoading {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.9);
+      z-index: 1000 !important;
+    }
   }
-  .green {
-    background-color: green;
-    color: red;
-  }
-  .fromLoading {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.9);
-    z-index: 1000 !important;
-  }
-}
 </style>

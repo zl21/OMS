@@ -634,7 +634,7 @@ export default {
             text: "返回", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
-              this.$store.commit("TabHref", {
+              this.$store.commit("customize/TabHref", {
                 id: 249130284,
                 type: "table",
                 name: "OC_B_JD_REFUND_IN",
@@ -675,7 +675,7 @@ export default {
                 data: { id: _this.$route.query.id }
               }).then(res => {
                 if (res.data.code === 0) {
-                  _this.$store.commit("TabHref", {
+                  _this.$store.commit("customize/TabHref", {
                     id: _this.$route.query.id, //id
                     type: "action", //类型action
                     name: "jdManualMatching", //文件名
@@ -712,7 +712,7 @@ export default {
                 data: { id: _this.$route.query.id }
               }).then(res => {
                 if (res.data.code === 0) {
-                  _this.$store.commit("TabHref", {
+                  _this.$store.commit("customize/TabHref", {
                     id: _this.$route.query.id, //id
                     type: "action", //类型action
                     name: "jdManualMatching", //文件名
@@ -759,7 +759,7 @@ export default {
             text: "返回", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
-              this.$store.commit("TabHref", {
+              this.$store.commit("customize/TabHref", {
                 id: 249130284,
                 type: "table",
                 name: "OC_B_JD_REFUND_IN",
@@ -945,7 +945,7 @@ export default {
       }).then(res => {
         if (res.data.code === 0) {
           _this.isSaveLoading = false;
-          this.$store.commit("TabHref", {
+          this.$store.commit("customize/TabHref", {
             id: 249130284,
             type: "table",
             name: "OC_B_JD_REFUND_IN",

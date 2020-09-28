@@ -156,7 +156,7 @@ export default {
           {
             text: "新增",
             btnclick: () => {
-              this.$store.commit("TabHref", {
+              this.$store.commit("customize/TabHref", {
                 id: -1, //id
                 type: "action", //类型action
                 name: "returnTreasuryAdd", //文件名
@@ -190,7 +190,7 @@ export default {
                 data: { id: id }
               }).then(res => {
                 if (res.data.code === 0) {
-                  self.$store.commit("TabHref", {
+                  self.$store.commit("customize/TabHref", {
                     id: id, //id
                     type: "action", //类型action
                     name: "manualMatching", //文件名
@@ -231,7 +231,7 @@ export default {
                 data: { id: id }
               }).then(res => {
                 if (res.data.code === 0) {
-                  self.$store.commit("TabHref", {
+                  self.$store.commit("customize/TabHref", {
                     id: id, //id
                     type: "action", //类型action
                     name: "manualMatching", //文件名
@@ -363,7 +363,7 @@ export default {
                         params.row.ORIG_ORDER_NO === ""
                       )
                         return;
-                      this.$store.commit("TabOpen", {
+                      this.$store.commit("customize/TabOpen", {
                         id: params.row.ORIG_ORDER_NO, //单据id
                         type: "action", //类型action
                         name: "orderManageDetail", //文件名
@@ -783,7 +783,7 @@ export default {
     },
     // 单击某二行时触发
     onRowDblclick(row, index) {
-      this.$store.commit("TabHref", {
+      this.$store.commit("customize/TabHref", {
         id: row.ID,
         type: "action",
         name: "returnTreasuryAdd",

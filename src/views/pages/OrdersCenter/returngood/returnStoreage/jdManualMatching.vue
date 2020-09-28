@@ -238,7 +238,7 @@ export default {
             btnclick: () => {
               const _this = this;
               if (_this.$route.query.form === 'details') {
-                _this.$store.commit("TabHref", {
+                _this.$store.commit("customize/TabHref", {
                   id: 249130284,
                   type: "table",
                   name: "OC_B_JD_REFUND_IN",
@@ -250,7 +250,7 @@ export default {
                   })
                 });
               } else {
-                _this.$store.commit("TabHref", {
+                _this.$store.commit("customize/TabHref", {
                   id: _this.$route.query.id,
                   type: "action",
                   name: "returnJdTreasuryAdd",
@@ -736,7 +736,7 @@ export default {
           // this.getList();
           this.isSave = false;
           if (this.$route.query.form === 'details') {
-            this.$store.commit("TabHref", {
+            this.$store.commit("customize/TabHref", {
               id: 249130284,
               type: "table",
               name: "OC_B_JD_REFUND_IN",
@@ -749,7 +749,7 @@ export default {
             });
             // });
           } else {
-            this.$store.commit("TabHref", {
+            this.$store.commit("customize/TabHref", {
               id: this.$route.query.id,
               type: "action",
               name: "returnJdTreasuryAdd",

@@ -351,9 +351,9 @@
               type: 'success',
               message: '保存成功'
             });
-            let action = 'switchActiveTab';
+            let action = 'customize/switchActiveTab';
             if (this.objid == -1) {
-              action = 'TabClose';
+              action = 'customize/TabClose';
             }
             this.objid = String(res.data.data.objid) || -1;
             this.$nextTick(() => {
@@ -686,6 +686,21 @@
 @import "./less/common.less";
 @borderColor: #bfcbd9;
 .addOrEditActi {
+  /deep/ .ark-table-overflowX {
+    input {
+      font-size: 12px;
+      height: 24px;
+      line-height: 24px;
+      border: 1px solid #DCDFE6;
+      border-radius: 2px;
+      text-align: left;
+      padding: 0 15px;
+      color: #606266;
+    }
+  }
+  /deep/ .form_el_input input {
+    color: #606266;
+  }
   display: flex;
   height: 100%;
   //height: calc(100% - 30px);

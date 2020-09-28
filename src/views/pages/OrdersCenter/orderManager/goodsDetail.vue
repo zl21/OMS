@@ -33,10 +33,10 @@
 </template>
 <script>
 import axios from "axios";
-import jordanForm from "../../../components/jordanForm";
+import jordanForm from "professionalComponents/jordanForm";
 import jordanBtn from "professionalComponents/jordanButton";
-import jordanActionTable from "../../../components/jordanActionTable";
-import jordanModal from "../../../components/JDialog";
+import jordanActionTable from "professionalComponents/jordanActionTable";
+import jordanModal from "professionalComponents/JDialog";
 import publicDialogConfig from "./publicConfig/publicDialog.js";
 import { listeningToKeydownMixin } from "../../../mixins/listeningToKeydown.js";
 export default {

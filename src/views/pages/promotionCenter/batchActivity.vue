@@ -321,7 +321,7 @@
           if (rs.code == -1) {
             return rs;
           }
-        
+
           if (gift_arr.length === 0) {
             return { code: -1, message: '赠品列表无数据' };
           }
@@ -360,7 +360,7 @@
        * 初始化默认时间  时间范围好下线时间
        */
       initDefaultTime() {
-        
+
       },
       /**
        * 保存草稿
@@ -394,9 +394,9 @@
               type: 'success',
               message: '保存成功'
             });
-            let action = 'switchActiveTab';
+            let action = 'customize/switchActiveTab';
             if (this.objid == -1) {
-              action = 'TabClose';
+              action = 'customize/TabClose';
             }
             this.objid = String(res.data.data.objid) || '-1';
             this.$nextTick(() => {
@@ -506,7 +506,7 @@
         }
       },
       /**
-       * 
+       *
        */
       addListener() {
         this.$refs.basicSteps.addEventListener('scroll', this.handleScrollByUser);
@@ -531,7 +531,7 @@
         this.validateModule();
         this.$nextTick(() => {
           this.isScorlling = false;
-        });   
+        });
       }
     },
     beforeDestroy() {
