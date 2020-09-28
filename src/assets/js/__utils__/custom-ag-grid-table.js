@@ -23,7 +23,7 @@ const initializeAgTable = (container, opt, obj) => {
   const agTable = (agGridTableContainer, options, obj) => {
     agTable.customizeOptions = options
     agGridTableContainer.style.width = `100%`
-    agGridTableContainer.style.height = obj.tableHeight
+    agGridTableContainer.style.height = obj.tableHeight || '600px'
     agGridTableContainer.style.margin = '0 auto'
     agGridTableContainer.style.position = 'relative'
     agGridTableContainer.classList.add('ag-theme-balham')
@@ -104,8 +104,8 @@ const initializeAgTable = (container, opt, obj) => {
         return agTable
       }
       // if (!(data[0][AG_SEQUENCE_COLUMN_NAME])) {
-      data.map((item, index) => {
-        item[AG_SEQUENCE_COLUMN_NAME] = index + 1
+      data.forEach((item, index) => {
+        item[AG_SEQUENCE_COLUMN_NAME] = index + 1;
       })
       // }
 
