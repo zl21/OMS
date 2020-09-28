@@ -1030,7 +1030,7 @@
         }
       },
       ok_home() {
-        this.$store.commit('TabHref', {
+        this.$store.commit('customize/TabHref', {
           id: 249130125,
           type: 'table',
           name: 'SG_B_OUT_PICKORDER',
@@ -1606,7 +1606,7 @@
           // let minutes = date.getMinutes();
           // let seconds = date.getSeconds();
           return `${year}-${month}-${mydate}`;
-        } 
+        }
         return '';
       },
       onSelect(selection, row) {

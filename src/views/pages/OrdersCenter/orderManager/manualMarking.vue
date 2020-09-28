@@ -15,11 +15,12 @@
 <script>
 import { post } from '@/utils/request'
 import jordanBtn from "professionalComponents/jordanButton"
+import reActionTable from "professionalComponents/jordanActionTable"
 
 export default {
   name: 'manualMarking',
   components: {
-    reActionTable: () => import('../../../components/jordanActionTable'),
+    reActionTable,
     jordanBtn
   },
   props: {

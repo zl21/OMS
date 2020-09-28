@@ -385,7 +385,7 @@ export default {
                 1 ||
                 data.ORDER_STATUS === 2
               ) {
-                self.$store.commit("TabHref", {
+                self.$store.commit("customize/TabHref", {
                   id: self.$route.query.id,
                   type: "action",
                   name: "splitOrder",
@@ -667,7 +667,7 @@ export default {
             text: "额外退款", //按钮文本
             btnclick: () => {
               if (this.statusName === '仓库发货' || this.statusName === '平台发货') {
-                this.$store.commit("TabOpen", {
+                this.$store.commit("customize/TabOpen", {
                   id: -1,
                   type: "action",
                   name: "refundAfterShipment",
@@ -694,7 +694,7 @@ export default {
                 this.$Message.warning('订单状态为仓库发货和平台发货才能新增退单!')
                 return
               }
-              this.$store.commit("TabOpen", {
+              this.$store.commit("customize/TabOpen", {
                 id: -1,
                 type: "action",
                 name: "returngood",
@@ -717,7 +717,7 @@ export default {
           {
             text: "返回", //按钮文本
             btnclick: () => {
-              this.$store.commit("TabHref", {
+              this.$store.commit("customize/TabHref", {
                 id: 2627,
                 type: "action",
                 name: "orderManager",
@@ -816,7 +816,7 @@ export default {
       } else {
         query.copyOrder = true
       }
-      self.$store.commit("TabHref", {
+      self.$store.commit("customize/TabHref", {
         id: -1,
         type: "action",
         name: "orderManageAdd",

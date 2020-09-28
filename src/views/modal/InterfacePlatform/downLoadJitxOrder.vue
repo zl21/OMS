@@ -65,7 +65,7 @@ export default {
         typeAll: "error", //按钮统一风格样式
         btnsite: "right", //按钮位置 (right , center , left)
         buttons: [
-          
+
           {
             type: "", //按钮类型
             text: "下载", //按钮文本
@@ -244,7 +244,7 @@ export default {
       self.$emit("confirmImport");
       self.$emit("closeActionDialog");
       this.downLoadModal = false;
-      this.$store.commit("TabOpen", {
+      this.$store.commit("customize/TabOpen", {
         id: this.taskId,
         type: "singleView", //类型action
         name: "singleView",

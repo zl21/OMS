@@ -83,7 +83,7 @@
               <div class="form_el_input">
                 <input
                   v-model="basicData.buy_ranking"
-                  placeholder 
+                  placeholder
                   @keyup="basicData.buy_ranking = basicData.buy_ranking.length === 1 ? basicData.buy_ranking.replace(/[^1-9]/g, '') : basicData.buy_ranking.replace(/\D/g, '')"
                 >
               </div>
@@ -131,11 +131,11 @@
                     <button class="btn add" @click="add_prolist">新增</button>
                     <button class="btn lead">导入</button>
                 </div> -->
-          <detailtable 
-            :t-columns="products_columns" 
+          <detailtable
+            :t-columns="products_columns"
             :itemdata="itemdata"
-            :is-object="itemdata.isObject" 
-            :t-data="productslistView.data"  
+            :is-object="itemdata.isObject"
+            :t-data="productslistView.data"
             :total="productslistView.total"
             :current="productslistView.current"
             :page-size="productslistView.pageSize"
@@ -271,7 +271,7 @@
           length: 65535,
           name: '',
           readonly: false,
-          reftable: 'SG_B_CHANNEL_PRODUCT', 
+          reftable: 'SG_B_CHANNEL_PRODUCT',
           reftableid: 24801,
           row: 1,
           statsize: -1,
@@ -470,7 +470,7 @@
       },
       cancel_simulation() {
         this.$destroy(true);
-        this.$store.commit('TabClose', {
+        this.$store.commit('customize/TabClose', {
           id: 31460113, // id
           type: 'action', // 类型action
           name: 'onlinepromotionlist', // 文件名
@@ -570,8 +570,8 @@
             }
           }
         }
-            
-            
+
+
         return { code: 0, message: '校验完成' };
       },
       /**
@@ -708,7 +708,7 @@
                     height:100%;
                     .el-input{
                     width:100%;
-                    height:100%; 
+                    height:100%;
                     input{
                         font-size: 12px;
                         width:100%;
@@ -731,7 +731,7 @@
                 top:0;
                 right:0;
             }
-                
+
             }
             .timeScope{
                 padding-left: 74px;
@@ -866,6 +866,6 @@
         }
 
     }
-    
+
 }
 </style>

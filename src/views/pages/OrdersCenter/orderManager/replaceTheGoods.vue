@@ -33,8 +33,8 @@
 </template>
 
 <script>
-import jordanActionTable from "../../../components/jordanActionTable";
-import jordanForm from "../../../components/jordanForm";
+import jordanActionTable from "professionalComponents/jordanActionTable";
+import jordanForm from "professionalComponents/jordanForm";
 import jordanButton from "professionalComponents/jordanButton";
 import { listeningToKeydownMixin } from "../../../mixins/listeningToKeydown.js";
 import axios from "axios";

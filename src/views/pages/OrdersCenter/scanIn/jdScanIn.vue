@@ -452,7 +452,7 @@
       // 五选一查询方法
       fiveQuery(type, value) {
         const self = this;
-        let id; let receiver_phone; let receiver_name; let 
+        let id; let receiver_phone; let receiver_name; let
           logistic_code;
         switch (type) {
         case 'id':
@@ -501,7 +501,7 @@
       // 物流单号，原单单号查询方法
       fiveQuery1(type, value) {
         const self = this;
-        let id; let 
+        let id; let
           logistic_code;
         switch (type) {
         case 'id':
@@ -549,7 +549,7 @@
       // 清除
       removeData() {
         if (this.$route.query.returnId) {
-          this.$store.commit('TabHref', {
+          this.$store.commit('customize/TabHref', {
             id: 2776, // 单据id
             type: 'action', // 类型action
             name: 'scanIn', // 文件名
@@ -782,7 +782,7 @@
                     self.$Message.success(res.data.message);
                     self.fm_four();
                     if (this.$route.query.returnId) { // 如果是从退换货列表跳转过来的，入库完成后再调回去
-                      this.$store.commit('TabHref', {
+                      this.$store.commit('customize/TabHref', {
                         id: 249130279,
                         type: 'table',
                         name: 'OC_B_JD_RETURN_ORDER',
@@ -1143,7 +1143,7 @@
                 // 判断扫描发出条码后是否为特殊处理流程
                 if (self.formConfig3.formValue.SPECIAL_TYPE === '1' || self.formConfig3.formValue.SPECIAL_TYPE === '2') {
                   // 判断发出条码在明细表中是否存在
-                  isDlog = detailist.some(item => 
+                  isDlog = detailist.some(item =>
                     // return self.formConfig3.formValue.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE;
                     self.formConfig3.formValue.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE || self.formConfig3.formValue.PS_C_SKU_ECODE === item.GBCODE // 2019/6/6 需求改动，同时匹配发出条码和国标码；
                   );
@@ -1170,7 +1170,7 @@
                         res.data.data.PRODUCT_MARK = '1';
                         // 增加底色
                         self.$set(res.data.data, 'cellClassName', {
-                          OC_B_JD_RETURN_ORDER_ID: 'yellow', PS_C_PRO_ECODE: 'yellow', PS_C_PRO_ENAME: 'yellow', PRODUCT_MARK: 'yellow', PS_C_SKU_ECODE: 'yellow', REAL_SKU_ECODE: 'yellow', SKU_SPEC: 'yellow', QTY: 'yellow', QTY_SCAN: 'yellow', GBCODE: 'yellow', RESERVE_VARCHAR01: 'yellow', IS_WITHOUT_ORIG: 'yellow' 
+                          OC_B_JD_RETURN_ORDER_ID: 'yellow', PS_C_PRO_ECODE: 'yellow', PS_C_PRO_ENAME: 'yellow', PRODUCT_MARK: 'yellow', PS_C_SKU_ECODE: 'yellow', REAL_SKU_ECODE: 'yellow', SKU_SPEC: 'yellow', QTY: 'yellow', QTY_SCAN: 'yellow', GBCODE: 'yellow', RESERVE_VARCHAR01: 'yellow', IS_WITHOUT_ORIG: 'yellow'
                         });
                         console.log(res.data.data);
                         self.jordanTableConfig.data.push(res.data.data);
@@ -1238,7 +1238,7 @@
                         if ((self.formConfig3.formValue.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE || self.formConfig3.formValue.PS_C_SKU_ECODE === item.GBCODE) && item.QTY > item.QTY_SCAN) {
                           item.QTY_SCAN = Number(item.QTY_SCAN) + 1;
                           self.$set(item, 'cellClassName', {
-                            OC_B_JD_RETURN_ORDER_ID: 'green', PS_C_PRO_ECODE: 'green', PS_C_PRO_ENAME: 'green', PRODUCT_MARK: 'green', PS_C_SKU_ECODE: 'green', REAL_SKU_ECODE: 'green', SKU_SPEC: 'green', QTY: 'green', QTY_SCAN: 'green', GBCODE: 'green', RESERVE_VARCHAR01: 'green', IS_WITHOUT_ORIG: 'green' 
+                            OC_B_JD_RETURN_ORDER_ID: 'green', PS_C_PRO_ECODE: 'green', PS_C_PRO_ENAME: 'green', PRODUCT_MARK: 'green', PS_C_SKU_ECODE: 'green', REAL_SKU_ECODE: 'green', SKU_SPEC: 'green', QTY: 'green', QTY_SCAN: 'green', GBCODE: 'green', RESERVE_VARCHAR01: 'green', IS_WITHOUT_ORIG: 'green'
                           });
                           self.formConfig3.formValue.PS_C_SKU_ECODE = '';
                           self.fm_three();
@@ -1252,7 +1252,7 @@
                           arr.OC_B_JD_RETURN_ORDER_ID = '';
                           arr.IS_WITHOUT_ORIG = '是';
                           self.$set(arr, 'cellClassName', {
-                            OC_B_JD_RETURN_ORDER_ID: 'yellow', PS_C_PRO_ECODE: 'yellow', PS_C_PRO_ENAME: 'yellow', PRODUCT_MARK: 'yellow', PS_C_SKU_ECODE: 'yellow', REAL_SKU_ECODE: 'yellow', SKU_SPEC: 'yellow', QTY: 'yellow', QTY_SCAN: 'yellow', GBCODE: 'yellow', RESERVE_VARCHAR01: 'yellow', IS_WITHOUT_ORIG: 'yellow' 
+                            OC_B_JD_RETURN_ORDER_ID: 'yellow', PS_C_PRO_ECODE: 'yellow', PS_C_PRO_ENAME: 'yellow', PRODUCT_MARK: 'yellow', PS_C_SKU_ECODE: 'yellow', REAL_SKU_ECODE: 'yellow', SKU_SPEC: 'yellow', QTY: 'yellow', QTY_SCAN: 'yellow', GBCODE: 'yellow', RESERVE_VARCHAR01: 'yellow', IS_WITHOUT_ORIG: 'yellow'
                           });
                           detailist.push(arr);
                           self.fm_three();
@@ -1265,7 +1265,7 @@
                   }
                 } else {
                   // 判断发出条码在明细表中是否存在
-                  isDlog = detailist.some(item => 
+                  isDlog = detailist.some(item =>
                     // return self.formConfig3.formValue.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE;
                     self.formConfig3.formValue.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE || self.formConfig3.formValue.PS_C_SKU_ECODE === item.GBCODE // 2019/6/6 需求改动，同时匹配发出条码和国标码；
                   );
@@ -1292,7 +1292,7 @@
                         res.data.data.PRODUCT_MARK = '1';
                         // 增加底色
                         self.$set(res.data.data, 'cellClassName', {
-                          OC_B_JD_RETURN_ORDER_ID: 'yellow', PS_C_PRO_ECODE: 'yellow', PS_C_PRO_ENAME: 'yellow', PRODUCT_MARK: 'yellow', PS_C_SKU_ECODE: 'yellow', REAL_SKU_ECODE: 'yellow', SKU_SPEC: 'yellow', QTY: 'yellow', QTY_SCAN: 'yellow', GBCODE: 'yellow', RESERVE_VARCHAR01: 'yellow', IS_WITHOUT_ORIG: 'yellow' 
+                          OC_B_JD_RETURN_ORDER_ID: 'yellow', PS_C_PRO_ECODE: 'yellow', PS_C_PRO_ENAME: 'yellow', PRODUCT_MARK: 'yellow', PS_C_SKU_ECODE: 'yellow', REAL_SKU_ECODE: 'yellow', SKU_SPEC: 'yellow', QTY: 'yellow', QTY_SCAN: 'yellow', GBCODE: 'yellow', RESERVE_VARCHAR01: 'yellow', IS_WITHOUT_ORIG: 'yellow'
                         });
                         console.log(res.data.data);
                         self.jordanTableConfig.data.push(res.data.data);
@@ -1337,7 +1337,7 @@
                         if ((self.formConfig3.formValue.PS_C_SKU_ECODE === items.PS_C_SKU_ECODE || self.formConfig3.formValue.PS_C_SKU_ECODE === items.GBCODE) && items.QTY > items.QTY_SCAN) {
                           items.QTY_SCAN = Number(items.QTY_SCAN) + 1;
                           self.$set(items, 'cellClassName', {
-                            OC_B_JD_RETURN_ORDER_ID: 'green', PS_C_PRO_ECODE: 'green', PS_C_PRO_ENAME: 'green', PRODUCT_MARK: 'green', PS_C_SKU_ECODE: 'green', REAL_SKU_ECODE: 'green', SKU_SPEC: 'green', QTY: 'green', QTY_SCAN: 'green', GBCODE: 'green', RESERVE_VARCHAR01: 'green', IS_WITHOUT_ORIG: 'green' 
+                            OC_B_JD_RETURN_ORDER_ID: 'green', PS_C_PRO_ECODE: 'green', PS_C_PRO_ENAME: 'green', PRODUCT_MARK: 'green', PS_C_SKU_ECODE: 'green', REAL_SKU_ECODE: 'green', SKU_SPEC: 'green', QTY: 'green', QTY_SCAN: 'green', GBCODE: 'green', RESERVE_VARCHAR01: 'green', IS_WITHOUT_ORIG: 'green'
                           });
                           self.formConfig3.formValue.PS_C_SKU_ECODE = '';
                           self.fm_three();
@@ -1352,7 +1352,7 @@
                           arr.IS_WITHOUT_ORIG = '是';
                           arr.PRODUCT_MARK = '1';
                           self.$set(arr, 'cellClassName', {
-                            OC_B_JD_RETURN_ORDER_ID: 'yellow', PS_C_PRO_ECODE: 'yellow', PS_C_PRO_ENAME: 'yellow', PRODUCT_MARK: 'yellow', PS_C_SKU_ECODE: 'yellow', REAL_SKU_ECODE: 'yellow', SKU_SPEC: 'yellow', QTY: 'yellow', QTY_SCAN: 'yellow', GBCODE: 'yellow', RESERVE_VARCHAR01: 'yellow', IS_WITHOUT_ORIG: 'yellow' 
+                            OC_B_JD_RETURN_ORDER_ID: 'yellow', PS_C_PRO_ECODE: 'yellow', PS_C_PRO_ENAME: 'yellow', PRODUCT_MARK: 'yellow', PS_C_SKU_ECODE: 'yellow', REAL_SKU_ECODE: 'yellow', SKU_SPEC: 'yellow', QTY: 'yellow', QTY_SCAN: 'yellow', GBCODE: 'yellow', RESERVE_VARCHAR01: 'yellow', IS_WITHOUT_ORIG: 'yellow'
                           });
                           detailist.push(arr);
                           self.fm_three();
@@ -1401,7 +1401,7 @@
                       if (res.data.code === 0) {
                         self.$Message.success(res.data.message);
                         if (this.$route.query.returnId) { // 如果是从退换货列表跳转过来的，入库完成后再调回去
-                          this.$store.commit('TabHref', {
+                          this.$store.commit('customize/TabHref', {
                             id: 249130279,
                             type: 'table',
                             name: 'OC_B_JD_RETURN_ORDER',

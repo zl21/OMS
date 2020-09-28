@@ -245,7 +245,7 @@ export default {
             btnclick: () => {
               const _this = this;
               if (_this.$route.query.form == 'list') {
-                _this.$store.commit("TabHref", {
+                _this.$store.commit("customize/TabHref", {
                   id: 2809,
                   type: "action",
                   name: "returnStoreageList",
@@ -257,7 +257,7 @@ export default {
                   back: true
                 });
               } else {
-                _this.$store.commit("TabHref", {
+                _this.$store.commit("customize/TabHref", {
                   id: _this.$route.query.id,
                   type: "action",
                   name: "returnTreasuryAdd",
@@ -743,7 +743,7 @@ export default {
           // this.getList();
           this.isSave = false;
           if (this.$route.query.form === 'list') {
-            this.$store.commit("TabHref", {
+            this.$store.commit("customize/TabHref", {
               id: 2809,
               type: "action",
               name: "returnStoreageList",
@@ -755,7 +755,7 @@ export default {
               back: true
             });
           } else {
-            this.$store.commit("TabHref", {
+            this.$store.commit("customize/TabHref", {
               id: this.$route.query.id,
               type: "action",
               name: "returnTreasuryAdd",

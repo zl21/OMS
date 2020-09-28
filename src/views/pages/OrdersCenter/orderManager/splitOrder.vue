@@ -190,7 +190,7 @@ export default {
   },
   methods: {
     back() {
-      this.$store.commit("TabHref", {
+      this.$store.commit("customize/TabHref", {
         id: 2627,
         type: "action",
         name: "orderManager",

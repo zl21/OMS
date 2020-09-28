@@ -59,7 +59,7 @@
 
 <script>
 import axios from "axios";
-import reForm from "../../../components/jordanForm.vue";
+import reForm from "professionalComponents/jordanForm";
 export default {
   components: {
     reForm

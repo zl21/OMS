@@ -963,7 +963,7 @@ export default {
         const ACTI_ID = selectedData[0].ACTI_ID;
         const IS_BATCH = selectedData[0].IS_BATCH;
         if (IS_BATCH) {
-          this.$store.commit("TabOpen", {
+          this.$store.commit("customize/TabOpen", {
             id: -1, // id
             type: "action", // 类型action
             name: "batchActivity", // 文件名
@@ -975,7 +975,7 @@ export default {
             }), // 带的参数
           });
         } else {
-          this.$store.commit("TabOpen", {
+          this.$store.commit("customize/TabOpen", {
             id: -1, // id
             type: "action", // 类型action
             name: "addOrEditActi", // 文件名
@@ -1155,7 +1155,7 @@ export default {
     },
     simulation() {
       // 模拟仿真
-      this.$store.commit("TabOpen", {
+      this.$store.commit("customize/TabOpen", {
         id: -1, // id
         type: "action", // 类型action
         name: "simulation", // 文件名
@@ -1218,7 +1218,7 @@ export default {
           // let scheme_dataInit = JSON.stringify(res.data.data.scheme_arr);
           // 存储种类id保存草稿时需要
           if (IS_BATCH) {
-            this.$store.commit("TabOpen", {
+            this.$store.commit("customize/TabOpen", {
               id: ACTI_ID, // id
               type: "action", // 类型action
               name: "batchActivity", // 文件名

@@ -275,7 +275,7 @@ export default {
       self.$emit("confirmImport");
       self.$emit("closeActionDialog");
       this.downLoadModal = false;
-      this.$store.commit("TabOpen", {
+      this.$store.commit("customize/TabOpen", {
         id: this.taskId,
         type: "singleView", //类型action
         name: "singleView",

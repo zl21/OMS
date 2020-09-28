@@ -351,9 +351,9 @@
               type: 'success',
               message: '保存成功'
             });
-            let action = 'switchActiveTab';
+            let action = 'customize/switchActiveTab';
             if (this.objid == -1) {
-              action = 'TabClose';
+              action = 'customize/TabClose';
             }
             this.objid = String(res.data.data.objid) || -1;
             this.$nextTick(() => {

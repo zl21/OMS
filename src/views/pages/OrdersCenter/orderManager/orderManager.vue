@@ -1442,7 +1442,7 @@
                   fromdata.append('param', JSON.stringify({ IDS: ids }));
                   self.$network.post('/api/cs/oc/oms/v1/checkAddOrderInvoicing', fromdata).then((res) => {
                     if (res.data.code === 0) {
-                      // self.$store.commit('TabOpen', {
+                      // self.$store.commit('customize/('TabOpen', {
                       //   id: -1,
                       //   type: 'action',
                       //   name: 'invoiceNoticetAdd',
@@ -1662,7 +1662,7 @@
                     || self.selection[0].ORDER_STATUS
                       === self.orderStatus.orderOutofstock
                   ) {
-                    // self.$store.commit('TabHref', {
+                    // self.$store.commit('customize/('TabHref', {
                     //   id: self.selection[0].ID,
                     //   type: 'action',
                     //   name: 'splitOrder',
@@ -1817,7 +1817,7 @@
                   });
                   return false;
                 }
-                // self.$store.commit('TabOpen', {
+                // self.$store.commit('customize/('TabOpen', {
                 //   id: -1,
                 //   type: 'action',
                 //   name: 'returngood',
@@ -1946,7 +1946,7 @@
             //         copyOrder: true,
             //         id: self.selection[0].ID
             //       };
-            //       self.$store.commit("TabHref", {
+            //       self.$store.commit("customize/TabHref", {
             //         id: -1,
             //         type: "action",
             //         name: "orderManageAdd",
@@ -2741,7 +2741,7 @@
           } else {
             query.copyOrder = true;
           }
-          // self.$store.commit('TabHref', {
+          // self.$store.commit('customize/('TabHref', {
           //   id: -1,
           //   type: 'action',
           //   name: 'orderManageAdd',
@@ -3733,7 +3733,7 @@
             if (res.data.code === 0) {
               self.$Message.success(res.data.message);
               // self.selection = [];
-              // self.$store.commit("TabOpen", {
+              // self.$store.commit("customize/TabOpen", {
               //   id: res.data.data,
               //   type: 'singleView',
               //   name: 'singleView',
