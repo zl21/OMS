@@ -794,17 +794,10 @@ export default {
     },
     // 单击某二行时触发
     onRowDblclick(row, index) {
-<<<<<<< HEAD
-      this.$store.commit("customize/TabHref", {
-        id: row.ID,
-        type: "action",
-        name: "returnTreasuryAdd",
-=======
       this.$store.commit("global/tabOpen", {
         customizedModuleId: row.ID,
         type: "C",
         customizedModuleName: "returnTreasuryAdd",
->>>>>>> feature/sq-opt
         label: "退货入库详情",
       });
     },
