@@ -17,18 +17,13 @@
       ></jordanLabel>
       <!-- 列表组件 -->
       <div class="tableBox">
-        <jordan-action-table
-          :jordanTableConfig="jordanTableConfig"
-          @on-row-dblclick="onRowDblclick"
-          @on-select="returnOnSelect"
-          @table-import="returnImport"
-          @table-export="returnExport"
-          @on-select-cancel="returnCancel"
-          @on-select-all="returnSelectAll"
-          @on-select-all-cancel="returnSelectAllCancel"
+        <aTable
+          ref="agtable"
+          :agTableConfig="agTableConfig"
           @on-page-change="pageChange"
           @on-page-size-change="pageSizeChange"
-        ></jordan-action-table>
+          @on-row-dblclick="onRowDblclick"
+        ></aTable>
       </div>
     </div>
     <!-- 导入 -->
@@ -65,7 +60,7 @@
 import jordanButton from "professionalComponents/jordanButton";
 import jordanForm from "professionalComponents/jordanForm";
 import jordanLabel from "professionalComponents/jordanLabel";
-import jordanActionTable from "professionalComponents/jordanActionTable";
+import aTable from "professionalComponents/table/agGridTable.vue";
 import jordanModal from "professionalComponents/JDialog";
 import axios from "axios";
 import { debug, debuglog } from "util";
@@ -73,11 +68,132 @@ import { isFavoriteMixin } from "@/assets/js/mixins/isFavorite";
 import publicMethodsUtil from "@/assets/js/public/publicMethods";
 import { customPagingMixins } from "@/assets/js/mixins/customPaging.js";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
+
+// 表头的基本配置
+const baseColumnDefs = [
+  {
+    headerName: "单据状态",
+    field: "BILL_STATUS_NAME",
+  },
+  {
+    headerName: "单据编号",
+    field: "BILL_NO",
+  },
+  {
+    headerName: "平台单号",
+    field: "TID",
+  },
+  {
+    headerName: "单据类型",
+    field: "BILL_TYPE_NAME",
+  },
+  {
+    headerName: "调整类型",
+    field: "ADJUST_TYPE_NAME",
+  },
+  {
+    headerName: "店铺名称",
+    field: "CP_C_SHOP_TITLE",
+  },
+  {
+    headerName: "实体仓",
+    field: "CP_C_PHY_WAREHOUSE_ENAME",
+  },
+  {
+    headerName: "赔付快递公司",
+    field: "CP_C_LOGISTICS_ENAME",
+  },
+  {
+    headerName: "快递单号",
+    field: "LOGISTICS_NO",
+  },
+  {
+    headerName: "总应付金额",
+    field: "PAYABLE_PRICE",
+  },
+  {
+    headerName: "支付方式",
+    field: "PAY_TYPE_NAME",
+  },
+  {
+    headerName: "备注",
+    field: "REMARK",
+  },
+  {
+    headerName: "来源单据编号",
+    field: "ORDER_NO",
+  },
+  {
+    headerName: "顾客电话",
+    field: "CUSTOMER_TEL",
+  },
+  {
+    headerName: "顾客姓名",
+    field: "CUSTOMER_NAME",
+  },
+  {
+    headerName: "支付宝号",
+    field: "ALIPAY_ACCOUNT",
+  },
+  {
+    headerName: "会员昵称",
+    field: "CUSTOMER_NICK",
+  },
+  {
+    headerName: "付款时间",
+    field: "PAY_TIME",
+  },
+  {
+    headerName: "创建时间",
+    field: "CREATIONDATE",
+  },
+  {
+    headerName: "创建人",
+    field: "OWNERENAME",
+  },
+  {
+    headerName: "修改时间",
+    field: "MODIFIEDDATE",
+  },
+  {
+    headerName: "修改人",
+    field: "MODIFIERENAME",
+  },
+  {
+    headerName: "客审时间",
+    field: "GUEST_TRIAL_TIME",
+  },
+  {
+    headerName: "客审人",
+    field: "GUEST_TRIAL_ENAME",
+  },
+  {
+    headerName: "财审时间",
+    field: "FINANCIAL_TRIAL_TIME",
+  },
+  {
+    headerName: "财审人",
+    field: "FINANCIAL_TRIAL_ENAME",
+  },
+  {
+    headerName: "作废时间",
+    field: "DEL_TIME",
+  },
+  {
+    headerName: "作废人",
+    field: "DELENAME",
+  },
+  {
+    headerName: "可用",
+    field: "ISACTIVE",
+  },
+];
+
 export default {
   components: {
     jordanButton,
     jordanForm,
-    jordanActionTable,
+    aTable,
     jordanLabel,
     jordanModal,
   },
@@ -407,142 +523,40 @@ export default {
         },
       ], // tab切换
       labelDefaultValue: "1",
-      jordanTableConfig: {
-        columns: [
-          {
-            title: "单据状态",
-            key: "BILL_STATUS_NAME",
+
+      agTableConfig: {
+        // isIndex: true, // 如果要自定义序号，则将此key的值设置为true，而后自己定义序号生成器，可参考promotionlist.vue
+        tableHeight: "440px",
+        columnDefs: baseColumnDefs,
+        rowData: [],
+        renderArr: {
+          ACTION_LOG: (params) => {
+            // console.log("params :>> ", params);
+            if (!params.data.ACTION_LOG) return;
+            const resultElement = document.createElement("div");
+            const iTag = document.createElement("div");
+            iTag.style.color = "#0f8ee9";
+            iTag.style.textDecoration = "underline";
+            iTag.innerText = params.data.ACTION_LOG;
+            iTag.style.cursor = "pointer";
+            iTag.onclick = () => {
+              // console.log(params.data);
+              this.viewLog(params.data);
+            };
+            resultElement.appendChild(iTag);
+            return resultElement;
           },
-          {
-            title: "单据编号",
-            key: "BILL_NO",
-          },
-          {
-            title: "平台单号",
-            key: "TID",
-          },
-          {
-            title: "单据类型",
-            key: "BILL_TYPE_NAME",
-          },
-          {
-            title: "调整类型",
-            key: "ADJUST_TYPE_NAME",
-          },
-          {
-            title: "店铺名称",
-            key: "CP_C_SHOP_TITLE",
-          },
-          {
-            title: "实体仓",
-            key: "CP_C_PHY_WAREHOUSE_ENAME",
-          },
-          {
-            title: "赔付快递公司",
-            key: "CP_C_LOGISTICS_ENAME",
-          },
-          {
-            title: "快递单号",
-            key: "LOGISTICS_NO",
-          },
-          {
-            title: "总应付金额",
-            key: "PAYABLE_PRICE",
-          },
-          {
-            title: "支付方式",
-            key: "PAY_TYPE_NAME",
-          },
-          {
-            title: "备注",
-            key: "REMARK",
-          },
-          {
-            title: "来源单据编号",
-            key: "ORDER_NO",
-          },
-          {
-            title: "顾客电话",
-            key: "CUSTOMER_TEL",
-          },
-          {
-            title: "顾客姓名",
-            key: "CUSTOMER_NAME",
-          },
-          {
-            title: "支付宝号",
-            key: "ALIPAY_ACCOUNT",
-          },
-          {
-            title: "会员昵称",
-            key: "CUSTOMER_NICK",
-          },
-          {
-            title: "付款时间",
-            key: "PAY_TIME",
-          },
-          {
-            title: "创建时间",
-            key: "CREATIONDATE",
-          },
-          {
-            title: "创建人",
-            key: "OWNERENAME",
-          },
-          {
-            title: "修改时间",
-            key: "MODIFIEDDATE",
-          },
-          {
-            title: "修改人",
-            key: "MODIFIERENAME",
-          },
-          {
-            title: "客审时间",
-            key: "GUEST_TRIAL_TIME",
-          },
-          {
-            title: "客审人",
-            key: "GUEST_TRIAL_ENAME",
-          },
-          {
-            title: "财审时间",
-            key: "FINANCIAL_TRIAL_TIME",
-          },
-          {
-            title: "财审人",
-            key: "FINANCIAL_TRIAL_ENAME",
-          },
-          {
-            title: "作废时间",
-            key: "DEL_TIME",
-          },
-          {
-            title: "作废人",
-            key: "DELENAME",
-          },
-          {
-            title: "可用",
-            key: "ISACTIVE",
-          },
-        ], //表头
-        pageShow: true, //控制分页是否显示
-        loading: false,
-        // isShowDeleteDetailBtn: true, //控制是否显示删除明细
-        // isShowImportBtn: true, //控制是否显示导入
-        // isShowExportBtn: true, //控制是否显示导出
-        searchInputShow: false, // 控制搜索框是否显示
-        indexColumn: true, // 是否显示序号
-        isShowSelection: true, // 是否显示checkedbox
-        width: "", // 表格宽度
-        height: 440, // 表格高度
-        border: true, //是否显示纵向边框
-        current: 1, //当前页数
-        total: 0, //设置总条数
-        pageSizeOpts: [20, 50, 80, 100], // 每页条数切换的配置
-        pageSize: 50, // 每页条数
-        data: [], //数据配置
-      }, // 列表数据
+        },
+        pagenation: {
+          // 设置总条数
+          total: 0,
+          // 条数
+          pageSize: 20,
+          // 页数
+          current: 1,
+          pageSizeOpts: [20, 50, 150, 1000],
+        },
+      }, // 全部
       returnSelectData: [], // 列表选中数据
       isShowFromLoading: false,
       statusTab: "", // 单据类型
@@ -550,7 +564,7 @@ export default {
   },
   activated() {
     // 获取默认数据
-    this.jordanTableConfig.current = 1;
+    this.agTableConfig.pagenation.current = 1;
     this.getList();
   },
   created() {
@@ -635,7 +649,7 @@ export default {
     },
     // 查找
     find() {
-      this.jordanTableConfig.current = 1;
+      this.agTableConfig.pagenation.current = 1;
       this.getList();
     },
     invalid() {
@@ -725,12 +739,12 @@ export default {
     // 获取列表数据
     getList() {
       const _this = this;
-      if (_this.jordanTableConfig.loading) {
+      if (_this.agTableConfig.loading) {
         return;
       }
-      _this.jordanTableConfig.data = [];
-      _this.jordanTableConfig.total = 0;
-      _this.jordanTableConfig.loading = true;
+      _this.agTableConfig.rowData = [];
+      _this.agTableConfig.pagenation.total = 0;
+      _this.agTableConfig.loading = true;
 
       let mainData = _this.formConfig.formValue;
       let creationdateStart = "";
@@ -756,8 +770,8 @@ export default {
       }
 
       let whereInfoForm = {
-        // start: _this.jordanTableConfig.current,
-        // count: _this.jordanTableConfig.pageSize,
+        // start: _this.agTableConfig.pagenation.current,
+        // count: _this.agTableConfig.pagenation.pageSize,
         CREATIONDATE_START: creationdateStart,
         CREATIONDATE_END: creationdateEnd,
         GUEST_TRIAL_TIME_START: guestTrialTimeStart,
@@ -781,8 +795,8 @@ export default {
 
       let param = {
         whereInfo: whereInfoForm,
-        pageNum: _this.jordanTableConfig.current,
-        pageSize: _this.jordanTableConfig.pageSize,
+        pageNum: _this.agTableConfig.pagenation.current,
+        pageSize: _this.agTableConfig.pagenation.pageSize,
       };
       // let newParam = Object.assign(param, _this.formConfig.formValue);
       let fromdata = new FormData();
@@ -792,10 +806,11 @@ export default {
         method: "post",
         data: fromdata,
       }).then((res) => {
-        _this.jordanTableConfig.loading = false;
+        _this.agTableConfig.loading = false;
         _this.returnSelectData = [];
         if (res.data.code === 0 && res.data.data.payableAdjustmentList.length) {
           //Table表单赋值
+
           _this.allTableArr = res.data.data.payableAdjustmentList.map(
             (item) => {
               //过滤不需要展示的模糊搜索项
@@ -850,16 +865,21 @@ export default {
           );
           // _this.customPagingFun(
           //   filterItemData,
-          //   _this.jordanTableConfig.pageSize,
-          //   _this.jordanTableConfig,
-          //   "jordanTableConfig"
+          //   _this.agTableConfig.pagenation.pageSize,
+          //   _this.agTableConfig,
+          //   "agTableConfig"
           // );
-          _this.jordanTableConfig.total = res.data.data.page.totalSize;
-          _this.jordanTableConfig.data = _this.allTableArr;
+          _this.agTableConfig.pagenation.total = res.data.data.page.totalSize;
+          _this.agTableConfig.rowData = _this.allTableArr;
         } else {
-          _this.jordanTableConfig.data = [];
-          _this.jordanTableConfig.total = 0;
+          _this.agTableConfig.rowData = [];
+          _this.agTableConfig.pagenation.total = 0;
         }
+        this.$refs.agtable.agGridTable(
+          this.agTableConfig.columnDefs,
+          this.agTableConfig.rowData
+          // this.getExtendObj()
+        );
       });
     },
     oneObjs(e) {},
@@ -895,13 +915,31 @@ export default {
     // 分页change 事件
     pageChange(val) {
       this.selectArr = [];
-      this.jordanTableConfig.current = val;
+      this.agTableConfig.pagenation.current = val;
       this.getList();
     },
     // 切换分页条数
     pageSizeChange(val) {
       this.selectArr = [];
-      this.jordanTableConfig.pageSize = val;
+      this.agTableConfig.pagenation.pageSize = val;
+    },
+    getExtendObj() {
+      return {
+        getRowStyle(params) {
+          // console.log("params :>> ", params);
+          // 设置行样式
+          if (params.data.STATUS === 1) {
+            // 草稿
+            return { color: "#323233" };
+          }
+          if (params.data.STATUS === 2) {
+            // 已发布
+            return { color: "blue" };
+          }
+          // 下线过期
+          return { color: "gray" };
+        },
+      };
     },
     // 导入
     returnExport() {},
@@ -917,7 +955,7 @@ export default {
       returnHeight += document.getElementsByClassName("returnForm")[0]
         .clientHeight;
       let tableHeight = contentHeight - returnHeight;
-      _this.jordanTableConfig.height = tableHeight - 130;
+      _this.agTableConfig.height = tableHeight - 130;
     },
     // 导出
     exportClick() {
@@ -945,7 +983,7 @@ export default {
           }
         });
       } else {
-        if (_this.jordanTableConfig.data.length === 0) {
+        if (_this.agTableConfig.rowData.length === 0) {
           return _this.$Message.error("列表没有数据,无法导出!");
         }
         _this.warningModal = true;
@@ -988,7 +1026,7 @@ export default {
         financialTrialTimeEnd = mainData.FINANCIAL_TRIAL_TIME[1];
       }
       let param = {
-        start: _this.jordanTableConfig.current,
+        start: _this.agTableConfig.pagenation.current,
         count: 999999,
         CREATIONDATE_START: creationdateStart,
         CREATIONDATE_END: creationdateEnd,
