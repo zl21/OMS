@@ -10,7 +10,7 @@ import WelcomePage from './src/component/WelcomePage.vue';
 import projectRouterConfig from './src/config/router.config';
 import customizedPageConfig from './src/config/customized.page.config';
 import customizedModalConfig from './src/config/customized.modal.config';
-import './static/theme/custom.less'; // 主题文件
+import '@burgeon/oms-theme/theme/custom.less'; // 主题文件
 import customizedTheme from './src/config/customized.theme.js';//主题配置
 
 // import './static/theme/custom.less'; // 主题文件
@@ -48,6 +48,7 @@ const {
   network,
   urlSearchParams
 } = R3;
+window.R3 = R3;
 Vue.prototype.$network = network;
 Vue.prototype.$urlSearchParams = urlSearchParams;
 Vue.prototype.$theme = customizedTheme;//将主题方法挂载到原型上
@@ -77,8 +78,6 @@ function getTreeChildren(pnode, arr) {
   });
 }
 
-const theme = localStorage.getItem('theme');
-document.getElementsByTagName('body')[0].className = theme;
 // 老框架引入的 自定义界面内需要的资源
 R3.launchApplication({
   image: {

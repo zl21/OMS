@@ -1,7 +1,7 @@
 <template>
-  <div class="downLoadTaobaoOrder" style="width:400px">
-    <jordanForm :formConfig="downLoadJitxOrderFormConfig"></jordanForm>
-    <jordanBtn :btnConfig="downLoadJitxOrderBtnConfig"></jordanBtn>
+  <div class="downLoadTaobaoOrder" style="width:400px;padding-right:20px">
+    <jordanForm :formConfig="downLoadFormConfig"></jordanForm>
+    <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
     <!-- 确认下载弹框 -->
     <Modal
       class="downLoadModal"
@@ -32,10 +32,16 @@ export default {
   },
   props: {
     objList: {
-      type: Array
+      type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     idArr: {
-      type: Array
+      type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     webid: {
       type: Number
@@ -44,7 +50,10 @@ export default {
       type: String
     },
     rowData: {
-      type: Array
+      type: Array,
+      defalut:() =>{
+        return []
+      }
     }
   },
 
@@ -52,7 +61,7 @@ export default {
     return {
       downLoadModal: false,
       taskId: "",
-      downLoadJitxOrderBtnConfig: {
+      downLoadBtnConfig: {
         typeAll: "error", //按钮统一风格样式
         btnsite: "right", //按钮位置 (right , center , left)
         buttons: [
@@ -65,9 +74,9 @@ export default {
             disabled: false, //按钮禁用控制
             btnclick: () => {
               let self = this;
-              let formValue = self.downLoadJitxOrderFormConfig.formValue
+              let formValue = self.downLoadFormConfig.formValue
               if (
-                !self.downLoadJitxOrderFormConfig.formData[0].itemdata.pid
+                !self.downLoadFormConfig.formData[0].itemdata.pid
               ) {
                 self.$Message.warning("请选择需要下载的店铺");
                 return false;
@@ -82,14 +91,8 @@ export default {
               }
               let param = {
                 shop_id:
-                  self.downLoadJitxOrderFormConfig.formData[0].itemdata.pid,
+                  self.downLoadFormConfig.formData[0].itemdata.pid,
                 bill_no: formValue.orderNum, //订单编号
-                // start_time: self.standardTimeConversiondateToStr(
-                //   self.downLoadJitxOrderFormConfig.formValue.startEndTimes[0]
-                // ), //开始时间
-                // end_time: self.standardTimeConversiondateToStr(
-                //   self.downLoadJitxOrderFormConfig.formValue.startEndTimes[1]
-                // ), //结束时间
                 status: formValue.orderStatus, //状态 必传 给默认值
                 table: self.tablename //当前表名 必传
               };
@@ -102,7 +105,7 @@ export default {
               }).then(function(res) {
                 console.log(res);
                 if (res.data.code === 0) {
-                  let orderNum = self.downLoadJitxOrderFormConfig.formValue.orderNum;
+                  let orderNum = self.downLoadFormConfig.formValue.orderNum;
                   if(orderNum){
                     self.$Message.success(res.data.message);
                     self.$emit("closeActionDialog");
@@ -128,9 +131,8 @@ export default {
           }
         ]
       },
-      downLoadJitxOrderFormConfig: {
+      downLoadFormConfig: {
         formValue: {
-          // orderStatus: "WAIT_SELLER_STOCK_OUT",
           orderStatus: "",
           startEndTimes: [],
           orderNum: "",
@@ -227,43 +229,6 @@ export default {
   },
 
   methods: {
-    standardTimeConversiondateToStr(val) {
-      let dateTime = new Date(val);
-      let year = dateTime.getFullYear();
-      let month = dateTime.getMonth() + 1; //js从0开始取
-      let date = dateTime.getDate();
-      let hour = dateTime.getHours();
-      let minutes = dateTime.getMinutes();
-      let second = dateTime.getSeconds();
-      if (month < 10) {
-        month = "0" + month;
-      }
-      if (date < 10) {
-        date = "0" + date;
-      }
-      if (hour < 10) {
-        hour = "0" + hour;
-      }
-      if (minutes < 10) {
-        minutes = "0" + minutes;
-      }
-      if (second < 10) {
-        second = "0" + second;
-      }
-      return (
-        year +
-        "-" +
-        month +
-        "-" +
-        date +
-        " " +
-        hour +
-        ":" +
-        minutes +
-        ":" +
-        second
-      );
-    },
     downLoadOk() {
       const self = this;
       self.$emit("confirmImport");

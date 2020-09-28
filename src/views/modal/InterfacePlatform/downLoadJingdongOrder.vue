@@ -1,7 +1,7 @@
 <template>
-  <div class="downLoadTaobaoOrder" style="width:400px">
-    <jordanForm :formConfig="downLoadTaobaoOrderFormConfig"></jordanForm>
-    <jordanBtn :btnConfig="downLoadTaobaoOrderBtnConfig"></jordanBtn>
+  <div class="downLoadTaobaoOrder" style="width:400px;padding-right:20px">
+    <jordanForm :formConfig="downLoadFormConfig"></jordanForm>
+    <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
     <!-- 确认下载弹框 -->
     <Modal
       class="downLoadModal"
@@ -33,10 +33,16 @@ export default {
   },
   props: {
     objList: {
-      type: Array
+      type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     idArr: {
-      type: Array
+      type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     webid: {
       type: Number
@@ -45,15 +51,17 @@ export default {
       type: String
     },
     rowData: {
-      type: Array
+      type: Array,
+      defalut:() =>{
+        return []
+      }
     }
   },
-
   data() {
     return {
       downLoadModal: false,
       taskId: "",
-      downLoadTaobaoOrderBtnConfig: {
+      downLoadBtnConfig: {
         typeAll: "error", //按钮统一风格样式
         btnsite: "right", //按钮位置 (right , center , left)
         buttons: [
@@ -123,7 +131,7 @@ export default {
           }
         ]
       },
-      downLoadTaobaoOrderFormConfig: {
+      downLoadFormConfig: {
         formValue: {
           orderStatus: "WAIT_SELLER_STOCK_OUT",
           startEndTimes: [],
@@ -212,16 +220,15 @@ export default {
       }
     };
   },
-
   methods: {
     standardTimeConversiondateToStr(val) {
-      var dateTime = new Date(val);
-      var year = dateTime.getFullYear();
-      var month = dateTime.getMonth() + 1; //js从0开始取
-      var date = dateTime.getDate();
-      var hour = dateTime.getHours();
-      var minutes = dateTime.getMinutes();
-      var second = dateTime.getSeconds();
+      let dateTime = new Date(val);
+      let year = dateTime.getFullYear();
+      let month = dateTime.getMonth() + 1; //js从0开始取
+      let date = dateTime.getDate();
+      let hour = dateTime.getHours();
+      let minutes = dateTime.getMinutes();
+      let second = dateTime.getSeconds();
       if (month < 10) {
         month = "0" + month;
       }

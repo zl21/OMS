@@ -1,7 +1,7 @@
 <template>
   <div class="downLoadTaobaoOrder" style="width:400px">
-    <jordanForm :formConfig="downLoadTaobaoOrderFormConfig"></jordanForm>
-    <jordanBtn :btnConfig="downLoadTaobaoOrderBtnConfig"></jordanBtn>
+    <jordanForm :formConfig="downLoadFormConfig"></jordanForm>
+    <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
     <!-- 确认下载弹框 -->
     <Modal
       class="downLoadModal"
@@ -61,7 +61,7 @@ export default {
     return {
       downLoadModal: false,
       taskId: "",
-      downLoadTaobaoOrderBtnConfig: {
+      downLoadBtnConfig: {
         typeAll: "error", //按钮统一风格样式
         btnsite: "right", //按钮位置 (right , center , left)
         buttons: [
@@ -74,31 +74,31 @@ export default {
             btnclick: () => {
               let self = this;
               if (
-                !self.downLoadTaobaoOrderFormConfig.formData[0].itemdata.pid
+                !self.downLoadFormConfig.formData[0].itemdata.pid
               ) {
                 self.$Message.warning("请选择需要下载的店铺");
                 return false;
               }
               if (
-                self.downLoadTaobaoOrderFormConfig.formValue.startEndTimes
+                self.downLoadFormConfig.formValue.startEndTimes
                   .length === 0 &&
-                self.downLoadTaobaoOrderFormConfig.formValue.orderNum === ""
+                self.downLoadFormConfig.formValue.orderNum === ""
               ) {
                 self.$Message.warning("请选择输入的日期或输入订单编号");
                 return false;
               }
               let param = {
                 shop_id:
-                  self.downLoadTaobaoOrderFormConfig.formData[0].itemdata.pid,
-                bill_no: self.downLoadTaobaoOrderFormConfig.formValue.orderNum, //订单编号
+                  self.downLoadFormConfig.formData[0].itemdata.pid,
+                bill_no: self.downLoadFormConfig.formValue.orderNum, //订单编号
                 start_time: self.standardTimeConversiondateToStr(
-                  self.downLoadTaobaoOrderFormConfig.formValue.startEndTimes[0]
+                  self.downLoadFormConfig.formValue.startEndTimes[0]
                 ), //开始时间
                 end_time: self.standardTimeConversiondateToStr(
-                  self.downLoadTaobaoOrderFormConfig.formValue.startEndTimes[1]
+                  self.downLoadFormConfig.formValue.startEndTimes[1]
                 ), //结束时间
                 status:
-                  self.downLoadTaobaoOrderFormConfig.formValue.orderStatus, //状态 必传 给默认值
+                  self.downLoadFormConfig.formValue.orderStatus, //状态 必传 给默认值
                 table: self.tablename //当前表名 必传
               };
               let fromdata = new FormData();
@@ -131,7 +131,7 @@ export default {
           }
         ]
       },
-      downLoadTaobaoOrderFormConfig: {
+      downLoadFormConfig: {
         formValue: {
           orderStatus: "WAIT_SELLER_SEND_GOODS",
           startEndTimes: [],

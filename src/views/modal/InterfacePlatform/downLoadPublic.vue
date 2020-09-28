@@ -1,5 +1,5 @@
 <template>
-  <div class="public" style="width:400px">
+  <div class="public" style="width:400px;padding-right:20px">
     <jordanForm :formConfig="downLoadPublicFormConfig">
       <template #compile="{ rowData }">
         <div class="import-box" @click="importBoxOpen(rowData.item)">
@@ -47,9 +47,15 @@ export default {
   props: {
     objList: {
       type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     idArr: {
       type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     webid: {
       type: Number,
@@ -59,6 +65,9 @@ export default {
     },
     rowData: {
       type: Array,
+      defalut:() =>{
+        return []
+      }
     },
     SpecialTitle: {
       type: String,
@@ -198,7 +207,7 @@ export default {
           {
             style: "radio", //单选框
             label: "订单状态", //前面字段
-            width: "6", //宽度
+            width: "24", //宽度
             value: "orderStatus", //绑定到formValue的值
             // radioChange: ()=>{alert('123')}, //切换时的方法
             // setRequired: "required", //必选标识,值不为required时无标识

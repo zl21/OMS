@@ -1,5 +1,5 @@
 <template>
-  <div style="width:430px">
+  <div style="width:430px;padding-right:20px">
     <jordanForm :formConfig="downLoadTaobaoGoodsFormConfig"></jordanForm>
     <div class="dialog-footer">
       <Button type="primary" ghost size="" @click="download">确定</Button>
