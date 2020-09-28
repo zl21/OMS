@@ -104,6 +104,7 @@ import dateUtil from "@/assets/js/__utils__/date.js";
 import tableInput from "professionalComponents/jordanTableInput.vue";
 import publicMethodsUtil from "@/assets/js/public/publicMethods.js";
 export default {
+  name: "payableAdjustAdd",
   components: {
     jordanButton,
     jordanForm,
