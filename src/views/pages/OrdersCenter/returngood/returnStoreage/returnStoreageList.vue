@@ -169,10 +169,10 @@ export default {
           {
             text: "新增",
             btnclick: () => {
-              this.$store.commit("TabHref", {
-                id: -1, //id
-                type: "action", //类型action
-                name: "returnTreasuryAdd", //文件名
+              this.$store.commit("global/tabOpen", {
+                customizedModuleId: "NEW", //id
+                type: "C", //类型action
+                customizedModuleName: "returnTreasuryAdd", //文件名
                 label: "退货入库新增", //tab中文名
                 query: Object.assign({
                   id: -1, //id
@@ -186,6 +186,7 @@ export default {
             disabled: false,
             btnclick: () => {
               let self = this;
+              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               let ids = this.selection.map(item => {
                 return item.ID;
               });
@@ -227,6 +228,7 @@ export default {
             disabled: false,
             btnclick: () => {
               let self = this;
+              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               let ids = this.selection.map(item => {
                 return item.ID;
               });
@@ -267,6 +269,7 @@ export default {
             text: "作废",
             isShow: false,
             btnclick: () => {
+              this.selection = this.$refs.agGridChild.AGTABLE.getSelect();
               let ids = this.selection.map(item => {
                 return item.ID;
               });
@@ -335,19 +338,12 @@ export default {
         flodClick: "a",
         formData: [],
         formValue: {},
-        flodClick: () => {
-          const _this = this;
-          setTimeout(() => {
-            _this.setTableHeight();
-          }, 10);
-        }
+        flodClick: () => {}
       },
       // tableConfig: {
       //   parentClass: "parentClass",
       //   isShowSelection: true,
       //   indexColumn: true,
-      //   columns: [],
-      //   data: [],
       //   renderArr: [
       //     {
       //       key: "ID",
@@ -546,13 +542,10 @@ export default {
     this.$nextTick(() => {
       this.getPermissions("btnConfig", "returnStoreageList");
     });
-    // this.getisFavorite();
     this.getHeaderList();
-    this.setTableHeight();
   },
   activated() {
     this.agTableConfig.pagenation.current = 1;
-    // this.request();
   },
   methods: {
     // 获取高级查询&表头
@@ -562,7 +555,6 @@ export default {
       const params = { "table": "OC_B_REFUND_IN", "column_include_uicontroller": true, "fixedcolumns": {}, "multiple": [], "startindex": 0 }
       axios({
         url: "/api/cs/oc/oms/v1/DynamicList",
-        // url: "/api/cs/oc/oms/v1/queryListConfig",
         method: "post",
         data: params
       }).then((res) => {
@@ -699,6 +691,8 @@ export default {
         res.data.data.columns.forEach(item=>{
           item['field'] = item.key;
           item['headerName'] = item.title;
+          delete item.key;
+          delete item.title;
         })
         _this.agTableConfig.columnDefs = res.data.data.columns;
         _this.isShowFromLoading = false;
@@ -798,34 +792,13 @@ export default {
         //}
       });
     },
-    // 选中某一项时触发
-    onSelect(selection, row) {
-      this.selection = selection;
-    },
-    // 取消选中某一项时触发
-    onSelectCancel(selection, row) {
-      this.selection = selection;
-    },
-    // 点击全选时触发
-    onSelectAll(selection) {
-      this.selection = selection;
-    },
-    // 点击取消全选时触发
-    onSelectAllCancel(selection) {
-      this.selection = selection;
-    },
     // 单击某二行时触发
     onRowDblclick(row, index) {
-      this.$store.commit("TabHref", {
-        id: row.ID,
-        type: "action",
-        name: "returnTreasuryAdd",
+      this.$store.commit("global/tabOpen", {
+        customizedModuleId: row.ID,
+        type: "C",
+        customizedModuleName: "returnTreasuryAdd",
         label: "退货入库详情",
-        query: Object.assign({
-          id: row.ID, //单据id
-          tabTitle: "退货入库详情",
-          statusName: row.INVALIDSTATE
-        })
       });
     },
     // 分页change 事件
@@ -838,14 +811,9 @@ export default {
       this.agTableConfig.pagenation.pageSize = val;
       this.request();
     },
-    setTableHeight() {
-      // let tableHeight = document.getElementsByClassName("jordan-table-box")[0]
-      //   .clientHeight;
-      // let formHeight = document.getElementsByClassName("searchList")[0].clientHeight;
-      // this.tableConfig.height = tableHeight - formHeight;
-    },
     exportClick() {
       let self = this;
+      self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
       if (self.selection.length) {
         if (this.isExport) return this.$Message.error('有一项导出正在进行中')
         this.isExport = true;
@@ -859,7 +827,7 @@ export default {
         axios({
           url: "/api/cs/oc/oms/v1/exportOcBRefundIn",
           method: "post",
-          cancelToken: true,
+          // cancelToken: true,
           data: idList
         }).then(res => {
           self.isExport = false;
