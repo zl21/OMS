@@ -154,7 +154,7 @@ module.exports = env => ({
       allpages: path.resolve(__dirname, 'src/views/pages'),
       framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
       professionalComponents: path.resolve(__dirname, 'node_modules/@burgeon/business-components/jordanComponent'),
-      omsTheme:path.resolve(__dirname, 'node_modules/@burgeon/oms-theme/'),
+      omsTheme: path.resolve(__dirname, 'node_modules/@burgeon/oms-theme/'),
     },
   },
   optimization: {
