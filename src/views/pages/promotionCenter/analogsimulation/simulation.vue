@@ -605,7 +605,7 @@
 @lineHeight: 24px;
 @inputWidth: 410px;
 @fontSize: 12px;
-@baseColor: #fd6442;
+@baseColor: #0068b7;
 @bgColr:#fff6f6;
 @bgColor:#fff;
 .simulation{
@@ -622,7 +622,7 @@
         box-sizing: border-box;
         z-index:101;
         border:1px solid #ffdcdc;
-        .btn{
+        .btn {
             font-size: 12px;
             color:@baseColor;
             border:1px solid @baseColor;
