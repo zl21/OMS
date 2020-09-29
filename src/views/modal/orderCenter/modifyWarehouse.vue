@@ -166,8 +166,6 @@ export default {
         self.totalRowCount = res.data.count;
       });
     },
-    // 输入框改变产生的
-    InputValueChange() { },
     // 分页请求数据
     changePage(value) {
       this.pageNum = value;

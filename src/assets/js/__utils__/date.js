@@ -2,7 +2,43 @@ import strUtil from './util.js';
 
 class dateFuns {
   constructor() { }
-
+  standardTimeConversiondateToStr(val) {
+    let dateTime = new Date(val);
+    let year = dateTime.getFullYear();
+    let month = dateTime.getMonth() + 1; //js从0开始取
+    let date = dateTime.getDate();
+    let hour = dateTime.getHours();
+    let minutes = dateTime.getMinutes();
+    let second = dateTime.getSeconds();
+    if (month < 10) {
+      month = "0" + month;
+    }
+    if (date < 10) {
+      date = "0" + date;
+    }
+    if (hour < 10) {
+      hour = "0" + hour;
+    }
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    if (second < 10) {
+      second = "0" + second;
+    }
+    return (
+      year +
+      "-" +
+      month +
+      "-" +
+      date +
+      " " +
+      hour +
+      ":" +
+      minutes +
+      ":" +
+      second
+    );
+  };
   // 针对日期组件：数据标准时间转成 yyyy-mm-dd hh:mm:ss
   standardTimeConversion(val) {
     var d = new Date(val);

@@ -88,46 +88,7 @@ export default {
       },
       formConfig: {
         formValue: {},
-
         formData: [
-          // {
-          //   style: "popInput", //输入框弹框单多选
-          //   width: "24",
-          //   isActive: true,
-          //   isdisabled: false,
-          //   inputList: [
-          //     {
-          //       childs: [{ colname: "OC_B_VIPCOM_DELIVERY_ID", refobjid: 0, valuedata: 0 }]
-          //     }
-          //   ],
-          //   itemdata: {
-          //     refcolval: {
-          //       fixcolumn: "STATUS",
-          //       expre: "equal",
-          //       srccol: "OC_B_VIPCOM_DELIVERY_ID"
-          //     }, //过滤配置
-          //     col: 1,
-          //     colid: 173684,
-          //     colname: "OC_B_VIPCOM_DELIVERY_ID", //当前字段的名称
-          //     datelimit: "all",
-          //     display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-          //     fkdisplay: "drp", //外键关联类型
-          //     fkdesc: "出仓单",
-          //     inputname: "OC_B_VIPCOM_DELIVERY_ID", //这个是做中文类型的模糊查询字段，例如ENAME
-          //     isfk: true, //是否有fk键
-          //     isnotnull: false, //是否必填
-          //     isuppercase: false, //是否转大写
-          //     length: 65535, //最大长度是多少
-          //     name: "出仓单", //input前面显示的lable值
-          //     readonly: false, //是否可编辑，对应input   readonly属性
-          //     reftable: "OC_B_VIPCOM_DELIVERY", //对应的表
-          //     reftableid: 24652, //对应的表ID
-          //     row: 1,
-          //     statsize: -1,
-          //     type: "STRING", //这个是后台用的
-          //     valuedata: "" //这个是选择的值
-          //   }
-          // }
           {
             style: "popInput", //输入框弹框单多选
             width: "24",

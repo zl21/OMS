@@ -524,8 +524,6 @@ export default {
         if (res.data.code === 0) {
           _this.$Message.success(res.data.message);
           _this.$emit("closeActionDialog");
-          // _this.taskId = res.data.message.match(/\d+/)[0];
-          // _this.downLoadModal = true;
         } else {
           _this.$Message.error(res.data.message);
         }
@@ -567,8 +565,6 @@ export default {
         if (res.data.code === 0) {
           _this.$Message.success(res.data.message);
           _this.$emit("closeActionDialog");
-          // _this.taskId = res.data.message.match(/\d+/)[0];
-          // _this.downLoadModal = true;
         } else {
           _this.$Message.error(res.data.message);
         }

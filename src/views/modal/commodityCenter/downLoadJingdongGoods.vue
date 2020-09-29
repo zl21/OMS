@@ -1,6 +1,6 @@
 <template>
   <div style="width:440px;padding-right:20px">
-    <jordanForm :formConfig="downLoadTaobaoGoodsFormConfig"></jordanForm>
+    <jordanForm :formConfig="downLoadFormConfig"></jordanForm>
     <div class="timeBox">
       <label>修改时间:</label>
       <el-date-picker
@@ -44,34 +44,10 @@ export default {
   components: {
     jordanForm
   },
-  props: {
-    objList: {
-      type: Array
-    },
-    idArr: {
-      type: Array
-    },
-    webid: {
-      type: Number
-    },
-    tablename: {
-      type: String
-    },
-    rowData: {
-      type: Array
-    }
-  },
-  mounted() {
-    // console.log(this.rowData, "rowData");
-    // console.log(this.tablename, "tablename");
-    // console.log(this.webid, "webid");
-    // console.log(this.idArr, "idArr");
-    // console.log(this.objList, "objList");
-  },
   data() {
     let _this = this;
     return {
-      downLoadTaobaoGoodsFormConfig: {
+      downLoadFormConfig: {
         formValue: {
           shopID: "", //商品id
           articleNumber: "" //货号
@@ -138,10 +114,6 @@ export default {
             iconclick: () => {} //点击icon图标事件
           } */
         ],
-        //表单非空提示
-        ruleValidate: {
-          // numNumber: [{ required: true, message: " ", trigger: "blur" }]
-        }
       },
       monthSearchStartDate: null,
       timeConfig: {
@@ -177,16 +149,16 @@ export default {
     // 下载模板
     download() {
       let self = this;
-      let formValue = self.downLoadTaobaoGoodsFormConfig.formValue;
-      if (!self.downLoadTaobaoGoodsFormConfig.formData[0].itemdata.pid)
+      let formValue = self.downLoadFormConfig.formValue;
+      if (!self.downLoadFormConfig.formData[0].itemdata.pid)
         return self.$Message.warning("请选择需要下载的店铺");
       if (formValue.shopID === "" && !self.timeConfig.data[0])
         return self.$Message.warning("商品ID和时间必填其中一个");
       let param = {
-        shop_id: self.downLoadTaobaoGoodsFormConfig.formData[0].itemdata.pid, // 店铺id 必传
+        shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
         // item_num:formValue.articleNumber, // 货号
         ware_id: formValue.shopID, // 商品ID
-        table: self.tablename, //表名字 必传
+        table: this.$route.params.tableName, //表名字 必传
         start_time: self.timeConfig.data[0],
         end_time: self.timeConfig.data[1]
       };
