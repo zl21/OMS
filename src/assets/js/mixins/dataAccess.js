@@ -3,8 +3,10 @@ import axios from "axios";
 export const dataAccessMixin = {
   methods: {
     getDataAccess(table, callback) {
-      let data = { table: table };
-      axios.post("/p/cs/getSingleObjectPermission", data).then(res => {
+      let data = {
+        table: table
+      };
+      axios.post("/api/cs/oc/oms/v1/getSingleObjectPermission", data).then(res => {
         callback(res.data.data)
       });
     },
@@ -58,24 +60,24 @@ export const dataAccessMixin = {
     },
 
     //设置表头数据
-    setTablePermissions(arrays,res){
+    setTablePermissions(arrays, res) {
 
       let __columns = []
 
-        arrays.forEach((parent, index) => {
-          res.SENSITIVE_COLUMNS.forEach((child, parentIndex) => {
-            if (parent.dataAcessKey == child.ecode) {
-              if (child.isRead == "N") {
-                parent.__isShow = false;
-              }
+      arrays.forEach((parent, index) => {
+        res.SENSITIVE_COLUMNS.forEach((child, parentIndex) => {
+          if (parent.dataAcessKey == child.ecode) {
+            if (child.isRead == "N") {
+              parent.__isShow = false;
             }
-          });
-        });
-        arrays.forEach((value, index) => {
-          if (value.__isShow != false) {
-            __columns.push(value);
           }
         });
+      });
+      arrays.forEach((value, index) => {
+        if (value.__isShow != false) {
+          __columns.push(value);
+        }
+      });
 
       return __columns
     }

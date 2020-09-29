@@ -1,6 +1,6 @@
 <template>
   <div style="width:440px;padding-right:20px">
-    <jordanForm :formConfig="downLoadFormConfig"></jordanForm>
+    <businessForm :formConfig="downLoadFormConfig"></businessForm>
     <div class="timeBox">
       <label>修改时间:</label>
       <el-date-picker
@@ -38,11 +38,11 @@
 
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
+import businessForm from "professionalComponents/businessForm";
 
 export default {
   components: {
-    jordanForm
+    businessForm
   },
   data() {
     let _this = this;

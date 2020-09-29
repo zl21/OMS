@@ -310,9 +310,9 @@
 </template>
 
 <script>
-  import buttons from 'professionalComponents/jordanButton.vue';
-  import Aform from 'professionalComponents/jordanForm.vue';
-  import Atable from 'professionalComponents/jordanActionTable.vue';
+  import buttons from 'professionalComponents/businessButton.vue';
+  import Aform from 'professionalComponents/businessForm.vue';
+  import Atable from 'professionalComponents/businessActionTable.vue';
   import axios from 'axios';
 
   export default {

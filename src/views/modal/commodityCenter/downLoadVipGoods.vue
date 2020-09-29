@@ -1,6 +1,6 @@
 <template>
   <div style="width:400px;padding-right:15px">
-    <jordanForm :formConfig="formConfig"></jordanForm>
+    <businessForm :formConfig="formConfig"></businessForm>
     <div class="dialog-footer">
       <Button type="primary" ghost size="small" @click="confirmChange">确定</Button>
         <Button
@@ -19,10 +19,10 @@
 
 <script>
 import httpServer from 'framework/__utils__/request';
-import jordanForm from "professionalComponents/jordanForm";
+import businessForm from "professionalComponents/businessForm";
 export default {
   components: {
-    jordanForm
+    businessForm
   },
   props: {
     objList: {

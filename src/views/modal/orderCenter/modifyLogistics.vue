@@ -1,7 +1,7 @@
 <template>
   <div class="jordanModal">
     <!-- 修改物流 -->
-    <!-- <jordanForm style="margin-top:10px;" :formConfig="formConfig"></jordanForm> -->
+    <!-- <businessForm style="margin-top:10px;" :formConfig="formConfig"></businessForm> -->
     <div class="jordanModal_box">
       <label for>物流公司:</label>
       <DropDownSelectFilter
@@ -30,10 +30,10 @@
 </template>
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
-import jordanActionTable from "professionalComponents/jordanActionTable.vue";
-import { listeningToKeydownMixin } from "../../../mixins/listeningToKeydown.js";
+import businessForm from "professionalComponents/businessForm";
+import jordanBtn from "professionalComponents/businessButton";
+import businessActionTable from "professionalComponents/businessActionTable.vue";
+import { listeningToKeydownMixin } from "@/assets/js/mixins/listeningToKeydown.js";
 export default {
   mixins: [listeningToKeydownMixin],
   props: {
@@ -43,9 +43,9 @@ export default {
     }
   },
   components: {
-    jordanForm,
+    businessForm,
     jordanBtn,
-    jordanActionTable
+    businessActionTable
   },
   computed: {},
   data() {

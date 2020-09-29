@@ -1,17 +1,17 @@
 <template>
   <div style="width:400px;padding-right:20px">
-    <jordanForm :formConfig="pickorderFromConfig"></jordanForm>
+    <businessForm :formConfig="pickorderFromConfig"></businessForm>
     <jordanBtn :btnConfig="pickorderBtnConfig"></jordanBtn>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
+import businessForm from "professionalComponents/businessForm";
+import jordanBtn from "professionalComponents/businessButton";
 export default {
   components: {
-    jordanForm,
+    businessForm,
     jordanBtn
   },
   data() {

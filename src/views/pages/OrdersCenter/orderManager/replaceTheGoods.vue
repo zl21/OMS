@@ -10,10 +10,10 @@
       <input v-focus id="focus" class="focusStyle" />
     </div>
     <div>
-      <jordanButton :btnConfig="btnConfig"></jordanButton>
+      <businessButton :btnConfig="btnConfig"></businessButton>
     </div>
     <div>
-      <jordanActionTable
+      <businessActionTable
         :jordanTableConfig="tableConfig"
         @on-select="onSelect"
         @on-select-cancel="onSelectCancel"
@@ -24,24 +24,24 @@
         @table-delete-detail="tableDeleteDetail"
         @on-page-change="pageChange"
         @on-page-size-change="pageSizeChange"
-      ></jordanActionTable>
+      ></businessActionTable>
     </div>
     <div class="order-footer">
-      <jordanButton :btnConfig="btnConfig2"></jordanButton>
+      <businessButton :btnConfig="btnConfig2"></businessButton>
     </div>
   </div>
 </template>
 
 <script>
-import jordanActionTable from "professionalComponents/jordanActionTable";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanButton from "professionalComponents/jordanButton";
+import businessActionTable from "professionalComponents/businessActionTable";
+import businessForm from "professionalComponents/businessForm";
+import businessButton from "professionalComponents/businessButton";
 import { listeningToKeydownMixin } from "@/assets/js/mixins/listeningToKeydown.js";
 import axios from "axios";
 export default {
   components: {
-    jordanActionTable,
-    jordanButton
+    businessActionTable,
+    businessButton
   },
   mixins: [listeningToKeydownMixin],
   props: {

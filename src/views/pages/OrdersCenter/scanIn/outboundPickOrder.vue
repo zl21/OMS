@@ -354,10 +354,10 @@
 </template>
 
 <script>
-  import buttons from 'professionalComponents/jordanButton.vue';
-  import Aform from 'professionalComponents/jordanForm.vue';
-  import Atable from 'professionalComponents/jordanActionTable.vue';
-  import jordanModal from 'professionalComponents/JDialog';
+  import buttons from 'professionalComponents/businessButton.vue';
+  import Aform from 'professionalComponents/businessForm.vue';
+  import Atable from 'professionalComponents/businessActionTable.vue';
+  import jordanModal from 'professionalComponents/businessDialog';
   import axios from 'axios';
 
   export default {
@@ -397,7 +397,7 @@
           maskClosable: true, // 是否可以点击叉号关闭
           transfer: true, // 是否将弹层放在body内
           name: 'importTable', // 组件名称
-          url: 'publicDialog/importTable',
+          url: 'importTable',
           keepAlive: true,
           excludeString: 'importTable', // 将name传进去，确认不缓存
           componentData: {}

@@ -29,7 +29,7 @@
         @on-search="search"
       />
       <!-- trigger="click" -->
-      <jordanForm
+      <businessForm
         v-show="!isShowSeniorOrOrdinary"
         :form-config="formConfig"
         style="margin-top:10px;"
@@ -47,10 +47,10 @@
       </div>
     </div>
     <div class="table">
-      <jordanLabel
+      <businessLabel
         :label-default-value="labelDefaultValue"
         :label-list="labelList"
-        class="jordanLabel"
+        class="businessLabel"
         @labelClick="labelClick"
       />
       <div class="aTable">
@@ -153,22 +153,22 @@
       <p>批量生成退换货订单，是否继续?</p>
       <br>
       <div class="orderContent">
-        <jordanForm :form-config="batchReturnFormConfig" />
+        <businessForm :form-config="batchReturnFormConfig" />
       </div>
     </Modal>
   </div>
 </template>
 
 <script>
-  import jordanBtn from 'professionalComponents/jordanButton';
-  import jordanLabel from 'professionalComponents/jordanLabel';
-  import jordanForm from 'professionalComponents/jordanForm';
-  import jordanModal from 'professionalComponents/JDialog';
+  import jordanBtn from 'professionalComponents/businessButton';
+  import businessLabel from 'professionalComponents/businessLabel';
+  import businessForm from 'professionalComponents/businessForm';
+  import jordanModal from 'professionalComponents/businessDialog';
   // import { listeningToKeydownMixin } from "@/common/js//mixins/listeningToKeydown.js";
   import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
   import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
   import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
-  import aTable from 'professionalComponents/table/agGridTable.vue';
+  import aTable from 'professionalComponents/agGridTable.vue';
   import unzipXv from '@/assets/js/dataToSmall.js';
   import publicDialogConfig from './publicConfig/publicDialog.js';
   import labelListConfig from './publicConfig/labelList.js';
@@ -178,8 +178,8 @@
   export default {
     components: {
       jordanBtn,
-      jordanForm,
-      jordanLabel,
+      businessForm,
+      businessLabel,
       jordanModal,
       aTable,
     },
@@ -287,7 +287,7 @@
           maskClosable: true, // 是否可以点击叉号关闭
           transfer: true, // 是否将弹层放在body内
           name: 'importTable', // 组件名称
-          url: 'publicDialog/importTable',
+          url: 'importTable',
           keepAlive: true,
           excludeString: 'importTable', // 将name传进去，确认不缓存
           componentData: {},
@@ -4112,7 +4112,7 @@
             margin-top: 8px;
         }
 
-        .jordanLabel {
+        .businessLabel {
             margin-top: 8px;
         }
 

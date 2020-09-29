@@ -2,19 +2,19 @@
   <div class="payableAdjustmentList">
     <div style="margin-top: 8px" class="returnBtn">
       <!-- 按钮 -->
-      <jordanButton :btnConfig="btnConfig"></jordanButton>
+      <businessButton :btnConfig="btnConfig"></businessButton>
     </div>
     <div class="returnForm">
       <!-- form表单 -->
-      <jordanForm :formConfig="formConfig"></jordanForm>
+      <businessForm :formConfig="formConfig"></businessForm>
     </div>
     <div class="salesTable">
       <!-- tab切换 -->
-      <jordanLabel
-        class="jordanLabel"
+      <businessLabel
+        class="businessLabel"
         :labelList="labelList"
         :labelDefaultValue="labelDefaultValue"
-      ></jordanLabel>
+      ></businessLabel>
       <!-- 列表组件 -->
       <div class="tableBox">
         <aTable
@@ -57,11 +57,11 @@
 </template>
 
 <script>
-import jordanButton from "professionalComponents/jordanButton";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanLabel from "professionalComponents/jordanLabel";
-import aTable from "professionalComponents/table/agGridTable.vue";
-import jordanModal from "professionalComponents/JDialog";
+import businessButton from "professionalComponents/businessButton";
+import businessForm from "professionalComponents/businessForm";
+import businessLabel from "professionalComponents/businessLabel";
+import aTable from "professionalComponents/agGridTable.vue";
+import jordanModal from "professionalComponents/businessDialog";
 import axios from "axios";
 import { debug, debuglog } from "util";
 import { isFavoriteMixin } from "@/assets/js/mixins/isFavorite";
@@ -191,10 +191,10 @@ const baseColumnDefs = [
 
 export default {
   components: {
-    jordanButton,
-    jordanForm,
+    businessButton,
+    businessForm,
     aTable,
-    jordanLabel,
+    businessLabel,
     jordanModal,
   },
   mixins: [isFavoriteMixin, customPagingMixins, buttonPermissionsMixin],
@@ -215,7 +215,7 @@ export default {
         maskClosable: true, //是否可以点击叉号关闭
         transfer: true, //是否将弹层放在body内
         name: "importTable", //组件名称
-        url: "publicDialog/importTable",
+        url: "importTable",
         keepAlive: true,
         excludeString: "importTable", //将name传进去，确认不缓存
         componentData: {},
@@ -1118,7 +1118,7 @@ export default {
   }
 
   .salesTable {
-    .jordanLabel {
+    .businessLabel {
       margin-top: 8px;
     }
     .tableBox {

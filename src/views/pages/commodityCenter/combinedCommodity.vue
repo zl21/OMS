@@ -3,7 +3,7 @@
   <div class="jq-combined-commodity">
     <div class="jq-combined-commodity-new" v-if="objid === '-1'">
       <div class="btn-operate">
-        <jordanButton :btnConfig="btnConfig"></jordanButton>
+        <businessButton :btnConfig="btnConfig"></businessButton>
       </div>
       <jordan-status-flag :statusName="statusName"></jordan-status-flag>
       <div class="item-collapse">
@@ -14,18 +14,18 @@
           </Panel>
           <Panel name="2">
             日志
-            <jordanForm slot="content" :formConfig="formConfig2"></jordanForm>
+            <businessForm slot="content" :formConfig="formConfig2"></businessForm>
           </Panel>
         </Collapse>
       </div>
       <div class="commodity-detail-box">
         <div class="bar-code-detail">
-          <jordanLabel
+          <businessLabel
             :labelDefaultValue="tabconfig1.labelDefaultValue"
             :labelList="tabconfig1.labelList"
-          ></jordanLabel>
+          ></businessLabel>
           <div class="tab-content">
-            <jordanActionTable
+            <businessActionTable
               ref="codeTable"
               :jordanTableConfig="jordanTableConfig1"
               @on-select="onSelect"
@@ -36,17 +36,17 @@
               @on-select-cancel="onSelectCancel"
               @on-select-all="onSelectAll"
               @on-select-all-cancel="onSelectAllCancel"
-            ></jordanActionTable>
+            ></businessActionTable>
           </div>
         </div>
         <div class="combined-commodity-detail">
-          <jordanLabel
+          <businessLabel
             :labelDefaultValue="tabconfig2.labelDefaultValue"
             :labelList="tabconfig2.labelList"
-          ></jordanLabel>
+          ></businessLabel>
           <div class="tab-content">
             <div class="wrap">
-              <jordanActionTable
+              <businessActionTable
                 :jordanTableConfig="jordanTableConfig2"
                 @table-delete-detail="commodityDeleteDetail"
                 @on-select="RightonSelect"
@@ -57,7 +57,7 @@
                 @on-select-all-cancel="onSelectAllCancelCommodity"
                 @table-import="commodityDetailImport"
                 @table-export="commodityDetailExport"
-              ></jordanActionTable>
+              ></businessActionTable>
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@
       <Tabs :value="tab.activeName" on-click="changeTab">
         <TabPane label="基本信息" :name="'基本信息'">
           <div class="btn-operate">
-            <jordanButton :btnConfig="btnConfig"></jordanButton>
+            <businessButton :btnConfig="btnConfig"></businessButton>
           </div>
           <jordan-status-flag :statusName="statusName"></jordan-status-flag>
           <div class="item-collapse">
@@ -81,21 +81,21 @@
               </Panel>
               <Panel name="2">
                 日志
-                <jordanForm
+                <businessForm
                   slot="content"
                   :formConfig="formConfig2"
-                ></jordanForm>
+                ></businessForm>
               </Panel>
             </Collapse>
           </div>
           <div class="commodity-detail-box">
             <div class="bar-code-detail">
-              <jordanLabel
+              <businessLabel
                 :labelDefaultValue="tabconfig1.labelDefaultValue"
                 :labelList="tabconfig1.labelList"
-              ></jordanLabel>
+              ></businessLabel>
               <div class="tab-content">
-                <jordanActionTable
+                <businessActionTable
                   ref="codeTable"
                   :jordanTableConfig="jordanTableConfig1"
                   @on-select="onSelect"
@@ -106,17 +106,17 @@
                   @on-select-cancel="onSelectCancel"
                   @on-select-all="onSelectAll"
                   @on-select-all-cancel="onSelectAllCancel"
-                ></jordanActionTable>
+                ></businessActionTable>
               </div>
             </div>
             <div class="combined-commodity-detail">
-              <jordanLabel
+              <businessLabel
                 :labelDefaultValue="tabconfig2.labelDefaultValue"
                 :labelList="tabconfig2.labelList"
-              ></jordanLabel>
+              ></businessLabel>
               <div class="tab-content">
                 <div class="wrap">
-                  <jordanActionTable
+                  <businessActionTable
                     :jordanTableConfig="jordanTableConfig2"
                     @table-delete-detail="commodityDeleteDetail"
                     @on-select="RightonSelect"
@@ -127,19 +127,19 @@
                     @on-select-all-cancel="onSelectAllCancelCommodity"
                     @table-import="commodityDetailImport"
                     @table-export="commodityDetailExport"
-                  ></jordanActionTable>
+                  ></businessActionTable>
                 </div>
               </div>
             </div>
           </div>
         </TabPane>
         <!--<TabPane label="修改日志" :name="'日志'">-->
-        <!--<jordanActionTable-->
+        <!--<businessActionTable-->
         <!--ref="oprateLog"-->
         <!--:jordanTableConfig="oprateLogTableConfig"-->
         <!--@on-page-change="operateLogPageChange"-->
         <!--@on-page-size-change="operateLogPageSizeChange"-->
-        <!--&gt;</jordanActionTable>-->
+        <!--&gt;</businessActionTable>-->
         <!--</TabPane>-->
       </Tabs>
     </div>
@@ -172,20 +172,20 @@
   </div>
 </template>
 <script>
-import jordanButton from "professionalComponents/jordanButton";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanLabel from "professionalComponents/jordanLabel";
-import jordanActionTable from "professionalComponents/jordanActionTable";
-import jordanStatusFlag from "professionalComponents/jordanStatusFlag";
-import jordanModal from "professionalComponents/JDialog";
+import businessButton from "professionalComponents/businessButton";
+import businessForm from "professionalComponents/businessForm";
+import businessLabel from "professionalComponents/businessLabel";
+import businessActionTable from "professionalComponents/businessActionTable";
+import businessStatusFlag from "professionalComponents/businessStatusFlag";
+import jordanModal from "professionalComponents/businessDialog";
 import axios from "axios";
 export default {
   components: {
-    jordanButton,
-    jordanForm,
-    jordanLabel,
-    jordanActionTable,
-    jordanStatusFlag,
+    businessButton,
+    businessForm,
+    businessLabel,
+    businessActionTable,
+    businessStatusFlag,
     jordanModal,
   },
   data() {
@@ -866,7 +866,7 @@ export default {
         maskClosable: true, //是否可以点击叉号关闭
         transfer: true, //是否将弹层放在body内
         name: "importTable", //组件名称
-        url: "publicDialog/importTable",
+        url: "importTable",
         keepAlive: true,
         excludeString: "importTable", //将name传进去，确认不缓存
         componentData: {

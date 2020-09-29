@@ -1,6 +1,6 @@
 <template>
   <div style="width:430px;padding-right:20px">
-    <jordanForm :formConfig="downLoadTaobaoGoodsFormConfig"></jordanForm>
+    <businessForm :formConfig="downLoadTaobaoGoodsFormConfig"></businessForm>
     <div class="dialog-footer">
       <Button type="primary" ghost @click="download">确定</Button>
       <Button
@@ -19,12 +19,12 @@
 
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
+import businessForm from "professionalComponents/businessForm";
+import jordanBtn from "professionalComponents/businessButton";
 
 export default {
   components: {
-    jordanForm,
+    businessForm,
     jordanBtn
   },
   props: {

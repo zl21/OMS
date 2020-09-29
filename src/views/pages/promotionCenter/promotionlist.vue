@@ -248,7 +248,7 @@ import Mydialog from "framework/components/dialog/mydialog.vue";
 // import { post } from '@/utils/request';
 // import myInputLd from 'framework/components/element/input';
 import TableInput from "framework/components/element/input";
-import aTable from "professionalComponents/table/agGridTable.vue";
+import aTable from "professionalComponents/agGridTable.vue";
 import dialogVisible from "./setGroup";
 import Favorite from "./components/favorite";
 
@@ -684,6 +684,7 @@ export default {
   },
   mounted() {
     this.getPermissions();
+    this.getData();
   },
   methods: {
     // 分页change 事件
@@ -1157,8 +1158,8 @@ export default {
       // 模拟仿真
       this.$store.commit("customize/TabOpen", {
         id: -1, // id
-        type: "action", // 类型action
-        name: "simulation", // 文件名
+        type: "CUSTOMIZED", // 类型action
+        name: "SIMULATION", // 文件名
         label: "模拟仿真", // tab中文名
         query: Object.assign({
           id: -1, // id
