@@ -36,7 +36,7 @@
 import businessActionTable from "professionalComponents/businessActionTable";
 import businessForm from "professionalComponents/businessForm";
 import businessButton from "professionalComponents/businessButton";
-import { listeningToKeydownMixin } from "../../../mixins/listeningToKeydown.js";
+import { listeningToKeydownMixin } from "@/assets/js/mixins/listeningToKeydown.js";
 import axios from "axios";
 export default {
   components: {

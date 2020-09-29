@@ -72,7 +72,7 @@ import businessForm from "professionalComponents/businessForm";
 import businessLabel from "professionalComponents/businessLabel";
 import businessActionTable from "professionalComponents/businessActionTable";
 import businessStatusFlag from "professionalComponents/businessStatusFlag";
-import OrderItem from "../../orderManageDetail/details/orderItem.vue";
+import OrderItem from "@/views/pages/OrdersCenter/orderManageDetail/details/orderItem.vue";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
 import { dataAccessMixin } from "@/assets/js/mixins/dataAccess";
 export default {

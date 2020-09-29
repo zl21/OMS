@@ -21,7 +21,7 @@
 <script>
 import businessButton from "professionalComponents/businessButton";
 import businessActionTable from "professionalComponents/businessActionTable.vue";
-import EasyMatrix from "../../../components/combineMatrix/easyMatrix";
+import EasyMatrix from "professionalComponents/easyMatrix";
 import axios from "axios";
 import { listeningToKeydownMixin } from "@/assets/js/mixins/listeningToKeydown.js";
 export default {
