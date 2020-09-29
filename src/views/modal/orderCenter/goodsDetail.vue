@@ -1,6 +1,6 @@
 <template>
   <div class="jordanModal">
-    <jordan-action-table
+    <businessActionTable
       class="jordan-action-table"
       :jordanTableConfig="jordanTableConfig"
       @on-select="onSelect"
@@ -9,7 +9,7 @@
       @on-page-size-change="pageSizeChange"
       @on-select-all="onSelectAll"
       @on-select-all-cancel="onSelectAllCancel"
-    ></jordan-action-table>
+    ></businessActionTable>
     <!-- 公共弹框 -->
     <jordanModal
       :title="publicBouncedConfig.confirmTitle"
@@ -37,7 +37,7 @@ import businessForm from "professionalComponents/businessForm";
 import jordanBtn from "professionalComponents/businessButton";
 import businessActionTable from "professionalComponents/businessActionTable";
 import jordanModal from "professionalComponents/businessDialog";
-import publicDialogConfig from "./publicConfig/publicDialog.js";
+import publicDialogConfig from "@/views/pages/OrdersCenter/orderManager/publicConfig/publicDialog.js";
 import { listeningToKeydownMixin } from "@/assets/js/mixins/listeningToKeydown.js";
 export default {
   components: {

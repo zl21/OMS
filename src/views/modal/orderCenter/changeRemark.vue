@@ -4,22 +4,22 @@
       <FormItem label="旗帜:">
         <RadioGroup @on-change="radioChange" v-model="formItem.flag">
           <Radio label="1">
-            <img src="@/assest/image/img/1.png" alt />
+            <img src="@/assets/image/img/0.png" alt />
           </Radio>
           <Radio label="2">
-            <img src="@/assest/image/img/2.png" alt />
+            <img src="@/assets/image/img/2.png" alt />
           </Radio>
           <Radio label="3">
-            <img src="@/assest/image/img/3.png" alt />
+            <img src="@/assets/image/img/3.png" alt />
           </Radio>
           <Radio label="4">
-            <img src="@/assest/image/img/4.png" alt />
+            <img src="@/assets/image/img/4.png" alt />
           </Radio>
           <Radio label="5">
-            <img src="@/assest/image/img/5.png" alt />
+            <img src="@/assets/image/img/5.png" alt />
           </Radio>
           <Radio label="0">
-            <img src="@/assest/image/img/0.png" alt />
+            <img src="@/assets/image/img/0.png" alt />
           </Radio>
         </RadioGroup>
       </FormItem>

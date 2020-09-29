@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import jordanButton from "@/components/jordanButton";
+import jordanButton from "professionalComponents/businessButton";
 import { listeningToKeydownMixin } from "@/assets/js/mixins/listeningToKeydown.js";
 import axios from "axios";
 const areaList = require("@/assets/js/address/area-list.js");

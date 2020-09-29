@@ -64,7 +64,7 @@
           height="250"
         ></Table>
       </div>
-      <img class="icon_switch" src="@/static/image/switch.png" />
+      <img class="icon_switch" src="@/assets/image/switch.png" />
     </div>
     <div class="i_food">
       <span class="title">
@@ -93,7 +93,7 @@
 
 <script>
 import axios from "axios";
-import reForm from "professionalComponents/jordanForm";
+import reForm from "professionalComponents/businessForm";
 export default {
   components: {
     reForm

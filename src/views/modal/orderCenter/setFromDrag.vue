@@ -24,16 +24,14 @@
 
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
-import jordanActionTable from "professionalComponents/jordanActionTable";
+import jordanForm from "professionalComponents/businessForm";
+import jordanBtn from "professionalComponents/businessButton";
 import { listeningToKeydownMixin } from "@/assets/js/mixins/listeningToKeydown.js";
 export default {
   mixins: [listeningToKeydownMixin],
   components: {
     jordanForm,
-    jordanBtn,
-    jordanActionTable
+    jordanBtn
   },
   data() {
     return {
