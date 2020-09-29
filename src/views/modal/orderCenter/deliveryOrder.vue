@@ -1,18 +1,18 @@
 <template>
   <div style="width:400px;padding-right:20px">
-    <jordanForm :formConfig="formConfig"></jordanForm>
+    <businessForm :formConfig="formConfig"></businessForm>
     <jordanBtn :btnConfig="btnConfig"></jordanBtn>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
+import businessForm from "professionalComponents/businessForm";
+import jordanBtn from "professionalComponents/businessButton";
 export default {
   props: {},
   components: {
-    jordanForm,
+    businessForm,
     jordanBtn
   },
   data() {

@@ -1,12 +1,12 @@
 <template>
   <div class="public" style="width:400px;padding-right:20px">
-    <jordanForm :formConfig="pulicdownLoadConfig">
+    <businessForm :formConfig="pulicdownLoadConfig">
       <template #compile="{ rowData }">
         <div class="import-box" @click="importBoxOpen(rowData.item)">
           [导入]
         </div>
       </template>
-    </jordanForm>
+    </businessForm>
     <div class="dialog-footer">
       <Button type="primary"  @click="downloadPublicAll">确定</Button>
       <Button
@@ -28,12 +28,12 @@
 
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanDialog from "professionalComponents/JDialog";
+import businessForm from "professionalComponents/businessForm";
+import jordanDialog from "professionalComponents/businessDialog";
 
 export default {
   components: {
-    jordanForm,
+    businessForm,
     jordanDialog,
   },
   props: {

@@ -14,8 +14,8 @@
 
 <script>
 import { post } from '@/utils/request'
-import jordanBtn from "professionalComponents/jordanButton"
-import reActionTable from "professionalComponents/jordanActionTable"
+import jordanBtn from "professionalComponents/businessButton"
+import reActionTable from "professionalComponents/businessActionTable"
 
 export default {
   name: 'manualMarking',

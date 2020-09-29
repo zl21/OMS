@@ -27,25 +27,25 @@
         </RadioGroup>
         <span v-if="specialInvoiceFlag" style="color: #fd6442;">开专用发票必须跟开票专员确认</span>
       </div>
-      <jordanForm :formConfig="formConfig"></jordanForm>
+      <businessForm :formConfig="formConfig"></businessForm>
     </div>
     <div class="invoice-footer" v-if="invoiceFooterFlag">
       <Divider orientation="left">收票信息</Divider>
-      <jordanForm :formConfig="formConfig2"></jordanForm>
+      <businessForm :formConfig="formConfig2"></businessForm>
     </div>
     <jordanBtn :btnConfig="btnConfig" style="margin-top:10px;"></jordanBtn>
   </div>
 </template>
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
-import jordanActionTable from "professionalComponents/jordanActionTable.vue";
+import businessForm from "professionalComponents/businessForm";
+import jordanBtn from "professionalComponents/businessButton";
+import businessActionTable from "professionalComponents/businessActionTable.vue";
 export default {
   components: {
-    jordanForm,
+    businessForm,
     jordanBtn,
-    jordanActionTable
+    businessActionTable
   },
   props: {
     componentData: {

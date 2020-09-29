@@ -3,20 +3,20 @@
   <div class="returngood">
     <!--按钮块-->
     <div class="returnAddBtn">
-      <jordanButton :btnConfig="btnConfig"></jordanButton>
+      <businessButton :btnConfig="btnConfig"></businessButton>
     </div>
     <div class="returnAddColl">
       <Collapse v-model="openDefault">
         <Panel name="1">
           基本信息
           <p slot="content">
-            <jordanForm :formConfig="information"></jordanForm>
+            <businessForm :formConfig="information"></businessForm>
           </p>
         </Panel>
         <Panel name="2">
           换货人信息
           <p slot="content">
-            <jordanForm :formConfig="replacement"></jordanForm>
+            <businessForm :formConfig="replacement"></businessForm>
           </p>
         </Panel>
         <Panel name="3">
@@ -69,12 +69,12 @@
     </div>
     <div class="salesTable">
       <!-- tab切换 -->
-      <jordanLabel
-        class="jordanLabel"
+      <businessLabel
+        class="businessLabel"
         :labelList="labelList"
         :labelDefaultValue="DefaultValue"
         @labelClick="labelClick"
-      ></jordanLabel>
+      ></businessLabel>
       <!-- 列表组件 -->
       <div class="tableBox">
         <!-- 退货明细 -->
@@ -118,8 +118,8 @@
         @on-cancel="querycancel"
       >
         <div class="orderContent">
-          <jordanForm :formConfig="order.orderform"></jordanForm>
-          <jordanButton :btnConfig="order.btn"></jordanButton>
+          <businessForm :formConfig="order.orderform"></businessForm>
+          <businessButton :btnConfig="order.btn"></businessButton>
         </div>
         <jordan-action-table
           :jordanTableConfig="order.table"
@@ -148,7 +148,7 @@
       :componentData="changeRemarkConfig.componentData"
     ></jordanModal>
     <!--单据状态图片展示 -->
-    <jordanStatusFlag :statusName="statusName"></jordanStatusFlag>
+    <businessStatusFlag :statusName="statusName"></businessStatusFlag>
     <div class="fromLoading" v-show="isSaveLoading">
       <Spin></Spin>
     </div>
@@ -201,15 +201,15 @@
 
 <script>
 import axios from "axios";
-import jordanButton from "professionalComponents/jordanButton";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanActionTable from "professionalComponents/jordanActionTable";
-import jordanLabel from "professionalComponents/jordanLabel";
+import businessButton from "professionalComponents/businessButton";
+import businessForm from "professionalComponents/businessForm";
+import businessActionTable from "professionalComponents/businessActionTable";
+import businessLabel from "professionalComponents/businessLabel";
 import { setTimeout } from "timers";
-import jordanModal from "professionalComponents/JDialog";
+import jordanModal from "professionalComponents/businessDialog";
 import OrderItem from "./orderItem";
 import publicMethodsUtil from "@/assets/js/public/publicMethods";
-import jordanStatusFlag from "professionalComponents/jordanStatusFlag";
+import businessStatusFlag from "professionalComponents/businessStatusFlag";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
 import { dataAccessMixin } from "@/assets/js/mixins/dataAccess";
 const areaList = require("@/assets/js/address/area-list");
@@ -219,13 +219,13 @@ parseArea(areaList);
 export default {
   name: 'returngoodmanagement',
   components: {
-    jordanButton,
-    jordanForm,
-    jordanActionTable,
+    businessButton,
+    businessForm,
+    businessActionTable,
     jordanModal,
     OrderItem,
-    jordanLabel,
-    jordanStatusFlag
+    businessLabel,
+    businessStatusFlag
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
@@ -4813,7 +4813,7 @@ export default {
     margin-top: 0 !important;
   }
   .salesTable {
-    .jordanLabel {
+    .businessLabel {
       margin-top: 8px;
     }
     .tableBox {

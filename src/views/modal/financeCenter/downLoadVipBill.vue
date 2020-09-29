@@ -1,20 +1,20 @@
 <template>
   <!-- 下载账单 -->
   <div class="downLoadVipBill" style="width:430px;padding-right:20px">
-    <jordanForm :formConfig="downLoadFormConfig"></jordanForm>
+    <businessForm :formConfig="downLoadFormConfig"></businessForm>
     <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
+import businessForm from "professionalComponents/businessForm";
+import jordanBtn from "professionalComponents/businessButton";
 import formatData from "@/assets/js/__utils__/date.js"
 
 export default {
   components: {
-    jordanForm,
+    businessForm,
     jordanBtn
   },
   name: "downloadVipBill",

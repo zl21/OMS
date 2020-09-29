@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import jordanActionTable from "professionalComponents/jordanActionTable.vue";
+import businessActionTable from "professionalComponents/businessActionTable.vue";
 import config from "./config";
 import axios from "axios";
 export default {
@@ -35,7 +35,7 @@ export default {
     };
   },
   components: {
-    jordanActionTable
+    businessActionTable
   },
   props: {
     componentData: {}
