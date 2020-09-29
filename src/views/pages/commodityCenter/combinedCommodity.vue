@@ -1,7 +1,7 @@
 <!--组合商品编码新增和编辑页面-->
 <template>
   <div class="jq-combined-commodity">
-    <div class="jq-combined-commodity-new" v-if="objid==='-1'">
+    <div class="jq-combined-commodity-new" v-if="objid === '-1'">
       <div class="btn-operate">
         <jordanButton :btnConfig="btnConfig"></jordanButton>
       </div>
@@ -74,11 +74,17 @@
             <Collapse v-model="value1">
               <Panel name="1">
                 基本信息
-                <jordan-form slot="content" :formConfig="formConfig1"></jordan-form>
+                <jordan-form
+                  slot="content"
+                  :formConfig="formConfig1"
+                ></jordan-form>
               </Panel>
               <Panel name="2">
                 日志
-                <jordanForm slot="content" :formConfig="formConfig2"></jordanForm>
+                <jordanForm
+                  slot="content"
+                  :formConfig="formConfig2"
+                ></jordanForm>
               </Panel>
             </Collapse>
           </div>
@@ -137,8 +143,14 @@
         <!--</TabPane>-->
       </Tabs>
     </div>
-    <Modal width="360" v-model="modal1" title="警告" @on-ok="ok" @on-cancel="cancel">
-      <p>{{tipMessage}}</p>
+    <Modal
+      width="360"
+      v-model="modal1"
+      title="警告"
+      @on-ok="ok"
+      @on-cancel="cancel"
+    >
+      <p>{{ tipMessage }}</p>
     </Modal>
     <!-- 导入 -->
     <jordanModal
@@ -174,7 +186,7 @@ export default {
     jordanLabel,
     jordanActionTable,
     jordanStatusFlag,
-    jordanModal
+    jordanModal,
   },
   data() {
     return {
@@ -186,7 +198,7 @@ export default {
       //按钮配置
       btnConfig: {
         typeAll: "error",
-        buttons: []
+        buttons: [],
       },
       //基本信息表单配置
       formConfig1: {
@@ -198,7 +210,7 @@ export default {
           GROUP_TYPE: 2, //组合商品类型 默认为普通组合
           PRICELIST: "", //价格
           CP_C_STORE_IDS: "", //逻辑仓库
-          REMARK: "" //备注
+          REMARK: "", //备注
         },
         formData: [
           {
@@ -209,7 +221,7 @@ export default {
             disabled: false,
             inputChange: () => {
               this.inputCapital(1);
-            }
+            },
           },
           {
             style: "input", //输入框类型
@@ -221,7 +233,7 @@ export default {
             disabled: false,
             inputChange: () => {
               this.inputCapital(2);
-            }
+            },
           },
           {
             style: "popInput", //输入框类型
@@ -248,11 +260,11 @@ export default {
               row: 1,
               statsize: -1,
               type: "STRING", //这个是后台用的
-              valuedata: "" //这个是选择的值
+              valuedata: "", //这个是选择的值
             },
             oneObj() {
               //this.mutipleSelect(val);
-            }
+            },
           },
           {
             style: "select", //下拉框类型
@@ -261,7 +273,7 @@ export default {
             value: "GROUP_TYPE", //输入框的值
             multiple: false, //布尔值,下拉框是否开启多选,默认为不开启
             disabled: false,
-            selectChange: value => {
+            selectChange: (value) => {
               // this.selecttype(value);
               this.modal1 = true;
             }, //选中事件，默认返回选中的值,默认返回当前值value
@@ -269,13 +281,13 @@ export default {
               //下拉框选项值
               {
                 value: 1,
-                label: "福袋"
+                label: "福袋",
               },
               {
                 value: 2,
-                label: "普通"
-              }
-            ]
+                label: "普通",
+              },
+            ],
           },
 
           {
@@ -285,7 +297,7 @@ export default {
             width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             placeholder: "", //占位文本，默认为请输入
             ghost: false, //是否关闭幽灵按钮，默认开启
-            disabled: false
+            disabled: false,
           },
           {
             style: "popInput", //输入框类型
@@ -312,28 +324,28 @@ export default {
               row: 1,
               statsize: -1,
               type: "STRING", //这个是后台用的
-              valuedata: "" //这个是选择的值
+              valuedata: "", //这个是选择的值
             },
             oneObj() {
               //this.mutipleSelect(val);
-            }
+            },
           },
           {
             style: "input", //输入框类型
             label: "备注", //输入框前文字
             value: "REMARK", //输入框的值
-            width: "12", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+            width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             placeholder: "", //占位文本，默认为请输入
             ghost: false, //是否关闭幽灵按钮，默认开启
-            disabled: false
-          }
+            disabled: false,
+          },
         ],
         //表单非空提示
         ruleValidate: {
           ECODE: [{ required: true, message: " ", trigger: "blur" }],
           ENAME: [{ required: true, message: " ", trigger: "blur" }],
-          PRICELIST: [{ required: true, message: " ", trigger: "blur" }]
-        }
+          PRICELIST: [{ required: true, message: " ", trigger: "blur" }],
+        },
       },
       //日志表单配置信息
       formConfig2: {
@@ -342,7 +354,7 @@ export default {
           OWNERNAME: "", //创建人
           CREATIONDATE: "", //创建时间
           MODIFIERNAME: "", //修改人姓名
-          MODIFIEDDATE: "" //修改时间
+          MODIFIEDDATE: "", //修改时间
         },
         formData: [
           {
@@ -350,7 +362,7 @@ export default {
             label: "创建人", //输入框前文字
             value: "OWNERNAME", //输入框的值
             width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-            disabled: true
+            disabled: true,
           },
           {
             style: "date", //输入框类型
@@ -358,14 +370,14 @@ export default {
             value: "CREATIONDATE", //输入框的值
             width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             format: "yyyy-MM-dd HH:mm:ss", //时间格式
-            disabled: true
+            disabled: true,
           },
           {
             style: "input", //输入框类型
             label: "修改人", //输入框前文字
             value: "MODIFIERNAME", //输入框的值
             width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-            disabled: true
+            disabled: true,
           },
           {
             style: "date", //输入框类型
@@ -373,9 +385,9 @@ export default {
             value: "MODIFIEDDATE", //输入框的值
             width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             format: "yyyy-MM-dd HH:mm:ss",
-            disabled: true
-          }
-        ]
+            disabled: true,
+          },
+        ],
       },
       //tab切换配置数据
       tabconfig1: {
@@ -384,9 +396,9 @@ export default {
           {
             label: "条码明细",
             value: "1",
-            isShow: true
-          }
-        ]
+            isShow: true,
+          },
+        ],
       },
       tabconfig2: {
         labelDefaultValue: "1", //设置默认选中的
@@ -394,9 +406,9 @@ export default {
           {
             label: "组合商品明细",
             value: "1",
-            isShow: true
-          }
-        ]
+            isShow: true,
+          },
+        ],
       },
 
       //条码明细表格配置数据
@@ -404,7 +416,7 @@ export default {
         jordanFormConfig: {
           formValue: {
             ECODE: "", //虚拟条码
-            PS_C_PRO_ENAME: "" //商品名称
+            PS_C_PRO_ENAME: "", //商品名称
           },
           formData: [
             {
@@ -415,7 +427,7 @@ export default {
               disabled: false,
               inputChange: () => {
                 this.inputCapital(3);
-              }
+              },
             },
             {
               style: "input", //输入框类型
@@ -423,15 +435,15 @@ export default {
               value: "PS_C_PRO_ENAME", //输入框的值
               width: "12", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
               disabled: false,
-              inputenter: val => {
+              inputenter: (val) => {
                 //回车事件
                 this.codedetailEvent();
               },
               inputChange: () => {
                 this.inputCapital(4);
-              }
-            }
-          ]
+              },
+            },
+          ],
         }, //表单配置
         // 表格搜索框
         // 是否修改搜索框为select
@@ -465,8 +477,8 @@ export default {
                   {
                     style: {
                       width: "100%",
-                      textAlign: "left"
-                    }
+                      textAlign: "left",
+                    },
                   },
                   params.row.ECODE
                 );
@@ -478,8 +490,8 @@ export default {
                       width: "100%",
                       display: "flex",
                       alignitems: "center",
-                      justifyContent: "space-between"
-                    }
+                      justifyContent: "space-between",
+                    },
                   },
                   [
                     h(
@@ -488,15 +500,15 @@ export default {
                         class: "isNone",
                         style: {
                           width: "100%",
-                          height: "100%"
+                          height: "100%",
                         },
                         props: {
                           value: params.row.ECODE,
                           autosize: true,
-                          regx: /^[0-9a-zA-Z]+$/
+                          regx: /^[0-9a-zA-Z]+$/,
                         },
                         on: {
-                          "on-blur": e => {
+                          "on-blur": (e) => {
                             let self = this;
                             self.jordanTableConfig1.data[
                               `${params.index}`
@@ -508,15 +520,15 @@ export default {
                               );
                               return;
                             }
-                          }
-                        }
+                          },
+                        },
                       },
                       params.row.ECODE
-                    )
+                    ),
                   ]
                 );
               }
-            }
+            },
           },
           {
             title: "商品名称",
@@ -528,8 +540,8 @@ export default {
                   {
                     style: {
                       width: "100%",
-                      textAlign: "left"
-                    }
+                      textAlign: "left",
+                    },
                   },
                   params.row.PS_C_PRO_ENAME
                 );
@@ -541,8 +553,8 @@ export default {
                       width: "100%",
                       display: "flex",
                       alignitems: "center",
-                      justifyContent: "space-between"
-                    }
+                      justifyContent: "space-between",
+                    },
                   },
                   [
                     h(
@@ -551,15 +563,15 @@ export default {
                         class: "isNone",
                         style: {
                           width: "100%",
-                          height: "100%"
+                          height: "100%",
                         },
                         props: {
                           value: params.row.PS_C_PRO_ENAME,
-                          autosize: true
+                          autosize: true,
                           // regx:/^[0-9]*$/
                         },
                         on: {
-                          "on-blur": e => {
+                          "on-blur": (e) => {
                             let self = this;
                             self.jordanTableConfig1.data[
                               `${params.index}`
@@ -569,26 +581,26 @@ export default {
                               self.$Message.warning("商品名称不能为空");
                               return;
                             }
-                          }
-                        }
+                          },
+                        },
                       },
                       params.row.PS_C_PRO_ENAME
-                    )
+                    ),
                   ]
                 );
               }
-            }
-          }
+            },
+          },
         ],
         //表格的数据
-        data: []
+        data: [],
       },
       //组合商品明细表格配置数据
       jordanTableConfig2: {
         jordanFormConfig: {
           formValue: {
             dimdata: "", //商品编码
-            NUM: "" //商品数量
+            NUM: "", //商品数量
           },
           formData: [
             {
@@ -600,12 +612,12 @@ export default {
               AuotData: [], //模糊显示的数据], //匹配的选项
               disabled: false,
               // datalist:[],//下拉框的内容
-              dimChange: val => {
+              dimChange: (val) => {
                 this.jordanTableConfig2.jordanFormConfig.formValue.dimdata = val.toUpperCase();
                 //模糊查询的方法
                 if (val) this.findCommodityData(val);
               }, //change事件
-              dimSelect: val => {
+              dimSelect: (val) => {
                 //选中事件
                 let self = this;
                 let code = val.tem.PS_C_SKU_ECODE;
@@ -615,14 +627,14 @@ export default {
                   data: {
                     isBlur: "N", //N为精确匹配
                     psCSku: {
-                      ECODE: code
-                    }
-                  }
-                }).then(res => {
+                      ECODE: code,
+                    },
+                  },
+                }).then((res) => {
                   if (res.status === 200) {
                     let data = res.data.data.data;
                     let arr = []; //展示的数据
-                    data.map(item => {
+                    data.map((item) => {
                       //获取想要展示的
                       arr.push({
                         PS_C_SKU_ECODE: item.ECODE, //条码
@@ -631,32 +643,33 @@ export default {
                         PS_C_CLR_ID: item.colorId, //颜色id
                         PS_C_CLR_ENAME: item.colorName, //颜色
                         PS_C_SIZE_ID: item.sizeId, //尺寸id
-                        PS_C_SIZE_ENAME: item.sizeName //尺寸
+                        PS_C_SIZE_ENAME: item.sizeName, //尺寸
                       });
                     });
-                    self.jordanTableConfig2SelectStatus = true
+                    self.jordanTableConfig2SelectStatus = true;
                     this.selectData = Object.assign({}, arr[0]);
                   }
                 });
                 document.getElementById("Num").focus();
               },
               dimEnter: () => {
-                let _this = this
-                let code = this.jordanTableConfig2.jordanFormConfig.formValue.dimdata;
+                let _this = this;
+                let code = this.jordanTableConfig2.jordanFormConfig.formValue
+                  .dimdata;
                 axios({
                   url: "/p/cs/skuQuery",
                   method: "post",
                   data: {
                     isBlur: "N", //N为精确匹配
                     psCSku: {
-                      ECODE: code
-                    }
-                  }
-                }).then(res => {
+                      ECODE: code,
+                    },
+                  },
+                }).then((res) => {
                   if (res.status === 200) {
                     let data = res.data.data.data;
                     let arr = []; //展示的数据
-                    data.map(item => {
+                    data.map((item) => {
                       //获取想要展示的
                       arr.push({
                         PS_C_SKU_ECODE: item.ECODE, //条码
@@ -665,32 +678,33 @@ export default {
                         PS_C_CLR_ID: item.colorId, //颜色id
                         PS_C_CLR_ENAME: item.colorName, //颜色
                         PS_C_SIZE_ID: item.sizeId, //尺寸id
-                        PS_C_SIZE_ENAME: item.sizeName //尺寸
+                        PS_C_SIZE_ENAME: item.sizeName, //尺寸
                       });
                     });
-                    _this.jordanTableConfig2SelectStatus = true
+                    _this.jordanTableConfig2SelectStatus = true;
                     this.selectData = Object.assign({}, arr[0]);
                     this.comodityDetailEvent();
                   }
                 });
               }, //回车事件
               dimblur: () => {
-                let _this = this
-                let code = this.jordanTableConfig2.jordanFormConfig.formValue.dimdata;
+                let _this = this;
+                let code = this.jordanTableConfig2.jordanFormConfig.formValue
+                  .dimdata;
                 axios({
                   url: "/p/cs/skuQuery",
                   method: "post",
                   data: {
                     isBlur: "N", //N为精确匹配
                     psCSku: {
-                      ECODE: code
-                    }
-                  }
-                }).then(res => {
+                      ECODE: code,
+                    },
+                  },
+                }).then((res) => {
                   if (res.status === 200) {
                     let data = res.data.data.data;
                     let arr = []; //展示的数据
-                    data.map(item => {
+                    data.map((item) => {
                       //获取想要展示的
                       arr.push({
                         PS_C_SKU_ECODE: item.ECODE, //条码
@@ -699,14 +713,14 @@ export default {
                         PS_C_CLR_ID: item.colorId, //颜色id
                         PS_C_CLR_ENAME: item.colorName, //颜色
                         PS_C_SIZE_ID: item.sizeId, //尺寸id
-                        PS_C_SIZE_ENAME: item.sizeName //尺寸
+                        PS_C_SIZE_ENAME: item.sizeName, //尺寸
                       });
                     });
-                    _this.jordanTableConfig2SelectStatus = true
+                    _this.jordanTableConfig2SelectStatus = true;
                     this.selectData = Object.assign({}, arr[0]);
                   }
                 });
-              } //失去焦点事件
+              }, //失去焦点事件
             },
             {
               style: "input", //输入框类型
@@ -717,9 +731,9 @@ export default {
               disabled: false,
               inputenter: () => {
                 this.comodityDetailEvent();
-              } //表单回车事件
-            }
-          ]
+              }, //表单回车事件
+            },
+          ],
         }, //表单配置
         // 表格搜索框
         // 是否修改搜索框为select
@@ -746,23 +760,23 @@ export default {
           //表头
           {
             title: "条码",
-            key: "PS_C_SKU_ECODE"
+            key: "PS_C_SKU_ECODE",
           },
           {
             title: "商品编码",
-            key: "PS_C_PRO_ECODE"
+            key: "PS_C_PRO_ECODE",
           },
           {
             title: "商品名称",
-            key: "PS_C_PRO_ENAME"
+            key: "PS_C_PRO_ENAME",
           },
           {
             title: "颜色",
-            key: "PS_C_CLR_ENAME"
+            key: "PS_C_CLR_ENAME",
           },
           {
             title: "尺寸",
-            key: "PS_C_SIZE_ENAME"
+            key: "PS_C_SIZE_ENAME",
           },
           {
             title: "赠送数量",
@@ -774,8 +788,8 @@ export default {
                   {
                     style: {
                       width: "50px",
-                      textAlign: "left"
-                    }
+                      textAlign: "left",
+                    },
                   },
                   params.row.NUM
                 );
@@ -787,8 +801,8 @@ export default {
                       width: "100%",
                       display: "flex",
                       alignitems: "center",
-                      justifyContent: "space-between"
-                    }
+                      justifyContent: "space-between",
+                    },
                   },
                   [
                     h(
@@ -797,15 +811,15 @@ export default {
                         class: "isNone",
                         style: {
                           width: "50px",
-                          height: "100%"
+                          height: "100%",
                         },
                         props: {
                           value: params.row.NUM,
                           autosize: true,
-                          regx: /^[0-9]*$/
+                          regx: /^[0-9]*$/,
                         },
                         on: {
-                          "on-blur": e => {
+                          "on-blur": (e) => {
                             let self = this;
                             self.jordanTableConfig2.data[
                               `${params.index}`
@@ -815,21 +829,21 @@ export default {
                               self.$Message.warning("商品数量只能录入正整数");
                               return;
                             }
-                          }
-                        }
+                          },
+                        },
                       },
                       params.row.NUM
-                    )
+                    ),
                   ]
                 );
               }
-            }
-          }
+            },
+          },
         ],
         //表格的数据
         data: [
           //表体数据
-        ]
+        ],
       },
       SkuGroupRequestList: [], //存放明细数据
       selectData: {}, //模糊查找选中的数据
@@ -856,7 +870,7 @@ export default {
         keepAlive: true,
         excludeString: "importTable", //将name传进去，确认不缓存
         componentData: {
-          returnData: data => {
+          returnData: (data) => {
             if (data) {
               let returnData = JSON.parse(data);
               let self = this;
@@ -901,7 +915,9 @@ export default {
                     //   item.psCSkugroupList = item.psCSkugroupList.concat(repeatObj.psCSkugroupList);
                     // }
                   }
-                  self.jordanTableConfig1.data = self.jordanTableConfig1.data.concat(table1Arr);
+                  self.jordanTableConfig1.data = self.jordanTableConfig1.data.concat(
+                    table1Arr
+                  );
                 } else {
                   self.jordanTableConfig1.data = table1Arr;
                 }
@@ -910,11 +926,16 @@ export default {
                   self.jordanTableConfig2.data = table1FirstRow.psCSkugroupList;
                 }
                 //条数赋值
-                self.jordanTableConfig1.total = self.jordanTableConfig1.data.length;
-                self.jordanTableConfig2.total = self.jordanTableConfig2.data.length;
+                self.jordanTableConfig1.total =
+                  self.jordanTableConfig1.data.length;
+                self.jordanTableConfig2.total =
+                  self.jordanTableConfig2.data.length;
               } else {
                 //实际条码导入
-                if (this.jordanTableConfig1.data.length > 0 && this.jordanTableConfig1.data[this.clickIndex].isActive) {
+                if (
+                  this.jordanTableConfig1.data.length > 0 &&
+                  this.jordanTableConfig1.data[this.clickIndex].isActive
+                ) {
                   if (returnData.length > 0) {
                     returnData.map((item, index) => {
                       item.isChecked = false;
@@ -933,11 +954,11 @@ export default {
                 }
               }
             }
-          }
-        }
+          },
+        },
       },
       tab: {
-        activeName: "基本信息"
+        activeName: "基本信息",
       },
       oprateLogTableConfig: {
         //操作日志表格配置数据
@@ -957,27 +978,27 @@ export default {
         columns: [
           {
             title: "修改内容",
-            key: ""
+            key: "",
           },
           {
             title: "修改前",
-            key: ""
+            key: "",
           },
           {
             title: "修改后",
-            key: ""
+            key: "",
           },
           {
             title: "修改人",
-            key: ""
+            key: "",
           },
           {
             title: "修改时间",
-            key: ""
-          }
+            key: "",
+          },
         ],
-        data: []
-      }
+        data: [],
+      },
     };
   },
   methods: {
@@ -1003,21 +1024,21 @@ export default {
         data: {
           isBlur: "Y", //N为精确匹配
           psCSku: {
-            ECODE: str
-          }
-        }
-      }).then(res => {
+            ECODE: str,
+          },
+        },
+      }).then((res) => {
         if (res.status === 200) {
           let data = res.data.data.data;
           let dimList = self.jordanTableConfig2.jordanFormConfig.formData;
           let arr = []; //展示的数据
-          data.map(item => {
+          data.map((item) => {
             //获取想要展示的
             arr.push({
-              PS_C_SKU_ECODE: item.ECODE //条码
+              PS_C_SKU_ECODE: item.ECODE, //条码
             });
           });
-          dimList.map(item => {
+          dimList.map((item) => {
             if (item.label === "商品条码") {
               item.AuotData = arr;
             }
@@ -1056,7 +1077,7 @@ export default {
           let table1Index = this.jordanTableConfig1.columns.length - 1;
           this.$delete(this.jordanTableConfig1.columns, table1Index);
         }
-        this.jordanTableConfig2.jordanFormConfig.formData.map(item => {
+        this.jordanTableConfig2.jordanFormConfig.formData.map((item) => {
           if (item["label"] === "分组") {
             this.$set(item, "style", "");
             this.$delete(item, "inputenter");
@@ -1098,17 +1119,17 @@ export default {
               width: "8", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)})
               inputenter: () => {
                 this.codedetailEvent();
-              } //表单回车事件});
+              }, //表单回车事件});
             }
           );
-          this.jordanTableConfig1.jordanFormConfig.formData.map(item => {
+          this.jordanTableConfig1.jordanFormConfig.formData.map((item) => {
             this.$set(item, "width", "8");
             if (item["label"] === "商品名称") {
               this.$delete(item, "inputenter");
             }
           });
         } else {
-          this.jordanTableConfig1.jordanFormConfig.formData.map(item => {
+          this.jordanTableConfig1.jordanFormConfig.formData.map((item) => {
             this.$set(item, "width", "8");
             if (item["label"] === "每组抽取行数") {
               this.$set(item, "style", "input");
@@ -1126,9 +1147,11 @@ export default {
           ""
         );
         //表头也要加入该字段
-        let isGROUP_EXTRACT_NUM = this.jordanTableConfig1.columns.every(ele => {
-          return ele.key !== "GROUP_EXTRACT_NUM";
-        });
+        let isGROUP_EXTRACT_NUM = this.jordanTableConfig1.columns.every(
+          (ele) => {
+            return ele.key !== "GROUP_EXTRACT_NUM";
+          }
+        );
         if (isGROUP_EXTRACT_NUM) {
           //该数组中不存在是就添加
           let ciluIndex = this.jordanTableConfig1.columns.length;
@@ -1142,8 +1165,8 @@ export default {
                   {
                     style: {
                       width: "100%",
-                      textAlign: "left"
-                    }
+                      textAlign: "left",
+                    },
                   },
                   params.row.GROUP_EXTRACT_NUM
                 );
@@ -1155,8 +1178,8 @@ export default {
                       width: "100%",
                       display: "flex",
                       alignitems: "center",
-                      justifyContent: "space-between"
-                    }
+                      justifyContent: "space-between",
+                    },
                   },
                   [
                     h(
@@ -1165,15 +1188,15 @@ export default {
                         class: "isNone",
                         style: {
                           width: "100%",
-                          height: "100%"
+                          height: "100%",
                         },
                         props: {
                           value: params.row.GROUP_EXTRACT_NUM,
                           autosize: true,
-                          regx: /^[0-9]*$/
+                          regx: /^[0-9]*$/,
                         },
                         on: {
-                          "on-blur": e => {
+                          "on-blur": (e) => {
                             let self = this;
                             self.jordanTableConfig1.data[
                               `${params.index}`
@@ -1185,15 +1208,15 @@ export default {
                               );
                               return;
                             }
-                          }
-                        }
+                          },
+                        },
                       },
                       params.row.GROUP_EXTRACT_NUM
-                    )
+                    ),
                   ]
                 );
               }
-            }
+            },
           });
         }
         if (this.jordanTableConfig2.jordanFormConfig.formData.length < 3) {
@@ -1210,10 +1233,10 @@ export default {
               width: "8", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)})
               inputenter: () => {
                 this.comodityDetailEvent();
-              } //表单回车事件
+              }, //表单回车事件
             }
           );
-          this.jordanTableConfig2.jordanFormConfig.formData.map(item => {
+          this.jordanTableConfig2.jordanFormConfig.formData.map((item) => {
             if (item["label"] === "商品条码") {
               this.$set(item, "width", "9");
             }
@@ -1225,7 +1248,7 @@ export default {
             }
           });
         } else {
-          this.jordanTableConfig2.jordanFormConfig.formData.map(item => {
+          this.jordanTableConfig2.jordanFormConfig.formData.map((item) => {
             if (item["label"] === "商品条码") {
               this.$set(item, "width", "9");
             }
@@ -1249,7 +1272,7 @@ export default {
           ""
         );
         //表格表头显示也要处理一下
-        let ishas = this.jordanTableConfig2.columns.every(item => {
+        let ishas = this.jordanTableConfig2.columns.every((item) => {
           return item.key !== "GROUPNUM";
         });
         if (ishas) {
@@ -1265,8 +1288,8 @@ export default {
                   {
                     style: {
                       width: "100%",
-                      textAlign: "left"
-                    }
+                      textAlign: "left",
+                    },
                   },
                   params.row.GROUPNUM
                 );
@@ -1278,8 +1301,8 @@ export default {
                       width: "100%",
                       display: "flex",
                       alignitems: "center",
-                      justifyContent: "space-between"
-                    }
+                      justifyContent: "space-between",
+                    },
                   },
                   [
                     h(
@@ -1288,15 +1311,15 @@ export default {
                         class: "isNone",
                         style: {
                           width: "100%",
-                          height: "100%"
+                          height: "100%",
                         },
                         props: {
                           value: params.row.GROUPNUM,
                           autosize: true,
-                          regx: /^[0-9]*$/
+                          regx: /^[0-9]*$/,
                         },
                         on: {
-                          "on-blur": e => {
+                          "on-blur": (e) => {
                             let self = this;
                             self.jordanTableConfig2.data[
                               `${params.index}`
@@ -1306,15 +1329,15 @@ export default {
                               self.$Message.warning("分组只能录入正整数");
                               return;
                             }
-                          }
-                        }
+                          },
+                        },
                       },
                       params.row.GROUPNUM
-                    )
+                    ),
                   ]
                 );
               }
-            }
+            },
           });
         }
       }
@@ -1353,14 +1376,14 @@ export default {
             text: "保存", //按钮文本
             btnclick: () => {
               this.saveAll(objid);
-            }
+            },
           },
           {
             text: "导入", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.importskuGroup("baseInfo");
-            }
+            },
           },
           {
             text: "返回",
@@ -1372,11 +1395,11 @@ export default {
                 label: "组合商品档案",
                 query: Object.assign({
                   id: 24525,
-                  tabTitle: "组合商品档案"
-                })
+                  tabTitle: "组合商品档案",
+                }),
               });
-            }
-          }
+            },
+          },
         ];
         this.btnConfig.buttons.push(...buttonconfig);
         this.tipMessage = "切换组合商品类型会清空数据，确认切换组合商品类型？";
@@ -1397,17 +1420,17 @@ export default {
                 label: "组合商品档案编辑",
                 query: Object.assign({
                   id: -1,
-                  tabTitle: "组合商品档案编辑"
-                })
+                  tabTitle: "组合商品档案编辑",
+                }),
               });
-            }
+            },
           },
           {
             text: "保存", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.saveAll(objid);
-            }
+            },
           },
           // {
           //   text: "提交",
@@ -1434,13 +1457,13 @@ export default {
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.importskuGroup("baseInfo");
-            }
+            },
           },
           {
             text: "刷新",
             btnclick: () => {
               this.IniData();
-            }
+            },
           },
           {
             text: "返回",
@@ -1453,11 +1476,11 @@ export default {
                 label: "组合商品档案",
                 query: Object.assign({
                   id: 24525,
-                  tabTitle: "组合商品档案"
-                })
+                  tabTitle: "组合商品档案",
+                }),
               });
-            }
-          }
+            },
+          },
         ];
         this.btnConfig.buttons.push(...buttonsdata);
         // this.jordanTableConfig2.columns.push({title:'是否缺货',key:'IS_LACK'});//添加是否缺货的字段
@@ -1510,9 +1533,9 @@ export default {
         this.jordanTableConfig1.data.push(inputData); //在表格中显示数据
         this.jordanTableConfig2.data = []; //清空右边明细的数据
       }
-      this.jordanTableConfig1.total++
+      this.jordanTableConfig1.total++;
       Object.keys(this.jordanTableConfig1.jordanFormConfig.formValue).map(
-        item => {
+        (item) => {
           //回车完后清空输入框
           this.$set(
             this.jordanTableConfig1.jordanFormConfig.formValue,
@@ -1593,7 +1616,7 @@ export default {
         ) {
           let flag = this.jordanTableConfig1.data[
             this.clickIndex
-          ].psCSkugroupList.findIndex(innerIntem => {
+          ].psCSkugroupList.findIndex((innerIntem) => {
             let tem = innerIntem.PS_C_SKU_ECODE;
             if (innerIntem.GROUPNUM) {
               tem += innerIntem.GROUPNUM;
@@ -1631,7 +1654,7 @@ export default {
       this.selectData = {}; //回车之后将数据清掉
       //回车完后清空输入框
       Object.keys(this.jordanTableConfig2.jordanFormConfig.formValue).map(
-        item => {
+        (item) => {
           this.$set(
             this.jordanTableConfig2.jordanFormConfig.formValue,
             item,
@@ -1700,7 +1723,7 @@ export default {
         this.$Message.warning("商品名称不能为空");
         return false;
       }
-      let flag1 = this.formConfig1.formData.filter(ele => {
+      let flag1 = this.formConfig1.formData.filter((ele) => {
         if (ele.itemdata && ele.itemdata.fkdisplay === "drp") {
           return ele.itemdata.pid === "";
         }
@@ -1709,7 +1732,7 @@ export default {
         this.$Message.warning("请选择品牌");
         return false;
       } else {
-        this.formConfig1.formData.map(ele => {
+        this.formConfig1.formData.map((ele) => {
           if (ele.itemdata && ele.itemdata.fkdisplay === "drp") {
             baseData.PS_C_BRAND_ID = ele.itemdata.pid;
           }
@@ -1727,7 +1750,7 @@ export default {
         }
       }
 
-      let flag2 = this.formConfig1.formData.filter(ele => {
+      let flag2 = this.formConfig1.formData.filter((ele) => {
         if (ele.itemdata && ele.itemdata.fkdisplay === "mrp") {
           return ele.itemdata.pid === "";
         }
@@ -1736,7 +1759,7 @@ export default {
         this.$Message.warning("请选择虚拟仓库");
         return false;
       } else {
-        this.formConfig1.formData.map(ele => {
+        this.formConfig1.formData.map((ele) => {
           if (ele.itemdata && ele.itemdata.fkdisplay === "mrp") {
             baseData.CP_C_STORE_IDS = ele.itemdata.pid;
           }
@@ -1759,7 +1782,7 @@ export default {
           if (item.GROUP_EXTRACT_NUM) {
             let groupDATA = {};
             if (item.psCSkugroupList) {
-              item.psCSkugroupList.map(inner => {
+              item.psCSkugroupList.map((inner) => {
                 if (!groupDATA.hasOwnProperty(inner.GROUPNUM)) {
                   groupDATA[inner.GROUPNUM] = [];
                   groupDATA[inner.GROUPNUM].push(inner);
@@ -1814,12 +1837,12 @@ export default {
       let t_SkuGroupRequestList = [];
       if (type === "-1") {
         //新增页面保存
-        this.SkuGroupRequestList.map(item => {
+        this.SkuGroupRequestList.map((item) => {
           delete item.isActive;
           delete item.isChecked;
           delete item.BK;
           let t_PsCSkugroupList = item.psCSkugroupList;
-          t_PsCSkugroupList.map(sub => {
+          t_PsCSkugroupList.map((sub) => {
             delete sub.isChecked;
             delete sub._index;
             delete sub.BK;
@@ -1827,7 +1850,7 @@ export default {
           delete item.psCSkugroupList;
           t_SkuGroupRequestList.push({
             psCSku: item,
-            psCSkugroupList: t_PsCSkugroupList
+            psCSkugroupList: t_PsCSkugroupList,
           });
         });
       } else {
@@ -1838,15 +1861,15 @@ export default {
           //编辑页面保存
           let psCSkukeys = []; //左边表格列名
           let PsCSkugroupListkeys = []; //右边表格列名
-          this.jordanTableConfig1.columns.map(item => {
+          this.jordanTableConfig1.columns.map((item) => {
             psCSkukeys.push(item.key);
           });
           psCSkukeys.push("ID");
-          this.jordanTableConfig2.columns.map(item => {
+          this.jordanTableConfig2.columns.map((item) => {
             PsCSkugroupListkeys.push(item.key);
           });
           PsCSkugroupListkeys.push("ID");
-          this.SkuGroupRequestList.map(item => {
+          this.SkuGroupRequestList.map((item) => {
             let obj = {};
             obj.psCSku = {};
             obj.psCSkugroupList = [];
@@ -1875,7 +1898,7 @@ export default {
               item.ID = -1;
               obj.psCSku = item;
             }
-            t_PsCSkugroupList.map(sub => {
+            t_PsCSkugroupList.map((sub) => {
               let Len = obj.psCSkugroupList.length;
               if (sub.hasOwnProperty("ID")) {
                 let itemobj = {};
@@ -1909,13 +1932,13 @@ export default {
         objid: type,
         CP_C_STORE_IDS: baseData.CP_C_STORE_IDS,
         psCPro: baseData,
-        SkuGroupRequestList: t_SkuGroupRequestList
+        SkuGroupRequestList: t_SkuGroupRequestList,
       };
       axios({
         url: "/p/cs/product/skuGroupSave",
         method: "post",
-        data: data
-      }).then(res => {
+        data: data,
+      }).then((res) => {
         let data = res.data;
         if (data.code === 0) {
           this.$Message.success(data.message);
@@ -1928,8 +1951,8 @@ export default {
               label: "组合商品档案",
               query: Object.assign({
                 id: 24525,
-                tabTitle: "组合商品档案"
-              })
+                tabTitle: "组合商品档案",
+              }),
             });
           } else {
             this.IniData();
@@ -1941,7 +1964,7 @@ export default {
     },
     //表格选中某一行执行的操作
     onSelect(selection, row) {
-      this.jordanTableConfig1.data.map(item => {
+      this.jordanTableConfig1.data.map((item) => {
         if (row.ECODE === item.ECODE) {
           item.isChecked = true;
         }
@@ -1950,7 +1973,7 @@ export default {
     //取消选择的事件
     onSelectCancel(selection, row) {
       let self = this;
-      self.jordanTableConfig1.data.map(item => {
+      self.jordanTableConfig1.data.map((item) => {
         if (item.ECODE === row.ECODE) {
           item.isChecked = false;
         }
@@ -1958,13 +1981,13 @@ export default {
     },
     onSelectAllCancel() {
       let self = this;
-      self.jordanTableConfig1.data.map(item => {
+      self.jordanTableConfig1.data.map((item) => {
         item.isChecked = false;
       });
     }, //全选勾选事件
     onSelectAll() {
       let self = this;
-      self.jordanTableConfig1.data.map(item => {
+      self.jordanTableConfig1.data.map((item) => {
         item.isChecked = true;
       });
     }, //全选选中事件
@@ -1973,7 +1996,7 @@ export default {
       this.clickIndex = index;
       let t_len = this.jordanTableConfig1.data.length;
       if (t_len > 0) {
-        this.jordanTableConfig1.data.forEach(element => {
+        this.jordanTableConfig1.data.forEach((element) => {
           if (element.isActive) {
             element.isActive = false;
           }
@@ -1983,7 +2006,8 @@ export default {
       row.psCSkugroupList = this.jordanTableConfig1.data[index].psCSkugroupList;
       this.jordanTableConfig1.data[index] = Object.assign({}, row);
       if (this.jordanTableConfig1.data[index].isActive) {
-        if (row.hasOwnProperty("ID")) {//编辑
+        if (row.hasOwnProperty("ID")) {
+          //编辑
           //这个是编辑页面显示数据
           //调用右边分页的事件 进行分页
           this.selectId = row.ID;
@@ -2014,7 +2038,7 @@ export default {
 
     //右边表格选中某一行执行的操作
     RightonSelect(selection, row) {
-      this.jordanTableConfig2.data.map(item => {
+      this.jordanTableConfig2.data.map((item) => {
         if (row._index === item._index) {
           item.isChecked = true;
         }
@@ -2023,7 +2047,7 @@ export default {
     //取消选择的事件
     onSelectCancelCommodity(selection, row) {
       let self = this;
-      self.jordanTableConfig2.data.map(item => {
+      self.jordanTableConfig2.data.map((item) => {
         if (item._index === row._index) {
           item.isChecked = false;
         }
@@ -2032,13 +2056,13 @@ export default {
     //全部取消
     onSelectAllCancelCommodity() {
       let self = this;
-      self.jordanTableConfig2.data.map(item => {
+      self.jordanTableConfig2.data.map((item) => {
         item.isChecked = false;
       });
     }, //全选勾选事件
     onSelectAllCommodity() {
       let self = this;
-      self.jordanTableConfig2.data.map(item => {
+      self.jordanTableConfig2.data.map((item) => {
         item.isChecked = true;
       });
     }, //全选选中事件
@@ -2053,7 +2077,7 @@ export default {
         } else {
           //编辑页面的删除明细
           let Noselectdata = []; //存放没有选中的
-          this.jordanTableConfig1.data.map(item => {
+          this.jordanTableConfig1.data.map((item) => {
             if (item.isActive) {
               selectcuu.push(item);
               if (item.ID) {
@@ -2075,13 +2099,13 @@ export default {
               let param = {
                 delID: 1,
                 objid: selectTableRow,
-                mainId: this.objList.psCPro.ID
+                mainId: this.objList.psCPro.ID,
               };
               axios({
                 url: "/p/cs/product/skuGroupDelDetail",
                 method: "post",
-                data: param
-              }).then(res => {
+                data: param,
+              }).then((res) => {
                 if (res.data.code === 0) {
                   this.IniData();
                 } else {
@@ -2111,7 +2135,7 @@ export default {
         }
         // this.jordanTableConfig1.data = [];
         this.jordanTableConfig1.data = arrNo;
-        this.jordanTableConfig1.total--
+        this.jordanTableConfig1.total--;
       }
     },
     //组合商品明细 删除明细功能
@@ -2125,7 +2149,7 @@ export default {
         } else {
           //编辑页面删除明细走接口
           let Noselectdata = []; //存放没有选中的
-          this.jordanTableConfig2.data.map(item => {
+          this.jordanTableConfig2.data.map((item) => {
             if (item.isChecked) {
               selectTableRow.push(item);
               if (item.ID) {
@@ -2140,7 +2164,7 @@ export default {
             parseInt(Noselectdata.length) + parseInt(selectdedidata.length);
           if (this.jordanTableConfig2.data.length > cuLen) {
             //存在选中新增的
-            this.jordanTableConfig1.data.map(item => {
+            this.jordanTableConfig1.data.map((item) => {
               if (item.isActive) {
                 item.psCSkugroupList = Noselectdata;
               }
@@ -2153,13 +2177,13 @@ export default {
               let param = {
                 delID: 2,
                 objid: selectdedidata,
-                mainId: this.objList.psCPro.ID
+                mainId: this.objList.psCPro.ID,
               };
               axios({
                 url: "/p/cs/product/skuGroupDelDetail",
                 method: "post",
-                data: param
-              }).then(res => {
+                data: param,
+              }).then((res) => {
                 if (res.data.code === 0) {
                   this.IniData();
                 } else {
@@ -2179,7 +2203,7 @@ export default {
             arrNo.push(item);
           }
         });
-        this.jordanTableConfig1.data.map(item => {
+        this.jordanTableConfig1.data.map((item) => {
           if (item.isActive) {
             item.psCSkugroupList = arrNo;
           }
@@ -2194,9 +2218,9 @@ export default {
         url: "/p/cs/product/skuGroupSubmit",
         method: "post",
         data: {
-          objid: this.objid
-        }
-      }).then(res => {
+          objid: this.objid,
+        },
+      }).then((res) => {
         let data = res.data;
         if (data.code === 0) {
           this.$Message.success(data.message);
@@ -2211,9 +2235,9 @@ export default {
         url: "/p/cs/product/skuGroupVoid",
         method: "post",
         data: {
-          objid: this.objid
-        }
-      }).then(res => {
+          objid: this.objid,
+        },
+      }).then((res) => {
         let data = res.data;
         if (data.code === 0) {
           this.$Message.success(data.message);
@@ -2234,13 +2258,13 @@ export default {
         count:
           this.jordanTableConfig1.pageSize === undefined
             ? 1
-            : this.jordanTableConfig1.pageSize
+            : this.jordanTableConfig1.pageSize,
       };
       axios({
         url: "/p/cs/product/skuPage",
         method: "post",
-        data: param
-      }).then(res => {
+        data: param,
+      }).then((res) => {
         this.jordanTableConfig1.loading = false;
         let data = res.data;
         if (data.code == 0) {
@@ -2282,13 +2306,13 @@ export default {
         count:
           this.jordanTableConfig2.pageSize === undefined
             ? 1
-            : this.jordanTableConfig2.pageSize
+            : this.jordanTableConfig2.pageSize,
       };
       axios({
         url: "/p/cs/product/skuGroupDetailSearch",
         method: "post",
-        data: param
-      }).then(res => {
+        data: param,
+      }).then((res) => {
         this.jordanTableConfig2.loading = false;
         let data = res.data;
         if (data.code === 0) {
@@ -2299,7 +2323,7 @@ export default {
             item._index = index;
             this.jordanTableConfig2.data.push(item);
           });
-          this.jordanTableConfig1.data.map(sub => {
+          this.jordanTableConfig1.data.map((sub) => {
             if (sub.ID && sub.ID === this.selectId) {
               sub.psCSkugroupList = this.jordanTableConfig2.data;
             }
@@ -2327,16 +2351,16 @@ export default {
         data: {
           objid: this.objid,
           pageNum: this.jordanTableConfig1.current,
-          pageSize: this.jordanTableConfig1.pageSize
-        }
-      }).then(res => {
+          pageSize: this.jordanTableConfig1.pageSize,
+        },
+      }).then((res) => {
         let data = res.data;
         if (data.code === 0) {
           this.objList = data.data.data;
           this.jordanTableConfig1.total = data.data.skuTotal; //条码数据总条数
           this.jordanTableConfig2.total = data.data.skuGroupTotal; //组合商品数据总条数
           this.DataCombine();
-          this.formConfig1.formData.map(item => {
+          this.formConfig1.formData.map((item) => {
             if (
               item.style === "popInput" &&
               item.itemdata.fkdisplay === "drp"
@@ -2384,7 +2408,7 @@ export default {
     changeReadStatus() {
       // if (status === "已作废") {
       //已作废
-      this.formConfig1.formData.map(item => {
+      this.formConfig1.formData.map((item) => {
         if ("disabled" in item) {
           item.disabled = true;
         }
@@ -2394,12 +2418,12 @@ export default {
           }
         }
       });
-      this.jordanTableConfig1.jordanFormConfig.formData.map(item => {
+      this.jordanTableConfig1.jordanFormConfig.formData.map((item) => {
         if ("disabled" in item) {
           item.disabled = true;
         }
       });
-      this.jordanTableConfig2.jordanFormConfig.formData.map(item => {
+      this.jordanTableConfig2.jordanFormConfig.formData.map((item) => {
         if ("disabled" in item) {
           item.disabled = true;
         }
@@ -2409,7 +2433,7 @@ export default {
       this.jordanTableConfig2.isShowImportBtn = false;
       this.jordanTableConfig1.jordanFormConfig.formData = [];
       this.jordanTableConfig2.jordanFormConfig.formData = [];
-      this.btnConfig.buttons.map(item => {
+      this.btnConfig.buttons.map((item) => {
         if (item.text !== "返回") {
           this.$set(item, "disabled", true);
         }
@@ -2429,7 +2453,7 @@ export default {
           }
           if (CurrentData.psCPro["ISACTIVE"] === "N") {
             this.statusName = "停用"; //作废状态
-            this.formConfig1.formData.map(item => {
+            this.formConfig1.formData.map((item) => {
               if (item.label === "商品编码") {
                 item.disabled = true;
               }
@@ -2472,7 +2496,7 @@ export default {
             if (
               i === 0 &&
               CurrentData.skuGroupRequestList[i].psCSkugroupList instanceof
-              Array &&
+                Array &&
               CurrentData.skuGroupRequestList[i].psCSkugroupList.length > 0
             ) {
               for (
@@ -2508,10 +2532,10 @@ export default {
         {
           tableName: "PS_C_SKUGROUP",
           type: _this.formConfig1.formValue.GROUP_TYPE,
-          operationType: operationType
+          operationType: operationType,
         }
       );
-      _this.$children.find(item => item.name === "importTable").openConfirm();
+      _this.$children.find((item) => item.name === "importTable").openConfirm();
     },
     commodityDetailImport() {
       //组合商品明细导入
@@ -2538,10 +2562,10 @@ export default {
       //每页显示数据条数改变
     },
     setTableHeight() {
-      let tableHeight = document.getElementById('content').clientHeight;
+      let tableHeight = document.getElementById("content").clientHeight;
       this.jordanTableConfig1.height = tableHeight - 350;
       this.jordanTableConfig2.height = tableHeight - 350;
-    }
+    },
   },
   created() {
     this.objid = this.$route.query.id; //根据objid判断页面是新增页面还是编辑页面
@@ -2550,7 +2574,7 @@ export default {
   },
   mounted() {
     this.setTableHeight();
-  }
+  },
 };
 </script>
 <style lang="less">
@@ -2570,8 +2594,22 @@ export default {
       width: 100%;
     }
   }
-  .orderManageEdit .popInput .item-input .input-wrap .input-inner input {
+  .orderManageEdit .popInput {
     font-size: 12px;
+    .item-col label.title i {
+      top: auto;
+      left: -2px !important;
+      font-size: 12px;
+      height: auto;
+      line-height: inherit;
+      vertical-align: inherit;
+    }
+    .add-input {
+      padding: 5px 10px !important;
+      // color: #575757;
+      opacity: 1;
+      // cursor: not-allowed;
+    }
   }
   .commodity-detail-box {
     width: 100%;
