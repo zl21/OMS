@@ -104,9 +104,9 @@
   </div>
 </template>
 <script>
-  import reButton from "professionalComponents/jordanButton";
-  import reTable from "professionalComponents/jordanActionTable"
-  import reForm from "professionalComponents/jordanForm"
+  import reButton from "professionalComponents/businessButton";
+  import reTable from "professionalComponents/businessActionTable"
+  import reForm from "professionalComponents/businessForm"
   import refundAfterShipment from './constants/refundAfterShipment'
   import logTable from 'professionalComponents/LogTable'
 

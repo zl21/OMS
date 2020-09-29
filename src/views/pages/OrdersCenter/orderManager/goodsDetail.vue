@@ -33,17 +33,17 @@
 </template>
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
-import jordanActionTable from "professionalComponents/jordanActionTable";
-import jordanModal from "professionalComponents/JDialog";
+import businessForm from "professionalComponents/businessForm";
+import jordanBtn from "professionalComponents/businessButton";
+import businessActionTable from "professionalComponents/businessActionTable";
+import jordanModal from "professionalComponents/businessDialog";
 import publicDialogConfig from "./publicConfig/publicDialog.js";
 import { listeningToKeydownMixin } from "../../../mixins/listeningToKeydown.js";
 export default {
   components: {
-    jordanForm,
+    businessForm,
     jordanBtn,
-    jordanActionTable,
+    businessActionTable,
     jordanModal
   },
   props: {

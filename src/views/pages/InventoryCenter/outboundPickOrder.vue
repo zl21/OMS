@@ -354,10 +354,10 @@
 </template>
 
 <script>
-  import buttons from 'professionalComponents/jordanButton';
-  import Atable from 'professionalComponents/jordanActionTable.vue';
-  import Aform from 'professionalComponents/jordanForm.vue';
-  import jordanModal from 'professionalComponents/JDialog';
+  import buttons from 'professionalComponents/businessButton';
+  import Atable from 'professionalComponents/businessActionTable.vue';
+  import Aform from 'professionalComponents/businessForm.vue';
+  import jordanModal from 'professionalComponents/businessDialog';
   import axios from 'axios';
 
   export default {

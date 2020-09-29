@@ -59,7 +59,7 @@
 
 <script>
 import axios from "axios";
-import reForm from "professionalComponents/jordanForm";
+import reForm from "professionalComponents/businessForm";
 export default {
   components: {
     reForm

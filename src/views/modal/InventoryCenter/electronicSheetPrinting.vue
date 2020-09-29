@@ -1,18 +1,18 @@
 <template>
   <div style="width: 440px;">
     <p>是否打印选中行？</p>
-    <jordanButton :btn-config="btnConfig" />
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 <script>
   import axios from 'axios';
-  import jordanButton from 'framework/jordanComponents/jordanButton.vue';
+  import businessButton from 'professionalComponents/businessButton';
   import DateUtil from '@/assets/js/__utils__/date';
   import { getLodop } from 'professionalComponents/common/js/LodopFuncs';
 
   export default {
     components: {
-      jordanButton,
+      businessButton,
     },
     props: {
       objList: {

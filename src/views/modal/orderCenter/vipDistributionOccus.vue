@@ -11,7 +11,7 @@
 </template>
 <script>
 import axios from "axios";
-import jordanBtn from "professionalComponents/jordanButton";
+import jordanBtn from "professionalComponents/businessButton";
 import R3 from '@syman/burgeon-r3';
 const { getModuleName } = R3;
 export default {

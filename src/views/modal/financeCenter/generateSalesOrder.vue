@@ -1,18 +1,18 @@
 <template>
   <!-- 下载账单 -->
   <div class="generateSalesOrder" v-loading="pageLoad" style="width:400px;padding-right:20px">
-    <jordanForm :formConfig="generateFormConfig"></jordanForm>
+    <businessForm :formConfig="generateFormConfig"></businessForm>
     <jordanBtn :btnConfig="generateBtnConfig"></jordanBtn>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
+import businessForm from "professionalComponents/businessForm";
+import jordanBtn from "professionalComponents/businessButton";
 export default {
   components: {
-    jordanForm,
+    businessForm,
     jordanBtn
   },
   name: "generateSalesOrder",

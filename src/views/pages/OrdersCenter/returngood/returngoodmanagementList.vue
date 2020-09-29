@@ -1,24 +1,24 @@
 <template>
   <div class="returnGoodList">
-    <div style="margin-top: 8px;" class="returnBtn">
+    <div style="margin-top: 8px" class="returnBtn">
       <!-- 按钮 -->
-      <jordanButton :btnConfig="btnConfig"></jordanButton>
+      <businessButton :btnConfig="btnConfig"></businessButton>
     </div>
     <div class="returnForm">
       <!-- form表单 -->
-      <jordanForm :formConfig="formConfig"></jordanForm>
+      <businessForm :formConfig="formConfig"></businessForm>
       <div class="fromLoading" v-show="isShowFromLoading">
         <Spin></Spin>
       </div>
     </div>
     <div class="salesTable">
       <!-- tab切换 -->
-      <jordanLabel
-        class="jordanLabel"
+      <businessLabel
+        class="businessLabel"
         :labelList="labelList"
         :labelDefaultValue="labelDefaultValue"
         @labelClick="labelClick"
-      ></jordanLabel>
+      ></businessLabel>
       <!-- 列表组件 -->
       <div class="tableBox">
         <jordan-action-table
@@ -121,14 +121,32 @@
       :componentData="importTable.componentData"
     ></jordanModal>
     <!-- 导出 -->
-    <Modal v-model="warningModal" title="警告" width="420" @on-ok="warningOk" :mask="true">
+    <Modal
+      v-model="warningModal"
+      title="警告"
+      width="420"
+      @on-ok="warningOk"
+      :mask="true"
+    >
       <p>当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？</p>
     </Modal>
-    <Modal v-model="virtualWarehouseModal" title="手动入库" width="420" @on-ok="virtualWarehouseLibrary" :mask="true">
+    <Modal
+      v-model="virtualWarehouseModal"
+      title="手动入库"
+      width="420"
+      @on-ok="virtualWarehouseLibrary"
+      :mask="true"
+    >
       <p>当前的操作会执行手动入库，是否继续？</p>
     </Modal>
     <!-- 批量原退 -->
-    <Modal v-model="errModal" title="提示" width="500" @on-keydown="keyenter" :mask="true">
+    <Modal
+      v-model="errModal"
+      title="提示"
+      width="500"
+      @on-keydown="keyenter"
+      :mask="true"
+    >
       <Table :columns="errThData" height="300" :data="errdataList"></Table>
     </Modal>
     <div class="fromLoading" v-show="isSaveLoading">
@@ -138,22 +156,22 @@
 </template>
 
 <script>
-import jordanButton from "professionalComponents/jordanButton.vue";
-import jordanForm from "professionalComponents/jordanForm.vue";
-import jordanLabel from "professionalComponents/jordanLabel.vue";
-import jordanActionTable from "professionalComponents/jordanActionTable.vue";
-import jordanModal from "professionalComponents/JDialog.vue";
+import businessButton from "professionalComponents/businessButton.vue";
+import businessForm from "professionalComponents/businessForm.vue";
+import businessLabel from "professionalComponents/businessLabel.vue";
+import businessActionTable from "professionalComponents/businessActionTable.vue";
+import jordanModal from "professionalComponents/businessDialog.vue";
 import axios from "axios";
 import { isFavoriteMixin } from "@/assets/js/mixins/isFavorite.js";
 import publicMethodsUtil from "@/assets/js/public/publicMethods";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
 export default {
   components: {
-    jordanButton,
-    jordanForm,
-    jordanActionTable,
-    jordanLabel,
-    jordanModal
+    businessButton,
+    businessForm,
+    businessActionTable,
+    businessLabel,
+    jordanModal,
   },
   // mixins: [isFavoriteMixin],
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
@@ -161,13 +179,13 @@ export default {
     return {
       errThData: [
         {
-          title: '退单编号',
-          key: 'id'
+          title: "退单编号",
+          key: "id",
         },
         {
-          title: '异常信息',
-          key: 'error'
-        }
+          title: "异常信息",
+          key: "error",
+        },
       ],
       errModal: false,
       errdataList: [],
@@ -187,7 +205,7 @@ export default {
         url: "returngood/jordanBounced",
         keepAlive: true,
         excludeString: "jordanBounced", //将name传进去，确认不缓存
-        componentData: {}
+        componentData: {},
       },
       // 修改退回仓库
       modifyWarehouse: {
@@ -205,7 +223,7 @@ export default {
         url: "returngood/modifyWarehouse",
         keepAlive: true,
         excludeString: "modifyWarehouse", //将name传进去，确认不缓存
-        componentData: {}
+        componentData: {},
       },
       modifyReturnOrderLogistics: {
         refFuns: "confirmFun",
@@ -222,7 +240,7 @@ export default {
         url: "returngood/modifyReturnOrderLogistics",
         keepAlive: true,
         excludeString: "modifyReturnOrderLogistics", //将name传进去，确认不缓存
-        componentData: {}
+        componentData: {},
       },
       setFromInput: {
         refFuns: "confirmFun",
@@ -239,7 +257,7 @@ export default {
         url: "returngood/setFromInput",
         keepAlive: true,
         excludeString: "setFromInput", //将name传进去，确认不缓存
-        componentData: {}
+        componentData: {},
       },
       // 弹框配置 导入
       importTable: {
@@ -257,7 +275,7 @@ export default {
         url: "importTable",
         keepAlive: true,
         excludeString: "importTable", //将name传进去，确认不缓存
-        componentData: {}
+        componentData: {},
       },
       warningModal: false, // 警告弹框
       virtualWarehouseModal: false, // 手工入库弹框
@@ -269,7 +287,7 @@ export default {
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.find();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             text: "新增", //按钮文本
@@ -282,91 +300,91 @@ export default {
                 label: "退换货订单新增", //tab中文名
                 query: Object.assign({
                   id: -1, //id
-                  tabTitle: "退换货订单新增" //tab中文名
-                }) //带的参数
+                  tabTitle: "退换货订单新增", //tab中文名
+                }), //带的参数
               });
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             text: "修改", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.modify();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             text: "扫描入库", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.scanIncoming();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             text: "售后审核", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.afterAudit();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             text: "取消", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.cancelBtn();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             text: "虚拟入库", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.virtualLibrary();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             text: "手动入库", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.virtualWarehouseLibraryWarn();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             text: "取消自动退款", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.cancelRefund();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             text: "修改备注", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.bounced();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             text: "修改卖家备注", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.bounced2();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
-            text: '修改退回仓库',
+            text: "修改退回仓库",
             btnclick: () => {
-              this.Warehouse()
-            }
+              this.Warehouse();
+            },
           },
           {
-            text: '修改物流公司',
+            text: "修改物流公司",
             btnclick: () => {
-              this.OrderLogistics()
-            }
+              this.OrderLogistics();
+            },
           },
           {
-            text: '批量原退',
+            text: "批量原退",
             btnclick: () => {
-              this.batchOriginalBack()
-            }
+              this.batchOriginalBack();
+            },
           },
           // {
           //   text: "从WMS撤回", //按钮文本
@@ -380,21 +398,21 @@ export default {
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.againWMS();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             text: "强制完成", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.forcedCompletion();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             text: "退换货复制",
             disabled: false,
             btnclick: () => {
               this.cloneRenturnGood();
-            }
+            },
           },
           {
             type: "", //按钮类型
@@ -402,12 +420,15 @@ export default {
             disabled: false, //按钮禁用控制
             btnclick: () => {
               const _this = this;
-              _this.importTable.componentData = {tableName: 'OC_B_RETURN_ORDER_remark', objid: '1'};
+              _this.importTable.componentData = {
+                tableName: "OC_B_RETURN_ORDER_remark",
+                objid: "1",
+              };
               _this.importTable.confirmTitle = "卖家备注导入";
               _this.$children
-                .find(item => item.name === "importTable")
+                .find((item) => item.name === "importTable")
                 .openConfirm();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             type: "", //按钮类型
@@ -415,32 +436,34 @@ export default {
             disabled: false, //按钮禁用控制
             btnclick: () => {
               const _this = this;
-              _this.importTable.componentData = {tableName: 'OC_B_RETURN_ORDER'}
+              _this.importTable.componentData = {
+                tableName: "OC_B_RETURN_ORDER",
+              };
               _this.$children
-                .find(item => item.name === "importTable")
+                .find((item) => item.name === "importTable")
                 .openConfirm();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             text: "导出", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.exportClick();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             icon: "iconfont iconbj_setup", //按钮图标
             btnclick: () => {
               let self = this;
               self.setFromInput.componentData = {
-                typeName: 'OC_B_RETURN_ORDER',
+                typeName: "OC_B_RETURN_ORDER",
               };
               setTimeout(() => {
                 self.$children
-                  .find(item => item.name === "setFromInput")
+                  .find((item) => item.name === "setFromInput")
                   .openConfirm();
               }, 100);
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             icon: "iconfont iconbj_col", //按钮图标
@@ -450,9 +473,9 @@ export default {
             btnclick: () => {
               let _this = this;
               _this.setFavorite();
-            } //按钮点击事件
-          }
-        ]
+            }, //按钮点击事件
+          },
+        ],
       }, // 按钮数据
       formConfig: {
         flodClick: "a", // 展开按钮 参数任意字符串
@@ -462,34 +485,34 @@ export default {
           setTimeout(() => {
             this.setTableHeight();
           }, 10);
-        }
+        },
       }, // form表单
       labelList: [
         {
           label: "全部",
           value: "1",
-          isShow: true
+          isShow: true,
         },
         {
           label: "等待退货入库",
           value: "2",
-          isShow: true
+          isShow: true,
         },
         {
           label: "等待售后确认",
           value: "3",
-          isShow: true
+          isShow: true,
         },
         {
           label: "完成",
           value: "4",
-          isShow: true
+          isShow: true,
         },
         {
           label: "取消",
           value: "5",
-          isShow: true
-        }
+          isShow: true,
+        },
       ], // tab切换
       labelDefaultValue: "1",
       jordanTableConfig: {
@@ -500,23 +523,23 @@ export default {
             // title: "所有商品",
             render: (h, params) => {
               let bottomTable = "bottom";
-              if (params.index >= 8) bottomTable = 'top';
+              if (params.index >= 8) bottomTable = "top";
               if (params.row.allSkuItem === null) return;
-              params.row.allSkuItem.forEach(item => {
+              params.row.allSkuItem.forEach((item) => {
                 item.qty_refund = parseInt(item.qty_refund);
-              })
+              });
               let goodsThead = [
                 {
                   key: "id",
-                  title: "编号"
+                  title: "编号",
                 },
                 {
                   key: "return",
-                  title: "退换货"
+                  title: "退换货",
                 },
                 {
                   title: "货号",
-                  key: "ps_c_pro_ecode"
+                  key: "ps_c_pro_ecode",
                 },
                 // {
                 //   title: "规格",
@@ -524,24 +547,24 @@ export default {
                 // },
                 {
                   title: "颜色",
-                  key: "ps_c_clr_ename"
+                  key: "ps_c_clr_ename",
                 },
                 {
                   title: "尺寸",
-                  key: "ps_c_size_ename"
+                  key: "ps_c_size_ename",
                 },
                 {
                   title: "退款金额",
-                  key: "refund_amt"
+                  key: "refund_amt",
                 },
                 {
                   title: "申请数量",
-                  key: "qty_refund"
+                  key: "qty_refund",
                 },
                 {
                   title: "入库数量",
-                  key: "qty_in"
-                }
+                  key: "qty_in",
+                },
               ]; // 浮框表头
               return h(
                 "div",
@@ -550,8 +573,8 @@ export default {
                     width: "200px",
                     display: "flex",
                     alignitems: "center",
-                    justifyContent: "space-between"
-                  }
+                    justifyContent: "space-between",
+                  },
                 },
                 [
                   h(
@@ -561,21 +584,22 @@ export default {
                         placement: bottomTable,
                         transfer: true,
                         minWidth: "400",
-                        trigger: "hover"
-                      }
+                        trigger: "hover",
+                      },
                     },
                     [
                       h(
                         "div",
                         {
                           style: {
-                            width: '200px',
+                            width: "200px",
                             position: "releative",
-                            overflow: 'hidden',
-                            'white-space': 'nowrap',
-                            'text-overflow': 'ellipsis',
-                          }
-                        }, params.row.allSkuItem.length ? params.row.ALL_SKU : '' // hover值
+                            overflow: "hidden",
+                            "white-space": "nowrap",
+                            "text-overflow": "ellipsis",
+                          },
+                        },
+                        params.row.allSkuItem.length ? params.row.ALL_SKU : "" // hover值
                       ),
                       h("i-table", {
                         slot: "content",
@@ -585,19 +609,23 @@ export default {
                           "highlight-row": false,
                           "no-data-text": "暂无数据",
                           columns: goodsThead,
-                          data: params.row.allSkuItem ? params.row.allSkuItem : [],// 浮框数据
-                        }
-                      })
+                          data: params.row.allSkuItem
+                            ? params.row.allSkuItem
+                            : [], // 浮框数据
+                        },
+                      }),
                     ]
-                  )
+                  ),
                 ]
               );
-            }
+            },
           },
           {
             key: "ORDERFLAG",
             render: (h, params) => {
-              let imgSrc = params.row.RESERVE_VARCHAR02 == null || params.row.RESERVE_VARCHAR02 == ''
+              let imgSrc =
+                params.row.RESERVE_VARCHAR02 == null ||
+                params.row.RESERVE_VARCHAR02 == ""
                   ? require("@/assets/image/img/0.png")
                   : require(`@/assets/image/img/1.png`);
               return h(
@@ -606,58 +634,60 @@ export default {
                   props: {
                     placement: "right",
                     width: "78",
-                    trigger: "hover"
-                  }
+                    trigger: "hover",
+                  },
                 },
                 [
-                  h(
-                    "img",
-                    {
-                      attrs: {
-                        src: imgSrc
-                      },
-                      style: {
-                        width: "20px",
-                        height: "20px"
-                      }
+                  h("img", {
+                    attrs: {
+                      src: imgSrc,
                     },
-                  ),
+                    style: {
+                      width: "20px",
+                      height: "20px",
+                    },
+                  }),
                   h(
                     "span",
                     {
                       slot: "content",
                     },
-                    params.row.RESERVE_VARCHAR02 ? params.row.RESERVE_VARCHAR02 : '暂无卖家备注'
-                  )
+                    params.row.RESERVE_VARCHAR02
+                      ? params.row.RESERVE_VARCHAR02
+                      : "暂无卖家备注"
+                  ),
                 ]
               );
-            }
+            },
           },
           {
             key: "CP_C_SHOP_ID",
             // title: "卖家昵称（店铺）",
             render: (h, params) => {
-              return h (
+              return h(
                 "div",
                 {
                   style: {
                     width: "100%",
                     display: "flex",
                     alignitems: "center",
-                    justifyContent: "space-between"
-                  }
+                    justifyContent: "space-between",
+                  },
                 },
                 [
-                  h ('span', {
-                    style: {
-                      width: '100%',
-                      height: '100%',
+                  h(
+                    "span",
+                    {
+                      style: {
+                        width: "100%",
+                        height: "100%",
+                      },
                     },
-                  }, params.row.CP_C_SHOP_TITLE),
+                    params.row.CP_C_SHOP_TITLE
+                  ),
                 ]
-              )
-
-            }
+              );
+            },
           },
         ],
         pageShow: true, //控制分页是否显示
@@ -675,21 +705,20 @@ export default {
         total: 0, //设置总条数
         pageSizeOpts: [15, 30, 45, 60], // 每页条数切换的配置
         pageSize: 15, // 每页条数
-        data: [] //数据配置
+        data: [], //数据配置
       }, // 列表数据
       returnSelectData: [], // 列表选中数据
       isShowFromLoading: false,
-      statusTab: '', // 单据类型
+      statusTab: "", // 单据类型
       isExport: false,
-      isSaveLoading: false
+      isSaveLoading: false,
     };
   },
-  activated() {
-  },
-  created(){
+  activated() {},
+  created() {
     // 获取默认数据
     this.jordanTableConfig.current = 1;
-    if (this.$route.query.type === 'workID') {
+    if (this.$route.query.type === "workID") {
       this.formConfig.formValue = {};
       this.getListWork();
     } else {
@@ -709,16 +738,16 @@ export default {
     });
 
     const _this = this;
-    window.addEventListener('keydown', e => {
+    window.addEventListener("keydown", (e) => {
       let key = e.keyCode;
       if (key == 13 && _this.warningModal) {
         _this.warningOk();
-      }else if (key == 27) {
+      } else if (key == 27) {
         _this.warningModal = false;
       }
-    })
+    });
     this.getHeaderList();
-    if (_this.$route.query.type == 'workID') {
+    if (_this.$route.query.type == "workID") {
       this.getListWork();
     } else {
       this.getList();
@@ -729,12 +758,18 @@ export default {
     // 获取高级查询&表头
     getHeaderList() {
       const _this = this;
-      const params = {"table":"OC_B_RETURN_ORDER","column_include_uicontroller":true,"fixedcolumns":{},"multiple":[],"startindex":0}
+      const params = {
+        table: "OC_B_RETURN_ORDER",
+        column_include_uicontroller: true,
+        fixedcolumns: {},
+        multiple: [],
+        startindex: 0,
+      };
       axios({
         url: "/p/cs/DynamicList",
         // url: "/p/cs/queryListConfig",
         method: "post",
-        data: params
+        data: params,
       }).then((res) => {
         // 高级查询
         let formData = [];
@@ -755,7 +790,7 @@ export default {
                 _this.getList();
               }, //表单回车事件
               iconclick: () => {}, //点击icon图标事件
-              clearable: true
+              clearable: true,
             };
             _this.formConfig.formValue[item.tabth.colname] = "";
           }
@@ -785,17 +820,21 @@ export default {
                 statsize: -1,
                 type: item.tabth.type, //这个是后台用的
                 pid: "",
-                valuedata: "" //这个是选择的值
+                valuedata: "", //这个是选择的值
               },
               oneObj: (e) => {
                 _this.oneObjs(e);
-              }
+              },
             };
-            if (item.tabth.precolnameslist) formData[index].itemdata.precolnameslist = item.tabth.precolnameslist ? item.tabth.precolnameslist : []
+            if (item.tabth.precolnameslist)
+              formData[index].itemdata.precolnameslist = item.tabth
+                .precolnameslist
+                ? item.tabth.precolnameslist
+                : [];
           }
           if (item.type === "text") {
             formData[index] = {
-              style:  item.tabth.isfilter ? "input" : "", //输入框类型
+              style: item.tabth.isfilter ? "input" : "", //输入框类型
               // type: "", //文本框类型的input
               label: item.tabth.name, //输入框前文字
               value: item.tabth.colname, //输入框的值
@@ -807,7 +846,7 @@ export default {
               inputenter: () => {
                 _this.getList();
               }, //表单回车事件
-              iconclick: () => {} //点击icon图标事件
+              iconclick: () => {}, //点击icon图标事件
             };
             _this.formConfig.formValue[item.tabth.colname] = "";
           }
@@ -825,7 +864,7 @@ export default {
               inputenter: () => {
                 _this.getList();
               }, //表单回车事件
-              iconclick: () => {} //点击icon图标事件
+              iconclick: () => {}, //点击icon图标事件
             };
             _this.formConfig.formValue[item.tabth.colname] = "";
           }
@@ -838,26 +877,26 @@ export default {
               value: item.tabth.colname, //输入框的值
               multiple: true, //布尔值,下拉框是否开启多选,默认为不开启
               selectChange: () => {}, //选中事件，默认返回选中的值
-              clearSelect:(e)=>{
-                if (e == 'RETURN_STATUS') {
-                  _this.formConfig.formValue.RETURN_STATUS = '';
-                }else if (e == 'IS_ADD') {
-                  _this.formConfig.formValue.IS_ADD = '';
-                } else if (e == 'IS_TOAG') {
-                  _this.formConfig.formValue.IS_TOAG = '';
-                } else if (e == 'IS_TOWMS') {
-                  _this.formConfig.formValue.IS_TOWMS = '';
-                } else if (e == 'BILL_TYPE') {
-                  _this.formConfig.formValue.BILL_TYPE = '';
-                } else if (e == 'IS_EXAMINE') {
-                  _this.formConfig.formValue.IS_EXAMINE = '';
-                } else if (e == 'IS_TODRP') {
-                  _this.formConfig.formValue.IS_TODRP = '';
-                } else if (e == 'IS_TRANSFER') {
-                  _this.formConfig.formValue.IS_TRANSFER = '';
+              clearSelect: (e) => {
+                if (e == "RETURN_STATUS") {
+                  _this.formConfig.formValue.RETURN_STATUS = "";
+                } else if (e == "IS_ADD") {
+                  _this.formConfig.formValue.IS_ADD = "";
+                } else if (e == "IS_TOAG") {
+                  _this.formConfig.formValue.IS_TOAG = "";
+                } else if (e == "IS_TOWMS") {
+                  _this.formConfig.formValue.IS_TOWMS = "";
+                } else if (e == "BILL_TYPE") {
+                  _this.formConfig.formValue.BILL_TYPE = "";
+                } else if (e == "IS_EXAMINE") {
+                  _this.formConfig.formValue.IS_EXAMINE = "";
+                } else if (e == "IS_TODRP") {
+                  _this.formConfig.formValue.IS_TODRP = "";
+                } else if (e == "IS_TRANSFER") {
+                  _this.formConfig.formValue.IS_TRANSFER = "";
                 }
               }, //点击清空按钮回调
-              options: _this.converSelect(item.tabth.combobox)
+              options: _this.converSelect(item.tabth.combobox),
             };
             _this.formConfig.formValue[item.tabth.colname] = [];
           }
@@ -866,8 +905,7 @@ export default {
         // 表头赋值
         // res.data.data.tableHeader.forEach(ele => ele.align = "center");
         _this.jordanTableConfig.columns = res.data.data.columns;
-      })
-
+      });
     },
     // 查找
     find() {
@@ -880,13 +918,13 @@ export default {
       val.map((item, index) => {
         list[index] = {
           label: item.limitdesc,
-          value: item.limitval
+          value: item.limitval,
         };
       });
       return list;
     },
     // 获取列表数据
-    getList(status = '') {
+    getList(status = "") {
       const _this = this;
       _this.returnSelectData = [];
       if (_this.jordanTableConfig.loading) {
@@ -898,118 +936,152 @@ export default {
       let param = {
         start: _this.jordanTableConfig.current,
         count: _this.jordanTableConfig.pageSize,
-        RETURN_STATUS: status == undefined || !status ? [] : [status]
+        RETURN_STATUS: status == undefined || !status ? [] : [status],
       };
-      _this.formConfig.formValue.RECEIVE_PROVINCE = '';
-      _this.formConfig.formValue.RECEIVE_PROVINCE_ID = '';
+      _this.formConfig.formValue.RECEIVE_PROVINCE = "";
+      _this.formConfig.formValue.RECEIVE_PROVINCE_ID = "";
       if (_this.formConfig.formData.length) {
-        _this.formConfig.formData.forEach(item => {
-          if (item.itemdata !== undefined && item.itemdata.name == '原始订单编号') {
+        _this.formConfig.formData.forEach((item) => {
+          if (
+            item.itemdata !== undefined &&
+            item.itemdata.name == "原始订单编号"
+          ) {
             _this.formConfig.formValue.ORIG_ORDER_ID = item.itemdata.valuedata;
           }
-        })
+        });
       }
       if (status) {
         _this.formConfig.formValue.RETURN_STATUS = [status];
       }
       const Obj = _this.formConfig.formValue;
-      if (Obj.INVENTED_STATUS && Obj.INVENTED_STATUS[0] === 'bSelect-all') Obj.INVENTED_STATUS = ''
-        else if (Obj.BILL_TYPE && Obj.BILL_TYPE[0] === 'bSelect-all') Obj.BILL_TYPE = ''
-        else if (Obj.RETURN_STATUS && Obj.RETURN_STATUS[0] === 'bSelect-all') Obj.RETURN_STATUS = ''
-        else if (Obj.IS_TOWMS && Obj.IS_TOWMS[0] === 'bSelect-all') Obj.IS_TOWMS = ''
-        else if (Obj.WMS_CANCEL_STATUS && Obj.WMS_CANCEL_STATUS[0] === 'bSelect-all') Obj.WMS_CANCEL_STATUS = ''
-        else if (Obj.IS_ADD && Obj.IS_ADD[0] === 'bSelect-all') Obj.IS_ADD = ''
-        else if (Obj.IS_TOAG && Obj.IS_TOAG[0] === 'bSelect-all') Obj.IS_TOAG = ''
-        else if (Obj.IS_BACK && Obj.IS_BACK[0] === 'bSelect-all') Obj.IS_BACK = ''
-        else if (Obj.RESERVE_BIGINT07 && Obj.RESERVE_BIGINT07[0] === 'bSelect-all') Obj.RESERVE_BIGINT07 = ''
+      if (Obj.INVENTED_STATUS && Obj.INVENTED_STATUS[0] === "bSelect-all")
+        Obj.INVENTED_STATUS = "";
+      else if (Obj.BILL_TYPE && Obj.BILL_TYPE[0] === "bSelect-all")
+        Obj.BILL_TYPE = "";
+      else if (Obj.RETURN_STATUS && Obj.RETURN_STATUS[0] === "bSelect-all")
+        Obj.RETURN_STATUS = "";
+      else if (Obj.IS_TOWMS && Obj.IS_TOWMS[0] === "bSelect-all")
+        Obj.IS_TOWMS = "";
+      else if (
+        Obj.WMS_CANCEL_STATUS &&
+        Obj.WMS_CANCEL_STATUS[0] === "bSelect-all"
+      )
+        Obj.WMS_CANCEL_STATUS = "";
+      else if (Obj.IS_ADD && Obj.IS_ADD[0] === "bSelect-all") Obj.IS_ADD = "";
+      else if (Obj.IS_TOAG && Obj.IS_TOAG[0] === "bSelect-all")
+        Obj.IS_TOAG = "";
+      else if (Obj.IS_BACK && Obj.IS_BACK[0] === "bSelect-all")
+        Obj.IS_BACK = "";
+      else if (
+        Obj.RESERVE_BIGINT07 &&
+        Obj.RESERVE_BIGINT07[0] === "bSelect-all"
+      )
+        Obj.RESERVE_BIGINT07 = "";
       axios({
         url: "/p/cs/querySalesReturn",
         method: "post",
-        data: Object.assign(param, _this.formConfig.formValue)
-      }).then(res => {
+        data: Object.assign(param, _this.formConfig.formValue),
+      }).then((res) => {
         if (res.data.code == 0 && res.data.data.queryResult.length) {
           _this.jordanTableConfig.loading = false;
           _this.jordanTableConfig.data = res.data.data.queryResult;
           _this.jordanTableConfig.total = res.data.data.totalNum;
           for (let i = 0; i < _this.jordanTableConfig.data.length; i++) {
             let item = _this.jordanTableConfig.data[i];
-            if (item.MODIFIEDDATE) item.MODIFIEDDATE = publicMethodsUtil.DatesTime(item.MODIFIEDDATE); // 修改时间
-            if (item.IN_TIME) item.IN_TIME = publicMethodsUtil.DatesTime(item.IN_TIME); // 入库时间
-            if (item.AUDIT_TIME) item.AUDIT_TIME = publicMethodsUtil.DatesTime(item.AUDIT_TIME); // 审核时间
-            if (item.LAST_UPDATE_TIME) item.LAST_UPDATE_TIME = publicMethodsUtil.DatesTime(item.LAST_UPDATE_TIME); // 退款平台最后修改时间
-            if (item.RETURN_CREATE_TIME) item.RETURN_CREATE_TIME = publicMethodsUtil.DatesTime(item.RETURN_CREATE_TIME); // 退款创建时间
-            if (item.CREATIONDATE) item.CREATIONDATE = publicMethodsUtil.DatesTime(item.CREATIONDATE); // 创建时间
+            if (item.MODIFIEDDATE)
+              item.MODIFIEDDATE = publicMethodsUtil.DatesTime(
+                item.MODIFIEDDATE
+              ); // 修改时间
+            if (item.IN_TIME)
+              item.IN_TIME = publicMethodsUtil.DatesTime(item.IN_TIME); // 入库时间
+            if (item.AUDIT_TIME)
+              item.AUDIT_TIME = publicMethodsUtil.DatesTime(item.AUDIT_TIME); // 审核时间
+            if (item.LAST_UPDATE_TIME)
+              item.LAST_UPDATE_TIME = publicMethodsUtil.DatesTime(
+                item.LAST_UPDATE_TIME
+              ); // 退款平台最后修改时间
+            if (item.RETURN_CREATE_TIME)
+              item.RETURN_CREATE_TIME = publicMethodsUtil.DatesTime(
+                item.RETURN_CREATE_TIME
+              ); // 退款创建时间
+            if (item.CREATIONDATE)
+              item.CREATIONDATE = publicMethodsUtil.DatesTime(
+                item.CREATIONDATE
+              ); // 创建时间
             item.RETURN_STATUS = item.rETURNNAME; // 退单状态
-            item.IS_ADD = item.IS_ADD == 0 ? '否' : '是'; // 是否手工新增
+            item.IS_ADD = item.IS_ADD == 0 ? "否" : "是"; // 是否手工新增
             if (item.INVENTED_STATUS == 0) {
-              item.INVENTED_STATUS = '未虚拟入库';
-            }else if (item.INVENTED_STATUS == 1) {
-              item.INVENTED_STATUS = '虚拟入库未入库';
-            }else if (item.INVENTED_STATUS == 2) {
-              item.INVENTED_STATUS = '虚拟入库已入库';
+              item.INVENTED_STATUS = "未虚拟入库";
+            } else if (item.INVENTED_STATUS == 1) {
+              item.INVENTED_STATUS = "虚拟入库未入库";
+            } else if (item.INVENTED_STATUS == 2) {
+              item.INVENTED_STATUS = "虚拟入库已入库";
             }
             item.PLATFORM = item.pLAT; // 平台类型
             item.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ECODE; // 退回物流公司
-            item.IS_RECEIVE_CONFIRM = item.IS_RECEIVE_CONFIRM == 0 ? '否' : '是'; // 是否确认收货
+            item.IS_RECEIVE_CONFIRM =
+              item.IS_RECEIVE_CONFIRM == 0 ? "否" : "是"; // 是否确认收货
             // item.WMS_CANCEL_STATUS = item.WMS_CANCEL_STATUS == 0 ? '未撤回' : '已撤回'; // WMS撤回状态
-            if (item.WMS_CANCEL_STATUS == 0) item.WMS_CANCEL_STATUS = '未撤回';
-              else if (item.WMS_CANCEL_STATUS == 1) item.WMS_CANCEL_STATUS = '已撤回';
-              else if (item.WMS_CANCEL_STATUS == 2) item.WMS_CANCEL_STATUS = '撤回失败';
-            item.IS_BACK = item.IS_BACK == 0 ? '否' : '是'; // 是否原退
-            item.IS_MANUAL_AUDIT = item.IS_MANUAL_AUDIT == 0 ? '否' : '是'; // 是否手工审核
+            if (item.WMS_CANCEL_STATUS == 0) item.WMS_CANCEL_STATUS = "未撤回";
+            else if (item.WMS_CANCEL_STATUS == 1)
+              item.WMS_CANCEL_STATUS = "已撤回";
+            else if (item.WMS_CANCEL_STATUS == 2)
+              item.WMS_CANCEL_STATUS = "撤回失败";
+            item.IS_BACK = item.IS_BACK == 0 ? "否" : "是"; // 是否原退
+            item.IS_MANUAL_AUDIT = item.IS_MANUAL_AUDIT == 0 ? "否" : "是"; // 是否手工审核
             // item.IS_TOAG = item.IS_TOAG == 0 ? '否' : '是'; // 是否传AG
             if (item.IS_TOAG == 0) {
-              item.IS_TOAG = '未传';
+              item.IS_TOAG = "未传";
             } else if (item.IS_TOAG == 1) {
-              item.IS_TOAG = '已传';
+              item.IS_TOAG = "已传";
             } else if (item.IS_TOAG == 2) {
-              item.IS_TOAG = '失败';
+              item.IS_TOAG = "失败";
             } else if (item.IS_TOAG == 3) {
-              item.IS_TOAG = '不传';
+              item.IS_TOAG = "不传";
             }
             // 0未传WMS，1传WMS中，2传WMS成功，3传WMS失败;
             if (item.IS_TOWMS == 0) {
-              item.IS_TOWMS = '未传WMS';
+              item.IS_TOWMS = "未传WMS";
             } else if (item.IS_TOWMS == 1) {
-              item.IS_TOWMS = '传WMS中';
+              item.IS_TOWMS = "传WMS中";
             } else if (item.IS_TOWMS == 2) {
-              item.IS_TOWMS = '传WMS成功';
+              item.IS_TOWMS = "传WMS成功";
             } else if (item.IS_TOWMS == 3) {
-              item.IS_TOWMS = '传WMS失败';
+              item.IS_TOWMS = "传WMS失败";
             }
             // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否传wms
 
             // 0无次品调拨，1次品未调拨，2次品已调拨
             if (item.RESERVE_BIGINT07 === 0) {
-              item.RESERVE_BIGINT07 = '无次品调拨';
+              item.RESERVE_BIGINT07 = "无次品调拨";
             } else if (item.RESERVE_BIGINT07 === 1) {
-              item.RESERVE_BIGINT07 = '次品未调拨';
+              item.RESERVE_BIGINT07 = "次品未调拨";
             } else if (item.RESERVE_BIGINT07 === 2) {
-              item.RESERVE_BIGINT07 = '次品已调拨';
+              item.RESERVE_BIGINT07 = "次品已调拨";
             }
             item.RETURN_REASON = item.RETURN_REASON; // 退货原因
-            item.BILL_TYPE = item.BILL_TYPE == 1 ? '退货单' : '退换货单';
+            item.BILL_TYPE = item.BILL_TYPE == 1 ? "退货单" : "退换货单";
             item.OWNERID = item.OWNERNAME;
-            item.IS_CHECK = item.IS_CHECK == 0 ? '否' : '是'; // 是否已匹配
-            item.IS_NOTLOGMBER = item.IS_NOTLOGMBER == 0 ? '否' : '是'; // 是否缺少运单号
-            item.IS_EXAMINE = item.IS_EXAMINE == 0 ? '否' : '是'; // 是否提交审核
-            item.ISACTIVE = item.ISACTIVE == 0 ? '否' : '是'; // 是否激活
+            item.IS_CHECK = item.IS_CHECK == 0 ? "否" : "是"; // 是否已匹配
+            item.IS_NOTLOGMBER = item.IS_NOTLOGMBER == 0 ? "否" : "是"; // 是否缺少运单号
+            item.IS_EXAMINE = item.IS_EXAMINE == 0 ? "否" : "是"; // 是否提交审核
+            item.ISACTIVE = item.ISACTIVE == 0 ? "否" : "是"; // 是否激活
             // item.IS_TODRP = item.IS_TODRP == 0 ? '否' : '是'; // 是否生成零售
             if (item.IS_TODRP == 0) {
-              item.IS_TODRP = '未生成';
+              item.IS_TODRP = "未生成";
             } else if (item.IS_TODRP == 1) {
-              item.IS_TODRP = '已生成';
+              item.IS_TODRP = "已生成";
             } else if (item.IS_TODRP == 2) {
-              item.IS_TODRP = '生成失败';
+              item.IS_TODRP = "生成失败";
             }
-            item.IS_REFUND = item.IS_REFUND == 0 ? '否' : '是'; // 是否
-            item.IS_RESERVED = item.IS_RESERVED == 0 ? '否' : '是'; // 是否
-            item.IS_INSTORAGE = item.IS_INSTORAGE == 0 ? '否' : '是'; // 是否
+            item.IS_REFUND = item.IS_REFUND == 0 ? "否" : "是"; // 是否
+            item.IS_RESERVED = item.IS_RESERVED == 0 ? "否" : "是"; // 是否
+            item.IS_INSTORAGE = item.IS_INSTORAGE == 0 ? "否" : "是"; // 是否
             // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否
-            item.IS_TRANSFER = item.IS_TRANSFER == 0 ? '否' : '是'; // 是否
-            item.IS_FORCE = item.IS_FORCE == 0 ? '否' : '是'; // 是否
+            item.IS_TRANSFER = item.IS_TRANSFER == 0 ? "否" : "是"; // 是否
+            item.IS_FORCE = item.IS_FORCE == 0 ? "否" : "是"; // 是否
           }
-        }else {
+        } else {
           _this.jordanTableConfig.data = [];
           _this.jordanTableConfig.total = 0;
           _this.jordanTableConfig.loading = false;
@@ -1017,7 +1089,7 @@ export default {
       });
     },
     // 客服工作台跳转获取列表数据
-    getListWork(status = '') {
+    getListWork(status = "") {
       const _this = this;
       if (_this.jordanTableConfig.loading) {
         return;
@@ -1028,121 +1100,157 @@ export default {
       let param = {
         start: _this.jordanTableConfig.current,
         count: _this.jordanTableConfig.pageSize,
-        RETURN_STATUS: status == undefined || !status ? [] : [status]
+        RETURN_STATUS: status == undefined || !status ? [] : [status],
       };
-      _this.formConfig.formValue.RECEIVE_PROVINCE = '';
-      _this.formConfig.formValue.RECEIVE_PROVINCE_ID = '';
+      _this.formConfig.formValue.RECEIVE_PROVINCE = "";
+      _this.formConfig.formValue.RECEIVE_PROVINCE_ID = "";
       if (_this.formConfig.formData.length) {
-        _this.formConfig.formData.forEach(item => {
-          if (item.itemdata !== undefined && item.itemdata.name == '原始订单编号') {
+        _this.formConfig.formData.forEach((item) => {
+          if (
+            item.itemdata !== undefined &&
+            item.itemdata.name == "原始订单编号"
+          ) {
             _this.formConfig.formValue.ORIG_ORDER_ID = item.itemdata.valuedata;
           }
-        })
+        });
       }
       if (status) {
         _this.formConfig.formValue.RETURN_STATUS = [status];
       }
       let returnParam = JSON.parse(_this.$route.query.returnParam);
-      if (_this.$route.query.type == 'workID') {
-        if (returnParam.time == 'IN_TIME') _this.formConfig.formValue.IN_TIME = [new Date(returnParam.startTime), new Date(returnParam.endTime)]
-          else if (returnParam.time == 'AUDIT_TIME') _this.formConfig.formValue.AUDIT_TIME = [new Date(returnParam.startTime), new Date(returnParam.endTime)]
-          else if (returnParam.time == 'CREATIONDATE') {
-            _this.formConfig.formValue.CREATIONDATE = [new Date(returnParam.startTime), new Date(returnParam.endTime)];
-            _this.formConfig.formValue.ISACTIVE =  returnParam.IS_ACTIVE;
-          }
-        if (returnParam.ID) _this.formConfig.formValue.ID = returnParam.ID
-        if (returnParam.returnStatus) _this.formConfig.formValue.RETURN_STATUS = returnParam.returnStatus
-        if (returnParam.shopId) _this.formConfig.formValue.CP_C_SHOP_ID = returnParam.shopId
-        if (returnParam.IS_BACK) _this.formConfig.formValue.IS_BACK = returnParam.IS_BACK // 是否原退
-        if (returnParam.CP_C_PHY_WAREHOUSE_ID) _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = returnParam.CP_C_PHY_WAREHOUSE_ID // 入库实体仓库
+      if (_this.$route.query.type == "workID") {
+        if (returnParam.time == "IN_TIME")
+          _this.formConfig.formValue.IN_TIME = [
+            new Date(returnParam.startTime),
+            new Date(returnParam.endTime),
+          ];
+        else if (returnParam.time == "AUDIT_TIME")
+          _this.formConfig.formValue.AUDIT_TIME = [
+            new Date(returnParam.startTime),
+            new Date(returnParam.endTime),
+          ];
+        else if (returnParam.time == "CREATIONDATE") {
+          _this.formConfig.formValue.CREATIONDATE = [
+            new Date(returnParam.startTime),
+            new Date(returnParam.endTime),
+          ];
+          _this.formConfig.formValue.ISACTIVE = returnParam.IS_ACTIVE;
+        }
+        if (returnParam.ID) _this.formConfig.formValue.ID = returnParam.ID;
+        if (returnParam.returnStatus)
+          _this.formConfig.formValue.RETURN_STATUS = returnParam.returnStatus;
+        if (returnParam.shopId)
+          _this.formConfig.formValue.CP_C_SHOP_ID = returnParam.shopId;
+        if (returnParam.IS_BACK)
+          _this.formConfig.formValue.IS_BACK = returnParam.IS_BACK; // 是否原退
+        if (returnParam.CP_C_PHY_WAREHOUSE_ID)
+          _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID =
+            returnParam.CP_C_PHY_WAREHOUSE_ID; // 入库实体仓库
       }
       axios({
         url: "/p/cs/querySalesReturn",
         method: "post",
-        data: Object.assign(param, _this.formConfig.formValue)
-      }).then(res => {
+        data: Object.assign(param, _this.formConfig.formValue),
+      }).then((res) => {
         if (res.data.code == 0 && res.data.data.queryResult.length) {
           _this.jordanTableConfig.loading = false;
           _this.jordanTableConfig.data = res.data.data.queryResult;
           _this.jordanTableConfig.total = res.data.data.totalNum;
           for (let i = 0; i < _this.jordanTableConfig.data.length; i++) {
             let item = _this.jordanTableConfig.data[i];
-            if (item.MODIFIEDDATE) item.MODIFIEDDATE = publicMethodsUtil.DatesTime(item.MODIFIEDDATE); // 修改时间
-            if (item.IN_TIME) item.IN_TIME = publicMethodsUtil.DatesTime(item.IN_TIME); // 入库时间
-            if (item.AUDIT_TIME) item.AUDIT_TIME = publicMethodsUtil.DatesTime(item.AUDIT_TIME); // 审核时间
-            if (item.LAST_UPDATE_TIME) item.LAST_UPDATE_TIME = publicMethodsUtil.DatesTime(item.LAST_UPDATE_TIME); // 退款平台最后修改时间
-            if (item.RETURN_CREATE_TIME) item.RETURN_CREATE_TIME = publicMethodsUtil.DatesTime(item.RETURN_CREATE_TIME); // 退款创建时间
-            if (item.CREATIONDATE) item.CREATIONDATE = publicMethodsUtil.DatesTime(item.CREATIONDATE); // 创建时间
+            if (item.MODIFIEDDATE)
+              item.MODIFIEDDATE = publicMethodsUtil.DatesTime(
+                item.MODIFIEDDATE
+              ); // 修改时间
+            if (item.IN_TIME)
+              item.IN_TIME = publicMethodsUtil.DatesTime(item.IN_TIME); // 入库时间
+            if (item.AUDIT_TIME)
+              item.AUDIT_TIME = publicMethodsUtil.DatesTime(item.AUDIT_TIME); // 审核时间
+            if (item.LAST_UPDATE_TIME)
+              item.LAST_UPDATE_TIME = publicMethodsUtil.DatesTime(
+                item.LAST_UPDATE_TIME
+              ); // 退款平台最后修改时间
+            if (item.RETURN_CREATE_TIME)
+              item.RETURN_CREATE_TIME = publicMethodsUtil.DatesTime(
+                item.RETURN_CREATE_TIME
+              ); // 退款创建时间
+            if (item.CREATIONDATE)
+              item.CREATIONDATE = publicMethodsUtil.DatesTime(
+                item.CREATIONDATE
+              ); // 创建时间
             item.RETURN_STATUS = item.rETURNNAME; // 退单状态
-            item.IS_ADD = item.IS_ADD == 0 ? '否' : '是'; // 是否手工新增
+            item.IS_ADD = item.IS_ADD == 0 ? "否" : "是"; // 是否手工新增
             if (item.INVENTED_STATUS == 0) {
-              item.INVENTED_STATUS = '未虚拟入库';
-            }else if (item.INVENTED_STATUS == 1) {
-              item.INVENTED_STATUS = '虚拟入库未入库';
-            }else if (item.INVENTED_STATUS == 2) {
-              item.INVENTED_STATUS = '虚拟入库已入库';
+              item.INVENTED_STATUS = "未虚拟入库";
+            } else if (item.INVENTED_STATUS == 1) {
+              item.INVENTED_STATUS = "虚拟入库未入库";
+            } else if (item.INVENTED_STATUS == 2) {
+              item.INVENTED_STATUS = "虚拟入库已入库";
             }
             item.PLATFORM = item.pLAT; // 平台类型
             item.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ECODE; // 退回物流公司
-            item.IS_RECEIVE_CONFIRM = item.IS_RECEIVE_CONFIRM == 0 ? '否' : '是'; // 是否确认收货
+            item.IS_RECEIVE_CONFIRM =
+              item.IS_RECEIVE_CONFIRM == 0 ? "否" : "是"; // 是否确认收货
             // item.WMS_CANCEL_STATUS = item.WMS_CANCEL_STATUS == 0 ? '未撤回' : '已撤回'; // WMS撤回状态
-            if (item.WMS_CANCEL_STATUS == 0) item.WMS_CANCEL_STATUS = '未撤回';
-              else if (item.WMS_CANCEL_STATUS == 1) item.WMS_CANCEL_STATUS = '已撤回';
-              else if (item.WMS_CANCEL_STATUS == 2) item.WMS_CANCEL_STATUS = '撤回失败';
-            item.IS_BACK = item.IS_BACK == 0 ? '否' : '是'; // 是否原退
-            item.IS_MANUAL_AUDIT = item.IS_MANUAL_AUDIT == 0 ? '否' : '是'; // 是否手工审核
+            if (item.WMS_CANCEL_STATUS == 0) item.WMS_CANCEL_STATUS = "未撤回";
+            else if (item.WMS_CANCEL_STATUS == 1)
+              item.WMS_CANCEL_STATUS = "已撤回";
+            else if (item.WMS_CANCEL_STATUS == 2)
+              item.WMS_CANCEL_STATUS = "撤回失败";
+            item.IS_BACK = item.IS_BACK == 0 ? "否" : "是"; // 是否原退
+            item.IS_MANUAL_AUDIT = item.IS_MANUAL_AUDIT == 0 ? "否" : "是"; // 是否手工审核
             // item.IS_TOAG = item.IS_TOAG == 0 ? '否' : '是'; // 是否传AG
             if (item.IS_TOAG == 0) {
-              item.IS_TOAG = '未传';
+              item.IS_TOAG = "未传";
             } else if (item.IS_TOAG == 1) {
-              item.IS_TOAG = '已传';
+              item.IS_TOAG = "已传";
             } else if (item.IS_TOAG == 2) {
-              item.IS_TOAG = '失败';
+              item.IS_TOAG = "失败";
             } else if (item.IS_TOAG == 3) {
-              item.IS_TOAG = '不传';
+              item.IS_TOAG = "不传";
             }
             // 0未传WMS，1传WMS中，2传WMS成功，3传WMS失败;
             if (item.IS_TOWMS == 0) {
-              item.IS_TOWMS = '未传WMS';
+              item.IS_TOWMS = "未传WMS";
             } else if (item.IS_TOWMS == 1) {
-              item.IS_TOWMS = '传WMS中';
+              item.IS_TOWMS = "传WMS中";
             } else if (item.IS_TOWMS == 2) {
-              item.IS_TOWMS = '传WMS成功';
+              item.IS_TOWMS = "传WMS成功";
             } else if (item.IS_TOWMS == 3) {
-              item.IS_TOWMS = '传WMS失败';
+              item.IS_TOWMS = "传WMS失败";
             }
             // 0无次品调拨，1次品未调拨，2次品已调拨
             if (item.RESERVE_BIGINT07 === 0) {
-              item.RESERVE_BIGINT07 = '无次品调拨';
+              item.RESERVE_BIGINT07 = "无次品调拨";
             } else if (item.RESERVE_BIGINT07 === 1) {
-              item.RESERVE_BIGINT07 = '次品未调拨';
+              item.RESERVE_BIGINT07 = "次品未调拨";
             } else if (item.RESERVE_BIGINT07 === 2) {
-              item.RESERVE_BIGINT07 = '次品已调拨';
+              item.RESERVE_BIGINT07 = "次品已调拨";
             }
             // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否传wms
             item.RETURN_REASON = item.RETURN_REASON; // 退货原因
-            item.BILL_TYPE = item.BILL_TYPE == 1 ? '退货单' : '退换货单';
+            item.BILL_TYPE = item.BILL_TYPE == 1 ? "退货单" : "退换货单";
             item.OWNERID = item.OWNERNAME;
-            item.IS_CHECK = item.IS_CHECK == 0 ? '否' : '是'; // 是否已匹配
-            item.IS_NOTLOGMBER = item.IS_NOTLOGMBER == 0 ? '否' : '是'; // 是否缺少运单号
-            item.IS_EXAMINE = item.IS_EXAMINE == 0 ? '否' : '是'; // 是否提交审核
-            item.ISACTIVE = item.ISACTIVE == 0 ? '否' : '是'; // 是否激活
+            item.IS_CHECK = item.IS_CHECK == 0 ? "否" : "是"; // 是否已匹配
+            item.IS_NOTLOGMBER = item.IS_NOTLOGMBER == 0 ? "否" : "是"; // 是否缺少运单号
+            item.IS_EXAMINE = item.IS_EXAMINE == 0 ? "否" : "是"; // 是否提交审核
+            item.ISACTIVE = item.ISACTIVE == 0 ? "否" : "是"; // 是否激活
             // item.IS_TODRP = item.IS_TODRP == 0 ? '否' : '是'; // 是否生成零售
             if (item.IS_TODRP == 0) {
-              item.IS_TODRP = '未生成';
+              item.IS_TODRP = "未生成";
             } else if (item.IS_TODRP == 1) {
-              item.IS_TODRP = '已生成';
+              item.IS_TODRP = "已生成";
             } else if (item.IS_TODRP == 2) {
-              item.IS_TODRP = '生成失败';
+              item.IS_TODRP = "生成失败";
             }
-            item.IS_REFUND = item.IS_REFUND == 0 ? '否' : '是'; // 是否
-            item.IS_RESERVED = item.IS_RESERVED == 0 ? '否' : '是'; // 是否
-            item.IS_INSTORAGE = item.IS_INSTORAGE == 0 ? '否' : '是'; // 是否
+            item.IS_REFUND = item.IS_REFUND == 0 ? "否" : "是"; // 是否
+            item.IS_RESERVED = item.IS_RESERVED == 0 ? "否" : "是"; // 是否
+            item.IS_INSTORAGE = item.IS_INSTORAGE == 0 ? "否" : "是"; // 是否
             // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否
-            item.IS_TRANSFER = item.IS_TRANSFER == 0 ? '否' : '是'; // 是否
-            item.IS_FORCE = item.IS_FORCE == 0 ? '否' : '是'; // 是否
+            item.IS_TRANSFER = item.IS_TRANSFER == 0 ? "否" : "是"; // 是否
+            item.IS_FORCE = item.IS_FORCE == 0 ? "否" : "是"; // 是否
           }
-        }else {
+        } else {
           _this.jordanTableConfig.data = [];
           _this.jordanTableConfig.total = 0;
           _this.jordanTableConfig.loading = false;
@@ -1152,41 +1260,50 @@ export default {
     // 切换table
     labelClick(item, index) {
       if (index == 0) {
-        this.formConfig.formValue.RETURN_STATUS = '';
-        this.statusTab = '';
+        this.formConfig.formValue.RETURN_STATUS = "";
+        this.statusTab = "";
         this.jordanTableConfig.current = 1;
         this.getList();
-      }else if (index == 1) {
+      } else if (index == 1) {
         this.jordanTableConfig.current = 1;
-        this.statusTab = '20';
-        this.getList('20');
-      }else if (index == 2) {
+        this.statusTab = "20";
+        this.getList("20");
+      } else if (index == 2) {
         this.jordanTableConfig.current = 1;
-        this.statusTab = '30';
-        this.getList('30');
-      }else if (index == 3) {
+        this.statusTab = "30";
+        this.getList("30");
+      } else if (index == 3) {
         this.jordanTableConfig.current = 1;
-        this.statusTab = '50';
-        this.getList('50');
-      }else if (index == 4) {
+        this.statusTab = "50";
+        this.getList("50");
+      } else if (index == 4) {
         this.jordanTableConfig.current = 1;
-        this.statusTab = '60';
-        this.getList('60');
+        this.statusTab = "60";
+        this.getList("60");
       }
     },
     oneObjs(e) {
       const _this = this;
-      _this.formConfig.formData.forEach(item => {
+      _this.formConfig.formData.forEach((item) => {
         if (item.itemdata) {
-          if (item.itemdata.name == '平台') _this.formConfig.formValue.PLATFORM = item.itemdata.pid
-            else if (item.itemdata.name == '入库逻辑仓库') _this.formConfig.formValue.CP_C_STORE_ID = item.itemdata.pid
-            else if (item.itemdata.name == '快递公司') _this.formConfig.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid
-            else if (item.itemdata.name == '入库实体仓库') _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_IN_ID = item.itemdata.pid
-            else if (item.itemdata.name == '发货实体仓库') _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = item.itemdata.pid
-            else if (item.itemdata.name == '店铺名称') _this.formConfig.formValue.CP_C_SHOP_ID = item.itemdata.pid
-            else if (item.itemdata.name == '创建人') _this.formConfig.formValue.OWNERID = item.itemdata.pid
+          if (item.itemdata.name == "平台")
+            _this.formConfig.formValue.PLATFORM = item.itemdata.pid;
+          else if (item.itemdata.name == "入库逻辑仓库")
+            _this.formConfig.formValue.CP_C_STORE_ID = item.itemdata.pid;
+          else if (item.itemdata.name == "快递公司")
+            _this.formConfig.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid;
+          else if (item.itemdata.name == "入库实体仓库")
+            _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_IN_ID =
+              item.itemdata.pid;
+          else if (item.itemdata.name == "发货实体仓库")
+            _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID =
+              item.itemdata.pid;
+          else if (item.itemdata.name == "店铺名称")
+            _this.formConfig.formValue.CP_C_SHOP_ID = item.itemdata.pid;
+          else if (item.itemdata.name == "创建人")
+            _this.formConfig.formValue.OWNERID = item.itemdata.pid;
         }
-      })
+      });
     },
     // 双击时触发
     onRowDblclick(row, index) {
@@ -1198,8 +1315,8 @@ export default {
         query: Object.assign({
           id: row.ID, //单据id
           tabTitle: "退换货订单详情", //tab中文名
-          statusName: row.rETURNNAME // 行的退单状态
-        }) //带的参数
+          statusName: row.rETURNNAME, // 行的退单状态
+        }), //带的参数
       });
     },
     // 列表勾选
@@ -1221,7 +1338,7 @@ export default {
     // 分页change 事件
     pageChange(val) {
       this.jordanTableConfig.current = val;
-      if (this.$route.query.type == 'workID') {
+      if (this.$route.query.type == "workID") {
         this.getListWork();
       } else {
         this.getList(this.statusTab);
@@ -1230,7 +1347,7 @@ export default {
     // 切换分页条数
     pageSizeChange(val) {
       this.jordanTableConfig.pageSize = val;
-      if (this.$route.query.type == 'workID') {
+      if (this.$route.query.type == "workID") {
         this.getListWork();
       } else {
         this.getList(this.statusTab);
@@ -1239,7 +1356,7 @@ export default {
     // 修改
     modify() {
       if (this.returnSelectData.length != 1) {
-        this.$Message.error('请选中一项修改!');
+        this.$Message.error("请选中一项修改!");
         return;
       }
       this.$store.commit("customize/TabHref", {
@@ -1250,23 +1367,23 @@ export default {
         query: Object.assign({
           id: this.returnSelectData[0].ID, //单据id
           tabTitle: "退换货订单详情", //tab中文名
-          statusName: this.returnSelectData[0].rETURNNAME // 选中行的退单状态
-        }) //带的参数
+          statusName: this.returnSelectData[0].rETURNNAME, // 选中行的退单状态
+        }), //带的参数
       });
     },
     // 扫描入库按钮
     scanIncoming() {
       const _this = this;
       if (this.returnSelectData.length != 1) {
-        this.$Message.error('请选中一项修改!');
+        this.$Message.error("请选中一项修改!");
         return;
       }
       axios({
         url: "/p/cs/getScanIncomingInfo",
         method: "post",
-        cancelToken:true,
-        data: {ID: this.returnSelectData[0].ID}
-      }).then(res => {
+        cancelToken: true,
+        data: { ID: this.returnSelectData[0].ID },
+      }).then((res) => {
         if (res.data.code === 0) {
           this.$store.commit("customize/TabOpen", {
             id: -1, //单据id
@@ -1274,117 +1391,126 @@ export default {
             name: "scanIn", //文件名
             label: "扫描入库", //tab中文名
             query: Object.assign({
-              id:-1,
+              id: -1,
               returnId: this.returnSelectData[0].ID, //单据id
               isOrderHrefReturn: "order",
-              tabTitle: "扫描入库" //tab中文名
-            }) //带的参数
-          })
-        }else {
-          this.$Message.warning('此退换单状态不允许扫描入库,请重新选择！')
+              tabTitle: "扫描入库", //tab中文名
+            }), //带的参数
+          });
+        } else {
+          this.$Message.warning("此退换单状态不允许扫描入库,请重新选择！");
         }
       });
     },
     // 售后审核接口
     afterAudit() {
-      const _this = this
+      const _this = this;
       if (this.returnSelectData.length == 0) {
-        _this.$Message.error('请选中一项修改!');
+        _this.$Message.error("请选中一项修改!");
         return;
       }
-      if (_this.returnSelectData[0].rETURNNAME != '等待售后确认' && this.returnSelectData.length == 1) {
-        _this.$Message.warning('当前选中行，无法使用此按钮!');
+      if (
+        _this.returnSelectData[0].rETURNNAME != "等待售后确认" &&
+        this.returnSelectData.length == 1
+      ) {
+        _this.$Message.warning("当前选中行，无法使用此按钮!");
         return;
       }
       let ids = [];
       for (let i = 0; i < this.returnSelectData.length; i++) {
-        if (this.returnSelectData[i].rETURNNAME == '等待售后确认') {
+        if (this.returnSelectData[i].rETURNNAME == "等待售后确认") {
           ids.push(this.returnSelectData[i].ID);
         }
       }
       if (ids.length == 0) {
-        _this.$Message.warning('单据状态不符合审核条件，请重新选择');
+        _this.$Message.warning("单据状态不符合审核条件，请重新选择");
         return;
       }
       this.$Modal.info({
-        title: '提示',
-        content: '是否确定售后审核？',
+        title: "提示",
+        content: "是否确定售后审核？",
         mask: true,
         showCancel: true,
-        okText: '取消',
-        cancelText: '确定',
+        okText: "取消",
+        cancelText: "确定",
         onCancel: () => {
           axios({
             url: "/p/cs/chargebackcheck",
             method: "post",
-            cancelToken:true,
-            data: {ID: ids.join(',')}
-          }).then(res => {
+            cancelToken: true,
+            data: { ID: ids.join(",") },
+          }).then((res) => {
             if (res.data.code == 0) {
-              let mes = res.data.message || '售后审核成功！';
+              let mes = res.data.message || "售后审核成功！";
               _this.$Message.success(mes);
               _this.getList(_this.statusTab);
-            }else {
-              let err = res.data.message || '售后审核失败！';
+            } else {
+              let err = res.data.message || "售后审核失败！";
               _this.$Message.error(err);
             }
           });
-        }
+        },
       });
     },
     // 取消按钮
     cancelBtn() {
       if (this.returnSelectData.length == 0) {
-        this.$Message.error('请至少选中一项!');
+        this.$Message.error("请至少选中一项!");
         return;
       }
-      if (this.returnSelectData[0].rETURNNAME != '等待退货入库' && this.returnSelectData.length == 1) {
-        this.$Message.warning('退换货取消失败,只有【等待退货入库】状态才可以操作取消，请检查后重试!');
+      if (
+        this.returnSelectData[0].rETURNNAME != "等待退货入库" &&
+        this.returnSelectData.length == 1
+      ) {
+        this.$Message.warning(
+          "退换货取消失败,只有【等待退货入库】状态才可以操作取消，请检查后重试!"
+        );
         return;
       }
       let ids = [];
       for (let i = 0; i < this.returnSelectData.length; i++) {
-        if (this.returnSelectData[i].rETURNNAME == '等待退货入库') {
+        if (this.returnSelectData[i].rETURNNAME == "等待退货入库") {
           ids.push(this.returnSelectData[i].ID);
         }
       }
       if (ids.length == 0) {
-        this.$Message.warning('单据状态不符合取消条件，请重新选择');
+        this.$Message.warning("单据状态不符合取消条件，请重新选择");
         return;
       }
       this.$Modal.info({
-        title: '提示',
-        content: '是否确定取消退单？',
+        title: "提示",
+        content: "是否确定取消退单？",
         mask: true,
         showCancel: true,
-        okText: '取消',
-        cancelText: '确定',
+        okText: "取消",
+        cancelText: "确定",
         onCancel: () => {
           this.isSaveLoading = true;
           axios({
             url: "/p/cs/OcCancelChangingOrRefund",
             method: "post",
-            cancelToken:true,
-            data: {ids: ids}
-          }).then(res => {
+            cancelToken: true,
+            data: { ids: ids },
+          }).then((res) => {
             this.isSaveLoading = false;
             if (res.data.code === 0) {
-              if(res.data.data === "comfirmFlag"){
+              if (res.data.data === "comfirmFlag") {
                 this.$Modal.info({
-                  title: '提示',
-                  content: '换货订单的状态为配货中或已经发货,是否确认直接取消退货？',
+                  title: "提示",
+                  content:
+                    "换货订单的状态为配货中或已经发货,是否确认直接取消退货？",
                   mask: true,
                   showCancel: true,
-                  okText: '确定',
-                  cancelText: '取消',
+                  okText: "确定",
+                  cancelText: "取消",
                   onOk: () => {
                     this.isSaveLoading = true;
                     axios({
                       url: "/p/cs/OcCancelChangingOrRefund",
                       method: "post",
-                      cancelToken:true,
-                      data: {ids: ids, comfirmFlag: "comfirmFlag"}
-                    }).then(res => {
+                      cancelToken: true,
+                      data: { ids: ids, comfirmFlag: "comfirmFlag" },
+                    }).then((res) => {
                       this.isSaveLoading = false;
                       if (res.data.code === 0) {
                         this.$Message.success(res.data.message);
@@ -1392,66 +1518,66 @@ export default {
                           this.getList(this.statusTab);
                         }, 500);
                       } else {
-                        let err = res.data.message || '取消失败！';
+                        let err = res.data.message || "取消失败！";
                         this.$Message.info(err);
                       }
                     });
-                  }
+                  },
                 });
-              }else{
+              } else {
                 this.$Message.success(res.data.message);
                 setTimeout(() => {
                   this.getList(this.statusTab);
                 }, 500);
               }
             } else {
-              let err = res.data.message || '取消失败！'
+              let err = res.data.message || "取消失败！";
               this.$Message.info(err);
             }
           });
-        }
+        },
       });
     },
     // 虚拟入库
     virtualLibrary() {
       if (this.returnSelectData.length != 1) {
-        this.$Message.error('请选中一项修改!');
+        this.$Message.error("请选中一项修改!");
         return;
       }
-      if (this.returnSelectData[0].rETURNNAME !== '等待退货入库') {
-        this.$Message.error('此退换单状态不允许虚拟入库!');
+      if (this.returnSelectData[0].rETURNNAME !== "等待退货入库") {
+        this.$Message.error("此退换单状态不允许虚拟入库!");
         return;
       }
       this.$Modal.info({
-        title: '提示',
-        content: '是否确定虚拟入库？',
+        title: "提示",
+        content: "是否确定虚拟入库？",
         mask: true,
         showCancel: true,
-        okText: '取消',
-        cancelText: '确定',
+        okText: "取消",
+        cancelText: "确定",
         onCancel: () => {
           axios({
             url: "/p/cs/updateVirtualLibrary",
             method: "post",
-            cancelToken:true,
-            data: {ID: this.returnSelectData[0].ID}
-          }).then(res => {
+            cancelToken: true,
+            data: { ID: this.returnSelectData[0].ID },
+          }).then((res) => {
             if (res.data.code == 0) {
               this.$Message.success(res.data.message);
               setTimeout(() => {
                 this.getList(this.statusTab);
-              }, 500)
+              }, 500);
             } else {
-              let err = res.data.message || '虚拟入库失败！'
+              let err = res.data.message || "虚拟入库失败！";
               this.$Message.info(err);
             }
           });
-        }
+        },
       });
     },
-    virtualWarehouseLibraryWarn(){
+    virtualWarehouseLibraryWarn() {
       if (this.returnSelectData.length === 0) {
-        this.$Message.error('请至少选中一项!');
+        this.$Message.error("请至少选中一项!");
         return;
       }
       this.virtualWarehouseModal = true;
@@ -1459,20 +1585,20 @@ export default {
     // 虚拟仓库入库
     virtualWarehouseLibrary() {
       let ids = [];
-      this.returnSelectData.forEach(item => {
+      this.returnSelectData.forEach((item) => {
         ids.push(item.ID);
       });
       axios({
         url: "/p/cs/virtualWarehouseStorage",
         method: "post",
-        cancelToken:true,
-        data: {ids: ids}
-      }).then(res => {
+        cancelToken: true,
+        data: { ids: ids },
+      }).then((res) => {
         if (res.data.code === 0) {
           this.getList(this.statusTab);
           this.$Message.success(res.data.message);
         } else {
-          let err = res.data.message || '虚拟仓库入库失败！'
+          let err = res.data.message || "虚拟仓库入库失败！";
           this.$Message.info(err);
         }
       });
@@ -1480,20 +1606,20 @@ export default {
     // 取消自动退款
     cancelRefund() {
       if (this.returnSelectData.length != 1) {
-        this.$Message.error('请选中一项修改!');
+        this.$Message.error("请选中一项修改!");
         return;
       }
       axios({
         url: "/p/cs/cancelautorefund",
         method: "post",
-        cancelToken:true,
-        data: {ID: this.returnSelectData[0].ID}
-      }).then(res => {
+        cancelToken: true,
+        data: { ID: this.returnSelectData[0].ID },
+      }).then((res) => {
         if (res.data.code === 0) {
           this.getList(this.statusTab);
           this.$Message.success(res.data.message);
         } else {
-          let err = res.data.message || '取消自动退款失败！'
+          let err = res.data.message || "取消自动退款失败！";
           this.$Message.info(err);
         }
       });
@@ -1501,43 +1627,54 @@ export default {
     // 修改备注
     bounced() {
       if (!this.returnSelectData.length) {
-        this.$Message.error('请至少选中一项修改!');
+        this.$Message.error("请至少选中一项修改!");
         return;
       }
-      if (this.returnSelectData[0].rETURNNAME == '取消' && this.returnSelectData.length == 1) {
-        this.$Message.error('取消状态不允许修改备注!');
+      if (
+        this.returnSelectData[0].rETURNNAME == "取消" &&
+        this.returnSelectData.length == 1
+      ) {
+        this.$Message.error("取消状态不允许修改备注!");
         return;
       }
       let ids = [];
       for (let i = 0; i < this.returnSelectData.length; i++) {
-        if (this.returnSelectData[i].rETURNNAME != '取消') {
+        if (this.returnSelectData[i].rETURNNAME != "取消") {
           ids.push(this.returnSelectData[i].ID);
         }
       }
-      this.changeRemarkConfig.componentData = {ids: ids.join(","), status: this.statusTab, type: 1}
+      this.changeRemarkConfig.componentData = {
+        ids: ids.join(","),
+        status: this.statusTab,
+        type: 1,
+      };
       this.$children
-        .find(item => item.name === "jordanBounced")
+        .find((item) => item.name === "jordanBounced")
         .openConfirm();
     },
     // 修改卖家备注
     bounced2() {
       if (!this.returnSelectData.length) {
-        this.$Message.error('请至少选中一项修改!');
+        this.$Message.error("请至少选中一项修改!");
         return;
       }
       let ids = [];
       for (let i = 0; i < this.returnSelectData.length; i++) {
         ids.push(this.returnSelectData[i].ID);
       }
-      this.changeRemarkConfig.componentData = {ids: ids.join(","), status: this.statusTab, type: 2}
+      this.changeRemarkConfig.componentData = {
+        ids: ids.join(","),
+        status: this.statusTab,
+        type: 2,
+      };
       this.$children
-        .find(item => item.name === "jordanBounced")
+        .find((item) => item.name === "jordanBounced")
         .openConfirm();
     },
     // 修改退货仓库
     Warehouse() {
       if (!this.returnSelectData.length) {
-        this.$Message.error('请至少选中一项修改!');
+        this.$Message.error("请至少选中一项修改!");
         return;
       }
       // if (this.returnSelectData[0].rETURNNAME != '等待退货入库' && this.returnSelectData.length == 1) {
@@ -1547,32 +1684,32 @@ export default {
       let ids = [];
       for (let i = 0; i < this.returnSelectData.length; i++) {
         // if (this.returnSelectData[i].rETURNNAME != '取消') {
-          ids.push(this.returnSelectData[i].ID);
+        ids.push(this.returnSelectData[i].ID);
         // }
       }
-      this.modifyWarehouse.componentData = {ids: ids};
+      this.modifyWarehouse.componentData = { ids: ids };
       this.$children
-        .find(item => item.name === "modifyWarehouse")
+        .find((item) => item.name === "modifyWarehouse")
         .openConfirm();
     },
     OrderLogistics() {
       if (!this.returnSelectData.length) {
-        this.$Message.error('请至少选中一项修改!');
+        this.$Message.error("请至少选中一项修改!");
         return;
       }
       let ids = [];
       for (let i = 0; i < this.returnSelectData.length; i++) {
         ids.push(this.returnSelectData[i].ID);
       }
-      this.modifyReturnOrderLogistics.componentData = {ids: ids};
+      this.modifyReturnOrderLogistics.componentData = { ids: ids };
       this.$children
-        .find(item => item.name === "modifyReturnOrderLogistics")
+        .find((item) => item.name === "modifyReturnOrderLogistics")
         .openConfirm();
     },
     // 批量原退
     batchOriginalBack() {
       if (this.returnSelectData.length == 0) {
-        this.$Message.error('请至少选中一项!');
+        this.$Message.error("请至少选中一项!");
         return;
       }
       let ids = [];
@@ -1580,19 +1717,19 @@ export default {
         ids.push(this.returnSelectData[i].ID);
       }
       this.$Modal.info({
-        title: '提示',
-        content: '是否确定批量原退？',
+        title: "提示",
+        content: "是否确定批量原退？",
         mask: true,
         showCancel: true,
-        okText: '取消',
-        cancelText: '确定',
+        okText: "取消",
+        cancelText: "确定",
         onCancel: () => {
           axios({
             url: "/p/cs/updateReturnBOrder",
             method: "post",
-            cancelToken:true,
-            data: {ids: ids}
-          }).then(res => {
+            cancelToken: true,
+            data: { ids: ids },
+          }).then((res) => {
             if (res.data.code === 0) {
               this.getList(this.statusTab);
               this.$Message.success(res.data.message);
@@ -1601,11 +1738,11 @@ export default {
                 this.errdataList = res.data.data;
               }
             } else {
-              let err = res.data.message || '批量原退失败！'
+              let err = res.data.message || "批量原退失败！";
               this.$Message.info(err);
             }
           });
-        }
+        },
       });
     },
     keyenter() {
@@ -1614,30 +1751,33 @@ export default {
     // 从wms撤回
     withdrawWMS() {
       if (this.returnSelectData.length == 0) {
-        this.$Message.error('请至少选中一项!');
+        this.$Message.error("请至少选中一项!");
         return;
       }
-      if (this.returnSelectData[0].rETURNNAME != '等待退货入库' && this.returnSelectData.length == 1) {
-        this.$Message.error('只有等待退货入库状态可以从WMS撤回!');
+      if (
+        this.returnSelectData[0].rETURNNAME != "等待退货入库" &&
+        this.returnSelectData.length == 1
+      ) {
+        this.$Message.error("只有等待退货入库状态可以从WMS撤回!");
         return;
       }
       let ids = [];
       for (let i = 0; i < this.returnSelectData.length; i++) {
-        if (this.returnSelectData[i].rETURNNAME == '等待退货入库') {
+        if (this.returnSelectData[i].rETURNNAME == "等待退货入库") {
           ids.push(this.returnSelectData[i].ID);
         }
       }
       axios({
         url: "/p/cs/orderReturnRecallFromWms",
         method: "post",
-        cancelToken:true,
-        data: {ID: ids}
-      }).then(res => {
+        cancelToken: true,
+        data: { ID: ids },
+      }).then((res) => {
         if (res.data.code === 0) {
           this.getList(this.statusTab);
           this.$Message.success(res.data.message);
         } else {
-          let err = res.data.message || '从wms撤回失败！'
+          let err = res.data.message || "从wms撤回失败！";
           this.$Message.info(err);
         }
       });
@@ -1645,7 +1785,7 @@ export default {
     // 重传wms
     againWMS() {
       if (this.returnSelectData.length == 0) {
-        this.$Message.error('请至少选中一项!');
+        this.$Message.error("请至少选中一项!");
         return;
       }
       let ids = [];
@@ -1656,13 +1796,13 @@ export default {
         url: "/p/cs/retransmissionWms",
         method: "post",
         cancelToken: true,
-        data: {returnOrderIds: ids.join(',')}
-      }).then(res => {
+        data: { returnOrderIds: ids.join(",") },
+      }).then((res) => {
         if (res.data.code === 0) {
           this.getList(this.statusTab);
           this.$Message.success(res.data.message);
         } else {
-          let err = res.data.message || '重WMS失败！'
+          let err = res.data.message || "重WMS失败！";
           this.$Message.info(err);
         }
       });
@@ -1670,46 +1810,50 @@ export default {
     // 强制完成
     forcedCompletion() {
       if (this.returnSelectData.length == 0) {
-        this.$Message.error('请至少选中一项!');
+        this.$Message.error("请至少选中一项!");
         return;
       }
-      if (this.returnSelectData[0].rETURNNAME != '等待售后确认' && this.returnSelectData.length == 1) {
-        this.$Message.error('只有等待售后确认状态可以强制完成!');
+      if (
+        this.returnSelectData[0].rETURNNAME != "等待售后确认" &&
+        this.returnSelectData.length == 1
+      ) {
+        this.$Message.error("只有等待售后确认状态可以强制完成!");
         return;
       }
       let ids = [];
-      this.returnSelectData.forEach(item => {
+      this.returnSelectData.forEach((item) => {
         ids.push(item.ID);
       });
       this.$Modal.info({
-        title: '提示',
-        content: '是否确定强制完成？',
+        title: "提示",
+        content: "是否确定强制完成？",
         mask: true,
         showCancel: true,
-        okText: '取消',
-        cancelText: '确定',
+        okText: "取消",
+        cancelText: "确定",
         onCancel: () => {
           axios({
             url: "/p/cs/forcedCompletion",
             method: "post",
-            cancelToken:true,
-            data: {ids: ids}
-          }).then(res => {
+            cancelToken: true,
+            data: { ids: ids },
+          }).then((res) => {
             if (res.data.code === 0) {
               this.getList(this.statusTab);
               this.$Message.success(res.data.message);
             } else {
-              let err = res.data.message || '强制完成失败！'
+              let err = res.data.message || "强制完成失败！";
               this.$Message.info(err);
             }
           });
-        }
+        },
       });
     },
     // 复制退单
     cloneRenturnGood() {
       const _this = this;
-      if (this.returnSelectData.length !== 1) return this.$Message.error('请选中一条单据进行复制!')
+      if (this.returnSelectData.length !== 1)
+        return this.$Message.error("请选中一条单据进行复制!");
       _this.$store.commit("customize/TabOpen", {
         id: -1,
         type: "action",
@@ -1718,8 +1862,8 @@ export default {
         query: {
           id: -1,
           cloneReturnGoodId: _this.returnSelectData[0].ID,
-          tabTitle: "退换货订单新增"
-        }
+          tabTitle: "退换货订单新增",
+        },
       });
     },
     // 导入
@@ -1729,10 +1873,13 @@ export default {
     //设置表格高度
     setTableHeight() {
       let _this = this;
-      const contentHeight = document.getElementsByClassName("main-content")[0].clientHeight;
+      const contentHeight = document.getElementsByClassName("main-content")[0]
+        .clientHeight;
       let returnHeight = 25;
-      returnHeight += document.getElementsByClassName("returnBtn")[0].clientHeight;
-      returnHeight += document.getElementsByClassName("returnForm")[0].clientHeight;
+      returnHeight += document.getElementsByClassName("returnBtn")[0]
+        .clientHeight;
+      returnHeight += document.getElementsByClassName("returnForm")[0]
+        .clientHeight;
       let tableHeight = contentHeight - returnHeight;
       _this.jordanTableConfig.height = tableHeight - 130;
     },
@@ -1740,7 +1887,7 @@ export default {
     exportClick() {
       const _this = this;
       if (_this.returnSelectData.length) {
-        if (this.isExport) return this.$Message.error('有一项导出正在进行中')
+        if (this.isExport) return this.$Message.error("有一项导出正在进行中");
         this.isExport = true;
         let ids = [];
         for (let i = 0; i < _this.returnSelectData.length; i++) {
@@ -1750,9 +1897,9 @@ export default {
         axios({
           url: "/p/cs/exportReturnOrder",
           method: "post",
-          cancelToken:true,
-          data: idList
-        }).then(res => {
+          cancelToken: true,
+          data: idList,
+        }).then((res) => {
           _this.isExport = false;
           if (res.data.code == 0 && res.data.data !== null) {
             let mes = res.data.message || "导出成功！";
@@ -1767,7 +1914,7 @@ export default {
       } else {
         if (_this.jordanTableConfig.data.length === 0)
           return _this.$Message.error("列表没有数据,无法导出!");
-        if (_this.statusTab == '') {
+        if (_this.statusTab == "") {
           _this.warningModal = true;
         } else {
           _this.warningOk();
@@ -1778,21 +1925,24 @@ export default {
     // 警告框确认
     warningOk() {
       const _this = this;
-      if (this.isExport) return this.$Message.error('有一项导出正在进行中')
+      if (this.isExport) return this.$Message.error("有一项导出正在进行中");
       this.isExport = true;
       const param = {
         start: _this.jordanTableConfig.current,
         count: 999999,
-        RETURN_STATUS: status == undefined ? '' : status
+        RETURN_STATUS: status == undefined ? "" : status,
       };
-      _this.formConfig.formValue.RECEIVE_PROVINCE = '';
-      _this.formConfig.formValue.RECEIVE_PROVINCE_ID = '';
+      _this.formConfig.formValue.RECEIVE_PROVINCE = "";
+      _this.formConfig.formValue.RECEIVE_PROVINCE_ID = "";
       if (_this.formConfig.formData.length) {
-        _this.formConfig.formData.forEach(item => {
-          if (item.itemdata !== undefined && item.itemdata.name == '原始订单编号') {
+        _this.formConfig.formData.forEach((item) => {
+          if (
+            item.itemdata !== undefined &&
+            item.itemdata.name == "原始订单编号"
+          ) {
             _this.formConfig.formValue.ORIG_ORDER_ID = item.itemdata.valuedata;
           }
-        })
+        });
       }
       if (status) {
         _this.formConfig.formValue.RETURN_STATUS = status;
@@ -1800,9 +1950,9 @@ export default {
       axios({
         url: "/p/cs/exportReturnOrder",
         method: "post",
-        cancelToken:true,
-        data: Object.assign(param, _this.formConfig.formValue)
-      }).then(res => {
+        cancelToken: true,
+        data: Object.assign(param, _this.formConfig.formValue),
+      }).then((res) => {
         _this.isExport = false;
         if (res.data.code == 0 && res.data.data !== null) {
           let mes = res.data.message || "导出成功！";
@@ -1817,8 +1967,8 @@ export default {
     },
     // 导出
     downloadUrlFile(src) {
-      var download_file= {};
-      if (typeof(download_file.iframe) == "undefined") {
+      var download_file = {};
+      if (typeof download_file.iframe == "undefined") {
         var iframe = document.createElement("iframe");
         download_file.iframe = iframe;
         document.body.appendChild(download_file.iframe);
@@ -1828,15 +1978,15 @@ export default {
     },
   },
   destroyed() {
-    window.removeEventListener('keydown', this, false);
-  }
+    window.removeEventListener("keydown", this, false);
+  },
 };
 </script>
 
 <style lang="less">
 .returnGoodList {
   .salesTable {
-    .jordanLabel {
+    .businessLabel {
       margin-top: 8px;
     }
     .tableBox {
@@ -1879,9 +2029,9 @@ export default {
     z-index: 1000 !important;
   }
 }
-.tableFooter{
+.tableFooter {
   padding: 10px 10px 10px 0px;
-  .tableFooter_border{
+  .tableFooter_border {
     padding: 2px 4px;
     border: 1px solid red;
   }

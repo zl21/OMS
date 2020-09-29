@@ -71,12 +71,12 @@
   </div>
 </template>
 <script>
-  import jordanButton from 'professionalComponents/jordanButton';
-  import jordanForm from 'professionalComponents/jordanForm';
-  import jordanActionTable from 'professionalComponents/jordanActionTable';
-  import jordanLabel from 'professionalComponents/jordanLabel';
+  import businessButton from 'professionalComponents/businessButton';
+  import businessForm from 'professionalComponents/businessForm';
+  import businessActionTable from 'professionalComponents/businessActionTable';
+  import businessLabel from 'professionalComponents/businessLabel';
   import publicMethodsUtil from '@/assets/js/public/publicMethods';
-  import jordanModal from 'professionalComponents/JDialog';
+  import jordanModal from 'professionalComponents/businessDialog';
   import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
   import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
 
@@ -86,10 +86,10 @@
   parseArea(areaList);
   export default {
     components: {
-      jordanButton,
-      jordanForm,
-      jordanActionTable,
-      jordanLabel,
+      businessButton,
+      businessForm,
+      businessActionTable,
+      businessLabel,
       jordanModal
     },
     mixins: [buttonPermissionsMixin, dataAccessMixin],

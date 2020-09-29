@@ -2,7 +2,7 @@
 <template>
   <div>
     <EasyMatrix :componentData="matrixData"></EasyMatrix>
-    <jordanActionTable
+    <businessActionTable
       :jordanTableConfig="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
@@ -10,17 +10,17 @@
       @on-select-all-cancel="onSelectAllCancel"
       @on-row-click="onRowClick"
       @on-row-dblclick="onRowDblclick"
-    ></jordanActionTable>
+    ></businessActionTable>
     <input v-focus id="focus" class="focusStyle" />
     <div class="order-footer">
-      <jordanButton :btnConfig="btnConfig"></jordanButton>
+      <businessButton :btnConfig="btnConfig"></businessButton>
     </div>
   </div>
 </template>
 
 <script>
-import jordanButton from "professionalComponents/jordanButton";
-import jordanActionTable from "professionalComponents/jordanActionTable.vue";
+import businessButton from "professionalComponents/businessButton";
+import businessActionTable from "professionalComponents/businessActionTable.vue";
 import EasyMatrix from "../../../components/combineMatrix/easyMatrix";
 import axios from "axios";
 import { listeningToKeydownMixin } from "../../../mixins/listeningToKeydown.js";
@@ -120,9 +120,9 @@ export default {
     };
   },
   components: {
-    jordanActionTable,
+    businessActionTable,
     EasyMatrix,
-    jordanButton
+    businessButton
   },
   props: {
     componentData: {}

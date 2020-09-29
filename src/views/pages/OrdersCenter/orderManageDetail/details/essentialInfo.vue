@@ -162,7 +162,7 @@
       </div>
     </div>
 
-    <JDialog
+    <businessDialog
       v-for="(list, index) in dialogs"
       :key="index"
       :ref="list.name"
@@ -176,9 +176,9 @@
       :footerHide="list.footerHide"
       :quit="list.quit"
       :confirm="list.confirm"
-    ></JDialog>
+    ></businessDialog>
     <!-- 公共弹框 -->
-    <JDialog
+    <businessDialog
       :title="publicBouncedConfig.confirmTitle"
       :titleAlign="publicBouncedConfig.titleAlign"
       :width="publicBouncedConfig.width"
@@ -195,15 +195,15 @@
       :excludeString="publicBouncedConfig.excludeString"
       :componentData="publicBouncedConfig.componentData"
       :quit="publicBouncedConfig.quit"
-    ></JDialog>
+    ></businessDialog>
   </div>
 </template>
 
 <script>
-import jordanButton from "professionalComponents/jordanButton";
-import jordanActionTable from "professionalComponents/jordanActionTable";
+import businessButton from "professionalComponents/businessButton";
+import businessActionTable from "professionalComponents/businessActionTable";
 const _importA = file => require(`${file}.vue`).default;
-import JDialog from "professionalComponents/JDialog";
+import businessDialog from "professionalComponents/businessDialog";
 import CusOrderItem from "./custOrderItem";
 // import publicMethodsUtil from "@/assets/js/publicMethods";
 // import { BILL_STATUS } from "./config.js";
@@ -216,9 +216,9 @@ export default {
     componentData: {}
   },
   components: {
-    jordanButton,
-    JDialog,
-    jordanActionTable,
+    businessButton,
+    businessDialog,
+    businessActionTable,
     CusOrderItem
   },
   data() {

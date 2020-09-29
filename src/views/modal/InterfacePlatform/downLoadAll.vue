@@ -1,7 +1,7 @@
 <template>
   <div class="downLoadTaobaoOrder" style="width:430px;padding-right:20px">
-    <jordanForm :formConfig="downLoadFormConfig">
-    </jordanForm>
+    <businessForm :formConfig="downLoadFormConfig">
+    </businessForm>
     <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
     <!-- 确认下载弹框 -->
     <Modal
@@ -24,13 +24,13 @@
 <script>
 import axios from "axios";
 import httpServer from 'framework/__utils__/request';
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
+import businessForm from "professionalComponents/businessForm";
+import jordanBtn from "professionalComponents/businessButton";
 import R3 from '@syman/burgeon-r3'
 const formConfig = file => require(`./config/${file}.js`).default;
 export default {
   components: {
-    jordanForm,
+    businessForm,
     jordanBtn
   },
   props: {

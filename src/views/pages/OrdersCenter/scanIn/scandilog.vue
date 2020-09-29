@@ -14,13 +14,13 @@
 </template>
 
 <script>
-  import jordanTable from 'professionalComponents/jordanActionTable.vue';
-  import jordanButton from 'professionalComponents/jordanButton.vue';
+  import businessActionTable from 'professionalComponents/businessActionTable.vue';
+  import businessButton from 'professionalComponents/businessButton.vue';
 
   export default {
     components: {
-      jordanTable,
-      jordanButton
+      businessActionTable,
+      businessButton
     },
     methods: {
       // 勾选事件

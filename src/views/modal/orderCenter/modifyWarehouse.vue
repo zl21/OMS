@@ -23,16 +23,16 @@
 </template>
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
-import jordanActionTable from "professionalComponents/jordanActionTable.vue";
+import businessForm from "professionalComponents/businessForm";
+import jordanBtn from "professionalComponents/businessButton";
+import businessActionTable from "professionalComponents/businessActionTable.vue";
 import R3 from '@syman/burgeon-r3';
 const { getModuleName } = R3;
 export default {
   components: {
-    jordanForm,
+    businessForm,
     jordanBtn,
-    jordanActionTable
+    businessActionTable
   },
   props: {},
   computed: {

@@ -70,7 +70,7 @@
     </div>
     <!-- 弹框 -->
     <div class="dilog">
-      <JDialog
+      <businessDialog
         :closable="changeWarehouseConfig.closable"
         :component-data="changeWarehouseConfig.componentData"
         :draggable="changeWarehouseConfig.draggable"
@@ -167,21 +167,21 @@
 </template>
 
 <script>
-  import jordanButton from 'professionalComponents/jordanButton.vue';
-  import jordanForm from 'professionalComponents/jordanForm.vue';
-  // import jordanLabel from 'professionalComponents/jordanLabel.vue';
-  import jordanActionTable from 'professionalComponents/jordanActionTable.vue';
-  import JDialog from 'professionalComponents/JDialog';
+  import businessButton from 'professionalComponents/businessButton.vue';
+  import businessForm from 'professionalComponents/businessForm.vue';
+  // import businessLabel from 'professionalComponents/businessLabel.vue';
+  import businessActionTable from 'professionalComponents/businessActionTable.vue';
+  import businessDialog from 'professionalComponents/businessDialog';
   import {setTimeout} from 'timers';
   import {buttonPermissionsMixin} from '@/assets/js/mixins/buttonPermissions';
 
   export default {
     components: {
-      jordanButton,
-      jordanForm,
-      jordanActionTable,
-      // jordanLabel,
-      JDialog
+      businessButton,
+      businessForm,
+      businessActionTable,
+      // businessLabel,
+      businessDialog
     },
     // inject: ['reload'],
     mixins: [buttonPermissionsMixin],

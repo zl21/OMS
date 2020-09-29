@@ -9,13 +9,13 @@ feature : 订单中心-零售发货单详情
     class="order"
   >
     <div class="order-btn">
-      <jordanButton
+      <businessButton
         :btn-config="btnConfig"
         @dropDownClick="dropDownClickChange"
       />
     </div>
     <div class="order-header">
-      <jordanLabel
+      <businessLabel
         :label-default-value="labelDefaultValue"
         :label-list="labelList"
         @labelClick="labelClick"
@@ -36,7 +36,7 @@ feature : 订单中心-零售发货单详情
       />
     </div>
     <!--单据状态图片展示 -->
-    <jordanStatusFlag
+    <businessStatusFlag
       :status-name="statusName"
       class="statusFlag"
     />
@@ -49,7 +49,7 @@ feature : 订单中心-零售发货单详情
       <p>error_tip</p>
     </Modal>
 
-    <JDialog
+    <businessDialog
       :key="index"
       :ref="list.name"
       :component-data="list.data"
@@ -66,7 +66,7 @@ feature : 订单中心-零售发货单详情
       :width="list.width||''"
     />
     <!-- 公共弹框 -->
-    <JDialog
+    <businessDialog
       :batch-closed="publicBouncedConfig.batchClosed"
       :closable="publicBouncedConfig.closable"
       :component-data="publicBouncedConfig.componentData"
@@ -88,14 +88,10 @@ feature : 订单中心-零售发货单详情
 </template>
 
 <script>
-  import jordanButton from 'professionalComponents/jordanButton';
-  // import jordanForm from 'professionalComponents/jordanForm';
-  // import jordanTable from 'professionalComponents/jordanTable.vue';
-  import jordanLabel from 'professionalComponents/jordanLabel';
-  // import myInput from 'framework/components/element/input.vue';
-  // import dictionary from "../../../assets/zh-CN.js";
-  import jordanStatusFlag from 'professionalComponents/jordanStatusFlag';
-  import JDialog from 'professionalComponents/JDialog';
+  import businessButton from 'professionalComponents/businessButton';
+  import businessLabel from 'professionalComponents/businessLabel';
+  import businessStatusFlag from 'professionalComponents/businessStatusFlag';
+  import businessDialog from 'professionalComponents/businessDialog';
   import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
   import EssentialInfo from './details/essentialInfo';
   import OrderItem from './details/orderItem';
@@ -104,15 +100,12 @@ feature : 订单中心-零售发货单详情
   export default {
     name: 'OrderManageDetail',
     components: {
-      jordanButton,
-      // jordanForm,
-      // jordanTable,
-      jordanLabel,
-      // myInput,
+      businessButton,
+      businessLabel,
       EssentialInfo,
       OrderItem,
-      jordanStatusFlag,
-      JDialog
+      businessStatusFlag,
+      businessDialog
     },
     mixins: [buttonPermissionsMixin],
     data() {
