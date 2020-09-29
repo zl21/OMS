@@ -43,7 +43,7 @@ import jordanForm from "professionalComponents/jordanForm";
 import jordanBtn from "professionalComponents/jordanButton";
 import jordanActionTable from "professionalComponents/jordanActionTable";
 
-import { listeningToKeydownMixin } from "../../../mixins/listeningToKeydown.js";
+import { listeningToKeydownMixin } from "@/assets/js/mixins/listeningToKeydown.js";
 export default {
   mixins: [listeningToKeydownMixin],
   components: {

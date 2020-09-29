@@ -59,7 +59,7 @@
 import axios from "axios";
 import jordanBtn from "professionalComponents/jordanButton";
 import jordanActionTable from "professionalComponents/jordanActionTable.vue";
-import { listeningToKeydownMixin } from "../../../mixins/listeningToKeydown.js";
+import { listeningToKeydownMixin } from "@/assets/js/mixins/listeningToKeydown.js";
 export default {
   mixins: [listeningToKeydownMixin],
   components: {
