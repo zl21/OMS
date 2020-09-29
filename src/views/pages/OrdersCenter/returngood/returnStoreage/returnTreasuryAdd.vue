@@ -26,12 +26,12 @@
       ></businessLabel>
       <!-- 列表组件 -->
       <div class="tableBox">
-        <jordan-action-table
+        <business-action-table
           v-if="labelDefaultValue"
           :jordanTableConfig="jordanTableConfig"
           @on-select="returnOnSelect"
           @on-select-cancel="returnCancel"
-        ></jordan-action-table>
+        ></business-action-table>
         <OrderItem v-if="!labelDefaultValue" :componentData="tab2"></OrderItem>
       </div>
     </div>
@@ -49,11 +49,11 @@
           <businessButton :btnConfig="order.btn"></businessButton>
         </div>
         <div class="orderTable">
-          <jordan-action-table
+          <business-action-table
             :jordanTableConfig="order.table"
             @on-select="onquerySelect"
             @on-select-cancel="onqueryCancel"
-          ></jordan-action-table>
+          ></business-action-table>
         </div>
       </Modal>
     </div>
@@ -174,7 +174,7 @@ export default {
             },
             {
               key: "ORIG_ORDER_NO",
-              title: "原单单号",
+              title: "原单单号"
             },
             {
               key: "BUYER_NICK",
@@ -608,7 +608,7 @@ export default {
                 data: { id: _this.$route.query.id }
               }).then(res => {
                 if (res.data.code === 0) {
-                  _this.$store.commit("TabHref", {
+                  _this.$store.commit("customize/TabHref", {
                     id: _this.$route.query.id, //id
                     type: "action", //类型action
                     name: "manualMatching", //文件名
@@ -645,7 +645,7 @@ export default {
                 data: { id: _this.$route.query.id }
               }).then(res => {
                 if (res.data.code === 0) {
-                  _this.$store.commit("TabHref", {
+                  _this.$store.commit("customize/TabHref", {
                     id: _this.$route.query.id, //id
                     type: "action", //类型action
                     name: "manualMatching", //文件名
@@ -676,7 +676,13 @@ export default {
               axios({
                 url: "/api/cs/oc/oms/v1/returnCancel",
                 method: "post",
-                data: { ids: [this.$route.params.customizedModuleId == 'NEW' ? -1:this.$route.params.customizedModuleId] }
+                data: {
+                  ids: [
+                    this.$route.params.customizedModuleId == "NEW"
+                      ? -1
+                      : this.$route.params.customizedModuleId
+                  ]
+                }
               }).then(res => {
                 if (res.data.code === 0) {
                   let mes = res.data.message || "作废操作成功";
@@ -692,7 +698,7 @@ export default {
             text: "返回", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
-              this.$store.commit("TabHref", {
+              this.$store.commit("customize/TabHref", {
                 id: 2809,
                 type: "action",
                 name: "returnStoreageList",
@@ -708,7 +714,7 @@ export default {
         ];
       }
       this.getPermissions("btnConfig", "returnStoreageList");
-    })
+    });
     // 判断是新增还是修改
     if (this.$route.params.customizedModuleId == "NEW") {
       this.information.formValue.SPECIAL_TYPE = "0";
@@ -726,8 +732,7 @@ export default {
         }
       });
       this.getReturnBatch();
-    }
-    else {
+    } else {
       this.getList();
       let isDis = this.information.formData;
       isDis[0].disabled = true;
@@ -789,13 +794,13 @@ export default {
           width: "6"
         }
       );
-    };
+    }
     this.$nextTick(() => {
       this.getDataAccess("OC_B_REFUND_IN", res => {
         this.information.formData.forEach((parent, parentIndex) => {
           res.SENSITIVE_COLUMNS.forEach((child, childIndex) => {
             if (parent.dataAcessKey == child.ecode) {
-              if (tthis.$route.params.customizedModuleId== "NEW") {
+              if (tthis.$route.params.customizedModuleId == "NEW") {
                 this.setFormPermissions(parent, child, "add");
               } else {
                 this.setFormPermissions(parent, child, "detail");
@@ -805,7 +810,10 @@ export default {
         });
         // 退货入库-表格
 
-        this.jordanTableConfig.columns = this.setTablePermissions(this.jordanTableConfig.columns, res);
+        this.jordanTableConfig.columns = this.setTablePermissions(
+          this.jordanTableConfig.columns,
+          res
+        );
       });
     });
     this.setTableHeight();
@@ -838,7 +846,7 @@ export default {
         item.IS_MATC = item.IS_MATCH == "是" ? 1 : 0;
         // 是否生成调整单
         item.IS_GEN_ADJUST = tem.IS_GEN_ADJUST == "是" ? 1 : 0;
-        item.RESERVE_BIGINT01 =item.RESERVE_BIGINT01 == "是" ?  1 : 0;
+        item.RESERVE_BIGINT01 = item.RESERVE_BIGINT01 == "是" ? 1 : 0;
         item.RESERVE_BIGINT02 = item.RESERVE_BIGINT02 == "是" ? 1 : 0;
         item.RESERVE_BIGINT03 = item.RESERVE_BIGINT03 == "是" ? 1 : 0;
       });
@@ -867,7 +875,8 @@ export default {
         }, // 退货入库主表数据
         ID: this.ID
       };
-      if (this.$route.params.customizedModuleId != "NEW") params.OcBRefundIn.ID = item.ID; // 修改时传主表ID
+      if (this.$route.params.customizedModuleId != "NEW")
+        params.OcBRefundIn.ID = item.ID; // 修改时传主表ID
       _this.isSaveLoading = true;
       axios({
         url: "/api/cs/oc/oms/v1/ReturnStorageSave",
@@ -877,7 +886,7 @@ export default {
       }).then(res => {
         if (res.data.code == 0) {
           _this.isSaveLoading = false;
-          this.$store.commit("TabHref", {
+          this.$store.commit("customize/TabHref", {
             id: 2809,
             type: "action",
             name: "returnStoreageList",
@@ -910,15 +919,15 @@ export default {
           res.data.data.inProductItem.forEach(item => {
             item.Flag1 = true;
             // 商品标记
-            item.PRODUCT_MARK = item.PRODUCT_MARK == 1 ? "正品" : '次品';
+            item.PRODUCT_MARK = item.PRODUCT_MARK == 1 ? "正品" : "次品";
             // 是否无原单条码
             item.IS_WITHOUT_ORIG = item.IS_WITHOUT_ORIG == 1 ? "是" : "否";
             // 是否匹配
-            item.IS_MATCH =item.IS_MATCH == 1 ? "是" : "否";
+            item.IS_MATCH = item.IS_MATCH == 1 ? "是" : "否";
             // 是否生成调整单
             item.IS_GEN_ADJUST = item.IS_GEN_ADJUST == 1 ? "是" : "否";
-            item.RESERVE_BIGINT01 =item.RESERVE_BIGINT01 == 1 ? "是" : "否";
-            item.RESERVE_BIGINT02 =item.RESERVE_BIGINT02 == 1 ?  "是" : "否";
+            item.RESERVE_BIGINT01 = item.RESERVE_BIGINT01 == 1 ? "是" : "否";
+            item.RESERVE_BIGINT02 = item.RESERVE_BIGINT02 == 1 ? "是" : "否";
             item.RESERVE_BIGINT03 = item.RESERVE_BIGINT03 == 1 ? "是" : "否";
           });
           if (res.data.data.ocBRefundIn.MATCH_STATUS == 2) {
@@ -927,7 +936,9 @@ export default {
             });
           }
           _this.isMatch = res.data.data.ocBRefundIn.IS_OFF_MATCH;
-          res.data.data.ocBRefundIn.IS_OFF_MATCH == 1 ? res.data.data.ocBRefundIn.IS_OFF_MATCH = true : es.data.data.ocBRefundIn.IS_OFF_MATCH = false;
+          res.data.data.ocBRefundIn.IS_OFF_MATCH == 1
+            ? (res.data.data.ocBRefundIn.IS_OFF_MATCH = true)
+            : (es.data.data.ocBRefundIn.IS_OFF_MATCH = false);
           if (res.data.data.ocBRefundIn.IN_STATUS == 3) {
             _this.statusName = _this.$route.query.statusName;
             _this.btnConfig.buttons[0].disabled = true;
@@ -971,11 +982,11 @@ export default {
       }).then(res => {
         this.information.formData.forEach(value => {
           if (value.label === "特殊处理类型") {
-            res.data.data.addcolums.forEach((item) => {
-              if (item.parentdesc === '基本信息') {
+            res.data.data.addcolums.forEach(item => {
+              if (item.parentdesc === "基本信息") {
                 let childItem = item.childs;
-                childItem.forEach((item) => {
-                  if (item.colname === 'SPECIAL_TYPE') {
+                childItem.forEach(item => {
+                  if (item.colname === "SPECIAL_TYPE") {
                     for (let i = 0; i < item.combobox.length; i++) {
                       value.options.push({
                         value: item.combobox[i].limitval,
@@ -997,7 +1008,7 @@ export default {
         url: "/api/cs/oc/oms/v1/getCurrentBatch",
         method: "post",
         data: {
-          BATCH_TYPE: ''
+          BATCH_TYPE: ""
         }
       }).then(res => {
         if (res.data.code === 0) {
@@ -1139,7 +1150,7 @@ export default {
       this.jordanTableConfig.data[this.index].OC_B_RETURN_ORDER_ID = data;
     },
     // 取消
-    querycancel() { },
+    querycancel() {},
     // 切换tab
     labelClick(item, index) {
       console.log(item, index);
@@ -1150,7 +1161,10 @@ export default {
         _this.labelDefaultValue = false;
         _this.tab2 = {
           tablename: "OC_B_REFUND_IN",
-          objid: this.$route.params.customizedModuleId == "NEW" ? -1 : this.$route.params.customizedModuleId
+          objid:
+            this.$route.params.customizedModuleId == "NEW"
+              ? -1
+              : this.$route.params.customizedModuleId
         };
       }
     },

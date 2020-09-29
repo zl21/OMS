@@ -1602,10 +1602,6 @@ export default {
             }
             const replace = _this.replacement.formValue;
             replace.platform = res.data.data.returnOrders.PLATFORM; // 平台
-            // res.data.data.exchangeDtoList.forEach(item => {
-            //   item.SEX_NAME = item.SEX_ENAME;
-            //   item.PRICE = item.RESERVE_DECIMAL01;
-            // });
 
             res.data.data.refundDtoList.forEach(item => {
               item.QTY_EXCHANGE = item.QTY_REFUND;
