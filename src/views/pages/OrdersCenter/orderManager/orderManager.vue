@@ -1672,15 +1672,15 @@
                     //     tabTitle: '订单拆分',
                     //   },
                     // })
-                    R3.store.commit('global/tabOpen', {
-                      type: 'C',
-                      label: '订单拆分',
-                      customizedModuleName: 'SPLITORDER',
-                      customizedModuleId: self.selection[0].ID,
+                    self.$store.commit("customize/TabHref", {
+                      id: self.selection[0].ID,
+                      type: "action",
+                      name: "splitOrder",
+                      label: "订单拆分",
                       query: {
                         id: self.selection[0].ID,
-                        tabTitle: '订单拆分',
-                      },
+                        tabTitle: "订单拆分"
+                      }
                     });
                   } else {
                     self.$Message.warning({
@@ -1830,17 +1830,17 @@
                 //   },
                 // })
 
-                R3.store.commit('global/tabOpen', {
-                  type: 'C',
-                  label: '退换货单新增',
-                  customizedModuleName: 'RETURNGOOD',
-                  customizedModuleId: '-1',
+                self.$store.commit("customize/TabOpen", {
+                  id: -1,
+                  type: "action",
+                  name: "returngood",
+                  label: "退换货单新增",
                   query: {
                     id: -1,
                     orderHrefReturnid: self.selection[0].ID,
-                    isOrderHrefReturn: 'order',
-                    tabTitle: '退换货单新增',
-                  },
+                    isOrderHrefReturn: "order",
+                    tabTitle: "退换货单新增"
+                  }
                 });
                 // self.selection = [];
               }, // 按钮点击事件
@@ -2710,6 +2710,10 @@
       // 丢单复制、错发复制、漏发复制、赠品出库复制
       copyRouteChange(type) {
         const self = this;
+        if(!self.selection.length){
+          self.$Message.warning('请先选择需要复制的订单!');
+          return;
+        }
         const selectItem = self.selection[0];
         const ORDERSTATUSNAME = selectItem.ORDERSTATUSNAME;
         if (self.selection.length === 1) {

@@ -10,8 +10,7 @@
       </div>
     </div>
     <div class="tableContent">
-      <!-- <div  class="tableContain"> -->
-      <jordanTable
+      <!-- <jordanTable
         :jordanTableConfig="tableConfig"
         @on-select="onSelect"
         @on-select-cancel="onSelectCancel"
@@ -22,8 +21,20 @@
         @table-delete-detail="tableDeleteDetail"
         @on-page-change="pageChange"
         @on-page-size-change="pageSizeChange"
-      ></jordanTable>
-      <!-- </div> -->
+      ></jordanTable> -->
+      <div class="agLoading" v-show="agTableConfig.agLoading">
+          <Spin fix>
+            <Icon type="ios-loading" size="18" class="demo-spin-icon-load"></Icon>
+            <div>Loading</div>
+          </Spin>
+        </div>
+      <aTable
+        ref="agGridChild"
+        :agTableConfig="agTableConfig"
+        @on-page-change="pageChange"
+        @on-page-size-change="pageSizeChange"
+        @on-row-dblclick="onRowDblclick"
+      ></aTable>
     </div>
     <!-- 修改from表单 -->
     <jordanModal
@@ -87,13 +98,15 @@ let addSevenDay = (() => {
 
 import axios from "axios";
 import util from "@/assets/js/__utils__/util";
+import aTable from 'professionalComponents/table/agGridTable.vue';
 export default {
   components: {
     jordanButton,
     jordanForm,
     jordanTable,
     JDialog,
-    jordanModal
+    jordanModal,
+    aTable
   },
   mixins: [buttonPermissionsMixin, isFavoriteMixin],
   props: {},
@@ -156,10 +169,10 @@ export default {
           {
             text: "新增",
             btnclick: () => {
-              this.$store.commit("customize/TabHref", {
-                id: -1, //id
-                type: "action", //类型action
-                name: "returnTreasuryAdd", //文件名
+              this.$store.commit("global/tabOpen", {
+                customizedModuleId: "NEW", //id
+                type: "C", //类型action
+                customizedModuleName: "returnTreasuryAdd", //文件名
                 label: "退货入库新增", //tab中文名
                 query: Object.assign({
                   id: -1, //id
@@ -173,6 +186,7 @@ export default {
             disabled: false,
             btnclick: () => {
               let self = this;
+              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               let ids = this.selection.map(item => {
                 return item.ID;
               });
@@ -214,6 +228,7 @@ export default {
             disabled: false,
             btnclick: () => {
               let self = this;
+              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               let ids = this.selection.map(item => {
                 return item.ID;
               });
@@ -254,6 +269,7 @@ export default {
             text: "作废",
             isShow: false,
             btnclick: () => {
+              this.selection = this.$refs.agGridChild.AGTABLE.getSelect();
               let ids = this.selection.map(item => {
                 return item.ID;
               });
@@ -322,189 +338,198 @@ export default {
         flodClick: "a",
         formData: [],
         formValue: {},
-        flodClick: () => {
-          const _this = this;
-          setTimeout(() => {
-            _this.setTableHeight();
-          }, 10);
-        }
+        flodClick: () => {}
       },
-      tableConfig: {
-        parentClass: "parentClass",
-        isShowSelection: true,
-        indexColumn: true,
-        columns: [],
-        data: [],
-        renderArr: [
-          {
-            key: "ID",
-            render: (h, params) => {
-              return h(
-                "a",
-                {
-                  style: {
-                    "text-decoration": "underline"
-                  }
-                },
-                params.row.ID
-              );
-            }
-          },
-          {
-            key: "ORIG_ORDER_NO",
-            render: (h, params) => {
-              return h(
-                "div",
-                {
-                  on: {
-                    click: () => {
-                      if (
-                        !params.row.ORIG_ORDER_NO ||
-                        params.row.ORIG_ORDER_NO === ""
-                      )
-                        return;
-                      this.$store.commit("customize/TabOpen", {
-                        id: params.row.ORIG_ORDER_NO, //单据id
-                        type: "action", //类型action
-                        name: "orderManageDetail", //文件名
-                        label: "零售发货单详情", //tab中文名
-                        query: Object.assign({
-                          id: params.row.ORIG_ORDER_NO, //单据id
-                          tabTitle: "零售发货单详情" //tab中文名
-                        }) //带的参数
-                      });
-                    }
-                  }
-                },
-                params.row.ORIG_ORDER_NO
-                  ? [
-                    h(
-                      "i",
-                      {
-                        class: "iconfont  iconliebiaowaijianguanlian",
-                        style: {
-                          color: "#0f8EE9"
-                        }
-                      }
-                      //'&#xe625;'
-                    ),
-                    " " + params.row.ORIG_ORDER_NO
-                  ]
-                  : ""
-              );
-            }
-          },
-          {
-            key: "ALL_SKU",
-            render: (h, params) => {
-              let num = 0;
-              for (let i = 2; i < params.row.itemList.length; i++) {
-                num += params.row.itemList[i].QTY;
-              }
-              if (
-                params.row.itemList &&
-                params.row.itemList.length !== 0
-              ) {
-                return h(
-                  "div",
-                  {
-                    style: {
-                      display: "flex",
-                      // "justify-content": "space-between"
-                    }
-                  },
-                  params.row.itemList.map((item, index) => {
-                    // debugger
-                    if (index < 2) {
-                      return h(
-                        "div",
-                        {
-                          style: {
-                            padding: "4px 6px",
-                            border: "1px solid #d3d3d3",
-                            position: "relative",
-                            marginRight: "10px"
-                          }
-                        },
-                        [
-                          h("span", {}, `${item.PS_C_PRO_ECODE},${item.PS_C_CLR_ENAME},${item.PS_C_SIZE_ENAME}`),
-                          h(
-                            "div",
-                            {
-                              style: {
-                                "min-width": "16px",
-                                height: "16px",
-                                "line-height": "14px",
-                                border: "1px solid #DCDEE2",
-                                borderRadius: "9px",
-                                backgroundColor: "#84C9E2",
-                                "font-size": "6px",
-                                position: "absolute",
-                                top: "-1px",
-                                right: "-8px",
-                                zIndex: "1",
-                                color: "white",
-                                "text-align": 'center'
-                              }
-                            },
-                            item.QTY
-                          ),
-                        ]
-                      )
-                    } else if (index === 2) {
-                      return h(
-                        "div",
-                        {
-                          style: {
-                            padding: "4px 6px",
-                            border: "1px solid #d3d3d3",
-                            position: "relative",
-                            marginRight: "10px"
-                          }
-                        },
-                        [
-                          h("span", {}, '更多'),
-                          h(
-                            "div",
-                            {
-                              style: {
-                                "min-width": "16px",
-                                height: "16px",
-                                "line-height": "14px",
-                                border: "1px solid #DCDEE2",
-                                borderRadius: "9px",
-                                backgroundColor: "#84C9E2",
-                                "font-size": "6px",
-                                position: "absolute",
-                                top: "-1px",
-                                right: "-8px",
-                                zIndex: "1",
-                                color: "white",
-                                "text-align": 'center'
-                              }
-                            },
-                            num
-                          ),
-                        ]
-                      )
-                    }
-                  })
-                )
-              }
-            }
-          }
-        ],
-        loading: false,
-        pageShow: true, //控制分页是否显示
-        btnsShow: true, //控制操作按钮是否显示
-        searchInputShow: false, // 控制搜索框是否显示
-        width: "", // 表格宽度
-        height: "", // 表格高度
-        border: true, //是否显示纵向边框
-        current: 1, //当前页数
-        total: 0, //设置总条数
-        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
-        pageSize: 50 // 每页条数
+      // tableConfig: {
+      //   parentClass: "parentClass",
+      //   isShowSelection: true,
+      //   indexColumn: true,
+      //   renderArr: [
+      //     {
+      //       key: "ID",
+      //       render: (h, params) => {
+      //         return h(
+      //           "a",
+      //           {
+      //             style: {
+      //               "text-decoration": "underline"
+      //             }
+      //           },
+      //           params.row.ID
+      //         );
+      //       }
+      //     },
+      //     {
+      //       key: "ORIG_ORDER_NO",
+      //       render: (h, params) => {
+      //         return h(
+      //           "div",
+      //           {
+      //             on: {
+      //               click: () => {
+      //                 if (
+      //                   !params.row.ORIG_ORDER_NO ||
+      //                   params.row.ORIG_ORDER_NO === ""
+      //                 )
+      //                   return;
+      //                 this.$store.commit("TabOpen", {
+      //                   id: params.row.ORIG_ORDER_NO, //单据id
+      //                   type: "action", //类型action
+      //                   name: "orderManageDetail", //文件名
+      //                   label: "零售发货单详情", //tab中文名
+      //                   query: Object.assign({
+      //                     id: params.row.ORIG_ORDER_NO, //单据id
+      //                     tabTitle: "零售发货单详情" //tab中文名
+      //                   }) //带的参数
+      //                 });
+      //               }
+      //             }
+      //           },
+      //           params.row.ORIG_ORDER_NO
+      //             ? [
+      //               h(
+      //                 "i",
+      //                 {
+      //                   class: "iconfont  iconliebiaowaijianguanlian",
+      //                   style: {
+      //                     color: "#0f8EE9"
+      //                   }
+      //                 }
+      //                 //'&#xe625;'
+      //               ),
+      //               " " + params.row.ORIG_ORDER_NO
+      //             ]
+      //             : ""
+      //         );
+      //       }
+      //     },
+      //     {
+      //       key: "ALL_SKU",
+      //       render: (h, params) => {
+      //         let num = 0;
+      //         for (let i = 2; i < params.row.itemList.length; i++) {
+      //           num += params.row.itemList[i].QTY;
+      //         }
+      //         if (
+      //           params.row.itemList &&
+      //           params.row.itemList.length !== 0
+      //         ) {
+      //           return h(
+      //             "div",
+      //             {
+      //               style: {
+      //                 display: "flex",
+      //                 // "justify-content": "space-between"
+      //               }
+      //             },
+      //             params.row.itemList.map((item, index) => {
+      //               // debugger
+      //               if (index < 2) {
+      //                 return h(
+      //                   "div",
+      //                   {
+      //                     style: {
+      //                       padding: "4px 6px",
+      //                       border: "1px solid #d3d3d3",
+      //                       position: "relative",
+      //                       marginRight: "10px"
+      //                     }
+      //                   },
+      //                   [
+      //                     h("span", {}, `${item.PS_C_PRO_ECODE},${item.PS_C_CLR_ENAME},${item.PS_C_SIZE_ENAME}`),
+      //                     h(
+      //                       "div",
+      //                       {
+      //                         style: {
+      //                           "min-width": "16px",
+      //                           height: "16px",
+      //                           "line-height": "14px",
+      //                           border: "1px solid #DCDEE2",
+      //                           borderRadius: "9px",
+      //                           backgroundColor: "#84C9E2",
+      //                           "font-size": "6px",
+      //                           position: "absolute",
+      //                           top: "-1px",
+      //                           right: "-8px",
+      //                           zIndex: "1",
+      //                           color: "white",
+      //                           "text-align": 'center'
+      //                         }
+      //                       },
+      //                       item.QTY
+      //                     ),
+      //                   ]
+      //                 )
+      //               } else if (index === 2) {
+      //                 return h(
+      //                   "div",
+      //                   {
+      //                     style: {
+      //                       padding: "4px 6px",
+      //                       border: "1px solid #d3d3d3",
+      //                       position: "relative",
+      //                       marginRight: "10px"
+      //                     }
+      //                   },
+      //                   [
+      //                     h("span", {}, '更多'),
+      //                     h(
+      //                       "div",
+      //                       {
+      //                         style: {
+      //                           "min-width": "16px",
+      //                           height: "16px",
+      //                           "line-height": "14px",
+      //                           border: "1px solid #DCDEE2",
+      //                           borderRadius: "9px",
+      //                           backgroundColor: "#84C9E2",
+      //                           "font-size": "6px",
+      //                           position: "absolute",
+      //                           top: "-1px",
+      //                           right: "-8px",
+      //                           zIndex: "1",
+      //                           color: "white",
+      //                           "text-align": 'center'
+      //                         }
+      //                       },
+      //                       num
+      //                     ),
+      //                   ]
+      //                 )
+      //               }
+      //             })
+      //           )
+      //         }
+      //       }
+      //     }
+      //   ],
+      //   loading: false,
+      //   pageShow: true, //控制分页是否显示
+      //   btnsShow: true, //控制操作按钮是否显示
+      //   searchInputShow: false, // 控制搜索框是否显示
+      //   width: "", // 表格宽度
+      //   height: "", // 表格高度
+      //   border: true, //是否显示纵向边框
+      //   current: 1, //当前页数
+      //   total: 0, //设置总条数
+      //   pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
+      //   pageSize: 50 // 每页条数
+      // },
+      agTableConfig:{
+        agLoading:false,
+        columnDefs: [],
+        rowData: [],
+        renderArr:{},
+        tableHeight:'600px',
+        pagenation:{
+          //设置总条数
+          total: 0,
+          // 条数
+          pageSize: 20,
+          // 页数
+          current: 1,
+          pageSizeOpts: [50, 200, 500, 2000]
+        }
       },
       selection: [],
       searchObj: {},
@@ -517,13 +542,10 @@ export default {
     this.$nextTick(() => {
       this.getPermissions("btnConfig", "returnStoreageList");
     });
-    // this.getisFavorite();
     this.getHeaderList();
-    this.setTableHeight();
   },
   activated() {
-    this.tableConfig.current = 1;
-    // this.request();
+    this.agTableConfig.pagenation.current = 1;
   },
   methods: {
     // 获取高级查询&表头
@@ -533,7 +555,6 @@ export default {
       const params = { "table": "OC_B_REFUND_IN", "column_include_uicontroller": true, "fixedcolumns": {}, "multiple": [], "startindex": 0 }
       axios({
         url: "/api/cs/oc/oms/v1/DynamicList",
-        // url: "/api/cs/oc/oms/v1/queryListConfig",
         method: "post",
         data: params
       }).then((res) => {
@@ -667,8 +688,13 @@ export default {
         });
         _this.formConfig.formData = formData;
         // 表头赋值
-        // res.data.data.tableHeader.forEach(ele => ele.align = "center");
-        _this.tableConfig.columns = res.data.data.columns;
+        res.data.data.columns.forEach(item=>{
+          item['field'] = item.key;
+          item['headerName'] = item.title;
+          delete item.key;
+          delete item.title;
+        })
+        _this.agTableConfig.columnDefs = res.data.data.columns;
         _this.isShowFromLoading = false;
         setTimeout(() => {
           _this.request();
@@ -709,13 +735,13 @@ export default {
       return "";
     },
     requestBefore() {
-      this.tableConfig.current = 1;
+      this.agTableConfig.pagenation.current = 1;
       this.request();
     },
     requestParams() {
       let params = {
-        currentPage: this.tableConfig.current || 1, //当前页
-        pageSize: this.tableConfig.pageSize //页大小
+        currentPage: this.agTableConfig.pagenation.current || 1, //当前页
+        pageSize: this.agTableConfig.pagenation.pageSize //页大小
       };
       this.formConfig.formData.forEach(item => {
         if (item.value === "CREATETIME") return; //特殊处理
@@ -750,7 +776,7 @@ export default {
     request() {
       let self = this;
       self.selection = [];
-      self.tableConfig.loading = true;
+      self.agTableConfig.agLoading = true;
       let params = this.requestParams();
       axios({
         url: "/api/cs/oc/oms/v1/ReturnStorageList",
@@ -758,61 +784,36 @@ export default {
         data: params
       }).then(res => {
         //if (res.data.code === 1) {
-        self.tableConfig.loading = false;
+        self.agTableConfig.agLoading = false;
         let data = res.data.data || {};
-        self.tableConfig.data = data.queryResult || [];
-        self.tableConfig.total = data.totalSize;
+        self.agTableConfig.rowData = data.queryResult || [];
+        self.agTableConfig.pagenation.total = data.totalSize;
+        self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
         //}
       });
     },
-    // 选中某一项时触发
-    onSelect(selection, row) {
-      this.selection = selection;
-    },
-    // 取消选中某一项时触发
-    onSelectCancel(selection, row) {
-      this.selection = selection;
-    },
-    // 点击全选时触发
-    onSelectAll(selection) {
-      this.selection = selection;
-    },
-    // 点击取消全选时触发
-    onSelectAllCancel(selection) {
-      this.selection = selection;
-    },
     // 单击某二行时触发
     onRowDblclick(row, index) {
-      this.$store.commit("customize/TabHref", {
-        id: row.ID,
-        type: "action",
-        name: "returnTreasuryAdd",
+      this.$store.commit("global/tabOpen", {
+        customizedModuleId: row.ID,
+        type: "C",
+        customizedModuleName: "returnTreasuryAdd",
         label: "退货入库详情",
-        query: Object.assign({
-          id: row.ID, //单据id
-          tabTitle: "退货入库详情",
-          statusName: row.INVALIDSTATE
-        })
       });
     },
     // 分页change 事件
     pageChange(val) {
-      this.tableConfig.current = val;
+      this.agTableConfig.pagenation.current = val;
       this.request();
     },
     // 切换分页条数
     pageSizeChange(val) {
-      this.tableConfig.pageSize = val;
+      this.agTableConfig.pagenation.pageSize = val;
       this.request();
-    },
-    setTableHeight() {
-      let tableHeight = document.getElementsByClassName("jordan-table-box")[0]
-        .clientHeight;
-      let formHeight = document.getElementsByClassName("searchList")[0].clientHeight;
-      this.tableConfig.height = tableHeight - formHeight;
     },
     exportClick() {
       let self = this;
+      self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
       if (self.selection.length) {
         if (this.isExport) return this.$Message.error('有一项导出正在进行中')
         this.isExport = true;
@@ -826,7 +827,7 @@ export default {
         axios({
           url: "/api/cs/oc/oms/v1/exportOcBRefundIn",
           method: "post",
-          cancelToken: true,
+          // cancelToken: true,
           data: idList
         }).then(res => {
           self.isExport = false;
@@ -924,15 +925,17 @@ export default {
     }
   }
   .tableContent {
-    position: relative;
-    display: flex;
-    flex: 1;
-    .jordan-table-box {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      height: calc(100% - 20px) !important;
-    }
+    // position: relative;
+    // display: flex;
+    // flex: 1;
+    // .jordan-table-box {
+    //   display: flex;
+    //   flex-direction: column;
+    //   width: 100%;
+    //   height: calc(100% - 20px) !important;
+    // }
+    width: 100%;
+    height: 100%;
   }
 
   .searchList {

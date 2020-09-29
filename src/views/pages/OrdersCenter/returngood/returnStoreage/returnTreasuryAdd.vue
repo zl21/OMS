@@ -216,130 +216,7 @@ export default {
       onSelectData: [], // 选中的原始订单编号
       btnConfig: {
         typeAll: "error", //按钮统一风格样式
-        buttons: [
-          // {
-          //   text: "保存", //按钮文本
-          //   disabled: false, //按钮禁用控制
-          //   btnclick: () => {
-          //     this.saveData();
-          //   } //按钮点击事件
-          // },
-          // {
-          //   text: "手工匹配", //按钮文本
-          //   isShow: "",
-          //   disabled: false, //按钮禁用控制
-          //   btnclick: () => {
-          //     const _this = this;
-          //     if (_this.isMatch == 1) {
-          //       return _this.$Message.error(
-          //         "此退货入库单已经关闭匹配，不允许选择!"
-          //       );
-          //     }
-          //     if (_this.$route.query.id == -1) return;
-          //     axios({
-          //       url: "/api/cs/oc/oms/v1/manualMatchingCheck",
-          //       method: "post",
-          //       data: { id: _this.$route.query.id }
-          //     }).then(res => {
-          //       if (res.data.code === 0) {
-          //         _this.$store.commit("customize/TabHref", {
-          //           id: _this.$route.query.id, //id
-          //           type: "action", //类型action
-          //           name: "manualMatching", //文件名
-          //           label: "退货入库-手工匹配", //tab中文名
-          //           query: Object.assign({
-          //             id: _this.$route.query.id, //id
-          //             tabTitle: "退货入库-手工匹配", //tab中文名
-          //             source: 2,
-          //             statusName: this.$route.query.statusName,
-          //             form: "details"
-          //           }) //带的参数
-          //         });
-          //       } else {
-          //         let mes = res.data.message || "此单据不可进行手工匹配操作！";
-          //         _this.$Message.error(mes);
-          //       }
-          //     });
-          //   } //按钮点击事件
-          // },
-          // {
-          //   text: "错发强制匹配",
-          //   disabled: false,
-          //   btnclick: () => {
-          //     const _this = this;
-          //     if (_this.isMatch == 1) {
-          //       return _this.$Message.error(
-          //         "此退货入库单已经关闭匹配，不允许选择!"
-          //       );
-          //     }
-          //     if (_this.$route.query.id == -1) return;
-          //     axios({
-          //       url: "/api/cs/oc/oms/v1/manualMatchingCheck",
-          //       method: "post",
-          //       data: { id: _this.$route.query.id }
-          //     }).then(res => {
-          //       if (res.data.code === 0) {
-          //         _this.$store.commit("customizeTabHref", {
-          //           id: _this.$route.query.id, //id
-          //           type: "action", //类型action
-          //           name: "manualMatching", //文件名
-          //           label: "退货入库-错发强制匹配", //tab中文名
-          //           query: Object.assign({
-          //             id: _this.$route.query.id, //id
-          //             tabTitle: "退货入库-错发强制匹配", //tab中文名
-          //             source: 3,
-          //             statusName: this.$route.query.statusName,
-          //             form: "details"
-          //           }) //带的参数
-          //         });
-          //       } else {
-          //         let mes =
-          //           res.data.message || "此单据不可进行错发强制匹配操作！";
-          //         _this.$Message.error(mes);
-          //       }
-          //     });
-          //   } //按钮点击事件
-          // },
-          // {
-          //   // ========================================暂时影藏
-          //   text: "作废", //按钮文本
-          //   isShow: false,
-          //   disabled: false, //按钮禁用控制
-          //   btnclick: () => {
-          //     if (this.$route.query.id == -1) return;
-          //     axios({
-          //       url: "/api/cs/oc/oms/v1/returnCancel",
-          //       method: "post",
-          //       data: { ids: [this.$route.query.id] }
-          //     }).then(res => {
-          //       if (res.data.code === 0) {
-          //         let mes = res.data.message || "作废操作成功";
-          //         this.$Message.success(mes);
-          //       } else {
-          //         let mes = res.data.message || "作废操作失败";
-          //         this.$Message.error(mes);
-          //       }
-          //     });
-          //   } //按钮点击事件
-          // },
-          // {
-          //   text: "返回", //按钮文本
-          //   disabled: false, //按钮禁用控制
-          //   btnclick: () => {
-          //     this.$store.commit("customize/TabHref", {
-          //       id: 2809,
-          //       type: "action",
-          //       name: "returnStoreageList",
-          //       label: "退货入库",
-          //       query: Object.assign({
-          //         id: 2809,
-          //         tabTitle: "退货入库"
-          //       }),
-          //       back: true
-          //     });
-          //   } //按钮点击事件
-          // }
-        ]
+        buttons: []
       }, // 按钮
       information: {
         formValue: {
@@ -386,7 +263,7 @@ export default {
               this.onSelectData = [];
               this.order.orderform.formValue = {};
               this.order.table.data = [];
-              if (this.$route.query.id == "-1") {
+              if (this.$route.params.customizedModuleId == "NEW") {
                 this.order.modal = true;
               }
             } //点击icon图标事件
@@ -563,89 +440,6 @@ export default {
             key: "RESERVE_VARCHAR04",
             title: "实际发出条码"
           },
-          // {
-          //   key: "REAL_SKU_ECODE",
-          //   dataAcessKey: "REAL_SKU_ECODE",
-          //   title: "实收条码",
-          //   render: (h, params) => {
-          //     let pageShow = [];
-          //     const _this = this;
-          //     return h(
-          //       "div",
-          //       {
-          //         style: {
-          //           width: "100%",
-          //           display: "flex",
-          //           alignitems: "center",
-          //           justifyContent: "space-between"
-          //         }
-          //       },
-          //       [
-          //         h("Input", {
-          //           style: {
-          //             width: "100%",
-          //             height: "100%",
-          //             display: params.row.Flag1 ? "none" : "block"
-          //           },
-          //           props: {
-          //             value: params.row.REAL_SKU_ECODE
-          //           },
-          //           on: {
-          //             "on-enter": e => {
-          //               // 修改行数据
-          //               if (e.target.value) {
-          //                 axios({
-          //                   url: "/api/cs/oc/oms/v1/getOneRefundItem",
-          //                   method: "post",
-          //                   cancelToken: true,
-          //                   data: { PS_C_SKU_ECODE: e.target.value }
-          //                 }).then(res => {
-          //                   if (res.data.code == 0) {
-          //                     params.row.Flag1 = true;
-          //                     _this.jordanTableConfig.data[
-          //                       params.index
-          //                     ].REAL_SKU_ECODE = e.target.value;
-          //                     params.row.REAL_SKU_ECODE = e.target.value;
-          //                   } else {
-          //                     let err =
-          //                       res.data.message ||
-          //                       "本地条码档案中不存在此条码，请检查后重试!";
-          //                     _this.$Message.error(err);
-          //                   }
-          //                 });
-          //               } else {
-          //                 params.row.Flag1 = true;
-          //               }
-          //             }
-          //           }
-          //         }),
-          //         h(
-          //           "span",
-          //           {
-          //             style: {
-          //               minWidth: "150px",
-          //               height: "16px",
-          //               display: params.row.Flag1 ? "block" : "none"
-          //             },
-          //             on: {
-          //               dblclick: data => {
-          //                 if (!_this.isFlag) return;
-          //                 if (_this.$route.query.id == -1)
-          //                   params.row.Flag1 = false;
-          //               }
-          //             }
-          //           },
-          //           params.row.REAL_SKU_ECODE
-          //         )
-          //       ]
-          //     );
-          //   }
-          // },
-          // {
-          //   key: "RESERVE_VARCHAR01",
-          //   dataAcessKey: "RESERVE_VARCHAR01",
-          //   title: "实收国标码"
-          // },
           {
             key: "PS_C_PRO_ENAME",
             dataAcessKey: "PS_C_PRO_ENAME",
@@ -764,9 +558,8 @@ export default {
     };
   },
   mounted() {
-
     this.$nextTick(() => {
-      if (this.$route.query.id === "-1") {
+      if (this.$route.params.customizedModuleId === "NEW") {
         this.btnConfig.buttons = [
           {
             text: "保存", //按钮文本
@@ -779,16 +572,11 @@ export default {
             text: "返回", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
-              this.$store.commit("customize/TabHref", {
-                id: 2809,
-                type: "action",
-                name: "returnStoreageList",
-                label: "退货入库",
-                query: Object.assign({
-                  id: 2809,
-                  tabTitle: "退货入库"
-                }),
-                back: true
+              this.$store.commit("global/tabOpen", {
+                customizedModuleId: 2809,
+                type: "C",
+                customizedModuleName: "returnStoreageList",
+                label: "退货入库"
               });
             } //按钮点击事件
           }
@@ -884,11 +672,11 @@ export default {
             isShow: false,
             disabled: false, //按钮禁用控制
             btnclick: () => {
-              if (this.$route.query.id == -1) return;
+              if (this.$route.params.customizedModuleId == "NEW") return;
               axios({
                 url: "/api/cs/oc/oms/v1/returnCancel",
                 method: "post",
-                data: { ids: [this.$route.query.id] }
+                data: { ids: [this.$route.params.customizedModuleId == 'NEW' ? -1:this.$route.params.customizedModuleId] }
               }).then(res => {
                 if (res.data.code === 0) {
                   let mes = res.data.message || "作废操作成功";
@@ -922,7 +710,7 @@ export default {
       this.getPermissions("btnConfig", "returnStoreageList");
     })
     // 判断是新增还是修改
-    if (this.$route.query.id == "-1") {
+    if (this.$route.params.customizedModuleId == "NEW") {
       this.information.formValue.SPECIAL_TYPE = "0";
       this.btnConfig.buttons.forEach(item => {
         switch (item.text) {
@@ -1001,15 +789,13 @@ export default {
           width: "6"
         }
       );
-    }
-
-
+    };
     this.$nextTick(() => {
       this.getDataAccess("OC_B_REFUND_IN", res => {
         this.information.formData.forEach((parent, parentIndex) => {
           res.SENSITIVE_COLUMNS.forEach((child, childIndex) => {
             if (parent.dataAcessKey == child.ecode) {
-              if (this.$route.query.id == "-1") {
+              if (tthis.$route.params.customizedModuleId== "NEW") {
                 this.setFormPermissions(parent, child, "add");
               } else {
                 this.setFormPermissions(parent, child, "detail");
@@ -1045,25 +831,17 @@ export default {
       let dataArr = JSON.parse(JSON.stringify(this.jordanTableConfig.data));
       dataArr.forEach(item => {
         // 商品标记
-        if (item.PRODUCT_MARK == "正品") item.PRODUCT_MARK = 1;
-        if (item.PRODUCT_MARK == "次品") item.PRODUCT_MARK = 0;
+        item.PRODUCT_MARK = item.PRODUCT_MARK == "正品" ? 1 : 0;
         // 是否无原单条码
-        if (item.IS_WITHOUT_ORIG == "是") item.IS_WITHOUT_ORIG = 1;
-        else if (item.IS_WITHOUT_ORIG == "否") item.IS_WITHOUT_ORIG = 0;
+        item.IS_WITHOUT_ORIG = item.IS_WITHOUT_ORIG == "是" ? 1 : 0;
         // 是否匹配
-        if (item.IS_MATCH == "是") item.IS_MATCH = 1;
-        else if (item.IS_MATCH == "否") item.IS_MATCH = 0;
+        item.IS_MATC = item.IS_MATCH == "是" ? 1 : 0;
         // 是否生成调整单
-        if (item.IS_GEN_ADJUST == "是") item.IS_GEN_ADJUST = 1;
-        else if (item.IS_GEN_ADJUST == "否") item.IS_GEN_ADJUST = 0;
-        if (item.RESERVE_BIGINT01 == "是") item.RESERVE_BIGINT01 = 1;
-        else if (item.RESERVE_BIGINT01 == "否") item.RESERVE_BIGINT01 = 0;
-        if (item.RESERVE_BIGINT02 == "是") item.RESERVE_BIGINT02 = 1;
-        else if (item.RESERVE_BIGINT02 == "否") item.RESERVE_BIGINT02 = 0;
-        if (item.RESERVE_BIGINT03 == "是") item.RESERVE_BIGINT03 = 1;
-        else if (item.RESERVE_BIGINT03 == "否") item.RESERVE_BIGINT03 = 0;
+        item.IS_GEN_ADJUST = tem.IS_GEN_ADJUST == "是" ? 1 : 0;
+        item.RESERVE_BIGINT01 =item.RESERVE_BIGINT01 == "是" ?  1 : 0;
+        item.RESERVE_BIGINT02 = item.RESERVE_BIGINT02 == "是" ? 1 : 0;
+        item.RESERVE_BIGINT03 = item.RESERVE_BIGINT03 == "是" ? 1 : 0;
       });
-      console.log(this.jordanTableConfig.data);
       let params = {
         ocBRefundInProductItem: dataArr, // 退货入库明细
         OcBRefundIn: {
@@ -1089,7 +867,7 @@ export default {
         }, // 退货入库主表数据
         ID: this.ID
       };
-      if (this.$route.query.id != "-1") params.OcBRefundIn.ID = item.ID; // 修改时传主表ID
+      if (this.$route.params.customizedModuleId != "NEW") params.OcBRefundIn.ID = item.ID; // 修改时传主表ID
       _this.isSaveLoading = true;
       axios({
         url: "/api/cs/oc/oms/v1/ReturnStorageSave",
@@ -1132,23 +910,16 @@ export default {
           res.data.data.inProductItem.forEach(item => {
             item.Flag1 = true;
             // 商品标记
-            if (item.PRODUCT_MARK == 1) item.PRODUCT_MARK = "正品";
-            else if (item.PRODUCT_MARK == 0) item.PRODUCT_MARK = "次品";
+            item.PRODUCT_MARK = item.PRODUCT_MARK == 1 ? "正品" : '次品';
             // 是否无原单条码
-            if (item.IS_WITHOUT_ORIG == 1) item.IS_WITHOUT_ORIG = "是";
-            else if (item.IS_WITHOUT_ORIG == 0) item.IS_WITHOUT_ORIG = "否";
+            item.IS_WITHOUT_ORIG = item.IS_WITHOUT_ORIG == 1 ? "是" : "否";
             // 是否匹配
-            if (item.IS_MATCH == 1) item.IS_MATCH = "是";
-            else if (item.IS_MATCH == 0) item.IS_MATCH = "否";
+            item.IS_MATCH =item.IS_MATCH == 1 ? "是" : "否";
             // 是否生成调整单
-            if (item.IS_GEN_ADJUST == 1) item.IS_GEN_ADJUST = "是";
-            else if (item.IS_GEN_ADJUST == 0) item.IS_GEN_ADJUST = "否";
-            if (item.RESERVE_BIGINT01 == 1) item.RESERVE_BIGINT01 = "是";
-            else if (item.RESERVE_BIGINT01 == 0) item.RESERVE_BIGINT01 = "否";
-            if (item.RESERVE_BIGINT02 == 1) item.RESERVE_BIGINT02 = "是";
-            else if (item.RESERVE_BIGINT02 == 0) item.RESERVE_BIGINT02 = "否";
-            if (item.RESERVE_BIGINT03 == 1) item.RESERVE_BIGINT03 = "是";
-            else if (item.RESERVE_BIGINT03 == 0) item.RESERVE_BIGINT03 = "否";
+            item.IS_GEN_ADJUST = item.IS_GEN_ADJUST == 1 ? "是" : "否";
+            item.RESERVE_BIGINT01 =item.RESERVE_BIGINT01 == 1 ? "是" : "否";
+            item.RESERVE_BIGINT02 =item.RESERVE_BIGINT02 == 1 ?  "是" : "否";
+            item.RESERVE_BIGINT03 = item.RESERVE_BIGINT03 == 1 ? "是" : "否";
           });
           if (res.data.data.ocBRefundIn.MATCH_STATUS == 2) {
             _this.information.formData.forEach(item => {
@@ -1156,10 +927,7 @@ export default {
             });
           }
           _this.isMatch = res.data.data.ocBRefundIn.IS_OFF_MATCH;
-          if (res.data.data.ocBRefundIn.IS_OFF_MATCH == 1)
-            res.data.data.ocBRefundIn.IS_OFF_MATCH = true;
-          else if (res.data.data.ocBRefundIn.IS_OFF_MATCH == 0)
-            res.data.data.ocBRefundIn.IS_OFF_MATCH = false;
+          res.data.data.ocBRefundIn.IS_OFF_MATCH == 1 ? res.data.data.ocBRefundIn.IS_OFF_MATCH = true : es.data.data.ocBRefundIn.IS_OFF_MATCH = false;
           if (res.data.data.ocBRefundIn.IN_STATUS == 3) {
             _this.statusName = _this.$route.query.statusName;
             _this.btnConfig.buttons[0].disabled = true;
@@ -1382,7 +1150,7 @@ export default {
         _this.labelDefaultValue = false;
         _this.tab2 = {
           tablename: "OC_B_REFUND_IN",
-          objid: this.$route.query.id
+          objid: this.$route.params.customizedModuleId == "NEW" ? -1 : this.$route.params.customizedModuleId
         };
       }
     },
