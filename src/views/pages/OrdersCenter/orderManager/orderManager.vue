@@ -168,7 +168,7 @@
   import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
   import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
   import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
-  import aTable from 'professionalComponents/table/agGridTable.vue';
+  import aTable from 'professionalComponents/agGridTable.vue';
   import unzipXv from '@/assets/js/dataToSmall.js';
   import publicDialogConfig from './publicConfig/publicDialog.js';
   import labelListConfig from './publicConfig/labelList.js';
@@ -287,7 +287,7 @@
           maskClosable: true, // 是否可以点击叉号关闭
           transfer: true, // 是否将弹层放在body内
           name: 'importTable', // 组件名称
-          url: 'publicDialog/importTable',
+          url: 'importTable',
           keepAlive: true,
           excludeString: 'importTable', // 将name传进去，确认不缓存
           componentData: {},

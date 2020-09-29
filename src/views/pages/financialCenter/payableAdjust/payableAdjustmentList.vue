@@ -60,7 +60,7 @@
 import jordanButton from "professionalComponents/jordanButton";
 import jordanForm from "professionalComponents/jordanForm";
 import jordanLabel from "professionalComponents/jordanLabel";
-import aTable from "professionalComponents/table/agGridTable.vue";
+import aTable from "professionalComponents/agGridTable.vue";
 import jordanModal from "professionalComponents/JDialog";
 import axios from "axios";
 import { debug, debuglog } from "util";
@@ -215,7 +215,7 @@ export default {
         maskClosable: true, //是否可以点击叉号关闭
         transfer: true, //是否将弹层放在body内
         name: "importTable", //组件名称
-        url: "publicDialog/importTable",
+        url: "importTable",
         keepAlive: true,
         excludeString: "importTable", //将name传进去，确认不缓存
         componentData: {},
