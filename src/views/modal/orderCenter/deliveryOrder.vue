@@ -10,23 +10,7 @@ import axios from "axios";
 import jordanForm from "professionalComponents/jordanForm";
 import jordanBtn from "professionalComponents/jordanButton";
 export default {
-  props: {
-    objList: {
-      type: Array
-    },
-    idArr: {
-      type: Array
-    },
-    webid: {
-      type: Number
-    },
-    tablename: {
-      type: String
-    },
-    rowData: {
-      type: Array
-    }
-  },
+  props: {},
   components: {
     jordanForm,
     jordanBtn
@@ -50,7 +34,7 @@ export default {
               let param = {
                 deliver_id: pid,
                 delivery_no:valuedata,
-                ids: self.idArr
+                ids: self.$store.state[getModuleName()].buttons.selectIdArr
               };
               let formdata = new FormData();
               formdata.append("param", JSON.stringify(param));

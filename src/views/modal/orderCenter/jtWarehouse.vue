@@ -14,23 +14,7 @@ export default {
     jordanForm,
     jordanBtn
   },
-  props: {
-    objList: {
-      type: Array
-    },
-    idArr: {
-      type: Array
-    },
-    webid: {
-      type: Number
-    },
-    tablename: {
-      type: String
-    },
-    rowData: {
-      type: Array
-    }
-  },
+  props: {},
 
   data() {
     return {
@@ -47,11 +31,12 @@ export default {
             btnclick: () => {
               let self = this;
               let promptMessage = ""; //非空提示信息
-              if (!self.warehouseManagementFromConfig.formData[0].itemdata.pid) {
+              let formData = formData
+              if (!formData[0].itemdata.pid) {
                 promptMessage = "店铺";
-              } else if (!self.warehouseManagementFromConfig.formData[1].itemdata.pid) {
+              } else if (!formData[1].itemdata.pid) {
                 promptMessage = "档期日程归属";
-              } else if (!self.warehouseManagementFromConfig.formData[2].itemdata.pid) {
+              } else if (!formData[2].itemdata.pid) {
                 promptMessage = "实体仓库";
               } else if (!self.warehouseManagementFromConfig.formValue.DELIVERYTYPE) {
                 promptMessage = "配送方式";
@@ -62,12 +47,10 @@ export default {
               }
               let fromdata = new FormData();
               let param = {
-                CPCSHOPID:
-                  self.warehouseManagementFromConfig.formData[0].itemdata.pid, //店铺id
-                ASCRIPTIONID:
-                  self.warehouseManagementFromConfig.formData[1].itemdata.pid, //日程档案id
-                WAHOUSEID: self.idArr.join(","), //列表中选中的数据id
-                PHYWAREHOUSE: self.warehouseManagementFromConfig.formData[2].itemdata.pid,//实体店仓id
+                CPCSHOPID:formData[0].itemdata.pid, //店铺id
+                ASCRIPTIONID:formData[1].itemdata.pid, //日程档案id
+                WAHOUSEID: self.$store.state[getModuleName()].buttons.selectIdArr.join(","), //列表中选中的数据id
+                PHYWAREHOUSE: formData[2].itemdata.pid,//实体店仓id
                 DELIVERYTYPE: self.warehouseManagementFromConfig.formValue.DELIVERYTYPE,//配送方式
               };
               fromdata.append("param", JSON.stringify(param));
@@ -233,7 +216,6 @@ export default {
         method: "post",
         data: fromdata
       }).then(function (res) {
-        console.log(res);
         if (res.data.code === 0) {
           let arr = '';
           res.data.datas.tabth.forEach(item => {
@@ -248,16 +230,6 @@ export default {
           })
           self.warehouseManagementFromConfig.formData[3].options = arr;
         }
-        // item.childs.forEach(key => {
-        //   if (key.colname === "WAREHOUSE_CODE") {
-        //     key.combobox.forEach(tem => {
-        //       tem.value = tem.limitval;
-        //       tem.label = tem.limitdesc;
-        //     });
-        //     self.warehouseManagementFromConfig.formData[3].options =
-        //       key.combobox;
-        //   }
-        // });
       });
     }
   }
