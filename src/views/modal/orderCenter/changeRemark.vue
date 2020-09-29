@@ -4,22 +4,22 @@
       <FormItem label="旗帜:">
         <RadioGroup v-model="formItem.flag" @on-change="radioChange">
           <Radio label="1">
-            <img src="../../../assets/img/1.png" alt />
+            <img src="@/assest/image/img/1.png" alt />
           </Radio>
           <Radio label="2">
-            <img src="../../../assets/img/2.png" alt />
+            <img src="@/assest/image/img/2.png" alt />
           </Radio>
           <Radio label="3">
-            <img src="../../../assets/img/3.png" alt />
+            <img src="@/assest/image/img/3.png" alt />
           </Radio>
           <Radio label="4">
-            <img src="../../../assets/img/4.png" alt />
+            <img src="@/assest/image/img/4.png" alt />
           </Radio>
           <Radio label="5">
-            <img src="../../../assets/img/5.png" alt />
+            <img src="@/assest/image/img/5.png" alt />
           </Radio>
           <Radio label="0">
-            <img src="../../../assets/img/0.png" alt />
+            <img src="@/assest/image/img/0.png" alt />
           </Radio>
         </RadioGroup>
       </FormItem>
@@ -59,7 +59,7 @@
 import axios from "axios";
 import jordanBtn from "professionalComponents/jordanButton";
 import jordanActionTable from "professionalComponents/jordanActionTable.vue";
-import { listeningToKeydownMixin } from "../../../mixins/listeningToKeydown.js";
+import { listeningToKeydownMixin } from "@/assest/js/mixins/listeningToKeydown.js";
 export default {
   mixins: [listeningToKeydownMixin],
   components: {
