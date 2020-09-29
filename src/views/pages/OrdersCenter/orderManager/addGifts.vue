@@ -23,7 +23,7 @@ import businessButton from "professionalComponents/businessButton";
 import businessActionTable from "professionalComponents/businessActionTable.vue";
 import EasyMatrix from "../../../components/combineMatrix/easyMatrix";
 import axios from "axios";
-import { listeningToKeydownMixin } from "../../../mixins/listeningToKeydown.js";
+import { listeningToKeydownMixin } from "@/assets/js/mixins/listeningToKeydown.js";
 export default {
   mixins: [listeningToKeydownMixin],
   data() {

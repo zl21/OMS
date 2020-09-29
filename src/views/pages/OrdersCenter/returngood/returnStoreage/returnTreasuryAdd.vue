@@ -608,7 +608,7 @@ export default {
                 data: { id: _this.$route.query.id }
               }).then(res => {
                 if (res.data.code === 0) {
-                  _this.$store.commit("customize/TabHref", {
+                  _this.$store.commit("TabHref", {
                     id: _this.$route.query.id, //id
                     type: "action", //类型action
                     name: "manualMatching", //文件名
@@ -645,7 +645,7 @@ export default {
                 data: { id: _this.$route.query.id }
               }).then(res => {
                 if (res.data.code === 0) {
-                  _this.$store.commit("customize/TabHref", {
+                  _this.$store.commit("TabHref", {
                     id: _this.$route.query.id, //id
                     type: "action", //类型action
                     name: "manualMatching", //文件名
@@ -692,7 +692,7 @@ export default {
             text: "返回", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
-              this.$store.commit("customize/TabHref", {
+              this.$store.commit("TabHref", {
                 id: 2809,
                 type: "action",
                 name: "returnStoreageList",
@@ -877,7 +877,7 @@ export default {
       }).then(res => {
         if (res.data.code == 0) {
           _this.isSaveLoading = false;
-          this.$store.commit("customize/TabHref", {
+          this.$store.commit("TabHref", {
             id: 2809,
             type: "action",
             name: "returnStoreageList",

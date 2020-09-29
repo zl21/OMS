@@ -38,7 +38,7 @@ import jordanBtn from "professionalComponents/businessButton";
 import businessActionTable from "professionalComponents/businessActionTable";
 import jordanModal from "professionalComponents/businessDialog";
 import publicDialogConfig from "./publicConfig/publicDialog.js";
-import { listeningToKeydownMixin } from "../../../mixins/listeningToKeydown.js";
+import { listeningToKeydownMixin } from "@/assets/js/mixins/listeningToKeydown.js";
 export default {
   components: {
     businessForm,
