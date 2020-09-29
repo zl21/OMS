@@ -557,7 +557,7 @@ export default {
           pageSizeOpts: [20, 50, 150, 1000],
         },
       }, // 全部
-      returnSelectData: [], // 列表选中数据
+      // returnSelectData: [], // 列表选中数据
       isShowFromLoading: false,
       statusTab: "", // 单据类型
     };
@@ -654,8 +654,9 @@ export default {
     },
     invalid() {
       let self = this;
+      self.selection = self.$refs.agtable.AGTABLE.getSelect();
       let ids = [];
-      this.returnSelectData.map((item) => {
+      this.selection.map((item) => {
         ids.push(item.ID);
       });
       let param = {
@@ -676,6 +677,7 @@ export default {
         }
       });
     },
+    // 财审
     fiAudit() {
       let self = this;
       let fromdata = self.generateAuditFromdata();
@@ -692,6 +694,7 @@ export default {
         }
       });
     },
+    // 客审
     custAudit() {
       let self = this;
       let fromdata = self.generateAuditFromdata();
@@ -708,6 +711,7 @@ export default {
         }
       });
     },
+    // 反客审
     unCustAudit() {
       let self = this;
       let fromdata = self.generateAuditFromdata();
@@ -726,7 +730,9 @@ export default {
     },
     generateAuditFromdata() {
       let ids = [];
-      this.returnSelectData.map((item) => {
+      let self = this;
+      self.selection = self.$refs.agtable.AGTABLE.getSelect();
+      this.selection.map((item) => {
         ids.push(item.ID);
       });
       let param = {
@@ -770,8 +776,6 @@ export default {
       }
 
       let whereInfoForm = {
-        // start: _this.agTableConfig.pagenation.current,
-        // count: _this.agTableConfig.pagenation.pageSize,
         CREATIONDATE_START: creationdateStart,
         CREATIONDATE_END: creationdateEnd,
         GUEST_TRIAL_TIME_START: guestTrialTimeStart,
@@ -863,12 +867,6 @@ export default {
               };
             }
           );
-          // _this.customPagingFun(
-          //   filterItemData,
-          //   _this.agTableConfig.pagenation.pageSize,
-          //   _this.agTableConfig,
-          //   "agTableConfig"
-          // );
           _this.agTableConfig.pagenation.total = res.data.data.page.totalSize;
           _this.agTableConfig.rowData = _this.allTableArr;
         } else {
@@ -878,7 +876,6 @@ export default {
         this.$refs.agtable.agGridTable(
           this.agTableConfig.columnDefs,
           this.agTableConfig.rowData
-          // this.getExtendObj()
         );
       });
     },
@@ -895,22 +892,6 @@ export default {
           tabTitle: "赔付详情", //tab中文名
         }), //带的参数
       });
-    },
-    // 列表勾选
-    returnOnSelect(e) {
-      this.returnSelectData = e;
-    },
-    // 取消勾选
-    returnCancel(e) {
-      this.returnSelectData = e;
-    },
-    // 列表全选
-    returnSelectAll(e) {
-      this.returnSelectData = e;
-    },
-    // 取消全选
-    returnSelectAllCancel(e) {
-      this.returnSelectData = e;
     },
     // 分页change 事件
     pageChange(val) {
@@ -960,16 +941,18 @@ export default {
     // 导出
     exportClick() {
       const _this = this;
-      if (_this.returnSelectData.length) {
+      _this.selection = _this.$refs.agtable.AGTABLE.getSelect();
+      console.log("selection", _this.selection);
+      if (_this.selection.length) {
         let ids = [];
-        for (let i = 0; i < _this.returnSelectData.length; i++) {
-          ids.push(_this.returnSelectData[i].ID);
+        for (let i = 0; i < _this.selection.length; i++) {
+          ids.push(_this.selection[i].ID);
         }
         let idList = { idList: ids };
         axios({
           url: "/p/cs/exportPayableAdjustment",
           method: "post",
-          cancelToken: true,
+          cancelToken: false,
           data: idList,
         }).then((res) => {
           if (res.data.code === 0 && res.data.data !== null) {
@@ -989,7 +972,7 @@ export default {
         _this.warningModal = true;
       }
     },
-    // 导出
+    // 导出下载
     downloadUrlFile(src) {
       var download_file = {};
       if (typeof download_file.iframe == "undefined") {
