@@ -20,7 +20,7 @@ export const isFavoriteMixin = {
           data: fromdata
         }).then((res) => {
           if (res.data.code == 0) {
-            self.$store.commit('customize/updateFavoriteList', res.data.data);
+            self.$store.commit('global/updateFavoriteData', res.data);
             self.btnConfig.buttons.find(item => item.name === '收藏').icon === 'iconfont icon-liebiao-yishoucang' ? self.btnConfig.buttons.find(item => item.name === '收藏').icon = 'iconfont iconbj_col' : self.btnConfig.buttons.find(item => item.name === '收藏').icon = 'iconfont icon-liebiao-yishoucang';
           }
         });
@@ -31,7 +31,7 @@ export const isFavoriteMixin = {
           data: fromdata
         }).then((res) => {
           if (res.data.code == 0) {
-            self.$store.commit('customize/updateFavoriteList', res.data.data);
+            self.$store.commit('global/updateFavoriteData', res.data);
             self.btnConfig.buttons.find(item => item.name === '收藏').icon === 'iconfont icon-liebiao-yishoucang' ? self.btnConfig.buttons.find(item => item.name === '收藏').icon = 'iconfont iconbj_col' : self.btnConfig.buttons.find(item => item.name === '收藏').icon = 'iconfont icon-liebiao-yishoucang';
           }
         });
