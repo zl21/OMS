@@ -1,5 +1,6 @@
+import httpServer from 'framework/__utils__/request';
 export default {
-  // 淘宝换货单接口列表界面
+  // 唯品会 - 淘宝商品（下载商品）
   formConfig: {
     formValue: {
       numNumber: ""
@@ -12,7 +13,9 @@ export default {
         isdisabled: false,
         inputList: [
           {
-            childs: [{ colname: "CP_C_SHOP_ID", refobjid: 50, valuedata: 2 }]
+            childs: [
+              { colname: "CP_C_SHOP_ID", refobjid: 19, valuedata: 2 }
+            ]
           }
         ],
         itemdata: {
@@ -47,57 +50,51 @@ export default {
         style: "date",
         type: "datetimerange", //日期组件类型,默认为data  (daterange)为双日期区间选择
         value: "query_date",
-        label: "查询时间",
+        label: "平台修改时间",
         width: "24",
         format: "yyyy-MM-dd HH:mm:ss", //格式参照burgeonui
         placeholder: ""
-      },
+      }
     ],
     //表单非空提示
     ruleValidate: {
       numNumber: [{ required: true, message: " ", trigger: "blur" }],
-      'query_date': [{ required: true }]
+      query_date: [{ required: true }]
     }
   },
   // 确定按钮
   determine: (self) => {
-    console.log(self);
-    console.log("唯品会取消时效订单列表界面,取消时效订单下载");
-    if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
-      self.$Message.warning("请选择需要下载的店铺");
-      return
+    console.log("唯品会 - 淘宝商品 ,下载商品");
+    let formValue = self.downLoadFormConfig.formValue;
+    let shopId = self.downLoadFormConfig.formData[0].itemdata.pid;
+    if (!shopId || !formValue.query_date[0]) {
+      self.$message.error("店铺和平台时间不能为空");
+      return;
     }
-    if (!self.downLoadFormConfig.formValue.query_date[0]) {
-      self.$Message.warning("请选择需要下载的查询时间");
-      return
-    }
-    let startTime = self.downLoadFormConfig.formValue.query_date[0];
-    let endTime = self.downLoadFormConfig.formValue.query_date[1];
-    if (startTime) {
-      startTime = self.standardTimeConversiondateToStr(startTime);
-    }
-    if (endTime) {
-      endTime = self.standardTimeConversiondateToStr(endTime);
-    }
-    let param = {
-      shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
-      start_time: startTime,
-      end_time: endTime
-    };
-    let fromdata = new FormData();
-    fromdata.append("param", JSON.stringify(param));
-    axios({
-      url: "/p/cs/downLoadVipCancelTimeOrder",
-      method: "post",
-      data: fromdata
-    }).then(function (res) {
-      if (res.data.code === 0) {
-        self.$Message.success(res.data.message);
-        self.$emit("confirmImport");
-        self.$emit("closeActionDialog");
-      } else {
-        self.$Message.error(res.data.message);
-      }
+    let params = JSON.stringify({
+      shop_id: shopId,
+      start_time: self.standardTimeConversiondateToStr(formValue.query_date[0]),
+      end_time: self.standardTimeConversiondateToStr(formValue.query_date[1])
     });
+    self.dialogLoad = true;
+    console.log(R3.network);
+    httpServer({
+      url: "/p/cs/vip/item/get",
+      method: "post",
+      data: {
+        param: params
+      }
+    })
+      .then(res => {
+        self.dialogLoad = false;
+        if (res.data.code === 0) {
+          self.$message.success(res.data.message);
+          self.$emit("confirmImport");
+          self.$emit("closeActionDialog");
+        }
+      })
+      .catch(() => {
+        self.dialogLoad = false;
+      });
   }
 };
