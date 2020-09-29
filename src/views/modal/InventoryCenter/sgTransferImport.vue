@@ -8,8 +8,7 @@
 </template>
 
 <script>
-  import importTable from 'professionalComponents/publicDialog/importTable';
-  // import importTable from "../../publicDialog/importTable";
+  import importTable from 'professionalComponents/importTable';
   export default {
     components: {
       importTable,

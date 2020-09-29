@@ -57,14 +57,14 @@
 </template>
 <script>
 import axios from "axios";
-import jordanBtn from "professionalComponents/jordanButton";
-import jordanActionTable from "professionalComponents/jordanActionTable.vue";
+import jordanBtn from "professionalComponents/businessButton";
+import businessActionTable from "professionalComponents/businessActionTable.vue";
 import { listeningToKeydownMixin } from "../../../mixins/listeningToKeydown.js";
 export default {
   mixins: [listeningToKeydownMixin],
   components: {
     jordanBtn,
-    jordanActionTable
+    businessActionTable
   },
   props: {
     componentData: {

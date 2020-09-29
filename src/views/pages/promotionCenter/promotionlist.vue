@@ -248,7 +248,7 @@ import Mydialog from "framework/components/dialog/mydialog.vue";
 // import { post } from '@/utils/request';
 // import myInputLd from 'framework/components/element/input';
 import TableInput from "framework/components/element/input";
-import aTable from "professionalComponents/table/agGridTable.vue";
+import aTable from "professionalComponents/agGridTable.vue";
 import dialogVisible from "./setGroup";
 import Favorite from "./components/favorite";
 

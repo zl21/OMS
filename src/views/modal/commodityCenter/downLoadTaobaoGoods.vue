@@ -1,12 +1,11 @@
 <template>
   <div style="width:430px;padding-right:20px">
-    <jordanForm :formConfig="downLoadTaobaoGoodsFormConfig"></jordanForm>
+    <businessForm :formConfig="downLoadTaobaoGoodsFormConfig"></businessForm>
     <div class="dialog-footer">
-      <Button type="primary" ghost size="" @click="download">确定</Button>
+      <Button type="primary" ghost @click="download">确定</Button>
       <Button
         type="error"
         ghost
-        size=""
         @click="
           () => {
             this.$emit('closeActionDialog');
@@ -20,12 +19,12 @@
 
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
+import businessForm from "professionalComponents/businessForm";
+import jordanBtn from "professionalComponents/businessButton";
 
 export default {
   components: {
-    jordanForm,
+    businessForm,
     jordanBtn
   },
   props: {
@@ -45,13 +44,6 @@ export default {
       type: Array
     }
   },
-  // mounted() {
-  //   console.log(this.rowData, "rowData");
-  //   console.log(this.tablename, "tablename");
-  //   console.log(this.webid, "webid");
-  //   console.log(this.idArr, "idArr");
-  //   console.log(this.objList, "objList");
-  // },
   data() {
     return {
       downLoadTaobaoGoodsFormConfig: {
@@ -118,10 +110,6 @@ export default {
             placeholder: ""
           }
         ]
-        //表单非空提示
-        // ruleValidate: {
-        //   numNumber: [{ required: true, message: " ", trigger: "blur" }]
-        // }
       }
     };
   },
@@ -129,45 +117,7 @@ export default {
     // 下载模板
     download() {
       let self = this;
-      let paramTime =
-        self.downLoadTaobaoGoodsFormConfig.formValue.timeArr || [];
-      if (!self.downLoadTaobaoGoodsFormConfig.formData[0].itemdata.pid) {
-        self.$Message.warning("请选择需要下载的店铺");
-        return false;
-      }
-      if (
-        self.downLoadTaobaoGoodsFormConfig.formValue.numNumber === "" &&
-        paramTime[0] === ""
-      ) {
-        self.$Message.warning("请输入需要下载的数字编号或修改时间中的一个");
-        return false;
-      }
-      let param = {
-        shop_id: self.downLoadTaobaoGoodsFormConfig.formData[0].itemdata.pid, // 店铺id 必传
-        item_num: self.downLoadTaobaoGoodsFormConfig.formValue.numNumber, // 数字编号 必传
-        table: "IP_C_TAOBAO_PRODUCT", //表名字 必传
-        start_time: paramTime[0]
-          ? self.$comUtils.dateFormat(paramTime[0], "yyyy-MM-dd hh:mm:ss")
-          : "",
-        end_time: paramTime[1]
-          ? self.$comUtils.dateFormat(paramTime[1], "yyyy-MM-dd hh:mm:ss")
-          : ""
-      };
-      let fromdata = new FormData();
-      fromdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/itemDownload",
-        method: "post",
-        data: fromdata
-      }).then(function(res) {
-        if (res.data.code === 0) {
-          self.$Message.success(res.data.message);
-          self.$emit("confirmImport");
-          self.$emit("closeActionDialog");
-        } else {
-          self.$Message.error(res.data.message);
-        }
-      });
+      
     }
   }
 };

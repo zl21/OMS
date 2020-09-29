@@ -1,19 +1,20 @@
 <template>
   <!-- 下载账单 -->
   <div class="downLoadVipBill" style="width:430px;padding-right:20px">
-    <jordanForm :formConfig="downLoadVipBillFormConfig"></jordanForm>
-    <jordanBtn :btnConfig="downLoadVipBillBtnConfig"></jordanBtn>
+    <businessForm :formConfig="downLoadFormConfig"></businessForm>
+    <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
+import businessForm from "professionalComponents/businessForm";
+import jordanBtn from "professionalComponents/businessButton";
+import formatData from "@/assets/js/__utils__/date.js"
 
 export default {
   components: {
-    jordanForm,
+    businessForm,
     jordanBtn
   },
   name: "downloadVipBill",
@@ -21,7 +22,7 @@ export default {
     let _this = this;
     return {
       type: "", //月结:month 进度: progress
-      downLoadVipBillFormConfig: {
+      downLoadFormConfig: {
         formValue: {
           type: "", //状态 月结账单,进度账单
           // vendorCode: "", //供应商编码
@@ -29,19 +30,6 @@ export default {
           bill_numbere: "" //账单编码
         },
         formData: [
-          // {
-          //   style: "input", //输入框类型
-          //   label: "供应商编码", //输入框前文字
-          //   value: "vendorCode", //输入框的值
-          //   clearable: true,
-          //   regx: /[0-9a-zA-Z]/,
-          //   width: "24", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-          //   ghost: false, //是否关闭幽灵按钮，默认开启
-          //   inputenter: () => {
-          //   }, //表单回车事件
-          //   iconclick: () => {
-          //   } //点击icon图标事件
-          // },
           {
             style: "popInput", //输入框弹框单多选
             width: "24",
@@ -81,7 +69,7 @@ export default {
               valuedata: "" //这个是选择的值
             },
             oneObj: val => {
-              _this.downLoadVipBillFormConfig.formValue.CP_C_SHOP_ID = val.pid;
+              _this.downLoadFormConfig.formValue.CP_C_SHOP_ID = val.pid;
             }
           },
           {
@@ -118,7 +106,7 @@ export default {
           timerange: [{ required: true, message: " ", trigger: "blur" }]
         }
       },
-      downLoadVipBillBtnConfig: {
+      downLoadBtnConfig: {
         typeAll: "error", //按钮统一风格样式
         btnsite: "right", //按钮位置 (right , center , left)
         buttons: [
@@ -148,23 +136,19 @@ export default {
   methods: {
     // 打印
     printData() {
-      let formValue = this.downLoadVipBillFormConfig.formValue;
+      let formValue = this.downLoadFormConfig.formValue;
       let startTime = formValue.timerange[0];
       let endTime = formValue.timerange[1];
-      if (this.downLoadVipBillFormConfig.formData[0].itemdata.pid == "") {
+      if (this.downLoadFormConfig.formData[0].itemdata.pid == "") {
         this.$Message.warning("请输入需要下载的店铺!");
         return false;
       }
-      if (
-        startTime === "" &&
-        endTime === "" &&
-        !this.downLoadVipBillFormConfig.formValue.bill_numbere
-      ) {
+      if (startTime === "" && endTime === "" && !this.downLoadFormConfig.formValue.bill_numbere) {
         this.$Message.warning("账单时间账单编码不能同时为空!");
         return false;
       } else {
         // 如果没填写账单编码,则对时间格式进行判断
-        if (!this.downLoadVipBillFormConfig.formValue.bill_numbere) {
+        if (!this.downLoadFormConfig.formValue.bill_numbere) {
           if (startTime === "" && endTime === "") {
             this.$Message.warning("账单时间不能为空");
             return false;
@@ -188,24 +172,15 @@ export default {
         }
       }
       let param = {
-        // vendorCode: this.downLoadVipBillFormConfig.formValue.vendorCode,
-        shop_id: this.downLoadVipBillFormConfig.formData[0].itemdata.pid,
-        type: this.downLoadVipBillFormConfig.formValue.type,
-        start_time: startTime
-          ? this.$comUtils.dateFormat(startTime, "yyyy-MM-dd hh:mm:ss")
-          : "",
-        end_time: endTime
-          ? this.$comUtils.dateFormat(endTime, "yyyy-MM-dd hh:mm:ss")
-          : "",
-        bill_numbere: this.downLoadVipBillFormConfig.formValue.bill_numbere
+        shop_id: this.downLoadFormConfig.formData[0].itemdata.pid,
+        type: this.downLoadFormConfig.formValue.type,
+        start_time: startTime ? formatData.standardTimeConversiondateToStr(startTime, "yyyy-MM-dd hh:mm:ss") : "",
+        end_time: endTime ? formatData.standardTimeConversiondateToStr(endTime, "yyyy-MM-dd hh:mm:ss") : "",
+        bill_numbere: this.downLoadFormConfig.formValue.bill_numbere
       };
       let fromdata = new FormData();
       fromdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/ac/v1/triggerVipBill",
-        method: "post",
-        data: fromdata
-      }).then(res => {
+      R3.network.post( "/p/cs/ac/v1/triggerVipBill",fromdata).then(res => {
         if (res.data.data.Code === 0) {
           this.$Message.success(res.data.data.Execmsg);
           this.$parent.$parent.actionDialog.show = false;
@@ -218,20 +193,19 @@ export default {
   mounted() {
     window.downLoadVipBill = this;
     // 月结,进度
-    if (this.$route.path == "/m/table/AC_F_VIP_BILL_MONTH") {
-      this.downLoadVipBillFormConfig.formValue.type = "billMonthDownload";
-      this.downLoadVipBillFormConfig.formData[1].options[0].label =
+    if (this.$route.params.tableName == "AC_F_VIP_BILL_MONTH") {
+      this.downLoadFormConfig.formValue.type = "billMonthDownload";
+      this.downLoadFormConfig.formData[1].options[0].label =
         "月结账单下载";
-      this.downLoadVipBillFormConfig.formData[1].options[0].value =
+      this.downLoadFormConfig.formData[1].options[0].value =
         "billMonthDownload";
     } else {
-      this.downLoadVipBillFormConfig.formValue.type = "billDownload";
-      this.downLoadVipBillFormConfig.formData[1].options[0].label =
+      this.downLoadFormConfig.formValue.type = "billDownload";
+      this.downLoadFormConfig.formData[1].options[0].label =
         "进度账单下载";
-      this.downLoadVipBillFormConfig.formData[1].options[0].value =
+      this.downLoadFormConfig.formData[1].options[0].value =
         "billDownload";
     }
-    window.downloadVipBill = this;
   }
 };
 </script>

@@ -1,9 +1,6 @@
+// 商品中心
 export default {
-  //淘宝商品 (下载商品)
-  downLoadTaobaoGoods: {
-    component: () => import("@/views/modal/commodityCenter/downLoadTaobaoGoods.vue"),
-  },
-  //京东商品 (下载商品)
+  // //京东商品 (下载商品)
   downLoadJingdongGoods: {
     component: () => import("@/views/modal/commodityCenter/downLoadJingdongGoods.vue"),
   },
@@ -13,10 +10,4 @@ export default {
       import("@/views/modal/InterfacePlatform/downLoadPublic.vue");
     }
   },
-  // 唯品会商品(下载商品)
-  downLoadVipGoods: {
-    component: () => {
-      import("@/views/modal/commodityCenter/downLoadVipGoods.vue");
-    }
-  }
 };

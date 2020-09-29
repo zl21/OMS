@@ -3,15 +3,15 @@
     <div class="buttons">
       <jordan-button :btnConfig="btnConfig"></jordan-button>
     </div>
-    <jordanStatusFlag
+    <businessStatusFlag
       v-if="custAuditFlag"
       :statusName="'已客审'"
-    ></jordanStatusFlag>
-    <jordanStatusFlag
+    ></businessStatusFlag>
+    <businessStatusFlag
       v-if="financeAuditFlag"
       :statusName="'已财审'"
-    ></jordanStatusFlag>
-    <jordanStatusFlag v-if="voidFlag" :statusName="'已作废'"></jordanStatusFlag>
+    ></businessStatusFlag>
+    <businessStatusFlag v-if="voidFlag" :statusName="'已作废'"></businessStatusFlag>
     <Collapse v-model="spreadPanel">
       <Panel name="panel_baseInfo">
         基本信息
@@ -92,25 +92,25 @@
 </template>
 
 <script>
-import jordanButton from "professionalComponents/jordanButton";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanActionTable from "professionalComponents/jordanActionTable";
-import jordanLabel from "professionalComponents/jordanLabel";
+import businessButton from "professionalComponents/businessButton";
+import businessForm from "professionalComponents/businessForm";
+import businessActionTable from "professionalComponents/businessActionTable";
+import businessLabel from "professionalComponents/businessLabel";
 import { customPagingMixins } from "@/assets/js/mixins/customPaging.js";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
 import axios from "axios";
-import jordanStatusFlag from "professionalComponents/jordanStatusFlag";
+import businessStatusFlag from "professionalComponents/businessStatusFlag";
 import dateUtil from "@/assets/js/__utils__/date.js";
-import tableInput from "professionalComponents/jordanTableInput.vue";
+import tableInput from "professionalComponents/businessTableInput.vue";
 import publicMethodsUtil from "@/assets/js/public/publicMethods.js";
 export default {
   name: "payableAdjustAdd",
   components: {
-    jordanButton,
-    jordanForm,
-    jordanActionTable,
-    jordanLabel,
-    jordanStatusFlag,
+    businessButton,
+    businessForm,
+    businessActionTable,
+    businessLabel,
+    businessStatusFlag,
   },
   mixins: [customPagingMixins, buttonPermissionsMixin],
   data() {

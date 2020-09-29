@@ -2,26 +2,14 @@
 <template>
   <div class="returnstoreage tableList">
     <!-- <input  type='hidden'  :value=IsDisabled /> -->
-    <jordanButton :btnConfig="btnConfig"></jordanButton>
+    <businessButton :btnConfig="btnConfig"></businessButton>
     <div class="form">
-      <jordanForm :formConfig="formConfig" class="searchList"></jordanForm>
+      <businessForm :formConfig="formConfig" class="searchList"></businessForm>
       <div class="fromLoading" v-show="isShowFromLoading">
         <Spin></Spin>
       </div>
     </div>
     <div class="tableContent">
-      <!-- <jordanTable
-        :jordanTableConfig="tableConfig"
-        @on-select="onSelect"
-        @on-select-cancel="onSelectCancel"
-        @on-select-all="onSelectAll"
-        @on-select-all-cancel="onSelectAllCancel"
-        @on-row-click="onRowClick"
-        @on-row-dblclick="onRowDblclick"
-        @table-delete-detail="tableDeleteDetail"
-        @on-page-change="pageChange"
-        @on-page-size-change="pageSizeChange"
-      ></jordanTable> -->
       <div class="agLoading" v-show="agTableConfig.agLoading">
           <Spin fix>
             <Icon type="ios-loading" size="18" class="demo-spin-icon-load"></Icon>
@@ -76,14 +64,14 @@
   </div>
 </template>
 <script>
-import jordanButton from "professionalComponents/jordanButton";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanTable from "professionalComponents/jordanActionTable";
-import JDialog from "professionalComponents/JDialog";
+import businessButton from "professionalComponents/businessButton";
+import businessForm from "professionalComponents/businessForm";
+import businessActionTable from "professionalComponents/businessActionTable";
+import businessDialog from "professionalComponents/businessDialog";
 import strUtil from "@/assets/js/__utils__/util";
 import DateUtil from "@/assets/js/__utils__/date";
 // import publicMethods from "@/assets/js/public/publicMethods";
-import jordanModal from "professionalComponents/JDialog";
+import jordanModal from "professionalComponents/businessDialog";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
 import { isFavoriteMixin } from "@/assets/js/mixins/isFavorite";
 let getCurrentTime = (() => {
@@ -98,13 +86,13 @@ let addSevenDay = (() => {
 
 import axios from "axios";
 import util from "@/assets/js/__utils__/util";
-import aTable from 'professionalComponents/table/agGridTable.vue';
+import aTable from 'professionalComponents/agGridTable.vue';
 export default {
   components: {
-    jordanButton,
-    jordanForm,
-    jordanTable,
-    JDialog,
+    businessButton,
+    businessForm,
+    businessActionTable,
+    businessDialog,
     jordanModal,
     aTable
   },
@@ -135,7 +123,7 @@ export default {
         maskClosable: true, //是否可以点击叉号关闭
         transfer: true, //是否将弹层放在body内
         name: "importTable", //组件名称
-        url: "publicDialog/importTable",
+        url: "importTable",
         keepAlive: true,
         excludeString: "importTable", //将name传进去，确认不缓存
         componentData: {}

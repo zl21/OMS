@@ -11,28 +11,14 @@
 </template>
 <script>
 import axios from "axios";
-import jordanBtn from "professionalComponents/jordanButton";
+import jordanBtn from "professionalComponents/businessButton";
+import R3 from '@syman/burgeon-r3';
+const { getModuleName } = R3;
 export default {
   components: {
     jordanBtn
   },
-  props: {
-    objList: {
-      type: Array
-    },
-    idArr: {
-      type: Array
-    },
-    webid: {
-      type: Number
-    },
-    tablename: {
-      type: String
-    },
-    rowData: {
-      type: Array
-    }
-  },
+  props: {},
   data() {
     return {
       corfirmFlag:false,
@@ -80,7 +66,7 @@ export default {
       let self = this;
       let fromdata = new FormData();
       let param ={
-        ids:self.idArr,
+        ids:self.$store.state[getModuleName()].buttons.selectIdArr,
       };
       fromdata.append("param", JSON.stringify(param));
       axios({
@@ -162,7 +148,7 @@ export default {
     },
     setBtnDisabled(closeFlag){
       let self = this;
-      self.confirmBtnConfig.buttons.map(btn => {
+      self.confirmBtnConfig.buttons.forEach(btn => {
           btn.disabled = closeFlag;
       });
     }

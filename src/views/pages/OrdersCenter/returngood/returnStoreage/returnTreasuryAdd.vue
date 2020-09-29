@@ -3,7 +3,7 @@
   <div class="returnTreasurys">
     <!--按钮块-->
     <div style="margin-top: 8px;">
-      <jordanButton :btnConfig="btnConfig"></jordanButton>
+      <businessButton :btnConfig="btnConfig"></businessButton>
     </div>
     <!-- form表单 -->
     <div class="TreasuryDefault">
@@ -11,19 +11,19 @@
         <Panel name="1">
           基本信息
           <p slot="content">
-            <jordanForm :formConfig="information"></jordanForm>
+            <businessForm :formConfig="information"></businessForm>
           </p>
         </Panel>
       </Collapse>
     </div>
     <div class="salesTable">
       <!-- tab切换 -->
-      <jordanLabel
-        class="jordanLabel"
+      <businessLabel
+        class="businessLabel"
         :labelList="labelList"
         :labelDefaultValue="DefaultValue"
         @labelClick="labelClick"
-      ></jordanLabel>
+      ></businessLabel>
       <!-- 列表组件 -->
       <div class="tableBox">
         <jordan-action-table
@@ -45,8 +45,8 @@
         @on-cancel="querycancel"
       >
         <div class="orderContent">
-          <jordanForm :formConfig="order.orderform"></jordanForm>
-          <jordanButton :btnConfig="order.btn"></jordanButton>
+          <businessForm :formConfig="order.orderform"></businessForm>
+          <businessButton :btnConfig="order.btn"></businessButton>
         </div>
         <div class="orderTable">
           <jordan-action-table
@@ -58,7 +58,7 @@
       </Modal>
     </div>
     <!-- 水印图片 -->
-    <jordanStatusFlag :statusName="statusName"></jordanStatusFlag>
+    <businessStatusFlag :statusName="statusName"></businessStatusFlag>
     <div class="fromLoading" v-show="isSaveLoading">
       <Spin></Spin>
     </div>
@@ -67,22 +67,22 @@
 
 <script>
 import axios from "axios";
-import jordanButton from "professionalComponents/jordanButton";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanLabel from "professionalComponents/jordanLabel";
-import jordanActionTable from "professionalComponents/jordanActionTable";
-import jordanStatusFlag from "professionalComponents/jordanStatusFlag";
+import businessButton from "professionalComponents/businessButton";
+import businessForm from "professionalComponents/businessForm";
+import businessLabel from "professionalComponents/businessLabel";
+import businessActionTable from "professionalComponents/businessActionTable";
+import businessStatusFlag from "professionalComponents/businessStatusFlag";
 import OrderItem from "../../orderManageDetail/details/orderItem.vue";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
 import { dataAccessMixin } from "@/assets/js/mixins/dataAccess";
 export default {
   components: {
-    jordanButton,
-    jordanForm,
-    jordanActionTable,
+    businessButton,
+    businessForm,
+    businessActionTable,
     OrderItem,
-    jordanLabel,
-    jordanStatusFlag
+    businessLabel,
+    businessStatusFlag
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {

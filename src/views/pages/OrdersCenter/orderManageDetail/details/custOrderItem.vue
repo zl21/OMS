@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import jordanActionTable from "professionalComponents/jordanActionTable.vue";
+import businessActionTable from "professionalComponents/businessActionTable.vue";
 import publicMethodsUtil from "@/assets/js/public/publicMethods";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
 import { dataAccessMixin } from "@/assets/js/mixins/dataAccess";
@@ -118,7 +118,7 @@ export default {
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   components: {
-    jordanActionTable
+    businessActionTable
   },
   props: {
     componentData: {},

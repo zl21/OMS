@@ -1,12 +1,12 @@
 <template>
   <div class="public" style="width:400px;padding-right:20px">
-    <jordanForm :formConfig="pulicdownLoadConfig">
+    <businessForm :formConfig="pulicdownLoadConfig">
       <template #compile="{ rowData }">
         <div class="import-box" @click="importBoxOpen(rowData.item)">
           [导入]
         </div>
       </template>
-    </jordanForm>
+    </businessForm>
     <div class="dialog-footer">
       <Button type="primary"  @click="downloadPublicAll">确定</Button>
       <Button
@@ -28,12 +28,12 @@
 
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanDialog from "professionalComponents/JDialog";
+import businessForm from "professionalComponents/businessForm";
+import jordanDialog from "professionalComponents/businessDialog";
 
 export default {
   components: {
-    jordanForm,
+    businessForm,
     jordanDialog,
   },
   props: {
@@ -524,8 +524,6 @@ export default {
         if (res.data.code === 0) {
           _this.$Message.success(res.data.message);
           _this.$emit("closeActionDialog");
-          // _this.taskId = res.data.message.match(/\d+/)[0];
-          // _this.downLoadModal = true;
         } else {
           _this.$Message.error(res.data.message);
         }
@@ -567,8 +565,6 @@ export default {
         if (res.data.code === 0) {
           _this.$Message.success(res.data.message);
           _this.$emit("closeActionDialog");
-          // _this.taskId = res.data.message.match(/\d+/)[0];
-          // _this.downLoadModal = true;
         } else {
           _this.$Message.error(res.data.message);
         }
@@ -624,7 +620,7 @@ export default {
           },
         },
         name: "importTable",
-        url: "publicDialog/importTable",
+        url: "importTable",
         width: 600,
       };
       this.$refs.dialog.openConfirm();

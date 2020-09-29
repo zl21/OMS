@@ -1,24 +1,24 @@
 <template>
   <div class="returnGoodList">
-    <div style="margin-top: 8px;" class="returnBtn">
+    <div style="margin-top: 8px" class="returnBtn">
       <!-- 按钮 -->
-      <jordanButton :btnConfig="btnConfig"></jordanButton>
+      <businessButton :btnConfig="btnConfig"></businessButton>
     </div>
     <div class="returnForm">
       <!-- form表单 -->
-      <jordanForm :formConfig="formConfig"></jordanForm>
+      <businessForm :formConfig="formConfig"></businessForm>
       <div class="fromLoading" v-show="isShowFromLoading">
         <Spin></Spin>
       </div>
     </div>
     <div class="salesTable">
       <!-- tab切换 -->
-      <jordanLabel
-        class="jordanLabel"
+      <businessLabel
+        class="businessLabel"
         :labelList="labelList"
         :labelDefaultValue="labelDefaultValue"
         @labelClick="labelClick"
-      ></jordanLabel>
+      ></businessLabel>
       <!-- 列表组件 -->
       <div class="tableBox">
         <!-- <jordan-action-table
@@ -163,22 +163,21 @@
 </template>
 
 <script>
-import jordanButton from "professionalComponents/jordanButton.vue";
-import jordanForm from "professionalComponents/jordanForm.vue";
-import jordanLabel from "professionalComponents/jordanLabel.vue";
-import jordanActionTable from "professionalComponents/jordanActionTable.vue";
-import jordanModal from "professionalComponents/JDialog.vue";
-import axios from "axios";
+import businessButton from "professionalComponents/businessButton.vue";
+import businessForm from "professionalComponents/businessForm.vue";
+import businessLabel from "professionalComponents/businessLabel.vue";
+import businessActionTable from "professionalComponents/businessActionTable.vue";
+import jordanModal from "professionalComponents/businessDialog.vue";
 import { isFavoriteMixin } from "@/assets/js/mixins/isFavorite.js";
 import publicMethodsUtil from "@/assets/js/public/publicMethods";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
-import aTable from "professionalComponents/table/agGridTable.vue";
+import aTable from "professionalComponents/agGridTable.vue";
 export default {
   components: {
-    jordanButton,
-    jordanForm,
-    jordanActionTable,
-    jordanLabel,
+    businessButton,
+    businessForm,
+    businessActionTable,
+    businessLabel,
     jordanModal,
     aTable
   },
@@ -281,7 +280,7 @@ export default {
         maskClosable: true, //是否可以点击叉号关闭
         transfer: true, //是否将弹层放在body内
         name: "importTable", //组件名称
-        url: "publicDialog/importTable",
+        url: "importTable",
         keepAlive: true,
         excludeString: "importTable", //将name传进去，确认不缓存
         componentData: {}
@@ -790,152 +789,154 @@ export default {
         multiple: [],
         startindex: 0
       };
-      axios({
-        url: "/api/cs/oc/oms/v1/DynamicList",
-        // url: "/p/cs/queryListConfig",
-        method: "post",
-        data: params
-      }).then(res => {
-        // 高级查询
-        let formData = [];
-        res.data.data.search.date.map((item, index) => {
-          if (item.type === "date") {
-            formData[index] = {
-              style: item.tabth.isfilter ? "date" : "", //输入框类型
-              type: "datetimerange", //文本框类型的input
-              label: item.tabth.name, //输入框前文字
-              value: item.tabth.colname, //输入框的值
-              // format: "yyyy-MM-dd",
-              width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-              icon: "md-alarm", //输入框后带的图标,暂只有输入框支持
-              placeholder: "", //占位文本，默认为请输入
-              transfer: true,
-              ghost: false, //是否关闭幽灵按钮，默认开启
-              inputenter: () => {
-                _this.getList();
-              }, //表单回车事件
-              iconclick: () => {}, //点击icon图标事件
-              clearable: true
-            };
-            _this.formConfig.formValue[item.tabth.colname] = "";
-          }
-          if (item.type === "propInput") {
-            formData[index] = {
-              style: item.tabth.isfilter ? "popInput" : "", //输入框弹框单多选
-              width: "6",
-              itemdata: {
-                col: 1,
-                colid: item.tabth.colid,
-                colname: item.tabth.colname, //当前字段的名称
-                datelimit: "all",
-                display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-                fkdisplay: item.tabth.fkdisplay, //外键关联类型
-                fkdesc: item.tabth.fkdesc,
-                inputname: item.tabth.inputname, //这个是做中文类型的模糊查询字段，例如ENAME
-                isfk: true, //是否有fk键
-                isnotnull: false, //是否必填
-                isuppercase: false, //是否转大写
-                length: 65535, //最大长度是多少
-                name: item.tabth.name, //input前面显示的lable值
-                readonly: false, //是否可编辑，对应input   readonly属性
-                reftable: item.tabth.reftable,
-                reftableid: item.tabth.reftableid,
-                row: 1,
-                scale: 0,
-                statsize: -1,
-                type: item.tabth.type, //这个是后台用的
-                pid: "",
-                valuedata: "" //这个是选择的值
-              },
-              oneObj: e => {
-                _this.oneObjs(e);
-              }
-            };
-            if (item.tabth.precolnameslist)
-              formData[index].itemdata.precolnameslist = item.tabth
-                .precolnameslist
-                ? item.tabth.precolnameslist
-                : [];
-          }
-          if (item.type === "text") {
-            formData[index] = {
-              style: item.tabth.isfilter ? "input" : "", //输入框类型
-              // type: "", //文本框类型的input
-              label: item.tabth.name, //输入框前文字
-              value: item.tabth.colname, //输入框的值
-              width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-              icon: "", //输入框后带的图标,暂只有输入框支持
-              clearable: true,
-              placeholder: "", //占位文本，默认为请输入
-              ghost: false, //是否关闭幽灵按钮，默认开启
-              inputenter: () => {
-                _this.getList();
-              }, //表单回车事件
-              iconclick: () => {} //点击icon图标事件
-            };
-            _this.formConfig.formValue[item.tabth.colname] = "";
-          }
-          if (item.type === "number") {
-            formData[index] = {
-              style: item.tabth.isfilter ? "input" : "", //输入框类型
-              // type: "", //文本框类型的input
-              label: item.tabth.name, //输入框前文字
-              value: item.tabth.colname, //输入框的值
-              clearable: true,
-              width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-              icon: "", //输入框后带的图标,暂只有输入框支持
-              placeholder: "", //占位文本，默认为请输入
-              ghost: false, //是否关闭幽灵按钮，默认开启
-              inputenter: () => {
-                _this.getList();
-              }, //表单回车事件
-              iconclick: () => {} //点击icon图标事件
-            };
-            _this.formConfig.formValue[item.tabth.colname] = "";
-          }
-          if (item.type === "select") {
-            formData[index] = {
-              style: item.tabth.isfilter ? "select" : "", //下拉框类型
-              label: item.tabth.name, //下拉框前的值
-              width: "6", //所占宽度宽度
-              clearable: true, // 是否显示下来清空按钮
-              value: item.tabth.colname, //输入框的值
-              multiple: true, //布尔值,下拉框是否开启多选,默认为不开启
-              selectChange: () => {}, //选中事件，默认返回选中的值
-              clearSelect: e => {
-                if (e == "RETURN_STATUS") {
-                  _this.formConfig.formValue.RETURN_STATUS = "";
-                } else if (e == "IS_ADD") {
-                  _this.formConfig.formValue.IS_ADD = "";
-                } else if (e == "IS_TOAG") {
-                  _this.formConfig.formValue.IS_TOAG = "";
-                } else if (e == "IS_TOWMS") {
-                  _this.formConfig.formValue.IS_TOWMS = "";
-                } else if (e == "BILL_TYPE") {
-                  _this.formConfig.formValue.BILL_TYPE = "";
-                } else if (e == "IS_EXAMINE") {
-                  _this.formConfig.formValue.IS_EXAMINE = "";
-                } else if (e == "IS_TODRP") {
-                  _this.formConfig.formValue.IS_TODRP = "";
-                } else if (e == "IS_TRANSFER") {
-                  _this.formConfig.formValue.IS_TRANSFER = "";
+      this.$network
+        .axios({
+          url: "/api/cs/oc/oms/v1/DynamicList",
+          type: "formdata",
+          method: "post",
+          data: params
+        })
+        .then(res => {
+          // 高级查询
+          let formData = [];
+          res.data.data.search.date.map((item, index) => {
+            if (item.type === "date") {
+              formData[index] = {
+                style: item.tabth.isfilter ? "date" : "", //输入框类型
+                type: "datetimerange", //文本框类型的input
+                label: item.tabth.name, //输入框前文字
+                value: item.tabth.colname, //输入框的值
+                // format: "yyyy-MM-dd",
+                width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                icon: "md-alarm", //输入框后带的图标,暂只有输入框支持
+                placeholder: "", //占位文本，默认为请输入
+                transfer: true,
+                ghost: false, //是否关闭幽灵按钮，默认开启
+                inputenter: () => {
+                  _this.getList();
+                }, //表单回车事件
+                iconclick: () => {}, //点击icon图标事件
+                clearable: true
+              };
+              _this.formConfig.formValue[item.tabth.colname] = "";
+            }
+            if (item.type === "propInput") {
+              formData[index] = {
+                style: item.tabth.isfilter ? "popInput" : "", //输入框弹框单多选
+                width: "6",
+                itemdata: {
+                  col: 1,
+                  colid: item.tabth.colid,
+                  colname: item.tabth.colname, //当前字段的名称
+                  datelimit: "all",
+                  display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+                  fkdisplay: item.tabth.fkdisplay, //外键关联类型
+                  fkdesc: item.tabth.fkdesc,
+                  inputname: item.tabth.inputname, //这个是做中文类型的模糊查询字段，例如ENAME
+                  isfk: true, //是否有fk键
+                  isnotnull: false, //是否必填
+                  isuppercase: false, //是否转大写
+                  length: 65535, //最大长度是多少
+                  name: item.tabth.name, //input前面显示的lable值
+                  readonly: false, //是否可编辑，对应input   readonly属性
+                  reftable: item.tabth.reftable,
+                  reftableid: item.tabth.reftableid,
+                  row: 1,
+                  scale: 0,
+                  statsize: -1,
+                  type: item.tabth.type, //这个是后台用的
+                  pid: "",
+                  valuedata: "" //这个是选择的值
+                },
+                oneObj: e => {
+                  _this.oneObjs(e);
                 }
-              }, //点击清空按钮回调
-              options: _this.converSelect(item.tabth.combobox)
-            };
-            _this.formConfig.formValue[item.tabth.colname] = [];
-          }
+              };
+              if (item.tabth.precolnameslist)
+                formData[index].itemdata.precolnameslist = item.tabth
+                  .precolnameslist
+                  ? item.tabth.precolnameslist
+                  : [];
+            }
+            if (item.type === "text") {
+              formData[index] = {
+                style: item.tabth.isfilter ? "input" : "", //输入框类型
+                // type: "", //文本框类型的input
+                label: item.tabth.name, //输入框前文字
+                value: item.tabth.colname, //输入框的值
+                width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                icon: "", //输入框后带的图标,暂只有输入框支持
+                clearable: true,
+                placeholder: "", //占位文本，默认为请输入
+                ghost: false, //是否关闭幽灵按钮，默认开启
+                inputenter: () => {
+                  _this.getList();
+                }, //表单回车事件
+                iconclick: () => {} //点击icon图标事件
+              };
+              _this.formConfig.formValue[item.tabth.colname] = "";
+            }
+            if (item.type === "number") {
+              formData[index] = {
+                style: item.tabth.isfilter ? "input" : "", //输入框类型
+                // type: "", //文本框类型的input
+                label: item.tabth.name, //输入框前文字
+                value: item.tabth.colname, //输入框的值
+                clearable: true,
+                width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                icon: "", //输入框后带的图标,暂只有输入框支持
+                placeholder: "", //占位文本，默认为请输入
+                ghost: false, //是否关闭幽灵按钮，默认开启
+                inputenter: () => {
+                  _this.getList();
+                }, //表单回车事件
+                iconclick: () => {} //点击icon图标事件
+              };
+              _this.formConfig.formValue[item.tabth.colname] = "";
+            }
+            if (item.type === "select") {
+              formData[index] = {
+                style: item.tabth.isfilter ? "select" : "", //下拉框类型
+                label: item.tabth.name, //下拉框前的值
+                width: "6", //所占宽度宽度
+                clearable: true, // 是否显示下来清空按钮
+                value: item.tabth.colname, //输入框的值
+                multiple: true, //布尔值,下拉框是否开启多选,默认为不开启
+                selectChange: () => {}, //选中事件，默认返回选中的值
+                clearSelect: e => {
+                  if (e == "RETURN_STATUS") {
+                    _this.formConfig.formValue.RETURN_STATUS = "";
+                  } else if (e == "IS_ADD") {
+                    _this.formConfig.formValue.IS_ADD = "";
+                  } else if (e == "IS_TOAG") {
+                    _this.formConfig.formValue.IS_TOAG = "";
+                  } else if (e == "IS_TOWMS") {
+                    _this.formConfig.formValue.IS_TOWMS = "";
+                  } else if (e == "BILL_TYPE") {
+                    _this.formConfig.formValue.BILL_TYPE = "";
+                  } else if (e == "IS_EXAMINE") {
+                    _this.formConfig.formValue.IS_EXAMINE = "";
+                  } else if (e == "IS_TODRP") {
+                    _this.formConfig.formValue.IS_TODRP = "";
+                  } else if (e == "IS_TRANSFER") {
+                    _this.formConfig.formValue.IS_TRANSFER = "";
+                  }
+                }, //点击清空按钮回调
+                options: _this.converSelect(item.tabth.combobox)
+              };
+              _this.formConfig.formValue[item.tabth.colname] = [];
+            }
+          });
+          _this.formConfig.formData = formData;
+          // 表头赋值
+          res.data.data.columns.forEach(item => {
+            item["field"] = item.key;
+            item["headerName"] = item.title;
+            delete item.key;
+            delete item.title;
+          });
+          _this.agTableConfig.columnDefs = res.data.data.columns;
         });
-        _this.formConfig.formData = formData;
-        // 表头赋值
-        res.data.data.columns.forEach(item => {
-          item["field"] = item.key;
-          item["headerName"] = item.title;
-          delete item.key;
-          delete item.title;
-        });
-        _this.agTableConfig.columnDefs = res.data.data.columns;
-      });
     },
     // 查找
     find() {
@@ -1007,120 +1008,123 @@ export default {
         Obj.RESERVE_BIGINT07[0] === "bSelect-all"
       )
         Obj.RESERVE_BIGINT07 = "";
-      axios({
-        url: "/api/cs/oc/oms/v1/querySalesReturn",
-        method: "post",
-        data: Object.assign(param, _this.formConfig.formValue)
-      }).then(res => {
-        if (res.data.code == 0 && res.data.data.queryResult.length) {
-          _this.agTableConfig.agLoading = false;
-          _this.agTableConfig.rowData = res.data.data.queryResult;
-          _this.agTableConfig.pagenation.total = res.data.data.totalNum;
-          for (let i = 0; i < _this.agTableConfig.rowData.length; i++) {
-            let item = _this.agTableConfig.rowData[i];
-            if (item.MODIFIEDDATE)
-              item.MODIFIEDDATE = publicMethodsUtil.DatesTime(
-                item.MODIFIEDDATE
-              ); // 修改时间
-            if (item.IN_TIME)
-              item.IN_TIME = publicMethodsUtil.DatesTime(item.IN_TIME); // 入库时间
-            if (item.AUDIT_TIME)
-              item.AUDIT_TIME = publicMethodsUtil.DatesTime(item.AUDIT_TIME); // 审核时间
-            if (item.LAST_UPDATE_TIME)
-              item.LAST_UPDATE_TIME = publicMethodsUtil.DatesTime(
-                item.LAST_UPDATE_TIME
-              ); // 退款平台最后修改时间
-            if (item.RETURN_CREATE_TIME)
-              item.RETURN_CREATE_TIME = publicMethodsUtil.DatesTime(
-                item.RETURN_CREATE_TIME
-              ); // 退款创建时间
-            if (item.CREATIONDATE)
-              item.CREATIONDATE = publicMethodsUtil.DatesTime(
-                item.CREATIONDATE
-              ); // 创建时间
-            item.RETURN_STATUS = item.rETURNNAME; // 退单状态
-            item.IS_ADD = item.IS_ADD == 0 ? "否" : "是"; // 是否手工新增
-            if (item.INVENTED_STATUS == 0) {
-              item.INVENTED_STATUS = "未虚拟入库";
-            } else if (item.INVENTED_STATUS == 1) {
-              item.INVENTED_STATUS = "虚拟入库未入库";
-            } else if (item.INVENTED_STATUS == 2) {
-              item.INVENTED_STATUS = "虚拟入库已入库";
-            }
-            item.PLATFORM = item.pLAT; // 平台类型
-            item.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ECODE; // 退回物流公司
-            item.IS_RECEIVE_CONFIRM =
-              item.IS_RECEIVE_CONFIRM == 0 ? "否" : "是"; // 是否确认收货
-            // item.WMS_CANCEL_STATUS = item.WMS_CANCEL_STATUS == 0 ? '未撤回' : '已撤回'; // WMS撤回状态
-            if (item.WMS_CANCEL_STATUS == 0) item.WMS_CANCEL_STATUS = "未撤回";
-            else if (item.WMS_CANCEL_STATUS == 1)
-              item.WMS_CANCEL_STATUS = "已撤回";
-            else if (item.WMS_CANCEL_STATUS == 2)
-              item.WMS_CANCEL_STATUS = "撤回失败";
-            item.IS_BACK = item.IS_BACK == 0 ? "否" : "是"; // 是否原退
-            item.IS_MANUAL_AUDIT = item.IS_MANUAL_AUDIT == 0 ? "否" : "是"; // 是否手工审核
-            // item.IS_TOAG = item.IS_TOAG == 0 ? '否' : '是'; // 是否传AG
-            if (item.IS_TOAG == 0) {
-              item.IS_TOAG = "未传";
-            } else if (item.IS_TOAG == 1) {
-              item.IS_TOAG = "已传";
-            } else if (item.IS_TOAG == 2) {
-              item.IS_TOAG = "失败";
-            } else if (item.IS_TOAG == 3) {
-              item.IS_TOAG = "不传";
-            }
-            // 0未传WMS，1传WMS中，2传WMS成功，3传WMS失败;
-            if (item.IS_TOWMS == 0) {
-              item.IS_TOWMS = "未传WMS";
-            } else if (item.IS_TOWMS == 1) {
-              item.IS_TOWMS = "传WMS中";
-            } else if (item.IS_TOWMS == 2) {
-              item.IS_TOWMS = "传WMS成功";
-            } else if (item.IS_TOWMS == 3) {
-              item.IS_TOWMS = "传WMS失败";
-            }
-            // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否传wms
+      this.$network
+        .axios({
+          url: "/api/cs/oc/oms/v1/querySalesReturn",
+          method: "post",
+          data: Object.assign(param, _this.formConfig.formValue)
+        })
+        .then(res => {
+          if (res.data.code == 0 && res.data.data.queryResult.length) {
+            _this.agTableConfig.agLoading = false;
+            _this.agTableConfig.rowData = res.data.data.queryResult;
+            _this.agTableConfig.pagenation.total = res.data.data.totalNum;
+            for (let i = 0; i < _this.agTableConfig.rowData.length; i++) {
+              let item = _this.agTableConfig.rowData[i];
+              if (item.MODIFIEDDATE)
+                item.MODIFIEDDATE = publicMethodsUtil.DatesTime(
+                  item.MODIFIEDDATE
+                ); // 修改时间
+              if (item.IN_TIME)
+                item.IN_TIME = publicMethodsUtil.DatesTime(item.IN_TIME); // 入库时间
+              if (item.AUDIT_TIME)
+                item.AUDIT_TIME = publicMethodsUtil.DatesTime(item.AUDIT_TIME); // 审核时间
+              if (item.LAST_UPDATE_TIME)
+                item.LAST_UPDATE_TIME = publicMethodsUtil.DatesTime(
+                  item.LAST_UPDATE_TIME
+                ); // 退款平台最后修改时间
+              if (item.RETURN_CREATE_TIME)
+                item.RETURN_CREATE_TIME = publicMethodsUtil.DatesTime(
+                  item.RETURN_CREATE_TIME
+                ); // 退款创建时间
+              if (item.CREATIONDATE)
+                item.CREATIONDATE = publicMethodsUtil.DatesTime(
+                  item.CREATIONDATE
+                ); // 创建时间
+              item.RETURN_STATUS = item.rETURNNAME; // 退单状态
+              item.IS_ADD = item.IS_ADD == 0 ? "否" : "是"; // 是否手工新增
+              if (item.INVENTED_STATUS == 0) {
+                item.INVENTED_STATUS = "未虚拟入库";
+              } else if (item.INVENTED_STATUS == 1) {
+                item.INVENTED_STATUS = "虚拟入库未入库";
+              } else if (item.INVENTED_STATUS == 2) {
+                item.INVENTED_STATUS = "虚拟入库已入库";
+              }
+              item.PLATFORM = item.pLAT; // 平台类型
+              item.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ECODE; // 退回物流公司
+              item.IS_RECEIVE_CONFIRM =
+                item.IS_RECEIVE_CONFIRM == 0 ? "否" : "是"; // 是否确认收货
+              // item.WMS_CANCEL_STATUS = item.WMS_CANCEL_STATUS == 0 ? '未撤回' : '已撤回'; // WMS撤回状态
+              if (item.WMS_CANCEL_STATUS == 0)
+                item.WMS_CANCEL_STATUS = "未撤回";
+              else if (item.WMS_CANCEL_STATUS == 1)
+                item.WMS_CANCEL_STATUS = "已撤回";
+              else if (item.WMS_CANCEL_STATUS == 2)
+                item.WMS_CANCEL_STATUS = "撤回失败";
+              item.IS_BACK = item.IS_BACK == 0 ? "否" : "是"; // 是否原退
+              item.IS_MANUAL_AUDIT = item.IS_MANUAL_AUDIT == 0 ? "否" : "是"; // 是否手工审核
+              // item.IS_TOAG = item.IS_TOAG == 0 ? '否' : '是'; // 是否传AG
+              if (item.IS_TOAG == 0) {
+                item.IS_TOAG = "未传";
+              } else if (item.IS_TOAG == 1) {
+                item.IS_TOAG = "已传";
+              } else if (item.IS_TOAG == 2) {
+                item.IS_TOAG = "失败";
+              } else if (item.IS_TOAG == 3) {
+                item.IS_TOAG = "不传";
+              }
+              // 0未传WMS，1传WMS中，2传WMS成功，3传WMS失败;
+              if (item.IS_TOWMS == 0) {
+                item.IS_TOWMS = "未传WMS";
+              } else if (item.IS_TOWMS == 1) {
+                item.IS_TOWMS = "传WMS中";
+              } else if (item.IS_TOWMS == 2) {
+                item.IS_TOWMS = "传WMS成功";
+              } else if (item.IS_TOWMS == 3) {
+                item.IS_TOWMS = "传WMS失败";
+              }
+              // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否传wms
 
-            // 0无次品调拨，1次品未调拨，2次品已调拨
-            if (item.RESERVE_BIGINT07 === 0) {
-              item.RESERVE_BIGINT07 = "无次品调拨";
-            } else if (item.RESERVE_BIGINT07 === 1) {
-              item.RESERVE_BIGINT07 = "次品未调拨";
-            } else if (item.RESERVE_BIGINT07 === 2) {
-              item.RESERVE_BIGINT07 = "次品已调拨";
+              // 0无次品调拨，1次品未调拨，2次品已调拨
+              if (item.RESERVE_BIGINT07 === 0) {
+                item.RESERVE_BIGINT07 = "无次品调拨";
+              } else if (item.RESERVE_BIGINT07 === 1) {
+                item.RESERVE_BIGINT07 = "次品未调拨";
+              } else if (item.RESERVE_BIGINT07 === 2) {
+                item.RESERVE_BIGINT07 = "次品已调拨";
+              }
+              item.RETURN_REASON = item.RETURN_REASON; // 退货原因
+              item.BILL_TYPE = item.BILL_TYPE == 1 ? "退货单" : "退换货单";
+              item.OWNERID = item.OWNERNAME;
+              item.IS_CHECK = item.IS_CHECK == 0 ? "否" : "是"; // 是否已匹配
+              item.IS_NOTLOGMBER = item.IS_NOTLOGMBER == 0 ? "否" : "是"; // 是否缺少运单号
+              item.IS_EXAMINE = item.IS_EXAMINE == 0 ? "否" : "是"; // 是否提交审核
+              item.ISACTIVE = item.ISACTIVE == 0 ? "否" : "是"; // 是否激活
+              // item.IS_TODRP = item.IS_TODRP == 0 ? '否' : '是'; // 是否生成零售
+              if (item.IS_TODRP == 0) {
+                item.IS_TODRP = "未生成";
+              } else if (item.IS_TODRP == 1) {
+                item.IS_TODRP = "已生成";
+              } else if (item.IS_TODRP == 2) {
+                item.IS_TODRP = "生成失败";
+              }
+              item.IS_REFUND = item.IS_REFUND == 0 ? "否" : "是"; // 是否
+              item.IS_RESERVED = item.IS_RESERVED == 0 ? "否" : "是"; // 是否
+              item.IS_INSTORAGE = item.IS_INSTORAGE == 0 ? "否" : "是"; // 是否
+              // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否
+              item.IS_TRANSFER = item.IS_TRANSFER == 0 ? "否" : "是"; // 是否
+              item.IS_FORCE = item.IS_FORCE == 0 ? "否" : "是"; // 是否
+              _this.$refs.agGridChild.agGridTable(
+                _this.agTableConfig.columnDefs,
+                _this.agTableConfig.rowData
+              );
             }
-            item.RETURN_REASON = item.RETURN_REASON; // 退货原因
-            item.BILL_TYPE = item.BILL_TYPE == 1 ? "退货单" : "退换货单";
-            item.OWNERID = item.OWNERNAME;
-            item.IS_CHECK = item.IS_CHECK == 0 ? "否" : "是"; // 是否已匹配
-            item.IS_NOTLOGMBER = item.IS_NOTLOGMBER == 0 ? "否" : "是"; // 是否缺少运单号
-            item.IS_EXAMINE = item.IS_EXAMINE == 0 ? "否" : "是"; // 是否提交审核
-            item.ISACTIVE = item.ISACTIVE == 0 ? "否" : "是"; // 是否激活
-            // item.IS_TODRP = item.IS_TODRP == 0 ? '否' : '是'; // 是否生成零售
-            if (item.IS_TODRP == 0) {
-              item.IS_TODRP = "未生成";
-            } else if (item.IS_TODRP == 1) {
-              item.IS_TODRP = "已生成";
-            } else if (item.IS_TODRP == 2) {
-              item.IS_TODRP = "生成失败";
-            }
-            item.IS_REFUND = item.IS_REFUND == 0 ? "否" : "是"; // 是否
-            item.IS_RESERVED = item.IS_RESERVED == 0 ? "否" : "是"; // 是否
-            item.IS_INSTORAGE = item.IS_INSTORAGE == 0 ? "否" : "是"; // 是否
-            // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否
-            item.IS_TRANSFER = item.IS_TRANSFER == 0 ? "否" : "是"; // 是否
-            item.IS_FORCE = item.IS_FORCE == 0 ? "否" : "是"; // 是否
-            _this.$refs.agGridChild.agGridTable(
-              _this.agTableConfig.columnDefs,
-              _this.agTableConfig.rowData
-            );
+          } else {
+            _this.agTableConfig.rowData = [];
+            _this.agTableConfig.pagenation.total = 0;
+            _this.agTableConfig.agLoading = false;
           }
-        } else {
-          _this.agTableConfig.rowData = [];
-          _this.agTableConfig.pagenation.total = 0;
-          _this.agTableConfig.agLoading = false;
-        }
-      });
+        });
     },
     // 客服工作台跳转获取列表数据
     getListWork(status = "") {
@@ -1181,119 +1185,122 @@ export default {
           _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID =
             returnParam.CP_C_PHY_WAREHOUSE_ID; // 入库实体仓库
       }
-      axios({
-        url: "/api/cs/oc/oms/v1/querySalesReturn",
-        method: "post",
-        data: Object.assign(param, _this.formConfig.formValue)
-      }).then(res => {
-        if (res.data.code == 0 && res.data.data.queryResult.length) {
-          _this.agTableConfig.agLoading = false;
-          _this.agTableConfig.rowData = res.data.data.queryResult;
-          _this.agTableConfig.pagenation.total = res.data.data.totalNum;
-          for (let i = 0; i < _this.agTableConfig.rowData.length; i++) {
-            let item = _this.agTableConfig.rowData[i];
-            if (item.MODIFIEDDATE)
-              item.MODIFIEDDATE = publicMethodsUtil.DatesTime(
-                item.MODIFIEDDATE
-              ); // 修改时间
-            if (item.IN_TIME)
-              item.IN_TIME = publicMethodsUtil.DatesTime(item.IN_TIME); // 入库时间
-            if (item.AUDIT_TIME)
-              item.AUDIT_TIME = publicMethodsUtil.DatesTime(item.AUDIT_TIME); // 审核时间
-            if (item.LAST_UPDATE_TIME)
-              item.LAST_UPDATE_TIME = publicMethodsUtil.DatesTime(
-                item.LAST_UPDATE_TIME
-              ); // 退款平台最后修改时间
-            if (item.RETURN_CREATE_TIME)
-              item.RETURN_CREATE_TIME = publicMethodsUtil.DatesTime(
-                item.RETURN_CREATE_TIME
-              ); // 退款创建时间
-            if (item.CREATIONDATE)
-              item.CREATIONDATE = publicMethodsUtil.DatesTime(
-                item.CREATIONDATE
-              ); // 创建时间
-            item.RETURN_STATUS = item.rETURNNAME; // 退单状态
-            item.IS_ADD = item.IS_ADD == 0 ? "否" : "是"; // 是否手工新增
-            if (item.INVENTED_STATUS == 0) {
-              item.INVENTED_STATUS = "未虚拟入库";
-            } else if (item.INVENTED_STATUS == 1) {
-              item.INVENTED_STATUS = "虚拟入库未入库";
-            } else if (item.INVENTED_STATUS == 2) {
-              item.INVENTED_STATUS = "虚拟入库已入库";
+      this.$network
+        .axios({
+          url: "/api/cs/oc/oms/v1/querySalesReturn",
+          method: "post",
+          data: Object.assign(param, _this.formConfig.formValue)
+        })
+        .then(res => {
+          if (res.data.code == 0 && res.data.data.queryResult.length) {
+            _this.agTableConfig.agLoading = false;
+            _this.agTableConfig.rowData = res.data.data.queryResult;
+            _this.agTableConfig.pagenation.total = res.data.data.totalNum;
+            for (let i = 0; i < _this.agTableConfig.rowData.length; i++) {
+              let item = _this.agTableConfig.rowData[i];
+              if (item.MODIFIEDDATE)
+                item.MODIFIEDDATE = publicMethodsUtil.DatesTime(
+                  item.MODIFIEDDATE
+                ); // 修改时间
+              if (item.IN_TIME)
+                item.IN_TIME = publicMethodsUtil.DatesTime(item.IN_TIME); // 入库时间
+              if (item.AUDIT_TIME)
+                item.AUDIT_TIME = publicMethodsUtil.DatesTime(item.AUDIT_TIME); // 审核时间
+              if (item.LAST_UPDATE_TIME)
+                item.LAST_UPDATE_TIME = publicMethodsUtil.DatesTime(
+                  item.LAST_UPDATE_TIME
+                ); // 退款平台最后修改时间
+              if (item.RETURN_CREATE_TIME)
+                item.RETURN_CREATE_TIME = publicMethodsUtil.DatesTime(
+                  item.RETURN_CREATE_TIME
+                ); // 退款创建时间
+              if (item.CREATIONDATE)
+                item.CREATIONDATE = publicMethodsUtil.DatesTime(
+                  item.CREATIONDATE
+                ); // 创建时间
+              item.RETURN_STATUS = item.rETURNNAME; // 退单状态
+              item.IS_ADD = item.IS_ADD == 0 ? "否" : "是"; // 是否手工新增
+              if (item.INVENTED_STATUS == 0) {
+                item.INVENTED_STATUS = "未虚拟入库";
+              } else if (item.INVENTED_STATUS == 1) {
+                item.INVENTED_STATUS = "虚拟入库未入库";
+              } else if (item.INVENTED_STATUS == 2) {
+                item.INVENTED_STATUS = "虚拟入库已入库";
+              }
+              item.PLATFORM = item.pLAT; // 平台类型
+              item.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ECODE; // 退回物流公司
+              item.IS_RECEIVE_CONFIRM =
+                item.IS_RECEIVE_CONFIRM == 0 ? "否" : "是"; // 是否确认收货
+              // item.WMS_CANCEL_STATUS = item.WMS_CANCEL_STATUS == 0 ? '未撤回' : '已撤回'; // WMS撤回状态
+              if (item.WMS_CANCEL_STATUS == 0)
+                item.WMS_CANCEL_STATUS = "未撤回";
+              else if (item.WMS_CANCEL_STATUS == 1)
+                item.WMS_CANCEL_STATUS = "已撤回";
+              else if (item.WMS_CANCEL_STATUS == 2)
+                item.WMS_CANCEL_STATUS = "撤回失败";
+              item.IS_BACK = item.IS_BACK == 0 ? "否" : "是"; // 是否原退
+              item.IS_MANUAL_AUDIT = item.IS_MANUAL_AUDIT == 0 ? "否" : "是"; // 是否手工审核
+              // item.IS_TOAG = item.IS_TOAG == 0 ? '否' : '是'; // 是否传AG
+              if (item.IS_TOAG == 0) {
+                item.IS_TOAG = "未传";
+              } else if (item.IS_TOAG == 1) {
+                item.IS_TOAG = "已传";
+              } else if (item.IS_TOAG == 2) {
+                item.IS_TOAG = "失败";
+              } else if (item.IS_TOAG == 3) {
+                item.IS_TOAG = "不传";
+              }
+              // 0未传WMS，1传WMS中，2传WMS成功，3传WMS失败;
+              if (item.IS_TOWMS == 0) {
+                item.IS_TOWMS = "未传WMS";
+              } else if (item.IS_TOWMS == 1) {
+                item.IS_TOWMS = "传WMS中";
+              } else if (item.IS_TOWMS == 2) {
+                item.IS_TOWMS = "传WMS成功";
+              } else if (item.IS_TOWMS == 3) {
+                item.IS_TOWMS = "传WMS失败";
+              }
+              // 0无次品调拨，1次品未调拨，2次品已调拨
+              if (item.RESERVE_BIGINT07 === 0) {
+                item.RESERVE_BIGINT07 = "无次品调拨";
+              } else if (item.RESERVE_BIGINT07 === 1) {
+                item.RESERVE_BIGINT07 = "次品未调拨";
+              } else if (item.RESERVE_BIGINT07 === 2) {
+                item.RESERVE_BIGINT07 = "次品已调拨";
+              }
+              // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否传wms
+              item.RETURN_REASON = item.RETURN_REASON; // 退货原因
+              item.BILL_TYPE = item.BILL_TYPE == 1 ? "退货单" : "退换货单";
+              item.OWNERID = item.OWNERNAME;
+              item.IS_CHECK = item.IS_CHECK == 0 ? "否" : "是"; // 是否已匹配
+              item.IS_NOTLOGMBER = item.IS_NOTLOGMBER == 0 ? "否" : "是"; // 是否缺少运单号
+              item.IS_EXAMINE = item.IS_EXAMINE == 0 ? "否" : "是"; // 是否提交审核
+              item.ISACTIVE = item.ISACTIVE == 0 ? "否" : "是"; // 是否激活
+              // item.IS_TODRP = item.IS_TODRP == 0 ? '否' : '是'; // 是否生成零售
+              if (item.IS_TODRP == 0) {
+                item.IS_TODRP = "未生成";
+              } else if (item.IS_TODRP == 1) {
+                item.IS_TODRP = "已生成";
+              } else if (item.IS_TODRP == 2) {
+                item.IS_TODRP = "生成失败";
+              }
+              item.IS_REFUND = item.IS_REFUND == 0 ? "否" : "是"; // 是否
+              item.IS_RESERVED = item.IS_RESERVED == 0 ? "否" : "是"; // 是否
+              item.IS_INSTORAGE = item.IS_INSTORAGE == 0 ? "否" : "是"; // 是否
+              // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否
+              item.IS_TRANSFER = item.IS_TRANSFER == 0 ? "否" : "是"; // 是否
+              item.IS_FORCE = item.IS_FORCE == 0 ? "否" : "是"; // 是否
             }
-            item.PLATFORM = item.pLAT; // 平台类型
-            item.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ECODE; // 退回物流公司
-            item.IS_RECEIVE_CONFIRM =
-              item.IS_RECEIVE_CONFIRM == 0 ? "否" : "是"; // 是否确认收货
-            // item.WMS_CANCEL_STATUS = item.WMS_CANCEL_STATUS == 0 ? '未撤回' : '已撤回'; // WMS撤回状态
-            if (item.WMS_CANCEL_STATUS == 0) item.WMS_CANCEL_STATUS = "未撤回";
-            else if (item.WMS_CANCEL_STATUS == 1)
-              item.WMS_CANCEL_STATUS = "已撤回";
-            else if (item.WMS_CANCEL_STATUS == 2)
-              item.WMS_CANCEL_STATUS = "撤回失败";
-            item.IS_BACK = item.IS_BACK == 0 ? "否" : "是"; // 是否原退
-            item.IS_MANUAL_AUDIT = item.IS_MANUAL_AUDIT == 0 ? "否" : "是"; // 是否手工审核
-            // item.IS_TOAG = item.IS_TOAG == 0 ? '否' : '是'; // 是否传AG
-            if (item.IS_TOAG == 0) {
-              item.IS_TOAG = "未传";
-            } else if (item.IS_TOAG == 1) {
-              item.IS_TOAG = "已传";
-            } else if (item.IS_TOAG == 2) {
-              item.IS_TOAG = "失败";
-            } else if (item.IS_TOAG == 3) {
-              item.IS_TOAG = "不传";
-            }
-            // 0未传WMS，1传WMS中，2传WMS成功，3传WMS失败;
-            if (item.IS_TOWMS == 0) {
-              item.IS_TOWMS = "未传WMS";
-            } else if (item.IS_TOWMS == 1) {
-              item.IS_TOWMS = "传WMS中";
-            } else if (item.IS_TOWMS == 2) {
-              item.IS_TOWMS = "传WMS成功";
-            } else if (item.IS_TOWMS == 3) {
-              item.IS_TOWMS = "传WMS失败";
-            }
-            // 0无次品调拨，1次品未调拨，2次品已调拨
-            if (item.RESERVE_BIGINT07 === 0) {
-              item.RESERVE_BIGINT07 = "无次品调拨";
-            } else if (item.RESERVE_BIGINT07 === 1) {
-              item.RESERVE_BIGINT07 = "次品未调拨";
-            } else if (item.RESERVE_BIGINT07 === 2) {
-              item.RESERVE_BIGINT07 = "次品已调拨";
-            }
-            // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否传wms
-            item.RETURN_REASON = item.RETURN_REASON; // 退货原因
-            item.BILL_TYPE = item.BILL_TYPE == 1 ? "退货单" : "退换货单";
-            item.OWNERID = item.OWNERNAME;
-            item.IS_CHECK = item.IS_CHECK == 0 ? "否" : "是"; // 是否已匹配
-            item.IS_NOTLOGMBER = item.IS_NOTLOGMBER == 0 ? "否" : "是"; // 是否缺少运单号
-            item.IS_EXAMINE = item.IS_EXAMINE == 0 ? "否" : "是"; // 是否提交审核
-            item.ISACTIVE = item.ISACTIVE == 0 ? "否" : "是"; // 是否激活
-            // item.IS_TODRP = item.IS_TODRP == 0 ? '否' : '是'; // 是否生成零售
-            if (item.IS_TODRP == 0) {
-              item.IS_TODRP = "未生成";
-            } else if (item.IS_TODRP == 1) {
-              item.IS_TODRP = "已生成";
-            } else if (item.IS_TODRP == 2) {
-              item.IS_TODRP = "生成失败";
-            }
-            item.IS_REFUND = item.IS_REFUND == 0 ? "否" : "是"; // 是否
-            item.IS_RESERVED = item.IS_RESERVED == 0 ? "否" : "是"; // 是否
-            item.IS_INSTORAGE = item.IS_INSTORAGE == 0 ? "否" : "是"; // 是否
-            // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否
-            item.IS_TRANSFER = item.IS_TRANSFER == 0 ? "否" : "是"; // 是否
-            item.IS_FORCE = item.IS_FORCE == 0 ? "否" : "是"; // 是否
+            _this.$refs.agGridChild.agGridTable(
+              _this.agTableConfig.columnDefs,
+              _this.agTableConfig.rowData
+            );
+          } else {
+            _this.agTableConfig.rowData = [];
+            _this.agTableConfig.pagenation.total = 0;
+            _this.agTableConfig.agLoading = false;
           }
-          _this.$refs.agGridChild.agGridTable(
-            _this.agTableConfig.columnDefs,
-            _this.agTableConfig.rowData
-          );
-        } else {
-          _this.agTableConfig.rowData = [];
-          _this.agTableConfig.pagenation.total = 0;
-          _this.agTableConfig.agLoading = false;
-        }
-      });
+        });
     },
     // 切换table
     labelClick(item, index) {
@@ -1416,29 +1423,31 @@ export default {
         this.$Message.error("请选中一项修改!");
         return;
       }
-      axios({
-        url: "/p/cs/getScanIncomingInfo",
-        method: "post",
-        cancelToken: true,
-        data: { ID: this.returnSelectData[0].ID }
-      }).then(res => {
-        if (res.data.code === 0) {
-          this.$store.commit("customize/TabOpen", {
-            id: -1, //单据id
-            type: "action", //类型action
-            name: "scanIn", //文件名
-            label: "扫描入库", //tab中文名
-            query: Object.assign({
-              id: -1,
-              returnId: this.returnSelectData[0].ID, //单据id
-              isOrderHrefReturn: "order",
-              tabTitle: "扫描入库" //tab中文名
-            }) //带的参数
-          });
-        } else {
-          this.$Message.warning("此退换单状态不允许扫描入库,请重新选择！");
-        }
-      });
+      this.$network
+        .axios({
+          url: "/p/cs/getScanIncomingInfo",
+          method: "post",
+          cancelToken: true,
+          data: { ID: this.returnSelectData[0].ID }
+        })
+        .then(res => {
+          if (res.data.code === 0) {
+            this.$store.commit("customize/TabOpen", {
+              id: -1, //单据id
+              type: "action", //类型action
+              name: "scanIn", //文件名
+              label: "扫描入库", //tab中文名
+              query: Object.assign({
+                id: -1,
+                returnId: this.returnSelectData[0].ID, //单据id
+                isOrderHrefReturn: "order",
+                tabTitle: "扫描入库" //tab中文名
+              }) //带的参数
+            });
+          } else {
+            this.$Message.warning("此退换单状态不允许扫描入库,请重新选择！");
+          }
+        });
     },
     // 售后审核接口
     afterAudit() {
@@ -1472,21 +1481,23 @@ export default {
         okText: "取消",
         cancelText: "确定",
         onCancel: () => {
-          axios({
-            url: "/p/cs/chargebackcheck",
-            method: "post",
-            cancelToken: true,
-            data: { ID: ids.join(",") }
-          }).then(res => {
-            if (res.data.code == 0) {
-              let mes = res.data.message || "售后审核成功！";
-              _this.$Message.success(mes);
-              _this.getList(_this.statusTab);
-            } else {
-              let err = res.data.message || "售后审核失败！";
-              _this.$Message.error(err);
-            }
-          });
+          this.$network
+            .axios({
+              url: "/p/cs/chargebackcheck",
+              method: "post",
+              cancelToken: true,
+              data: { ID: ids.join(",") }
+            })
+            .then(res => {
+              if (res.data.code == 0) {
+                let mes = res.data.message || "售后审核成功！";
+                _this.$Message.success(mes);
+                _this.getList(_this.statusTab);
+              } else {
+                let err = res.data.message || "售后审核失败！";
+                _this.$Message.error(err);
+              }
+            });
         }
       });
     },
@@ -1524,55 +1535,59 @@ export default {
         cancelText: "确定",
         onCancel: () => {
           this.isSaveLoading = true;
-          axios({
-            url: "/p/cs/OcCancelChangingOrRefund",
-            method: "post",
-            cancelToken: true,
-            data: { ids: ids }
-          }).then(res => {
-            this.isSaveLoading = false;
-            if (res.data.code === 0) {
-              if (res.data.data === "comfirmFlag") {
-                this.$Modal.info({
-                  title: "提示",
-                  content:
-                    "换货订单的状态为配货中或已经发货,是否确认直接取消退货？",
-                  mask: true,
-                  showCancel: true,
-                  okText: "确定",
-                  cancelText: "取消",
-                  onOk: () => {
-                    this.isSaveLoading = true;
-                    axios({
-                      url: "/p/cs/OcCancelChangingOrRefund",
-                      method: "post",
-                      cancelToken: true,
-                      data: { ids: ids, comfirmFlag: "comfirmFlag" }
-                    }).then(res => {
-                      this.isSaveLoading = false;
-                      if (res.data.code === 0) {
-                        this.$Message.success(res.data.message);
-                        setTimeout(() => {
-                          this.getList(this.statusTab);
-                        }, 500);
-                      } else {
-                        let err = res.data.message || "取消失败！";
-                        this.$Message.info(err);
-                      }
-                    });
-                  }
-                });
+          this.$network
+            .axios({
+              url: "/p/cs/OcCancelChangingOrRefund",
+              method: "post",
+              cancelToken: true,
+              data: { ids: ids }
+            })
+            .then(res => {
+              this.isSaveLoading = false;
+              if (res.data.code === 0) {
+                if (res.data.data === "comfirmFlag") {
+                  this.$Modal.info({
+                    title: "提示",
+                    content:
+                      "换货订单的状态为配货中或已经发货,是否确认直接取消退货？",
+                    mask: true,
+                    showCancel: true,
+                    okText: "确定",
+                    cancelText: "取消",
+                    onOk: () => {
+                      this.isSaveLoading = true;
+                      this.$network
+                        .axios({
+                          url: "/p/cs/OcCancelChangingOrRefund",
+                          method: "post",
+                          cancelToken: true,
+                          data: { ids: ids, comfirmFlag: "comfirmFlag" }
+                        })
+                        .then(res => {
+                          this.isSaveLoading = false;
+                          if (res.data.code === 0) {
+                            this.$Message.success(res.data.message);
+                            setTimeout(() => {
+                              this.getList(this.statusTab);
+                            }, 500);
+                          } else {
+                            let err = res.data.message || "取消失败！";
+                            this.$Message.info(err);
+                          }
+                        });
+                    }
+                  });
+                } else {
+                  this.$Message.success(res.data.message);
+                  setTimeout(() => {
+                    this.getList(this.statusTab);
+                  }, 500);
+                }
               } else {
-                this.$Message.success(res.data.message);
-                setTimeout(() => {
-                  this.getList(this.statusTab);
-                }, 500);
+                let err = res.data.message || "取消失败！";
+                this.$Message.info(err);
               }
-            } else {
-              let err = res.data.message || "取消失败！";
-              this.$Message.info(err);
-            }
-          });
+            });
         }
       });
     },
@@ -1594,22 +1609,24 @@ export default {
         okText: "取消",
         cancelText: "确定",
         onCancel: () => {
-          axios({
-            url: "/p/cs/updateVirtualLibrary",
-            method: "post",
-            cancelToken: true,
-            data: { ID: this.returnSelectData[0].ID }
-          }).then(res => {
-            if (res.data.code == 0) {
-              this.$Message.success(res.data.message);
-              setTimeout(() => {
-                this.getList(this.statusTab);
-              }, 500);
-            } else {
-              let err = res.data.message || "虚拟入库失败！";
-              this.$Message.info(err);
-            }
-          });
+          this.$network
+            .axios({
+              url: "/p/cs/updateVirtualLibrary",
+              method: "post",
+              cancelToken: true,
+              data: { ID: this.returnSelectData[0].ID }
+            })
+            .then(res => {
+              if (res.data.code == 0) {
+                this.$Message.success(res.data.message);
+                setTimeout(() => {
+                  this.getList(this.statusTab);
+                }, 500);
+              } else {
+                let err = res.data.message || "虚拟入库失败！";
+                this.$Message.info(err);
+              }
+            });
         }
       });
     },
@@ -1626,20 +1643,22 @@ export default {
       this.returnSelectData.forEach(item => {
         ids.push(item.ID);
       });
-      axios({
-        url: "/p/cs/virtualWarehouseStorage",
-        method: "post",
-        cancelToken: true,
-        data: { ids: ids }
-      }).then(res => {
-        if (res.data.code === 0) {
-          this.getList(this.statusTab);
-          this.$Message.success(res.data.message);
-        } else {
-          let err = res.data.message || "虚拟仓库入库失败！";
-          this.$Message.info(err);
-        }
-      });
+      this.$network
+        .axios({
+          url: "/p/cs/virtualWarehouseStorage",
+          method: "post",
+          cancelToken: true,
+          data: { ids: ids }
+        })
+        .then(res => {
+          if (res.data.code === 0) {
+            this.getList(this.statusTab);
+            this.$Message.success(res.data.message);
+          } else {
+            let err = res.data.message || "虚拟仓库入库失败！";
+            this.$Message.info(err);
+          }
+        });
     },
     // 取消自动退款
     cancelRefund() {
@@ -1647,20 +1666,22 @@ export default {
         this.$Message.error("请选中一项修改!");
         return;
       }
-      axios({
-        url: "/p/cs/cancelautorefund",
-        method: "post",
-        cancelToken: true,
-        data: { ID: this.returnSelectData[0].ID }
-      }).then(res => {
-        if (res.data.code === 0) {
-          this.getList(this.statusTab);
-          this.$Message.success(res.data.message);
-        } else {
-          let err = res.data.message || "取消自动退款失败！";
-          this.$Message.info(err);
-        }
-      });
+      this.$network
+        .axios({
+          url: "/p/cs/cancelautorefund",
+          method: "post",
+          cancelToken: true,
+          data: { ID: this.returnSelectData[0].ID }
+        })
+        .then(res => {
+          if (res.data.code === 0) {
+            this.getList(this.statusTab);
+            this.$Message.success(res.data.message);
+          } else {
+            let err = res.data.message || "取消自动退款失败！";
+            this.$Message.info(err);
+          }
+        });
     },
     // 修改备注
     bounced() {
@@ -1758,24 +1779,26 @@ export default {
         okText: "取消",
         cancelText: "确定",
         onCancel: () => {
-          axios({
-            url: "/p/cs/updateReturnBOrder",
-            method: "post",
-            cancelToken: true,
-            data: { ids: ids }
-          }).then(res => {
-            if (res.data.code === 0) {
-              this.getList(this.statusTab);
-              this.$Message.success(res.data.message);
-              if (res.data.data.length) {
-                this.errModal = true;
-                this.errdataList = res.data.data;
+          this.$network
+            .axios({
+              url: "/p/cs/updateReturnBOrder",
+              method: "post",
+              cancelToken: true,
+              data: { ids: ids }
+            })
+            .then(res => {
+              if (res.data.code === 0) {
+                this.getList(this.statusTab);
+                this.$Message.success(res.data.message);
+                if (res.data.data.length) {
+                  this.errModal = true;
+                  this.errdataList = res.data.data;
+                }
+              } else {
+                let err = res.data.message || "批量原退失败！";
+                this.$Message.info(err);
               }
-            } else {
-              let err = res.data.message || "批量原退失败！";
-              this.$Message.info(err);
-            }
-          });
+            });
         }
       });
     },
@@ -1801,20 +1824,22 @@ export default {
           ids.push(this.returnSelectData[i].ID);
         }
       }
-      axios({
-        url: "/p/cs/orderReturnRecallFromWms",
-        method: "post",
-        cancelToken: true,
-        data: { ID: ids }
-      }).then(res => {
-        if (res.data.code === 0) {
-          this.getList(this.statusTab);
-          this.$Message.success(res.data.message);
-        } else {
-          let err = res.data.message || "从wms撤回失败！";
-          this.$Message.info(err);
-        }
-      });
+      this.$network
+        .axios({
+          url: "/p/cs/orderReturnRecallFromWms",
+          method: "post",
+          cancelToken: true,
+          data: { ID: ids }
+        })
+        .then(res => {
+          if (res.data.code === 0) {
+            this.getList(this.statusTab);
+            this.$Message.success(res.data.message);
+          } else {
+            let err = res.data.message || "从wms撤回失败！";
+            this.$Message.info(err);
+          }
+        });
     },
     // 重传wms
     againWMS() {
@@ -1826,20 +1851,22 @@ export default {
       for (let i = 0; i < this.returnSelectData.length; i++) {
         ids.push(this.returnSelectData[i].ID);
       }
-      axios({
-        url: "/p/cs/retransmissionWms",
-        method: "post",
-        cancelToken: true,
-        data: { returnOrderIds: ids.join(",") }
-      }).then(res => {
-        if (res.data.code === 0) {
-          this.getList(this.statusTab);
-          this.$Message.success(res.data.message);
-        } else {
-          let err = res.data.message || "重WMS失败！";
-          this.$Message.info(err);
-        }
-      });
+      this.$network
+        .axios({
+          url: "/p/cs/retransmissionWms",
+          method: "post",
+          cancelToken: true,
+          data: { returnOrderIds: ids.join(",") }
+        })
+        .then(res => {
+          if (res.data.code === 0) {
+            this.getList(this.statusTab);
+            this.$Message.success(res.data.message);
+          } else {
+            let err = res.data.message || "重WMS失败！";
+            this.$Message.info(err);
+          }
+        });
     },
     // 强制完成
     forcedCompletion() {
@@ -1866,20 +1893,22 @@ export default {
         okText: "取消",
         cancelText: "确定",
         onCancel: () => {
-          axios({
-            url: "/p/cs/forcedCompletion",
-            method: "post",
-            cancelToken: true,
-            data: { ids: ids }
-          }).then(res => {
-            if (res.data.code === 0) {
-              this.getList(this.statusTab);
-              this.$Message.success(res.data.message);
-            } else {
-              let err = res.data.message || "强制完成失败！";
-              this.$Message.info(err);
-            }
-          });
+          this.$network
+            .axios({
+              url: "/p/cs/forcedCompletion",
+              method: "post",
+              cancelToken: true,
+              data: { ids: ids }
+            })
+            .then(res => {
+              if (res.data.code === 0) {
+                this.getList(this.statusTab);
+                this.$Message.success(res.data.message);
+              } else {
+                let err = res.data.message || "强制完成失败！";
+                this.$Message.info(err);
+              }
+            });
         }
       });
     },
@@ -1928,23 +1957,25 @@ export default {
           ids.push(_this.returnSelectData[i].ID);
         }
         let idList = { idList: ids };
-        axios({
-          url: "/p/cs/exportReturnOrder",
-          method: "post",
-          cancelToken: true,
-          data: idList
-        }).then(res => {
-          _this.isExport = false;
-          if (res.data.code == 0 && res.data.data !== null) {
-            let mes = res.data.message || "导出成功！";
-            _this.$Message.success(mes);
-            _this.downloadUrlFile(res.data.data);
-            // return (window.location = res.data.data);
-          } else {
-            let err = res.data.message || "失败！";
-            _this.$Message.error(err);
-          }
-        });
+        this.$network
+          .axios({
+            url: "/p/cs/exportReturnOrder",
+            method: "post",
+            cancelToken: true,
+            data: idList
+          })
+          .then(res => {
+            _this.isExport = false;
+            if (res.data.code == 0 && res.data.data !== null) {
+              let mes = res.data.message || "导出成功！";
+              _this.$Message.success(mes);
+              _this.downloadUrlFile(res.data.data);
+              // return (window.location = res.data.data);
+            } else {
+              let err = res.data.message || "失败！";
+              _this.$Message.error(err);
+            }
+          });
       } else {
         if (_this.agTableConfig.rowData.length === 0)
           return _this.$Message.error("列表没有数据,无法导出!");
@@ -1981,23 +2012,25 @@ export default {
       if (status) {
         _this.formConfig.formValue.RETURN_STATUS = status;
       }
-      axios({
-        url: "/p/cs/exportReturnOrder",
-        method: "post",
-        cancelToken: true,
-        data: Object.assign(param, _this.formConfig.formValue)
-      }).then(res => {
-        _this.isExport = false;
-        if (res.data.code == 0 && res.data.data !== null) {
-          let mes = res.data.message || "导出成功！";
-          _this.$Message.success(mes);
-          // return (window.location = res.data.data);
-          _this.downloadUrlFile(res.data.data);
-        } else {
-          let err = res.data.message || "失败！";
-          _this.$Message.error(err);
-        }
-      });
+      this.$network
+        .axios({
+          url: "/p/cs/exportReturnOrder",
+          method: "post",
+          cancelToken: true,
+          data: Object.assign(param, _this.formConfig.formValue)
+        })
+        .then(res => {
+          _this.isExport = false;
+          if (res.data.code == 0 && res.data.data !== null) {
+            let mes = res.data.message || "导出成功！";
+            _this.$Message.success(mes);
+            // return (window.location = res.data.data);
+            _this.downloadUrlFile(res.data.data);
+          } else {
+            let err = res.data.message || "失败！";
+            _this.$Message.error(err);
+          }
+        });
     },
     // 导出
     downloadUrlFile(src) {
@@ -2020,7 +2053,7 @@ export default {
 <style lang="less">
 .returnGoodList {
   .salesTable {
-    .jordanLabel {
+    .businessLabel {
       margin-top: 8px;
     }
     .tableBox {

@@ -1,13 +1,7 @@
 <template>
   <div class="downLoadTaobaoOrder" style="width:430px;padding-right:20px">
-    <jordanForm :formConfig="downLoadFormConfig">
-      <!-- 如果内容全自定义脱离form时使用 则插入导入功能 -->
-      <template #compile="{ rowData }">
-        <div class="import-box" @click="importBoxOpen(rowData.item)">
-          [导入]
-        </div>
-      </template>
-    </jordanForm>
+    <businessForm :formConfig="downLoadFormConfig">
+    </businessForm>
     <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
     <!-- 确认下载弹框 -->
     <Modal
@@ -30,14 +24,13 @@
 <script>
 import axios from "axios";
 import httpServer from 'framework/__utils__/request';
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
-import dateFuns from "@/assets/js/__utils__/date.js";
+import businessForm from "professionalComponents/businessForm";
+import jordanBtn from "professionalComponents/businessButton";
 import R3 from '@syman/burgeon-r3'
 const formConfig = file => require(`./config/${file}.js`).default;
 export default {
   components: {
-    jordanForm,
+    businessForm,
     jordanBtn
   },
   props: {
@@ -81,8 +74,8 @@ export default {
             size: "", //按钮大小
             disabled: false, //按钮禁用控制
             btnclick: () => {
-              // formConfig(this.$route.params.tableName).determine(this)
-              formConfig('IP_B_TAOBAO_ORDER').determine(this)
+              formConfig(this.$route.params.tableName).determine(this)
+              // formConfig('IP_C_VIP_PRO').determine(this)
             } //按钮点击事件
           },
           {
@@ -105,8 +98,8 @@ export default {
     if(this.$route.params.tableName == 'IP_B_JITX_DELIVERY'){
       self.downLoadFormConfig.formValue.order_status = "NEW";
     }
-    // this.downLoadFormConfig = formConfig(this.$route.params.tableName).formConfig
-    self.downLoadFormConfig = formConfig('IP_B_TAOBAO_ORDER').formConfig
+    this.downLoadFormConfig = formConfig(this.$route.params.tableName).formConfig
+    // self.downLoadFormConfig = formConfig('IP_C_VIP_PRO').formConfig
   },
   methods: {
     standardTimeConversiondateToStr(val) {
@@ -175,23 +168,6 @@ export default {
           tableName: "IP_T_CONSUMER_LOG"
         }
       });
-    },
-     // 打开导入弹窗
-    importBoxOpen(item) {
-      let _this = this;
-      this.dialogConfig = {
-        title: "导入",
-        componentData: {
-          tableName: "IP_C_STANDPLAT_PRO",
-          returnData(data) {
-            _this.pulicdownLoadConfig.formValue.sp_ids = data;
-          },
-        },
-        name: "importTable",
-        url: "publicDialog/importTable",
-        width: 600,
-      };
-      this.$refs.dialog.openConfirm();
     },
   }
 };

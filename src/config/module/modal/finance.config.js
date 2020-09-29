@@ -1,3 +1,4 @@
+// 财务中心
 export default {
   //唯品会进度账单 唯品会月结账单列表 (下载账单)
   downLoadVipBill: {

@@ -2,8 +2,8 @@
 <template>
   <div class="returnNumberPop">
     <div class="orderContent">
-      <jordanForm @oneObjs="threeObjs" :formConfig="order.orderform"></jordanForm>
-      <jordanButton :btnConfig="order.btn"></jordanButton>
+      <businessForm @oneObjs="threeObjs" :formConfig="order.orderform"></businessForm>
+      <businessButton :btnConfig="order.btn"></businessButton>
     </div>
     <jordan-action-table
       :jordanTableConfig="order.table"
@@ -12,7 +12,7 @@
       @on-select-all="onSelectAll"
       @on-select-all-cancel="onSelectAllCancel"
     ></jordan-action-table>
-    <jordanButton :btnConfig="btnConfig"></jordanButton>
+    <businessButton :btnConfig="btnConfig"></businessButton>
     <div class="wrongForce">
       <Modal
         v-model="wrong.modal"
@@ -35,15 +35,15 @@
 </template>
 <script>
 import axios from "axios";
-import jordanButton from "professionalComponents/jordanButton";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanActionTable from "professionalComponents/jordanActionTable";
+import businessButton from "professionalComponents/businessButton";
+import businessForm from "professionalComponents/businessForm";
+import businessActionTable from "professionalComponents/businessActionTable";
 import { setTimeout } from 'timers';
 export default {
   components: {
-    jordanButton,
-    jordanForm,
-    jordanActionTable,
+    businessButton,
+    businessForm,
+    businessActionTable,
   },
   data() {
     return {

@@ -1,37 +1,19 @@
 <template>
   <div style="width:400px;padding-right:20px">
-    <jordanForm :formConfig="pickorderFromConfig"></jordanForm>
+    <businessForm :formConfig="pickorderFromConfig"></businessForm>
     <jordanBtn :btnConfig="pickorderBtnConfig"></jordanBtn>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import jordanForm from "professionalComponents/jordanForm";
-import jordanBtn from "professionalComponents/jordanButton";
+import businessForm from "professionalComponents/businessForm";
+import jordanBtn from "professionalComponents/businessButton";
 export default {
   components: {
-    jordanForm,
+    businessForm,
     jordanBtn
   },
-  props: {
-    objList: {
-      type: Array
-    },
-    idArr: {
-      type: Array
-    },
-    webid: {
-      type: Number
-    },
-    tablename: {
-      type: String
-    },
-    rowData: {
-      type: Array
-    }
-  },
-
   data() {
     return {
       pickorderBtnConfig: {
@@ -47,7 +29,8 @@ export default {
             btnclick: () => {
               let self = this;
               let promptMessage = ""; //非空提示信息
-              if (!self.pickorderFromConfig.formData[0].itemdata.pid) {
+              let formData = self.pickorderFromConfig.formData
+              if (!formData[0].itemdata.pid) {
                 promptMessage = "店铺";
               }
               if (promptMessage) {
@@ -56,7 +39,7 @@ export default {
               }
               let fromdata = new FormData();
               let param = {
-                CP_C_SHOP_ID:  self.pickorderFromConfig.formData[0].itemdata.pid,
+                CP_C_SHOP_ID: formData[0].itemdata.pid,
                 PO_NO:self.pickorderFromConfig.formValue.PO_NO
               };
               fromdata.append("param", JSON.stringify(param));
