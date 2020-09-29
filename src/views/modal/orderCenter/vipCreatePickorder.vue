@@ -1,5 +1,5 @@
 <template>
-  <div style="width:400px;;padding-right:20px">
+  <div style="width: 400px; padding-right: 20px">
     <jordanForm :formConfig="pickorderFromConfig"></jordanForm>
     <jordanBtn :btnConfig="pickorderBtnConfig"></jordanBtn>
   </div>
@@ -12,26 +12,9 @@ import jordanBtn from "professionalComponents/jordanButton";
 export default {
   components: {
     jordanForm,
-    jordanBtn
+    jordanBtn,
   },
-  props: {
-    objList: {
-      type: Array
-    },
-    idArr: {
-      type: Array
-    },
-    webid: {
-      type: Number
-    },
-    tablename: {
-      type: String
-    },
-    rowData: {
-      type: Array
-    }
-  },
-
+  props: {},
   data() {
     return {
       pickorderBtnConfig: {
@@ -49,15 +32,15 @@ export default {
               let promptMessage = ""; //非空提示信息
               if (!self.pickorderFromConfig.formData[1].itemdata.pid) {
                 promptMessage = "店铺";
-              }else if(!self.pickorderFromConfig.formValue.TYPE){
+              } else if (!self.pickorderFromConfig.formValue.TYPE) {
                 promptMessage = "配送方式";
               }
-              if(self.pickorderFromConfig.formValue.TYPE === "0"){
-                if(!self.pickorderFromConfig.formValue.PICK_NO){
+              if (self.pickorderFromConfig.formValue.TYPE === "0") {
+                if (!self.pickorderFromConfig.formValue.PICK_NO) {
                   promptMessage = "拣货单号";
                 }
-              }else if(self.pickorderFromConfig.formValue.TYPE === "1"){
-                if(!self.pickorderFromConfig.formValue.PO_NO){
+              } else if (self.pickorderFromConfig.formValue.TYPE === "1") {
+                if (!self.pickorderFromConfig.formValue.PO_NO) {
                   promptMessage = "PO";
                 }
               }
@@ -67,28 +50,28 @@ export default {
               }
               let fromdata = new FormData();
               let param = {
-                CP_C_SHOP_ID:  self.pickorderFromConfig.formData[1].itemdata.pid,
-                TYPE:self.pickorderFromConfig.formValue.TYPE,
-                PICK_NO:self.pickorderFromConfig.formValue.PICK_NO,
-                PO_NO:self.pickorderFromConfig.formValue.PO_NO
+                CP_C_SHOP_ID: self.pickorderFromConfig.formData[1].itemdata.pid,
+                TYPE: self.pickorderFromConfig.formValue.TYPE,
+                PICK_NO: self.pickorderFromConfig.formValue.PICK_NO,
+                PO_NO: self.pickorderFromConfig.formValue.PO_NO,
               };
               fromdata.append("param", JSON.stringify(param));
               axios({
                 url: "/api/cs/vip/pick/v1/downloadPick",
                 method: "post",
-                data: fromdata
-              }).then(function(res) {
+                data: fromdata,
+              }).then(function (res) {
                 if (res.data.data.code === 0) {
                   self.$Message.success(res.data.data.message);
                   self.$emit("confirmImport");
                   self.$emit("closeActionDialog");
                 } else {
                   self.$Message.error(res.data.data.message);
-                  self.$emit('uploadError', res.data.data.data);
+                  self.$emit("uploadError", res.data.data.data);
                   self.$emit("closeActionDialog");
                 }
               });
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             type: "", //按钮类型
@@ -98,9 +81,9 @@ export default {
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.$emit("closeActionDialog");
-            } //按钮点击事件
-          }
-        ]
+            }, //按钮点击事件
+          },
+        ],
       },
       pickorderFromConfig: {
         formValue: {
@@ -110,47 +93,48 @@ export default {
           CP_C_SHOP_ID: "",
         },
         ruleValidate: {
-          TYPE:[
-            {required: true}
-          ],
-          PO_NO:[
-            {required: true}
-          ],
-          PICK_NO:[
-            {required: true}
-          ]
+          TYPE: [{ required: true }],
+          PO_NO: [{ required: true }],
+          PICK_NO: [{ required: true }],
         },
         formData: [
           {
-            style: 'radio', //单选框
-            label: '下载类型', //前面字段
-            width: '24', //宽度
-            value: 'TYPE', //绑定到formValue的值
-            radioChange: ()=>{
+            style: "radio", //单选框
+            label: "下载类型", //前面字段
+            width: "24", //宽度
+            value: "TYPE", //绑定到formValue的值
+            radioChange: () => {
               let self = this;
               self.setInputDisplay();
             }, //切换时的方法
-            setRequired: '', //必选标识,值不为required时无标识
-            options: [  //radio选项
+            setRequired: "", //必选标识,值不为required时无标识
+            options: [
+              //radio选项
               {
                 value: "0",
                 label: "仅下载拣货单",
-                disabled:false
+                disabled: false,
               },
               {
                 value: "1",
                 label: "创建并下载拣货单",
-                disabled:false
-              }
-            ]
+                disabled: false,
+              },
+            ],
           },
           {
             style: "popInput", //输入框弹框单多选
             width: "24",
             inputList: [
               {
-                childs: [{ colname: "CP_C_SHOP_ID", refobjid: 'IN (19,999999)', valuedata: 2 }]
-              }
+                childs: [
+                  {
+                    colname: "CP_C_SHOP_ID",
+                    refobjid: "IN (19,999999)",
+                    valuedata: 2,
+                  },
+                ],
+              },
             ],
             itemdata: {
               col: 1,
@@ -159,7 +143,7 @@ export default {
               refcolval: {
                 fixcolumn: "CP_C_PLATFORM_ID",
                 // expre: "equal",
-                srccol: "CP_C_SHOP_ID"
+                srccol: "CP_C_SHOP_ID",
               },
               datelimit: "all",
               display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
@@ -177,26 +161,26 @@ export default {
               row: 1,
               statsize: -1,
               type: "STRING",
-              valuedata: "" //这个是选择的值
+              valuedata: "", //这个是选择的值
             },
-            oneObj:(val)=>{
+            oneObj: (val) => {
               this.pickorderFromConfig.formValue.CP_C_SHOP_ID = val.pid;
-            }
+            },
           },
           {
             style: "input",
             label: "PO",
             value: "PO_NO",
-            width: "24"
+            width: "24",
           },
           {
             style: "input",
             label: "拣货单号",
             value: "PICK_NO",
-            width: "24"
-          }
-        ]
-      }
+            width: "24",
+          },
+        ],
+      },
     };
   },
   mounted() {
@@ -205,27 +189,26 @@ export default {
     self.setInputDisplay();
   },
   methods: {
-    setInputDisplay(){
+    setInputDisplay() {
       let self = this;
       let type = self.pickorderFromConfig.formValue.TYPE;
       let poNoData = self.pickorderFromConfig.formData.filter(
-        item => item.value === "PO_NO"
+        (item) => item.value === "PO_NO"
       );
       let pickNoData = self.pickorderFromConfig.formData.filter(
-        item => item.value === "PICK_NO"
+        (item) => item.value === "PICK_NO"
       );
-      if(type === '0'){
+      if (type === "0") {
         poNoData[0].style = "";
         pickNoData[0].style = "input";
         self.pickorderFromConfig.formValue.PO_NO = "";
-      }else{
+      } else {
         poNoData[0].style = "input";
         pickNoData[0].style = "";
         self.pickorderFromConfig.formValue.PICK_NO = "";
       }
-
-    }
-  }
+    },
+  },
 };
 </script>
 
