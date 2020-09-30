@@ -406,8 +406,11 @@
         if (_this.information.formData[0].itemdata.pid === undefined || !_this.information.formData[0].itemdata.pid) return _this.$Message('物流公司必填');
         if (_this.tableSize > 1000) return _this.$Message.error('数量过大，请使用导入功能设置是否到达');
         _this.dataArr.forEach((item) => {
-          if (item.IS_ARRIVE) item.IS_ARRIVE = 'Y';
-          else item.IS_ARRIVE = 'N';
+          if (item.IS_ARRIVE) {
+            item.IS_ARRIVE = 'Y';
+          } else {
+            item.IS_ARRIVE = 'N';
+          }
         });
         _this.isSaveLoading = true;
         _this.name2 = '';
@@ -493,14 +496,14 @@
               if (res.data.data.expressArea.ISACTIVE === 'N') {
                 _this.statusName = '已作废';
                 _this.btnConfig.buttons.forEach((item) => {
-                  if (item.text === '保存') item.disabled = true;
-                  else if (item.text === '作废') item.disabled = true;
-                  else if (item.text === '导入') item.disabled = true;
-                  else if (item.text === '导出') item.disabled = true;
-                  else if (item.text === '刷新') item.disabled = true;
+                  if (['保存', '作废', '导入', '导出', '刷新'].includes(item.text)) {
+                    item.disabled = true;
+                  }
                 });
               }
-              if (save === 'import') _this.synchronous();
+              if (save === 'import') {
+                _this.synchronous();
+              }
             }
           });
       },
@@ -560,7 +563,7 @@
         _this.listArr = [];
         _this.tableLoading = true;
         const param = { objid: _this.$route.query.id, treeLikeKey: e };
-        _this.$network.post('/p/cs/getExpressAreaItemLikeTable')
+        _this.$network.post('/p/cs/getExpressAreaItemLikeTable', param)
           .then((res) => {
             _this.tableLoading = false;
             if (res.data.code === 0) {
@@ -647,8 +650,11 @@
       },
       // 全选是否到达
       handleAllChange(e) {
-        if (e) this.dataArr.forEach(item => item.IS_ARRIVE = true);
-        else this.dataArr.forEach(item => item.IS_ARRIVE = false);
+        if (e) {
+          this.dataArr.forEach(item => item.IS_ARRIVE = true);
+        } else {
+          this.dataArr.forEach(item => item.IS_ARRIVE = false);
+        }
       },
       // 是否到达
       isDeliveryChange() {
