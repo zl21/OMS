@@ -2361,12 +2361,6 @@
             });
             const fromdata = new FormData();
             fromdata.append('ids', ids);
-            self.publicBouncedConfig = publicDialogConfig.changeWarehouseConfig;
-             setTimeout(() => {
-                    self.$children
-                      .find(item => item.name === 'changeWarehouse')
-                      .openConfirm();
-                  }, 100);
             self.$network.post('/api/cs/oc/oms/v1/checkOrderBeforeWarehouse', fromdata)
               .then((res) => {
                 if (res.data.code === 0) {
