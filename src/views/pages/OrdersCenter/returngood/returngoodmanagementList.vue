@@ -33,6 +33,16 @@
           @on-page-change="pageChange"
           @on-page-size-change="pageSizeChange"
         ></jordan-action-table> -->
+        <div class="agLoading" v-show="agTableConfig.agLoading">
+          <Spin fix>
+            <Icon
+              type="ios-loading"
+              size="18"
+              class="demo-spin-icon-load"
+            ></Icon>
+            <div>Loading</div>
+          </Spin>
+        </div>
         <aTable
           ref="agGridChild"
           :agTableConfig="agTableConfig"
