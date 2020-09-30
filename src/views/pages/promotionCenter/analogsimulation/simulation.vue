@@ -357,16 +357,6 @@
             obj[col.key] = objRow.ECODE ? objRow[col.key] : '';
           }
         });
-        // if(objRow.PRO_ECODE && objRow.SG_PRO_ID){
-        //     obj.PRO_ECODE = objRow.PRO_ECODE
-        //     obj.SG_PRO_ID = objRow.SG_PRO_ID
-        // }
-        // obj.itemdata =  JSON.parse(JSON.stringify(this.itemdata));
-        // if(objRow){
-        //     obj.itemdata.pid = objRow.ID;
-        //     obj.itemdata.valuedata  = objRow.ECODE;
-        // }
-        // obj.itemdata.colname = obj.itemdata.colname + Math.floor(Math.random()*1000000);
         this.products_data.push(obj);
         this.countTablelistView();
       },
@@ -468,15 +458,16 @@
           });
         });
       },
+      // 取消
       cancel_simulation() {
         this.$destroy(true);
         this.$store.commit('customize/TabClose', {
-          id: 31460113, // id
+          id: 2895, // id
           type: 'CUSTOMIZED', // 类型action
           name: 'PROMACTIQUERYLIST', // 文件名
           label: '促销活动', // tab中文名 
           query: Object.assign({
-            id: 31460113
+            id: 2895
           }) // 带的参数
         });
       },

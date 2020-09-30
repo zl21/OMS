@@ -1,7 +1,7 @@
 <template>
   <div class="financialManageCenter">
     <div class="buttons">
-      <jordan-button :btnConfig="btnConfig"></jordan-button>
+      <businessButton :btnConfig="btnConfig"></businessButton>
     </div>
     <businessStatusFlag
       v-if="custAuditFlag"
@@ -11,7 +11,10 @@
       v-if="financeAuditFlag"
       :statusName="'已财审'"
     ></businessStatusFlag>
-    <businessStatusFlag v-if="voidFlag" :statusName="'已作废'"></businessStatusFlag>
+    <businessStatusFlag
+      v-if="voidFlag"
+      :statusName="'已作废'"
+    ></businessStatusFlag>
     <Collapse v-model="spreadPanel">
       <Panel name="panel_baseInfo">
         基本信息
@@ -23,16 +26,16 @@
           ></ImageUpload>
         </p>
         <p slot="content">
-          <jordan-form
+          <businessForm
             @keyDown="keyDown"
             :formConfig="formConfig"
-          ></jordan-form>
+          ></businessForm>
         </p>
       </Panel>
       <Panel name="panel_log">
         日志
         <p slot="content">
-          <jordan-form :formConfig="formConfigLog"></jordan-form>
+          <businessForm :formConfig="formConfigLog"></businessForm>
         </p>
       </Panel>
 
@@ -46,26 +49,26 @@
         @on-ok="resetMainTable"
         @on-cancel="detailAddCancel"
       >
-        <jordan-action-table
+        <businessActionTable
           :jordanTableConfig="detailAddTable.table"
           @on-select="detailAddOnSelect"
           @on-select-cancel="detailAddOnCancel"
           @on-select-all="detailAddOnSelectAll"
           @on-select-all-cancel="detailAddOnSelectAllCancel"
-        ></jordan-action-table>
+        ></businessActionTable>
       </Modal>
     </Collapse>
     <!-- tab切换 -->
-    <jordan-label
+    <businessLabel
       :labelList="labelList"
       :labelDefaultValue="labelDefaultValue"
       @labelClick="labelClick"
-    ></jordan-label>
+    ></businessLabel>
     <!-- 表格 -->
     <div class="table">
       <!-- 赔付单明细 -->
       <div class="barcodeDetails">
-        <jordan-action-table
+        <businessActionTable
           v-show="labelDefaultValue === '1'"
           :jordanTableConfig="jordanTableConfig"
           @table-delete-detail="delTableDetail"
@@ -76,13 +79,13 @@
           @on-select-all-cancel="onSelectAllCancel"
           @on-page-change="pageChange"
           @on-page-size-change="pageSizeChange"
-        ></jordan-action-table>
-        <jordan-action-table
+        ></businessActionTable>
+        <businessActionTable
           v-show="labelDefaultValue === '2'"
           :jordanTableConfig="payableAdjustLog"
           @on-page-change="logPageChange"
           @on-page-size-change="logPageSizeChange"
-        ></jordan-action-table>
+        ></businessActionTable>
       </div>
     </div>
     <div class="fromLoading" v-show="isSaveLoading">
@@ -200,16 +203,17 @@ export default {
           {
             text: "返回",
             btnclick: () => {
+              this.$destroy(true);
               this.$store.commit("customize/TabHref", {
                 id: 2986,
                 type: "CUSTOMIZED",
                 name: "payableAdjustmentList",
                 label: "赔付单",
                 back: true,
-                query: Object.assign({
+                /* query: Object.assign({
                   id: 2986,
                   tabTitle: "赔付单",
-                }),
+                }), */
               });
             },
           },
@@ -1871,6 +1875,36 @@ export default {
 </script>
 <style lang="less">
 @import "~professionalComponents/common/css/theme.less";
+
+.financialManageCenter {
+  /deep/ .barcodeDetails {
+    .ark-form-item {
+      margin-bottom: 0;
+    }
+  }
+  /deep/ .orderManageEdit {
+    .ark-fkrp-poptip div {
+      outline: none;
+      height: 30px;
+    }
+    .item-col label.title i {
+      top: auto;
+      left: -2px !important;
+      font-size: 12px;
+      height: auto;
+      line-height: inherit;
+      vertical-align: inherit;
+    }
+    .ark-row {
+      div.ark-col-span-8:nth-child(8) {
+        .item-col .add-input {
+          color: #575757;
+          padding: 0 10px !important;
+        }
+      }
+    }
+  }
+}
 
 .ark-table-wrapper {
   margin-top: 8px;

@@ -17,7 +17,7 @@ export default {
   ADDOREDITACTI: {
     component: addOrEditActi,
   },
-  SIMULATION: {
+  BATCHACTIVITY: {
     component: batchActivity,
   },
   SIMULATION: {
