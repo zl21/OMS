@@ -263,7 +263,7 @@ export default {
               this.onSelectData = [];
               this.order.orderform.formValue = {};
               this.order.table.data = [];
-              if (this.$route.params.customizedModuleId == "NEW") {
+              if (this.$route.query.id == -1) {
                 this.order.modal = true;
               }
             } //点击icon图标事件
@@ -559,7 +559,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      if (this.$route.params.customizedModuleId === "NEW") {
+      if (this.$route.query.id === -1) {
         this.btnConfig.buttons = [
           {
             text: "保存", //按钮文本
@@ -572,11 +572,16 @@ export default {
             text: "返回", //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
-              this.$store.commit("global/tabOpen", {
-                customizedModuleId: 2809,
-                type: "C",
-                customizedModuleName: "returnStoreageList",
-                label: "退货入库"
+              this.$store.commit("customize/TabHref", {
+                id: 2809,
+                type: "action",
+                name: "returnStoreageList",
+                label: "退货入库",
+                query: Object.assign({
+                  id: 2809,
+                  tabTitle: "退货入库"
+                }),
+                back: true
               });
             } //按钮点击事件
           }
@@ -672,16 +677,12 @@ export default {
             isShow: false,
             disabled: false, //按钮禁用控制
             btnclick: () => {
-              if (this.$route.params.customizedModuleId == "NEW") return;
+              if (this.$route.query.id == -1) return;
               axios({
                 url: "/api/cs/oc/oms/v1/returnCancel",
                 method: "post",
                 data: {
-                  ids: [
-                    this.$route.params.customizedModuleId == "NEW"
-                      ? -1
-                      : this.$route.params.customizedModuleId
-                  ]
+                  ids: [this.$route.query.id]
                 }
               }).then(res => {
                 if (res.data.code === 0) {
@@ -716,7 +717,7 @@ export default {
       this.getPermissions("btnConfig", "returnStoreageList");
     });
     // 判断是新增还是修改
-    if (this.$route.params.customizedModuleId == "NEW") {
+    if (this.$route.query.id == -1) {
       this.information.formValue.SPECIAL_TYPE = "0";
       this.btnConfig.buttons.forEach(item => {
         switch (item.text) {
@@ -800,7 +801,7 @@ export default {
         this.information.formData.forEach((parent, parentIndex) => {
           res.SENSITIVE_COLUMNS.forEach((child, childIndex) => {
             if (parent.dataAcessKey == child.ecode) {
-              if (tthis.$route.params.customizedModuleId == "NEW") {
+              if (tthis.$route.query.id == -1) {
                 this.setFormPermissions(parent, child, "add");
               } else {
                 this.setFormPermissions(parent, child, "detail");
@@ -816,7 +817,6 @@ export default {
         );
       });
     });
-    this.setTableHeight();
     this.obtainWarehouse();
   },
   methods: {
@@ -875,8 +875,7 @@ export default {
         }, // 退货入库主表数据
         ID: this.ID
       };
-      if (this.$route.params.customizedModuleId != "NEW")
-        params.OcBRefundIn.ID = item.ID; // 修改时传主表ID
+      if (this.$route.query.id != -1) params.OcBRefundIn.ID = item.ID; // 修改时传主表ID
       _this.isSaveLoading = true;
       axios({
         url: "/api/cs/oc/oms/v1/ReturnStorageSave",
@@ -938,7 +937,7 @@ export default {
           _this.isMatch = res.data.data.ocBRefundIn.IS_OFF_MATCH;
           res.data.data.ocBRefundIn.IS_OFF_MATCH == 1
             ? (res.data.data.ocBRefundIn.IS_OFF_MATCH = true)
-            : (es.data.data.ocBRefundIn.IS_OFF_MATCH = false);
+            : (res.data.data.ocBRefundIn.IS_OFF_MATCH = false);
           if (res.data.data.ocBRefundIn.IN_STATUS == 3) {
             _this.statusName = _this.$route.query.statusName;
             _this.btnConfig.buttons[0].disabled = true;
@@ -1161,10 +1160,7 @@ export default {
         _this.labelDefaultValue = false;
         _this.tab2 = {
           tablename: "OC_B_REFUND_IN",
-          objid:
-            this.$route.params.customizedModuleId == "NEW"
-              ? -1
-              : this.$route.params.customizedModuleId
+          objid: this.$route.query.id
         };
       }
     },
@@ -1197,19 +1193,6 @@ export default {
           }
         }
       });
-    },
-    //设置表格高度
-    setTableHeight() {
-      let _this = this;
-      const contentHeight = document.getElementsByClassName("main-content")[0]
-        .clientHeight;
-      let returnHeight = 25;
-      returnHeight += document.getElementsByClassName("buttonBox")[0]
-        .clientHeight;
-      returnHeight += document.getElementsByClassName("TreasuryDefault")[0]
-        .clientHeight;
-      let tableHeight = contentHeight - returnHeight;
-      _this.jordanTableConfig.height = tableHeight - 220;
     }
   },
   created() {
