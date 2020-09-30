@@ -3,18 +3,27 @@
     <!-- 开票 -->
     <div class="invoice-header">
       <span>开票状态:</span>
-      <span>{{componentData.QUERYORDERRESULT.INVOICE_STATUS_NAME || '未登记'}}</span>
+      <span>{{
+        componentData.QUERYORDERRESULT.INVOICE_STATUS_NAME || "未登记"
+      }}</span>
     </div>
     <div class="invoice-content">
       <Divider orientation="left">发票信息</Divider>
       <div>
         <span>发票类型:</span>
-        <RadioGroup v-model="invoiceType" type="button" size="small" @on-change="invoiceTypeChange">
+        <RadioGroup
+          v-model="invoiceType"
+          type="button"
+          size="small"
+          @on-change="invoiceTypeChange"
+        >
           <Radio label="电子发票"></Radio>
           <Radio label="纸质发票"></Radio>
           <Radio label="专用发票"></Radio>
         </RadioGroup>
-        <span v-if="!specialInvoiceFlag" style="margin-left: 20px">抬头类型:</span>
+        <span v-if="!specialInvoiceFlag" style="margin-left: 20px"
+          >抬头类型:</span
+        >
         <RadioGroup
           v-if="!specialInvoiceFlag"
           v-model="invoiceTitleType"
@@ -25,7 +34,9 @@
           <Radio label="个人"></Radio>
           <Radio label="企业"></Radio>
         </RadioGroup>
-        <span v-if="specialInvoiceFlag" style="color: #fd6442;">开专用发票必须跟开票专员确认</span>
+        <span v-if="specialInvoiceFlag" style="color: #fd6442"
+          >开专用发票必须跟开票专员确认</span
+        >
       </div>
       <businessForm :formConfig="formConfig"></businessForm>
     </div>
@@ -33,7 +44,7 @@
       <Divider orientation="left">收票信息</Divider>
       <businessForm :formConfig="formConfig2"></businessForm>
     </div>
-    <jordanBtn :btnConfig="btnConfig" style="margin-top:10px;"></jordanBtn>
+    <jordanBtn :btnConfig="btnConfig" style="margin-top: 10px"></jordanBtn>
   </div>
 </template>
 <script>
@@ -45,13 +56,13 @@ export default {
   components: {
     businessForm,
     jordanBtn,
-    businessActionTable
+    businessActionTable,
   },
   props: {
     componentData: {
       type: Object,
-      default: {}
-    }
+      default: {},
+    },
   },
   computed: {},
   data() {
@@ -86,17 +97,17 @@ export default {
                 obj.ID = self.componentData.OC_B_ORDER_INVOICE_INFORM.ID;
               }
               let params = {
-                "OC_B_ORDER_INVOICE_INFORM": Object.assign(
+                OC_B_ORDER_INVOICE_INFORM: Object.assign(
                   self.formConfig.formValue,
                   self.formConfig2.formValue,
                   obj
                 ),
-                "QUERYORDERRESULT": self.componentData.QUERYORDERRESULT
+                QUERYORDERRESULT: self.componentData.QUERYORDERRESULT,
               };
               let fromdata = new FormData();
               fromdata.append("param", JSON.stringify(params));
               self.save(fromdata);
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             type: "", //按钮类型
@@ -105,10 +116,10 @@ export default {
             size: "small", //按钮大小
             disabled: false, //按钮禁用控制
             btnclick: () => {
-              this.$parent.$parent.closeConfirm()
-            } //按钮点击事件
-          }
-        ]
+              this.$parent.$parent.closeConfirm();
+            }, //按钮点击事件
+          },
+        ],
       },
       formConfig: {
         formData: [
@@ -174,8 +185,10 @@ export default {
         },
         //表单非空提示
         ruleValidate: {
-          HEADER_NAME: [{ required: true, message: "发票抬头不能为空", trigger: "blur" }], // 发票抬头
-        }
+          HEADER_NAME: [
+            { required: true, message: "发票抬头不能为空", trigger: "blur" },
+          ], // 发票抬头
+        },
       },
       formConfig2: {
         formValue: {
@@ -203,10 +216,10 @@ export default {
             value: "RECEIVER_ADDRESS", //输入框的值
             width: "24", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
           },
-        ]
+        ],
       },
-      invoiceType: '电子发票', // 发票类型
-      invoiceTitleType: '个人', // 抬头类型
+      invoiceType: "电子发票", // 发票类型
+      invoiceTitleType: "个人", // 抬头类型
       invoiceFooterFlag: false, // 控制收票信息显示
       identificationFlag: false, // 根据抬头类型控制识别号显示
       specialInvoiceFlag: false, // 专用发票标识，用来隐藏抬头类型和邮箱
@@ -217,8 +230,9 @@ export default {
     if (self.componentData.OC_B_ORDER_INVOICE_INFORM) {
       self.getFormValue(self.componentData.OC_B_ORDER_INVOICE_INFORM);
     } else {
-      if (self.invoiceTitleType === '个人') {
-        self.formConfig.formValue.HEADER_NAME = self.componentData.QUERYORDERRESULT.RECEIVER_NAME;
+      if (self.invoiceTitleType === "个人") {
+        self.formConfig.formValue.HEADER_NAME =
+          self.componentData.QUERYORDERRESULT.RECEIVER_NAME;
       }
     }
     self.controlFormData();
@@ -227,47 +241,89 @@ export default {
     // 发票类型改变事件
     invoiceTypeChange(value) {
       let self = this;
-      if (value === '电子发票') {
+      if (value === "电子发票") {
         self.invoiceFooterFlag = false; // 不显示收票信息
         self.specialInvoiceFlag = false; // 不是专用发票
       } else {
         self.invoiceFooterFlag = true;
-        if (value === '专用发票') {
+        if (value === "专用发票") {
           self.specialInvoiceFlag = true;
         } else {
           self.specialInvoiceFlag = false;
         }
       }
       self.formConfig.ruleValidate = {};
-      if (value !== '专用发票') {
+      if (value !== "专用发票") {
         if (self.identificationFlag) {
           self.formConfig.ruleValidate = {
-            HEADER_NAME: [{ required: true, message: "发票抬头不能为空", trigger: "blur" }], // 发票抬头
-            TAXPAYER_NO: [{ required: true, message: "识别号不能为空", trigger: "blur" }], // 识别号
-            COMPANY: [{ required: false, message: "公司地址不能为空", trigger: "blur" }], // 公司地址
-            PHONE_NO: [{ required: false, message: "电话号码不能为空", trigger: "blur" }], // 电话号码
-            OPENING_BANK: [{ required: false, message: "开户银行不能为空", trigger: "blur" }], // 开户银行
-            OPENING_BANK_ACCOUNT: [{ required: false, message: "开户行账号不能为空", trigger: "blur" }], // 开户行账号
-          }
+            HEADER_NAME: [
+              { required: true, message: "发票抬头不能为空", trigger: "blur" },
+            ], // 发票抬头
+            TAXPAYER_NO: [
+              { required: true, message: "识别号不能为空", trigger: "blur" },
+            ], // 识别号
+            COMPANY: [
+              { required: false, message: "公司地址不能为空", trigger: "blur" },
+            ], // 公司地址
+            PHONE_NO: [
+              { required: false, message: "电话号码不能为空", trigger: "blur" },
+            ], // 电话号码
+            OPENING_BANK: [
+              { required: false, message: "开户银行不能为空", trigger: "blur" },
+            ], // 开户银行
+            OPENING_BANK_ACCOUNT: [
+              {
+                required: false,
+                message: "开户行账号不能为空",
+                trigger: "blur",
+              },
+            ], // 开户行账号
+          };
         } else {
           self.formConfig.ruleValidate = {};
           self.formConfig.ruleValidate = {
-            HEADER_NAME: [{ required: true, message: "发票抬头不能为空", trigger: "blur" }], // 发票抬头
-            COMPANY: [{ required: false, message: "公司地址不能为空", trigger: "blur" }], // 公司地址
-            PHONE_NO: [{ required: false, message: "电话号码不能为空", trigger: "blur" }], // 电话号码
-            OPENING_BANK: [{ required: false, message: "开户银行不能为空", trigger: "blur" }], // 开户银行
-            OPENING_BANK_ACCOUNT: [{ required: false, message: "开户行账号不能为空", trigger: "blur" }], // 开户行账号
-          }
+            HEADER_NAME: [
+              { required: true, message: "发票抬头不能为空", trigger: "blur" },
+            ], // 发票抬头
+            COMPANY: [
+              { required: false, message: "公司地址不能为空", trigger: "blur" },
+            ], // 公司地址
+            PHONE_NO: [
+              { required: false, message: "电话号码不能为空", trigger: "blur" },
+            ], // 电话号码
+            OPENING_BANK: [
+              { required: false, message: "开户银行不能为空", trigger: "blur" },
+            ], // 开户银行
+            OPENING_BANK_ACCOUNT: [
+              {
+                required: false,
+                message: "开户行账号不能为空",
+                trigger: "blur",
+              },
+            ], // 开户行账号
+          };
         }
       } else {
         self.formConfig.ruleValidate = {
-          HEADER_NAME: [{ required: true, message: "发票抬头不能为空", trigger: "blur" }], // 发票抬头
-          TAXPAYER_NO: [{ required: true, message: "识别号不能为空", trigger: "blur" }], // 识别号
-          COMPANY: [{ required: true, message: "公司地址不能为空", trigger: "blur" }], // 公司地址
-          PHONE_NO: [{ required: true, message: "电话号码不能为空", trigger: "blur" }], // 电话号码
-          OPENING_BANK: [{ required: true, message: "开户银行不能为空", trigger: "blur" }], // 开户银行
-          OPENING_BANK_ACCOUNT: [{ required: true, message: "开户行账号不能为空", trigger: "blur" }], // 开户行账号
-        }
+          HEADER_NAME: [
+            { required: true, message: "发票抬头不能为空", trigger: "blur" },
+          ], // 发票抬头
+          TAXPAYER_NO: [
+            { required: true, message: "识别号不能为空", trigger: "blur" },
+          ], // 识别号
+          COMPANY: [
+            { required: true, message: "公司地址不能为空", trigger: "blur" },
+          ], // 公司地址
+          PHONE_NO: [
+            { required: true, message: "电话号码不能为空", trigger: "blur" },
+          ], // 电话号码
+          OPENING_BANK: [
+            { required: true, message: "开户银行不能为空", trigger: "blur" },
+          ], // 开户银行
+          OPENING_BANK_ACCOUNT: [
+            { required: true, message: "开户行账号不能为空", trigger: "blur" },
+          ], // 开户行账号
+        };
       }
       self.controlFormData();
     },
@@ -275,30 +331,53 @@ export default {
     invoiceTitleTypeChange(value) {
       let self = this;
       self.formConfig.ruleValidate = {};
-      if (value === '个人') {
+      if (value === "个人") {
         self.identificationFlag = false;
         if (!self.componentData.OC_B_ORDER_INVOICE_INFORM) {
-          self.formConfig.formValue.HEADER_NAME = self.componentData.QUERYORDERRESULT.RECEIVER_NAME;
+          self.formConfig.formValue.HEADER_NAME =
+            self.componentData.QUERYORDERRESULT.RECEIVER_NAME;
         }
         self.formConfig.ruleValidate = {
-          HEADER_NAME: [{ required: true, message: "发票抬头不能为空", trigger: "blur" }], // 发票抬头
-          COMPANY: [{ required: false, message: "公司地址不能为空", trigger: "blur" }], // 公司地址
-          PHONE_NO: [{ required: false, message: "电话号码不能为空", trigger: "blur" }], // 电话号码
-          OPENING_BANK: [{ required: false, message: "开户银行不能为空", trigger: "blur" }], // 开户银行
-          OPENING_BANK_ACCOUNT: [{ required: false, message: "开户行账号不能为空", trigger: "blur" }], // 开户行账号
-        }
+          HEADER_NAME: [
+            { required: true, message: "发票抬头不能为空", trigger: "blur" },
+          ], // 发票抬头
+          COMPANY: [
+            { required: false, message: "公司地址不能为空", trigger: "blur" },
+          ], // 公司地址
+          PHONE_NO: [
+            { required: false, message: "电话号码不能为空", trigger: "blur" },
+          ], // 电话号码
+          OPENING_BANK: [
+            { required: false, message: "开户银行不能为空", trigger: "blur" },
+          ], // 开户银行
+          OPENING_BANK_ACCOUNT: [
+            { required: false, message: "开户行账号不能为空", trigger: "blur" },
+          ], // 开户行账号
+        };
       } else {
         self.identificationFlag = true;
         self.formConfig.ruleValidate = {};
-        self.formConfig.formValue.HEADER_NAME = '';
+        self.formConfig.formValue.HEADER_NAME = "";
         self.formConfig.ruleValidate = {
-          HEADER_NAME: [{ required: true, message: "发票抬头不能为空", trigger: "blur" }], // 发票抬头
-          TAXPAYER_NO: [{ required: true, message: "识别号不能为空", trigger: "blur" }], // 识别号
-          COMPANY: [{ required: false, message: "公司地址不能为空", trigger: "blur" }], // 公司地址
-          PHONE_NO: [{ required: false, message: "电话号码不能为空", trigger: "blur" }], // 电话号码
-          OPENING_BANK: [{ required: false, message: "开户银行不能为空", trigger: "blur" }], // 开户银行
-          OPENING_BANK_ACCOUNT: [{ required: false, message: "开户行账号不能为空", trigger: "blur" }], // 开户行账号
-        }
+          HEADER_NAME: [
+            { required: true, message: "发票抬头不能为空", trigger: "blur" },
+          ], // 发票抬头
+          TAXPAYER_NO: [
+            { required: true, message: "识别号不能为空", trigger: "blur" },
+          ], // 识别号
+          COMPANY: [
+            { required: false, message: "公司地址不能为空", trigger: "blur" },
+          ], // 公司地址
+          PHONE_NO: [
+            { required: false, message: "电话号码不能为空", trigger: "blur" },
+          ], // 电话号码
+          OPENING_BANK: [
+            { required: false, message: "开户银行不能为空", trigger: "blur" },
+          ], // 开户银行
+          OPENING_BANK_ACCOUNT: [
+            { required: false, message: "开户行账号不能为空", trigger: "blur" },
+          ], // 开户行账号
+        };
       }
       self.controlFormData();
     },
@@ -331,12 +410,12 @@ export default {
         RECEIVE_NAME: data.RECEIVE_NAME,
         RECEIVER_MOBILE: data.RECEIVER_MOBILE,
         RECEIVER_ADDRESS: data.RECEIVER_ADDRESS,
-      }
+      };
     },
     // 控制识别号和邮箱的显示
     controlFormData() {
       let self = this;
-      self.formConfig.formData.map(item => {
+      self.formConfig.formData.map((item) => {
         if (self.specialInvoiceFlag) {
           if (item.label === "识别号") {
             item.style = "input";
@@ -358,7 +437,6 @@ export default {
             item.style = "input";
           }
         }
-
       });
     },
     // 非空判断
@@ -385,22 +463,23 @@ export default {
       axios({
         url: "/api/cs/oc/oms/v1/recordInvoicing",
         method: "post",
-        data: params
+        data: params,
       }).then(function (res) {
         if (res.data.code === 0) {
           self.$Message.success(res.data.message);
           self.$parent.$parent.closeConfirm();
           self.$parent.$parent.$parent.getData();
         } else {
-          self.$Message.warning(res.data.message || '保存未成功!');
+          self.$Message.warning(res.data.message || "保存未成功!");
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang='less' scoped>
+<style lang='less'>
+@import "~@burgeon/oms-theme/skin/public.less";
 .header {
   background-color: #eee;
   color: black;
@@ -409,5 +488,9 @@ export default {
 .footer {
   width: 100%;
   margin-top: 20px;
+}
+.ark-radio-group-button.ark-radio-group-small .ark-radio-wrapper:first-child {
+  border-color: @button-border;
+  color: @button-transparent-font;
 }
 </style>

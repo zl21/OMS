@@ -40,7 +40,7 @@
         <p>点击后将删除凭证,是否继续?</p>
       </Modal>
       <Modal
-        class="detailAdd"
+        class="detailAdd customizedModal"
         v-model="detailAddTable.modal"
         :title="'新增应付调整单明细'"
         @on-ok="resetMainTable"

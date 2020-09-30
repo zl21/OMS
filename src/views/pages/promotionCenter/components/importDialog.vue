@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <div class="footer">
+    <div class="dialog-footer">
       <Button type="primary" size="large" @click="importDialog">确定</Button>
       <Button type="error" ghost size="large" @click="close">取消</Button>
     </div>
@@ -247,6 +247,7 @@ export default {
 </script>
 
 <style scoped lang="less">
+@import '~@burgeon/oms-theme/skin/public.less';
 .content {
   padding: 20px 30px 10px;
   display: flex;
@@ -273,8 +274,8 @@ export default {
     margin-top: 8px;
     padding-bottom: 8px;
     .ui_button {
-      background-color: #fd6442;
-      border-color: #fd6442;
+      background-color: @button-transparent;
+      border-color: @button-transparent-font;
       border-radius: 2px;
       color: #fff;
       height: 24px;

@@ -37,7 +37,7 @@
           <Input v-model="psCProEname" style="width: 150px; marginRight:8px" @on-enter="search" />
         </div> -->
 
-        <div style="marginLeft:20px">
+        <div class="search-button">
           <Button type="primary" @click="search">搜索</Button>
         </div>
       </div>
@@ -45,7 +45,7 @@
     <div class="i_body">
       <Table :columns="columns" :data="data" :loading="tableLoad" @on-row-click="onRowClick" :highlight-row="true"></Table>
     </div>
-    <div class="i_food">
+    <div class="dialog-footer">
       <Button style="marginLeft:8px;" type="primary" @click="confirm">确定</Button>
       <Button @click="()=>{this.$parent.$parent.closeConfirm();}">取消</Button>
     </div>
@@ -282,9 +282,9 @@ export default {
 };
 </script>
 <style lang="less">
+@import "~@burgeon/oms-theme/skin/public.less";
 .itemDelete {
   .i_head {
-    // height: 30px;
     .i_title {
       margin-bottom: 7px;
       line-height: 20px;
@@ -301,6 +301,15 @@ export default {
   .i_food {
     display: flex;
     flex-direction: row-reverse;
+  }
+  .search-button {
+    text-align: right;
+    width: 100px;
+    margin-top: 2px;
+    .ark-btn-primary {
+      background-color: @button-bg;
+      border-color: @button-border;
+    }
   }
 }
 </style>
