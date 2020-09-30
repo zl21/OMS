@@ -38,8 +38,17 @@
         </div>
       </div>
     </div>
-    <copyModal :copyModal="copyModal" @cancel-btn="cancelBtn" @sure-btn="sureBtn"></copyModal>
-    <Modal v-model="saveModal" title="提示" @on-ok="saveOk" @on-cancel="saveCancel">
+    <copyModal
+      :copyModal="copyModal"
+      @cancel-btn="cancelBtn"
+      @sure-btn="sureBtn"
+    ></copyModal>
+    <Modal
+      v-model="saveModal"
+      title="提示"
+      @on-ok="saveOk"
+      @on-cancel="saveCancel"
+    >
       <p>是否保存已经修改的数据?</p>
     </Modal>
   </div>
@@ -49,10 +58,10 @@ import qxBtnData from "./qxBtnData";
 import customButton from "./customButton";
 import quanXianTable from "./quanXianTable";
 import copyModal from "./copyModal";
-import R3 from '@syman/burgeon-r3'
-console.log(4,R3)
+import R3 from "@syman/burgeon-r3";
+console.log(4, R3);
 const { FilterTree, SelectTree, SearchForm } = R3.components;
-const{network,urlSearchParams}=R3
+const { network, urlSearchParams } = R3;
 import axios from "axios";
 import form from "@/assets/js/__utils__/form";
 export default {
@@ -70,12 +79,12 @@ export default {
       spinShow: false,
       saveModal: false,
 
-      permissionType: '', //权限类型
-      permissionTable: '',
-      permissionKeyColumn: '',
+      permissionType: "", //权限类型
+      permissionTable: "",
+      permissionKeyColumn: "",
 
-      groupId: '', // 菜单id
-      newGroupId: '', // 切换菜单时，当前切换的id
+      groupId: "", // 菜单id
+      newGroupId: "", // 切换菜单时，当前切换的id
 
       isChange: false,
 
@@ -143,18 +152,18 @@ export default {
       },
       sensitiveColumns: [
         {
-          title: '敏感列',
-          key: 'CP_C_COLUMN_ENAME'
+          title: "敏感列",
+          key: "CP_C_COLUMN_ENAME"
         },
         {
-          title: '查看',
-          key: 'IS_READ'
+          title: "查看",
+          key: "IS_READ"
         },
         {
-          title: '编辑',
-          key: 'IS_WRITE'
+          title: "编辑",
+          key: "IS_WRITE"
         }
-      ],
+      ]
     };
   },
 
@@ -164,14 +173,13 @@ export default {
 
     // 获取角色
     this.getRoleData();
-    if (this.permissionType !== 'sensitive') {
+    if (this.permissionType !== "sensitive") {
       this.getSearchForm();
     }
     this.buttonConfig.buttons = this.normal.buttons;
   },
   mounted() {
     const { customizedModuleName } = this.$route.params;
-
   },
   methods: {
     saveOk() {
@@ -209,28 +217,46 @@ export default {
 
     // 获取角色id
     getRoleData() {
-      network.post('/p/cs/groupTreeload', {})
-        .then((res) => {
-          if (res.data.code === 0) {
-            this.groupId = res.data.data[0].ID;
-            this.newGroupId = res.data.data[0].ID;
-            this.filterTreeConfig.treeAttribute.data = this.restructureMenuTreeData(res.data.data, true);
+      network.post("/p/cs/groupTreeload", {}).then(res => {
+        if (res.data.code === 0) {
+          this.groupId = res.data.data[0].ID;
+          this.newGroupId = res.data.data[0].ID;
+          this.filterTreeConfig.treeAttribute.data = this.restructureMenuTreeData(
+            res.data.data,
+            true
+          );
 
-            this.getTableData();
-          }
-        });
+          this.getTableData();
+        }
+      });
     },
     // 获取搜索框
     getSearchForm() {
-      network.post('/p/cs/permission/v1/selectPermissionColumn', urlSearchParams({ permissionType: this.permissionType }))
-        .then((res) => {
+      // network.post('/p/cs/permission/v1/selectPermissionColumn', urlSearchParams({ permissionType: this.permissionType }))
+      //   .then((res) => {
+      //     if (res.data.code === 0) {
+      //       let dataArray = form.refactoringData(res.data.datas.dataarry);
+      //       dataArray.map(item => {
+      //         if (item.item.value) {
+      //           item.item.props.value = item.item.value;
+      //         }
+      //       })
+      //       this.searchFormConfig.defaultconfig = dataArray;
+      //     }
+      //   });
+      network
+        .post(
+          "http://yapi.dev.syman.cn/mock/624/p/cs/permission/v1/selectPermissionColumn",
+          urlSearchParams({ permissionType: 1 })
+        )
+        .then(res => {
           if (res.data.code === 0) {
             let dataArray = form.refactoringData(res.data.datas.dataarry);
             dataArray.map(item => {
               if (item.item.value) {
                 item.item.props.value = item.item.value;
               }
-            })
+            });
             this.searchFormConfig.defaultconfig = dataArray;
           }
         });
@@ -241,105 +267,106 @@ export default {
       this.groupId = this.newGroupId;
       let url, params;
       if (this.permissionType === "sensitive") {
-        url = '/p/cs/cgroupcolumnquery';
+        url = "/p/cs/cgroupcolumnquery";
         params = {
           GROUPS_ID: this.groupId,
           QUERY: ""
         };
       } else {
-        url = '/p/cs/permission/v1/selectDataPermission';
+        // url = "/p/cs/permission/v1/selectDataPermission";
+        url =
+          "http://yapi.dev.syman.cn/mock/624/p/cs/permission/v1/selectDataPermission";
         params = {
           permissionType: this.permissionType,
           groupId: this.groupId,
           searchCondition: searchCondition
         };
       }
-      network.post(url, urlSearchParams(params))
-        .then((res) => {
-          if (res.data.code === 0) {
-            this.tableArr.isReadValueTotal = 0;
-            this.tableArr.isWriteValueTotal = 0;
-            this.tableArr.isReadValue = false;
-            this.tableArr.isWriteValue = false;
-            this.tableArr.isChild = false;
-            this.tableArr.parentIsRead = 0;
-            this.tableArr.parentIsWrite = 0;
-            this.tableArr.isParentReadValue = false;
-            this.tableArr.isParentWriteValue = false;
+      network.post(url, urlSearchParams(params)).then(res => {
+        if (res.data.code === 0) {
+          this.tableArr.isReadValueTotal = 0;
+          this.tableArr.isWriteValueTotal = 0;
+          this.tableArr.isReadValue = false;
+          this.tableArr.isWriteValue = false;
+          this.tableArr.isChild = false;
+          this.tableArr.parentIsRead = 0;
+          this.tableArr.parentIsWrite = 0;
+          this.tableArr.isParentReadValue = false;
+          this.tableArr.isParentWriteValue = false;
 
-            if (this.permissionType === "sensitive") {
-              let dt = res.data.data;
-              dt.map((item) => {
-                dt.isChild = !!item.PARENT_GROUPS_ID;
-                if (item.PARENT_GROUPS_ID) {
-                  if (item.PARENT_ISREAD == 'Y') {
-                    this.tableArr.parentIsRead++;
-                  }
-                  if (item.PARENT_ISMODIFY == 'Y') {
-                    this.tableArr.parentIsWrite++;
-                  }
+          if (this.permissionType === "sensitive") {
+            let dt = res.data.data;
+            dt.map(item => {
+              dt.isChild = !!item.PARENT_GROUPS_ID;
+              if (item.PARENT_GROUPS_ID) {
+                if (item.PARENT_ISREAD == "Y") {
+                  this.tableArr.parentIsRead++;
                 }
-                item.IS_WRITE = item.ISMODIFY == 'Y';
-                item.IS_READ = item.ISREAD == 'Y';
-              });
-              this.tableArr.columns = this.sensitiveColumns;
-              this.tableArr.rows = res.data.data;
-              this.tableArr.isChild = dt.isChild;
-            } else {
-              let dt = res.data.data;
-              dt.rows.map(item => {
-                dt.isChild = !!item.PARENT_GROUPS_ID;
-                if (item.PARENT_GROUPS_ID) {
-                  if (item.PARENT_IS_READ == 'Y') {
-                    this.tableArr.parentIsRead++;
-                  }
-                  if (item.PARENT_IS_WRITE == 'Y') {
-                    this.tableArr.parentIsWrite++;
-                  }
+                if (item.PARENT_ISMODIFY == "Y") {
+                  this.tableArr.parentIsWrite++;
                 }
-              })
-              this.tableArr.columns = dt.columns;
-              this.tableArr.rows = dt.rows;
-              this.tableArr.isChild = dt.isChild;
-            }
-
-            this.tableArr.rows.forEach(item => {
-              if (item.IS_READ === "Y" || item.ISREAD === "Y") {
-                item.IS_READ = true;
-                this.tableArr.isReadValueTotal++;
-              } else {
-                item.IS_READ = false;
               }
-              if (item.IS_WRITE === "Y" || item.ISMODIFY === "Y") {
-                item.IS_WRITE = true;
-                this.tableArr.isWriteValueTotal++;
-              } else {
-                item.IS_WRITE = false;
+              item.IS_WRITE = item.ISMODIFY == "Y";
+              item.IS_READ = item.ISREAD == "Y";
+            });
+            this.tableArr.columns = this.sensitiveColumns;
+            this.tableArr.rows = res.data.data;
+            this.tableArr.isChild = dt.isChild;
+          } else {
+            let dt = res.data.data;
+            dt.rows.map(item => {
+              dt.isChild = !!item.PARENT_GROUPS_ID;
+              if (item.PARENT_GROUPS_ID) {
+                if (item.PARENT_IS_READ == "Y") {
+                  this.tableArr.parentIsRead++;
+                }
+                if (item.PARENT_IS_WRITE == "Y") {
+                  this.tableArr.parentIsWrite++;
+                }
               }
             });
-
-            if (this.tableArr.parentIsRead === this.tableArr.rows.length) {
-              this.tableArr.isParentReadValue = true;
-            }
-            if (this.tableArr.parentIsWrite === this.tableArr.rows.length) {
-              this.tableArr.isParentWriteValue = true;
-            }
-            if (this.tableArr.isReadValueTotal === this.tableArr.rows.length) {
-              this.tableArr.isReadValue = true;
-            }
-            if (this.tableArr.isWriteValueTotal === this.tableArr.rows.length) {
-              this.tableArr.isWriteValue = true;
-            }
-
-            this.permissionTable = res.data.data.permissionTable;
-            this.permissionKeyColumn = res.data.data.permissionKeyColumn;
-
-            this.oldTableArr = JSON.parse(JSON.stringify(this.tableArr.rows));
-            if (refresh) {
-              this.$Message.success('刷新成功');
-            }
+            this.tableArr.columns = dt.columns;
+            this.tableArr.rows = dt.rows;
+            this.tableArr.isChild = dt.isChild;
           }
-        });
+
+          this.tableArr.rows.forEach(item => {
+            if (item.IS_READ === "Y" || item.ISREAD === "Y") {
+              item.IS_READ = true;
+              this.tableArr.isReadValueTotal++;
+            } else {
+              item.IS_READ = false;
+            }
+            if (item.IS_WRITE === "Y" || item.ISMODIFY === "Y") {
+              item.IS_WRITE = true;
+              this.tableArr.isWriteValueTotal++;
+            } else {
+              item.IS_WRITE = false;
+            }
+          });
+
+          if (this.tableArr.parentIsRead === this.tableArr.rows.length) {
+            this.tableArr.isParentReadValue = true;
+          }
+          if (this.tableArr.parentIsWrite === this.tableArr.rows.length) {
+            this.tableArr.isParentWriteValue = true;
+          }
+          if (this.tableArr.isReadValueTotal === this.tableArr.rows.length) {
+            this.tableArr.isReadValue = true;
+          }
+          if (this.tableArr.isWriteValueTotal === this.tableArr.rows.length) {
+            this.tableArr.isWriteValue = true;
+          }
+
+          this.permissionTable = res.data.data.permissionTable;
+          this.permissionKeyColumn = res.data.data.permissionKeyColumn;
+
+          this.oldTableArr = JSON.parse(JSON.stringify(this.tableArr.rows));
+          if (refresh) {
+            this.$Message.success("刷新成功");
+          }
+        }
+      });
     },
 
     sureBtn(params) {
@@ -347,49 +374,51 @@ export default {
       let param = new URLSearchParams();
       console.log(params);
       param.append("param", JSON.stringify(params));
-      axios({
-        url: "/p/cs/copyShopPermission",
-        method: "post",
-        data: param
-      }).then(res => {
-        if (res.data.code === 0) {
-          this.$Modal.success({
-            title: "提示",
-            content: res.data.message,
-            cancelType: true,
-            titleAlign: "left",
-            mask: true,
-            draggable: true,
-            keyDown: event => {
-              if (event.keyCode == 27 || event.keyCode == 13) {
-                self.$Modal.remove();
+      network
+        .axios({
+          url: "/p/cs/copyShopPermission",
+          method: "post",
+          data: param
+        })
+        .then(res => {
+          if (res.data.code === 0) {
+            this.$Modal.success({
+              title: "提示",
+              content: res.data.message,
+              cancelType: true,
+              titleAlign: "left",
+              mask: true,
+              draggable: true,
+              keyDown: event => {
+                if (event.keyCode == 27 || event.keyCode == 13) {
+                  self.$Modal.remove();
+                }
               }
-            }
-          });
-        } else {
-          this.$Modal.error({
-            title: "提示",
-            content: res.data.message,
-            cancelType: true,
-            titleAlign: "left",
-            mask: true,
-            draggable: true,
-            keyDown: event => {
-              if (event.keyCode == 27 || event.keyCode == 13) {
-                self.$Modal.remove();
+            });
+          } else {
+            this.$Modal.error({
+              title: "提示",
+              content: res.data.message,
+              cancelType: true,
+              titleAlign: "left",
+              mask: true,
+              draggable: true,
+              keyDown: event => {
+                if (event.keyCode == 27 || event.keyCode == 13) {
+                  self.$Modal.remove();
+                }
               }
-            }
-          });
-        }
-      });
+            });
+          }
+        });
     },
     cancelBtn() {
       this.copyModal = false;
-    },
+    }
   }
 };
 </script>
-<style lang="less" >
+<style lang="less">
 .jurisdiction {
   height: 100%;
   .content {

@@ -147,6 +147,7 @@
       width="360"
       v-model="modal1"
       title="警告"
+      class="customizedModal"
       @on-ok="ok"
       @on-cancel="cancel"
     >
@@ -2592,23 +2593,6 @@ export default {
     z-index: 1000;
     img {
       width: 100%;
-    }
-  }
-  .orderManageEdit .popInput {
-    font-size: 12px;
-    .item-col label.title i {
-      top: auto;
-      left: -2px !important;
-      font-size: 12px;
-      height: auto;
-      line-height: inherit;
-      vertical-align: inherit;
-    }
-    .add-input {
-      padding: 5px 10px !important;
-      // color: #575757;
-      opacity: 1;
-      // cursor: not-allowed;
     }
   }
   .commodity-detail-box {

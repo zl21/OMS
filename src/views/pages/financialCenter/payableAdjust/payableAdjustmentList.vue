@@ -875,7 +875,8 @@ export default {
         }
         this.$refs.agtable.agGridTable(
           this.agTableConfig.columnDefs,
-          this.agTableConfig.rowData
+          this.agTableConfig.rowData,
+          this.getExtendObj()
         );
       });
     },
@@ -905,20 +906,26 @@ export default {
       this.agTableConfig.pagenation.pageSize = val;
     },
     getExtendObj() {
+      /**
+       * BILL_STATUS: 4，BILL_STATUS_NAME: "已作废"。
+       * BILL_STATUS: 1，BILL_STATUS_NAME: "未审核"。
+       * BILL_STATUS: 2，BILL_STATUS_NAME: "已客审"。
+       * BILL_STATUS: 3，BILL_STATUS_NAME: "已财审"。
+       * */
       return {
         getRowStyle(params) {
           // console.log("params :>> ", params);
           // 设置行样式
-          if (params.data.STATUS === 1) {
-            // 草稿
-            return { color: "#323233" };
+          if (params.data.BILL_STATUS === 4) {
+            // 已作废
+            return { color: "gray" };
           }
-          if (params.data.STATUS === 2) {
-            // 已发布
+          if (params.data.BILL_STATUS ===3) {
+            // 已财审
             return { color: "blue" };
           }
-          // 下线过期
-          return { color: "gray" };
+          // 未审核
+          return { color: "#323233" };
         },
       };
     },

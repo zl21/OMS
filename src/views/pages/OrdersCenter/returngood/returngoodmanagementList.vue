@@ -33,6 +33,16 @@
           @on-page-change="pageChange"
           @on-page-size-change="pageSizeChange"
         ></jordan-action-table> -->
+        <div class="agLoading" v-show="agTableConfig.agLoading">
+          <Spin fix>
+            <Icon
+              type="ios-loading"
+              size="18"
+              class="demo-spin-icon-load"
+            ></Icon>
+            <div>Loading</div>
+          </Spin>
+        </div>
         <aTable
           ref="agGridChild"
           :agTableConfig="agTableConfig"
@@ -527,7 +537,17 @@ export default {
         agLoading: false,
         columnDefs: [],
         rowData: [],
-        renderArr: {},
+        renderArr: {
+          CP_C_SHOP_ID: param => {
+            let resDom = document.createElement("div");
+            resDom.style.width = "100%";
+            resDom.style.display = "flex";
+            resDom.style.alignitems = "center";
+            resDom.style.justifyContent = "space-between";
+            resDom.innerHTML = param.data.CP_C_SHOP_TITLE;
+            return resDom;
+          }
+        },
         tableHeight: "600px",
         pagenation: {
           //设置总条数
@@ -679,35 +699,6 @@ export default {
                     params.row.RESERVE_VARCHAR02
                       ? params.row.RESERVE_VARCHAR02
                       : "暂无卖家备注"
-                  )
-                ]
-              );
-            }
-          },
-          {
-            key: "CP_C_SHOP_ID",
-            // title: "卖家昵称（店铺）",
-            render: (h, params) => {
-              return h(
-                "div",
-                {
-                  style: {
-                    width: "100%",
-                    display: "flex",
-                    alignitems: "center",
-                    justifyContent: "space-between"
-                  }
-                },
-                [
-                  h(
-                    "span",
-                    {
-                      style: {
-                        width: "100%",
-                        height: "100%"
-                      }
-                    },
-                    params.row.CP_C_SHOP_TITLE
                   )
                 ]
               );

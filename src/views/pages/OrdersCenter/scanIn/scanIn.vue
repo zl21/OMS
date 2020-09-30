@@ -2,7 +2,7 @@
   <div class="scanIn">
     <!-- 按钮 -->
     <div class="scan_button">
-      <jordan-button :btn-config="btnConfig"/>
+      <businessButton :btn-config="btnConfig"/>
     </div>
     <!-- 高级搜索 -->
     <div class="scan_search">
@@ -23,7 +23,7 @@
         />
         扫描信息
       </div>
-      <jordan-form :form-config="formConfig1"/>
+      <businessForm :form-config="formConfig1"/>
     </div>
     <!-- 录入信息 -->
     <div class="scan_logg">
@@ -35,11 +35,11 @@
         />
         录入信息
       </div>
-      <jordan-form :form-config="formConfig2"/>
+      <businessForm :form-config="formConfig2"/>
     </div>
     <!-- 特殊处理 -->
     <div class="scan_special">
-      <jordan-form :form-config="formConfig3"/>
+      <businessForm :form-config="formConfig3"/>
     </div>
     <!-- 扫描明细 -->
     <div class="scan_details">
@@ -51,7 +51,7 @@
         />
         扫描明细
       </div>
-      <jordan-action-table
+      <businessActionTable
         :jordan-table-config="jordanTableConfig"
         @on-row-click="onRowClick"
       />
@@ -66,7 +66,7 @@
         />
         退换货信息
       </div>
-      <jordan-form :form-config="formConfig4"/>
+      <businessForm :form-config="formConfig4"/>
     </div>
     <!-- 弹框 -->
     <div class="dilog">
@@ -1866,7 +1866,7 @@
       margin: 10px 0 10px 37px;
       font-size: 16px;
       font-weight: 600;
-      border-bottom: 3px solid #f00;
+      border-bottom: 3px solid @base-color;
       width: 120px;
       padding-bottom: 5px;
     }

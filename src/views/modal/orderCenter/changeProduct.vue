@@ -8,14 +8,6 @@
           <div class="skuBox">
             <re-form :formConfig="formConfig" />
           </div>
-          <!-- <div class="search_child">
-            <span class="lable">商品SKU:</span>
-            <Input v-model="searchValue" @on-enter="search('one')" />
-          </div>
-          <div class="search_child">
-            <span class="lable">商品款号:</span>
-            <Input v-model="proEcode" @on-enter="search('one')" />
-          </div>-->
           <div class="search_child">
             <span class="lable">商品名称:</span>
             <Input v-model="proName" @on-enter="search('one')" />
@@ -39,14 +31,6 @@
           <div class="skuBox">
             <re-form :formConfig="replaceFormConfig" />
           </div>
-          <!-- <div class="search_child">
-            <span class="lable">商品SKU:</span>
-            <Input v-model="replace_searchValue" @on-enter="search('two')" />
-          </div>
-          <div class="search_child">
-            <span class="lable">商品款号:</span>
-            <Input v-model="replace_proEcode" @on-enter="search('two')" />
-          </div>-->
           <div class="search_child">
             <span class="lable">商品名称:</span>
             <Input v-model="replace_proName" @on-enter="search('two')" />
@@ -69,11 +53,11 @@
     <div class="i_food">
       <span class="title">
         <span>将</span>
-        <span style="color:#003200">{{ onRowClickText }}</span>
+        <span style="color: #003200">{{ onRowClickText }}</span>
         <span>替换为</span>
-        <span style="color:#003200">{{ onRowClickReplaceText }}</span>
+        <span style="color: #003200">{{ onRowClickReplaceText }}</span>
       </span>
-      <div class="i_button">
+      <div class="dialog-footer">
         <Button
           type="error"
           ghost
@@ -96,7 +80,7 @@ import axios from "axios";
 import reForm from "professionalComponents/businessForm";
 export default {
   components: {
-    reForm
+    reForm,
   },
   data() {
     return {
@@ -106,7 +90,7 @@ export default {
       formConfig: {
         formValue: {
           searchValue: "",
-          psCProEcode: ""
+          psCProEcode: "",
         },
         formData: [
           {
@@ -116,7 +100,7 @@ export default {
             value: "searchValue",
             columns: ["ECODE"],
             AuotData: [], //匹配的选项
-            dimChange: val => {
+            dimChange: (val) => {
               //模糊查询的方法
               let _this = this;
               _this.formConfig.formValue.searchValue = val.trim();
@@ -126,15 +110,15 @@ export default {
                 data: {
                   isBlur: "Y", //N为精确匹配
                   psCSku: {
-                    ECODE: val.trim()
-                  }
-                }
-              }).then(res => {
+                    ECODE: val.trim(),
+                  },
+                },
+              }).then((res) => {
                 if (res.status === 200) {
                   let data = res.data.data.data;
                   let dimList = _this.formConfig.formData;
                   let arr;
-                  data.map(item => {
+                  data.map((item) => {
                     //删除不需要展示的模糊搜索项
                     delete item.GBCODE;
                     delete item.IS_GIFT;
@@ -148,7 +132,7 @@ export default {
                     delete item.sizeName;
                     delete item.skuId;
                   });
-                  dimList.map(item => {
+                  dimList.map((item) => {
                     if (item.label === "商品SKU") {
                       item.AuotData = data;
                       //调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
@@ -160,9 +144,9 @@ export default {
             dimEnter: () => {
               this.search("one");
             },
-            dimSelect: val => {
+            dimSelect: (val) => {
               this.formConfig.formValue.searchValue = val.label;
-            }
+            },
           },
           {
             label: "商品款号",
@@ -171,7 +155,7 @@ export default {
             value: "psCProEcode",
             columns: ["ECODE"],
             AuotData: [], //匹配的选项
-            dimChange: val => {
+            dimChange: (val) => {
               //模糊查询的方法
               let _this = this;
               _this.formConfig.psCProEcode = val.trim();
@@ -181,18 +165,18 @@ export default {
                 PAGENUM: 1,
                 PAGESIZE: 10,
                 CONDITION: {},
-                TABLENAME: "PS_C_PRO"
+                TABLENAME: "PS_C_PRO",
               };
               fromdata.append("param", JSON.stringify(params));
               axios({
                 url: "/p/cs/screenresult",
                 method: "post",
-                data: fromdata
-              }).then(res => {
+                data: fromdata,
+              }).then((res) => {
                 if (res.data.code === 0) {
                   let dimList = _this.formConfig.formData;
 
-                  dimList.map(item => {
+                  dimList.map((item) => {
                     if (item.label === "商品款号") {
                       item.AuotData = res.data.data.list;
                     }
@@ -203,17 +187,17 @@ export default {
             dimEnter: () => {
               this.search("one");
             },
-            dimSelect: val => {
+            dimSelect: (val) => {
               this.formConfig.formValue.psCProEcode = val.label;
               // this.psCProEcode = val.label;
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       replaceFormConfig: {
         formValue: {
           searchValue: "",
-          psCProEcode: ""
+          psCProEcode: "",
         },
         formData: [
           {
@@ -223,7 +207,7 @@ export default {
             value: "searchValue",
             columns: ["ECODE"],
             AuotData: [], //匹配的选项
-            dimChange: val => {
+            dimChange: (val) => {
               //模糊查询的方法
               let _this = this;
               _this.replaceFormConfig.formValue.searchValue = val.trim();
@@ -233,15 +217,15 @@ export default {
                 data: {
                   isBlur: "Y", //N为精确匹配
                   psCSku: {
-                    ECODE: val.trim()
-                  }
-                }
-              }).then(res => {
+                    ECODE: val.trim(),
+                  },
+                },
+              }).then((res) => {
                 if (res.status === 200) {
                   let data = res.data.data.data;
                   let dimList = _this.replaceFormConfig.formData;
                   let arr;
-                  data.map(item => {
+                  data.map((item) => {
                     //删除不需要展示的模糊搜索项
                     delete item.GBCODE;
                     delete item.IS_GIFT;
@@ -255,7 +239,7 @@ export default {
                     delete item.sizeName;
                     delete item.skuId;
                   });
-                  dimList.map(item => {
+                  dimList.map((item) => {
                     if (item.label === "商品SKU") {
                       item.AuotData = data;
                       //调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
@@ -267,9 +251,9 @@ export default {
             dimEnter: () => {
               this.search("two");
             },
-            dimSelect: val => {
+            dimSelect: (val) => {
               this.replaceFormConfig.formValue.searchValue = val.label;
-            }
+            },
           },
           {
             label: "商品款号",
@@ -278,7 +262,7 @@ export default {
             value: "psCProEcode",
             columns: ["ECODE"],
             AuotData: [], //匹配的选项
-            dimChange: val => {
+            dimChange: (val) => {
               //模糊查询的方法
               let _this = this;
               _this.replaceFormConfig.psCProEcode = val.trim();
@@ -288,18 +272,18 @@ export default {
                 PAGENUM: 1,
                 PAGESIZE: 10,
                 CONDITION: {},
-                TABLENAME: "PS_C_PRO"
+                TABLENAME: "PS_C_PRO",
               };
               fromdata.append("param", JSON.stringify(params));
               axios({
                 url: "/p/cs/screenresult",
                 method: "post",
-                data: fromdata
-              }).then(res => {
+                data: fromdata,
+              }).then((res) => {
                 if (res.data.code === 0) {
                   let dimList = _this.replaceFormConfig.formData;
 
-                  dimList.map(item => {
+                  dimList.map((item) => {
                     if (item.label === "商品款号") {
                       item.AuotData = res.data.data.list;
                     }
@@ -310,12 +294,12 @@ export default {
             dimEnter: () => {
               this.search("two");
             },
-            dimSelect: val => {
+            dimSelect: (val) => {
               this.replaceFormConfig.formValue.psCProEcode = val.label;
               // this.psCProEcode = val.label;
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       // searchValue: "",
       // proEcode: "",
@@ -328,29 +312,29 @@ export default {
       columns: [
         {
           title: "商品SKU",
-          key: "ECODE"
+          key: "ECODE",
         },
         {
           title: "商品名称",
-          key: "PS_C_PRO_ENAME"
+          key: "PS_C_PRO_ENAME",
         },
         {
           title: "商品SKU名称",
-          key: "SPEC"
-        }
+          key: "SPEC",
+        },
       ],
       data: [],
       replace_data: [],
       onRowClickReplaceData: {},
       onRowClickData: {},
       onRowClickText: "",
-      onRowClickReplaceText: ""
+      onRowClickReplaceText: "",
     };
   },
   props: {
     componentData: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   mounted() {
     // console.log("componentData=>",this.componentData);
@@ -380,13 +364,15 @@ export default {
                 ? self.formConfig.formValue.psCProEcode.trim()
                 : self.replaceFormConfig.formValue.psCProEcode.trim(),
             psCProEname:
-              value == "one" ? self.proName.trim() : self.replace_proName.trim()
-          }
-        }
+              value == "one"
+                ? self.proName.trim()
+                : self.replace_proName.trim(),
+          },
+        },
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.code == 0) {
-            res.data.data.data.map(item => {
+            res.data.data.data.map((item) => {
               item.IS_GIFT == "0" ? "否" : "是";
             });
             if (value == "one") {
@@ -429,7 +415,7 @@ export default {
         PRICELIST: self.onRowClickReplaceData.PRICELIST,
         IS_GROUP: self.onRowClickReplaceData.IS_GROUP,
         SKU_ECODE: self.onRowClickReplaceData.ECODE,
-        PS_C_PRO_ID: self.onRowClickReplaceData.PS_C_PRO_ID
+        PS_C_PRO_ID: self.onRowClickReplaceData.PS_C_PRO_ID,
       };
       if (self.componentData.a_2.length == 0) {
         self.$Message.warning("请勾选订单数据!");
@@ -443,8 +429,8 @@ export default {
       axios({
         url: "/api/cs/oc/oms/v1/bathChangeGoods",
         method: "post",
-        data: result
-      }).then(res => {
+        data: result,
+      }).then((res) => {
         console.log(res);
         if (res.data.code == 0) {
           self.$Message.error(res.data.message);
@@ -453,19 +439,19 @@ export default {
           self.$Modal.confirm({
             title: res.data.message,
             width: 500,
-            render: h => {
+            render: (h) => {
               return h("Table", {
                 props: {
                   columns: [
                     {
                       title: "提示信息",
-                      key: "message"
-                    }
+                      key: "message",
+                    },
                   ],
-                  data: res.data.data
-                }
+                  data: res.data.data,
+                },
               });
-            }
+            },
           });
         }
       });
@@ -477,11 +463,12 @@ export default {
     onRowClick(row) {
       this.onRowClickData = row;
       this.onRowClickText = row.ECODE;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="less" scoped>
+@import '~@burgeon/oms-theme/skin/public.less';
 .changeProduct {
   .i_head {
     display: flex;
@@ -499,15 +486,34 @@ export default {
       flex-wrap: wrap;
       white-space: nowrap;
       .search_child {
-        display: flex;
-        margin-left: 15px;
-        margin-bottom: 8px;
-        .lable {
-          margin-right: 6px;
+        width: 50%;
+        font-size: 0;
+        height: 32px;
+        line-height: 1;
+        & + .search_child {
+          text-align: right;
+          padding-top: 3px;
+          .ark-btn-primary {
+            background-color: @button-bg;
+            border-color: @button-border;
+          }
         }
-      }
-      .search_child:last-child {
-        margin-left: 153px;
+
+        .lable {
+          font-size: 12px;
+          display: inline-block;
+          width: 100px;
+          padding: 10px 12px 10px 0;
+          text-align: right;
+          vertical-align: middle;
+        }
+        .ark-input-wrapper {
+          font-size: 12px;
+          width: calc(100% - 100px);
+          display: inline-block;
+          text-align: right;
+          vertical-align: middle;
+        }
       }
     }
     .i_body {
@@ -533,35 +539,8 @@ export default {
       transform: translate(-50%, -50%);
     }
   }
-
-  .i_food {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 10px;
-    .title {
-      font-family: PingFangSC-Regular;
-      font-size: 12px;
-      color: #999999;
-      letter-spacing: 0.7px;
-    }
-    .i_button {
-      font-size: 0;
-      text-align: right;
-      .burgeon-btn.burgeon-btn-primary {
-        margin-left: 8px;
-      }
-    }
-  }
-  // .burgeon-input {
-  //   height: 32px;
-  // }
-  // .burgeon-input-icon {
-  //   line-height: 32px;
-  // }
   .skuBox {
-    width: 430px;
-    height: 29px;
+    width: 100%;
     overflow: hidden;
     margin-top: -2px;
     /deep/ .orderManageEdit {

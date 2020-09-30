@@ -357,16 +357,6 @@
             obj[col.key] = objRow.ECODE ? objRow[col.key] : '';
           }
         });
-        // if(objRow.PRO_ECODE && objRow.SG_PRO_ID){
-        //     obj.PRO_ECODE = objRow.PRO_ECODE
-        //     obj.SG_PRO_ID = objRow.SG_PRO_ID
-        // }
-        // obj.itemdata =  JSON.parse(JSON.stringify(this.itemdata));
-        // if(objRow){
-        //     obj.itemdata.pid = objRow.ID;
-        //     obj.itemdata.valuedata  = objRow.ECODE;
-        // }
-        // obj.itemdata.colname = obj.itemdata.colname + Math.floor(Math.random()*1000000);
         this.products_data.push(obj);
         this.countTablelistView();
       },
@@ -468,15 +458,16 @@
           });
         });
       },
+      // 取消
       cancel_simulation() {
         this.$destroy(true);
         this.$store.commit('customize/TabClose', {
-          id: 31460113, // id
+          id: 2895, // id
           type: 'CUSTOMIZED', // 类型action
           name: 'PROMACTIQUERYLIST', // 文件名
           label: '促销活动', // tab中文名 
           query: Object.assign({
-            id: 31460113
+            id: 2895
           }) // 带的参数
         });
       },
@@ -602,10 +593,11 @@
 </script>
 <style lang="less">
 @import "../less/common.less";
+@import '~@burgeon/oms-theme/skin/public.less';
 @lineHeight: 24px;
 @inputWidth: 410px;
 @fontSize: 12px;
-@baseColor: #0068b7;
+// @publicColor: #0068b7;
 @bgColr:#fff6f6;
 @bgColor:#fff;
 .simulation{
@@ -616,16 +608,16 @@
         position: absolute;
         top:10px;
         text-align: left;
-        background:@bgColr;
+        background:@base-bg;
         padding:10px 20px;
         width:100%;
         box-sizing: border-box;
         z-index:101;
-        border:1px solid #ffdcdc;
+        border:1px solid @base-border;
         .btn {
             font-size: 12px;
-            color:@baseColor;
-            border:1px solid @baseColor;
+            color:@base-color;
+            border:1px solid @base-color;
             padding:0px 8px;
             border-radius:2px;
             height:24px;
@@ -785,8 +777,8 @@
                 text-align: right;
                 .btn{
                     font-size: 12px;
-                    color:@baseColor;
-                    border:1px solid @baseColor;
+                    color:@base-color;
+                    border:1px solid @base-color;
                     padding:0px 8px;
                     border-radius:2px;
                     height:24px;
