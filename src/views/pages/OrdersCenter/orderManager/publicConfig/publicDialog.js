@@ -11,7 +11,7 @@ export default {
     maskClosable: false, //是否可以点击蒙层关闭
     transfer: true, //是否将弹层放在body内
     name: "modifyLogistics", //组件名称
-    url: "OrdersCenter/orderManager/modifyLogistics",
+    url: "modal/orderCenter/modifyLogistics",
     keepAlive: true,
     componentData: {},
     quit: function () {
@@ -31,27 +31,7 @@ export default {
     maskClosable: false, //是否可以点击蒙层关闭
     transfer: true, //是否将弹层放在body内
     name: "makeOutInvoice", //组件名称
-    url: "OrdersCenter/orderManager/makeOutInvoice",
-    keepAlive: true,
-    componentData: {},
-    quit: function () {
-      this.closeConfirm()
-    }
-  },
-
-  // 弹框配置 拆分订单
-  splitOrderConfig: {
-    confirmTitle: "拆分订单",
-    titleAlign: "center", //设置标题是否居中 center left
-    width: "800",
-    scrollable: false, //是否可以滚动
-    closable: true, //是否可以按esc关闭
-    draggable: true, //是否可以拖动
-    mask: true, //是否显示遮罩层
-    maskClosable: false, //是否可以点击蒙层关闭
-    transfer: true, //是否将弹层放在body内
-    name: "splitOrder", //组件名称
-    url: "OrdersCenter/orderManager/splitOrder",
+    url: "modal/orderCenter/makeOutInvoice",
     keepAlive: true,
     componentData: {},
     quit: function () {
@@ -72,7 +52,7 @@ export default {
     transfer: true, //是否将弹层放在body内
     name: "addGifts", //组件名称
     keepAlive: true,
-    url: "OrdersCenter/orderManager/addGifts",
+    url: "modal/orderCenter/addGifts",
     componentData: {},
     quit: function () {
       this.closeConfirm()
@@ -91,7 +71,7 @@ export default {
     maskClosable: false, //是否可以点击蒙层关闭
     transfer: true, //是否将弹层放在body内
     name: "changeRemark", //组件名称
-    url: "OrdersCenter/orderManager/changeRemark",
+    url: "modal/orderCenter/changeRemark",
     keepAlive: true,
     componentData: {},
     quit: function () {
@@ -111,7 +91,7 @@ export default {
     maskClosable: false, //是否可以点击蒙层关闭
     transfer: true, //是否将弹层放在body内
     name: "setFromDrag", //组件名称
-    url: "OrdersCenter/orderManager/setFromDrag",
+    url: "modal/orderCenter/setFromDrag",
     keepAlive: true,
     componentData: {},
     quit: function () {
@@ -131,7 +111,7 @@ export default {
     maskClosable: false, //是否可以点击蒙层关闭
     transfer: true, //是否将弹层放在body内
     name: "goodsDetail", //组件名称
-    url: "OrdersCenter/orderManager/goodsDetail",
+    url: "modal/orderCenter/goodsDetail",
     keepAlive: true,
     componentData: {},
     quit: function () {
@@ -150,7 +130,7 @@ export default {
     maskClosable: false, //是否可以点击蒙层关闭
     transfer: true, //是否将弹层放在body内
     name: "changeWarehouse", //组件名称
-    url: "OrdersCenter/orderManager/changeWarehouse",
+    url: "modal/orderCenter/changeWarehouse",
     keepAlive: true,
     componentData: {},
     quit: function () {
@@ -169,7 +149,7 @@ export default {
     maskClosable: false, //是否可以点击蒙层关闭
     transfer: true, //是否将弹层放在body内
     name: "resolveAddress", //组件名称
-    url: "order/resolveAddress",
+    url: "modal/order/resolveAddress",
     keepAlive: true,
     componentData: {},
     quit: function () {
@@ -188,7 +168,7 @@ export default {
     maskClosable: false, //是否可以点击蒙层关闭
     transfer: true, //是否将弹层放在body内
     name: "manualMarking", //组件名称
-    url: "OrdersCenter/orderManager/manualMarking",
+    url: "modal/orderCenter/manualMarking",
     keepAlive: true,
     componentData: {
       type: '0'
@@ -209,7 +189,7 @@ export default {
     maskClosable: false, //是否可以点击蒙层关闭
     transfer: true, //是否将弹层放在body内
     name: "manualMarking", //组件名称
-    url: "OrdersCenter/orderManager/manualMarking",
+    url: "modal/orderCenter/manualMarking",
     keepAlive: true,
     componentData: {},
     quit: function () {
@@ -228,7 +208,7 @@ export default {
     maskClosable: false, //是否可以点击蒙层关闭
     transfer: true, //是否将弹层放在body内
     name: "replaceTheGoods", //组件名称
-    url: "OrdersCenter/orderManager/changeProduct",
+    url: "modal/orderCenter/changeProduct",
     keepAlive: true,
     componentData: {},
     quit: function () {
@@ -246,7 +226,7 @@ export default {
     maskClosable: false, //是否可以点击蒙层关闭
     transfer: true, //是否将弹层放在body内
     name: "pushProduce", //组件名称
-    url: "OrdersCenter/orderManager/pushProduce",
+    url: "modal/orderCenter/pushProduce",
     keepAlive: true,
     componentData: {},
     quit: function () {
@@ -264,7 +244,7 @@ export default {
     maskClosable: false, //是否可以点击蒙层关闭
     transfer: true, //是否将弹层放在body内
     name: "itemDelete", //组件名称
-    url: "OrdersCenter/orderManager/itemDelete",
+    url: "modal/orderCenter/itemDelete",
     keepAlive: true,
     componentData: {},
     quit: function () {
@@ -282,7 +262,7 @@ export default {
     maskClosable: false, //是否可以点击蒙层关闭
     transfer: true, //是否将弹层放在body内
     name: "specifyGoodsAssign", //组件名称
-    url: "OrdersCenter/orderManager/specifyGoodsAssign",
+    url: "modal/orderCenter/specifyGoodsAssign",
     keepAlive: true,
     componentData: {},
     quit: function () {
@@ -301,7 +281,7 @@ export default {
     maskClosable: false, //是否可以点击蒙层关闭
     transfer: true, //是否将弹层放在body内
     name: "replaceGoodsDetail", //组件名称
-    url: "OrdersCenter/orderManager/replaceGoodsDetail",
+    url: "modal/orderCenter/replaceGoodsDetail",
     keepAlive: true,
     componentData: {},
     quit: function () {
@@ -320,7 +300,7 @@ export default {
     maskClosable: false, //是否可以点击蒙层关闭
     transfer: true, //是否将弹层放在body内
     name: "holdOrderDialog", //组件名称
-    url: "OrdersCenter/orderManager/holdOrderDialog",
+    url: "modal/orderCenter/holdOrderDialog",
     keepAlive: true,
     componentData: {},
     quit: function () {

@@ -5,13 +5,13 @@
       {{corfirmMessage}}
       </p>
       <br/>
-      <jordanBtn :btnConfig="confirmBtnConfig"></jordanBtn>
+      <businessActionTable :btnConfig="confirmBtnConfig"></businessActionTable>
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
-import jordanBtn from "professionalComponents/businessButton";
+import businessActionTable from "professionalComponents/businessActionTable";
 import R3 from '@syman/burgeon-r3';
 const { getModuleName } = R3;
 export default {

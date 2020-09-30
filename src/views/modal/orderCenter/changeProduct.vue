@@ -1,0 +1,586 @@
+<template>
+  <!-- 替换商品 -->
+  <div class="changeProduct">
+    <div class="i_head">
+      <div class="i_body">
+        <p>被替换商品SKU</p>
+        <div class="search">
+          <div class="skuBox">
+            <re-form :formConfig="formConfig" />
+          </div>
+          <!-- <div class="search_child">
+            <span class="lable">商品SKU:</span>
+            <Input v-model="searchValue" @on-enter="search('one')" />
+          </div>
+          <div class="search_child">
+            <span class="lable">商品款号:</span>
+            <Input v-model="proEcode" @on-enter="search('one')" />
+          </div>-->
+          <div class="search_child">
+            <span class="lable">商品名称:</span>
+            <Input v-model="proName" @on-enter="search('one')" />
+          </div>
+          <div class="search_child">
+            <Button type="primary" @click="search('one')">搜索</Button>
+          </div>
+        </div>
+        <Table
+          :columns="columns"
+          :data="data"
+          :loading="tableLoad"
+          @on-row-click="onRowClick"
+          :highlight-row="true"
+          height="250"
+        ></Table>
+      </div>
+      <div class="i_body1">
+        <p>替换后商品SKU</p>
+        <div class="search">
+          <div class="skuBox">
+            <re-form :formConfig="replaceFormConfig" />
+          </div>
+          <!-- <div class="search_child">
+            <span class="lable">商品SKU:</span>
+            <Input v-model="replace_searchValue" @on-enter="search('two')" />
+          </div>
+          <div class="search_child">
+            <span class="lable">商品款号:</span>
+            <Input v-model="replace_proEcode" @on-enter="search('two')" />
+          </div>-->
+          <div class="search_child">
+            <span class="lable">商品名称:</span>
+            <Input v-model="replace_proName" @on-enter="search('two')" />
+          </div>
+          <div class="search_child">
+            <Button type="primary" @click="search('two')">搜索</Button>
+          </div>
+        </div>
+        <Table
+          :columns="columns"
+          :data="replace_data"
+          :loading="replaceTableLoad"
+          @on-row-click="onRowClickReplace"
+          :highlight-row="true"
+          height="250"
+        ></Table>
+      </div>
+      <img class="icon_switch" src="@/assets/image/switch.png" />
+    </div>
+    <div class="i_food">
+      <span class="title">
+        <span>将</span>
+        <span style="color:#003200">{{ onRowClickText }}</span>
+        <span>替换为</span>
+        <span style="color:#003200">{{ onRowClickReplaceText }}</span>
+      </span>
+      <div class="i_button">
+        <Button
+          type="error"
+          ghost
+          size="small"
+          @click="
+            () => {
+              this.$parent.$parent.closeConfirm();
+            }
+          "
+          >取消</Button
+        >
+        <Button type="primary" size="small" @click="confirm">确定</Button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+import reForm from "professionalComponents/businessForm";
+export default {
+  components: {
+    reForm
+  },
+  data() {
+    return {
+      pro: "",
+      replace_pro: "",
+      radioValue: "2",
+      formConfig: {
+        formValue: {
+          searchValue: "",
+          psCProEcode: ""
+        },
+        formData: [
+          {
+            label: "商品SKU",
+            style: "dimSearch",
+            width: "12",
+            value: "searchValue",
+            columns: ["ECODE"],
+            AuotData: [], //匹配的选项
+            dimChange: val => {
+              //模糊查询的方法
+              let _this = this;
+              _this.formConfig.formValue.searchValue = val.trim();
+              axios({
+                url: "/p/cs/skuQuery",
+                method: "post",
+                data: {
+                  isBlur: "Y", //N为精确匹配
+                  psCSku: {
+                    ECODE: val.trim()
+                  }
+                }
+              }).then(res => {
+                if (res.status === 200) {
+                  let data = res.data.data.data;
+                  let dimList = _this.formConfig.formData;
+                  let arr;
+                  data.map(item => {
+                    //删除不需要展示的模糊搜索项
+                    delete item.GBCODE;
+                    delete item.IS_GIFT;
+                    delete item.IS_GROUP;
+                    delete item.PRICELIST;
+                    // delete item.PS_C_PRO_ECODE;
+                    delete item.PS_C_PRO_ID;
+                    delete item.colorId;
+                    delete item.colorName;
+                    delete item.sizeId;
+                    delete item.sizeName;
+                    delete item.skuId;
+                  });
+                  dimList.map(item => {
+                    if (item.label === "商品SKU") {
+                      item.AuotData = data;
+                      //调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
+                    }
+                  });
+                }
+              });
+            },
+            dimEnter: () => {
+              this.search("one");
+            },
+            dimSelect: val => {
+              this.formConfig.formValue.searchValue = val.label;
+            }
+          },
+          {
+            label: "商品款号",
+            style: "dimSearch",
+            width: "12",
+            value: "psCProEcode",
+            columns: ["ECODE"],
+            AuotData: [], //匹配的选项
+            dimChange: val => {
+              //模糊查询的方法
+              let _this = this;
+              _this.formConfig.psCProEcode = val.trim();
+              let fromdata = new FormData();
+              let params = {
+                GLOBAL: val.trim(),
+                PAGENUM: 1,
+                PAGESIZE: 10,
+                CONDITION: {},
+                TABLENAME: "PS_C_PRO"
+              };
+              fromdata.append("param", JSON.stringify(params));
+              axios({
+                url: "/p/cs/screenresult",
+                method: "post",
+                data: fromdata
+              }).then(res => {
+                if (res.data.code === 0) {
+                  let dimList = _this.formConfig.formData;
+
+                  dimList.map(item => {
+                    if (item.label === "商品款号") {
+                      item.AuotData = res.data.data.list;
+                    }
+                  });
+                }
+              });
+            },
+            dimEnter: () => {
+              this.search("one");
+            },
+            dimSelect: val => {
+              this.formConfig.formValue.psCProEcode = val.label;
+              // this.psCProEcode = val.label;
+            }
+          }
+        ]
+      },
+      replaceFormConfig: {
+        formValue: {
+          searchValue: "",
+          psCProEcode: ""
+        },
+        formData: [
+          {
+            label: "商品SKU",
+            style: "dimSearch",
+            width: "12",
+            value: "searchValue",
+            columns: ["ECODE"],
+            AuotData: [], //匹配的选项
+            dimChange: val => {
+              //模糊查询的方法
+              let _this = this;
+              _this.replaceFormConfig.formValue.searchValue = val.trim();
+              axios({
+                url: "/p/cs/skuQuery",
+                method: "post",
+                data: {
+                  isBlur: "Y", //N为精确匹配
+                  psCSku: {
+                    ECODE: val.trim()
+                  }
+                }
+              }).then(res => {
+                if (res.status === 200) {
+                  let data = res.data.data.data;
+                  let dimList = _this.replaceFormConfig.formData;
+                  let arr;
+                  data.map(item => {
+                    //删除不需要展示的模糊搜索项
+                    delete item.GBCODE;
+                    delete item.IS_GIFT;
+                    delete item.IS_GROUP;
+                    delete item.PRICELIST;
+                    // delete item.PS_C_PRO_ECODE;
+                    delete item.PS_C_PRO_ID;
+                    delete item.colorId;
+                    delete item.colorName;
+                    delete item.sizeId;
+                    delete item.sizeName;
+                    delete item.skuId;
+                  });
+                  dimList.map(item => {
+                    if (item.label === "商品SKU") {
+                      item.AuotData = data;
+                      //调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
+                    }
+                  });
+                }
+              });
+            },
+            dimEnter: () => {
+              this.search("two");
+            },
+            dimSelect: val => {
+              this.replaceFormConfig.formValue.searchValue = val.label;
+            }
+          },
+          {
+            label: "商品款号",
+            style: "dimSearch",
+            width: "12",
+            value: "psCProEcode",
+            columns: ["ECODE"],
+            AuotData: [], //匹配的选项
+            dimChange: val => {
+              //模糊查询的方法
+              let _this = this;
+              _this.replaceFormConfig.psCProEcode = val.trim();
+              let fromdata = new FormData();
+              let params = {
+                GLOBAL: val.trim(),
+                PAGENUM: 1,
+                PAGESIZE: 10,
+                CONDITION: {},
+                TABLENAME: "PS_C_PRO"
+              };
+              fromdata.append("param", JSON.stringify(params));
+              axios({
+                url: "/p/cs/screenresult",
+                method: "post",
+                data: fromdata
+              }).then(res => {
+                if (res.data.code === 0) {
+                  let dimList = _this.replaceFormConfig.formData;
+
+                  dimList.map(item => {
+                    if (item.label === "商品款号") {
+                      item.AuotData = res.data.data.list;
+                    }
+                  });
+                }
+              });
+            },
+            dimEnter: () => {
+              this.search("two");
+            },
+            dimSelect: val => {
+              this.replaceFormConfig.formValue.psCProEcode = val.label;
+              // this.psCProEcode = val.label;
+            }
+          }
+        ]
+      },
+      // searchValue: "",
+      // proEcode: "",
+      proName: "",
+      // replace_searchValue: "",
+      // replace_proEcode: "",
+      replace_proName: "",
+      replaceTableLoad: false,
+      tableLoad: false,
+      columns: [
+        {
+          title: "商品SKU",
+          key: "ECODE"
+        },
+        {
+          title: "商品名称",
+          key: "PS_C_PRO_ENAME"
+        },
+        {
+          title: "商品SKU名称",
+          key: "SPEC"
+        }
+      ],
+      data: [],
+      replace_data: [],
+      onRowClickReplaceData: {},
+      onRowClickData: {},
+      onRowClickText: "",
+      onRowClickReplaceText: ""
+    };
+  },
+  props: {
+    componentData: {
+      type: Object
+    }
+  },
+  mounted() {
+    // console.log("componentData=>",this.componentData);
+  },
+  methods: {
+    radioChange(value) {
+      console.log(value);
+    },
+    search(value) {
+      //sku查询
+      let self = this;
+      // console.log(value) "two"
+      let loadName = value === "one" ? "tableLoad" : "replaceTableLoad";
+      this[loadName] = true;
+      axios({
+        url: "/p/cs/skuQuery",
+        method: "post",
+        data: {
+          isBlur: "N",
+          psCSku: {
+            ECODE:
+              value == "one"
+                ? self.formConfig.formValue.searchValue.trim()
+                : self.replaceFormConfig.formValue.searchValue.trim(),
+            psCProEcode:
+              value == "one"
+                ? self.formConfig.formValue.psCProEcode.trim()
+                : self.replaceFormConfig.formValue.psCProEcode.trim(),
+            psCProEname:
+              value == "one" ? self.proName.trim() : self.replace_proName.trim()
+          }
+        }
+      })
+        .then(res => {
+          if (res.data.code == 0) {
+            res.data.data.data.map(item => {
+              item.IS_GIFT == "0" ? "否" : "是";
+            });
+            if (value == "one") {
+              self.data = res.data.data.data;
+              self.onRowClickData = self.data[0];
+              self.onRowClickText = self.data[0].ECODE;
+            } else {
+              self.replace_data = res.data.data.data;
+              self.onRowClickReplaceData = self.replace_data[0];
+              self.onRowClickReplaceText = self.replace_data[0].ECODE;
+            }
+          } else {
+            this.$Message.warning("sku查询失败!");
+          }
+          this[loadName] = false;
+        })
+        .catch(() => {
+          this[loadName] = false;
+        });
+    },
+    confirm() {
+      let self = this;
+      if (JSON.stringify(self.onRowClickData) == "{}") {
+        self.$Message.warning("替换前商品sku不能为空!");
+        return;
+      }
+      if (JSON.stringify(self.onRowClickReplaceData) == "{}") {
+        self.$Message.warning("替换后商品sku码不能为空!");
+        return;
+      }
+      if (self.onRowClickData.ECODE == self.onRowClickReplaceData.ECODE) {
+        self.$Message.warning("替换商品与被替换商品不能相同!");
+        return;
+      }
+      let result = {};
+      let needParam = {
+        IS_GIFT: self.onRowClickReplaceData.IS_GIFT == "是" ? "0" : "1",
+        PS_C_PRO_ECODE: self.onRowClickReplaceData.PS_C_PRO_ECODE,
+        PS_C_PRO_ENAME: self.onRowClickReplaceData.PS_C_PRO_ENAME,
+        PRICELIST: self.onRowClickReplaceData.PRICELIST,
+        IS_GROUP: self.onRowClickReplaceData.IS_GROUP,
+        SKU_ECODE: self.onRowClickReplaceData.ECODE,
+        PS_C_PRO_ID: self.onRowClickReplaceData.PS_C_PRO_ID
+      };
+      if (self.componentData.a_2.length == 0) {
+        self.$Message.warning("请勾选订单数据!");
+        return;
+      }
+      result.ids = self.componentData.a_2;
+      result["changeGoodsSku"] = self.onRowClickData.ECODE;
+      result["sku_code"] = needParam.SKU_ECODE;
+      result["type"] = 1;
+      console.log(this.componentData.a_1, result);
+      axios({
+        url: "/api/cs/oc/oms/v1/bathChangeGoods",
+        method: "post",
+        data: result
+      }).then(res => {
+        console.log(res);
+        if (res.data.code == 0) {
+          self.$Message.error(res.data.message);
+          this.$parent.$parent.closeConfirm();
+        } else {
+          self.$Modal.confirm({
+            title: res.data.message,
+            width: 500,
+            render: h => {
+              return h("Table", {
+                props: {
+                  columns: [
+                    {
+                      title: "提示信息",
+                      key: "message"
+                    }
+                  ],
+                  data: res.data.data
+                }
+              });
+            }
+          });
+        }
+      });
+    },
+    onRowClickReplace(row) {
+      this.onRowClickReplaceData = row;
+      this.onRowClickReplaceText = row.ECODE;
+    },
+    onRowClick(row) {
+      this.onRowClickData = row;
+      this.onRowClickText = row.ECODE;
+    }
+  }
+};
+</script>
+<style lang="less" scoped>
+.changeProduct {
+  .i_head {
+    display: flex;
+    justify-content: space-between;
+    p {
+      font-family: PingFangSC-Medium;
+      font-size: 14px;
+      color: #333333;
+    }
+    .search {
+      display: flex;
+      line-height: 26px;
+      margin-top: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      white-space: nowrap;
+      .search_child {
+        display: flex;
+        margin-left: 15px;
+        margin-bottom: 8px;
+        .lable {
+          margin-right: 6px;
+        }
+      }
+      .search_child:last-child {
+        margin-left: 153px;
+      }
+    }
+    .i_body {
+      width: 50%;
+      border-right: 1px solid #dcdee2;
+      padding-top: 0;
+      padding-right: 15px;
+      // border-bottom: 1px solid #dcdee2;
+    }
+    .i_body1 {
+      width: 50%;
+      padding-top: 0;
+      padding-left: 15px;
+      // padding-bottom: 15px;
+      // border-bottom: 1px solid #dcdee2;
+    }
+    .icon_switch {
+      width: 38px;
+      height: 38px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .i_food {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    .title {
+      font-family: PingFangSC-Regular;
+      font-size: 12px;
+      color: #999999;
+      letter-spacing: 0.7px;
+    }
+    .i_button {
+      font-size: 0;
+      text-align: right;
+      .burgeon-btn.burgeon-btn-primary {
+        margin-left: 8px;
+      }
+    }
+  }
+  // .burgeon-input {
+  //   height: 32px;
+  // }
+  // .burgeon-input-icon {
+  //   line-height: 32px;
+  // }
+  .skuBox {
+    width: 430px;
+    height: 29px;
+    overflow: hidden;
+    margin-top: -2px;
+    /deep/ .orderManageEdit {
+      padding-right: 0;
+      .burgeon-form-item {
+        line-height: 28px;
+        margin-right: 5px;
+        .burgeon-form-item-label {
+          padding-top: 0;
+          padding-bottom: 0;
+          width: auto !important;
+          line-height: 28px;
+        }
+        .burgeon-form-item-content {
+          line-height: 28px;
+          margin-left: 60px !important;
+        }
+      }
+    }
+  }
+}
+</style>

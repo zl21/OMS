@@ -148,7 +148,7 @@
   import reTable from "professionalComponents/businessActionTable"
   import reForm from "professionalComponents/businessForm"
   import refundAfterShipment from './constants/refundAfterShipment'
-  import { dateFormat } from '@/assets/js/__utils__/common';
+  import dateFormat from '@/assets/js/__utils__/common';
 
   export default {
     components: {

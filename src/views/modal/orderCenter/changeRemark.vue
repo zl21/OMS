@@ -3,24 +3,8 @@
     <Form :label-width="80" :model="formItem">
       <FormItem label="旗帜:">
         <RadioGroup @on-change="radioChange" v-model="formItem.flag">
-          <Radio label="1">
-            <!--            <img src="../../../assets/img/1.png" alt />-->
-            <img :src="()=>{return require('@/assets/image/img/1.png')}" alt />
-          </Radio>
-          <Radio label="2">
-            <img :src="()=>{return require('@/assets/image/img/2.png')}" alt />
-          </Radio>
-          <Radio label="3">
-            <img :src="()=>{return require('@/assets/image/img/3.png')}" alt />
-          </Radio>
-          <Radio label="4">
-            <img :src="()=>{return require('@/assets/image/img/4.png')}" alt />
-          </Radio>
-          <Radio label="5">
-            <img :src="()=>{return require('@/assets/image/img/5.png')}" alt />
-          </Radio>
-          <Radio label="0">
-            <img :src="()=>{return require('@/assets/image/img/0.png')}" alt />
+          <Radio :label="index"  v-for="index of 5" :key="index">
+            <img :src="'@/assets/image/img/'+ index +'.png'" alt />
           </Radio>
         </RadioGroup>
       </FormItem>
@@ -42,7 +26,7 @@
         </RadioGroup>
       </FormItem>
     </Form>
-    <jordanBtn :btnConfig="btnConfig"></jordanBtn>
+    <businessButton :btnConfig="btnConfig"></businessButton>
     <Modal
       :mask="true"
       :z-index="2600"
@@ -58,14 +42,14 @@
 </template>
 <script>
   import axios from "axios";
-  import jordanBtn from "professionalComponents/businessButton";
+  import businessButton from "professionalComponents/businessButton";
   import businessActionTable from "professionalComponents/businessActionTable.vue";
   import {listeningToKeydownMixin} from "@/assets/js/mixins/listeningToKeydown.js";
 
   export default {
     mixins: [listeningToKeydownMixin],
     components: {
-      jordanBtn,
+      businessButton,
       businessActionTable
     },
     props: {

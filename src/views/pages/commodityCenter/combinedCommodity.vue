@@ -5,12 +5,12 @@
       <div class="btn-operate">
         <businessButton :btnConfig="btnConfig"></businessButton>
       </div>
-      <jordan-status-flag :statusName="statusName"></jordan-status-flag>
+      <businessStatusFlag :statusName="statusName"></businessStatusFlag>
       <div class="item-collapse">
         <Collapse v-model="value1">
           <Panel name="1">
             基本信息
-            <jordan-form slot="content" :formConfig="formConfig1"></jordan-form>
+            <businessForm slot="content" :formConfig="formConfig1"></businessForm>
           </Panel>
           <Panel name="2">
             日志
@@ -69,15 +69,15 @@
           <div class="btn-operate">
             <businessButton :btnConfig="btnConfig"></businessButton>
           </div>
-          <jordan-status-flag :statusName="statusName"></jordan-status-flag>
+          <businessStatusFlag :statusName="statusName"></businessStatusFlag>
           <div class="item-collapse">
             <Collapse v-model="value1">
               <Panel name="1">
                 基本信息
-                <jordan-form
+                <businessForm
                   slot="content"
                   :formConfig="formConfig1"
-                ></jordan-form>
+                ></businessForm>
               </Panel>
               <Panel name="2">
                 日志
