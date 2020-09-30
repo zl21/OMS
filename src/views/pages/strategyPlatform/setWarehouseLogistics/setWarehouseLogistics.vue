@@ -1,5 +1,5 @@
 <template>
-  <div class="logisticsArea">
+  <div class="setWarehouseLogistics">
     <div class="tableTop">
       <businessButton :btn-config="btnConfig" />
       <Collapse v-model="openDefault">
@@ -838,7 +838,7 @@
 
 <style lang="less">
   @import "~professionalComponents/common/css/theme.less";
-.logisticsArea {
+.setWarehouseLogistics {
   position: relative;
   padding-top: 8px;
   .tableContent {
