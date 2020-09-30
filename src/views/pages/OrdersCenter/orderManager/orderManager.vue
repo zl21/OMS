@@ -170,7 +170,7 @@
   import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
   import aTable from 'professionalComponents/agGridTable.vue';
   import unzipXv from '@/assets/js/dataToSmall.js';
-  import publicDialogConfig from './publicConfig/publicDialog.js';
+  import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
   import labelListConfig from './publicConfig/labelList.js';
   import orderLogo from './publicConfig/orderLogo.js';
 

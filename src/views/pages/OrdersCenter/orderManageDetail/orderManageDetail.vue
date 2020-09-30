@@ -95,7 +95,7 @@ feature : 订单中心-零售发货单详情
   import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
   import EssentialInfo from './details/essentialInfo';
   import OrderItem from './details/orderItem';
-  import publicDialogConfig from '../orderManager/publicConfig/publicDialog.js';
+  import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
 
   export default {
     name: 'OrderManageDetail',

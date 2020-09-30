@@ -207,7 +207,7 @@ import businessDialog from "professionalComponents/businessDialog";
 import CusOrderItem from "./custOrderItem";
 // import publicMethodsUtil from "@/assets/js/publicMethods";
 // import { BILL_STATUS } from "./config.js";
-import publicDialogConfig from "../../orderManager/publicConfig/publicDialog.js";
+import publicDialogConfig from "professionalComponents/common/js/publicDialog.js";
 // import axios from "axios";
 let self = null;
 export default {

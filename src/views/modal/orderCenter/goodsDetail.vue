@@ -37,7 +37,7 @@ import businessForm from "professionalComponents/businessForm";
 import jordanBtn from "professionalComponents/businessButton";
 import businessActionTable from "professionalComponents/businessActionTable";
 import jordanModal from "professionalComponents/businessDialog";
-import publicDialogConfig from "@/views/pages/OrdersCenter/orderManager/publicConfig/publicDialog.js";
+import publicDialogConfig from "professionalComponents/common/js/publicDialog.js";
 import { listeningToKeydownMixin } from "@/assets/js/mixins/listeningToKeydown.js";
 export default {
   components: {
