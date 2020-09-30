@@ -211,7 +211,6 @@
 </template>
 
 <script>
-  import axios from 'axios';
   import businessButton from 'professionalComponents/businessButton';
   import businessForm from 'professionalComponents/businessForm';
   import businessLabel from 'professionalComponents/businessLabel';
@@ -256,7 +255,7 @@
               text: '新增',
               btnclick: () => {
                 const _this = this;
-                _this.$store.commit('TabHref', {
+                _this.$store.commit('customize/TabHref', {
                   id: -1, // 单据id
                   type: 'action', // 类型action
                   name: 'logisticsArea', // 文件名
@@ -314,12 +313,12 @@
             {
               text: '返回',
               btnclick: () => {
-                const _this = this;
-                _this.$store.commit('TabHref', {
-                  id: 24639,
-                  type: 'table',
-                  name: 'ST_C_EXPRESS_AREA',
+                R3.store.commit('global/tabOpen', {
+                  type: 'S',
+                  tableId: 24639,
+                  tableName: 'ST_C_EXPRESS_AREA',
                   label: '物流区域设置',
+                  back: true,
                 });
               }
             }
@@ -425,31 +424,28 @@
           objid: this.$route.query.id
         };
         fromdata.append('param', JSON.stringify(param));
-        axios({
-          url: '/p/cs/expressAreaSaveCmd',
-          method: 'post',
-          data: fromdata
-        }).then((res) => {
-          _this.isSaveLoading = false;
-          _this.dataArr = [];
-          if (res.data.data.code === 0) {
-            _this.$Message.success('保存成功');
-            _this.getTree('', res.data.data.data.objid);
-            this.$store.commit('TabHref', {
-              id: res.data.data.data.objid, // 单据id
-              type: 'action', // 类型action
-              name: 'logisticsArea', // 文件名
-              label: '物流区域设置', // tab中文名
-              query: Object.assign({
+        _this.$network.post('/p/cs/expressAreaSaveCmd', fromdata)
+          .then((res) => {
+            _this.isSaveLoading = false;
+            _this.dataArr = [];
+            if (res.data.data.code === 0) {
+              _this.$Message.success('保存成功');
+              _this.getTree('', res.data.data.data.objid);
+              this.$store.commit('customize/TabHref', {
                 id: res.data.data.data.objid, // 单据id
-                tabTitle: '物流区域设置', // tab中文名
-              }) // 带的参数
-            });
-          } else {
-            const err = res.data.data.message || '保存失败';
-            _this.$Message.error(err);
-          }
-        });
+                type: 'action', // 类型action
+                name: 'logisticsArea', // 文件名
+                label: '物流区域设置', // tab中文名
+                query: Object.assign({
+                  id: res.data.data.data.objid, // 单据id
+                  tabTitle: '物流区域设置', // tab中文名
+                }) // 带的参数
+              });
+            } else {
+              const err = res.data.data.message || '保存失败';
+              _this.$Message.error(err);
+            }
+          });
       },
       // 作废
       invalid() {
@@ -458,61 +454,55 @@
         const fromdata = new FormData();
         const param = { objid: this.$route.query.id };
         fromdata.append('param', JSON.stringify(param));
-        axios({
-          url: '/p/cs/expressAreaVoidCmd',
-          method: 'post',
-          data: fromdata
-        }).then((res) => {
-          _this.isSaveLoading = false;
-          if (res.data.code === 0) {
-            const ess = res.data.data.message || '作废成功';
-            _this.getTree();
-            _this.$Message.success(ess);
-          } else {
-            const err = res.data.data.message || '作废失败';
-            _this.$Message.success(err);
-          }
-        });
+        _this.$network.post('/p/cs/expressAreaVoidCmd', fromdata)
+          .then((res) => {
+            _this.isSaveLoading = false;
+            if (res.data.code === 0) {
+              const ess = res.data.data.message || '作废成功';
+              _this.getTree();
+              _this.$Message.success(ess);
+            } else {
+              const err = res.data.data.message || '作废失败';
+              _this.$Message.success(err);
+            }
+          });
       },
       // 获取树
       getTree(save, objid) {
         const _this = this;
         _this.isSaveLoading = true;
-        axios({
-          url: '/p/cs/getExpressAreaTree',
-          method: 'post',
-          data: { objid: objid || this.$route.query.id }
-        }).then((res) => {
-          _this.isSaveLoading = false;
-          if (res.data.code === 0) {
-            const treeList = JSON.parse(JSON.stringify(res.data.data.expressAreaTree));
-            _this.treeData1 = res.data.data.expressAreaTree;
-            _this.treeData2 = treeList;
-            _this.information.formData[0].itemdata.pid = res.data.data.expressArea.CP_C_LOGISTICS_ID;
-            _this.information.formData[0].itemdata.valuedata = res.data.data.expressArea.CP_C_LOGISTICS_ENAME;
-            _this.information.formValue.REMARK = res.data.data.expressArea.REMARK;
-            this.treeData1.forEach((item) => {
-              item.disableCheckbox = true;
-              item.children.forEach((list) => {
-                list.disableCheckbox = true;
-                list.children.forEach((data) => {
-                  data.disableCheckbox = true;
+        _this.$network.post('/p/cs/getExpressAreaTree', { objid: objid || this.$route.query.id })
+          .then((res) => {
+            _this.isSaveLoading = false;
+            if (res.data.code === 0) {
+              const treeList = JSON.parse(JSON.stringify(res.data.data.expressAreaTree));
+              _this.treeData1 = res.data.data.expressAreaTree;
+              _this.treeData2 = treeList;
+              _this.information.formData[0].itemdata.pid = res.data.data.expressArea.CP_C_LOGISTICS_ID;
+              _this.information.formData[0].itemdata.valuedata = res.data.data.expressArea.CP_C_LOGISTICS_ENAME;
+              _this.information.formValue.REMARK = res.data.data.expressArea.REMARK;
+              this.treeData1.forEach((item) => {
+                item.disableCheckbox = true;
+                item.children.forEach((list) => {
+                  list.disableCheckbox = true;
+                  list.children.forEach((data) => {
+                    data.disableCheckbox = true;
+                  });
                 });
               });
-            });
-            if (res.data.data.expressArea.ISACTIVE === 'N') {
-              _this.statusName = '已作废';
-              _this.btnConfig.buttons.forEach((item) => {
-                if (item.text === '保存') item.disabled = true;
-                else if (item.text === '作废') item.disabled = true;
-                else if (item.text === '导入') item.disabled = true;
-                else if (item.text === '导出') item.disabled = true;
-                else if (item.text === '刷新') item.disabled = true;
-              });
+              if (res.data.data.expressArea.ISACTIVE === 'N') {
+                _this.statusName = '已作废';
+                _this.btnConfig.buttons.forEach((item) => {
+                  if (item.text === '保存') item.disabled = true;
+                  else if (item.text === '作废') item.disabled = true;
+                  else if (item.text === '导入') item.disabled = true;
+                  else if (item.text === '导出') item.disabled = true;
+                  else if (item.text === '刷新') item.disabled = true;
+                });
+              }
+              if (save === 'import') _this.synchronous();
             }
-            if (save === 'import') _this.synchronous();
-          }
-        });
+          });
       },
       // 全选树
       checkAll(e) {
@@ -570,40 +560,37 @@
         _this.listArr = [];
         _this.tableLoading = true;
         const param = { objid: _this.$route.query.id, treeLikeKey: e };
-        axios({
-          url: '/p/cs/getExpressAreaItemLikeTable',
-          method: 'post',
-          data: param
-        }).then((res) => {
-          _this.tableLoading = false;
-          if (res.data.code === 0) {
-            _this.cityThead = true;
-            _this.dataArr = res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT !== undefined ? res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT : [];
-            _this.treeData2 = res.data.data.REGION_TREE_RESULT;
-            _this.dataArr.forEach((item) => {
-              if (item.IS_ARRIVE === 'Y') item.IS_ARRIVE = true;
-              else if (item.IS_ARRIVE === 'N') item.IS_ARRIVE = false;
-            });
-            _this.query2 = e;
-            _this.treeData2.forEach((item) => {
-              if (item.children.length) {
-                item.children.forEach((list) => {
-                  if (list.title.indexOf(`${e}`) != -1) {
-                    item.expand = true;
-                  }
-                  list.children.forEach((data) => {
-                    if (data.title.indexOf(`${e}`) != -1) {
+        _this.$network.post('/p/cs/getExpressAreaItemLikeTable')
+          .then((res) => {
+            _this.tableLoading = false;
+            if (res.data.code === 0) {
+              _this.cityThead = true;
+              _this.dataArr = res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT !== undefined ? res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT : [];
+              _this.treeData2 = res.data.data.REGION_TREE_RESULT;
+              _this.dataArr.forEach((item) => {
+                if (item.IS_ARRIVE === 'Y') item.IS_ARRIVE = true;
+                else if (item.IS_ARRIVE === 'N') item.IS_ARRIVE = false;
+              });
+              _this.query2 = e;
+              _this.treeData2.forEach((item) => {
+                if (item.children.length) {
+                  item.children.forEach((list) => {
+                    if (list.title.indexOf(`${e}`) != -1) {
                       item.expand = true;
-                      list.expand = true;
                     }
+                    list.children.forEach((data) => {
+                      if (data.title.indexOf(`${e}`) != -1) {
+                        item.expand = true;
+                        list.expand = true;
+                      }
+                    });
                   });
-                });
-              }
-            });
-          } else {
-            _this.$Message.error(res.data.data.message || '失败');
-          }
-        });
+                }
+              });
+            } else {
+              _this.$Message.error(res.data.data.message || '失败');
+            }
+          });
       },
       // 同步table数据
       synchronous() {
@@ -635,24 +622,21 @@
             });
           });
         });
-        axios({
-          url: '/p/cs/getExpressAreaItemTable',
-          method: 'post',
-          data: { objid: this.$route.query.id, treeNode: treeList }
-        }).then((res) => {
-          _this.tableLoading = false;
-          _this.isDelivery = false;
-          if (res.data.code === 0 && res.data.data !== null) {
-            if (res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT.length) _this.dataArr = res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT;
-            _this.tableSize = res.data.data.TABLE_SIZE;
-            _this.dataArr.forEach((item) => {
-              if (item.IS_ARRIVE === 'Y') item.IS_ARRIVE = true;
-              else if (item.IS_ARRIVE === 'N') item.IS_ARRIVE = false;
-            });
-          } else {
-            _this.tableSize = 0;
-          }
-        });
+        _this.$network.post('/p/cs/getExpressAreaItemTable', { objid: this.$route.query.id, treeNode: treeList })
+          .then((res) => {
+            _this.tableLoading = false;
+            _this.isDelivery = false;
+            if (res.data.code === 0 && res.data.data !== null) {
+              if (res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT.length) _this.dataArr = res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT;
+              _this.tableSize = res.data.data.TABLE_SIZE;
+              _this.dataArr.forEach((item) => {
+                if (item.IS_ARRIVE === 'Y') item.IS_ARRIVE = true;
+                else if (item.IS_ARRIVE === 'N') item.IS_ARRIVE = false;
+              });
+            } else {
+              _this.tableSize = 0;
+            }
+          });
       },
       selectChange(e) {
         console.log(e);
@@ -692,21 +676,18 @@
           objid: _this.$route.query.id,
           treeNode: treeList
         };
-        axios({
-          url: '/p/cs/exportExpressAreaItem',
-          method: 'post',
-          data: param
-        }).then((res) => {
-          if (res.data.code === 0) {
-            const ess = res.data.data.message || '导出成功';
-            _this.$Message.success(ess);
-            _this.downloadUrlFile(res.data.data);
-          } else {
-            const err = res.data.data.message || '导出失败';
-            _this.$Message.success(err);
-            _this.downloadUrlFile(res.data.data);
-          }
-        });
+        _this.$network.post('/p/cs/exportExpressAreaItem', param)
+          .then((res) => {
+            if (res.data.code === 0) {
+              const ess = res.data.data.message || '导出成功';
+              _this.$Message.success(ess);
+              _this.downloadUrlFile(res.data.data);
+            } else {
+              const err = res.data.data.message || '导出失败';
+              _this.$Message.success(err);
+              _this.downloadUrlFile(res.data.data);
+            }
+          });
       },
       // 导出
       downloadUrlFile(src) {
@@ -723,12 +704,9 @@
       },
       // 设置表格高度
       setTableHeight() {
-        const _this = this;
-        const contentHeight = document.getElementsByClassName('main-content')[0]
-          .clientHeight;
+        const contentHeight = document.getElementById('content').clientHeight;
         let logisticsAreaHeight = 25;
-        logisticsAreaHeight += document.getElementsByClassName('tableTop')[0]
-          .clientHeight;
+        logisticsAreaHeight += document.getElementsByClassName('tableTop')[0].clientHeight;
         const tableHeight = contentHeight - logisticsAreaHeight;
         const Theight = document.getElementsByClassName('tableBox')[0];
         Theight.style = `height: ${tableHeight - 100}px;`;
