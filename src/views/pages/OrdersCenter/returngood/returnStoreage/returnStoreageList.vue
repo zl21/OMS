@@ -524,7 +524,14 @@ export default {
         agLoading: false,
         columnDefs: [],
         rowData: [],
-        renderArr: {},
+        renderArr: {
+          ID: param => {
+            let resDom = document.createElement("a");
+            resDom.style["text-decoration"] = "underline";
+            resDom.innerHTML = param.data.ID;
+            return resDom;
+          }
+        },
         tableHeight: "600px",
         pagenation: {
           //设置总条数
