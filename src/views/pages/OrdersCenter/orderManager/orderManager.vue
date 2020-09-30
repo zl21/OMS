@@ -164,7 +164,7 @@
   import jordanBtn from 'professionalComponents/businessButton';
   import businessLabel from 'professionalComponents/businessLabel';
   import businessForm from 'professionalComponents/businessForm';
-  import jordanModal from 'professionalComponents/JDialog';
+  import jordanModal from 'professionalComponents/businessDialog';
   // import { listeningToKeydownMixin } from "@/common/js//mixins/listeningToKeydown.js";
   import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
   import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';

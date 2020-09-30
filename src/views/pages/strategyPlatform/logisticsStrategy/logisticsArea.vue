@@ -215,7 +215,7 @@
   import businessForm from 'professionalComponents/businessForm';
   import businessLabel from 'professionalComponents/businessLabel';
   import businessStatusFlag from 'professionalComponents/businessStatusFlag';
-  import businessModal from 'professionalComponents/JDialog';
+  import businessModal from 'professionalComponents/businessDialog';
 
   export default {
     components: {

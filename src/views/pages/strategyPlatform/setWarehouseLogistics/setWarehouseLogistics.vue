@@ -230,7 +230,7 @@
   import businessButton from 'professionalComponents/businessButton.vue';
   import businessForm from 'professionalComponents/businessForm.vue';
   import businessLabel from 'professionalComponents/businessLabel.vue';
-  import businessModal from 'professionalComponents/JDialog.vue';
+  import businessModal from 'professionalComponents/businessDialog.vue';
   import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
   import businessStatusFlag from 'professionalComponents/businessStatusFlag.vue';
   import { setTimeout } from 'timers';
