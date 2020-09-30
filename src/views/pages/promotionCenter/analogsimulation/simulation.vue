@@ -602,10 +602,11 @@
 </script>
 <style lang="less">
 @import "../less/common.less";
+@import '~@burgeon/oms-theme/skin/public.less';
 @lineHeight: 24px;
 @inputWidth: 410px;
 @fontSize: 12px;
-@baseColor: #0068b7;
+// @publicColor: #0068b7;
 @bgColr:#fff6f6;
 @bgColor:#fff;
 .simulation{
@@ -616,16 +617,16 @@
         position: absolute;
         top:10px;
         text-align: left;
-        background:@bgColr;
+        background:@base-bg;
         padding:10px 20px;
         width:100%;
         box-sizing: border-box;
         z-index:101;
-        border:1px solid #ffdcdc;
+        border:1px solid @base-border;
         .btn {
             font-size: 12px;
-            color:@baseColor;
-            border:1px solid @baseColor;
+            color:@base-color;
+            border:1px solid @base-color;
             padding:0px 8px;
             border-radius:2px;
             height:24px;
@@ -785,8 +786,8 @@
                 text-align: right;
                 .btn{
                     font-size: 12px;
-                    color:@baseColor;
-                    border:1px solid @baseColor;
+                    color:@base-color;
+                    border:1px solid @base-color;
                     padding:0px 8px;
                     border-radius:2px;
                     height:24px;

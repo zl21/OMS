@@ -558,6 +558,7 @@
 </script>
 <style lang="less" scoped>
 @import "./less/common.less";
+@import '~@burgeon/oms-theme/skin/public.less';
 @borderColor: #bfcbd9;
 @bgColor:#fff;
 .batchActivity {
@@ -586,16 +587,17 @@
     .footer {
       height: 50px;
       line-height: 50px;
-      background: rgb(253, 245, 244);
+      background:@base-bg;
+      border: 1px solid @base-border;
       width: 100%;
       text-align: right;
       > button {
         height: 24px;
         line-height: 24px;
         padding: 0 8px;
-        border: 1px solid #fd6442;
+        border: 1px solid @button-border;
         font-size: 12px;
-        color: #fd6442;
+        color: @button-border;
         border-radius: 2px;
         margin-right: 10px;
         background:transparent;

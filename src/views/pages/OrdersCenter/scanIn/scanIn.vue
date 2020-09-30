@@ -1866,7 +1866,7 @@
       margin: 10px 0 10px 37px;
       font-size: 16px;
       font-weight: 600;
-      border-bottom: 3px solid #f00;
+      border-bottom: 3px solid @base-color;
       width: 120px;
       padding-bottom: 5px;
     }

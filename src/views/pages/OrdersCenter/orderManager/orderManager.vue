@@ -147,6 +147,7 @@
       :mask="true"
       title="警告"
       width="420"
+      class="customizedModal"
       @on-cancel="onBatchReturnOrderCancel"
       @on-ok="doBatchReturnOrder"
     >
@@ -163,7 +164,8 @@
   import jordanBtn from 'professionalComponents/businessButton';
   import businessLabel from 'professionalComponents/businessLabel';
   import businessForm from 'professionalComponents/businessForm';
-  import jordanModal from 'professionalComponents/businessDialog';
+  // import jordanModal from 'professionalComponents/businessDialog';
+  import jordanModal from './publicConfig/publicDialog';
   // import { listeningToKeydownMixin } from "@/common/js//mixins/listeningToKeydown.js";
   import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
   import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
@@ -1499,6 +1501,7 @@
                         }
                       );
                       setTimeout(() => {
+                        console.log(  self.$children);
                         self.$children
                           .find(item => item.name === 'makeOutInvoice')
                           .openConfirm();
