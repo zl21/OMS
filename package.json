@@ -51,6 +51,7 @@
   "dependencies": {
     "@burgeon/business-components": "git+ssh://git@gitee.com:product_centerfront_end/burgeon-private-npm.git#feature/business-components",
     "@burgeon/oms-theme": "git+ssh://git@gitee.com:product_centerfront_end/burgeon-private-npm.git#feature/theme",
+    "@burgeon/internationalization": "git+ssh://git@gitee.com:product_centerfront_end/burgeon-private-npm.git#feature/internationalization",
     "@syman/ark-ui": "^1.0.61",
     "@syman/burgeon-r3": "^1.0.32",
     "@syman/burgeon-r3-components": "^1.0.9",
@@ -58,6 +59,7 @@
     "burgeon-ui": "^1.0.56",
     "element-ui": "^2.13.2",
     "vue": "^2.6.8",
+    "vue-i18n": "^8.22.0",
     "vue-router": "^3.0.2",
     "vuex": "^3.1.0"
   }
