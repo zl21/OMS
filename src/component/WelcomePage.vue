@@ -8,52 +8,57 @@
         </a>
         <DropdownMenu slot="list">
           <DropdownItem
-            @click.native="toggleLang('zh')"
-            :disabled="this.vm.$i18n._vm.locale == 'zh'"
-            >中文</DropdownItem
-          >
-          <DropdownItem
-            @click.native="toggleLang('en')"
-            :disabled="this.vm.$i18n._vm.locale == 'en'"
-            >English</DropdownItem
-          >
-          <DropdownItem
-            @click.native="toggleLang('ja')"
-            :disabled="this.vm.$i18n._vm.locale == 'ja'"
-            >日本</DropdownItem
+            v-for="item in langConfig"
+            :key="item.type"
+            @click.native="toggleLang(item.type)"
+            :disabled="vmI18n.locale == item.type"
+            >{{ item.text }}</DropdownItem
           >
         </DropdownMenu>
       </Dropdown>
-      <br>
-      <button>{{ vm.$t("btn.text") }}</button>
-      <span>{{ vm.$t("message.hello") }}</span>
+      <br />
+      <button>{{ vmI18n.t("btn.text") }}</button>
+      <span>{{ vmI18n.t("message.hello") }}</span>
     </div>
   </div>
 </template>
 
 <script>
+
+const langConfig = [
+  {
+    type: "zh",
+    text: "中文",
+  },
+  {
+    type: "en",
+    text: "English",
+  },
+  {
+    type: "ja",
+    text: "日语",
+  },
+];
+
 export default {
   name: "WelcomePage",
   data() {
-    const vm = window.vm;
     return {
-      vm: vm,
+      vmI18n: window.vmI18n,
+      langConfig: langConfig,
     };
   },
   mounted() {
-    console.log("this", this);
-    console.log("this.vm.$i18n._vm.locale", this.vm.$i18n._vm.locale);
+    // console.log("vmI18n", this.vmI18n);
   },
   methods: {
     toggleLang(lang) {
       let _this = this;
-      console.log("_this", _this);
       localStorage.setItem("locale", lang);
-      _this.vm.$i18n._vm.locale = localStorage.getItem("locale");
-      console.log(_this.vm.$i18n._vm.messages[lang]);
+      _this.vmI18n.locale = localStorage.getItem("locale");
       this.$message({
-        message: _this.vm.$i18n._vm.messages[lang].tip_info,
-        type: _this.vm.$i18n._vm.messages[lang].tip_type,
+        message: _this.vmI18n.messages[lang].tip_info,
+        type: _this.vmI18n.messages[lang].tip_type,
       });
     },
   },

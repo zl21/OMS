@@ -54,7 +54,7 @@ const {
 } = R3;
 window.R3 = R3;
 
-window.vm = new Vue({i18n: i18n});
+window.vmI18n = i18n;
 
 Vue.prototype.$network = network;
 Vue.prototype.$urlSearchParams = urlSearchParams;
