@@ -324,11 +324,6 @@
                     let text = '';
                     _this.listArr.forEach((item) => {
                       let flag = true;
-                      // for (let i = 1; i < num; i++) {
-                      //   if (item['RANK' + i] != '') {
-                      //     flag = false;
-                      //   };
-                      // }
                       item.LOGISTICS_RANK.forEach((i) => {
                         if (i.rank != '') {
                           flag = false;
@@ -481,11 +476,7 @@
         this.setTableHeight();
         this.refresh();
         this.btnConfig.buttons.forEach((item) => {
-          if (item.text === '修改物流') item.disabled = false;
-          else if (item.text === '作废') item.disabled = false;
-          else if (item.text === '导入') item.disabled = false;
-          else if (item.text === '导出') item.disabled = false;
-          else if (item.text === '刷新') item.disabled = false;
+          if (item.text === ('修改物流' || '作废' || '导入' || '刷新')) item.disabled = false;
         });
       }
     },
@@ -527,7 +518,6 @@
         }).then((res) => {
           _this.isSaveLoading = false;
           if (res.data.data.code === 0) {
-            // let ess = res.data.data.message || '保存成功';
             _this.$Message.success('保存成功');
             if (this.$route.query.id !== '-1') {
               this.refresh();
@@ -550,7 +540,6 @@
           }
         });
       },
-      // 获取树
       getTreeData() {
         const _this = this;
         _this.isSaveLoading = true;
@@ -563,57 +552,14 @@
           _this.isSaveLoading = false;
           if (res.data.code === 0) {
             _this.treeData = res.data.data.warehouseLogisticsTree;
-            if (res.data.data.warehouseLogistics !== null) {
+            if (res.data.data.warehouseLogistics) {
               _this.information.formData[0].itemdata.pid = res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ID;
               _this.information.formData[0].itemdata.valuedata = res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ENAME;
               _this.information.formValue.REMARK = res.data.data.warehouseLogistics.REMARK;
               if (res.data.data.warehouseLogistics.ISACTIVE === 'N') {
                 _this.statusName = '已作废';
                 _this.btnConfig.buttons.forEach((item) => {
-                  if (item.text === '修改物流') item.disabled = true;
-                  else if (item.text === '作废') item.disabled = true;
-                  else if (item.text === '导入') item.disabled = true;
-                  else if (item.text === '导出') item.disabled = true;
-                });
-              }
-            }
-            if (res.data.data.warehouseLogisticsItems.length) {
-              this.theadArr = [];
-              res.data.data.warehouseLogisticsItems.forEach((item) => {
-                this.theadArr.push({
-                  name: item.CP_C_LOGISTICS_ENAME
-                });
-              });
-            } else {
-              this.theadArr = [];
-            }
-          }
-        });
-      },
-      getTreeData1() {
-        const _this = this;
-        _this.isSaveLoading = true;
-        const param = { objid: this.$route.query.id };
-        axios({
-          url: '/p/cs/getWarehouseLogisticsTree',
-          method: 'post',
-          data: param
-        }).then((res) => {
-          _this.isSaveLoading = false;
-          if (res.data.code === 0) {
-            _this.treeData = res.data.data.warehouseLogisticsTree;
-            if (res.data.data.warehouseLogistics !== null) {
-              _this.information.formData[0].itemdata.pid = res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ID;
-              _this.information.formData[0].itemdata.valuedata = res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ENAME;
-              _this.information.formValue.REMARK = res.data.data.warehouseLogistics.REMARK;
-              if (res.data.data.warehouseLogistics.ISACTIVE === 'N') {
-                _this.statusName = '已作废';
-                _this.btnConfig.buttons.forEach((item) => {
-                  if (item.text === '修改物流') item.disabled = true;
-                  else if (item.text === '作废') item.disabled = true;
-                  else if (item.text === '导入') item.disabled = true;
-                  else if (item.text === '导出') item.disabled = true;
-                  else if (item.text === '保存') item.disabled = true;
+                  if (item.text === ('修改物流' || '作废' || '导入' || '导出' || '保存')) item.disabled = true;
                 });
               }
             }
@@ -750,7 +696,7 @@
       },
       // 刷新
       refresh() {
-        this.getTreeData1();
+        this.getTreeData();
       },
       // 作废
       invalid() {
@@ -767,7 +713,7 @@
           _this.isSaveLoading = false;
           if (res.data.code === 0) {
             const ess = res.data.data.message || '作废成功';
-            _this.getTreeData1();
+            _this.getTreeData();
             _this.$Message.success(ess);
           } else {
             const err = res.data.data.message || '作废失败';
@@ -824,7 +770,6 @@
         const tableHeight = contentHeight - logisticsAreaHeight;
         const Theight = document.getElementsByClassName('tableBox')[0];
         document.getElementsByClassName('list-table')[0].style = `height: ${tableHeight - 140}px;`;
-        // document.getElementById('conTop').style = `height: ${tableHeight - 170}px;`;
         Theight.style = `height: ${tableHeight - 110}px;`;
       },
       paperScroll(e) {
@@ -838,6 +783,7 @@
 
 <style lang="less">
   @import "~professionalComponents/common/css/theme.less";
+  @import "~@burgeon/oms-theme/skin/public.less";
 .setWarehouseLogistics {
   position: relative;
   padding-top: 8px;
@@ -888,8 +834,8 @@
         margin-right: 15px;
         position: relative;
         .btn1 {
-          border-color: #ec6e4e;
-          color: #ec6e4e;
+          border-color: @base-color;
+          color: @base-color;
           position: absolute;
           top: 50%;
           left: 50%;
@@ -899,8 +845,8 @@
           }
         }
         .btn2 {
-          border-color: #ec6e4e;
-          color: #ec6e4e;
+          border-color: @base-color;
+          color: @base-color;
           position: absolute;
           top: 50%;
           left: 50%;
