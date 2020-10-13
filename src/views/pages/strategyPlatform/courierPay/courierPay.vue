@@ -59,14 +59,10 @@
 
   import areaList from '@/assets/js/address/area-list';
   import { parse, parseArea } from '@/assets/js/address/address-parse';
-  import BusinessForm from '@burgeon/business-components/businessForm';
-  import BusinessActionTable from '@burgeon/business-components/businessActionTable';
 
   parseArea(areaList);
   export default {
     components: {
-      BusinessActionTable,
-      BusinessForm,
       businessButton,
       businessForm,
       businessActionTable,
