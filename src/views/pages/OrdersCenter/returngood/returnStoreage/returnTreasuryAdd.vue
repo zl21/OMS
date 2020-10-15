@@ -845,7 +845,7 @@ export default {
         // 是否匹配
         item.IS_MATC = item.IS_MATCH == "是" ? 1 : 0;
         // 是否生成调整单
-        item.IS_GEN_ADJUST = tem.IS_GEN_ADJUST == "是" ? 1 : 0;
+        item.IS_GEN_ADJUST = item.IS_GEN_ADJUST == "是" ? 1 : 0;
         item.RESERVE_BIGINT01 = item.RESERVE_BIGINT01 == "是" ? 1 : 0;
         item.RESERVE_BIGINT02 = item.RESERVE_BIGINT02 == "是" ? 1 : 0;
         item.RESERVE_BIGINT03 = item.RESERVE_BIGINT03 == "是" ? 1 : 0;
@@ -880,7 +880,6 @@ export default {
       axios({
         url: "/api/cs/oc/oms/v1/ReturnStorageSave",
         method: "post",
-        cancelToken: true,
         data: params
       }).then(res => {
         if (res.data.code == 0) {
@@ -1072,7 +1071,6 @@ export default {
       axios({
         url: "/api/cs/oc/oms/v1/searchButtonsInDetail",
         method: "post",
-        cancelToken: true,
         data: param
       })
         .then(res => {
