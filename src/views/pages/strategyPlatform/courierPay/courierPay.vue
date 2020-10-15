@@ -40,8 +40,6 @@
             @on-select-cancel="onSelectCancel"
             @table-delete-detail="tableDeleteDetail"
           />
-          <!-- </div> -->
-          <!-- </div> -->
         </p>
       </Panel>
     </Collapse>
@@ -359,50 +357,51 @@
                 value: 'COMPENSATE_TYPE', // 输入框的值
                 selectChange: () => {
                   const self = this;
+                  let formValue = self.jordanTableConfig.jordanFormConfig.formValue;
+                  let formData = self.jordanTableConfig.jordanFormConfig.formData;
+                  let ruleValidate = self.jordanTableConfig.jordanFormConfig.ruleValidate;
                   switch (
                     self.jordanTableConfig.jordanFormConfig.formValue.COMPENSATE_TYPE
                   ) {
                   case 1:
-                    self.jordanTableConfig.jordanFormConfig.formValue.COMPENSATE_STANDARD = ''; // 赔付标准置空
-                    self.jordanTableConfig.jordanFormConfig.formValue.SETTLEMENTPRICE = ''; // 结算价置空
-                    self.jordanTableConfig.jordanFormConfig.formData[2].options[0].disabled = false;
-                    self.jordanTableConfig.jordanFormConfig.formData[2].options[1].disabled = false;
-                    // self.jordanTableConfig.jordanFormConfig.formData[2].options[2].disabled = true;
-                    self.jordanTableConfig.jordanFormConfig.formData[2].disabled = false; // 赔付标准可编辑
-                    self.jordanTableConfig.jordanFormConfig.formData[3].disabled = false; // 倍数可编辑
-                    self.jordanTableConfig.jordanFormConfig.formData[4].disabled = true; // 结算价不可编辑
+                    formValue.COMPENSATE_STANDARD = ''; // 赔付标准置空
+                    formValue.SETTLEMENTPRICE = ''; // 结算价置空
+                    formData[2].options[0].disabled = false;
+                    formData[2].options[1].disabled = false;
+                    formData[2].disabled = false; // 赔付标准可编辑
+                    formData[3].disabled = false; // 倍数可编辑
+                    formData[4].disabled = true; // 结算价不可编辑
 
-                    self.jordanTableConfig.jordanFormConfig.ruleValidate.COMPENSATE_STANDARD[0].required = true;
-                    self.jordanTableConfig.jordanFormConfig.ruleValidate.MULTIPLE[0].required = true;
-                    self.jordanTableConfig.jordanFormConfig.ruleValidate.SETTLEMENTPRICE[0].required = false;
-                    self.jordanTableConfig.jordanFormConfig.ruleValidate = Object.assign({}, self.jordanTableConfig.jordanFormConfig.ruleValidate);
+                    ruleValidate.COMPENSATE_STANDARD[0].required = true;
+                    ruleValidate.MULTIPLE[0].required = true;
+                    ruleValidate.SETTLEMENTPRICE[0].required = false;
+                    ruleValidate = Object.assign({}, ruleValidate);
                     break;
                   case 2:
-                    self.jordanTableConfig.jordanFormConfig.formValue.COMPENSATE_STANDARD = ''; // 赔付标准置空
-                    self.jordanTableConfig.jordanFormConfig.formValue.SETTLEMENTPRICE = ''; // 结算价置空
-                    self.jordanTableConfig.jordanFormConfig.formData[2].options[0].disabled = true;
-                    self.jordanTableConfig.jordanFormConfig.formData[2].options[1].disabled = true;
-                    // self.jordanTableConfig.jordanFormConfig.formData[2].options[2].disabled = false;
-                    self.jordanTableConfig.jordanFormConfig.formData[2].disabled = false; // 赔付标准可编辑
-                    self.jordanTableConfig.jordanFormConfig.formData[3].disabled = false; // 倍数可编辑
-                    self.jordanTableConfig.jordanFormConfig.formData[4].disabled = true; // 结算价不可编辑
+                    formValue.COMPENSATE_STANDARD = ''; // 赔付标准置空
+                    formValue.SETTLEMENTPRICE = ''; // 结算价置空
+                    formData[2].options[0].disabled = true;
+                    formData[2].options[1].disabled = true;
+                    formData[2].disabled = false; // 赔付标准可编辑
+                    formData[3].disabled = false; // 倍数可编辑
+                    formData[4].disabled = true; // 结算价不可编辑
 
-                    self.jordanTableConfig.jordanFormConfig.ruleValidate.COMPENSATE_STANDARD[0].required = true;
-                    self.jordanTableConfig.jordanFormConfig.ruleValidate.MULTIPLE[0].required = true;
-                    self.jordanTableConfig.jordanFormConfig.ruleValidate.SETTLEMENTPRICE[0].required = false;
-                    self.jordanTableConfig.jordanFormConfig.ruleValidate = Object.assign({}, self.jordanTableConfig.jordanFormConfig.ruleValidate);
+                    ruleValidate.COMPENSATE_STANDARD[0].required = true;
+                    ruleValidate.MULTIPLE[0].required = true;
+                    ruleValidate.SETTLEMENTPRICE[0].required = false;
+                    ruleValidate = Object.assign({}, ruleValidate);
                     break;
                   case 3:
-                    self.jordanTableConfig.jordanFormConfig.formValue.MULTIPLE = ''; // 倍数置空
-                    self.jordanTableConfig.jordanFormConfig.formValue.COMPENSATE_STANDARD = ''; // 赔付标准置空
-                    self.jordanTableConfig.jordanFormConfig.formData[2].disabled = true;
-                    self.jordanTableConfig.jordanFormConfig.formData[3].disabled = true;
-                    self.jordanTableConfig.jordanFormConfig.formData[4].disabled = false;
+                    formValue.MULTIPLE = ''; // 倍数置空
+                    formValue.COMPENSATE_STANDARD = ''; // 赔付标准置空
+                    formData[2].disabled = true;
+                    formData[3].disabled = true;
+                    formData[4].disabled = false;
 
-                    self.jordanTableConfig.jordanFormConfig.ruleValidate.COMPENSATE_STANDARD[0].required = false;
-                    self.jordanTableConfig.jordanFormConfig.ruleValidate.MULTIPLE[0].required = false;
-                    self.jordanTableConfig.jordanFormConfig.ruleValidate.SETTLEMENTPRICE[0].required = true;
-                    self.jordanTableConfig.jordanFormConfig.ruleValidate = Object.assign({}, self.jordanTableConfig.jordanFormConfig.ruleValidate);
+                    ruleValidate.COMPENSATE_STANDARD[0].required = false;
+                    ruleValidate.MULTIPLE[0].required = false;
+                    ruleValidate.SETTLEMENTPRICE[0].required = true;
+                    ruleValidate = Object.assign({}, ruleValidate);
                     break;
                   }
                 }, // 选中事件，默认返回选中的值
@@ -582,13 +581,11 @@
         if (!self.jordanTableConfig.data.length) return self.$Message.error('明细为空不允许保存');
         const formdata = new FormData();
         formdata.append('param', JSON.stringify(param));
-        console.log(formdata);
         axios({
           url: '/p/cs/saveCompensate',
           method: 'post',
           data: formdata
         }).then((res) => {
-          console.log(res);
           if (res.data.data.code === 0) {
             if (JSON.stringify(res.data.data.data) !== '{}') {
               self.removeDetail();
@@ -614,26 +611,27 @@
       setData(data) {
         // 页面赋值方法
         const self = this;
-        self.formConfig.formValue.BILL_NO = data.ST_C_COMPENSATE.BILL_NO; // 单据编号赋值
+        let formValue =  self.formConfig.formValue;
+        let formValue_one = self.formConfig1.formValue;
+        formValue.BILL_NO = data.ST_C_COMPENSATE.BILL_NO; // 单据编号赋值
         self.formConfig.formData[1].itemdata.valuedata = data.ST_C_COMPENSATE.CP_C_PHY_WAREHOUSE_ENAME;
         self.formConfig.formData[1].itemdata.pid = data.ST_C_COMPENSATE.CP_C_PHY_WAREHOUSE_ID;
-        self.formConfig.formValue.BEGIN_TIME = new Date(data.ST_C_COMPENSATE.BEGIN_TIME); // 生效时间赋值
-        self.formConfig.formValue.END_TIME = new Date(data.ST_C_COMPENSATE.END_TIME); // 结束日期赋值
-        self.formConfig.formValue.ENAME = data.ST_C_COMPENSATE.ENAME; // 方案名称
-        self.formConfig.formValue.PLAN_DESC = data.ST_C_COMPENSATE.PLAN_DESC; // 方案描述
+        formValue.BEGIN_TIME = new Date(data.ST_C_COMPENSATE.BEGIN_TIME); // 生效时间赋值
+        formValue.END_TIME = new Date(data.ST_C_COMPENSATE.END_TIME); // 结束日期赋值
+        formValue.ENAME = data.ST_C_COMPENSATE.ENAME; // 方案名称
+        formValue.PLAN_DESC = data.ST_C_COMPENSATE.PLAN_DESC; // 方案描述
 
-        self.formConfig1.formValue.OWNERENAME = data.ST_C_COMPENSATE.OWNERENAME; // 创建人
-        self.formConfig1.formValue.CREATIONDATE = self.setTime(data.ST_C_COMPENSATE.CREATIONDATE); // 创建时间
-        self.formConfig1.formValue.MODIFIERENAME = data.ST_C_COMPENSATE.MODIFIERENAME; // 修改人
-        self.formConfig1.formValue.MODIFIEDDATE = self.setTime(data.ST_C_COMPENSATE.MODIFIEDDATE); // 修改时间
-        self.formConfig1.formValue.DELENAME = data.ST_C_COMPENSATE.DELENAME; // 作废人
-        self.formConfig1.formValue.DEL_TIME = self.setTime(data.ST_C_COMPENSATE.DEL_TIME); // 作废时间
+        formValue_one.OWNERENAME = data.ST_C_COMPENSATE.OWNERENAME; // 创建人
+        formValue_one.CREATIONDATE = self.setTime(data.ST_C_COMPENSATE.CREATIONDATE); // 创建时间
+        formValue_one.MODIFIERENAME = data.ST_C_COMPENSATE.MODIFIERENAME; // 修改人
+        formValue_one.MODIFIEDDATE = self.setTime(data.ST_C_COMPENSATE.MODIFIEDDATE); // 修改时间
+        formValue_one.DELENAME = data.ST_C_COMPENSATE.DELENAME; // 作废人
+        formValue_one.DEL_TIME = self.setTime(data.ST_C_COMPENSATE.DEL_TIME); // 作废时间
 
-        self.formConfig1.formValue.CHECKENAME = data.ST_C_COMPENSATE.CHECKENAME; // 审核人
-        self.formConfig1.formValue.CHECKTIME = self.setTime(data.ST_C_COMPENSATE.CHECKTIME); // 审核时间
-        self.formConfig1.formValue.FINISHENAME = data.ST_C_COMPENSATE.FINISHENAME; // 结案人
-        self.formConfig1.formValue.FINISHTIME = self.setTime(data.ST_C_COMPENSATE.FINISHTIME); // 结案时间
-        console.log(data.ST_C_COMPENSATE_LOGISTICS, '++++++++');
+        formValue_one.CHECKENAME = data.ST_C_COMPENSATE.CHECKENAME; // 审核人
+        formValue_one.CHECKTIME = self.setTime(data.ST_C_COMPENSATE.CHECKTIME); // 审核时间
+        formValue_one.FINISHENAME = data.ST_C_COMPENSATE.FINISHENAME; // 结案人
+        formValue_one.FINISHTIME = self.setTime(data.ST_C_COMPENSATE.FINISHTIME); // 结案时间
         data.ST_C_COMPENSATE_LOGISTICS.forEach((item) => {
           if (item.COMPENSATE_TYPE == 1) {
             item.COMPENSATE_TYPE = '价格赔付';
@@ -651,7 +649,6 @@
             item.COMPENSATE_STANDARD = '邮费';
           }
         });
-        console.log(data.ST_C_COMPENSATE_LOGISTICS, '++++++++');
         self.jordanTableConfig.data = data.ST_C_COMPENSATE_LOGISTICS; // 赋值明细信息
       },
       setTime(needTime) {
@@ -800,10 +797,8 @@
         // 新增明细标识
         addList.ID = -1;
         param.fixcolumn.ST_C_COMPENSATE_LOGISTICS.push(addList);
-        console.log(param);
         const formdata = new FormData();
         formdata.append('param', JSON.stringify(param));
-        console.log(formdata);
         axios({
           url: '/p/cs/saveCompensate',
           method: 'post',
