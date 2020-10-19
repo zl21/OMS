@@ -1,6 +1,7 @@
 <template>
   <div style="width: 440px;">
-    <p>是否打印选中行？</p>
+    <!-- 是否打印选中行？ -->
+    <p>{{vmI18n.t("modalTips.bz")}}</p>
     <businessButton :btn-config="btnConfig" />
   </div>
 </template>
@@ -37,19 +38,20 @@
     },
     data() {
       return {
+        vmI18n: window.vmI18n,
         btnConfig: {
           typeAll: 'error', // 按钮统一风格样式
           btnsite: 'right', // 按钮位置 (right , center , left)
           loading: false, // 按钮组件是否有loading样式,值为true false
           buttons: [
             {
-              text: '取消', // 按钮文本
+              text: vmI18n.t("common.cancel"), // 取消 按钮文本
               btnclick: () => {
                 this.$emit('closeActionDialog', false);
               }, // 按钮点击事件
             },
             {
-              text: '确定打印', // 按钮文本
+              text: vmI18n.t("other.confirmPrinting"), // 确定打印 按钮文本
               disabled: false,
               btnclick: () => {
                 this.print();
@@ -64,41 +66,41 @@
             data: {
               recipient: {
                 address: {
-                  city: '杭州市',
-                  detail: '良睦路999号乐佳国际大厦2号楼小邮局',
-                  district: '余杭区',
-                  province: '浙江省',
+                  city: vmI18n.t("other.hzCity"),//杭州市
+                  detail: vmI18n.t("other.addressDetails0"),//良睦路999号乐佳国际大厦2号楼小邮局
+                  district: vmI18n.t("other.yhErea"),//余杭区
+                  province: vmI18n.t("other.zjProvince"),//浙江省
                   town: '',
                 },
-                mobile: '13012345678',
-                name: '乾宝贝最可爱',
-                phone: '057112345678',
+                mobile: vmI18n.t("other.mobile0"),//13012345678
+                name: vmI18n.t("other.name"),//乾宝贝最可爱
+                phone: vmI18n.t("other.phone0"),//057112345678
               },
               routingInfo: {
                 consolidation: {
-                  name: '杭州',
+                  name:vmI18n.t("common.address.placeName0"),//杭州
                   code: 'hangzhou',
                 },
                 origin: {
-                  name: '杭州',
+                  name:vmI18n.t("common.address.placeName0"),//杭州
                   code: 'POSTB',
                 },
                 sortation: {
-                  name: '杭州',
+                  name:vmI18n.t("common.address.placeName0"),//杭州
                 },
                 routeCode: '123A-456-789',
               },
               sender: {
                 address: {
-                  city: '杭州市',
-                  detail: '文一西路1001号阿里巴巴淘宝城5号小邮局',
-                  district: '余杭区',
-                  province: '浙江省',
+                  city: vmI18n.t("common.address.city1"),//杭州市
+                  detail: vmI18n.t("common.address.addressDetails1"),//文一西路1001号阿里巴巴淘宝城5号小邮局
+                  district: vmI18n.t("common.address.erea1"),//余杭区
+                  province: vmI18n.t("common.address.province1"),//浙江省
                   town: '',
                 },
-                mobile: '13012345678',
-                name: '阿里巴巴',
-                phone: '057112345678',
+                mobile: vmI18n.t("common.address.mobile1"),//13012345678
+                name: vmI18n.t("common.address.name"),//阿里巴巴
+                phone: vmI18n.t("common.address.phone1"),//057112345678
               },
               shippingOption: {
                 code: 'COD',
@@ -716,8 +718,8 @@
         const self = this;
         this.btnConfig.buttons[1].disabled = true;
         this.$Modal.info({
-          title: '打印',
-          content: '正在打印中，请稍后。。。',
+          title: this.vmI18n.t("other.printing"),//打印
+          content:this.vmI18n.t("modalTips.ca") ,//正在打印中，请稍后。。。
           mask: true,
           onOk: () => {
             self.$emit('confirmView');

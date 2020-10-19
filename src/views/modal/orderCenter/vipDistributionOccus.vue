@@ -33,7 +33,7 @@ export default {
         buttons: [
           {
             type: "", //按钮类型
-            text: "确认", //按钮文本
+            text:  vmI18n.t("common.determine"), //确定 按钮文本
             icon: "", //按钮图标
             size: "", //按钮大小
             disabled: false, //按钮禁用控制
@@ -44,7 +44,7 @@ export default {
           },
           {
             type: "", //按钮类型
-            text: "取消", //按钮文本
+            text: vmI18n.t("common.cancel"), //取消 按钮文本
             icon: "", //按钮图标
             size: "", //按钮大小
             disabled: false, //按钮禁用控制
@@ -86,7 +86,7 @@ export default {
               self.distributionIds = res.data.data.distributionIds.replace(/\[|]/g,'');
             }
           }else{
-            self.$Message.success("手工占单成功!");
+            self.$Message.success(self.vmI18n.t("modalTips.cb"));//手工占单成功!
             self.$emit("closeActionDialog");
             self.$emit("confirmImport");
           }
@@ -96,7 +96,7 @@ export default {
           self.confirmBtnConfig.buttons = [
             {
               type: "", //按钮类型
-              text: "关闭", //按钮文本
+              text: self.vmI18n.t("common.close"), //关闭 按钮文本
               icon: "", //按钮图标
               size: "", //按钮大小
               disabled: false, //按钮禁用控制
@@ -123,14 +123,14 @@ export default {
         data: fromdata
       }).then(function(res) {
         if (res.data.data.code === 0) {
-          self.$Message.success("合并占单成功!");
+          self.$Message.success( self.vmI18n.t("modalTips.cc"));//合并占单成功!
           self.$emit("closeActionDialog");
         } else {
           self.corfirmMessage = res.data.data.message;
           self.confirmBtnConfig.buttons = [
             {
               type: "", //按钮类型
-              text: "关闭", //按钮文本
+              text: self.vmI18n.t("common.close"), //关闭 按钮文本
               icon: "", //按钮图标
               size: "", //按钮大小
               disabled: false, //按钮禁用控制
