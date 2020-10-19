@@ -12,6 +12,7 @@ import WelcomePage from './src/component/WelcomePage.vue';
 import projectRouterConfig from './src/config/router.config';
 import customizedPageConfig from './src/config/customized.page.config';
 import customizedModalConfig from './src/config/customized.modal.config';
+import apiPath from '@/assets/js/api/path/index.js'
 import '@burgeon/oms-theme/theme/custom.less'; // 主题文件
 import customizedTheme from './src/config/customized.theme.js';//主题配置
 
@@ -45,6 +46,7 @@ Vue.prototype.$ajax = ajax;
 Vue.prototype.axios = request;
 Vue.prototype.request = request;
 Vue.prototype.httpForm = httpFormdata;
+Vue.prototype.$httpApi = apiPath
 
 Vue.prototype.$store = store;
 
