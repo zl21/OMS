@@ -5,20 +5,38 @@
       <div class="head_botton">
         <button class="white" @click="getData">
           <!-- <i class="burgeon-icon burgeon-icon-ios-search" /> -->
-          查找
+          <!-- 查找 -->
+          {{ vmI18n.t("btn.find") }}
         </button>
         <button class="white" @click="Reset">
           <!-- <i class="burgeon-icon burgeon-icon-ios-refresh" /> -->
-          重置
+          <!-- 重置 -->
+          {{ vmI18n.t("btn.reset") }}
         </button>
-        <button class="white" @click="promotionClick">新增</button>
-        <button class="white" @click="promotionBlukClick">批量新增</button>
-        <button class="white" @click="publish">发布</button>
-        <button class="white" @click="actOffline">下线</button>
-        <button class="white" @click="copy">复制</button>
-        <button class="white" @click="deleteActi">删除</button>
-        <button class="white" @click="setGroup">设置分组</button>
-        <button class="white" @click="simulation">模拟仿真</button>
+        <button class="white" @click="promotionClick">
+          {{ vmI18n.t("btn.add") }}
+        </button>
+        <button class="white" @click="promotionBlukClick">
+          {{ vmI18n.t("btn.batch_add") }}
+        </button>
+        <button class="white" @click="publish">
+          {{ vmI18n.t("btn.publish") }}
+        </button>
+        <button class="white" @click="actOffline">
+          {{ vmI18n.t("btn.offline") }}
+        </button>
+        <button class="white" @click="copy">
+          {{ vmI18n.t("common.copy") }}
+        </button>
+        <button class="white" @click="deleteActi">
+          {{ vmI18n.t("btn.delete") }}
+        </button>
+        <button class="white" @click="setGroup">
+          {{ vmI18n.t("btn.set_groups") }}
+        </button>
+        <button class="white" @click="simulation">
+          {{ vmI18n.t("btn.simulation") }}
+        </button>
         <Favorite />
       </div>
       <!-- 过滤器 -->
@@ -26,7 +44,9 @@
         <!--促销编号--->
         <div class="item_three_1">
           <span>
-            <i class="query_titile">促销编号:</i>
+            <i class="query_titile"
+              >{{ vmI18n.t("form_label.promotionNo") }}:</i
+            >
             <input
               v-model="acti_no"
               type="text"
@@ -39,21 +59,25 @@
         <!-- 活动日期 -->
         <div class="item_three_1">
           <span>
-            <i class="query_titile">活动日期:</i>
+            <i class="query_titile"
+              >{{ vmI18n.t("form_label.activityDate") }}:</i
+            >
             <el-date-picker
               v-model="acti_date"
               class="M_date_clas"
               format="yyyy-MM-dd"
               value-format="yyyyMMdd"
               type="daterange"
-              placeholder="选择日期范围"
+              :placeholder="vmI18n.t('pHolder.a1')"
             />
           </span>
         </div>
         <!-- 活动名称 -->
         <div class="item_three_1">
           <span>
-            <i class="query_titile">活动名称:</i>
+            <i class="query_titile"
+              >{{ vmI18n.t("form_label.activityName") }}:</i
+            >
             <input
               v-model="acti_name"
               type="text"
@@ -78,7 +102,7 @@
         <!-- 商品 -->
         <div class="item_three_1">
           <span>
-            <i class="query_titile">参与商品:</i>
+            <i class="query_titile">{{ vmI18n.t("other.goods") }}:</i>
             <TableInput
               style="width: calc(100% - 60px)"
               :is-active="true"
@@ -92,7 +116,7 @@
         <!-- 分组-->
         <div class="item_three_1">
           <span>
-            <i class="query_titile">分组名称:</i>
+            <i class="query_titile">{{ vmI18n.t("table_label.grouping") }}:</i>
             <input
               v-model="acti_group"
               type="text"
@@ -105,7 +129,7 @@
         <!--操作人-->
         <div class="item_three_1">
           <span>
-            <i class="query_titile">操作人:</i>
+            <i class="query_titile">{{ vmI18n.t("form_label.operator") }}:</i>
             <input
               v-model="release_name"
               type="text"
@@ -118,7 +142,9 @@
         <!--促销状态-->
         <div class="item_three_1">
           <span>
-            <i class="query_titile">促销状态:</i>
+            <i class="query_titile"
+              >{{ vmI18n.t("form_label.promotion_status") }}:</i
+            >
             <div class="query_select">
               <Select v-model="STATUS" multiple>
                 <Option
@@ -186,19 +212,36 @@
     </div>
     <div class="promactiIcon">
       <div class="legend">
-        <span style="font-weight: bold">图例:</span>
+        <!-- 图例 -->
+        <span style="font-weight: bold">{{ vmI18n.t("other.legend") }}:</span>
         <p>
-          <span>提交状态:&nbsp;</span>
-          <button class="color-blue">已发布</button>
+          <!-- 提交状态 -->
+          <span>{{ vmI18n.t("other.submission_status") }}:&nbsp;</span>
+          <!-- 已发布 -->
+          <button class="color-blue">
+            {{ vmI18n.t("form_label.published") }}
+          </button>
+        </p>
+        other
+        <p>
+          <!-- 草稿状态 -->
+          <span>{{ vmI18n.t("other.draft_status") }}:&nbsp;</span>
+          <!-- 草稿 -->
+          <button class="color-italic-black">
+            {{ vmI18n.t("btn.draft") }}
+          </button>
         </p>
         <p>
-          <span>草稿状态:&nbsp;</span>
-          <button class="color-italic-black">草稿</button>
-        </p>
-        <p>
-          <span>下线/过期状态:&nbsp;</span>
-          <button class="color-italic-grey">下线</button>
-          <button class="color-italic-grey">过期</button>
+          <!-- 下线/过期状态 -->
+          <span>{{ vmI18n.t("other.offline_expired_status") }}:&nbsp;</span>
+          <!-- 下线 -->
+          <button class="color-italic-grey">
+            {{ vmI18n.t("btn.offline") }}
+          </button>
+          <!-- 过期 -->
+          <button class="color-italic-grey">
+            {{ vmI18n.t("btn.overdue") }}
+          </button>
         </p>
       </div>
     </div>
@@ -229,7 +272,10 @@
     <Modal v-model="modal">
       <Table :columns="logData.columns" :data="logData.data" :height="300" />
       <div slot="footer">
-        <Button type="error" @click="closeModal"> 关闭 </Button>
+        <!-- 关闭 -->
+        <Button type="error" @click="closeModal">
+          {{ vmI18n.t("common.close") }}
+        </Button>
       </div>
     </Modal>
   </div>
@@ -255,6 +301,7 @@ import Favorite from "./components/favorite";
 const baseColumnDefs = [
   {
     headerName: "序号",
+    // headerName: vmI18n.t("table_label.serialNo"),
     field: "SERIAL_NO",
     pinned: "left",
     maxWidth: 120,
@@ -265,91 +312,112 @@ const baseColumnDefs = [
   },
   {
     headerName: "促销编号",
+    // headerName: vmI18n.t("table_label.serialNo"),
     field: "ACTI_NO",
   },
   {
     headerName: "活动名称",
+    // headerName: vmI18n.t("form_label.activityName"),
     field: "ACTI_NAME",
   },
   {
     headerName: "参与店铺",
+    // headerName: vmI18n.t("table_label.participating_store"),
     field: "STORE_NAMES",
   },
   {
     headerName: "活动时间段",
+    // headerName: vmI18n.t("table_label.activity_period"),
     field: "ACTI_DATE",
   },
   {
     headerName: "失效下线时间",
+    // headerName: vmI18n.t("table_label.failure_offline_time"),
     field: "DOWN_TIME",
   },
   {
     headerName: "剩余可送",
+    // headerName: vmI18n.t("table_label.rest_sent"),
     field: "STOCK",
   },
   {
     headerName: "已送数量",
+    // headerName: vmI18n.t("table_label.delivered_quantity"),
     field: "SEND",
   },
   {
     headerName: "状态",
+    // headerName: vmI18n.t("table_label.status"),
     field: "status",
   },
   {
     headerName: "分组名称",
+    // headerName: vmI18n.t("table_label.groupName"),
     field: "GROUP_NAME",
   },
   {
     headerName: "优先级",
+    // headerName: vmI18n.t("table_label.priority"),
     field: "LEVEL",
   },
   {
     headerName: "创建人",
+    // headerName: vmI18n.t("table_label.creator"),
     field: "OWNERENAME",
   },
   {
     headerName: "创建时间",
+    // headerName: vmI18n.t("table_label.creationTime"),
     field: "CREATIONDATE",
   },
   {
     headerName: "修改人",
+    // headerName: vmI18n.t("table_label.reviser"),
     field: "OWNERENAME",
   },
   {
     headerName: "修改时间",
+    // headerName: vmI18n.t("table_label.modificationTime"),
     field: "MODIFIEDDATE",
   },
   {
     headerName: "备注",
+    // headerName: vmI18n.t("table_label.remarks"),
     field: "REMARK",
   },
   {
     headerName: "操作",
+    // headerName: vmI18n.t("table_label.operation"),
     field: "ACTION_LOG",
   },
 ];
 export default {
   data() {
     return {
+      vmI18n: window.vmI18n,
       modal: false, // 查看日志弹框
       logData: {
         columns: [
           {
-            title: "序号",
+            // title: "序号",
+            title: vmI18n.t("table_label.serialNo"),
             type: "index",
             width: 60,
             align: "center",
           },
           {
-            title: "操作时间",
+            // title: "操作时间",
+            title: vmI18n.t("table_label.operatorTime"),
             key: "creationdate",
           },
           {
-            title: "操作人",
+            // title: "操作人",
+            title: vmI18n.t("form_label.operator"),
             key: "operator",
           },
           {
-            title: "操作描述",
+            // title: "操作描述",
+            title: vmI18n.t("table_label.operation_description"),
             key: "describes",
           },
         ],
@@ -375,7 +443,8 @@ export default {
           isnotnull: false, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: "店铺名称", // input前面显示的lable值
+          // name: "店铺名称", // input前面显示的lable值
+          name: vmI18n.t("table_label.shopName"),
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: "CP_C_SHOP", // 对应的表
           // reftableid: 24475, //对应的表ID
@@ -399,7 +468,8 @@ export default {
           isnotnull: false, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: "线下门店", // input前面显示的lable值
+          // name: "线下门店", // input前面显示的lable值
+          name: vmI18n.t("form_label.offline_stores"),
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: "CP_C_RSTORE", // 对应的表
           // reftableid: 23296, //对应的表ID
@@ -411,7 +481,8 @@ export default {
       },
       dataError: {
         show: false, // 控制警告弹框显示
-        title: "错误", // 弹框标题
+        // title: "错误", // 弹框标题
+        title: vmI18n.t("modalTitle.error"), //弹框标题
         type: "warning", // 类型警告
         backBtn: true, // 是否显示返回按钮
         errorList: [{ message: "确定执行下线操作？" }], // 提示内容
@@ -449,7 +520,8 @@ export default {
           colname: "PS_C_PRO_ECODE",
           cusurl: "custompage/matrix",
           display: "text",
-          name: "商品编码",
+          // name: "商品编码",
+          name: vmI18n.t("table_label.productNo"),
           pid: "",
           tablename: "DL_B_TRAN_PLAN_ITEM",
           type: "STRING",
@@ -603,15 +675,18 @@ export default {
       diStatusArr: [
         {
           value: 1,
-          label: "草稿",
+          // label: "草稿",
+          label: vmI18n.t("btn.draft"),
         },
         {
           value: 2,
-          label: "已发布",
+          // label: "已发布",
+          label: vmI18n.t("btn.published"),
         },
         {
           value: 3,
-          label: "下线",
+          // label: "下线",
+          label: vmI18n.t("btn.offline"),
         },
       ],
       fixedHeight: 351, // 固定高度
@@ -633,7 +708,8 @@ export default {
           isnotnull: false,
           isuppercase: true,
           length: 65535,
-          name: "参与商品",
+          // name: "参与商品",
+          name: vmI18n.t("other.participating_goods"),
           readonly: false,
           reftable: "PS_C_PRO",
           reftableid: 23281,
@@ -675,10 +751,22 @@ export default {
     },
     tabTotal() {
       return {
-        one: `全部(${this.agTableConfig1.pagenation.total})`,
-        two: `已发布(${this.agTableConfig2.pagenation.total})`,
-        three: `草稿(${this.agTableConfig3.pagenation.total})`,
-        four: `下线/过期(${this.agTableConfig4.pagenation.total})`,
+        // 全部
+        one: `${vmI18n.t("common.all")}(${
+          this.agTableConfig1.pagenation.total
+        })`,
+        // 已发布
+        two: `${vmI18n.t("btn.published")}(${
+          this.agTableConfig2.pagenation.total
+        })`,
+        // 草稿
+        three: `${vmI18n.t("btn.draft")}(${
+          this.agTableConfig3.pagenation.total
+        })`,
+        // 下线/过期
+        four: `${vmI18n.t("other.offline_expired")}(${
+          this.agTableConfig4.pagenation.total
+        })`,
       };
     },
   },
@@ -780,7 +868,8 @@ export default {
           if (data && data.ACTI_ALL_INFO) {
             data.ACTI_ALL_INFO.forEach((item, index) => {
               item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-              item.ACTION_LOG = "查看日志";
+              // item.ACTION_LOG = "查看日志";
+              item.ACTION_LOG = vmI18n.t("other.view_log");
             });
             this.agTableConfig1.rowData = data.ACTI_ALL_INFO || [];
             this.agTableConfig1.pagenation.total = data.ACTI_ALL_NUM;
@@ -795,7 +884,8 @@ export default {
           if (data && data.ACTI_RELEASE_INFO) {
             data.ACTI_RELEASE_INFO.forEach((item, index) => {
               item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-              item.ACTION_LOG = "查看日志";
+              // item.ACTION_LOG = "查看日志";
+              item.ACTION_LOG = vmI18n.t("other.view_log");
             });
             this.agTableConfig2.rowData = data.ACTI_RELEASE_INFO || [];
             this.agTableConfig2.pagenation.total = data.ACTI_RELEASE_NUM;
@@ -810,7 +900,8 @@ export default {
           if (res.data.data && res.data.data.ACTI_DRAFT_INFO) {
             data.ACTI_DRAFT_INFO.forEach((item, index) => {
               item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-              item.ACTION_LOG = "查看日志";
+              // item.ACTION_LOG = "查看日志";
+              item.ACTION_LOG = vmI18n.t("other.view_log");
             });
             this.agTableConfig3.rowData = data.ACTI_DRAFT_INFO || [];
             this.agTableConfig3.pagenation.total = data.ACTI_DRAFT_NUM;
@@ -826,7 +917,8 @@ export default {
           if (res.data.data && res.data.data.ACTI_OVER_INFO) {
             data.ACTI_OVER_INFO.forEach((item, index) => {
               item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-              item.ACTION_LOG = "查看日志";
+              // item.ACTION_LOG = "查看日志";
+              item.ACTION_LOG = vmI18n.t("other.view_log");
             });
             this.agTableConfig4.rowData = data.ACTI_OVER_INFO || [];
             this.agTableConfig4.pagenation.total = data.ACTI_OVER_NUM;
@@ -882,7 +974,8 @@ export default {
         console.log(res);
         if (res.data.code === 0) {
           if (res.data.data.length === 0) {
-            self.$message.warning("查询数据为空");
+            // self.$message.warning("查询数据为空");
+            self.$message.warning(vmI18n.t("modalTips.r8"));
           } else {
             self.logData.data = res.data.data;
             self.$message.success(res.data.message);
@@ -934,7 +1027,8 @@ export default {
       );
       if (newList.length < 1) {
         this.$message({
-          message: "请至少选择一个",
+          // message: "请至少选择一个",
+          message: vmI18n.t("modalTips.r9"),
           type: "warning",
         });
         return;
@@ -943,7 +1037,8 @@ export default {
       const flag = newList.some((item) => item.STATUS === 3);
       if (flag) {
         this.$message({
-          message: "选择的促销活动已经下线/过期",
+          // message: "选择的促销活动已经下线/过期",
+          message: vmI18n.t("modalTips.q0"),
           type: "warning",
         });
         return;
@@ -955,11 +1050,13 @@ export default {
         `agGridChild${this.activeName}`
       ].AGTABLE.getSelect();
       if (selectedData.length === 0) {
-        this.$message.warning("请选择一条数据进行复制操作");
+        // this.$message.warning("请选择一条数据进行复制操作");
+        this.$message.warning(vmI18n.t("modalTips.q1"));
         return;
       }
       if (selectedData.length > 1) {
-        this.$message.warning("只能选取一条数据");
+        // this.$message.warning("只能选取一条数据");
+        this.$message.warning(vmI18n.t("modalTips.q2"));
       } else {
         const ACTI_ID = selectedData[0].ACTI_ID;
         const IS_BATCH = selectedData[0].IS_BATCH;
@@ -968,11 +1065,13 @@ export default {
             id: -1, // id
             type: "action", // 类型action
             name: "batchActivity", // 文件名
-            label: "批量新增促销活动", // tab中文名
+            // label: "批量新增促销活动", // tab中文名batchAddPromotion
+            label: vmI18n.t("panel_label.batchAddPromotion"),
             query: Object.assign({
               id: -1, // id
               copy: ACTI_ID,
-              tabTitle: "批量新增促销活动", // tab中文名
+              // tabTitle: "批量新增促销活动", // tab中文名
+              tabTitle: vmI18n.t("panel_label.batchAddPromotion"),
             }), // 带的参数
           });
         } else {
@@ -980,11 +1079,13 @@ export default {
             id: -1, // id
             type: "action", // 类型action
             name: "addOrEditActi", // 文件名
-            label: "新增促销活动", // tab中文名
+            // label: "新增促销活动", // tab中文名
+            label: vmI18n.t("panel_label.addPromotion"),
             query: Object.assign({
               id: -1, // id
               copy: ACTI_ID,
-              tabTitle: "新增促销活动", // tab中文名
+              // tabTitle: "新增促销活动", // tab中文名
+              tabTitle: vmI18n.t("panel_label.addPromotion"),
             }), // 带的参数
           });
         }
@@ -995,10 +1096,12 @@ export default {
         id: -1, // id
         type: "action", // 类型action
         name: "addOrEditActi", // 文件名
-        label: "新增促销活动", // tab中文名
+        // label: "新增促销活动", // tab中文名
+        label: vmI18n.t("panel_label.addPromotion"),
         query: Object.assign({
           id: -1, // id
-          tabTitle: "新增促销活动", // tab中文名
+          // tabTitle: "新增促销活动", // tab中文名
+          tabTitle: vmI18n.t("panel_label.addPromotion"),
         }), // 带的参数
       });
     },
@@ -1008,10 +1111,12 @@ export default {
         id: -1, // id
         type: "action", // 类型action
         name: "batchActivity", // 文件名
-        label: "批量新增促销活动", // tab中文名
+        // label: "批量新增促销活动", // tab中文名
+        label: vmI18n.t("panel_label.batchAddPromotion"),
         query: Object.assign({
           id: -1, // id
-          tabTitle: "批量新增促销活动", // tab中文名
+          // tabTitle: "批量新增促销活动", // tab中文名
+          tabTitle: vmI18n.t("panel_label.batchAddPromotion"),
         }), // 带的参数
       });
     },
@@ -1027,7 +1132,8 @@ export default {
       );
       if (newList.length < 1) {
         this.$message({
-          message: "请至少选择一个",
+          // message: "请至少选择一个",
+          message: vmI18n.t("modalTips.r9"),
           type: "warning",
         });
         return false;
@@ -1035,7 +1141,8 @@ export default {
       flag = newList.every((item) => item.STATUS === 1);
       if (!flag) {
         this.$message({
-          message: "选择的促销活动已经发布",
+          // message: "选择的促销活动已经发布",
+          message: vmI18n.t("modalTips.q3"),
           type: "warning",
         });
         return false;
@@ -1079,7 +1186,8 @@ export default {
       );
       if (newIds.length < 1) {
         this.$message({
-          message: "请至少选择一个",
+          // message: "请至少选择一个",
+          message: vmI18n.t("modalTips.r9"),
           type: "warning",
         });
         return;
@@ -1119,7 +1227,8 @@ export default {
       );
       if (newList.length < 1) {
         this.$message({
-          message: "请先勾选需要分组的促销",
+          // message: "请先勾选需要分组的促销",
+          message: vmI18n.t("modalTips.q4"),
           type: "warning",
         });
         return;
@@ -1128,7 +1237,8 @@ export default {
       const flag = newList.some((item) => item.STATUS === 3);
       if (flag) {
         this.$message({
-          message: "存在【下线过期】的促销，请重新选择",
+          // message: "存在【下线过期】的促销，请重新选择",
+          message: vmI18n.t("modalTips.q5"),
           type: "warning",
         });
       } else {
@@ -1160,10 +1270,12 @@ export default {
         id: -1, // id
         type: "CUSTOMIZED", // 类型action
         name: "SIMULATION", // 文件名
-        label: "模拟仿真", // tab中文名
+        // label: "模拟仿真", // tab中文名
+        label: vmI18n.t("btn.simulation"),
         query: Object.assign({
           id: -1, // id
-          tabTitle: "模拟仿真", // tab中文名
+          // tabTitle: "模拟仿真", // tab中文名
+          tabTitle: vmI18n.t("btn.simulation"),
         }), // 带的参数
       });
     },
@@ -1223,10 +1335,12 @@ export default {
               id: ACTI_ID, // id
               type: "action", // 类型action
               name: "batchActivity", // 文件名
-              label: "批量新增促销活动", // tab中文名
+              // label: "批量新增促销活动", // tab中文名
+              label: vmI18n.t("panel_label.batchAddPromotion"),
               query: Object.assign({
                 id: ACTI_ID, // id
-                tabTitle: "批量新增促销活动", // tab中文名
+                // tabTitle: "批量新增促销活动", // tab中文名
+                tabTitle: vmI18n.t("panel_label.batchAddPromotion"),
               }), // 带的参数
             });
           } else {
@@ -1234,10 +1348,12 @@ export default {
               id: ACTI_ID, // id
               type: "action", // 类型action
               name: "addOrEditActi", // 文件名
-              label: "编辑促销活动", // tab中文名
+              // label: "编辑促销活动", // tab中文名
+              label: vmI18n.t("panel_label.editPromotion"),
               query: Object.assign({
                 id: ACTI_ID, // id
-                tabTitle: "编辑促销活动", // tab中文名
+                // tabTitle: "编辑促销活动", // tab中文名
+                tabTitle: vmI18n.t("panel_label.editPromotion"),
               }), // 带的参数
             });
           }
@@ -1255,7 +1371,8 @@ export default {
       );
       if (newList.length < 1) {
         this.$message({
-          message: "请至少选择一个",
+          // message: "请至少选择一个",
+          message: vmI18n.t("modalTips.r9"),
           type: "warning",
         });
         return false;
@@ -1264,7 +1381,8 @@ export default {
       const flag = newList.some((item) => item.STATUS === 3);
       if (flag) {
         this.$message({
-          message: "选择的促销活动已经下线/过期",
+          // message: "选择的促销活动已经下线/过期",
+          message: vmI18n.t("modalTips.q0"),
           type: "warning",
         });
         return false;

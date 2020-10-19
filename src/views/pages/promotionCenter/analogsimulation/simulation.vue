@@ -2,13 +2,20 @@
 <template>
   <div class="simulation">
     <div class="operation_btn">
-      <button class="btn" @click="cancel_simulation">取消</button>
-      <button class="btn" @click="execute_simulation">仿真试算</button>
+      <button class="btn" @click="cancel_simulation">
+        {{ vmI18n.t("common.cancel") }}
+      </button>
+      <button class="btn" @click="execute_simulation">
+        {{ vmI18n.t("common.simulation_trial_calculation") }}
+      </button>
     </div>
     <div class="content">
       <div class="orderSet">
         <div class="header_title">
-          <i class="header_name">模拟订单设置</i>
+          <i class="header_name">
+            <!-- 模拟订单设置 -->
+            {{ vmI18n.t("other.simulation_order_setup") }}
+          </i>
         </div>
         <div class="formList">
           <div class="row storeName">
@@ -19,7 +26,10 @@
             />
           </div>
           <div class="row">
-            <div class="form_label"><i class="red">*</i>时间类型：</div>
+            <div class="form_label">
+              <!-- 时间类型 -->
+              <i class="red">*</i> {{ vmI18n.t("form_label.timeType") }}：
+            </div>
             <div class="form_content">
               <SingleBox
                 :value="basicData.time_type"
@@ -27,7 +37,8 @@
                 @changeSingle="checkTimeTypeChange"
               />
               <div class="form_item">
-                <i class="red">*</i>时间范围：
+                <!-- 时间范围 -->
+                <i class="red">*</i>{{ vmI18n.t("form_label.timeRange") }}：
                 <DatePicker
                   v-model="basicData.time_limit"
                   format="yyyy/MM/dd HH:mm:ss"
@@ -40,7 +51,10 @@
             </div>
           </div>
           <div class="row">
-            <div class="form_label"><i class="red">*</i>订单类型：</div>
+            <div class="form_label">
+              <!-- 订单类型 -->
+              <i class="red">*</i>{{ vmI18n.t("form_label.orderType") }}：
+            </div>
             <div class="form_content">
               <SingleBox
                 :value="basicData.order_list"
@@ -50,7 +64,10 @@
             </div>
           </div>
           <div class="row">
-            <div class="form_label"><i class="red" />平台标记：</div>
+            <div class="form_label">
+              <!-- 平台标记 -->
+              <i class="red" />{{ vmI18n.t("form_label.platform_marking") }}：
+            </div>
             <div class="form_content">
               <SingleBox
                 :value="basicData.platform_mark"
@@ -60,7 +77,10 @@
             </div>
           </div>
           <div class="row">
-            <div class="form_label"><i class="red" />购买排名：</div>
+            <div class="form_label">
+              <!-- 购买排名 -->
+              <i class="red" />{{ vmI18n.t("form_label.purchase_ranking") }}：
+            </div>
             <div class="form_content">
               <div class="form_el_input">
                 <input
@@ -77,7 +97,10 @@
             </div>
           </div>
           <div class="row">
-            <div class="form_label"><i class="red" />卖家备注：</div>
+            <div class="form_label">
+              <!-- 卖家备注 -->
+              <i class="red" />{{ vmI18n.t("form_label.sellerNotes") }}：
+            </div>
             <div class="form_content">
               <div class="form_el_input">
                 <input v-model="basicData.vendor_remark" placeholder />
@@ -85,7 +108,10 @@
             </div>
           </div>
           <div class="row">
-            <div class="form_label"><i class="red" />买家留言：</div>
+            <div class="form_label">
+              <!-- 买家留言 -->
+              <i class="red" />{{ vmI18n.t("form_label.buyer_message") }}：
+            </div>
             <div class="form_content">
               <div class="form_el_input">
                 <input v-model="basicData.buyer_message" placeholder />
@@ -102,7 +128,8 @@
         </div>
         <div class="products_list">
           <div class="header_title">
-            <i class="header_name">商品列表</i>
+            <!-- 商品列表 -->
+            <i class="header_name">{{ vmI18n.t("other.product_list") }}</i>
           </div>
           <!-- <div class="button_list">
                     <button class="btn add" @click="add_prolist">新增</button>
@@ -126,15 +153,24 @@
                 :itemdata="itemdataFk"
                 @getFkChooseItem="getButtonFkChoose"
               />
-              <button class="btn" @click="add_prolist">新增</button>
-              <button class="btn">导入</button>
+              <button class="btn" @click="add_prolist">
+                <!-- 新增 -->
+                {{ vmI18n.t("btn.add") }}
+              </button>
+              <button class="btn">
+                <!-- 导入 -->
+                {{ vmI18n.t("btn.import") }}
+              </button>
             </div>
           </detailtable>
         </div>
       </div>
       <div class="execute_result">
         <div class="header_title">
-          <i class="header_name">试算执行结果</i>
+          <i class="header_name">
+            <!-- 试算执行结果 -->
+            {{ vmI18n.t("other.trialCalculation_results") }}</i
+          >
         </div>
         <div class="table">
           <Table
@@ -161,6 +197,7 @@ import tabList from "@/assets/js/promotion/columns.js";
 export default {
   data() {
     return {
+      vmI18n: window.vmI18n,
       basicData: {
         time_limit: "", // 时间范围
         time_type: "1", // 时间类型
@@ -185,7 +222,8 @@ export default {
             isnotnull: true,
             isuppercase: false,
             length: 65535,
-            name: "收货省份",
+            // name: "收货省份",
+            name: vmI18n.t("form_label.receiving_province"),
             readonly: false,
             reftable: "CP_C_PROVINCE",
             reftableid: 10010,
@@ -211,7 +249,8 @@ export default {
             isnotnull: true,
             isuppercase: false,
             length: 20,
-            name: "店铺名称",
+            // name: "店铺名称",
+            name: vmI18n.t("table_label.shopName"),
             readonly: false,
             refobjid: "",
             reftable: "CP_C_SHOP",
@@ -437,7 +476,8 @@ export default {
         id: 2895, // id
         type: "CUSTOMIZED", // 类型action
         name: "PROMACTIQUERYLIST", // 文件名
-        label: "促销活动", // tab中文名
+        // label: "促销活动", // tab中文名
+        label: vmI18n.t("panel_label.promotionList"),
         query: Object.assign({
           id: 2895,
         }), // 带的参数
@@ -471,7 +511,8 @@ export default {
           self.result_columns = res.data.data.cloumns;
           self.$message({
             type: "success",
-            message: "试算成功！",
+            // message: "试算成功！",
+            message: vmI18n.t("modalTips.t5"),
           });
         } else {
           self.result_data = [];
@@ -510,37 +551,44 @@ export default {
     },
     checkSimulation() {
       if (!this.basicData.stores.itemdata.pid) {
-        return { code: "-1", message: "店铺信息未填写" };
+        return { code: "-1", message: vmI18n.t("modalTips.t6") };
       }
       if (this.basicData.time_type === "") {
-        return { code: "-1", message: "时间类型未填写" };
+        return { code: "-1", message: vmI18n.t("modalTips.t7") };
       }
       if (this.basicData.time_limit === "") {
-        return { code: "-1", message: "时间范围未填写" };
+        return { code: "-1", message: vmI18n.t("modalTips.t8") };
       }
       if (this.basicData.order_list === "") {
-        return { code: "-1", message: "订单类型未填写" };
+        return { code: "-1", message: vmI18n.t("modalTips.t9") };
       }
       // if(this.basicData.platform_mark === ""){
       //     return {code:"-1",message:"平台标记未填写"}
       // }
       if (!this.basicData.receiving_porvince.itemdata.pid) {
-        return { code: "-1", message: "收货省份未填写" };
+        return { code: "-1", message: vmI18n.t("modalTips.s0") };
       }
       if (this.products_data.length == 0) {
-        return { code: "-1", message: "商品列表数据不能为空" };
+        return { code: "-1", message: vmI18n.t("modalTips.s1") };
       }
       for (let i = 0; i < this.products_data.length; i++) {
         const row = this.products_data[i];
         for (const j in row) {
           const notnull = ["ECODE", "ENAME", "NUM", "SUM"];
           if (notnull.includes(j) && row[j] === "") {
-            return { code: -1, message: `商品列表第${i + 1}行数据未填写完毕` };
+            // return { code: -1, message: `商品列表第${i + 1}行数据未填写完毕` };
+            return {
+              code: -1,
+              message: `${vmI18n.t("modalTips.s2")}${i + 1}${vmI18n.t(
+                "modalTips.s3"
+              )}`,
+            };
           }
         }
       }
 
-      return { code: 0, message: "校验完成" };
+      // return { code: 0, message: "校验完成" };
+      return { code: 0, message: vmI18n.t("modalTips.s4") };
     },
     /**
      *  修改行数据

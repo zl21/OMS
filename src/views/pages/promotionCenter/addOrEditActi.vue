@@ -20,9 +20,13 @@
         />
       </div>
       <div class="footer">
-        <button @click="close">取消</button>
-        <button v-if="showSaveButton" @click="saveDraft">保存草稿</button>
-        <button v-if="showPublishButton" @click="publish">发布</button>
+        <button @click="close">{{ vmI18n.t("common.cancel") }}</button>
+        <button v-if="showSaveButton" @click="saveDraft">
+          {{ vmI18n.t("btn.saveDraft") }}
+        </button>
+        <button v-if="showPublishButton" @click="publish">
+          {{ vmI18n.t("btn.publish") }}
+        </button>
       </div>
     </div>
     <div class="steps_bar">
@@ -53,6 +57,7 @@ export default {
   },
   data() {
     return {
+      vmI18n: window.vmI18n,
       objid: "-1", // 新增-1 保存的正整数
       basic_info: {
         // 基础信息设置
@@ -72,7 +77,8 @@ export default {
             isnotnull: true, // 是否必填
             isuppercase: false, // 是否转大写
             length: 65535, // 最大长度是多少
-            name: "店铺名称", // input前面显示的lable值
+            // name: "店铺名称", // input前面显示的lable值
+            name: vmI18n.t("table_label.shopName"),
             readonly: false, // 是否可编辑，对应input   readonly属性
             reftable: "CP_C_SHOP", // 对应的表
             // reftableid: 24475, //对应的表ID
@@ -108,7 +114,8 @@ export default {
             isnotnull: false,
             isuppercase: false,
             length: 65535,
-            name: "排除省",
+            // name: "排除省",
+            name: vmI18n.t("common.exclude_province"),
             readonly: false,
             reftable: "CP_C_PROVINCE",
             reftableid: 23862,
@@ -182,22 +189,26 @@ export default {
       stepsBar: [
         {
           class: "iconjibenxinxi",
-          content: "基础信息",
+          // content: "基础信息",
+          content: vmI18n.t("other.basic_info"),
           finish: false,
         },
         {
           class: "iconliuchengtiaojian",
-          content: "条件信息",
+          // content: "条件信息",
+          content: vmI18n.t("other.condition_info"),
           finish: false,
         },
         {
           class: "iconzengpin",
-          content: "赠品信息",
+          // content: "赠品信息",
+          content: vmI18n.t("other.gift_info"),
           finish: false,
         },
         {
           class: "iconhuodong",
-          content: "活动概览",
+          // content: "活动概览",
+          content: vmI18n.t("other.activity_overview"),
           finish: false,
         },
       ],
@@ -307,7 +318,8 @@ export default {
           }
         })
         .catch((res) => {
-          self.$message({ type: "error", message: "获取促销详情异常" });
+          // self.$message({ type: "error", message: "获取促销详情异常" });
+          self.$message({ type: "error", message: vmI18n.t("modalTips.r4") });
         });
     },
     /**
@@ -350,7 +362,8 @@ export default {
           if (res.data.code === 0) {
             this.$message({
               type: "success",
-              message: "保存成功",
+              // message: "保存成功",
+              message: vmI18n.t("modalTips.z9"),
             });
             let action = "customize/switchActiveTab";
             if (this.objid == -1) {
@@ -362,10 +375,12 @@ export default {
                 id: this.objid, // id
                 type: "action", // 类型action
                 name: "addOrEditActi", // 文件名
-                label: "编辑促销活动", // tab中文名
+                // label: "编辑促销活动", // tab中文名
+                label: vmI18n.t("panel_label.editPromotion"),
                 query: Object.assign({
                   id: this.objid, // id
-                  tabTitle: "编辑促销活动", // tab中文名
+                  // tabTitle: "编辑促销活动", // tab中文名
+                  tabTitle: vmI18n.t("panel_label.editPromotion"),
                 }), // 带的参数
               });
             });
@@ -450,7 +465,8 @@ export default {
         id: 31460113, // id
         type: "CUSTOMIZED", // 类型action
         name: "PROMACTIQUERYLIST", // 文件名
-        label: "促销活动", // tab中文名
+        // label: "促销活动", // tab中文名
+        label: vmI18n.t("panel_label.promotionList"),
         query: Object.assign({
           id: 31460113,
         }), // 带的参数
@@ -585,13 +601,13 @@ export default {
     },
     validate1() {
       if (this.basic_info.activity_name === "") {
-        return { code: -1, message: "活动名称未填写！" };
+        return { code: -1, message: vmI18n.t("modalTips.s5") }; //活动名称未填写！
       }
       if (this.basic_info.stores.itemdata.valuedata === "") {
-        return { code: -1, message: "店铺名称未填写！" };
+        return { code: -1, message: vmI18n.t("modalTips.s6") }; //店铺名称未填写！
       }
       if (this.basic_info.order_type.length === 0) {
-        return { code: -1, message: "订单类型必选！" };
+        return { code: -1, message: vmI18n.t("modalTips.s7") }; //订单类型必选！
       }
       // if(this.basic_info.platform_mark.length === 0){
       //    return {code:-1,message:'平台标记未填写！'};
@@ -601,22 +617,23 @@ export default {
         this.basic_info.time_limit[0] === "" ||
         this.basic_info.time_limit[1] === ""
       ) {
-        return { code: -1, message: "时间范围未填写！" };
+        return { code: -1, message: vmI18n.t("modalTips.t8") }; //时间范围未填写！
       }
       if (this.basic_info.offline_time === "") {
-        return { code: -1, message: "下线时间未填写！" };
+        return { code: -1, message: vmI18n.t("modalTips.s8") }; //下线时间未填写！
       }
       if (
         this.basic_info.buyer_limit_frequency === "1" &&
         this.basic_info.buyer_max_frequency === ""
       ) {
-        return { code: -1, message: "最大限制次数未填写！" };
+        return { code: -1, message: vmI18n.t("modalTips.s9") }; //最大限制次数未填写！
       }
 
-      return { code: 0, message: "校验完成" };
+      return { code: 0, message: vmI18n.t("modalTips.s4") }; //校验完成
     },
     validate2() {
-      const tablename = "商品列表";
+      // const tablename = "商品列表";
+      const tablename = vmI18n.t("other.product_list");
       // 1.指定-非搭配   2.全场-不梯度, 规则至少需要选中一个
       // add  by wdq  1情况 不控制   (this.basic_info.activity_type === "GA" && this.condition_info_setting.products_join === "1")
       if (
@@ -630,23 +647,29 @@ export default {
         if (!o) {
           return {
             code: -1,
-            message: "【满足条件】至少要选中一项并且填写数量或金额条件",
+            // message: "【满足条件】至少要选中一项并且填写数量或金额条件",
+            message: vmI18n.t("modalTips.r5"),
           };
         }
       }
-      let rs = { code: 0, message: "校验完成" };
+      // let rs = { code: 0, message: "校验完成" };
+      let rs = { code: 0, message: vmI18n.t("modalTips.s4") };
       if (this.basic_info.activity_type === "GA") {
         // 指定
         if (this.condition_info_setting.products_join === "1") {
           // 非搭配
           const arrs = this.condition_info_setting.productslist || [];
-          if (arrs.length === 0) return { code: -1, message: "无数据" };
+          // if (arrs.length === 0) return { code: -1, message: "无数据" };
+          if (arrs.length === 0)
+            return { code: -1, message: vmI18n.t("modalTips.r6") };
           rs = this.checkTable(arrs);
         }
         if (this.condition_info_setting.products_join === "2") {
           // 搭配
           const arrs = this.condition_info_setting.productsArrs || [];
-          if (arrs.length === 0) return { code: -1, message: "无数据" };
+          // if (arrs.length === 0) return { code: -1, message: "无数据" };
+          if (arrs.length === 0)
+            return { code: -1, message: vmI18n.t("modalTips.r6") };
           rs = this.checkTableTab(arrs, "info");
         }
       }
@@ -656,16 +679,19 @@ export default {
       return rs;
     },
     validate3() {
-      const tablename = "赠品列表";
-      let rs = { code: 0, message: "校验完成" };
+      // const tablename = "赠品列表";
+      const tablename = vmI18n.t("other.gift_list");
+      let rs = { code: 0, message: vmI18n.t("modalTips.s4") };
       if (this.basic_info.gradient_gift === "0") {
         // 不梯度
         const arrs = this.gift_info_setting.gift_productslist || [];
-        if (arrs.length === 0) return { code: -1, message: "无数据" };
+        if (arrs.length === 0)
+          return { code: -1, message: vmI18n.t("modalTips.r6") };
         rs = this.checkTable(arrs);
       } else {
         const arrs = this.gift_info_setting.gift_productsArrs || [];
-        if (arrs.length === 0) return { code: -1, message: "无数据" };
+        if (arrs.length === 0)
+          return { code: -1, message: vmI18n.t("modalTips.r6") };
         rs = this.checkTableTab(arrs, "gift");
       }
       if (rs.code === -1) {
@@ -700,7 +726,7 @@ export default {
           return res;
         }
       }
-      return { code: 0, message: "校验完成" };
+      return { code: 0, message: vmI18n.t("modalTips.s4") };
     },
     checkTable(rows) {
       for (let i = 0; i < rows.length; i++) {
@@ -712,7 +738,7 @@ export default {
           }
         }
       }
-      return { code: 0, message: "校验完成" };
+      return { code: 0, message: vmI18n.t("modalTips.s4") };
     },
   },
   mounted() {
@@ -745,7 +771,7 @@ export default {
 </script>
 <style lang="less" scoped>
 @import "./less/common.less";
-@import '~@burgeon/oms-theme/skin/public.less';
+@import "~@burgeon/oms-theme/skin/public.less";
 @borderColor: #bfcbd9;
 .addOrEditActi {
   /deep/ .ark-table-overflowX {

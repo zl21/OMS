@@ -24,7 +24,38 @@
 </template>
 
 <script>
+/* 
+label: vmI18n.t('panel_label.diy'),
 
+label: vmI18n.t('table_label.dis'),
+
+label: vmI18n.t('form_label.dist'),
+
+:placeholder="vmI18n.t('pHolder.userName')"
+
+vmI18n.t('btn.manualCreation')
+
+vmI18n.t('common.manualCreation')
+
+:title="vmI18n.t('modalTitle.tips')"
+
+<p>{{ vmI18n.t('modalTips.a0') }}</p>
+
+{{ vmI18n.t('modalTips.a0') }}
+
+text: vmI18n.t('btn.import'), //按钮文本
+name: vmI18n.t('form_label.distributionCenter_authority'),
+// label: '备注',
+label: vmI18n.t('table_label.remarks'),
+
+vmI18n: window.vmI18n,
+
+<!-- 基本信息 -->
+{{ vmI18n.t("common.baseInformation") }}
+ // title: "商品编码",
+title: vmI18n.t("table_label.productNo"),
+title: vmI18n.t("other.productNo"),
+*/
 const langConfig = [
   {
     type: "zh",
