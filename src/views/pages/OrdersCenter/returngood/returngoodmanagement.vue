@@ -8,29 +8,34 @@
     <div class="returnAddColl">
       <Collapse v-model="openDefault">
         <Panel name="1">
-          基本信息
+          <!-- 基本信息 -->
+          {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
             <businessForm :formConfig="information"></businessForm>
           </p>
         </Panel>
         <Panel name="2">
-          换货人信息
+          <!-- 换货人信息 -->
+          {{ vmI18n.t("panel_label.exchangeInfo") }}
           <p slot="content">
             <businessForm :formConfig="replacement"></businessForm>
           </p>
         </Panel>
         <Panel name="3">
-          退货金额
+          <!-- 退货金额 -->
+          {{ vmI18n.t("panel_label.returnAmount") }}
           <div slot="content">
             <div class="sales">
               <ul>
                 <li>
-                  <p>商品应退金额</p>
+                  <!-- 商品应退金额 -->
+                  <p>{{vmI18n.t("other.refundAmountGoods") }}</p>
                   <input type="text" disabled v-model="amountReturned" />
                 </li>
                 <li class="symbol">+</li>
                 <li>
-                  <p>应退邮费</p>
+                  <!-- 应退邮费 -->
+                  <p>{{vmI18n.t("other.refundablePostage") }}</p>
                   <input
                     type="text"
                     v-model="returnPostage"
@@ -39,7 +44,8 @@
                 </li>
                 <li class="symbol">+</li>
                 <li>
-                  <p>其他金额</p>
+                  <!-- 其他金额 -->
+                  <p>{{vmI18n.t("other.otherAmounts") }}</p>
                   <input
                     type="text"
                     v-model="otherAmount"
@@ -48,12 +54,14 @@
                 </li>
                 <li class="symbol">-</li>
                 <li>
-                  <p>换货金额</p>
+                  <!-- 换货金额 -->
+                  <p>{{vmI18n.t("other.exchangeAmounts") }}</p>
                   <input type="text" disabled v-model="exchangeAmount" />
                 </li>
                 <li class="symbol">=</li>
                 <li>
-                  <p>退货单总金额</p>
+                  <!-- 退货单总金额 -->
+                  <p>{{vmI18n.t("other.totalAmountReturnOrder") }}</p>
                   <input
                     type="text"
                     @input="isSettlementAmount(returnTotalAmount)"
@@ -62,7 +70,8 @@
                   />
                 </li>
                 <li>
-                  <p>代销结算金额</p>
+                  <!-- 代销结算金额 -->
+                  <p>{{vmI18n.t("other.settlementAmountConsignment") }}</p>
                   <input
                     type="text"
                     @input="isSettlementAmount(settlementAmount)"
@@ -120,11 +129,12 @@
     </div>
     <!-- <jordanBounced :bouncedData="bouncedList"></jordanBounced> -->
     <div class="queryorderB">
+      <!-- 查询原始订单编号 -->
       <Modal
         class="queryorder"
         v-model="order.modal"
         :mask="true"
-        :title="'查询原始订单编号'"
+        :title="vmI18n.t('modalTitle.query_OriginalOrderNo')"
         @on-ok="queryorder"
         @on-cancel="querycancel"
       >
@@ -163,23 +173,24 @@
     <div class="fromLoading" v-show="isSaveLoading">
       <Spin></Spin>
     </div>
-
+<!-- 提示 -->
     <Modal
       class="available"
       v-model="availableStock"
-      title="提示"
+      :title='vmI18n.t("modalTitle.tips")'
       width="400"
       :mask-closable="false"
       :mask="true"
       @on-ok="saveData"
       @on-cancel="cancalModal"
     >
-      <p class="availableStock">{{ availableStockMassage }}。是否继续？</p>
+    <!-- 。是否继续？ -->
+      <p class="availableStock">{{ availableStockMassage }}{{vmI18n.t("modalTips.n2")}}</p>
     </Modal>
     <Modal
       class="detailAdd"
       v-model="returnDetailAddTable.modal"
-      :title="'新增退货明细'"
+      :title='vmI18n.t("modalTitle.newReturnDetails")'
       @on-ok="resetReturnMainTable"
       @on-cancel="detailAddCancel"
     >
@@ -242,6 +253,7 @@ export default {
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {
+      vmI18n: window.vmI18n,
       // 显示水印标识
       statusName: "",
       // 可用库存不足弹窗提示
@@ -254,7 +266,7 @@ export default {
       isModalSave: false, // 是否弹窗保存
       matrixBox: {
         refFuns: "confirmFun",
-        confirmTitle: "矩阵录入",
+        confirmTitle: vmI18n.t("modalTitle.matrixEntry"),//矩阵录入
         titleAlign: "center", //设置标题是否居中 center left
         width: "860",
         scrollable: false, //是否可以滚动
@@ -273,7 +285,7 @@ export default {
       // 弹框配置 修改备注
       changeRemarkConfig: {
         refFuns: "confirmFun",
-        confirmTitle: "修改卖家备注",
+        confirmTitle: vmI18n.t("modalTitle.modify_sellerNotes"),//修改卖家备注
         titleAlign: "center", //设置标题是否居中 center left
         width: "440",
         scrollable: false, //是否可以滚动
@@ -294,7 +306,7 @@ export default {
           typeAll: "error", //按钮统一风格样式
           buttons: [
             {
-              text: "查找", //按钮文本
+              text: vmI18n.t("btn.find"), //查找 按钮文本
               disabled: false, //按钮禁用控制
               btnclick: () => {
                 this.queryBounced();
@@ -314,35 +326,35 @@ export default {
           formData: [
             {
               style: "input",
-              label: "订单号",
+              label: vmI18n.t("form_label.orderNumber"),//订单号
               value: "bill_no",
               width: "8",
               inputenter: () => this.queryBounced()
             },
             {
               style: "input",
-              label: "平台单号",
+              label: vmI18n.t("form_label.platform_billNo"),//平台单号
               value: "source_code",
               width: "8",
               inputenter: () => this.queryBounced()
             },
             {
               style: "input",
-              label: "收货人",
+              label: vmI18n.t("form_label.consignee"),//收货人
               value: "receiver_name",
               width: "8",
               inputenter: () => this.queryBounced()
             },
             {
               style: "input",
-              label: "买家昵称",
+              label: vmI18n.t("table_label.buyerNickname"),//买家昵称
               value: "user_nick",
               width: "8",
               inputenter: () => this.queryBounced()
             },
             {
               style: "input",
-              label: "收货人手机",
+              label: vmI18n.t("form_label.consignee_phone"),//收货人手机
               value: "receiver_mobile",
               width: "8",
               inputenter: () => this.queryBounced()
@@ -364,13 +376,13 @@ export default {
                 ],
                 display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
                 fkdisplay: "drp", //外键关联类型
-                fkdesc: "店铺名称",
+                fkdesc: vmI18n.t("table_label.shopName"),//店铺名称
                 inputname: "SELLER_NICK:ENAME", //这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, //是否有fk键
                 isnotnull: false, //是否必填
                 isuppercase: false, //是否转大写
                 length: 65535, //最大长度是多少
-                name: "店铺名称", //input前面显示的lable值
+                name: vmI18n.t("table_label.shopName"),//店铺名称
                 readonly: false, //是否可编辑，对应input   readonly属性
                 reftable: "OC_B_RETURN_ORDER", //对应的表
                 reftableid: 24578, //对应的表ID
@@ -389,27 +401,27 @@ export default {
           columns: [
             {
               key: "SOURCE_CODE",
-              title: "平台信息"
+              title: "平台信息"//平台信息
             },
             {
               key: "ID",
-              title: "订单编号"
+              title: vmI18n.t("table_label.orderNo")//订单编号
             },
             {
               key: "USER_NICK",
-              title: "买家昵称"
+              title: vmI18n.t("table_label.buyerNickname")//买家昵称
             },
             {
               key: "ORDER_AMT",
-              title: "订单总额"
+              title: vmI18n.t("table_label.totalOrderAmount")//订单总额
             },
             {
               key: "RECEIVER_NAME",
-              title: "收货人"
+              title: vmI18n.t("form_label.consignee")//收货人
             },
             {
               key: "RECEIVER_MOBILE",
-              title: "收货人手机号"
+              title: vmI18n.t("form_label.consignee_phone")//收货人手机号
             },
             {
               key: "CP_C_PHY_WAREHOUSE_ENAME",
@@ -421,11 +433,11 @@ export default {
             // },
             {
               key: "EXPRESSCODE",
-              title: "物流单号"
+              title: vmI18n.t("form_label.logisticsOrder_No")//物流单号
             },
             {
               key: "CP_C_SHOP_TITLE",
-              title: "下单店铺"
+              title: vmI18n.t("form_label.orderShop")//下单店铺
             }
           ], //表头
           data: [], //数据配置
@@ -444,13 +456,13 @@ export default {
           datelimit: "all",
           display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: "drp", //外键关联类型
-          fkdesc: "收货人省份",
+          fkdesc: vmI18n.t("form_label.consignee_province"),//收货人省份
           inputname: "CP_C_STORE_IDS:ENAME", //这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, //是否有fk键
           isnotnull: false, //是否必填
           isuppercase: false, //是否转大写
           length: 65535, //最大长度是多少
-          name: "收货人省份", //input前面显示的lable值
+          name: vmI18n.t("form_label.consignee_province"), //收货人省份 input前面显示的lable值
           readonly: false, //是否可编辑，对应input   readonly属性
           reftable: "CP_C_PROVINCE", //对应的表
           reftableid: 10010, //对应的表ID
@@ -467,13 +479,13 @@ export default {
           datelimit: "all",
           display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: "drp", //外键关联类型
-          fkdesc: "收货人市",
+          fkdesc: vmI18n.t("form_label.consignee_city"),//收货人市
           inputname: "RECEIVER_CITY:ENAME", //这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, //是否有fk键
           isnotnull: false, //是否必填
           isuppercase: false, //是否转大写
           length: 65535, //最大长度是多少
-          name: "收货人市", //input前面显示的lable值
+          name: vmI18n.t("form_label.consignee_city"),//收货人市
           readonly: false, //是否可编辑，对应input   readonly属性
           reftable: "CP_C_CITY", //对应的表
           reftableid: 23864, //对应的表ID
@@ -533,7 +545,7 @@ export default {
         formData: [
           {
             style: "",
-            label: "退单编号",
+            label: vmI18n.t("form_label.chargebackNumber"),//退单编号
             disabled: true,
             value: "ID",
             width: "6"
@@ -541,7 +553,7 @@ export default {
           {
             style: "input", //输入框类型
             dataAcessKey: "ORIG_ORDER_ID",
-            label: "原始订单编号", //输入框前文字
+            label: vmI18n.t("form_label.originalOrderNo"), //原始订单编号输入框前文字
             value: "ORIG_ORDER_ID", //输入框的值
             width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: "ios-search", //输入框后带的图标,暂只有输入框支持
@@ -569,7 +581,7 @@ export default {
           },
           {
             style: "select", //下拉框类型
-            label: "单据类型", //下拉框前的值
+            label: vmI18n.t("form_label.billType"), //单据类型 下拉框前的值
             dataAcessKey: "BILL_TYPE",
             width: "6", //所占宽度宽度
             disabled: false, //按钮禁用控制
@@ -582,17 +594,17 @@ export default {
               //下拉框选项值
               {
                 value: "1",
-                label: "退货"
+                label: vmI18n.t("form_label.returnGood")//退货
               },
               {
                 value: "2",
-                label: "退换货"
+                label: vmI18n.t("table_label.returnGoods")//退换货
               }
             ]
           },
           {
             style: "input",
-            label: "买家昵称",
+            label: vmI18n.t("table_label.buyerNickname"),//买家昵称
             value: "BUYER_NICK",
             dataAcessKey: "BUYER_NICK",
             disabled: true, //按钮禁用控制
@@ -600,7 +612,7 @@ export default {
           },
           {
             style: "input",
-            label: "原始平台单号",
+            label: vmI18n.t("form_label.originalPlatformNo"),//原始平台单号
             value: "ORIG_SOURCE_CODE",
             dataAcessKey: "ORIG_SOURCE_CODE",
             disabled: true, //按钮禁用控制
@@ -621,13 +633,13 @@ export default {
               datelimit: "all",
               display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: "drp", //外键关联类型
-              fkdesc: "店铺名称",
+              fkdesc: vmI18n.t("table_label.shopName"),//店铺名称
               inputname: "SELLER_NICK:ENAME", //这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, //是否有fk键
               isnotnull: true, //是否必填
               isuppercase: false, //是否转大写
               length: 65535, //最大长度是多少
-              name: "店铺名称", //input前面显示的lable值
+              name:vmI18n.t("table_label.shopName"),//店铺名称 input前面显示的lable值
               readonly: true, //是否可编辑，对应input   readonly属性
               reftable: "OC_B_RETURN_ORDER", //对应的表
               reftableid: 24578, //对应的表ID
@@ -642,7 +654,7 @@ export default {
           },
           {
             style: "input",
-            label: "平台退款单号",
+            label: vmI18n.t("form_label.platformRefundNo"),//平台退款单号
             dataAcessKey: "RETURN_ID",
             disabled: true, //按钮禁用控制
             value: "RETURN_ID",
@@ -660,13 +672,13 @@ export default {
               datelimit: "all",
               display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: "drp", //外键关联类型
-              fkdesc: "退回物流公司",
+              fkdesc: vmI18n.t("table_label.returnLogisticsCompany"),//退回物流公司
               inputname: "CP_C_LOGISTICS_ENAME:ENAME", //这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, //是否有fk键
               isnotnull: false, //是否必填
               isuppercase: false, //是否转大写
               length: 65535, //最大长度是多少
-              name: "退回物流公司", //input前面显示的lable值
+              name: vmI18n.t("form_label.returnLogisticsCompany"), //退回物流公司input前面显示的lable值
               readonly: false, //是否可编辑，对应input   readonly属性
               reftable: "OC_B_RETURN_ORDER", //对应的表
               reftableid: 24578, //对应的表ID
@@ -681,7 +693,7 @@ export default {
           },
           {
             style: "select", //下拉框类型
-            label: "退款原因", //下拉框前的值
+            label: vmI18n.t("form_label.reasonRefund"), //退款原因 下拉框前的值
             dataAcessKey: "RETURN_REASON",
             width: "6", //所占宽度宽度
             value: "RETURN_REASON",
@@ -690,7 +702,7 @@ export default {
           },
           {
             style: "input",
-            label: "退回物流单号",
+            label: vmI18n.t("form_label.returnLogisticsNumber"),//退回物流单号
             dataAcessKey: "LOGISTICS_CODE",
             value: "LOGISTICS_CODE",
             disabled: false, //按钮禁用控制
@@ -698,7 +710,7 @@ export default {
           },
           {
             style: "", //勾选框类型
-            label: "换货预留库存", //前面的文字
+            label: vmI18n.t("form_label.reservedStockExchange"), //换货预留库存前面的文字
             dataAcessKey: "IS_RESERVED",
             width: "6", //所占的宽度
             value: "IS_RESERVED",
@@ -722,7 +734,7 @@ export default {
           },
           {
             style: "",
-            label: "是否生成换货单",
+            label: vmI18n.t("form_label.generate_replacement_order"),//是否生成换货单
             dataAcessKey: "",
             disabled: false, //按钮禁用控制
             value: "IS_RETURN_ORDER_EXCHANGE",
@@ -740,7 +752,7 @@ export default {
           },
           {
             style: "checkbox", //勾选框类型
-            label: "是否原退", //前面的文字
+            label: vmI18n.t("form_label.whether_returned"), //是否原退 前面的文字
             dataAcessKey: "IS_BACK",
             width: "6", //所占的宽度
             value: "IS_BACK",
@@ -768,9 +780,10 @@ export default {
                     _this.information.formValue.CP_C_LOGISTICS_ID =
                       arrList.CP_C_LOGISTICS_ID;
                     _this.information.formData.forEach((list, j) => {
+                      // 退回物流公司
                       if (
                         list.style === "popInput" &&
-                        list.itemdata.name === "退回物流公司"
+                        list.itemdata.name === _this.vmI18n.t("table_label.returnLogisticsCompany")
                       ) {
                         list.itemdata.pid = arrList.CP_C_LOGISTICS_ID;
                         list.itemdata.valuedata = arrList.CP_C_LOGISTICS_ENAME;
@@ -804,13 +817,13 @@ export default {
               // ],
               display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: "drp", //外键关联类型
-              fkdesc: "实体仓档案",
+              fkdesc: vmI18n.t("form_label.physicalWarehouseFile"),//实体仓档案
               inputname: "CP_C_PHY_WAREHOUSE_IN_ID:ENAME", //这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, //是否有fk键
               isnotnull: false, //是否必填
               isuppercase: false, //是否转大写
               length: 20, //最大长度是多少
-              name: "入库实体仓库", //input前面显示的lable值
+              name: vmI18n.t("form_label.warehousingEntity"), //入库实体仓库 input前面显示的lable值
               readonly: false, //是否可编辑，对应input   readonly属性
               reftable: "CP_C_PHY_WAREHOUSE", //对应的表
               reftableid: 24486, //对应的表ID
@@ -835,13 +848,13 @@ export default {
               datelimit: "all",
               display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: "drp", //外键关联类型
-              fkdesc: "实体仓档案",
+              fkdesc: vmI18n.t("form_label.physicalWarehouseFile"),//实体仓档案
               inputname: "CP_C_PHY_WAREHOUSE_ID:ENAME:ENAME", //这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, //是否有fk键
               isnotnull: false, //是否必填
               isuppercase: false, //是否转大写
               length: 20, //最大长度是多少
-              name: "发货实体仓库", //input前面显示的lable值
+              name: vmI18n.t("form_label.shipPhysicalWarehouse"), //发货实体仓库input前面显示的lable值
               readonly: true, //是否可编辑，对应input   readonly属性
               reftable: "CP_C_PHY_WAREHOUSE", //对应的表
               reftableid: 24486, //对应的表ID
@@ -857,7 +870,7 @@ export default {
           },
           {
             style: "input",
-            label: "备注",
+            label: vmI18n.t("table_label.remarks"),//备注
             dataAcessKey: "REMARK",
             value: "REMARK",
             disabled: false, //按钮禁用控制
@@ -865,7 +878,7 @@ export default {
           },
           {
             style: "input",
-            label: "卖家备注",
+            label: vmI18n.t("form_label.sellerNotes"),//卖家备注
             value: "SELLER_MEMO",
             disabled: true, //按钮禁用控制
             width: "12"
@@ -879,82 +892,82 @@ export default {
           columns: [
             {
               key: "PS_C_PRO_ECODE",
-              title: "商品编码",
+              title: vmI18n.t("table_label.productNo"),//商品编码
               dataAcessKey: "PS_C_PRO_ECODE"
             },
             {
               key: "PS_C_CLR_ENAME",
-              title: "颜色",
+              title: vmI18n.t("other.color"),//颜色
               dataAcessKey: "PS_C_CLR_ENAME"
             },
             {
               key: "PS_C_SIZE_ENAME",
               dataAcessKey: "PS_C_SIZE_ENAME",
-              title: "尺码"
+              title: vmI18n.t("other.sizes")//尺码
             },
             {
               key: "QTY_REFUND",
-              title: "申请数量",
+              title: vmI18n.t("table_label.appleNumber"),//申请数量
               dataAcessKey: "QTY_REFUND"
             },
             {
               key: "PS_C_SKU_ECODE",
-              title: "条码",
+              title: vmI18n.t("form_label.barCode"),//条码
               dataAcessKey: "PS_C_SKU_ECODE"
             },
             {
               key: "BARCODE",
-              title: "国标码",
+              title: vmI18n.t("form_label.gBCode"),//国标码
               dataAcessKey: "BARCODE"
             },
             {
               key: "PS_C_PRO_ENAME",
-              title: "商品名称",
+              title: vmI18n.t("form_label.goodsName"),//商品名称
               dataAcessKey: "PS_C_PRO_ENAME"
             },
             {
               key: "SEX_NAME",
-              title: "性别",
+              title: vmI18n.t("table_label.gender"),//性别
               dataAcessKey: "SEX"
             },
             {
               key: "QTY_IN",
-              title: "入库数量",
+              title: vmI18n.t("table_label.storageQuantity"),//入库数量
               dataAcessKey: "QTY_IN"
             },
             {
               key: "QTY_CAN_REFUND",
-              title: "订单数量",
+              title: vmI18n.t("table_label.orderQuantity"),//订单数量
               dataAcessKey: "QTY_CAN_REFUND"
             },
             {
               key: "PRICE",
-              title: "吊牌价",
+              title: vmI18n.t("form_label.tagPrice"),//吊牌价
               dataAcessKey: "RESERVE_DECIMAL01"
             },
             {
               key: "amt_refund_single",
-              title: "单件退货金额",
+              title: vmI18n.t("table_label.unitReturnAmount"),//单件退货金额
               dataAcessKey: "AMT_REFUND_SINGLE"
             },
             {
               key: "AMT_REFUND",
               dataAcessKey: "AMT_REFUND",
-              title: "退货金额"
+              title: vmI18n.t("panel_label.returnAmount"),//退货金额
             },
             {
               key: "RESERVE_DECIMAL02",
               dataAcessKey: "RESERVE_DECIMAL02",
-              title: "结算单价"
+              title: vmI18n.t("table_label.unitPriceSettlement")//结算单价
             },
             {
               key: "RESERVE_DECIMAL03",
               dataAcessKey: "RESERVE_DECIMAL03",
-              title: "结算金额"
+              title: vmI18n.t("form_label.settlementAmount")//结算金额
             },
             {
               key: "PRODUCT_MARK",
-              title: "商品标记",
+              title: vmI18n.t("form_label.goodsMark"),//商品标记
               dataAcessKey: "PRODUCT_MARK"
             }
           ], //表头
@@ -984,7 +997,7 @@ export default {
         formData: [
           {
             style: "input",
-            label: "收货人信息",
+            label: vmI18n.t("common.consigneeInformation"),//收货人信息
             dataAcessKey: "",
             value: "message",
             disabled: false, //按钮禁用控制
@@ -993,7 +1006,7 @@ export default {
               let self = this;
               self.address = parse(self.replacement.formValue.message);
               if (!self.information.formValue.ORIG_ORDER_ID) {
-                self.$Message.warning("请先填入原订单信息");
+                self.$Message.warning(self.vmI18n.t("modalTips.n3"));//请先填入原订单信息
                 return;
               }
               if (
@@ -1004,9 +1017,7 @@ export default {
                 (self.address.mobile == "" && self.address.phone == "") ||
                 self.address.province == ""
               ) {
-                self.$Message.warning(
-                  "请填入完整信息,如:XX,17788888888,上海上海市闵行区XXXXXXXXXXX"
-                );
+                self.$Message.warning(vmI18n.t("modalTips.f9"));//请填入完整信息,如:XX,17788888888,上海上海市闵行区XXXXXXXXXXX
               } else {
                 self.replacement.formValue.RECEIVE_NAME = self.address.name; //收货人赋值
                 self.replacement.formValue.RECEIVE_PHONE = self.address.phone;
@@ -1023,7 +1034,7 @@ export default {
                     if (res.data.code === 0) {
                       self.getQueryResionByName(res.data.data);
                     } else {
-                      self.$Message.warning("省市区id获取失败");
+                      self.$Message.warning(self.vmI18n.t("modalTips.n4"));//省市区id获取失败
                     }
                   });
               }
@@ -1031,7 +1042,7 @@ export default {
           },
           {
             style: "input",
-            label: "收货人",
+            label: vmI18n.t("common.consigneeInformation"),//收货人
             dataAcessKey: "RECEIVE_NAME",
             value: "RECEIVE_NAME",
             disabled: false, //按钮禁用控制
@@ -1040,7 +1051,7 @@ export default {
           },
           {
             style: "input",
-            label: "收货人手机",
+            label: vmI18n.t("form_label.consignee_phone"),//收货人手机
             dataAcessKey: "RECEIVE_MOBILE",
             value: "RECEIVE_MOBILE",
             disabled: false, //按钮禁用控制
@@ -1049,7 +1060,7 @@ export default {
           },
           {
             style: "input",
-            label: "收货人电话",
+            label: vmI18n.t("form_label.consignee_tel"),//收货人电话
             dataAcessKey: "RECEIVE_PHONE",
             value: "RECEIVE_PHONE",
             disabled: false, //按钮禁用控制
@@ -1057,7 +1068,7 @@ export default {
           },
           {
             style: "input",
-            label: "收货人邮编",
+            label: vmI18n.t("form_label.consignee_postcode"),//收货人邮编
             dataAcessKey: "RECEIVE_ZIP",
             value: "RECEIVE_ZIP",
             disabled: false, //按钮禁用控制
@@ -1106,13 +1117,13 @@ export default {
               datelimit: "all",
               display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: "drp", //外键关联类型
-              fkdesc: "收货人区",
+              fkdesc:vmI18n.t("form_label.aconsignee_area"),//收货人区
               inputname: "RECEIVER_AREA:ENAME", //这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, //是否有fk键
               isnotnull: false, //是否必填
               isuppercase: false, //是否转大写
               length: 65535, //最大长度是多少
-              name: "收货人区", //input前面显示的lable值
+              name: vmI18n.t("form_label.aconsignee_area"), //收货人区input前面显示的lable值
               readonly: false, //是否可编辑，对应input   readonly属性
               reftable: "CP_C_DISTAREA", //对应的表
               reftableid: 23863, //对应的表ID
@@ -1133,7 +1144,7 @@ export default {
           },
           {
             style: "input",
-            label: "换货邮费",
+            label: vmI18n.t("form_label.exchangePostage"),//换货邮费
             dataAcessKey: "SHIP_AMT",
             disabled: false, //按钮禁用控制
             value: "SHIP_AMT",
@@ -1141,7 +1152,7 @@ export default {
           },
           {
             style: "input",
-            label: "收货人地址",
+            label: vmI18n.t("form_label.aconsignee_address"),//收货人地址
             dataAcessKey: "RECEIVE_ADDRESS",
             value: "RECEIVE_ADDRESS",
             disabled: false, //按钮禁用控制
@@ -1152,22 +1163,22 @@ export default {
       }, // 换货人信
       labelList: [
         {
-          label: "退货明细",
+          label: vmI18n.t("form_label.returnDetails"),//退货明细
           value: "1",
           isShow: true
         },
         {
-          label: "换货明细",
+          label: vmI18n.t("form_label.exchangeDetails"),//换货明细
           value: "2",
           isShow: false
         },
         {
-          label: "退货单日志",
+          label: vmI18n.t("form_label.returnOrderLog"),//退货单日志
           value: "3",
           isShow: true
         },
         {
-          label: "次品记录",
+          label: vmI18n.t("form_label.defectiveProductRecord"),//次品记录
           value: "4",
           isShow: true
         }
@@ -1287,14 +1298,14 @@ export default {
       if (this.$route.query.id === "-1") {
         this.btnConfig.buttons = [
           {
-            text: "保存", //按钮文本
+            text: this.vmI18n.t("btn.save"), //保存 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.saveData();
             } //按钮点击事件
           },
           {
-            text: "返回", //按钮文本
+            text: vmI18n.t("btn.back"), //返回 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               // this.$router.push({ path: "/m/action/returngoodList?id=2661" });
@@ -1302,10 +1313,10 @@ export default {
                 id: 2661,
                 type: "action",
                 name: "returngoodList",
-                label: "退换货订单",
+                label: this.vmI18n.t("panel_label.forcedStorage"),//退换货订单
                 query: Object.assign({
                   id: 2661,
-                  tabTitle: "退换货订单"
+                  tabTitle: this.vmI18n.t("panel_label.forcedStorage")//退换货订单
                 }),
                 back: true
               });
@@ -1315,7 +1326,7 @@ export default {
       } else {
         this.btnConfig.buttons = [
           {
-            text: "保存", //按钮文本
+            text: vmI18n.t("btn.save"), //保存 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.saveData();
@@ -1323,49 +1334,49 @@ export default {
           },
           {
             isShow: "",
-            text: "售后审核", //按钮文本
+            text: vmI18n.t("btn.afterSalesAudit"), //售后审核 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.afterAudit();
             } //按钮点击事件
           },
           {
-            text: "取消", //按钮文本
+            text: vmI18n.t("common.cancel"), //取消 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.cancelBtn();
             } //按钮点击事件
           },
           {
-            text: "虚拟入库", //按钮文本
+            text: vmI18n.t("bth.virtualWarehous"), //虚拟入库 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.virtualLibrary();
             } //按钮点击事件
           },
           {
-            text: "取消自动退款", //按钮文本
+            text:  vmI18n.t("bth.cancel_automaticRefund"), //取消自动退款
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.cancelRefund();
             } //按钮点击事件
           },
           {
-            text: "修改备注", //按钮文本
+            text: vmI18n.t("bth.modifyRemarks"), //修改备注 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.bounced();
             } //按钮点击事件
           },
           {
-            text: "标记次品已调拨", //按钮文本
+            text: vmI18n.t("bth.mark_efective_product_transferred"), //标记次品已调拨 按钮文本
             disabled: true, //按钮禁用控制
             btnclick: () => {
               this.defectiveGoods();
             } //按钮点击事件
           },
           {
-            text: "返回", //按钮文本
+            text: vmI18n.t("bth.return"), //返回 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               // this.$router.push({ path: "/m/action/returngoodList?id=2661" });
@@ -1373,10 +1384,10 @@ export default {
                 id: 2661,
                 type: "action",
                 name: "returngoodList",
-                label: "退换货订单",
+                label: this.vmI18n.t("panel_label.forcedStorage"),//退换货订单
                 query: Object.assign({
                   id: 2661,
-                  tabTitle: "退换货订单"
+                  tabTitle: this.vmI18n.t("panel_label.forcedStorage"),//退换货订单
                 }),
                 back: true
               });
@@ -1650,30 +1661,35 @@ export default {
             // 按钮是否可用
             if (res.data.data.returnOrders.RETURN_STATUS != 30) {
               _this.btnConfig.buttons.forEach(item => {
-                if (item.text == "售后审核") {
+                //售后审核
+                if (item.text == _this.vmI18n.t("btn.afterSalesAudit")) {
                   item.disabled = true;
                 }
               });
             }
             if (res.data.data.returnOrders.RETURN_STATUS != 20) {
               _this.btnConfig.buttons.forEach(item => {
-                if (item.text == "取消") {
+                // 取消
+                if (item.text == _this.vmI18n.t("common.cancel")) {
                   item.disabled = true;
                 }
-                if (item.text == "虚拟入库") {
+                // 虚拟入库
+                if (item.text == _this.vmI18n.t("bth.virtualWarehous")) {
                   item.disabled = true;
                 }
               });
             }
             if (res.data.data.returnOrders.RETURN_STATUS == 60) {
               _this.btnConfig.buttons.forEach(item => {
-                if (item.text == "修改备注") {
+                // 修改备注
+                if (item.text == _this.vmI18n.t("bth.modifyRemarks")) {
                   item.disabled = true;
                 }
               });
             }
           } else {
-            let err = res.data.message || "复制退单失败!";
+            // 复制退单失败!
+            let err = res.data.message || _this.vmI18n.t("modalTips.n5");
             _this.$Message.error(err);
           }
         });
@@ -1690,7 +1706,7 @@ export default {
       let informationArr = [
         {
           style: "input",
-          label: "换货平台单号",
+          label: this.vmI18n.t("form_label.exchangePlatform_no"),//换货平台单号
           disabled: true,
           dataAcessKey: "TB_DISPUTE_ID",
           value: "TB_DISPUTE_ID",
@@ -1698,7 +1714,7 @@ export default {
         },
         {
           style: "input",
-          label: "次品调拨状态",
+          label: this.vmI18n.t("form_label.defectiveProduct_allocation_status"),//次品调拨状态
           disabled: true,
           dataAcessKey: "RESERVE_BIGINT07_type",
           value: "RESERVE_BIGINT07_type",
@@ -1753,19 +1769,22 @@ export default {
       let queryData = _this.replacement.formData;
       queryData.map(item => {
         if (item.itemdata) {
-          if (item.itemdata.name === "收货人省份") {
+          // 收货人省份
+          if (item.itemdata.name === _this.vmI18n.t("form_label.consignee_province")) {
             item.itemdata.valuedata = data.CP_C_REGION_PROVINCE_ENAME;
             _this.replacement.formValue.receiver_province_id =
               data.CP_C_REGION_PROVINCE_ID;
             _this.replacement.formValue.receiver_province_name =
               data.CP_C_REGION_PROVINCE_ENAME;
-          } else if (item.itemdata.name === "收货人市") {
+              // 收货人市
+          } else if (item.itemdata.name === _this.vmI18n.t("form_label.consignee_city")) {
             item.itemdata.valuedata = data.CP_C_REGION_CITY_ENAME;
             _this.replacement.formValue.receiver_city_id =
               data.CP_C_REGION_CITY_ID;
             _this.replacement.formValue.receiver_city_name =
               data.CP_C_REGION_CITY_ENAME;
-          } else if (item.itemdata.name === "收货人区") {
+              // 收货人区
+          } else if (item.itemdata.name === _this.vmI18n.t("form_label.aconsignee_area")) {
             item.itemdata.valuedata = data.CP_C_REGION_AREA_ENAME;
             _this.replacement.formValue.receiver_area_id =
               data.CP_C_REGION_AREA_ID;
@@ -1883,24 +1902,28 @@ export default {
           // 按钮是否可用
           if (res.data.data.returnOrders.RETURN_STATUS != 30) {
             _this.btnConfig.buttons.forEach(item => {
-              if (item.text == "售后审核") {
+              // 售后审核
+              if (item.text == _this.vmI18n.t("btn.afterSalesAudit")) {
                 item.disabled = true;
               }
             });
           }
           if (res.data.data.returnOrders.RETURN_STATUS != 20) {
             _this.btnConfig.buttons.forEach(item => {
-              if (item.text == "取消") {
+              // 取消
+              if (item.text == _this.vmI18n.t("common.cancel")) {
                 item.disabled = true;
               }
-              if (item.text == "虚拟入库") {
+              // 虚拟入库
+              if (item.text == _this.vmI18n.t("bth.virtualWarehous")) {
                 item.disabled = true;
               }
             });
           }
           if (res.data.data.returnOrders.RETURN_STATUS == 60) {
             _this.btnConfig.buttons.forEach(item => {
-              if (item.text == "修改备注") {
+              // 修改备注
+              if (item.text == _this.vmI18n.t("bth.modifyRemarks")) {
                 item.disabled = true;
               }
             });
@@ -1908,7 +1931,8 @@ export default {
           //设置不可编辑文本框
           _this.setDisplayByReturnOrder(res.data.data.returnOrders);
         } else {
-          let err = res.data.message || "获取详情失败!";
+          // 获取详情失败!
+          let err = res.data.message ||  _this.vmI18n.t("modalTips.n6");
           _this.$Message.error(err);
         }
       });
@@ -2138,7 +2162,7 @@ export default {
         this.jordanTableConfig.columns = [
           {
             key: "RESERVE_VARCHAR01",
-            title: "平台退款单号",
+            title:  _this.vmI18n.t("form_label.platformRefundNo"),//平台退款单号
             dataAcessKey: "RESERVE_VARCHAR01",
             render: (h, params) => {
               let _this = this;
@@ -2228,12 +2252,12 @@ export default {
           },
           {
             key: "PS_C_PRO_ECODE",
-            title: "商品编码",
+            title:  _this.vmI18n.t("table_label.productNo"),//商品编码
             dataAcessKey: "PS_C_PRO_ECODE"
           },
           {
             key: "PS_C_CLR_ID",
-            title: "颜色",
+            title:  _this.vmI18n.t("other.color"),//颜色
             dataAcessKey: "PS_C_CLR_ID",
             render: (h, params) => {
               let proEcode = params.row.PS_C_PRO_ECODE;
@@ -2396,7 +2420,7 @@ export default {
           {
             key: "PS_C_SIZE_ID",
             dataAcessKey: "PS_C_SIZE_ID",
-            title: "尺码",
+            title:  _this.vmI18n.t("other.sizes"),//尺码
             render: (h, params) => {
               let proEcode = params.row.PS_C_PRO_ECODE;
               let list = params.row.sizeList;
@@ -2574,7 +2598,7 @@ export default {
           },
           {
             key: "QTY_REFUND",
-            title: "申请数量",
+            title:  _this.vmI18n.t("table_label.appleNumber"),//申请数量
             dataAcessKey: "QTY_REFUND",
             render: (h, params) => {
               let _this = this;
@@ -2707,62 +2731,62 @@ export default {
           },
           {
             key: "PS_C_SKU_ECODE",
-            title: "条码",
+            title:  _this.vmI18n.t("form_label.barCode"),//条码
             dataAcessKey: "PS_C_SKU_ECODE"
           },
           {
             key: "BARCODE",
-            title: "国标码",
+            title:  _this.vmI18n.t("form_label.gBCode"),//国标码
             dataAcessKey: "BARCODE"
           },
           {
             key: "PS_C_PRO_ENAME",
-            title: "商品名称",
+            title:  _this.vmI18n.t("form_label.goodsName"),//商品名称
             dataAcessKey: "PS_C_PRO_ENAME"
           },
           {
             key: "SEX_NAME",
-            title: "性别",
+            title:  _this.vmI18n.t("table_label.gender"),//性别
             dataAcessKey: "SEX"
           },
           {
             key: "QTY_IN",
-            title: "入库数量",
+            title:  _this.vmI18n.t("table_label.storageQuantity"),//入库数量
             dataAcessKey: "QTY_IN"
           },
           {
             key: "QTY_CAN_REFUND",
-            title: "订单数量",
+            title:  _this.vmI18n.t("table_label.orderQuantity"),//订单数量
             dataAcessKey: "QTY_CAN_REFUND"
           },
           {
             key: "PRICE",
-            title: "吊牌价",
+            title:  _this.vmI18n.t("form_label.tagPrice"),//吊牌价
             dataAcessKey: "RESERVE_DECIMAL01"
           },
           {
             key: "amt_refund_single",
-            title: "单件退货金额",
+            title:  _this.vmI18n.t("table_label.unitReturnAmount"),//单件退货金额
             dataAcessKey: "AMT_REFUND_SINGLE"
           },
           {
             key: "AMT_REFUND",
             dataAcessKey: "AMT_REFUND",
-            title: "退货金额"
+            title:  _this.vmI18n.t("panel_label.returnAmount"),//退货金额
           },
           {
             key: "RESERVE_DECIMAL02",
             dataAcessKey: "RESERVE_DECIMAL02",
-            title: "结算单价"
+            title:  _this.vmI18n.t("table_label.unitPriceSettlement")//结算单价
           },
           {
             key: "RESERVE_DECIMAL03",
             dataAcessKey: "RESERVE_DECIMAL03",
-            title: "结算金额"
+            title:  _this.vmI18n.t("form_label.settlementAmount")//结算金额
           },
           {
             key: "PRODUCT_MARK",
-            title: "商品标记",
+            title:  _this.vmI18n.t("form_label.goodsMark"),//商品标记
             dataAcessKey: "PRODUCT_MARK",
             render: (h, params) => {
               let list = [
@@ -2868,13 +2892,13 @@ export default {
         this.jordanTableConfig2.columns = [
           {
             key: "PS_C_PRO_ECODE",
-            title: "商品编码",
+            title: _this.vmI18n.t("table_label.productNo"),//商品编码
             dataAcessKey: "PS_C_PRO_ECODE"
           },
           {
             key: "PS_C_CLR_ID",
             dataAcessKey: "PS_C_CLR_ID",
-            title: "颜色",
+            title: _this.vmI18n.t("other.color"),//颜色
             render: (h, params) => {
               let proEcode = params.row.PS_C_PRO_ECODE;
               let list = params.row.clrList;
@@ -3031,7 +3055,7 @@ export default {
           {
             key: "PS_C_SIZE_ID",
             dataAcessKey: "PS_C_SIZE_ID",
-            title: "尺码",
+            title:  _this.vmI18n.t("other.sizes"),//尺码
             render: (h, params) => {
               let proEcode = params.row.PS_C_PRO_ECODE;
               let list = params.row.sizeList;
@@ -3190,7 +3214,7 @@ export default {
           {
             key: "QTY_EXCHANGE",
             dataAcessKey: "ORIG_ORDER_ID",
-            title: "换货数量",
+            title: _this.vmI18n.t("table_label.exchangeQuantity"),//换货数量
             render: (h, params) => {
               let _this = this;
               return h(
@@ -3241,32 +3265,32 @@ export default {
           {
             key: "PS_C_SKU_ECODE",
             dataAcessKey: "PS_C_SKU_ECODE",
-            title: "条码"
+            title: _this.vmI18n.t("form_label.barCode"),//条码
           },
           {
             key: "BARCODE",
             dataAcessKey: "BARCODE",
-            title: "国标码"
+            title: _this.vmI18n.t("form_label.gBCode"),//国标码
           },
           {
             key: "PS_C_PRO_ENAME",
             dataAcessKey: "PS_C_PRO_ENAME",
-            title: "商品名称"
+            title: _this.vmI18n.t("form_label.goodsName"),//商品名称
           },
           {
             key: "SEX_NAME",
             dataAcessKey: "SEX",
-            title: "性别"
+            title: _this.vmI18n.t("table_label.gender"),//性别
           },
           {
             key: "PRICE",
             dataAcessKey: "RESERVE_DECIMAL01",
-            title: "吊牌价"
+            title:  _this.vmI18n.t("form_label.tagPrice"),//吊牌价
           },
           {
             key: "AMT_REFUND",
             dataAcessKey: "AMT_REFUND",
-            title: "换货金额",
+            title:  _this.vmI18n.t("panel_label.returnAmount"),//退货金额
             render: (h, params) => {
               let _this = this;
               return h(
@@ -3325,7 +3349,7 @@ export default {
             },
             formData: [
               {
-                label: "商品编码",
+                label: _this.vmI18n.t("table_label.productNo"),//商品编码
                 style: "dimSearch",
                 width: "6",
                 value: "gbCode",
@@ -3354,7 +3378,8 @@ export default {
                         _this.jordanTableConfig2.jordanFormConfig.formData;
 
                       dimList.map(item => {
-                        if (item.label === "商品编码") {
+                        //商品编码
+                        if (item.label === _this.vmI18n.t("table_label.productNo")) {
                           item.AuotData = res.data.data.list;
                         }
                       });
@@ -3364,7 +3389,8 @@ export default {
                 dimEnter: val => {
                   const self = this;
                   if (!self.information.formData[14].itemdata.pid) {
-                    self.$Message.warning("发货店仓，不能为空");
+                    //发货店仓，不能为空
+                    self.$Message.warning(self.vmI18n.t("modalTips.g0"));
                     return;
                   }
                   self.matrixBox.componentData = {
@@ -3381,7 +3407,8 @@ export default {
                 dimSelect: val => {
                   const self = this;
                   if (!self.information.formData[14].itemdata.pid) {
-                    self.$Message.warning("发货店仓，不能为空");
+                    // 发货店仓，不能为空
+                    self.$Message.warning(self.vmI18n.t("modalTips.n"));
                     return;
                   }
                   self.matrixBox.componentData = {
@@ -3399,7 +3426,7 @@ export default {
               },
               {
                 style: "dimSearch", //输入框类型
-                label: "条码", //输入框前文字
+                label: self.vmI18n.t("form_label.barCode"), //条码 输入框前文字
                 value: "sku", //输入框的值
                 placeholder: "请输入sku、款号",
                 width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -3477,37 +3504,37 @@ export default {
           {
             key: "PS_C_PRO_ECODE",
             dataAcessKey: "PS_C_PRO_ECODE",
-            title: "商品编码"
+            title:  _this.vmI18n.t("table_label.productNo"),//商品编码
           },
           {
             key: "PS_C_CLR_ENAME",
             dataAcessKey: "PS_C_CLR_ENAME",
-            title: "颜色"
+            title: _this.vmI18n.t("other.color"),//颜色
           },
           {
             key: "PS_C_SIZE_ENAME",
             dataAcessKey: "PS_C_SIZE_ENAME",
-            title: "尺码"
+            title: _this.vmI18n.t("other.sizes"),//尺码
           },
           {
             key: "PS_C_SKU_ECODE",
             dataAcessKey: "PS_C_SKU_ECODE",
-            title: "条码"
+            title: _this.vmI18n.t("form_label.barCode"),//条码
           },
           {
             key: "GBCODE",
             dataAcessKey: "BARCODE",
-            title: "国标码"
+            title: _this.vmI18n.t("form_label.gBCode"),//国标码
           },
           {
             key: "PS_C_PRO_ENAME",
             dataAcessKey: "PS_C_PRO_ENAME",
-            title: "商品名称"
+            title:  _this.vmI18n.t("form_label.goodsName"),//商品名称
           },
           {
             key: "QTY_IN",
             dataAcessKey: "QTY_IN",
-            title: "入库数量"
+            title: _this.vmI18n.t("table_label.storageQuantity"),//入库数量
           }
         ];
         //处理页面权限
@@ -3524,7 +3551,8 @@ export default {
       let _this = this;
       // 传WMS成功的单据不允许修改
       if (_this.isTowwms == 2) {
-        return this.$Message.warning("传WMS成功状态的单据不可修改！");
+        // 传WMS成功状态的单据不可修改！
+        return this.$Message.warning(this.vmI18n.t("modalTips.n7"));
       }
       // 只有等待退货入库和等待售后确认状态的可以修改
       if (_this.$route.query.id !== "-1") {
@@ -3532,20 +3560,18 @@ export default {
           (_this.status != 20 && _this.status != 30 && _this.status != 50) ||
           (_this.status == 50 && _this.inventedStatus != 1)
         ) {
-          return this.$Message.warning(
-            "只有等待退货入库和等待售后确认状态的单据 或 完成状态且虚拟入库未入库状态的单据可修改!"
-          );
+            // "只有等待退货入库和等待售后确认状态的单据 或 完成状态且虚拟入库未入库状态的单据可修改!"
+          return this.$Message.warning(this.vmI18n.t("modalTips.n8"));
         } else if (_this.status == 20 && _this.isTowwms == 2) {
-          return this.$Message.warning(
-            "等待退货入库且传WMS成功状态的单据不可修改！"
-          );
+          return this.$Message.warning(this.vmI18n.t("modalTips.n9"));//"等待退货入库且传WMS成功状态的单据不可修改！"
         }
       }
       if (!_this.information.formValue.ORIG_ORDER_ID) {
-        return this.$Message.warning("原始订单编号不能为空!");
+        // 原始订单编号不能为空!
+        return this.$Message.warning(this.vmI18n.t("modalTips.j1"));
       }
       if (!_this.information.formValue.CP_C_SHOP_ID)
-        return this.$Message.warning("店铺名称不能为空!");
+        return this.$Message.warning(this.vmI18n.t("modalTips.o0"));//店铺名称不能为空!
       // if (!_this.information.formValue.CP_C_LOGISTICS_ID) return this.$Message.warning("退回物流公司不能为空!");
       if (_this.information.formValue.BILL_TYPE !== "1") {
         // 换货类型校验
@@ -3553,45 +3579,45 @@ export default {
           !_this.replacement.formValue.receiver_province_id ||
           !_this.replacement.formValue.receiver_city_id
         ) {
-          return this.$Message.warning("省市信息必填!");
+          return this.$Message.warning(this.vmI18n.t("modalTips.aa"));//省市信息必填!
         }
         if (_this.replacement.formValue.RECEIVE_NAME.length > 50) {
-          return this.$Message.warning("收货人姓名不合法，请重新填写！");
+          return this.$Message.warning(this.vmI18n.t("modalTips.ab"));//收货人姓名不合法，请重新填写！
         }
         if (!_this.replacement.formValue.RECEIVE_NAME) {
-          return this.$Message.warning("收货人必填!");
+          return this.$Message.warning(this.vmI18n.t("modalTips.ac"));//收货人必填!
         }
         let phone = _this.replacement.formValue.RECEIVE_MOBILE;
         if (!phone) {
-          return this.$Message.warning("收货人手机必填!");
+          return this.$Message.warning(this.vmI18n.t("modalTips.ad"));//收货人手机必填!
         }
         if (phone.indexOf(1) != 0 || phone.length != 11) {
-          return this.$Message.warning("电话号码不合法，请重新填写！");
+          return this.$Message.warning(this.vmI18n.t("modalTips.ae"));//电话号码不合法，请重新填写！
         }
         if (!_this.replacement.formValue.RECEIVE_ADDRESS) {
-          return this.$Message.warning("收货人地址必填!");
+          return this.$Message.warning(this.vmI18n.t("modalTips.af"));//收货人地址必填!
         }
         if (!_this.refundDtoList.data.length) {
-          return this.$Message.info("退货明细必须有行数据！");
+          return this.$Message.info(this.vmI18n.t("modalTips.ag"));//退货明细必须有行数据！
         }
         if (!_this.exchangeDtoList.data.length) {
-          return this.$Message.info("换货明细必须有行数据！");
+          return this.$Message.info(this.vmI18n.t("modalTips.ah"));//换货明细必须有行数据！
         }
         if (_this.returnTotalAmount != 0) {
-          return this.$Message.info("换货金额必须等于退货金额！");
+          return this.$Message.info(this.vmI18n.t("modalTips.ai"));//换货金额必须等于退货金额！
         }
       } else {
         if (!_this.refundDtoList.data.length) {
-          return this.$Message.info("退货明细必须有行数据！");
+          return this.$Message.info(this.vmI18n.t("modalTips.ag"));//退货明细必须有行数据！
         }
         if (parseInt(_this.returnTotalAmount) < 0) {
-          return this.$Message.info("退货总金额不能小于0，请修改后重新保存！");
+          return this.$Message.info(this.vmI18n.t("modalTips.aj"));//退货总金额不能小于0，请修改后重新保存！
         }
       }
       if (_this.replacement.formValue.SHIP_AMT) {
         let n = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
         if (!n.test(_this.replacement.formValue.SHIP_AMT)) {
-          return this.$Message.warning("请输入正确的换货邮费!");
+          return this.$Message.warning(this.vmI18n.t("modalTips.ak"));//请输入正确的换货邮费!
         }
       }
       // 是否原退
@@ -3623,13 +3649,13 @@ export default {
       }
       for (let i = 0; i < item.length; i++) {
         if (!item[i].QTY_REFUND)
-          return _this.$Message.error("退货明细数量不能为空");
+          return _this.$Message.error(_this.vmI18n.t("modalTips.al"));//退货明细数量不能为空
         if (!item[i].PS_C_CLR_ID)
-          return _this.$Message.error("退货明细颜色不能为空");
+          return _this.$Message.error(_this.vmI18n.t("modalTips.am"));//退货明细颜色不能为空
         if (!item[i].PS_C_SIZE_ID)
-          return _this.$Message.error("退货明细尺码不能为空");
+          return _this.$Message.error(_this.vmI18n.t("modalTips.an"));//退货明细尺码不能为空
         if (!item[i].PS_C_SKU_ECODE)
-          return _this.$Message.error("退货明细条码不能为空");
+          return _this.$Message.error(_this.vmI18n.t("modalTips.ao"));//退货明细条码不能为空
         Rlist.push({
           ID: item[i].ID != -1 ? item[i].ID : -1,
           reserve_bigint10: item[i].reserve_bigint10,
@@ -3670,13 +3696,13 @@ export default {
       let Eitem = _this.exchangeDtoList.data;
       for (let i = 0; i < Eitem.length; i++) {
         if (!Eitem[i].QTY_EXCHANGE)
-          return _this.$Message.error("换货明细换货数量不能为空");
+          return _this.$Message.error(_this.vmI18n.t("modalTips.ap"));//换货明细换货数量不能为空
         if (!Eitem[i].PS_C_CLR_ID)
-          return _this.$Message.error("换货明细颜色不能为空");
+          return _this.$Message.error(_this.vmI18n.t("modalTips.aq"));//换货明细颜色不能为空
         if (!Eitem[i].PS_C_SIZE_ID)
-          return _this.$Message.error("换货明细尺码不能为空");
+          return _this.$Message.error(_this.vmI18n.t("modalTips.ar"));//换货明细尺码不能为空
         if (!Eitem[i].PS_C_SKU_ECODE)
-          return _this.$Message.error("换货明细条码不能为空");
+          return _this.$Message.error(_this.vmI18n.t("modalTips.as"));//换货明细条码不能为空
         Elist.push({
           ID: Eitem[i].ID != -1 ? Eitem[i].ID : -1,
           ps_c_sku_ecode: Eitem[i].PS_C_SKU_ECODE,
@@ -3747,7 +3773,7 @@ export default {
                 _this.save(params);
               }
             } else {
-              let err = res.data.message || "可用库存查询失败!";
+              let err = res.data.message || _this.vmI18n.t("modalTips.at");//可用库存查询失败!
               _this.$Message.error(err);
             }
           });
@@ -3777,7 +3803,7 @@ export default {
                 _this.save(params);
               }
             } else {
-              let err = res.data.message || "可用库存查询失败!";
+              let err = res.data.message || _this.vmI18n.t("modalTips.at");//可用库存查询失败!
               _this.$Message.error(err);
             }
           });
@@ -3807,15 +3833,15 @@ export default {
             id: 2661,
             type: "action",
             name: "returngoodList",
-            label: "退换货订单",
+            label: _this.vmI18n.t("panel_label.forcedStorage"),//退换货订单
             query: Object.assign({
               id: 2661,
-              tabTitle: "退换货订单"
+              tabTitle: _this.vmI18n.t("panel_label.forcedStorage")//退换货订单
             }),
             back: true
           });
         } else {
-          let err = res.data.message || "新增退换货订单失败!";
+          let err = res.data.message || _this.vmI18n.t("modalTips.au");//新增退换货订单失败
           _this.$Message.error(err);
         }
       });
@@ -3833,12 +3859,12 @@ export default {
       });
       if (unMatchFlag) {
         _this.$Modal.info({
-          title: "提示",
-          content: "申请数量与入库数量不一致，是否确定售后审核？",
+          title: _this.vmI18n.t("modalTitle.tips"), //提示
+          content: _this.vmI18n.t("modalTips.av"),//申请数量与入库数量不一致，是否确定售后审核？
           mask: true,
           showCancel: true,
-          okText: "确定",
-          cancelText: "取消",
+          okText: _this.vmI18n.t("common.determine"), //取消
+          cancelText: _this.vmI18n.t("common.cancel"), //确定
           onOk: () => {
             axios({
               url: "/p/cs/chargebackcheck",
@@ -3857,12 +3883,12 @@ export default {
         });
       } else {
         _this.$Modal.info({
-          title: "提示",
-          content: "是否确定售后审核？",
+          title: _this.vmI18n.t("modalTitle.tips"), //提示
+          content: _this.vmI18n.t("modalTips.k7"),//是否确定售后审核？
           mask: true,
           showCancel: true,
-          okText: "确定",
-          cancelText: "取消",
+          okText: _this.vmI18n.t("common.determine"), //取消
+          cancelText: _this.vmI18n.t("common.cancel"), //确定
           onOk: () => {
             axios({
               url: "/p/cs/chargebackcheck",
@@ -3886,12 +3912,12 @@ export default {
       const _this = this;
       if (this.$route.query.id == "-1") return;
       this.$Modal.info({
-        title: "提示",
-        content: "是否确定取消退单？",
+        title: _this.vmI18n.t("modalTitle.tips"), //提示
+        content: _this.vmI18n.t("modalTips.l3"),//是否确定取消退单？
         mask: true,
         showCancel: true,
-        okText: "取消",
-        cancelText: "确定",
+        okText: _this.vmI18n.t("common.determine"), //取消
+        cancelText: _this.vmI18n.t("common.cancel"), //确定
         onCancel: () => {
           axios({
             url: "/p/cs/OcCancelChangingOrRefund",
@@ -3914,16 +3940,16 @@ export default {
       const _this = this;
       if (this.$route.query.id == "-1") return;
       if (this.status !== 20) {
-        this.$Message.error("此退换单状态不允许虚拟入库!");
+        this.$Message.error(_this.vmI18n.t("modalTips.l6"));//此退换单状态不允许虚拟入库!
         return;
       }
       this.$Modal.info({
-        title: "提示",
-        content: "是否确定虚拟入库？",
+        title: _this.vmI18n.t("modalTitle.tips"), //提示
+        content:_this.vmI18n.t("modalTips.l7") ,//是否确定虚拟入库？
         mask: true,
         showCancel: true,
-        okText: "取消",
-        cancelText: "确定",
+        okText: _this.vmI18n.t("common.determine"), //取消
+        cancelText: _this.vmI18n.t("common.cancel"), //确定
         onCancel: () => {
           axios({
             url: "/p/cs/updateVirtualLibrary",
@@ -3972,7 +3998,8 @@ export default {
       }).then(res => {
         if (res.data.code == 0) {
           this.information.formData.forEach(value => {
-            if (value.label === "退款原因") {
+            // 退款原因
+            if (value.label === _this.vmI18n.t("form_label.reasonRefund")) {
               let arr = [];
               res.data.data.addcolums
                 .find(item => item.parentdesc && item.parentdesc == "基本信息")
@@ -4062,7 +4089,7 @@ export default {
           }
           let lists = res.data.data.data || [];
           if (lists.length === 0) {
-            return this.$message.error("不存在该条码！");
+            return this.$message.error(this.vmI18n.t("modalTips.g6"));//不存在该条码！
           }
           let obj = lists.length > 0 ? lists[0] : {};
           obj.ID = -1; // 明细id
@@ -4286,10 +4313,10 @@ export default {
         _this.returnSelectData.length == 0 ||
         _this.returnSelectData.length == null
       ) {
-        _this.$Message.error("请选择一条需要删除的明细!");
+        _this.$Message.error(_this.vmI18n.t("modalTips.aw"));//请选择一条需要删除的明细!
         return;
       } else if (_this.returnSelectData.length > 1) {
-        _this.$Message.error("不允许批量删除明细!");
+        _this.$Message.error(_this.vmI18n.t("modalTips.ax"));//不允许批量删除明细!
         return;
       } else {
         let item = _this.jordanTableConfig.data;
@@ -4311,7 +4338,7 @@ export default {
               .calculateMoney(_this.refundDtoList.data, 1)
               .toFixed(2);
             _this.returnTotal();
-            return _this.$Message.success("删除成功");
+            return _this.$Message.success(_this.vmI18n.t("modalTips.ay"));//删除成功
           }
         }
       }
@@ -4323,10 +4350,10 @@ export default {
         _this.exchangeSelectData.length == 0 ||
         _this.exchangeSelectData.length == null
       ) {
-        _this.$Message.error("请选择一条需要删除的明细!");
+        _this.$Message.error(_this.vmI18n.t("modalTips.aw"));//请选择一条需要删除的明细!
         return;
       } else if (_this.exchangeSelectData.length > 1) {
-        _this.$Message.error("不允许批量删除明细!");
+        _this.$Message.error(_this.vmI18n.t("modalTips.ax"));//不允许批量删除明细!
         return;
       } else {
         let item = _this.jordanTableConfig2.data;
@@ -4343,7 +4370,7 @@ export default {
               .calculateMoney(_this.exchangeDtoList.data, 2)
               .toFixed(2);
             _this.returnTotal();
-            return _this.$Message.success("删除成功");
+            return _this.$Message.success(_this.vmI18n.t("modalTips.ay"));//删除成功
           }
         }
       }
@@ -4362,7 +4389,7 @@ export default {
         (lists.cp_c_store_ename == "" || lists.cp_c_store_ename == undefined) &&
         num == undefined
       ) {
-        _this.$Message.error("请输入查询条件！");
+        _this.$Message.error(_this.vmI18n.t("modalTips.i8"));//请输入查询条件！
         return;
       }
       _this.order.table.loading = true;
@@ -4477,7 +4504,7 @@ export default {
         queryInfo: [
           {
             type: "Input",
-            displayName: "平台单号",
+            displayName:  _this.vmI18n.t("form_label.platform_billNo"),//平台单号
             queryName: "SOURCE_CODE",
             value: this.information.formValue.ORIG_SOURCE_CODE,
             list: []
@@ -4501,16 +4528,15 @@ export default {
       })
         .then(res => {
           if (res.data.data.queryOrderResultList.length != 1) {
-            _this.$Message.error(
-              "原始平台单号存在多条记录，请用订单编号查询！"
-            );
+            //原始平台单号存在多条记录，请用订单编号查询！
+            _this.$Message.error(_this.vmI18n.t("modalTips.az"));
             return;
           }
           if (res.data.code == 0) {
             _this.order.table.data = res.data.data.queryOrderResultList;
             _this.queryorder(_this.order.table.data);
           } else {
-            let err = res.data.message || "未查询到数据！";
+            let err = res.data.message || _this.vmI18n.t("modalTips.ba");//未查询到数据！
             _this.$Message.error(err);
           }
         })
@@ -4524,12 +4550,12 @@ export default {
       // 判断是否为回车精确查询
       if (isEnter) {
         if (!listData.length) {
-          _this.$Message.warning("查询不到数据！");
+          _this.$Message.warning(_this.vmI18n.t("modalTips.bb"));//查询不到数据！
           return;
         }
       } else {
         if (!this.onSelectData.length) {
-          _this.$Message.warning("请选择一条数据！");
+          _this.$Message.warning(_this.vmI18n.t("modalTips.bc"));//请选择一条数据！
           return;
         }
       }
@@ -4537,9 +4563,10 @@ export default {
         this.onSelectData = listData;
       }
       this.information.formData.forEach((list, j) => {
+        // 退回物流公司
         if (
           list.style === "popInput" &&
-          list.itemdata.name === "退回物流公司"
+          list.itemdata.name === this.vmI18n.t("table_label.returnLogisticsCompany")
         ) {
           list.itemdata.pid = this.onSelectData[0].CP_C_LOGISTICS_ID;
           list.itemdata.valuedata = this.onSelectData[0].CP_C_LOGISTICS_ENAME;
@@ -4588,7 +4615,8 @@ export default {
       this.replacement.formData[6].itemdata.valuedata = this.onSelectData[0].CP_C_REGION_CITY_ENAME; // 市
       this.replacement.formData[7].itemdata.valuedata = this.onSelectData[0].CP_C_REGION_AREA_ENAME; // 区
       this.information.formData.forEach((item, index) => {
-        if (item.label === "是否原退" && this.information.formValue.IS_BACK) {
+        // 是否原退
+        if (item.label === this.vmI18n.t("form_label.whether_returned") && this.information.formValue.IS_BACK) {
           this.information.formValue.LOGISTICS_CODE =
             _this.onSelectData[0].EXPRESSCODE;
         }
@@ -4660,7 +4688,8 @@ export default {
     onquerySelect(e) {
       // console.log(e.length);
       if (e.length != 1) {
-        this.$Message.info("只能选择一条订单记录!");
+        // 只能选择一条订单记录
+        this.$Message.info(this.vmI18n.t("modalTips.b"));
         return;
       }
       this.onSelectData = e;
@@ -4773,29 +4802,35 @@ export default {
       const _this = this;
       _this.information.formData.forEach(item => {
         if (item.itemdata) {
+          // 店铺名称
           if (
-            item.itemdata.name == "店铺名称" &&
+            item.itemdata.name == _this.vmI18n.t("table_label.shopName") &&
             item.itemdata.name == e.name
           ) {
             this.information.formValue.CP_C_SHOP_ID = item.itemdata.pid;
             this.information.formValue.CP_C_SHOP_TITLE =
               item.itemdata.valuedata;
-          } else if (
-            item.itemdata.name == "退回物流公司" &&
+          }
+           // 退回物流公司
+          else if (
+            item.itemdata.name == _this.vmI18n.t("table_label.returnLogisticsCompany") &&
             item.itemdata.name == e.name
           ) {
             this.information.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid;
             this.information.formValue.CP_C_LOGISTICS_ENAME =
               item.itemdata.valuedata;
           } else if (
-            item.itemdata.name == "入库实体仓库" &&
+            // 入库实体仓库
+            item.itemdata.name ==  _this.vmI18n.t("form_label.warehousingEntity") &&
             item.itemdata.name == e.name
           ) {
             this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID =
               item.itemdata.pid;
             // this.information.formValue.CP_C_PHY_WAREHOUSE_IN_NAME = item.itemdata.valuedata;
           } else if (
-            item.itemdata.name == "发货实体仓库" &&
+            // 发货实体仓库
+            item.itemdata.name == 
+            _this.vmI18n.t("form_label.shipPhysicalWarehouse") &&
             item.itemdata.name == e.name
           ) {
             this.information.formValue.CP_C_PHY_WAREHOUSE_ID =
@@ -4808,22 +4843,27 @@ export default {
       const _this = this;
       _this.replacement.formData.forEach(item => {
         if (item.itemdata) {
+          // 收货人省份
           if (
-            item.itemdata.name == "收货人省份" &&
+            item.itemdata.name == _this.vmI18n.t("form_label.consignee_province") &&
             item.itemdata.name == e.name
           ) {
             this.replacement.formValue.receiver_province_id = item.itemdata.pid;
             this.replacement.formValue.receiver_province_name =
               item.itemdata.valuedata;
-          } else if (
-            item.itemdata.name == "收货人市" &&
+          } 
+          // 收货人市
+          else if (
+            item.itemdata.name == _this.vmI18n.t("form_label.consignee_city") &&
             item.itemdata.name == e.name
           ) {
             this.replacement.formValue.receiver_city_id = item.itemdata.pid;
             this.replacement.formValue.receiver_city_name =
               item.itemdata.valuedata;
-          } else if (
-            item.itemdata.name == "收货人区" &&
+          } 
+          // 收货人区
+          else if (
+            item.itemdata.name == _this.vmI18n.t("form_label.aconsignee_area") &&
             item.itemdata.name == e.name
           ) {
             this.replacement.formValue.receiver_area_id = item.itemdata.pid;
