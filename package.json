@@ -53,7 +53,7 @@
     "@burgeon/oms-theme": "git+ssh://git@gitee.com:product_centerfront_end/burgeon-private-npm.git#feature/theme",
     "@syman/ark-ui": "^1.0.61",
     "@syman/burgeon-r3": "^1.0.32",
-    "@syman/burgeon-r3-components": "^1.0.9",
+    "@syman/burgeon-r3-components": "^1.0.10",
     "axios": "^0.18.0",
     "burgeon-ui": "^1.0.56",
     "element-ui": "^2.13.2",
