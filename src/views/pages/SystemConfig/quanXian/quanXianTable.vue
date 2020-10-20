@@ -6,23 +6,26 @@
         <table>
           <thead>
             <tr>
-              <th>序号</th>
+              <!-- <th>序号</th> -->
+              <th>{{ vmI18n.t("table_label.serialNo") }}</th>
               <template v-for="(column, index) in columns">
                 <th :key="index" v-if="column.key === 'IS_READ'">
                   <Checkbox
                     v-model="tableArr.isReadValue"
                     :disabled="tableArr.isChild && !tableArr.isParentReadValue"
                     @on-change="theadCheckboxChange($event, column)"
-                  >{{column.title}}</Checkbox>
+                    >{{ column.title }}</Checkbox
+                  >
                 </th>
                 <th :key="index" v-else-if="column.key === 'IS_WRITE'">
                   <Checkbox
                     v-model="tableArr.isWriteValue"
                     :disabled="tableArr.isChild && !tableArr.isParentWriteValue"
                     @on-change="theadCheckboxChange($event, column)"
-                  >{{column.title}}</Checkbox>
+                    >{{ column.title }}</Checkbox
+                  >
                 </th>
-                <th :key="index" v-else>{{column.title}}</th>
+                <th :key="index" v-else>{{ column.title }}</th>
               </template>
             </tr>
           </thead>
@@ -32,20 +35,30 @@
         <table>
           <tbody>
             <tr v-for="(row, rowIndex) in rows" :key="rowIndex">
-              <td>{{rowIndex + 1}}</td>
+              <td>{{ rowIndex + 1 }}</td>
               <template v-for="(column, index) in columns">
-                <td :key="index" v-if="column.key === 'IS_READ' || column.key === 'IS_WRITE'">
+                <td
+                  :key="index"
+                  v-if="column.key === 'IS_READ' || column.key === 'IS_WRITE'"
+                >
                   <Checkbox
                     v-model="row[column.key]"
-                    :disabled="row.PARENT_GROUPS_ID && (column.key === 'IS_READ' && (row.PARENT_IS_READ === 'N' || row.PARENT_ISREAD === 'N')) || (column.key === 'IS_WRITE' && (row.PARENT_IS_WRITE === 'N' || row.PARENT_ISMODIFY === 'N'))"
+                    :disabled="
+                      (row.PARENT_GROUPS_ID &&
+                        column.key === 'IS_READ' &&
+                        (row.PARENT_IS_READ === 'N' ||
+                          row.PARENT_ISREAD === 'N')) ||
+                      (column.key === 'IS_WRITE' &&
+                        (row.PARENT_IS_WRITE === 'N' ||
+                          row.PARENT_ISMODIFY === 'N'))
+                    "
                     @on-change="rowCheckboxChange($event, rowIndex, column)"
                   ></Checkbox>
                 </td>
-                <td
-                  :key="index"
-                  v-else-if="column.key === 'ISACTIVE'"
-                >{{row[column.key] === "Y" ? "是" : "否"}}</td>
-                <td :key="index" v-else>{{row[column.key]}}</td>
+                <td :key="index" v-else-if="column.key === 'ISACTIVE'">
+                  {{ row[column.key] === "Y" ? "是" : "否" }}
+                </td>
+                <td :key="index" v-else>{{ row[column.key] }}</td>
               </template>
             </tr>
           </tbody>
@@ -59,42 +72,45 @@ export default {
   props: {
     rows: {
       type: Array,
-      default: []
+      default: [],
     },
     columns: {
       type: Array,
-      default: []
+      default: [],
     },
     tableArr: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
   },
   data() {
     return {
+      vmI18n: window.vmI18n,
       scrollThead: {
-        marginRight: "10px"
+        marginRight: "10px",
       },
       scrollTableHeight: {
-        height: ""
+        height: "",
       },
-    }
+    };
   },
   mounted() {
     this.setTableHeight();
   },
   methods: {
     refreshTable() {
-      this.$refs.scrollTable.scrollTop = 0
+      this.$refs.scrollTable.scrollTop = 0;
     },
     setTableHeight() {
       let self = this;
-      const contentHeight = document.getElementsByClassName("SearchForm_Table")[0].clientHeight;
+      const contentHeight = document.getElementsByClassName(
+        "SearchForm_Table"
+      )[0].clientHeight;
       let scrollTableHeight = contentHeight - 200;
       this.scrollTableHeight.height = `${scrollTableHeight}px`;
     },
     theadCheckboxChange(val, column) {
-      this.$emit('isChangeFun', true);
+      this.$emit("isChangeFun", true);
       if (column.key === "IS_WRITE") {
         this.tableArr.isWriteValue = val;
         if (val) {
@@ -135,7 +151,7 @@ export default {
       }, 0);
     },
     rowCheckboxChange(val, rowIndex, column) {
-      this.$emit('isChangeFun', true);
+      this.$emit("isChangeFun", true);
       if (column.key === "IS_WRITE") {
         this.rows[rowIndex]["IS_WRITE"] = val;
         if (val) {
@@ -160,10 +176,12 @@ export default {
           this.tableArr.isReadValueTotal++;
         }
       }
-      this.tableArr.isReadValue = this.tableArr.isReadValueTotal === this.rows.length ? true : false;
-      this.tableArr.isWriteValue = this.tableArr.isWriteValueTotal === this.rows.length ? true : false;
+      this.tableArr.isReadValue =
+        this.tableArr.isReadValueTotal === this.rows.length ? true : false;
+      this.tableArr.isWriteValue =
+        this.tableArr.isWriteValueTotal === this.rows.length ? true : false;
     },
-  }
+  },
 };
 </script>
 

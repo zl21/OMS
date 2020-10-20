@@ -138,28 +138,31 @@
       :componentData="importTable.componentData"
     ></jordanModal>
     <!-- 导出 -->
+    <!-- 警告 -->
     <Modal
       v-model="warningModal"
-      title="警告"
+      :title="vmI18n.t('common.warning')"
       width="420"
       @on-ok="warningOk"
       :mask="true"
     >
-      <p>当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？</p>
+    <!-- 当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？ -->
+      <p>{{ vmI18n.t("modalTips.e3") }}</p>
     </Modal>
     <Modal
       v-model="virtualWarehouseModal"
-      title="手动入库"
+      :title="vmI18n.t('common.manualWarehous')"
       width="420"
       @on-ok="virtualWarehouseLibrary"
       :mask="true"
     >
-      <p>当前的操作会执行手动入库，是否继续？</p>
+      <!-- <p>当前的操作会执行手动入库，是否继续？</p> -->
+      <p>{{ vmI18n.t("modalTips.k3") }}</p>
     </Modal>
-    <!-- 批量原退 -->
+    <!-- 批量原退 提示 -->
     <Modal
       v-model="errModal"
-      title="提示"
+      :title="vmI18n.t('common.tips')"
       width="500"
       @on-keydown="keyenter"
       :mask="true"
@@ -189,28 +192,29 @@ export default {
     businessActionTable,
     businessLabel,
     jordanModal,
-    aTable
+    aTable,
   },
   // mixins: [isFavoriteMixin],
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
   data() {
     return {
+      vmI18n: window.vmI18n,
       errThData: [
         {
-          title: "退单编号",
-          key: "id"
+          title: vmI18n.t("form_label.chargebackNumber"),//退单编号
+          key: "id",
         },
         {
-          title: "异常信息",
-          key: "error"
-        }
+          title:  vmI18n.t("table_label.abnormalInfo"),//异常信息
+          key: "error",
+        },
       ],
       errModal: false,
       errdataList: [],
       // 弹框配置 修改备注
       changeRemarkConfig: {
         refFuns: "confirmFun",
-        confirmTitle: "修改卖家备注",
+        confirmTitle: vmI18n.t("modalTitle.modify_sellerNotes"),//修改卖家备注
         titleAlign: "center", //设置标题是否居中 center left
         width: "440",
         scrollable: false, //是否可以滚动
@@ -223,12 +227,12 @@ export default {
         url: "returngood/jordanBounced",
         keepAlive: true,
         excludeString: "jordanBounced", //将name传进去，确认不缓存
-        componentData: {}
+        componentData: {},
       },
       // 修改退回仓库
       modifyWarehouse: {
         refFuns: "confirmFun",
-        confirmTitle: "修改退货仓库",
+        confirmTitle: vmI18n.t("modalTitle.modify_returnWarehouse"),//修改退货仓库
         titleAlign: "center", //设置标题是否居中 center left
         width: "440",
         scrollable: false, //是否可以滚动
@@ -241,11 +245,11 @@ export default {
         url: "returngood/modifyWarehouse",
         keepAlive: true,
         excludeString: "modifyWarehouse", //将name传进去，确认不缓存
-        componentData: {}
+        componentData: {},
       },
       modifyReturnOrderLogistics: {
         refFuns: "confirmFun",
-        confirmTitle: "修改物流公司",
+        confirmTitle: vmI18n.t("modalTitle.modify_logisticsCompany"),//修改物流公司
         titleAlign: "center", //设置标题是否居中 center left
         width: "440",
         scrollable: false, //是否可以滚动
@@ -258,11 +262,11 @@ export default {
         url: "returngood/modifyReturnOrderLogistics",
         keepAlive: true,
         excludeString: "modifyReturnOrderLogistics", //将name传进去，确认不缓存
-        componentData: {}
+        componentData: {},
       },
       setFromInput: {
         refFuns: "confirmFun",
-        confirmTitle: "排序表单",
+        confirmTitle: vmI18n.t("modalTitle.sortForm"),//排序表单
         titleAlign: "center", //设置标题是否居中 center left
         width: "300",
         scrollable: false, //是否可以滚动
@@ -275,12 +279,12 @@ export default {
         url: "returngood/setFromInput",
         keepAlive: true,
         excludeString: "setFromInput", //将name传进去，确认不缓存
-        componentData: {}
+        componentData: {},
       },
       // 弹框配置 导入
       importTable: {
         refFuns: "confirmFun",
-        confirmTitle: "导入",
+        confirmTitle: vmI18n.t("bth.import"),//导入
         titleAlign: "center", //设置标题是否居中 center left
         width: "600",
         scrollable: false, //是否可以滚动
@@ -293,7 +297,7 @@ export default {
         url: "importTable",
         keepAlive: true,
         excludeString: "importTable", //将name传进去，确认不缓存
-        componentData: {}
+        componentData: {},
       },
       warningModal: false, // 警告弹框
       virtualWarehouseModal: false, // 手工入库弹框
@@ -301,108 +305,108 @@ export default {
         typeAll: "error", //按钮统一风格样式
         buttons: [
           {
-            text: "查找", //按钮文本
+            text: vmI18n.t("bth.find"), //查找 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.find();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
-            text: "新增", //按钮文本
+            text: vmI18n.t("bth.add"), //新增  按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.$store.commit("customize/TabHref", {
                 id: -1, //id
                 type: "action", //类型action
                 name: "returngood", //文件名
-                label: "退换货订单新增", //tab中文名
+                label: this.vmI18n.t("panel_label.addReturnOrder"), //退换货订单新增 tab中文名
                 query: Object.assign({
                   id: -1, //id
-                  tabTitle: "退换货订单新增" //tab中文名
-                }) //带的参数
+                  tabTitle: this.vmI18n.t("panel_label.addReturnOrder"), //退换货订单新增 tab中文名
+                }), //带的参数
               });
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
-            text: "修改", //按钮文本
+            text: vmI18n.t("bth.modify"), //修改 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.modify();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
-            text: "扫描入库", //按钮文本
+            text: vmI18n.t("panel_label.scannAndWarehous"), //扫描入库 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.scanIncoming();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
-            text: "售后审核", //按钮文本
+            text: vmI18n.t("bth.afterSalesAudit"), //售后审核 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.afterAudit();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
-            text: "取消", //按钮文本
+            text: vmI18n.t("common.cancel"), //取消 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.cancelBtn();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
-            text: "虚拟入库", //按钮文本
+            text: vmI18n.t("bth.virtualWarehous"), //虚拟入库 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.virtualLibrary();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
-            text: "手动入库", //按钮文本
+            text: vmI18n.t("modalTitle.manualWarehous"), //手动入库 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.virtualWarehouseLibraryWarn();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
-            text: "取消自动退款", //按钮文本
+            text: vmI18n.t("bth.cancel_automaticRefund"), //取消自动退款 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.cancelRefund();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
-            text: "修改备注", //按钮文本
+            text: vmI18n.t("bth.modifyRemarks"), //修改备注 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.bounced();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
-            text: "修改卖家备注", //按钮文本
+            text: vmI18n.t("modalTitle.modify_sellerNotes"), //修改卖家备注 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.bounced2();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
-            text: "修改退回仓库",
+            text: vmI18n.t("bth.modify_returnWarehouse"),//修改退回仓库
             btnclick: () => {
               this.Warehouse();
-            }
+            },
           },
           {
-            text: "修改物流公司",
+            text: vmI18n.t("modalTitle.modify_logisticsCompany"),//修改物流公司
             btnclick: () => {
               this.OrderLogistics();
-            }
+            },
           },
           {
-            text: "批量原退",
+            text: vmI18n.t("bth.batchOriginalReturn"),//批量原退
             btnclick: () => {
               this.batchOriginalBack();
-            }
+            },
           },
           // {
           //   text: "从WMS撤回", //按钮文本
@@ -412,88 +416,88 @@ export default {
           //   } //按钮点击事件
           // },
           {
-            text: "重传WMS", //按钮文本
+            text: vmI18n.t("bth.retransmission_WMS"),//重传WMS  //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.againWMS();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
-            text: "强制完成", //按钮文本
+            text: vmI18n.t("bth.mandatoryCompletion"),//强制完成  //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.forcedCompletion();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
-            text: "退换货复制",
+            text: vmI18n.t("bth.returnCopy"),//退换货复制 
             disabled: false,
             btnclick: () => {
               this.cloneRenturnGood();
-            }
+            },
           },
           {
             type: "", //按钮类型
-            text: "卖家备注导入", //按钮文本
+            text:  vmI18n.t("bth.sellerNotesImport"), //卖家备注导入 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               const _this = this;
               _this.importTable.componentData = {
                 tableName: "OC_B_RETURN_ORDER_remark",
-                objid: "1"
+                objid: "1",
               };
-              _this.importTable.confirmTitle = "卖家备注导入";
+              _this.importTable.confirmTitle =  _this.vmI18n.t("bth.sellerNotesImport");//卖家备注导入
               _this.$children
-                .find(item => item.name === "importTable")
+                .find((item) => item.name === "importTable")
                 .openConfirm();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             type: "", //按钮类型
-            text: "导入", //按钮文本
+            text: vmI18n.t("bth.import"), //导入 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               const _this = this;
               _this.importTable.componentData = {
-                tableName: "OC_B_RETURN_ORDER"
+                tableName: "OC_B_RETURN_ORDER",
               };
               _this.$children
-                .find(item => item.name === "importTable")
+                .find((item) => item.name === "importTable")
                 .openConfirm();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
-            text: "导出", //按钮文本
+            text: vmI18n.t("bth.export"), //导出 按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.exportClick();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             icon: "iconfont iconbj_setup", //按钮图标
             btnclick: () => {
               let self = this;
               self.setFromInput.componentData = {
-                typeName: "OC_B_RETURN_ORDER"
+                typeName: "OC_B_RETURN_ORDER",
               };
               setTimeout(() => {
                 self.$children
-                  .find(item => item.name === "setFromInput")
+                  .find((item) => item.name === "setFromInput")
                   .openConfirm();
               }, 100);
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             icon: "iconfont iconbj_col", //按钮图标
             size: "small", //按钮大小
-            name: "收藏",
+            name: vmI18n.t("bth.collection"),//收藏
             disabled: false, //按钮禁用控制
             btnclick: () => {
               let _this = this;
               _this.setFavorite();
-            } //按钮点击事件
-          }
-        ]
+            }, //按钮点击事件
+          },
+        ],
       }, // 按钮数据
       formConfig: {
         flodClick: "a", // 展开按钮 参数任意字符串
@@ -503,34 +507,34 @@ export default {
           setTimeout(() => {
             this.setTableHeight();
           }, 10);
-        }
+        },
       }, // form表单
       labelList: [
         {
-          label: "全部",
+          label:  vmI18n.t("panel_label.all"),//全部
           value: "1",
-          isShow: true
+          isShow: true,
         },
         {
-          label: "等待退货入库",
+          label: vmI18n.t("form_label.waitFor_return_warehous"),//等待退货入库
           value: "2",
-          isShow: true
+          isShow: true,
         },
         {
-          label: "等待售后确认",
+          label: vmI18n.t("form_label.waitFor_afterSale_confirm"),//等待售后确认
           value: "3",
-          isShow: true
+          isShow: true,
         },
         {
-          label: "完成",
+          label: vmI18n.t("form_label.complete"),//完成
           value: "4",
-          isShow: true
+          isShow: true,
         },
         {
-          label: "取消",
+          label: vmI18n.t("common.cancel"),//取消
           value: "5",
-          isShow: true
-        }
+          isShow: true,
+        },
       ], // tab切换
       labelDefaultValue: "1",
       agTableConfig: {
@@ -538,7 +542,7 @@ export default {
         columnDefs: [],
         rowData: [],
         renderArr: {
-          CP_C_SHOP_ID: param => {
+          CP_C_SHOP_ID: (param) => {
             let resDom = document.createElement("div");
             resDom.style.width = "100%";
             resDom.style.display = "flex";
@@ -546,7 +550,7 @@ export default {
             resDom.style.justifyContent = "space-between";
             resDom.innerHTML = param.data.CP_C_SHOP_TITLE;
             return resDom;
-          }
+          },
         },
         tableHeight: "600px",
         pagenation: {
@@ -556,8 +560,8 @@ export default {
           pageSize: 20,
           // 页数
           current: 1,
-          pageSizeOpts: [50, 200, 500, 2000]
-        }
+          pageSizeOpts: [50, 200, 500, 2000],
+        },
       },
       jordanTableConfig: {
         columns: [], //表头
@@ -569,46 +573,46 @@ export default {
               let bottomTable = "bottom";
               if (params.index >= 8) bottomTable = "top";
               if (params.row.allSkuItem === null) return;
-              params.row.allSkuItem.forEach(item => {
+              params.row.allSkuItem.forEach((item) => {
                 item.qty_refund = parseInt(item.qty_refund);
               });
               let goodsThead = [
                 {
                   key: "id",
-                  title: "编号"
+                  title: vmI18n.t("table_label.code"),//编号
                 },
                 {
                   key: "return",
-                  title: "退换货"
+                  title: vmI18n.t("table_label.returnGoods"),//退换货
                 },
                 {
-                  title: "货号",
-                  key: "ps_c_pro_ecode"
+                  title: vmI18n.t("table_label.articleNumber"),//货号
+                  key: "ps_c_pro_ecode",
                 },
                 // {
                 //   title: "规格",
                 //   key: "sku_spec"
                 // },
                 {
-                  title: "颜色",
-                  key: "ps_c_clr_ename"
+                  title: vmI18n.t("other.color"),//颜色
+                  key: "ps_c_clr_ename",
                 },
                 {
-                  title: "尺寸",
-                  key: "ps_c_size_ename"
+                  title: vmI18n.t("other.sizes"),//尺寸
+                  key: "ps_c_size_ename",
                 },
                 {
-                  title: "退款金额",
-                  key: "refund_amt"
+                  title: vmI18n.t("form_label.refundAmount"),//退款金额
+                  key: "refund_amt",
                 },
                 {
-                  title: "申请数量",
-                  key: "qty_refund"
+                  title: vmI18n.t("table_label.appleNumber"),//申请数量
+                  key: "qty_refund",
                 },
                 {
-                  title: "入库数量",
-                  key: "qty_in"
-                }
+                  title: vmI18n.t("table_label.storageQuantity"),//入库数量
+                  key: "qty_in",
+                },
               ]; // 浮框表头
               return h(
                 "div",
@@ -617,8 +621,8 @@ export default {
                     width: "200px",
                     display: "flex",
                     alignitems: "center",
-                    justifyContent: "space-between"
-                  }
+                    justifyContent: "space-between",
+                  },
                 },
                 [
                   h(
@@ -628,8 +632,8 @@ export default {
                         placement: bottomTable,
                         transfer: true,
                         minWidth: "400",
-                        trigger: "hover"
-                      }
+                        trigger: "hover",
+                      },
                     },
                     [
                       h(
@@ -640,8 +644,8 @@ export default {
                             position: "releative",
                             overflow: "hidden",
                             "white-space": "nowrap",
-                            "text-overflow": "ellipsis"
-                          }
+                            "text-overflow": "ellipsis",
+                          },
                         },
                         params.row.allSkuItem.length ? params.row.ALL_SKU : "" // hover值
                       ),
@@ -655,14 +659,14 @@ export default {
                           columns: goodsThead,
                           data: params.row.allSkuItem
                             ? params.row.allSkuItem
-                            : [] // 浮框数据
-                        }
-                      })
+                            : [], // 浮框数据
+                        },
+                      }),
                     ]
-                  )
+                  ),
                 ]
               );
-            }
+            },
           },
           {
             key: "ORDERFLAG",
@@ -678,32 +682,32 @@ export default {
                   props: {
                     placement: "right",
                     width: "78",
-                    trigger: "hover"
-                  }
+                    trigger: "hover",
+                  },
                 },
                 [
                   h("img", {
                     attrs: {
-                      src: imgSrc
+                      src: imgSrc,
                     },
                     style: {
                       width: "20px",
-                      height: "20px"
-                    }
+                      height: "20px",
+                    },
                   }),
                   h(
                     "span",
                     {
-                      slot: "content"
+                      slot: "content",
                     },
                     params.row.RESERVE_VARCHAR02
                       ? params.row.RESERVE_VARCHAR02
                       : "暂无卖家备注"
-                  )
+                  ),
                 ]
               );
-            }
-          }
+            },
+          },
         ],
         pageShow: true, //控制分页是否显示
         loading: false,
@@ -720,13 +724,13 @@ export default {
         total: 0, //设置总条数
         pageSizeOpts: [15, 30, 45, 60], // 每页条数切换的配置
         pageSize: 15, // 每页条数
-        data: [] //数据配置
+        data: [], //数据配置
       }, // 列表数据
       returnSelectData: [], // 列表选中数据
       isShowFromLoading: false,
       statusTab: "", // 单据类型
       isExport: false,
-      isSaveLoading: false
+      isSaveLoading: false,
     };
   },
   activated() {},
@@ -753,7 +757,7 @@ export default {
     });
 
     const _this = this;
-    window.addEventListener("keydown", e => {
+    window.addEventListener("keydown", (e) => {
       let key = e.keyCode;
       if (key == 13 && _this.warningModal) {
         _this.warningOk();
@@ -778,16 +782,16 @@ export default {
         column_include_uicontroller: true,
         fixedcolumns: {},
         multiple: [],
-        startindex: 0
+        startindex: 0,
       };
       this.$network
         .axios({
           url: "/api/cs/oc/oms/v1/DynamicList",
           type: "formdata",
           method: "post",
-          data: params
+          data: params,
         })
-        .then(res => {
+        .then((res) => {
           // 高级查询
           let formData = [];
           res.data.data.search.date.map((item, index) => {
@@ -807,7 +811,7 @@ export default {
                   _this.getList();
                 }, //表单回车事件
                 iconclick: () => {}, //点击icon图标事件
-                clearable: true
+                clearable: true,
               };
               _this.formConfig.formValue[item.tabth.colname] = "";
             }
@@ -837,11 +841,11 @@ export default {
                   statsize: -1,
                   type: item.tabth.type, //这个是后台用的
                   pid: "",
-                  valuedata: "" //这个是选择的值
+                  valuedata: "", //这个是选择的值
                 },
-                oneObj: e => {
+                oneObj: (e) => {
                   _this.oneObjs(e);
-                }
+                },
               };
               if (item.tabth.precolnameslist)
                 formData[index].itemdata.precolnameslist = item.tabth
@@ -863,7 +867,7 @@ export default {
                 inputenter: () => {
                   _this.getList();
                 }, //表单回车事件
-                iconclick: () => {} //点击icon图标事件
+                iconclick: () => {}, //点击icon图标事件
               };
               _this.formConfig.formValue[item.tabth.colname] = "";
             }
@@ -881,7 +885,7 @@ export default {
                 inputenter: () => {
                   _this.getList();
                 }, //表单回车事件
-                iconclick: () => {} //点击icon图标事件
+                iconclick: () => {}, //点击icon图标事件
               };
               _this.formConfig.formValue[item.tabth.colname] = "";
             }
@@ -894,7 +898,7 @@ export default {
                 value: item.tabth.colname, //输入框的值
                 multiple: true, //布尔值,下拉框是否开启多选,默认为不开启
                 selectChange: () => {}, //选中事件，默认返回选中的值
-                clearSelect: e => {
+                clearSelect: (e) => {
                   if (e == "RETURN_STATUS") {
                     _this.formConfig.formValue.RETURN_STATUS = "";
                   } else if (e == "IS_ADD") {
@@ -913,14 +917,14 @@ export default {
                     _this.formConfig.formValue.IS_TRANSFER = "";
                   }
                 }, //点击清空按钮回调
-                options: _this.converSelect(item.tabth.combobox)
+                options: _this.converSelect(item.tabth.combobox),
               };
               _this.formConfig.formValue[item.tabth.colname] = [];
             }
           });
           _this.formConfig.formData = formData;
           // 表头赋值
-          res.data.data.columns.forEach(item => {
+          res.data.data.columns.forEach((item) => {
             item["field"] = item.key;
             item["headerName"] = item.title;
             delete item.key;
@@ -940,7 +944,7 @@ export default {
       val.map((item, index) => {
         list[index] = {
           label: item.limitdesc,
-          value: item.limitval
+          value: item.limitval,
         };
       });
       return list;
@@ -958,12 +962,12 @@ export default {
       let param = {
         start: _this.agTableConfig.pagenation.current,
         count: _this.agTableConfig.pagenation.pageSize,
-        RETURN_STATUS: status == undefined || !status ? [] : [status]
+        RETURN_STATUS: status == undefined || !status ? [] : [status],
       };
       _this.formConfig.formValue.RECEIVE_PROVINCE = "";
       _this.formConfig.formValue.RECEIVE_PROVINCE_ID = "";
       if (_this.formConfig.formData.length) {
-        _this.formConfig.formData.forEach(item => {
+        _this.formConfig.formData.forEach((item) => {
           if (
             item.itemdata !== undefined &&
             item.itemdata.name == "原始订单编号"
@@ -1003,9 +1007,9 @@ export default {
         .axios({
           url: "/api/cs/oc/oms/v1/querySalesReturn",
           method: "post",
-          data: Object.assign(param, _this.formConfig.formValue)
+          data: Object.assign(param, _this.formConfig.formValue),
         })
-        .then(res => {
+        .then((res) => {
           if (res.data.code == 0 && res.data.data.queryResult.length) {
             _this.agTableConfig.agLoading = false;
             _this.agTableConfig.rowData = res.data.data.queryResult;
@@ -1129,12 +1133,12 @@ export default {
       let param = {
         start: _this.agTableConfig.pagenation.current,
         count: _this.agTableConfig.pagenation.pageSize,
-        RETURN_STATUS: status == undefined || !status ? [] : [status]
+        RETURN_STATUS: status == undefined || !status ? [] : [status],
       };
       _this.formConfig.formValue.RECEIVE_PROVINCE = "";
       _this.formConfig.formValue.RECEIVE_PROVINCE_ID = "";
       if (_this.formConfig.formData.length) {
-        _this.formConfig.formData.forEach(item => {
+        _this.formConfig.formData.forEach((item) => {
           if (
             item.itemdata !== undefined &&
             item.itemdata.name == "原始订单编号"
@@ -1151,17 +1155,17 @@ export default {
         if (returnParam.time == "IN_TIME")
           _this.formConfig.formValue.IN_TIME = [
             new Date(returnParam.startTime),
-            new Date(returnParam.endTime)
+            new Date(returnParam.endTime),
           ];
         else if (returnParam.time == "AUDIT_TIME")
           _this.formConfig.formValue.AUDIT_TIME = [
             new Date(returnParam.startTime),
-            new Date(returnParam.endTime)
+            new Date(returnParam.endTime),
           ];
         else if (returnParam.time == "CREATIONDATE") {
           _this.formConfig.formValue.CREATIONDATE = [
             new Date(returnParam.startTime),
-            new Date(returnParam.endTime)
+            new Date(returnParam.endTime),
           ];
           _this.formConfig.formValue.ISACTIVE = returnParam.IS_ACTIVE;
         }
@@ -1180,9 +1184,9 @@ export default {
         .axios({
           url: "/api/cs/oc/oms/v1/querySalesReturn",
           method: "post",
-          data: Object.assign(param, _this.formConfig.formValue)
+          data: Object.assign(param, _this.formConfig.formValue),
         })
-        .then(res => {
+        .then((res) => {
           if (res.data.code == 0 && res.data.data.queryResult.length) {
             _this.agTableConfig.agLoading = false;
             _this.agTableConfig.rowData = res.data.data.queryResult;
@@ -1320,7 +1324,7 @@ export default {
     },
     oneObjs(e) {
       const _this = this;
-      _this.formConfig.formData.forEach(item => {
+      _this.formConfig.formData.forEach((item) => {
         if (item.itemdata) {
           if (item.itemdata.name == "平台")
             _this.formConfig.formValue.PLATFORM = item.itemdata.pid;
@@ -1351,8 +1355,8 @@ export default {
         query: Object.assign({
           id: row.ID, //单据id
           tabTitle: "退换货订单详情", //tab中文名
-          statusName: row.rETURNNAME // 行的退单状态
-        }) //带的参数
+          statusName: row.rETURNNAME, // 行的退单状态
+        }), //带的参数
       });
     },
     // 列表勾选
@@ -1392,26 +1396,26 @@ export default {
     // 修改
     modify() {
       if (this.returnSelectData.length != 1) {
-        this.$Message.error("请选中一项修改!");
+        this.$Message.error(this.vmI18n.t("modalTips.k3"));//请选中一项修改!
         return;
       }
       this.$store.commit("customize/TabHref", {
         id: this.returnSelectData[0].ID, //单据id
         type: "action", //类型action
         name: "returngood", //文件名
-        label: "退换货订单详情", //tab中文名
+        label: this.vmI18n.t("panel_label.ReturnOrderDetails"), //退换货订单详情 tab中文名
         query: Object.assign({
           id: this.returnSelectData[0].ID, //单据id
-          tabTitle: "退换货订单详情", //tab中文名
-          statusName: this.returnSelectData[0].rETURNNAME // 选中行的退单状态
-        }) //带的参数
+          tabTitle: this.vmI18n.t("panel_label.ReturnOrderDetails"), //退换货订单详情 tab中文名
+          statusName: this.returnSelectData[0].rETURNNAME, // 选中行的退单状态
+        }), //带的参数
       });
     },
     // 扫描入库按钮
     scanIncoming() {
       const _this = this;
       if (this.returnSelectData.length != 1) {
-        this.$Message.error("请选中一项修改!");
+        this.$Message.error(this.vmI18n.t("modalTips.k3"));//请选中一项修改!
         return;
       }
       this.$network
@@ -1419,24 +1423,24 @@ export default {
           url: "/p/cs/getScanIncomingInfo",
           method: "post",
           cancelToken: true,
-          data: { ID: this.returnSelectData[0].ID }
+          data: { ID: this.returnSelectData[0].ID },
         })
-        .then(res => {
+        .then((res) => {
           if (res.data.code === 0) {
             this.$store.commit("customize/TabOpen", {
               id: -1, //单据id
               type: "action", //类型action
               name: "scanIn", //文件名
-              label: "扫描入库", //tab中文名
+              label: this.vmI18n.t("panel_label.scannAndWarehous"), //扫描入库 tab中文名
               query: Object.assign({
                 id: -1,
                 returnId: this.returnSelectData[0].ID, //单据id
                 isOrderHrefReturn: "order",
-                tabTitle: "扫描入库" //tab中文名
-              }) //带的参数
+                tabTitle: this.vmI18n.t("panel_label.scannAndWarehous"), //扫描入库 tab中文名
+              }), //带的参数
             });
           } else {
-            this.$Message.warning("此退换单状态不允许扫描入库,请重新选择！");
+            this.$Message.warning(this.vmI18n.t("modalTips.k4"));//此退换单状态不允许扫描入库,请重新选择!
           }
         });
     },
@@ -1444,14 +1448,14 @@ export default {
     afterAudit() {
       const _this = this;
       if (this.returnSelectData.length == 0) {
-        _this.$Message.error("请选中一项修改!");
+        _this.$Message.error(this.vmI18n.t("modalTips.k3"));//请选中一项修改!
         return;
       }
       if (
         _this.returnSelectData[0].rETURNNAME != "等待售后确认" &&
         this.returnSelectData.length == 1
       ) {
-        _this.$Message.warning("当前选中行，无法使用此按钮!");
+        _this.$Message.warning(this.vmI18n.t("modalTips.k5"));//当前选中行，无法使用此按钮!
         return;
       }
       let ids = [];
@@ -1461,50 +1465,48 @@ export default {
         }
       }
       if (ids.length == 0) {
-        _this.$Message.warning("单据状态不符合审核条件，请重新选择");
+        _this.$Message.warning(this.vmI18n.t("modalTips.k6"));//单据状态不符合审核条件，请重新选择
         return;
       }
       this.$Modal.info({
-        title: "提示",
-        content: "是否确定售后审核？",
+        title: this.vmI18n.t("modalTitle.tips"), //提示
+        content: this.vmI18n.t("modalTips.k7"),//是否确定售后审核？
         mask: true,
         showCancel: true,
-        okText: "取消",
-        cancelText: "确定",
+        okText: this.vmI18n.t("common.determine"), //取消
+        cancelText: this.vmI18n.t("common.cancel"), //确定
         onCancel: () => {
           this.$network
             .axios({
               url: "/p/cs/chargebackcheck",
               method: "post",
               cancelToken: true,
-              data: { ID: ids.join(",") }
+              data: { ID: ids.join(",") },
             })
-            .then(res => {
+            .then((res) => {
               if (res.data.code == 0) {
-                let mes = res.data.message || "售后审核成功！";
+                let mes = res.data.message || _this.vmI18n.t("modalTips.k8");//售后审核成功！
                 _this.$Message.success(mes);
                 _this.getList(_this.statusTab);
               } else {
-                let err = res.data.message || "售后审核失败！";
+                let err = res.data.message ||  _this.vmI18n.t("modalTips.k9");//售后审核失败！
                 _this.$Message.error(err);
               }
             });
-        }
+        },
       });
     },
     // 取消按钮
     cancelBtn() {
       if (this.returnSelectData.length == 0) {
-        this.$Message.error("请至少选中一项!");
+        this.$Message.error(this.vmI18n.t("modalTips.l0"));//请至少选中一项!
         return;
       }
       if (
         this.returnSelectData[0].rETURNNAME != "等待退货入库" &&
         this.returnSelectData.length == 1
       ) {
-        this.$Message.warning(
-          "退换货取消失败,只有【等待退货入库】状态才可以操作取消，请检查后重试!"
-        );
+        this.$Message.warning(this.vmI18n.t("modalTips.l1"));//退换货取消失败,只有【等待退货入库】状态才可以操作取消，请检查后重试!
         return;
       }
       let ids = [];
@@ -1514,16 +1516,16 @@ export default {
         }
       }
       if (ids.length == 0) {
-        this.$Message.warning("单据状态不符合取消条件，请重新选择");
+        this.$Message.warning(this.vmI18n.t("modalTips.l2"));//单据状态不符合取消条件，请重新选择
         return;
       }
       this.$Modal.info({
-        title: "提示",
-        content: "是否确定取消退单？",
+        title: this.vmI18n.t("modalTitle.tips"), //提示
+        content: this.vmI18n.t("modalTips.l3"),//是否确定取消退单？
         mask: true,
         showCancel: true,
-        okText: "取消",
-        cancelText: "确定",
+        okText: this.vmI18n.t("common.determine"), //取消
+        cancelText: this.vmI18n.t("common.cancel"), //确定
         onCancel: () => {
           this.isSaveLoading = true;
           this.$network
@@ -1531,20 +1533,19 @@ export default {
               url: "/p/cs/OcCancelChangingOrRefund",
               method: "post",
               cancelToken: true,
-              data: { ids: ids }
+              data: { ids: ids },
             })
-            .then(res => {
+            .then((res) => {
               this.isSaveLoading = false;
               if (res.data.code === 0) {
                 if (res.data.data === "comfirmFlag") {
                   this.$Modal.info({
-                    title: "提示",
-                    content:
-                      "换货订单的状态为配货中或已经发货,是否确认直接取消退货？",
+                    title: this.vmI18n.t("modalTitle.tips"), //提示
+                    content:this.vmI18n.t("modalTips.l4"),//换货订单的状态为配货中或已经发货,是否确认直接取消退货？
                     mask: true,
                     showCancel: true,
-                    okText: "确定",
-                    cancelText: "取消",
+                    okText: this.vmI18n.t("common.determine"), //取消
+                    cancelText: this.vmI18n.t("common.cancel"), //确定
                     onOk: () => {
                       this.isSaveLoading = true;
                       this.$network
@@ -1552,9 +1553,9 @@ export default {
                           url: "/p/cs/OcCancelChangingOrRefund",
                           method: "post",
                           cancelToken: true,
-                          data: { ids: ids, comfirmFlag: "comfirmFlag" }
+                          data: { ids: ids, comfirmFlag: "comfirmFlag" },
                         })
-                        .then(res => {
+                        .then((res) => {
                           this.isSaveLoading = false;
                           if (res.data.code === 0) {
                             this.$Message.success(res.data.message);
@@ -1562,11 +1563,11 @@ export default {
                               this.getList(this.statusTab);
                             }, 500);
                           } else {
-                            let err = res.data.message || "取消失败！";
+                            let err = res.data.message || this.vmI18n.t("modalTips.l5");//取消失败！
                             this.$Message.info(err);
                           }
                         });
-                    }
+                    },
                   });
                 } else {
                   this.$Message.success(res.data.message);
@@ -1575,55 +1576,55 @@ export default {
                   }, 500);
                 }
               } else {
-                let err = res.data.message || "取消失败！";
+                let err = res.data.message || this.vmI18n.t("modalTips.l5");//取消失败！
                 this.$Message.info(err);
               }
             });
-        }
+        },
       });
     },
     // 虚拟入库
     virtualLibrary() {
       if (this.returnSelectData.length != 1) {
-        this.$Message.error("请选中一项修改!");
+        this.$Message.error(this.vmI18n.t("modalTips.k3"));//请选中一项修改!
         return;
       }
       if (this.returnSelectData[0].rETURNNAME !== "等待退货入库") {
-        this.$Message.error("此退换单状态不允许虚拟入库!");
+        this.$Message.error(this.vmI18n.t("modalTips.l6"));//此退换单状态不允许虚拟入库!
         return;
       }
       this.$Modal.info({
-        title: "提示",
-        content: "是否确定虚拟入库？",
+        title: this.vmI18n.t("modalTitle.tips"), //提示
+        content:this.vmI18n.t("modalTips.l7") ,//是否确定虚拟入库？
         mask: true,
         showCancel: true,
-        okText: "取消",
-        cancelText: "确定",
+        okText: this.vmI18n.t("common.determine"), //取消
+        cancelText: this.vmI18n.t("common.cancel"), //确定
         onCancel: () => {
           this.$network
             .axios({
               url: "/p/cs/updateVirtualLibrary",
               method: "post",
               cancelToken: true,
-              data: { ID: this.returnSelectData[0].ID }
+              data: { ID: this.returnSelectData[0].ID },
             })
-            .then(res => {
+            .then((res) => {
               if (res.data.code == 0) {
                 this.$Message.success(res.data.message);
                 setTimeout(() => {
                   this.getList(this.statusTab);
                 }, 500);
               } else {
-                let err = res.data.message || "虚拟入库失败！";
+                let err = res.data.message || this.vmI18n.t("modalTips.l5");//虚拟入库失败！
                 this.$Message.info(err);
               }
             });
-        }
+        },
       });
     },
     virtualWarehouseLibraryWarn() {
       if (this.returnSelectData.length === 0) {
-        this.$Message.error("请至少选中一项!");
+        this.$Message.error(this.vmI18n.t("modalTips.l0"));//请至少选中一项!
         return;
       }
       this.virtualWarehouseModal = true;
@@ -1631,7 +1632,7 @@ export default {
     // 虚拟仓库入库
     virtualWarehouseLibrary() {
       let ids = [];
-      this.returnSelectData.forEach(item => {
+      this.returnSelectData.forEach((item) => {
         ids.push(item.ID);
       });
       this.$network
@@ -1639,14 +1640,14 @@ export default {
           url: "/p/cs/virtualWarehouseStorage",
           method: "post",
           cancelToken: true,
-          data: { ids: ids }
+          data: { ids: ids },
         })
-        .then(res => {
+        .then((res) => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);
             this.$Message.success(res.data.message);
           } else {
-            let err = res.data.message || "虚拟仓库入库失败！";
+            let err = res.data.message || this.vmI18n.t("modalTips.l9");//虚拟仓库入库失败！
             this.$Message.info(err);
           }
         });
@@ -1654,7 +1655,7 @@ export default {
     // 取消自动退款
     cancelRefund() {
       if (this.returnSelectData.length != 1) {
-        this.$Message.error("请选中一项修改!");
+        this.$Message.error(this.vmI18n.t("modalTips.k3"));//请选中一项修改!
         return;
       }
       this.$network
@@ -1662,14 +1663,14 @@ export default {
           url: "/p/cs/cancelautorefund",
           method: "post",
           cancelToken: true,
-          data: { ID: this.returnSelectData[0].ID }
+          data: { ID: this.returnSelectData[0].ID },
         })
-        .then(res => {
+        .then((res) => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);
             this.$Message.success(res.data.message);
           } else {
-            let err = res.data.message || "取消自动退款失败！";
+            let err = res.data.message || this.vmI18n.t("modalTips.m0");//取消自动退款失败！
             this.$Message.info(err);
           }
         });
@@ -1677,14 +1678,14 @@ export default {
     // 修改备注
     bounced() {
       if (!this.returnSelectData.length) {
-        this.$Message.error("请至少选中一项修改!");
+        this.$Message.error(this.vmI18n.t("modalTips.m1"));//请至少选中一项修改!
         return;
       }
       if (
         this.returnSelectData[0].rETURNNAME == "取消" &&
         this.returnSelectData.length == 1
       ) {
-        this.$Message.error("取消状态不允许修改备注!");
+        this.$Message.error(this.vmI18n.t("modalTips.m2"));//取消状态不允许修改备注!
         return;
       }
       let ids = [];
@@ -1696,14 +1697,16 @@ export default {
       this.changeRemarkConfig.componentData = {
         ids: ids.join(","),
         status: this.statusTab,
-        type: 1
+        type: 1,
       };
-      this.$children.find(item => item.name === "jordanBounced").openConfirm();
+      this.$children
+        .find((item) => item.name === "jordanBounced")
+        .openConfirm();
     },
     // 修改卖家备注
     bounced2() {
       if (!this.returnSelectData.length) {
-        this.$Message.error("请至少选中一项修改!");
+        this.$Message.error(this.vmI18n.t("modalTips.m1"));//请至少选中一项修改!
         return;
       }
       let ids = [];
@@ -1713,14 +1716,16 @@ export default {
       this.changeRemarkConfig.componentData = {
         ids: ids.join(","),
         status: this.statusTab,
-        type: 2
+        type: 2,
       };
-      this.$children.find(item => item.name === "jordanBounced").openConfirm();
+      this.$children
+        .find((item) => item.name === "jordanBounced")
+        .openConfirm();
     },
     // 修改退货仓库
     Warehouse() {
       if (!this.returnSelectData.length) {
-        this.$Message.error("请至少选中一项修改!");
+        this.$Message.error(this.vmI18n.t("modalTips.m1"));//请至少选中一项修改!
         return;
       }
       // if (this.returnSelectData[0].rETURNNAME != '等待退货入库' && this.returnSelectData.length == 1) {
@@ -1735,12 +1740,12 @@ export default {
       }
       this.modifyWarehouse.componentData = { ids: ids };
       this.$children
-        .find(item => item.name === "modifyWarehouse")
+        .find((item) => item.name === "modifyWarehouse")
         .openConfirm();
     },
     OrderLogistics() {
       if (!this.returnSelectData.length) {
-        this.$Message.error("请至少选中一项修改!");
+        this.$Message.error(this.vmI18n.t("modalTips.m1"));//请至少选中一项修改!
         return;
       }
       let ids = [];
@@ -1749,13 +1754,13 @@ export default {
       }
       this.modifyReturnOrderLogistics.componentData = { ids: ids };
       this.$children
-        .find(item => item.name === "modifyReturnOrderLogistics")
+        .find((item) => item.name === "modifyReturnOrderLogistics")
         .openConfirm();
     },
     // 批量原退
     batchOriginalBack() {
       if (this.returnSelectData.length == 0) {
-        this.$Message.error("请至少选中一项!");
+        this.$Message.error(this.vmI18n.t("modalTips.l0"));//请至少选中一项!
         return;
       }
       let ids = [];
@@ -1763,21 +1768,21 @@ export default {
         ids.push(this.returnSelectData[i].ID);
       }
       this.$Modal.info({
-        title: "提示",
-        content: "是否确定批量原退？",
+        title: this.vmI18n.t("modalTitle.tips"), //提示
+        content: this.vmI18n.t("modalTips.m3"),//是否确定批量原退？
         mask: true,
         showCancel: true,
-        okText: "取消",
-        cancelText: "确定",
+        okText: this.vmI18n.t("common.determine"), //取消
+        cancelText: this.vmI18n.t("common.cancel"), //确定
         onCancel: () => {
           this.$network
             .axios({
               url: "/p/cs/updateReturnBOrder",
               method: "post",
               cancelToken: true,
-              data: { ids: ids }
+              data: { ids: ids },
             })
-            .then(res => {
+            .then((res) => {
               if (res.data.code === 0) {
                 this.getList(this.statusTab);
                 this.$Message.success(res.data.message);
@@ -1786,11 +1791,11 @@ export default {
                   this.errdataList = res.data.data;
                 }
               } else {
-                let err = res.data.message || "批量原退失败！";
+                let err = res.data.message || this.vmI18n.t("modalTips.m4");//批量原退失败！
                 this.$Message.info(err);
               }
             });
-        }
+        },
       });
     },
     keyenter() {
@@ -1799,14 +1804,14 @@ export default {
     // 从wms撤回
     withdrawWMS() {
       if (this.returnSelectData.length == 0) {
-        this.$Message.error("请至少选中一项!");
+        this.$Message.error(this.vmI18n.t("modalTips.l0"));//请至少选中一项!
         return;
       }
       if (
         this.returnSelectData[0].rETURNNAME != "等待退货入库" &&
         this.returnSelectData.length == 1
       ) {
-        this.$Message.error("只有等待退货入库状态可以从WMS撤回!");
+        this.$Message.error(this.vmI18n.t("modalTips.m5"));//只有等待退货入库状态可以从WMS撤回!
         return;
       }
       let ids = [];
@@ -1820,14 +1825,14 @@ export default {
           url: "/p/cs/orderReturnRecallFromWms",
           method: "post",
           cancelToken: true,
-          data: { ID: ids }
+          data: { ID: ids },
         })
-        .then(res => {
+        .then((res) => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);
             this.$Message.success(res.data.message);
           } else {
-            let err = res.data.message || "从wms撤回失败！";
+            let err = res.data.message || this.vmI18n.t("modalTips.m6");//从wms撤回失败！
             this.$Message.info(err);
           }
         });
@@ -1835,7 +1840,7 @@ export default {
     // 重传wms
     againWMS() {
       if (this.returnSelectData.length == 0) {
-        this.$Message.error("请至少选中一项!");
+        this.$Message.error(this.vmI18n.t("modalTips.l0"));//请至少选中一项!
         return;
       }
       let ids = [];
@@ -1847,14 +1852,14 @@ export default {
           url: "/p/cs/retransmissionWms",
           method: "post",
           cancelToken: true,
-          data: { returnOrderIds: ids.join(",") }
+          data: { returnOrderIds: ids.join(",") },
         })
-        .then(res => {
+        .then((res) => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);
             this.$Message.success(res.data.message);
           } else {
-            let err = res.data.message || "重WMS失败！";
+            let err = res.data.message || this.vmI18n.t("modalTips.m7");//重WMS失败！
             this.$Message.info(err);
           }
         });
@@ -1862,62 +1867,62 @@ export default {
     // 强制完成
     forcedCompletion() {
       if (this.returnSelectData.length == 0) {
-        this.$Message.error("请至少选中一项!");
+        this.$Message.error(this.vmI18n.t("modalTips.l0"));//请至少选中一项!
         return;
       }
       if (
         this.returnSelectData[0].rETURNNAME != "等待售后确认" &&
         this.returnSelectData.length == 1
       ) {
-        this.$Message.error("只有等待售后确认状态可以强制完成!");
+        this.$Message.error(this.vmI18n.t("modalTips.m8"));//只有等待售后确认状态可以强制完成!
         return;
       }
       let ids = [];
-      this.returnSelectData.forEach(item => {
+      this.returnSelectData.forEach((item) => {
         ids.push(item.ID);
       });
       this.$Modal.info({
-        title: "提示",
-        content: "是否确定强制完成？",
+        title: this.vmI18n.t("modalTitle.tips"), //提示
+        content: this.vmI18n.t("modalTips.m9"),//是否确定强制完成？
         mask: true,
         showCancel: true,
-        okText: "取消",
-        cancelText: "确定",
+        okText: this.vmI18n.t("common.determine"), //取消
+        cancelText: this.vmI18n.t("common.cancel"), //确定
         onCancel: () => {
           this.$network
             .axios({
               url: "/p/cs/forcedCompletion",
               method: "post",
               cancelToken: true,
-              data: { ids: ids }
+              data: { ids: ids },
             })
-            .then(res => {
+            .then((res) => {
               if (res.data.code === 0) {
                 this.getList(this.statusTab);
                 this.$Message.success(res.data.message);
               } else {
-                let err = res.data.message || "强制完成失败！";
+                let err = res.data.message || this.vmI18n.t("modalTips.n0");//强制完成失败！
                 this.$Message.info(err);
               }
             });
-        }
+        },
       });
     },
     // 复制退单
     cloneRenturnGood() {
       const _this = this;
       if (this.returnSelectData.length !== 1)
-        return this.$Message.error("请选中一条单据进行复制!");
+        return this.$Message.error(this.vmI18n.t("modalTips.n1"));//请选中一条单据进行复制!
       _this.$store.commit("customize/TabOpen", {
         id: -1,
         type: "action",
         name: "returngood",
-        label: "退换货订单新增",
+        label: _this.vmI18n.t("panel_label.addReturnOrder"),//退换货订单新增
         query: {
           id: -1,
           cloneReturnGoodId: _this.returnSelectData[0].ID,
-          tabTitle: "退换货订单新增"
-        }
+          tabTitle: _this.vmI18n.t("panel_label.addReturnOrder"),//退换货订单新增
+        },
       });
     },
     // 导入
@@ -1941,7 +1946,7 @@ export default {
     exportClick() {
       const _this = this;
       if (_this.returnSelectData.length) {
-        if (this.isExport) return this.$Message.error("有一项导出正在进行中");
+        if (this.isExport) return this.$Message.error(_this.vmI18n.t("modalTips.f8"));//有一项导出正在进行中
         this.isExport = true;
         let ids = [];
         for (let i = 0; i < _this.returnSelectData.length; i++) {
@@ -1953,23 +1958,23 @@ export default {
             url: "/p/cs/exportReturnOrder",
             method: "post",
             cancelToken: true,
-            data: idList
+            data: idList,
           })
-          .then(res => {
+          .then((res) => {
             _this.isExport = false;
             if (res.data.code == 0 && res.data.data !== null) {
-              let mes = res.data.message || "导出成功！";
+              let mes = res.data.message || _this.vmI18n.t("modalTips.z2");//导出成功！
               _this.$Message.success(mes);
               _this.downloadUrlFile(res.data.data);
               // return (window.location = res.data.data);
             } else {
-              let err = res.data.message || "失败！";
+              let err = res.data.message || _this.vmI18n.t("modalTips.z3");//失败！
               _this.$Message.error(err);
             }
           });
       } else {
         if (_this.agTableConfig.rowData.length === 0)
-          return _this.$Message.error("列表没有数据,无法导出!");
+          return _this.$Message.error(_this.vmI18n.t("modalTips.z4"));//列表没有数据,无法导出!
         if (_this.statusTab == "") {
           _this.warningModal = true;
         } else {
@@ -1981,17 +1986,17 @@ export default {
     // 警告框确认
     warningOk() {
       const _this = this;
-      if (this.isExport) return this.$Message.error("有一项导出正在进行中");
+      if (this.isExport) return this.$Message.error(_this.vmI18n.t("modalTips.f8"));//有一项导出正在进行中
       this.isExport = true;
       const param = {
         start: _this.agTableConfig.pagenation.current,
         count: 999999,
-        RETURN_STATUS: status == undefined ? "" : status
+        RETURN_STATUS: status == undefined ? "" : status,
       };
       _this.formConfig.formValue.RECEIVE_PROVINCE = "";
       _this.formConfig.formValue.RECEIVE_PROVINCE_ID = "";
       if (_this.formConfig.formData.length) {
-        _this.formConfig.formData.forEach(item => {
+        _this.formConfig.formData.forEach((item) => {
           if (
             item.itemdata !== undefined &&
             item.itemdata.name == "原始订单编号"
@@ -2008,17 +2013,17 @@ export default {
           url: "/p/cs/exportReturnOrder",
           method: "post",
           cancelToken: true,
-          data: Object.assign(param, _this.formConfig.formValue)
+          data: Object.assign(param, _this.formConfig.formValue),
         })
-        .then(res => {
+        .then((res) => {
           _this.isExport = false;
           if (res.data.code == 0 && res.data.data !== null) {
-            let mes = res.data.message || "导出成功！";
+            let mes = res.data.message || this.vmI18n.t("modalTips.z2");//导出成功！
             _this.$Message.success(mes);
             // return (window.location = res.data.data);
             _this.downloadUrlFile(res.data.data);
           } else {
-            let err = res.data.message || "失败！";
+            let err = res.data.message || this.vmI18n.t("modalTips.z3");//失败！
             _this.$Message.error(err);
           }
         });
@@ -2033,11 +2038,11 @@ export default {
       }
       download_file.iframe.src = src;
       download_file.iframe.style.display = "none";
-    }
+    },
   },
   destroyed() {
     window.removeEventListener("keydown", this, false);
-  }
+  },
 };
 </script>
 

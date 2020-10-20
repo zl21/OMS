@@ -3,9 +3,10 @@
     <!-- 修改物流 -->
     <!-- <businessForm style="margin-top:10px;" :formConfig="formConfig"></businessForm> -->
     <div class="jordanModal_box">
-      <label for>物流公司:</label>
+      <!-- <label for>物流公司:</label> -->
+      <label for>{{ vmI18n.t("form_label.logisticsCompany") }}:</label>
       <DropDownSelectFilter
-        style="width:250px;"
+        style="width: 250px"
         :single="true"
         :data="foreignKeyLink"
         :zIndex="zIndex"
@@ -21,11 +22,16 @@
       ></DropDownSelectFilter>
     </div>
     <div class="jordanModal_box" v-if="type == 'EXPRESSCODE'">
-      <label for>物流单号:</label>
-      <Input style="width: 250px" v-model="expressCode" :disabled="expressCodeFlag" />
+      <!-- <label for>物流单号:</label> -->
+      <label for>{{ vmI18n.t("form_label.logisticsOrder_No") }}:</label>
+      <Input
+        style="width: 250px"
+        v-model="expressCode"
+        :disabled="expressCodeFlag"
+      />
     </div>
 
-    <jordanBtn :btnConfig="btnConfig" style="margin-top:10px;"></jordanBtn>
+    <jordanBtn :btnConfig="btnConfig" style="margin-top: 10px"></jordanBtn>
   </div>
 </template>
 <script>
@@ -39,17 +45,18 @@ export default {
   props: {
     componentData: {
       type: Object,
-      default: {}
-    }
+      default: {},
+    },
   },
   components: {
     businessForm,
     jordanBtn,
-    businessActionTable
+    businessActionTable,
   },
   computed: {},
   data() {
     return {
+      vmI18n: window.vmI18n,
       zIndex: 2500,
       totalRowCount: 0,
       pageSize: 10,
@@ -58,7 +65,8 @@ export default {
       expressCode: "",
       type: "LOGISTICCOMPANY",
       pageNum: 1,
-      dataEmptyMessage: "数据加载中...", // 无数据的提示
+      // dataEmptyMessage: "数据加载中...", // 无数据的提示
+      dataEmptyMessage: vmI18n.t("modalTips.ye"), // 无数据的提示
       columns: ["ename"], // 展现的组
       AutoData: [],
       foreignKeyLink: {},
@@ -70,26 +78,28 @@ export default {
         buttons: [
           {
             type: "", //按钮类型
-            text: "确定", //按钮文本
+            // text: "确定", //按钮文本
+            text: vmI18n.t("common.determine"), //按钮文本
             icon: "", //按钮图标
             size: "small", //按钮大小
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.determine();
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             type: "", //按钮类型
-            text: "取消", //按钮文本
+            // text: "取消", //按钮文本
+            text: vmI18n.t("common.cancel"), //按钮文本
             icon: "", //按钮图标
             size: "small", //按钮大小
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
-            } //按钮点击事件
-          }
-        ]
-      }
+            }, //按钮点击事件
+          },
+        ],
+      },
     };
   },
   mounted() {
@@ -104,7 +114,7 @@ export default {
       if (e.keyCode === 27) {
         this.$parent.$parent.closeConfirm();
         this.$parent.$parent.$parent.publicBouncedIndex = {
-          name: "testModal"
+          name: "testModal",
         };
       }
       if (e.keyCode === 13) {
@@ -126,18 +136,20 @@ export default {
       if (self.type === "EXPRESSCODE") {
         if (!self.expressCode) {
           self.$Message.warning({
-            content: "请选择物流单号",
+            // content: "请选择物流单号",
+            content: vmI18n.t("modalTips.yd"),
             duration: 5,
-            top: 80
+            top: 80,
           });
           return false;
         }
       } else {
         if (!self.pid) {
           self.$Message.warning({
-            content: "请选择物流公司",
+            // content: "请选择物流公司",
+            content: vmI18n.t("modalTips.ye"),
             duration: 5,
-            top: 80
+            top: 80,
           });
           return false;
         }
@@ -149,10 +161,10 @@ export default {
       fromdata.append("type", self.type);
       axios({
         // url: "/p/cs/updateLogistics",
-        url: "/api/cs/oc/oms/v1/updateLogistics",  //切换接口服务
+        url: "/api/cs/oc/oms/v1/updateLogistics", //切换接口服务
         method: "post",
         cancelToken: true,
-        data: fromdata
+        data: fromdata,
       }).then(function (res) {
         if (res.data.code === 0) {
           console.log(self.$route.query.id);
@@ -164,15 +176,16 @@ export default {
               self.$parent.$parent.$parent.selection = [];
             } else {
               self.$Modal.error({
-                title: "提示",
-                render: h =>
+                // title: "提示",
+                title: vmI18n.t("modalTitle.tips"),
+                render: (h) =>
                   h("div", {}, [
                     h(
                       "p",
                       {
                         style: {
-                          padding: "10px 15px 10px 0px"
-                        }
+                          padding: "10px 15px 10px 0px",
+                        },
                       },
                       res.data.message
                     ),
@@ -180,11 +193,12 @@ export default {
                       props: {
                         "disabled-hover": true,
                         "highlight-row": false,
-                        "no-data-text": "暂无数据",
+                        // "no-data-text": "暂无数据",
+                        "no-data-text": vmI18n.t("other.noDataAvailable"),
                         columns: res.data.data.columns,
-                        data: res.data.data.prompt_data
-                      }
-                    })
+                        data: res.data.data.prompt_data,
+                      },
+                    }),
                   ]),
                 cancelType: true,
                 titleAlign: "left",
@@ -194,13 +208,13 @@ export default {
                 onOk: () => {
                   self.$parent.$parent.closeConfirm();
                 },
-                keyDown: event => {
+                keyDown: (event) => {
                   if (event.keyCode === 27) {
                     self.$parent.$parent.closeConfirm();
                   } else if (event.keyCode === 13) {
                     self.$parent.$parent.closeConfirm();
                   }
-                }
+                },
               });
             }
           } else {
@@ -208,12 +222,11 @@ export default {
             self.$Message.success(res.data.message);
             self.$parent.$parent.closeConfirm();
           }
-
         } else {
           self.$Message.warning({
             content: res.data.message,
             duration: 5,
-            top: 80
+            top: 80,
           });
         }
       });
@@ -231,25 +244,25 @@ export default {
         id: self.componentData.CP_C_PHY_WAREHOUSE_ID,
         num: self.pageNum,
         size: self.pageSize,
-        inputValue: ''
-      }
+        inputValue: "",
+      };
       axios({
         url: "/api/cs/oc/oms/v1/getQueryList",
         method: "post",
-        data
+        data,
       }).then(function (res) {
-        res.data.data.forEach(element => {
+        res.data.data.forEach((element) => {
           element.ecode = {
-            val: element.ecode
+            val: element.ecode,
           };
           element.ename = {
-            val: element.ename
+            val: element.ename,
           };
           element.shortName = {
-            val: element.shortName
+            val: element.shortName,
           };
           element.ID = {
-            val: element.id
+            val: element.id,
           };
         });
         console.log(res.data);
@@ -259,25 +272,28 @@ export default {
             {
               colname: "ID",
               name: "ID",
-              show: false
+              show: false,
             },
             {
               colname: "ename",
-              name: "快递名称",
+              // name: "快递名称",
+              name: vmI18n.t("table_label.expressName"),
               show: true,
             },
             {
               colname: "ecode",
-              name: "快递编码",
-              show: false
+              // name: "快递编码",
+              name: vmI18n.t("table_label.expressCode"),
+              show: false,
             },
             {
               colname: "shortName",
-              name: "简称",
-              show: false
-            }
+              // name: "简称",
+              name: vmI18n.t("table_label.abbreviation"),
+              show: false,
+            },
           ],
-          row: res.data.data
+          row: res.data.data,
         };
         console.log(res.data.data);
         console.log(self.foreignKeyLink);
@@ -291,8 +307,8 @@ export default {
     onFkrpSelected(val) {
       console.log(val);
       this.pid = val[0].ID;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -3,11 +3,12 @@
   <div class="giftSet">
     <div class="title">
       <i class="iconfontPromotion iconzengpin" />
-      <span>赠品信息设置</span>
+      <!-- <span>赠品信息设置</span> -->
+      <span>{{ vmI18n.t("other.gift_set") }}</span>
     </div>
     <!--阶梯类型-->
     <div v-if="showPdtsArr" class="row">
-      <div class="form_label">阶梯类型：</div>
+      <div class="form_label">{{ vmI18n.t("form_label.ladderType") }}：</div>
       <div class="form_content">
         <SingleBox
           :value="giftData.steps_type"
@@ -18,14 +19,18 @@
     </div>
     <!--赠品翻倍-->
     <div class="row">
-      <div class="form_label"><i class="red">*</i>赠品翻倍：</div>
+      <div class="form_label">
+        <i class="red">*</i>{{ vmI18n.t("form_label.double_gifts") }}：
+      </div>
       <div class="form_content">
         <SingleBox
           :value="giftData.gift_doubles"
           :options="groups.giftDoubles"
           @changeSingle="checkGiftDoublesChange"
         />
-        <div class="form_item">,最大翻倍次数</div>
+        <div class="form_item">
+          ,{{ vmI18n.t("form_label.max_doubling_times") }}
+        </div>
         <div class="form_el_input form_item limitinput">
           <input
             v-model="giftData.max_doubles_limits"
@@ -37,7 +42,9 @@
     </div>
     <!--赠送方式-->
     <div class="row">
-      <div class="form_label"><i class="red">*</i>赠送方式：</div>
+      <div class="form_label">
+        <i class="red">*</i>{{ vmI18n.t("form_label.giving_ways") }}：
+      </div>
       <div class="form_content">
         <SingleBox
           :value="giftData.gift_methods"
@@ -48,7 +55,8 @@
     </div>
     <!--梯度-->
     <div v-if="showPdtsArr" class="row">
-      <div class="form_label">赠品列表：</div>
+      <!-- 赠品列表： -->
+      <div class="form_label">{{ vmI18n.t("other.gift_list") }}：</div>
       <div class="form_content">
         <detailtabs
           :current.sync="currentTab"
@@ -66,15 +74,24 @@
           @returnOneTableData="returnOneTableData"
         >
           <div slot="MatchOperate" class="form_button">
-            <button class="white" @click="addSteps">添加阶梯</button>
-            <button class="white" @click="removeSteps">删除阶梯</button>
+            <button class="white" @click="addSteps">
+              <!-- 添加阶梯 -->
+              { vmI18n.t("btn.add_ladder") }}
+            </button>
+            <button class="white" @click="removeSteps">
+              <!-- 删除阶梯 -->
+              {{ vmI18n.t("btn.delete_ladder") }}
+            </button>
           </div>
         </detailtabs>
       </div>
     </div>
     <!--非梯度-->
     <div v-if="!showPdtsArr" class="row">
-      <div class="form_label"><i class="red">*</i>赠品列表：</div>
+      <div class="form_label">
+        <!-- 赠品列表 -->
+        <i class="red">*</i>{{ vmI18n.t("other.gift_list") }}：
+      </div>
       <div class="form_content">
         <detailtable
           :t-columns="columns"
@@ -93,8 +110,12 @@
               :itemdata="itemdataFk"
               @getFkChooseItem="getButtonFkChoose"
             />
-            <button class="white" @click="addRowData">新增</button>
-            <button class="white" @click="importData">导入</button>
+            <button class="white" @click="addRowData">
+              {{ vmI18n.t("btn.add") }}
+            </button>
+            <button class="white" @click="importData">
+              {{ vmI18n.t("btn.import") }}
+            </button>
           </div>
         </detailtable>
       </div>
@@ -205,6 +226,7 @@ export default {
   },
   data() {
     return {
+      vmI18n: window.vmI18n,
       currentTab: 0,
       tableCols,
       // columns: [
@@ -650,7 +672,8 @@ export default {
         Vue.extend(_import("onlinePromotion/components/importDialog"))
       );
       self.currentView = _component;
-      self.dialogSet.dialogTitle = "导入";
+      // self.dialogSet.dialogTitle = "导入";
+      self.dialogSet.dialogTitle = vmI18n.t("modalTitle.import");
       self.show_dialog = true;
     },
     /**

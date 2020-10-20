@@ -3,12 +3,16 @@
   <div class="infoSet">
     <div class="title">
       <i class="iconfontPromotion iconliuchengtiaojian" />
-      <span>条件信息设置</span>
+      <!-- <span>条件信息设置</span>  -->
+      <span>{{ vmI18n.t("other.info_set") }}</span>
     </div>
     <div v-if="!onlyShowRules">
       <!--商品参与方式-->
       <div class="row">
-        <div class="form_label"><i class="red">*</i>商品参与方式：</div>
+        <div class="form_label">
+          <i class="red">*</i
+          >{{ vmI18n.t("form_label.goods_participation_mode") }}：
+        </div>
         <div class="form_content">
           <SingleBox
             :value="infoData.products_join"
@@ -19,7 +23,9 @@
       </div>
       <!--商品来源-->
       <div class="row">
-        <div class="form_label"><i class="red">*</i>商品来源：</div>
+        <div class="form_label">
+          <i class="red">*</i>{{ vmI18n.t("form_label.goods_source") }}：
+        </div>
         <div class="form_content">
           <SingleBox
             :value="infoData.products_origin"
@@ -30,7 +36,9 @@
       </div>
       <!--选择商品方式-->
       <div class="row">
-        <div class="form_label"><i class="red">*</i>选择商品方式：</div>
+        <div class="form_label">
+          <i class="red">*</i>{{ vmI18n.t("form_label.choose_product_ways") }}：
+        </div>
         <div class="form_content">
           <SingleBox
             :value="infoData.includeorexclude"
@@ -39,9 +47,11 @@
           />
         </div>
       </div>
-      <!--搭配 选择商品方式-->
+      <!--搭配 选择商品方式 商品列表-->
       <div v-if="showPdtsArr" class="row">
-        <div class="form_label"><i class="red">*</i>商品列表：</div>
+        <div class="form_label">
+          <i class="red">*</i>{{ vmI18n.t("other.product_list") }}：
+        </div>
         <div class="form_content">
           <detailtabs
             :current.sync="currentTab"
@@ -59,15 +69,21 @@
             @returnOneTableData="returnOneTableData"
           >
             <div slot="MatchOperate" class="form_button">
-              <button class="white" @click="addGroup">添加搭配</button>
-              <button class="white" @click="removeGroup">删除搭配</button>
+              <!-- 添加搭配 -->
+              <button class="white" @click="addGroup">
+                {{ vmI18n.t("btn.add_collocation") }}
+              </button>
+              <!-- 删除搭配 -->
+              <button class="white" @click="removeGroup">
+                {{ vmI18n.t("btn.delete_collocation") }}
+              </button>
             </div>
           </detailtabs>
         </div>
       </div>
-      <!--非搭配 选择商品方式-->
+      <!--非搭配 选择商品方式 商品列表-->
       <div v-if="!showPdtsArr" class="row">
-        <div class="form_label">商品列表：</div>
+        <div class="form_label">{{ vmI18n.t("other.product_list") }}：</div>
         <div class="form_content">
           <detailtable
             :t-columns="columns"
@@ -87,8 +103,14 @@
                 :itemdata="itemdataFk"
                 @getFkChooseItem="getButtonFkChoose"
               />
-              <button class="white" @click="addRowData">新增</button>
-              <button class="white" @click="importData">导入</button>
+              <!-- 新增 -->
+              <button class="white" @click="addRowData">
+                {{ vmI18n.t("btn.add") }}
+              </button>
+              <!-- 导入 -->
+              <button class="white" @click="importData">
+                {{ vmI18n.t("btn.import") }}
+              </button>
             </div>
           </detailtable>
         </div>
@@ -96,7 +118,9 @@
     </div>
     <!--满足条件-->
     <div v-if="showRulesContent" class="row">
-      <div class="form_label"><i class="red">*</i>满足条件：</div>
+      <div class="form_label">
+        <i class="red">*</i>{{ vmI18n.t("form_label.meet_conditions") }}：
+      </div>
       <div class="form_content">
         <CTSIT
           v-for="(rule, _index) in infoData.rules"
@@ -206,6 +230,7 @@ export default {
   },
   data() {
     return {
+      vmI18n: window.vmI18n,
       temp_time_type: "",
       columns: tableCols.infoColumns,
       data: [], // 表格数据

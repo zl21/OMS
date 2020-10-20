@@ -13,7 +13,7 @@ export const isFavoriteMixin = {
       const fromdata = new FormData();
       fromdata.append('id', self.$route.params.customizedModuleId);
       fromdata.append('type', 'action');
-      if (self.btnConfig.buttons.find(item => item.name === '收藏').icon !== 'iconfont icon-liebiao-yishoucang') {
+      if (self.btnConfig.buttons.find(item => (item.name === '收藏' || item.name === 'collection')).icon !== 'iconfont icon-liebiao-yishoucang') {
         axios({
           url: '/p/cs/addToFavorite',
           method: 'post',
@@ -21,7 +21,7 @@ export const isFavoriteMixin = {
         }).then((res) => {
           if (res.data.code == 0) {
             self.$store.commit('global/updateFavoriteData', res.data);
-            self.btnConfig.buttons.find(item => item.name === '收藏').icon === 'iconfont icon-liebiao-yishoucang' ? self.btnConfig.buttons.find(item => item.name === '收藏').icon = 'iconfont iconbj_col' : self.btnConfig.buttons.find(item => item.name === '收藏').icon = 'iconfont icon-liebiao-yishoucang';
+            self.btnConfig.buttons.find(item => (item.name === '收藏' || item.name === 'collection')).icon === 'iconfont icon-liebiao-yishoucang' ? self.btnConfig.buttons.find(item => item.name === '收藏').icon = 'iconfont iconbj_col' : self.btnConfig.buttons.find(item => item.name === '收藏').icon = 'iconfont icon-liebiao-yishoucang';
           }
         });
       } else {
@@ -32,7 +32,7 @@ export const isFavoriteMixin = {
         }).then((res) => {
           if (res.data.code == 0) {
             self.$store.commit('global/updateFavoriteData', res.data);
-            self.btnConfig.buttons.find(item => item.name === '收藏').icon === 'iconfont icon-liebiao-yishoucang' ? self.btnConfig.buttons.find(item => item.name === '收藏').icon = 'iconfont iconbj_col' : self.btnConfig.buttons.find(item => item.name === '收藏').icon = 'iconfont icon-liebiao-yishoucang';
+            self.btnConfig.buttons.find(item => (item.name === '收藏' || item.name === 'collection')).icon === 'iconfont icon-liebiao-yishoucang' ? self.btnConfig.buttons.find(item => item.name === '收藏').icon = 'iconfont iconbj_col' : self.btnConfig.buttons.find(item => item.name === '收藏').icon = 'iconfont icon-liebiao-yishoucang';
           }
         });
       }
@@ -49,9 +49,9 @@ export const isFavoriteMixin = {
         data: fromdata
       }).then((res) => {
         if (res.data.data.isFavorite) {
-          self.btnConfig.buttons.find(item => item.name === '收藏').icon = 'iconfont icon-liebiao-yishoucang';
+          self.btnConfig.buttons.find(item => (item.name === '收藏' || item.name === 'collection')).icon = 'iconfont icon-liebiao-yishoucang';
         } else {
-          self.btnConfig.buttons.find(item => item.name === '收藏').icon = 'iconfont iconbj_col';
+          self.btnConfig.buttons.find(item => (item.name === '收藏' || item.name === 'collection')).icon = 'iconfont iconbj_col';
         }
       });
     },

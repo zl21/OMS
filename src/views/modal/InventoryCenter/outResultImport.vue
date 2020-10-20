@@ -29,6 +29,7 @@
     },
     data() {
       return {
+        vmI18n: window.vmI18n,
         componentData: {
           tableName: 'SG_B_PHY_OUT_RESULT',
           importType: 1,

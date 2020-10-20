@@ -3,19 +3,22 @@
     <businessForm :formConfig="downLoadFormConfig">
     </businessForm>
     <jordanBtn :btnConfig="downLoadBtnConfig"></jordanBtn>
-    <!-- 确认下载弹框 -->
+    <!-- 确认下载弹框 订单下载-->
     <Modal
       class="downLoadModal"
       v-model="downLoadModal"
-      title="订单下载"
+      :title="vmI18n.t('modalTitle.orderDownload')"
       width="450"
       @on-ok="downLoadOk"
       @on-cancel="downLoadCancel"
       :mask="true"
     >
       <p>
-        订单下载任务已经发送，任务ID：
-        <span class="taskID" @click="taskIDClick">{{taskId}}</span>，请前往接口下载任务表查看下载进度！
+        <!-- 订单下载任务已经发送，任务ID： -->
+        {{vmI18n.t("modalTips.bn")}}
+        <span class="taskID" @click="taskIDClick">{{taskId}}</span>
+        <!-- ，请前往接口下载任务表查看下载进度！ -->
+        {{vmI18n.t("modalTips.bo")}}
       </p>
     </Modal>
   </div>
@@ -61,6 +64,7 @@ export default {
   },
   data() {
     return {
+       vmI18n: window.vmI18n,
       downLoadModal: false,
       taskId: "",
       downLoadBtnConfig: {
@@ -69,18 +73,18 @@ export default {
         buttons: [
           {
             type: "", //按钮类型
-            text: "下载", //按钮文本
+            text: vmI18n.t('btn.download'), //下载 按钮文本
             icon: "", //按钮图标
             size: "", //按钮大小
             disabled: false, //按钮禁用控制
             btnclick: () => {
               formConfig(this.$route.params.tableName).determine(this)
-              // formConfig('IP_C_VIP_PRO').determine(this)
+              // formConfig('IP_B_CANCEL_TIME_ORDER_VIP').determine(this)
             } //按钮点击事件
           },
           {
             type: "", //按钮类型
-            text: "取消", //按钮文本
+            text: vmI18n.t('common.cancel'), //取消 按钮文本
             icon: "", //按钮图标
             size: "", //按钮大小
             disabled: false, //按钮禁用控制
@@ -99,7 +103,7 @@ export default {
       self.downLoadFormConfig.formValue.order_status = "NEW";
     }
     this.downLoadFormConfig = formConfig(this.$route.params.tableName).formConfig
-    // self.downLoadFormConfig = formConfig('IP_C_VIP_PRO').formConfig
+    // self.downLoadFormConfig = formConfig('IP_B_CANCEL_TIME_ORDER_VIP').formConfig
   },
   methods: {
     standardTimeConversiondateToStr(val) {
@@ -158,13 +162,13 @@ export default {
         id: this.taskId,
         type: "singleView", //类型action
         name: "singleView",
-        label: "接口下载任务表编辑", //tab中文名
+        label: this.vmI18n.t('common.interface_download_taskTable_edit'), //接口下载任务表编辑 tab中文名
         query: {
           id: this.taskId,
           pid: "24775",
-          ptitle: "接口下载任务表",
+          ptitle: this.vmI18n.t('common.interface_download_taskTable'),//接口下载任务表
           ptype: "table",
-          tabTitle: "接口下载任务表编辑",
+          tabTitle: this.vmI18n.t('common.interface_download_taskTable_edit'),//接口下载任务表编辑
           tableName: "IP_T_CONSUMER_LOG"
         }
       });

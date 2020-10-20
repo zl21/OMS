@@ -2,7 +2,9 @@
   <div style="width:430px;padding-right:20px">
     <businessForm :formConfig="downLoadTaobaoGoodsFormConfig"></businessForm>
     <div class="dialog-footer">
-      <Button type="primary" ghost @click="download">确定</Button>
+      <!-- 确定 -->
+      <Button type="primary" ghost @click="download">{{vmI18n.t('btn.determine')}}</Button>
+      <!-- 取消 -->
       <Button
         type="error"
         ghost
@@ -11,7 +13,7 @@
             this.$emit('closeActionDialog');
           }
         "
-        >取消</Button
+        >{{vmI18n.t('btn.cacel')}}</Button
       >
     </div>
   </div>
@@ -46,6 +48,7 @@ export default {
   },
   data() {
     return {
+      vmI18n: window.vmI18n,
       downLoadTaobaoGoodsFormConfig: {
         formValue: {
           numNumber: ""
@@ -73,13 +76,13 @@ export default {
               },
               display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: "drp", //外键关联类型
-              fkdesc: "店铺",
+              fkdesc: vmI18n.t('other.shop'),//店铺
               inputname: "CP_C_SHOP_ID", //这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, //是否有fk键
               isnotnull: true, //是否必填
               isuppercase: false, //是否转大写
               length: 65535, //最大长度是多少
-              name: "店铺", //input前面显示的lable值
+              name: vmI18n.t('other.shop'),//店铺 input前面显示的lable值
               readonly: false, //是否可编辑，对应input   readonly属性
               reftable: "CP_C_SHOP",
               reftableid: 24475,
@@ -91,7 +94,7 @@ export default {
           },
           {
             style: "input", //输入框类型
-            label: "数字编号", //输入框前文字
+            label: vmI18n.t('form_label.numberCode'), //数字编号 输入框前文字
             value: "numNumber", //输入框的值
             width: "24", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: "", //输入框后带的图标,暂只有输入框支持
@@ -104,7 +107,7 @@ export default {
             style: "date",
             type: "datetimerange", //日期组件类型,默认为data  (daterange)为双日期区间选择
             value: "timeArr",
-            label: "修改时间",
+            label: vmI18n.t('table_label.modificationTime'),//修改时间
             width: "24",
             format: "yyyy-MM-dd HH:mm:ss", //格式参照burgeonui
             placeholder: ""

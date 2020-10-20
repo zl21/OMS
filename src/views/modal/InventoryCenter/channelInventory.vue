@@ -1,8 +1,13 @@
 <template>
   <div style="width:250px" class="gf">
-    <p class="title">是否确认同步库存？</p>
+    <!-- 是否确认同步库存？ -->
+    <p class="title">{{vmI18n.t('mmodalTips.by')}}</p>
     <div class="dialog-footer">
-      <Button type="primary" size="small" @click="determine">确定</Button>
+      <!-- 确定 -->
+      <Button type="primary" size="small" @click="determine">
+        {{vmI18n.t("common.determine")}}
+      </Button>
+      <!-- 取消 -->
       <Button
         type="error"
         ghost
@@ -11,7 +16,7 @@
           () => {
             this.$emit('closeActionDialog');
           }
-        ">取消</Button>
+        ">{{ vmI18n.t("common.cancel") }}</Button>
     </div>
   </div>
 </template>
@@ -22,7 +27,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      
+      vmI18n: window.vmI18n
     };
   },
 
@@ -30,9 +35,11 @@ export default {
     determine() {
       let self = this;
       let url = "";
-      if (self.$parent.title === "库存按查询条件同步")
+      // 库存按查询条件同步
+      if (self.$parent.title === self.vmI18n.t("modalTitle.z0"))
         url = "/p/cs/storage/manualSynchChannelStorageByQuery";
-      else if (self.$parent.title === "商品按查询条件同步")
+        // 商品按查询条件同步
+      else if (self.$parent.title === self.vmI18n.t("modalTitle.z1"))
         url = "/p/cs/storage/manualCalcAndSynchChannelProduct";
       // let paramsObj = self.$parent.$parent.formObj.fixedcolumns;
       // 获取搜索form表单的对象

@@ -46,12 +46,13 @@
     <!-- 导出 -->
     <Modal
       v-model="warningModal"
-      title="警告"
+      :title="vmI18n.t('modalTitle.warning')"
       width="420"
       @on-ok="warningOk"
       :mask="true"
     >
-      <p>当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？</p>
+      <!-- <p>当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？</p> -->
+      <p>{{ vmI18n.t("modalTips.z0") }}</p>
     </Modal>
   </div>
 </template>
@@ -200,12 +201,13 @@ export default {
   mixins: [isFavoriteMixin, customPagingMixins, buttonPermissionsMixin],
   data() {
     return {
+      vmI18n: window.vmI18n,
       allTableArr: [],
       selectArr: [],
       // 弹框配置 导入
       importTable: {
         refFuns: "confirmFun",
-        confirmTitle: "导入",
+        confirmTitle: vmI18n.t("modalTitle.import"),
         titleAlign: "center", //设置标题是否居中 center left
         width: "600",
         scrollable: false, //是否可以滚动
@@ -225,24 +227,28 @@ export default {
         typeAll: "error", //按钮统一风格样式
         buttons: [
           {
-            text: "查找", //按钮文本
+            // text: "查找", //按钮文本
+            text: vmI18n.t("btn.find"), //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.find();
             }, //按钮点击事件
           },
           {
-            text: "新增", //按钮文本
+            // text: "新增", //按钮文本
+            text: vmI18n.t("btn.add"), //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.$store.commit("customize/TabHref", {
                 id: -1, //id
                 type: "action", //类型action
                 name: "payableAdjustAdd", //文件名
-                label: "赔付单新增", //tab中文名
+                // label: "赔付单新增", //tab中文名
+                label: vmI18n.t("panel_label.add_claimForm"), //tab中文名
                 query: Object.assign({
                   id: -1, //id
-                  tabTitle: "赔付单新增", //tab中文名
+                  // tabTitle: "赔付单新增", //tab中文名
+                  tabTitle: vmI18n.t("panel_label.add_claimForm"), //tab中文名
                 }), //带的参数
               });
             }, //按钮点击事件
@@ -258,35 +264,40 @@ export default {
           //   } //按钮点击事件
           // },
           {
-            text: "导出", //按钮文本
+            // text: "导出", //按钮文本
+            text: vmI18n.t("btn.export"), //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.exportClick();
             }, //按钮点击事件
           },
           {
-            text: "作废", //按钮文本
+            // text: "作废", //按钮文本
+            text: vmI18n.t("btn.void"), //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.invalid();
             }, //按钮点击事件
           },
           {
-            text: "财审", //按钮文本
+            // text: "财审", //按钮文本
+            text: vmI18n.t("btn.financeAudit"), //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.fiAudit();
             }, //按钮点击事件
           },
           {
-            text: "客审", //按钮文本
+            // text: "客审", //按钮文本
+            text: vmI18n.t("btn.custAudit"), //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.custAudit();
             }, //按钮点击事件
           },
           {
-            text: "反客审", //按钮文本
+            // text: "反客审", //按钮文本
+            text: vmI18n.t("btn.deCustAudit"), //按钮文本
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.unCustAudit();
@@ -295,7 +306,8 @@ export default {
           {
             icon: "iconfont iconbj_col", //按钮图标
             size: "small", //按钮大小
-            name: "收藏",
+            // name: "收藏",
+            name: vmI18n.t("btn.collection"),
             disabled: false, //按钮禁用控制
             btnclick: () => {
               let _this = this;
@@ -308,44 +320,52 @@ export default {
         formData: [
           {
             style: "input", //文本录入
-            label: "单据编号",
+            // label: "单据编号",
+            label: vmI18n.t("form_label.billNo"),
             value: "BILL_NO",
             width: "6",
           },
           {
             style: "input", //文本录入
-            label: "平台单号",
+            // label: "平台单号",
+            label: vmI18n.t("form_label.platform_billNo"),
             value: "TID",
             width: "6",
           },
           {
             style: "select", //下拉框类型
-            label: "单据状态", //下拉框前的值
+            // label: "单据状态", //下拉框前的值
+            label: vmI18n.t("form_label.billStatus"),
             width: "6", //所占宽度宽度
             value: "BILL_STATUS", //输入框的值
             multiple: true,
             options: [
               {
-                label: "未审核",
+                // label: "未审核",
+                label: vmI18n.t("common.unAudit"),
                 value: "1",
               },
               {
-                label: "已客审",
+                // label: "已客审",
+                label: vmI18n.t("common.custAudited"),
                 value: "2",
               },
               {
-                label: "已财审",
+                // label: "已财审",
+                label: vmI18n.t("common.financeAudited"),
                 value: "3",
               },
               {
-                label: "已作废",
+                // label: "已作废",
+                label: vmI18n.t("common.voided"),
                 value: "4",
               },
             ],
           },
           {
             style: "input",
-            label: "来源单据编号",
+            // label: "来源单据编号",
+            label: vmI18n.t("form_label.source_billNo"),
             value: "ORDER_NO",
             width: "6",
           },
@@ -365,7 +385,8 @@ export default {
               isnotnull: false, //是否必填
               isuppercase: false, //是否转大写
               length: 65535, //最大长度是多少
-              name: "实体仓名称", //input前面显示的lable值
+              // name: "实体仓名称", //input前面显示的lable值
+              name: vmI18n.t("form_label.physicalWarehouseName"),
               readonly: false, //是否可编辑，对应input   readonly属性
               reftable: "CP_C_PHY_WAREHOUSE", //对应的表
               reftableid: 23451, //对应的表ID
@@ -397,7 +418,8 @@ export default {
               isnotnull: false, //是否必填
               isuppercase: false, //是否转大写
               length: 65535, //最大长度是多少
-              name: "快递公司名称", //input前面显示的lable值
+              // name: "快递公司名称", //input前面显示的lable值
+              name: vmI18n.t("form_label.expressCompanyName"),
               readonly: false, //是否可编辑，对应input   readonly属性
               reftable: "CP_C_LOGISTICS", //对应的表
               row: 1,
@@ -427,7 +449,8 @@ export default {
               isnotnull: false, //是否必填
               isuppercase: false, //是否转大写
               length: 65535, //最大长度是多少
-              name: "商品条码", //input前面显示的lable值
+              // name: "商品条码", //input前面显示的lable值
+              name: vmI18n.t("form_label.commodityCode"),
               readonly: false, //是否可编辑，对应input   readonly属性
               reftable: "PS_C_SKU", //对应的表
               row: 1,
@@ -443,13 +466,15 @@ export default {
           },
           {
             style: "input", //文本录入
-            label: "国标码",
+            // label: "国标码",
+            label: vmI18n.t("form_label.gBCode"),
             value: "GBCODE",
             width: "6",
           },
           {
             style: "select", //下拉框类型
-            label: "调整类型", //下拉框前的值
+            // label: "调整类型", //下拉框前的值
+            label: vmI18n.t("form_label.adjustmentType"),
             width: "6", //所占宽度宽度
             value: "ADJUST_TYPE", //输入框的值
             multiple: true,
@@ -459,7 +484,8 @@ export default {
           },
           {
             style: "select", //下拉框类型
-            label: "单据类型", //下拉框前的值
+            // label: "单据类型", //下拉框前的值
+            label: vmI18n.t("form_label.billType"),
             width: "6", //所占宽度宽度
             value: "BILL_TYPE", //输入框的值
             multiple: true,
@@ -469,7 +495,8 @@ export default {
           },
           {
             style: "select", //下拉框类型
-            label: "渠道类型", //下拉框前的值
+            // label: "渠道类型", //下拉框前的值
+            label: vmI18n.t("form_label.channelType"),
             width: "6", //所占宽度宽度
             value: "RESERVE_BIGINT01", //输入框的值
             multiple: true,
@@ -480,7 +507,8 @@ export default {
           {
             style: "date",
             type: "datetimerange",
-            label: "创建日期",
+            // label: "创建日期",
+            label: vmI18n.t("form_label.creationDate"),
             width: "6",
             value: "CREATIONDATE",
             format: "yyyy-MM-dd HH:mm:ss", //格式参照burgeonui
@@ -490,7 +518,8 @@ export default {
           {
             style: "date",
             type: "datetimerange",
-            label: "客审日期",
+            // label: "客审日期",
+            label: vmI18n.t("form_label.custAuditDate"),
             width: "6",
             value: "GUEST_TRIAL_TIME",
             format: "yyyy-MM-dd HH:mm:ss", //格式参照burgeonui
@@ -500,7 +529,8 @@ export default {
           {
             style: "date",
             type: "datetimerange",
-            label: "财审日期",
+            // label: "财审日期",
+            label: vmI18n.t("form_label.financeAuditDate"),
             width: "6",
             value: "FINANCIAL_TRIAL_TIME",
             format: "yyyy-MM-dd HH:mm:ss", //格式参照burgeonui
@@ -517,7 +547,8 @@ export default {
       }, // form表单
       labelList: [
         {
-          label: "全部",
+          // label: "全部",
+          label: vmI18n.t("panel_label.all"),
           value: "1",
           isShow: true,
         },
@@ -527,7 +558,153 @@ export default {
       agTableConfig: {
         // isIndex: true, // 如果要自定义序号，则将此key的值设置为true，而后自己定义序号生成器，可参考promotionlist.vue
         tableHeight: "440px",
-        columnDefs: baseColumnDefs,
+        columnDefs: [
+          {
+            // headerName: "单据状态",
+            headerName: vmI18n.t('form_label.billStatus'),
+            field: "BILL_STATUS_NAME",
+          },
+          {
+            // headerName: "单据编号",
+            headerName: vmI18n.t('form_label.billNo'),
+            field: "BILL_NO",
+          },
+          {
+            // headerName: "平台单号",
+            headerName: vmI18n.t('form_label.platform_billNo'),
+            field: "TID",
+          },
+          {
+            // headerName: "单据类型",
+            headerName: vmI18n.t('form_label.billType'),
+            field: "BILL_TYPE_NAME",
+          },
+          {
+            // headerName: "调整类型",
+            headerName: vmI18n.t('form_label.adjustmentType'),
+            field: "ADJUST_TYPE_NAME",
+          },
+          {
+            // headerName: "店铺名称",
+            headerName: vmI18n.t('table_label.shopName'),
+            field: "CP_C_SHOP_TITLE",
+          },
+          {
+            // headerName: "实体仓",
+            headerName: vmI18n.t('table_label.physicalWarehouse'),
+            field: "CP_C_PHY_WAREHOUSE_ENAME",
+          },
+          {
+            // headerName: "赔付快递公司",
+            headerName: vmI18n.t('table_label.compensation_expressCompany'),
+            field: "CP_C_LOGISTICS_ENAME",
+          },
+          {
+            // headerName: "快递单号",
+            headerName: vmI18n.t('table_label.expressNo'),
+            field: "LOGISTICS_NO",
+          },
+          {
+            // headerName: "总应付金额",
+            headerName: vmI18n.t('table_label.total_amountDue'),
+            field: "PAYABLE_PRICE",
+          },
+          {
+            // headerName: "支付方式",
+            headerName: vmI18n.t('table_label.paymentWay'),
+            field: "PAY_TYPE_NAME",
+          },
+          {
+            // headerName: "备注",
+            headerName: vmI18n.t('table_label.remarks'),
+            field: "REMARK",
+          },
+          {
+            // headerName: "来源单据编号",
+            headerName: vmI18n.t('form_label.source_billNo'),
+            field: "ORDER_NO",
+          },
+          {
+            // headerName: "顾客电话",
+            headerName: vmI18n.t('table_label.custTelephone'),
+            field: "CUSTOMER_TEL",
+          },
+          {
+            // headerName: "顾客姓名",
+            headerName: vmI18n.t('table_label.custName'),
+            field: "CUSTOMER_NAME",
+          },
+          {
+            // headerName: "支付宝号",
+            headerName: vmI18n.t('table_label.alipay'),
+            field: "ALIPAY_ACCOUNT",
+          },
+          {
+            // headerName: "会员昵称",
+            headerName: vmI18n.t('table_label.vip_nickname'),
+            field: "CUSTOMER_NICK",
+          },
+          {
+            // headerName: "付款时间",
+            headerName: vmI18n.t('table_label.paymentTime'),
+            field: "PAY_TIME",
+          },
+          {
+            // headerName: "创建时间",
+            headerName: vmI18n.t('table_label.creationTime'),
+            field: "CREATIONDATE",
+          },
+          {
+            // headerName: "创建人",
+            headerName: vmI18n.t('table_label.creator'),
+            field: "OWNERENAME",
+          },
+          {
+            // headerName: "修改时间",
+            headerName: vmI18n.t('table_label.modificationTime'),
+            field: "MODIFIEDDATE",
+          },
+          {
+            // headerName: "修改人",
+            headerName: vmI18n.t('table_label.reviser'),
+            field: "MODIFIERENAME",
+          },
+          {
+            // headerName: "客审时间",
+            headerName: vmI18n.t('table_label.custAuditTime'),
+            field: "GUEST_TRIAL_TIME",
+          },
+          {
+            // headerName: "客审人",
+            headerName: vmI18n.t('table_label.custAuditMan'),
+            field: "GUEST_TRIAL_ENAME",
+          },
+          {
+            // headerName: "财审时间",
+            headerName: vmI18n.t('table_label.financeAuditTime'),
+            field: "FINANCIAL_TRIAL_TIME",
+          },
+          {
+            // headerName: "财审人",
+            headerName: vmI18n.t('table_label.financeAuditMan'),
+            field: "FINANCIAL_TRIAL_ENAME",
+          },
+          {
+            // headerName: "作废时间",
+            headerName: vmI18n.t('table_label.voidTime'),
+            field: "DEL_TIME",
+          },
+          {
+            // headerName: "作废人",
+            headerName: vmI18n.t('table_label.voidMan'),
+            field: "DELENAME",
+          },
+          {
+            // headerName: "可用",
+            headerName: vmI18n.t('table_label.usable'),
+            field: "ISACTIVE",
+          },
+        ],
         rowData: [],
         renderArr: {
           ACTION_LOG: (params) => {
@@ -593,17 +770,20 @@ export default {
       let self = this;
       let arrBillType = await this.getColOption(
         "AC_F_PAYABLE_ADJUSTMENT",
-        "基本信息",
+        // "基本信息",
+        vmI18n.t("common.baseInformation"),
         "BILL_TYPE"
       );
       let arrAdjustType = await this.getColOption(
         "AC_F_PAYABLE_ADJUSTMENT",
-        "基本信息",
+        // "基本信息",
+        vmI18n.t("common.baseInformation"),
         "ADJUST_TYPE"
       );
       let arrChannel = await this.getColOption(
         "AC_F_PAYABLE_ADJUSTMENT",
-        "基本信息",
+        // "基本信息",
+        vmI18n.t("common.baseInformation"),
         "RESERVE_BIGINT01"
       );
       self.formConfig.formData.map((item) => {
@@ -721,7 +901,8 @@ export default {
         data: fromdata,
       }).then((res) => {
         if (res.data.data.code === 0) {
-          self.$Message.success("反客审成功!");
+          // self.$Message.success("反客审成功!");
+          self.$Message.success(vmI18n.t("modalTips.z1"));
           self.getList();
         } else {
           self.$Message.error(res.data.data.message);
@@ -887,10 +1068,12 @@ export default {
         id: row.ID, //单据id
         type: "action", //类型action
         name: "payableAdjustAdd", //文件名
-        label: "赔付单详情", //tab中文名
+        // label: "赔付单详情", //tab中文名
+        label: vmI18n.t("panel_label.details_claimForm"),
         query: Object.assign({
           id: row.ID, //单据id
-          tabTitle: "赔付详情", //tab中文名
+          // tabTitle: "赔付单详情", //tab中文名
+          tabTitle: vmI18n.t("panel_label.details_claimForm"),
         }), //带的参数
       });
     },
@@ -920,7 +1103,7 @@ export default {
             // 已作废
             return { color: "gray" };
           }
-          if (params.data.BILL_STATUS ===3) {
+          if (params.data.BILL_STATUS === 3) {
             // 已财审
             return { color: "blue" };
           }
@@ -963,18 +1146,21 @@ export default {
           data: idList,
         }).then((res) => {
           if (res.data.code === 0 && res.data.data !== null) {
-            let mes = res.data.message || "导出成功！";
+            // let mes = res.data.message || "导出成功！";
+            let mes = res.data.message || vmI18n.t("modalTips.z2");
             _this.$Message.success(mes);
             _this.downloadUrlFile(res.data.data);
             // return (window.location = res.data.data);
           } else {
-            let err = res.data.message || "失败！";
+            // let err = res.data.message || "失败！";
+            let err = res.data.message || vmI18n.t("modalTips.z3");
             _this.$Message.error(err);
           }
         });
       } else {
         if (_this.agTableConfig.rowData.length === 0) {
-          return _this.$Message.error("列表没有数据,无法导出!");
+          // return _this.$Message.error("列表没有数据,无法导出!");
+          return _this.$Message.error(vmI18n.t("modalTips.z4"));
         }
         _this.warningModal = true;
       }
@@ -1045,12 +1231,14 @@ export default {
         data: param,
       }).then((res) => {
         if (res.data.code === 0 && res.data.data !== null) {
-          let mes = res.data.message || "导出成功！";
+          // let mes = res.data.message || "导出成功！";
+          let mes = res.data.message || vmI18n.t("modalTips.z2");
           _this.$Message.success(mes);
           _this.downloadUrlFile(res.data.data);
           // return (window.location = res.data.data);
         } else {
-          let err = res.data.message || "失败！";
+          //   let err = res.data.message || "失败！";
+          let err = res.data.message || vmI18n.t("modalTips.z3");
           _this.$Message.error(err);
         }
       });
