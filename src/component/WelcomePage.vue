@@ -1,5 +1,6 @@
 <template>
   <div class="welcomepage">
+    <!--     
     <div class="container">
       <Dropdown>
         <a href="javascript:void(0)">
@@ -19,7 +20,8 @@
       <br />
       <button>{{ vmI18n.t("btn.text") }}</button>
       <span>{{ vmI18n.t("message.hello") }}</span>
-    </div>
+    </div> 
+    -->
   </div>
 </template>
 
