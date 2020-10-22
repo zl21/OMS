@@ -49,9 +49,9 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "@burgeon/business-components": "git+ssh://git@gitee.com:product_centerfront_end/burgeon-private-npm.git#feature/business-components",
-    "@burgeon/oms-theme": "git+ssh://git@gitee.com:product_centerfront_end/burgeon-private-npm.git#feature/theme",
-    "@burgeon/internationalization": "git+ssh://git@gitee.com:product_centerfront_end/burgeon-private-npm.git#feature/internationalization",
+    "@burgeon/business-components": "^1.0.4",
+    "@burgeon/internationalization": "^1.0.1",
+    "@burgeon/oms-theme": "^1.0.0",
     "@syman/ark-ui": "^1.0.61",
     "@syman/burgeon-r3": "^1.0.32",
     "@syman/burgeon-r3-components": "^1.0.10",
