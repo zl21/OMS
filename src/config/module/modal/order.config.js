@@ -2,7 +2,7 @@
 export default {
   //JIT配货单修改仓库测试弹框
   modifyWarehouse: {
-    component: () => import("@/views/modal/InterfacePlatform/downLoadAll.vue"),
+    component: () => import("@/views/modal/orderCenter/modifyWarehouse.vue"),
   },
   //JIT拣货单 (创建拣货单)
   vipCreatePickorder: {
