@@ -1,9 +1,6 @@
 // import arkUI from '@syman/ark-ui';
 import R3 from '@syman/burgeon-r3';
 
-// 国际化
-import i18n from '@burgeon/internationalization/i18n/i18n.js'
-
 // 企业Logo、Banner配置信息
 import enterpriseLogo from './src/assets/image/logo.png';
 import enterpriseBanner from './src/assets/image/banner.png';
@@ -15,7 +12,8 @@ import customizedModalConfig from './src/config/customized.modal.config';
 import apiPath from '@/assets/js/api/path/index.js'
 import '@burgeon/oms-theme/theme/custom.less'; // 主题文件
 import customizedTheme from './src/config/customized.theme.js';//主题配置
-
+import externalTreeDatasConfig from './src/config/externalTreeDatas.config'; // 树结构配置
+import i18n from '@burgeon/internationalization/i18n/i18n.js'; // 国际化
 // import './static/theme/custom.less'; // 主题文件
 // import './static/theme/theme.less'; // 自定义主题文件
 // import '@syman/ark-ui/dist/styles/ark-ui.css';
@@ -47,46 +45,13 @@ Vue.prototype.axios = request;
 Vue.prototype.request = request;
 Vue.prototype.httpForm = httpFormdata;
 Vue.prototype.$httpApi = apiPath
-
 Vue.prototype.$store = store;
-
-const {
-  network,
-  urlSearchParams
-} = R3;
-window.R3 = R3;
-
-window.vmI18n = i18n;
-
-Vue.prototype.$network = network;
-Vue.prototype.$urlSearchParams = urlSearchParams;
+window.R3 = R3; // 暴露R3为全局变量
+window.vmI18n = i18n; // 挂载国际化
 Vue.prototype.$theme = customizedTheme;//将主题方法挂载到原型上
 
 // 设置主题调用方法
-
 customizedTheme.appendLink('skyBlue')
-
-function restructureMenuTreeData(data) {
-  return data.map((item) => {
-    item.NAME = item.ENAME;
-    // item.id = item.ID;
-    if (item.children && item.children.length > 0) {
-      restructureMenuTreeData(item.children);
-    }
-    return item;
-  });
-}
-
-function getTreeChildren(pnode, arr) {
-  pnode.children = arr.filter(item => item.CP_C_ORGUP_ID === pnode.ID);
-  pnode.children.forEach((item) => {
-    item.lastChild = false;
-    item.ID = item.ENAME;
-    // item.expand = true;
-    pnode.children[pnode.children.length - 1].lastChild = true;
-    getTreeChildren(item, arr);
-  });
-}
 
 // 老框架引入的 自定义界面内需要的资源
 R3.launchApplication({
@@ -113,56 +78,5 @@ R3.launchApplication({
   isCommonTable: false, // 是否开启普通表格，默认关闭
   projectRoutes: projectRouterConfig, // 项目自定义路由，一般情况下用不到此配置
   // quietRoutes: ['/register', '/password', '/forgotPassword'], // 外置路由
-  externalTreeDatas: {
-    // 供应商档案
-    CP_C_SUPPLIER: () => async () => {
-      let data = [];
-      const formdata = new FormData();
-      formdata.append('param', 'IN');
-      await network.post('/p/c/cpCHrorgTree', formdata).then((res) => {
-        console.log(res);
-        // data = restructureMenuTreeData(res.data);
-        data = res.data;
-        if (res.data.code === 0) {}
-      });
-      const treeData = {
-        data,
-        name: 'CP_C_HRORG_ID'
-      };
-      return treeData;
-    },
-    // 员工档案
-    CP_C_EMP: () => async () => {
-      let data = [];
-      const formdata = new FormData();
-      formdata.append('param', 'IN');
-      await network.post('/p/c/cpCHrorgTree', formdata).then((res) => {
-        console.log(res);
-        // data = restructureMenuTreeData(res.data);
-        data = res.data;
-        if (res.data.code === 0) {}
-      });
-      const treeData = {
-        data,
-        name: 'ID'
-      };
-      return treeData;
-    },
-    // 组织中心
-    CP_C_INORG: () => async () => {
-      let data = [];
-      const formdata = new FormData();
-      formdata.append('param', 'IN');
-      await network.post('/p/c/cpCHrorgTree', formdata).then((res) => {
-        console.log(res);
-        // data = restructureMenuTreeData(res.data);
-        data = res.data;
-      });
-      const treeData = {
-        data,
-        name: 'ID'
-      };
-      return treeData;
-    }
-  }
+  externalTreeDatas: externalTreeDatasConfig,
 });
