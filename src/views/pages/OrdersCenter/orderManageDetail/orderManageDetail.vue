@@ -939,12 +939,10 @@ feature : 订单中心-零售发货单详情
 <style lang="less" scoped>
   .order {
     .order-btn {
-      // padding: 10px 10px 0px 10px;
-      padding-top: 10px;
       width: calc(100% - 190px);
       z-index: 1000;
       position: fixed;
-      top: 84px;
+      top: 93px;
       background: #fff;
     }
 

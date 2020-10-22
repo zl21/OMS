@@ -4103,16 +4103,6 @@
             align-items: center !important;
         }
 
-        /*.burgeon-table-cell {*/
-        /*overflow: inherit !important;*/
-        /*}*/
-        // .burgeon-table td {
-        //   height: 50px !important;
-        // }
-        .btn {
-            margin-top: 8px;
-        }
-
         .businessLabel {
             margin-top: 8px;
         }
