@@ -5,15 +5,18 @@
       <div style="float:left;marginTop:8px;">
         <RadioGroup v-model="radioValue" @on-change="radioChange">
           <Radio label="2">
-            <span>按页面已勾选订单</span>
+            <!-- 按页面已勾选订单 -->
+            <span>{{vmI18n.t("modalTips.cd")}}</span>
           </Radio>
           <Radio label="1">
-            <span>按筛选条件选中订单</span>
+            <!-- 按筛选条件选中订单 -->
+            <span>{{vmI18n.t("modalTips.ce")}}</span>
           </Radio>
         </RadioGroup>
       </div>
+      <!-- 商品SKU -->
       <div style="float:right">
-        商品SKU:
+        {{vmI18n.t('table_label.commoditySKU')}}:
         <Input
           v-model="searchValue"
           icon="ios-search"
@@ -29,8 +32,10 @@
       <Table :columns="columns" :data="data"></Table>
     </div>
     <div class="dialog-footer">
-      <Button style="marginLeft:8px;" type="error" @click="confirm">确定</Button>
-      <Button type="error" ghost @click="()=>{this.$parent.$parent.closeConfirm();}">取消</Button>
+      <!-- 确定 -->
+      <Button style="marginLeft:8px;" type="error" @click="confirm">{{vmI18n.t("common.determine")}}</Button>
+      <!-- 取消 -->
+      <Button type="error" ghost @click="()=>{this.$parent.$parent.closeConfirm();}">{{vmI18n.t("common.cancel")}}</Button>
     </div>
   </div>
 </template>
@@ -40,21 +45,22 @@ import axios from "axios";
 export default {
   data() {
     return {
+      vmI18n: window.vmI18n,
       pageLoad: false,
       radioValue: '2',
       searchValue: '',
       qty: '1',
       columns: [
         {
-          title: '商品SKU',
+          title: vmI18n.t('table_label.commoditySKU'),//商品SKU
           key: 'ECODE'
         },
         {
-          title: '商品名称',
+          title: vmI18n.t('table_label.productName'),//商品名称
           key: 'PS_C_PRO_ENAME'
         },
         {
-          title: '商品SKU名称',
+          title: vmI18n.t('table_label.productSKUname'),//商品SKU名称
           key: 'SPEC'
         },
         // {
@@ -80,7 +86,7 @@ export default {
     search(value) {   //sku查询
       let self = this;
       if (!self.searchValue) {
-        self.$Message.warning('请输入商品SKU');
+        self.$Message.warning(self.vmI18n.t("pHolder.z4"));//请输入商品SKU
         return;
       }
       axios({
@@ -91,20 +97,20 @@ export default {
         console.log(res);
         if (res.data.code == 0) {
           if (res.data.data.data.length == 0) {
-            this.$Message.warning('查询数据为空!');
+            this.$Message.warning(this.vmI18n.t("modalTips.r8"));//查询数据为空!
             return;
           }
           res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是'
           self.data = res.data.data.data
         } else {
-          this.$Message.warning('sku查询失败!');
+          this.$Message.warning(this.vmI18n.t("modalTips.zt"));//sku查询失败!
         }
       })
     },
     confirm() {
       let self = this;
       if (self.data.length == 0) {
-        self.$Message.warning('sku不能为空!');
+        self.$Message.warning(this.vmI18n.t("modalTips.cg"));//sku不能为空!
         return
       }
       let result = {}
@@ -118,7 +124,7 @@ export default {
         result = self.componentData.a_1
       } else if (self.radioValue == '2') {
         if (self.componentData.a_2.length == 0) {
-          self.$Message.warning('请勾选订单数据!');
+          self.$Message.warning(this.vmI18n.t("modalTips.zu"));//请勾选订单数据!
           return
         }
         result['ids'] = self.componentData.a_2;

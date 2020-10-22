@@ -1,6 +1,8 @@
 // import arkUI from '@syman/ark-ui';
 import R3 from '@syman/burgeon-r3';
 
+// 国际化
+import i18n from '@burgeon/internationalization/i18n/i18n.js'
 
 // 企业Logo、Banner配置信息
 import enterpriseLogo from './src/assets/image/logo.png';
@@ -26,8 +28,6 @@ import './static/promotion.icofont/iconfont.css'; //促销iconfont
 import '@/assets/css/css_1_3/index.less'; // customize-1.3自定义界面icon,下拉单选
 import '@/assets/css/css_1_3/common.less';
 import '@/assets/css/css_1_3/reset.less';
-// 老框架引入的 自定义界面内需要的css资源
-
 
 // 老框架引入的 自定义界面内需要的js资源
 import request, {
@@ -49,11 +49,15 @@ Vue.prototype.httpForm = httpFormdata;
 Vue.prototype.$httpApi = apiPath
 
 Vue.prototype.$store = store;
+
 const {
   network,
   urlSearchParams
 } = R3;
 window.R3 = R3;
+
+window.vmI18n = i18n;
+
 Vue.prototype.$network = network;
 Vue.prototype.$urlSearchParams = urlSearchParams;
 Vue.prototype.$theme = customizedTheme;//将主题方法挂载到原型上

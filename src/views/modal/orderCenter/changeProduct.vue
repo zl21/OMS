@@ -3,17 +3,24 @@
   <div class="changeProduct">
     <div class="i_head">
       <div class="i_body">
-        <p>被替换商品SKU</p>
+        <!-- <p>被替换商品SKU</p> -->
+        <p>{{ vmI18n.t("modalTips.a1") }}</p>
         <div class="search">
           <div class="skuBox">
             <re-form :formConfig="formConfig" />
           </div>
           <div class="search_child">
-            <span class="lable">商品名称:</span>
+            <!-- <span class="lable">商品名称:</span> -->
+            <span class="lable"
+              >{{ vmI18n.t("table_label.productName") }}:</span
+            >
             <Input v-model="proName" @on-enter="search('one')" />
           </div>
           <div class="search_child">
-            <Button type="primary" @click="search('one')">搜索</Button>
+            <!-- 搜索 -->
+            <Button type="primary" @click="search('one')">{{
+              vmI18n.t("btn.search")
+            }}</Button>
           </div>
         </div>
         <Table
@@ -26,17 +33,24 @@
         ></Table>
       </div>
       <div class="i_body1">
-        <p>替换后商品SKU</p>
+        <!-- <p>替换后商品SKU</p> -->
+        <p>{{ vmI18n.t("modalTips.a1") }}</p>
         <div class="search">
           <div class="skuBox">
             <re-form :formConfig="replaceFormConfig" />
           </div>
           <div class="search_child">
-            <span class="lable">商品名称:</span>
+            <!-- <span class="lable">商品名称:</span> -->
+            <span class="lable"
+              >{{ vmI18n.t("table_label.productName") }}:</span
+            >
             <Input v-model="replace_proName" @on-enter="search('two')" />
           </div>
           <div class="search_child">
-            <Button type="primary" @click="search('two')">搜索</Button>
+            <!-- 搜索 -->
+            <Button type="primary" @click="search('two')">{{
+              vmI18n.t("btn.search")
+            }}</Button>
           </div>
         </div>
         <Table
@@ -52,9 +66,11 @@
     </div>
     <div class="i_food">
       <span class="title">
-        <span>将</span>
+        <!-- <span>将</span> -->
+        <span>{{ vmI18n.t("modalTips.zf") }}</span>
         <span style="color: #003200">{{ onRowClickText }}</span>
-        <span>替换为</span>
+        <!-- <span>替换为</span> -->
+        <span>{{ vmI18n.t("modalTips.zg") }}</span>
         <span style="color: #003200">{{ onRowClickReplaceText }}</span>
       </span>
       <div class="dialog-footer">
@@ -67,9 +83,14 @@
               this.$parent.$parent.closeConfirm();
             }
           "
-          >取消</Button
         >
-        <Button type="primary" size="small" @click="confirm">确定</Button>
+          <!-- 取消 -->
+          {{ vmI18n.t("common.cancel") }}
+        </Button>
+        <Button type="primary" size="small" @click="confirm">
+          <!-- 确定 -->
+          {{ vmI18n.t("common.determine") }}
+        </Button>
       </div>
     </div>
   </div>
@@ -84,6 +105,7 @@ export default {
   },
   data() {
     return {
+      vmI18n: window.vmI18n,
       pro: "",
       replace_pro: "",
       radioValue: "2",
@@ -311,15 +333,18 @@ export default {
       tableLoad: false,
       columns: [
         {
-          title: "商品SKU",
+          // title: "商品SKU",
+          title: vmI18n.t("table_label.commoditySKU"),
           key: "ECODE",
         },
         {
-          title: "商品名称",
+          // title: "商品名称",
+          title: vmI18n.t("table_label.productName"),
           key: "PS_C_PRO_ENAME",
         },
         {
-          title: "商品SKU名称",
+          // title: "商品SKU名称",
+          title: vmI18n.t("table_label.productSKUname"),
           key: "SPEC",
         },
       ],
@@ -385,7 +410,8 @@ export default {
               self.onRowClickReplaceText = self.replace_data[0].ECODE;
             }
           } else {
-            this.$Message.warning("sku查询失败!");
+            // this.$Message.warning("sku查询失败!");
+            this.$Message.warning(vmI18n.t("modalTips.zt"));
           }
           this[loadName] = false;
         })
@@ -396,15 +422,18 @@ export default {
     confirm() {
       let self = this;
       if (JSON.stringify(self.onRowClickData) == "{}") {
-        self.$Message.warning("替换前商品sku不能为空!");
+        // self.$Message.warning("替换前商品sku不能为空!");
+        self.$Message.warning(vmI18n.t("modalTips.yf"));
         return;
       }
       if (JSON.stringify(self.onRowClickReplaceData) == "{}") {
-        self.$Message.warning("替换后商品sku码不能为空!");
+        // self.$Message.warning("替换后商品sku码不能为空!");
+        self.$Message.warning(vmI18n.t("modalTips.yg"));
         return;
       }
       if (self.onRowClickData.ECODE == self.onRowClickReplaceData.ECODE) {
-        self.$Message.warning("替换商品与被替换商品不能相同!");
+        // self.$Message.warning("替换商品与被替换商品不能相同!");
+        self.$Message.warning(vmI18n.t("modalTips.yh"));
         return;
       }
       let result = {};
@@ -418,7 +447,8 @@ export default {
         PS_C_PRO_ID: self.onRowClickReplaceData.PS_C_PRO_ID,
       };
       if (self.componentData.a_2.length == 0) {
-        self.$Message.warning("请勾选订单数据!");
+        // self.$Message.warning("请勾选订单数据!");
+        self.$Message.warning(vmI18n.t("modalTips.zu"));
         return;
       }
       result.ids = self.componentData.a_2;
@@ -444,7 +474,8 @@ export default {
                 props: {
                   columns: [
                     {
-                      title: "提示信息",
+                      // title: "提示信息",
+                      title: vmI18n.t("modalTitle.tips"),
                       key: "message",
                     },
                   ],
@@ -468,7 +499,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-@import '~@burgeon/oms-theme/skin/public.less';
+@import "~@burgeon/oms-theme/skin/public.less";
 .changeProduct {
   .i_head {
     display: flex;

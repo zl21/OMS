@@ -5,9 +5,10 @@
       <Spin></Spin>
     </div>
     <div class="jordanModal_box">
-      <label for>修改仓库:</label>
+      <!-- <label for>修改仓库:</label> -->
+      <label for>{{ vmI18n.t("btn.modifyWarehouse") }}:</label>
       <DropDownSelectFilter
-        style="width:250px;"
+        style="width: 250px"
         :single="true"
         :data="foreignKeyLink"
         :zIndex="zIndex"
@@ -24,17 +25,23 @@
       ></DropDownSelectFilter>
     </div>
     <div class="jordanModal-input-box">
-      <label for>改仓原因:</label>
+      <!-- <label for>改仓原因:</label> -->
+      <label for>{{ vmI18n.t("form_label.changeWarehouse_reasons") }}:</label>
       <!-- <Input class="jordanModal-input" v-model="updateRemark" /> -->
-      <Select class="jordanModal-input" v-model="updateRemark" style="width:200px">
+      <Select
+        class="jordanModal-input"
+        v-model="updateRemark"
+        style="width: 200px"
+      >
         <Option
           v-for="item in updateRemarkOptions"
           :value="item.value"
           :key="item.value"
-        >{{ item.label }}</Option>
+          >{{ item.label }}</Option
+        >
       </Select>
     </div>
-    <jordanBtn :btnConfig="btnConfig" style="margin-top:10px;"></jordanBtn>
+    <jordanBtn :btnConfig="btnConfig" style="margin-top: 10px"></jordanBtn>
   </div>
 </template>
 <script>
@@ -49,17 +56,18 @@ export default {
   components: {
     businessForm,
     jordanBtn,
-    businessActionTable
+    businessActionTable,
   },
   props: {
     componentData: {
       type: Object,
-      default: {}
-    }
+      default: {},
+    },
   },
   computed: {},
   data() {
     return {
+      vmI18n: window.vmI18n,
       isShowFromLoading: false, // 加载
       zIndex: 2500,
       totalRowCount: 0,
@@ -75,15 +83,17 @@ export default {
       updateRemark: "",
       updateRemarkOptions: [
         {
-          label: '原仓缺货改仓',
-          value: '原仓缺货改仓'
-        }, {
-          label: '系统错判改仓',
-          value: '系统错判改仓'
-        }, {
-          label: '新增仓库改仓',
-          value: '新增仓库改仓'
-        }
+          label: "原仓缺货改仓",
+          label: vmI18n.t("other.originalWarehouseOutOfStock_change"),
+        },
+        {
+          label: "系统错判改仓",
+          label: vmI18n.t("other.sysWrongJudgment_change"),
+        },
+        {
+          label: "新增仓库改仓",
+          label: vmI18n.t("other.newWarehouse_change"),
+        },
       ],
       btnConfig: {
         typeAll: "error", //按钮统一风格样式
@@ -91,26 +101,28 @@ export default {
         buttons: [
           {
             type: "", //按钮类型
-            text: "确定", //按钮文本
+            // text: "确定", //按钮文本
+            text: vmI18n.t("common.determine"), //按钮文本
             icon: "", //按钮图标
             size: "small", //按钮大小
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.determine(false);
-            } //按钮点击事件
+            }, //按钮点击事件
           },
           {
             type: "", //按钮类型
-            text: "取消", //按钮文本
+            // text: "取消", //按钮文本
+            text: vmI18n.t("common.cancel"), //按钮文本
             icon: "", //按钮图标
             size: "small", //按钮大小
             disabled: false, //按钮禁用控制
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
-            } //按钮点击事件
-          }
-        ]
-      }
+            }, //按钮点击事件
+          },
+        ],
+      },
     };
   },
   beforeDestroy() {
@@ -129,7 +141,7 @@ export default {
       if (e.keyCode == 27) {
         this.$parent.$parent.closeConfirm();
         this.$parent.$parent.$parent.publicBouncedIndex = {
-          name: "testModal"
+          name: "testModal",
         };
       }
       if (e.keyCode == 13) {
@@ -141,9 +153,10 @@ export default {
       let fromdata = new FormData();
       if (!self.pid) {
         self.$Message.warning({
-          content: "请选择仓库",
+          // content: "请选择仓库",
+          content: vmI18n.t("modalTips.zi"),
           duration: 5,
-          top: 80
+          top: 80,
         });
         return false;
       }
@@ -156,7 +169,7 @@ export default {
         url: "/api/cs/oc/oms/v1/updateWarehouse",
         method: "post",
         cancelToken: true,
-        data: fromdata
+        data: fromdata,
       }).then(function (res) {
         self.isShowFromLoading = false;
         if (res.data.code === 0) {
@@ -171,15 +184,16 @@ export default {
               let isOutOfStockFlag = false; // 由于830不上，所以默认为false，暂注释上面的处理逻辑，之后要加，打开注释即可。
               if (isOutOfStockFlag) {
                 self.$Modal.confirm({
-                  title: "提示",
-                  render: h =>
+                  // title: "提示",
+                  title: vmI18n.t("modalTitle.tips"),
+                  render: (h) =>
                     h("div", {}, [
                       h(
                         "p",
                         {
                           style: {
-                            padding: "10px 15px 10px 0px"
-                          }
+                            padding: "10px 15px 10px 0px",
+                          },
                         },
                         res.data.message
                       ),
@@ -187,11 +201,12 @@ export default {
                         props: {
                           "disabled-hover": true,
                           "highlight-row": false,
-                          "no-data-text": "暂无数据",
+                          // "no-data-text": "暂无数据",
+                          "no-data-text": vmI18n.t("other.noDataAvailable"),
                           columns: res.data.data.columns,
-                          data: res.data.data.prompt_data
-                        }
-                      })
+                          data: res.data.data.prompt_data,
+                        },
+                      }),
                     ]),
                   cancelType: true,
                   showCancel: true,
@@ -204,20 +219,20 @@ export default {
                   },
                   onCancel: () => {
                     self.$parent.$parent.closeConfirm();
-                  }
+                  },
                 });
-
               } else {
                 self.$Modal.error({
-                  title: "提示",
-                  render: h =>
+                  // title: "提示",
+                  title: vmI18n.t("modalTitle.tips"),
+                  render: (h) =>
                     h("div", {}, [
                       h(
                         "p",
                         {
                           style: {
-                            padding: "10px 15px 10px 0px"
-                          }
+                            padding: "10px 15px 10px 0px",
+                          },
                         },
                         res.data.message
                       ),
@@ -225,11 +240,12 @@ export default {
                         props: {
                           "disabled-hover": true,
                           "highlight-row": false,
-                          "no-data-text": "暂无数据",
+                          // "no-data-text": "暂无数据",
+                          "no-data-text": vmI18n.t("other.noDataAvailable"),
                           columns: res.data.data.columns,
-                          data: res.data.data.prompt_data
-                        }
-                      })
+                          data: res.data.data.prompt_data,
+                        },
+                      }),
                     ]),
                   cancelType: true,
                   titleAlign: "left",
@@ -239,15 +255,14 @@ export default {
                   onOk: () => {
                     self.$parent.$parent.closeConfirm();
                   },
-                  keyDown: event => {
+                  keyDown: (event) => {
                     if (event.keyCode == 27) {
                       self.$parent.$parent.closeConfirm();
                     } else if (event.keyCode == 13) {
                       self.$parent.$parent.closeConfirm();
                     }
-                  }
+                  },
                 });
-
               }
             }
           } else {
@@ -255,7 +270,6 @@ export default {
             self.$Message.success(res.data.message);
             self.$parent.$parent.closeConfirm();
           }
-
         } else {
           // self.$Message.warning({
           //   content: res.data.message,
@@ -263,15 +277,16 @@ export default {
           //   top: 80
           // });
           self.$Modal.error({
-            title: "提示",
-            render: h =>
+            // title: "提示",
+            title: vmI18n.t("modalTitle.tips"),
+            render: (h) =>
               h("div", {}, [
                 h(
                   "p",
                   {
                     style: {
-                      padding: "10px 15px 10px 0px"
-                    }
+                      padding: "10px 15px 10px 0px",
+                    },
                   },
                   res.data.message
                 ),
@@ -279,11 +294,12 @@ export default {
                   props: {
                     "disabled-hover": true,
                     "highlight-row": false,
-                    "no-data-text": "暂无数据",
+                    // "no-data-text": "暂无数据",
+                    "no-data-text": vmI18n.t("other.noDataAvailable"),
                     columns: res.data.data.columns,
-                    data: res.data.data.prompt_data
-                  }
-                })
+                    data: res.data.data.prompt_data,
+                  },
+                }),
               ]),
             cancelType: true,
             titleAlign: "left",
@@ -307,22 +323,22 @@ export default {
         id: self.componentData.CP_C_SHOP_ID,
         num: self.pageNum,
         size: 10,
-        inputValue: ''
-      }
+        inputValue: "",
+      };
       axios({
         url: "/api/cs/oc/oms/v1/getQueryList",
         method: "post",
-        data: fromdata
+        data: fromdata,
       }).then(function (res) {
-        res.data.data.forEach(element => {
+        res.data.data.forEach((element) => {
           element.ecode = {
-            val: element.ecode
+            val: element.ecode,
           };
           element.ename = {
-            val: element.ename
+            val: element.ename,
           };
           element.ID = {
-            val: element.id
+            val: element.id,
           };
         });
         console.log(res.data);
@@ -332,20 +348,22 @@ export default {
             {
               colname: "ID",
               name: "ID",
-              show: false
+              show: false,
             },
             {
               colname: "ename",
-              name: "发货仓库名称",
-              show: true
+              // name: "发货仓库名称",
+              name: vmI18n.t("table_label.deliveryWarehouse_nam"),
+              show: true,
             },
             {
               colname: "ecode",
-              name: "发货仓库编码",
-              show: false
-            }
+              // name: "发货仓库编码",
+              name: vmI18n.t("table_label.deliveryWarehouse_code"),
+              show: false,
+            },
           ],
-          row: res.data.data
+          row: res.data.data,
         };
         self.totalRowCount = res.data.count;
         // if (res.data.code === 0) {
@@ -369,12 +387,12 @@ export default {
         id: self.componentData.CP_C_SHOP_ID,
         num: self.pageNum,
         size: 10,
-        inputValue: value
-      }
+        inputValue: value,
+      };
       axios({
         url: "/api/cs/oc/oms/v1/getQueryList",
         method: "post",
-        data: fromdata
+        data: fromdata,
       }).then(function (res) {
         if (res.data.code === 0) {
           // res.data.data.forEach(element => {
@@ -388,10 +406,10 @@ export default {
           //     val: element.id
           //   };
           // });
-          self.AutoData = res.data.data.map(element => {
+          self.AutoData = res.data.data.map((element) => {
             return {
               value: element.ename,
-              id: element.id
+              id: element.id,
             };
           });
           self.totalRowCount = res.data.count;
@@ -405,20 +423,22 @@ export default {
             {
               colname: "ID",
               name: "ID",
-              show: false
+              show: false,
             },
             {
               colname: "ename",
-              name: "发货仓库名称",
-              show: true
+              // name: "发货仓库名称",
+              name: vmI18n.t("table_label.deliveryWarehouse_nam"),
+              show: true,
             },
             {
               colname: "ecode",
-              name: "发货仓库编码",
-              show: false
-            }
+              // name: "发货仓库编码",
+              name: vmI18n.t("table_label.deliveryWarehouse_code"),
+              show: false,
+            },
           ],
-          row: res.data.data
+          row: res.data.data,
         };
         self.pageNum = 1;
       });
@@ -431,8 +451,8 @@ export default {
     onFkrpSelected(val) {
       console.log(val);
       this.pid = val[0].ID;
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped lang='less'>

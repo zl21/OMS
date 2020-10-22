@@ -12,11 +12,9 @@
           </Radio>
         </RadioGroup>
       </div>-->
-      <div style="display:flex">
+      <div style="display: flex">
         <div class="skuBox">
-          <re-form
-            :formConfig="formConfig"
-          />
+          <re-form :formConfig="formConfig" />
           <!-- SKU编码:
           <Input
             v-model="searchValue"
@@ -38,16 +36,37 @@
         </div> -->
 
         <div class="search-button">
-          <Button type="primary" @click="search">搜索</Button>
+          <Button type="primary" @click="search">
+            <!-- 搜索 -->
+            {{ vmI18n.t("btn.search") }}
+          </Button>
         </div>
       </div>
     </div>
     <div class="i_body">
-      <Table :columns="columns" :data="data" :loading="tableLoad" @on-row-click="onRowClick" :highlight-row="true"></Table>
+      <Table
+        :columns="columns"
+        :data="data"
+        :loading="tableLoad"
+        @on-row-click="onRowClick"
+        :highlight-row="true"
+      ></Table>
     </div>
     <div class="dialog-footer">
-      <Button style="marginLeft:8px;" type="primary" @click="confirm">确定</Button>
-      <Button @click="()=>{this.$parent.$parent.closeConfirm();}">取消</Button>
+      <Button style="marginleft: 8px" type="primary" @click="confirm">
+        <!-- 确定 -->
+        {{ vmI18n.t("common.determine") }}
+      </Button>
+      <Button
+        @click="
+          () => {
+            this.$parent.$parent.closeConfirm();
+          }
+        "
+      >
+        <!-- 取消 -->
+        {{ vmI18n.t("common.cancel") }}
+      </Button>
     </div>
   </div>
 </template>
@@ -57,24 +76,26 @@ import axios from "axios";
 import reForm from "professionalComponents/businessForm";
 export default {
   components: {
-    reForm
+    reForm,
   },
   data() {
     return {
+      vmI18n: window.vmI18n,
       formConfig: {
         formValue: {
-          searchValue: '',
-          psCProEcode: ''
+          searchValue: "",
+          psCProEcode: "",
         },
         formData: [
           {
-            label: "SKU编码",
+            // label: "SKU编码",
+            label: vmI18n.t("table_label.code_SKU"),
             style: "dimSearch",
             width: "12",
             value: "searchValue",
             columns: ["ECODE"],
             AuotData: [], //匹配的选项
-            dimChange: val => {
+            dimChange: (val) => {
               //模糊查询的方法
               let _this = this;
               _this.formConfig.formValue.searchValue = val.trim();
@@ -84,16 +105,15 @@ export default {
                 data: {
                   isBlur: "Y", //N为精确匹配
                   psCSku: {
-                    ECODE: val.trim()
-                  }
-                }
-              }).then(res => {
+                    ECODE: val.trim(),
+                  },
+                },
+              }).then((res) => {
                 if (res.status === 200) {
                   let data = res.data.data.data;
-                  let dimList =
-                    _this.formConfig.formData;
+                  let dimList = _this.formConfig.formData;
                   let arr;
-                  data.map(item => {
+                  data.map((item) => {
                     //删除不需要展示的模糊搜索项
                     delete item.GBCODE;
                     delete item.IS_GIFT;
@@ -107,7 +127,7 @@ export default {
                     delete item.sizeName;
                     delete item.skuId;
                   });
-                  dimList.map(item => {
+                  dimList.map((item) => {
                     if (item.label === "SKU编码") {
                       item.AuotData = data;
                       //调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
@@ -117,19 +137,21 @@ export default {
               });
             },
             dimEnter: () => {
-              this.search()
+              this.search();
             },
-            dimSelect: val => {
+            dimSelect: (val) => {
               this.formConfig.formValue.searchValue = val.label;
-            }
-          }, {
-            label: "商品编码",
+            },
+          },
+          {
+            // label: "商品编码",
+            label: vmI18n.t("table_label.productNo"),
             style: "dimSearch",
             width: "12",
             value: "psCProEcode",
             columns: ["ECODE"],
             AuotData: [], //匹配的选项
-            dimChange: val => {
+            dimChange: (val) => {
               //模糊查询的方法
               let _this = this;
               _this.formConfig.psCProEcode = val.trim();
@@ -139,19 +161,18 @@ export default {
                 PAGENUM: 1,
                 PAGESIZE: 10,
                 CONDITION: {},
-                TABLENAME: "PS_C_PRO"
+                TABLENAME: "PS_C_PRO",
               };
               fromdata.append("param", JSON.stringify(params));
               axios({
                 url: "/p/cs/screenresult",
                 method: "post",
-                data: fromdata
-              }).then(res => {
+                data: fromdata,
+              }).then((res) => {
                 if (res.data.code === 0) {
-                  let dimList =
-                    _this.formConfig.formData;
+                  let dimList = _this.formConfig.formData;
 
-                  dimList.map(item => {
+                  dimList.map((item) => {
                     if (item.label === "商品编码") {
                       item.AuotData = res.data.data.list;
                     }
@@ -160,14 +181,14 @@ export default {
               });
             },
             dimEnter: () => {
-              this.search()
+              this.search();
             },
-            dimSelect: val => {
+            dimSelect: (val) => {
               this.formConfig.formValue.psCProEcode = val.label;
               // this.psCProEcode = val.label;
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       rowClickData: {},
       radioValue: "2",
@@ -177,25 +198,28 @@ export default {
       tableLoad: false,
       columns: [
         {
-          title: "SKU编码",
-          key: "ECODE"
+          // title: "SKU编码",
+          title: vmI18n.t("table_label.code_SKU"),
+          key: "ECODE",
         },
         {
-          title: "商品名称",
-          key: "PS_C_PRO_ENAME"
+          // title: "商品名称",
+          title: vmI18n.t("table_label.productName"),
+          key: "PS_C_PRO_ENAME",
         },
         {
-          title: "SKU名称",
-          key: "SPEC"
-        }
+          // title: "SKU名称",
+          title: vmI18n.t("form_label.skuName"),
+          key: "SPEC",
+        },
       ],
-      data: []
+      data: [],
     };
   },
   props: {
     componentData: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   mounted() {
     console.log(this.componentData);
@@ -207,7 +231,7 @@ export default {
     search(value) {
       //sku查询
       let self = this;
-      self.tableLoad = true
+      self.tableLoad = true;
       axios({
         url: "/p/cs/skuQuery",
         method: "post",
@@ -217,27 +241,31 @@ export default {
             ECODE: self.formConfig.formValue.searchValue.trim(),
             psCProEcode: self.formConfig.formValue.psCProEcode.trim(),
             // psCProEname: self.psCProEname.trim()
+          },
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          if (res.data.code == 0) {
+            // res.data.data.data[0].IS_GIFT =
+            //   res.data.data.data[0].IS_GIFT == "0" ? "否" : "否";
+            self.data = res.data.data.data;
+          } else {
+            // this.$Message.warning("sku查询失败!");
+            this.$Message.warning(vmI18n.t("modalTips.zt"));
           }
-        }
-      }).then(res => {
-        console.log(res);
-        if (res.data.code == 0) {
-          // res.data.data.data[0].IS_GIFT =
-          //   res.data.data.data[0].IS_GIFT == "0" ? "否" : "否";
-          self.data = res.data.data.data;
-        } else {
-          this.$Message.warning("sku查询失败!");
-        }
-        self.tableLoad = false
-      }).catch(() => {
-        self.tableLoad = false
-      });
+          self.tableLoad = false;
+        })
+        .catch(() => {
+          self.tableLoad = false;
+        });
     },
     confirm() {
       let self = this;
       let result = {};
       if (self.componentData.a_2.length == 0) {
-        self.$Message.warning("请勾选订单数据!");
+        // self.$Message.warning("请勾选订单数据!");
+        self.$Message.warning(vmI18n.t("modalTips.zu"));
         return;
       }
       result.ids = self.componentData.a_2;
@@ -246,8 +274,8 @@ export default {
       axios({
         url: "/api/cs/oc/oms/v1/batchDeleteGoods",
         method: "post",
-        data: result
-      }).then(res => {
+        data: result,
+      }).then((res) => {
         if (res.data.code == 0) {
           self.$Message.error(res.data.message);
           self.$parent.$parent.$parent.getData();
@@ -257,19 +285,20 @@ export default {
             self.$Modal.confirm({
               title: res.data.message,
               width: 500,
-              render: h => {
+              render: (h) => {
                 return h("Table", {
                   props: {
                     columns: [
                       {
-                        title: "提示信息",
-                        key: "message"
-                      }
+                        // title: "提示信息",
+                        title: vmI18n.t("modalTitle.tips"),
+                        key: "message",
+                      },
                     ],
-                    data: res.data.data
-                  }
+                    data: res.data.data,
+                  },
                 });
-              }
+              },
             });
           }
         }
@@ -277,8 +306,8 @@ export default {
     },
     onRowClick(row) {
       this.rowClickData = row;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="less">
