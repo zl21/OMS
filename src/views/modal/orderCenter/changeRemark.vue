@@ -59,27 +59,6 @@
 </script>
 
 <style lang='less'>
-/* radio框样式调整 */
-.jordanModal-- {
-  .burgeon-radio .burgeon-radio-inner:after {
-    left: 2px !important;
-    top: 2px !important;
-  }
-
-  .header {
-    background-color: #eee;
-    color: black;
-    font-size: 13px;
-  }
-
-  .footer {
-    width: 100%;
-    margin-top: 20px;
-  }
-
-  img {
-    width: 14px;
-    height: auto;
-  }
-}
+  /* radio框样式调整 */
+  @import "~@/css/modal/orderCenter/changeRemark.less";
 </style>

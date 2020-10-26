@@ -12,12 +12,5 @@
 </script>
 
 <style lang="less" scoped>
-.generateSalesOrder {
-  width: 500px;
-
-  .button {
-    display: flex;
-    justify-content: space-around;
-  }
-}
+  @import "~@/css/modal/financeCenter/generateSalesOrder.less";
 </style>

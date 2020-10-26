@@ -8,5 +8,3 @@
   import outResultImport from "@/js/modal/InventoryCenter/outResultImport";
   export default outResultImport;
 </script>
-
-<style></style>

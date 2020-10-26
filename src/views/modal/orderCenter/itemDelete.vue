@@ -76,34 +76,6 @@
   export default itemDelete;
 </script>
 <style lang="less">
-@import "~@burgeon/oms-theme/skin/public.less";
-.itemDelete {
-  .i_head {
-    .i_title {
-      margin-bottom: 7px;
-      line-height: 20px;
-      font-size: 14px;
-      color: #333333;
-      line-height: 20px;
-      font-weight: bold;
-    }
-  }
-  .i_body {
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-  .i_food {
-    display: flex;
-    flex-direction: row-reverse;
-  }
-  .search-button {
-    text-align: right;
-    width: 100px;
-    margin-top: 2px;
-    .ark-btn-primary {
-      background-color: @button-bg;
-      border-color: @button-border;
-    }
-  }
-}
+  @import "~@burgeon/oms-theme/skin/public.less";
+  @import "~@/css/modal/orderCenter/itemDelete.less";
 </style>

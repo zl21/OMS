@@ -49,51 +49,5 @@
   export default changeWarehouse;
 </script>
 <style scoped lang='less'>
-.jordanModal {
-  width: 380px;
-  .jordanModal_box {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-  .header {
-    background-color: #eee;
-    color: black;
-    font-size: 13px;
-  }
-  .footer {
-    width: 100%;
-    margin-top: 20px;
-  }
-  .order_warehouse_loading {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.7);
-    z-index: 1000 !important;
-  }
-  .jordanModal-input-box {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-top: 10px;
-    .jordanModal-input {
-      width: 250px !important;
-    }
-  }
-  // 修改按钮白色字体问题
-  /deep/ .one_button {
-    > div:last-child {
-      span {
-        color: #333333 !important;
-      }
-    }
-  }
-}
+  @import "~@/css/modal/orderCenter/changeWarehouse.less";
 </style>

@@ -23,14 +23,7 @@
   export default addGifts;
 </script>
 <style lang="less" scoped>
-.order-footer {
-  margin-top: 10px;
-}
-.focusStyle {
-  margin-top: -40px;
-  z-index: -1;
-  opacity: 0;
-}
+  @import "~@/css/modal/orderCenter/addGifts.less";
 </style>
 
 

@@ -27,9 +27,5 @@
 </script>
 
 <style>
-.gf .title {
-  height: 50px;
-  line-height: 50px;
-  text-align: center;
-}
+  @import "~@/css/modal/InventoryCenter/channelInventory.less";
 </style>

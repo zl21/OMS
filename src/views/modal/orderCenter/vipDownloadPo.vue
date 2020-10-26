@@ -9,6 +9,3 @@
   import vipDownloadPo from "@/js/modal/orderCenter/vipDownloadPo";
   export default vipDownloadPo;
 </script>
-
-<style>
-</style>

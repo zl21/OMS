@@ -67,18 +67,6 @@
 </script>
 
 <style lang='less'>
-@import "~@burgeon/oms-theme/skin/public.less";
-.header {
-  background-color: #eee;
-  color: black;
-  font-size: 13px;
-}
-.footer {
-  width: 100%;
-  margin-top: 20px;
-}
-.ark-radio-group-button.ark-radio-group-small .ark-radio-wrapper:first-child {
-  border-color: @button-border;
-  color: @button-transparent-font;
-}
+  @import "~@burgeon/oms-theme/skin/public.less";
+  @import "~@/css/modal/orderCenter/makeOutInvoice.less";
 </style>

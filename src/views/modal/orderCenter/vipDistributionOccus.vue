@@ -13,6 +13,3 @@
   import vipDistributionOccus from "@/js/modal/orderCenter/vipDistributionOccus";
   export default vipDistributionOccus;
 </script>
-
-<style>
-</style>

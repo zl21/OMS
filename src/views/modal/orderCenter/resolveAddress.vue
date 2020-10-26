@@ -116,40 +116,5 @@
 </script>
 
 <style lang="less" scoped>
-.order_address {
-  width: 100%;
-  max-height: 520px;
-  overflow: auto;
-  .burgeon-form-item {
-    margin-bottom: 8px;
-    vertical-align: top;
-    zoom: 1;
-  }
-  .province_city_area {
-    height: 26px;
-    line-height: 26px;
-    display: flex;
-    .fenge {
-      padding-left: 1px;
-      padding-right: 5px;
-    }
-  }
-
-  .order-footer {
-    margin-top: 10px;
-  }
-  .order_address_loading {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.7);
-    z-index: 1000 !important;
-  }
-}
+  @import "~@/css/modal/orderCenter/resolveAddress.less";
 </style>

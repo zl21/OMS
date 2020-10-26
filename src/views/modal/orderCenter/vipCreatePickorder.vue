@@ -9,6 +9,3 @@
   import vipCreatePickorder from "@/js/modal/orderCenter/vipCreatePickorder";
   export default vipCreatePickorder;
 </script>
-
-<style>
-</style>

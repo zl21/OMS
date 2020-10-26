@@ -9,4 +9,3 @@
   import electronicSheetPrinting from "@/js/modal/InventoryCenter/electronicSheetPrinting";
   export default electronicSheetPrinting;
 </script>
-<style lang="less"></style>

@@ -30,15 +30,5 @@ export default downLoadAll;
 </script>
 
 <style >
-.downLoadTaobaoOrder .burgeon-radio-group {
-  display: flex !important;
-}
-.downLoadModal .burgeon-modal-wrap {
-  /* z-index: 2019 !important; */
-  /* top: -700px !important; */
-}
-.downLoadModal .taskID {
-  color: blue;
-  cursor: pointer;
-}
+  @import "~@/css/modal/InterfacePlatform/downLoadAll.less";
 </style>

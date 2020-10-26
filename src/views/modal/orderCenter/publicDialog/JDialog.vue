@@ -40,18 +40,5 @@
 </script>
 
 <style lang="less">
-.burgeon-modal-footer {
-  border: none;
-}
-
-.burgeon-modal-footer button > span {
-  font-size: 12px;
-}
-
-.burgeon-modal-footer button {
-  width: auto;
-  border-radius: 2px;
-  height: 26px;
-  line-height: 0px;
-}
+  @import "~@/css/modal/orderCenter/publicDialog/JDialog.less";
 </style>
