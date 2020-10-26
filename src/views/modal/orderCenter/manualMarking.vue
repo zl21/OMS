@@ -19,9 +19,5 @@
 </script>
 
 <style lang="less" scoped>
-.marking {
-  .vip {
-    text-align: center;
-  }
-}
+  @import "~@/css/modal/orderCenter/manualMarking.less";
 </style>

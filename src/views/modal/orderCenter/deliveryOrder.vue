@@ -9,5 +9,4 @@
   import deliveryOrder from "@/js/modal/orderCenter/deliveryOrder";
   export default deliveryOrder;
 </script>
-<style>
-</style>
+<style lang="less" scoped></style>

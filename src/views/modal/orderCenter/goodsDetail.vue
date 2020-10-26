@@ -37,13 +37,5 @@
 </script>
 
 <style scoped>
-.header {
-  background-color: #eee;
-  color: black;
-  font-size: 13px;
-}
-.footer {
-  width: 100%;
-  margin-top: 20px;
-}
+  @import "~@/css/modal/orderCenter/goodsDetail.less";
 </style>

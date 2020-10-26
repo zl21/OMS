@@ -12,4 +12,4 @@
   export default sgTransferImport;
 </script>
 
-<style></style>
+<style lang="less" scoped></style>

@@ -40,22 +40,5 @@
 </script>
 
 <style scoped lang='less'>
-.jordanModal {
-  width: 380px;
-  .jordanModal_box {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-bottom: 5px;
-  }
-  .header {
-    background-color: #eee;
-    color: black;
-    font-size: 13px;
-  }
-  .footer {
-    width: 100%;
-    margin-top: 20px;
-  }
-}
+  @import "~@/css/modal/orderCenter/modifyLogistics.less";
 </style>

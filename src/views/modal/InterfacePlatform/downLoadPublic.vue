@@ -41,14 +41,5 @@
 </script>
 
 <style lang="less">
-.public .burgeon-radio-group {
-  display: flex !important;
-}
-.import-box {
-  font-size: 14px;
-  text-align: right;
-  color: #0f8ee9;
-  line-height: 32px;
-  cursor: pointer;
-}
+  @import "~@/css/modal/InterfacePlatform/downLoadPublic.less";
 </style>

@@ -27,37 +27,5 @@
   export default modifyWarehouse;
 </script>
 <style  lang='less'>
-.stockOutWarehouse_box {
-  .stockOutWarehouse {
-    box-sizing: border-box;
-    label {
-      width: 80px;
-      margin-right: 10px;
-      display: flex;
-      justify-content: flex-end;
-    }
-    #dropDownSelectFilter {
-      box-sizing: border-box;
-      .burgeon-select {
-        box-sizing: border-box;
-        input {
-          box-sizing: border-box;
-        }
-      }
-    }
-  }
-
-  .stockOutWarehouse {
-    .label {
-      margin-right: 10px;
-    }
-    display: flex;
-    align-items: center;
-    html *,
-    :after,
-    :before {
-      box-sizing: border-box !important;
-    }
-  }
-}
+  @import "~@/css/modal/orderCenter/modifyWarehouse.less";
 </style>

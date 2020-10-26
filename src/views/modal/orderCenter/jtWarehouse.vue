@@ -11,7 +11,5 @@
 </script>
 
 <style>
-.burgeon-select-dropdown-transfer {
-  z-index: 9999 !important;
-}
+  @import "~@/css/modal/orderCenter/jtWarehouse.less";
 </style>

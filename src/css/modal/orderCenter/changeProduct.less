@@ -1,0 +1,93 @@
+.changeProduct {
+  .i_head {
+    display: flex;
+    justify-content: space-between;
+    p {
+      font-family: PingFangSC-Medium;
+      font-size: 14px;
+      color: #333333;
+    }
+    .search {
+      display: flex;
+      line-height: 26px;
+      margin-top: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      white-space: nowrap;
+      .search_child {
+        width: 50%;
+        font-size: 0;
+        height: 32px;
+        line-height: 1;
+        & + .search_child {
+          text-align: right;
+          padding-top: 3px;
+          .ark-btn-primary {
+            background-color: @button-bg;
+            border-color: @button-border;
+          }
+        }
+
+        .lable {
+          font-size: 12px;
+          display: inline-block;
+          width: 100px;
+          padding: 10px 12px 10px 0;
+          text-align: right;
+          vertical-align: middle;
+        }
+        .ark-input-wrapper {
+          font-size: 12px;
+          width: calc(100% - 100px);
+          display: inline-block;
+          text-align: right;
+          vertical-align: middle;
+        }
+      }
+    }
+    .i_body {
+      width: 50%;
+      border-right: 1px solid #dcdee2;
+      padding-top: 0;
+      padding-right: 15px;
+      // border-bottom: 1px solid #dcdee2;
+    }
+    .i_body1 {
+      width: 50%;
+      padding-top: 0;
+      padding-left: 15px;
+      // padding-bottom: 15px;
+      // border-bottom: 1px solid #dcdee2;
+    }
+    .icon_switch {
+      width: 38px;
+      height: 38px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .skuBox {
+    width: 100%;
+    overflow: hidden;
+    margin-top: -2px;
+    /deep/ .orderManageEdit {
+      padding-right: 0;
+      .burgeon-form-item {
+        line-height: 28px;
+        margin-right: 5px;
+        .burgeon-form-item-label {
+          padding-top: 0;
+          padding-bottom: 0;
+          width: auto !important;
+          line-height: 28px;
+        }
+        .burgeon-form-item-content {
+          line-height: 28px;
+          margin-left: 60px !important;
+        }
+      }
+    }
+  }
+}
