@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-
+      pageLoad: false,
       radioValue: '2',
       searchValue: '',
       qty: '1',
@@ -17,13 +17,13 @@ export default {
           key: 'PS_C_PRO_ENAME'
         },
         {
-          title: '规格',
+          title: '商品SKU名称',
           key: 'SPEC'
         },
-        {
-          title: '是否为赠品',
-          key: 'IS_GIFT'
-        }
+        // {
+        //   title: '是否为赠品',
+        //   key: 'IS_GIFT'
+        // }
       ],
       data: []
     }
@@ -34,7 +34,7 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.$parent.$parent.$parent.reloadCus);
+    console.log(this.componentData);
   },
   methods: {
     radioChange(value) {
@@ -42,6 +42,10 @@ export default {
     },
     search(value) {   //sku查询
       let self = this;
+      if (!self.searchValue) {
+        self.$Message.warning('请输入商品SKU');
+        return;
+      }
       axios({
         url: '/p/cs/skuQuery',
         method: 'post',
@@ -67,45 +71,42 @@ export default {
         return
       }
       let result = {}
-      result['ids'] = self.componentData.ids;
-      result['sku_code'] = self.data[0].ECODE;
-      result['itemId'] = self.componentData.itemId;
-      result['type'] = 1;
+      // if (self.qty == '') {
+      //   self.$Message.warning('请输入数量!');
+      //   return;
+      // }
+      if (self.radioValue == '1') {
+        self.componentData.a_1['appiontSplitSkuCode'] = self.searchValue;
+        // self.componentData.a_1['qty'] = self.qty;
+        result = self.componentData.a_1
+      } else if (self.radioValue == '2') {
+        if (self.componentData.a_2.length == 0) {
+          self.$Message.warning('请勾选订单数据!');
+          return
+        }
+        result['ids'] = self.componentData.a_2;
+        result['appiontSplitSkuCode'] = self.searchValue;
+        // result['qty'] = self.qty;
+      }
+      console.log(this.componentData.a_1, result);
+      this.pageLoad = true
       axios({
-        url: '/api/cs/oc/oms/v1/bathChangeGoods',
+        url: '/api/cs/oc/oms/v1/saveAppointSplitOrderInfo',
         method: 'post',
         data: result
       }).then(res => {
+        this.pageLoad = false
         console.log(res);
         if (res.data.code == 0) {
           self.$Message.success(res.data.message);
-          if (self.componentData.list) {
-            self.$parent.$parent.$parent.getData();
-          } else {
-            if (self.$parent.$parent.$parent.reloadCus) self.$parent.$parent.$parent.reloadCus();
-            if (self.$parent.$parent.$parent.$parent.autoRefresh) self.$parent.$parent.$parent.$parent.autoRefresh();
-          }
-
-          self.$parent.$parent.closeConfirm();
+          self.$parent.$parent.$parent.getData();
+          this.$parent.$parent.closeConfirm();
         } else {
-          self.$Modal.confirm({
-            title: res.data.message,
-            width: 500,
-            render: h => {
-              return h("Table", {
-                props: {
-                  columns: [
-                    {
-                      title: "提示信息",
-                      key: "message"
-                    }
-                  ],
-                  data: res.data.data
-                }
-              });
-            }
-          });
+          self.$Message.error(res.data.message);
+          this.$parent.$parent.closeConfirm();
         }
+      }).catch(() => {
+        this.pageLoad = false
       })
     }
   }
