@@ -194,6 +194,7 @@ import businessStatusFlag from "professionalComponents/businessStatusFlag";
 import jordanModal from "professionalComponents/businessDialog";
 import axios from "axios";
 export default {
+  name: 'combindCommondity',
   components: {
     businessButton,
     businessForm,
@@ -1799,7 +1800,6 @@ export default {
     },
     //保存功能
     saveAll(type) {
-      let data = {};
       let baseData = Object.assign({}, this.formConfig1.formValue);
       if (baseData["ECODE"] === "") {
         // this.$Message.warning("商品编码不能为空");
@@ -2029,41 +2029,65 @@ export default {
           });
         }
       }
-      data = {
+      let query = {
         objid: type,
         CP_C_STORE_IDS: baseData.CP_C_STORE_IDS,
         psCPro: baseData,
         SkuGroupRequestList: t_SkuGroupRequestList,
       };
-      axios({
-        url: "/p/cs/product/skuGroupSave",
-        method: "post",
-        data: data,
-      }).then((res) => {
-        let data = res.data;
-        if (data.code === 0) {
-          this.$Message.success(data.message);
-          if (type === "-1") {
-            this.$store.commit("customize/TabHref", {
-              //返回列表页面
+      const res = this.service.commodityCenter.skuGroupSave(query);
+      let data = res.data;
+      if (data.code === 0) {
+        this.$Message.success(data.message);
+        if (type === "-1") {
+          this.$store.commit("customize/TabHref", {
+            //返回列表页面
+            id: 24525,
+            type: "table",
+            name: "PS_C_PRO_GROUP",
+            // label: "组合商品档案",
+            label: vmI18n.t("panel_label.combinedCommodity"),
+            query: Object.assign({
               id: 24525,
-              type: "table",
-              name: "PS_C_PRO_GROUP",
-              // label: "组合商品档案",
-              label: vmI18n.t("panel_label.combinedCommodity"),
-              query: Object.assign({
-                id: 24525,
-                // tabTitle: "组合商品档案",
-                tabTitle: vmI18n.t("panel_label.combinedCommodity"),
-              }),
-            });
-          } else {
-            this.IniData();
-          }
+              // tabTitle: "组合商品档案",
+              tabTitle: vmI18n.t("panel_label.combinedCommodity"),
+            }),
+          });
         } else {
-          this.$Message.warning(data.message);
+          this.IniData();
         }
-      });
+      } else {
+        this.$Message.warning(data.message);
+      }
+      // axios({
+      //   url: "/p/cs/product/skuGroupSave",
+      //   method: "post",
+      //   data: data,
+      // }).then((res) => {
+      //   let data = res.data;
+      //   if (data.code === 0) {
+      //     this.$Message.success(data.message);
+      //     if (type === "-1") {
+      //       this.$store.commit("customize/TabHref", {
+      //         //返回列表页面
+      //         id: 24525,
+      //         type: "table",
+      //         name: "PS_C_PRO_GROUP",
+      //         // label: "组合商品档案",
+      //         label: vmI18n.t("panel_label.combinedCommodity"),
+      //         query: Object.assign({
+      //           id: 24525,
+      //           // tabTitle: "组合商品档案",
+      //           tabTitle: vmI18n.t("panel_label.combinedCommodity"),
+      //         }),
+      //       });
+      //     } else {
+      //       this.IniData();
+      //     }
+      //   } else {
+      //     this.$Message.warning(data.message);
+      //   }
+      // });
     },
     //表格选中某一行执行的操作
     onSelect(selection, row) {

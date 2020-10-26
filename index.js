@@ -14,6 +14,7 @@ import '@burgeon/oms-theme/theme/custom.less'; // 主题文件
 import customizedTheme from './src/config/customized.theme.js';//主题配置
 import externalTreeDatasConfig from './src/config/externalTreeDatas.config'; // 树结构配置
 import i18n from '@burgeon/internationalization/i18n/i18n.js'; // 国际化
+import service from '@/service/api-service/index';
 // import './static/theme/custom.less'; // 主题文件
 // import './static/theme/theme.less'; // 自定义主题文件
 // import '@syman/ark-ui/dist/styles/ark-ui.css';
@@ -46,6 +47,7 @@ Vue.prototype.request = request;
 Vue.prototype.httpForm = httpFormdata;
 Vue.prototype.$httpApi = apiPath
 Vue.prototype.$store = store;
+Vue.prototype.service = service;
 window.R3 = R3; // 暴露R3为全局变量
 window.vmI18n = i18n; // 挂载国际化
 Vue.prototype.$theme = customizedTheme;//将主题方法挂载到原型上
