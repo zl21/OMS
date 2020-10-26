@@ -59,7 +59,7 @@ export default {
               isnotnull: true, //是否必填
               isuppercase: false, //是否转大写
               length: 65535, //最大长度是多少
-              name: vmI18n.other.shop,//店铺input前面显示的lable值
+              name: vmI18n.t('other.shop'),//店铺input前面显示的lable值
               readonly: false, //是否可编辑，对应input   readonly属性
               reftable: "CP_C_SHOP",
               reftableid: 24475,
@@ -203,7 +203,7 @@ export default {
     } else {
       this.downLoadFormConfig.formValue.type = "billDownload";
       this.downLoadFormConfig.formData[1].options[0].label =
-        this.vmI18n.t("modalTips.downloadProgressBill");//进度账单下载
+        this.vmI18n.t("btn.downloadProgressBill");//进度账单下载
       this.downLoadFormConfig.formData[1].options[0].value =
         "billDownload";
     }

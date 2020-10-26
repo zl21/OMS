@@ -1,28 +1,27 @@
 // 订单中心
 export default {
   //JIT配货单修改仓库测试弹框
-  modifyWarehouse: {
+  MODIFYWAREHOUSE: {
     component: () => import("@/views/modal/orderCenter/modifyWarehouse.vue"),
   },
   //JIT拣货单 (创建拣货单)
-  vipCreatePickorder: {
+  VIPCREATEPICKORDER: {
     component: () => import("@/views/modal/orderCenter/vipCreatePickorder.vue")
   },
   // JIT配货单(手工占单)
-  vipDistributionOccus: {
+  VIPDISTRIBUTIONOCCUS: {
     component: () => import("@/views/modal/orderCenter/vipDistributionOccus.vue")
   },
   // JIT配货单(匹配出仓单)
-  deliveryOrder: {
+  DELIVERYORDER: {
     component: () => import("@/views/modal/orderCenter/deliveryOrder.vue")
   },
   // JIT PO单(下载PO单)
-  vipDownloadPo: {
+  VIPDOWNLOADPO: {
     component: () => import("@/views/modal/orderCenter/vipDownloadPo.vue")
   },
   // JIT仓库管理(生成出仓单)
-  jtWarehouse: {
+  JTWAREHOUSE: {
     component: () => import("@/views/modal/orderCenter/jtWarehouse.vue")
   }
-  
 };
