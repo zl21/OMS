@@ -73,11 +73,13 @@ export default {
   },
   mounted: function () {
     let self = this;
-    if (this.$route.params.tableName == 'IP_B_JITX_DELIVERY') {
-      self.downLoadFormConfig.formValue.order_status = "NEW";
-    }
     this.downLoadFormConfig = formConfig(this.$route.params.tableName).formConfig
     // self.downLoadFormConfig = formConfig('IP_B_CANCEL_TIME_ORDER_VIP').formConfig
+    
+    if (this.$route.params.tableName == 'IP_B_JITX_DELIVERY') {
+      console.log("self.downLoadFormConfig.formValue",self.downLoadFormConfig);
+      self.downLoadFormConfig.formValue.order_status = "NEW";
+    }
   },
   methods: {
     standardTimeConversiondateToStr(val) {

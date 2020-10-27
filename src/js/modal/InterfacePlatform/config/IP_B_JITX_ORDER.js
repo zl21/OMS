@@ -79,7 +79,7 @@ export default {
       // },
       {
         style: "input", //输入框类型
-        label: vmI18n.t("table_label.platform_billNo"), //平台单号 输入框前文字
+        label: vmI18n.t("form_label.platform_billNo"), //平台单号 输入框前文字
         value: "orderNum", //输入框的值
         width: "24", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: "", //输入框后带的图标,暂只有输入框支持
@@ -95,7 +95,7 @@ export default {
     }
   },
   // 确定按钮
-  determine: (self) => {
+  determine: async (self) => {
     let formValue = self.downLoadFormConfig.formValue
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
@@ -120,24 +120,41 @@ export default {
     };
     let fromdata = new FormData();
     fromdata.append("param", JSON.stringify(param));
-    axios({
-      url: "/p/cs/orderDownload",
-      method: "post",
-      data: fromdata
-    }).then(function (res) {
+
+    // 请求下载订单接口
+    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(fromdata);
+    if (code === 0) {
       self.downLoadModal = true;
-      if (res.data.code === 0) {
-        let orderNum = self.downLoadFormConfig.formValue.orderNum;
-        if (orderNum) {
-          self.$Message.success(res.data.message);
-          self.$emit('closeActionDialog',true)
-        } else {
-          self.taskId = res.data.message.match(/\d+/)[0];
-          self.downLoadModal = true;
-        }
+      let orderNum = self.downLoadFormConfig.formValue.orderNum;
+      if (orderNum) {
+        self.$Message.success(message);
+        self.$emit('closeActionDialog',true)
       } else {
-        self.$Message.error(res.data.message);
+        self.taskId = message.match(/\d+/)[0];
+        self.downLoadModal = true;
       }
-    });
+    } else {
+      self.$Message.error(message);
+      self.$emit("closeActionDialog",true);
+    }
+    // axios({
+    //   url: "/p/cs/orderDownload",
+    //   method: "post",
+    //   data: fromdata
+    // }).then(function (res) {
+    //   self.downLoadModal = true;
+    //   if (res.data.code === 0) {
+    //     let orderNum = self.downLoadFormConfig.formValue.orderNum;
+    //     if (orderNum) {
+    //       self.$Message.success(res.data.message);
+    //       self.$emit('closeActionDialog',true)
+    //     } else {
+    //       self.taskId = res.data.message.match(/\d+/)[0];
+    //       self.downLoadModal = true;
+    //     }
+    //   } else {
+    //     self.$Message.error(res.data.message);
+    //   }
+    // });
   }
 };

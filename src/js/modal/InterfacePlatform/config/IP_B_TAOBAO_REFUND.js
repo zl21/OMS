@@ -75,7 +75,7 @@ export default {
     ]
   },
   // 确定按钮
-  determine: (self) => {
+  determine: async (self) => {
     if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
       self.$Message.warning(self.vmI18n.t("modalTips.be"));//请选择需要下载的店铺
       return false;
@@ -87,7 +87,7 @@ export default {
       self.$Message.warning(self.vmI18n.t("modalTips.bv"));//退单修改时间和退单单号不能同时为空
       return false;
     }
-    let param = {
+    let params = {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid,
       bill_no: self.downLoadFormConfig.formValue.bill_no,
       start_time:self.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[0]),
@@ -96,19 +96,29 @@ export default {
       table: "IP_B_TAOBAO_REFUND"
     };
     let fromdata = new FormData();
-    fromdata.append("param", JSON.stringify(param));
-    axios({
-      url: "/p/cs/refundDownload",
-      method: "post",
-      data: fromdata
-    }).then(res => {
-      if (res.data.code === 0) {
-        self.$Message.success(res.data.message);
-        // self.$parent.$parent.actionDialog.show = false;
-        this.$emit("closeActionDialog",true);
-      } else {
-        self.$Message.error(res.data.message);
-      }
-    });
+    fromdata.append("param", JSON.stringify(params));
+
+    // 请求退单下载订单接口
+    const { data: { code, message } } = await self.service.interfacePlatform.refundDownload(fromdata);
+    if (code === 0) {
+      self.$Message.success(message);
+      self.$emit("closeActionDialog",true);
+    } else {
+      self.$emit("closeActionDialog",true);
+      self.$Message.error(message);
+    }
+    // axios({
+    //   url: "/p/cs/refundDownload",
+    //   method: "post",
+    //   data: fromdata
+    // }).then(res => {
+    //   if (res.data.code === 0) {
+    //     self.$Message.success(res.data.message);
+    //     // self.$parent.$parent.actionDialog.show = false;
+    //     this.$emit("closeActionDialog",true);
+    //   } else {
+    //     self.$Message.error(res.data.message);
+    //   }
+    // });
   }
 };

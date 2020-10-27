@@ -75,7 +75,7 @@ export default {
     ]
   },
   // 确定按钮
-  determine: (self) => {
+  determine: async (self) => {
     if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
       self.$Message.warning(self.vmI18n.t("modalTips.be"));//请选择需要下载的店铺
       return false;
@@ -97,18 +97,27 @@ export default {
     };
     let fromdata = new FormData();
     fromdata.append("param", JSON.stringify(param));
-    axios({
-      url: "/p/cs/exchangeDownload",
-      method: "post",
-      data: fromdata
-    }).then(res => {
-      if (res.data.code === 0) {
-        self.$Message.success(res.data.message);
-        // self.$parent.$parent.actionDialog.show = false;
-        self.$emit("closeActionDialog",true);
-      } else {
-        self.$Message.error(res.data.message);
-      }
-    });
+    // 换货单下载订单
+    const { data: { code, message } } = await self.service.interfacePlatform.refundDownload(fromdata);
+    if (code === 0) {
+      self.$Message.success(message);
+      self.$emit("closeActionDialog",true);
+    } else {
+      self.$Message.error(message);
+      self.$emit("closeActionDialog",true);
+    }
+    // axios({
+    //   url: "/p/cs/exchangeDownload",
+    //   method: "post",
+    //   data: fromdata
+    // }).then(res => {
+    //   if (res.data.code === 0) {
+    //     self.$Message.success(res.data.message);
+    //     // self.$parent.$parent.actionDialog.show = false;
+    //     self.$emit("closeActionDialog",true);
+    //   } else {
+    //     self.$Message.error(res.data.message);
+    //   }
+    // });
   }
 };

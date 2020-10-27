@@ -70,7 +70,7 @@ export default {
     }
   },
   // 确定按钮
-  determine: (self) => {
+  determine: async (self) => {
     let formValue = self.downLoadFormConfig.formValue
       let shopId = self.downLoadFormConfig.formData[0].itemdata.pid
       if (!shopId) {
@@ -81,30 +81,47 @@ export default {
         self.$message.error(self.vmI18n.t("pHolder.bw"))//请输入平台时间或退供单号
         return
       }
+      self.dialogLoad = true
+
       let params = {
-        "shop_id": shopId,
-        "refund_nos": formValue.refund_nos
+        shop_id: shopId,
+        refund_nos: formValue.refund_nos
       }
       if (formValue.query_date[0]) {
         params['start_time'] = self.standardTimeConversiondateToStr(formValue.query_date[0]);
         params['end_time'] = self.standardTimeConversiondateToStr(formValue.query_date[1]);
       }
-      self.dialogLoad = true
-      httpServer({
-        url: '/p/cs/downLoadVipOrderRefund',
-        method: 'post',
-        data: {
-          param: JSON.stringify(params)
-        }
-      }).then(res => {
+
+      let fromdata = new FormData();
+      fromdata.append("param", JSON.stringify(params));
+
+      try{
+        // 唯品会退单下载
+        const { data: { code, message } } = await self.service.interfacePlatform.downLoadVipOrderRefund(fromdata);
         self.dialogLoad = false
-        if (res.data.code === 0) {
-          self.$message.success(res.data.message)
+        if (code === 0) {
+          self.$message.success(message)
           self.$emit('confirmImport')
-          self.$emit('closeActionDialog')
+          self.$emit('closeActionDialog',true)
         }
-      }).catch(() => {
-        self.dialogLoad = false
-      })
+      }catch(error){
+          self.dialogLoad = false
+      }
+      // httpServer({
+      //   url: '/p/cs/downLoadVipOrderRefund',
+      //   method: 'post',
+      //   data: {
+      //     param: JSON.stringify(params)
+      //   }
+      // }).then(res => {
+      //   self.dialogLoad = false
+      //   if (res.data.code === 0) {
+      //     self.$message.success(res.data.message)
+      //     self.$emit('confirmImport')
+      //     self.$emit('closeActionDialog')
+      //   }
+      // }).catch(() => {
+      //   self.dialogLoad = false
+      // })
   }
 };

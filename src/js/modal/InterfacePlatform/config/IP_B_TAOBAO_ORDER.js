@@ -31,13 +31,13 @@ export default {
           },
           display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: "drp", //外键关联类型
-          fkdesc:vmI18n.t('other.shop'),//店铺 
+          fkdesc: vmI18n.t('other.shop'),//店铺 
           inputname: "CP_C_SHOP_ID", //这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, //是否有fk键
           isnotnull: false, //是否必填
           isuppercase: false, //是否转大写
           length: 65535, //最大长度是多少
-          name:vmI18n.t('other.shop'),//店铺 input前面显示的lable值
+          name: vmI18n.t('other.shop'),//店铺 input前面显示的lable值
           readonly: false, //是否可编辑，对应input   readonly属性
           reftable: "CP_C_SHOP",
           reftableid: 24475,
@@ -89,7 +89,7 @@ export default {
     ]
   },
   // 确定按钮
-  determine: (self) => {
+  determine: async (self) => {
     self.downLoadModal = true;
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
@@ -121,19 +121,21 @@ export default {
     };
     let fromdata = new FormData();
     fromdata.append("param", JSON.stringify(param));
-    axios({
-      url: "/p/cs/orderDownload",
-      method: "post",
-      data: fromdata
-    }).then(function (res) {
-      console.log(res);
-      if (res.data.code === 0) {
-        // self.$Message.success(res.data.message);
-        self.taskId = res.data.message.match(/\d+/)[0];
+    // 请求下载订单接口
+    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(fromdata);
+    if (code === 0) {
+        self.taskId = message.match(/\d+/)[0];
         self.downLoadModal = true;
       } else {
-        self.$Message.error(res.data.message);
+        self.$Message.error(message);
       }
-    });
+    // axios({
+    //   url: "/p/cs/orderDownload",
+    //   method: "post",
+    //   data: fromdata
+    // }).then(function (res) {
+    //   console.log(res);
+    //   
+    // });
   }
 };

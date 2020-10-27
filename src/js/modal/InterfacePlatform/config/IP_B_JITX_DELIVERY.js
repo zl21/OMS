@@ -84,7 +84,7 @@ export default {
     }
   },
   // 确定按钮
-  determine: (self) => {
+  determine: async (self) => {
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
@@ -107,18 +107,28 @@ export default {
     };
     let fromdata = new FormData();
     fromdata.append("param", JSON.stringify(param));
-    axios({
-      url: "/p/cs/downLoadVipDelivery",
-      method: "post",
-      data: fromdata
-    }).then(function (res) {
-      if (res.data.code === 0) {
-        self.$Message.success(res.data.message);
+    // 寻仓订单下载
+    const { data: { code, message } } = await self.service.interfacePlatform.refundDownload(fromdata);
+    if (code === 0) {
+        self.$Message.success(message);
         self.$emit("confirmImport");
-        self.$emit("closeActionDialog");
+        self.$emit("closeActionDialog",true);
       } else {
-        self.$Message.error(res.data.message);
+        self.$Message.error(message);
+        self.$emit("closeActionDialog",true);
       }
-    });
+    // axios({
+    //   url: "/p/cs/downLoadVipDelivery",
+    //   method: "post",
+    //   data: fromdata
+    // }).then(function (res) {
+    //   if (res.data.code === 0) {
+    //     self.$Message.success(res.data.message);
+    //     self.$emit("confirmImport");
+    //     self.$emit("closeActionDialog");
+    //   } else {
+    //     self.$Message.error(res.data.message);
+    //   }
+    // });
   }
 };
