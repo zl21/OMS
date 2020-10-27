@@ -87,54 +87,5 @@
 </script>
 
 <style lang="less">
-@import "~@/assets/css/css_1_3/theme.less";
-.returnTreasury {
-  position: relative;
-  .fromLoading {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.9);
-    z-index: 1000 !important;
-  }
-}
-.queryorder .burgeon-modal {
-  width: 800px !important;
-}
-.queryorder .burgeon-modal-body {
-  overflow: hidden;
-}
-.queryorder
-  .burgeon-modal-content
-  .burgeon-modal-body
-  .burgeon-form-item-content {
-  margin-right: 0 !important;
-}
-.queryorder .burgeon-form-item {
-  margin-bottom: 0 !important;
-}
-.queryorder .burgeon-modal-body .orderContent {
-  display: flex;
-  justify-content: space-between;
-}
-.queryorder .jordan-table-box {
-  height: 300px;
-  overflow-y: auto;
-}
-.queryorder .orderContent .buttonBox {
-  height: 30px;
-  margin-top: 40px;
-}
-.queryorder .jordan-table-box .page-box {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-.queryorder .jordan-table-box .burgeon-table-wrapper {
-  margin-top: 0 !important;
-}
+@import "~@/css/pages/orderCenter/returngood/returnStoreage/manualMatching.less";
 </style>

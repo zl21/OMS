@@ -30,17 +30,5 @@ import replaceGoodsDetail from "@/js/pages/orderCenter/orderManager/replaceGoods
 export default replaceGoodsDetail;
 </script>
 <style lang="less">
-.replaceGoodsDetail {
-  .i_head {
-    height: 30px;
-  }
-  .i_body {
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-  .i_food {
-    display: flex;
-    flex-direction: row-reverse;
-  }
-}
+@import "~@/css/pages/orderCenter/orderManager/replaceGoodsDetail.less";
 </style>

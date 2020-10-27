@@ -128,33 +128,5 @@ export default {
 };
 </script>
 <style lang="less">
-.lookUserJurisdiction {
-  display: flex;
-  padding: 10px 0px;
-  height: 100%;
-  flex-direction: row;
-  .right_box {
-    min-width: 200px;
-    height: 100%;
-    padding: 6px 8px;
-    margin-right: 10px;
-    border: 1px solid #dcdcdc;
-    border-radius: 4px;
-  }
-  .center_box {
-    min-width: 200px;
-    height: 100%;
-    padding: 6px 8px;
-    margin-right: 10px;
-    border: 1px solid #dcdcdc;
-    border-radius: 4px;
-  }
-  .left_box {
-    min-width: 200px;
-    height: 100%;
-    padding: 6px 8px;
-    border: 1px solid #dcdcdc;
-    border-radius: 4px;
-  }
-}
+@import "~@/css/pages/SystemConfig/quanXian/1/lookUserJurisdiction.less";
 </style>

@@ -190,6 +190,6 @@ import combinedCommodity from "@/js/pages/commodityCenter/combinedCommodity";
 export default combinedCommodity;
 </script>
 <style lang="less">
-
+  @import "~@/css/pages/commodityCenter/combinedCommodity.less";
 </style>
 

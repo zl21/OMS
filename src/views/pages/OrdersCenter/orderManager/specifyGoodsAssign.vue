@@ -40,17 +40,5 @@ import specifyGoodsAssign from "@/js/pages/orderCenter/orderManager/specifyGoods
 export default specifyGoodsAssign;
 </script>
 <style lang="less">
-.specifyGoods {
-  .i_head {
-    height: 30px;
-  }
-  .i_body {
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-  .i_food {
-    display: flex;
-    flex-direction: row-reverse;
-  }
-}
+@import "~@/css/pages/orderCenter/orderManager/specifyGoodsAssign.less";
 </style>

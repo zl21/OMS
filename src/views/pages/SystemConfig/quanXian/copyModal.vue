@@ -19,4 +19,5 @@
   export default copyModal;
 </script>
 <style lang="less">
+  @import "~@/css/pages/SystemConfig/quanXian/copyModal.less";
 </style>

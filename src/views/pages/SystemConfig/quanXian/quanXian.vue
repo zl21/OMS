@@ -59,45 +59,5 @@ import quanXian from "@/js/pages/SystemConfig/quanXian/quanXian.js";
 export default quanXian;
 </script>
 <style lang="less">
-.jurisdiction {
-  height: 100%;
-  .content {
-    height: calc(100% - 50px);
-    display: flex;
-    align-items: center;
-    .FilterTree_box {
-      height: 100%;
-      .FilterTree {
-        height: 100%;
-      }
-    }
-    .right_col {
-      height: 100%;
-      display: flex;
-      width: 100%;
-      border: 1px solid #d8d8d8;
-      border-radius: 6px;
-      .SelectTree_box {
-        height: 100%;
-        display: flex;
-        .SelectTree {
-          height: 100%;
-        }
-      }
-      .SearchForm_Table {
-        height: 100%;
-        padding: 8px 12px;
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        .SearchForm {
-          width: 100%;
-        }
-        .table_content {
-          margin-top: 10px;
-        }
-      }
-    }
-  }
-}
+@import "~@/css/pages/SystemConfig/quanXian/quanXian.less";
 </style>
