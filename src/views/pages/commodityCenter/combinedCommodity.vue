@@ -1799,7 +1799,7 @@ export default {
       return newObj;
     },
     //保存功能
-    saveAll(type) {
+    async saveAll(type) {
       let baseData = Object.assign({}, this.formConfig1.formValue);
       if (baseData["ECODE"] === "") {
         // this.$Message.warning("商品编码不能为空");
@@ -2035,7 +2035,7 @@ export default {
         psCPro: baseData,
         SkuGroupRequestList: t_SkuGroupRequestList,
       };
-      const res = this.service.commodityCenter.skuGroupSave(query);
+      const res = await this.service.commodityCenter.skuGroupSave(query);
       let data = res.data;
       if (data.code === 0) {
         this.$Message.success(data.message);

@@ -14,7 +14,7 @@ import '@burgeon/oms-theme/theme/custom.less'; // 主题文件
 import customizedTheme from './src/config/customized.theme.js';//主题配置
 import externalTreeDatasConfig from './src/config/externalTreeDatas.config'; // 树结构配置
 import i18n from '@burgeon/internationalization/i18n/i18n.js'; // 国际化
-import service from '@/service/api-service/index';
+import service from '@/service/index.js';
 // import './static/theme/custom.less'; // 主题文件
 // import './static/theme/theme.less'; // 自定义主题文件
 // import '@syman/ark-ui/dist/styles/ark-ui.css';
