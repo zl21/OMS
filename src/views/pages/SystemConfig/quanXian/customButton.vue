@@ -1,8 +1,8 @@
 <template>
   <div class="btn">
-    <div :class="['btn-group',config.flex]">
+    <div :class="['btn-group', config.flex]">
       <Button
-        v-for="(item,index) in config.buttons"
+        v-for="(item, index) in config.buttons"
         :key="index"
         @click="item.btnClick"
         type="fcdefault"
@@ -12,29 +12,8 @@
   </div>
 </template>
 <script>
-export default {
-  props: {
-    buttonConfig: {
-      type: Object,
-      default: {}
-    }
-  },
-  data() {
-    return {};
-  },
-  computed: {
-    config() {
-      console.log(this.buttonConfig);
-      return this.buttonConfig;
-    }
-  },
-  mounted() {
-    console.log(this.buttonConfig);
-    console.log(window);
-    console.log(this.$route);
-  },
-  methods: {}
-};
+import customButton from "@/js/pages/SystemConfig/quanXian/customButton.js";
+export default customButton;
 </script>
 <style lang="less">
 .btn {
