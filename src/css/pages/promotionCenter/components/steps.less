@@ -1,0 +1,48 @@
+.stepsBars {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  color: rgb(204, 204, 204);
+  .steps-item {
+    position: relative;
+    text-align: center;
+    height: 140px;
+    .steps-tail {
+      position: absolute;
+      border-left: 2px dashed rgb(204, 204, 204);
+      height: calc(100% - 90px);
+      width: 1px;
+      left: 50%;
+      margin-top: 90px;
+    }
+    .steps-head {
+      .steps-head-inner {
+        .icon-item {
+          line-height: 70px;
+          padding: 5px;
+          font-size: 50px;
+        }
+      }
+      .steps-head-inner > span:hover{
+         cursor: pointer;
+      }
+     
+      .step-noactive {
+        color: rgb(204, 204, 204);
+      }
+      .step-finish {
+        //color: rgb(48,62,79)
+        color: #fd6442;
+      }
+       .step-active {
+        border: 2px dashed;
+        //color: #fd6442;
+      }
+    }
+    .steps-main {
+      .steps-content {
+        font-size: 12px;
+      }
+    }
+  }
+}

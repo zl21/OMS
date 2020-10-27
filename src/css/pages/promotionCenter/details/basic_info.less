@@ -1,0 +1,112 @@
+@lineHeight: 24px;
+@inputWidth: 400px;
+@fontSize: 12px;
+.basicInfo {
+  padding: 10px;
+  border: 1px solid rgb(235, 235, 235);
+  .title {
+    i {
+      font-size: 36px;
+      color: rgb(236, 110, 78);
+    }
+    > span {
+      line-height: 36px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+  .row {
+    margin: 20px 0px;
+    white-space: nowrap;
+    .form_label {
+      text-align: center;
+      display: inline-block;
+      font-size: 12px;
+      width: 150px;
+      height: 100%;
+      line-height: @lineHeight;
+      padding: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .item-input {
+      height: 25px !important;
+      label.title {
+        width: 150px;
+        text-align: center;
+      }
+      label i {
+        font-size: 12px;
+        line-height: 10px;
+      }
+      .input-wrap {
+        .input-inner {
+          width: @inputWidth;
+          .el-input {
+            width: @inputWidth;
+            .el-input__inner {
+              font-size: @fontSize;
+              border-radius: 2px;
+              height: @lineHeight;
+              line-height: @lineHeight;
+              padding: 0 5px;
+            }
+          }
+        }
+      }
+      .el-select {
+        width: 300px;
+        .el-input {
+          font-size: 12px;
+          .el-input__inner {
+            font-size: @fontSize;
+            height: @lineHeight;
+            line-height: @lineHeight;
+            border-radius: 2px;
+          }
+        }
+      }
+    }
+    .burgeon-date-picker {
+      .burgeon-date-picker-rel {
+        .burgeon-input-wrapper {
+          .burgeon-input-icon-normal + .burgeon-input {
+            padding: 0;
+            height: 24px;
+            line-height: 24px;
+          }
+        }
+      }
+    }
+    .form_content {
+      height: 100%;
+      line-height: @lineHeight;
+      display: inline-block;
+      vertical-align: top;
+      width: calc(100% - 150px);
+      .form_item {
+        display: inline-block;
+      }
+      .limitinput {
+        width: 60px !important;
+      }
+      .form_el_input {
+        width: @inputWidth;
+        height: 100%;
+        input {
+          width: 100%;
+          height: 24px;
+          padding: 0 5px;
+          border-radius: 2px;
+          border: 1px solid #dcdfe6;
+          box-sizing: border-box;
+        }
+      }
+    }
+    .red {
+      padding: 5px;
+      color: red;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+
+@import "~@burgeon/oms-theme/skin/public.less";
+
+.scanIn {
+  position: relative;
+
+  .scan_button {
+    padding-left: 37px;
+    padding-top: 15px;
+
+    .one_button {
+      button {
+        min-height: 22px;
+      }
+    }
+  }
+
+  .scan_search {
+    padding: 10px 0 15px 37px;
+  }
+
+  .scan_search .titles,
+  .scan_info .titles,
+  .scan_logg .titles,
+  .scan_details .titles,
+  .scan_returngood .titles {
+    margin: 10px 0 10px 37px;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 3px solid @base-color;
+    width: 120px;
+    padding-bottom: 5px;
+  }
+
+  .yellow {
+    background-color: yellow;
+    color: red;
+  }
+
+  .green {
+    background-color: green;
+    color: red;
+  }
+
+  .fromLoading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 1000 !important;
+  }
+}
