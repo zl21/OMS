@@ -120,52 +120,7 @@
   </div>
 </template>
 <style lang="less" type="text/less">
-.ff-input-matrix--self {
-  .ff-matrix--table-content {
-    max-width: 800px;
-    max-height: 400px;
-    overflow: auto;
-  }
-}
-.ff-input--matrix-popover {
-  right: 0;
-  top: 33px;
-  background-color: #fff;
-  margin-left:-60px;
-  /*min-height: 100px;*/
-  .ff-input--dialog-pop {
-    position: absolute;
-    background-color: #fff;
-    width:200px;
-    padding: 6px;
-    box-sizing: border-box;
-    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.04), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
-    .ff--pop-option {
-      height: 24px;
-      box-sizing: border-box;
-      align-items: center;
-      display: flex;
-      span {
-        flex: 1;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-      }
-      &:hover {
-        background-color: #e4e8f1;
-      }
-      &:active {
-        background-color: #0082e6;
-      }
-    }
-    .ff--pop-option-active {
-      background-color: #20a0ff;
-      &:hover {
-        background-color: #20a0ff;
-      }
-    }
-  }
-}
+  @import "~@/css/pages/promotionCenter/components/P_matrixInput.less";
 </style>
 <style lang="less" scoped type="text/less">
 .ff-input--query--matrix {
@@ -204,6 +159,7 @@
 }
 </style>
 <script>
-  import P_matrixInput from "@/js/pages/promotionCenter/components/P_matrixInput";
+  import P_matrixInput from '@/js/pages/promotionCenter/components/P_matrixInput';
+
   export default P_matrixInput;
 </script>

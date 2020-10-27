@@ -2,31 +2,49 @@
 <template>
   <div class="row">
     <div style="width: 100%">
-      <Button class="import" @click="importData">批量导入</Button>
+      <Button
+        class="import"
+        @click="importData"
+      >
+        批量导入
+      </Button>
     </div>
     <div
-      class="form_content content_pro_list"
       v-for="(list, listIndex) in productList"
-      v-on:mouseover="changeActive(listIndex)"
       :key="listIndex"
+      class="form_content content_pro_list"
+      @mouseover="changeActive(listIndex)"
     >
       <i
+        v-show="list_index === listIndex ? true : false"
         class="el-tag__close el-icon-close closeBtn"
         @click="delIndexData(listIndex)"
-        v-show="list_index === listIndex ? true : false"
-      ></i>
+      />
       <div class="detailtable">
-        <div slot="action" class="form_button">
+        <div
+          slot="action"
+          class="form_button"
+        >
           <ButtonFkDialog
             :itemdata="itemdataFk"
             @getFkChooseItem="getButtonFkChoose(listIndex, 'product')"
-          ></ButtonFkDialog>
-          <button class="white" @click="addRowData(listIndex, 'product')">
+          />
+          <button
+            class="white"
+            @click="addRowData(listIndex, 'product')"
+          >
             添加
           </button>
         </div>
-        <Table :columns="products_columns" :data="list.products" border>
-          <template slot-scope="{ row, index }" slot="ECODE">
+        <Table
+          :columns="products_columns"
+          :data="list.products"
+          border
+        >
+          <template
+            slot="ECODE"
+            slot-scope="{ row, index }"
+          >
             <!-- <myInputLd
                 :isActive="true"
                 :isdisabled="false"
@@ -47,37 +65,59 @@
               @clearFilterChooseItem="
                 clearFilterChooseItem(listIndex, index, 'product')
               "
-            ></TableSku>
-          </template>
-          <template slot-scope="{ row, index }" slot="NUM">
-            <input
-              type="text"
-              v-model="row.NUM"
-              placeholder=""
-              oninput="this.value = this.value.replace( /[^0-9]+/,'');"
-              @blur="blurValue($event, row, listIndex, index, 'product', 'NUM')"
-              :class="{ AutoRight }"
             />
           </template>
-          <template slot-scope="{ row, index }" slot="OPERATE">
-            <Button :row="row" @click="deleteRowData(row, listIndex, 'product')"
-              >删除</Button
+          <template
+            slot="NUM"
+            slot-scope="{ row, index }"
+          >
+            <input
+              v-model="row.NUM"
+              type="text"
+              placeholder=""
+              oninput="this.value = this.value.replace( /[^0-9]+/,'');"
+              :class="{ AutoRight }"
+              @blur="blurValue($event, row, listIndex, index, 'product', 'NUM')"
             >
+          </template>
+          <template
+            slot="OPERATE"
+            slot-scope="{ row, index }"
+          >
+            <Button
+              :row="row"
+              @click="deleteRowData(row, listIndex, 'product')"
+            >
+              删除
+            </Button>
           </template>
         </Table>
       </div>
       <div class="detailtable">
-        <div slot="action" class="form_button">
+        <div
+          slot="action"
+          class="form_button"
+        >
           <ButtonFkDialog
             :itemdata="itemdata_giftFk"
             @getFkChooseItem="getButtonFkChoose(listIndex, 'gift')"
-          ></ButtonFkDialog>
-          <button class="white" @click="addRowData(listIndex, 'gift')">
+          />
+          <button
+            class="white"
+            @click="addRowData(listIndex, 'gift')"
+          >
             添加
           </button>
         </div>
-        <Table :columns="gift_columns" :data="list.gift_products" border>
-          <template slot-scope="{ row, index }" slot="ECODE">
+        <Table
+          :columns="gift_columns"
+          :data="list.gift_products"
+          border
+        >
+          <template
+            slot="ECODE"
+            slot-scope="{ row, index }"
+          >
             <!-- <myInputLd
                 :isActive="true"
                 :isdisabled="false"
@@ -98,38 +138,56 @@
               @clearFilterChooseItem="
                 clearFilterChooseItem(listIndex, index, 'gift')
               "
-            ></TableSku>
+            />
           </template>
-          <template slot-scope="{ row, index }" slot="NUM">
+          <template
+            slot="NUM"
+            slot-scope="{ row, index }"
+          >
             <input
-              type="text"
               v-model="row.NUM"
-              placeholder=""
-              oninput="this.value = this.value.replace( /[^0-9]+/,'');"
-              @blur="blurValue($event, row, listIndex, index, 'gift', 'NUM')"
-              :class="{ AutoRight }"
-            />
-          </template>
-          <template slot-scope="{ row, index }" slot="SUM">
-            <input
               type="text"
-              v-model="row.SUM"
               placeholder=""
               oninput="this.value = this.value.replace( /[^0-9]+/,'');"
-              @blur="blurValue($event, row, listIndex, index, 'gift', 'SUM')"
               :class="{ AutoRight }"
-            />
-          </template>
-          <template slot-scope="{ row, index }" slot="OPERATE">
-            <Button :row="row" @click="deleteRowData(row, listIndex, 'gift')"
-              >删除</Button
+              @blur="blurValue($event, row, listIndex, index, 'gift', 'NUM')"
             >
+          </template>
+          <template
+            slot="SUM"
+            slot-scope="{ row, index }"
+          >
+            <input
+              v-model="row.SUM"
+              type="text"
+              placeholder=""
+              oninput="this.value = this.value.replace( /[^0-9]+/,'');"
+              :class="{ AutoRight }"
+              @blur="blurValue($event, row, listIndex, index, 'gift', 'SUM')"
+            >
+          </template>
+          <template
+            slot="OPERATE"
+            slot-scope="{ row, index }"
+          >
+            <Button
+              :row="row"
+              @click="deleteRowData(row, listIndex, 'gift')"
+            >
+              删除
+            </Button>
           </template>
         </Table>
       </div>
     </div>
-    <div class="add" @click="addList">
-      <Icon type="md-add" class="addIcon" />
+    <div
+      class="add"
+      @click="addList"
+    >
+      <Icon
+        type="md-add"
+        class="addIcon"
+      />
     </div>
 
     <!--导入组件-->
@@ -140,87 +198,26 @@
      </div> -->
     <div v-if="show_dialog">
       <Modal
-        class="dialog"
         v-model="show_dialog"
+        class="dialog"
         :footer-hide="dialogSet.footerHide"
         :title="dialogSet.dialogTitle"
         :mask="dialogSet.mask"
       >
         <importDialog
-          :componentData="dialogModal"
+          :component-data="dialogModal"
           @returnData="returnData"
-        ></importDialog>
+        />
       </Modal>
     </div>
   </div>
 </template>
 <script>
-  import batchTables from "@/js/pages/promotionCenter/details/batchTables.js";
+  import batchTables from '@/js/pages/promotionCenter/details/batchTables.js';
+
   export default batchTables;
 </script>
 <style lang="less" scoped>
 @import "../less/common.less";
-.row {
-  padding: 0px 0 40px;
-  display: block;
-
-  .AutoRight {
-    text-align: right;
-    padding: 0 15px;
-  }
-  .form_content {
-    position: relative;
-    width: 100%;
-    //display:flex;
-    .detailtable {
-      width: 50%;
-    }
-    .closeBtn {
-      position: absolute;
-      right: -7px;
-      top: 30px;
-      z-index: 10;
-      font-size: 16px;
-      border: 1px solid #666;
-      border-radius: 50%;
-      color: #666;
-      background: #fff;
-    }
-  }
-  .burgeon-table-row {
-    font-size: 12px;
-    .item-input {
-      min-width: 150px;
-    }
-  }
-  .import {
-    float: right;
-    background: #fd6442;
-    color: #fff;
-    border: 1px solid #fd6442;
-    border-radius: 3px;
-    padding: 5px;
-  }
-  .burgeon-table-body {
-    button {
-      color: #fd6442;
-    }
-  }
-}
-.add {
-  display: inline-block;
-  background: #fd6442;
-  color: #fff;
-  padding: 0px 10px;
-  text-align: right;
-  float: right;
-  margin: 0 10px;
-  justify-content: flex-end;
-}
-.addIcon {
-  font-size: 30px;
-}
-.buttonFk {
-  display: inline-block;
-}
+@import "~@/css/pages/promotionCenter/details/batchTables.less";
 </style>

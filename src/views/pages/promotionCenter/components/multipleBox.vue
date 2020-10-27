@@ -22,14 +22,10 @@
   </div>
 </template>
 <script>
-  import multipleBox from "@/js/pages/promotionCenter/components/multipleBox";
+  import multipleBox from '@/js/pages/promotionCenter/components/multipleBox';
+
   export default multipleBox;
  </script>
 <style lang="less" scoped>
-.multipleBox{
-  display: flex;
-  .burgeon-checkbox-group{
-    white-space: initial;
-  }
-}
+@import "~@/css/pages/promotionCenter/components/multipleBox.less";
 </style>>

@@ -16,13 +16,10 @@
   </div>
 </template>
 <script>
-  import singleBox from "@/js/pages/promotionCenter/components/singleBox";
+  import singleBox from '@/js/pages/promotionCenter/components/singleBox';
+
   export default singleBox;
  </script>
 <style lang="less" scoped>
-.singleBox{
-  display: inline-block;
-  height: 100%;
-  line-height: 100%;
-}
+@import "~@/css/pages/promotionCenter/components/singleBox.less";
 </style>>

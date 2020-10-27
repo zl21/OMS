@@ -108,89 +108,10 @@
 </template>
 <script>
 
-  import setGroup from "@/js/pages/promotionCenter/setGroup";
+  import setGroup from '@/js/pages/promotionCenter/setGroup';
+
   export default setGroup;
 </script>
 <style lang="less">
-.setGroup{
-    .setGroupEdit{
-        .el-radio{
-            margin-right:20px;
-            font-weight:initial;
-        }
-        .lastRadio{
-            display:block;
-            margin-top:10px;
-        }
-        .setGroupName{
-            display:inline-block;
-            font-size: 14px;
-            position:relative;
-            .labelTitle{
-                width:70px;
-                font-style: normal;
-                text-align: right;
-                position:absolute;
-                line-height: 24px;
-            }
-            .groupInput{
-                height:24px;
-                padding-left: 70px;
-                .el-input__inner{
-                    height:24px;
-                    line-height: 24px;
-                }
-            }
-        }
-    }
-    .table{
-        
-        padding-top:10px;
-        .el-table__header-wrapper{
-            font-size: 13px;
-            .has-gutter tr th{
-                padding:0;
-                height:34px;
-            }
-        }
-        .el-table__body-wrapper{
-            .el-table__body tr td{
-                padding:0;
-                height:34px;
-            }
-        }
-        .priority{
-            height:22px;
-            line-height: 22px;
-            .el-input__inner{
-                height:22px;
-                line-height: 22px;
-                text-align: center;
-            }
-        }
-    }
-    .footer{
-        text-align: right;
-        button{
-            height: 24px;
-            min-width: 50px;
-            line-height: 24px;
-            padding: 0 8px;
-            border: 1px solid #fd6442;
-            font-size: 12px;
-            background: #fff;
-            color: #fd6442;
-            border-radius: 2px;
-            margin-right: 5px;
-        }
-        .active{
-            background: #fd6442;
-            color: #fff;
-            margin-right: 8px;
-        }
-        .white{
-
-        }
-    }
-}
+@import "~@/css/pages/promotionCenter/setGroup.less";
 </style>

@@ -21,21 +21,10 @@
   </div>
 </template>
 <script>
-  import buttonFkDialog from "@/js/pages/promotionCenter/components/buttonFkDialog";
+  import buttonFkDialog from '@/js/pages/promotionCenter/components/buttonFkDialog';
+
   export default buttonFkDialog;
 </script>
 <style lang="less" scoped>
-.buttonFk {
-    button {
-        height: 24px;
-        line-height: 24px;
-        padding: 0 8px;
-        border: 1px solid #fd6442;
-        font-size: 12px;
-        background: #fff;
-        color: #fd6442;
-        border-radius: 2px;
-        margin-right: 5px;
-      }
-}
+@import "~@/css/pages/promotionCenter/components/buttonFkDialog.less";
 </style>
