@@ -144,29 +144,5 @@
   export default commodityAuthority;
 </script>
 <style lang="less">
-.commodityAuthority {
-  height: 100%;
-  @import "~@/assets/css/css_1_3/order.less";
-  .content {
-    .tab-content {
-      .content-fixed {
-        .content-panel.right {
-          margin-right: 0;
-          width: calc(~"75% - 10px");
-        }
-      }
-    }
-  }
-  .table-head .oper-bar .input .el-autocomplete input {
-    width: 150px;
-  }
-}
-.my-autocomplete {
-  .el-autocomplete-suggestion__wrap {
-    padding: 4px 0;
-  }
-  .el-autocomplete-suggestion li {
-    padding: 0 5px;
-  }
-}
+@import "~@/css/pages/SystemConfig/commodityAuthority/commodityAuthority.less";
 </style>

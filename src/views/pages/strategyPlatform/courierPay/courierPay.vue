@@ -50,19 +50,5 @@
 </script>
 
 <style lang="less">
-@import "~professionalComponents/common/css/theme.less";
-
-.courierPay .buttons {
-  margin-top: 10px;
-}
-
-.courierPay .img {
-  position: absolute;
-  right: 80px;
-  z-index: 999;
-}
-
-.courierPay .img img {
-  height: 104px;
-}
+  @import "~@/css/pages/strategyPlatform/courierPay/courierPay.less";
 </style>
