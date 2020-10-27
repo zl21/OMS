@@ -181,56 +181,5 @@
 </script>
 
 <style lang="less">
-.returnGoodList {
-  .salesTable {
-    .businessLabel {
-      margin-top: 8px;
-    }
-    .tableBox {
-      border: 1px solid #dcdee2;
-      border-top: none;
-      padding: 10px 10px 10px 10px;
-    }
-  }
-  .jordan-table-box .page-box {
-    margin-top: 0;
-  }
-  .returnForm {
-    position: relative;
-    .fromLoading {
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      bottom: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: rgba(255, 255, 255, 0.9);
-      z-index: 1000 !important;
-    }
-  }
-  .burgeon-btn > .burgeon-icon {
-    margin-left: 3px;
-  }
-  .fromLoading {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.9);
-    z-index: 1000 !important;
-  }
-}
-.tableFooter {
-  padding: 10px 10px 10px 0px;
-  .tableFooter_border {
-    padding: 2px 4px;
-    border: 1px solid red;
-  }
-}
+@import "~@/css/pages/orderCenter/returngood/returngoodmanagementList.less";
 </style>

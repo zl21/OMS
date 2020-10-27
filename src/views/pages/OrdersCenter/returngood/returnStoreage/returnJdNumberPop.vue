@@ -39,34 +39,5 @@
 </script>
 
 <style>
-.returnNumberPop .burgeon-modal-body {
-  overflow: hidden;
-}
-.returnNumberPop
-  .burgeon-modal-content
-  .burgeon-modal-body
-  .burgeon-form-item-content {
-  margin-right: 0 !important;
-}
-.returnNumberPop .burgeon-form-item {
-  margin-bottom: 0 !important;
-}
-.returnNumberPop .orderContent {
-  display: flex;
-  justify-content: space-between;
-}
-.returnNumberPop .orderContent .buttonBox {
-  height: 30px;
-  margin-top: 40px;
-}
-.returnNumberPop .jordan-table-box .page-box {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-.returnNumberPop .jordan-table-box .burgeon-table-wrapper {
-  margin-top: 0 !important;
-}
-.burgeon-modal-content .burgeon-modal-body .burgeon-form-item-content {
-  margin-right: 0 !important;
-}
+@import "~@/css/pages/orderCenter/returngood/returnStoreage/returnJdNumberPop.less";
 </style>

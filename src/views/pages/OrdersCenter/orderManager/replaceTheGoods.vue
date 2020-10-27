@@ -42,34 +42,5 @@ export default replaceTheGoods;
 </script>
 
 <style lang="less" scoped>
-.order-change-detail {
-  position: relative;
-  overflow: auto;
-  ul {
-    li {
-      line-height: 16px;
-      vertical-align: middle;
-      padding: 5px;
-      float: left;
-      width: 30%;
-      display: flex;
-      label {
-        min-width: 60px;
-        text-align: right;
-        margin: 5px;
-      }
-      p {
-        margin-left: 10px;
-      }
-    }
-  }
-}
-.focusStyle {
-  margin-top: -40px;
-  z-index: -1;
-  opacity: 0;
-}
-.order-footer {
-  margin-top: 10px;
-}
+@import "~@/css/pages/orderCenter/orderManager/replaceTheGoods.less";
 </style>

@@ -79,33 +79,5 @@ import orderManageDetail from "@/js/pages/orderCenter/orderManageDetail/orderMan
 export default orderManageDetail;
 </script>
 <style lang="less" scoped>
-.order {
-  .order-btn {
-    // padding: 10px 10px 0px 10px;
-    padding-top: 10px;
-    width: calc(100% - 190px);
-    z-index: 1000;
-    position: fixed;
-    top: 84px;
-    background: #fff;
-  }
-
-  .order-header {
-    position: fixed;
-    z-index: 999;
-    top: 128px;
-    width: 100%;
-    background: #fff;
-  }
-
-  .order-content {
-    margin-top: 88px;
-  }
-
-  .statusFlag {
-    position: fixed !important;
-    right: 60px !important;
-    top: 120px !important;
-  }
-}
+  @import "~@/css/pages/orderCenter/orderManageDetail/orderManageDetail.less";
 </style>

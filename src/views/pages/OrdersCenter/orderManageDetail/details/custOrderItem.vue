@@ -20,15 +20,5 @@ import custManageAdd from "@/js/pages/orderCenter/orderManageDetail/details/cust
 export default custManageAdd;
 </script>
 <style lang='less'>
-.order-item {
-  .burgeon-table-tfoot {
-    transform: translateY(1px) !important;
-  }
-  .burgeon-table-tfoot tr:first-child td {
-    border-top: none;
-  }
-  // .burgeon-table-fixed {
-  //   width: 42px !important;
-  // }
-}
+  @import "~@/css/pages/orderCenter/orderManageDetail/details/custOrderItem.less";
 </style>

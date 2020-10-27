@@ -160,7 +160,7 @@
 </template>
 
 <script>
-  import quanXianTable from "@/js/pages/SystemConfig/userPermission/userPermission.js";
+  import userPermission from "@/js/pages/SystemConfig/userPermission/userPermission.js";
   export default userPermission;
 </script>
 
