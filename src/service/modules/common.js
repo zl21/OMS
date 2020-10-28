@@ -4,7 +4,6 @@ import R3 from '@syman/burgeon-r3';
 const {network} = R3;
 
 export default {
-  hello: (params) => network.post('/p/cs/hello', params),
   getObject: (params) => network.post('/p/cs/getObject', params),
   ignoreMsg: (params) => network.post('/p/cs/ignoreMsg', params),
   queryPhyWareHouseList: (params) => network.post('/p/cs/queryPhyWareHouseList', params),
@@ -32,9 +31,33 @@ export default {
   manualJdMatchingCheck: (params) => network.post('/p/cs/manualJdMatchingCheck', params),
   jdReturnStorageSave: (params) => network.get('/p/cs/jdReturnStorageSave', params),
   manualJdMatchingList: (params) => network.post('/p/cs/manualJdMatchingList', params),
+  screenresult: (params) => network.post('/p/cs/screenresult', params),
+  cpCHrorgTree: (params) => network.post('/p/cs/cpCHrorgTree', params),
+  downLoadVipCancelTimeOrder: (params) => network.post('/p/cs/downLoadVipCancelTimeOrder', params),
+  downLoadVipOrderRefund: (params) => network.post('/p/cs/downLoadVipOrderRefund', params),
+  addToFavorite: (params) => network.post('/p/cs/addToFavorite', params),
+  exchangeDownload: (params) => network.post('/p/cs/exchangeDownload', params),
+  groupTreeload: (params) => network.post('/p/cs/groupTreeload', params),
+  removeFromFavorite: (params) => network.post('/p/cs/removeFromFavorite', params),
+  refundDownload: (params) => network.post('/p/cs/refundDownload', params),
+  itemDownload: (params) => network.post('/p/cs/itemDownload', params),
+  downLoadVipTimeOrder: (params) => network.post('/p/cs/downLoadVipTimeOrder', params),
+  orderDownload: (params) => network.post('/p/cs/orderDownload', params),
+  downLoadVipDelivery: (params) => network.post('/p/cs/downLoadVipDelivery', params),
+  getUserConfig: (params) => network.post('/p/cs/getUserConfig', params),
+  QueryList: (params) => network.post('/p/cs/QueryList', params),
+  SgOutNoticePrint: (params) => network.post('/p/cs/SgOutNoticePrint', params),
+  fuzzyquerybyak: (params) => network.post('/p/cs/fuzzyquerybyak', params),
+  cgroupcolumnquery: (params) => network.post('/p/cs/cgroupcolumnquery', params),
+  screenresultcheck: (params) => network.post('/p/cs/screenresultcheck', params),
+  searchButtonsInJdDetail: (params) => network.post('/p/cs/searchButtonsInJdDetail', params),
+  objectSave: (params) => network.post('/p/cs/objectSave', params),
+  expressAreaVoidCmd: (params) => network.post('/p/cs/expressAreaVoidCmd', params),
+  cpromLogQuery: (params) => network.post('/p/cs/cpromLogQuery', params),
+  getweekdate: (params) => network.post('/p/cs/getweekdate', params),
   // 通用接口下载
   /**
-   * 经销订单下载 分销商订单下载 /p/cs/orderDownload 
+   * 经销订单下载 分销商订单下载 /p/cs/orderDownload
    * 分销商品下载 /p/cs/itemDownload
    * 通用商品下载 /p/cs/stdp/item/get
    * 分销退单下载 /p/cs/refundDownload
