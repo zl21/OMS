@@ -32,6 +32,15 @@ export default {
   manualJdMatchingCheck: (params) => network.post('/p/cs/manualJdMatchingCheck', params),
   jdReturnStorageSave: (params) => network.get('/p/cs/jdReturnStorageSave', params),
   manualJdMatchingList: (params) => network.post('/p/cs/manualJdMatchingList', params),
+  // 通用接口下载
+  /**
+   * 经销订单下载 分销商订单下载 /p/cs/orderDownload 
+   * 分销商品下载 /p/cs/itemDownload
+   * 通用商品下载 /p/cs/stdp/item/get
+   * 分销退单下载 /p/cs/refundDownload
+   * "/p/cs/stdp/order/get
+   */
+  publicOrderDownload: (url,params) => network.post(url, params),
 }
 
 

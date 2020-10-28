@@ -1,6 +1,5 @@
 // 接口平台
 import R3 from '@syman/burgeon-r3';
-import httpServer from 'framework/__utils__/request';
 const {network} = R3;
 export default {
   // 淘宝订单/京东订单/JITX订单 下载
@@ -17,6 +16,7 @@ export default {
   downLoadVipTimeOrder: (params) => network.post('/p/cs/downLoadVipTimeOrder', params),
   // 取消实效订单下载
   downLoadVipCancelTimeOrder: (params) => network.post('/p/cs/downLoadVipCancelTimeOrder', params),
+  
   // 通用接口下载
   /**
    * 经销订单下载 分销商订单下载 /p/cs/orderDownload 
