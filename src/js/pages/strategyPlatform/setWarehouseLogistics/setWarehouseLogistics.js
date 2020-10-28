@@ -290,7 +290,7 @@ export default {
   },
   methods: {
     // 保存
-    save() {
+    async save() {
       const _this = this;
       if (!_this.information.formData[0].itemdata.pid)
         return _this.$Message.error("仓库必填");
@@ -320,91 +320,81 @@ export default {
         objid: this.$route.query.id,
       };
       fromdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/saveWarehouseLogistics",
-        method: "post",
-        data: fromdata,
-      }).then((res) => {
-        _this.isSaveLoading = false;
-        if (res.data.data.code === 0) {
-          // _this.$Message.success("保存成功");
-          _this.$Message.success(vmI18n.t("modalTips.z9"));
-          if (this.$route.query.id !== "-1") {
-            this.refresh();
-          } else {
-            this.$store.commit("customize/TabHref", {
-              id: res.data.data.data.objid, // 单据id
-              type: "action", // 类型action
-              name: "setWarehouseLogistics", // 文件名
-              // label: "仓库物流优先级设置", // tab中文名
-              label: vmI18n.t("panel_label.setWarehouseLogistics"),
-              query: Object.assign({
-                id: res.data.data.data.objid, // 单据id
-                // tabTitle: "仓库物流优先级设置", // tab中文名
-                tabTitle: vmI18n.t("panel_label.setWarehouseLogistics"),
-              }), // 带的参数
-            });
-          }
+      const res = await this.service.common.saveWarehouseLogistics(fromdata);
+      _this.isSaveLoading = false;
+      if (res.data.data.code === 0) {
+        // _this.$Message.success("保存成功");
+        _this.$Message.success(vmI18n.t("modalTips.z9"));
+        if (this.$route.query.id !== "-1") {
+          this.refresh();
         } else {
-          // const err = res.data.data.message || "保存失败";
-          const err = res.data.data.message || vmI18n.t("modalTips.y0");
-          _this.$Message.error(err);
-          _this.refresh();
+          this.$store.commit("customize/TabHref", {
+            id: res.data.data.data.objid, // 单据id
+            type: "action", // 类型action
+            name: "setWarehouseLogistics", // 文件名
+            // label: "仓库物流优先级设置", // tab中文名
+            label: vmI18n.t("panel_label.setWarehouseLogistics"),
+            query: Object.assign({
+              id: res.data.data.data.objid, // 单据id
+              // tabTitle: "仓库物流优先级设置", // tab中文名
+              tabTitle: vmI18n.t("panel_label.setWarehouseLogistics"),
+            }), // 带的参数
+          });
         }
-      });
+      } else {
+        // const err = res.data.data.message || "保存失败";
+        const err = res.data.data.message || vmI18n.t("modalTips.y0");
+        _this.$Message.error(err);
+        _this.refresh();
+      }
     },
-    getTreeData() {
+    async getTreeData() {
       const _this = this;
       _this.isSaveLoading = true;
       const param = { objid: this.$route.query.id };
-      axios({
-        url: "/p/cs/getWarehouseLogisticsTree",
-        method: "post",
-        data: param,
-      }).then((res) => {
-        _this.isSaveLoading = false;
-        if (res.data.code === 0) {
-          _this.treeData = res.data.data.warehouseLogisticsTree;
-          if (res.data.data.warehouseLogistics) {
-            _this.information.formData[0].itemdata.pid =
-              res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ID;
-            _this.information.formData[0].itemdata.valuedata =
-              res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ENAME;
-            _this.information.formValue.REMARK =
-              res.data.data.warehouseLogistics.REMARK;
-            if (res.data.data.warehouseLogistics.ISACTIVE === "N") {
-              // _this.statusName = "已作废";
-              _this.statusName = vmI18n.t("common.voided");
-              _this.btnConfig.buttons.forEach((item) => {
-                // if (item.text === ("修改物流" || "作废" || "导入" || "导出" || "保存"))
-                if (
-                  item.text ===
-                  (vmI18n.t("btn.modify_logistics") ||
-                    vmI18n.t("btn.void") ||
-                    vmI18n.t("btn.import") ||
-                    vmI18n.t("btn.export") ||
-                    vmI18n.t("btn.save"))
-                )
-                  item.disabled = true;
-              });
-            }
-          }
-          if (res.data.data.warehouseLogisticsItems.length) {
-            this.theadArr = [];
-            res.data.data.warehouseLogisticsItems.forEach((item) => {
-              this.theadArr.push({
-                name: item.CP_C_LOGISTICS_ENAME,
-              });
+      const res = await this.service.common.getWarehouseLogisticsTree(param);
+      _this.isSaveLoading = false;
+      if (res.data.code === 0) {
+        _this.treeData = res.data.data.warehouseLogisticsTree;
+        if (res.data.data.warehouseLogistics) {
+          _this.information.formData[0].itemdata.pid =
+            res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ID;
+          _this.information.formData[0].itemdata.valuedata =
+            res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ENAME;
+          _this.information.formValue.REMARK =
+            res.data.data.warehouseLogistics.REMARK;
+          if (res.data.data.warehouseLogistics.ISACTIVE === "N") {
+            // _this.statusName = "已作废";
+            _this.statusName = vmI18n.t("common.voided");
+            _this.btnConfig.buttons.forEach((item) => {
+              // if (item.text === ("修改物流" || "作废" || "导入" || "导出" || "保存"))
+              if (
+                item.text ===
+                (vmI18n.t("btn.modify_logistics") ||
+                  vmI18n.t("btn.void") ||
+                  vmI18n.t("btn.import") ||
+                  vmI18n.t("btn.export") ||
+                  vmI18n.t("btn.save"))
+              )
+                item.disabled = true;
             });
-          } else {
-            this.theadArr = [];
           }
-          _this.provinceSynchronous();
         }
-      });
+        if (res.data.data.warehouseLogisticsItems.length) {
+          this.theadArr = [];
+          res.data.data.warehouseLogisticsItems.forEach((item) => {
+            this.theadArr.push({
+              name: item.CP_C_LOGISTICS_ENAME,
+            });
+          });
+        } else {
+          this.theadArr = [];
+        }
+        _this.provinceSynchronous();
+      }
     },
     // 同步查询
-    synchronous() {
+    async synchronous() {
       const _this = this;
       _this.tableLoading = true;
       _this.listArr = [];
@@ -419,20 +409,16 @@ export default {
           }
         });
       });
-      axios({
-        url: "/p/cs/getLogisticsRankResultTable",
-        method: "post",
-        data: { objid: this.$route.query.id, treeNode: treeList },
-      }).then((res) => {
-        _this.tableLoading = false;
-        if (res.data.code === 0) {
-          _this.cityThead = true;
-          _this.listArr = res.data.data !== undefined ? res.data.data : [];
-          _this.listArr.forEach(
-            (item) => (item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK))
-          );
-        }
-      });
+      const query = { objid: this.$route.query.id, treeNode: treeList };
+      const res = await this.service.common.getLogisticsRankResultTable(query);
+      _this.tableLoading = false;
+      if (res.data.code === 0) {
+        _this.cityThead = true;
+        _this.listArr = res.data.data !== undefined ? res.data.data : [];
+        _this.listArr.forEach(
+          (item) => (item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK))
+        );
+      }
     },
     // 省同步查询
     provinceSynchronous() {
@@ -545,32 +531,27 @@ export default {
       this.getTreeData();
     },
     // 作废
-    invalid() {
+    async invalid() {
       const _this = this;
       _this.isSaveLoading = true;
       const fromdata = new FormData();
       const param = { objid: this.$route.query.id };
       fromdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/voidWarehouseLogistics",
-        method: "post",
-        data: fromdata,
-      }).then((res) => {
-        _this.isSaveLoading = false;
-        if (res.data.code === 0) {
-          // const ess = res.data.data.message || "作废成功";
-          const ess = res.data.data.message || vmI18n.t("modalTips.y4");
-          _this.getTreeData();
-          _this.$Message.success(ess);
-        } else {
-          // const err = res.data.data.message || "作废失败";
-          const err = res.data.data.message || vmI18n.t("modalTips.y4");
-          _this.$Message.success(err);
-        }
-      });
+      const res = await this.service.common.voidWarehouseLogistics(fromdata);
+      _this.isSaveLoading = false;
+      if (res.data.code === 0) {
+        // const ess = res.data.data.message || "作废成功";
+        const ess = res.data.data.message || vmI18n.t("modalTips.y4");
+        _this.getTreeData();
+        _this.$Message.success(ess);
+      } else {
+        // const err = res.data.data.message || "作废失败";
+        const err = res.data.data.message || vmI18n.t("modalTips.y4");
+        _this.$Message.success(err);
+      }
     },
     // 导出
-    warningOk() {
+    async warningOk() {
       const _this = this;
       _this.warningModal = false;
       const treeList = [];
@@ -588,23 +569,18 @@ export default {
         objid: _this.$route.query.id,
         treeNode: treeList,
       };
-      axios({
-        url: "/p/cs/exportWarehouseLogisticsRank",
-        method: "post",
-        data: param,
-      }).then((res) => {
-        if (res.data.code === 0) {
-          // const ess = res.data.message || "导出成功";
-          const ess = res.data.data.message || vmI18n.t("modalTips.z2");
-          _this.$Message.success(ess);
-          publicMethodsUtil.downloadUrlFile(res.data.data);
-        } else {
-          // const err = res.data.message || "导出失败";
-          const err = res.data.data.message || vmI18n.t("modalTips.y6");
-          _this.$Message.success(err);
-          publicMethodsUtil.downloadUrlFile(res.data.data);
-        }
-      });
+      const res = await this.service.common.exportWarehouseLogisticsRank(param);
+      if (res.data.code === 0) {
+        // const ess = res.data.message || "导出成功";
+        const ess = res.data.data.message || vmI18n.t("modalTips.z2");
+        _this.$Message.success(ess);
+        publicMethodsUtil.downloadUrlFile(res.data.data);
+      } else {
+        // const err = res.data.message || "导出失败";
+        const err = res.data.data.message || vmI18n.t("modalTips.y6");
+        _this.$Message.success(err);
+        publicMethodsUtil.downloadUrlFile(res.data.data);
+      }
     },
     saveOk() {
       this.save();

@@ -2,6 +2,7 @@
 // 数据约定 和 外键关联
 import axios from 'axios';
 import R3 from '@syman/burgeon-r3';
+import service from '@/service/index';
 
 const { store } = R3;
 const groups = {
@@ -213,18 +214,14 @@ colGroups.prototype.getSelect = function () {
   });
 };
 
-colGroups.prototype.getPromField = function () {
+colGroups.prototype.getPromField = async function () {
   if (!$.isEmptyObject(this.columnIds)) return this.columnIds;
-  axios({
-    method: 'get',
-    url: '/p/cs/getPromField',
-  }).then((res) => {
-    if (res.data.code === 0) {
-      console.log('getPromField------', res.data.data);
-      this.columnIds = res.data.data || {};
-      store.commit('customize/forginkeys', { key: 'columnIds', value: this.columnIds });
-    }
-  });
+  const res = await service.common.getPromField();
+  if (res.data.code === 0) {
+    console.log('getPromField------', res.data.data);
+    this.columnIds = res.data.data || {};
+    store.commit('customize/forginkeys', { key: 'columnIds', value: this.columnIds });
+  }
 };
 
 colGroups.prototype.load = function () {

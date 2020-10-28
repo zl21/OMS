@@ -1,4 +1,5 @@
 import axios from "axios";
+import service from '@/service/index';
 
 class publicUtil {
   constructor() {}
@@ -121,31 +122,26 @@ class publicUtil {
    *  @param table 表名
    *  @param label label Name
    *  @param foldingName 折叠名称
-   * */ 
-  getTypeList(table, label, foldingName) {
+   * */
+  async getTypeList(table, label, foldingName) {
     let fromdata = new FormData();
     let data = [];
     fromdata.append("table", table);
     fromdata.append("objid", -1);
-    axios({
-      url: "/p/cs/getObject",
-      method: "post",
-      data: fromdata
-    }).then((res) => {
-      res.data.data.addcolums.forEach(item => {
-        if (item.parentdesc == foldingName) {
-          item.childs.forEach(list => {
-            if (list.name == label) {
-              list.combobox.forEach(arr => {
-                data.push({
-                  value: arr.limitval,
-                  label: arr.limitdesc
-                })
+    const res = await service.common.getObject(fromdata);
+    res.data.data.addcolums.forEach(item => {
+      if (item.parentdesc == foldingName) {
+        item.childs.forEach(list => {
+          if (list.name == label) {
+            list.combobox.forEach(arr => {
+              data.push({
+                value: arr.limitval,
+                label: arr.limitdesc
               })
-            }
-          })
-        }
-      })
+            })
+          }
+        })
+      }
     });
     return data;
   }

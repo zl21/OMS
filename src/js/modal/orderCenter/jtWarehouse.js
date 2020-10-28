@@ -230,26 +230,21 @@ export default {
         "searchdata",
         '{"column_include_uicontroller":true,"startindex":0,"fixedcolumns":{}}'
       );
-      await axios({
-        url: "/p/cs/objectTableItem",
-        method: "post",
-        data: fromdata,
-      }).then(function (res) {
-        if (res.data.code === 0) {
-          let arr = "";
-          res.data.datas.tabth.forEach((item) => {
-            if (item.name === "配送方式") {
-              arr = item.combobox;
-            }
-          });
-          console.log(arr);
-          arr.forEach((tem) => {
-            tem.value = tem.limitval;
-            tem.label = tem.limitdesc;
-          });
-          self.warehouseManagementFromConfig.formData[3].options = arr;
-        }
-      });
+      const res = await this.service.common.objectTableItem(fromdata);
+      if (res.data.code === 0) {
+        let arr = "";
+        res.data.datas.tabth.forEach((item) => {
+          if (item.name === "配送方式") {
+            arr = item.combobox;
+          }
+        });
+        console.log(arr);
+        arr.forEach((tem) => {
+          tem.value = tem.limitval;
+          tem.label = tem.limitdesc;
+        });
+        self.warehouseManagementFromConfig.formData[3].options = arr;
+      }
     },
   },
 };

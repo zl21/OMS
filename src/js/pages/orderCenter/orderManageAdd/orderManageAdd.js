@@ -1403,7 +1403,7 @@ export default {
   }, // 获取支付方式下拉选项值
   methods: {
     // 发货仓库
-    getWarehouse(id, cid) {
+    async getWarehouse(id, cid) {
       const _this = this;
       _this.formConfig.formData[8].options = [];
       const formData = new FormData();
@@ -1422,30 +1422,27 @@ export default {
         );
       }
       if (_this.formConfig.formData[0].itemdata.pid) {
-        this.$network
-          .post("/p/cs/queryPhyWareHouseList", formData)
-          .then((res) => {
-            if (res.data.code === 0) {
-              _this.formConfig.formData.forEach((item) => {
-                if (item.label === "发货仓库") item.options = res.data.data;
-              });
-              let existsFlag = false;
-              let cidStr = `${cid}`;
-              res.data.data.forEach((item) => {
-                if (item.value === cidStr) {
-                  existsFlag = true;
-                }
-              });
-              if (!existsFlag) {
-                cidStr = "";
-              }
-              if (cid) {
-                setTimeout(() => {
-                  _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = cidStr;
-                }, 100);
-              }
+        const res = await _this.service.common.queryPhyWareHouseList(formData);
+        if (res.data.code === 0) {
+          _this.formConfig.formData.forEach((item) => {
+            if (item.label === "发货仓库") item.options = res.data.data;
+          });
+          let existsFlag = false;
+          let cidStr = `${cid}`;
+          res.data.data.forEach((item) => {
+            if (item.value === cidStr) {
+              existsFlag = true;
             }
           });
+          if (!existsFlag) {
+            cidStr = "";
+          }
+          if (cid) {
+            setTimeout(() => {
+              _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = cidStr;
+            }, 100);
+          }
+        }
       } else {
         // _this.$Message.error('请先选择下单店铺');
       }

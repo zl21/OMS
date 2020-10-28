@@ -5,7 +5,6 @@ const {network} = R3;
 
 export default {
   getObject: (params) => network.post('/p/cs/getObject', params),
-  ignoreMsg: (params) => network.post('/p/cs/ignoreMsg', params),
   queryPhyWareHouseList: (params) => network.post('/p/cs/queryPhyWareHouseList', params),
   selectLimitGroups: (params) => network.post('/p/cs/selectLimitGroups', params),
   objectTableItem: (params) => network.post('/p/cs/objectTableItem', params),
@@ -15,7 +14,7 @@ export default {
   getLogisticsLikeRankResultTable: (params) => network.post('/p/cs/getLogisticsLikeRankResultTable', params),
   voidWarehouseLogistics: (params) => network.post('/p/cs/voidWarehouseLogistics', params),
   exportWarehouseLogisticsRank: (params) => network.post('/p/cs/exportWarehouseLogisticsRank', params),
-  getPromField: (params) => network.post('/p/cs/getPromField', params),
+  getPromField: (params) => network.get('/p/cs/getPromField', params),
   getWarehouseLogisticsInfo: (params) => network.post('/p/cs/getWarehouseLogisticsInfo', params),
   delWarehouseLogistics: (params) => network.post('/p/cs/delWarehouseLogistics', params),
   saveCompensate: (params) => network.post('/p/cs/saveCompensate', params),

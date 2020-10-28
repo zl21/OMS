@@ -9,6 +9,7 @@ import businessStatusFlag from "professionalComponents/businessStatusFlag";
 import dateUtil from "@/assets/js/__utils__/date.js";
 import tableInput from "professionalComponents/businessTableInput.vue";
 import publicMethodsUtil from "@/assets/js/public/publicMethods.js";
+
 export default {
   name: "payableAdjustAdd",
   components: {
@@ -1616,22 +1617,17 @@ export default {
       let fromdata = new FormData();
       fromdata.append("table", tableName);
       fromdata.append("objid", -1);
-      await axios({
-        url: "/p/cs/getObject",
-        method: "post",
-        data: fromdata,
-      }).then(function (res) {
-        let selectData = res.data.data.addcolums;
-        selectData.forEach((item) => {
-          if (item.parentdesc === parentColName) {
-            let childItem = item.childs;
-            childItem.forEach((item) => {
-              if (item.colname === childColName) {
-                self.selectData = item.combobox;
-              }
-            });
-          }
-        });
+      const res = await self.service.common.getObject(fromdata);
+      let selectData = res.data.data.addcolums;
+      selectData.forEach((item) => {
+        if (item.parentdesc === parentColName) {
+          let childItem = item.childs;
+          childItem.forEach((item) => {
+            if (item.colname === childColName) {
+              self.selectData = item.combobox;
+            }
+          });
+        }
       });
     },
     keyDown(e) {

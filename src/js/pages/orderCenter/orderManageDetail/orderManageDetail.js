@@ -820,7 +820,7 @@ export default {
       }
     },
   },
-  created() {
+  async created() {
     const id = this.$route.query ? this.$route.query.id : -1;
     this.objId = id;
     this.tab1 = {
@@ -863,28 +863,26 @@ export default {
       },
     };
     this.pageLoad = true;
-    this.$network
-      .post(this.$httpApi.public.selectLimitGroups, ["UPLOAD_SAP_STATUS"])
-      .then((res) => {
-        if (Array.isArray(res.data)) {
-          res.data.forEach((item) => {
-            this.enumerationList[item.name] = item.adLimitvalues.map((val) => ({
-              label: val.description,
-              value: Number(val.value),
-            }));
-          });
-        } else {
-          this.enumerationList.UPLOAD_SAP_STATUS = [];
-        }
-        this.$nextTick(() => {
-          this.pageLoad = false;
-          this.load();
-          this.getPermissions("btnConfig", "orderManager");
+    try {
+      const res = await service.common.selectLimitGroups(["UPLOAD_SAP_STATUS"]);
+      if (Array.isArray(res.data)) {
+        res.data.forEach((item) => {
+          this.enumerationList[item.name] = item.adLimitvalues.map((val) => ({
+            label: val.description,
+            value: Number(val.value),
+          }));
         });
-      })
-      .catch(() => {
+      } else {
+        this.enumerationList.UPLOAD_SAP_STATUS = [];
+      }
+      this.$nextTick(() => {
         this.pageLoad = false;
+        this.load();
+        this.getPermissions("btnConfig", "orderManager");
       });
+    } catch (e) {
+      this.pageLoad = false;
+    }
   } /* ,
   mounted() {
     this.$nextTick(() => {

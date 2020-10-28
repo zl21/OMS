@@ -740,31 +740,26 @@ export default {
       let fromdata = new FormData();
       fromdata.append("table", tableName);
       fromdata.append("objid", -1);
-      return new Promise((resolve) => {
+      return new Promise(async (resolve) => {
         let optionData = [];
-        axios({
-          url: "/p/cs/getObject",
-          method: "post",
-          data: fromdata,
-        }).then((res) => {
-          let selectData = res.data.data.addcolums;
-          selectData.forEach((item) => {
-            if (item.parentdesc === parentColName) {
-              let childItem = item.childs;
-              childItem.forEach((item) => {
-                if (item.colname === childColName) {
-                  optionData = item.combobox.map((subItem) => {
-                    return {
-                      label: subItem.limitdesc,
-                      value: subItem.limitval,
-                    };
-                  });
-                }
-              });
-            }
-          });
-          resolve(optionData);
+        const res = await this.service.common.getObject(fromdata);
+        let selectData = res.data.data.addcolums;
+        selectData.forEach((item) => {
+          if (item.parentdesc === parentColName) {
+            let childItem = item.childs;
+            childItem.forEach((item) => {
+              if (item.colname === childColName) {
+                optionData = item.combobox.map((subItem) => {
+                  return {
+                    label: subItem.limitdesc,
+                    value: subItem.limitval,
+                  };
+                });
+              }
+            });
+          }
         });
+        resolve(optionData);
       });
     },
     // 查找
