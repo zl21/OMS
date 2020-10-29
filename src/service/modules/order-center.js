@@ -26,5 +26,13 @@ export default {
   splitOrder: params => network.post('/api/cs/oc/oms/v1/splitOrder', params),
   manualUnHoldOrder: params => network.post('/api/cs/oc/oms/v1/manualUnHoldOrder', params),
   mergeOrderOne: params => network.post('/api/cs/oc/oms/v1/mergeOrderOne', params),
-  cancelMergeOrder: params => network.post('/api/cs/oc/oms/v1/cancelMergeOrder', params)
+  cancelMergeOrder: params => network.post('/api/cs/oc/oms/v1/cancelMergeOrder', params),
+  screenresult: params => network.post('/p/cs/screenresult', params),
+  skuQuery: params => network.post('/p/cs/skuQuery', params),
+  getObject: params => network.post('/p/cs/getObject', params),
+  billCopy: params => network.post('/p/cs/billCopy', params),
+  getOrderDetailList: params => network.post('/p/cs/getOrderDetailList', params),
+  saveBill: params => network.post('p/cs/saveBill', params),
+  delOrderItem: params => network.post('/p/cs/delOrderItem', params),
+  queryResionByName: params => network.post('/p/cs/queryResionByName', params)
 };
