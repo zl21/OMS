@@ -182,7 +182,7 @@ export default {
       this.search();
     },
     tableDeleteDetail() { },
-    request(req) {
+    async request(req) {
       let self = this;
       self.objid = req.objid || -1;
       self.itemobjid = req.itemobjid || -1;
@@ -204,11 +204,6 @@ export default {
               : "";
         }
       });
-      axios({
-        url: "/p/cs/skuQuery",
-        method: "post",
-        data: param
-      }).then(res => { });
     },
     submit() {
       let self = this;
@@ -266,7 +261,7 @@ export default {
         }
       });
     },
-    search() {
+    async search() {
       //搜索
       let self = this;
       let p = self.reaptData(this.queryParams);
@@ -285,17 +280,12 @@ export default {
         psCSku: p,
         IS_GIFT: p.IS_GIFT
       };
-      axios({
-        url: "/p/cs/skuQuery",
-        method: "post",
-        data: param
-      }).then(res => {
-        if (res.data.code === 0) {
-          let lists = res.data.data.data;
-          self.tableConfig.data = lists;
-          self.tableConfig.total = res.data.data.totleCount;
-        }
-      });
+      const res = await self.service.common.skuQuery(param);
+      if (res.data.code === 0) {
+        let lists = res.data.data.data;
+        self.tableConfig.data = lists;
+        self.tableConfig.total = res.data.data.totleCount;
+      }
     },
     reaptData(obj) {
       if (obj instanceof Array) {

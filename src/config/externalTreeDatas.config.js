@@ -1,6 +1,7 @@
 /* 树结构界面配置 */
 
 import R3 from '@syman/burgeon-r3'
+import service from '@/service/index'
 const {
   network,
   urlSearchParams
@@ -34,12 +35,11 @@ export default {
     let data = [];
     let formdata = new FormData();
     formdata.append('param', 'cpcsupplier');
-    await network.post('/p/c/cpCHrorgTree', formdata).then((res) => {
-      //   console.log(res);
-      // data = restructureMenuTreeData(res.data);
-      data = res.data;
-      if (res.data.code === 0) {}
-    });
+    const res = await service.common.cpCHrorgTree(formdata);
+    //   console.log(res);
+    // data = restructureMenuTreeData(res.data);
+    data = res.data;
+    if (res.data.code === 0) {}
     const treeData = {
       data,
       name: 'CP_C_HRORG_ID'
@@ -68,11 +68,8 @@ export default {
     let data = [];
     let formdata = new FormData();
     formdata.append('param', 'cpcHrorg');
-    await network.post('/p/c/cpCHrorgTree', formdata).then((res) => {
-      //   console.log(res);
-      // data = restructureMenuTreeData(res.data);
-      data = res.data;
-    })
+    const res = await service.common.cpCHrorgTree(formdata);
+    data = res.data;
     const treeData = {
       data,
       name: 'ID'
@@ -84,9 +81,8 @@ export default {
     let data = [];
     let formdata = new FormData();
     formdata.append('param', 'users');
-    await network.post('/p/c/cpCHrorgTree', formdata).then((res) => {
-      data = res.data;
-    })
+    const res = await service.common.cpCHrorgTree(formdata);
+    data = res.data;
     const treeData = {
       data,
       name: 'ID'
@@ -98,9 +94,8 @@ export default {
     let data = [];
     let formdata = new FormData();
     formdata.append('param', 'group');
-    await network.post('/p/c/cpCHrorgTree', formdata).then((res) => {
-      data = res.data;
-    })
+    const res = await service.common.cpCHrorgTree(formdata);
+    data = res.data;
     const treeData = {
       data,
       name: 'ID'
@@ -112,11 +107,9 @@ export default {
     let data = [];
     const formdata = new FormData();
     formdata.append('param', 'IN');
-    await network.post('/p/c/cpCHrorgTree', formdata).then((res) => {
-      //   console.log(res);
-      data = res.data;
-      if (res.data.code === 0) {}
-    });
+    const res = await service.common.cpCHrorgTree(formdata);
+    data = res.data;
+    if (res.data.code === 0) {}
     const treeData = {
       data,
       name: 'CP_C_HRORG_ID'

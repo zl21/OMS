@@ -3130,7 +3130,7 @@ export default {
                 value: "gbCode",
                 columns: ["ECODE"],
                 AuotData: [], //匹配的选项
-                dimChange: val => {
+                dimChange: async (val) => {
                   //模糊查询的方法
                   let _this = this;
                   _this.jordanTableConfig2.jordanFormConfig.formValue.gbCode = val.trim();
@@ -3143,23 +3143,18 @@ export default {
                     TABLENAME: "PS_C_PRO"
                   };
                   fromdata.append("param", JSON.stringify(params));
-                  axios({
-                    url: "/p/cs/screenresult",
-                    method: "post",
-                    data: fromdata
-                  }).then(res => {
-                    if (res.data.code === 0) {
-                      let dimList =
-                        _this.jordanTableConfig2.jordanFormConfig.formData;
+                  const res = await _this.service.common.screenresult(fromdata);
+                  if (res.data.code === 0) {
+                    let dimList =
+                      _this.jordanTableConfig2.jordanFormConfig.formData;
 
-                      dimList.map(item => {
-                        //商品编码
-                        if (item.label === _this.vmI18n.t("table_label.productNo")) {
-                          item.AuotData = res.data.data.list;
-                        }
-                      });
-                    }
-                  });
+                    dimList.map(item => {
+                      //商品编码
+                      if (item.label === _this.vmI18n.t("table_label.productNo")) {
+                        item.AuotData = res.data.data.list;
+                      }
+                    });
+                  }
                 },
                 dimEnter: val => {
                   const self = this;
@@ -3809,7 +3804,7 @@ export default {
       });
     },
     //获取list模糊数据
-    getData(search, index) {
+    async getData(search, index) {
       let self = this;
       let param = {
         isBlur: "Y",
@@ -3821,27 +3816,22 @@ export default {
       if (search === "") {
         return;
       }
-      axios({
-        url: "/p/cs/skuQuery",
-        method: "post",
-        data: param
-      }).then(res => {
-        if (res.data.code === 0) {
-          if (index) {
-            self.jordanTableConfig2.jordanFormConfig.formData[1].AuotData = res.data.data.data.map(
-              row => {
-                return {
-                  ECODE: row.ECODE,
-                  PS_C_PRO_ENAME: row.PS_C_PRO_ENAME,
-                  SPEC: row.SPEC
-                };
-              }
-            );
-          }
+      const res = await self.service.common.skuQuery(param);
+      if (res.data.code === 0) {
+        if (index) {
+          self.jordanTableConfig2.jordanFormConfig.formData[1].AuotData = res.data.data.data.map(
+            row => {
+              return {
+                ECODE: row.ECODE,
+                PS_C_PRO_ENAME: row.PS_C_PRO_ENAME,
+                SPEC: row.SPEC
+              };
+            }
+          );
         }
-      });
+      }
     },
-    entry(search, index) {
+    async entry(search, index) {
       // index 1 ==> 退货明细 2 ==> 换货明细 -- 去除退货明细20191217
       let self = this;
       if (!search || search === "") return;
@@ -3852,167 +3842,162 @@ export default {
           ECODE: search
         }
       };
-      axios({
-        url: "/p/cs/skuQuery",
-        method: "post",
-        data: param
-      }).then(async res => {
-        if (res.data.code === 0) {
-          let dataList = [];
-          if (index === 2) {
-            self.jordanTableConfig2.jordanFormConfig.formValue.sku = "";
-            dataList = self.jordanTableConfig2.data;
-          }
-          let lists = res.data.data.data || [];
-          if (lists.length === 0) {
-            return this.$message.error(this.vmI18n.t("modalTips.g6"));//不存在该条码！
-          }
-          let obj = lists.length > 0 ? lists[0] : {};
-          obj.ID = -1; // 明细id
-          obj.QTY_CAN_REFUND = qty; // 退货数量
-          obj.QTY_REFUND = qty; // 退货数量
-          obj.QTY_EXCHANGE = qty; // 换货数量
-          obj.PS_C_SKU_ECODE = obj.ECODE; // 条码
-          obj.BARCODE = obj.GBCODE; // 国际码
-          // obj.PS_C_PRO_ECODE = obj.PS_C_PRO_ECODE; // 商品编码
-          obj.PS_C_CLR_ID = obj.colorId; // 颜色
-          obj.PS_C_CLR_ECODE = obj.colorCode;
-          obj.PS_C_CLR_ENAME = obj.colorName;
-          obj.PS_C_SIZE_ID = obj.sizeId; // 尺寸
-          obj.PS_C_SIZE_ECODE = obj.sizeCode;
-          obj.PS_C_SIZE_ENAME = obj.sizeName;
-          // obj.PS_C_PRO_ENAME = obj.PS_C_PRO_ENAME; // 商品名称
-          obj.SEX_NAME = obj.sexName;
-          obj.SEX = obj.sex;
-          obj.PRICE = obj.tagPrice; // 商品单价
-          obj.AMT_REFUND = 0; // 退货金额
-          obj.QTY_IN = 0; // 入库数量
-          obj.SKU_SPEC = obj.SPEC; // 规格
-          obj.amt_refund_single = 0; // 单件退货金额
-          obj.PRODUCT_MARK = "正品"; // 商品标记
-          obj.AMT_REFUND = 0; // 换货金额
-          await self.getDataByProinfo(obj.PS_C_PRO_ECODE, 1);
-          obj.clrList = this.clrListArr;
-          obj.sizeList = this.sizeListArr;
-          // 新增换货明细时判断退货明细中是否存在此商品编号
-          // 存在 ==> 将退货明细中数据拿过来
-          // 不存在 ==> 新增
-          if (index == 2) {
-            let x = JSON.parse(JSON.stringify(self.refundDtoList.data));
-            let y = x.find(
+      const res = await self.service.common.skuQuery(param);
+      if (res.data.code === 0) {
+        let dataList = [];
+        if (index === 2) {
+          self.jordanTableConfig2.jordanFormConfig.formValue.sku = "";
+          dataList = self.jordanTableConfig2.data;
+        }
+        let lists = res.data.data.data || [];
+        if (lists.length === 0) {
+          return this.$message.error(this.vmI18n.t("modalTips.g6"));//不存在该条码！
+        }
+        let obj = lists.length > 0 ? lists[0] : {};
+        obj.ID = -1; // 明细id
+        obj.QTY_CAN_REFUND = qty; // 退货数量
+        obj.QTY_REFUND = qty; // 退货数量
+        obj.QTY_EXCHANGE = qty; // 换货数量
+        obj.PS_C_SKU_ECODE = obj.ECODE; // 条码
+        obj.BARCODE = obj.GBCODE; // 国际码
+        // obj.PS_C_PRO_ECODE = obj.PS_C_PRO_ECODE; // 商品编码
+        obj.PS_C_CLR_ID = obj.colorId; // 颜色
+        obj.PS_C_CLR_ECODE = obj.colorCode;
+        obj.PS_C_CLR_ENAME = obj.colorName;
+        obj.PS_C_SIZE_ID = obj.sizeId; // 尺寸
+        obj.PS_C_SIZE_ECODE = obj.sizeCode;
+        obj.PS_C_SIZE_ENAME = obj.sizeName;
+        // obj.PS_C_PRO_ENAME = obj.PS_C_PRO_ENAME; // 商品名称
+        obj.SEX_NAME = obj.sexName;
+        obj.SEX = obj.sex;
+        obj.PRICE = obj.tagPrice; // 商品单价
+        obj.AMT_REFUND = 0; // 退货金额
+        obj.QTY_IN = 0; // 入库数量
+        obj.SKU_SPEC = obj.SPEC; // 规格
+        obj.amt_refund_single = 0; // 单件退货金额
+        obj.PRODUCT_MARK = "正品"; // 商品标记
+        obj.AMT_REFUND = 0; // 换货金额
+        await self.getDataByProinfo(obj.PS_C_PRO_ECODE, 1);
+        obj.clrList = this.clrListArr;
+        obj.sizeList = this.sizeListArr;
+        // 新增换货明细时判断退货明细中是否存在此商品编号
+        // 存在 ==> 将退货明细中数据拿过来
+        // 不存在 ==> 新增
+        if (index == 2) {
+          let x = JSON.parse(JSON.stringify(self.refundDtoList.data));
+          let y = x.find(
+            item =>
+              item.ECODE === obj.ECODE || item.PS_C_SKU_ECODE === obj.ECODE
+          );
+          if (y) {
+            // 如果退货明细中存在再判断换货明细中是否存在
+            // 换货明细中存在 => 数量相加、金额计算
+            // 不存在push进去PS_C_SKU_ECODE
+            let j = JSON.parse(JSON.stringify(dataList));
+            let i = j.find(
               item =>
                 item.ECODE === obj.ECODE || item.PS_C_SKU_ECODE === obj.ECODE
             );
-            if (y) {
-              // 如果退货明细中存在再判断换货明细中是否存在
-              // 换货明细中存在 => 数量相加、金额计算
-              // 不存在push进去PS_C_SKU_ECODE
-              let j = JSON.parse(JSON.stringify(dataList));
-              let i = j.find(
-                item =>
-                  item.ECODE === obj.ECODE || item.PS_C_SKU_ECODE === obj.ECODE
+            if (i) {
+              y.QTY_EXCHANGE =
+                (parseInt(y.QTY_EXCHANGE) ? parseInt(y.QTY_EXCHANGE) : 0) +
+                parseInt(obj.QTY_EXCHANGE);
+              dataList = [...j];
+              y.AMT_REFUND = publicMethodsUtil.accMul(
+                y.QTY_EXCHANGE,
+                obj.PRICE
               );
-              if (i) {
-                y.QTY_EXCHANGE =
-                  (parseInt(y.QTY_EXCHANGE) ? parseInt(y.QTY_EXCHANGE) : 0) +
-                  parseInt(obj.QTY_EXCHANGE);
-                dataList = [...j];
-                y.AMT_REFUND = publicMethodsUtil.accMul(
-                  y.QTY_EXCHANGE,
-                  obj.PRICE
-                );
-              } else {
-                // 判断退货明细中是否有单件实际成交价
-                // 有 => 单件实际成交价 * 数量
-                // 无 => 吊牌价 * 数量
-                if (y.amtRefundSingle == 0 || !y.amtRefundSingle) {
-                  y.AMT_REFUND = publicMethodsUtil.accMul(
-                    obj.PRICE,
-                    obj.QTY_EXCHANGE
-                  );
-                } else {
-                  y.AMT_REFUND = publicMethodsUtil.accMul(
-                    y.amtRefundSingle,
-                    obj.QTY_EXCHANGE
-                  );
-                }
-                y.QTY_EXCHANGE = parseInt(obj.QTY_EXCHANGE);
-                dataList.push(y);
-              }
             } else {
-              // 退货明细中无此商品编码 再验证换货明细中是否存在
-              // 存在    => 退货数量加
-              // 不存在  => push进去
-              let eData = dataList;
-              let s = eData.find(
-                item =>
-                  item.ECODE === obj.ECODE || item.PS_C_SKU_ECODE === obj.ECODE
-              );
-
-              if (s) {
-                s.QTY_EXCHANGE =
-                  (parseInt(s.QTY_EXCHANGE) ? parseInt(s.QTY_EXCHANGE) : 0) +
-                  parseInt(obj.QTY_EXCHANGE);
-                dataList = [...eData];
-                s.AMT_REFUND = publicMethodsUtil.accMul(
-                  s.QTY_EXCHANGE,
-                  obj.PRICE
+              // 判断退货明细中是否有单件实际成交价
+              // 有 => 单件实际成交价 * 数量
+              // 无 => 吊牌价 * 数量
+              if (y.amtRefundSingle == 0 || !y.amtRefundSingle) {
+                y.AMT_REFUND = publicMethodsUtil.accMul(
+                  obj.PRICE,
+                  obj.QTY_EXCHANGE
                 );
               } else {
-                dataList.push(obj);
-                obj.AMT_REFUND = publicMethodsUtil.accMul(
-                  obj.QTY_EXCHANGE,
-                  obj.PRICE
-                ); // 换货金额
+                y.AMT_REFUND = publicMethodsUtil.accMul(
+                  y.amtRefundSingle,
+                  obj.QTY_EXCHANGE
+                );
               }
+              y.QTY_EXCHANGE = parseInt(obj.QTY_EXCHANGE);
+              dataList.push(y);
             }
           } else {
-            // 判断是否要新增一条明细=
-            let data = dataList;
-            let d = data.find(
+            // 退货明细中无此商品编码 再验证换货明细中是否存在
+            // 存在    => 退货数量加
+            // 不存在  => push进去
+            let eData = dataList;
+            let s = eData.find(
               item =>
                 item.ECODE === obj.ECODE || item.PS_C_SKU_ECODE === obj.ECODE
             );
-            if (d) {
-              d.QTY_CAN_REFUND =
-                parseInt(d.QTY_CAN_REFUND) + parseInt(obj.QTY_CAN_REFUND);
-              d.QTY_REFUND = parseInt(d.QTY_REFUND) + parseInt(obj.QTY_REFUND);
-              d.QTY_EXCHANGE =
-                (parseInt(d.QTY_EXCHANGE) ? parseInt(d.QTY_EXCHANGE) : 0) +
+
+            if (s) {
+              s.QTY_EXCHANGE =
+                (parseInt(s.QTY_EXCHANGE) ? parseInt(s.QTY_EXCHANGE) : 0) +
                 parseInt(obj.QTY_EXCHANGE);
-              dataList = [...data];
-              d.AMT_REFUND = publicMethodsUtil.accMul(d.QTY_REFUND, d.PRICE); // 退货金额
-              d.AMT_REFUND = publicMethodsUtil.accMul(d.QTY_EXCHANGE, d.PRICE); // 换货金额
+              dataList = [...eData];
+              s.AMT_REFUND = publicMethodsUtil.accMul(
+                s.QTY_EXCHANGE,
+                obj.PRICE
+              );
             } else {
               dataList.push(obj);
-              obj.AMT_REFUND = publicMethodsUtil.accMul(
-                obj.QTY_REFUND,
-                obj.PRICE
-              ); // 退货金额
               obj.AMT_REFUND = publicMethodsUtil.accMul(
                 obj.QTY_EXCHANGE,
                 obj.PRICE
               ); // 换货金额
             }
           }
-          if (index == 1) {
-            // 1 退货明细 2 退换货明细
-            dataList.forEach(item => {
-              item.AMT_REFUND = publicMethodsUtil.accMul(
-                item.QTY_REFUND,
-                item.PRICE
-              );
-            });
-            self.refundDtoList.data = dataList;
-            self.amountReturned = self.calculateMoney(dataList, 1).toFixed(2);
-            self.returnTotal();
-          } else if (index == 2) {
-            self.exchangeAmount = self.calculateMoney(dataList, 1).toFixed(2);
-            self.returnTotal();
-            self.exchangeDtoList.data = dataList;
+        } else {
+          // 判断是否要新增一条明细=
+          let data = dataList;
+          let d = data.find(
+            item =>
+              item.ECODE === obj.ECODE || item.PS_C_SKU_ECODE === obj.ECODE
+          );
+          if (d) {
+            d.QTY_CAN_REFUND =
+              parseInt(d.QTY_CAN_REFUND) + parseInt(obj.QTY_CAN_REFUND);
+            d.QTY_REFUND = parseInt(d.QTY_REFUND) + parseInt(obj.QTY_REFUND);
+            d.QTY_EXCHANGE =
+              (parseInt(d.QTY_EXCHANGE) ? parseInt(d.QTY_EXCHANGE) : 0) +
+              parseInt(obj.QTY_EXCHANGE);
+            dataList = [...data];
+            d.AMT_REFUND = publicMethodsUtil.accMul(d.QTY_REFUND, d.PRICE); // 退货金额
+            d.AMT_REFUND = publicMethodsUtil.accMul(d.QTY_EXCHANGE, d.PRICE); // 换货金额
+          } else {
+            dataList.push(obj);
+            obj.AMT_REFUND = publicMethodsUtil.accMul(
+              obj.QTY_REFUND,
+              obj.PRICE
+            ); // 退货金额
+            obj.AMT_REFUND = publicMethodsUtil.accMul(
+              obj.QTY_EXCHANGE,
+              obj.PRICE
+            ); // 换货金额
           }
         }
-      });
+        if (index == 1) {
+          // 1 退货明细 2 退换货明细
+          dataList.forEach(item => {
+            item.AMT_REFUND = publicMethodsUtil.accMul(
+              item.QTY_REFUND,
+              item.PRICE
+            );
+          });
+          self.refundDtoList.data = dataList;
+          self.amountReturned = self.calculateMoney(dataList, 1).toFixed(2);
+          self.returnTotal();
+        } else if (index == 2) {
+          self.exchangeAmount = self.calculateMoney(dataList, 1).toFixed(2);
+          self.returnTotal();
+          self.exchangeDtoList.data = dataList;
+        }
+      }
     },
     // 列表勾选
     returnOnSelect(e) {

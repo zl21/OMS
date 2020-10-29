@@ -3,45 +3,42 @@ import axios from "axios";
 export const buttonPermissionsMixin = {
   methods: {
     // 获取表单或表头数组
-    getPermissions(arrry, params, isIndependent) {
-      let independent = []
-      axios({
-        method: "get",
-        url: "/p/cs/v2/fetchActionsInCustomizePage",
+    async getPermissions(arrry, params, isIndependent) {
+      let independent = [];
+      const query = {
         params: {
           param: {
             AD_ACTION_NAME: params
           }
         }
+      };
+      const res = await this.service.common.fetchActionsInCustomizePage(query);
+      let result = res.data.data || []
+      independent = result
+      let a = []
+      this[arrry].buttons.forEach((item, i) => {
+        if (!item.text && item.icon) {
+          a.push(item)
+        }
       })
-        .then(res => {
-          let result = res.data.data || []
-          independent = result
-          let a = []
-          this[arrry].buttons.forEach((item, i) => {
-            if (!item.text && item.icon) {
-              a.push(item)
-            }
-          })
-          console.log(a, 'a')
-          let c = []
-          result.forEach((element, index) => {
-            if (element.child) {
-              this.buttonChild(element, this[arrry].buttons, c);
-            }
-            this[arrry].buttons.forEach((btn, btnIndex) => {
-              if (element.webdesc && element.webdesc == btn.text) {
-                c.push(btn)
-              }
-            });
-          });
-          this[arrry].loading = false
-          if (isIndependent) {
-            return independent
-          } else {
-            this[arrry].buttons = [...c, ...a]
+      console.log(a, 'a')
+      let c = []
+      result.forEach((element, index) => {
+        if (element.child) {
+          this.buttonChild(element, this[arrry].buttons, c);
+        }
+        this[arrry].buttons.forEach((btn, btnIndex) => {
+          if (element.webdesc && element.webdesc == btn.text) {
+            c.push(btn)
           }
         });
+      });
+      this[arrry].loading = false
+      if (isIndependent) {
+        return independent
+      } else {
+        this[arrry].buttons = [...c, ...a]
+      }
     },
     buttonChild(ele, btns, arr) {
       let obj = {};

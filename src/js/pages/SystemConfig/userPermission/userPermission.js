@@ -249,7 +249,7 @@ export default {
       this.currentItem = item;
       this.getPermission(this.currentItem);
     }, //点击用户
-    middleScroll(event) {
+    async middleScroll(event) {
       this.obj.startindex = this.middleList.body.length;
       if (
         event.target.scrollHeight - event.target.scrollTop ===
@@ -257,26 +257,21 @@ export default {
         event.target.scrollTop !== 0
       ) {
         this.dataLoading = true;
-        axios({
-          url: "/p/cs/QueryList",
-          method: "post",
-          data: {
-            searchdata: JSON.stringify(this.obj),
-          },
-        }).then((res) => {
-          let data = res.data;
-          if (data.code === 0) {
-            let arr = data.datas.row.map((obj) => {
-              let listData = {};
-              Object.keys(obj).forEach((label) => {
-                listData[label] = obj[label].val;
-              });
-              return listData;
-            });
-            this.middleList.body.push(...arr);
-            this.dataLoading = false;
-          }
+        const res = await this.service.common.QueryList({
+          searchdata: JSON.stringify(this.obj),
         });
+        let data = res.data;
+        if (data.code === 0) {
+          let arr = data.datas.row.map((obj) => {
+            let listData = {};
+            Object.keys(obj).forEach((label) => {
+              listData[label] = obj[label].val;
+            });
+            return listData;
+          });
+          this.middleList.body.push(...arr);
+          this.dataLoading = false;
+        }
       }
     }, //懒加载数据
     getUserHeadData() {
@@ -299,12 +294,8 @@ export default {
     }, //获取用户头部数据
     getUserBodyData() {
       this.dataLoading = true;
-      return axios({
-        url: "/p/cs/QueryList",
-        method: "post",
-        data: {
-          searchdata: JSON.stringify(this.obj),
-        },
+      return this.service.common.QueryList({
+        searchdata: JSON.stringify(this.obj),
       }).then((res) => {
         let data = res.data;
         if (data.code === 0) {

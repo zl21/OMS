@@ -330,7 +330,7 @@ export default {
     },
 
     //弹出框多选组件,确定调用方法
-    easyData(result) {
+    async easyData(result) {
       result = JSON.parse(result);
       let _self = this;
       if (_self.userId === 0) {
@@ -339,25 +339,23 @@ export default {
       }
       let param = new URLSearchParams();
       param.append("param", JSON.stringify(result.value));
-      post("/p/cs/screenresultcheck", param).then(res => {
-        if (res.data.code === 0) {
-          let searchResult = res.data.data.list;
-          if (searchResult.length <= 0) return;
-          let insertList = [];
-          for (let sr of searchResult) {
-            insertList.push({
-              ID: -1,
-              GROUPS_ID: _self.userId,
-              PS_C_PRO_ID: sr.ID
-            });
-          }
-          _self.insertAuthority(insertList);
-        } else {
+      const res = await this.service.common.screenresult(param);
+      if (res.data.code === 0) {
+        let searchResult = res.data.data.list;
+        if (searchResult.length <= 0) return;
+        let insertList = [];
+        for (let sr of searchResult) {
+          insertList.push({
+            ID: -1,
+            GROUPS_ID: _self.userId,
+            PS_C_PRO_ID: sr.ID
+          });
         }
-      });
+        _self.insertAuthority(insertList);
+      }
     },
     //发送请求,插入用户权限
-    insertAuthority(insertList) {
+    async insertAuthority(insertList) {
       let _self = this;
       let insertParam = {
         table: "CP_C_HRUSERS_PRO",
@@ -368,18 +366,17 @@ export default {
       param.append("table", insertParam.table);
       param.append("objid", insertParam.objid);
       param.append("data", JSON.stringify(insertParam.data));
-      post("/p/cs/objectSave", param)
-        .then(res => {
-          _self.page.disabled = false;
-          if (res.data.code !== 0) {
-          } else {
-            _self.$message({ message: res.data.message, type: "success" });
-          }
-          _self.axiosUserAuthority();
-        })
-        .catch(error => {
-          _self.page.disabled = false;
-        });
+      try {
+        const res = await _self.service.common.objectSave(param);
+        _self.page.disabled = false;
+        if (res.data.code !== 0) {
+        } else {
+          _self.$message({ message: res.data.message, type: "success" });
+        }
+        _self.axiosUserAuthority();
+      } catch (e) {
+        _self.page.disabled = false;
+      }
     },
     //全选/取消
     handleChangeAll() {

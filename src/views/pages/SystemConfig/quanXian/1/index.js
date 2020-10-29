@@ -50,7 +50,7 @@ export const jurisdictionConfig = {
               event: {
                 'on-page-change': (value) => { },
                 'on-input-value-change': (value) => { },
-                'on-popper-show': (e) => {
+                'on-popper-show': async (e) => {
                   const searchdata = {
                     isdroplistsearch: true,
                     refcolid: 1700804609,
@@ -59,36 +59,31 @@ export const jurisdictionConfig = {
                   };
                   const param = new URLSearchParams();
                   param.append('searchdata', JSON.stringify(searchdata));
-                  axios({
-                    url: '/p/cs/QueryList',
-                    method: 'post',
-                    data: param
-                  }).then((res) => {
-                    if (res.data.code === 0) {
-                      this.searchFormConfig.defaultconfig[0].item.props.totalRowCount = res.data.datas.totalRowCount;
-                      this.searchFormConfig.defaultconfig[0].item.props.data = {
-                        start: 0,
-                        tabth: [
-                          {
-                            colname: 'ID',
-                            name: 'ID',
-                            show: false
-                          },
-                          {
-                            colname: 'ECODE',
-                            name: '名称',
-                            show: true
-                          },
-                          {
-                            colname: 'ENAME',
-                            name: '邮箱',
-                            show: true
-                          }
-                        ],
-                        row: res.data.datas.row
-                      };
-                    }
-                  });
+                  const res = await this.service.common.QueryList(param);
+                  if (res.data.code === 0) {
+                    this.searchFormConfig.defaultconfig[0].item.props.totalRowCount = res.data.datas.totalRowCount;
+                    this.searchFormConfig.defaultconfig[0].item.props.data = {
+                      start: 0,
+                      tabth: [
+                        {
+                          colname: 'ID',
+                          name: 'ID',
+                          show: false
+                        },
+                        {
+                          colname: 'ECODE',
+                          name: '名称',
+                          show: true
+                        },
+                        {
+                          colname: 'ENAME',
+                          name: '邮箱',
+                          show: true
+                        }
+                      ],
+                      row: res.data.datas.row
+                    };
+                  }
                 },
                 'on-fkrp-selected': (e) => { }
               }
@@ -5662,42 +5657,65 @@ export const jurisdictionConfig = {
   },
   methods: {
     // 敏感列权限
-    getSENSITIVECOLUMNPERMISSIONSdata() {
-      axios({
-        method: 'get',
-        url: '/p/cs/cgroupcolumnquery',
-        params: { GROUPS_ID: this.GROUPS_ID, QUERY: '' }
-      }).then((res) => {
-        res.data.data.forEach((ele) => {
-          ele.filter = ele.CP_C_COLUMN_ENAME;
-          ele.__look = !(ele.ISREAD && ele.ISREAD == 'N');
-          ele.__edit = !(ele.ISMODIFY && ele.ISMODIFY == 'N');
-          ele.__disabled = false;
-        });
-        this.tableConfig.data = res.data.data;
+    async getSENSITIVECOLUMNPERMISSIONSdata() {
+      const res = await this.service.common.cgroupcolumnquery({ GROUPS_ID: this.GROUPS_ID, QUERY: '' });
+      res.data.data.forEach((ele) => {
+        ele.filter = ele.CP_C_COLUMN_ENAME;
+        ele.__look = !(ele.ISREAD && ele.ISREAD == 'N');
+        ele.__edit = !(ele.ISMODIFY && ele.ISMODIFY == 'N');
+        ele.__disabled = false;
       });
+      this.tableConfig.data = res.data.data;
+      // axios({
+      //   method: 'get',
+      //   url: '/p/cs/cgroupcolumnquery',
+      //   params: { GROUPS_ID: this.GROUPS_ID, QUERY: '' }
+      // }).then((res) => {
+      //   res.data.data.forEach((ele) => {
+      //     ele.filter = ele.CP_C_COLUMN_ENAME;
+      //     ele.__look = !(ele.ISREAD && ele.ISREAD == 'N');
+      //     ele.__edit = !(ele.ISMODIFY && ele.ISMODIFY == 'N');
+      //     ele.__disabled = false;
+      //   });
+      //   this.tableConfig.data = res.data.data;
+      // });
     },
     // 销售渠道权限
-    getSALESCHANNELAUTHORITYdata() {
-      axios({
-        method: 'get',
-        url: '/p/cs/queryShopPermission',
-        params: {
-          GROUPS_ID: 93,
-          SOURCE_TYPE_IDS: '',
-          IS_ACTIVE: 'all',
-          IS_READ: 'all',
-          IS_MAIN: 'all',
-        }
-      }).then((res) => {
-        res.data.data.forEach((ele) => {
-          ele.filter = ele.CP_C_PLATFORM_ENAME;
-          ele.__look = !(ele.IS_READ && ele.IS_READ == 'N');
-          ele.__edit = !(ele.IS_MODIFY && ele.IS_MODIFY == 'N');
-          ele.__disabled = ele.ISACTIVE != 'Y';
-        });
-        this.tableConfig.data = res.data.data;
+    async getSALESCHANNELAUTHORITYdata() {
+      const query = {
+        GROUPS_ID: 93,
+        SOURCE_TYPE_IDS: '',
+        IS_ACTIVE: 'all',
+        IS_READ: 'all',
+        IS_MAIN: 'all',
+      };
+      const res = await this.service.common.queryShopPermission(query);
+      res.data.data.forEach((ele) => {
+        ele.filter = ele.CP_C_PLATFORM_ENAME;
+        ele.__look = !(ele.IS_READ && ele.IS_READ == 'N');
+        ele.__edit = !(ele.IS_MODIFY && ele.IS_MODIFY == 'N');
+        ele.__disabled = ele.ISACTIVE != 'Y';
       });
+      this.tableConfig.data = res.data.data;
+      // axios({
+      //   method: 'get',
+      //   url: '/p/cs/queryShopPermission',
+      //   params: {
+      //     GROUPS_ID: 93,
+      //     SOURCE_TYPE_IDS: '',
+      //     IS_ACTIVE: 'all',
+      //     IS_READ: 'all',
+      //     IS_MAIN: 'all',
+      //   }
+      // }).then((res) => {
+      //   res.data.data.forEach((ele) => {
+      //     ele.filter = ele.CP_C_PLATFORM_ENAME;
+      //     ele.__look = !(ele.IS_READ && ele.IS_READ == 'N');
+      //     ele.__edit = !(ele.IS_MODIFY && ele.IS_MODIFY == 'N');
+      //     ele.__disabled = ele.ISACTIVE != 'Y';
+      //   });
+      //   this.tableConfig.data = res.data.data;
+      // });
     },
     // 客户权限
     getCUSTOMERRIGHTSdata() {

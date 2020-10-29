@@ -682,43 +682,38 @@ export default {
       })
     },
     // 获取详情
-    getList() {
+    async getList() {
       const _this = this;
-      axios({
-        url: "/p/cs/manualJdMatchingList",
-        method: "post",
-        data: { id: _this.$route.query.id }
-      }).then(res => {
-        if (res.data.code === 0) {
-          res.data.data.ocBJdRefundIn.IN_STORE_ENAME = res.data.data.ocBJdRefundIn.IN_STORE_ENAME;
-          _this.information.formValue = res.data.data.ocBJdRefundIn;
-          res.data.data.ocBJdRefundInProductItemList.forEach(item => {
-            item.Flag1 = true;
-            // 商品标记
-            if (item.PRODUCT_MARK == 1) item.PRODUCT_MARK = '正品';
-            else if (item.PRODUCT_MARK == 0) item.PRODUCT_MARK = '次品';
-            // 是否无原单条码
-            if (item.IS_WITHOUT_ORIG == 1) item.IS_WITHOUT_ORIG = '是';
-            else if (item.IS_WITHOUT_ORIG == 0) item.IS_WITHOUT_ORIG = '否';
-            // 是否匹配
-            if (item.IS_MATCH == 1) item.IS_MATCH = '是';
-            else if (item.IS_MATCH == 0) item.IS_MATCH = '否';
-            // 是否生成调整单
-            if (item.IS_GEN_ADJUST == 1) item.IS_GEN_ADJUST = '是';
-            else if (item.IS_GEN_ADJUST == 0) item.IS_GEN_ADJUST = '否';
-          })
-          // 物流公司
-          _this.information.formValue.CP_C_LOGISTICS_ID = res.data.data.ocBJdRefundIn.CP_C_LOGISTICS_ID;
-          _this.information.formValue.CP_C_LOGISTICS_ENAME = res.data.data.ocBJdRefundIn.CP_C_LOGISTICS_ENAME;
-          _this.information.formData[4].itemdata.valuedata = res.data.data.ocBJdRefundIn.CP_C_LOGISTICS_ENAME;
-          document.getElementsByClassName('disabled')[0].value = res.data.data.ocBJdRefundIn.CP_C_LOGISTICS_ENAME;
-          _this.information.formData[2].options = [{
-            label: _this.information.formValue.BATCH_NO,
-            value: _this.information.formValue.OC_B_REFUND_BATCH_ID
-          }];
-          _this.jordanTableConfig.data = res.data.data.ocBJdRefundInProductItemList;
-        }
-      })
+      const res = await _this.service.common.manualJdMatchingList({ id: _this.$route.query.id });
+      if (res.data.code === 0) {
+        res.data.data.ocBJdRefundIn.IN_STORE_ENAME = res.data.data.ocBJdRefundIn.IN_STORE_ENAME;
+        _this.information.formValue = res.data.data.ocBJdRefundIn;
+        res.data.data.ocBJdRefundInProductItemList.forEach(item => {
+          item.Flag1 = true;
+          // 商品标记
+          if (item.PRODUCT_MARK == 1) item.PRODUCT_MARK = '正品';
+          else if (item.PRODUCT_MARK == 0) item.PRODUCT_MARK = '次品';
+          // 是否无原单条码
+          if (item.IS_WITHOUT_ORIG == 1) item.IS_WITHOUT_ORIG = '是';
+          else if (item.IS_WITHOUT_ORIG == 0) item.IS_WITHOUT_ORIG = '否';
+          // 是否匹配
+          if (item.IS_MATCH == 1) item.IS_MATCH = '是';
+          else if (item.IS_MATCH == 0) item.IS_MATCH = '否';
+          // 是否生成调整单
+          if (item.IS_GEN_ADJUST == 1) item.IS_GEN_ADJUST = '是';
+          else if (item.IS_GEN_ADJUST == 0) item.IS_GEN_ADJUST = '否';
+        })
+        // 物流公司
+        _this.information.formValue.CP_C_LOGISTICS_ID = res.data.data.ocBJdRefundIn.CP_C_LOGISTICS_ID;
+        _this.information.formValue.CP_C_LOGISTICS_ENAME = res.data.data.ocBJdRefundIn.CP_C_LOGISTICS_ENAME;
+        _this.information.formData[4].itemdata.valuedata = res.data.data.ocBJdRefundIn.CP_C_LOGISTICS_ENAME;
+        document.getElementsByClassName('disabled')[0].value = res.data.data.ocBJdRefundIn.CP_C_LOGISTICS_ENAME;
+        _this.information.formData[2].options = [{
+          label: _this.information.formValue.BATCH_NO,
+          value: _this.information.formValue.OC_B_REFUND_BATCH_ID
+        }];
+        _this.jordanTableConfig.data = res.data.data.ocBJdRefundInProductItemList;
+      }
     },
     // 获取特殊处理类型字段选项组
     async obtainWarehouse() {
@@ -778,7 +773,7 @@ export default {
       });
     },
     // 查询原始订单编号
-    queryBounced() {
+    async queryBounced() {
       //  获取页面数据
       let _this = this;
       _this.order.table.data = [];
@@ -796,12 +791,8 @@ export default {
         receive_mobile: lists.receive_mobile,
         // orig_order_id: lists.orig_order_id
       };
-      axios({
-        url: "/p/cs/searchButtonsInJdDetail",
-        method: "post",
-        cancelToken: true,
-        data: param
-      }).then(res => {
+      try {
+        const res = await _this.service.common.searchButtonsInJdDetail(param);
         if (res.data.code == 0) {
           // _this.order.table.data = res.data.data;
           for (let i = 0; i < res.data.data.length; i++) {
@@ -812,13 +803,13 @@ export default {
           }
         }
         _this.order.table.loading = false;
-      }).catch(err => {
+      } catch (e) {
         _this.$Message.error(err.message);
         _this.order.table.loading = false;
-      })
+      }
     },
     // 原单单号回车查询
-    queryEnter() {
+    async queryEnter() {
       const _this = this;
       _this.jordanTableConfig.data = [];
       if (_this.information.formValue.ORIG_ORDER_NO == '') {
@@ -828,42 +819,36 @@ export default {
         let params = {
           orig_order_id: _this.information.formValue.ORIG_ORDER_NO
         };
-        axios({
-          url: "/p/cs/searchButtonsInJdDetail",
-          method: "post",
-          cancelToken: true,
-          data: params
-        }).then(res => {
-          if (res.data.code === 0) {
-            let data = _this.information.formValue;
-            let resData = res.data.data[0];
-            data.ORIG_ORDER_NO = resData.ORIG_ORDER_ID; // 原单单号
-            data.SOURCE_CODE = resData.ORIG_SOURCE_CODE; // 平台单号
-            data.USER_NICK = resData.BUYER_NICK; // 买家昵称
-            data.LOGISTIC_NUMBER = resData.LOGISTICS_CODE; // 物流单号
-            data.RECEIVER_MOBILE = resData.RECEIVE_MOBILE; // 手机号
-            data.RECEIVER_NAME = resData.RECEIVE_NAME; // 姓名
-            data.RECEIVER_ADDRESS = resData.RECEIVE_ADDRESS; // 发件地址
+        const res = await _this.service.common.searchButtonsInJdDetail(params);
+        if (res.data.code === 0) {
+          let data = _this.information.formValue;
+          let resData = res.data.data[0];
+          data.ORIG_ORDER_NO = resData.ORIG_ORDER_ID; // 原单单号
+          data.SOURCE_CODE = resData.ORIG_SOURCE_CODE; // 平台单号
+          data.USER_NICK = resData.BUYER_NICK; // 买家昵称
+          data.LOGISTIC_NUMBER = resData.LOGISTICS_CODE; // 物流单号
+          data.RECEIVER_MOBILE = resData.RECEIVE_MOBILE; // 手机号
+          data.RECEIVER_NAME = resData.RECEIVE_NAME; // 姓名
+          data.RECEIVER_ADDRESS = resData.RECEIVE_ADDRESS; // 发件地址
 
-            let item = res.data.data[0].PRODUCTITEMS;
-            item.forEach(item => {
-              _this.jordanTableConfig.data.push({
-                // 'ID': _this.information.formValue.ID, // ，明细id
-                'PS_C_SKU_ECODE': item.PS_C_SKU_ECODE, // 条码
-                'GBCODE': item.BARCODE, // 国标码
-                'OC_B_JD_RETURN_ORDER_ID': resData.formValue.ID, // 退单编号
-                'REAL_SKU_ECODE': '', // 实收条码
-                'PS_C_PRO_ENAME': item.PS_C_PRO_ENAME, // 商品名称
-                'PRODUCT_MARK': item.PRODUCT_MARK, // 商品标记
-                'IS_MATCH': resData.formValue.IS_CHECK == 0 ? '否' : '是', // 是否匹配
-                'IS_GEN_ADJUST': resData.formValue.IS_TRANSFER == 0 ? '否' : '是', // 是否生成调整单
-                'QTY': item.QTY_REFUND, // 数量
-                'IS_WITHOUT_ORIG': '否', // 是否无原单条码
-                'Flag1': true
-              });
-            })
-          }
-        })
+          let item = res.data.data[0].PRODUCTITEMS;
+          item.forEach(item => {
+            _this.jordanTableConfig.data.push({
+              // 'ID': _this.information.formValue.ID, // ，明细id
+              'PS_C_SKU_ECODE': item.PS_C_SKU_ECODE, // 条码
+              'GBCODE': item.BARCODE, // 国标码
+              'OC_B_JD_RETURN_ORDER_ID': resData.formValue.ID, // 退单编号
+              'REAL_SKU_ECODE': '', // 实收条码
+              'PS_C_PRO_ENAME': item.PS_C_PRO_ENAME, // 商品名称
+              'PRODUCT_MARK': item.PRODUCT_MARK, // 商品标记
+              'IS_MATCH': resData.formValue.IS_CHECK == 0 ? '否' : '是', // 是否匹配
+              'IS_GEN_ADJUST': resData.formValue.IS_TRANSFER == 0 ? '否' : '是', // 是否生成调整单
+              'QTY': item.QTY_REFUND, // 数量
+              'IS_WITHOUT_ORIG': '否', // 是否无原单条码
+              'Flag1': true
+            });
+          })
+        }
       }
     },
     // 确定原始订单编号

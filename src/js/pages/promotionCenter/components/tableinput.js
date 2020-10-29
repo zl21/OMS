@@ -827,7 +827,7 @@ import axios from 'axios';
           if (params[key] != -1 && params[key]) {
             return params;
             self.drpPopoverShow = true;
-          } 
+          }
           self.$message({
             message: `请先选择${tipsname[key].name}`,
             type: 'warning'
@@ -1197,7 +1197,7 @@ import axios from 'axios';
           }
         }
       },
-      getQueryList(queryString, id, cb) {
+      async getQueryList(queryString, id, cb) {
         const self = this;
         const query = {
           ak: queryString,
@@ -1215,7 +1215,7 @@ import axios from 'axios';
         if (self.itemdata.refcolprem) {
           if (!self.itemdata.refcolprem.refcolval) {
             return;
-          } 
+          }
           query.fixedcolumns.precolnameslist = (
             query.fixedcolumns.precolnameslist || []
           ).concat([self.itemdata.refcolprem]);
@@ -1225,20 +1225,15 @@ import axios from 'axios';
         searchParam.append('ak', queryString);
         searchParam.append('colid', id);
         searchParam.append('fixedcolumns', query.fixedcolumns);
-        axios({
-          method: 'post',
-          url: '/p/cs/fuzzyquerybyak',
-          data: searchParam
-        }).then((res) => {
-          self.queryList = res.data.data;
-          if (res.data.data.length > 0) {
-            cb(res.data.data);
-            self.$refs[`autocomplete${self.itemdata.colname}`].activated = true;
-          } else {
-            cb([]);
-            $(`.fkAutocomplete${self.itemdata.colname}`).css('display', 'none');
-          }
-        });
+        const res = await this.service.common.fuzzyquerybyak(searchParam);
+        self.queryList = res.data.data;
+        if (res.data.data.length > 0) {
+          cb(res.data.data);
+          self.$refs[`autocomplete${self.itemdata.colname}`].activated = true;
+        } else {
+          cb([]);
+          $(`.fkAutocomplete${self.itemdata.colname}`).css('display', 'none');
+        }
       },
       autocompleteEnter(itemdata, event) {
         const self = this;
@@ -1547,7 +1542,7 @@ import axios from 'axios';
 
       //        self.isHandleSelect = false
       },
-      inQueryList(itemdata, callback) {
+      async inQueryList(itemdata, callback) {
         const self = this;
         const query = {
           ak: itemdata.valuedata,
@@ -1565,7 +1560,7 @@ import axios from 'axios';
         if (self.itemdata.refcolprem) {
           if (!self.itemdata.refcolprem.refcolval) {
             return;
-          } 
+          }
           query.fixedcolumns.precolnameslist = (
             query.fixedcolumns.precolnameslist || []
           ).concat([self.itemdata.refcolprem]);
@@ -1575,26 +1570,21 @@ import axios from 'axios';
         searchParam.append('ak', itemdata.valuedata);
         searchParam.append('colid', itemdata.colid);
         searchParam.append('fixedcolumns', query.fixedcolumns);
-        axios({
-          method: 'post',
-          url: '/p/cs/fuzzyquerybyak',
-          data: searchParam
-        }).then((res) => {
-          for (let i = 0; i < res.data.data.length; i++) {
-            const element = res.data.data[i];
-            if (
-              element.value === itemdata.valuedata
-              && (element.id === itemdata.pid || element.id == itemdata.refobjid)
-            ) {
-              // console.log('beforecall')
-              callback();
-            }
+        const res = await this.service.common.fuzzyquerybyak(searchParam);
+        for (let i = 0; i < res.data.data.length; i++) {
+          const element = res.data.data[i];
+          if (
+            element.value === itemdata.valuedata
+            && (element.id === itemdata.pid || element.id == itemdata.refobjid)
+          ) {
+            // console.log('beforecall')
+            callback();
           }
-          if (res.data.data.length === 0) {
-            self.itemdata.valuedata = null;
-            self.itemdata.pid = null;
-          }
-        });
+        }
+        if (res.data.data.length === 0) {
+          self.itemdata.valuedata = null;
+          self.itemdata.pid = null;
+        }
       },
 
       DeleteClick(event) {
@@ -2049,7 +2039,7 @@ import axios from 'axios';
           callback();
         });
       },
-      getSelectData(query) {
+      async getSelectData(query) {
         const self = this;
         const item = self.SelectionData.item;
         self.SelectionData.row = [];
@@ -2065,20 +2055,29 @@ import axios from 'axios';
           // searchdata.fixedcolumns = self.selectConfigChanged
           searchdata.fixedcolumns = query;
         }
-        axios({
-          url: '/p/cs/QueryList',
-          type: 'post',
-          params: {
+        const res = await this.service.common.QueryList({params: {
             searchdata
-          }
-        }).then((res) => {
-          if (res.data.code === 0) {
-            self.SelectionData.row = res.data.datas.row;
-            self.SelectionData.thead = res.data.datas.tabth;
-            self.SelectionData.tableAllDatas = res.data.datas;
-            self.selectOperation.page.totalRowCount = res.data.datas.totalRowCount;
-          }
-        });
+          }});
+        if (res.data.code === 0) {
+          self.SelectionData.row = res.data.datas.row;
+          self.SelectionData.thead = res.data.datas.tabth;
+          self.SelectionData.tableAllDatas = res.data.datas;
+          self.selectOperation.page.totalRowCount = res.data.datas.totalRowCount;
+        }
+        // axios({
+        //   url: '/p/cs/QueryList',
+        //   type: 'post',
+        //   params: {
+        //     searchdata
+        //   }
+        // }).then((res) => {
+        //   if (res.data.code === 0) {
+        //     self.SelectionData.row = res.data.datas.row;
+        //     self.SelectionData.thead = res.data.datas.tabth;
+        //     self.SelectionData.tableAllDatas = res.data.datas;
+        //     self.selectOperation.page.totalRowCount = res.data.datas.totalRowCount;
+        //   }
+        // });
       },
 
       selectionQueryTable(val) {

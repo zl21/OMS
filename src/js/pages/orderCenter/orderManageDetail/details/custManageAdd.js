@@ -902,33 +902,31 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      axios({
-        method: "get",
-        url: "/p/cs/fetchActionsInCustomizePage",
+    this.$nextTick(async () => {
+      const query = {
         params: {
           param: {
             AD_ACTION_NAME: "orderManager"
           }
         }
-      }).then(res => {
-        console.log(res.data.data);
-        let c = [];
-        let resData = res.data.data || []
-        resData.forEach((element, index) => {
-          this.tableConfig.jordanBtnConfig.buttons.forEach((btn, btnIndex) => {
-            if (element.webdesc == btn.text) {
-              c.push({
-                btnclick: btn.btnclick,
-                text: btn.text,
-                isShow: !btn.ishide,
-                icon: btn.icon
-              });
-            }
-          });
+      };
+      const res = await this.service.common.fetchActionsInCustomizePage(query);
+      console.log(res.data.data);
+      let c = [];
+      let resData = res.data.data || []
+      resData.forEach((element, index) => {
+        this.tableConfig.jordanBtnConfig.buttons.forEach((btn, btnIndex) => {
+          if (element.webdesc == btn.text) {
+            c.push({
+              btnclick: btn.btnclick,
+              text: btn.text,
+              isShow: !btn.ishide,
+              icon: btn.icon
+            });
+          }
         });
-        this.tableConfig.jordanBtnConfig.buttons = c;
       });
+      this.tableConfig.jordanBtnConfig.buttons = c;
     });
     this.getColumns();
 

@@ -154,67 +154,60 @@ export default {
     this.initWebSocket();
   },
   methods: {
-    print() {
-      axios({
-        url: '/p/cs/SgOutNoticePrint',
-        method: 'post',
-        data: {
-          ids: this.idArray,
-        },
-      }).then((res) => {
-        const self = this;
-        console.log(res);
-        if (res.data.code === 0) {
-          res.data.data.map((data) => {
-            if (data.PLATFORM === 'CN') {
-              self.getData = data.RETURN_DATA;
-            } else if (data.PLATFORM === 'JD_WJQT') {
-              self.getJdWjQtData = data.RETURN_DATA;
-            } else if (data.PLATFORM === 'JD_WJSF') {
-              self.getJdWjSfData = data.RETURN_DATA;
-            } else if (data.PLATFORM === 'JD_QL') {
-              self.getJdData = data.RETURN_DATA;
-            }
-          });
-          self.$emit('closeActionDialog', true);
-          if (self.getData.length > 0) {
-            self.doPrint(self.defaultPrinter, self.num);
-          } else {
-            const LODOP = getLodop();
-            const today = new Date();
-            const formatToday = today.Format('yyyy-MM-dd');
-            if (self.getJdWjQtData.length > 0) {
-              LODOP.PRINT_INITA(
-                '0mm',
-                '0mm',
-                '100mm',
-                '180mm',
-                '京东无界通用模板'
-              );
-              LODOP.SET_PRINT_PAGESIZE(1, '108mm', '188mm', '');
-              self.getJdWjQtData.map((qtData) => {
-                self.doPrintForJdWjQt(LODOP, qtData);
-              });
-            } else if (self.getJdData.length > 0) {
-              LODOP.PRINT_INITA(
-                '0mm',
-                '0mm',
-                '110mm',
-                '113mm',
-                '京东无界自营模板'
-              );
-              LODOP.SET_PRINT_PAGESIZE(1, '110mm', '113mm', '');
-              self.getJdData.map((zyData) => {
-                self.doPrintForJd(LODOP, zyData, formatToday);
-              });
-            }
-            LODOP.PREVIEW(); // 预览
+    async print() {
+      const res = await this.service.common.SgOutNoticePrint({ids: this.idArray});
+      const self = this;
+      console.log(res);
+      if (res.data.code === 0) {
+        res.data.data.map((data) => {
+          if (data.PLATFORM === 'CN') {
+            self.getData = data.RETURN_DATA;
+          } else if (data.PLATFORM === 'JD_WJQT') {
+            self.getJdWjQtData = data.RETURN_DATA;
+          } else if (data.PLATFORM === 'JD_WJSF') {
+            self.getJdWjSfData = data.RETURN_DATA;
+          } else if (data.PLATFORM === 'JD_QL') {
+            self.getJdData = data.RETURN_DATA;
           }
+        });
+        self.$emit('closeActionDialog', true);
+        if (self.getData.length > 0) {
+          self.doPrint(self.defaultPrinter, self.num);
         } else {
-          self.$Message.error(res.data.message);
-          self.$emit('closeActionDialog', true);
+          const LODOP = getLodop();
+          const today = new Date();
+          const formatToday = today.Format('yyyy-MM-dd');
+          if (self.getJdWjQtData.length > 0) {
+            LODOP.PRINT_INITA(
+              '0mm',
+              '0mm',
+              '100mm',
+              '180mm',
+              '京东无界通用模板'
+            );
+            LODOP.SET_PRINT_PAGESIZE(1, '108mm', '188mm', '');
+            self.getJdWjQtData.map((qtData) => {
+              self.doPrintForJdWjQt(LODOP, qtData);
+            });
+          } else if (self.getJdData.length > 0) {
+            LODOP.PRINT_INITA(
+              '0mm',
+              '0mm',
+              '110mm',
+              '113mm',
+              '京东无界自营模板'
+            );
+            LODOP.SET_PRINT_PAGESIZE(1, '110mm', '113mm', '');
+            self.getJdData.map((zyData) => {
+              self.doPrintForJd(LODOP, zyData, formatToday);
+            });
+          }
+          LODOP.PREVIEW(); // 预览
         }
-      });
+      } else {
+        self.$Message.error(res.data.message);
+        self.$emit('closeActionDialog', true);
+      }
     },
     // doPrint(printer, waybillArray) {
     //   var request = this.getRequestObject("print");

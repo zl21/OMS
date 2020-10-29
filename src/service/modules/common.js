@@ -48,12 +48,15 @@ export default {
   SgOutNoticePrint: (params) => network.post('/p/cs/SgOutNoticePrint', params),
   fuzzyquerybyak: (params) => network.post('/p/cs/fuzzyquerybyak', params),
   cgroupcolumnquery: (params) => network.post('/p/cs/cgroupcolumnquery', params),
+  queryShopPermission: (params) => network.get('/p/cs/queryShopPermission', params),
   screenresultcheck: (params) => network.post('/p/cs/screenresultcheck', params),
   searchButtonsInJdDetail: (params) => network.post('/p/cs/searchButtonsInJdDetail', params),
   objectSave: (params) => network.post('/p/cs/objectSave', params),
   expressAreaVoidCmd: (params) => network.post('/p/cs/expressAreaVoidCmd', params),
   cpromLogQuery: (params) => network.post('/p/cs/cpromLogQuery', params),
   getweekdate: (params) => network.post('/p/cs/getweekdate', params),
+  getWarehourseByShopId: (params) => network.post('/p/cs/getWarehourseByShopId', params),
+  voidPayableAdjustment: (params) => network.post('/p/cs/voidPayableAdjustment', params),
   // 通用接口下载
   /**
    * 经销订单下载 分销商订单下载 /p/cs/orderDownload

@@ -767,7 +767,7 @@ export default {
       this.agTableConfig.pagenation.current = 1;
       this.getList();
     },
-    invalid() {
+    async invalid() {
       let self = this;
       self.selection = self.$refs.agtable.AGTABLE.getSelect();
       let ids = [];
@@ -779,18 +779,13 @@ export default {
       };
       let fromdata = new FormData();
       fromdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/voidPayableAdjustment",
-        method: "post",
-        data: fromdata,
-      }).then(function (res) {
-        if (res.data.data.code === 0) {
-          self.$Message.success(res.data.data.message);
-          self.getList();
-        } else {
-          self.$Message.error(res.data.data.message);
-        }
-      });
+      const res = await this.service.common.voidPayableAdjustment(fromdata);
+      if (res.data.data.code === 0) {
+        self.$Message.success(res.data.data.message);
+        self.getList();
+      } else {
+        self.$Message.error(res.data.data.message);
+      }
     },
     // 财审
     fiAudit() {

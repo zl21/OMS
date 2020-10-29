@@ -109,7 +109,7 @@ export default {
   },
   methods: {
     // 下载模板
-    download() {
+    async download() {
       let self = this;
       let formValue = self.downLoadFormConfig.formValue;
       if (!self.downLoadFormConfig.formData[0].itemdata.pid)
@@ -126,19 +126,14 @@ export default {
       };
       let fromdata = new FormData();
       fromdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/itemDownload",
-        method: "post",
-        data: fromdata
-      }).then(function(res) {
-        if (res.data.code === 0) {
-          self.$Message.success(res.data.message);
-          self.$emit("confirmImport");
-          self.$emit("closeActionDialog");
-        } else {
-          self.$Message.error(res.data.message);
-        }
-      });
+      const res = await this.service.common.itemDownload(fromdata);
+      if (res.data.code === 0) {
+        self.$Message.success(res.data.message);
+        self.$emit("confirmImport");
+        self.$emit("closeActionDialog");
+      } else {
+        self.$Message.error(res.data.message);
+      }
     }
   }
 };

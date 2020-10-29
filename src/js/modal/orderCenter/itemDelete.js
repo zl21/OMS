@@ -21,46 +21,42 @@ export default {
             value: "searchValue",
             columns: ["ECODE"],
             AuotData: [], //匹配的选项
-            dimChange: (val) => {
+            dimChange: async (val) => {
               //模糊查询的方法
               let _this = this;
               _this.formConfig.formValue.searchValue = val.trim();
-              axios({
-                url: "/p/cs/skuQuery",
-                method: "post",
-                data: {
-                  isBlur: "Y", //N为精确匹配
-                  psCSku: {
-                    ECODE: val.trim(),
-                  },
+              const query = {
+                isBlur: "Y", //N为精确匹配
+                psCSku: {
+                  ECODE: val.trim(),
                 },
-              }).then((res) => {
-                if (res.status === 200) {
-                  let data = res.data.data.data;
-                  let dimList = _this.formConfig.formData;
-                  let arr;
-                  data.map((item) => {
-                    //删除不需要展示的模糊搜索项
-                    delete item.GBCODE;
-                    delete item.IS_GIFT;
-                    delete item.IS_GROUP;
-                    delete item.PRICELIST;
-                    // delete item.PS_C_PRO_ECODE;
-                    delete item.PS_C_PRO_ID;
-                    delete item.colorId;
-                    delete item.colorName;
-                    delete item.sizeId;
-                    delete item.sizeName;
-                    delete item.skuId;
-                  });
-                  dimList.map((item) => {
-                    if (item.label === "SKU编码") {
-                      item.AuotData = data;
-                      //调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
-                    }
-                  });
-                }
-              });
+              }
+              const res = await _this.service.common.skuQuery(query);
+              if (res.status === 200) {
+                let data = res.data.data.data;
+                let dimList = _this.formConfig.formData;
+                let arr;
+                data.map((item) => {
+                  //删除不需要展示的模糊搜索项
+                  delete item.GBCODE;
+                  delete item.IS_GIFT;
+                  delete item.IS_GROUP;
+                  delete item.PRICELIST;
+                  // delete item.PS_C_PRO_ECODE;
+                  delete item.PS_C_PRO_ID;
+                  delete item.colorId;
+                  delete item.colorName;
+                  delete item.sizeId;
+                  delete item.sizeName;
+                  delete item.skuId;
+                });
+                dimList.map((item) => {
+                  if (item.label === "SKU编码") {
+                    item.AuotData = data;
+                    //调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
+                  }
+                });
+              }
             },
             dimEnter: () => {
               this.search();
@@ -77,7 +73,7 @@ export default {
             value: "psCProEcode",
             columns: ["ECODE"],
             AuotData: [], //匹配的选项
-            dimChange: (val) => {
+            dimChange: async (val) => {
               //模糊查询的方法
               let _this = this;
               _this.formConfig.psCProEcode = val.trim();
@@ -90,21 +86,16 @@ export default {
                 TABLENAME: "PS_C_PRO",
               };
               fromdata.append("param", JSON.stringify(params));
-              axios({
-                url: "/p/cs/screenresult",
-                method: "post",
-                data: fromdata,
-              }).then((res) => {
-                if (res.data.code === 0) {
-                  let dimList = _this.formConfig.formData;
+              const res = await this.service.common.screenresult(fromdata);
+              if (res.data.code === 0) {
+                let dimList = _this.formConfig.formData;
 
-                  dimList.map((item) => {
-                    if (item.label === "商品编码") {
-                      item.AuotData = res.data.data.list;
-                    }
-                  });
-                }
-              });
+                dimList.map((item) => {
+                  if (item.label === "商品编码") {
+                    item.AuotData = res.data.data.list;
+                  }
+                });
+              }
             },
             dimEnter: () => {
               this.search();
@@ -154,37 +145,32 @@ export default {
     radioChange(value) {
       console.log(value);
     },
-    search(value) {
+    async search(value) {
       //sku查询
       let self = this;
       self.tableLoad = true;
-      axios({
-        url: "/p/cs/skuQuery",
-        method: "post",
-        data: {
-          isBlur: "N",
-          psCSku: {
-            ECODE: self.formConfig.formValue.searchValue.trim(),
-            psCProEcode: self.formConfig.formValue.psCProEcode.trim(),
-            // psCProEname: self.psCProEname.trim()
-          },
+      const query = {
+        isBlur: "N",
+        psCSku: {
+          ECODE: self.formConfig.formValue.searchValue.trim(),
+          psCProEcode: self.formConfig.formValue.psCProEcode.trim(),
+          // psCProEname: self.psCProEname.trim()
         },
-      })
-        .then((res) => {
-          console.log(res);
-          if (res.data.code == 0) {
-            // res.data.data.data[0].IS_GIFT =
-            //   res.data.data.data[0].IS_GIFT == "0" ? "否" : "否";
-            self.data = res.data.data.data;
-          } else {
-            // this.$Message.warning("sku查询失败!");
-            this.$Message.warning(vmI18n.t("modalTips.zt"));
-          }
-          self.tableLoad = false;
-        })
-        .catch(() => {
-          self.tableLoad = false;
-        });
+      };
+      try {
+        const res = await self.service.common.skuQuery(query);
+        if (res.data.code == 0) {
+          // res.data.data.data[0].IS_GIFT =
+          //   res.data.data.data[0].IS_GIFT == "0" ? "否" : "否";
+          self.data = res.data.data.data;
+        } else {
+          // this.$Message.warning("sku查询失败!");
+          this.$Message.warning(vmI18n.t("modalTips.zt"));
+        }
+        self.tableLoad = false;
+      } catch (e) {
+        self.tableLoad = false;
+      }
     },
     confirm() {
       let self = this;

@@ -164,7 +164,8 @@ export default {
     }, // 重构树数据
 
     // 获取角色id
-    getRoleData() {
+    async getRoleData() {
+      const res = await this.service.common.groupTreeload({});
       network.post("/p/cs/groupTreeload", {}).then((res) => {
         if (res.data.code === 0) {
           this.groupId = res.data.data[0].ID;

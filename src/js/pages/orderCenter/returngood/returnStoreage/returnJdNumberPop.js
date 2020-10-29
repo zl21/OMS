@@ -249,7 +249,7 @@ export default {
       this.selectData = [];
     },
     // 查询原始订单编号
-    queryBounced() {
+    async queryBounced() {
       //  获取页面数据
       let _this = this;
       _this.order.table.data = [];
@@ -267,11 +267,8 @@ export default {
       if (lists.buyer_nick) param.buyer_nick = lists.buyer_nick;
       if (lists.receive_mobile) param.receive_mobile = lists.receive_mobile;
       if (lists.logistics_code) param.logistics_code = lists.logistics_code;
-      axios({
-        url: "/p/cs/searchButtonsInJdDetail",
-        method: "post",
-        data: param
-      }).then(res => {
+      try {
+        const res = await _this.service.common.searchButtonsInJdDetail(param);
         if (res.data.code == 0 && res.data.data !== null) {
           for (let i = 0, list = res.data.data.length; i < list; i++) {
             res.data.data[i].ORIG_ORDER_NO = res.data.data[i].ORIG_ORDER_ID;
@@ -279,10 +276,10 @@ export default {
           }
         }
         _this.order.table.loading = false;
-      }).catch(err => {
+      } catch (e) {
         _this.$Message.error(err.message);
         _this.order.table.loading = false;
-      })
+      }
     },
     // 手工匹配确定
     okClick() {

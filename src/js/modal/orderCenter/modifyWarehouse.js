@@ -92,7 +92,7 @@ export default {
     this.getListData();
   },
   methods: {
-    getListData() {
+    async getListData() {
       let self = this;
       let fromdata = new FormData();
       let rowData = self.rowData;
@@ -107,47 +107,42 @@ export default {
       fromdata.append("shopId", shopId);
       fromdata.append("pageNum", self.pageNum);
       fromdata.append("pageSize", self.pageSize);
-      axios({
-        url: "/p/cs/getWarehourseByShopId",
-        method: "post",
-        data: fromdata,
-      }).then(function (res) {
-        res.data.data.forEach((element) => {
-          element.ecode = {
-            val: element.ecode,
-          };
-          element.ename = {
-            val: element.ename,
-          };
-          element.ID = {
-            val: element.id,
-          };
-        });
-        self.foreignKeyLink = {
-          start: 0,
-          tabth: [
-            {
-              colname: "ID",
-              name: "ID",
-              show: false,
-            },
-            {
-              colname: "ename",
-              // name: "发货仓库名称",
-              name: vmI18n.t("table_label.deliveryWarehouse_nam"),
-              show: true,
-            },
-            {
-              colname: "ecode",
-              // name: "发货仓库编码",
-              name: vmI18n.t("table_label.deliveryWarehouse_code"),
-              show: false,
-            },
-          ],
-          row: res.data.data,
+      const res = await this.service.common.getWarehouseLogisticsTree(fromdata);
+      res.data.data.forEach((element) => {
+        element.ecode = {
+          val: element.ecode,
         };
-        self.totalRowCount = res.data.count;
+        element.ename = {
+          val: element.ename,
+        };
+        element.ID = {
+          val: element.id,
+        };
       });
+      self.foreignKeyLink = {
+        start: 0,
+        tabth: [
+          {
+            colname: "ID",
+            name: "ID",
+            show: false,
+          },
+          {
+            colname: "ename",
+            // name: "发货仓库名称",
+            name: vmI18n.t("table_label.deliveryWarehouse_nam"),
+            show: true,
+          },
+          {
+            colname: "ecode",
+            // name: "发货仓库编码",
+            name: vmI18n.t("table_label.deliveryWarehouse_code"),
+            show: false,
+          },
+        ],
+        row: res.data.data,
+      };
+      self.totalRowCount = res.data.count;
     },
     // 分页请求数据
     changePage(value) {

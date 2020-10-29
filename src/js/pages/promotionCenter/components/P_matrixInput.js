@@ -3,7 +3,7 @@ import DragDialog from 'framework/components/dialog/dragDialog.vue';
 import axios from 'framework/__utils__/request';
 import port from '@/views/pages/common/orderDetail/connector.js';
 // import store from '@/store';
-import store from '@/config/store/store'; 
+import store from '@/config/store/store';
 
 export default {
   props: {
@@ -132,27 +132,23 @@ export default {
       this.$emit('refreshGetData'); // 刷新数据
       this.$emit('refreshItem'); // 向上派发父组件刷新
     }, // 取消不刷新数据，确认刷新数据
-    getData() {
-      axios({
-        url: '/p/cs/screenresult',
-        method: 'post',
-        data: {
-          param: JSON.stringify({
-            GLOBAL: this.search.toLocaleUpperCase(), // 搜索字段
-            PAGENUM: 1,
-            PAGESIZE: 10,
-            CONDITION: {},
-            TABLENAME: 'PS_C_PRO'
-          })
-        }
-      }).then((res) => {
-        const data = res.data;
-        if (data.code === 0) {
-          this.lists = data.data.list;
-          this.loading = false;
-          document.addEventListener('click', this.close);
-        }
-      });
+    async getData() {
+      let query = {
+        param: JSON.stringify({
+          GLOBAL: this.search.toLocaleUpperCase(), // 搜索字段
+          PAGENUM: 1,
+          PAGESIZE: 10,
+          CONDITION: {},
+          TABLENAME: 'PS_C_PRO'
+        })
+      }
+      const res = await this.service.common.screenresult(query);
+      const data = res.data;
+      if (data.code === 0) {
+        this.lists = data.data.list;
+        this.loading = false;
+        document.addEventListener('click', this.close);
+      }
     }, // 获取select数据
     optionClick(val, index) {
       this.NoImport = true;
@@ -215,7 +211,7 @@ export default {
           message: '请先选择店仓',
           center: true,
           type: 'warning'
-        }); 
+        });
       }
       this.getStyle().then((data) => {
         if (data === undefined) return;
