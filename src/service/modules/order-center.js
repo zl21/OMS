@@ -34,5 +34,10 @@ export default {
   getOrderDetailList: params => network.post('/p/cs/getOrderDetailList', params),
   saveBill: params => network.post('p/cs/saveBill', params),
   delOrderItem: params => network.post('/p/cs/delOrderItem', params),
-  queryResionByName: params => network.post('/p/cs/queryResionByName', params)
+  queryResionByName: params => network.post('/p/cs/queryResionByName', params),
+  getCurrentBatch: params => network.post('/api/cs/oc/oms/v1/getCurrentBatch', params),
+  getOneRefundItem: params => network.post('/api/cs/oc/oms/v1/getOneRefundItem', params),
+  cpStoreInfo: params => network.post('/api/cs/oc/oms/v1/cpStoreInfo', params),
+  getScanIncomingInfo: params => network.post('/api/cs/oc/oms/v1/getScanIncomingInfo', params),
+  saveScanIncoming: params => network.post('/api/cs/oc/oms/v1/saveScanIncoming', params),
 };
