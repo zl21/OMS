@@ -203,16 +203,16 @@ export default {
   },
   methods: {
     // 保存
-    save() {
+    async save() {
       const _this = this;
       if (
         _this.information.formData[0].itemdata.pid === undefined ||
         !_this.information.formData[0].itemdata.pid
       )
-        return _this.$Message("物流公司必填");
+        return _this.$message("物流公司必填");
       // if (_this.tableSize > 1000) return _this.$Message.error('数量过大，请使用导入功能设置是否到达');
       if (_this.tableSize > 1000)
-        return _this.$Message.error(vmI18n.t("modalTips.y3"));
+        return _this.$message.error(vmI18n.t("modalTips.y3"));
       _this.dataArr.forEach((item) => {
         if (item.IS_ARRIVE) {
           item.IS_ARRIVE = "Y";
@@ -223,7 +223,7 @@ export default {
       _this.isSaveLoading = true;
       _this.name2 = "";
       _this.query2 = "";
-      const fromdata = new FormData();
+      const formData = new FormData();
       const param = {
         fixcolumn: {
           ST_C_EXPRESS_AREA: {
@@ -234,75 +234,106 @@ export default {
         },
         objid: this.$route.query.id,
       };
-      fromdata.append("param", JSON.stringify(param));
-      _this.$network.post("/p/cs/expressAreaSaveCmd", fromdata).then((res) => {
-        _this.isSaveLoading = false;
-        _this.dataArr = [];
-        if (res.data.data.code === 0) {
-          _this.$Message.success("保存成功");
-          _this.getTree("", res.data.data.data.objid);
-          this.$store.commit("customize/TabHref", {
-            id: res.data.data.data.objid, // 单据id
-            type: "action", // 类型action
-            name: "logisticsArea", // 文件名
-            // label: '物流区域设置', // tab中文名
-            label: vmI18n.t("panel_label.logisticsAreaSetting"),
-            query: Object.assign({
-              id: res.data.data.data.objid, // 单据id
-              // tabTitle: '物流区域设置', // tab中文名
-              tabTitle: vmI18n.t("panel_label.logisticsAreaSetting"),
-            }), // 带的参数
-          });
-        } else {
-          // const err = res.data.data.message || '保存失败';
-          const err = res.data.data.message || vmI18n.t("modalTips.y0");
-          _this.$Message.error(err);
-        }
-      });
+      formData.append("param", JSON.stringify(param));
+      // 保存
+      const {data:{data:{code,message,data}}} = await this.service.strategyPlatform.expressAreaSaveCmd(formData)
+      _this.isSaveLoading = false;
+      _this.dataArr = [];
+      if (code === 0) {
+        _this.$message.success("保存成功");
+        _this.getTree("", data.objid);
+        this.$store.commit("customize/TabHref", {
+          id: data.objid, // 单据id
+          type: "action", // 类型action
+          name: "logisticsArea", // 文件名
+          label: vmI18n.t("panel_label.logisticsAreaSetting"),//物流区域设置
+          query: Object.assign({
+            id: data.objid, // 单据id
+            tabTitle: vmI18n.t("panel_label.logisticsAreaSetting"),//物流区域设置
+          }), // 带的参数
+        });
+      } else {
+        const err = message || vmI18n.t("modalTips.y0");//'保存失败';
+        _this.$message.error(err);
+      }
+      
+      // _this.$network.post("/p/cs/expressAreaSaveCmd", fromdata).then((res) => {
+      //   _this.isSaveLoading = false;
+      //   _this.dataArr = [];
+      //   if (res.data.data.code === 0) {
+      //     _this.$message.success("保存成功");
+      //     _this.getTree("", res.data.data.data.objid);
+      //     this.$store.commit("customize/TabHref", {
+      //       id: res.data.data.data.objid, // 单据id
+      //       type: "action", // 类型action
+      //       name: "logisticsArea", // 文件名
+      //       // label: '物流区域设置', // tab中文名
+      //       label: vmI18n.t("panel_label.logisticsAreaSetting"),
+      //       query: Object.assign({
+      //         id: res.data.data.data.objid, // 单据id
+      //         // tabTitle: '物流区域设置', // tab中文名
+      //         tabTitle: vmI18n.t("panel_label.logisticsAreaSetting"),
+      //       }), // 带的参数
+      //     });
+      //   } else {
+      //     // const err = res.data.data.message || '保存失败';
+      //     const err = res.data.data.message || vmI18n.t("modalTips.y0");
+      //     _this.$message.error(err);
+      //   }
+      // });
     },
     // 作废
-    invalid() {
+    async invalid() {
       const _this = this;
       _this.isSaveLoading = true;
-      const fromdata = new FormData();
+      const formData = new FormData();
       const param = { objid: this.$route.query.id };
-      fromdata.append("param", JSON.stringify(param));
-      _this.$network.post("/p/cs/expressAreaVoidCmd", fromdata).then((res) => {
-        _this.isSaveLoading = false;
-        if (res.data.code === 0) {
-          // const ess = res.data.data.message || '作废成功';
-          const ess = res.data.data.message || vmI18n.t("modalTips.y4");
-          _this.getTree();
-          _this.$Message.success(ess);
-        } else {
-          // const err = res.data.data.message || '作废失败';
-          const err = res.data.data.message || vmI18n.t("modalTips.y5");
-          _this.$Message.success(err);
-        }
-      });
+      formData.append("param", JSON.stringify(param));
+      const {data:{data:{code,message,data}}} = await this.service.strategyPlatform.expressAreaSaveCmd(formData)
+      console.log(code,message,data);
+      _this.isSaveLoading = false;
+      if (code === 0) {
+        const ess = rdata.message || vmI18n.t("modalTips.y4");//作废成功
+        _this.getTree();
+        _this.$message.success(ess);
+      } else {
+        const err = data.message || vmI18n.t("modalTips.y5");//作废失败
+        _this.$message.success(err);
+      }
+      // _this.$network.post("/p/cs/expressAreaVoidCmd", fromdata).then((res) => {
+      //   _this.isSaveLoading = false;
+      //   if (res.data.code === 0) {
+      //     // const ess = res.data.data.message || '作废成功';
+      //     const ess = res.data.data.message || vmI18n.t("modalTips.y4");
+      //     _this.getTree();
+      //     _this.$Message.success(ess);
+      //   } else {
+      //     // const err = res.data.data.message || '作废失败';
+      //     const err = res.data.data.message || vmI18n.t("modalTips.y5");
+      //     _this.$Message.success(err);
+      //   }
+      // });
     },
     // 获取树
-    getTree(save, objid) {
+    async getTree(save, objid) {
       const _this = this;
       _this.isSaveLoading = true;
-      _this.$network
-        .post("/p/cs/getExpressAreaTree", {
-          objid: objid || this.$route.query.id,
-        })
-        .then((res) => {
-          _this.isSaveLoading = false;
-          if (res.data.code === 0) {
+      const {data:{code,message,data}} = await this.service.strategyPlatform.getExpressAreaTree({
+        objid: objid || this.$route.query.id,
+      })
+      _this.isSaveLoading = false;
+          if (code === 0) {
             const treeList = JSON.parse(
-              JSON.stringify(res.data.data.expressAreaTree)
+              JSON.stringify(data.expressAreaTree)
             );
-            _this.treeData1 = res.data.data.expressAreaTree;
+            _this.treeData1 = data.expressAreaTree;
             _this.treeData2 = treeList;
             _this.information.formData[0].itemdata.pid =
-              res.data.data.expressArea.CP_C_LOGISTICS_ID;
+              data.expressArea.CP_C_LOGISTICS_ID;
             _this.information.formData[0].itemdata.valuedata =
-              res.data.data.expressArea.CP_C_LOGISTICS_ENAME;
+              data.expressArea.CP_C_LOGISTICS_ENAME;
             _this.information.formValue.REMARK =
-              res.data.data.expressArea.REMARK;
+              data.expressArea.REMARK;
             this.treeData1.forEach((item) => {
               item.disableCheckbox = true;
               item.children.forEach((list) => {
@@ -312,10 +343,10 @@ export default {
                 });
               });
             });
-            if (res.data.data.expressArea.ISACTIVE === "N") {
+            if (data.expressArea.ISACTIVE === "N") {
               _this.statusName = "已作废";
               _this.btnConfig.buttons.forEach((item) => {
-                // if (['保存', '作废', '导入', '导出', '刷新'].includes(item.text)) {
+                // ['保存', '作废', '导入', '导出', '刷新']
                 if (
                   [
                     vmI18n.t("btn.save"),
@@ -333,7 +364,55 @@ export default {
               _this.synchronous();
             }
           }
-        });
+      // _this.$network
+      //   .post("/p/cs/getExpressAreaTree", {
+      //     objid: objid || this.$route.query.id,
+      //   })
+      //   .then((res) => {
+      //     _this.isSaveLoading = false;
+      //     if (res.data.code === 0) {
+      //       const treeList = JSON.parse(
+      //         JSON.stringify(res.data.data.expressAreaTree)
+      //       );
+      //       _this.treeData1 = res.data.data.expressAreaTree;
+      //       _this.treeData2 = treeList;
+      //       _this.information.formData[0].itemdata.pid =
+      //         res.data.data.expressArea.CP_C_LOGISTICS_ID;
+      //       _this.information.formData[0].itemdata.valuedata =
+      //         res.data.data.expressArea.CP_C_LOGISTICS_ENAME;
+      //       _this.information.formValue.REMARK =
+      //         res.data.data.expressArea.REMARK;
+      //       this.treeData1.forEach((item) => {
+      //         item.disableCheckbox = true;
+      //         item.children.forEach((list) => {
+      //           list.disableCheckbox = true;
+      //           list.children.forEach((data) => {
+      //             data.disableCheckbox = true;
+      //           });
+      //         });
+      //       });
+      //       if (res.data.data.expressArea.ISACTIVE === "N") {
+      //         _this.statusName = "已作废";
+      //         _this.btnConfig.buttons.forEach((item) => {
+      //           // if (['保存', '作废', '导入', '导出', '刷新'].includes(item.text)) {
+      //           if (
+      //             [
+      //               vmI18n.t("btn.save"),
+      //               vmI18n.t("btn.void"),
+      //               vmI18n.t("btn.import"),
+      //               vmI18n.t("btn.export"),
+      //               vmI18n.t("btn.refresh"),
+      //             ].includes(item.text)
+      //           ) {
+      //             item.disabled = true;
+      //           }
+      //         });
+      //       }
+      //       if (save === "import") {
+      //         _this.synchronous();
+      //       }
+      //     }
+      //   });
     },
     // 全选树
     checkAll(e) {
@@ -386,52 +465,86 @@ export default {
       });
       // this.data1 = this.data1;
     },
-    enter2(e) {
+    async enter2(e) {
       const _this = this;
       _this.listArr = [];
       _this.tableLoading = true;
       const param = { objid: _this.$route.query.id, treeLikeKey: e };
-      _this.$network
-        .post("/p/cs/getExpressAreaItemLikeTable", param)
-        .then((res) => {
-          _this.tableLoading = false;
-          if (res.data.code === 0) {
-            _this.cityThead = true;
-            _this.dataArr =
-              res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT !== undefined
-                ? res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT
-                : [];
-            _this.treeData2 = res.data.data.REGION_TREE_RESULT;
-            _this.dataArr.forEach((item) => {
-              if (item.IS_ARRIVE === "Y") item.IS_ARRIVE = true;
-              else if (item.IS_ARRIVE === "N") item.IS_ARRIVE = false;
-            });
-            _this.query2 = e;
-            _this.treeData2.forEach((item) => {
-              if (item.children.length) {
-                item.children.forEach((list) => {
-                  if (list.title.indexOf(`${e}`) != -1) {
-                    item.expand = true;
-                  }
-                  list.children.forEach((data) => {
-                    if (data.title.indexOf(`${e}`) != -1) {
-                      item.expand = true;
-                      list.expand = true;
-                    }
-                  });
-                });
+      const {data:{code,message,data}} = await this.service.strategyPlatform.getExpressAreaItemLikeTable(param)
+      _this.tableLoading = false;
+      if (code === 0) {
+        _this.cityThead = true;
+        _this.dataArr =
+          data.ST_C_EXPRESS_AREA_ITEM_RESULT !== undefined
+            ? data.ST_C_EXPRESS_AREA_ITEM_RESULT
+            : [];
+        _this.treeData2 = data.REGION_TREE_RESULT;
+        _this.dataArr.forEach((item) => {
+          if (item.IS_ARRIVE === "Y") item.IS_ARRIVE = true;
+          else if (item.IS_ARRIVE === "N") item.IS_ARRIVE = false;
+        });
+        _this.query2 = e;
+        _this.treeData2.forEach((item) => {
+          if (item.children.length) {
+            item.children.forEach((list) => {
+              if (list.title.indexOf(`${e}`) != -1) {
+                item.expand = true;
               }
+              list.children.forEach((data) => {
+                if (data.title.indexOf(`${e}`) != -1) {
+                  item.expand = true;
+                  list.expand = true;
+                }
+              });
             });
-          } else {
-            // _this.$Message.error(res.data.data.message || '失败');
-            _this.$Message.error(
-              res.data.data.message || vmI18n.t("modalTips.z3")
-            );
           }
         });
+      } else {
+        _this.$message.error(
+          data.message || vmI18n.t("modalTips.z3")//失败
+        );
+      }
+      // _this.$network
+      //   .post("/p/cs/getExpressAreaItemLikeTable", param)
+      //   .then((res) => {
+      //     _this.tableLoading = false;
+      //     if (res.data.code === 0) {
+      //       _this.cityThead = true;
+      //       _this.dataArr =
+      //         res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT !== undefined
+      //           ? res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT
+      //           : [];
+      //       _this.treeData2 = res.data.data.REGION_TREE_RESULT;
+      //       _this.dataArr.forEach((item) => {
+      //         if (item.IS_ARRIVE === "Y") item.IS_ARRIVE = true;
+      //         else if (item.IS_ARRIVE === "N") item.IS_ARRIVE = false;
+      //       });
+      //       _this.query2 = e;
+      //       _this.treeData2.forEach((item) => {
+      //         if (item.children.length) {
+      //           item.children.forEach((list) => {
+      //             if (list.title.indexOf(`${e}`) != -1) {
+      //               item.expand = true;
+      //             }
+      //             list.children.forEach((data) => {
+      //               if (data.title.indexOf(`${e}`) != -1) {
+      //                 item.expand = true;
+      //                 list.expand = true;
+      //               }
+      //             });
+      //           });
+      //         }
+      //       });
+      //     } else {
+      //       // _this.$Message.error(res.data.data.message || '失败');
+      //       _this.$Message.error(
+      //         res.data.data.message || vmI18n.t("modalTips.z3")
+      //       );
+      //     }
+      //   });
     },
     // 同步table数据
-    synchronous() {
+    async synchronous() {
       const _this = this;
       _this.tableLoading = true;
       _this.dataArr = [];
@@ -460,26 +573,40 @@ export default {
           });
         });
       });
-      _this.$network
-        .post("/p/cs/getExpressAreaItemTable", {
-          objid: this.$route.query.id,
-          treeNode: treeList,
-        })
-        .then((res) => {
-          _this.tableLoading = false;
-          _this.isDelivery = false;
-          if (res.data.code === 0 && res.data.data !== null) {
-            if (res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT.length)
-              _this.dataArr = res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT;
-            _this.tableSize = res.data.data.TABLE_SIZE;
-            _this.dataArr.forEach((item) => {
-              if (item.IS_ARRIVE === "Y") item.IS_ARRIVE = true;
-              else if (item.IS_ARRIVE === "N") item.IS_ARRIVE = false;
-            });
-          } else {
-            _this.tableSize = 0;
-          }
+      // 明细
+      const params = {
+        objid: this.$route.query.id,
+        treeNode: treeList,
+      }
+      const {data:{code,data}} = await this.service.strategyPlatform.getExpressAreaItemTable(params)
+      if (code === 0 && data !== null) {
+        if (data.ST_C_EXPRESS_AREA_ITEM_RESULT.length)
+          _this.dataArr = data.ST_C_EXPRESS_AREA_ITEM_RESULT;
+        _this.tableSize = data.TABLE_SIZE;
+        _this.dataArr.forEach((item) => {
+          if (item.IS_ARRIVE === "Y") item.IS_ARRIVE = true;
+          else if (item.IS_ARRIVE === "N") item.IS_ARRIVE = false;
         });
+      } else {
+        _this.tableSize = 0;
+      }
+      // _this.$network
+      //   .post("/p/cs/getExpressAreaItemTable", params)
+      //   .then((res) => {
+      //     _this.tableLoading = false;
+      //     _this.isDelivery = false;
+      //     if (res.data.code === 0 && res.data.data !== null) {
+      //       if (res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT.length)
+      //         _this.dataArr = res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT;
+      //       _this.tableSize = res.data.data.TABLE_SIZE;
+      //       _this.dataArr.forEach((item) => {
+      //         if (item.IS_ARRIVE === "Y") item.IS_ARRIVE = true;
+      //         else if (item.IS_ARRIVE === "N") item.IS_ARRIVE = false;
+      //       });
+      //     } else {
+      //       _this.tableSize = 0;
+      //     }
+      //   });
     },
     selectChange(e) {
       console.log(e);
@@ -504,7 +631,7 @@ export default {
         this.isDelivery = false;
     },
     // 导出
-    warningOk() {
+    async warningOk() {
       const _this = this;
       _this.warningModal = false;
       const treeList = [];
@@ -524,19 +651,31 @@ export default {
         objid: _this.$route.query.id,
         treeNode: treeList,
       };
-      _this.$network.post("/p/cs/exportExpressAreaItem", param).then((res) => {
-        if (res.data.code === 0) {
-          // const ess = res.data.data.message || '导出成功';
-          const ess = res.data.data.message || vmI18n.t("modalTips.z2");
-          _this.$Message.success(ess);
-          _this.downloadUrlFile(res.data.data);
-        } else {
-          // const err = res.data.data.message || '导出失败';
-          const err = res.data.data.message || vmI18n.t("modalTips.y6");
-          _this.$Message.success(err);
-          _this.downloadUrlFile(res.data.data);
-        }
-      });
+      // 导出
+      const {data:{code,message,data}} = await this.service.strategyPlatform.exportExpressAreaItem(param)
+      console.log(code,message,data);
+      if (code === 0) {
+        const ess = data.message || vmI18n.t("modalTips.z2");//导出成功
+        _this.$message.success(ess);
+        _this.downloadUrlFile(data);
+      } else {
+        const err = data.message || vmI18n.t("modalTips.y6");//导出失败
+        _this.$message.success(err);
+        _this.downloadUrlFile(data);
+      }
+      // _this.$network.post("/p/cs/exportExpressAreaItem", param).then((res) => {
+      //   if (res.data.code === 0) {
+      //     // const ess = res.data.data.message || '导出成功';
+      //     const ess = res.data.data.message || vmI18n.t("modalTips.z2");
+      //     _this.$Message.success(ess);
+      //     _this.downloadUrlFile(res.data.data);
+      //   } else {
+      //     // const err = res.data.data.message || '导出失败';
+      //     const err = res.data.data.message || vmI18n.t("modalTips.y6");
+      //     _this.$Message.success(err);
+      //     _this.downloadUrlFile(res.data.data);
+      //   }
+      // });
     },
     // 导出
     downloadUrlFile(src) {

@@ -4,7 +4,6 @@ import businessActionTable from "professionalComponents/businessActionTable";
 // import businessLabel from 'professionalComponents/businessLabel';
 import axios from "axios";
 import publicMethods from "@/assets/js/public/publicMethods";
-
 // import port from "@/assets/js/connector.js";
 
 import areaList from "@/assets/js/address/area-list";
@@ -551,7 +550,7 @@ export default {
   }, // 获取支付方式下拉选项值
   methods: {
     // 保存方法
-    sava() {
+    async sava() {
       const self = this;
       const a = self.getData(self.$route.query.id);
       console.log(a);
@@ -563,7 +562,7 @@ export default {
         !a.fixcolumn.ST_C_COMPENSATE.CP_C_PHY_WAREHOUSE_ID
       ) {
         // self.$Message.warning("实体仓不能为空");
-        self.$Message.warning(vmI18n.t("modalTips.x0"));
+        self.$message.warning(vmI18n.t("modalTips.x0"));
         return;
       }
       if (
@@ -571,56 +570,76 @@ export default {
         !a.fixcolumn.ST_C_COMPENSATE.BEGIN_TIME
       ) {
         // self.$Message.warning("生效日期不能为空");
-        self.$Message.warning(vmI18n.t("modalTips.x1"));
+        self.$message.warning(vmI18n.t("modalTips.x1"));
         return;
       }
       if (
         String(a.fixcolumn.ST_C_COMPENSATE.END_TIME) == "undefined" ||
         !a.fixcolumn.ST_C_COMPENSATE.END_TIME
       ) {
-        self.$Message.warning("结束日期不能为空");
-        self.$Message.warning(vmI18n.t("modalTips.x2"));
+        self.$message.warning("结束日期不能为空");
+        self.$message.warning(vmI18n.t("modalTips.x2"));
         return;
       }
       if (
         String(a.fixcolumn.ST_C_COMPENSATE.ENAME) == "undefined" ||
         !a.fixcolumn.ST_C_COMPENSATE.ENAME
       ) {
-        self.$Message.warning("方案名称不能为空");
-        self.$Message.warning(vmI18n.t("modalTips.x3"));
+        self.$message.warning("方案名称不能为空");
+        self.$message.warning(vmI18n.t("modalTips.x3"));
         return;
       }
       if (!self.jordanTableConfig.data.length)
-        return self.$Message.error("明细为空不允许保存");
-      return self.$Message.error(vmI18n.t("modalTips.x4"));
+        return self.$message.error("明细为空不允许保存");
+        return self.$message.error(vmI18n.t("modalTips.x4"));
       const formdata = new FormData();
       formdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/saveCompensate",
-        method: "post",
-        data: formdata,
-      }).then((res) => {
-        if (res.data.data.code === 0) {
-          if (JSON.stringify(res.data.data.data) !== "{}") {
-            self.removeDetail();
-            // self.$store.commit("TabHref", {
-            //   id: res.data.data.data.objid,
-            //   type: "action",
-            //   name: "courierPay",
-            //   label: "快递赔付方案",
-            //   query: Object.assign({
-            //     id: res.data.data.data.objid,
-            //     tabTitle: "快递赔付方案"
-            //   })
-            // });
-          }
-          self.query(self.objid);
-          self.$Message.success(res.data.data.message);
-        } else {
-          self.$Message.error(res.data.data.message);
+      const {data:{code,data}} = await this.service.strategyPlatform.saveCompensate(formdata)
+      if (data.code === 0) {
+        if (JSON.stringify(data.data) !== "{}") {
+          self.removeDetail();
+          // self.$store.commit("TabHref", {
+          //   id: data.data.objid,
+          //   type: "action",
+          //   name: "courierPay",
+          //   label: "快递赔付方案",
+          //   query: Object.assign({
+          //     id: data.data.objid,
+          //     tabTitle: "快递赔付方案"
+          //   })
+          // });
         }
-        // self.query(self.objid);
-      });
+        self.query(self.objid);
+        self.$message.success(data.message);
+      } else {
+        self.$message.error(data.message);
+      }
+      // axios({
+      //   url: "/p/cs/saveCompensate",
+      //   method: "post",
+      //   data: formdata,
+      // }).then((res) => {
+      //   if (res.data.data.code === 0) {
+      //     if (JSON.stringify(res.data.data.data) !== "{}") {
+      //       self.removeDetail();
+      //       // self.$store.commit("TabHref", {
+      //       //   id: res.data.data.data.objid,
+      //       //   type: "action",
+      //       //   name: "courierPay",
+      //       //   label: "快递赔付方案",
+      //       //   query: Object.assign({
+      //       //     id: res.data.data.data.objid,
+      //       //     tabTitle: "快递赔付方案"
+      //       //   })
+      //       // });
+      //     }
+      //     self.query(self.objid);
+      //     self.$Message.success(res.data.data.message);
+      //   } else {
+      //     self.$Message.error(res.data.data.message);
+      //   }
+      //   // self.query(self.objid);
+      // });
     },
     setData(data) {
       // 页面赋值方法
@@ -744,7 +763,7 @@ export default {
       // return data;
     },
     // 删除明细
-    tableDeleteDetail() {
+    async tableDeleteDetail() {
       const self = this;
       const obj = {
         tabitem: {
@@ -767,17 +786,23 @@ export default {
       const param = obj;
       const formdata = new FormData();
       formdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/delCompenstate",
-        method: "post",
-        data: formdata,
-      }).then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          self.$Message.success(res.data.data.message);
-          self.query(self.objid);
-        }
-      });
+      //接口
+      const res = await this.service.strategyPlatform.delCompenstate(formdata)
+      if (res.status === 200) {
+        self.$message.success(res.data.data.message);
+        self.query(self.objid);
+      }
+      // axios({
+      //   url: "/p/cs/delCompenstate",
+      //   method: "post",
+      //   data: formdata,
+      // }).then((res) => {
+      //   console.log(res);
+      //   if (res.status === 200) {
+      //     self.$Message.success(res.data.data.message);
+      //     self.query(self.objid);
+      //   }
+      // });
     },
     // 查询方法
     async query(id) {
@@ -788,25 +813,36 @@ export default {
       const param = obj;
       const formdata = new FormData();
       formdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/selectCompenstateLogistic",
-        method: "post",
-        data: formdata,
-      }).then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          if (res.data.ST_C_COMPENSATE.BILL_STATUS)
-            self.identifying = res.data.ST_C_COMPENSATE.BILL_STATUS;
-          if (res.data.ST_C_COMPENSATE.BILL_STATUS !== 1)
-            self.jordanTableConfig.isShowDeleteDetailBtn = false;
-          if (res.data.ST_C_COMPENSATE.END_TIME === null)
-            res.data.ST_C_COMPENSATE.END_TIME = "";
-          self.setData(res.data);
-        }
-      });
+      //接口
+      const res = await this.service.strategyPlatform.delCompenstate(formdata)
+      if (res.status === 200) {
+        if (res.data.ST_C_COMPENSATE.BILL_STATUS)
+          self.identifying = res.data.ST_C_COMPENSATE.BILL_STATUS;
+        if (res.data.ST_C_COMPENSATE.BILL_STATUS !== 1)
+          self.jordanTableConfig.isShowDeleteDetailBtn = false;
+        if (res.data.ST_C_COMPENSATE.END_TIME === null)
+          res.data.ST_C_COMPENSATE.END_TIME = "";
+        self.setData(res.data);
+      }
+      // axios({
+      //   url: "/p/cs/selectCompenstateLogistic",
+      //   method: "post",
+      //   data: formdata,
+      // }).then((res) => {
+      //   console.log(res);
+      //   if (res.status === 200) {
+      //     if (res.data.ST_C_COMPENSATE.BILL_STATUS)
+      //       self.identifying = res.data.ST_C_COMPENSATE.BILL_STATUS;
+      //     if (res.data.ST_C_COMPENSATE.BILL_STATUS !== 1)
+      //       self.jordanTableConfig.isShowDeleteDetailBtn = false;
+      //     if (res.data.ST_C_COMPENSATE.END_TIME === null)
+      //       res.data.ST_C_COMPENSATE.END_TIME = "";
+      //     self.setData(res.data);
+      //   }
+      // });
     },
     // 新增明细方法
-    addDetail() {
+    async addDetail() {
       const self = this;
       const a = self.getData(self.objid);
       const param = a;
@@ -818,20 +854,20 @@ export default {
         (valueType.COMPENSATE_TYPE === 1 || valueType.COMPENSATE_TYPE === 2) &&
         (valueType.COMPENSATE_STANDARD === "" || valueType.MULTIPLE === "")
       ) {
-        self.$Message.warning("赔付标准和倍数不能为空");
-        self.$Message.warning(vmI18n.t("modalTips.x5"));
+        self.$message.warning("赔付标准和倍数不能为空");
+        self.$message.warning(vmI18n.t("modalTips.x5"));
         return;
       }
       if (valueType.COMPENSATE_TYPE === 3 && valueType.SETTLEMENTPRICE === "") {
-        self.$Message.warning("结算价不能为空");
-        self.$Message.warning(vmI18n.t("modalTips.x6"));
+        self.$message.warning("结算价不能为空");
+        self.$message.warning(vmI18n.t("modalTips.x6"));
         return;
       }
       if (
         self.jordanTableConfig.jordanFormConfig.formData[0].itemdata.pid === ""
       ) {
-        self.$Message.warning("快递公司名称不能为空");
-        self.$Message.warning(vmI18n.t("modalTips.x7"));
+        self.$message.warning("快递公司名称不能为空");
+        self.$message.warning(vmI18n.t("modalTips.x7"));
         return;
       }
       addList.CP_C_LOGISTICS_ENAME =
@@ -845,35 +881,58 @@ export default {
       param.fixcolumn.ST_C_COMPENSATE_LOGISTICS.push(addList);
       const formdata = new FormData();
       formdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/saveCompensate",
-        method: "post",
-        data: formdata,
-      }).then((res) => {
-        console.log(res);
-        if (res.data.data.code === 0) {
-          self.removeDetail();
-          if (JSON.stringify(res.data.data.data) !== "{}") {
-            self.$store.commit("TabHref", {
-              id: res.data.data.data.objid,
-              type: "action",
-              name: "courierPay",
-              // label: "快递赔付方案",
-              label: vmI18n.t("panel_label.express_compensation_scheme"),
-              query: Object.assign({
-                id: res.data.data.data.objid,
-                // tabTitle: "快递赔付方案",
-                tabTitle: vmI18n.t("panel_label.express_compensation_scheme"),
-              }),
-            });
-          }
-          self.$Message.success(res.data.data.message);
-        } else {
-          self.$Message.error(res.data.data.message);
-          return;
+      const {data:{code,data}} = await this.service.strategyPlatform.saveCompensate(formdata)
+      if (data.code === 0) {
+        self.removeDetail();
+        if (JSON.stringify(data.data) !== "{}") {
+          self.$store.commit("TabHref", {
+            id: data.data.objid,
+            type: "action",
+            name: "courierPay",
+            // label: "快递赔付方案",
+            label: vmI18n.t("panel_label.express_compensation_scheme"),
+            query: Object.assign({
+              id: data.data.objid,
+              // tabTitle: "快递赔付方案",
+              tabTitle: vmI18n.t("panel_label.express_compensation_scheme"),
+            }),
+          });
         }
-        self.query(self.objid);
-      });
+        self.$message.success(data.message);
+      } else {
+        self.$message.error(data.message);
+        return;
+      }
+      self.query(self.objid);
+      // axios({
+      //   url: "/p/cs/saveCompensate",
+      //   method: "post",
+      //   data: formdata,
+      // }).then((res) => {
+      //   console.log(res);
+      //   if (res.data.data.code === 0) {
+      //     self.removeDetail();
+      //     if (JSON.stringify(res.data.data.data) !== "{}") {
+      //       self.$store.commit("TabHref", {
+      //         id: res.data.data.data.objid,
+      //         type: "action",
+      //         name: "courierPay",
+      //         // label: "快递赔付方案",
+      //         label: vmI18n.t("panel_label.express_compensation_scheme"),
+      //         query: Object.assign({
+      //           id: res.data.data.data.objid,
+      //           // tabTitle: "快递赔付方案",
+      //           tabTitle: vmI18n.t("panel_label.express_compensation_scheme"),
+      //         }),
+      //       });
+      //     }
+      //     self.$Message.success(res.data.data.message);
+      //   } else {
+      //     self.$Message.error(res.data.data.message);
+      //     return;
+      //   }
+      //   self.query(self.objid);
+      // });
     },
     // 保存清除明细条件
     removeDetail() {
