@@ -227,62 +227,104 @@ export default {
     /**
      * 查询促销的详情
      */
-    getData(_objid) {
+    async getData(_objid) {
       const self = this;
-      const searchParam = new URLSearchParams();
+      const formData = new URLSearchParams();
       const obj = { objid: this.objid };
       if (_objid) obj.objid = _objid;
-      searchParam.append("param", JSON.stringify(obj));
-      axios({
-        method: "post",
-        url: "/p/cs/pm/v1/selectPm",
-        data: searchParam,
-      })
-        .then((res) => {
-          if (res.data.code === 0) {
-            const rs = res.data.data || {};
-            Object.assign(self.basic_info, rs.basic_info);
-            if (rs.condition_info_setting) {
-              const info = rs.condition_info_setting || {};
-              for (const key in info) {
-                if (key === "rules") {
-                  // Object.assign(self.condition_info_setting.rules,info.rules);
-                  // add by wdq  由于后台不完整结构,
-                  self.condition_info_setting.rules.forEach((rule) => {
-                    const obj = info.rules.find(
-                      (item) => item.name === rule.name
-                    );
-                    if (obj) {
-                      for (const i in obj) {
-                        rule[i] = obj[i];
-                      }
+      formData.append("param", JSON.stringify(obj));
+      try {
+        const {data:{code,message,data}} = await this.service.promotionCenter.selectPm(formData)
+        console.log(code,message,data);
+        if (code === 0) {
+          const rs = data || {};
+          Object.assign(self.basic_info, rs.basic_info);
+          if (rs.condition_info_setting) {
+            const info = rs.condition_info_setting || {};
+            for (const key in info) {
+              if (key === "rules") {
+                // Object.assign(self.condition_info_setting.rules,info.rules);
+                // add by wdq  由于后台不完整结构,
+                self.condition_info_setting.rules.forEach((rule) => {
+                  const obj = info.rules.find(
+                    (item) => item.name === rule.name
+                  );
+                  if (obj) {
+                    for (const i in obj) {
+                      rule[i] = obj[i];
                     }
-                  });
-                } else self.condition_info_setting[key] = info[key];
-              }
+                  }
+                });
+              } else self.condition_info_setting[key] = info[key];
             }
-            Object.assign(self.gift_info_setting, rs.gift_info_setting);
-            this.loadDis = true;
-            this.$nextTick(() => {
-              this.loadDis = false;
-              this.validateModule();
-            });
-          } else {
-            self.$message({
-              message: res.data.message,
-              type: "error",
-            });
           }
-        })
-        .catch((res) => {
-          // self.$message({ type: "error", message: "获取促销详情异常" });
-          self.$message({ type: "error", message: vmI18n.t("modalTips.r4") });
-        });
+          Object.assign(self.gift_info_setting, rs.gift_info_setting);
+          this.loadDis = true;
+          this.$nextTick(() => {
+            this.loadDis = false;
+            this.validateModule();
+          });
+        } else {
+          self.$message({
+            message: message,
+            type: "error",
+          });
+        }
+      } catch (error) {
+        // self.$message({ type: "error", message: "获取促销详情异常" });
+        self.$message({ type: "error", message: vmI18n.t("modalTips.r4") });
+      }
+     
+      // axios({
+      //   method: "post",
+      //   url: "/p/cs/pm/v1/selectPm",
+      //   data: formData,
+      // })
+      //   .then((res) => {
+      //     if (res.data.code === 0) {
+      //       const rs = res.data.data || {};
+      //       Object.assign(self.basic_info, rs.basic_info);
+      //       if (rs.condition_info_setting) {
+      //         const info = rs.condition_info_setting || {};
+      //         for (const key in info) {
+      //           if (key === "rules") {
+      //             // Object.assign(self.condition_info_setting.rules,info.rules);
+      //             // add by wdq  由于后台不完整结构,
+      //             self.condition_info_setting.rules.forEach((rule) => {
+      //               const obj = info.rules.find(
+      //                 (item) => item.name === rule.name
+      //               );
+      //               if (obj) {
+      //                 for (const i in obj) {
+      //                   rule[i] = obj[i];
+      //                 }
+      //               }
+      //             });
+      //           } else self.condition_info_setting[key] = info[key];
+      //         }
+      //       }
+      //       Object.assign(self.gift_info_setting, rs.gift_info_setting);
+      //       this.loadDis = true;
+      //       this.$nextTick(() => {
+      //         this.loadDis = false;
+      //         this.validateModule();
+      //       });
+      //     } else {
+      //       self.$message({
+      //         message: res.data.message,
+      //         type: "error",
+      //       });
+      //     }
+      //   })
+      //   .catch((res) => {
+      //     // self.$message({ type: "error", message: "获取促销详情异常" });
+      //     self.$message({ type: "error", message: vmI18n.t("modalTips.r4") });
+      //   });
     },
     /**
      * 保存草稿
      */
-    saveDraft() {
+    async saveDraft() {
       // console.log('保存草稿');
       const [
         modulesValid1,
@@ -307,54 +349,92 @@ export default {
         gift_info_setting: this.gift_info_setting,
         index,
       };
+      // 请求保存接口
       this.loading = true;
       const searchParam = new URLSearchParams();
       searchParam.append("param", JSON.stringify(params));
-      axios({
-        method: "post",
-        url: "/p/cs/pm/v1/savePm",
-        data: searchParam,
-      })
-        .then((res) => {
-          if (res.data.code === 0) {
-            this.$message({
-              type: "success",
-              // message: "保存成功",
-              message: vmI18n.t("modalTips.z9"),
-            });
-            let action = "customize/switchActiveTab";
-            if (this.objid == -1) {
-              action = "customize/TabClose";
-            }
-            this.objid = String(res.data.data.objid) || -1;
-            this.$nextTick(() => {
-              this.$store.commit(action, {
-                id: this.objid, // id
-                type: "action", // 类型action
-                name: "addOrEditActi", // 文件名
-                // label: "编辑促销活动", // tab中文名
-                label: vmI18n.t("panel_label.editPromotion"),
-                query: Object.assign({
-                  id: this.objid, // id
-                  // tabTitle: "编辑促销活动", // tab中文名
-                  tabTitle: vmI18n.t("panel_label.editPromotion"),
-                }), // 带的参数
-              });
-            });
-          } else {
-            this.$message({
-              type: "error",
-              message: res.data.message,
-            });
+      try {
+        const { data: { code, message, data } } = await this.service.promotionCenter.selectPm(formData)
+        if (code === 0) {
+          this.$message({
+            type: "success",
+            // message: "保存成功",
+            message: vmI18n.t("modalTips.z9"),
+          });
+          let action = "customize/switchActiveTab";
+          if (this.objid == -1) {
+            action = "customize/TabClose";
           }
-          this.loading = false;
-        })
-        .catch(() => {
-          this.loading = false;
-        });
+          this.objid = String(data.objid) || -1;
+          this.$nextTick(() => {
+            this.$store.commit(action, {
+              id: this.objid, // id
+              type: "action", // 类型action
+              name: "addOrEditActi", // 文件名
+              // label: "编辑促销活动", // tab中文名
+              label: vmI18n.t("panel_label.editPromotion"),
+              query: Object.assign({
+                id: this.objid, // id
+                // tabTitle: "编辑促销活动", // tab中文名
+                tabTitle: vmI18n.t("panel_label.editPromotion"),
+              }), // 带的参数
+            });
+          });
+        } else {
+          this.$message({
+            type: "error",
+            message: message,
+          });
+        }
+        this.loading = false;
+      } catch (error) {
+
+      }
+      // axios({
+      //   method: "post",
+      //   url: "/p/cs/pm/v1/savePm",
+      //   data: searchParam,
+      // })
+      //   .then((res) => {
+      //     if (res.data.code === 0) {
+      //       this.$message({
+      //         type: "success",
+      //         // message: "保存成功",
+      //         message: vmI18n.t("modalTips.z9"),
+      //       });
+      //       let action = "customize/switchActiveTab";
+      //       if (this.objid == -1) {
+      //         action = "customize/TabClose";
+      //       }
+      //       this.objid = String(res.data.data.objid) || -1;
+      //       this.$nextTick(() => {
+      //         this.$store.commit(action, {
+      //           id: this.objid, // id
+      //           type: "action", // 类型action
+      //           name: "addOrEditActi", // 文件名
+      //           // label: "编辑促销活动", // tab中文名
+      //           label: vmI18n.t("panel_label.editPromotion"),
+      //           query: Object.assign({
+      //             id: this.objid, // id
+      //             // tabTitle: "编辑促销活动", // tab中文名
+      //             tabTitle: vmI18n.t("panel_label.editPromotion"),
+      //           }), // 带的参数
+      //         });
+      //       });
+      //     } else {
+      //       this.$message({
+      //         type: "error",
+      //         message: res.data.message,
+      //       });
+      //     }
+      //     this.loading = false;
+      //   })
+      //   .catch(() => {
+      //     this.loading = false;
+      //   });
     },
     // 发布
-    publish() {
+    async publish() {
       const [
         modulesValid1,
         modulesValid2,
@@ -382,37 +462,62 @@ export default {
         },
       };
       this.loading = true;
-      const searchParam = new URLSearchParams();
-      searchParam.append("param", JSON.stringify(params));
-      axios({
-        method: "post",
-        url: "/p/cs/pm/v1/updatePmStatus",
-        data: searchParam,
-      })
-        .then((res) => {
-          if (res.data.code === 0) {
-            this.$message({
-              message: res.data.message,
-              type: "success",
-            });
-            let action = "switchActiveTab";
-            if (this.objid == -1) {
-              action = "TabClose";
-            }
-            this.$nextTick(() => {
-              this.getData(this.objid);
-            });
-          } else {
-            this.$message({
-              type: "error",
-              message: res.data.message,
-            });
+      // 发布
+      const formData = new URLSearchParams();
+      formData.append("param", JSON.stringify(params));
+      try {
+        const { data: { code, message } } = await this.service.promotionCenter.updatePmStatus(formData)
+        if (code === 0) {
+          this.$message({
+            message: message,
+            type: "success",
+          });
+          let action = "switchActiveTab";
+          if (this.objid == -1) {
+            action = "TabClose";
           }
-          this.loading = false;
-        })
-        .catch(() => {
-          this.loading = false;
-        });
+          this.$nextTick(() => {
+            this.getData(this.objid);
+          });
+        } else {
+          this.$message({
+            type: "error",
+            message: res.data.message,
+          });
+        }
+        this.loading = false;
+      } catch (error) {
+        this.loading = false;
+      }
+      // axios({
+      //   method: "post",
+      //   url: "/p/cs/pm/v1/updatePmStatus",
+      //   data: searchParam,
+      // })
+      //   .then((res) => {
+      //     if (res.data.code === 0) {
+      //       this.$message({
+      //         message: res.data.message,
+      //         type: "success",
+      //       });
+      //       let action = "switchActiveTab";
+      //       if (this.objid == -1) {
+      //         action = "TabClose";
+      //       }
+      //       this.$nextTick(() => {
+      //         this.getData(this.objid);
+      //       });
+      //     } else {
+      //       this.$message({
+      //         type: "error",
+      //         message: res.data.message,
+      //       });
+      //     }
+      //     this.loading = false;
+      //   })
+      //   .catch(() => {
+      //     this.loading = false;
+      //   });
     },
     /**
      * 取消(关闭) 返回列表界面
@@ -486,7 +591,7 @@ export default {
     /**
      * 初始化默认时间  时间范围好下线时间
      */
-    initDefaultTime() {},
+    initDefaultTime() { },
     /**
      * 滚动选中区域
      */
@@ -518,7 +623,7 @@ export default {
       let area_1 = 0;
       try {
         area_1 = this.$refs.area_1.$el.offsetHeight; // 第二个模块可能没有
-      } catch (e) {}
+      } catch (e) { }
       const area_2 = this.$refs.area_2.$el.offsetHeight;
       if (scroll < area_0) {
         this.current = 0;

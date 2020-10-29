@@ -276,7 +276,7 @@ export default {
       this.setTableHeight();
       this.refresh();
       this.btnConfig.buttons.forEach((item) => {
-        // if (item.text === ("修改物流" || "作废" || "导入" || "刷新"))
+        // "修改物流" || "作废" || "导入" || "刷新"
         if (
           item.text ===
           (vmI18n.t("btn.modify_logistics") ||
@@ -288,16 +288,16 @@ export default {
       });
     }
   },
-  methods: {
+   methods: {
     // 保存
     async save() {
       const _this = this;
-      if (!_this.information.formData[0].itemdata.pid)
-        return _this.$Message.error("仓库必填");
+      // if (!_this.information.formData[0].itemdata.pid)
+      //   return _this.$Message.error("仓库必填");
       _this.isSaveLoading = true;
       _this.name = "";
       _this.query = "";
-      const fromdata = new FormData();
+      const fromData = new FormData();
       const cloneListArr = JSON.parse(JSON.stringify(_this.listArr));
 
       if (cloneListArr.length) {
@@ -319,51 +319,84 @@ export default {
         },
         objid: this.$route.query.id,
       };
-      fromdata.append("param", JSON.stringify(param));
-      const res = await this.service.common.saveWarehouseLogistics(fromdata);
+      fromData.append("param", JSON.stringify(param));
+      // 保存
+      const {data:{data:{code,data}}} = await this.service.strategyPlatform.saveWarehouseLogistics(fromData)
       _this.isSaveLoading = false;
-      if (res.data.data.code === 0) {
-        // _this.$Message.success("保存成功");
-        _this.$Message.success(vmI18n.t("modalTips.z9"));
+      if (code === 0) {
+        _this.$Message.success(vmI18n.t("modalTips.z9"));//保存成功
         if (this.$route.query.id !== "-1") {
           this.refresh();
         } else {
           this.$store.commit("customize/TabHref", {
-            id: res.data.data.data.objid, // 单据id
+            id: data.objid, // 单据id
             type: "action", // 类型action
             name: "setWarehouseLogistics", // 文件名
-            // label: "仓库物流优先级设置", // tab中文名
-            label: vmI18n.t("panel_label.setWarehouseLogistics"),
+            label: vmI18n.t("panel_label.setWarehouseLogistics"),//仓库物流优先级设置
             query: Object.assign({
-              id: res.data.data.data.objid, // 单据id
-              // tabTitle: "仓库物流优先级设置", // tab中文名
-              tabTitle: vmI18n.t("panel_label.setWarehouseLogistics"),
+              id: data.objid, // 单据id
+              tabTitle: vmI18n.t("panel_label.setWarehouseLogistics"),//仓库物流优先级设置
             }), // 带的参数
           });
         }
       } else {
-        // const err = res.data.data.message || "保存失败";
-        const err = res.data.data.message || vmI18n.t("modalTips.y0");
+        const err = message || vmI18n.t("modalTips.y0");//保存失败
         _this.$Message.error(err);
         _this.refresh();
       }
+      // axios({
+      //   url: "/p/cs/saveWarehouseLogistics",
+      //   method: "post",
+      //   data: fromData,
+      // }).then((res) => {
+      //   _this.isSaveLoading = false;
+      //   if (res.data.data.code === 0) {
+      //     // _this.$Message.success("保存成功");
+      //     _this.$Message.success(vmI18n.t("modalTips.z9"));
+      //     if (this.$route.query.id !== "-1") {
+      //       this.refresh();
+      //     } else {
+      //       this.$store.commit("customize/TabHref", {
+      //         id: res.data.data.data.objid, // 单据id
+      //         type: "action", // 类型action
+      //         name: "setWarehouseLogistics", // 文件名
+      //         // label: "仓库物流优先级设置", // tab中文名
+      //         label: vmI18n.t("panel_label.setWarehouseLogistics"),
+      //         query: Object.assign({
+      //           id: res.data.data.data.objid, // 单据id
+      //           // tabTitle: "仓库物流优先级设置", // tab中文名
+      //           tabTitle: vmI18n.t("panel_label.setWarehouseLogistics"),
+      //         }), // 带的参数
+      //       });
+      //     }
+      //   } else {
+      //     // const err = res.data.data.message || "保存失败";
+      //     const err = res.data.data.message || vmI18n.t("modalTips.y0");
+      //     _this.$Message.error(err);
+      //     _this.refresh();
+      //   }
+      // });
     },
     async getTreeData() {
       const _this = this;
       _this.isSaveLoading = true;
+      const fromData = new FormData();
       const param = { objid: this.$route.query.id };
-      const res = await this.service.common.getWarehouseLogisticsTree(param);
+      fromData.append("param", JSON.stringify(param));
+
+      // 保存
+      const {data:{oK,data}} = await this.service.strategyPlatform.saveWarehouseLogistics(fromData)
       _this.isSaveLoading = false;
-      if (res.data.code === 0) {
-        _this.treeData = res.data.data.warehouseLogisticsTree;
-        if (res.data.data.warehouseLogistics) {
+      if (oK) {
+        _this.treeData = data.warehouseLogisticsTree;
+        if (data.warehouseLogistics) {
           _this.information.formData[0].itemdata.pid =
-            res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ID;
+            data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ID;
           _this.information.formData[0].itemdata.valuedata =
-            res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ENAME;
+            data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ENAME;
           _this.information.formValue.REMARK =
-            res.data.data.warehouseLogistics.REMARK;
-          if (res.data.data.warehouseLogistics.ISACTIVE === "N") {
+            data.warehouseLogistics.REMARK;
+          if (data.warehouseLogistics.ISACTIVE === "N") {
             // _this.statusName = "已作废";
             _this.statusName = vmI18n.t("common.voided");
             _this.btnConfig.buttons.forEach((item) => {
@@ -380,9 +413,9 @@ export default {
             });
           }
         }
-        if (res.data.data.warehouseLogisticsItems.length) {
+        if (data.warehouseLogisticsItems && data.warehouseLogisticsItems.length) {
           this.theadArr = [];
-          res.data.data.warehouseLogisticsItems.forEach((item) => {
+          data.warehouseLogisticsItems.forEach((item) => {
             this.theadArr.push({
               name: item.CP_C_LOGISTICS_ENAME,
             });
@@ -392,6 +425,51 @@ export default {
         }
         _this.provinceSynchronous();
       }
+      // axios({
+      //   url: "/p/cs/getWarehouseLogisticsTree",
+      //   method: "post",
+      //   data: params,
+      // }).then((res) => {
+      //   _this.isSaveLoading = false;
+      //   if (res.data.code === 0) {
+      //     _this.treeData = res.data.data.warehouseLogisticsTree;
+      //     if (res.data.data.warehouseLogistics) {
+      //       _this.information.formData[0].itemdata.pid =
+      //         res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ID;
+      //       _this.information.formData[0].itemdata.valuedata =
+      //         res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ENAME;
+      //       _this.information.formValue.REMARK =
+      //         res.data.data.warehouseLogistics.REMARK;
+      //       if (res.data.data.warehouseLogistics.ISACTIVE === "N") {
+      //         // _this.statusName = "已作废";
+      //         _this.statusName = vmI18n.t("common.voided");
+      //         _this.btnConfig.buttons.forEach((item) => {
+      //           // if (item.text === ("修改物流" || "作废" || "导入" || "导出" || "保存"))
+      //           if (
+      //             item.text ===
+      //             (vmI18n.t("btn.modify_logistics") ||
+      //               vmI18n.t("btn.void") ||
+      //               vmI18n.t("btn.import") ||
+      //               vmI18n.t("btn.export") ||
+      //               vmI18n.t("btn.save"))
+      //           )
+      //             item.disabled = true;
+      //         });
+      //       }
+      //     }
+      //     if (res.data.data.warehouseLogisticsItems.length) {
+      //       this.theadArr = [];
+      //       res.data.data.warehouseLogisticsItems.forEach((item) => {
+      //         this.theadArr.push({
+      //           name: item.CP_C_LOGISTICS_ENAME,
+      //         });
+      //       });
+      //     } else {
+      //       this.theadArr = [];
+      //     }
+      //     _this.provinceSynchronous();
+      //   }
+      // });
     },
     // 同步查询
     async synchronous() {
@@ -399,61 +477,96 @@ export default {
       _this.tableLoading = true;
       _this.listArr = [];
       const treeList = [];
-      this.treeData.forEach((item) => {
-        item.children.forEach((list) => {
-          if (list.checked) {
-            treeList.push({
-              id: list.id,
-              regiontype: list.regiontype,
-            });
-          }
+      if (this.treeData) {
+        this.treeData.forEach((item) => {
+          item.children.forEach((list) => {
+            if (list.checked) {
+              treeList.push({
+                id: list.id,
+                regiontype: list.regiontype,
+              });
+            }
+          });
         });
-      });
-      const query = { objid: this.$route.query.id, treeNode: treeList };
-      const res = await this.service.common.getLogisticsRankResultTable(query);
+      }
+      // 接口
       _this.tableLoading = false;
-      if (res.data.code === 0) {
+      const fromData = new FormData();
+      const params  = {objid: this.$route.query.id, treeNode: treeList }
+      fromData.append('param',JSON.stringify(params))
+      // 接口
+      const {data:{oK,data}} = await this.service.strategyPlatform.saveWarehouseLogistics(fromData)
+      if (oK) {
         _this.cityThead = true;
-        _this.listArr = res.data.data !== undefined ? res.data.data : [];
+        _this.listArr = data !== undefined ? data : [];
         _this.listArr.forEach(
           (item) => (item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK))
         );
       }
+      // axios({
+      //   url: "/p/cs/getLogisticsRankResultTable",
+      //   method: "post",
+      //   data: { objid: this.$route.query.id, treeNode: treeList },
+      // }).then((res) => {
+      //   _this.tableLoading = false;
+      //   if (res.data.code === 0) {
+      //     _this.cityThead = true;
+      //     _this.listArr = res.data.data !== undefined ? res.data.data : [];
+      //     _this.listArr.forEach(
+      //       (item) => (item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK))
+      //     );
+      //   }
+      // });
     },
     // 省同步查询
-    provinceSynchronous() {
+    async provinceSynchronous() {
       const _this = this;
       _this.tableLoading = true;
       _this.listArr = [];
       const treeList = [];
-      this.treeData.forEach((item) => {
-        item.children.forEach((list) => {
-          if (list.checked) {
-            treeList.push({
-              id: list.id,
-              regiontype: list.regiontype,
-            });
-          }
+      if (this.treeData) {
+        this.treeData.forEach((item) => {
+          item.children.forEach((list) => {
+            if (list.checked) {
+              treeList.push({
+                id: list.id,
+                regiontype: list.regiontype,
+              });
+            }
+          });
         });
-      });
-      axios({
-        url: "/p/cs/getLogisticsRankResultTable",
-        method: "post",
-        data: {
-          objid: this.$route.query.id,
-          cityleave: "PROV",
-          treeNode: treeList,
-        },
-      }).then((res) => {
-        _this.tableLoading = false;
-        if (res.data.code === 0) {
-          _this.cityThead = false;
-          _this.listArr = res.data.data !== undefined ? res.data.data : [];
-          _this.listArr.forEach(
-            (item) => (item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK))
-          );
-        }
-      });
+      }
+      const fromData = new FormData();
+      const params  = {objid: this.$route.query.id, treeNode: treeList }
+      fromData.append('param',JSON.stringify(params))
+      // 接口
+      const {data:{oK,data}} = await this.service.strategyPlatform.saveWarehouseLogistics(fromData)
+      console.log(oK,data);
+      if (oK) {
+        _this.cityThead = false;
+        _this.listArr = data !== undefined ? data : [];
+        _this.listArr.forEach(
+          (item) => (item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK))
+        );
+      }
+      // axios({
+      //   url: "/p/cs/getLogisticsRankResultTable",
+      //   method: "post",
+      //   data: {
+      //     objid: this.$route.query.id,
+      //     cityleave: "PROV",
+      //     treeNode: treeList,
+      //   },
+      // }).then((res) => {
+      //   _this.tableLoading = false;
+      //   if (res.data.code === 0) {
+      //     _this.cityThead = false;
+      //     _this.listArr = res.data.data !== undefined ? res.data.data : [];
+      //     _this.listArr.forEach(
+      //       (item) => (item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK))
+      //     );
+      //   }
+      // });
     },
     // 全选树
     checkAll(e) {
@@ -489,27 +602,27 @@ export default {
       }
     },
     // 检索
-    enter(e) {
+   async enter(e) {
       const _this = this;
       _this.listArr = [];
       _this.tableLoading = true;
-      const param = { objid: _this.$route.query.id, treeLikeKey: e };
-      axios({
-        url: "/p/cs/getLogisticsLikeRankResultTable",
-        method: "post",
-        data: param,
-      }).then((res) => {
-        _this.tableLoading = false;
-        if (res.data.code === 0) {
+      const fromData = new FormData();
+      const params = { objid: _this.$route.query.id, treeLikeKey: e };
+      fromData.append('param',JSON.stringify(params))
+      // 接口
+      const {data:{oK,data}} = await this.service.strategyPlatform.saveWarehouseLogistics(fromData)
+      console.log(oK,data);
+      _this.tableLoading = false;
+        if (oK) {
           _this.cityThead = true;
           _this.listArr =
-            res.data.data.warehouseLogisticsRanks !== undefined
-              ? res.data.data.warehouseLogisticsRanks
+            data.warehouseLogisticsRanks !== undefined
+              ? data.warehouseLogisticsRanks
               : [];
           _this.listArr.forEach(
             (item) => (item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK))
           );
-          _this.treeData = res.data.data.warehouseLogisticsTree;
+          _this.treeData = data.warehouseLogisticsTree;
           _this.query = e;
           _this.treeData.forEach((item) => {
             item.children.forEach((list) => {
@@ -519,12 +632,41 @@ export default {
             });
           });
         } else {
-          // _this.$Message.error(res.data.data.message || "失败");
           _this.$Message.error(
-            res.data.data.message || vmI18n.t("modalTips.z3")
+            data.message || vmI18n.t("modalTips.z3")//失败
           );
         }
-      });
+      // axios({
+      //   url: "/p/cs/getLogisticsLikeRankResultTable",
+      //   method: "post",
+      //   data: param,
+      // }).then((res) => {
+      //   _this.tableLoading = false;
+      //   if (res.data.code === 0) {
+      //     _this.cityThead = true;
+      //     _this.listArr =
+      //       res.data.data.warehouseLogisticsRanks !== undefined
+      //         ? res.data.data.warehouseLogisticsRanks
+      //         : [];
+      //     _this.listArr.forEach(
+      //       (item) => (item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK))
+      //     );
+      //     _this.treeData = res.data.data.warehouseLogisticsTree;
+      //     _this.query = e;
+      //     _this.treeData.forEach((item) => {
+      //       item.children.forEach((list) => {
+      //         if (list.title.indexOf(`${e}`) != -1) {
+      //           item.expand = true;
+      //         }
+      //       });
+      //     });
+      //   } else {
+      //     // _this.$Message.error(res.data.data.message || "失败");
+      //     _this.$Message.error(
+      //       res.data.data.message || vmI18n.t("modalTips.z3")
+      //     );
+      //   }
+      // });
     },
     // 刷新
     refresh() {
@@ -534,21 +676,34 @@ export default {
     async invalid() {
       const _this = this;
       _this.isSaveLoading = true;
-      const fromdata = new FormData();
+      const fromData = new FormData();
       const param = { objid: this.$route.query.id };
-      fromdata.append("param", JSON.stringify(param));
-      const res = await this.service.common.voidWarehouseLogistics(fromdata);
+      fromData.append("param", JSON.stringify(param));
+      const {data:{code,data,message}} = await this.service.strategyPlatform.voidWarehouseLogistics(fromData)
       _this.isSaveLoading = false;
-      if (res.data.code === 0) {
-        // const ess = res.data.data.message || "作废成功";
-        const ess = res.data.data.message || vmI18n.t("modalTips.y4");
+      if (code === 0) {
+        const ess = data.message || vmI18n.t("modalTips.y4");//作废成功
         _this.getTreeData();
         _this.$Message.success(ess);
       } else {
-        // const err = res.data.data.message || "作废失败";
-        const err = res.data.data.message || vmI18n.t("modalTips.y4");
+        const err = data.message || vmI18n.t("modalTips.y4");//作废失败
         _this.$Message.success(err);
       }
+      // axios({
+      //   url: "/p/cs/voidWarehouseLogistics",
+      //   method: "post",
+      //   data: fromdata,
+      // }).then((res) => {
+      //   _this.isSaveLoading = false;
+      //   if (res.data.code === 0) {
+      //     const ess = res.data.data.message || vmI18n.t("modalTips.y4");//作废成功
+      //     _this.getTreeData();
+      //     _this.$Message.success(ess);
+      //   } else {
+      //     const err = res.data.data.message || vmI18n.t("modalTips.y4");//作废失败
+      //     _this.$Message.success(err);
+      //   }
+      // });
     },
     // 导出
     async warningOk() {
@@ -565,22 +720,41 @@ export default {
           }
         });
       });
+      
+      const fromData = new FormData();
       const param = {
         objid: _this.$route.query.id,
         treeNode: treeList,
       };
-      const res = await this.service.common.exportWarehouseLogisticsRank(param);
-      if (res.data.code === 0) {
-        // const ess = res.data.message || "导出成功";
-        const ess = res.data.data.message || vmI18n.t("modalTips.z2");
+      fromData.append("param", JSON.stringify(param));
+      const {data:{code,data}} = await this.service.strategyPlatform.exportWarehouseLogisticsRank(fromData)
+      if (code === 0) {
+        const ess = data.message || vmI18n.t("modalTips.z2");//导出成功
         _this.$Message.success(ess);
-        publicMethodsUtil.downloadUrlFile(res.data.data);
+        publicMethodsUtil.downloadUrlFile(data);
       } else {
-        // const err = res.data.message || "导出失败";
-        const err = res.data.data.message || vmI18n.t("modalTips.y6");
+        const err = data.message || vmI18n.t("modalTips.y6");//导出失败
         _this.$Message.success(err);
-        publicMethodsUtil.downloadUrlFile(res.data.data);
+        publicMethodsUtil.downloadUrlFile(data);
       }
+      
+      // axios({
+      //   url: "/p/cs/exportWarehouseLogisticsRank",
+      //   method: "post",
+      //   data: param,
+      // }).then((res) => {
+      //   if (res.data.code === 0) {
+      //     // const ess = res.data.message || "导出成功";
+      //     const ess = res.data.data.message || vmI18n.t("modalTips.z2");
+      //     _this.$Message.success(ess);
+      //     publicMethodsUtil.downloadUrlFile(res.data.data);
+      //   } else {
+      //     // const err = res.data.message || "导出失败";
+      //     const err = res.data.data.message || vmI18n.t("modalTips.y6");
+      //     _this.$Message.success(err);
+      //     publicMethodsUtil.downloadUrlFile(res.data.data);
+      //   }
+      // });
     },
     saveOk() {
       this.save();

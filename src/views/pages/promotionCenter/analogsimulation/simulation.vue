@@ -12,7 +12,7 @@
         class="btn"
         @click="execute_simulation"
       >
-        {{ vmI18n.t("common.simulation_trial_calculation") }}
+        {{ vmI18n.t("btn.simulation_trial_calculation") }}
       </button>
     </div>
     <div class="content">

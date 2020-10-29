@@ -17,15 +17,6 @@ export default {
   // 取消实效订单下载
   downLoadVipCancelTimeOrder: (params) => network.post('/p/cs/downLoadVipCancelTimeOrder', params),
   
-  // 通用接口下载
-  /**
-   * 经销订单下载 分销商订单下载 /p/cs/orderDownload 
-   * 分销商品下载 /p/cs/itemDownload
-   * 通用商品下载 /p/cs/stdp/item/get
-   * 分销退单下载 /p/cs/refundDownload
-   * "/p/cs/stdp/order/get
-   */
-  publicOrderDownload: (url,params) => network.post(url, params),
 
 
 }
