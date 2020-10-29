@@ -73,7 +73,25 @@ export default {
   },
   methods: {
     // 确定
-    determine() {
+    async getLogistics(name, index = '') {
+      const _this = this;
+      _this.removeLoading = true;
+      const param = {
+        objid: _this.componentData.id,
+        logisticsInfo: name === undefined ? '' : name
+      };
+      const res = await _this.service.common.getWarehouseLogisticsInfo(param);
+      _this.removeLoading = false;
+      if (res.data.code === 0) {
+        _this.jordanTableConfig.data = res.data.data.cpLogisticsList;
+        if (!index) {
+          _this.selectData = res.data.data.warehouseLogisticsItems;
+          _this.total = _this.selectData.length;
+        }
+      }
+    },
+    // 获取物流公司数据
+    async determine() {
       const _this = this;
       const fromdata = new FormData();
       const param = {
@@ -85,43 +103,15 @@ export default {
         objid: this.$route.query.id
       };
       fromdata.append('param', JSON.stringify(param));
-      axios({
-        url: '/p/cs/saveWarehouseLogistics',
-        method: 'post',
-        data: fromdata
-      }).then((res) => {
-        if (res.data.data.code === 0) {
-          _this.$parent.$parent.$parent.getTreeData();
-          _this.$parent.$parent.$parent.provinceSynchronous();
-          _this.$parent.$parent.closeConfirm();
-        } else {
-          const err = res.data.data.message || '设置失败';
-          _this.$Message.error(err);
-        }
-      });
-    },
-    // 获取物流公司数据
-    getLogistics(name, index = '') {
-      const _this = this;
-      _this.removeLoading = true;
-      const param = {
-        objid: _this.componentData.id,
-        logisticsInfo: name === undefined ? '' : name
-      };
-      axios({
-        url: '/p/cs/getWarehouseLogisticsInfo',
-        method: 'post',
-        data: param
-      }).then((res) => {
-        _this.removeLoading = false;
-        if (res.data.code === 0) {
-          _this.jordanTableConfig.data = res.data.data.cpLogisticsList;
-          if (!index) {
-            _this.selectData = res.data.data.warehouseLogisticsItems;
-            _this.total = _this.selectData.length;
-          }
-        }
-      });
+      const res = await this.service.common.setWarehouseLogistics(fromdata);
+      if (res.data.data.code === 0) {
+        _this.$parent.$parent.$parent.getTreeData();
+        _this.$parent.$parent.$parent.provinceSynchronous();
+        _this.$parent.$parent.closeConfirm();
+      } else {
+        const err = res.data.data.message || '设置失败';
+        _this.$Message.error(err);
+      }
     },
     // 同步查询
     synchronous() {
@@ -169,7 +159,7 @@ export default {
       this.cancelModel = true;
     },
     // 删除确认
-    okClick() {
+    async okClick() {
       this.removeLoading = true;
       const ids = [];
       if (this.delId) {
@@ -185,22 +175,16 @@ export default {
         }
       };
       fromdata.append('param', JSON.stringify(param));
-      axios({
-        url: '/p/cs/delWarehouseLogistics',
-        method: 'post',
-        data: fromdata
-      }).then((res) => {
-        this.removeLoading = false;
-        if (res.data.data.code === 0) {
-          const ess = res.data.data.message || '删除成功';
-          this.getLogistics();
-          this.$parent.$parent.$parent.refresh();
-          this.$Message.success(ess);
-        } else {
-          const err = res.data.data.message || '删除失败';
-          this.$Message.error(err);
-        }
-      });
+      const res = await this.service.common.delWarehouseLogistics(fromdata);
+      if (res.data.data.code === 0) {
+        const ess = res.data.data.message || '删除成功';
+        this.getLogistics();
+        this.$parent.$parent.$parent.refresh();
+        this.$Message.success(ess);
+      } else {
+        const err = res.data.data.message || '删除失败';
+        this.$Message.error(err);
+      }
       this.total = this.selectData.length;
     },
     cancalModal() {

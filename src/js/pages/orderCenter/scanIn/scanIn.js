@@ -48,10 +48,13 @@ export default {
       self.isSaveLoading = true;
       const pici = sessionStorage.getItem('status');
       self.formConfig2.formData[0].options = [];
-      this.$network
-        .post('/api/cs/oc/oms/v1/getCurrentBatch', {
-          BATCH_TYPE: '',
-        })
+      this.service.orderCenter.getCurrentBatch({
+        BATCH_TYPE: '',
+      })
+      // this.$network
+      //   .post('/api/cs/oc/oms/v1/getCurrentBatch', {
+      //     BATCH_TYPE: '',
+      //   })
         .then((res) => {
           console.log(res);
           if (res.data.code === 0) {
@@ -130,10 +133,13 @@ export default {
     },
     ok1() {
       const self = this;
-      this.$network
-        .post('/api/cs/oc/oms/v1/getOneRefundItem', {
-          PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE,
-        })
+      this.service.orderCenter.getOneRefundItem({
+        PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE,
+      })
+      // this.$network
+      //   .post('/api/cs/oc/oms/v1/getOneRefundItem', {
+      //     PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE,
+      //   })
         .then((res) => {
           // console.log(res);
           if (res.data.code === 0) {
@@ -321,8 +327,9 @@ export default {
     // 获取销退入库仓以及批次类型方法
     getBatch(val) {
       const self = this;
-      self.$network
-        .post('/api/cs/oc/oms/v1/cpStoreInfo', { BATCH_ID: val })
+      self.service.orderCenter.cpStoreInfo({ BATCH_ID: val })
+      // self.$network
+      //   .post('/api/cs/oc/oms/v1/cpStoreInfo', { BATCH_ID: val })
         .then((res) => {
           console.log(res);
           if (res.data.code === 0) {
@@ -376,14 +383,21 @@ export default {
           orig_order_id = value;
           break;
       }
-      this.$network
-        .post('/api/cs/oc/oms/v1/getScanIncomingInfo', {
-          ID: id, // 退单编号
-          RECEIVER_MOBILE: receiver_phone, // 手机号码
-          RECEIVER_NAME: receiver_name, // 收货人
-          LOGISTIC_CODE: logistic_code, // 物流单号
-          ORIG_ORDER_ID: orig_order_id, // 原单单号
-        })
+      this.service.orderCenter.getScanIncomingInfo({
+        ID: id, // 退单编号
+        RECEIVER_MOBILE: receiver_phone, // 手机号码
+        RECEIVER_NAME: receiver_name, // 收货人
+        LOGISTIC_CODE: logistic_code, // 物流单号
+        ORIG_ORDER_ID: orig_order_id, // 原单单号
+      })
+      // this.$network
+      //   .post('/api/cs/oc/oms/v1/getScanIncomingInfo', {
+      //     ID: id, // 退单编号
+      //     RECEIVER_MOBILE: receiver_phone, // 手机号码
+      //     RECEIVER_NAME: receiver_name, // 收货人
+      //     LOGISTIC_CODE: logistic_code, // 物流单号
+      //     ORIG_ORDER_ID: orig_order_id, // 原单单号
+      //   })
         .then((res) => {
           // console.log(res);
           if (res.data.code === 0) {
@@ -437,14 +451,21 @@ export default {
           orig_order_id = value;
           break;
       }
-      this.$network
-        .post('/api/cs/oc/oms/v1/getScanIncomingInfo', {
-          ID: id, // 退单编号
-          RECEIVER_MOBILE: receiver_phone, // 手机号码
-          RECEIVER_NAME: receiver_name, // 收货人
-          LOGISTIC_CODE: logistic_code, // 物流单号
-          ORIG_ORDER_ID: orig_order_id, // 原单单号
-        })
+      this.service.orderCenter.getScanIncomingInfo({
+        ID: id, // 退单编号
+        RECEIVER_MOBILE: receiver_phone, // 手机号码
+        RECEIVER_NAME: receiver_name, // 收货人
+        LOGISTIC_CODE: logistic_code, // 物流单号
+        ORIG_ORDER_ID: orig_order_id, // 原单单号
+      })
+      // this.$network
+      //   .post('/api/cs/oc/oms/v1/getScanIncomingInfo', {
+      //     ID: id, // 退单编号
+      //     RECEIVER_MOBILE: receiver_phone, // 手机号码
+      //     RECEIVER_NAME: receiver_name, // 收货人
+      //     LOGISTIC_CODE: logistic_code, // 物流单号
+      //     ORIG_ORDER_ID: orig_order_id, // 原单单号
+      //   })
         .then((res) => {
           if (res.data.code === 0) {
             self.ID = res.data.data[0].ID; // 存储退单ID
@@ -709,8 +730,9 @@ export default {
               if (self.isSave) return;
               self.isSave = true;
               self.btnConfig.buttons[1].disabled = true;
-              self.$network
-                .post('/api/cs/oc/oms/v1/saveScanIncoming', a)
+              self.service.orderCenter.saveScanIncoming(a)
+              // self.$network
+              //   .post('/api/cs/oc/oms/v1/saveScanIncoming', a)
                 .then((res) => {
                   // console.log(res);
                   if (res.data.code === 0) {
@@ -1104,10 +1126,13 @@ export default {
                   // 07/01版本优化项:不弹框,直接扫入,根据底色判断单据状态
 
                   const self = this;
-                  self.$network
-                    .post('/api/cs/oc/oms/v1/getOneRefundItem', {
-                      PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE,
-                    })
+                  self.service.orderCenter.getOneRefundItem({
+                    PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE,
+                  })
+                  // self.$network
+                  //   .post('/api/cs/oc/oms/v1/getOneRefundItem', {
+                  //     PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE,
+                  //   })
                     .then((res) => {
                       if (res.data.code === 0) {
                         res.data.data.IS_WITHOUT_ORIG = '是';
@@ -1183,11 +1208,15 @@ export default {
                       ))
                     && !detailist.some(item => item.OC_B_RETURN_ORDER_ID)
                   ) {
-                    this.$network
-                      .post('/api/cs/oc/oms/v1/getOneRefundItem', {
-                        PS_C_SKU_ECODE:
-                          self.formConfig3.formValue.PS_C_SKU_ECODE,
-                      })
+                    this.service.orderCenter.getOneRefundItem({
+                      PS_C_SKU_ECODE:
+                        self.formConfig3.formValue.PS_C_SKU_ECODE,
+                    })
+                    // this.$network
+                    //   .post('/api/cs/oc/oms/v1/getOneRefundItem', {
+                    //     PS_C_SKU_ECODE:
+                    //       self.formConfig3.formValue.PS_C_SKU_ECODE,
+                    //   })
                       .then((res) => {
                         // console.log(res);
                         if (res.data.code === 0) {
@@ -1299,10 +1328,13 @@ export default {
                   // 07/01版本优化项:不弹框,直接扫入,根据底色判断单据状态
 
                   const self = this;
-                  self.$network
-                    .post('/api/cs/oc/oms/v1/getOneRefundItem', {
-                      PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE,
-                    })
+                  self.service.orderCenter.getOneRefundItem({
+                    PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE,
+                  })
+                  // self.$network
+                  //   .post('/api/cs/oc/oms/v1/getOneRefundItem', {
+                  //     PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE,
+                  //   })
                     .then((res) => {
                       if (res.data.code === 0) {
                         res.data.data.IS_WITHOUT_ORIG = '是';
@@ -1483,8 +1515,9 @@ export default {
                   //   self.$Message.warning('收件人手机不能为空!');
                   //   return;
                   // }
-                  this.$network
-                    .post('/api/cs/oc/oms/v1/saveScanIncoming', a)
+                  this.service.orderCenter.saveScanIncoming(a)
+                  // this.$network
+                  //   .post('/api/cs/oc/oms/v1/saveScanIncoming', a)
                     .then((res) => {
                       console.log(res);
                       if (res.data.code === 0) {
@@ -1651,10 +1684,13 @@ export default {
               } else if (self.jordanTableConfig.data.length === 1) {
                 // 当扫描明细区只有一条数据时
                 const self = this;
-                self.$network
-                  .post('/api/cs/oc/oms/v1/getOneRefundItem', {
-                    PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE,
-                  })
+                self.service.orderCenter.getOneRefundItem({
+                  PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE,
+                })
+                // self.$network
+                //   .post('/api/cs/oc/oms/v1/getOneRefundItem', {
+                //     PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE,
+                //   })
                   .then((res) => {
                     if (res.data.code === 0) {
                       const self = this;
@@ -1687,10 +1723,13 @@ export default {
               if (self.onRowClickData.OC_B_RETURN_ORDER_ID) {
                 // 有退换货单号时
                 const self = this;
-                self.$network
-                  .post('/api/cs/oc/oms/v1/getOneRefundItem', {
-                    PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE,
-                  })
+                self.service.orderCenter.getOneRefundItem({
+                  PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE,
+                })
+                // self.$network
+                //   .post('/api/cs/oc/oms/v1/getOneRefundItem', {
+                //     PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE,
+                //   })
                   .then((res) => {
                     if (res.data.code === 0) {
                       console.log(res);
@@ -1720,10 +1759,13 @@ export default {
               } else if (!self.onRowClickData.OC_B_RETURN_ORDER_ID) {
                 // 无头件
                 const self = this;
-                self.$network
-                  .post('/api/cs/oc/oms/v1/getOneRefundItem', {
-                    PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE,
-                  })
+                self.service.orderCenter.getOneRefundItem({
+                  PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE,
+                })
+                // self.$network
+                //   .post('/api/cs/oc/oms/v1/getOneRefundItem', {
+                //     PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE,
+                //   })
                   .then((res) => {
                     if (res.data.code === 0) {
                       if (

@@ -3766,6 +3766,7 @@ export default {
       let fromdata = new FormData();
       fromdata.append("table", "OC_B_RETURN_ORDER");
       fromdata.append("objid", -1);
+      _this.service
       axios({
         url: "/p/cs/getObject",
         method: "post",
@@ -4604,7 +4605,7 @@ export default {
             // this.information.formValue.CP_C_PHY_WAREHOUSE_IN_NAME = item.itemdata.valuedata;
           } else if (
             // 发货实体仓库
-            item.itemdata.name == 
+            item.itemdata.name ==
             _this.vmI18n.t("form_label.shipPhysicalWarehouse") &&
             item.itemdata.name == e.name
           ) {
@@ -4626,7 +4627,7 @@ export default {
             this.replacement.formValue.receiver_province_id = item.itemdata.pid;
             this.replacement.formValue.receiver_province_name =
               item.itemdata.valuedata;
-          } 
+          }
           // 收货人市
           else if (
             item.itemdata.name == _this.vmI18n.t("form_label.consignee_city") &&
@@ -4635,7 +4636,7 @@ export default {
             this.replacement.formValue.receiver_city_id = item.itemdata.pid;
             this.replacement.formValue.receiver_city_name =
               item.itemdata.valuedata;
-          } 
+          }
           // 收货人区
           else if (
             item.itemdata.name == _this.vmI18n.t("form_label.aconsignee_area") &&

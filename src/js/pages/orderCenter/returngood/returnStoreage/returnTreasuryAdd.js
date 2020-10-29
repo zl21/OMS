@@ -988,37 +988,32 @@ export default {
       });
     },
     // 获取特殊处理类型字段选项组
-    obtainWarehouse() {
+    async obtainWarehouse() {
       const _this = this;
       let fromdata = new FormData();
       fromdata.append("table", "OC_B_REFUND_IN");
       fromdata.append("objid", -1);
-      axios({
-        url: "/p/cs/getObject",
-        method: "post",
-        data: fromdata,
-      }).then((res) => {
-        this.information.formData.forEach((value) => {
-          // if (value.label === "特殊处理类型") {
-          if (value.label === vmI18n.t("form_label.specialTreatmentType")) {
-            res.data.data.addcolums.forEach((item) => {
-              // if (item.parentdesc === "基本信息") {
-              if (item.parentdesc === vmI18n.t("common.baseInformation")) {
-                let childItem = item.childs;
-                childItem.forEach((item) => {
-                  if (item.colname === "SPECIAL_TYPE") {
-                    for (let i = 0; i < item.combobox.length; i++) {
-                      value.options.push({
-                        value: item.combobox[i].limitval,
-                        label: item.combobox[i].limitdesc,
-                      });
-                    }
+      const res = await this.service.common.getObject(fromdata);
+      this.information.formData.forEach((value) => {
+        // if (value.label === "特殊处理类型") {
+        if (value.label === vmI18n.t("form_label.specialTreatmentType")) {
+          res.data.data.addcolums.forEach((item) => {
+            // if (item.parentdesc === "基本信息") {
+            if (item.parentdesc === vmI18n.t("common.baseInformation")) {
+              let childItem = item.childs;
+              childItem.forEach((item) => {
+                if (item.colname === "SPECIAL_TYPE") {
+                  for (let i = 0; i < item.combobox.length; i++) {
+                    value.options.push({
+                      value: item.combobox[i].limitval,
+                      label: item.combobox[i].limitdesc,
+                    });
                   }
-                });
-              }
-            });
-          }
-        });
+                }
+              });
+            }
+          });
+        }
       });
     },
     // 获取退货批次数据

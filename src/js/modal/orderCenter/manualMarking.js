@@ -221,7 +221,7 @@ export default {
         });
     },
     // 发货仓库
-    getWarehouse() {
+    async getWarehouse() {
       const formData = new FormData();
       formData.append(
         "param",
@@ -230,15 +230,12 @@ export default {
         })
       );
       if (this.depositConfig.jordanFormConfig.formValue.CP_C_SHOP_ID) {
-        this.$network
-          .post(this.$httpApi.public.queryPhyWareHouseList, formData)
-          .then((res) => {
-            if (res.data.code === 0) {
-              this.depositConfig.jordanFormConfig.formData.forEach((item) => {
-                if (item.label === "发货仓库") item.options = res.data.data;
-              });
-            }
+        const res = await this.service.common.queryPhyWareHouseList(formData);
+        if (res.data.code === 0) {
+          this.depositConfig.jordanFormConfig.formData.forEach((item) => {
+            if (item.label === "发货仓库") item.options = res.data.data;
           });
+        }
       }
     },
     // 查询
