@@ -250,7 +250,7 @@ export default {
         this.add_prolist(row);
       });
     },
-    isGetIndexValue(reftable, nameList) {
+    async isGetIndexValue(reftable, nameList) {
       const arr = [];
       console.log("nameList++++++", nameList);
       const simParam = new URLSearchParams();
@@ -262,24 +262,34 @@ export default {
         ids: arr,
       };
       simParam.append("param", JSON.stringify(params));
-      return new Promise((resolve) => {
-        axios({
-          // 根据id获取表格其他数据
-          method: "post",
-          url: "/p/cs/pm/v1/selectProInfo",
-          data: simParam,
-        }).then((res) => {
-          if (res.data.code === 0) {
-            console.log("res.data.data", res.data.data);
-            resolve(res.data.data);
-          } else {
-            this.$message({
-              type: "error",
-              message: res.data.message,
-            });
-          }
+      const {data:{code,message,data}} =  await this.service.promotionCenter.selectProInfo(formData) 
+      console.log(code,message,data);
+      if (code === 0) {
+        resolve(data);
+      } else {
+        this.$message({
+          type: "error",
+          message: message,
         });
-      });
+      }
+      // return new Promise((resolve) => {
+      //   axios({
+      //     // 根据id获取表格其他数据
+      //     method: "post",
+      //     url: "/p/cs/pm/v1/selectProInfo",
+      //     data: simParam,
+      //   }).then((res) => {
+      //     if (res.data.code === 0) {
+      //       console.log("res.data.data", res.data.data);
+      //       resolve(res.data.data);
+      //     } else {
+      //       this.$message({
+      //         type: "error",
+      //         message: res.data.message,
+      //       });
+      //     }
+      //   });
+      // });
     },
     // 取消
     cancel_simulation() {
@@ -295,7 +305,7 @@ export default {
         }), // 带的参数
       });
     },
-    execute_simulation() {
+    async execute_simulation() {
       const self = this;
       const checkSimulation = this.checkSimulation();
       if (checkSimulation.code == "-1") {
@@ -305,35 +315,54 @@ export default {
         });
         return;
       }
+      //  仿真试算
       const params = {
         basicData: this.basicData,
         products_data: this.products_data,
       };
-      const simParam = new URLSearchParams();
-      simParam.append("param", JSON.stringify(params));
-      axios({
-        // 仿真试算
-        method: "post",
-        url: "/p/cs/pm/v1/testPm",
-        data: simParam,
-      }).then((res) => {
-        if (res.data.code === 0) {
-          console.log("res.data.data", res.data.data);
-          self.result_data = res.data.data.result;
-          self.result_columns = res.data.data.cloumns;
-          self.$message({
-            type: "success",
-            // message: "试算成功！",
-            message: vmI18n.t("modalTips.t5"),
-          });
-        } else {
-          self.result_data = [];
-          self.$message({
-            type: "error",
-            message: res.data.message,
-          });
-        }
-      });
+      const formData = new URLSearchParams();
+      formData.append("param", JSON.stringify(params));
+      const {data:{code,message,data}} =  await this.service.promotionCenter.testPm(formData) 
+      console.log(code,message,data);
+      if (code === 0) {
+        console.log("data", data);
+        self.result_data = data.result;
+        self.result_columns = data.cloumns;
+        self.$message({
+          type: "success",
+          // message: "试算成功！",
+          message: vmI18n.t("modalTips.t5"),
+        });
+      } else {
+        self.result_data = [];
+        self.$message({
+          type: "error",
+          message: message,
+        });
+      }
+      // axios({
+      //   // 仿真试算
+      //   method: "post",
+      //   url: "/p/cs/pm/v1/testPm",
+      //   data: formData,
+      // }).then((res) => {
+      //   if (res.data.code === 0) {
+      //     console.log("res.data.data", res.data.data);
+      //     self.result_data = res.data.data.result;
+      //     self.result_columns = res.data.data.cloumns;
+      //     self.$message({
+      //       type: "success",
+      //       // message: "试算成功！",
+      //       message: vmI18n.t("modalTips.t5"),
+      //     });
+      //   } else {
+      //     self.result_data = [];
+      //     self.$message({
+      //       type: "error",
+      //       message: res.data.message,
+      //     });
+      //   }
+      // });
     },
     initData() {
       // 初始化数据

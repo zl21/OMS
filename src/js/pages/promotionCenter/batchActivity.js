@@ -150,25 +150,33 @@ export default {
     /**
      * 查询促销的详情
      */
-    getInitData(_objid) {
+    async getInitData(_objid) {
       const self = this;
-      const searchParam = new URLSearchParams();
+      
+      const formData = new URLSearchParams();
       const obj = { objid: this.objid };
       if (_objid) obj.objid = _objid;
-      searchParam.append("param", JSON.stringify(obj));
-      axios({
-        method: "post",
-        url: "/p/cs/pm/v1/selectPm",
-        data: searchParam,
-      }).then((res) => {
-        if (res.data.code === 0) {
-          const rs = res.data.data;
-          this.basic_info = rs.basic_info || {};
-          this.batch_infos_setting = rs.batch_infos_setting || {};
-        } else {
-          this.$message("error", res.data.message);
-        }
-      });
+      formData.append("param", JSON.stringify(obj));
+      const {data:{code,message,data}} = await this.service.promotionCenter.selectPm(formData)
+      if (code === 0) {
+        this.basic_info = data.basic_info || {};
+        this.batch_infos_setting = data.batch_infos_setting || {};
+      } else {
+        this.$message("error", message);
+      }
+      // axios({
+      //   method: "post",
+      //   url: "/p/cs/pm/v1/selectPm",
+      //   data: formData,
+      // }).then((res) => {
+      //   if (res.data.code === 0) {
+      //     const rs = res.data.data;
+      //     this.basic_info = rs.basic_info || {};
+      //     this.batch_infos_setting = rs.batch_infos_setting || {};
+      //   } else {
+      //     this.$message("error", res.data.message);
+      //   }
+      // });
       // .catch((res)=>{
       //     self.$message({type:'error',message:'获取促销详情异常'});
       // });
@@ -359,8 +367,8 @@ export default {
     /**
      * 保存草稿
      */
-    saveDraft() {
-      console.log(this.basic_info);
+    async saveDraft() {
+      console.clear()
       const [modulesValid1, modulesValid2] = this.validateModule();
       if (modulesValid1.code === -1) {
         return this.$message({ type: "error", message: modulesValid1.message });
@@ -377,52 +385,92 @@ export default {
         index,
       };
       this.loading = true;
-      const searchParam = new URLSearchParams();
-      searchParam.append("param", JSON.stringify(params));
-      axios({
-        method: "post",
-        url: "/p/cs/pm/v1/saveBatchPm",
-        data: searchParam,
-      })
-        .then((res) => {
-          if (res.data.code === 0) {
-            this.$message({
-              type: "success",
-              // message: "保存成功",
-              message: vmI18n.t("modalTips.z9"),
-            });
-            let action = "customize/switchActiveTab";
-            if (this.objid == -1) {
-              action = "customize/TabClose";
-            }
-            this.objid = String(res.data.data.objid) || "-1";
-            this.$nextTick(() => {
-              this.$store.commit(action, {
-                id: this.objid, // id
-                type: "action", // 类型action
-                name: "batchActivity", // 文件名
-                // label: "批量新增促销活动", // tab中文名
-                label: vmI18n.t("panel_label.batchAddPromotion"),
-                query: Object.assign({
-                  id: this.objid, // id
-                  tabTitle: "批量新增促销活动", // tab中文名
-                  tabTitle: vmI18n.t("panel_label.batchAddPromotion"),
-                }), // 带的参数
-              });
-            });
-          } else {
-            this.$message({
-              type: "error",
-              message: res.data.message,
-            });
+      const formData = new URLSearchParams();
+      formData.append("param", JSON.stringify(params));
+      try {
+        const {data:{code,message,data}} = await this.service.promotionCenter.saveBatchPm(formData)
+        console.log(code,message,data);
+        if (code === 0) {
+          this.$message({
+            type: "success",
+            // message: "保存成功",
+            message: vmI18n.t("modalTips.z9"),
+          });
+          let action = "customize/switchActiveTab";
+          if (this.objid == -1) {
+            action = "customize/TabClose";
           }
-          this.loading = false;
-        })
-        .catch(() => {
-          this.loading = false;
-        });
+          this.objid = String(data.objid) || "-1";
+          this.$nextTick(() => {
+            this.$store.commit(action, {
+              id: this.objid, // id
+              type: "action", // 类型action
+              name: "batchActivity", // 文件名
+              // label: "批量新增促销活动", // tab中文名
+              label: vmI18n.t("panel_label.batchAddPromotion"),
+              query: Object.assign({
+                id: this.objid, // id
+                tabTitle: "批量新增促销活动", // tab中文名
+                tabTitle: vmI18n.t("panel_label.batchAddPromotion"),
+              }), // 带的参数
+            });
+          });
+        } else {
+          this.$message({
+            type: "error",
+            message: message,
+          });
+        }
+        this.loading = false;
+      } catch (error) {
+        this.loading = false;
+      }
+      
+
+      // axios({
+      //   method: "post",
+      //   url: "/p/cs/pm/v1/saveBatchPm",
+      //   data: searchParam,
+      // })
+      //   .then((res) => {
+      //     if (res.data.code === 0) {
+      //       this.$message({
+      //         type: "success",
+      //         // message: "保存成功",
+      //         message: vmI18n.t("modalTips.z9"),
+      //       });
+      //       let action = "customize/switchActiveTab";
+      //       if (this.objid == -1) {
+      //         action = "customize/TabClose";
+      //       }
+      //       this.objid = String(res.data.data.objid) || "-1";
+      //       this.$nextTick(() => {
+      //         this.$store.commit(action, {
+      //           id: this.objid, // id
+      //           type: "action", // 类型action
+      //           name: "batchActivity", // 文件名
+      //           // label: "批量新增促销活动", // tab中文名
+      //           label: vmI18n.t("panel_label.batchAddPromotion"),
+      //           query: Object.assign({
+      //             id: this.objid, // id
+      //             tabTitle: "批量新增促销活动", // tab中文名
+      //             tabTitle: vmI18n.t("panel_label.batchAddPromotion"),
+      //           }), // 带的参数
+      //         });
+      //       });
+      //     } else {
+      //       this.$message({
+      //         type: "error",
+      //         message: res.data.message,
+      //       });
+      //     }
+      //     this.loading = false;
+      //   })
+      //   .catch(() => {
+      //     this.loading = false;
+      //   });
     },
-    publish() {
+    async publish() {
       console.log(this.basic_info);
       const [modulesValid1, modulesValid2] = this.validateModule();
       if (modulesValid1.code === -1) {
@@ -446,35 +494,61 @@ export default {
       this.loading = true;
       const searchParam = new URLSearchParams();
       searchParam.append("param", JSON.stringify(params));
-      axios({
-        method: "post",
-        url: "/p/cs/pm/v1/updatePmStatus",
-        data: searchParam,
-      })
-        .then((res) => {
-          if (res.data.code === 0) {
-            this.$message({
-              message: res.data.message,
-              type: "success",
-            });
-            let action = "switchActiveTab";
-            if (this.objid == -1) {
-              action = "TabClose";
-            }
-            this.$nextTick(() => {
-              this.getInitData(this.objid);
-            });
-          } else {
-            this.$message({
-              type: "error",
-              message: res.data.message,
-            });
+
+      try {
+        const {data:{code,message,data}} =  await this.service.promotionCenter.updatePmStatus(formData)
+        console.log(code,message,data);
+        if (code === 0) {
+          this.$message({
+            message: message,
+            type: "success",
+          });
+          let action = "switchActiveTab";
+          if (this.objid == -1) {
+            action = "TabClose";
           }
-          this.loading = false;
-        })
-        .catch(() => {
-          this.loading = false;
-        });
+          this.$nextTick(() => {
+            this.getInitData(this.objid);
+          });
+        } else {
+          this.$message({
+            type: "error",
+            message: message,
+          });
+        }
+        this.loading = false;
+      } catch (error) {
+        this.loading = false;
+      }
+      // axios({
+      //   method: "post",
+      //   url: "/p/cs/pm/v1/updatePmStatus",
+      //   data: searchParam,
+      // })
+      //   .then((res) => {
+      //     if (res.data.code === 0) {
+      //       this.$message({
+      //         message: res.data.message,
+      //         type: "success",
+      //       });
+      //       let action = "switchActiveTab";
+      //       if (this.objid == -1) {
+      //         action = "TabClose";
+      //       }
+      //       this.$nextTick(() => {
+      //         this.getInitData(this.objid);
+      //       });
+      //     } else {
+      //       this.$message({
+      //         type: "error",
+      //         message: res.data.message,
+      //       });
+      //     }
+      //     this.loading = false;
+      //   })
+      //   .catch(() => {
+      //     this.loading = false;
+      //   });
     },
     /**
      * 取消(关闭)

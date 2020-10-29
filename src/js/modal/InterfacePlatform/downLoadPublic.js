@@ -442,7 +442,7 @@ export default {
       let fromdata = new FormData();
       fromdata.append("param", JSON.stringify(param));
       // 淘宝分销、淘宝经销、通用订单 下载
-      const { data: { code, message } } = await self.service.interfacePlatform.publicOrderDownload(url,fromdata);
+      const { data: { code, message } } = await self.service.common.publicOrderDownload(url,fromdata);
       if (code === 0) {
           _this.$Message.success(message);
           _this.$emit("closeActionDialog",true);
@@ -490,7 +490,7 @@ export default {
       let fromdata = new FormData();
       fromdata.append("param", JSON.stringify(param));
       // 通用商品下载
-      const { data: { code, message } } = await self.service.interfacePlatform.publicOrderDownload(url,fromdata);
+      const { data: { code, message } } = await self.service.common.publicOrderDownload(url,fromdata);
       if (code === 0) {
         _this.$Message.success(message);
         _this.$emit("closeActionDialog",true);
@@ -540,7 +540,7 @@ export default {
       let fromdata = new FormData();
       fromdata.append("param", JSON.stringify(param));
       // 分销商品
-      const { data: { code, message } } = await self.service.interfacePlatform.publicOrderDownload(url,fromdata);
+      const { data: { code, message } } = await self.service.common.publicOrderDownload(url,fromdata);
       if (code === 0) {
         _this.$Message.success(message);
         _this.$emit("closeActionDialog",true);
@@ -590,7 +590,7 @@ export default {
       let fromdata = new FormData();
       fromdata.append("param", JSON.stringify(param));
       // 通用退单下载方法
-      const { data: { code, message } } = await self.service.interfacePlatform.publicOrderDownload(url,fromdata);
+      const { data: { code, message } } = await self.service.common.publicOrderDownload(url,fromdata);
       if (code === 0) {
         _this.$Message.success(message);
         _this.$emit("closeActionDialog",true);
