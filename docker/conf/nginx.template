@@ -51,6 +51,26 @@ location /p/ {
 		proxy_temp_file_write_size 1m;
 		proxy_max_temp_file_size 128m;
 }
+location /api/ {
+	    proxy_next_upstream http_500 http_502 http_503 http_404 error timeout invalid_header;
+		proxy_pass ${WEB_HOST_URL}$request_uri;
+		proxy_redirect off ;
+		proxy_set_header Host $host:9093;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header REMOTE-HOST $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		client_max_body_size 300m;
+		client_body_buffer_size 1m;
+		proxy_connect_timeout 1;
+		proxy_send_timeout 30;
+		proxy_read_timeout 1800;
+		send_timeout 30s;
+		proxy_buffer_size 1m;
+		proxy_buffers 4 1m;
+		proxy_busy_buffers_size 1m;
+		proxy_temp_file_write_size 1m;
+		proxy_max_temp_file_size 128m;
+}
 location ~* .*/api/rpt/ {
     proxy_pass ${PRINT_HOST_URL}$request_uri;
     proxy_redirect off ;
