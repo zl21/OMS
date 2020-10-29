@@ -40,4 +40,9 @@ export default {
   cpStoreInfo: params => network.post('/api/cs/oc/oms/v1/cpStoreInfo', params),
   getScanIncomingInfo: params => network.post('/api/cs/oc/oms/v1/getScanIncomingInfo', params),
   saveScanIncoming: params => network.post('/api/cs/oc/oms/v1/saveScanIncoming', params),
+  saveAfterDeliver: params => network.post('/api/cs/oc/oms/v1/saveAfterDeliver', params),
+  saveAfterDeliverItem: params => network.post('/api/cs/oc/oms/v1/saveAfterDeliverItem', params),
+  deleteAfterDeliverItem: params => network.post('/api/cs/oc/oms/v1/deleteAfterDeliverItem', params),
+  copyAfterDeliver: params => network.post('/api/cs/oc/oms/v1/copyAfterDeliver', params),
+  objectTableItem: params => network.post('/p/cs/objectTableItem', params)
 };

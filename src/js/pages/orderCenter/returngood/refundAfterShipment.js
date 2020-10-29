@@ -1,8 +1,8 @@
-import reButton from "professionalComponents/businessButton";
-import reTable from "professionalComponents/businessActionTable";
-import reForm from "professionalComponents/businessForm";
-import refundAfterShipment from "./constants/refundAfterShipment";
-import dateFormat from "@/assets/js/__utils__/common";
+import reButton from 'professionalComponents/businessButton';
+import reTable from 'professionalComponents/businessActionTable';
+import reForm from 'professionalComponents/businessForm';
+import dateFormat from '@/assets/js/__utils__/common';
+import refundAfterShipment from './constants/refundAfterShipment';
 
 export default {
   components: {
@@ -12,13 +12,13 @@ export default {
   },
   data() {
     return {
-      IMAGE: "", // 图片
+      IMAGE: '', // 图片
       imgIndex: 0, // 当前操作图片位置
       isModal: false,
       delTableData: [], // 要删除的退款单明细
       isOne: true,
       RETURN_STATUS: null,
-      BILL_TYPE: "1",
+      BILL_TYPE: '1',
       addItem: {
         // 新增明细弹框数据
         modal: false,
@@ -34,21 +34,21 @@ export default {
       order: {
         modal: false,
         btn: {
-          typeAll: "error", // 按钮统一风格样式
+          typeAll: 'error', // 按钮统一风格样式
           buttons: [
             {
-              text: vmI18n.t("btn.find"), //查找 按钮文本
+              text: vmI18n.t('btn.find'), // 查找 按钮文本
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.queryBounced();
                 this.$nextTick(() => {
                   this.reForm.config.forEach((val, index) => {
-                    if (val.item.label === "单据来源") {
-                      this.reForm.config[index].item.props.value = "手动";
-                    } else if (val.item.label === "单据日期") {
+                    if (val.item.label === '单据来源') {
+                      this.reForm.config[index].item.props.value = '手动';
+                    } else if (val.item.label === '单据日期') {
                       this.reForm.config[index].item.props.value = dateFormat(
                         new Date(),
-                        "yyyy-MM-dd"
+                        'yyyy-MM-dd'
                       );
                     }
                   });
@@ -59,81 +59,81 @@ export default {
         },
         orderform: {
           formValue: {
-            bill_no: "",
-            source_code: "",
-            receiver_name: "",
-            user_nick: "",
-            receiver_mobile: "",
-            cp_c_store_ename: "",
+            bill_no: '',
+            source_code: '',
+            receiver_name: '',
+            user_nick: '',
+            receiver_mobile: '',
+            cp_c_store_ename: '',
           },
           formData: [
             {
-              style: "input",
-              label: vmI18n.t("table_label.orderNo"), //订单编号
-              value: "bill_no",
-              width: "8",
+              style: 'input',
+              label: vmI18n.t('table_label.orderNo'), // 订单编号
+              value: 'bill_no',
+              width: '8',
               inputenter: () => this.queryBounced(),
             },
             {
-              style: "input",
-              label: vmI18n.t("table_label.platform_orderNo"), //平台订单号
-              value: "source_code",
-              width: "8",
+              style: 'input',
+              label: vmI18n.t('table_label.platform_orderNo'), // 平台订单号
+              value: 'source_code',
+              width: '8',
               inputenter: () => this.queryBounced(),
             },
             {
-              style: "input",
-              label: vmI18n.t("table_label.buyerNickname"), //买家昵称
-              value: "user_nick",
-              width: "8",
+              style: 'input',
+              label: vmI18n.t('table_label.buyerNickname'), // 买家昵称
+              value: 'user_nick',
+              width: '8',
               inputenter: () => this.queryBounced(),
             },
             {
-              style: "input",
-              label: vmI18n.t("form_label.consignee"), //收货人
-              value: "receiver_name",
-              width: "8",
+              style: 'input',
+              label: vmI18n.t('form_label.consignee'), // 收货人
+              value: 'receiver_name',
+              width: '8',
               inputenter: () => this.queryBounced(),
             },
             {
-              style: "input",
-              label: vmI18n.t("form_label.consignee_phone"), //收货人手机
-              value: "receiver_mobile",
-              width: "8",
+              style: 'input',
+              label: vmI18n.t('form_label.consignee_phone'), // 收货人手机
+              value: 'receiver_mobile',
+              width: '8',
               regx: /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
               inputenter: () => this.queryBounced(),
             },
             {
-              style: "popInput",
-              width: "8",
+              style: 'popInput',
+              width: '8',
               itemdata: {
                 col: 1,
                 colid: 168210,
-                colname: "SELLER_NICK", // 当前字段的名称
-                datelimit: "all",
+                colname: 'SELLER_NICK', // 当前字段的名称
+                datelimit: 'all',
                 precolnameslist: [
                   {
-                    premtype: "CP_C_SHOP_PERMISSION_ID",
-                    refcol: "ID",
-                    iswrite: "true",
+                    premtype: 'CP_C_SHOP_PERMISSION_ID',
+                    refcol: 'ID',
+                    iswrite: 'true',
                   },
                 ],
-                display: "text", // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-                fkdisplay: "drp", // 外键关联类型
-                fkdesc: vmI18n.t("table_label.shopName"), //店铺名称
-                inputname: "SELLER_NICK:ENAME", // 这个是做中文类型的模糊查询字段，例如ENAME
+                display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+                fkdisplay: 'drp', // 外键关联类型
+                fkdesc: vmI18n.t('table_label.shopName'), // 店铺名称
+                inputname: 'SELLER_NICK:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
                 isnotnull: false, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: vmI18n.t("table_label.shopName"), // 店铺名称input前面显示的lable值
+                name: vmI18n.t('table_label.shopName'), // 店铺名称input前面显示的lable值
                 readonly: false, // 是否可编辑，对应input   readonly属性
-                reftable: "OC_B_RETURN_ORDER", // 对应的表
+                reftable: 'OC_B_RETURN_ORDER', // 对应的表
                 reftableid: 24578, // 对应的表ID
                 row: 1,
                 statsize: -1,
-                type: "STRING", // 这个是后台用的
-                valuedata: "", // 这个是选择的值
+                type: 'STRING', // 这个是后台用的
+                valuedata: '', // 这个是选择的值
               },
               oneObj: () => {
                 this.threeObjs();
@@ -144,57 +144,57 @@ export default {
         table: {
           columns: [
             {
-              key: "SOURCE_CODE",
-              title: vmI18n.t("table_label.platformInfo"), //平台信息
+              key: 'SOURCE_CODE',
+              title: vmI18n.t('table_label.platformInfo'), // 平台信息
             },
             {
-              key: "ID",
-              title: vmI18n.t("table_label.orderNo"), //订单编号
+              key: 'ID',
+              title: vmI18n.t('table_label.orderNo'), // 订单编号
             },
             {
-              key: "USER_NICK",
-              title: vmI18n.t("table_label.buyerNickname"), //买家昵称
+              key: 'USER_NICK',
+              title: vmI18n.t('table_label.buyerNickname'), // 买家昵称
             },
             {
-              key: "ORDER_AMT",
-              title: vmI18n.t("table_label.totalOrderAmount"), //订单总额
+              key: 'ORDER_AMT',
+              title: vmI18n.t('table_label.totalOrderAmount'), // 订单总额
             },
             {
-              key: "RECEIVER_NAME",
-              title: vmI18n.t("form_label.consignee"), //收货人
+              key: 'RECEIVER_NAME',
+              title: vmI18n.t('form_label.consignee'), // 收货人
             },
             {
-              key: "RECEIVER_MOBILE",
-              title: vmI18n.t("form_label.consignee_phone"), //收货人手机号
+              key: 'RECEIVER_MOBILE',
+              title: vmI18n.t('form_label.consignee_phone'), // 收货人手机号
             },
             {
-              key: "CP_C_PHY_WAREHOUSE_ENAME",
-              title: vmI18n.t("form_label.delivery_warehouse"), //发货仓库
+              key: 'CP_C_PHY_WAREHOUSE_ENAME',
+              title: vmI18n.t('form_label.delivery_warehouse'), // 发货仓库
             },
             // {
             //   key: "PLATFORM",
             //   title: "平台状态"
             // },
             {
-              key: "EXPRESSCODE",
-              title: vmI18n.t("form_label.logisticsOrder_No"), //物流单号
+              key: 'EXPRESSCODE',
+              title: vmI18n.t('form_label.logisticsOrder_No'), // 物流单号
             },
             {
-              key: "CP_C_SHOP_TITLE",
-              title: vmI18n.t("form_label.orderShop"), //下单店铺
+              key: 'CP_C_SHOP_TITLE',
+              title: vmI18n.t('form_label.orderShop'), // 下单店铺
             },
           ], // 表头
           data: [], // 数据配置
           indexColumn: true, // 是否显示序号
-          height: "300",
+          height: '300',
           loading: false,
           //   isShowSelection: true // 是否显示checkedbox
         },
-        value: "",
+        value: '',
       },
       imageUploadConfig: {
-        name: vmI18n.t("other.uploadVoucher"),
-        url: "/p/cs/upload2", // 上传地址
+        name: vmI18n.t('other.uploadVoucher'),
+        url: '/p/cs/upload2', // 上传地址
         sendData: {
           path: `${this.$route.query.tableName}/${this.$route.query.id}/`,
         }, // 上传参数
@@ -209,26 +209,26 @@ export default {
             show: true, // 是否显示隐藏
             col: 3, // 列宽
             item: {
-              soltName: "CBX", // 组件类型
+              soltName: 'CBX', // 组件类型
               props: {},
               event: {},
             },
           },
           {
             item: {
-              type: "Input",
-              label: vmI18n.t("form_label.billNo"), //单据编号
+              type: 'Input',
+              label: vmI18n.t('form_label.billNo'), // 单据编号
               props: {
-                value: "",
+                value: '',
               },
             },
           },
           {
             item: {
-              type: "Input",
-              label: vmI18n.t("form_label.sourceDocuments"), //单据来源
+              type: 'Input',
+              label: vmI18n.t('form_label.sourceDocuments'), // 单据来源
               props: {
-                value: "",
+                value: '',
                 disabled: true,
               },
             },
@@ -245,15 +245,15 @@ export default {
           // },
           {
             item: {
-              type: "Input",
-              label: vmI18n.t("form_label.originalOrderNo"), //原始订单编号
+              type: 'Input',
+              label: vmI18n.t('form_label.originalOrderNo'), // 原始订单编号
               required: true,
               props: {
-                icon: "ios-search",
-                value: "",
+                icon: 'ios-search',
+                value: '',
               },
               event: {
-                "on-click": () => {
+                'on-click': () => {
                   // icon点击事件
                   const self = this;
                   self.order.modal = true;
@@ -263,11 +263,11 @@ export default {
           },
           {
             item: {
-              type: "Input",
-              label: vmI18n.t("table_label.shopName"), //店铺名称
+              type: 'Input',
+              label: vmI18n.t('table_label.shopName'), // 店铺名称
               required: true,
               props: {
-                value: "",
+                value: '',
                 disabled: true,
               },
               event: {},
@@ -275,11 +275,11 @@ export default {
           },
           {
             item: {
-              type: "Input",
-              label: vmI18n.t("form_label.originalOrderNo"), //原始平台单号
+              type: 'Input',
+              label: vmI18n.t('form_label.originalOrderNo'), // 原始平台单号
               required: true,
               props: {
-                value: "",
+                value: '',
                 disabled: true,
               },
               event: {},
@@ -287,21 +287,21 @@ export default {
           },
           {
             item: {
-              type: "Input",
-              label: vmI18n.t("form_label.originalPlatformNo"), //平台退款单号
+              type: 'Input',
+              label: vmI18n.t('form_label.originalPlatformNo'), // 平台退款单号
               // required: true,
               props: {
-                value: "",
+                value: '',
               },
               event: {},
             },
           },
           {
             item: {
-              type: "Input",
-              label: vmI18n.t("table_label.buyerNickname"), //买家昵称
+              type: 'Input',
+              label: vmI18n.t('table_label.buyerNickname'), // 买家昵称
               props: {
-                value: "",
+                value: '',
                 disabled: true,
               },
               event: {},
@@ -309,78 +309,78 @@ export default {
           },
           {
             item: {
-              type: "Input",
-              label: vmI18n.t("form_label.BuyerPhoneNumber"), //买家手机号
+              type: 'Input',
+              label: vmI18n.t('form_label.BuyerPhoneNumber'), // 买家手机号
               // required: true,
               props: {
-                value: "",
+                value: '',
                 disabled: false,
               },
               event: {
-                "on-blur": (e) => {
+                'on-blur': (e) => {
                   const value = e.currentTarget.value;
-                  this.sellerRemarkValueChange("phone", value);
+                  this.sellerRemarkValueChange('phone', value);
                 },
               },
             },
           },
           {
             item: {
-              type: "Input",
-              label: vmI18n.t("form_label.reasonRefund"), //退款原因
+              type: 'Input',
+              label: vmI18n.t('form_label.reasonRefund'), // 退款原因
               props: {
-                value: "",
+                value: '',
               },
               event: {},
             },
           },
           {
             item: {
-              type: "Select",
-              label: vmI18n.t("form_label.paymentWay"), //支付方式
+              type: 'Select',
+              label: vmI18n.t('form_label.paymentWay'), // 支付方式
               props: {
-                value: "1",
+                value: '1',
                 options: [],
               },
               event: {
-                "on-change": (value) => {
-                  this.sellerRemarkValueChange("payMode", value);
+                'on-change': (value) => {
+                  this.sellerRemarkValueChange('payMode', value);
                 },
               },
             },
           },
           {
             item: {
-              type: "Input",
-              label: "支付账号",
+              type: 'Input',
+              label: '支付账号',
               required: true,
               props: {
-                value: "",
+                value: '',
               },
               event: {
-                "on-blur": (e) => {
+                'on-blur': (e) => {
                   const value = e.currentTarget.value;
-                  this.sellerRemarkValueChange("payNo", value);
+                  this.sellerRemarkValueChange('payNo', value);
                 },
               },
             },
           },
           {
             item: {
-              type: "DatePicker",
-              label: vmI18n.t("form_label.documentDate"), //单据日期
+              type: 'DatePicker',
+              label: vmI18n.t('form_label.documentDate'), // 单据日期
               required: true,
               props: {
-                value: "",
+                value: '',
               },
             },
           },
           {
             item: {
-              type: "Input",
-              label: vmI18n.t("form_label.refundAmount"), //申请退款金额
+              type: 'Input',
+              label: vmI18n.t('form_label.refundAmount'), // 申请退款金额
               props: {
-                value: "",
+                value: '',
                 disabled: true,
               },
               event: {},
@@ -388,10 +388,10 @@ export default {
           },
           {
             item: {
-              type: "Select",
-              label: vmI18n.t("form_label.responsibleParty"), //判责方
+              type: 'Select',
+              label: vmI18n.t('form_label.responsibleParty'), // 判责方
               props: {
-                value: "",
+                value: '',
                 options: [],
               },
               event: {},
@@ -399,10 +399,10 @@ export default {
           },
           {
             item: {
-              type: "Input",
-              label: vmI18n.t("form_label.remarksResponsibleParty"), //判责方备注
+              type: 'Input',
+              label: vmI18n.t('form_label.remarksResponsibleParty'), // 判责方备注
               props: {
-                value: "",
+                value: '',
               },
               event: {},
             },
@@ -411,8 +411,8 @@ export default {
             show: true, // 是否显示隐藏
             col: 1, // 列宽
             item: {
-              label: vmI18n.t("form_label.refundClass"), //退款分类
-              soltName: "returnType", // 组件类型
+              label: vmI18n.t('form_label.refundClass'), // 退款分类
+              soltName: 'returnType', // 组件类型
               props: {},
               event: {},
             },
@@ -421,38 +421,38 @@ export default {
             show: true, // 是否显示隐藏
             col: 1, // 列宽
             item: {
-              label: vmI18n.t("form_label.refundDescription"), //退款描述
-              soltName: "returnTypeItem", // 组件类型
+              label: vmI18n.t('form_label.refundDescription'), // 退款描述
+              soltName: 'returnTypeItem', // 组件类型
               props: {},
               event: {},
             },
           },
           {
             item: {
-              type: "Input",
-              label: vmI18n.t("form_label.namePayee"), //收款人姓名
+              type: 'Input',
+              label: vmI18n.t('form_label.namePayee'), // 收款人姓名
               required: true,
               props: {
-                value: "",
+                value: '',
               },
             },
           },
           {
             item: {
-              type: "Input",
-              label: vmI18n.t("table_label.remarks"), //备注
+              type: 'Input',
+              label: vmI18n.t('table_label.remarks'), // 备注
               props: {
-                value: "",
+                value: '',
               },
               event: {},
             },
           },
           {
             item: {
-              type: "Input",
-              label: vmI18n.t("form_label.sellerNotes"), //卖家备注
+              type: 'Input',
+              label: vmI18n.t('form_label.sellerNotes'), // 卖家备注
               props: {
-                value: "",
+                value: '',
               },
               event: {},
             },
@@ -461,43 +461,41 @@ export default {
       },
       reFormDataConfig: refundAfterShipment.reFormDataConfig,
       sellerRemarkData: {
-        USER_NICK: "",
-        VIP_PHONE: "",
-        SOURCE_CODE: "",
-        OC_B_RETURN_TYPE_ENAME: "",
-        AMT_RETURN_APPLY: "",
-        PAY_MODE: "",
-        BUYER_ALIPAY_NO: "",
+        USER_NICK: '',
+        VIP_PHONE: '',
+        SOURCE_CODE: '',
+        OC_B_RETURN_TYPE_ENAME: '',
+        AMT_RETURN_APPLY: '',
+        PAY_MODE: '',
+        BUYER_ALIPAY_NO: '',
       },
-      value: ["1", "2"],
+      value: ['1', '2'],
       returnTypeFormConfig: {
         formValue: {},
         formData: [
           {
-            style: "popInput",
-            width: "24",
+            style: 'popInput',
+            width: '24',
             itemdata: {
               colid: 1700816078,
-              colname: "OC_B_RETURN_TYPE_ID",
-              display: "text",
-              fkdisplay: "drp",
+              colname: 'OC_B_RETURN_TYPE_ID',
+              display: 'text',
+              fkdisplay: 'drp',
               isfk: true,
               length: 100,
-              name: vmI18n.t("form_label.refundClass"), //退款分类
+              name: vmI18n.t('form_label.refundClass'), // 退款分类
               isnotnull: true,
-              reftable: "OC_B_RETURN_TYPE", // 对应的表
+              reftable: 'OC_B_RETURN_TYPE', // 对应的表
               reftableid: 249230473, // 对应的表ID
-              pid: "", // 这个是选择的id
-              valuedata: "",
+              pid: '', // 这个是选择的id
+              valuedata: '',
             },
             oneObj: (data) => {
-              this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ID =
-                data.pid;
-              this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ENAME =
-                data.valuedata;
+              this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ID = data.pid;
+              this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ENAME = data.valuedata;
               if (data.pid) {
                 this.returnTypeChange();
-                this.sellerRemarkValueChange("returnType", data.valuedata);
+                this.sellerRemarkValueChange('returnType', data.valuedata);
               }
             },
             InputEnter: () => {},
@@ -508,51 +506,51 @@ export default {
         formValue: {},
         formData: [
           {
-            style: "select", // 下拉框类型
-            label: vmI18n.t("form_label.refundDescription"), //退款描述
-            width: "24", // 所占宽度宽度
-            value: "OC_B_RETURN_TYPE_ITEM_ID", // 输入框的值
+            style: 'select', // 下拉框类型
+            label: vmI18n.t('form_label.refundDescription'), // 退款描述
+            width: '24', // 所占宽度宽度
+            value: 'OC_B_RETURN_TYPE_ITEM_ID', // 输入框的值
             // clearable: true, //下拉选中是否显示清空按钮,默认为false
             options: [],
           },
         ],
         ruleValidate: {
           OC_B_RETURN_TYPE_ITEM_ID: [
-            { required: true, message: " ", trigger: "blur" },
+            { required: true, message: ' ', trigger: 'blur' },
           ],
         },
       },
       btnConfig: {
-        typeAll: "error",
+        typeAll: 'error',
         buttons: [
           {
-            text: vmI18n.t("btn.save"), //保存
+            text: vmI18n.t('btn.save'), // 保存
             // class: 'save',
-            icon: "md-download",
+            icon: 'md-download',
             btnclick: () => {
               this.save();
             },
           },
           {
-            text: vmI18n.t("btn.back"), //返回
+            text: vmI18n.t('btn.back'), // 返回
             // class: 'cancel',
-            icon: "md-arrow-round-back",
+            icon: 'md-arrow-round-back',
             btnclick: () => {
-              if (this.$route.query.tabTitle === "额外退款编辑") {
-                R3.store.commit("global/tabOpen", {
-                  type: "S",
+              if (this.$route.query.tabTitle === '额外退款编辑') {
+                R3.store.commit('global/tabOpen', {
+                  type: 'S',
                   tableId: 249130393,
-                  tableName: "OC_B_RETURN_AF_SEND",
+                  tableName: 'OC_B_RETURN_AF_SEND',
                   back: true,
-                  label: vmI18n.t("btn.additionalRefund"), //额外退款
+                  label: vmI18n.t('btn.additionalRefund'), // 额外退款
                 });
               } else {
-                R3.store.commit("global/tabOpen", {
-                  type: "S",
+                R3.store.commit('global/tabOpen', {
+                  type: 'S',
                   tableId: 249130393,
-                  tableName: "OC_B_RETURN_AF_SEND",
+                  tableName: 'OC_B_RETURN_AF_SEND',
                   back: true,
-                  label: vmI18n.t("btn.refundNoteDelivered"), //已发货退款单
+                  label: vmI18n.t('btn.refundNoteDelivered'), // 已发货退款单
                 });
               }
               // 销毁当前实例
@@ -588,49 +586,49 @@ export default {
         isShowAddDetailBtn: true, // 显示新增明细
         columns: [
           {
-            type: "selection",
+            type: 'selection',
             width: 50,
-            align: "center",
+            align: 'center',
           },
           // {
           //   title: '业务单据',
           //   key: 'BILL_TYPE'
           // },
           {
-            title: vmI18n.t("form_label.billNo"), //单据编号
-            key: "BILL_NO",
+            title: vmI18n.t('form_label.billNo'), // 单据编号
+            key: 'BILL_NO',
           },
           {
-            title: vmI18n.t("form_label.gift"), //赠品
-            key: "IS_GIFT_NAME",
+            title: vmI18n.t('form_label.gift'), // 赠品
+            key: 'IS_GIFT_NAME',
           },
           {
-            title: vmI18n.t("form_label.gift"), //平台商品编码
-            key: "PS_C_SKU_PT_ECODE",
+            title: vmI18n.t('form_label.gift'), // 平台商品编码
+            key: 'PS_C_SKU_PT_ECODE',
           },
           {
-            title: vmI18n.t("table_label.code_SKU"), //SKU编码
-            key: "skuEcode",
+            title: vmI18n.t('table_label.code_SKU'), // SKU编码
+            key: 'skuEcode',
           },
           // {
           //   title: '商品条码',
           //   key: 'skuEcode'
           // },
           {
-            title: vmI18n.t("form_label.platformProductsCod"), //商品编码
-            key: "ecode",
+            title: vmI18n.t('form_label.platformProductsCod'), // 商品编码
+            key: 'ecode',
           },
           {
-            title: vmI18n.t("form_label.platformProductsName"), //平台商品名称
-            key: "PT_PRO_NAME",
+            title: vmI18n.t('form_label.platformProductsName'), // 平台商品名称
+            key: 'PT_PRO_NAME',
           },
           {
-            title: vmI18n.t("table_label.productName"), //商品名称
-            key: "proEname",
+            title: vmI18n.t('table_label.productName'), // 商品名称
+            key: 'proEname',
           },
           {
-            title: vmI18n.t("form_label.skuName"), //SKU名称
-            key: "PS_C_SKU_ENAME",
+            title: vmI18n.t('form_label.skuName'), // SKU名称
+            key: 'PS_C_SKU_ENAME',
           },
 
           // {
@@ -638,46 +636,46 @@ export default {
           //   key: 'skuSpec'
           // },
           {
-            title: vmI18n.t("form_label.purchaseQuantity"), //购买数量
-            key: "qty",
+            title: vmI18n.t('form_label.purchaseQuantity'), // 购买数量
+            key: 'qty',
           },
           {
-            title: vmI18n.t("form_label.transactionAmount"), //成交金额
-            key: "price",
+            title: vmI18n.t('form_label.transactionAmount'), // 成交金额
+            key: 'price',
           },
           {
-            title: vmI18n.t("form_label.returnQuantity"), //退货数量
-            key: "QTY_IN",
+            title: vmI18n.t('form_label.returnQuantity'), // 退货数量
+            key: 'QTY_IN',
             render: (h, params) => {
               const self = this;
               return h(
-                "div",
+                'div',
                 {
                   style: {
-                    width: "100%",
-                    display: "flex",
-                    alignitems: "center",
-                    justifyContent: "space-between",
+                    width: '100%',
+                    display: 'flex',
+                    alignitems: 'center',
+                    justifyContent: 'space-between',
                   },
                 },
                 [
-                  h("Input", {
-                    class: "isNone",
+                  h('Input', {
+                    class: 'isNone',
                     style: {
-                      width: "150",
-                      height: "100%",
-                      "text-align": "center",
+                      width: '150',
+                      height: '100%',
+                      'text-align': 'center',
                     },
                     props: {
                       value: params.row.QTY_IN,
                       autosize: true,
-                      placeholder: "",
+                      placeholder: '',
                       // regx:/^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$/,
                       regx: /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
                     },
 
                     on: {
-                      "on-change": (e) => {
+                      'on-change': (e) => {
                         params.row.QTY_IN = Number(e.target.value);
                         self.tableConfig.data[params.index] = params.row;
                       },
@@ -688,28 +686,28 @@ export default {
             },
           },
           {
-            title: vmI18n.t("form_label.refundAmount"), //退款金额
-            key: "c",
+            title: vmI18n.t('form_label.refundAmount'), // 退款金额
+            key: 'c',
             render: (h, params) => {
               const self = this;
               return h(
-                "div",
+                'div',
                 {
                   style: {
-                    width: "100%",
-                    display: "flex",
-                    alignitems: "center",
-                    justifyContent: "space-between",
+                    width: '100%',
+                    display: 'flex',
+                    alignitems: 'center',
+                    justifyContent: 'space-between',
                   },
                 },
                 [
-                  h("Input", {
-                    class: "isNone",
+                  h('Input', {
+                    class: 'isNone',
                     style: {
-                      width: "150",
-                      height: "100%",
-                      border: "1px solid #dcdee2",
-                      "text-align": "center",
+                      width: '150',
+                      height: '100%',
+                      border: '1px solid #dcdee2',
+                      'text-align': 'center',
                     },
                     props: {
                       value: params.row.returnPrice,
@@ -719,7 +717,7 @@ export default {
                     },
 
                     on: {
-                      "on-change": (e) => {
+                      'on-change': (e) => {
                         params.row.returnPrice = Number(e.target.value);
                         if (this.$route.query.new) {
                           // if (params.row.returnPrice > params.row.RETURNABLE_AMOUNT) {
@@ -732,14 +730,12 @@ export default {
                         self.tableConfig.data[params.index] = params.row;
                         let total = 0;
                         self.tableConfig.data.forEach((item) => {
-                          total =
-                            total + (item.returnPrice || 0) + item.FREIGHT;
+                          total = total + (item.returnPrice || 0) + item.FREIGHT;
                         });
                         // self.reForm.config[12].item.props.value = total;
                         self.reForm.config.find(
-                          (item) =>
-                            item.item.label ==
-                            self.vmI18n.t("form_label.refundAmount") //申请退款金额
+                          item => item.item.label
+                            == self.vmI18n.t('form_label.refundAmount') // 申请退款金额
                         ).item.props.value = total;
                       },
                     },
@@ -753,28 +749,28 @@ export default {
           //   key: 'RETURNABLE_AMOUNT'
           // },
           {
-            title: vmI18n.t("form_label.freight"), //运费
-            key: "FREIGHT",
+            title: vmI18n.t('form_label.freight'), // 运费
+            key: 'FREIGHT',
             width: 60,
             render: (h, params) => {
               const self = this;
               return h(
-                "div",
+                'div',
                 {
                   style: {
-                    width: "100%",
-                    display: "flex",
-                    alignitems: "center",
-                    justifyContent: "space-between",
+                    width: '100%',
+                    display: 'flex',
+                    alignitems: 'center',
+                    justifyContent: 'space-between',
                   },
                 },
                 [
-                  h("Input", {
-                    class: "isNone",
+                  h('Input', {
+                    class: 'isNone',
                     style: {
-                      width: "50px",
-                      height: "100%",
-                      "text-align": "center",
+                      width: '50px',
+                      height: '100%',
+                      'text-align': 'center',
                     },
                     props: {
                       value: params.row.FREIGHT,
@@ -784,19 +780,17 @@ export default {
                     },
 
                     on: {
-                      "on-change": (e) => {
+                      'on-change': (e) => {
                         params.row.FREIGHT = Number(e.target.value);
                         self.tableConfig.data[params.index] = params.row;
                         let total = 0;
                         self.tableConfig.data.forEach((item) => {
-                          total =
-                            total + item.FREIGHT + (item.returnPrice || 0);
+                          total = total + item.FREIGHT + (item.returnPrice || 0);
                         });
                         // self.reForm.config[12].item.props.value = total;
                         self.reForm.config.find(
-                          (item) =>
-                            item.item.label ==
-                            self.vmI18n.t("form_label.refundAmount") //申请退款金额
+                          item => item.item.label
+                            == self.vmI18n.t('form_label.refundAmount') // 申请退款金额
                         ).item.props.value = total;
                       },
                     },
@@ -825,10 +819,10 @@ export default {
     if (this.$route.query.id && !this.$route.query.new) {
       this.reForm.config.splice(14, 0, {
         item: {
-          type: "Input",
-          label: vmI18n.t("form_label.actualRefundAmount"), //实际退款金额
+          type: 'Input',
+          label: vmI18n.t('form_label.actualRefundAmount'), // 实际退款金额
           props: {
-            value: "",
+            value: '',
           },
           event: {},
         },
@@ -839,12 +833,12 @@ export default {
       this.queryBounced(this.$route.query.oid);
       this.$nextTick(() => {
         this.reForm.config.forEach((val, index) => {
-          if (val.item.label === "单据来源") {
-            this.reForm.config[index].item.props.value = "手动";
-          } else if (val.item.label === "单据日期") {
+          if (val.item.label === '单据来源') {
+            this.reForm.config[index].item.props.value = '手动';
+          } else if (val.item.label === '单据日期') {
             this.reForm.config[index].item.props.value = dateFormat(
               new Date(),
-              "yyyy-MM-dd"
+              'yyyy-MM-dd'
             );
           }
         });
@@ -852,12 +846,12 @@ export default {
     } else {
       this.$nextTick(() => {
         this.reForm.config.forEach((val, index) => {
-          if (val.item.label === "单据来源") {
-            this.reForm.config[index].item.props.value = "手动";
-          } else if (val.item.label === "单据日期") {
+          if (val.item.label === '单据来源') {
+            this.reForm.config[index].item.props.value = '手动';
+          } else if (val.item.label === '单据日期') {
             this.reForm.config[index].item.props.value = dateFormat(
               new Date(),
-              "yyyy-MM-dd"
+              'yyyy-MM-dd'
             );
           }
         });
@@ -869,7 +863,7 @@ export default {
     billTypeChange(val) {
       // 退款完成的订单不进行操作
       if (this.RETURN_STATUS === 2) return;
-      if (val === "1") {
+      if (val === '1') {
         // 仅退款
         this.tableConfig.data.forEach((val) => {
           val.QTY_IN = 0;
@@ -890,19 +884,17 @@ export default {
     },
     filter(arr) {
       arr.forEach((item, i) => {
-        item.IS_GIFT_NAME =
-          item.GIFT_TYPE == "2"
-            ? "平台赠品"
-            : item.GIFT_TYPE == "1"
-            ? "系统赠品"
-            : "否";
+        item.IS_GIFT_NAME = item.GIFT_TYPE == '2'
+          ? '平台赠品'
+          : item.GIFT_TYPE == '1'
+            ? '系统赠品'
+            : '否';
         item.IS_GIFT = item.GIFT_TYPE;
         if (!item.FREIGHT) item.FREIGHT = 0; // 运费
         if (item.RETURNABLE_AMOUNT == 0) {
           arr.splice(i, 1);
         }
-        if (item.QTY_IN === undefined || item.QTY_IN === null)
-          item.QTY_IN = this.BILL_TYPE === "1" ? 0 : Number(item.qty || 1);
+        if (item.QTY_IN === undefined || item.QTY_IN === null) { item.QTY_IN = this.BILL_TYPE === '1' ? 0 : Number(item.qty || 1); }
       });
       return arr;
     },
@@ -910,8 +902,7 @@ export default {
       const _this = this;
       console.log(listData);
       _this.onSelectData = listData[0];
-      const QUERYORDERITEMRESULTLIST =
-        _this.onSelectData.QUERYORDERITEMRESULTLIST;
+      const QUERYORDERITEMRESULTLIST = _this.onSelectData.QUERYORDERITEMRESULTLIST;
       _this.onSelectData.QUERYORDERITEMRESULTLIST = _this.filter(
         QUERYORDERITEMRESULTLIST
       );
@@ -921,36 +912,29 @@ export default {
 
       const data = _this.onSelectData;
       _this.reForm.config.forEach((item) => {
-        //原始订单编号
-        if (item.item.label == _this.vmI18n.t("form_label.originalOrderNo"))
-          item.item.props.value = data.ID;
-        //店铺名称
-        if (item.item.label == _this.vmI18n.t("table_label.shopName"))
-          item.item.props.value = data.CP_C_SHOP_TITLE;
-        //原始平台单号
-        if (item.item.label == _this.vmI18n.t("form_label.originalOrderNo"))
-          item.item.props.value = data.SOURCE_CODE;
+        // 原始订单编号
+        if (item.item.label == _this.vmI18n.t('form_label.originalOrderNo')) { item.item.props.value = data.ID; }
+        // 店铺名称
+        if (item.item.label == _this.vmI18n.t('table_label.shopName')) { item.item.props.value = data.CP_C_SHOP_TITLE; }
+        // 原始平台单号
+        if (item.item.label == _this.vmI18n.t('form_label.originalOrderNo')) { item.item.props.value = data.SOURCE_CODE; }
         // 买家昵称
-        if (item.item.label == _this.vmI18n.t("table_label.buyerNickname"))
-          item.item.props.value = data.USER_NICK;
+        if (item.item.label == _this.vmI18n.t('table_label.buyerNickname')) { item.item.props.value = data.USER_NICK; }
         // 买家手机号;
-        if (item.item.label == _this.vmI18n.t("form_label.BuyerPhoneNumber"))
-          item.item.props.value = data.VIP_PHONE;
+        if (item.item.label == _this.vmI18n.t('form_label.BuyerPhoneNumber')) { item.item.props.value = data.VIP_PHONE; }
         // if (item.item.label == '平台退款单号') item.item.props.value = '5';
         // if (item.item.label == '退款原因') item.item.props.value = '6';
         // 支付方式
-        if (item.item.label == _this.vmI18n.t("form_label.paymentWay"))
-          item.item.props.value = String(data.PAY_TYPE) || "1";
+        if (item.item.label == _this.vmI18n.t('form_label.paymentWay')) { item.item.props.value = String(data.PAY_TYPE) || '1'; }
         // if (item.item.label == '判责方') item.item.props.value = data.RESPONSIBLE_PARTY;
         // if (item.item.label == '支付账号') item.item.props.value = data.BUYER_ALIPAY_NO;
         // 收款人姓名
-        if (item.item.label === _this.vmI18n.t("form_label.namePayee"))
-          item.item.props.value = data.RESERVE_VARCHAR01;
+        if (item.item.label === _this.vmI18n.t('form_label.namePayee')) { item.item.props.value = data.RESERVE_VARCHAR01; }
         // _this.addItem.addList.forEach(item => {
         //   a = a + Number(item.RETURNABLE_AMOUNT);
         // });
         // 申请退款金额
-        if (item.item.label == _this.vmI18n.t("form_label.apply_refundAmount")) {
+        if (item.item.label == _this.vmI18n.t('form_label.apply_refundAmount')) {
           if (initStatus && _this.addItem.addList.length === 0) {
             item.item.props.value = _this.addItem.table.data.reduce(
               (sum, n) => sum + Number(n.RETURNABLE_AMOUNT || 0),
@@ -968,12 +952,11 @@ export default {
       QUERYORDERITEMRESULTLIST.forEach((item) => {
         item.returnPrice = item.RETURNABLE_AMOUNT;
         item.ID = item.proId;
-        item.IS_GIFT_NAME =
-          item.GIFT_TYPE == "2"
-            ? "平台赠品"
-            : item.GIFT_TYPE == "1"
-            ? "系统赠品"
-            : "否";
+        item.IS_GIFT_NAME = item.GIFT_TYPE == '2'
+          ? '平台赠品'
+          : item.GIFT_TYPE == '1'
+            ? '系统赠品'
+            : '否';
         item.IS_GIFT = item.GIFT_TYPE;
         item.BILL_NO = _this.selectData.BILL_NO;
       });
@@ -986,12 +969,11 @@ export default {
         _this.fromOrder(listData, true);
       } else {
         _this.onSelectData = _this.selectData;
-        if (JSON.stringify(_this.onSelectData) == "{}") {
-          _this.$Message.warning(vmI18n.t("modalTips.i7")); //请选择一条数据！
+        if (JSON.stringify(_this.onSelectData) == '{}') {
+          _this.$Message.warning(vmI18n.t('modalTips.i7')); // 请选择一条数据！
           return;
         }
-        const QUERYORDERITEMRESULTLIST =
-          _this.onSelectData.QUERYORDERITEMRESULTLIST;
+        const QUERYORDERITEMRESULTLIST = _this.onSelectData.QUERYORDERITEMRESULTLIST;
         _this.onSelectData.QUERYORDERITEMRESULTLIST = _this.filter(
           QUERYORDERITEMRESULTLIST
         );
@@ -1008,13 +990,12 @@ export default {
       _this.order.orderform.formData.forEach((item) => {
         // 店铺名称
         if (
-          item &&
-          item.itemdata &&
-          item.itemdata.name === _this.vmI18n.t("table_label.shopName")
+          item
+          && item.itemdata
+          && item.itemdata.name === _this.vmI18n.t('table_label.shopName')
         ) {
           this.order.orderform.formValue.cp_c_store_id = item.itemdata.pid;
-          this.order.orderform.formValue.cp_c_store_ename =
-            item.itemdata.valuedata;
+          this.order.orderform.formValue.cp_c_store_ename = item.itemdata.valuedata;
         }
       });
     },
@@ -1036,70 +1017,71 @@ export default {
       //   return;
       // }
       if (
-        !lists.bill_no &&
-        !lists.source_code &&
-        !lists.receiver_name &&
-        !lists.user_nick &&
-        !lists.receiver_mobile &&
-        !lists.cp_c_store_ename &&
-        num === undefined
+        !lists.bill_no
+        && !lists.source_code
+        && !lists.receiver_name
+        && !lists.user_nick
+        && !lists.receiver_mobile
+        && !lists.cp_c_store_ename
+        && num === undefined
       ) {
-        _this.$Message.error(_this.vmI18n.t("modalTips.i8")); //请输入查询条件！
+        _this.$Message.error(_this.vmI18n.t('modalTips.i8')); // 请输入查询条件！
         return;
       }
       _this.order.table.loading = true;
       const fromdata = new FormData();
       const param = {
         page: {
-          pageSize: "500",
-          pageNum: "1",
+          pageSize: '500',
+          pageNum: '1',
         },
         highSearch: [
           {
-            type: "Select",
-            queryName: "ID",
+            type: 'Select',
+            queryName: 'ID',
             value: lists.bill_no,
           },
           {
-            type: "Input",
-            queryName: "SOURCE_CODE",
+            type: 'Input',
+            queryName: 'SOURCE_CODE',
             value: lists.source_code,
           },
           {
-            type: "Input",
-            queryName: "RECEIVER_NAME",
+            type: 'Input',
+            queryName: 'RECEIVER_NAME',
             value: lists.receiver_name,
           },
           {
-            type: "Input",
-            queryName: "USER_NICK",
+            type: 'Input',
+            queryName: 'USER_NICK',
             value: lists.user_nick,
           },
           {
-            type: "Input",
-            queryName: "RECEIVER_MOBILE",
+            type: 'Input',
+            queryName: 'RECEIVER_MOBILE',
             value: lists.receiver_mobile,
           },
           {
-            type: "Select",
-            queryName: "CP_C_SHOP_ID",
+            type: 'Select',
+            queryName: 'CP_C_SHOP_ID',
             value: lists.cp_c_store_id,
           },
           {
-            type: "Select",
-            queryName: "ID",
+            type: 'Select',
+            queryName: 'ID',
             value: num,
           },
           {
-            type: "Select",
-            queryName: "ORDER_STATUS",
-            value: "5,6,12",
+            type: 'Select',
+            queryName: 'ORDER_STATUS',
+            value: '5,6,12',
           },
         ],
       };
-      fromdata.append("param", JSON.stringify(param));
-      this.$network
-        .post("/api/cs/oc/oms/v1/queryOrderList", fromdata)
+      fromdata.append('param', JSON.stringify(param));
+      this.service.orderCenter.queryOrderList(fromdata)
+      // this.$network
+      //   .post("/api/cs/oc/oms/v1/queryOrderList", fromdata)
         .then((res) => {
           const query = _this.$route.query;
           if (res.data.data) {
@@ -1124,28 +1106,27 @@ export default {
           }
         })
         .catch(() => {
-          _this.$Message.info(_this.vmI18n.t("modalTips.i9")); //查询不到数据!
+          _this.$Message.info(_this.vmI18n.t('modalTips.i9')); // 查询不到数据!
           _this.order.table.loading = false;
         });
     },
     save() {
       const self = this;
       const flag = self.isNull();
-      if (flag !== "") {
-        self.$Message.warning(`${flag},${self.vmI18n.t("modalTips.y1")}`);
+      if (flag !== '') {
+        self.$Message.warning(`${flag},${self.vmI18n.t('modalTips.y1')}`);
         return;
       }
       const data = {};
-      data.objId =
-        self.$route.query.new || self.$route.query.cid || self.$route.query.oid
-          ? -1
-          : self.$route.query.id;
+      data.objId = self.$route.query.new || self.$route.query.cid || self.$route.query.oid
+        ? -1
+        : self.$route.query.id;
       const AfSend = self.getForm();
       if (AfSend.VIP_PHONE && !/^1[3456789]\d{9}$/.test(AfSend.VIP_PHONE)) {
-        return self.$Message.warning(self.vmI18n.t("modalTips.j0")); //请输入正确的买家手机号
+        return self.$Message.warning(self.vmI18n.t('modalTips.j0')); // 请输入正确的买家手机号
       }
       AfSend.ID = self.$route.query.cid || self.$route.query.id;
-      const AfSendItem = self.tableConfig.data.map((item) => ({
+      const AfSendItem = self.tableConfig.data.map(item => ({
         id: item.ID,
         AMT_RETURN: item.returnPrice,
         FREIGHT: item.FREIGHT,
@@ -1172,25 +1153,26 @@ export default {
       AfSend.IMAGE = this.IMAGE;
       data.AfSend = AfSend;
       data.AfSendItem = AfSendItem;
-      this.$network
-        .post("/api/cs/oc/oms/v1/saveAfterDeliver", data)
+      this.service.orderCenter.saveAfterDeliver(data)
+      // this.$network
+      //   .post("/api/cs/oc/oms/v1/saveAfterDeliver", data)
         .then((res) => {
           if (res.data.code == 0) {
             self.$Message.success(res.data.message);
-            if (this.$route.query.tabTitle === "额外退款编辑") {
-              this.$store.commit("customize/TabHref", {
+            if (this.$route.query.tabTitle === '额外退款编辑') {
+              this.$store.commit('customize/TabHref', {
                 id: 249230545,
-                type: "table",
-                name: "OC_B_RETURN_AF_SEND_MANUAL",
-                label: vmI18n.t("btn.additionalRefund"), //额外退款
+                type: 'table',
+                name: 'OC_B_RETURN_AF_SEND_MANUAL',
+                label: vmI18n.t('btn.additionalRefund'), // 额外退款
                 back: true,
               });
             } else {
-              this.$store.commit("customize/TabHref", {
+              this.$store.commit('customize/TabHref', {
                 id: 249130393,
-                type: "table",
-                name: "OC_B_RETURN_AF_SEND",
-                label: vmI18n.t("btn.refundNoteDelivered"), //已发货退款单
+                type: 'table',
+                name: 'OC_B_RETURN_AF_SEND',
+                label: vmI18n.t('btn.refundNoteDelivered'), // 已发货退款单
                 back: true,
               });
             }
@@ -1217,9 +1199,8 @@ export default {
       self.reForm.config.forEach((item) => {
         const itemLabel = item.item.label;
         AfSend[dataConfig[itemLabel]] = item.item.props.value;
-        if (itemLabel == "单据来源") {
-          AfSend[dataConfig[itemLabel]] =
-            item.item.props.value == "手动" ? 1 : 2;
+        if (itemLabel == '单据来源') {
+          AfSend[dataConfig[itemLabel]] = item.item.props.value == '手动' ? 1 : 2;
         }
       });
       // self.reForm.config.map(item => {
@@ -1251,53 +1232,53 @@ export default {
       //   }
       // })
       let flag = this.reForm.config.find(
-        (item) => item.item.required && !item.item.props.value
+        item => item.item.required && !item.item.props.value
       );
       // 退款分类必填校验
       if (!flag) {
         if (!this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ID) {
-          //退款分类
+          // 退款分类
           flag = {
-            item: { label: `${this.vmI18n.t("form_label.refundClass")}` },
+            item: { label: `${this.vmI18n.t('form_label.refundClass')}` },
           };
         } else if (
           // 退款描述
           !this.returnTypeItemConfig.formValue.OC_B_RETURN_TYPE_ITEM_ID
         ) {
           flag = {
-            item: { label: `${this.vmI18n.t("form_label.refundDescription")}` },
+            item: { label: `${this.vmI18n.t('form_label.refundDescription')}` },
           };
         }
       }
-      return `${flag ? flag.item.label : ""}`;
+      return `${flag ? flag.item.label : ''}`;
     },
     // 新增明细按钮调用
     tableAddDetail() {
       const self = this;
       if (!self.reForm.config[3].item.props.value) {
-        self.$Message.warning(self.vmI18n.t("modalTips.j1")); //原始订单编号不能为空!
+        self.$Message.warning(self.vmI18n.t('modalTips.j1')); // 原始订单编号不能为空!
         return;
       }
       const formData = new FormData();
       const requestData = {
-        page: { pageSize: "500", pageNum: "1" },
+        page: { pageSize: '500', pageNum: '1' },
         highSearch: [
           {
-            type: "Select",
-            queryName: "ID",
+            type: 'Select',
+            queryName: 'ID',
             value: self.reForm.config[3].item.props.value,
           },
         ],
       };
-      formData.append("param", JSON.stringify(requestData));
-      this.$network
-        .post("/api/cs/oc/oms/v1/queryOrderList", formData)
+      formData.append('param', JSON.stringify(requestData));
+      this.service.orderCenter.queryOrderList(formData)
+      // this.$network
+      //   .post('/api/cs/oc/oms/v1/queryOrderList', formData)
         .then((res) => {
           console.log(res);
           if (res.data.code == 0) {
             const arr = [];
-            if (!res.data.data)
-              return this.$Message.error(self.vmI18n.t("modalTips.j2")); //没有明细可新增
+            if (!res.data.data) { return this.$Message.error(self.vmI18n.t('modalTips.j2')); } // 没有明细可新增
             //  res.data.data.queryOrderResultList[0].QUERYORDERITEMRESULTLIST = self.filter( res.data.data.queryOrderResultList[0].QUERYORDERITEMRESULTLIST)
             res.data.data.queryOrderResultList[0].QUERYORDERITEMRESULTLIST.forEach(
               (item) => {
@@ -1309,14 +1290,12 @@ export default {
             );
             self.addItem.table.data = arr;
             self.addItem.table.data.forEach((item) => {
-              item.returnQTY =
-                item.qty - (item.QTY_RETURN_APPLY ? item.QTY_RETURN_APPLY : 0);
-              item.IS_GIFT_NAME =
-                item.GIFT_TYPE == "2"
-                  ? "平台赠品"
-                  : item.GIFT_TYPE == "1"
-                  ? "系统赠品"
-                  : "否";
+              item.returnQTY = item.qty - (item.QTY_RETURN_APPLY ? item.QTY_RETURN_APPLY : 0);
+              item.IS_GIFT_NAME = item.GIFT_TYPE == '2'
+                ? '平台赠品'
+                : item.GIFT_TYPE == '1'
+                  ? '系统赠品'
+                  : '否';
               item.IS_GIFT = item.GIFT_TYPE;
             });
             self.addItem.modal = true;
@@ -1335,59 +1314,52 @@ export default {
           self.reForm.config.forEach((item) => {
             const configItem = item.item;
             const configItemLabel = configItem.label;
-            //原始订单编号
-            if (configItemLabel === self.vmI18n.t("form_label.originalOrderNo"))
-              configItem.props.value = data.ID;
-            //店铺名称
-            if (configItemLabel === self.vmI18n.t("table_label.shopName"))
-              configItem.props.value = data.CP_C_SHOP_TITLE;
+            // 原始订单编号
+            if (configItemLabel === self.vmI18n.t('form_label.originalOrderNo')) { configItem.props.value = data.ID; }
+            // 店铺名称
+            if (configItemLabel === self.vmI18n.t('table_label.shopName')) { configItem.props.value = data.CP_C_SHOP_TITLE; }
             // 原始平台单号
-            if (configItemLabel === self.vmI18n.t("form_label.originalOrderNo"))
-              configItem.props.value = data.SOURCE_CODE;
-            //买家昵称
-            if (configItemLabel === self.vmI18n.t("table_label.buyerNickname"))
-              configItem.props.value = data.USER_NICK;
+            if (configItemLabel === self.vmI18n.t('form_label.originalOrderNo')) { configItem.props.value = data.SOURCE_CODE; }
+            // 买家昵称
+            if (configItemLabel === self.vmI18n.t('table_label.buyerNickname')) { configItem.props.value = data.USER_NICK; }
             // 买家手机号
             if (
-              configItemLabel === self.vmI18n.t("form_label.BuyerPhoneNumber")
-            )
-              configItem.props.value = data.VIP_PHONE;
+              configItemLabel === self.vmI18n.t('form_label.BuyerPhoneNumber')
+            ) { configItem.props.value = data.VIP_PHONE; }
             // if (item.item.label == '平台退款单号') item.item.props.value = '5';
             // if (item.item.label == '退款原因') item.item.props.value = '6';
             // 支付方式
-            if (configItemLabel === self.vmI18n.t("form_label.paymentWay"))
-              configItem.props.value = String(data.PAY_TYPE) || "1";
+            if (configItemLabel === self.vmI18n.t('form_label.paymentWay')) { configItem.props.value = String(data.PAY_TYPE) || '1'; }
             // if (item.item.label === '判责方') item.item.props.value = data.RESPONSIBLE_PARTY;
             // if (configItemLabel === '支付账号') configItem.props.value = data.BUYER_ALIPAY_NO;
             // 收款人姓名;
-            if (configItemLabel === self.vmI18n.t("form_label.namePayee"))
-              configItem.props.value = data.RESERVE_VARCHAR01;
+            if (configItemLabel === self.vmI18n.t('form_label.namePayee')) { configItem.props.value = data.RESERVE_VARCHAR01; }
             // self.addItem.addList.forEach(item => {
             //   a = a + Number(item.RETURNABLE_AMOUNT);
             // });
-            //申请退款金额
-            if (configItemLabel === self.vmI18n.t("form_label.apply_refundAmount"))
+            // 申请退款金额
+            if (configItemLabel === self.vmI18n.t('form_label.apply_refundAmount')) {
               configItem.props.value = self.addItem.addList.reduce(
                 (sum, n) => sum + Number(n.RETURNABLE_AMOUNT || 0),
                 0
-              );
+              ); 
+            }
             // if (item.item.label == '判责方备注') item.item.props.value = '10';
           });
           self.addItem.addList.forEach((item) => {
             item.returnPrice = item.RETURNABLE_AMOUNT;
             item.ID = item.proId;
-            item.IS_GIFT_NAME =
-              item.GIFT_TYPE == "2"
-                ? "平台赠品"
-                : item.GIFT_TYPE == "1"
-                ? "系统赠品"
-                : "否";
+            item.IS_GIFT_NAME = item.GIFT_TYPE == '2'
+              ? '平台赠品'
+              : item.GIFT_TYPE == '1'
+                ? '系统赠品'
+                : '否';
             item.IS_GIFT = item.GIFT_TYPE;
             item.BILL_NO = self.selectData.BILL_NO;
-            item.QTY_IN = self.BILL_TYPE === "1" ? 0 : Number(item.qty || 1);
+            item.QTY_IN = self.BILL_TYPE === '1' ? 0 : Number(item.qty || 1);
           });
           self.tableConfig.data = self.addItem.addList;
-          this.sellerRemarkValueChange("originalOrder", data);
+          this.sellerRemarkValueChange('originalOrder', data);
           // 通过原始订单编号二次弹框确定 end
         } else {
           // self.tableConfig.map(item=>{
@@ -1400,18 +1372,16 @@ export default {
               }
             });
             if (!flag) {
-              item.returnPrice =
-                item.price > item.RETURNABLE_AMOUNT
-                  ? item.RETURNABLE_AMOUNT
-                  : item.price;
+              item.returnPrice = item.price > item.RETURNABLE_AMOUNT
+                ? item.RETURNABLE_AMOUNT
+                : item.price;
               self.tableConfig.data.push(item);
             }
             if (self.$route.query.new || self.$route.query.cid) {
               self.tableConfig.data.forEach((item) => {
-                item.returnPrice =
-                  item.price > item.RETURNABLE_AMOUNT
-                    ? item.RETURNABLE_AMOUNT
-                    : item.price;
+                item.returnPrice = item.price > item.RETURNABLE_AMOUNT
+                  ? item.RETURNABLE_AMOUNT
+                  : item.price;
                 item.ID = item.proId;
                 item.BILL_NO = self.selectData.BILL_NO;
               });
@@ -1420,8 +1390,7 @@ export default {
           const returnprice = self.getnumPrice(self.tableConfig.data);
           // self.reForm.config[12].item.props.value = returnprice;
           self.reForm.config.find(
-            (item) =>
-              item.item.label == self.vmI18n.t("form_label.refundAmount") //申请退款金额
+            item => item.item.label == self.vmI18n.t('form_label.refundAmount') // 申请退款金额
           ).item.props.value = returnprice;
         }
       } else {
@@ -1438,8 +1407,9 @@ export default {
           OcBReturnAfSendItem.push(obj);
         });
         data.OcBReturnAfSendItem = OcBReturnAfSendItem;
-        this.$network
-          .post("/api/cs/oc/oms/v1/saveAfterDeliverItem", data)
+        this.service.orderCenter.saveAfterDeliverItem(data)
+        // this.$network
+        //   .post('/api/cs/oc/oms/v1/saveAfterDeliverItem', data)
           .then((res) => {
             if (res.data.code == 0) {
               self.$Message.success(res.data.message);
@@ -1462,13 +1432,12 @@ export default {
       // 删除明细
       const self = this;
       if (
-        self.$route.query.new ||
-        self.$route.query.cid ||
-        self.$route.query.oid
+        self.$route.query.new
+        || self.$route.query.cid
+        || self.$route.query.oid
       ) {
         // 新增的请求方式
-        if (self.tableConfig.data.length == self.delTableData.length)
-          self.tableConfig.data = [];
+        if (self.tableConfig.data.length == self.delTableData.length) { self.tableConfig.data = []; }
         // 删除明细
         self.delTableData.forEach((item) => {
           if (self.isIn(item.proId, self.tableConfig.data) >= 0) {
@@ -1486,23 +1455,23 @@ export default {
         //   total += item.returnPrice;
         // })
         self.reForm.config.find(
-          (item) => item.item.label == self.vmI18n.t("form_label.refundAmount") //申请退款金额
+          item => item.item.label == self.vmI18n.t('form_label.refundAmount') // 申请退款金额
         ).item.props.value = total;
         // self.reForm.config[12].item.props.value = total;
         self.delTableData = [];
       } else {
         // 编辑状态,删除明细
         if (self.delTableData.length == 0) {
-          self.$Message.warning(self.vmI18n.t("modalTips.j3")); //请选择需要删除的明细!
+          self.$Message.warning(self.vmI18n.t('modalTips.j3')); // 请选择需要删除的明细!
           return;
         }
         if (self.delTableData.length == self.tableConfig.data.length) {
-          self.$Message.warning(self.vmI18n.t("modalTips.j4")); //至少保留一条明细,不允许全部删除
+          self.$Message.warning(self.vmI18n.t('modalTips.j4')); // 至少保留一条明细,不允许全部删除
           return;
         }
         this.$Modal.fcError({
-          title: self.vmI18n.t("modalTitle.deleteDetails"), //删除明细
-          content: self.vmI18n.t("modalTips.j5"), //确定删除所选明细?
+          title: self.vmI18n.t('modalTitle.deleteDetails'), // 删除明细
+          content: self.vmI18n.t('modalTips.j5'), // 确定删除所选明细?
           onOk: () => {
             const data = {};
             const arr = [];
@@ -1511,8 +1480,9 @@ export default {
               arr.push(item.ID);
             });
             data.AfSendItemIds = arr;
-            this.$network
-              .post("/api/cs/oc/oms/v1/deleteAfterDeliverItem", data)
+            this.service.orderCenter.deleteAfterDeliverItem(data)
+            // this.$network
+            //   .post('/api/cs/oc/oms/v1/deleteAfterDeliverItem', data)
               .then((res) => {
                 console.log(res);
                 if (res.data.code == 0) {
@@ -1547,8 +1517,9 @@ export default {
     query() {
       const self = this;
       const query = { ID: self.$route.query.cid || self.$route.query.id };
-      self.$network
-        .post("/api/cs/oc/oms/v1/copyAfterDeliver", query)
+      self.service.orderCenter.copyAfterDeliver(query)
+      // self.$network
+      //   .post('/api/cs/oc/oms/v1/copyAfterDeliver', query)
         .then((res) => {
           console.log(res);
           if (res.data.code == 0) {
@@ -1565,17 +1536,17 @@ export default {
             self.logFormConfig.formValue = {
               OWNERENAME: AfSend.OWNERNAME,
               CREATIONDATE:
-                AfSend.CREATIONDATE &&
-                dateFormat(
+                AfSend.CREATIONDATE
+                && dateFormat(
                   new Date(AfSend.CREATIONDATE),
-                  "yyyy-MM-dd hh:mm:ss"
+                  'yyyy-MM-dd hh:mm:ss'
                 ),
               MODIFIERENAME: AfSend.MODIFIERENAME || AfSend.MODIFIERNAME,
               MODIFIEDDATE:
-                AfSend.MODIFIEDDATE &&
-                dateFormat(
+                AfSend.MODIFIEDDATE
+                && dateFormat(
                   new Date(AfSend.MODIFIEDDATE),
-                  "yyyy-MM-dd hh:mm:ss"
+                  'yyyy-MM-dd hh:mm:ss'
                 ),
             };
             self.$nextTick(() => {
@@ -1597,39 +1568,33 @@ export default {
         const itemLabel = item.item.label;
         // 单据日期 退款分类 退款描述 单据来源
         if (
-          itemLabel !==
-          (self.vmI18n.t("form_label.documentDate") &&
-            self.vmI18n.t("form_label.refundClass") &&
-            self.vmI18n.t("form_label.refundDescription") &&
-            self.vmI18n.t("form_label.sourceDocuments"))
+          itemLabel
+          !== (self.vmI18n.t('form_label.documentDate')
+            && self.vmI18n.t('form_label.refundClass')
+            && self.vmI18n.t('form_label.refundDescription')
+            && self.vmI18n.t('form_label.sourceDocuments'))
         ) {
           item.item.props.value = data[dataConfig[itemLabel]];
           // 退款分类
-        } else if (itemLabel === self.vmI18n.t("form_label.refundClass")) {
-          this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ID =
-            data.OC_B_RETURN_TYPE_ID;
-          this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ENAME =
-            data.OC_B_RETURN_TYPE_ENAME;
-          this.returnTypeFormConfig.formData[0].itemdata.pid =
-            data.OC_B_RETURN_TYPE_ID;
-          this.returnTypeFormConfig.formData[0].itemdata.valuedata =
-            data.OC_B_RETURN_TYPE_ENAME;
+        } else if (itemLabel === self.vmI18n.t('form_label.refundClass')) {
+          this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ID = data.OC_B_RETURN_TYPE_ID;
+          this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ENAME = data.OC_B_RETURN_TYPE_ENAME;
+          this.returnTypeFormConfig.formData[0].itemdata.pid = data.OC_B_RETURN_TYPE_ID;
+          this.returnTypeFormConfig.formData[0].itemdata.valuedata = data.OC_B_RETURN_TYPE_ENAME;
           // 退款描述
         } else if (
-          itemLabel === self.vmI18n.t("form_label.refundDescription")
+          itemLabel === self.vmI18n.t('form_label.refundDescription')
         ) {
           await this.returnTypeChange();
-          this.returnTypeItemConfig.formValue.OC_B_RETURN_TYPE_ITEM_ID =
-            data.OC_B_RETURN_TYPE_ITEM_ID;
+          this.returnTypeItemConfig.formValue.OC_B_RETURN_TYPE_ITEM_ID = data.OC_B_RETURN_TYPE_ITEM_ID;
           // 单据来源
-        } else if (itemLabel === self.vmI18n.t("form_label.sourceDocuments")) {
-          item.item.props.value =
-            data[dataConfig[itemLabel]] == 1 ? "手动" : "自动";
+        } else if (itemLabel === self.vmI18n.t('form_label.sourceDocuments')) {
+          item.item.props.value = data[dataConfig[itemLabel]] == 1 ? '手动' : '自动';
         } else {
           // item.item.props.value = self.$route.query.cid ? 0 : data[dataConfig[itemLabel]]
           item.item.props.value = dateFormat(
             new Date(data[dataConfig[itemLabel]]),
-            "yyyy-MM-dd"
+            'yyyy-MM-dd'
           );
         }
         // switch (item.item.label) {
@@ -1689,7 +1654,7 @@ export default {
         //     break
         // }
       });
-      this.sellerRemarkValueChange("originalOrder", data);
+      this.sellerRemarkValueChange('originalOrder', data);
       self.imageUploadConfig.valuedata = data.IMAGE
         ? JSON.parse(data.IMAGE)
         : [];
@@ -1717,9 +1682,9 @@ export default {
       const self = this;
       data.forEach((item) => {
         item.IS_GIFT = item.GIFT; // 赠品
-        if (item.GIFT == 1) item.GIFT = "系统赠品";
-        else if (item.GIFT == 2) item.GIFT = "平台赠品";
-        else if (item.GIFT == 0) item.GIFT = "否";
+        if (item.GIFT == 1) item.GIFT = '系统赠品';
+        else if (item.GIFT == 2) item.GIFT = '平台赠品';
+        else if (item.GIFT == 0) item.GIFT = '否';
         item.price = item.AMT_ACTUAL; // 成交金额
         item.RETURNABLE_AMOUNT = item.AMT_HAS_RETURN; // 可退金额
         item.returnPrice = item.AMT_RETURN; // 退款金额
@@ -1733,7 +1698,7 @@ export default {
         item.skuSpec = item.PS_C_SPEC_ENAME; // 商品规格
         item.qty = item.PURCHASE_QTY; // 购买数量
         item.BILL_NO = item.RELATION_BILL_NO; // 单据编号
-        item.BILL_TYPE = item.BILL_TYPE == 0 ? "退货单" : "发货单";
+        item.BILL_TYPE = item.BILL_TYPE == 0 ? '退货单' : '发货单';
         if (self.$route.query.cid) {
           // 如果为复制状态订单,修改明细id为原订单id
           item.ID = item.RELATION_BILL_ITEM_ID;
@@ -1743,21 +1708,20 @@ export default {
     async getDownUp() {
       const self = this;
       const formdata = new FormData();
-      formdata.append("table", "OC_B_RETURN_AF_SEND");
-      formdata.append("objid", -1);
+      formdata.append('table', 'OC_B_RETURN_AF_SEND');
+      formdata.append('objid', -1);
       const res = await self.service.common.getObject(formdata);
       console.log(res);
       if (res.data.code == 0) {
         let payType = [];
         let dutyOfficer = [];
-        const childs =
-          res.data.data.addcolums[res.data.data.addcolums.length - 2]
-            .childs || [];
+        const childs = res.data.data.addcolums[res.data.data.addcolums.length - 2]
+          .childs || [];
         childs.forEach((item) => {
-          if (item.name === "判责方") {
+          if (item.name === '判责方') {
             dutyOfficer = item.combobox;
           }
-          if (item.name === "支付方式") {
+          if (item.name === '支付方式') {
             payType = item.combobox;
           }
         });
@@ -1775,12 +1739,12 @@ export default {
         };
         self.reForm.config.forEach((item) => {
           // 支付方式
-          if (item.item.label == self.vmI18n.t("form_label.paymentWay")) {
+          if (item.item.label == self.vmI18n.t('form_label.paymentWay')) {
             item.item.props.options = payType;
           }
           // 判责方
           if (
-            item.item.label == self.vmI18n.t("form_label.responsibleParty")
+            item.item.label == self.vmI18n.t('form_label.responsibleParty')
           ) {
             item.item.props.options = dutyOfficer;
           }
@@ -1792,7 +1756,7 @@ export default {
     // 退款分类联动查询退描述
     returnTypeChange() {
       const params = {
-        table: "OC_B_RETURN_TYPE_ITEM",
+        table: 'OC_B_RETURN_TYPE_ITEM',
         objid: this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ID,
         refcolid: 1700815960,
         searchdata: JSON.stringify({
@@ -1801,8 +1765,9 @@ export default {
           fixedcolumns: {},
         }),
       };
-      this.$network
-        .post(this.$httpApi.order.returnTypeItemquery, params)
+      this.service.orderCenter.objectTableItem(params)
+      // this.$network
+      //   .post(this.$httpApi.order.returnTypeItemquery, params)
         .then((res) => {
           const resData = res.data;
           if (resData.code === 0) {
@@ -1810,14 +1775,14 @@ export default {
             this.returnTypeItemConfig.formData[0].options = [];
             this.$nextTick(() => {
               this.returnTypeItemConfig.formData[0].options = row.map(
-                (item) => ({
+                item => ({
                   label: item.ENAME.val,
                   value: Number(item.ID.val),
                 })
               );
             });
           } else {
-            this.$Message.error(self.vmI18n.t("modalTips.j6")); //退款描述请求失败
+            this.$Message.error(self.vmI18n.t('modalTips.j6')); // 退款描述请求失败
           }
         });
     },
@@ -1827,28 +1792,28 @@ export default {
      * @param { string } type 联动类型(originalOrder: 原始订单；phone: 手机号；payMode: 支付方式；payNo: 支付账号；returnType: 退款分类)
      * @param { string | {} } value
      */
-    sellerRemarkValueChange(type = "", value) {
+    sellerRemarkValueChange(type = '', value) {
       const config = this.reForm.config;
       const index = config.length - 1;
       const sellerRemarkData = this.sellerRemarkData;
       // 判断编辑状态时是否数据渲染初始化完成
       if (!this.createdStatus) return;
-      if (type === "originalOrder") {
+      if (type === 'originalOrder') {
         // 原始订单
         for (const key in sellerRemarkData) {
-          if (key !== "PAY_MODE") sellerRemarkData[key] = value[key] || "xxxxx";
+          if (key !== 'PAY_MODE') sellerRemarkData[key] = value[key] || 'xxxxx';
           else sellerRemarkData[key] = this.payTypeName(value.payType);
         }
-      } else if (type === "phone") {
+      } else if (type === 'phone') {
         // 买家手机号
-        sellerRemarkData.VIP_PHONE = value || "xxxxx";
-      } else if (type === "payMode") {
+        sellerRemarkData.VIP_PHONE = value || 'xxxxx';
+      } else if (type === 'payMode') {
         // 支付方式
         sellerRemarkData.PAY_MODE = this.payTypeName(value);
-      } else if (type === "payNo") {
+      } else if (type === 'payNo') {
         // 支付账号
-        sellerRemarkData.BUYER_ALIPAY_NO = value || "xxxxx";
-      } else if (type === "returnType") {
+        sellerRemarkData.BUYER_ALIPAY_NO = value || 'xxxxx';
+      } else if (type === 'returnType') {
         // 退款分类
         sellerRemarkData.OC_B_RETURN_TYPE_ENAME = value;
       }
@@ -1856,25 +1821,25 @@ export default {
       this.sellerRemarkCompensation();
       this.reForm.config[index].item.props.value = `${
         sellerRemarkData.USER_NICK
-      }-${sellerRemarkData.VIP_PHONE}${self.vmI18n.t("modalTips.j7")}${
+      }-${sellerRemarkData.VIP_PHONE}${self.vmI18n.t('modalTips.j7')}${
         sellerRemarkData.SOURCE_CODE
-      }${self.vmI18n.t("modalTips.j8")}${
+      }${self.vmI18n.t('modalTips.j8')}${
         sellerRemarkData.OC_B_RETURN_TYPE_ENAME
-      }${self.vmI18n.t("modalTips.j9")}${
+      }${self.vmI18n.t('modalTips.j9')}${
         sellerRemarkData.AMT_RETURN_APPLY || 0
-      }${self.vmI18n.t("modalTips.k0")}${sellerRemarkData.PAY_MODE}${
+      }${self.vmI18n.t('modalTips.k0')}${sellerRemarkData.PAY_MODE}${
         sellerRemarkData.BUYER_ALIPAY_NO
-      }${self.vmI18n.t("modalTips.k1")}`;
+      }${self.vmI18n.t('modalTips.k1')}`;
       // 亲，您好！您的订单号
       // 因为
       // 原因，给您申请
-      //中，请您注意查收！感谢您的惠顾，欢迎下次光临，祝您生活愉快！
+      // 中，请您注意查收！感谢您的惠顾，欢迎下次光临，祝您生活愉快！
     },
     // 获取支付方式名称
     payTypeName(value) {
       const item = this.selectOptions.payType.find(
-        (item) => item.value === value
-      ) || { label: "xxxxx" };
+        item => item.value === value
+      ) || { label: 'xxxxx' };
       return item.label;
     },
     // 卖家备注数据补偿（编辑状态下，第一次编写时触发）
@@ -1885,30 +1850,29 @@ export default {
       if (!this.sellerRemarkDataCreated) {
         config.forEach((configItem) => {
           const item = configItem.item;
-          const itemValue = item.props.value || "xxxxx";
+          const itemValue = item.props.value || 'xxxxx';
           switch (item.label) {
-            case "买家昵称":
+            case '买家昵称':
               sellerRemarkData.USER_NICK = itemValue;
               break;
-            case "买家手机号":
+            case '买家手机号':
               sellerRemarkData.VIP_PHONE = itemValue;
               break;
-            case "原始平台单号":
+            case '原始平台单号':
               sellerRemarkData.SOURCE_CODE = itemValue;
               break;
-            case "申请退款金额":
+            case '申请退款金额':
               sellerRemarkData.AMT_RETURN_APPLY = itemValue;
               break;
-            case "支付方式":
+            case '支付方式':
               sellerRemarkData.PAY_MODE = this.payTypeName(itemValue);
               break;
-            case "支付账号":
+            case '支付账号':
               sellerRemarkData.BUYER_ALIPAY_NO = itemValue;
               break;
           }
         });
-        sellerRemarkData.OC_B_RETURN_TYPE_ENAME =
-          this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ENAME || "xxxxx";
+        sellerRemarkData.OC_B_RETURN_TYPE_ENAME = this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ENAME || 'xxxxx';
         this.sellerRemarkDataCreated = true;
       }
     },
@@ -1931,19 +1895,19 @@ export default {
       this.sellerRemarkCompensation();
       this.reForm.config[index].item.props.value = `${
         sellerRemarkData.USER_NICK
-      }-${sellerRemarkData.VIP_PHONE}${self.vmI18n.t("modalTips.j7")}${
+      }-${sellerRemarkData.VIP_PHONE}${self.vmI18n.t('modalTips.j7')}${
         sellerRemarkData.SOURCE_CODE
-      }${self.vmI18n.t("modalTips.j8")}${
+      }${self.vmI18n.t('modalTips.j8')}${
         sellerRemarkData.OC_B_RETURN_TYPE_ENAME
-      }${self.vmI18n.t("modalTips.j9")}${
+      }${self.vmI18n.t('modalTips.j9')}${
         sellerRemarkData.AMT_RETURN_APPLY || 0
-      }${self.vmI18n.t("modalTips.k0")}${sellerRemarkData.PAY_MODE}${
+      }${self.vmI18n.t('modalTips.k0')}${sellerRemarkData.PAY_MODE}${
         sellerRemarkData.BUYER_ALIPAY_NO
-      }${self.vmI18n.t("modalTips.k1")}`;
+      }${self.vmI18n.t('modalTips.k1')}`;
       // 亲，您好！您的订单号
       // 因为
       // 原因，给您申请
-      //中，请您注意查收！感谢您的惠顾，欢迎下次光临，祝您生活愉快！
+      // 中，请您注意查收！感谢您的惠顾，欢迎下次光临，祝您生活愉快！
     },
   },
 };
