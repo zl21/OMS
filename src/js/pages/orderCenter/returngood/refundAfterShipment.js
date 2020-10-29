@@ -815,6 +815,9 @@ export default {
       },
     };
   },
+  created() {
+    this.vmI18n = vmI18n;
+  },
   mounted() {
     if (this.$route.query.id && !this.$route.query.new) {
       this.reForm.config.splice(14, 0, {

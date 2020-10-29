@@ -1,6 +1,9 @@
 <template>
   <!-- 发货后退款 -->
-  <div id="cbx" class="refundAfterShipment">
+  <div
+    id="cbx"
+    class="refundAfterShipment"
+  >
     <div class="re_button">
       <reButton :btn-config="btnConfig" />
     </div>
@@ -9,7 +12,10 @@
         <Panel name="1">
           <!-- 基础资料 -->
           {{ vmI18n.t("panel_label.basicData") }}
-          <p slot="content" class="basic-message">
+          <p
+            slot="content"
+            class="basic-message"
+          >
             <ImageUpload
               :dataitem="imageUploadConfig"
               @deleteImg="deleteImg"
@@ -21,32 +27,47 @@
               :defaultconfig="reForm.config"
               class="basic-message-form"
             >
-              <div slot="CBX" class="cbx">
+              <div
+                slot="CBX"
+                class="cbx"
+              >
                 <i style="color: #ff9900; padding: 0 6px">*</i>
                 <!-- 退款类型 -->
                 {{ vmI18n.t("panel_label.refundType") }}
                 :&nbsp;&nbsp;&nbsp;&nbsp;
-                <RadioGroup v-model="BILL_TYPE" @on-change="billTypeChange">
+                <RadioGroup
+                  v-model="BILL_TYPE"
+                  @on-change="billTypeChange"
+                >
                   <!-- 仅退款 -->
                   <Radio label="1">
-                    {{ vmI18n.t("panel_label.refundOnly") }}</Radio
-                  >
+                    {{ vmI18n.t("panel_label.refundOnly") }}
+                  </Radio>
                   <!-- 退货退款 -->
                   <Radio label="0">
-                    {{ vmI18n.t("panel_label.returnRefund") }}</Radio
-                  >
+                    {{ vmI18n.t("panel_label.returnRefund") }}
+                  </Radio>
                 </RadioGroup>
               </div>
-              <div slot="returnType" class="returnType">
+              <div
+                slot="returnType"
+                class="returnType"
+              >
                 <reForm :form-config="returnTypeFormConfig" />
               </div>
-              <div slot="returnTypeItem" class="returnType">
+              <div
+                slot="returnTypeItem"
+                class="returnType"
+              >
                 <reForm :form-config="returnTypeItemConfig" />
               </div>
             </FormLayout>
           </p>
         </Panel>
-        <Panel v-if="!$route.query.new" name="2">
+        <Panel
+          v-if="!$route.query.new"
+          name="2"
+        >
           <!-- 日志 -->
           {{ vmI18n.t("panel_label.log") }}
           <div slot="content">
@@ -57,12 +78,18 @@
     </div>
     <div class="page-footer">
       <div class="page-footer-navTab">
-        <p :class="navStatus === 0 ? 'action' : ''" @click="navStatus = 0">
+        <p
+          :class="navStatus === 0 ? 'action' : ''"
+          @click="navStatus = 0"
+        >
           <!-- 退款单详情 -->
           {{ vmI18n.t("panel_label.refundSlipDetails") }}
         </p>
       </div>
-      <div v-show="navStatus === 0" class="re_table">
+      <div
+        v-show="navStatus === 0"
+        class="re_table"
+      >
         <reTable
           :jordan-table-config="tableConfig"
           @on-page-change="tabllePageChange"
@@ -115,7 +142,11 @@
           @on-select-cancel="onSelect"
         />
       </Modal>
-      <Modal v-model="isModal" :title="提示" @on-ok="deleteImgBySure">
+      <Modal
+        v-model="isModal"
+        title="提示"
+        @on-ok="deleteImgBySure"
+      >
         <!-- 点击后将删除凭证,是否继续? -->
         <p>{{ vmI18n.t("modalTips.z5") }}</p>
       </Modal>
@@ -123,7 +154,8 @@
   </div>
 </template>
 <script>
-  import orderItem from "@/js/pages/orderCenter/returngood/orderItem";
+  import orderItem from '@/js/pages/orderCenter/returngood/refundAfterShipment.js';
+
   export default orderItem;
 </script>
 
