@@ -17,6 +17,7 @@ export default {
   props: {},
   data() {
     return {
+      vmI18n: window.vmI18n,
       pickorderBtnConfig: {
         typeAll: "error", //按钮统一风格样式
         btnsite: "right", //按钮位置 (right , center , left)
@@ -175,7 +176,7 @@ export default {
           },
           {
             style: "input",
-            label: form_label.t("other.pickingOrder_no"),//拣货单号
+            label: vmI18n.t("other.pickingOrder_no"),//拣货单号
             value: "PICK_NO",
             width: "24",
           },

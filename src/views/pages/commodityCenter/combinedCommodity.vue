@@ -5,7 +5,7 @@
       <div class="btn-operate">
         <businessButton :btnConfig="btnConfig"></businessButton>
       </div>
-      <businessStatusFlag :statusName="statusName"></businessStatusFlag>
+      <!-- <businessStatusFlag :statusName="statusName"></businessStatusFlag> -->
       <div class="item-collapse">
         <Collapse v-model="value1">
           <Panel name="1">
@@ -80,7 +80,7 @@
           <div class="btn-operate">
             <businessButton :btnConfig="btnConfig"></businessButton>
           </div>
-          <businessStatusFlag :statusName="statusName"></businessStatusFlag>
+          <!-- <businessStatusFlag :statusName="statusName"></businessStatusFlag> -->
           <div class="item-collapse">
             <Collapse v-model="value1">
               <Panel name="1">
@@ -1445,18 +1445,18 @@ export default {
             // text: "返回",
             text: vmI18n.t("btn.back"), //按钮文本
             btnclick: () => {
-              this.$store.commit("customize/TabHref", {
-                id: 24525,
-                type: "table",
-                name: "PS_C_PRO_GROUP",
+              this.$store.commit("global/tabOpen", {
+                tableId: 24525,
+                type: "S",
+                tableName: "PS_C_PRO_GROUP",
                 // label: "组合商品档案",
                 label: vmI18n.t("panel_label.combinedCommodity"),
 
-                query: Object.assign({
+                /* query: Object.assign({
                   id: 24525,
                   // tabTitle: "组合商品档案",
                   tabTitle: vmI18n.t("panel_label.combinedCommodity"),
-                }),
+                }), */
               });
             },
           },
@@ -1536,18 +1536,18 @@ export default {
             // text: "返回",
             text: vmI18n.t("btn.back"), //按钮文本
             btnclick: () => {
-              this.$store.commit("customize/TabHref", {
+              this.$store.commit("global/tabOpen", {
                 back: true,
-                id: 24525,
-                type: "table",
-                name: "PS_C_PRO_GROUP",
+                tableId: 24525,
+                type: "S",
+                tableName: "PS_C_PRO_GROUP",
                 // label: "组合商品档案",
                 label: vmI18n.t("panel_label.combinedCommodity"),
-                query: Object.assign({
+                /* query: Object.assign({
                   id: 24525,
                   // tabTitle: "组合商品档案",
                   tabTitle: vmI18n.t("panel_label.combinedCommodity"),
-                }),
+                }), */
               });
             },
           },
@@ -2677,7 +2677,10 @@ export default {
     },
   },
   created() {
-    this.objid = this.$route.query.id; //根据objid判断页面是新增页面还是编辑页面
+    let mark = [...this.$route.path.split("/")].pop();
+    // this.objid = this.$route.query.id; //根据objid判断页面是新增页面还是编辑页面
+    if (mark === "New") this.objid = '-1';
+    console.log(this.objid);
     this.pageconfigData(this.objid);
     this.IniData(); //初始化数据
   },
@@ -2691,6 +2694,15 @@ export default {
 .jq-combined-commodity {
   .btn-operate {
     padding: 8px 0 0 0;
+  }
+  /deep/ .ark-form .ark-form-item-label {
+    padding: 10px 12px 7px 0;
+  }
+  .item-input .table-input[data-v-6c3e82ea] {
+    margin: 0;
+  }
+  /deep/ .el-input__inner{
+    border: none;
   }
   .submit-img {
     //no-active

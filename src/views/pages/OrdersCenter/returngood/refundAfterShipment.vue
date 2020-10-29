@@ -137,6 +137,7 @@ export default {
   },
   data() {
     return {
+      vmI18n: window.vmI18n,
       IMAGE: "", // 图片
       imgIndex: 0, // 当前操作图片位置
       isModal: false,
