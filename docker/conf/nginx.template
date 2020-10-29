@@ -90,25 +90,6 @@ location ~* .*/api/rpt/ {
     proxy_next_upstream error timeout invalid_header http_500 http_503 http_404;
     proxy_max_temp_file_size 128m;
 }
-location ^~ /jflow/ {
-    proxy_pass ${JFLOW_HOST_URL}$request_uri;
-    proxy_redirect off ;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header REMOTE-HOST $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    client_max_body_size 50m;
-    client_body_buffer_size 256k;
-    proxy_connect_timeout 1;
-    proxy_send_timeout 30;
-    proxy_read_timeout 1800;
-    send_timeout 30s;
-    proxy_buffer_size 256k;
-    proxy_buffers 4 256k;
-    proxy_busy_buffers_size 256k;
-    proxy_temp_file_write_size 256k;
-    proxy_next_upstream error timeout invalid_header http_500 http_503 http_404;
-    proxy_max_temp_file_size 128m;
-}
 location ^~ /mall/ {
 	proxy_pass http://172.16.8.32:10003/;
 	proxy_redirect off ;
@@ -128,62 +109,5 @@ location ^~ /mall/ {
 	proxy_next_upstream error timeout invalid_header http_500 http_503 http_404;
 	proxy_max_temp_file_size 128m;
 
-}
-location ~* .*/r3/cs/uc/ {
-    proxy_pass ${UC_HOST_URL}$request_uri;
-    proxy_redirect off ;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header REMOTE-HOST $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    client_max_body_size 50m;
-    client_body_buffer_size 256k;
-    proxy_connect_timeout 1;
-    proxy_send_timeout 30;
-    proxy_read_timeout 1800;
-    send_timeout 30s;
-    proxy_buffer_size 256k;
-    proxy_buffers 4 256k;
-    proxy_busy_buffers_size 256k;
-    proxy_temp_file_write_size 256k;
-    proxy_next_upstream error timeout invalid_header http_500 http_503 http_404;
-    proxy_max_temp_file_size 128m;
-}
-location ~* .*/r3/cabben/pt/ {
-    proxy_pass ${PS_HOST_URL}$request_uri;
-    proxy_redirect off ;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header REMOTE-HOST $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    client_max_body_size 50m;
-    client_body_buffer_size 256k;
-    proxy_connect_timeout 1;
-    proxy_send_timeout 30;
-    proxy_read_timeout 1800;
-    send_timeout 30s;
-    proxy_buffer_size 256k;
-    proxy_buffers 4 256k;
-    proxy_busy_buffers_size 256k;
-    proxy_temp_file_write_size 256k;
-    proxy_next_upstream error timeout invalid_header http_500 http_503 http_404;
-    proxy_max_temp_file_size 128m;
-}
-location ~* .*/r3/cs/scrm {
-    proxy_pass ${SCRM_HOST_URL}$request_uri;
-    proxy_redirect off ;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header REMOTE-HOST $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    client_max_body_size 50m;
-    client_body_buffer_size 256k;
-    proxy_connect_timeout 1;
-    proxy_send_timeout 30;
-    proxy_read_timeout 1800;
-    send_timeout 30s;
-    proxy_buffer_size 256k;
-    proxy_buffers 4 256k;
-    proxy_busy_buffers_size 256k;
-    proxy_temp_file_write_size 256k;
-    proxy_next_upstream error timeout invalid_header http_500 http_503 http_404;
-    proxy_max_temp_file_size 128m;
 }
 }
