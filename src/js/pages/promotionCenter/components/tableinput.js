@@ -2041,6 +2041,7 @@ import axios from 'axios';
       },
       async getSelectData(query) {
         const self = this;
+        const params = new FormData();
         const item = self.SelectionData.item;
         self.SelectionData.row = [];
         const searchdata = {
@@ -2055,9 +2056,8 @@ import axios from 'axios';
           // searchdata.fixedcolumns = self.selectConfigChanged
           searchdata.fixedcolumns = query;
         }
-        const res = await this.service.common.QueryList({params: {
-            searchdata
-          }});
+        params.append('searchdata', JSON.stringify(searchdata));
+        const res = await this.service.common.QueryList(params);
         if (res.data.code === 0) {
           self.SelectionData.row = res.data.datas.row;
           self.SelectionData.thead = res.data.datas.tabth;
