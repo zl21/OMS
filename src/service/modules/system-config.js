@@ -19,5 +19,26 @@ export default {
   getTableQuery: (params) => network.post('/p/cs/getTableQuery', params),
   // /p/cs/usertreequery
   usertreequery: (params) => network.post('/p/cs/usertreequery', params),
-
+  /**
+   * 角色
+   */
+  // 权限查询接口
+  selectPermissionColumn:(params) => network.post('/p/cs/permission/v1/selectPermissionColumn', params),
+  /**
+   * 用户档案
+   * */
+  
+ /**
+  * quanxian
+  */
+  // 获取搜索框
+  selectPermissionColumn:(params) => network.post('/p/cs/permission/v1/selectPermissionColumn', params),
+  // 获取表格 /p/cs/cgroupcolumnquery    /p/cs/permission/v1/selectDataPermission
+  selectDataPermission:(url,params) => network.post(url, params),
+  // 保存 /p/cs/objectSave /p/cs/permission/v1/saveDataPermission
+  objectSave:(url,params) => network.post(url, params),
+  // 复制权限 /p/cs/copyShopPermission
+  copyShopPermission:(params) => network.post('/p/cs/copyShopPermission', params),
+  
 }
+
