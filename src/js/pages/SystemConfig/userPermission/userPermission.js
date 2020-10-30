@@ -226,24 +226,35 @@ export default {
     tree,
   },
   methods: {
-    getPermission(item) {
+   async getPermission(item) {
       if (item === undefined) return (this.rightListBody = []);
       this.rightLoading = true;
-      axios({
-        url: this.activeName,
-        method: "post",
-        data: {
-          param: JSON.stringify({
-            CP_C_HRUSERS_ID: item.ID, //用户item.ID
-          }),
-        },
-      }).then((res) => {
-        let data = res.data;
-        this.rightLoading = false;
-        if (data.code === 0) {
-          this.rightListBody = data.data;
-        }
-      });
+      // 接口
+      const formData = new FormData();
+      formData.append("param", JSON.stringify({
+        CP_C_HRUSERS_ID: item.ID, //用户item.ID
+      }));
+      const {data:{data,code}} = await this.service.systemConfig.chrstoregroupquery(this.activeName,formData);
+      console.log(data,code);
+      this.rightLoading = false;
+      if (code === 0 && data) {
+        this.rightListBody = data.data;
+      }
+      // axios({
+      //   url: this.activeName,
+      //   method: "post",
+      //   data: {
+      //     param: JSON.stringify({
+      //       CP_C_HRUSERS_ID: item.ID, //用户item.ID
+      //     }),
+      //   },
+      // }).then((res) => {
+      //   let data = res.data;
+      //   this.rightLoading = false;
+      //   if (data.code === 0) {
+      //     this.rightListBody = data.data;
+      //   }
+      // });
     }, //获取最右边的数据
     activeUser(item) {
       this.currentItem = item;
@@ -274,23 +285,31 @@ export default {
         }
       }
     }, //懒加载数据
-    getUserHeadData() {
-      axios({
-        url: "/p/cs/getTableQuery",
-        method: "post",
-        data: {
-          table: "CP_C_HRUSERS",
-          getcmd: "y",
-        },
-      }).then((res) => {
-        let data = res.data;
-        if (data.code === 0) {
-          data.datas["dataarry"].forEach((obj, index) => {
-            if (index > 1) return;
-            this.middleList.header.push(obj);
-          });
-        }
-      });
+    async getUserHeadData() {
+      const formData = new FormData();
+      formData.append("table",'CP_C_HRUSERS');
+      formData.append("getcmd",'y');
+      console.log(formData);
+      const {data:{code,datas,tabcmd}} = await this.service.systemConfig.getTableQuery(formData);
+      if (code === 0) {
+        datas["dataarry"].forEach((obj, index) => {
+          if (index > 1) return;
+          this.middleList.header.push(obj);
+        });
+      }
+      // axios({
+      //   url: "/p/cs/getTableQuery",
+      //   method: "post",
+      //   data:params,
+      // }).then((res) => {
+      //   let data = res.data;
+      //   if (data.code === 0) {
+      //     data.datas["dataarry"].forEach((obj, index) => {
+      //       if (index > 1) return;
+      //       this.middleList.header.push(obj);
+      //     });
+      //   }
+      // });
     }, //获取用户头部数据
     getUserBodyData() {
       this.dataLoading = true;
@@ -312,30 +331,39 @@ export default {
         }
       });
     }, //获取用户头部数据
-    getTableWay(bo) {
+    async etTableWay(bo) {
       let self = this;
       let num = 0;
       let sendObj = {}; //存储传给table的对象
-
-      this.$ajax.dataAjax("/p/cs/userstreeload", {}, function (res) {
-        res = JSON.parse(JSON.stringify(res));
-        if (res.code === 0) {
-          // 储存原始数据以便后续模糊查询使用
-          self.ztreeDataSource = JSON.parse(JSON.stringify(res.data));
-          //储存渲染树的数据
-          self.treeData = res.data;
-        }
-        if (res.code == -1) {
-          self.errorMessage({
-            action: "confirm",
-            title: "警告",
-            type: "error",
-            list: [],
-            isAction: true,
-            desc: res.message,
-          });
-        }
-      });
+      const {data:{data,code}} = await this.service.systemConfig.userstreeload();
+      console.log(data,code);
+      if (code === 0) {
+        // 储存原始数据以便后续模糊查询使用
+        self.ztreeDataSource = JSON.parse(JSON.stringify(res.data));
+        //储存渲染树的数据
+        self.treeData = res.data;
+      }else{
+        this.$message.warning(message)
+      }
+      // this.$ajax.dataAjax("/p/cs/userstreeload", {}, function (res) {
+      //   res = JSON.parse(JSON.stringify(res));
+      //   if (res.code === 0) {
+      //     // 储存原始数据以便后续模糊查询使用
+      //     self.ztreeDataSource = JSON.parse(JSON.stringify(res.data));
+      //     //储存渲染树的数据
+      //     self.treeData = res.data;
+      //   }
+      //   if (res.code == -1) {
+      //     self.errorMessage({
+      //       action: "confirm",
+      //       title: "警告",
+      //       type: "error",
+      //       list: [],
+      //       isAction: true,
+      //       desc: res.message,
+      //     });
+      //   }
+      // });
     }, //表格返回时的状态
     async getItemData(val) {
       this.obj = {
@@ -359,43 +387,67 @@ export default {
           this.obj["reffixedcolumns"].CP_C_STORE_ID = ["=" + valID];
         }
         if (val.TYPE === "CP_C_HRORG_ID") {
-          await axios({
-            url: "/p/cs/usertreequery",
-            method: "post",
-            data: {
-              CP_C_HRORG_ID: valID,
-            },
-          }).then((res) => {
-            let data = res.data;
-            if (data.code === 0) {
-              let HRORG = "in ("; //储存键名为CP_C_HRORG_ID对象的ID
-              let STORE = "in ("; //储存键名为CP_C_STORE_ID对象的ID
-              data.CP_C_HRORG_ID.forEach((item) => {
-                HRORG += item.ID + ","; // in 1,2,3,5,6,87,8,6
-              });
-              data.CP_C_STORE_ID.forEach((item) => {
-                STORE += item.ID + ",";
-              });
-              if (data.CP_C_HRORG_ID.length > 0) {
-                this.obj["reffixedcolumns"].CP_C_HRORG_ID =
-                  HRORG.substring(0, HRORG.length - 1) + ")";
-              }
-              if (data.CP_C_STORE_ID.length > 0) {
-                this.obj["reffixedcolumns"].CP_C_STORE_ID =
-                  STORE.substring(0, STORE.length - 1) + ")";
-              }
+          // 接口
+          const formData = new FormData(); 
+          formData.append('CP_C_HRORG_ID','valID')
+          const {data:{message,code,CP_C_HRORG_ID,CP_C_STORE_ID}} = await this.service.systemConfig.usertreequery(formData);
+          if (code === 0) {
+            let HRORG = "in ("; //储存键名为CP_C_HRORG_ID对象的ID
+            let STORE = "in ("; //储存键名为CP_C_STORE_ID对象的ID
+            CP_C_HRORG_ID.forEach((item) => {
+              HRORG += item.ID + ","; // in 1,2,3,5,6,87,8,6
+            });
+            CP_C_STORE_ID.forEach((item) => {
+              STORE += item.ID + ",";
+            });
+            if (CP_C_HRORG_ID.length > 0) {
+              this.obj["reffixedcolumns"].CP_C_HRORG_ID =
+                HRORG.substring(0, HRORG.length - 1) + ")";
             }
-            if (data.code == -1) {
-              self.errorMessage({
-                action: "confirm",
-                title: "警告",
-                type: "error",
-                list: [],
-                isAction: true,
-                desc: res.message,
-              });
+            if (CP_C_STORE_ID.length > 0) {
+              this.obj["reffixedcolumns"].CP_C_STORE_ID =
+                STORE.substring(0, STORE.length - 1) + ")";
             }
-          });
+          }else{
+            this.$message.error(message)
+          }
+          // await axios({
+          //   url: "/p/cs/usertreequery",
+          //   method: "post",
+          //   data: {
+          //     CP_C_HRORG_ID: valID,
+          //   },
+          // }).then((res) => {
+          //   let data = res.data;
+          //   if (data.code === 0) {
+          //     let HRORG = "in ("; //储存键名为CP_C_HRORG_ID对象的ID
+          //     let STORE = "in ("; //储存键名为CP_C_STORE_ID对象的ID
+          //     data.CP_C_HRORG_ID.forEach((item) => {
+          //       HRORG += item.ID + ","; // in 1,2,3,5,6,87,8,6
+          //     });
+          //     data.CP_C_STORE_ID.forEach((item) => {
+          //       STORE += item.ID + ",";
+          //     });
+          //     if (data.CP_C_HRORG_ID.length > 0) {
+          //       this.obj["reffixedcolumns"].CP_C_HRORG_ID =
+          //         HRORG.substring(0, HRORG.length - 1) + ")";
+          //     }
+          //     if (data.CP_C_STORE_ID.length > 0) {
+          //       this.obj["reffixedcolumns"].CP_C_STORE_ID =
+          //         STORE.substring(0, STORE.length - 1) + ")";
+          //     }
+          //   }
+          //   if (data.code == -1) {
+          //     self.errorMessage({
+          //       action: "confirm",
+          //       title: "警告",
+          //       type: "error",
+          //       list: [],
+          //       isAction: true,
+          //       desc: res.message,
+          //     });
+          //   }
+          // });
         }
       }
       this.getUserBodyData().then(() => {

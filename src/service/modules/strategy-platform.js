@@ -1,5 +1,4 @@
 // 策略平台
-// 营销中心(促销中心)
 import R3 from '@syman/burgeon-r3';
 const {network} = R3;
 export default {
