@@ -2,8 +2,6 @@ const path = require("path");
 const { VueLoaderPlugin } = require("vue-loader");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -137,7 +135,6 @@ module.exports = env => ({
     new MiniCssExtractPlugin({
       filename: "r3.css"
     }),
-    new BundleAnalyzerPlugin(),
     new CleanWebpackPlugin([env && env.production ? "dist" : "devDist"]),
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
@@ -155,12 +152,7 @@ module.exports = env => ({
         from: path.resolve(__dirname, "./static"),
         to: "static",
         ignore: [".*"]
-      },
-      {
-        from: path.resolve(__dirname, "./node_modules/@burgeon/oms-theme/*"),
-        to: "./node_modules/@burgeon/oms-theme/",
-        // ignore: [".*"]
-      },      
+      }     
     ]),
 
     new webpack.ProvidePlugin({
