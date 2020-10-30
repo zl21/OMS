@@ -2,11 +2,9 @@ import R3 from '@syman/burgeon-r3';
 import service from '@/service/index';
 
 export const fkQueryList = function fkQueryList(params) {
-  service.common.QueryList(R3.urlSearchParams({
-    searchdata: params.searchObject
-  }), {
-    serviceId: params.serviceId
-  }).then((res) => {
+  let query = new FormData();
+  query.append('searchdata',JSON.stringify(params.searchObject));
+  service.common.QueryList(query).then((res) => {
     if (typeof params.success === 'function') {
       params.success(res);
     }

@@ -939,17 +939,16 @@ export default {
               : this.tablename
         }_ID`
       ] = this.objid; //主表ID
-      const query = {
-        searchdata: JSON.stringify({
-          table: port[this.tablename].virtualName, //虚表表名
-          column_include_uicontroller: true,
-          startindex: (this.currentPage - 1) * this.pageSize, //起始下标
-          range: this.pageSize, //每页个数
-          fixedcolumns: fixedcolumns,
-          multiple: [],
-          orderby: this.orderby //按什么排序
-        })
-      };
+      let query = new FormData();
+      query.append('searchdata',JSON.stringify({
+        table: port[this.tablename].virtualName, //虚表表名
+        column_include_uicontroller: true,
+        startindex: (this.currentPage - 1) * this.pageSize, //起始下标
+        range: this.pageSize, //每页个数
+        fixedcolumns: fixedcolumns,
+        multiple: [],
+        orderby: this.orderby //按什么排序
+      }));
       return this.service.common.QueryList(query).then(res => {
         let data = res.data;
         if (data.code === 0) {

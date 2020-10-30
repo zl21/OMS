@@ -268,9 +268,9 @@ export default {
         event.target.scrollTop !== 0
       ) {
         this.dataLoading = true;
-        const res = await this.service.common.QueryList({
-          searchdata: JSON.stringify(this.obj),
-        });
+        let query = new FormData();
+        query.append('searchdata', JSON.stringify(this.obj));
+        const res = await this.service.common.QueryList(query);
         let data = res.data;
         if (data.code === 0) {
           let arr = data.datas.row.map((obj) => {
@@ -313,9 +313,9 @@ export default {
     }, //获取用户头部数据
     getUserBodyData() {
       this.dataLoading = true;
-      return this.service.common.QueryList({
-        searchdata: JSON.stringify(this.obj),
-      }).then((res) => {
+      let query = new FormData();
+      query.append('searchdata', JSON.stringify(this.obj));
+      return this.service.common.QueryList(query).then((res) => {
         let data = res.data;
         if (data.code === 0) {
           this.$refs["middleware_table"].scrollTop = 0; //初始scrollTop

@@ -57,7 +57,7 @@ export const jurisdictionConfig = {
                     startindex: 0,
                     range: 10
                   };
-                  const param = new URLSearchParams();
+                  const param = new FormData();
                   param.append('searchdata', JSON.stringify(searchdata));
                   const res = await this.service.common.QueryList(param);
                   if (res.data.code === 0) {
