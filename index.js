@@ -10,6 +10,8 @@ import projectRouterConfig from './src/config/router.config';
 import customizedPageConfig from './src/config/customized.page.config';
 import customizedModalConfig from './src/config/customized.modal.config';
 import apiPath from '@/assets/js/api/path/index.js'
+import '@burgeon/oms-theme/skin/skyBlue/index.min.css'; // 蓝色主题文件
+import '@burgeon/oms-theme/skin/coralRed/index.min.css'; // 桔色主题文件
 import '@burgeon/oms-theme/theme/custom.less'; // 主题文件
 import customizedTheme from './src/config/customized.theme.js';//主题配置
 import externalTreeDatasConfig from './src/config/externalTreeDatas.config'; // 树结构配置
@@ -46,10 +48,13 @@ Vue.prototype.request = request;
 Vue.prototype.httpForm = httpFormdata;
 Vue.prototype.$httpApi = apiPath
 Vue.prototype.$store = store;
+
 window.R3 = R3; // 暴露R3为全局变量
 window.vmI18n = i18n; // 挂载国际化
 Vue.prototype.$theme = customizedTheme;//将主题方法挂载到原型上
 
+
+// window.skin=omsSkin;
 // 设置主题调用方法
 customizedTheme.appendLink('skyBlue')
 
