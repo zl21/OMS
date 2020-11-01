@@ -10,15 +10,14 @@ import projectRouterConfig from './src/config/router.config';
 import customizedPageConfig from './src/config/customized.page.config';
 import customizedModalConfig from './src/config/customized.modal.config';
 import apiPath from '@/assets/js/api/path/index.js'
-import '@burgeon/oms-theme/skin/skyBlue/index.min.css'; // 蓝色主题文件
-import '@burgeon/oms-theme/skin/coralRed/index.min.css'; // 桔色主题文件
+
+const projectConfig = require("./project.config");  //-------------引入框架项目配置文件;
+const customizedTheme = require(`@burgeon/oms-theme/skin/${projectConfig.omsTheme}/index.min.css`);//----------动态加载主题库皮肤包;
 import '@burgeon/oms-theme/theme/custom.less'; // 主题文件
-import customizedTheme from './src/config/customized.theme.js';//主题配置
+
 import externalTreeDatasConfig from './src/config/externalTreeDatas.config'; // 树结构配置
 import i18n from '@burgeon/internationalization/i18n/i18n.js'; // 国际化
-// import './static/theme/custom.less'; // 主题文件
-// import './static/theme/theme.less'; // 自定义主题文件
-// import '@syman/ark-ui/dist/styles/ark-ui.css';
+
 import '@syman/burgeon-r3/r3.publish/r3.min.css';
 
 // 老框架引入的 自定义界面内需要的css资源
@@ -56,7 +55,7 @@ Vue.prototype.$theme = customizedTheme;//将主题方法挂载到原型上
 
 // window.skin=omsSkin;
 // 设置主题调用方法
-customizedTheme.appendLink('skyBlue')
+// customizedTheme.appendLink('skyBlue')
 
 // 老框架引入的 自定义界面内需要的资源
 R3.launchApplication({
