@@ -1,6 +1,9 @@
 <template>
   <div class="order-add">
-    <div v-show="isShowFromLoading" class="order_add_loading">
+    <div
+      v-show="isShowFromLoading" 
+      class="order_add_loading"
+    >
       <Spin />
     </div>
     <div class="orderButtons">
@@ -11,7 +14,10 @@
         <!-- 基本信息 -->
         {{ vmI18n.t("common.baseInformation") }}
         <p slot="content">
-          <businessForm :form-config="formConfig" @keyDown="keyDown" />
+          <businessForm
+            :form-config="formConfig"
+            @keyDown="keyDown"
+          />
         </p>
       </Panel>
       <Panel name="2">
@@ -68,8 +74,9 @@
   </div>
 </template>
 <script>
-import orderManageAdd from "@/js/pages/orderCenter/orderManageAdd/orderManageAdd";
-export default orderManageAdd;
+  import orderManageAdd from '@/js/pages/orderCenter/orderManageAdd/orderManageAdd';
+
+  export default orderManageAdd;
 </script>
 
 <style lang="less">

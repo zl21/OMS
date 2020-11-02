@@ -328,7 +328,6 @@ export default {
         formData: [],
         flodClick: () => {
           setTimeout(() => {
-            this.setTableHeight();
           }, 10);
         },
       }, // form表单
@@ -593,7 +592,6 @@ export default {
     } else {
       this.getList();
     }
-    // this.setTableHeight();
   },
   methods: {
     // 获取高级查询&表头
@@ -1722,19 +1720,6 @@ export default {
     returnExport() {},
     // 导出
     returnImport() {},
-    // 设置表格高度
-    setTableHeight() {
-      const _this = this;
-      const contentHeight = document.getElementsByClassName('main-content')[0]
-        .clientHeight;
-      let returnHeight = 25;
-      returnHeight += document.getElementsByClassName('returnBtn')[0]
-        .clientHeight;
-      returnHeight += document.getElementsByClassName('returnForm')[0]
-        .clientHeight;
-      const tableHeight = contentHeight - returnHeight;
-      _this.jordanTableConfig.height = tableHeight - 130;
-    },
     // 导出
     exportClick() {
       const _this = this;
