@@ -1,5 +1,6 @@
 // 订单中心
 import R3 from '@syman/burgeon-r3';
+import port from '@/js/pages/common/orderDetail/connector.js';
 
 const { network } = R3;
 export default {
@@ -70,5 +71,9 @@ export default {
   exportOcBRefundIn: params => network.post('/api/cs/oc/oms/v1/exportOcBRefundIn', params),
   ReturnStorageSave: params => network.post('/api/cs/oc/oms/v1/ReturnStorageSave', params),
   searchButtonsInDetail: params => network.post('/api/cs/oc/oms/v1/searchButtonsInDetail', params),
-  getDetail: params => network.post('/api/cs/oc/oms/v1/getDetail', params)
+  getDetail: params => network.post('/api/cs/oc/oms/v1/getDetail', params),
+  export: params => network.post('/p/outpro/export', params),
+  amendBody: (tableName, params) => network.post(port[tableName].amendBody, params),
+  prodel: params => network.post('/p/cs/prodel', params),
+  updateDicunot: params => network.post('/p/cs/oc/v1/sale/updateDicunot', params)
 };
