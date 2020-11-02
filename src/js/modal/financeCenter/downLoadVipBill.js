@@ -1,4 +1,3 @@
-import axios from "axios";
 import businessForm from "professionalComponents/businessForm";
 import jordanBtn from "professionalComponents/businessButton";
 import formatData from "@/assets/js/__utils__/date.js"
@@ -50,7 +49,7 @@ export default {
               isnotnull: true, //是否必填
               isuppercase: false, //是否转大写
               length: 65535, //最大长度是多少
-              name: vmI18n.other.shop,//店铺input前面显示的lable值
+              name: vmI18n.t('other.shop'),//店铺input前面显示的lable值
               readonly: false, //是否可编辑，对应input   readonly属性
               reftable: "CP_C_SHOP",
               reftableid: 24475,
@@ -118,7 +117,8 @@ export default {
             size: "", //按钮大小
             disabled: false, //按钮禁用控制
             btnclick: () => {
-              this.$parent.$parent.actionDialog.show = false;
+              // this.$parent.$parent.actionDialog.show = false;
+              this.$emit('closeActionDialog', false);
             } //按钮点击事件
           }
         ]
@@ -127,7 +127,7 @@ export default {
   },
   methods: {
     // 打印
-    printData() {
+   async printData() {
       let formValue = this.downLoadFormConfig.formValue;
       let startTime = formValue.timerange[0];
       let endTime = formValue.timerange[1];
@@ -170,16 +170,23 @@ export default {
         end_time: endTime ? formatData.standardTimeConversiondateToStr(endTime, "yyyy-MM-dd hh:mm:ss") : "",
         bill_numbere: this.downLoadFormConfig.formValue.bill_numbere
       };
-      let fromdata = new FormData();
-      fromdata.append("param", JSON.stringify(param));
-      R3.network.post( "/p/cs/ac/v1/triggerVipBill",fromdata).then(res => {
-        if (res.data.data.Code === 0) {
-          this.$Message.success(res.data.data.Execmsg);
-          this.$parent.$parent.actionDialog.show = false;
-        } else {
-          this.$Message.error(res.data.data.Execmsg);
-        }
-      });
+      let formdata = new FormData();
+      formdata.append("param", JSON.stringify(param));
+      const {data:{data}} =  await this.service.financeCenter.triggerVipBill(formdata) 
+      if (data.Code === 0) {
+        this.$message.success(data.Execmsg);
+        this.$parent.$parent.actionDialog.show = false;
+      } else {
+        this.$message.error(data.Execmsg);
+      }
+      // R3.network.post( "/p/cs/ac/v1/triggerVipBill",fromdata).then(res => {
+      //   if (res.data.data.Code === 0) {
+      //     this.$Message.success(res.data.data.Execmsg);
+      //     this.$parent.$parent.actionDialog.show = false;
+      //   } else {
+      //     this.$Message.error(res.data.data.Execmsg);
+      //   }
+      // });
     }
   },
   mounted() {
@@ -194,7 +201,7 @@ export default {
     } else {
       this.downLoadFormConfig.formValue.type = "billDownload";
       this.downLoadFormConfig.formData[1].options[0].label =
-        this.vmI18n.t("modalTips.downloadProgressBill");//进度账单下载
+        this.vmI18n.t("btn.downloadProgressBill");//进度账单下载
       this.downLoadFormConfig.formData[1].options[0].value =
         "billDownload";
     }
