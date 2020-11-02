@@ -69,5 +69,6 @@ export default {
   ReturnStorageList: params => network.post('/api/cs/oc/oms/v1/ReturnStorageList', params),
   exportOcBRefundIn: params => network.post('/api/cs/oc/oms/v1/exportOcBRefundIn', params),
   ReturnStorageSave: params => network.post('/api/cs/oc/oms/v1/ReturnStorageSave', params),
-  searchButtonsInDetail: params => network.post('/api/cs/oc/oms/v1/searchButtonsInDetail', params)
+  searchButtonsInDetail: params => network.post('/api/cs/oc/oms/v1/searchButtonsInDetail', params),
+  getDetail: params => network.post('/api/cs/oc/oms/v1/getDetail', params)
 };
