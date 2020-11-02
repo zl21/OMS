@@ -8,12 +8,48 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const projectConfig = require("./project.config");
-
 const target = projectConfig.target; // 框架研发网关开启环境
-const proxyLists = ["/p/c", "/p/cs", "/api"];
+const proxyLists =  projectConfig.burgeonProxy;
 
 const indexProHtml = path.posix.join("/", "index.pro.html");
 const indexHtml = path.posix.join("/", "index.html");
+
+const burgeonPlugins = [
+  new MiniCssExtractPlugin({
+    filename: "r3.css"
+  }),
+  new CleanWebpackPlugin([process.env && process.env.production ? "dist" : "devDist"]),
+  new VueLoaderPlugin(),
+  new HtmlWebpackPlugin({
+    chunksSortMode: "none",
+    title:
+    process.env && process.env.production
+        ? projectConfig.projectsTitle
+        : `Debug:${projectConfig.projectsTitle}`,
+    template: process.env && process.env.production ? "./index.pro.html" : "./index.html",
+    inject: true,
+    favicon: projectConfig.projectIconPath
+  }),
+  new CopyWebpackPlugin([
+    {
+      from: path.resolve(__dirname, "./static"),
+      to: "static",
+      ignore: [".*"]
+    }
+  ]),
+
+  new webpack.ProvidePlugin({
+    $: "jquery",
+    jQuery: "jquery",
+    jquery: "jquery",
+    "window.jQuery": "jquery"
+  })
+];
+
+if (projectConfig.build.bundleAnalyzerReport) {
+  const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+  burgeonPlugins.push(new BundleAnalyzerPlugin());
+}
 
 module.exports = env => ({
   entry: {
@@ -79,6 +115,7 @@ module.exports = env => ({
       },
       {
         test: /\.(sa|sc|c|le)ss$/,
+        // include: [path.resolve('./node_modules/@burgeon/oms-theme/')],
         use: [
           {
             loader:
@@ -131,37 +168,7 @@ module.exports = env => ({
       }
     ]
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: "r3.css"
-    }),
-    new CleanWebpackPlugin([env && env.production ? "dist" : "devDist"]),
-    new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({
-      chunksSortMode: "none",
-      title:
-        env && env.production
-          ? projectConfig.projectsTitle
-          : `Debug:${projectConfig.projectsTitle}`,
-      template: env && env.production ? "./index.pro.html" : "./index.html",
-      inject: true,
-      favicon: projectConfig.projectIconPath
-    }),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, "./static"),
-        to: "static",
-        ignore: [".*"]
-      }     
-    ]),
-
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      jquery: "jquery",
-      "window.jQuery": "jquery"
-    })
-  ],
+  plugins: burgeonPlugins,
   mode: env && env.production ? "production" : "development",
   resolve: {
     extensions: [".js", ".json", ".vue", ".css"],
@@ -177,7 +184,7 @@ module.exports = env => ({
         __dirname,
         "node_modules/@burgeon/business-components"
       ),
-      omsTheme: path.resolve(__dirname, "/node_modules/@burgeon/oms-theme/")
+      omsTheme: path.resolve(__dirname, "/node_modules/@burgeon/oms-theme/skin")
     }
   },
   optimization: {

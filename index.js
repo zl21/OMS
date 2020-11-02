@@ -13,6 +13,7 @@ import apiPath from '@/assets/js/api/path/index.js'
 
 const projectConfig = require("./project.config");  //-------------引入框架项目配置文件;
 const customizedTheme = require(`@burgeon/oms-theme/skin/${projectConfig.omsTheme}/index.min.css`);//----------动态加载主题库皮肤包;
+
 import '@burgeon/oms-theme/theme/custom.less'; // 主题文件
 
 import externalTreeDatasConfig from './src/config/externalTreeDatas.config'; // 树结构配置
@@ -21,7 +22,7 @@ import i18n from '@burgeon/internationalization/i18n/i18n.js'; // 国际化
 import '@syman/burgeon-r3/r3.publish/r3.min.css';
 
 // 老框架引入的 自定义界面内需要的css资源
-import 'element-ui/lib/theme-chalk/index.css'; // customize-1.3
+// import 'element-ui/lib/theme-chalk/index.css'; // customize-1.3
 import './static/iconfont/iconfont.css'; // customize-1.3自定义界面icon,下拉单选,此样式会影响框架样式，
 import './static/promotion.icofont/iconfont.css'; //促销iconfont
 import '@/assets/css/css_1_3/index.less'; // customize-1.3自定义界面icon,下拉单选
