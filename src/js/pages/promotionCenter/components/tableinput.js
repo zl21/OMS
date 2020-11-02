@@ -1819,7 +1819,7 @@ import axios from 'axios';
         $(`.mop${itemdata.colname} span i`).trigger('click');
         $(`#${self.itemdata.colname}mopfile`).trigger('click');
       }, // 导入
-      uploadFileChange(itemdata, event) {
+      async uploadFileChange(itemdata, event) {
         const self = this;
         const file = $(`#${self.itemdata.colname}mopfile`)[0].files;
         const data = new FormData();
@@ -1829,48 +1829,24 @@ import axios from 'axios';
         data.append('file', file[0]);
         data.append('table', self.itemdata.reftable);
 
-        self.$ajax.formAjax(
-          '/p/cs/menuimport',
-          data,
-          (res) => {
-            if (res.code == 0) {
-              self.fkDialog.dialog = true;
-              self.fkDialog.lists = res.data.text;
-            } else {
-              const data = {
-                message: res.message
-              };
-              self.errorData = data;
-              self.errorDialog = true;
-              self.errorDialogClass = 'error';
-              self.errorDialogTitle = self.ChineseDictionary.ERROR;
-              self.errorDialogBack = false;
-            }
-          },
-          false
-        );
+        const res = await self.service.common.menuimport(data);
+        if (res.code == 0) {
+          self.fkDialog.dialog = true;
+          self.fkDialog.lists = res.data.text;
+        } else {
+          const data = {
+            message: res.message
+          };
+          self.errorData = data;
+          self.errorDialog = true;
+          self.errorDialogClass = 'error';
+          self.errorDialogTitle = self.ChineseDictionary.ERROR;
+          self.errorDialogBack = false;
+        }
 
         setTimeout(() => {
           $(`#${self.itemdata.colname}mopfile`).val('');
         });
-      // $.ajax({
-      //   type: "POST",
-      //   url: "/p/cs/menuimport",
-      //   dateType:'json',
-      //   data: data,
-      //   processData: false,
-      //   contentType: false,
-      //   success:function(res){
-      //     $("#"+self.itemdata.colname+'mopfile').val('')
-      //     if(res.code == 0){
-      //       self.fkDialog.dialog = true
-      //       self.fkDialog.lists = res.data.text
-      //     }
-      //   },
-      //   error:function(res){
-      //     $("#"+self.itemdata.colname+'mopfile').val('')
-      //   }
-      // })
       },
       modelIconShow(item, index) {
         const self = this;
@@ -2011,10 +1987,18 @@ import axios from 'axios';
         }
         self.$emit('getFkChooseItem', self.itemdata, self.row);
       },
-      getSelectConfig(item, callback) {
+      async getSelectConfig(item, callback) {
         // 更新数据: SelectionData.config 弹出框输入配置
         const self = this;
         self.SelectionData.config = []; // 请求前清空旧数据
+        const query = {
+          params: {
+            tableid: item.reftableid,
+            getcmd: 'n',
+            table: item.reftable
+          }
+        };
+        const res = await this.service.common.getTableQuery(query);
         axios({
           url: '/p/cs/getTableQuery',
           type: 'post',

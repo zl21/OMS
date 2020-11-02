@@ -50,7 +50,8 @@ export default {
             event: {
               "on-page-change": value => { },
               "on-input-value-change": value => { },
-              "on-popper-show": e => {
+              "on-popper-show": async e => {
+                const res = await this.service.common.getCo
                 axios({
                   url: "/p/cs/getCopyTargetGroups",
                   method: "get",

@@ -5718,20 +5718,16 @@ export const jurisdictionConfig = {
       // });
     },
     // 客户权限
-    getCUSTOMERRIGHTSdata() {
-      axios({
-        method: 'get',
-        url: '/p/cs/cgroupcolumnquery',
-        params: { GROUPS_ID: 3, QUERY: '' }
-      }).then((res) => {
-        res.data.data.forEach((ele) => {
-          ele.filter = ele.CP_C_COLUMN_ENAME;
-          ele.__look = !(ele.ISREAD && ele.ISREAD == 'N');
-          ele.__edit = !(ele.ISMODIFY && ele.ISMODIFY == 'N');
-          ele.__disabled = false;
-        });
-        this.tableConfig.data = res.data.data;
+    async getCUSTOMERRIGHTSdata() {
+      const query = { GROUPS_ID: 3, QUERY: '' };
+      const res = await this.service.common.cgroupcolumnquery(query);
+      res.data.data.forEach((ele) => {
+        ele.filter = ele.CP_C_COLUMN_ENAME;
+        ele.__look = !(ele.ISREAD && ele.ISREAD == 'N');
+        ele.__edit = !(ele.ISMODIFY && ele.ISMODIFY == 'N');
+        ele.__disabled = false;
       });
+      this.tableConfig.data = res.data.data;
     },
   }
 };

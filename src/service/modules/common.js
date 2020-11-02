@@ -1,5 +1,6 @@
 // 公共的接口
 import R3 from '@syman/burgeon-r3';
+import qs from 'qs';
 
 const {network} = R3;
 
@@ -47,7 +48,7 @@ export default {
   QueryList: (params) => network.post('/p/cs/QueryList', params),
   SgOutNoticePrint: (params) => network.post('/p/cs/SgOutNoticePrint', params),
   fuzzyquerybyak: (params) => network.post('/p/cs/fuzzyquerybyak', params),
-  cgroupcolumnquery: (params) => network.post('/p/cs/cgroupcolumnquery', params),
+  cgroupcolumnquery: (params) => network.get(`/p/cs/cgroupcolumnquery?${qs.stringify(params)}`),
   queryShopPermission: (params) => network.get('/p/cs/queryShopPermission', params),
   screenresultcheck: (params) => network.post('/p/cs/screenresultcheck', params),
   searchButtonsInJdDetail: (params) => network.post('/p/cs/searchButtonsInJdDetail', params),
@@ -57,6 +58,35 @@ export default {
   getweekdate: (params) => network.post('/p/cs/getweekdate', params),
   getWarehourseByShopId: (params) => network.post('/p/cs/getWarehourseByShopId', params),
   voidPayableAdjustment: (params) => network.post('/p/cs/voidPayableAdjustment', params),
+  regionBySelect: (params) => network.post('/p/cs/regionBySelect', params),
+  prodel: (params) => network.post('/p/cs/prodel', params),
+  exeAction: (params) => network.post('/p/cs/exeAction', params),
+  menuimport: (params) => network.post('/p/cs/menuimport', params),
+  queryOcBOrder: (params) => network.post('/p/cs/queryOcBOrder', params),
+  billCopy: (params) => network.post('/p/cs/billCopy', params),
+  getOrderDetailList: (params) => network.post('/p/cs/getOrderDetailList', params),
+  returnOrderquery: (params) => network.post('/p/cs/returnOrderquery', params),
+  returnSkuDb: (params) => network.post('/p/cs/returnSkuDb', params),
+  checkAllStroreStock: (params) => network.post('/p/cs/checkAllStroreStock', params),
+  returnOrder: (params) => network.post('/p/cs/returnOrder', params),
+  chargebackcheck: (params) => network.post('/p/cs/chargebackcheck', params),
+  OcCancelChangingOrRefund: (params) => network.post('/p/cs/OcCancelChangingOrRefund', params),
+  updateVirtualLibrary: (params) => network.post('/p/cs/updateVirtualLibrary', params),
+  cancelautorefund: (params) => network.post('/p/cs/cancelautorefund', params),
+  queryResionByName: (params) => network.post('/p/cs/queryResionByName', params),
+  getOrderList: (params) => network.post('/p/cs/getOrderList', params),
+  extInfoQuery: (params) => network.post('/p/cs/extInfoQuery', params),
+  manualJdMatchingConfirmationButton: (params) => network.post('/p/cs/manualJdMatchingConfirmationButton', params),
+  seachJdForced: (params) => network.post('/p/cs/seachJdForced', params),
+  getJdScanIncomingInfo: (params) => network.post('/p/cs/getJdScanIncomingInfo', params),
+  saveJdScanIncoming: (params) => network.post('/p/cs/saveJdScanIncoming', params),
+  getTableQuery: (params) => network.post('/p/cs/getTableQuery', params),
+  groupQueryName: (params) => network.post('/p/cs/groupQueryName', params),
+  cuserspro: (params) => network.post('/p/cs/cuserspro', params),
+  objectDelete: (params) => network.post('/p/cs/objectDelete', params),
+  cprolikequery: (params) => network.post('/p/cs/cprolikequery', params),
+  cgroupsquery: (params) => network.get(`/p/cs/cgroupsquery?${qs.toString()}`, params),
+  getCopyTargetGroups: (params) => network.get(`/p/cs/getCopyTargetGroups?${qs.stringify(params)}`),
   // 通用接口下载
   /**
    * 经销订单下载 分销商订单下载 /p/cs/orderDownload

@@ -133,17 +133,16 @@ export default {
   methods: {
     //发送请求,通过用户id获取用户信息
     //修改为用户组查询
-    axiosUserName() {
+    async axiosUserName() {
       const _self = this;
       let param = new URLSearchParams();
       param.append(
         "param",
         JSON.stringify({ GROUPS_ID: Number(_self.userId) })
       );
-      post("/p/cs/groupQueryName", param).then(res => {
-        if (res.data.data) _self.userQuery = res.data.data.name;
-        _self.axiosGroup();
-      });
+      const res = await this.service.common.groupQueryName(param);
+      if (res.data.data) _self.userQuery = res.data.data.name;
+      _self.axiosGroup();
     },
     //发送请求,获取用户的action权限
     axiosAction() {
@@ -159,7 +158,7 @@ export default {
       // });
     },
     //发送请求,用户模糊搜索---弃用
-    axiosUser(query, flag) {
+    async axiosUser(query, flag) {
       $(".table-scroll-body").scrollTop(0);
       let _self = this;
       let param = new URLSearchParams();
@@ -172,37 +171,36 @@ export default {
           PAGESIZE: _self.loadSize
         })
       );
-      post("/p/cs/chrusersquery", param)
-        .then(res => {
-          if (res.data.code === 0) {
-            let result = res.data.data;
-            _self.loadFlag = false;
-            _self.userList = result.list;
+      try {
+        const res = await this.service.common.chrusersquery(param);
+        if (res.data.code === 0) {
+          let result = res.data.data;
+          _self.loadFlag = false;
+          _self.userList = result.list;
 
-            _self.loadNumber["userList"] = result.endRow;
-            _self.totalNumber["userList"] = result.total;
+          _self.loadNumber["userList"] = result.endRow;
+          _self.totalNumber["userList"] = result.total;
 
-            if (_self.userList.length > 0) {
-              _self.selectOne(_self.userList[0]);
-              //              _self.$set(_self.userList[0], "checked", true);
-              //              _self.userId = _self.userList[0].ID;
-              //              _self.axiosUserAuthority();
-            } else {
-              _self.userId = 0;
-              _self.userAuthorityList = [];
-              //判断是否是刷新操作,添加提示信息
-              if (_self.actionFlag.freshFlag) {
-                _self.$message({ message: "刷新成功", type: "success" });
-                _self.actionFlag.freshFlag = false;
-              }
-            }
+          if (_self.userList.length > 0) {
+            _self.selectOne(_self.userList[0]);
+            //              _self.$set(_self.userList[0], "checked", true);
+            //              _self.userId = _self.userList[0].ID;
+            //              _self.axiosUserAuthority();
           } else {
-            if (_self.actionFlag.freshFlag) _self.actionFlag.freshFlag = false;
+            _self.userId = 0;
+            _self.userAuthorityList = [];
+            //判断是否是刷新操作,添加提示信息
+            if (_self.actionFlag.freshFlag) {
+              _self.$message({ message: "刷新成功", type: "success" });
+              _self.actionFlag.freshFlag = false;
+            }
           }
-        })
-        .catch(error => {
+        } else {
           if (_self.actionFlag.freshFlag) _self.actionFlag.freshFlag = false;
-        });
+        }
+      } catch (e) {
+        if (_self.actionFlag.freshFlag) _self.actionFlag.freshFlag = false;
+      }
     },
     //用户组模糊搜索
     axiosGroup() {
@@ -226,33 +224,32 @@ export default {
     },
 
     // 发送请求,获取指定用户的权限
-    axiosUserAuthority() {
+    async axiosUserAuthority() {
       let _self = this;
       let param = new URLSearchParams();
       param.append("param", JSON.stringify({ GROUPS_ID: _self.userId }));
-      post("/p/cs/cuserspro/query", param)
-        .then(res => {
-          if (res.data.code === 0) {
-            let result = res.data.data;
-            for (let g of result) {
-              g.checked = false;
-            }
-            _self.userAuthorityList = result;
-            if (_self.actionFlag.freshFlag) {
-              _self.$message({ message: "刷新成功", type: "success" });
-              _self.actionFlag.freshFlag = false;
-            }
-          } else {
-            if (_self.actionFlag.freshFlag) {
-              _self.actionFlag.freshFlag = false;
-            }
+      try {
+        const res = await this.service.common.cuserspro(param);
+        if (res.data.code === 0) {
+          let result = res.data.data;
+          for (let g of result) {
+            g.checked = false;
           }
-        })
-        .catch(error => {
+          _self.userAuthorityList = result;
+          if (_self.actionFlag.freshFlag) {
+            _self.$message({ message: "刷新成功", type: "success" });
+            _self.actionFlag.freshFlag = false;
+          }
+        } else {
           if (_self.actionFlag.freshFlag) {
             _self.actionFlag.freshFlag = false;
           }
-        });
+        }
+      } catch (e) {
+        if (_self.actionFlag.freshFlag) {
+          _self.actionFlag.freshFlag = false;
+        }
+      }
     },
     //插入用户权限按钮触发,显示筛选dialog
     insertUserAuthority() {
@@ -271,7 +268,7 @@ export default {
       }
     },
     //标准保存接口----删除
-    deleteAuthority() {
+    async deleteAuthority() {
       let _self = this;
       let param = {
         table: "CP_C_HRUSERS_PRO",
@@ -283,32 +280,29 @@ export default {
         if (u.checked) param.data.CP_C_HRUSERS_PRO.push(u.ID);
       }
       if (param.data.CP_C_HRUSERS_PRO.length > 0) {
-        fetch("/p/cs/objectDelete", param).then(res => {
-          if (res.data.code < 0) {
-          } else {
-            _self.$message({ message: res.data.message, type: "success" });
-            _self.axiosUserAuthority();
-          }
-        });
+        const res = await this.service.common.objectDelete(param);
+        if (res.data.code < 0) {
+        } else {
+          _self.$message({ message: res.data.message, type: "success" });
+          _self.axiosUserAuthority();
+        }
       } else {
         _self.$message("没有选中");
       }
     },
     //下拉筛选,auto-complete组件调用方法
-    querySearch(queryString, cb) {
+    async querySearch(queryString, cb) {
       if (queryString.length <= 0) {
         cb([]);
       } else {
         let _self = this;
         let param = new URLSearchParams();
         param.append("query", "{'query':'" + queryString + "'}");
-        post("/p/cs/cprolikequery", param).then(res => {
-          if (res.data.code === 0) {
-            let result = res.data.data;
-            cb(result);
-          } else {
-          }
-        });
+        const res = await this.service.common.cprolikequery(param);
+        if (res.data.code === 0) {
+          let result = res.data.data;
+          cb(result);
+        }
       }
     },
     //选中下拉的筛选条件,auto-complete组件调用方法
@@ -415,7 +409,7 @@ export default {
     },
 
     //发送请求,预加载下一页记录
-    loadPage(target) {
+    async loadPage(target) {
       let _self = this;
       _self.axiosLoad[target] = false;
       let param = new URLSearchParams();
@@ -427,22 +421,21 @@ export default {
           PAGESIZE: _self.loadSize
         })
       );
-      post("/p/cs/chrusersquery", param).then(res => {
-        let result = res.data.data;
-        if (!_self.loadFlag) {
-          for (let user of result.list) {
-            if (user.ID == _self.userId) {
-              _self.loadFlag = true;
-              _self.$set(user, "checked", true);
-              break;
-            }
+      const res = await this.service.common.chrusersquery(param);
+      let result = res.data.data;
+      if (!_self.loadFlag) {
+        for (let user of result.list) {
+          if (user.ID == _self.userId) {
+            _self.loadFlag = true;
+            _self.$set(user, "checked", true);
+            break;
           }
-          _self[target] = _self[target].concat(result.list);
         }
-        _self.loadNumber[target] = result.endRow;
-        _self.totalNumber[target] = result.total;
-        _self.axiosLoad[target] = true;
-      });
+        _self[target] = _self[target].concat(result.list);
+      }
+      _self.loadNumber[target] = result.endRow;
+      _self.totalNumber[target] = result.total;
+      _self.axiosLoad[target] = true;
     }
   }
 };
