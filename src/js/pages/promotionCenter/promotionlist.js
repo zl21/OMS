@@ -951,7 +951,7 @@ export default {
           }
         );
       }
-      
+
       if (newList.length < 1) {
         this.$message({
           // message: "请至少选择一个",
@@ -982,7 +982,7 @@ export default {
       }
       const formData = new FormData();
       formData.append("param", JSON.stringify(params));
-      const {data:{code,message}} =  await this.service.promotionCenter.updatePmStatus(formData) 
+      const {data:{code,message}} =  await this.service.promotionCenter.updatePmStatus(formData)
       console.log("请求发布", 'code:' + code, 'message:' + message);
       if (code === 0) {
         this.getData();
@@ -996,33 +996,6 @@ export default {
           type: "success",
         });
       }
-      // this.axios({
-      //   url: "/p/cs/pm/v1/updatePmStatus",
-      //   method: "POST",
-      //   data: {
-      //     param: JSON.stringify({
-      //       objid: -1, // 默认参数 保持格式统一 传死-1
-      //       isBatch: true, // 是否批量 传true
-      //       fixcolumn: {
-      //         ids: newIds, // 促销活动ID
-      //         status: 2, // 3表示下线
-      //       },
-      //     }),
-      //   },
-      // }).then((res) => {
-      //   if (res.data.code === 0) {
-      //     this.getData();
-      //     this.$message({
-      //       message: res.data.message,
-      //       type: "success",
-      //     });
-      //   } else {
-      //     this.$message({
-      //       message: res.data.message,
-      //       type: "success",
-      //     });
-      //   }
-      // });
     }, // 发布
     async deleteActi() {
       const newIds = [];
@@ -1048,7 +1021,7 @@ export default {
       formData.append("param", JSON.stringify({
         objid: newIds, // 默认参数 保持格式统一 传死-1
       }));
-      const {data:{code,message}} =  await this.service.promotionCenter.deletePm(formData) 
+      const {data:{code,message}} =  await this.service.promotionCenter.deletePm(formData)
       if (code === 0) {
         this.getData();
         this.$message({
@@ -1304,7 +1277,7 @@ export default {
         return false;
       }
       this.dataError.show = false; // 关闭弹框
-      
+
       let params = {
         objid: -1, // 默认参数 保持格式统一 传死-1
         isBatch: true, // 是否批量 传true
@@ -1315,7 +1288,7 @@ export default {
       }
       const formData = new FormData();
       formData.append("param", JSON.stringify(params));
-      const {data:{code,message}} =  await this.service.promotionCenter.updatePmStatus(formData) 
+      const {data:{code,message}} =  await this.service.promotionCenter.updatePmStatus(formData)
       if (code === 0) {
         this.getData();
         this.$message({

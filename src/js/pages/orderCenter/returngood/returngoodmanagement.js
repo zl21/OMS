@@ -533,39 +533,33 @@ export default {
             value: "IS_BACK",
             disabled: false, //按钮禁用控制
             checked: false, //是否勾选控制
-            checkboxChange: e => {
+            checkboxChange: async (e) => {
               const _this = this;
               let phy = _this.information.formData[13].itemdata;
               let phyIn = _this.information.formData[14].itemdata;
               if (!e) {
-                axios({
-                  url: "/p/cs/queryOcBOrder",
-                  method: "post",
-                  cancelToken: true,
-                  data: { id: _this.information.formValue.ORIG_ORDER_ID }
-                }).then(res => {
-                  if (res.data.code === 0) {
-                    phy.pid = phyIn.pid;
-                    phy.valuedata = phyIn.valuedata;
-                    _this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID =
-                      phyIn.pid;
-                    let arrList = JSON.parse(res.data.data);
-                    _this.information.formValue.LOGISTICS_CODE =
-                      arrList.EXPRESSCODE;
-                    _this.information.formValue.CP_C_LOGISTICS_ID =
-                      arrList.CP_C_LOGISTICS_ID;
-                    _this.information.formData.forEach((list, j) => {
-                      // 退回物流公司
-                      if (
-                        list.style === "popInput" &&
-                        list.itemdata.name === _this.vmI18n.t("table_label.returnLogisticsCompany")
-                      ) {
-                        list.itemdata.pid = arrList.CP_C_LOGISTICS_ID;
-                        list.itemdata.valuedata = arrList.CP_C_LOGISTICS_ENAME;
-                      }
-                    });
-                  }
-                });
+                const res = await _this.service.common.queryOcBOrder({ id: _this.information.formValue.ORIG_ORDER_ID });
+                if (res.data.code === 0) {
+                  phy.pid = phyIn.pid;
+                  phy.valuedata = phyIn.valuedata;
+                  _this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID =
+                    phyIn.pid;
+                  let arrList = JSON.parse(res.data.data);
+                  _this.information.formValue.LOGISTICS_CODE =
+                    arrList.EXPRESSCODE;
+                  _this.information.formValue.CP_C_LOGISTICS_ID =
+                    arrList.CP_C_LOGISTICS_ID;
+                  _this.information.formData.forEach((list, j) => {
+                    // 退回物流公司
+                    if (
+                      list.style === "popInput" &&
+                      list.itemdata.name === _this.vmI18n.t("table_label.returnLogisticsCompany")
+                    ) {
+                      list.itemdata.pid = arrList.CP_C_LOGISTICS_ID;
+                      list.itemdata.valuedata = arrList.CP_C_LOGISTICS_ENAME;
+                    }
+                  });
+                }
               } else {
                 _this.information.formValue.LOGISTICS_CODE = "";
                 phy.pid = "";
@@ -1180,13 +1174,9 @@ export default {
       this.information.formValue.BILL_TYPE = "1";
       _this.clrAndSizeFlag = true;
       if (this.$route.query.orderHrefReturnid) {
-        axios({
-          url: "/p/cs/billCopy",
-          method: "post",
-          data: {
-            IDS: _this.$route.query.orderHrefReturnid.split(","),
-            TYPE: "3"
-          }
+        this.service.common.billCopy({
+          IDS: _this.$route.query.orderHrefReturnid.split(","),
+          TYPE: "3"
         }).then(res => {
           if (res.data.code === 0) {
             const item = res.data.data.baseInfo;
@@ -1258,15 +1248,11 @@ export default {
           }
         });
 
-        axios({
-          url: "/p/cs/getOrderDetailList",
-          method: "post",
-          data: {
-            id: _this.$route.query.orderHrefReturnid,
-            currentPage: 1,
-            pageSize: 1000,
-            detailType: 2 // 退换货订单使用
-          }
+        this.service.common.getOrderDetailList({
+          id: _this.$route.query.orderHrefReturnid,
+          currentPage: 1,
+          pageSize: 1000,
+          detailType: 2 // 退换货订单使用
         }).then(async res => {
           let queryList = [];
           res.data.data.records.forEach(item => {
@@ -1320,14 +1306,10 @@ export default {
       }
       // 退换货复制退单
       if (this.$route.query.cloneReturnGoodId) {
-        axios({
-          url: "/p/cs/returnOrderquery",
-          method: "post",
-          data: {
-            id: _this.$route.query.cloneReturnGoodId,
-            start: 1,
-            count: 50
-          }
+        this.service.common.returnOrderquery({
+          id: _this.$route.query.cloneReturnGoodId,
+          start: 1,
+          count: 50
         }).then(async res => {
           if (res.data.code == 0) {
             _this.jordanTableConfig.loading = false;
@@ -1855,22 +1837,16 @@ export default {
       this.$children.find(item => item.name === "jordanBounced").openConfirm();
     },
     // 标记次品已调拨
-    defectiveGoods() {
+    async defectiveGoods() {
       const _this = this;
-      axios({
-        url: "/p/cs/returnSkuDb",
-        method: "post",
-        cancelToken: true,
-        data: { id: _this.$route.query.id }
-      }).then(res => {
-        if (res.data.code == 0) {
-          _this.$Message.success(res.data.message);
-          // _this.getList();
-          _this.$router.go(0);
-        } else {
-          _this.$Message.error(res.data.message);
-        }
-      });
+      const res = await this.service.common.returnSkuDb({ id: _this.$route.query.id });
+      if (res.data.code == 0) {
+        _this.$Message.success(res.data.message);
+        // _this.getList();
+        _this.$router.go(0);
+      } else {
+        _this.$Message.error(res.data.message);
+      }
     },
     // 计算商品/换货金额总和
     calculateMoney(arr, num) {
@@ -3317,7 +3293,7 @@ export default {
       }
     },
     // 保存
-    saveData() {
+    async saveData() {
       let _this = this;
       // 传WMS成功的单据不允许修改
       if (_this.isTowwms == 2) {
@@ -3527,26 +3503,20 @@ export default {
           _this.information.formValue.BILL_TYPE === "2" &&
           !_this.isModalSave
         ) {
-          axios({
-            url: "/p/cs/checkAllStroreStock",
-            method: "post",
-            cancelToken: true,
-            data: params
-          }).then(res => {
-            if (res.data.code === 0) {
-              // 换货明细的商品换货数量小于可用库存，弹窗提示,否则执行保存操作
-              if (!res.data.data) {
-                _this.availableStockMassage = res.data.message;
-                _this.availableStock = true;
-                _this.isModalSave = true;
-              } else {
-                _this.save(params);
-              }
+          const res = await this.service.common.checkAllStroreStock(params);
+          if (res.data.code === 0) {
+            // 换货明细的商品换货数量小于可用库存，弹窗提示,否则执行保存操作
+            if (!res.data.data) {
+              _this.availableStockMassage = res.data.message;
+              _this.availableStock = true;
+              _this.isModalSave = true;
             } else {
-              let err = res.data.message || _this.vmI18n.t("modalTips.at");//可用库存查询失败!
-              _this.$Message.error(err);
+              _this.save(params);
             }
-          });
+          } else {
+            let err = res.data.message || _this.vmI18n.t("modalTips.at");//可用库存查询失败!
+            _this.$Message.error(err);
+          }
         } else {
           _this.save(params);
         }
@@ -3557,26 +3527,20 @@ export default {
           !_this.isModalSave &&
           _this.information.formValue.BILL_TYPE === "2"
         ) {
-          axios({
-            url: "/p/cs/checkAllStroreStock",
-            method: "post",
-            cancelToken: true,
-            data: params
-          }).then(res => {
-            if (res.data.code === 0) {
-              // 换货明细的商品换货数量小于可用库存，弹窗提示,否则执行保存操作
-              if (!res.data.data) {
-                _this.availableStockMassage = res.data.message;
-                _this.availableStock = true;
-                _this.isModalSave = true;
-              } else {
-                _this.save(params);
-              }
+          const res = await this.service.common.checkAllStroreStock(params);
+          if (res.data.code === 0) {
+            // 换货明细的商品换货数量小于可用库存，弹窗提示,否则执行保存操作
+            if (!res.data.data) {
+              _this.availableStockMassage = res.data.message;
+              _this.availableStock = true;
+              _this.isModalSave = true;
             } else {
-              let err = res.data.message || _this.vmI18n.t("modalTips.at");//可用库存查询失败!
-              _this.$Message.error(err);
+              _this.save(params);
             }
-          });
+          } else {
+            let err = res.data.message || _this.vmI18n.t("modalTips.at");//可用库存查询失败!
+            _this.$Message.error(err);
+          }
         } else {
           _this.save(params);
         }
@@ -3584,37 +3548,31 @@ export default {
       //  || (_this.status == 20 && _this.$route.query.id != -1)
     },
     // 保存接口
-    save(params) {
+    async save(params) {
       // 防止多次触发
       let _this = this;
       _this.isSaveLoading = true;
-      axios({
-        url: "/p/cs/returnOrder",
-        method: "post",
-        cancelToken: true,
-        data: params
-      }).then(res => {
-        _this.availableStock = false;
-        _this.isModalSave = false;
-        _this.isSaveLoading = false;
-        if (res.data.code === 0) {
-          _this.$Message.success(res.data.message);
-          _this.$store.commit("customize/TabHref", {
+      const res = await this.service.common.returnOrder(params);
+      _this.availableStock = false;
+      _this.isModalSave = false;
+      _this.isSaveLoading = false;
+      if (res.data.code === 0) {
+        _this.$Message.success(res.data.message);
+        _this.$store.commit("customize/TabHref", {
+          id: 2661,
+          type: "action",
+          name: "returngoodList",
+          label: _this.vmI18n.t("panel_label.forcedStorage"),//退换货订单
+          query: Object.assign({
             id: 2661,
-            type: "action",
-            name: "returngoodList",
-            label: _this.vmI18n.t("panel_label.forcedStorage"),//退换货订单
-            query: Object.assign({
-              id: 2661,
-              tabTitle: _this.vmI18n.t("panel_label.forcedStorage")//退换货订单
-            }),
-            back: true
-          });
-        } else {
-          let err = res.data.message || _this.vmI18n.t("modalTips.au");//新增退换货订单失败
-          _this.$Message.error(err);
-        }
-      });
+            tabTitle: _this.vmI18n.t("panel_label.forcedStorage")//退换货订单
+          }),
+          back: true
+        });
+      } else {
+        let err = res.data.message || _this.vmI18n.t("modalTips.au");//新增退换货订单失败
+        _this.$Message.error(err);
+      }
     },
     // 售后审核
     afterAudit() {
@@ -3635,20 +3593,14 @@ export default {
           showCancel: true,
           okText: _this.vmI18n.t("common.determine"), //取消
           cancelText: _this.vmI18n.t("common.cancel"), //确定
-          onOk: () => {
-            axios({
-              url: "/p/cs/chargebackcheck",
-              method: "post",
-              cancelToken: true,
-              data: { ID: _this.$route.query.id }
-            }).then(res => {
-              if (res.data.code === 0) {
-                _this.$Message.success(res.data.message);
-                _this.getList();
-              } else {
-                _this.$Message.error(res.data.message);
-              }
-            });
+          onOk: async () => {
+            const res = await this.service.common.chargebackcheck({ ID: _this.$route.query.id });
+            if (res.data.code === 0) {
+              _this.$Message.success(res.data.message);
+              _this.getList();
+            } else {
+              _this.$Message.error(res.data.message);
+            }
           }
         });
       } else {
@@ -3659,20 +3611,14 @@ export default {
           showCancel: true,
           okText: _this.vmI18n.t("common.determine"), //取消
           cancelText: _this.vmI18n.t("common.cancel"), //确定
-          onOk: () => {
-            axios({
-              url: "/p/cs/chargebackcheck",
-              method: "post",
-              cancelToken: true,
-              data: { ID: _this.$route.query.id }
-            }).then(res => {
-              if (res.data.code === 0) {
-                _this.$Message.success(res.data.message);
-                _this.getList();
-              } else {
-                _this.$Message.error(res.data.message);
-              }
-            });
+          onOk: async () => {
+            const res = await this.service.common.chargebackcheck({ ID: _this.$route.query.id });
+            if (res.data.code === 0) {
+              _this.$Message.success(res.data.message);
+              _this.getList();
+            } else {
+              _this.$Message.error(res.data.message);
+            }
           }
         });
       }
@@ -3688,20 +3634,14 @@ export default {
         showCancel: true,
         okText: _this.vmI18n.t("common.determine"), //取消
         cancelText: _this.vmI18n.t("common.cancel"), //确定
-        onCancel: () => {
-          axios({
-            url: "/p/cs/OcCancelChangingOrRefund",
-            method: "post",
-            cancelToken: true,
-            data: { ids: [this.$route.query.id] }
-          }).then(res => {
-            if (res.data.code == 0) {
-              _this.$Message.success(res.data.message);
-              _this.getList();
-            } else {
-              _this.$Message.error(res.data.message);
-            }
-          });
+        onCancel: async () => {
+          const res = await this.service.common.OcCancelChangingOrRefund({ ids: [this.$route.query.id] });
+          if (res.data.code == 0) {
+            _this.$Message.success(res.data.message);
+            _this.getList();
+          } else {
+            _this.$Message.error(res.data.message);
+          }
         }
       });
     },
@@ -3720,88 +3660,67 @@ export default {
         showCancel: true,
         okText: _this.vmI18n.t("common.determine"), //取消
         cancelText: _this.vmI18n.t("common.cancel"), //确定
-        onCancel: () => {
-          axios({
-            url: "/p/cs/updateVirtualLibrary",
-            method: "post",
-            cancelToken: true,
-            data: { ID: _this.$route.query.id }
-          }).then(res => {
-            if (res.data.code == 0) {
-              _this.$Message.success(res.data.message);
-              _this.getList();
-            } else {
-              _this.$Message.error(res.data.message);
-            }
-          });
+        onCancel: async () => {
+          const res = await this.service.common.updateVirtualLibrary({ ID: _this.$route.query.id });
+          if (res.data.code == 0) {
+            _this.$Message.success(res.data.message);
+            _this.getList();
+          } else {
+            _this.$Message.error(res.data.message);
+          }
         }
       });
     },
     // 取消自动退款
-    cancelRefund() {
+    async cancelRefund() {
       const _this = this;
       if (this.$route.query.id == "-1") return;
-      axios({
-        url: "/p/cs/cancelautorefund",
-        method: "post",
-        cancelToken: true,
-        data: { ID: _this.$route.query.id }
-      }).then(res => {
-        if (res.data.code == 0) {
-          _this.$Message.success(res.data.message);
-          _this.getList();
-        } else {
-          _this.$Message.error(res.data.message);
-        }
-      });
+      const res = await this.service.common.cancelautorefund({ ID: _this.$route.query.id });
+      if (res.data.code == 0) {
+        _this.$Message.success(res.data.message);
+        _this.getList();
+      } else {
+        _this.$Message.error(res.data.message);
+      }
     },
     // 获取退款原因字段选项组
-    obtainWarehouse() {
+    async obtainWarehouse() {
       const _this = this;
       let fromdata = new FormData();
       fromdata.append("table", "OC_B_RETURN_ORDER");
       fromdata.append("objid", -1);
-      _this.service
-      axios({
-        url: "/p/cs/getObject",
-        method: "post",
-        data: fromdata
-      }).then(res => {
-        if (res.data.code == 0) {
-          this.information.formData.forEach(value => {
-            // 退款原因
-            if (value.label === _this.vmI18n.t("form_label.reasonRefund")) {
-              let arr = [];
-              res.data.data.addcolums
-                .find(item => item.parentdesc && item.parentdesc == "基本信息")
-                .childs.forEach(item => {
-                  if (item.name == "退款原因") {
-                    arr = item.combobox;
-                  }
-                });
-              for (let i = 0; i < arr.length; i++) {
-                value.options.push({
-                  value: arr[i].limitval,
-                  label: arr[i].limitdesc
-                });
+      const res = await _this.service.common.getObject(fromdata);
+      if (res.data.code == 0) {
+        this.information.formData.forEach(value => {
+          // 退款原因
+          if (value.label === _this.vmI18n.t("form_label.reasonRefund")) {
+            let arr = [];
+            res.data.data.addcolums
+              .find(item => item.parentdesc && item.parentdesc == "基本信息")
+              .childs.forEach(item => {
+              if (item.name == "退款原因") {
+                arr = item.combobox;
               }
+            });
+            for (let i = 0; i < arr.length; i++) {
+              value.options.push({
+                value: arr[i].limitval,
+                label: arr[i].limitdesc
+              });
             }
-          });
-        }
-      });
+          }
+        });
+      }
     },
     //获取省份id
     getAddressId(provinceName, cityName, areaName) {
       let self = this;
-      return axios({
-        url: "/p/cs/queryResionByName",
-        method: "post",
-        data: {
-          provinceName: provinceName,
-          cityName: cityName,
-          areaName: areaName
-        }
-      });
+      const query = {
+        provinceName: provinceName,
+        cityName: cityName,
+        areaName: areaName
+      };
+      return this.service.common.queryResionByName(query);
     },
     //获取list模糊数据
     async getData(search, index) {
@@ -4137,7 +4056,7 @@ export default {
       }
     },
     // 查询原始订单编号
-    queryBounced(num) {
+    async queryBounced(num) {
       //  获取页面数据
       let _this = this;
       let lists = _this.order.orderform.formValue;
@@ -4205,33 +4124,27 @@ export default {
         detailType: 2 // 退换货订单使用
       };
       fromdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/getOrderList",
-        method: "post",
-        cancelToken: true,
-        data: fromdata
-      })
-        .then(res => {
-          if (res.data.data) {
-            res.data.data.queryOrderResultList.forEach(item => {
-              item.USER_NICK =
-                item.USER_NICK + "(" + item.CP_C_SHOP_TITLE + ")";
-            });
-            _this.order.table.data = res.data.data.queryOrderResultList;
-          } else {
-            _this.order.table.data = [];
-            _this.information.formValue.ORIG_ORDER_ID = "";
-          }
-          if (num) {
-            _this.queryorder(_this.order.table.data, 1);
-          }
-          _this.order.table.loading = false;
-        })
-        .catch(err => {
-          _this.$Message.info(err.message);
-          _this.order.table.loading = false;
+      try {
+        const res = await this.service.common.getOrderList(fromdata);
+        if (res.data.data) {
+          res.data.data.queryOrderResultList.forEach(item => {
+            item.USER_NICK =
+              item.USER_NICK + "(" + item.CP_C_SHOP_TITLE + ")";
+          });
+          _this.order.table.data = res.data.data.queryOrderResultList;
+        } else {
+          _this.order.table.data = [];
           _this.information.formValue.ORIG_ORDER_ID = "";
-        });
+        }
+        if (num) {
+          _this.queryorder(_this.order.table.data, 1);
+        }
+        _this.order.table.loading = false;
+      } catch (e) {
+        _this.$Message.info(err.message);
+        _this.order.table.loading = false;
+        _this.information.formValue.ORIG_ORDER_ID = "";
+      }
     },
     // 查询原始订单编号回车事件
     queryEnter() {
@@ -4254,7 +4167,7 @@ export default {
       }
     },
     // 查询原始平台单号回车事件
-    querySourceEnter() {
+    async querySourceEnter() {
       const _this = this;
       let fromdata = new FormData();
       let param = {
@@ -4281,29 +4194,23 @@ export default {
         detailType: 2 // 退换货订单使用
       };
       fromdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/getOrderList",
-        method: "post",
-        cancelToken: true,
-        data: fromdata
-      })
-        .then(res => {
-          if (res.data.data.queryOrderResultList.length != 1) {
-            //原始平台单号存在多条记录，请用订单编号查询！
-            _this.$Message.error(_this.vmI18n.t("modalTips.az"));
-            return;
-          }
-          if (res.data.code == 0) {
-            _this.order.table.data = res.data.data.queryOrderResultList;
-            _this.queryorder(_this.order.table.data);
-          } else {
-            let err = res.data.message || _this.vmI18n.t("modalTips.ba");//未查询到数据！
-            _this.$Message.error(err);
-          }
-        })
-        .catch(err => {
-          _this.$Message.info(err.message);
-        });
+      try {
+        const res = await this.service.common.getOrderList(fromdata);
+        if (res.data.data.queryOrderResultList.length != 1) {
+          //原始平台单号存在多条记录，请用订单编号查询！
+          _this.$Message.error(_this.vmI18n.t("modalTips.az"));
+          return;
+        }
+        if (res.data.code == 0) {
+          _this.order.table.data = res.data.data.queryOrderResultList;
+          _this.queryorder(_this.order.table.data);
+        } else {
+          let err = res.data.message || _this.vmI18n.t("modalTips.ba");//未查询到数据！
+          _this.$Message.error(err);
+        }
+      } catch (e) {
+        _this.$Message.info(err.message);
+      }
     },
     // 确定原始订单编号
     async queryorder(listData, isEnter) {
@@ -4758,11 +4665,8 @@ export default {
       formdata.append("param", JSON.stringify(param));
       return new Promise(resolve => {
         let optionData = {};
-        axios({
-          url: "/p/cs/extInfoQuery",
-          method: "post",
-          data: formdata
-        }).then(function(res) {
+
+        this.service.common.extInfoQuery(formdata).then(function(res) {
           if (dataType === 1) {
             _this.clrListArr = res.data.data.psCSpec1objList;
             _this.sizeListArr = res.data.data.psCSpec2objList;

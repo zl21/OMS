@@ -274,87 +274,75 @@ export default {
         this.dataAysis = false;
       }
     },
-    getProv() {
-      axios({
-        url: "/p/cs/regionBySelect",
-        method: "post",
-        data: {
-          ID: null,
-          REGIONTYPE: "COUN",
-        },
-      }).then((res) => {
-        // this.clearCity();
-        if (res.data ? res.data.code === 0 : false) {
-          this.provList = res.data.data.data.map((row) => {
-            return {
-              ID: row.ID,
-              ENAME: row.ENAME,
-            };
-          });
-        } else {
-          // this.$Message.error("省份查询失败");
-          this.$Message.error(vmI18n.t("modalTips.yu"));
-        }
-      });
+    async getProv() {
+      let query = {
+        ID: null,
+        REGIONTYPE: "COUN",
+      };
+      const res = await this.service.common.regionBySelect()
+      // this.clearCity();
+      if (res.data ? res.data.code === 0 : false) {
+        this.provList = res.data.data.data.map((row) => {
+          return {
+            ID: row.ID,
+            ENAME: row.ENAME,
+          };
+        });
+      } else {
+        // this.$Message.error("省份查询失败");
+        this.$Message.error(vmI18n.t("modalTips.yu"));
+      }
     },
     /**回调
      *
      * callback
      * prov 省份
      */
-    getCity(callback, prov) {
+    async getCity(callback, prov) {
       let provid = prov ? prov : this.data.cp_c_region_province_id;
       // if (provid === "") return this.$Message.error("请先选择省份");
       if (provid === "") return this.$Message.error(vmI18n.t("modalTips.yv"));
-      axios({
-        url: "/p/cs/regionBySelect",
-        method: "post",
-        data: {
-          ID: provid,
-          REGIONTYPE: "PROV",
-        },
-      }).then((res) => {
-        if (res.data ? res.data.code === 0 : false) {
-          this.cityList = res.data.data.data.map((row) => {
-            return {
-              ID: row.ID,
-              ENAME: row.ENAME,
-            };
-          });
-          this.clearArea();
-          this.data.cp_c_region_area_id = this.componentData.CP_C_REGION_AREA_ID;
-        } else {
-          // this.$Message.error("城市查询失败");
-          this.$Message.error(vmI18n.t("modalTips.yw"));
-        }
-        typeof callback === "function" ? callback() : "";
-      });
+      const query = {
+        ID: provid,
+        REGIONTYPE: "PROV",
+      };
+      const res = await this.service.common.regionBySelect(query);
+      if (res.data ? res.data.code === 0 : false) {
+        this.cityList = res.data.data.data.map((row) => {
+          return {
+            ID: row.ID,
+            ENAME: row.ENAME,
+          };
+        });
+        this.clearArea();
+        this.data.cp_c_region_area_id = this.componentData.CP_C_REGION_AREA_ID;
+      } else {
+        // this.$Message.error("城市查询失败");
+        this.$Message.error(vmI18n.t("modalTips.yw"));
+      }
+      typeof callback === "function" ? callback() : "";
     },
-    getArea(callback, city) {
+    async getArea(callback, city) {
       let cityid = city ? city : this.data.cp_c_region_city_id;
       // if (cityid === "") return this.$Message.error("请先选择城市");
       if (cityid === "") return this.$Message.error(vmI18n.t("modalTips.yx"));
-      axios({
-        url: "/p/cs/regionBySelect",
-        method: "post",
-        data: {
-          ID: cityid,
-          REGIONTYPE: "CITY",
-        },
-      }).then((res) => {
-        if (res.data ? res.data.code === 0 : false) {
-          this.areaList = res.data.data.data.map((row) => {
-            return {
-              ID: row.ID,
-              ENAME: row.ENAME,
-            };
-          });
-        } else {
-          // this.$Message.error("区县查询失败");
-          this.$Message.error(vmI18n.t("modalTips.yy"));
-        }
-        typeof callback === "function" ? callback() : "";
-      });
+      const query = {
+        ID: cityid,
+        REGIONTYPE: "CITY",
+      };
+      const res = await this.service.common.regionBySelect(query);
+      if (res.data ? res.data.code === 0 : false) {
+        this.areaList = res.data.data.data.map((row) => {
+          return {
+            ID: row.ID,
+            ENAME: row.ENAME,
+          };
+        });
+      } else {
+        // this.$Message.error("区县查询失败");
+        this.$Message.error(vmI18n.t("modalTips.yy"));
+      }
+      typeof callback === "function" ? callback() : "";
     },
     clearProv() {
       this.cityList = [];

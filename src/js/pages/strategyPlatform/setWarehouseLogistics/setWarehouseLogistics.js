@@ -689,21 +689,6 @@ export default {
         const err = data.message || vmI18n.t("modalTips.y4");//作废失败
         _this.$Message.success(err);
       }
-      // axios({
-      //   url: "/p/cs/voidWarehouseLogistics",
-      //   method: "post",
-      //   data: fromdata,
-      // }).then((res) => {
-      //   _this.isSaveLoading = false;
-      //   if (res.data.code === 0) {
-      //     const ess = res.data.data.message || vmI18n.t("modalTips.y4");//作废成功
-      //     _this.getTreeData();
-      //     _this.$Message.success(ess);
-      //   } else {
-      //     const err = res.data.data.message || vmI18n.t("modalTips.y4");//作废失败
-      //     _this.$Message.success(err);
-      //   }
-      // });
     },
     // 导出
     async warningOk() {
@@ -720,7 +705,7 @@ export default {
           }
         });
       });
-      
+
       const fromData = new FormData();
       const param = {
         objid: _this.$route.query.id,
@@ -737,24 +722,6 @@ export default {
         _this.$Message.success(err);
         publicMethodsUtil.downloadUrlFile(data);
       }
-      
-      // axios({
-      //   url: "/p/cs/exportWarehouseLogisticsRank",
-      //   method: "post",
-      //   data: param,
-      // }).then((res) => {
-      //   if (res.data.code === 0) {
-      //     // const ess = res.data.message || "导出成功";
-      //     const ess = res.data.data.message || vmI18n.t("modalTips.z2");
-      //     _this.$Message.success(ess);
-      //     publicMethodsUtil.downloadUrlFile(res.data.data);
-      //   } else {
-      //     // const err = res.data.message || "导出失败";
-      //     const err = res.data.data.message || vmI18n.t("modalTips.y6");
-      //     _this.$Message.success(err);
-      //     publicMethodsUtil.downloadUrlFile(res.data.data);
-      //   }
-      // });
     },
     saveOk() {
       this.save();

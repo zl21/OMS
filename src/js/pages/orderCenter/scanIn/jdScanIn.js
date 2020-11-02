@@ -295,7 +295,7 @@ export default {
     },
 
     // 五选一查询方法
-    fiveQuery(type, value) {
+    async fiveQuery(type, value) {
       const self = this;
       let id; let receiver_phone; let receiver_name; let
         logistic_code;
@@ -313,38 +313,33 @@ export default {
           logistic_code = value;
           break;
       }
-      axios({
-        url: '/p/cs/getJdScanIncomingInfo',
-        method: 'post',
-        data: {
-          ID: id, // 退单编号
-          LOGISTIC_CODE: logistic_code, // 物流单号
-        }
-      }).then((res) => {
-        if (res.data.code === 0) {
-          self.ID = res.data.data[0].ID; // 存储退单ID
-          if (res.data.data.length === 1) {
-            self.setData(res.data.data[0]);
-            self.fm_one();
-            // 光标跳到发出条码框
-            document.getElementById('toNo').focus();
-          } else {
-            // 弹出弹框,展示多条退换货单
-            // let obj = {};
-            // obj.list = res.data.data;
-            self.changeWarehouseConfig.componentData = { list: res.data.data };
-            self.$children.find(item => item.name === 'dilog').openConfirm();
-          }
-          // 无头件标识改为否
-          self.isNoHeader = false;
-        } else {
-          self.error_one();
-          self.$Message.warning(res.data.message);
-        }
+      const res = await this.service.common.getJdScanIncomingInfo({
+        ID: id, // 退单编号
+        LOGISTIC_CODE: logistic_code, // 物流单号
       });
+      if (res.data.code === 0) {
+        self.ID = res.data.data[0].ID; // 存储退单ID
+        if (res.data.data.length === 1) {
+          self.setData(res.data.data[0]);
+          self.fm_one();
+          // 光标跳到发出条码框
+          document.getElementById('toNo').focus();
+        } else {
+          // 弹出弹框,展示多条退换货单
+          // let obj = {};
+          // obj.list = res.data.data;
+          self.changeWarehouseConfig.componentData = { list: res.data.data };
+          self.$children.find(item => item.name === 'dilog').openConfirm();
+        }
+        // 无头件标识改为否
+        self.isNoHeader = false;
+      } else {
+        self.error_one();
+        self.$Message.warning(res.data.message);
+      }
     },
     // 物流单号，原单单号查询方法
-    fiveQuery1(type, value) {
+    async fiveQuery1(type, value) {
       const self = this;
       let id; let
         logistic_code;
@@ -356,40 +351,35 @@ export default {
           logistic_code = value;
           break;
       }
-      axios({
-        url: '/p/cs/getJdScanIncomingInfo',
-        method: 'post',
-        data: {
-          ID: id, // 退单编号
-          LOGISTIC_CODE: logistic_code, // 物流单号
-        }
-      }).then((res) => {
-        if (res.data.code === 0) {
-          self.ID = res.data.data[0].ID; // 存储退单ID
-          self.setData(res.data.data[0]);
-          self.fm_two();
-          // 光标跳到发出条码框
-          document.getElementById('toNo').focus();
-          self.isNoHeader = false;
-        } else if (res.data.code === -2) {
-          const err = res.data.message || '退货入库单中存在此物流单号，不允许扫描入库！';
-          self.$Message.error(err);
-          self.removeData();
-          if (sessionStorage.getItem('companyId') !== null) {
-            this.formConfig2.formData.map((item) => {
-              if (item.itemdata && item.itemdata.name === '物流公司') {
-                item.itemdata.valuedata = sessionStorage.getItem('companyName');
-                item.itemdata.pid = sessionStorage.getItem('companyId');
-              }
-            });
-          }
-        } else {
-          // self.isModal2 = true;
-          self.ok2();
-          document.getElementById('toNo').focus();
-          self.error_one();
-        }
+      const res = await this.service.common.getJdScanIncomingInfo({
+        ID: id, // 退单编号
+        LOGISTIC_CODE: logistic_code, // 物流单号
       });
+      if (res.data.code === 0) {
+        self.ID = res.data.data[0].ID; // 存储退单ID
+        self.setData(res.data.data[0]);
+        self.fm_two();
+        // 光标跳到发出条码框
+        document.getElementById('toNo').focus();
+        self.isNoHeader = false;
+      } else if (res.data.code === -2) {
+        const err = res.data.message || '退货入库单中存在此物流单号，不允许扫描入库！';
+        self.$Message.error(err);
+        self.removeData();
+        if (sessionStorage.getItem('companyId') !== null) {
+          this.formConfig2.formData.map((item) => {
+            if (item.itemdata && item.itemdata.name === '物流公司') {
+              item.itemdata.valuedata = sessionStorage.getItem('companyName');
+              item.itemdata.pid = sessionStorage.getItem('companyId');
+            }
+          });
+        }
+      } else {
+        // self.isModal2 = true;
+        self.ok2();
+        document.getElementById('toNo').focus();
+        self.error_one();
+      }
     },
     // 清除
     removeData() {
@@ -583,7 +573,7 @@ export default {
           {
             text: '强制入库',
             disabled: false,
-            btnclick: () => {
+            btnclick: async () => {
               const self = this;
               const a = this.getData();
               a.ID = self.ID; // 后端要求新增两个字段 主表ID/是否强制入库
@@ -616,48 +606,42 @@ export default {
               if (self.isSave) return;
               self.isSave = true;
               self.btnConfig.buttons[1].disabled = true;
-              axios({
-                url: '/p/cs/saveJdScanIncoming',
-                method: 'post',
-                cancelToken: true,
-                data: a
-              }).then((res) => {
-                // console.log(res);
-                if (res.data.code === 0) {
-                  self.$Message.success(res.data.message);
-                  self.fm_four();
-                  if (this.$route.query.returnId) { // 如果是从退换货列表跳转过来的，入库完成后再调回去
-                    this.$store.commit('customize/TabHref', {
+              const res = await this.service.common.saveJdScanIncoming(a);
+              // console.log(res);
+              if (res.data.code === 0) {
+                self.$Message.success(res.data.message);
+                self.fm_four();
+                if (this.$route.query.returnId) { // 如果是从退换货列表跳转过来的，入库完成后再调回去
+                  this.$store.commit('customize/TabHref', {
+                    id: 249130279,
+                    type: 'table',
+                    name: 'OC_B_JD_RETURN_ORDER',
+                    label: '京东退货订单',
+                    back: true,
+                    query: Object.assign({
                       id: 249130279,
-                      type: 'table',
-                      name: 'OC_B_JD_RETURN_ORDER',
-                      label: '京东退货订单',
-                      back: true,
-                      query: Object.assign({
-                        id: 249130279,
-                        tabTitle: '京东退货订单'
-                      }),
-                    });
-                    // 销毁当前实例
-                    this.$destroy();
-                  } else {
-                    self.reload();
-                    self.formConfig2.formData.map((item) => {
-                      if (item.itemdata && item.itemdata.name === '物流公司') {
-                        item.itemdata.valuedata = sessionStorage.getItem('companyName');
-                        item.itemdata.pid = sessionStorage.getItem('companyId');
-                      }
-                    });
-                  }
-                  self.isSave = false;
+                      tabTitle: '京东退货订单'
+                    }),
+                  });
+                  // 销毁当前实例
+                  this.$destroy();
                 } else {
-                  self.errModelTitle = res.data.message || '强制入库失败';
-                  self.isModal3 = true;
-                  self.error_one();
-                  self.btnConfig.buttons[1].disabled = false;
-                  self.isSave = false;
+                  self.reload();
+                  self.formConfig2.formData.map((item) => {
+                    if (item.itemdata && item.itemdata.name === '物流公司') {
+                      item.itemdata.valuedata = sessionStorage.getItem('companyName');
+                      item.itemdata.pid = sessionStorage.getItem('companyId');
+                    }
+                  });
                 }
-              });
+                self.isSave = false;
+              } else {
+                self.errModelTitle = res.data.message || '强制入库失败';
+                self.isModal3 = true;
+                self.error_one();
+                self.btnConfig.buttons[1].disabled = false;
+                self.isSave = false;
+              }
             }
           },
           {
@@ -977,7 +961,7 @@ export default {
             value: 'PS_C_SKU_ECODE',
             width: '6',
             id: 'toNo',
-            inputenter: () => {
+            inputenter: async () => {
               const self = this;
               const detailist = this.jordanTableConfig.data;
               let isDlog = true; // 标识：识别明细中是否已存在该条码
@@ -1238,34 +1222,29 @@ export default {
                   //   self.$Message.warning('收件人手机不能为空!');
                   //   return;
                   // }
-                  axios({
-                    url: '/p/cs/saveJdScanIncoming',
-                    method: 'post',
-                    data: a
-                  }).then((res) => {
-                    if (res.data.code === 0) {
-                      self.$Message.success(res.data.message);
-                      if (this.$route.query.returnId) { // 如果是从退换货列表跳转过来的，入库完成后再调回去
-                        this.$store.commit('customize/TabHref', {
+                  const res = await this.service.common.saveJdScanIncoming(a);
+                  if (res.data.code === 0) {
+                    self.$Message.success(res.data.message);
+                    if (this.$route.query.returnId) { // 如果是从退换货列表跳转过来的，入库完成后再调回去
+                      this.$store.commit('customize/TabHref', {
+                        id: 249130279,
+                        type: 'table',
+                        name: 'OC_B_JD_RETURN_ORDER',
+                        label: '京东退货订单',
+                        back: true,
+                        query: Object.assign({
                           id: 249130279,
-                          type: 'table',
-                          name: 'OC_B_JD_RETURN_ORDER',
-                          label: '京东退货订单',
-                          back: true,
-                          query: Object.assign({
-                            id: 249130279,
-                            tabTitle: '京东退货订单'
-                          }),
-                        });
-                        // 销毁当前实例
-                        this.$destroy();
-                      } else {
-                        self.reload();
-                      }
+                          tabTitle: '京东退货订单'
+                        }),
+                      });
+                      // 销毁当前实例
+                      this.$destroy();
                     } else {
-                      self.$Message.error(res.data.message);
+                      self.reload();
                     }
-                  });
+                  } else {
+                    self.$Message.error(res.data.message);
+                  }
                 // console.log(a);
                 // alert('自动入库');
                 } // 如果数量全部等于扫描数量,则自动入库
