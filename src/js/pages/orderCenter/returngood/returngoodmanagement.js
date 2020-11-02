@@ -527,7 +527,6 @@ export default {
             ]
           },
           {
-<<<<<<< HEAD
             style: 'checkbox', // 勾选框类型
             label: vmI18n.t('form_label.whether_returned'), // 是否原退 前面的文字
             dataAcessKey: 'IS_BACK',
@@ -536,21 +535,10 @@ export default {
             disabled: false, // 按钮禁用控制
             checked: false, // 是否勾选控制
             checkboxChange: (e) => {
-=======
-            style: "checkbox", //勾选框类型
-            label: vmI18n.t("form_label.whether_returned"), //是否原退 前面的文字
-            dataAcessKey: "IS_BACK",
-            width: "6", //所占的宽度
-            value: "IS_BACK",
-            disabled: false, //按钮禁用控制
-            checked: false, //是否勾选控制
-            checkboxChange: async (e) => {
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
               const _this = this;
               const phy = _this.information.formData[13].itemdata;
               const phyIn = _this.information.formData[14].itemdata;
               if (!e) {
-<<<<<<< HEAD
                 _this.service.orderCenter.queryOcBOrder({ id: _this.information.formValue.ORIG_ORDER_ID })
                 // axios({
                 //   url: '/p/cs/queryOcBOrder',
@@ -578,30 +566,6 @@ export default {
                       });
                     }
                   });
-=======
-                const res = await _this.service.common.queryOcBOrder({ id: _this.information.formValue.ORIG_ORDER_ID });
-                if (res.data.code === 0) {
-                  phy.pid = phyIn.pid;
-                  phy.valuedata = phyIn.valuedata;
-                  _this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID =
-                    phyIn.pid;
-                  let arrList = JSON.parse(res.data.data);
-                  _this.information.formValue.LOGISTICS_CODE =
-                    arrList.EXPRESSCODE;
-                  _this.information.formValue.CP_C_LOGISTICS_ID =
-                    arrList.CP_C_LOGISTICS_ID;
-                  _this.information.formData.forEach((list, j) => {
-                    // 退回物流公司
-                    if (
-                      list.style === "popInput" &&
-                      list.itemdata.name === _this.vmI18n.t("table_label.returnLogisticsCompany")
-                    ) {
-                      list.itemdata.pid = arrList.CP_C_LOGISTICS_ID;
-                      list.itemdata.valuedata = arrList.CP_C_LOGISTICS_ENAME;
-                    }
-                  });
-                }
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
               } else {
                 _this.information.formValue.LOGISTICS_CODE = '';
                 phy.pid = '';
@@ -1216,7 +1180,6 @@ export default {
       this.information.formValue.BILL_TYPE = '1';
       _this.clrAndSizeFlag = true;
       if (this.$route.query.orderHrefReturnid) {
-<<<<<<< HEAD
         _this.service.orderCenter.billCopy({
           IDS: _this.$route.query.orderHrefReturnid.split(','),
           TYPE: '3'
@@ -1371,17 +1334,6 @@ export default {
                 res.data.data.returnOrders.BILL_TYPE
               );
               _this.selectSelectt();
-=======
-        this.service.common.billCopy({
-          IDS: _this.$route.query.orderHrefReturnid.split(","),
-          TYPE: "3"
-        }).then(res => {
-          if (res.data.code === 0) {
-            const item = res.data.data.baseInfo;
-            const replace = _this.replacement.formValue;
-            this.onSelectData.push(item);
-            this.information.formData.forEach((list, j) => {
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
               if (
                 _this.information.formValue.BILL_TYPE == '2'
               && !res.data.data.returnOrders.IS_RESERVED
@@ -1437,7 +1389,6 @@ export default {
               _this.refundDtoList.data = res.data.data.refundDtoList;
               _this.exchangeDtoList.data = res.data.data.exchangeDtoList;
 
-<<<<<<< HEAD
               _this.jordanTableConfig.data = res.data.data.refundDtoList;
               _this.onSelectData.push(res.data.data.returnOrders);
               _this.assignment(res.data.data.returnOrders);
@@ -1507,20 +1458,8 @@ export default {
               const err = res.data.message || _this.vmI18n.t('modalTips.n5');
               _this.$Message.error(err);
             }
-=======
-        this.service.common.getOrderDetailList({
-          id: _this.$route.query.orderHrefReturnid,
-          currentPage: 1,
-          pageSize: 1000,
-          detailType: 2 // 退换货订单使用
-        }).then(async res => {
-          let queryList = [];
-          res.data.data.records.forEach(item => {
-            if (item.REFUND_STATUS != 6) queryList.push(item);
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
           });
       }
-<<<<<<< HEAD
     } else {
       this.getList();
       this.information.formData[1].disabled = true;
@@ -1627,16 +1566,6 @@ export default {
       // })
         .then(async (res) => {
           if (res.data.code === 0) {
-=======
-      // 退换货复制退单
-      if (this.$route.query.cloneReturnGoodId) {
-        this.service.common.returnOrderquery({
-          id: _this.$route.query.cloneReturnGoodId,
-          start: 1,
-          count: 50
-        }).then(async res => {
-          if (res.data.code == 0) {
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
             _this.jordanTableConfig.loading = false;
             _this.information.formValue.BILL_TYPE = String(
               res.data.data.returnOrders.BILL_TYPE
@@ -1902,7 +1831,6 @@ export default {
     // 标记次品已调拨
     async defectiveGoods() {
       const _this = this;
-<<<<<<< HEAD
       _this.service.orderCenter.returnSkuDb({ id: _this.$route.query.id })
       // axios({
       //   url: '/p/cs/returnSkuDb',
@@ -1919,16 +1847,6 @@ export default {
             _this.$Message.error(res.data.message);
           }
         });
-=======
-      const res = await this.service.common.returnSkuDb({ id: _this.$route.query.id });
-      if (res.data.code == 0) {
-        _this.$Message.success(res.data.message);
-        // _this.getList();
-        _this.$router.go(0);
-      } else {
-        _this.$Message.error(res.data.message);
-      }
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
     },
     // 计算商品/换货金额总和
     calculateMoney(arr, num) {
@@ -3149,7 +3067,6 @@ export default {
             },
             formData: [
               {
-<<<<<<< HEAD
                 label: _this.vmI18n.t('table_label.productNo'), // 商品编码
                 style: 'dimSearch',
                 width: '6',
@@ -3159,17 +3076,6 @@ export default {
                 dimChange: (val) => {
                   // 模糊查询的方法
                   const _this = this;
-=======
-                label: _this.vmI18n.t("table_label.productNo"),//商品编码
-                style: "dimSearch",
-                width: "6",
-                value: "gbCode",
-                columns: ["ECODE"],
-                AuotData: [], //匹配的选项
-                dimChange: async (val) => {
-                  //模糊查询的方法
-                  let _this = this;
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
                   _this.jordanTableConfig2.jordanFormConfig.formValue.gbCode = val.trim();
                   const fromdata = new FormData();
                   const params = {
@@ -3179,7 +3085,6 @@ export default {
                     CONDITION: {},
                     TABLENAME: 'PS_C_PRO'
                   };
-<<<<<<< HEAD
                   fromdata.append('param', JSON.stringify(params));
                   _this.service.orderCenter.screenresult(fromdata)
                   // axios({
@@ -3199,21 +3104,6 @@ export default {
                         });
                       }
                     });
-=======
-                  fromdata.append("param", JSON.stringify(params));
-                  const res = await _this.service.common.screenresult(fromdata);
-                  if (res.data.code === 0) {
-                    let dimList =
-                      _this.jordanTableConfig2.jordanFormConfig.formData;
-
-                    dimList.map(item => {
-                      //商品编码
-                      if (item.label === _this.vmI18n.t("table_label.productNo")) {
-                        item.AuotData = res.data.data.list;
-                      }
-                    });
-                  }
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
                 },
                 dimEnter: (val) => {
                   const self = this;
@@ -3375,13 +3265,8 @@ export default {
       }
     },
     // 保存
-<<<<<<< HEAD
     saveData() {
       const _this = this;
-=======
-    async saveData() {
-      let _this = this;
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
       // 传WMS成功的单据不允许修改
       if (_this.isTowwms == 2) {
         // 传WMS成功状态的单据不可修改！
@@ -3578,7 +3463,6 @@ export default {
           _this.information.formValue.BILL_TYPE === '2'
           && !_this.isModalSave
         ) {
-<<<<<<< HEAD
           this.service.orderCenter.checkAllStroreStock(params)
           // axios({
           //   url: '/p/cs/checkAllStroreStock',
@@ -3634,49 +3518,6 @@ export default {
           });
       } else {
         _this.save(params);
-=======
-          const res = await this.service.common.checkAllStroreStock(params);
-          if (res.data.code === 0) {
-            // 换货明细的商品换货数量小于可用库存，弹窗提示,否则执行保存操作
-            if (!res.data.data) {
-              _this.availableStockMassage = res.data.message;
-              _this.availableStock = true;
-              _this.isModalSave = true;
-            } else {
-              _this.save(params);
-            }
-          } else {
-            let err = res.data.message || _this.vmI18n.t("modalTips.at");//可用库存查询失败!
-            _this.$Message.error(err);
-          }
-        } else {
-          _this.save(params);
-        }
-      } else {
-        if (
-          _this.status == 20 &&
-          !_this.information.formValue.IS_RESERVED &&
-          !_this.isModalSave &&
-          _this.information.formValue.BILL_TYPE === "2"
-        ) {
-          const res = await this.service.common.checkAllStroreStock(params);
-          if (res.data.code === 0) {
-            // 换货明细的商品换货数量小于可用库存，弹窗提示,否则执行保存操作
-            if (!res.data.data) {
-              _this.availableStockMassage = res.data.message;
-              _this.availableStock = true;
-              _this.isModalSave = true;
-            } else {
-              _this.save(params);
-            }
-          } else {
-            let err = res.data.message || _this.vmI18n.t("modalTips.at");//可用库存查询失败!
-            _this.$Message.error(err);
-          }
-        } else {
-          _this.save(params);
-        }
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
       }
       //  || (_this.status == 20 && _this.$route.query.id != -1)
     },
@@ -3685,7 +3526,6 @@ export default {
       // 防止多次触发
       const _this = this;
       _this.isSaveLoading = true;
-<<<<<<< HEAD
       _this.service.orderCenter.returnOrder(params)
       // axios({
       //   url: '/p/cs/returnOrder',
@@ -3715,29 +3555,6 @@ export default {
             _this.$Message.error(err);
           }
         });
-=======
-      const res = await this.service.common.returnOrder(params);
-      _this.availableStock = false;
-      _this.isModalSave = false;
-      _this.isSaveLoading = false;
-      if (res.data.code === 0) {
-        _this.$Message.success(res.data.message);
-        _this.$store.commit("customize/TabHref", {
-          id: 2661,
-          type: "action",
-          name: "returngoodList",
-          label: _this.vmI18n.t("panel_label.forcedStorage"),//退换货订单
-          query: Object.assign({
-            id: 2661,
-            tabTitle: _this.vmI18n.t("panel_label.forcedStorage")//退换货订单
-          }),
-          back: true
-        });
-      } else {
-        let err = res.data.message || _this.vmI18n.t("modalTips.au");//新增退换货订单失败
-        _this.$Message.error(err);
-      }
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
     },
     // 售后审核
     afterAudit() {
@@ -3756,7 +3573,6 @@ export default {
           content: _this.vmI18n.t('modalTips.av'), // 申请数量与入库数量不一致，是否确定售后审核？
           mask: true,
           showCancel: true,
-<<<<<<< HEAD
           okText: _this.vmI18n.t('common.determine'), // 取消
           cancelText: _this.vmI18n.t('common.cancel'), // 确定
           onOk: () => {
@@ -3775,18 +3591,6 @@ export default {
                   _this.$Message.error(res.data.message);
                 }
               });
-=======
-          okText: _this.vmI18n.t("common.determine"), //取消
-          cancelText: _this.vmI18n.t("common.cancel"), //确定
-          onOk: async () => {
-            const res = await this.service.common.chargebackcheck({ ID: _this.$route.query.id });
-            if (res.data.code === 0) {
-              _this.$Message.success(res.data.message);
-              _this.getList();
-            } else {
-              _this.$Message.error(res.data.message);
-            }
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
           }
         });
       } else {
@@ -3795,7 +3599,6 @@ export default {
           content: _this.vmI18n.t('modalTips.k7'), // 是否确定售后审核？
           mask: true,
           showCancel: true,
-<<<<<<< HEAD
           okText: _this.vmI18n.t('common.determine'), // 取消
           cancelText: _this.vmI18n.t('common.cancel'), // 确定
           onOk: () => {
@@ -3814,18 +3617,6 @@ export default {
                   _this.$Message.error(res.data.message);
                 }
               });
-=======
-          okText: _this.vmI18n.t("common.determine"), //取消
-          cancelText: _this.vmI18n.t("common.cancel"), //确定
-          onOk: async () => {
-            const res = await this.service.common.chargebackcheck({ ID: _this.$route.query.id });
-            if (res.data.code === 0) {
-              _this.$Message.success(res.data.message);
-              _this.getList();
-            } else {
-              _this.$Message.error(res.data.message);
-            }
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
           }
         });
       }
@@ -3839,7 +3630,6 @@ export default {
         content: _this.vmI18n.t('modalTips.l3'), // 是否确定取消退单？
         mask: true,
         showCancel: true,
-<<<<<<< HEAD
         okText: _this.vmI18n.t('common.determine'), // 取消
         cancelText: _this.vmI18n.t('common.cancel'), // 确定
         onCancel: () => {
@@ -3858,18 +3648,6 @@ export default {
                 _this.$Message.error(res.data.message);
               }
             });
-=======
-        okText: _this.vmI18n.t("common.determine"), //取消
-        cancelText: _this.vmI18n.t("common.cancel"), //确定
-        onCancel: async () => {
-          const res = await this.service.common.OcCancelChangingOrRefund({ ids: [this.$route.query.id] });
-          if (res.data.code == 0) {
-            _this.$Message.success(res.data.message);
-            _this.getList();
-          } else {
-            _this.$Message.error(res.data.message);
-          }
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
         }
       });
     },
@@ -3886,7 +3664,6 @@ export default {
         content: _this.vmI18n.t('modalTips.l7'), // 是否确定虚拟入库？
         mask: true,
         showCancel: true,
-<<<<<<< HEAD
         okText: _this.vmI18n.t('common.determine'), // 取消
         cancelText: _this.vmI18n.t('common.cancel'), // 确定
         onCancel: () => {
@@ -3905,25 +3682,12 @@ export default {
                 _this.$Message.error(res.data.message);
               }
             });
-=======
-        okText: _this.vmI18n.t("common.determine"), //取消
-        cancelText: _this.vmI18n.t("common.cancel"), //确定
-        onCancel: async () => {
-          const res = await this.service.common.updateVirtualLibrary({ ID: _this.$route.query.id });
-          if (res.data.code == 0) {
-            _this.$Message.success(res.data.message);
-            _this.getList();
-          } else {
-            _this.$Message.error(res.data.message);
-          }
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
         }
       });
     },
     // 取消自动退款
     async cancelRefund() {
       const _this = this;
-<<<<<<< HEAD
       if (this.$route.query.id == '-1') return;
       _this.service.orderCenter.cancelautorefund({ ID: _this.$route.query.id })
       // axios({
@@ -3940,21 +3704,10 @@ export default {
             _this.$Message.error(res.data.message);
           }
         });
-=======
-      if (this.$route.query.id == "-1") return;
-      const res = await this.service.common.cancelautorefund({ ID: _this.$route.query.id });
-      if (res.data.code == 0) {
-        _this.$Message.success(res.data.message);
-        _this.getList();
-      } else {
-        _this.$Message.error(res.data.message);
-      }
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
     },
     // 获取退款原因字段选项组
     async obtainWarehouse() {
       const _this = this;
-<<<<<<< HEAD
       const fromdata = new FormData();
       fromdata.append('table', 'OC_B_RETURN_ORDER');
       fromdata.append('objid', -1);
@@ -3987,37 +3740,9 @@ export default {
             });
           }
         });
-=======
-      let fromdata = new FormData();
-      fromdata.append("table", "OC_B_RETURN_ORDER");
-      fromdata.append("objid", -1);
-      const res = await _this.service.common.getObject(fromdata);
-      if (res.data.code == 0) {
-        this.information.formData.forEach(value => {
-          // 退款原因
-          if (value.label === _this.vmI18n.t("form_label.reasonRefund")) {
-            let arr = [];
-            res.data.data.addcolums
-              .find(item => item.parentdesc && item.parentdesc == "基本信息")
-              .childs.forEach(item => {
-              if (item.name == "退款原因") {
-                arr = item.combobox;
-              }
-            });
-            for (let i = 0; i < arr.length; i++) {
-              value.options.push({
-                value: arr[i].limitval,
-                label: arr[i].limitdesc
-              });
-            }
-          }
-        });
-      }
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
     },
     // 获取省份id
     getAddressId(provinceName, cityName, areaName) {
-<<<<<<< HEAD
       const self = this;
       return self.service.orderCenter.queryResionByName({
         provinceName,
@@ -4040,22 +3765,6 @@ export default {
       const param = {
         isBlur: 'Y',
         isGift: 'Y',
-=======
-      let self = this;
-      const query = {
-        provinceName: provinceName,
-        cityName: cityName,
-        areaName: areaName
-      };
-      return this.service.common.queryResionByName(query);
-    },
-    //获取list模糊数据
-    async getData(search, index) {
-      let self = this;
-      let param = {
-        isBlur: "Y",
-        isGift: "Y",
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
         psCSku: {
           ECODE: search
         }
@@ -4063,7 +3772,6 @@ export default {
       if (search === '') {
         return;
       }
-<<<<<<< HEAD
       this.service.orderCenter.skuQuery(param)
       // axios({
       //   url: '/p/cs/skuQuery',
@@ -4083,22 +3791,6 @@ export default {
             }
           }
         });
-=======
-      const res = await self.service.common.skuQuery(param);
-      if (res.data.code === 0) {
-        if (index) {
-          self.jordanTableConfig2.jordanFormConfig.formData[1].AuotData = res.data.data.data.map(
-            row => {
-              return {
-                ECODE: row.ECODE,
-                PS_C_PRO_ENAME: row.PS_C_PRO_ENAME,
-                SPEC: row.SPEC
-              };
-            }
-          );
-        }
-      }
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
     },
     async entry(search, index) {
       // index 1 ==> 退货明细 2 ==> 换货明细 -- 去除退货明细20191217
@@ -4111,7 +3803,6 @@ export default {
           ECODE: search
         }
       };
-<<<<<<< HEAD
       this.service.orderCenter.skuQuery(param)
       // axios({
       //   url: '/p/cs/skuQuery',
@@ -4247,92 +3938,10 @@ export default {
                   obj.QTY_EXCHANGE,
                   obj.PRICE
                 ); // 换货金额
-=======
-      const res = await self.service.common.skuQuery(param);
-      if (res.data.code === 0) {
-        let dataList = [];
-        if (index === 2) {
-          self.jordanTableConfig2.jordanFormConfig.formValue.sku = "";
-          dataList = self.jordanTableConfig2.data;
-        }
-        let lists = res.data.data.data || [];
-        if (lists.length === 0) {
-          return this.$message.error(this.vmI18n.t("modalTips.g6"));//不存在该条码！
-        }
-        let obj = lists.length > 0 ? lists[0] : {};
-        obj.ID = -1; // 明细id
-        obj.QTY_CAN_REFUND = qty; // 退货数量
-        obj.QTY_REFUND = qty; // 退货数量
-        obj.QTY_EXCHANGE = qty; // 换货数量
-        obj.PS_C_SKU_ECODE = obj.ECODE; // 条码
-        obj.BARCODE = obj.GBCODE; // 国际码
-        // obj.PS_C_PRO_ECODE = obj.PS_C_PRO_ECODE; // 商品编码
-        obj.PS_C_CLR_ID = obj.colorId; // 颜色
-        obj.PS_C_CLR_ECODE = obj.colorCode;
-        obj.PS_C_CLR_ENAME = obj.colorName;
-        obj.PS_C_SIZE_ID = obj.sizeId; // 尺寸
-        obj.PS_C_SIZE_ECODE = obj.sizeCode;
-        obj.PS_C_SIZE_ENAME = obj.sizeName;
-        // obj.PS_C_PRO_ENAME = obj.PS_C_PRO_ENAME; // 商品名称
-        obj.SEX_NAME = obj.sexName;
-        obj.SEX = obj.sex;
-        obj.PRICE = obj.tagPrice; // 商品单价
-        obj.AMT_REFUND = 0; // 退货金额
-        obj.QTY_IN = 0; // 入库数量
-        obj.SKU_SPEC = obj.SPEC; // 规格
-        obj.amt_refund_single = 0; // 单件退货金额
-        obj.PRODUCT_MARK = "正品"; // 商品标记
-        obj.AMT_REFUND = 0; // 换货金额
-        await self.getDataByProinfo(obj.PS_C_PRO_ECODE, 1);
-        obj.clrList = this.clrListArr;
-        obj.sizeList = this.sizeListArr;
-        // 新增换货明细时判断退货明细中是否存在此商品编号
-        // 存在 ==> 将退货明细中数据拿过来
-        // 不存在 ==> 新增
-        if (index == 2) {
-          let x = JSON.parse(JSON.stringify(self.refundDtoList.data));
-          let y = x.find(
-            item =>
-              item.ECODE === obj.ECODE || item.PS_C_SKU_ECODE === obj.ECODE
-          );
-          if (y) {
-            // 如果退货明细中存在再判断换货明细中是否存在
-            // 换货明细中存在 => 数量相加、金额计算
-            // 不存在push进去PS_C_SKU_ECODE
-            let j = JSON.parse(JSON.stringify(dataList));
-            let i = j.find(
-              item =>
-                item.ECODE === obj.ECODE || item.PS_C_SKU_ECODE === obj.ECODE
-            );
-            if (i) {
-              y.QTY_EXCHANGE =
-                (parseInt(y.QTY_EXCHANGE) ? parseInt(y.QTY_EXCHANGE) : 0) +
-                parseInt(obj.QTY_EXCHANGE);
-              dataList = [...j];
-              y.AMT_REFUND = publicMethodsUtil.accMul(
-                y.QTY_EXCHANGE,
-                obj.PRICE
-              );
-            } else {
-              // 判断退货明细中是否有单件实际成交价
-              // 有 => 单件实际成交价 * 数量
-              // 无 => 吊牌价 * 数量
-              if (y.amtRefundSingle == 0 || !y.amtRefundSingle) {
-                y.AMT_REFUND = publicMethodsUtil.accMul(
-                  obj.PRICE,
-                  obj.QTY_EXCHANGE
-                );
-              } else {
-                y.AMT_REFUND = publicMethodsUtil.accMul(
-                  y.amtRefundSingle,
-                  obj.QTY_EXCHANGE
-                );
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
               }
               y.QTY_EXCHANGE = parseInt(obj.QTY_EXCHANGE);
               dataList.push(y);
             }
-<<<<<<< HEAD
             if (index == 1) {
             // 1 退货明细 2 退换货明细
               dataList.forEach((item) => {
@@ -4351,81 +3960,6 @@ export default {
             }
           }
         });
-=======
-          } else {
-            // 退货明细中无此商品编码 再验证换货明细中是否存在
-            // 存在    => 退货数量加
-            // 不存在  => push进去
-            let eData = dataList;
-            let s = eData.find(
-              item =>
-                item.ECODE === obj.ECODE || item.PS_C_SKU_ECODE === obj.ECODE
-            );
-
-            if (s) {
-              s.QTY_EXCHANGE =
-                (parseInt(s.QTY_EXCHANGE) ? parseInt(s.QTY_EXCHANGE) : 0) +
-                parseInt(obj.QTY_EXCHANGE);
-              dataList = [...eData];
-              s.AMT_REFUND = publicMethodsUtil.accMul(
-                s.QTY_EXCHANGE,
-                obj.PRICE
-              );
-            } else {
-              dataList.push(obj);
-              obj.AMT_REFUND = publicMethodsUtil.accMul(
-                obj.QTY_EXCHANGE,
-                obj.PRICE
-              ); // 换货金额
-            }
-          }
-        } else {
-          // 判断是否要新增一条明细=
-          let data = dataList;
-          let d = data.find(
-            item =>
-              item.ECODE === obj.ECODE || item.PS_C_SKU_ECODE === obj.ECODE
-          );
-          if (d) {
-            d.QTY_CAN_REFUND =
-              parseInt(d.QTY_CAN_REFUND) + parseInt(obj.QTY_CAN_REFUND);
-            d.QTY_REFUND = parseInt(d.QTY_REFUND) + parseInt(obj.QTY_REFUND);
-            d.QTY_EXCHANGE =
-              (parseInt(d.QTY_EXCHANGE) ? parseInt(d.QTY_EXCHANGE) : 0) +
-              parseInt(obj.QTY_EXCHANGE);
-            dataList = [...data];
-            d.AMT_REFUND = publicMethodsUtil.accMul(d.QTY_REFUND, d.PRICE); // 退货金额
-            d.AMT_REFUND = publicMethodsUtil.accMul(d.QTY_EXCHANGE, d.PRICE); // 换货金额
-          } else {
-            dataList.push(obj);
-            obj.AMT_REFUND = publicMethodsUtil.accMul(
-              obj.QTY_REFUND,
-              obj.PRICE
-            ); // 退货金额
-            obj.AMT_REFUND = publicMethodsUtil.accMul(
-              obj.QTY_EXCHANGE,
-              obj.PRICE
-            ); // 换货金额
-          }
-        }
-        if (index == 1) {
-          // 1 退货明细 2 退换货明细
-          dataList.forEach(item => {
-            item.AMT_REFUND = publicMethodsUtil.accMul(
-              item.QTY_REFUND,
-              item.PRICE
-            );
-          });
-          self.refundDtoList.data = dataList;
-          self.amountReturned = self.calculateMoney(dataList, 1).toFixed(2);
-          self.returnTotal();
-        } else if (index == 2) {
-          self.exchangeAmount = self.calculateMoney(dataList, 1).toFixed(2);
-          self.returnTotal();
-          self.exchangeDtoList.data = dataList;
-        }
-      }
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
     },
     // 列表勾选
     returnOnSelect(e) {
@@ -4628,7 +4162,6 @@ export default {
         ],
         detailType: 2 // 退换货订单使用
       };
-<<<<<<< HEAD
       fromdata.append('param', JSON.stringify(param));
       this.service.orderCenter.getOrderList(fromdata)
       // axios({
@@ -4657,30 +4190,6 @@ export default {
           _this.order.table.loading = false;
           _this.information.formValue.ORIG_ORDER_ID = '';
         });
-=======
-      fromdata.append("param", JSON.stringify(param));
-      try {
-        const res = await this.service.common.getOrderList(fromdata);
-        if (res.data.data) {
-          res.data.data.queryOrderResultList.forEach(item => {
-            item.USER_NICK =
-              item.USER_NICK + "(" + item.CP_C_SHOP_TITLE + ")";
-          });
-          _this.order.table.data = res.data.data.queryOrderResultList;
-        } else {
-          _this.order.table.data = [];
-          _this.information.formValue.ORIG_ORDER_ID = "";
-        }
-        if (num) {
-          _this.queryorder(_this.order.table.data, 1);
-        }
-        _this.order.table.loading = false;
-      } catch (e) {
-        _this.$Message.info(err.message);
-        _this.order.table.loading = false;
-        _this.information.formValue.ORIG_ORDER_ID = "";
-      }
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
     },
     // 查询原始订单编号回车事件
     queryEnter() {
@@ -4729,7 +4238,6 @@ export default {
         ],
         detailType: 2 // 退换货订单使用
       };
-<<<<<<< HEAD
       fromdata.append('param', JSON.stringify(param));
       this.service.orderCenter.getOrderList(fromdata)
       // axios({
@@ -4755,26 +4263,6 @@ export default {
         .catch((err) => {
           _this.$Message.info(err.message);
         });
-=======
-      fromdata.append("param", JSON.stringify(param));
-      try {
-        const res = await this.service.common.getOrderList(fromdata);
-        if (res.data.data.queryOrderResultList.length != 1) {
-          //原始平台单号存在多条记录，请用订单编号查询！
-          _this.$Message.error(_this.vmI18n.t("modalTips.az"));
-          return;
-        }
-        if (res.data.code == 0) {
-          _this.order.table.data = res.data.data.queryOrderResultList;
-          _this.queryorder(_this.order.table.data);
-        } else {
-          let err = res.data.message || _this.vmI18n.t("modalTips.ba");//未查询到数据！
-          _this.$Message.error(err);
-        }
-      } catch (e) {
-        _this.$Message.info(err.message);
-      }
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
     },
     // 确定原始订单编号
     async queryorder(listData, isEnter) {
@@ -5209,7 +4697,6 @@ export default {
           sizeId
         };
       }
-<<<<<<< HEAD
       const formdata = new FormData();
       formdata.append('param', JSON.stringify(param));
       return new Promise((resolve) => {
@@ -5225,19 +4712,6 @@ export default {
               _this.clrListArr = res.data.data.psCSpec1objList;
               _this.sizeListArr = res.data.data.psCSpec2objList;
             } else if (res.data.code === 0) {
-=======
-      let formdata = new FormData();
-      formdata.append("param", JSON.stringify(param));
-      return new Promise(resolve => {
-        let optionData = {};
-
-        this.service.common.extInfoQuery(formdata).then(function(res) {
-          if (dataType === 1) {
-            _this.clrListArr = res.data.data.psCSpec1objList;
-            _this.sizeListArr = res.data.data.psCSpec2objList;
-          } else {
-            if (res.data.code === 0) {
->>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
               _this.itemSkuEcode = res.data.data.ecode;
               _this.itemSkuId = res.data.data.skuId;
               _this.itemGbcode = res.data.data.gbcode;

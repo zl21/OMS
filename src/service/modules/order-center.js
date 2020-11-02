@@ -63,5 +63,11 @@ export default {
   returnSkuDb: params => network.post('/p/cs/returnSkuDb', params),
   checkAllStroreStock: params => network.post('/p/cs/checkAllStroreStock', params),
   returnOrder: params => network.post('/p/cs/returnOrder', params),
-  extInfoQuery: params => network.post('/p/cs/extInfoQuery', params)
+  extInfoQuery: params => network.post('/p/cs/extInfoQuery', params),
+  manualMatchingCheck: params => network.post('/api/cs/oc/oms/v1/manualMatchingCheck', params),
+  returnCancel: params => network.post('/api/cs/oc/oms/v1/returnCancel', params),
+  ReturnStorageList: params => network.post('/api/cs/oc/oms/v1/ReturnStorageList', params),
+  exportOcBRefundIn: params => network.post('/api/cs/oc/oms/v1/exportOcBRefundIn', params),
+  ReturnStorageSave: params => network.post('/api/cs/oc/oms/v1/ReturnStorageSave', params),
+  searchButtonsInDetail: params => network.post('/api/cs/oc/oms/v1/searchButtonsInDetail', params)
 };
