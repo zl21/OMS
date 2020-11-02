@@ -1,7 +1,7 @@
 import matrix from '@/views/pages/common/orderDetail/matrix.vue';
 import DragDialog from 'framework/components/dialog/dragDialog.vue';
 import axios from 'framework/__utils__/request';
-import port from '@/views/pages/common/orderDetail/connector.js';
+import port from '@/js/pages/common/orderDetail/connector.js';
 // import store from '@/store';
 import store from '@/config/store/store';
 

@@ -35,8 +35,7 @@ import request, {
 import ajax from 'framework/__utils__/ajax';
 import store from '@/config/store/store'; // 将老框架公共状态注册为customize模块
 import groups from '@/assets/js/promotion/groups.js';// 促销需要
-
-import connector from './src/views/pages/common/orderDetail/connector.js';
+import connector from './src/js/pages/common/orderDetail/connector.js';
 
 // import 'omsTheme/skin/skyBlue/index.min.css'
 
