@@ -15,6 +15,7 @@ import customizedTheme from './src/config/customized.theme.js';//主题配置
 import externalTreeDatasConfig from './src/config/externalTreeDatas.config'; // 树结构配置
 import i18n from '@burgeon/internationalization/i18n/i18n.js'; // 国际化
 import service from '@/service/index.js';
+import qs from 'qs';
 // import './static/theme/custom.less'; // 主题文件
 // import './static/theme/theme.less'; // 自定义主题文件
 // import '@syman/ark-ui/dist/styles/ark-ui.css';
@@ -35,8 +36,7 @@ import request, {
 import ajax from 'framework/__utils__/ajax';
 import store from '@/config/store/store'; // 将老框架公共状态注册为customize模块
 import groups from '@/assets/js/promotion/groups.js';// 促销需要
-
-import connector from './src/views/pages/common/orderDetail/connector.js';
+import connector from './src/js/pages/common/orderDetail/connector.js';
 
 // import 'omsTheme/skin/skyBlue/index.min.css'
 
@@ -48,6 +48,7 @@ Vue.prototype.httpForm = httpFormdata;
 Vue.prototype.$httpApi = apiPath
 Vue.prototype.$store = store;
 Vue.prototype.service = service;
+Vue.prototype.qs = qs;
 window.R3 = R3; // 暴露R3为全局变量
 window.vmI18n = i18n; // 挂载国际化
 Vue.prototype.$theme = customizedTheme;//将主题方法挂载到原型上

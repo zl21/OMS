@@ -41,7 +41,7 @@ export default {
       self.getTableData(obj, true);
       this.isChange = false;
     },
-    saveQuanXian() {
+    async saveQuanXian() {
       this.getSaveData();
       if (this.saveTableArr.length === 0) {
         this.$Message.info('没有更改');
@@ -71,16 +71,27 @@ export default {
         params.data[`${this.permissionTable}`] = this.saveTableArr;
       }
       this.spinShow = true;
-      this.$network.post(url, this.$urlSearchParams(params))
-        .then((res) => {
-          this.spinShow = false;
-          this.$Modal.fcSuccess({
-            title: '成功',
-            content: res.data.message
-          });
-          this.getTableData();
-          this.isChange = false;
+      // 接口
+      const res = await this.service.systemConfig.objectSave(url,urlSearchParams(params))
+      if(res){
+        this.spinShow = false;
+        this.$Modal.fcSuccess({
+          title: '成功',
+          content: res.data.message
         });
+        this.getTableData();
+        this.isChange = false;
+      }
+      // this.$network.post(url, this.$urlSearchParams(params))
+      //   .then((res) => {
+      //     this.spinShow = false;
+      //     this.$Modal.fcSuccess({
+      //       title: '成功',
+      //       content: res.data.message
+      //     });
+      //     this.getTableData();
+      //     this.isChange = false;
+      //   });
     },
     getSaveData() {
       this.saveTableArr = [];

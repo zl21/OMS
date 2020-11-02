@@ -1,6 +1,6 @@
 import buttons from 'professionalComponents/businessButton.vue';
-import Aform from 'professionalComponents/businessForm.vue';
 import Atable from 'professionalComponents/businessActionTable.vue';
+import Aform from 'professionalComponents/businessForm.vue';
 import jordanModal from 'professionalComponents/businessDialog';
 import axios from 'axios';
 

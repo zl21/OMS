@@ -164,22 +164,44 @@ export default {
     }, // 重构树数据
 
     // 获取角色id
-    getRoleData() {
-      network.post("/p/cs/groupTreeload", {}).then((res) => {
-        if (res.data.code === 0) {
-          this.groupId = res.data.data[0].ID;
-          this.newGroupId = res.data.data[0].ID;
-          this.filterTreeConfig.treeAttribute.data = this.restructureMenuTreeData(
-            res.data.data,
-            true
-          );
+    async getRoleData() {
+      const res = await this.service.common.groupTreeload({});
+      if (res.data.code === 0) {
+        this.groupId = res.data.data[0].ID;
+        this.newGroupId = res.data.data[0].ID;
+        this.filterTreeConfig.treeAttribute.data = this.restructureMenuTreeData(
+          res.data.data,
+          true
+        );
 
-          this.getTableData();
-        }
-      });
+        this.getTableData();
+      }
+      // network.post("/p/cs/groupTreeload", {}).then((res) => {
+      //   if (res.data.code === 0) {
+      //     this.groupId = res.data.data[0].ID;
+      //     this.newGroupId = res.data.data[0].ID;
+      //     this.filterTreeConfig.treeAttribute.data = this.restructureMenuTreeData(
+      //       res.data.data,
+      //       true
+      //     );
+
+      //     this.getTableData();
+      //   }
+      // });
     },
     // 获取搜索框
-    getSearchForm() {
+    async getSearchForm() {
+      // 
+      let {data:{code,datas}} = await this.service.systemConfig.selectPermissionColumn(fromdata)
+      if (code === 0) {
+        let dataArray = form.refactoringData(datas.dataarry);
+        dataArray.map(item => {
+          if (item.item.value) {
+            item.item.props.value = item.item.value;
+          }
+        })
+        this.searchFormConfig.defaultconfig = dataArray;
+      }
       // network.post('/p/cs/permission/v1/selectPermissionColumn', urlSearchParams({ permissionType: this.permissionType }))
       //   .then((res) => {
       //     if (res.data.code === 0) {
@@ -192,26 +214,10 @@ export default {
       //       this.searchFormConfig.defaultconfig = dataArray;
       //     }
       //   });
-      network
-        .post(
-          "http://yapi.dev.syman.cn/mock/624/p/cs/permission/v1/selectPermissionColumn",
-          urlSearchParams({ permissionType: 1 })
-        )
-        .then((res) => {
-          if (res.data.code === 0) {
-            let dataArray = form.refactoringData(res.data.datas.dataarry);
-            dataArray.map((item) => {
-              if (item.item.value) {
-                item.item.props.value = item.item.value;
-              }
-            });
-            this.searchFormConfig.defaultconfig = dataArray;
-          }
-        });
     },
 
     // 获取表格
-    getTableData(searchCondition = {}, refresh = false) {
+    async getTableData(searchCondition = {}, refresh = false) {
       this.groupId = this.newGroupId;
       let url, params;
       if (this.permissionType === "sensitive") {
@@ -221,147 +227,261 @@ export default {
           QUERY: "",
         };
       } else {
-        // url = "/p/cs/permission/v1/selectDataPermission";
-        url =
-          "http://yapi.dev.syman.cn/mock/624/p/cs/permission/v1/selectDataPermission";
+        url = "/p/cs/permission/v1/selectDataPermission";
         params = {
           permissionType: this.permissionType,
-          groupId: this.groupId,
+          groupId: this.groupId, 
           searchCondition: searchCondition,
         };
       }
-      network.post(url, urlSearchParams(params)).then((res) => {
-        if (res.data.code === 0) {
-          this.tableArr.isReadValueTotal = 0;
-          this.tableArr.isWriteValueTotal = 0;
-          this.tableArr.isReadValue = false;
-          this.tableArr.isWriteValue = false;
-          this.tableArr.isChild = false;
-          this.tableArr.parentIsRead = 0;
-          this.tableArr.parentIsWrite = 0;
-          this.tableArr.isParentReadValue = false;
-          this.tableArr.isParentWriteValue = false;
+      const {data:{data,code}} = await this.service.systemConfig.selectPermissionColumn(url,urlSearchParams(params))
+      if (code === 0) {
+        this.tableArr.isReadValueTotal = 0;
+        this.tableArr.isWriteValueTotal = 0;
+        this.tableArr.isReadValue = false;
+        this.tableArr.isWriteValue = false;
+        this.tableArr.isChild = false;
+        this.tableArr.parentIsRead = 0;
+        this.tableArr.parentIsWrite = 0;
+        this.tableArr.isParentReadValue = false;
+        this.tableArr.isParentWriteValue = false;
 
-          if (this.permissionType === "sensitive") {
-            let dt = res.data.data;
-            dt.map((item) => {
-              dt.isChild = !!item.PARENT_GROUPS_ID;
-              if (item.PARENT_GROUPS_ID) {
-                if (item.PARENT_ISREAD == "Y") {
-                  this.tableArr.parentIsRead++;
-                }
-                if (item.PARENT_ISMODIFY == "Y") {
-                  this.tableArr.parentIsWrite++;
-                }
+        if (this.permissionType === "sensitive") {
+          let dt = data;
+          dt.map((item) => {
+            dt.isChild = !!item.PARENT_GROUPS_ID;
+            if (item.PARENT_GROUPS_ID) {
+              if (item.PARENT_ISREAD == "Y") {
+                this.tableArr.parentIsRead++;
               }
-              item.IS_WRITE = item.ISMODIFY == "Y";
-              item.IS_READ = item.ISREAD == "Y";
-            });
-            this.tableArr.columns = this.sensitiveColumns;
-            this.tableArr.rows = res.data.data;
-            this.tableArr.isChild = dt.isChild;
-          } else {
-            let dt = res.data.data;
-            dt.rows.map((item) => {
-              dt.isChild = !!item.PARENT_GROUPS_ID;
-              if (item.PARENT_GROUPS_ID) {
-                if (item.PARENT_IS_READ == "Y") {
-                  this.tableArr.parentIsRead++;
-                }
-                if (item.PARENT_IS_WRITE == "Y") {
-                  this.tableArr.parentIsWrite++;
-                }
+              if (item.PARENT_ISMODIFY == "Y") {
+                this.tableArr.parentIsWrite++;
               }
-            });
-            this.tableArr.columns = dt.columns;
-            this.tableArr.rows = dt.rows;
-            this.tableArr.isChild = dt.isChild;
-          }
-
-          this.tableArr.rows.forEach((item) => {
-            if (item.IS_READ === "Y" || item.ISREAD === "Y") {
-              item.IS_READ = true;
-              this.tableArr.isReadValueTotal++;
-            } else {
-              item.IS_READ = false;
             }
-            if (item.IS_WRITE === "Y" || item.ISMODIFY === "Y") {
-              item.IS_WRITE = true;
-              this.tableArr.isWriteValueTotal++;
-            } else {
-              item.IS_WRITE = false;
+            item.IS_WRITE = item.ISMODIFY == "Y";
+            item.IS_READ = item.ISREAD == "Y";
+          });
+          this.tableArr.columns = this.sensitiveColumns;
+          this.tableArr.rows = data;
+          this.tableArr.isChild = dt.isChild;
+        } else {
+          let dt = data;
+          dt.rows.map((item) => {
+            dt.isChild = !!item.PARENT_GROUPS_ID;
+            if (item.PARENT_GROUPS_ID) {
+              if (item.PARENT_IS_READ == "Y") {
+                this.tableArr.parentIsRead++;
+              }
+              if (item.PARENT_IS_WRITE == "Y") {
+                this.tableArr.parentIsWrite++;
+              }
             }
           });
-
-          if (this.tableArr.parentIsRead === this.tableArr.rows.length) {
-            this.tableArr.isParentReadValue = true;
-          }
-          if (this.tableArr.parentIsWrite === this.tableArr.rows.length) {
-            this.tableArr.isParentWriteValue = true;
-          }
-          if (this.tableArr.isReadValueTotal === this.tableArr.rows.length) {
-            this.tableArr.isReadValue = true;
-          }
-          if (this.tableArr.isWriteValueTotal === this.tableArr.rows.length) {
-            this.tableArr.isWriteValue = true;
-          }
-
-          this.permissionTable = res.data.data.permissionTable;
-          this.permissionKeyColumn = res.data.data.permissionKeyColumn;
-
-          this.oldTableArr = JSON.parse(JSON.stringify(this.tableArr.rows));
-          if (refresh) {
-            // this.$Message.success("刷新成功");
-            this.$Message.success(vmI18n.t("common.refresh_succee"));
-          }
+          this.tableArr.columns = dt.columns;
+          this.tableArr.rows = dt.rows;
+          this.tableArr.isChild = dt.isChild;
         }
-      });
+
+        this.tableArr.rows.forEach((item) => {
+          if (item.IS_READ === "Y" || item.ISREAD === "Y") {
+            item.IS_READ = true;
+            this.tableArr.isReadValueTotal++;
+          } else {
+            item.IS_READ = false;
+          }
+          if (item.IS_WRITE === "Y" || item.ISMODIFY === "Y") {
+            item.IS_WRITE = true;
+            this.tableArr.isWriteValueTotal++;
+          } else {
+            item.IS_WRITE = false;
+          }
+        });
+
+        if (this.tableArr.parentIsRead === this.tableArr.rows.length) {
+          this.tableArr.isParentReadValue = true;
+        }
+        if (this.tableArr.parentIsWrite === this.tableArr.rows.length) {
+          this.tableArr.isParentWriteValue = true;
+        }
+        if (this.tableArr.isReadValueTotal === this.tableArr.rows.length) {
+          this.tableArr.isReadValue = true;
+        }
+        if (this.tableArr.isWriteValueTotal === this.tableArr.rows.length) {
+          this.tableArr.isWriteValue = true;
+        }
+
+        this.permissionTable = data.permissionTable;
+        this.permissionKeyColumn = data.permissionKeyColumn;
+
+        this.oldTableArr = JSON.parse(JSON.stringify(this.tableArr.rows));
+        if (refresh) {
+          this.$Message.success(vmI18n.t("common.refresh_succee"));//刷新成功
+        }
+      }
+      // network.post(url, urlSearchParams(params)).then((res) => {
+      //   if (res.data.code === 0) {
+      //     this.tableArr.isReadValueTotal = 0;
+      //     this.tableArr.isWriteValueTotal = 0;
+      //     this.tableArr.isReadValue = false;
+      //     this.tableArr.isWriteValue = false;
+      //     this.tableArr.isChild = false;
+      //     this.tableArr.parentIsRead = 0;
+      //     this.tableArr.parentIsWrite = 0;
+      //     this.tableArr.isParentReadValue = false;
+      //     this.tableArr.isParentWriteValue = false;
+
+      //     if (this.permissionType === "sensitive") {
+      //       let dt = res.data.data;
+      //       dt.map((item) => {
+      //         dt.isChild = !!item.PARENT_GROUPS_ID;
+      //         if (item.PARENT_GROUPS_ID) {
+      //           if (item.PARENT_ISREAD == "Y") {
+      //             this.tableArr.parentIsRead++;
+      //           }
+      //           if (item.PARENT_ISMODIFY == "Y") {
+      //             this.tableArr.parentIsWrite++;
+      //           }
+      //         }
+      //         item.IS_WRITE = item.ISMODIFY == "Y";
+      //         item.IS_READ = item.ISREAD == "Y";
+      //       });
+      //       this.tableArr.columns = this.sensitiveColumns;
+      //       this.tableArr.rows = res.data.data;
+      //       this.tableArr.isChild = dt.isChild;
+      //     } else {
+      //       let dt = res.data.data;
+      //       dt.rows.map((item) => {
+      //         dt.isChild = !!item.PARENT_GROUPS_ID;
+      //         if (item.PARENT_GROUPS_ID) {
+      //           if (item.PARENT_IS_READ == "Y") {
+      //             this.tableArr.parentIsRead++;
+      //           }
+      //           if (item.PARENT_IS_WRITE == "Y") {
+      //             this.tableArr.parentIsWrite++;
+      //           }
+      //         }
+      //       });
+      //       this.tableArr.columns = dt.columns;
+      //       this.tableArr.rows = dt.rows;
+      //       this.tableArr.isChild = dt.isChild;
+      //     }
+
+      //     this.tableArr.rows.forEach((item) => {
+      //       if (item.IS_READ === "Y" || item.ISREAD === "Y") {
+      //         item.IS_READ = true;
+      //         this.tableArr.isReadValueTotal++;
+      //       } else {
+      //         item.IS_READ = false;
+      //       }
+      //       if (item.IS_WRITE === "Y" || item.ISMODIFY === "Y") {
+      //         item.IS_WRITE = true;
+      //         this.tableArr.isWriteValueTotal++;
+      //       } else {
+      //         item.IS_WRITE = false;
+      //       }
+      //     });
+
+      //     if (this.tableArr.parentIsRead === this.tableArr.rows.length) {
+      //       this.tableArr.isParentReadValue = true;
+      //     }
+      //     if (this.tableArr.parentIsWrite === this.tableArr.rows.length) {
+      //       this.tableArr.isParentWriteValue = true;
+      //     }
+      //     if (this.tableArr.isReadValueTotal === this.tableArr.rows.length) {
+      //       this.tableArr.isReadValue = true;
+      //     }
+      //     if (this.tableArr.isWriteValueTotal === this.tableArr.rows.length) {
+      //       this.tableArr.isWriteValue = true;
+      //     }
+
+      //     this.permissionTable = res.data.data.permissionTable;
+      //     this.permissionKeyColumn = res.data.data.permissionKeyColumn;
+
+      //     this.oldTableArr = JSON.parse(JSON.stringify(this.tableArr.rows));
+      //     if (refresh) {
+      //       // this.$Message.success("刷新成功");
+      //       this.$Message.success(vmI18n.t("common.refresh_succee"));
+      //     }
+      //   }
+      // });
     },
 
-    sureBtn(params) {
+    async sureBtn(params) {
       this.copyModal = false;
       let param = new URLSearchParams();
       console.log(params);
       param.append("param", JSON.stringify(params));
-      network
-        .axios({
-          url: "/p/cs/copyShopPermission",
-          method: "post",
-          data: param,
-        })
-        .then((res) => {
-          if (res.data.code === 0) {
-            this.$Modal.success({
-              // title: "提示",
-              title: vmI18n.t("modalTitle.tips"),
-              content: res.data.message,
-              cancelType: true,
-              titleAlign: "left",
-              mask: true,
-              draggable: true,
-              keyDown: (event) => {
-                if (event.keyCode == 27 || event.keyCode == 13) {
-                  self.$Modal.remove();
-                }
-              },
-            });
-          } else {
-            this.$Modal.error({
-              // title: "提示",
-              title: vmI18n.t("modalTitle.tips"),
-              content: res.data.message,
-              cancelType: true,
-              titleAlign: "left",
-              mask: true,
-              draggable: true,
-              keyDown: (event) => {
-                if (event.keyCode == 27 || event.keyCode == 13) {
-                  self.$Modal.remove();
-                }
-              },
-            });
-          }
+      const {data:{data,code}} = await this.service.systemConfig.copyShopPermission(param)
+      if (code === 0) {
+        this.$Modal.success({
+          // title: "提示",
+          title: vmI18n.t("modalTitle.tips"),
+          content: message,
+          cancelType: true,
+          titleAlign: "left",
+          mask: true,
+          draggable: true,
+          keyDown: (event) => {
+            if (event.keyCode == 27 || event.keyCode == 13) {
+              self.$Modal.remove();
+            }
+          },
         });
+      } else {
+        this.$Modal.error({
+          // title: "提示",
+          title: vmI18n.t("modalTitle.tips"),
+          content: message,
+          cancelType: true,
+          titleAlign: "left",
+          mask: true,
+          draggable: true,
+          keyDown: (event) => {
+            if (event.keyCode == 27 || event.keyCode == 13) {
+              self.$Modal.remove();
+            }
+          },
+        });
+      }
+      // network
+      //   .axios({
+      //     url: "/p/cs/copyShopPermission",
+      //     method: "post",
+      //     data: param,
+      //   })
+      //   .then((res) => {
+      //     if (res.data.code === 0) {
+      //       this.$Modal.success({
+      //         // title: "提示",
+      //         title: vmI18n.t("modalTitle.tips"),
+      //         content: res.data.message,
+      //         cancelType: true,
+      //         titleAlign: "left",
+      //         mask: true,
+      //         draggable: true,
+      //         keyDown: (event) => {
+      //           if (event.keyCode == 27 || event.keyCode == 13) {
+      //             self.$Modal.remove();
+      //           }
+      //         },
+      //       });
+      //     } else {
+      //       this.$Modal.error({
+      //         // title: "提示",
+      //         title: vmI18n.t("modalTitle.tips"),
+      //         content: res.data.message,
+      //         cancelType: true,
+      //         titleAlign: "left",
+      //         mask: true,
+      //         draggable: true,
+      //         keyDown: (event) => {
+      //           if (event.keyCode == 27 || event.keyCode == 13) {
+      //             self.$Modal.remove();
+      //           }
+      //         },
+      //       });
+      //     }
+      //   });
     },
     cancelBtn() {
       this.copyModal = false;

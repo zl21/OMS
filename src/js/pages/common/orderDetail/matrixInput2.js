@@ -1,9 +1,10 @@
-import matrix from '@/views/pages/common/orderDetail/matrix.vue';
+import R3 from '@syman/burgeon-r3';
+import matrix from 'framework/components/views/custompage/matrix.vue';
 import DragDialog from 'framework/components/dialog/dragDialog.vue';
 import axios from 'framework/__utils__/request';
-import port from '@/js/pages/common/orderDetail/connector.js';
-// import store from '@/store';
-import store from '@/config/store/store';
+
+const { store } = R3;
+const port = R3.connector;
 
 export default {
   props: {
@@ -25,7 +26,7 @@ export default {
     save: {}, // 保存
     isCustom: {}, // 判断是定制界面里的矩阵还是配置的矩阵
     editsave: Boolean, // 判断编辑的时候主表是否保存完毕
-    stopsave: Boolean // 停止矩阵保存
+    stopsave: Boolean, // 停止矩阵保存
   },
   data() {
     return {
@@ -36,6 +37,7 @@ export default {
       generalLoading: false, // 加载
       Dialog: false, // 弹框
       distribId: '', // 配销中心
+      cp_c_phy_warehouse_id: '', // add by  wdq 20190521   实体仓逻辑
       count: '', // 数量
       isInputShow: false, // 配置的数量框是否显示
       matrixcoll: '', // 数量字段名
@@ -46,7 +48,7 @@ export default {
       NoImport: false, // 表示点击选择的或entry选择的下拉值(true)
       singleData: {}, // 单条码定制界面新增
       judgeSingle: false, // 判断是单条码还是款号(true单条码)
-      compositionFlag: false
+      compositionFlag: false,
     };
   },
   methods: {
@@ -60,19 +62,15 @@ export default {
       this.$emit('changeEditSave');
     }, // 初始化主表保存完毕的变量
     newLySave() {
-      this.$emit('newLySave');
+      this.$emit('newLySave', this.singleData);
     }, // 触发保存
     changeSave(val) {
       this.$emit('changeSave', val);
     }, // 改变save
     countChange(event) {
       const value = event.target.value;
-      const isNum = /^[0-9]*$/.test(value); // 判断输入的是否是数字
-      this.$set(
-        this,
-        'count',
-        (event.target.value = isNum && Number(value) !== 0 ? Number(value) : '')
-      );
+      const isNum = /^[0-9]*$/.test(value);// 判断输入的是否是数字
+      this.$set(this, 'count', event.target.value = (isNum && Number(value) !== 0) ? Number(value) : '');
       if (this.objid == -1) {
         const index = this.inputList.findIndex(n => n.name === '数量');
         if (index != -1) {
@@ -88,7 +86,8 @@ export default {
         params: {
           param: {
             ECODE: this.search,
-            CP_C_STORE_ID: this.distribId
+            CP_C_STORE_ID: this.distribId,
+            CP_C_PHY_WAREHOUSE_ID: this.cp_c_phy_warehouse_id
           }
         }
       }).then((res) => {
@@ -99,7 +98,7 @@ export default {
       });
     }, // 判断是条码还是商品编码
     changeHeight(val) {
-    /* let height = Number.parseInt(this.$refs['popMatrix'].$el.style.height);
+      /* let height = Number.parseInt(this.$refs['popMatrix'].$el.style.height);
       this.$nextTick(() => {
         if (val.judge) {
           this.$refs['popMatrix'].$el.style.height = `${(height + val.count * 25) % 2 !== 1 ? height + val.count * 25 + 1 : height + val.count * 25}px`;
@@ -110,7 +109,7 @@ export default {
     }, // 计算高度
     generalLoadChange() {
       this.generalLoading = false;
-    /* if (this.Dialog) {
+      /* if (this.Dialog) {
         this.$nextTick(() => {
           let width = this.$refs['popMatrix'].$el.clientWidth;
           let height = this.$refs['popMatrix'].$el.clientHeight;
@@ -122,18 +121,18 @@ export default {
     refreshData(val) {
       this.Dialog = false;
       if (!val.status) {
-        if (val.clear) this.search = ''; // 清空数据
-        return this.$refs.searchInput.focus(); // 取消直接关掉
+        if (val.clear) this.search = '';// 清空数据
+        return this.$refs.searchInput.focus();// 取消直接关掉
       }
       this.search = '';
       this.judgeUser = true;
       this.$refs.searchInput.focus();
       /* this.$emit('objectSave'); */
-      this.$emit('refreshGetData'); // 刷新数据
-      this.$emit('refreshItem'); // 向上派发父组件刷新
+      this.$emit('refreshGetData');// 刷新数据
+      this.$emit('refreshItem');// 向上派发父组件刷新
     }, // 取消不刷新数据，确认刷新数据
     async getData() {
-      let query = {
+      const query = {
         param: JSON.stringify({
           GLOBAL: this.search.toLocaleUpperCase(), // 搜索字段
           PAGENUM: 1,
@@ -141,7 +140,7 @@ export default {
           CONDITION: {},
           TABLENAME: 'PS_C_PRO'
         })
-      }
+      };
       const res = await this.service.common.screenresult(query);
       const data = res.data;
       if (data.code === 0) {
@@ -152,10 +151,10 @@ export default {
     }, // 获取select数据
     optionClick(val, index) {
       this.NoImport = true;
-      this.sub = -1;
+      this.sub = index;
       this.search = val.ECODE;
       this.visible = false;
-    // this.entry();
+      this.entry();
     }, // 修改search
     handFocus(event) {
       if (event.target.value.trim() === '') return;
@@ -190,23 +189,23 @@ export default {
       this.visible = false;
     },//商品编码input失焦 */
     entry() {
-      this.findId(); // 查找配销中心
+      this.findId()
       this.NoImport = true;
       if (this.sub !== -1) {
-        this.search = this.lists[this.sub].ECODE.toLocaleUpperCase();
+        this.sub > this.lists.length - 1
+          ? (this.lists.length === 0 ? '' : this.search = this.lists[0].ECODE.toLocaleUpperCase())
+          : this.search = this.lists[this.sub].ECODE.toLocaleUpperCase();
         this.sub = -1;
       }
-      if (this.search.trim() === '') return (this.visible = false);
-      const index = this.inputList.findIndex(
-        n => n.cusurl === 'custompage/matrix'
-      );
+      if (this.search.trim() === '') return this.visible = false;
+      const index = this.inputList.findIndex(n => n.cusurl === 'custompage/matrix');
       if (this.objid == -1) {
         if (index != -1 && this.inputList[index].matrix !== undefined) {
           this.$delete(this.inputList[index], 'matrix');
         }
-      } // 新增先初始化
-      this.visible = false; // 关闭下拉框
-      if (this.distribId === '' || this.distribId === undefined) {
+      }// 新增先初始化
+      this.visible = false;// 关闭下拉框
+      if ((this.distribId === '' || this.distribId === undefined) && (this.cp_c_phy_warehouse_id === '' || this.cp_c_phy_warehouse_id === undefined)) {
         return this.$message({
           message: '请先选择店仓',
           center: true,
@@ -215,48 +214,44 @@ export default {
       }
       this.getStyle().then((data) => {
         if (data === undefined) return;
-        if (data.TYPE === 'proEcode') {
-          // 商品编码
+        if (data.TYPE === 'proEcode') { // 商品编码
           this.Dialog = true;
           this.generalLoading = true;
           this.$refs.searchInput.blur();
           this.judgeSingle = false;
-        } else {
-          // SKU编码
+        } else { // SKU编码
           const obj = {};
-          obj[
-            this.tablename === 'DL_B_TRAN_OUT'
-            || this.tablename === 'DL_B_TRAN_OUT_POS'
-              ? port[this.tablename].special
-              : port[this.tablename].tableName
-          ] = {
+          obj[(this.tablename === 'DL_B_TRAN_OUT' || this.tablename === 'DL_B_TRAN_OUT_POS') ? port[this.tablename].special : port[this.tablename].tableName] = {
             /* ID: this.selectItem.tableid,//子表ID */
             PS_C_SKU_ECODE: this.search, // SKU编码
-            PS_C_SKU_ID: data.PS_C_SKU_ID // skuID
+            PS_C_SKU_ID: data.PS_C_SKU_ID, // skuID
           };
-          obj[
-            this.tablename === 'DL_B_TRAN_OUT'
-            || this.tablename === 'DL_B_TRAN_OUT_POS'
-              ? port[this.tablename].special
-              : port[this.tablename].tableName
-          ][`${this.matrixcoll}`] = this.count === '' ? this.matrixnum : this.count; // 数量
-          /* if (this.objid == -1) { */
-          if (index !== -1) {
-            if (this.inputList[index].matrix !== undefined) { this.$delete(this.inputList[index], 'matrix'); }
-          /* this.$set(this.inputList[index],'matrix', Object.assign({},obj)); */
-          }
-          if (!this.isCustom) {
-            this.$emit('objectEdit');
+          obj[(this.tablename === 'DL_B_TRAN_OUT' || this.tablename === 'DL_B_TRAN_OUT_POS') ? (port[this.tablename].special) : port[this.tablename].tableName][`${this.matrixcoll}`] = this.count === '' ? this.matrixnum : this.count;// 数量
+          if (this.objid == -1) {
+            if (index !== -1) {
+              if (this.inputList[index].matrix !== undefined) this.$delete(this.inputList[index], 'matrix');
+              const QTY = this.inputList.findIndex(n => n.colname === 'QTY');
+              if (QTY !== -1) {
+                this.$set(this.inputList[QTY], 'valuedata', this.count === '' ? this.matrixnum : this.count);
+                this.$emit('getChangeItem', this.inputList[QTY]);
+              }
+              /* this.$set(this.inputList[index],'matrix', Object.assign({},obj)); */
+            }
+            this.$emit('itemInputEnter', {
+              PS_C_SKU_ECODE: this.search,
+              PS_C_SKU_ID: data.PS_C_SKU_ID,
+              QTY: 1
+            });/* 专为促销而增向上传递数据 */
+            this.singleData = obj;
+            this.judgeSingle = true;
+            this.newLySave();
           } else {
-            this.$emit('itemInputEnter');
+            this.singleData = obj;
+            this.judgeSingle = true;
+            this.$emit('objectEdit', this.singleData);
           }
-          this.newLySave();
-          this.singleData = obj;
-          this.judgeSingle = true;
-        // return;
-        /* } */
         }
-      });
+      });// 查找配销中心
     }, // 判断是条码还是商品编码: 弹出通用矩阵
     close() {
       this.visible = false;
@@ -266,32 +261,52 @@ export default {
     }, // 阻止冒泡
     selectOption(e) {
       const event = e;
-      if (event.keyCode === 40) {
-        // 下
+      if (event.keyCode === 40) { // 下
         if (this.sub === this.lists.length - 1) return;
         this.sub++;
-      } else if (event.keyCode === 38) {
-        // 上
+      } else if (event.keyCode === 38) { // 上
         if (this.sub === 0) return;
         this.sub--;
       }
-    /* e.stopPropagation(); */
+      /* e.stopPropagation(); */
     }, // 快捷键选择编码
     findId() {
-      if (Object.prototype.toString.call(this.objList) === '[object Array]') {
-        let id = '';
-        this.objList.map((obj) => {
-          if (obj.childs) {
-            obj.childs.map((data) => {
-              if (data.colname === 'CP_C_STORE_ID') id = data.pid;
-              if (id === '' && data.colname === 'CP_C_DEST_ID') id = data.pid;
-              if (id === '' && data.colname === 'CP_C_ORIG_ID') id = data.pid;
-            /* if(data.name === '配销中心') this.distribId = data.refobjid; */
-            });
-          }
-        });
-        this.distribId = id;
+      let id = '';
+      let data = this.selectItem.updateData[this.tablename];
+      if (this.$route.params.itemId == 'New' && Object.keys(data.add).length !== 0) {
+        if (data.add[this.tablename].CP_C_STORE_ID) id = data.add[this.tablename].CP_C_STORE_ID;
+        if (id === '' && data.add[this.tablename].CP_C_DEST_ID) id = data.add[this.tablename].CP_C_DEST_ID;
+        if (id === '' && data.add[this.tablename].CP_C_ORIG_ID) id = data.add[this.tablename].CP_C_ORIG_ID;
+        if (id === '' && data.add[this.tablename].CP_C_PHY_WAREHOUSE_ID) this.cp_c_phy_warehouse_id = data.add[this.tablename].CP_C_PHY_WAREHOUSE_ID;
+      } else if (Object.keys(data.modify).length !== 0) {
+        if (Object.keys(data.default).length && data.modify[this.tablename].CP_C_STORE_ID) id = data.modify[this.tablename].CP_C_STORE_ID;
+        if (id === '' && data.modify[this.tablename].CP_C_DEST_ID) id = data.modify[this.tablename].CP_C_DEST_ID;
+        if (id === '' && data.modify[this.tablename].CP_C_ORIG_ID) id = data.modify[this.tablename].CP_C_ORIG_ID;
+        if (id === '' && data.modify[this.tablename].CP_C_PHY_WAREHOUSE_ID) this.cp_c_phy_warehouse_id = data.modify[this.tablename].CP_C_PHY_WAREHOUSE_ID;
       }
+      if (id === '' && Object.keys(data.default).length !== 0) {
+        if (data.default[this.tablename].CP_C_STORE_ID) id = data.default[this.tablename].CP_C_STORE_ID;
+        if (id === '' && data.default[this.tablename].CP_C_DEST_ID) id = data.default[this.tablename].CP_C_DEST_ID;
+        if (id === '' && data.default[this.tablename].CP_C_ORIG_ID) id = data.default[this.tablename].CP_C_ORIG_ID;
+        if (id === '' && data.default[this.tablename].CP_C_PHY_WAREHOUSE_ID) this.cp_c_phy_warehouse_id = data.default[this.tablename].CP_C_PHY_WAREHOUSE_ID;
+      }
+
+      this.distribId = id;
+      //   if (Object.prototype.toString.call(this.objList) === '[object Array]') {
+      //     let id = '';
+      //     this.objList.map((obj) => {
+      //       if (obj.childs) {
+      //         obj.childs.map((data) => {
+      //           if (data.colname === 'CP_C_STORE_ID') id = data.pid;
+      //           if (id === '' && data.colname === 'CP_C_DEST_ID') id = data.pid;
+      //           if (id === '' && data.colname === 'CP_C_ORIG_ID') id = data.pid;
+      //           if (data.colname === 'CP_C_PHY_WAREHOUSE_ID') this.cp_c_phy_warehouse_id = data.pid;
+      //           /* if(data.name === '配销中心') this.distribId = data.refobjid; */
+      //         });
+      //       }
+      //     });
+      //     this.distribId = id;
+      //   }
     }, // 查询店仓ID
     amendData(val) {
       this.$emit('changeContent', Object.keys(val).length !== 0);
@@ -302,15 +317,9 @@ export default {
     }, // 新增时向上派发事件
     customize(val) {
       this.customData = val;
-    } // 新增定制页面防止单对象数据未填完，处理矩阵不关闭的情况
+    }, // 新增定制页面防止单对象数据未填完，处理矩阵不关闭的情况
   },
   watch: {
-    inputList: {
-      handler(val) {
-        if (val[0].valuedata === '') this.search = '';
-      },
-      deep: true
-    },
     visible(val) {
       if (val) {
         this.$el.addEventListener('keyup', this.selectOption);
@@ -321,11 +330,9 @@ export default {
     }, // 控制下拉
     search(val, oldval) {
       $('.pinyin').val(val);
-      this.search = val.match(/[\w]*/gi)[0].toLocaleUpperCase();
+      this.search = val.match(/[\w]*/ig)[0].toLocaleUpperCase();
       if (oldval.toLocaleUpperCase() === val) return;
-      const index = this.inputList.findIndex(
-        n => n.cusurl === 'custompage/matrix'
-      );
+      const index = this.inputList.findIndex(n => n.cusurl === 'custompage/matrix');
       /* if(index !== -1) {
         this.$set(this.inputList[index],'valuedata', val);
         if(this.inputList[index].matrix !== undefined) this.$delete(this.inputList[index],'matrix');
@@ -334,15 +341,15 @@ export default {
         this.$emit('getChangeItem', this.itemdata);
       } */
       this.customData = {};
-      this.$emit('noContent'); // 只用于定制页面保存用的（定制页面没有明细）
+      this.$emit('noContent');// 只用于定制页面保存用的（定制页面没有明细）
       if (this.objid == -1 && !this.judgeUser && index != -1) {
         this.$set(this.inputList[index], 'valuedata', val);
-        if (this.inputList[index].matrix !== undefined) { this.$delete(this.inputList[index], 'matrix'); }
+        if (this.inputList[index].matrix !== undefined) this.$delete(this.inputList[index], 'matrix');
         this.$emit('getChangeItem', this.itemdata);
       } else {
         this.judgeUser = false;
       }
-      if (this.search === '') return (this.visible = false); // 关闭select
+      if (this.search === '') return this.visible = false;// 关闭select
       this.loading = true;
       if (this.NoImport) {
         this.NoImport = false;
@@ -355,7 +362,7 @@ export default {
       if (!val) {
         this.$emit('changeContent', false);
       } else {
-        this.customData = {}; // 清空定制页面矩阵的数据
+        this.customData = {};// 清空定制页面矩阵的数据
         this.$emit('noContent');
       }
     }, // 监听弹框
@@ -374,48 +381,41 @@ export default {
             url: port[this.tablename].amendBody,
             method: 'post',
             data: {
-              table:
-                this.tablename === 'DL_B_TRAN_OUT_POS'
-                  ? this.tablename.replace('_POS', '')
-                  : this.tablename, // 表名
+              table: this.tablename === 'DL_B_TRAN_OUT_POS' ? this.tablename.replace('_POS', '') : this.tablename, // 表名
               objid: this.objid, // 主表ID
               data: JSON.stringify(this.customData)
             }
-          })
-            .then((res) => {
-              const data = res.data;
-              if (data.code === 0) {
-                this.customData = {};
-                this.search = ''; // 清空
-                this.judgeUser = true; // 表示我手动清空的
+          }).then((res) => {
+            const data = res.data;
+            if (data.code === 0) {
+              this.customData = {};
+              this.search = '';// 清空
+              this.judgeUser = true;// 表示我手动清空的
+            } else {
+              let errorData;
+              if (data.data) {
+                errorData = data.data;
+                errorData.unshift({ message: data.message });
+                store.commit('errorDialog', { // 其它报错
+                  message: { data: errorData }
+                });
               } else {
-                let errorData;
-                if (data.data) {
-                  errorData = data.data;
-                  errorData.unshift({ message: data.message });
-                  store.commit('errorDialog', {
-                    // 其它报错
-                    message: { data: errorData }
-                  });
-                } else {
-                  store.commit('errorDialog', {
-                    // 其它报错
-                    message: data.message
-                  });
-                }
-                this.$emit('errorHasContent');
+                store.commit('errorDialog', { // 其它报错
+                  message: data.message
+                });
               }
-              /* else if(data.message === undefined || (data.ext && data.ext.msgtype === 2)) {
+              this.$emit('errorHasContent');
+            }
+            /* else if(data.message === undefined || (data.ext && data.ext.msgtype === 2)) {
                           let matrixData = res.data.data.error || res.data.data;
                           matrixData.unshift({message: res.data.message});
                           store.commit('errorDialog',{ //其它报错
                             message: {data: matrixData}
                           })
                         } */
-              this.$emit('changeSave', false);
-            })
-            .catch(() => this.$emit('changeSave', false));
-        /* this.$emit('changeSave', false) */
+            this.$emit('changeSave', false);
+          }).catch(() => this.$emit('changeSave', false));
+          /* this.$emit('changeSave', false) */
         }
         /* 单条码新增 */
         if (Object.keys(this.singleData).length !== 0 && this.judgeSingle) {
@@ -427,54 +427,7 @@ export default {
               objid: this.objid, // 主表ID
               fixcolumn: JSON.stringify(this.singleData)
             }
-          })
-            .then((res) => {
-              const resData = res.data;
-              if (resData.code === 0) {
-                this.$message({
-                  message: '单条码新增成功',
-                  center: true,
-                  type: 'success'
-                });
-                this.search = '';
-                this.count = '';
-                this.singleData = {};
-                this.$refs.searchInput.focus();
-              } else {
-                this.$emit('errorHasContent');
-                let errorData;
-                if (resData.data) {
-                  errorData = resData.data;
-                  errorData.unshift({ message: resData.message });
-                  store.commit('errorDialog', {
-                    // 其它报错
-                    message: { data: errorData }
-                  });
-                } else {
-                  store.commit('errorDialog', {
-                    // 其它报错
-                    message: resData.message
-                  });
-                }
-              }
-              this.$emit('changeSave', false);
-            })
-            .catch(() => this.$emit('changeSave', false)); // 直接触发保存接口并刷新数据
-        }
-      }
-    }, // 新增定制界面保存
-    editsave(val) {
-      if (this.judgeSingle && val) {
-        axios({
-          url: port[this.tablename].singleCode,
-          method: 'post',
-          data: {
-            table: this.tablename, // 表名
-            objid: this.objid, // 主表ID
-            fixcolumn: JSON.stringify(this.singleData)
-          }
-        })
-          .then((res) => {
+          }).then((res) => {
             const resData = res.data;
             if (resData.code === 0) {
               this.$message({
@@ -484,28 +437,69 @@ export default {
               });
               this.search = '';
               this.count = '';
+              this.singleData = {};
               this.$refs.searchInput.focus();
-              this.$emit('refreshGetData'); // 更新数据
-              this.$emit('refreshItem'); // 向上派发父组件刷新
             } else {
+              this.$emit('errorHasContent');
               let errorData;
               if (resData.data) {
                 errorData = resData.data;
                 errorData.unshift({ message: resData.message });
-                store.commit('errorDialog', {
-                  // 其它报错
+                store.commit('errorDialog', { // 其它报错
                   message: { data: errorData }
                 });
               } else {
-                store.commit('errorDialog', {
-                  // 其它报错
+                store.commit('errorDialog', { // 其它报错
                   message: resData.message
                 });
               }
             }
-            this.$emit('changeEditSave');
-          })
-          .catch(() => this.$emit('changeEditSave')); // 直接触发保存接口并刷新数据
+            this.$emit('changeSave', false);
+          }).catch(() => this.$emit('changeSave', false));// 直接触发保存接口并刷新数据
+        }
+      }
+    }, // 新增定制界面保存
+    editsave(val) {
+      if (this.judgeSingle && val) {
+        this.judgeSingle = false;// 初始化
+        axios({
+          url: port[this.tablename].singleCode,
+          method: 'post',
+          data: {
+            table: this.tablename, // 表名
+            objid: this.objid, // 主表ID
+            fixcolumn: JSON.stringify(this.singleData)
+          }
+        }).then((res) => {
+          const resData = res.data;
+          if (resData.code === 0) {
+            this.$message({
+              message: '单条码新增成功',
+              center: true,
+              type: 'success'
+            });
+            this.search = '';
+            this.count = '';
+            this.singleData = {}; // 清空单条码新增数据
+            this.$refs.searchInput.focus();
+            this.$emit('refreshGetData');// 更新数据
+            this.$emit('refreshItem');// 向上派发父组件刷新
+          } else {
+            let errorData;
+            if (resData.data) {
+              errorData = resData.data;
+              errorData.unshift({ message: resData.message });
+              store.commit('errorDialog', { // 其它报错
+                message: { data: errorData }
+              });
+            } else {
+              store.commit('errorDialog', { // 其它报错
+                message: resData.message
+              });
+            }
+          }
+          this.$emit('changeEditSave');
+        }).catch(() => this.$emit('changeEditSave'));// 直接触发保存接口并刷新数据
       }
     }
   },
@@ -517,15 +511,15 @@ export default {
     this.inputList.map((obj) => {
       if (obj.name === '数量') {
         this.matrixcoll = obj.colname;
-        this.matrixnum = obj.defnum; // 默认数量
+        this.matrixnum = obj.defnum;// 默认数量
         this.isInputShow = obj.qtyisshow;
       }
     });
     if (this.isCustom) {
-      this.matrixInput = port[this.tablename].matrixInput; // 定制界面的数量框是否显示
+      this.matrixInput = port[this.tablename].matrixInput;// 定制界面的数量框是否显示
     }
   },
   activated() {
-    $('.ff-search-input.pinyin').val(this.search);
+    /* $('.ff-search-input.pinyin').val(this.search) */
   }
 };

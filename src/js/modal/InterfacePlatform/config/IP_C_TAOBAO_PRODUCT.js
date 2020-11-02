@@ -66,7 +66,7 @@ export default {
     ]
   },
   // 确定按钮
-  determine: (self) => {
+  determine: async (self) => {
     let paramTime =
         self.downLoadFormConfig.formValue.timeArr || [];
       if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
@@ -84,24 +84,18 @@ export default {
         shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
         item_num: self.downLoadFormConfig.formValue.numNumber, // 数字编号 必传
         table: "IP_C_TAOBAO_PRODUCT", //表名字 必传
-        start_time:self.standardTimeConversiondateToStr(paramTime[0]), 
+        start_time:self.standardTimeConversiondateToStr(paramTime[0]),
         end_time:self.standardTimeConversiondateToStr(paramTime[1])
       };
       let fromdata = new FormData();
       fromdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/itemDownload",
-        method: "post",
-        data: fromdata
-      }).then(function(res) {
-        if (res.data.code === 0) {
-          self.$Message.success(res.data.message);
-          self.$emit("confirmImport");
-          self.$emit("closeActionDialog");
-        } else {
-          self.$Message.error(res.data.message);
-        }
-      });
-    
+      const res = await this.service.common.itemDownload(fromdata);
+      if (res.data.code === 0)   {
+      self.$Message.success(res.data.message);
+      self.$emit("confirmImport");
+      self.$emit("closeActionDialog");
+    } else {
+        self.$Message.error(res.data.message);
+      }
   }
 };

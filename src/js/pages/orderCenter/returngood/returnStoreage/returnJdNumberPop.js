@@ -249,7 +249,7 @@ export default {
       this.selectData = [];
     },
     // 查询原始订单编号
-    queryBounced() {
+    async queryBounced() {
       //  获取页面数据
       let _this = this;
       _this.order.table.data = [];
@@ -267,11 +267,8 @@ export default {
       if (lists.buyer_nick) param.buyer_nick = lists.buyer_nick;
       if (lists.receive_mobile) param.receive_mobile = lists.receive_mobile;
       if (lists.logistics_code) param.logistics_code = lists.logistics_code;
-      axios({
-        url: "/p/cs/searchButtonsInJdDetail",
-        method: "post",
-        data: param
-      }).then(res => {
+      try {
+        const res = await _this.service.common.searchButtonsInJdDetail(param);
         if (res.data.code == 0 && res.data.data !== null) {
           for (let i = 0, list = res.data.data.length; i < list; i++) {
             res.data.data[i].ORIG_ORDER_NO = res.data.data[i].ORIG_ORDER_ID;
@@ -279,38 +276,31 @@ export default {
           }
         }
         _this.order.table.loading = false;
-      }).catch(err => {
+      } catch (e) {
         _this.$Message.error(err.message);
         _this.order.table.loading = false;
-      })
+      }
     },
     // 手工匹配确定
-    okClick() {
+    async okClick() {
       const _this = this;
       let param = {
         refundId: _this.componentData.ids,
         id: _this.selectData[0].ID,
         refundInId: this.$route.query.id
       }
-      axios({
-        url: "/p/cs/manualJdMatchingConfirmationButton",
-        method: "post",
-        cancelToken: true,
-        data: param
-      }).then(res => {
-        if (res.data.code == 0) {
+      const res = await this.service.common.manualJdMatchingConfirmationButton(param);
+      if (res.data.code == 0) {
 
-          _this.$parent.$parent.$parent.returnArr(_this.selectData[0].ID);
-          // _this.$parent.$parent.$parent.getList();
-          _this.$parent.$parent.closeConfirm();
-        } else {
-          _this.$Message.warning(res.data.message);
-          return;
-        }
-      });
+        _this.$parent.$parent.$parent.returnArr(_this.selectData[0].ID);
+        // _this.$parent.$parent.$parent.getList();
+        _this.$parent.$parent.closeConfirm();
+      } else {
+        _this.$Message.warning(res.data.message);
+      }
     },
     // 错发强制匹配确定
-    okClick2() {
+    async okClick2() {
       const _this = this;
       if (_this.selectData[0].PRODUCTITEMS.length !== 1 && _this.selectData[0].PRODUCTITEMS !== undefined) {
         _this.wrong.modal = true;
@@ -322,22 +312,15 @@ export default {
           refundInId: this.$route.query.id,
           returnItem: _this.selectData[0].PRODUCTITEMS[0].ID
         };
-        axios({
-          url: "/p/cs/seachJdForced",
-          method: "post",
-          cancelToken: true,
-          data: param
-        }).then(res => {
-          if (res.data.code == 0) {
+        const res = await this.service.common.seachJdForced(param);
+        if (res.data.code == 0) {
 
-            _this.$parent.$parent.$parent.returnArr1(_this.selectData[0].ID, res.data.data.REAL_SEND_SKU, _this.selectData[0].PRODUCTITEMS[0].ID);
-            // _this.$parent.$parent.$parent.getList();
-            _this.$parent.$parent.closeConfirm();
-          } else {
-            _this.$Message.warning(res.data.message);
-            return;
-          }
-        });
+          _this.$parent.$parent.$parent.returnArr1(_this.selectData[0].ID, res.data.data.REAL_SEND_SKU, _this.selectData[0].PRODUCTITEMS[0].ID);
+          // _this.$parent.$parent.$parent.getList();
+          _this.$parent.$parent.closeConfirm();
+        } else {
+          _this.$Message.warning(res.data.message);
+        }
       }
     },
     wrongForce() {

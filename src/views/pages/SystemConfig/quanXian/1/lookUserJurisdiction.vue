@@ -30,6 +30,7 @@
 </template>
 <script>
 import axios from "axios";
+import R3 from '@syman/burgeon-r3';
 const { FilterTree } = R3.components;
 export default {
   components: {
@@ -86,43 +87,38 @@ export default {
     this.getRoleData();
   },
   methods: {
-    getRoleData() {
-      axios({
-        url: "/p/cs/groupTreeload",
-        method: "post",
-        data: {}
-      }).then(res => {
-        if (res.data.code === 0) {
-          [...res.data.data].forEach((father, fatherIndex) => {
-            if (fatherIndex == 0) {
-              father.expand = true;
-              father.selected = true;
-            }
-            father.title = father.NAME;
-            father.children.forEach(son => {
-              son.title = son.NAME;
-              son.children.forEach(grandson => {
-                grandson.title = grandson.NAME;
-              });
+    async getRoleData() {
+      const res = await this.service.common.groupTreeload({});
+      if (res.data.code === 0) {
+        [...res.data.data].forEach((father, fatherIndex) => {
+          if (fatherIndex == 0) {
+            father.expand = true;
+            father.selected = true;
+          }
+          father.title = father.NAME;
+          father.children.forEach(son => {
+            son.title = son.NAME;
+            son.children.forEach(grandson => {
+              grandson.title = grandson.NAME;
             });
           });
-          this.rightConfig.treeAttribute.data = res.data.data;
-        } else {
-          this.$Modal.error({
-            title: "提示",
-            content: res.data.message,
-            cancelType: true,
-            titleAlign: "left",
-            mask: true,
-            draggable: true,
-            keyDown: event => {
-              if (event.keyCode == 27 || event.keyCode == 13) {
-                self.$Modal.remove();
-              }
+        });
+        this.rightConfig.treeAttribute.data = res.data.data;
+      } else {
+        this.$Modal.error({
+          title: "提示",
+          content: res.data.message,
+          cancelType: true,
+          titleAlign: "left",
+          mask: true,
+          draggable: true,
+          keyDown: event => {
+            if (event.keyCode == 27 || event.keyCode == 13) {
+              self.$Modal.remove();
             }
-          });
-        }
-      });
+          }
+        });
+      }
     }
   }
 };

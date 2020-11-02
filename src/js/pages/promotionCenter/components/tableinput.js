@@ -827,7 +827,7 @@ import axios from 'axios';
           if (params[key] != -1 && params[key]) {
             return params;
             self.drpPopoverShow = true;
-          } 
+          }
           self.$message({
             message: `请先选择${tipsname[key].name}`,
             type: 'warning'
@@ -1197,7 +1197,7 @@ import axios from 'axios';
           }
         }
       },
-      getQueryList(queryString, id, cb) {
+      async getQueryList(queryString, id, cb) {
         const self = this;
         const query = {
           ak: queryString,
@@ -1215,7 +1215,7 @@ import axios from 'axios';
         if (self.itemdata.refcolprem) {
           if (!self.itemdata.refcolprem.refcolval) {
             return;
-          } 
+          }
           query.fixedcolumns.precolnameslist = (
             query.fixedcolumns.precolnameslist || []
           ).concat([self.itemdata.refcolprem]);
@@ -1225,20 +1225,15 @@ import axios from 'axios';
         searchParam.append('ak', queryString);
         searchParam.append('colid', id);
         searchParam.append('fixedcolumns', query.fixedcolumns);
-        axios({
-          method: 'post',
-          url: '/p/cs/fuzzyquerybyak',
-          data: searchParam
-        }).then((res) => {
-          self.queryList = res.data.data;
-          if (res.data.data.length > 0) {
-            cb(res.data.data);
-            self.$refs[`autocomplete${self.itemdata.colname}`].activated = true;
-          } else {
-            cb([]);
-            $(`.fkAutocomplete${self.itemdata.colname}`).css('display', 'none');
-          }
-        });
+        const res = await this.service.common.fuzzyquerybyak(searchParam);
+        self.queryList = res.data.data;
+        if (res.data.data.length > 0) {
+          cb(res.data.data);
+          self.$refs[`autocomplete${self.itemdata.colname}`].activated = true;
+        } else {
+          cb([]);
+          $(`.fkAutocomplete${self.itemdata.colname}`).css('display', 'none');
+        }
       },
       autocompleteEnter(itemdata, event) {
         const self = this;
@@ -1547,7 +1542,7 @@ import axios from 'axios';
 
       //        self.isHandleSelect = false
       },
-      inQueryList(itemdata, callback) {
+      async inQueryList(itemdata, callback) {
         const self = this;
         const query = {
           ak: itemdata.valuedata,
@@ -1565,7 +1560,7 @@ import axios from 'axios';
         if (self.itemdata.refcolprem) {
           if (!self.itemdata.refcolprem.refcolval) {
             return;
-          } 
+          }
           query.fixedcolumns.precolnameslist = (
             query.fixedcolumns.precolnameslist || []
           ).concat([self.itemdata.refcolprem]);
@@ -1575,26 +1570,21 @@ import axios from 'axios';
         searchParam.append('ak', itemdata.valuedata);
         searchParam.append('colid', itemdata.colid);
         searchParam.append('fixedcolumns', query.fixedcolumns);
-        axios({
-          method: 'post',
-          url: '/p/cs/fuzzyquerybyak',
-          data: searchParam
-        }).then((res) => {
-          for (let i = 0; i < res.data.data.length; i++) {
-            const element = res.data.data[i];
-            if (
-              element.value === itemdata.valuedata
-              && (element.id === itemdata.pid || element.id == itemdata.refobjid)
-            ) {
-              // console.log('beforecall')
-              callback();
-            }
+        const res = await this.service.common.fuzzyquerybyak(searchParam);
+        for (let i = 0; i < res.data.data.length; i++) {
+          const element = res.data.data[i];
+          if (
+            element.value === itemdata.valuedata
+            && (element.id === itemdata.pid || element.id == itemdata.refobjid)
+          ) {
+            // console.log('beforecall')
+            callback();
           }
-          if (res.data.data.length === 0) {
-            self.itemdata.valuedata = null;
-            self.itemdata.pid = null;
-          }
-        });
+        }
+        if (res.data.data.length === 0) {
+          self.itemdata.valuedata = null;
+          self.itemdata.pid = null;
+        }
       },
 
       DeleteClick(event) {
@@ -1829,7 +1819,7 @@ import axios from 'axios';
         $(`.mop${itemdata.colname} span i`).trigger('click');
         $(`#${self.itemdata.colname}mopfile`).trigger('click');
       }, // 导入
-      uploadFileChange(itemdata, event) {
+      async uploadFileChange(itemdata, event) {
         const self = this;
         const file = $(`#${self.itemdata.colname}mopfile`)[0].files;
         const data = new FormData();
@@ -1839,48 +1829,24 @@ import axios from 'axios';
         data.append('file', file[0]);
         data.append('table', self.itemdata.reftable);
 
-        self.$ajax.formAjax(
-          '/p/cs/menuimport',
-          data,
-          (res) => {
-            if (res.code == 0) {
-              self.fkDialog.dialog = true;
-              self.fkDialog.lists = res.data.text;
-            } else {
-              const data = {
-                message: res.message
-              };
-              self.errorData = data;
-              self.errorDialog = true;
-              self.errorDialogClass = 'error';
-              self.errorDialogTitle = self.ChineseDictionary.ERROR;
-              self.errorDialogBack = false;
-            }
-          },
-          false
-        );
+        const res = await self.service.common.menuimport(data);
+        if (res.code == 0) {
+          self.fkDialog.dialog = true;
+          self.fkDialog.lists = res.data.text;
+        } else {
+          const data = {
+            message: res.message
+          };
+          self.errorData = data;
+          self.errorDialog = true;
+          self.errorDialogClass = 'error';
+          self.errorDialogTitle = self.ChineseDictionary.ERROR;
+          self.errorDialogBack = false;
+        }
 
         setTimeout(() => {
           $(`#${self.itemdata.colname}mopfile`).val('');
         });
-      // $.ajax({
-      //   type: "POST",
-      //   url: "/p/cs/menuimport",
-      //   dateType:'json',
-      //   data: data,
-      //   processData: false,
-      //   contentType: false,
-      //   success:function(res){
-      //     $("#"+self.itemdata.colname+'mopfile').val('')
-      //     if(res.code == 0){
-      //       self.fkDialog.dialog = true
-      //       self.fkDialog.lists = res.data.text
-      //     }
-      //   },
-      //   error:function(res){
-      //     $("#"+self.itemdata.colname+'mopfile').val('')
-      //   }
-      // })
       },
       modelIconShow(item, index) {
         const self = this;
@@ -2021,10 +1987,18 @@ import axios from 'axios';
         }
         self.$emit('getFkChooseItem', self.itemdata, self.row);
       },
-      getSelectConfig(item, callback) {
+      async getSelectConfig(item, callback) {
         // 更新数据: SelectionData.config 弹出框输入配置
         const self = this;
         self.SelectionData.config = []; // 请求前清空旧数据
+        const query = {
+          params: {
+            tableid: item.reftableid,
+            getcmd: 'n',
+            table: item.reftable
+          }
+        };
+        const res = await this.service.common.getTableQuery(query);
         axios({
           url: '/p/cs/getTableQuery',
           type: 'post',
@@ -2049,8 +2023,9 @@ import axios from 'axios';
           callback();
         });
       },
-      getSelectData(query) {
+      async getSelectData(query) {
         const self = this;
+        const params = new FormData();
         const item = self.SelectionData.item;
         self.SelectionData.row = [];
         const searchdata = {
@@ -2065,20 +2040,28 @@ import axios from 'axios';
           // searchdata.fixedcolumns = self.selectConfigChanged
           searchdata.fixedcolumns = query;
         }
-        axios({
-          url: '/p/cs/QueryList',
-          type: 'post',
-          params: {
-            searchdata
-          }
-        }).then((res) => {
-          if (res.data.code === 0) {
-            self.SelectionData.row = res.data.datas.row;
-            self.SelectionData.thead = res.data.datas.tabth;
-            self.SelectionData.tableAllDatas = res.data.datas;
-            self.selectOperation.page.totalRowCount = res.data.datas.totalRowCount;
-          }
-        });
+        params.append('searchdata', JSON.stringify(searchdata));
+        const res = await this.service.common.QueryList(params);
+        if (res.data.code === 0) {
+          self.SelectionData.row = res.data.datas.row;
+          self.SelectionData.thead = res.data.datas.tabth;
+          self.SelectionData.tableAllDatas = res.data.datas;
+          self.selectOperation.page.totalRowCount = res.data.datas.totalRowCount;
+        }
+        // axios({
+        //   url: '/p/cs/QueryList',
+        //   type: 'post',
+        //   params: {
+        //     searchdata
+        //   }
+        // }).then((res) => {
+        //   if (res.data.code === 0) {
+        //     self.SelectionData.row = res.data.datas.row;
+        //     self.SelectionData.thead = res.data.datas.tabth;
+        //     self.SelectionData.tableAllDatas = res.data.datas;
+        //     self.selectOperation.page.totalRowCount = res.data.datas.totalRowCount;
+        //   }
+        // });
       },
 
       selectionQueryTable(val) {

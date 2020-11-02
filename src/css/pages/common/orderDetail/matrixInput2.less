@@ -1,0 +1,81 @@
+.ff-input-matrix--self {
+  .ff-matrix--table-content {
+    max-width: 800px;
+    max-height: 400px;
+    overflow: auto;
+  }
+}
+.ff-input--dialog-popover {
+  right: 0;
+  top: 33px;
+  background-color: #fff;
+  /*min-height: 100px;*/
+  .ff-input--dialog-pop {
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    padding: 6px;
+    box-sizing: border-box;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.04), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+    .ff--pop-option {
+      height: 24px;
+      box-sizing: border-box;
+      align-items: center;
+      display: flex;
+      span {
+        flex: 1;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      &:hover {
+        background-color: #e4e8f1;
+      }
+      &:active {
+        background-color: #0082e6;
+      }
+    }
+    .ff--pop-option-active {
+      background-color: #20a0ff;
+      &:hover {
+        background-color: #20a0ff;
+      }
+    }
+  }
+}
+
+.ff-input--dialog--matrix {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 12px;
+  position: relative;
+  .ff-input--dialog--number {
+    display: inline-block;
+    margin-left: 30px;
+  }
+  .ff-order-detail-search {
+    padding-left: 36px;
+    line-height: 33px;
+  }
+  .ff-search-input {
+    /*width: 200px;*/
+    height: 24px;
+    box-sizing: border-box;
+    padding: 0 6px;
+    border-radius: 2px;
+    transition: border-color 0.2s ease;
+    border: 1px solid #dcdcdc;
+    &:focus,
+    &:hover {
+      border-color: #20a0ff;
+    }
+    &.pinyin {
+      position: absolute;
+      top: 4px;
+    }
+  }
+  input[type="password"].ff-search-input.pinyin {
+    color: transparent;
+    opacity: 0.1;
+  }
+}

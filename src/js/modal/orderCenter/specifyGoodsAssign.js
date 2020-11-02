@@ -41,29 +41,25 @@ export default {
     radioChange(value) {
       console.log(value);
     },
-    search(value) {   //sku查询
+    async search(value) {   //sku查询
       let self = this;
       if (!self.searchValue) {
         self.$Message.warning(self.vmI18n.t("pHolder.z4"));//请输入商品SKU
         return;
       }
-      axios({
-        url: '/p/cs/skuQuery',
-        method: 'post',
-        data: {isBlur: 'N', psCSku: {ECODE: self.searchValue}}
-      }).then(res => {
-        console.log(res);
-        if (res.data.code == 0) {
-          if (res.data.data.data.length == 0) {
-            this.$Message.warning(this.vmI18n.t("modalTips.r8"));//查询数据为空!
-            return;
-          }
-          res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是'
-          self.data = res.data.data.data
-        } else {
-          this.$Message.warning(this.vmI18n.t("modalTips.zt"));//sku查询失败!
+      const query = {isBlur: 'N', psCSku: {ECODE: self.searchValue}};
+      const res = await _this.service.common.skuQuery(query);
+      console.log(res);
+      if (res.data.code == 0) {
+        if (res.data.data.data.length == 0) {
+          this.$Message.warning(this.vmI18n.t("modalTips.r8"));//查询数据为空!
+          return;
         }
-      })
+        res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是'
+        self.data = res.data.data.data
+      } else {
+        this.$Message.warning(this.vmI18n.t("modalTips.zt"));//sku查询失败!
+      }
     },
     confirm() {
       let self = this;

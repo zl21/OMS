@@ -41,6 +41,7 @@ export default {
     radioChange(value) {
       console.log(value);
     },
+<<<<<<< HEAD
     search(value) { // sku查询
       const self = this;
       axios({
@@ -60,6 +61,23 @@ export default {
           this.$Message.warning('sku查询失败!');
         }
       });
+=======
+    async search(value) {   //sku查询
+      let self = this;
+      const query = { isBlur: 'N', psCSku: { ECODE: self.searchValue } };
+      const res = await self.service.common.skuQuery(query);
+      console.log(res);
+      if (res.data.code == 0) {
+        if (res.data.data.data.length == 0) {
+          this.$Message.warning('查询数据为空!');
+          return;
+        }
+        res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是'
+        self.data = res.data.data.data
+      } else {
+        this.$Message.warning('sku查询失败!');
+      }
+>>>>>>> c3b7c68209381703048dfb68f70aa6c32755ef5b
     },
     confirm() {
       const self = this;
