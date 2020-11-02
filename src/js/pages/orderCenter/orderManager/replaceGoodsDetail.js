@@ -1,5 +1,6 @@
 
-import axios from "axios";
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -26,7 +27,7 @@ export default {
         }
       ],
       data: []
-    }
+    };
   },
   props: {
     componentData: {
@@ -40,38 +41,42 @@ export default {
     radioChange(value) {
       console.log(value);
     },
-    async search(value) {   //sku查询
-      let self = this;
-      const query = { isBlur: 'N', psCSku: { ECODE: self.searchValue } };
-      const res = await self.service.common.skuQuery(query);
-      console.log(res);
-      if (res.data.code == 0) {
-        if (res.data.data.data.length == 0) {
-          this.$Message.warning('查询数据为空!');
-          return;
+    search(value) { // sku查询
+      const self = this;
+      axios({
+        url: '/p/cs/skuQuery',
+        method: 'post',
+        data: { isBlur: 'N', psCSku: { ECODE: self.searchValue } }
+      }).then((res) => {
+        console.log(res);
+        if (res.data.code == 0) {
+          if (res.data.data.data.length == 0) {
+            this.$Message.warning('查询数据为空!');
+            return;
+          }
+          res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是';
+          self.data = res.data.data.data;
+        } else {
+          this.$Message.warning('sku查询失败!');
         }
-        res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是'
-        self.data = res.data.data.data
-      } else {
-        this.$Message.warning('sku查询失败!');
-      }
+      });
     },
     confirm() {
-      let self = this;
+      const self = this;
       if (self.data.length == 0) {
         self.$Message.warning('sku不能为空!');
-        return
+        return;
       }
-      let result = {}
-      result['ids'] = self.componentData.ids;
-      result['sku_code'] = self.data[0].ECODE;
-      result['itemId'] = self.componentData.itemId;
-      result['type'] = 1;
+      const result = {};
+      result.ids = self.componentData.ids;
+      result.sku_code = self.data[0].ECODE;
+      result.itemId = self.componentData.itemId;
+      result.type = 1;
       axios({
         url: '/api/cs/oc/oms/v1/bathChangeGoods',
         method: 'post',
         data: result
-      }).then(res => {
+      }).then((res) => {
         console.log(res);
         if (res.data.code == 0) {
           self.$Message.success(res.data.message);
@@ -87,22 +92,20 @@ export default {
           self.$Modal.confirm({
             title: res.data.message,
             width: 500,
-            render: h => {
-              return h("Table", {
-                props: {
-                  columns: [
-                    {
-                      title: "提示信息",
-                      key: "message"
-                    }
-                  ],
-                  data: res.data.data
-                }
-              });
-            }
+            render: h => h('Table', {
+              props: {
+                columns: [
+                  {
+                    title: '提示信息',
+                    key: 'message'
+                  }
+                ],
+                data: res.data.data
+              }
+            })
           });
         }
-      })
+      });
     }
   }
-}
+};

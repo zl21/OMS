@@ -1,25 +1,27 @@
-import businessButton from "professionalComponents/businessButton";
-import businessForm from "professionalComponents/businessForm";
-import businessActionTable from "professionalComponents/businessActionTable";
-import businessDialog from "professionalComponents/businessDialog";
-import strUtil from "@/assets/js/__utils__/util";
-import DateUtil from "@/assets/js/__utils__/date";
+import businessButton from 'professionalComponents/businessButton';
+import businessForm from 'professionalComponents/businessForm';
+import businessActionTable from 'professionalComponents/businessActionTable';
+import businessDialog from 'professionalComponents/businessDialog';
+import strUtil from '@/assets/js/__utils__/util';
+import DateUtil from '@/assets/js/__utils__/date';
 // import publicMethods from "@/assets/js/public/publicMethods";
-import jordanModal from "professionalComponents/businessDialog";
-import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
-import { isFavoriteMixin } from "@/assets/js/mixins/isFavorite";
-let getCurrentTime = (() => {
-  let t = new Date();
-  return t.Format("yyyy-MM-dd 23:59:59");
-})();
-let addSevenDay = (() => {
-  let d = new Date();
-  let t = d.addDays(d, -7);
-  return t.Format("yyyy-MM-dd 00:00:00");
-})();
+import jordanModal from 'professionalComponents/businessDialog';
+import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
+import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
 
 // import util from "@/assets/js/__utils__/util";
-import aTable from "professionalComponents/agGridTable.vue";
+import aTable from 'professionalComponents/agGridTable.vue';
+
+const getCurrentTime = (() => {
+  const t = new Date();
+  return t.Format('yyyy-MM-dd 23:59:59');
+})();
+const addSevenDay = (() => {
+  const d = new Date();
+  const t = d.addDays(d, -7);
+  return t.Format('yyyy-MM-dd 00:00:00');
+})();
+
 export default {
   components: {
     businessButton,
@@ -46,119 +48,118 @@ export default {
       isFavorite: false,
       // 弹框配置 导入
       importTable: {
-        refFuns: "confirmFun",
+        refFuns: 'confirmFun',
         // confirmTitle: "导入",
-        confirmTitle: vmI18n.t("modalTitle.import"),
-        titleAlign: "center", //设置标题是否居中 center left
-        width: "600",
-        scrollable: false, //是否可以滚动
-        closable: true, //是否可以按esc关闭
-        draggable: true, //是否可以拖动
-        mask: true, //是否显示遮罩层
-        maskClosable: true, //是否可以点击叉号关闭
-        transfer: true, //是否将弹层放在body内
-        name: "importTable", //组件名称
-        url: "importTable",
+        confirmTitle: vmI18n.t('modalTitle.import'),
+        titleAlign: 'center', // 设置标题是否居中 center left
+        width: '600',
+        scrollable: false, // 是否可以滚动
+        closable: true, // 是否可以按esc关闭
+        draggable: true, // 是否可以拖动
+        mask: true, // 是否显示遮罩层
+        maskClosable: true, // 是否可以点击叉号关闭
+        transfer: true, // 是否将弹层放在body内
+        name: 'importTable', // 组件名称
+        url: 'importTable',
         keepAlive: true,
-        excludeString: "importTable", //将name传进去，确认不缓存
+        excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {},
       },
       setFromInput: {
-        refFuns: "confirmFun",
+        refFuns: 'confirmFun',
         // confirmTitle: "排序表单",
-        confirmTitle: vmI18n.t("modalTitle.sortForm"),
-        titleAlign: "center", //设置标题是否居中 center left
-        width: "300",
-        scrollable: false, //是否可以滚动
-        closable: true, //是否可以按esc关闭
-        draggable: true, //是否可以拖动
-        mask: true, //是否显示遮罩层
-        maskClosable: true, //是否可以点击叉号关闭
-        transfer: true, //是否将弹层放在body内
-        name: "setFromInput", //组件名称
-        url: "returngood/setFromInput",
+        confirmTitle: vmI18n.t('modalTitle.sortForm'),
+        titleAlign: 'center', // 设置标题是否居中 center left
+        width: '300',
+        scrollable: false, // 是否可以滚动
+        closable: true, // 是否可以按esc关闭
+        draggable: true, // 是否可以拖动
+        mask: true, // 是否显示遮罩层
+        maskClosable: true, // 是否可以点击叉号关闭
+        transfer: true, // 是否将弹层放在body内
+        name: 'setFromInput', // 组件名称
+        url: 'returngood/setFromInput',
         keepAlive: true,
-        excludeString: "setFromInput", //将name传进去，确认不缓存
+        excludeString: 'setFromInput', // 将name传进去，确认不缓存
         componentData: {},
       },
       btnConfig: {
-        typeAll: "error",
+        typeAll: 'error',
         buttons: [
           {
             // text: "查找",
-            text: vmI18n.t("btn.find"), //按钮文本
+            text: vmI18n.t('btn.find'), // 按钮文本
             btnclick: () => {
               this.requestBefore();
             },
           },
           {
             // text: "新增",
-            text: vmI18n.t("btn.add"), //按钮文本
+            text: vmI18n.t('btn.add'), // 按钮文本
             btnclick: () => {
-              this.$store.commit("customize/TabHref", {
-                id: -1, //id
-                type: "action", //类型action
-                name: "returnTreasuryAdd", //文件名
+              this.$store.commit('customize/TabHref', {
+                id: -1, // id
+                type: 'action', // 类型action
+                name: 'returnTreasuryAdd', // 文件名
                 // label: "退货入库新增", //tab中文名
-                label: vmI18n.t("panel_label.returnTreasuryAdd"),
+                label: vmI18n.t('panel_label.returnTreasuryAdd'),
                 query: Object.assign({
-                  id: -1, //id
+                  id: -1, // id
                   // tabTitle: "退货入库新增", //tab中文名
-                  tabTitle: vmI18n.t("panel_label.returnTreasuryAdd"),
-                }), //带的参数
+                  tabTitle: vmI18n.t('panel_label.returnTreasuryAdd'),
+                }), // 带的参数
               });
             },
           },
           {
             // text: "手工匹配",
-            text: vmI18n.t("btn.manual_matching"), //按钮文本
+            text: vmI18n.t('btn.manual_matching'), // 按钮文本
             disabled: false,
             btnclick: () => {
-              let self = this;
+              const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
-              let ids = this.selection.map((item) => {
-                return item.ID;
-              });
+              const ids = this.selection.map(item => item.ID);
               if (ids.length === 0)
-                // return this.$Message.error("请选择一条明细手工匹配");
-                return this.$Message.error(vmI18n.t("modalTips.p4"));
+              // return this.$Message.error("请选择一条明细手工匹配");
+              { return this.$Message.error(vmI18n.t('modalTips.p4')); }
               if (ids.length > 1)
-                // return this.$Message.error("只能选择一条明细手工匹配");
-                return this.$Message.error(vmI18n.t("modalTips.p5"));
+              // return this.$Message.error("只能选择一条明细手工匹配");
+              { return this.$Message.error(vmI18n.t('modalTips.p5')); }
               if (this.selection[0].IS_OFF_MATCH == 1)
-                // return this.$Message.error("此退货入库单已经关闭匹配，不允许选择");
-                return this.$Message.error(vmI18n.t("modalTips.q6"));
-              let id = ids[0];
-              //需要验证是否能够进入手工匹配界面
-              this.$network
-                .axios({
-                  url: "/api/cs/oc/oms/v1/manualMatchingCheck",
-                  method: "post",
-                  data: { id: id },
-                })
+              // return this.$Message.error("此退货入库单已经关闭匹配，不允许选择");
+              { return this.$Message.error(vmI18n.t('modalTips.q6')); }
+              const id = ids[0];
+              // 需要验证是否能够进入手工匹配界面
+              this.service.orderCenter.manualMatchingCheck({ id })
+              // this.$network
+              //   .axios({
+              //     url: '/api/cs/oc/oms/v1/manualMatchingCheck',
+              //     method: 'post',
+              //     data: { id },
+              //   })
                 .then((res) => {
                   if (res.data.code === 0) {
-                    self.$store.commit("customize/TabHref", {
-                      id: id, //id
-                      type: "action", //类型action
-                      name: "manualMatching", //文件名
+                    self.$store.commit('customize/TabHref', {
+                      id, // id
+                      type: 'action', // 类型action
+                      name: 'manualMatching', // 文件名
                       // label: "退货入库-手工匹配", //tab中文名
                       label: vmI18n.t(
-                        "panel_label.return_warehousing_manual_matching"
+                        'panel_label.return_warehousing_manual_matching'
                       ),
                       query: Object.assign({
-                        id: id, //id
+                        id, // id
                         // tabTitle: "退货入库-手工匹配", //tab中文名
                         tabTitle: vmI18n.t(
-                          "panel_label.return_warehousing_manual_matching"
+                          'panel_label.return_warehousing_manual_matching'
                         ),
                         source: 2,
-                        form: "list",
-                      }), //带的参数
+                        form: 'list',
+                      }), // 带的参数
                     });
                   } else {
                     // let mes = res.data.message || "状态不匹配不能进入手动匹配";
-                    let mes = res.data.message || vmI18n.t("modalTips.p6");
+                    const mes = res.data.message || vmI18n.t('modalTips.p6');
                     self.$Message.error(mes);
                   }
                 });
@@ -166,55 +167,54 @@ export default {
           },
           {
             // text: "错发强制匹配",
-            text: vmI18n.t("btn.wrong_sending_forced_matching"), //按钮文本
+            text: vmI18n.t('btn.wrong_sending_forced_matching'), // 按钮文本
             disabled: false,
             btnclick: () => {
-              let self = this;
+              const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
-              let ids = this.selection.map((item) => {
-                return item.ID;
-              });
+              const ids = this.selection.map(item => item.ID);
               if (ids.length === 0)
-                // return this.$Message.error("请选择一条明细错发强制匹配");
-                return this.$Message.error(vmI18n.t("modalTips.p7"));
+              // return this.$Message.error("请选择一条明细错发强制匹配");
+              { return this.$Message.error(vmI18n.t('modalTips.p7')); }
               if (ids.length > 1)
-                // return this.$Message.error("只能选择一条明细错发强制匹配");
-                return this.$Message.error(vmI18n.t("modalTips.p8"));
+              // return this.$Message.error("只能选择一条明细错发强制匹配");
+              { return this.$Message.error(vmI18n.t('modalTips.p8')); }
               if (this.selection[0].IS_OFF_MATCH == 1)
-                // return this.$Message.error("此退货入库单已经关闭匹配，不允许选择");
-                return this.$Message.error(vmI18n.t("modalTips.q6"));
-              let id = ids[0];
-              //需要验证是否能够进入错发强制匹配界面
-              this.$network
-                .axios({
-                  url: "/api/cs/oc/oms/v1/manualMatchingCheck",
-                  method: "post",
-                  data: { id: id },
-                })
+              // return this.$Message.error("此退货入库单已经关闭匹配，不允许选择");
+              { return this.$Message.error(vmI18n.t('modalTips.q6')); }
+              const id = ids[0];
+              // 需要验证是否能够进入错发强制匹配界面
+              this.service.orderCenter.manualMatchingCheck({ id })
+              // this.$network
+              //   .axios({
+              //     url: '/api/cs/oc/oms/v1/manualMatchingCheck',
+              //     method: 'post',
+              //     data: { id },
+              //   })
                 .then((res) => {
                   if (res.data.code === 0) {
-                    self.$store.commit("customize/TabHref", {
-                      id: id, //id
-                      type: "action", //类型action
-                      name: "manualMatching", //文件名
+                    self.$store.commit('customize/TabHref', {
+                      id, // id
+                      type: 'action', // 类型action
+                      name: 'manualMatching', // 文件名
                       // label: "退货入库-错发强制匹配", //tab中文名
                       label: vmI18n.t(
-                        "panel_label.idreturn_warehousing_wrong_delivery_forced_matching"
+                        'panel_label.idreturn_warehousing_wrong_delivery_forced_matching'
                       ),
                       query: Object.assign({
-                        id: id, //
+                        id, //
                         // tabTitle: "退货入库-错发强制匹配", //tab中文名
                         tabTitle: vmI18n.t(
-                          "panel_label.idreturn_warehousing_wrong_delivery_forced_matching"
+                          'panel_label.idreturn_warehousing_wrong_delivery_forced_matching'
                         ),
                         source: 3,
-                        form: "list",
-                      }), //带的参数
+                        form: 'list',
+                      }), // 带的参数
                     });
                   } else {
-                    let mes =
+                    const mes =
                       // res.data.message || "状态不匹配不能进入错发强制匹配";
-                      res.data.message || vmI18n.t("modalTips.p9");
+                      res.data.message || vmI18n.t('modalTips.p9');
                     self.$Message.error(mes);
                   }
                 });
@@ -223,82 +223,81 @@ export default {
           {
             // =======================================================暂时影藏
             // text: "作废",
-            text: vmI18n.t("btn.void"), //按钮文本
+            text: vmI18n.t('btn.void'), // 按钮文本
             isShow: false,
             btnclick: () => {
               this.selection = this.$refs.agGridChild.AGTABLE.getSelect();
-              let ids = this.selection.map((item) => {
-                return item.ID;
-              });
+              const ids = this.selection.map(item => item.ID);
               if (ids.length === 0)
-                // return this.$Message.error("未选择退货入库单,请选择一条数据后再操作！");
-                return this.$Message.error(vmI18n.t("modalTips.o0"));
-              this.$network
-                .axios({
-                  url: "/api/cs/oc/oms/v1/returnCancel",
-                  method: "post",
-                  data: { ids: ids },
-                })
+              // return this.$Message.error("未选择退货入库单,请选择一条数据后再操作！");
+              { return this.$Message.error(vmI18n.t('modalTips.o0')); }
+              this.service.orderCenter.returnCancel({ ids })
+              // this.$network
+              //   .axios({
+              //     url: '/api/cs/oc/oms/v1/returnCancel',
+              //     method: 'post',
+              //     data: { ids },
+              //   })
                 .then((res) => {
                   if (res.data.code === 0) {
                     // let mes = res.data.message || "作废操作成功";
-                    let mes = res.data.message || vmI18n.t("modalTips.q9");
+                    const mes = res.data.message || vmI18n.t('modalTips.q9');
                     this.$Message.success(mes);
                   } else {
                     // let mes = res.data.message || "作废操作失败";
-                    let mes = res.data.message || vmI18n.t("modalTips.p0");
+                    const mes = res.data.message || vmI18n.t('modalTips.p0');
                     this.$Message.error(mes);
                   }
                 });
             },
           },
           {
-            type: "", //按钮类型
+            type: '', // 按钮类型
             // text: "导入", //按钮文本
-            text: vmI18n.t("btn.import"), //按钮文本
-            disabled: false, //按钮禁用控制
+            text: vmI18n.t('btn.import'), // 按钮文本
+            disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
-              _this.importTable.componentData = { tableName: "OC_B_REFUND_IN" };
+              _this.importTable.componentData = { tableName: 'OC_B_REFUND_IN' };
               _this.$children
-                .find((item) => item.name === "importTable")
+                .find(item => item.name === 'importTable')
                 .openConfirm();
-            }, //按钮点击事件
+            }, // 按钮点击事件
           },
           {
             // text: "导出", //按钮文本
-            text: vmI18n.t("btn.export"), //按钮文本
+            text: vmI18n.t('btn.export'), // 按钮文本
             btnclick: () => {
               this.exportClick();
-            }, //按钮点击事件
+            }, // 按钮点击事件
           },
           {
-            icon: "iconfont iconbj_setup", //按钮图标
+            icon: 'iconfont iconbj_setup', // 按钮图标
             btnclick: () => {
-              let self = this;
+              const self = this;
               self.setFromInput.componentData = {
-                typeName: "OC_B_REFUND_IN",
+                typeName: 'OC_B_REFUND_IN',
               };
               setTimeout(() => {
                 self.$children
-                  .find((item) => item.name === "setFromInput")
+                  .find(item => item.name === 'setFromInput')
                   .openConfirm();
               }, 100);
-            }, //按钮点击事件
+            }, // 按钮点击事件
           },
           {
-            icon: "iconfont iconbj_col", //按钮图标
+            icon: 'iconfont iconbj_col', // 按钮图标
             // name: "收藏",
-            name: vmI18n.t("btn.collection"), //按钮文本
+            name: vmI18n.t('btn.collection'), // 按钮文本
             btnclick: () => {
-              let self = this;
+              const self = this;
               self.setFavorite();
-            }, //按钮点击事件
+            }, // 按钮点击事件
           },
         ],
       },
       formConfig: {
-        flodClick: "a",
+        flodClick: 'a',
         formData: [],
         formValue: {},
         flodClick: () => {},
@@ -484,15 +483,15 @@ export default {
         rowData: [],
         renderArr: {
           ID: (param) => {
-            let resDom = document.createElement("a");
-            resDom.style["text-decoration"] = "underline";
+            const resDom = document.createElement('a');
+            resDom.style['text-decoration'] = 'underline';
             resDom.innerHTML = param.data.ID;
             return resDom;
           },
         },
-        tableHeight: "600px",
+        tableHeight: '600px',
         pagenation: {
-          //设置总条数
+          // 设置总条数
           total: 0,
           // 条数
           pageSize: 20,
@@ -510,7 +509,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.getPermissions("btnConfig", "returnStoreageList");
+      this.getPermissions('btnConfig', 'returnStoreageList');
     });
     this.getHeaderList();
   },
@@ -523,150 +522,152 @@ export default {
       const _this = this;
       _this.isShowFromLoading = true;
       const params = {
-        table: "OC_B_REFUND_IN",
+        table: 'OC_B_REFUND_IN',
         column_include_uicontroller: true,
         fixedcolumns: {},
         multiple: [],
         startindex: 0,
       };
-      this.$network
-        .axios({
-          url: "/api/cs/oc/oms/v1/DynamicList",
-          method: "post",
-          data: params,
-        })
+      this.service.orderCenter.DynamicList(params)
+      // this.$network
+      //   .axios({
+      //     url: '/api/cs/oc/oms/v1/DynamicList',
+      //     method: 'post',
+      //     data: params,
+      //   })
         .then((res) => {
           // 高级查询
-          let formData = [];
+          const formData = [];
           res.data.data.search.date.map((item, index) => {
             switch (item.type) {
-              case "date":
+              case 'date':
                 formData[index] = {
-                  style: item.tabth.isfilter ? "date" : "", //输入框类型
-                  type: "datetimerange", //文本框类型的input
-                  label: item.tabth.name, //输入框前文字
-                  value: item.tabth.colname, //输入框的值
-                  format: "yyyy-MM-dd HH:mm:ss",
-                  width: "12", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-                  icon: "md-alarm", //输入框后带的图标,暂只有输入框支持
-                  placeholder: "", //占位文本，默认为请输入
+                  style: item.tabth.isfilter ? 'date' : '', // 输入框类型
+                  type: 'datetimerange', // 文本框类型的input
+                  label: item.tabth.name, // 输入框前文字
+                  value: item.tabth.colname, // 输入框的值
+                  format: 'yyyy-MM-dd HH:mm:ss',
+                  width: '12', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                  icon: 'md-alarm', // 输入框后带的图标,暂只有输入框支持
+                  placeholder: '', // 占位文本，默认为请输入
                   transfer: true,
-                  ghost: false, //是否关闭幽灵按钮，默认开启
+                  ghost: false, // 是否关闭幽灵按钮，默认开启
                   inputenter: () => {
                     _this.request();
-                  }, //表单回车事件
-                  iconclick: () => {}, //点击icon图标事件
+                  }, // 表单回车事件
+                  iconclick: () => {}, // 点击icon图标事件
                   clearable: true,
                 };
-                item.tabth.name === "创建时间"
+                item.tabth.name === '创建时间'
                   ? (_this.formConfig.formValue[item.tabth.colname] = [
-                      addSevenDay,
-                      getCurrentTime,
-                    ])
+                    addSevenDay,
+                    getCurrentTime,
+                  ])
                   : (_this.formConfig.formValue[item.tabth.colname] = []);
                 break;
-              case "propInput":
+              case 'propInput':
                 formData[index] = {
-                  style: item.tabth.isfilter ? "popInput" : "", //输入框弹框单多选
-                  width: "6",
+                  style: item.tabth.isfilter ? 'popInput' : '', // 输入框弹框单多选
+                  width: '6',
                   itemdata: {
                     col: 1,
                     colid: item.tabth.colid,
-                    colname: item.tabth.colname, //当前字段的名称
-                    datelimit: "all",
-                    display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-                    fkdisplay: item.tabth.fkdisplay, //外键关联类型
+                    colname: item.tabth.colname, // 当前字段的名称
+                    datelimit: 'all',
+                    display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+                    fkdisplay: item.tabth.fkdisplay, // 外键关联类型
                     fkdesc: item.tabth.fkdesc,
-                    inputname: item.tabth.inputname, //这个是做中文类型的模糊查询字段，例如ENAME
-                    isfk: true, //是否有fk键
-                    isnotnull: false, //是否必填
-                    isuppercase: false, //是否转大写
-                    length: 65535, //最大长度是多少
-                    name: item.tabth.name, //input前面显示的lable值
-                    readonly: false, //是否可编辑，对应input   readonly属性
+                    inputname: item.tabth.inputname, // 这个是做中文类型的模糊查询字段，例如ENAME
+                    isfk: true, // 是否有fk键
+                    isnotnull: false, // 是否必填
+                    isuppercase: false, // 是否转大写
+                    length: 65535, // 最大长度是多少
+                    name: item.tabth.name, // input前面显示的lable值
+                    readonly: false, // 是否可编辑，对应input   readonly属性
                     reftable: item.tabth.reftable,
                     reftableid: item.tabth.reftableid,
                     row: 1,
                     scale: 0,
                     statsize: -1,
-                    type: item.tabth.type, //这个是后台用的
-                    pid: "",
-                    valuedata: "", //这个是选择的值
+                    type: item.tabth.type, // 这个是后台用的
+                    pid: '',
+                    valuedata: '', // 这个是选择的值
                   },
                   oneObj: (e) => {
                     _this.oneObjs(e);
                   },
                 };
-                if (item.tabth.precolnameslist)
+                if (item.tabth.precolnameslist) {
                   formData[index].itemdata.precolnameslist = item.tabth
                     .precolnameslist
                     ? item.tabth.precolnameslist
-                    : [];
+                    : []; 
+                }
                 break;
-              case "text":
+              case 'text':
                 formData[index] = {
-                  style: item.tabth.isfilter ? "input" : "", //输入框类型
+                  style: item.tabth.isfilter ? 'input' : '', // 输入框类型
                   // type: "", //文本框类型的input
-                  label: item.tabth.name, //输入框前文字
-                  value: item.tabth.colname, //输入框的值
-                  width: item.tabth.name == "备注" ? "12" : "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-                  icon: "", //输入框后带的图标,暂只有输入框支持
+                  label: item.tabth.name, // 输入框前文字
+                  value: item.tabth.colname, // 输入框的值
+                  width: item.tabth.name == '备注' ? '12' : '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                  icon: '', // 输入框后带的图标,暂只有输入框支持
                   clearable: true,
-                  placeholder: "", //占位文本，默认为请输入
-                  ghost: false, //是否关闭幽灵按钮，默认开启
+                  placeholder: '', // 占位文本，默认为请输入
+                  ghost: false, // 是否关闭幽灵按钮，默认开启
                   inputenter: () => {
                     _this.request();
-                  }, //表单回车事件
-                  iconclick: () => {}, //点击icon图标事件
+                  }, // 表单回车事件
+                  iconclick: () => {}, // 点击icon图标事件
                 };
-                _this.formConfig.formValue[item.tabth.colname] = "";
+                _this.formConfig.formValue[item.tabth.colname] = '';
                 break;
-              case "number":
+              case 'number':
                 formData[index] = {
-                  style: item.tabth.isfilter ? "input" : "", //输入框类型
+                  style: item.tabth.isfilter ? 'input' : '', // 输入框类型
                   // type: "", //文本框类型的input
-                  label: item.tabth.name, //输入框前文字
-                  value: item.tabth.colname, //输入框的值
+                  label: item.tabth.name, // 输入框前文字
+                  value: item.tabth.colname, // 输入框的值
                   clearable: true,
-                  width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-                  icon: "", //输入框后带的图标,暂只有输入框支持
-                  placeholder: "", //占位文本，默认为请输入
-                  ghost: false, //是否关闭幽灵按钮，默认开启
+                  width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                  icon: '', // 输入框后带的图标,暂只有输入框支持
+                  placeholder: '', // 占位文本，默认为请输入
+                  ghost: false, // 是否关闭幽灵按钮，默认开启
                   inputenter: () => {
                     _this.request();
-                  }, //表单回车事件
-                  iconclick: () => {}, //点击icon图标事件
+                  }, // 表单回车事件
+                  iconclick: () => {}, // 点击icon图标事件
                 };
-                _this.formConfig.formValue[item.tabth.colname] = "";
+                _this.formConfig.formValue[item.tabth.colname] = '';
                 break;
-              case "select":
+              case 'select':
                 formData[index] = {
-                  style: item.tabth.isfilter ? "select" : "", //下拉框类型
-                  label: item.tabth.name, //下拉框前的值
-                  width: "6", //所占宽度宽度
+                  style: item.tabth.isfilter ? 'select' : '', // 下拉框类型
+                  label: item.tabth.name, // 下拉框前的值
+                  width: '6', // 所占宽度宽度
                   clearable: true, // 是否显示下来清空按钮
-                  value: item.tabth.colname, //输入框的值
-                  multiple: true, //布尔值,下拉框是否开启多选,默认为不开启
-                  selectChange: () => {}, //选中事件，默认返回选中的值
+                  value: item.tabth.colname, // 输入框的值
+                  multiple: true, // 布尔值,下拉框是否开启多选,默认为不开启
+                  selectChange: () => {}, // 选中事件，默认返回选中的值
                   clearSelect: (e) => {
-                    if (e == "RETURN_STATUS") {
-                      _this.formConfig.formValue.RETURN_STATUS = "";
-                    } else if (e == "IS_ADD") {
-                      _this.formConfig.formValue.IS_ADD = "";
-                    } else if (e == "IS_TOAG") {
-                      _this.formConfig.formValue.IS_TOAG = "";
-                    } else if (e == "IS_TOWMS") {
-                      _this.formConfig.formValue.IS_TOWMS = "";
-                    } else if (e == "BILL_TYPE") {
-                      _this.formConfig.formValue.BILL_TYPE = "";
-                    } else if (e == "IS_EXAMINE") {
-                      _this.formConfig.formValue.IS_EXAMINE = "";
-                    } else if (e == "IS_TODRP") {
-                      _this.formConfig.formValue.IS_TODRP = "";
-                    } else if (e == "IS_TRANSFER") {
-                      _this.formConfig.formValue.IS_TRANSFER = "";
+                    if (e == 'RETURN_STATUS') {
+                      _this.formConfig.formValue.RETURN_STATUS = '';
+                    } else if (e == 'IS_ADD') {
+                      _this.formConfig.formValue.IS_ADD = '';
+                    } else if (e == 'IS_TOAG') {
+                      _this.formConfig.formValue.IS_TOAG = '';
+                    } else if (e == 'IS_TOWMS') {
+                      _this.formConfig.formValue.IS_TOWMS = '';
+                    } else if (e == 'BILL_TYPE') {
+                      _this.formConfig.formValue.BILL_TYPE = '';
+                    } else if (e == 'IS_EXAMINE') {
+                      _this.formConfig.formValue.IS_EXAMINE = '';
+                    } else if (e == 'IS_TODRP') {
+                      _this.formConfig.formValue.IS_TODRP = '';
+                    } else if (e == 'IS_TRANSFER') {
+                      _this.formConfig.formValue.IS_TRANSFER = '';
                     }
-                  }, //点击清空按钮回调
+                  }, // 点击清空按钮回调
                   options: _this.converSelect(item.tabth.combobox),
                 };
                 _this.formConfig.formValue[item.tabth.colname] = [];
@@ -676,8 +677,8 @@ export default {
           _this.formConfig.formData = formData;
           // 表头赋值
           res.data.data.columns.forEach((item) => {
-            item["field"] = item.key;
-            item["headerName"] = item.title;
+            item.field = item.key;
+            item.headerName = item.title;
             delete item.key;
             delete item.title;
           });
@@ -693,15 +694,14 @@ export default {
       _this.formConfig.formData.forEach((item) => {
         if (item.itemdata && item.itemdata.name == e.name) {
           switch (item.itemdata.name) {
-            case "物流公司":
+            case '物流公司':
               _this.formConfig.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid;
               break;
-            case "入库仓库":
+            case '入库仓库':
               _this.formConfig.formValue.IN_STORE_ID = item.itemdata.pid;
               break;
-            case "批货编号":
-              _this.formConfig.formValue.OC_B_REFUND_BATCH_ID =
-                item.itemdata.pid;
+            case '批货编号':
+              _this.formConfig.formValue.OC_B_REFUND_BATCH_ID = item.itemdata.pid;
               break;
           }
         }
@@ -709,7 +709,7 @@ export default {
     },
     // 字段选项组转换
     converSelect(val) {
-      let list = [];
+      const list = [];
       val.map((item, index) => {
         list[index] = {
           label: item.limitdesc,
@@ -719,82 +719,84 @@ export default {
       return list;
     },
     parentClass() {
-      return "";
+      return '';
     },
     requestBefore() {
       this.agTableConfig.pagenation.current = 1;
       this.request();
     },
     requestParams() {
-      let params = {
-        currentPage: this.agTableConfig.pagenation.current || 1, //当前页
-        pageSize: this.agTableConfig.pagenation.pageSize, //页大小
+      const params = {
+        currentPage: this.agTableConfig.pagenation.current || 1, // 当前页
+        pageSize: this.agTableConfig.pagenation.pageSize, // 页大小
       };
       this.formConfig.formData.forEach((item) => {
-        if (item.value === "CREATETIME") return; //特殊处理
+        if (item.value === 'CREATETIME') return; // 特殊处理
         if (
-          item.value === "MATCH_STATUS" ||
-          item.value === "IS_OFF_MATCH" ||
-          item.value === "PRODUCT_MARK" ||
-          item.value === "IN_STATUS"
+          item.value === 'MATCH_STATUS'
+          || item.value === 'IS_OFF_MATCH'
+          || item.value === 'PRODUCT_MARK'
+          || item.value === 'IN_STATUS'
         ) {
-          let arr = this.formConfig.formValue[item.value];
+          const arr = this.formConfig.formValue[item.value];
           if (
-            Object.prototype.toString.call(arr) === "[object Array]" &&
-            arr[0] === "bSelect-all"
-          )
-            return;
+            Object.prototype.toString.call(arr) === '[object Array]'
+            && arr[0] === 'bSelect-all'
+          ) { return; }
         }
         if (
-          !strUtil.isObjectEmpty(item.itemdata) &&
-          item.itemdata.colname !== "" &&
-          item.itemdata.valuedata &&
-          item.itemdata.valuedata !== ""
+          !strUtil.isObjectEmpty(item.itemdata)
+          && item.itemdata.colname !== ''
+          && item.itemdata.valuedata
+          && item.itemdata.valuedata !== ''
         ) {
-          let colname = item.itemdata.colname;
-          this.formConfig.formValue[colname] = item.itemdata.pid || "";
+          const colname = item.itemdata.colname;
+          this.formConfig.formValue[colname] = item.itemdata.pid || '';
           params[colname] = this.formConfig.formValue[colname];
-        } else if (item.value && this.formConfig.formValue[item.value] !== "") {
-          //正常
+        } else if (item.value && this.formConfig.formValue[item.value] !== '') {
+          // 正常
           params[item.value] = this.formConfig.formValue[item.value];
         }
       });
-      var CREATETIME = this.formConfig.formValue["CREATETIME"];
+      const CREATETIME = this.formConfig.formValue.CREATETIME;
       if (CREATETIME && CREATETIME !== []) {
-        if (CREATETIME[0] !== "")
+        if (CREATETIME[0] !== '') {
           params.beginDate = CREATETIME[0]
-            ? CREATETIME[0].Format("yyyy-MM-dd hh:mm:ss")
-            : "";
-        if (CREATETIME[1] !== "")
+            ? CREATETIME[0].Format('yyyy-MM-dd hh:mm:ss')
+            : ''; 
+        }
+        if (CREATETIME[1] !== '') {
           params.endDate = CREATETIME[1]
-            ? CREATETIME[1].Format("yyyy-MM-dd hh:mm:ss")
-            : "";
+            ? CREATETIME[1].Format('yyyy-MM-dd hh:mm:ss')
+            : ''; 
+        }
       }
 
       return params;
     },
     request() {
-      let self = this;
+      const self = this;
       self.selection = [];
       self.agTableConfig.agLoading = true;
-      let params = this.requestParams();
-      this.$network
-        .axios({
-          url: "/api/cs/oc/oms/v1/ReturnStorageList",
-          method: "post",
-          data: params,
-        })
+      const params = this.requestParams();
+      this.service.orderCenter.ReturnStorageList(params)
+      // this.$network
+      //   .axios({
+      //     url: '/api/cs/oc/oms/v1/ReturnStorageList',
+      //     method: 'post',
+      //     data: params,
+      //   })
         .then((res) => {
-          //if (res.data.code === 1) {
+          // if (res.data.code === 1) {
           self.agTableConfig.agLoading = false;
-          let data = res.data.data || {};
+          const data = res.data.data || {};
           self.agTableConfig.rowData = data.queryResult || [];
           self.agTableConfig.pagenation.total = data.totalSize;
           self.$refs.agGridChild.agGridTable(
             self.agTableConfig.columnDefs,
             self.agTableConfig.rowData
           );
-          //}
+          // }
         });
     },
     // 单击某二行时触发
@@ -805,16 +807,16 @@ export default {
       //   customizedModuleName: "returnTreasuryAdd",
       //   label: "退货入库详情"
       // });
-      this.$store.commit("customize/TabHref", {
+      this.$store.commit('customize/TabHref', {
         id: row.ID,
-        type: "action",
-        name: "returnTreasuryAdd",
+        type: 'action',
+        name: 'returnTreasuryAdd',
         // label: "退货入库详情",
-        label: vmI18n.t("panel_label.returnTreasuryDetails"),
+        label: vmI18n.t('panel_label.returnTreasuryDetails'),
         query: Object.assign({
-          id: row.ID, //单据id
+          id: row.ID, // 单据id
           // tabTitle: "退货入库详情",
-          tabTitle: vmI18n.t("panel_label.returnTreasuryDetails"),
+          tabTitle: vmI18n.t('panel_label.returnTreasuryDetails'),
           statusName: row.INVALIDSTATE,
         }),
       });
@@ -830,84 +832,86 @@ export default {
       this.request();
     },
     exportClick() {
-      let self = this;
+      const self = this;
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
       if (self.selection.length) {
         // if (this.isExport) return this.$Message.error("有一项导出正在进行中");
-        if (this.isExport) return this.$Message.error(vmI18n.t("modalTips.f8"));
+        if (this.isExport) return this.$Message.error(vmI18n.t('modalTips.f8'));
         this.isExport = true;
-        let ids = [];
+        const ids = [];
         for (let i = 0; i < self.selection.length; i++) {
           ids.push(self.selection[i].ID);
         }
-        let fromdata = new FormData();
-        let idList = { idList: ids };
-        fromdata.append("param", JSON.stringify(idList));
-        this.$network
-          .axios({
-            url: "/api/cs/oc/oms/v1/exportOcBRefundIn",
-            method: "post",
-            // cancelToken: true,
-            data: idList,
-          })
+        const fromdata = new FormData();
+        const idList = { idList: ids };
+        fromdata.append('param', JSON.stringify(idList));
+        this.service.orderCenter.exportOcBRefundIn(idList)
+        // this.$network
+        //   .axios({
+        //     url: '/api/cs/oc/oms/v1/exportOcBRefundIn',
+        //     method: 'post',
+        //     // cancelToken: true,
+        //     data: idList,
+        //   })
           .then((res) => {
             self.isExport = false;
             if (res.data.code == 0 && res.data.data !== null) {
               // let mes = res.data.message || "导出成功！";
-              let mes = res.data.message || vmI18n.t("modalTips.z2");
+              const mes = res.data.message || vmI18n.t('modalTips.z2');
               self.$Message.success(mes);
               self.downloadUrlFile(res.data.data);
               // return (window.location = res.data.data);
             } else {
               // let err = res.data.message || "失败！";
-              let err = res.data.message || vmI18n.t("modalTips.z3");
+              const err = res.data.message || vmI18n.t('modalTips.z3');
               self.$Message.error(err);
             }
           });
       } else {
         if (self.tableConfig.data.length === 0)
-          // return self.$Message.error("列表没有数据,无法导出!");
-          return self.$Message.error(vmI18n.t("modalTips.z4"));
-        else self.warningModal = true;
+        // return self.$Message.error("列表没有数据,无法导出!");
+        { return self.$Message.error(vmI18n.t('modalTips.z4')); }
+        self.warningModal = true;
       }
     },
     // 导出
     downloadUrlFile(src) {
-      var download_file = {};
-      if (typeof download_file.iframe == "undefined") {
-        var iframe = document.createElement("iframe");
+      const download_file = {};
+      if (typeof download_file.iframe === 'undefined') {
+        const iframe = document.createElement('iframe');
         download_file.iframe = iframe;
         document.body.appendChild(download_file.iframe);
       }
       download_file.iframe.src = src;
-      download_file.iframe.style.display = "none";
+      download_file.iframe.style.display = 'none';
     },
     // 警告框确认
     warningOk() {
-      let self = this;
+      const self = this;
       // if (this.isExport) return this.$Message.error("有一项导出正在进行中");
-      if (this.isExport) return this.$Message.error(vmI18n.t("modalTips.f8"));
+      if (this.isExport) return this.$Message.error(vmI18n.t('modalTips.f8'));
       this.isExport = true;
-      let arr = this.requestParams();
+      const arr = this.requestParams();
       arr.pageSize = 999999;
-      let params = JSON.parse(JSON.stringify(arr));
-      this.$network
-        .axios({
-          url: "/api/cs/oc/oms/v1/exportOcBRefundIn",
-          method: "post",
-          data: params,
-        })
+      const params = JSON.parse(JSON.stringify(arr));
+      this.service.orderCenter.exportOcBRefundIn(params)
+      // this.$network
+      //   .axios({
+      //     url: '/api/cs/oc/oms/v1/exportOcBRefundIn',
+      //     method: 'post',
+      //     data: params,
+      //   })
         .then((res) => {
           self.isExport = false;
           if (res.data.code == 0 && res.data.data !== null) {
             // let mes = res.data.message || "导出成功！";
-            let mes = res.data.message || vmI18n.t("modalTips.z2");
+            const mes = res.data.message || vmI18n.t('modalTips.z2');
             self.$Message.success(mes);
             // return (window.location = res.data.data);
             self.downloadUrlFile(res.data.data);
           } else {
             // let err = res.data.message || "失败！";
-            let err = res.data.message || vmI18n.t("modalTips.z3");
+            const err = res.data.message || vmI18n.t('modalTips.z3');
             self.$Message.error(err);
           }
         });
