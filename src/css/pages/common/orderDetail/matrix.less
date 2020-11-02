@@ -1,0 +1,447 @@
+.showColor {
+  /*margin-left: 700px;*/
+  float: right;
+  cursor: pointer;
+  color: #0089ea;
+}
+.span-style () {
+  display: inline-block;
+  width: 62px;
+  height: 18px;
+  box-sizing: border-box;
+  padding: 0 4px;
+  border-radius: 2px;
+  border: 1px solid #e6e6e6;
+  background-color: #f4f4f4;
+}
+
+.ff-matrix--min-table {
+  max-width: 760px;
+}
+
+.ff-matrix--big-table {
+  min-width: 820px;
+}
+
+.ff-matrix--table {
+  user-select: none;
+  font-size: 12px;
+  color: #575757;
+  user-select: none;
+  margin: 10px;
+
+  .ff-matrix--active-one {
+    background-color: #f9c89b;
+  }
+
+  .ff-matrix--active-two {
+    background-color: #9bd0fc;
+  }
+
+  .ff-matrix--active-three {
+    background-color: #aab5f7;
+  }
+
+  .ff-matrix--active-four {
+    background-color: #c1e6b0;
+  }
+
+  .ff-matrix--active-six {
+    background-color: #d2b48c;
+  }
+
+  .ff-matrix--active-five {
+    background-color: #facc2e;
+  }
+
+  input[type="radio"] {
+    transform: translateY(2px);
+  }
+
+  .ff-matrix--head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ff-matrix--head-no-data {
+    margin-bottom: 10px;
+  }
+
+  .ff-matrix--clear {
+    display: inline-block;
+    cursor: pointer;
+    color: #0089ea;
+
+    i {
+      font-size: 16px;
+    }
+  }
+
+  .ff-matrix--matching {
+    .ff-matrix--radio-one {
+      margin: 0 10px 0 5px;
+    }
+  }
+
+  .ff-matrix--choose {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0 6px;
+
+    & > span {
+      display: flex;
+      align-items: center;
+    }
+
+    .ff-matrix--active-label {
+      padding: 0 10px;
+      border-radius: 2px;
+      box-sizing: border-box;
+      min-width: 63px;
+      height: 20px;
+      line-height: normal;
+      display: flex;
+      align-items: center;
+      margin: 0 2px 0 4px;
+
+      input {
+        margin-top: 2px;
+      }
+    }
+  }
+
+  .ff-matrix--reveal-choose {
+    padding: 6px 0 12px 14px;
+
+    .ff-matrix--radio-one {
+      margin-right: 16px;
+    }
+  }
+
+  .ff-matrix--table-content {
+    overflow: scroll;
+    .ff-matrix-font--red {
+      color: #ed3838;
+    }
+
+    table {
+      width: 100%;
+
+      th {
+        height: 34px;
+        font-weight: bold;
+      }
+
+      th,
+      td {
+        border: 1px solid #e6e6e6;
+        text-align: center;
+        box-sizing: border-box;
+        vertical-align: middle;
+      }
+
+      .ff-matrix-th-head {
+        background: url("/static/img/matrix.jpg") no-repeat;
+        background-size: 100% 100%;
+
+        .ff-matrix-th-head-box {
+          display: flex;
+          align-items: center;
+          height: 100%;
+
+          span {
+            flex: 1;
+            text-align: center;
+          }
+
+          span:first-child {
+            padding-top: 10px;
+          }
+
+          span:last-child {
+            padding-bottom: 10px;
+          }
+        }
+      }
+
+      tr td:first-child {
+        font-weight: bold;
+      }
+
+      .ff-matrix--table-align {
+        text-align: center;
+
+        li {
+          min-height: 24px;
+          max-height: 24px;
+          border-bottom: 1px solid #e6e6e6;
+          /*padding: 3px 14px;*/
+          padding: 2px;
+          box-sizing: border-box;
+          text-align: center;
+          line-height: 20px;
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+
+        .ff-matrix--table-reveal {
+        }
+
+        .ff-matrix--table-disabled {
+          /*background-color: #F4F4F4;*/
+          font-size: 0;
+          color: #575757;
+
+          span {
+            display: inline-block;
+            height: 20px;
+            box-sizing: border-box;
+            width: 100%;
+            border: 1px solid #e6e6e6;
+            background-color: #f4f4f4;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #575757;
+          }
+        }
+
+        .ff-matrix--table-compile {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          line-height: 1;
+
+          input {
+            /*width: calc(~"100% + 2px");*/
+            /*position: absolute;*/
+            /*width: 90px;*/
+            width: 100%;
+            height: 20px;
+            box-sizing: border-box;
+            padding: 0 4px;
+            /*left: -1px;*/
+            color: #575757;
+            /*border: none;
+              border-left: 1px solid #E6E6E6;
+              border-right: 1px solid #E6E6E6;*/
+            border: 1px solid #e6e6e6;
+            transition: border-color 0.2s ease;
+            text-align: center;
+
+            &:focus {
+              border: 1px solid #0f8ee9;
+              /*height: 20px;*/
+              /*z-index: 1;
+                top: -1px;*/
+            }
+          }
+
+          .ff-matrix--input-tip {
+            &:focus {
+              border-color: #e80000;
+            }
+          }
+
+          .ff-input--prompt {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 140px;
+            margin-top: 7px;
+            transform: translateX(-50%);
+            border-radius: 4px;
+            padding: 7px 8px;
+            z-index: 1;
+            background-color: #fff;
+            border: 1px solid #d8d8d8;
+
+            &::before {
+              position: absolute;
+              content: "";
+              width: 8px;
+              height: 8px;
+              top: -5px;
+              border: 1px solid #d8d8d8;
+              left: 50%;
+              margin-right: 2px;
+              border-bottom-color: transparent;
+              border-right-color: transparent;
+              background-color: #fff;
+              transform: translateX(-50%) rotate(45deg);
+            }
+
+            i {
+              font-size: 16px;
+              color: #e80000;
+            }
+          }
+
+          .ff-matrix--input-disabled {
+            background-color: #f4f4f4;
+          }
+        }
+      }
+    }
+
+    .ff-matrix--table-total {
+      height: 25px;
+      color: #ed3838;
+
+      td {
+        padding: 3px 14px;
+      }
+    }
+
+    .ff-matrix--edit-color {
+      background-color: #f5f6fa;
+      th {
+        min-width: 50px;
+      }
+    }
+  }
+
+  /*以上公共样式*/
+  .ff-matrix--edit-reveal {
+    table {
+      th,
+      td {
+        border-color: #d8d8d8;
+      }
+
+      .ff-matrix--table-align {
+        li {
+          border-color: #d8d8d8;
+        }
+
+        .ff-matrix--table-disabled {
+          span {
+            border-color: #d8d8d8;
+          }
+        }
+
+        .ff-matrix--table-compile {
+          input {
+            border-color: #d8d8d8;
+          }
+        }
+      }
+    }
+  }
+
+  /*纯编辑和纯展示时候的样式*/
+  .ff-matrix--footer {
+    margin: 10px 0 20px;
+    /*padding-left: 15px;*/
+    box-sizing: border-box;
+
+    i {
+      color: #e80000;
+      font-size: 15px;
+    }
+
+    .ff-matrix-hint {
+      color: #e80000;
+    }
+
+    .ff-matrix--des {
+      .span-style();
+      width: 32px;
+      height: 14px;
+      vertical-align: middle;
+      margin: 0 3px 1px;
+    }
+  }
+
+  .ff-matrix--box-btn {
+    padding-bottom: 10px;
+  }
+
+  .ff-matrix--box-btn,
+  .ff-matrix--reveal,
+  .ff-matrix--matching {
+    text-align: right;
+
+    .ff-matrix-btn {
+      padding: 6px 21px;
+      border-radius: 2px;
+      box-sizing: border-box;
+      user-select: none;
+      /*transition: all .2s ease;*/
+    }
+
+    .ff-matrix-btn-confirm {
+      background-color: #fd6442;
+      margin-right: 3px;
+      color: #fff;
+
+      &:hover {
+        background-color: rgba(253, 100, 66, 0.7);
+      }
+    }
+
+    .ff-matrix-btn-cancel {
+      color: #fd6442;
+      padding: 3px 20px;
+      border: 1px solid #fd6442;
+      background-color: #fff;
+
+      &:hover {
+        opacity: 0.5;
+      }
+
+      &:first-child:focus {
+        opacity: 0.5;
+      }
+    }
+
+    .ff-btn-disabled {
+      cursor: not-allowed;
+      background-color: #e6e6e6;
+      border: 1px solid #d8d8d8;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .ff-matrix--reveal {
+    text-align: left;
+
+    table {
+      vertical-align: bottom;
+      width: auto;
+      display: inline-block;
+
+      th,
+      td {
+        min-width: 63px;
+      }
+
+      .ff-matrix--table-align {
+        /*li {
+            padding: 3px 4px;
+          }*/
+      }
+    }
+
+    .ff-matrix--table-total {
+      td {
+        padding: 3px 4px;
+      }
+    }
+
+    .ff-matrix-btn-cancel {
+      padding: 4px 8px;
+      margin-left: 15px;
+    }
+  }
+
+  /*纯展示时候的样式*/
+}
+.ff-input--prompt {
+  color: #575757;
+}
