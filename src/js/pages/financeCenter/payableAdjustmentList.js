@@ -777,9 +777,9 @@ export default {
       let param = {
         objids: ids,
       };
-      let fromdata = new FormData();
-      fromdata.append("param", JSON.stringify(param));
-      const res = await this.service.common.voidPayableAdjustment(fromdata);
+      let formdata = new FormData();
+      formdata.append("param", JSON.stringify(param));
+      const res = await this.service.common.voidPayableAdjustment(formdata);
       if (res.data.data.code === 0) {
         self.$Message.success(res.data.data.message);
         self.getList();
@@ -788,56 +788,73 @@ export default {
       }
     },
     // 财审
-    fiAudit() {
+    async fiAudit() {
       let self = this;
-      let fromdata = self.generateAuditFromdata();
-      axios({
-        url: "/p/cs/fiAuditPayableAdjustment",
-        method: "post",
-        data: fromdata,
-      }).then(function (res) {
-        if (res.data.data.code === 0) {
-          self.$Message.success(res.data.data.message);
-          self.getList();
-        } else {
-          self.$Message.error(res.data.data.message);
-        }
-      });
+      let formdata = self.generateAuditFromdata();
+      const {data:{data,code,message}} = await this.service.financeCenter.fiAuditPayableAdjustment(formdata);
+      console.log(data,code,message);
+      if (code === 0) {
+        self.$Message.success(message);
+        self.getList();
+      }
+      // axios({
+      //   url: "/p/cs/fiAuditPayableAdjustment",
+      //   method: "post",
+      //   data: formdata,
+      // }).then(function (res) {
+      //   if (res.data.data.code === 0) {
+      //     self.$Message.success(res.data.data.message);
+      //     self.getList();
+      //   } else {
+      //     self.$Message.error(res.data.data.message);
+      //   }
+      // });
     },
     // 客审
-    custAudit() {
+    async custAudit() {
       let self = this;
-      let fromdata = self.generateAuditFromdata();
-      axios({
-        url: "/p/cs/auditPayableAdjustment",
-        method: "post",
-        data: fromdata,
-      }).then(function (res) {
-        if (res.data.data.code === 0) {
-          self.$Message.success(res.data.data.message);
+      let formdata = self.generateAuditFromdata();
+      // 接口
+      let {data:{code,data,message}} = await this.service.financeCenter.auditPayableAdjustment(formdata);
+      if (code === 0) {
+          self.$Message.success(message);
           self.getList();
-        } else {
-          self.$Message.error(res.data.data.message);
-        }
-      });
+      }
+      // axios({
+      //   url: "/p/cs/auditPayableAdjustment",
+      //   method: "post",
+      //   data: formdata,
+      // }).then(function (res) {
+      //   if (res.data.data.code === 0) {
+      //     self.$Message.success(res.data.data.message);
+      //     self.getList();
+      //   } else {
+      //     self.$Message.error(res.data.data.message);
+      //   }
+      // });
     },
     // 反客审
-    unCustAudit() {
+    async unCustAudit() {
       let self = this;
-      let fromdata = self.generateAuditFromdata();
-      axios({
-        url: "/p/cs/cancelAuditPayableAdjustment",
-        method: "post",
-        data: fromdata,
-      }).then((res) => {
-        if (res.data.data.code === 0) {
-          // self.$Message.success("反客审成功!");
-          self.$Message.success(vmI18n.t("modalTips.z1"));
+      let formdata = self.generateAuditFromdata();
+      // 接口
+      let {data:{code,data,message}} = await this.service.financeCenter.cancelAuditPayableAdjustment(formdata);
+      if (code === 0) {
+          self.$Message.success(vmI18n.t("modalTips.z1"));//反客审成功!
           self.getList();
-        } else {
-          self.$Message.error(res.data.data.message);
         }
-      });
+      // axios({
+      //   url: "/p/cs/cancelAuditPayableAdjustment",
+      //   method: "post",
+      //   data: formdata,
+      // }).then((res) => {
+      //   if (res.data.data.code === 0) {
+      //     self.$Message.success(vmI18n.t("modalTips.z1"));//反客审成功!
+      //     self.getList();
+      //   } else {
+      //     self.$Message.error(res.data.data.message);
+      //   }
+      // });
     },
     generateAuditFromdata() {
       let ids = [];
@@ -849,12 +866,12 @@ export default {
       let param = {
         ids: ids,
       };
-      let fromdata = new FormData();
-      fromdata.append("param", JSON.stringify(param));
-      return fromdata;
+      let formdata = new FormData();
+      formdata.append("param", JSON.stringify(param));
+      return formdata;
     },
     // 获取列表数据
-    getList() {
+    async getList() {
       const _this = this;
       if (_this.agTableConfig.loading) {
         return;
@@ -913,83 +930,150 @@ export default {
         pageNum: _this.agTableConfig.pagenation.current,
         pageSize: _this.agTableConfig.pagenation.pageSize,
       };
-      // let newParam = Object.assign(param, _this.formConfig.formValue);
       let fromdata = new FormData();
       fromdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/getPayableAdjustmentList",
-        method: "post",
-        data: fromdata,
-      }).then((res) => {
-        _this.agTableConfig.loading = false;
-        _this.returnSelectData = [];
-        if (res.data.code === 0 && res.data.data.payableAdjustmentList.length) {
-          //Table表单赋值
-
-          _this.allTableArr = res.data.data.payableAdjustmentList.map(
-            (item) => {
-              //过滤不需要展示的模糊搜索项
-              return {
-                ID: item.ID,
-                BILL_STATUS: item.BILL_STATUS,
-                BILL_STATUS_NAME: item.BILL_STATUS_NAME,
-                BILL_NO: item.BILL_NO,
-                TID: item.TID,
-                BILL_TYPE: item.BILL_TYPE,
-                BILL_TYPE_NAME: item.BILL_TYPE_NAME,
-                ADJUST_TYPE_NAME: item.ADJUST_TYPE_NAME,
-                CP_C_SHOP_TITLE: item.CP_C_SHOP_TITLE,
-                CP_C_PHY_WAREHOUSE_ENAME: item.CP_C_PHY_WAREHOUSE_ENAME,
-                CP_C_LOGISTICS_ENAME: item.CP_C_LOGISTICS_ENAME,
-                LOGISTICS_NO: item.LOGISTICS_NO,
-                PAYABLE_PRICE: item.PAYABLE_PRICE,
-                PAY_TYPE: item.PAY_TYPE,
-                PAY_TYPE_NAME: item.PAY_TYPE_NAME,
-                REMARK: item.REMARK,
-                ORDER_NO: item.ORDER_NO,
-                CUSTOMER_TEL: item.CUSTOMER_TEL,
-                CUSTOMER_NAME: item.CUSTOMER_NAME,
-                ALIPAY_ACCOUNT: item.ALIPAY_ACCOUNT,
-                CUSTOMER_NICK: item.CUSTOMER_NICK,
-                OWNERENAME: item.OWNERENAME,
-                FINANCIAL_TRIAL_ENAME: item.FINANCIAL_TRIAL_ENAME,
-                MODIFIERENAME: item.MODIFIERENAME,
-                GUEST_TRIAL_ENAME: item.GUEST_TRIAL_ENAME,
-                DELENAME: item.DELENAME,
-                ISACTIVE: item.ISACTIVE === "Y" ? "是" : "否",
-                CREATIONDATE: item.CREATIONDATE
-                  ? publicMethodsUtil.DatesTime(item.CREATIONDATE)
-                  : "",
-                PAY_TIME: item.PAY_TIME
-                  ? publicMethodsUtil.DatesTime(item.PAY_TIME)
-                  : "",
-                MODIFIEDDATE: item.MODIFIEDDATE
-                  ? publicMethodsUtil.DatesTime(item.MODIFIEDDATE)
-                  : "",
-                GUEST_TRIAL_TIME: item.GUEST_TRIAL_TIME
-                  ? publicMethodsUtil.DatesTime(item.GUEST_TRIAL_TIME)
-                  : "",
-                FINANCIAL_TRIAL_TIME: item.FINANCIAL_TRIAL_TIME
-                  ? publicMethodsUtil.DatesTime(item.FINANCIAL_TRIAL_TIME)
-                  : "",
-                DEL_TIME: item.DEL_TIME
-                  ? publicMethodsUtil.DatesTime(item.DEL_TIME)
-                  : "",
-              };
-            }
-          );
-          _this.agTableConfig.pagenation.total = res.data.data.page.totalSize;
-          _this.agTableConfig.rowData = _this.allTableArr;
-        } else {
-          _this.agTableConfig.rowData = [];
-          _this.agTableConfig.pagenation.total = 0;
-        }
-        this.$refs.agtable.agGridTable(
-          this.agTableConfig.columnDefs,
-          this.agTableConfig.rowData,
-          this.getExtendObj()
+      // 接口
+      const {data:{code,data,message}} =  await this.service.financeCenter.getPayableAdjustmentList(fromdata) 
+      _this.agTableConfig.loading = false;
+      _this.returnSelectData = [];
+      if (code === 0 && data.payableAdjustmentList.length) {
+        //Table表单赋值
+        _this.allTableArr = data.payableAdjustmentList.map(
+          (item) => {
+            //过滤不需要展示的模糊搜索项
+            return {
+              ID: item.ID,
+              BILL_STATUS: item.BILL_STATUS,
+              BILL_STATUS_NAME: item.BILL_STATUS_NAME,
+              BILL_NO: item.BILL_NO,
+              TID: item.TID,
+              BILL_TYPE: item.BILL_TYPE,
+              BILL_TYPE_NAME: item.BILL_TYPE_NAME,
+              ADJUST_TYPE_NAME: item.ADJUST_TYPE_NAME,
+              CP_C_SHOP_TITLE: item.CP_C_SHOP_TITLE,
+              CP_C_PHY_WAREHOUSE_ENAME: item.CP_C_PHY_WAREHOUSE_ENAME,
+              CP_C_LOGISTICS_ENAME: item.CP_C_LOGISTICS_ENAME,
+              LOGISTICS_NO: item.LOGISTICS_NO,
+              PAYABLE_PRICE: item.PAYABLE_PRICE,
+              PAY_TYPE: item.PAY_TYPE,
+              PAY_TYPE_NAME: item.PAY_TYPE_NAME,
+              REMARK: item.REMARK,
+              ORDER_NO: item.ORDER_NO,
+              CUSTOMER_TEL: item.CUSTOMER_TEL,
+              CUSTOMER_NAME: item.CUSTOMER_NAME,
+              ALIPAY_ACCOUNT: item.ALIPAY_ACCOUNT,
+              CUSTOMER_NICK: item.CUSTOMER_NICK,
+              OWNERENAME: item.OWNERENAME,
+              FINANCIAL_TRIAL_ENAME: item.FINANCIAL_TRIAL_ENAME,
+              MODIFIERENAME: item.MODIFIERENAME,
+              GUEST_TRIAL_ENAME: item.GUEST_TRIAL_ENAME,
+              DELENAME: item.DELENAME,
+              ISACTIVE: item.ISACTIVE === "Y" ? "是" : "否",
+              CREATIONDATE: item.CREATIONDATE
+                ? publicMethodsUtil.DatesTime(item.CREATIONDATE)
+                : "",
+              PAY_TIME: item.PAY_TIME
+                ? publicMethodsUtil.DatesTime(item.PAY_TIME)
+                : "",
+              MODIFIEDDATE: item.MODIFIEDDATE
+                ? publicMethodsUtil.DatesTime(item.MODIFIEDDATE)
+                : "",
+              GUEST_TRIAL_TIME: item.GUEST_TRIAL_TIME
+                ? publicMethodsUtil.DatesTime(item.GUEST_TRIAL_TIME)
+                : "",
+              FINANCIAL_TRIAL_TIME: item.FINANCIAL_TRIAL_TIME
+                ? publicMethodsUtil.DatesTime(item.FINANCIAL_TRIAL_TIME)
+                : "",
+              DEL_TIME: item.DEL_TIME
+                ? publicMethodsUtil.DatesTime(item.DEL_TIME)
+                : "",
+            };
+          }
         );
-      });
+        _this.agTableConfig.pagenation.total = data.page.totalSize;
+        _this.agTableConfig.rowData = _this.allTableArr;
+      } else {
+        _this.agTableConfig.rowData = [];
+        _this.agTableConfig.pagenation.total = 0;
+      }
+      this.$refs.agtable.agGridTable(
+        this.agTableConfig.columnDefs,
+        this.agTableConfig.rowData,
+        this.getExtendObj()
+      );
+      // axios({
+      //   url: "/p/cs/getPayableAdjustmentList",
+      //   method: "post",
+      //   data: fromdata,
+      // }).then((res) => {
+      //   _this.agTableConfig.loading = false;
+      //   _this.returnSelectData = [];
+      //   if (res.data.code === 0 && res.data.data.payableAdjustmentList.length) {
+      //     //Table表单赋值
+      //     _this.allTableArr = res.data.data.payableAdjustmentList.map(
+      //       (item) => {
+      //         //过滤不需要展示的模糊搜索项
+      //         return {
+      //           ID: item.ID,
+      //           BILL_STATUS: item.BILL_STATUS,
+      //           BILL_STATUS_NAME: item.BILL_STATUS_NAME,
+      //           BILL_NO: item.BILL_NO,
+      //           TID: item.TID,
+      //           BILL_TYPE: item.BILL_TYPE,
+      //           BILL_TYPE_NAME: item.BILL_TYPE_NAME,
+      //           ADJUST_TYPE_NAME: item.ADJUST_TYPE_NAME,
+      //           CP_C_SHOP_TITLE: item.CP_C_SHOP_TITLE,
+      //           CP_C_PHY_WAREHOUSE_ENAME: item.CP_C_PHY_WAREHOUSE_ENAME,
+      //           CP_C_LOGISTICS_ENAME: item.CP_C_LOGISTICS_ENAME,
+      //           LOGISTICS_NO: item.LOGISTICS_NO,
+      //           PAYABLE_PRICE: item.PAYABLE_PRICE,
+      //           PAY_TYPE: item.PAY_TYPE,
+      //           PAY_TYPE_NAME: item.PAY_TYPE_NAME,
+      //           REMARK: item.REMARK,
+      //           ORDER_NO: item.ORDER_NO,
+      //           CUSTOMER_TEL: item.CUSTOMER_TEL,
+      //           CUSTOMER_NAME: item.CUSTOMER_NAME,
+      //           ALIPAY_ACCOUNT: item.ALIPAY_ACCOUNT,
+      //           CUSTOMER_NICK: item.CUSTOMER_NICK,
+      //           OWNERENAME: item.OWNERENAME,
+      //           FINANCIAL_TRIAL_ENAME: item.FINANCIAL_TRIAL_ENAME,
+      //           MODIFIERENAME: item.MODIFIERENAME,
+      //           GUEST_TRIAL_ENAME: item.GUEST_TRIAL_ENAME,
+      //           DELENAME: item.DELENAME,
+      //           ISACTIVE: item.ISACTIVE === "Y" ? "是" : "否",
+      //           CREATIONDATE: item.CREATIONDATE
+      //             ? publicMethodsUtil.DatesTime(item.CREATIONDATE)
+      //             : "",
+      //           PAY_TIME: item.PAY_TIME
+      //             ? publicMethodsUtil.DatesTime(item.PAY_TIME)
+      //             : "",
+      //           MODIFIEDDATE: item.MODIFIEDDATE
+      //             ? publicMethodsUtil.DatesTime(item.MODIFIEDDATE)
+      //             : "",
+      //           GUEST_TRIAL_TIME: item.GUEST_TRIAL_TIME
+      //             ? publicMethodsUtil.DatesTime(item.GUEST_TRIAL_TIME)
+      //             : "",
+      //           FINANCIAL_TRIAL_TIME: item.FINANCIAL_TRIAL_TIME
+      //             ? publicMethodsUtil.DatesTime(item.FINANCIAL_TRIAL_TIME)
+      //             : "",
+      //           DEL_TIME: item.DEL_TIME
+      //             ? publicMethodsUtil.DatesTime(item.DEL_TIME)
+      //             : "",
+      //         };
+      //       }
+      //     );
+      //     _this.agTableConfig.pagenation.total = res.data.data.page.totalSize;
+      //     _this.agTableConfig.rowData = _this.allTableArr;
+      //   } else {
+      //     _this.agTableConfig.rowData = [];
+      //     _this.agTableConfig.pagenation.total = 0;
+      //   }
+      //   this.$refs.agtable.agGridTable(
+      //     this.agTableConfig.columnDefs,
+      //     this.agTableConfig.rowData,
+      //     this.getExtendObj()
+      //   );
+      // });
     },
     oneObjs(e) {},
     // 双击时触发
@@ -1059,7 +1143,7 @@ export default {
       _this.agTableConfig.height = tableHeight - 130;
     },
     // 导出
-    exportClick() {
+    async exportClick() {
       const _this = this;
       _this.selection = _this.$refs.agtable.AGTABLE.getSelect();
       console.log("selection", _this.selection);
@@ -1069,28 +1153,37 @@ export default {
           ids.push(_this.selection[i].ID);
         }
         let idList = { idList: ids };
-        axios({
-          url: "/p/cs/exportPayableAdjustment",
-          method: "post",
-          cancelToken: false,
-          data: idList,
-        }).then((res) => {
-          if (res.data.code === 0 && res.data.data !== null) {
-            // let mes = res.data.message || "导出成功！";
-            let mes = res.data.message || vmI18n.t("modalTips.z2");
-            _this.$Message.success(mes);
-            _this.downloadUrlFile(res.data.data);
-            // return (window.location = res.data.data);
-          } else {
-            // let err = res.data.message || "失败！";
-            let err = res.data.message || vmI18n.t("modalTips.z3");
-            _this.$Message.error(err);
-          }
-        });
+        const {data:{code,data,message}} =  await this.service.financeCenter.exportPayableAdjustment(idList) 
+        if (code === 0 && data !== null) {
+          let mes = message || vmI18n.t("modalTips.z2");//导出成功！
+          _this.$Message.success(mes);
+          _this.downloadUrlFile(data);
+        } else {
+          let err = message || vmI18n.t("modalTips.z3");//失败！
+          _this.$Message.error(err);
+        }
+        // axios({
+        //   url: "/p/cs/exportPayableAdjustment",
+        //   method: "post",
+        //   cancelToken: false,
+        //   data: idList,
+        // }).then((res) => {
+        //   console.log(res);
+        //   if (res.data.code === 0 && res.data.data !== null) {
+        //     let mes = res.data.message || vmI18n.t("modalTips.z2");//导出成功！
+        //     _this.$Message.success(mes);
+        //     _this.downloadUrlFile(res.data.data);
+        //   } else {
+        //     let err = res.data.message || vmI18n.t("modalTips.z3");//失败！
+        //     _this.$Message.error(err);
+        //   }
+        // });
+        
+        
+
       } else {
         if (_this.agTableConfig.rowData.length === 0) {
-          // return _this.$Message.error("列表没有数据,无法导出!");
-          return _this.$Message.error(vmI18n.t("modalTips.z4"));
+          return _this.$Message.error(vmI18n.t("modalTips.z4"));//列表没有数据,无法导出!
         }
         _this.warningModal = true;
       }
@@ -1107,7 +1200,7 @@ export default {
       download_file.iframe.style.display = "none";
     },
     // 警告框确认
-    warningOk() {
+    async warningOk() {
       const _this = this;
       let mainData = _this.formConfig.formValue;
       let creationdateStart = "";
@@ -1154,24 +1247,31 @@ export default {
         ORDER_NO: mainData.ORDER_NO,
         RESERVE_BIGINT01: mainData.RESERVE_BIGINT01,
       };
-      axios({
-        url: "/p/cs/exportPayableAdjustment",
-        method: "post",
-        cancelToken: true,
-        data: param,
-      }).then((res) => {
-        if (res.data.code === 0 && res.data.data !== null) {
-          // let mes = res.data.message || "导出成功！";
-          let mes = res.data.message || vmI18n.t("modalTips.z2");
-          _this.$Message.success(mes);
-          _this.downloadUrlFile(res.data.data);
-          // return (window.location = res.data.data);
-        } else {
-          //   let err = res.data.message || "失败！";
-          let err = res.data.message || vmI18n.t("modalTips.z3");
-          _this.$Message.error(err);
-        }
-      });
+      const {data:{code,data,message}} =  await this.service.financeCenter.exportPayableAdjustment(param) 
+      console.log(code,data,message);
+      if (code === 0 && data !== null) {
+        let mes = message || vmI18n.t("modalTips.z2");//导出成功！
+        _this.$Message.success(mes);
+        _this.downloadUrlFile(data);
+      } else {
+        let err = message || vmI18n.t("modalTips.z3");//失败！
+        _this.$Message.error(err);
+      }
+      // axios({
+      //   url: "/p/cs/exportPayableAdjustment",
+      //   method: "post",
+      //   cancelToken: true,
+      //   data: param,
+      // }).then((res) => {
+      //   if (res.data.code === 0 && res.data.data !== null) {
+      //     let mes = res.data.message || vmI18n.t("modalTips.z2");//导出成功！
+      //     _this.$Message.success(mes);
+      //     _this.downloadUrlFile(res.data.data);
+      //   } else {
+      //     let err = res.data.message || vmI18n.t("modalTips.z3");//失败！
+      //     _this.$Message.error(err);
+      //   }
+      // });
     },
   },
   destroyed() {

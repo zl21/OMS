@@ -4,7 +4,6 @@ import businessActionTable from "professionalComponents/businessActionTable";
 import businessLabel from "professionalComponents/businessLabel";
 import { customPagingMixins } from "@/assets/js/mixins/customPaging.js";
 import { buttonPermissionsMixin } from "@/assets/js/mixins/buttonPermissions";
-import axios from "axios";
 import businessStatusFlag from "professionalComponents/businessStatusFlag";
 import dateUtil from "@/assets/js/__utils__/date.js";
 import tableInput from "professionalComponents/businessTableInput.vue";
@@ -94,14 +93,14 @@ export default {
                 this.$Message.warning(promptMessage + vmI18n.t("modalTips.y1"));
                 return;
               }
-              //2.特殊字段正则校验
-              // let telFlag = self.CheckRegx(
-              //   /^1[34578]\d{9}$/,
-              //   masterForm.CUSTOMER_TEL
-              // ); //电话校验
-              // if (!telFlag) {
-              //   return self.$Message.error("顾客电话不合法!");
-              // }
+              // 2.特殊字段正则校验
+              let telFlag = self.CheckRegx(
+                /^1[34578]\d{9}$/,
+                masterForm.CUSTOMER_TEL
+              ); //电话校验
+              if (!telFlag) {
+                return self.$Message.error("顾客电话不合法!");
+              }
 
               //3.保存
               self.save();
@@ -221,7 +220,7 @@ export default {
             columns: ["SOURCE_CODE"],
             AuotData: [{}], //模糊搜索的数据
             //匹配的选项
-            dimChange: (val) => {
+            dimChange: async (val) => {
               //模糊查询的方法
               let self = this;
               let fromdata = new FormData();
@@ -240,36 +239,61 @@ export default {
                 ],
               };
               fromdata.append("param", JSON.stringify(param));
-              axios({
-                url: "/api/cs/oc/oms/v1/queryOrderList",
-                method: "post",
-                data: fromdata,
-              }).then((res) => {
-                if (res.status === 200) {
-                  let resData = res.data.data || {};
-                  let dataBySourceCode = resData.queryOrderResultList || [];
-                  let dimList = self.formConfig.formData;
-                  // let arr;
-                  let filterData = dataBySourceCode.map((item) => {
-                    //过滤不需要展示的模糊搜索项
-                    return {
-                      LOGISTICS_NO: item.EXPRESSCODE,
-                      CP_C_LOGISTICS_ENAME: item.CP_C_LOGISTICS_ENAME,
-                      BILL_NO: item.BILL_NO,
-                      SOURCE_CODE: item.SOURCE_CODE,
-                      CP_C_PHY_WAREHOUSE_ENAME: item.CP_C_PHY_WAREHOUSE_ENAME,
-                    };
-                  });
-                  dimList.map((item) => {
-                    if (
-                      item.label === "平台单号" ||
-                      item.label === "platform_billNo"
-                    ) {
-                      item.AuotData = self.theadTitle.concat(filterData);
-                    }
-                  });
-                }
-              });
+              const {data:{code,data,message}} =  await this.service.financeCenter.queryOrderList(param) 
+              if (code === 0) {
+                let resData = data || {};
+                let dataBySourceCode = resData.queryOrderResultList || [];
+                let dimList = self.formConfig.formData;
+                // let arr;
+                let filterData = dataBySourceCode.map((item) => {
+                  //过滤不需要展示的模糊搜索项
+                  return {
+                    LOGISTICS_NO: item.EXPRESSCODE,
+                    CP_C_LOGISTICS_ENAME: item.CP_C_LOGISTICS_ENAME,
+                    BILL_NO: item.BILL_NO,
+                    SOURCE_CODE: item.SOURCE_CODE,
+                    CP_C_PHY_WAREHOUSE_ENAME: item.CP_C_PHY_WAREHOUSE_ENAME,
+                  };
+                });
+                dimList.map((item) => {
+                  if (
+                    item.label === "平台单号" ||
+                    item.label === "platform_billNo"
+                  ) {
+                    item.AuotData = self.theadTitle.concat(filterData);
+                  }
+                });
+              }
+              // axios({
+              //   url: "/api/cs/oc/oms/v1/queryOrderList",
+              //   method: "post",
+              //   data: fromdata,
+              // }).then((res) => {
+              //   if (res.status === 200) {
+              //     let resData = data || {};
+              //     let dataBySourceCode = resData.queryOrderResultList || [];
+              //     let dimList = self.formConfig.formData;
+              //     // let arr;
+              //     let filterData = dataBySourceCode.map((item) => {
+              //       //过滤不需要展示的模糊搜索项
+              //       return {
+              //         LOGISTICS_NO: item.EXPRESSCODE,
+              //         CP_C_LOGISTICS_ENAME: item.CP_C_LOGISTICS_ENAME,
+              //         BILL_NO: item.BILL_NO,
+              //         SOURCE_CODE: item.SOURCE_CODE,
+              //         CP_C_PHY_WAREHOUSE_ENAME: item.CP_C_PHY_WAREHOUSE_ENAME,
+              //       };
+              //     });
+              //     dimList.map((item) => {
+              //       if (
+              //         item.label === "平台单号" ||
+              //         item.label === "platform_billNo"
+              //       ) {
+              //         item.AuotData = self.theadTitle.concat(filterData);
+              //       }
+              //     });
+              //   }
+              // });
             },
             dimSelect: (obj) => {
               let self = this;
@@ -1063,72 +1087,114 @@ export default {
     // this.inputList = port[this.tablename].inputList;
   },
   methods: {
-    queryBIllCause(val) {
+    async queryBIllCause(val) {
       let formdata = new FormData();
       formdata.append("id", val);
-      axios({
-        url: "/p/cs/getCompensationReason",
-        method: "post",
-        data: formdata,
-      }).then((res) => {
-        console.log(res);
-        if (res.data.code == 0) {
-          let arr = [];
-          res.data.data.forEach((item) => {
-            let obj = {};
-            obj["value"] = item.ID;
-            obj["label"] = item.ac_f_compensation_type_ename;
-            arr.push(obj);
-          });
-          this.formConfig.formData.forEach((item) => {
-            if (
-              item.label == "赔付原因" ||
-              item.label == "payableAdjustReason"
-            ) {
-              item.options = arr;
-            }
-          });
-        }
-      });
+      const {data:{code,data,message}} =  await this.service.financeCenter.getCompensationReason(formdata) 
+      console.log(code,data,message);
+      if (code == 0) {
+        let arr = [];
+        data.forEach((item) => {
+          let obj = {};
+          obj["value"] = item.ID;
+          obj["label"] = item.ac_f_compensation_type_ename;
+          arr.push(obj);
+        });
+        this.formConfig.formData.forEach((item) => {
+          if (
+            item.label == "赔付原因" ||
+            item.label == "payableAdjustReason"
+          ) {
+            item.options = arr;
+          }
+        });
+      }
+      // axios({
+      //   url: "/p/cs/getCompensationReason",
+      //   method: "post",
+      //   data: formdata,
+      // }).then((res) => {
+      //   console.log(res);
+      //   if (res.data.code == 0) {
+      //     let arr = [];
+      //     res.data.data.forEach((item) => {
+      //       let obj = {};
+      //       obj["value"] = item.ID;
+      //       obj["label"] = item.ac_f_compensation_type_ename;
+      //       arr.push(obj);
+      //     });
+      //     this.formConfig.formData.forEach((item) => {
+      //       if (
+      //         item.label == "赔付原因" ||
+      //         item.label == "payableAdjustReason"
+      //       ) {
+      //         item.options = arr;
+      //       }
+      //     });
+      //   }
+      // });
     },
     labelClick(item, index) {
       this.labelDefaultValue = item.value;
     },
-    getPayableAdjustment() {
+    async getPayableAdjustment() {
       let self = this;
       let param = {
         objid: self.ID,
       };
       let fromdata = new FormData();
       fromdata.append("param", JSON.stringify(param));
-      axios({
-        url: "/p/cs/getPayableAdjustment",
-        method: "post",
-        data: fromdata,
-      }).then((res) => {
-        if (res.data.code === 0) {
-          self.labelList = [
-            {
-              // label: "赔付单明细",
-              label: vmI18n.t("panel_label.payableAdjust_details"),
-              value: "1",
-              isShow: true,
-            },
-            {
-              // label: "操作日志",
-              label: vmI18n.t("panel_label.operationLog"),
-              value: "2",
-            },
-          ];
-          let mainData = res.data.data.acFPayableAdjustment;
-          let itemData = res.data.data.acFPayableAdjustmentItemList;
-          let logData = res.data.data.acFPayableAdjustmentLogList;
-          self.setPayableAdjustData(mainData, itemData, logData);
-        } else {
-          self.$Message.warning(res.data.message || vmI18n.t("modalTips.z8"));
-        }
-        self.isSaveLoading = false;
-      });
+      const {data:{code,data,message}} =  await this.service.financeCenter.getPayableAdjustment(param) 
+      if (code === 0) {
+        self.labelList = [
+          {
+            // label: "赔付单明细",
+            label: vmI18n.t("panel_label.payableAdjust_details"),
+            value: "1",
+            isShow: true,
+          },
+          {
+            // label: "操作日志",
+            label: vmI18n.t("panel_label.operationLog"),
+            value: "2",
+          },
+        ];
+        let mainData = data.acFPayableAdjustment;
+        let itemData = data.acFPayableAdjustmentItemList;
+        let logData = data.acFPayableAdjustmentLogList;
+        self.setPayableAdjustData(mainData, itemData, logData);
+      } else {
+        self.$Message.warning(message || vmI18n.t("modalTips.z8"));
+      }
+      self.isSaveLoading = false;
+      // axios({
+      //   url: "/p/cs/getPayableAdjustment",
+      //   method: "post",
+      //   data: fromdata,
+      // }).then((res) => {
+      //   if (res.data.code === 0) {
+      //     self.labelList = [
+      //       {
+      //         // label: "赔付单明细",
+      //         label: vmI18n.t("panel_label.payableAdjust_details"),
+      //         value: "1",
+      //         isShow: true,
+      //       },
+      //       {
+      //         // label: "操作日志",
+      //         label: vmI18n.t("panel_label.operationLog"),
+      //         value: "2",
+      //       },
+      //     ];
+      //     let mainData = res.data.data.acFPayableAdjustment;
+      //     let itemData = res.data.data.acFPayableAdjustmentItemList;
+      //     let logData = res.data.data.acFPayableAdjustmentLogList;
+      //     self.setPayableAdjustData(mainData, itemData, logData);
+      //   } else {
+      //     self.$Message.warning(res.data.message || vmI18n.t("modalTips.z8"));
+      //   }
+      //   self.isSaveLoading = false;
+      // });
     },
     // 分页change 事件
     pageChange(val) {
@@ -1191,7 +1257,7 @@ export default {
       fromdata.append("param", JSON.stringify(param));
       return fromdata;
     },
-    getSourceCodeDetail(obj) {
+    async getSourceCodeDetail(obj) {
       let self = this;
       let sourceCode = obj.tem.SOURCE_CODE;
       if (sourceCode === "平台单号" || sourceCode === "platform_billNo") {
@@ -1219,116 +1285,121 @@ export default {
         ],
       };
       fromdataReq.append("param", JSON.stringify(param));
-      axios({
-        url: "/api/cs/oc/oms/v1/queryOrderList",
-        method: "post",
-        data: fromdataReq,
-      }).then((res) => {
-        if (res.status === 200) {
-          let dataByBillNo = res.data.data.queryOrderResultList;
-          let item = dataByBillNo[0];
-          //Form表单赋值
-          let payType = item.PAY_TYPE;
-          if (payType) {
-            payType = payType.toString();
-            self.formConfig.formValue.PAY_TYPE = payType;
-          }
-          self.formConfig.formValue.TID = item.SOURCE_CODE;
-          self.formConfig.formValue.ORDER_NO = item.BILL_NO;
-          self.formConfig.formValue.SOURCE_TID = item.ID;
-          if (item.PAY_TIME) {
-            //时间戳转换为时间
-            self.formConfig.formValue.PAY_TIME = self.formatDate(item.PAY_TIME);
-          }
-          self.formConfig.formValue.CUSTOMER_NAME = item.RECEIVER_NAME;
-          self.formConfig.formValue.CUSTOMER_TEL = item.RECEIVER_MOBILE;
-          self.formConfig.formValue.CUSTOMER_NICK = item.USER_NICK;
-          self.formConfig.formValue.LOGISTICS_NO = item.EXPRESSCODE;
-          self.formConfig.formValue.CP_C_SHOP_ID = item.CP_C_SHOP_ID;
-          self.formConfig.formValue.PAYABLE_PRICE = 0;
-          self.addSelection = [];
-          self.detailAddTable.table.data = self.addSelection;
-          if (item.SCAN_TIME) {
-            self.formConfig.formValue.SOURCE_OUTSOURCE_DATE = this.formatDate(
-              item.SCAN_TIME
-            );
-          }
-          let queryData = self.formConfig.formData;
-          queryData.map((formItem) => {
-            if (
-              formItem.itemdata &&
-              (formItem.itemdata.name === "快递公司名称" ||
-                formItem.itemdata.name === "expressCompanyName")
-            ) {
-              formItem.itemdata.valuedata = item.CP_C_LOGISTICS_ENAME;
-              formItem.itemdata.pid = item.CP_C_LOGISTICS_ID;
-              this.formConfig.formValue.CP_C_LOGISTICS_ID =
-                item.CP_C_LOGISTICS_ID;
-              this.formConfig.formValue.CP_C_LOGISTICS_ENAME =
-                item.CP_C_LOGISTICS_ENAME;
-            } else if (formItem.itemdata && formItem.itemdata.name === "店铺") {
-              formItem.itemdata.valuedata = item.CP_C_SHOP_TITLE;
-              formItem.itemdata.pid = item.CP_C_SHOP_ID;
-              this.formConfig.formValue.CP_C_SHOP_ID = item.CP_C_SHOP_ID;
-              this.formConfig.formValue.CP_C_SHOP_TITLE = item.CP_C_SHOP_TITLE;
-            } else if (
-              formItem.itemdata &&
-              formItem.itemdata.name ===
-                vmI18n.t("form_label.physicalWarehouseName")
-            ) {
-              formItem.itemdata.valuedata = item.CP_C_PHY_WAREHOUSE_ENAME;
-              formItem.itemdata.pid = item.CP_C_PHY_WAREHOUSE_ID;
-              this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID =
-                item.CP_C_PHY_WAREHOUSE_ID;
-              this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME =
-                item.CP_C_PHY_WAREHOUSE_ENAME;
-            }
-          });
-          //Table表单赋值
-          let truePrice = 0;
-          let orderQty = 0;
-          let filterItemData = item.QUERYORDERITEMRESULTLIST.map((subItem) => {
-            let priceActual = parseFloat(
-              (subItem.realAmt / subItem.qty).toFixed(2)
-            );
-            truePrice = truePrice + parseFloat(subItem.realAmt);
-            orderQty = orderQty + subItem.qty;
-            //过滤不需要展示的模糊搜索项
-            return {
-              ID: subItem.proId,
-              ORDER_ITEM_ID: subItem.proId,
-              PS_C_PRO_ID: subItem.psCproId,
-              PS_C_PRO_ECODE: subItem.ecode,
-              PS_C_PRO_ENAME: subItem.proEname,
-              PS_C_CLR_ENAME: subItem.clrs,
-              PS_C_SIZE_ENAME: subItem.sizes,
-              PS_C_SKU_ECODE: subItem.skuEcode,
-              QTY: subItem.qty,
-              ORDER_QTY: subItem.qty,
-              STANDARD_PRICE: subItem.price,
-              DEAL_AMT: priceActual,
-              TRUE_PRICE: subItem.realAmt,
-              PS_C_SKU_ID: subItem.skuId,
-              GBCODE: subItem.barCode,
-              PAYABLE_PRICE: 0, //应付金额初始默认为0
-              checked: false,
-            };
-          });
-          self.customPagingFun(
-            filterItemData,
-            self.jordanTableConfig.pageSize,
-            self.jordanTableConfig,
-            "jordanTableConfig"
-          );
-          self.allTableArr = filterItemData;
-          self.getTableAfterCalPayablePrice();
+      const {data:{code,data}} =  await this.service.financeCenter.queryOrderList(param) 
+      if (code === 0) {
+        let dataByBillNo = data.queryOrderResultList;
+        let item = dataByBillNo[0];
+        //Form表单赋值
+        let payType = item.PAY_TYPE;
+        if (payType) {
+          payType = payType.toString();
+          self.formConfig.formValue.PAY_TYPE = payType;
         }
-      });
+        self.formConfig.formValue.TID = item.SOURCE_CODE;
+        self.formConfig.formValue.ORDER_NO = item.BILL_NO;
+        self.formConfig.formValue.SOURCE_TID = item.ID;
+        if (item.PAY_TIME) {
+          //时间戳转换为时间
+          self.formConfig.formValue.PAY_TIME = self.formatDate(item.PAY_TIME);
+        }
+        self.formConfig.formValue.CUSTOMER_NAME = item.RECEIVER_NAME;
+        self.formConfig.formValue.CUSTOMER_TEL = item.RECEIVER_MOBILE;
+        self.formConfig.formValue.CUSTOMER_NICK = item.USER_NICK;
+        self.formConfig.formValue.LOGISTICS_NO = item.EXPRESSCODE;
+        self.formConfig.formValue.CP_C_SHOP_ID = item.CP_C_SHOP_ID;
+        self.formConfig.formValue.PAYABLE_PRICE = 0;
+        self.addSelection = [];
+        self.detailAddTable.table.data = self.addSelection;
+        if (item.SCAN_TIME) {
+          self.formConfig.formValue.SOURCE_OUTSOURCE_DATE = this.formatDate(
+            item.SCAN_TIME
+          );
+        }
+        let queryData = self.formConfig.formData;
+        queryData.map((formItem) => {
+          if (
+            formItem.itemdata &&
+            (formItem.itemdata.name === "快递公司名称" ||
+              formItem.itemdata.name === "expressCompanyName")
+          ) {
+            formItem.itemdata.valuedata = item.CP_C_LOGISTICS_ENAME;
+            formItem.itemdata.pid = item.CP_C_LOGISTICS_ID;
+            this.formConfig.formValue.CP_C_LOGISTICS_ID =
+              item.CP_C_LOGISTICS_ID;
+            this.formConfig.formValue.CP_C_LOGISTICS_ENAME =
+              item.CP_C_LOGISTICS_ENAME;
+          } else if (formItem.itemdata && formItem.itemdata.name === "店铺") {
+            formItem.itemdata.valuedata = item.CP_C_SHOP_TITLE;
+            formItem.itemdata.pid = item.CP_C_SHOP_ID;
+            this.formConfig.formValue.CP_C_SHOP_ID = item.CP_C_SHOP_ID;
+            this.formConfig.formValue.CP_C_SHOP_TITLE = item.CP_C_SHOP_TITLE;
+          } else if (
+            formItem.itemdata &&
+            formItem.itemdata.name ===
+              vmI18n.t("form_label.physicalWarehouseName")
+          ) {
+            formItem.itemdata.valuedata = item.CP_C_PHY_WAREHOUSE_ENAME;
+            formItem.itemdata.pid = item.CP_C_PHY_WAREHOUSE_ID;
+            this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID =
+              item.CP_C_PHY_WAREHOUSE_ID;
+            this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME =
+              item.CP_C_PHY_WAREHOUSE_ENAME;
+          }
+        });
+        //Table表单赋值
+        let truePrice = 0;
+        let orderQty = 0;
+        let filterItemData = item.QUERYORDERITEMRESULTLIST.map((subItem) => {
+          let priceActual = parseFloat(
+            (subItem.realAmt / subItem.qty).toFixed(2)
+          );
+          truePrice = truePrice + parseFloat(subItem.realAmt);
+          orderQty = orderQty + subItem.qty;
+          //过滤不需要展示的模糊搜索项
+          return {
+            ID: subItem.proId,
+            ORDER_ITEM_ID: subItem.proId,
+            PS_C_PRO_ID: subItem.psCproId,
+            PS_C_PRO_ECODE: subItem.ecode,
+            PS_C_PRO_ENAME: subItem.proEname,
+            PS_C_CLR_ENAME: subItem.clrs,
+            PS_C_SIZE_ENAME: subItem.sizes,
+            PS_C_SKU_ECODE: subItem.skuEcode,
+            QTY: subItem.qty,
+            ORDER_QTY: subItem.qty,
+            STANDARD_PRICE: subItem.price,
+            DEAL_AMT: priceActual,
+            TRUE_PRICE: subItem.realAmt,
+            PS_C_SKU_ID: subItem.skuId,
+            GBCODE: subItem.barCode,
+            PAYABLE_PRICE: 0, //应付金额初始默认为0
+            checked: false,
+          };
+        });
+        self.customPagingFun(
+          filterItemData,
+          self.jordanTableConfig.pageSize,
+          self.jordanTableConfig,
+          "jordanTableConfig"
+        );
+        self.allTableArr = filterItemData;
+        self.getTableAfterCalPayablePrice();
+      }
+      // axios({
+      //   url: "/api/cs/oc/oms/v1/queryOrderList",
+      //   method: "post",
+      //   data: fromdataReq,
+      // }).then((res) => {
+      //   if (res.status === 200) {
+      //   // 同上
+        
+      //   }
+      // });
     },
     //计算应付金额
-    getTableAfterCalPayablePrice() {
+    async getTableAfterCalPayablePrice() {
       let self = this;
-      let fromdata = self.generateFromdata();
+      let formdata = self.generateFromdata();
       let billType = self.formConfig.formValue.BILL_TYPE;
       if (billType === "1" || billType === "4") {
         self.formConfig.formData.map((item) => {
@@ -1346,51 +1417,92 @@ export default {
           {},
           self.formConfig.ruleValidate
         );
-        axios({
-          url: "/p/cs/getCompensate",
-          method: "post",
-          data: fromdata,
-        }).then((res) => {
-          if (res.status === 200) {
-            self.formConfig.formValue.PAYABLE_PRICE =
-              res.data.data.payablePrice;
-            let itemList = res.data.data.acFPayableAdjustmentItemList;
-            let filterItemData = itemList.map((subItem) => {
-              // let priceActual = parseFloat((subItem.TRUE_PRICE / subItem.ORDER_QTY).toFixed(2));
-              //过滤不需要展示的模糊搜索项
-              return {
-                ID: subItem.ID,
-                ORDER_ITEM_ID: subItem.ORDER_ITEM_ID,
-                PS_C_PRO_ID: subItem.PS_C_PRO_ID,
-                PS_C_PRO_ECODE: subItem.PS_C_PRO_ECODE,
-                PS_C_PRO_ENAME: subItem.PS_C_PRO_ENAME,
-                PS_C_CLR_ENAME: subItem.PS_C_CLR_ENAME,
-                PS_C_SIZE_ENAME: subItem.PS_C_SIZE_ENAME,
-                PS_C_SKU_ECODE: subItem.PS_C_SKU_ECODE,
-                QTY: subItem.QTY,
-                ORDER_QTY: subItem.ORDER_QTY,
-                STANDARD_PRICE: subItem.STANDARD_PRICE,
-                DEAL_AMT: subItem.DEAL_AMT,
-                PAY_AMT: subItem.PAY_AMT,
-                TRUE_PRICE: subItem.TRUE_PRICE,
-                PS_C_SKU_ID: subItem.PS_C_SKU_ID,
-                GBCODE: subItem.GBCODE,
-                PAYABLE_PRICE: subItem.PAYABLE_PRICE,
-                checked: false,
-              };
-            });
-            self.jordanTableConfig.data = filterItemData;
-            self.allTableArr = filterItemData;
-            self.selectArr = [];
-            self.customPagingFun(
-              filterItemData,
-              self.jordanTableConfig.pageSize,
-              self.jordanTableConfig,
-              "jordanTableConfig"
-            );
-            self.calTableTable(self.jordanTableConfig.data);
-          }
-        });
+        // 接口
+        const {data:{code,data,message}} =  await this.service.financeCenter.getCompensate(formdata) 
+        console.log("formdata:",code,data,message);
+        if (code === 0) {
+          self.formConfig.formValue.PAYABLE_PRICE = data.payablePrice;
+          let itemList = data.acFPayableAdjustmentItemList;
+          let filterItemData = itemList.map((subItem) => {
+            // let priceActual = parseFloat((subItem.TRUE_PRICE / subItem.ORDER_QTY).toFixed(2));
+            //过滤不需要展示的模糊搜索项
+            return {
+              ID: subItem.ID,
+              ORDER_ITEM_ID: subItem.ORDER_ITEM_ID,
+              PS_C_PRO_ID: subItem.PS_C_PRO_ID,
+              PS_C_PRO_ECODE: subItem.PS_C_PRO_ECODE,
+              PS_C_PRO_ENAME: subItem.PS_C_PRO_ENAME,
+              PS_C_CLR_ENAME: subItem.PS_C_CLR_ENAME,
+              PS_C_SIZE_ENAME: subItem.PS_C_SIZE_ENAME,
+              PS_C_SKU_ECODE: subItem.PS_C_SKU_ECODE,
+              QTY: subItem.QTY,
+              ORDER_QTY: subItem.ORDER_QTY,
+              STANDARD_PRICE: subItem.STANDARD_PRICE,
+              DEAL_AMT: subItem.DEAL_AMT,
+              PAY_AMT: subItem.PAY_AMT,
+              TRUE_PRICE: subItem.TRUE_PRICE,
+              PS_C_SKU_ID: subItem.PS_C_SKU_ID,
+              GBCODE: subItem.GBCODE,
+              PAYABLE_PRICE: subItem.PAYABLE_PRICE,
+              checked: false,
+            };
+          });
+          self.jordanTableConfig.data = filterItemData;
+          self.allTableArr = filterItemData;
+          self.selectArr = [];
+          self.customPagingFun(
+            filterItemData,
+            self.jordanTableConfig.pageSize,
+            self.jordanTableConfig,
+            "jordanTableConfig"
+          );
+          self.calTableTable(self.jordanTableConfig.data);
+        }
+        // axios({
+        //   url: "/p/cs/getCompensate",
+        //   method: "post",
+        //   data: formdata,
+        // }).then((res) => {
+        //   if (res.status === 200) {
+        //     self.formConfig.formValue.PAYABLE_PRICE =
+        //       res.data.data.payablePrice;
+        //     let itemList = res.data.data.acFPayableAdjustmentItemList;
+        //     let filterItemData = itemList.map((subItem) => {
+        //       // let priceActual = parseFloat((subItem.TRUE_PRICE / subItem.ORDER_QTY).toFixed(2));
+        //       //过滤不需要展示的模糊搜索项
+        //       return {
+        //         ID: subItem.ID,
+        //         ORDER_ITEM_ID: subItem.ORDER_ITEM_ID,
+        //         PS_C_PRO_ID: subItem.PS_C_PRO_ID,
+        //         PS_C_PRO_ECODE: subItem.PS_C_PRO_ECODE,
+        //         PS_C_PRO_ENAME: subItem.PS_C_PRO_ENAME,
+        //         PS_C_CLR_ENAME: subItem.PS_C_CLR_ENAME,
+        //         PS_C_SIZE_ENAME: subItem.PS_C_SIZE_ENAME,
+        //         PS_C_SKU_ECODE: subItem.PS_C_SKU_ECODE,
+        //         QTY: subItem.QTY,
+        //         ORDER_QTY: subItem.ORDER_QTY,
+        //         STANDARD_PRICE: subItem.STANDARD_PRICE,
+        //         DEAL_AMT: subItem.DEAL_AMT,
+        //         PAY_AMT: subItem.PAY_AMT,
+        //         TRUE_PRICE: subItem.TRUE_PRICE,
+        //         PS_C_SKU_ID: subItem.PS_C_SKU_ID,
+        //         GBCODE: subItem.GBCODE,
+        //         PAYABLE_PRICE: subItem.PAYABLE_PRICE,
+        //         checked: false,
+        //       };
+        //     });
+        //     self.jordanTableConfig.data = filterItemData;
+        //     self.allTableArr = filterItemData;
+        //     self.selectArr = [];
+        //     self.customPagingFun(
+        //       filterItemData,
+        //       self.jordanTableConfig.pageSize,
+        //       self.jordanTableConfig,
+        //       "jordanTableConfig"
+        //     );
+        //     self.calTableTable(self.jordanTableConfig.data);
+        //   }
+        // });
       } else {
         self.formConfig.formData.map((item) => {
           if (
@@ -1640,20 +1752,29 @@ export default {
       let self = this;
       self.isSaveLoading = true;
       let fromdata = self.generateFromdata();
-      axios({
-        url: "/p/cs/savePayableAdjustment",
-        method: "post",
-        data: fromdata,
-      }).then(function (res) {
-        if (res.data.code === 0) {
-          self.$Message.success(res.data.message || vmI18n.t("modalTips.z9"));
-          self.ID = res.data.data.objid;
-          self.getPayableAdjustment();
-        } else {
-          self.$Message.error(res.data.message || vmI18n.t("modalTips.y0"));
-        }
-        self.isSaveLoading = false;
-      });
+      const {data:{code,data,message}} = await self.service.financeCenter.savePayableAdjustment(fromdata);
+      if (code === 0) {
+        self.$Message.success(message || vmI18n.t("modalTips.z9"));
+        self.ID = data.objid;
+        self.getPayableAdjustment();
+      } else {
+        self.$Message.error(message || vmI18n.t("modalTips.y0"));
+      }
+      self.isSaveLoading = false;
+      // axios({
+      //   url: "/p/cs/savePayableAdjustment",
+      //   method: "post",
+      //   data: fromdata,
+      // }).then(function (res) {
+      //   if (res.data.code === 0) {
+      //     self.$Message.success(res.data.message || vmI18n.t("modalTips.z9"));
+      //     self.ID = res.data.data.objid;
+      //     self.getPayableAdjustment();
+      //   } else {
+      //     self.$Message.error(res.data.message || vmI18n.t("modalTips.y0"));
+      //   }
+      //   self.isSaveLoading = false;
+      // });
     }, //保存方法
 
     async enterSave() {
@@ -1665,16 +1786,21 @@ export default {
         AC_F_PAYABLE_ADJUSTMENT: payableAdjustmentDO,
         AC_F_PAYABLE_ADJUSTMENT_ITEM: payableAdjustmentItemDO,
       };
-      axios({
-        url: "/p/cs/savePayableAdjustment",
-        method: "post",
-        data: data,
-      }).then(function (res) {
-        if (res.data.code === 0) {
-          self.$Message.success(res.data.message || vmI18n.t("modalTips.z9"));
-          // self.ID = res.data.data;
-        }
-      });
+      const res = await self.service.financeCenter.savePayableAdjustment(data);
+      if (res.data.code === 0) {
+        self.$Message.success(res.data.message || vmI18n.t("modalTips.z9"));
+        // self.ID = res.data.data;
+      }
+      // axios({
+      //   url: "/p/cs/savePayableAdjustment",
+      //   method: "post",
+      //   data: data,
+      // }).then(function (res) {
+      //   if (res.data.code === 0) {
+      //     self.$Message.success(res.data.message || vmI18n.t("modalTips.z9"));
+      //     // self.ID = res.data.data;
+      //   }
+      // });
     },
     onSelectCancel(selection, row) {
       let selectArr = this.selectArr;

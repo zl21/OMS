@@ -55,7 +55,7 @@ export default {
         buttons: [
           {
             type: "", //按钮类型
-            text: vmI18n.t("bth.generate"), //生成 按钮文本
+            text: vmI18n.t("btn.generate"), //生成 按钮文本
             icon: "", //按钮图标
             size: "", //按钮大小
             disabled: false, //按钮禁用控制
@@ -91,38 +91,56 @@ export default {
         this.generateFormConfig.formValue.type = "2";
       }
     },
-    getBillMonthAndVendorIds() {
+    async getBillMonthAndVendorIds() {
       let params = {
         param: {
           type: this.generateFormConfig.formValue.type
         }
       };
       this.pageLoad = true;
-      R3.network.get("/p/cs/ac/v1/getVendorCodeAndBillNumber", {params})
-        .then(res => {
-          this.pageLoad = false;
-          let resData = res.data.data;
-          if (resData.code === 0) {
-            console.log(resData);
-            this.generateFormConfig.formData[0].options = resData.data.vendorIds.map(
-              item => ({
-                label: String(item),
-                value: String(item)
-              })
-            );
-            this.generateFormConfig.formData[1].options = resData.data.billNumbers.map(
-              item => ({
-                label: item,
-                value: item
-              })
-            );
-          } else {
-            this.$Message.error(res.data.message);
-          }
-        });
+      const {data:{data:{code,data,message}}} =  await this.service.financeCenter.getVendorCodeAndBillNumber({params})
+      this.pageLoad = false;
+      if (code === 0) {
+        this.generateFormConfig.formData[0].options = data.vendorIds.map(
+          item => ({
+            label: String(item),
+            value: String(item)
+          })
+        );
+        this.generateFormConfig.formData[1].options = data.billNumbers.map(
+          item => ({
+            label: item,
+            value: item
+          })
+        );
+      } else {
+        this.$message.error(message);
+      }
+      // R3.network.get("/p/cs/ac/v1/getVendorCodeAndBillNumber", {params})
+      //   .then(res => {
+      //     this.pageLoad = false;
+      //     let resData = res.data.data;
+      //     if (resData.code === 0) {
+      //       console.log(resData);
+      //       this.generateFormConfig.formData[0].options = resData.data.vendorIds.map(
+      //         item => ({
+      //           label: String(item),
+      //           value: String(item)
+      //         })
+      //       );
+      //       this.generateFormConfig.formData[1].options = resData.data.billNumbers.map(
+      //         item => ({
+      //           label: item,
+      //           value: item
+      //         })
+      //       );
+      //     } else {
+      //       this.$Message.error(res.data.message);
+      //     }
+      //   });
     },
     // 打印
-    printData() {
+    async printData() {
       let formValue = this.generateFormConfig.formValue;
       if (!formValue.vendorId) {
         // 供应商ID不能为空!
@@ -141,15 +159,28 @@ export default {
           billNumber: formValue.billNumber
         }
       };
-      R3.network.get("/p/cs/ac/v1/generateVipSalesOrder", {params})
-        .then(res => {
-          if (res.data.data.code === 0) {
-            this.$Message.success(res.data.data.message);
-            this.$parent.$parent.actionDialog.show = false;
-          } else {
-            this.$Message.error(res.data.data.message);
-          }
-        });
+      const {data:{data:{code,message}}} =  await this.service.financeCenter.generateVipSalesOrder({params})
+      if (code === 0) {
+          this.$message.success(message);
+          this.$parent.$parent.actionDialog.show = false;
+        } else {
+          this.$message.error(message);
+        }
+      // if (res.data.data.code === 0) {
+      //   this.$Message.success(res.data.data.message);
+      //   this.$parent.$parent.actionDialog.show = false;
+      // } else {
+      //   this.$Message.error(res.data.data.message);
+      // }
+      // R3.network.get("/p/cs/ac/v1/generateVipSalesOrder", {params})
+      //   .then(res => {
+      //     if (res.data.data.code === 0) {
+      //       this.$Message.success(res.data.data.message);
+      //       this.$parent.$parent.actionDialog.show = false;
+      //     } else {
+      //       this.$Message.error(res.data.data.message);
+      //     }
+      //   });
     }
   },
   mounted() {
