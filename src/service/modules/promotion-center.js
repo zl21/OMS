@@ -6,7 +6,7 @@ export default {
    * 营销列表页面
    */
   // 查询列表 
-  selectPmList: (params) => network.post('/p/cs/pm/v1/selectPmList', params),
+  selectPmList: (params) => network.post('http://yapi.dev.syman.cn/mock/624/p/cs/pm/v1/selectPmList', params),
   // 查看日志
   cpromLogQuery:  (params) => network.post('/p/cs/cpromLogQuery', params),
   // 获取button数组

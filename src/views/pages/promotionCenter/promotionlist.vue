@@ -1,229 +1,190 @@
 <template>
-  <div
-    v-loading="loadings"
-    class="promactiqueryList"
-  >
-    <div style="height: 132px">
-      <!-- 按钮 -->
-      <div class="head_botton">
-        <button
-          class="white"
-          @click="getData"
-        >
-          <!-- <i class="burgeon-icon burgeon-icon-ios-search" /> -->
+  <!-- promactiqueryList -->
+  <div v-loading="loadings" class="promotion-content">
+    <div class="operation-content">
+      <!-- 按钮 head_botton-->
+      <div class="operation-botton">
+        <button class="white" @click="getData">
           <!-- 查找 -->
           {{ vmI18n.t("btn.find") }}
         </button>
-        <button
-          class="white"
-          @click="Reset"
-        >
-          <!-- <i class="burgeon-icon burgeon-icon-ios-refresh" /> -->
+        <button class="white" @click="Reset">
           <!-- 重置 -->
           {{ vmI18n.t("btn.reset") }}
         </button>
-        <button
-          class="white"
-          @click="promotionClick"
-        >
+        <button class="white" @click="promotionClick">
           {{ vmI18n.t("btn.add") }}
         </button>
-        <button
-          class="white"
-          @click="promotionBlukClick"
-        >
+        <button class="white" @click="promotionBlukClick">
           {{ vmI18n.t("btn.batch_add") }}
         </button>
-        <button
-          class="white"
-          @click="publish"
-        >
+        <button class="white" @click="publish">
           {{ vmI18n.t("btn.publish") }}
         </button>
-        <button
-          class="white"
-          @click="actOffline"
-        >
+        <button class="white" @click="actOffline">
           {{ vmI18n.t("btn.offline") }}
         </button>
-        <button
-          class="white"
-          @click="copy"
-        >
+        <button class="white" @click="copy">
           {{ vmI18n.t("common.copy") }}
         </button>
-        <button
-          class="white"
-          @click="deleteActi"
-        >
+        <button class="white" @click="deleteActi">
           {{ vmI18n.t("btn.delete") }}
         </button>
-        <button
-          class="white"
-          @click="setGroup"
-        >
+        <button class="white" @click="setGroup">
           {{ vmI18n.t("btn.set_groups") }}
         </button>
-        <button
-          class="white"
-          @click="simulation"
-        >
+        <button class="white" @click="simulation">
           {{ vmI18n.t("btn.simulation") }}
         </button>
         <Favorite />
       </div>
       <!-- 过滤器 -->
-      <div class="body_select_three">
-        <!--促销编号--->
-        <div class="item_three_1">
-          <span>
-            <i
-              class="query_titile"
-            >{{ vmI18n.t("form_label.promotionNo") }}:</i>
+      <Row class="operation-form">
+        <!--促销编号 item_three_1  query_titile--->
+        <Col span="6" class="form-item">
+          <span class="form-label">
+            {{ vmI18n.t("form_label.promotionNo") }}:
+          </span>
+          <div class="form-input">
             <input
               v-model="acti_no"
               type="text"
               class="pure_text"
-              style="width: calc(100% - 60px)"
               @keyup="formUserKeyUp"
-            >
-          </span>
-        </div>
+            />
+          </div>
+        </Col>
         <!-- 活动日期 -->
-        <div class="item_three_1">
-          <span>
-            <i
-              class="query_titile"
-            >{{ vmI18n.t("form_label.activityDate") }}:</i>
-            <el-date-picker
+        <Col span="6" class="form-item">
+          <span class="form-label">
+            {{ vmI18n.t("form_label.activityDate") }}:
+          </span>
+          <div class="form-input">
+            <DatePicker
               v-model="acti_date"
-              class="M_date_clas"
               format="yyyy-MM-dd"
               value-format="yyyyMMdd"
               type="daterange"
               :placeholder="vmI18n.t('pHolder.a1')"
-            />
-          </span>
-        </div>
+            >
+            </DatePicker>
+          </div>
+        </Col>
         <!-- 活动名称 -->
-        <div class="item_three_1">
-          <span>
-            <i
-              class="query_titile"
-            >{{ vmI18n.t("form_label.activityName") }}:</i>
+        <Col span="6" class="form-item">
+          <span class="form-label">
+            {{ vmI18n.t("form_label.activityName") }}:
+          </span>
+          <div class="form-input">
             <input
               v-model="acti_name"
               type="text"
               class="pure_text"
-              style="width: calc(100% - 60px)"
               @keyup="formUserKeyUp"
-            >
-          </span>
-        </div>
+            />
+          </div>
+        </Col>
         <!-- 线下门店 -->
-        <!-- <div class="item_three_1">
+        <!-- <div class="form-item">
           <myInputLd :isActive="true" :isDisabled="false" :itemdata="my_input_st.itemdata"></myInputLd>
         </div>-->
         <!-- 线上门店 -->
-        <div class="item_three_1">
-          <TableInput
-            :is-active="true"
-            :is-disabled="false"
-            :itemdata="my_input_sh.itemdata"
-          />
-        </div>
-        <!-- 商品 -->
-        <div class="item_three_1">
-          <span>
-            <i class="query_titile">{{ vmI18n.t("other.goods") }}:</i>
+        <Col span="6" class="form-item tableInput">
+          <span class="form-label"> 店铺名称: </span>
+          <div class="form-input">
             <TableInput
-              style="width: calc(100% - 60px)"
+              :is-active="true"
+              :has-label="false"
+              :is-disabled="false"
+              :itemdata="my_input_sh.itemdata"
+            />
+          </div>
+        </Col>
+        <!-- 商品 -->
+        <Col span="6" class="form-item">
+          <span class="form-label"> {{ vmI18n.t("other.goods") }}: </span>
+          <div class="form-input">
+            <TableInput
               :is-active="true"
               :isdisabled="false"
               :itemdata="product.itemdata_xitong"
               :has-label="false"
               :is-promotion="true"
             />
-          </span>
-        </div>
+          </div>
+        </Col>
         <!-- 分组-->
-        <div class="item_three_1">
-          <span>
-            <i class="query_titile">{{ vmI18n.t("table_label.grouping") }}:</i>
+        <Col span="6" class="form-item">
+          <span class="form-label">
+            {{ vmI18n.t("table_label.grouping") }}:
+          </span>
+          <div class="form-input">
             <input
               v-model="acti_group"
               type="text"
               class="pure_text"
-              style="width: calc(100% - 60px)"
               @keyup="formUserKeyUp"
-            >
-          </span>
-        </div>
+            />
+          </div>
+        </Col>
         <!--操作人-->
-        <div class="item_three_1">
-          <span>
-            <i class="query_titile">{{ vmI18n.t("form_label.operator") }}:</i>
+        <Col span="6" class="form-item">
+          <span class="form-label">
+            {{ vmI18n.t("form_label.operator") }}:
+          </span>
+          <div class="form-input">
             <input
               v-model="release_name"
               type="text"
               class="pure_text"
-              style="width: calc(100% - 60px)"
               @keyup="formUserKeyUp"
-            >
-          </span>
-        </div>
-        <!--促销状态-->
-        <div class="item_three_1">
-          <span>
-            <i
-              class="query_titile"
-            >{{ vmI18n.t("form_label.promotion_status") }}:</i>
-            <div class="query_select">
-              <Select
-                v-model="STATUS"
-                multiple
-              >
+            />
+          </div>
+        </Col>
+        <!--促销状态 query_select-->
+        <Col span="6">
+          <div span="6" class="form-item">
+            <span class="form-label"
+              >{{ vmI18n.t("form_label.promotion_status") }}:
+            </span>
+            <div class="form-input">
+              <Select v-model="STATUS" multiple>
                 <Option
                   v-for="item in diStatusArr"
                   :key="item.value"
                   :value="item.value"
-                >{{ item.label }}</Option>
+                  >{{ item.label }}</Option
+                >
               </Select>
             </div>
-          </span>
-        </div>
-        <!-- <div class="item_three_1" />
-        <div class="item_three_1" />
-        <div class="item_three_1" /> -->
-
+          </div>
+        </Col>
+        <!-- <div class="formItem" />
+        <div class="formItem" />
+        <div class="formItem" /> -->
         <!-- 搜索按钮 -->
-        <div class="item_three_1 button-right" />
-      </div>
+        <div class="formItem button-right" />
+      </Row>
     </div>
     <!-- 列表部分 -->
-    <div class="main_body">
-      <el-tabs
-        v-model="activeName"
-        type="border-card"
-      >
-        <el-tab-pane
-          :label="tabTotal.one"
-          name="1"
+    <div class="tabale-content">
+      <Tabs v-model="activeName">
+        <TabPane
+          v-for="(user, index) in tabConfig"
+          :key="index"
+          :label="`${user.label} ${user.total}`"
+          :name="`${index}`"
         >
           <!-- hasNation 是否自动计算序号 -->
           <aTable
-            ref="agGridChild1"
-            :ag-table-config="agTableConfig1"
-            @on-page-change="pageChange1"
-            @on-page-size-change="pageSizeChange1"
+            :ref="`agGridChild${index + 1}`"
+            :ag-table-config="user.agTableConfig"
+            @on-page-change="pageChange"
+            @on-page-size-change="pageSizeChange"
             @on-row-dblclick="handDblClick"
           />
-        </el-tab-pane>
-
-        <el-tab-pane
-          :label="tabTotal.two"
-          name="2"
-        >
+        </TabPane>
+        <!-- <TabPane :label="tabTotal.two" name="2">
           <aTable
             ref="agGridChild2"
             :ag-table-config="agTableConfig2"
@@ -231,12 +192,8 @@
             @on-page-size-change="pageSizeChange2"
             @on-row-dblclick="handDblClick"
           />
-        </el-tab-pane>
-
-        <el-tab-pane
-          :label="tabTotal.three"
-          name="3"
-        >
+        </TabPane>
+        <TabPane :label="tabTotal.three" name="3">
           <aTable
             ref="agGridChild3"
             :ag-table-config="agTableConfig3"
@@ -244,12 +201,8 @@
             @on-page-size-change="pageSizeChange3"
             @on-row-dblclick="handDblClick"
           />
-        </el-tab-pane>
-
-        <el-tab-pane
-          :label="tabTotal.four"
-          name="4"
-        >
+        </TabPane>
+        <TabPane :label="tabTotal.four" name="4">
           <aTable
             ref="agGridChild4"
             :ag-table-config="agTableConfig4"
@@ -257,8 +210,8 @@
             @on-page-size-change="pageSizeChange4"
             @on-row-dblclick="handDblClick"
           />
-        </el-tab-pane>
-      </el-tabs>
+        </TabPane> -->
+      </Tabs>
     </div>
     <div class="promactiIcon">
       <div class="legend">
@@ -272,7 +225,6 @@
             {{ vmI18n.t("form_label.published") }}
           </button>
         </p>
-        other
         <p>
           <!-- 草稿状态 -->
           <span>{{ vmI18n.t("other.draft_status") }}:&nbsp;</span>
@@ -320,17 +272,10 @@
     />
     <!-- 查看日志弹框 -->
     <Modal v-model="modal">
-      <Table
-        :columns="logData.columns"
-        :data="logData.data"
-        :height="300"
-      />
+      <Table :columns="logData.columns" :data="logData.data" :height="300" />
       <div slot="footer">
         <!-- 关闭 -->
-        <Button
-          type="error"
-          @click="closeModal"
-        >
+        <Button type="error" @click="closeModal">
           {{ vmI18n.t("common.close") }}
         </Button>
       </div>
@@ -338,11 +283,10 @@
   </div>
 </template>
 <script>
-  import promotionlist from '@/js/pages/promotionCenter/promotionlist';
-
-  export default promotionlist;
+import promotionlist from "@/js/pages/promotionCenter/promotionlist";
+export default promotionlist;
 </script>
 <style lang="less">
-@import "~@/assets/css/css_1_3/datepicker";
+// @import "~@/assets/css/css_1_3/datepicker";
 @import "~@/css/pages/promotionCenter/promotionlist.less";
 </style>

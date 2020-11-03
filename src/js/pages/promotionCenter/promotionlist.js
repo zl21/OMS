@@ -1,4 +1,5 @@
 import axios from "axios";
+import businessLabel from 'professionalComponents/businessLabel';
 import customTable from "framework/components/table/P_customTable.vue";
 import errorMessage from "framework/components/tablelist/error.vue";
 import Mydialog from "framework/components/dialog/mydialog.vue";
@@ -6,7 +7,6 @@ import TableInput from "framework/components/element/input";
 import aTable from "professionalComponents/agGridTable.vue";
 import dialogVisible from "@/views/pages/promotionCenter/setGroup";
 import Favorite from "@/views/pages/promotionCenter/components/favorite";
-
 const baseColumnDefs = [
   {
     headerName: "序号",
@@ -105,6 +105,9 @@ export default {
     return {
       vmI18n: window.vmI18n,
       modal: false, // 查看日志弹框
+      // tabs
+      // 设置tabs默认值
+      labelDefaultValue: '0',
       logData: {
         columns: [
           {
@@ -133,10 +136,6 @@ export default {
         data: [],
       },
       buttons: [], // 按钮权限列表
-      checkedArr1: [],
-      checkedArr2: [],
-      checkedArr3: [],
-      checkedArr4: [],
       my_input_sh: {
         itemdata: {
           col: 1,
@@ -220,7 +219,7 @@ export default {
       acti_no: "", // 促销编号
       acti_name: "", // 促销名称
       acti_group: "", // 分组设置
-      activeName: "1", // 根据这个，判断是第几个tab
+      activeName: 0, // 根据这个，判断是第几个tab
       // Myinput: [],
       // sheetWidth: 0,
       tabulation: [], // 列表数据
@@ -244,142 +243,156 @@ export default {
       objid: -1,
       selectItem: {},
       tablename: "DL_B_PAND", // 表名
-      agTableConfig1: {
-        isIndex: true,
-        tableHeight: "450px",
-        columnDefs: baseColumnDefs,
-        rowData: [],
-        renderArr: {
-          ACTION_LOG: (params) => {
-            // console.log("params :>> ", params);
-            if (!params.data.ACTION_LOG) return;
-
-            const resultElement = document.createElement("div");
-            const iTag = document.createElement("div");
-            iTag.style.color = "#0f8ee9";
-            iTag.style.textDecoration = "underline";
-            iTag.innerText = params.data.ACTION_LOG;
-            iTag.style.cursor = "pointer";
-            iTag.onclick = () => {
-              // console.log(params.data);
-              this.viewLog(params.data);
-            };
-            resultElement.appendChild(iTag);
-            return resultElement;
+      tabConfig:[{
+        // 全部
+        label:vmI18n.t("common.all"),
+        total:'0',
+        agTableConfig:{
+          isIndex: true,
+          tableHeight: "450px",
+          columnDefs: baseColumnDefs,
+          rowData: [],
+          renderArr: {
+            ACTION_LOG: (params) => {
+              // console.log("params :>> ", params);
+              if (!params.data.ACTION_LOG) return;
+              const resultElement = document.createElement("div");
+              const iTag = document.createElement("div");
+              iTag.style.color = "#0f8ee9";
+              iTag.style.textDecoration = "underline";
+              iTag.innerText = params.data.ACTION_LOG;
+              iTag.style.cursor = "pointer";
+              iTag.onclick = () => {
+                // console.log(params.data);
+                this.viewLog(params.data);
+              };
+              resultElement.appendChild(iTag);
+              return resultElement;
+            },
           },
-        },
-        pagenation: {
-          // 设置总条数
-          total: 0,
-          // 条数
-          pageSize: 20,
-          // 页数
-          current: 1,
-          pageSizeOpts: [20, 50, 150, 1000],
-        },
-      }, // 全部
-      agTableConfig2: {
-        isIndex: true,
-        tableHeight: "450px",
-        columnDefs: baseColumnDefs,
-        rowData: [],
-        renderArr: {
-          ACTION_LOG: (params) => {
-            // console.log("params :>> ", params);
-            if (!params.data.ACTION_LOG) return;
-
-            const resultElement = document.createElement("div");
-            const iTag = document.createElement("div");
-            iTag.style.color = "#0f8ee9";
-            iTag.style.textDecoration = "underline";
-            iTag.innerText = params.data.ACTION_LOG;
-            iTag.style.cursor = "pointer";
-            iTag.onclick = () => {
-              // console.log(params.data);
-              this.viewLog(params.data);
-            };
-            resultElement.appendChild(iTag);
-            return resultElement;
+          pagenation: {
+            // 设置总条数
+            total: 0,
+            // 条数
+            pageSize: 20,
+            // 页数
+            current: 1,
+            pageSizeOpts: [20, 50, 150, 1000],
           },
-        },
-        pagenation: {
-          // 设置总条数
-          total: 0,
-          // 条数
-          pageSize: 20,
-          // 页数
-          current: 1,
-          pageSizeOpts: [20, 50, 150, 1000],
-        },
-      }, // 已发布
-      agTableConfig3: {
-        isIndex: true,
-        tableHeight: "450px",
-        columnDefs: baseColumnDefs,
-        rowData: [],
-        renderArr: {
-          ACTION_LOG: (params) => {
-            // console.log("params :>> ", params);
-            if (!params.data.ACTION_LOG) return;
-
-            const resultElement = document.createElement("div");
-            const iTag = document.createElement("div");
-            iTag.style.color = "#0f8ee9";
-            iTag.style.textDecoration = "underline";
-            iTag.innerText = params.data.ACTION_LOG;
-            iTag.style.cursor = "pointer";
-            iTag.onclick = () => {
-              // console.log(params.data);
-              this.viewLog(params.data);
-            };
-            resultElement.appendChild(iTag);
-            return resultElement;
+        }
+      },{
+        // 已发布
+        label:vmI18n.t("btn.published"),
+        total:'0',
+        agTableConfig:{
+          isIndex: true,
+          tableHeight: "450px",
+          columnDefs: baseColumnDefs,
+          rowData: [],
+          renderArr: {
+            ACTION_LOG: (params) => {
+              // console.log("params :>> ", params);
+              if (!params.data.ACTION_LOG) return;
+              const resultElement = document.createElement("div");
+              const iTag = document.createElement("div");
+              iTag.style.color = "#0f8ee9";
+              iTag.style.textDecoration = "underline";
+              iTag.innerText = params.data.ACTION_LOG;
+              iTag.style.cursor = "pointer";
+              iTag.onclick = () => {
+                // console.log(params.data);
+                this.viewLog(params.data);
+              };
+              resultElement.appendChild(iTag);
+              return resultElement;
+            },
           },
-        },
-        pagenation: {
-          // 设置总条数
-          total: 0,
-          // 条数
-          pageSize: 20,
-          // 页数
-          current: 1,
-          pageSizeOpts: [20, 50, 150, 1000],
-        },
-      }, // 草稿
-      agTableConfig4: {
-        isIndex: true,
-        tableHeight: "450px",
-        columnDefs: baseColumnDefs,
-        rowData: [],
-        renderArr: {
-          ACTION_LOG: (params) => {
-            // console.log("params :>> ", params);
-            if (!params.data.ACTION_LOG) return;
-
-            const resultElement = document.createElement("div");
-            const iTag = document.createElement("div");
-            iTag.style.color = "#0f8ee9";
-            iTag.style.textDecoration = "underline";
-            iTag.innerText = params.data.ACTION_LOG;
-            iTag.style.cursor = "pointer";
-            iTag.onclick = () => {
-              // console.log(params.data);
-              this.viewLog(params.data);
-            };
-            resultElement.appendChild(iTag);
-            return resultElement;
+          pagenation: {
+            // 设置总条数
+            total: 0,
+            // 条数
+            pageSize: 20,
+            // 页数
+            current: 1,
+            pageSizeOpts: [20, 50, 150, 1000],
           },
-        },
-        pagenation: {
-          // 设置总条数
-          total: 0,
-          // 条数
-          pageSize: 20,
-          // 页数
-          current: 1,
-          pageSizeOpts: [20, 50, 150, 1000],
-        },
-      }, // 下线/过期
+        }
+      },{
+        // 草稿
+        label:vmI18n.t("btn.draft"),
+        total:'0',
+        agTableConfig:{
+          isIndex: true,
+          tableHeight: "450px",
+          columnDefs: baseColumnDefs,
+          rowData: [],
+          renderArr: {
+            ACTION_LOG: (params) => {
+              // console.log("params :>> ", params);
+              if (!params.data.ACTION_LOG) return;
+              const resultElement = document.createElement("div");
+              const iTag = document.createElement("div");
+              iTag.style.color = "#0f8ee9";
+              iTag.style.textDecoration = "underline";
+              iTag.innerText = params.data.ACTION_LOG;
+              iTag.style.cursor = "pointer";
+              iTag.onclick = () => {
+                // console.log(params.data);
+                this.viewLog(params.data);
+              };
+              resultElement.appendChild(iTag);
+              return resultElement;
+            },
+          },
+          pagenation: {
+            // 设置总条数
+            total: 0,
+            // 条数
+            pageSize: 20,
+            // 页数
+            current: 1,
+            pageSizeOpts: [20, 50, 150, 1000],
+          },
+        }
+      },{
+        // 下线/过期
+        label:vmI18n.t("other.offline_expired"),
+        total:'0',
+        agTableConfig:{
+          isIndex: true,
+          tableHeight: "450px",
+          columnDefs: baseColumnDefs,
+          rowData: [],
+          renderArr: {
+            ACTION_LOG: (params) => {
+              // console.log("params :>> ", params);
+              if (!params.data.ACTION_LOG) return;
+  
+              const resultElement = document.createElement("div");
+              const iTag = document.createElement("div");
+              iTag.style.color = "#0f8ee9";
+              iTag.style.textDecoration = "underline";
+              iTag.innerText = params.data.ACTION_LOG;
+              iTag.style.cursor = "pointer";
+              iTag.onclick = () => {
+                // console.log(params.data);
+                this.viewLog(params.data);
+              };
+              resultElement.appendChild(iTag);
+              return resultElement;
+            },
+          },
+          pagenation: {
+            // 设置总条数
+            total: 0,
+            // 条数
+            pageSize: 20,
+            // 页数
+            current: 1,
+            pageSizeOpts: [20, 50, 150, 1000],
+          },
+        }
+      }],
       STATUS: [1, 2], // 状态 1.草稿，2.已发布，3.下线
       diStatusArr: [
         {
@@ -437,16 +450,10 @@ export default {
   },
   components: {
     customTable,
+    businessLabel,
     aTable,
-    // currentUserAccessFirstLevel,
-    // currentUserAccessLastLevel,
-    // currentUserAccessStore,
-    // currentUserAccessDistrib,
-    // matrixInput,
-    // myInput,
     Mydialog,
     errorMessage,
-    // myInputLd,
     dialogVisible,
     Favorite,
     TableInput,
@@ -457,23 +464,7 @@ export default {
   computed: {
     commodity() {
       return this.inputList[0].valuedata;
-    },
-    tabTotal() {
-      return {
-        // 全部
-        one: `${vmI18n.t("common.all")}(${this.agTableConfig1.pagenation.total
-          })`,
-        // 已发布
-        two: `${vmI18n.t("btn.published")}(${this.agTableConfig2.pagenation.total
-          })`,
-        // 草稿
-        three: `${vmI18n.t("btn.draft")}(${this.agTableConfig3.pagenation.total
-          })`,
-        // 下线/过期
-        four: `${vmI18n.t("other.offline_expired")}(${this.agTableConfig4.pagenation.total
-          })`,
-      };
-    },
+    }
   },
   mounted() {
     this.getPermissions();
@@ -481,43 +472,15 @@ export default {
   },
   methods: {
     // 分页change 事件
-    pageChange1(val) {
-      this.agTableConfig1.pagenation.current = val;
+    pageChange(val) {
+      // this.agTableConfig.pagenation.current = val;
+      this.tabConfig[this.activeName].agTableConfig.pagenation.current = val;
       this.getData();
     },
     // 切换分页条数
-    pageSizeChange1(val) {
-      this.agTableConfig1.pagenation.pageSize = val;
-      this.getData();
-    },
-    // 分页change 事件
-    pageChange2(val) {
-      this.agTableConfig2.pagenation.current = val;
-      this.getData();
-    },
-    // 切换分页条数
-    pageSizeChange2(val) {
-      this.agTableConfig2.pagenation.pageSize = val;
-      this.getData();
-    },
-    // 分页change 事件
-    pageChange3(val) {
-      this.agTableConfig3.pagenation.current = val;
-      this.getData();
-    },
-    // 切换分页条数
-    pageSizeChange3(val) {
-      this.agTableConfig3.pagenation.pageSize = val;
-      this.getData();
-    },
-    // 分页change 事件
-    pageChange4(val) {
-      this.agTableConfig4.pagenation.current = val;
-      this.getData();
-    },
-    // 切换分页条数
-    pageSizeChange4(val) {
-      this.agTableConfig4.pagenation.pageSize = val;
+    pageSizeChange(val) {
+      // this.agTableConfig.pagenation.pageSize = val;
+      this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize = val;
       this.getData();
     },
     getExtendObj() {
@@ -540,8 +503,8 @@ export default {
     },
     // 查找
     async getData() {
-      const currentPage = this[`agTableConfig${this.activeName}`].pagenation.current;
-      const pageSize = this[`agTableConfig${this.activeName}`].pagenation.pageSize;
+      const currentPage = this.tabConfig[this.activeName].agTableConfig.pagenation.current;
+      const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
       this.loadings = true;
       const params = {
         ACTISTATUS: this.STATUS.join(",").replace("bSelect-all", 0), // 活动状态
@@ -560,168 +523,70 @@ export default {
       let formData = new FormData();
       formData.append("param", JSON.stringify(params));
       // 促销中心列表
-      const { data: { code, message, data } } = await this.service.promotionCenter.selectPmList(formData)
+      const { data: { code, data } } = await this.service.promotionCenter.selectPmList(formData)
       this.loadings = false;
-      console.log("促销中心列表", 'code:' + code, 'message:' + message, 'data:' + data);
       if (code === 0) {
-        // this.activeName = '1' // 全部
         if (data && data.ACTI_ALL_INFO) {
           data.ACTI_ALL_INFO.forEach((item, index) => {
             item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-            // item.ACTION_LOG = "查看日志";
-            item.ACTION_LOG = vmI18n.t("other.view_log");
+            item.ACTION_LOG = vmI18n.t("other.view_log");//查看日志
           });
-          this.agTableConfig1.rowData = data.ACTI_ALL_INFO || [];
-          this.agTableConfig1.pagenation.total = data.ACTI_ALL_NUM;
-
-          this.$refs.agGridChild1.agGridTable(
-            this.agTableConfig1.columnDefs,
-            this.agTableConfig1.rowData,
+          this.tabConfig[0].agTableConfig.rowData = data.ACTI_ALL_INFO || [];
+          this.tabConfig[0].agTableConfig.pagenation.total = data.ACTI_ALL_NUM;
+          this.$refs.agGridChild1[0].agGridTable(
+            this.tabConfig[0].agTableConfig.columnDefs,
+            this.tabConfig[0].agTableConfig.rowData,
             this.getExtendObj()
           );
         }
-        // this.activeName = '2' // 已发布
+        // 1 已发布
         if (data && data.ACTI_RELEASE_INFO) {
           data.ACTI_RELEASE_INFO.forEach((item, index) => {
             item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-            // item.ACTION_LOG = "查看日志";
-            item.ACTION_LOG = vmI18n.t("other.view_log");
+            item.ACTION_LOG = vmI18n.t("other.view_log");//查看日志
           });
-          this.agTableConfig2.rowData = data.ACTI_RELEASE_INFO || [];
-          this.agTableConfig2.pagenation.total = data.ACTI_RELEASE_NUM;
+          this.tabConfig[1].agTableConfig.rowData = data.ACTI_RELEASE_INFO || [];
+          this.tabConfig[1].agTableConfig.pagenation.total = data.ACTI_RELEASE_NUM;
 
-          this.$refs.agGridChild2.agGridTable(
-            this.agTableConfig2.columnDefs,
-            this.agTableConfig2.rowData,
+          this.$refs.agGridChild2[0].agGridTable(
+            this.tabConfig[1].agTableConfig.columnDefs,
+            this.tabConfig[1].agTableConfig.rowData,
             this.getExtendObj()
           );
         }
-        // this.activeName = '3' // 草稿
+        // 2  草稿
         if (data && data.ACTI_DRAFT_INFO) {
           data.ACTI_DRAFT_INFO.forEach((item, index) => {
             item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
             // item.ACTION_LOG = "查看日志";
             item.ACTION_LOG = vmI18n.t("other.view_log");
           });
-          this.agTableConfig3.rowData = data.ACTI_DRAFT_INFO || [];
-          this.agTableConfig3.pagenation.total = data.ACTI_DRAFT_NUM;
+          this.tabConfig[2].agTableConfig.rowData = data.ACTI_DRAFT_INFO || [];
+          this.tabConfig[2].agTableConfig.pagenation.total = data.ACTI_DRAFT_NUM;
 
-          this.$refs.agGridChild3.agGridTable(
-            this.agTableConfig3.columnDefs,
-            this.agTableConfig3.rowData,
+          this.$refs.agGridChild3[0].agGridTable(
+            this.tabConfig[2].agTableConfig.columnDefs,
+            this.tabConfig[2].agTableConfig.rowData,
             this.getExtendObj()
           );
         }
 
-        // this.activeName = '4' // 下线过期
+        //3 下线过期
         if (data && data.ACTI_OVER_INFO) {
           data.ACTI_OVER_INFO.forEach((item, index) => {
             item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
             // item.ACTION_LOG = "查看日志";
             item.ACTION_LOG = vmI18n.t("other.view_log");
           });
-          this.agTableConfig4.rowData = data.ACTI_OVER_INFO || [];
-          this.agTableConfig4.pagenation.total = data.ACTI_OVER_NUM;
-
-          this.$refs.agGridChild4.agGridTable(
-            this.agTableConfig4.columnDefs,
-            this.agTableConfig4.rowData,
+          this.tabConfig[3].agTableConfig.rowData = data.ACTI_OVER_INFO || [];
+          this.tabConfig[3].agTableConfig.pagenation.total = data.ACTI_OVER_NUM;
+          this.$refs.agGridChild4[0].agGridTable(
+            this.tabConfig[3].agTableConfig.columnDefs,
+            this.tabConfig[3].agTableConfig.rowData,
             this.getExtendObj()
           );
         }
       }
-
-      // this.axios({
-      //   url: "/p/cs/pm/v1/selectPmList",
-      //   method: "POST",
-      //   data: {
-      //     param: JSON.stringify({
-      //       ACTISTATUS: this.STATUS.join(",").replace("bSelect-all", 0), // 活动状态
-      //       SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
-      //       ACTI_PRO: this.product.itemdata_xitong, // 款号0
-      //       ACTI_DATE: this.acti_date ? this.acti_date.join("-") : "", // 活动日期0
-      //       ACTI_NAME: this.acti_name, // 活动名称
-      //       GROUP_NAME: this.acti_group, // 活动分组
-      //       RELEASE_NAME: this.release_name, // 发布人
-      //       ACTI_NO: this.acti_no,
-      //       PAGE: {
-      //         CURRENT_PAGE: currentPage, // 当前页码
-      //         PAGE_SIZE: pageSize, // 分页单位
-      //       },
-      //     }),
-      //   },
-      // }).then((res) => {
-      //   this.loadings = false;
-      //   if (res.data.code === 0) {
-      //     const data = res.data.data;
-      //     // console.log("data :>> ", this.$print(data));
-      //     // this.activeName = '1' // 全部
-      //     if (data && data.ACTI_ALL_INFO) {
-      //       data.ACTI_ALL_INFO.forEach((item, index) => {
-      //         item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-      //         // item.ACTION_LOG = "查看日志";
-      //         item.ACTION_LOG = vmI18n.t("other.view_log");
-      //       });
-      //       this.agTableConfig1.rowData = data.ACTI_ALL_INFO || [];
-      //       this.agTableConfig1.pagenation.total = data.ACTI_ALL_NUM;
-
-      //       this.$refs.agGridChild1.agGridTable(
-      //         this.agTableConfig1.columnDefs,
-      //         this.agTableConfig1.rowData,
-      //         this.getExtendObj()
-      //       );
-      //     }
-      //     // this.activeName = '2' // 已发布
-      //     if (data && data.ACTI_RELEASE_INFO) {
-      //       data.ACTI_RELEASE_INFO.forEach((item, index) => {
-      //         item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-      //         // item.ACTION_LOG = "查看日志";
-      //         item.ACTION_LOG = vmI18n.t("other.view_log");
-      //       });
-      //       this.agTableConfig2.rowData = data.ACTI_RELEASE_INFO || [];
-      //       this.agTableConfig2.pagenation.total = data.ACTI_RELEASE_NUM;
-
-      //       this.$refs.agGridChild2.agGridTable(
-      //         this.agTableConfig2.columnDefs,
-      //         this.agTableConfig2.rowData,
-      //         this.getExtendObj()
-      //       );
-      //     }
-      //     // this.activeName = '3' // 草稿
-      //     if (res.data.data && res.data.data.ACTI_DRAFT_INFO) {
-      //       data.ACTI_DRAFT_INFO.forEach((item, index) => {
-      //         item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-      //         // item.ACTION_LOG = "查看日志";
-      //         item.ACTION_LOG = vmI18n.t("other.view_log");
-      //       });
-      //       this.agTableConfig3.rowData = data.ACTI_DRAFT_INFO || [];
-      //       this.agTableConfig3.pagenation.total = data.ACTI_DRAFT_NUM;
-
-      //       this.$refs.agGridChild3.agGridTable(
-      //         this.agTableConfig3.columnDefs,
-      //         this.agTableConfig3.rowData,
-      //         this.getExtendObj()
-      //       );
-      //     }
-
-      //     // this.activeName = '4' // 下线过期
-      //     if (res.data.data && res.data.data.ACTI_OVER_INFO) {
-      //       data.ACTI_OVER_INFO.forEach((item, index) => {
-      //         item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-      //         // item.ACTION_LOG = "查看日志";
-      //         item.ACTION_LOG = vmI18n.t("other.view_log");
-      //       });
-      //       this.agTableConfig4.rowData = data.ACTI_OVER_INFO || [];
-      //       this.agTableConfig4.pagenation.total = data.ACTI_OVER_NUM;
-
-      //       this.$refs.agGridChild4.agGridTable(
-      //         this.agTableConfig4.columnDefs,
-      //         this.agTableConfig4.rowData,
-      //         this.getExtendObj()
-      //       );
-      //     }
-      //   }
-      // });
     },
     timestampToTime(timestamp) {
       const date = new Date(timestamp); // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
@@ -1065,14 +930,14 @@ export default {
           }
         );
       }
-      // if (newList.length < 1) {
-      //   this.$message({
-      //     // message: "请先勾选需要分组的促销",
-      //     message: vmI18n.t("modalTips.q4"),
-      //     type: "warning",
-      //   });
-      //   return;
-      // }
+      if (newList.length < 1) {
+        this.$message({
+          // message: "请先勾选需要分组的促销",
+          message: vmI18n.t("modalTips.q4"),
+          type: "warning",
+        });
+        return;
+      }
       // STATUS === 1 草稿 ，STATUS === 2 已发布，STATUS === 3 下线过期
       const flag = newList.some((item) => item.STATUS === 3);
       if (flag) {
@@ -1087,8 +952,6 @@ export default {
         const formData = new FormData();
         formData.append("param", JSON.stringify({ objids: newIds }));
         const {data:{code,message,data}} = await this.service.promotionCenter.selectPmGroup(formData)
-        console.clear()
-        console.log(code,message,data);
         if (code === 0) {
           this.setGroupTableData = data;
           this.dialog_visible = true;
@@ -1119,12 +982,10 @@ export default {
         id: -1, // id
         type: "CUSTOMIZED", // 类型action
         name: "SIMULATION", // 文件名
-        // label: "模拟仿真", // tab中文名
-        label: vmI18n.t("btn.simulation"),
+        label: vmI18n.t("btn.simulation"),//模拟仿真
         query: Object.assign({
           id: -1, // id
-          // tabTitle: "模拟仿真", // tab中文名
-          tabTitle: vmI18n.t("btn.simulation"),
+          tabTitle: vmI18n.t("btn.simulation"),//模拟仿真
         }), // 带的参数
       });
     },
@@ -1135,16 +996,10 @@ export default {
       this.acti_date = [start, end];
       const _this = this;
       this.acti_date = [start.split("-").join(""), end.split("-").join("")];
-      const {data:{code,message,data}} = await this.service.promotionCenter.getweekdate()
+      const {data:{code,data}} = await this.service.promotionCenter.getweekdate()
       if (code === 0) {
         _this.acti_date = [data.START_WEEK,data.END_WEEK];
-        console.log("_this.acti_date_this.acti_date",_this.acti_date);
       }
-      // axios.post("/p/cs/getweekdate").then((res) => {
-      //   if (res.data.code === 0) {
-      //     _this.acti_date = [res.data.data.START_WEEK, res.data.data.END_WEEK];
-      //   }
-      // });
     },
     Reset() {
       // this.acti_date = "";
@@ -1185,8 +1040,7 @@ export default {
             id: ACTI_ID, // id
             type: "action", // 类型action
             name: "batchActivity", // 文件名
-            // label: "批量新增促销活动", // tab中文名
-            label: vmI18n.t("panel_label.batchAddPromotion"),
+            label: vmI18n.t("panel_label.batchAddPromotion"),//批量新增促销活动
             query: Object.assign({
               id: ACTI_ID, // id
               // tabTitle: "批量新增促销活动", // tab中文名
@@ -1198,12 +1052,10 @@ export default {
             id: ACTI_ID, // id
             type: "action", // 类型action
             name: "addOrEditActi", // 文件名
-            // label: "编辑促销活动", // tab中文名
-            label: vmI18n.t("panel_label.editPromotion"),
+            label: vmI18n.t("panel_label.editPromotion"),//编辑促销活动
             query: Object.assign({
               id: ACTI_ID, // id
-              // tabTitle: "编辑促销活动", // tab中文名
-              tabTitle: vmI18n.t("panel_label.editPromotion"),
+              tabTitle: vmI18n.t("panel_label.editPromotion"),//编辑促销活动
             }), // 带的参数
           });
         }
@@ -1260,8 +1112,7 @@ export default {
       );
       if (newList.length < 1) {
         this.$message({
-          // message: "请至少选择一个",
-          message: vmI18n.t("modalTips.r9"),
+          message: vmI18n.t("modalTips.r9"),//请至少选择一个
           type: "warning",
         });
         return false;
@@ -1270,8 +1121,7 @@ export default {
       const flag = newList.some((item) => item.STATUS === 3);
       if (flag) {
         this.$message({
-          // message: "选择的促销活动已经下线/过期",
-          message: vmI18n.t("modalTips.q0"),
+          message: vmI18n.t("modalTips.q0"),//选择的促销活动已经下线/过期
           type: "warning",
         });
         return false;
