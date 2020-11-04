@@ -21,12 +21,10 @@ export default {
         {
           text: '返回',
           clickEv: () => {
-            this.$store.commit('customize/TabHref', {
-              id: 24634,
-              type: 'table',
-              name: 'ST_C_AUTOCHECK',
-              label: '订单自动审核',
-              back: true
+            R3.store.commit('global/tabOpen', {
+              type: 'S',
+              tableName: 'ST_C_AUTOCHECK',
+              tableId: 24634
             });
           }
         }
