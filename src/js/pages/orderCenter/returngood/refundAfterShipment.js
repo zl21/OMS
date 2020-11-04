@@ -12,6 +12,7 @@ export default {
   },
   data() {
     return {
+      vmI18n: window.vmI18n,
       IMAGE: '', // 图片
       imgIndex: 0, // 当前操作图片位置
       isModal: false,
@@ -815,9 +816,6 @@ export default {
       },
     };
   },
-  created() {
-    this.vmI18n = vmI18n;
-  },
   mounted() {
     if (this.$route.query.id && !this.$route.query.new) {
       this.reForm.config.splice(14, 0, {
@@ -897,7 +895,7 @@ export default {
         if (item.RETURNABLE_AMOUNT == 0) {
           arr.splice(i, 1);
         }
-        if (item.QTY_IN === undefined || item.QTY_IN === null) { item.QTY_IN = this.BILL_TYPE === '1' ? 0 : Number(item.qty || 1); }
+        if (item.QTY_IN === undefined || item.QTY_IN === null) item.QTY_IN = this.BILL_TYPE === '1' ? 0 : Number(item.qty || 1);
       });
       return arr;
     },
@@ -916,23 +914,23 @@ export default {
       const data = _this.onSelectData;
       _this.reForm.config.forEach((item) => {
         // 原始订单编号
-        if (item.item.label == _this.vmI18n.t('form_label.originalOrderNo')) { item.item.props.value = data.ID; }
+        if (item.item.label == _this.vmI18n.t('form_label.originalOrderNo')) item.item.props.value = data.ID;
         // 店铺名称
-        if (item.item.label == _this.vmI18n.t('table_label.shopName')) { item.item.props.value = data.CP_C_SHOP_TITLE; }
+        if (item.item.label == _this.vmI18n.t('table_label.shopName')) item.item.props.value = data.CP_C_SHOP_TITLE;
         // 原始平台单号
-        if (item.item.label == _this.vmI18n.t('form_label.originalOrderNo')) { item.item.props.value = data.SOURCE_CODE; }
+        if (item.item.label == _this.vmI18n.t('form_label.originalOrderNo')) item.item.props.value = data.SOURCE_CODE;
         // 买家昵称
-        if (item.item.label == _this.vmI18n.t('table_label.buyerNickname')) { item.item.props.value = data.USER_NICK; }
+        if (item.item.label == _this.vmI18n.t('table_label.buyerNickname')) item.item.props.value = data.USER_NICK;
         // 买家手机号;
-        if (item.item.label == _this.vmI18n.t('form_label.BuyerPhoneNumber')) { item.item.props.value = data.VIP_PHONE; }
+        if (item.item.label == _this.vmI18n.t('form_label.BuyerPhoneNumber')) item.item.props.value = data.VIP_PHONE;
         // if (item.item.label == '平台退款单号') item.item.props.value = '5';
         // if (item.item.label == '退款原因') item.item.props.value = '6';
         // 支付方式
-        if (item.item.label == _this.vmI18n.t('form_label.paymentWay')) { item.item.props.value = String(data.PAY_TYPE) || '1'; }
+        if (item.item.label == _this.vmI18n.t('form_label.paymentWay')) item.item.props.value = String(data.PAY_TYPE) || '1';
         // if (item.item.label == '判责方') item.item.props.value = data.RESPONSIBLE_PARTY;
         // if (item.item.label == '支付账号') item.item.props.value = data.BUYER_ALIPAY_NO;
         // 收款人姓名
-        if (item.item.label === _this.vmI18n.t('form_label.namePayee')) { item.item.props.value = data.RESERVE_VARCHAR01; }
+        if (item.item.label === _this.vmI18n.t('form_label.namePayee')) item.item.props.value = data.RESERVE_VARCHAR01;
         // _this.addItem.addList.forEach(item => {
         //   a = a + Number(item.RETURNABLE_AMOUNT);
         // });
@@ -1318,25 +1316,25 @@ export default {
             const configItem = item.item;
             const configItemLabel = configItem.label;
             // 原始订单编号
-            if (configItemLabel === self.vmI18n.t('form_label.originalOrderNo')) { configItem.props.value = data.ID; }
+            if (configItemLabel === self.vmI18n.t('form_label.originalOrderNo')) configItem.props.value = data.ID;
             // 店铺名称
-            if (configItemLabel === self.vmI18n.t('table_label.shopName')) { configItem.props.value = data.CP_C_SHOP_TITLE; }
+            if (configItemLabel === self.vmI18n.t('table_label.shopName')) configItem.props.value = data.CP_C_SHOP_TITLE;
             // 原始平台单号
-            if (configItemLabel === self.vmI18n.t('form_label.originalOrderNo')) { configItem.props.value = data.SOURCE_CODE; }
+            if (configItemLabel === self.vmI18n.t('form_label.originalOrderNo')) configItem.props.value = data.SOURCE_CODE;
             // 买家昵称
-            if (configItemLabel === self.vmI18n.t('table_label.buyerNickname')) { configItem.props.value = data.USER_NICK; }
+            if (configItemLabel === self.vmI18n.t('table_label.buyerNickname')) configItem.props.value = data.USER_NICK;
             // 买家手机号
             if (
               configItemLabel === self.vmI18n.t('form_label.BuyerPhoneNumber')
-            ) { configItem.props.value = data.VIP_PHONE; }
+            ) configItem.props.value = data.VIP_PHONE;
             // if (item.item.label == '平台退款单号') item.item.props.value = '5';
             // if (item.item.label == '退款原因') item.item.props.value = '6';
             // 支付方式
-            if (configItemLabel === self.vmI18n.t('form_label.paymentWay')) { configItem.props.value = String(data.PAY_TYPE) || '1'; }
+            if (configItemLabel === self.vmI18n.t('form_label.paymentWay')) configItem.props.value = String(data.PAY_TYPE) || '1';
             // if (item.item.label === '判责方') item.item.props.value = data.RESPONSIBLE_PARTY;
             // if (configItemLabel === '支付账号') configItem.props.value = data.BUYER_ALIPAY_NO;
             // 收款人姓名;
-            if (configItemLabel === self.vmI18n.t('form_label.namePayee')) { configItem.props.value = data.RESERVE_VARCHAR01; }
+            if (configItemLabel === self.vmI18n.t('form_label.namePayee')) configItem.props.value = data.RESERVE_VARCHAR01;
             // self.addItem.addList.forEach(item => {
             //   a = a + Number(item.RETURNABLE_AMOUNT);
             // });
@@ -1345,7 +1343,7 @@ export default {
               configItem.props.value = self.addItem.addList.reduce(
                 (sum, n) => sum + Number(n.RETURNABLE_AMOUNT || 0),
                 0
-              ); 
+              );
             }
             // if (item.item.label == '判责方备注') item.item.props.value = '10';
           });
@@ -1440,7 +1438,7 @@ export default {
         || self.$route.query.oid
       ) {
         // 新增的请求方式
-        if (self.tableConfig.data.length == self.delTableData.length) { self.tableConfig.data = []; }
+        if (self.tableConfig.data.length == self.delTableData.length) self.tableConfig.data = [];
         // 删除明细
         self.delTableData.forEach((item) => {
           if (self.isIn(item.proId, self.tableConfig.data) >= 0) {
@@ -1714,47 +1712,47 @@ export default {
       formdata.append('table', 'OC_B_RETURN_AF_SEND');
       formdata.append('objid', -1);
       const res = await self.service.common.getObject(formdata);
-      console.log(res);
-      if (res.data.code == 0) {
-        let payType = [];
-        let dutyOfficer = [];
-        const childs = res.data.data.addcolums[res.data.data.addcolums.length - 2]
-          .childs || [];
-        childs.forEach((item) => {
-          if (item.name === '判责方') {
-            dutyOfficer = item.combobox;
-          }
-          if (item.name === '支付方式') {
-            payType = item.combobox;
-          }
-        });
-        payType.forEach((item) => {
-          item.label = item.limitdesc;
-          item.value = item.limitval;
-        });
-        dutyOfficer.forEach((item) => {
-          item.label = item.limitdesc;
-          item.value = item.limitval;
-        });
-        this.selectOptions = {
-          payType,
-          dutyOfficer,
-        };
-        self.reForm.config.forEach((item) => {
-          // 支付方式
-          if (item.item.label == self.vmI18n.t('form_label.paymentWay')) {
-            item.item.props.options = payType;
-          }
-          // 判责方
-          if (
-            item.item.label == self.vmI18n.t('form_label.responsibleParty')
-          ) {
-            item.item.props.options = dutyOfficer;
-          }
-        });
-      } else {
-        self.$Message.error(res.data.message);
-      }
+        console.log(res);
+        if (res.data.code == 0) {
+          let payType = [];
+          let dutyOfficer = [];
+          const childs = res.data.data.addcolums[res.data.data.addcolums.length - 2]
+            .childs || [];
+          childs.forEach((item) => {
+            if (item.name === '判责方') {
+              dutyOfficer = item.combobox;
+            }
+            if (item.name === '支付方式') {
+              payType = item.combobox;
+            }
+          });
+          payType.forEach((item) => {
+            item.label = item.limitdesc;
+            item.value = item.limitval;
+          });
+          dutyOfficer.forEach((item) => {
+            item.label = item.limitdesc;
+            item.value = item.limitval;
+          });
+          this.selectOptions = {
+            payType,
+            dutyOfficer,
+          };
+          self.reForm.config.forEach((item) => {
+            // 支付方式
+            if (item.item.label == self.vmI18n.t('form_label.paymentWay')) {
+              item.item.props.options = payType;
+            }
+            // 判责方
+            if (
+              item.item.label == self.vmI18n.t('form_label.responsibleParty')
+            ) {
+              item.item.props.options = dutyOfficer;
+            }
+          });
+        } else {
+          self.$Message.error(res.data.message);
+        }
     },
     // 退款分类联动查询退描述
     returnTypeChange() {
