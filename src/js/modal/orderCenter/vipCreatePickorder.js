@@ -1,7 +1,6 @@
 import axios from "axios";
 import businessForm from "professionalComponents/businessForm";
 import jordanBtn from "professionalComponents/businessButton";
-
 export default {
   components: {
     businessForm,
@@ -10,13 +9,14 @@ export default {
   props: {},
   data() {
     return {
+      vmI18n: window.vmI18n,
       pickorderBtnConfig: {
         typeAll: "error", //按钮统一风格样式
         btnsite: "right", //按钮位置 (right , center , left)
         buttons: [
           {
             type: "", //按钮类型
-            text: vmI18n.t("common.determine"), //确定 按钮文本
+            text:vmI18n.t("common.determine"), //确定 按钮文本
             icon: "", //按钮图标
             size: "", //按钮大小
             disabled: false, //按钮禁用控制
@@ -86,9 +86,9 @@ export default {
           CP_C_SHOP_ID: "",
         },
         ruleValidate: {
-          TYPE: [{required: true}],
-          PO_NO: [{required: true}],
-          PICK_NO: [{required: true}],
+          TYPE: [{ required: true }],
+          PO_NO: [{ required: true }],
+          PICK_NO: [{ required: true }],
         },
         formData: [
           {
@@ -147,7 +147,7 @@ export default {
               isnotnull: true, //是否必填
               isuppercase: false, //是否转大写
               length: 65535, //最大长度是多少
-              name: vmI18n.t("other.shop"), //店铺input前面显示的lable值
+              name:vmI18n.t("other.shop"), //店铺input前面显示的lable值
               readonly: false, //是否可编辑，对应input   readonly属性
               reftable: "CP_C_SHOP",
               reftableid: 24475,
@@ -168,7 +168,7 @@ export default {
           },
           {
             style: "input",
-            label: form_label.t("other.pickingOrder_no"),//拣货单号
+            label: vmI18n.t("other.pickingOrder_no"),//拣货单号
             value: "PICK_NO",
             width: "24",
           },
