@@ -482,19 +482,6 @@ export default {
       // 促销中心列表
       const { data: { code, data } } = await this.service.promotionCenter.selectPmList(formData)
       this.loadings = false;
-      const dataArr = [{
-        info:'ACTI_ALL_INFO',
-        num:'ACTI_ALL_NUM'
-      },{
-        info:'ACTI_RELEASE_INFO',
-        num:'ACTI_RELEASE_NUM'
-      },{
-        info:'ACTI_DRAFT_INFO',
-        num:'ACTI_DRAFT_NUM'
-      },{
-        info:'ACTI_DRAFT_INFO',
-        num:'ACTI_OVER_NUM'
-      }]
       if (code === 0) {
         if (data && data.ACTI_ALL_INFO) {
           console.log("全部");
@@ -662,67 +649,67 @@ export default {
     actOffline() {
       const newList = [];
       const newIds = [];
-      this.$refs[`agGridChild${this.activeName}`].AGTABLE.getSelect().forEach(
-        (item) => {
-          newList.push(item);
-          newIds.push(item.ACTI_ID);
-        }
-      );
+      const agGridChild = `agGridChild${this.activeName+1}`
+      const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE
+      if(agGridTable.getSelect().length){
+        agGridTable.getSelect().forEach(
+          (item) => {
+            newList.push(item);
+            newIds.push(item.ACTI_ID);
+          }
+        );
+      }
       if (newList.length < 1) {
-        this.$message({
-          message: vmI18n.t("modalTips.r9"),//请至少选择一个
-          type: "warning",
-        });
+        this.$Message.warning(vmI18n.t("modalTips.r9"));
         return;
       }
       // STATUS === 1 草稿 ，STATUS === 2 已发布，STATUS === 3 下线过期
       const flag = newList.some((item) => item.STATUS === 3);
       if (flag) {
-        this.$message({
-          message: vmI18n.t("modalTips.q0"),//选择的促销活动已经下线/过期
-          type: "warning",
-        });
+        this.$Message.warning(vmI18n.t("modalTips.q0"));//选择的促销活动已经下线/过期
         return;
       }
       this.dataError.show = true;
     },
     copy() {
-      const selectedData = this.$refs[
-        `agGridChild${this.activeName}`
-      ].AGTABLE.getSelect();
-      if (selectedData.length === 0) {
-        this.$message.warning(vmI18n.t("modalTips.q1"));//请选择一条数据进行复制操作
-        return;
-      }
-      if (selectedData.length > 1) {
-        this.$message.warning(vmI18n.t("modalTips.q2"));//只能选取一条数据
-      } else {
-        const ACTI_ID = selectedData[0].ACTI_ID;
-        const IS_BATCH = selectedData[0].IS_BATCH;
-        if (IS_BATCH) {
-          this.$store.commit("customize/TabOpen", {
-            id: -1, // id
-            type: "action", // 类型action
-            name: "batchActivity", // 文件名
-            label: vmI18n.t("panel_label.batchAddPromotion"),//批量新增促销活动
-            query: Object.assign({
-              id: -1, // id
-              copy: ACTI_ID,
-              tabTitle: vmI18n.t("panel_label.batchAddPromotion"),//批量新增促销活动
-            }), // 带的参数
-          });
+      const agGridChild = `agGridChild${this.activeName+1}`
+      const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE
+      if(agGridTable.getSelect().length){
+        var selectedData = agGridTable.getSelect();
+        if (selectedData.length === 0) {
+          this.$Message.warning(vmI18n.t("modalTips.q1"));//请选择一条数据进行复制操作
+          return;
+        }
+        if (selectedData.length > 1) {
+          this.$Message.warning(vmI18n.t("modalTips.q2"));//只能选取一条数据
         } else {
-          this.$store.commit("customize/TabOpen", {
-            id: -1, // id
-            type: "action", // 类型action
-            name: "addOrEditActi", // 文件名
-            label: vmI18n.t("panel_label.addPromotion"),//新增促销活动
-            query: Object.assign({
+          const ACTI_ID = selectedData[0].ACTI_ID;
+          const IS_BATCH = selectedData[0].IS_BATCH;
+          if (IS_BATCH) {
+            this.$store.commit("customize/TabOpen", {
               id: -1, // id
-              copy: ACTI_ID,
-              tabTitle: vmI18n.t("panel_label.addPromotion"),//新增促销活动
-            }), // 带的参数
-          });
+              type: "action", // 类型action
+              name: "batchActivity", // 文件名
+              label: vmI18n.t("panel_label.batchAddPromotion"),//批量新增促销活动
+              query: Object.assign({
+                id: -1, // id
+                copy: ACTI_ID,
+                tabTitle: vmI18n.t("panel_label.batchAddPromotion"),//批量新增促销活动
+              }), // 带的参数
+            });
+          } else {
+            this.$store.commit("customize/TabOpen", {
+              id: -1, // id
+              type: "action", // 类型action
+              name: "addOrEditActi", // 文件名
+              label: vmI18n.t("panel_label.addPromotion"),//新增促销活动
+              query: Object.assign({
+                id: -1, // id
+                copy: ACTI_ID,
+                tabTitle: vmI18n.t("panel_label.addPromotion"),//新增促销活动
+              }), // 带的参数
+            });
+          }
         }
       }
     },
@@ -755,8 +742,9 @@ export default {
       const newList = [];
       let flag = false;
       const newIds = [];
-      const agGridTable = this.$refs[`agGridChild${this.activeName}`].AGTABLE
-      if (agGridTable) {
+      const agGridChild = `agGridChild${this.activeName+1}`
+      const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE
+      if (agGridTable.getSelect().length) {
         agGridTable.getSelect().map(
           (item) => {
             newList.push(item);
@@ -764,20 +752,13 @@ export default {
           }
         );
       }
-
       if (newList.length < 1) {
-        this.$message({
-          message: vmI18n.t("modalTips.r9"),//请至少选择一个
-          type: "warning",
-        });
+        this.$Message.warning(vmI18n.t("modalTips.r9"));//请至少选择一个
         return false;
       }
       flag = newList.every((item) => item.STATUS === 1);
       if (!flag) {
-        this.$message({
-          message: vmI18n.t("modalTips.q3"),//选择的促销活动已经发布
-          type: "warning",
-        });
+        this.$Message.warning(vmI18n.t("modalTips.q3"));//选择的促销活动已经发布
         return false;
       }
       this.dataError.show = false; // 关闭弹框
@@ -810,8 +791,9 @@ export default {
     }, // 发布
     async deleteActi() {
       const newIds = [];
-      const agGridTable = this.$refs[`agGridChild${this.activeName}`].AGTABLE
-      if (agGridTable) {
+      const agGridChild = `agGridChild${this.activeName+1}`
+      const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE
+      if (agGridTable.getSelect().length) {
         agGridTable.getSelect().map(
           (item) => {
             newList.push(item);
@@ -820,10 +802,7 @@ export default {
         );
       }
       if (newIds.length < 1) {
-        this.$message({
-          message: vmI18n.t("modalTips.r9"),//请至少选择一个
-          type: "warning",
-        });
+        this.$Message.warning(vmI18n.t("modalTips.r9"));//请至少选择一个
         return;
       }
       // 删除请求接口
@@ -844,8 +823,9 @@ export default {
       // 设置分组
       const newList = [];
       const newIds = [];
-      const agGridTable = this.$refs[`agGridChild${this.activeName}`].AGTABLE
-      if (agGridTable) {
+      const agGridChild = `agGridChild${this.activeName+1}`
+      const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE
+      if (agGridTable.getSelect().length) {
         agGridTable.getSelect().map(
           (item) => {
             newList.push(item);
@@ -854,19 +834,13 @@ export default {
         );
       }
       if (newList.length < 1) {
-        this.$message({
-          message: vmI18n.t("modalTips.q4"),//请先勾选需要分组的促销
-          type: "warning",
-        });
+        this.$Message.warning(vmI18n.t("modalTips.q4"));//请先勾选需要分组的促销
         return;
       }
       // STATUS === 1 草稿 ，STATUS === 2 已发布，STATUS === 3 下线过期
       const flag = newList.some((item) => item.STATUS === 3);
       if (flag) {
-        this.$message({
-          message: vmI18n.t("modalTips.q5"),//存在【下线过期】的促销，请重新选择
-          type: "warning",
-        });
+        this.$Message.warning( vmI18n.t("modalTips.q5"));//存在【下线过期】的促销，请重新选择
       } else {
         this.checkList = newList;
         // 设置分组请求接口
@@ -877,7 +851,7 @@ export default {
           this.setGroupTableData = data;
           this.dialog_visible = true;
         } else {
-          this.$message.error(message);
+          this.$Message.error(message);
         }
       }
     },//设置分组
@@ -971,26 +945,24 @@ export default {
     async downLine() {
       const newList = [];
       const newIds = [];
-      this.$refs[`agGridChild${this.activeName}`].AGTABLE.getSelect().forEach(
-        (item) => {
-          newList.push(item);
-          newIds.push(item.ACTI_ID);
-        }
-      );
+      const agGridChild = `agGridChild${this.activeName+1}`
+      const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE
+      if (agGridTable.getSelect().length) {
+        agGridTable.getSelect().forEach(
+          (item) => {
+            newList.push(item);
+            newIds.push(item.ACTI_ID);
+          }
+        );
+      }
       if (newList.length < 1) {
-        this.$message({
-          message: vmI18n.t("modalTips.r9"),//请至少选择一个
-          type: "warning",
-        });
+        this.$message.warning(vmI18n.t("modalTips.r9"));//请至少选择一个
         return false;
       }
       // STATUS === 1 草稿 ，STATUS === 2 已发布，STATUS === 3 下线过期
       const flag = newList.some((item) => item.STATUS === 3);
       if (flag) {
-        this.$message({
-          message: vmI18n.t("modalTips.q0"),//选择的促销活动已经下线/过期
-          type: "warning",
-        });
+        this.$Message.warning(vmI18n.t("modalTips.q0"));////选择的促销活动已经下线/过期
         return false;
       }
       this.dataError.show = false; // 关闭弹框
@@ -1008,10 +980,7 @@ export default {
       const {data:{code,message}} =  await this.service.promotionCenter.updatePmStatus(formData)
       if (code === 0) {
         this.getData();
-        this.$message({
-          message: message,
-          type: "success",
-        });
+        this.$Message.success(message);
       }
     },
     formUserKeyUp(event) {
