@@ -33,7 +33,7 @@
               >
                 <i style="color: #ff9900; padding: 0 6px">*</i>
                 <!-- 退款类型 -->
-                {{ vmI18n.t("panel_label.refundType") }}
+                {{ vmI18n.t("form_label.refundType") }}
                 :&nbsp;&nbsp;&nbsp;&nbsp;
                 <RadioGroup
                   v-model="BILL_TYPE"
@@ -41,11 +41,11 @@
                 >
                   <!-- 仅退款 -->
                   <Radio label="1">
-                    {{ vmI18n.t("panel_label.refundOnly") }}
+                    {{ vmI18n.t("form_label.refundOnly") }}
                   </Radio>
                   <!-- 退货退款 -->
                   <Radio label="0">
-                    {{ vmI18n.t("panel_label.returnRefund") }}
+                    {{ vmI18n.t("form_label.returnRefund") }}
                   </Radio>
                 </RadioGroup>
               </div>

@@ -338,7 +338,7 @@ export default {
           {
             item: {
               type: 'Select',
-              label: vmI18n.t('form_label.paymentWay'), // 支付方式
+              label: vmI18n.t('table_label.paymentWay'), // 支付方式
               props: {
                 value: '1',
                 options: [],
@@ -616,7 +616,7 @@ export default {
           //   key: 'skuEcode'
           // },
           {
-            title: vmI18n.t('form_label.platformProductsCod'), // 商品编码
+            title: vmI18n.t('form_label.platformProductsCode'), // 商品编码
             key: 'ecode',
           },
           {
@@ -926,7 +926,7 @@ export default {
         // if (item.item.label == '平台退款单号') item.item.props.value = '5';
         // if (item.item.label == '退款原因') item.item.props.value = '6';
         // 支付方式
-        if (item.item.label == _this.vmI18n.t('form_label.paymentWay')) item.item.props.value = String(data.PAY_TYPE) || '1';
+        if (item.item.label == _this.vmI18n.t('table_label.paymentWay')) item.item.props.value = String(data.PAY_TYPE) || '1';
         // if (item.item.label == '判责方') item.item.props.value = data.RESPONSIBLE_PARTY;
         // if (item.item.label == '支付账号') item.item.props.value = data.BUYER_ALIPAY_NO;
         // 收款人姓名
@@ -1330,7 +1330,7 @@ export default {
             // if (item.item.label == '平台退款单号') item.item.props.value = '5';
             // if (item.item.label == '退款原因') item.item.props.value = '6';
             // 支付方式
-            if (configItemLabel === self.vmI18n.t('form_label.paymentWay')) configItem.props.value = String(data.PAY_TYPE) || '1';
+            if (configItemLabel === self.vmI18n.t('table_label.paymentWay')) configItem.props.value = String(data.PAY_TYPE) || '1';
             // if (item.item.label === '判责方') item.item.props.value = data.RESPONSIBLE_PARTY;
             // if (configItemLabel === '支付账号') configItem.props.value = data.BUYER_ALIPAY_NO;
             // 收款人姓名;
@@ -1740,7 +1740,7 @@ export default {
           };
           self.reForm.config.forEach((item) => {
             // 支付方式
-            if (item.item.label == self.vmI18n.t('form_label.paymentWay')) {
+            if (item.item.label == self.vmI18n.t('table_label.paymentWay')) {
               item.item.props.options = payType;
             }
             // 判责方

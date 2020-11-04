@@ -2490,9 +2490,8 @@ export default {
     },
   },
   created() {
-    let mark = [...this.$route.path.split("/")].pop();
-    // this.objid = this.$route.query.id; //根据objid判断页面是新增页面还是编辑页面
-    if (mark === "New") this.objid = '-1';
+    const customizedModuleId = this.$route.params.customizedModuleId;
+    this.objid = customizedModuleId === 'New' ? -1 : customizedModuleId;
     console.log(this.objid);
     this.pageconfigData(this.objid);
     this.IniData(); //初始化数据
