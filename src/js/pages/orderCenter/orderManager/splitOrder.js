@@ -1,9 +1,10 @@
-import axios from 'axios'
+import axios from 'axios';
+
 export default {
   name: 'splitOrder',
   data() {
     return {
-      old_cp_c_phy_warehouse_ename: '',  //保存原仓库
+      old_cp_c_phy_warehouse_ename: '', // 保存原仓库
       columns: [
         {
           type: 'selection'
@@ -37,17 +38,15 @@ export default {
           key: 'advise_phy_warehouse_id',
           render: (h, params) => {
             console.log(params);
-            let options = params.row.sgBPhyInStorageItemExt.map(item => {
-              return h('Option', {
-                style: {
-                  'font-style': item.total_qty_available === 0 ? 'italic' : 'normal'
-                },
-                props: {
-                  value: item.advise_phy_warehouse_id,
-                  label: item.advise_phy_warehouse_ename
-                }
-              })
-            })
+            const options = params.row.sgBPhyInStorageItemExt.map(item => h('Option', {
+              style: {
+                'font-style': item.total_qty_available === 0 ? 'italic' : 'normal'
+              },
+              props: {
+                value: item.advise_phy_warehouse_id,
+                label: item.advise_phy_warehouse_ename
+              }
+            }));
             return h('div', [
               h('Select', {
                 props: {
@@ -56,27 +55,27 @@ export default {
                 },
                 on: {
                   'on-change': (value) => {
-                    let opt = params.row.sgBPhyInStorageItemExt.filter(item => { return item.advise_phy_warehouse_id == value })[0];
+                    const opt = params.row.sgBPhyInStorageItemExt.filter(item => item.advise_phy_warehouse_id == value)[0];
                     params.row.cp_c_phy_warehouse_id = value;
                     params.row.cp_c_phy_warehouse_ecode = opt.advise_phy_warehouse_ecode;
                     params.row.cp_c_phy_warehouse_ename = opt.advise_phy_warehouse_ename;
                     params.row.total_qty_available = opt.total_qty_available;
                     // params.row.total_qty_available = params.row.sgBPhyInStorageItemExt.filter(item => { return item.advise_phy_warehouse_id == value })[0].total_qty_available;
-                    //如果勾选了,同时更新勾选数据
+                    // 如果勾选了,同时更新勾选数据
                     if (this.onSelectData.length !== 0) {
-                      this.onSelectData.map(item => {
+                      this.onSelectData.map((item) => {
                         if (params.row.orig_order_item_id == item.orig_order_item_id) {
                           item.cp_c_phy_warehouse_id = value;
                           item.cp_c_phy_warehouse_ecode = opt.advise_phy_warehouse_ecode;
                           item.cp_c_phy_warehouse_ename = opt.advise_phy_warehouse_ename;
                         }
-                      })
+                      });
                     }
                     this.data[0][params.index] = params.row;
                   }
                 }
               }, options)
-            ])
+            ]);
           }
         },
 
@@ -111,19 +110,19 @@ export default {
                       this.$Message.warning('拆分数量不能大于待拆数量；不进行拆单');
                       this.$nextTick(() => {
                         params.row.split_num = params.row.waiting_split_num;
-                        this.data[0][params.index] = params.row
-                      })
+                        this.data[0][params.index] = params.row;
+                      });
                       return;
-                    };
+                    }
                     // params.row.waiting_split_num = params.row.waiting_split_num - value.target.value;
                     // params.row.qty = params.row.waiting_split_num;
-                    //如果勾选了,同时更新勾选数据
+                    // 如果勾选了,同时更新勾选数据
                     if (this.onSelectData.length !== 0) {
-                      this.onSelectData.map(item => {
+                      this.onSelectData.map((item) => {
                         if (params.row.orig_order_item_id == item.orig_order_item_id) {
                           item.split_num = value.target.value;
                         }
-                      })
+                      });
                     }
                     this.data[0][params.index] = params.row;
                   }
@@ -132,14 +131,14 @@ export default {
                   'text-align': 'center'
                 }
               })
-            ])
+            ]);
           }
         },
       ],
       data: [],
       dataIndex: 0,
       onSelectData: []
-    }
+    };
   },
   watch: {
   },
@@ -149,37 +148,37 @@ export default {
   },
   methods: {
     back() {
-      this.$store.commit("customize/TabHref", {
+      this.$store.commit('customize/TabHref', {
         id: 2627,
-        type: "action",
-        name: "orderManager",
-        label: "零售发货单",
+        type: 'action',
+        name: 'orderManager',
+        label: '零售发货单',
         back: true,
         query: {
-        } //row.id
+        } // row.id
       });
       this.$destroy();
     },
     getData() {
-      let self = this;
+      const self = this;
       axios({
         url: '/api/cs/oc/oms/v1/querySkuListAndStorageInfo',
         method: 'post',
         data: { orderId: self.$route.query.id }
-      }).then(res => {
+      }).then((res) => {
         console.log(res);
         let total = 0;
         if (res.data.code === 0) {
           self.old_cp_c_phy_warehouse_ename = res.data.data[0].cp_c_phy_warehouse_ename;
-          res.data.data.map(item => {
+          res.data.data.map((item) => {
             item.waiting_split_num = Number(item.waiting_split_num || 0);
             item.split_num = item.waiting_split_num;
             total += item.waiting_split_num;
-            item['total_qty_available'] = item.sgBPhyInStorageItemExt[0].total_qty_available; //获取默认仓库可售数量
+            item.total_qty_available = item.sgBPhyInStorageItemExt[0].total_qty_available; // 获取默认仓库可售数量
             if (item.is_gift == 0) {
-              item.is_gift_name = '否'
+              item.is_gift_name = '否';
             } else {
-              item.is_gift_name = '是'
+              item.is_gift_name = '是';
             }
           });
           res.data.data[0].total = total;
@@ -187,7 +186,7 @@ export default {
         } else {
           self.$Message.error('查询失败!');
         }
-      })
+      });
     },
     onSelect(selection) {
       this.onSelectData = selection;
@@ -202,47 +201,48 @@ export default {
       console.log(selection);
       this.onSelectData = selection;
     },
-    //添加到带拆单按钮方法
+    // 添加到带拆单按钮方法
     addPendingOrder() {
-      let self = this;
+      const self = this;
       let flag = true;
       if (self.onSelectData.length === 0) {
         self.$Message.warning('请选择需要拆分的明细!');
         return;
-      };
+      }
       if (self.data[0].length == 0 || self.data[0][0].total <= 1) {
         self.$Message.warning('没有可拆分的订单');
         return;
       }
-      self.onSelectData.map(item => {
+      self.onSelectData.map((item) => {
         if (item.split_num == 0) {
-          flag = false
+          flag = false;
         }
-      })
+      });
       if (!flag) {
         self.$Message.warning('拆分数量不能为0!');
         return;
       }
       console.log(self.onSelectData);
       self.onSelectData[0].total = 0;
-      self.onSelectData.map(item => {
-        item['_index'] = undefined;
-        item['orig_order_id'] = self.$route.query.id
+      self.onSelectData.map((item) => {
+        item._index = undefined;
+        item.orig_order_id = self.$route.query.id;
         self.onSelectData[0].total = Number(item.split_num) + Number(self.onSelectData[0].total);
         // self.data[0][0].total -= item.split_num;
       });
-      //更新原单拆单数量
-      let arr = [];
+      // 更新原单拆单数量
+      const arr = [];
+      self.data[0][0].total = 0; // 重置促使仓库数量,一下重新计算总件数
       self.data[0].map((item, index) => {
         if (self.isNullToArr(item.orig_order_item_id, self.onSelectData)) {
-          item.waiting_split_num = item.waiting_split_num - item.split_num;
+          item.waiting_split_num -= item.split_num;
         }
         item.split_num = item.waiting_split_num;
         if (item.waiting_split_num !== 0) {
-          item['_index'] = undefined;
+          item._index = undefined;
           arr.push(item);
-          if (arr[0].total) arr[0].total += item.waiting_split_num
-          else arr[0].total = item.waiting_split_num
+          if (arr[0].total) arr[0].total += item.waiting_split_num;
+          else arr[0].total = item.waiting_split_num;
         }
       });
       self.data.push(JSON.parse(JSON.stringify(self.onSelectData)));
@@ -250,7 +250,7 @@ export default {
       self.onSelectData = [];
     },
     isNullToArr(code, arr) {
-      let flag = arr.find(item => code == item.orig_order_item_id);
+      const flag = arr.find(item => code == item.orig_order_item_id);
       // arr.map(item => {
       //   if (code == item.orig_order_item_id) {
       //     flag = true;
@@ -258,9 +258,9 @@ export default {
       // })
       return !!flag;
     },
-    //确认拆单
+    // 确认拆单
     confirm() {
-      let self = this;
+      const self = this;
       console.log(self.data);
       if (self.data.length <= 1) {
         self.$Message.warning('请先选择拆单明细添加到待拆单，再进行拆单');
@@ -270,7 +270,7 @@ export default {
         url: '/api/cs/oc/oms/v1/saveSplitOrderInfo',
         method: 'post',
         data: { data: self.data }
-      }).then(res => {
+      }).then((res) => {
         console.log(res);
         if (res.data.code == 0) {
           self.$Message.success(res.data.message);
@@ -278,11 +278,11 @@ export default {
         } else {
           self.$Message.error(res.data.message);
         }
-      })
+      });
     },
-    //切换列表
+    // 切换列表
     switchList(index) {
-      let self = this;
+      const self = this;
       self.dataIndex = index;
     }
   },
@@ -295,11 +295,11 @@ export default {
           buyNum += Number(item.qty);
           canSellNum += Number(item.total_qty_available);
         });
-        return canSellNum >= buyNum ? false : true;
-      } else {
-        return false;
-      }
-      return this.$store.state.sliderbar.isopen
+        return !(canSellNum >= buyNum);
+      } 
+      return false;
+      
+      return this.$store.state.sliderbar.isopen;
     },
   }
-}
+};
