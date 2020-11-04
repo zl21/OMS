@@ -84,11 +84,7 @@
             />
           </div>
         </Col>
-        <!-- 线下门店 -->
-        <!-- <div class="form-item">
-          <myInputLd :isActive="true" :isDisabled="false" :itemdata="my_input_st.itemdata"></myInputLd>
-        </div>-->
-        <!-- 线上门店 -->
+        <!-- 店铺名称 -->
         <Col span="6" class="form-item tableInput">
           <span class="form-label"> 店铺名称: </span>
           <div class="form-input">
@@ -159,9 +155,6 @@
             </div>
           </div>
         </Col>
-        <!-- <div class="formItem" />
-        <div class="formItem" />
-        <div class="formItem" /> -->
         <!-- 搜索按钮 -->
         <div class="formItem button-right" />
       </Row>
@@ -184,33 +177,6 @@
             @on-row-dblclick="handDblClick"
           />
         </TabPane>
-        <!-- <TabPane :label="tabTotal.two" name="2">
-          <aTable
-            ref="agGridChild2"
-            :ag-table-config="agTableConfig2"
-            @on-page-change="pageChange2"
-            @on-page-size-change="pageSizeChange2"
-            @on-row-dblclick="handDblClick"
-          />
-        </TabPane>
-        <TabPane :label="tabTotal.three" name="3">
-          <aTable
-            ref="agGridChild3"
-            :ag-table-config="agTableConfig3"
-            @on-page-change="pageChange3"
-            @on-page-size-change="pageSizeChange3"
-            @on-row-dblclick="handDblClick"
-          />
-        </TabPane>
-        <TabPane :label="tabTotal.four" name="4">
-          <aTable
-            ref="agGridChild4"
-            :ag-table-config="agTableConfig4"
-            @on-page-change="pageChange4"
-            @on-page-size-change="pageSizeChange4"
-            @on-row-dblclick="handDblClick"
-          />
-        </TabPane> -->
       </Tabs>
     </div>
     <div class="promactiIcon">
@@ -287,6 +253,6 @@ import promotionlist from "@/js/pages/promotionCenter/promotionlist";
 export default promotionlist;
 </script>
 <style lang="less">
-// @import "~@/assets/css/css_1_3/datepicker";
 @import "~@/css/pages/promotionCenter/promotionlist.less";
+
 </style>

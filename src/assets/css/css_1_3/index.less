@@ -832,3 +832,64 @@ body {
     }
   }
 }
+// element popover 箭头（很重要 关乎显示位置）
+.fktable{
+  background-color: #fff;
+}
+.input-wrap .el-autocomplete .el-input{
+  position: relative;
+}
+.el-popper .popper__arrow {
+    top: -6px;
+    left: 50%;
+    margin-right: 3px;
+    border-top-width: 0;
+    border-bottom-color: #ebeef5;
+}
+.el-popper .popper__arrow {
+    border-width: 6px;
+    -webkit-filter: drop-shadow(0 2px 12px rgba(0,0,0,.03));
+    filter: drop-shadow(0 2px 12px rgba(0,0,0,.03));
+}
+.el-popper .popper__arrow, .el-popper .popper__arrow:after {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+// element pages
+.fktable .page ul li {
+  height: 14px;
+  padding: 0 4px;
+  line-height: 14px;
+  min-width: auto;
+  width: auto;
+  border: none;
+}
+.el-icon-arrow-left:before {
+  content: "<";
+}
+.el-icon-more:before {
+  content: "...";
+}
+.el-icon-arrow-right:before {
+  content: ">";
+}
+.el-icon-d-arrow-right:before {
+  content: ">>";
+}
+.el-icon-d-arrow-left:before {
+  content: "<<";
+}
+.el-pagination button:disabled {
+  color: #c0c4cc;
+  background-color: #fff;
+  cursor: not-allowed;
+}
+.el-pager, .el-pager li {
+  vertical-align: top;
+  margin: 0;
+  display: inline-block;
+}

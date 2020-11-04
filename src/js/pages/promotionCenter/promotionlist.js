@@ -1,6 +1,5 @@
 import axios from "axios";
 import businessLabel from 'professionalComponents/businessLabel';
-import customTable from "framework/components/table/P_customTable.vue";
 import errorMessage from "framework/components/tablelist/error.vue";
 import Mydialog from "framework/components/dialog/mydialog.vue";
 import TableInput from "framework/components/element/input";
@@ -105,9 +104,18 @@ export default {
     return {
       vmI18n: window.vmI18n,
       modal: false, // 查看日志弹框
-      // tabs
-      // 设置tabs默认值
-      labelDefaultValue: '0',
+      loadings: false, // 下拉框默认loadings值
+      release_name: "", // 操作人
+      acti_no: "", // 促销编号
+      acti_name: "", // 促销名称
+      acti_group: "", // 分组设置
+      activeName: 0, // tabs默认值 根据这个，判断是第几个tab
+      dialog_visible: false,
+      buttons: [], // 按钮权限列表
+      acti_date: [], // 时间
+      checkList: [], // 表格复选框选中的id
+      setGroupTableData: [], // 设置分组列表
+      STATUS: [1, 2], // 状态 1.草稿，2.已发布，3.下线
       logData: {
         columns: [
           {
@@ -135,7 +143,6 @@ export default {
         ],
         data: [],
       },
-      buttons: [], // 按钮权限列表
       my_input_sh: {
         itemdata: {
           col: 1,
@@ -151,8 +158,7 @@ export default {
           isnotnull: false, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          // name: "店铺名称", // input前面显示的lable值
-          name: vmI18n.t("table_label.shopName"),
+          name: vmI18n.t("table_label.shopName"),//店铺名称 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: "CP_C_SHOP", // 对应的表
           // reftableid: 24475, //对应的表ID
@@ -176,8 +182,7 @@ export default {
           isnotnull: false, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          // name: "线下门店", // input前面显示的lable值
-          name: vmI18n.t("form_label.offline_stores"),
+          name: vmI18n.t("form_label.offline_stores"), //线下门店 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: "CP_C_RSTORE", // 对应的表
           // reftableid: 23296, //对应的表ID
@@ -189,8 +194,7 @@ export default {
       },
       dataError: {
         show: false, // 控制警告弹框显示
-        // title: "错误", // 弹框标题
-        title: vmI18n.t("modalTitle.error"), //弹框标题
+        title: vmI18n.t("modalTitle.error"), //错误 弹框标题
         type: "warning", // 类型警告
         backBtn: true, // 是否显示返回按钮
         errorList: [{ message: "确定执行下线操作？" }], // 提示内容
@@ -207,22 +211,6 @@ export default {
         distrib: "", // 配销中心,
         storeType: true,
       },
-      firstLevel: "",
-      lastLevel: "",
-      param: {},
-      loadings: false, // 下拉框默认loadings值
-      acti_date: [], // 时间
-      distrib_id: [], // 配销中心
-      storeId: "", // 门店
-      acti_pro: "", // 商品
-      release_name: "", // 操作人
-      acti_no: "", // 促销编号
-      acti_name: "", // 促销名称
-      acti_group: "", // 分组设置
-      activeName: 0, // 根据这个，判断是第几个tab
-      // Myinput: [],
-      // sheetWidth: 0,
-      tabulation: [], // 列表数据
       inputList: [
         {
           colname: "PS_C_PRO_ECODE",
@@ -237,15 +225,8 @@ export default {
           valuedata: "",
         },
       ],
-      isActive: true, // 表示是否激活状态(false禁用input)
-      isCustom: false,
-      isdisabled: false, // 表示是否可编辑(true禁用input)
-      objid: -1,
-      selectItem: {},
-      tablename: "DL_B_PAND", // 表名
       tabConfig:[{
-        // 全部
-        label:vmI18n.t("common.all"),
+        label:vmI18n.t("common.all"), // 全部
         total:'0',
         agTableConfig:{
           isIndex: true,
@@ -254,7 +235,6 @@ export default {
           rowData: [],
           renderArr: {
             ACTION_LOG: (params) => {
-              // console.log("params :>> ", params);
               if (!params.data.ACTION_LOG) return;
               const resultElement = document.createElement("div");
               const iTag = document.createElement("div");
@@ -263,7 +243,6 @@ export default {
               iTag.innerText = params.data.ACTION_LOG;
               iTag.style.cursor = "pointer";
               iTag.onclick = () => {
-                // console.log(params.data);
                 this.viewLog(params.data);
               };
               resultElement.appendChild(iTag);
@@ -281,8 +260,7 @@ export default {
           },
         }
       },{
-        // 已发布
-        label:vmI18n.t("btn.published"),
+        label:vmI18n.t("btn.published"),// 已发布
         total:'0',
         agTableConfig:{
           isIndex: true,
@@ -291,7 +269,6 @@ export default {
           rowData: [],
           renderArr: {
             ACTION_LOG: (params) => {
-              // console.log("params :>> ", params);
               if (!params.data.ACTION_LOG) return;
               const resultElement = document.createElement("div");
               const iTag = document.createElement("div");
@@ -300,7 +277,6 @@ export default {
               iTag.innerText = params.data.ACTION_LOG;
               iTag.style.cursor = "pointer";
               iTag.onclick = () => {
-                // console.log(params.data);
                 this.viewLog(params.data);
               };
               resultElement.appendChild(iTag);
@@ -318,8 +294,7 @@ export default {
           },
         }
       },{
-        // 草稿
-        label:vmI18n.t("btn.draft"),
+        label:vmI18n.t("btn.draft"), // 草稿
         total:'0',
         agTableConfig:{
           isIndex: true,
@@ -328,7 +303,6 @@ export default {
           rowData: [],
           renderArr: {
             ACTION_LOG: (params) => {
-              // console.log("params :>> ", params);
               if (!params.data.ACTION_LOG) return;
               const resultElement = document.createElement("div");
               const iTag = document.createElement("div");
@@ -337,7 +311,6 @@ export default {
               iTag.innerText = params.data.ACTION_LOG;
               iTag.style.cursor = "pointer";
               iTag.onclick = () => {
-                // console.log(params.data);
                 this.viewLog(params.data);
               };
               resultElement.appendChild(iTag);
@@ -355,8 +328,7 @@ export default {
           },
         }
       },{
-        // 下线/过期
-        label:vmI18n.t("other.offline_expired"),
+        label:vmI18n.t("other.offline_expired"),// 下线/过期
         total:'0',
         agTableConfig:{
           isIndex: true,
@@ -365,9 +337,7 @@ export default {
           rowData: [],
           renderArr: {
             ACTION_LOG: (params) => {
-              // console.log("params :>> ", params);
               if (!params.data.ACTION_LOG) return;
-  
               const resultElement = document.createElement("div");
               const iTag = document.createElement("div");
               iTag.style.color = "#0f8ee9";
@@ -375,7 +345,6 @@ export default {
               iTag.innerText = params.data.ACTION_LOG;
               iTag.style.cursor = "pointer";
               iTag.onclick = () => {
-                // console.log(params.data);
                 this.viewLog(params.data);
               };
               resultElement.appendChild(iTag);
@@ -393,28 +362,20 @@ export default {
           },
         }
       }],
-      STATUS: [1, 2], // 状态 1.草稿，2.已发布，3.下线
       diStatusArr: [
         {
           value: 1,
-          // label: "草稿",
-          label: vmI18n.t("btn.draft"),
+          label: vmI18n.t("btn.draft"),//草稿
         },
         {
           value: 2,
-          // label: "已发布",
-          label: vmI18n.t("btn.published"),
+          label: vmI18n.t("btn.published"),//已发布
         },
         {
           value: 3,
-          // label: "下线",
-          label: vmI18n.t("btn.offline"),
+          label: vmI18n.t("btn.offline"),//下线
         },
       ],
-      fixedHeight: 351, // 固定高度
-      dialog_visible: false,
-      checkList: [], // 表格复选框选中的id
-      setGroupTableData: [], // 设置分组列表
       product: {
         itemdata_xitong: {
           col: 1,
@@ -449,7 +410,6 @@ export default {
     },
   },
   components: {
-    customTable,
     businessLabel,
     aTable,
     Mydialog,
@@ -473,20 +433,17 @@ export default {
   methods: {
     // 分页change 事件
     pageChange(val) {
-      // this.agTableConfig.pagenation.current = val;
       this.tabConfig[this.activeName].agTableConfig.pagenation.current = val;
       this.getData();
     },
     // 切换分页条数
     pageSizeChange(val) {
-      // this.agTableConfig.pagenation.pageSize = val;
       this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize = val;
       this.getData();
     },
     getExtendObj() {
       return {
         getRowStyle(params) {
-          // console.log("params :>> ", params);
           // 设置行样式
           if (params.data.STATUS === 1) {
             // 草稿
@@ -525,68 +482,107 @@ export default {
       // 促销中心列表
       const { data: { code, data } } = await this.service.promotionCenter.selectPmList(formData)
       this.loadings = false;
+      const dataArr = [{
+        info:'ACTI_ALL_INFO',
+        num:'ACTI_ALL_NUM'
+      },{
+        info:'ACTI_RELEASE_INFO',
+        num:'ACTI_RELEASE_NUM'
+      },{
+        info:'ACTI_DRAFT_INFO',
+        num:'ACTI_DRAFT_NUM'
+      },{
+        info:'ACTI_DRAFT_INFO',
+        num:'ACTI_OVER_NUM'
+      }]
       if (code === 0) {
         if (data && data.ACTI_ALL_INFO) {
-          data.ACTI_ALL_INFO.forEach((item, index) => {
-            item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-            item.ACTION_LOG = vmI18n.t("other.view_log");//查看日志
-          });
-          this.tabConfig[0].agTableConfig.rowData = data.ACTI_ALL_INFO || [];
-          this.tabConfig[0].agTableConfig.pagenation.total = data.ACTI_ALL_NUM;
-          this.$refs.agGridChild1[0].agGridTable(
-            this.tabConfig[0].agTableConfig.columnDefs,
-            this.tabConfig[0].agTableConfig.rowData,
-            this.getExtendObj()
-          );
+          console.log("全部");
+          this.setAgTableData(data.ACTI_ALL_INFO,data.ACTI_ALL_NUM,0)
+          // data.ACTI_ALL_INFO.forEach((item, index) => {
+          //   item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
+          //   item.ACTION_LOG = vmI18n.t("other.view_log");//查看日志
+          // });
+          // this.tabConfig[0].agTableConfig.rowData = data.ACTI_ALL_INFO || [];
+          // this.tabConfig[0].agTableConfig.pagenation.total = data.ACTI_ALL_NUM;
+          // this.$refs.agGridChild1[0].agGridTable(
+          //   this.tabConfig[0].agTableConfig.columnDefs,
+          //   this.tabConfig[0].agTableConfig.rowData,
+          //   this.getExtendObj()
+          // );
         }
         // 1 已发布
         if (data && data.ACTI_RELEASE_INFO) {
-          data.ACTI_RELEASE_INFO.forEach((item, index) => {
-            item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-            item.ACTION_LOG = vmI18n.t("other.view_log");//查看日志
-          });
-          this.tabConfig[1].agTableConfig.rowData = data.ACTI_RELEASE_INFO || [];
-          this.tabConfig[1].agTableConfig.pagenation.total = data.ACTI_RELEASE_NUM;
+          console.log("已发布");
+          this.setAgTableData(data.ACTI_RELEASE_INFO,data.ACTI_RELEASE_NUM,1)
+          // data.ACTI_RELEASE_INFO.forEach((item, index) => {
+          //   item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
+          //   item.ACTION_LOG = vmI18n.t("other.view_log");//查看日志
+          // });
+          // this.tabConfig[1].agTableConfig.rowData = data.ACTI_RELEASE_INFO || [];
+          // this.tabConfig[1].agTableConfig.pagenation.total = data.ACTI_RELEASE_NUM;
 
-          this.$refs.agGridChild2[0].agGridTable(
-            this.tabConfig[1].agTableConfig.columnDefs,
-            this.tabConfig[1].agTableConfig.rowData,
-            this.getExtendObj()
-          );
+          // this.$refs.agGridChild2[0].agGridTable(
+          //   this.tabConfig[1].agTableConfig.columnDefs,
+          //   this.tabConfig[1].agTableConfig.rowData,
+          //   this.getExtendObj()
+          // );
         }
         // 2  草稿
         if (data && data.ACTI_DRAFT_INFO) {
-          data.ACTI_DRAFT_INFO.forEach((item, index) => {
-            item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-            // item.ACTION_LOG = "查看日志";
-            item.ACTION_LOG = vmI18n.t("other.view_log");
-          });
-          this.tabConfig[2].agTableConfig.rowData = data.ACTI_DRAFT_INFO || [];
-          this.tabConfig[2].agTableConfig.pagenation.total = data.ACTI_DRAFT_NUM;
+          console.log("草稿");
+          this.setAgTableData(data.ACTI_DRAFT_INFO,data.ACTI_DRAFT_NUM,2)
+          // data.ACTI_DRAFT_INFO.forEach((item, index) => {
+          //   item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
+          //   // item.ACTION_LOG = "查看日志";
+          //   item.ACTION_LOG = vmI18n.t("other.view_log");
+          // });
+          // this.tabConfig[2].agTableConfig.rowData = data.ACTI_DRAFT_INFO || [];
+          // this.tabConfig[2].agTableConfig.pagenation.total = data.ACTI_DRAFT_NUM;
 
-          this.$refs.agGridChild3[0].agGridTable(
-            this.tabConfig[2].agTableConfig.columnDefs,
-            this.tabConfig[2].agTableConfig.rowData,
-            this.getExtendObj()
-          );
+          // this.$refs.agGridChild3[0].agGridTable(
+          //   this.tabConfig[2].agTableConfig.columnDefs,
+          //   this.tabConfig[2].agTableConfig.rowData,
+          //   this.getExtendObj()
+          // );
         }
 
         //3 下线过期
         if (data && data.ACTI_OVER_INFO) {
-          data.ACTI_OVER_INFO.forEach((item, index) => {
-            item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-            // item.ACTION_LOG = "查看日志";
-            item.ACTION_LOG = vmI18n.t("other.view_log");
-          });
-          this.tabConfig[3].agTableConfig.rowData = data.ACTI_OVER_INFO || [];
-          this.tabConfig[3].agTableConfig.pagenation.total = data.ACTI_OVER_NUM;
-          this.$refs.agGridChild4[0].agGridTable(
-            this.tabConfig[3].agTableConfig.columnDefs,
-            this.tabConfig[3].agTableConfig.rowData,
-            this.getExtendObj()
-          );
+          console.log("下线过期");
+          this.setAgTableData(data.ACTI_OVER_INFO,data.ACTI_OVER_NUM,3)
+          // data.ACTI_OVER_INFO.forEach((item, index) => {
+          //   item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
+          //   // item.ACTION_LOG = "查看日志";
+          //   item.ACTION_LOG = vmI18n.t("other.view_log");
+          // });
+          // this.tabConfig[3].agTableConfig.rowData = data.ACTI_OVER_INFO || [];
+          // this.tabConfig[3].agTableConfig.pagenation.total = data.ACTI_OVER_NUM;
+          // this.$refs.agGridChild4[0].agGridTable(
+          //   this.tabConfig[3].agTableConfig.columnDefs,
+          //   this.tabConfig[3].agTableConfig.rowData,
+          //   this.getExtendObj()
+          // );
         }
       }
+    },
+    // agTable
+    setAgTableData(info,num,index){
+      const currentPage = this.tabConfig[this.activeName].agTableConfig.pagenation.current;
+      const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
+      info.forEach((item, index) => {
+        item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
+        item.ACTION_LOG = vmI18n.t("other.view_log");//查看日志
+      });
+      const agGridChild = `agGridChild${index+1}`
+      this.tabConfig[index].agTableConfig.rowData = info || [];
+      this.tabConfig[index].agTableConfig.pagenation.total = num;
+      
+      this.$refs[`${agGridChild}`][0].agGridTable(
+        this.tabConfig[index].agTableConfig.columnDefs,
+        this.tabConfig[index].agTableConfig.rowData,
+        this.getExtendObj()
+      );
     },
     timestampToTime(timestamp) {
       const date = new Date(timestamp); // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
@@ -626,8 +622,7 @@ export default {
       console.log("查看日志", 'code:' + code, 'message:' + message, 'data:' + data);
       if (code === 0) {
         if (data.length === 0) {
-          // self.$message.warning("查询数据为空");
-          self.$message.warning(vmI18n.t("modalTips.r8"));
+          self.$message.warning(vmI18n.t("modalTips.r8"));//查询数据为空
         } else {
           self.logData.data = data;
           self.$message.success(message);
@@ -636,35 +631,16 @@ export default {
       } else {
         self.$message.error(message);
       }
-      // axios({
-      //   method: "post",
-      //   url: "/p/cs/cpromLogQuery",
-      //   data: formData,
-      // }).then((res) => {
-      //   console.log(res);
-      //   if (res.data.code === 0) {
-      //     if (res.data.data.length === 0) {
-      //       // self.$message.warning("查询数据为空");
-      //       self.$message.warning(vmI18n.t("modalTips.r8"));
-      //     } else {
-      //       self.logData.data = res.data.data;
-      //       self.$message.success(res.data.message);
-      //       self.modal = true;
-      //     }
-      //   } else {
-      //     self.$message.error(res.data.message);
-      //   }
-      // });
     },
     // 获取button数组
     async getPermissions() {
       const independent = [];
       const buttons = [];
       const params = {
-                        param:{
-                          AD_ACTION_NAME: "promactiquerylist",
-                        }
-                     }
+              param:{
+                AD_ACTION_NAME: "promactiquerylist",
+              }
+            }
       // 获取button数组
       const { data: { code, message, data } } = await this.service.promotionCenter.fetchActionsInCustomizePage(params)
       console.log("获取button数组", 'code:' + code, 'message:' + message, 'data:' + data);
@@ -673,22 +649,6 @@ export default {
           buttons.push(item.webid);
         });
       }
-      // axios({
-      //   method: "get",
-      //   url: "/p/cs/fetchActionsInCustomizePage",
-      //   params: {
-      //     param: {
-      //       AD_ACTION_NAME: "promactiquerylist",
-      //     }
-      //   }
-      // }).then((res) => {
-      //   console.log("paramsparams", res);
-      //   if (res.data.code === 0) {
-      //     res.data.data.map((item) => {
-      //       buttons.push(item.webid);
-      //     });
-      //   }
-      // });
       this.buttons = buttons;
       console.log('获取but', this.buttons);
     },
@@ -710,8 +670,7 @@ export default {
       );
       if (newList.length < 1) {
         this.$message({
-          // message: "请至少选择一个",
-          message: vmI18n.t("modalTips.r9"),
+          message: vmI18n.t("modalTips.r9"),//请至少选择一个
           type: "warning",
         });
         return;
@@ -720,8 +679,7 @@ export default {
       const flag = newList.some((item) => item.STATUS === 3);
       if (flag) {
         this.$message({
-          // message: "选择的促销活动已经下线/过期",
-          message: vmI18n.t("modalTips.q0"),
+          message: vmI18n.t("modalTips.q0"),//选择的促销活动已经下线/过期
           type: "warning",
         });
         return;
@@ -733,13 +691,11 @@ export default {
         `agGridChild${this.activeName}`
       ].AGTABLE.getSelect();
       if (selectedData.length === 0) {
-        // this.$message.warning("请选择一条数据进行复制操作");
-        this.$message.warning(vmI18n.t("modalTips.q1"));
+        this.$message.warning(vmI18n.t("modalTips.q1"));//请选择一条数据进行复制操作
         return;
       }
       if (selectedData.length > 1) {
-        // this.$message.warning("只能选取一条数据");
-        this.$message.warning(vmI18n.t("modalTips.q2"));
+        this.$message.warning(vmI18n.t("modalTips.q2"));//只能选取一条数据
       } else {
         const ACTI_ID = selectedData[0].ACTI_ID;
         const IS_BATCH = selectedData[0].IS_BATCH;
@@ -748,13 +704,11 @@ export default {
             id: -1, // id
             type: "action", // 类型action
             name: "batchActivity", // 文件名
-            // label: "批量新增促销活动", // tab中文名batchAddPromotion
-            label: vmI18n.t("panel_label.batchAddPromotion"),
+            label: vmI18n.t("panel_label.batchAddPromotion"),//批量新增促销活动
             query: Object.assign({
               id: -1, // id
               copy: ACTI_ID,
-              // tabTitle: "批量新增促销活动", // tab中文名
-              tabTitle: vmI18n.t("panel_label.batchAddPromotion"),
+              tabTitle: vmI18n.t("panel_label.batchAddPromotion"),//批量新增促销活动
             }), // 带的参数
           });
         } else {
@@ -762,13 +716,11 @@ export default {
             id: -1, // id
             type: "action", // 类型action
             name: "addOrEditActi", // 文件名
-            // label: "新增促销活动", // tab中文名
-            label: vmI18n.t("panel_label.addPromotion"),
+            label: vmI18n.t("panel_label.addPromotion"),//新增促销活动
             query: Object.assign({
               id: -1, // id
               copy: ACTI_ID,
-              // tabTitle: "新增促销活动", // tab中文名
-              tabTitle: vmI18n.t("panel_label.addPromotion"),
+              tabTitle: vmI18n.t("panel_label.addPromotion"),//新增促销活动
             }), // 带的参数
           });
         }
@@ -779,12 +731,10 @@ export default {
         id: -1, // id
         type: "action", // 类型action
         name: "addOrEditActi", // 文件名
-        // label: "新增促销活动", // tab中文名
-        label: vmI18n.t("panel_label.addPromotion"),
+        label: vmI18n.t("panel_label.addPromotion"),//新增促销活动
         query: Object.assign({
           id: -1, // id
-          // tabTitle: "新增促销活动", // tab中文名
-          tabTitle: vmI18n.t("panel_label.addPromotion"),
+          tabTitle: vmI18n.t("panel_label.addPromotion"),//新增促销活动
         }), // 带的参数
       });
     },
@@ -794,12 +744,10 @@ export default {
         id: -1, // id
         type: "action", // 类型action
         name: "batchActivity", // 文件名
-        // label: "批量新增促销活动", // tab中文名
-        label: vmI18n.t("panel_label.batchAddPromotion"),
+        label: vmI18n.t("panel_label.batchAddPromotion"),//批量新增促销活动
         query: Object.assign({
           id: -1, // id
-          // tabTitle: "批量新增促销活动", // tab中文名
-          tabTitle: vmI18n.t("panel_label.batchAddPromotion"),
+          tabTitle: vmI18n.t("panel_label.batchAddPromotion"),//批量新增促销活动
         }), // 带的参数
       });
     },
@@ -819,8 +767,7 @@ export default {
 
       if (newList.length < 1) {
         this.$message({
-          // message: "请至少选择一个",
-          message: vmI18n.t("modalTips.r9"),
+          message: vmI18n.t("modalTips.r9"),//请至少选择一个
           type: "warning",
         });
         return false;
@@ -828,8 +775,7 @@ export default {
       flag = newList.every((item) => item.STATUS === 1);
       if (!flag) {
         this.$message({
-          // message: "选择的促销活动已经发布",
-          message: vmI18n.t("modalTips.q3"),
+          message: vmI18n.t("modalTips.q3"),//选择的促销活动已经发布
           type: "warning",
         });
         return false;
@@ -875,8 +821,7 @@ export default {
       }
       if (newIds.length < 1) {
         this.$message({
-          // message: "请至少选择一个",
-          message: vmI18n.t("modalTips.r9"),
+          message: vmI18n.t("modalTips.r9"),//请至少选择一个
           type: "warning",
         });
         return;
@@ -894,28 +839,6 @@ export default {
           type: "success",
         });
       }
-      // this.axios({
-      //   url: "/p/cs/pm/v1/deletePm",
-      //   method: "POST",
-      //   data: {
-      //     param: JSON.stringify({
-      //       objid: newIds, // 默认参数 保持格式统一 传死-1
-      //     }),
-      //   },
-      // }).then((res) => {
-      //   if (res.data.code === 0) {
-      //     this.getData();
-      //     this.$message({
-      //       message: res.data.message,
-      //       type: "success",
-      //     });
-      //   } else {
-      //     // this.$message({
-      //     //   message: res.data.message,
-      //     //   type: "success"
-      //     // });
-      //   }
-      // });
     },// 删除
     async setGroup() {
       // 设置分组
@@ -932,8 +855,7 @@ export default {
       }
       if (newList.length < 1) {
         this.$message({
-          // message: "请先勾选需要分组的促销",
-          message: vmI18n.t("modalTips.q4"),
+          message: vmI18n.t("modalTips.q4"),//请先勾选需要分组的促销
           type: "warning",
         });
         return;
@@ -942,8 +864,7 @@ export default {
       const flag = newList.some((item) => item.STATUS === 3);
       if (flag) {
         this.$message({
-          // message: "存在【下线过期】的促销，请重新选择",
-          message: vmI18n.t("modalTips.q5"),
+          message: vmI18n.t("modalTips.q5"),//存在【下线过期】的促销，请重新选择
           type: "warning",
         });
       } else {
@@ -958,19 +879,6 @@ export default {
         } else {
           this.$message.error(message);
         }
-        // axios({
-        //   method: "post",
-        //   url: "/p/cs/pm/v1/selectPmGroup",
-        //   data: formData,
-        // }).then((res) => {
-        //   // console.log(res);
-        //   if (res.data.code === 0) {
-        //     this.setGroupTableData = res.data.data;
-        //     this.dialog_visible = true;
-        //   } else {
-        //     this.$message.error(res.data.message);
-        //   }
-        // });
       }
     },//设置分组
     closeDialog() {
@@ -1043,8 +951,7 @@ export default {
             label: vmI18n.t("panel_label.batchAddPromotion"),//批量新增促销活动
             query: Object.assign({
               id: ACTI_ID, // id
-              // tabTitle: "批量新增促销活动", // tab中文名
-              tabTitle: vmI18n.t("panel_label.batchAddPromotion"),
+              tabTitle: vmI18n.t("panel_label.batchAddPromotion"),//批量新增促销活动
             }), // 带的参数
           });
         } else {
@@ -1060,46 +967,6 @@ export default {
           });
         }
       }
-      // this.axios({
-      //   method: "post",
-      //   url: "/p/cs/pm/v1/selectPm",
-      //   data: {
-      //     param: JSON.stringify(),
-      //   },
-      // }).then((res) => {
-      //   if (res.data.code === 0) {
-      //     // sq存储一套作为清空操作的初始数据
-      //     // let scheme_dataInit = JSON.stringify(res.data.data.scheme_arr);
-      //     // 存储种类id保存草稿时需要
-      //     if (IS_BATCH) {
-      //       this.$store.commit("customize/TabOpen", {
-      //         id: ACTI_ID, // id
-      //         type: "action", // 类型action
-      //         name: "batchActivity", // 文件名
-      //         // label: "批量新增促销活动", // tab中文名
-      //         label: vmI18n.t("panel_label.batchAddPromotion"),
-      //         query: Object.assign({
-      //           id: ACTI_ID, // id
-      //           // tabTitle: "批量新增促销活动", // tab中文名
-      //           tabTitle: vmI18n.t("panel_label.batchAddPromotion"),
-      //         }), // 带的参数
-      //       });
-      //     } else {
-      //       this.$store.commit("customize/TabOpen", {
-      //         id: ACTI_ID, // id
-      //         type: "action", // 类型action
-      //         name: "addOrEditActi", // 文件名
-      //         // label: "编辑促销活动", // tab中文名
-      //         label: vmI18n.t("panel_label.editPromotion"),
-      //         query: Object.assign({
-      //           id: ACTI_ID, // id
-      //           // tabTitle: "编辑促销活动", // tab中文名
-      //           tabTitle: vmI18n.t("panel_label.editPromotion"),
-      //         }), // 带的参数
-      //       });
-      //     }
-      //   }
-      // });
     },
     async downLine() {
       const newList = [];
@@ -1146,29 +1013,6 @@ export default {
           type: "success",
         });
       }
-      // this.axios({
-      //   url: "/p/cs/pm/v1/updatePmStatus",
-      //   method: "POST",
-      //   data: {
-      //     param: JSON.stringify({
-      //       objid: -1, // 默认参数 保持格式统一 传死-1
-      //       isBatch: true, // 是否批量 传true
-      //       fixcolumn: {
-      //         ids: newIds, // 促销活动ID
-      //         status: 3, // 3表示下线
-      //       },
-      //     }),
-      //   },
-      // }).then((res) => {
-      //   if (res.data.code === 0) {
-      //     // console.log("0", res.data.code);
-      //     this.getData();
-      //     this.$message({
-      //       message: res.data.message,
-      //       type: "success",
-      //     });
-      //   }
-      // });
     },
     formUserKeyUp(event) {
       if (event.keyCode === 13) {
