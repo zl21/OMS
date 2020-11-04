@@ -13,27 +13,35 @@
           {{ vmI18n.t("btn.reset") }}
         </button>
         <button class="white" @click="promotionClick">
+          <!-- 新增 -->
           {{ vmI18n.t("btn.add") }}
         </button>
         <button class="white" @click="promotionBlukClick">
+          <!-- 批量新增 -->
           {{ vmI18n.t("btn.batch_add") }}
         </button>
         <button class="white" @click="publish">
+          <!-- 发布 -->
           {{ vmI18n.t("btn.publish") }}
         </button>
         <button class="white" @click="actOffline">
+          <!-- 下线 -->
           {{ vmI18n.t("btn.offline") }}
         </button>
         <button class="white" @click="copy">
+          <!-- 复制 -->
           {{ vmI18n.t("common.copy") }}
         </button>
         <button class="white" @click="deleteActi">
+          <!-- 删除 -->
           {{ vmI18n.t("btn.delete") }}
         </button>
         <button class="white" @click="setGroup">
+          <!-- 设置分组 -->
           {{ vmI18n.t("btn.set_groups") }}
         </button>
         <button class="white" @click="simulation">
+          <!-- 模拟仿真 -->
           {{ vmI18n.t("btn.simulation") }}
         </button>
         <Favorite />
