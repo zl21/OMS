@@ -50,7 +50,7 @@ export default {
         style: "date",
         type: "datetimerange", //日期组件类型,默认为data  (daterange)为双日期区间选择
         value: "query_date",
-        label: vmI18n.form_label.PlatformModifyTime,//平台修改时间
+        label: vmI18n.t('form_label.PlatformModifyTime'),//平台修改时间
         width: "24",
         format: "yyyy-MM-dd HH:mm:ss", //格式参照burgeonui
         placeholder: ""
@@ -64,8 +64,8 @@ export default {
   },
   // 确定按钮
   determine: (self) => {
-    let formValue = self.downLoadFormConfig.formValue;
-    let shopId = self.downLoadFormConfig.formData[0].itemdata.pid;
+    let formValue = self.formConfig.formValue;
+    let shopId = self.formConfig.formData[0].itemdata.pid;
     if (!shopId || !formValue.query_date[0]) {
       self.$message.error(self.vmI18n.t("modalTips.bt"));//店铺和平台时间不能为空
       return;
