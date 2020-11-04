@@ -106,8 +106,8 @@ export default {
       this.pulicUrl = "/p/cs/refundDownload";
       this.downLoadPublicFormConfig.formData.forEach((item) => {
         if (item.label === this.vmI18n.t("other.orderState"))
-          //订单状态
-          // 全部
+        //订单状态
+        // 全部
           item.options = [
             { label: this.vmI18n.t("panel_label.all"), value: "" },
           ];
@@ -229,8 +229,8 @@ export default {
             icon: "", //输入框后带的图标,暂只有输入框支持
             placeholder: "", //占位文本，默认为请输入
             ghost: false, //是否关闭幽灵按钮，默认开启
-            inputenter: () => { }, //表单回车事件
-            iconclick: () => { }, //点击icon图标事件
+            inputenter: () => {}, //表单回车事件
+            iconclick: () => {}, //点击icon图标事件
             // setRequired: "required" //必选标识,值不为required时无标识
           },
         ],
@@ -257,7 +257,7 @@ export default {
               datelimit: "all",
               display: "OBJ_FK", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: "drp", //外键关联类型
-              fkdesc:vmI18n.t("other.shop"), //店铺
+              fkdesc: vmI18n.t("other.shop"), //店铺
               inputname: "CP_C_SHOP_ID:CP_C_SHOP_TITLE", //这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, //是否有fk键
               isnotnull: true, //是否必填
@@ -290,8 +290,8 @@ export default {
             icon: "", //输入框后带的图标,暂只有输入框支持
             placeholder: "", //占位文本，默认为请输入
             ghost: false, //是否关闭幽灵按钮，默认开启
-            inputenter: () => { }, //表单回车事件
-            iconclick: () => { }, //点击icon图标事件
+            inputenter: () => {}, //表单回车事件
+            iconclick: () => {}, //点击icon图标事件
             // setRequired: "required" //必选标识,值不为required时无标识
           },
           {
@@ -494,9 +494,9 @@ export default {
       if (code === 0) {
         _this.$Message.success(message);
         _this.$emit("closeActionDialog",true);
-      } else {
+        } else {
         _this.$Message.error(message);
-      }
+        }
       // axios({
       //   url: url,
       //   method: "post",
@@ -544,9 +544,9 @@ export default {
       if (code === 0) {
         _this.$Message.success(message);
         _this.$emit("closeActionDialog",true);
-      } else {
+        } else {
         _this.$Message.error(message);
-      }
+        }
       // axios({
       //   url: url,
       //   method: "post",
@@ -594,9 +594,9 @@ export default {
       if (code === 0) {
         _this.$Message.success(message);
         _this.$emit("closeActionDialog",true);
-      } else {
+        } else {
         _this.$Message.error(message);
-      }
+        }
       // axios({
       //   url: url,
       //   method: "post",
