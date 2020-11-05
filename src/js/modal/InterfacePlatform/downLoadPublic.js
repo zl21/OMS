@@ -270,6 +270,7 @@ export default {
               row: 1,
               statsize: -1,
               type: "STRING",
+              pid: "",
               valuedata: "", //这个是选择的值
             },
           },
@@ -393,13 +394,13 @@ export default {
     // 下载
     downloadPublicAll() {
       // 经销订单下载  通用订单下载  分销订单下载  分销退单下载
-      if (
-        this.$parent.title ===
-        (this.vmI18n.t("btn.dealInOrder_download") ||
-          this.vmI18n.t("btn.generalOrder_download") ||
-          this.vmI18n.t("btn.distributionOrder_download") ||
-          this.vmI18n.t("btn.distributionChargeback_download"))
-      ) {
+      const arr = [
+        this.vmI18n.t("btn.dealInOrder_download"),
+        this.vmI18n.t("btn.generalOrder_download"),
+        this.vmI18n.t("btn.distributionOrder_download"),
+        this.vmI18n.t("btn.distributionChargeback_download"),
+      ];
+      if (arr.includes(this.$parent.title)) {
         this.downloadPublic(this.pulicUrl);
       }
       // 通用商品下载
