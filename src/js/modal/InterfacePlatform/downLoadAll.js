@@ -53,7 +53,7 @@ export default {
             disabled: false, //按钮禁用控制
             btnclick: () => {
               formConfig(this.$route.params.tableName).determine(this)
-              // formConfig('IP_B_CANCEL_TIME_ORDER_VIP').determine(this)
+              // formConfig('IP_B_TAOBAO_ORDER').determine(this)
             } //按钮点击事件
           },
           {
@@ -75,7 +75,7 @@ export default {
     let self = this;
     this.downLoadFormConfig = formConfig(this.$route.params.tableName).formConfig
     // self.downLoadFormConfig = formConfig('IP_B_CANCEL_TIME_ORDER_VIP').formConfig
-    
+
     if (this.$route.params.tableName == 'IP_B_JITX_DELIVERY') {
       console.log("self.downLoadFormConfig.formValue",self.downLoadFormConfig);
       self.downLoadFormConfig.formValue.order_status = "NEW";
@@ -84,40 +84,44 @@ export default {
   methods: {
     standardTimeConversiondateToStr(val) {
       let dateTime = new Date(val);
-      let year = dateTime.getFullYear();
-      let month = dateTime.getMonth() + 1; //js从0开始取
-      let date = dateTime.getDate();
-      let hour = dateTime.getHours();
-      let minutes = dateTime.getMinutes();
-      let second = dateTime.getSeconds();
-      if (month < 10) {
-        month = "0" + month;
+      if(!(dateTime instanceof Date)) {
+        return "";
+      }else {
+        let year = dateTime.getFullYear();
+        let month = dateTime.getMonth() + 1; //js从0开始取
+        let date = dateTime.getDate();
+        let hour = dateTime.getHours();
+        let minutes = dateTime.getMinutes();
+        let second = dateTime.getSeconds();
+        if (month < 10) {
+          month = "0" + month;
+        }
+        if (date < 10) {
+          date = "0" + date;
+        }
+        if (hour < 10) {
+          hour = "0" + hour;
+        }
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+        if (second < 10) {
+          second = "0" + second;
+        }
+        return (
+          year +
+          "-" +
+          month +
+          "-" +
+          date +
+          " " +
+          hour +
+          ":" +
+          minutes +
+          ":" +
+          second
+        );
       }
-      if (date < 10) {
-        date = "0" + date;
-      }
-      if (hour < 10) {
-        hour = "0" + hour;
-      }
-      if (minutes < 10) {
-        minutes = "0" + minutes;
-      }
-      if (second < 10) {
-        second = "0" + second;
-      }
-      return (
-        year +
-        "-" +
-        month +
-        "-" +
-        date +
-        " " +
-        hour +
-        ":" +
-        minutes +
-        ":" +
-        second
-      );
     },
     downLoadOk() {
       const self = this;
