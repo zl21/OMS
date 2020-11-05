@@ -170,7 +170,7 @@ export default {
             btnclick: () => {
               const self = this;
               const ids = [];
-              ids[0] = this.$route.query.id;
+              ids[0] = this.$route.params.customizedModuleId;
               this.$Modal.info({
                 title: self.vmI18n.t('modalTitle.tips'), // 提示
                 content: vmI18n.t('modalTips.g7'), // 是否确定反审核订单？
@@ -217,7 +217,7 @@ export default {
             btnclick: () => {
               const self = this;
               const ids = [];
-              ids[0] = this.$route.query.id;
+              ids[0] = this.$route.params.customizedModuleId;
               this.$Modal.info({
                 title: self.vmI18n.t('modalTitle.tips'), // 提示
                 content: self.vmI18n.t('modalTips.e0'), // 是否确定取消订单？
@@ -259,7 +259,7 @@ export default {
             text: vmI18n.t('btn.holdOrder'), // Hold单
             btnclick: () => {
               const self = this;
-              const ids = self.$route.query.id;
+              const ids = self.$route.params.customizedModuleId;
               const publicBouncedConfig = JSON.parse(
                 JSON.stringify(publicDialogConfig.holdOrderConfig)
               );
@@ -301,12 +301,12 @@ export default {
               }
               if (data.ORDER_STATUS === 1 || data.ORDER_STATUS === 2) {
                 self.$store.commit('customize/TabHref', {
-                  id: self.$route.query.id,
+                  id: self.$route.params.customizedModuleId,
                   type: 'action',
                   name: 'splitOrder',
                   label: self.vmI18n.t('panel_label.orderSplit'), // 订单拆分
                   query: {
-                    id: self.$route.query.id,
+                    id: self.$route.params.customizedModuleId,
                     tabTitle: self.vmI18n.t('panel_label.orderSplit'), // 订单拆分
                   },
                 });
@@ -324,7 +324,7 @@ export default {
             btnclick: () => {
               const self = this;
               const ids = [];
-              ids[0] = self.$route.query.id;
+              ids[0] = self.$route.params.customizedModuleId;
               const CP_C_PHY_WAREHOUSE_ID = [];
               CP_C_PHY_WAREHOUSE_ID[0] = self.tab1.order.CP_C_PHY_WAREHOUSE_ID;
               const fromdata = new FormData();
@@ -370,7 +370,7 @@ export default {
             btnclick: () => {
               const self = this;
               const ids = [];
-              ids[0] = self.$route.query.id;
+              ids[0] = self.$route.params.customizedModuleId;
               const CP_C_SHOP_ID = [];
               CP_C_SHOP_ID[0] = self.tab1.order.CP_C_SHOP_ID;
               const fromdata = new FormData();
@@ -414,7 +414,7 @@ export default {
             btnclick: () => {
               const self = this;
               const ids = [];
-              ids[0] = self.$route.query.id;
+              ids[0] = self.$route.params.customizedModuleId;
               const ORDER_STATUS = [];
               ORDER_STATUS[0] = self.tab1.order.ORDER_STATUS;
               self.publicBouncedConfig = publicDialogConfig.changeRemarkConfig;
@@ -576,7 +576,7 @@ export default {
                   name: 'refundAfterShipment',
                   label: vmI18n.t('panel_label.extraRefundEdit'), // 额外退款编辑
                   query: Object.assign({
-                    oid: this.$route.query.id,
+                    oid: this.$route.params.customizedModuleId,
                     tabTitle: vmI18n.t('panel_label.extraRefundEdit'), // 额外退款编辑
                     fromOrder: true,
                     new: true,
@@ -654,10 +654,10 @@ export default {
   },
   watch: {
     $route(to) {
-      if (to.path !== '/m/action/orderManageDetail') {
+      if (to.path !== '/CUSTOMIZED/ORDERMANAGEDETAIL') {
         return;
       }
-      const id = this.$route.query ? this.$route.query.id : -1;
+      const id = this.$route.params ? this.$route.params.customizedModuleId : -1;
       this.objId = id;
       this.load();
     },
@@ -721,7 +721,7 @@ export default {
       }
       // 默认是丢单复制的query
       const query = {
-        id: self.$route.query.id,
+        id: self.$route.params.customizedModuleId,
         pageTitle: type,
       };
       // 丢单复制
@@ -775,7 +775,7 @@ export default {
               : this.vmI18n.t('common.yes');
             const TO_SETTLE_STATUS_NAME = (
               this.enumerationList.UPLOAD_SAP_STATUS.find(
-                val => val.value === resData.TO_SETTLE_STATUS
+                val => val.value === resData.TO_SAP_STATUS
               ) || {}
             ).label;
             resData.TO_SETTLE_STATUS_NAME = TO_SETTLE_STATUS_NAME || '';
@@ -830,7 +830,7 @@ export default {
     },
   },
   async created() {
-    const id = this.$route.query ? this.$route.query.id : -1;
+    const id = this.$route.params.customizedModuleId ? this.$route.params.customizedModuleId : -1;
     this.objId = id;
     this.tab1 = {
       order: {
@@ -873,7 +873,7 @@ export default {
     };
     this.pageLoad = true;
     try {
-      const res = await service.common.selectLimitGroups(['UPLOAD_SAP_STATUS']);
+      const res = await this.service.common.selectLimitGroups(['UPLOAD_SAP_STATUS']);
       if (Array.isArray(res.data)) {
         res.data.forEach((item) => {
           this.enumerationList[item.name] = item.adLimitvalues.map(val => ({
@@ -892,13 +892,13 @@ export default {
     } catch (e) {
       this.pageLoad = false;
     }
-  } /* ,
-  mounted() {
-    this.$nextTick(() => {
-      setTimeout(() => {
-        this.load();
-        this.getPermissions("btnConfig", "orderManager");
-      }, 30)
-    });
-  } */,
+  },
+  // mounted() {
+  //   this.$nextTick(() => {
+  //     setTimeout(() => {
+  //       this.load();
+  //       this.getPermissions('btnConfig', 'orderManager');
+  //     }, 30);
+  //   });
+  // }
 };

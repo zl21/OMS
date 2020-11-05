@@ -165,7 +165,7 @@ export default {
 
       // tabs
       // 设置tabs默认值
-      labelDefaultValue: '0',
+      labelDefaultValue: '1',
       // 设置tabs列表
       labelList: labelListConfig,
       // 表格
@@ -2726,7 +2726,7 @@ export default {
       for (const item of self.selection) {
         if (
           // 待审核  已审核
-          item.ORDERSTATUSNAME !== ('待审核' && '已审核')
+          item.ORDERSTATUSNAME !== '待审核' && item.ORDERSTATUSNAME !== '已审核'
         ) {
           // 要合并的单据的订单状态只能为待审核或已审核
           message = self.vmI18n.t('modalTips.e7');

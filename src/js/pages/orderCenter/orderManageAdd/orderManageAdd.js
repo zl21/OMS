@@ -765,9 +765,7 @@ export default {
       jordanTableConfig: {
         indexColumn: false,
         // isShowSelection: true, // 是否存在多选框
-        jordanFormConfig: {
-          img: {},
-
+        businessFormConfig: {
           formValue: {
             dimData: '',
             Num: '',
@@ -784,7 +782,7 @@ export default {
               dimChange: (val) => {
                 // 模糊查询的方法
                 const _this = this;
-                _this.jordanTableConfig.jordanFormConfig.formValue.gbCode = val.trim();
+                _this.jordanTableConfig.businessFormConfig.formValue.gbCode = val.trim();
                 const fromdata = new FormData();
                 const params = {
                   GLOBAL: val.trim(),
@@ -799,7 +797,7 @@ export default {
                 //   .post("/p/cs/screenresult", fromdata)
                   .then((res) => {
                     if (res.data.code === 0) {
-                      const dimList = _this.jordanTableConfig.jordanFormConfig.formData;
+                      const dimList = _this.jordanTableConfig.businessFormConfig.formData;
 
                       dimList.forEach((item) => {
                         if (
@@ -855,7 +853,7 @@ export default {
               dimChange: (val) => {
                 // 模糊查询的方法
                 const _this = this;
-                _this.jordanTableConfig.jordanFormConfig.formValue.dimData = val.trim();
+                _this.jordanTableConfig.businessFormConfig.formValue.dimData = val.trim();
                 this.service.orderCenter.skuQuery({
                   isBlur: 'Y', // N为精确匹配
                   psCSku: {
@@ -872,8 +870,7 @@ export default {
                   .then((res) => {
                     if (res.status === 200) {
                       const data = res.data.data.data;
-                      const dimList = _this.jordanTableConfig.jordanFormConfig.formData;
-                      let arr;
+                      const dimList = _this.jordanTableConfig.businessFormConfig.formData;
                       data.forEach((item) => {
                         // 删除不需要展示的模糊搜索项
                         delete item.GBCODE;
@@ -906,7 +903,7 @@ export default {
               },
               dimSelect: (val) => {
                 const self = this;
-                self.jordanTableConfig.jordanFormConfig.formValue.dimData = val.label;
+                self.jordanTableConfig.businessFormConfig.formValue.dimData = val.label;
                 // const self = this;
                 // if (!self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID) {
                 //   self.$Message.warning("发货店仓，不能为空");
@@ -933,7 +930,7 @@ export default {
             //   inputenter: () => {
             //     let self = this;
             //     // let ecode =
-            //     //   self.jordanTableConfig.jordanFormConfig.formValue.dimData;
+            //     //   self.jordanTableConfig.businessFormConfig.formValue.dimData;
             //     // self.searchOnEnter(ecode);
             //     self.enterQuerySave();
             //   }
@@ -943,7 +940,6 @@ export default {
 
         // 是否修改搜索框为select
         isSearchText: true,
-        searchInputShow: false,
         isShowDeleteDetailBtn: true, // 控制是否显示删除明细
         // isSearchText为false的情况下使用 搜索框list
         searchSelectList: [
@@ -1041,7 +1037,7 @@ export default {
           },
           // 性别
           {
-            title: vmI18n.t('table_label.price'), // 吊牌价
+            title: vmI18n.t('table_label.tagPrice'), // 吊牌价
             key: 'RESERVE_DECIMAL02',
             dataAcessKey: 'RESERVE_DECIMAL02',
             // render: (h, params) => {
@@ -1351,7 +1347,7 @@ export default {
           });
         });
         // 订单新增-表格-表单
-        this.jordanTableConfig.jordanFormConfig.formData.forEach((parent) => {
+        this.jordanTableConfig.businessFormConfig.formData.forEach((parent) => {
           res.SENSITIVE_COLUMNS.forEach((child) => {
             if (parent.dataAcessKey == child.ecode) {
               this.setFormPermissions(parent, child, 'add');
@@ -1662,7 +1658,8 @@ export default {
     }, // 保存方法
     saveAdd(data) {
       const self = this;
-      data.isNew = 1;
+      // data.isNew = 1;
+      data.type = 3;
       const warnFlag = self.saveWarnCheck(data);
       if (warnFlag) {
         self.$Modal.info({
@@ -1757,14 +1754,14 @@ export default {
       const self = this;
       // self.$children[3].$children[0].$children[0].$children[0].$children[0].$children[0].$children[0].$children[0].currentValue =
       //   ""; //从实例中清空条码框的值
-      self.jordanTableConfig.jordanFormConfig.formValue.dimData = '';
-      self.jordanTableConfig.jordanFormConfig.formValue.Num = '';
+      self.jordanTableConfig.businessFormConfig.formValue.dimData = '';
+      self.jordanTableConfig.businessFormConfig.formValue.Num = '';
     },
     enterQuerySave(value) {
       const self = this;
       let ocBorderItemDto; // 明细参数
-      const ecode = self.jordanTableConfig.jordanFormConfig.formValue.dimData;
-      const Num = self.jordanTableConfig.jordanFormConfig.formValue.Num;
+      const ecode = self.jordanTableConfig.businessFormConfig.formValue.dimData;
+      const Num = self.jordanTableConfig.businessFormConfig.formValue.Num;
       // value有值代表编码弹出矩阵框，否则代表条码直接保存
       if (value) {
         const arr = [];
@@ -1977,7 +1974,7 @@ export default {
         }
       }
       _this.totalNum();
-      this.jordanTableConfig.jordanFormConfig.formValue.gbCode = '';
+      this.jordanTableConfig.businessFormConfig.formValue.gbCode = '';
       this.$children
         .find(item => item.name === 'jordanMatrixBox')
         .closeConfirm();
@@ -2039,7 +2036,7 @@ export default {
             } else {
               _this.jordanTableConfig.data = cloneArr;
             }
-            _this.jordanTableConfig.jordanFormConfig.formValue.dimData = '';
+            _this.jordanTableConfig.businessFormConfig.formValue.dimData = '';
             _this.totalNum();
           }
         });

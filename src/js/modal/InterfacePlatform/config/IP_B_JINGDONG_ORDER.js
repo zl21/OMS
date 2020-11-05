@@ -115,7 +115,7 @@ export default {
       ), //结束时间
       status:
         self.downLoadFormConfig.formValue.orderStatus, //状态 必传 给默认值
-      table: self.tablename //当前表名 必传
+      table: self.$route.params.tableName //当前表名 必传
     };
     let fromdata = new FormData();
     fromdata.append("param", JSON.stringify(param));

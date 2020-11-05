@@ -132,16 +132,16 @@ export default {
       this.$emit('refreshItem');// 向上派发父组件刷新
     }, // 取消不刷新数据，确认刷新数据
     async getData() {
-      const query = {
-        param: JSON.stringify({
-          GLOBAL: this.search.toLocaleUpperCase(), // 搜索字段
-          PAGENUM: 1,
-          PAGESIZE: 10,
-          CONDITION: {},
-          TABLENAME: 'PS_C_PRO'
-        })
-      };
-      const res = await this.service.common.screenresult(query);
+      const formdata = new FormData();
+      const param = JSON.stringify({
+        GLOBAL: this.search.toLocaleUpperCase(), // 搜索字段
+        PAGENUM: 1,
+        PAGESIZE: 10,
+        CONDITION: {},
+        TABLENAME: 'PS_C_PRO'
+      });
+      formdata.append('param', param);
+      const res = await this.service.common.screenresult(formdata);
       const data = res.data;
       if (data.code === 0) {
         this.lists = data.data.list;
@@ -189,7 +189,7 @@ export default {
       this.visible = false;
     },//商品编码input失焦 */
     entry() {
-      this.findId()
+      this.findId();
       this.NoImport = true;
       if (this.sub !== -1) {
         this.sub > this.lists.length - 1
@@ -272,7 +272,7 @@ export default {
     }, // 快捷键选择编码
     findId() {
       let id = '';
-      let data = this.selectItem.updateData[this.tablename];
+      const data = this.selectItem.updateData[this.tablename];
       if (this.$route.params.itemId == 'New' && Object.keys(data.add).length !== 0) {
         if (data.add[this.tablename].CP_C_STORE_ID) id = data.add[this.tablename].CP_C_STORE_ID;
         if (id === '' && data.add[this.tablename].CP_C_DEST_ID) id = data.add[this.tablename].CP_C_DEST_ID;

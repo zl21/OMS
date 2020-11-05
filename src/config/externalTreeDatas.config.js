@@ -36,8 +36,6 @@ export default {
     let formdata = new FormData();
     formdata.append('param', 'cpcsupplier');
     const res = await service.common.cpCHrorgTree(formdata);
-    //   console.log(res);
-    // data = restructureMenuTreeData(res.data);
     data = res.data;
     if (res.data.code === 0) {}
     const treeData = {
@@ -51,9 +49,7 @@ export default {
     let data = [];
     let formdata = new FormData();
     formdata.append('param', 'emp');
-    await network.post('http://yapi.dev.syman.cn/mock/624/p/c/standardTree_1603157227651', formdata).then((res) => {
-      //   console.log(res);
-      // data = restructureMenuTreeData(res.data);
+    await network.post('http://yapi.dev.syman.cn/mock/624/p/c/standardTree', formdata).then((res) => {
       data = res.data;
       if (res.data.code === 0) {}
     });
