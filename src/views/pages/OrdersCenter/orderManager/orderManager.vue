@@ -28,7 +28,6 @@
       <jordanBtn
         v-show="!isShowSeniorOrOrdinary"
         :btn-config="btnsSearch"
-        style="margin-left: 80px; margin-top: 10px; justify-content: flex-end"
       />
       <div class="from-folding" @click="shutDownOrbounceOff">
         <i :class="iconDownIcon" />

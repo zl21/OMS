@@ -10,7 +10,6 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const projectConfig = require("./project.config");
 const target = projectConfig.target; // 框架研发网关开启环境
 const proxyLists =  projectConfig.burgeonProxy;
-
 const indexProHtml = path.posix.join("/", "index.pro.html");
 const indexHtml = path.posix.join("/", "index.html");
 
@@ -83,6 +82,10 @@ module.exports = env => ({
       {
         context: proxyLists,
         target,
+        changeOrigin: true
+      },
+      {
+        '/yapi': 'http://yapi.dev.syman.cn/mock/624',
         changeOrigin: true
       }
     ]
