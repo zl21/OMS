@@ -3454,7 +3454,7 @@ export default {
           money
         ), // 主表信息
         OcBreturnOrderExchange: Elist, // 换货明细
-        OcBreturnOrderRefund: Rlist // 退货明细
+        oc_b_order_item_id: Rlist // 退货明细
       };
       // 复制订单标识
       if (_this.$route.query.cloneReturnGoodId) params.copytype = 1;
