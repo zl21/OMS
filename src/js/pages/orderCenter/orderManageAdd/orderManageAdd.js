@@ -1041,7 +1041,7 @@ export default {
           },
           // 性别
           {
-            title: vmI18n.t('table_label.price'), // 吊牌价
+            title: vmI18n.t('table_label.tagPrice'), // 吊牌价
             key: 'RESERVE_DECIMAL02',
             dataAcessKey: 'RESERVE_DECIMAL02',
             // render: (h, params) => {
