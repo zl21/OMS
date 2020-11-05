@@ -3154,9 +3154,9 @@ export default {
     shutDownOrbounceOff() {
       const self = this;
       self.isShowFromLoading = true;
-      if (self.iconDownIcon === 'iconfont iconbj_down') {
+      if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down icon-xiadown') {
         // 打开高级搜索
-        self.iconDownIcon = 'iconfont iconbj_up';
+        self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down ';
         self.labelData = [];
         self.queryInfoData = [];
         self.clearFromListValue = true;
@@ -3164,7 +3164,7 @@ export default {
       } else {
         // 关闭高级搜索
         self.clearFromListValue = false;
-        self.iconDownIcon = 'iconfont iconbj_down';
+        self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down icon-xiadown';
         self.highSearchData = [];
         self.isShowSeniorOrOrdinary = !self.isShowSeniorOrOrdinary;
         // 设置普通搜索默认选项
