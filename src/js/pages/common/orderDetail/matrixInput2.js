@@ -55,8 +55,8 @@ export default {
     changeStopSave() {
       this.$emit('changeStopSave');
     }, // 初始化主表保存有错变量
-    objectEdit() {
-      this.$emit('objectEdit');
+    objectEdit(data) {
+      this.$emit('objectEdit', data);
     }, // 告诉父组件先保存主表
     changeEditSave() {
       this.$emit('changeEditSave');

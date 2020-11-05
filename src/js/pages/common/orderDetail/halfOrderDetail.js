@@ -26,10 +26,10 @@ export default {
       type: Boolean
     }, // 用于判断状态是否变更
     editsave: Boolean, // 判断编辑的时候主表是否保存完毕
-    stopsave: Boolean // 停止矩阵保存
   },
   data() {
     return {
+      stopsave: false,
       refresh: Boolean, // 刷新
       save: Boolean, // 保存
       singleData: '',
@@ -237,10 +237,21 @@ export default {
       this.$emit('changeStopSave');
     }, // 初始化主表保存有错变量
     objectEdit(e) {
-      this.isDialogMatrixSave = true;
-      // this.$emit("objectEdit");
+      // this.isDialogMatrixSave = true;
       this.singleData = e;
-      $('#actionMODIFY')[0].click();
+      console.log(e);
+      const obj = {
+        data: JSON.stringify(e),
+        table: this.$route.params.tableName,
+        objid: this.$route.params.itemId
+      };
+      // this.service.common.objectSave(obj).then((res) => {
+      //   console.log(res);
+        
+      // });
+      this.$children[0].Dialog = false;
+      console.log(this);
+      // document.getElementById('actionMODIFY').click();
     }, // 告诉父组件先保存主表
     changeEditSave() {
       this.isDialogMatrixSave = false;
