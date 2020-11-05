@@ -27,7 +27,7 @@ export default {
           },
           display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: "drp", //外键关联类型
-          fkdesc: vmI18n.t('other.shop'),//店铺 
+          fkdesc: vmI18n.t('other.shop'),//店铺
           inputname: "CP_C_SHOP_ID", //这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, //是否有fk键
           isnotnull: true, //是否必填
@@ -103,7 +103,8 @@ export default {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
       order_status: self.downLoadFormConfig.formValue.order_status,
       start_time: startTime,
-      end_time: endTime
+      end_time: endTime,
+      table: self.$route.params.tableName //当前表名 必传
     };
     let fromdata = new FormData();
     fromdata.append("param", JSON.stringify(param));
