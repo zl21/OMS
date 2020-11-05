@@ -180,7 +180,11 @@ const groups = {
     {
       title: '全部送',
       value: '1'
-    }
+    },
+    {
+        "title": "随机送",
+        "value": "3"
+    },
   ],
   diffFilterPdts: [ // 满足条件 单选商品
     {
@@ -190,6 +194,26 @@ const groups = {
     {
       title: '买商品列表任意商品',
       value: '2'
+    },
+  ],
+  diffFilter: [  //满足条件 总金额
+    {
+      title: "指定商品总金额",
+      value: "1"
+    },
+    {
+      title: "订单总金额",
+      value: "2"
+    },
+  ],
+  giveNumShare: [  //赠送总量giveNumShare
+    {
+      title: "单行单梯度数量",
+      value: "2"
+    },
+    {
+      title: "多梯度统一总量",
+      value: "1"
     },
   ]
 };

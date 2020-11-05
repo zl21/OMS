@@ -467,7 +467,6 @@ export default {
       const currentPage = this.tabConfig[this.activeName].agTableConfig.pagenation.current;
       const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
       this.loadings = true;
-      console.log("1111",this.acti_date);
       const params = {
         ACTISTATUS: this.STATUS.join(",").replace("bSelect-all", 0), // 活动状态
         SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
@@ -558,7 +557,6 @@ export default {
 
       // 查看日志
       const { data: { code, message, data } } = await this.service.promotionCenter.cpromLogQuery(formData)
-      console.log("查看日志", 'code:' + code, 'message:' + message, 'data:' + data);
       if (code === 0) {
         if (data.length === 0) {
           self.$message.warning(vmI18n.t("modalTips.r8"));//查询数据为空
@@ -582,14 +580,12 @@ export default {
             }
       // 获取button数组
       const { data: { code, message, data } } = await this.service.promotionCenter.fetchActionsInCustomizePage(params)
-      console.log("获取button数组", 'code:' + code, 'message:' + message, 'data:' + data);
       if (code === 0) {
         data.map((item) => {
           buttons.push(item.webid);
         });
       }
       this.buttons = buttons;
-      console.log('获取but', this.buttons);
     },
     errorDialogClose(value, option) {
       if (option) {
@@ -727,7 +723,6 @@ export default {
       const formData = new FormData();
       formData.append("param", JSON.stringify(params));
       const {data:{code,message}} =  await this.service.promotionCenter.updatePmStatus(formData)
-      console.log("请求发布", 'code:' + code, 'message:' + message);
       if (code === 0) {
         this.getData();
         this.$message({
@@ -835,7 +830,6 @@ export default {
       if (code === 0) {
         _this.acti_date = [data.START_WEEK,data.END_WEEK];
       }
-      console.log( _this.acti_date," _this.acti_date");
     },
     Reset() {
       this.acti_no = ""; // 活动编号
@@ -865,7 +859,6 @@ export default {
         prom_type_id: typeId,
       }));
       const {data:{code,message,data}} = await this.service.promotionCenter.selectPm(formData)
-      console.log(code,message,data);
       if (code === 0) {
         // sq存储一套作为清空操作的初始数据
         // let scheme_dataInit = JSON.stringify(res.data.data.scheme_arr);

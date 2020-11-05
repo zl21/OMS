@@ -196,7 +196,7 @@
           <span>{{ vmI18n.t("other.submission_status") }}:&nbsp;</span>
           <!-- 已发布 -->
           <button class="color-blue">
-            {{ vmI18n.t("form_label.published") }}
+            {{ vmI18n.t("btn.published") }}
           </button>
         </p>
         <p>
