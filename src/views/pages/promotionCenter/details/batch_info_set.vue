@@ -8,7 +8,6 @@
     </div>
     <!--商品来源-->
     <div class="info-row row">
-      <!-- <div class="form_label">商品来源：</div> -->
       <div class="form_label">
         {{ vmI18n.t("form_label.goods_source") }}：
       </div>
@@ -22,7 +21,6 @@
     </div>
     <!--赠品翻倍-->
     <div class="info-row row">
-      <!-- <div class="form_label">赠品翻倍：</div> -->
       <div class="form_label">
         {{ vmI18n.t("form_label.double_gifts") }}：
       </div>
@@ -32,7 +30,7 @@
           :options="groups.giftDoubles"
           @changeSingle="checkBuyerLimitFrequencyChange"
         />
-        <!-- <div class="form_item">,最大翻倍次数</div> -->
+        <!--最大翻倍次数 -->
         <div class="form_item">
           ,{{ vmI18n.t("form_label.max_doubling_times") }}
         </div>
@@ -45,9 +43,8 @@
         </div>
       </div>
     </div>
-    <!--选择商品方式-->
+    <!--选择商品方式 -- 赠送方式：-->
     <div class="info-row row">
-      <!-- <div class="form_label">赠送方式：</div> -->
       <div class="form_label">
         {{ vmI18n.t("form_label.giving_ways") }}：
       </div>

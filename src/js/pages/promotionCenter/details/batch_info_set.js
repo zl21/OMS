@@ -290,6 +290,8 @@ export default {
     },
     addList() {
       this.infoData.list.push({ gift_products: [], products: [] });
+      this.addRowData(this.infoData.list.length - 1, "product");
+      this.addRowData(this.infoData.list.length - 1, "gift");
     },
     productsFromChange(val) {
       this.infoData.list = [{ gift_products: [], products: [] }];
@@ -321,11 +323,25 @@ export default {
       }
     },
     deleteRowData(row, index, from) {
-      const self = this;
-      const rowIndex = row._index;
+      let self = this;
+      let rowIndex = row._index;
       if (from === "gift") {
+        if (self.infoData.list[index].gift_products.length <= 1) {
+          this.$message({
+            type: "warning",
+            message: "至少保留一条赠品信息",
+          });
+          return;
+        }
         self.infoData.list[index].gift_products.splice(rowIndex, 1);
       } else {
+        if (self.infoData.list[index].products.length <= 1) {
+          this.$message({
+            type: "warning",
+            message: "至少保留一条条件信息",
+          });
+          return;
+        }
         self.infoData.list[index].products.splice(rowIndex, 1);
       }
     },
@@ -359,5 +375,8 @@ export default {
 
   mounted() {
     // console.log("infoData", this.infoData);
+    this.addRowData(0, "product");
+    this.addRowData(0, "gift");
+    console.log("infoData", this.infoData);
   },
 };
