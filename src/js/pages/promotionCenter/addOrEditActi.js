@@ -95,23 +95,27 @@ export default {
         productslist: [],
         rules: [
           {
-            show: true, // 不显示
-            check: false, // 选中  true、false
+            show:true,  //不显示
+            check: false, //选中  true、false
             name: "QTTY", // 条件名称
             type: "GE", // 条件类型：大于，等于
             value: "", // 条件值
-            filterPdtWayShow: true, // 过滤商品方式是否展示
-            filterPdtWay: "2", // 增加过滤商品方式
+            filterPdtWayShow:true, //过滤商品方式是否展示
+            amoutStyleShow:false,//金额满足条件
+            filterPdtWay:"2" ,//增加过滤商品方式
+            amount_style:'',//金额来源方式
           },
           {
-            show: true, // 不显示
-            check: false, // 选中  true、false
+            show:true,  //不显示
+            check: false, //选中  true、false
             name: "AMOUNT_LIST", // 条件名称
             type: "GE", // 条件类型：大于，等于
             value: "", // 条件值
-            filterPdtWayShow: false, // 过滤商品方式是否展示
-            filterPdtWay: "", // 增加过滤商品方式
-          },
+            filterPdtWayShow:false, //过滤商品方式是否展示
+            amoutStyleShow:true,//金额来源满足条件
+            amount_style:'1',//金额来源方式
+            filterPdtWay:"" //增加过滤商品方式
+          }
         ],
       },
       gift_info_setting: {
@@ -122,13 +126,6 @@ export default {
         gift_methods: "1", // 赠送方式  1-全部送  2-顺序送  3-随机送
         gift_productslist: [],
         gift_productsArrs: [],
-        // gift_productsArrs: [
-        //   {
-        //     group: "1",
-        //     unit:'件',
-        //     productslist: []
-        //   }
-        // ]
       },
       batch_infos_setting: {
         // 【批量】条件信息设置
@@ -325,7 +322,7 @@ export default {
      * 保存草稿
      */
     async saveDraft() {
-      // console.log('保存草稿');
+      console.log('保存草稿');
       const [
         modulesValid1,
         modulesValid2,
@@ -351,15 +348,15 @@ export default {
       };
       // 请求保存接口
       this.loading = true;
-      const searchParam = new URLSearchParams();
-      searchParam.append("param", JSON.stringify(params));
+      console.log("发布",params);
+      const formData = new FormData();
+      formData.append("param", JSON.stringify(params));
       try {
         const { data: { code, message, data } } = await this.service.promotionCenter.selectPm(formData)
         if (code === 0) {
           this.$message({
             type: "success",
-            // message: "保存成功",
-            message: vmI18n.t("modalTips.z9"),
+            message: vmI18n.t("modalTips.z9"),//保存成功
           });
           let action = "customize/switchActiveTab";
           if (this.objid == -1) {
@@ -371,12 +368,10 @@ export default {
               id: this.objid, // id
               type: "action", // 类型action
               name: "addOrEditActi", // 文件名
-              // label: "编辑促销活动", // tab中文名
-              label: vmI18n.t("panel_label.editPromotion"),
+              label: vmI18n.t("panel_label.editPromotion"),//编辑促销活动
               query: Object.assign({
                 id: this.objid, // id
-                // tabTitle: "编辑促销活动", // tab中文名
-                tabTitle: vmI18n.t("panel_label.editPromotion"),
+                tabTitle: vmI18n.t("panel_label.editPromotion"),//编辑促销活动
               }), // 带的参数
             });
           });
@@ -435,6 +430,7 @@ export default {
     },
     // 发布
     async publish() {
+      console.log("1111");
       const [
         modulesValid1,
         modulesValid2,
@@ -463,7 +459,7 @@ export default {
       };
       this.loading = true;
       // 发布
-      const formData = new URLSearchParams();
+      const formData = new FormData();
       formData.append("param", JSON.stringify(params));
       try {
         const { data: { code, message } } = await this.service.promotionCenter.updatePmStatus(formData)
@@ -709,29 +705,25 @@ export default {
         if (!o) {
           return {
             code: -1,
-            // message: "【满足条件】至少要选中一项并且填写数量或金额条件",
-            message: vmI18n.t("modalTips.r5"),
+            message: vmI18n.t("modalTips.r5"),//【满足条件】至少要选中一项并且填写数量或金额条件
           };
         }
       }
-      // let rs = { code: 0, message: "校验完成" };
-      let rs = { code: 0, message: vmI18n.t("modalTips.s4") };
+      let rs = { code: 0, message: vmI18n.t("modalTips.s4") };//校验完成
       if (this.basic_info.activity_type === "GA") {
         // 指定
         if (this.condition_info_setting.products_join === "1") {
           // 非搭配
           const arrs = this.condition_info_setting.productslist || [];
-          // if (arrs.length === 0) return { code: -1, message: "无数据" };
           if (arrs.length === 0)
-            return { code: -1, message: vmI18n.t("modalTips.r6") };
+            return { code: -1, message: vmI18n.t("modalTips.r6") };//无数据
           rs = this.checkTable(arrs);
         }
         if (this.condition_info_setting.products_join === "2") {
           // 搭配
           const arrs = this.condition_info_setting.productsArrs || [];
-          // if (arrs.length === 0) return { code: -1, message: "无数据" };
           if (arrs.length === 0)
-            return { code: -1, message: vmI18n.t("modalTips.r6") };
+            return { code: -1, message: vmI18n.t("modalTips.r6") };//无数据
           rs = this.checkTableTab(arrs, "info");
         }
       }
@@ -741,9 +733,8 @@ export default {
       return rs;
     },
     validate3() {
-      // const tablename = "赠品列表";
       const tablename = vmI18n.t("other.gift_list");
-      let rs = { code: 0, message: vmI18n.t("modalTips.s4") };
+      let rs = { code: 0, message: vmI18n.t("modalTips.s4") };//赠品列表
       if (this.basic_info.gradient_gift === "0") {
         // 不梯度
         const arrs = this.gift_info_setting.gift_productslist || [];
