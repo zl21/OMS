@@ -493,8 +493,8 @@ export default {
           {
             key: 'ORDERFLAG',
             render: (h, params) => {
-              const imgSrc = params.row.RESERVE_VARCHAR02 == null
-                || params.row.RESERVE_VARCHAR02 == ''
+              const imgSrc = params.row.BACK_MESSAGE == null
+                || params.row.BACK_MESSAGE == ''
                 ? require('@/assets/image/img/0.png')
                 : require('@/assets/image/img/1.png');
               return h(
@@ -521,8 +521,8 @@ export default {
                     {
                       slot: 'content',
                     },
-                    params.row.RESERVE_VARCHAR02
-                      ? params.row.RESERVE_VARCHAR02
+                    params.row.BACK_MESSAGE
+                      ? params.row.BACK_MESSAGE
                       : '暂无卖家备注'
                   ),
                 ]
@@ -807,9 +807,9 @@ export default {
         && Obj.WMS_CANCEL_STATUS[0] === 'bSelect-all'
       ) { Obj.WMS_CANCEL_STATUS = ''; } else if (Obj.IS_ADD && Obj.IS_ADD[0] === 'bSelect-all') Obj.IS_ADD = '';
       else if (Obj.IS_TOAG && Obj.IS_TOAG[0] === 'bSelect-all') { Obj.IS_TOAG = ''; } else if (Obj.IS_BACK && Obj.IS_BACK[0] === 'bSelect-all') { Obj.IS_BACK = ''; } else if (
-        Obj.RESERVE_BIGINT07
-        && Obj.RESERVE_BIGINT07[0] === 'bSelect-all'
-      ) { Obj.RESERVE_BIGINT07 = ''; }
+        Obj.STATUS_DEFECTIVE_TRANS
+        && Obj.STATUS_DEFECTIVE_TRANS[0] === 'bSelect-all'
+      ) { Obj.STATUS_DEFECTIVE_TRANS = ''; }
       this.service.orderCenter.querySalesReturn(Object.assign(param, _this.formConfig.formValue))
       // this.$network
       //   .axios({
@@ -846,7 +846,7 @@ export default {
                   item.CREATIONDATE
                 ); 
               } // 创建时间
-              item.RETURN_STATUS = item.rETURNNAME; // 退单状态
+              item.RETURN_STATUS = item.RETURN_STATUS_NAME; // 退单状态
               item.IS_ADD = item.IS_ADD == 0 ? '否' : '是'; // 是否手工新增
               if (item.INVENTED_STATUS == 0) {
                 item.INVENTED_STATUS = '未虚拟入库';
@@ -855,7 +855,7 @@ export default {
               } else if (item.INVENTED_STATUS == 2) {
                 item.INVENTED_STATUS = '虚拟入库已入库';
               }
-              item.PLATFORM = item.pLAT; // 平台类型
+              item.PLATFORM = item.PLAT_NAME; // 平台类型
               item.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ECODE; // 退回物流公司
               item.IS_RECEIVE_CONFIRM = item.IS_RECEIVE_CONFIRM == 0 ? '否' : '是'; // 是否确认收货
               // item.WMS_CANCEL_STATUS = item.WMS_CANCEL_STATUS == 0 ? '未撤回' : '已撤回'; // WMS撤回状态
@@ -885,12 +885,12 @@ export default {
               // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否传wms
 
               // 0无次品调拨，1次品未调拨，2次品已调拨
-              if (item.RESERVE_BIGINT07 === 0) {
-                item.RESERVE_BIGINT07 = '无次品调拨';
-              } else if (item.RESERVE_BIGINT07 === 1) {
-                item.RESERVE_BIGINT07 = '次品未调拨';
-              } else if (item.RESERVE_BIGINT07 === 2) {
-                item.RESERVE_BIGINT07 = '次品已调拨';
+              if (item.STATUS_DEFECTIVE_TRANS === 0) {
+                item.STATUS_DEFECTIVE_TRANS = '无次品调拨';
+              } else if (item.STATUS_DEFECTIVE_TRANS === 1) {
+                item.STATUS_DEFECTIVE_TRANS = '次品未调拨';
+              } else if (item.STATUS_DEFECTIVE_TRANS === 2) {
+                item.STATUS_DEFECTIVE_TRANS = '次品已调拨';
               }
               item.RETURN_REASON = item.RETURN_REASON; // 退货原因
               item.BILL_TYPE = item.BILL_TYPE == 1 ? '退货单' : '退换货单';
@@ -1015,7 +1015,7 @@ export default {
                   item.CREATIONDATE
                 ); 
               } // 创建时间
-              item.RETURN_STATUS = item.rETURNNAME; // 退单状态
+              item.RETURN_STATUS = item.RETURN_STATUS_NAME; // 退单状态
               item.IS_ADD = item.IS_ADD == 0 ? '否' : '是'; // 是否手工新增
               if (item.INVENTED_STATUS == 0) {
                 item.INVENTED_STATUS = '未虚拟入库';
@@ -1024,7 +1024,7 @@ export default {
               } else if (item.INVENTED_STATUS == 2) {
                 item.INVENTED_STATUS = '虚拟入库已入库';
               }
-              item.PLATFORM = item.pLAT; // 平台类型
+              item.PLATFORM = item.PLAT_NAME; // 平台类型
               item.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ECODE; // 退回物流公司
               item.IS_RECEIVE_CONFIRM = item.IS_RECEIVE_CONFIRM == 0 ? '否' : '是'; // 是否确认收货
               // item.WMS_CANCEL_STATUS = item.WMS_CANCEL_STATUS == 0 ? '未撤回' : '已撤回'; // WMS撤回状态
@@ -1052,12 +1052,12 @@ export default {
                 item.IS_TOWMS = '传WMS失败';
               }
               // 0无次品调拨，1次品未调拨，2次品已调拨
-              if (item.RESERVE_BIGINT07 === 0) {
-                item.RESERVE_BIGINT07 = '无次品调拨';
-              } else if (item.RESERVE_BIGINT07 === 1) {
-                item.RESERVE_BIGINT07 = '次品未调拨';
-              } else if (item.RESERVE_BIGINT07 === 2) {
-                item.RESERVE_BIGINT07 = '次品已调拨';
+              if (item.STATUS_DEFECTIVE_TRANS === 0) {
+                item.STATUS_DEFECTIVE_TRANS = '无次品调拨';
+              } else if (item.STATUS_DEFECTIVE_TRANS === 1) {
+                item.STATUS_DEFECTIVE_TRANS = '次品未调拨';
+              } else if (item.STATUS_DEFECTIVE_TRANS === 2) {
+                item.STATUS_DEFECTIVE_TRANS = '次品已调拨';
               }
               // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否传wms
               item.RETURN_REASON = item.RETURN_REASON; // 退货原因
@@ -1136,7 +1136,7 @@ export default {
         query: Object.assign({
           id: row.ID, // 单据id
           tabTitle: '退换货订单详情', // tab中文名
-          statusName: row.rETURNNAME, // 行的退单状态
+          statusName: row.RETURN_STATUS_NAME, // 行的退单状态
         }), // 带的参数
       });
     },
@@ -1188,7 +1188,7 @@ export default {
         query: Object.assign({
           id: this.returnSelectData[0].ID, // 单据id
           tabTitle: this.vmI18n.t('panel_label.ReturnOrderDetails'), // 退换货订单详情 tab中文名
-          statusName: this.returnSelectData[0].rETURNNAME, // 选中行的退单状态
+          statusName: this.returnSelectData[0].RETURN_STATUS_NAME, // 选中行的退单状态
         }), // 带的参数
       });
     },
@@ -1234,7 +1234,7 @@ export default {
         return;
       }
       if (
-        _this.returnSelectData[0].rETURNNAME != '等待售后确认'
+        _this.returnSelectData[0].RETURN_STATUS_NAME != '等待售后确认'
         && this.returnSelectData.length == 1
       ) {
         _this.$Message.warning(this.vmI18n.t('modalTips.k5'));// 当前选中行，无法使用此按钮!
@@ -1242,7 +1242,7 @@ export default {
       }
       const ids = [];
       for (let i = 0; i < this.returnSelectData.length; i++) {
-        if (this.returnSelectData[i].rETURNNAME == '等待售后确认') {
+        if (this.returnSelectData[i].RETURN_STATUS_NAME == '等待售后确认') {
           ids.push(this.returnSelectData[i].ID);
         }
       }
@@ -1286,7 +1286,7 @@ export default {
         return;
       }
       if (
-        this.returnSelectData[0].rETURNNAME != '等待退货入库'
+        this.returnSelectData[0].RETURN_STATUS_NAME != '等待退货入库'
         && this.returnSelectData.length == 1
       ) {
         this.$Message.warning(this.vmI18n.t('modalTips.l1'));// 退换货取消失败,只有【等待退货入库】状态才可以操作取消，请检查后重试!
@@ -1294,7 +1294,7 @@ export default {
       }
       const ids = [];
       for (let i = 0; i < this.returnSelectData.length; i++) {
-        if (this.returnSelectData[i].rETURNNAME == '等待退货入库') {
+        if (this.returnSelectData[i].RETURN_STATUS_NAME == '等待退货入库') {
           ids.push(this.returnSelectData[i].ID);
         }
       }
@@ -1374,7 +1374,7 @@ export default {
         this.$Message.error(this.vmI18n.t('modalTips.k3'));// 请选中一项修改!
         return;
       }
-      if (this.returnSelectData[0].rETURNNAME !== '等待退货入库') {
+      if (this.returnSelectData[0].RETURN_STATUS_NAME !== '等待退货入库') {
         this.$Message.error(this.vmI18n.t('modalTips.l6'));// 此退换单状态不允许虚拟入库!
         return;
       }
@@ -1470,7 +1470,7 @@ export default {
         return;
       }
       if (
-        this.returnSelectData[0].rETURNNAME == '取消'
+        this.returnSelectData[0].RETURN_STATUS_NAME == '取消'
         && this.returnSelectData.length == 1
       ) {
         this.$Message.error(this.vmI18n.t('modalTips.m2'));// 取消状态不允许修改备注!
@@ -1478,7 +1478,7 @@ export default {
       }
       const ids = [];
       for (let i = 0; i < this.returnSelectData.length; i++) {
-        if (this.returnSelectData[i].rETURNNAME != '取消') {
+        if (this.returnSelectData[i].RETURN_STATUS_NAME != '取消') {
           ids.push(this.returnSelectData[i].ID);
         }
       }
@@ -1516,13 +1516,13 @@ export default {
         this.$Message.error(this.vmI18n.t('modalTips.m1'));// 请至少选中一项修改!
         return;
       }
-      // if (this.returnSelectData[0].rETURNNAME != '等待退货入库' && this.returnSelectData.length == 1) {
+      // if (this.returnSelectData[0].RETURN_STATUS_NAME != '等待退货入库' && this.returnSelectData.length == 1) {
       //   this.$Message.error('只有等待退货入库状态可以从WMS撤回!');
       //   return;
       // }
       const ids = [];
       for (let i = 0; i < this.returnSelectData.length; i++) {
-        // if (this.returnSelectData[i].rETURNNAME != '取消') {
+        // if (this.returnSelectData[i].RETURN_STATUS_NAME != '取消') {
         ids.push(this.returnSelectData[i].ID);
         // }
       }
@@ -1597,7 +1597,7 @@ export default {
         return;
       }
       if (
-        this.returnSelectData[0].rETURNNAME != '等待退货入库'
+        this.returnSelectData[0].RETURN_STATUS_NAME != '等待退货入库'
         && this.returnSelectData.length == 1
       ) {
         this.$Message.error(this.vmI18n.t('modalTips.m5'));// 只有等待退货入库状态可以从WMS撤回!
@@ -1605,7 +1605,7 @@ export default {
       }
       const ids = [];
       for (let i = 0; i < this.returnSelectData.length; i++) {
-        if (this.returnSelectData[i].rETURNNAME == '等待退货入库') {
+        if (this.returnSelectData[i].RETURN_STATUS_NAME == '等待退货入库') {
           ids.push(this.returnSelectData[i].ID);
         }
       }
@@ -1662,7 +1662,7 @@ export default {
         return;
       }
       if (
-        this.returnSelectData[0].rETURNNAME != '等待售后确认'
+        this.returnSelectData[0].RETURN_STATUS_NAME != '等待售后确认'
         && this.returnSelectData.length == 1
       ) {
         this.$Message.error(this.vmI18n.t('modalTips.m8'));// 只有等待售后确认状态可以强制完成!
