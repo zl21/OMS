@@ -892,13 +892,13 @@ export default {
     } catch (e) {
       this.pageLoad = false;
     }
-  } /* ,
-  mounted() {
-    this.$nextTick(() => {
-      setTimeout(() => {
-        this.load();
-        this.getPermissions("btnConfig", "orderManager");
-      }, 30)
-    });
-  } */,
+  },
+  // mounted() {
+  //   this.$nextTick(() => {
+  //     setTimeout(() => {
+  //       this.load();
+  //       this.getPermissions('btnConfig', 'orderManager');
+  //     }, 30);
+  //   });
+  // }
 };
