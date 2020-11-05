@@ -402,7 +402,7 @@ export default {
       axios({
         url: url,
         method: "post",
-        cancelToken: true,
+        // cancelToken: true,
         headers: {"Content-Type": "multipart/form-data"},
         data: param,
       })
