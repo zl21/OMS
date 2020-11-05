@@ -661,7 +661,7 @@ export default {
           },
         },
         name: "importTable",
-        url: "importTable",
+        url: "modal/publicDialog/importTable",
         width: 600,
       };
       this.$refs.dialog.openConfirm();

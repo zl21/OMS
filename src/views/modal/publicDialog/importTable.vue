@@ -10,7 +10,7 @@
         <span>{{ vmI18n.t("modalTips.za") }}</span>
         <!-- <a @click="downloadTemplate">(下载模版)</a> -->
         <a @click="downloadTemplate"
-          >({{ vmI18n.t("other.download_templat") }})</a
+          >({{ vmI18n.t("other.download_template") }})</a
         >
       </div>
       <div class="upload">
@@ -72,7 +72,7 @@
     <div class="dialog-footer">
       <Button type="error" ghost size="small" @click="closeConfirm">
         <!-- 取消 -->
-        {{ vmI18n.t("common.canael") }}
+        {{ vmI18n.t("common.cancel") }}
       </Button>
       <Button type="primary" size="small" @click="importDialog">
         <!-- 确定 -->
@@ -83,8 +83,8 @@
 </template>
 
 <script>
-  import importDialog from "allpages/promotionCenter/components/importDialog";
-  export default importDialog;
+  import importTable from '@/js/modal/publicDialog/importTable';
+  export default importTable;
 </script>
 
 <style scoped lang="less">

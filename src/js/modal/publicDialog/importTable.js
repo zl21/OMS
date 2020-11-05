@@ -1,4 +1,4 @@
-<!-- 导入组件-->
+// <!-- 导入组件-->
 import axios from "axios";
 import {setTimeout} from "timers";
 
@@ -11,6 +11,7 @@ export default {
   },
   data() {
     return {
+      vmI18n: window.vmI18n,
       text: "", // 选择的导入文件名
       files: {}, // 选择的文件
       loading: false, // 导入中loading
