@@ -977,7 +977,7 @@ export default {
         isShowSelection: false, // 是否存在多选框
         columns: [
           {
-            title: vmI18n.t('form_laber.returnOrder_no'), // 退换货单号
+            title: vmI18n.t('form_label.returnOrder_no'), // 退换货单号
             key: 'OC_B_RETURN_ORDER_ID',
             width: '',
             type: 'asc',
@@ -995,7 +995,7 @@ export default {
             type: 'asc',
           },
           {
-            title: vmI18n.t('form_laber.goodsMark'), // 商品标记
+            title: vmI18n.t('form_label.goodsMark'), // 商品标记
             key: 'PRODUCT_MARK',
             render: (h, params) => h(
               'Select',
@@ -1027,19 +1027,19 @@ export default {
             type: 'asc',
           },
           {
-            title: vmI18n.t('form_laber.issueBarcode'), // 发出条码
+            title: vmI18n.t('form_label.issueBarcode'), // 发出条码
             key: 'PS_C_SKU_ECODE',
             width: '',
             type: 'asc',
           },
           {
-            title: vmI18n.t('form_laber.receivedBarcode'), // 实收条码
+            title: vmI18n.t('form_label.receivedBarcode'), // 实收条码
             key: 'REAL_SKU_ECODE',
             width: '',
             type: 'asc',
           },
           {
-            title: '', // 规格
+            title: vmI18n.t('form_label.specs'), // 规格
             key: 'SKU_SPEC',
             width: '',
             type: 'asc',
@@ -1051,25 +1051,25 @@ export default {
             type: 'asc',
           },
           {
-            title: vmI18n.t('form_laber.scansNumber'), // 扫描数量
+            title: vmI18n.t('form_label.scansNumber'), // 扫描数量
             key: 'QTY_SCAN',
             width: '',
             type: 'asc',
           },
           {
-            title: vmI18n.t('form_laber.gBCode'), // 国标码
+            title: vmI18n.t('form_label.gBCode'), // 国标码
             key: 'GBCODE',
             width: '',
             type: 'asc',
           },
           {
-            title: vmI18n.t('form_laber.receivedGBcode'), // 实收国标码
+            title: vmI18n.t('form_label.receivedGBcode'), // 实收国标码
             key: 'RESERVE_VARCHAR01',
             width: '',
             type: 'asc',
           },
           {
-            title: vmI18n.t('form_laber.is_there_no_original_barcode'), // 是否无原单条码
+            title: vmI18n.t('form_label.is_there_no_original_barcode'), // 是否无原单条码
             key: 'IS_WITHOUT_ORIG',
             width: '',
             type: 'asc',
