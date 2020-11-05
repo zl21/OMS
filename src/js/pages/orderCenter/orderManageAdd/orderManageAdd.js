@@ -1662,7 +1662,8 @@ export default {
     }, // 保存方法
     saveAdd(data) {
       const self = this;
-      data.isNew = 1;
+      // data.isNew = 1;
+      data.type = 3;
       const warnFlag = self.saveWarnCheck(data);
       if (warnFlag) {
         self.$Modal.info({

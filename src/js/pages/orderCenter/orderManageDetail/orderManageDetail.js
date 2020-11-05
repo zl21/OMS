@@ -775,7 +775,7 @@ export default {
               : this.vmI18n.t('common.yes');
             const TO_SETTLE_STATUS_NAME = (
               this.enumerationList.UPLOAD_SAP_STATUS.find(
-                val => val.value === resData.TO_SETTLE_STATUS
+                val => val.value === resData.TO_SAP_STATUS
               ) || {}
             ).label;
             resData.TO_SETTLE_STATUS_NAME = TO_SETTLE_STATUS_NAME || '';

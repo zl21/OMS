@@ -1712,47 +1712,47 @@ export default {
       formdata.append('table', 'OC_B_RETURN_AF_SEND');
       formdata.append('objid', -1);
       const res = await self.service.common.getObject(formdata);
-        console.log(res);
-        if (res.data.code == 0) {
-          let payType = [];
-          let dutyOfficer = [];
-          const childs = res.data.data.addcolums[res.data.data.addcolums.length - 2]
-            .childs || [];
-          childs.forEach((item) => {
-            if (item.name === '判责方') {
-              dutyOfficer = item.combobox;
-            }
-            if (item.name === '支付方式') {
-              payType = item.combobox;
-            }
-          });
-          payType.forEach((item) => {
-            item.label = item.limitdesc;
-            item.value = item.limitval;
-          });
-          dutyOfficer.forEach((item) => {
-            item.label = item.limitdesc;
-            item.value = item.limitval;
-          });
-          this.selectOptions = {
-            payType,
-            dutyOfficer,
-          };
-          self.reForm.config.forEach((item) => {
-            // 支付方式
-            if (item.item.label == self.vmI18n.t('form_label.paymentWay')) {
-              item.item.props.options = payType;
-            }
-            // 判责方
-            if (
-              item.item.label == self.vmI18n.t('form_label.responsibleParty')
-            ) {
-              item.item.props.options = dutyOfficer;
-            }
-          });
-        } else {
-          self.$Message.error(res.data.message);
-        }
+      console.log(res);
+      if (res.data.code == 0) {
+        let payType = [];
+        let dutyOfficer = [];
+        const childs = res.data.data.addcolums[res.data.data.addcolums.length - 2]
+          .childs || [];
+        childs.forEach((item) => {
+          if (item.name === '判责方') {
+            dutyOfficer = item.combobox;
+          }
+          if (item.name === '支付方式') {
+            payType = item.combobox;
+          }
+        });
+        payType.forEach((item) => {
+          item.label = item.limitdesc;
+          item.value = item.limitval;
+        });
+        dutyOfficer.forEach((item) => {
+          item.label = item.limitdesc;
+          item.value = item.limitval;
+        });
+        this.selectOptions = {
+          payType,
+          dutyOfficer,
+        };
+        self.reForm.config.forEach((item) => {
+          // 支付方式
+          if (item.item.label == self.vmI18n.t('form_label.paymentWay')) {
+            item.item.props.options = payType;
+          }
+          // 判责方
+          if (
+            item.item.label == self.vmI18n.t('form_label.responsibleParty')
+          ) {
+            item.item.props.options = dutyOfficer;
+          }
+        });
+      } else {
+        self.$Message.error(res.data.message);
+      }
     },
     // 退款分类联动查询退描述
     returnTypeChange() {

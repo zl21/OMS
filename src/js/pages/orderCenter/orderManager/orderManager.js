@@ -165,7 +165,7 @@ export default {
 
       // tabs
       // 设置tabs默认值
-      labelDefaultValue: '0',
+      labelDefaultValue: '1',
       // 设置tabs列表
       labelList: labelListConfig,
       // 表格
