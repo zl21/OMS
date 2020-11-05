@@ -239,13 +239,12 @@ export default {
     objectEdit(e) {
       // this.isDialogMatrixSave = true;
       this.singleData = e;
-      console.log(e);
-      const obj = {
-        data: JSON.stringify(e),
-        table: this.$route.params.tableName,
-        objid: this.$route.params.itemId
-      };
-      this.service.common.objectSave(obj).then((res) => {
+      let formdata = new FormData();
+      formdata.append('data' , JSON.stringify(e));
+      formdata.append('table' , this.$route.params.tableName);
+      formdata.append('objid' , this.$route.params.itemId);
+
+      this.service.common.objectSave(formdata).then((res) => {
         console.log(res);
         
       });
