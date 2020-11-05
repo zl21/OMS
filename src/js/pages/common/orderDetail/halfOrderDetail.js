@@ -245,10 +245,10 @@ export default {
         table: this.$route.params.tableName,
         objid: this.$route.params.itemId
       };
-      // this.service.common.objectSave(obj).then((res) => {
-      //   console.log(res);
+      this.service.common.objectSave(obj).then((res) => {
+        console.log(res);
         
-      // });
+      });
       this.$children[0].Dialog = false;
       console.log(this);
       // document.getElementById('actionMODIFY').click();

@@ -248,6 +248,7 @@ export default {
           || type === 'BUYER_REMARK'
           || type === 'SELLER_REMARK'
           || type === 'HOLD_WAIT_TIME'
+          || type ==='UN_AUDIT_WAIT_TIME'
       ) {
         this.result[type] = this.info[type];
       } else if (type == 'orderType') {
