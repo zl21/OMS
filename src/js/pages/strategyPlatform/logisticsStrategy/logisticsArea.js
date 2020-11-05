@@ -83,7 +83,7 @@ export default {
               const _this = this;
               _this.importTable.componentData = {
                 tableName: "ST_C_EXPRESS_AREA",
-                objid: _this.$route.query.id,
+                objid: _this.$route.params.customizedModuleId,
               };
               console.log(_this.$children);
               _this.$children
@@ -174,7 +174,7 @@ export default {
       labelList: [
         {
           // label: '区域明细',
-          label: vmI18n.t("table_label.region_details"),
+          label: vmI18n.t("form_label.region_details"),
           value: "1",
           isShow: true,
         },
@@ -195,7 +195,7 @@ export default {
     };
   },
   mounted() {
-    if (this.$route.query.id !== "-1") {
+    if (this.$route.params.customizedModuleId !== "New") {
       this.information.formData[0].itemdata.readonly = true;
       this.setTableHeight();
       this.getTree();
@@ -232,7 +232,7 @@ export default {
           },
           ST_C_EXPRESS_AREA_ITEM: _this.dataArr,
         },
-        objid: this.$route.query.id,
+        objid: this.$route.params.customizedModuleId,
       };
       formData.append("param", JSON.stringify(param));
       // 保存
@@ -256,7 +256,7 @@ export default {
         const err = message || vmI18n.t("modalTips.y0");//'保存失败';
         _this.$message.error(err);
       }
-      
+
       // _this.$network.post("/p/cs/expressAreaSaveCmd", fromdata).then((res) => {
       //   _this.isSaveLoading = false;
       //   _this.dataArr = [];
@@ -287,7 +287,7 @@ export default {
       const _this = this;
       _this.isSaveLoading = true;
       const formData = new FormData();
-      const param = { objid: this.$route.query.id };
+      const param = { objid: this.$route.params.customizedModuleId };
       formData.append("param", JSON.stringify(param));
       const {data:{data:{code,message,data}}} = await this.service.strategyPlatform.expressAreaSaveCmd(formData)
       console.log(code,message,data);
@@ -319,7 +319,7 @@ export default {
       const _this = this;
       _this.isSaveLoading = true;
       const {data:{code,message,data}} = await this.service.strategyPlatform.getExpressAreaTree({
-        objid: objid || this.$route.query.id,
+        objid: objid || this.$route.params.customizedModuleId,
       })
       _this.isSaveLoading = false;
           if (code === 0) {
@@ -366,7 +366,7 @@ export default {
           }
       // _this.$network
       //   .post("/p/cs/getExpressAreaTree", {
-      //     objid: objid || this.$route.query.id,
+      //     objid: objid || this.$route.params.customizedModuleId,
       //   })
       //   .then((res) => {
       //     _this.isSaveLoading = false;
@@ -469,7 +469,7 @@ export default {
       const _this = this;
       _this.listArr = [];
       _this.tableLoading = true;
-      const param = { objid: _this.$route.query.id, treeLikeKey: e };
+      const param = { objid: _this.$route.params.customizedModuleId, treeLikeKey: e };
       const {data:{code,message,data}} = await this.service.strategyPlatform.getExpressAreaItemLikeTable(param)
       _this.tableLoading = false;
       if (code === 0) {
@@ -575,7 +575,7 @@ export default {
       });
       // 明细
       const params = {
-        objid: this.$route.query.id,
+        objid: this.$route.params.customizedModuleId,
         treeNode: treeList,
       }
       const {data:{code,data}} = await this.service.strategyPlatform.getExpressAreaItemTable(params)
@@ -648,7 +648,7 @@ export default {
         });
       });
       const param = {
-        objid: _this.$route.query.id,
+        objid: _this.$route.params.customizedModuleId,
         treeNode: treeList,
       };
       // 导出
