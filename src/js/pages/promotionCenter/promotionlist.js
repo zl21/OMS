@@ -1,4 +1,3 @@
-import axios from "axios";
 import businessLabel from 'professionalComponents/businessLabel';
 import errorMessage from "framework/components/tablelist/error.vue";
 import Mydialog from "framework/components/dialog/mydialog.vue";
@@ -227,7 +226,6 @@ export default {
       ],
       tabConfig:[{
         label:vmI18n.t("common.all"), // 全部
-        total:'0',
         agTableConfig:{
           isIndex: true,
           tableHeight: "450px",
@@ -261,7 +259,6 @@ export default {
         }
       },{
         label:vmI18n.t("btn.published"),// 已发布
-        total:'0',
         agTableConfig:{
           isIndex: true,
           tableHeight: "450px",
@@ -295,7 +292,6 @@ export default {
         }
       },{
         label:vmI18n.t("btn.draft"), // 草稿
-        total:'0',
         agTableConfig:{
           isIndex: true,
           tableHeight: "450px",
@@ -329,7 +325,6 @@ export default {
         }
       },{
         label:vmI18n.t("other.offline_expired"),// 下线/过期
-        total:'0',
         agTableConfig:{
           isIndex: true,
           tableHeight: "450px",
@@ -419,18 +414,27 @@ export default {
     TableInput,
   },
   created() {
-    this.times(); // 默认时间
+    
   },
   computed: {
     commodity() {
       return this.inputList[0].valuedata;
     }
   },
-  mounted() {
-    this.getPermissions();
-    this.getData();
+  async mounted() {
+    await this.times(); // 默认时间
+    await this.getPermissions();
+    await this.getData();
   },
   methods: {
+    // 处理时间
+    handleChange(dateArr){
+      let filterDate = []
+      dateArr.forEach(function (item) {
+        filterDate.push(item.replace(/\-/g, "")) 
+      });
+      this.acti_date = filterDate
+    },
     // 分页change 事件
     pageChange(val) {
       this.tabConfig[this.activeName].agTableConfig.pagenation.current = val;
@@ -463,6 +467,7 @@ export default {
       const currentPage = this.tabConfig[this.activeName].agTableConfig.pagenation.current;
       const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
       this.loadings = true;
+      console.log("1111",this.acti_date);
       const params = {
         ACTISTATUS: this.STATUS.join(",").replace("bSelect-all", 0), // 活动状态
         SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
@@ -484,77 +489,25 @@ export default {
       this.loadings = false;
       if (code === 0) {
         if (data && data.ACTI_ALL_INFO) {
-          console.log("全部");
-          this.setAgTableData(data.ACTI_ALL_INFO,data.ACTI_ALL_NUM,0)
-          // data.ACTI_ALL_INFO.forEach((item, index) => {
-          //   item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-          //   item.ACTION_LOG = vmI18n.t("other.view_log");//查看日志
-          // });
-          // this.tabConfig[0].agTableConfig.rowData = data.ACTI_ALL_INFO || [];
-          // this.tabConfig[0].agTableConfig.pagenation.total = data.ACTI_ALL_NUM;
-          // this.$refs.agGridChild1[0].agGridTable(
-          //   this.tabConfig[0].agTableConfig.columnDefs,
-          //   this.tabConfig[0].agTableConfig.rowData,
-          //   this.getExtendObj()
-          // );
+          // 全部
+          this.getAgTableData(data.ACTI_ALL_INFO,data.ACTI_ALL_NUM,0)
         }
-        // 1 已发布
         if (data && data.ACTI_RELEASE_INFO) {
-          console.log("已发布");
-          this.setAgTableData(data.ACTI_RELEASE_INFO,data.ACTI_RELEASE_NUM,1)
-          // data.ACTI_RELEASE_INFO.forEach((item, index) => {
-          //   item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-          //   item.ACTION_LOG = vmI18n.t("other.view_log");//查看日志
-          // });
-          // this.tabConfig[1].agTableConfig.rowData = data.ACTI_RELEASE_INFO || [];
-          // this.tabConfig[1].agTableConfig.pagenation.total = data.ACTI_RELEASE_NUM;
-
-          // this.$refs.agGridChild2[0].agGridTable(
-          //   this.tabConfig[1].agTableConfig.columnDefs,
-          //   this.tabConfig[1].agTableConfig.rowData,
-          //   this.getExtendObj()
-          // );
+          // 1 已发布
+          this.getAgTableData(data.ACTI_RELEASE_INFO,data.ACTI_RELEASE_NUM,1)
         }
-        // 2  草稿
         if (data && data.ACTI_DRAFT_INFO) {
-          console.log("草稿");
-          this.setAgTableData(data.ACTI_DRAFT_INFO,data.ACTI_DRAFT_NUM,2)
-          // data.ACTI_DRAFT_INFO.forEach((item, index) => {
-          //   item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-          //   // item.ACTION_LOG = "查看日志";
-          //   item.ACTION_LOG = vmI18n.t("other.view_log");
-          // });
-          // this.tabConfig[2].agTableConfig.rowData = data.ACTI_DRAFT_INFO || [];
-          // this.tabConfig[2].agTableConfig.pagenation.total = data.ACTI_DRAFT_NUM;
-
-          // this.$refs.agGridChild3[0].agGridTable(
-          //   this.tabConfig[2].agTableConfig.columnDefs,
-          //   this.tabConfig[2].agTableConfig.rowData,
-          //   this.getExtendObj()
-          // );
+          // 2  草稿
+          this.getAgTableData(data.ACTI_DRAFT_INFO,data.ACTI_DRAFT_NUM,2)
         }
-
-        //3 下线过期
         if (data && data.ACTI_OVER_INFO) {
-          console.log("下线过期");
-          this.setAgTableData(data.ACTI_OVER_INFO,data.ACTI_OVER_NUM,3)
-          // data.ACTI_OVER_INFO.forEach((item, index) => {
-          //   item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-          //   // item.ACTION_LOG = "查看日志";
-          //   item.ACTION_LOG = vmI18n.t("other.view_log");
-          // });
-          // this.tabConfig[3].agTableConfig.rowData = data.ACTI_OVER_INFO || [];
-          // this.tabConfig[3].agTableConfig.pagenation.total = data.ACTI_OVER_NUM;
-          // this.$refs.agGridChild4[0].agGridTable(
-          //   this.tabConfig[3].agTableConfig.columnDefs,
-          //   this.tabConfig[3].agTableConfig.rowData,
-          //   this.getExtendObj()
-          // );
+          //3 下线过期
+          this.getAgTableData(data.ACTI_OVER_INFO,data.ACTI_OVER_NUM,3)
         }
       }
     },
-    // agTable
-    setAgTableData(info,num,index){
+    // 获取agTable数据
+    getAgTableData(info,num,index){
       const currentPage = this.tabConfig[this.activeName].agTableConfig.pagenation.current;
       const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
       info.forEach((item, index) => {
@@ -564,7 +517,6 @@ export default {
       const agGridChild = `agGridChild${index+1}`
       this.tabConfig[index].agTableConfig.rowData = info || [];
       this.tabConfig[index].agTableConfig.pagenation.total = num;
-      
       this.$refs[`${agGridChild}`][0].agGridTable(
         this.tabConfig[index].agTableConfig.columnDefs,
         this.tabConfig[index].agTableConfig.rowData,
@@ -791,6 +743,7 @@ export default {
     }, // 发布
     async deleteActi() {
       const newIds = [];
+      const newList =[];
       const agGridChild = `agGridChild${this.activeName+1}`
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE
       if (agGridTable.getSelect().length) {
@@ -882,9 +835,9 @@ export default {
       if (code === 0) {
         _this.acti_date = [data.START_WEEK,data.END_WEEK];
       }
+      console.log( _this.acti_date," _this.acti_date");
     },
     Reset() {
-      // this.acti_date = "";
       this.acti_no = ""; // 活动编号
       this.times(); // 活动日期:
       this.acti_name = ""; // 活动名称

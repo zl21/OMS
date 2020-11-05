@@ -69,11 +69,11 @@
           </span>
           <div class="form-input">
             <DatePicker
-              v-model="acti_date"
-              format="yyyy-MM-dd"
-              value-format="yyyyMMdd"
-              type="daterange"
+              :value="acti_date"
               :placeholder="vmI18n.t('pHolder.a1')"
+              format="yyyy-MM-dd"
+              type="daterange"
+              @on-change="handleChange"
             >
             </DatePicker>
           </div>
@@ -173,7 +173,7 @@
         <TabPane
           v-for="(user, index) in tabConfig"
           :key="index"
-          :label="`${user.label} ${user.total}`"
+          :label="`${user.label} ${user.agTableConfig.pagenation.total}`"
           :name="`${index}`"
         >
           <!-- hasNation 是否自动计算序号 -->
@@ -262,5 +262,4 @@ export default promotionlist;
 </script>
 <style lang="less">
 @import "~@/css/pages/promotionCenter/promotionlist.less";
-
 </style>
