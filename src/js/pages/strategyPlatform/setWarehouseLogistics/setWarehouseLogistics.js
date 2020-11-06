@@ -191,7 +191,7 @@ export default {
                 type: 'S',
                 tableName: 'ST_C_WAREHOUSE_LOGISTICS',
                 tableId: 1111113,
-                label: "仓库物流优先级方案",
+                label: '仓库物流优先级方案',
               });
               // const _this = this;
               // _this.$store.commit('customize/TabHref', {
@@ -390,9 +390,10 @@ export default {
       fromData.append('param', JSON.stringify(param));
 
       // 保存
-      const { data: { oK, data } } = await this.service.strategyPlatform.saveWarehouseLogistics(fromData);
+      const res = await this.service.strategyPlatform.getWarehouseLogisticsTree(param);
+      const data = res.data.data;
       _this.isSaveLoading = false;
-      if (oK) {
+      if (res.data.code === 0) {
         _this.treeData = data.warehouseLogisticsTree;
         if (data.warehouseLogistics) {
           _this.information.formData[0].itemdata.pid = data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ID;
@@ -496,8 +497,9 @@ export default {
       const params = { objid: this.$route.params.customizedModuleId, treeNode: treeList };
       fromData.append('param', JSON.stringify(params));
       // 接口
-      const { data: { oK, data } } = await this.service.strategyPlatform.saveWarehouseLogistics(fromData);
-      if (oK) {
+      const res = await this.service.strategyPlatform.getLogisticsRankResultTable(fromData);
+      const data = res.data.data;
+      if (res.data.code === 0) {
         _this.cityThead = true;
         _this.listArr = data !== undefined ? data : [];
         _this.listArr.forEach(
@@ -537,13 +539,12 @@ export default {
           });
         });
       }
-      const fromData = new FormData();
       const params = { objid: this.$route.params.customizedModuleId, treeNode: treeList };
-      fromData.append('param', JSON.stringify(params));
       // 接口
-      const { data: { oK, data } } = await this.service.strategyPlatform.saveWarehouseLogistics(fromData);
-      console.log(oK, data);
-      if (oK) {
+      const res = await this.service.strategyPlatform.getLogisticsRankResultTable(params);
+      const data = res.data.data;
+      _this.tableLoading = false;
+      if (res.data.code === 0) {
         _this.cityThead = false;
         _this.listArr = data !== undefined ? data : [];
         _this.listArr.forEach(

@@ -5,7 +5,7 @@ const { network } = R3;
 export default {
   /**
    * 物流区域设置 新增
-   * */ 
+   * */
   // 保存修改
   expressAreaSaveCmd: params => network.post('/p/cs/expressAreaSaveCmd', params),
   // 作废
@@ -14,21 +14,21 @@ export default {
   getExpressAreaTree: params => network.post('/p/cs/getExpressAreaTree', params),
   // 省市区检索
   getExpressAreaItemLikeTable: params => network.post('/p/cs/getExpressAreaItemLikeTable', params),
-  // 明细 
+  // 明细
   getExpressAreaItemTable: params => network.post('/p/cs/getExpressAreaItemTable', params),
   // 导出
   exportExpressAreaItem: params => network.post('/p/cs/exportExpressAreaItem', params),
   /**
    * 仓库物流规则 新增
-   * */ 
+   * */
   saveWarehouseLogistics: params => network.post('/p/cs/saveWarehouseLogistics', params),
   // 获取treeData
-  getWarehouseLogisticsTree: params => network.post('p/cs/getWarehouseLogisticsTree', params),
+  getWarehouseLogisticsTree: params => network.post('/p/cs/getWarehouseLogisticsTree', params),
   // 省同步查询 /p/cs/getLogisticsRankResultTable
-  getLogisticsRankResultTable: params => network.post('p/cs/getLogisticsRankResultTable', params),
+  getLogisticsRankResultTable: params => network.post('/p/cs/getLogisticsRankResultTable', params),
   // 检索
-  getLogisticsLikeRankResultTable: params => network.post('getLogisticsLikeRankResultTable', params),
-  // 作废 
+  getLogisticsLikeRankResultTable: params => network.post('/p/cs/getLogisticsLikeRankResultTable', params),
+  // 作废
   voidWarehouseLogistics: params => network.post('/p/cs/voidWarehouseLogistics', params),
   // 导出
   exportWarehouseLogisticsRank: params => network.post('/p/cs/exportWarehouseLogisticsRank', params),
