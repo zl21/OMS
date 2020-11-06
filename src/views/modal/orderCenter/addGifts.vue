@@ -1,29 +1,32 @@
 <!--增加赠品-->
 <template>
   <div>
-    <EasyMatrix :componentData="matrixData"></EasyMatrix>
+    <EasyMatrix :component-data="matrixData" />
     <businessActionTable
-      :jordanTableConfig="tableConfig"
+      :jordan-table-config="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
       @on-select-all="onSelectAll"
       @on-select-all-cancel="onSelectAllCancel"
       @on-row-click="onRowClick"
       @on-row-dblclick="onRowDblclick"
-    ></businessActionTable>
-    <input v-focus id="focus" class="focusStyle" />
+    />
+    <input
+      id="focus"
+      v-focus
+      class="focusStyle"
+    >
     <div class="order-footer">
-      <businessButton :btnConfig="btnConfig"></businessButton>
+      <businessButton :btn-config="btnConfig" />
     </div>
   </div>
 </template>
 
 <script>
-  import addGifts from "@/js/modal/orderCenter/addGifts";
+  import addGifts from '@/js/modal/orderCenter/addGifts';
+
   export default addGifts;
 </script>
 <style lang="less" scoped>
   @import "~@/css/modal/orderCenter/addGifts.less";
 </style>
-
-

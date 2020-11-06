@@ -1,8 +1,14 @@
 <template>
-  <div class="public" style="width: 400px; padding-right: 20px">
-    <businessForm :formConfig="pulicdownLoadConfig">
+  <div
+    class="public"
+    style="width: 400px; padding-right: 20px"
+  >
+    <businessForm :form-config="pulicdownLoadConfig">
       <template #compile="{ rowData }">
-        <div class="import-box" @click="importBoxOpen(rowData.item)">
+        <div
+          class="import-box"
+          @click="importBoxOpen(rowData.item)"
+        >
           <!-- 导入 -->
           [{{ vmI18n.t("btn.import") }}]
         </div>
@@ -10,9 +16,14 @@
     </businessForm>
     <div class="dialog-footer">
       <!-- 确定 -->
-      <Button type="primary" @click="downloadPublicAll">{{
-        vmI18n.t("common.determine")
-      }}</Button>
+      <Button
+        type="primary"
+        @click="downloadPublicAll"
+      >
+        {{
+          vmI18n.t("common.determine")
+        }}
+      </Button>
       <Button
         type="error"
         ghost
@@ -21,13 +32,14 @@
             this.$emit('closeActionDialog');
           }
         "
-        >{{ vmI18n.t("common.cancel") }}</Button
       >
+        {{ vmI18n.t("common.cancel") }}
+      </Button>
     </div>
     <jordan-dialog
       ref="dialog"
       :title="dialogConfig.title"
-      :componentData="dialogConfig.componentData"
+      :component-data="dialogConfig.componentData"
       :name="dialogConfig.name"
       :url="dialogConfig.url"
       :width="dialogConfig.width"
@@ -36,7 +48,8 @@
 </template>
 
 <script>
-  import downLoadPublic from "@/js/modal/InterfacePlatform/downLoadPublic";
+  import downLoadPublic from '@/js/modal/InterfacePlatform/downLoadPublic';
+
   export default downLoadPublic;
 </script>
 

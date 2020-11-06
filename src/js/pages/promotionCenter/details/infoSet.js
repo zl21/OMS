@@ -1,13 +1,13 @@
-import tableCols from "@/assets/js/promotion/columns.js";
-import SingleBox from "@/views/pages/promotionCenter/components/singleBox.vue";
-import ButtonFkDialog from "@/views/pages/promotionCenter/components/buttonFkDialog.vue";
-import detailtable from "@/views/pages/promotionCenter/details/table.vue";
-import detailtabs from "@/views/pages/promotionCenter/details/tableTabs.vue";
-import CTSIT from "@/views/pages/promotionCenter/details/CTSIT";
+import tableCols from '@/assets/js/promotion/columns.js';
+import SingleBox from '@/views/pages/promotionCenter/components/singleBox.vue';
+import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDialog.vue';
+import detailtable from '@/views/pages/promotionCenter/details/table.vue';
+import detailtabs from '@/views/pages/promotionCenter/details/tableTabs.vue';
+import CTSIT from '@/views/pages/promotionCenter/details/CTSIT';
 
 // const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
 export default {
-  name: "InfoSet",
+  name: 'InfoSet',
   components: {
     detailtable,
     detailtabs,
@@ -28,14 +28,14 @@ export default {
     },
   },
   watch: {
-    "infoData.products_origin": {
+    'infoData.products_origin': {
       handler(val, old) {
         const self = this;
-        if (val === "1") {
+        if (val === '1') {
           this.columns = self.tableCols.infoColumns;
-        } else if (val === "2") {
+        } else if (val === '2') {
           this.columns = self.tableCols.infoColumns;
-        } else if (val === "3") {
+        } else if (val === '3') {
           this.columns = self.tableCols.infoColumnsxt;
         } else {
           this.columns = self.tableCols.infoColumnspt;
@@ -51,89 +51,89 @@ export default {
   data() {
     return {
       vmI18n: window.vmI18n,
-      temp_time_type: "",
+      temp_time_type: '',
       columns: tableCols.infoColumns,
       data: [], // 表格数据
       itemdata_xitong: {
         col: 1,
         colid:
-          this.$store.state.customize.forginkeys.columnIds.sku || "1700806532",
-        colname: "PS_C_PRO_ID",
-        datelimit: "all",
-        display: "text",
-        fkdesc: "系统商品SKU",
-        fkdisplay: "drp",
-        inputname: "PS_C_PRO_ID:ECODE",
+          this.$store.state.customize.forginkeys.columnIds.sku || '1700806532',
+        colname: 'PS_C_PRO_ID',
+        datelimit: 'all',
+        display: 'text',
+        fkdesc: '系统商品SKU',
+        fkdisplay: 'drp',
+        inputname: 'PS_C_PRO_ID:ECODE',
         isfk: true,
         isnotnull: false,
         isuppercase: true,
         length: 65535,
-        name: "",
+        name: '',
         readonly: false,
-        reftable: "PS_C_SKU",
+        reftable: 'PS_C_SKU',
         reftableid: 23281,
         row: 1,
         statsize: -1,
-        type: "STRING",
-        valuedata: "",
+        type: 'STRING',
+        valuedata: '',
         isOneData: true,
         isObject: true,
       },
       itemdata_channel: {
         col: 1,
         colid:
-          this.$store.state.customize.forginkeys.columnIds.plateform_sku ||
-          "1700806533",
-        colname: "SG_B_CHANNEL_PRODUCT_ID",
-        datelimit: "all",
-        display: "text",
-        fkdesc: "平台SKUID",
-        fkdisplay: "drp",
-        inputname: "SG_B_CHANNEL_PRODUCT_ID:ECODE",
+          this.$store.state.customize.forginkeys.columnIds.plateform_sku
+          || '1700806533',
+        colname: 'SG_B_CHANNEL_PRODUCT_ID',
+        datelimit: 'all',
+        display: 'text',
+        fkdesc: '平台SKUID',
+        fkdisplay: 'drp',
+        inputname: 'SG_B_CHANNEL_PRODUCT_ID:ECODE',
         isfk: true,
         isnotnull: false,
         isuppercase: true,
         length: 65535,
-        name: "",
+        name: '',
         readonly: false,
-        reftable: "SG_B_CHANNEL_PRODUCT",
+        reftable: 'SG_B_CHANNEL_PRODUCT',
         reftableid: 24801,
         row: 1,
         statsize: -1,
-        type: "STRING",
-        valuedata: "",
+        type: 'STRING',
+        valuedata: '',
         isOneData: true,
         isObject: true,
         refcolval: {
           // 该值为过滤功能的配置项
-          fixcolumn: "CP_C_SHOP_ID", // 该值为该选项的上级ID
-          expre: "equal", // 该值为过滤条件 equal为等于
-          srccol: "CP_C_SHOP_ID", // 改值为该选项的上级字段名
+          fixcolumn: 'CP_C_SHOP_ID', // 该值为该选项的上级ID
+          expre: 'equal', // 该值为过滤条件 equal为等于
+          srccol: 'CP_C_SHOP_ID', // 改值为该选项的上级字段名
         },
       },
       itemdata_xitong_pro: {
         // 系统商品款号
         col: 1,
         colid:
-          this.$store.state.customize.forginkeys.columnIds.pro || "1700806532",
-        colname: "PS_C_PRO_ID",
-        datelimit: "all",
-        display: "text",
-        fkdesc: "系统商品款号",
-        fkdisplay: "drp",
-        inputname: "PS_C_PRO_ID:ECODE",
+          this.$store.state.customize.forginkeys.columnIds.pro || '1700806532',
+        colname: 'PS_C_PRO_ID',
+        datelimit: 'all',
+        display: 'text',
+        fkdesc: '系统商品款号',
+        fkdisplay: 'drp',
+        inputname: 'PS_C_PRO_ID:ECODE',
         isfk: true,
         isnotnull: false,
         isuppercase: true,
         length: 65535,
-        name: "",
+        name: '',
         readonly: false,
-        reftable: "PS_C_PRO",
+        reftable: 'PS_C_PRO',
         reftableid: 23281,
         row: 1,
         statsize: -1,
-        type: "STRING",
-        valuedata: "",
+        type: 'STRING',
+        valuedata: '',
         isOneData: true,
         isObject: true,
       },
@@ -141,26 +141,26 @@ export default {
         // 平台商品ID
         col: 1,
         colid:
-          this.$store.state.customize.forginkeys.columnIds.plateform_pro ||
-          "1700806533",
-        colname: "IP_C_TAOBAO_PRODUCT_ID",
-        datelimit: "all",
-        display: "text",
-        fkdesc: "平台商品ID",
-        fkdisplay: "drp",
-        inputname: "IP_C_TAOBAO_PRODUCT_ID:ECODE",
+          this.$store.state.customize.forginkeys.columnIds.plateform_pro
+          || '1700806533',
+        colname: 'IP_C_TAOBAO_PRODUCT_ID',
+        datelimit: 'all',
+        display: 'text',
+        fkdesc: '平台商品ID',
+        fkdisplay: 'drp',
+        inputname: 'IP_C_TAOBAO_PRODUCT_ID:ECODE',
         isfk: true,
         isnotnull: false,
         isuppercase: true,
         length: 65535,
-        name: "",
+        name: '',
         readonly: false,
-        reftable: "IP_C_TAOBAO_PRODUCT",
+        reftable: 'IP_C_TAOBAO_PRODUCT',
         reftableid: 24801,
         row: 1,
         statsize: -1,
-        type: "STRING",
-        valuedata: "",
+        type: 'STRING',
+        valuedata: '',
         isOneData: true,
       },
       currentTab: 0, // 当前选中
@@ -170,29 +170,29 @@ export default {
         pageSize: 10,
       },
       productsArrsView: [],
-      currentView: "",
-      popDialog: "",
+      currentView: '',
+      popDialog: '',
       dialogModal: {},
       show_dialog: false,
       dialogSet: {
-        dialogTitle: "",
+        dialogTitle: '',
         footerHide: true,
         mask: true,
       },
-      moduleMode: "info",
+      moduleMode: 'info',
     };
   },
   computed: {
     itemdata() {
       const self = this;
       let rs;
-      if (this.infoData.products_origin === "1") {
+      if (this.infoData.products_origin === '1') {
         rs = this.itemdata_xitong;
         // this.columns = self.tableCols.infoColumns
-      } else if (this.infoData.products_origin === "2") {
+      } else if (this.infoData.products_origin === '2') {
         rs = this.itemdata_channel;
         // this.columns = self.tableCols.infoColumns
-      } else if (this.infoData.products_origin === "3") {
+      } else if (this.infoData.products_origin === '3') {
         rs = this.itemdata_xitong_pro;
         // this.columns = self.tableCols.infoColumnsxt
       } else {
@@ -200,7 +200,7 @@ export default {
         // this.columns = self.tableCols.infoColumnspt
       }
       const itemdata = JSON.parse(JSON.stringify(rs));
-      if (this.infoData.products_origin === "2") {
+      if (this.infoData.products_origin === '2') {
         itemdata.objList = [];
         const obj = this.basicData.stores.itemdata;
         itemdata.objList.push(obj);
@@ -210,18 +210,18 @@ export default {
     itemdataFk() {
       try {
         let rs;
-        if (this.infoData.products_origin === "1") {
+        if (this.infoData.products_origin === '1') {
           rs = this.itemdata_xitong;
-        } else if (this.infoData.products_origin === "2") {
+        } else if (this.infoData.products_origin === '2') {
           rs = this.itemdata_channel;
-        } else if (this.infoData.products_origin === "3") {
+        } else if (this.infoData.products_origin === '3') {
           rs = this.itemdata_xitong_pro;
         } else {
           rs = this.itemdata_channel_pro;
         }
         const itemdata = JSON.parse(JSON.stringify(rs));
         itemdata.isOneData = false;
-        itemdata.fkdisplay = "mop";
+        itemdata.fkdisplay = 'mop';
         itemdata.isObject = true;
         return itemdata;
       } catch (e) {}
@@ -234,17 +234,17 @@ export default {
     },
     productsJoin() {
       let options = this.groups.productsJoin || [];
-      if (this.basicData.gradient_gift === "1") {
+      if (this.basicData.gradient_gift === '1') {
         // 梯度赠送选择是
         options = this.groups.productsJoin.filter(
-          (item) => item.title === "非搭配商品" // 非搭配商品
+          item => item.title === '非搭配商品' // 非搭配商品
         );
-        this.infoData.products_join = "1";
+        this.infoData.products_join = '1';
       }
       return options;
     },
     showPdtsArr() {
-      const flag = this.infoData.products_join === "2";
+      const flag = this.infoData.products_join === '2';
       if (flag) {
         // 重置tab页面为第一页
         this.currentTab = 0;
@@ -264,8 +264,8 @@ export default {
       // 只显示满足条件规则
       // 全场 & 梯度否
       if (
-        this.basicData.activity_type === "PA" &&
-        this.basicData.gradient_gift === "0"
+        this.basicData.activity_type === 'PA'
+        && this.basicData.gradient_gift === '0'
       ) {
         this.infoData.rules.forEach((rule) => {
           rule.show = true;
@@ -273,14 +273,14 @@ export default {
         return true;
       }
       if (
-        this.basicData.activity_type === "GA" &&
-        this.basicData.gradient_gift === "0"
+        this.basicData.activity_type === 'GA'
+        && this.basicData.gradient_gift === '0'
       ) {
         this.infoData.rules.forEach((rule) => {
           rule.show = true;
-          if (rule.name === "QTTY") {
+          if (rule.name === 'QTTY') {
             rule.filterPdtWayShow = true;
-            if (!rule.filterPdtWay) rule.filterPdtWay = "2"; // 指定商品梯度为否  如果没有选择,默认为任意商品
+            if (!rule.filterPdtWay) rule.filterPdtWay = '2'; // 指定商品梯度为否  如果没有选择,默认为任意商品
           }
         });
         return false;
@@ -290,16 +290,16 @@ export default {
     includeOrExclude() {
       // 选择商品方式，非搭配商品全部展示  搭配商品需要去掉【排除以下商品】
       let options = this.groups.includeOrExclude || [];
-      if (this.infoData.products_join === "2") {
+      if (this.infoData.products_join === '2') {
         options = this.groups.includeOrExclude.filter(
-          (item) => item.title !== "排除以下商品" // 非搭配商品
+          item => item.title !== '排除以下商品' // 非搭配商品
         );
-        this.infoData.includeOrExclude = "1";
+        this.infoData.includeOrExclude = '1';
       }
       return options;
     },
     showRulesContent() {
-      if (this.basicData.gradient_gift === "0") return true;
+      if (this.basicData.gradient_gift === '0') return true;
       return false;
     },
   },
@@ -310,8 +310,8 @@ export default {
     checkProductJoinChange(val) {
       this.infoData.products_join = val;
       // 需要根据当前的情况修改选择商品方式
-      if (val === "2") {
-        this.infoData.includeorexclude = "1";
+      if (val === '2') {
+        this.infoData.includeorexclude = '1';
       }
       this.clearPdts();
     },
@@ -337,7 +337,7 @@ export default {
       // 非搭配--增加行
       const obj = {};
       this.columns.forEach((col) => {
-        obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : "";
+        obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : '';
       });
       // obj.itemdata = JSON.parse(JSON.stringify(this.itemdata));
       // if(rowObj){
@@ -346,8 +346,8 @@ export default {
       // }
       // obj.itemdata.colname = obj.itemdata.colname + Math.floor(Math.random()*1000000);
       if (rowObj) {
-        obj.ID = rowObj.ID || "";
-        obj.SKU_ID = rowObj.SKU_ID || "";
+        obj.ID = rowObj.ID || '';
+        obj.SKU_ID = rowObj.SKU_ID || '';
       }
       this.infoData.productslist.push(obj);
       this.countTablelistView();
@@ -376,15 +376,15 @@ export default {
       // 搭配-增加行数据
       const obj = {};
       this.columns.forEach((col) => {
-        obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : "";
+        obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : '';
       });
       // obj.itemdata = JSON.parse(JSON.stringify(this.itemdata));
       //  if(rowObj){
       //     obj.itemdata.valuedata  = rowObj.ECODE;
       // }
       if (rowObj) {
-        obj.ID = rowObj.ID || "";
-        obj.SKU_ID = rowObj.SKU_ID || "";
+        obj.ID = rowObj.ID || '';
+        obj.SKU_ID = rowObj.SKU_ID || '';
       }
       this.infoData.productsArrs[tabindex].productslist.push(obj);
       this.countOneTablelistView(tabindex);
@@ -406,16 +406,16 @@ export default {
       // 增加搭配
       const obj = {};
       this.columns.forEach((col) => {
-        obj[col.key] = "";
+        obj[col.key] = '';
       });
       const group = {
         group: this.getGroupIndex(),
         rules: [
           {
             show: false,
-            name: "QTTY", // 条件名称
-            type: "GE", // 条件类型：大于，等于
-            value: "", // 条件值
+            name: 'QTTY', // 条件名称
+            type: 'GE', // 条件类型：大于，等于
+            value: '', // 条件值
           },
         ],
         productslist: [...obj],
@@ -438,12 +438,12 @@ export default {
     },
     showRules(index, rule) {
       if (
-        this.basicData.activity_type === "PA" &&
-        this.basicData.gradient_gift === "0"
+        this.basicData.activity_type === 'PA'
+        && this.basicData.gradient_gift === '0'
       ) {
         return true;
       }
-      if (this.infoData.products_join === "2" && rule.name === "QTTY") {
+      if (this.infoData.products_join === '2' && rule.name === 'QTTY') {
         return false;
       }
       return true;
@@ -583,23 +583,23 @@ export default {
       const namelist = JSON.parse(rs.pid).nameList;
       namelist.forEach((obj) => {
         const row = {};
-        if (rs.reftable === "SG_B_CHANNEL_PRODUCT") {
-          row.ECODE = obj.PS_C_SKU_ECODE || "";
-          row.ENAME = obj.PS_C_PRO_ENAME || "";
-          row.SKU_ID = obj.SKU_ID || "";
+        if (rs.reftable === 'SG_B_CHANNEL_PRODUCT') {
+          row.ECODE = obj.PS_C_SKU_ECODE || '';
+          row.ENAME = obj.PS_C_PRO_ENAME || '';
+          row.SKU_ID = obj.SKU_ID || '';
           row.ID = obj.ID;
-        } else if (rs.reftable === "IP_C_TAOBAO_PRODUCT") {
-          row.ECODE = String(obj.NUM_IID) || "";
-          row.ENAME = obj.TITLE || "";
+        } else if (rs.reftable === 'IP_C_TAOBAO_PRODUCT') {
+          row.ECODE = String(obj.NUM_IID) || '';
+          row.ENAME = obj.TITLE || '';
           row.ID = obj.ID;
-        } else if (rs.reftable === "PS_C_PRO") {
-          row.ECODE = obj.ECODE || "";
-          row.ENAME = obj.ENAME || "";
-          row.ID = obj.ID || "";
+        } else if (rs.reftable === 'PS_C_PRO') {
+          row.ECODE = obj.ECODE || '';
+          row.ENAME = obj.ENAME || '';
+          row.ID = obj.ID || '';
         } else {
-          row.ECODE = obj.ECODE || "";
-          row.ENAME = obj.PS_C_PRO_ENAME || "";
-          row.ID = obj.ID || "";
+          row.ECODE = obj.ECODE || '';
+          row.ENAME = obj.PS_C_PRO_ENAME || '';
+          row.ID = obj.ID || '';
         }
         this.addRowData(row);
       });
@@ -609,22 +609,22 @@ export default {
       const namelist = JSON.parse(rs.pid).nameList;
       namelist.forEach((obj) => {
         const row = {};
-        if (rs.reftable === "SG_B_CHANNEL_PRODUCT") {
-          row.ECODE = obj.PS_C_SKU_ECODE || "";
-          row.ENAME = obj.PS_C_PRO_ENAME || "";
+        if (rs.reftable === 'SG_B_CHANNEL_PRODUCT') {
+          row.ECODE = obj.PS_C_SKU_ECODE || '';
+          row.ENAME = obj.PS_C_PRO_ENAME || '';
           row.ID = obj.SKU_ID;
-        } else if (rs.reftable === "IP_C_TAOBAO_PRODUCT") {
-          row.ECODE = obj.NUM_IID || "";
-          row.ENAME = obj.TITLE || "";
+        } else if (rs.reftable === 'IP_C_TAOBAO_PRODUCT') {
+          row.ECODE = obj.NUM_IID || '';
+          row.ENAME = obj.TITLE || '';
           row.ID = obj.ID;
-        } else if (rs.reftable === "PS_C_PRO") {
-          row.ECODE = obj.ECODE || "";
-          row.ENAME = obj.ENAME || "";
-          row.ID = obj.ID || "";
+        } else if (rs.reftable === 'PS_C_PRO') {
+          row.ECODE = obj.ECODE || '';
+          row.ENAME = obj.ENAME || '';
+          row.ID = obj.ID || '';
         } else {
-          row.ECODE = obj.ECODE || "";
-          row.ENAME = obj.ENAME || "";
-          row.ID = obj.ID || "";
+          row.ECODE = obj.ECODE || '';
+          row.ENAME = obj.ENAME || '';
+          row.ID = obj.ID || '';
         }
         this.addOneTableRowData(tabindex, row);
       });
@@ -647,7 +647,7 @@ export default {
         pageSize: 10,
         data: [],
       };
-      if (this.infoData.products_join === "1") {
+      if (this.infoData.products_join === '1') {
         this.productslistView = obj;
         this.tablelistView(this.infoData.productslist, this.productslistView);
       } else {
@@ -671,15 +671,15 @@ export default {
     importData() {
       const self = this;
       this.dialogModal = {};
-      this.dialogModal.tableName = this.itemdata.reftable || "PS_C_SKU";
+      this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
       this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
-      const _component = "popdialog";
+      const _component = 'popdialog';
       Vue.component(
         _component,
-        Vue.extend(_import("onlinePromotion/components/importDialog"))
+        Vue.extend(_import('onlinePromotion/components/importDialog'))
       );
       self.currentView = _component;
-      self.dialogSet.dialogTitle = "导入";
+      self.dialogSet.dialogTitle = '导入';
       self.show_dialog = true;
     },
     /**

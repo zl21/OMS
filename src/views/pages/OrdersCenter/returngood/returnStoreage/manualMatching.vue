@@ -3,7 +3,7 @@
   <div class="returnTreasury">
     <!--按钮块-->
     <div style="margin-top: 8px;">
-      <businessButton :btnConfig="btnConfig"></businessButton>
+      <businessButton :btn-config="btnConfig" />
     </div>
     <!-- form表单 -->
     <div class="TreasuryDefault">
@@ -11,7 +11,10 @@
         <Panel name="1">
           基本信息
           <p slot="content">
-            <businessForm @oneObjs="oneObjs" :formConfig="information"></businessForm>
+            <businessForm
+              :form-config="information"
+              @oneObjs="oneObjs"
+            />
           </p>
         </Panel>
       </Collapse>
@@ -20,48 +23,51 @@
       <!-- tab切换 -->
       <businessLabel
         class="businessLabel"
-        :labelList="labelList"
-        :labelDefaultValue="DefaultValue"
+        :label-list="labelList"
+        :label-default-value="DefaultValue"
         @labelClick="labelClick"
-      ></businessLabel>
+      />
       <!-- 列表组件 -->
       <div class="tableBox">
         <jordan-action-table
           v-if="labelDefaultValue"
-          :jordanTableConfig="jordanTableConfig"
+          :jordan-table-config="jordanTableConfig"
           @on-select="returnOnSelect"
           @on-select-cancel="returnCancel"
           @on-select-all="onSelectAll"
           @on-select-all-cancel="onSelectAllCancel"
-        ></jordan-action-table>
-        <OrderItem v-if="!labelDefaultValue" :componentData="tab2"></OrderItem>
+        />
+        <OrderItem
+          v-if="!labelDefaultValue"
+          :component-data="tab2"
+        />
       </div>
     </div>
     <div class="queryorder">
       <Modal
-        class="queryorder"
         v-model="order.modal"
+        class="queryorder"
         :title="'退换货订单明细'"
         @on-ok="queryorder"
         @on-cancel="querycancel"
       >
         <div class="orderContent">
-          <businessForm :formConfig="order.orderform"></businessForm>
-          <businessButton :btnConfig="order.btn"></businessButton>
+          <businessForm :form-config="order.orderform" />
+          <businessButton :btn-config="order.btn" />
         </div>
         <jordan-action-table
-          :jordanTableConfig="order.table"
+          :jordan-table-config="order.table"
           @on-select="onquerySelect"
           @on-select-cancel="onqueryCancel"
           @on-select-all="onqueryAll"
           @on-select-all-cancel="onqueryAllCancel"
-        ></jordan-action-table>
+        />
       </Modal>
     </div>
     <!-- 退单编号-->
     <jordanModal
       :title="returnNumber.confirmTitle"
-      :titleAlign="returnNumber.titleAlign"
+      :title-align="returnNumber.titleAlign"
       :width="returnNumber.width"
       :scrollable="returnNumber.scrollable"
       :closable="returnNumber.closable"
@@ -71,18 +77,22 @@
       :transfer="returnNumber.transfer"
       :name="returnNumber.name"
       :url="returnNumber.url"
-      :keepAlive="returnNumber.keepAlive"
-      :excludeString="returnNumber.excludeString"
-      :componentData="returnNumber.componentData"
-    ></jordanModal>
-    <div class="fromLoading" v-show="isSaveLoading">
-      <Spin></Spin>
+      :keep-alive="returnNumber.keepAlive"
+      :exclude-string="returnNumber.excludeString"
+      :component-data="returnNumber.componentData"
+    />
+    <div
+      v-show="isSaveLoading"
+      class="fromLoading"
+    >
+      <Spin />
     </div>
   </div>
 </template>
   
 <script>
-  import manualMatching from "@/js/pages/orderCenter/returngood/returnStoreage/manualMatching";
+  import manualMatching from '@/js/pages/orderCenter/returngood/returnStoreage/manualMatching';
+
   export default manualMatching;
 </script>
 

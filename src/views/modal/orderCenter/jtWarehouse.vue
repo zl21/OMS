@@ -1,12 +1,13 @@
 <template>
   <div style="width: 400px; padding-right: 20px">
-    <businessForm :formConfig="warehouseManagementFromConfig"></businessForm>
-    <jordanBtn :btnConfig="warehouseManagementBtnConfig"></jordanBtn>
+    <businessForm :form-config="warehouseManagementFromConfig" />
+    <jordanBtn :btn-config="warehouseManagementBtnConfig" />
   </div>
 </template>
 
 <script>
-  import jtWarehouse from "@/js/modal/orderCenter/jtWarehouse";
+  import jtWarehouse from '@/js/modal/orderCenter/jtWarehouse';
+
   export default jtWarehouse;
 </script>
 

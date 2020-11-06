@@ -1,10 +1,10 @@
-import axios from "axios";
-import businessForm from "professionalComponents/businessForm";
-import jordanBtn from "professionalComponents/businessButton";
-import businessActionTable from "professionalComponents/businessActionTable.vue";
-import R3 from "@syman/burgeon-r3";
+import axios from 'axios';
+import businessForm from 'professionalComponents/businessForm';
+import jordanBtn from 'professionalComponents/businessButton';
+import businessActionTable from 'professionalComponents/businessActionTable.vue';
+import R3 from '@syman/burgeon-r3';
 
-const {getModuleName} = R3;
+const { getModuleName } = R3;
 export default {
   components: {
     businessForm,
@@ -13,9 +13,7 @@ export default {
   },
   props: {},
   computed: {
-    idArr: () => {
-      return vm.$store.state[getModuleName()].buttons.selectIdArr;
-    },
+    idArr: () => vm.$store.state[getModuleName()].buttons.selectIdArr,
     rowData: () => {
       console.log(this);
       return vm.$store.state[getModuleName()].buttons.selectArr;
@@ -27,61 +25,61 @@ export default {
       totalRowCount: 0,
       pageSize: 10,
       pageNum: 1,
-      dataEmptyMessage: "数据加载中...", // 无数据的提示
-      columns: ["ename"], // 展现的组
+      dataEmptyMessage: '数据加载中...', // 无数据的提示
+      columns: ['ename'], // 展现的组
       AutoData: [],
       foreignKeyLink: {},
       //
-      pid: "",
+      pid: '',
       btnConfig: {
-        typeAll: "error", //按钮统一风格样式
-        btnsite: "right", //按钮位置 (right , center , left)
+        typeAll: 'error', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            type: "", //按钮类型
+            type: '', // 按钮类型
             // text: "确定", //按钮文本
-            text: vmI18n.t("common.determine"), //按钮文本
-            icon: "", //按钮图标
-            size: "small", //按钮大小
-            disabled: false, //按钮禁用控制
+            text: vmI18n.t('common.determine'), // 按钮文本
+            icon: '', // 按钮图标
+            size: 'small', // 按钮大小
+            disabled: false, // 按钮禁用控制
             btnclick: () => {
-              let self = this;
+              const self = this;
               if (!self.pid) {
                 // self.$Message.warning("请选择仓库");
-                self.$Message.warning(vmI18n.t("modalTips.zi"));
+                self.$Message.warning(vmI18n.t('modalTips.zi'));
                 return false;
               }
-              let param = {
+              const param = {
                 ids: self.idArr[0],
                 warehouseId: self.pid,
               };
-              let fromdata = new FormData();
-              fromdata.append("param", JSON.stringify(param));
+              const fromdata = new FormData();
+              fromdata.append('param', JSON.stringify(param));
               axios({
-                url: "/api/cs/vip/distribution/v1/updateBeforeWarehouse",
-                method: "post",
+                url: '/api/cs/vip/distribution/v1/updateBeforeWarehouse',
+                method: 'post',
                 data: fromdata,
-              }).then(function (res) {
+              }).then((res) => {
                 if (res.data.code === 0) {
                   self.$Message.success(res.data.message);
-                  self.$emit("confirmImport");
+                  self.$emit('confirmImport');
                 } else {
                   self.$Message.warning(res.data.message);
                 }
                 self.closeActionDialog();
               });
-            }, //按钮点击事件
+            }, // 按钮点击事件
           },
           {
-            type: "", //按钮类型
+            type: '', // 按钮类型
             // text: "取消", //按钮文本
-            text: vmI18n.t("common.cancel"), //按钮文本
-            icon: "", //按钮图标
-            size: "small", //按钮大小
-            disabled: false, //按钮禁用控制
+            text: vmI18n.t('common.cancel'), // 按钮文本
+            icon: '', // 按钮图标
+            size: 'small', // 按钮大小
+            disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.closeActionDialog();
-            }, //按钮点击事件
+            }, // 按钮点击事件
           },
         ],
       },
@@ -93,20 +91,20 @@ export default {
   },
   methods: {
     async getListData() {
-      let self = this;
-      let fromdata = new FormData();
-      let rowData = self.rowData;
-      let checkId = self.idArr[0];
-      let shopId = "";
+      const self = this;
+      const fromdata = new FormData();
+      const rowData = self.rowData;
+      const checkId = self.idArr[0];
+      let shopId = '';
       rowData.map((item) => {
-        let rowId = item.ID.val;
+        const rowId = item.ID.val;
         if (rowId === checkId) {
           shopId = item.CP_C_SHOP_ID.refobjid;
         }
       });
-      fromdata.append("shopId", shopId);
-      fromdata.append("pageNum", self.pageNum);
-      fromdata.append("pageSize", self.pageSize);
+      fromdata.append('shopId', shopId);
+      fromdata.append('pageNum', self.pageNum);
+      fromdata.append('pageSize', self.pageSize);
       const res = await this.service.common.getWarehouseLogisticsTree(fromdata);
       res.data.data.forEach((element) => {
         element.ecode = {
@@ -123,20 +121,20 @@ export default {
         start: 0,
         tabth: [
           {
-            colname: "ID",
-            name: "ID",
+            colname: 'ID',
+            name: 'ID',
             show: false,
           },
           {
-            colname: "ename",
+            colname: 'ename',
             // name: "发货仓库名称",
-            name: vmI18n.t("table_label.deliveryWarehouse_nam"),
+            name: vmI18n.t('table_label.deliveryWarehouse_nam'),
             show: true,
           },
           {
-            colname: "ecode",
+            colname: 'ecode',
             // name: "发货仓库编码",
-            name: vmI18n.t("table_label.deliveryWarehouse_code"),
+            name: vmI18n.t('table_label.deliveryWarehouse_code'),
             show: false,
           },
         ],
@@ -152,7 +150,7 @@ export default {
       this.pid = val[0].ID;
     },
     closeActionDialog() {
-      this.$emit("closeActionDialog");
+      this.$emit('closeActionDialog');
     },
   },
 };

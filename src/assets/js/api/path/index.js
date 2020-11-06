@@ -1,7 +1,7 @@
-import order from './order'
-import publicPath from './publicPath'
+import order from './order';
+import publicPath from './publicPath';
 
 export default {
   order,
   public: publicPath
-}
+};

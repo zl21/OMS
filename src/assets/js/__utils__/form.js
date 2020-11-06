@@ -6,9 +6,9 @@ import {
 const form = {
   // 表单操作
   refactoringData(defaultFormItemsLists) {
-    let list = [];
-    defaultFormItemsLists.forEach(ele => {
-      let obj = {};
+    const list = [];
+    defaultFormItemsLists.forEach((ele) => {
+      const obj = {};
       obj.row = ele.row ? ele.row : 1;
       obj.col = ele.col ? ele.col : 1;
       obj.item = {
@@ -25,15 +25,15 @@ const form = {
 
       // 带有combobox的添加到options属性中
       if (ele.combobox) {
-        let arr = [];
-        ele.combobox.forEach(item => {
+        const arr = [];
+        ele.combobox.forEach((item) => {
           arr.push({
             label: item.limitdesc,
             value: item.limitval
           });
         });
         obj.item.props.options = arr;
-      };
+      }
 
       // 外键的单选多选判断
       if (ele.display === 'OBJ_FK') {
@@ -118,39 +118,37 @@ const form = {
             });
           },
           'on-input-value-change': (value, $this) => {
-            //下拉多选模糊搜索事件
+            // 下拉多选模糊搜索事件
             console.log(value, $this);
-            let params = {
+            const params = {
               ak: '北京市',
               colid: '1700823465',
               fixedcolumns: {}
-            }
+            };
             // fkFuzzyquerybyak(params)
           },
           'on-fkrp-selected': (value) => {
-            //下拉单选选中事件
+            // 下拉单选选中事件
             console.log(value);
             obj.item.value = value[0].ID;
           },
           'on-clear': () => {
-            obj.item.value = undefined
+            obj.item.value = undefined;
           }
-        }
+        };
       } else if (ele.display == 'OBJ_SELECT') {
         obj.item.event = {
           'on-change': (value) => {
             obj.item.value = value;
           },
           'on-clear': () => {
-            obj.item.value = undefined
+            obj.item.value = undefined;
           }
-        }
+        };
       }
       list.push(obj);
     });
     return list;
-
-
   },
   checkDisplay(item) {
     if (!item.display || item.display === 'text') {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import businessButton from 'professionalComponents/businessButton';
 import DateUtil from '@/assets/js/__utils__/date';
-import {getLodop} from 'professionalComponents/common/js/LodopFuncs';
+import { getLodop } from 'professionalComponents/common/js/LodopFuncs';
 
 export default {
   components: {
@@ -37,13 +37,13 @@ export default {
         loading: false, // 按钮组件是否有loading样式,值为true false
         buttons: [
           {
-            text: vmI18n.t("common.cancel"), // 取消 按钮文本
+            text: vmI18n.t('common.cancel'), // 取消 按钮文本
             btnclick: () => {
               this.$emit('closeActionDialog', false);
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t("other.confirmPrinting"), // 确定打印 按钮文本
+            text: vmI18n.t('other.confirmPrinting'), // 确定打印 按钮文本
             disabled: false,
             btnclick: () => {
               this.print();
@@ -58,41 +58,41 @@ export default {
           data: {
             recipient: {
               address: {
-                city: vmI18n.t("other.hzCity"),//杭州市
-                detail: vmI18n.t("other.addressDetails0"),//良睦路999号乐佳国际大厦2号楼小邮局
-                district: vmI18n.t("other.yhErea"),//余杭区
-                province: vmI18n.t("other.zjProvince"),//浙江省
+                city: vmI18n.t('other.hzCity'), // 杭州市
+                detail: vmI18n.t('other.addressDetails0'), // 良睦路999号乐佳国际大厦2号楼小邮局
+                district: vmI18n.t('other.yhErea'), // 余杭区
+                province: vmI18n.t('other.zjProvince'), // 浙江省
                 town: '',
               },
-              mobile: vmI18n.t("other.mobile0"),//13012345678
-              name: vmI18n.t("other.name"),//乾宝贝最可爱
-              phone: vmI18n.t("other.phone0"),//057112345678
+              mobile: vmI18n.t('other.mobile0'), // 13012345678
+              name: vmI18n.t('other.name'), // 乾宝贝最可爱
+              phone: vmI18n.t('other.phone0'), // 057112345678
             },
             routingInfo: {
               consolidation: {
-                name: vmI18n.t("common.address.placeName0"),//杭州
+                name: vmI18n.t('common.address.placeName0'), // 杭州
                 code: 'hangzhou',
               },
               origin: {
-                name: vmI18n.t("common.address.placeName0"),//杭州
+                name: vmI18n.t('common.address.placeName0'), // 杭州
                 code: 'POSTB',
               },
               sortation: {
-                name: vmI18n.t("common.address.placeName0"),//杭州
+                name: vmI18n.t('common.address.placeName0'), // 杭州
               },
               routeCode: '123A-456-789',
             },
             sender: {
               address: {
-                city: vmI18n.t("common.address.city1"),//杭州市
-                detail: vmI18n.t("common.address.addressDetails1"),//文一西路1001号阿里巴巴淘宝城5号小邮局
-                district: vmI18n.t("common.address.erea1"),//余杭区
-                province: vmI18n.t("common.address.province1"),//浙江省
+                city: vmI18n.t('common.address.city1'), // 杭州市
+                detail: vmI18n.t('common.address.addressDetails1'), // 文一西路1001号阿里巴巴淘宝城5号小邮局
+                district: vmI18n.t('common.address.erea1'), // 余杭区
+                province: vmI18n.t('common.address.province1'), // 浙江省
                 town: '',
               },
-              mobile: vmI18n.t("common.address.mobile1"),//13012345678
-              name: vmI18n.t("common.address.name"),//阿里巴巴
-              phone: vmI18n.t("common.address.phone1"),//057112345678
+              mobile: vmI18n.t('common.address.mobile1'), // 13012345678
+              name: vmI18n.t('common.address.name'), // 阿里巴巴
+              phone: vmI18n.t('common.address.phone1'), // 057112345678
             },
             shippingOption: {
               code: 'COD',
@@ -155,7 +155,7 @@ export default {
   },
   methods: {
     async print() {
-      const res = await this.service.common.SgOutNoticePrint({ids: this.idArray});
+      const res = await this.service.common.SgOutNoticePrint({ ids: this.idArray });
       const self = this;
       console.log(res);
       if (res.data.code === 0) {
@@ -703,8 +703,8 @@ export default {
       const self = this;
       this.btnConfig.buttons[1].disabled = true;
       this.$Modal.info({
-        title: this.vmI18n.t("other.printing"),//打印
-        content: this.vmI18n.t("modalTips.ca"),//正在打印中，请稍后。。。
+        title: this.vmI18n.t('other.printing'), // 打印
+        content: this.vmI18n.t('modalTips.ca'), // 正在打印中，请稍后。。。
         mask: true,
         onOk: () => {
           self.$emit('confirmView');

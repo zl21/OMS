@@ -1,5 +1,5 @@
-import axios from "axios";
-import reForm from "professionalComponents/businessForm";
+import axios from 'axios';
+import reForm from 'professionalComponents/businessForm';
 
 export default {
   components: {
@@ -8,39 +8,39 @@ export default {
   data() {
     return {
       vmI18n: window.vmI18n,
-      pro: "",
-      replace_pro: "",
-      radioValue: "2",
+      pro: '',
+      replace_pro: '',
+      radioValue: '2',
       formConfig: {
         formValue: {
-          searchValue: "",
-          psCProEcode: "",
+          searchValue: '',
+          psCProEcode: '',
         },
         formData: [
           {
-            label: "商品SKU",
-            style: "dimSearch",
-            width: "12",
-            value: "searchValue",
-            columns: ["ECODE"],
-            AuotData: [], //匹配的选项
+            label: '商品SKU',
+            style: 'dimSearch',
+            width: '12',
+            value: 'searchValue',
+            columns: ['ECODE'],
+            AuotData: [], // 匹配的选项
             dimChange: async (val) => {
-              //模糊查询的方法
-              let _this = this;
+              // 模糊查询的方法
+              const _this = this;
               _this.formConfig.formValue.searchValue = val.trim();
-              let query = {
-                isBlur: "Y", //N为精确匹配
+              const query = {
+                isBlur: 'Y', // N为精确匹配
                 psCSku: {
                   ECODE: val.trim(),
                 },
               };
               const res = await _this.service.common.skuQuery(query);
               if (res.status === 200) {
-                let data = res.data.data.data;
-                let dimList = _this.formConfig.formData;
+                const data = res.data.data.data;
+                const dimList = _this.formConfig.formData;
                 let arr;
                 data.map((item) => {
-                  //删除不需要展示的模糊搜索项
+                  // 删除不需要展示的模糊搜索项
                   delete item.GBCODE;
                   delete item.IS_GIFT;
                   delete item.IS_GROUP;
@@ -54,53 +54,53 @@ export default {
                   delete item.skuId;
                 });
                 dimList.map((item) => {
-                  if (item.label === "商品SKU") {
+                  if (item.label === '商品SKU') {
                     item.AuotData = data;
-                    //调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
+                    // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
                   }
                 });
               }
             },
             dimEnter: () => {
-              this.search("one");
+              this.search('one');
             },
             dimSelect: (val) => {
               this.formConfig.formValue.searchValue = val.label;
             },
           },
           {
-            label: "商品款号",
-            style: "dimSearch",
-            width: "12",
-            value: "psCProEcode",
-            columns: ["ECODE"],
-            AuotData: [], //匹配的选项
+            label: '商品款号',
+            style: 'dimSearch',
+            width: '12',
+            value: 'psCProEcode',
+            columns: ['ECODE'],
+            AuotData: [], // 匹配的选项
             dimChange: async (val) => {
-              //模糊查询的方法
-              let _this = this;
+              // 模糊查询的方法
+              const _this = this;
               _this.formConfig.psCProEcode = val.trim();
-              let fromdata = new FormData();
-              let params = {
+              const fromdata = new FormData();
+              const params = {
                 GLOBAL: val.trim(),
                 PAGENUM: 1,
                 PAGESIZE: 10,
                 CONDITION: {},
-                TABLENAME: "PS_C_PRO",
+                TABLENAME: 'PS_C_PRO',
               };
-              fromdata.append("param", JSON.stringify(params));
+              fromdata.append('param', JSON.stringify(params));
               const res = await this.service.common.screenresult(fromdata);
               if (res.data.code === 0) {
-                let dimList = _this.formConfig.formData;
+                const dimList = _this.formConfig.formData;
 
                 dimList.map((item) => {
-                  if (item.label === "商品款号") {
+                  if (item.label === '商品款号') {
                     item.AuotData = res.data.data.list;
                   }
                 });
               }
             },
             dimEnter: () => {
-              this.search("one");
+              this.search('one');
             },
             dimSelect: (val) => {
               this.formConfig.formValue.psCProEcode = val.label;
@@ -111,34 +111,34 @@ export default {
       },
       replaceFormConfig: {
         formValue: {
-          searchValue: "",
-          psCProEcode: "",
+          searchValue: '',
+          psCProEcode: '',
         },
         formData: [
           {
-            label: "商品SKU",
-            style: "dimSearch",
-            width: "12",
-            value: "searchValue",
-            columns: ["ECODE"],
-            AuotData: [], //匹配的选项
+            label: '商品SKU',
+            style: 'dimSearch',
+            width: '12',
+            value: 'searchValue',
+            columns: ['ECODE'],
+            AuotData: [], // 匹配的选项
             dimChange: async (val) => {
-              //模糊查询的方法
-              let _this = this;
+              // 模糊查询的方法
+              const _this = this;
               _this.replaceFormConfig.formValue.searchValue = val.trim();
               const query = {
-                isBlur: "Y", //N为精确匹配
+                isBlur: 'Y', // N为精确匹配
                 psCSku: {
                   ECODE: val.trim(),
                 },
               };
               const res = await this.service.common.skuQuery(query);
               if (res.status === 200) {
-                let data = res.data.data.data;
-                let dimList = _this.replaceFormConfig.formData;
+                const data = res.data.data.data;
+                const dimList = _this.replaceFormConfig.formData;
                 let arr;
                 data.map((item) => {
-                  //删除不需要展示的模糊搜索项
+                  // 删除不需要展示的模糊搜索项
                   delete item.GBCODE;
                   delete item.IS_GIFT;
                   delete item.IS_GROUP;
@@ -152,53 +152,53 @@ export default {
                   delete item.skuId;
                 });
                 dimList.map((item) => {
-                  if (item.label === "商品SKU") {
+                  if (item.label === '商品SKU') {
                     item.AuotData = data;
-                    //调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
+                    // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
                   }
                 });
               }
             },
             dimEnter: () => {
-              this.search("two");
+              this.search('two');
             },
             dimSelect: (val) => {
               this.replaceFormConfig.formValue.searchValue = val.label;
             },
           },
           {
-            label: "商品款号",
-            style: "dimSearch",
-            width: "12",
-            value: "psCProEcode",
-            columns: ["ECODE"],
-            AuotData: [], //匹配的选项
+            label: '商品款号',
+            style: 'dimSearch',
+            width: '12',
+            value: 'psCProEcode',
+            columns: ['ECODE'],
+            AuotData: [], // 匹配的选项
             dimChange: async (val) => {
-              //模糊查询的方法
-              let _this = this;
+              // 模糊查询的方法
+              const _this = this;
               _this.replaceFormConfig.psCProEcode = val.trim();
-              let fromdata = new FormData();
-              let params = {
+              const fromdata = new FormData();
+              const params = {
                 GLOBAL: val.trim(),
                 PAGENUM: 1,
                 PAGESIZE: 10,
                 CONDITION: {},
-                TABLENAME: "PS_C_PRO",
+                TABLENAME: 'PS_C_PRO',
               };
-              fromdata.append("param", JSON.stringify(params));
+              fromdata.append('param', JSON.stringify(params));
               const res = await this.service.common.screenresult(fromdata);
               if (res.data.code === 0) {
-                let dimList = _this.replaceFormConfig.formData;
+                const dimList = _this.replaceFormConfig.formData;
 
                 dimList.map((item) => {
-                  if (item.label === "商品款号") {
+                  if (item.label === '商品款号') {
                     item.AuotData = res.data.data.list;
                   }
                 });
               }
             },
             dimEnter: () => {
-              this.search("two");
+              this.search('two');
             },
             dimSelect: (val) => {
               this.replaceFormConfig.formValue.psCProEcode = val.label;
@@ -209,35 +209,35 @@ export default {
       },
       // searchValue: "",
       // proEcode: "",
-      proName: "",
+      proName: '',
       // replace_searchValue: "",
       // replace_proEcode: "",
-      replace_proName: "",
+      replace_proName: '',
       replaceTableLoad: false,
       tableLoad: false,
       columns: [
         {
           // title: "商品SKU",
-          title: vmI18n.t("table_label.commoditySKU"),
-          key: "ECODE",
+          title: vmI18n.t('table_label.commoditySKU'),
+          key: 'ECODE',
         },
         {
           // title: "商品名称",
-          title: vmI18n.t("table_label.productName"),
-          key: "PS_C_PRO_ENAME",
+          title: vmI18n.t('table_label.productName'),
+          key: 'PS_C_PRO_ENAME',
         },
         {
           // title: "商品SKU名称",
-          title: vmI18n.t("table_label.productSKUname"),
-          key: "SPEC",
+          title: vmI18n.t('table_label.productSKUname'),
+          key: 'SPEC',
         },
       ],
       data: [],
       replace_data: [],
       onRowClickReplaceData: {},
       onRowClickData: {},
-      onRowClickText: "",
-      onRowClickReplaceText: "",
+      onRowClickText: '',
+      onRowClickReplaceText: '',
     };
   },
   props: {
@@ -253,24 +253,24 @@ export default {
       console.log(value);
     },
     async search(value) {
-      //sku查询
-      let self = this;
+      // sku查询
+      const self = this;
       // console.log(value) "two"
-      let loadName = value === "one" ? "tableLoad" : "replaceTableLoad";
+      const loadName = value === 'one' ? 'tableLoad' : 'replaceTableLoad';
       this[loadName] = true;
-      let query = {
-        isBlur: "N",
+      const query = {
+        isBlur: 'N',
         psCSku: {
           ECODE:
-            value == "one"
+            value == 'one'
               ? self.formConfig.formValue.searchValue.trim()
               : self.replaceFormConfig.formValue.searchValue.trim(),
           psCProEcode:
-            value == "one"
+            value == 'one'
               ? self.formConfig.formValue.psCProEcode.trim()
               : self.replaceFormConfig.formValue.psCProEcode.trim(),
           psCProEname:
-            value == "one"
+            value == 'one'
               ? self.proName.trim()
               : self.replace_proName.trim(),
         },
@@ -279,9 +279,9 @@ export default {
         const res = await _this.service.common.skuQuery(query);
         if (res.data.code == 0) {
           res.data.data.data.map((item) => {
-            item.IS_GIFT == "0" ? "否" : "是";
+            item.IS_GIFT == '0' ? '否' : '是';
           });
-          if (value == "one") {
+          if (value == 'one') {
             self.data = res.data.data.data;
             self.onRowClickData = self.data[0];
             self.onRowClickText = self.data[0].ECODE;
@@ -292,7 +292,7 @@ export default {
           }
         } else {
           // this.$Message.warning("sku查询失败!");
-          this.$Message.warning(vmI18n.t("modalTips.zt"));
+          this.$Message.warning(vmI18n.t('modalTips.zt'));
         }
         this[loadName] = false;
       } catch (e) {
@@ -300,25 +300,25 @@ export default {
       }
     },
     confirm() {
-      let self = this;
-      if (JSON.stringify(self.onRowClickData) == "{}") {
+      const self = this;
+      if (JSON.stringify(self.onRowClickData) == '{}') {
         // self.$Message.warning("替换前商品sku不能为空!");
-        self.$Message.warning(vmI18n.t("modalTips.yf"));
+        self.$Message.warning(vmI18n.t('modalTips.yf'));
         return;
       }
-      if (JSON.stringify(self.onRowClickReplaceData) == "{}") {
+      if (JSON.stringify(self.onRowClickReplaceData) == '{}') {
         // self.$Message.warning("替换后商品sku码不能为空!");
-        self.$Message.warning(vmI18n.t("modalTips.yg"));
+        self.$Message.warning(vmI18n.t('modalTips.yg'));
         return;
       }
       if (self.onRowClickData.ECODE == self.onRowClickReplaceData.ECODE) {
         // self.$Message.warning("替换商品与被替换商品不能相同!");
-        self.$Message.warning(vmI18n.t("modalTips.yh"));
+        self.$Message.warning(vmI18n.t('modalTips.yh'));
         return;
       }
-      let result = {};
-      let needParam = {
-        IS_GIFT: self.onRowClickReplaceData.IS_GIFT == "是" ? "0" : "1",
+      const result = {};
+      const needParam = {
+        IS_GIFT: self.onRowClickReplaceData.IS_GIFT == '是' ? '0' : '1',
         PS_C_PRO_ECODE: self.onRowClickReplaceData.PS_C_PRO_ECODE,
         PS_C_PRO_ENAME: self.onRowClickReplaceData.PS_C_PRO_ENAME,
         PRICELIST: self.onRowClickReplaceData.PRICELIST,
@@ -328,17 +328,17 @@ export default {
       };
       if (self.componentData.a_2.length == 0) {
         // self.$Message.warning("请勾选订单数据!");
-        self.$Message.warning(vmI18n.t("modalTips.zu"));
+        self.$Message.warning(vmI18n.t('modalTips.zu'));
         return;
       }
       result.ids = self.componentData.a_2;
-      result["changeGoodsSku"] = self.onRowClickData.ECODE;
-      result["sku_code"] = needParam.SKU_ECODE;
-      result["type"] = 1;
+      result.changeGoodsSku = self.onRowClickData.ECODE;
+      result.sku_code = needParam.SKU_ECODE;
+      result.type = 1;
       console.log(this.componentData.a_1, result);
       axios({
-        url: "/api/cs/oc/oms/v1/bathChangeGoods",
-        method: "post",
+        url: '/api/cs/oc/oms/v1/bathChangeGoods',
+        method: 'post',
         data: result,
       }).then((res) => {
         console.log(res);
@@ -349,20 +349,18 @@ export default {
           self.$Modal.confirm({
             title: res.data.message,
             width: 500,
-            render: (h) => {
-              return h("Table", {
-                props: {
-                  columns: [
-                    {
-                      // title: "提示信息",
-                      title: vmI18n.t("modalTitle.tips"),
-                      key: "message",
-                    },
-                  ],
-                  data: res.data.data,
-                },
-              });
-            },
+            render: h => h('Table', {
+              props: {
+                columns: [
+                  {
+                    // title: "提示信息",
+                    title: vmI18n.t('modalTitle.tips'),
+                    key: 'message',
+                  },
+                ],
+                data: res.data.data,
+              },
+            }),
           });
         }
       });

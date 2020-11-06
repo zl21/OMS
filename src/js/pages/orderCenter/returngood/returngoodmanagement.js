@@ -718,7 +718,7 @@ export default {
             {
               key: 'PRICE',
               title: vmI18n.t('form_label.tagPrice'), // 吊牌价
-              dataAcessKey: 'RESERVE_DECIMAL01'
+              dataAcessKey: 'PRICE_LIST'
             },
             {
               key: 'amt_refund_single',
@@ -731,13 +731,13 @@ export default {
               title: vmI18n.t('panel_label.returnAmount'), // 退货金额
             },
             {
-              key: 'RESERVE_DECIMAL02',
-              dataAcessKey: 'RESERVE_DECIMAL02',
+              key: 'PRICE_SETTLE',
+              dataAcessKey: 'PRICE_SETTLE',
               title: vmI18n.t('table_label.unitPriceSettlement')// 结算单价
             },
             {
-              key: 'RESERVE_DECIMAL03',
-              dataAcessKey: 'RESERVE_DECIMAL03',
+              key: 'AMT_SETTLE_TOT',
+              dataAcessKey: 'AMT_SETTLE_TOT',
               title: vmI18n.t('form_label.settlementAmount')// 结算金额
             },
             {
@@ -1284,11 +1284,11 @@ export default {
               newItem.PS_C_SIZE_ENAME = queryList[i].PS_C_SIZE_ENAME;
               newItem.PS_C_PRO_ENAME = queryList[i].PS_C_PRO_ENAME;
               newItem.QTY_CAN_REFUND = queryList[i].QTY;
-              newItem.QTY_REFUND = queryList[i].QTY - queryList[i].RESERVE_DECIMAL01;
+              newItem.QTY_REFUND = queryList[i].QTY - queryList[i].PRICE_LIST;
               newItem.QTY_EXCHANGE = queryList[i].QTY;
               newItem.SEX_NAME = queryList[i].SEX_NAME;
               newItem.SEX = queryList[i].SEX;
-              newItem.PRICE = queryList[i].RESERVE_DECIMAL02;
+              newItem.PRICE = queryList[i].PRICE_SETTLE;
               newItem.amt_refund_single = queryList[i].PRICE_ACTUAL;
               newItem.AMT_REFUND = publicMethodsUtil
                 .accMul(queryList[i].QTY, queryList[i].PRICE_ACTUAL)
@@ -1299,8 +1299,8 @@ export default {
               await _this.getDataByProinfo(queryList[i].PS_C_PRO_ECODE, 1);
               newItem.clrList = _this.clrListArr;
               newItem.sizeList = _this.sizeListArr;
-              newItem.RESERVE_DECIMAL02 = queryList[i].PRICE_SETTLE; // 结算单价
-              newItem.RESERVE_DECIMAL03 = queryList[i].TOT_PRICE_SETTLE; // 结算金额
+              newItem.PRICE_SETTLE = queryList[i].PRICE_SETTLE; // 结算单价
+              newItem.AMT_SETTLE_TOT = queryList[i].TOT_PRICE_SETTLE; // 结算金额
               newQueryList.push(newItem);
             }
             _this.jordanTableConfig.data = newQueryList;
@@ -1365,7 +1365,7 @@ export default {
                   : '次品';
                 res.data.data.refundDtoList[i].amt_refund_single = res.data.data.refundDtoList[i].AMT_REFUND_SINGLE;
                 res.data.data.refundDtoList[i].SEX_NAME = res.data.data.refundDtoList[i].SEX_ENAME;
-                res.data.data.refundDtoList[i].PRICE = res.data.data.refundDtoList[i].RESERVE_DECIMAL01;
+                res.data.data.refundDtoList[i].PRICE = res.data.data.refundDtoList[i].PRICE_LIST;
                 const proEcode = res.data.data.refundDtoList[i].PS_C_PRO_ECODE;
                 await _this.getDataByProinfo(proEcode, 1);
                 res.data.data.refundDtoList[i].clrList = _this.clrListArr;
@@ -1374,7 +1374,7 @@ export default {
               for (let i = 0; i < res.data.data.exchangeDtoList.length; i++) {
                 const item = res.data.data.exchangeDtoList[i];
                 item.SEX_NAME = item.SEX_ENAME;
-                item.PRICE = item.RESERVE_DECIMAL01;
+                item.PRICE = item.PRICE_LIST;
                 const proEcode = item.PS_C_PRO_ECODE;
                 await _this.getDataByProinfo(proEcode, 1);
                 item.clrList = _this.clrListArr;
@@ -1602,7 +1602,7 @@ export default {
                 : '次品';
               res.data.data.refundDtoList[i].amt_refund_single = res.data.data.refundDtoList[i].AMT_REFUND_SINGLE;
               res.data.data.refundDtoList[i].SEX_NAME = res.data.data.refundDtoList[i].SEX_ENAME;
-              res.data.data.refundDtoList[i].PRICE = res.data.data.refundDtoList[i].RESERVE_DECIMAL01;
+              res.data.data.refundDtoList[i].PRICE = res.data.data.refundDtoList[i].PRICE_LIST;
               const proEcode = res.data.data.refundDtoList[i].PS_C_PRO_ECODE;
               await _this.getDataByProinfo(proEcode, 1);
               res.data.data.refundDtoList[i].clrList = _this.clrListArr;
@@ -1611,7 +1611,7 @@ export default {
             for (let i = 0; i < res.data.data.exchangeDtoList.length; i++) {
               const item = res.data.data.exchangeDtoList[i];
               item.SEX_NAME = item.SEX_ENAME;
-              item.PRICE = item.RESERVE_DECIMAL01;
+              item.PRICE = item.PRICE_LIST;
               const proEcode = item.PS_C_PRO_ECODE;
               await _this.getDataByProinfo(proEcode, 1);
               item.clrList = _this.clrListArr;
@@ -1726,15 +1726,15 @@ export default {
       item.ORIG_ORDER_ID = data.ORIG_ORDER_ID ? data.ORIG_ORDER_ID : '';
       item.ID = data.ID;
       item.TB_DISPUTE_ID = data.TB_DISPUTE_ID;
-      if (data.RESERVE_BIGINT07 == 0) item.RESERVE_BIGINT07_type = '无次品调拨';
-      else if (data.RESERVE_BIGINT07 == 2) { item.RESERVE_BIGINT07_type = '次品已调拨'; } else if (data.RESERVE_BIGINT07 == 1) {
+      if (data.STATUS_DEFECTIVE_TRANS == 0) item.RESERVE_BIGINT07_type = '无次品调拨';
+      else if (data.STATUS_DEFECTIVE_TRANS == 2) { item.RESERVE_BIGINT07_type = '次品已调拨'; } else if (data.STATUS_DEFECTIVE_TRANS == 1) {
         item.RESERVE_BIGINT07_type = '次品未调拨';
         this.btnConfig.buttons.forEach((item) => {
           if (item.text == '标记次品已调拨') item.disabled = false;
         });
       }
       // item.RESERVE_BIGINT07_type = data.RESERVE_BIGINT07_type;
-      item.SELLER_MEMO = data.RESERVE_VARCHAR02;
+      item.SELLER_MEMO = data.BACK_MESSAGE;
       item.BILL_TYPE = String(data.BILL_TYPE) ? String(data.BILL_TYPE) : '';
       item.BUYER_NICK = data.BUYER_NICK ? data.BUYER_NICK : '';
       item.CP_C_LOGISTICS_ENAME = data.CP_C_LOGISTICS_ENAME
@@ -1912,9 +1912,9 @@ export default {
         this.jordanTableConfig.data = this.refundDtoList.data;
         this.jordanTableConfig.columns = [
           {
-            key: 'RESERVE_VARCHAR01',
+            key: 'WMS_BILL_NO',
             title: _this.vmI18n.t('form_label.platformRefundNo'), // 平台退款单号
-            dataAcessKey: 'RESERVE_VARCHAR01',
+            dataAcessKey: 'WMS_BILL_NO',
             render: (h, params) => {
               const _this = this;
               if (_this.returnIdEditFlag) {
@@ -1938,18 +1938,18 @@ export default {
                         'text-align': 'center'
                       },
                       props: {
-                        value: params.row.RESERVE_VARCHAR01,
+                        value: params.row.WMS_BILL_NO,
                         autosize: true
                       },
                       on: {
                         'on-change': (e) => {
-                          params.row.RESERVE_VARCHAR01 = e.target.value;
+                          params.row.WMS_BILL_NO = e.target.value;
                           _this.refundDtoList.data[params.index] = params.row;
                           _this.returnSelectData.forEach((item) => {
                             if (
                               item.PS_C_SKU_ECODE === params.row.PS_C_SKU_ECODE
                             ) {
-                              item.RESERVE_VARCHAR01 = params.row.RESERVE_VARCHAR01;
+                              item.WMS_BILL_NO = params.row.WMS_BILL_NO;
                             }
                           });
                           // if (_this.returnSelectData.length > 0) {
@@ -1989,11 +1989,11 @@ export default {
                         height: '100%'
                       },
                       props: {
-                        value: params.row.RESERVE_VARCHAR01,
+                        value: params.row.WMS_BILL_NO,
                         autosize: true
                       }
                     },
-                    params.row.RESERVE_VARCHAR01
+                    params.row.WMS_BILL_NO
                   )
                 ]
               );
@@ -2395,11 +2395,11 @@ export default {
                             );
                           }
                           // 计算结算金额
-                          params.row.RESERVE_DECIMAL03 = publicMethodsUtil.accMul(
+                          params.row.AMT_SETTLE_TOT = publicMethodsUtil.accMul(
                             e.target.value,
-                            params.row.RESERVE_DECIMAL02 === null
+                            params.row.PRICE_SETTLE === null
                               ? 0
-                              : params.row.RESERVE_DECIMAL02
+                              : params.row.PRICE_SETTLE
                           );
                           params.row.QTY_REFUND = e.target.value;
                           _this.refundDtoList.data[params.index] = params.row;
@@ -2411,7 +2411,7 @@ export default {
                               item.AMT_REFUND = params.row.AMT_REFUND;
                               item.QTY_REFUND = params.row.QTY_REFUND;
                               item.QTY_EXCHANGE = params.row.QTY_REFUND;
-                              item.RESERVE_DECIMAL03 = params.row.RESERVE_DECIMAL03;
+                              item.AMT_SETTLE_TOT = params.row.AMT_SETTLE_TOT;
                             }
                           });
                           if (_this.returnSelectData.length > 0) {
@@ -2494,7 +2494,7 @@ export default {
           {
             key: 'PRICE',
             title: _this.vmI18n.t('form_label.tagPrice'), // 吊牌价
-            dataAcessKey: 'RESERVE_DECIMAL01'
+            dataAcessKey: 'PRICE_LIST'
           },
           {
             key: 'amt_refund_single',
@@ -2507,13 +2507,13 @@ export default {
             title: _this.vmI18n.t('panel_label.returnAmount'), // 退货金额
           },
           {
-            key: 'RESERVE_DECIMAL02',
-            dataAcessKey: 'RESERVE_DECIMAL02',
+            key: 'PRICE_SETTLE',
+            dataAcessKey: 'PRICE_SETTLE',
             title: _this.vmI18n.t('table_label.unitPriceSettlement')// 结算单价
           },
           {
-            key: 'RESERVE_DECIMAL03',
-            dataAcessKey: 'RESERVE_DECIMAL03',
+            key: 'AMT_SETTLE_TOT',
+            dataAcessKey: 'AMT_SETTLE_TOT',
             title: _this.vmI18n.t('form_label.settlementAmount')// 结算金额
           },
           {
@@ -3002,7 +3002,7 @@ export default {
           },
           {
             key: 'PRICE',
-            dataAcessKey: 'RESERVE_DECIMAL01',
+            dataAcessKey: 'PRICE_LIST',
             title: _this.vmI18n.t('form_label.tagPrice'), // 吊牌价
           },
           {
@@ -3350,9 +3350,9 @@ export default {
       } else {
         _this.information.formValue.IS_RESERVED = 0;
       }
-      if (_this.RESERVE_BIGINT07_type == '无次品调拨') _this.information.formValue.RESERVE_BIGINT07 = 0;
-      else if (_this.RESERVE_BIGINT07_type == '次品已调拨') _this.information.formValue.RESERVE_BIGINT07 = 2;
-      else if (_this.RESERVE_BIGINT07_type == '次品未调拨') _this.information.formValue.RESERVE_BIGINT07 = 1;
+      if (_this.RESERVE_BIGINT07_type == '无次品调拨') _this.information.formValue.STATUS_DEFECTIVE_TRANS = 0;
+      else if (_this.RESERVE_BIGINT07_type == '次品已调拨') _this.information.formValue.STATUS_DEFECTIVE_TRANS = 2;
+      else if (_this.RESERVE_BIGINT07_type == '次品未调拨') _this.information.formValue.STATUS_DEFECTIVE_TRANS = 1;
       const Rlist = [];
       let total = 0;
       let item = [];
@@ -3381,7 +3381,7 @@ export default {
           ps_c_pro_ename: item[i].PS_C_PRO_ENAME,
           qty_can_refund: parseInt(item[i].QTY_CAN_REFUND),
           qty_refund: parseInt(item[i].QTY_REFUND),
-          reserve_decimal01: item[i].PRICE,
+          PRICE_LIST: item[i].PRICE,
           price: item[i].PRICE,
           sex: item[i].SEX,
           amt_refund: item[i].AMT_REFUND,
@@ -3396,9 +3396,9 @@ export default {
           amt_adjust:
             parseInt(item[i].AMT_REFUND)
             - parseInt(item[i].PRICE) * parseInt(item[i].QTY_REFUND), // 总调整金额
-          RESERVE_DECIMAL02: item[i].RESERVE_DECIMAL02,
-          RESERVE_DECIMAL03: item[i].RESERVE_DECIMAL03,
-          RESERVE_VARCHAR01: item[i].RESERVE_VARCHAR01
+          PRICE_SETTLE: item[i].PRICE_SETTLE,
+          AMT_SETTLE_TOT: item[i].AMT_SETTLE_TOT,
+          WMS_BILL_NO: item[i].WMS_BILL_NO
         });
         total += parseInt(item[i].QTY_REFUND); // 商品数量
       }
@@ -3421,7 +3421,7 @@ export default {
           ps_c_size_ecode: Eitem[i].PS_C_SIZE_ECODE,
           ps_c_size_ename: Eitem[i].PS_C_SIZE_ENAME,
           ps_c_pro_ename: Eitem[i].PS_C_PRO_ENAME,
-          reserve_decimal01: Eitem[i].PRICE,
+          PRICE_LIST: Eitem[i].PRICE,
           price: Eitem[i].PRICE,
           sex: Eitem[i].SEX,
           amt_refund: Eitem[i].AMT_REFUND,
@@ -3444,7 +3444,7 @@ export default {
         // CP_C_PHY_WAREHOUSE_ID: _this.warehouseId,
         TID: _this.tId,
         QTY_INSTORE: total,
-        RESERVE_VARCHAR02: _this.information.formValue.SELLER_MEMO
+        BACK_MESSAGE: _this.information.formValue.SELLER_MEMO
       };
       const params = {
         objid: _this.$route.query.id,
@@ -4367,11 +4367,11 @@ export default {
           queryListItem.PS_C_SIZE_ENAME = selection.sizes;
           queryListItem.PS_C_PRO_ENAME = selection.proEname;
           queryListItem.QTY_CAN_REFUND = selection.qty;
-          queryListItem.QTY_REFUND = selection.qty - selection.RESERVE_DECIMAL01;
+          queryListItem.QTY_REFUND = selection.qty - selection.PRICE_LIST;
           queryListItem.QTY_EXCHANGE = selection.qty;
           queryListItem.SEX_NAME = selection.sexName;
           queryListItem.SEX = selection.sex;
-          queryListItem.PRICE = selection.RESERVE_DECIMAL02;
+          queryListItem.PRICE = selection.PRICE_SETTLE;
           queryListItem.SKU_SPEC = selection.skuSpec; // 原单带出的规格
           queryListItem.AMT_REFUND = publicMethodsUtil
             .accMul(selection.qty, selection.amtRefundSingle)
@@ -4381,8 +4381,8 @@ export default {
           queryListItem.PRODUCT_MARK = '正品';
           queryListItem.amtRefundSingle = selection.amtRefundSingle;
           queryListItem.amt_refund_single = selection.amtRefundSingle;
-          queryListItem.RESERVE_DECIMAL02 = selection.priceSettle;
-          queryListItem.RESERVE_DECIMAL03 = selection.totPriceSettle;
+          queryListItem.PRICE_SETTLE = selection.priceSettle;
+          queryListItem.AMT_SETTLE_TOT = selection.totPriceSettle;
           await _this.getDataByProinfo(selection.ecode, 1);
           queryListItem.clrList = _this.clrListArr;
           queryListItem.sizeList = _this.sizeListArr;

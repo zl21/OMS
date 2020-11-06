@@ -14,7 +14,7 @@
       </div>-->
       <div style="display: flex">
         <div class="skuBox">
-          <re-form :formConfig="formConfig" />
+          <re-form :form-config="formConfig" />
           <!-- SKU编码:
           <Input
             v-model="searchValue"
@@ -36,7 +36,10 @@
         </div> -->
 
         <div class="search-button">
-          <Button type="primary" @click="search">
+          <Button
+            type="primary"
+            @click="search"
+          >
             <!-- 搜索 -->
             {{ vmI18n.t("btn.search") }}
           </Button>
@@ -48,12 +51,16 @@
         :columns="columns"
         :data="data"
         :loading="tableLoad"
-        @on-row-click="onRowClick"
         :highlight-row="true"
-      ></Table>
+        @on-row-click="onRowClick"
+      />
     </div>
     <div class="dialog-footer">
-      <Button style="marginleft: 8px" type="primary" @click="confirm">
+      <Button
+        style="marginleft: 8px"
+        type="primary"
+        @click="confirm"
+      >
         <!-- 确定 -->
         {{ vmI18n.t("common.determine") }}
       </Button>
@@ -72,7 +79,8 @@
 </template>
 
 <script>
-  import itemDelete from "@/js/modal/orderCenter/itemDelete";
+  import itemDelete from '@/js/modal/orderCenter/itemDelete';
+
   export default itemDelete;
 </script>
 <style lang="less">

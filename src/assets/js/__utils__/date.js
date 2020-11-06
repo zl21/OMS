@@ -2,48 +2,49 @@ import strUtil from './util.js';
 
 class dateFuns {
   constructor() { }
+
   standardTimeConversiondateToStr(val) {
-    let dateTime = new Date(val);
-    let year = dateTime.getFullYear();
-    let month = dateTime.getMonth() + 1; //js从0开始取
+    const dateTime = new Date(val);
+    const year = dateTime.getFullYear();
+    let month = dateTime.getMonth() + 1; // js从0开始取
     let date = dateTime.getDate();
     let hour = dateTime.getHours();
     let minutes = dateTime.getMinutes();
     let second = dateTime.getSeconds();
     if (month < 10) {
-      month = "0" + month;
+      month = `0${month}`;
     }
     if (date < 10) {
-      date = "0" + date;
+      date = `0${date}`;
     }
     if (hour < 10) {
-      hour = "0" + hour;
+      hour = `0${hour}`;
     }
     if (minutes < 10) {
-      minutes = "0" + minutes;
+      minutes = `0${minutes}`;
     }
     if (second < 10) {
-      second = "0" + second;
+      second = `0${second}`;
     }
     return (
-      year +
-      "-" +
-      month +
-      "-" +
-      date +
-      " " +
-      hour +
-      ":" +
-      minutes +
-      ":" +
-      second
+      `${year 
+      }-${ 
+        month 
+      }-${ 
+        date 
+      } ${ 
+        hour 
+      }:${ 
+        minutes 
+      }:${ 
+        second}`
     );
-  };
+  }
+
   // 针对日期组件：数据标准时间转成 yyyy-mm-dd hh:mm:ss
   standardTimeConversion(val) {
-    var d = new Date(val);
-    var datetime =
-      d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " ";
+    const d = new Date(val);
+    const datetime = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()} `;
     return datetime;
   }
 
@@ -56,56 +57,53 @@ class dateFuns {
    */
   getFormatDate(date, fmt) {
     if (/(y+)/.test(fmt)) {
-      fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+      fmt = fmt.replace(RegExp.$1, (`${date.getFullYear()}`).substr(4 - RegExp.$1.length));
     }
-    let o = {
+    const o = {
       'M+': date.getMonth() + 1,
       'd+': date.getDate(),
       'H+': date.getHours(),
       'm+': date.getMinutes(),
       's+': date.getSeconds()
     };
-    for (let k in o) {
+    for (const k in o) {
       if (new RegExp(`(${k})`).test(fmt)) {
-        let str = o[k] + '';
-        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? str : ('00' + str).substr(str.length));
+        const str = `${o[k]}`;
+        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? str : (`00${str}`).substr(str.length));
       }
     }
     return fmt;
-  };
+  }
 
-  compareDate(date1,date2)
-  {
-    let d1 = new Date(date1);
-    let d2 = new Date(date2);
+  compareDate(date1, date2) {
+    const d1 = new Date(date1);
+    const d2 = new Date(date2);
     if (d1.getTime() > d2.getTime()) {
       return true;
-    } else {
-      return false;
-    }
+    } 
+    return false;
   }
 }
 export default new dateFuns();
 
 
-
-/**日期原型扩展
+/** 日期原型扩展
  * 日期格式转化函数
  */
 Date.prototype.Format = function (fmt) {
-  let o = {
-    'M+': this.getMonth() + 1, //月份
-    'd+': this.getDate(), //日
-    'h+': this.getHours(), //小时
-    'm+': this.getMinutes(), //分
-    's+': this.getSeconds(), //秒
-    'q+': Math.floor((this.getMonth() + 3) / 3), //季度
-    S: this.getMilliseconds() //毫秒
+  const o = {
+    'M+': this.getMonth() + 1, // 月份
+    'd+': this.getDate(), // 日
+    'h+': this.getHours(), // 小时
+    'm+': this.getMinutes(), // 分
+    's+': this.getSeconds(), // 秒
+    'q+': Math.floor((this.getMonth() + 3) / 3), // 季度
+    S: this.getMilliseconds() // 毫秒
   };
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(RegExp.$1, `${this.getFullYear()}`.substr(4 - RegExp.$1.length));
   }
-  for (let k in o) {
+  for (const k in o) {
     if (new RegExp(`(${k})`).test(fmt)) {
       fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : `00${o[k]}`.substr(`${o[k]}`.length));
     }
@@ -123,22 +121,22 @@ Date.prototype.Format = function (fmt) {
 Date.prototype.dateAdd = function (dt, num, unit) {
   dt = this.convert(dt);
   switch (unit) {
-  case 'S':
-    return new Date(dt.getTime() + num);
-  case 's':
-    return new Date(dt.getTime() + num * 1000);
-  case 'm':
-    return new Date(dt.getTime() + num * 60000);
-  case 'h':
-    return new Date(dt.getTime() + num * 3600000);
-  case 'd':
-    return new Date(dt.getTime() + num * 86400000);
-  case 'M':
-    return new Date(dt.getFullYear(), dt.getMonth() + num, dt.getDate(), dt.getHours(), dt.getSeconds(), dt.getMilliseconds());
-  case 'y':
-    return new Date(dt.getFullYear() + num, dt.getMonth(), dt.getDate(), dt.getHours(), dt.getSeconds(), dt.getMilliseconds());
-  default:
-    return dt;
+    case 'S':
+      return new Date(dt.getTime() + num);
+    case 's':
+      return new Date(dt.getTime() + num * 1000);
+    case 'm':
+      return new Date(dt.getTime() + num * 60000);
+    case 'h':
+      return new Date(dt.getTime() + num * 3600000);
+    case 'd':
+      return new Date(dt.getTime() + num * 86400000);
+    case 'M':
+      return new Date(dt.getFullYear(), dt.getMonth() + num, dt.getDate(), dt.getHours(), dt.getSeconds(), dt.getMilliseconds());
+    case 'y':
+      return new Date(dt.getFullYear() + num, dt.getMonth(), dt.getDate(), dt.getHours(), dt.getSeconds(), dt.getMilliseconds());
+    default:
+      return dt;
   }
 };
 
@@ -199,19 +197,17 @@ Date.prototype.addDays = function (dt, days) {
 Date.prototype.convert = function (maybe) {
   if (this.isDate(maybe)) {
     return maybe;
-  } else if (strUtil.IsString(maybe) && Number.isNaN(maybe)) {
+  } if (strUtil.IsString(maybe) && Number.isNaN(maybe)) {
     maybe = maybe.replace(/-/g, '/');
-    let values = maybe.match(/(\d+)+/g);
+    const values = maybe.match(/(\d+)+/g);
     return new Date(values[0], parseInt(values[1]) - 1, values[2] || '', values[3] || '', values[4] || '', values[5] || '', values[6] || '');
-  } else if (strUtil.IsString(maybe)) {
+  } if (strUtil.IsString(maybe)) {
     maybe = `${maybe.slice(0, 4)}-${maybe.slice(4, 6)}-${maybe.slice(6, 8)}`;
     maybe = maybe.replace(/-/g, '/');
-    let values = maybe.match(/(\d+)+/g);
+    const values = maybe.match(/(\d+)+/g);
     return new Date(values[0], parseInt(values[1]) - 1, values[2] || '', values[3] || '', values[4] || '', values[5] || '', values[6] || '');
-
-  } else {
-    return new Date(Number(maybe));
-  }
+  } 
+  return new Date(Number(maybe));
 };
 
 /**

@@ -2,18 +2,18 @@
   <div class="jordanModal">
     <businessActionTable
       class="jordan-action-table"
-      :jordanTableConfig="jordanTableConfig"
+      :jordan-table-config="jordanTableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
       @on-page-change="pageChange"
       @on-page-size-change="pageSizeChange"
       @on-select-all="onSelectAll"
       @on-select-all-cancel="onSelectAllCancel"
-    ></businessActionTable>
+    />
     <!-- 公共弹框 -->
     <jordanModal
       :title="publicBouncedConfig.confirmTitle"
-      :titleAlign="publicBouncedConfig.titleAlign"
+      :title-align="publicBouncedConfig.titleAlign"
       :width="publicBouncedConfig.width"
       :scrollable="publicBouncedConfig.scrollable"
       :closable="publicBouncedConfig.closable"
@@ -23,16 +23,17 @@
       :transfer="publicBouncedConfig.transfer"
       :name="publicBouncedConfig.name"
       :url="publicBouncedConfig.url"
-      :keepAlive="publicBouncedConfig.keepAlive"
-      :batchClosed="publicBouncedConfig.batchClosed"
-      :excludeString="publicBouncedConfig.excludeString"
-      :componentData="publicBouncedConfig.componentData"
+      :keep-alive="publicBouncedConfig.keepAlive"
+      :batch-closed="publicBouncedConfig.batchClosed"
+      :exclude-string="publicBouncedConfig.excludeString"
+      :component-data="publicBouncedConfig.componentData"
       :quit="publicBouncedConfig.quit"
-    ></jordanModal>
+    />
   </div>
 </template>
 <script>
-  import goodsDetail from "@/js/modal/orderCenter/goodsDetail";
+  import goodsDetail from '@/js/modal/orderCenter/goodsDetail';
+
   export default goodsDetail;
 </script>
 

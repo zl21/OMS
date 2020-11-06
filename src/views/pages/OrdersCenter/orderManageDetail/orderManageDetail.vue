@@ -4,7 +4,10 @@ author:wdq
 feature : 订单中心-零售发货单详情
 -->
 <template>
-  <div v-loading="pageLoad" class="order">
+  <div
+    v-loading="pageLoad"
+    class="order"
+  >
     <div class="order-btn">
       <businessButton
         :btn-config="btnConfig"
@@ -18,7 +21,10 @@ feature : 订单中心-零售发货单详情
         @labelClick="labelClick"
       />
     </div>
-    <div v-if="refresh" class="order-content">
+    <div
+      v-if="refresh"
+      class="order-content"
+    >
       <EssentialInfo
         v-show="labelDefaultValue === 'OC_B_ORDER'"
         :component-data="tab1"
@@ -30,17 +36,24 @@ feature : 订单中心-零售发货单详情
       />
     </div>
     <!--单据状态图片展示 -->
-    <businessStatusFlag :status-name="statusName" class="statusFlag" />
+    <businessStatusFlag
+      :status-name="statusName"
+      class="statusFlag"
+    />
     <!--错误弹框-->
-    <Modal v-model="modal" title="Title" @on-ok="asyncOK">
+    <Modal
+      v-model="modal"
+      title="Title"
+      @on-ok="asyncOK"
+    >
       <p>error_tip</p>
     </Modal>
 
     <businessDialog
+      v-for="(list, index) in dialogs"
       :key="index"
       :ref="list.name"
       :component-data="list.data"
-      v-for="(list, index) in dialogs"
       :confirm="list.confirm"
       :exclude-string="list.excludeString"
       :footer-hide="list.footerHide"
@@ -75,8 +88,9 @@ feature : 订单中心-零售发货单详情
 </template>
 
 <script>
-import orderManageDetail from "@/js/pages/orderCenter/orderManageDetail/orderManageDetail";
-export default orderManageDetail;
+  import orderManageDetail from '@/js/pages/orderCenter/orderManageDetail/orderManageDetail';
+
+  export default orderManageDetail;
 </script>
 <style lang="less" scoped>
   @import "~@/css/pages/orderCenter/orderManageDetail/orderManageDetail.less";

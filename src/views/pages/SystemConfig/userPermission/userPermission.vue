@@ -4,38 +4,50 @@
     <div class="ff-user-tree">
       <div class="title_sec">
         <input
-          type="text"
           v-model="search"
-          @keyup.enter="searchNode"
+          type="text"
           :placeholder="vmI18n.t('pHolder.organizationCode_or_name')"
+          @keyup.enter="searchNode"
+        >
+        <i
+          class="iconfont icon-sousuo"
+          @click="handleIconClick"
         />
-        <i class="iconfont icon-sousuo" @click="handleIconClick"></i>
       </div>
       <div class="ff-user-tree-box">
         <tree
-          v-on:getItemData="getItemData"
           :list="list"
           :search="search"
           class="ff-box-user-true"
-        ></tree>
+          @getItemData="getItemData"
+        />
       </div>
     </div>
-    <div class="middleware" v-loading="dataLoading">
+    <div
+      v-loading="dataLoading"
+      class="middleware"
+    >
       <div class="title_sec">
         <input
+          v-model="middleSearch"
           type="text"
           :placeholder="vmI18n.t('pHolder.userName')"
-          v-model="middleSearch"
           @keyup.enter="searchMiddleData"
+        >
+        <i
+          class="iconfont icon-sousuo"
+          @click="handleMiddleIconClick"
         />
-        <i class="iconfont icon-sousuo" @click="handleMiddleIconClick"></i>
       </div>
       <div class="middleware_body">
         <div class="middleware_table_hidden">
           <table class="table_first">
             <thead>
               <tr>
-                <td :key="index" v-for="(item, index) of middleList.header">
+                <td
+                  v-for="(item, index) of middleList.header"
+                  :key="index"
+                >
                   {{ item.coldesc }}
                 </td>
               </tr>
@@ -48,14 +60,17 @@
           </table>
         </div>
         <div
+          ref="middleware_table"
           class="middleware_table"
           @scroll="middleScroll($event)"
-          ref="middleware_table"
         >
           <table>
             <thead>
               <tr>
-                <td :key="index" v-for="(item, index) of middleList.header">
+                <td
+                  v-for="(item, index) of middleList.header"
+                  :key="index"
+                >
                   {{ item.coldesc }}
                 </td>
               </tr>
@@ -63,12 +78,15 @@
             <tbody>
               <tr
                 v-for="(item, index) of middleList.body"
-                @click="activeUser(item)"
+                :key="index"
                 class="ff-user-active"
                 :class="{ 'ff-user-click-active': currentItem.ID === item.ID }"
-                :key="index"
+                @click="activeUser(item)"
               >
-                <td v-for="(list, i) of middleList.header" :key="i">
+                <td
+                  v-for="(list, i) of middleList.header"
+                  :key="i"
+                >
                   {{ item[list.colname] }}
                 </td>
               </tr>
@@ -78,15 +96,21 @@
       </div>
     </div>
     <div class="rightware_table">
-      <el-tabs v-model="activeName" type="card">
+      <el-tabs
+        v-model="activeName"
+        type="card"
+      >
         <el-tab-pane
           v-for="(list, index) of tabsList"
+          :key="index"
           :label="list.label"
           :name="list.url"
-          :key="index"
-        ></el-tab-pane>
+        />
       </el-tabs>
-      <div class="rightware_table_centen" v-loading="rightLoading">
+      <div
+        v-loading="rightLoading"
+        class="rightware_table_centen"
+      >
         <div class="rightware_table_head">
           <table>
             <thead>
@@ -101,23 +125,28 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(list, index) of rightListBody" :key="index">
+              <tr
+                v-for="(list, index) of rightListBody"
+                :key="index"
+              >
                 <td>{{ index + 1 }}</td>
-                <td v-for="(data, sub) of rightListHead[activeName]" :key="sub">
+                <td
+                  v-for="(data, sub) of rightListHead[activeName]"
+                  :key="sub"
+                >
                   <span
                     v-if="
                       data.name !== 'ISMAIN' &&
-                      data.name !== 'ISREAD' &&
-                      data.name !== 'ISWRITE'
+                        data.name !== 'ISREAD' &&
+                        data.name !== 'ISWRITE'
                     "
-                    >{{ list[data.name] }}</span
-                  >
+                  >{{ list[data.name] }}</span>
                   <input
+                    v-else
                     type="checkbox"
                     disabled="disabled"
                     :checked="list[data.name] === 'Y'"
-                    v-else
-                  />
+                  >
                 </td>
               </tr>
             </tbody>
@@ -126,27 +155,35 @@
         <div class="rightware_table_center_M">
           <table>
             <tbody>
-              <tr v-for="(list, index) of rightListBody" :key="index">
+              <tr
+                v-for="(list, index) of rightListBody"
+                :key="index"
+              >
                 <td>{{ index + 1 }}</td>
-                <td v-for="(data, sub) of rightListHead[activeName]" :key="sub">
+                <td
+                  v-for="(data, sub) of rightListHead[activeName]"
+                  :key="sub"
+                >
                   <span
                     v-if="
                       data.name !== 'ISMAIN' &&
-                      data.name !== 'ISREAD' &&
-                      data.name !== 'ISWRITE'
+                        data.name !== 'ISREAD' &&
+                        data.name !== 'ISWRITE'
                     "
-                    >{{ list[data.name] }}</span
-                  >
+                  >{{ list[data.name] }}</span>
                   <input
+                    v-else
                     type="checkbox"
                     disabled="disabled"
                     :checked="list[data.name] === 'Y'"
-                    v-else
-                  />
+                  >
                 </td>
               </tr>
               <tr>
-                <td colspan="5" style="color: red">
+                <td
+                  colspan="5"
+                  style="color: red"
+                >
                   {{ vmI18n.t("table_label.total") }}{{ rightListBody.length
                   }}{{ vmI18n.t("table_label.rows") }}
                 </td>
@@ -160,7 +197,8 @@
 </template>
 
 <script>
-  import userPermission from "@/js/pages/SystemConfig/userPermission/userPermission.js";
+  import userPermission from '@/js/pages/SystemConfig/userPermission/userPermission.js';
+
   export default userPermission;
 </script>
 

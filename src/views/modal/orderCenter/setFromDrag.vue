@@ -1,29 +1,33 @@
 <template>
-  <ul id="container" class="setFromDrag">
+  <ul
+    id="container"
+    class="setFromDrag"
+  >
     <li
+      v-for="(item,index) in dragList"
+      :id="item.id"
+      :key="index"
       class="ele"
       :orderno="item.orderno"
       :isfilter="item.isfilter"
       :label="item.label"
       :colname="item.colname"
-      :id="item.id"
       draggable="true"
-      v-for="(item,index) in dragList"
-      :key="index"
     >
       <input
-        type="checkbox"
         id="checkboxid"
+        type="checkbox"
         :checked="item.isfilter === false ? false : true"
         @click="checkbox($event,item)"
-      />
-      {{item.label}}
+      >
+      {{ item.label }}
     </li>
   </ul>
 </template>
 
 <script>
-  import setFromDrag from "@/js/modal/orderCenter/setFromDrag";
+  import setFromDrag from '@/js/modal/orderCenter/setFromDrag';
+
   export default setFromDrag;
 </script>
 

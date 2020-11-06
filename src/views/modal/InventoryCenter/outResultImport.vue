@@ -5,6 +5,7 @@
 </template>
 
 <script>
-  import outResultImport from "@/js/modal/InventoryCenter/outResultImport";
+  import outResultImport from '@/js/modal/InventoryCenter/outResultImport';
+
   export default outResultImport;
 </script>

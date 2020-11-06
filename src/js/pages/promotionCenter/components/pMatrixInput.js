@@ -133,7 +133,7 @@ export default {
       this.$emit('refreshItem'); // 向上派发父组件刷新
     }, // 取消不刷新数据，确认刷新数据
     async getData() {
-      let query = {
+      const query = {
         param: JSON.stringify({
           GLOBAL: this.search.toLocaleUpperCase(), // 搜索字段
           PAGENUM: 1,
@@ -141,7 +141,7 @@ export default {
           CONDITION: {},
           TABLENAME: 'PS_C_PRO'
         })
-      }
+      };
       const res = await this.service.common.screenresult(query);
       const data = res.data;
       if (data.code === 0) {

@@ -9,33 +9,40 @@
         style="width: 250px"
         :single="true"
         :data="foreignKeyLink"
-        :zIndex="zIndex"
-        :totalRowCount="totalRowCount"
-        :pageSize="pageSize"
-        :showColnameKey="'show'"
-        @on-page-change="changePage"
-        :dataEmptyMessage="dataEmptyMessage"
+        :z-index="zIndex"
+        :total-row-count="totalRowCount"
+        :page-size="pageSize"
+        :show-colname-key="'show'"
+        :data-empty-message="dataEmptyMessage"
         :columns="columns"
-        :AutoData="AutoData"
+        :auto-data="AutoData"
         :disabled="logisticsFlag"
+        @on-page-change="changePage"
         @on-fkrp-selected="onFkrpSelected"
-      ></DropDownSelectFilter>
+      />
     </div>
-    <div class="jordanModal_box" v-if="type == 'EXPRESSCODE'">
+    <div
+      v-if="type == 'EXPRESSCODE'"
+      class="jordanModal_box"
+    >
       <!-- <label for>物流单号:</label> -->
       <label for>{{ vmI18n.t("form_label.logisticsOrder_No") }}:</label>
       <Input
-        style="width: 250px"
         v-model="expressCode"
+        style="width: 250px"
         :disabled="expressCodeFlag"
       />
     </div>
 
-    <jordanBtn :btnConfig="btnConfig" style="margin-top: 10px"></jordanBtn>
+    <jordanBtn
+      :btn-config="btnConfig"
+      style="margin-top: 10px"
+    />
   </div>
 </template>
 <script>
-  import modifyLogistics from "@/js/modal/orderCenter/modifyLogistics";
+  import modifyLogistics from '@/js/modal/orderCenter/modifyLogistics';
+
   export default modifyLogistics;
 </script>
 

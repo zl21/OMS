@@ -1,9 +1,15 @@
 <template>
   <!-- 指定商品拆单 -->
-  <div class="specifyGoods" v-loading="pageLoad">
+  <div
+    v-loading="pageLoad"
+    class="specifyGoods"
+  >
     <div class="i_head">
       <div style="float:left;marginTop:8px;">
-        <RadioGroup v-model="radioValue" @on-change="radioChange">
+        <RadioGroup
+          v-model="radioValue"
+          @on-change="radioChange"
+        >
           <Radio label="2">
             <span>按页面已勾选订单</span>
           </Radio>
@@ -26,18 +32,34 @@
       </div>
     </div>
     <div class="i_body">
-      <Table :columns="columns" :data="data"></Table>
+      <Table
+        :columns="columns"
+        :data="data"
+      />
     </div>
     <div class="i_food">
-      <Button style="marginLeft:8px;" type="error" @click="confirm">确定</Button>
-      <Button type="error" ghost @click="()=>{this.$parent.$parent.closeConfirm();}">取消</Button>
+      <Button
+        style="marginLeft:8px;"
+        type="error"
+        @click="confirm"
+      >
+        确定
+      </Button>
+      <Button
+        type="error"
+        ghost
+        @click="()=>{this.$parent.$parent.closeConfirm();}"
+      >
+        取消
+      </Button>
     </div>
   </div>
 </template>
 
 <script>
-import specifyGoodsAssign from "@/js/pages/orderCenter/orderManager/specifyGoodsAssign";
-export default specifyGoodsAssign;
+  import specifyGoodsAssign from '@/js/pages/orderCenter/orderManager/specifyGoodsAssign';
+
+  export default specifyGoodsAssign;
 </script>
 <style lang="less">
 @import "~@/css/pages/orderCenter/orderManager/specifyGoodsAssign.less";

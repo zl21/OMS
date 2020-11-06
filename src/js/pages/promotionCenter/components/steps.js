@@ -1,6 +1,6 @@
 
 export default {
-  name: "stepsBars",
+  name: 'stepsBars',
   data() {
     return {};
   },
@@ -10,7 +10,7 @@ export default {
         return this.current;
       },
       set(val) {
-        this.$emit("update:current", val);
+        this.$emit('update:current', val);
       }
     }
   },
@@ -24,13 +24,13 @@ export default {
   },
   methods: {
     showItem(index, item) {
-      return item.class ? item.class : "";
+      return item.class ? item.class : '';
     },
-    showActive(index, item) {  //激活
-      return this.current_step === index ? "step-active" : "step-noactive";
+    showActive(index, item) { // 激活
+      return this.current_step === index ? 'step-active' : 'step-noactive';
     },
-    showFinish(index, item) {  //完成
-      return item.finish === true ? "step-finish" : "";
+    showFinish(index, item) { // 完成
+      return item.finish === true ? 'step-finish' : '';
     },
     /**
      * 选中某个模块

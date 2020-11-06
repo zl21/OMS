@@ -1,7 +1,23 @@
 <template>
-  <div class="ff-order-detail" v-loading="fileImport">
+  <div
+    v-loading="fileImport"
+    class="ff-order-detail"
+  >
     <div class="ff-order-detail-search-box">
       <matrix-input
+        :stopsave="stopsave"
+        :is-custom="isCustom"
+        :select-item="selectItem"
+        :objid="objid"
+        :obj-list="objList"
+        :active-obj="activeObj"
+        :tablename="tablename"
+        :input-list="inputList"
+        :isdisabled="isdisabled"
+        :is-active="isActive"
+        :save="save"
+        :editsave="editsave"
+        ref="inputMatrix"
         @refreshGetData="refreshData"
         @changeSave="changeSave"
         @newLySave="newLySave"
@@ -10,143 +26,147 @@
         @changeEditSave="changeEditSave"
         @objectEdit="objectEdit"
         @changeStopSave="changeStopSave"
-        :stopsave="stopsave"
-        :isCustom="isCustom"
-        :selectItem="selectItem"
-        :objid="objid"
-        :objList="objList"
-        :activeObj="activeObj"
-        :tablename="tablename"
-        :inputList="inputList"
-        :isdisabled="isdisabled"
-        :isActive="isActive"
-        :save="save"
-        :editsave="editsave"
-        ref="inputMatrix"
-      ></matrix-input>
+      />
     </div>
 
     <!--条码录入框-->
     <page-nation
-      :currentPag="currentPage"
-      :pageSize="pageSize"
+      :current-pag="currentPage"
+      :page-size="pageSize"
       :total="total"
-      :searchNation="searchNation"
+      :search-nation="searchNation"
+      :is-delete-btn="isDeleteBtn && isActive && !isdisabled"
+      :is-update-discount-btn="isUpdateDiscountBtn && isActive && !isdisabled"
+      :has-import="tablename === 'DL_B_TRAN_OUT' ? true : false"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       @detail-delete="detailDelete"
       @detail-updateDiscount="updateDiscount"
-      :isDeleteBtn="isDeleteBtn && isActive && !isdisabled"
-      :isUpdateDiscountBtn="isUpdateDiscountBtn && isActive && !isdisabled"
-      :hasImport="tablename === 'DL_B_TRAN_OUT' ? true : false"
       @detailImport="detailImport"
-    ></page-nation>
+    />
     <!-- 分页 -->
     <div class="ff-order-detail-content">
       <div
-        class="ff-order-detail--box"
-        v-loading="tableLoading"
-        :class="{ 'ff-order-detail--box-full': !matrixShow }"
         v-show="listShow"
+        v-loading="tableLoading"
+        class="ff-order-detail--box"
+        :class="{ 'ff-order-detail--box-full': !matrixShow }"
       >
         <custom-table
           ref="custom"
-          :tHead="tHead"
-          :tBody="tBody"
-          :subtotalRow="subtotalRow"
-          :objList="objList"
-          :activeSub="activeSub"
+          :t-head="tHead"
+          :t-body="tBody"
+          :subtotal-row="subtotalRow"
+          :obj-list="objList"
+          :active-sub="activeSub"
           :isdisabled="isdisabled"
-          :isActive="isActive"
+          :is-active="isActive"
           @popShow="popShow"
           @loadChange="loadChange"
           @change="checkChange"
           @amendChange="amendChange"
           @asc="asc"
           @des="des"
-        ></custom-table>
+        />
         <!-- 表格 -->
       </div>
       <div
+        v-if="matrixShow"
         class="ff-popper-class-triangle"
         :style="{ transform: `translate3d(-4px,${translate}px,0)` }"
-        v-if="matrixShow"
-      ></div>
+      />
       <div
+        v-show="matrixShow"
         class="ff-o-popper-class-box"
         :style="{ overflow: loading ? 'hidden' : 'auto' }"
-        v-show="matrixShow"
         :class="{ 'ff-popper-class-box-full': !listShow }"
       >
         <div
           class="ff-list-hidden-show"
+          :title="listShow ? '收起列表' : '显示列表'"
           @click="
             listShow = !listShow;
             matrixShow = true;
           "
-          :title="listShow ? '收起列表' : '显示列表'"
         >
-          <i class="iconfont" v-show="!listShow">&#xe610;</i>
-          <i class="iconfont" v-show="listShow">&#xe611;</i>
+          <i
+            v-show="!listShow"
+            class="iconfont"
+          >&#xe610;</i>
+          <i
+            v-show="listShow"
+            class="iconfont"
+          >&#xe611;</i>
         </div>
         <div
-          class="ff-o-popper-class"
-          v-loading="hasMatch ? loading || revealLoading : loading"
           ref="detail"
+          v-loading="hasMatch ? loading || revealLoading : loading"
+          class="ff-o-popper-class"
         >
           <matrix
             v-if="visible"
             :edit="true"
+            ref="matrixOne"
             :objid="objid"
-            :selectItem="selectItem"
-            :objList="objList"
+            :select-item="selectItem"
+            :obj-list="objList"
             :encode="activeObj.PS_C_PRO_ECODE"
-            :priceList="activeObj.PRICE_LIST"
+            :price-list="activeObj.PRICE_LIST"
             :tablename="tablename"
             :loading="loading"
-            :matchTableData="matchTableData"
+            :match-table-data="matchTableData"
             :isdisabled="isdisabled"
-            :isActive="isActive"
+            :is-active="isActive"
             :general="general"
-            :btnFlag="btnFlag"
-            :isStockBtn="isStockBtn"
-            :isStockNoEnoughBtn="isStockNoEnoughBtn"
-            :isDetailMatrix="isDetailMatrix"
+            :btn-flag="btnFlag"
+            :is-stock-btn="isStockBtn"
+            :is-stock-no-enough-btn="isStockNoEnoughBtn"
+            :is-detail-matrix="isDetailMatrix"
             @enterSave="enterSave"
             @matrixSave="matrixSave"
             @loadChange="loadChange"
             @amendData="amendData"
             @inputFocus="inputFocus"
-            ref="matrixOne"
-          ></matrix>
+          />
           <matrix
-            ref="matrixTwo"
             v-if="visible && hasMatch"
+            ref="matrixTwo"
             :reveal="true"
             :objid="objid"
             :isdisabled="isdisabled"
-            :isActive="isActive"
-            :selectItem="selectItem"
-            :objList="objList"
+            :is-active="isActive"
+            :select-item="selectItem"
+            :obj-list="objList"
             :encode="activeObj.PS_C_PRO_ECODE"
             :tablename="tablename"
             :loading="revealLoading"
             @match="match"
             @loadChange="revealLoadChange"
-          ></matrix>
-          <div v-if="tBody.length === 0" class="ff-matrix--nodata">暂无数据</div>
+          />
+          <div
+            v-if="tBody.length === 0"
+            class="ff-matrix--nodata"
+          >
+            暂无数据
+          </div>
         </div>
       </div>
       <div
         class="ff-matrix-hidden-show"
+        :title="matrixShow ? '收起矩阵' : '显示矩阵'"
         @click="
           matrixShow = !matrixShow;
           listShow = true;
         "
-        :title="matrixShow ? '收起矩阵' : '显示矩阵'"
       >
-        <i class="iconfont" v-show="!matrixShow">&#xe610;</i>
-        <i class="iconfont" v-show="matrixShow">&#xe611;</i>
+        <i
+          v-show="!matrixShow"
+          class="iconfont"
+        >&#xe610;</i>
+        <i
+          v-show="matrixShow"
+          class="iconfont"
+        >&#xe611;</i>
       </div>
     </div>
     <!--右侧悬浮框-->
@@ -156,22 +176,22 @@
       :title="tipsDialog.title"
       :visible.sync="tipsDialog.show"
       :close-on-click-modal="false"
-      :showClose="true"
+      :show-close="true"
       size="mini"
       class="tipsDialog"
       :class="tipsDialog.type"
     >
       <error-tips
-        :errorMessage="tipsDialog.errorList"
-        :DialogBack="tipsDialog.backBtn"
-        :DialogClass="tipsDialog.type"
-        v-on:refreshbizlines="errorDialogClose"
-      ></error-tips>
+        :error-message="tipsDialog.errorList"
+        :dialog-back="tipsDialog.backBtn"
+        :dialog-class="tipsDialog.type"
+        @refreshbizlines="errorDialogClose"
+      />
     </drag-dialog>
     <Modal
+      v-model="updateSalePriceFlag"
       class="orderDetailModal"
       :mask="true"
-      v-model="updateSalePriceFlag"
       :loading="discountLoading"
       :title="'批量修改折扣'"
       @on-ok="updateDiscountCorfirm"
@@ -185,34 +205,45 @@
           :label-width="70"
           inline
         >
-          <FormItem label="修改类型" prop="UPDATE_TYPE">
+          <FormItem
+            label="修改类型"
+            prop="UPDATE_TYPE"
+          >
             <Select
+              v-model="updateSalePriceModal.UPDATE_TYPE"
               style="width: 160px"
               :transfer="true"
-              v-model="updateSalePriceModal.UPDATE_TYPE"
               @on-change="updateTypeChange"
             >
               <Option
                 v-for="item in updateTypeArr"
                 :key="item.key"
                 :value="item.key"
-              >{{ item.showName }}</Option>
+              >
+                {{ item.showName }}
+              </Option>
             </Select>
           </FormItem>
-          <FormItem label="折扣" prop="SALE_DISCOUNT">
+          <FormItem
+            label="折扣"
+            prop="SALE_DISCOUNT"
+          >
             <Input
               v-model="updateSalePriceModal.SALE_DISCOUNT"
               placeholder="请输入折扣"
-              @on-change="saleDiscountChange"
               :regx="/^\d*\.{0,1}\d{0,2}$/"
+              @on-change="saleDiscountChange"
             />
           </FormItem>
-          <FormItem label="价格" prop="SALE_PRICE">
+          <FormItem
+            label="价格"
+            prop="SALE_PRICE"
+          >
             <Input
               v-model="updateSalePriceModal.SALE_PRICE"
               placeholder="请输入价格"
-              @on-change="salePriceChange"
               :regx="/^\d*\.{0,1}\d{0,2}$/"
+              @on-change="salePriceChange"
             />
           </FormItem>
         </Form>
@@ -222,7 +253,8 @@
 </template>
 
 <script>
-  import halfOrderDetail from "@/js/pages/common/orderDetail/halfOrderDetail";
+  import halfOrderDetail from '@/js/pages/common/orderDetail/halfOrderDetail';
+
   export default halfOrderDetail;
 </script>
 <style lang="less" scoped type="text/less">

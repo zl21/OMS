@@ -1,8 +1,8 @@
-import axios from "axios";
-import businessForm from "professionalComponents/businessForm";
-import jordanBtn from "professionalComponents/businessButton";
-import businessActionTable from "professionalComponents/businessActionTable.vue";
-import {listeningToKeydownMixin} from "@/assets/js/mixins/listeningToKeydown.js";
+import axios from 'axios';
+import businessForm from 'professionalComponents/businessForm';
+import jordanBtn from 'professionalComponents/businessButton';
+import businessActionTable from 'professionalComponents/businessActionTable.vue';
+import { listeningToKeydownMixin } from '@/assets/js/mixins/listeningToKeydown.js';
 
 export default {
   mixins: [listeningToKeydownMixin],
@@ -26,51 +26,50 @@ export default {
       pageSize: 10,
       logisticsFlag: false,
       expressCodeFlag: true,
-      expressCode: "",
-      type: "LOGISTICCOMPANY",
+      expressCode: '',
+      type: 'LOGISTICCOMPANY',
       pageNum: 1,
       // dataEmptyMessage: "数据加载中...", // 无数据的提示
-      dataEmptyMessage: vmI18n.t("modalTips.ye"), // 无数据的提示
-      columns: ["ename"], // 展现的组
+      dataEmptyMessage: vmI18n.t('modalTips.ye'), // 无数据的提示
+      columns: ['ename'], // 展现的组
       AutoData: [],
       foreignKeyLink: {},
       //
-      pid: "",
+      pid: '',
       btnConfig: {
-        typeAll: "error", //按钮统一风格样式
-        btnsite: "right", //按钮位置 (right , center , left)
+        typeAll: 'error', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            type: "", //按钮类型
+            type: '', // 按钮类型
             // text: "确定", //按钮文本
-            text: vmI18n.t("common.determine"), //按钮文本
-            icon: "", //按钮图标
-            size: "small", //按钮大小
-            disabled: false, //按钮禁用控制
+            text: vmI18n.t('common.determine'), // 按钮文本
+            icon: '', // 按钮图标
+            size: 'small', // 按钮大小
+            disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.determine();
-            }, //按钮点击事件
+            }, // 按钮点击事件
           },
           {
-            type: "", //按钮类型
+            type: '', // 按钮类型
             // text: "取消", //按钮文本
-            text: vmI18n.t("common.cancel"), //按钮文本
-            icon: "", //按钮图标
-            size: "small", //按钮大小
-            disabled: false, //按钮禁用控制
+            text: vmI18n.t('common.cancel'), // 按钮文本
+            icon: '', // 按钮图标
+            size: 'small', // 按钮大小
+            disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
-            }, //按钮点击事件
+            }, // 按钮点击事件
           },
         ],
       },
     };
   },
   mounted() {
-    this.zIndex =
-      Number(
-        document.getElementsByClassName("burgeon-modal-wrap")[0].style.zIndex
-      ) + 50;
+    this.zIndex = Number(
+      document.getElementsByClassName('burgeon-modal-wrap')[0].style.zIndex
+    ) + 50;
     this.setupByDeliver();
   },
   methods: {
@@ -78,7 +77,7 @@ export default {
       if (e.keyCode === 27) {
         this.$parent.$parent.closeConfirm();
         this.$parent.$parent.$parent.publicBouncedIndex = {
-          name: "testModal",
+          name: 'testModal',
         };
       }
       if (e.keyCode === 13) {
@@ -86,50 +85,48 @@ export default {
       }
     },
     setupByDeliver() {
-      let platform = this.componentData.platform;
+      const platform = this.componentData.platform;
       if (platform === 50) {
         this.logisticsFlag = true;
         this.expressCodeFlag = false;
-        this.type = "EXPRESSCODE";
+        this.type = 'EXPRESSCODE';
       } else {
         this.getListData();
       }
     },
     determine() {
-      let self = this;
-      if (self.type === "EXPRESSCODE") {
+      const self = this;
+      if (self.type === 'EXPRESSCODE') {
         if (!self.expressCode) {
           self.$Message.warning({
             // content: "请选择物流单号",
-            content: vmI18n.t("modalTips.yd"),
+            content: vmI18n.t('modalTips.yd'),
             duration: 5,
             top: 80,
           });
           return false;
         }
-      } else {
-        if (!self.pid) {
-          self.$Message.warning({
-            // content: "请选择物流公司",
-            content: vmI18n.t("modalTips.ye"),
-            duration: 5,
-            top: 80,
-          });
-          return false;
-        }
+      } else if (!self.pid) {
+        self.$Message.warning({
+          // content: "请选择物流公司",
+          content: vmI18n.t('modalTips.ye'),
+          duration: 5,
+          top: 80,
+        });
+        return false;
       }
-      let fromdata = new FormData();
-      fromdata.append("ids", self.componentData.ids);
-      fromdata.append("cLogisticsId", self.pid);
-      fromdata.append("expressCode", self.expressCode);
-      fromdata.append("type", self.type);
+      const fromdata = new FormData();
+      fromdata.append('ids', self.componentData.ids);
+      fromdata.append('cLogisticsId', self.pid);
+      fromdata.append('expressCode', self.expressCode);
+      fromdata.append('type', self.type);
       axios({
         // url: "/p/cs/updateLogistics",
-        url: "/api/cs/oc/oms/v1/updateLogistics", //切换接口服务
-        method: "post",
+        url: '/api/cs/oc/oms/v1/updateLogistics', // 切换接口服务
+        method: 'post',
         cancelToken: true,
         data: fromdata,
-      }).then(function (res) {
+      }).then((res) => {
         if (res.data.code === 0) {
           console.log(self.$route.query.id);
           if (self.$route.query.id == 2627) {
@@ -141,31 +138,30 @@ export default {
             } else {
               self.$Modal.error({
                 // title: "提示",
-                title: vmI18n.t("modalTitle.tips"),
-                render: (h) =>
-                  h("div", {}, [
-                    h(
-                      "p",
-                      {
-                        style: {
-                          padding: "10px 15px 10px 0px",
-                        },
+                title: vmI18n.t('modalTitle.tips'),
+                render: h => h('div', {}, [
+                  h(
+                    'p',
+                    {
+                      style: {
+                        padding: '10px 15px 10px 0px',
                       },
-                      res.data.message
-                    ),
-                    h("Table", {
-                      props: {
-                        "disabled-hover": true,
-                        "highlight-row": false,
-                        // "no-data-text": "暂无数据",
-                        "no-data-text": vmI18n.t("other.noDataAvailable"),
-                        columns: res.data.data.columns,
-                        data: res.data.data.prompt_data,
-                      },
-                    }),
-                  ]),
+                    },
+                    res.data.message
+                  ),
+                  h('Table', {
+                    props: {
+                      'disabled-hover': true,
+                      'highlight-row': false,
+                      // "no-data-text": "暂无数据",
+                      'no-data-text': vmI18n.t('other.noDataAvailable'),
+                      columns: res.data.data.columns,
+                      data: res.data.data.prompt_data,
+                    },
+                  }),
+                ]),
                 cancelType: true,
-                titleAlign: "left",
+                titleAlign: 'left',
                 mask: true,
                 width: 500,
                 draggable: true,
@@ -196,25 +192,25 @@ export default {
       });
     },
     getListData() {
-      let self = this;
+      const self = this;
       // let fromdata = new FormData();
       // fromdata.append("flag", 1);
       // fromdata.append("id", self.componentData.CP_C_PHY_WAREHOUSE_ID);
       // fromdata.append("num", self.pageNum);
       // fromdata.append("size", self.pageSize);
       // fromdata.append("inputValue", "");
-      let data = {
+      const data = {
         flag: 1,
         id: self.componentData.CP_C_PHY_WAREHOUSE_ID,
         num: self.pageNum,
         size: self.pageSize,
-        inputValue: "",
+        inputValue: '',
       };
       axios({
-        url: "/api/cs/oc/oms/v1/getQueryList",
-        method: "post",
+        url: '/api/cs/oc/oms/v1/getQueryList',
+        method: 'post',
         data,
-      }).then(function (res) {
+      }).then((res) => {
         res.data.data.forEach((element) => {
           element.ecode = {
             val: element.ecode,
@@ -234,26 +230,26 @@ export default {
           start: 0,
           tabth: [
             {
-              colname: "ID",
-              name: "ID",
+              colname: 'ID',
+              name: 'ID',
               show: false,
             },
             {
-              colname: "ename",
+              colname: 'ename',
               // name: "快递名称",
-              name: vmI18n.t("table_label.expressName"),
+              name: vmI18n.t('table_label.expressName'),
               show: true,
             },
             {
-              colname: "ecode",
+              colname: 'ecode',
               // name: "快递编码",
-              name: vmI18n.t("table_label.expressCode"),
+              name: vmI18n.t('table_label.expressCode'),
               show: false,
             },
             {
-              colname: "shortName",
+              colname: 'shortName',
               // name: "简称",
-              name: vmI18n.t("table_label.abbreviation"),
+              name: vmI18n.t('table_label.abbreviation'),
               show: false,
             },
           ],
@@ -274,4 +270,3 @@ export default {
     },
   },
 };
-

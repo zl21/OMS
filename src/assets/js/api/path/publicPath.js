@@ -3,4 +3,4 @@ export default {
   queryPhyWareHouseList: '/p/cs/queryPhyWareHouseList',
   // 查询枚举
   selectLimitGroups: '/p/cs/selectLimitGroups'
-}
+};

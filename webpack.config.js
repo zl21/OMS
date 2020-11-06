@@ -9,7 +9,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const projectConfig = require("./project.config");
 const target = projectConfig.target; // 框架研发网关开启环境
-const proxyLists =  projectConfig.burgeonProxy;
+const proxyLists = projectConfig.burgeonProxy;
 const indexProHtml = path.posix.join("/", "index.pro.html");
 const indexHtml = path.posix.join("/", "index.html");
 
@@ -17,15 +17,20 @@ const burgeonPlugins = [
   new MiniCssExtractPlugin({
     filename: "r3.css"
   }),
-  new CleanWebpackPlugin([process.env && process.env.production ? "dist" : "devDist"]),
+  new CleanWebpackPlugin([
+    process.env && process.env.production ? "dist" : "devDist"
+  ]),
   new VueLoaderPlugin(),
   new HtmlWebpackPlugin({
     chunksSortMode: "none",
     title:
-    process.env && process.env.production
+      process.env && process.env.production
         ? projectConfig.projectsTitle
         : `Debug:${projectConfig.projectsTitle}`,
-    template: process.env && process.env.production ? "./index.pro.html" : "./index.html",
+    template:
+      process.env && process.env.production
+        ? "./index.pro.html"
+        : "./index.html",
     inject: true,
     favicon: projectConfig.projectIconPath
   }),
@@ -46,7 +51,8 @@ const burgeonPlugins = [
 ];
 
 if (projectConfig.build.bundleAnalyzerReport) {
-  const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+  const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+    .BundleAnalyzerPlugin;
   burgeonPlugins.push(new BundleAnalyzerPlugin());
 }
 
@@ -85,7 +91,7 @@ module.exports = env => ({
         changeOrigin: true
       },
       {
-        '/yapi': 'http://yapi.dev.syman.cn/mock/624',
+        "/yapi": "http://yapi.dev.syman.cn/mock/624",
         changeOrigin: true
       }
     ]

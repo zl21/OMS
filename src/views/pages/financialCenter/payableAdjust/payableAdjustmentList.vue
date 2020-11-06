@@ -1,35 +1,38 @@
 <template>
   <div class="payableAdjustmentList">
-    <div style="margin-top: 8px" class="returnBtn">
+    <div
+      style="margin-top: 8px"
+      class="returnBtn"
+    >
       <!-- 按钮 -->
-      <businessButton :btnConfig="btnConfig"></businessButton>
+      <businessButton :btn-config="btnConfig" />
     </div>
     <div class="returnForm">
       <!-- form表单 -->
-      <businessForm :formConfig="formConfig"></businessForm>
+      <businessForm :form-config="formConfig" />
     </div>
     <div class="salesTable">
       <!-- tab切换 -->
       <businessLabel
         class="businessLabel"
-        :labelList="labelList"
-        :labelDefaultValue="labelDefaultValue"
-      ></businessLabel>
+        :label-list="labelList"
+        :label-default-value="labelDefaultValue"
+      />
       <!-- 列表组件 -->
       <div class="tableBox">
         <aTable
           ref="agtable"
-          :agTableConfig="agTableConfig"
+          :ag-table-config="agTableConfig"
           @on-page-change="pageChange"
           @on-page-size-change="pageSizeChange"
           @on-row-dblclick="onRowDblclick"
-        ></aTable>
+        />
       </div>
     </div>
     <!-- 导入 -->
     <jordanModal
       :title="importTable.confirmTitle"
-      :titleAlign="importTable.titleAlign"
+      :title-align="importTable.titleAlign"
       :width="importTable.width"
       :scrollable="importTable.scrollable"
       :closable="importTable.closable"
@@ -39,17 +42,17 @@
       :transfer="importTable.transfer"
       :name="importTable.name"
       :url="importTable.url"
-      :keepAlive="importTable.keepAlive"
-      :excludeString="importTable.excludeString"
-      :componentData="importTable.componentData"
-    ></jordanModal>
+      :keep-alive="importTable.keepAlive"
+      :exclude-string="importTable.excludeString"
+      :component-data="importTable.componentData"
+    />
     <!-- 导出 -->
     <Modal
       v-model="warningModal"
       :title="vmI18n.t('modalTitle.warning')"
       width="420"
-      @on-ok="warningOk"
       :mask="true"
+      @on-ok="warningOk"
     >
       <!-- <p>当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？</p> -->
       <p>{{ vmI18n.t("modalTips.z0") }}</p>
@@ -58,7 +61,8 @@
 </template>
 
 <script>
-  import payableAdjustmentList from "@/js/pages/financeCenter/payableAdjustmentList";
+  import payableAdjustmentList from '@/js/pages/financeCenter/payableAdjustmentList';
+
   export default payableAdjustmentList;
 </script>
 

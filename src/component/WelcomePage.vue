@@ -26,44 +26,44 @@
 </template>
 
 <script>
-const langConfig = [
-  {
-    type: "zh",
-    text: "中文",
-  },
-  {
-    type: "en",
-    text: "English",
-  },
-  {
-    type: "ja",
-    text: "日语",
-  },
-];
-
-export default {
-  name: "WelcomePage",
-  data() {
-    return {
-      vmI18n: window.vmI18n,
-      langConfig: langConfig,
-    };
-  },
-  mounted() {
-    // console.log("vmI18n", this.vmI18n);
-  },
-  methods: {
-    toggleLang(lang) {
-      let _this = this;
-      localStorage.setItem("locale", lang);
-      _this.vmI18n.locale = localStorage.getItem("locale");
-      this.$message({
-        message: _this.vmI18n.messages[lang].tip_info,
-        type: _this.vmI18n.messages[lang].tip_type,
-      });
+  const langConfig = [
+    {
+      type: 'zh',
+      text: '中文',
     },
-  },
-};
+    {
+      type: 'en',
+      text: 'English',
+    },
+    {
+      type: 'ja',
+      text: '日语',
+    },
+  ];
+
+  export default {
+    name: 'WelcomePage',
+    data() {
+      return {
+        vmI18n: window.vmI18n,
+        langConfig,
+      };
+    },
+    mounted() {
+    // console.log("vmI18n", this.vmI18n);
+    },
+    methods: {
+      toggleLang(lang) {
+        const _this = this;
+        localStorage.setItem('locale', lang);
+        _this.vmI18n.locale = localStorage.getItem('locale');
+        this.$message({
+          message: _this.vmI18n.messages[lang].tip_info,
+          type: _this.vmI18n.messages[lang].tip_type,
+        });
+      },
+    },
+  };
 </script>
 
 <style scoped lang="less">

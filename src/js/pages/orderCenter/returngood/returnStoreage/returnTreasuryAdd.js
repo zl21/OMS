@@ -184,7 +184,7 @@ export default {
           SPECIAL_TYPE: '', // 特殊处理类型
           REMARK: '', // 备注
           RECEIVER_ADDRESS: '', // 发件地址
-          RESERVE_VARCHAR05: '', // 处理人
+          HANDLER: '', // 处理人
           RESERVE_VARCHAR02: '', // 处理人备注
           IS_OFF_MATCH: false,
         },
@@ -407,7 +407,7 @@ export default {
             title: vmI18n.t('form_label.chargebackNumber'),
           },
           {
-            key: 'RESERVE_VARCHAR04',
+            key: 'PS_C_SKU_ECODE_ACTUAL',
             // title: "实际发出条码",
             title: vmI18n.t('table_label.actual_barcode'),
           },
@@ -478,20 +478,20 @@ export default {
             title: vmI18n.t('table_label.no_original_barcode'),
           },
           {
-            key: 'RESERVE_BIGINT01',
-            dataAcessKey: 'RESERVE_BIGINT01',
+            key: 'IS_GEN_IN_ORDER',
+            dataAcessKey: 'IS_GEN_IN_ORDER',
             // title: "是否生成入库单",
             title: vmI18n.t('table_label.generate_stock'),
           },
           {
-            key: 'RESERVE_BIGINT02',
-            dataAcessKey: 'RESERVE_BIGINT02',
+            key: 'IS_GEN_WRO_ADJUST',
+            dataAcessKey: 'IS_GEN_WRO_ADJUST',
             // title: "是否生成错发调整单",
             title: vmI18n.t('table_label.generate_error_adjustment'),
           },
           {
-            key: 'RESERVE_BIGINT03',
-            dataAcessKey: 'RESERVE_BIGINT03',
+            key: 'IS_GEN_MINUS_ADJUST',
+            dataAcessKey: 'IS_GEN_MINUS_ADJUST',
             // title: "是否生成冲无头件调整单",
             title: vmI18n.t(
               'table_label.generate_punching_headless_adjustment'
@@ -775,8 +775,8 @@ export default {
           // label: "处理人",
           label: vmI18n.t('form_label.handler'),
           disabled: false, // 按钮禁用控制
-          dataAcessKey: 'RESERVE_VARCHAR05',
-          value: 'RESERVE_VARCHAR05',
+          dataAcessKey: 'HANDLER',
+          value: 'HANDLER',
           width: '6',
         },
         {
@@ -870,9 +870,9 @@ export default {
         item.IS_MATC = item.IS_MATCH == '是' ? 1 : 0;
         // 是否生成调整单
         item.IS_GEN_ADJUST = item.IS_GEN_ADJUST == '是' ? 1 : 0;
-        item.RESERVE_BIGINT01 = item.RESERVE_BIGINT01 == '是' ? 1 : 0;
-        item.RESERVE_BIGINT02 = item.RESERVE_BIGINT02 == '是' ? 1 : 0;
-        item.RESERVE_BIGINT03 = item.RESERVE_BIGINT03 == '是' ? 1 : 0;
+        item.IS_GEN_IN_ORDER = item.IS_GEN_IN_ORDER == '是' ? 1 : 0;
+        item.IS_GEN_WRO_ADJUST = item.IS_GEN_WRO_ADJUST == '是' ? 1 : 0;
+        item.IS_GEN_MINUS_ADJUST = item.IS_GEN_MINUS_ADJUST == '是' ? 1 : 0;
       });
       const params = {
         ocBRefundInProductItem: dataArr, // 退货入库明细
@@ -893,7 +893,7 @@ export default {
           SPECIAL_TYPE: item.SPECIAL_TYPE, // 特殊处理类型
           REMARK: item.REMARK, // 备注
           RECEIVER_ADDRESS: item.RECEIVER_ADDRESS, // 发件地址
-          RESERVE_VARCHAR05: item.RESERVE_VARCHAR05,
+          HANDLER: item.HANDLER,
           RESERVE_VARCHAR02: item.RESERVE_VARCHAR02,
           IS_OFF_MATCH: item.IS_OFF_MATCH ? 1 : 0,
         }, // 退货入库主表数据
@@ -954,9 +954,9 @@ export default {
               item.IS_MATCH = item.IS_MATCH == 1 ? '是' : '否';
               // 是否生成调整单
               item.IS_GEN_ADJUST = item.IS_GEN_ADJUST == 1 ? '是' : '否';
-              item.RESERVE_BIGINT01 = item.RESERVE_BIGINT01 == 1 ? '是' : '否';
-              item.RESERVE_BIGINT02 = item.RESERVE_BIGINT02 == 1 ? '是' : '否';
-              item.RESERVE_BIGINT03 = item.RESERVE_BIGINT03 == 1 ? '是' : '否';
+              item.IS_GEN_IN_ORDER = item.IS_GEN_IN_ORDER == 1 ? '是' : '否';
+              item.IS_GEN_WRO_ADJUST = item.IS_GEN_WRO_ADJUST == 1 ? '是' : '否';
+              item.IS_GEN_MINUS_ADJUST = item.IS_GEN_MINUS_ADJUST == 1 ? '是' : '否';
             });
             if (res.data.data.ocBRefundIn.MATCH_STATUS == 2) {
               _this.information.formData.forEach((item) => {

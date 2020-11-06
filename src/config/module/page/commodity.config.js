@@ -1,9 +1,9 @@
-import combinedCommodity from 'allpages/commodityCenter/combinedCommodity' //商品中心-组合福袋商品-新增/详情
+import combinedCommodity from 'allpages/commodityCenter/combinedCommodity'; // 商品中心-组合福袋商品-新增/详情
 
 export default {
   // 商品中心-组合福袋商品-新增/详情
   COMBINEDCOMMODITY: {
     component: combinedCommodity,
-    labelName:'组合福袋商品编辑',
+    labelName: '组合福袋商品编辑',
   },
-} 
+}; 

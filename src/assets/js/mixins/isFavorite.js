@@ -1,6 +1,6 @@
 // 是否收藏公共逻辑管理
 import axios from 'axios';
-import lookUserJurisdiction from "allpages/SystemConfig/quanXian/1/lookUserJurisdiction";
+import lookUserJurisdiction from 'allpages/SystemConfig/quanXian/1/lookUserJurisdiction';
 
 export const isFavoriteMixin = {
   mounted() {

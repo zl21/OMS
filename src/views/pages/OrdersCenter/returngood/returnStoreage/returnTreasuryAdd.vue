@@ -3,7 +3,7 @@
   <div class="returnTreasurys">
     <!--按钮块-->
     <div style="margin-top: 8px">
-      <businessButton :btnConfig="btnConfig"></businessButton>
+      <businessButton :btn-config="btnConfig" />
     </div>
     <!-- form表单 -->
     <div class="TreasuryDefault">
@@ -12,7 +12,7 @@
           <!-- 基本信息 -->
           {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
-            <businessForm :formConfig="information"></businessForm>
+            <businessForm :form-config="information" />
           </p>
         </Panel>
       </Collapse>
@@ -21,54 +21,61 @@
       <!-- tab切换 -->
       <businessLabel
         class="businessLabel"
-        :labelList="labelList"
-        :labelDefaultValue="DefaultValue"
+        :label-list="labelList"
+        :label-default-value="DefaultValue"
         @labelClick="labelClick"
-      ></businessLabel>
+      />
       <!-- 列表组件 -->
       <div class="tableBox">
         <business-action-table
           v-if="labelDefaultValue"
-          :jordanTableConfig="jordanTableConfig"
+          :jordan-table-config="jordanTableConfig"
           @on-select="returnOnSelect"
           @on-select-cancel="returnCancel"
-        ></business-action-table>
-        <OrderItem v-if="!labelDefaultValue" :componentData="tab2"></OrderItem>
+        />
+        <OrderItem
+          v-if="!labelDefaultValue"
+          :component-data="tab2"
+        />
       </div>
     </div>
     <div class="queryorderBox">
       <!-- :title="'查询原始订单编号'" -->
       <Modal
+        v-model="order.modal"
         class="queryorder"
         :mask="true"
-        v-model="order.modal"
         :title="vmI18n.t('modalTitle.query_OriginalOrderNo')"
         @on-ok="queryorder"
         @on-cancel="querycancel"
       >
         <div class="orderContent">
-          <businessForm :formConfig="order.orderform"></businessForm>
-          <businessButton :btnConfig="order.btn"></businessButton>
+          <businessForm :form-config="order.orderform" />
+          <businessButton :btn-config="order.btn" />
         </div>
         <div class="orderTable">
           <business-action-table
-            :jordanTableConfig="order.table"
+            :jordan-table-config="order.table"
             @on-select="onquerySelect"
             @on-select-cancel="onqueryCancel"
-          ></business-action-table>
+          />
         </div>
       </Modal>
     </div>
     <!-- 水印图片 -->
-    <businessStatusFlag :statusName="statusName"></businessStatusFlag>
-    <div class="fromLoading" v-show="isSaveLoading">
-      <Spin></Spin>
+    <businessStatusFlag :status-name="statusName" />
+    <div
+      v-show="isSaveLoading"
+      class="fromLoading"
+    >
+      <Spin />
     </div>
   </div>
 </template>
 
 <script>
-  import returnTreasuryAdd from "@/js/pages/orderCenter/returngood/returnStoreage/returnTreasuryAdd";
+  import returnTreasuryAdd from '@/js/pages/orderCenter/returngood/returnStoreage/returnTreasuryAdd';
+
   export default returnTreasuryAdd;
 </script>
 
