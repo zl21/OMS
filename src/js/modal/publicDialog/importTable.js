@@ -41,119 +41,99 @@ export default {
     },
     // 下载模板
     downloadTemplate() {
-      if (this.componentData.tableName === "OC_B_ORDER") {
+      if (this.componentData.tableName === 'OC_B_ORDER') {
         // 零售发货单
-        this.getDownloadTemp("/api/cs/oc/oms/v1/downloadOrderTemp");
-        
-      } else if (this.componentData.tableName === "OC_B_RETURN_ORDER") {
+        this.getDownloadTemp('/api/cs/oc/oms/v1/downloadOrderTemp');
+      } else if (this.componentData.tableName === 'OC_B_RETURN_ORDER') {
         // 退换货订单
-        this.getDownloadTemp("/api/cs/oc/oms/v1/downloadReturnOrderTemp");
-        
-      } else if (this.componentData.tableName === "PS_C_SKUGROUP") {
-        if (this.componentData.operationType === "baseInfo") {
+        this.getDownloadTemp('/api/cs/oc/oms/v1/downloadReturnOrderTemp');
+      } else if (this.componentData.tableName === 'PS_C_SKUGROUP') {
+        if (this.componentData.operationType === 'baseInfo') {
           // 组合商品明细表与虚拟明细
-          this.getDownloadTemp("/p/cs/product/downloadSkuGroupTemp", {
+          this.getDownloadTemp('/p/cs/product/downloadSkuGroupTemp', {
             type: this.componentData.type,
           });
         } else {
-          this.getDownloadTemp("/p/cs/product/downloadRealSkuGroupTemp", {
+          this.getDownloadTemp('/p/cs/product/downloadRealSkuGroupTemp', {
             type: this.componentData.type,
           });
         }
-        
-      } else if (this.componentData.tableName === "OC_B_INVOICE_NOTICE") {
+      } else if (this.componentData.tableName === 'OC_B_INVOICE_NOTICE') {
         // 开票信息
-        this.getDownloadTemp("/api/cs/oc/oms/v1/downloadInvoiceNotice");
-        
-      } else if (this.componentData.tableName === "AC_F_DISTRIBUTION") {
+        this.getDownloadTemp('/api/cs/oc/oms/v1/downloadInvoiceNotice');
+      } else if (this.componentData.tableName === 'AC_F_DISTRIBUTION') {
         // 分销代销商品明细
-        this.getDownloadTemp("/p/cs/downloadDistributionItem");
-        
-      } else if (this.componentData.tableName === "ST_C_EXPRESS_AREA") {
+        this.getDownloadTemp('/p/cs/downloadDistributionItem');
+      } else if (this.componentData.tableName === 'ST_C_EXPRESS_AREA') {
         // 物流区域设置
-        this.getDownloadTemp("/p/cs/downloadExpressAreaItem");
-        
-      } else if (this.componentData.tableName === "OUT_OF_STOCK_MEMO") {
+        this.getDownloadTemp('/p/cs/downloadExpressAreaItem');
+      } else if (this.componentData.tableName === 'OUT_OF_STOCK_MEMO') {
         // 缺货备注
-        this.getDownloadTemp("/api/cs/oc/oms/v1/downloadUpdateRemarkTemp");
-        
-      } else if (this.componentData.tableName === "ST_C_WAREHOUSE_LOGISTICS") {
+        this.getDownloadTemp('/api/cs/oc/oms/v1/downloadUpdateRemarkTemp');
+      } else if (this.componentData.tableName === 'ST_C_WAREHOUSE_LOGISTICS') {
         // 仓库物流优先级设置
-        this.getDownloadTemp("/p/cs/downloadWarehouseLogisticsRank", {
+        this.getDownloadTemp('/p/cs/downloadWarehouseLogisticsRank', {
           objid: this.componentData.objid,
         });
-        
-      } else if (this.componentData.tableName === "OC_B_REFUND_IN") {
+      } else if (this.componentData.tableName === 'OC_B_REFUND_IN') {
         // 退货入库
-        this.getDownloadTemp("/api/cs/oc/oms/v1/downloadRdfundInRemarkTemp");
-        
-      } else if (this.componentData.tableName === "ST_C_SEND_RULE") {
+        this.getDownloadTemp('/api/cs/oc/oms/v1/downloadRdfundInRemarkTemp');
+      } else if (this.componentData.tableName === 'ST_C_SEND_RULE') {
         // 订单派单规则-优先级
-        this.getDownloadTemp("/p/cs/downloadSendRuleWarehouseRank", {
+        this.getDownloadTemp('/p/cs/downloadSendRuleWarehouseRank', {
           objid: this.componentData.objid,
         });
-        
-      } else if (this.componentData.tableName === "ST_C_SEND_RULE_RATE") {
+      } else if (this.componentData.tableName === 'ST_C_SEND_RULE_RATE') {
         // 订单派单规则-比例
-        this.getDownloadTemp("/p/cs/downloadSendRuleWarehouseRate", {
+        this.getDownloadTemp('/p/cs/downloadSendRuleWarehouseRate', {
           objid: this.componentData.objid,
         });
-        return;
-      } else if (this.componentData.tableName === "ST_C_PRODUCT_STRATEGY") {
+      } else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY') {
         // 店铺商品特殊设置
-        this.getDownloadTemp("/p/cs/downloadProductStrategyItem");
-        return;
-      } else if (this.componentData.tableName === "OC_B_RETURN_ORDER_remark") {
+        this.getDownloadTemp('/p/cs/downloadProductStrategyItem');
+      } else if (this.componentData.tableName === 'OC_B_RETURN_ORDER_remark') {
         // 退换货卖家备注导入
-        this.getDownloadTemp("/api/cs/oc/oms/v1/downloadReturnRemarkTemp");
-        return;
+        this.getDownloadTemp('/api/cs/oc/oms/v1/downloadReturnRemarkTemp');
       } else if (
-        this.componentData.tableName === "AC_F_RECEIVABLES_ADJUSTMENT"
+        this.componentData.tableName === 'AC_F_RECEIVABLES_ADJUSTMENT'
       ) {
         // 应收款调整单导入
-        this.getDownloadTemp("/p/cs/receivableAdjustmentDownload", {
+        this.getDownloadTemp('/p/cs/receivableAdjustmentDownload', {
           billType: this.componentData.billType,
         });
-        return;
-      } else if (this.componentData.tableName === "SC_B_TRANSFER") {
+      } else if (this.componentData.tableName === 'SC_B_TRANSFER') {
         if (this.componentData.importType === 3) {
-          let downloadUrl =
-            "http://qd-r3-upload-dev.oss-cn-shanghai.aliyuncs.com/import/template/sc_b_transfer/dbd_template.xlsx";
+          const downloadUrl = 'http://qd-r3-upload-dev.oss-cn-shanghai.aliyuncs.com/import/template/sc_b_transfer/dbd_template.xlsx';
           this.downloadUrlFile(downloadUrl);
         } else {
           // 导入-调拨单
-          this.getDownloadTemp(" /p/cs/transfer/downloadTemp");
+          this.getDownloadTemp(' /p/cs/transfer/downloadTemp');
         }
-        return;
-      } else if (this.componentData.tableName === "SG_B_PHY_OUT_RESULT") {
+      } else if (this.componentData.tableName === 'SG_B_PHY_OUT_RESULT') {
         if (this.componentData.importType === 1) {
-          this.getDownloadTemp("/p/cs/downLoadSgPhyOutResultTemp");
+          this.getDownloadTemp('/p/cs/downLoadSgPhyOutResultTemp');
         }
       } else if (
-        this.componentData.tableName === "OC_B_MULTI_STORE_DISTRIBUTION"
+        this.componentData.tableName === 'OC_B_MULTI_STORE_DISTRIBUTION'
       ) {
         this.getDownloadTemp(
-          "/p/cs/oc/v1/sale/downloadMultiStoreDistributionSku"
+          '/p/cs/oc/v1/sale/downloadMultiStoreDistributionSku'
         );
-      } else if (this.componentData.tableName === "OC_B_SEND_OUT") {
+      } else if (this.componentData.tableName === 'OC_B_SEND_OUT') {
         if (this.componentData.importType === 1) {
           // this.getDownloadTemp("/p/cs/oc/v1/send/downloadSendOut");
-          let downloadUrl =
-            "http://qd-r3-upload-dev.oss-cn-shanghai.aliyuncs.com/import/template/saleorder/importTemplate_batch.xlsx";
+          const downloadUrl = 'http://qd-r3-upload-dev.oss-cn-shanghai.aliyuncs.com/import/template/saleorder/importTemplate_batch.xlsx';
           this.downloadUrlFile(downloadUrl);
         } else {
-          let downloadUrl =
-            "http://qd-r3-upload-dev.oss-cn-shanghai.aliyuncs.com/import/template/saleorder/importTemplate.xlsx";
+          const downloadUrl = 'http://qd-r3-upload-dev.oss-cn-shanghai.aliyuncs.com/import/template/saleorder/importTemplate.xlsx';
           this.downloadUrlFile(downloadUrl);
         }
-      } else if (this.componentData.tableName === "OC_B_JD_RETURN_ORDER") {
+      } else if (this.componentData.tableName === 'OC_B_JD_RETURN_ORDER') {
         // 导入-调拨单
-        this.getDownloadTemp("/p/cs/ocBJdReturnOrder/downloadTemple");
-        return;
-      } else if (this.componentData.tableName === "IP_C_STANDPLAT_PRO") {
+        this.getDownloadTemp('/p/cs/ocBJdReturnOrder/downloadTemple');
+      } else if (this.componentData.tableName === 'IP_C_STANDPLAT_PRO') {
         // 通用商品下载
-        let downloadUrl =
-          "http://smtools.oss-cn-shanghai.aliyuncs.com/import/template/893/商品下载-商品代码上传模板-root-20200622161110098.xlsx";
+        const downloadUrl = 'http://smtools.oss-cn-shanghai.aliyuncs.com/import/template/893/商品下载-商品代码上传模板-root-20200622161110098.xlsx';
         this.downloadUrlFile(downloadUrl);
       }
     },
@@ -195,130 +175,113 @@ export default {
     // 导入
     importDialog() {
       if (this.handleBefore(this.files)) return;
-      if (this.componentData.tableName === "OC_B_ORDER") {
+      if (this.componentData.tableName === 'OC_B_ORDER') {
         // 零售发货单
-        this.getImportDialog("/api/cs/oc/oms/v1/importOcBOrder");
-        
-      } else if (this.componentData.tableName === "OC_B_RETURN_ORDER") {
+        this.getImportDialog('/api/cs/oc/oms/v1/importOcBOrder');
+      } else if (this.componentData.tableName === 'OC_B_RETURN_ORDER') {
         // 退换货订单
-        this.getImportDialog("/api/cs/oc/oms/v1/importReturnOrder");
-        
-      } else if (this.componentData.tableName === "PS_C_SKUGROUP") {
-        if (this.componentData.operationType === "baseInfo") {
+        this.getImportDialog('/api/cs/oc/oms/v1/importReturnOrder');
+      } else if (this.componentData.tableName === 'PS_C_SKUGROUP') {
+        if (this.componentData.operationType === 'baseInfo') {
           // 组合商品档案明细与虚拟条码
-          this.getImportDialog("/p/cs/product/skuGroupImport");
+          this.getImportDialog('/p/cs/product/skuGroupImport');
         } else {
           // 组合商品档案明细
-          this.getImportDialog("/p/cs/product/realSkuGroupImport");
+          this.getImportDialog('/p/cs/product/realSkuGroupImport');
         }
-        
-      } else if (this.componentData.tableName === "OC_B_INVOICE_NOTICE") {
+      } else if (this.componentData.tableName === 'OC_B_INVOICE_NOTICE') {
         // 开票信息
-        this.getImportDialog("/api/cs/oc/oms/v1/importInvoiceNotice");
-        
-      } else if (this.componentData.tableName === "AC_F_DISTRIBUTION") {
+        this.getImportDialog('/api/cs/oc/oms/v1/importInvoiceNotice');
+      } else if (this.componentData.tableName === 'AC_F_DISTRIBUTION') {
         // 分销代销商品明细
-        this.getImportDialog("/p/cs/importDistributionItem");
-        
-      } else if (this.componentData.tableName === "ST_C_EXPRESS_AREA") {
+        this.getImportDialog('/p/cs/importDistributionItem');
+      } else if (this.componentData.tableName === 'ST_C_EXPRESS_AREA') {
         // 物流区域设置
         this.getImportDialog(
-          "/p/cs/importExpressAreaItem",
+          '/p/cs/importExpressAreaItem',
           this.componentData.objid
         );
-        
-      } else if (this.componentData.tableName === "OUT_OF_STOCK_MEMO") {
+      } else if (this.componentData.tableName === 'OUT_OF_STOCK_MEMO') {
         // 缺货备注
         this.getImportDialog(
-          "/api/cs/oc/oms/v1/batchImport",
+          '/api/cs/oc/oms/v1/batchImport',
           this.componentData.objid
         );
-        
-      } else if (this.componentData.tableName === "ST_C_WAREHOUSE_LOGISTICS") {
+      } else if (this.componentData.tableName === 'ST_C_WAREHOUSE_LOGISTICS') {
         // 仓库物流优先级设置
         this.getImportDialog(
-          "/p/cs/importWarehouseLogisticsRank",
+          '/p/cs/importWarehouseLogisticsRank',
           this.componentData.objid
         );
-        
-      } else if (this.componentData.tableName === "OC_B_REFUND_IN") {
+      } else if (this.componentData.tableName === 'OC_B_REFUND_IN') {
         // 退货入库
-        this.getImportDialog("/api/cs/oc/oms/v1/refundInImport");
-        
-      } else if (this.componentData.tableName === "ST_C_SEND_RULE") {
+        this.getImportDialog('/api/cs/oc/oms/v1/refundInImport');
+      } else if (this.componentData.tableName === 'ST_C_SEND_RULE') {
         // 订单派单规则-优先级
         this.getImportDialog(
-          "/p/cs/importSendRuleWarehouseRank",
+          '/p/cs/importSendRuleWarehouseRank',
           this.componentData.objid
         );
-        
-      } else if (this.componentData.tableName === "ST_C_SEND_RULE_RATE") {
+      } else if (this.componentData.tableName === 'ST_C_SEND_RULE_RATE') {
         // 订单派单规则-比例
         this.getImportDialog(
-          "/p/cs/importSendRuleWarehouseRate",
+          '/p/cs/importSendRuleWarehouseRate',
           this.componentData.objid
         );
-        return;
-      } else if (this.componentData.tableName === "ST_C_PRODUCT_STRATEGY") {
+      } else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY') {
         // 店铺商品特殊设置
         this.getImportDialog(
-          "/p/cs/importProductStrategyItem",
+          '/p/cs/importProductStrategyItem',
           this.componentData.objid
         );
-        return;
-      } else if (this.componentData.tableName === "OC_B_RETURN_ORDER_remark") {
+      } else if (this.componentData.tableName === 'OC_B_RETURN_ORDER_remark') {
         // 退换货卖家备注导入
         this.getImportDialog(
-          "/api/cs/oc/oms/v1/importReturnSellerRemark",
+          '/api/cs/oc/oms/v1/importReturnSellerRemark',
           this.componentData.objid
         );
-        return;
       } else if (
-        this.componentData.tableName === "AC_F_RECEIVABLES_ADJUSTMENT"
+        this.componentData.tableName === 'AC_F_RECEIVABLES_ADJUSTMENT'
       ) {
         // 应收款调整单导入
         this.getImportDialog(
-          "/p/cs/receivableAdjustmentImport",
+          '/p/cs/receivableAdjustmentImport',
           this.componentData.billType
         );
-        return;
-      } else if (this.componentData.tableName === "SC_B_TRANSFER") {
+      } else if (this.componentData.tableName === 'SC_B_TRANSFER') {
         if (this.componentData.importType === 3) {
           this.getImportDialog(
-            "/p/cs/store/transfer/importTransferItems",
+            '/p/cs/store/transfer/importTransferItems',
             this.componentData.objid
           );
         } else {
-          this.getImportDialog("/p/cs/transfer/sgTransferImport");
+          this.getImportDialog('/p/cs/transfer/sgTransferImport');
         }
-        return;
-      } else if (this.componentData.tableName === "SG_B_PHY_OUT_RESULT") {
+      } else if (this.componentData.tableName === 'SG_B_PHY_OUT_RESULT') {
         if (this.componentData.importType === 1) {
-          this.getImportDialog("/p/cs/importSgPhyOutResult");
+          this.getImportDialog('/p/cs/importSgPhyOutResult');
         }
       } else if (
-        this.componentData.tableName === "OC_B_MULTI_STORE_DISTRIBUTION"
+        this.componentData.tableName === 'OC_B_MULTI_STORE_DISTRIBUTION'
       ) {
         this.getImportDialog(
-          "/p/cs/oc/v1/sale/importMultiStoreDistributionSku",
+          '/p/cs/oc/v1/sale/importMultiStoreDistributionSku',
           this.componentData.objid
         );
-      } else if (this.componentData.tableName === "OC_B_SEND_OUT") {
+      } else if (this.componentData.tableName === 'OC_B_SEND_OUT') {
         if (this.componentData.importType === 1) {
-          this.getImportDialog("/p/cs/oc/v1/send/importSendOut");
+          this.getImportDialog('/p/cs/oc/v1/send/importSendOut');
         } else {
           this.getImportDialog(
-            "/p/cs/oc/v1/send/importSendOutSku",
+            '/p/cs/oc/v1/send/importSendOutSku',
             this.componentData.objid
           );
         }
-      } else if (this.componentData.tableName === "OC_B_JD_RETURN_ORDER") {
-        this.getImportDialog("/p/cs/ocBJdReturnOrder/importTemple");
-        return;
-      } else if (this.componentData.tableName === "IP_C_STANDPLAT_PRO") {
+      } else if (this.componentData.tableName === 'OC_B_JD_RETURN_ORDER') {
+        this.getImportDialog('/p/cs/ocBJdReturnOrder/importTemple');
+      } else if (this.componentData.tableName === 'IP_C_STANDPLAT_PRO') {
         // 通用商品下载
-        this.getImportDialog("/p/cs/getItemIdsForExcel");
-        return;
+        this.getImportDialog('/p/cs/getItemIdsForExcel');
       }
     },
     closeConfirm() {

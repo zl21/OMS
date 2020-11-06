@@ -5,10 +5,10 @@
       <!-- 修改时间 -->
       <label>{{ vmI18n.t('table_label.modificationTime') }}:</label>
       <el-date-picker
+        v-model="timeConfig.data"
         :default-time="timeConfig.config.defaultTime"
         :end-placeholder="vmI18n.t('common.endDate')"
         :format="timeConfig.config.format"
-        v-model="timeConfig.data"
         :picker-options="timeConfig.config.pickerOptions"
         :range-separator="vmI18n.t('common.to')"
         :start-placeholder="vmI18n.t('common.startDate')"
