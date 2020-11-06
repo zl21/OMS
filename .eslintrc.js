@@ -19,6 +19,8 @@ module.exports = {
     "max-len": "off",
     'prefer-const ':0,
     'vue/no-parsing-error': [2, { "x-invalid-end-tag": false }],
+    'eqeqeq':["off"],
+    "no-useless-escape": 0,//转义字符, 这里设置为0则可通过检查
     // quotes: [1, "single"],
     radix: "off",
     "no-plusplus": "off",

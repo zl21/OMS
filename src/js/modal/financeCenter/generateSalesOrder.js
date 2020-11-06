@@ -1,4 +1,3 @@
-import axios from 'axios';
 import businessForm from 'professionalComponents/businessForm';
 import jordanBtn from 'professionalComponents/businessButton';
 
@@ -30,7 +29,7 @@ export default {
             clearable: true, // 下拉选中是否显示清空按钮,默认为false
             clearSelect: () => {
             }, // 点击清空按钮回调
-            selectChange: (value) => {
+            selectChange: () => {
             }, // 选中事件，默认返回选中的值,默认返回当前值value
             setRequired: 'required', // 必选标识,值不为required时无标识
             options: []

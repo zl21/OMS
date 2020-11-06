@@ -1,4 +1,5 @@
 import tree from 'framework/components/tree/tree2.vue';
+
 export default {
   data() {
     return {
