@@ -1,6 +1,6 @@
 import detailTable from "@/views/pages/promotionCenter/details/table";
 import CTSIT from "@/views/pages/promotionCenter/details/CTSIT";
-import tabList from "@/views/pages/promotionCenter/details/tab_list";
+import tabList from "@/views/pages/promotionCenter/details/tabList";
 import ButtonFkDialog from  "@/views/pages/promotionCenter/components/buttonFkDialog";
 // const _import = file =>
 //   require("@/jordanComponents/views/" + file + ".vue").default;

@@ -87,12 +87,13 @@
             slot="MatchOperate"
             class="form_button"
           >
+            <button class="white" v-show="giftData.give_num_share==1" @click="setCommodity">设置商品池</button>
             <button
               class="white"
               @click="addSteps"
             >
               <!-- 添加阶梯 -->
-              { vmI18n.t("btn.add_ladder") }}
+              {{ vmI18n.t("btn.add_ladder") }}
             </button>
             <button
               class="white"
@@ -169,14 +170,24 @@
         />
       </Modal>
     </div>
+    
+    <SetCommodity 
+      :dialog_visible="dialog_visible"
+      :giftData="giftData"
+      :basicData="basicData"
+      :objid="objid"
+      :loadDis="loadDis"
+      @confirm="confirm"
+      @closeDialog="closeDialog"
+      ></SetCommodity>
   </div>
 </template>
 <script>
-  import gift_set from '@/js/pages/promotionCenter/details/gift_set.js';
+  import gift_set from '@/js/pages/promotionCenter/details/giftSet.js';
 
   export default gift_set;
 </script>
 <style lang="less">
 @import "./../less/common.less";
-@import "~@/css/pages/promotionCenter/details/gift_set.less";
+@import "~@/css/pages/promotionCenter/details/giftSet.less";
 </style>

@@ -82,7 +82,7 @@
           </template>
           <template
             slot="OPERATE"
-            slot-scope="{ row, index }"
+            slot-scope="{ row }"
           >
             <Button
               :row="row"
@@ -168,7 +168,7 @@
           </template>
           <template
             slot="OPERATE"
-            slot-scope="{ row, index }"
+            slot-scope="{ row }"
           >
             <Button
               :row="row"

@@ -22,15 +22,14 @@
     </div>
     <div class="tabs_content">
       <slot name="tab_content" />
-      <!-- <div v-for="(item,index) in  panels" :key="index" v-show="showContent(index)">{{index}}</div> -->
     </div>
   </div>
 </template>
 <script>
-  import tab_list from '@/js/pages/promotionCenter/details/tab_list.js';
+  import tabList from '@/js/pages/promotionCenter/details/tabList.js';
 
-  export default tab_list;
+  export default tabList;
 </script>
 <style lang="less" scoped>
-@import "~@/css/pages/promotionCenter/details/tab_list.less";
+@import "~@/css/pages/promotionCenter/details/tabList.less";
 </style>

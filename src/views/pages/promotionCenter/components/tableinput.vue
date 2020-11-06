@@ -96,11 +96,12 @@
           <template slot-scope="{ item }">
             <span
               v-for="(value, key, index) of item"
-              v-if="key != 'id' && key != 'value'"
               :key="index"
               :class="`length${Object.keys(item).length - 2}`"
               :title="value"
-            >{{ value }}</span>
+            >
+              <span v-if="key != 'id' && key != 'value'">{{ value }}</span>
+            </span>
           </template>
         </el-autocomplete>
 
@@ -191,6 +192,7 @@
               </li>
               <li
                 v-for="item in modelList"
+                :key='item.id'
                 @click="modelClick(item)"
               >
                 <span :title="item.key">{{ item.key }}</span>

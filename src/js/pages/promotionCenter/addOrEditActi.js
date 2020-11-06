@@ -1,8 +1,7 @@
 import axios from "axios";
-// import DateUtil from "@/assets/js/__utils__/date";
-import BasicInfo from "@/views/pages/promotionCenter/details/basic_info";
-import InfoSet from "@/views/pages/promotionCenter/details/info_set";
-import GiftSet from "@/views/pages/promotionCenter/details/gift_set";
+import BasicInfo from "@/views/pages/promotionCenter/details/basicInfo";
+import InfoSet from "@/views/pages/promotionCenter/details/infoSet";
+import GiftSet from "@/views/pages/promotionCenter/details/giftSet";
 import stepsBars from "@/views/pages/promotionCenter/components/steps";
 
 export default {
@@ -16,6 +15,7 @@ export default {
     return {
       vmI18n: window.vmI18n,
       objid: "-1", // 新增-1 保存的正整数
+      dialog_visible:false,
       basic_info: {
         // 基础信息设置
         activity_name: "", // 活动名称【必填】
@@ -124,8 +124,10 @@ export default {
         gift_doubles: "0", // 赠品翻倍 1--翻倍 0-不翻倍
         max_doubles_limits: "999", // 最大翻倍次数
         gift_methods: "1", // 赠送方式  1-全部送  2-顺序送  3-随机送
+        give_num_share: "2",//赠送总量 1-单行单梯度数量 2-多梯度统一总量
         gift_productslist: [],
         gift_productsArrs: [],
+        gift_commoditylist: [],
       },
       batch_infos_setting: {
         // 【批量】条件信息设置
@@ -180,7 +182,8 @@ export default {
         this.basic_info.gradient_gift === "1"
       )
         return false;
-      return true;
+      else
+        return true;
     },
     showSaveButton() {
       if (
@@ -221,6 +224,100 @@ export default {
     },
   },
   methods: {
+    closeDialog(){
+      this.dialog_visible = false;
+    },
+    confirm(){
+      let tablename = '商品池'
+      let rs = {code:0,message:'校验完成'};
+      rs = this.checkTable(this.gift_info_setting.gift_commoditylist)
+      if(rs.code === -1){
+          rs.message = tablename+","+rs.message;
+          return this.$message({type:'error',message:rs.message});
+       }else{
+         rs.message = tablename+","+'保存成功';
+         this.$message({type:'success',message:rs.message});
+         this.closeDialog()
+       }
+      
+    },
+    async setCommodity(){
+      let modulesValid3= this.validate3();
+      if(modulesValid3.code === -1){
+          return this.$message({type:'error',message:modulesValid3.message});
+       }
+      let arr = []
+      this.gift_info_setting.gift_productsArrs.forEach((item,index)=>{
+         item.productslist.forEach((obj,i)=>{
+           arr.push(obj)
+         })
+       })
+       console.log('this.gift_info_setting.gift_productsArrs',arr)
+       this.gift_info_setting.gift_commoditylist = await this.unique(arr)
+       this.loadDis = true
+       this.dialog_visible = true
+        this.$nextTick(()=>{
+        this.loadDis = false
+        })
+    },
+    unique(arr){ 
+      const res = new Map();
+      let self = this;
+      let copy = this.$route.query.copy
+      let arrlist =  JSON.parse(JSON.stringify(arr))
+        for (let i = 0; i < arrlist.length; i++) {
+          let temp = arrlist[i];
+          if(self.gift_info_setting.gift_commoditylist.length>0){
+            for (let j = 0; j < self.gift_info_setting.gift_commoditylist.length; j++) {
+              let item = self.gift_info_setting.gift_commoditylist[j];
+              if (item.ECODE === temp.ECODE) {
+                temp.SUM = item.SUM || '';
+                    temp.SUM_QTY = item.SUM_QTY || 0;
+                }
+              }
+          }
+        }
+      if(copy && copy > 1){
+         arrlist.forEach((item,index)=>{
+              item.SUM_QTY = item.SUM;
+        })
+       }else{
+        arrlist.forEach((item,index)=>{
+            if(!(item.SUM || item.SUM_QTY)){
+              item.SUM_QTY = 0;
+              item.SUM = '';
+            }
+        })
+       }
+        //梯度合并之后如果是导入的相同的商品赠送总计数量相加展示在商品池中，循环判断相加
+        //  arrlist.forEach((item,index)=>{
+        //    let flag = true
+        //     if(!(item.SUM || item.SUM_QTY)){
+        //       item.SUM_QTY = 0;
+        //       item.SUM = 0;
+        //     }else if(item.SUM > 0){
+        //       item.SUM_QTY = item.SUM
+        //     }
+        //     if(arrList.length>0){
+        //       arrList.some((obj,i)=>{
+        //         if(obj.ECODE===item.ECODE){
+        //           arrList[i].SUM = Number(arrList[i].SUM) + Number(item.SUM)
+        //           arrList[i].SUM_QTY = arrList[i].SUM
+        //           flag = false
+        //           return true
+        //         }
+        //       })
+        //       if(flag){
+        //         arrList.push(item)
+        //       }
+        //     }else{
+        //       arrList.push(item)
+        //     }
+        // })
+      //  console.log('arrList00000000000000',arrList)
+        console.log('arrlist------------',arrlist)
+        return arrlist.filter((arrlist) => !res.has(arrlist.ECODE) && res.set(arrlist.ECODE, 1));
+    },
     /**
      * 查询促销的详情
      */
@@ -242,12 +339,12 @@ export default {
               if (key === "rules") {
                 // Object.assign(self.condition_info_setting.rules,info.rules);
                 // add by wdq  由于后台不完整结构,
-                self.condition_info_setting.rules.forEach((rule) => {
-                  const obj = info.rules.find(
-                    (item) => item.name === rule.name
-                  );
+                self.condition_info_setting["rules"].forEach((rule) => {
+                  let obj = info['rules'].find((item) => {
+                    return item.name === rule.name;
+                  })
                   if (obj) {
-                    for (const i in obj) {
+                    for (let i in obj) {
                       rule[i] = obj[i];
                     }
                   }
@@ -607,7 +704,7 @@ export default {
      *
      */
     addListener() {
-      this.$refs.basicSteps.addEventListener("scroll", this.handleScrollByUser);
+      this.$refs['basicSteps'].addEventListener("scroll", this.handleScrollByUser);
     },
     /**
      * 用户手动滚动,监听页面滚动

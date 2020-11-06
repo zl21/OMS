@@ -3,62 +3,54 @@ import detailtabs from "@/views/pages/promotionCenter/details/tableTabs.vue";
 import SingleBox from "@/views/pages/promotionCenter/components/singleBox";
 import tableCols from "@/assets/js/promotion/columns.js";
 import ButtonFkDialog from "@/views/pages/promotionCenter/components/buttonFkDialog";
-
+import SetCommodity from "@/views/pages/promotionCenter/details/setCommodity";
 // const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
 export default {
-  name: "GiftSet",
+  name: "giftSet",
   components: {
     detailtable,
     detailtabs,
     SingleBox,
     ButtonFkDialog,
+    SetCommodity
   },
   props: {
     basicData: {
-      type: Object,
+      type: Object
     },
     giftData: {
-      type: Object,
-      // default:{
-      //   steps_type: "", //阶梯类型
-      //   gift_doubles: "1", //赠品翻倍 1--翻倍 0-不翻倍
-      //   max_doubles_limits: "999", //最大翻倍次数
-      //   gift_methods: "1", //赠送方式  1-全部送  2-顺序送  3-随机送
-      //   gift_productslist: [],
-      //   gift_productsArrs: [
-      //     {
-      //       group: "1件",
-      //       productslist: []
-      //     }
-      //   ]
-      // }
+      type: Object
     },
     loadDis: {
       type: Boolean,
-      default: false,
+      default: false
     },
-    objid: {
-      type: String,
+    objid:{
+      type: String
     },
+    dialog_visible:{
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     groups() {
       return this.$store.state.customize.forginkeys.groups;
     },
     showPdtsArr() {
-      const flag = this.basicData.gradient_gift === "1";
+      let flag = this.basicData.gradient_gift === "1";
       if (flag) {
-        // 重置tab页面为第一页
+        //重置tab页面为第一页
         this.currentTab = 0;
       }
       return flag;
     },
     getProductsArrsIndex() {
-      // 组索引
+      //组索引
       return this.giftData.gift_productsArrs.length;
     },
     getProductsListIndex() {
-      // 商品列表索引
+      //商品列表索引
       return this.giftData.gift_productslist.length;
     },
     columns() {
@@ -66,47 +58,30 @@ export default {
     },
     itemdataFk() {
       try {
-        const itemdata = JSON.parse(JSON.stringify(this.itemdata));
+        let itemdata = JSON.parse(JSON.stringify(this.itemdata));
         itemdata.isOneData = false;
         itemdata.fkdisplay = "mop";
         itemdata.isObject = true;
         return itemdata;
       } catch (e) {}
-    },
+    }
   },
   watch: {
-    loadDis(val) {
+    loadDis: function(val) {
       if (val === true) {
         this.initView();
       }
-    },
+    }
   },
   data() {
     return {
       vmI18n: window.vmI18n,
       currentTab: 0,
-      tableCols,
-      // columns: [
-      //   {
-      //     slot: "ECODE",
-      //     key: "ECODE",
-      //     title: "商品编码"
-      //   },
-      //   {
-      //     key: "ENAME",
-      //     title: "商品名称"
-      //   },
-      //   {
-      //     key: "OPERATE",
-      //     title: "操作",
-      //     fun: ""
-      //   }
-      // ], //表头
-      data: [], // 表格数据
+      tableCols: tableCols,
+      data: [], //表格数据
       itemdata: {
         col: 1,
-        colid:
-          this.$store.state.customize.forginkeys.columnIds.sku || "1700806532",
+        colid: this.$store.state.customize.forginkeys.columnIds.sku||'1700806532',
         colname: `PS_C_PRO_ID${Math.floor(Math.random() * 100)}`,
         datelimit: "all",
         display: "text",
@@ -126,26 +101,25 @@ export default {
         type: "STRING",
         valuedata: "",
         isOneData: true,
-        isObject: true,
+        isObject: true
       },
       productslistView: {
         current: 1,
         total: 0,
         pageSize: 10,
-        data: [],
+        data: []
       },
-      productsArrsView: [], // 多tab表格
-      currentView: "", // 弹框展示模块
-      popDialog: "", // 弹框
-      dialogModal: {},
-      show_dialog: false,
-      dialogSet: {
-        // 弹框设置
-        dialogTitle: "",
-        footerHide: true,
-        mask: true,
+      productsArrsView: [],   //多tab表格
+      currentView:'',   //弹框展示模块
+      popDialog:'',  //弹框
+      dialogModal:{},
+      show_dialog:false,
+      dialogSet:{     //弹框设置
+         dialogTitle:'',
+         footerHide:true,
+         mask:true,
       },
-      moduleMode: "gift",
+      moduleMode:'gift'
     };
   },
   methods: {
@@ -169,53 +143,55 @@ export default {
       this.giftData.gift_methods = val;
       this.clearPdts();
     },
+    checkGiftGrossChange(val){
+      this.giftData.give_num_share = val;
+
+      this.clearPdts();
+    },
     deleteOneTableRowData(tabindex, row, currentPage, pageSize) {
-      // 搭配-删除行数据
+      //搭配-删除行数据
       try {
-        const rowCount = (currentPage - 1) * pageSize;
-        const rowindex = rowCount + row._index;
-        const arrs =
-          this.giftData.gift_productsArrs[tabindex].productslist || [];
+        let rowCount = (currentPage - 1) * pageSize;
+        let rowindex = rowCount + row._index;
+        let arrs = this.giftData.gift_productsArrs[tabindex].productslist || [];
+        if(this.giftData.gift_productsArrs[tabindex].productslist.length <= 1){
+          this.$message({
+              type:'warning',
+              message:'至少保留一条条件信息'
+           })
+           return
+        }
         arrs.splice(rowindex, 1);
         this.countOneTablelistView(tabindex);
       } catch (e) {}
     },
     addOneTableRowData(tabindex, rowObj) {
-      // 搭配-增加行数据
-      const obj = {};
-      this.columns.forEach((col) => {
+      //搭配-增加行数据
+      let obj = {};
+      this.giftData.gift_productsArrs[tabindex].productslist
+      this.columns.forEach(col => {
         obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : "";
-        if (col.key === "ORDER") {
+        if (col.key === "ORDER")
           obj[col.key] =
             this.giftData.gift_productsArrs[tabindex].productslist.length + 1;
-        }
       });
-      // obj.itemdata = JSON.parse(JSON.stringify(this.itemdata));
-      // if (rowObj) {
-      //   obj.ID = rowObj.ID;
-      //   obj.itemdata.valuedata = rowObj.ECODE;
-      // }
-      if (rowObj) {
-        obj.ID = rowObj.ID || "";
-        obj.SKU_ID = rowObj.SKU_ID || "";
+      if(rowObj){
+          obj.ID = rowObj.ID||"";
+          obj.SKU_ID = rowObj.SKU_ID ||"";
       }
       this.giftData.gift_productsArrs[tabindex].productslist.push(obj);
       this.countOneTablelistView(tabindex);
     },
     addRowData(event, rowObj) {
-      // 非搭配--增加行
-      const obj = {};
-      this.columns.forEach((col) => {
+      //非搭配--增加行
+      let obj = {};
+
+
+      this.columns.forEach(col => {
         obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : "";
-        if (col.key === "ORDER") {
+        if (col.key === "ORDER")
           obj[col.key] = this.giftData.gift_productslist.length + 1;
-        }
       });
-      // obj.itemdata = JSON.parse(JSON.stringify(this.itemdata));
-      // if (rowObj) {
-      //   obj.ID = obj.itemdata.pid = rowObj.ID;
-      //   obj.itemdata.valuedata = rowObj.ECODE;
-      // }
       this.giftData.gift_productslist.push(obj);
       this.countTablelistView();
     },
@@ -226,9 +202,16 @@ export default {
      * @pageSize 分页页数
      */
     deleteRowData(row, currentPage, pageSize) {
-      // 非搭配-删除行
-      const rowCount = (currentPage - 1) * pageSize;
-      const index = rowCount + row._index;
+      //非搭配-删除行
+      let rowCount = (currentPage - 1) * pageSize;
+      let index = rowCount + row._index;
+      if(this.giftData.gift_productslist.length <= 1){
+        this.$message({
+              type:'warning',
+              message:'至少保留一条赠品信息'
+           })
+           return
+      }
       if (index >= 0) {
         this.giftData.gift_productslist.splice(index, 1);
       }
@@ -238,28 +221,34 @@ export default {
      * 删除阶梯
      */
     removeSteps() {
-      // let delTab = this.giftData.gift_productsArrs.length - 1;
-      const delTab = this.currentTab;
+      //let delTab = this.giftData.gift_productsArrs.length - 1;
+      let delTab = this.currentTab;
       this.giftData.gift_productsArrs.splice(this.currentTab, 1);
-      // 确认是否是删除的最后一个
+      //确认是否是删除的最后一个
       if (this.giftData.gift_productsArrs.length <= this.currentTab) {
         this.currentTab = this.giftData.gift_productsArrs.length - 1;
       }
       this.removeGroupView(delTab);
       this.countOneTablelistView(this.currentTab);
     },
-    /**
+     /**
+     *  设置商品池
+     */
+    setCommodity() {
+      this.$emit('setcommodity')
+    },
+        /**
      *  添加阶梯
      */
     addSteps() {
-      const obj = {};
-      this.columns.forEach((col) => {
+      let obj = [];
+      this.columns.forEach(col => {
         obj[col.key] = "";
       });
-      const group = {
+      let group = {
         group: this.getGroupIndex(),
         unit: this.giftData.steps_type === "QTTY" ? "件" : "元",
-        productslist: [...obj],
+        productslist: [...obj]
       };
       this.giftData.gift_productsArrs.push(group);
       this.currentTab = this.getProductsArrsIndex - 1;
@@ -275,7 +264,7 @@ export default {
         total: 0,
         current: 1,
         pageSize: 10,
-        data: [],
+        data: []
       };
       this.productsArrsView = [];
     },
@@ -323,10 +312,10 @@ export default {
      * 单表格添加和删除 灵活展示表格
      */
     countTablelistView() {
-      const rows = this.giftData.gift_productslist || [];
-      const obj = this.productslistView;
-      const pageSize = obj.pageSize || 10;
-      const pagesLen = Math.ceil(rows.length / pageSize);
+      let rows = this.giftData.gift_productslist || [];
+      let obj = this.productslistView;
+      let pageSize = obj.pageSize || 10;
+      let pagesLen = Math.ceil(rows.length / pageSize);
       if (obj.current > pagesLen) obj.current = pagesLen;
       if (pagesLen === 0) obj.current = 1;
       this.tablelistView(rows, this.productslistView);
@@ -335,10 +324,10 @@ export default {
      * 多tab单表格添加和删除 灵活展示表格
      */
     countOneTablelistView(tabindex) {
-      const rows = this.giftData.gift_productsArrs[tabindex].productslist || [];
-      const obj = this.productsArrsView[tabindex];
-      const pageSize = obj.pageSize || 10;
-      const pagesLen = Math.ceil(rows.length / pageSize);
+      let rows = this.giftData.gift_productsArrs[tabindex].productslist || [];
+      let obj = this.productsArrsView[tabindex];
+      let pageSize = obj.pageSize || 10;
+      let pagesLen = Math.ceil(rows.length / pageSize);
       if (obj.current > pagesLen) obj.current = pagesLen;
       if (pagesLen === 0) obj.current = 1;
       this.tablelistView(rows, obj);
@@ -349,10 +338,10 @@ export default {
      * @obj 表格虚拟视图
      */
     tablelistView(rows, obj) {
-      const current = obj.current || 1;
-      const pageSize = obj.pageSize || 10;
-      const start = Number((current - 1) * pageSize);
-      const end = Number(current * pageSize);
+      let current = obj.current || 1;
+      let pageSize = obj.pageSize || 10;
+      let start = Number((current - 1) * pageSize);
+      let end = Number(current * pageSize);
       obj.total = rows.length;
       obj.data = rows.slice(start, end);
     },
@@ -360,13 +349,14 @@ export default {
      * 新增的阶梯 增加对应的视图表格
      */
     addGroupView() {
-      const obj = {
+      let obj = {
         current: 1,
         total: 0,
         pageSize: 10,
-        data: [],
+        data: []
       };
       this.productsArrsView.push(obj);
+      this.addOneTableRowData(this.currentTab);
     },
     /**
      * 删除阶梯对应的视图表格
@@ -382,8 +372,8 @@ export default {
      *  @force 强制更改元数据，刷新表格
      */
     alertRowData(row, currentPage, pageSize, force) {
-      const rowCount = (currentPage - 1) * pageSize;
-      const index = rowCount + row._index;
+      let rowCount = (currentPage - 1) * pageSize;
+      let index = rowCount + row._index;
       if (index >= 0) {
         this.deleteProperty(row);
         this.giftData.gift_productslist.splice(index, 1, row);
@@ -395,25 +385,24 @@ export default {
      * @tabindex 表格索引
      */
     alertOneTableRowData(tabindex, row, currentPage, pageSize, force) {
-      const rowCount = (currentPage - 1) * pageSize;
-      const rowindex = rowCount + row._index;
+      let rowCount = (currentPage - 1) * pageSize;
+      let rowindex = rowCount + row._index;
       if (rowindex >= 0) {
         this.deleteProperty(row);
-        const arrs =
-          this.giftData.gift_productsArrs[tabindex].productslist || [];
+        let arrs = this.giftData.gift_productsArrs[tabindex].productslist || [];
         arrs.splice(rowindex, 1, row);
       }
       if (force) this.countOneTablelistView(tabindex);
     },
     getButtonFkChoose() {
-      const rs = this.itemdataFk || {};
-      const namelist = JSON.parse(rs.pid).nameList;
-      namelist.forEach((obj) => {
-        const row = {};
+      let rs = this.itemdataFk || {};
+      let namelist = JSON.parse(rs.pid).nameList;
+      namelist.forEach(obj => {
+        let row = {};
         if (rs.reftable === "SG_B_CHANNEL_PRODUCT") {
           row.ECODE = obj.PS_C_SKU_ECODE || "";
           row.ENAME = obj.PS_C_PRO_ENAME || "";
-          row.SKU_ID = obj.SKU_ID || "";
+          row.SKU_ID = obj.SKU_ID||"";
           row.ID = obj.ID;
         } else {
           row.ECODE = obj.ECODE || "";
@@ -424,23 +413,23 @@ export default {
       });
     },
     getOnePageButtonFkChoose(tabindex, val) {
-      const rs = val || {};
-      const namelist = JSON.parse(rs.pid).nameList;
-      namelist.forEach((obj) => {
-        const row = {};
+      let rs = val || {};
+      let namelist = JSON.parse(rs.pid).nameList;
+      namelist.forEach(obj => {
+        let row = {};
         if (rs.reftable === "SG_B_CHANNEL_PRODUCT") {
           row.ECODE = obj.PS_C_SKU_ECODE || "";
           row.ENAME = obj.PS_C_PRO_ENAME || "";
           row.ID = obj.SKU_ID;
-        } else if (rs.reftable === "IP_C_TAOBAO_PRODUCT") {
-          row.ECODE = obj.NUM_IID || "";
-          row.ENAME = obj.TITLE || "";
-          row.ID = obj.ID;
-        } else if (rs.reftable === "PS_C_PRO") {
-          row.ECODE = obj.ECODE || "";
-          row.ENAME = obj.ENAME || "";
-          row.ID = obj.ID || "";
-        } else {
+        }else if(rs.reftable === 'IP_C_TAOBAO_PRODUCT'){
+             row.ECODE = obj.NUM_IID||"";
+             row.ENAME = obj.TITLE||"";
+             row.ID = obj.ID;
+         }else if(rs.reftable === 'PS_C_PRO'){
+             row.ECODE = obj.ECODE||"";
+             row.ENAME = obj.ENAME||"";
+             row.ID = obj.ID||"";
+         } else {
           row.ECODE = obj.ECODE || "";
           row.ENAME = obj.PS_C_PRO_ENAME || "";
           row.ID = obj.ID;
@@ -460,17 +449,27 @@ export default {
      * 定制列元素
      */
     customeColumns() {
-      let cols = [];
+      let cols = [];     
       if (this.giftData.gift_methods === "2") {
-        cols = JSON.parse(JSON.stringify(this.tableCols.giftInCreaseColumns));
-      } else {
-        cols = JSON.parse(JSON.stringify(this.tableCols.giftAllColumns));
-      }
-
-      cols.forEach((column) => {
+        if (this.giftData.give_num_share === "1") {
+           cols = JSON.parse(JSON.stringify(this.tableCols.giftInCreaseNoSUMColumns));
+         }else{
+         cols = JSON.parse(JSON.stringify(this.tableCols.giftInCreaseColumns));
+         }
+       } else {
+         if (this.giftData.give_num_share === "1") {
+           cols = JSON.parse(JSON.stringify(this.tableCols.giftNoSumColumns));
+         }else{
+           cols = JSON.parse(JSON.stringify(this.tableCols.giftAllColumns));
+         }
+       }
+      
+      cols.forEach(column => {
         if (column.key === "SUM_QTY") {
           if (this.basicData.status === "1" || this.objid == "-1") {
-            column.render = (h, params) => h("div", {}, params.row.SUM);
+            column.render = (h, params) => {
+              return h("div", {}, params.row.SUM);
+            };
           } else {
             delete column.render;
             this.$set(column, "render", null);
@@ -478,7 +477,9 @@ export default {
         }
         if (column.key === "SEND_QTY") {
           if (this.basicData.status === "1" || this.objid == "-1") {
-            column.render = (h, params) => h("div", {}, 0);
+            column.render = (h, params) => {
+              return h("div", {}, 0);
+            };
           } else {
             delete column.render;
             this.$set(column, "render", null);
@@ -491,11 +492,11 @@ export default {
      * 根据数据源 真实展示数据
      */
     initView() {
-      const obj = {
+      let obj = {
         current: 1,
         total: 0,
         pageSize: 10,
-        data: [],
+        data: []
       };
       if (this.basicData.gradient_gift === "0") {
         this.productslistView = obj;
@@ -506,7 +507,7 @@ export default {
       } else {
         this.productsArrsView = [];
         this.giftData.gift_productsArrs.forEach((item, index) => {
-          const o = JSON.parse(JSON.stringify(obj));
+          let o = JSON.parse(JSON.stringify(obj));
           this.productsArrsView.push(o);
           this.tablelistView(
             this.giftData.gift_productsArrs[index].productslist,
@@ -515,54 +516,61 @@ export default {
         });
       }
     },
-    /**
+     /**
      * 导入
      */
-    importData() {
-      const self = this;
+    importData(){
+      let self = this;
       this.dialogModal = {};
-      this.dialogModal.tableName = this.itemdata.reftable || "PS_C_SKU";
-      this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
-      const _component = "popdialog";
+      this.dialogModal.tableName = this.itemdata.reftable||'PS_C_SKU';
+      this.dialogModal.mode = this.moduleMode;   //区分模块 条件设置  赠品设置 还是批量设置
+      let  _component = "popdialog";
       Vue.component(
         _component,
-        Vue.extend(_import("onlinePromotion/components/importDialog"))
+        Vue.extend("@/views/pages/promotionCenter/components/importDialog")
       );
       self.currentView = _component;
-      // self.dialogSet.dialogTitle = "导入";
-      self.dialogSet.dialogTitle = vmI18n.t("modalTitle.import");
+      self.dialogSet.dialogTitle = '导入';
       self.show_dialog = true;
     },
     /**
      * 返回值，用于弹框返回解析
      */
-    returnData(data) {
-      if (data && data.length > 0) {
-        this.giftData.gift_productslist = this.giftData.gift_productslist.concat(
-          data
-        );
-        this.countTablelistView();
-      }
+    returnData(data){
+       if(data && data.length > 0){
+          this.giftData.gift_productslist = this.giftData.gift_productslist.concat(data);
+          this.countTablelistView();
+       }
     },
-    /**
+     /**
      * 返回值，用于弹框导入返回调添加多个表
      */
-    returnOneTableData(data, tabindex) {
-      if (data && data.length > 0) {
-        this.giftData.gift_productsArrs[
-          tabindex
-        ].productslist = this.giftData.gift_productsArrs[
-          tabindex
-        ].productslist.concat(data);
-        this.countOneTablelistView(tabindex);
-      }
+    returnOneTableData(data ,tabindex){
+       if(data && data.length > 0){
+         if(this.giftData.give_num_share == '1'){
+           data.forEach((item,index)=>{
+             item.SUM = 0
+           })
+         }
+          this.giftData.gift_productsArrs[tabindex].productslist = this.giftData.gift_productsArrs[tabindex].productslist.concat(data);
+          this.countOneTablelistView(tabindex);
+       }
+    },
+    /**
+     * 商品池保存
+     */
+    confirm(){
+      this.$emit('confirm')
     },
     /**
      * 关闭弹框
      */
-    closeDialog() {
-      this.show_dialog = false;
-    },
+    closeDialog(){
+      //  this.show_dialog = false;
+      this.$emit('closeDialog')
+    }
   },
-  mounted() {},
+  mounted() {
+    this.addRowData()
+  }
 };

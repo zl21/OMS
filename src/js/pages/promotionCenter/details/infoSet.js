@@ -21,33 +21,6 @@ export default {
     },
     infoData: {
       type: Object,
-      // default: {
-      //   products_join: 1, // 商品参与方式  1-非搭配 2-搭配
-      //   products_origin: "1", //商品来源  1-系统商品  2-平台商品
-      //   includeorexclude: "1", // 选择商品方式    1-包含  2-排除
-      //   productsArrs: [
-      //     {
-      //       group: "组01",
-      //       rules: [
-      //         {
-      //           name: "AMOUNT_LIST", // 条件名称
-      //           type: "GE", // 条件类型：大于，等于
-      //           value: "3" // 条件值
-      //         }
-      //       ],
-      //       productslist: []
-      //     }
-      //   ],
-      //   productslist: [],
-      //   rules: [
-      //     {
-      //       check: true, //选中  true、false
-      //       name: "AMOUNT_LIST", // 条件名称
-      //       type: "GE", // 条件类型：大于，等于
-      //       value: "3" // 条件值
-      //     }
-      //   ]
-      // }
     },
     loadDis: {
       type: Boolean,

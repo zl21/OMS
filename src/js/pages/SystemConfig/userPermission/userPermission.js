@@ -226,7 +226,7 @@ export default {
     tree,
   },
   methods: {
-   async getPermission(item) {
+    async getPermission(item) {
       if (item === undefined) return (this.rightListBody = []);
       this.rightLoading = true;
       // 接口
@@ -234,8 +234,8 @@ export default {
       formData.append("param", JSON.stringify({
         CP_C_HRUSERS_ID: item.ID, //用户item.ID
       }));
-      const {data:{data,code}} = await this.service.systemConfig.chrstoregroupquery(this.activeName,formData);
-      console.log(data,code);
+      const { data: { data, code } } = await this.service.systemConfig.chrstoregroupquery(this.activeName, formData);
+      console.log(data, code);
       this.rightLoading = false;
       if (code === 0 && data) {
         this.rightListBody = data.data;
@@ -264,7 +264,7 @@ export default {
       this.obj.startindex = this.middleList.body.length;
       if (
         event.target.scrollHeight - event.target.scrollTop ===
-          event.target.offsetHeight &&
+        event.target.offsetHeight &&
         event.target.scrollTop !== 0
       ) {
         this.dataLoading = true;
@@ -287,10 +287,10 @@ export default {
     }, //懒加载数据
     async getUserHeadData() {
       const formData = new FormData();
-      formData.append("table",'CP_C_HRUSERS');
-      formData.append("getcmd",'y');
+      formData.append("table", 'CP_C_HRUSERS');
+      formData.append("getcmd", 'y');
       console.log(formData);
-      const {data:{code,datas,tabcmd}} = await this.service.systemConfig.getTableQuery(formData);
+      const { data: { code, datas, tabcmd } } = await this.service.systemConfig.getTableQuery(formData);
       if (code === 0) {
         datas["dataarry"].forEach((obj, index) => {
           if (index > 1) return;
@@ -335,14 +335,14 @@ export default {
       let self = this;
       let num = 0;
       let sendObj = {}; //存储传给table的对象
-      const {data:{data,code}} = await this.service.systemConfig.userstreeload();
-      console.log(data,code);
+      const { data: { data, code } } = await this.service.systemConfig.userstreeload();
+      console.log(data, code);
       if (code === 0) {
         // 储存原始数据以便后续模糊查询使用
         self.ztreeDataSource = JSON.parse(JSON.stringify(res.data));
         //储存渲染树的数据
         self.treeData = res.data;
-      }else{
+      } else {
         this.$message.warning(message)
       }
       // this.$ajax.dataAjax("/p/cs/userstreeload", {}, function (res) {
@@ -388,9 +388,9 @@ export default {
         }
         if (val.TYPE === "CP_C_HRORG_ID") {
           // 接口
-          const formData = new FormData(); 
-          formData.append('CP_C_HRORG_ID','valID')
-          const {data:{message,code,CP_C_HRORG_ID,CP_C_STORE_ID}} = await this.service.systemConfig.usertreequery(formData);
+          const formData = new FormData();
+          formData.append('CP_C_HRORG_ID', 'valID')
+          const { data: { message, code, CP_C_HRORG_ID, CP_C_STORE_ID } } = await this.service.systemConfig.usertreequery(formData);
           if (code === 0) {
             let HRORG = "in ("; //储存键名为CP_C_HRORG_ID对象的ID
             let STORE = "in ("; //储存键名为CP_C_STORE_ID对象的ID
@@ -408,7 +408,7 @@ export default {
               this.obj["reffixedcolumns"].CP_C_STORE_ID =
                 STORE.substring(0, STORE.length - 1) + ")";
             }
-          }else{
+          } else {
             this.$message.error(message)
           }
           // await axios({

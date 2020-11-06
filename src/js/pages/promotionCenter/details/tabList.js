@@ -3,7 +3,6 @@ export default {
   data() {
     return {
       edit: false, //tab标签编辑
-      //current:this.currentTab
     };
   },
   

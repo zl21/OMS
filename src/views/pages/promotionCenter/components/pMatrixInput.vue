@@ -120,7 +120,7 @@
   </div>
 </template>
 <style lang="less" type="text/less">
-  @import "~@/css/pages/promotionCenter/components/P_matrixInput.less";
+  @import "~@/css/pages/promotionCenter/components/pMatrixInput.less";
 </style>
 <style lang="less" scoped type="text/less">
 .ff-input--query--matrix {
@@ -159,7 +159,7 @@
 }
 </style>
 <script>
-  import P_matrixInput from '@/js/pages/promotionCenter/components/P_matrixInput';
+  import pMatrixInput from '@/js/pages/promotionCenter/components/pMatrixInput';
 
-  export default P_matrixInput;
+  export default pMatrixInput;
 </script>
