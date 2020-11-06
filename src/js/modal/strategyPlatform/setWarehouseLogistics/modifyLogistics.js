@@ -103,7 +103,7 @@ export default {
         objid: this.$route.query.id
       };
       fromdata.append('param', JSON.stringify(param));
-      const res = await this.service.common.setWarehouseLogistics(fromdata);
+      const res = await this.service.common.saveWarehouseLogistics(fromdata);
       if (res.data.data.code === 0) {
         _this.$parent.$parent.$parent.getTreeData();
         _this.$parent.$parent.$parent.provinceSynchronous();

@@ -38,7 +38,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        url: 'publicDialog/importTable',
+        url: 'modal/publicDialog/importTable',
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {},
@@ -57,7 +57,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'modifyLogistics', // 组件名称
-        url: 'strategyPlatform/setWarehouseLogistics/modifyLogistics',
+        url: 'modal/strategyPlatform/setWarehouseLogistics/modifyLogistics',
         keepAlive: true,
         excludeString: 'modifyLogistics', // 将name传进去，确认不缓存
         componentData: {},
@@ -89,7 +89,7 @@ export default {
             text: vmI18n.t('btn.save'), // 按钮文本
             btnclick: () => {
               const _this = this;
-              if (this.$route.query.id > 0) {
+              if (this.$route.params.customizedModuleId > 0) {
                 if (_this.listArr.length == 0) {
                   // _this.$Message.warning("请选择物流区域!");
                   _this.$Message.warning(vmI18n.t('modalTips.y7'));
@@ -147,7 +147,7 @@ export default {
               const _this = this;
               _this.importTable.componentData = {
                 tableName: 'ST_C_WAREHOUSE_LOGISTICS',
-                objid: _this.$route.query.id,
+                objid: _this.$route.params.customizedModuleId,
               };
               _this.$children
                 .find(item => item.name === 'importTable')
@@ -168,7 +168,7 @@ export default {
             text: vmI18n.t('btn.modify_logistics'), // 按钮文本
             disabled: true,
             btnclick: () => {
-              this.modifyLogistics.componentData = { id: this.$route.query.id };
+              this.modifyLogistics.componentData = { id: this.$route.params.customizedModuleId };
               this.$children
                 .find(item => item.name === 'modifyLogistics')
                 .openConfirm();
@@ -187,17 +187,23 @@ export default {
             // text: "返回",
             text: vmI18n.t('btn.back'), // 按钮文本
             btnclick: () => {
-              const _this = this;
-              _this.$store.commit('customize/TabHref', {
-                id: 1111113,
-                type: 'table',
-                name: 'ST_C_WAREHOUSE_LOGISTICS',
-                // label: "仓库物流优先级方案",warehouse_logistics_priority_scheme
-                label: vmI18n.t(
-                  'panel_label.warehouse_logistics_priority_scheme'
-                ),
-                back: true,
+              this.$store.commit('global/tabOpen', {
+                type: 'S',
+                tableName: 'ST_C_WAREHOUSE_LOGISTICS',
+                tableId: 1111113,
+                label: "仓库物流优先级方案",
               });
+              // const _this = this;
+              // _this.$store.commit('customize/TabHref', {
+              //   id: 1111113,
+              //   type: 'table',
+              //   name: 'ST_C_WAREHOUSE_LOGISTICS',
+              //   // label: "仓库物流优先级方案",warehouse_logistics_priority_scheme
+              //   label: vmI18n.t(
+              //     'panel_label.warehouse_logistics_priority_scheme'
+              //   ),
+              //   back: true,
+              // });
             },
           },
         ],
@@ -271,7 +277,7 @@ export default {
     };
   },
   mounted() {
-    if (this.$route.query.id !== '-1') {
+    if (this.$route.params.customizedModuleId !== 'New') {
       this.information.formData[0].itemdata.readonly = true;
       this.setTableHeight();
       this.refresh();
@@ -316,7 +322,7 @@ export default {
           ST_C_WAREHOUSE_LOGISTICS_ITEM: [],
           ST_C_WAREHOUSE_LOGISTICS_RANK_RESULT: cloneListArr,
         },
-        objid: this.$route.query.id,
+        objid: this.$route.params.customizedModuleId,
       };
       fromData.append('param', JSON.stringify(param));
       // 保存
@@ -324,7 +330,7 @@ export default {
       _this.isSaveLoading = false;
       if (code === 0) {
         _this.$Message.success(vmI18n.t('modalTips.z9'));// 保存成功
-        if (this.$route.query.id !== '-1') {
+        if (this.$route.params.customizedModuleId !== 'New') {
           this.refresh();
         } else {
           this.$store.commit('customize/TabHref', {
@@ -352,7 +358,7 @@ export default {
       //   if (res.data.data.code === 0) {
       //     // _this.$Message.success("保存成功");
       //     _this.$Message.success(vmI18n.t("modalTips.z9"));
-      //     if (this.$route.query.id !== "-1") {
+      //     if (this.$route.params.customizedModuleId !== "-1") {
       //       this.refresh();
       //     } else {
       //       this.$store.commit("customize/TabHref", {
@@ -380,7 +386,7 @@ export default {
       const _this = this;
       _this.isSaveLoading = true;
       const fromData = new FormData();
-      const param = { objid: this.$route.query.id };
+      const param = { objid: this.$route.params.customizedModuleId };
       fromData.append('param', JSON.stringify(param));
 
       // 保存
@@ -487,7 +493,7 @@ export default {
       // 接口
       _this.tableLoading = false;
       const fromData = new FormData();
-      const params = { objid: this.$route.query.id, treeNode: treeList };
+      const params = { objid: this.$route.params.customizedModuleId, treeNode: treeList };
       fromData.append('param', JSON.stringify(params));
       // 接口
       const { data: { oK, data } } = await this.service.strategyPlatform.saveWarehouseLogistics(fromData);
@@ -501,7 +507,7 @@ export default {
       // axios({
       //   url: "/p/cs/getLogisticsRankResultTable",
       //   method: "post",
-      //   data: { objid: this.$route.query.id, treeNode: treeList },
+      //   data: { objid: this.$route.params.customizedModuleId, treeNode: treeList },
       // }).then((res) => {
       //   _this.tableLoading = false;
       //   if (res.data.code === 0) {
@@ -532,7 +538,7 @@ export default {
         });
       }
       const fromData = new FormData();
-      const params = { objid: this.$route.query.id, treeNode: treeList };
+      const params = { objid: this.$route.params.customizedModuleId, treeNode: treeList };
       fromData.append('param', JSON.stringify(params));
       // 接口
       const { data: { oK, data } } = await this.service.strategyPlatform.saveWarehouseLogistics(fromData);
@@ -548,7 +554,7 @@ export default {
       //   url: "/p/cs/getLogisticsRankResultTable",
       //   method: "post",
       //   data: {
-      //     objid: this.$route.query.id,
+      //     objid: this.$route.params.customizedModuleId,
       //     cityleave: "PROV",
       //     treeNode: treeList,
       //   },
@@ -602,7 +608,7 @@ export default {
       _this.listArr = [];
       _this.tableLoading = true;
       const fromData = new FormData();
-      const params = { objid: _this.$route.query.id, treeLikeKey: e };
+      const params = { objid: _this.$route.params.customizedModuleId, treeLikeKey: e };
       fromData.append('param', JSON.stringify(params));
       // 接口
       const { data: { oK, data } } = await this.service.strategyPlatform.saveWarehouseLogistics(fromData);
@@ -671,7 +677,7 @@ export default {
       const _this = this;
       _this.isSaveLoading = true;
       const fromData = new FormData();
-      const param = { objid: this.$route.query.id };
+      const param = { objid: this.$route.params.customizedModuleId };
       fromData.append('param', JSON.stringify(param));
       const { data: { code, data, message } } = await this.service.strategyPlatform.voidWarehouseLogistics(fromData);
       _this.isSaveLoading = false;
@@ -702,7 +708,7 @@ export default {
 
       const fromData = new FormData();
       const param = {
-        objid: _this.$route.query.id,
+        objid: _this.$route.params.customizedModuleId,
         treeNode: treeList,
       };
       fromData.append('param', JSON.stringify(param));
