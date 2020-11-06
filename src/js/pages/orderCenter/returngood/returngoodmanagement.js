@@ -71,7 +71,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'jordanBounced', // 组件名称
-        url: 'returngood/jordanBounced',
+        url: 'returngood/rturngoodModifyRemarks',
         keepAlive: true,
         excludeString: 'jordanBounced', // 将name传进去，确认不缓存
         componentData: {}

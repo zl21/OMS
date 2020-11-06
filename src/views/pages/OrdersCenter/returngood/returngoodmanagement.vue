@@ -143,7 +143,6 @@
         />
       </div>
     </div>
-    <!-- <jordanBounced :bouncedData="bouncedList"></jordanBounced> -->
     <div class="queryorderB">
       <!-- 查询原始订单编号 -->
       <Modal

@@ -46,10 +46,10 @@ export default {
         mask: true, // 是否显示遮罩层
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
-        name: 'jordanBounced', // 组件名称
-        url: 'returngood/jordanBounced',
+        name: 'rturngoodModifyRemarks', // 组件名称
+        url: 'returngood/rturngoodModifyRemarks',
         keepAlive: true,
-        excludeString: 'jordanBounced', // 将name传进去，确认不缓存
+        excludeString: 'rturngoodModifyRemarks', // 将name传进去，确认不缓存
         componentData: {},
       },
       // 修改退回仓库
@@ -1488,7 +1488,7 @@ export default {
         type: 1,
       };
       this.$children
-        .find(item => item.name === 'jordanBounced')
+        .find(item => item.name === 'rturngoodModifyRemarks')
         .openConfirm();
     },
     // 修改卖家备注
@@ -1507,7 +1507,7 @@ export default {
         type: 2,
       };
       this.$children
-        .find(item => item.name === 'jordanBounced')
+        .find(item => item.name === 'returngoodmanagement')
         .openConfirm();
     },
     // 修改退货仓库
