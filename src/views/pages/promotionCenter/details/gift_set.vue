@@ -172,7 +172,7 @@
   </div>
 </template>
 <script>
-  import gift_set from '@/js/pages/promotionCenter/details/gift_set.js';
+  import gift_set from '@/js/pages/promotionCenter/details/gift_set';
 
   export default gift_set;
 </script>

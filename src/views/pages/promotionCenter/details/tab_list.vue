@@ -27,7 +27,7 @@
   </div>
 </template>
 <script>
-  import tab_list from '@/js/pages/promotionCenter/details/tab_list.js';
+  import tab_list from '@/js/pages/promotionCenter/details/tab_list';
 
   export default tab_list;
 </script>

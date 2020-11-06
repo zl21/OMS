@@ -18,6 +18,7 @@ module.exports = {
     "import/no-cycle": "off",
     "max-len": "off",
     'prefer-const ':0,
+    'vue/no-parsing-error': [2, { "x-invalid-end-tag": false }],
     // quotes: [1, "single"],
     radix: "off",
     "no-plusplus": "off",

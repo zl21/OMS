@@ -154,7 +154,7 @@
   </div>
 </template>
 <script>
-  import orderItem from '@/js/pages/orderCenter/returngood/refundAfterShipment.js';
+  import orderItem from '@/js/pages/orderCenter/returngood/refundAfterShipment';
 
   export default orderItem;
 </script>

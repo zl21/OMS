@@ -213,7 +213,7 @@
   </div>
 </template>
 <script>
-  import batchTables from '@/js/pages/promotionCenter/details/batchTables.js';
+  import batchTables from '@/js/pages/promotionCenter/details/batchTables';
 
   export default batchTables;
 </script>

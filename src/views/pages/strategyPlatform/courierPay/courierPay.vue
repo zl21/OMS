@@ -51,7 +51,7 @@
   </div>
 </template>
 <script>
-  import courierPay from '@/js/pages/strategyPlatform/courierPay/courierPay.js';
+  import courierPay from '@/js/pages/strategyPlatform/courierPay/courierPay';
 
   export default courierPay;
 </script>

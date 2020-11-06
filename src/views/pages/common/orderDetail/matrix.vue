@@ -179,7 +179,10 @@
                 <span>尺寸</span>
               </div>
             </th>
-            <th v-for="(size, index) of tHead">
+            <th
+              v-for="(size, index) of tHead"
+              :key="`'ff-matrix'+${index}`"
+            >
               {{ size.name }}
             </th>
             <th class="ff-matrix-font--red">
@@ -302,6 +305,7 @@
             </td>
             <td
               v-for="(size, index) of tHead"
+              :key="`'ff-matrix--table'+${index}`"
               class="ff-matrix--table-align"
             >
               {{ calculateLine(size, tally) }}
@@ -351,7 +355,7 @@
   </div>
 </template>
 <script>
-  import matrix from '@/js/pages/common/orderDetail/matrix.js';
+  import matrix from '@/js/pages/common/orderDetail/matrix';
 
   export default matrix;
 </script>

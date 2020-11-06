@@ -310,7 +310,7 @@
 </template>
 
 <script>
-  import putStorePickOrder from '@/js/pages/orderCenter/scanIn/putStorePickOrder.js';
+  import putStorePickOrder from '@/js/pages/orderCenter/scanIn/putStorePickOrder';
 
   export default putStorePickOrder;
 </script>

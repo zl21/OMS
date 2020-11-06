@@ -46,7 +46,7 @@ export default {
       dataEmptyMessage: '数据加载中...', // c
       columns: ['name', 'value'], // 展现的组
       IS_AUTOCHECK_ORDER: false,
-      IS_MERGE_ORDER: false,     //是否可合并
+      IS_MERGE_ORDER: false, // 是否可合并
       orderType: [''],
       indeterminate: false,
       checkAll: false,
@@ -239,16 +239,16 @@ export default {
     setResult(type) {
       if (type == 'IS_AUTOCHECK_ORDER') {
         this.result.IS_AUTOCHECK_ORDER = this.IS_AUTOCHECK_ORDER ? 'Y' : 'N';
-      } else if (type == 'IS_MERGE_ORDER'){
+      } else if (type == 'IS_MERGE_ORDER') {
         this.result.IS_MERGE_ORDER = this.IS_MERGE_ORDER ? 'Y' : 'N';
       } else if (
-        type ==='AUDIT_WAIT_TIME'
+        type === 'AUDIT_WAIT_TIME'
           || type === 'WAIT_TIME'
           || type === 'RECEIVER_ADDRESS'
           || type === 'BUYER_REMARK'
           || type === 'SELLER_REMARK'
           || type === 'HOLD_WAIT_TIME'
-          || type ==='UN_AUDIT_WAIT_TIME'
+          || type === 'UN_AUDIT_WAIT_TIME'
       ) {
         this.result[type] = this.info[type];
       } else if (type == 'orderType') {

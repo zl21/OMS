@@ -1,6 +1,6 @@
 // 订单中心
 import R3 from '@syman/burgeon-r3';
-import port from '@/js/pages/common/orderDetail/connector.js';
+import port from '@/js/pages/common/orderDetail/connector';
 
 const { network } = R3;
 export default {

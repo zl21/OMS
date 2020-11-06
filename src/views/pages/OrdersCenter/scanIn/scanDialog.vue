@@ -1,5 +1,5 @@
 <template>
-  <div class="dilog">
+  <div class="dialog">
     <jordan-table
       :jordan-table-config="jordanTableConfig"
       @on-select="onSelect"
@@ -7,20 +7,20 @@
       @on-select-all="onSelectAll"
       @on-select-all-cancel="onSelectAllCancel"
     />
-    <div class="dilogBtn">
+    <div class="dialogBtn">
       <jordan-button :btn-config="btnConfig" />
     </div>
   </div>
 </template>
 
 <script>
-  import scandilog from '@/js/pages/orderCenter/scanIn/scandilog.js';
+  import scanDialog from '@/js/pages/orderCenter/scanIn/scanDialog';
 
-  export default scandilog;
+  export default scanDialog;
 </script>
 
 <style scoped>
-    .dilogBtn {
+    .dialogBtn {
         margin-top: 10px;
     }
 </style>

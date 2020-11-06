@@ -332,7 +332,6 @@ export default {
           data: param
         }).then((res) => {
           if (res.data.code == 0) {
-
             _this.$parent.$parent.$parent.returnArr1(_this.selectData[0].ID, res.data.data.PS_C_SKU_ECODE_ACTUAL, _this.selectData[0].PRODUCTITEMS[0].ID);
             // _this.$parent.$parent.$parent.getList();
             _this.$parent.$parent.closeConfirm();

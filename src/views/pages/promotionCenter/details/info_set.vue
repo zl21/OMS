@@ -179,7 +179,7 @@
   </div>
 </template>
 <script>
-  import info_set from '@/js/pages/promotionCenter/details/info_set.js';
+  import info_set from '@/js/pages/promotionCenter/details/info_set';
 
   export default info_set;
 </script>

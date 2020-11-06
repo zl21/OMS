@@ -174,7 +174,7 @@
   </div>
 </template>
 <script>
-  import commodityAuthority from '@/js/pages/SystemConfig/commodityAuthority/commodityAuthority.js';
+  import commodityAuthority from '@/js/pages/SystemConfig/commodityAuthority/commodityAuthority';
 
   export default commodityAuthority;
 </script>

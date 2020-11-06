@@ -1,6 +1,4 @@
 import tree from 'framework/components/tree/tree2.vue';
-import axios from 'framework/__utils__/request';
-
 export default {
   data() {
     return {
@@ -15,7 +13,7 @@ export default {
       sheetWidth: '',
       tabsList: [
         {
-          label: vmI18n.t('panel_label.warehouse_authority'),
+          label: this.vmI18n.t('panel_label.warehouse_authority'),
           url: '/p/cs/chrstoregroupquery',
         },
         {
@@ -240,21 +238,6 @@ export default {
       if (code === 0 && data) {
         this.rightListBody = data.data;
       }
-      // axios({
-      //   url: this.activeName,
-      //   method: "post",
-      //   data: {
-      //     param: JSON.stringify({
-      //       CP_C_HRUSERS_ID: item.ID, //用户item.ID
-      //     }),
-      //   },
-      // }).then((res) => {
-      //   let data = res.data;
-      //   this.rightLoading = false;
-      //   if (data.code === 0) {
-      //     this.rightListBody = data.data;
-      //   }
-      // });
     }, // 获取最右边的数据
     activeUser(item) {
       this.currentItem = item;
@@ -297,19 +280,6 @@ export default {
           this.middleList.header.push(obj);
         });
       }
-      // axios({
-      //   url: "/p/cs/getTableQuery",
-      //   method: "post",
-      //   data:params,
-      // }).then((res) => {
-      //   let data = res.data;
-      //   if (data.code === 0) {
-      //     data.datas["dataarry"].forEach((obj, index) => {
-      //       if (index > 1) return;
-      //       this.middleList.header.push(obj);
-      //     });
-      //   }
-      // });
     }, // 获取用户头部数据
     getUserBodyData() {
       this.dataLoading = true;
@@ -345,25 +315,6 @@ export default {
       } else {
         this.$message.warning(message);
       }
-      // this.$ajax.dataAjax("/p/cs/userstreeload", {}, function (res) {
-      //   res = JSON.parse(JSON.stringify(res));
-      //   if (res.code === 0) {
-      //     // 储存原始数据以便后续模糊查询使用
-      //     self.ztreeDataSource = JSON.parse(JSON.stringify(res.data));
-      //     //储存渲染树的数据
-      //     self.treeData = res.data;
-      //   }
-      //   if (res.code == -1) {
-      //     self.errorMessage({
-      //       action: "confirm",
-      //       title: "警告",
-      //       type: "error",
-      //       list: [],
-      //       isAction: true,
-      //       desc: res.message,
-      //     });
-      //   }
-      // });
     }, // 表格返回时的状态
     async getItemData(val) {
       this.obj = {
@@ -413,43 +364,6 @@ export default {
           } else {
             this.$message.error(message);
           }
-          // await axios({
-          //   url: "/p/cs/usertreequery",
-          //   method: "post",
-          //   data: {
-          //     CP_C_HRORG_ID: valID,
-          //   },
-          // }).then((res) => {
-          //   let data = res.data;
-          //   if (data.code === 0) {
-          //     let HRORG = "in ("; //储存键名为CP_C_HRORG_ID对象的ID
-          //     let STORE = "in ("; //储存键名为CP_C_STORE_ID对象的ID
-          //     data.CP_C_HRORG_ID.forEach((item) => {
-          //       HRORG += item.ID + ","; // in 1,2,3,5,6,87,8,6
-          //     });
-          //     data.CP_C_STORE_ID.forEach((item) => {
-          //       STORE += item.ID + ",";
-          //     });
-          //     if (data.CP_C_HRORG_ID.length > 0) {
-          //       this.obj["reffixedcolumns"].CP_C_HRORG_ID =
-          //         HRORG.substring(0, HRORG.length - 1) + ")";
-          //     }
-          //     if (data.CP_C_STORE_ID.length > 0) {
-          //       this.obj["reffixedcolumns"].CP_C_STORE_ID =
-          //         STORE.substring(0, STORE.length - 1) + ")";
-          //     }
-          //   }
-          //   if (data.code == -1) {
-          //     self.errorMessage({
-          //       action: "confirm",
-          //       title: "警告",
-          //       type: "error",
-          //       list: [],
-          //       isAction: true,
-          //       desc: res.message,
-          //     });
-          //   }
-          // });
         }
       }
       this.getUserBodyData().then(() => {
@@ -494,7 +408,6 @@ export default {
       });
     }, // 获取初始接口传过来的值
     searchNode(func, b) {
-      const self = this;
       let k = 0;
       if (!this.search.trim()) return;
       if (typeof func !== 'function') {
@@ -504,7 +417,7 @@ export default {
         }
         func = item => item.MIXNAME_UPPER.indexOf(upper) !== -1;
       }
-      const start = Date.now();
+
       if (b === undefined) {
         this.treeNodes.forEach((item) => {
           item.clickNode = false;
@@ -512,8 +425,6 @@ export default {
           item.isExpand = false;
         });
       }
-      const end = Date.now();
-      const begin = new Date().getTime();
       for (let i = 0; i < this.treeNodes.length; i++) {
         const treeNode = this.treeNodes[i];
         if (func(treeNode)) {
@@ -530,7 +441,6 @@ export default {
           i = this.treeNodes.length;
         }
       }
-      const end1 = new Date().getTime();
     }, // 时时改变list的值
     handleIconClick() {
       this.searchNode();

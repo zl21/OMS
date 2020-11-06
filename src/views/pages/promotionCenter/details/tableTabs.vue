@@ -84,7 +84,7 @@
   </div>
 </template>
 <script>
-  import tableTabs from '@/js/pages/promotionCenter/details/tableTabs.js';
+  import tableTabs from '@/js/pages/promotionCenter/details/tableTabs';
 
   export default tableTabs;
 </script>

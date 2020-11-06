@@ -73,7 +73,7 @@ export default {
       }
       this.spinShow = true;
       // 接口
-      const res = await this.service.systemConfig.objectSave(url, urlSearchParams(params));
+      const res = await this.service.systemConfig.objectSave(url, this.$urlSearchParams(params));
       if (res) {
         this.spinShow = false;
         this.$Modal.fcSuccess({

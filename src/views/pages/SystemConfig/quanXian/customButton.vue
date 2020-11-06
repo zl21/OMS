@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-  import customButton from '@/js/pages/SystemConfig/quanXian/customButton.js';
+  import customButton from '@/js/pages/SystemConfig/quanXian/customButton';
 
   export default customButton;
 </script>
