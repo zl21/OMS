@@ -245,11 +245,13 @@ export default {
       formdata.append('objid' , this.$route.params.itemId);
 
       this.service.common.objectSave(formdata).then((res) => {
-        console.log(res);
+        if(res.data.code === 0){
+          this.getData();
+          this.save = false;
+          this.$children[0].Dialog = false;
+        }
         
       });
-      this.$children[0].Dialog = false;
-      console.log(this);
       // document.getElementById('actionMODIFY').click();
     }, // 告诉父组件先保存主表
     changeEditSave() {
@@ -459,26 +461,11 @@ export default {
           }`
         ].push(obj);
       }
-      return this.service.orderCenter.amendBody(this.tablename, {
-        table:
-          this.tablename === 'DL_B_TRAN_OUT_POS'
-            ? this.tablename.replace('_POS', '')
-            : this.tablename, // 表
-        objid: this.objid, // 主表ID
-        data: JSON.stringify(data)
-      });
-      // return axios({
-      //   url: port[this.tablename].amendBody,
-      //   method: 'post',
-      //   data: {
-      //     table:
-      //       this.tablename === 'DL_B_TRAN_OUT_POS'
-      //         ? this.tablename.replace('_POS', '')
-      //         : this.tablename, // 表
-      //     objid: this.objid, // 主表ID
-      //     data: JSON.stringify(data)
-      //   }
-      // });
+      let formdata = new FormData();
+      formdata.append('table' , this.tablename === 'DL_B_TRAN_OUT_POS' ? this.tablename.replace('_POS', '') : this.tablename);
+      formdata.append('objid' , this.objid);
+      formdata.append('data' , JSON.stringify(data));
+      return this.service.orderCenter.amendBody(this.tablename, formdata);
     }, // 切换和改变页码和页显示数时保存数据
     errorDialogClose(val, option) {
       if (option) {
@@ -522,30 +509,16 @@ export default {
           type: 'warning'
         }); 
       }
-      this.service.orderCenter.prodel({
-        param: JSON.stringify({
-          objid: this.objid,
-          maintable: this.tablename,
-          tablename: port[this.tablename].tableName,
-          fixcolumn: {
-            PRO_ECODES: arr
-          }
-        })
-      })
-      // axios({
-      //   url: '/p/cs/prodel',
-      //   method: 'post',
-      //   data: {
-      //     param: JSON.stringify({
-      //       objid: this.objid,
-      //       maintable: this.tablename,
-      //       tablename: port[this.tablename].tableName,
-      //       fixcolumn: {
-      //         PRO_ECODES: arr
-      //       }
-      //     })
-      //   }
-      // })
+      let formdata = new FormData();
+      formdata.append('param' , JSON.stringify({
+        objid: this.objid,
+        maintable: this.tablename,
+        tablename: port[this.tablename].tableName,
+        fixcolumn: {
+          PRO_ECODES: arr
+        }
+      }));
+      this.service.orderCenter.prodel(formdata)
         .then((res) => {
           const data = res.data;
           if (data.code === 0) {
