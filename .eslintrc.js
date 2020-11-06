@@ -1,10 +1,10 @@
 module.exports = {
-  extends: ["airbnb-base", "plugin:vue/recommended"],
-  plugins: ["vue", "jsx"],
+  extends: ['airbnb-base', 'plugin:vue/recommended'],
+  plugins: ['vue', 'jsx'],
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       webpack: {
-        config: "./webpack.config.js"
+        config: './webpack.config.js'
       }
     }
   },
@@ -13,38 +13,38 @@ module.exports = {
     node: true
   },
   rules: {
-    "no-trailing-spaces": "off",
-    "linebreak-style": "off",
-    "import/no-cycle": "off",
-    "max-len": "off",
-    'prefer-const ':0,
+    'no-trailing-spaces': 'off',
+    'linebreak-style': 'off',
+    'import/no-cycle': 'off',
+    'max-len': 'off',
+    'prefer-const ': 0,
     // quotes: [1, "single"],
-    radix: "off",
-    "no-plusplus": "off",
-    "prefer-destructuring": "off",
-    "global-require": "off",
-    "comma-dangle": "off",
-    "no-underscore-dangle": "off",
-    "guard-for-in": "off",
-    "no-restricted-syntax": "off",
-    "no-param-reassign": "off",
-    "vue/script-indent": ["error", 2, { baseIndent: 1 }],
-    "vue/order-in-components": "off",
-    "no-extend-native": "off",
-    "no-eval": "off",
-    "no-shadow": "off"
+    radix: 'off',
+    'no-plusplus': 'off',
+    'prefer-destructuring': 'off',
+    'global-require': 'off',
+    'comma-dangle': 'off',
+    'no-underscore-dangle': 'off',
+    'guard-for-in': 'off',
+    'no-restricted-syntax': 'off',
+    'no-param-reassign': 'off',
+    'vue/script-indent': ['error', 2, { baseIndent: 1 }],
+    'vue/order-in-components': 'off',
+    'no-extend-native': 'off',
+    'no-eval': 'off',
+    'no-shadow': 'off'
   },
   overrides: [
     {
-      files: ["*.vue"],
+      files: ['*.vue'],
       rules: {
-        indent: "off"
+        indent: 'off'
       }
     }
   ],
   parserOptions: {
-    parser: "babel-eslint",
-    sourceType: "module",
+    parser: 'babel-eslint',
+    sourceType: 'module',
     ecmaVersion: 2017
   }
 };
