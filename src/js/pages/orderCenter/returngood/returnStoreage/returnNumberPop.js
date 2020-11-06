@@ -332,7 +332,8 @@ export default {
           data: param
         }).then((res) => {
           if (res.data.code == 0) {
-            _this.$parent.$parent.$parent.returnArr1(_this.selectData[0].ID, res.data.data.reserve_varchar04, _this.selectData[0].PRODUCTITEMS[0].ID);
+
+            _this.$parent.$parent.$parent.returnArr1(_this.selectData[0].ID, res.data.data.PS_C_SKU_ECODE_ACTUAL, _this.selectData[0].PRODUCTITEMS[0].ID);
             // _this.$parent.$parent.$parent.getList();
             _this.$parent.$parent.closeConfirm();
           } else {
@@ -359,7 +360,7 @@ export default {
       }).then((res) => {
         this.$parent.$parent.closeConfirm();
         if (res.data.code == 0) {
-          this.$parent.$parent.$parent.returnArr1(res.data.data.returnId, res.data.data.reserve_varchar04, this.wrongSelectData[0].ID);
+          this.$parent.$parent.$parent.returnArr1(res.data.data.returnId, res.data.data.PS_C_SKU_ECODE_ACTUAL, this.wrongSelectData[0].ID);
         } else {
           this.$Message.warning(res.data.message);
         }

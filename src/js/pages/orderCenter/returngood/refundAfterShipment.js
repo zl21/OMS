@@ -930,7 +930,7 @@ export default {
         // if (item.item.label == '判责方') item.item.props.value = data.RESPONSIBLE_PARTY;
         // if (item.item.label == '支付账号') item.item.props.value = data.BUYER_ALIPAY_NO;
         // 收款人姓名
-        if (item.item.label === _this.vmI18n.t('form_label.namePayee')) item.item.props.value = data.RESERVE_VARCHAR01;
+        if (item.item.label === _this.vmI18n.t('form_label.namePayee')) item.item.props.value = data.RECEIVER_NAME;
         // _this.addItem.addList.forEach(item => {
         //   a = a + Number(item.RETURNABLE_AMOUNT);
         // });
@@ -1334,7 +1334,7 @@ export default {
             // if (item.item.label === '判责方') item.item.props.value = data.RESPONSIBLE_PARTY;
             // if (configItemLabel === '支付账号') configItem.props.value = data.BUYER_ALIPAY_NO;
             // 收款人姓名;
-            if (configItemLabel === self.vmI18n.t('form_label.namePayee')) configItem.props.value = data.RESERVE_VARCHAR01;
+            if (configItemLabel === self.vmI18n.t('form_label.namePayee')) configItem.props.value = data.RECEIVER_NAME;
             // self.addItem.addList.forEach(item => {
             //   a = a + Number(item.RETURNABLE_AMOUNT);
             // });

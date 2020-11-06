@@ -40,20 +40,6 @@
           slot="reference"
           style="display: inline-block;position: relative;"
         >
-          <!--防止显示提示的密码列表-->
-          <!--<input type="password" id="preventTipsPassword" style="width: 0; border: 0 none"/>
-          <input
-            type="text"
-            class="ff-search-input pinyin"
-            placeholder="请输入条码、商品编码"
-            @keyup="keyup($event)"
-            @input="keyinput($event)"
-            @compositionstart="composition($event, 'start')"
-            @compositionend="composition($event, 'end')"
-            readonly
-            onfocus="$(this).removeAttr('readonly');"
-            @keyup.enter.stop="entry"
-          />-->
           <input
             ref="searchInput"
             v-model="search"

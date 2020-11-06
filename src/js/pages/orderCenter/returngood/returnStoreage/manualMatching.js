@@ -205,8 +205,8 @@ export default {
           SPECIAL_TYPE: '', // 特殊处理类型
           REMARK: '', // 备注
           RECEIVER_ADDRESS: '', // 发件地址
-          RESERVE_VARCHAR01: '', // 处理人
-          RESERVE_VARCHAR02: '', // 处理人备注
+          MATCHER: '', // 处理人
+          REMARk_HANDLE: '', // 处理人备注
         },
         // 表单非空提示
         ruleValidate: {
@@ -525,7 +525,7 @@ export default {
           title: '退单编号'
         },
         {
-          key: 'RESERVE_VARCHAR04',
+          key: 'PS_C_SKU_ECODE_ACTUAL',
           title: '实际发出条码'
         },
         {
@@ -564,14 +564,14 @@ export default {
           style: 'input',
           label: '处理人',
           disabled: false, // 按钮禁用控制
-          value: 'RESERVE_VARCHAR01',
+          value: 'MATCHER',
           width: '6'
         },
         {
           style: 'input',
           label: '处理人备注',
           disabled: false, // 按钮禁用控制
-          value: 'RESERVE_VARCHAR02',
+          value: 'REMARk_HANDLE',
           width: '6'
         },
         {
@@ -590,13 +590,11 @@ export default {
     // 选中的退货明细赋值
     returnArr(data, itemId) {
       this.jordanTableConfig.data[this.index].OC_B_RETURN_ORDER_ID = data;
-      // this.jordanTableConfig.data.RESERVE_BIGINT01 = itemId;
     },
     // 选中的退货明细赋值
     returnArr1(data, data1, itemId) {
       this.jordanTableConfig.data[this.index].OC_B_RETURN_ORDER_ID = data;
-      this.jordanTableConfig.data[this.index].RESERVE_VARCHAR04 = data1;
-      // this.jordanTableConfig.data[this.index].RESERVE_BIGINT01 = itemId;
+      this.jordanTableConfig.data[this.index].PS_C_SKU_ECODE_ACTUAL = data1;
     },
     // 保存
     saveData() {

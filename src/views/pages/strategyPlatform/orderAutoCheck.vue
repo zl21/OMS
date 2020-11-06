@@ -68,6 +68,46 @@
                     </Col>
                   </FormItem>
                   </Col>
+                  <Col span="4">
+                    <FormItem label="检查可合并订单：">
+                      <Checkbox
+                        @on-change="setResult('IS_MERGE_ORDER')"
+                        size="small"
+                        v-model="IS_MERGE_ORDER"
+                      >&nbsp;
+                      </Checkbox>
+                    </FormItem>
+                  </Col>
+                  <Col span="8">
+                    <FormItem label="hold单等待时间：">
+                      <Col span="20">
+                        <Input
+                          size="small"
+                          v-model="info.HOLD_WAIT_TIME"
+                          @on-change="setResult('HOLD_WAIT_TIME')"
+                          :maxlength="5"
+                        />
+                      </Col>
+                      <Col span="4">
+                        分钟
+                      </Col>
+                    </FormItem>
+                  </Col>
+                  <Col span="8">
+                    <FormItem label="反审核等待时间：">
+                      <Col span="20">
+                        <Input
+                          size="small"
+                          v-model="info.UN_AUDIT_WAIT_TIME"
+                          @on-change="setResult('UN_AUDIT_WAIT_TIME')"
+                          :maxlength="5"
+                        />
+                      </Col>
+                      <Col span="4">
+                        分钟
+                      </Col>
+                    </FormItem>
+                  </Col>
                 </Row>
               </div>
             </Panel>

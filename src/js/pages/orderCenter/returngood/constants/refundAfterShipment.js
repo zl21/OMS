@@ -118,7 +118,7 @@ const reFormDataConfig = {
   实际退款金额: 'AMT_RETURN_ACTUAL',
   判责方: 'RESPONSIBLE_PARTY',
   判责方备注: 'RESPONSIBLE_PARTY_REMARK',
-  收款人姓名: 'RESERVE_VARCHAR01',
+  收款人姓名: 'RECEIVER_NAME',
   备注: 'REMARK',
   卖家备注: 'SELLER_REMARK'
 };
