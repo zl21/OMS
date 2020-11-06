@@ -24,10 +24,6 @@ export default {
               'filter-method': this.filterMethod
             },
             event: {
-              'on-change': (e) => {
-                // console.log(e);
-                // this.copyModalConfig.originalRole = e.target.value;
-              },
               'on-select': (value) => {
                 this.copyModalConfig.originalRole = value.value;
               }
@@ -48,10 +44,10 @@ export default {
               AutoData: []
             },
             event: {
-              'on-page-change': (value) => { },
-              'on-input-value-change': (value) => { },
-              'on-popper-show': async (e) => {
-                const res = await this.service.common.getCo;
+              'on-page-change': () => { },
+              'on-input-value-change': () => { },
+              'on-popper-show': async () => {
+                // const res = await this.service.common.getCo;
                 axios({
                   url: '/p/cs/getCopyTargetGroups',
                   method: 'get',
@@ -174,7 +170,7 @@ export default {
     }
   },
   watch: {
-    copyModal(val, oldVal) {
+    copyModal(val) {
       if (val) {
         this.getOriginRole();
       }

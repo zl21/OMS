@@ -2,13 +2,12 @@ import customButton from '@/views/pages/SystemConfig/quanXian/customButton';
 import quanXianTable from '@/views/pages/SystemConfig/quanXian/quanXianTable';
 import copyModal from '@/views/pages/SystemConfig/quanXian/copyModal';
 import R3 from '@syman/burgeon-r3';
-import axios from 'axios';
 import form from '@/assets/js/__utils__/form';
 import qxBtnData from './qxBtnData';
 
 console.log(4, R3);
 const { FilterTree, SelectTree, SearchForm } = R3.components;
-const { network, urlSearchParams } = R3;
+const { urlSearchParams } = R3;
 export default {
   components: {
     customButton,
@@ -177,18 +176,6 @@ export default {
 
         this.getTableData();
       }
-      // network.post("/p/cs/groupTreeload", {}).then((res) => {
-      //   if (res.data.code === 0) {
-      //     this.groupId = res.data.data[0].ID;
-      //     this.newGroupId = res.data.data[0].ID;
-      //     this.filterTreeConfig.treeAttribute.data = this.restructureMenuTreeData(
-      //       res.data.data,
-      //       true
-      //     );
-
-      //     this.getTableData();
-      //   }
-      // });
     },
     // 获取搜索框
     async getSearchForm() {
@@ -203,18 +190,6 @@ export default {
         });
         this.searchFormConfig.defaultconfig = dataArray;
       }
-      // network.post('/p/cs/permission/v1/selectPermissionColumn', urlSearchParams({ permissionType: this.permissionType }))
-      //   .then((res) => {
-      //     if (res.data.code === 0) {
-      //       let dataArray = form.refactoringData(res.data.datas.dataarry);
-      //       dataArray.map(item => {
-      //         if (item.item.value) {
-      //           item.item.props.value = item.item.value;
-      //         }
-      //       })
-      //       this.searchFormConfig.defaultconfig = dataArray;
-      //     }
-      //   });
     },
 
     // 获取表格
@@ -320,92 +295,6 @@ export default {
           this.$Message.success(vmI18n.t('common.refresh_succee'));// 刷新成功
         }
       }
-      // network.post(url, urlSearchParams(params)).then((res) => {
-      //   if (res.data.code === 0) {
-      //     this.tableArr.isReadValueTotal = 0;
-      //     this.tableArr.isWriteValueTotal = 0;
-      //     this.tableArr.isReadValue = false;
-      //     this.tableArr.isWriteValue = false;
-      //     this.tableArr.isChild = false;
-      //     this.tableArr.parentIsRead = 0;
-      //     this.tableArr.parentIsWrite = 0;
-      //     this.tableArr.isParentReadValue = false;
-      //     this.tableArr.isParentWriteValue = false;
-
-      //     if (this.permissionType === "sensitive") {
-      //       let dt = res.data.data;
-      //       dt.map((item) => {
-      //         dt.isChild = !!item.PARENT_GROUPS_ID;
-      //         if (item.PARENT_GROUPS_ID) {
-      //           if (item.PARENT_ISREAD == "Y") {
-      //             this.tableArr.parentIsRead++;
-      //           }
-      //           if (item.PARENT_ISMODIFY == "Y") {
-      //             this.tableArr.parentIsWrite++;
-      //           }
-      //         }
-      //         item.IS_WRITE = item.ISMODIFY == "Y";
-      //         item.IS_READ = item.ISREAD == "Y";
-      //       });
-      //       this.tableArr.columns = this.sensitiveColumns;
-      //       this.tableArr.rows = res.data.data;
-      //       this.tableArr.isChild = dt.isChild;
-      //     } else {
-      //       let dt = res.data.data;
-      //       dt.rows.map((item) => {
-      //         dt.isChild = !!item.PARENT_GROUPS_ID;
-      //         if (item.PARENT_GROUPS_ID) {
-      //           if (item.PARENT_IS_READ == "Y") {
-      //             this.tableArr.parentIsRead++;
-      //           }
-      //           if (item.PARENT_IS_WRITE == "Y") {
-      //             this.tableArr.parentIsWrite++;
-      //           }
-      //         }
-      //       });
-      //       this.tableArr.columns = dt.columns;
-      //       this.tableArr.rows = dt.rows;
-      //       this.tableArr.isChild = dt.isChild;
-      //     }
-
-      //     this.tableArr.rows.forEach((item) => {
-      //       if (item.IS_READ === "Y" || item.ISREAD === "Y") {
-      //         item.IS_READ = true;
-      //         this.tableArr.isReadValueTotal++;
-      //       } else {
-      //         item.IS_READ = false;
-      //       }
-      //       if (item.IS_WRITE === "Y" || item.ISMODIFY === "Y") {
-      //         item.IS_WRITE = true;
-      //         this.tableArr.isWriteValueTotal++;
-      //       } else {
-      //         item.IS_WRITE = false;
-      //       }
-      //     });
-
-      //     if (this.tableArr.parentIsRead === this.tableArr.rows.length) {
-      //       this.tableArr.isParentReadValue = true;
-      //     }
-      //     if (this.tableArr.parentIsWrite === this.tableArr.rows.length) {
-      //       this.tableArr.isParentWriteValue = true;
-      //     }
-      //     if (this.tableArr.isReadValueTotal === this.tableArr.rows.length) {
-      //       this.tableArr.isReadValue = true;
-      //     }
-      //     if (this.tableArr.isWriteValueTotal === this.tableArr.rows.length) {
-      //       this.tableArr.isWriteValue = true;
-      //     }
-
-      //     this.permissionTable = res.data.data.permissionTable;
-      //     this.permissionKeyColumn = res.data.data.permissionKeyColumn;
-
-      //     this.oldTableArr = JSON.parse(JSON.stringify(this.tableArr.rows));
-      //     if (refresh) {
-      //       // this.$Message.success("刷新成功");
-      //       this.$Message.success(vmI18n.t("common.refresh_succee"));
-      //     }
-      //   }
-      // });
     },
 
     async sureBtn(params) {
@@ -445,45 +334,6 @@ export default {
           },
         });
       }
-      // network
-      //   .axios({
-      //     url: "/p/cs/copyShopPermission",
-      //     method: "post",
-      //     data: param,
-      //   })
-      //   .then((res) => {
-      //     if (res.data.code === 0) {
-      //       this.$Modal.success({
-      //         // title: "提示",
-      //         title: vmI18n.t("modalTitle.tips"),
-      //         content: res.data.message,
-      //         cancelType: true,
-      //         titleAlign: "left",
-      //         mask: true,
-      //         draggable: true,
-      //         keyDown: (event) => {
-      //           if (event.keyCode == 27 || event.keyCode == 13) {
-      //             self.$Modal.remove();
-      //           }
-      //         },
-      //       });
-      //     } else {
-      //       this.$Modal.error({
-      //         // title: "提示",
-      //         title: vmI18n.t("modalTitle.tips"),
-      //         content: res.data.message,
-      //         cancelType: true,
-      //         titleAlign: "left",
-      //         mask: true,
-      //         draggable: true,
-      //         keyDown: (event) => {
-      //           if (event.keyCode == 27 || event.keyCode == 13) {
-      //             self.$Modal.remove();
-      //           }
-      //         },
-      //       });
-      //     }
-      //   });
     },
     cancelBtn() {
       this.copyModal = false;
