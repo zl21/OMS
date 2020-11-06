@@ -1,3 +1,5 @@
+import qs from 'qs';
+
 export default {
   props: {
     copyModal: {
@@ -47,54 +49,51 @@ export default {
               'on-page-change': () => { },
               'on-input-value-change': () => { },
               'on-popper-show': async () => {
-                // const res = await this.service.common.getCo;
-                axios({
-                  url: '/p/cs/getCopyTargetGroups',
-                  method: 'get',
+                const query = {
                   params: {
                     id: this.copyModalConfig.originalRole
                   }
-                }).then((res) => {
-                  if (res.data.code === 0) {
-                    this.config[1].item.props.totalRowCount = res.data.data.length;
-                    const cc = [];
-                    res.data.data.map((item, index) => {
-                      cc[index] = {
-                        ID: {
-                          val: item.id
-                        },
-                        INDEX: {
-                          val: index
-                        },
-                        NAME: {
-                          val: item.name
-                        }
-                      };
-                    });
-                    this.config[1].item.props.data = {
-                      start: 0,
-                      tabth: [
-                        {
-                          colname: 'ID',
-                          name: 'ID',
-                          show: false
-                        },
-                        {
-                          colname: 'INDEX',
-                          name: '序号',
-                          show: false
-                        },
-                        {
-                          colname: 'NAME',
-                          name: '名称',
-                          show: true
-                        }
-                      ],
-                      row: cc
+                };
+                const res = await this.service.common.getCopyTargetGroups(qs.stringify(query));
+                if (res.data.code === 0) {
+                  this.config[1].item.props.totalRowCount = res.data.data.length;
+                  const cc = [];
+                  res.data.data.forEach((item, index) => {
+                    cc[index] = {
+                      ID: {
+                        val: item.id
+                      },
+                      INDEX: {
+                        val: index
+                      },
+                      NAME: {
+                        val: item.name
+                      }
                     };
-                    console.log(this.config);
-                  }
-                });
+                  });
+                  this.config[1].item.props.data = {
+                    start: 0,
+                    tabth: [
+                      {
+                        colname: 'ID',
+                        name: 'ID',
+                        show: false
+                      },
+                      {
+                        colname: 'INDEX',
+                        name: '序号',
+                        show: false
+                      },
+                      {
+                        colname: 'NAME',
+                        name: '名称',
+                        show: true
+                      }
+                    ],
+                    row: cc
+                  };
+                  console.log(this.config);
+                }
               },
               'on-fkrp-selected': (e) => {
                 this.copyModalConfig.destinationRole = e.map(item => item.ID);
@@ -155,18 +154,17 @@ export default {
     cancelBtn() {
       this.$emit('cancel-btn');
     },
-    getOriginRole() { // 获取原角色全部数据
-      axios({
-        url: '/p/cs/cgroupsquery?param=%7B%7D',
-        method: 'get'
-      }).then((res) => {
-        console.log(res);
-        if (res.data.code == 0) {
-          this.config[0].item.props.AuotData = res.data.data;
-        } else {
-          this.$Message.warning('原角色请求失败!');
-        }
-      });
+    async getOriginRole() { // 获取原角色全部数据
+      const query = {
+        param: '%7B%7D'
+      };
+      const res = await this.service.common.cgroupsquery(qs.stringify(query));
+      console.log(res);
+      if (res.data.code === 0) {
+        this.config[0].item.props.AuotData = res.data.data;
+      } else {
+        this.$Message.warning('原角色请求失败!');
+      }
     }
   },
   watch: {
