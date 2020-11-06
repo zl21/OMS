@@ -46,7 +46,9 @@ export default {
       dataEmptyMessage: '数据加载中...', // c
       columns: ['name', 'value'], // 展现的组
       IS_AUTOCHECK_ORDER: false,
+      IS_AUTOCHECK_PAY: false, //自动审核货到付款
       IS_MERGE_ORDER: false,     //是否可合并
+      IS_FULL_GIFT_ORDER: false, //全赠品订单开启审核
       orderType: [''],
       indeterminate: false,
       checkAll: false,
@@ -86,7 +88,22 @@ export default {
       ],
       EXCLUDE_SKU_TYPE: 1,
       CREATIONDATE: '',
-      MODIFIEDDATE: ''
+      MODIFIEDDATE: '',
+      CP_C_LOGISTICS_ID:'',
+      CP_C_LOGISTICS_ID_SELECT: [
+        {
+          label:'阿里',
+          value:1
+        },
+        {
+          label:'华为',
+          value:2
+        },
+        {
+          label:'百度',
+          value:3
+        }
+      ]
     };
   },
   mounted() {
@@ -120,7 +137,9 @@ export default {
           if (data.data.code == 0) {
             this.info = data.data.data;
             this.IS_AUTOCHECK_ORDER = this.info.IS_AUTOCHECK_ORDER == 'Y';
+            this.IS_AUTOCHECK_PAY = this.info.IS_AUTOCHECK_PAY == 'Y';
             this.IS_MERGE_ORDER = this.info.IS_MERGE_ORDER == 'Y';
+            this.IS_FULL_GIFT_ORDER = this.info.IS_FULL_GIFT_ORDER == 'Y';
             this.orderType = this.info.ORDER_TYPE
               ? this.info.ORDER_TYPE.split(',')
               : [];
@@ -241,6 +260,10 @@ export default {
         this.result.IS_AUTOCHECK_ORDER = this.IS_AUTOCHECK_ORDER ? 'Y' : 'N';
       } else if (type == 'IS_MERGE_ORDER'){
         this.result.IS_MERGE_ORDER = this.IS_MERGE_ORDER ? 'Y' : 'N';
+      } else if (type == 'IS_FULL_GIFT_ORDER'){
+        this.result.IS_FULL_GIFT_ORDER = this.IS_FULL_GIFT_ORDER ? 'Y' : 'N'
+      } else if (type == 'IS_AUTOCHECK_PAY'){
+        this.result.IS_AUTOCHECK_PAY = this.IS_AUTOCHECK_PAY ? 'Y' : 'N'
       } else if (
         type ==='AUDIT_WAIT_TIME'
           || type === 'WAIT_TIME'
@@ -248,7 +271,7 @@ export default {
           || type === 'BUYER_REMARK'
           || type === 'SELLER_REMARK'
           || type === 'HOLD_WAIT_TIME'
-          || type ==='UN_AUDIT_WAIT_TIME'
+          || type === 'ANTI_AUDIT_WAIT_TIME'
       ) {
         this.result[type] = this.info[type];
       } else if (type == 'orderType') {
