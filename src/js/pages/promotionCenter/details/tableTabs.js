@@ -1,12 +1,13 @@
-import detailTable from "@/views/pages/promotionCenter/details/table";
-import CTSIT from "@/views/pages/promotionCenter/details/CTSIT";
-import tabList from "@/views/pages/promotionCenter/details/tab_list";
-import ButtonFkDialog from  "@/views/pages/promotionCenter/components/buttonFkDialog";
+import detailTable from '@/views/pages/promotionCenter/details/table';
+import CTSIT from '@/views/pages/promotionCenter/details/CTSIT';
+import tabList from '@/views/pages/promotionCenter/details/tab_list';
+import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDialog';
 // const _import = file =>
 //   require("@/jordanComponents/views/" + file + ".vue").default;
-import importDialog from "./../components/importDialog";
+import importDialog from '../components/importDialog';
+
 export default {
-  name: "detailTabs",
+  name: 'detailTabs',
   components: {
     detailTable,
     CTSIT,
@@ -20,17 +21,17 @@ export default {
         return this.current;
       },
       set(val) {
-        this.$emit("update:current", val);
+        this.$emit('update:current', val);
       }
     },
-    itemdataFk(){
-      try{
-        let itemdata = JSON.parse(JSON.stringify(this.itemdata));
+    itemdataFk() {
+      try {
+        const itemdata = JSON.parse(JSON.stringify(this.itemdata));
         itemdata.isOneData = false;
         itemdata.fkdisplay = 'mop';
         itemdata.isObject = true;
         return itemdata;
-      }catch(e){}
+      } catch (e) {}
     },
   },
   props: {
@@ -46,23 +47,23 @@ export default {
     itemdata: {
       type: Object
     },
-    productsArrsView:{
-      type:Array
+    productsArrsView: {
+      type: Array
     },
-    moduleMode:{
-      type:String
+    moduleMode: {
+      type: String
     }
   },
   data() {
     return {
       // currentView:'',  //弹框
       // popDialog:'',     
-      dialogModal:{},   //弹框传参
-      show_dialog:false,   //弹框是否关闭
-      dialogSet:{       //弹框层设置  标题、 隐藏底部 、是否遮罩
-         dialogTitle:'',
-         footerHide:true,
-         mask:true,
+      dialogModal: {}, // 弹框传参
+      show_dialog: false, // 弹框是否关闭
+      dialogSet: { // 弹框层设置  标题、 隐藏底部 、是否遮罩
+        dialogTitle: '',
+        footerHide: true,
+        mask: true,
       }
     };
   },
@@ -74,41 +75,41 @@ export default {
      * @tabindex 标记第几个表格
      */
     addOneTableRowData(tabindex) {
-      this.$emit("addOneTableRowData", tabindex);
+      this.$emit('addOneTableRowData', tabindex);
     },
     /**
      * @rowindex 行数据的标记
      */
-    deleteOneTableRowData(row,currentPage ,pageSize) {
-      let tabindex = Number(this.currentTab);
-      if (tabindex >= 0) this.$emit("deleteOneTableRowData", tabindex, row,currentPage ,pageSize);
+    deleteOneTableRowData(row, currentPage, pageSize) {
+      const tabindex = Number(this.currentTab);
+      if (tabindex >= 0) this.$emit('deleteOneTableRowData', tabindex, row, currentPage, pageSize);
     },
     /**
      * 修改表格数据
      */
-    alertOneTableRowData(row ,currentPage ,pageSize,force){
-       let tabindex = Number(this.currentTab);
-       if (tabindex >= 0)  this.$emit('alertOneTableRowData', tabindex,row ,currentPage , pageSize ,force);
+    alertOneTableRowData(row, currentPage, pageSize, force) {
+      const tabindex = Number(this.currentTab);
+      if (tabindex >= 0) this.$emit('alertOneTableRowData', tabindex, row, currentPage, pageSize, force);
     },
-    onePageChange(val){
-      let tabindex = Number(this.currentTab);
-      if (tabindex >= 0) this.$emit("onePageChange", tabindex, val);
+    onePageChange(val) {
+      const tabindex = Number(this.currentTab);
+      if (tabindex >= 0) this.$emit('onePageChange', tabindex, val);
     },
-    onOnePageSizeChange(val){
-      let tabindex = Number(this.currentTab);
-      if (tabindex >= 0) this.$emit("onOnePageSizeChange", tabindex, val);
+    onOnePageSizeChange(val) {
+      const tabindex = Number(this.currentTab);
+      if (tabindex >= 0) this.$emit('onOnePageSizeChange', tabindex, val);
     },
-    getOnePageButtonFkChoose(val){
-      let tabindex = Number(this.currentTab);
-      if (tabindex >= 0) this.$emit("getOnePageButtonFkChoose", tabindex, val);
+    getOnePageButtonFkChoose(val) {
+      const tabindex = Number(this.currentTab);
+      if (tabindex >= 0) this.$emit('getOnePageButtonFkChoose', tabindex, val);
     },
     /**
      * 导入
      */
-    importData(){
-      let self = this;
+    importData() {
+      const self = this;
       this.dialogModal = {};
-      this.dialogModal.tableName = this.itemdata.reftable||'PS_C_SKU';
+      this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
       this.dialogModal.mode = this.moduleMode;
       // let  _component = "poptabdialog";
       // Vue.component(
@@ -122,15 +123,15 @@ export default {
     /**
      * 返回值，用于弹框返回解析
      */
-    returnData(data){
-        let tabindex = Number(this.currentTab);
-        this.$emit('returnOneTableData',data,tabindex)
+    returnData(data) {
+      const tabindex = Number(this.currentTab);
+      this.$emit('returnOneTableData', data, tabindex);
     },
     /**
      * 关闭弹框
      */
-    closeDialog(){
-       this.show_dialog = false;
+    closeDialog() {
+      this.show_dialog = false;
     }
 
   },

@@ -48,7 +48,8 @@
 
 <script>
 
-  import R3 from '@syman/burgeon-r3'
+  import R3 from '@syman/burgeon-r3';
+
   const enableGateWay = false;
   const { network, urlSearchParams } = R3;
   
@@ -80,7 +81,7 @@
               rememberMe: false,
               lang: 'zh_CN',
             })).then((r) => {
-              if (r.status === 200 && r.data.code === (0||1)) {
+              if (r.status === 200 && r.data.code === (0 || 1)) {
                 window.location.href = window.location.origin;
               }
             });

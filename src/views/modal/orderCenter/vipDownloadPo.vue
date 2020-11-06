@@ -1,11 +1,12 @@
 <template>
   <div style="width:400px;padding-right:20px">
-    <businessForm :formConfig="pickorderFromConfig"></businessForm>
-    <jordanBtn :btnConfig="pickorderBtnConfig"></jordanBtn>
+    <businessForm :form-config="pickorderFromConfig" />
+    <jordanBtn :btn-config="pickorderBtnConfig" />
   </div>
 </template>
 
 <script>
-  import vipDownloadPo from "@/js/modal/orderCenter/vipDownloadPo";
+  import vipDownloadPo from '@/js/modal/orderCenter/vipDownloadPo';
+
   export default vipDownloadPo;
 </script>

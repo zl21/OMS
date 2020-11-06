@@ -1,9 +1,9 @@
 // 引入曼卡龙的弹框组件
-const _import = (file) => require("@/views/" + file + ".vue").default;
+const _import = file => require(`@/views/${file}.vue`).default;
 // const _import = file => require("@/views/modal/publicDialog/importTable.vue").default;
 
 export default {
-  name: "jordanDialog",
+  name: 'jordanDialog',
   props: {
     // 是否去掉页面缓存
     keepAlive: {
@@ -13,11 +13,11 @@ export default {
     title: {
       type: String,
       // default: () => "标题"
-      default: () => vmI18n.t("modalTips.title"),
+      default: () => vmI18n.t('modalTips.title'),
     }, // 设置标题title
     titleAlign: {
       type: String,
-      default: () => "center",
+      default: () => 'center',
     }, // 设置标题是否居中 // center left
     width: {
       type: [Number, String],
@@ -26,60 +26,60 @@ export default {
     scrollable: {
       type: Boolean,
       default: () => false,
-    }, //是否可以滚动
+    }, // 是否可以滚动
     closable: {
       type: Boolean,
       default: () => true,
-    }, //是否可以按esc关闭
+    }, // 是否可以按esc关闭
     draggable: {
       type: Boolean,
       default: () => true,
-    }, //是否可以拖动
+    }, // 是否可以拖动
     mask: {
       type: Boolean,
       default: () => true,
-    }, //是否显示遮罩层
+    }, // 是否显示遮罩层
     maskClosable: {
       type: Boolean,
       default: () => true,
-    }, //是否可以点击叉号关闭
+    }, // 是否可以点击叉号关闭
     transfer: {
       type: Boolean,
       default: () => true,
-    }, //是否将弹层放在body内
+    }, // 是否将弹层放在body内
     name: {
       type: String,
-      default: () => " ",
-    }, //组件名称
+      default: () => ' ',
+    }, // 组件名称
     url: {
       type: String,
-      default: () => " ",
-    }, //组件路由
+      default: () => ' ',
+    }, // 组件路由
     componentData: {
       type: Object,
       default: () => {
       },
-    }, //数据填充
+    }, // 数据填充
     footerHide: {
       type: Boolean,
       default: () => true,
-    }, //是否显示底部
+    }, // 是否显示底部
     okText: {
       type: String,
       // default: () => "确定"
-      default: () => vmI18n.t("common.determine"),
+      default: () => vmI18n.t('common.determine'),
     },
     cancelText: {
       type: String,
       // default: () => "取消"
-      default: () => vmI18n.t("common.cancel"),
+      default: () => vmI18n.t('common.cancel'),
     },
     confirm: {
       type: Function,
-    }, //确定事件
+    }, // 确定事件
     quit: {
       type: Function,
-    }, //取消事件
+    }, // 取消事件
     visible: {
       type: Boolean,
       default: false,
@@ -89,7 +89,7 @@ export default {
     return {
       vmI18n: window.vmI18n,
       modal: this.$props.visible,
-      currentView: "",
+      currentView: '',
       commonObj: {},
       showModal: this.$props.visible,
     };
@@ -97,7 +97,7 @@ export default {
   computed: {
     currentViewData() {
       const _self = this;
-      let componentName = _self.name;
+      const componentName = _self.name;
       console.log(_self.url);
       Vue.component(componentName, Vue.extend(_import(_self.url)));
       return componentName;
@@ -109,7 +109,7 @@ export default {
       this.modal = newValue;
     },
     modal(newValue) {
-      this.$emit("update:visible", newValue);
+      this.$emit('update:visible', newValue);
       this.showModal = newValue;
     },
   },
@@ -119,7 +119,7 @@ export default {
       this.showModal = true;
       this.modal = true;
     },
-    //关闭弹框
+    // 关闭弹框
     closeConfirm() {
       setTimeout(() => {
         this.modal = false;
@@ -128,21 +128,21 @@ export default {
     },
     returnData(data) {
       if (
-        this.componentData.returnData &&
-        typeof this.componentData.returnData === "function"
+        this.componentData.returnData
+        && typeof this.componentData.returnData === 'function'
       ) {
         this.componentData.returnData(data);
       }
     },
-    //确定
+    // 确定
     onOk() {
-      if (typeof this.confirm === "function") {
+      if (typeof this.confirm === 'function') {
         this.confirm();
       }
     },
     // 取消
     onCancel() {
-      if (typeof this.quit === "function") {
+      if (typeof this.quit === 'function') {
         this.quit();
       } else {
         this.closeConfirm();

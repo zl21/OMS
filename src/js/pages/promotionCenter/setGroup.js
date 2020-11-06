@@ -39,9 +39,9 @@ export default {
     'itemdata.radio': {
       handler(val, old) {
         this.tHead = val == 1 ? [{ label: '活动名称', name: 'ENAME' }, { label: '参与店铺', name: 'SHOP_NAME' },
-                                 { label: '原分组名称', name: 'PM_GROUP' }, { label: '优先级', name: 'PM_PRIORITY' }]
+          { label: '原分组名称', name: 'PM_GROUP' }, { label: '优先级', name: 'PM_PRIORITY' }]
           : [{ label: '活动名称', name: 'ENAME' }, { label: '参与店铺', name: 'SHOP_NAME' },
-             { label: '原分组名称', name: 'PM_GROUP' }];
+            { label: '原分组名称', name: 'PM_GROUP' }];
       }
     },
     setGroupTableData: {

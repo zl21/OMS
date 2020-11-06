@@ -12,7 +12,7 @@
     mounted() {
       console.log('mounted');
     },
-  }
+  };
 </script>
 <style scoped lang="less">
   .root {

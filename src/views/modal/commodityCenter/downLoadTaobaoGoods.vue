@@ -1,9 +1,15 @@
 <template>
   <div style="width:430px;padding-right:20px">
-    <businessForm :formConfig="downLoadTaobaoGoodsFormConfig"></businessForm>
+    <businessForm :form-config="downLoadTaobaoGoodsFormConfig" />
     <div class="dialog-footer">
       <!-- 确定 -->
-      <Button type="primary" ghost @click="download">{{vmI18n.t('btn.determine')}}</Button>
+      <Button
+        type="primary"
+        ghost
+        @click="download"
+      >
+        {{ vmI18n.t('btn.determine') }}
+      </Button>
       <!-- 取消 -->
       <Button
         type="error"
@@ -13,14 +19,16 @@
             this.$emit('closeActionDialog');
           }
         "
-        >{{vmI18n.t('btn.cacel')}}</Button
       >
+        {{ vmI18n.t('btn.cacel') }}
+      </Button>
     </div>
   </div>
 </template>
 
 <script>
-  import downLoadTaobaoGoods from "@/js/modal/commodityCenter/downLoadTaobaoGoods";
+  import downLoadTaobaoGoods from '@/js/modal/commodityCenter/downLoadTaobaoGoods';
+
   export default downLoadTaobaoGoods;
 </script>
 

@@ -17,10 +17,10 @@ export default {
     return {
       vmI18n: window.vmI18n,
       scrollThead: {
-        marginRight: "10px",
+        marginRight: '10px',
       },
       scrollTableHeight: {
-        height: "",
+        height: '',
       },
     };
   },
@@ -32,16 +32,16 @@ export default {
       this.$refs.scrollTable.scrollTop = 0;
     },
     setTableHeight() {
-      let self = this;
+      const self = this;
       const contentHeight = document.getElementsByClassName(
-        "SearchForm_Table"
+        'SearchForm_Table'
       )[0].clientHeight;
-      let scrollTableHeight = contentHeight - 200;
+      const scrollTableHeight = contentHeight - 200;
       this.scrollTableHeight.height = `${scrollTableHeight}px`;
     },
     theadCheckboxChange(val, column) {
-      this.$emit("isChangeFun", true);
-      if (column.key === "IS_WRITE") {
+      this.$emit('isChangeFun', true);
+      if (column.key === 'IS_WRITE') {
         this.tableArr.isWriteValue = val;
         if (val) {
           this.tableArr.isReadValue = val;
@@ -50,7 +50,7 @@ export default {
         } else {
           this.tableArr.isWriteValueTotal = 0;
         }
-      } else if (column.key === "IS_READ") {
+      } else if (column.key === 'IS_READ') {
         this.tableArr.isReadValue = val;
         if (!val) {
           this.tableArr.isWriteValue = val;
@@ -62,18 +62,18 @@ export default {
       }
 
       setTimeout(() => {
-        if (column.key === "IS_WRITE") {
+        if (column.key === 'IS_WRITE') {
           this.rows.forEach((item) => {
-            item["IS_WRITE"] = val;
-            if (val && item["IS_READ"] !== val) {
-              item["IS_READ"] = val;
+            item.IS_WRITE = val;
+            if (val && item.IS_READ !== val) {
+              item.IS_READ = val;
             }
           });
-        } else if (column.key === "IS_READ") {
+        } else if (column.key === 'IS_READ') {
           this.rows.forEach((item) => {
-            item["IS_READ"] = val;
-            if (!val && item["IS_WRITE"] !== val) {
-              item["IS_WRITE"] = val;
+            item.IS_READ = val;
+            if (!val && item.IS_WRITE !== val) {
+              item.IS_WRITE = val;
             }
           });
         }
@@ -81,12 +81,12 @@ export default {
       }, 0);
     },
     rowCheckboxChange(val, rowIndex, column) {
-      this.$emit("isChangeFun", true);
-      if (column.key === "IS_WRITE") {
-        this.rows[rowIndex]["IS_WRITE"] = val;
+      this.$emit('isChangeFun', true);
+      if (column.key === 'IS_WRITE') {
+        this.rows[rowIndex].IS_WRITE = val;
         if (val) {
-          if (this.rows[rowIndex]["IS_READ"] !== val) {
-            this.rows[rowIndex]["IS_READ"] = val;
+          if (this.rows[rowIndex].IS_READ !== val) {
+            this.rows[rowIndex].IS_READ = val;
             this.tableArr.isReadValueTotal++;
           }
           this.tableArr.isWriteValueTotal++;
@@ -94,11 +94,11 @@ export default {
           this.tableArr.isWriteValueTotal--;
         }
       }
-      if (column.key === "IS_READ") {
-        this.rows[rowIndex]["IS_READ"] = val;
+      if (column.key === 'IS_READ') {
+        this.rows[rowIndex].IS_READ = val;
         if (!val) {
-          if (this.rows[rowIndex]["IS_WRITE"] !== val) {
-            this.rows[rowIndex]["IS_WRITE"] = val;
+          if (this.rows[rowIndex].IS_WRITE !== val) {
+            this.rows[rowIndex].IS_WRITE = val;
             this.tableArr.isWriteValueTotal--;
           }
           this.tableArr.isReadValueTotal--;
@@ -106,10 +106,8 @@ export default {
           this.tableArr.isReadValueTotal++;
         }
       }
-      this.tableArr.isReadValue =
-        this.tableArr.isReadValueTotal === this.rows.length ? true : false;
-      this.tableArr.isWriteValue =
-        this.tableArr.isWriteValueTotal === this.rows.length ? true : false;
+      this.tableArr.isReadValue = this.tableArr.isReadValueTotal === this.rows.length;
+      this.tableArr.isWriteValue = this.tableArr.isWriteValueTotal === this.rows.length;
     },
   },
 };

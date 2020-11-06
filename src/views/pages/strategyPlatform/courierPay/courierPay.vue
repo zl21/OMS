@@ -1,7 +1,13 @@
 <template>
   <div class="courierPay">
-    <div v-if="identifying === 3" class="img">
-      <img :src="'@/assets/image/void.png'" alt="" />
+    <div
+      v-if="identifying === 3"
+      class="img"
+    >
+      <img
+        :src="'@/assets/image/void.png'"
+        alt=""
+      >
     </div>
     <div class="buttons">
       <business-button :btn-config="btnConfig" />
@@ -45,7 +51,8 @@
   </div>
 </template>
 <script>
-  import courierPay from "@/js/pages/strategyPlatform/courierPay/courierPay.js";
+  import courierPay from '@/js/pages/strategyPlatform/courierPay/courierPay.js';
+
   export default courierPay;
 </script>
 

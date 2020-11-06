@@ -2,85 +2,85 @@ export default {
   // JITX寻仓接口列表界面(寻仓订单下载)
   formConfig: {
     formValue: {
-      numNumber: ""
+      numNumber: ''
     },
     formData: [
       {
-        style: "popInput", //输入框弹框单多选
-        width: "24",
+        style: 'popInput', // 输入框弹框单多选
+        width: '24',
         isActive: true,
         isdisabled: false,
         inputList: [
           {
-            childs: [{ colname: "CP_C_SHOP_ID", refobjid: 50, valuedata: 2 }]
+            childs: [{ colname: 'CP_C_SHOP_ID', refobjid: 50, valuedata: 2 }]
           }
         ],
         itemdata: {
           col: 1,
           colid: 167606,
-          colname: "CP_C_SHOP_ID", //当前字段的名称
-          datelimit: "all",
+          colname: 'CP_C_SHOP_ID', // 当前字段的名称
+          datelimit: 'all',
           refcolval: {
-            fixcolumn: "CP_C_PLATFORM_ID",
-            expre: "equal",
-            srccol: "CP_C_SHOP_ID"
+            fixcolumn: 'CP_C_PLATFORM_ID',
+            expre: 'equal',
+            srccol: 'CP_C_SHOP_ID'
           },
-          display: "text", //显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-          fkdisplay: "drp", //外键关联类型
-          fkdesc: vmI18n.t('other.shop'),//店铺
-          inputname: "CP_C_SHOP_ID", //这个是做中文类型的模糊查询字段，例如ENAME
-          isfk: true, //是否有fk键
-          isnotnull: true, //是否必填
-          isuppercase: false, //是否转大写
-          length: 65535, //最大长度是多少
-          name: vmI18n.t('other.shop'),//店铺 input前面显示的lable值
-          readonly: false, //是否可编辑，对应input   readonly属性
-          reftable: "CP_C_SHOP",
+          display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+          fkdisplay: 'drp', // 外键关联类型
+          fkdesc: vmI18n.t('other.shop'), // 店铺
+          inputname: 'CP_C_SHOP_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
+          isfk: true, // 是否有fk键
+          isnotnull: true, // 是否必填
+          isuppercase: false, // 是否转大写
+          length: 65535, // 最大长度是多少
+          name: vmI18n.t('other.shop'), // 店铺 input前面显示的lable值
+          readonly: false, // 是否可编辑，对应input   readonly属性
+          reftable: 'CP_C_SHOP',
           reftableid: 24475,
           row: 1,
           statsize: -1,
-          type: "STRING",
-          valuedata: "" //这个是选择的值
+          type: 'STRING',
+          valuedata: '' // 这个是选择的值
         }
       },
       {
-        style: 'radio', //单选框
-        label:  vmI18n.t('other.orderState'), //订单状态 前面字段
-        width: '24', //宽度
-        value: 'order_status', //绑定到formValue的值
-        setRequired: '', //必选标识,值不为required时无标识
-        options: [  //radio选项
+        style: 'radio', // 单选框
+        label: vmI18n.t('other.orderState'), // 订单状态 前面字段
+        width: '24', // 宽度
+        value: 'order_status', // 绑定到formValue的值
+        setRequired: '', // 必选标识,值不为required时无标识
+        options: [ // radio选项
           {
-            value: "NEW",
-            label: vmI18n.t('form_label.newlyBuild'),//新建
+            value: 'NEW',
+            label: vmI18n.t('form_label.newlyBuild'), // 新建
           },
           {
-            value: "CONFIRMING",
-            label: vmI18n.t('form_label.confirming'),//确认中
+            value: 'CONFIRMING',
+            label: vmI18n.t('form_label.confirming'), // 确认中
           },
           {
-            value: "CONFIRMED",
-            label: vmI18n.t('form_label.confirmed_as_JITX'),//确认为JITX
+            value: 'CONFIRMED',
+            label: vmI18n.t('form_label.confirmed_as_JITX'), // 确认为JITX
           },
           {
-            value: "ROLLBACK",
-            label: vmI18n.t('form_label.confirmed_as_non_JITX'),//确认为非JITX
+            value: 'ROLLBACK',
+            label: vmI18n.t('form_label.confirmed_as_non_JITX'), // 确认为非JITX
           }
         ]
       },
       {
-        style: "date",
-        type: "datetimerange", //日期组件类型,默认为data  (daterange)为双日期区间选择
-        value: "query_date",
-        label: vmI18n.t('form_label.queryTime'),//查询时间
-        width: "24",
-        format: "yyyy-MM-dd HH:mm:ss", //格式参照burgeonui
-        placeholder: ""
+        style: 'date',
+        type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
+        value: 'query_date',
+        label: vmI18n.t('form_label.queryTime'), // 查询时间
+        width: '24',
+        format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
+        placeholder: ''
       },
     ],
-    //表单非空提示
+    // 表单非空提示
     ruleValidate: {
-      numNumber: [{ required: true, message: " ", trigger: "blur" }]
+      numNumber: [{ required: true, message: ' ', trigger: 'blur' }]
     }
   },
   // 确定按钮
@@ -88,7 +88,7 @@ export default {
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
-      self.$Message.warning(self.vmI18n.t("modalTips.be"));//请选择需要下载的店铺
+      self.$Message.warning(self.vmI18n.t('modalTips.be'));// 请选择需要下载的店铺
       return false;
     }
     let startTime = self.downLoadFormConfig.formValue.query_date[0];
@@ -99,25 +99,25 @@ export default {
     if (endTime) {
       endTime = self.standardTimeConversiondateToStr(endTime);
     }
-    let param = {
+    const param = {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
       order_status: self.downLoadFormConfig.formValue.order_status,
       start_time: startTime,
       end_time: endTime,
-      table: self.$route.params.tableName //当前表名 必传
+      table: self.$route.params.tableName // 当前表名 必传
     };
-    let fromdata = new FormData();
-    fromdata.append("param", JSON.stringify(param));
+    const fromdata = new FormData();
+    fromdata.append('param', JSON.stringify(param));
     // 寻仓订单下载
     const { data: { code, message } } = await self.service.interfacePlatform.refundDownload(fromdata);
     if (code === 0) {
-        self.$Message.success(message);
-        self.$emit("confirmImport");
-        self.$emit("closeActionDialog",true);
-      } else {
-        self.$Message.error(message);
-        self.$emit("closeActionDialog",true);
-      }
+      self.$Message.success(message);
+      self.$emit('confirmImport');
+      self.$emit('closeActionDialog', true);
+    } else {
+      self.$Message.error(message);
+      self.$emit('closeActionDialog', true);
+    }
     // axios({
     //   url: "/p/cs/downLoadVipDelivery",
     //   method: "post",

@@ -1,8 +1,8 @@
-//系统配置-查看用户权限
-import userPermission from 'allpages/SystemConfig/userPermission/userPermission'
+// 系统配置-查看用户权限
+import userPermission from 'allpages/SystemConfig/userPermission/userPermission';
 
-//系统配置-商品权限
-import commodityAuthority from 'allpages/SystemConfig/commodityAuthority/commodityAuthority'
+// 系统配置-商品权限
+import commodityAuthority from 'allpages/SystemConfig/commodityAuthority/commodityAuthority';
 
 
 // 权限
@@ -33,11 +33,11 @@ export default {
   CP_C_HRUSERS: {
     component: quanXian,
   },  
-  //实体仓权限
+  // 实体仓权限
   physicalStorageAuthority: {
     component: quanXian,
   },
-  //品牌权限
+  // 品牌权限
   brandPermissions: {
     component: quanXian,
   },
@@ -45,4 +45,4 @@ export default {
   salesChannelAuthority: {
     component: quanXian,
   },
-}
+};

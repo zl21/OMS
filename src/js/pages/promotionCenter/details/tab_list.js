@@ -1,42 +1,40 @@
 export default {
-  name: "tablist",
+  name: 'tablist',
   data() {
     return {
-      edit: false, //tab标签编辑
-      //current:this.currentTab
+      edit: false, // tab标签编辑
+      // current:this.currentTab
     };
   },
   
   props: {
     currentTab: {
       type: Number
-    }, //当前选中
+    }, // 当前选中
     panels: {
       type: Array
     }
   },
-  computed:{
-      current:{
-          get(){
-              return this.currentTab;
-          },
-          set(val){
-              this.$emit('update:currentTab',val);
-          }
+  computed: {
+    current: {
+      get() {
+        return this.currentTab;
+      },
+      set(val) {
+        this.$emit('update:currentTab', val);
       }
+    }
   },
   methods: {
-    showClass(index){
-         return  this.current == index ? 'tab_item tab_active':'tab_item';
+    showClass(index) {
+      return this.current == index ? 'tab_item tab_active' : 'tab_item';
     },
     /**
      * 展示tab标题
      */
     showTitle(index, item) {
-      if (index === this.current && this.edit)
-         return true;
-      else 
-         return false;
+      if (index === this.current && this.edit) return true;
+      return false;
     },
     showContent(index) {
       return this.current === index;
@@ -44,8 +42,8 @@ export default {
     /**
      *  不可编辑tab
      */
-    noedit(event,item) {
-      item.group = event.target.value === ""? item.group:event.target.value;
+    noedit(event, item) {
+      item.group = event.target.value === '' ? item.group : event.target.value;
       this.edit = false;
     },
     /**
@@ -61,10 +59,10 @@ export default {
       this.handleHeaderClick(index);
       this.edit = true;
     },
-    check(event,item){
-       if(item.unit === '件'){
-           event.target.value = event.target.value.match(/^[1-9]\d{0,2}/) ? event.target.value.match(/^[1-9]\d{0,2}/)[0] : '';
-       }
+    check(event, item) {
+      if (item.unit === '件') {
+        event.target.value = event.target.value.match(/^[1-9]\d{0,2}/) ? event.target.value.match(/^[1-9]\d{0,2}/)[0] : '';
+      }
     }
   },
   mounted() {}

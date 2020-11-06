@@ -1,48 +1,55 @@
 <template>
   <div class="jurisdiction">
-    <Spin size="large" fix v-if="spinShow"></Spin>
+    <Spin
+      v-if="spinShow"
+      size="large"
+      fix
+    />
     <customButton :button-config="buttonConfig" />
     <div class="content">
       <div class="FilterTree_box left_col">
         <FilterTree
           class="FilterTree"
-          :treeAttribute="filterTreeConfig.treeAttribute"
-          :treeEvent="filterTreeConfig.treeEvent"
+          :tree-attribute="filterTreeConfig.treeAttribute"
+          :tree-event="filterTreeConfig.treeEvent"
           :clearable="filterTreeConfig.clearable"
           :placeholder="filterTreeConfig.placeholder"
-        ></FilterTree>
+        />
       </div>
       <div class="right_col">
         <div class="SearchForm_Table">
-          <div class="fromHeight" v-if="permissionType !== 'sensitive'">
+          <div
+            v-if="permissionType !== 'sensitive'"
+            class="fromHeight"
+          >
             <SearchForm
               class="SearchForm"
-              :setHeight="searchFormConfig.setHeight"
-              :rowAll="searchFormConfig.rowAll"
-              :searchFoldnum="searchFormConfig.searchFoldnum"
-              :defaultColumn="searchFormConfig.defaultColumn"
+              :set-height="searchFormConfig.setHeight"
+              :row-all="searchFormConfig.rowAll"
+              :search-foldnum="searchFormConfig.searchFoldnum"
+              :default-column="searchFormConfig.defaultColumn"
               :defaultconfig="searchFormConfig.defaultconfig"
-            ></SearchForm>
+            />
             <customButton :button-config="searchBtnConfig" />
           </div>
           <div class="table_content">
             <quanXianTable
               ref="quanXianTable"
-              :searchValue="tableArr.searchValue"
+              :search-value="tableArr.searchValue"
               :rows="tableArr.rows"
               :columns="tableArr.columns"
-              :tableArr="tableArr"
+              :table-arr="tableArr"
               @isChangeFun="isChangeFun"
-            ></quanXianTable>
+            />
           </div>
         </div>
       </div>
     </div>
     <copyModal
-      :copyModal="copyModal"
+      :copy-modal="copyModal"
       @cancel-btn="cancelBtn"
       @sure-btn="sureBtn"
-    ></copyModal>
+    />
     <Modal
       v-model="saveModal"
       :title="vmI18n.t('modalTitle.tips')"
@@ -55,8 +62,9 @@
   </div>
 </template>
 <script>
-import quanXian from "@/js/pages/SystemConfig/quanXian/quanXian.js";
-export default quanXian;
+  import quanXian from '@/js/pages/SystemConfig/quanXian/quanXian.js';
+
+  export default quanXian;
 </script>
 <style lang="less">
 @import "~@/css/pages/SystemConfig/quanXian/quanXian.less";

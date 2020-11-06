@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from 'axios';
+
 export default {
   props: {
     itemdata: {
@@ -9,15 +10,15 @@ export default {
     },
     showCol: {
       type: String,
-      default: "PS_C_SKU_ECODE"
+      default: 'PS_C_SKU_ECODE'
     }
   },
   components: {},
   data() {
     return {
-      value: "", //选中值 v-model 绑定
-      queryList: [], //模糊搜索项目
-      isSelected:false,  // 是否选中项
+      value: '', // 选中值 v-model 绑定
+      queryList: [], // 模糊搜索项目
+      isSelected: false, // 是否选中项
     };
   },
   watch: {},
@@ -28,29 +29,29 @@ export default {
      * @val 回调
      */
     handleSearch(val, cb) {
-      let self = this;
-      let params={
-          table:this.itemdata.reftable,
-          like:val
-      }
-      let serachParams = new URLSearchParams();
-      serachParams.append("param", JSON.stringify(params));
+      const self = this;
+      const params = {
+        table: this.itemdata.reftable,
+        like: val
+      };
+      const serachParams = new URLSearchParams();
+      serachParams.append('param', JSON.stringify(params));
       axios({
-        method: "post",
-        url: "/p/cs/pm/v1/selectProInfoLike",
+        method: 'post',
+        url: '/p/cs/pm/v1/selectProInfoLike',
         data: serachParams
-      }).then(res => {
-          if(res.data.code === 0){
-               self.queryList = res.data.data;
-               cb(self.queryList);
-          }else{
-              this.$message({
-                  type:'error',
-                  message:res.data.message
-              })
-              self.queryList = [];
-          }
-      }).catch(()=>{
+      }).then((res) => {
+        if (res.data.code === 0) {
+          self.queryList = res.data.data;
+          cb(self.queryList);
+        } else {
+          this.$message({
+            type: 'error',
+            message: res.data.message
+          });
+          self.queryList = [];
+        }
+      }).catch(() => {
         // let list = [
         //   {
         //     PS_C_PRO_ECODE: "10020043",
@@ -73,83 +74,82 @@ export default {
         // ];
         self.queryList = [];
         cb([]);
-        $(".fkAutocomplete" + self.itemdata.colname).css("display", "none");
+        $(`.fkAutocomplete${self.itemdata.colname}`).css('display', 'none');
       });
     },
     /**
      * 选中项目
      */
     handleSelect(val) {
-      let self = this;
-      let obj = val;
+      const self = this;
+      const obj = val;
       if (obj) {
-        //当前选中项
+        // 当前选中项
         this.isSelected = true;
         this.confirmResult(obj);
-      }else{
-         this.isSelected = fasle;
+      } else {
+        this.isSelected = fasle;
       }
-
     },
     autocompleteEnter(evnet) {
-      let self = this;
-      if(this.isSelected){
-         return true;
+      const self = this;
+      if (this.isSelected) {
+        return true;
       }
       if (this.queryList.length > 0) {
         this.confirmResult(self.queryList[0]);
       } else {
         this.clearResult();
       }
-      $(".fkAutocomplete" + self.itemdata.colname).css("display", "none");
+      $(`.fkAutocomplete${self.itemdata.colname}`).css('display', 'none');
     },
     autocompleteBlur(event) {
-      let self = this;
-      setTimeout(()=>{
-        if(this.isSelected) return;
+      const self = this;
+      setTimeout(() => {
+        if (this.isSelected) return;
         if (self.queryList.length > 0) {
           self.confirmResult(self.queryList[0]);
-        }else if(self.queryList.length === 0 && self.value === ''){
+        } else if (self.queryList.length === 0 && self.value === '') {
           self.clearResult();
-        }else{
-           self.blurInQuery();
+        } else {
+          self.blurInQuery();
         }
         self.queryList = [];
-        $(".fkAutocomplete" + self.itemdata.colname).css("display", "none");
-      },500);
+        $(`.fkAutocomplete${self.itemdata.colname}`).css('display', 'none');
+      }, 500);
     },
     blurInQuery(cb) {
-      let self = this;
-      let params={
-          table:this.itemdata.reftable,
-          like:this.value
-      }
-      let serachParams = new URLSearchParams();
-      serachParams.append("param", JSON.stringify(params));
+      const self = this;
+      const params = {
+        table: this.itemdata.reftable,
+        like: this.value
+      };
+      const serachParams = new URLSearchParams();
+      serachParams.append('param', JSON.stringify(params));
       axios({
-        method: "post",
-        url: "/p/cs/pm/v1/selectProInfoLike",
+        method: 'post',
+        url: '/p/cs/pm/v1/selectProInfoLike',
         data: serachParams
-      }).then(res => {
-          if(res.data.code === 0){
-              if(res.data.data.length === 0){
-                 this.value = [];
-                 this.queryList =[];
-              }
+      }).then((res) => {
+        if (res.data.code === 0) {
+          if (res.data.data.length === 0) {
+            this.value = [];
+            this.queryList = [];
           }
-      }).catch(()=>{
-           this.value = [];
-           this.queryList =[];
+        }
+      }).catch(() => {
+        this.value = [];
+        this.queryList = [];
       });
     },
     keyUp(event) {
-      let self = this;
-      if(event.keyCode !== 13){
+      const self = this;
+      if (event.keyCode !== 13) {
         self.isSelected = false;
-        self.queryList =[];
+        self.queryList = [];
       }
-      if(this.value === ''){
-         this.confirmResult();
+      if (this.value === '') {
+        this.confirmResult();
       }
     },
     /**
@@ -157,22 +157,22 @@ export default {
      *  @id  款号id
      */
     selectProInfo(id) {
-      let params = {
+      const params = {
         table: this.itemdata.reftable,
         ids: [id]
       };
-      let serachParams = new URLSearchParams();
-      serachParams.append("param", JSON.stringify(params));
+      const serachParams = new URLSearchParams();
+      serachParams.append('param', JSON.stringify(params));
       axios({
-        method: "post",
-        url: "/p/cs/pm/v1/selectProInfo",
+        method: 'post',
+        url: '/p/cs/pm/v1/selectProInfo',
         data: serachParams
-      }).then(res => {
+      }).then((res) => {
         if (res.data.code === 0) {
           console.log(res.data.data);
         } else {
           this.$message({
-            type: "error",
+            type: 'error',
             message: res.data.message
           });
         }
@@ -183,11 +183,11 @@ export default {
      */
     confirmResult(item) {
       this.value = String(item[this.showCol]);
-      this.$emit("getFilterChooseItem", item, this.row);
+      this.$emit('getFilterChooseItem', item, this.row);
     },
     clearResult() {
-      this.value = "";
-      this.$emit("clearFilterChooseItem", this.row);
+      this.value = '';
+      this.$emit('clearFilterChooseItem', this.row);
     },
     /**
     初始化

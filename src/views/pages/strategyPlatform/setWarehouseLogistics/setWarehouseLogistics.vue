@@ -235,7 +235,8 @@
 </template>
 
 <script>
-  import setWarehouseLogistics from "@/js/pages/strategyPlatform/setWarehouseLogistics/setWarehouseLogistics.js";
+  import setWarehouseLogistics from '@/js/pages/strategyPlatform/setWarehouseLogistics/setWarehouseLogistics.js';
+
   export default setWarehouseLogistics;
 </script>
 

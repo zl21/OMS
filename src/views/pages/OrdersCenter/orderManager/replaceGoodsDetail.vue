@@ -16,18 +16,34 @@
       </div>
     </div>
     <div class="i_body">
-      <Table :columns="columns" :data="data"></Table>
+      <Table
+        :columns="columns"
+        :data="data"
+      />
     </div>
     <div class="i_food">
-      <Button style="marginLeft:8px;" type="error" @click="confirm">确定</Button>
-      <Button type="error" ghost @click="()=>{this.$parent.$parent.closeConfirm();}">取消</Button>
+      <Button
+        style="marginLeft:8px;"
+        type="error"
+        @click="confirm"
+      >
+        确定
+      </Button>
+      <Button
+        type="error"
+        ghost
+        @click="()=>{this.$parent.$parent.closeConfirm();}"
+      >
+        取消
+      </Button>
     </div>
   </div>
 </template>
 
 <script>
-import replaceGoodsDetail from "@/js/pages/orderCenter/orderManager/replaceGoodsDetail";
-export default replaceGoodsDetail;
+  import replaceGoodsDetail from '@/js/pages/orderCenter/orderManager/replaceGoodsDetail';
+
+  export default replaceGoodsDetail;
 </script>
 <style lang="less">
 @import "~@/css/pages/orderCenter/orderManager/replaceGoodsDetail.less";

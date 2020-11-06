@@ -1,43 +1,46 @@
 <template>
   <div class="financialManageCenter">
     <div class="buttons">
-      <businessButton :btnConfig="btnConfig"></businessButton>
+      <businessButton :btn-config="btnConfig" />
     </div>
     <businessStatusFlag
       v-if="custAuditFlag"
-      :statusName="vmI18n.t('common.custAudited')"
-    ></businessStatusFlag>
+      :status-name="vmI18n.t('common.custAudited')"
+    />
     <businessStatusFlag
       v-if="financeAuditFlag"
-      :statusName="vmI18n.t('common.financeAudited')"
-    ></businessStatusFlag>
+      :status-name="vmI18n.t('common.financeAudited')"
+    />
     <businessStatusFlag
       v-if="voidFlag"
-      :statusName="vmI18n.t('common.voided')"
-    ></businessStatusFlag>
+      :status-name="vmI18n.t('common.voided')"
+    />
     <Collapse v-model="spreadPanel">
       <Panel name="panel_baseInfo">
         <!-- 基本信息 -->
         {{ vmI18n.t("common.baseInformation") }}
-        <p style="float: left; width: 250px; margin-top: 15px" slot="content">
+        <p
+          slot="content"
+          style="float: left; width: 250px; margin-top: 15px"
+        >
           <ImageUpload
             :dataitem="dataitem"
             @deleteImg="deleteImg"
             @uploadFileChangeSuccess="uploadFileChangeSuccess"
-          ></ImageUpload>
+          />
         </p>
         <p slot="content">
           <businessForm
+            :form-config="formConfig"
             @keyDown="keyDown"
-            :formConfig="formConfig"
-          ></businessForm>
+          />
         </p>
       </Panel>
       <Panel name="panel_log">
         <!-- 日志 -->
         {{ vmI18n.t("common.journal") }}
         <p slot="content">
-          <businessForm :formConfig="formConfigLog"></businessForm>
+          <businessForm :form-config="formConfigLog" />
         </p>
       </Panel>
 
@@ -50,34 +53,34 @@
         <p>{{ vmI18n.t("modalTips.z5") }}</p>
       </Modal>
       <Modal
-        class="detailAdd customizedModal"
         v-model="detailAddTable.modal"
+        class="detailAdd customizedModal"
         :title="vmI18n.t('modalTitle.add_adjustmentListDetails')"
         @on-ok="resetMainTable"
         @on-cancel="detailAddCancel"
       >
         <businessActionTable
-          :jordanTableConfig="detailAddTable.table"
+          :jordan-table-config="detailAddTable.table"
           @on-select="detailAddOnSelect"
           @on-select-cancel="detailAddOnCancel"
           @on-select-all="detailAddOnSelectAll"
           @on-select-all-cancel="detailAddOnSelectAllCancel"
-        ></businessActionTable>
+        />
       </Modal>
     </Collapse>
     <!-- tab切换 -->
     <businessLabel
-      :labelList="labelList"
-      :labelDefaultValue="labelDefaultValue"
+      :label-list="labelList"
+      :label-default-value="labelDefaultValue"
       @labelClick="labelClick"
-    ></businessLabel>
+    />
     <!-- 表格 -->
     <div class="table">
       <!-- 赔付单明细 -->
       <div class="barcodeDetails">
         <businessActionTable
           v-show="labelDefaultValue === '1'"
-          :jordanTableConfig="jordanTableConfig"
+          :jordan-table-config="jordanTableConfig"
           @table-delete-detail="delTableDetail"
           @table-add-detail="addTableDetail"
           @on-select="onSelect"
@@ -86,24 +89,28 @@
           @on-select-all-cancel="onSelectAllCancel"
           @on-page-change="pageChange"
           @on-page-size-change="pageSizeChange"
-        ></businessActionTable>
+        />
         <businessActionTable
           v-show="labelDefaultValue === '2'"
-          :jordanTableConfig="payableAdjustLog"
+          :jordan-table-config="payableAdjustLog"
           @on-page-change="logPageChange"
           @on-page-size-change="logPageSizeChange"
-        ></businessActionTable>
+        />
       </div>
     </div>
-    <div class="fromLoading" v-show="isSaveLoading">
-      <Spin></Spin>
+    <div
+      v-show="isSaveLoading"
+      class="fromLoading"
+    >
+      <Spin />
     </div>
   </div>
 </template>
 
 <script>
-import payableAdjustAdd from "@/js/pages/financeCenter/payableAdjustAdd";
-export default payableAdjustAdd;
+  import payableAdjustAdd from '@/js/pages/financeCenter/payableAdjustAdd';
+
+  export default payableAdjustAdd;
 </script>
 <style lang="less">
 @import "~@/css/pages/financialCenter/payableAdjust/payableAdjustAdd.less";

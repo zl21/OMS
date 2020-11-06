@@ -56,7 +56,7 @@
           <div class="setTree">
             <div class="retrieveBox">
               <!-- <span class="retrieveTitle">检索</span> -->
-            <span class="retrieveTitle">{{ vmI18n.t('common.searching') }}</span>
+              <span class="retrieveTitle">{{ vmI18n.t('common.searching') }}</span>
               <Input
                 v-model="name2"
                 :expand="false"
@@ -222,7 +222,8 @@
 </template>
 
 <script>
-  import logisticsArea from "@/js/pages/strategyPlatform/logisticsStrategy/logisticsArea.js";
+  import logisticsArea from '@/js/pages/strategyPlatform/logisticsStrategy/logisticsArea.js';
+
   export default logisticsArea;
 </script>
 

@@ -1,23 +1,24 @@
-import pako from './pako.min.js'
+import pako from './pako.min.js';
 
 function unzipXv(key) {
   // 将二进制字符串转换为字符数组
-  var charData = key.split('').map(function (x) {
-    return x.charCodeAt(0);
-  });
+  const charData = key.split('').map(x => x.charCodeAt(0));
   // 将数字数组转换成字节数组
-  var binData = new Uint8Array(charData);
-  var data = pako.inflate(binData);
-  var strings = Utf8ArrayToStr(data);
+  const binData = new Uint8Array(charData);
+  const data = pako.inflate(binData);
+  const strings = Utf8ArrayToStr(data);
   // var strings = unescape(key);
   return strings;
 }
 
 var Utf8ArrayToStr = function (array) {
-  var out = "",
-    i = 0,
-    len = array.length,
-    char1, char2, char3, char4;
+  let out = '';
+  let i = 0;
+  const len = array.length;
+  let char1; 
+  let char2; 
+  let char3; 
+  let char4;
   while (i < len) {
     char1 = array[i++];
     if (char1 >> 4 <= 7) {

@@ -11,24 +11,24 @@ export default {
       config: [
         {
           item: {
-            type: "AttachFilter", // 组件类型
+            type: 'AttachFilter', // 组件类型
             required: true, // 是否必填
-            label: "原角色",
+            label: '原角色',
             props: {
-              placeholder: "气泡弹框",
-              value: "",
-              regularMessage: "", // 报错提示
+              placeholder: '气泡弹框',
+              value: '',
+              regularMessage: '', // 报错提示
               AuotData: [],
               columnsKey: ['NAME'],
               hidecolumns: ['DESCRIPTION', 'ID'],
-              "filter-method": this.filterMethod
+              'filter-method': this.filterMethod
             },
             event: {
-              "on-change": e => {
+              'on-change': (e) => {
                 // console.log(e);
                 // this.copyModalConfig.originalRole = e.target.value;
               },
-              "on-select": (value) => {
+              'on-select': (value) => {
                 this.copyModalConfig.originalRole = value.value;
               }
             }
@@ -36,33 +36,32 @@ export default {
         },
         {
           item: {
-            type: "DropMultiSelectFilter", // 组件类型
-            label: "目的角色",
+            type: 'DropMultiSelectFilter', // 组件类型
+            label: '目的角色',
             props: {
               data: {},
               totalRowCount: 0,
               pageSize: 10,
-              showColnameKey: "show",
-              dataEmptyMessage: "数据加载中...", // 无数据的提示
-              columns: ["INDEX", "NAME"], // 展现的组
+              showColnameKey: 'show',
+              dataEmptyMessage: '数据加载中...', // 无数据的提示
+              columns: ['INDEX', 'NAME'], // 展现的组
               AutoData: []
             },
             event: {
-              "on-page-change": value => { },
-              "on-input-value-change": value => { },
-              "on-popper-show": async e => {
-                const res = await this.service.common.getCo
+              'on-page-change': (value) => { },
+              'on-input-value-change': (value) => { },
+              'on-popper-show': async (e) => {
+                const res = await this.service.common.getCo;
                 axios({
-                  url: "/p/cs/getCopyTargetGroups",
-                  method: "get",
+                  url: '/p/cs/getCopyTargetGroups',
+                  method: 'get',
                   params: {
                     id: this.copyModalConfig.originalRole
                   }
-                }).then(res => {
+                }).then((res) => {
                   if (res.data.code === 0) {
-                    this.config[1].item.props.totalRowCount =
-                      res.data.data.length;
-                    let cc = [];
+                    this.config[1].item.props.totalRowCount = res.data.data.length;
+                    const cc = [];
                     res.data.data.map((item, index) => {
                       cc[index] = {
                         ID: {
@@ -80,18 +79,18 @@ export default {
                       start: 0,
                       tabth: [
                         {
-                          colname: "ID",
-                          name: "ID",
+                          colname: 'ID',
+                          name: 'ID',
                           show: false
                         },
                         {
-                          colname: "INDEX",
-                          name: "序号",
+                          colname: 'INDEX',
+                          name: '序号',
                           show: false
                         },
                         {
-                          colname: "NAME",
-                          name: "名称",
+                          colname: 'NAME',
+                          name: '名称',
                           show: true
                         }
                       ],
@@ -101,7 +100,7 @@ export default {
                   }
                 });
               },
-              "on-fkrp-selected": e => {
+              'on-fkrp-selected': (e) => {
                 this.copyModalConfig.destinationRole = e.map(item => item.ID);
                 console.log(this.copyModalConfig.destinationRole);
               }
@@ -113,24 +112,24 @@ export default {
           row: 1, // 行高
           col: 1, // 列宽
           item: {
-            type: "Select", // 组件类型
+            type: 'Select', // 组件类型
             required: true,
-            label: "复制方式",
+            label: '复制方式',
             props: {
-              placeholder: "请选择复制方式",
+              placeholder: '请选择复制方式',
               options: [
                 {
-                  value: "cover",
-                  label: "覆盖原有权限"
+                  value: 'cover',
+                  label: '覆盖原有权限'
                 },
                 {
-                  value: "copy",
-                  label: "保留原有权限"
+                  value: 'copy',
+                  label: '保留原有权限'
                 }
               ]
             },
             event: {
-              "on-change": e => {
+              'on-change': (e) => {
                 this.copyModalConfig.replicationMode = e;
                 console.log(e);
               }
@@ -139,9 +138,9 @@ export default {
         }
       ],
       copyModalConfig: {
-        originalRole: "",
+        originalRole: '',
         destinationRole: [],
-        replicationMode: ""
+        replicationMode: ''
       }
     };
   },
@@ -150,28 +149,28 @@ export default {
       return option.NAME.indexOf(val) !== -1;
     },
     sureBtn() {
-      let params = {
+      const params = {
         sourceId: this.copyModalConfig.originalRole,
         targetIdList: this.copyModalConfig.destinationRole,
         type: this.copyModalConfig.replicationMode
       };
-      this.$emit("sure-btn", params);
+      this.$emit('sure-btn', params);
     },
     cancelBtn() {
-      this.$emit("cancel-btn");
+      this.$emit('cancel-btn');
     },
-    getOriginRole() {  //获取原角色全部数据
+    getOriginRole() { // 获取原角色全部数据
       axios({
         url: '/p/cs/cgroupsquery?param=%7B%7D',
         method: 'get'
-      }).then(res => {
+      }).then((res) => {
         console.log(res);
         if (res.data.code == 0) {
           this.config[0].item.props.AuotData = res.data.data;
         } else {
-          this.$Message.warning('原角色请求失败!')
+          this.$Message.warning('原角色请求失败!');
         }
-      })
+      });
     }
   },
   watch: {

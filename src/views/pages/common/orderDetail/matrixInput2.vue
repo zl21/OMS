@@ -1,6 +1,12 @@
 <template>
-  <div v-if="!isdisabled && isActive" class="ff-input--dialog--matrix">
-    <div class="ff-order-detail-search" @click.stop>
+  <div
+    v-if="!isdisabled && isActive"
+    class="ff-input--dialog--matrix"
+  >
+    <div
+      class="ff-order-detail-search"
+      @click.stop
+    >
       <span>商品编码︰</span>
       <el-popover
         ref="popover"
@@ -12,7 +18,10 @@
         :visible-arrow="false"
         popper-class="ff-input--dialog-popover"
       >
-        <div class="ff-input--dialog-pop" @click.stop>
+        <div
+          class="ff-input--dialog-pop"
+          @click.stop
+        >
           <!--@keyup.entry="optionEntry"-->
           <ul>
             <li
@@ -27,7 +36,10 @@
             </li>
           </ul>
         </div>
-        <div slot="reference" style="display: inline-block;position: relative;">
+        <div
+          slot="reference"
+          style="display: inline-block;position: relative;"
+        >
           <!--防止显示提示的密码列表-->
           <!--<input type="password" id="preventTipsPassword" style="width: 0; border: 0 none"/>
           <input
@@ -51,10 +63,13 @@
             class="ff-search-input"
             @keyup.enter.stop="entry"
             @focus="handFocus($event)"
-          />
+          >
         </div>
       </el-popover>
-      <div v-if="matrixInput || isInputShow" class="ff-input--dialog--number">
+      <div
+        v-if="matrixInput || isInputShow"
+        class="ff-input--dialog--number"
+      >
         <span>数量︰</span>
         <input
           type="text"
@@ -63,7 +78,7 @@
           class="ff-search-input"
           @input="countChange($event)"
           @keyup.enter.stop="entry"
-        />
+        >
       </div>
     </div>
     <drag-dialog
@@ -111,6 +126,7 @@
   @import "~@/css/pages/common/orderDetail/matrixInput2"; 
 </style>
 <script>
-  import matrixInput2 from "@/js/pages/common/orderDetail/matrixInput2.js";
+  import matrixInput2 from '@/js/pages/common/orderDetail/matrixInput2.js';
+
   export default matrixInput2;
 </script>

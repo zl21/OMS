@@ -3,7 +3,7 @@
   <div class="returngood">
     <!--按钮块-->
     <div class="returnAddBtn">
-      <businessButton :btnConfig="btnConfig"></businessButton>
+      <businessButton :btn-config="btnConfig" />
     </div>
     <div class="returnAddColl">
       <Collapse v-model="openDefault">
@@ -11,14 +11,14 @@
           <!-- 基本信息 -->
           {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
-            <businessForm :formConfig="information"></businessForm>
+            <businessForm :form-config="information" />
           </p>
         </Panel>
         <Panel name="2">
           <!-- 换货人信息 -->
           {{ vmI18n.t("panel_label.exchangeInfo") }}
           <p slot="content">
-            <businessForm :formConfig="replacement"></businessForm>
+            <businessForm :form-config="replacement" />
           </p>
         </Panel>
         <Panel name="3">
@@ -29,54 +29,70 @@
               <ul>
                 <li>
                   <!-- 商品应退金额 -->
-                  <p>{{vmI18n.t("other.refundAmountGoods") }}</p>
-                  <input type="text" disabled v-model="amountReturned" />
+                  <p>{{ vmI18n.t("other.refundAmountGoods") }}</p>
+                  <input
+                    v-model="amountReturned"
+                    type="text"
+                    disabled
+                  >
                 </li>
-                <li class="symbol">+</li>
+                <li class="symbol">
+                  +
+                </li>
                 <li>
                   <!-- 应退邮费 -->
-                  <p>{{vmI18n.t("other.refundablePostage") }}</p>
+                  <p>{{ vmI18n.t("other.refundablePostage") }}</p>
                   <input
-                    type="text"
                     v-model="returnPostage"
+                    type="text"
                     @input="returnTotal(returnPostage, 1)"
-                  />
+                  >
                 </li>
-                <li class="symbol">+</li>
+                <li class="symbol">
+                  +
+                </li>
                 <li>
                   <!-- 其他金额 -->
-                  <p>{{vmI18n.t("other.otherAmounts") }}</p>
+                  <p>{{ vmI18n.t("other.otherAmounts") }}</p>
                   <input
-                    type="text"
                     v-model="otherAmount"
+                    type="text"
                     @input="returnTotal(otherAmount, 2)"
-                  />
+                  >
                 </li>
-                <li class="symbol">-</li>
+                <li class="symbol">
+                  -
+                </li>
                 <li>
                   <!-- 换货金额 -->
-                  <p>{{vmI18n.t("other.exchangeAmounts") }}</p>
-                  <input type="text" disabled v-model="exchangeAmount" />
+                  <p>{{ vmI18n.t("other.exchangeAmounts") }}</p>
+                  <input
+                    v-model="exchangeAmount"
+                    type="text"
+                    disabled
+                  >
                 </li>
-                <li class="symbol">=</li>
+                <li class="symbol">
+                  =
+                </li>
                 <li>
                   <!-- 退货单总金额 -->
-                  <p>{{vmI18n.t("other.totalAmountReturnOrder") }}</p>
+                  <p>{{ vmI18n.t("other.totalAmountReturnOrder") }}</p>
                   <input
-                    type="text"
-                    @input="isSettlementAmount(returnTotalAmount)"
-                    disabled
                     v-model="returnTotalAmount"
-                  />
+                    type="text"
+                    disabled
+                    @input="isSettlementAmount(returnTotalAmount)"
+                  >
                 </li>
                 <li>
                   <!-- 代销结算金额 -->
-                  <p>{{vmI18n.t("other.settlementAmountConsignment") }}</p>
+                  <p>{{ vmI18n.t("other.settlementAmountConsignment") }}</p>
                   <input
+                    v-model="settlementAmount"
                     type="text"
                     @input="isSettlementAmount(settlementAmount)"
-                    v-model="settlementAmount"
-                  />
+                  >
                 </li>
               </ul>
             </div>
@@ -88,73 +104,73 @@
       <!-- tab切换 -->
       <businessLabel
         class="businessLabel"
-        :labelList="labelList"
-        :labelDefaultValue="DefaultValue"
+        :label-list="labelList"
+        :label-default-value="DefaultValue"
         @labelClick="labelClick"
-      ></businessLabel>
+      />
       <!-- 列表组件 -->
       <div class="tableBox">
         <!-- 退货明细 -->
         <business-action-table
           v-show="labelDefaultValue === 1"
-          :jordanTableConfig="jordanTableConfig"
+          :jordan-table-config="jordanTableConfig"
           @on-select="returnOnSelect"
           @table-delete-detail="returnDeleteDetail"
           @table-add-detail="returnAddDetail"
           @on-select-cancel="returnCancel"
           @on-select-all="returnSelectAll"
           @on-select-all-cancel="returnSelectAllCancel"
-        ></business-action-table>
+        />
         <!-- 换货明细 -->
         <business-action-table
           v-show="labelDefaultValue === 2"
-          :jordanTableConfig="jordanTableConfig2"
+          :jordan-table-config="jordanTableConfig2"
           @on-select="returnOnSelect2"
           @table-delete-detail="returnDeleteDetail2"
           @on-select-cancel="returnCancel2"
           @on-select-all="returnSelectAll2"
           @on-select-all-cancel="returnSelectAllCancel2"
-        ></business-action-table>
+        />
         <!-- 退货日志 -->
         <OrderItem
           v-show="labelDefaultValue === 3"
-          :componentData="tab2"
-        ></OrderItem>
+          :component-data="tab2"
+        />
         <!-- 次品记录 -->
         <business-action-table
           v-show="labelDefaultValue === 4"
-          :jordanTableConfig="jordanTableConfig4"
-        ></business-action-table>
+          :jordan-table-config="jordanTableConfig4"
+        />
       </div>
     </div>
     <!-- <jordanBounced :bouncedData="bouncedList"></jordanBounced> -->
     <div class="queryorderB">
       <!-- 查询原始订单编号 -->
       <Modal
-        class="queryorder"
         v-model="order.modal"
+        class="queryorder"
         :mask="true"
         :title="vmI18n.t('modalTitle.query_OriginalOrderNo')"
         @on-ok="queryorder"
         @on-cancel="querycancel"
       >
         <div class="orderContent">
-          <businessForm :formConfig="order.orderform"></businessForm>
-          <businessButton :btnConfig="order.btn"></businessButton>
+          <businessForm :form-config="order.orderform" />
+          <businessButton :btn-config="order.btn" />
         </div>
         <business-action-table
-          :jordanTableConfig="order.table"
+          :jordan-table-config="order.table"
           @on-select="onquerySelect"
           @on-select-cancel="onqueryCancel"
           @on-select-all="onSelectAll"
           @on-select-all-cancel="onSelectAllCancel"
-        ></business-action-table>
+        />
       </Modal>
     </div>
     <!-- 修改备注 11-->
     <jordanModal
       :title="changeRemarkConfig.confirmTitle"
-      :titleAlign="changeRemarkConfig.titleAlign"
+      :title-align="changeRemarkConfig.titleAlign"
       :width="changeRemarkConfig.width"
       :scrollable="changeRemarkConfig.scrollable"
       :closable="changeRemarkConfig.closable"
@@ -164,48 +180,53 @@
       :transfer="changeRemarkConfig.transfer"
       :name="changeRemarkConfig.name"
       :url="changeRemarkConfig.url"
-      :keepAlive="changeRemarkConfig.keepAlive"
-      :excludeString="changeRemarkConfig.excludeString"
-      :componentData="changeRemarkConfig.componentData"
-    ></jordanModal>
+      :keep-alive="changeRemarkConfig.keepAlive"
+      :exclude-string="changeRemarkConfig.excludeString"
+      :component-data="changeRemarkConfig.componentData"
+    />
     <!--单据状态图片展示 -->
-    <businessStatusFlag :statusName="statusName"></businessStatusFlag>
-    <div class="fromLoading" v-show="isSaveLoading">
-      <Spin></Spin>
+    <businessStatusFlag :status-name="statusName" />
+    <div
+      v-show="isSaveLoading"
+      class="fromLoading"
+    >
+      <Spin />
     </div>
-<!-- 提示 -->
+    <!-- 提示 -->
     <Modal
-      class="available"
       v-model="availableStock"
-      :title='vmI18n.t("modalTitle.tips")'
+      class="available"
+      :title="vmI18n.t(&quot;modalTitle.tips&quot;)"
       width="400"
       :mask-closable="false"
       :mask="true"
       @on-ok="saveData"
       @on-cancel="cancalModal"
     >
-    <!-- 。是否继续？ -->
-      <p class="availableStock">{{ availableStockMassage }}{{vmI18n.t("modalTips.n2")}}</p>
+      <!-- 。是否继续？ -->
+      <p class="availableStock">
+        {{ availableStockMassage }}{{ vmI18n.t("modalTips.n2") }}
+      </p>
     </Modal>
     <Modal
-      class="detailAdd"
       v-model="returnDetailAddTable.modal"
-      :title='vmI18n.t("modalTitle.newReturnDetails")'
+      class="detailAdd"
+      :title="vmI18n.t(&quot;modalTitle.newReturnDetails&quot;)"
       @on-ok="resetReturnMainTable"
       @on-cancel="detailAddCancel"
     >
       <business-action-table
-        :jordanTableConfig="returnDetailAddTable.table"
+        :jordan-table-config="returnDetailAddTable.table"
         @on-select="returnDetailAddOnSelect"
         @on-select-cancel="returnDetailAddOnCancel"
         @on-select-all="returnDetailAddOnSelectAll"
         @on-select-all-cancel="returnDetailAddOnSelectAllCancel"
-      ></business-action-table>
+      />
     </Modal>
     <!-- 矩阵框-->
     <jordanModal
       :title="matrixBox.confirmTitle"
-      :titleAlign="matrixBox.titleAlign"
+      :title-align="matrixBox.titleAlign"
       :width="matrixBox.width"
       :scrollable="matrixBox.scrollable"
       :closable="matrixBox.closable"
@@ -215,16 +236,17 @@
       :transfer="matrixBox.transfer"
       :name="matrixBox.name"
       :url="matrixBox.url"
-      :keepAlive="matrixBox.keepAlive"
-      :excludeString="matrixBox.excludeString"
-      :componentData="matrixBox.componentData"
-    ></jordanModal>
+      :keep-alive="matrixBox.keepAlive"
+      :exclude-string="matrixBox.excludeString"
+      :component-data="matrixBox.componentData"
+    />
   </div>
 </template>
 
 <script>
- import returngoodmanagement from "@/js/pages/orderCenter/returngood/returngoodmanagement";
- export default returngoodmanagement;
+  import returngoodmanagement from '@/js/pages/orderCenter/returngood/returngoodmanagement';
+
+  export default returngoodmanagement;
 </script>
 
 <style lang="less">

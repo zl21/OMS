@@ -8,7 +8,8 @@
 </template>
 
 <script>
-  import sgTransferImport from "@/js/modal/InventoryCenter/sgTransferImport";
+  import sgTransferImport from '@/js/modal/InventoryCenter/sgTransferImport';
+
   export default sgTransferImport;
 </script>
 

@@ -1,73 +1,73 @@
 // 定制页面数据权限
-import axios from "axios";
+import axios from 'axios';
+
 export const dataAccessMixin = {
   methods: {
     getDataAccess(table, callback) {
-      let data = {
-        table: table
+      const data = {
+        table
       };
-      axios.post("/api/cs/oc/oms/v1/getSingleObjectPermission", data).then(res => {
-        callback(res.data.data)
+      axios.post('/api/cs/oc/oms/v1/getSingleObjectPermission', data).then((res) => {
+        callback(res.data.data);
       });
     },
     // 设置表单或表头数组
     setFormPermissions(parent, child, param) {
-      if (param == "add") {
-        if (parent.style == "popInput") {
-          if (child.isRead == "N" && child.isWrite == "N") {
+      if (param == 'add') {
+        if (parent.style == 'popInput') {
+          if (child.isRead == 'N' && child.isWrite == 'N') {
             parent.itemdata.readonly = true;
-          } else if (child.isRead == "N") {
+          } else if (child.isRead == 'N') {
             parent.itemdata.readonly = true;
-          } else if (child.isWrite == "N") {
+          } else if (child.isWrite == 'N') {
             parent.itemdata.readonly = true;
           }
           // else{
           //   parent.itemdata.readonly = false;
           // }
           // ele.style = "" //控制字段隐藏
-        } else if (parent.style != "") {
-          if (child.isRead == "N" && child.isWrite == "N") {
+        } else if (parent.style != '') {
+          if (child.isRead == 'N' && child.isWrite == 'N') {
             parent.disabled = true;
-          } else if (child.isRead == "N") {
+          } else if (child.isRead == 'N') {
             parent.disabled = true;
-          } else if (child.isWrite == "N") {
+          } else if (child.isWrite == 'N') {
             parent.disabled = true;
           }
         }
-      } else if (param == "detail") {
-        if (parent.style == "popInput") {
-          if (child.isRead == "N" && child.isWrite == "N") {
-            parent.style = ""
-          } else if (child.isRead == "N") {
-            parent.style = ""
-          } else if (child.isWrite == "N") {
+      } else if (param == 'detail') {
+        if (parent.style == 'popInput') {
+          if (child.isRead == 'N' && child.isWrite == 'N') {
+            parent.style = '';
+          } else if (child.isRead == 'N') {
+            parent.style = '';
+          } else if (child.isWrite == 'N') {
             parent.itemdata.readonly = true;
           }
           // else{
           //   parent.itemdata.readonly = false;
           // }
           //  //控制字段隐藏
-        } else if (parent.style != "") {
-          if (child.isRead == "N" && child.isWrite == "N") {
-            parent.style = ""
-          } else if (child.isRead == "N") {
-            parent.style = ""
-          } else if (child.isWrite == "N") {
+        } else if (parent.style != '') {
+          if (child.isRead == 'N' && child.isWrite == 'N') {
+            parent.style = '';
+          } else if (child.isRead == 'N') {
+            parent.style = '';
+          } else if (child.isWrite == 'N') {
             parent.disabled = true;
           }
         }
       }
     },
 
-    //设置表头数据
+    // 设置表头数据
     setTablePermissions(arrays, res) {
-
-      let __columns = []
+      const __columns = [];
 
       arrays.forEach((parent, index) => {
         res.SENSITIVE_COLUMNS.forEach((child, parentIndex) => {
           if (parent.dataAcessKey == child.ecode) {
-            if (child.isRead == "N") {
+            if (child.isRead == 'N') {
               parent.__isShow = false;
             }
           }
@@ -79,7 +79,7 @@ export const dataAccessMixin = {
         }
       });
 
-      return __columns
+      return __columns;
     }
   }
 };

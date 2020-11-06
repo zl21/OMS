@@ -14,15 +14,22 @@
       </div>-->
       <div style="display: flex">
         <div class="skuBox">
-          <re-form :formConfig="formConfig" />
+          <re-form :form-config="formConfig" />
         </div>
         <div class="number-box">
           <!-- <label>数量:</label> -->
           <label>{{ vmI18n.t("table_label.quantities") }}:</label>
-          <Input v-model="qty" style="width: 80px" @on-enter="search" />
+          <Input
+            v-model="qty"
+            style="width: 80px"
+            @on-enter="search"
+          />
         </div>
         <div class="search-button">
-          <Button type="error" @click="search">
+          <Button
+            type="error"
+            @click="search"
+          >
             <!-- 搜索 -->
             {{ vmI18n.t("btn.search") }}
           </Button>
@@ -34,9 +41,9 @@
         :columns="columns"
         :loading="tableLoading"
         :data="data"
-        @on-row-click="onRowClick"
         :highlight-row="true"
-      ></Table>
+        @on-row-click="onRowClick"
+      />
     </div>
     <div class="dialog-footer">
       <Button
@@ -65,7 +72,8 @@
 </template>
 
 <script>
-  import pushProduce from "@/js/modal/orderCenter/pushProduce";
+  import pushProduce from '@/js/modal/orderCenter/pushProduce';
+
   export default pushProduce;
 </script>
 <style lang="less">

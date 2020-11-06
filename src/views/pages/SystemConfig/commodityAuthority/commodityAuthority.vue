@@ -2,7 +2,9 @@
   <div class="commodityAuthority">
     <div class="content">
       <ul class="tab-nav">
-        <li class="active">用户与商品</li>
+        <li class="active">
+          用户与商品
+        </li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active">
@@ -13,22 +15,31 @@
               v-if="actionFlag.deleteFlag"
             >{{Buttonmap.CMD_DELETE.name}}</button>
             <button @click="refresh">{{Buttonmap.CMD_REFRESH.name}}</button>-->
-            <jordanBtn :btnConfig="btnConfig"></jordanBtn>
+            <jordanBtn :btn-config="btnConfig" />
           </div>
           <div class="content-fixed">
-            <div class="content-panel" style="width: 25%">
-              <div class="grid-content" style="min-width: 256px;">
+            <div
+              class="content-panel"
+              style="width: 25%"
+            >
+              <div
+                class="grid-content"
+                style="min-width: 256px;"
+              >
                 <div class="table-head">
                   <span class="oper-bar">
                     <button class="white-btn">检索</button>
                     <span class="input">
                       <input
-                        type="text"
-                        @keyup.enter="axiosGroup()"
-                        placeholder="请输入角色"
                         v-model="userQuery"
-                      />
-                      <i class="iconfont" @click="axiosGroup()">&#xe620;</i>
+                        type="text"
+                        placeholder="请输入角色"
+                        @keyup.enter="axiosGroup()"
+                      >
+                      <i
+                        class="iconfont"
+                        @click="axiosGroup()"
+                      >&#xe620;</i>
                     </span>
                   </span>
                 </div>
@@ -37,9 +48,9 @@
                     :search-query="userQuery"
                     :search-flag="userSearchFlag"
                     :refresh="treeRefresh"
-                    v-on:selectTreeItem="selectTreeItem"
-                    v-on:searchFinish="searchFinish"
-                  ></group-tree>
+                    @selectTreeItem="selectTreeItem"
+                    @searchFinish="searchFinish"
+                  />
                   <!--<table class="table">
                   <tr>
                     <th width="20%">{{ChineseDictionary.NUMBER}}</th>
@@ -61,14 +72,20 @@
               </div>
             </div>
             <div class="content-panel right">
-              <div class="grid-content" style="min-width: 490px;">
+              <div
+                class="grid-content"
+                style="min-width: 490px;"
+              >
                 <div class="table-head">
-                  <span class="oper-bar" v-if="actionFlag.saveFlag">
+                  <span
+                    v-if="actionFlag.saveFlag"
+                    class="oper-bar"
+                  >
                     <button class="white-btn">添加</button>
                     <span class="input">
                       <el-autocomplete
-                        popper-class="my-autocomplete"
                         v-model="commodityResult"
+                        popper-class="my-autocomplete"
                         :disabled="page.disabled"
                         :trigger-on-focus="page.focus"
                         :fetch-suggestions="querySearch"
@@ -76,10 +93,13 @@
                         @select="handleSelect"
                       >
                         <template slot-scope="{ item }">
-                          <span :title="item.ENAME">{{item.ENAME}}</span>
+                          <span :title="item.ENAME">{{ item.ENAME }}</span>
                         </template>
                       </el-autocomplete>
-                      <i @click="insertUserAuthority" class="iconfont blue">&#xe62f;</i>
+                      <i
+                        class="iconfont blue"
+                        @click="insertUserAuthority"
+                      >&#xe62f;</i>
                     </span>
                   </span>
                   <!--<button @click="insertUserAuthority" v-if="actionFlag.saveFlag"><i class="iconfont">&#xe62f;</i></button>-->
@@ -90,33 +110,47 @@
                       <th width="20%">
                         <label class="checkbox">
                           <input
-                            type="checkbox"
                             v-model="authorityFlag"
-                            @change="handleChangeAll"
+                            type="checkbox"
                             :disabled="!actionFlag.deleteFlag"
-                          />
-                          {{ChineseDictionary.NUMBER}}
+                            @change="handleChangeAll"
+                          >
+                          {{ ChineseDictionary.NUMBER }}
                         </label>
                       </th>
-                      <th width="40%">商品款号</th>
-                      <th width="40%">商品名称</th>
+                      <th width="40%">
+                        商品款号
+                      </th>
+                      <th width="40%">
+                        商品名称
+                      </th>
                     </tr>
                   </table>
-                  <div class="table-scroll-body" style="overflow-y: auto;">
+                  <div
+                    class="table-scroll-body"
+                    style="overflow-y: auto;"
+                  >
                     <table class="table">
-                      <tr v-for="(commodity, i) in userAuthorityList" :key="commodity.ID">
+                      <tr
+                        v-for="(commodity, i) in userAuthorityList"
+                        :key="commodity.ID"
+                      >
                         <td width="20%">
                           <label class="checkbox">
                             <input
-                              type="checkbox"
                               v-model="commodity.checked"
+                              type="checkbox"
                               :disabled="!actionFlag.deleteFlag"
-                            />
-                            {{i+1}}
+                            >
+                            {{ i+1 }}
                           </label>
                         </td>
-                        <td width="40%">{{commodity.PROECODE}}</td>
-                        <td width="40%">{{commodity.PROENAME}}</td>
+                        <td width="40%">
+                          {{ commodity.PROECODE }}
+                        </td>
+                        <td width="40%">
+                          {{ commodity.PROENAME }}
+                        </td>
                       </tr>
                     </table>
                   </div>
@@ -132,15 +166,16 @@
       title="添加商品"
       :tablename="storage.name"
       :tableid="storage.id"
-      :showClose="true"
+      :show-close="true"
       :fkshow.sync="page.dialogShow"
       :right-list="page.rightList"
       @easyData="easyData"
-    ></fk-dialog>
+    />
   </div>
 </template>
 <script>
-  import commodityAuthority from "@/js/pages/SystemConfig/commodityAuthority/commodityAuthority.js";
+  import commodityAuthority from '@/js/pages/SystemConfig/commodityAuthority/commodityAuthority.js';
+
   export default commodityAuthority;
 </script>
 <style lang="less">

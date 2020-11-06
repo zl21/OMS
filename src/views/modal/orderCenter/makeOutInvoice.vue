@@ -22,16 +22,18 @@
           @on-change="invoiceTypeChange"
         >
           <!-- <Radio label="电子发票"></Radio> -->
-          <Radio :label="vmI18n.t('form_label.electronic_invoic')"></Radio>
+          <Radio :label="vmI18n.t('form_label.electronic_invoic')" />
           <!-- <Radio label="纸质发票"></Radio> -->
-          <Radio :label="vmI18n.t('form_label.paper_invoice')"></Radio>
+          <Radio :label="vmI18n.t('form_label.paper_invoice')" />
           <!-- <Radio label="专用发票"></Radio> -->
-          <Radio :label="vmI18n.t('form_label.special_invoice')"></Radio>
+          <Radio :label="vmI18n.t('form_label.special_invoice')" />
         </RadioGroup>
-        <span v-if="!specialInvoiceFlag" style="margin-left: 20px">
-          <!-- 抬头类型 -->
-          {{ vmI18n.t("form_label.invoiceTitle_typ") }}:</span
+        <span
+          v-if="!specialInvoiceFlag"
+          style="margin-left: 20px"
         >
+          <!-- 抬头类型 -->
+          {{ vmI18n.t("form_label.invoiceTitle_typ") }}:</span>
         <RadioGroup
           v-if="!specialInvoiceFlag"
           v-model="invoiceTitleType"
@@ -40,29 +42,39 @@
           @on-change="invoiceTitleTypeChange"
         >
           <!-- <Radio label="个人"></Radio> -->
-          <Radio :label="vmI18n.t('form_label.personal')"></Radio>
+          <Radio :label="vmI18n.t('form_label.personal')" />
           <!-- <Radio label="企业"></Radio> -->
-          <Radio :label="vmI18n.t('form_label.enterprise')"></Radio>
+          <Radio :label="vmI18n.t('form_label.enterprise')" />
         </RadioGroup>
-        <span v-if="specialInvoiceFlag" style="color: #fd6442">
+        <span
+          v-if="specialInvoiceFlag"
+          style="color: #fd6442"
+        >
           <!-- 开专用发票必须跟开票专员确认 -->
           {{ vmI18n.t("modalTips.zv") }}
         </span>
       </div>
-      <businessForm :formConfig="formConfig"></businessForm>
+      <businessForm :form-config="formConfig" />
     </div>
-    <div class="invoice-footer" v-if="invoiceFooterFlag">
+    <div
+      v-if="invoiceFooterFlag"
+      class="invoice-footer"
+    >
       <Divider orientation="left">
         <!-- 收票信息 -->
         {{ vmI18n.t("form_label.ticket_info") }}
       </Divider>
-      <businessForm :formConfig="formConfig2"></businessForm>
+      <businessForm :form-config="formConfig2" />
     </div>
-    <jordanBtn :btnConfig="btnConfig" style="margin-top: 10px"></jordanBtn>
+    <jordanBtn
+      :btn-config="btnConfig"
+      style="margin-top: 10px"
+    />
   </div>
 </template>
 <script>
-  import makeOutInvoice from "@/js/modal/orderCenter/makeOutInvoice";
+  import makeOutInvoice from '@/js/modal/orderCenter/makeOutInvoice';
+
   export default makeOutInvoice;
 </script>
 

@@ -1,24 +1,30 @@
 <template>
   <div class="returnGoodList">
-    <div style="margin-top: 8px" class="returnBtn">
+    <div
+      style="margin-top: 8px"
+      class="returnBtn"
+    >
       <!-- 按钮 -->
-      <businessButton :btnConfig="btnConfig"></businessButton>
+      <businessButton :btn-config="btnConfig" />
     </div>
     <div class="returnForm">
       <!-- form表单 -->
-      <businessForm :formConfig="formConfig"></businessForm>
-      <div class="fromLoading" v-show="isShowFromLoading">
-        <Spin></Spin>
+      <businessForm :form-config="formConfig" />
+      <div
+        v-show="isShowFromLoading"
+        class="fromLoading"
+      >
+        <Spin />
       </div>
     </div>
     <div class="salesTable">
       <!-- tab切换 -->
       <businessLabel
         class="businessLabel"
-        :labelList="labelList"
-        :labelDefaultValue="labelDefaultValue"
+        :label-list="labelList"
+        :label-default-value="labelDefaultValue"
         @labelClick="labelClick"
-      ></businessLabel>
+      />
       <!-- 列表组件 -->
       <div class="tableBox">
         <!-- <jordan-action-table
@@ -33,29 +39,32 @@
           @on-page-change="pageChange"
           @on-page-size-change="pageSizeChange"
         ></jordan-action-table> -->
-        <div class="agLoading" v-show="agTableConfig.agLoading">
+        <div
+          v-show="agTableConfig.agLoading"
+          class="agLoading"
+        >
           <Spin fix>
             <Icon
               type="ios-loading"
               size="18"
               class="demo-spin-icon-load"
-            ></Icon>
+            />
             <div>Loading</div>
           </Spin>
         </div>
         <aTable
           ref="agGridChild"
-          :agTableConfig="agTableConfig"
+          :ag-table-config="agTableConfig"
           @on-page-change="pageChange"
           @on-page-size-change="pageSizeChange"
           @on-row-dblclick="onRowDblclick"
-        ></aTable>
+        />
       </div>
     </div>
     <!-- 修改备注-->
     <jordanModal
       :title="changeRemarkConfig.confirmTitle"
-      :titleAlign="changeRemarkConfig.titleAlign"
+      :title-align="changeRemarkConfig.titleAlign"
       :width="changeRemarkConfig.width"
       :scrollable="changeRemarkConfig.scrollable"
       :closable="changeRemarkConfig.closable"
@@ -65,14 +74,14 @@
       :transfer="changeRemarkConfig.transfer"
       :name="changeRemarkConfig.name"
       :url="changeRemarkConfig.url"
-      :keepAlive="changeRemarkConfig.keepAlive"
-      :excludeString="changeRemarkConfig.excludeString"
-      :componentData="changeRemarkConfig.componentData"
-    ></jordanModal>
+      :keep-alive="changeRemarkConfig.keepAlive"
+      :exclude-string="changeRemarkConfig.excludeString"
+      :component-data="changeRemarkConfig.componentData"
+    />
     <!-- 修改退回仓库-->
     <jordanModal
       :title="modifyWarehouse.confirmTitle"
-      :titleAlign="modifyWarehouse.titleAlign"
+      :title-align="modifyWarehouse.titleAlign"
       :width="modifyWarehouse.width"
       :scrollable="modifyWarehouse.scrollable"
       :closable="modifyWarehouse.closable"
@@ -82,14 +91,14 @@
       :transfer="modifyWarehouse.transfer"
       :name="modifyWarehouse.name"
       :url="modifyWarehouse.url"
-      :keepAlive="modifyWarehouse.keepAlive"
-      :excludeString="modifyWarehouse.excludeString"
-      :componentData="modifyWarehouse.componentData"
-    ></jordanModal>
+      :keep-alive="modifyWarehouse.keepAlive"
+      :exclude-string="modifyWarehouse.excludeString"
+      :component-data="modifyWarehouse.componentData"
+    />
     <!-- 修改物流公司-->
     <jordanModal
       :title="modifyReturnOrderLogistics.confirmTitle"
-      :titleAlign="modifyReturnOrderLogistics.titleAlign"
+      :title-align="modifyReturnOrderLogistics.titleAlign"
       :width="modifyReturnOrderLogistics.width"
       :scrollable="modifyReturnOrderLogistics.scrollable"
       :closable="modifyReturnOrderLogistics.closable"
@@ -99,14 +108,14 @@
       :transfer="modifyReturnOrderLogistics.transfer"
       :name="modifyReturnOrderLogistics.name"
       :url="modifyReturnOrderLogistics.url"
-      :keepAlive="modifyReturnOrderLogistics.keepAlive"
-      :excludeString="modifyReturnOrderLogistics.excludeString"
-      :componentData="modifyReturnOrderLogistics.componentData"
-    ></jordanModal>
+      :keep-alive="modifyReturnOrderLogistics.keepAlive"
+      :exclude-string="modifyReturnOrderLogistics.excludeString"
+      :component-data="modifyReturnOrderLogistics.componentData"
+    />
     <!-- 修改from表单 -->
     <jordanModal
       :title="setFromInput.confirmTitle"
-      :titleAlign="setFromInput.titleAlign"
+      :title-align="setFromInput.titleAlign"
       :width="setFromInput.width"
       :scrollable="setFromInput.scrollable"
       :closable="setFromInput.closable"
@@ -116,14 +125,14 @@
       :transfer="setFromInput.transfer"
       :name="setFromInput.name"
       :url="setFromInput.url"
-      :keepAlive="setFromInput.keepAlive"
-      :excludeString="setFromInput.excludeString"
-      :componentData="setFromInput.componentData"
-    ></jordanModal>
+      :keep-alive="setFromInput.keepAlive"
+      :exclude-string="setFromInput.excludeString"
+      :component-data="setFromInput.componentData"
+    />
     <!-- 导入 -->
     <jordanModal
       :title="importTable.confirmTitle"
-      :titleAlign="importTable.titleAlign"
+      :title-align="importTable.titleAlign"
       :width="importTable.width"
       :scrollable="importTable.scrollable"
       :closable="importTable.closable"
@@ -133,28 +142,28 @@
       :transfer="importTable.transfer"
       :name="importTable.name"
       :url="importTable.url"
-      :keepAlive="importTable.keepAlive"
-      :excludeString="importTable.excludeString"
-      :componentData="importTable.componentData"
-    ></jordanModal>
+      :keep-alive="importTable.keepAlive"
+      :exclude-string="importTable.excludeString"
+      :component-data="importTable.componentData"
+    />
     <!-- 导出 -->
     <!-- 警告 -->
     <Modal
       v-model="warningModal"
       :title="vmI18n.t('common.warning')"
       width="420"
-      @on-ok="warningOk"
       :mask="true"
+      @on-ok="warningOk"
     >
-    <!-- 当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？ -->
+      <!-- 当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？ -->
       <p>{{ vmI18n.t("modalTips.e3") }}</p>
     </Modal>
     <Modal
       v-model="virtualWarehouseModal"
       :title="vmI18n.t('common.manualWarehous')"
       width="420"
-      @on-ok="virtualWarehouseLibrary"
       :mask="true"
+      @on-ok="virtualWarehouseLibrary"
     >
       <!-- <p>当前的操作会执行手动入库，是否继续？</p> -->
       <p>{{ vmI18n.t("modalTips.k3") }}</p>
@@ -164,19 +173,27 @@
       v-model="errModal"
       :title="vmI18n.t('common.tips')"
       width="500"
-      @on-keydown="keyenter"
       :mask="true"
+      @on-keydown="keyenter"
     >
-      <Table :columns="errThData" height="300" :data="errdataList"></Table>
+      <Table
+        :columns="errThData"
+        height="300"
+        :data="errdataList"
+      />
     </Modal>
-    <div class="fromLoading" v-show="isSaveLoading">
-      <Spin></Spin>
+    <div
+      v-show="isSaveLoading"
+      class="fromLoading"
+    >
+      <Spin />
     </div>
   </div>
 </template>
 
 <script>
-  import returngoodmanagementList from "@/js/pages/orderCenter/returngood/returngoodmanagementList";
+  import returngoodmanagementList from '@/js/pages/orderCenter/returngood/returngoodmanagementList';
+
   export default returngoodmanagementList;
 </script>
 

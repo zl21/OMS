@@ -1,13 +1,14 @@
-import qxBtnData from "./qxBtnData";
-import customButton from "@/views/pages/SystemConfig/quanXian/customButton";
-import quanXianTable from "@/views/pages/SystemConfig/quanXian/quanXianTable";
-import copyModal from "@/views/pages/SystemConfig/quanXian/copyModal";
-import R3 from "@syman/burgeon-r3";
+import customButton from '@/views/pages/SystemConfig/quanXian/customButton';
+import quanXianTable from '@/views/pages/SystemConfig/quanXian/quanXianTable';
+import copyModal from '@/views/pages/SystemConfig/quanXian/copyModal';
+import R3 from '@syman/burgeon-r3';
+import axios from 'axios';
+import form from '@/assets/js/__utils__/form';
+import qxBtnData from './qxBtnData';
+
 console.log(4, R3);
 const { FilterTree, SelectTree, SearchForm } = R3.components;
 const { network, urlSearchParams } = R3;
-import axios from "axios";
-import form from "@/assets/js/__utils__/form";
 export default {
   components: {
     customButton,
@@ -24,12 +25,12 @@ export default {
       spinShow: false,
       saveModal: false,
 
-      permissionType: "", //权限类型
-      permissionTable: "",
-      permissionKeyColumn: "",
+      permissionType: '', // 权限类型
+      permissionTable: '',
+      permissionKeyColumn: '',
 
-      groupId: "", // 菜单id
-      newGroupId: "", // 切换菜单时，当前切换的id
+      groupId: '', // 菜单id
+      newGroupId: '', // 切换菜单时，当前切换的id
 
       isChange: false,
 
@@ -47,14 +48,14 @@ export default {
       },
 
       searchBtnConfig: {
-        flex: "right",
+        flex: 'right',
         buttons: [
           {
-            text: vmI18n.t("btn.search"),
-            icon: "",
+            text: vmI18n.t('btn.search'),
+            icon: '',
             btnClick: () => {
-              let self = this;
-              let obj = {};
+              const self = this;
+              const obj = {};
               console.log(self.searchFormConfig.defaultconfig);
               self.searchFormConfig.defaultconfig.map((item) => {
                 if (item.item.value) {
@@ -72,17 +73,17 @@ export default {
           data: [],
         },
         treeEvent: {
-          "on-select-change": this.filterTreeChange,
+          'on-select-change': this.filterTreeChange,
         },
         clearable: true,
-        placeholder: vmI18n.t("pHolder.enter"),
+        placeholder: vmI18n.t('pHolder.enter'),
       },
 
       oldTableArr: [],
       saveTableArr: [],
 
       tableArr: {
-        searchValue: "", //检索的输入框
+        searchValue: '', // 检索的输入框
         columns: [],
         rows: [],
         isReadValueTotal: 0,
@@ -97,19 +98,19 @@ export default {
       },
       sensitiveColumns: [
         {
-          title: vmI18n.t("table_label.sensitiveColumn"),
+          title: vmI18n.t('table_label.sensitiveColumn'),
           // title: "敏感列",
-          key: "CP_C_COLUMN_ENAME",
+          key: 'CP_C_COLUMN_ENAME',
         },
         {
-          title: vmI18n.t("table_label.view"),
+          title: vmI18n.t('table_label.view'),
           // title: "查看",
-          key: "IS_READ",
+          key: 'IS_READ',
         },
         {
-          title: vmI18n.t("table_label.edit"),
+          title: vmI18n.t('table_label.edit'),
           // title: "编辑",
-          key: "IS_WRITE",
+          key: 'IS_WRITE',
         },
       ],
     };
@@ -121,7 +122,7 @@ export default {
 
     // 获取角色
     this.getRoleData();
-    if (this.permissionType !== "sensitive") {
+    if (this.permissionType !== 'sensitive') {
       this.getSearchForm();
     }
     this.buttonConfig.buttons = this.normal.buttons;
@@ -192,14 +193,14 @@ export default {
     // 获取搜索框
     async getSearchForm() {
       // 
-      let {data:{code,datas}} = await this.service.systemConfig.selectPermissionColumn(fromdata)
+      const { data: { code, datas } } = await this.service.systemConfig.selectPermissionColumn(fromdata);
       if (code === 0) {
-        let dataArray = form.refactoringData(datas.dataarry);
-        dataArray.map(item => {
+        const dataArray = form.refactoringData(datas.dataarry);
+        dataArray.map((item) => {
           if (item.item.value) {
             item.item.props.value = item.item.value;
           }
-        })
+        });
         this.searchFormConfig.defaultconfig = dataArray;
       }
       // network.post('/p/cs/permission/v1/selectPermissionColumn', urlSearchParams({ permissionType: this.permissionType }))
@@ -219,22 +220,23 @@ export default {
     // 获取表格
     async getTableData(searchCondition = {}, refresh = false) {
       this.groupId = this.newGroupId;
-      let url, params;
-      if (this.permissionType === "sensitive") {
-        url = "/p/cs/cgroupcolumnquery";
+      let url; let 
+        params;
+      if (this.permissionType === 'sensitive') {
+        url = '/p/cs/cgroupcolumnquery';
         params = {
           GROUPS_ID: this.groupId,
-          QUERY: "",
+          QUERY: '',
         };
       } else {
-        url = "/p/cs/permission/v1/selectDataPermission";
+        url = '/p/cs/permission/v1/selectDataPermission';
         params = {
           permissionType: this.permissionType,
           groupId: this.groupId, 
-          searchCondition: searchCondition,
+          searchCondition,
         };
       }
-      const {data:{data,code}} = await this.service.systemConfig.selectPermissionColumn(url,urlSearchParams(params))
+      const { data: { data, code } } = await this.service.systemConfig.selectPermissionColumn(url, urlSearchParams(params));
       if (code === 0) {
         this.tableArr.isReadValueTotal = 0;
         this.tableArr.isWriteValueTotal = 0;
@@ -246,33 +248,33 @@ export default {
         this.tableArr.isParentReadValue = false;
         this.tableArr.isParentWriteValue = false;
 
-        if (this.permissionType === "sensitive") {
-          let dt = data;
+        if (this.permissionType === 'sensitive') {
+          const dt = data;
           dt.map((item) => {
             dt.isChild = !!item.PARENT_GROUPS_ID;
             if (item.PARENT_GROUPS_ID) {
-              if (item.PARENT_ISREAD == "Y") {
+              if (item.PARENT_ISREAD == 'Y') {
                 this.tableArr.parentIsRead++;
               }
-              if (item.PARENT_ISMODIFY == "Y") {
+              if (item.PARENT_ISMODIFY == 'Y') {
                 this.tableArr.parentIsWrite++;
               }
             }
-            item.IS_WRITE = item.ISMODIFY == "Y";
-            item.IS_READ = item.ISREAD == "Y";
+            item.IS_WRITE = item.ISMODIFY == 'Y';
+            item.IS_READ = item.ISREAD == 'Y';
           });
           this.tableArr.columns = this.sensitiveColumns;
           this.tableArr.rows = data;
           this.tableArr.isChild = dt.isChild;
         } else {
-          let dt = data;
+          const dt = data;
           dt.rows.map((item) => {
             dt.isChild = !!item.PARENT_GROUPS_ID;
             if (item.PARENT_GROUPS_ID) {
-              if (item.PARENT_IS_READ == "Y") {
+              if (item.PARENT_IS_READ == 'Y') {
                 this.tableArr.parentIsRead++;
               }
-              if (item.PARENT_IS_WRITE == "Y") {
+              if (item.PARENT_IS_WRITE == 'Y') {
                 this.tableArr.parentIsWrite++;
               }
             }
@@ -283,13 +285,13 @@ export default {
         }
 
         this.tableArr.rows.forEach((item) => {
-          if (item.IS_READ === "Y" || item.ISREAD === "Y") {
+          if (item.IS_READ === 'Y' || item.ISREAD === 'Y') {
             item.IS_READ = true;
             this.tableArr.isReadValueTotal++;
           } else {
             item.IS_READ = false;
           }
-          if (item.IS_WRITE === "Y" || item.ISMODIFY === "Y") {
+          if (item.IS_WRITE === 'Y' || item.ISMODIFY === 'Y') {
             item.IS_WRITE = true;
             this.tableArr.isWriteValueTotal++;
           } else {
@@ -315,7 +317,7 @@ export default {
 
         this.oldTableArr = JSON.parse(JSON.stringify(this.tableArr.rows));
         if (refresh) {
-          this.$Message.success(vmI18n.t("common.refresh_succee"));//刷新成功
+          this.$Message.success(vmI18n.t('common.refresh_succee'));// 刷新成功
         }
       }
       // network.post(url, urlSearchParams(params)).then((res) => {
@@ -408,17 +410,17 @@ export default {
 
     async sureBtn(params) {
       this.copyModal = false;
-      let param = new URLSearchParams();
+      const param = new URLSearchParams();
       console.log(params);
-      param.append("param", JSON.stringify(params));
-      const {data:{data,code}} = await this.service.systemConfig.copyShopPermission(param)
+      param.append('param', JSON.stringify(params));
+      const { data: { data, code } } = await this.service.systemConfig.copyShopPermission(param);
       if (code === 0) {
         this.$Modal.success({
           // title: "提示",
-          title: vmI18n.t("modalTitle.tips"),
+          title: vmI18n.t('modalTitle.tips'),
           content: message,
           cancelType: true,
-          titleAlign: "left",
+          titleAlign: 'left',
           mask: true,
           draggable: true,
           keyDown: (event) => {
@@ -430,10 +432,10 @@ export default {
       } else {
         this.$Modal.error({
           // title: "提示",
-          title: vmI18n.t("modalTitle.tips"),
+          title: vmI18n.t('modalTitle.tips'),
           content: message,
           cancelType: true,
-          titleAlign: "left",
+          titleAlign: 'left',
           mask: true,
           draggable: true,
           keyDown: (event) => {

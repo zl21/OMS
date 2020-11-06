@@ -1,10 +1,19 @@
 <template>
-  <div v-loading="pageLoad" class="orderManager-box">
+  <div
+    v-loading="pageLoad"
+    class="orderManager-box"
+  >
     <div class="btn">
-      <jordanBtn :btn-config="btnConfig" @dropDownClick="dropDownClickChange" />
+      <jordanBtn
+        :btn-config="btnConfig"
+        @dropDownClick="dropDownClickChange"
+      />
     </div>
     <div class="from">
-      <div v-show="isShowFromLoading" class="from_loading">
+      <div
+        v-show="isShowFromLoading"
+        class="from_loading"
+      >
         <Spin />
       </div>
       <IntegrateSearchFilter
@@ -29,7 +38,10 @@
         v-show="!isShowSeniorOrOrdinary"
         :btn-config="btnsSearch"
       />
-      <div class="from-folding" @click="shutDownOrbounceOff">
+      <div
+        class="from-folding"
+        @click="shutDownOrbounceOff"
+      >
         <i :class="iconDownIcon" />
       </div>
     </div>
@@ -41,9 +53,16 @@
         @labelClick="labelClick"
       />
       <div class="aTable">
-        <div v-show="agTableConfig.agLoading" class="agLoading">
+        <div
+          v-show="agTableConfig.agLoading"
+          class="agLoading"
+        >
           <Spin fix>
-            <Icon class="demo-spin-icon-load" size="18" type="ios-loading" />
+            <Icon
+              class="demo-spin-icon-load"
+              size="18"
+              type="ios-loading"
+            />
             <div>Loading</div>
           </Spin>
         </div>
@@ -137,7 +156,7 @@
     >
       <!-- 批量生成退换货订单，是否继续? -->
       <p>{{ vmI18n.t("modalTips.e6") }}</p>
-      <br />
+      <br>
       <div class="orderContent">
         <businessForm :form-config="batchReturnFormConfig" />
       </div>
@@ -146,7 +165,8 @@
 </template>
 
 <script>
-  import orderManager from "@/js/pages/orderCenter/orderManager/orderManager";
+  import orderManager from '@/js/pages/orderCenter/orderManager/orderManager';
+
   export default orderManager;
 </script>
 

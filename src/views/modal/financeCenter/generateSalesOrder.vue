@@ -1,13 +1,18 @@
 <template>
   <!-- 下载账单 -->
-  <div class="generateSalesOrder" v-loading="pageLoad" style="width:400px;padding-right:20px">
-    <businessForm :formConfig="generateFormConfig"></businessForm>
-    <jordanBtn :btnConfig="generateBtnConfig"></jordanBtn>
+  <div
+    v-loading="pageLoad"
+    class="generateSalesOrder"
+    style="width:400px;padding-right:20px"
+  >
+    <businessForm :form-config="generateFormConfig" />
+    <jordanBtn :btn-config="generateBtnConfig" />
   </div>
 </template>
 
 <script>
-  import generateSalesOrder from "@/js/modal/financeCenter/generateSalesOrder";
+  import generateSalesOrder from '@/js/modal/financeCenter/generateSalesOrder';
+
   export default generateSalesOrder;
 </script>
 

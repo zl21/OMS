@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "start": "webpack-dev-server --progress --env.develop",
+    "lint": "eslint --fix --ext .js,.vue src",
     "build": "webpack --color --progress --env.production"
   },
   "author": "Burgeon Developer",

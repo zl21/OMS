@@ -3,7 +3,7 @@ import orderManager from 'allpages/OrdersCenter/orderManager/orderManager.vue'; 
 // 零售发货单-新增
 import orderManageAdd from 'allpages/OrdersCenter/orderManageAdd/orderManageAdd';
 import orderManageDetail from 'allpages/OrdersCenter/orderManageDetail/orderManageDetail.vue'; // 零售发货单-详情
-import splitOrder from "allpages/OrdersCenter/orderManager/splitOrder";
+import splitOrder from 'allpages/OrdersCenter/orderManager/splitOrder';
 import returnGoodManagementList from 'allpages/OrdersCenter/returngood/returngoodmanagementList.vue'; // 订单中心-退换货单
 import returnGood from 'allpages/OrdersCenter/returngood/returngoodmanagement.vue'; // 订单中心-退换货单详情
 import returnStorageList from 'allpages/OrdersCenter/returngood/returnStoreage/returnStoreageList.vue'; // 退货入库-列表

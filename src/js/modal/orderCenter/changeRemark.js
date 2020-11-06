@@ -1,7 +1,7 @@
-import axios from "axios";
-import businessButton from "professionalComponents/businessButton";
-import businessActionTable from "professionalComponents/businessActionTable.vue";
-import {listeningToKeydownMixin} from "@/assets/js/mixins/listeningToKeydown.js";
+import axios from 'axios';
+import businessButton from 'professionalComponents/businessButton';
+import businessActionTable from 'professionalComponents/businessActionTable.vue';
+import { listeningToKeydownMixin } from '@/assets/js/mixins/listeningToKeydown.js';
 
 export default {
   mixins: [listeningToKeydownMixin],
@@ -22,34 +22,34 @@ export default {
       // 提示
       confirmModal: false,
       formItem: {
-        cover: "false",
-        flag: "1",
-        textarea: "",
+        cover: 'false',
+        flag: '1',
+        textarea: '',
       },
       btnConfig: {
-        typeAll: "error", //按钮统一风格样式
-        btnsite: "right", //按钮位置 (right , center , left)
+        typeAll: 'error', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
             // text: "确定", //按钮文本
-            text: vmI18n.t("common.determine"), //按钮文本
-            size: "small", //按钮大小
-            disabled: true, //按钮禁用控制
+            text: vmI18n.t('common.determine'), // 按钮文本
+            size: 'small', // 按钮大小
+            disabled: true, // 按钮禁用控制
             btnclick: () => {
               this.determine();
-            }, //按钮点击事件
+            }, // 按钮点击事件
           },
           {
-            type: "", //按钮类型
+            type: '', // 按钮类型
             // text: "取消", //按钮文本
-            text: vmI18n.t("common.cancel"), //按钮文本
-            icon: "", //按钮图标
-            size: "small", //按钮大小
-            disabled: false, //按钮禁用控制
+            text: vmI18n.t('common.cancel'), // 按钮文本
+            icon: '', // 按钮图标
+            size: 'small', // 按钮大小
+            disabled: false, // 按钮禁用控制
             btnclick: () => {
               // this.$refs.changeLogistics.close();
               this.$parent.$parent.closeConfirm();
-            }, //按钮点击事件
+            }, // 按钮点击事件
           },
         ],
       },
@@ -74,7 +74,7 @@ export default {
         if (!this.confirmModal) {
           this.$parent.$parent.closeConfirm();
           this.$parent.$parent.$parent.publicBouncedIndex = {
-            name: "testModal",
+            name: 'testModal',
           };
         } else {
           this.confirmModal = false;
@@ -88,19 +88,19 @@ export default {
       // }
     },
     determine() {
-      let self = this;
-      if (typeof self.componentData.status === "object") {
+      const self = this;
+      if (typeof self.componentData.status === 'object') {
         if (
-          self.componentData.status.includes(2) ||
-          self.componentData.status.includes(1)
+          self.componentData.status.includes(2)
+          || self.componentData.status.includes(1)
         ) {
           self.confirmModal = true;
         } else {
           self.saveRemark();
         }
       } else if (
-        self.componentData.status === "1" ||
-        self.componentData.status === "2"
+        self.componentData.status === '1'
+        || self.componentData.status === '2'
       ) {
         self.confirmModal = true;
       } else {
@@ -124,22 +124,21 @@ export default {
     },
     // 保存备注
     saveRemark() {
-      let self = this;
-      let data =
-        typeof self.componentData.ids === "number"
-          ? self.componentData.ids
-          : self.componentData.ids.join(",");
-      let fromdata = new FormData();
-      let param = {
+      const self = this;
+      const data = typeof self.componentData.ids === 'number'
+        ? self.componentData.ids
+        : self.componentData.ids.join(',');
+      const fromdata = new FormData();
+      const param = {
         ids: data,
         remark: self.formItem.textarea,
         order_flag: self.formItem.flag,
         cover: self.formItem.cover,
       };
-      fromdata.append("param", JSON.stringify(param));
+      fromdata.append('param', JSON.stringify(param));
       axios({
-        url: "/api/cs/oc/oms/v1/remarkUpdate", //接口调整,切换服务地址
-        method: "post",
+        url: '/api/cs/oc/oms/v1/remarkUpdate', // 接口调整,切换服务地址
+        method: 'post',
         cancelToken: true,
         data: param,
       }).then((res) => {

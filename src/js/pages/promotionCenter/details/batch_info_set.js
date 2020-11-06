@@ -1,10 +1,10 @@
-import detailtable from "@/views/pages/promotionCenter/details/table.vue";
-import batchTables from "@/views/pages/promotionCenter/details/batchTables";
-import SingleBox from "@/views/pages/promotionCenter/components/singleBox";
-import tableCols from "@/assets/js/promotion/columns.js";
+import detailtable from '@/views/pages/promotionCenter/details/table.vue';
+import batchTables from '@/views/pages/promotionCenter/details/batchTables';
+import SingleBox from '@/views/pages/promotionCenter/components/singleBox';
+import tableCols from '@/assets/js/promotion/columns.js';
 
 export default {
-  name: "InfoSet",
+  name: 'InfoSet',
   components: {
     detailtable,
     batchTables,
@@ -77,77 +77,77 @@ export default {
       itemdata_xitong: {
         col: 1,
         colid:
-          this.$store.state.customize.forginkeys.columnIds.sku || "1700806532",
-        colid: "1700806532",
-        colname: "PS_C_PRO_ID",
-        datelimit: "all",
-        display: "text",
-        fkdesc: "门店档案",
-        fkdisplay: "drp",
-        inputname: "PS_C_PRO_ID:ECODE",
+          this.$store.state.customize.forginkeys.columnIds.sku || '1700806532',
+        colid: '1700806532',
+        colname: 'PS_C_PRO_ID',
+        datelimit: 'all',
+        display: 'text',
+        fkdesc: '门店档案',
+        fkdisplay: 'drp',
+        inputname: 'PS_C_PRO_ID:ECODE',
         isfk: true,
         isnotnull: false,
         isuppercase: true,
         length: 65535,
-        name: "",
+        name: '',
         readonly: false,
-        reftable: "PS_C_SKU",
+        reftable: 'PS_C_SKU',
         reftableid: 23281,
         row: 1,
         statsize: -1,
-        type: "STRING",
-        valuedata: "",
+        type: 'STRING',
+        valuedata: '',
         isOneData: true,
         isObject: true,
       },
       itemdata_channel: {
         col: 1,
         colid:
-          this.$store.state.customize.forginkeys.columnIds.plateform_sku ||
-          "1700806533",
-        colname: "SG_B_CHANNEL_PRODUCT_ID",
-        datelimit: "all",
-        display: "text",
-        fkdesc: "门店档案",
-        fkdisplay: "drp",
-        inputname: "SG_B_CHANNEL_PRODUCT_ID:ECODE",
+          this.$store.state.customize.forginkeys.columnIds.plateform_sku
+          || '1700806533',
+        colname: 'SG_B_CHANNEL_PRODUCT_ID',
+        datelimit: 'all',
+        display: 'text',
+        fkdesc: '门店档案',
+        fkdisplay: 'drp',
+        inputname: 'SG_B_CHANNEL_PRODUCT_ID:ECODE',
         isfk: true,
         isnotnull: false,
         isuppercase: true,
         length: 65535,
-        name: "",
+        name: '',
         readonly: false,
-        reftable: "SG_B_CHANNEL_PRODUCT",
+        reftable: 'SG_B_CHANNEL_PRODUCT',
         reftableid: 24801,
         row: 1,
         statsize: -1,
-        type: "STRING",
-        valuedata: "",
+        type: 'STRING',
+        valuedata: '',
         isOneData: true,
       },
       itemdata_xitong_pro: {
         // 系统商品款号
         col: 1,
         colid:
-          this.$store.state.customize.forginkeys.columnIds.pro || "1700806532",
-        colname: "PS_C_PRO_ID",
-        datelimit: "all",
-        display: "text",
-        fkdesc: "门店档案",
-        fkdisplay: "drp",
-        inputname: "PS_C_PRO_ID:ECODE",
+          this.$store.state.customize.forginkeys.columnIds.pro || '1700806532',
+        colname: 'PS_C_PRO_ID',
+        datelimit: 'all',
+        display: 'text',
+        fkdesc: '门店档案',
+        fkdisplay: 'drp',
+        inputname: 'PS_C_PRO_ID:ECODE',
         isfk: true,
         isnotnull: false,
         isuppercase: true,
         length: 65535,
-        name: "",
+        name: '',
         readonly: false,
-        reftable: "PS_C_PRO",
+        reftable: 'PS_C_PRO',
         reftableid: 23281,
         row: 1,
         statsize: -1,
-        type: "STRING",
-        valuedata: "",
+        type: 'STRING',
+        valuedata: '',
         isOneData: true,
         isObject: true,
       },
@@ -155,25 +155,25 @@ export default {
         // 平台商品ID
         col: 1,
         // colid: this.$store.state.forginkeys.columnIds.plateform_pro || '1700806533',
-        colid: "1700806533",
-        colname: "IP_C_TAOBAO_PRODUCT_ID",
-        datelimit: "all",
-        display: "text",
-        fkdesc: "门店档案",
-        fkdisplay: "drp",
-        inputname: "IP_C_TAOBAO_PRODUCT_ID:ECODE",
+        colid: '1700806533',
+        colname: 'IP_C_TAOBAO_PRODUCT_ID',
+        datelimit: 'all',
+        display: 'text',
+        fkdesc: '门店档案',
+        fkdisplay: 'drp',
+        inputname: 'IP_C_TAOBAO_PRODUCT_ID:ECODE',
         isfk: true,
         isnotnull: false,
         isuppercase: true,
         length: 65535,
-        name: "",
+        name: '',
         readonly: false,
-        reftable: "IP_C_TAOBAO_PRODUCT",
+        reftable: 'IP_C_TAOBAO_PRODUCT',
         reftableid: 24801,
         row: 1,
         statsize: -1,
-        type: "STRING",
-        valuedata: "",
+        type: 'STRING',
+        valuedata: '',
         isOneData: true,
       },
     };
@@ -185,11 +185,11 @@ export default {
     itemdata() {
       // this.clearPdts();
       let rs;
-      if (this.infoData.products_origin === "1") {
+      if (this.infoData.products_origin === '1') {
         rs = this.itemdata_xitong;
-      } else if (this.infoData.products_origin === "2") {
+      } else if (this.infoData.products_origin === '2') {
         rs = this.itemdata_channel;
-      } else if (this.infoData.products_origin === "3") {
+      } else if (this.infoData.products_origin === '3') {
         rs = this.itemdata_xitong_pro;
       } else {
         rs = this.itemdata_channel_pro;
@@ -203,29 +203,29 @@ export default {
     gift_columns() {
       const cols = JSON.parse(JSON.stringify(this.tableCols.giftColumns));
       cols.forEach((column) => {
-        if (column.key === "ECODE") {
+        if (column.key === 'ECODE') {
           column.width = 200;
         }
-        if (column.key === "SUM_QTY") {
+        if (column.key === 'SUM_QTY') {
           if (
-            (this.basicData && this.basicData.status === "1") ||
-            this.objid == "-1"
+            (this.basicData && this.basicData.status === '1')
+            || this.objid == '-1'
           ) {
-            column.render = (h, params) => h("div", {}, params.row.SUM);
+            column.render = (h, params) => h('div', {}, params.row.SUM);
           } else {
             delete column.render;
-            this.$set(column, "render", null);
+            this.$set(column, 'render', null);
           }
         }
-        if (column.key === "SEND_QTY") {
+        if (column.key === 'SEND_QTY') {
           if (
-            (this.basicData && this.basicData.status === "1") ||
-            this.objid == "-1"
+            (this.basicData && this.basicData.status === '1')
+            || this.objid == '-1'
           ) {
-            column.render = (h, params) => h("div", {}, 0);
+            column.render = (h, params) => h('div', {}, 0);
           } else {
             delete column.render;
-            this.$set(column, "render", null);
+            this.$set(column, 'render', null);
           }
         }
       });
@@ -245,7 +245,7 @@ export default {
     },
   },
   watch: {
-    "infoData.products_origin": {
+    'infoData.products_origin': {
       handler(val, old) {
         const self = this;
         const cols = JSON.parse(JSON.stringify(this.tableCols.productsColumns));
@@ -255,23 +255,23 @@ export default {
         const colspt = JSON.parse(
           JSON.stringify(this.tableCols.productsColumnspt)
         );
-        if (val === "1" || val === "2") {
+        if (val === '1' || val === '2') {
           cols.forEach((column) => {
-            if (column.key === "ECODE") {
+            if (column.key === 'ECODE') {
               column.width = 200;
             }
           });
           this.products_columns = cols;
-        } else if (val === "3") {
+        } else if (val === '3') {
           colsxt.forEach((column) => {
-            if (column.key === "ECODE") {
+            if (column.key === 'ECODE') {
               column.width = 200;
             }
           });
           this.products_columns = colsxt;
         } else {
           colspt.forEach((column) => {
-            if (column.key === "ECODE") {
+            if (column.key === 'ECODE') {
               column.width = 200;
             }
           });
@@ -282,7 +282,7 @@ export default {
   },
   methods: {
     blurValue(row, listIndex, index, from, key) {
-      if (from === "gift") {
+      if (from === 'gift') {
         this.infoData.list[listIndex].gift_products[index][key] = row[key];
       } else {
         this.infoData.list[listIndex].products[index][key] = row[key];
@@ -290,8 +290,8 @@ export default {
     },
     addList() {
       this.infoData.list.push({ gift_products: [], products: [] });
-      this.addRowData(this.infoData.list.length - 1, "product");
-      this.addRowData(this.infoData.list.length - 1, "gift");
+      this.addRowData(this.infoData.list.length - 1, 'product');
+      this.addRowData(this.infoData.list.length - 1, 'gift');
     },
     productsFromChange(val) {
       this.infoData.list = [{ gift_products: [], products: [] }];
@@ -307,15 +307,15 @@ export default {
       // 添加
       const self = this;
       const obj = {};
-      if (from === "gift") {
+      if (from === 'gift') {
         self.gift_columns.forEach((col) => {
-          obj[col.key] = row && row[col.key] ? row[col.key] : "";
+          obj[col.key] = row && row[col.key] ? row[col.key] : '';
         });
         if (row && row.ID) obj.ID = row.ID;
         self.infoData.list[index].gift_products.push(obj);
       } else {
         self.products_columns.forEach((col) => {
-          obj[col.key] = row && row[col.key] ? row[col.key] : "";
+          obj[col.key] = row && row[col.key] ? row[col.key] : '';
         });
         if (row && row.ID) obj.ID = row.ID;
         if (row && row.SKU_ID) obj.SKU_ID = row.SKU_ID;
@@ -323,13 +323,13 @@ export default {
       }
     },
     deleteRowData(row, index, from) {
-      let self = this;
-      let rowIndex = row._index;
-      if (from === "gift") {
+      const self = this;
+      const rowIndex = row._index;
+      if (from === 'gift') {
         if (self.infoData.list[index].gift_products.length <= 1) {
           this.$message({
-            type: "warning",
-            message: "至少保留一条赠品信息",
+            type: 'warning',
+            message: '至少保留一条赠品信息',
           });
           return;
         }
@@ -337,8 +337,8 @@ export default {
       } else {
         if (self.infoData.list[index].products.length <= 1) {
           this.$message({
-            type: "warning",
-            message: "至少保留一条条件信息",
+            type: 'warning',
+            message: '至少保留一条条件信息',
           });
           return;
         }
@@ -352,7 +352,7 @@ export default {
      * 批量录入
      */
     batchImport(data) {
-      let self = this;
+      const self = this;
       data.forEach((item, index) => {
         let obj = this.infoData.list[index];
         try {
@@ -367,7 +367,7 @@ export default {
           }
         } catch (e) {
           // console.log("批量导入解析出现问题...");
-          self.$message({ type: "error", message: vmI18n.t("modalTips.r7") });
+          self.$message({ type: 'error', message: vmI18n.t('modalTips.r7') });
         }
       });
     },
@@ -375,8 +375,8 @@ export default {
 
   mounted() {
     // console.log("infoData", this.infoData);
-    this.addRowData(0, "product");
-    this.addRowData(0, "gift");
-    console.log("infoData", this.infoData);
+    this.addRowData(0, 'product');
+    this.addRowData(0, 'gift');
+    console.log('infoData', this.infoData);
   },
 };

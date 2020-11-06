@@ -8,4 +8,4 @@ export default {
   returnTypeItemquery: '/p/cs/objectTableItem', // 退款分类描述
   // 额外退款单
   extraReturnTableLogQuery: '/api/cs/oc/oms/v1/getOcBReturnAfSendLog' // 额外退款单日志
-}
+};

@@ -1,11 +1,20 @@
 <template>
-  <div style="width:250px" class="gf">
+  <div
+    style="width:250px"
+    class="gf"
+  >
     <!-- 是否确认同步库存？ -->
-    <p class="title">{{vmI18n.t('mmodalTips.by')}}</p>
+    <p class="title">
+      {{ vmI18n.t('mmodalTips.by') }}
+    </p>
     <div class="dialog-footer">
       <!-- 确定 -->
-      <Button type="primary" size="small" @click="determine">
-        {{vmI18n.t("common.determine")}}
+      <Button
+        type="primary"
+        size="small"
+        @click="determine"
+      >
+        {{ vmI18n.t("common.determine") }}
       </Button>
       <!-- 取消 -->
       <Button
@@ -16,13 +25,17 @@
           () => {
             this.$emit('closeActionDialog');
           }
-        ">{{ vmI18n.t("common.cancel") }}</Button>
+        "
+      >
+        {{ vmI18n.t("common.cancel") }}
+      </Button>
     </div>
   </div>
 </template>
 
 <script>
-  import channelInventory from "@/js/modal/InventoryCenter/channelInventory";
+  import channelInventory from '@/js/modal/InventoryCenter/channelInventory';
+
   export default channelInventory;
 </script>
 

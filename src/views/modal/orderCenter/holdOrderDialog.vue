@@ -1,49 +1,55 @@
 <template>
-  <div class="hold-dialog" v-loading="dialogLoad">
+  <div
+    v-loading="dialogLoad"
+    class="hold-dialog"
+  >
     <div class="hold-form">
-      <re-form :formConfig="formConfig">
+      <re-form :form-config="formConfig">
         <template #formCompile="{ rowData }">
           <div class="form-compile">
             <Select
-              class="form-compile-item"
               v-model="formConfig.formValue.DAY_TYPE"
+              class="form-compile-item"
             >
               <Option
                 v-for="item in rowData.item.options1"
-                :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</Option
+                :value="item.value"
               >
+                {{ item.label }}
+              </Option>
             </Select>
             <InputNumber
+              v-model="formConfig.formValue.FIXED_DURATION"
               class="form-compile-item compile-item-input"
               :max="10000"
               :min="1"
-              v-model="formConfig.formValue.FIXED_DURATION"
-            ></InputNumber>
+            />
             <Select
-              class="form-compile-item"
               v-model="formConfig.formValue.TIME_UNIT"
+              class="form-compile-item"
             >
               <Option
                 v-for="item in rowData.item.options2"
-                :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</Option
+                :value="item.value"
               >
+                {{ item.label }}
+              </Option>
             </Select>
           </div>
         </template>
       </re-form>
     </div>
-    <re-button :btnConfig="btnConfig" />
+    <re-button :btn-config="btnConfig" />
   </div>
 </template>
 
 <script>
 // import httpServer, { post } from '@/utils/request'
-import holdOrderDialog from "@/js/modal/orderCenter/holdOrderDialog";
-export default holdOrderDialog;
+  import holdOrderDialog from '@/js/modal/orderCenter/holdOrderDialog';
+
+  export default holdOrderDialog;
 </script>
 
 <style lang="less" scoped>

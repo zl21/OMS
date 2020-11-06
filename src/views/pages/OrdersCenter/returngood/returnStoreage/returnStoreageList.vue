@@ -2,32 +2,45 @@
 <template>
   <div class="returnstoreage tableList">
     <!-- <input  type='hidden'  :value=IsDisabled /> -->
-    <businessButton :btnConfig="btnConfig"></businessButton>
+    <businessButton :btn-config="btnConfig" />
     <div class="form">
-      <businessForm :formConfig="formConfig" class="searchList"></businessForm>
-      <div class="fromLoading" v-show="isShowFromLoading">
-        <Spin></Spin>
+      <businessForm
+        :form-config="formConfig"
+        class="searchList"
+      />
+      <div
+        v-show="isShowFromLoading"
+        class="fromLoading"
+      >
+        <Spin />
       </div>
     </div>
     <div class="tableContent">
-      <div class="agLoading" v-show="agTableConfig.agLoading">
+      <div
+        v-show="agTableConfig.agLoading"
+        class="agLoading"
+      >
         <Spin fix>
-          <Icon type="ios-loading" size="18" class="demo-spin-icon-load"></Icon>
+          <Icon
+            type="ios-loading"
+            size="18"
+            class="demo-spin-icon-load"
+          />
           <div>Loading</div>
         </Spin>
       </div>
       <aTable
         ref="agGridChild"
-        :agTableConfig="agTableConfig"
+        :ag-table-config="agTableConfig"
         @on-page-change="pageChange"
         @on-page-size-change="pageSizeChange"
         @on-row-dblclick="onRowDblclick"
-      ></aTable>
+      />
     </div>
     <!-- 修改from表单 -->
     <jordanModal
       :title="setFromInput.confirmTitle"
-      :titleAlign="setFromInput.titleAlign"
+      :title-align="setFromInput.titleAlign"
       :width="setFromInput.width"
       :scrollable="setFromInput.scrollable"
       :closable="setFromInput.closable"
@@ -37,14 +50,14 @@
       :transfer="setFromInput.transfer"
       :name="setFromInput.name"
       :url="setFromInput.url"
-      :keepAlive="setFromInput.keepAlive"
-      :excludeString="setFromInput.excludeString"
-      :componentData="setFromInput.componentData"
-    ></jordanModal>
+      :keep-alive="setFromInput.keepAlive"
+      :exclude-string="setFromInput.excludeString"
+      :component-data="setFromInput.componentData"
+    />
     <!-- 导入 -->
     <jordanModal
       :title="importTable.confirmTitle"
-      :titleAlign="importTable.titleAlign"
+      :title-align="importTable.titleAlign"
       :width="importTable.width"
       :scrollable="importTable.scrollable"
       :closable="importTable.closable"
@@ -54,16 +67,16 @@
       :transfer="importTable.transfer"
       :name="importTable.name"
       :url="importTable.url"
-      :keepAlive="importTable.keepAlive"
-      :excludeString="importTable.excludeString"
-      :componentData="importTable.componentData"
-    ></jordanModal>
+      :keep-alive="importTable.keepAlive"
+      :exclude-string="importTable.excludeString"
+      :component-data="importTable.componentData"
+    />
     <Modal
       v-model="warningModal"
       :title="vmI18n.t('modalTitle.warning')"
       width="420"
-      @on-ok="warningOk"
       :mask="true"
+      @on-ok="warningOk"
     >
       <!-- <p>当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？</p> -->
       <p>{{ vmI18n.t("modalTips.e3") }}</p>
@@ -71,7 +84,8 @@
   </div>
 </template>
 <script>
-  import returnStoreageList from "@/js/pages/orderCenter/returngood/returnStoreage/returnStoreageList";
+  import returnStoreageList from '@/js/pages/orderCenter/returngood/returnStoreage/returnStoreageList';
+
   export default returnStoreageList;
 </script>
 <style lang="less">

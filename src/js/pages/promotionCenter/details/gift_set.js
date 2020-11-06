@@ -1,12 +1,12 @@
-import detailtable from "@/views/pages/promotionCenter/details/table.vue";
-import detailtabs from "@/views/pages/promotionCenter/details/tableTabs.vue";
-import SingleBox from "@/views/pages/promotionCenter/components/singleBox";
-import tableCols from "@/assets/js/promotion/columns.js";
-import ButtonFkDialog from "@/views/pages/promotionCenter/components/buttonFkDialog";
+import detailtable from '@/views/pages/promotionCenter/details/table.vue';
+import detailtabs from '@/views/pages/promotionCenter/details/tableTabs.vue';
+import SingleBox from '@/views/pages/promotionCenter/components/singleBox';
+import tableCols from '@/assets/js/promotion/columns.js';
+import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDialog';
 
 // const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
 export default {
-  name: "GiftSet",
+  name: 'GiftSet',
   components: {
     detailtable,
     detailtabs,
@@ -46,7 +46,7 @@ export default {
       return this.$store.state.customize.forginkeys.groups;
     },
     showPdtsArr() {
-      const flag = this.basicData.gradient_gift === "1";
+      const flag = this.basicData.gradient_gift === '1';
       if (flag) {
         // 重置tab页面为第一页
         this.currentTab = 0;
@@ -68,7 +68,7 @@ export default {
       try {
         const itemdata = JSON.parse(JSON.stringify(this.itemdata));
         itemdata.isOneData = false;
-        itemdata.fkdisplay = "mop";
+        itemdata.fkdisplay = 'mop';
         itemdata.isObject = true;
         return itemdata;
       } catch (e) {}
@@ -106,25 +106,25 @@ export default {
       itemdata: {
         col: 1,
         colid:
-          this.$store.state.customize.forginkeys.columnIds.sku || "1700806532",
+          this.$store.state.customize.forginkeys.columnIds.sku || '1700806532',
         colname: `PS_C_PRO_ID${Math.floor(Math.random() * 100)}`,
-        datelimit: "all",
-        display: "text",
-        fkdesc: "商品档案",
-        fkdisplay: "drp",
-        inputname: "PS_C_PRO_ID:ECODE",
+        datelimit: 'all',
+        display: 'text',
+        fkdesc: '商品档案',
+        fkdisplay: 'drp',
+        inputname: 'PS_C_PRO_ID:ECODE',
         isfk: true,
         isnotnull: false,
         isuppercase: true,
         length: 65535,
-        name: "",
+        name: '',
         readonly: false,
-        reftable: "PS_C_SKU",
+        reftable: 'PS_C_SKU',
         reftableid: 23281,
         row: 1,
         statsize: -1,
-        type: "STRING",
-        valuedata: "",
+        type: 'STRING',
+        valuedata: '',
         isOneData: true,
         isObject: true,
       },
@@ -135,17 +135,17 @@ export default {
         data: [],
       },
       productsArrsView: [], // 多tab表格
-      currentView: "", // 弹框展示模块
-      popDialog: "", // 弹框
+      currentView: '', // 弹框展示模块
+      popDialog: '', // 弹框
       dialogModal: {},
       show_dialog: false,
       dialogSet: {
         // 弹框设置
-        dialogTitle: "",
+        dialogTitle: '',
         footerHide: true,
         mask: true,
       },
-      moduleMode: "gift",
+      moduleMode: 'gift',
     };
   },
   methods: {
@@ -174,8 +174,7 @@ export default {
       try {
         const rowCount = (currentPage - 1) * pageSize;
         const rowindex = rowCount + row._index;
-        const arrs =
-          this.giftData.gift_productsArrs[tabindex].productslist || [];
+        const arrs = this.giftData.gift_productsArrs[tabindex].productslist || [];
         arrs.splice(rowindex, 1);
         this.countOneTablelistView(tabindex);
       } catch (e) {}
@@ -184,10 +183,9 @@ export default {
       // 搭配-增加行数据
       const obj = {};
       this.columns.forEach((col) => {
-        obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : "";
-        if (col.key === "ORDER") {
-          obj[col.key] =
-            this.giftData.gift_productsArrs[tabindex].productslist.length + 1;
+        obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : '';
+        if (col.key === 'ORDER') {
+          obj[col.key] = this.giftData.gift_productsArrs[tabindex].productslist.length + 1;
         }
       });
       // obj.itemdata = JSON.parse(JSON.stringify(this.itemdata));
@@ -196,8 +194,8 @@ export default {
       //   obj.itemdata.valuedata = rowObj.ECODE;
       // }
       if (rowObj) {
-        obj.ID = rowObj.ID || "";
-        obj.SKU_ID = rowObj.SKU_ID || "";
+        obj.ID = rowObj.ID || '';
+        obj.SKU_ID = rowObj.SKU_ID || '';
       }
       this.giftData.gift_productsArrs[tabindex].productslist.push(obj);
       this.countOneTablelistView(tabindex);
@@ -206,8 +204,8 @@ export default {
       // 非搭配--增加行
       const obj = {};
       this.columns.forEach((col) => {
-        obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : "";
-        if (col.key === "ORDER") {
+        obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : '';
+        if (col.key === 'ORDER') {
           obj[col.key] = this.giftData.gift_productslist.length + 1;
         }
       });
@@ -254,11 +252,11 @@ export default {
     addSteps() {
       const obj = {};
       this.columns.forEach((col) => {
-        obj[col.key] = "";
+        obj[col.key] = '';
       });
       const group = {
         group: this.getGroupIndex(),
-        unit: this.giftData.steps_type === "QTTY" ? "件" : "元",
+        unit: this.giftData.steps_type === 'QTTY' ? '件' : '元',
         productslist: [...obj],
       };
       this.giftData.gift_productsArrs.push(group);
@@ -399,8 +397,7 @@ export default {
       const rowindex = rowCount + row._index;
       if (rowindex >= 0) {
         this.deleteProperty(row);
-        const arrs =
-          this.giftData.gift_productsArrs[tabindex].productslist || [];
+        const arrs = this.giftData.gift_productsArrs[tabindex].productslist || [];
         arrs.splice(rowindex, 1, row);
       }
       if (force) this.countOneTablelistView(tabindex);
@@ -410,15 +407,15 @@ export default {
       const namelist = JSON.parse(rs.pid).nameList;
       namelist.forEach((obj) => {
         const row = {};
-        if (rs.reftable === "SG_B_CHANNEL_PRODUCT") {
-          row.ECODE = obj.PS_C_SKU_ECODE || "";
-          row.ENAME = obj.PS_C_PRO_ENAME || "";
-          row.SKU_ID = obj.SKU_ID || "";
+        if (rs.reftable === 'SG_B_CHANNEL_PRODUCT') {
+          row.ECODE = obj.PS_C_SKU_ECODE || '';
+          row.ENAME = obj.PS_C_PRO_ENAME || '';
+          row.SKU_ID = obj.SKU_ID || '';
           row.ID = obj.ID;
         } else {
-          row.ECODE = obj.ECODE || "";
-          row.ENAME = obj.PS_C_PRO_ENAME || "";
-          row.ID = obj.ID || "";
+          row.ECODE = obj.ECODE || '';
+          row.ENAME = obj.PS_C_PRO_ENAME || '';
+          row.ID = obj.ID || '';
         }
         this.addRowData(null, row);
       });
@@ -428,21 +425,21 @@ export default {
       const namelist = JSON.parse(rs.pid).nameList;
       namelist.forEach((obj) => {
         const row = {};
-        if (rs.reftable === "SG_B_CHANNEL_PRODUCT") {
-          row.ECODE = obj.PS_C_SKU_ECODE || "";
-          row.ENAME = obj.PS_C_PRO_ENAME || "";
+        if (rs.reftable === 'SG_B_CHANNEL_PRODUCT') {
+          row.ECODE = obj.PS_C_SKU_ECODE || '';
+          row.ENAME = obj.PS_C_PRO_ENAME || '';
           row.ID = obj.SKU_ID;
-        } else if (rs.reftable === "IP_C_TAOBAO_PRODUCT") {
-          row.ECODE = obj.NUM_IID || "";
-          row.ENAME = obj.TITLE || "";
+        } else if (rs.reftable === 'IP_C_TAOBAO_PRODUCT') {
+          row.ECODE = obj.NUM_IID || '';
+          row.ENAME = obj.TITLE || '';
           row.ID = obj.ID;
-        } else if (rs.reftable === "PS_C_PRO") {
-          row.ECODE = obj.ECODE || "";
-          row.ENAME = obj.ENAME || "";
-          row.ID = obj.ID || "";
+        } else if (rs.reftable === 'PS_C_PRO') {
+          row.ECODE = obj.ECODE || '';
+          row.ENAME = obj.ENAME || '';
+          row.ID = obj.ID || '';
         } else {
-          row.ECODE = obj.ECODE || "";
-          row.ENAME = obj.PS_C_PRO_ENAME || "";
+          row.ECODE = obj.ECODE || '';
+          row.ENAME = obj.PS_C_PRO_ENAME || '';
           row.ID = obj.ID;
         }
         this.addOneTableRowData(tabindex, row);
@@ -461,27 +458,27 @@ export default {
      */
     customeColumns() {
       let cols = [];
-      if (this.giftData.gift_methods === "2") {
+      if (this.giftData.gift_methods === '2') {
         cols = JSON.parse(JSON.stringify(this.tableCols.giftInCreaseColumns));
       } else {
         cols = JSON.parse(JSON.stringify(this.tableCols.giftAllColumns));
       }
 
       cols.forEach((column) => {
-        if (column.key === "SUM_QTY") {
-          if (this.basicData.status === "1" || this.objid == "-1") {
-            column.render = (h, params) => h("div", {}, params.row.SUM);
+        if (column.key === 'SUM_QTY') {
+          if (this.basicData.status === '1' || this.objid == '-1') {
+            column.render = (h, params) => h('div', {}, params.row.SUM);
           } else {
             delete column.render;
-            this.$set(column, "render", null);
+            this.$set(column, 'render', null);
           }
         }
-        if (column.key === "SEND_QTY") {
-          if (this.basicData.status === "1" || this.objid == "-1") {
-            column.render = (h, params) => h("div", {}, 0);
+        if (column.key === 'SEND_QTY') {
+          if (this.basicData.status === '1' || this.objid == '-1') {
+            column.render = (h, params) => h('div', {}, 0);
           } else {
             delete column.render;
-            this.$set(column, "render", null);
+            this.$set(column, 'render', null);
           }
         }
       });
@@ -497,7 +494,7 @@ export default {
         pageSize: 10,
         data: [],
       };
-      if (this.basicData.gradient_gift === "0") {
+      if (this.basicData.gradient_gift === '0') {
         this.productslistView = obj;
         this.tablelistView(
           this.giftData.gift_productslist,
@@ -521,16 +518,16 @@ export default {
     importData() {
       const self = this;
       this.dialogModal = {};
-      this.dialogModal.tableName = this.itemdata.reftable || "PS_C_SKU";
+      this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
       this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
-      const _component = "popdialog";
+      const _component = 'popdialog';
       Vue.component(
         _component,
-        Vue.extend(_import("onlinePromotion/components/importDialog"))
+        Vue.extend(_import('onlinePromotion/components/importDialog'))
       );
       self.currentView = _component;
       // self.dialogSet.dialogTitle = "导入";
-      self.dialogSet.dialogTitle = vmI18n.t("modalTitle.import");
+      self.dialogSet.dialogTitle = vmI18n.t('modalTitle.import');
       self.show_dialog = true;
     },
     /**

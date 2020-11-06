@@ -13,10 +13,10 @@
     </AutoComplete>-->
     <el-autocomplete
       :ref="'autocomplete'+itemdata.colname"
+      v-model="value"
       class="table-input"
       :popper-class="'fkAutocomplete'+itemdata.colname"
       type="text"
-      v-model="value"
       :fetch-suggestions="handleSearch"
       :trigger-on-focus="false"
       @select="handleSelect"
@@ -27,15 +27,16 @@
       <template slot-scope="{ item }">
         <span
           v-for="(value, key, index) of item"
+          :key="index"
           :class="`length${Object.keys(item).length - 2}`"
           :title="value"
-          :key="index"
-        >{{value}}</span>
+        >{{ value }}</span>
       </template>
     </el-autocomplete>
   </div>
 </template>
 <script>
-  import tableSku from "@/js/pages/promotionCenter/components/tableSku";
+  import tableSku from '@/js/pages/promotionCenter/components/tableSku';
+
   export default tableSku;
 </script>

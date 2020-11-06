@@ -4,7 +4,7 @@
     <Modal
       v-model="modal"
       :title="title"
-      :titleAlign="titleAlign"
+      :title-align="titleAlign"
       :width="width"
       :scrollable="scrollable"
       :closable="closable"
@@ -22,21 +22,25 @@
       @on-ok="onOk"
     >
       <component
+        :is="currentViewData"
         v-if="!$slots.content"
-        v-bind:is="currentViewData"
         :ref="currentView"
-        :componentData="componentData"
+        :component-data="componentData"
         @returnData="returnData"
-      ></component>
+      />
       <!-- 插槽适用范围：多个组件、单个的复杂组件、内容完全自由 -->
-      <slot v-else-if="$slots.content" name="content"></slot>
+      <slot
+        v-else-if="$slots.content"
+        name="content"
+      />
     </Modal>
   </div>
 </template>
 
 <script>
-  import JDialog from "@/js/modal/orderCenter/publicDialog/JDialog";
-  export default JDialog
+  import JDialog from '@/js/modal/orderCenter/publicDialog/JDialog';
+
+  export default JDialog;
 </script>
 
 <style lang="less">

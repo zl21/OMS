@@ -9,37 +9,57 @@
               <!-- <th>序号</th> -->
               <th>{{ vmI18n.t("table_label.serialNo") }}</th>
               <template v-for="(column, index) in columns">
-                <th :key="index" v-if="column.key === 'IS_READ'">
+                <th
+                  v-if="column.key === 'IS_READ'"
+                  :key="index"
+                >
                   <Checkbox
                     v-model="tableArr.isReadValue"
                     :disabled="tableArr.isChild && !tableArr.isParentReadValue"
                     @on-change="theadCheckboxChange($event, column)"
-                    >{{ column.title }}</Checkbox
                   >
+                    {{ column.title }}
+                  </Checkbox>
                 </th>
-                <th :key="index" v-else-if="column.key === 'IS_WRITE'">
+                <th
+                  v-else-if="column.key === 'IS_WRITE'"
+                  :key="index"
+                >
                   <Checkbox
                     v-model="tableArr.isWriteValue"
                     :disabled="tableArr.isChild && !tableArr.isParentWriteValue"
                     @on-change="theadCheckboxChange($event, column)"
-                    >{{ column.title }}</Checkbox
                   >
+                    {{ column.title }}
+                  </Checkbox>
                 </th>
-                <th :key="index" v-else>{{ column.title }}</th>
+                <th
+                  v-else
+                  :key="index"
+                >
+                  {{ column.title }}
+                </th>
               </template>
             </tr>
           </thead>
         </table>
       </div>
-      <div class="scrollTable" :style="scrollTableHeight" ref="scrollTable">
+      <div
+        ref="scrollTable"
+        class="scrollTable"
+        :style="scrollTableHeight"
+      >
         <table>
           <tbody>
-            <tr v-for="(row, rowIndex) in rows" :key="rowIndex">
+            <tr
+              v-for="(row, rowIndex) in rows"
+              :key="rowIndex"
+            >
               <td>{{ rowIndex + 1 }}</td>
               <template v-for="(column, index) in columns">
                 <td
-                  :key="index"
                   v-if="column.key === 'IS_READ' || column.key === 'IS_WRITE'"
+                  :key="index"
                 >
                   <Checkbox
                     v-model="row[column.key]"
@@ -47,18 +67,26 @@
                       (row.PARENT_GROUPS_ID &&
                         column.key === 'IS_READ' &&
                         (row.PARENT_IS_READ === 'N' ||
-                          row.PARENT_ISREAD === 'N')) ||
-                      (column.key === 'IS_WRITE' &&
+                        row.PARENT_ISREAD === 'N')) ||
+                        (column.key === 'IS_WRITE' &&
                         (row.PARENT_IS_WRITE === 'N' ||
-                          row.PARENT_ISMODIFY === 'N'))
+                        row.PARENT_ISMODIFY === 'N'))
                     "
                     @on-change="rowCheckboxChange($event, rowIndex, column)"
-                  ></Checkbox>
+                  />
                 </td>
-                <td :key="index" v-else-if="column.key === 'ISACTIVE'">
+                <td
+                  v-else-if="column.key === 'ISACTIVE'"
+                  :key="index"
+                >
                   {{ row[column.key] === "Y" ? "是" : "否" }}
                 </td>
-                <td :key="index" v-else>{{ row[column.key] }}</td>
+                <td
+                  v-else
+                  :key="index"
+                >
+                  {{ row[column.key] }}
+                </td>
               </template>
             </tr>
           </tbody>
@@ -68,8 +96,9 @@
   </div>
 </template>
 <script>
-import quanXianTable from "@/js/pages/SystemConfig/quanXian/quanXianTable.js";
-export default quanXianTable;
+  import quanXianTable from '@/js/pages/SystemConfig/quanXian/quanXianTable.js';
+
+  export default quanXianTable;
 </script>
 
 <style lang="less">
