@@ -1,30 +1,32 @@
 export default {
   data() {
     return {
-      normal: { // 正常
-        buttons: [{
-          text: '保存',
-          icon: '',
-          btnClick: () => {
-            this.saveQuanXian();
+      normal: {
+        // 正常
+        buttons: [
+          {
+            text: '保存',
+            icon: '',
+            btnClick: () => {
+              this.saveQuanXian();
+            }
+          },
+          // {
+          //   text: '复制',
+          //   icon: '',
+          //   btnClick: () => {
+          //     this.copyModal = true;
+          //   }
+          // },
+          {
+            text: '刷新',
+            icon: '',
+            btnClick: () => {
+              this.refresh();
+            }
           }
-        },
-        // {
-        //   text: '复制',
-        //   icon: '',
-        //   btnClick: () => {
-        //     this.copyModal = true;
-        //   }
-        // },
-        {
-          text: '刷新',
-          icon: '',
-          btnClick: () => {
-            this.refresh();
-          }
-        }
-        ],
-      },
+        ]
+      }
     };
   },
   methods: {
@@ -33,10 +35,11 @@ export default {
       const self = this;
       const obj = {};
       console.log(self.searchFormConfig.defaultconfig);
-      self.searchFormConfig.defaultconfig.map((item) => {
+      self.searchFormConfig.defaultconfig.map(item => {
         if (item.item.value) {
           obj[item.item.field] = item.item.value;
         }
+        return true;
       });
       self.getTableData(obj, true);
       this.isChange = false;
@@ -48,10 +51,13 @@ export default {
         return;
       }
 
-      let url; let 
-        params;
+      let url;
+      let params;
       if (this.permissionType === 'sensitive') {
-        this.saveTableArr.map(item => item.CP_C_GROUPS_ID = this.groupId);
+        this.saveTableArr.map(item => {
+          item.CP_C_GROUPS_ID = this.groupId;
+          return true;
+        });
         // console.log(this.saveTableArr);
         url = '/p/cs/objectSave';
         params = {
@@ -98,26 +104,24 @@ export default {
       this.saveTableArr = [];
       if (this.permissionType === 'sensitive') {
         this.tableArr.rows.forEach((item, index) => {
-          if (item.ID === null || (item.ID === this.oldTableArr[index].ID
-              && (item.IS_READ !== this.oldTableArr[index].IS_READ || item.IS_WRITE !== this.oldTableArr[index].IS_WRITE))) {
+          if (item.ID === null || (item.ID === this.oldTableArr[index].ID && (item.IS_READ !== this.oldTableArr[index].IS_READ || item.IS_WRITE !== this.oldTableArr[index].IS_WRITE))) {
             this.saveTableArr.push({
               ISREAD: item.IS_READ ? 'Y' : 'N',
               ISMODIFY: item.IS_WRITE ? 'Y' : 'N',
               CP_C_COLUMN_ID: item.CP_C_COLUMN_ID,
               ID: item.ID === null ? -1 : item.ID,
-              CP_C_GROUPS_ID: item.CP_C_GROUPS_ID,
+              CP_C_GROUPS_ID: item.CP_C_GROUPS_ID
             });
           }
         });
       } else {
         this.tableArr.rows.forEach((item, index) => {
-          if (item.ID === null || (item.ID === this.oldTableArr[index].ID
-              && (item.IS_READ !== this.oldTableArr[index].IS_READ || item.IS_WRITE !== this.oldTableArr[index].IS_WRITE))) {
+          if (item.ID === null || (item.ID === this.oldTableArr[index].ID && (item.IS_READ !== this.oldTableArr[index].IS_READ || item.IS_WRITE !== this.oldTableArr[index].IS_WRITE))) {
             const saveTableItem = {
               IS_READ: item.IS_READ ? 'Y' : 'N',
               IS_WRITE: item.IS_WRITE ? 'Y' : 'N',
               ID: item.ID === null ? -1 : item.ID,
-              GROUPS_ID: item.GROUPS_ID ? item.GROUPS_ID : this.groupId,
+              GROUPS_ID: item.GROUPS_ID ? item.GROUPS_ID : this.groupId
             };
             saveTableItem[`${this.permissionKeyColumn}`] = item[this.permissionKeyColumn];
             this.saveTableArr.push(saveTableItem);
@@ -126,7 +130,6 @@ export default {
       }
     }, // 获得保存的数据
     copyQuanXian() {},
-    refreshQuanXian() {},
-
+    refreshQuanXian() {}
   }
 };

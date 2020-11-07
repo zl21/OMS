@@ -1,79 +1,70 @@
-const path = require("path");
-const { VueLoaderPlugin } = require("vue-loader");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const TerserJSPlugin = require("terser-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const projectConfig = require("./project.config");
+const path = require('path');
+const { VueLoaderPlugin } = require('vue-loader');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const projectConfig = require('./project.config');
 const target = projectConfig.target; // 框架研发网关开启环境
 const proxyLists = projectConfig.burgeonProxy;
-const indexProHtml = path.posix.join("/", "index.pro.html");
-const indexHtml = path.posix.join("/", "index.html");
+const indexProHtml = path.posix.join('/', 'index.pro.html');
+const indexHtml = path.posix.join('/', 'index.html');
 
 const burgeonPlugins = [
   new MiniCssExtractPlugin({
-    filename: "r3.css"
+    filename: 'r3.css'
   }),
-  new CleanWebpackPlugin([
-    process.env && process.env.production ? "dist" : "devDist"
-  ]),
+  new CleanWebpackPlugin([process.env && process.env.production ? 'dist' : 'devDist']),
   new VueLoaderPlugin(),
   new HtmlWebpackPlugin({
-    chunksSortMode: "none",
-    title:
-      process.env && process.env.production
-        ? projectConfig.projectsTitle
-        : `Debug:${projectConfig.projectsTitle}`,
-    template:
-      process.env && process.env.production
-        ? "./index.pro.html"
-        : "./index.html",
+    chunksSortMode: 'none',
+    title: process.env && process.env.production ? projectConfig.projectsTitle : `Debug:${projectConfig.projectsTitle}`,
+    template: process.env && process.env.production ? './index.pro.html' : './index.html',
     inject: true,
     favicon: projectConfig.projectIconPath
   }),
   new CopyWebpackPlugin([
     {
-      from: path.resolve(__dirname, "./static"),
-      to: "static",
-      ignore: [".*"]
+      from: path.resolve(__dirname, './static'),
+      to: 'static',
+      ignore: ['.*']
     }
   ]),
 
   new webpack.ProvidePlugin({
-    $: "jquery",
-    jQuery: "jquery",
-    jquery: "jquery",
-    "window.jQuery": "jquery"
+    $: 'jquery',
+    jQuery: 'jquery',
+    jquery: 'jquery',
+    'window.jQuery': 'jquery'
   })
 ];
 
 if (projectConfig.build.bundleAnalyzerReport) {
-  const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-    .BundleAnalyzerPlugin;
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
   burgeonPlugins.push(new BundleAnalyzerPlugin());
 }
 
 module.exports = env => ({
   entry: {
-    index: "./index.js"
+    index: './index.js'
   },
   externals: {
-    vue: "Vue",
-    vuex: "Vuex",
-    "vue-router": "VueRouter",
-    axios: "axios",
+    vue: 'Vue',
+    vuex: 'Vuex',
+    'vue-router': 'VueRouter',
+    axios: 'axios',
     // 'ag-grid': 'agGrid',
-    "ark-ui": "Ark",
-    ztree: "ztree",
-    jquery: "$"
+    'ark-ui': 'Ark',
+    ztree: 'ztree',
+    jquery: '$'
   },
   devServer: {
     compress: true,
     port: 8080,
-    host: "localhost",
+    host: 'localhost',
     open: true,
     historyApiFallback: {
       rewrites: [
@@ -83,7 +74,7 @@ module.exports = env => ({
         }
       ]
     },
-    publicPath: "/",
+    publicPath: '/',
     proxy: [
       {
         context: proxyLists,
@@ -91,19 +82,18 @@ module.exports = env => ({
         changeOrigin: true
       },
       {
-        "/yapi": "http://yapi.dev.syman.cn/mock/624",
+        '/yapi': 'http://yapi.dev.syman.cn/mock/624',
         changeOrigin: true
       }
     ]
   },
-  target: "web",
-  devtool:
-    env && env.production ? "source-map" : "cheap-module-eval-source-map",
+  target: 'web',
+  devtool: env && env.production ? 'source-map' : 'cheap-module-eval-source-map',
   output: {
-    filename: "[name].js",
-    chunkFilename: "[name].js",
-    path: path.join(__dirname, "./dist"),
-    publicPath: "/"
+    filename: '[name].js',
+    chunkFilename: '[name].js',
+    path: path.join(__dirname, './dist'),
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -111,7 +101,7 @@ module.exports = env => ({
         test: /\.vue$/,
         use: [
           {
-            loader: "vue-loader"
+            loader: 'vue-loader'
           }
         ]
       },
@@ -119,7 +109,7 @@ module.exports = env => ({
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader'
         }
       },
       {
@@ -127,16 +117,13 @@ module.exports = env => ({
         // include: [path.resolve('./node_modules/@burgeon/oms-theme/')],
         use: [
           {
-            loader:
-              env && env.production
-                ? MiniCssExtractPlugin.loader
-                : "style-loader"
+            loader: env && env.production ? MiniCssExtractPlugin.loader : 'style-loader'
           },
           {
-            loader: "css-loader"
+            loader: 'css-loader'
           },
           {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
               javascriptEnabled: true
             }
@@ -147,10 +134,10 @@ module.exports = env => ({
         test: /\.(png|jpg|gif)$/,
         use: [
           {
-            loader: "url-loader",
+            loader: 'url-loader',
             options: {
               limit: 8192,
-              name: "[path][name].[ext]"
+              name: '[path][name].[ext]'
             }
           }
         ]
@@ -159,41 +146,35 @@ module.exports = env => ({
         test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
         use: [
           {
-            loader: "file-loader",
+            loader: 'file-loader',
             options: {
-              name: "[path][name].[ext]",
-              context: "src"
+              name: '[path][name].[ext]',
+              context: 'src'
             }
           }
         ]
       },
       {
         test: /\.(mp3)(\?.*)?$/,
-        loader: "url-loader",
+        loader: 'url-loader',
         options: {
-          name: "audios/[name].[ext]",
+          name: 'audios/[name].[ext]',
           limit: 10
         }
       }
     ]
   },
   plugins: burgeonPlugins,
-  mode: env && env.production ? "production" : "development",
+  mode: env && env.production ? 'production' : 'development',
   resolve: {
-    extensions: [".js", ".json", ".vue", ".css"],
+    extensions: ['.js', '.json', '.vue', '.css'],
     alias: {
-      "@": path.resolve(__dirname, "src"),
-      libs: path.resolve(__dirname, "node_modules"),
-      allpages: path.resolve(__dirname, "src/views/pages"),
-      framework: path.resolve(
-        __dirname,
-        "node_modules/@syman/burgeon-r3-components/r3.publish/src"
-      ),
-      professionalComponents: path.resolve(
-        __dirname,
-        "node_modules/@burgeon/business-components"
-      ),
-      omsTheme: path.resolve(__dirname, "/node_modules/@burgeon/oms-theme/skin")
+      '@': path.resolve(__dirname, 'src'),
+      libs: path.resolve(__dirname, 'node_modules'),
+      allpages: path.resolve(__dirname, 'src/views/pages'),
+      framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
+      professionalComponents: path.resolve(__dirname, 'node_modules/@burgeon/business-components'),
+      omsTheme: path.resolve(__dirname, '/node_modules/@burgeon/oms-theme/skin')
     }
   },
   optimization: {
@@ -202,14 +183,14 @@ module.exports = env => ({
         sourceMap: true,
         terserOptions: {
           compress: {
-            pure_funcs: ["console.log"]
+            pure_funcs: ['console.log']
           }
         }
       }),
       new OptimizeCSSAssetsPlugin({})
     ],
     splitChunks: {
-      chunks: "all"
+      chunks: 'all'
     }
   }
 });

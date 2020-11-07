@@ -8,6 +8,14 @@ module.exports = {
       }
     }
   },
+  globals:{
+    "jquery": true,
+    "jQuery": true,
+    "$": true,
+    "window.jQuery": true,
+    "customizedModuleName":true,
+    "customizedModuleId":true,
+  },
   env: {
     browser: true,
     node: true
@@ -17,6 +25,11 @@ module.exports = {
     "linebreak-style": "off",
     "import/no-cycle": "off",
     "max-len": "off",
+    "no-const-assign": 2,//禁止修改const声明的变量
+    "arrow-parens": 0,//箭头函数用小括号括起来
+    "arrow-spacing": 0,//=>的前/后括号
+    "no-console": 0,//禁止使用console
+    "no-octal-escape": 0,//禁止使用八进制转义序列
     'prefer-const ':0,
     'vue/no-parsing-error': [2, { "x-invalid-end-tag": false }],
     'eqeqeq':["off"],
