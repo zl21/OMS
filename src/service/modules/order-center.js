@@ -33,7 +33,7 @@ export default {
   getObject: params => network.post('/p/cs/getObject', params),
   billCopy: params => network.post('/p/cs/billCopy', params),
   getOrderDetailList: params => network.post('/p/cs/getOrderDetailList', params),
-  saveBill: params => network.post('p/cs/saveBill', params),
+  saveBill: params => network.post('/p/cs/saveBill', params),
   delOrderItem: params => network.post('/p/cs/delOrderItem', params),
   queryResionByName: params => network.post('/p/cs/queryResionByName', params),
   getCurrentBatch: params => network.post('/api/cs/oc/oms/v1/getCurrentBatch', params),
