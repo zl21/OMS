@@ -223,7 +223,7 @@ export default {
 
         if (this.permissionType === 'sensitive') {
           const dt = data;
-          dt.map(item => {
+          dt.forEach(item => {
             dt.isChild = !!item.PARENT_GROUPS_ID;
             if (item.PARENT_GROUPS_ID) {
               if (item.PARENT_ISREAD == 'Y') {

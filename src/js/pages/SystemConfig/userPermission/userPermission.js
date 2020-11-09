@@ -1,4 +1,4 @@
-import tree from 'framework/components/tree/tree2.vue';
+import tree from 'framework/components/tree/tree2';
 
 export default {
   data() {
@@ -41,14 +41,7 @@ export default {
       ztreeDataSource: [], // 请求回来的初始data
 
       rightListHead: {}, // 最右边table头部
-      rightListBody: [
-        /* {
-            distribCenter: '杭州仓',//配销中心
-            storehouse: '32004【汉中店】',//店仓
-            touching: 'N',//制单主店仓
-            examine: 'Y',//查看主店仓
-          } */
-      ], // 最右边table内容
+      rightListBody: [], // 最右边table内容
       currentItem: '', // 当前用户信息
       dataLoading: true, // 加载效果
       middleSearch: '' // 中间用户名搜索字段

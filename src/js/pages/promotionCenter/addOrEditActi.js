@@ -1,5 +1,4 @@
-import axios from 'axios';
-// import DateUtil from "@/assets/js/__utils__/date";
+
 import BasicInfo from '@/views/pages/promotionCenter/details/basicInfo';
 import InfoSet from '@/views/pages/promotionCenter/details/infoSet';
 import GiftSet from '@/views/pages/promotionCenter/details/giftSet';
@@ -10,7 +9,7 @@ export default {
     BasicInfo,
     InfoSet,
     GiftSet,
-    stepsBars,
+    stepsBars
   },
   data() {
     return {
@@ -35,7 +34,7 @@ export default {
             isuppercase: false, // 是否转大写
             length: 65535, // 最大长度是多少
             // name: "店铺名称", // input前面显示的lable值
-            name: vmI18n.t('table_label.shopName'),
+            name: window.vmI18n.t('table_label.shopName'),
             readonly: false, // 是否可编辑，对应input   readonly属性
             reftable: 'CP_C_SHOP', // 对应的表
             // reftableid: 24475, //对应的表ID
@@ -44,8 +43,8 @@ export default {
             type: 'STRING', // 这个是后台用的
             isOneData: true,
             valuedata: '', // 这个是选择的值
-            isObject: true,
-          },
+            isObject: true
+          }
         }, // 多选店仓信息
         order_type: [], // 订单类型,选项1，2，3
         platform_mark: [], // 平台标记
@@ -72,19 +71,19 @@ export default {
             isuppercase: false,
             length: 65535,
             // name: "排除省",
-            name: vmI18n.t('common.exclude_province'),
+            name: window.vmI18n.t('common.exclude_province'),
             readonly: false,
             reftable: 'CP_C_PROVINCE',
             reftableid: 23862,
             row: 1,
             statsize: -1,
             type: 'STRING',
-            valuedata: '',
-          },
+            valuedata: ''
+          }
         }, // 排除省份
         buyer_limit_frequency: '', // 单个买家参与活动次数  0-不限制 1-限制
         buyer_max_frequency: '1', // 最大次数
-        status: '1', // 促销状态
+        status: '1' // 促销状态
       },
       condition_info_setting: {
         // 条件信息设置
@@ -103,7 +102,7 @@ export default {
             filterPdtWayShow: true, // 过滤商品方式是否展示
             amoutStyleShow: false, // 金额满足条件
             filterPdtWay: '2', // 增加过滤商品方式
-            amount_style: '', // 金额来源方式
+            amount_style: '' // 金额来源方式
           },
           {
             show: true, // 不显示
@@ -116,7 +115,7 @@ export default {
             amount_style: '1', // 金额来源方式
             filterPdtWay: '' // 增加过滤商品方式
           }
-        ],
+        ]
       },
       gift_info_setting: {
         // 赠品信息设置
@@ -125,7 +124,7 @@ export default {
         max_doubles_limits: '999', // 最大翻倍次数
         gift_methods: '1', // 赠送方式  1-全部送  2-顺序送  3-随机送
         gift_productslist: [],
-        gift_productsArrs: [],
+        gift_productsArrs: []
       },
       batch_infos_setting: {
         // 【批量】条件信息设置
@@ -136,56 +135,50 @@ export default {
         list: [
           {
             gift_products: {},
-            products: {}, // 商品列表
-          },
-        ],
+            products: {} // 商品列表
+          }
+        ]
       },
       stepsBar: [
         {
           class: 'iconjibenxinxi',
           // content: "基础信息",
-          content: vmI18n.t('other.basic_info'),
-          finish: false,
+          content: window.vmI18n.t('other.basic_info'),
+          finish: false
         },
         {
           class: 'iconliuchengtiaojian',
           // content: "条件信息",
-          content: vmI18n.t('other.condition_info'),
-          finish: false,
+          content: window.vmI18n.t('other.condition_info'),
+          finish: false
         },
         {
           class: 'iconzengpin',
           // content: "赠品信息",
-          content: vmI18n.t('other.gift_info'),
-          finish: false,
+          content: window.vmI18n.t('other.gift_info'),
+          finish: false
         },
         {
           class: 'iconhuodong',
           // content: "活动概览",
-          content: vmI18n.t('other.activity_overview'),
-          finish: false,
-        },
+          content: window.vmI18n.t('other.activity_overview'),
+          finish: false
+        }
       ],
       current: 0,
       loadDis: false, // 是否加载促销详情
       loading: false, // 是否需要展示加载中的样式
-      isScorlling: false, // 是否在滚动中
+      isScorlling: false // 是否在滚动中
     };
   },
   computed: {
     showInfoDataContainer() {
       // 全场买赠不展示模块
-      if (
-        this.basic_info.activity_type === 'PA'
-        && this.basic_info.gradient_gift === '1'
-      ) return false;
+      if (this.basic_info.activity_type === 'PA' && this.basic_info.gradient_gift === '1') return false;
       return true;
     },
     showSaveButton() {
-      if (
-        this.objid > 0
-        && (this.basic_info.status === '2' || this.basic_info.status === '3')
-      ) {
+      if (this.objid > 0 && (this.basic_info.status === '2' || this.basic_info.status === '3')) {
         return false;
       }
       return true;
@@ -195,10 +188,10 @@ export default {
         return false;
       }
       return true;
-    },
+    }
   },
   watch: {
-    current(val) {
+    current() {
       if (!this.isScorlling) {
         // 非手动滚动时候触发
         this.scorllArea();
@@ -206,18 +199,14 @@ export default {
     },
     stepsBar: {
       handler(bars) {
-        if (
-          bars[0].finish === true
-          && bars[1].finish === true
-          && bars[2].finish === true
-        ) {
+        if (bars[0].finish === true && bars[1].finish === true && bars[2].finish === true) {
           bars[3].finish = true;
         } else {
           bars[3].finish = false;
         }
       },
-      deep: true,
-    },
+      deep: true
+    }
   },
   methods: {
     /**
@@ -230,7 +219,9 @@ export default {
       if (_objid) obj.objid = _objid;
       formData.append('param', JSON.stringify(obj));
       try {
-        const { data: { code, message, data } } = await this.service.promotionCenter.selectPm(formData);
+        const {
+          data: { code, message, data }
+        } = await this.service.promotionCenter.selectPm(formData);
         console.log(code, message, data);
         if (code === 0) {
           const rs = data || {};
@@ -241,10 +232,8 @@ export default {
               if (key === 'rules') {
                 // Object.assign(self.condition_info_setting.rules,info.rules);
                 // add by wdq  由于后台不完整结构,
-                self.condition_info_setting.rules.forEach((rule) => {
-                  const obj = info.rules.find(
-                    item => item.name === rule.name
-                  );
+                self.condition_info_setting.rules.forEach(rule => {
+                  const obj = info.rules.find(item => item.name === rule.name);
                   if (obj) {
                     for (const i in obj) {
                       rule[i] = obj[i];
@@ -263,78 +252,31 @@ export default {
         } else {
           self.$message({
             message,
-            type: 'error',
+            type: 'error'
           });
         }
       } catch (error) {
         // self.$message({ type: "error", message: "获取促销详情异常" });
-        self.$message({ type: 'error', message: vmI18n.t('modalTips.r4') });
+        self.$message({ type: 'error', message: this.vmI18n.t('modalTips.r4') });
       }
-     
-      // axios({
-      //   method: "post",
-      //   url: "/p/cs/pm/v1/selectPm",
-      //   data: formData,
-      // })
-      //   .then((res) => {
-      //     if (res.data.code === 0) {
-      //       const rs = res.data.data || {};
-      //       Object.assign(self.basic_info, rs.basic_info);
-      //       if (rs.condition_info_setting) {
-      //         const info = rs.condition_info_setting || {};
-      //         for (const key in info) {
-      //           if (key === "rules") {
-      //             // Object.assign(self.condition_info_setting.rules,info.rules);
-      //             // add by wdq  由于后台不完整结构,
-      //             self.condition_info_setting.rules.forEach((rule) => {
-      //               const obj = info.rules.find(
-      //                 (item) => item.name === rule.name
-      //               );
-      //               if (obj) {
-      //                 for (const i in obj) {
-      //                   rule[i] = obj[i];
-      //                 }
-      //               }
-      //             });
-      //           } else self.condition_info_setting[key] = info[key];
-      //         }
-      //       }
-      //       Object.assign(self.gift_info_setting, rs.gift_info_setting);
-      //       this.loadDis = true;
-      //       this.$nextTick(() => {
-      //         this.loadDis = false;
-      //         this.validateModule();
-      //       });
-      //     } else {
-      //       self.$message({
-      //         message: res.data.message,
-      //         type: "error",
-      //       });
-      //     }
-      //   })
-      //   .catch((res) => {
-      //     // self.$message({ type: "error", message: "获取促销详情异常" });
-      //     self.$message({ type: "error", message: vmI18n.t("modalTips.r4") });
-      //   });
     },
     /**
      * 保存草稿
      */
     async saveDraft() {
       console.log('保存草稿');
-      const [
-        modulesValid1,
-        modulesValid2,
-        modulesValid3,
-      ] = this.validateModule();
+      const [modulesValid1, modulesValid2, modulesValid3] = this.validateModule();
       if (modulesValid1.code === -1) {
-        return this.$message({ type: 'error', message: modulesValid1.message });
+        this.$message({ type: 'error', message: modulesValid1.message });
+        return;
       }
       if (modulesValid2.code === -1) {
-        return this.$message({ type: 'error', message: modulesValid2.message });
+        this.$message({ type: 'error', message: modulesValid2.message });
+        return;
       }
       if (modulesValid3.code === -1) {
-        return this.$message({ type: 'error', message: modulesValid3.message });
+        this.$message({ type: 'error', message: modulesValid3.message });
+        return;
       }
       const index = this.basic_info.activity_type + new Date().Format('yyyyMMddHHMMSS');
       const params = {
@@ -342,7 +284,7 @@ export default {
         basic_info: this.basic_info,
         condition_info_setting: this.condition_info_setting,
         gift_info_setting: this.gift_info_setting,
-        index,
+        index
       };
       // 请求保存接口
       this.loading = true;
@@ -350,11 +292,13 @@ export default {
       const formData = new FormData();
       formData.append('param', JSON.stringify(params));
       try {
-        const { data: { code, message, data } } = await this.service.promotionCenter.selectPm(formData);
+        const {
+          data: { code, message, data }
+        } = await this.service.promotionCenter.selectPm(formData);
         if (code === 0) {
           this.$message({
             type: 'success',
-            message: vmI18n.t('modalTips.z9'), // 保存成功
+            message: this.vmI18n.t('modalTips.z9') // 保存成功
           });
           let action = 'customize/switchActiveTab';
           if (this.objid == -1) {
@@ -366,84 +310,45 @@ export default {
               id: this.objid, // id
               type: 'action', // 类型action
               name: 'addOrEditActi', // 文件名
-              label: vmI18n.t('panel_label.editPromotion'), // 编辑促销活动
+              label: this.vmI18n.t('panel_label.editPromotion'), // 编辑促销活动
               query: Object.assign({
                 id: this.objid, // id
-                tabTitle: vmI18n.t('panel_label.editPromotion'), // 编辑促销活动
-              }), // 带的参数
+                tabTitle: this.vmI18n.t('panel_label.editPromotion') // 编辑促销活动
+              }) // 带的参数
             });
           });
         } else {
           this.$message({
             type: 'error',
-            message,
+            message
           });
         }
         this.loading = false;
       } catch (error) {
-
+        this.loading = false;
+        this.$message({
+          type: 'error',
+          error
+        });
       }
-      // axios({
-      //   method: "post",
-      //   url: "/p/cs/pm/v1/savePm",
-      //   data: searchParam,
-      // })
-      //   .then((res) => {
-      //     if (res.data.code === 0) {
-      //       this.$message({
-      //         type: "success",
-      //         // message: "保存成功",
-      //         message: vmI18n.t("modalTips.z9"),
-      //       });
-      //       let action = "customize/switchActiveTab";
-      //       if (this.objid == -1) {
-      //         action = "customize/TabClose";
-      //       }
-      //       this.objid = String(res.data.data.objid) || -1;
-      //       this.$nextTick(() => {
-      //         this.$store.commit(action, {
-      //           id: this.objid, // id
-      //           type: "action", // 类型action
-      //           name: "addOrEditActi", // 文件名
-      //           // label: "编辑促销活动", // tab中文名
-      //           label: vmI18n.t("panel_label.editPromotion"),
-      //           query: Object.assign({
-      //             id: this.objid, // id
-      //             // tabTitle: "编辑促销活动", // tab中文名
-      //             tabTitle: vmI18n.t("panel_label.editPromotion"),
-      //           }), // 带的参数
-      //         });
-      //       });
-      //     } else {
-      //       this.$message({
-      //         type: "error",
-      //         message: res.data.message,
-      //       });
-      //     }
-      //     this.loading = false;
-      //   })
-      //   .catch(() => {
-      //     this.loading = false;
-      //   });
     },
     // 发布
     async publish() {
       console.log('1111');
-      const [
-        modulesValid1,
-        modulesValid2,
-        modulesValid3,
-      ] = this.validateModule();
+      const [modulesValid1, modulesValid2, modulesValid3] = this.validateModule();
       if (modulesValid1.code === -1) {
-        return this.$message({ type: 'error', message: modulesValid1.message });
+        this.$message({ type: 'error', message: modulesValid1.message });
+        return;
       }
       if (modulesValid2.code === -1) {
-        return this.$message({ type: 'error', message: modulesValid2.message });
+        this.$message({ type: 'error', message: modulesValid2.message });
+        return;
       }
       if (modulesValid3.code === -1) {
-        return this.$message({ type: 'error', message: modulesValid3.message });
+        this.$message({ type: 'error', message: modulesValid3.message });
+        return;
       }
-      const index = this.basic_info.activity_type + new Date().Format('yyyyMMddHHMMSS');
+      // const index = this.basic_info.activity_type + new Date().Format('yyyyMMddHHMMSS');
       const ids = [];
       ids[0] = this.basic_info.objid;
       const params = {
@@ -451,19 +356,21 @@ export default {
         isBatch: true, // 是否批量 传true
         fixcolumn: {
           ids,
-          status: 2,
-        },
+          status: 2
+        }
       };
       this.loading = true;
       // 发布
       const formData = new FormData();
       formData.append('param', JSON.stringify(params));
       try {
-        const { data: { code, message } } = await this.service.promotionCenter.updatePmStatus(formData);
+        const {
+          data: { code, message }
+        } = await this.service.promotionCenter.updatePmStatus(formData);
         if (code === 0) {
           this.$message({
             message,
-            type: 'success',
+            type: 'success'
           });
           let action = 'switchActiveTab';
           if (this.objid == -1) {
@@ -475,42 +382,13 @@ export default {
         } else {
           this.$message({
             type: 'error',
-            message: res.data.message,
+            message: res.data.message
           });
         }
         this.loading = false;
       } catch (error) {
         this.loading = false;
       }
-      // axios({
-      //   method: "post",
-      //   url: "/p/cs/pm/v1/updatePmStatus",
-      //   data: searchParam,
-      // })
-      //   .then((res) => {
-      //     if (res.data.code === 0) {
-      //       this.$message({
-      //         message: res.data.message,
-      //         type: "success",
-      //       });
-      //       let action = "switchActiveTab";
-      //       if (this.objid == -1) {
-      //         action = "TabClose";
-      //       }
-      //       this.$nextTick(() => {
-      //         this.getData(this.objid);
-      //       });
-      //     } else {
-      //       this.$message({
-      //         type: "error",
-      //         message: res.data.message,
-      //       });
-      //     }
-      //     this.loading = false;
-      //   })
-      //   .catch(() => {
-      //     this.loading = false;
-      //   });
     },
     /**
      * 取消(关闭) 返回列表界面
@@ -521,10 +399,10 @@ export default {
         type: 'CUSTOMIZED', // 类型action
         name: 'PROMACTIQUERYLIST', // 文件名
         // label: "促销活动", // tab中文名
-        label: vmI18n.t('panel_label.promotionList'),
+        label: this.vmI18n.t('panel_label.promotionList'),
         query: Object.assign({
-          id: 31460113,
-        }), // 带的参数
+          id: 31460113
+        }) // 带的参数
       });
       this.$destroy();
     },
@@ -535,48 +413,24 @@ export default {
       try {
         const groups = this.$store.state.customize.forginkeys.groups;
         // 基础信息设置
-        this.basic_info.order_type = groups.orderTypes.map(
-          item => item.value
-        );
+        this.basic_info.order_type = groups.orderTypes.map(item => item.value);
         // this.basic_info.platform_mark = groups.platformTabs.map((item)=>{
         //   return item.value;
         // });
-        this.basic_info.time_type = groups.timeTypes.find(
-          item => item.title === '付款日期'
-        ).value;
-        this.basic_info.activity_type = groups.actiTypes.find(
-          item => item.title === '指定买赠'
-        ).value;
-        this.basic_info.gradient_gift = groups.gradientGift.find(
-          item => item.title === '否'
-        ).value;
-        this.basic_info.buyer_limit_frequency = groups.buyerLimitFrequency.find(
-          item => item.title === '不限制'
-        ).value;
+        this.basic_info.time_type = groups.timeTypes.find(item => item.title === '付款日期').value;
+        this.basic_info.activity_type = groups.actiTypes.find(item => item.title === '指定买赠').value;
+        this.basic_info.gradient_gift = groups.gradientGift.find(item => item.title === '否').value;
+        this.basic_info.buyer_limit_frequency = groups.buyerLimitFrequency.find(item => item.title === '不限制').value;
         this.initDefaultTime();
-        this.basic_info.order_notes_type = groups.orderRemarks.find(
-          item => item.title === '买家留言'
-        ).value;
+        this.basic_info.order_notes_type = groups.orderRemarks.find(item => item.title === '买家留言').value;
         // 条件设置
-        this.condition_info_setting.products_join = groups.productsJoin.find(
-          item => item.title === '非搭配商品'
-        ).value;
-        this.condition_info_setting.products_origin = groups.productsOrigin.find(
-          item => item.title === '系统商品SKU'
-        ).value;
-        this.condition_info_setting.includeorexclude = groups.includeOrExclude.find(
-          item => item.title === '包含以下商品'
-        ).value;
+        this.condition_info_setting.products_join = groups.productsJoin.find(item => item.title === '非搭配商品').value;
+        this.condition_info_setting.products_origin = groups.productsOrigin.find(item => item.title === '系统商品SKU').value;
+        this.condition_info_setting.includeorexclude = groups.includeOrExclude.find(item => item.title === '包含以下商品').value;
         // 赠品设置
-        this.gift_info_setting.steps_type = groups.stepsType.find(
-          item => item.title === '数量阶梯'
-        ).value;
-        this.gift_info_setting.gift_doubles = groups.giftDoubles.find(
-          item => item.title === '不翻倍'
-        ).value;
-        this.gift_info_setting.gift_methods = groups.giftMethods.find(
-          item => item.title === '全部送'
-        ).value;
+        this.gift_info_setting.steps_type = groups.stepsType.find(item => item.title === '数量阶梯').value;
+        this.gift_info_setting.gift_doubles = groups.giftDoubles.find(item => item.title === '不翻倍').value;
+        this.gift_info_setting.gift_methods = groups.giftMethods.find(item => item.title === '全部送').value;
       } catch (e) {
         console.log(e.stack);
       }
@@ -584,19 +438,19 @@ export default {
     /**
      * 初始化默认时间  时间范围好下线时间
      */
-    initDefaultTime() { },
+    initDefaultTime() {},
     /**
      * 滚动选中区域
      */
     scorllArea() {
-      const area_0 = this.$refs.area_0.$el.offsetHeight;
-      const area_1 = this.$refs.area_1.$el.offsetHeight;
-      const area_2 = this.$refs.area_2.$el.offsetHeight;
+      const area0 = this.$refs.area_0.$el.offsetHeight;
+      const area1 = this.$refs.area_1.$el.offsetHeight;
+      // const area2 = this.$refs.area_2.$el.offsetHeight;
       if (this.current === 0) this.$refs.basicSteps.scrollTop = 0;
       else if (this.current === 1) {
-        this.$refs.basicSteps.scrollTop = area_0;
+        this.$refs.basicSteps.scrollTop = area0;
       } else if (this.current === 2) {
-        this.$refs.basicSteps.scrollTop = area_0 + area_1;
+        this.$refs.basicSteps.scrollTop = area0 + area1;
       }
       this.validateModule();
     },
@@ -612,17 +466,19 @@ export default {
     handleScrollByUser() {
       this.isScorlling = true;
       const scroll = this.$refs.basicSteps.scrollTop;
-      const area_0 = this.$refs.area_0.$el.offsetHeight;
-      let area_1 = 0;
+      const area0 = this.$refs.area_0.$el.offsetHeight;
+      let area1 = 0;
       try {
-        area_1 = this.$refs.area_1.$el.offsetHeight; // 第二个模块可能没有
-      } catch (e) { }
-      const area_2 = this.$refs.area_2.$el.offsetHeight;
-      if (scroll < area_0) {
+        area1 = this.$refs.area_1.$el.offsetHeight; // 第二个模块可能没有
+      } catch (e) {
+        this.throw(e);
+      }
+      const area2 = this.$refs.area_2.$el.offsetHeight;
+      if (scroll < area0) {
         this.current = 0;
-      } else if (scroll < area_0 + area_1) {
+      } else if (scroll < area0 + area1) {
         this.current = 1;
-      } else if (scroll < area_0 + area_1 + area_2) {
+      } else if (scroll < area0 + area1 + area2) {
         this.current = 2;
       }
       this.validateModule();
@@ -633,7 +489,7 @@ export default {
     /**
      * @needTip 是否需要提示出来，哪一项存在问题
      */
-    validateModule(needTip) {
+    validateModule() {
       const f1 = this.validate1();
       if (f1.code === 0) {
         this.stepsBar[0].finish = true;
@@ -656,69 +512,57 @@ export default {
     },
     validate1() {
       if (this.basic_info.activity_name === '') {
-        return { code: -1, message: vmI18n.t('modalTips.s5') }; // 活动名称未填写！
+        return { code: -1, message: this.vmI18n.t('modalTips.s5') }; // 活动名称未填写！
       }
       if (this.basic_info.stores.itemdata.valuedata === '') {
-        return { code: -1, message: vmI18n.t('modalTips.s6') }; // 店铺名称未填写！
+        return { code: -1, message: this.vmI18n.t('modalTips.s6') }; // 店铺名称未填写！
       }
       if (this.basic_info.order_type.length === 0) {
-        return { code: -1, message: vmI18n.t('modalTips.s7') }; // 订单类型必选！
+        return { code: -1, message: this.vmI18n.t('modalTips.s7') }; // 订单类型必选！
       }
       // if(this.basic_info.platform_mark.length === 0){
       //    return {code:-1,message:'平台标记未填写！'};
       // }
-      if (
-        this.basic_info.time_limit === ''
-        || this.basic_info.time_limit[0] === ''
-        || this.basic_info.time_limit[1] === ''
-      ) {
-        return { code: -1, message: vmI18n.t('modalTips.t8') }; // 时间范围未填写！
+      if (this.basic_info.time_limit === '' || this.basic_info.time_limit[0] === '' || this.basic_info.time_limit[1] === '') {
+        return { code: -1, message: this.vmI18n.t('modalTips.t8') }; // 时间范围未填写！
       }
       if (this.basic_info.offline_time === '') {
-        return { code: -1, message: vmI18n.t('modalTips.s8') }; // 下线时间未填写！
+        return { code: -1, message: this.vmI18n.t('modalTips.s8') }; // 下线时间未填写！
       }
-      if (
-        this.basic_info.buyer_limit_frequency === '1'
-        && this.basic_info.buyer_max_frequency === ''
-      ) {
-        return { code: -1, message: vmI18n.t('modalTips.s9') }; // 最大限制次数未填写！
+      if (this.basic_info.buyer_limit_frequency === '1' && this.basic_info.buyer_max_frequency === '') {
+        return { code: -1, message: this.vmI18n.t('modalTips.s9') }; // 最大限制次数未填写！
       }
 
-      return { code: 0, message: vmI18n.t('modalTips.s4') }; // 校验完成
+      return { code: 0, message: this.vmI18n.t('modalTips.s4') }; // 校验完成
     },
     validate2() {
       // const tablename = "商品列表";
-      const tablename = vmI18n.t('other.product_list');
+      const tablename = this.vmI18n.t('other.product_list');
       // 1.指定-非搭配   2.全场-不梯度, 规则至少需要选中一个
       // add  by wdq  1情况 不控制   (this.basic_info.activity_type === "GA" && this.condition_info_setting.products_join === "1")
-      if (
-        (this.basic_info.activity_type === 'PA'
-          || (this.basic_info.activity_type === 'GA'
-            && this.condition_info_setting.products_join === '1'))
-        && this.basic_info.gradient_gift === '0'
-      ) {
+      if ((this.basic_info.activity_type === 'PA' || (this.basic_info.activity_type === 'GA' && this.condition_info_setting.products_join === '1')) && this.basic_info.gradient_gift === '0') {
         const rules = this.condition_info_setting.rules || [];
         const o = rules.find(rule => rule.check && Number(rule.value) > 0);
         if (!o) {
           return {
             code: -1,
-            message: vmI18n.t('modalTips.r5'), // 【满足条件】至少要选中一项并且填写数量或金额条件
+            message: this.vmI18n.t('modalTips.r5') // 【满足条件】至少要选中一项并且填写数量或金额条件
           };
         }
       }
-      let rs = { code: 0, message: vmI18n.t('modalTips.s4') };// 校验完成
+      let rs = { code: 0, message: this.vmI18n.t('modalTips.s4') }; // 校验完成
       if (this.basic_info.activity_type === 'GA') {
         // 指定
         if (this.condition_info_setting.products_join === '1') {
           // 非搭配
           const arrs = this.condition_info_setting.productslist || [];
-          if (arrs.length === 0) return { code: -1, message: vmI18n.t('modalTips.r6') };// 无数据
+          if (arrs.length === 0) return { code: -1, message: this.vmI18n.t('modalTips.r6') }; // 无数据
           rs = this.checkTable(arrs);
         }
         if (this.condition_info_setting.products_join === '2') {
           // 搭配
           const arrs = this.condition_info_setting.productsArrs || [];
-          if (arrs.length === 0) return { code: -1, message: vmI18n.t('modalTips.r6') };// 无数据
+          if (arrs.length === 0) return { code: -1, message: this.vmI18n.t('modalTips.r6') }; // 无数据
           rs = this.checkTableTab(arrs, 'info');
         }
       }
@@ -728,16 +572,16 @@ export default {
       return rs;
     },
     validate3() {
-      const tablename = vmI18n.t('other.gift_list');
-      let rs = { code: 0, message: vmI18n.t('modalTips.s4') };// 赠品列表
+      const tablename = this.vmI18n.t('other.gift_list');
+      let rs = { code: 0, message: this.vmI18n.t('modalTips.s4') }; // 赠品列表
       if (this.basic_info.gradient_gift === '0') {
         // 不梯度
         const arrs = this.gift_info_setting.gift_productslist || [];
-        if (arrs.length === 0) return { code: -1, message: vmI18n.t('modalTips.r6') };
+        if (arrs.length === 0) return { code: -1, message: this.vmI18n.t('modalTips.r6') };
         rs = this.checkTable(arrs);
       } else {
         const arrs = this.gift_info_setting.gift_productsArrs || [];
-        if (arrs.length === 0) return { code: -1, message: vmI18n.t('modalTips.r6') };
+        if (arrs.length === 0) return { code: -1, message: this.vmI18n.t('modalTips.r6') };
         rs = this.checkTableTab(arrs, 'gift');
       }
       if (rs.code === -1) {
@@ -754,7 +598,7 @@ export default {
             if (rule.value === '') {
               return {
                 code: -1,
-                message: `表格【${tab.group}】,数量规则未填写`,
+                message: `表格【${tab.group}】,数量规则未填写`
               };
             }
           }
@@ -770,7 +614,7 @@ export default {
           return res;
         }
       }
-      return { code: 0, message: vmI18n.t('modalTips.s4') };
+      return { code: 0, message: this.vmI18n.t('modalTips.s4') };
     },
     checkTable(rows) {
       for (let i = 0; i < rows.length; i++) {
@@ -782,8 +626,8 @@ export default {
           }
         }
       }
-      return { code: 0, message: vmI18n.t('modalTips.s4') };
-    },
+      return { code: 0, message: this.vmI18n.t('modalTips.s4') };
+    }
   },
   mounted() {
     // 新增
@@ -794,11 +638,7 @@ export default {
     });
   },
   beforeDestroy() {
-    this.$refs.basicSteps.removeEventListener(
-      'scroll',
-      this.handleScrollByUser,
-      false
-    );
+    this.$refs.basicSteps.removeEventListener('scroll', this.handleScrollByUser, false);
   },
   created() {
     if (this.$route.query.id > 0) {
@@ -810,5 +650,5 @@ export default {
       const copy = this.$route.query.copy;
       if (copy && copy > 1) this.getData(copy);
     }
-  },
+  }
 };

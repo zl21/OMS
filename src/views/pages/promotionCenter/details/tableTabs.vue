@@ -12,51 +12,51 @@
           v-for="(panel,index) in productsArrs"
           :key="index"
         >
-        <div v-if="showContent(index)">
-          <div
-            v-if="panel.rules && panel.rules.length>0"
-            class="detail_rules"
-          >
-            <CTSIT
-              v-for="(rule,_index) in panel.rules"
-              :key="_index"
-              :rule="rule"
-            />
-          </div>
-          <detailTable
-            :t-columns="columns"
-            :t-data="productsArrsView[index].data"
-            :current.sync="productsArrsView[index].current"
-            :total="productsArrsView[index].total"
-            :itemdata="itemdata"
-            :page-size="productsArrsView[index].pageSize"
-            @alertRowData="alertOneTableRowData"
-            @deleteRowData="deleteOneTableRowData"
-            @on-page-change="onePageChange"
-            @on-page-size-change="onOnePageSizeChange"
-          >
+          <div v-if="showContent(index)">
             <div
-              slot="action"
-              class="form_button"
+              v-if="panel.rules && panel.rules.length>0"
+              class="detail_rules"
             >
-              <ButtonFkDialog
-                :itemdata="itemdataFk"
-                @getFkChooseItem="getOnePageButtonFkChoose"
+              <CTSIT
+                v-for="(rule,_index) in panel.rules"
+                :key="_index"
+                :rule="rule"
               />
-              <button
-                class="white"
-                @click="addOneTableRowData(index)"
-              >
-                新增
-              </button>
-              <button
-                class="white"
-                @click="importData"
-              >
-                导入
-              </button>
             </div>
-          </detailTable>
+            <detailTable
+              :t-columns="columns"
+              :t-data="productsArrsView[index].data"
+              :current.sync="productsArrsView[index].current"
+              :total="productsArrsView[index].total"
+              :itemdata="itemdata"
+              :page-size="productsArrsView[index].pageSize"
+              @alertRowData="alertOneTableRowData"
+              @deleteRowData="deleteOneTableRowData"
+              @on-page-change="onePageChange"
+              @on-page-size-change="onOnePageSizeChange"
+            >
+              <div
+                slot="action"
+                class="form_button"
+              >
+                <ButtonFkDialog
+                  :itemdata="itemdataFk"
+                  @getFkChooseItem="getOnePageButtonFkChoose"
+                />
+                <button
+                  class="white"
+                  @click="addOneTableRowData(index)"
+                >
+                  新增
+                </button>
+                <button
+                  class="white"
+                  @click="importData"
+                >
+                  导入
+                </button>
+              </div>
+            </detailTable>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
-import Buttonmap from 'framework/assets/js/buttonmap.js';
-import ChineseDictionary from 'framework/assets/js/ChineseDictionary.js';
+import Buttonmap from 'framework/assets/js/buttonmap';
+import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
 import FkDialog from 'framework/components/tablelist/fkdialog';
 import GroupTree from 'framework/components/tree/groupTree';
 import jordanBtn from 'professionalComponents/businessButton';
