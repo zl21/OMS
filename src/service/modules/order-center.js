@@ -32,7 +32,7 @@ export default {
   skuQuery: params => network.post('/p/cs/skuQuery', params),
   getObject: params => network.post('/p/cs/getObject', params),
   billCopy: params => network.post('/api/cs/oc/oms/v1/billCopy', params),
-  getOrderDetailList: params => network.post('/p/cs/getOrderDetailList', params),
+  getOrderDetailList: params => network.post('/api/cs/oc/oms/v1/getOrderDetailList', params),
   saveBill: params => network.post('/api/cs/oc/oms/v1/saveBill', params),
   delOrderItem: params => network.post('/p/cs/delOrderItem', params),
   queryResionByName: params => network.post('/api/cs/oc/oms/v1/queryResionByName', params),
