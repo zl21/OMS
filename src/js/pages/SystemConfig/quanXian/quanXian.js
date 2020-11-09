@@ -222,12 +222,8 @@ export default {
     // 获取表格
     async getTableData(searchCondition = {}, refresh = false) {
       this.groupId = this.newGroupId;
-<<<<<<< HEAD
       let params;
       let res;
-=======
-      let url; let params;
->>>>>>> origin/feature/main
       if (this.permissionType === 'sensitive') {
         params = {
           GROUPS_ID: this.groupId,
