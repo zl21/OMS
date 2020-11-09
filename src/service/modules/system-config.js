@@ -12,7 +12,8 @@ export default {
    * /p/cs/cgrouppro/query  商品权限
    * /p/cs/chrgroupscompany/query  公司权限
    * /p/cs/cusergroupquery  角色权限
-   * */ 
+   * */
+
   chrstoregroupquery: (url, params) => network.post(url, params),
   // 请求tab列表页
   userstreeload: params => network.post('/p/cs/userstreeload', params),
@@ -23,17 +24,16 @@ export default {
   /**
    * 角色
    */
-  // 权限查询接口
-  selectPermissionColumn: params => network.post('/p/cs/permission/v1/selectPermissionColumn', params),
+  // 权限查询接口'/p/cs/permission/v1/selectPermissionColumn','/p/cs/cgroupcolumnquery'
+  selectPermissionColumn: params => network.post('/p/cs/permission/v1/selectDataPermission', params),
   /**
    * 用户档案
    * */
-  
+
   // 获取表格 /p/cs/cgroupcolumnquery    /p/cs/permission/v1/selectDataPermission
   selectDataPermission: (url, params) => network.post(url, params),
   // 保存 /p/cs/objectSave /p/cs/permission/v1/saveDataPermission
   objectSave: (url, params) => network.post(url, params),
   // 复制权限 /p/cs/copyShopPermission
-  copyShopPermission: params => network.post('/p/cs/copyShopPermission', params),
-  
+  copyShopPermission: params => network.post('/p/cs/copyShopPermission', params)
 };

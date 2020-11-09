@@ -177,10 +177,8 @@ export default {
     },
     // 获取搜索框
     async getSearchForm() {
-      //
-      const {
-        data: { code, datas }
-      } = await this.service.systemConfig.selectPermissionColumn(fromdata);
+      // 
+      const { data: { code, datas } } = await this.service.systemConfig.selectPermissionColumn(fromdata);
       if (code === 0) {
         const dataArray = form.refactoringData(datas.dataarry);
         dataArray.forEach(item => {
@@ -211,9 +209,7 @@ export default {
           searchCondition
         };
       }
-      const {
-        data: { data, code }
-      } = await this.service.systemConfig.selectPermissionColumn(url, urlSearchParams(params));
+      const { data: { data, code } } = await this.service.systemConfig.selectDataPermission(url, urlSearchParams(params));
       if (code === 0) {
         this.tableArr.isReadValueTotal = 0;
         this.tableArr.isWriteValueTotal = 0;
