@@ -192,11 +192,13 @@ export default {
     },
     // 获取搜索框
     async getSearchForm() {
-      // 
-      const { data: { code, datas } } = await this.service.systemConfig.selectPermissionColumn(fromdata);
+      const formData = new FormData();
+      formData.append('permissionType', this.permissionType);
+      const { data } = await this.service.systemConfig.selectPermissionColumn(formData);
+      const { code, datas } = data;
       if (code === 0) {
         const dataArray = form.refactoringData(datas.dataarry);
-        dataArray.map((item) => {
+        dataArray.forEach((item) => {
           if (item.item.value) {
             item.item.props.value = item.item.value;
           }
@@ -220,22 +222,27 @@ export default {
     // 获取表格
     async getTableData(searchCondition = {}, refresh = false) {
       this.groupId = this.newGroupId;
+<<<<<<< HEAD
+      let params;
+      let res;
+=======
       let url; let params;
+>>>>>>> origin/feature/main
       if (this.permissionType === 'sensitive') {
         params = {
           GROUPS_ID: this.groupId,
           QUERY: '',
         };
-        var { data: { data, code } } = await this.service.systemConfig.cgroupcolumnquery(urlSearchParams(params));
+        res = await this.service.systemConfig.cgroupcolumnquery(urlSearchParams(params));
       } else {
         params = {
           permissionType: this.permissionType,
-          groupId: this.groupId, 
+          groupId: this.groupId,
           searchCondition,
         };
-        var { data: { data, code } } = await this.service.systemConfig.selectDataPermission(urlSearchParams(params));
+        res = await this.service.systemConfig.selectDataPermission(urlSearchParams(params));
       }
-      if (code === 0) {
+      if (res.data.code === 0) {
         this.tableArr.isReadValueTotal = 0;
         this.tableArr.isWriteValueTotal = 0;
         this.tableArr.isReadValue = false;
@@ -247,32 +254,32 @@ export default {
         this.tableArr.isParentWriteValue = false;
 
         if (this.permissionType === 'sensitive') {
-          const dt = data;
-          dt.map((item) => {
+          const dt = res.data.data;
+          dt.forEach((item) => {
             dt.isChild = !!item.PARENT_GROUPS_ID;
             if (item.PARENT_GROUPS_ID) {
-              if (item.PARENT_ISREAD == 'Y') {
+              if (item.PARENT_ISREAD === 'Y') {
                 this.tableArr.parentIsRead++;
               }
-              if (item.PARENT_ISMODIFY == 'Y') {
+              if (item.PARENT_ISMODIFY === 'Y') {
                 this.tableArr.parentIsWrite++;
               }
             }
-            item.IS_WRITE = item.ISMODIFY == 'Y';
-            item.IS_READ = item.ISREAD == 'Y';
+            item.IS_WRITE = item.ISMODIFY === 'Y';
+            item.IS_READ = item.ISREAD === 'Y';
           });
           this.tableArr.columns = this.sensitiveColumns;
-          this.tableArr.rows = data;
+          this.tableArr.rows = res.data.data;
           this.tableArr.isChild = dt.isChild;
         } else {
-          const dt = data;
-          dt.rows.map((item) => {
+          const dt = res.data.data;
+          dt.rows.forEach((item) => {
             dt.isChild = !!item.PARENT_GROUPS_ID;
             if (item.PARENT_GROUPS_ID) {
-              if (item.PARENT_IS_READ == 'Y') {
+              if (item.PARENT_IS_READ === 'Y') {
                 this.tableArr.parentIsRead++;
               }
-              if (item.PARENT_IS_WRITE == 'Y') {
+              if (item.PARENT_IS_WRITE === 'Y') {
                 this.tableArr.parentIsWrite++;
               }
             }
