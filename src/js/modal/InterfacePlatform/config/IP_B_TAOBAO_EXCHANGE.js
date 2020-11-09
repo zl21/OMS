@@ -106,18 +106,5 @@ export default {
       self.$Message.error(message);
       self.$emit('closeActionDialog', true);
     }
-    // axios({
-    //   url: "/p/cs/exchangeDownload",
-    //   method: "post",
-    //   data: fromdata
-    // }).then(res => {
-    //   if (res.data.code === 0) {
-    //     self.$Message.success(res.data.message);
-    //     // self.$parent.$parent.actionDialog.show = false;
-    //     self.$emit("closeActionDialog",true);
-    //   } else {
-    //     self.$Message.error(res.data.message);
-    //   }
-    // });
   }
 };

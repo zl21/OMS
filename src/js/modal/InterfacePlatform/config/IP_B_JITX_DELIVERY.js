@@ -118,18 +118,5 @@ export default {
       self.$Message.error(message);
       self.$emit('closeActionDialog', true);
     }
-    // axios({
-    //   url: "/p/cs/downLoadVipDelivery",
-    //   method: "post",
-    //   data: fromdata
-    // }).then(function (res) {
-    //   if (res.data.code === 0) {
-    //     self.$Message.success(res.data.message);
-    //     self.$emit("confirmImport");
-    //     self.$emit("closeActionDialog");
-    //   } else {
-    //     self.$Message.error(res.data.message);
-    //   }
-    // });
   }
 };

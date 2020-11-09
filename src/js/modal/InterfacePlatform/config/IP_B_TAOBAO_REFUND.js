@@ -107,18 +107,5 @@ export default {
       self.$emit('closeActionDialog', true);
       self.$Message.error(message);
     }
-    // axios({
-    //   url: "/p/cs/refundDownload",
-    //   method: "post",
-    //   data: fromdata
-    // }).then(res => {
-    //   if (res.data.code === 0) {
-    //     self.$Message.success(res.data.message);
-    //     // self.$parent.$parent.actionDialog.show = false;
-    //     this.$emit("closeActionDialog",true);
-    //   } else {
-    //     self.$Message.error(res.data.message);
-    //   }
-    // });
   }
 };

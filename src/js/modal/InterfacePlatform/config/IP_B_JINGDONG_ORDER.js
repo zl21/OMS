@@ -129,14 +129,5 @@ export default {
     } else {
       self.$Message.error(message);
     }
-    // const res = await this.service.common.orderDownload(fromdata);
-    // console.log(res);
-    // if (res.data.code === 0) {
-    //   // self.$Message.success(res.data.message);
-    //   self.taskId = res.data.message.match(/\d+/)[0];
-    //   self.downLoadModal = true;
-    // } else {
-    //   self.$Message.error(res.data.message);
-    // }
   }
 };

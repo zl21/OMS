@@ -61,7 +61,6 @@ export default {
   },
   // 确定按钮
   determine: async (self) => {
-    console.log(self);
     if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
       self.$Message.warning(self.vmI18n.t('modalTips.be'));// 请选择需要下载的店铺
       return;
@@ -95,18 +94,5 @@ export default {
       self.$Message.error(message);
       self.$emit('closeActionDialog', true);
     }
-    // axios({
-    //   url: "/p/cs/downLoadVipCancelTimeOrder",
-    //   method: "post",
-    //   data: fromdata
-    // }).then(function (res) {
-    //   if (res.data.code === 0) {
-    //     self.$Message.success(res.data.message);
-    //     self.$emit("confirmImport");
-    //     self.$emit("closeActionDialog");
-    //   } else {
-    //     self.$Message.error(res.data.message);
-    //   }
-    // });
   }
 };

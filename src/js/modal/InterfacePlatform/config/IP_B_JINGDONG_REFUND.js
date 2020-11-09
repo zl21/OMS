@@ -1,5 +1,3 @@
-import httpServer from 'framework/__utils__/request';
-
 export default {
   // 京东退单接口列表界面(下载退单)
   formConfig: {
@@ -91,21 +89,5 @@ export default {
     } catch (error) {
       self.dialogLoad = false;
     }
-    // httpServer({
-    //   url: '/p/cs/refundDownload',
-    //   method: 'post',
-    //   data: {
-    //     param: params
-    //   }
-    // }).then(res => {
-    //   self.dialogLoad = false
-    //   if (res.data.code === 0) {
-    //     self.$message.success(res.data.message)
-    //     self.$emit('confirmImport')
-    //     self.$emit('closeActionDialog',true)
-    //   }
-    // }).catch(() => {
-    //   self.dialogLoad = false
-    // })
   }
 };

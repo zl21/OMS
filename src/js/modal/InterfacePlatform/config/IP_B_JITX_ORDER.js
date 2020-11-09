@@ -137,25 +137,6 @@ export default {
     } else {
       self.$Message.error(message);
       self.$emit('closeActionDialog', true);
-    }
-    // axios({
-    //   url: "/p/cs/orderDownload",
-    //   method: "post",
-    //   data: fromdata
-    // }).then(function (res) {
-    //   self.downLoadModal = true;
-    //   if (res.data.code === 0) {
-    //     let orderNum = self.downLoadFormConfig.formValue.orderNum;
-    //     if (orderNum) {
-    //       self.$Message.success(res.data.message);
-    //       self.$emit('closeActionDialog',true)
-    //     } else {
-    //       self.taskId = res.data.message.match(/\d+/)[0];
-    //       self.downLoadModal = true;
-    //     }
-    //   } else {
-    //     self.$Message.error(res.data.message);
-    //   }
-    // });
+    } 
   }
 };
