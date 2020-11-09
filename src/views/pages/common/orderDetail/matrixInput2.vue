@@ -112,7 +112,7 @@
   @import "~@/css/pages/common/orderDetail/matrixInput2"; 
 </style>
 <script>
-  import matrixInput2 from '@/js/pages/common/orderDetail/matrixInput2.js';
+  import matrixInput2 from '@/js/pages/common/orderDetail/matrixInput2';
 
   export default matrixInput2;
 </script>

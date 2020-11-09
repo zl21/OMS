@@ -72,9 +72,9 @@
   </div>
 </template>
 <script>
-  import batch_info_set from '@/js/pages/promotionCenter/details/batchInfoSet.js';
+  import batchInfoSet from '@/js/pages/promotionCenter/details/batchInfoSet';
 
-  export default batch_info_set;
+  export default batchInfoSet;
 </script>
 
 <style lang="less">

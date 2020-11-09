@@ -92,6 +92,7 @@
                     </Col>
                   </FormItem>
                   </Col>
+<<<<<<< HEAD
 
                   <Col span="8" >
                   <FormItem label="反审核等待时间">
@@ -112,6 +113,22 @@
                   <Col span="8" >
                   <FormItem label="hold单等待时间：">
                     <Col span="20" >
+=======
+                  <Col span="4" />
+                  <FormItem label="检查可合并订单：">
+                    <Checkbox
+                      v-model="IS_MERGE_ORDER"
+                      size="small"
+                      @on-change="setResult('IS_MERGE_ORDER')"
+                    >
+&nbsp;
+                    </Checkbox>
+                  </FormItem>
+                  </Col>
+                  <Col span="8" />
+                  <FormItem label="hold单等待时间：">
+                    <Col span="20" />
+>>>>>>> feature/eslint-fix
                     <Input
                       v-model="info.HOLD_WAIT_TIME"
                       size="small"
@@ -119,11 +136,16 @@
                       @on-change="setResult('HOLD_WAIT_TIME')"
                     />
                     </Col>
+<<<<<<< HEAD
                     <Col span="4" >
+=======
+                    <Col span="4" />
+>>>>>>> feature/eslint-fix
                     分钟
                     </Col>
                   </FormItem>
                   </Col>
+<<<<<<< HEAD
                   <Col span="4" >
                   <FormItem label="自动审核货到付款：">
                     <Checkbox
@@ -142,6 +164,20 @@
                       <Select v-model="info.CP_C_LOGISTICS_ID" @on-change="setResult('CP_C_LOGISTICS_ID')">
                         <Option v-for="(item , index) in CP_C_LOGISTICS_ID_SELECT" :key='index' :value="item.value">{{item.label}}</Option>
                       </Select>
+=======
+                  <Col span="8" />
+                  <FormItem label="反审核等待时间：">
+                    <Col span="20" />
+                    <Input
+                      v-model="info.UN_AUDIT_WAIT_TIME"
+                      size="small"
+                      :maxlength="5"
+                      @on-change="setResult('UN_AUDIT_WAIT_TIME')"
+                    />
+                    </Col>
+                    <Col span="4" />
+                    分钟
+>>>>>>> feature/eslint-fix
                     </Col>
                   </FormItem>
                   </Col>

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
@@ -148,7 +147,8 @@ export default {
           if (this.selectData[i].CP_C_LOGISTICS_ECODE === ecode) {
             this.selectData.splice(i, 1);
             this.total = this.selectData.length;
-            return this.$Message.success('删除成功');
+            this.$Message.success('删除成功');
+            break;
           }
         }
       }
@@ -191,7 +191,7 @@ export default {
       this.cancelModel = false;
     },
     // 双击
-    onRowDblclick(row, index) {
+    onRowDblclick(row) {
       const arr = {
         CP_C_LOGISTICS_ID: row.ID,
         CP_C_LOGISTICS_ECODE: row.ECODE,

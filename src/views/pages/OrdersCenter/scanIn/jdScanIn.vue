@@ -153,7 +153,7 @@
 </template>
 
 <script>
-  import jdScanIn from '@/js/pages/orderCenter/scanIn/jdScanIn.js';
+  import jdScanIn from '@/js/pages/orderCenter/scanIn/jdScanIn';
 
   export default jdScanIn;
 </script>

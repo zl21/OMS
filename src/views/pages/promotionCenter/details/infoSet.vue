@@ -6,9 +6,9 @@
       <!-- <span>条件信息设置</span>  -->
       <span>{{ vmI18n.t("other.info_set") }}</span>
     </div>
-    <div>
+    <div v-if="!onlyShowRules">
       <!--商品参与方式-->
-      <div class="row" v-if="!onlyShowRules">
+      <div class="row">
         <div class="form_label">
           <i class="red">*</i>{{ vmI18n.t("form_label.goods_participation_mode") }}：
         </div>
@@ -21,7 +21,7 @@
         </div>
       </div>
       <!--商品来源-->
-      <div class="row" v-if="!onlyShowRules">
+      <div class="row">
         <div class="form_label">
           <i class="red">*</i>{{ vmI18n.t("form_label.goods_source") }}：
         </div>
@@ -34,7 +34,7 @@
         </div>
       </div>
       <!--选择商品方式-->
-      <div class="row"  v-if="!onlyShowRules">
+      <div class="row">
         <div class="form_label">
           <i class="red">*</i>{{ vmI18n.t("form_label.choose_product_ways") }}：
         </div>
@@ -46,21 +46,11 @@
           />
         </div>
       </div>
-      <!--满足条件-->
-      <!-- <div class="row" v-if="showRulesContent">
-        <div class="form_label"><i class="red">*</i>满足条件：</div>
-        <div class="form_content">
-          <CTSIT
-            v-for="(rule, _index) in infoData.rules"
-            :key="_index"
-            :rule="rule"
-            :onlyShowRules="onlyShowRules"
-            v-show="showRules(_index, rule)"
-          ></CTSIT>
-        </div>
-      </div> -->
       <!--搭配 选择商品方式 商品列表-->
-      <div v-if="!onlyShowRules && showPdtsArr">
+      <div
+        v-if="showPdtsArr"
+        class="row"
+      >
         <div class="form_label">
           <i class="red">*</i>{{ vmI18n.t("other.product_list") }}：
         </div>
@@ -103,7 +93,10 @@
         </div>
       </div>
       <!--非搭配 选择商品方式 商品列表-->
-      <div class="row" v-if="!onlyShowRules && !showPdtsArr">
+      <div
+        v-if="!showPdtsArr"
+        class="row"
+      >
         <div class="form_label">
           {{ vmI18n.t("other.product_list") }}：
         </div>
@@ -186,9 +179,9 @@
   </div>
 </template>
 <script>
-  import info_set from '@/js/pages/promotionCenter/details/infoSet.js';
+  import infoSet from '@/js/pages/promotionCenter/details/infoSet';
 
-  export default info_set;
+  export default infoSet;
 </script>
 
 <style lang="less">

@@ -197,7 +197,7 @@
 </template>
 
 <script>
-  import userPermission from '@/js/pages/SystemConfig/userPermission/userPermission.js';
+  import userPermission from '@/js/pages/SystemConfig/userPermission/userPermission';
 
   export default userPermission;
 </script>

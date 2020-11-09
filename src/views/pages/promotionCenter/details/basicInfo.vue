@@ -193,9 +193,9 @@
   </div>
 </template>
 <script>
-  import basic_info from '@/js/pages/promotionCenter/details/basicInfo';
+  import basicInfo from '@/js/pages/promotionCenter/details/basicInfo';
 
-  export default basic_info;
+  export default basicInfo;
 </script>
 <style lang="less">
 @import "~@/css/pages/promotionCenter/details/basicInfo.less";

@@ -83,8 +83,8 @@
 </template>
 
 <script>
-
-  import modifyLogistics from '@/js/modal/strategyPlatform/setWarehouseLogistics/modifyLogistics.js';
+  
+  import modifyLogistics from '@/js/pages/strategyPlatform/setWarehouseLogistics/modifyLogistics';
 
   export default modifyLogistics;
 </script>

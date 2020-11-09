@@ -222,7 +222,7 @@
 </template>
 
 <script>
-  import logisticsArea from '@/js/pages/strategyPlatform/logisticsStrategy/logisticsArea.js';
+  import logisticsArea from '@/js/pages/strategyPlatform/logisticsStrategy/logisticsArea';
 
   export default logisticsArea;
 </script>

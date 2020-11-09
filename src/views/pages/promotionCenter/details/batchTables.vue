@@ -62,9 +62,7 @@
                   getFilterChooseItem(item, row, listIndex, index, 'product');
                 }
               "
-              @clearFilterChooseItem="
-                clearFilterChooseItem(listIndex, index, 'product')
-              "
+              @clearFilterChooseItem="clearFilterChooseItem(listIndex, index, 'product')"
             />
           </template>
           <template
@@ -135,9 +133,7 @@
                   getFilterChooseItem(item, row, listIndex, index, 'gift');
                 }
               "
-              @clearFilterChooseItem="
-                clearFilterChooseItem(listIndex, index, 'gift')
-              "
+              @clearFilterChooseItem="clearFilterChooseItem(listIndex, index, 'gift')"
             />
           </template>
           <template
@@ -213,11 +209,11 @@
   </div>
 </template>
 <script>
-  import batchTables from '@/js/pages/promotionCenter/details/batchTables.js';
+  import batchTables from '@/js/pages/promotionCenter/details/batchTables';
 
   export default batchTables;
 </script>
 <style lang="less" scoped>
-@import "../less/common.less";
-@import "~@/css/pages/promotionCenter/details/batchTables.less";
+@import '../less/common.less';
+@import '~@/css/pages/promotionCenter/details/batchTables.less';
 </style>

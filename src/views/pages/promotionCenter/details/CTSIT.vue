@@ -49,7 +49,7 @@
   </div>
 </template>
 <script>
-  import CTSIT from '@/js/pages/promotionCenter/details/CTSIT.js';
+  import CTSIT from '@/js/pages/promotionCenter/details/CTSIT';
 
   export default CTSIT;
 </script>
