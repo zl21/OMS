@@ -229,8 +229,9 @@ export default {
                 ocBorderDto,
                 ocBorderItemDto,
               };
+              debugger;
               // 新增订单走新保存（去掉草稿模式）
-              if (self.$route.query.id === '-1') {
+              if (self.$route.params.customizedModuleId === '-1') {
                 return self.saveAdd(data);
               }
               // 如果是丢单复制或者复制订单的保存，传被复制订单的id
@@ -1678,8 +1679,14 @@ export default {
                 if (res.data.code === 0) {
                   self.$Message.success(res.data.message);
                   self.btnConfig.buttons[0].disabled = false;
+                  // R3.store.commit('global/tabOpen', {
+                  //   type: 'tableDetailAction' || 'C',
+                  //   label: '零售发货单详情',
+                  //   customizedModuleName: 'ORDERMANAGEDETAIL',
+                  //   customizedModuleId: res.data.data
+                  // });
                   self.$store.commit('customize/TabHref', {
-                    id: -1,
+                    id: res.data.data,
                     type: 'action',
                     name: 'orderManageDetail',
                     label: self.vmI18n.t('panel_label.orderManager_edit'), // 订单管理编辑
@@ -1708,8 +1715,14 @@ export default {
             if (res.data.code === 0) {
               self.$Message.success(res.data.message);
               self.btnConfig.buttons[0].disabled = false;
+              // R3.store.commit('global/tabOpen', {
+              //   type: 'tableDetailAction' || 'C',
+              //   label: '零售发货单详情',
+              //   customizedModuleName: 'ORDERMANAGEDETAIL',
+              //   customizedModuleId: 'res.data.data'
+              // });
               self.$store.commit('customize/TabHref', {
-                id: -1,
+                id: res.data.data,
                 type: 'action',
                 name: 'orderManageDetail',
                 label: self.vmI18n.t('panel_label.orderManager_edit'), // 订单管理编辑
