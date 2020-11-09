@@ -238,7 +238,7 @@ export default {
       console.log(data, code);
       this.rightLoading = false;
       if (code === 0 && data) {
-        this.rightListBody = data.data;
+        this.rightListBody = data;
       }
       // axios({
       //   url: this.activeName,

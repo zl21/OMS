@@ -47,7 +47,7 @@
         </div>
       </div>
       <!--满足条件-->
-      <div class="row" v-if="showRulesContent">
+      <!-- <div class="row" v-if="showRulesContent">
         <div class="form_label"><i class="red">*</i>满足条件：</div>
         <div class="form_content">
           <CTSIT
@@ -58,7 +58,7 @@
             v-show="showRules(_index, rule)"
           ></CTSIT>
         </div>
-      </div>
+      </div> -->
       <!--搭配 选择商品方式 商品列表-->
       <div v-if="!onlyShowRules && showPdtsArr">
         <div class="form_label">

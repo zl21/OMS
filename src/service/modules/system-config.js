@@ -23,9 +23,7 @@ export default {
   /**
    * 角色
    */
-  // TODO 待替换mock接口
-  selectPermissionColumn: params => network.post('http://yapi.dev.syman.cn/mock/624/p/cs/permission/v1/selectPermissionColumn', params),
-  // selectPermissionColumn: params => network.post('/p/cs/permission/v1/selectPermissionColumn', params),
+  selectPermissionColumn: params => network.post('/p/cs/permission/v1/selectPermissionColumn', params),
   /**
    * 用户档案
    * */
@@ -34,9 +32,7 @@ export default {
   */
   // 获取表格
   cgroupcolumnquery: params => network.post('/p/cs/cgroupcolumnquery', params),
-  // TODO 待替换mock接口
-  selectDataPermission: params => network.post('http://yapi.dev.syman.cn/mock/624/p/cs/permission/v1/selectDataPermission', params),
-  // selectDataPermission: params => network.post('/p/cs/permission/v1/selectDataPermission', params),
+  selectDataPermission: params => network.post('/p/cs/permission/v1/selectDataPermission', params),
   // 保存 /p/cs/objectSave /p/cs/permission/v1/saveDataPermission
   objectSave: (url, params) => network.post(url, params),
   // 复制权限 /p/cs/copyShopPermission

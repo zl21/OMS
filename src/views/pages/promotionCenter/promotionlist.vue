@@ -85,7 +85,7 @@
         <Col
           span="6"
           class="form-item"
-        />
+        >
         <span class="form-label">
           {{ vmI18n.t("form_label.promotionNo") }}:
         </span>
@@ -102,7 +102,7 @@
         <Col
           span="6"
           class="form-item"
-        />
+        >
         <span class="form-label">
           {{ vmI18n.t("form_label.activityDate") }}:
         </span>
@@ -120,7 +120,7 @@
         <Col
           span="6"
           class="form-item"
-        />
+        >
         <span class="form-label">
           {{ vmI18n.t("form_label.activityName") }}:
         </span>
@@ -137,7 +137,7 @@
         <Col
           span="6"
           class="form-item tableInput"
-        />
+        >
         <span class="form-label"> 店铺名称: </span>
         <div class="form-input">
           <TableInput
@@ -152,7 +152,7 @@
         <Col
           span="6"
           class="form-item"
-        />
+        >
         <span class="form-label"> {{ vmI18n.t("other.goods") }}: </span>
         <div class="form-input">
           <TableInput
@@ -168,7 +168,7 @@
         <Col
           span="6"
           class="form-item"
-        />
+        >
         <span class="form-label">
           {{ vmI18n.t("table_label.grouping") }}:
         </span>
@@ -185,7 +185,7 @@
         <Col
           span="6"
           class="form-item"
-        />
+        >
         <span class="form-label">
           {{ vmI18n.t("form_label.operator") }}:
         </span>
@@ -199,7 +199,7 @@
         </div>
         </Col>
         <!--促销状态 query_select-->
-        <Col span="6" />
+        <Col span="6" >
         <div
           span="6"
           class="form-item"
@@ -325,9 +325,9 @@
   </div>
 </template>
 <script>
-  import promotionlist from '@/js/pages/promotionCenter/promotionlist';
+import promotionlist from "@/js/pages/promotionCenter/promotionlist";
 
-  export default promotionlist;
+export default promotionlist;
 </script>
 <style lang="less">
 @import "~@/css/pages/promotionCenter/promotionlist.less";

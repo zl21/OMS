@@ -252,7 +252,6 @@ export default {
            arr.push(obj)
          })
        })
-       console.log('this.gift_info_setting.gift_productsArrs',arr)
        this.gift_info_setting.gift_commoditylist = await this.unique(arr)
        this.loadDis = true
        this.dialog_visible = true
@@ -365,8 +364,7 @@ export default {
           });
         }
       } catch (error) {
-        // self.$message({ type: "error", message: "获取促销详情异常" });
-        self.$message({ type: "error", message: vmI18n.t("modalTips.r4") });
+        self.$message({ type: "error", message: vmI18n.t("modalTips.r4") });//获取促销详情异常
       }
      
       // axios({
