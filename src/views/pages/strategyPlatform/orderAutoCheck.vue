@@ -139,7 +139,7 @@
                   <Col span="8" >
                   <FormItem label="排除物流公司：">
                     <Col span="20" >
-                      <Select v-model="CP_C_LOGISTICS_ID">
+                      <Select v-model="info.CP_C_LOGISTICS_ID" @on-change="setResult('CP_C_LOGISTICS_ID')">
                         <Option v-for="(item , index) in CP_C_LOGISTICS_ID_SELECT" :key='index' :value="item.value">{{item.label}}</Option>
                       </Select>
                     </Col>

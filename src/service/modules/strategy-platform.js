@@ -45,7 +45,7 @@ export default {
   selectCompenstateLogistic: params => network.post('/p/cs/selectCompenstateLogistic', params),
   getAutoCheck: params => network.post('/p/cs/st/v1/getAutoCheck', params),
   QueryList: params => network.post('/p/cs/QueryList', params),
-  addAutoCheck: params => network.post('/p/cs/st/v1/addAutoCheck', params)
-
+  addAutoCheck: params => network.post('/p/cs/st/v1/addAutoCheck', params),
+  queryLogisticsCompany: ()=> network.post('/p/cs/cpext/v1/queryLogisticsList')
 
 };
