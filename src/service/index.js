@@ -1,17 +1,17 @@
 // 导出所有的接口
 import common from './modules/common';
-import interfacePlatform from './modules/interface-platform';
-import orderCenter from './modules/order-center';
-import promotionCenter from './modules/promotion-center';
-import commodityCenter from './modules/commodity-center';
-import inventoryCenter from './modules/inventory-center';
-import strategyPlatform from './modules/strategy-platform';
-import organizationCenter from './modules/organization-center';
-import financeCenter from './modules/finance-center';
-import clearanceCenter from './modules/clearance-center';
-import memberCenter from './modules/member-center';
-import reportCenter from './modules/report-center';
-import systemConfig from './modules/system-config';
+import interfacePlatform from './modules/interfacePlatform';
+import orderCenter from './modules/orderCenter';
+import promotionCenter from './modules/promotionCenter';
+import commodityCenter from './modules/commodityCenter';
+import inventoryCenter from './modules/inventoryCenter';
+import strategyPlatform from './modules/strategyPlatform';
+import organizationCenter from './modules/organizationCenter';
+import financeCenter from './modules/financeCenter';
+import clearanceCenter from './modules/clearanceCenter';
+import memberCenter from './modules/memberCenter';
+import reportCenter from './modules/reportCenter';
+import systemConfig from './modules/systemConfig';
 
 export default {
   common, // 公共
