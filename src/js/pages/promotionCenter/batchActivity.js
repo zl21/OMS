@@ -1,6 +1,6 @@
 import axios from 'axios';
-import BasicInfo from '@/views/pages/promotionCenter/details/basic_info';
-import BatchInfoSet from '@/views/pages/promotionCenter/details/batch_info_set';
+import BasicInfo from '@/views/pages/promotionCenter/details/basicInfo';
+import BatchInfoSet from '@/views/pages/promotionCenter/details/batchInfoSet';
 import stepsBars from '@/views/pages/promotionCenter/components/steps';
 
 export default {

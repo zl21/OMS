@@ -72,12 +72,12 @@
   </div>
 </template>
 <script>
-  import batch_info_set from '@/js/pages/promotionCenter/details/batch_info_set';
+  import batchInfoSet from '@/js/pages/promotionCenter/details/batchInfoSet';
 
-  export default batch_info_set;
+  export default batchInfoSet;
 </script>
 
 <style lang="less">
 @import "./../less/common.less";
-@import "~@/css/pages/promotionCenter/details/batch_info_set.less";
+@import "~@/css/pages/promotionCenter/details/batchInfoSet.less";
 </style>

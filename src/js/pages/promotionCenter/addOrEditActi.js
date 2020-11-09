@@ -1,8 +1,8 @@
 import axios from 'axios';
 // import DateUtil from "@/assets/js/__utils__/date";
-import BasicInfo from '@/views/pages/promotionCenter/details/basic_info';
-import InfoSet from '@/views/pages/promotionCenter/details/info_set';
-import GiftSet from '@/views/pages/promotionCenter/details/gift_set';
+import BasicInfo from '@/views/pages/promotionCenter/details/basicInfo';
+import InfoSet from '@/views/pages/promotionCenter/details/infoSet';
+import GiftSet from '@/views/pages/promotionCenter/details/giftSet';
 import stepsBars from '@/views/pages/promotionCenter/components/steps';
 
 export default {

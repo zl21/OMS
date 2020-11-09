@@ -12,7 +12,7 @@
       <!-- 定义slot部分 -->
       <template
         slot="ECODE"
-        slot-scope="{ row, index }"
+        slot-scope="{ row }"
       >
         <TableSku
           :itemdata="itemdata"

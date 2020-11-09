@@ -179,12 +179,12 @@
   </div>
 </template>
 <script>
-  import info_set from '@/js/pages/promotionCenter/details/info_set';
+  import infoSet from '@/js/pages/promotionCenter/details/infoSet';
 
-  export default info_set;
+  export default infoSet;
 </script>
 
 <style lang="less">
 @import "./../less/common.less";
-@import "~@/css/pages/promotionCenter/details/info_set.less";
+@import "~@/css/pages/promotionCenter/details/infoSet.less";
 </style>

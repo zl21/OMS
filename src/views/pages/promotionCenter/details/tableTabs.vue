@@ -10,9 +10,9 @@
       <div slot="tab_content">
         <div
           v-for="(panel,index) in productsArrs"
-          v-if="showContent(index)"
           :key="index"
         >
+        <div v-if="showContent(index)">
           <div
             v-if="panel.rules && panel.rules.length>0"
             class="detail_rules"
@@ -57,6 +57,7 @@
               </button>
             </div>
           </detailTable>
+          </div>
         </div>
       </div>
     </tabList>
