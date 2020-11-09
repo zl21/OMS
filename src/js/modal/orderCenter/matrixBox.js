@@ -1,8 +1,10 @@
 
-import axios from "axios";
-import matrix from "@/views/modal/orderCenter/matrixBox.vue";
-import publicMethodsUtil from "@/assets/js/public/publicMethods.js";
+import axios from 'axios';
+import matrix from '@/views/pages/common/orderDetail/matrix.vue';
+import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
+
 export default {
+  name:'matrixBox',
   components: {
     matrix
   },
@@ -24,30 +26,30 @@ export default {
     // 确定
     confirmOk(val, num) {
       if (num) {
-        let arr = [];
-        let arrList = [];
-        Object.keys(val).map(keys => {
-          let obj = val[keys];
+        const arr = [];
+        const arrList = [];
+        Object.keys(val).map((keys) => {
+          const obj = val[keys];
           arr.push(obj.PS_C_SKU_ECODE.trim());
         });
-        Object.keys(val).map(keys => {
-          let obj = val[keys];
-          arrList.push({ sku: obj.PS_C_SKU_ECODE.trim(), qty: obj.count === "" ? 0 : obj.count.trim() });
+        Object.keys(val).map((keys) => {
+          const obj = val[keys];
+          arrList.push({ sku: obj.PS_C_SKU_ECODE.trim(), qty: obj.count === '' ? 0 : obj.count.trim() });
         });
-        let fromdata = new FormData();
-        fromdata.append('param', JSON.stringify({ 'SkuEcodeList': arr }))
+        const fromdata = new FormData();
+        fromdata.append('param', JSON.stringify({ SkuEcodeList: arr }));
         axios({
-          url: "/p/cs/skuListQuery",
-          method: "post",
+          url: '/p/cs/skuListQuery',
+          method: 'post',
           data: fromdata
         }).then(async (res) => {
           if (res.data.code === 0) {
-            let queryList = res.data.data;
+            const queryList = res.data.data;
             for (let i = 0; i < arrList.length; i++) {
-              let list = arrList[i];
-              let resData = res.data.data;
+              const list = arrList[i];
+              const resData = res.data.data;
               for (let index = 0; index < resData.length; index++) {
-                let item = resData[index];
+                const item = resData[index];
                 if (item) {
                   if (list.sku === item.ECODE) {
                     queryList[index].skuId = item.ID;
@@ -72,70 +74,69 @@ export default {
                       .accMul(list.qty, item.PRICELIST)
                       .toFixed(2); // 退货金额realAmt
                     queryList[index].QTY_IN = 0;
-                    queryList[index].PRODUCT_MARK = "正品";
+                    queryList[index].PRODUCT_MARK = '正品';
                     queryList[index].ID = -1;
                     await this.$parent.$parent.$parent.getDataByProinfo(item.PS_C_PRO_ECODE, 1);
                     queryList[index].clrList = this.$parent.$parent.$parent.clrListArr;
                     queryList[index].sizeList = this.$parent.$parent.$parent.sizeListArr;
                   }
                 }
-
               }
             }
             this.$parent.$parent.$parent.enterQuerySave(queryList, num);
           }
-        })
+        });
       } else {
-        let arr = [];
-        let arrList = [];
-        Object.keys(val).map(keys => {
-          let obj = val[keys];
+        const arr = [];
+        const arrList = [];
+        Object.keys(val).map((keys) => {
+          const obj = val[keys];
           arr.push(obj.PS_C_SKU_ECODE.trim());
         });
-        Object.keys(val).map(keys => {
-          let obj = val[keys];
-          arrList.push({ sku: obj.PS_C_SKU_ECODE.trim(), qty: obj.count === "" ? 0 : obj.count.trim() });
+        Object.keys(val).map((keys) => {
+          const obj = val[keys];
+          arrList.push({ sku: obj.PS_C_SKU_ECODE.trim(), qty: obj.count === '' ? 0 : obj.count.trim() });
         });
-        let fromdata = new FormData();
-        fromdata.append('param', JSON.stringify({ 'SkuEcodeList': arr }))
+        const fromdata = new FormData();
+        fromdata.append('param', JSON.stringify({ SkuEcodeList: arr }));
         axios({
-          url: "/p/cs/skuListQuery",
-          method: "post",
+          url: '/p/cs/skuListQuery',
+          method: 'post',
           data: fromdata
         }).then((res) => {
           if (res.data.code === 0) {
-            let queryList = [];
+            const queryList = [];
 
             // 熊伟，15703766695，浙江省杭州市江干区九堡
-            arrList.forEach(list => {
+            arrList.forEach((list) => {
               res.data.data.forEach((item, index) => {
                 if (list.sku === item.ECODE) {
-                  if (item.IS_GIFT === 'Y') item.IS_GIFT = '1'
-                  else if (item.IS_GIFT === 'N') item.IS_GIFT = '0'
+                  if (item.IS_GIFT === 'Y') item.IS_GIFT = '1';
+                  else if (item.IS_GIFT === 'N') item.IS_GIFT = '0';
 
                   queryList.push({
-                    'RESERVE_DECIMAL02': item.PRICELIST,
-                    'PRICE_ACTUAL': item.PRICELIST,
-                    'REAL_AMT': publicMethodsUtil.accMul(item.PRICELIST, list.qty),
-                    'PS_C_CLR_ENAME': item.CLRSENAME,
-                    'PS_C_SIZE_ENAME': item.SIZESENAME,
-                    'PS_C_SKU_ECODE': item.ECODE,
-                    'QTY': list.qty,
-                    'ADJUST_AMT': 0,
-                    'AMT_DISCOUNT': 0,
-                    'IS_GIFT': item.IS_GIFT,
-                    'SEX_NAME': item.SEX_NAME,
-                    'PS_C_PRO_ENAME': item.PS_C_PRO_ENAME,
-                    'PS_C_PRO_ECODE': item.PS_C_PRO_ECODE,
-                    'PRICE': item.PRICELIST,
-                    'PRICE_TAG': item.PRICELIST
-                  })
+                    RESERVE_DECIMAL02: item.PRICELIST,
+                    PRICE_ACTUAL: item.PRICELIST,
+                    REAL_AMT: publicMethodsUtil.accMul(item.PRICELIST, list.qty),
+                    PS_C_CLR_ENAME: item.CLRSENAME,
+                    PS_C_SIZE_ENAME: item.SIZESENAME,
+                    PS_C_SKU_ECODE: item.ECODE,
+                    QTY: list.qty,
+                    ADJUST_AMT: 0,
+                    AMT_DISCOUNT: 0,
+                    IS_GIFT: item.IS_GIFT,
+                    SEX_NAME: item.SEX_NAME,
+                    PS_C_PRO_ENAME: item.PS_C_PRO_ENAME,
+                    PS_C_PRO_ECODE: item.PS_C_PRO_ECODE,
+                    PRICE: item.PRICELIST,
+                    PRICE_TAG: item.PRICELIST
+                  });
                 }
-              })
-            })
+              });
+            });
             this.$parent.$parent.$parent.enterQuerySave1(queryList);
           }
-        })
+        });
         // this.$parent.$parent.$parent.enterQuerySave(val);
       }
     },

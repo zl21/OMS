@@ -46,9 +46,9 @@ export default {
       dataEmptyMessage: '数据加载中...', // c
       columns: ['name', 'value'], // 展现的组
       IS_AUTOCHECK_ORDER: false,
-      IS_AUTOCHECK_PAY: false, //自动审核货到付款
-      IS_MERGE_ORDER: false,     //是否可合并
-      IS_FULL_GIFT_ORDER: false, //全赠品订单开启审核
+      IS_AUTOCHECK_PAY: false, // 自动审核货到付款
+      IS_MERGE_ORDER: false, // 是否可合并
+      IS_FULL_GIFT_ORDER: false, // 全赠品订单开启审核
       orderType: [''],
       indeterminate: false,
       checkAll: false,
@@ -89,19 +89,18 @@ export default {
       EXCLUDE_SKU_TYPE: 1,
       CREATIONDATE: '',
       MODIFIEDDATE: '',
-      CP_C_LOGISTICS_ID:'',
       CP_C_LOGISTICS_ID_SELECT: [
         {
-          label:'阿里',
-          value:1
+          label: '阿里',
+          value: 1
         },
         {
-          label:'华为',
-          value:2
+          label: '华为',
+          value: 2
         },
         {
-          label:'百度',
-          value:3
+          label: '百度',
+          value: 3
         }
       ]
     };
@@ -110,8 +109,24 @@ export default {
     this.getAutoCheck().then(() => {
       this.QueryList();
     });
+    this.queryLogisticsCompany();
   },
   methods: {
+    queryLogisticsCompany() {
+      let self = this;
+      self.service.strategyPlatform.queryLogisticsCompany().then((res) => {
+        if (res.data.code === 0) {
+          let arr = [];
+          res.data.data.forEach(item=>{
+            let obj = {};
+            obj.value = String(item.ID);
+            obj.label = item.ENAME;
+            arr.push(obj);
+          });
+          this.CP_C_LOGISTICS_ID_SELECT = arr;
+        }
+      });
+    },
     selected(value) {
       console.log(value);
       this.providesList = value;
@@ -258,20 +273,21 @@ export default {
     setResult(type) {
       if (type == 'IS_AUTOCHECK_ORDER') {
         this.result.IS_AUTOCHECK_ORDER = this.IS_AUTOCHECK_ORDER ? 'Y' : 'N';
-      } else if (type == 'IS_MERGE_ORDER'){
+      } else if (type == 'IS_MERGE_ORDER') {
         this.result.IS_MERGE_ORDER = this.IS_MERGE_ORDER ? 'Y' : 'N';
-      } else if (type == 'IS_FULL_GIFT_ORDER'){
-        this.result.IS_FULL_GIFT_ORDER = this.IS_FULL_GIFT_ORDER ? 'Y' : 'N'
-      } else if (type == 'IS_AUTOCHECK_PAY'){
-        this.result.IS_AUTOCHECK_PAY = this.IS_AUTOCHECK_PAY ? 'Y' : 'N'
+      } else if (type == 'IS_FULL_GIFT_ORDER') {
+        this.result.IS_FULL_GIFT_ORDER = this.IS_FULL_GIFT_ORDER ? 'Y' : 'N';
+      } else if (type == 'IS_AUTOCHECK_PAY') {
+        this.result.IS_AUTOCHECK_PAY = this.IS_AUTOCHECK_PAY ? 'Y' : 'N';
       } else if (
-        type ==='AUDIT_WAIT_TIME'
+        type === 'AUDIT_WAIT_TIME'
           || type === 'WAIT_TIME'
           || type === 'RECEIVER_ADDRESS'
           || type === 'BUYER_REMARK'
           || type === 'SELLER_REMARK'
           || type === 'HOLD_WAIT_TIME'
           || type === 'ANTI_AUDIT_WAIT_TIME'
+          || type === 'CP_C_LOGISTICS_ID'
       ) {
         this.result[type] = this.info[type];
       } else if (type == 'orderType') {
