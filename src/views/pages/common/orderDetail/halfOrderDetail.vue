@@ -5,6 +5,7 @@
   >
     <div class="ff-order-detail-search-box">
       <matrix-input
+        ref="inputMatrix"
         :stopsave="stopsave"
         :is-custom="isCustom"
         :select-item="selectItem"
@@ -17,7 +18,6 @@
         :is-active="isActive"
         :save="save"
         :editsave="editsave"
-        ref="inputMatrix"
         @refreshGetData="refreshData"
         @changeSave="changeSave"
         @newLySave="newLySave"
@@ -105,8 +105,8 @@
         >
           <matrix
             v-if="visible"
-            :edit="true"
             ref="matrixOne"
+            :edit="true"
             :objid="objid"
             :select-item="selectItem"
             :obj-list="objList"

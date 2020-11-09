@@ -1,3 +1,37 @@
+.ff-input--query--matrix {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 12px;
+  position: relative;
+  .ff-input--dialog--number {
+    display: inline-block;
+    margin-left: 30px;
+  }
+  .ff-order-detail-search {
+    line-height: 33px;
+  }
+  .ff-search-input {
+    width: 100%;
+    height: 24px;
+    box-sizing: border-box;
+    padding: 0 6px;
+    border-radius: 2px;
+    transition: border-color 0.2s ease;
+    border: 1px solid #dcdcdc;
+    &:focus,
+    &:hover {
+      border-color: #20a0ff;
+    }
+    &.pinyin {
+      position: absolute;
+      top: 4px;
+    }
+  }
+  input[type="password"].ff-search-input.pinyin {
+    color: transparent;
+    opacity: 0.1;
+  }
+}
 .ff-input-matrix--self {
   .ff-matrix--table-content {
     max-width: 800px;

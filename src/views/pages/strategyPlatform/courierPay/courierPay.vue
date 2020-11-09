@@ -38,9 +38,9 @@
           <business-action-table
             :jordan-table-config="jordanTableConfig"
             @on-select="onSelect"
-            @on-select-all="onSelectAll"
+            @on-select-all="onSelect"
             @on-select-all-cancel="onSelectAllCancel"
-            @on-select-cancel="onSelectCancel"
+            @on-select-cancel="onSelect"
             @table-delete-detail="tableDeleteDetail"
           />
         </p>
@@ -51,7 +51,7 @@
   </div>
 </template>
 <script>
-  import courierPay from '@/js/pages/strategyPlatform/courierPay/courierPay.js';
+  import courierPay from '@/js/pages/strategyPlatform/courierPay/courierPay';
 
   export default courierPay;
 </script>

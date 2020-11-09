@@ -239,18 +239,17 @@ export default {
     objectEdit(e) {
       // this.isDialogMatrixSave = true;
       this.singleData = e;
-      let formdata = new FormData();
-      formdata.append('data' , JSON.stringify(e));
-      formdata.append('table' , this.$route.params.tableName);
-      formdata.append('objid' , this.$route.params.itemId);
+      const formdata = new FormData();
+      formdata.append('data', JSON.stringify(e));
+      formdata.append('table', this.$route.params.tableName);
+      formdata.append('objid', this.$route.params.itemId);
 
       this.service.common.objectSave(formdata).then((res) => {
-        if(res.data.code === 0){
+        if (res.data.code === 0) {
           this.getData();
           this.save = false;
           this.$children[0].Dialog = false;
         }
-        
       });
       // document.getElementById('actionMODIFY').click();
     }, // 告诉父组件先保存主表
@@ -461,10 +460,10 @@ export default {
           }`
         ].push(obj);
       }
-      let formdata = new FormData();
-      formdata.append('table' , this.tablename === 'DL_B_TRAN_OUT_POS' ? this.tablename.replace('_POS', '') : this.tablename);
-      formdata.append('objid' , this.objid);
-      formdata.append('data' , JSON.stringify(data));
+      const formdata = new FormData();
+      formdata.append('table', this.tablename === 'DL_B_TRAN_OUT_POS' ? this.tablename.replace('_POS', '') : this.tablename);
+      formdata.append('objid', this.objid);
+      formdata.append('data', JSON.stringify(data));
       return this.service.orderCenter.amendBody(this.tablename, formdata);
     }, // 切换和改变页码和页显示数时保存数据
     errorDialogClose(val, option) {
@@ -509,8 +508,8 @@ export default {
           type: 'warning'
         }); 
       }
-      let formdata = new FormData();
-      formdata.append('param' , JSON.stringify({
+      const formdata = new FormData();
+      formdata.append('param', JSON.stringify({
         objid: this.objid,
         maintable: this.tablename,
         tablename: port[this.tablename].tableName,

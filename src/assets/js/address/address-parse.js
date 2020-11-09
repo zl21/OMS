@@ -16,9 +16,9 @@ function parseArea(list, init) {
     return true;
   }
   defaultData = list;
-  defaultData.forEach((province) => {
+  defaultData.forEach(province => {
     if (province.city) {
-      province.city.forEach((city) => {
+      province.city.forEach(city => {
         if (city.name !== '其他') {
           if (!mCity[city.name]) {
             mCity[city.name] = [];
@@ -30,7 +30,7 @@ function parseArea(list, init) {
           });
         }
         if (city.area) {
-          city.area.forEach((area) => {
+          city.area.forEach(area => {
             if (area !== '其他') {
               if (!mArea[area]) {
                 mArea[area] = [];
@@ -61,10 +61,13 @@ function parse(address) {
     phone: ''
   };
 
-  address = address.replace(/\r\n/g, ' ').replace(/\n/g, ' ').replace(/\t/g, ' ');
+  address = address
+    .replace(/\r\n/g, ' ')
+    .replace(/\n/g, ' ')
+    .replace(/\t/g, ' ');
 
-  const search = ['地址', '收货地址', '收货人', '收件人', '收货', '邮编', '电话', '：', ':', '；', ';', '，', ',', '。',];
-  search.forEach((str) => {
+  const search = ['地址', '收货地址', '收货人', '收件人', '收货', '邮编', '电话', '：', ':', '；', ';', '，', ',', '。'];
+  search.forEach(str => {
     address = address.replace(new RegExp(str, 'g'), ' ');
   });
 
@@ -111,18 +114,22 @@ function parse(address) {
       console.log('smart_parse');
     }
     // 这个待完善
-    const list = address.replace(detail.province, '').replace(detail.city, '').replace(detail.area, '').split(' ')
+    const list = address
+      .replace(detail.province, '')
+      .replace(detail.city, '')
+      .replace(detail.area, '')
+      .split(' ')
       .filter(str => str);
     if (list.length > 1) {
       try {
-        list.forEach((str) => {
-          if (!parse.name || str && str.length < parse.name.length) {
+        list.forEach(str => {
+          if (!parse.name || (str && str.length < parse.name.length)) {
             parse.name = str.trim();
             throw new Error('终端执行');
           }
         });
       } catch (e) {}
-      
+
       if (parse.name) {
         detail.addr = detail.addr.replace(parse.name, '').trim();
       }
@@ -161,7 +168,7 @@ function detail_parse_forward(address) {
     city: '',
     area: '',
     addr: '',
-    name: '',
+    name: ''
   };
 
   const provinceKey = ['特别行政区', '古自治区', '维吾尔自治区', '壮族自治区', '回族自治区', '自治区', '省省直辖', '省', '市'];
@@ -228,14 +235,14 @@ function detail_parse(address, { ignoreArea = false } = {}) {
     area: '',
     name: '',
     _area: '',
-    addr: '',
+    addr: ''
   };
   let areaIndex = -1;
   let cityIndex = -1;
 
   address = address.replace('  ', ' ');
 
-  if (!ignoreArea && address.indexOf('县') > -1 || !ignoreArea && address.indexOf('区') > -1 || !ignoreArea && address.indexOf('旗') > -1) {
+  if ((!ignoreArea && address.indexOf('县') > -1) || (!ignoreArea && address.indexOf('区') > -1) || (!ignoreArea && address.indexOf('旗') > -1)) {
     if (address.indexOf('旗') > -1) {
       areaIndex = address.indexOf('旗');
       parse.area = address.substr(areaIndex - 1, 2);

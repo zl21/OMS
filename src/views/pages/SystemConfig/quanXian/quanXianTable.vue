@@ -96,7 +96,7 @@
   </div>
 </template>
 <script>
-  import quanXianTable from '@/js/pages/SystemConfig/quanXian/quanXianTable.js';
+  import quanXianTable from '@/js/pages/SystemConfig/quanXian/quanXianTable';
 
   export default quanXianTable;
 </script>

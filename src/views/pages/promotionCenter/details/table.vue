@@ -51,7 +51,7 @@
   </div>
 </template>
 <script>
-  import table from '@/js/pages/promotionCenter/details/table.js';
+  import table from '@/js/pages/promotionCenter/details/table';
 
   export default table;
 </script>

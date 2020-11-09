@@ -354,7 +354,7 @@
 </template>
 
 <script>
-  import outboundPickOrder from '@/js/pages/orderCenter/scanIn/outboundPickOrder.js';
+  import outboundPickOrder from '@/js/pages/orderCenter/scanIn/outboundPickOrder';
 
   export default outboundPickOrder;
 </script>

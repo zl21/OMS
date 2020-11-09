@@ -1,5 +1,4 @@
-import tree from 'framework/components/tree/tree2.vue';
-import axios from 'framework/__utils__/request';
+import tree from 'framework/components/tree/tree2';
 
 export default {
   data() {
@@ -10,39 +9,10 @@ export default {
       treeList: [], // 树数据
       middleList: {
         header: [],
-        body: [],
+        body: []
       }, // 中间数据
       sheetWidth: '',
-      tabsList: [
-        {
-          label: vmI18n.t('panel_label.warehouse_authority'),
-          url: '/p/cs/chrstoregroupquery',
-        },
-        {
-          label: vmI18n.t('panel_label.supplier_authority'),
-          url: '/p/cs/chrsuppgroupquery',
-        },
-        {
-          label: vmI18n.t('panel_label.distributionCenter_authority'),
-          url: '/p/cs/chrgroupsdistrib/query',
-        },
-        {
-          label: vmI18n.t('panel_label.brand_authority'),
-          url: '/p/cs/cgroupsbrand/query',
-        },
-        {
-          label: vmI18n.t('panel_label.commodity_authority'),
-          url: '/p/cs/cgrouppro/query',
-        },
-        {
-          label: vmI18n.t('panel_label.company_authority'),
-          url: '/p/cs/chrgroupscompany/query',
-        },
-        {
-          label: vmI18n.t('panel_label.role_authority'),
-          url: '/p/cs/cusergroupquery',
-        },
-      ], // 右边tab列表
+      tabsList: [], // 右边tab列表
       obj: {}, // 传给table的对象
       layerOut: false, // 蒙层
 
@@ -64,148 +34,171 @@ export default {
         { id: 7, pid: 4, name: '7[父4]' },
         { id: 8, pid: 6, name: '8[父6]' },
         { id: 9, pid: 0, name: '9' },
-        { id: 10, pid: 6, name: '10[父6]' },
+        { id: 10, pid: 6, name: '10[父6]' }
       ], // 请求回来的初始data
 
       // arrayList:[],//把匹配到item 存放这个数组
       ztreeDataSource: [], // 请求回来的初始data
 
-      rightListHead: {
-        '/p/cs/chrstoregroupquery': [
-          {
-            label: vmI18n.t('table_label.distributionCenterName'),
-            // label: "配销中心名称",
-            name: 'CP_C_DISTRIB_ENAME',
-          },
-          {
-            label: vmI18n.t('table_label.storehouse'),
-            // label: "店仓",
-            name: 'STOREENAME',
-          },
-          {
-            label: vmI18n.t('table_label.mainStore_warehouse'),
-            // label: "制单主店仓",
-            name: 'ISMAIN',
-          },
-          {
-            label: vmI18n.t('table_label.check_mainStore'),
-            // label: "查看主店仓",
-            name: 'ISREAD',
-          },
-        ], // 店仓权限
-        '/p/cs/chrsuppgroupquery': [
-          {
-            label: vmI18n.t('table_label.supplierCode'),
-            // label: "供应商编码",
-            name: 'SUPECODE',
-          },
-          {
-            label: vmI18n.t('table_label.supplierName'),
-            // label: "供应商名称",
-            name: 'SUPENAME',
-          },
-          {
-            label: vmI18n.t('table_label.supplier_fullName'),
-            // label: "供应商全称",
-            name: 'AllNAME',
-          },
-        ], // 供应商权限
-        '/p/cs/chrgroupsdistrib/query': [
-          {
-            label: vmI18n.t('table_label.distributionCenterCode'),
-            // label: "配销中心编码",
-            name: 'CP_C_DISTRIB_ECODE',
-          },
-          {
-            label: vmI18n.t('table_label.distributionCenterName'),
-            // label: "配销中心名称",
-            name: 'CP_C_DISTRIB_ENAME',
-          },
-          {
-            label: vmI18n.t('table_label.view'),
-            // label: "查看",
-            name: 'ISREAD',
-          },
-          {
-            label: vmI18n.t('table_label.edit'),
-            // label: "编辑",
-            name: 'ISWRITE',
-          },
-        ], // 配销中心权限
-        '/p/cs/cgroupsbrand/query': [
-          {
-            label: vmI18n.t('table_label.brand'),
-            // label: "品牌",
-            name: 'BRANDENAME',
-          },
-          {
-            label: vmI18n.t('table_label.view'),
-            // label: "查看",
-            name: 'ISREAD',
-          },
-        ], // 品牌权限
-        '/p/cs/cgrouppro/query': [
-          {
-            label: vmI18n.t('table_label.productNo'),
-            // label: "商品编号",
-            name: 'ecode',
-          },
-          {
-            label: vmI18n.t('table_label.productName'),
-            // label: "商品名称",
-            name: 'ename',
-          },
-        ], // 商品权限
-        '/p/cs/chrgroupscompany/query': [
-          {
-            label: vmI18n.t('table_label.companyCode'),
-            // label: "公司编码",
-            name: 'ECODE',
-          },
-          {
-            label: vmI18n.t('table_label.companyName'),
-            // label: "公司名称",
-            name: 'ENAME',
-          },
-          {
-            label: vmI18n.t('table_label.view'),
-            // label: "查看",
-            name: 'ISREAD',
-          },
-          {
-            label: vmI18n.t('table_label.edit'),
-            // label: "编辑",
-            name: 'ISWRITE',
-          },
-        ],
-        '/p/cs/cusergroupquery': [
-          {
-            label: vmI18n.t('table_label.roles'),
-            // label: "角色",
-            name: 'name',
-          },
-          {
-            label: vmI18n.t('table_label.description'),
-            // label: "说明",
-            name: 'description',
-          },
-        ], // 角色权限
-      }, // 最右边table头部
-      rightListBody: [
-        /* {
-            distribCenter: '杭州仓',//配销中心
-            storehouse: '32004【汉中店】',//店仓
-            touching: 'N',//制单主店仓
-            examine: 'Y',//查看主店仓
-          } */
-      ], // 最右边table内容
+      rightListHead: {}, // 最右边table头部
+      rightListBody: [], // 最右边table内容
       currentItem: '', // 当前用户信息
       dataLoading: true, // 加载效果
-      middleSearch: '', // 中间用户名搜索字段
+      middleSearch: '' // 中间用户名搜索字段
     };
   },
   mounted() {
-    const _this = this;
+    this.tabsList = [
+      {
+        label: this.vmI18n.t('panel_label.warehouse_authority'),
+        url: '/p/cs/chrstoregroupquery'
+      },
+      {
+        label: this.vmI18n.t('panel_label.supplier_authority'),
+        url: '/p/cs/chrsuppgroupquery'
+      },
+      {
+        label: this.vmI18n.t('panel_label.distributionCenter_authority'),
+        url: '/p/cs/chrgroupsdistrib/query'
+      },
+      {
+        label: this.vmI18n.t('panel_label.brand_authority'),
+        url: '/p/cs/cgroupsbrand/query'
+      },
+      {
+        label: this.vmI18n.t('panel_label.commodity_authority'),
+        url: '/p/cs/cgrouppro/query'
+      },
+      {
+        label: this.vmI18n.t('panel_label.company_authority'),
+        url: '/p/cs/chrgroupscompany/query'
+      },
+      {
+        label: this.vmI18n.t('panel_label.role_authority'),
+        url: '/p/cs/cusergroupquery'
+      }
+    ];
+    this.rightHead = {
+      '/p/cs/chrstoregroupquery': [
+        {
+          label: this.vmI18n.t('table_label.distributionCenterName'),
+          // label: "配销中心名称",
+          name: 'CP_C_DISTRIB_ENAME'
+        },
+        {
+          label: this.vmI18n.t('table_label.storehouse'),
+          // label: "店仓",
+          name: 'STOREENAME'
+        },
+        {
+          label: this.vmI18n.t('table_label.mainStore_warehouse'),
+          // label: "制单主店仓",
+          name: 'ISMAIN'
+        },
+        {
+          label: this.vmI18n.t('table_label.check_mainStore'),
+          // label: "查看主店仓",
+          name: 'ISREAD'
+        }
+      ], // 店仓权限
+      '/p/cs/chrsuppgroupquery': [
+        {
+          label: this.vmI18n.t('table_label.supplierCode'),
+          // label: "供应商编码",
+          name: 'SUPECODE'
+        },
+        {
+          label: this.vmI18n.t('table_label.supplierName'),
+          // label: "供应商名称",
+          name: 'SUPENAME'
+        },
+        {
+          label: this.vmI18n.t('table_label.supplier_fullName'),
+          // label: "供应商全称",
+          name: 'AllNAME'
+        }
+      ], // 供应商权限
+      '/p/cs/chrgroupsdistrib/query': [
+        {
+          label: this.vmI18n.t('table_label.distributionCenterCode'),
+          // label: "配销中心编码",
+          name: 'CP_C_DISTRIB_ECODE'
+        },
+        {
+          label: this.vmI18n.t('table_label.distributionCenterName'),
+          // label: "配销中心名称",
+          name: 'CP_C_DISTRIB_ENAME'
+        },
+        {
+          label: this.vmI18n.t('table_label.view'),
+          // label: "查看",
+          name: 'ISREAD'
+        },
+        {
+          label: this.vmI18n.t('table_label.edit'),
+          // label: "编辑",
+          name: 'ISWRITE'
+        }
+      ], // 配销中心权限
+      '/p/cs/cgroupsbrand/query': [
+        {
+          label: this.vmI18n.t('table_label.brand'),
+          // label: "品牌",
+          name: 'BRANDENAME'
+        },
+        {
+          label: this.vmI18n.t('table_label.view'),
+          // label: "查看",
+          name: 'ISREAD'
+        }
+      ], // 品牌权限
+      '/p/cs/cgrouppro/query': [
+        {
+          label: this.vmI18n.t('table_label.productNo'),
+          // label: "商品编号",
+          name: 'ecode'
+        },
+        {
+          label: this.vmI18n.t('table_label.productName'),
+          // label: "商品名称",
+          name: 'ename'
+        }
+      ], // 商品权限
+      '/p/cs/chrgroupscompany/query': [
+        {
+          label: this.vmI18n.t('table_label.companyCode'),
+          // label: "公司编码",
+          name: 'ECODE'
+        },
+        {
+          label: this.vmI18n.t('table_label.companyName'),
+          // label: "公司名称",
+          name: 'ENAME'
+        },
+        {
+          label: this.vmI18n.t('table_label.view'),
+          // label: "查看",
+          name: 'ISREAD'
+        },
+        {
+          label: this.vmI18n.t('table_label.edit'),
+          // label: "编辑",
+          name: 'ISWRITE'
+        }
+      ],
+      '/p/cs/cusergroupquery': [
+        {
+          label: this.vmI18n.t('table_label.roles'),
+          // label: "角色",
+          name: 'name'
+        },
+        {
+          label: this.vmI18n.t('table_label.description'),
+          // label: "说明",
+          name: 'description'
+        }
+      ] // 角色权限
+    };
     this.obj = {
       table: 'CP_C_HRUSERS',
       column_include_uicontroller: true,
@@ -214,7 +207,7 @@ export default {
       startindex: 0,
       range: 100,
       reffixedcolumns: {},
-      orderby: [{ column: 'CP_C_HRUSERS.ID', asc: true }],
+      orderby: [{ column: 'CP_C_HRUSERS.ID', asc: true }]
     }; // 初始参数
     this.getUserHeadData(); // 获取用户头部数据
     this.getUserBodyData().then(() => {
@@ -223,38 +216,31 @@ export default {
     this.getCstoreorgload(); // 获取树节点
   },
   components: {
-    tree,
+    tree
   },
   methods: {
     async getPermission(item) {
-      if (item === undefined) return (this.rightListBody = []);
+      if (item === undefined) {
+        this.rightListBody = [];
+        return;
+      }
       this.rightLoading = true;
       // 接口
       const formData = new FormData();
-      formData.append('param', JSON.stringify({
-        CP_C_HRUSERS_ID: item.ID, // 用户item.ID
-      }));
-      const { data: { data, code } } = await this.service.systemConfig.chrstoregroupquery(this.activeName, formData);
+      formData.append(
+        'param',
+        JSON.stringify({
+          CP_C_HRUSERS_ID: item.ID // 用户item.ID
+        })
+      );
+      const {
+        data: { data, code }
+      } = await this.service.systemConfig.chrstoregroupquery(this.activeName, formData);
       console.log(data, code);
       this.rightLoading = false;
       if (code === 0 && data) {
         this.rightListBody = data;
       }
-      // axios({
-      //   url: this.activeName,
-      //   method: "post",
-      //   data: {
-      //     param: JSON.stringify({
-      //       CP_C_HRUSERS_ID: item.ID, //用户item.ID
-      //     }),
-      //   },
-      // }).then((res) => {
-      //   let data = res.data;
-      //   this.rightLoading = false;
-      //   if (data.code === 0) {
-      //     this.rightListBody = data.data;
-      //   }
-      // });
     }, // 获取最右边的数据
     activeUser(item) {
       this.currentItem = item;
@@ -262,20 +248,16 @@ export default {
     }, // 点击用户
     async middleScroll(event) {
       this.obj.startindex = this.middleList.body.length;
-      if (
-        event.target.scrollHeight - event.target.scrollTop
-          === event.target.offsetHeight
-        && event.target.scrollTop !== 0
-      ) {
+      if (event.target.scrollHeight - event.target.scrollTop === event.target.offsetHeight && event.target.scrollTop !== 0) {
         this.dataLoading = true;
         const query = new FormData();
         query.append('searchdata', JSON.stringify(this.obj));
         const res = await this.service.common.QueryList(query);
         const data = res.data;
         if (data.code === 0) {
-          const arr = data.datas.row.map((obj) => {
+          const arr = data.datas.row.map(obj => {
             const listData = {};
-            Object.keys(obj).forEach((label) => {
+            Object.keys(obj).forEach(label => {
               listData[label] = obj[label].val;
             });
             return listData;
@@ -290,39 +272,29 @@ export default {
       formData.append('table', 'CP_C_HRUSERS');
       formData.append('getcmd', 'y');
       console.log(formData);
-      const { data: { code, datas, tabcmd } } = await this.service.systemConfig.getTableQuery(formData);
+      const {
+        data: { code, datas }
+      } = await this.service.systemConfig.getTableQuery(formData);
       if (code === 0) {
         datas.dataarry.forEach((obj, index) => {
           if (index > 1) return;
           this.middleList.header.push(obj);
         });
       }
-      // axios({
-      //   url: "/p/cs/getTableQuery",
-      //   method: "post",
-      //   data:params,
-      // }).then((res) => {
-      //   let data = res.data;
-      //   if (data.code === 0) {
-      //     data.datas["dataarry"].forEach((obj, index) => {
-      //       if (index > 1) return;
-      //       this.middleList.header.push(obj);
-      //     });
-      //   }
-      // });
     }, // 获取用户头部数据
     getUserBodyData() {
       this.dataLoading = true;
       const query = new FormData();
       query.append('searchdata', JSON.stringify(this.obj));
-      return this.service.common.QueryList(query).then((res) => {
+      return this.service.common.QueryList(query).then(res => {
         const data = res.data;
         if (data.code === 0) {
           this.$refs.middleware_table.scrollTop = 0; // 初始scrollTop
-          this.middleList.body = data.datas.row.map((obj) => {
+          this.middleList.body = data.datas.row.map(obj => {
             const listData = {};
-            Object.keys(obj).map((label) => {
+            Object.keys(obj).map(label => {
               listData[label] = obj[label].val;
+              return true;
             });
             return listData;
           });
@@ -335,7 +307,9 @@ export default {
       const self = this;
       const num = 0;
       const sendObj = {}; // 存储传给table的对象
-      const { data: { data, code } } = await this.service.systemConfig.userstreeload();
+      const {
+        data: { data, code }
+      } = await this.service.systemConfig.userstreeload();
       console.log(data, code);
       if (code === 0) {
         // 储存原始数据以便后续模糊查询使用
@@ -345,38 +319,19 @@ export default {
       } else {
         this.$message.warning(message);
       }
-      // this.$ajax.dataAjax("/p/cs/userstreeload", {}, function (res) {
-      //   res = JSON.parse(JSON.stringify(res));
-      //   if (res.code === 0) {
-      //     // 储存原始数据以便后续模糊查询使用
-      //     self.ztreeDataSource = JSON.parse(JSON.stringify(res.data));
-      //     //储存渲染树的数据
-      //     self.treeData = res.data;
-      //   }
-      //   if (res.code == -1) {
-      //     self.errorMessage({
-      //       action: "confirm",
-      //       title: "警告",
-      //       type: "error",
-      //       list: [],
-      //       isAction: true,
-      //       desc: res.message,
-      //     });
-      //   }
-      // });
     }, // 表格返回时的状态
     async getItemData(val) {
       this.obj = {
         table: 'CP_C_HRUSERS',
         column_include_uicontroller: true,
         fixedcolumns: {
-          NAME: this.middleSearch,
+          NAME: this.middleSearch
         },
         multiple: [],
         startindex: 0,
         range: 100,
         reffixedcolumns: {},
-        orderby: [{ column: 'CP_C_HRUSERS.ID', asc: true }],
+        orderby: [{ column: 'CP_C_HRUSERS.ID', asc: true }]
       };
       this.saveObj = val;
       let valID = val.ID.split('.')[1];
@@ -388,20 +343,20 @@ export default {
         }
         if (val.TYPE === 'CP_C_HRORG_ID') {
           // 接口
-          const formData = new FormData(); 
+          const formData = new FormData();
           formData.append('CP_C_HRORG_ID', 'valID');
           const {
             data: {
               message, code, CP_C_HRORG_ID, CP_C_STORE_ID 
-            } 
+            }
           } = await this.service.systemConfig.usertreequery(formData);
           if (code === 0) {
             let HRORG = 'in ('; // 储存键名为CP_C_HRORG_ID对象的ID
             let STORE = 'in ('; // 储存键名为CP_C_STORE_ID对象的ID
-            CP_C_HRORG_ID.forEach((item) => {
+            CP_C_HRORG_ID.forEach(item => {
               HRORG += `${item.ID},`; // in 1,2,3,5,6,87,8,6
             });
-            CP_C_STORE_ID.forEach((item) => {
+            CP_C_STORE_ID.forEach(item => {
               STORE += `${item.ID},`;
             });
             if (CP_C_HRORG_ID.length > 0) {
@@ -413,43 +368,6 @@ export default {
           } else {
             this.$message.error(message);
           }
-          // await axios({
-          //   url: "/p/cs/usertreequery",
-          //   method: "post",
-          //   data: {
-          //     CP_C_HRORG_ID: valID,
-          //   },
-          // }).then((res) => {
-          //   let data = res.data;
-          //   if (data.code === 0) {
-          //     let HRORG = "in ("; //储存键名为CP_C_HRORG_ID对象的ID
-          //     let STORE = "in ("; //储存键名为CP_C_STORE_ID对象的ID
-          //     data.CP_C_HRORG_ID.forEach((item) => {
-          //       HRORG += item.ID + ","; // in 1,2,3,5,6,87,8,6
-          //     });
-          //     data.CP_C_STORE_ID.forEach((item) => {
-          //       STORE += item.ID + ",";
-          //     });
-          //     if (data.CP_C_HRORG_ID.length > 0) {
-          //       this.obj["reffixedcolumns"].CP_C_HRORG_ID =
-          //         HRORG.substring(0, HRORG.length - 1) + ")";
-          //     }
-          //     if (data.CP_C_STORE_ID.length > 0) {
-          //       this.obj["reffixedcolumns"].CP_C_STORE_ID =
-          //         STORE.substring(0, STORE.length - 1) + ")";
-          //     }
-          //   }
-          //   if (data.code == -1) {
-          //     self.errorMessage({
-          //       action: "confirm",
-          //       title: "警告",
-          //       type: "error",
-          //       list: [],
-          //       isAction: true,
-          //       desc: res.message,
-          //     });
-          //   }
-          // });
         }
       }
       this.getUserBodyData().then(() => {
@@ -459,7 +377,7 @@ export default {
     handleMiddleIconClick() {
       /* if(this.middleSearch.trim().length === 0) return */
       this.obj.fixedcolumns = {
-        NAME: this.middleSearch,
+        NAME: this.middleSearch
       };
       this.getUserBodyData().then(() => {
         this.getPermission(this.currentItem); // 获取右边的信息
@@ -472,7 +390,7 @@ export default {
     // 以下都是左边树的操作
     getCstoreorgload() {
       const self = this;
-      this.$ajax.dataAjax('/p/cs/userstreeload', {}, (res) => {
+      this.$ajax.dataAjax('/p/cs/userstreeload', {}, res => {
         res = JSON.parse(JSON.stringify(res));
         if (res.code === 0) {
           // 储存原始数据以便后续模糊查询使用
@@ -488,13 +406,12 @@ export default {
             type: 'error',
             list: [],
             isAction: true,
-            desc: res.message,
+            desc: res.message
           });
         }
       });
     }, // 获取初始接口传过来的值
     searchNode(func, b) {
-      const self = this;
       let k = 0;
       if (!this.search.trim()) return;
       if (typeof func !== 'function') {
@@ -504,16 +421,14 @@ export default {
         }
         func = item => item.MIXNAME_UPPER.indexOf(upper) !== -1;
       }
-      const start = Date.now();
+
       if (b === undefined) {
-        this.treeNodes.forEach((item) => {
+        this.treeNodes.forEach(item => {
           item.clickNode = false;
           item.isFolder = false;
           item.isExpand = false;
         });
       }
-      const end = Date.now();
-      const begin = new Date().getTime();
       for (let i = 0; i < this.treeNodes.length; i++) {
         const treeNode = this.treeNodes[i];
         if (func(treeNode)) {
@@ -530,14 +445,13 @@ export default {
           i = this.treeNodes.length;
         }
       }
-      const end1 = new Date().getTime();
     }, // 时时改变list的值
     handleIconClick() {
       this.searchNode();
     }, // 搜索框匹配
     openFather(_item) {
       const self = this;
-      this.treeData.forEach((item) => {
+      this.treeData.forEach(item => {
         if (_item.CP_C_ORGUP_ID !== item.ID) {
           return self.treeData;
         }
@@ -546,8 +460,9 @@ export default {
         item.isFolder = true;
         item.isExpand = true;
         self.openFather(item);
+        return true;
       });
-      this.treeData.forEach((item) => {
+      this.treeData.forEach(item => {
         if (_item.CP_C_STORE_ID !== item.ID) {
           return self.treeData;
         }
@@ -555,6 +470,7 @@ export default {
         item.isFolder = true;
         item.isExpand = true;
         self.openFather(item);
+        return true;
       });
       //    console.log("why")
     }, // 递归把父节点打开
@@ -567,10 +483,8 @@ export default {
     },
     getTreeChildren(pnode) {
       const self = this;
-      pnode.children = this.treeData.filter(
-        item => item.CP_C_ORGUP_ID === pnode.ID
-      );
-      pnode.children.forEach((item) => {
+      pnode.children = this.treeData.filter(item => item.CP_C_ORGUP_ID === pnode.ID);
+      pnode.children.forEach(item => {
         item.lastChild = false;
         pnode.children[pnode.children.length - 1].lastChild = true;
         self.getTreeChildren(item);
@@ -586,7 +500,6 @@ export default {
       this.treeNodes = result.nodes;
     }, // 加载树的方法
     convertTree(datas) {
-      const begin = new Date().getTime();
       const map = {};
       const roots = [];
       let nodes = [];
@@ -601,7 +514,7 @@ export default {
             isExpand: false,
             isFolder: false,
             clickNode: false,
-            lastChild: false,
+            lastChild: false
           };
           const children = [];
           n.getChildren = function () {
@@ -640,24 +553,26 @@ export default {
           node.getChildren()[node.getChildren().length - 1].lastChild = true;
         }
       }
-      const end = new Date().getTime();
       // return (window.$test = { roots, map, nodes, vm: this })  //2020-09-27 为何要将参数挂载在windows对象？观察一段时间
       return {
-        roots, map, nodes, vm: this 
+        roots,
+        map,
+        nodes,
+        vm: this
       };
-    }, // 转化树节点数据
+    } // 转化树节点数据
   },
   watch: {
     'middleList.header': {
-      handler(val, oldval) {
+      handler() {
         const _self = this;
         this.$nextTick(() => {
           _self.sheetWidth = $('.table_first').width() + 17;
         });
-      },
+      }
     },
     activeName() {
       this.getPermission(this.currentItem); // 获取当前用户当前tab的数据
-    }, // tab切换
-  },
+    } // tab切换
+  }
 };

@@ -62,7 +62,7 @@
   </div>
 </template>
 <script>
-  import quanXian from '@/js/pages/SystemConfig/quanXian/quanXian.js';
+  import quanXian from '@/js/pages/SystemConfig/quanXian/quanXian';
 
   export default quanXian;
 </script>

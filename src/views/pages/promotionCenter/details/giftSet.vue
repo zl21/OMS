@@ -4,7 +4,7 @@
     <div class="title">
       <i class="iconfontPromotion iconzengpin" />
       <!-- <span>赠品信息设置</span> -->
-      <span>{{ vmI18n.t("other.gift_set") }}</span>
+      <span>{{ vmI18n.t('other.gift_set') }}</span>
     </div>
     <!--阶梯类型-->
     <div
@@ -12,7 +12,7 @@
       class="row"
     >
       <div class="form_label">
-        {{ vmI18n.t("form_label.ladderType") }}：
+        {{ vmI18n.t('form_label.ladderType') }}：
       </div>
       <div class="form_content">
         <SingleBox
@@ -25,7 +25,7 @@
     <!--赠品翻倍-->
     <div class="row">
       <div class="form_label">
-        <i class="red">*</i>{{ vmI18n.t("form_label.double_gifts") }}：
+        <i class="red">*</i>{{ vmI18n.t('form_label.double_gifts') }}：
       </div>
       <div class="form_content">
         <SingleBox
@@ -34,7 +34,7 @@
           @changeSingle="checkGiftDoublesChange"
         />
         <div class="form_item">
-          ,{{ vmI18n.t("form_label.max_doubling_times") }}
+          ,{{ vmI18n.t('form_label.max_doubling_times') }}
         </div>
         <div class="form_el_input form_item limitinput">
           <input
@@ -48,7 +48,7 @@
     <!--赠送方式-->
     <div class="row">
       <div class="form_label">
-        <i class="red">*</i>{{ vmI18n.t("form_label.giving_ways") }}：
+        <i class="red">*</i>{{ vmI18n.t('form_label.giving_ways') }}：
       </div>
       <div class="form_content">
         <SingleBox
@@ -65,7 +65,7 @@
     >
       <!-- 赠品列表： -->
       <div class="form_label">
-        {{ vmI18n.t("other.gift_list") }}：
+        {{ vmI18n.t('other.gift_list') }}：
       </div>
       <div class="form_content">
         <detailtabs
@@ -87,20 +87,19 @@
             slot="MatchOperate"
             class="form_button"
           >
-            <button class="white" v-show="giftData.give_num_share==1" @click="setCommodity">设置商品池</button>
             <button
               class="white"
               @click="addSteps"
             >
               <!-- 添加阶梯 -->
-              {{ vmI18n.t("btn.add_ladder") }}
+              { vmI18n.t("btn.add_ladder") }}
             </button>
             <button
               class="white"
               @click="removeSteps"
             >
               <!-- 删除阶梯 -->
-              {{ vmI18n.t("btn.delete_ladder") }}
+              {{ vmI18n.t('btn.delete_ladder') }}
             </button>
           </div>
         </detailtabs>
@@ -113,7 +112,7 @@
     >
       <div class="form_label">
         <!-- 赠品列表 -->
-        <i class="red">*</i>{{ vmI18n.t("other.gift_list") }}：
+        <i class="red">*</i>{{ vmI18n.t('other.gift_list') }}：
       </div>
       <div class="form_content">
         <detailtable
@@ -140,13 +139,13 @@
               class="white"
               @click="addRowData"
             >
-              {{ vmI18n.t("btn.add") }}
+              {{ vmI18n.t('btn.add') }}
             </button>
             <button
               class="white"
               @click="importData"
             >
-              {{ vmI18n.t("btn.import") }}
+              {{ vmI18n.t('btn.import') }}
             </button>
           </div>
         </detailtable>
@@ -170,24 +169,14 @@
         />
       </Modal>
     </div>
-    
-    <SetCommodity 
-      :dialog_visible="dialog_visible"
-      :giftData="giftData"
-      :basicData="basicData"
-      :objid="objid"
-      :loadDis="loadDis"
-      @confirm="confirm"
-      @closeDialog="closeDialog"
-      ></SetCommodity>
   </div>
 </template>
 <script>
-  import gift_set from '@/js/pages/promotionCenter/details/giftSet.js';
+  import giftSet from '@/js/pages/promotionCenter/details/giftSet';
 
-  export default gift_set;
+  export default giftSet;
 </script>
 <style lang="less">
-@import "./../less/common.less";
-@import "~@/css/pages/promotionCenter/details/giftSet.less";
+@import './../less/common.less';
+@import '~@/css/pages/promotionCenter/details/giftSet.less';
 </style>
