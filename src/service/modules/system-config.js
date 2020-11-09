@@ -23,8 +23,8 @@ export default {
   /**
    * 角色
    */
-  // 权限查询接口
-  selectPermissionColumn: params => network.post('/p/cs/permission/v1/selectPermissionColumn', params),
+  // 权限查询接口'/p/cs/permission/v1/selectPermissionColumn','/p/cs/cgroupcolumnquery'
+  selectPermissionColumn: params  => network.post('/p/cs/permission/v1/selectDataPermission',params),
   /**
    * 用户档案
    * */
