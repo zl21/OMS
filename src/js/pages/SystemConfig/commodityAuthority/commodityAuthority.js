@@ -1,4 +1,3 @@
-import { post, fetch } from 'framework/__utils__/request';
 import Buttonmap from 'framework/assets/js/buttonmap.js';
 import ChineseDictionary from 'framework/assets/js/ChineseDictionary.js';
 import FkDialog from 'framework/components/tablelist/fkdialog';
@@ -30,7 +29,7 @@ export default {
           {
             text: '刷新', // 按钮文本
             btnclick: () => {
-              this.refresh;
+              this.refresh();
             } // 按钮点击事件
           }
         ]
@@ -79,7 +78,7 @@ export default {
   },
   watch: {
     userAuthorityList: {
-      handler(val, oldVal) {
+      handler(val) {
         let flag;
         if (val.length <= 0) flag = false;
         else flag = val.every(item => item.checked);
@@ -119,11 +118,7 @@ export default {
       const target = $this.attr('data-target');
       if (undefined != target) {
         const percent = $this.scrollTop() / ($this.find('.table').height() - $this.height());
-        if (
-          percent > 0.5
-          && this.axiosLoad.userList
-          && this.loadNumber[target] < this.totalNumber[target]
-        ) this.loadPage(target);
+        if (percent > 0.5 && this.axiosLoad.userList && this.loadNumber[target] < this.totalNumber[target]) this.loadPage(target);
       }
     });
   },
@@ -134,10 +129,7 @@ export default {
     async axiosUserName() {
       const _self = this;
       const param = new URLSearchParams();
-      param.append(
-        'param',
-        JSON.stringify({ GROUPS_ID: Number(_self.userId) })
-      );
+      param.append('param', JSON.stringify({ GROUPS_ID: Number(_self.userId) }));
       const res = await this.service.common.groupQueryName(param);
       if (res.data.data) _self.userQuery = res.data.data.name;
       _self.axiosGroup();
@@ -156,48 +148,48 @@ export default {
       // });
     },
     // 发送请求,用户模糊搜索---弃用
-    async axiosUser(query, flag) {
-      $('.table-scroll-body').scrollTop(0);
-      const _self = this;
-      const param = new URLSearchParams();
-      _self.searchQuery.userList = query;
-      param.append(
-        'QUERY',
-        JSON.stringify({
-          QUERY: _self.searchQuery.userList,
-          PAGENUM: 1,
-          PAGESIZE: _self.loadSize
-        })
-      );
-      try {
-        const res = await this.service.common.chrusersquery(param);
-        if (res.data.code === 0) {
-          const result = res.data.data;
-          _self.loadFlag = false;
-          _self.userList = result.list;
+    // async axiosUser(query, flag) {
+    //   $('.table-scroll-body').scrollTop(0);
+    //   const _self = this;
+    //   const param = new URLSearchParams();
+    //   _self.searchQuery.userList = query;
+    //   param.append(
+    //     'QUERY',
+    //     JSON.stringify({
+    //       QUERY: _self.searchQuery.userList,
+    //       PAGENUM: 1,
+    //       PAGESIZE: _self.loadSize
+    //     })
+    //   );
+    //   try {
+    //     const res = await this.service.common.chrusersquery(param);
+    //     if (res.data.code === 0) {
+    //       const result = res.data.data;
+    //       _self.loadFlag = false;
+    //       _self.userList = result.list;
 
-          _self.loadNumber.userList = result.endRow;
-          _self.totalNumber.userList = result.total;
+    //       _self.loadNumber.userList = result.endRow;
+    //       _self.totalNumber.userList = result.total;
 
-          if (_self.userList.length > 0) {
-            _self.selectOne(_self.userList[0]);
-            //              _self.$set(_self.userList[0], "checked", true);
-            //              _self.userId = _self.userList[0].ID;
-            //              _self.axiosUserAuthority();
-          } else {
-            _self.userId = 0;
-            _self.userAuthorityList = [];
-            // 判断是否是刷新操作,添加提示信息
-            if (_self.actionFlag.freshFlag) {
-              _self.$message({ message: '刷新成功', type: 'success' });
-              _self.actionFlag.freshFlag = false;
-            }
-          }
-        } else if (_self.actionFlag.freshFlag) _self.actionFlag.freshFlag = false;
-      } catch (e) {
-        if (_self.actionFlag.freshFlag) _self.actionFlag.freshFlag = false;
-      }
-    },
+    //       if (_self.userList.length > 0) {
+    //         _self.selectOne(_self.userList[0]);
+    //         //              _self.$set(_self.userList[0], "checked", true);
+    //         //              _self.userId = _self.userList[0].ID;
+    //         //              _self.axiosUserAuthority();
+    //       } else {
+    //         _self.userId = 0;
+    //         _self.userAuthorityList = [];
+    //         // 判断是否是刷新操作,添加提示信息
+    //         if (_self.actionFlag.freshFlag) {
+    //           _self.$message({ message: '刷新成功', type: 'success' });
+    //           _self.actionFlag.freshFlag = false;
+    //         }
+    //       }
+    //     } else if (_self.actionFlag.freshFlag) _self.actionFlag.freshFlag = false;
+    //   } catch (e) {
+    //     if (_self.actionFlag.freshFlag) _self.actionFlag.freshFlag = false;
+    //   }
+    // },
     // 用户组模糊搜索
     axiosGroup() {
       this.userSearchFlag = true;
@@ -275,8 +267,7 @@ export default {
       }
       if (param.data.CP_C_HRUSERS_PRO.length > 0) {
         const res = await this.service.common.objectDelete(param);
-        if (res.data.code < 0) {
-        } else {
+        if (res.data.code >= 0) {
           _self.$message({ message: res.data.message, type: 'success' });
           _self.axiosUserAuthority();
         }
@@ -289,7 +280,6 @@ export default {
       if (queryString.length <= 0) {
         cb([]);
       } else {
-        const _self = this;
         const param = new URLSearchParams();
         param.append('query', `{'query':'${queryString}'}`);
         const res = await this.service.common.cprolikequery(param);
@@ -357,8 +347,7 @@ export default {
       try {
         const res = await _self.service.common.objectSave(param);
         _self.page.disabled = false;
-        if (res.data.code !== 0) {
-        } else {
+        if (res.data.code === 0) {
           _self.$message({ message: res.data.message, type: 'success' });
         }
         _self.axiosUserAuthority();
@@ -376,14 +365,8 @@ export default {
     matchWords(value) {
       if (value == null || value == '') return '';
       if (this.userQuery === '') return value;
-      const searchQuery = this.userQuery.replace(
-        /[\@\#\$\%\^\&\*\{\}\:\"\L\<\>\?\+\.\(\)\[\]\\]/g,
-        q => `\\${q}`
-      );
-      return value.replace(
-        new RegExp(searchQuery, 'gi'),
-        word => `<span class="color-red">${word}</span>`
-      );
+      const searchQuery = this.userQuery.replace(/[\@\#\$\%\^\&\*\{\}\:\"\L\<\>\?\+\.\(\)\[\]\\]/g, q => `\\${q}`);
+      return value.replace(new RegExp(searchQuery, 'gi'), word => `<span class="color-red">${word}</span>`);
     },
     // 刷新操作
     refresh() {

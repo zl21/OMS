@@ -15,7 +15,7 @@ export default {
     FilterTree,
     SelectTree,
     SearchForm,
-    copyModal,
+    copyModal
   },
   mixins: [qxBtnData],
   data() {
@@ -38,44 +38,28 @@ export default {
         rowAll: 3,
         searchFoldnum: 2,
         defaultColumn: 3,
-        defaultconfig: [],
+        defaultconfig: []
       },
 
       copyModal: false, // 弹框
       buttonConfig: {
-        buttons: [],
+        buttons: []
       },
 
       searchBtnConfig: {
         flex: 'right',
-        buttons: [
-          {
-            text: vmI18n.t('btn.search'),
-            icon: '',
-            btnClick: () => {
-              const self = this;
-              const obj = {};
-              console.log(self.searchFormConfig.defaultconfig);
-              self.searchFormConfig.defaultconfig.map((item) => {
-                if (item.item.value) {
-                  obj[item.item.field] = item.item.value;
-                }
-              });
-              self.getTableData(obj);
-            },
-          },
-        ],
+        buttons: []
       },
 
       filterTreeConfig: {
         treeAttribute: {
-          data: [],
+          data: []
         },
         treeEvent: {
-          'on-select-change': this.filterTreeChange,
+          'on-select-change': this.filterTreeChange
         },
         clearable: true,
-        placeholder: vmI18n.t('pHolder.enter'),
+        placeholder: ''
       },
 
       oldTableArr: [],
@@ -93,25 +77,9 @@ export default {
         parentIsRead: 0,
         parentIsWrite: 0,
         isParentReadValue: false,
-        isParentWriteValue: false,
+        isParentWriteValue: false
       },
-      sensitiveColumns: [
-        {
-          title: vmI18n.t('table_label.sensitiveColumn'),
-          // title: "敏感列",
-          key: 'CP_C_COLUMN_ENAME',
-        },
-        {
-          title: vmI18n.t('table_label.view'),
-          // title: "查看",
-          key: 'IS_READ',
-        },
-        {
-          title: vmI18n.t('table_label.edit'),
-          // title: "编辑",
-          key: 'IS_WRITE',
-        },
-      ],
+      sensitiveColumns: []
     };
   },
 
@@ -128,6 +96,39 @@ export default {
   },
   mounted() {
     const { customizedModuleName } = this.$route.params;
+    this.sensitiveColumns = [
+      {
+        title: this.vmI18n.t('table_label.sensitiveColumn'),
+        // title: "敏感列",
+        key: 'CP_C_COLUMN_ENAME'
+      },
+      {
+        title: this.vmI18n.t('table_label.view'),
+        // title: "查看",
+        key: 'IS_READ'
+      },
+      {
+        title: this.vmI18n.t('table_label.edit'),
+        // title: "编辑",
+        key: 'IS_WRITE'
+      }
+    ];
+    this.searchBtnConfig.buttons = {
+      text: this.buttonsvmI18n.t('btn.search'),
+      icon: '',
+      btnClick: () => {
+        const self = this;
+        const obj = {};
+        console.log(self.searchFormConfig.defaultconfig);
+        self.searchFormConfig.defaultconfig.forEach(item => {
+          if (item.item.value) {
+            obj[item.item.field] = item.item.value;
+          }
+        });
+        self.getTableData(obj);
+      }
+    };
+    this.filterTreeConfig.placeholder = this.vmI18n.t('pHolder.enter');
   },
   methods: {
     saveOk() {
@@ -169,21 +170,20 @@ export default {
       if (res.data.code === 0) {
         this.groupId = res.data.data[0].ID;
         this.newGroupId = res.data.data[0].ID;
-        this.filterTreeConfig.treeAttribute.data = this.restructureMenuTreeData(
-          res.data.data,
-          true
-        );
+        this.filterTreeConfig.treeAttribute.data = this.restructureMenuTreeData(res.data.data, true);
 
         this.getTableData();
       }
     },
     // 获取搜索框
     async getSearchForm() {
-      // 
-      const { data: { code, datas } } = await this.service.systemConfig.selectPermissionColumn(fromdata);
+      //
+      const {
+        data: { code, datas }
+      } = await this.service.systemConfig.selectPermissionColumn(fromdata);
       if (code === 0) {
         const dataArray = form.refactoringData(datas.dataarry);
-        dataArray.map((item) => {
+        dataArray.forEach(item => {
           if (item.item.value) {
             item.item.props.value = item.item.value;
           }
@@ -195,23 +195,25 @@ export default {
     // 获取表格
     async getTableData(searchCondition = {}, refresh = false) {
       this.groupId = this.newGroupId;
-      let url; let 
-        params;
+      let url;
+      let params;
       if (this.permissionType === 'sensitive') {
         url = '/p/cs/cgroupcolumnquery';
         params = {
           GROUPS_ID: this.groupId,
-          QUERY: '',
+          QUERY: ''
         };
       } else {
         url = '/p/cs/permission/v1/selectDataPermission';
         params = {
           permissionType: this.permissionType,
-          groupId: this.groupId, 
-          searchCondition,
+          groupId: this.groupId,
+          searchCondition
         };
       }
-      const { data: { data, code } } = await this.service.systemConfig.selectPermissionColumn(url, urlSearchParams(params));
+      const {
+        data: { data, code }
+      } = await this.service.systemConfig.selectPermissionColumn(url, urlSearchParams(params));
       if (code === 0) {
         this.tableArr.isReadValueTotal = 0;
         this.tableArr.isWriteValueTotal = 0;
@@ -225,7 +227,7 @@ export default {
 
         if (this.permissionType === 'sensitive') {
           const dt = data;
-          dt.map((item) => {
+          dt.map(item => {
             dt.isChild = !!item.PARENT_GROUPS_ID;
             if (item.PARENT_GROUPS_ID) {
               if (item.PARENT_ISREAD == 'Y') {
@@ -243,7 +245,7 @@ export default {
           this.tableArr.isChild = dt.isChild;
         } else {
           const dt = data;
-          dt.rows.map((item) => {
+          dt.rows.forEach(item => {
             dt.isChild = !!item.PARENT_GROUPS_ID;
             if (item.PARENT_GROUPS_ID) {
               if (item.PARENT_IS_READ == 'Y') {
@@ -259,7 +261,7 @@ export default {
           this.tableArr.isChild = dt.isChild;
         }
 
-        this.tableArr.rows.forEach((item) => {
+        this.tableArr.rows.forEach(item => {
           if (item.IS_READ === 'Y' || item.ISREAD === 'Y') {
             item.IS_READ = true;
             this.tableArr.isReadValueTotal++;
@@ -292,7 +294,7 @@ export default {
 
         this.oldTableArr = JSON.parse(JSON.stringify(this.tableArr.rows));
         if (refresh) {
-          this.$Message.success(vmI18n.t('common.refresh_succee'));// 刷新成功
+          this.$Message.success(this.vmI18n.t('common.refresh_succee')); // 刷新成功
         }
       }
     },
@@ -302,41 +304,42 @@ export default {
       const param = new URLSearchParams();
       console.log(params);
       param.append('param', JSON.stringify(params));
-      const { data: { data, code } } = await this.service.systemConfig.copyShopPermission(param);
+      const self = this;
+      const {
+        data: { data, code }
+      } = await this.service.systemConfig.copyShopPermission(param);
       if (code === 0) {
         this.$Modal.success({
-          // title: "提示",
-          title: vmI18n.t('modalTitle.tips'),
+          title: self.vmI18n.t('modalTitle.tips'),
           content: message,
           cancelType: true,
           titleAlign: 'left',
           mask: true,
           draggable: true,
-          keyDown: (event) => {
+          keyDown: event => {
             if (event.keyCode == 27 || event.keyCode == 13) {
               self.$Modal.remove();
             }
-          },
+          }
         });
       } else {
         this.$Modal.error({
-          // title: "提示",
-          title: vmI18n.t('modalTitle.tips'),
-          content: message,
+          title: self.vmI18n.t('modalTitle.tips'),
+          content: self.message,
           cancelType: true,
           titleAlign: 'left',
           mask: true,
           draggable: true,
-          keyDown: (event) => {
+          keyDown: event => {
             if (event.keyCode == 27 || event.keyCode == 13) {
               self.$Modal.remove();
             }
-          },
+          }
         });
       }
     },
     cancelBtn() {
       this.copyModal = false;
-    },
-  },
+    }
+  }
 };
