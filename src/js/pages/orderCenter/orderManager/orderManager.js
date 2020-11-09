@@ -1298,26 +1298,11 @@ export default {
                 //   .post('/api/cs/oc/oms/v1/checkAddOrderInvoicing', fromdata)
                   .then((res) => {
                     if (res.data.code === 0) {
-                      // self.$store.commit('customize/('TabOpen', {
-                      //   id: -1,
-                      //   type: 'action',
-                      //   name: 'invoiceNoticetAdd',
-                      //   label: '开票通知编辑',
-                      //   query: {
-                      //     highSearchData: JSON.stringify({
-                      //       type: 'Input',
-                      //       queryName: 'ID',
-                      //       value: res.data.data.join(),
-                      //     }),
-                      //     isOrder: 'ture',
-                      //     id: -1,
-                      //   },
-                      // })
-                      R3.store.commit('global/tabOpen', {
-                        type: 'C',
-                        label: self.vmI18n.t('panel_label.billingNoticeEdit'),
-                        customizedModuleName: 'INVOICENOTICETADD',
-                        customizedModuleId: '-1',
+                      self.$store.commit('customize/TabOpen', {
+                        id: -1,
+                        type: 'action',
+                        name: 'invoiceNoticetAdd',
+                        label: '开票通知编辑',
                         query: {
                           highSearchData: JSON.stringify({
                             type: 'Input',
@@ -1328,6 +1313,21 @@ export default {
                           id: -1,
                         },
                       });
+                      // R3.store.commit('global/tabOpen', {
+                      //   type: 'C',
+                      //   label: self.vmI18n.t('panel_label.billingNoticeEdit'),
+                      //   customizedModuleName: 'INVOICENOTICETADD',
+                      //   customizedModuleId: '-1',
+                      //   query: {
+                      //     highSearchData: JSON.stringify({
+                      //       type: 'Input',
+                      //       queryName: 'ID',
+                      //       value: res.data.data.join(),
+                      //     }),
+                      //     isOrder: 'ture',
+                      //     id: -1,
+                      //   },
+                      // });
                     } else {
                       self.$Message.warning(res.data.message);
                     }
@@ -2647,19 +2647,19 @@ export default {
         } else {
           query.copyOrder = true;
         }
-        // self.$store.commit('customize/('TabHref', {
-        //   id: -1,
-        //   type: 'action',
-        //   name: 'orderManageAdd',
-        //   label: '零售发货单新增',
-        //   query: query,
-        // })
-        R3.store.commit('global/tabOpen', {
-          type: 'C',
-          label: vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
-          customizedModuleName: 'ORDERMANAGEADD',
-          customizedModuleId: '-1',
+        self.$store.commit('customize/TabHref', {
+          id: -1,
+          type: 'action',
+          name: 'orderManageAdd',
+          label: '零售发货单新增',
+          query,
         });
+        // R3.store.commit('global/tabOpen', {
+        //   type: 'C',
+        //   label: vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
+        //   customizedModuleName: 'ORDERMANAGEADD',
+        //   customizedModuleId: '-1',
+        // });
       } else {
         self.$Message.warning({
           content: this.vmI18n.t('modalTips.a5'), // 请选择一条需要复制的订单！
