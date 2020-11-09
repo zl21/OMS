@@ -174,6 +174,7 @@ export default {
     },
     // 导入
     importDialog() {
+      debugger;
       if (this.handleBefore(this.files)) return;
       if (this.componentData.tableName === 'OC_B_ORDER') {
         // 零售发货单
@@ -357,7 +358,6 @@ export default {
       axios({
         url,
         method: 'post',
-        cancelToken: true,
         headers: { 'Content-Type': 'multipart/form-data' },
         data: param,
       })
