@@ -12,7 +12,7 @@ export default {
       isCombination: 2, // 1:组合商品 2:组合商品下挂商品
       tableItemUrl: '/api/cs/oc/oms/v1/getOrderDetailList',
       tableConfig: {
-        jordanBtnConfig: {
+        businessButtonConfig: {
           typeAll: 'error', // 按钮统一风格样式
           btnsite: 'left', // 按钮位置 (right , center , left)
           buttons: [
@@ -118,7 +118,7 @@ export default {
       deep: true
     },
     isQh() {
-      this.tableConfig.jordanBtnConfig.buttons.map((item) => {
+      this.tableConfig.businessButtonConfig.buttons.forEach((item) => {
         item.isShow = !this.isQh;
       });
     }
@@ -876,7 +876,7 @@ export default {
       const c = [];
       const resData = res.data.data || [];
       resData.forEach((element, index) => {
-        this.tableConfig.jordanBtnConfig.buttons.forEach((btn, btnIndex) => {
+        this.tableConfig.businessButtonConfig.buttons.forEach((btn, btnIndex) => {
           if (element.webdesc == btn.text) {
             c.push({
               btnclick: btn.btnclick,
@@ -887,7 +887,7 @@ export default {
           }
         });
       });
-      this.tableConfig.jordanBtnConfig.buttons = c;
+      this.tableConfig.businessButtonConfig.buttons = c;
     });
     this.getColumns();
 
