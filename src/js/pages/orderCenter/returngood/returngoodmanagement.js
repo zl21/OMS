@@ -51,10 +51,10 @@ export default {
         mask: true, // 是否显示遮罩层
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
-        name: 'jordanMatrixBox', // 组件名称
-        url: 'matrixBox/jordanMatrixBox',
+        name: 'matrixBox', // 组件名称
+        url: 'modal/orderCenter/matrixBox',
         keepAlive: true,
-        excludeString: 'jordanMatrixBox', // 将name传进去，确认不缓存
+        excludeString: 'matrixBox', // 将name传进去，确认不缓存
         componentData: {}
       }, // 退单编号查询
 
@@ -3120,7 +3120,7 @@ export default {
                     returnType: '2'
                   };
                   self.$children
-                    .find(item => item.name === 'jordanMatrixBox')
+                    .find(item => item.name === 'matrixBox')
                     .openConfirm();
                 },
                 dimSelect: (val) => {
@@ -3138,7 +3138,7 @@ export default {
                     returnType: '2'
                   };
                   self.$children
-                    .find(item => item.name === 'jordanMatrixBox')
+                    .find(item => item.name === 'matrixBox')
                     .openConfirm();
                   // document.getElementById("Num").focus();
                 }
@@ -4507,7 +4507,7 @@ export default {
         _this.jordanTableConfig2.jordanFormConfig.formValue.gbCode = '';
       }
       _this.$children
-        .find(item => item.name === 'jordanMatrixBox')
+        .find(item => item.name === 'matrixBox')
         .closeConfirm();
     },
     oneObjs(e) {
