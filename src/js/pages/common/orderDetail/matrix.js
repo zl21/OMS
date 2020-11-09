@@ -3,6 +3,7 @@ import axios from 'framework/__utils__/request';
 import port from './connector.js';
 
 export default {
+  name:'matrix',
   props: {
     encode: {
       type: String,
