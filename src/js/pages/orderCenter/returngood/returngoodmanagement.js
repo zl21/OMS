@@ -70,10 +70,10 @@ export default {
         mask: true, // 是否显示遮罩层
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
-        name: 'jordanBounced', // 组件名称
+        name: 'rturngoodModifyRemarks', // 组件名称
         url: 'returngood/rturngoodModifyRemarks',
         keepAlive: true,
-        excludeString: 'jordanBounced', // 将name传进去，确认不缓存
+        excludeString: 'rturngoodModifyRemarks', // 将name传进去，确认不缓存
         componentData: {}
       },
       order: {
@@ -1826,7 +1826,7 @@ export default {
         ids: this.$route.query.id,
         type: 1
       };
-      this.$children.find(item => item.name === 'jordanBounced').openConfirm();
+      this.$children.find(item => item.name === 'rturngoodModifyRemarks').openConfirm();
     },
     // 标记次品已调拨
     async defectiveGoods() {
@@ -3176,7 +3176,7 @@ export default {
               }
               // {
               //   style: "input", //输入框类型
-              //   label: "数量", //输入框前文字
+              //   label: "数量", //输��框前文字
               //   value: "number", //输入框的值
               //   id: "Enumber",
               //   width: "6", //所占的宽度 (宽度分为24份,数值代表所占份数的宽度)

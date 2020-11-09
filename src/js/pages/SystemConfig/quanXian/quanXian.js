@@ -223,20 +223,19 @@ export default {
       let url; let 
         params;
       if (this.permissionType === 'sensitive') {
-        url = '/p/cs/cgroupcolumnquery';
         params = {
           GROUPS_ID: this.groupId,
           QUERY: '',
         };
+        var { data: { data, code } } = await this.service.systemConfig.cgroupcolumnquery(urlSearchParams(params));
       } else {
-        url = '/p/cs/permission/v1/selectDataPermission';
         params = {
           permissionType: this.permissionType,
           groupId: this.groupId, 
           searchCondition,
         };
+        var { data: { data, code } } = await this.service.systemConfig.selectDataPermission(urlSearchParams(params));
       }
-      const { data: { data, code } } = await this.service.systemConfig.selectPermissionColumn(url, urlSearchParams(params));
       if (code === 0) {
         this.tableArr.isReadValueTotal = 0;
         this.tableArr.isWriteValueTotal = 0;
