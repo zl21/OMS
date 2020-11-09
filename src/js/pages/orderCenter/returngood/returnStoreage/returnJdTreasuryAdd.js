@@ -428,8 +428,8 @@ export default {
             }
           },
           {
-            key: 'RESERVE_VARCHAR01',
-            dataAcessKey: 'RESERVE_VARCHAR01',
+            key: 'GBCODE_ACTUAL',
+            dataAcessKey: 'GBCODE_ACTUAL',
             title: '实收国标码'
           },
           {
@@ -494,18 +494,18 @@ export default {
             title: '是否无原单条码'
           },
           {
-            key: 'RESERVE_BIGINT01',
-            dataAcessKey: 'RESERVE_BIGINT01',
+            key: ' IS_GEN_IN_ORDER',
+            dataAcessKey: ' IS_GEN_IN_ORDER',
             title: '是否生成入库单'
           },
           {
-            key: 'RESERVE_BIGINT02',
-            dataAcessKey: 'RESERVE_BIGINT02',
+            key: 'IS_GEN_WRO_ADJUST',
+            dataAcessKey: 'IS_GEN_WRO_ADJUST',
             title: '是否生成错发调整单'
           },
           {
-            key: 'RESERVE_BIGINT03',
-            dataAcessKey: 'RESERVE_BIGINT03',
+            key: 'IS_GEN_MINUS_ADJUST',
+            dataAcessKey: 'IS_GEN_MINUS_ADJUST',
             title: '是否生成冲无头件调整单'
           }
         ],
@@ -819,12 +819,12 @@ export default {
         // 是否生成调整单
         if (item.IS_GEN_ADJUST == '是') item.IS_GEN_ADJUST = 1;
         else if (item.IS_GEN_ADJUST == '否') item.IS_GEN_ADJUST = 0;
-        if (item.RESERVE_BIGINT01 == '是') item.RESERVE_BIGINT01 = 1;
-        else if (item.RESERVE_BIGINT01 == '否') item.RESERVE_BIGINT01 = 0;
-        if (item.RESERVE_BIGINT02 == '是') item.RESERVE_BIGINT02 = 1;
-        else if (item.RESERVE_BIGINT02 == '否') item.RESERVE_BIGINT02 = 0;
-        if (item.RESERVE_BIGINT03 == '是') item.RESERVE_BIGINT03 = 1;
-        else if (item.RESERVE_BIGINT03 == '否') item.RESERVE_BIGINT03 = 0;
+        if (item. IS_GEN_IN_ORDER == '是') item. IS_GEN_IN_ORDER = 1;
+        else if (item. IS_GEN_IN_ORDER == '否') item. IS_GEN_IN_ORDER = 0;
+        if (item.IS_GEN_WRO_ADJUST == '是') item.IS_GEN_WRO_ADJUST = 1;
+        else if (item.IS_GEN_WRO_ADJUST == '否') item.IS_GEN_WRO_ADJUST = 0;
+        if (item.IS_GEN_MINUS_ADJUST == '是') item.IS_GEN_MINUS_ADJUST = 1;
+        else if (item.IS_GEN_MINUS_ADJUST == '否') item.IS_GEN_MINUS_ADJUST = 0;
       });
       console.log(this.jordanTableConfig.data);
       const params = {
@@ -895,12 +895,12 @@ export default {
           // 是否生成调整单
           if (item.IS_GEN_ADJUST == 1) item.IS_GEN_ADJUST = '是';
           else if (item.IS_GEN_ADJUST == 0) item.IS_GEN_ADJUST = '否';
-          if (item.RESERVE_BIGINT01 == 1) item.RESERVE_BIGINT01 = '是';
-          else if (item.RESERVE_BIGINT01 == 0) item.RESERVE_BIGINT01 = '否';
-          if (item.RESERVE_BIGINT02 == 1) item.RESERVE_BIGINT02 = '是';
-          else if (item.RESERVE_BIGINT02 == 0) item.RESERVE_BIGINT02 = '否';
-          if (item.RESERVE_BIGINT03 == 1) item.RESERVE_BIGINT03 = '是';
-          else if (item.RESERVE_BIGINT03 == 0) item.RESERVE_BIGINT03 = '否';
+          if (item. IS_GEN_IN_ORDER == 1) item. IS_GEN_IN_ORDER = '是';
+          else if (item. IS_GEN_IN_ORDER == 0) item. IS_GEN_IN_ORDER = '否';
+          if (item.IS_GEN_WRO_ADJUST == 1) item.IS_GEN_WRO_ADJUST = '是';
+          else if (item.IS_GEN_WRO_ADJUST == 0) item.IS_GEN_WRO_ADJUST = '否';
+          if (item.IS_GEN_MINUS_ADJUST == 1) item.IS_GEN_MINUS_ADJUST = '是';
+          else if (item.IS_GEN_MINUS_ADJUST == 0) item.IS_GEN_MINUS_ADJUST = '否';
         });
         if (res.data.data.ocBJdRefundIn.MATCH_STATUS == 2) {
           _this.information.formData.forEach((item) => {

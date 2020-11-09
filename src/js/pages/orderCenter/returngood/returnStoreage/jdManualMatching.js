@@ -195,8 +195,8 @@ export default {
           // SPECIAL_TYPE: '', // 特殊处理类型
           REMARK: '', // 备注
           RECEIVER_ADDRESS: '', // 发件地址
-          RESERVE_VARCHAR01: '', // 处理人
-          RESERVE_VARCHAR02: '', // 处理人备注
+          MATCHER: '', // 处理人
+          REMARK_HANDLE: '', // 处理人备注
         },
         // 表单非空提示
         ruleValidate: {
@@ -554,14 +554,14 @@ export default {
           style: 'input',
           label: '处理人',
           disabled: false, // 按钮禁用控制
-          value: 'RESERVE_VARCHAR01',
+          value: 'MATCHER',
           width: '6'
         },
         {
           style: 'input',
           label: '处理人备注',
           disabled: false, // 按钮禁用控制
-          value: 'RESERVE_VARCHAR02',
+          value: 'REMARK_HANDLE',
           width: '6'
         },
         {
