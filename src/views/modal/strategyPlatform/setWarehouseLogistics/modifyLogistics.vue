@@ -83,12 +83,12 @@
 </template>
 
 <script>
-  
-  import modifyLogistics from '@/js/pages/strategyPlatform/setWarehouseLogistics/modifyLogistics';
+
+  import modifyLogistics from '@/js/modal/strategyPlatform/setWarehouseLogistics/modifyLogistics';
 
   export default modifyLogistics;
 </script>
 
 <style lang="less">
-  @import "~@/css/pages/strategyPlatform/setWarehouseLogistics/modifyLogistics.less";
+  @import "~@/css/modal/strategyPlatform/setWarehouseLogistics/modifyLogistics.less";
 </style>
