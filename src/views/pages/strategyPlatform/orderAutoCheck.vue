@@ -34,13 +34,13 @@
               >
                 <Row>
                   <Col span="8" >
-                  <FormItem label="店铺名称：">
-                    <Input
-                      v-model="info.CP_C_SHOP_TITLE"
-                      disabled
-                      size="small"
-                    />
-                  </FormItem>
+                    <FormItem label="店铺名称：">
+                      <Input
+                        v-model="info.CP_C_SHOP_TITLE"
+                        disabled
+                        size="small"
+                      />
+                    </FormItem>
                   </Col>
                   <Col span="4" >
                   <FormItem label="启用自动审核：">
@@ -92,7 +92,6 @@
                     </Col>
                   </FormItem>
                   </Col>
-<<<<<<< HEAD
 
                   <Col span="8" >
                   <FormItem label="反审核等待时间">
@@ -113,22 +112,6 @@
                   <Col span="8" >
                   <FormItem label="hold单等待时间：">
                     <Col span="20" >
-=======
-                  <Col span="4" />
-                  <FormItem label="检查可合并订单：">
-                    <Checkbox
-                      v-model="IS_MERGE_ORDER"
-                      size="small"
-                      @on-change="setResult('IS_MERGE_ORDER')"
-                    >
-&nbsp;
-                    </Checkbox>
-                  </FormItem>
-                  </Col>
-                  <Col span="8" />
-                  <FormItem label="hold单等待时间：">
-                    <Col span="20" />
->>>>>>> feature/eslint-fix
                     <Input
                       v-model="info.HOLD_WAIT_TIME"
                       size="small"
@@ -136,16 +119,11 @@
                       @on-change="setResult('HOLD_WAIT_TIME')"
                     />
                     </Col>
-<<<<<<< HEAD
                     <Col span="4" >
-=======
-                    <Col span="4" />
->>>>>>> feature/eslint-fix
                     分钟
                     </Col>
                   </FormItem>
                   </Col>
-<<<<<<< HEAD
                   <Col span="4" >
                   <FormItem label="自动审核货到付款：">
                     <Checkbox
@@ -164,90 +142,12 @@
                       <Select v-model="info.CP_C_LOGISTICS_ID" @on-change="setResult('CP_C_LOGISTICS_ID')">
                         <Option v-for="(item , index) in CP_C_LOGISTICS_ID_SELECT" :key='index' :value="item.value">{{item.label}}</Option>
                       </Select>
-=======
-                  <Col span="8" />
-                  <FormItem label="反审核等待时间：">
-                    <Col span="20" />
-                    <Input
-                      v-model="info.UN_AUDIT_WAIT_TIME"
-                      size="small"
-                      :maxlength="5"
-                      @on-change="setResult('UN_AUDIT_WAIT_TIME')"
-                    />
-                    </Col>
-                    <Col span="4" />
-                    分钟
->>>>>>> feature/eslint-fix
                     </Col>
                   </FormItem>
                   </Col>
                 </Row>
               </div>
             </Panel>
-            <!-- <Panel name="auditCondition">
-              审核条件
-              <div
-                slot="content"
-                class="content"
-              >
-                <Row>
-                  <Col
-                    colspan="2"
-                    span="2"
-                    style="padding-top: 10px;"
-                  />
-                  <Checkbox
-                    v-model="effectiveCondition[0].value"
-                    size="small"
-                    @on-change="setResult('effectiveCondition')"
-                  >
-&nbsp;
-                  </Checkbox>
-                  </Col>
-                  <Col span="10" />
-                  <FormItem label="订单金额（元）">
-                    <Row>
-                      <Col span="10" />
-                      <Input
-                        v-model="info.AUDIT_PRICE_DOWN"
-                        placeholder
-                        size="small"
-                        :maxlength="10"
-                        @on-change="setResult('AUDIT_PRICE')"
-                      />
-                      </Col>
-                      <Col
-                        span="4"
-                        style="text-align: center;"
-                      />-</Col>
-                      <Col span="10" />
-                      <Input
-                        v-model="info.AUDIT_PRICE_UP"
-                        placeholder
-                        size="small"
-                        :maxlength="10"
-                        @on-change="setResult('AUDIT_PRICE')"
-                      />
-                      </Col>
-                    </Row>
-                  </FormItem>
-                  </Col>
-                  <Col span="10" />
-                  <FormItem label="等待">
-                    <Col span="4" />
-                    <Input
-                      v-model="info.AUDIT_WAIT_TIME"
-                      size="small"
-                      :maxlength="5"
-                      @on-change="setResult('AUDIT_WAIT_TIME')"
-                    />
-                    </Col>
-                    分钟后自动审核，满足限制条件的订单需进行人工审核
-                  </FormItem>
-                  </Col>
-                </Row>
-              </div>
-            </Panel> -->
             <Panel name="2">
               限制条件
               <div
@@ -558,11 +458,11 @@
   </div>
 </template>
 <script>
-  import orderAutoCheck from '@/js/pages/strategyPlatform/orderAutoCheck';
+import orderAutoCheck from '@/js/pages/strategyPlatform/orderAutoCheck';
 
-  export default orderAutoCheck;
+export default orderAutoCheck;
 </script>
 <style lang="less" type="text/less">
-@import "~@/assets/css/css_1_3/theme.less";
+@import '~@/assets/css/css_1_3/theme.less';
 @import '~@/css/pages/strategyPlatform/orderAutoCheck.less';
 </style>
