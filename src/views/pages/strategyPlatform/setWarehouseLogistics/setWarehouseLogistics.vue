@@ -235,12 +235,11 @@
 </template>
 
 <script>
-  import setWarehouseLogistics from '@/js/pages/strategyPlatform/setWarehouseLogistics/setWarehouseLogistics';
-
-  export default setWarehouseLogistics;
+import setWarehouseLogistics from '@/js/pages/strategyPlatform/setWarehouseLogistics/setWarehouseLogistics';
+export default setWarehouseLogistics;
 </script>
 
 
 <style lang="less">
-  @import "~@/css/pages/strategyPlatform/setWarehouseLogistics/setWarehouseLogistics.less";
+@import '~@/css/pages/strategyPlatform/setWarehouseLogistics/setWarehouseLogistics.less';
 </style>

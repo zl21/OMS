@@ -5,10 +5,7 @@
     <!--因为element-ui 不可编辑tab标签内容  因此需要重写组件-->
     <tabList :currentTab.sync="currentTab" :panels="productsArrs">
       <div slot="tab_content">
-        <div
-          v-for="(panel,index) in productsArrs"
-          :key="index"
-        >
+        <div  v-for="(panel,index) in productsArrs"  :key="index">
           <div v-if="showContent(index)">
             <div
               v-if="panel.rules && panel.rules.length>0"
@@ -56,6 +53,7 @@
             </detailTable>
           </div>
         </div>
+      </div>  
     </tabList>
 
      <!--导入组件-->
