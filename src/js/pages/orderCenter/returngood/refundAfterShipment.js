@@ -198,7 +198,7 @@ export default {
         name: vmI18n.t('other.uploadVoucher'),
         url: '/p/cs/upload2', // 上传地址
         sendData: {
-          path: `${this.$route.query.tableName}/${this.$route.query.id}/`,
+          path: `${this.$route.params.customizedModuleName}/${this.$route.params.customizedModuleId}/`,
         }, // 上传参数
         width: 270,
         height: 250,
@@ -807,8 +807,8 @@ export default {
       navStatus: 0,
       logFormConfig: refundAfterShipment.logFormConfig,
       logTableConfig: {
-        tableName: this.$route.query.tableName,
-        id: this.$route.query.id,
+        tableName: this.$route.params.customizedModuleName,
+        id: this.$route.params.customizedModuleId,
       },
       createdStatus: !!this.$route.query.new, // 页面数据是否初始化完成
       sellerRemarkDataCreated: !!this.$route.query.new,
@@ -1125,12 +1125,12 @@ export default {
       const data = {};
       data.objId = self.$route.query.new || self.$route.query.cid || self.$route.query.oid
         ? -1
-        : self.$route.query.id;
+        : self.$route.params.customizedModuleId;
       const AfSend = self.getForm();
       if (AfSend.VIP_PHONE && !/^1[3456789]\d{9}$/.test(AfSend.VIP_PHONE)) {
         return self.$Message.warning(self.vmI18n.t('modalTips.j0')); // 请输入正确的买家手机号
       }
-      AfSend.ID = self.$route.query.cid || self.$route.query.id;
+      AfSend.ID = self.$route.query.cid || self.$route.params.customizedModuleId;
       const AfSendItem = self.tableConfig.data.map(item => ({
         id: item.ID,
         AMT_RETURN: item.returnPrice,
@@ -1403,7 +1403,7 @@ export default {
         const data = {};
         const OcBReturnAfSendItem = [];
         data.orderId = self.reForm.config[3].item.props.value;
-        data.id = self.$route.query.id;
+        data.id = self.$route.params.customizedModuleId;
         self.addItem.addList.forEach((item) => {
           const obj = {};
           obj.id = item.proId;
@@ -1480,7 +1480,7 @@ export default {
           onOk: () => {
             const data = {};
             const arr = [];
-            data.AfSendID = self.$route.query.id;
+            data.AfSendID = self.$route.params.customizedModuleId;
             self.delTableData.forEach((item) => {
               arr.push(item.ID);
             });
@@ -1521,7 +1521,7 @@ export default {
     // 详情 复制查询方法
     query() {
       const self = this;
-      const query = { ID: self.$route.query.cid || self.$route.query.id };
+      const query = { ID: self.$route.params.customizedModuleId };
       self.service.orderCenter.copyAfterDeliver(query)
       // self.$network
       //   .post('/api/cs/oc/oms/v1/copyAfterDeliver', query)
@@ -1760,17 +1760,16 @@ export default {
     },
     // 退款分类联动查询退描述
     returnTypeChange() {
-      const params = {
-        table: 'OC_B_RETURN_TYPE_ITEM',
-        objid: this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ID,
-        refcolid: 1700815960,
-        searchdata: JSON.stringify({
-          column_include_uicontroller: true,
-          startindex: 0,
-          fixedcolumns: {},
-        }),
-      };
-      this.service.orderCenter.objectTableItem(params)
+      let formdata = new FormData();
+      formdata.append('table' , 'OC_B_RETURN_TYPE_ITEM');
+      formdata.append('objid' , this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ID);
+      formdata.append('refcolid' , 1700815960);
+      formdata.append('searchdata' , JSON.stringify({
+                                            column_include_uicontroller: true,
+                                            startindex: 0,
+                                            fixedcolumns: {},
+                                          }));
+      this.service.orderCenter.objectTableItem(formdata)
       // this.$network
       //   .post(this.$httpApi.order.returnTypeItemquery, params)
         .then((res) => {
