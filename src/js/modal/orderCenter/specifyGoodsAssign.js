@@ -48,8 +48,7 @@ export default {
         return;
       }
       const query = { isBlur: 'N', psCSku: { ECODE: self.searchValue } };
-      const res = await _this.service.common.skuQuery(query);
-      console.log(res);
+      const res = await self.service.common.skuQuery(query);
       if (res.data.code == 0) {
         if (res.data.data.data.length == 0) {
           this.$Message.warning(this.vmI18n.t('modalTips.r8'));// 查询数据为空!
