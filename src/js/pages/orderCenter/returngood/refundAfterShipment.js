@@ -817,7 +817,9 @@ export default {
     };
   },
   mounted() {
-    if (this.$route.query.id && !this.$route.query.new) {
+    debugger;
+    // if (this.$route.query.id && !this.$route.query.new) {
+      if (this.$route.params.customizedModuleId && this.$route.params.customizedModuleId !== '41460334') { //已发货退款单详情跳转
       this.reForm.config.splice(14, 0, {
         item: {
           type: 'Input',
