@@ -12,6 +12,7 @@ export default {
   },
   data() {
     return {
+      sessionStorageData:'',
       vmI18n: window.vmI18n,
       IMAGE: '', // 图片
       imgIndex: 0, // 当前操作图片位置
@@ -817,9 +818,10 @@ export default {
     };
   },
   mounted() {
-    debugger;
+    this.sessionStorageData = JSON.parse(sessionStorage.getItem('customizeMessage'))[this.$route.params.customizedModuleId == '41460334' ? 'undefined' : this.$route.params.customizedModuleId];
+    console.log(this.sessionStorageData);
     // if (this.$route.query.id && !this.$route.query.new) {
-      if (this.$route.params.customizedModuleId && this.$route.params.customizedModuleId !== '41460334') { //已发货退款单详情跳转
+      if (this.sessionStorageData.standardTableurlCustomized) { //已发货退款单详情跳转
       this.reForm.config.splice(14, 0, {
         item: {
           type: 'Input',

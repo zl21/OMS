@@ -560,11 +560,11 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('but.new_workOrder'), // 新增工单
+            text: vmI18n.t('btn.new_workOrder'), // 新增工单
             btnclick: () => {}, // 按钮点击事件
           },
           {
-            text: vmI18n.t('but.additionalRefund'), // 额外退款
+            text: vmI18n.t('btn.additionalRefund'), // 额外退款
             btnclick: () => {
               if (
                 this.statusName === this.vmI18n.t('other.warehouseDelivery')
