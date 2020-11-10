@@ -1,7 +1,4 @@
 // 是否收藏公共逻辑管理
-import axios from 'axios';
-import lookUserJurisdiction from 'allpages/SystemConfig/quanXian/1/lookUserJurisdiction';
-
 export const isFavoriteMixin = {
   mounted() {
     // 获取当前页面是否被收藏

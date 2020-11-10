@@ -32,7 +32,6 @@ export default {
       this.$refs.scrollTable.scrollTop = 0;
     },
     setTableHeight() {
-      const self = this;
       const contentHeight = document.getElementsByClassName(
         'SearchForm_Table'
       )[0].clientHeight;

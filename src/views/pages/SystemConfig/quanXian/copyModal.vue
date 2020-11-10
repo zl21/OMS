@@ -38,7 +38,7 @@
   </div>
 </template>
 <script>
-  import copyModal from '@/js/pages/SystemConfig/quanXian/copyModal.js';
+  import copyModal from '@/js/pages/SystemConfig/quanXian/copyModal';
 
   export default copyModal;
 </script>

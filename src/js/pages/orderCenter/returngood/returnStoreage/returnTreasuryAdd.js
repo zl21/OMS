@@ -185,7 +185,7 @@ export default {
           REMARK: '', // 备注
           RECEIVER_ADDRESS: '', // 发件地址
           HANDLER: '', // 处理人
-          RESERVE_VARCHAR02: '', // 处理人备注
+          REMARK_HANDLE: '', // 处理人备注
           IS_OFF_MATCH: false,
         },
         // 表单非空提示
@@ -783,9 +783,9 @@ export default {
           style: 'input',
           // label: "处理人备注",
           label: vmI18n.t('form_label.processor_remarks'),
-          dataAcessKey: 'RESERVE_VARCHAR02',
+          dataAcessKey: 'REMARK_HANDLE',
           disabled: false, // 按钮禁用控制
-          value: 'RESERVE_VARCHAR02',
+          value: 'REMARK_HANDLE',
           width: '6',
         },
         {
@@ -894,7 +894,7 @@ export default {
           REMARK: item.REMARK, // 备注
           RECEIVER_ADDRESS: item.RECEIVER_ADDRESS, // 发件地址
           HANDLER: item.HANDLER,
-          RESERVE_VARCHAR02: item.RESERVE_VARCHAR02,
+          REMARK_HANDLE: item.REMARK_HANDLE,
           IS_OFF_MATCH: item.IS_OFF_MATCH ? 1 : 0,
         }, // 退货入库主表数据
         ID: this.ID,

@@ -415,7 +415,7 @@ export default {
     TableInput,
   },
   created() {
-    
+
   },
   computed: {
     commodity() {
@@ -432,7 +432,7 @@ export default {
     handleChange(dateArr) {
       const filterDate = [];
       dateArr.forEach((item) => {
-        filterDate.push(item.replace(/\-/g, '')); 
+        filterDate.push(item.replace(/\-/g, ''));
       });
       this.acti_date = filterDate;
     },
@@ -531,7 +531,7 @@ export default {
       const M = `${date.getMonth() + 1 < 10
         ? `0${date.getMonth() + 1}`
         : date.getMonth() + 1
-      }.`;
+        }.`;
 
       const D = `${date.getDate()} `;
 
@@ -580,7 +580,7 @@ export default {
         }
       };
       // 获取button数组
-      const { data: { code, message, data } } = await this.service.promotionCenter.fetchActionsInCustomizePage(params);
+      const { data: { code, data } } = await this.service.promotionCenter.fetchActionsInCustomizePage(params);
       if (code === 0) {
         data.map((item) => {
           buttons.push(item.webid);
@@ -588,7 +588,7 @@ export default {
       }
       this.buttons = buttons;
     },
-    errorDialogClose(value, option) {
+    errorDialogClose(option) {
       if (option) {
         this.downLine();
       } else {

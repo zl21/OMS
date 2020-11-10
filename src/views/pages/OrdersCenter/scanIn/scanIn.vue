@@ -170,7 +170,7 @@
 </template>
 
 <script>
-  import scanIn from '@/js/pages/orderCenter/scanIn/scanIn.js';
+  import scanIn from '@/js/pages/orderCenter/scanIn/scanIn';
 
   export default scanIn;
 </script>
