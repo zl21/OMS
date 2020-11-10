@@ -66,22 +66,21 @@ export default {
         param = {
           ids: self.componentData.ids,
           remark: self.bouncedData.value,
-          cover: cover
+          cover
         };
         url = '/api/cs/oc/oms/v1/reRemarkUpdate';
       } else if (self.componentData.type == 2) {
         param = {
-          ids: self.componentData.ids,
-          reserve_varchar02: self.bouncedData.value,
-          cover: cover
+          IDS: self.componentData.ids,
+          BACK_MESSAGE: self.bouncedData.value,
+          COVER: cover
         };
         url = '/api/cs/oc/oms/v1/modifyReturnSellerRemark';
       }
       // fromdata.append("param", JSON.stringify(param));
       axios({
-        url: url,
+        url,
         method: "post",
-        cancelToken: true,
         data: param
       }).then(res => {
         if (res.data.code === 0) {

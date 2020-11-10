@@ -47,7 +47,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'rturngoodModifyRemarks', // 组件名称
-        url: 'returngood/rturngoodModifyRemarks',
+        url: 'pages/OrdersCenter/returngood/rturngoodModifyRemarks',
         keepAlive: true,
         excludeString: 'rturngoodModifyRemarks', // 将name传进去，确认不缓存
         componentData: {},
@@ -1475,7 +1475,6 @@ export default {
     },
     // 修改卖家备注
     bounced2() {
-      debugger;
       if (!this.$refs.agGridChild.AGTABLE.getSelect().length) {
         this.$Message.error(this.vmI18n.t('modalTips.m1'));// 请至少选中一项修改!
         return;
@@ -1490,7 +1489,7 @@ export default {
         type: 2,
       };
       this.$children
-        .find(item => item.name === 'returngoodmanagement')
+        .find(item => item.name === 'rturngoodModifyRemarks')
         .openConfirm();
     },
     // 修改退货仓库
