@@ -118,7 +118,7 @@ export default {
           data: {},
           width: 650,
           keepAlive: true,
-          url: 'order/resolveAddress',
+          url: 'modal/orderCenter/resolveAddress',
           name: 'addressDialog',
           excludeString: 'addressDialog',
           footerHide: true,

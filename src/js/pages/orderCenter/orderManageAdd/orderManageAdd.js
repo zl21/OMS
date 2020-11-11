@@ -229,7 +229,6 @@ export default {
                 ocBorderDto,
                 ocBorderItemDto,
               };
-              debugger;
               // 新增订单走新保存（去掉草稿模式）
               if (self.$route.params.customizedModuleId === '-1') {
                 return self.saveAdd(data);
