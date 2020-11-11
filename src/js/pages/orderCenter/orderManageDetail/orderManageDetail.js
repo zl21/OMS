@@ -633,6 +633,9 @@ export default {
             }, // 按钮点击事件
           },
           {
+            text: vmI18n.t('btn.copyOrder'), // 复制订单
+          },
+          {
             text: vmI18n.t('btn.lostOrder_copy'), // 丢单复制
           },
           {
@@ -829,7 +832,8 @@ export default {
       }
     },
   },
-  async created() {
+  created() {
+    debugger;
     const id = this.$route.params.customizedModuleId ? this.$route.params.customizedModuleId : -1;
     this.objId = id;
     this.tab1 = {
@@ -872,9 +876,13 @@ export default {
       },
     };
     this.pageLoad = true;
-    try {
-      const res = await this.service.common.selectLimitGroups(['UPLOAD_SAP_STATUS']);
-      if (Array.isArray(res.data)) {
+    this.$nextTick(() => {
+      this.pageLoad = false;
+      this.load();
+      this.getPermissions('btnConfig', 'orderManager');
+    });
+      this.service.common.selectLimitGroups(['UPLOAD_SAP_STATUS']).then(res=>{
+        if (Array.isArray(res.data)) {
         res.data.forEach((item) => {
           this.enumerationList[item.name] = item.adLimitvalues.map(val => ({
             label: val.description,
@@ -884,21 +892,8 @@ export default {
       } else {
         this.enumerationList.UPLOAD_SAP_STATUS = [];
       }
-      this.$nextTick(() => {
-        this.pageLoad = false;
-        this.load();
-        this.getPermissions('btnConfig', 'orderManager');
-      });
-    } catch (e) {
+      }).catch(() => {
       this.pageLoad = false;
-    }
+    });
   },
-  // mounted() {
-  //   this.$nextTick(() => {
-  //     setTimeout(() => {
-  //       this.load();
-  //       this.getPermissions('btnConfig', 'orderManager');
-  //     }, 30);
-  //   });
-  // }
 };

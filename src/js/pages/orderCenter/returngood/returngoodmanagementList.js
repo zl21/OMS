@@ -107,7 +107,7 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: vmI18n.t('bth.import'), // 导入
+        confirmTitle: vmI18n.t('btn.import'), // 导入
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -128,14 +128,14 @@ export default {
         typeAll: 'error', // 按钮统一风格样式
         buttons: [
           {
-            text: vmI18n.t('bth.find'), // 查找 按钮文本
+            text: vmI18n.t('btn.find'), // 查找 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.find();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('bth.add'), // 新增  按钮文本
+            text: vmI18n.t('btn.add'), // 新增  按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$store.commit('customize/TabHref', {
@@ -151,7 +151,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('bth.modify'), // 修改 按钮文本
+            text: vmI18n.t('btn.modify'), // 修改 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.modify();
@@ -165,7 +165,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('bth.afterSalesAudit'), // 售后审核 按钮文本
+            text: vmI18n.t('btn.afterSalesAudit'), // 售后审核 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.afterAudit();
@@ -179,7 +179,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('bth.virtualWarehous'), // 虚拟入库 按钮文本
+            text: vmI18n.t('btn.virtualWarehous'), // 虚拟入库 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.virtualLibrary();
@@ -193,14 +193,14 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('bth.cancel_automaticRefund'), // 取消自动退款 按钮文本
+            text: vmI18n.t('btn.cancel_automaticRefund'), // 取消自动退款 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.cancelRefund();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('bth.modifyRemarks'), // 修改备注 按钮文本
+            text: vmI18n.t('btn.modifyRemarks'), // 修改备注 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.bounced();
@@ -214,7 +214,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('bth.modify_returnWarehouse'), // 修改退回仓库
+            text: vmI18n.t('btn.modify_returnWarehouse'), // 修改退回仓库
             btnclick: () => {
               this.Warehouse();
             },
@@ -226,7 +226,7 @@ export default {
             },
           },
           {
-            text: vmI18n.t('bth.batchOriginalReturn'), // 批量原退
+            text: vmI18n.t('btn.batchOriginalReturn'), // 批量原退
             btnclick: () => {
               this.batchOriginalBack();
             },
@@ -239,21 +239,21 @@ export default {
           //   } //按钮点击事件
           // },
           {
-            text: vmI18n.t('bth.retransmission_WMS'), // 重传WMS  //按钮文本
+            text: vmI18n.t('btn.retransmission_WMS'), // 重传WMS  //按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.againWMS();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('bth.mandatoryCompletion'), // 强制完成  //按钮文本
+            text: vmI18n.t('btn.mandatoryCompletion'), // 强制完成  //按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.forcedCompletion();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('bth.returnCopy'), // 退换货复制 
+            text: vmI18n.t('btn.returnCopy'), // 退换货复制 
             disabled: false,
             btnclick: () => {
               this.cloneRenturnGood();
@@ -261,7 +261,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: vmI18n.t('bth.sellerNotesImport'), // 卖家备注导入 按钮文本
+            text: vmI18n.t('btn.sellerNotesImport'), // 卖家备注导入 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
@@ -269,7 +269,7 @@ export default {
                 tableName: 'OC_B_RETURN_ORDER_remark',
                 objid: '1',
               };
-              _this.importTable.confirmTitle = _this.vmI18n.t('bth.sellerNotesImport');// 卖家备注导入
+              _this.importTable.confirmTitle = _this.vmI18n.t('btn.sellerNotesImport');// 卖家备注导入
               _this.$children
                 .find(item => item.name === 'importTable')
                 .openConfirm();
@@ -277,7 +277,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: vmI18n.t('bth.import'), // 导入 按钮文本
+            text: vmI18n.t('btn.import'), // 导入 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
@@ -290,7 +290,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('bth.export'), // 导出 按钮文本
+            text: vmI18n.t('btn.export'), // 导出 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.exportClick();
@@ -313,7 +313,7 @@ export default {
           {
             icon: 'iconfont iconbj_col', // 按钮图标
             size: 'small', // 按钮大小
-            name: vmI18n.t('bth.collection'), // 收藏
+            name: vmI18n.t('btn.collection'), // 收藏
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
