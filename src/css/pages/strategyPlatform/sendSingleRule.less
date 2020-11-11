@@ -1,0 +1,171 @@
+@import "~@/assets/css/css_1_3/theme.less";
+.sendSingleRule {
+  .tableContent {
+    .tableBox {
+      display: flex;
+      .tableLeft {
+        width: 20%;
+        height: 100%;
+        min-height: 400px;
+        margin: 20px 20px 10px;
+        border: 1px solid #d3d3d3;
+        overflow: hidden;
+        .retrieveBox {
+          text-align: center;
+          margin: 20px 0;
+          font-size: 0;
+          width: 100%;
+          .retrieveTitle {
+            display: inline-block;
+            vertical-align: middle;
+            background: #ddd;
+            width: 36px;
+            height: 26px;
+            line-height: 26px;
+            font-size: 14px;
+          }
+          .retrieve {
+            width: 60%;
+            display: inline-block;
+            .burgeon-input {
+              padding: 0 0 0 5px !important;
+              height: 24px !important;
+            }
+          }
+        }
+        .treeBox {
+          height: 90%;
+          padding: 0 10px 15px 32px;
+          overflow: scroll;
+          #tree {
+            .iconbj_on:before {
+              content: "\ea03";
+            }
+          }
+          .fromLoading {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            z-index: 1000 !important;
+          }
+        }
+      }
+      .tableSynchronous {
+        width: 24px;
+        height: 100%;
+        min-height: 500px;
+        margin-right: 10px;
+        position: relative;
+        button {
+          border-color: #ec6e4e;
+          color: #ec6e4e;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin: -12px 0 0 -20px;
+          span {
+            vertical-align: top !important;
+          }
+        }
+      }
+      .tableRight {
+        position: relative;
+        width: 75%;
+        height: 100%;
+        overflow: hidden;
+        margin-top: 20px;
+        border: 1px solid #d3d3d3;
+        .all-table {
+          width: 100%;
+        }
+        .conTop {
+          overflow: hidden;
+        }
+        .list-table {
+          // width: 100%;
+          height: 500px;
+          overflow: hidden;
+          overflow: auto;
+          Input {
+            height: 23px !important;
+            padding: 0 10px;
+            border: none;
+          }
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        th {
+          text-align: left;
+          background-color: #eeeff0 !important;
+          font-weight: normal;
+          span {
+            font-size: 14px;
+          }
+        }
+        th,
+        td {
+          min-width: 150px;
+          height: 23px;
+          line-height: 23px;
+          white-space: nowrap;
+          box-sizing: content-box;
+          background-color: #fff;
+          border: 1px solid #eeeff0;
+          padding: 0 10px;
+          text-align: left;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          word-break: break-all;
+        }
+        #contenter {
+          z-index: 1000;
+          position: relative;
+          margin: auto;
+          background-color: white;
+        }
+        #fixedDiv {
+          position: absolute;
+          left: 0;
+          overflow: hidden;
+        }
+        #mainDiv {
+          margin-top: 24px;
+          overflow: auto;
+          // overflow-x: hidden;
+        }
+        .fromLoading {
+          position: absolute;
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: rgba(255, 255, 255, 0.9);
+          z-index: 1000 !important;
+        }
+      }
+    }
+  }
+  .fromLoading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 1000 !important;
+  }
+}

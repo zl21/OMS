@@ -46,6 +46,15 @@ export default {
   getAutoCheck: params => network.post('/p/cs/st/v1/getAutoCheck', params),
   QueryList: params => network.post('/p/cs/QueryList', params),
   addAutoCheck: params => network.post('/p/cs/st/v1/addAutoCheck', params),
-  queryLogisticsCompany: ()=> network.post('/p/cs/cpext/v1/queryLogisticsList')
+  queryLogisticsCompany: ()=> network.post('/p/cs/cpext/v1/queryLogisticsList'),
+  saveSendRule: params => network.post('/p/cs/saveSendRule', params),
+  getSendRuleMain: params => network.post('/p/cs/getSendRuleMain', params),
+  getWarehouseRateResultTable: params => network.post('/p/cs/getWarehouseRateResultTable', params),
+  getLikeRankResultTable: params => network.post('/p/cs/getLikeRankResultTable', params),
+  voidSendRule: params => network.post('/p/cs/voidSendRule', params),
+  exportSendRuleWarehouseRate: params => network.post('p/cs/exportSendRuleWarehouseRate', params),
+  delSendRule: params => network.post('/p/cs/delSendRule', params),
+  exportSendRuleWarehouseRank: params => network.post('/p/cs/exportSendRuleWarehouseRank', params)
+
 
 };
