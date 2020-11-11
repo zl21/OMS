@@ -1267,10 +1267,10 @@ export default {
           //   } //按钮点击事件
           // },
           {
-            text: vmI18n.t('btn.deAudit'), // 批量修改
+            text: vmI18n.t('btn.batchModify'), // 批量修改
           },
           {
-            text: vmI18n.t('btn.batchModify'), // 批量修改物流
+            text: vmI18n.t('btn.batchModify_logistics'), // 批量修改物流
           },
           {
             text: vmI18n.t('btn.lostOrder_copy'), // 丢单复制
