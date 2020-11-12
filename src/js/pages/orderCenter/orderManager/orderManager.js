@@ -2620,7 +2620,7 @@ export default {
         // 原单无效复制
         if (type === this.vmI18n.t('btn.original_single_null_and_void_copy')) {
           // 已取消
-          if (ORDERSTATUSNAME !== this.vmI18n.t('btn.cancel')) {
+          if (ORDERSTATUSNAME !== '已取消') {
             // 非已取消订单，不允许复制
             self.$Message.error(this.vmI18n.t('modalTips.a3'));
             return;
