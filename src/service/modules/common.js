@@ -27,7 +27,7 @@ export default {
   getExpressAreaItemTable: params => network.post('/p/cs/getExpressAreaItemTable', params),
   exportExpressAreaItem: params => network.post('/p/cs/exportExpressAreaItem', params),
   skuQuery: params => network.post('/p/cs/skuQuery', params),
-  fetchActionsInCustomizePage: params => network.get('/p/cs/v2/fetchActionsInCustomizePage', params),
+  fetchActionsInCustomizePage: params => network.get(`/p/cs/v2/fetchActionsInCustomizePage?${qs.stringify(params)}`),
   manualJdMatchingCheck: params => network.post('/p/cs/manualJdMatchingCheck', params),
   jdReturnStorageSave: params => network.get('/p/cs/jdReturnStorageSave', params),
   manualJdMatchingList: params => network.post('/p/cs/manualJdMatchingList', params),
@@ -85,7 +85,7 @@ export default {
   cuserspro: params => network.post('/p/cs/cuserspro', params),
   objectDelete: params => network.post('/p/cs/objectDelete', params),
   cprolikequery: params => network.post('/p/cs/cprolikequery', params),
-  cgroupsquery: params => network.get(`/p/cs/cgroupsquery?${qs.toString()}`, params),
+  cgroupsquery: params => network.get(`/p/cs/cgroupsquery?${qs.stringify(params)}`),
   getCopyTargetGroups: params => network.get(`/p/cs/getCopyTargetGroups?${qs.stringify(params)}`),
   // 通用接口下载
   /**

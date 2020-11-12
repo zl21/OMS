@@ -6,12 +6,12 @@ export default {
   /**
    * 营销列表页面
    */
-  // 查询列表 
+  // 查询列表
   selectPmList: params => network.post('/p/cs/pm/v1/selectPmList', params),
   // 查看日志
   cpromLogQuery: params => network.post('/p/cs/cpromLogQuery', params),
   // 获取button数组
-  fetchActionsInCustomizePage: params => network.get('/p/cs/fetchActionsInCustomizePage', { params }),
+  fetchActionsInCustomizePage: params => network.get(`/p/cs/fetchActionsInCustomizePage?${qs.stringify(params)}`),
   // 发布
   updatePmStatus: params => network.post('/p/cs/pm/v1/updatePmStatus', params),
   // 删除
@@ -25,7 +25,7 @@ export default {
   /**
    * 促销编辑页面
    */
-  // 保存 
+  // 保存
   savePm: params => network.post('/p/cs/pm/v1/savePm', params),
   /**
    * 草稿保存
@@ -34,7 +34,7 @@ export default {
   /**
    * 仿真试算
    */
-  // 根据id获取表格其他数据 
+  // 根据id获取表格其他数据
   selectProInfo: params => network.post('/p/cs/pm/v1/selectProInfo', params),
   // 仿真试算：
   testPm: params => network.post('/p/cs/pm/v1/testPm', params)

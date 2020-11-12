@@ -863,20 +863,18 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(async () => {
-      const query = {
-        params: {
-          param: {
-            AD_ACTION_NAME: 'orderManager'
-          }
-        }
-      };
-      const res = await this.service.common.fetchActionsInCustomizePage(query);
+    const _this = this;
+    const query = {
+      param: JSON.stringify({
+        AD_ACTION_NAME: 'orderManager'
+      })
+    };
+    _this.service.common.fetchActionsInCustomizePage(query).then(res => {
       console.log(res.data.data);
       const c = [];
       const resData = res.data.data || [];
-      resData.forEach((element, index) => {
-        this.tableConfig.businessButtonConfig.buttons.forEach((btn, btnIndex) => {
+      resData.forEach((element) => {
+        _this.tableConfig.businessButtonConfig.buttons.forEach((btn) => {
           if (element.webdesc == btn.text) {
             c.push({
               btnclick: btn.btnclick,
@@ -887,7 +885,9 @@ export default {
           }
         });
       });
-      this.tableConfig.businessButtonConfig.buttons = c;
+      _this.tableConfig.businessButtonConfig.buttons = c;
+    }).catch((e)=>{
+      console.log(e);
     });
     this.getColumns();
 
