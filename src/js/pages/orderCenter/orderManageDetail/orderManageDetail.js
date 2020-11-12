@@ -707,7 +707,7 @@ export default {
         // 已取消  系统作废
         if (
           ORDERSTATUSNAME
-          !== (this.vmI18n.t('btn.cancel') && this.vmI18n.t('other.systemVoid'))
+          !== '已取消' && ORDERSTATUSNAME !== this.vmI18n.t('other.systemVoid')
         ) {
           self.$Message.error(this.vmI18n.t('modalTips.a3'));
           return;
@@ -715,9 +715,8 @@ export default {
         // 仓库发货&&平台发货
       } else if (
         ORDERSTATUSNAME
-        !== (this.vmI18n.t('other.warehouseDelivery')
-          && this.vmI18n.t('other.platformDelivery'))
-      ) {
+        !== this.vmI18n.t('other.warehouseDelivery')
+          && ORDERSTATUSNAME !== this.vmI18n.t('other.platformDelivery')) {
         // 只能对【仓库发货，平台发货】订单状态的原单进行复制操作
         self.$Message.error(this.vmI18n.t('modalTips.a4'));
         return;
@@ -776,11 +775,7 @@ export default {
             resData.TO_SETTLE_STATUS_TAG = data.RESERVE_BIGINT02 === null
               ? this.vmI18n.t('common.no')
               : this.vmI18n.t('common.yes');
-            const TO_SETTLE_STATUS_NAME = (
-              this.enumerationList.UPLOAD_SAP_STATUS.find(
-                val => val.value === resData.TO_SAP_STATUS
-              ) || {}
-            ).label;
+            const TO_SETTLE_STATUS_NAME = (this.enumerationList.UPLOAD_SAP_STATUS.find(val => val.value === resData.TO_SAP_STATUS) || {}).label;
             resData.TO_SETTLE_STATUS_NAME = TO_SETTLE_STATUS_NAME || '';
             this.tab1.order = resData;
             const statusList = [
@@ -833,7 +828,6 @@ export default {
     },
   },
   created() {
-    debugger;
     const id = this.$route.params.customizedModuleId ? this.$route.params.customizedModuleId : -1;
     this.objId = id;
     this.tab1 = {

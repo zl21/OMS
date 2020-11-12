@@ -622,8 +622,8 @@ export default {
         else if (item.IS_GEN_ADJUST == '否') item.IS_GEN_ADJUST = 0;
       });
       const params = {
-        ocBRefundInProductItem: dataArr, // 退货入库明细
-        OcBRefundIn: {
+        OC_B_REFUND_IN_PRODUCT_ITEM: dataArr, // 退货入库明细
+        OC_B_REFUND_IN: {
           ID: item.ID,
           ORIG_ORDER_NO: item.ORIG_ORDER_NO, // 原单单号
           SOURCE_CODE: item.SOURCE_CODE, // 平台单号
