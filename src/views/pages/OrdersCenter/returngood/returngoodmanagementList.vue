@@ -27,18 +27,6 @@
       />
       <!-- 列表组件 -->
       <div class="tableBox">
-        <!-- <jordan-action-table
-          :jordanTableConfig="jordanTableConfig"
-          @on-row-dblclick="onRowDblclick"
-          @on-select="returnOnSelect"
-          @table-import="returnImport"
-          @table-export="returnExport"
-          @on-select-cancel="returnCancel"
-          @on-select-all="returnSelectAll"
-          @on-select-all-cancel="returnSelectAllCancel"
-          @on-page-change="pageChange"
-          @on-page-size-change="pageSizeChange"
-        ></jordan-action-table> -->
         <div
           v-show="agTableConfig.agLoading"
           class="agLoading"

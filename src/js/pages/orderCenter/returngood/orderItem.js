@@ -1,6 +1,6 @@
 import businessActionTable from 'professionalComponents/businessActionTable.vue';
 import axios from 'axios';
-import config from './config.js';
+import config from './config';
 
 export default {
   name: 'orderItem',
