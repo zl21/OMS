@@ -378,7 +378,7 @@ export default {
             title: vmI18n.t('table_label.productName'),
             key: 'PS_C_PRO_ENAME',
             render: (h, params) => {
-              if (params.row.ID && this.statusName === '启用') {
+              if (params.row.ID && this.statusName === '已提交') {
                 return h(
                   'div',
                   {
@@ -633,7 +633,7 @@ export default {
             title: vmI18n.t('form_label.free_quantity'),
             key: 'NUM',
             render: (h, params) => {
-              if (params.row.ID && this.statusName === '启用') {
+              if (params.row.ID && this.statusName === '已提交') {
                 return h(
                   'div',
                   {
@@ -1010,7 +1010,7 @@ export default {
             title: vmI18n.t('table_label.number_of_rows_per_group'),
             key: 'GROUP_EXTRACT_NUM',
             render: (h, params) => {
-              if (params.row.ID && this.statusName === '启用') {
+              if (params.row.ID && this.statusName === '已提交') {
                 return h(
                   'div',
                   {
@@ -1130,7 +1130,7 @@ export default {
             title: vmI18n.t('table_label.grouping'),
             key: 'GROUPNUM',
             render: (h, params) => {
-              if (params.row.ID && this.statusName === '启用') {
+              if (params.row.ID && this.statusName === '已提交') {
                 return h(
                   'div',
                   {
@@ -2340,11 +2340,11 @@ export default {
       if (CurrentData) {
         if (CurrentData.psCPro) {
           if (CurrentData.psCPro.ISACTIVE === 'Y') {
-            this.statusName = '启用'; // 提交状态
+            this.statusName = '已提交'; // 提交状态
             this.changeReadStatus();
           }
           if (CurrentData.psCPro.ISACTIVE === 'N') {
-            this.statusName = '停用'; // 作废状态
+            this.statusName = '已作废'; // 作废状态
             this.formConfig1.formData.map((item) => {
               if (item.label === '商品编码') {
                 item.disabled = true;
@@ -2461,9 +2461,9 @@ export default {
   created() {
     const customizedModuleId = this.$route.params.customizedModuleId;
     this.objid = customizedModuleId === 'New' ? -1 : customizedModuleId;
-    console.log(this.objid);
+    console.log('this.objid::',this.objid);
     this.pageconfigData(this.objid);
-    this.IniData(); // 初始化数据
+    this.objid != -1 && this.IniData(); // 初始化数据
   },
   mounted() {
     this.setTableHeight();
