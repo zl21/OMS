@@ -5,7 +5,7 @@ import fkdialog from 'framework/components/tablelist/fkdialog.vue';
 import advancedSearch from 'framework/components/views/custompage/crm/advancedSearch.vue';
 import FkTable from 'framework/components/tablelist/fktable.vue';
 import ChineseDictionary from '@/assets/js/ChineseDictionary.js';
-import ImportDialog from './importDialog';
+import ImportDialog from '@/js/pages/promotionCenter/components/importDialog';
 // import mAutocomplete from './autocomplete.vue'
 /* import Vue from 'vue' */
 

@@ -4,7 +4,7 @@ import tabList from '@/views/pages/promotionCenter/details/tabList';
 import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDialog';
 // const _import = file =>
 //   require("@/jordanComponents/views/" + file + ".vue").default;
-import importDialog from '../components/importDialog';
+import importDialog from '@/js/pages/promotionCenter/components/importDialog';
 
 export default {
   name: 'detailTabs',
