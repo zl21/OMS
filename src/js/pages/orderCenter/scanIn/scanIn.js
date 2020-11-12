@@ -783,14 +783,14 @@ export default {
             },
           },
           {
-            text: vmI18n.t('bth.refresh'), // 刷新
+            text: vmI18n.t('btn.refresh'), // 刷新
             btnclick: () => {
               const _this = this;
               _this.getReturnBatch();
             },
           },
           {
-            text: vmI18n.t('bth.empty'), // 清除
+            text: vmI18n.t('btn.empty'), // 清除
             btnclick: () => {
               const _this = this;
               _this.removeData();

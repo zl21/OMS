@@ -1123,35 +1123,35 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: vmI18n.t('bth.virtualWarehous'), // 虚拟入库 按钮文本
+            text: vmI18n.t('btn.virtualWarehous'), // 虚拟入库 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.virtualLibrary();
             } // 按钮点击事件
           },
           {
-            text: vmI18n.t('bth.cancel_automaticRefund'), // 取消自动退款
+            text: vmI18n.t('btn.cancel_automaticRefund'), // 取消自动退款
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.cancelRefund();
             } // 按钮点击事件
           },
           {
-            text: vmI18n.t('bth.modifyRemarks'), // 修改备注 按钮文本
+            text: vmI18n.t('btn.modifyRemarks'), // 修改备注 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.bounced();
             } // 按钮点击事件
           },
           {
-            text: vmI18n.t('bth.mark_efective_product_transferred'), // 标记次品已调拨 按钮文本
+            text: vmI18n.t('btn.mark_efective_product_transferred'), // 标记次品已调拨 按钮文本
             disabled: true, // 按钮禁用控制
             btnclick: () => {
               this.defectiveGoods();
             } // 按钮点击事件
           },
           {
-            text: vmI18n.t('bth.return'), // 返回 按钮文本
+            text: vmI18n.t('btn.return'), // 返回 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               // this.$router.push({ path: "/m/action/returngoodList?id=2661" });
@@ -1440,7 +1440,7 @@ export default {
                     item.disabled = true;
                   }
                   // 虚拟入库
-                  if (item.text == _this.vmI18n.t('bth.virtualWarehous')) {
+                  if (item.text == _this.vmI18n.t('btn.virtualWarehous')) {
                     item.disabled = true;
                   }
                 });
@@ -1448,7 +1448,7 @@ export default {
               if (res.data.data.returnOrders.RETURN_STATUS == 60) {
                 _this.btnConfig.buttons.forEach((item) => {
                 // 修改备注
-                  if (item.text == _this.vmI18n.t('bth.modifyRemarks')) {
+                  if (item.text == _this.vmI18n.t('btn.modifyRemarks')) {
                     item.disabled = true;
                   }
                 });
@@ -1670,7 +1670,7 @@ export default {
                   item.disabled = true;
                 }
                 // 虚拟入库
-                if (item.text == _this.vmI18n.t('bth.virtualWarehous')) {
+                if (item.text == _this.vmI18n.t('btn.virtualWarehous')) {
                   item.disabled = true;
                 }
               });
@@ -1678,7 +1678,7 @@ export default {
             if (res.data.data.returnOrders.RETURN_STATUS == 60) {
               _this.btnConfig.buttons.forEach((item) => {
               // 修改备注
-                if (item.text == _this.vmI18n.t('bth.modifyRemarks')) {
+                if (item.text == _this.vmI18n.t('btn.modifyRemarks')) {
                   item.disabled = true;
                 }
               });
