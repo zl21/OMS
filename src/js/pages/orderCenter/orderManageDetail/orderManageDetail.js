@@ -32,29 +32,29 @@ export default {
           value: 'OC_B_ORDER',
         },
         {
-          label: vmI18n.t('common.preferential_info'), // 优惠信息
+          label: vmI18n.t('form_label.preferential_info'), // 优惠信息
           value: 'OC_B_ORDER_PROMOTION',
         },
         {
-          label: vmI18n.t('common.payment_info'), // 支付信息
+          label: vmI18n.t('form_label.payment_info'), // 支付信息
           value: 'OC_B_ORDER_PAYMENT',
         },
         {
-          label: vmI18n.t('common.shipping_info'), // 发货信息
+          label: vmI18n.t('form_label.shipping_info'), // 发货信息
           value: 'OC_B_ORDER_DELIVERY',
         },
         {
-          label: vmI18n.t('common.workOrder'), // 工单
+          label: vmI18n.t('form_label.workOrder'), // 工单
           value: '5',
           isShow: false,
         },
         {
-          label: vmI18n.t('common.status_in_warehouse'), // 仓内状态
+          label: vmI18n.t('form_label.status_in_warehouse'), // 仓内状态
           value: 'OC_B_ORDER_WMS_STATUS',
           isShow: false,
         },
         {
-          label: vmI18n.t('common.routing_info'), // 路由信息
+          label: vmI18n.t('form_label.routing_info'), // 路由信息
           value: 'OC_B_ORDER_ROUTE',
           isShow: false,
         },
