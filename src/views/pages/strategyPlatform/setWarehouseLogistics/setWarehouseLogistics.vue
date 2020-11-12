@@ -13,7 +13,7 @@
       </Collapse>
     </div>
     <div
-      v-if="this.$route.query.id !== '-1'"
+      v-if="this.$route.params.customizedModuleId !== 'New'"
       class="tableContent"
     >
       <!-- tab切换 -->
@@ -235,8 +235,9 @@
 </template>
 
 <script>
-import setWarehouseLogistics from '@/js/pages/strategyPlatform/setWarehouseLogistics/setWarehouseLogistics';
-export default setWarehouseLogistics;
+  import setWarehouseLogistics from '@/js/pages/strategyPlatform/setWarehouseLogistics/setWarehouseLogistics';
+
+  export default setWarehouseLogistics;
 </script>
 
 

@@ -120,7 +120,7 @@ export default {
         text: this.vmI18n.t('btn.save'), // 按钮文本
         btnclick: () => {
           const _this = this;
-          if (this.$route.query.id > 0) {
+          if (this.$route.params.customizedModuleId !== 'New') {
             if (_this.listArr.length == 0) {
               // _this.$Message.warning("请选择物流区域!");
               _this.$Message.warning(this.vmI18n.t('modalTips.y7'));
@@ -174,7 +174,7 @@ export default {
           const _this = this;
           _this.importTable.componentData = {
             tableName: 'ST_C_WAREHOUSE_LOGISTICS',
-            objid: _this.$route.query.id
+            objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId
           };
           _this.$children.find(item => item.name === 'importTable').openConfirm();
         }
@@ -193,7 +193,7 @@ export default {
         text: this.vmI18n.t('btn.modify_logistics'), // 按钮文本
         disabled: true,
         btnclick: () => {
-          this.modifyLogistics.componentData = { id: this.$route.query.id };
+          this.modifyLogistics.componentData = { id: this.$route.params.customizedModuleId == 'New' ? '-1' : this.$route.params.customizedModuleId };
           this.$children.find(item => item.name === 'modifyLogistics').openConfirm();
         }
       },
@@ -211,14 +211,19 @@ export default {
         text: this.vmI18n.t('btn.back'), // 按钮文本
         btnclick: () => {
           const _this = this;
-          _this.$store.commit('customize/TabHref', {
-            id: 1111113,
-            type: 'table',
-            name: 'ST_C_WAREHOUSE_LOGISTICS',
-            // label: "仓库物流优先级方案",warehouse_logistics_priority_scheme
-            label: this.vmI18n.t('panel_label.warehouse_logistics_priority_scheme'),
-            back: true
+          _this.$store.commit('global/tabOpen', {
+            type: 'S',
+            tableName: 'ST_C_WAREHOUSE_LOGISTICS',
+            tableId: 1111113
           });
+          // _this.$store.commit('customize/TabHref', {
+          //   id: 1111113,
+          //   type: 'table',
+          //   name: 'ST_C_WAREHOUSE_LOGISTICS',
+          //   // label: "仓库物流优先级方案",warehouse_logistics_priority_scheme
+          //   label: this.vmI18n.t('panel_label.warehouse_logistics_priority_scheme'),
+          //   back: true
+          // });
         }
       }
     ];
@@ -258,7 +263,7 @@ export default {
       }
     ];
 
-    if (this.$route.query.id !== '-1') {
+    if (this.$route.params.customizedModuleId !== 'New') {
       this.information.formData[0].itemdata.readonly = true;
       this.setTableHeight();
       this.refresh();
@@ -304,7 +309,7 @@ export default {
           ST_C_WAREHOUSE_LOGISTICS_ITEM: [],
           ST_C_WAREHOUSE_LOGISTICS_RANK_RESULT: cloneListArr
         },
-        objid: this.$route.query.id
+        objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId
       };
       fromData.append('param', JSON.stringify(param));
       // 保存
@@ -316,7 +321,7 @@ export default {
       _this.isSaveLoading = false;
       if (code === 0) {
         _this.$Message.success(this.vmI18n.t('modalTips.z9')); // 保存成功
-        if (this.$route.query.id !== '-1') {
+        if (this.$route.params.customizedModuleId !== 'New') {
           this.refresh();
         } else {
           this.$store.commit('customize/TabHref', {
@@ -372,7 +377,7 @@ export default {
       const _this = this;
       _this.isSaveLoading = true;
       const fromData = new FormData();
-      const param = { objid: this.$route.query.id };
+      const param = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId };
       fromData.append('param', JSON.stringify(param));
 
       // 保存
@@ -481,7 +486,7 @@ export default {
       // 接口
       _this.tableLoading = false;
       const fromData = new FormData();
-      const params = { objid: this.$route.query.id, treeNode: treeList };
+      const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeNode: treeList };
       fromData.append('param', JSON.stringify(params));
       // 接口
       const {
@@ -514,7 +519,7 @@ export default {
         });
       }
       const fromData = new FormData();
-      const params = { objid: this.$route.query.id, treeNode: treeList };
+      const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeNode: treeList };
       fromData.append('param', JSON.stringify(params));
       // 接口
       const {
@@ -583,7 +588,7 @@ export default {
       _this.listArr = [];
       _this.tableLoading = true;
       const fromData = new FormData();
-      const params = { objid: _this.$route.query.id, treeLikeKey: e };
+      const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeLikeKey: e };
       fromData.append('param', JSON.stringify(params));
       // 接口
       const {
@@ -652,7 +657,7 @@ export default {
       const _this = this;
       _this.isSaveLoading = true;
       const fromData = new FormData();
-      const param = { objid: this.$route.query.id };
+      const param = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId };
       fromData.append('param', JSON.stringify(param));
       const {
         data: { code, data, message }
@@ -685,7 +690,7 @@ export default {
 
       const fromData = new FormData();
       const param = {
-        objid: _this.$route.query.id,
+        objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId,
         treeNode: treeList
       };
       fromData.append('param', JSON.stringify(param));
