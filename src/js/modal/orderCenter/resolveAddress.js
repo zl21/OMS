@@ -129,14 +129,14 @@ export default {
         if (!f) return this.CheckRegxMobile();
       } else {
         // return this.$Message.error("请填写收货人手机");
-        return this.$Message.error(vmI18n.t('modalTips.yi'));
+        return this.$Message.error(window.vmI18n.t('modalTips.yi'));
       }
       if (this.ReceivName) {
         // let f = this.CheckRegx(this.regx.name, this.ReceivName);
         // if (!f) return this.CheckRegxName();
       } else {
         // return this.$Message.error("请填写收货人名称");
-        return this.$Message.error(vmI18n.t('modalTips.yj'));
+        return this.$Message.error(window.vmI18n.t('modalTips.yj'));
       }
 
       this.data.receiver_name = this.ReceivName;
@@ -149,15 +149,15 @@ export default {
     update() {
       if (!this.data.cp_c_region_province_id) {
         // return this.$Message.error("请填写省份！");
-        return this.$Message.error(vmI18n.t('modalTips.yk'));
+        return this.$Message.error(window.vmI18n.t('modalTips.yk'));
       }
       if (!this.data.cp_c_region_city_id) {
         // return this.$Message.error("请填写城市！");
-        return this.$Message.error(vmI18n.t('modalTips.yl'));
+        return this.$Message.error(window.vmI18n.t('modalTips.yl'));
       }
       if (!this.data.receiver_address) {
         // return this.$Message.error("请填写详细地址！");
-        return this.$Message.error(vmI18n.t('modalTips.ym'));
+        return this.$Message.error(window.vmI18n.t('modalTips.ym'));
       }
       //  f = this.CheckRegx(this.regx.name, this.data.receiver_name);
       // if (!f) return this.CheckRegxName();
@@ -215,15 +215,15 @@ export default {
     // },
     CheckRegxMobile() {
       // return this.$Message.error("收货人手机不合法");
-      return this.$Message.error(vmI18n.t('modalTips.yn'));
+      return this.$Message.error(window.vmI18n.t('modalTips.yn'));
     },
     CheckRegxPhone() {
       // return this.$Message.error("收货人电话不合法");
-      return this.$Message.error(vmI18n.t('modalTips.yo'));
+      return this.$Message.error(window.vmI18n.t('modalTips.yo'));
     },
     CheckRegxZip() {
       // return this.$Message.error("邮编不合法");
-      return this.$Message.error(vmI18n.t('modalTips.yp'));
+      return this.$Message.error(window.vmI18n.t('modalTips.yp'));
     },
     searchProv() {
       const name = this.ReceivProvinceName;
@@ -240,7 +240,7 @@ export default {
         });
       } 
       // this.$Message.error("请正确填写省份");
-      this.$Message.error(vmI18n.t('modalTips.yr'));
+      this.$Message.error(window.vmI18n.t('modalTips.yr'));
       this.dataAysis = false;
     },
     searchCity() {
@@ -256,7 +256,7 @@ export default {
         });
       } 
       // this.$Message.error("请正确填写城市");
-      this.$Message.error(vmI18n.t('modalTips.ys'));
+      this.$Message.error(window.vmI18n.t('modalTips.ys'));
       this.dataAysis = false;
     },
     searchArea() {
@@ -268,7 +268,7 @@ export default {
         this.ReceivArea = obj.ID;
       } else {
         // this.$Message.error("请正确填写区县");
-        this.$Message.error(vmI18n.t('modalTips.yt'));
+        this.$Message.error(window.vmI18n.t('modalTips.yt'));
         this.dataAysis = false;
       }
     },
@@ -286,7 +286,7 @@ export default {
         }));
       } else {
         // this.$Message.error("省份查询失败");
-        this.$Message.error(vmI18n.t('modalTips.yu'));
+        this.$Message.error(window.vmI18n.t('modalTips.yu'));
       }
     },
     /** 回调
@@ -297,7 +297,7 @@ export default {
     async getCity(callback, prov) {
       const provid = prov || this.data.cp_c_region_province_id;
       // if (provid === "") return this.$Message.error("请先选择省份");
-      if (provid === '') return this.$Message.error(vmI18n.t('modalTips.yv'));
+      if (provid === '') return this.$Message.error(window.vmI18n.t('modalTips.yv'));
       const query = {
         ID: provid,
         REGIONTYPE: 'PROV',
@@ -312,14 +312,14 @@ export default {
         this.data.cp_c_region_area_id = this.componentData.CP_C_REGION_AREA_ID;
       } else {
         // this.$Message.error("城市查询失败");
-        this.$Message.error(vmI18n.t('modalTips.yw'));
+        this.$Message.error(window.vmI18n.t('modalTips.yw'));
       }
       typeof callback === 'function' ? callback() : '';
     },
     async getArea(callback, city) {
       const cityid = city || this.data.cp_c_region_city_id;
       // if (cityid === "") return this.$Message.error("请先选择城市");
-      if (cityid === '') return this.$Message.error(vmI18n.t('modalTips.yx'));
+      if (cityid === '') return this.$Message.error(window.vmI18n.t('modalTips.yx'));
       const query = {
         ID: cityid,
         REGIONTYPE: 'CITY',
@@ -332,7 +332,7 @@ export default {
         }));
       } else {
         // this.$Message.error("区县查询失败");
-        this.$Message.error(vmI18n.t('modalTips.yy'));
+        this.$Message.error(window.vmI18n.t('modalTips.yy'));
       }
       typeof callback === 'function' ? callback() : '';
     },

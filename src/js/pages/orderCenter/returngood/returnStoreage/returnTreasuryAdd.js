@@ -590,7 +590,7 @@ export default {
               const _this = this;
               if (_this.isMatch == 1) {
                 // return _this.$Message.error("此退货入库单已经关闭匹配，不允许选择!");
-                return _this.$Message.error(vmI18n.t('modalTips.q6'));
+                return _this.$Message.error(window.vmI18n.t('modalTips.q6'));
               }
               if (_this.$route.query.id == -1) return;
               this.service.orderCenter.manualMatchingCheck({ id: _this.$route.query.id })
@@ -636,7 +636,7 @@ export default {
               const _this = this;
               if (_this.isMatch == 1) {
                 // return _this.$Message.error("此退货入库单已经关闭匹配，不允许选择!");
-                return _this.$Message.error(vmI18n.t('modalTips.q6'));
+                return _this.$Message.error(window.vmI18n.t('modalTips.q6'));
               }
               if (_this.$route.query.id == -1) return;
               this.service.orderCenter.manualMatchingCheck({ id: _this.$route.query.id })
@@ -1080,7 +1080,7 @@ export default {
         && !lists.logistics_code
       ) {
         // _this.$Message.error("请输入查询条件！");
-        _this.$Message.error(vmI18n.t('modalTips.i8'));
+        _this.$Message.error(window.vmI18n.t('modalTips.i8'));
         return;
       }
       _this.order.table.loading = true;
@@ -1123,7 +1123,7 @@ export default {
       _this.jordanTableConfig.data = [];
       if (!this.onSelectData.length) {
         // _this.$Message.error("请选择一条数据！");
-        _this.$Message.error(vmI18n.t('modalTips.i7'));
+        _this.$Message.error(window.vmI18n.t('modalTips.i7'));
         return;
       }
       const data = _this.information.formValue;

@@ -1177,7 +1177,7 @@ export default {
         // });
       } else {
         if (_this.agTableConfig.rowData.length === 0) {
-          return _this.$Message.error(vmI18n.t('modalTips.z4'));// 列表没有数据,无法导出!
+          return _this.$Message.error(window.vmI18n.t('modalTips.z4'));// 列表没有数据,无法导出!
         }
         _this.warningModal = true;
       }

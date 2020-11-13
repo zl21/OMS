@@ -232,7 +232,7 @@ export default {
               // 新增订单走新保存（去掉草稿模式）
               if (self.$route.params.customizedModuleId === '-1') {
                 self.saveAdd(data);
-                return ;
+                return;
               }
               // 如果是丢单复制或者复制订单的保存，传被复制订单的id
               // 如果为丢单复制,则新增一个标识
@@ -1282,7 +1282,7 @@ export default {
         // _this.$Message.error('请先选择下单店铺');
       }
     },
-    keyDown(e){},
+    keyDown(e) {},
     // 返回
     back() {
       this.$store.commit('customize/TabHref', {

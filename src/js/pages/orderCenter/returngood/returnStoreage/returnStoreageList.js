@@ -121,13 +121,13 @@ export default {
               const ids = this.selection.map(item => item.ID);
               if (ids.length === 0)
               // return this.$Message.error("请选择一条明细手工匹配");
-              { return this.$Message.error(vmI18n.t('modalTips.p4')); }
+              { return this.$Message.error(window.vmI18n.t('modalTips.p4')); }
               if (ids.length > 1)
               // return this.$Message.error("只能选择一条明细手工匹配");
-              { return this.$Message.error(vmI18n.t('modalTips.p5')); }
+              { return this.$Message.error(window.vmI18n.t('modalTips.p5')); }
               if (this.selection[0].IS_OFF_MATCH == 1)
               // return this.$Message.error("此退货入库单已经关闭匹配，不允许选择");
-              { return this.$Message.error(vmI18n.t('modalTips.q6')); }
+              { return this.$Message.error(window.vmI18n.t('modalTips.q6')); }
               const id = ids[0];
               // 需要验证是否能够进入手工匹配界面
               this.service.orderCenter.manualMatchingCheck({ id })
@@ -175,13 +175,13 @@ export default {
               const ids = this.selection.map(item => item.ID);
               if (ids.length === 0)
               // return this.$Message.error("请选择一条明细错发强制匹配");
-              { return this.$Message.error(vmI18n.t('modalTips.p7')); }
+              { return this.$Message.error(window.vmI18n.t('modalTips.p7')); }
               if (ids.length > 1)
               // return this.$Message.error("只能选择一条明细错发强制匹配");
-              { return this.$Message.error(vmI18n.t('modalTips.p8')); }
+              { return this.$Message.error(window.vmI18n.t('modalTips.p8')); }
               if (this.selection[0].IS_OFF_MATCH == 1)
               // return this.$Message.error("此退货入库单已经关闭匹配，不允许选择");
-              { return this.$Message.error(vmI18n.t('modalTips.q6')); }
+              { return this.$Message.error(window.vmI18n.t('modalTips.q6')); }
               const id = ids[0];
               // 需要验证是否能够进入错发强制匹配界面
               this.service.orderCenter.manualMatchingCheck({ id })
@@ -230,7 +230,7 @@ export default {
               const ids = this.selection.map(item => item.ID);
               if (ids.length === 0)
               // return this.$Message.error("未选择退货入库单,请选择一条数据后再操作！");
-              { return this.$Message.error(vmI18n.t('modalTips.o0')); }
+              { return this.$Message.error(window.vmI18n.t('modalTips.o0')); }
               this.service.orderCenter.returnCancel({ ids })
               // this.$network
               //   .axios({
@@ -836,7 +836,7 @@ export default {
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
       if (self.selection.length) {
         // if (this.isExport) return this.$Message.error("有一项导出正在进行中");
-        if (this.isExport) return this.$Message.error(vmI18n.t('modalTips.f8'));
+        if (this.isExport) return this.$Message.error(window.vmI18n.t('modalTips.f8'));
         this.isExport = true;
         const ids = [];
         for (let i = 0; i < self.selection.length; i++) {
@@ -870,7 +870,7 @@ export default {
       } else {
         if (self.tableConfig.data.length === 0)
         // return self.$Message.error("列表没有数据,无法导出!");
-        { return self.$Message.error(vmI18n.t('modalTips.z4')); }
+        { return self.$Message.error(window.vmI18n.t('modalTips.z4')); }
         self.warningModal = true;
       }
     },
@@ -889,7 +889,7 @@ export default {
     warningOk() {
       const self = this;
       // if (this.isExport) return this.$Message.error("有一项导出正在进行中");
-      if (this.isExport) return this.$Message.error(vmI18n.t('modalTips.f8'));
+      if (this.isExport) return this.$Message.error(window.vmI18n.t('modalTips.f8'));
       this.isExport = true;
       const arr = this.requestParams();
       arr.pageSize = 999999;

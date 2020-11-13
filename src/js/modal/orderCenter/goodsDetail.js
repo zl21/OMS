@@ -72,7 +72,7 @@ export default {
                 const ids = this.selection.map(row => row.ID);
                 if (ids.length === 0)
                 // return self.$Message.error("至少选择一条订单明细");
-                { return self.$Message.error(vmI18n.t('modalTips.zk')); }
+                { return self.$Message.error(window.vmI18n.t('modalTips.zk')); }
                 const param = {
                   orderId: self.componentData.id,
                   ids,
@@ -165,7 +165,7 @@ export default {
                 const ids = this.selection.map(row => row.ID);
                 if (ids.length === 0)
                 // return self.$Message.error("至少选择一条订单明细");
-                { return self.$Message.error(vmI18n.t('modalTips.zk')); }
+                { return self.$Message.error(window.vmI18n.t('modalTips.zk')); }
                 const param = {
                   IDS: ids.join(','),
                 };
