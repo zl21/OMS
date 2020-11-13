@@ -16,7 +16,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: vmI18n.t('common.determine'), // 确定 按钮文本
+            text: window.vmI18n.t('common.determine'), // 确定 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -58,7 +58,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: vmI18n.t('common.cancel'), // 取消 按钮文本
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -105,7 +105,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: vmI18n.t('other.shop'), // 店铺 input前面显示的lable值
+              name: window.vmI18n.t('other.shop'), // 店铺 input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP',
               reftableid: 24475,

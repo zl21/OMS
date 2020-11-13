@@ -798,7 +798,7 @@ export default {
     // 设置表格高度
     setTableHeight() {
       const _this = this;
-      const contentHeight = document.getElementsByClassName('main-content')[0].clientHeight;
+      const contentHeight = document.getElementById('content').clientHeight;
       const Theight = document.getElementsByClassName('tableBox')[0];
       if (Theight !== undefined) {
         document.getElementsByClassName('list-table')[0].style = `height: ${contentHeight - 240}px;`;

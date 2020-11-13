@@ -148,7 +148,7 @@
     </Modal>
     <Modal
       v-model="virtualWarehouseModal"
-      :title="vmI18n.t('common.manualWarehous')"
+      :title="vmI18n.t('modalTitle.manualWarehous')"
       width="420"
       :mask="true"
       @on-ok="virtualWarehouseLibrary"

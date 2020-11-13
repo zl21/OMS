@@ -21,7 +21,7 @@ export default {
         formData: [
           {
             style: 'select', // 下拉框类型
-            label: vmI18n.t('form_label.supplierID'), // 供应商ID 下拉框前的值
+            label: window.vmI18n.t('form_label.supplierID'), // 供应商ID 下拉框前的值
             width: '24', // 所占宽度宽度
             value: 'vendorId', // 输入框的值
             multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启
@@ -36,7 +36,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: vmI18n.t('other.billCode'), // 账单编码 下拉框前的值
+            label: window.vmI18n.t('other.billCode'), // 账单编码 下拉框前的值
             width: '24', // 所占宽度宽度
             value: 'billNumber', // 输入框的值
             multiple: false,
@@ -54,7 +54,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: vmI18n.t('btn.generate'), // 生成 按钮文本
+            text: window.vmI18n.t('btn.generate'), // 生成 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -63,7 +63,7 @@ export default {
             } // 按钮点击事件
           }, {
             type: '', // 按钮类型
-            text: vmI18n.t('common.cancel'), // 取消 按钮文本
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制

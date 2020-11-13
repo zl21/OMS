@@ -19,7 +19,7 @@ export default {
           {
             type: '', // 按钮类型
             // text: "确定", //按钮文本
-            text: vmI18n.t('common.determine'), // 按钮文本
+            text: window.vmI18n.t('common.determine'), // 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -29,18 +29,18 @@ export default {
               const formData = formData;
               if (!formData[0].itemdata.pid) {
                 // promptMessage = "店铺";
-                promptMessage = vmI18n.t('other.shop');
+                promptMessage = window.vmI18n.t('other.shop');
               } else if (!formData[1].itemdata.pid) {
                 // promptMessage = "档期日程归属";
-                promptMessage = vmI18n.t('form_label.scheduleOwnership');
+                promptMessage = window.vmI18n.t('form_label.scheduleOwnership');
               } else if (!formData[2].itemdata.pid) {
                 // promptMessage = "实体仓库";
-                promptMessage = vmI18n.t('table_label.physical_warehouse');
+                promptMessage = window.vmI18n.t('table_label.physical_warehouse');
               } else if (
                 !self.warehouseManagementFromConfig.formValue.DELIVERYTYPE
               ) {
                 // promptMessage = "配送方式";
-                promptMessage = vmI18n.t('form_label.distributionMode');
+                promptMessage = window.vmI18n.t('form_label.distributionMode');
               }
               if (promptMessage) {
                 // this.$Message.warning(promptMessage + "不能为空");
@@ -79,7 +79,7 @@ export default {
           {
             type: '', // 按钮类型
             // text: "取消", //按钮文本
-            text: vmI18n.t('common.cancel'), // 按钮文本
+            text: window.vmI18n.t('common.cancel'), // 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -125,7 +125,7 @@ export default {
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
               // name: "店铺", //input前面显示的lable值
-              name: vmI18n.t('other.shop'),
+              name: window.vmI18n.t('other.shop'),
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP',
               reftableid: 24475,
@@ -157,7 +157,7 @@ export default {
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
               // name: "日程归属", //input前面显示的lable值
-              name: vmI18n.t('form_label.ownership'),
+              name: window.vmI18n.t('form_label.ownership'),
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'ST_C_VIPCOM_PROJECT_ITEM',
               reftableid: 24583,
@@ -184,7 +184,7 @@ export default {
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
               // name: "实体仓库", //input前面显示的lable值
-              name: vmI18n.t('table_label.physical_warehouse'),
+              name: window.vmI18n.t('table_label.physical_warehouse'),
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE',
               reftableid: 24486,
@@ -197,7 +197,7 @@ export default {
           {
             style: 'select', // 下拉框类型
             // label: "配送方式", //下拉框前的值
-            label: vmI18n.t('form_label.distributionMode'),
+            label: window.vmI18n.t('form_label.distributionMode'),
             width: '24', // 所占宽度宽度
             value: 'DELIVERYTYPE', // 输入框的值
             multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启

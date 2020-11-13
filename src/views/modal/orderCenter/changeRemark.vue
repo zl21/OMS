@@ -16,7 +16,7 @@
             :label="index"
           >
             <img
-              :src="'@/assets/image/img/' + index + '.png'"
+              :src="'/src/assets/image/img/'+index+'.png'"
               alt
             >
           </Radio>

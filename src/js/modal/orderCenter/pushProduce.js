@@ -17,7 +17,7 @@ export default {
         formData: [
           {
             // label: "商品SKU",
-            label: vmI18n.t('table_label.commoditySKU'),
+            label: window.vmI18n.t('table_label.commoditySKU'),
             style: 'dimSearch',
             width: '12',
             value: 'searchValue',
@@ -69,7 +69,7 @@ export default {
           },
           {
             // label: "商品款号",
-            label: vmI18n.t('table_label.itemNo'),
+            label: window.vmI18n.t('table_label.itemNo'),
             style: 'dimSearch',
             width: '12',
             value: 'psCProEcode',
@@ -119,22 +119,22 @@ export default {
       columns: [
         {
           // title: "商品SKU",
-          label: vmI18n.t('table_label.commoditySKU'),
+          label: window.vmI18n.t('table_label.commoditySKU'),
           key: 'ECODE',
         },
         {
           // title: "商品名称",
-          title: vmI18n.t('table_label.productName'),
+          title: window.vmI18n.t('table_label.productName'),
           key: 'PS_C_PRO_ENAME',
         },
         {
           // title: "商品SKU名称",
-          label: vmI18n.t('table_label.productSKUname'),
+          label: window.vmI18n.t('table_label.productSKUname'),
           key: 'SPEC',
         },
         {
           // title: "数量",
-          label: vmI18n.t('table_label.quantities'),
+          label: window.vmI18n.t('table_label.quantities'),
           key: 'qty',
         },
       ],
@@ -175,7 +175,7 @@ export default {
         if (res.data.code == 0) {
           if (res.data.data.data.length == 0) {
             // this.$Message.warning("查询数据为空!");
-            this.$Message.warning(vmI18n.t('modalTips.r8'));
+            this.$Message.warning(window.vmI18n.t('modalTips.r8'));
             elf.data = [];
             self.tableLoading = false;
             return;
@@ -188,7 +188,7 @@ export default {
           self.data = resData;
         } else {
           // this.$Message.warning("sku查询失败!");
-          this.$Message.warning(vmI18n.t('modalTips.zt'));
+          this.$Message.warning(window.vmI18n.t('modalTips.zt'));
         }
         self.tableLoading = false;
       } catch (e) {
@@ -201,12 +201,12 @@ export default {
       const result = {};
       if (self.componentData.a_2.length == 0) {
         // self.$Message.warning("请选中订单数据!");
-        self.$Message.warning(vmI18n.t('modalTips.yz'));
+        self.$Message.warning(window.vmI18n.t('modalTips.yz'));
         return;
       }
       if (JSON.stringify(self.rowClickData) == '{}') {
         // self.$Message.warning("请选中需要新增的赠品!");
-        self.$Message.warning(vmI18n.t('modalTips.xa'));
+        self.$Message.warning(window.vmI18n.t('modalTips.xa'));
         return;
       }
       result.ids = self.componentData.a_2;
@@ -246,7 +246,7 @@ export default {
                   columns: [
                     {
                       // title: "提示信息",
-                      title: vmI18n.t('modalTitle.tips'),
+                      title: window.vmI18n.t('modalTitle.tips'),
                       key: 'message',
                     },
                   ],

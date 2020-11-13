@@ -50,7 +50,7 @@ export default {
       importTable: {
         refFuns: 'confirmFun',
         // confirmTitle: "导入",
-        confirmTitle: vmI18n.t('modalTitle.import'),
+        confirmTitle: window.vmI18n.t('modalTitle.import'),
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -68,7 +68,7 @@ export default {
       setFromInput: {
         refFuns: 'confirmFun',
         // confirmTitle: "排序表单",
-        confirmTitle: vmI18n.t('modalTitle.sortForm'),
+        confirmTitle: window.vmI18n.t('modalTitle.sortForm'),
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '300',
         scrollable: false, // 是否可以滚动
@@ -88,32 +88,32 @@ export default {
         buttons: [
           {
             // text: "查找",
-            text: vmI18n.t('btn.find'), // 按钮文本
+            text: window.vmI18n.t('btn.find'), // 按钮文本
             btnclick: () => {
               this.requestBefore();
             },
           },
           {
             // text: "新增",
-            text: vmI18n.t('btn.add'), // 按钮文本
+            text: window.vmI18n.t('btn.add'), // 按钮文本
             btnclick: () => {
               this.$store.commit('customize/TabHref', {
                 id: -1, // id
                 type: 'action', // 类型action
                 name: 'returnTreasuryAdd', // 文件名
                 // label: "退货入库新增", //tab中文名
-                label: vmI18n.t('panel_label.returnTreasuryAdd'),
+                label: window.vmI18n.t('panel_label.returnTreasuryAdd'),
                 query: Object.assign({
                   id: -1, // id
                   // tabTitle: "退货入库新增", //tab中文名
-                  tabTitle: vmI18n.t('panel_label.returnTreasuryAdd'),
+                  tabTitle: window.vmI18n.t('panel_label.returnTreasuryAdd'),
                 }), // 带的参数
               });
             },
           },
           {
             // text: "手工匹配",
-            text: vmI18n.t('btn.manual_matching'), // 按钮文本
+            text: window.vmI18n.t('btn.manual_matching'), // 按钮文本
             disabled: false,
             btnclick: () => {
               const self = this;
@@ -144,13 +144,13 @@ export default {
                       type: 'action', // 类型action
                       name: 'manualMatching', // 文件名
                       // label: "退货入库-手工匹配", //tab中文名
-                      label: vmI18n.t(
+                      label: window.vmI18n.t(
                         'panel_label.return_warehousing_manual_matching'
                       ),
                       query: Object.assign({
                         id, // id
                         // tabTitle: "退货入库-手工匹配", //tab中文名
-                        tabTitle: vmI18n.t(
+                        tabTitle: window.vmI18n.t(
                           'panel_label.return_warehousing_manual_matching'
                         ),
                         source: 2,
@@ -167,7 +167,7 @@ export default {
           },
           {
             // text: "错发强制匹配",
-            text: vmI18n.t('btn.wrong_sending_forced_matching'), // 按钮文本
+            text: window.vmI18n.t('btn.wrong_sending_forced_matching'), // 按钮文本
             disabled: false,
             btnclick: () => {
               const self = this;
@@ -198,13 +198,13 @@ export default {
                       type: 'action', // 类型action
                       name: 'manualMatching', // 文件名
                       // label: "退货入库-错发强制匹配", //tab中文名
-                      label: vmI18n.t(
+                      label: window.vmI18n.t(
                         'panel_label.idreturn_warehousing_wrong_delivery_forced_matching'
                       ),
                       query: Object.assign({
                         id, //
                         // tabTitle: "退货入库-错发强制匹配", //tab中文名
-                        tabTitle: vmI18n.t(
+                        tabTitle: window.vmI18n.t(
                           'panel_label.idreturn_warehousing_wrong_delivery_forced_matching'
                         ),
                         source: 3,
@@ -223,7 +223,7 @@ export default {
           {
             // =======================================================暂时影藏
             // text: "作废",
-            text: vmI18n.t('btn.void'), // 按钮文本
+            text: window.vmI18n.t('btn.void'), // 按钮文本
             isShow: false,
             btnclick: () => {
               this.selection = this.$refs.agGridChild.AGTABLE.getSelect();
@@ -254,7 +254,7 @@ export default {
           {
             type: '', // 按钮类型
             // text: "导入", //按钮文本
-            text: vmI18n.t('btn.import'), // 按钮文本
+            text: window.vmI18n.t('btn.import'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
@@ -266,7 +266,7 @@ export default {
           },
           {
             // text: "导出", //按钮文本
-            text: vmI18n.t('btn.export'), // 按钮文本
+            text: window.vmI18n.t('btn.export'), // 按钮文本
             btnclick: () => {
               this.exportClick();
             }, // 按钮点击事件
@@ -288,7 +288,7 @@ export default {
           {
             icon: 'iconfont iconbj_col', // 按钮图标
             // name: "收藏",
-            name: vmI18n.t('btn.collection'), // 按钮文本
+            name: window.vmI18n.t('btn.collection'), // 按钮文本
             btnclick: () => {
               const self = this;
               self.setFavorite();
@@ -812,11 +812,11 @@ export default {
         type: 'action',
         name: 'returnTreasuryAdd',
         // label: "退货入库详情",
-        label: vmI18n.t('panel_label.returnTreasuryDetails'),
+        label: window.vmI18n.t('panel_label.returnTreasuryDetails'),
         query: Object.assign({
           id: row.ID, // 单据id
           // tabTitle: "退货入库详情",
-          tabTitle: vmI18n.t('panel_label.returnTreasuryDetails'),
+          tabTitle: window.vmI18n.t('panel_label.returnTreasuryDetails'),
           statusName: row.INVALIDSTATE,
         }),
       });

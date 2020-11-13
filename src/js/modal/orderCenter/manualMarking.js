@@ -23,28 +23,28 @@ export default {
             {
               style: 'input',
               // label: "押金订单号",
-              label: vmI18n.t('form_label.depositOrderNo'),
+              label: window.vmI18n.t('form_label.depositOrderNo'),
               value: 'demo1',
               width: '8',
             },
             {
               style: 'input',
               // label: "收货人",
-              label: vmI18n.t('form_label.consignee'),
+              label: window.vmI18n.t('form_label.consignee'),
               value: 'demo2',
               width: '8',
             },
             {
               style: 'input',
               // label: "收货人手机号",
-              label: vmI18n.t('form_label.consignee_phone'),
+              label: window.vmI18n.t('form_label.consignee_phone'),
               value: 'demo3',
               width: '8',
             },
             {
               style: 'input',
               // label: "买家昵称",
-              label: vmI18n.t('table_label.buyerNickname'),
+              label: window.vmI18n.t('table_label.buyerNickname'),
               value: 'demo4',
               width: '8',
             },
@@ -65,7 +65,7 @@ export default {
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
                 // name: "下单店铺", // input前面显示的lable值
-                name: vmI18n.t('form_label.orderShop'),
+                name: window.vmI18n.t('form_label.orderShop'),
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'CP_C_SHOP', // 对应的表
                 reftableid: 24475, // 对应的表ID
@@ -87,7 +87,7 @@ export default {
             {
               style: 'select', // 下拉框类型
               // label: "发货仓库", // 下拉框前的值
-              label: vmI18n.t('form_label.delivery_warehouse'),
+              label: window.vmI18n.t('form_label.delivery_warehouse'),
               width: '8', // 所占宽度宽度
               value: 'CP_C_PHY_WAREHOUSE_ID', // 输入框的值
               selectChange: () => {
@@ -121,7 +121,7 @@ export default {
           buttons: [
             {
               // text: "查询",
-              text: vmI18n.t('btn.query'), // 按钮文本
+              text: window.vmI18n.t('btn.query'), // 按钮文本
               size: 'small',
               brnclick: () => {
                 this.searchChange();
@@ -135,37 +135,37 @@ export default {
         columns: [
           {
             // title: "押金订单号",
-            title: vmI18n.t('form_label.depositOrderNo'),
+            title: window.vmI18n.t('form_label.depositOrderNo'),
             key: 'demo1',
           },
           {
             // title: "收货人",
-            title: vmI18n.t('table_label.consignee'),
+            title: window.vmI18n.t('table_label.consignee'),
             key: 'demo2',
           },
           {
             // title: "卖家昵称",
-            title: vmI18n.t('table_label.seller_nickname'),
+            title: window.vmI18n.t('table_label.seller_nickname'),
             key: 'demo3',
           },
           {
             // title: "收货人手机",
-            title: vmI18n.t('form_label.consignee_phone'),
+            title: window.vmI18n.t('form_label.consignee_phone'),
             key: 'demo4',
           },
           {
             // title: "发货仓库",
-            title: vmI18n.t('form_label.delivery_warehouse'),
+            title: window.vmI18n.t('form_label.delivery_warehouse'),
             key: 'demo5',
           },
           {
             // title: "物流单号",
-            title: vmI18n.t('form_label.logisticsOrder_No'),
+            title: window.vmI18n.t('form_label.logisticsOrder_No'),
             key: 'demo6',
           },
           {
             // title: "下单店铺",
-            title: vmI18n.t('form_label.orderShop'),
+            title: window.vmI18n.t('form_label.orderShop'),
             key: 'demo7',
           },
         ],
@@ -177,7 +177,7 @@ export default {
         buttons: [
           {
             // text: "确定", // 按钮文本
-            text: vmI18n.t('common.determine'),
+            text: window.vmI18n.t('common.determine'),
             size: 'small', // 按钮大小
             btnclick: () => {
               this.confirmChange();
@@ -185,7 +185,7 @@ export default {
           },
           {
             // text: "取消", // 按钮文本
-            text: vmI18n.t('common.cancel'),
+            text: window.vmI18n.t('common.cancel'),
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {

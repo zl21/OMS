@@ -17,32 +17,32 @@ export default {
           {
             key: 'ECODE',
             // title: "条码"
-            title: vmI18n.t('form_label.barCode'),
+            title: window.vmI18n.t('form_label.barCode'),
           },
           {
             key: 'sizeName',
             // title: "尺码",
-            title: vmI18n.t('other.size'),
+            title: window.vmI18n.t('other.size'),
           },
           {
             key: 'colorName',
             // title: "颜色",
-            title: vmI18n.t('other.color'),
+            title: window.vmI18n.t('other.color'),
           },
           {
             key: 'QTY',
             // title: "数量",
-            title: vmI18n.t('table_label.quantities'),
+            title: window.vmI18n.t('table_label.quantities'),
           },
           {
             key: 'PS_C_PRO_ENAME',
             // title: "商品名称",
-            title: vmI18n.t('table_label.productName'),
+            title: window.vmI18n.t('table_label.productName'),
           },
           {
             key: 'IS_GIFT',
             // title: "是否赠品",
-            title: vmI18n.t('table_label.whetherGift'),
+            title: window.vmI18n.t('table_label.whetherGift'),
             render: (h, params) => {
               const IS_GIFT = params.row.IS_GIFT == 1 ? '是' : '否';
               return h('span', {}, IS_GIFT);
@@ -51,7 +51,7 @@ export default {
           {
             key: 'IS_DELETE',
             // title: "操作",
-            title: vmI18n.t('table_label.operation'),
+            title: window.vmI18n.t('table_label.operation'),
             render: (h, params) => h(
               'a',
               {
@@ -93,14 +93,14 @@ export default {
         buttons: [
           {
             // text: "确定", //按钮文本
-            text: vmI18n.t('common.determine'), // 按钮文本
+            text: window.vmI18n.t('common.determine'), // 按钮文本
             btnclick: () => {
               this.submit();
             },
           },
           {
             // text: "取消", //按钮文本
-            text: vmI18n.t('common.cancel'), // 按钮文本
+            text: window.vmI18n.t('common.cancel'), // 按钮文本
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
@@ -191,27 +191,27 @@ export default {
         {
           key: 'ECODE',
           // title: "条码",
-          title: vmI18n.t('form_label.barCode'),
+          title: window.vmI18n.t('form_label.barCode'),
         },
         {
           key: 'QTY',
           // title: "数量",
-          title: vmI18n.t('table_label.quantities'),
+          title: window.vmI18n.t('table_label.quantities'),
         },
         {
           key: 'PS_C_PRO_ENAME',
           // title: "商品名称",
-          title: vmI18n.t('table_label.productName'),
+          title: window.vmI18n.t('table_label.productName'),
         },
         {
           key: 'GBCODE',
           // title: "国标码",
-          title: vmI18n.t('form_label.gBCode'),
+          title: window.vmI18n.t('form_label.gBCode'),
         },
         {
           key: 'IS_GIFT',
           // title: "是否赠品",
-          title: vmI18n.t('table_label.whetherGift'),
+          title: window.vmI18n.t('table_label.whetherGift'),
         },
       ];
       this.columns = cols;

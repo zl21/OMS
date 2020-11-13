@@ -24,6 +24,7 @@
     distribIds：仓库id
   -->
   <matrix
+    ref="matrixOne"
     :edit="true"
     :general="true"
     :isdisabled="false"
@@ -31,7 +32,6 @@
     :is-stock-btn="false"
     :objid="componentData.objid"
     :encode="componentData.encode"
-    ref="matrixOne"
     :tablename="componentData.tablename"
     :distrib-ids="componentData.distribIds"
     :return-type="componentData.returnType"

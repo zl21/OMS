@@ -10,15 +10,15 @@ export default {
       qty: '1',
       columns: [
         {
-          title: vmI18n.t('table_label.commoditySKU'), // 商品SKU
+          title: window.vmI18n.t('table_label.commoditySKU'), // 商品SKU
           key: 'ECODE'
         },
         {
-          title: vmI18n.t('table_label.productName'), // 商品名称
+          title: window.vmI18n.t('table_label.productName'), // 商品名称
           key: 'PS_C_PRO_ENAME'
         },
         {
-          title: vmI18n.t('table_label.productSKUname'), // 商品SKU名称
+          title: window.vmI18n.t('table_label.productSKUname'), // 商品SKU名称
           key: 'SPEC'
         },
         // {

@@ -1151,8 +1151,7 @@ export default {
     // 设置表格高度
     setTableHeight() {
       const _this = this;
-      const contentHeight = document.getElementsByClassName('main-content')[0]
-        .clientHeight;
+      const contentHeight = document.getElementById('content').clientHeight;
       let returnHeight = 25;
       returnHeight += document.getElementsByClassName('buttonBox')[0]
         .clientHeight;

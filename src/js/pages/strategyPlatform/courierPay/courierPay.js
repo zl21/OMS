@@ -567,7 +567,7 @@ export default {
         return;
       }
       if (!self.jordanTableConfig.data.length) return self.$message.error('明细为空不允许保存');
-      return self.$message.error(vmI18n.t('modalTips.x4'));
+      return self.$message.error(self.vmI18n.t('modalTips.x4'));
       const formdata = new FormData();
       formdata.append('param', JSON.stringify(param));
       const {
