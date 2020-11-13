@@ -371,7 +371,7 @@ export default {
               // 下拉框选项值
               {
                 value: '1',
-                label: vmI18n.t('form_label.returnGood')// 退货
+                label: vmI18n.t('table_label.returnGood')// 退货
               },
               {
                 value: '2',
@@ -449,7 +449,7 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: vmI18n.t('table_label.returnLogisticsCompany'), // 退回物流公司
+              fkdesc: vmI18n.t('form_label.returnLogisticsCompany'), // 退回物流公司
               inputname: 'CP_C_LOGISTICS_ENAME:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
@@ -511,7 +511,7 @@ export default {
           },
           {
             style: '',
-            label: vmI18n.t('form_label.generate_replacement_order'), // 是否生成换货单
+            label: vmI18n.t('panel_label.generate_replacement_order'), // 是否生成换货单
             dataAcessKey: '',
             disabled: false, // 按钮禁用控制
             value: 'IS_RETURN_ORDER_EXCHANGE',
@@ -559,7 +559,7 @@ export default {
                       // 退回物流公司
                         if (
                           list.style === 'popInput'
-                        && list.itemdata.name === _this.vmI18n.t('table_label.returnLogisticsCompany')
+                        && list.itemdata.name === _this.vmI18n.t('form_label.returnLogisticsCompany')
                         ) {
                           list.itemdata.pid = arrList.CP_C_LOGISTICS_ID;
                           list.itemdata.valuedata = arrList.CP_C_LOGISTICS_ENAME;
@@ -718,7 +718,7 @@ export default {
             },
             {
               key: 'PRICE',
-              title: vmI18n.t('form_label.tagPrice'), // 吊牌价
+              title: vmI18n.t('table_label.tagPrice'), // 吊牌价
               dataAcessKey: 'PRICE_LIST'
             },
             {
@@ -739,7 +739,7 @@ export default {
             {
               key: 'AMT_SETTLE_TOT',
               dataAcessKey: 'AMT_SETTLE_TOT',
-              title: vmI18n.t('form_label.settlementAmount')// 结算金额
+              title: vmI18n.t('table_label.settlementAmount')// 结算金额
             },
             {
               key: 'PRODUCT_MARK',
@@ -2494,7 +2494,7 @@ export default {
           },
           {
             key: 'PRICE',
-            title: _this.vmI18n.t('form_label.tagPrice'), // 吊牌价
+            title: _this.vmI18n.t('table_label.tagPrice'), // 吊牌价
             dataAcessKey: 'PRICE_LIST'
           },
           {
@@ -2515,7 +2515,7 @@ export default {
           {
             key: 'AMT_SETTLE_TOT',
             dataAcessKey: 'AMT_SETTLE_TOT',
-            title: _this.vmI18n.t('form_label.settlementAmount')// 结算金额
+            title: _this.vmI18n.t('table_label.settlementAmount')// 结算金额
           },
           {
             key: 'PRODUCT_MARK',
@@ -3004,7 +3004,7 @@ export default {
           {
             key: 'PRICE',
             dataAcessKey: 'PRICE_LIST',
-            title: _this.vmI18n.t('form_label.tagPrice'), // 吊牌价
+            title: _this.vmI18n.t('table_label.tagPrice'), // 吊牌价
           },
           {
             key: 'AMT_REFUND',
@@ -4285,7 +4285,7 @@ export default {
         // 退回物流公司
         if (
           list.style === 'popInput'
-          && list.itemdata.name === this.vmI18n.t('table_label.returnLogisticsCompany')
+          && list.itemdata.name === this.vmI18n.t('form_label.returnLogisticsCompany')
         ) {
           list.itemdata.pid = this.onSelectData[0].CP_C_LOGISTICS_ID;
           list.itemdata.valuedata = this.onSelectData[0].CP_C_LOGISTICS_ENAME;

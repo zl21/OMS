@@ -1,3 +1,4 @@
+// 额外退款新增/编辑、已发货退款编辑  共用此组件
 import reButton from 'professionalComponents/businessButton';
 import reTable from 'professionalComponents/businessActionTable';
 import reForm from 'professionalComponents/businessForm';
@@ -552,7 +553,7 @@ export default {
                   tableId: 249130393,
                   tableName: 'OC_B_RETURN_AF_SEND',
                   back: true,
-                  label: vmI18n.t('btn.refundNoteDelivered'), // 已发货退款单
+                  label: vmI18n.t('form_label.refundNoteDelivered'), // 已发货退款单
                 });
               }
               // 销毁当前实例
@@ -1177,7 +1178,7 @@ export default {
                 id: 249130393,
                 type: 'table',
                 name: 'OC_B_RETURN_AF_SEND',
-                label: vmI18n.t('btn.refundNoteDelivered'), // 已发货退款单
+                label: vmI18n.t('form_label.refundNoteDelivered'), // 已发货退款单
                 back: true,
               });
             }
