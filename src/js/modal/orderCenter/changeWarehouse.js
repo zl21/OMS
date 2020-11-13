@@ -38,15 +38,15 @@ export default {
       updateRemarkOptions: [
         {
           label: '原仓缺货改仓',
-          label: vmI18n.t('other.originalWarehouseOutOfStock_change'),
+          value: vmI18n.t('other.originalWarehouseOutOfStock_change'),
         },
         {
           label: '系统错判改仓',
-          label: vmI18n.t('other.sysWrongJudgment_change'),
+          value: vmI18n.t('other.sysWrongJudgment_change'),
         },
         {
           label: '新增仓库改仓',
-          label: vmI18n.t('other.newWarehouse_change'),
+          value: vmI18n.t('other.newWarehouse_change'),
         },
       ],
       btnConfig: {
@@ -84,7 +84,7 @@ export default {
   },
   mounted() {
     this.zIndex = Number(
-      document.getElementsByClassName('burgeon-modal-wrap')[0].style.zIndex
+      document.getElementsByClassName('ark-modal-wrap')[0].style.zIndex
     ) + 50;
     this.getListData();
     document.addEventListener('keydown', this.onKeyDown);
@@ -106,22 +106,23 @@ export default {
       const fromdata = new FormData();
       if (!self.pid) {
         self.$Message.warning({
-          // content: "请选择仓库",
-          content: vmI18n.t('modalTips.zi'),
+          content: vmI18n.t('modalTips.zi'),//请选择仓库
           duration: 5,
           top: 80,
         });
         return false;
       }
+      console.log("isOutOfStockFlag",isOutOfStockFlag);
       self.isShowFromLoading = true;
       fromdata.append('ids', self.componentData.ids);
       fromdata.append('warehouseId', self.pid);
       fromdata.append('isOutOfStockFlag ', isOutOfStockFlag);
       fromdata.append('updateRemark', self.updateRemark);
+      console.log("fromdata",fromdata);
       axios({
         url: '/api/cs/oc/oms/v1/updateWarehouse',
         method: 'post',
-        cancelToken: true,
+        // cancelToken: true,
         data: fromdata,
       }).then((res) => {
         self.isShowFromLoading = false;

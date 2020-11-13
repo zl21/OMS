@@ -68,7 +68,7 @@ export default {
   },
   mounted() {
     this.zIndex = Number(
-      document.getElementsByClassName('burgeon-modal-wrap')[0].style.zIndex
+      document.getElementsByClassName('ark-modal-wrap')[0].style.zIndex
     ) + 50;
     this.setupByDeliver();
   },
