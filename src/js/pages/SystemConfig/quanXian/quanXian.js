@@ -84,7 +84,7 @@ export default {
   },
 
   created() {
-    const { customizedModuleName, customizedModuleId } = this.$route.params;
+    // const { customizedModuleName, customizedModuleId } = this.$route.params;
     this.permissionType = this.$route.query.type;
 
     // 获取角色
@@ -95,7 +95,7 @@ export default {
     this.buttonConfig.buttons = this.normal.buttons;
   },
   mounted() {
-    const { customizedModuleName } = this.$route.params;
+    // const { customizedModuleName } = this.$route.params;
     this.sensitiveColumns = [
       {
         title: this.vmI18n.t('table_label.sensitiveColumn'),
@@ -302,7 +302,7 @@ export default {
       param.append('param', JSON.stringify(params));
       const self = this;
       const {
-        data: { data, code }
+        data: { message, code }
       } = await this.service.systemConfig.copyShopPermission(param);
       if (code === 0) {
         this.$Modal.success({

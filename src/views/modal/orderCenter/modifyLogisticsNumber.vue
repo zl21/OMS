@@ -41,7 +41,8 @@
     },
     props: {
       idArray: {
-        type: Array
+        type: Array,
+        default: () => []
       }
     },
     methods: {

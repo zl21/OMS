@@ -112,7 +112,7 @@ export default {
   },
   watch: {
     componentData: {
-      handler(newVal, oldVal) {
+      handler(newVal) {
         this.request(newVal);
       },
       deep: true
@@ -176,7 +176,11 @@ export default {
     returnAccount() {
       const self = this;
       const ids = this.checkSelection.map(row => row.ID);
-      if (ids.length === 0) return self.$Message.error('至少选择一条订单明细');
+      if (ids.length === 0) {
+        self.$Message.error('至少选择一条订单明细'); 
+        return;
+      }
+      
       axios({
         url: '/api/cs/oc/oms/v1/markrefund',
         method: 'post',
@@ -202,8 +206,14 @@ export default {
       const self = this;
       // self.BtnClickEvent({ name: "CHANGESKU" });
       const rows = this.selection.map(row => ({ ID: row.ID, SKU_ID: row.PS_C_SKU_ID }));
-      if (rows.length === 0) return self.$Message.error('请选择一条订单明细');
-      if (rows.length > 1) return self.$Message.error('只能一条订单明细');
+      if (rows.length === 0) {
+         self.$Message.error('请选择一条订单明细');
+         return;
+      }
+      if (rows.length > 1) {
+         self.$Message.error('只能一条订单明细');
+         return;
+      }
       axios({
         url: '/api/cs/oc/oms/v1/modifygoodscheck',
         method: 'post',
@@ -217,11 +227,11 @@ export default {
       });
     },
     // 选中某一项时触发
-    onSelect(selection, row) {
+    onSelect(selection) {
       this.checkSelection = selection;
     },
     // 取消选中某一项时触发
-    onSelectCancel(selection, row) {
+    onSelectCancel(selection) {
       this.checkSelection = selection;
     },
     // 点击全选时触发
@@ -233,12 +243,12 @@ export default {
       this.checkSelection = selection;
     },
     // 单击某一行时触发
-    onRowClick(row, index) {
+    onRowClick(row) {
       this.selection = [];
       this.selection.push(row);
     },
     // 单击某二行时触发
-    onRowDblclick(row, index) {
+    onRowDblclick(row) {
       this.selection = [];
       this.selection.push(row);
     },
@@ -388,7 +398,7 @@ export default {
                   value: params.row.PS_C_SIZE_ID
                 },
                 on: {
-                  'on-change': (value, ev) => {
+                  'on-change': (value) => {
                     if (value) {
                       const sizeObj = list.find(item => item.SIZE_ID === value);
                       self.tableConfig.data[params.index].PS_C_SIZE_ECODE = sizeObj.SIZE_CODE;
@@ -780,7 +790,6 @@ export default {
     },
     showTable(obj) {
       const tbody = obj;
-      const tabname = obj.tabname;
       let totalData = [];
       // 明细合计
       let amt = 0;
@@ -886,7 +895,7 @@ export default {
         });
       });
       _this.tableConfig.businessButtonConfig.buttons = c;
-    }).catch((e)=>{
+    }).catch((e) => {
       console.log(e);
     });
     this.getColumns();

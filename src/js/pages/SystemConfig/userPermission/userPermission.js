@@ -303,19 +303,17 @@ export default {
         }
       });
     }, // 获取用户头部数据
-    async etTableWay(bo) {
+    async etTableWay() {
       const self = this;
-      const num = 0;
-      const sendObj = {}; // 存储传给table的对象
-      const {
-        data: { data, code }
-      } = await this.service.systemConfig.userstreeload();
+      // const num = 0;
+      // const sendObj = {}; // 存储传给table的对象
+      const { data, code, message } = await this.service.systemConfig.userstreeload();
       console.log(data, code);
       if (code === 0) {
         // 储存原始数据以便后续模糊查询使用
-        self.ztreeDataSource = JSON.parse(JSON.stringify(res.data));
+        self.ztreeDataSource = JSON.parse(JSON.stringify(data));
         // 储存渲染树的数据
-        self.treeData = res.data;
+        self.treeData = data;
       } else {
         this.$message.warning(message);
       }
