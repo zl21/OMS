@@ -385,7 +385,7 @@ export default {
         size: 10,
         inputValue: '',
       };
-      const { data: { data } } = await self.service.orderCenter.getQueryList(fromdata);
+      const { data: { data, count } } = await self.service.orderCenter.getQueryList(fromdata);
       if (data) {
         data.forEach((element) => {
           element.ecode = {
