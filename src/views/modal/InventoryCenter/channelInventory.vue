@@ -5,7 +5,7 @@
   >
     <!-- 是否确认同步库存？ -->
     <p class="title">
-      {{ vmI18n.t('mmodalTips.by') }}
+      {{ vmI18n.t('modalTips.by') }}
     </p>
     <div class="dialog-footer">
       <!-- 确定 -->

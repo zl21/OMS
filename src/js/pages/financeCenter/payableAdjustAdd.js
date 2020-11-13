@@ -673,12 +673,12 @@ export default {
           },
           {
             // title: "颜色",
-            title: vmI18n.t('common.color'),
+            title: vmI18n.t('other.color'),
             key: 'PS_C_CLR_ENAME',
           },
           {
             // title: "尺寸",
-            title: vmI18n.t('common.sizes'),
+            title: vmI18n.t('other.sizes'),
             key: 'PS_C_SIZE_ENAME',
           },
           {
@@ -1047,7 +1047,7 @@ export default {
       labelList: [
         {
           // label: "赔付单明细",
-          label: vmI18n.t('table_label.payableAdjust_details'),
+          label: vmI18n.t('panel_label.payableAdjust_details'),
           value: '1',
           isShow: true,
         },
@@ -1136,7 +1136,7 @@ export default {
       };
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
-      const { data: { code, data, message } } = await this.service.financeCenter.getPayableAdjustment(param); 
+      const { data: { code, data, message } } = await this.service.financeCenter.getPayableAdjustment(fromdata); 
       if (code === 0) {
         self.labelList = [
           {
