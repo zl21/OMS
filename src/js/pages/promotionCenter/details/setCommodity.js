@@ -1,20 +1,21 @@
-import detailtable from "@/views/pages/promotionCenter/details/table.vue";
-import tableCols from "@/assets/js/promotion/columns.js";
-import MyDialog from 'framework/components/dialog/mydialog'
+import detailtable from '@/views/pages/promotionCenter/details/table.vue';
+import tableCols from '@/assets/js/promotion/columns.js';
+import MyDialog from 'framework/components/dialog/mydialog';
+
  export default {
-     name:"dialogVisiblex",
-     data(){
-         return{
-           tableCols: tableCols,
-           commodityList:{
+     name: 'dialogVisiblex',
+     data() {
+         return {
+           tableCols,
+           commodityList: {
                 current: 1,
                 total: 0,
                 pageSize: 10,
                 data: []
            }
-         }
+         };
      },
-    props:{
+    props: {
         dialog_visible: {
         type: Boolean,
         default: false
@@ -25,7 +26,7 @@ import MyDialog from 'framework/components/dialog/mydialog'
         basicData: {
             type: Object
         },
-        objid:{
+        objid: {
         type: String
         },
         loadDis: {
@@ -37,32 +38,32 @@ import MyDialog from 'framework/components/dialog/mydialog'
         detailtable,
         MyDialog
     },
-    computed:{
+    computed: {
         columns() {
             return this.tableCols.set_commodity;
         },
     },
-    watch:{
-        loadDis: function(val) {
+    watch: {
+        loadDis(val) {
             if (val === true) {
-                this.commodityList.data = []
+                this.commodityList.data = [];
                 this.initView();
             }
          }
     },
-    mounted(){
+    mounted() {
     },
-    created(){
+    created() {
     },
-    activated(){
+    activated() {
 
     },
-    methods:{
+    methods: {
         /**
          * 根据数据源 真实展示数据
          */
         initView() {
-            let obj = {
+            const obj = {
                 current: 1,
                 total: 0,
                 pageSize: 10,
@@ -74,21 +75,21 @@ import MyDialog from 'framework/components/dialog/mydialog'
             this.commodityList
             );
         },
-        confirm(){
-            this.$emit('confirm')
+        confirm() {
+            this.$emit('confirm');
         },
-        closeDialogs(){
-            this.$emit('closeDialog')
+        closeDialogs() {
+            this.$emit('closeDialog');
         },
-        /*** 根据当前页和当前页数目 ，展示表格
+        /** * 根据当前页和当前页数目 ，展示表格
          * @row 原始表格数据
          * @obj 表格虚拟视图
          */
         tablelistView(rows, obj) {
-        let current = obj.current || 1;
-        let pageSize = obj.pageSize || 10;
-        let start = Number((current - 1) * pageSize);
-        let end = Number(current * pageSize);
+        const current = obj.current || 1;
+        const pageSize = obj.pageSize || 10;
+        const start = Number((current - 1) * pageSize);
+        const end = Number(current * pageSize);
         obj.total = rows.length;
         obj.data = rows.slice(start, end);
         },
@@ -113,10 +114,10 @@ import MyDialog from 'framework/components/dialog/mydialog'
          * 单表格添加和删除 灵活展示表格
          */
         countTablelistView() {
-        let rows = this.giftData.gift_commoditylist || [];
-        let obj = this.commodityList;
-        let pageSize = obj.pageSize || 10;
-        let pagesLen = Math.ceil(rows.length / pageSize);
+        const rows = this.giftData.gift_commoditylist || [];
+        const obj = this.commodityList;
+        const pageSize = obj.pageSize || 10;
+        const pagesLen = Math.ceil(rows.length / pageSize);
         if (obj.current > pagesLen) obj.current = pagesLen;
         if (pagesLen === 0) obj.current = 1;
         this.tablelistView(rows, this.commodityList);
@@ -137,12 +138,12 @@ import MyDialog from 'framework/components/dialog/mydialog'
          *  @force 强制更改元数据，刷新表格
          */
         alertRowData(row, currentPage, pageSize, force) {
-        let rowCount = (currentPage - 1) * pageSize;
-        let index = rowCount + row._index;
-        if (index >= 0 && !(this.objid > 0 && (this.basicData.status === '2' || this.basicData.status ==='3'))) {
-            this.giftData.gift_commoditylist[index].SUM_QTY = this.giftData.gift_commoditylist[index].SUM  = row.SUM
-            this.commodityList.data[row._index].SUM_QTY = row.SUM
+        const rowCount = (currentPage - 1) * pageSize;
+        const index = rowCount + row._index;
+        if (index >= 0 && !(this.objid > 0 && (this.basicData.status === '2' || this.basicData.status === '3'))) {
+            this.giftData.gift_commoditylist[index].SUM_QTY = this.giftData.gift_commoditylist[index].SUM = row.SUM;
+            this.commodityList.data[row._index].SUM_QTY = row.SUM;
         }
         },
     }
- }
+ };

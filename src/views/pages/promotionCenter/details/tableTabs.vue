@@ -1,11 +1,17 @@
 <template>
   <div class="detailTabs">
-    <slot name="MatchOperate"></slot>
+    <slot name="MatchOperate" />
 
     <!--因为element-ui 不可编辑tab标签内容  因此需要重写组件-->
-    <tabList :currentTab.sync="currentTab" :panels="productsArrs">
+    <tabList
+      :current-tab.sync="currentTab"
+      :panels="productsArrs"
+    >
       <div slot="tab_content">
-        <div  v-for="(panel,index) in productsArrs"  :key="index">
+        <div
+          v-for="(panel,index) in productsArrs"
+          :key="index"
+        >
           <div v-if="showContent(index)">
             <div
               v-if="panel.rules && panel.rules.length>0"
@@ -56,15 +62,24 @@
       </div>  
     </tabList>
 
-     <!--导入组件-->
+    <!--导入组件-->
     <!-- <div  v-if="show_dialog">
       <Modal class="dialog" v-model="show_dialog" :footer-hide="dialogSet.footerHide"  :title="dialogSet.dialogTitle"   :mask="dialogSet.mask"  >
           <component :ref="popDialog"   :componentData="dialogModal"  v-bind:is="currentView"  @returnData="returnData"  ></component>
       </Modal>
     </div> -->
-    <div  v-if="show_dialog">
-      <Modal class="dialog" v-model="show_dialog" :footer-hide="dialogSet.footerHide"  :title="dialogSet.dialogTitle"   :mask="dialogSet.mask"  >
-        <importDialog :componentData="dialogModal" @returnData="returnData" ></importDialog>
+    <div v-if="show_dialog">
+      <Modal
+        v-model="show_dialog"
+        class="dialog"
+        :footer-hide="dialogSet.footerHide"
+        :title="dialogSet.dialogTitle"
+        :mask="dialogSet.mask"
+      >
+        <importDialog
+          :component-data="dialogModal"
+          @returnData="returnData"
+        />
       </Modal>
     </div>
   </div>

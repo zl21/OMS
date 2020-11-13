@@ -4,7 +4,7 @@ import matrix from '@/views/pages/common/orderDetail/matrix.vue';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 
 export default {
-  name:'matrixBox',
+  name: 'matrixBox',
   components: {
     matrix
   },

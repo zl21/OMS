@@ -70,7 +70,7 @@
       :transfer="matrixBox.transfer"
       :url="matrixBox.url"
       :width="matrixBox.width"
-    ></jordanModal>
+    />
   </div>
 </template>
 <script>

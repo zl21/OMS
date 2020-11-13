@@ -192,7 +192,7 @@
               </li>
               <li
                 v-for="item in modelList"
-                :key='item.id'
+                :key="item.id"
                 @click="modelClick(item)"
               >
                 <span :title="item.key">{{ item.key }}</span>

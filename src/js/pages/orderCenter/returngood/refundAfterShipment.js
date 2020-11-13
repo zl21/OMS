@@ -12,7 +12,7 @@ export default {
   },
   data() {
     return {
-      sessionStorageData:'',
+      sessionStorageData: '',
       vmI18n: window.vmI18n,
       IMAGE: '', // 图片
       imgIndex: 0, // 当前操作图片位置
@@ -821,7 +821,7 @@ export default {
     this.sessionStorageData = JSON.parse(sessionStorage.getItem('customizeMessage'))[this.$route.params.customizedModuleId == '41460334' ? 'undefined' : this.$route.params.customizedModuleId];
     console.log(this.sessionStorageData);
     // if (this.$route.query.id && !this.$route.query.new) {
-      if (this.sessionStorageData.standardTableurlCustomized) { //已发货退款单详情跳转
+      if (this.sessionStorageData.standardTableurlCustomized) { // 已发货退款单详情跳转
       this.reForm.config.splice(14, 0, {
         item: {
           type: 'Input',
@@ -1760,11 +1760,11 @@ export default {
     },
     // 退款分类联动查询退描述
     returnTypeChange() {
-      let formdata = new FormData();
-      formdata.append('table' , 'OC_B_RETURN_TYPE_ITEM');
-      formdata.append('objid' , this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ID);
-      formdata.append('refcolid' , 1700815960);
-      formdata.append('searchdata' , JSON.stringify({
+      const formdata = new FormData();
+      formdata.append('table', 'OC_B_RETURN_TYPE_ITEM');
+      formdata.append('objid', this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ID);
+      formdata.append('refcolid', 1700815960);
+      formdata.append('searchdata', JSON.stringify({
                                             column_include_uicontroller: true,
                                             startindex: 0,
                                             fixedcolumns: {},

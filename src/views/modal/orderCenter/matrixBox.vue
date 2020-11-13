@@ -27,26 +27,27 @@
     :edit="true"
     :general="true"
     :isdisabled="false"
-    :isActive="true"
-    :isStockBtn="false"
+    :is-active="true"
+    :is-stock-btn="false"
     :objid="componentData.objid"
     :encode="componentData.encode"
+    ref="matrixOne"
     :tablename="componentData.tablename"
-    :distribIds="componentData.distribIds"
-    :returnType="componentData.returnType"
-    :nameJoin="componentData.nameJoin"
+    :distrib-ids="componentData.distribIds"
+    :return-type="componentData.returnType"
+    :name-join="componentData.nameJoin"
     @inputFocus="inputFocus"
     @enterSave="enterSave"
     @loadChange="loadChange"
     @amendData="amendData"
     @confirmOk="confirmOk"
     @refreshData="refreshData"
-    ref="matrixOne"
-  ></matrix>
+  />
 </template>
 
 <script>
   import matrixBox from '@/js/modal/orderCenter/matrixBox';
+
   export default matrixBox;
 </script>
 

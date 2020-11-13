@@ -1,9 +1,18 @@
 <!-- 新增 或者 编辑 或者 复制促销-->
 <template>
-  <div v-loading="loading" class="addOrEditActi">
+  <div
+    v-loading="loading"
+    class="addOrEditActi"
+  >
     <div class="steps_content">
-      <div ref="basicSteps" class="basicSteps">
-        <BasicInfo ref="area_0" :basic-data="basic_info" />
+      <div
+        ref="basicSteps"
+        class="basicSteps"
+      >
+        <BasicInfo
+          ref="area_0"
+          :basic-data="basic_info"
+        />
         <InfoSet
           v-if="showInfoDataContainer"
           ref="area_1"
@@ -28,16 +37,22 @@
           @setcommodity="setCommodity"
           @closeDialog="closeDialog"
           @confirm="confirm"
-        ></GiftSet>
+        />
       </div>
       <div class="footer">
         <button @click="close">
           {{ vmI18n.t("common.cancel") }}
         </button>
-        <button v-if="showSaveButton" @click="saveDraft">
+        <button
+          v-if="showSaveButton"
+          @click="saveDraft"
+        >
           {{ vmI18n.t("btn.saveDraft") }}
         </button>
-        <button v-if="showPublishButton" @click="publish">
+        <button
+          v-if="showPublishButton"
+          @click="publish"
+        >
           {{ vmI18n.t("btn.publish") }}
         </button>
       </div>
@@ -49,14 +64,17 @@
         <Step content="赠品信息" icon="test iconfont burgeon-iconzengpin" @click="positionSteps(2)"></Step>
         <Step content="活动概览" icon="test iconfont burgeon-iconhuodong" @click="positionSteps(3)"></Step>
       </Steps> -->
-      <stepsBars :current.sync="current" :steps="stepsBar" />
+      <stepsBars
+        :current.sync="current"
+        :steps="stepsBar"
+      />
     </div>
   </div>
 </template>
 <script>
-import addOrEditActi from "@/js/pages/promotionCenter/addOrEditActi";
+  import addOrEditActi from '@/js/pages/promotionCenter/addOrEditActi';
 
-export default addOrEditActi;
+  export default addOrEditActi;
 </script>
 <style lang="less" scoped>
 @import "./less/common.less";

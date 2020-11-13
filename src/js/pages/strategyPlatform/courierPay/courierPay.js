@@ -863,9 +863,7 @@ export default {
     },
     // 选中明细列表
     onSelect(row) {
-      this.detailList = row.map(item => {
-        return item.ID;
-      });
+      this.detailList = row.map(item => item.ID);
     },
 
     onSelectAllCancel() {

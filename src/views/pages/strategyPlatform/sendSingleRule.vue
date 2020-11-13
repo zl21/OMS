@@ -309,7 +309,7 @@
 </template>
 
 <script>
-  import sendSingleRule from '@/js/pages/strategyPlatform/sendSingleRule.js';
+  import sendSingleRule from '@/js/pages/strategyPlatform/sendSingleRule';
 
   export default sendSingleRule;
 </script>

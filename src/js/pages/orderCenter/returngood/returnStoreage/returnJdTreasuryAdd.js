@@ -819,8 +819,8 @@ export default {
         // 是否生成调整单
         if (item.IS_GEN_ADJUST == '是') item.IS_GEN_ADJUST = 1;
         else if (item.IS_GEN_ADJUST == '否') item.IS_GEN_ADJUST = 0;
-        if (item. IS_GEN_IN_ORDER == '是') item. IS_GEN_IN_ORDER = 1;
-        else if (item. IS_GEN_IN_ORDER == '否') item. IS_GEN_IN_ORDER = 0;
+        if (item.IS_GEN_IN_ORDER == '是') item.IS_GEN_IN_ORDER = 1;
+        else if (item.IS_GEN_IN_ORDER == '否') item.IS_GEN_IN_ORDER = 0;
         if (item.IS_GEN_WRO_ADJUST == '是') item.IS_GEN_WRO_ADJUST = 1;
         else if (item.IS_GEN_WRO_ADJUST == '否') item.IS_GEN_WRO_ADJUST = 0;
         if (item.IS_GEN_MINUS_ADJUST == '是') item.IS_GEN_MINUS_ADJUST = 1;
@@ -895,8 +895,8 @@ export default {
           // 是否生成调整单
           if (item.IS_GEN_ADJUST == 1) item.IS_GEN_ADJUST = '是';
           else if (item.IS_GEN_ADJUST == 0) item.IS_GEN_ADJUST = '否';
-          if (item. IS_GEN_IN_ORDER == 1) item. IS_GEN_IN_ORDER = '是';
-          else if (item. IS_GEN_IN_ORDER == 0) item. IS_GEN_IN_ORDER = '否';
+          if (item.IS_GEN_IN_ORDER == 1) item.IS_GEN_IN_ORDER = '是';
+          else if (item.IS_GEN_IN_ORDER == 0) item.IS_GEN_IN_ORDER = '否';
           if (item.IS_GEN_WRO_ADJUST == 1) item.IS_GEN_WRO_ADJUST = '是';
           else if (item.IS_GEN_WRO_ADJUST == 0) item.IS_GEN_WRO_ADJUST = '否';
           if (item.IS_GEN_MINUS_ADJUST == 1) item.IS_GEN_MINUS_ADJUST = '是';

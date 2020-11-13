@@ -179,7 +179,7 @@ export default {
           if (data.code == 0) {
             this.totalRowCount = data.datas.totalRowCount;
             const d = data.datas.tabth;
-            d.map(item => {
+            d.forEach(item => {
               item.show = true;
             });
             this.data1 = data.datas;
