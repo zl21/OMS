@@ -239,7 +239,7 @@ export default {
                 ],
               };
               fromdata.append('param', JSON.stringify(param));
-              const { data: { code, data, message } } = await this.service.financeCenter.queryOrderList(param); 
+              const { data: { code, data } } = await this.service.financeCenter.queryOrderList(fromdata); 
               if (code === 0) {
                 const resData = data || {};
                 const dataBySourceCode = resData.queryOrderResultList || [];
@@ -263,36 +263,7 @@ export default {
                   }
                 });
               }
-              // axios({
-              //   url: "/api/cs/oc/oms/v1/queryOrderList",
-              //   method: "post",
-              //   data: fromdata,
-              // }).then((res) => {
-              //   if (res.status === 200) {
-              //     let resData = data || {};
-              //     let dataBySourceCode = resData.queryOrderResultList || [];
-              //     let dimList = self.formConfig.formData;
-              //     // let arr;
-              //     let filterData = dataBySourceCode.map((item) => {
-              //       //过滤不需要展示的模糊搜索项
-              //       return {
-              //         LOGISTICS_NO: item.EXPRESSCODE,
-              //         CP_C_LOGISTICS_ENAME: item.CP_C_LOGISTICS_ENAME,
-              //         BILL_NO: item.BILL_NO,
-              //         SOURCE_CODE: item.SOURCE_CODE,
-              //         CP_C_PHY_WAREHOUSE_ENAME: item.CP_C_PHY_WAREHOUSE_ENAME,
-              //       };
-              //     });
-              //     dimList.map((item) => {
-              //       if (
-              //         item.label === "平台单号" ||
-              //         item.label === "platform_billNo"
-              //       ) {
-              //         item.AuotData = self.theadTitle.concat(filterData);
-              //       }
-              //     });
-              //   }
-              // });
+              
             },
             dimSelect: (obj) => {
               const self = this;
@@ -1256,7 +1227,7 @@ export default {
         self.formConfig.formValue.TID = '';
         return;
       }
-      const fromdataReq = new FormData();
+      const fromdata = new FormData();
       const param = {
         highSearch: [
           {
@@ -1276,8 +1247,8 @@ export default {
           },
         ],
       };
-      fromdataReq.append('param', JSON.stringify(param));
-      const { data: { code, data } } = await this.service.financeCenter.queryOrderList(param); 
+      fromdata.append('param', JSON.stringify(param));
+      const { data: { code, data } } = await this.service.financeCenter.queryOrderList(fromdata); 
       if (code === 0) {
         const dataByBillNo = data.queryOrderResultList;
         const item = dataByBillNo[0];
