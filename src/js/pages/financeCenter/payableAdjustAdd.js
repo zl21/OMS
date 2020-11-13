@@ -40,7 +40,7 @@ export default {
           LOGISTICS_NO: vmI18n.t('table_label.expressNo'),
           CP_C_LOGISTICS_ENAME: vmI18n.t('table_label.expressCompany'),
           BILL_NO: vmI18n.t('table_label.orderNo'),
-          SOURCE_CODE: vmI18n.t('table_label.platform_billNo'),
+          SOURCE_CODE: vmI18n.t('form_label.platform_billNo'),
           CP_C_PHY_WAREHOUSE_ENAME: vmI18n.t('table_label.warehouseName'),
         },
       ],
