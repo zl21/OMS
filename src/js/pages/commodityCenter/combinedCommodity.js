@@ -2461,7 +2461,7 @@ export default {
   created() {
     const customizedModuleId = this.$route.params.customizedModuleId;
     this.objid = customizedModuleId === 'New' ? -1 : customizedModuleId;
-    console.log('this.objid::',this.objid);
+    console.log('this.objid::', this.objid);
     this.pageconfigData(this.objid);
     this.objid != -1 && this.IniData(); // 初始化数据
   },

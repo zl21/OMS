@@ -263,7 +263,6 @@ export default {
                   }
                 });
               }
-              
             },
             dimSelect: (obj) => {
               const self = this;

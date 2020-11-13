@@ -106,19 +106,19 @@ export default {
       const fromdata = new FormData();
       if (!self.pid) {
         self.$Message.warning({
-          content: vmI18n.t('modalTips.zi'),//请选择仓库
+          content: vmI18n.t('modalTips.zi'), // 请选择仓库
           duration: 5,
           top: 80,
         });
         return false;
       }
-      console.log("isOutOfStockFlag",isOutOfStockFlag);
+      console.log('isOutOfStockFlag', isOutOfStockFlag);
       self.isShowFromLoading = true;
       fromdata.append('ids', self.componentData.ids);
       fromdata.append('warehouseId', self.pid);
       fromdata.append('isOutOfStockFlag ', isOutOfStockFlag);
       fromdata.append('updateRemark', self.updateRemark);
-      console.log("fromdata",fromdata);
+      console.log('fromdata', fromdata);
       axios({
         url: '/api/cs/oc/oms/v1/updateWarehouse',
         method: 'post',

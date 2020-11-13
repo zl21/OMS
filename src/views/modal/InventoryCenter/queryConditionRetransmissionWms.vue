@@ -46,7 +46,7 @@
     methods: {
       determine() {
         if (this.is_click) {
-          return false;
+          return;
         }
         if (this.allFormData.CP_C_PHY_WAREHOUSE_ID || (this.allFormData.BILL_DATE[0] && this.allFormData.BILL_DATE[1]) || this.allFormData.SOURCE_BILL_NO) {
           const obj = {};
