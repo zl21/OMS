@@ -881,7 +881,7 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: vmI18n.t('form_label.logisticsCompany'), // 物流公司
+              fkdesc: window.vmI18n.t('form_label.logisticsCompany'), // 物流公司
               inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
@@ -918,7 +918,7 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: vmI18n.t('form_label.salesReturn_to_warehouse'), // 销退入库仓
+              fkdesc: window.vmI18n.t('form_label.salesReturn_to_warehouse'), // 销退入库仓
               inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
@@ -1888,7 +1888,7 @@ export default {
         {
           label: window.vmI18n.t('form_label.chargebackNumber'), // 退单编号
           column: 'docno',
-          placeholder: vmI18n.t('pHolder.chargebackNumber'), // 请输入退单编号
+          placeholder: window.vmI18n.t('pHolder.chargebackNumber'), // 请输入退单编号
           type: 'Input',
           componentAttribute: {},
           value: '',
@@ -1902,7 +1902,7 @@ export default {
         {
           label: window.vmI18n.t('form_label.phone_number'), // 手机号码
           column: 'test1',
-          placeholder: vmI18n.t('pHolder.phone_number'), // 请输入手机号码
+          placeholder: window.vmI18n.t('pHolder.phone_number'), // 请输入手机号码
           type: 'Input',
           componentAttribute: {},
           value: '',
@@ -1916,7 +1916,7 @@ export default {
         {
           label: window.vmI18n.t('form_label.consignee'), // 收货人
           column: 'test2',
-          placeholder: vmI18n.t('pHolder.consignee'), // 请输入收货人
+          placeholder: window.vmI18n.t('pHolder.consignee'), // 请输入收货人
           type: 'Input',
           componentAttribute: {},
           value: '',

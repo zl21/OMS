@@ -420,7 +420,7 @@ export default {
             // return { code: -1, message: `商品列表第${i + 1}行数据未填写完毕` };
             return {
               code: -1,
-              message: `${vmI18n.t('modalTips.s2')}${i + 1}${vmI18n.t(
+              message: `${window.vmI18n.t('modalTips.s2')}${i + 1}${window.vmI18n.t(
                 'modalTips.s3'
               )}`,
             };

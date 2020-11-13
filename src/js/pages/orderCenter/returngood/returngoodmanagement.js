@@ -153,7 +153,7 @@ export default {
                 ],
                 display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
                 fkdisplay: 'drp', // 外键关联类型
-                fkdesc: vmI18n.t('table_label.shopName'), // 店铺名称
+                fkdesc: window.vmI18n.t('table_label.shopName'), // 店铺名称
                 inputname: 'SELLER_NICK:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
                 isnotnull: false, // 是否必填
@@ -233,7 +233,7 @@ export default {
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: vmI18n.t('form_label.consignee_province'), // 收货人省份
+          fkdesc: window.vmI18n.t('form_label.consignee_province'), // 收货人省份
           inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: false, // 是否必填
@@ -256,7 +256,7 @@ export default {
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: vmI18n.t('form_label.consignee_city'), // 收货人市
+          fkdesc: window.vmI18n.t('form_label.consignee_city'), // 收货人市
           inputname: 'RECEIVER_CITY:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: false, // 是否必填
@@ -410,7 +410,7 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: vmI18n.t('table_label.shopName'), // 店铺名称
+              fkdesc: window.vmI18n.t('table_label.shopName'), // 店铺名称
               inputname: 'SELLER_NICK:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
@@ -449,7 +449,7 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: vmI18n.t('form_label.returnLogisticsCompany'), // 退回物流公司
+              fkdesc: window.vmI18n.t('form_label.returnLogisticsCompany'), // 退回物流公司
               inputname: 'CP_C_LOGISTICS_ENAME:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
@@ -593,7 +593,7 @@ export default {
               // ],
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: vmI18n.t('form_label.physicalWarehouseFile'), // 实体仓档案
+              fkdesc: window.vmI18n.t('form_label.physicalWarehouseFile'), // 实体仓档案
               inputname: 'CP_C_PHY_WAREHOUSE_IN_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
@@ -624,7 +624,7 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: vmI18n.t('form_label.physicalWarehouseFile'), // 实体仓档案
+              fkdesc: window.vmI18n.t('form_label.physicalWarehouseFile'), // 实体仓档案
               inputname: 'CP_C_PHY_WAREHOUSE_ID:ENAME:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
@@ -893,7 +893,7 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: vmI18n.t('form_label.aconsignee_area'), // 收货人区
+              fkdesc: window.vmI18n.t('form_label.aconsignee_area'), // 收货人区
               inputname: 'RECEIVER_AREA:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
