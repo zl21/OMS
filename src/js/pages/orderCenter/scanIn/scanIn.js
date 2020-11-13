@@ -695,7 +695,7 @@ export default {
           //   }
           // },
           {
-            text: vmI18n.t('but.forcedStorage'), // 强制入库
+            text: vmI18n.t('panel_label.forcedStorage'), // 强制入库
             disabled: false,
             btnclick: () => {
               const self = this;
@@ -1528,11 +1528,11 @@ export default {
                             id: 2661,
                             type: 'action',
                             name: 'returngoodList',
-                            label: self.vmI18n.t('panel_laber.forcedStorage'), // 退换货订单
+                            label: self.vmI18n.t('panel_label.forcedStorage'), // 退换货订单
                             query: Object.assign({
                               id: 2661,
                               tabTitle: self.vmI18n.t(
-                                'panel_laber.forcedStorage'
+                                'panel_label.forcedStorage'
                               ), // 退换货订单
                             }),
                             back: true,

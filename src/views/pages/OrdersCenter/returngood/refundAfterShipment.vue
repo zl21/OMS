@@ -129,7 +129,7 @@
       <Modal
         v-model="addItem.modal"
         :mask="true"
-        :title="vmI18n.t('panel_label.originalChargebackDetails')"
+        :title="vmI18n.t('modalTitle.originalChargebackDetails')"
         :width="800"
         @on-cancel="addItemCancel"
         @on-ok="onAddItem"

@@ -51,4 +51,8 @@ export default {
     component: refundAfterShipment,
     labelName: '已发货退款单编辑',
   },
+  EXTRAREFUND: {
+    component: refundAfterShipment,
+    labelName: '额外退款编辑',
+  },
 };
