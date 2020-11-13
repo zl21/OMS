@@ -1152,11 +1152,11 @@ export default {
         const idList = { idList: ids };
         const { data: { code, data, message } } = await this.service.financeCenter.exportPayableAdjustment(idList); 
         if (code === 0 && data !== null) {
-          const mes = message || vmI18n.t('modalTips.z2');// 导出成功！
+          const mes = message || window.vmI18n.t('modalTips.z2');// 导出成功！
           _this.$Message.success(mes);
           _this.downloadUrlFile(data);
         } else {
-          const err = message || vmI18n.t('modalTips.z3');// 失败！
+          const err = message || window.vmI18n.t('modalTips.z3');// 失败！
           _this.$Message.error(err);
         }
         // axios({
@@ -1167,11 +1167,11 @@ export default {
         // }).then((res) => {
         //   console.log(res);
         //   if (res.data.code === 0 && res.data.data !== null) {
-        //     let mes = res.data.message || vmI18n.t("modalTips.z2");//导出成功！
+        //     let mes = res.data.message || window.vmI18n.t("modalTips.z2");//导出成功！
         //     _this.$Message.success(mes);
         //     _this.downloadUrlFile(res.data.data);
         //   } else {
-        //     let err = res.data.message || vmI18n.t("modalTips.z3");//失败！
+        //     let err = res.data.message || window.vmI18n.t("modalTips.z3");//失败！
         //     _this.$Message.error(err);
         //   }
         // });
@@ -1244,11 +1244,11 @@ export default {
       const { data: { code, data, message } } = await this.service.financeCenter.exportPayableAdjustment(param); 
       console.log(code, data, message);
       if (code === 0 && data !== null) {
-        const mes = message || vmI18n.t('modalTips.z2');// 导出成功！
+        const mes = message || window.vmI18n.t('modalTips.z2');// 导出成功！
         _this.$Message.success(mes);
         _this.downloadUrlFile(data);
       } else {
-        const err = message || vmI18n.t('modalTips.z3');// 失败！
+        const err = message || window.vmI18n.t('modalTips.z3');// 失败！
         _this.$Message.error(err);
       }
       // axios({
@@ -1258,11 +1258,11 @@ export default {
       //   data: param,
       // }).then((res) => {
       //   if (res.data.code === 0 && res.data.data !== null) {
-      //     let mes = res.data.message || vmI18n.t("modalTips.z2");//导出成功！
+      //     let mes = res.data.message || window.vmI18n.t("modalTips.z2");//导出成功！
       //     _this.$Message.success(mes);
       //     _this.downloadUrlFile(res.data.data);
       //   } else {
-      //     let err = res.data.message || vmI18n.t("modalTips.z3");//失败！
+      //     let err = res.data.message || window.vmI18n.t("modalTips.z3");//失败！
       //     _this.$Message.error(err);
       //   }
       // });

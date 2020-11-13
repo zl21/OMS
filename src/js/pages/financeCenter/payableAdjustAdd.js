@@ -1126,7 +1126,7 @@ export default {
         const logData = data.acFPayableAdjustmentLogList;
         self.setPayableAdjustData(mainData, itemData, logData);
       } else {
-        self.$Message.warning(message || vmI18n.t('modalTips.z8'));
+        self.$Message.warning(message || window.vmI18n.t('modalTips.z8'));
       }
       self.isSaveLoading = false;
       // axios({
@@ -1153,7 +1153,7 @@ export default {
       //     let logData = res.data.data.acFPayableAdjustmentLogList;
       //     self.setPayableAdjustData(mainData, itemData, logData);
       //   } else {
-      //     self.$Message.warning(res.data.message || vmI18n.t("modalTips.z8"));
+      //     self.$Message.warning(res.data.message || window.vmI18n.t("modalTips.z8"));
       //   }
       //   self.isSaveLoading = false;
       // });
@@ -1706,11 +1706,11 @@ export default {
       const fromdata = self.generateFromdata();
       const { data: { code, data, message } } = await self.service.financeCenter.savePayableAdjustment(fromdata);
       if (code === 0) {
-        self.$Message.success(message || vmI18n.t('modalTips.z9'));
+        self.$Message.success(message || window.vmI18n.t('modalTips.z9'));
         self.ID = data.objid;
         self.getPayableAdjustment();
       } else {
-        self.$Message.error(message || vmI18n.t('modalTips.y0'));
+        self.$Message.error(message || window.vmI18n.t('modalTips.y0'));
       }
       self.isSaveLoading = false;
       // axios({
@@ -1719,11 +1719,11 @@ export default {
       //   data: fromdata,
       // }).then(function (res) {
       //   if (res.data.code === 0) {
-      //     self.$Message.success(res.data.message || vmI18n.t("modalTips.z9"));
+      //     self.$Message.success(res.data.message || window.vmI18n.t("modalTips.z9"));
       //     self.ID = res.data.data.objid;
       //     self.getPayableAdjustment();
       //   } else {
-      //     self.$Message.error(res.data.message || vmI18n.t("modalTips.y0"));
+      //     self.$Message.error(res.data.message || window.vmI18n.t("modalTips.y0"));
       //   }
       //   self.isSaveLoading = false;
       // });
@@ -1740,7 +1740,7 @@ export default {
       };
       const res = await self.service.financeCenter.savePayableAdjustment(data);
       if (res.data.code === 0) {
-        self.$Message.success(res.data.message || vmI18n.t('modalTips.z9'));
+        self.$Message.success(res.data.message || window.vmI18n.t('modalTips.z9'));
         // self.ID = res.data.data;
       }
       // axios({
@@ -1749,7 +1749,7 @@ export default {
       //   data: data,
       // }).then(function (res) {
       //   if (res.data.code === 0) {
-      //     self.$Message.success(res.data.message || vmI18n.t("modalTips.z9"));
+      //     self.$Message.success(res.data.message || window.vmI18n.t("modalTips.z9"));
       //     // self.ID = res.data.data;
       //   }
       // });

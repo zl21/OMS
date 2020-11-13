@@ -622,7 +622,7 @@ export default {
                     });
                   } else {
                   // let mes = res.data.message || "此单据不可进行手工匹配操作！";
-                    const mes = res.data.message || vmI18n.t('modalTips.q7');
+                    const mes = res.data.message || window.vmI18n.t('modalTips.q7');
                     _this.$Message.error(mes);
                   }
                 });
@@ -668,7 +668,7 @@ export default {
                     });
                   } else {
                   // let mes = res.data.message || "此单据不可进行错发强制匹配操作！";
-                    const mes = res.data.message || vmI18n.t('modalTips.q8');
+                    const mes = res.data.message || window.vmI18n.t('modalTips.q8');
                     _this.$Message.error(mes);
                   }
                 });
@@ -695,11 +695,11 @@ export default {
                 .then((res) => {
                   if (res.data.code === 0) {
                   // let mes = res.data.message || "作废操作成功";
-                    const mes = res.data.message || vmI18n.t('modalTips.q9');
+                    const mes = res.data.message || window.vmI18n.t('modalTips.q9');
                     this.$Message.success(mes);
                   } else {
                   // let mes = res.data.message || "作废操作失败";
-                    const mes = res.data.message || vmI18n.t('modalTips.p0');
+                    const mes = res.data.message || window.vmI18n.t('modalTips.p0');
                     this.$Message.error(mes);
                   }
                 });
@@ -735,15 +735,15 @@ export default {
       this.btnConfig.buttons.forEach((item) => {
         switch (item.text) {
           // case "手工匹配":
-          case vmI18n.t('btn.manual_matching'):
+          case window.vmI18n.t('btn.manual_matching'):
             item.isShow = false;
             break;
           // case "错发强制匹配":
-          case vmI18n.t('btn.wrong_sending_forced_matching'):
+          case window.vmI18n.t('btn.wrong_sending_forced_matching'):
             item.isShow = false;
             break;
           // case "作废":
-          case vmI18n.t('btn.void'):
+          case window.vmI18n.t('btn.void'):
             item.isShow = false;
             break;
         }
@@ -1209,7 +1209,7 @@ export default {
         if (item.itemdata) {
           switch (item.itemdata.name) {
             // case "物流公司":logisticsCompany
-            case vmI18n.t('form_label.logisticsCompany'):
+            case _this.vmI18n.t('form_label.logisticsCompany'):
               this.information.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid;
               this.information.formValue.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
               break;

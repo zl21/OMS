@@ -176,7 +176,7 @@ export default {
           self.$parent.$parent.$parent.selection = [];
         } else {
           // let mes = res.data.message || "失败";
-          const mes = res.data.message || vmI18n.t('modalTips.z3');
+          const mes = res.data.message || window.vmI18n.t('modalTips.z3');
           self.$Message.error(mes);
         }
       });

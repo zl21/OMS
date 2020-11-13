@@ -159,7 +159,7 @@ export default {
                     });
                   } else {
                     // let mes = res.data.message || "状态不匹配不能进入手动匹配";
-                    const mes = res.data.message || vmI18n.t('modalTips.p6');
+                    const mes = res.data.message || window.vmI18n.t('modalTips.p6');
                     self.$Message.error(mes);
                   }
                 });
@@ -214,7 +214,7 @@ export default {
                   } else {
                     const mes =
                       // res.data.message || "状态不匹配不能进入错发强制匹配";
-                      res.data.message || vmI18n.t('modalTips.p9');
+                      res.data.message || window.vmI18n.t('modalTips.p9');
                     self.$Message.error(mes);
                   }
                 });
@@ -241,11 +241,11 @@ export default {
                 .then((res) => {
                   if (res.data.code === 0) {
                     // let mes = res.data.message || "作废操作成功";
-                    const mes = res.data.message || vmI18n.t('modalTips.q9');
+                    const mes = res.data.message || window.vmI18n.t('modalTips.q9');
                     this.$Message.success(mes);
                   } else {
                     // let mes = res.data.message || "作废操作失败";
-                    const mes = res.data.message || vmI18n.t('modalTips.p0');
+                    const mes = res.data.message || window.vmI18n.t('modalTips.p0');
                     this.$Message.error(mes);
                   }
                 });
@@ -857,13 +857,13 @@ export default {
             self.isExport = false;
             if (res.data.code == 0 && res.data.data !== null) {
               // let mes = res.data.message || "导出成功！";
-              const mes = res.data.message || vmI18n.t('modalTips.z2');
+              const mes = res.data.message || window.vmI18n.t('modalTips.z2');
               self.$Message.success(mes);
               self.downloadUrlFile(res.data.data);
               // return (window.location = res.data.data);
             } else {
               // let err = res.data.message || "失败！";
-              const err = res.data.message || vmI18n.t('modalTips.z3');
+              const err = res.data.message || window.vmI18n.t('modalTips.z3');
               self.$Message.error(err);
             }
           });
@@ -905,13 +905,13 @@ export default {
           self.isExport = false;
           if (res.data.code == 0 && res.data.data !== null) {
             // let mes = res.data.message || "导出成功！";
-            const mes = res.data.message || vmI18n.t('modalTips.z2');
+            const mes = res.data.message || window.vmI18n.t('modalTips.z2');
             self.$Message.success(mes);
             // return (window.location = res.data.data);
             self.downloadUrlFile(res.data.data);
           } else {
             // let err = res.data.message || "失败！";
-            const err = res.data.message || vmI18n.t('modalTips.z3');
+            const err = res.data.message || window.vmI18n.t('modalTips.z3');
             self.$Message.error(err);
           }
         });
