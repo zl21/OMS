@@ -128,7 +128,7 @@ export default {
           {
             colname: 'ename',
             // name: "发货仓库名称",
-            name: vmI18n.t('table_label.deliveryWarehouse_nam'),
+            name: vmI18n.t('table_label.deliveryWarehouse_name'),
             show: true,
           },
           {
