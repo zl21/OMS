@@ -23,5 +23,8 @@ export default {
   // JIT仓库管理(生成出仓单)
   JTWAREHOUSE: {
     component: () => import('@/views/modal/orderCenter/jtWarehouse.vue')
+  },
+  MODIFYLOGISTICSNUMBER: {
+    component: () => import('@/views/modal/orderCenter/modifyLogisticsNumber.vue')
   }
 };
