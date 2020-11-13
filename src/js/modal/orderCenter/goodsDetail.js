@@ -561,7 +561,7 @@ export default {
             key: 'ORDER_SPLIT_AMT',
             // title: "平摊金额",
             title: window.vmI18n.t('table_label.equal_amount'),
-            render: (h, params) => h('span', {}, params.row.ORDER_SPLIT_AMT.toFixed(2)),
+            render: (h, params) => h('span', {}, Number(params.row.ORDER_SPLIT_AMT).toFixed(2)),
           },
           {
             key: 'REFUND_STATUS_EXT',
