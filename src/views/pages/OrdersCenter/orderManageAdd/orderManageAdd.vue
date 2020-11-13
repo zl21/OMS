@@ -80,6 +80,6 @@
 </script>
 
 <style lang="less">
-  @import "~@/css/pages/InventoryCenter/outboundPickOrder.less";
+  @import "~@/css/pages/orderCenter/orderManageAdd/orderManageAdd.less";
   
 </style>
