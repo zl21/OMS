@@ -27,7 +27,7 @@ export default {
       isShowFromLoading: false, // 加载
       matrixBox: {
         refFuns: 'confirmFun',
-        confirmTitle: vmI18n.t('modalTitle.matrixEntry'), // 矩阵录入
+        confirmTitle: window.vmI18n.t('modalTitle.matrixEntry'), // 矩阵录入
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '860',
         scrollable: false, // 是否可以滚动
@@ -45,11 +45,11 @@ export default {
       ORDER_TYPE: '', // 丢单的值
       isgift: [
         {
-          label: vmI18n.t('common.yes'),
+          label: window.vmI18n.t('common.yes'),
           value: '1',
         },
         {
-          label: vmI18n.t('common.no'),
+          label: window.vmI18n.t('common.no'),
           value: '0',
         },
       ],
@@ -75,7 +75,7 @@ export default {
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: vmI18n.t('form_label.consignee_province'), // 收货人省份 // input前面显示的lable值
+          name: window.vmI18n.t('form_label.consignee_province'), // 收货人省份 // input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_PROVINCE', // 对应的表
           reftableid: 10010, // 对应的表ID
@@ -98,7 +98,7 @@ export default {
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: vmI18n.t('form_label.consignee_city'), // 收货人市 // input前面显示的lable值
+          name: window.vmI18n.t('form_label.consignee_city'), // 收货人市 // input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_CITY', // 对应的表
           reftableid: 23864, // 对应的表ID
@@ -126,7 +126,7 @@ export default {
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: vmI18n.t('form_label.orderShop'), // 下单店铺 // input前面显示的lable值
+          name: window.vmI18n.t('form_label.orderShop'), // 下单店铺 // input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_SHOP', // 对应的表
           reftableid: 24475, // 对应的表ID
@@ -150,7 +150,7 @@ export default {
         typeAll: 'error',
         buttons: [
           {
-            text: vmI18n.t('btn.save'), // 按钮文本
+            text: window.vmI18n.t('btn.save'), // 按钮文本
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -251,7 +251,7 @@ export default {
             },
           },
           {
-            text: vmI18n.t('common.return'), // 返回
+            text: window.vmI18n.t('common.return'), // 返回
             btnclick: () => {
               this.back();
               // 销毁当前实例
@@ -293,7 +293,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: vmI18n.t('form_label.distribution_logistics'), // 配送物流 input前面显示的lable值
+              name: window.vmI18n.t('form_label.distribution_logistics'), // 配送物流 input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               reftableid: 24411, // 对应的表ID
@@ -305,7 +305,7 @@ export default {
           },
           {
             style: 'input',
-            label: vmI18n.t('form_label.distribution_costs'), // 配送费用
+            label: window.vmI18n.t('form_label.distribution_costs'), // 配送费用
             value: 'SHIP_AMT',
             dataAcessKey: 'SHIP_AMT',
             disabled: false,
@@ -313,7 +313,7 @@ export default {
           },
           {
             style: 'input', // 输入框弹框单多选
-            label: vmI18n.t('table_label.buyerNickname'), // 买家昵称
+            label: window.vmI18n.t('table_label.buyerNickname'), // 买家昵称
             value: 'USER_NICK',
             dataAcessKey: 'USER_NICK',
             disabled: false,
@@ -322,14 +322,14 @@ export default {
           {
             style: 'input', // 输入框弹框单多选
             value: 'SOURCE_CODE',
-            label: vmI18n.t('form_label.platform_billNo'), // 平台单号
+            label: window.vmI18n.t('form_label.platform_billNo'), // 平台单号
             disabled: false,
             dataAcessKey: 'SOURCE_CODE',
             width: '6',
           },
           {
             style: 'select', // 下拉框类型
-            label: vmI18n.t('form_label.paymentMethod'), // 付款方式 下拉框前的值
+            label: window.vmI18n.t('form_label.paymentMethod'), // 付款方式 下拉框前的值
             width: '6', // 所占宽度宽度
             value: 'PAY_TYPE', // 输入框的值
             disabled: false,
@@ -344,21 +344,21 @@ export default {
           },
           {
             style: 'input',
-            label: vmI18n.t('form_label.collection_amount'), // 代收金额
+            label: window.vmI18n.t('form_label.collection_amount'), // 代收金额
             value: 'COD_AMT',
             disabled: false,
             width: '6',
           },
           {
             style: 'input',
-            label: vmI18n.t('form_label.service_charge'), // 服务费
+            label: window.vmI18n.t('form_label.service_charge'), // 服务费
             value: 'SERVICE_AMT',
             disabled: false,
             width: '6',
           },
           {
             style: 'select', // 下拉框类型
-            label: vmI18n.t('form_label.delivery_warehouse'), // 发货仓库 下拉框前的值
+            label: window.vmI18n.t('form_label.delivery_warehouse'), // 发货仓库 下拉框前的值
             width: '6', // 所占宽度宽度
             dataAcessKey: 'CP_C_PHY_WAREHOUSE_ENAME',
             value: 'CP_C_PHY_WAREHOUSE_ID', // 输入框的值
@@ -423,7 +423,7 @@ export default {
           {
             style: 'date', // 输入框类型
             type: 'datetime', // 文本框类型的input
-            label: vmI18n.t('table_label.paymentTime'), // 付款时间 输入框前文字
+            label: window.vmI18n.t('table_label.paymentTime'), // 付款时间 输入框前文字
             value: 'PAY_TIME', // 输入框的值
             dataAcessKey: 'PAY_TIME',
             disabled: false,
@@ -440,14 +440,14 @@ export default {
           {
             style: '', // 输入框弹框单多选
             value: 'EXPRESS_CODE',
-            label: vmI18n.t('form_label.logisticsOrder_No'), // 物流单号
+            label: window.vmI18n.t('form_label.logisticsOrder_No'), // 物流单号
             disabled: false,
             dataAcessKey: 'EXPRESS_CODE',
             width: '6',
           },
           {
             style: 'checkbox',
-            label: vmI18n.t('form_label.invoice_or_not'), // 是否开票
+            label: window.vmI18n.t('form_label.invoice_or_not'), // 是否开票
             value: 'is_kaip',
             disabled: false,
             dataAcessKey: 'IS_INVOICE',
@@ -455,7 +455,7 @@ export default {
           },
           {
             style: 'input',
-            label: vmI18n.t('form_label.internalRemarks'), // 内部备注
+            label: window.vmI18n.t('form_label.internalRemarks'), // 内部备注
             value: 'INSIDE_REMARK',
             disabled: false,
             dataAcessKey: 'INSIDE_REMARK',
@@ -500,7 +500,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: vmI18n.t('form_label.match_smart_address'), // 智能匹配地址
+            label: window.vmI18n.t('form_label.match_smart_address'), // 智能匹配地址
             value: 'site',
             disabled: false,
             dataAcessKey: 'RECEIVER_NAME',
@@ -599,7 +599,7 @@ export default {
           },
           {
             style: 'input',
-            label: vmI18n.t('form_label.consignee'), // 收货人
+            label: window.vmI18n.t('form_label.consignee'), // 收货人
             disabled: false,
             value: 'RECEIVER_NAME',
             dataAcessKey: 'RECEIVER_NAME',
@@ -608,7 +608,7 @@ export default {
           },
           {
             style: 'input',
-            label: vmI18n.t('form_label.consignee_phone'), // 收货人手机
+            label: window.vmI18n.t('form_label.consignee_phone'), // 收货人手机
             disabled: false,
             value: 'RECEIVER_MOBILE',
             dataAcessKey: 'RECEIVER_MOBILE',
@@ -616,7 +616,7 @@ export default {
           },
           {
             style: 'input',
-            label: vmI18n.t('form_label.consignee_tel'), // 收货人电话
+            label: window.vmI18n.t('form_label.consignee_tel'), // 收货人电话
             disabled: false,
             value: 'RECEIVER_PHONE',
             dataAcessKey: 'RECEIVER_PHONE',
@@ -624,7 +624,7 @@ export default {
           },
           {
             style: 'input',
-            label: vmI18n.t('form_label.consignee_postcode'), // 收货人邮编
+            label: window.vmI18n.t('form_label.consignee_postcode'), // 收货人邮编
             disabled: false,
             value: 'RECEIVER_ZIP',
             dataAcessKey: 'RECEIVER_ZIP',
@@ -679,7 +679,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: vmI18n.t('form_label.aconsignee_area'), // 收货人区 input前面显示的lable值
+              name: window.vmI18n.t('form_label.aconsignee_area'), // 收货人区 input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_DISTAREA', // 对应的表
               reftableid: 23863, // 对应的表ID
@@ -703,7 +703,7 @@ export default {
           // },
           {
             style: 'input',
-            label: vmI18n.t('form_label.aconsignee_address'), // 收获人地址
+            label: window.vmI18n.t('form_label.aconsignee_address'), // 收获人地址
             value: 'RECEIVER_ADDRESS',
             dataAcessKey: 'RECEIVER_ADDRESS',
             width: '12',
@@ -741,7 +741,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: vmI18n.t('form_label.buyerNotes'), // 买家备注
+            label: window.vmI18n.t('form_label.buyerNotes'), // 买家备注
             value: 'BUYER_MESSAGE',
             disabled: false,
             dataAcessKey: 'BUYER_MESSAGE',
@@ -749,7 +749,7 @@ export default {
           },
           {
             style: 'input',
-            label: vmI18n.t('form_label.sellerNotes'), // 卖家备注
+            label: window.vmI18n.t('form_label.sellerNotes'), // 卖家备注
             value: 'SELLER_MEMO',
             disabled: false,
             dataAcessKey: 'SELLER_MEMO',
@@ -773,7 +773,7 @@ export default {
           },
           formData: [
             {
-              label: vmI18n.t('table_label.productNo'), // 商品编码
+              label: window.vmI18n.t('table_label.productNo'), // 商品编码
               style: 'dimSearch',
               width: '6',
               value: 'gbCode',
@@ -844,7 +844,7 @@ export default {
               },
             },
             {
-              label: vmI18n.t('form_label.barCode'), // 条码
+              label: window.vmI18n.t('form_label.barCode'), // 条码
               style: 'dimSearch',
               width: '6',
               value: 'dimData',
@@ -969,29 +969,29 @@ export default {
             align: 'center',
           },
           {
-            title: vmI18n.t('table_label.productNo'), // 商品编码
+            title: window.vmI18n.t('table_label.productNo'), // 商品编码
             key: 'PS_C_PRO_ECODE',
             dataAcessKey: 'PS_C_PRO_ECODE',
           },
           // 颜色
           {
-            title: vmI18n.t('other.color'), // 颜色
+            title: window.vmI18n.t('other.color'), // 颜色
             key: 'PS_C_CLR_ENAME',
             dataAcessKey: 'PS_C_CLR_ENAME',
           },
           // 尺寸
           {
-            title: vmI18n.t('other.sizes'),
+            title: window.vmI18n.t('other.sizes'),
             key: 'PS_C_SIZE_ENAME',
             dataAcessKey: 'PS_C_SIZE_ENAME',
           },
           {
-            title: vmI18n.t('form_label.barCode'), // 条码
+            title: window.vmI18n.t('form_label.barCode'), // 条码
             key: 'PS_C_SKU_ECODE',
             dataAcessKey: 'PS_C_SKU_ECODE',
           },
           {
-            title: vmI18n.t('table_label.productName'), // 商品名称
+            title: window.vmI18n.t('table_label.productName'), // 商品名称
             key: 'PS_C_PRO_ENAME',
             dataAcessKey: 'PS_C_PRO_ENAME',
             width: 100,
@@ -1031,13 +1031,13 @@ export default {
           },
           // 性别
           {
-            title: vmI18n.t('table_label.gender'), // 性别
+            title: window.vmI18n.t('table_label.gender'), // 性别
             key: 'SEX_NAME',
             dataAcessKey: 'SEX',
           },
           // 性别
           {
-            title: vmI18n.t('table_label.tagPrice'), // 吊牌价
+            title: window.vmI18n.t('table_label.tagPrice'), // 吊牌价
             key: 'RESERVE_DECIMAL02',
             dataAcessKey: 'RESERVE_DECIMAL02',
             // render: (h, params) => {
@@ -1058,7 +1058,7 @@ export default {
           //   }
           // },
           {
-            title: vmI18n.t('table_label.unitPrice'), // 成交单价
+            title: window.vmI18n.t('table_label.unitPrice'), // 成交单价
             key: 'PRICE_ACTUAL',
             dataAcessKey: 'PRICE',
             render: (h, params) => {
@@ -1108,7 +1108,7 @@ export default {
             },
           },
           {
-            title: vmI18n.t('table_label.quantities'), // 数量
+            title: window.vmI18n.t('table_label.quantities'), // 数量
             key: 'QTY',
             dataAcessKey: 'QTY',
             render: (h, params) => {
@@ -1160,7 +1160,7 @@ export default {
             },
           },
           {
-            title: vmI18n.t('table_label.transactionAmount'), // 成交金额
+            title: window.vmI18n.t('table_label.transactionAmount'), // 成交金额
             key: 'REAL_AMT',
             dataAcessKey: 'REAL_AMT',
             render: (h, params) => {
@@ -1210,7 +1210,7 @@ export default {
             },
           },
           {
-            title: vmI18n.t('table_label.whetherGift'), // 是否赠品
+            title: window.vmI18n.t('table_label.whetherGift'), // 是否赠品
             key: 'IS_GIFT',
             dataAcessKey: 'IS_GIFT',
             render: (h, params) => h(
@@ -1243,13 +1243,13 @@ export default {
             ),
           },
           {
-            title: vmI18n.t('table_label.adjustment_amount'),
+            title: window.vmI18n.t('table_label.adjustment_amount'),
             key: 'ADJUST_AMT',
             dataAcessKey: 'ADJUST_AMT',
             render: (h, params) => h('span', {}, params.row.ADJUST_AMT.toFixed(2)),
           },
           {
-            title: vmI18n.t('table_label.preferential_amount'),
+            title: window.vmI18n.t('table_label.preferential_amount'),
             key: 'AMT_DISCOUNT',
             dataAcessKey: 'AMT_DISCOUNT',
             render: (h, params) => h('span', {}, params.row.AMT_DISCOUNT.toFixed(2)),
@@ -1269,7 +1269,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: vmI18n.t('panel_label.order_detailed'), // 订单明细
+          label: window.vmI18n.t('panel_label.order_detailed'), // 订单明细
           value: '1',
           isShow: true,
         },
@@ -1277,7 +1277,7 @@ export default {
       labelDefaultValue: '1', // 设置tab默认值
       orderNo: {
         refFuns: 'confirmFun',
-        confirmTitle: vmI18n.t('modalTitle.matrixEntry'), // 矩阵录入
+        confirmTitle: window.vmI18n.t('modalTitle.matrixEntry'), // 矩阵录入
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '800',
         scrollable: false, // 是否可以滚动
@@ -1439,11 +1439,11 @@ export default {
         id: 2627,
         type: 'action',
         name: 'orderManager',
-        label: vmI18n.t('panel_label.orderManager'), // 订单管理
+        label: window.vmI18n.t('panel_label.orderManager'), // 订单管理
         back: true,
         query: Object.assign({
           id: 2627,
-          tabTitle: vmI18n.t('panel_label.orderManager'), // 订单管理
+          tabTitle: window.vmI18n.t('panel_label.orderManager'), // 订单管理
         }),
       });
     },
@@ -2060,7 +2060,7 @@ export default {
           // 发货仓库
           if (
             item.itemdata.name == e.name
-            && item.itemdata.name == vmI18n.t('form_label.delivery_warehouse')
+            && item.itemdata.name == window.vmI18n.t('form_label.delivery_warehouse')
           ) {
             _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = item.itemdata.pid;
           }

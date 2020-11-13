@@ -33,7 +33,7 @@ export default {
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: vmI18n.t('other.shop'), // 店铺 input前面显示的lable值
+          name: window.vmI18n.t('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_SHOP',
           reftableid: 24475,
@@ -45,26 +45,26 @@ export default {
       },
       {
         style: 'radio', // 单选框
-        label: vmI18n.t('other.orderState'), // 订单状态 前面字段
+        label: window.vmI18n.t('other.orderState'), // 订单状态 前面字段
         width: '24', // 宽度
         value: 'order_status', // 绑定到formValue的值
         setRequired: '', // 必选标识,值不为required时无标识
         options: [ // radio选项
           {
             value: 'NEW',
-            label: vmI18n.t('form_label.newlyBuild'), // 新建
+            label: window.vmI18n.t('form_label.newlyBuild'), // 新建
           },
           {
             value: 'CONFIRMING',
-            label: vmI18n.t('form_label.confirming'), // 确认中
+            label: window.vmI18n.t('form_label.confirming'), // 确认中
           },
           {
             value: 'CONFIRMED',
-            label: vmI18n.t('form_label.confirmed_as_JITX'), // 确认为JITX
+            label: window.vmI18n.t('form_label.confirmed_as_JITX'), // 确认为JITX
           },
           {
             value: 'ROLLBACK',
-            label: vmI18n.t('form_label.confirmed_as_non_JITX'), // 确认为非JITX
+            label: window.vmI18n.t('form_label.confirmed_as_non_JITX'), // 确认为非JITX
           }
         ]
       },
@@ -72,7 +72,7 @@ export default {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'query_date',
-        label: vmI18n.t('form_label.queryTime'), // 查询时间
+        label: window.vmI18n.t('form_label.queryTime'), // 查询时间
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''

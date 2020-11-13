@@ -357,11 +357,11 @@ export default {
       //         type: "action", // 类型action
       //         name: "setWarehouseLogistics", // 文件名
       //         // label: "仓库物流优先级设置", // tab中文名
-      //         label: vmI18n.t("panel_label.setWarehouseLogistics"),
+      //         label: window.vmI18n.t("panel_label.setWarehouseLogistics"),
       //         query: Object.assign({
       //           id: res.data.data.data.objid, // 单据id
       //           // tabTitle: "仓库物流优先级设置", // tab中文名
-      //           tabTitle: vmI18n.t("panel_label.setWarehouseLogistics"),
+      //           tabTitle: window.vmI18n.t("panel_label.setWarehouseLogistics"),
       //         }), // 带的参数
       //       });
       //     }
@@ -436,7 +436,7 @@ export default {
       //         res.data.data.warehouseLogistics.REMARK;
       //       if (res.data.data.warehouseLogistics.ISACTIVE === "N") {
       //         // _this.statusName = "已作废";
-      //         _this.statusName = vmI18n.t("common.voided");
+      //         _this.statusName = window.vmI18n.t("common.voided");
       //         _this.btnConfig.buttons.forEach((item) => {
       //           // if (item.text === ("修改物流" || "作废" || "导入" || "导出" || "保存"))
       //           if (

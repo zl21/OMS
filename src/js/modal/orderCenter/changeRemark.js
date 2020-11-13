@@ -32,7 +32,7 @@ export default {
         buttons: [
           {
             // text: "确定", //按钮文本
-            text: vmI18n.t('common.determine'), // 按钮文本
+            text: window.vmI18n.t('common.determine'), // 按钮文本
             size: 'small', // 按钮大小
             disabled: true, // 按钮禁用控制
             btnclick: () => {
@@ -42,7 +42,7 @@ export default {
           {
             type: '', // 按钮类型
             // text: "取消", //按钮文本
-            text: vmI18n.t('common.cancel'), // 按钮文本
+            text: window.vmI18n.t('common.cancel'), // 按钮文本
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制

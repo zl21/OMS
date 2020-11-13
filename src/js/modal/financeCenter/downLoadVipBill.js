@@ -49,7 +49,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: vmI18n.t('other.shop'), // 店铺input前面显示的lable值
+              name: window.vmI18n.t('other.shop'), // 店铺input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP',
               reftableid: 24475,
@@ -65,7 +65,7 @@ export default {
           },
           {
             style: 'radio', // 输入框类型
-            label: vmI18n.t('other.downloadMethod'), // 下载方式 输入框前文字
+            label: window.vmI18n.t('other.downloadMethod'), // 下载方式 输入框前文字
             value: 'type', // 输入框的值
             width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             options: [
@@ -78,7 +78,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: vmI18n.t('other.billTime'), // 账单时间 输入框前文字
+            label: window.vmI18n.t('other.billTime'), // 账单时间 输入框前文字
             value: 'timerange', // 输入框的值
             type: 'datetimerange',
             width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -86,7 +86,7 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            label: vmI18n.t('other.billCode'), // 账单编码 输入框前文字
+            label: window.vmI18n.t('other.billCode'), // 账单编码 输入框前文字
             value: 'bill_numbere', // 输入框的值
             clearable: true,
             width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -103,7 +103,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: vmI18n.t('common.downloadNow'), // 立即下载 按钮文本
+            text: window.vmI18n.t('common.downloadNow'), // 立即下载 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -112,7 +112,7 @@ export default {
             } // 按钮点击事件
           }, {
             type: '', // 按钮类型
-            text: vmI18n.t('common.cancel'), // 取消 按钮文本
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制

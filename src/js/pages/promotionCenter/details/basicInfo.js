@@ -28,7 +28,7 @@ export default {
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
           // name: "店铺名称", // input前面显示的lable值
-          name: vmI18n.t('table_label.shopName'),
+          name: window.vmI18n.t('table_label.shopName'),
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_SHOP', // 对应的表
           // reftableid: 24475, //对应的表ID
@@ -54,7 +54,7 @@ export default {
           isuppercase: false,
           length: 65535,
           // name: "排除省",
-          name: vmI18n.t('common.exclude_province'),
+          name: window.vmI18n.t('common.exclude_province'),
           readonly: false,
           reftable: 'CP_C_PROVINCE',
           reftableid: 23862,

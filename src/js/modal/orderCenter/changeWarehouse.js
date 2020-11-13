@@ -55,7 +55,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型 确定
-            text: vmI18n.t('common.determine'), // 按钮文本
+            text: window.vmI18n.t('common.determine'), // 按钮文本
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -65,7 +65,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: vmI18n.t('common.cancel'), // 按钮文本 取消
+            text: window.vmI18n.t('common.cancel'), // 按钮文本 取消
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -104,7 +104,7 @@ export default {
       const fromdata = new FormData();
       if (!self.pid) {
         self.$Message.warning({
-          content: vmI18n.t('modalTips.zi'), // 请选择仓库
+          content: window.vmI18n.t('modalTips.zi'), // 请选择仓库
           duration: 5,
           top: 80,
         });
@@ -129,7 +129,7 @@ export default {
             const isOutOfStockFlag = false; // 由于830不上，所以默认为false，暂注释上面的处理逻辑，之后要加，打开注释即可。
             if (isOutOfStockFlag) {
               self.$Modal.confirm({
-                title: vmI18n.t('modalTitle.tips'), // 提示
+                title: window.vmI18n.t('modalTitle.tips'), // 提示
                 render: h => h('div', {}, [
                   h(
                     'p',
@@ -165,7 +165,7 @@ export default {
               });
             } else {
               self.$Modal.error({
-                title: vmI18n.t('modalTitle.tips'), // 提示
+                title: window.vmI18n.t('modalTitle.tips'), // 提示
                 render: h => h('div', {}, [
                   h(
                     'p',
@@ -211,7 +211,7 @@ export default {
         }
       } else {
         self.$Modal.error({
-          title: vmI18n.t('modalTitle.tips'), // 提示
+          title: window.vmI18n.t('modalTitle.tips'), // 提示
           render: h => h('div', {}, [
             h(
               'p',
@@ -259,7 +259,7 @@ export default {
       //         if (isOutOfStockFlag) {
       //           self.$Modal.confirm({
       //             // title: "提示",
-      //             title: vmI18n.t('modalTitle.tips'),
+      //             title: window.vmI18n.t('modalTitle.tips'),
       //             render: h => h('div', {}, [
       //               h(
       //                 'p',
@@ -297,7 +297,7 @@ export default {
       //         } else {
       //           self.$Modal.error({
       //             // title: "提示",
-      //             title: vmI18n.t('modalTitle.tips'),
+      //             title: window.vmI18n.t('modalTitle.tips'),
       //             render: h => h('div', {}, [
       //               h(
       //                 'p',
@@ -345,7 +345,7 @@ export default {
       //   } else {
       //     self.$Modal.error({
       //       // title: "提示",
-      //       title: vmI18n.t('modalTitle.tips'),
+      //       title: window.vmI18n.t('modalTitle.tips'),
       //       render: h => h('div', {}, [
       //         h(
       //           'p',
@@ -409,13 +409,13 @@ export default {
             {
               colname: 'ename',
               // name: "发货仓库名称",
-              name: vmI18n.t('table_label.deliveryWarehouse_name'),
+              name: window.vmI18n.t('table_label.deliveryWarehouse_name'),
               show: true,
             },
             {
               colname: 'ecode',
               // name: "发货仓库编码",
-              name: vmI18n.t('table_label.deliveryWarehouse_code'),
+              name: window.vmI18n.t('table_label.deliveryWarehouse_code'),
               show: false,
             },
           ],
@@ -450,13 +450,13 @@ export default {
       //       {
       //         colname: 'ename',
       //         // name: "发货仓库名称",
-      //         name: vmI18n.t('table_label.deliveryWarehouse_name'),
+      //         name: window.vmI18n.t('table_label.deliveryWarehouse_name'),
       //         show: true,
       //       },
       //       {
       //         colname: 'ecode',
       //         // name: "发货仓库编码",
-      //         name: vmI18n.t('table_label.deliveryWarehouse_code'),
+      //         name: window.vmI18n.t('table_label.deliveryWarehouse_code'),
       //         show: false,
       //       },
       //     ],
@@ -497,13 +497,13 @@ export default {
           {
             colname: 'ename',
             // name: "发货仓库名称",
-            name: vmI18n.t('table_label.deliveryWarehouse_name'),
+            name: window.vmI18n.t('table_label.deliveryWarehouse_name'),
             show: true,
           },
           {
             colname: 'ecode',
             // name: "发货仓库编码",
-            name: vmI18n.t('table_label.deliveryWarehouse_code'),
+            name: window.vmI18n.t('table_label.deliveryWarehouse_code'),
             show: false,
           },
         ],
@@ -536,13 +536,13 @@ export default {
       //       {
       //         colname: 'ename',
       //         // name: "发货仓库名称",
-      //         name: vmI18n.t('table_label.deliveryWarehouse_name'),
+      //         name: window.vmI18n.t('table_label.deliveryWarehouse_name'),
       //         show: true,
       //       },
       //       {
       //         colname: 'ecode',
       //         // name: "发货仓库编码",
-      //         name: vmI18n.t('table_label.deliveryWarehouse_code'),
+      //         name: window.vmI18n.t('table_label.deliveryWarehouse_code'),
       //         show: false,
       //       },
       //     ],

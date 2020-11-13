@@ -28,38 +28,38 @@ export default {
       labelDefaultValue: 'OC_B_ORDER',
       labelList: [
         {
-          label: vmI18n.t('common.baseInformation'), // 基本信息
+          label: window.vmI18n.t('common.baseInformation'), // 基本信息
           value: 'OC_B_ORDER',
         },
         {
-          label: vmI18n.t('form_label.preferential_info'), // 优惠信息
+          label: window.vmI18n.t('form_label.preferential_info'), // 优惠信息
           value: 'OC_B_ORDER_PROMOTION',
         },
         {
-          label: vmI18n.t('form_label.payment_info'), // 支付信息
+          label: window.vmI18n.t('form_label.payment_info'), // 支付信息
           value: 'OC_B_ORDER_PAYMENT',
         },
         {
-          label: vmI18n.t('form_label.shipping_info'), // 发货信息
+          label: window.vmI18n.t('form_label.shipping_info'), // 发货信息
           value: 'OC_B_ORDER_DELIVERY',
         },
         {
-          label: vmI18n.t('form_label.workOrder'), // 工单
+          label: window.vmI18n.t('form_label.workOrder'), // 工单
           value: '5',
           isShow: false,
         },
         {
-          label: vmI18n.t('form_label.status_in_warehouse'), // 仓内状态
+          label: window.vmI18n.t('form_label.status_in_warehouse'), // 仓内状态
           value: 'OC_B_ORDER_WMS_STATUS',
           isShow: false,
         },
         {
-          label: vmI18n.t('form_label.routing_info'), // 路由信息
+          label: window.vmI18n.t('form_label.routing_info'), // 路由信息
           value: 'OC_B_ORDER_ROUTE',
           isShow: false,
         },
         {
-          label: vmI18n.t('panel_label.operationLog'), // 操作日志
+          label: window.vmI18n.t('panel_label.operationLog'), // 操作日志
           value: 'OC_B_ORDER_LOG',
         },
       ],
@@ -113,7 +113,7 @@ export default {
       error_tip: '', // 错误提示
       dialogs: {
         address: {
-          title: vmI18n.t('modalTitle.modify_shipping_address'), // 修改收货地址
+          title: window.vmI18n.t('modalTitle.modify_shipping_address'), // 修改收货地址
           titleAlign: 'center',
           data: {},
           width: 650,
@@ -125,7 +125,7 @@ export default {
           maskClosable: false,
         },
         blacklist: {
-          title: vmI18n.t('modalTitle.blacklist'), // 加入黑名单
+          title: window.vmI18n.t('modalTitle.blacklist'), // 加入黑名单
           titleAlign: 'center',
           width: 400,
           data: {},
@@ -139,7 +139,7 @@ export default {
         typeAll: 'error',
         buttons: [
           {
-            text: vmI18n.t('btn.audit'), // 审核
+            text: window.vmI18n.t('btn.audit'), // 审核
             btnclick: () => {
               const self = this;
               const ids = [];
@@ -166,14 +166,14 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.deAudit'), // 反审核
+            text: window.vmI18n.t('btn.deAudit'), // 反审核
             btnclick: () => {
               const self = this;
               const ids = [];
               ids[0] = this.$route.params.customizedModuleId;
               this.$Modal.info({
                 title: self.vmI18n.t('modalTitle.tips'), // 提示
-                content: vmI18n.t('modalTips.g7'), // 是否确定反审核订单？
+                content: window.vmI18n.t('modalTips.g7'), // 是否确定反审核订单？
                 mask: true,
                 showCancel: true,
                 okText: vmI18n.t('common.cancel'), // 取消
@@ -213,7 +213,7 @@ export default {
             },
           },
           {
-            text: vmI18n.t('btn.batchModify_warehouse'), // 订单取消
+            text: window.vmI18n.t('btn.batchModify_warehouse'), // 订单取消
             btnclick: () => {
               const self = this;
               const ids = [];
@@ -256,7 +256,7 @@ export default {
             },
           },
           {
-            text: vmI18n.t('btn.holdOrder'), // Hold单
+            text: window.vmI18n.t('btn.holdOrder'), // Hold单
             btnclick: () => {
               const self = this;
               const ids = self.$route.params.customizedModuleId;
@@ -275,7 +275,7 @@ export default {
             },
           },
           {
-            text: vmI18n.t('btn.splitOrder'), // 拆分订单
+            text: window.vmI18n.t('btn.splitOrder'), // 拆分订单
             btnclick: () => {
               const self = this;
               const data = self.tab1.order;
@@ -320,7 +320,7 @@ export default {
             },
           },
           {
-            text: vmI18n.t('btn.modify_logistics'), // 修改物流
+            text: window.vmI18n.t('btn.modify_logistics'), // 修改物流
             btnclick: () => {
               const self = this;
               const ids = [];
@@ -366,7 +366,7 @@ export default {
             },
           },
           {
-            text: vmI18n.t('btn.modifyWarehouse'), // 修改仓库
+            text: window.vmI18n.t('btn.modifyWarehouse'), // 修改仓库
             btnclick: () => {
               const self = this;
               const ids = [];
@@ -410,7 +410,7 @@ export default {
             },
           },
           {
-            text: vmI18n.t('btn.modifyRemarks'), // 修改备注
+            text: window.vmI18n.t('btn.modifyRemarks'), // 修改备注
             btnclick: () => {
               const self = this;
               const ids = [];
@@ -430,7 +430,7 @@ export default {
             },
           },
           {
-            text: vmI18n.t('btn.beOut_of_stock'), // 缺货重新占单
+            text: window.vmI18n.t('btn.beOut_of_stock'), // 缺货重新占单
             btnclick: () => {
               const self = this;
               if (self.tab1.order.ID > 0) {
@@ -451,7 +451,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.fubaoOut_of_stock'), // 福袋缺货重新占单text: "福袋缺货重新占单", // 按钮文本
+            text: window.vmI18n.t('btn.fubaoOut_of_stock'), // 福袋缺货重新占单text: "福袋缺货重新占单", // 按钮文本
             btnclick: () => {
               const self = this;
               if (self.tab1.order.ID > 0) {
@@ -472,17 +472,17 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.changeAddress'), // 修改地址
+            text: window.vmI18n.t('btn.changeAddress'), // 修改地址
             btnclick: () => {
               // 判断条件是否符合
               const self = this;
               const status = self.tab1.order.ORDER_STATUS || '';
               if (status === 3) {
-                self.$Message.warning(vmI18n.t('modalTips.g8')); // 订单状态已审核，建议反审核再修改地址
+                self.$Message.warning(window.vmI18n.t('modalTips.g8')); // 订单状态已审核，建议反审核再修改地址
                 return;
               }
               if (![1, 2, 3, 4].includes(status)) {
-                self.$Message.warning(vmI18n.t('modalTips.g9')); // "订单状态非未确认、缺货、已审核、配货中，不允许修改地址"
+                self.$Message.warning(window.vmI18n.t('modalTips.g9')); // "订单状态非未确认、缺货、已审核、配货中，不允许修改地址"
                 return;
               }
               self.getWritData().then((res) => {
@@ -514,7 +514,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.orderBlocking'), // 订单拦截
+            text: window.vmI18n.t('btn.orderBlocking'), // 订单拦截
             btnclick: () => {
               const self = this;
               const id = self.tab1.order.ID || -1;
@@ -534,7 +534,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.cancelBlocking'), // 取消拦截
+            text: window.vmI18n.t('btn.cancelBlocking'), // 取消拦截
             btnclick: () => {
               const self = this;
               const id = self.tab1.order.ID || -1;
@@ -551,7 +551,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('modalTitle.blacklist'), // 加入黑名单
+            text: window.vmI18n.t('modalTitle.blacklist'), // 加入黑名单
             btnclick: () => {
               this.dialogs.blacklist.data = {
                 ID: this.tab1.order.ID || -1,
@@ -560,11 +560,11 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.new_workOrder'), // 新增工单
+            text: window.vmI18n.t('btn.new_workOrder'), // 新增工单
             btnclick: () => {}, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.additionalRefund'), // 额外退款
+            text: window.vmI18n.t('btn.additionalRefund'), // 额外退款
             btnclick: () => {
               if (
                 this.statusName === this.vmI18n.t('other.warehouseDelivery')
@@ -574,50 +574,50 @@ export default {
                   id: -1,
                   type: 'action',
                   name: 'refundAfterShipment',
-                  label: vmI18n.t('panel_label.extraRefundEdit'), // 额外退款编辑
+                  label: window.vmI18n.t('panel_label.extraRefundEdit'), // 额外退款编辑
                   query: Object.assign({
                     oid: this.$route.params.customizedModuleId,
-                    tabTitle: vmI18n.t('panel_label.extraRefundEdit'), // 额外退款编辑
+                    tabTitle: window.vmI18n.t('panel_label.extraRefundEdit'), // 额外退款编辑
                     fromOrder: true,
                     new: true,
                   }),
                 });
               } else {
-                this.$Message.warning(vmI18n.t('modalTips.h1')); // "只有仓库发货或者平台发货的订单才能操作!"
+                this.$Message.warning(window.vmI18n.t('modalTips.h1')); // "只有仓库发货或者平台发货的订单才能操作!"
               }
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.new_chargeback'), // 新增退单
+            text: window.vmI18n.t('btn.new_chargeback'), // 新增退单
             btnclick: () => {
               const orderDetails = this.tab1.order;
               // “仓库发货”、“平台发货”
               if (![5, 6].includes(orderDetails.ORDER_STATUS)) {
-                this.$Message.warning(vmI18n.t('modalTips.h2')); // "订单状态为仓库发货和平台发货才能新增退单!"
+                this.$Message.warning(window.vmI18n.t('modalTips.h2')); // "订单状态为仓库发货和平台发货才能新增退单!"
                 return;
               }
               this.$store.commit('customize/TabOpen', {
                 id: -1,
                 type: 'action',
                 name: 'returngood',
-                label: vmI18n.t('panel_label.addReturnOrder'), // 退换货单新增
+                label: window.vmI18n.t('panel_label.addReturnOrder'), // 退换货单新增
                 query: {
                   id: -1,
                   orderHrefReturnid: orderDetails.ID,
                   isOrderHrefReturn: 'order',
-                  tabTitle: vmI18n.t('panel_label.addReturnOrder'), // 退换货单新增
+                  tabTitle: window.vmI18n.t('panel_label.addReturnOrder'), // 退换货单新增
                 },
               });
             },
           },
           {
-            text: vmI18n.t('btn.refresh'), // 刷新 按钮文本
+            text: window.vmI18n.t('btn.refresh'), // 刷新 按钮文本
             btnclick: () => {
               this.autoRefresh();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.back'), // 返回 按钮文本
+            text: window.vmI18n.t('btn.back'), // 返回 按钮文本
             btnclick: () => {
               this.$store.commit('customize/TabHref', {
                 id: 2627,
@@ -633,22 +633,22 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.copyOrder'), // 复制订单
+            text: window.vmI18n.t('btn.copyOrder'), // 复制订单
           },
           {
-            text: vmI18n.t('btn.lostOrder_copy'), // 丢单复制
+            text: window.vmI18n.t('btn.lostOrder_copy'), // 丢单复制
           },
           {
-            text: vmI18n.t('btn.wrongCopy'), // 错发复制
+            text: window.vmI18n.t('btn.wrongCopy'), // 错发复制
           },
           {
-            text: vmI18n.t('btn.missedCopy'), // 漏发复制
+            text: window.vmI18n.t('btn.missedCopy'), // 漏发复制
           },
           {
-            text: vmI18n.t('btn.giftDelivery_copy'), // 赠品出库复制
+            text: window.vmI18n.t('btn.giftDelivery_copy'), // 赠品出库复制
           },
           {
-            text: vmI18n.t('btn.original_single_null_and_void_copy'), // 原单无效复制
+            text: window.vmI18n.t('btn.original_single_null_and_void_copy'), // 原单无效复制
           },
         ],
       },
@@ -736,7 +736,7 @@ export default {
         id: -1,
         type: 'action',
         name: 'orderManageAdd',
-        label: vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
+        label: window.vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
         query,
       });
     },

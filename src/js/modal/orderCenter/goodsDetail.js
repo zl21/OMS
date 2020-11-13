@@ -45,12 +45,12 @@ export default {
       islackstock: [
         {
           // label: "是",
-          label: vmI18n.t('common.yes'),
+          label: window.vmI18n.t('common.yes'),
           value: '1',
         },
         {
           // label: "否",
-          label: vmI18n.t('common.no'),
+          label: window.vmI18n.t('common.no'),
           value: '0',
         },
       ],
@@ -63,7 +63,7 @@ export default {
             {
               type: '', // 按钮类型
               // text: "删除赠品", //按钮文本
-              text: vmI18n.t('btn.deleteGift'), // 按钮文本
+              text: window.vmI18n.t('btn.deleteGift'), // 按钮文本
               icon: '', // 按钮图标
               size: 'small', // 按钮大小
               disabled: false, // 按钮禁用控制
@@ -95,7 +95,7 @@ export default {
             {
               type: '', // 按钮类型
               // text: "添加赠品", //按钮文本
-              text: vmI18n.t('btn.addGift'), // 按钮文本
+              text: window.vmI18n.t('btn.addGift'), // 按钮文本
               icon: '', // 按钮图标
               size: 'small', // 按钮大小
               disabled: false, // 按钮禁用控制
@@ -159,7 +159,7 @@ export default {
             },
             {
               // text: "标记退款完成", //按钮文本
-              text: vmI18n.t('btn.rark_refundComplete'), // 按钮文本
+              text: window.vmI18n.t('btn.rark_refundComplete'), // 按钮文本
               btnclick: () => {
                 const self = this;
                 const ids = this.selection.map(row => row.ID);
@@ -190,7 +190,7 @@ export default {
             {
               type: '', // 按钮类型
               // text: "更换商品", //按钮文本
-              text: vmI18n.t('btn.replaceGoods'), // 按钮文本
+              text: window.vmI18n.t('btn.replaceGoods'), // 按钮文本
               icon: '', // 按钮图标
               size: 'small', // 按钮大小
               disabled: false, // 按钮禁用控制
@@ -200,7 +200,7 @@ export default {
                 if (ids.length === 0) {
                   self.$Message.warning({
                     // content: "请选中其中一条记录",
-                    content: vmI18n.t('modalTips.al'),
+                    content: window.vmI18n.t('modalTips.al'),
                     duration: 5,
                     top: 80,
                   });
@@ -208,7 +208,7 @@ export default {
                 } if (ids.length > 1) {
                   self.$Message.warning({
                     // content: "请选中一条记录",
-                    content: vmI18n.t('modalTips.am'),
+                    content: window.vmI18n.t('modalTips.am'),
                     duration: 5,
                     top: 80,
                   });
@@ -290,11 +290,11 @@ export default {
           {
             key: 'PS_C_PRO_ECODE',
             // title: "商品编码",
-            title: vmI18n.t('table_label.productNo'),
+            title: window.vmI18n.t('table_label.productNo'),
           },
           {
             // title: "颜色",
-            title: vmI18n.t('other.color'),
+            title: window.vmI18n.t('other.color'),
             key: 'PS_C_CLR_ENAME',
             width: 80,
             render: (h, params) => {
@@ -359,7 +359,7 @@ export default {
           // 尺寸
           {
             // title: "尺寸",
-            title: vmI18n.t('other.sizes'),
+            title: window.vmI18n.t('other.sizes'),
             key: 'PS_C_SIZE_ENAME',
             width: 80,
             render: (h, params) => {
@@ -424,12 +424,12 @@ export default {
           {
             key: 'PS_C_SKU_ECODE',
             // title: "条码",
-            title: vmI18n.t('form_label.barCode'),
+            title: window.vmI18n.t('form_label.barCode'),
           },
           {
             key: 'PS_C_PRO_ENAME',
             // title: "商品名称",
-            title: vmI18n.t('table_label.productName'),
+            title: window.vmI18n.t('table_label.productName'),
             width: 200,
             ellipsis: true,
           },
@@ -441,23 +441,23 @@ export default {
           {
             key: 'QTY',
             // title: "数量",
-            title: vmI18n.t('table_label.quantities'),
+            title: window.vmI18n.t('table_label.quantities'),
           },
           // 缺货数量
           {
             key: 'QTY_LOST',
             // title: "缺货数量",
-            title: vmI18n.t('table_label.outOfStock_quantit'),
+            title: window.vmI18n.t('table_label.outOfStock_quantit'),
           },
           {
             key: 'STOCK',
             // title: "库存",
-            title: vmI18n.t('table_label.stock'),
+            title: window.vmI18n.t('table_label.stock'),
           },
           {
             key: 'IS_LACKSTOCK',
             // title: "实物报缺",
-            title: vmI18n.t('table_label.materialShortage'),
+            title: window.vmI18n.t('table_label.materialShortage'),
             width: 80,
             render: (h, params) => {
               // 订单状态为未确认或者缺货状态时,实物报缺为可修改
@@ -516,7 +516,7 @@ export default {
           {
             key: 'IS_GIFT',
             // title: "是否赠品",
-            title: vmI18n.t('table_label.whetherGift'),
+            title: window.vmI18n.t('table_label.whetherGift'),
             render: (h, params) => {
               const IS_GIFT = params.row.IS_GIFT === 1 ? '是' : '否';
               return h('span', {}, IS_GIFT);
@@ -525,53 +525,53 @@ export default {
           {
             key: 'PRICE_LIST',
             // title: "吊牌价",
-            title: vmI18n.t('table_label.tagPrice'),
+            title: window.vmI18n.t('table_label.tagPrice'),
           },
           {
             key: 'PRICE_ACTUAL',
             // title: "成交单价",
-            title: vmI18n.t('table_label.unitPrice'),
+            title: window.vmI18n.t('table_label.unitPrice'),
           },
           {
             key: 'REAL_AMT',
             // title: "成交金额",
-            title: vmI18n.t('table_label.transactionAmount'),
+            title: window.vmI18n.t('table_label.transactionAmount'),
           },
           {
             key: 'PRICE_SETTLE',
             // title: "结算单价",
-            title: vmI18n.t('table_label.unitPriceSettlement'),
+            title: window.vmI18n.t('table_label.unitPriceSettlement'),
           },
           {
             key: 'TOT_PRICE_SETTLE',
             // title: "结算总额",
-            title: vmI18n.t('table_label.totalSettlement'),
+            title: window.vmI18n.t('table_label.totalSettlement'),
           },
           {
             key: 'AMT_DISCOUNT',
             // title: "优惠金额",
-            title: vmI18n.t('table_label.preferential_amount'),
+            title: window.vmI18n.t('table_label.preferential_amount'),
           },
           {
             key: 'ADJUST_AMT',
             // title: "调整金额",
-            title: vmI18n.t('table_label.adjustment_amount'),
+            title: window.vmI18n.t('table_label.adjustment_amount'),
           },
           {
             key: 'ORDER_SPLIT_AMT',
             // title: "平摊金额",
-            title: vmI18n.t('table_label.equal_amount'),
+            title: window.vmI18n.t('table_label.equal_amount'),
             render: (h, params) => h('span', {}, params.row.ORDER_SPLIT_AMT.toFixed(2)),
           },
           {
             key: 'REFUND_STATUS_EXT',
             // title: "退款状态",
-            title: vmI18n.t('table_label.refund_status'),
+            title: window.vmI18n.t('table_label.refund_status'),
           },
           {
             key: 'DISTRIBUTION_PRICE',
             // title: "分销金额",
-            title: vmI18n.t('table_label.distribution_amount'),
+            title: window.vmI18n.t('table_label.distribution_amount'),
           },
         ],
         data: [],

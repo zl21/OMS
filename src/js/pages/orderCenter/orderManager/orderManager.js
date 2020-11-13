@@ -136,7 +136,7 @@ export default {
       clearFromListValue: false,
       // 状态json
       statusData: {
-        label: vmI18n.t('common.all'), // 全部
+        label: window.vmI18n.t('common.all'), // 全部
         value: '0',
         isShow: true,
       },
@@ -177,11 +177,11 @@ export default {
         // 自定义操作列
         renderArr: [
           {
-            title: vmI18n.t('table_label.replicationReason'), // 复制原因
+            title: window.vmI18n.t('table_label.replicationReason'), // 复制原因
             key: 'COPY_REASON',
           },
           {
-            title: vmI18n.t('table_label.flag'), // 旗帜
+            title: window.vmI18n.t('table_label.flag'), // 旗帜
             key: 'ORDER_FLAG',
             // draggable: true,
             render: (h, params) => {
@@ -289,7 +289,7 @@ export default {
             },
           },
           {
-            title: vmI18n.t('table_label.orderIdentification'), // 订单标识
+            title: window.vmI18n.t('table_label.orderIdentification'), // 订单标识
             sortable: true,
             // draggable: true,
             align: 'center',
@@ -353,7 +353,7 @@ export default {
             },
           },
           {
-            title: vmI18n.t('table_label.platform_orderNo'), // 平台单号
+            title: window.vmI18n.t('table_label.platform_orderNo'), // 平台单号
             align: 'center',
             key: 'SOURCE_CODE',
             render: (h, params) => {
@@ -413,7 +413,7 @@ export default {
             },
           },
           {
-            title: vmI18n.t('table_label.shippingAddress'), // 收货地址
+            title: window.vmI18n.t('table_label.shippingAddress'), // 收货地址
             key: 'REGION_RECEIVER_ADDRESS',
             render: (h, params) => h('span', [
               h(
@@ -450,7 +450,7 @@ export default {
             ]),
           },
           {
-            title: vmI18n.t('table_label.goodsInfo'), // 商品信息
+            title: window.vmI18n.t('table_label.goodsInfo'), // 商品信息
             align: 'center',
             width: 610,
             ellipsis: false,
@@ -813,7 +813,7 @@ export default {
             ]),
           },
           {
-            title: vmI18n.t('table_label.buyerNickname'), // 买家昵称
+            title: window.vmI18n.t('table_label.buyerNickname'), // 买家昵称
             align: 'center',
             key: 'USER_NICK',
             // width: 220,
@@ -876,7 +876,7 @@ export default {
             },
           },
           {
-            title: vmI18n.t('table_label.receivingInfo'), // 收货信息
+            title: window.vmI18n.t('table_label.receivingInfo'), // 收货信息
             key: 'JOIN_RECEIVER_ADDRESS',
             align: 'center',
             ellipsis: true,
@@ -941,7 +941,7 @@ export default {
             ]),
           },
           {
-            title: vmI18n.t('table_label.orderTime'), // 下单时间
+            title: window.vmI18n.t('table_label.orderTime'), // 下单时间
             key: 'ORDER_DATE',
             render: (h, params) => {
               if (!params.row.ORDER_DATE) {
@@ -954,7 +954,7 @@ export default {
             },
           },
           {
-            title: vmI18n.t('table_label.paymentTime'), // 付款时间
+            title: window.vmI18n.t('table_label.paymentTime'), // 付款时间
             key: 'PAY_TIME',
             render: (h, params) => {
               if (!params.row.PAY_TIME) {
@@ -967,7 +967,7 @@ export default {
             },
           },
           {
-            title: vmI18n.t('table_label.creationTime'), // 创建时间
+            title: window.vmI18n.t('table_label.creationTime'), // 创建时间
             key: 'CREATIONDATE',
             render: (h, params) => {
               if (!params.row.CREATIONDATE) {
@@ -980,7 +980,7 @@ export default {
             },
           },
           {
-            title: vmI18n.t('table_label.auditTime'), // 审核时间
+            title: window.vmI18n.t('table_label.auditTime'), // 审核时间
             key: 'AUDIT_TIME',
             render: (h, params) => {
               if (!params.row.AUDIT_TIME) {
@@ -993,7 +993,7 @@ export default {
             },
           },
           {
-            title: vmI18n.t('table_label.distributionTime'), // 配货时间
+            title: window.vmI18n.t('table_label.distributionTime'), // 配货时间
             key: 'DISTRIBUTION_TIME',
             render: (h, params) => {
               if (!params.row.DISTRIBUTION_TIME) {
@@ -1008,7 +1008,7 @@ export default {
             },
           },
           {
-            title: vmI18n.t('table_label.scanDeliveryTime'),
+            title: window.vmI18n.t('table_label.scanDeliveryTime'),
             key: 'SCAN_TIME',
             render: (h, params) => {
               if (!params.row.SCAN_TIME) {
@@ -1074,13 +1074,13 @@ export default {
         typeAll: 'error', // 按钮统一风格样式
         buttons: [
           {
-            text: vmI18n.t('btn.search'), // 按钮文本
+            text: window.vmI18n.t('btn.search'), // 按钮文本
             btnclick: () => {
               this.loadData();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.empty'), // 按钮文本
+            text: window.vmI18n.t('btn.empty'), // 按钮文本
             btnclick: () => {
               const _this = this;
               _this.clearFromListValue = true;
@@ -1101,13 +1101,13 @@ export default {
         loading: false, // 按钮加载
         buttons: [
           {
-            text: vmI18n.t('btn.manualCreation'), // 手工创建
+            text: window.vmI18n.t('btn.manualCreation'), // 手工创建
           },
           {
-            text: vmI18n.t('btn.add'), // 新增
+            text: window.vmI18n.t('btn.add'), // 新增
           },
           {
-            text: vmI18n.t('btn.audit'), // 审核
+            text: window.vmI18n.t('btn.audit'), // 审核
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -1173,7 +1173,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.deAudit'), // 反审核
+            text: window.vmI18n.t('btn.deAudit'), // 反审核
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -1267,22 +1267,22 @@ export default {
           //   } //按钮点击事件
           // },
           {
-            text: vmI18n.t('btn.batchModify'), // 批量修改
+            text: window.vmI18n.t('btn.batchModify'), // 批量修改
           },
           {
-            text: vmI18n.t('btn.batchModify_logistics'), // 批量修改物流
+            text: window.vmI18n.t('btn.batchModify_logistics'), // 批量修改物流
           },
           {
-            text: vmI18n.t('btn.lostOrder_copy'), // 丢单复制
+            text: window.vmI18n.t('btn.lostOrder_copy'), // 丢单复制
           },
           {
-            text: vmI18n.t('btn.batch_holdOrder'), // 批量Hold单
+            text: window.vmI18n.t('btn.batch_holdOrder'), // 批量Hold单
           },
           {
-            text: vmI18n.t('btn.cancelHold'), // 取消Hold
+            text: window.vmI18n.t('btn.cancelHold'), // 取消Hold
           },
           {
-            text: vmI18n.t('btn.invoice_otice'), // 开票通知
+            text: window.vmI18n.t('btn.invoice_otice'), // 开票通知
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -1337,7 +1337,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.invoice_otice'), // 记录发票
+            text: window.vmI18n.t('btn.invoice_otice'), // 记录发票
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -1373,10 +1373,10 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.recordInvoice'), // 批量修改仓库
+            text: window.vmI18n.t('btn.recordInvoice'), // 批量修改仓库
           },
           {
-            text: vmI18n.t('btn.batchModify_warehouse'), // 订单取消
+            text: window.vmI18n.t('btn.batchModify_warehouse'), // 订单取消
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -1434,7 +1434,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.orderBlocking'), // 订单拦截
+            text: window.vmI18n.t('btn.orderBlocking'), // 订单拦截
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -1482,16 +1482,16 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.manualMarking'), // 手工打标
+            text: window.vmI18n.t('btn.manualMarking'), // 手工打标
           },
           // {
           //   text: '定金预售提前发货'
           // },
           {
-            text: vmI18n.t('btn.expedited_shipment'), // 加急发货
+            text: window.vmI18n.t('btn.expedited_shipment'), // 加急发货
           },
           {
-            text: vmI18n.t('btn.splitOrder'), // 拆分订单
+            text: window.vmI18n.t('btn.splitOrder'), // 拆分订单
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -1632,7 +1632,7 @@ export default {
           //   } //按钮点击事件
           // },
           {
-            text: vmI18n.t('btn.new_chargeback'), // 新增退单
+            text: window.vmI18n.t('btn.new_chargeback'), // 新增退单
             // 新增退单跳转页面
             btnclick: () => {
               const self = this;
@@ -1702,26 +1702,26 @@ export default {
                 id: -1,
                 type: 'action',
                 name: 'returngood',
-                label: vmI18n.t('panel_label.addReturnOrder'), // 退换货单新增
+                label: window.vmI18n.t('panel_label.addReturnOrder'), // 退换货单新增
                 query: {
                   id: -1,
                   orderHrefReturnid: self.selection[0].ID,
                   isOrderHrefReturn: 'order',
-                  tabTitle: vmI18n.t('panel_label.addReturnOrder'), // 退换货单新增
+                  tabTitle: window.vmI18n.t('panel_label.addReturnOrder'), // 退换货单新增
                 },
               });
               // self.selection = [];
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.batchModify_remarks'), // 批量修改备注
+            text: window.vmI18n.t('btn.batchModify_remarks'), // 批量修改备注
           },
           // {
           //   text: "工单", //按钮文本
           //   btnclick: () => {} //按钮点击事件
           // },
           {
-            text: vmI18n.t('btn.beOut_of_stock'), // 缺货重新占单
+            text: window.vmI18n.t('btn.beOut_of_stock'), // 缺货重新占单
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -1766,7 +1766,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.fubaoOut_of_stock'), // 福袋缺货重新占单
+            text: window.vmI18n.t('btn.fubaoOut_of_stock'), // 福袋缺货重新占单
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -1837,28 +1837,28 @@ export default {
           //   } //按钮点击事件
           // },
           {
-            text: vmI18n.t('btn.copyOrder'), // 复制订单
+            text: window.vmI18n.t('btn.copyOrder'), // 复制订单
           },
           {
-            text: vmI18n.t('btn.wrongCopy'), // 错发复制
+            text: window.vmI18n.t('btn.wrongCopy'), // 错发复制
           },
           {
-            text: vmI18n.t('btn.missedCopy'), // 漏发复制
+            text: window.vmI18n.t('btn.missedCopy'), // 漏发复制
           },
           {
-            text: vmI18n.t('btn.giftDelivery_copy'), // 赠品出库复制
+            text: window.vmI18n.t('btn.giftDelivery_copy'), // 赠品出库复制
           },
           {
-            text: vmI18n.t('btn.original_single_null_and_void_copy'), // 原单无效复制
+            text: window.vmI18n.t('btn.original_single_null_and_void_copy'), // 原单无效复制
           },
           {
-            text: vmI18n.t('btn.note_import'), // 备注导入
+            text: window.vmI18n.t('btn.note_import'), // 备注导入
             btnclick: () => {
               const _this = this;
               _this.importTable.componentData = {
                 tableName: 'OUT_OF_STOCK_MEMO',
               };
-              _this.importTable.confirmTitle = vmI18n.t('btn.note_import');
+              _this.importTable.confirmTitle = window.vmI18n.t('btn.note_import');
               _this.$children
                 .find(item => item.name === 'importTable')
                 .openConfirm();
@@ -1877,7 +1877,7 @@ export default {
           //   } //按钮点击事件
           // },
           {
-            text: vmI18n.t('btn.changeTo_platformShipment'), // 更改为平台发货
+            text: window.vmI18n.t('btn.changeTo_platformShipment'), // 更改为平台发货
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -1925,28 +1925,28 @@ export default {
             },
           },
           {
-            text: vmI18n.t('btn.batchModifyGoods'), // 批量改商品
+            text: window.vmI18n.t('btn.batchModifyGoods'), // 批量改商品
           },
           {
-            text: vmI18n.t('btn.replaceGoods'), // 替换商品
+            text: window.vmI18n.t('btn.replaceGoods'), // 替换商品
           },
           {
-            text: vmI18n.t('btn.addGift'), // 添加赠品
+            text: window.vmI18n.t('btn.addGift'), // 添加赠品
           },
           {
-            text: vmI18n.t('btn.deleteGift'), // 删除赠品
+            text: window.vmI18n.t('btn.deleteGift'), // 删除赠品
           },
           {
-            text: vmI18n.t('btn.batchSplitOrder'), // 批量拆单
+            text: window.vmI18n.t('btn.batchSplitOrder'), // 批量拆单
           },
           {
-            text: vmI18n.t('btn.appointGoods_splitOrder'), // 指定商品拆单
+            text: window.vmI18n.t('btn.appointGoods_splitOrder'), // 指定商品拆单
           },
           {
-            text: vmI18n.t('btn.out_of_stock_splitOrder'), // 缺货拆单
+            text: window.vmI18n.t('btn.out_of_stock_splitOrder'), // 缺货拆单
           },
           {
-            text: vmI18n.t('btn.batch_chargeback'), // 批量退单
+            text: window.vmI18n.t('btn.batch_chargeback'), // 批量退单
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -1968,7 +1968,7 @@ export default {
             },
           },
           {
-            text: vmI18n.t('btn.release_inventory'), // 释放库存
+            text: window.vmI18n.t('btn.release_inventory'), // 释放库存
             btnclick: () => {
               const self = this;
               const ids = [];
@@ -2041,22 +2041,22 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.mergeOrders'), // 合并订单
+            text: window.vmI18n.t('btn.mergeOrders'), // 合并订单
             btnclick: () => {
               this.mergeOrder();
             },
           },
           {
-            text: vmI18n.t('btn.cancel_mergeOrders'), // 取消合并订单
+            text: window.vmI18n.t('btn.cancel_mergeOrders'), // 取消合并订单
             btnclick: () => {
               this.cancelMergeOrder();
             },
           },
           {
-            text: vmI18n.t('btn.export'), // 导入
+            text: window.vmI18n.t('btn.export'), // 导入
           },
           {
-            text: vmI18n.t('btn.import'), // 导出
+            text: window.vmI18n.t('btn.import'), // 导出
             btnclick: () => {
               this.exportClick();
             }, // 按钮点击事件
@@ -2083,7 +2083,7 @@ export default {
           },
           {
             icon: 'iconfont iconbj_col', // 收藏图标
-            name: vmI18n.t('btn.collection'),
+            name: window.vmI18n.t('btn.collection'),
             btnclick: () => {
               const self = this;
               self.setFavorite();
@@ -2098,7 +2098,7 @@ export default {
         formData: [
           {
             style: 'checkbox', // 勾选框类型
-            label: vmI18n.t('form_label.whether_returned'), // 前面的文字
+            label: window.vmI18n.t('form_label.whether_returned'), // 前面的文字
             value: 'IS_BACK', // 输入框的值
             width: '6', // 所占的宽度
             checked: false, // 是否勾选控制
@@ -2164,7 +2164,7 @@ export default {
         case '新增': {
           R3.store.commit('global/tabOpen', {
             type: 'C',
-            label: vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
+            label: window.vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
             customizedModuleName: 'orderManageAdd',
             customizedModuleId: '-1',
           });
@@ -2657,7 +2657,7 @@ export default {
         });
         // R3.store.commit('global/tabOpen', {
         //   type: 'C',
-        //   label: vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
+        //   label: window.vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
         //   customizedModuleName: 'ORDERMANAGEADD',
         //   customizedModuleId: '-1',
         // });

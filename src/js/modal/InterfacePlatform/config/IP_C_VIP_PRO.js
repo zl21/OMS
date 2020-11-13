@@ -37,7 +37,7 @@ export default {
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: vmI18n.t('other.shop'), // 店铺//input前面显示的lable值
+          name: window.vmI18n.t('other.shop'), // 店铺//input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_SHOP',
           reftableid: 24475,
@@ -51,7 +51,7 @@ export default {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'query_date',
-        label: vmI18n.t('form_label.PlatformModifyTime'), // 平台修改时间
+        label: window.vmI18n.t('form_label.PlatformModifyTime'), // 平台修改时间
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''

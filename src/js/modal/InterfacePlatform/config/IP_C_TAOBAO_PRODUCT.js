@@ -33,7 +33,7 @@ export default {
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: vmI18n.t('other.shop'), // 店铺input前面显示的lable值
+          name: window.vmI18n.t('other.shop'), // 店铺input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_SHOP',
           reftableid: 24475,
@@ -45,7 +45,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: vmI18n.t('form_label.numberCode'), // 数字编号 输入框前文字 输入框前文字
+        label: window.vmI18n.t('form_label.numberCode'), // 数字编号 输入框前文字 输入框前文字
         value: 'numNumber', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -58,7 +58,7 @@ export default {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'timeArr',
-        label: vmI18n.t('table_label.modificationTime'), // 修改时间
+        label: window.vmI18n.t('table_label.modificationTime'), // 修改时间
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''

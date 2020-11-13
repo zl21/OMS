@@ -67,10 +67,10 @@
                       (row.PARENT_GROUPS_ID &&
                         column.key === 'IS_READ' &&
                         (row.PARENT_IS_READ === 'N' ||
-                          row.PARENT_ISREAD === 'N')) ||
+                        row.PARENT_ISREAD === 'N')) ||
                         (column.key === 'IS_WRITE' &&
-                          (row.PARENT_IS_WRITE === 'N' ||
-                            row.PARENT_ISMODIFY === 'N'))
+                        (row.PARENT_IS_WRITE === 'N' ||
+                        row.PARENT_ISMODIFY === 'N'))
                     "
                     @on-change="rowCheckboxChange($event, rowIndex, column)"
                   />

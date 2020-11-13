@@ -32,7 +32,7 @@ export default {
             isuppercase: false, // 是否转大写
             length: 65535, // 最大长度是多少
             // name: "店铺名称", // input前面显示的lable值
-            name: vmI18n.t('table_label.shopName'),
+            name: window.vmI18n.t('table_label.shopName'),
             readonly: false, // 是否可编辑，对应input   readonly属性
             reftable: 'CP_C_SHOP', // 对应的表
             // reftableid: 24475, //对应的表ID
@@ -66,7 +66,7 @@ export default {
             isuppercase: false,
             length: 65535,
             // name: "排除省",
-            name: vmI18n.t('common.exclude_province'),
+            name: window.vmI18n.t('common.exclude_province'),
             readonly: false,
             reftable: 'CP_C_PROVINCE',
             reftableid: 23862,
@@ -97,19 +97,19 @@ export default {
         {
           class: 'iconjibenxinxi',
           // content: "基础信息",basic_info
-          content: vmI18n.t('other.basic_info'),
+          content: window.vmI18n.t('other.basic_info'),
           finish: false,
         },
         {
           class: 'iconliuchengtiaojian',
           // content: "条件信息",
-          content: vmI18n.t('other.condition_info'),
+          content: window.vmI18n.t('other.condition_info'),
           finish: false,
         },
         {
           class: 'iconhuodong',
           // content: "活动概览",
-          content: vmI18n.t('other.activity_overview'),
+          content: window.vmI18n.t('other.activity_overview'),
           finish: false,
         },
       ],
@@ -195,26 +195,26 @@ export default {
         //   return item.value;
         // });
         this.basic_info.time_type = groups.timeTypes.find(
-          item => item.title === vmI18n.t('other.payment_date')
+          item => item.title === window.vmI18n.t('other.payment_date')
         ).value; // 付款日期
         this.basic_info.activity_type = groups.actiTypes.find(
-          item => item.title === vmI18n.t('other.Designated_free_purchase')
+          item => item.title === window.vmI18n.t('other.Designated_free_purchase')
         ).value; // 指定买赠
         this.basic_info.buyer_limit_frequency = groups.buyerLimitFrequency.find(
-          item => item.title === vmI18n.t('other.unlimited')
+          item => item.title === window.vmI18n.t('other.unlimited')
         ).value; // 不限制
         this.basic_info.order_notes_type = groups.orderRemarks.find(
-          item => item.title === vmI18n.t('form_label.buyer_message')
+          item => item.title === window.vmI18n.t('form_label.buyer_message')
         ).value; // 买家留言
         // 条件设置
         this.batch_infos_setting.products_origin = groups.productsOrigin.find(
-          item => item.title === vmI18n.t('other.systemCommodity_SKU')
+          item => item.title === window.vmI18n.t('other.systemCommodity_SKU')
         ).value; // 系统商品SKU
         this.batch_infos_setting.gift_doubles = groups.giftDoubles.find(
-          item => item.title === vmI18n.t('other.no_double')
+          item => item.title === window.vmI18n.t('other.no_double')
         ).value; // 不翻倍
         this.batch_infos_setting.gift_methods = groups.batchGiftMethods.find(
-          item => item.title === vmI18n.t('other.sendAll')
+          item => item.title === window.vmI18n.t('other.sendAll')
         ).value; // 全部送
         this.basic_info.activity_name = '';
         this.basic_info.stores.itemdata.valuedata = '';
@@ -256,13 +256,13 @@ export default {
     },
     validate1() {
       if (this.basic_info.activity_name === '') {
-        return { code: -1, message: vmI18n.t('modalTips.s5') }; // 活动名称未填写！
+        return { code: -1, message: window.vmI18n.t('modalTips.s5') }; // 活动名称未填写！
       }
       if (this.basic_info.stores.itemdata.valuedata === '') {
-        return { code: -1, message: vmI18n.t('modalTips.s6') }; // 店铺名称未填写！
+        return { code: -1, message: window.vmI18n.t('modalTips.s6') }; // 店铺名称未填写！
       }
       if (this.basic_info.order_type.length === 0) {
-        return { code: -1, message: vmI18n.t('modalTips.s7') }; // 订单类型必选！
+        return { code: -1, message: window.vmI18n.t('modalTips.s7') }; // 订单类型必选！
       }
       // if(this.basic_info.platform_mark.length === 0){
       //    return {code:-1,message:'平台标记未填写！'};
@@ -272,36 +272,36 @@ export default {
         || this.basic_info.time_limit[0] === ''
         || this.basic_info.time_limit[1] === ''
       ) {
-        return { code: -1, message: vmI18n.t('modalTips.t8') }; // 时间范围未填写！
+        return { code: -1, message: window.vmI18n.t('modalTips.t8') }; // 时间范围未填写！
       }
       if (this.basic_info.offline_time === '') {
-        return { code: -1, message: vmI18n.t('modalTips.s8') }; // 下线时间未填写！
+        return { code: -1, message: window.vmI18n.t('modalTips.s8') }; // 下线时间未填写！
       }
       if (
         this.basic_info.buyer_limit_frequency === '1'
         && this.basic_info.buyer_max_frequency === ''
       ) {
-        return { code: -1, message: vmI18n.t('modalTips.s9') }; // 最大限制次数未填写！
+        return { code: -1, message: window.vmI18n.t('modalTips.s9') }; // 最大限制次数未填写！
       }
 
-      return { code: 0, message: vmI18n.t('modalTips.s4') }; // 校验完成
+      return { code: 0, message: window.vmI18n.t('modalTips.s4') }; // 校验完成
     },
     validate2() {
-      let rs = { code: 0, message: vmI18n.t('modalTips.s4') }; // 校验完成
+      let rs = { code: 0, message: window.vmI18n.t('modalTips.s4') }; // 校验完成
       if (
         this.batch_infos_setting.gift_doubles === '1'
         && this.batch_infos_setting.max_doubles_limits === ''
       ) {
-        return { code: -1, message: vmI18n.t('modalTips.r0') }; // 最大翻倍数未填写！
+        return { code: -1, message: window.vmI18n.t('modalTips.r0') }; // 最大翻倍数未填写！
       }
       if (this.batch_infos_setting.list.length === 0) {
-        return { code: -1, message: vmI18n.t('modalTips.r1') }; // 请先添加商品和赠品！
+        return { code: -1, message: window.vmI18n.t('modalTips.r1') }; // 请先添加商品和赠品！
       }
       for (let i = 0; i < this.batch_infos_setting.list.length; i++) {
         const product_arr = this.batch_infos_setting.list[i].products;
         const gift_arr = this.batch_infos_setting.list[i].gift_products;
         if (product_arr.length === 0) {
-          return { code: -1, message: vmI18n.t('modalTips.r2') }; // 商品列表无数据
+          return { code: -1, message: window.vmI18n.t('modalTips.r2') }; // 商品列表无数据
         }
         rs = this.checkTableProducts(product_arr, i);
         if (rs.code == -1) {
@@ -309,7 +309,7 @@ export default {
         }
 
         if (gift_arr.length === 0) {
-          return { code: -1, message: vmI18n.t('modalTips.r3') }; // 赠品列表无数据
+          return { code: -1, message: window.vmI18n.t('modalTips.r3') }; // 赠品列表无数据
         }
         rs = this.checkTableGift(gift_arr, i);
         if (rs.code == -1) {
@@ -332,7 +332,7 @@ export default {
           }
         }
       }
-      return { code: 0, message: vmI18n.t('modalTips.s4') }; // 校验完成
+      return { code: 0, message: window.vmI18n.t('modalTips.s4') }; // 校验完成
     },
     checkTableGift(arr, index) {
       for (let i = 0; i < arr.length; i++) {
@@ -348,7 +348,7 @@ export default {
           }
         }
       }
-      return { code: 0, message: vmI18n.t('modalTips.s4') }; // 校验完成
+      return { code: 0, message: window.vmI18n.t('modalTips.s4') }; // 校验完成
     },
     /**
      * 初始化默认时间  时间范围好下线时间
@@ -383,7 +383,7 @@ export default {
           this.$message({
             type: 'success',
             // message: "保存成功",
-            message: vmI18n.t('modalTips.z9'),
+            message: window.vmI18n.t('modalTips.z9'),
           });
           let action = 'customize/switchActiveTab';
           if (this.objid == -1) {
@@ -396,11 +396,11 @@ export default {
               type: 'action', // 类型action
               name: 'batchActivity', // 文件名
               // label: "批量新增促销活动", // tab中文名
-              label: vmI18n.t('panel_label.batchAddPromotion'),
+              label: window.vmI18n.t('panel_label.batchAddPromotion'),
               query: Object.assign({
                 id: this.objid, // id
                 tabTitle: '批量新增促销活动', // tab中文名
-                tabTitle: vmI18n.t('panel_label.batchAddPromotion'),
+                tabTitle: window.vmI18n.t('panel_label.batchAddPromotion'),
               }), // 带的参数
             });
           });
@@ -426,7 +426,7 @@ export default {
       //       this.$message({
       //         type: "success",
       //         // message: "保存成功",
-      //         message: vmI18n.t("modalTips.z9"),
+      //         message: window.vmI18n.t("modalTips.z9"),
       //       });
       //       let action = "customize/switchActiveTab";
       //       if (this.objid == -1) {
@@ -439,11 +439,11 @@ export default {
       //           type: "action", // 类型action
       //           name: "batchActivity", // 文件名
       //           // label: "批量新增促销活动", // tab中文名
-      //           label: vmI18n.t("panel_label.batchAddPromotion"),
+      //           label: window.vmI18n.t("panel_label.batchAddPromotion"),
       //           query: Object.assign({
       //             id: this.objid, // id
       //             tabTitle: "批量新增促销活动", // tab中文名
-      //             tabTitle: vmI18n.t("panel_label.batchAddPromotion"),
+      //             tabTitle: window.vmI18n.t("panel_label.batchAddPromotion"),
       //           }), // 带的参数
       //         });
       //       });
@@ -550,7 +550,7 @@ export default {
         type: 'CUSTOMIZED',
         name: 'PROMACTIQUERYLIST',
         // label: "促销活动",
-        label: vmI18n.t('panel_label.promotionList'),
+        label: window.vmI18n.t('panel_label.promotionList'),
         query: Object.assign({
           id: 31460113,
         }), // 带的参数
