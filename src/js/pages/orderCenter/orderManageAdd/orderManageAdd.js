@@ -1282,6 +1282,7 @@ export default {
         // _this.$Message.error('请先选择下单店铺');
       }
     },
+    keyDown(e){},
     // 返回
     back() {
       this.$store.commit('customize/TabHref', {
