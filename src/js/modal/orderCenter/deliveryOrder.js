@@ -18,7 +18,7 @@ export default {
           {
             type: '', // 按钮类型
             // text: "确定", //按钮文本
-            text: vmI18n.t('common.determine'), // 按钮文本
+            text: window.vmI18n.t('common.determine'), // 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -35,7 +35,7 @@ export default {
               formdata.append('param', JSON.stringify(param));
               if (valuedata === '' || pid === '') {
                 // self.$Message.warning("出仓单不能为空");
-                self.$Message.warning(vmI18n.t('modalTips.zj'));
+                self.$Message.warning(window.vmI18n.t('modalTips.zj'));
               }
               axios({
                 url: '/api/cs/vip/distribution/v1/matchingDelivery',
@@ -57,7 +57,7 @@ export default {
           {
             type: '', // 按钮类型
             // text: "取消", //按钮文本
-            text: vmI18n.t('common.cancel'), // 按钮文本
+            text: window.vmI18n.t('common.cancel'), // 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -105,7 +105,7 @@ export default {
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
               // name: "出仓单", //input前面显示的lable值
-              name: vmI18n.t('panel_label.warehouse_receipt'),
+              name: window.vmI18n.t('panel_label.warehouse_receipt'),
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'OC_B_VIPCOM_DELIVERY', // 对应的表
               reftableid: 24652, // 对应的表ID

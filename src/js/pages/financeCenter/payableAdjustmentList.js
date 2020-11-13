@@ -147,7 +147,7 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: vmI18n.t('modalTitle.import'),
+        confirmTitle: window.vmI18n.t('modalTitle.import'),
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -168,7 +168,7 @@ export default {
         buttons: [
           {
             // text: "查找", //按钮文本
-            text: vmI18n.t('btn.find'), // 按钮文本
+            text: window.vmI18n.t('btn.find'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.find();
@@ -176,7 +176,7 @@ export default {
           },
           {
             // text: "新增", //按钮文本
-            text: vmI18n.t('btn.add'), // 按钮文本
+            text: window.vmI18n.t('btn.add'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$store.commit('customize/TabHref', {
@@ -184,11 +184,11 @@ export default {
                 type: 'action', // 类型action
                 name: 'payableAdjustAdd', // 文件名
                 // label: "赔付单新增", //tab中文名
-                label: vmI18n.t('panel_label.add_claimForm'), // tab中文名
+                label: window.vmI18n.t('panel_label.add_claimForm'), // tab中文名
                 query: Object.assign({
                   id: -1, // id
                   // tabTitle: "赔付单新增", //tab中文名
-                  tabTitle: vmI18n.t('panel_label.add_claimForm'), // tab中文名
+                  tabTitle: window.vmI18n.t('panel_label.add_claimForm'), // tab中文名
                 }), // 带的参数
               });
             }, // 按钮点击事件
@@ -205,7 +205,7 @@ export default {
           // },
           {
             // text: "导出", //按钮文本
-            text: vmI18n.t('btn.export'), // 按钮文本
+            text: window.vmI18n.t('btn.export'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.exportClick();
@@ -213,7 +213,7 @@ export default {
           },
           {
             // text: "作废", //按钮文本
-            text: vmI18n.t('btn.void'), // 按钮文本
+            text: window.vmI18n.t('btn.void'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.invalid();
@@ -221,7 +221,7 @@ export default {
           },
           {
             // text: "财审", //按钮文本
-            text: vmI18n.t('btn.financeAudit'), // 按钮文本
+            text: window.vmI18n.t('btn.financeAudit'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.fiAudit();
@@ -229,7 +229,7 @@ export default {
           },
           {
             // text: "客审", //按钮文本
-            text: vmI18n.t('btn.custAudit'), // 按钮文本
+            text: window.vmI18n.t('btn.custAudit'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.custAudit();
@@ -237,7 +237,7 @@ export default {
           },
           {
             // text: "反客审", //按钮文本
-            text: vmI18n.t('btn.deCustAudit'), // 按钮文本
+            text: window.vmI18n.t('btn.deCustAudit'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.unCustAudit();
@@ -247,7 +247,7 @@ export default {
             icon: 'iconfont iconbj_col', // 按钮图标
             size: 'small', // 按钮大小
             // name: "收藏",
-            name: vmI18n.t('btn.collection'),
+            name: window.vmI18n.t('btn.collection'),
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
@@ -261,43 +261,43 @@ export default {
           {
             style: 'input', // 文本录入
             // label: "单据编号",
-            label: vmI18n.t('form_label.billNo'),
+            label: window.vmI18n.t('form_label.billNo'),
             value: 'BILL_NO',
             width: '6',
           },
           {
             style: 'input', // 文本录入
             // label: "平台单号",
-            label: vmI18n.t('form_label.platform_billNo'),
+            label: window.vmI18n.t('form_label.platform_billNo'),
             value: 'TID',
             width: '6',
           },
           {
             style: 'select', // 下拉框类型
             // label: "单据状态", //下拉框前的值
-            label: vmI18n.t('form_label.billStatus'),
+            label: window.vmI18n.t('form_label.billStatus'),
             width: '6', // 所占宽度宽度
             value: 'BILL_STATUS', // 输入框的值
             multiple: true,
             options: [
               {
                 // label: "未审核",
-                label: vmI18n.t('common.unAudit'),
+                label: window.vmI18n.t('common.unAudit'),
                 value: '1',
               },
               {
                 // label: "已客审",
-                label: vmI18n.t('common.custAudited'),
+                label: window.vmI18n.t('common.custAudited'),
                 value: '2',
               },
               {
                 // label: "已财审",
-                label: vmI18n.t('common.financeAudited'),
+                label: window.vmI18n.t('common.financeAudited'),
                 value: '3',
               },
               {
                 // label: "已作废",
-                label: vmI18n.t('common.voided'),
+                label: window.vmI18n.t('common.voided'),
                 value: '4',
               },
             ],
@@ -305,7 +305,7 @@ export default {
           {
             style: 'input',
             // label: "来源单据编号",
-            label: vmI18n.t('form_label.source_billNo'),
+            label: window.vmI18n.t('form_label.source_billNo'),
             value: 'ORDER_NO',
             width: '6',
           },
@@ -326,7 +326,7 @@ export default {
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
               // name: "实体仓名称", //input前面显示的lable值
-              name: vmI18n.t('form_label.physicalWarehouseName'),
+              name: window.vmI18n.t('form_label.physicalWarehouseName'),
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
               reftableid: 23451, // 对应的表ID
@@ -358,7 +358,7 @@ export default {
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
               // name: "快递公司名称", //input前面显示的lable值
-              name: vmI18n.t('form_label.expressCompanyName'),
+              name: window.vmI18n.t('form_label.expressCompanyName'),
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               row: 1,
@@ -389,7 +389,7 @@ export default {
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
               // name: "商品条码", //input前面显示的lable值
-              name: vmI18n.t('form_label.commodityCode'),
+              name: window.vmI18n.t('form_label.commodityCode'),
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_SKU', // 对应的表
               row: 1,
@@ -406,14 +406,14 @@ export default {
           {
             style: 'input', // 文本录入
             // label: "国标码",
-            label: vmI18n.t('form_label.gBCode'),
+            label: window.vmI18n.t('form_label.gBCode'),
             value: 'GBCODE',
             width: '6',
           },
           {
             style: 'select', // 下拉框类型
             // label: "调整类型", //下拉框前的值
-            label: vmI18n.t('form_label.adjustmentType'),
+            label: window.vmI18n.t('form_label.adjustmentType'),
             width: '6', // 所占宽度宽度
             value: 'ADJUST_TYPE', // 输入框的值
             multiple: true,
@@ -424,7 +424,7 @@ export default {
           {
             style: 'select', // 下拉框类型
             // label: "单据类型", //下拉框前的值
-            label: vmI18n.t('form_label.billType'),
+            label: window.vmI18n.t('form_label.billType'),
             width: '6', // 所占宽度宽度
             value: 'BILL_TYPE', // 输入框的值
             multiple: true,
@@ -435,7 +435,7 @@ export default {
           {
             style: 'select', // 下拉框类型
             // label: "渠道类型", //下拉框前的值
-            label: vmI18n.t('form_label.channelType'),
+            label: window.vmI18n.t('form_label.channelType'),
             width: '6', // 所占宽度宽度
             value: 'RESERVE_BIGINT01', // 输入框的值
             multiple: true,
@@ -447,7 +447,7 @@ export default {
             style: 'date',
             type: 'datetimerange',
             // label: "创建日期",
-            label: vmI18n.t('form_label.creationDate'),
+            label: window.vmI18n.t('form_label.creationDate'),
             width: '6',
             value: 'CREATIONDATE',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -458,7 +458,7 @@ export default {
             style: 'date',
             type: 'datetimerange',
             // label: "客审日期",
-            label: vmI18n.t('form_label.custAuditDate'),
+            label: window.vmI18n.t('form_label.custAuditDate'),
             width: '6',
             value: 'GUEST_TRIAL_TIME',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -469,7 +469,7 @@ export default {
             style: 'date',
             type: 'datetimerange',
             // label: "财审日期",
-            label: vmI18n.t('form_label.financeAuditDate'),
+            label: window.vmI18n.t('form_label.financeAuditDate'),
             width: '6',
             value: 'FINANCIAL_TRIAL_TIME',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -487,7 +487,7 @@ export default {
       labelList: [
         {
           // label: "全部",
-          label: vmI18n.t('panel_label.all'),
+          label: window.vmI18n.t('panel_label.all'),
           value: '1',
           isShow: true,
         },
@@ -1080,11 +1080,11 @@ export default {
         type: 'action', // 类型action
         name: 'payableAdjustAdd', // 文件名
         // label: "赔付单详情", //tab中文名
-        label: vmI18n.t('panel_label.details_claimForm'),
+        label: window.vmI18n.t('panel_label.details_claimForm'),
         query: Object.assign({
           id: row.ID, // 单据id
           // tabTitle: "赔付单详情", //tab中文名
-          tabTitle: vmI18n.t('panel_label.details_claimForm'),
+          tabTitle: window.vmI18n.t('panel_label.details_claimForm'),
         }), // 带的参数
       });
     },

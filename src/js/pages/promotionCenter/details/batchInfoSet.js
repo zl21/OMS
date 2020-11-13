@@ -367,7 +367,7 @@ export default {
           }
         } catch (e) {
           // console.log("批量导入解析出现问题...");
-          self.$message({ type: 'error', message: vmI18n.t('modalTips.r7') });
+          self.$message({ type: 'error', message: self.vmI18n.t('modalTips.r7') });
         }
       });
     },

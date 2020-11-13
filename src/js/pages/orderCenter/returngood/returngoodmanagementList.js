@@ -24,11 +24,11 @@ export default {
       vmI18n: window.vmI18n,
       errThData: [
         {
-          title: vmI18n.t('form_label.chargebackNumber'), // 退单编号
+          title: window.vmI18n.t('form_label.chargebackNumber'), // 退单编号
           key: 'id',
         },
         {
-          title: vmI18n.t('table_label.abnormalInfo'), // 异常信息
+          title: window.vmI18n.t('table_label.abnormalInfo'), // 异常信息
           key: 'error',
         },
       ],
@@ -37,7 +37,7 @@ export default {
       // 弹框配置 修改备注
       changeRemarkConfig: {
         refFuns: 'confirmFun',
-        confirmTitle: vmI18n.t('modalTitle.modify_sellerNotes'), // 修改卖家备注
+        confirmTitle: window.vmI18n.t('modalTitle.modify_sellerNotes'), // 修改卖家备注
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
@@ -55,7 +55,7 @@ export default {
       // 修改退回仓库
       modifyWarehouse: {
         refFuns: 'confirmFun',
-        confirmTitle: vmI18n.t('modalTitle.modify_returnWarehouse'), // 修改退货仓库
+        confirmTitle: window.vmI18n.t('modalTitle.modify_returnWarehouse'), // 修改退货仓库
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
@@ -72,7 +72,7 @@ export default {
       },
       modifyReturnOrderLogistics: {
         refFuns: 'confirmFun',
-        confirmTitle: vmI18n.t('modalTitle.modify_logisticsCompany'), // 修改物流公司
+        confirmTitle: window.vmI18n.t('modalTitle.modify_logisticsCompany'), // 修改物流公司
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
@@ -89,7 +89,7 @@ export default {
       },
       setFromInput: {
         refFuns: 'confirmFun',
-        confirmTitle: vmI18n.t('modalTitle.sortForm'), // 排序表单
+        confirmTitle: window.vmI18n.t('modalTitle.sortForm'), // 排序表单
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '300',
         scrollable: false, // 是否可以滚动
@@ -107,7 +107,7 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: vmI18n.t('btn.import'), // 导入
+        confirmTitle: window.vmI18n.t('btn.import'), // 导入
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -128,14 +128,14 @@ export default {
         typeAll: 'error', // 按钮统一风格样式
         buttons: [
           {
-            text: vmI18n.t('btn.find'), // 查找 按钮文本
+            text: window.vmI18n.t('btn.find'), // 查找 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.find();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.add'), // 新增  按钮文本
+            text: window.vmI18n.t('btn.add'), // 新增  按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$store.commit('customize/TabHref', {
@@ -151,82 +151,82 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.modify'), // 修改 按钮文本
+            text: window.vmI18n.t('btn.modify'), // 修改 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.modify();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('panel_label.scannAndWarehous'), // 扫描入库 按钮文本
+            text: window.vmI18n.t('panel_label.scannAndWarehous'), // 扫描入库 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.scanIncoming();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.afterSalesAudit'), // 售后审核 按钮文本
+            text: window.vmI18n.t('btn.afterSalesAudit'), // 售后审核 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.afterAudit();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('common.cancel'), // 取消 按钮文本
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.cancelBtn();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.virtualWarehous'), // 虚拟入库 按钮文本
+            text: window.vmI18n.t('btn.virtualWarehous'), // 虚拟入库 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.virtualLibrary();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('modalTitle.manualWarehous'), // 手动入库 按钮文本
+            text: window.vmI18n.t('modalTitle.manualWarehous'), // 手动入库 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.virtualWarehouseLibraryWarn();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.cancel_automaticRefund'), // 取消自动退款 按钮文本
+            text: window.vmI18n.t('btn.cancel_automaticRefund'), // 取消自动退款 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.cancelRefund();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.modifyRemarks'), // 修改备注 按钮文本
+            text: window.vmI18n.t('btn.modifyRemarks'), // 修改备注 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.bounced();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('modalTitle.modify_sellerNotes'), // 修改卖家备注 按钮文本
+            text: window.vmI18n.t('modalTitle.modify_sellerNotes'), // 修改卖家备注 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.bounced2();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.modify_returnWarehouse'), // 修改退回仓库
+            text: window.vmI18n.t('btn.modify_returnWarehouse'), // 修改退回仓库
             btnclick: () => {
               this.Warehouse();
             },
           },
           {
-            text: vmI18n.t('modalTitle.modify_logisticsCompany'), // 修改物流公司
+            text: window.vmI18n.t('modalTitle.modify_logisticsCompany'), // 修改物流公司
             btnclick: () => {
               this.OrderLogistics();
             },
           },
           {
-            text: vmI18n.t('btn.batchOriginalReturn'), // 批量原退
+            text: window.vmI18n.t('btn.batchOriginalReturn'), // 批量原退
             btnclick: () => {
               this.batchOriginalBack();
             },
@@ -239,21 +239,21 @@ export default {
           //   } //按钮点击事件
           // },
           {
-            text: vmI18n.t('btn.retransmission_WMS'), // 重传WMS  //按钮文本
+            text: window.vmI18n.t('btn.retransmission_WMS'), // 重传WMS  //按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.againWMS();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.mandatoryCompletion'), // 强制完成  //按钮文本
+            text: window.vmI18n.t('btn.mandatoryCompletion'), // 强制完成  //按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.forcedCompletion();
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.returnCopy'), // 退换货复制 
+            text: window.vmI18n.t('btn.returnCopy'), // 退换货复制 
             disabled: false,
             btnclick: () => {
               this.cloneRenturnGood();
@@ -261,7 +261,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: vmI18n.t('btn.sellerNotesImport'), // 卖家备注导入 按钮文本
+            text: window.vmI18n.t('btn.sellerNotesImport'), // 卖家备注导入 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
@@ -277,7 +277,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: vmI18n.t('btn.import'), // 导入 按钮文本
+            text: window.vmI18n.t('btn.import'), // 导入 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
@@ -290,7 +290,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('btn.export'), // 导出 按钮文本
+            text: window.vmI18n.t('btn.export'), // 导出 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.exportClick();
@@ -313,7 +313,7 @@ export default {
           {
             icon: 'iconfont iconbj_col', // 按钮图标
             size: 'small', // 按钮大小
-            name: vmI18n.t('btn.collection'), // 收藏
+            name: window.vmI18n.t('btn.collection'), // 收藏
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
@@ -333,27 +333,27 @@ export default {
       }, // form表单
       labelList: [
         {
-          label: vmI18n.t('panel_label.all'), // 全部
+          label: window.vmI18n.t('panel_label.all'), // 全部
           value: '1',
           isShow: true,
         },
         {
-          label: vmI18n.t('form_label.waitFor_return_warehous'), // 等待退货入库
+          label: window.vmI18n.t('form_label.waitFor_return_warehous'), // 等待退货入库
           value: '2',
           isShow: true,
         },
         {
-          label: vmI18n.t('form_label.waitFor_afterSale_confirm'), // 等待售后确认
+          label: window.vmI18n.t('form_label.waitFor_afterSale_confirm'), // 等待售后确认
           value: '3',
           isShow: true,
         },
         {
-          label: vmI18n.t('form_label.complete'), // 完成
+          label: window.vmI18n.t('form_label.complete'), // 完成
           value: '4',
           isShow: true,
         },
         {
-          label: vmI18n.t('common.cancel'), // 取消
+          label: window.vmI18n.t('common.cancel'), // 取消
           value: '5',
           isShow: true,
         },
@@ -401,14 +401,14 @@ export default {
               const goodsThead = [
                 {
                   key: 'id',
-                  title: vmI18n.t('table_label.code'), // 编号
+                  title: window.vmI18n.t('table_label.code'), // 编号
                 },
                 {
                   key: 'return',
-                  title: vmI18n.t('table_label.returnGoods'), // 退换货
+                  title: window.vmI18n.t('table_label.returnGoods'), // 退换货
                 },
                 {
-                  title: vmI18n.t('table_label.articleNumber'), // 货号
+                  title: window.vmI18n.t('table_label.articleNumber'), // 货号
                   key: 'ps_c_pro_ecode',
                 },
                 // {
@@ -416,23 +416,23 @@ export default {
                 //   key: "sku_spec"
                 // },
                 {
-                  title: vmI18n.t('other.color'), // 颜色
+                  title: window.vmI18n.t('other.color'), // 颜色
                   key: 'ps_c_clr_ename',
                 },
                 {
-                  title: vmI18n.t('other.sizes'), // 尺寸
+                  title: window.vmI18n.t('other.sizes'), // 尺寸
                   key: 'ps_c_size_ename',
                 },
                 {
-                  title: vmI18n.t('form_label.refundAmount'), // 退款金额
+                  title: window.vmI18n.t('form_label.refundAmount'), // 退款金额
                   key: 'refund_amt',
                 },
                 {
-                  title: vmI18n.t('table_label.appleNumber'), // 申请数量
+                  title: window.vmI18n.t('table_label.appleNumber'), // 申请数量
                   key: 'qty_refund',
                 },
                 {
-                  title: vmI18n.t('table_label.storageQuantity'), // 入库数量
+                  title: window.vmI18n.t('table_label.storageQuantity'), // 入库数量
                   key: 'qty_in',
                 },
               ]; // 浮框表头

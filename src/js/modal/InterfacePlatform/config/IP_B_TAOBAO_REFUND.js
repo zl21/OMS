@@ -20,13 +20,13 @@ export default {
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: vmI18n.t('other.shop'), // 店铺 
+          fkdesc: window.vmI18n.t('other.shop'), // 店铺 
           inputname: 'CP_C_SHOP_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: false, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: vmI18n.t('other.shop'), // 店铺 input前面显示的lable值
+          name: window.vmI18n.t('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_SHOP',
           reftableid: 24475,
@@ -38,24 +38,24 @@ export default {
       },
       {
         style: 'radio', // 输入框类型
-        label: vmI18n.t('form_label.chargebackStatus'), // 退单状态输入框前文字
+        label: window.vmI18n.t('form_label.chargebackStatus'), // 退单状态输入框前文字
         value: 'status', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         options: [
           // radio选项
           {
-            label: vmI18n.t('panel_label.all'), // 全部
+            label: window.vmI18n.t('panel_label.all'), // 全部
             value: ''
           },
           {
-            label: vmI18n.t('form_label.staySellerAgrees'), // 待卖家同意
+            label: window.vmI18n.t('form_label.staySellerAgrees'), // 待卖家同意
             value: 'WAIT_SELLER_AGREE'
           }
         ]
       },
       {
         style: 'date', // 输入框类型
-        label: vmI18n.t('form_label.chargebackModifyTime'), // 退单修改时间 输入框前文字
+        label: window.vmI18n.t('form_label.chargebackModifyTime'), // 退单修改时间 输入框前文字
         value: 'timerange', // 输入框的值
         type: 'datetimerange',
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -63,7 +63,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: vmI18n.t('form_label.platform_returnOrder_no'), // 平台退货单号 输入框前文字
+        label: window.vmI18n.t('form_label.platform_returnOrder_no'), // 平台退货单号 输入框前文字
         value: 'bill_no', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持

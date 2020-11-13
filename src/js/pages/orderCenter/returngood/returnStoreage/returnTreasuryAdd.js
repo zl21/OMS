@@ -35,7 +35,7 @@ export default {
             {
               type: '', // 按钮类型
               // text: "查找", //按钮文本
-              text: vmI18n.t('btn.find'), // 按钮文本
+              text: window.vmI18n.t('btn.find'), // 按钮文本
               icon: '', // 按钮图标
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制
@@ -60,7 +60,7 @@ export default {
             {
               style: 'input',
               // label: "物流编号",
-              label: vmI18n.t('form_label.logisticsNo'),
+              label: window.vmI18n.t('form_label.logisticsNo'),
               value: 'logistics_code',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -68,7 +68,7 @@ export default {
             {
               style: 'input',
               // label: "退换货单号",
-              label: vmI18n.t('form_label.returnOrder_no'),
+              label: window.vmI18n.t('form_label.returnOrder_no'),
               value: 'id',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -76,7 +76,7 @@ export default {
             {
               style: 'input',
               // label: "平台单号",
-              label: vmI18n.t('form_label.platform_billNo'),
+              label: window.vmI18n.t('form_label.platform_billNo'),
               value: 'tid',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -84,7 +84,7 @@ export default {
             {
               style: 'input',
               // label: "收货人",
-              label: vmI18n.t('form_label.consignee'),
+              label: window.vmI18n.t('form_label.consignee'),
               value: 'receive_name',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -92,7 +92,7 @@ export default {
             {
               style: 'input',
               // label: "买家昵称",
-              label: vmI18n.t('table_label.buyerNickname'),
+              label: window.vmI18n.t('table_label.buyerNickname'),
               value: 'buyer_nick',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -100,7 +100,7 @@ export default {
             {
               style: 'input',
               // label: "收货人手机",
-              label: vmI18n.t('form_label.consignee_phone'),
+              label: window.vmI18n.t('form_label.consignee_phone'),
               value: 'receive_mobile',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -112,47 +112,47 @@ export default {
             {
               key: 'ID',
               // title: "退换货单号",
-              title: vmI18n.t('table_label.returnOrder_no'),
+              title: window.vmI18n.t('table_label.returnOrder_no'),
             },
             {
               key: 'ORIG_ORDER_NO',
               // title: "原单单号",
-              title: vmI18n.t('table_label.originalOrder_No'),
+              title: window.vmI18n.t('table_label.originalOrder_No'),
             },
             {
               key: 'BUYER_NICK',
               // title: "买家昵称",
-              title: vmI18n.t('table_label.buyerNickname'),
+              title: window.vmI18n.t('table_label.buyerNickname'),
             },
             {
               key: 'LOGISTICS_CODE',
               // title: "物流单号",
-              title: vmI18n.t('table_label.logisticsOrder_No'),
+              title: window.vmI18n.t('table_label.logisticsOrder_No'),
             },
             {
               key: 'RECEIVE_NAME',
               // title: "收货人",
-              title: vmI18n.t('table_label.consignee'),
+              title: window.vmI18n.t('table_label.consignee'),
             },
             {
               key: 'RECEIVE_MOBILE',
               // title: "收货人手机号",
-              title: vmI18n.t('table_label.consignee_phone'),
+              title: window.vmI18n.t('table_label.consignee_phone'),
             },
             {
               key: 'shopName',
               // title: "实体仓库",
-              title: vmI18n.t('table_label.physical_warehouse'),
+              title: window.vmI18n.t('table_label.physical_warehouse'),
             },
             {
               key: 'IS_ADD',
               // title: "是否手工新增",
-              title: vmI18n.t('table_label.add_manually'),
+              title: window.vmI18n.t('table_label.add_manually'),
             },
             {
               key: 'CP_C_SHOP_TITLE',
               // title: "店铺名称",
-              title: vmI18n.t('table_label.shopName'),
+              title: window.vmI18n.t('table_label.shopName'),
             },
           ], // 表头
           data: [], // 数据配置
@@ -200,7 +200,7 @@ export default {
           {
             style: 'input', // 输入框类型
             // label: "原单单号", //输入框前文字
-            label: vmI18n.t('table_label.originalOrder_No'),
+            label: window.vmI18n.t('table_label.originalOrder_No'),
             value: 'ORIG_ORDER_NO', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: 'ios-search', // 输入框后带的图标,暂只有输入框支持
@@ -222,7 +222,7 @@ export default {
           {
             style: 'input',
             // label: "原平台单号",
-            label: vmI18n.t('form_label.originalOrderPlatform'),
+            label: window.vmI18n.t('form_label.originalOrderPlatform'),
             disabled: false, // 按钮禁用控制
             value: 'SOURCE_CODE',
             dataAcessKey: 'SOURCE_CODE',
@@ -231,7 +231,7 @@ export default {
           {
             style: 'input',
             // label: "买家昵称",
-            label: vmI18n.t('table_label.buyerNickname'),
+            label: window.vmI18n.t('table_label.buyerNickname'),
             disabled: false, // 按钮禁用控制
             value: 'USER_NICK',
             dataAcessKey: 'USER_NICK',
@@ -240,7 +240,7 @@ export default {
           {
             style: 'select', // 下拉框类型
             // label: "退货批次", //下拉框前的值
-            label: vmI18n.t('form_label.returnBatch'),
+            label: window.vmI18n.t('form_label.returnBatch'),
             width: '6', // 所占宽度宽度
             value: 'OC_B_REFUND_BATCH_ID',
             dataAcessKey: 'OC_B_REFUND_BATCH_ID',
@@ -253,7 +253,7 @@ export default {
           {
             style: 'input', // 下拉框类型
             // label: "入库仓库", //下拉框前的值
-            label: vmI18n.t('table_label.in_warehouse'),
+            label: window.vmI18n.t('table_label.in_warehouse'),
             width: '6', // 所占宽度宽度
             disabled: true, // 按钮禁用控制
             value: 'IN_STORE_ENAME',
@@ -278,7 +278,7 @@ export default {
               isuppercase: false,
               length: 20,
               // name: "物流公司",
-              name: vmI18n.t('form_label.logisticsCompany'),
+              name: window.vmI18n.t('form_label.logisticsCompany'),
               readonly: false,
               reftable: 'CP_C_LOGISTICS',
               // reftableid: 24633,
@@ -296,7 +296,7 @@ export default {
             style: 'input',
             dataAcessKey: 'LOGISTIC_NUMBER',
             // label: "物流单号",
-            label: vmI18n.t('form_label.logisticsOrder_No'),
+            label: window.vmI18n.t('form_label.logisticsOrder_No'),
             value: 'LOGISTIC_NUMBER',
             disabled: false, // 按钮禁用控制
             width: '6',
@@ -304,7 +304,7 @@ export default {
           {
             style: 'input',
             // label: "手机号",
-            label: vmI18n.t('form_label.cellPhone_number'),
+            label: window.vmI18n.t('form_label.cellPhone_number'),
             dataAcessKey: 'RECEIVER_MOBILE',
             value: 'RECEIVER_MOBILE',
             disabled: false, // 按钮禁用控制
@@ -313,7 +313,7 @@ export default {
           {
             style: 'input',
             // label: "姓名",
-            label: vmI18n.t('form_label.fullName'),
+            label: window.vmI18n.t('form_label.fullName'),
             dataAcessKey: 'RECEIVER_NAME',
             value: 'RECEIVER_NAME',
             disabled: false, // 按钮禁用控制
@@ -323,7 +323,7 @@ export default {
             style: 'select', // 下拉框类型
             dataAcessKey: 'SPECIAL_TYPE',
             // label: "特殊处理类型", //下拉框前的值
-            label: vmI18n.t('form_label.specialTreatmentType'),
+            label: window.vmI18n.t('form_label.specialTreatmentType'),
             width: '6', // 所占宽度宽度
             value: 'SPECIAL_TYPE',
             disabled: false, // 按钮禁用控制
@@ -335,7 +335,7 @@ export default {
           {
             style: 'input',
             // label: "备注",
-            label: vmI18n.t('table_label.remarks'),
+            label: window.vmI18n.t('table_label.remarks'),
             dataAcessKey: 'REMARK',
             value: 'REMARK',
             disabled: false, // 按钮禁用控制
@@ -344,7 +344,7 @@ export default {
           {
             style: 'input',
             // label: "发件地址",
-            label: vmI18n.t('table_label.sending_address'),
+            label: window.vmI18n.t('table_label.sending_address'),
             dataAcessKey: 'RECEIVER_ADDRESS',
             disabled: false, // 按钮禁用控制
             value: 'RECEIVER_ADDRESS',
@@ -353,7 +353,7 @@ export default {
           {
             style: 'checkbox', // 勾选框类型
             // label: "是否关闭匹配", //前面的文字
-            label: vmI18n.t('table_label.turnOff_match'),
+            label: window.vmI18n.t('table_label.turnOff_match'),
             dataAcessKey: 'IS_OFF_MATCH',
             width: '6', // 所占的宽度
             value: 'IS_OFF_MATCH',
@@ -368,60 +368,60 @@ export default {
             key: 'PS_C_PRO_ECODE',
             dataAcessKey: 'PS_C_PRO_ECODE',
             // title: "商品编码",
-            title: vmI18n.t('table_label.productNo'),
+            title: window.vmI18n.t('table_label.productNo'),
           },
           {
             key: 'PS_C_CLR_ENAME',
             dataAcessKey: 'PS_C_CLR_ENAME',
             // title: "颜色",
-            title: vmI18n.t('other.color'),
+            title: window.vmI18n.t('other.color'),
           },
           {
             key: 'PS_C_SIZE_ENAME',
             dataAcessKey: 'PS_C_SIZE_ENAME',
             // title: "尺码",
-            title: vmI18n.t('other.sizes'),
+            title: window.vmI18n.t('other.sizes'),
           },
           {
             key: 'QTY',
             dataAcessKey: 'QTY',
             // title: "数量",
-            title: vmI18n.t('table_label.quantities'),
+            title: window.vmI18n.t('table_label.quantities'),
           },
           {
             key: 'PS_C_SKU_ECODE',
             dataAcessKey: 'PS_C_SKU_ECODE',
             // title: "条码",
-            title: vmI18n.t('form_label.barCode'),
+            title: window.vmI18n.t('form_label.barCode'),
           },
           {
             key: 'GBCODE',
             dataAcessKey: 'GBCODE',
             // title: "国标码",
-            title: vmI18n.t('form_label.gBCode'),
+            title: window.vmI18n.t('form_label.gBCode'),
           },
           {
             key: 'OC_B_RETURN_ORDER_ID',
             dataAcessKey: 'OC_B_RETURN_ORDER_ID',
             // title: "退单编号",
-            title: vmI18n.t('form_label.chargebackNumber'),
+            title: window.vmI18n.t('form_label.chargebackNumber'),
           },
           {
             key: 'PS_C_SKU_ECODE_ACTUAL',
             // title: "实际发出条码",
-            title: vmI18n.t('table_label.actual_barcode'),
+            title: window.vmI18n.t('table_label.actual_barcode'),
           },
           {
             key: 'PS_C_PRO_ENAME',
             dataAcessKey: 'PS_C_PRO_ENAME',
             // title: "商品名称",
-            title: vmI18n.t('table_label.productName'),
+            title: window.vmI18n.t('table_label.productName'),
           },
           {
             key: 'PRODUCT_MARK',
             dataAcessKey: 'PRODUCT_MARK',
             // title: "商品标记",
-            title: vmI18n.t('form_label.goodsMark'),
+            title: window.vmI18n.t('form_label.goodsMark'),
             render: (h, params) => {
               const _this = this;
               const list = [
@@ -463,37 +463,37 @@ export default {
             key: 'IS_MATCH',
             dataAcessKey: 'IS_MATCH',
             // title: "是否匹配",
-            title: vmI18n.t('table_label.match_or_not'),
+            title: window.vmI18n.t('table_label.match_or_not'),
           },
           {
             key: 'IS_GEN_ADJUST',
             dataAcessKey: 'IS_GEN_ADJUST',
             // title: "是否生成调整单",
-            title: vmI18n.t('table_label.generate_adjustment'),
+            title: window.vmI18n.t('table_label.generate_adjustment'),
           },
           {
             key: 'IS_WITHOUT_ORIG',
             dataAcessKey: 'IS_WITHOUT_ORIG',
             // title: "是否无原单条码",
-            title: vmI18n.t('table_label.no_original_barcode'),
+            title: window.vmI18n.t('table_label.no_original_barcode'),
           },
           {
             key: 'IS_GEN_IN_ORDER',
             dataAcessKey: 'IS_GEN_IN_ORDER',
             // title: "是否生成入库单",
-            title: vmI18n.t('table_label.generate_stock'),
+            title: window.vmI18n.t('table_label.generate_stock'),
           },
           {
             key: 'IS_GEN_WRO_ADJUST',
             dataAcessKey: 'IS_GEN_WRO_ADJUST',
             // title: "是否生成错发调整单",
-            title: vmI18n.t('table_label.generate_error_adjustment'),
+            title: window.vmI18n.t('table_label.generate_error_adjustment'),
           },
           {
             key: 'IS_GEN_MINUS_ADJUST',
             dataAcessKey: 'IS_GEN_MINUS_ADJUST',
             // title: "是否生成冲无头件调整单",
-            title: vmI18n.t(
+            title: window.vmI18n.t(
               'table_label.generate_punching_headless_adjustment'
             ),
           },
@@ -516,13 +516,13 @@ export default {
       labelList: [
         {
           // label: "入库单商品明细",
-          label: vmI18n.t('panel_label.in_warehouse_goods_details'),
+          label: window.vmI18n.t('panel_label.in_warehouse_goods_details'),
           value: '1',
           isShow: true,
         },
         {
           // label: "退货入库日志",
-          label: vmI18n.t('panel_label.return_warehousing_log'),
+          label: window.vmI18n.t('panel_label.return_warehousing_log'),
           value: '2',
           isShow: true,
         },
@@ -544,7 +544,7 @@ export default {
         this.btnConfig.buttons = [
           {
             // text: "保存", //按钮文本
-            text: vmI18n.t('btn.save'), // 按钮文本
+            text: window.vmI18n.t('btn.save'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.saveData();
@@ -552,7 +552,7 @@ export default {
           },
           {
             // text: "返回", //按钮文本
-            text: vmI18n.t('btn.back'), // 按钮文本
+            text: window.vmI18n.t('btn.back'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$store.commit('customize/TabHref', {
@@ -560,11 +560,11 @@ export default {
                 type: 'action',
                 name: 'returnStoreageList',
                 // label: "退货入库",
-                label: vmI18n.t('panel_label.returnTreasury'),
+                label: window.vmI18n.t('panel_label.returnTreasury'),
                 query: Object.assign({
                   id: 2809,
                   // tabTitle: "退货入库",
-                  tabTitle: vmI18n.t('panel_label.returnTreasury'),
+                  tabTitle: window.vmI18n.t('panel_label.returnTreasury'),
                 }),
                 back: true,
               });
@@ -575,7 +575,7 @@ export default {
         this.btnConfig.buttons = [
           {
             // text: "保存", //按钮文本
-            text: vmI18n.t('btn.save'), // 按钮文本
+            text: window.vmI18n.t('btn.save'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.saveData();
@@ -583,7 +583,7 @@ export default {
           },
           {
             // text: "手工匹配", //按钮文本
-            text: vmI18n.t('btn.manual_matching'), // 按钮文本
+            text: window.vmI18n.t('btn.manual_matching'), // 按钮文本
             isShow: '',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -606,13 +606,13 @@ export default {
                       type: 'action', // 类型action
                       name: 'manualMatching', // 文件名
                       // label: "退货入库-手工匹配", //tab中文名
-                      label: vmI18n.t(
+                      label: window.vmI18n.t(
                         'panel_label.return_warehousing_manual_matching'
                       ),
                       query: Object.assign({
                         id: _this.$route.query.id, // id
                         // tabTitle: "退货入库-手工匹配", //tab中文名
-                        tabTitle: vmI18n.t(
+                        tabTitle: window.vmI18n.t(
                           'panel_label.return_warehousing_manual_matching'
                         ),
                         source: 2,
@@ -630,7 +630,7 @@ export default {
           },
           {
             // text: "错发强制匹配",
-            text: vmI18n.t('btn.wrong_sending_forced_matching'), // 按钮文本
+            text: window.vmI18n.t('btn.wrong_sending_forced_matching'), // 按钮文本
             disabled: false,
             btnclick: () => {
               const _this = this;
@@ -652,13 +652,13 @@ export default {
                       type: 'action', // 类型action
                       name: 'manualMatching', // 文件名
                       // label: "退货入库-错发强制匹配", //tab中文名
-                      label: vmI18n.t(
+                      label: window.vmI18n.t(
                         'panel_label.return_warehousing_wrong_delivery_forced_matching'
                       ),
                       query: Object.assign({
                         id: _this.$route.query.id, // id
                         // tabTitle: "退货入库-错发强制匹配", //tab中文名
-                        tabTitle: vmI18n.t(
+                        tabTitle: window.vmI18n.t(
                           'panel_label.return_warehousing_wrong_delivery_forced_matching'
                         ),
                         source: 3,
@@ -677,7 +677,7 @@ export default {
           {
             // ========================================暂时影藏
             // text: "作废", //按钮文本
-            text: vmI18n.t('btn.void'), // 按钮文本
+            text: window.vmI18n.t('btn.void'), // 按钮文本
             isShow: false,
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -707,7 +707,7 @@ export default {
           },
           {
             // text: "返回", //按钮文本
-            text: vmI18n.t('btn.back'), // 按钮文本
+            text: window.vmI18n.t('btn.back'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$store.commit('customize/TabHref', {
@@ -715,11 +715,11 @@ export default {
                 type: 'action',
                 name: 'returnStoreageList',
                 // label: "退货入库",
-                label: vmI18n.t('panel_label.returnTreasury'),
+                label: window.vmI18n.t('panel_label.returnTreasury'),
                 query: Object.assign({
                   id: 2809,
                   // tabTitle: "退货入库",
-                  tabTitle: vmI18n.t('panel_label.returnTreasury'),
+                  tabTitle: window.vmI18n.t('panel_label.returnTreasury'),
                 }),
                 back: true,
               });
@@ -773,7 +773,7 @@ export default {
         {
           style: 'input',
           // label: "处理人",
-          label: vmI18n.t('form_label.handler'),
+          label: window.vmI18n.t('form_label.handler'),
           disabled: false, // 按钮禁用控制
           dataAcessKey: 'HANDLER',
           value: 'HANDLER',
@@ -782,7 +782,7 @@ export default {
         {
           style: 'input',
           // label: "处理人备注",
-          label: vmI18n.t('form_label.processor_remarks'),
+          label: window.vmI18n.t('form_label.processor_remarks'),
           dataAcessKey: 'REMARK_HANDLE',
           disabled: false, // 按钮禁用控制
           value: 'REMARK_HANDLE',
@@ -791,7 +791,7 @@ export default {
         {
           style: 'input',
           // label: "入库单单号",
-          label: vmI18n.t('form_label.in_order_stockNo'),
+          label: window.vmI18n.t('form_label.in_order_stockNo'),
           dataAcessKey: 'ID',
           disabled: true, // 按钮禁用控制
           value: 'ID',
@@ -800,7 +800,7 @@ export default {
         {
           style: 'input',
           // label: "下单店铺",
-          label: vmI18n.t('form_label.orderShop'),
+          label: window.vmI18n.t('form_label.orderShop'),
           dataAcessKey: 'CP_C_SHOP_TITLE',
           disabled: true, // 按钮禁用控制
           value: 'CP_C_SHOP_TITLE',
@@ -809,7 +809,7 @@ export default {
         {
           style: 'input',
           // label: "WMS单据编号",
-          label: vmI18n.t('form_label.wMS_billNo'),
+          label: window.vmI18n.t('form_label.wMS_billNo'),
           dataAcessKey: 'WMS_BILL_NO',
           disabled: true, // 按钮禁用控制
           value: 'WMS_BILL_NO',
@@ -847,17 +847,17 @@ export default {
       const item = this.information.formValue;
       if (!item.OC_B_REFUND_BATCH_ID) {
         // this.$Message.warning("退货批次必填！");
-        this.$Message.warning(vmI18n.t('modalTips.p1'));
+        this.$Message.warning(window.vmI18n.t('modalTips.p1'));
         return;
       }
       if (!item.SPECIAL_TYPE) {
         // this.$Message.warning("特殊处理类型必填！");
-        this.$Message.warning(vmI18n.t('modalTips.p2'));
+        this.$Message.warning(window.vmI18n.t('modalTips.p2'));
         return;
       }
       if (!this.jordanTableConfig.data.length) {
         // this.$Message.warning("退货入库明细不能为空！");
-        this.$Message.warning(vmI18n.t('modalTips.p3'));
+        this.$Message.warning(window.vmI18n.t('modalTips.p3'));
         return;
       }
       const dataArr = JSON.parse(JSON.stringify(this.jordanTableConfig.data));
@@ -916,11 +916,11 @@ export default {
               type: 'action',
               name: 'returnStoreageList',
               // label: "退货入库",
-              label: vmI18n.t('panel_label.returnTreasury'),
+              label: window.vmI18n.t('panel_label.returnTreasury'),
               query: Object.assign({
                 id: 2809,
                 // tabTitle: "退货入库",
-                tabTitle: vmI18n.t('panel_label.returnTreasury'),
+                tabTitle: window.vmI18n.t('panel_label.returnTreasury'),
               }),
               back: true,
             });
@@ -999,10 +999,10 @@ export default {
       const res = await this.service.common.getObject(fromdata);
       this.information.formData.forEach((value) => {
         // if (value.label === "特殊处理类型") {
-        if (value.label === vmI18n.t('form_label.specialTreatmentType')) {
+        if (value.label === window.vmI18n.t('form_label.specialTreatmentType')) {
           res.data.data.addcolums.forEach((item) => {
             // if (item.parentdesc === "基本信息") {
-            if (item.parentdesc === vmI18n.t('common.baseInformation')) {
+            if (item.parentdesc === window.vmI18n.t('common.baseInformation')) {
               const childItem = item.childs;
               childItem.forEach((item) => {
                 if (item.colname === 'SPECIAL_TYPE') {

@@ -44,7 +44,7 @@ export default {
           {
             style: 'input', // 输入框类型
             // label: "商品编码", //输入框前文字
-            label: vmI18n.t('table_label.productNo'),
+            label: window.vmI18n.t('table_label.productNo'),
             value: 'ECODE', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             disabled: false,
@@ -55,7 +55,7 @@ export default {
           {
             style: 'input', // 输入框类型
             // label: "商品名称", //输入框前文字
-            label: vmI18n.t('table_label.productName'),
+            label: window.vmI18n.t('table_label.productName'),
             value: 'ENAME', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             placeholder: '', // 占位文本，默认为请输入
@@ -83,7 +83,7 @@ export default {
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
               // name: "品牌", //input前面显示的lable值
-              name: vmI18n.t('table_label.brand'),
+              name: window.vmI18n.t('table_label.brand'),
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_BRAND', // 对应的表
               reftableid: 23051, // 对应的表ID
@@ -100,7 +100,7 @@ export default {
           {
             style: 'select', // 下拉框类型
             // label: "组合商品类型", //下拉框前的值
-            label: vmI18n.t('form_label.combinedCommodityType'),
+            label: window.vmI18n.t('form_label.combinedCommodityType'),
             width: '6', // 所占宽度宽度
             value: 'GROUP_TYPE', // 输入框的值
             multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启
@@ -113,12 +113,12 @@ export default {
               // 下拉框选项值
               {
                 value: 1,
-                label: vmI18n.t('other.blessingBag'),
+                label: window.vmI18n.t('other.blessingBag'),
                 // label: "福袋",
               },
               {
                 value: 2,
-                label: vmI18n.t('other.common'),
+                label: window.vmI18n.t('other.common'),
                 // label: "普通",
               },
             ],
@@ -127,7 +127,7 @@ export default {
           {
             style: 'input', // 输入框类型
             // label: "价格", //输入框前文字
-            label: vmI18n.t('form_label.price'),
+            label: window.vmI18n.t('form_label.price'),
             value: 'PRICELIST', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             placeholder: '', // 占位文本，默认为请输入
@@ -152,7 +152,7 @@ export default {
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
               // name: "逻辑仓库", //input前面显示的lable值
-              name: vmI18n.t('form_label.logic_warehouse'),
+              name: window.vmI18n.t('form_label.logic_warehouse'),
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'SG_B_STORAGE', // 对应的表
               reftableid: 24610, // 对应的表ID
@@ -169,7 +169,7 @@ export default {
           {
             style: 'input', // 输入框类型
             // label: "备注", //输入框前文字
-            label: vmI18n.t('table_label.remarks'),
+            label: window.vmI18n.t('table_label.remarks'),
             value: 'REMARK', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             placeholder: '', // 占位文本，默认为请输入
@@ -197,7 +197,7 @@ export default {
           {
             style: 'input', // 输入框类型
             // label: "创建人", //输入框前文字
-            label: vmI18n.t('table_label.creator'),
+            label: window.vmI18n.t('table_label.creator'),
             value: 'OWNERNAME', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             disabled: true,
@@ -205,7 +205,7 @@ export default {
           {
             style: 'date', // 输入框类型
             // label: "创建时间", //输入框前文字
-            label: vmI18n.t('table_label.creationTime'),
+            label: window.vmI18n.t('table_label.creationTime'),
             value: 'CREATIONDATE', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             format: 'yyyy-MM-dd HH:mm:ss', // 时间格式
@@ -214,7 +214,7 @@ export default {
           {
             style: 'input', // 输入框类型
             // label: "修改人", //输入框前文字
-            label: vmI18n.t('table_label.reviser'),
+            label: window.vmI18n.t('table_label.reviser'),
             value: 'MODIFIERNAME', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             disabled: true,
@@ -222,7 +222,7 @@ export default {
           {
             style: 'date', // 输入框类型
             // label: "修改时间", //输入框前文字
-            label: vmI18n.t('table_label.modificationTime'),
+            label: window.vmI18n.t('table_label.modificationTime'),
             value: 'MODIFIEDDATE', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             format: 'yyyy-MM-dd HH:mm:ss',
@@ -236,7 +236,7 @@ export default {
         labelList: [
           {
             // label: "条码明细",
-            label: vmI18n.t('panel_label.barCode_details'),
+            label: window.vmI18n.t('panel_label.barCode_details'),
             value: '1',
             isShow: true,
           },
@@ -247,7 +247,7 @@ export default {
         labelList: [
           {
             // label: "组合商品明细",
-            label: vmI18n.t('panel_label.combinedCommodity_details'),
+            label: window.vmI18n.t('panel_label.combinedCommodity_details'),
             value: '1',
             isShow: true,
           },
@@ -265,7 +265,7 @@ export default {
             {
               style: 'input', // 输入框类型
               // label: "虚拟条码", //输入框前文字
-              label: vmI18n.t('form_label.virtual_barcode'),
+              label: window.vmI18n.t('form_label.virtual_barcode'),
               value: 'ECODE', // 输入框的值
               width: '12', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
               disabled: false,
@@ -276,7 +276,7 @@ export default {
             {
               style: 'input', // 输入框类型
               // label: "商品名称", //输入框前文字
-              label: vmI18n.t('table_label.productName'),
+              label: window.vmI18n.t('table_label.productName'),
               value: 'PS_C_PRO_ENAME', // 输入框的值
               width: '12', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
               disabled: false,
@@ -314,7 +314,7 @@ export default {
         columns: [
           {
             // title: "虚拟条码",
-            title: vmI18n.t('form_label.virtual_barcode'),
+            title: window.vmI18n.t('form_label.virtual_barcode'),
             key: 'ECODE',
             render: (h, params) => {
               if (params.row.ID) {
@@ -362,7 +362,7 @@ export default {
                           const reg = /^[0-9a-zA-Z]+$/;
                           if (!reg.test(e.target.value)) {
                             // self.$Message.warning("虚拟条码有英文字母和数字组成，请合理输入");
-                            self.$Message.warning(vmI18n.t('modalTips.x8'));
+                            self.$Message.warning(window.vmI18n.t('modalTips.x8'));
                           }
                         },
                       },
@@ -375,7 +375,7 @@ export default {
           },
           {
             // title: "商品名称",
-            title: vmI18n.t('table_label.productName'),
+            title: window.vmI18n.t('table_label.productName'),
             key: 'PS_C_PRO_ENAME',
             render: (h, params) => {
               if (params.row.ID && this.statusName === '已提交') {
@@ -423,7 +423,7 @@ export default {
                           // let reg = /^[0-9]*$/;
                           if (e.target.value === '') {
                             // self.$Message.warning("商品名称不能为空");
-                            self.$Message.warning(vmI18n.t('modalTips.x9'));
+                            self.$Message.warning(window.vmI18n.t('modalTips.x9'));
                           }
                         },
                       },
@@ -448,7 +448,7 @@ export default {
           formData: [
             {
               // label: "商品条码",
-              label: vmI18n.t('form_label.commodityCode'),
+              label: window.vmI18n.t('form_label.commodityCode'),
               style: 'dimSearch', // 模糊搜索组件类型  具体数据详情见burgeonUI
               width: '12',
               value: 'dimdata',
@@ -569,7 +569,7 @@ export default {
             {
               style: 'input', // 输入框类型
               // label: "赠送数量", //输入框前文字
-              label: vmI18n.t('form_label.free_quantity'),
+              label: window.vmI18n.t('form_label.free_quantity'),
               value: 'NUM', // 输入框的值
               width: '12', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
               id: 'Num',
@@ -605,32 +605,32 @@ export default {
           // 表头
           {
             // title: "条码",
-            title: vmI18n.t('form_label.barCode'),
+            title: window.vmI18n.t('form_label.barCode'),
             key: 'PS_C_SKU_ECODE',
           },
           {
             // title: "商品编码",
-            title: vmI18n.t('table_label.productNo'),
+            title: window.vmI18n.t('table_label.productNo'),
             key: 'PS_C_PRO_ECODE',
           },
           {
             // title: "商品名称",
-            title: vmI18n.t('table_label.productName'),
+            title: window.vmI18n.t('table_label.productName'),
             key: 'PS_C_PRO_ENAME',
           },
           {
             // title: "颜色",
-            title: vmI18n.t('other.color'),
+            title: window.vmI18n.t('other.color'),
             key: 'PS_C_CLR_ENAME',
           },
           {
             // title: "尺寸",
-            title: vmI18n.t('other.sizes'),
+            title: window.vmI18n.t('other.sizes'),
             key: 'PS_C_SIZE_ENAME',
           },
           {
             // title: "赠送数量",
-            title: vmI18n.t('form_label.free_quantity'),
+            title: window.vmI18n.t('form_label.free_quantity'),
             key: 'NUM',
             render: (h, params) => {
               if (params.row.ID && this.statusName === '已提交') {
@@ -678,7 +678,7 @@ export default {
                           const reg = /^[0-9]*$/;
                           if (!reg.test(e.target.value)) {
                             // self.$Message.warning("商品数量只能录入正整数");
-                            self.$Message.warning(vmI18n.t('modalTips.w0'));
+                            self.$Message.warning(window.vmI18n.t('modalTips.w0'));
                           }
                         },
                       },
@@ -707,7 +707,7 @@ export default {
       importTable: {
         refFuns: 'confirmFun',
         // confirmTitle: "导入",
-        confirmTitle: vmI18n.t('modalTitle.import'),
+        confirmTitle: window.vmI18n.t('modalTitle.import'),
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -828,27 +828,27 @@ export default {
         columns: [
           {
             // title: "修改内容",
-            title: vmI18n.t('table_label.revised_content'),
+            title: window.vmI18n.t('table_label.revised_content'),
             key: '',
           },
           {
             // title: "修改前",
-            title: vmI18n.t('table_label.before_modification'),
+            title: window.vmI18n.t('table_label.before_modification'),
             key: '',
           },
           {
             // title: "修改后",
-            title: vmI18n.t('table_label.after_modification'),
+            title: window.vmI18n.t('table_label.after_modification'),
             key: '',
           },
           {
             // title: "修改人",
-            title: vmI18n.t('table_label.reviser'),
+            title: window.vmI18n.t('table_label.reviser'),
             key: '',
           },
           {
             // title: "修改时间",
-            title: vmI18n.t('table_label.modificationTime'),
+            title: window.vmI18n.t('table_label.modificationTime'),
             key: '',
           },
         ],
@@ -965,7 +965,7 @@ export default {
             {
               style: 'input', // 输入框类型
               // label: "每组抽取行数", //输入框前文字
-              label: vmI18n.t('table_label.number_of_rows_per_group'),
+              label: window.vmI18n.t('table_label.number_of_rows_per_group'),
               value: 'GROUP_EXTRACT_NUM', // 输入框的值
               id: 'extract',
               width: '8', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)})
@@ -1007,7 +1007,7 @@ export default {
           const ciluIndex = this.jordanTableConfig1.columns.length;
           this.$set(this.jordanTableConfig1.columns, ciluIndex, {
             // title: "每组抽取行数",
-            title: vmI18n.t('table_label.number_of_rows_per_group'),
+            title: window.vmI18n.t('table_label.number_of_rows_per_group'),
             key: 'GROUP_EXTRACT_NUM',
             render: (h, params) => {
               if (params.row.ID && this.statusName === '已提交') {
@@ -1055,7 +1055,7 @@ export default {
                           const reg = /^[0-9]*$/;
                           if (!reg.test(e.target.value)) {
                             // self.$Message.warning("每组抽取行数只能录入正整数");
-                            self.$Message.warning(vmI18n.t('modalTitle.w1'));
+                            self.$Message.warning(window.vmI18n.t('modalTitle.w1'));
                           }
                         },
                       },
@@ -1076,7 +1076,7 @@ export default {
             {
               style: 'input', // 输入框类型
               // label: "分组", //输入框前文字
-              label: vmI18n.t('table_label.grouping'),
+              label: window.vmI18n.t('table_label.grouping'),
               value: 'GROUPNUM', // 输入框的值
               id: 'groupnum',
               width: '8', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)})
@@ -1127,7 +1127,7 @@ export default {
           const currentIndex = this.jordanTableConfig2.columns.length;
           this.$set(this.jordanTableConfig2.columns, currentIndex, {
             // title: "分组",
-            title: vmI18n.t('table_label.grouping'),
+            title: window.vmI18n.t('table_label.grouping'),
             key: 'GROUPNUM',
             render: (h, params) => {
               if (params.row.ID && this.statusName === '已提交') {
@@ -1175,7 +1175,7 @@ export default {
                           const reg = /^[0-9]*$/;
                           if (!reg.test(e.target.value)) {
                             // self.$Message.warning("分组只能录入正整数");
-                            self.$Message.warning(vmI18n.t('modalTips.t4'));
+                            self.$Message.warning(window.vmI18n.t('modalTips.t4'));
                           }
                         },
                       },
@@ -1221,14 +1221,14 @@ export default {
           {
             // type: '',  //按钮类型
             // text: "保存", //按钮文本
-            text: vmI18n.t('btn.save'), // 按钮文本
+            text: window.vmI18n.t('btn.save'), // 按钮文本
             btnclick: () => {
               this.saveAll(objid);
             },
           },
           {
             // text: "导入", //按钮文本
-            text: vmI18n.t('btn.import'), // 按钮文本
+            text: window.vmI18n.t('btn.import'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.importskuGroup('baseInfo');
@@ -1236,19 +1236,19 @@ export default {
           },
           {
             // text: "返回",
-            text: vmI18n.t('btn.back'), // 按钮文本
+            text: window.vmI18n.t('btn.back'), // 按钮文本
             btnclick: () => {
               this.$store.commit('global/tabOpen', {
                 tableId: 24525,
                 type: 'S',
                 tableName: 'PS_C_PRO_GROUP',
                 // label: "组合商品档案",
-                label: vmI18n.t('panel_label.combinedCommodity'),
+                label: window.vmI18n.t('panel_label.combinedCommodity'),
 
                 /* query: Object.assign({
                   id: 24525,
                   // tabTitle: "组合商品档案",
-                  tabTitle: vmI18n.t("panel_label.combinedCommodity"),
+                  tabTitle: window.vmI18n.t("panel_label.combinedCommodity"),
                 }), */
               });
             },
@@ -1256,7 +1256,7 @@ export default {
         ];
         this.btnConfig.buttons.push(...buttonconfig);
         // this.tipMessage = "切换组合商品类型会清空数据，确认切换组合商品类型？";
-        this.tipMessage = vmI18n.t('modalTips.w2');
+        this.tipMessage = window.vmI18n.t('modalTips.w2');
       } else {
         // 编辑页面
         this.btnConfig.buttons = [];
@@ -1264,7 +1264,7 @@ export default {
           {
             // type: '',  //按钮类型
             // text: "新增", //按钮文本
-            text: vmI18n.t('btn.add'), // 按钮文本
+            text: window.vmI18n.t('btn.add'), // 按钮文本
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -1273,18 +1273,18 @@ export default {
                 type: 'action',
                 name: 'combinedCommodity',
                 // label: "组合商品档案编辑",
-                label: vmI18n.t('panel_label.combinedCommodity_edit'),
+                label: window.vmI18n.t('panel_label.combinedCommodity_edit'),
                 query: Object.assign({
                   id: -1,
                   // tabTitle: "组合商品档案编辑",
-                  tabTitle: vmI18n.t('panel_label.combinedCommodity_edit'),
+                  tabTitle: window.vmI18n.t('panel_label.combinedCommodity_edit'),
                 }),
               });
             },
           },
           {
             // text: "保存", //按钮文本
-            text: vmI18n.t('btn.save'), // 按钮文本
+            text: window.vmI18n.t('btn.save'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.saveAll(objid);
@@ -1312,7 +1312,7 @@ export default {
           // },
           {
             text: '导入', // 按钮文本
-            text: vmI18n.t('btn.import'), // 按钮文本
+            text: window.vmI18n.t('btn.import'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.importskuGroup('baseInfo');
@@ -1320,14 +1320,14 @@ export default {
           },
           {
             // text: "刷新",
-            text: vmI18n.t('btn.refresh'), // 按钮文本
+            text: window.vmI18n.t('btn.refresh'), // 按钮文本
             btnclick: () => {
               this.IniData();
             },
           },
           {
             // text: "返回",
-            text: vmI18n.t('btn.back'), // 按钮文本
+            text: window.vmI18n.t('btn.back'), // 按钮文本
             btnclick: () => {
               this.$store.commit('global/tabOpen', {
                 back: true,
@@ -1335,11 +1335,11 @@ export default {
                 type: 'S',
                 tableName: 'PS_C_PRO_GROUP',
                 // label: "组合商品档案",
-                label: vmI18n.t('panel_label.combinedCommodity'),
+                label: window.vmI18n.t('panel_label.combinedCommodity'),
                 /* query: Object.assign({
                   id: 24525,
                   // tabTitle: "组合商品档案",
-                  tabTitle: vmI18n.t("panel_label.combinedCommodity"),
+                  tabTitle: window.vmI18n.t("panel_label.combinedCommodity"),
                 }), */
               });
             },
@@ -1348,7 +1348,7 @@ export default {
         this.btnConfig.buttons.push(...buttonsdata);
         // this.jordanTableConfig2.columns.push({title:'是否缺货',key:'IS_LACK'});//添加是否缺货的字段
         // this.tipMessage = "无法修改！";
-        this.tipMessage = vmI18n.t('modalTips.w3');
+        this.tipMessage = window.vmI18n.t('modalTips.w3');
         this.formConfig1.formData[0].disabled = true;
       }
     },
@@ -1363,13 +1363,13 @@ export default {
       inputData.psCSkugroupList = []; //
       if (inputData.ECODE === '') {
         // this.$Message.warning("虚拟条码为必填项，不能为空！");
-        this.$Message.warning(vmI18n.t('modalTips.w4'));
+        this.$Message.warning(window.vmI18n.t('modalTips.w4'));
         return false;
       } 
       const inputreg = /^[0-9a-zA-Z]+$/;
       if (!inputreg.test(inputData.ECODE)) {
         // this.$Message.warning("虚拟条码有英文字母和数字组成，请合理输入");
-        this.$Message.warning(vmI18n.t('modalTips.w5'));
+        this.$Message.warning(window.vmI18n.t('modalTips.w5'));
         return false;
       }
       
@@ -1378,7 +1378,7 @@ export default {
         const numRe = new RegExp(numReg);
         if (!numRe.test(inputData.GROUP_EXTRACT_NUM)) {
           // this.$Message.warning("每组抽取行数是一个数字，请合理输入");
-          this.$Message.warning(vmI18n.t('modalTips.w6'));
+          this.$Message.warning(window.vmI18n.t('modalTips.w6'));
           return false;
         }
       }
@@ -1389,7 +1389,7 @@ export default {
         for (const item of this.jordanTableConfig1.data) {
           if (item.ECODE === inputData.ECODE) {
             // let info = "当前" + inputData.ECODE + "已存在,不允许保存！";
-            const info = vmI18n.t('modalTips.w7')
+            const info = window.vmI18n.t('modalTips.w7')
               + inputData.ECODE
               + vmI18n.t('modalTips.w8');
             this.$Message.warning(info);
@@ -1421,7 +1421,7 @@ export default {
       let strkey = '';
       if (this.jordanTableConfig2.jordanFormConfig.formValue.dimdata === '') {
         // this.$Message.warning("商品条码不能为空！");
-        this.$Message.warning(vmI18n.t('modalTips.w9'));
+        this.$Message.warning(window.vmI18n.t('modalTips.w9'));
         return false;
       } 
       if (Object.keys(this.selectData).length > 0) {
@@ -1430,13 +1430,13 @@ export default {
         strkey = t_data.PS_C_SKU_ECODE;
       } else {
         // this.$Message.warning("请选择一个正确的商品条码");
-        this.$Message.warning(vmI18n.t('modalTips.v0'));
+        this.$Message.warning(window.vmI18n.t('modalTips.v0'));
         return false;
       }
       
       if (this.jordanTableConfig2.jordanFormConfig.formValue.NUM === '') {
         // this.$message.warning("商品数量不能为空！");
-        this.$Message.warning(vmI18n.t('modalTips.v1'));
+        this.$Message.warning(window.vmI18n.t('modalTips.v1'));
         return false;
       } 
       // 验证是否为数字
@@ -1446,7 +1446,7 @@ export default {
         !numRe.test(this.jordanTableConfig2.jordanFormConfig.formValue.NUM)
       ) {
         // this.$Message.warning("商品数量是一个数字，请合理输入");
-        this.$Message.warning(vmI18n.t('modalTips.v2'));
+        this.$Message.warning(window.vmI18n.t('modalTips.v2'));
         return false;
       }
       t_data.NUM = this.jordanTableConfig2.jordanFormConfig.formValue.NUM;
@@ -1461,7 +1461,7 @@ export default {
           this.jordanTableConfig2.jordanFormConfig.formValue.GROUPNUM === ''
         ) {
           // this.$Message.warning("分组不能为空！");
-          this.$Message.warning(vmI18n.t('modalTips.v3'));
+          this.$Message.warning(window.vmI18n.t('modalTips.v3'));
           return false;
         } 
         // 验证是否为数字
@@ -1473,7 +1473,7 @@ export default {
           )
         ) {
           // this.$Message.warning("分组是一个数字，请合理输入");
-          this.$Message.warning(vmI18n.t('modalTips.v4'));
+          this.$Message.warning(window.vmI18n.t('modalTips.v4'));
           return false;
         }
         t_data.GROUPNUM = this.jordanTableConfig2.jordanFormConfig.formValue.GROUPNUM;
@@ -1519,7 +1519,7 @@ export default {
         this.jordanTableConfig1.data[this.clickIndex].psCSkugroupList.length < 1
       ) {
         // this.$Message.warning("请选择点击要录入商品明细的条码信息");
-        this.$Message.warning(vmI18n.t('modalTips.v5'));
+        this.$Message.warning(window.vmI18n.t('modalTips.v5'));
         return false;
       }
       this.jordanTableConfig2.data = this.jordanTableConfig1.data[
@@ -1591,19 +1591,19 @@ export default {
       const baseData = Object.assign({}, this.formConfig1.formValue);
       if (baseData.ECODE === '') {
         // this.$Message.warning("商品编码不能为空");
-        this.$Message.warning(vmI18n.t('modalTips.v6'));
+        this.$Message.warning(window.vmI18n.t('modalTips.v6'));
         return false;
       } 
       const reg = /^[0-9a-zA-Z]+$/;
       if (!reg.test(baseData.ECODE)) {
         // this.$Message.warning("商品编码由英文字母和数字组成，请合理输入");
-        this.$Message.warning(vmI18n.t('modalTips.v7'));
+        this.$Message.warning(window.vmI18n.t('modalTips.v7'));
         return false;
       }
       
       if (baseData.ENAME === '') {
         // this.$Message.warning("商品名称不能为空");
-        this.$Message.warning(vmI18n.t('modalTips.x9'));
+        this.$Message.warning(window.vmI18n.t('modalTips.x9'));
         return false;
       }
       const flag1 = this.formConfig1.formData.filter((ele) => {
@@ -1613,7 +1613,7 @@ export default {
       });
       if (flag1.length > 0) {
         // this.$Message.warning("请选择品牌");
-        this.$Message.warning(vmI18n.t('modalTips.v8'));
+        this.$Message.warning(window.vmI18n.t('modalTips.v8'));
         return false;
       } 
       this.formConfig1.formData.map((ele) => {
@@ -1624,14 +1624,14 @@ export default {
       
       if (baseData.PRICELIST === '') {
         // this.$Message.warning("价格不能为空");
-        this.$Message.warning(vmI18n.t('modalTips.v9'));
+        this.$Message.warning(window.vmI18n.t('modalTips.v9'));
         return false;
       } 
       const numReg = /^\d+$|^\d*\.\d+$/g;
       const numRe = new RegExp(numReg);
       if (!numRe.test(baseData.PRICELIST)) {
         // this.$Message.warning("价格是一个数字，请合理输入");
-        this.$Message.warning(vmI18n.t('modalTips.u0'));
+        this.$Message.warning(window.vmI18n.t('modalTips.u0'));
         return false;
       }
       
@@ -1643,7 +1643,7 @@ export default {
       });
       if (flag2.length > 0) {
         // this.$Message.warning("请选择虚拟仓库");
-        this.$Message.warning(vmI18n.t('modalTips.u1'));
+        this.$Message.warning(window.vmI18n.t('modalTips.u1'));
         return false;
       } 
       this.formConfig1.formData.map((ele) => {
@@ -1654,7 +1654,7 @@ export default {
       
       if (this.jordanTableConfig1.data.length < 1) {
         // this.$Message.warning("请录入条码明细后再保存");
-        this.$Message.warning(vmI18n.t('modalTips.u2'));
+        this.$Message.warning(window.vmI18n.t('modalTips.u2'));
         return false;
       }
       const groupType = this.formConfig1.formValue.GROUP_TYPE;
@@ -1682,18 +1682,18 @@ export default {
             }
             if (Object.keys(groupDATA).length > 10) {
               // this.$Message.warning("福袋类型组合商品一个虚拟条码不允许存在超过十个分组");
-              this.$Message.warning(vmI18n.t('modalTips.u4'));
+              this.$Message.warning(window.vmI18n.t('modalTips.u4'));
               return false;
             }
             for (const inner1 in groupDATA) {
               if (item.GROUP_EXTRACT_NUM > groupDATA[inner1].length) {
                 // this.$Message.warning("存在每组抽取行数大于每组福袋商品总行数");
-                this.$Message.warning(vmI18n.t('modalTips.u5'));
+                this.$Message.warning(window.vmI18n.t('modalTips.u5'));
                 return false;
               }
               if (groupDATA[inner1].length > 200) {
                 // this.$Message.warning("福袋类型组合商品不允许存在一个分组超过200行的SKU");
-                this.$Message.warning(vmI18n.t('modalTips.u6'));
+                this.$Message.warning(window.vmI18n.t('modalTips.u6'));
                 return false;
               }
             }
@@ -1712,7 +1712,7 @@ export default {
             // 普通类型
             if (item.psCSkugroupList.length > 30) {
               // this.$Message.warning("普通类型组合商品，一个虚拟条码下不允许超过30条SKU");
-              this.$Message.warning(vmI18n.t('modalTips.u7'));
+              this.$Message.warning(window.vmI18n.t('modalTips.u7'));
               return false;
             }
           }
@@ -1744,7 +1744,7 @@ export default {
       } else {
         if (this.statusName === '已提交') {
           // this.$Message.warning("已提交的组合商品不能修改！");
-          this.$Message.warning(vmI18n.t('modalTips.u8'));
+          this.$Message.warning(window.vmI18n.t('modalTips.u8'));
           return false;
         } 
         // 编辑页面保存
@@ -1837,11 +1837,11 @@ export default {
               type: 'table',
               name: 'PS_C_PRO_GROUP',
               // label: "组合商品档案",
-              label: vmI18n.t('panel_label.combinedCommodity'),
+              label: window.vmI18n.t('panel_label.combinedCommodity'),
               query: Object.assign({
                 id: 24525,
                 // tabTitle: "组合商品档案",
-                tabTitle: vmI18n.t('panel_label.combinedCommodity'),
+                tabTitle: window.vmI18n.t('panel_label.combinedCommodity'),
               }),
             });
           } else {
@@ -1963,7 +1963,7 @@ export default {
       if (this.objid !== '-1') {
         if (this.statusName === '已提交') {
           // this.$Message.warning("已提交的组合商品不能执行删除！");
-          this.$Message.warning(vmI18n.t('modalTips.u9'));
+          this.$Message.warning(window.vmI18n.t('modalTips.u9'));
           return false;
         } 
         // 编辑页面的删除明细
@@ -2005,7 +2005,7 @@ export default {
           }
         } else {
           // this.$Message.warning("请选择要删除的条码！");
-          this.$Message.warning(vmI18n.t('modalTips.t0'));
+          this.$Message.warning(window.vmI18n.t('modalTips.t0'));
         }
       } else {
         // 新增页面的删除明细
@@ -2016,7 +2016,7 @@ export default {
               // 保存失败的时候可能不存在这个属性
               if (item.psCSkugroupList.length > 0) {
                 // this.$Message.warning("SKU存在明细,无法删除！");
-                this.$Message.warning(vmI18n.t('modalTips.t1'));
+                this.$Message.warning(window.vmI18n.t('modalTips.t1'));
                 return false;
               }
             }
@@ -2036,7 +2036,7 @@ export default {
       if (this.objid !== '-1') {
         if (this.statusName === '已提交') {
           // this.$Message.warning("已提交的组合商品不能执行删除！");
-          this.$Message.warning(vmI18n.t('modalTips.u9'));
+          this.$Message.warning(window.vmI18n.t('modalTips.u9'));
           return false;
         } 
         // 编辑页面删除明细走接口
@@ -2084,7 +2084,7 @@ export default {
           }
         } else {
           // this.$Message.warning("请选择要删除的组合商品！");
-          this.$Message.warning(vmI18n.t('modalTips.t2'));
+          this.$Message.warning(window.vmI18n.t('modalTips.t2'));
         }
       } else {
         const arrNo = [];
@@ -2186,7 +2186,7 @@ export default {
       this.jordanTableConfig2.loading = true;
       if (this.selectId === '') {
         // this.$Message.warning("请先选择一条条码明细");
-        this.$Message.warning(vmI18n.t('modalTips.t3'));
+        this.$Message.warning(window.vmI18n.t('modalTips.t3'));
         return;
       }
       const param = {

@@ -37,13 +37,13 @@ export default {
         loading: false, // 按钮组件是否有loading样式,值为true false
         buttons: [
           {
-            text: vmI18n.t('common.cancel'), // 取消 按钮文本
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             btnclick: () => {
               this.$emit('closeActionDialog', false);
             }, // 按钮点击事件
           },
           {
-            text: vmI18n.t('other.confirmPrinting'), // 确定打印 按钮文本
+            text: window.vmI18n.t('other.confirmPrinting'), // 确定打印 按钮文本
             disabled: false,
             btnclick: () => {
               this.print();
@@ -65,20 +65,20 @@ export default {
                 town: '',
               },
               mobile: vmI18n.t('other.mobile0'), // 13012345678
-              name: vmI18n.t('other.name'), // 乾宝贝最可爱
+              name: window.vmI18n.t('other.name'), // 乾宝贝最可爱
               phone: vmI18n.t('other.phone0'), // 057112345678
             },
             routingInfo: {
               consolidation: {
-                name: vmI18n.t('common.address.placeName0'), // 杭州
+                name: window.vmI18n.t('common.address.placeName0'), // 杭州
                 code: 'hangzhou',
               },
               origin: {
-                name: vmI18n.t('common.address.placeName0'), // 杭州
+                name: window.vmI18n.t('common.address.placeName0'), // 杭州
                 code: 'POSTB',
               },
               sortation: {
-                name: vmI18n.t('common.address.placeName0'), // 杭州
+                name: window.vmI18n.t('common.address.placeName0'), // 杭州
               },
               routeCode: '123A-456-789',
             },
@@ -91,7 +91,7 @@ export default {
                 town: '',
               },
               mobile: vmI18n.t('common.address.mobile1'), // 13012345678
-              name: vmI18n.t('common.address.name'), // 阿里巴巴
+              name: window.vmI18n.t('common.address.name'), // 阿里巴巴
               phone: vmI18n.t('common.address.phone1'), // 057112345678
             },
             shippingOption: {

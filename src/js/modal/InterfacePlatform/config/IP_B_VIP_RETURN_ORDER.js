@@ -29,13 +29,13 @@ export default {
           },
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: vmI18n.t('other.shop'), // 店铺
+          fkdesc: window.vmI18n.t('other.shop'), // 店铺
           inputname: 'CP_C_SHOP_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: vmI18n.t('other.shop'), // 店铺 input前面显示的lable值
+          name: window.vmI18n.t('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_SHOP',
           reftableid: 24475,
@@ -49,18 +49,18 @@ export default {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'query_date',
-        label: vmI18n.t('form_label.platformTime'), // 平台时间
+        label: window.vmI18n.t('form_label.platformTime'), // 平台时间
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''
       },
       {
         style: 'input', // 输入框类型
-        label: vmI18n.t('form_label.returnNo'), // 退供单号 输入框前文字
+        label: window.vmI18n.t('form_label.returnNo'), // 退供单号 输入框前文字
         value: 'refund_nos', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持
-        placeholder: vmI18n.t('pHolder.z3'), // 多个退供单号，用逗号隔开 占位文本，默认为请输入
+        placeholder: window.vmI18n.t('pHolder.z3'), // 多个退供单号，用逗号隔开 占位文本，默认为请输入
         ghost: false, // 是否关闭幽灵按钮，默认开启
       }
     ],

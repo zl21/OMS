@@ -17,7 +17,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: vmI18n.t('common.determine'), // 确定 按钮文本
+            text: window.vmI18n.t('common.determine'), // 确定 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -69,7 +69,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: vmI18n.t('common.cancel'), // 取消 按钮文本
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -94,7 +94,7 @@ export default {
         formData: [
           {
             style: 'radio', // 单选框
-            label: vmI18n.t('form_label.downloadType'), // 下载类型前面字段
+            label: window.vmI18n.t('form_label.downloadType'), // 下载类型前面字段
             width: '24', // 宽度
             value: 'TYPE', // 绑定到formValue的值
             radioChange: () => {
@@ -106,12 +106,12 @@ export default {
               // radio选项
               {
                 value: '0',
-                label: vmI18n.t('form_label.downloadOnly'), // 仅下载拣货单
+                label: window.vmI18n.t('form_label.downloadOnly'), // 仅下载拣货单
                 disabled: false,
               },
               {
                 value: '1',
-                label: vmI18n.t('form_label.create_and_download'), // 创建并下载拣货单
+                label: window.vmI18n.t('form_label.create_and_download'), // 创建并下载拣货单
                 disabled: false,
               },
             ],
@@ -142,13 +142,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: vmI18n.t('other.shop'), // 店铺
+              fkdesc: window.vmI18n.t('other.shop'), // 店铺
               inputname: 'CP_C_SHOP_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: vmI18n.t('other.shop'), // 店铺input前面显示的lable值
+              name: window.vmI18n.t('other.shop'), // 店铺input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP',
               reftableid: 24475,
@@ -169,7 +169,7 @@ export default {
           },
           {
             style: 'input',
-            label: vmI18n.t('other.pickingOrder_no'), // 拣货单号
+            label: window.vmI18n.t('other.pickingOrder_no'), // 拣货单号
             value: 'PICK_NO',
             width: '24',
           },

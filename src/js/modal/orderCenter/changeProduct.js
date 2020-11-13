@@ -218,17 +218,17 @@ export default {
       columns: [
         {
           // title: "商品SKU",
-          title: vmI18n.t('table_label.commoditySKU'),
+          title: window.vmI18n.t('table_label.commoditySKU'),
           key: 'ECODE',
         },
         {
           // title: "商品名称",
-          title: vmI18n.t('table_label.productName'),
+          title: window.vmI18n.t('table_label.productName'),
           key: 'PS_C_PRO_ENAME',
         },
         {
           // title: "商品SKU名称",
-          title: vmI18n.t('table_label.productSKUname'),
+          title: window.vmI18n.t('table_label.productSKUname'),
           key: 'SPEC',
         },
       ],
@@ -292,7 +292,7 @@ export default {
           }
         } else {
           // this.$Message.warning("sku查询失败!");
-          this.$Message.warning(vmI18n.t('modalTips.zt'));
+          this.$Message.warning(window.vmI18n.t('modalTips.zt'));
         }
         this[loadName] = false;
       } catch (e) {
@@ -303,17 +303,17 @@ export default {
       const self = this;
       if (JSON.stringify(self.onRowClickData) == '{}') {
         // self.$Message.warning("替换前商品sku不能为空!");
-        self.$Message.warning(vmI18n.t('modalTips.yf'));
+        self.$Message.warning(window.vmI18n.t('modalTips.yf'));
         return;
       }
       if (JSON.stringify(self.onRowClickReplaceData) == '{}') {
         // self.$Message.warning("替换后商品sku码不能为空!");
-        self.$Message.warning(vmI18n.t('modalTips.yg'));
+        self.$Message.warning(window.vmI18n.t('modalTips.yg'));
         return;
       }
       if (self.onRowClickData.ECODE == self.onRowClickReplaceData.ECODE) {
         // self.$Message.warning("替换商品与被替换商品不能相同!");
-        self.$Message.warning(vmI18n.t('modalTips.yh'));
+        self.$Message.warning(window.vmI18n.t('modalTips.yh'));
         return;
       }
       const result = {};
@@ -328,7 +328,7 @@ export default {
       };
       if (self.componentData.a_2.length == 0) {
         // self.$Message.warning("请勾选订单数据!");
-        self.$Message.warning(vmI18n.t('modalTips.zu'));
+        self.$Message.warning(window.vmI18n.t('modalTips.zu'));
         return;
       }
       result.ids = self.componentData.a_2;
@@ -354,7 +354,7 @@ export default {
                 columns: [
                   {
                     // title: "提示信息",
-                    title: vmI18n.t('modalTitle.tips'),
+                    title: window.vmI18n.t('modalTitle.tips'),
                     key: 'message',
                   },
                 ],

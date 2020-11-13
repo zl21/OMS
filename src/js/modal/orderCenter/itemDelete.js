@@ -16,7 +16,7 @@ export default {
         formData: [
           {
             // label: "SKU编码",
-            label: vmI18n.t('table_label.code_SKU'),
+            label: window.vmI18n.t('table_label.code_SKU'),
             style: 'dimSearch',
             width: '12',
             value: 'searchValue',
@@ -68,7 +68,7 @@ export default {
           },
           {
             // label: "商品编码",
-            label: vmI18n.t('table_label.productNo'),
+            label: window.vmI18n.t('table_label.productNo'),
             style: 'dimSearch',
             width: '12',
             value: 'psCProEcode',
@@ -117,17 +117,17 @@ export default {
       columns: [
         {
           // title: "SKU编码",
-          title: vmI18n.t('table_label.code_SKU'),
+          title: window.vmI18n.t('table_label.code_SKU'),
           key: 'ECODE',
         },
         {
           // title: "商品名称",
-          title: vmI18n.t('table_label.productName'),
+          title: window.vmI18n.t('table_label.productName'),
           key: 'PS_C_PRO_ENAME',
         },
         {
           // title: "SKU名称",
-          title: vmI18n.t('form_label.skuName'),
+          title: window.vmI18n.t('form_label.skuName'),
           key: 'SPEC',
         },
       ],
@@ -166,7 +166,7 @@ export default {
           self.data = res.data.data.data;
         } else {
           // this.$Message.warning("sku查询失败!");
-          this.$Message.warning(vmI18n.t('modalTips.zt'));
+          this.$Message.warning(window.vmI18n.t('modalTips.zt'));
         }
         self.tableLoad = false;
       } catch (e) {
@@ -178,7 +178,7 @@ export default {
       const result = {};
       if (self.componentData.a_2.length == 0) {
         // self.$Message.warning("请勾选订单数据!");
-        self.$Message.warning(vmI18n.t('modalTips.zu'));
+        self.$Message.warning(window.vmI18n.t('modalTips.zu'));
         return;
       }
       result.ids = self.componentData.a_2;
@@ -202,7 +202,7 @@ export default {
                 columns: [
                   {
                     // title: "提示信息",
-                    title: vmI18n.t('modalTitle.tips'),
+                    title: window.vmI18n.t('modalTitle.tips'),
                     key: 'message',
                   },
                 ],
