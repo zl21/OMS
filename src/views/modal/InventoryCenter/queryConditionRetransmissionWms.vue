@@ -32,7 +32,7 @@
     data() {
       return {
         vmI18n: window.vmI18n,
-        is_click: false,
+        is_click: false
       };
     },
     computed: {
@@ -56,9 +56,6 @@
           obj.endBillDate = this.allFormData.BILL_DATE[1];
           obj.user = this.user;
           this.is_click = true;
-          setTimeout(()=>{
-            this.is_click = false;
-          }, 180000);
           this.service.inventoryCenter.sgPhyOutNoticesSendWMSAgainCondition(obj).then(res=>{
             console.log(res);
             if (res.data.code == 0) {

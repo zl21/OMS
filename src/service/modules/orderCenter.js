@@ -75,5 +75,6 @@ export default {
   export: params => network.post('/p/outpro/export', params),
   amendBody: (tableName, params) => network.post(port[tableName].amendBody, params),
   prodel: params => network.post('/p/cs/prodel', params),
-  updateDicunot: params => network.post('/p/cs/oc/v1/sale/updateDicunot', params)
+  updateDicunot: params => network.post('/p/cs/oc/v1/sale/updateDicunot', params),
+  updateLogisticsBeforePacking: params => network.post('/api/cs/vip/distribution/Logistics/v1/updateLogisticsBeforePacking', params),
 };
