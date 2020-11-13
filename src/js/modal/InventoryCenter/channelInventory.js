@@ -4,6 +4,7 @@ export default {
   data() {
     return {
       vmI18n: window.vmI18n,
+      is_click: false
     };
   },
   computed: {
@@ -17,6 +18,9 @@ export default {
   methods: {
     determine() {
       const self = this;
+      if (self.is_click) {
+        return false;
+      }
       const url = '';
       // 库存按查询条件同步
       // if (self.$parent.title === self.vmI18n.t('modalTitle.z0')) url = '/p/cs/storage/manualSynchChannelStorageByQuery';
@@ -37,11 +41,13 @@ export default {
             param.cpCPlatformIdList.push(obj);
           });
         }
+        self.is_click = true;
       R3.network.post('/p/cs/storage/manualCalcAndSynchChannelProduct', param).then((res) => {
         if (res.data.code === 0) {
           self.$emit('closeActionDialog');
           self.$Message.success(res.data.message);
         } else {
+          self.is_click = false;
           self.$emit('closeActionDialog');
           self.$Message.error(res.data.message);
         }

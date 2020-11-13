@@ -32,6 +32,7 @@
     data() {
       return {
         vmI18n: window.vmI18n,
+        is_click: false
       };
     },
     computed: {
@@ -44,6 +45,9 @@
     },
     methods: {
       determine() {
+        if (this.is_click) {
+          return false;
+        }
         if (this.allFormData.CP_C_PHY_WAREHOUSE_ID || (this.allFormData.BILL_DATE[0] && this.allFormData.BILL_DATE[1]) || this.allFormData.SOURCE_BILL_NO) {
           const obj = {};
           obj.sourceBillType = this.allFormData.SOURCE_BILL_NO;
@@ -57,6 +61,7 @@
             if (res.data.code == 0) {
               this.$Message.success(res.data.data);
             } else {
+              this.is_click = false;
               this.$Message.error(res.data.data);
             }
           });
