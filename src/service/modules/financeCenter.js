@@ -29,7 +29,7 @@ export default {
   // 
   getPayableAdjustment: params => network.post('/p/cs/getPayableAdjustment', params),
   //
-  queryOrderList: params => network.post('/p/cs/queryOrderList', params),
+  queryOrderList: params => network.post('/api/cs/oc/oms/v1/queryOrderList', params),
   // 弹框 下载账单
   triggerVipBill: params => network.post('/p/cs/ac/v1/triggerVipBill', params),
   // 弹框 生成销售单
