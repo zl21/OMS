@@ -205,7 +205,7 @@ export default {
         .then((res) => {
           if (res.data.code === 0) {
             // this.$Message.success(res.data.message || "会员加急发货打标成功");
-            this.$Message.success(res.data.message || vmI18n.t('modalTips.yd'));
+            this.$Message.success(res.data.message || window.vmI18n.t('modalTips.yd'));
             this.$parent.$parent.$parent.selection = [];
             this.$parent.$parent.$parent.getData();
           }

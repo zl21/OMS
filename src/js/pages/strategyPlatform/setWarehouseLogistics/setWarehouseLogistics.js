@@ -367,7 +367,7 @@ export default {
       //     }
       //   } else {
       //     // const err = res.data.data.message || "保存失败";
-      //     const err = res.data.data.message || vmI18n.t("modalTips.y0");
+      //     const err = res.data.data.message || window.vmI18n.t("modalTips.y0");
       //     _this.$Message.error(err);
       //     _this.refresh();
       //   }
@@ -643,7 +643,7 @@ export default {
       //   } else {
       //     // _this.$Message.error(res.data.data.message || "失败");
       //     _this.$Message.error(
-      //       res.data.data.message || vmI18n.t("modalTips.z3")
+      //       res.data.data.message || window.vmI18n.t("modalTips.z3")
       //     );
       //   }
       // });

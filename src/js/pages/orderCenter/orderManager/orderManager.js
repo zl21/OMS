@@ -462,9 +462,9 @@ export default {
               ) {
                 const popList = [];
                 params.row.QUERYORDERITEMRESULTLIST.forEach((item, index) => {
-                  const ecode = item.ecode || vmI18n.t('other.goods'); // 商品
-                  const sizes = item.sizes || vmI18n.t('other.sizes'); // 尺寸
-                  const clrs = item.clrs || vmI18n.t('other.color'); // 颜色
+                  const ecode = item.ecode || window.vmI18n.t('other.goods'); // 商品
+                  const sizes = item.sizes || window.vmI18n.t('other.sizes'); // 尺寸
+                  const clrs = item.clrs || window.vmI18n.t('other.color'); // 颜色
                   const dataArr = [];
                   let dataMore = this.reaptData(
                     params.row.QUERYORDERITEMRESULTLIST
