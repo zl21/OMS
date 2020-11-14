@@ -1948,9 +1948,11 @@ export default {
           {
             text: window.vmI18n.t('btn.batch_chargeback'), // 批量退单
             btnclick: () => {
+              debugger;
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               if (self.selection.length > 0) {
+                console.log(self.selection);
                 try {
                   self.checkBatchReturnOrder(self.selection);
                 } catch (err) {
@@ -2120,6 +2122,8 @@ export default {
         orderOutofstock: 2, // 缺货
         orderCancel: 7, // 已取消
         orderSystemInvalid: 8, // 系统作废
+        warehouseDelivery: 5, // 仓库发货
+        platformDelivery: 6, // 平台发货
       },
       formValObj: {},
       isExport: false,
@@ -3610,24 +3614,30 @@ export default {
       }
       for (let i = 0; i < selection.length; i++) {
         const item = selection[i];
-        if (
-          item.ORDER_STATUS === self.orderStatus.orderCancel
-          || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid
-        ) {
-          // 订单需要生成退换货单的订单状态不能已取消、系统作废！
-          throw new Error(`${item.ID}${self.vmI18n.t('modalTips.f6')}`);
-        } else if (
-          item.ORDER_STATUS === self.orderStatus.waitDistribution
-          || item.ORDER_STATUS === self.orderStatus.orderUnconfirmed
-          || item.ORDER_STATUS === self.orderStatus.orderOutofstock
-          || item.ORDER_STATUS === self.orderStatus.audited
-          || item.ORDER_STATUS === self.orderStatus.waitSendWMS
-          || item.ORDER_STATUS === self.orderStatus.distributioning
-        ) {
-          // 存在未发货订单,不能进行批量新增退换货订单操作
-          throw new Error(self.vmI18n.t('modalTips.f7'));
+        if (!(item.ORDER_STATUS === self.orderStatus.warehouseDelivery || item.ORDER_STATUS === self.orderStatus.platformDelivery)) {
+          throw new Error('只允许仓库发货、平台发货状态订单允许批量退单');
         }
       }
+      // for (let i = 0; i < selection.length; i++) {
+      //   const item = selection[i];
+      //   if (
+      //     item.ORDER_STATUS === self.orderStatus.orderCancel
+      //     || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid
+      //   ) {
+      //     // 订单需要生成退换货单的订单状态不能已取消、系统作废！
+      //     throw new Error(`${item.ID}${self.vmI18n.t('modalTips.f6')}`);
+      //   } else if (
+      //     item.ORDER_STATUS === self.orderStatus.waitDistribution
+      //     || item.ORDER_STATUS === self.orderStatus.orderUnconfirmed
+      //     || item.ORDER_STATUS === self.orderStatus.orderOutofstock
+      //     || item.ORDER_STATUS === self.orderStatus.audited
+      //     || item.ORDER_STATUS === self.orderStatus.waitSendWMS
+      //     || item.ORDER_STATUS === self.orderStatus.distributioning
+      //   ) {
+      //     // 存在未发货订单,不能进行批量新增退换货订单操作
+      //     throw new Error(self.vmI18n.t('modalTips.f7'));
+      //   }
+      // }
     },
     onBatchReturnOrderCancel() {
       this.batchReturnFormConfig.formValue.IS_BACK = false;
