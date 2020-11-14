@@ -1337,7 +1337,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.invoice_otice'), // 记录发票
+            text: window.vmI18n.t('btn.recordInvoice'), // 记录发票
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -1373,10 +1373,10 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.recordInvoice'), // 批量修改仓库
+            text: window.vmI18n.t('btn.batchModify_warehouse'), // 批量修改仓库
           },
           {
-            text: window.vmI18n.t('btn.batchModify_warehouse'), // 订单取消
+            text: window.vmI18n.t('btn.orderCancel'), // 订单取消
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -1393,7 +1393,7 @@ export default {
                   showCancel: true,
                   okText: self.vmI18n.t('common.determine'), // 取消
                   cancelText: self.vmI18n.t('common.cancel'), // 确定
-                  onCancel: () => {
+                  onOk: () => {
                     self.service.orderCenter.cancelOrder({ ids, type: '1' })
                     // self.$network
                     //   .post('/api/cs/oc/oms/v1/cancelOrder', { ids, type: '1' })
@@ -1420,7 +1420,7 @@ export default {
                         self.btnConfig.loading = false;
                       });
                   },
-                  onOk: () => {
+                  onCancel: () => {
                     self.btnConfig.loading = false;
                   },
                 });
