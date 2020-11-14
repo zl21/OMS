@@ -566,58 +566,24 @@ export default {
         self.$message.warning(this.vmI18n.t('modalTips.x3'));
         return;
       }
-      if (!self.jordanTableConfig.data.length) return self.$message.error('明细为空不允许保存');
-      return self.$message.error(self.vmI18n.t('modalTips.x4'));
+      if (!self.jordanTableConfig.data.length) {
+         self.$message.error(self.vmI18n.t('modalTips.x4'));
+         return;
+      }
       const formdata = new FormData();
       formdata.append('param', JSON.stringify(param));
       const {
         data: { code, data }
       } = await this.service.strategyPlatform.saveCompensate(formdata);
-      if (data.code === 0) {
+      if (code === 0) {
         if (JSON.stringify(data.data) !== '{}') {
           self.removeDetail();
-          // self.$store.commit("TabHref", {
-          //   id: data.data.objid,
-          //   type: "action",
-          //   name: "courierPay",
-          //   label: "快递赔付方案",
-          //   query: Object.assign({
-          //     id: data.data.objid,
-          //     tabTitle: "快递赔付方案"
-          //   })
-          // });
         }
         self.query(self.objid);
         self.$message.success(data.message);
       } else {
         self.$message.error(data.message);
       }
-      // axios({
-      //   url: "/p/cs/saveCompensate",
-      //   method: "post",
-      //   data: formdata,
-      // }).then((res) => {
-      //   if (res.data.data.code === 0) {
-      //     if (JSON.stringify(res.data.data.data) !== "{}") {
-      //       self.removeDetail();
-      //       // self.$store.commit("TabHref", {
-      //       //   id: res.data.data.data.objid,
-      //       //   type: "action",
-      //       //   name: "courierPay",
-      //       //   label: "快递赔付方案",
-      //       //   query: Object.assign({
-      //       //     id: res.data.data.data.objid,
-      //       //     tabTitle: "快递赔付方案"
-      //       //   })
-      //       // });
-      //     }
-      //     self.query(self.objid);
-      //     self.$Message.success(res.data.data.message);
-      //   } else {
-      //     self.$Message.error(res.data.data.message);
-      //   }
-      //   // self.query(self.objid);
-      // });
     },
     setData(data) {
       // 页面赋值方法
@@ -832,7 +798,7 @@ export default {
       const {
         data: { code, data }
       } = await this.service.strategyPlatform.saveCompensate(formdata);
-      if (data.code === 0) {
+      if (code === 0) {
         self.removeDetail();
         if (JSON.stringify(data.data) !== '{}') {
           self.$store.commit('TabHref', {

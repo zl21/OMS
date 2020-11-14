@@ -11,18 +11,18 @@ export default {
     detailtable,
     ButtonFkDialog,
     TableSku,
-    importDialog,
+    importDialog
   },
   props: {
     productList: { type: Array },
     products_columns: {
-      type: Array,
+      type: Array
     },
     gift_columns: {
-      type: Array,
+      type: Array
     },
     itemdata: { type: Object },
-    itemdata_gift: { type: Object },
+    itemdata_gift: { type: Object }
   },
   data() {
     return {
@@ -37,9 +37,9 @@ export default {
         // 弹框设置
         dialogTitle: '',
         footerHide: true,
-        mask: true,
+        mask: true
       },
-      moduleMode: 'batch',
+      moduleMode: 'batch'
     };
   },
   watch: {},
@@ -52,7 +52,9 @@ export default {
         itemdata.fkdisplay = 'mop';
         itemdata.isObject = true;
         return itemdata;
-      } catch (e) {}
+      } catch (e) {
+        throw new Error(e);
+      }
     },
     itemdata_giftFk() {
       try {
@@ -62,8 +64,10 @@ export default {
         itemdata.fkdisplay = 'mop';
         itemdata.isObject = true;
         return itemdata;
-      } catch (e) {}
-    },
+      } catch (e) {
+        throw new Error(e);
+      }
+    }
   },
   methods: {
     changeActive(index) {
@@ -81,7 +85,7 @@ export default {
     getButtonFkChoose(index, from) {
       const rs = from === 'product' ? this.itemdataFk : this.itemdata_giftFk;
       const namelist = JSON.parse(rs.pid).nameList;
-      namelist.forEach((obj) => {
+      namelist.forEach(obj => {
         const row = {};
         if (rs.reftable === 'SG_B_CHANNEL_PRODUCT') {
           row.ECODE = obj.PS_C_SKU_ECODE || '';
@@ -257,9 +261,9 @@ export default {
       // event.target.value= event.target.value.match(/^[1-9]\d*/) ? event.target.value.match(/^[1-9]\d*/)[0] : '';
       event.target.value = event.target.value.replace(/[^0-9]+/, '');
       return event.target.value;
-    },
+    }
   },
   mounted() {
     console.log('productList', this.productList);
-  },
+  }
 };

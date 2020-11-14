@@ -668,7 +668,7 @@ export default {
         _this.getTreeData();
         _this.$Message.success(ess);
       } else {
-        const err = data.message || this.vmI18n.t('modalTips.y4'); // 作废失败
+        const err = message || this.vmI18n.t('modalTips.y4'); // 作废失败
         _this.$Message.success(err);
       }
     },

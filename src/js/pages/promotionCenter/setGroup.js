@@ -8,23 +8,39 @@ export default {
       itemdata: {
         name: '分组名称：',
         setGroupName: '',
-        radio: '1',
+        radio: '1'
       },
       visible: true,
       tableData: [],
-      tHead: [{
-        label: '活动名称',
-        name: 'ENAME'
-      }, {
-        label: '参与店铺',
-        name: 'SHOP_NAME'
-      }, {
-        label: '原分组名称',
-        name: 'PM_GROUP'
-      }, {
-        label: '优先级',
-        name: 'PM_PRIORITY'
-      }]
+      headOne: [
+        { label: '活动名称', name: 'ENAME' },
+        { label: '参与店铺', name: 'SHOP_NAME' },
+        { label: '原分组名称', name: 'PM_GROUP' },
+        { label: '优先级', name: 'PM_PRIORITY' }
+      ],
+      headTwo: [
+        { label: '活动名称', name: 'ENAME' },
+        { label: '参与店铺', name: 'SHOP_NAME' },
+        { label: '原分组名称', name: 'PM_GROUP' }
+      ],
+      tHead: [
+        {
+          label: '活动名称',
+          name: 'ENAME'
+        },
+        {
+          label: '参与店铺',
+          name: 'SHOP_NAME'
+        },
+        {
+          label: '原分组名称',
+          name: 'PM_GROUP'
+        },
+        {
+          label: '优先级',
+          name: 'PM_PRIORITY'
+        }
+      ]
       // dialogVisible:true
     };
   },
@@ -32,51 +48,36 @@ export default {
   components: {
     myInputLd
   },
-  computed: {
-      
-  },
+  computed: {},
   watch: {
     'itemdata.radio': {
-      handler(val, old) {
-        this.tHead = val == 1 ? [{ label: '活动名称', name: 'ENAME' }, { label: '参与店铺', name: 'SHOP_NAME' },
-          { label: '原分组名称', name: 'PM_GROUP' }, { label: '优先级', name: 'PM_PRIORITY' }]
-          : [{ label: '活动名称', name: 'ENAME' }, { label: '参与店铺', name: 'SHOP_NAME' },
-            { label: '原分组名称', name: 'PM_GROUP' }];
+      handler(val) {
+        this.tHead = val == 1 ? this.headOne : this.headTwo;
       }
     },
     setGroupTableData: {
-      handler(val, old) {
+      handler() {
         if (this.setGroupTableData.length > 0) {
           this.tableData = this.setGroupTableData;
         }
       }
     }
   },
-  mounted() {
-      
-  },
-  created() {
-      
-      
-    // this.getDataInit()
-  },
-  activated() {
-
-  },
   methods: {
     getDataInit() {
+      const _self = this;
       const formData = new FormData();
       formData.append('param', JSON.stringify({ objids: this.checkList }));
       axios({
         method: 'post',
         url: '/p/cs/pm/v1/selectPmGroup',
         data: formData
-      }).then((res) => {
+      }).then(res => {
         console.log(res);
         if (res.data.code === 0) {
           this.tableData = res.data.data;
         } else {
-          self.$message.error(res.data.message);
+          _self.$message.error(res.data.message);
         }
       });
     },
@@ -87,28 +88,28 @@ export default {
     confirm() {
       const self = this;
       const mapArr = [];
-      const prom_actis = [];
+      const promActis = [];
       if (this.itemdata.radio == 1 && this.itemdata.setGroupName == '') {
         self.$message.error('请填写分组名称');
         return;
       }
-      self.tableData.map((item) => {
+      self.tableData.forEach(item => {
         mapArr.push(Number(item.PM_PRIORITY));
-        prom_actis.push({ id: item.ID, pm_priority: item.PM_PRIORITY });
+        promActis.push({ id: item.ID, pm_priority: item.PM_PRIORITY });
       });
-      const setArr = new Set(mapArr);// 去重复
+      const setArr = new Set(mapArr); // 去重复
       console.log(setArr.size < mapArr.length ? '有重复' : '无重复');
       if (setArr.size < mapArr.length) {
         self.$message.error('有重复优先级');
         return;
       }
       const formData = new FormData();
-      formData.append('param', JSON.stringify({ prom_actis, group_status: this.itemdata.radio, pm_group: this.itemdata.setGroupName }));
+      formData.append('param', JSON.stringify({ promActis, group_status: this.itemdata.radio, pm_group: this.itemdata.setGroupName }));
       axios({
         method: 'post',
         url: '/p/cs/pm/v1/updatePmGroup',
         data: formData
-      }).then((res) => {
+      }).then(res => {
         console.log(res);
         if (res.data.code === 0) {
           self.$message.success('设置分组成功');

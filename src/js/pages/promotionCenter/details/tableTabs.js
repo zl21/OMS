@@ -31,13 +31,15 @@ export default {
         itemdata.fkdisplay = 'mop';
         itemdata.isObject = true;
         return itemdata;
-      } catch (e) { }
-    },
+      } catch (e) {
+        throw new Error(e);
+      }
+    }
   },
   props: {
     current: {
       type: Number
-    }, // 当前默认展示的tab
+    },
     productsArrs: {
       type: Array
     },
@@ -57,13 +59,14 @@ export default {
   data() {
     return {
       // currentView:'',  //弹框
-      // popDialog:'',     
+      // popDialog:'',
       dialogModal: {}, // 弹框传参
       show_dialog: false, // 弹框是否关闭
-      dialogSet: { // 弹框层设置  标题、 隐藏底部 、是否遮罩
+      dialogSet: {
+        // 弹框层设置  标题、 隐藏底部 、是否遮罩
         dialogTitle: '',
         footerHide: true,
-        mask: true,
+        mask: true
       }
     };
   },
@@ -133,7 +136,6 @@ export default {
     closeDialog() {
       this.show_dialog = false;
     }
-
   },
-  mounted() { }
+  mounted() {}
 };

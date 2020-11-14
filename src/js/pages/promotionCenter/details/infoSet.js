@@ -13,19 +13,19 @@ export default {
     detailtabs,
     SingleBox,
     CTSIT,
-    ButtonFkDialog,
+    ButtonFkDialog
   },
   props: {
     basicData: {
-      type: Object,
+      type: Object
     },
     infoData: {
-      type: Object,
+      type: Object
     },
     loadDis: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   watch: {
     'infoData.products_origin': {
@@ -40,13 +40,13 @@ export default {
         } else {
           this.columns = self.tableCols.infoColumnspt;
         }
-      },
+      }
     },
     loadDis(val) {
       if (val === true) {
         this.initView();
       }
-    },
+    }
   },
   data() {
     return {
@@ -56,8 +56,7 @@ export default {
       data: [], // 表格数据
       itemdata_xitong: {
         col: 1,
-        colid:
-          this.$store.state.customize.forginkeys.columnIds.sku || '1700806532',
+        colid: this.$store.state.customize.forginkeys.columnIds.sku || '1700806532',
         colname: 'PS_C_PRO_ID',
         datelimit: 'all',
         display: 'text',
@@ -77,13 +76,11 @@ export default {
         type: 'STRING',
         valuedata: '',
         isOneData: true,
-        isObject: true,
+        isObject: true
       },
       itemdata_channel: {
         col: 1,
-        colid:
-          this.$store.state.customize.forginkeys.columnIds.plateform_sku
-          || '1700806533',
+        colid: this.$store.state.customize.forginkeys.columnIds.plateform_sku || '1700806533',
         colname: 'SG_B_CHANNEL_PRODUCT_ID',
         datelimit: 'all',
         display: 'text',
@@ -108,14 +105,13 @@ export default {
           // 该值为过滤功能的配置项
           fixcolumn: 'CP_C_SHOP_ID', // 该值为该选项的上级ID
           expre: 'equal', // 该值为过滤条件 equal为等于
-          srccol: 'CP_C_SHOP_ID', // 改值为该选项的上级字段名
-        },
+          srccol: 'CP_C_SHOP_ID' // 改值为该选项的上级字段名
+        }
       },
       itemdata_xitong_pro: {
         // 系统商品款号
         col: 1,
-        colid:
-          this.$store.state.customize.forginkeys.columnIds.pro || '1700806532',
+        colid: this.$store.state.customize.forginkeys.columnIds.pro || '1700806532',
         colname: 'PS_C_PRO_ID',
         datelimit: 'all',
         display: 'text',
@@ -135,14 +131,12 @@ export default {
         type: 'STRING',
         valuedata: '',
         isOneData: true,
-        isObject: true,
+        isObject: true
       },
       itemdata_channel_pro: {
         // 平台商品ID
         col: 1,
-        colid:
-          this.$store.state.customize.forginkeys.columnIds.plateform_pro
-          || '1700806533',
+        colid: this.$store.state.customize.forginkeys.columnIds.plateform_pro || '1700806533',
         colname: 'IP_C_TAOBAO_PRODUCT_ID',
         datelimit: 'all',
         display: 'text',
@@ -161,13 +155,13 @@ export default {
         statsize: -1,
         type: 'STRING',
         valuedata: '',
-        isOneData: true,
+        isOneData: true
       },
       currentTab: 0, // 当前选中
       productslistView: {
         current: 1,
         total: 0,
-        pageSize: 10,
+        pageSize: 10
       },
       productsArrsView: [],
       currentView: '',
@@ -177,9 +171,9 @@ export default {
       dialogSet: {
         dialogTitle: '',
         footerHide: true,
-        mask: true,
+        mask: true
       },
-      moduleMode: 'info',
+      moduleMode: 'info'
     };
   },
   computed: {
@@ -224,7 +218,9 @@ export default {
         itemdata.fkdisplay = 'mop';
         itemdata.isObject = true;
         return itemdata;
-      } catch (e) {}
+      } catch (e) {
+        throw new Error(e);
+      }
     },
     groups() {
       return this.$store.state.customize.forginkeys.groups;
@@ -263,20 +259,14 @@ export default {
     onlyShowRules() {
       // 只显示满足条件规则
       // 全场 & 梯度否
-      if (
-        this.basicData.activity_type === 'PA'
-        && this.basicData.gradient_gift === '0'
-      ) {
-        this.infoData.rules.forEach((rule) => {
+      if (this.basicData.activity_type === 'PA' && this.basicData.gradient_gift === '0') {
+        this.infoData.rules.forEach(rule => {
           rule.show = true;
         });
         return true;
       }
-      if (
-        this.basicData.activity_type === 'GA'
-        && this.basicData.gradient_gift === '0'
-      ) {
-        this.infoData.rules.forEach((rule) => {
+      if (this.basicData.activity_type === 'GA' && this.basicData.gradient_gift === '0') {
+        this.infoData.rules.forEach(rule => {
           rule.show = true;
           if (rule.name === 'QTTY') {
             rule.filterPdtWayShow = true;
@@ -301,7 +291,7 @@ export default {
     showRulesContent() {
       if (this.basicData.gradient_gift === '0') return true;
       return false;
-    },
+    }
   },
   methods: {
     /**
@@ -336,7 +326,7 @@ export default {
     addRowData(rowObj) {
       // 非搭配--增加行
       const obj = {};
-      this.columns.forEach((col) => {
+      this.columns.forEach(col => {
         obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : '';
       });
       // obj.itemdata = JSON.parse(JSON.stringify(this.itemdata));
@@ -375,7 +365,7 @@ export default {
     addOneTableRowData(tabindex, rowObj) {
       // 搭配-增加行数据
       const obj = {};
-      this.columns.forEach((col) => {
+      this.columns.forEach(col => {
         obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : '';
       });
       // obj.itemdata = JSON.parse(JSON.stringify(this.itemdata));
@@ -405,7 +395,7 @@ export default {
     addGroup() {
       // 增加搭配
       const obj = {};
-      this.columns.forEach((col) => {
+      this.columns.forEach(col => {
         obj[col.key] = '';
       });
       const group = {
@@ -415,10 +405,10 @@ export default {
             show: false,
             name: 'QTTY', // 条件名称
             type: 'GE', // 条件类型：大于，等于
-            value: '', // 条件值
-          },
+            value: '' // 条件值
+          }
         ],
-        productslist: [...obj],
+        productslist: [...obj]
       };
       this.infoData.productsArrs.push(group);
       this.currentTab = this.getProductsArrsIndex - 1;
@@ -437,10 +427,7 @@ export default {
       this.countOneTablelistView(this.currentTab);
     },
     showRules(index, rule) {
-      if (
-        this.basicData.activity_type === 'PA'
-        && this.basicData.gradient_gift === '0'
-      ) {
+      if (this.basicData.activity_type === 'PA' && this.basicData.gradient_gift === '0') {
         return true;
       }
       if (this.infoData.products_join === '2' && rule.name === 'QTTY') {
@@ -455,7 +442,7 @@ export default {
         total: 0,
         current: 1,
         pageSize: 10,
-        data: [],
+        data: []
       };
       this.productsArrsView = [];
     },
@@ -478,20 +465,14 @@ export default {
      */
     onePageChange(tabindex, val) {
       this.productsArrsView[tabindex].current = val;
-      this.tablelistView(
-        this.infoData.productsArrs[tabindex].productslist,
-        this.productsArrsView[tabindex]
-      );
+      this.tablelistView(this.infoData.productsArrs[tabindex].productslist, this.productsArrsView[tabindex]);
     },
     /**
      * 切换tab页面的表格的页长度
      */
     onOnePageSizeChange(tabindex, val) {
       this.productsArrsView[tabindex].pageSize = val;
-      this.tablelistView(
-        this.infoData.productsArrs[tabindex].productslist,
-        this.productsArrsView[tabindex]
-      );
+      this.tablelistView(this.infoData.productsArrs[tabindex].productslist, this.productsArrsView[tabindex]);
     },
     /**
      * 单表格添加和删除 灵活展示表格
@@ -538,7 +519,7 @@ export default {
         current: 1,
         total: 0,
         pageSize: 10,
-        data: [],
+        data: []
       };
       this.productsArrsView.push(obj);
     },
@@ -581,7 +562,7 @@ export default {
     getButtonFkChoose() {
       const rs = this.itemdataFk || {};
       const namelist = JSON.parse(rs.pid).nameList;
-      namelist.forEach((obj) => {
+      namelist.forEach(obj => {
         const row = {};
         if (rs.reftable === 'SG_B_CHANNEL_PRODUCT') {
           row.ECODE = obj.PS_C_SKU_ECODE || '';
@@ -607,7 +588,7 @@ export default {
     getOnePageButtonFkChoose(tabindex, val) {
       const rs = val || {};
       const namelist = JSON.parse(rs.pid).nameList;
-      namelist.forEach((obj) => {
+      namelist.forEach(obj => {
         const row = {};
         if (rs.reftable === 'SG_B_CHANNEL_PRODUCT') {
           row.ECODE = obj.PS_C_SKU_ECODE || '';
@@ -645,7 +626,7 @@ export default {
         current: 1,
         total: 0,
         pageSize: 10,
-        data: [],
+        data: []
       };
       if (this.infoData.products_join === '1') {
         this.productslistView = obj;
@@ -658,10 +639,7 @@ export default {
           }
           const o = JSON.parse(JSON.stringify(obj));
           this.productsArrsView.push(o);
-          this.tablelistView(
-            this.infoData.productsArrs[index].productslist,
-            this.productsArrsView[index]
-          );
+          this.tablelistView(this.infoData.productsArrs[index].productslist, this.productsArrsView[index]);
         });
       }
     },
@@ -674,10 +652,7 @@ export default {
       this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
       this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
       const _component = 'popdialog';
-      Vue.component(
-        _component,
-        Vue.extend(_import('onlinePromotion/components/importDialog'))
-      );
+      Vue.component(_component, Vue.extend(_import('onlinePromotion/components/importDialog')));
       self.currentView = _component;
       self.dialogSet.dialogTitle = '导入';
       self.show_dialog = true;
@@ -696,11 +671,7 @@ export default {
      */
     returnOneTableData(data, tabindex) {
       if (data && data.length > 0) {
-        this.infoData.productsArrs[
-          tabindex
-        ].productslist = this.infoData.productsArrs[
-          tabindex
-        ].productslist.concat(data);
+        this.infoData.productsArrs[tabindex].productslist = this.infoData.productsArrs[tabindex].productslist.concat(data);
         this.countOneTablelistView(tabindex);
       }
     },
@@ -709,8 +680,8 @@ export default {
      */
     closeDialog() {
       this.show_dialog = false;
-    },
+    }
   },
 
-  mounted() {},
+  mounted() {}
 };

@@ -42,8 +42,8 @@ export default {
             row: 1,
             statsize: -1,
             type: 'STRING',
-            valuedata: '',
-          },
+            valuedata: ''
+          }
         }, // 收货省份
         stores: {
           isActive: true,
@@ -70,9 +70,9 @@ export default {
             row: 1,
             statsize: -1,
             type: 'STRING',
-            valuedata: '',
-          },
-        }, // 店铺名称
+            valuedata: ''
+          }
+        } // 店铺名称
       },
       itemdata: {
         // 平台商品
@@ -98,7 +98,7 @@ export default {
         valuedata: '',
         isObject: true,
         isSimulation: true,
-        isGetValue: true,
+        isGetValue: true
       },
       products_columns: tabList.products_columns,
       result_columns: tabList.result_columns,
@@ -109,9 +109,9 @@ export default {
       productslistView: {
         current: 1,
         total: 0,
-        pageSize: 10,
+        pageSize: 10
       },
-      productsArrsView: [],
+      productsArrsView: []
     };
   },
   props: [],
@@ -120,7 +120,7 @@ export default {
     detailtable,
     MultipleBox,
     SingleBox,
-    ButtonFkDialog,
+    ButtonFkDialog
   },
   computed: {
     groups() {
@@ -134,22 +134,24 @@ export default {
         itemdata.fkdisplay = 'mop';
         itemdata.isObject = true;
         return itemdata;
-      } catch (e) {}
-    },
+      } catch (e) {
+        throw new Error(e);
+      }
+    }
   },
   watch: {
     basicData: {
-      handler(val, old) {
+      handler() {
         this.result_data = [];
       },
-      deep: true,
+      deep: true
     },
     products_data: {
-      handler(val, old) {
+      handler() {
         this.result_data = [];
       },
-      deep: true,
-    },
+      deep: true
+    }
   },
   methods: {
     handleTimeLimitChange(val) {
@@ -167,7 +169,7 @@ export default {
     },
     add_prolist(objRow) {
       const obj = {};
-      this.products_columns.forEach((col) => {
+      this.products_columns.forEach(col => {
         if (col.key == 'ALLSUM') {
           obj[col.align] = 'right';
           obj[col.color] = 'red';
@@ -234,7 +236,7 @@ export default {
       if (rs.isGetValue) {
         namelist = await this.isGetIndexValue(rs.reftable, namelist);
       }
-      namelist.forEach((obj) => {
+      namelist.forEach(obj => {
         const row = {};
         if (rs.reftable === 'SG_B_CHANNEL_PRODUCT') {
           row.ECODE = obj.PS_C_SKU_ECODE || '';
@@ -259,17 +261,19 @@ export default {
       });
       const params = {
         table: reftable,
-        ids: arr,
+        ids: arr
       };
       simParam.append('param', JSON.stringify(params));
-      const { data: { code, message, data } } = await this.service.promotionCenter.selectProInfo(formData); 
+      const {
+        data: { code, message, data }
+      } = await this.service.promotionCenter.selectProInfo(formData);
       console.log(code, message, data);
       if (code === 0) {
         resolve(data);
       } else {
         this.$message({
           type: 'error',
-          message,
+          message
         });
       }
       // return new Promise((resolve) => {
@@ -301,8 +305,8 @@ export default {
         // label: "促销活动", // tab中文名
         label: window.vmI18n.t('panel_label.promotionList'),
         query: Object.assign({
-          id: 2895,
-        }), // 带的参数
+          id: 2895
+        }) // 带的参数
       });
     },
     async execute_simulation() {
@@ -311,18 +315,20 @@ export default {
       if (checkSimulation.code == '-1') {
         self.$message({
           message: checkSimulation.message,
-          type: 'warning',
+          type: 'warning'
         });
         return;
       }
       //  仿真试算
       const params = {
         basicData: this.basicData,
-        products_data: this.products_data,
+        products_data: this.products_data
       };
       const formData = new URLSearchParams();
       formData.append('param', JSON.stringify(params));
-      const { data: { code, message, data } } = await this.service.promotionCenter.testPm(formData); 
+      const {
+        data: { code, message, data }
+      } = await this.service.promotionCenter.testPm(formData);
       console.log(code, message, data);
       if (code === 0) {
         console.log('data', data);
@@ -331,13 +337,13 @@ export default {
         self.$message({
           type: 'success',
           // message: "试算成功！",
-          message: window.vmI18n.t('modalTips.t5'),
+          message: window.vmI18n.t('modalTips.t5')
         });
       } else {
         self.result_data = [];
         self.$message({
           type: 'error',
-          message,
+          message
         });
       }
       // axios({
@@ -368,12 +374,8 @@ export default {
       // 初始化数据
       try {
         const groups = this.groups;
-        this.basicData.time_type = groups.timeTypes.find(
-          item => item.value == 2
-        ).value;
-        this.basicData.order_list = groups.orderTypes.find(
-          item => item.value == 1
-        ).value;
+        this.basicData.time_type = groups.timeTypes.find(item => item.value == 2).value;
+        this.basicData.order_list = groups.orderTypes.find(item => item.value == 1).value;
         // this.basicData.platform_mark = groups.platformTabs.find((item)=>{
         //     return item.title == '手机';
         // }).value;
@@ -420,9 +422,7 @@ export default {
             // return { code: -1, message: `商品列表第${i + 1}行数据未填写完毕` };
             return {
               code: -1,
-              message: `${window.vmI18n.t('modalTips.s2')}${i + 1}${window.vmI18n.t(
-                'modalTips.s3'
-              )}`,
+              message: `${window.vmI18n.t('modalTips.s2')}${i + 1}${window.vmI18n.t('modalTips.s3')}`
             };
           }
         }
@@ -448,10 +448,10 @@ export default {
       delete row._index;
       delete row.colspan;
       delete row._rowKey;
-    },
+    }
   },
   created() {
     this.initData();
   },
-  mounted() {},
+  mounted() {}
 };

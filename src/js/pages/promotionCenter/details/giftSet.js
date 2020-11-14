@@ -63,7 +63,9 @@ export default {
         itemdata.fkdisplay = 'mop';
         itemdata.isObject = true;
         return itemdata;
-      } catch (e) {}
+      } catch (e) {
+        throw new Error(e);
+      }
     }
   },
   watch: {
@@ -114,10 +116,11 @@ export default {
       popDialog: '', // 弹框
       dialogModal: {},
       show_dialog: false,
-      dialogSet: { // 弹框设置
-         dialogTitle: '',
-         footerHide: true,
-         mask: true,
+      dialogSet: {
+        // 弹框设置
+        dialogTitle: '',
+        footerHide: true,
+        mask: true
       },
       moduleMode: 'gift'
     };
@@ -156,10 +159,10 @@ export default {
         const arrs = this.giftData.gift_productsArrs[tabindex].productslist || [];
         if (this.giftData.gift_productsArrs[tabindex].productslist.length <= 1) {
           this.$message({
-              type: 'warning',
-              message: '至少保留一条条件信息'
-           });
-           return;
+            type: 'warning',
+            message: '至少保留一条条件信息'
+          });
+          return;
         }
         arrs.splice(rowindex, 1);
         this.countOneTablelistView(tabindex);
@@ -174,8 +177,8 @@ export default {
         if (col.key === 'ORDER') obj[col.key] = this.giftData.gift_productsArrs[tabindex].productslist.length + 1;
       });
       if (rowObj) {
-          obj.ID = rowObj.ID || '';
-          obj.SKU_ID = rowObj.SKU_ID || '';
+        obj.ID = rowObj.ID || '';
+        obj.SKU_ID = rowObj.SKU_ID || '';
       }
       this.giftData.gift_productsArrs[tabindex].productslist.push(obj);
       this.countOneTablelistView(tabindex);
@@ -183,7 +186,6 @@ export default {
     addRowData(event, rowObj) {
       // 非搭配--增加行
       const obj = {};
-
 
       this.columns.forEach(col => {
         obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : '';
@@ -204,10 +206,10 @@ export default {
       const index = rowCount + row._index;
       if (this.giftData.gift_productslist.length <= 1) {
         this.$message({
-              type: 'warning',
-              message: '至少保留一条赠品信息'
-           });
-           return;
+          type: 'warning',
+          message: '至少保留一条赠品信息'
+        });
+        return;
       }
       if (index >= 0) {
         this.giftData.gift_productslist.splice(index, 1);
@@ -228,13 +230,13 @@ export default {
       this.removeGroupView(delTab);
       this.countOneTablelistView(this.currentTab);
     },
-     /**
+    /**
      *  设置商品池
      */
     setCommodity() {
       this.$emit('setcommodity');
     },
-        /**
+    /**
      *  添加阶梯
      */
     addSteps() {
@@ -270,40 +272,28 @@ export default {
      */
     pageChange(val) {
       this.productslistView.current = val;
-      this.tablelistView(
-        this.giftData.gift_productslist,
-        this.productslistView
-      );
+      this.tablelistView(this.giftData.gift_productslist, this.productslistView);
     },
     /**
      * 切换非tab页面的表格的页长度
      */
     onPageSizeChange(val) {
       this.productslistView.pageSize = val;
-      this.tablelistView(
-        this.giftData.gift_productslist,
-        this.productslistView
-      );
+      this.tablelistView(this.giftData.gift_productslist, this.productslistView);
     },
     /**
      * 切换tab页面的表格的页数
      */
     onePageChange(tabindex, val) {
       this.productsArrsView[tabindex].current = val;
-      this.tablelistView(
-        this.giftData.gift_productsArrs[tabindex].productslist,
-        this.productsArrsView[tabindex]
-      );
+      this.tablelistView(this.giftData.gift_productsArrs[tabindex].productslist, this.productsArrsView[tabindex]);
     },
     /**
      * 切换tab页面的表格的页长度
      */
     onOnePageSizeChange(tabindex, val) {
       this.productsArrsView[tabindex].pageSize = val;
-      this.tablelistView(
-        this.giftData.gift_productsArrs[tabindex].productslist,
-        this.productsArrsView[tabindex]
-      );
+      this.tablelistView(this.giftData.gift_productsArrs[tabindex].productslist, this.productsArrsView[tabindex]);
     },
     /**
      * 单表格添加和删除 灵活展示表格
@@ -419,14 +409,14 @@ export default {
           row.ENAME = obj.PS_C_PRO_ENAME || '';
           row.ID = obj.SKU_ID;
         } else if (rs.reftable === 'IP_C_TAOBAO_PRODUCT') {
-             row.ECODE = obj.NUM_IID || '';
-             row.ENAME = obj.TITLE || '';
-             row.ID = obj.ID;
-         } else if (rs.reftable === 'PS_C_PRO') {
-             row.ECODE = obj.ECODE || '';
-             row.ENAME = obj.ENAME || '';
-             row.ID = obj.ID || '';
-         } else {
+          row.ECODE = obj.NUM_IID || '';
+          row.ENAME = obj.TITLE || '';
+          row.ID = obj.ID;
+        } else if (rs.reftable === 'PS_C_PRO') {
+          row.ECODE = obj.ECODE || '';
+          row.ENAME = obj.ENAME || '';
+          row.ID = obj.ID || '';
+        } else {
           row.ECODE = obj.ECODE || '';
           row.ENAME = obj.PS_C_PRO_ENAME || '';
           row.ID = obj.ID;
@@ -446,19 +436,19 @@ export default {
      * 定制列元素
      */
     customeColumns() {
-      let cols = [];     
+      let cols = [];
       if (this.giftData.gift_methods === '2') {
         if (this.giftData.give_num_share === '1') {
-           cols = JSON.parse(JSON.stringify(this.tableCols.giftInCreaseNoSUMColumns));
-         } else {
-         cols = JSON.parse(JSON.stringify(this.tableCols.giftInCreaseColumns));
-         }
-       } else if (this.giftData.give_num_share === '1') {
-           cols = JSON.parse(JSON.stringify(this.tableCols.giftNoSumColumns));
-         } else {
-           cols = JSON.parse(JSON.stringify(this.tableCols.giftAllColumns));
-         }
-      
+          cols = JSON.parse(JSON.stringify(this.tableCols.giftInCreaseNoSUMColumns));
+        } else {
+          cols = JSON.parse(JSON.stringify(this.tableCols.giftInCreaseColumns));
+        }
+      } else if (this.giftData.give_num_share === '1') {
+        cols = JSON.parse(JSON.stringify(this.tableCols.giftNoSumColumns));
+      } else {
+        cols = JSON.parse(JSON.stringify(this.tableCols.giftAllColumns));
+      }
+
       cols.forEach(column => {
         if (column.key === 'SUM_QTY') {
           if (this.basicData.status === '1' || this.objid == '-1') {
@@ -491,23 +481,17 @@ export default {
       };
       if (this.basicData.gradient_gift === '0') {
         this.productslistView = obj;
-        this.tablelistView(
-          this.giftData.gift_productslist,
-          this.productslistView
-        );
+        this.tablelistView(this.giftData.gift_productslist, this.productslistView);
       } else {
         this.productsArrsView = [];
         this.giftData.gift_productsArrs.forEach((item, index) => {
           const o = JSON.parse(JSON.stringify(obj));
           this.productsArrsView.push(o);
-          this.tablelistView(
-            this.giftData.gift_productsArrs[index].productslist,
-            this.productsArrsView[index]
-          );
+          this.tablelistView(this.giftData.gift_productsArrs[index].productslist, this.productsArrsView[index]);
         });
       }
     },
-     /**
+    /**
      * 导入
      */
     importData() {
@@ -516,10 +500,7 @@ export default {
       this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
       this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
       const _component = 'popdialog';
-      Vue.component(
-        _component,
-        Vue.extend('@/views/pages/promotionCenter/components/importDialog')
-      );
+      Vue.component(_component, Vue.extend('@/views/pages/promotionCenter/components/importDialog'));
       self.currentView = _component;
       self.dialogSet.dialogTitle = '导入';
       self.show_dialog = true;
@@ -528,24 +509,24 @@ export default {
      * 返回值，用于弹框返回解析
      */
     returnData(data) {
-       if (data && data.length > 0) {
-          this.giftData.gift_productslist = this.giftData.gift_productslist.concat(data);
-          this.countTablelistView();
-       }
+      if (data && data.length > 0) {
+        this.giftData.gift_productslist = this.giftData.gift_productslist.concat(data);
+        this.countTablelistView();
+      }
     },
-     /**
+    /**
      * 返回值，用于弹框导入返回调添加多个表
      */
     returnOneTableData(data, tabindex) {
-       if (data && data.length > 0) {
-         if (this.giftData.give_num_share == '1') {
-           data.forEach((item, index)=>{
-             item.SUM = 0;
-           });
-         }
-          this.giftData.gift_productsArrs[tabindex].productslist = this.giftData.gift_productsArrs[tabindex].productslist.concat(data);
-          this.countOneTablelistView(tabindex);
-       }
+      if (data && data.length > 0) {
+        if (this.giftData.give_num_share == '1') {
+          data.forEach((item, index) => {
+            item.SUM = 0;
+          });
+        }
+        this.giftData.gift_productsArrs[tabindex].productslist = this.giftData.gift_productsArrs[tabindex].productslist.concat(data);
+        this.countOneTablelistView(tabindex);
+      }
     },
     /**
      * 商品池保存

@@ -285,7 +285,7 @@ export default {
       const _this = this;
       _this.isSaveLoading = true;
       const {
-        data: { code, message, data }
+        data: { code, data }
       } = await this.service.strategyPlatform.getExpressAreaTree({
         objid: objid || this.$route.params.customizedModuleId
       });
@@ -406,7 +406,7 @@ export default {
         });
       } else {
         _this.$message.error(
-          data.message || _this.vmI18n.t('modalTips.z3') // 失败
+          message || _this.vmI18n.t('modalTips.z3') // 失败
         );
       }
     },
@@ -527,11 +527,11 @@ export default {
       } = await this.service.strategyPlatform.exportExpressAreaItem(param);
       console.log(code, message, data);
       if (code === 0) {
-        const ess = data.message || _this.vmI18n.t('modalTips.z2'); // 导出成功
+        const ess = message || _this.vmI18n.t('modalTips.z2'); // 导出成功
         _this.$message.success(ess);
         _this.downloadUrlFile(data);
       } else {
-        const err = data.message || _this.vmI18n.t('modalTips.y6'); // 导出失败
+        const err = message || _this.vmI18n.t('modalTips.y6'); // 导出失败
         _this.$message.success(err);
         _this.downloadUrlFile(data);
       }
