@@ -19,7 +19,6 @@ export const buttonPermissionsMixin = {
             a.push(item);
           }
         });
-        console.log(a, 'a');
         const c = [];
         result.forEach((element, index) => {
           if (element.child) {
@@ -35,6 +34,7 @@ export const buttonPermissionsMixin = {
         if (isIndependent) {
           return independent;
         }
+        console.log('c-----', c);
         this[arrry].buttons = [...c, ...a];
       });
     },

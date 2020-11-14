@@ -145,6 +145,9 @@ export default {
         });
       }
     });
+    this.$nextTick(()=>{
+      this.getPermissions('tableConfig.businessButtonConfig', 'orderManager');
+    });
   },
   methods: {
     // 切换组合商品下拉
@@ -878,26 +881,6 @@ export default {
         AD_ACTION_NAME: 'orderManager'
       })
     };
-    _this.service.common.fetchActionsInCustomizePage(query).then(res => {
-      console.log(res.data.data);
-      const c = [];
-      const resData = res.data.data || [];
-      resData.forEach((element) => {
-        _this.tableConfig.businessButtonConfig.buttons.forEach((btn) => {
-          if (element.webdesc == btn.text) {
-            c.push({
-              btnclick: btn.btnclick,
-              text: btn.text,
-              isShow: !btn.ishide,
-              icon: btn.icon
-            });
-          }
-        });
-      });
-      _this.tableConfig.businessButtonConfig.buttons = c;
-    }).catch((e) => {
-      console.log(e);
-    });
     this.getColumns();
 
     if (this.componentData && this.componentData.tablename) {
