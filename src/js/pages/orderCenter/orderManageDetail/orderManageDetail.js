@@ -827,7 +827,8 @@ export default {
       }
     },
   },
-  created() {
+ async created() {
+  this.getPermissions('btnConfig', 'orderManager');
     const id = this.$route.params.customizedModuleId ? this.$route.params.customizedModuleId : -1;
     this.objId = id;
     this.tab1 = {
@@ -870,12 +871,7 @@ export default {
       },
     };
     this.pageLoad = true;
-    this.$nextTick(() => {
-      this.pageLoad = false;
-      this.load();
-      this.getPermissions('btnConfig', 'orderManager');
-    });
-      this.service.common.selectLimitGroups(['UPLOAD_SAP_STATUS']).then(res=>{
+     await this.service.common.selectLimitGroups(['UPLOAD_SAP_STATUS']).then(res=>{
         if (Array.isArray(res.data)) {
         res.data.forEach((item) => {
           this.enumerationList[item.name] = item.adLimitvalues.map(val => ({
@@ -889,5 +885,6 @@ export default {
       }).catch(() => {
       this.pageLoad = false;
     });
+      await this.load();
   },
 };
