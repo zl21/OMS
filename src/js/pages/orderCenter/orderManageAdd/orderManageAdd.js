@@ -1821,6 +1821,8 @@ export default {
                 }
               });
             } else {
+              // 如果为新增明细,手动添加TID属性,TID取已有明细第一条明细的TID,如果没有则穿空.
+              item.ITD = _this.jordanTableConfig.data[0].TID;
               const arr = [];
               arr.push(item);
               _this.jordanTableConfig.data = _this.jordanTableConfig.data.concat(
