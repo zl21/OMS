@@ -6,7 +6,7 @@ import jordanLabel from 'professionalComponents/businessLabel';
 import jordanModal from 'professionalComponents/businessDialog';
 import jordanActionTable from 'professionalComponents/businessActionTable';
 import jordanStatusFlag from 'professionalComponents/businessStatusFlag';
-import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
+import publicMethodsUtil from '@/assets/js/public/publicMethods';
 
 export default {
   components: {
@@ -43,7 +43,9 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'modifyWarehouse', // 组件名称
-        url: 'strategyPlatform/sendSingleRule/modifyWarehouse',
+        // src/views/modal/strategyPlatform/setWarehouseLogistics/modifyLogistics
+        // src/views/modal/
+        url: 'orderCenter/modifyWarehouse',
         keepAlive: true,
         excludeString: 'modifyWarehouse', // 将name传进去，确认不缓存
         componentData: {}
