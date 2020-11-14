@@ -63,6 +63,12 @@ export default {
                 // this.modifyGoodsCheck();
                 this.replaceGoodsDetail();
               } // 按钮点击事件
+            },
+            {
+              text: '标记取消退款',
+              btnclick: () => {
+                this.flagCalcelRefund();
+              }
             }
           ]
         }, // 按钮配置
@@ -194,6 +200,28 @@ export default {
           self.$Message.success(res.data.message);
         } else {
           self.$Message.error(res.data.message);
+        }
+      });
+    },
+    // 标记取消退款
+    flagCalcelRefund() {
+      const self = this;
+      const ids = this.checkSelection.map(row => row.ID);
+      if (ids.length === 0) {
+        self.$Message.error('至少选择一条订单明细'); 
+        return;
+      }
+      
+      axios({
+        url: '/api/cs/oc/oms/v1/markRefundCancel',
+        method: 'post',
+        data: { itemIds: ids.join(','), orderId: this.$route.params.customizedModuleId }
+      }).then((res) => {
+        if (res.data.data.code === 0) {
+          self.$parent.$parent.load();
+          self.$Message.success(res.data.data.message);
+        } else {
+          self.$Message.error(res.data.data.message);
         }
       });
     },

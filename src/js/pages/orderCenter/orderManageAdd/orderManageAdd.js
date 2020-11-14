@@ -229,14 +229,15 @@ export default {
                 ocBorderDto,
                 ocBorderItemDto,
               };
+              const copyID = self.$route.query;
               // 新增订单走新保存（去掉草稿模式）
-              if (self.$route.params.customizedModuleId === '-1') {
+              
+              if (self.$route.params.customizedModuleId === '-1' && !(copyID.orderCopy || copyID.copyOrder)) {
                 self.saveAdd(data);
                 return;
               }
               // 如果是丢单复制或者复制订单的保存，传被复制订单的id
               // 如果为丢单复制,则新增一个标识
-              const copyID = self.$route.query;
               if (copyID.orderCopy) {
                 data.type = '2';
                 data.orderId = copyID.id;
