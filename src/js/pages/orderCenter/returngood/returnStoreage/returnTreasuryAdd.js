@@ -200,7 +200,7 @@ export default {
           {
             style: 'input', // 输入框类型
             // label: "原单单号", //输入框前文字
-            label: window.vmI18n.t('table_label.originalOrder_No'),
+            label: window.vmI18n.t('form_label.originalOrder_No'),
             value: 'ORIG_ORDER_NO', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: 'ios-search', // 输入框后带的图标,暂只有输入框支持
@@ -253,7 +253,7 @@ export default {
           {
             style: 'input', // 下拉框类型
             // label: "入库仓库", //下拉框前的值
-            label: window.vmI18n.t('table_label.in_warehouse'),
+            label: window.vmI18n.t('form_label.in_warehouse'),
             width: '6', // 所占宽度宽度
             disabled: true, // 按钮禁用控制
             value: 'IN_STORE_ENAME',
@@ -344,7 +344,7 @@ export default {
           {
             style: 'input',
             // label: "发件地址",
-            label: window.vmI18n.t('table_label.sending_address'),
+            label: window.vmI18n.t('form_label.sending_address'),
             dataAcessKey: 'RECEIVER_ADDRESS',
             disabled: false, // 按钮禁用控制
             value: 'RECEIVER_ADDRESS',
@@ -516,13 +516,13 @@ export default {
       labelList: [
         {
           // label: "入库单商品明细",
-          label: window.vmI18n.t('panel_label.in_warehouse_goods_details'),
+          label: window.vmI18n.t('table_label.in_warehouse_goods_details'),
           value: '1',
           isShow: true,
         },
         {
           // label: "退货入库日志",
-          label: window.vmI18n.t('panel_label.return_warehousing_log'),
+          label: window.vmI18n.t('table_label.return_warehousing_log'),
           value: '2',
           isShow: true,
         },

@@ -1,6 +1,5 @@
 // 引入曼卡龙的弹框组件
 const _import = file => require(`@/views/${file}.vue`).default;
-// const _import = file => require("@/views/modal/publicDialog/importTable.vue").default;
 
 export default {
   name: 'jordanDialog',

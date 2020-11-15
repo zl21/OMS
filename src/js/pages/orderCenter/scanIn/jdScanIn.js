@@ -527,7 +527,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'dilog', // 组件名称
-        url: 'returngood/scanIn/scandilog',
+        url: 'pages/orderCenter/scanIn/scanDialog',
         keepAlive: true,
         excludeString: 'dilog', // 将name传进去，确认不缓存
         componentData: {},

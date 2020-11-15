@@ -63,7 +63,7 @@ export default {
   findDetail: params => network.post('/api/cs/oc/oms/v1/findDetail', params),
   returnSkuDb: params => network.post('/p/cs/returnSkuDb', params),
   checkAllStroreStock: params => network.post('/p/cs/checkAllStroreStock', params),
-  returnOrder: params => network.post('/p/cs/returnOrder', params),
+  returnOrder: params => network.post('api/cs/oc/oms/v1/returnOrder', params),
   extInfoQuery: params => network.post('/p/cs/extInfoQuery', params),
   manualMatchingCheck: params => network.post('/api/cs/oc/oms/v1/manualMatchingCheck', params),
   returnCancel: params => network.post('/api/cs/oc/oms/v1/returnCancel', params),

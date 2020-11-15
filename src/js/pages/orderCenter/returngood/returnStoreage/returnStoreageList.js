@@ -29,18 +29,16 @@ export default {
     businessActionTable,
     businessDialog,
     jordanModal,
-    aTable,
+    aTable
   },
   mixins: [buttonPermissionsMixin, isFavoriteMixin],
   props: {},
   watch: {
     selection: {
       handler(list, oldlist) {
-        this.btnConfig.buttons[2].disabled = !(
-          this.selection && this.selection.length <= 1
-        );
-      },
-    },
+        this.btnConfig.buttons[2].disabled = !(this.selection && this.selection.length <= 1);
+      }
+    }
   },
   data() {
     return {
@@ -60,10 +58,10 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        url: 'importTable',
+        url: 'modal/publicDialog/importTable',
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
-        componentData: {},
+        componentData: {}
       },
       setFromInput: {
         refFuns: 'confirmFun',
@@ -81,7 +79,7 @@ export default {
         url: 'returngood/setFromInput',
         keepAlive: true,
         excludeString: 'setFromInput', // 将name传进去，确认不缓存
-        componentData: {},
+        componentData: {}
       },
       btnConfig: {
         typeAll: 'error',
@@ -91,7 +89,7 @@ export default {
             text: window.vmI18n.t('btn.find'), // 按钮文本
             btnclick: () => {
               this.requestBefore();
-            },
+            }
           },
           {
             // text: "新增",
@@ -106,10 +104,10 @@ export default {
                 query: Object.assign({
                   id: -1, // id
                   // tabTitle: "退货入库新增", //tab中文名
-                  tabTitle: window.vmI18n.t('panel_label.returnTreasuryAdd'),
-                }), // 带的参数
+                  tabTitle: window.vmI18n.t('panel_label.returnTreasuryAdd')
+                }) // 带的参数
               });
-            },
+            }
           },
           {
             // text: "手工匹配",
@@ -119,43 +117,43 @@ export default {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               const ids = this.selection.map(item => item.ID);
-              if (ids.length === 0)
-              // return this.$Message.error("请选择一条明细手工匹配");
-              { return this.$Message.error(window.vmI18n.t('modalTips.p4')); }
-              if (ids.length > 1)
-              // return this.$Message.error("只能选择一条明细手工匹配");
-              { return this.$Message.error(window.vmI18n.t('modalTips.p5')); }
-              if (this.selection[0].IS_OFF_MATCH == 1)
-              // return this.$Message.error("此退货入库单已经关闭匹配，不允许选择");
-              { return this.$Message.error(window.vmI18n.t('modalTips.q6')); }
+              if (ids.length === 0) {
+                // return this.$Message.error("请选择一条明细手工匹配");
+                return this.$Message.error(window.vmI18n.t('modalTips.p4'));
+              }
+              if (ids.length > 1) {
+                // return this.$Message.error("只能选择一条明细手工匹配");
+                return this.$Message.error(window.vmI18n.t('modalTips.p5'));
+              }
+              if (this.selection[0].IS_OFF_MATCH == 1) {
+                // return this.$Message.error("此退货入库单已经关闭匹配，不允许选择");
+                return this.$Message.error(window.vmI18n.t('modalTips.q6'));
+              }
               const id = ids[0];
               // 需要验证是否能够进入手工匹配界面
-              this.service.orderCenter.manualMatchingCheck({ id })
-              // this.$network
-              //   .axios({
-              //     url: '/api/cs/oc/oms/v1/manualMatchingCheck',
-              //     method: 'post',
-              //     data: { id },
-              //   })
-                .then((res) => {
+              this.service.orderCenter
+                .manualMatchingCheck({ id })
+                // this.$network
+                //   .axios({
+                //     url: '/api/cs/oc/oms/v1/manualMatchingCheck',
+                //     method: 'post',
+                //     data: { id },
+                //   })
+                .then(res => {
                   if (res.data.code === 0) {
                     self.$store.commit('customize/TabHref', {
                       id, // id
                       type: 'action', // 类型action
                       name: 'manualMatching', // 文件名
                       // label: "退货入库-手工匹配", //tab中文名
-                      label: window.vmI18n.t(
-                        'panel_label.return_warehousing_manual_matching'
-                      ),
+                      label: window.vmI18n.t('panel_label.return_warehousing_manual_matching'),
                       query: Object.assign({
                         id, // id
                         // tabTitle: "退货入库-手工匹配", //tab中文名
-                        tabTitle: window.vmI18n.t(
-                          'panel_label.return_warehousing_manual_matching'
-                        ),
+                        tabTitle: window.vmI18n.t('panel_label.return_warehousing_manual_matching'),
                         source: 2,
-                        form: 'list',
-                      }), // 带的参数
+                        form: 'list'
+                      }) // 带的参数
                     });
                   } else {
                     // let mes = res.data.message || "状态不匹配不能进入手动匹配";
@@ -163,7 +161,7 @@ export default {
                     self.$Message.error(mes);
                   }
                 });
-            },
+            }
           },
           {
             // text: "错发强制匹配",
@@ -173,43 +171,43 @@ export default {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               const ids = this.selection.map(item => item.ID);
-              if (ids.length === 0)
-              // return this.$Message.error("请选择一条明细错发强制匹配");
-              { return this.$Message.error(window.vmI18n.t('modalTips.p7')); }
-              if (ids.length > 1)
-              // return this.$Message.error("只能选择一条明细错发强制匹配");
-              { return this.$Message.error(window.vmI18n.t('modalTips.p8')); }
-              if (this.selection[0].IS_OFF_MATCH == 1)
-              // return this.$Message.error("此退货入库单已经关闭匹配，不允许选择");
-              { return this.$Message.error(window.vmI18n.t('modalTips.q6')); }
+              if (ids.length === 0) {
+                // return this.$Message.error("请选择一条明细错发强制匹配");
+                return this.$Message.error(window.vmI18n.t('modalTips.p7'));
+              }
+              if (ids.length > 1) {
+                // return this.$Message.error("只能选择一条明细错发强制匹配");
+                return this.$Message.error(window.vmI18n.t('modalTips.p8'));
+              }
+              if (this.selection[0].IS_OFF_MATCH == 1) {
+                // return this.$Message.error("此退货入库单已经关闭匹配，不允许选择");
+                return this.$Message.error(window.vmI18n.t('modalTips.q6'));
+              }
               const id = ids[0];
               // 需要验证是否能够进入错发强制匹配界面
-              this.service.orderCenter.manualMatchingCheck({ id })
-              // this.$network
-              //   .axios({
-              //     url: '/api/cs/oc/oms/v1/manualMatchingCheck',
-              //     method: 'post',
-              //     data: { id },
-              //   })
-                .then((res) => {
+              this.service.orderCenter
+                .manualMatchingCheck({ id })
+                // this.$network
+                //   .axios({
+                //     url: '/api/cs/oc/oms/v1/manualMatchingCheck',
+                //     method: 'post',
+                //     data: { id },
+                //   })
+                .then(res => {
                   if (res.data.code === 0) {
                     self.$store.commit('customize/TabHref', {
                       id, // id
                       type: 'action', // 类型action
                       name: 'manualMatching', // 文件名
                       // label: "退货入库-错发强制匹配", //tab中文名
-                      label: window.vmI18n.t(
-                        'panel_label.idreturn_warehousing_wrong_delivery_forced_matching'
-                      ),
+                      label: window.vmI18n.t('panel_label.idreturn_warehousing_wrong_delivery_forced_matching'),
                       query: Object.assign({
                         id, //
                         // tabTitle: "退货入库-错发强制匹配", //tab中文名
-                        tabTitle: window.vmI18n.t(
-                          'panel_label.idreturn_warehousing_wrong_delivery_forced_matching'
-                        ),
+                        tabTitle: window.vmI18n.t('panel_label.idreturn_warehousing_wrong_delivery_forced_matching'),
                         source: 3,
-                        form: 'list',
-                      }), // 带的参数
+                        form: 'list'
+                      }) // 带的参数
                     });
                   } else {
                     const mes =
@@ -218,7 +216,7 @@ export default {
                     self.$Message.error(mes);
                   }
                 });
-            },
+            }
           },
           {
             // =======================================================暂时影藏
@@ -228,17 +226,19 @@ export default {
             btnclick: () => {
               this.selection = this.$refs.agGridChild.AGTABLE.getSelect();
               const ids = this.selection.map(item => item.ID);
-              if (ids.length === 0)
-              // return this.$Message.error("未选择退货入库单,请选择一条数据后再操作！");
-              { return this.$Message.error(window.vmI18n.t('modalTips.o0')); }
-              this.service.orderCenter.returnCancel({ ids })
-              // this.$network
-              //   .axios({
-              //     url: '/api/cs/oc/oms/v1/returnCancel',
-              //     method: 'post',
-              //     data: { ids },
-              //   })
-                .then((res) => {
+              if (ids.length === 0) {
+                // return this.$Message.error("未选择退货入库单,请选择一条数据后再操作！");
+                return this.$Message.error(window.vmI18n.t('modalTips.o0'));
+              }
+              this.service.orderCenter
+                .returnCancel({ ids })
+                // this.$network
+                //   .axios({
+                //     url: '/api/cs/oc/oms/v1/returnCancel',
+                //     method: 'post',
+                //     data: { ids },
+                //   })
+                .then(res => {
                   if (res.data.code === 0) {
                     // let mes = res.data.message || "作废操作成功";
                     const mes = res.data.message || window.vmI18n.t('modalTips.q9');
@@ -249,7 +249,7 @@ export default {
                     this.$Message.error(mes);
                   }
                 });
-            },
+            }
           },
           {
             type: '', // 按钮类型
@@ -259,31 +259,27 @@ export default {
             btnclick: () => {
               const _this = this;
               _this.importTable.componentData = { tableName: 'OC_B_REFUND_IN' };
-              _this.$children
-                .find(item => item.name === 'importTable')
-                .openConfirm();
-            }, // 按钮点击事件
+              _this.$children.find(item => item.name === 'importTable').openConfirm();
+            } // 按钮点击事件
           },
           {
             // text: "导出", //按钮文本
             text: window.vmI18n.t('btn.export'), // 按钮文本
             btnclick: () => {
               this.exportClick();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             icon: 'iconfont iconbj_setup', // 按钮图标
             btnclick: () => {
               const self = this;
               self.setFromInput.componentData = {
-                typeName: 'OC_B_REFUND_IN',
+                typeName: 'OC_B_REFUND_IN'
               };
               setTimeout(() => {
-                self.$children
-                  .find(item => item.name === 'setFromInput')
-                  .openConfirm();
+                self.$children.find(item => item.name === 'setFromInput').openConfirm();
               }, 100);
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             icon: 'iconfont iconbj_col', // 按钮图标
@@ -292,15 +288,15 @@ export default {
             btnclick: () => {
               const self = this;
               self.setFavorite();
-            }, // 按钮点击事件
-          },
-        ],
+            } // 按钮点击事件
+          }
+        ]
       },
       formConfig: {
         flodClick: 'a',
         formData: [],
         formValue: {},
-        flodClick: () => {},
+        flodClick: () => {}
       },
       // tableConfig: {
       //   parentClass: "parentClass",
@@ -482,12 +478,12 @@ export default {
         columnDefs: [],
         rowData: [],
         renderArr: {
-          ID: (param) => {
+          ID: param => {
             const resDom = document.createElement('a');
             resDom.style['text-decoration'] = 'underline';
             resDom.innerHTML = param.data.ID;
             return resDom;
-          },
+          }
         },
         tableHeight: '600px',
         pagenation: {
@@ -497,14 +493,14 @@ export default {
           pageSize: 20,
           // 页数
           current: 1,
-          pageSizeOpts: [50, 200, 500, 2000],
-        },
+          pageSizeOpts: [50, 200, 500, 2000]
+        }
       },
       selection: [],
       searchObj: {},
       warningModal: false,
       isShowFromLoading: false,
-      isExport: false,
+      isExport: false
     };
   },
   mounted() {
@@ -526,16 +522,17 @@ export default {
         column_include_uicontroller: true,
         fixedcolumns: {},
         multiple: [],
-        startindex: 0,
+        startindex: 0
       };
-      this.service.orderCenter.DynamicList(params)
-      // this.$network
-      //   .axios({
-      //     url: '/api/cs/oc/oms/v1/DynamicList',
-      //     method: 'post',
-      //     data: params,
-      //   })
-        .then((res) => {
+      this.service.orderCenter
+        .DynamicList(params)
+        // this.$network
+        //   .axios({
+        //     url: '/api/cs/oc/oms/v1/DynamicList',
+        //     method: 'post',
+        //     data: params,
+        //   })
+        .then(res => {
           // 高级查询
           const formData = [];
           res.data.data.search.date.map((item, index) => {
@@ -556,14 +553,9 @@ export default {
                     _this.request();
                   }, // 表单回车事件
                   iconclick: () => {}, // 点击icon图标事件
-                  clearable: true,
+                  clearable: true
                 };
-                item.tabth.name === '创建时间'
-                  ? (_this.formConfig.formValue[item.tabth.colname] = [
-                    addSevenDay,
-                    getCurrentTime,
-                  ])
-                  : (_this.formConfig.formValue[item.tabth.colname] = []);
+                item.tabth.name === '创建时间' ? (_this.formConfig.formValue[item.tabth.colname] = [addSevenDay, getCurrentTime]) : (_this.formConfig.formValue[item.tabth.colname] = []);
                 break;
               case 'propInput':
                 formData[index] = {
@@ -591,17 +583,14 @@ export default {
                     statsize: -1,
                     type: item.tabth.type, // 这个是后台用的
                     pid: '',
-                    valuedata: '', // 这个是选择的值
+                    valuedata: '' // 这个是选择的值
                   },
-                  oneObj: (e) => {
+                  oneObj: e => {
                     _this.oneObjs(e);
-                  },
+                  }
                 };
                 if (item.tabth.precolnameslist) {
-                  formData[index].itemdata.precolnameslist = item.tabth
-                    .precolnameslist
-                    ? item.tabth.precolnameslist
-                    : []; 
+                  formData[index].itemdata.precolnameslist = item.tabth.precolnameslist ? item.tabth.precolnameslist : [];
                 }
                 break;
               case 'text':
@@ -618,7 +607,7 @@ export default {
                   inputenter: () => {
                     _this.request();
                   }, // 表单回车事件
-                  iconclick: () => {}, // 点击icon图标事件
+                  iconclick: () => {} // 点击icon图标事件
                 };
                 _this.formConfig.formValue[item.tabth.colname] = '';
                 break;
@@ -636,7 +625,7 @@ export default {
                   inputenter: () => {
                     _this.request();
                   }, // 表单回车事件
-                  iconclick: () => {}, // 点击icon图标事件
+                  iconclick: () => {} // 点击icon图标事件
                 };
                 _this.formConfig.formValue[item.tabth.colname] = '';
                 break;
@@ -649,7 +638,7 @@ export default {
                   value: item.tabth.colname, // 输入框的值
                   multiple: true, // 布尔值,下拉框是否开启多选,默认为不开启
                   selectChange: () => {}, // 选中事件，默认返回选中的值
-                  clearSelect: (e) => {
+                  clearSelect: e => {
                     if (e == 'RETURN_STATUS') {
                       _this.formConfig.formValue.RETURN_STATUS = '';
                     } else if (e == 'IS_ADD') {
@@ -668,7 +657,7 @@ export default {
                       _this.formConfig.formValue.IS_TRANSFER = '';
                     }
                   }, // 点击清空按钮回调
-                  options: _this.converSelect(item.tabth.combobox),
+                  options: _this.converSelect(item.tabth.combobox)
                 };
                 _this.formConfig.formValue[item.tabth.colname] = [];
                 break;
@@ -676,7 +665,7 @@ export default {
           });
           _this.formConfig.formData = formData;
           // 表头赋值
-          res.data.data.columns.forEach((item) => {
+          res.data.data.columns.forEach(item => {
             item.field = item.key;
             item.headerName = item.title;
             delete item.key;
@@ -691,7 +680,7 @@ export default {
     },
     oneObjs(e) {
       const _this = this;
-      _this.formConfig.formData.forEach((item) => {
+      _this.formConfig.formData.forEach(item => {
         if (item.itemdata && item.itemdata.name == e.name) {
           switch (item.itemdata.name) {
             case '物流公司':
@@ -710,13 +699,9 @@ export default {
     // 字段选项组转换
     converSelect(val) {
       const list = [];
-      val.map((item, index) => {
-        list[index] = {
-          label: item.limitdesc,
-          value: item.limitval,
-        };
+      val.forEach(item => {
+        list.push({ label: item.limitdesc, value: item.limitval });
       });
-      return list;
     },
     parentClass() {
       return '';
@@ -728,28 +713,17 @@ export default {
     requestParams() {
       const params = {
         currentPage: this.agTableConfig.pagenation.current || 1, // 当前页
-        pageSize: this.agTableConfig.pagenation.pageSize, // 页大小
+        pageSize: this.agTableConfig.pagenation.pageSize // 页大小
       };
-      this.formConfig.formData.forEach((item) => {
+      this.formConfig.formData.forEach(item => {
         if (item.value === 'CREATETIME') return; // 特殊处理
-        if (
-          item.value === 'MATCH_STATUS'
-          || item.value === 'IS_OFF_MATCH'
-          || item.value === 'PRODUCT_MARK'
-          || item.value === 'IN_STATUS'
-        ) {
+        if (item.value === 'MATCH_STATUS' || item.value === 'IS_OFF_MATCH' || item.value === 'PRODUCT_MARK' || item.value === 'IN_STATUS') {
           const arr = this.formConfig.formValue[item.value];
-          if (
-            Object.prototype.toString.call(arr) === '[object Array]'
-            && arr[0] === 'bSelect-all'
-          ) { return; }
+          if (Object.prototype.toString.call(arr) === '[object Array]' && arr[0] === 'bSelect-all') {
+            return;
+          }
         }
-        if (
-          !strUtil.isObjectEmpty(item.itemdata)
-          && item.itemdata.colname !== ''
-          && item.itemdata.valuedata
-          && item.itemdata.valuedata !== ''
-        ) {
+        if (!strUtil.isObjectEmpty(item.itemdata) && item.itemdata.colname !== '' && item.itemdata.valuedata && item.itemdata.valuedata !== '') {
           const colname = item.itemdata.colname;
           this.formConfig.formValue[colname] = item.itemdata.pid || '';
           params[colname] = this.formConfig.formValue[colname];
@@ -761,14 +735,10 @@ export default {
       const CREATETIME = this.formConfig.formValue.CREATETIME;
       if (CREATETIME && CREATETIME !== []) {
         if (CREATETIME[0] !== '') {
-          params.beginDate = CREATETIME[0]
-            ? CREATETIME[0].Format('yyyy-MM-dd hh:mm:ss')
-            : ''; 
+          params.beginDate = CREATETIME[0] ? CREATETIME[0].Format('yyyy-MM-dd hh:mm:ss') : '';
         }
         if (CREATETIME[1] !== '') {
-          params.endDate = CREATETIME[1]
-            ? CREATETIME[1].Format('yyyy-MM-dd hh:mm:ss')
-            : ''; 
+          params.endDate = CREATETIME[1] ? CREATETIME[1].Format('yyyy-MM-dd hh:mm:ss') : '';
         }
       }
 
@@ -779,25 +749,15 @@ export default {
       self.selection = [];
       self.agTableConfig.agLoading = true;
       const params = this.requestParams();
-      this.service.orderCenter.ReturnStorageList(params)
-      // this.$network
-      //   .axios({
-      //     url: '/api/cs/oc/oms/v1/ReturnStorageList',
-      //     method: 'post',
-      //     data: params,
-      //   })
-        .then((res) => {
-          // if (res.data.code === 1) {
-          self.agTableConfig.agLoading = false;
-          const data = res.data.data || {};
-          self.agTableConfig.rowData = data.queryResult || [];
-          self.agTableConfig.pagenation.total = data.totalSize;
-          self.$refs.agGridChild.agGridTable(
-            self.agTableConfig.columnDefs,
-            self.agTableConfig.rowData
-          );
-          // }
-        });
+      this.service.orderCenter.ReturnStorageList({ params: params }).then(res => {
+        // if (res.data.code === 1) {
+        self.agTableConfig.agLoading = false;
+        const data = res.data.data || {};
+        self.agTableConfig.rowData = data.queryResult || [];
+        self.agTableConfig.pagenation.total = data.totalSize;
+        self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
+        // }
+      });
     },
     // 单击某二行时触发
     onRowDblclick(row, index) {
@@ -817,8 +777,8 @@ export default {
           id: row.ID, // 单据id
           // tabTitle: "退货入库详情",
           tabTitle: window.vmI18n.t('panel_label.returnTreasuryDetails'),
-          statusName: row.INVALIDSTATE,
-        }),
+          statusName: row.INVALIDSTATE
+        })
       });
     },
     // 分页change 事件
@@ -845,15 +805,16 @@ export default {
         const fromdata = new FormData();
         const idList = { idList: ids };
         fromdata.append('param', JSON.stringify(idList));
-        this.service.orderCenter.exportOcBRefundIn(idList)
-        // this.$network
-        //   .axios({
-        //     url: '/api/cs/oc/oms/v1/exportOcBRefundIn',
-        //     method: 'post',
-        //     // cancelToken: true,
-        //     data: idList,
-        //   })
-          .then((res) => {
+        this.service.orderCenter
+          .exportOcBRefundIn(idList)
+          // this.$network
+          //   .axios({
+          //     url: '/api/cs/oc/oms/v1/exportOcBRefundIn',
+          //     method: 'post',
+          //     // cancelToken: true,
+          //     data: idList,
+          //   })
+          .then(res => {
             self.isExport = false;
             if (res.data.code == 0 && res.data.data !== null) {
               // let mes = res.data.message || "导出成功！";
@@ -868,9 +829,10 @@ export default {
             }
           });
       } else {
-        if (self.tableConfig.data.length === 0)
-        // return self.$Message.error("列表没有数据,无法导出!");
-        { return self.$Message.error(window.vmI18n.t('modalTips.z4')); }
+        if (self.tableConfig.data.length === 0) {
+          // return self.$Message.error("列表没有数据,无法导出!");
+          return self.$Message.error(window.vmI18n.t('modalTips.z4'));
+        }
         self.warningModal = true;
       }
     },
@@ -894,14 +856,15 @@ export default {
       const arr = this.requestParams();
       arr.pageSize = 999999;
       const params = JSON.parse(JSON.stringify(arr));
-      this.service.orderCenter.exportOcBRefundIn(params)
-      // this.$network
-      //   .axios({
-      //     url: '/api/cs/oc/oms/v1/exportOcBRefundIn',
-      //     method: 'post',
-      //     data: params,
-      //   })
-        .then((res) => {
+      this.service.orderCenter
+        .exportOcBRefundIn(params)
+        // this.$network
+        //   .axios({
+        //     url: '/api/cs/oc/oms/v1/exportOcBRefundIn',
+        //     method: 'post',
+        //     data: params,
+        //   })
+        .then(res => {
           self.isExport = false;
           if (res.data.code == 0 && res.data.data !== null) {
             // let mes = res.data.message || "导出成功！";
@@ -915,6 +878,6 @@ export default {
             self.$Message.error(err);
           }
         });
-    },
-  },
+    }
+  }
 };

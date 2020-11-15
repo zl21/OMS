@@ -65,7 +65,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'modifyWarehouse', // 组件名称
-        url: 'returngood/modifyWarehouse',
+        url: 'modal/orderCenter/modifyWarehouse',
         keepAlive: true,
         excludeString: 'modifyWarehouse', // 将name传进去，确认不缓存
         componentData: {},
@@ -117,7 +117,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        url: 'importTable',
+        url: 'modal/publicDialog/importTable',
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {},

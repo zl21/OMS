@@ -1137,7 +1137,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'orderNo', // 组件名称
-        url: 'order/orderManager/changeRemark',
+        url: 'modal/orderCenter/changeRemark',
       },
     };
   },
