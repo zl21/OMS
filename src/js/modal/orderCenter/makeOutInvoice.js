@@ -175,7 +175,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: this.vmI18n.t('form_label.cellPhone_numbe'),
+        label: this.vmI18n.t('form_label.cellPhone_number'),
         value: 'RECEIVER_MOBILE', // 输入框的值
         width: '12' // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
       },

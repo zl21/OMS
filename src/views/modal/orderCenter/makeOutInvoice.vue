@@ -3,7 +3,7 @@
     <!-- 开票 -->
     <div class="invoice-header">
       <!-- <span>开票状态:</span> -->
-      <span>{{ vmI18n.t("form_label.billing_statu") }}:</span>
+      <span>{{ vmI18n.t("form_label.billing_status") }}:</span>
       <span>{{
         componentData.QUERYORDERRESULT.INVOICE_STATUS_NAME || "未登记"
       }}</span>
@@ -14,7 +14,7 @@
       </Divider>
       <div>
         <!-- <span>发票类型:</span> -->
-        <span>{{ vmI18n.t("form_label.invoice_type") }}:</span>
+        <span>{{ vmI18n.t('form_label.invoice_type') }}:</span>
         <RadioGroup
           v-model="invoiceType"
           type="button"
@@ -22,7 +22,7 @@
           @on-change="invoiceTypeChange"
         >
           <!-- <Radio label="电子发票"></Radio> -->
-          <Radio :label="vmI18n.t('form_label.electronic_invoic')" />
+          <Radio :label="vmI18n.t('form_label.electronic_invoice')" />
           <!-- <Radio label="纸质发票"></Radio> -->
           <Radio :label="vmI18n.t('form_label.paper_invoice')" />
           <!-- <Radio label="专用发票"></Radio> -->
@@ -33,7 +33,7 @@
           style="margin-left: 20px"
         >
           <!-- 抬头类型 -->
-          {{ vmI18n.t("form_label.invoiceTitle_typ") }}:</span>
+          {{ vmI18n.t("form_label.invoiceTitle_type") }}:</span>
         <RadioGroup
           v-if="!specialInvoiceFlag"
           v-model="invoiceTitleType"
