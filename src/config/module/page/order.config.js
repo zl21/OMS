@@ -1,14 +1,14 @@
-import scanIn from 'allpages/OrdersCenter/scanIn/scanIn.vue';
-import orderManager from 'allpages/OrdersCenter/orderManager/orderManager.vue'; // 零售发货单
+import scanIn from 'allpages/OrderCenter/scanIn/scanIn.vue';
+import orderManager from 'allpages/OrderCenter/orderManager/orderManager.vue'; // 零售发货单
 // 零售发货单-新增
-import orderManageAdd from 'allpages/OrdersCenter/orderManageAdd/orderManageAdd.vue';
-import orderManageDetail from 'allpages/OrdersCenter/orderManageDetail/orderManageDetail.vue'; // 零售发货单-详情
-import splitOrder from 'allpages/OrdersCenter/orderManager/splitOrder.vue';
-import returnGoodManagementList from 'allpages/OrdersCenter/returngood/returngoodmanagementList.vue'; // 订单中心-退换货单
-import returnGood from 'allpages/OrdersCenter/returngood/returngoodmanagement.vue'; // 订单中心-退换货单详情
-import returnStorageList from 'allpages/OrdersCenter/returngood/returnStoreage/returnStoreageList.vue'; // 退货入库-列表
-import returnTreasuryAdd from 'allpages/OrdersCenter/returngood/returnStoreage/returnTreasuryAdd.vue'; // 退货入库-新增 退货入库-新增
-import refundAfterShipment from 'allpages/OrdersCenter/returngood/refundAfterShipment.vue'; // 订单中心-已发货退款单-编辑 额外退款
+import orderManageAdd from 'allpages/OrderCenter/orderManageAdd/orderManageAdd.vue';
+import orderManageDetail from 'allpages/OrderCenter/orderManageDetail/orderManageDetail.vue'; // 零售发货单-详情
+import splitOrder from 'allpages/OrderCenter/orderManager/splitOrder.vue';
+import returnGoodManagementList from 'allpages/OrderCenter/returngood/returngoodmanagementList.vue'; // 订单中心-退换货单
+import returnGood from 'allpages/OrderCenter/returngood/returngoodmanagement.vue'; // 订单中心-退换货单详情
+import returnStorageList from 'allpages/OrderCenter/returngood/returnStoreage/returnStoreageList.vue'; // 退货入库-列表
+import returnTreasuryAdd from 'allpages/OrderCenter/returngood/returnStoreage/returnTreasuryAdd.vue'; // 退货入库-新增 退货入库-新增
+import refundAfterShipment from 'allpages/OrderCenter/returngood/refundAfterShipment.vue'; // 订单中心-已发货退款单-编辑 额外退款
 
 export default {
   // 订单中心-扫描入库

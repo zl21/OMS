@@ -1,6 +1,6 @@
 
 // 库存中心定制界面
-import outboundPickOrder from '@/views/pages/OrdersCenter/scanIn/outboundPickOrder.vue';
+import outboundPickOrder from '@/views/pages/OrderCenter/scanIn/outboundPickOrder.vue';
 import sgChannelSynstockQuery from '@/views/pages/InventoryCenter/sgChannelSynstockQuery.vue'; // 库存同步队列表
 import sgChannelStorageBuffer from '@/views/pages/InventoryCenter/sgChannelStorageBuffer.vue'; // 库存计算缓存池
 

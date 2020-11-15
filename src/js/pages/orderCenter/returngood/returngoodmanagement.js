@@ -10,7 +10,7 @@ import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
 // import OrderItem from './orderItem';
 
-import OrderItem from 'allpages/OrdersCenter/returngood/orderItem.vue';
+import OrderItem from 'allpages/OrderCenter/returngood/orderItem.vue';
 
 const areaList = require('@/assets/js/address/area-list');
 const { parse, parseArea } = require('@/assets/js/address/address-parse');

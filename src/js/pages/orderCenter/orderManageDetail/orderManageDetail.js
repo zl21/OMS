@@ -3,8 +3,8 @@ import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessDialog from 'professionalComponents/businessDialog';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
-import EssentialInfo from '@/views/pages/OrdersCenter/orderManageDetail/details/essentialInfo';
-import OrderItem from '@/views/pages/OrdersCenter/orderManageDetail/details/orderItem';
+import EssentialInfo from '@/views/pages/OrderCenter/orderManageDetail/details/essentialInfo';
+import OrderItem from '@/views/pages/OrderCenter/orderManageDetail/details/orderItem';
 import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
 
 export default {

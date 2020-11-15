@@ -1,5 +1,5 @@
 import MarketCenter from './module/modal/market.config.js'; // ------------促销中心
-import OrdersCenter from './module/modal/order.config.js'; // ------------订单中心
+import OrderCenter from './module/modal/order.config.js'; // ------------订单中心
 import FinanceCenter from './module/modal/finance.config.js'; // -----------财务中心
 import CommodityCenter from './module/modal/commodity.config.js'; // -----------商品中心
 import OrganizationCenter from './module/modal/organization.config.js'; // -----------组织中心
@@ -9,7 +9,7 @@ import InventoryConfig from './module/modal/inventory.config.js'; // -----------
 import InterfaceConfig from './module/modal/Interface.config.js';// ----------接口平台
 
 const allCenterModal = Object.assign(
-  OrdersCenter,
+  OrderCenter,
   MarketCenter,
   FinanceCenter,
   CommodityCenter,

@@ -1,12 +1,11 @@
 import businessButton from 'professionalComponents/businessButton';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessDialog from 'professionalComponents/businessDialog';
-import CusOrderItem from '@/views/pages/OrdersCenter/orderManageDetail/details/custOrderItem';
+import CusOrderItem from 'allpages/OrderCenter/orderManageDetail/details/custOrderItem';
 import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
 
 const _importA = file => require(`${file}.vue`).default;
 // import axios from "axios";
-const self = null;
 export default {
   name: 'EssentialInfo',
   props: {
