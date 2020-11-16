@@ -52,7 +52,7 @@ export default {
                 CPCSHOPID: formData[0].itemdata.pid, // 店铺id
                 ASCRIPTIONID: formData[1].itemdata.pid, // 日程档案id
                 WAHOUSEID: self.$store.state[
-                  getModuleName()
+                  R3.getModuleName()
                 ].buttons.selectIdArr.join(','), // 列表中选中的数据id
                 PHYWAREHOUSE: formData[2].itemdata.pid, // 实体店仓id
                 DELIVERYTYPE:

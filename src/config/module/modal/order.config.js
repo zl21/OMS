@@ -12,7 +12,7 @@ export default {
   VIPDISTRIBUTIONOCCUS: {
     component: () => import('@/views/modal/orderCenter/vipDistributionOccus.vue')
   },
-  // JIT配货单(匹配出仓单)
+  // JIT配货单(匹配出仓单)->改名为(匹配唯品会入库单)
   DELIVERYORDER: {
     component: () => import('@/views/modal/orderCenter/deliveryOrder.vue')
   },

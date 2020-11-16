@@ -29,7 +29,7 @@ export default {
               const param = {
                 deliver_id: pid,
                 delivery_no: valuedata,
-                ids: self.$store.state[getModuleName()].buttons.selectIdArr,
+                ids: self.$store.state[R3.getModuleName()].buttons.selectIdArr,
               };
               const formdata = new FormData();
               formdata.append('param', JSON.stringify(param));
