@@ -227,7 +227,7 @@ export default {
     },
     // 替换商品
     replaceGoodsDetail() {
-      if (this.selection.length == 0) {
+      if (this.checkSelection.length == 0) {
         this.$Message.warning('请选择需要替换的商品!');
         return;
       }

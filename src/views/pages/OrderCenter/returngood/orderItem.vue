@@ -1,6 +1,6 @@
 <template>
   <div>
-    <jordan-action-table
+    <business-action-table
       :jordan-table-config="tableConfig"
       @on-page-change="pageChange"
       @on-page-size-change="pageSizeChange"

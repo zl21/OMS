@@ -58,9 +58,9 @@
             console.log(res);
             if (res.data.code == 0) {
               self.$Message.success(res.data.message);
+              self.$emit('closeActionDialog');
             } else {
               self.$Message.error(res.data.message);
-              self.$emit('closeActionDialog');
             }
           });
         } else {
