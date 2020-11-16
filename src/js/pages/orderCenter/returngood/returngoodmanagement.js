@@ -4115,6 +4115,7 @@ export default {
       _this.order.table.loading = true;
       const fromdata = new FormData();
       const param = {
+        IS_UN_GZIP: true,
         page: {
           pageSize: '500',
           pageNum: '1'
