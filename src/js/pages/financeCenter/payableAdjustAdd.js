@@ -268,7 +268,7 @@ export default {
               const self = this;
               self.getSourceCodeDetail(obj);
             },
-            dimEnter: (e) => {},
+            dimEnter: () => {},
           },
           {
             style: 'input',

@@ -3,8 +3,8 @@ import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import aTable from 'professionalComponents/agGridTable.vue';
 import jordanModal from 'professionalComponents/businessDialog';
-import axios from 'axios';
-import { debug, debuglog } from 'util';
+// import axios from 'axios';
+// import { debug, debuglog } from 'util';
 import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import { customPagingMixins } from '@/assets/js/mixins/customPaging.js';
@@ -788,70 +788,39 @@ export default {
     async fiAudit() {
       const self = this;
       const formdata = self.generateAuditFromdata();
-      const { data: { data, code, message } } = await this.service.financeCenter.fiAuditPayableAdjustment(formdata);
-      console.log(data, code, message);
-      if (code === 0) {
-        self.$Message.success(message);
+      const { data: { data } } = await this.service.financeCenter.fiAuditPayableAdjustment(formdata);
+      if (data.code === 0) {
+        self.$Message.success(data.message);
         self.getList();
+      } else {
+        self.$Message.error(data.message);
       }
-      // axios({
-      //   url: "/p/cs/fiAuditPayableAdjustment",
-      //   method: "post",
-      //   data: formdata,
-      // }).then(function (res) {
-      //   if (res.data.data.code === 0) {
-      //     self.$Message.success(res.data.data.message);
-      //     self.getList();
-      //   } else {
-      //     self.$Message.error(res.data.data.message);
-      //   }
-      // });
     },
     // 客审
     async custAudit() {
       const self = this;
       const formdata = self.generateAuditFromdata();
       // 接口
-      const { data: { code, data, message } } = await this.service.financeCenter.auditPayableAdjustment(formdata);
-      if (code === 0) {
-        self.$Message.success(message);
+      const { data: { data } } = await this.service.financeCenter.auditPayableAdjustment(formdata);
+      if (data.code === 0) {
+        self.$Message.success(data.message);
         self.getList();
+      } else {
+        self.$Message.error(data.message);
       }
-      // axios({
-      //   url: "/p/cs/auditPayableAdjustment",
-      //   method: "post",
-      //   data: formdata,
-      // }).then(function (res) {
-      //   if (res.data.data.code === 0) {
-      //     self.$Message.success(res.data.data.message);
-      //     self.getList();
-      //   } else {
-      //     self.$Message.error(res.data.data.message);
-      //   }
-      // });
     },
     // 反客审
     async unCustAudit() {
       const self = this;
       const formdata = self.generateAuditFromdata();
       // 接口
-      const { data: { code, data, message } } = await this.service.financeCenter.cancelAuditPayableAdjustment(formdata);
-      if (code === 0) {
+      const { data: { data } } = await this.service.financeCenter.cancelAuditPayableAdjustment(formdata);
+      if (data.code === 0) {
         self.$Message.success(vmI18n.t('modalTips.z1'));// 反客审成功!
         self.getList();
+      } else {
+        self.$Message.error(data.message);
       }
-      // axios({
-      //   url: "/p/cs/cancelAuditPayableAdjustment",
-      //   method: "post",
-      //   data: formdata,
-      // }).then((res) => {
-      //   if (res.data.data.code === 0) {
-      //     self.$Message.success(vmI18n.t("modalTips.z1"));//反客审成功!
-      //     self.getList();
-      //   } else {
-      //     self.$Message.error(res.data.data.message);
-      //   }
-      // });
     },
     generateAuditFromdata() {
       const ids = [];
@@ -930,12 +899,12 @@ export default {
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
       // 接口
-      const { data: { code, data, message } } = await this.service.financeCenter.getPayableAdjustmentList(fromdata); 
+      const { data: { code, data } } = await this.service.financeCenter.getPayableAdjustmentList(fromdata); 
       _this.agTableConfig.loading = false;
       _this.returnSelectData = [];
       if (code === 0 && data.payableAdjustmentList.length) {
         // Table表单赋值
-        _this.allTableArr = data.payableAdjustmentList.map(
+        _this.allTableArr = data.payableAdjustmentList.forEach(
           item => 
             // 过滤不需要展示的模糊搜索项
             ({
@@ -1072,9 +1041,8 @@ export default {
       //   );
       // });
     },
-    oneObjs(e) {},
     // 双击时触发
-    onRowDblclick(row, index) {
+    onRowDblclick(row) {
       this.$store.commit('customize/TabHref', {
         id: row.ID, // 单据id
         type: 'action', // 类型action
