@@ -45,10 +45,11 @@ export default {
                 console.log(res);
                 if (res.data.code === 0) {
                   self.$Message.success(res.data.message);
-                  self.$emit('confirmImport');
+                  document.getElementById('reset').click();
+                  // self.$emit('confirmImport');
                 } else {
                   self.$Message.error(res.data.message);
-                  this.$emit('uploadError', res.data.data);
+                  // this.$emit('uploadError', res.data.data);
                 }
                 self.$emit('closeActionDialog');
               });
