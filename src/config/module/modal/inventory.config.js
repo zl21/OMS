@@ -4,7 +4,16 @@ export default {
   CHANNELINVENTORY: {
     component: () => import('@/views/modal/InventoryCenter/channelInventory.vue'),
   },
+  // 出库通知单-按查询条件重传WMS
   QUERYCONDITIONRETRANSMISSIONWMS: {
     component: () => import('@/views/modal/InventoryCenter/queryConditionRetransmissionWms.vue')
-  }
+  },
+  // 出库通知单-重传WMS(按条件)
+  SGPHYOUTNOTICESSENDWMSAGAINCMD: {
+
+  },
+  // 出库结果单-(导入-出库结果单)
+  OUTRESULTIMPORT: {
+    component: () => import('@/views/modal/InventoryCenter/outResultImport.vue')
+  },
 };
