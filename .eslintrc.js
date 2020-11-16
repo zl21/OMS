@@ -31,7 +31,7 @@ module.exports = {
     'linebreak-style': 'off',
     'import/no-cycle': 'off',
     'max-len': 'off',
-    indent: 'off',
+    // indent: 'off',
     // 'no-const-assign': 0, //禁止修改const声明的变量
     'arrow-parens': 0, // 箭头函数用小括号括起来
     'arrow-spacing': 0, // =>的前/后括号
@@ -44,6 +44,7 @@ module.exports = {
     'no-useless-escape': 0, // 转义字符, 这里设置为0则可通过检查
     // quotes: [1, "single"],
     radix: 'off',
+    indent: ['off', 2],
     'no-plusplus': 'off',
     'prefer-destructuring': 'off',
     'global-require': 'off',
