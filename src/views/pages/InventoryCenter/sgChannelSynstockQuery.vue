@@ -53,5 +53,5 @@
 </script>
 
 <style lang="less">
-@import '~@/css/pages/InventoryCenter/sgChannelSynstockQuery.less';
+@import '~@/css/pages/InventoryCenter/sgStorageChangeFtpQuery.less';
 </style>

@@ -139,7 +139,7 @@ export default {
       axios({
         url: '/api/cs/oc/oms/v1/remarkUpdate', // 接口调整,切换服务地址
         method: 'post',
-        cancelToken: true,
+        // cancelToken: true,
         data: param,
       }).then((res) => {
         if (res.data.code === 0) {
