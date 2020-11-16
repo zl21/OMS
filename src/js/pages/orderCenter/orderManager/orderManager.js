@@ -1948,7 +1948,6 @@ export default {
           {
             text: window.vmI18n.t('btn.batch_chargeback'), // 批量退单
             btnclick: () => {
-              debugger;
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               if (self.selection.length > 0) {

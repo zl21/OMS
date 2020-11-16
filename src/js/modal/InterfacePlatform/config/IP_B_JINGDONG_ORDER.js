@@ -121,7 +121,7 @@ export default {
     fromdata.append('param', JSON.stringify(param));
 
     // 请求下载订单接口
-    const { data: { code, message } } = await self.service.interfacePlatform.refundDownload(fromdata);
+    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(fromdata);
     console.log(code, message);
     if (code === 0) {
       self.taskId = message.match(/\d+/)[0];
