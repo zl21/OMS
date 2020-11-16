@@ -58,7 +58,7 @@ export default {
   retransmissionWms: params => network.post('/api/cs/oc/oms/v1/retransmissionWms', params),
   forcedCompletion: params => network.post('/api/cs/oc/oms/v1/forcedCompletion', params),
   exportReturnOrder: params => network.post('/api/cs/oc/oms/v1/exportReturnOrder', params),
-  queryOcBOrder: params => network.post('/p/cs/queryOcBOrder', params),
+  queryOcBOrder: params => network.post('/api/cs/oc/oms/v1/queryOcBOrder', params),
   returnOrderquery: params => network.post('/api/cs/oc/oms/v1/returnOrderquery', params),
   findDetail: params => network.post('/api/cs/oc/oms/v1/findDetail', params),
   returnSkuDb: params => network.post('/p/cs/returnSkuDb', params),
