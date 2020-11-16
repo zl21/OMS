@@ -233,7 +233,7 @@ export default {
     /**
      *  设置商品池
      */
-    setCommodity() {
+    setCommodityEvent() {
       this.$emit('setcommodity');
     },
     /**
