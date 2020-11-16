@@ -749,7 +749,7 @@ export default {
       self.selection = [];
       self.agTableConfig.agLoading = true;
       const params = this.requestParams();
-      this.service.orderCenter.ReturnStorageList({ params: params }).then(res => {
+      this.service.orderCenter.ReturnStorageList({ params }).then(res => {
         // if (res.data.code === 1) {
         self.agTableConfig.agLoading = false;
         const data = res.data.data || {};
