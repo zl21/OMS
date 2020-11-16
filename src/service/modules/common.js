@@ -65,7 +65,7 @@ export default {
   queryOcBOrder: params => network.post('/p/cs/queryOcBOrder', params),
   billCopy: params => network.post('/p/cs/billCopy', params),
   getOrderDetailList: params => network.post('/p/cs/getOrderDetailList', params),
-  returnOrderquery: params => network.post('/p/cs/returnOrderquery', params),
+  returnOrderquery: params => network.post('/api/cs/oc/oms/v1/returnOrderquery', params),
   returnSkuDb: params => network.post('/p/cs/returnSkuDb', params),
   checkAllStroreStock: params => network.post('/p/cs/checkAllStroreStock', params),
   returnOrder: params => network.post('api/cs/oc/oms/v1/returnOrder', params),

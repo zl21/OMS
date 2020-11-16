@@ -1454,7 +1454,7 @@ export default {
                   self.$Message.success(res.data.message);
                   self.btnConfig.buttons[0].disabled = false;
                   self.$store.commit('customize/TabHref', {
-                    id: -1,
+                    id: res.data.data,
                     type: 'action',
                     name: 'orderManageDetail',
                     label: self.vmI18n.t('panel_label.orderManager_edit'), // 订单管理编辑
@@ -1485,7 +1485,7 @@ export default {
               self.$Message.success(res.data.message);
               self.btnConfig.buttons[0].disabled = false;
               self.$store.commit('customize/TabHref', {
-                id: -1,
+                id: res.data.data,
                 type: 'action',
                 name: 'orderManageDetail',
                 label: self.vmI18n.t('panel_label.orderManager_edit'), // 订单管理编辑

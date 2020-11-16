@@ -219,6 +219,7 @@ export default {
   watch: {
     componentData: {
       handler(newobj, oldobj) {
+        debugger;
         this.tableConfig.objid = newobj.order.ID;
         this.tableConfig.order = newobj.order;
       },
