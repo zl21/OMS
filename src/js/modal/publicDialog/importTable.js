@@ -16,7 +16,7 @@ export default {
       loading: false, // 导入中loading
       isError: false, // 是否导入失败
       errorMessage: '', // 导入失败原因
-      configTableName: ['ST_C_PRODUCT_STRATEGY', 'AC_F_RECEIVABLES_ADJUSTMENT', 'SG_B_PHY_OUT_RESULT', 'SC_B_TRANSFER', 'OC_B_MULTI_STORE_DISTRIBUTION', 'OC_B_SEND_OUT', 'OC_B_JD_RETURN_ORDER'],
+      configTableName: ['ST_C_PRODUCT_STRATEGY', 'AC_F_RECEIVABLES_ADJUSTMENT', 'SG_B_PHY_OUT_RESULT', 'SC_B_TRANSFER', 'OC_B_MULTI_STORE_DISTRIBUTION', 'OC_B_SEND_OUT', 'OC_B_JD_RETURN_ORDER', 'OC_B_RETURN_AF_SEND_MANUAL'],
       cover: 'false' // 缺货备注单选默认选择
     };
   },
@@ -96,7 +96,7 @@ export default {
           this.downloadUrlFile(downloadUrl);
         } else {
           // 导入-调拨单
-          this.getDownloadTemp(' /p/cs/transfer/downloadTemp');
+          this.getDownloadTemp('/p/cs/transfer/downloadTemp');
         }
       } else if (this.componentData.tableName === 'SG_B_PHY_OUT_RESULT') {
         if (this.componentData.importType === 1) {
@@ -116,6 +116,9 @@ export default {
       } else if (this.componentData.tableName === 'OC_B_JD_RETURN_ORDER') {
         // 导入-调拨单
         this.getDownloadTemp('/p/cs/ocBJdReturnOrder/downloadTemple');
+      } else if (this.componentData.tableName === 'OC_B_RETURN_AF_SEND_MANUAL') {
+        // 导入-打款结果
+        this.getDownloadTemp('/api/cs/oc/oms/v1/downloadUpdateOcBReturnAfSendTemp');
       } else if (this.componentData.tableName === 'IP_C_STANDPLAT_PRO') {
         // 通用商品下载
         const downloadUrl = 'http://smtools.oss-cn-shanghai.aliyuncs.com/import/template/893/商品下载-商品代码上传模板-root-20200622161110098.xlsx';
@@ -159,7 +162,6 @@ export default {
     },
     // 导入
     importDialog() {
-      debugger;
       if (this.handleBefore(this.files)) return;
       if (this.componentData.tableName === 'OC_B_ORDER') {
         // 零售发货单
@@ -231,6 +233,9 @@ export default {
       } else if (this.componentData.tableName === 'IP_C_STANDPLAT_PRO') {
         // 通用商品下载
         this.getImportDialog('/p/cs/getItemIdsForExcel');
+      } else if (this.componentData.tableName === 'OC_B_RETURN_AF_SEND_MANUAL') {
+        // 导入打款结果导入
+        this.getImportDialog('/api/cs/oc/oms/v1/batchUpdateOcBReturnAfSend');
       }
     },
     closeConfirm() {
