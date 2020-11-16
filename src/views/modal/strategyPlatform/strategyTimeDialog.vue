@@ -116,17 +116,14 @@
     methods: {
       async confirmChange() {
         const formValue = this.formConfig.formValue;
-        console.log(formValue.END_TIME);
-        const params = {
-          ...this.infoParams,
-          isStrategyTime: 'Y',
-          END_TIME: format.getFormatDate(formValue.END_TIME, 'yyyy-MM-dd HH:mm:ss')
-          // END_TIME: this.$comUtils.dateFormat(formValue.END_TIME, 'yyyy-MM-dd hh:mm:ss')
-        };
-        console.log(params);
+        const fromdata = new FormData();
+        fromdata.append('objid', this.infoParams.objid);
+        fromdata.append('table', this.infoParams.table);
+        fromdata.append('isStrategyTime', 'Y');
+        fromdata.append('END_TIME', format.getFormatDate(formValue.END_TIME, 'yyyy-MM-dd HH:mm:ss'));
         this.dialogLoad = true;
         try {
-          const res = await this.service.strategyPlatform.holdOrderUpdateStrategyEndTime(params);
+          const res = await this.service.strategyPlatform.holdOrderUpdateStrategyEndTime(fromdata);
           this.dialogLoad = false;
           if (res.data.data.code === 0) {
             this.$Message.success('调整策略时间成功');
@@ -136,20 +133,6 @@
         } catch (error) {
           this.dialogLoad = false;
         }
-        // httpServer({
-        //   url: this.$httpApi.strategyPlatform.holdOrderUpdateStrategyEndTime,
-        //   method: 'post',
-        //   data: params
-        // }).then(res => {
-        //   this.dialogLoad = false;
-        //   if (res.data.data.code === 0) {
-        //     this.$Message.success('调整策略时间成功')
-        //     this.$emit('confirmImport')
-        //     this.$emit('closeActionDialog')
-        //   }
-        // }).catch(() => {
-        //   this.dialogLoad = false
-        // })
       }
     }
   }
