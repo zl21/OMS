@@ -1,7 +1,8 @@
 // 营销中心(促销中心)
 import R3 from '@syman/burgeon-r3';
-
+// import qs from 'qs';
 const { network } = R3;
+
 export default {
   /**
    * 营销列表页面
@@ -11,7 +12,8 @@ export default {
   // 查看日志
   cpromLogQuery: params => network.post('/p/cs/cpromLogQuery', params),
   // 获取button数组
-  fetchActionsInCustomizePage: params => network.get(`/p/cs/fetchActionsInCustomizePage?${this.qs.stringify(params)}`),
+  // fetchActionsInCustomizePage: params => network.get('/p/cs/fetchActionsInCustomizePage', params),
+  // network.get(`/p/cs/v2/fetchActionsInCustomizePage?${qs.stringify(params)}`)
   // 发布
   updatePmStatus: params => network.post('/p/cs/pm/v1/updatePmStatus', params),
   // 删除

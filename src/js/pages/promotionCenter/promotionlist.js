@@ -1,11 +1,12 @@
 import businessLabel from 'professionalComponents/businessLabel';
+import jordanBtn from 'professionalComponents/businessButton';
 import errorMessage from 'framework/components/tablelist/error.vue';
 import Mydialog from 'framework/components/dialog/mydialog.vue';
 import TableInput from 'framework/components/element/input';
 import aTable from 'professionalComponents/agGridTable.vue';
 import dialogVisible from '@/views/pages/promotionCenter/setGroup';
 import Favorite from '@/views/pages/promotionCenter/components/favorite';
-
+import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 const baseColumnDefs = [
   {
     headerName: '序号',
@@ -16,90 +17,91 @@ const baseColumnDefs = [
     headerCheckboxSelection: true,
     checkboxSelection: true,
     sort: 'asc',
-    suppressMovable: true,
+    suppressMovable: true
   },
   {
     headerName: '促销编号',
     // headerName: vmI18n.t("table_label.serialNo"),
-    field: 'ACTI_NO',
+    field: 'ACTI_NO'
   },
   {
     headerName: '活动名称',
     // headerName: vmI18n.t("form_label.activityName"),
-    field: 'ACTI_NAME',
+    field: 'ACTI_NAME'
   },
   {
     headerName: '参与店铺',
     // headerName: vmI18n.t("table_label.participating_store"),
-    field: 'STORE_NAMES',
+    field: 'STORE_NAMES'
   },
   {
     headerName: '活动时间段',
     // headerName: vmI18n.t("table_label.activity_period"),
-    field: 'ACTI_DATE',
+    field: 'ACTI_DATE'
   },
   {
     headerName: '失效下线时间',
     // headerName: vmI18n.t("table_label.failure_offline_time"),
-    field: 'DOWN_TIME',
+    field: 'DOWN_TIME'
   },
   {
     headerName: '剩余可送',
     // headerName: vmI18n.t("table_label.rest_sent"),
-    field: 'STOCK',
+    field: 'STOCK'
   },
   {
     headerName: '已送数量',
     // headerName: vmI18n.t("table_label.delivered_quantity"),
-    field: 'SEND',
+    field: 'SEND'
   },
   {
     headerName: '状态',
     // headerName: vmI18n.t("table_label.status"),
-    field: 'status',
+    field: 'status'
   },
   {
     headerName: '分组名称',
     // headerName: vmI18n.t("table_label.groupName"),
-    field: 'GROUP_NAME',
+    field: 'GROUP_NAME'
   },
   {
     headerName: '优先级',
     // headerName: vmI18n.t("table_label.priority"),
-    field: 'LEVEL',
+    field: 'LEVEL'
   },
   {
     headerName: '创建人',
     // headerName: vmI18n.t("table_label.creator"),
-    field: 'OWNERENAME',
+    field: 'OWNERENAME'
   },
   {
     headerName: '创建时间',
     // headerName: vmI18n.t("table_label.creationTime"),
-    field: 'CREATIONDATE',
+    field: 'CREATIONDATE'
   },
   {
     headerName: '修改人',
     // headerName: vmI18n.t("table_label.reviser"),
-    field: 'OWNERENAME',
+    field: 'OWNERENAME'
   },
   {
     headerName: '修改时间',
     // headerName: vmI18n.t("table_label.modificationTime"),
-    field: 'MODIFIEDDATE',
+    field: 'MODIFIEDDATE'
   },
   {
     headerName: '备注',
     // headerName: vmI18n.t("table_label.remarks"),
-    field: 'REMARK',
+    field: 'REMARK'
   },
   {
     headerName: '操作',
     // headerName: vmI18n.t("table_label.operation"),
-    field: 'ACTION_LOG',
-  },
+    field: 'ACTION_LOG'
+  }
 ];
 export default {
+  mixins: [buttonPermissionsMixin],
   data() {
     return {
       vmI18n: window.vmI18n,
@@ -111,7 +113,6 @@ export default {
       acti_group: '', // 分组设置
       activeName: 0, // tabs默认值 根据这个，判断是第几个tab
       dialog_visible: false,
-      buttons: [], // 按钮权限列表
       acti_date: [], // 时间
       checkList: [], // 表格复选框选中的id
       setGroupTableData: [], // 设置分组列表
@@ -123,25 +124,25 @@ export default {
             title: window.vmI18n.t('table_label.serialNo'),
             type: 'index',
             width: 60,
-            align: 'center',
+            align: 'center'
           },
           {
             // title: "操作时间",
             title: window.vmI18n.t('table_label.operatorTime'),
-            key: 'creationdate',
+            key: 'creationdate'
           },
           {
             // title: "操作人",
             title: window.vmI18n.t('form_label.operator'),
-            key: 'operator',
+            key: 'operator'
           },
           {
             // title: "操作描述",
             title: window.vmI18n.t('table_label.operation_description'),
-            key: 'describes',
-          },
+            key: 'describes'
+          }
         ],
-        data: [],
+        data: []
       },
       my_input_sh: {
         itemdata: {
@@ -165,8 +166,8 @@ export default {
           row: 1,
           statsize: -1,
           type: 'STRING', // 这个是后台用的
-          valuedata: '', // 这个是选择的值
-        },
+          valuedata: '' // 这个是选择的值
+        }
       },
       my_input_st: {
         itemdata: {
@@ -189,27 +190,27 @@ export default {
           row: 1,
           statsize: -1,
           type: 'STRING', // 这个是后台用的
-          valuedata: '', // 这个是选择的值
-        },
+          valuedata: '' // 这个是选择的值
+        }
       },
       dataError: {
         show: false, // 控制警告弹框显示
         title: window.vmI18n.t('modalTitle.error'), // 错误 弹框标题
         type: 'warning', // 类型警告
         backBtn: true, // 是否显示返回按钮
-        errorList: [{ message: '确定执行下线操作？' }], // 提示内容
+        errorList: [{ message: '确定执行下线操作？' }] // 提示内容
       },
       dialog: {
         visible: true, // 控制查看日志弹窗
         param: {},
-        title: '',
+        title: ''
       }, // 查看日志传参
       query: {
         store: [], // 门店
         firstLevel: [], // 促销大类
         lastLevel: [], // 店仓名称
         distrib: '', // 配销中心,
-        storeType: true,
+        storeType: true
       },
       inputList: [
         {
@@ -222,155 +223,160 @@ export default {
           tablename: 'DL_B_TRAN_PLAN_ITEM',
           type: 'STRING',
           value: '',
-          valuedata: '',
-        },
+          valuedata: ''
+        }
       ],
-      tabConfig: [{
-        label: window.vmI18n.t('common.all'), // 全部
-        agTableConfig: {
-          isIndex: true,
-          tableHeight: '450px',
-          columnDefs: baseColumnDefs,
-          rowData: [],
-          renderArr: {
-            ACTION_LOG: (params) => {
-              if (!params.data.ACTION_LOG) return;
-              const resultElement = document.createElement('div');
-              const iTag = document.createElement('div');
-              iTag.style.color = '#0f8ee9';
-              iTag.style.textDecoration = 'underline';
-              iTag.innerText = params.data.ACTION_LOG;
-              iTag.style.cursor = 'pointer';
-              iTag.onclick = () => {
-                this.viewLog(params.data);
-              };
-              resultElement.appendChild(iTag);
-              return resultElement;
+      tabConfig: [
+        {
+          label: window.vmI18n.t('common.all'), // 全部
+          agTableConfig: {
+            isIndex: true,
+            tableHeight: '450px',
+            columnDefs: baseColumnDefs,
+            rowData: [],
+            renderArr: {
+              ACTION_LOG: params => {
+                if (!params.data.ACTION_LOG) return;
+                const resultElement = document.createElement('div');
+                const iTag = document.createElement('div');
+                iTag.style.color = '#0f8ee9';
+                iTag.style.textDecoration = 'underline';
+                iTag.innerText = params.data.ACTION_LOG;
+                iTag.style.cursor = 'pointer';
+                iTag.onclick = () => {
+                  this.viewLog(params.data);
+                };
+                resultElement.appendChild(iTag);
+                return resultElement;
+              }
             },
-          },
-          pagenation: {
-            // 设置总条数
-            total: 0,
-            // 条数
-            pageSize: 20,
-            // 页数
-            current: 1,
-            pageSizeOpts: [20, 50, 150, 1000],
-          },
-        }
-      }, {
-        label: window.vmI18n.t('btn.published'), // 已发布
-        agTableConfig: {
-          isIndex: true,
-          tableHeight: '450px',
-          columnDefs: baseColumnDefs,
-          rowData: [],
-          renderArr: {
-            ACTION_LOG: (params) => {
-              if (!params.data.ACTION_LOG) return;
-              const resultElement = document.createElement('div');
-              const iTag = document.createElement('div');
-              iTag.style.color = '#0f8ee9';
-              iTag.style.textDecoration = 'underline';
-              iTag.innerText = params.data.ACTION_LOG;
-              iTag.style.cursor = 'pointer';
-              iTag.onclick = () => {
-                this.viewLog(params.data);
-              };
-              resultElement.appendChild(iTag);
-              return resultElement;
+            pagenation: {
+              // 设置总条数
+              total: 0,
+              // 条数
+              pageSize: 20,
+              // 页数
+              current: 1,
+              pageSizeOpts: [20, 50, 150, 1000]
+            }
+          }
+        },
+        {
+          label: window.vmI18n.t('btn.published'), // 已发布
+          agTableConfig: {
+            isIndex: true,
+            tableHeight: '450px',
+            columnDefs: baseColumnDefs,
+            rowData: [],
+            renderArr: {
+              ACTION_LOG: params => {
+                if (!params.data.ACTION_LOG) return;
+                const resultElement = document.createElement('div');
+                const iTag = document.createElement('div');
+                iTag.style.color = '#0f8ee9';
+                iTag.style.textDecoration = 'underline';
+                iTag.innerText = params.data.ACTION_LOG;
+                iTag.style.cursor = 'pointer';
+                iTag.onclick = () => {
+                  this.viewLog(params.data);
+                };
+                resultElement.appendChild(iTag);
+                return resultElement;
+              }
             },
-          },
-          pagenation: {
-            // 设置总条数
-            total: 0,
-            // 条数
-            pageSize: 20,
-            // 页数
-            current: 1,
-            pageSizeOpts: [20, 50, 150, 1000],
-          },
-        }
-      }, {
-        label: window.vmI18n.t('btn.draft'), // 草稿
-        agTableConfig: {
-          isIndex: true,
-          tableHeight: '450px',
-          columnDefs: baseColumnDefs,
-          rowData: [],
-          renderArr: {
-            ACTION_LOG: (params) => {
-              if (!params.data.ACTION_LOG) return;
-              const resultElement = document.createElement('div');
-              const iTag = document.createElement('div');
-              iTag.style.color = '#0f8ee9';
-              iTag.style.textDecoration = 'underline';
-              iTag.innerText = params.data.ACTION_LOG;
-              iTag.style.cursor = 'pointer';
-              iTag.onclick = () => {
-                this.viewLog(params.data);
-              };
-              resultElement.appendChild(iTag);
-              return resultElement;
+            pagenation: {
+              // 设置总条数
+              total: 0,
+              // 条数
+              pageSize: 20,
+              // 页数
+              current: 1,
+              pageSizeOpts: [20, 50, 150, 1000]
+            }
+          }
+        },
+        {
+          label: window.vmI18n.t('btn.draft'), // 草稿
+          agTableConfig: {
+            isIndex: true,
+            tableHeight: '450px',
+            columnDefs: baseColumnDefs,
+            rowData: [],
+            renderArr: {
+              ACTION_LOG: params => {
+                if (!params.data.ACTION_LOG) return;
+                const resultElement = document.createElement('div');
+                const iTag = document.createElement('div');
+                iTag.style.color = '#0f8ee9';
+                iTag.style.textDecoration = 'underline';
+                iTag.innerText = params.data.ACTION_LOG;
+                iTag.style.cursor = 'pointer';
+                iTag.onclick = () => {
+                  this.viewLog(params.data);
+                };
+                resultElement.appendChild(iTag);
+                return resultElement;
+              }
             },
-          },
-          pagenation: {
-            // 设置总条数
-            total: 0,
-            // 条数
-            pageSize: 20,
-            // 页数
-            current: 1,
-            pageSizeOpts: [20, 50, 150, 1000],
-          },
-        }
-      }, {
-        label: window.vmI18n.t('other.offline_expired'), // 下线/过期
-        agTableConfig: {
-          isIndex: true,
-          tableHeight: '450px',
-          columnDefs: baseColumnDefs,
-          rowData: [],
-          renderArr: {
-            ACTION_LOG: (params) => {
-              if (!params.data.ACTION_LOG) return;
-              const resultElement = document.createElement('div');
-              const iTag = document.createElement('div');
-              iTag.style.color = '#0f8ee9';
-              iTag.style.textDecoration = 'underline';
-              iTag.innerText = params.data.ACTION_LOG;
-              iTag.style.cursor = 'pointer';
-              iTag.onclick = () => {
-                this.viewLog(params.data);
-              };
-              resultElement.appendChild(iTag);
-              return resultElement;
+            pagenation: {
+              // 设置总条数
+              total: 0,
+              // 条数
+              pageSize: 20,
+              // 页数
+              current: 1,
+              pageSizeOpts: [20, 50, 150, 1000]
+            }
+          }
+        },
+        {
+          label: window.vmI18n.t('other.offline_expired'), // 下线/过期
+          agTableConfig: {
+            isIndex: true,
+            tableHeight: '450px',
+            columnDefs: baseColumnDefs,
+            rowData: [],
+            renderArr: {
+              ACTION_LOG: params => {
+                if (!params.data.ACTION_LOG) return;
+                const resultElement = document.createElement('div');
+                const iTag = document.createElement('div');
+                iTag.style.color = '#0f8ee9';
+                iTag.style.textDecoration = 'underline';
+                iTag.innerText = params.data.ACTION_LOG;
+                iTag.style.cursor = 'pointer';
+                iTag.onclick = () => {
+                  this.viewLog(params.data);
+                };
+                resultElement.appendChild(iTag);
+                return resultElement;
+              }
             },
-          },
-          pagenation: {
-            // 设置总条数
-            total: 0,
-            // 条数
-            pageSize: 20,
-            // 页数
-            current: 1,
-            pageSizeOpts: [20, 50, 150, 1000],
-          },
+            pagenation: {
+              // 设置总条数
+              total: 0,
+              // 条数
+              pageSize: 20,
+              // 页数
+              current: 1,
+              pageSizeOpts: [20, 50, 150, 1000]
+            }
+          }
         }
-      }],
+      ],
       diStatusArr: [
         {
           value: 1,
-          label: window.vmI18n.t('btn.draft'), // 草稿
+          label: window.vmI18n.t('btn.draft') // 草稿
         },
         {
           value: 2,
-          label: window.vmI18n.t('btn.published'), // 已发布
+          label: window.vmI18n.t('btn.published') // 已发布
         },
         {
           value: 3,
-          label: window.vmI18n.t('btn.offline'), // 下线
-        },
+          label: window.vmI18n.t('btn.offline') // 下线
+        }
       ],
       product: {
         itemdata_xitong: {
@@ -395,43 +401,110 @@ export default {
           row: 1,
           statsize: -1,
           type: 'STRING',
-          valuedata: '',
-        },
+          valuedata: ''
+        }
       },
+      btnConfig: {
+        typeAll: 'error', // 按钮统一风格样式
+        buttons: [
+          {
+            text: window.vmI18n.t('btn.find'), // 按钮文本,
+            btnclick: () => {
+              this.getData();
+            }
+          },
+          {
+            text: window.vmI18n.t('btn.reset'), // 按钮文本,
+            btnclick: () => {
+              this.Reset();
+            }
+          },
+          {
+            text: window.vmI18n.t('btn.add'), // 按钮文本,
+            btnclick: () => {
+              this.promotionClick();
+            }
+          },
+          {
+            text: window.vmI18n.t('btn.batch_add'), // 按钮文本,
+            btnclick: () => {
+              this.promotionBlukClick();
+            }
+          },
+          {
+            text: window.vmI18n.t('btn.publish'), // 按钮文本,
+            btnclick: () => {
+              this.publish();
+            }
+          },
+          {
+            text: window.vmI18n.t('btn.offline'), // 按钮文本,
+            btnclick: () => {
+              this.actOffline();
+            }
+          },
+          {
+            text: window.vmI18n.t('common.copy'), // 按钮文本,
+            btnclick: () => {
+              this.copy();
+            }
+          },
+          {
+            text: window.vmI18n.t('btn.delete'), // 按钮文本,
+            btnclick: () => {
+              this.deleteActi();
+            }
+          },
+          {
+            text: window.vmI18n.t('btn.set_groups'), // 按钮文本,
+            btnclick: () => {
+              this.setGroup();
+            }
+          },
+          {
+            text: window.vmI18n.t('btn.simulation'), // 按钮文本,
+            btnclick: () => {
+              this.simulation();
+            }
+          }
+        ]
+      }
     };
   },
   watch: {
     activeName() {
       this.getData();
-    },
+    }
   },
   components: {
+    jordanBtn,
     businessLabel,
     aTable,
     Mydialog,
     errorMessage,
     dialogVisible,
     Favorite,
-    TableInput,
+    TableInput
   },
-  created() {
-
-  },
+  created() {},
   computed: {
     commodity() {
       return this.inputList[0].valuedata;
     }
   },
   async mounted() {
+    this.$nextTick(() => {
+      this.getPermissions('btnConfig', 'promactiquerylist');
+    });
     await this.times(); // 默认时间
-    await this.getPermissions();
+    // await this.getPermissions();
     await this.getData();
   },
   methods: {
     // 处理时间
     handleChange(dateArr) {
       const filterDate = [];
-      dateArr.forEach((item) => {
+      dateArr.forEach(item => {
         filterDate.push(item.replace(/\-/g, ''));
       });
       this.acti_date = filterDate;
@@ -460,7 +533,7 @@ export default {
           }
           // 下线过期
           return { color: 'gray' };
-        },
+        }
       };
     },
     // 查找
@@ -479,13 +552,15 @@ export default {
         ACTI_NO: this.acti_no,
         PAGE: {
           CURRENT_PAGE: currentPage, // 当前页码
-          PAGE_SIZE: pageSize, // 分页单位
-        },
+          PAGE_SIZE: pageSize // 分页单位
+        }
       };
       const formData = new FormData();
       formData.append('param', JSON.stringify(params));
       // 促销中心列表
-      const { data: { code, data } } = await this.service.promotionCenter.selectPmList(formData);
+      const {
+        data: { code, data }
+      } = await this.service.promotionCenter.selectPmList(formData);
       this.loadings = false;
       if (code === 0) {
         if (data && data.ACTI_ALL_INFO) {
@@ -512,26 +587,19 @@ export default {
       const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
       info.forEach((item, index) => {
         item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-        item.ACTION_LOG = window.vmI18n.t('other.view_log');// 查看日志
+        item.ACTION_LOG = window.vmI18n.t('other.view_log'); // 查看日志
       });
       const agGridChild = `agGridChild${index + 1}`;
       this.tabConfig[index].agTableConfig.rowData = info || [];
       this.tabConfig[index].agTableConfig.pagenation.total = num;
-      this.$refs[`${agGridChild}`][0].agGridTable(
-        this.tabConfig[index].agTableConfig.columnDefs,
-        this.tabConfig[index].agTableConfig.rowData,
-        this.getExtendObj()
-      );
+      this.$refs[`${agGridChild}`][0].agGridTable(this.tabConfig[index].agTableConfig.columnDefs, this.tabConfig[index].agTableConfig.rowData, this.getExtendObj());
     },
     timestampToTime(timestamp) {
       const date = new Date(timestamp); // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
 
       const Y = `${date.getFullYear()}.`;
 
-      const M = `${date.getMonth() + 1 < 10
-        ? `0${date.getMonth() + 1}`
-        : date.getMonth() + 1
-        }.`;
+      const M = `${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}.`;
 
       const D = `${date.getDate()} `;
 
@@ -557,10 +625,12 @@ export default {
       formData.append('param', JSON.stringify({ promActiId: e.ACTI_ID }));
 
       // 查看日志
-      const { data: { code, message, data } } = await this.service.promotionCenter.cpromLogQuery(formData);
+      const {
+        data: { code, message, data }
+      } = await this.service.promotionCenter.cpromLogQuery(formData);
       if (code === 0) {
         if (data.length === 0) {
-          self.$message.warning(window.vmI18n.t('modalTips.r8'));// 查询数据为空
+          self.$message.warning(window.vmI18n.t('modalTips.r8')); // 查询数据为空
         } else {
           self.logData.data = data;
           self.$message.success(message);
@@ -571,23 +641,24 @@ export default {
       }
     },
     // 获取button数组
-    async getPermissions() {
-      const independent = [];
-      const buttons = [];
-      const params = {
-        param: {
-          AD_ACTION_NAME: 'promactiquerylist',
-        }
-      };
-      // 获取button数组
-      const { data: { code, data } } = await this.service.promotionCenter.fetchActionsInCustomizePage(params);
-      if (code === 0) {
-        data.map((item) => {
-          buttons.push(item.webid);
-        });
-      }
-      this.buttons = buttons;
-    },
+    // async getPermissions() {
+    //   const buttons = [];
+    //   const params = {
+    //     param: {
+    //       AD_ACTION_NAME: 'promactiquerylist'
+    //     }
+    //   };
+    //   // 获取button数组
+    //   const {
+    //     data: { code, data }
+    //   } = await this.service.promotionCenter.fetchActionsInCustomizePage(params);
+    //   if (code === 0) {
+    //     data.forEach(item => {
+    //       buttons.push(item.webid);
+    //     });
+    //   }
+    //   this.buttons = buttons;
+    // },
     errorDialogClose(option) {
       if (option) {
         this.downLine();
@@ -601,12 +672,10 @@ export default {
       const agGridChild = `agGridChild${this.activeName + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
-        agGridTable.getSelect().forEach(
-          (item) => {
-            newList.push(item);
-            newIds.push(item.ACTI_ID);
-          }
-        );
+        agGridTable.getSelect().forEach(item => {
+          newList.push(item);
+          newIds.push(item.ACTI_ID);
+        });
       }
       if (newList.length < 1) {
         this.$Message.warning(window.vmI18n.t('modalTips.r9'));
@@ -615,7 +684,7 @@ export default {
       // STATUS === 1 草稿 ，STATUS === 2 已发布，STATUS === 3 下线过期
       const flag = newList.some(item => item.STATUS === 3);
       if (flag) {
-        this.$Message.warning(window.vmI18n.t('modalTips.q0'));// 选择的促销活动已经下线/过期
+        this.$Message.warning(window.vmI18n.t('modalTips.q0')); // 选择的促销活动已经下线/过期
         return;
       }
       this.dataError.show = true;
@@ -626,11 +695,11 @@ export default {
       if (agGridTable.getSelect().length) {
         const selectedData = agGridTable.getSelect();
         if (selectedData.length === 0) {
-          this.$Message.warning(window.vmI18n.t('modalTips.q1'));// 请选择一条数据进行复制操作
+          this.$Message.warning(window.vmI18n.t('modalTips.q1')); // 请选择一条数据进行复制操作
           return;
         }
         if (selectedData.length > 1) {
-          this.$Message.warning(window.vmI18n.t('modalTips.q2'));// 只能选取一条数据
+          this.$Message.warning(window.vmI18n.t('modalTips.q2')); // 只能选取一条数据
         } else {
           const ACTI_ID = selectedData[0].ACTI_ID;
           const IS_BATCH = selectedData[0].IS_BATCH;
@@ -643,8 +712,8 @@ export default {
               query: Object.assign({
                 id: -1, // id
                 copy: ACTI_ID,
-                tabTitle: window.vmI18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
-              }), // 带的参数
+                tabTitle: window.vmI18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
+              }) // 带的参数
             });
           } else {
             this.$store.commit('customize/TabOpen', {
@@ -655,8 +724,8 @@ export default {
               query: Object.assign({
                 id: -1, // id
                 copy: ACTI_ID,
-                tabTitle: window.vmI18n.t('panel_label.addPromotion'), // 新增促销活动
-              }), // 带的参数
+                tabTitle: window.vmI18n.t('panel_label.addPromotion') // 新增促销活动
+              }) // 带的参数
             });
           }
         }
@@ -670,8 +739,8 @@ export default {
         label: window.vmI18n.t('panel_label.addPromotion'), // 新增促销活动
         query: Object.assign({
           id: -1, // id
-          tabTitle: window.vmI18n.t('panel_label.addPromotion'), // 新增促销活动
-        }), // 带的参数
+          tabTitle: window.vmI18n.t('panel_label.addPromotion') // 新增促销活动
+        }) // 带的参数
       });
     },
     promotionBlukClick() {
@@ -683,8 +752,8 @@ export default {
         label: window.vmI18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
         query: Object.assign({
           id: -1, // id
-          tabTitle: window.vmI18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
-        }), // 带的参数
+          tabTitle: window.vmI18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
+        }) // 带的参数
       });
     },
     async publish() {
@@ -694,20 +763,18 @@ export default {
       const agGridChild = `agGridChild${this.activeName + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
-        agGridTable.getSelect().map(
-          (item) => {
-            newList.push(item);
-            newIds.push(item.ACTI_ID);
-          }
-        );
+        agGridTable.getSelect().forEach(item => {
+          newList.push(item);
+          newIds.push(item.ACTI_ID);
+        });
       }
       if (newList.length < 1) {
-        this.$Message.warning(window.vmI18n.t('modalTips.r9'));// 请至少选择一个
+        this.$Message.warning(window.vmI18n.t('modalTips.r9')); // 请至少选择一个
         return false;
       }
       flag = newList.every(item => item.STATUS === 1);
       if (!flag) {
-        this.$Message.warning(window.vmI18n.t('modalTips.q3'));// 选择的促销活动已经发布
+        this.$Message.warning(window.vmI18n.t('modalTips.q3')); // 选择的促销活动已经发布
         return false;
       }
       this.dataError.show = false; // 关闭弹框
@@ -718,22 +785,24 @@ export default {
         isBatch: true, // 是否批量 传true
         fixcolumn: {
           ids: newIds, // 促销活动ID
-          status: 2, // 3表示下线
-        },
+          status: 2 // 3表示下线
+        }
       };
       const formData = new FormData();
       formData.append('param', JSON.stringify(params));
-      const { data: { code, message } } = await this.service.promotionCenter.updatePmStatus(formData);
+      const {
+        data: { code, message }
+      } = await this.service.promotionCenter.updatePmStatus(formData);
       if (code === 0) {
         this.getData();
         this.$message({
           message,
-          type: 'success',
+          type: 'success'
         });
       } else {
         this.$message({
           message,
-          type: 'success',
+          type: 'success'
         });
       }
     }, // 发布
@@ -743,28 +812,31 @@ export default {
       const agGridChild = `agGridChild${this.activeName + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
-        agGridTable.getSelect().map(
-          (item) => {
-            newList.push(item);
-            newIds.push(item.ACTI_ID);
-          }
-        );
+        agGridTable.getSelect().forEach(item => {
+          newList.push(item);
+          newIds.push(item.ACTI_ID);
+        });
       }
       if (newIds.length < 1) {
-        this.$Message.warning(window.vmI18n.t('modalTips.r9'));// 请至少选择一个
+        this.$Message.warning(window.vmI18n.t('modalTips.r9')); // 请至少选择一个
         return;
       }
       // 删除请求接口
       const formData = new FormData();
-      formData.append('param', JSON.stringify({
-        objid: newIds, // 默认参数 保持格式统一 传死-1
-      }));
-      const { data: { code, message } } = await this.service.promotionCenter.deletePm(formData);
+      formData.append(
+        'param',
+        JSON.stringify({
+          objid: newIds // 默认参数 保持格式统一 传死-1
+        })
+      );
+      const {
+        data: { code, message }
+      } = await this.service.promotionCenter.deletePm(formData);
       if (code === 0) {
         this.getData();
         this.$message({
           message,
-          type: 'success',
+          type: 'success'
         });
       }
     }, // 删除
@@ -775,27 +847,27 @@ export default {
       const agGridChild = `agGridChild${this.activeName + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
-        agGridTable.getSelect().map(
-          (item) => {
-            newList.push(item);
-            newIds.push(item.ACTI_ID);
-          }
-        );
+        agGridTable.getSelect().forEach(item => {
+          newList.push(item);
+          newIds.push(item.ACTI_ID);
+        });
       }
       if (newList.length < 1) {
-        this.$Message.warning(window.vmI18n.t('modalTips.q4'));// 请先勾选需要分组的促销
+        this.$Message.warning(window.vmI18n.t('modalTips.q4')); // 请先勾选需要分组的促销
         return;
       }
       // STATUS === 1 草稿 ，STATUS === 2 已发布，STATUS === 3 下线过期
       const flag = newList.some(item => item.STATUS === 3);
       if (flag) {
-        this.$Message.warning(window.vmI18n.t('modalTips.q5'));// 存在【下线过期】的促销，请重新选择
+        this.$Message.warning(window.vmI18n.t('modalTips.q5')); // 存在【下线过期】的促销，请重新选择
       } else {
         this.checkList = newList;
         // 设置分组请求接口
         const formData = new FormData();
         formData.append('param', JSON.stringify({ objids: newIds }));
-        const { data: { code, message, data } } = await this.service.promotionCenter.selectPmGroup(formData);
+        const {
+          data: { code, message, data }
+        } = await this.service.promotionCenter.selectPmGroup(formData);
         if (code === 0) {
           this.setGroupTableData = data;
           this.dialog_visible = true;
@@ -816,8 +888,8 @@ export default {
         label: window.vmI18n.t('btn.simulation'), // 模拟仿真
         query: Object.assign({
           id: -1, // id
-          tabTitle: window.vmI18n.t('btn.simulation'), // 模拟仿真
-        }), // 带的参数
+          tabTitle: window.vmI18n.t('btn.simulation') // 模拟仿真
+        }) // 带的参数
       });
     },
     async times() {
@@ -827,7 +899,9 @@ export default {
       this.acti_date = [start, end];
       const _this = this;
       this.acti_date = [start.split('-').join(''), end.split('-').join('')];
-      const { data: { code, data } } = await this.service.promotionCenter.getweekdate();
+      const {
+        data: { code, data }
+      } = await this.service.promotionCenter.getweekdate();
       if (code === 0) {
         _this.acti_date = [data.START_WEEK, data.END_WEEK];
       }
@@ -855,11 +929,16 @@ export default {
 
       // 查询当前点击行的信息
       const formData = new FormData();
-      formData.append('param', JSON.stringify({
-        objid: ACTI_ID,
-        prom_type_id: typeId,
-      }));
-      const { data: { code, message, data } } = await this.service.promotionCenter.selectPm(formData);
+      formData.append(
+        'param',
+        JSON.stringify({
+          objid: ACTI_ID,
+          prom_type_id: typeId
+        })
+      );
+      const {
+        data: { code }
+      } = await this.service.promotionCenter.selectPm(formData);
       if (code === 0) {
         // sq存储一套作为清空操作的初始数据
         // let scheme_dataInit = JSON.stringify(res.data.data.scheme_arr);
@@ -872,8 +951,8 @@ export default {
             label: window.vmI18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
             query: Object.assign({
               id: ACTI_ID, // id
-              tabTitle: window.vmI18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
-            }), // 带的参数
+              tabTitle: window.vmI18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
+            }) // 带的参数
           });
         } else {
           this.$store.commit('customize/TabOpen', {
@@ -883,8 +962,8 @@ export default {
             label: window.vmI18n.t('panel_label.editPromotion'), // 编辑促销活动
             query: Object.assign({
               id: ACTI_ID, // id
-              tabTitle: window.vmI18n.t('panel_label.editPromotion'), // 编辑促销活动
-            }), // 带的参数
+              tabTitle: window.vmI18n.t('panel_label.editPromotion') // 编辑促销活动
+            }) // 带的参数
           });
         }
       }
@@ -895,22 +974,20 @@ export default {
       const agGridChild = `agGridChild${this.activeName + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
-        agGridTable.getSelect().forEach(
-          (item) => {
-            newList.push(item);
-            newIds.push(item.ACTI_ID);
-          }
-        );
+        agGridTable.getSelect().forEach(item => {
+          newList.push(item);
+          newIds.push(item.ACTI_ID);
+        });
       }
       if (newList.length < 1) {
-        this.$message.warning(window.vmI18n.t('modalTips.r9'));// 请至少选择一个
-        return false;
+        this.$message.warning(window.vmI18n.t('modalTips.r9')); // 请至少选择一个
+        return;
       }
       // STATUS === 1 草稿 ，STATUS === 2 已发布，STATUS === 3 下线过期
       const flag = newList.some(item => item.STATUS === 3);
       if (flag) {
-        this.$Message.warning(window.vmI18n.t('modalTips.q0'));// //选择的促销活动已经下线/过期
-        return false;
+        this.$Message.warning(window.vmI18n.t('modalTips.q0')); // //选择的促销活动已经下线/过期
+        return;
       }
       this.dataError.show = false; // 关闭弹框
 
@@ -919,12 +996,14 @@ export default {
         isBatch: true, // 是否批量 传true
         fixcolumn: {
           ids: newIds, // 促销活动ID
-          status: 2, // 3表示下线
-        },
+          status: 2 // 3表示下线
+        }
       };
-      const formData = new FormData();
-      formData.append('param', JSON.stringify(params));
-      const { data: { code, message } } = await this.service.promotionCenter.updatePmStatus(formData);
+      // const formData = new FormData();
+      // formData.append('param', JSON.stringify(params));
+      const {
+        data: { code, message }
+      } = await this.service.promotionCenter.updatePmStatus(JSON.stringify(params));
       if (code === 0) {
         this.getData();
         this.$Message.success(message);
@@ -934,6 +1013,6 @@ export default {
       if (event.keyCode === 13) {
         this.getData();
       }
-    },
-  },
+    }
+  }
 };

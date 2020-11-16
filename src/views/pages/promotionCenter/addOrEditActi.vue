@@ -20,13 +20,6 @@
           :basic-data="basic_info"
           :info-data="condition_info_setting"
         />
-        <!-- <GiftSet
-          ref="area_2"
-          :objid="objid"
-          :load-dis="loadDis"
-          :basic-data="basic_info"
-          :gift-data="gift_info_setting"
-        /> -->
         <GiftSet
           ref="area_2"
           :objid="objid"
@@ -34,7 +27,7 @@
           :load-dis="loadDis"
           :basic-data="basic_info"
           :gift-data="gift_info_setting"
-          @setcommodity="setCommodity"
+          @setcommodity="setCommodityEvent"
           @closeDialog="closeDialog"
           @confirm="confirm"
         />
@@ -58,12 +51,6 @@
       </div>
     </div>
     <div class="steps_bar">
-      <!-- <Steps :current="0" direction="vertical">
-        <Step content="基础信息" icon="test iconfont burgeon-iconjibenxinxi" ></Step>
-        <Step content="条件信息" icon="test iconfont burgeon-iconliuchengtiaojian"  @click="positionSteps(1)"></Step>
-        <Step content="赠品信息" icon="test iconfont burgeon-iconzengpin" @click="positionSteps(2)"></Step>
-        <Step content="活动概览" icon="test iconfont burgeon-iconhuodong" @click="positionSteps(3)"></Step>
-      </Steps> -->
       <stepsBars
         :current.sync="current"
         :steps="stepsBar"
