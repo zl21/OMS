@@ -136,8 +136,8 @@ export default {
       clearFromListValue: false,
       // 状态json
       statusData: {
-        label: window.vmI18n.t('common.all'), // 全部
-        value: '0',
+        label: window.vmI18n.t('common.toBeReviewed'), // 全部
+        value: '1',
         isShow: true,
       },
       // tag 搜索
@@ -2577,8 +2577,8 @@ export default {
             content: self.vmI18n.t('modalTips.e1'), // 是否确定取消Hold？
             mask: true,
             showCancel: true,
-            okText: self.vmI18n.t('common.determine'), // 取消
-            cancelText: self.vmI18n.t('common.cancel'), // 确定
+            okText: self.vmI18n.t('common.cancel'), // 取消
+            cancelText: self.vmI18n.t('common.determine'), // 确定
             onCancel: () => {
               self.btnConfig.loading = true;
               self.service.orderCenter.manualUnHoldOrder(data)
