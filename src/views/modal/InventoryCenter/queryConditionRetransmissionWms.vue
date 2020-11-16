@@ -49,14 +49,16 @@
           return;
         }
         if (this.allFormData.CP_C_PHY_WAREHOUSE_ID || (this.allFormData.BILL_DATE[0] && this.allFormData.BILL_DATE[1]) || this.allFormData.SOURCE_BILL_NO) {
+          const formdata = new FormData();
           const obj = {};
           obj.sourceBillType = this.allFormData.SOURCE_BILL_NO;
           obj.phyWarehouseIds = this.allFormData.CP_C_PHY_WAREHOUSE_ID;
           obj.startBillDate = this.allFormData.BILL_DATE[0];
           obj.endBillDate = this.allFormData.BILL_DATE[1];
-          obj.user = this.user;
+          // obj.user = this.user;
+          formdata.append('param', JSON.stringify(obj));
           this.is_click = true;
-          this.service.inventoryCenter.sgPhyOutNoticesSendWMSAgainCondition(obj).then(res=>{
+          this.service.inventoryCenter.sgPhyOutNoticesSendWMSAgainCondition(formdata).then(res=>{
             console.log(res);
             if (res.data.code == 0) {
               this.$Message.success(res.data.data);
