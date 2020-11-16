@@ -3692,7 +3692,7 @@ export default {
       if (this.$route.query.id == '-1') return;
       _this.service.orderCenter.cancelautorefund({ ID: _this.$route.query.id })
       // axios({
-      //   url: '/p/cs/cancelautorefund',
+      //   url: '/api/cs/oc/oms/v1/cancelautorefund',
       //   method: 'post',
       //   cancelToken: true,
       //   data: { ID: _this.$route.query.id }
