@@ -120,6 +120,12 @@ export default {
         // 通用商品下载
         const downloadUrl = 'http://smtools.oss-cn-shanghai.aliyuncs.com/import/template/893/商品下载-商品代码上传模板-root-20200622161110098.xlsx';
         this.downloadUrlFile(downloadUrl);
+      } else if (this.componentData.tableName === 'ST_C_SYNC_STOCK_STRATEGY') {
+        // 店铺同步库存策略
+        this.getDownloadTemp('/p/cs/downLoadSyncStockStrategyImportTemp')
+      } else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY_SHOP') {
+        // 店铺商品特殊设置 - 多店铺比例-明细导入
+        this.getDownloadTemp('/p/cs/productStrategy/import/downloadMultiShopTemp')
       }
     },
 
@@ -230,6 +236,12 @@ export default {
       } else if (this.componentData.tableName === 'IP_C_STANDPLAT_PRO') {
         // 通用商品下载
         this.getImportDialog('/p/cs/getItemIdsForExcel');
+      } else if (this.componentData.tableName === 'ST_C_SYNC_STOCK_STRATEGY') {
+        // 店铺同步库存策略
+        this.getImportDialog('/p/cs/importSyncStockStrategy');
+      } else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY_SHOP') {
+        // 店铺商品特殊设置 - 多店铺比例-明细导入
+        this.getImportDialog('/p/cs/productStrategy/import/multiShopItem', this.componentData.objid);
       } 
     },
     closeConfirm() {

@@ -12,4 +12,7 @@ export default {
   STRATEGYTIMEDIALOG: {
     component: () => import('@/views/modal/strategyPlatform/strategyTimeDialog.vue'), // 修改结束时间
   },
+  SYNCSTOCKSTRATEGYIMPORT: {
+    component: () => import('@/views/modal/strategyPlatform/syncStockStrategyImport.vue'), // 导入
+  }
 };
