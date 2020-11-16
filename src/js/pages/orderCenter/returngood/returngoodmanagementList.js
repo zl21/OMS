@@ -1430,7 +1430,7 @@ export default {
       this.service.orderCenter.cancelautorefund({ ID: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID })
       // this.$network
       //   .axios({
-      //     url: '/p/cs/cancelautorefund',
+      //     url: '/api/cs/oc/oms/v1/cancelautorefund',
       //     method: 'post',
       //     cancelToken: true,
       //     data: { ID: this.returnSelectData[0].ID },
@@ -1542,8 +1542,8 @@ export default {
         content: this.vmI18n.t('modalTips.m3'), // 是否确定批量原退？
         mask: true,
         showCancel: true,
-        okText: this.vmI18n.t('common.determine'), // 取消
-        cancelText: this.vmI18n.t('common.cancel'), // 确定
+        okText: this.vmI18n.t('common.cancel'), // 取消
+        cancelText: this.vmI18n.t('common.determine'), // 确定
         onCancel: () => {
           this.service.orderCenter.updateReturnBOrder({ ids })
           // this.$network
@@ -1659,8 +1659,8 @@ export default {
         content: this.vmI18n.t('modalTips.m9'), // 是否确定强制完成？
         mask: true,
         showCancel: true,
-        okText: this.vmI18n.t('common.determine'), // 取消
-        cancelText: this.vmI18n.t('common.cancel'), // 确定
+        okText: this.vmI18n.t('common.cancel'), // 取消
+        cancelText: this.vmI18n.t('common.determine'), // 确定
         onCancel: () => {
           this.service.orderCenter.forcedCompletion({ ids })
           // this.$network

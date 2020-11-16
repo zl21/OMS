@@ -3631,8 +3631,8 @@ export default {
         content: _this.vmI18n.t('modalTips.l3'), // 是否确定取消退单？
         mask: true,
         showCancel: true,
-        okText: _this.vmI18n.t('common.determine'), // 取消
-        cancelText: _this.vmI18n.t('common.cancel'), // 确定
+        okText: _this.vmI18n.t('common.cancel'), // 取消
+        cancelText: _this.vmI18n.t('common.determine'), // 确定
         onCancel: () => {
           this.service.orderCenter.OcCancelChangingOrRefund({ ids: [this.$route.query.id] })
           // axios({
@@ -3692,7 +3692,7 @@ export default {
       if (this.$route.query.id == '-1') return;
       _this.service.orderCenter.cancelautorefund({ ID: _this.$route.query.id })
       // axios({
-      //   url: '/p/cs/cancelautorefund',
+      //   url: '/api/cs/oc/oms/v1/cancelautorefund',
       //   method: 'post',
       //   cancelToken: true,
       //   data: { ID: _this.$route.query.id }
