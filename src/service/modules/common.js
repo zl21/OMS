@@ -72,7 +72,7 @@ export default {
   chargebackcheck: params => network.post('/p/cs/chargebackcheck', params),
   OcCancelChangingOrRefund: params => network.post('/p/cs/OcCancelChangingOrRefund', params),
   updateVirtualLibrary: params => network.post('/p/cs/updateVirtualLibrary', params),
-  cancelautorefund: params => network.post('/p/cs/cancelautorefund', params),
+  cancelautorefund: params => network.post('/api/cs/oc/oms/v1/cancelautorefund', params),
   queryResionByName: params => network.post('/p/cs/queryResionByName', params),
   getOrderList: params => network.post('/p/cs/getOrderList', params),
   extInfoQuery: params => network.post('/p/cs/extInfoQuery', params),

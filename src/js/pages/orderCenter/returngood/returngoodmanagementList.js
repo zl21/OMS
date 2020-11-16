@@ -1430,7 +1430,7 @@ export default {
       this.service.orderCenter.cancelautorefund({ ID: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID })
       // this.$network
       //   .axios({
-      //     url: '/p/cs/cancelautorefund',
+      //     url: '/api/cs/oc/oms/v1/cancelautorefund',
       //     method: 'post',
       //     cancelToken: true,
       //     data: { ID: this.returnSelectData[0].ID },
