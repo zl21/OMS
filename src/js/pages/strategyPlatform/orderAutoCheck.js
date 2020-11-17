@@ -46,6 +46,9 @@ export default {
       dataEmptyMessage: '数据加载中...', // c
       columns: ['name', 'value'], // 展现的组
       IS_AUTOCHECK_ORDER: false,
+      IS_AUTOCHECK_PAY: false,
+      IS_FULL_GIFT_ORDER: false,
+      IS_MANUAL_ORDER: false,
       IS_MERGE_ORDER: false, // 是否可合并
       orderType: [''],
       indeterminate: false,
@@ -122,6 +125,9 @@ export default {
             if (data.data.code == 0) {
               this.info = data.data.data;
               this.IS_AUTOCHECK_ORDER = this.info.IS_AUTOCHECK_ORDER == 'Y';
+              this.IS_AUTOCHECK_PAY = this.info.IS_AUTOCHECK_PAY == 'Y';
+              this.IS_FULL_GIFT_ORDER = this.info.IS_FULL_GIFT_ORDER == 'Y';
+              this.IS_MANUAL_ORDER = this.info.IS_MANUAL_ORDER == 'Y';
               this.IS_MERGE_ORDER = this.info.IS_MERGE_ORDER == 'Y';
               this.orderType = this.info.ORDER_TYPE ? this.info.ORDER_TYPE.split(',') : [];
               this.checkAll = this.orderType.length == 7;
@@ -231,6 +237,12 @@ export default {
     setResult(type) {
       if (type == 'IS_AUTOCHECK_ORDER') {
         this.result.IS_AUTOCHECK_ORDER = this.IS_AUTOCHECK_ORDER ? 'Y' : 'N';
+      } else if (type == 'IS_AUTOCHECK_PAY') {
+        this.result.IS_AUTOCHECK_PAY = this.IS_AUTOCHECK_PAY ? 'Y' : 'N';
+      } else if (type == 'IS_FULL_GIFT_ORDER') {
+        this.result.IS_FULL_GIFT_ORDER = this.IS_FULL_GIFT_ORDER ? 'Y' : 'N';
+      } else if (type == 'IS_MANUAL_ORDER') {
+        this.result.IS_MANUAL_ORDER = this.IS_MANUAL_ORDER ? 'Y' : 'N';
       } else if (type == 'IS_MERGE_ORDER') {
         this.result.IS_MERGE_ORDER = this.IS_MERGE_ORDER ? 'Y' : 'N';
       } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME') {

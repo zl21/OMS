@@ -148,6 +148,17 @@
                     </Col>
                   </FormItem>
                   </Col>
+                  <Col span="4" />
+                  <FormItem label="手工订单：">
+                    <Checkbox
+                      v-model="IS_MANUAL_ORDER"
+                      size="small"
+                      @on-change="setResult('IS_MANUAL_ORDER')"
+                    >
+&nbsp;
+                    </Checkbox>
+                  </FormItem>
+                  </Col>
                 </Row>
               </div>
             </Panel>
@@ -193,9 +204,9 @@
                       <!-- <Checkbox label="6">
                         货到付款
                       </Checkbox> -->
-                      <Checkbox label="7">
+                      <!-- <Checkbox label="7">
                         手工订单
-                      </Checkbox>
+                      </Checkbox> -->
                     </CheckboxGroup>
                   </FormItem>
                 </Row>
@@ -401,14 +412,14 @@
                     span="2"
                     style="padding-top: 10px"
                   />
-                  <Checkbox
+                  <!-- <Checkbox
                     v-model="effectiveCondition[7].value"
                     size="small"
                     @on-change="setResult('effectiveCondition')"
                   >
 &nbsp;
-                  </Checkbox>
-                  </Col>
+                  </Checkbox> -->
+                  <!-- </Col>
                   <Col span="20" />
                   <FormItem label="平台SKU编码">
                     <Row>
@@ -441,7 +452,7 @@
                       </Col>
                     </Row>
                   </FormItem>
-                  </Col>
+                  </Col> -->
                 </Row>
               </div>
             </Panel>
