@@ -45,7 +45,6 @@ export default {
                 console.log(res);
                 if (res.data.code === 0) {
                   self.$Message.success(res.data.message);
-                  document.getElementById('reset').click();
                   // self.$emit('confirmImport');
                 } else {
                   self.$Message.error(res.data.message);
