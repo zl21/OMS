@@ -38,7 +38,8 @@ export default {
           key: 'advise_phy_warehouse_id',
           render: (h, params) => {
             console.log(params);
-            const options = params.row.sgBPhyInStorageItemExt.map(item => h('Option', {
+            const options = params.row.sgBPhyInStorageItemExt.map(item =>
+              h('Option', {
                 style: {
                   'font-style': item.total_qty_available === 0 ? 'italic' : 'normal'
                 },
@@ -46,7 +47,8 @@ export default {
                   value: item.advise_phy_warehouse_id,
                   label: item.advise_phy_warehouse_ename
                 }
-              }));
+              })
+            );
             return h('div', [
               h(
                 'Select',
@@ -171,6 +173,7 @@ export default {
         console.log(res);
         let total = 0;
         if (res.data.code === 0) {
+          self.data = [];
           self.old_cp_c_phy_warehouse_ename = res.data.data[0].cp_c_phy_warehouse_ename;
           res.data.data.forEach(item => {
             item.waiting_split_num = Number(item.waiting_split_num || 0);
@@ -231,7 +234,7 @@ export default {
       // 更新原单拆单数量
       const arr = [];
       self.data[0][0].total = 0; // 重置促使仓库数量,一下重新计算总件数
-      self.data[0].forEach((item) => {
+      self.data[0].forEach(item => {
         if (self.isNullToArr(item.orig_order_item_id, self.onSelectData)) {
           item.waiting_split_num -= item.split_num;
         }
