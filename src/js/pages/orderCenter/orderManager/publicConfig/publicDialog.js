@@ -281,7 +281,7 @@ export default {
     maskClosable: false, // 是否可以点击蒙层关闭
     transfer: true, // 是否将弹层放在body内
     name: 'replaceGoodsDetail', // 组件名称
-    url: 'modal/orderCenter/replaceGoodsDetail',
+    url: 'pages/OrderCenter/orderManager/replaceGoodsDetail',
     keepAlive: true,
     componentData: {},
     quit() {

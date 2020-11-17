@@ -442,7 +442,6 @@ export default {
             text: window.vmI18n.t('btn.offline'), // 按钮文本,
             btnclick: () => {
               this.actOffline();
-
             }
           },
           {
@@ -680,7 +679,7 @@ export default {
     actOffline() {
       const newList = [];
       const newIds = [];
-      const agGridChild = `agGridChild${this.activeName + 1}`;
+      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
         agGridTable.getSelect().forEach(item => {
@@ -701,7 +700,7 @@ export default {
       this.dataError.show = true;
     },
     copy() {
-      const agGridChild = `agGridChild${this.activeName + 1}`;
+      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       console.log(agGridTable.getSelect().length);
       if (agGridTable.getSelect().length) {
@@ -770,7 +769,8 @@ export default {
       const newList = [];
       let flag = false;
       const newIds = [];
-      const agGridChild = `agGridChild${this.activeName + 1}`;
+
+      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
         agGridTable.getSelect().forEach(item => {
@@ -780,12 +780,12 @@ export default {
       }
       if (newList.length < 1) {
         this.$Message.warning(window.vmI18n.t('modalTips.r9')); // 请至少选择一个
-        return false;
+        return;
       }
       flag = newList.every(item => item.STATUS === 1);
       if (!flag) {
         this.$Message.warning(window.vmI18n.t('modalTips.q3')); // 选择的促销活动已经发布
-        return false;
+        return;
       }
       this.dataError.show = false; // 关闭弹框
 
@@ -819,7 +819,7 @@ export default {
     async deleteActi() {
       const newIds = [];
       const newList = [];
-      const agGridChild = `agGridChild${this.activeName + 1}`;
+      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
         agGridTable.getSelect().forEach(item => {
@@ -854,7 +854,7 @@ export default {
       // 设置分组
       const newList = [];
       const newIds = [];
-      const agGridChild = `agGridChild${this.activeName + 1}`;
+      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
         agGridTable.getSelect().forEach(item => {
@@ -981,7 +981,7 @@ export default {
     async downLine() {
       const newList = [];
       const newIds = [];
-      const agGridChild = `agGridChild${this.activeName + 1}`;
+      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
         agGridTable.getSelect().forEach(item => {
