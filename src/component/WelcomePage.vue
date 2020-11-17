@@ -49,9 +49,6 @@
         langConfig,
       };
     },
-    mounted() {
-    // console.log("vmI18n", this.vmI18n);
-    },
     methods: {
       toggleLang(lang) {
         const _this = this;
@@ -63,6 +60,14 @@
         });
       },
     },
+    mounted(){
+      let domContent = document.getElementById('content');
+      domContent.style.padding = "0 0";
+    },
+    destroyed(){
+      let domContent = document.getElementById('content');
+      domContent.style.padding = "0 15px";
+    }
   };
 </script>
 
@@ -71,7 +76,7 @@
 .welcomepage {
   width: 100%;
   height: 100%;
-  background: url("../assets/image/loginBg.jpg") center / 100% no-repeat;
+  background: url("../assets/image/loginBg.jpg") center / 105% no-repeat;
   /deep/ .ark-dropdown {
     margin: 10px 10px 20px;
   }

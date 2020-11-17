@@ -242,7 +242,7 @@ colGroups.prototype.getPromField = async function () {
   if (!$.isEmptyObject(this.columnIds)) return this.columnIds;
   const res = await service.common.getPromField();
   if (res.data.code === 0) {
-    console.log('getPromField------', res.data.data);
+    // console.log('getPromField------', res.data.data);
     this.columnIds = res.data.data || {};
     store.commit('customize/forginkeys', { key: 'columnIds', value: this.columnIds });
   }
