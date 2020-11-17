@@ -7,7 +7,7 @@ import qxBtnData from './qxBtnData';
 
 console.log('R3::', R3);
 const { FilterTree, SelectTree, SearchForm } = R3.components;
-const { urlSearchParams } = R3;
+const { network,urlSearchParams } = R3;
 export default {
   components: {
     customButton,
@@ -89,7 +89,7 @@ export default {
 
     // 获取角色
     this.getRoleData();
-    if (this.permissionType !== 'sensitive') {
+    if (this.permissionType !== 'sensitivecol') {
       this.getSearchForm();
     }
     this.buttonConfig.buttons = this.normal.buttons;
@@ -178,8 +178,24 @@ export default {
     },
     // 获取搜索框
     async getSearchForm() {
+      network
+        .post(
+          "/p/cs/permission/v1/selectPermissionColumn",
+          urlSearchParams({ permissionType: this.permissionType })
+        )
+        .then(res => {
+          if (res.data.code === 0) {
+            let dataArray = form.refactoringData(res.data.datas.dataarry);
+            dataArray.map(item => {
+              if (item.item.value) {
+                item.item.props.value = item.item.value;
+              }
+            });
+            this.searchFormConfig.defaultconfig = dataArray;
+          }
+        });
       // 
-      const { data: { code, datas } } = await this.service.systemConfig.selectPermissionColumn();
+      /* const { data: { code, datas } } = await this.service.systemConfig.selectPermissionColumn();
       if (code === 0) {
         const dataArray = form.refactoringData(datas.dataarry);
         dataArray.forEach(item => {
@@ -188,7 +204,7 @@ export default {
           }
         });
         this.searchFormConfig.defaultconfig = dataArray;
-      }
+      } */
     },
 
     // 获取表格
@@ -222,7 +238,7 @@ export default {
         this.tableArr.isParentReadValue = false;
         this.tableArr.isParentWriteValue = false;
 
-        if (this.permissionType === 'sensitive') {
+        if (this.permissionType === 'sensitivecol') {
           const dt = data;
           dt.forEach(item => {
             dt.isChild = !!item.PARENT_GROUPS_ID;
