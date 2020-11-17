@@ -3558,13 +3558,7 @@ export default {
           okText: _this.vmI18n.t('common.determine'), // 取消
           cancelText: _this.vmI18n.t('common.cancel'), // 确定
           onOk: () => {
-            _this.service.orderCenter.chargebackcheck({ ID: _this.$route.query.id })
-            // axios({
-            //   url: '/p/cs/chargebackcheck',
-            //   method: 'post',
-            //   cancelToken: true,
-            //   data: { ID: _this.$route.query.id }
-            // })
+            _this.service.common.chargebackcheck({ ID: _this.$route.query.id })
               .then((res) => {
                 if (res.data.code === 0) {
                   _this.$Message.success(res.data.message);
