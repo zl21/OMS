@@ -1,12 +1,13 @@
 <template>
   <div class="import-page">
-    <importTable :componentData="componentData"></importTable>
+    <importTable :component-data="componentData" />
   </div>
 </template>
 
 <script>
-import extraReturnImport from '@/js/modal/orderCenter/extraReturnImport';
-export default extraReturnImport;
+  import extraReturnImport from '@/js/modal/orderCenter/extraReturnImport';
+
+  export default extraReturnImport;
 </script>
 
 <style lang="less" scoped>

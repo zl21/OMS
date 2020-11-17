@@ -85,20 +85,15 @@
 <script>
   import axios from 'axios';
   import jordanButton from 'professionalComponents/businessButton';
-  import jordanForm from 'professionalComponents/businessForm';
   import jordanActionTable from 'professionalComponents/businessActionTable.vue';
 
   export default {
     components: {
       jordanButton,
-      jordanForm,
       jordanActionTable
     },
     props: {
-      componentData: {
-        type: Object,
-        default: {}
-      }
+      componentData: {}
     },
     data() {
       return {
@@ -243,7 +238,8 @@
             if (this.selectData[i].CP_C_PHY_WAREHOUSE_ECODE === ecode) {
               this.selectData.splice(i, 1);
               this.total = this.selectData.length;
-              return this.$Message.success('删除成功');
+              this.$Message.success('删除成功');
+              return;
             }
           }
         }
@@ -292,7 +288,7 @@
         this.cancelModel = false;
       },
       // 双击
-      onRowDblclick(row, index) {
+      onRowDblclick(row) {
         const arr = {
           CP_C_PHY_WAREHOUSE_ID: row.ID,
           CP_C_PHY_WAREHOUSE_ECODE: row.ECODE,

@@ -219,18 +219,17 @@ export default {
       if (rs.code === -1) {
         rs.message = `${tablename},${rs.message}`;
         return this.$message({ type: 'error', message: rs.message });
-      } else {
-        rs.message = tablename + "," + '保存成功';
+      } 
+        rs.message = `${tablename},` + '保存成功';
         this.$message({ type: 'success', message: rs.message });
-        this.closeDialog()
-      }
+        this.closeDialog();
     },
     async setCommodity() {
       const modulesValid3 = this.validate3();
       if (modulesValid3.code === -1) {
         return this.$message({ type: 'error', message: modulesValid3.message });
       }
-      let arr = [];
+      const arr = [];
       this.gift_info_setting.gift_productsArrs.forEach((item) => {
         item.productslist.forEach((obj) => {
           arr.push(obj);
@@ -247,14 +246,14 @@ export default {
     unique(arr) {
       const res = new Map();
       const self = this;
-      const copy = this.$route.query.copy
+      const copy = this.$route.query.copy;
       // let arrList = []
-      let arrlist = JSON.parse(JSON.stringify(arr));
+      const arrlist = JSON.parse(JSON.stringify(arr));
       for (let i = 0; i < arrlist.length; i++) {
-        let temp = arrlist[i];
+        const temp = arrlist[i];
         if (self.gift_info_setting.gift_commoditylist.length > 0) {
           for (let j = 0; j < self.gift_info_setting.gift_commoditylist.length; j++) {
-            let item = self.gift_info_setting.gift_commoditylist[j];
+            const item = self.gift_info_setting.gift_commoditylist[j];
             if (item.ECODE === temp.ECODE) {
               temp.SUM = item.SUM || '';
               temp.SUM_QTY = item.SUM_QTY || 0;
@@ -265,7 +264,7 @@ export default {
       if (copy && copy > 1) {
         arrlist.forEach((item, index) => {
           item.SUM_QTY = item.SUM;
-        })
+        });
       } else {
         arrlist.forEach((item, index) => {
           if (!(item.SUM || item.SUM_QTY)) {
@@ -439,7 +438,7 @@ export default {
             message,
             type: 'success'
           });
-          var action = 'switchActiveTab';
+          let action = 'switchActiveTab';
           if (this.objid == -1) {
             action = 'TabClose';
           }

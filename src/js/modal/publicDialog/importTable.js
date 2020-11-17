@@ -122,10 +122,10 @@ export default {
         this.downloadUrlFile(downloadUrl);
       } else if (this.componentData.tableName === 'ST_C_SYNC_STOCK_STRATEGY') {
         // 店铺同步库存策略
-        this.getDownloadTemp('/p/cs/downLoadSyncStockStrategyImportTemp')
+        this.getDownloadTemp('/p/cs/downLoadSyncStockStrategyImportTemp');
       } else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY_SHOP') {
         // 店铺商品特殊设置 - 多店铺比例-明细导入
-        this.getDownloadTemp('/p/cs/productStrategy/import/downloadMultiShopTemp')
+        this.getDownloadTemp('/p/cs/productStrategy/import/downloadMultiShopTemp');
       }
     },
 

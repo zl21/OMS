@@ -3,11 +3,25 @@
   <div class="postponeConfirm">
     <div class="search">
       生效结束时间:
-      <DatePicker type="datetime" style="width: 200px" size="small" v-model="time" format="yyyy-MM-dd HH:mm:ss"/>
+      <DatePicker
+        v-model="time"
+        type="datetime"
+        style="width: 200px"
+        size="small"
+        format="yyyy-MM-dd HH:mm:ss"
+      />
     </div>
     <div class="button">
-      <Button type="error" @click="confirm" style="marginright: 35px">确定</Button>
-      <Button @click="closeActionDialog">取消</Button>
+      <Button
+        type="error"
+        style="marginright: 35px"
+        @click="confirm"
+      >
+        确定
+      </Button>
+      <Button @click="closeActionDialog">
+        取消
+      </Button>
     </div>
   </div>
 </template>

@@ -8,6 +8,7 @@ import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
 import dialogVisible from '@/views/pages/promotionCenter/setGroup';
 import Favorite from '@/views/pages/promotionCenter/components/favorite';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
+
 const baseColumnDefs = [
   {
     headerName: '序号',
@@ -248,7 +249,6 @@ export default {
                   this.viewLog(params.data);
                 };
                 resultElement.appendChild(iTag);
-                return resultElement;
               }
             },
             pagenation: {
@@ -282,7 +282,7 @@ export default {
                   this.viewLog(params.data);
                 };
                 resultElement.appendChild(iTag);
-                return resultElement;
+                // return resultElement;
               }
             },
             pagenation: {
@@ -316,7 +316,7 @@ export default {
                   this.viewLog(params.data);
                 };
                 resultElement.appendChild(iTag);
-                return resultElement;
+                // return resultElement;
               }
             },
             pagenation: {
@@ -350,7 +350,7 @@ export default {
                   this.viewLog(params.data);
                 };
                 resultElement.appendChild(iTag);
-                return resultElement;
+                // return resultElement;
               }
             },
             pagenation: {

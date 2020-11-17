@@ -1,12 +1,15 @@
 <template>
-  <div class="time-dialog" v-loading="dialogLoad">
+  <div
+    v-loading="dialogLoad"
+    class="time-dialog"
+  >
     <div class="time-dialog-form">
       <businessForm
-        :formConfig="formConfig"  
+        :form-config="formConfig"  
       />
     </div>
     <businessButton
-      :btnConfig="btnConfig"
+      :btn-config="btnConfig"
     />
   </div>
 </template>
@@ -15,8 +18,9 @@
   // import httpServer from '@/utils/request';
   import businessButton from 'professionalComponents/businessButton';
   import businessForm from 'professionalComponents/businessForm';
-  const { getModuleName } = R3;
   import format from '@/assets/js/__utils__/date';
+
+  const { getModuleName } = R3;
   export default {
     components: {
       businessButton,
@@ -59,7 +63,7 @@
               disabled: true,
               placeholder: ''
             }, {
-              style:'date',
+              style: 'date',
               type: 'datetime',
               label: '结束时间',
               width: '24',
@@ -90,7 +94,7 @@
           objid: '',
           table: ''
         }
-      }
+      };
     },
     mounted() {
       console.log(format.standardTimeConversion);
@@ -135,7 +139,7 @@
         }
       }
     }
-  }
+  };
 </script>
 
 <style lang="less" scoped>

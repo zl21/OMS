@@ -72,7 +72,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'rturngoodModifyRemarks', // 组件名称
-        url: 'returngood/rturngoodModifyRemarks',
+        url: 'pages/OrderCenter/returngood/rturngoodModifyRemarks',
         keepAlive: true,
         excludeString: 'rturngoodModifyRemarks', // 将name传进去，确认不缓存
         componentData: {}
