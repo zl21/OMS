@@ -540,13 +540,7 @@ export default {
               const phy = _this.information.formData[13].itemdata;
               const phyIn = _this.information.formData[14].itemdata;
               if (!e) {
-                _this.service.orderCenter.queryOcBOrder({ id: _this.information.formValue.ORIG_ORDER_ID })
-                // axios({
-                //   url: '/p/cs/queryOcBOrder',
-                //   method: 'post',
-                //   cancelToken: true,
-                //   data: { id: _this.information.formValue.ORIG_ORDER_ID }
-                // })
+                _this.service.common.queryOcBOrder({ id: _this.information.formValue.ORIG_ORDER_ID })
                   .then((res) => {
                     if (res.data.code === 0) {
                       phy.pid = phyIn.pid;
@@ -555,7 +549,7 @@ export default {
                       const arrList = JSON.parse(res.data.data);
                       _this.information.formValue.LOGISTICS_CODE = arrList.EXPRESSCODE;
                       _this.information.formValue.CP_C_LOGISTICS_ID = arrList.CP_C_LOGISTICS_ID;
-                      _this.information.formData.forEach((list, j) => {
+                      _this.information.formData.forEach((list) => {
                       // 退回物流公司
                         if (
                           list.style === 'popInput'
@@ -1198,7 +1192,7 @@ export default {
               const item = res.data.data.baseInfo;
               const replace = _this.replacement.formValue;
               this.onSelectData.push(item);
-              this.information.formData.forEach((list, j) => {
+              this.information.formData.forEach((list) => {
                 if (
                   list.style === 'popInput'
                 && list.itemdata.name === '退回物流公司'
@@ -1314,20 +1308,11 @@ export default {
       }
       // 退换货复制退单
       if (this.$route.query.cloneReturnGoodId) {
-        this.service.orderCenter.returnOrderquery({
+        this.service.common.returnOrderquery({
           id: _this.$route.query.cloneReturnGoodId,
           start: 1,
           count: 50
         })
-        // axios({
-        //   url: '/p/cs/returnOrderquery',
-        //   method: 'post',
-        //   data: {
-        //     id: _this.$route.query.cloneReturnGoodId,
-        //     start: 1,
-        //     count: 50
-        //   }
-        // })
           .then(async (res) => {
             if (res.data.code == 0) {
               _this.jordanTableConfig.loading = false;
@@ -1497,8 +1482,8 @@ export default {
       this.getDataAccess('OC_B_RETURN_ORDER', (res) => {
         this.SENSITIVE_COLUMNS = res.SENSITIVE_COLUMNS;
         // 退换货订单-基础信息
-        this.information.formData.forEach((parent, parentIndex) => {
-          res.SENSITIVE_COLUMNS.forEach((child, childIndex) => {
+        this.information.formData.forEach((parent) => {
+          res.SENSITIVE_COLUMNS.forEach((child) => {
             if (parent.dataAcessKey == child.ecode) {
               if (this.$route.query.id === '-1') {
                 this.setFormPermissions(parent, child, 'add');
@@ -1509,8 +1494,8 @@ export default {
           });
         });
         // 退换货订单-收货人信息
-        this.replacement.formData.forEach((parent, parentIndex) => {
-          res.SENSITIVE_COLUMNS.forEach((child, childIndex) => {
+        this.replacement.formData.forEach((parent) => {
+          res.SENSITIVE_COLUMNS.forEach((child) => {
             if (parent.dataAcessKey == child.ecode) {
               if (this.$route.query.id === '-1') {
                 this.setFormPermissions(parent, child, 'add');
@@ -1534,7 +1519,7 @@ export default {
     getQueryResionByName(data) {
       const _this = this;
       const queryData = _this.replacement.formData;
-      queryData.map((item) => {
+      queryData.forEach((item) => {
         if (item.itemdata) {
           // 收货人省份
           if (item.itemdata.name === _this.vmI18n.t('form_label.consignee_province')) {
@@ -1832,13 +1817,7 @@ export default {
     // 标记次品已调拨
     async defectiveGoods() {
       const _this = this;
-      _this.service.orderCenter.returnSkuDb({ id: _this.$route.query.id })
-      // axios({
-      //   url: '/p/cs/returnSkuDb',
-      //   method: 'post',
-      //   cancelToken: true,
-      //   data: { id: _this.$route.query.id }
-      // })
+      _this.service.common.returnSkuDb({ id: _this.$route.query.id })
         .then((res) => {
           if (res.data.code == 0) {
             _this.$Message.success(res.data.message);
@@ -3464,13 +3443,7 @@ export default {
           _this.information.formValue.BILL_TYPE === '2'
           && !_this.isModalSave
         ) {
-          this.service.orderCenter.checkAllStroreStock(params)
-          // axios({
-          //   url: '/p/cs/checkAllStroreStock',
-          //   method: 'post',
-          //   cancelToken: true,
-          //   data: params
-          // })
+          this.service.common.checkAllStroreStock(params)
             .then((res) => {
               if (res.data.code === 0) {
               // 换货明细的商品换货数量小于可用库存，弹窗提示,否则执行保存操作
@@ -3495,13 +3468,7 @@ export default {
           && !_this.isModalSave
           && _this.information.formValue.BILL_TYPE === '2'
       ) {
-        this.service.orderCenter.checkAllStroreStock(params)
-        // axios({
-        //   url: '/p/cs/checkAllStroreStock',
-        //   method: 'post',
-        //   cancelToken: true,
-        //   data: params
-        // })
+        this.service.common.checkAllStroreStock(params)
           .then((res) => {
             if (res.data.code === 0) {
             // 换货明细的商品换货数量小于可用库存，弹窗提示,否则执行保存操作
@@ -3527,13 +3494,7 @@ export default {
       // 防止多次触发
       const _this = this;
       _this.isSaveLoading = true;
-      _this.service.orderCenter.returnOrder(params)
-      // axios({
-      //   url: '/p/cs/returnOrder',
-      //   method: 'post',
-      //   cancelToken: true,
-      //   data: params
-      // })
+      _this.service.common.returnOrder(params)
         .then((res) => {
           _this.availableStock = false;
           _this.isModalSave = false;
@@ -3773,12 +3734,7 @@ export default {
       if (search === '') {
         return;
       }
-      this.service.orderCenter.skuQuery(param)
-      // axios({
-      //   url: '/p/cs/skuQuery',
-      //   method: 'post',
-      //   data: param
-      // })
+      this.service.common.skuQuery(param)
         .then((res) => {
           if (res.data.code === 0) {
             if (index) {
@@ -3804,13 +3760,7 @@ export default {
           ECODE: search
         }
       };
-      this.service.orderCenter.skuQuery(param)
-      // axios({
-      //   url: '/p/cs/skuQuery',
-      //   method: 'post',
-      //   data: param
-      // })
-        .then(async (res) => {
+      this.service.common.skuQuery(param).then(async (res) => {
           if (res.data.code === 0) {
             let dataList = [];
             if (index === 2) {
@@ -3819,7 +3769,8 @@ export default {
             }
             const lists = res.data.data.data || [];
             if (lists.length === 0) {
-              return this.$message.error(this.vmI18n.t('modalTips.g6'));// 不存在该条码！
+              this.$message.error(this.vmI18n.t('modalTips.g6'));// 不存在该条码！
+              return;
             }
             const obj = lists.length > 0 ? lists[0] : {};
             obj.ID = -1; // 明细id
@@ -4701,29 +4652,20 @@ export default {
       }
       const formdata = new FormData();
       formdata.append('param', JSON.stringify(param));
-      return new Promise((resolve) => {
-        const optionData = {};
-        this.service.orderCenter.extInfoQuery(formdata)
-        // axios({
-        //   url: '/p/cs/extInfoQuery',
-        //   method: 'post',
-        //   data: formdata
-        // })
-          .then((res) => {
-            if (dataType === 1) {
-              _this.clrListArr = res.data.data.psCSpec1objList;
-              _this.sizeListArr = res.data.data.psCSpec2objList;
-            } else if (res.data.code === 0) {
-              _this.itemSkuEcode = res.data.data.ecode;
-              _this.itemSkuId = res.data.data.skuId;
-              _this.itemGbcode = res.data.data.gbcode;
-            } else {
-              _this.itemSkuEcode = '';
-              _this.itemSkuId = '';
-              _this.itemGbcode = '';
-            }
-            resolve(optionData);
-          });
+      await this.service.common.extInfoQuery(formdata)
+      .then((res) => {
+        if (dataType === 1) {
+          _this.clrListArr = res.data.data.psCSpec1objList;
+          _this.sizeListArr = res.data.data.psCSpec2objList;
+        } else if (res.data.code === 0) {
+          _this.itemSkuEcode = res.data.data.ecode;
+          _this.itemSkuId = res.data.data.skuId;
+          _this.itemGbcode = res.data.data.gbcode;
+        } else {
+          _this.itemSkuEcode = '';
+          _this.itemSkuId = '';
+          _this.itemGbcode = '';
+        }
       });
     }
   }

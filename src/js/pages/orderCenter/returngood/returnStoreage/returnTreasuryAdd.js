@@ -589,16 +589,11 @@ export default {
             btnclick: () => {
               const _this = this;
               if (_this.isMatch == 1) {
-                // return _this.$Message.error("此退货入库单已经关闭匹配，不允许选择!");
-                return _this.$Message.error(window.vmI18n.t('modalTips.q6'));
+                _this.$Message.error(window.vmI18n.t('modalTips.q6'));
+                return;
               }
               if (_this.$route.query.id == -1) return;
               this.service.orderCenter.manualMatchingCheck({ id: _this.$route.query.id })
-              // axios({
-              //   url: '/api/cs/oc/oms/v1/manualMatchingCheck',
-              //   method: 'post',
-              //   data: { id: _this.$route.query.id },
-              // })
                 .then((res) => {
                   if (res.data.code === 0) {
                     _this.$store.commit('customize/TabHref', {

@@ -757,19 +757,12 @@ export default {
                 // 模糊查询的方法
                 const _this = this;
                 _this.jordanTableConfig.businessFormConfig.formValue.dimData = val.trim();
-                this.service.orderCenter.skuQuery({
+                this.service.common.skuQuery({
                   isBlur: 'Y', // N为精确匹配
                   psCSku: {
                     ECODE: val.trim(),
                   },
                 })
-                // this.$network
-                //   .post('/p/cs/skuQuery', {
-                //     isBlur: 'Y', // N为精确匹配
-                //     psCSku: {
-                //       ECODE: val.trim(),
-                //     },
-                //   })
                   .then((res) => {
                     if (res.status === 200) {
                       const data = res.data.data.data;
@@ -1845,7 +1838,7 @@ export default {
     },
     querySave(val) {
       const _this = this;
-      _this.service.orderCenter.skuQuery({
+      _this.service.common.skuQuery({
         isBlur: 'Y', // N为精确匹配
         psCSku: {
           ECODE: val,
