@@ -31,7 +31,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'returnNumberPop', // 组件名称
-        url: 'returngood/returnStoreage/returnNumberPop',
+        url: 'pages/OrderCenter/returngood/returnStoreage/returnNumberPop',
         keepAlive: true,
         excludeString: 'returnNumberPop', // 将name传进去，确认不缓存
         componentData: {}
@@ -588,11 +588,11 @@ export default {
   },
   methods: {
     // 选中的退货明细赋值
-    returnArr(data, itemId) {
+    returnArr(data) {
       this.jordanTableConfig.data[this.index].OC_B_RETURN_ORDER_ID = data;
     },
     // 选中的退货明细赋值
-    returnArr1(data, data1, itemId) {
+    returnArr1(data, data1) {
       this.jordanTableConfig.data[this.index].OC_B_RETURN_ORDER_ID = data;
       this.jordanTableConfig.data[this.index].PS_C_SKU_ECODE_ACTUAL = data1;
     },
@@ -731,7 +731,6 @@ export default {
     },
     // 获取特殊处理类型字段选项组
     async obtainWarehouse() {
-      const _this = this;
       const fromdata = new FormData();
       fromdata.append('table', 'OC_B_REFUND_IN');
       fromdata.append('objid', -1);
@@ -766,7 +765,7 @@ export default {
         if (res.data.code === 0) {
           _this.optionsData = res.data.data;
           const options = res.data.data;
-          options.map((item) => {
+          options.forEach((item) => {
             item.label = item.BATCH_NO;
             item.value = item.ID;
           });
@@ -956,12 +955,10 @@ export default {
     onSelectAllCancel(e) {
       this.returnSelectData = e;
     },
-    oneObjs() {
-      switch (val.name) {
-        case '物流公司':
-          this.information.formValue.CP_C_LOGISTICS_ID = val.pid;
-          this.information.formValue.CP_C_LOGISTICS_ENAME = val.valuedata;
-          break;
+    oneObjs(val) {
+      if (val.name == '物流公司') {
+        this.information.formValue.CP_C_LOGISTICS_ID = val.pid;
+        this.information.formValue.CP_C_LOGISTICS_ENAME = val.valuedata;
       }
     },
     // 设置表格高度
