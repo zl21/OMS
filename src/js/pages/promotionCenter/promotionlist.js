@@ -4,6 +4,7 @@ import errorMessage from 'framework/components/tablelist/error.vue';
 import Mydialog from 'framework/components/dialog/mydialog.vue';
 import TableInput from 'framework/components/element/input';
 import aTable from 'professionalComponents/agGridTable.vue';
+import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
 import dialogVisible from '@/views/pages/promotionCenter/setGroup';
 import Favorite from '@/views/pages/promotionCenter/components/favorite';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
@@ -101,7 +102,7 @@ const baseColumnDefs = [
   }
 ];
 export default {
-  mixins: [buttonPermissionsMixin],
+  mixins: [isFavoriteMixin, buttonPermissionsMixin],
   data() {
     return {
       vmI18n: window.vmI18n,
@@ -466,6 +467,14 @@ export default {
             btnclick: () => {
               this.simulation();
             }
+          },
+          {
+            icon: 'iconfont iconbj_col', // 按钮图标
+            name: '收藏',
+            btnclick: () => {
+              const self = this;
+              self.setFavorite();
+            } // 按钮点击事件
           }
         ]
       }
@@ -921,7 +930,7 @@ export default {
       this.release_name = ''; // 操作人
       this.STATUS = [1, 2]; // 状态
     }, // 重置
-    async handDblClick(row, index) {
+    async handDblClick(row) {
       // 双击事件
       const ACTI_ID = row.ACTI_ID;
       const typeId = row.PROM_TYPE_ID;

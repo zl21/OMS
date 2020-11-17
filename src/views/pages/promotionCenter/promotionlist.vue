@@ -5,7 +5,6 @@
       <!-- 按钮 head_botton-->
       <div class="operation-botton">
         <jordanBtn :btn-config="btnConfig" />
-        <Favorite />
       </div>
       <!-- 过滤器 -->
       <Row class="operation-form">
