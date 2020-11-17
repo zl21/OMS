@@ -72,7 +72,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'rturngoodModifyRemarks', // 组件名称
-        url: 'returngood/rturngoodModifyRemarks',
+        url: 'pages/OrderCenter/returngood/rturngoodModifyRemarks',
         keepAlive: true,
         excludeString: 'rturngoodModifyRemarks', // 将name传进去，确认不缓存
         componentData: {}
@@ -3535,16 +3535,10 @@ export default {
           content: _this.vmI18n.t('modalTips.av'), // 申请数量与入库数量不一致，是否确定售后审核？
           mask: true,
           showCancel: true,
-          okText: _this.vmI18n.t('common.determine'), // 取消
-          cancelText: _this.vmI18n.t('common.cancel'), // 确定
+          okText: _this.vmI18n.t('common.determine'), 
+          cancelText: _this.vmI18n.t('common.cancel'), 
           onOk: () => {
-            _this.service.orderCenter.chargebackcheck({ ID: _this.$route.query.id })
-            // axios({
-            //   url: '/p/cs/chargebackcheck',
-            //   method: 'post',
-            //   cancelToken: true,
-            //   data: { ID: _this.$route.query.id }
-            // })
+            _this.service.common.chargebackcheck({ ID: _this.$route.query.id })
               .then((res) => {
                 if (res.data.code === 0) {
                   _this.$Message.success(res.data.message);
@@ -3564,13 +3558,7 @@ export default {
           okText: _this.vmI18n.t('common.determine'), // 取消
           cancelText: _this.vmI18n.t('common.cancel'), // 确定
           onOk: () => {
-            _this.service.orderCenter.chargebackcheck({ ID: _this.$route.query.id })
-            // axios({
-            //   url: '/p/cs/chargebackcheck',
-            //   method: 'post',
-            //   cancelToken: true,
-            //   data: { ID: _this.$route.query.id }
-            // })
+            _this.service.common.chargebackcheck({ ID: _this.$route.query.id })
               .then((res) => {
                 if (res.data.code === 0) {
                   _this.$Message.success(res.data.message);

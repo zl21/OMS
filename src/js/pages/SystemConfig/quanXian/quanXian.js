@@ -113,7 +113,7 @@ export default {
         key: 'IS_WRITE'
       }
     ];
-    let btnSearchObj = {
+    const btnSearchObj = {
       text: window.vmI18n.t('btn.search'),
       icon: '',
       btnClick: () => {

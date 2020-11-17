@@ -24,7 +24,7 @@
   import jordanButton from 'professionalComponents/businessButton';
   import jordanActionTable from 'professionalComponents/businessActionTable';
   import EasyMatrix from 'professionalComponents/easyMatrix';
-  import { listeningToKeydownMixin } from '@/assets/js/mixins/listeningToKeydown.js';
+  import { listeningToKeydownMixin } from '@/assets/js/mixins/listeningToKeydown';
   import axios from 'axios';
 
   export default {
@@ -136,7 +136,7 @@
     },
     watch: {
       componentData: {
-        handler(newVal, oldVal) {
+        handler(newVal) {
           this.request(newVal);
         },
         deep: true
@@ -144,19 +144,19 @@
     },
     methods: {
       // 选中某一项时触发
-      onSelect(selection, row) { },
+      onSelect() { },
       // 取消选中某一项时触发
-      onSelectCancel(selection, row) { },
+      onSelectCancel() { },
       // 点击全选时触发
-      onSelectAll(selection) { },
+      onSelectAll() { },
       // 点击取消全选时触发
-      onSelectAllCancel(selection) { },
+      onSelectAllCancel() { },
       // 单击某一行时触发
-      onRowClick(row, index) {
+      onRowClick(row) {
         this.onRowData = row;
       },
       // 单击某二行时触发
-      onRowDblclick(row, index) { },
+      onRowDblclick() { },
       // 分页change 事件
       pageChange(val) {
         this.tableConfig.current = val;
@@ -184,14 +184,10 @@
       },
       submit() {
         const self = this;
-        // let rows = this.tableConfig.data.map((item) => {
-        //   return {
-        //     PS_C_SKU_ECODE: item.ECODE,
-        //     QTY: item.QTY,
-        //     IS_GIFT: item.IS_GIFT
-        //   }
-        // })
-        if (!self.onRowData) return self.$Message.error('无赠品可添加！');
+        if (!self.onRowData) {
+          self.$Message.error('无赠品可添加！');
+          return;
+        } 
         const ids = [];
         ids.push(self.objid);
         const param = {
@@ -205,7 +201,7 @@
           url: '/api/cs/oc/oms/v1/batchAddGoods',
           method: 'post',
           data: param
-        }).then(function (res) {
+        }).then((res) =>{
           console.log(res);
           if (res.data.code === 0) {
             self.$Message.info(res.data.message);
@@ -273,7 +269,6 @@
       },
       showTable(obj) {
         const tbody = obj;
-        const tabname = obj.tabname;
         this.tableConfig = Object.assign(this.tableConfig, {
           columns: this.columns,
           indexColumn: true, // 是否展示需要
