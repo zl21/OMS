@@ -49,7 +49,7 @@ export default {
   querySalesReturn: params => network.post('/api/cs/oc/oms/v1/querySalesReturn', params),
   OcCancelChangingOrRefund: params => network.post('/api/cs/oc/oms/v1/OcCancelChangingOrRefund', params),
   updateVirtualLibrary: params => network.post('/p/cs/updateVirtualLibrary', params),
-  virtualWarehouseStorage: params => network.post('p/cs/virtualWarehouseStorage', params),
+  virtualWarehouseStorage: params => network.post('/api/cs/oc/oms/v1/virtualWarehouseStorage', params),
   cancelautorefund: params => network.post('/api/cs/oc/oms/v1/cancelautorefund', params),
   updateReturnBOrder: params => network.post('/p/cs/updateReturnBOrder', params),
   orderReturnRecallFromWms: params => network.post('/p/cs/orderReturnRecallFromWms', params),

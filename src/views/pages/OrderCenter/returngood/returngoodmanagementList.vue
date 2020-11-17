@@ -154,7 +154,7 @@
       @on-ok="virtualWarehouseLibrary"
     >
       <!-- <p>当前的操作会执行手动入库，是否继续？</p> -->
-      <p>{{ vmI18n.t("modalTips.k3") }}</p>
+      <p>{{ vmI18n.t("modalTips.k2") }}</p>
     </Modal>
     <!-- 批量原退 提示 -->
     <Modal
