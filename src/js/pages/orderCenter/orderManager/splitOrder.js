@@ -163,31 +163,26 @@ export default {
       });
       this.$destroy();
     },
-    getData() {
+    async getData() {
       const self = this;
-      axios({
-        url: '/api/cs/oc/oms/v1/querySkuListAndStorageInfo',
-        method: 'post',
-        data: { orderId: self.$route.query.id }
-      }).then(res => {
-        console.log(res);
-        let total = 0;
-        if (res.data.code === 0) {
-          self.data = [];
-          self.old_cp_c_phy_warehouse_ename = res.data.data[0].cp_c_phy_warehouse_ename;
-          res.data.data.forEach(item => {
-            item.waiting_split_num = Number(item.waiting_split_num || 0);
-            item.split_num = item.waiting_split_num;
-            total += item.waiting_split_num;
-            item.total_qty_available = item.sgBPhyInStorageItemExt[0].total_qty_available; // 获取默认仓库可售数量
-            item.is_gift_name = item.is_gift == 0 ? '否' : '是';
-          });
-          res.data.data[0].total = total;
-          self.data.push(res.data.data);
-        } else {
-          self.$Message.error('查询失败!');
-        }
-      });
+      let params = { orderId: self.$route.query.id }
+      const res = await this.service.orderCenter.querySkuListAndStorageInfo(params);
+      console.log('getData::res::',res);
+      let total = 0;
+      if (res.data.code === 0) {
+        self.old_cp_c_phy_warehouse_ename = res.data.data[0].cp_c_phy_warehouse_ename;
+        res.data.data.forEach(item => {
+          item.waiting_split_num = Number(item.waiting_split_num || 0);
+          item.split_num = item.waiting_split_num;
+          total += item.waiting_split_num;
+          item.total_qty_available = item.sgBPhyInStorageItemExt[0].total_qty_available; // 获取默认仓库可售数量
+          item.is_gift_name = item.is_gift == 0 ? '否' : '是';
+        });
+        res.data.data[0].total = total;
+        self.data.push(res.data.data);
+      } else {
+        self.$Message.error('查询失败!');
+      }
     },
     onSelect(selection) {
       this.onSelectData = selection;

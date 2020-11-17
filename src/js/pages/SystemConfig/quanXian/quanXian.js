@@ -89,10 +89,10 @@ export default {
 
     // 获取角色
     this.getRoleData();
-    if (this.permissionType !== 'sensitivecol') {
       this.getSearchForm();
-    }
-    this.buttonConfig.buttons = this.normal.buttons;
+    this.buttonConfig.buttons = this.permissionType === "brand" || this.permissionType === "sensitivecol"
+    ? this.normal.buttons.filter(item => item.text != "复制权限")
+    : this.normal.buttons;
   },
   mounted() {
     // const { customizedModuleName } = this.$route.params;
@@ -238,7 +238,7 @@ export default {
         this.tableArr.isParentReadValue = false;
         this.tableArr.isParentWriteValue = false;
 
-        if (this.permissionType === 'sensitivecol') {
+        if (this.permissionType === 'sensitive') {
           const dt = data;
           dt.forEach(item => {
             dt.isChild = !!item.PARENT_GROUPS_ID;

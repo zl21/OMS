@@ -70,6 +70,7 @@ export default {
   prodel: params => network.post('/p/cs/prodel', params),
   updateDicunot: params => network.post('/p/cs/oc/v1/sale/updateDicunot', params),
   updateLogisticsBeforePacking: params => network.post('/api/cs/vip/distribution/Logistics/v1/updateLogisticsBeforePacking', params),
+  querySkuListAndStorageInfo: params => network.post('/api/cs/oc/oms/v1/querySkuListAndStorageInfo', params),
   // 半定制弹框
   //
   updateWarehouse: params => network.post('/api/cs/oc/oms/v1/updateWarehouse', params),
