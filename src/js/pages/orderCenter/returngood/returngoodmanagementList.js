@@ -15,7 +15,7 @@ export default {
     businessActionTable,
     businessLabel,
     jordanModal,
-    aTable,
+    aTable
   },
   // mixins: [isFavoriteMixin],
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
@@ -25,12 +25,12 @@ export default {
       errThData: [
         {
           title: window.vmI18n.t('form_label.chargebackNumber'), // 退单编号
-          key: 'id',
+          key: 'id'
         },
         {
           title: window.vmI18n.t('table_label.abnormalInfo'), // 异常信息
-          key: 'error',
-        },
+          key: 'error'
+        }
       ],
       errModal: false,
       errdataList: [],
@@ -50,7 +50,7 @@ export default {
         url: 'pages/OrderCenter/returngood/rturngoodModifyRemarks',
         keepAlive: true,
         excludeString: 'rturngoodModifyRemarks', // 将name传进去，确认不缓存
-        componentData: {},
+        componentData: {}
       },
       // 修改退回仓库
       modifyWarehouse: {
@@ -68,7 +68,7 @@ export default {
         url: 'modal/orderCenter/modifyWarehouse',
         keepAlive: true,
         excludeString: 'modifyWarehouse', // 将name传进去，确认不缓存
-        componentData: {},
+        componentData: {}
       },
       modifyReturnOrderLogistics: {
         refFuns: 'confirmFun',
@@ -85,7 +85,7 @@ export default {
         url: 'returngood/modifyReturnOrderLogistics',
         keepAlive: true,
         excludeString: 'modifyReturnOrderLogistics', // 将name传进去，确认不缓存
-        componentData: {},
+        componentData: {}
       },
       setFromInput: {
         refFuns: 'confirmFun',
@@ -102,7 +102,7 @@ export default {
         url: 'returngood/setFromInput',
         keepAlive: true,
         excludeString: 'setFromInput', // 将name传进去，确认不缓存
-        componentData: {},
+        componentData: {}
       },
       // 弹框配置 导入
       importTable: {
@@ -120,7 +120,7 @@ export default {
         url: 'modal/publicDialog/importTable',
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
-        componentData: {},
+        componentData: {}
       },
       warningModal: false, // 警告弹框
       virtualWarehouseModal: false, // 手工入库弹框
@@ -132,7 +132,7 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.find();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.add'), // 新增  按钮文本
@@ -145,91 +145,91 @@ export default {
                 label: this.vmI18n.t('panel_label.addReturnOrder'), // 退换货订单新增 tab中文名
                 query: Object.assign({
                   id: -1, // id
-                  tabTitle: this.vmI18n.t('panel_label.addReturnOrder'), // 退换货订单新增 tab中文名
-                }), // 带的参数
+                  tabTitle: this.vmI18n.t('panel_label.addReturnOrder') // 退换货订单新增 tab中文名
+                }) // 带的参数
               });
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.modify'), // 修改 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.modify();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('panel_label.scannAndWarehous'), // 扫描入库 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.scanIncoming();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.afterSalesAudit'), // 售后审核 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.afterAudit();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.cancelBtn();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.virtualWarehous'), // 虚拟入库 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.virtualLibrary();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('modalTitle.manualWarehous'), // 手动入库 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.virtualWarehouseLibraryWarn();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.cancel_automaticRefund'), // 取消自动退款 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.cancelRefund();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.modifyRemarks'), // 修改备注 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.bounced();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('modalTitle.modify_sellerNotes'), // 修改卖家备注 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.bounced2();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.modify_returnWarehouse'), // 修改退回仓库
             btnclick: () => {
               this.Warehouse();
-            },
+            }
           },
           {
             text: window.vmI18n.t('modalTitle.modify_logisticsCompany'), // 修改物流公司
             btnclick: () => {
               this.OrderLogistics();
-            },
+            }
           },
           {
             text: window.vmI18n.t('btn.batchOriginalReturn'), // 批量原退
             btnclick: () => {
               this.batchOriginalBack();
-            },
+            }
           },
           // {
           //   text: "从WMS撤回", //按钮文本
@@ -243,21 +243,21 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.againWMS();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.mandatoryCompletion'), // 强制完成  //按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.forcedCompletion();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.returnCopy'), // 退换货复制 
+            text: window.vmI18n.t('btn.returnCopy'), // 退换货复制
             disabled: false,
             btnclick: () => {
               this.cloneRenturnGood();
-            },
+            }
           },
           {
             type: '', // 按钮类型
@@ -267,13 +267,11 @@ export default {
               const _this = this;
               _this.importTable.componentData = {
                 tableName: 'OC_B_RETURN_ORDER_remark',
-                objid: '1',
+                objid: '1'
               };
-              _this.importTable.confirmTitle = _this.vmI18n.t('btn.sellerNotesImport');// 卖家备注导入
-              _this.$children
-                .find(item => item.name === 'importTable')
-                .openConfirm();
-            }, // 按钮点击事件
+              _this.importTable.confirmTitle = _this.vmI18n.t('btn.sellerNotesImport'); // 卖家备注导入
+              _this.$children.find(item => item.name === 'importTable').openConfirm();
+            } // 按钮点击事件
           },
           {
             type: '', // 按钮类型
@@ -282,33 +280,29 @@ export default {
             btnclick: () => {
               const _this = this;
               _this.importTable.componentData = {
-                tableName: 'OC_B_RETURN_ORDER',
+                tableName: 'OC_B_RETURN_ORDER'
               };
-              _this.$children
-                .find(item => item.name === 'importTable')
-                .openConfirm();
-            }, // 按钮点击事件
+              _this.$children.find(item => item.name === 'importTable').openConfirm();
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.export'), // 导出 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.exportClick();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             icon: 'iconfont iconbj_setup', // 按钮图标
             btnclick: () => {
               const self = this;
               self.setFromInput.componentData = {
-                typeName: 'OC_B_RETURN_ORDER',
+                typeName: 'OC_B_RETURN_ORDER'
               };
               setTimeout(() => {
-                self.$children
-                  .find(item => item.name === 'setFromInput')
-                  .openConfirm();
+                self.$children.find(item => item.name === 'setFromInput').openConfirm();
               }, 100);
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             icon: 'iconfont iconbj_col', // 按钮图标
@@ -318,45 +312,44 @@ export default {
             btnclick: () => {
               const _this = this;
               _this.setFavorite();
-            }, // 按钮点击事件
-          },
-        ],
+            } // 按钮点击事件
+          }
+        ]
       }, // 按钮数据
       formConfig: {
-        flodClick: 'a', // 展开按钮 参数任意字符串
+        flodClickMsg: 'a', // 展开按钮 参数任意字符串
         formValue: {},
         formData: [],
         flodClick: () => {
-          setTimeout(() => {
-          }, 10);
-        },
+          setTimeout(() => {}, 10);
+        }
       }, // form表单
       labelList: [
         {
           label: window.vmI18n.t('panel_label.all'), // 全部
           value: '1',
-          isShow: true,
+          isShow: true
         },
         {
           label: window.vmI18n.t('form_label.waitFor_return_warehous'), // 等待退货入库
           value: '2',
-          isShow: true,
+          isShow: true
         },
         {
           label: window.vmI18n.t('form_label.waitFor_afterSale_confirm'), // 等待售后确认
           value: '3',
-          isShow: true,
+          isShow: true
         },
         {
           label: window.vmI18n.t('form_label.complete'), // 完成
           value: '4',
-          isShow: true,
+          isShow: true
         },
         {
           label: window.vmI18n.t('common.cancel'), // 取消
           value: '5',
-          isShow: true,
-        },
+          isShow: true
+        }
       ], // tab切换
       labelDefaultValue: '1',
       agTableConfig: {
@@ -364,7 +357,7 @@ export default {
         columnDefs: [],
         rowData: [],
         renderArr: {
-          CP_C_SHOP_ID: (param) => {
+          CP_C_SHOP_ID: param => {
             const resDom = document.createElement('div');
             resDom.style.width = '100%';
             resDom.style.display = 'flex';
@@ -372,7 +365,7 @@ export default {
             resDom.style.justifyContent = 'space-between';
             resDom.innerHTML = param.data.CP_C_SHOP_TITLE;
             return resDom;
-          },
+          }
         },
         tableHeight: '600px',
         pagenation: {
@@ -382,8 +375,8 @@ export default {
           pageSize: 20,
           // 页数
           current: 1,
-          pageSizeOpts: [50, 200, 500, 2000],
-        },
+          pageSizeOpts: [50, 200, 500, 2000]
+        }
       },
       jordanTableConfig: {
         columns: [], // 表头
@@ -395,21 +388,21 @@ export default {
               let bottomTable = 'bottom';
               if (params.index >= 8) bottomTable = 'top';
               if (params.row.allSkuItem === null) return;
-              params.row.allSkuItem.forEach((item) => {
+              params.row.allSkuItem.forEach(item => {
                 item.qty_refund = parseInt(item.qty_refund);
               });
               const goodsThead = [
                 {
                   key: 'id',
-                  title: window.vmI18n.t('table_label.code'), // 编号
+                  title: window.vmI18n.t('table_label.code') // 编号
                 },
                 {
                   key: 'return',
-                  title: window.vmI18n.t('table_label.returnGoods'), // 退换货
+                  title: window.vmI18n.t('table_label.returnGoods') // 退换货
                 },
                 {
                   title: window.vmI18n.t('table_label.articleNumber'), // 货号
-                  key: 'ps_c_pro_ecode',
+                  key: 'ps_c_pro_ecode'
                 },
                 // {
                 //   title: "规格",
@@ -417,24 +410,24 @@ export default {
                 // },
                 {
                   title: window.vmI18n.t('other.color'), // 颜色
-                  key: 'ps_c_clr_ename',
+                  key: 'ps_c_clr_ename'
                 },
                 {
                   title: window.vmI18n.t('other.sizes'), // 尺寸
-                  key: 'ps_c_size_ename',
+                  key: 'ps_c_size_ename'
                 },
                 {
                   title: window.vmI18n.t('form_label.refundAmount'), // 退款金额
-                  key: 'refund_amt',
+                  key: 'refund_amt'
                 },
                 {
                   title: window.vmI18n.t('table_label.appleNumber'), // 申请数量
-                  key: 'qty_refund',
+                  key: 'qty_refund'
                 },
                 {
                   title: window.vmI18n.t('table_label.storageQuantity'), // 入库数量
-                  key: 'qty_in',
-                },
+                  key: 'qty_in'
+                }
               ]; // 浮框表头
               return h(
                 'div',
@@ -443,8 +436,8 @@ export default {
                     width: '200px',
                     display: 'flex',
                     alignitems: 'center',
-                    justifyContent: 'space-between',
-                  },
+                    justifyContent: 'space-between'
+                  }
                 },
                 [
                   h(
@@ -454,8 +447,8 @@ export default {
                         placement: bottomTable,
                         transfer: true,
                         minWidth: '400',
-                        trigger: 'hover',
-                      },
+                        trigger: 'hover'
+                      }
                     },
                     [
                       h(
@@ -466,8 +459,8 @@ export default {
                             position: 'releative',
                             overflow: 'hidden',
                             'white-space': 'nowrap',
-                            'text-overflow': 'ellipsis',
-                          },
+                            'text-overflow': 'ellipsis'
+                          }
                         },
                         params.row.allSkuItem.length ? params.row.ALL_SKU : '' // hover值
                       ),
@@ -479,56 +472,49 @@ export default {
                           'highlight-row': false,
                           'no-data-text': '暂无数据',
                           columns: goodsThead,
-                          data: params.row.allSkuItem
-                            ? params.row.allSkuItem
-                            : [], // 浮框数据
-                        },
-                      }),
+                          data: params.row.allSkuItem ? params.row.allSkuItem : [] // 浮框数据
+                        }
+                      })
                     ]
-                  ),
+                  )
                 ]
               );
-            },
+            }
           },
           {
             key: 'ORDERFLAG',
             render: (h, params) => {
-              const imgSrc = params.row.BACK_MESSAGE == null
-                || params.row.BACK_MESSAGE == ''
-                ? require('@/assets/image/img/0.png')
-                : require('@/assets/image/img/1.png');
+              const imgSrc = params.row.BACK_MESSAGE == null || params.row.BACK_MESSAGE == '' ? require('@/assets/image/img/0.png') : require('@/assets/image/img/1.png');
               return h(
                 'Poptip',
                 {
                   props: {
                     placement: 'right',
                     width: '78',
-                    trigger: 'hover',
-                  },
+                    trigger: 'hover'
+                  }
                 },
                 [
                   h('img', {
                     attrs: {
-                      src: imgSrc,
+                      src: imgSrc
                     },
                     style: {
                       width: '20px',
-                      height: '20px',
-                    },
+                      height: '20px'
+                    }
                   }),
                   h(
                     'span',
                     {
-                      slot: 'content',
+                      slot: 'content'
                     },
-                    params.row.BACK_MESSAGE
-                      ? params.row.BACK_MESSAGE
-                      : '暂无卖家备注'
-                  ),
+                    params.row.BACK_MESSAGE ? params.row.BACK_MESSAGE : '暂无卖家备注'
+                  )
                 ]
               );
-            },
-          },
+            }
+          }
         ],
         pageShow: true, // 控制分页是否显示
         loading: false,
@@ -545,12 +531,12 @@ export default {
         total: 0, // 设置总条数
         pageSizeOpts: [15, 30, 45, 60], // 每页条数切换的配置
         pageSize: 15, // 每页条数
-        data: [], // 数据配置
+        data: [] // 数据配置
       }, // 列表数据
       isShowFromLoading: false,
       statusTab: '', // 单据类型
       isExport: false,
-      isSaveLoading: false,
+      isSaveLoading: false
     };
   },
   activated() {},
@@ -577,7 +563,7 @@ export default {
     });
 
     const _this = this;
-    window.addEventListener('keydown', (e) => {
+    window.addEventListener('keydown', e => {
       const key = e.keyCode;
       if (key == 13 && _this.warningModal) {
         _this.warningOk();
@@ -601,158 +587,147 @@ export default {
         column_include_uicontroller: true,
         fixedcolumns: {},
         multiple: [],
-        startindex: 0,
+        startindex: 0
       };
-      this.service.orderCenter.DynamicList(params)
-      // this.$network
-      //   .axios({
-      //     url: "/api/cs/oc/oms/v1/DynamicList",
-      //     type: "formdata",
-      //     method: "post",
-      //     data: params,
-      //   })
-        .then((res) => {
-          // 高级查询
-          const formData = [];
-          res.data.data.search.date.map((item, index) => {
-            if (item.type === 'date') {
-              formData[index] = {
-                style: item.tabth.isfilter ? 'date' : '', // 输入框类型
-                type: 'datetimerange', // 文本框类型的input
-                label: item.tabth.name, // 输入框前文字
-                value: item.tabth.colname, // 输入框的值
-                // format: "yyyy-MM-dd",
-                width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-                icon: 'md-alarm', // 输入框后带的图标,暂只有输入框支持
-                placeholder: '', // 占位文本，默认为请输入
-                transfer: true,
-                ghost: false, // 是否关闭幽灵按钮，默认开启
-                inputenter: () => {
-                  _this.getList();
-                }, // 表单回车事件
-                iconclick: () => {}, // 点击icon图标事件
-                clearable: true,
-              };
-              _this.formConfig.formValue[item.tabth.colname] = '';
-            }
-            if (item.type === 'propInput') {
-              formData[index] = {
-                style: item.tabth.isfilter ? 'popInput' : '', // 输入框弹框单多选
-                width: '6',
-                itemdata: {
-                  col: 1,
-                  colid: item.tabth.colid,
-                  colname: item.tabth.colname, // 当前字段的名称
-                  datelimit: 'all',
-                  display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-                  fkdisplay: item.tabth.fkdisplay, // 外键关联类型
-                  fkdesc: item.tabth.fkdesc,
-                  inputname: item.tabth.inputname, // 这个是做中文类型的模糊查询字段，例如ENAME
-                  isfk: true, // 是否有fk键
-                  isnotnull: false, // 是否必填
-                  isuppercase: false, // 是否转大写
-                  length: 65535, // 最大长度是多少
-                  name: item.tabth.name, // input前面显示的lable值
-                  readonly: false, // 是否可编辑，对应input   readonly属性
-                  reftable: item.tabth.reftable,
-                  reftableid: item.tabth.reftableid,
-                  row: 1,
-                  scale: 0,
-                  statsize: -1,
-                  type: item.tabth.type, // 这个是后台用的
-                  pid: '',
-                  valuedata: '', // 这个是选择的值
-                },
-                oneObj: (e) => {
-                  _this.oneObjs(e);
-                },
-              };
-              if (item.tabth.precolnameslist) {
-                formData[index].itemdata.precolnameslist = item.tabth
-                  .precolnameslist
-                  ? item.tabth.precolnameslist
-                  : []; 
+      this.service.orderCenter.DynamicList(params).then(res => {
+        // 高级查询
+        const formData = [];
+        res.data.data.search.date.forEach((item, index) => {
+          if (item.type === 'date') {
+            formData[index] = {
+              style: item.tabth.isfilter ? 'date' : '', // 输入框类型
+              type: 'datetimerange', // 文本框类型的input
+              label: item.tabth.name, // 输入框前文字
+              value: item.tabth.colname, // 输入框的值
+              // format: "yyyy-MM-dd",
+              width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+              icon: 'md-alarm', // 输入框后带的图标,暂只有输入框支持
+              placeholder: '', // 占位文本，默认为请输入
+              transfer: true,
+              ghost: false, // 是否关闭幽灵按钮，默认开启
+              inputenter: () => {
+                _this.getList();
+              }, // 表单回车事件
+              iconclick: () => {}, // 点击icon图标事件
+              clearable: true
+            };
+            _this.formConfig.formValue[item.tabth.colname] = '';
+          }
+          if (item.type === 'propInput') {
+            formData[index] = {
+              style: item.tabth.isfilter ? 'popInput' : '', // 输入框弹框单多选
+              width: '6',
+              itemdata: {
+                col: 1,
+                colid: item.tabth.colid,
+                colname: item.tabth.colname, // 当前字段的名称
+                datelimit: 'all',
+                display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+                fkdisplay: item.tabth.fkdisplay, // 外键关联类型
+                fkdesc: item.tabth.fkdesc,
+                inputname: item.tabth.inputname, // 这个是做中文类型的模糊查询字段，例如ENAME
+                isfk: true, // 是否有fk键
+                isnotnull: false, // 是否必填
+                isuppercase: false, // 是否转大写
+                length: 65535, // 最大长度是多少
+                name: item.tabth.name, // input前面显示的lable值
+                readonly: false, // 是否可编辑，对应input   readonly属性
+                reftable: item.tabth.reftable,
+                reftableid: item.tabth.reftableid,
+                row: 1,
+                scale: 0,
+                statsize: -1,
+                type: item.tabth.type, // 这个是后台用的
+                pid: '',
+                valuedata: '' // 这个是选择的值
+              },
+              oneObj: e => {
+                _this.oneObjs(e);
               }
+            };
+            if (item.tabth.precolnameslist) {
+              formData[index].itemdata.precolnameslist = item.tabth.precolnameslist ? item.tabth.precolnameslist : [];
             }
-            if (item.type === 'text') {
-              formData[index] = {
-                style: item.tabth.isfilter ? 'input' : '', // 输入框类型
-                // type: "", //文本框类型的input
-                label: item.tabth.name, // 输入框前文字
-                value: item.tabth.colname, // 输入框的值
-                width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-                icon: '', // 输入框后带的图标,暂只有输入框支持
-                clearable: true,
-                placeholder: '', // 占位文本，默认为请输入
-                ghost: false, // 是否关闭幽灵按钮，默认开启
-                inputenter: () => {
-                  _this.getList();
-                }, // 表单回车事件
-                iconclick: () => {}, // 点击icon图标事件
-              };
-              _this.formConfig.formValue[item.tabth.colname] = '';
-            }
-            if (item.type === 'number') {
-              formData[index] = {
-                style: item.tabth.isfilter ? 'input' : '', // 输入框类型
-                // type: "", //文本框类型的input
-                label: item.tabth.name, // 输入框前文字
-                value: item.tabth.colname, // 输入框的值
-                clearable: true,
-                width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-                icon: '', // 输入框后带的图标,暂只有输入框支持
-                placeholder: '', // 占位文本，默认为请输入
-                ghost: false, // 是否关闭幽灵按钮，默认开启
-                inputenter: () => {
-                  _this.getList();
-                }, // 表单回车事件
-                iconclick: () => {}, // 点击icon图标事件
-              };
-              _this.formConfig.formValue[item.tabth.colname] = '';
-            }
-            if (item.type === 'select') {
-              formData[index] = {
-                style: item.tabth.isfilter ? 'select' : '', // 下拉框类型
-                label: item.tabth.name, // 下拉框前的值
-                width: '6', // 所占宽度宽度
-                clearable: true, // 是否显示下来清空按钮
-                value: item.tabth.colname, // 输入框的值
-                multiple: true, // 布尔值,下拉框是否开启多选,默认为不开启
-                selectChange: () => {}, // 选中事件，默认返回选中的值
-                clearSelect: (e) => {
-                  if (e == 'RETURN_STATUS') {
-                    _this.formConfig.formValue.RETURN_STATUS = '';
-                  } else if (e == 'IS_ADD') {
-                    _this.formConfig.formValue.IS_ADD = '';
-                  } else if (e == 'IS_TOAG') {
-                    _this.formConfig.formValue.IS_TOAG = '';
-                  } else if (e == 'IS_TOWMS') {
-                    _this.formConfig.formValue.IS_TOWMS = '';
-                  } else if (e == 'BILL_TYPE') {
-                    _this.formConfig.formValue.BILL_TYPE = '';
-                  } else if (e == 'IS_EXAMINE') {
-                    _this.formConfig.formValue.IS_EXAMINE = '';
-                  } else if (e == 'IS_TODRP') {
-                    _this.formConfig.formValue.IS_TODRP = '';
-                  } else if (e == 'IS_TRANSFER') {
-                    _this.formConfig.formValue.IS_TRANSFER = '';
-                  }
-                }, // 点击清空按钮回调
-                options: _this.converSelect(item.tabth.combobox),
-              };
-              _this.formConfig.formValue[item.tabth.colname] = [];
-            }
-          });
-          _this.formConfig.formData = formData;
-          // 表头赋值
-          res.data.data.columns.forEach((item) => {
-            item.field = item.key;
-            item.headerName = item.title;
-            delete item.key;
-            delete item.title;
-          });
-          _this.agTableConfig.columnDefs = res.data.data.columns;
+          }
+          if (item.type === 'text') {
+            formData[index] = {
+              style: item.tabth.isfilter ? 'input' : '', // 输入框类型
+              // type: "", //文本框类型的input
+              label: item.tabth.name, // 输入框前文字
+              value: item.tabth.colname, // 输入框的值
+              width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+              icon: '', // 输入框后带的图标,暂只有输入框支持
+              clearable: true,
+              placeholder: '', // 占位文本，默认为请输入
+              ghost: false, // 是否关闭幽灵按钮，默认开启
+              inputenter: () => {
+                _this.getList();
+              }, // 表单回车事件
+              iconclick: () => {} // 点击icon图标事件
+            };
+            _this.formConfig.formValue[item.tabth.colname] = '';
+          }
+          if (item.type === 'number') {
+            formData[index] = {
+              style: item.tabth.isfilter ? 'input' : '', // 输入框类型
+              // type: "", //文本框类型的input
+              label: item.tabth.name, // 输入框前文字
+              value: item.tabth.colname, // 输入框的值
+              clearable: true,
+              width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+              icon: '', // 输入框后带的图标,暂只有输入框支持
+              placeholder: '', // 占位文本，默认为请输入
+              ghost: false, // 是否关闭幽灵按钮，默认开启
+              inputenter: () => {
+                _this.getList();
+              }, // 表单回车事件
+              iconclick: () => {} // 点击icon图标事件
+            };
+            _this.formConfig.formValue[item.tabth.colname] = '';
+          }
+          if (item.type === 'select') {
+            formData[index] = {
+              style: item.tabth.isfilter ? 'select' : '', // 下拉框类型
+              label: item.tabth.name, // 下拉框前的值
+              width: '6', // 所占宽度宽度
+              clearable: true, // 是否显示下来清空按钮
+              value: item.tabth.colname, // 输入框的值
+              multiple: true, // 布尔值,下拉框是否开启多选,默认为不开启
+              selectChange: () => {}, // 选中事件，默认返回选中的值
+              clearSelect: e => {
+                if (e == 'RETURN_STATUS') {
+                  _this.formConfig.formValue.RETURN_STATUS = '';
+                } else if (e == 'IS_ADD') {
+                  _this.formConfig.formValue.IS_ADD = '';
+                } else if (e == 'IS_TOAG') {
+                  _this.formConfig.formValue.IS_TOAG = '';
+                } else if (e == 'IS_TOWMS') {
+                  _this.formConfig.formValue.IS_TOWMS = '';
+                } else if (e == 'BILL_TYPE') {
+                  _this.formConfig.formValue.BILL_TYPE = '';
+                } else if (e == 'IS_EXAMINE') {
+                  _this.formConfig.formValue.IS_EXAMINE = '';
+                } else if (e == 'IS_TODRP') {
+                  _this.formConfig.formValue.IS_TODRP = '';
+                } else if (e == 'IS_TRANSFER') {
+                  _this.formConfig.formValue.IS_TRANSFER = '';
+                }
+              }, // 点击清空按钮回调
+              options: _this.converSelect(item.tabth.combobox)
+            };
+            _this.formConfig.formValue[item.tabth.colname] = [];
+          }
         });
+        _this.formConfig.formData = formData;
+        // 表头赋值
+        res.data.data.columns.forEach(item => {
+          item.field = item.key;
+          item.headerName = item.title;
+          delete item.key;
+          delete item.title;
+        });
+        _this.agTableConfig.columnDefs = res.data.data.columns;
+      });
     },
     // 查找
     find() {
@@ -762,10 +737,10 @@ export default {
     // 字段选项组转换
     converSelect(val) {
       const list = [];
-      val.map((item, index) => {
+      val.forEach((item, index) => {
         list[index] = {
           label: item.limitdesc,
-          value: item.limitval,
+          value: item.limitval
         };
       });
       return list;
@@ -782,16 +757,13 @@ export default {
       const param = {
         start: _this.agTableConfig.pagenation.current,
         count: _this.agTableConfig.pagenation.pageSize,
-        RETURN_STATUS: status == undefined || !status ? [] : [status],
+        RETURN_STATUS: status == undefined || !status ? [] : [status]
       };
       _this.formConfig.formValue.RECEIVE_PROVINCE = '';
       _this.formConfig.formValue.RECEIVE_PROVINCE_ID = '';
       if (_this.formConfig.formData.length) {
-        _this.formConfig.formData.forEach((item) => {
-          if (
-            item.itemdata !== undefined
-            && item.itemdata.name == '原始订单编号'
-          ) {
+        _this.formConfig.formData.forEach(item => {
+          if (item.itemdata !== undefined && item.itemdata.name == '原始订单编号') {
             _this.formConfig.formValue.ORIG_ORDER_ID = item.itemdata.valuedata;
           }
         });
@@ -800,22 +772,33 @@ export default {
         _this.formConfig.formValue.RETURN_STATUS = [status];
       }
       const Obj = _this.formConfig.formValue;
-      if (Obj.INVENTED_STATUS && Obj.INVENTED_STATUS[0] === 'bSelect-all') { Obj.INVENTED_STATUS = ''; } else if (Obj.BILL_TYPE && Obj.BILL_TYPE[0] === 'bSelect-all') { Obj.BILL_TYPE = ''; } else if (Obj.RETURN_STATUS && Obj.RETURN_STATUS[0] === 'bSelect-all') { Obj.RETURN_STATUS = ''; } else if (Obj.IS_TOWMS && Obj.IS_TOWMS[0] === 'bSelect-all') { Obj.IS_TOWMS = ''; } else if (
-        Obj.WMS_CANCEL_STATUS
-        && Obj.WMS_CANCEL_STATUS[0] === 'bSelect-all'
-      ) { Obj.WMS_CANCEL_STATUS = ''; } else if (Obj.IS_ADD && Obj.IS_ADD[0] === 'bSelect-all') Obj.IS_ADD = '';
-      else if (Obj.IS_TOAG && Obj.IS_TOAG[0] === 'bSelect-all') { Obj.IS_TOAG = ''; } else if (Obj.IS_BACK && Obj.IS_BACK[0] === 'bSelect-all') { Obj.IS_BACK = ''; } else if (
-        Obj.STATUS_DEFECTIVE_TRANS
-        && Obj.STATUS_DEFECTIVE_TRANS[0] === 'bSelect-all'
-      ) { Obj.STATUS_DEFECTIVE_TRANS = ''; }
-      this.service.orderCenter.querySalesReturn(Object.assign(param, _this.formConfig.formValue))
-      // this.$network
-      //   .axios({
-      //     url: '/api/cs/oc/oms/v1/querySalesReturn',
-      //     method: 'post',
-      //     data: Object.assign(param, _this.formConfig.formValue),
-      //   })
-        .then((res) => {
+      if (Obj.INVENTED_STATUS && Obj.INVENTED_STATUS[0] === 'bSelect-all') {
+        Obj.INVENTED_STATUS = '';
+      } else if (Obj.BILL_TYPE && Obj.BILL_TYPE[0] === 'bSelect-all') {
+        Obj.BILL_TYPE = '';
+      } else if (Obj.RETURN_STATUS && Obj.RETURN_STATUS[0] === 'bSelect-all') {
+        Obj.RETURN_STATUS = '';
+      } else if (Obj.IS_TOWMS && Obj.IS_TOWMS[0] === 'bSelect-all') {
+        Obj.IS_TOWMS = '';
+      } else if (Obj.WMS_CANCEL_STATUS && Obj.WMS_CANCEL_STATUS[0] === 'bSelect-all') {
+        Obj.WMS_CANCEL_STATUS = '';
+      } else if (Obj.IS_ADD && Obj.IS_ADD[0] === 'bSelect-all') Obj.IS_ADD = '';
+      else if (Obj.IS_TOAG && Obj.IS_TOAG[0] === 'bSelect-all') {
+        Obj.IS_TOAG = '';
+      } else if (Obj.IS_BACK && Obj.IS_BACK[0] === 'bSelect-all') {
+        Obj.IS_BACK = '';
+      } else if (Obj.STATUS_DEFECTIVE_TRANS && Obj.STATUS_DEFECTIVE_TRANS[0] === 'bSelect-all') {
+        Obj.STATUS_DEFECTIVE_TRANS = '';
+      }
+      this.service.orderCenter
+        .querySalesReturn(Object.assign(param, _this.formConfig.formValue))
+        // this.$network
+        //   .axios({
+        //     url: '/api/cs/oc/oms/v1/querySalesReturn',
+        //     method: 'post',
+        //     data: Object.assign(param, _this.formConfig.formValue),
+        //   })
+        .then(res => {
           if (res.data.code == 0 && res.data.data.queryResult.length) {
             _this.agTableConfig.agLoading = false;
             _this.agTableConfig.rowData = res.data.data.queryResult;
@@ -823,26 +806,22 @@ export default {
             for (let i = 0; i < _this.agTableConfig.rowData.length; i++) {
               const item = _this.agTableConfig.rowData[i];
               if (item.MODIFIEDDATE) {
-                item.MODIFIEDDATE = publicMethodsUtil.DatesTime(
-                  item.MODIFIEDDATE
-                ); 
+                item.MODIFIEDDATE = publicMethodsUtil.DatesTime(item.MODIFIEDDATE);
               } // 修改时间
-              if (item.IN_TIME) { item.IN_TIME = publicMethodsUtil.DatesTime(item.IN_TIME); } // 入库时间
-              if (item.AUDIT_TIME) { item.AUDIT_TIME = publicMethodsUtil.DatesTime(item.AUDIT_TIME); } // 审核时间
+              if (item.IN_TIME) {
+                item.IN_TIME = publicMethodsUtil.DatesTime(item.IN_TIME);
+              } // 入库时间
+              if (item.AUDIT_TIME) {
+                item.AUDIT_TIME = publicMethodsUtil.DatesTime(item.AUDIT_TIME);
+              } // 审核时间
               if (item.LAST_UPDATE_TIME) {
-                item.LAST_UPDATE_TIME = publicMethodsUtil.DatesTime(
-                  item.LAST_UPDATE_TIME
-                ); 
+                item.LAST_UPDATE_TIME = publicMethodsUtil.DatesTime(item.LAST_UPDATE_TIME);
               } // 退款平台最后修改时间
               if (item.RETURN_CREATE_TIME) {
-                item.RETURN_CREATE_TIME = publicMethodsUtil.DatesTime(
-                  item.RETURN_CREATE_TIME
-                ); 
+                item.RETURN_CREATE_TIME = publicMethodsUtil.DatesTime(item.RETURN_CREATE_TIME);
               } // 退款创建时间
               if (item.CREATIONDATE) {
-                item.CREATIONDATE = publicMethodsUtil.DatesTime(
-                  item.CREATIONDATE
-                ); 
+                item.CREATIONDATE = publicMethodsUtil.DatesTime(item.CREATIONDATE);
               } // 创建时间
               item.RETURN_STATUS = item.RETURN_STATUS_NAME; // 退单状态
               item.IS_ADD = item.IS_ADD == 0 ? '否' : '是'; // 是否手工新增
@@ -857,7 +836,13 @@ export default {
               item.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ECODE; // 退回物流公司
               item.IS_RECEIVE_CONFIRM = item.IS_RECEIVE_CONFIRM == 0 ? '否' : '是'; // 是否确认收货
               // item.WMS_CANCEL_STATUS = item.WMS_CANCEL_STATUS == 0 ? '未撤回' : '已撤回'; // WMS撤回状态
-              if (item.WMS_CANCEL_STATUS == 0) { item.WMS_CANCEL_STATUS = '未撤回'; } else if (item.WMS_CANCEL_STATUS == 1) { item.WMS_CANCEL_STATUS = '已撤回'; } else if (item.WMS_CANCEL_STATUS == 2) { item.WMS_CANCEL_STATUS = '撤回失败'; }
+              if (item.WMS_CANCEL_STATUS == 0) {
+                item.WMS_CANCEL_STATUS = '未撤回';
+              } else if (item.WMS_CANCEL_STATUS == 1) {
+                item.WMS_CANCEL_STATUS = '已撤回';
+              } else if (item.WMS_CANCEL_STATUS == 2) {
+                item.WMS_CANCEL_STATUS = '撤回失败';
+              }
               item.IS_BACK = item.IS_BACK == 0 ? '否' : '是'; // 是否原退
               item.IS_MANUAL_AUDIT = item.IS_MANUAL_AUDIT == 0 ? '否' : '是'; // 是否手工审核
               // item.IS_TOAG = item.IS_TOAG == 0 ? '否' : '是'; // 是否传AG
@@ -911,10 +896,7 @@ export default {
               // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否
               item.IS_TRANSFER = item.IS_TRANSFER == 0 ? '否' : '是'; // 是否
               item.IS_FORCE = item.IS_FORCE == 0 ? '否' : '是'; // 是否
-              _this.$refs.agGridChild.agGridTable(
-                _this.agTableConfig.columnDefs,
-                _this.agTableConfig.rowData
-              );
+              _this.$refs.agGridChild.agGridTable(_this.agTableConfig.columnDefs, _this.agTableConfig.rowData);
             }
           } else {
             _this.agTableConfig.rowData = [];
@@ -935,16 +917,13 @@ export default {
       const param = {
         start: _this.agTableConfig.pagenation.current,
         count: _this.agTableConfig.pagenation.pageSize,
-        RETURN_STATUS: status == undefined || !status ? [] : [status],
+        RETURN_STATUS: status == undefined || !status ? [] : [status]
       };
       _this.formConfig.formValue.RECEIVE_PROVINCE = '';
       _this.formConfig.formValue.RECEIVE_PROVINCE_ID = '';
       if (_this.formConfig.formData.length) {
-        _this.formConfig.formData.forEach((item) => {
-          if (
-            item.itemdata !== undefined
-            && item.itemdata.name == '原始订单编号'
-          ) {
+        _this.formConfig.formData.forEach(item => {
+          if (item.itemdata !== undefined && item.itemdata.name == '原始订单编号') {
             _this.formConfig.formValue.ORIG_ORDER_ID = item.itemdata.valuedata;
           }
         });
@@ -955,36 +934,36 @@ export default {
       const returnParam = JSON.parse(_this.$route.query.returnParam);
       if (_this.$route.query.type == 'workID') {
         if (returnParam.time == 'IN_TIME') {
-          _this.formConfig.formValue.IN_TIME = [
-            new Date(returnParam.startTime),
-            new Date(returnParam.endTime),
-          ]; 
+          _this.formConfig.formValue.IN_TIME = [new Date(returnParam.startTime), new Date(returnParam.endTime)];
         } else if (returnParam.time == 'AUDIT_TIME') {
-          _this.formConfig.formValue.AUDIT_TIME = [
-            new Date(returnParam.startTime),
-            new Date(returnParam.endTime),
-          ]; 
+          _this.formConfig.formValue.AUDIT_TIME = [new Date(returnParam.startTime), new Date(returnParam.endTime)];
         } else if (returnParam.time == 'CREATIONDATE') {
-          _this.formConfig.formValue.CREATIONDATE = [
-            new Date(returnParam.startTime),
-            new Date(returnParam.endTime),
-          ];
+          _this.formConfig.formValue.CREATIONDATE = [new Date(returnParam.startTime), new Date(returnParam.endTime)];
           _this.formConfig.formValue.ISACTIVE = returnParam.IS_ACTIVE;
         }
         if (returnParam.ID) _this.formConfig.formValue.ID = returnParam.ID;
-        if (returnParam.returnStatus) { _this.formConfig.formValue.RETURN_STATUS = returnParam.returnStatus; }
-        if (returnParam.shopId) { _this.formConfig.formValue.CP_C_SHOP_ID = returnParam.shopId; }
-        if (returnParam.IS_BACK) { _this.formConfig.formValue.IS_BACK = returnParam.IS_BACK; } // 是否原退
-        if (returnParam.CP_C_PHY_WAREHOUSE_ID) { _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = returnParam.CP_C_PHY_WAREHOUSE_ID; } // 入库实体仓库
+        if (returnParam.returnStatus) {
+          _this.formConfig.formValue.RETURN_STATUS = returnParam.returnStatus;
+        }
+        if (returnParam.shopId) {
+          _this.formConfig.formValue.CP_C_SHOP_ID = returnParam.shopId;
+        }
+        if (returnParam.IS_BACK) {
+          _this.formConfig.formValue.IS_BACK = returnParam.IS_BACK;
+        } // 是否原退
+        if (returnParam.CP_C_PHY_WAREHOUSE_ID) {
+          _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = returnParam.CP_C_PHY_WAREHOUSE_ID;
+        } // 入库实体仓库
       }
-      this.service.orderCenter.querySalesReturn(Object.assign(param, _this.formConfig.formValue))
-      // this.$network
-      //   .axios({
-      //     url: '/api/cs/oc/oms/v1/querySalesReturn',
-      //     method: 'post',
-      //     data: Object.assign(param, _this.formConfig.formValue),
-      //   })
-        .then((res) => {
+      this.service.orderCenter
+        .querySalesReturn(Object.assign(param, _this.formConfig.formValue))
+        // this.$network
+        //   .axios({
+        //     url: '/api/cs/oc/oms/v1/querySalesReturn',
+        //     method: 'post',
+        //     data: Object.assign(param, _this.formConfig.formValue),
+        //   })
+        .then(res => {
           if (res.data.code == 0 && res.data.data.queryResult.length) {
             _this.agTableConfig.agLoading = false;
             _this.agTableConfig.rowData = res.data.data.queryResult;
@@ -992,26 +971,22 @@ export default {
             for (let i = 0; i < _this.agTableConfig.rowData.length; i++) {
               const item = _this.agTableConfig.rowData[i];
               if (item.MODIFIEDDATE) {
-                item.MODIFIEDDATE = publicMethodsUtil.DatesTime(
-                  item.MODIFIEDDATE
-                ); 
+                item.MODIFIEDDATE = publicMethodsUtil.DatesTime(item.MODIFIEDDATE);
               } // 修改时间
-              if (item.IN_TIME) { item.IN_TIME = publicMethodsUtil.DatesTime(item.IN_TIME); } // 入库时间
-              if (item.AUDIT_TIME) { item.AUDIT_TIME = publicMethodsUtil.DatesTime(item.AUDIT_TIME); } // 审核时间
+              if (item.IN_TIME) {
+                item.IN_TIME = publicMethodsUtil.DatesTime(item.IN_TIME);
+              } // 入库时间
+              if (item.AUDIT_TIME) {
+                item.AUDIT_TIME = publicMethodsUtil.DatesTime(item.AUDIT_TIME);
+              } // 审核时间
               if (item.LAST_UPDATE_TIME) {
-                item.LAST_UPDATE_TIME = publicMethodsUtil.DatesTime(
-                  item.LAST_UPDATE_TIME
-                ); 
+                item.LAST_UPDATE_TIME = publicMethodsUtil.DatesTime(item.LAST_UPDATE_TIME);
               } // 退款平台最后修改时间
               if (item.RETURN_CREATE_TIME) {
-                item.RETURN_CREATE_TIME = publicMethodsUtil.DatesTime(
-                  item.RETURN_CREATE_TIME
-                ); 
+                item.RETURN_CREATE_TIME = publicMethodsUtil.DatesTime(item.RETURN_CREATE_TIME);
               } // 退款创建时间
               if (item.CREATIONDATE) {
-                item.CREATIONDATE = publicMethodsUtil.DatesTime(
-                  item.CREATIONDATE
-                ); 
+                item.CREATIONDATE = publicMethodsUtil.DatesTime(item.CREATIONDATE);
               } // 创建时间
               item.RETURN_STATUS = item.RETURN_STATUS_NAME; // 退单状态
               item.IS_ADD = item.IS_ADD == 0 ? '否' : '是'; // 是否手工新增
@@ -1026,7 +1001,13 @@ export default {
               item.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ECODE; // 退回物流公司
               item.IS_RECEIVE_CONFIRM = item.IS_RECEIVE_CONFIRM == 0 ? '否' : '是'; // 是否确认收货
               // item.WMS_CANCEL_STATUS = item.WMS_CANCEL_STATUS == 0 ? '未撤回' : '已撤回'; // WMS撤回状态
-              if (item.WMS_CANCEL_STATUS == 0) { item.WMS_CANCEL_STATUS = '未撤回'; } else if (item.WMS_CANCEL_STATUS == 1) { item.WMS_CANCEL_STATUS = '已撤回'; } else if (item.WMS_CANCEL_STATUS == 2) { item.WMS_CANCEL_STATUS = '撤回失败'; }
+              if (item.WMS_CANCEL_STATUS == 0) {
+                item.WMS_CANCEL_STATUS = '未撤回';
+              } else if (item.WMS_CANCEL_STATUS == 1) {
+                item.WMS_CANCEL_STATUS = '已撤回';
+              } else if (item.WMS_CANCEL_STATUS == 2) {
+                item.WMS_CANCEL_STATUS = '撤回失败';
+              }
               item.IS_BACK = item.IS_BACK == 0 ? '否' : '是'; // 是否原退
               item.IS_MANUAL_AUDIT = item.IS_MANUAL_AUDIT == 0 ? '否' : '是'; // 是否手工审核
               // item.IS_TOAG = item.IS_TOAG == 0 ? '否' : '是'; // 是否传AG
@@ -1080,10 +1061,7 @@ export default {
               item.IS_TRANSFER = item.IS_TRANSFER == 0 ? '否' : '是'; // 是否
               item.IS_FORCE = item.IS_FORCE == 0 ? '否' : '是'; // 是否
             }
-            _this.$refs.agGridChild.agGridTable(
-              _this.agTableConfig.columnDefs,
-              _this.agTableConfig.rowData
-            );
+            _this.$refs.agGridChild.agGridTable(_this.agTableConfig.columnDefs, _this.agTableConfig.rowData);
           } else {
             _this.agTableConfig.rowData = [];
             _this.agTableConfig.pagenation.total = 0;
@@ -1116,16 +1094,30 @@ export default {
         this.getList('60');
       }
     },
-    oneObjs(e) {
+    oneObjs() {
       const _this = this;
-      _this.formConfig.formData.forEach((item) => {
+      _this.formConfig.formData.forEach(item => {
         if (item.itemdata) {
-          if (item.itemdata.name == '平台') { _this.formConfig.formValue.PLATFORM = item.itemdata.pid; } else if (item.itemdata.name == '入库逻辑仓库') { _this.formConfig.formValue.CP_C_STORE_ID = item.itemdata.pid; } else if (item.itemdata.name == '快递公司') { _this.formConfig.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid; } else if (item.itemdata.name == '入库实体仓库') { _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_IN_ID = item.itemdata.pid; } else if (item.itemdata.name == '发货实体仓库') { _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = item.itemdata.pid; } else if (item.itemdata.name == '店铺名称') { _this.formConfig.formValue.CP_C_SHOP_ID = item.itemdata.pid; } else if (item.itemdata.name == '创建人') { _this.formConfig.formValue.OWNERID = item.itemdata.pid; }
+          if (item.itemdata.name == '平台') {
+            _this.formConfig.formValue.PLATFORM = item.itemdata.pid;
+          } else if (item.itemdata.name == '入库逻辑仓库') {
+            _this.formConfig.formValue.CP_C_STORE_ID = item.itemdata.pid;
+          } else if (item.itemdata.name == '快递公司') {
+            _this.formConfig.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid;
+          } else if (item.itemdata.name == '入库实体仓库') {
+            _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_IN_ID = item.itemdata.pid;
+          } else if (item.itemdata.name == '发货实体仓库') {
+            _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = item.itemdata.pid;
+          } else if (item.itemdata.name == '店铺名称') {
+            _this.formConfig.formValue.CP_C_SHOP_ID = item.itemdata.pid;
+          } else if (item.itemdata.name == '创建人') {
+            _this.formConfig.formValue.OWNERID = item.itemdata.pid;
+          }
         }
       });
     },
     // 双击时触发
-    onRowDblclick(row, index) {
+    onRowDblclick(row) {
       this.$store.commit('customize/TabHref', {
         id: row.ID, // 单据id
         type: 'action', // 类型action
@@ -1134,8 +1126,8 @@ export default {
         query: Object.assign({
           id: row.ID, // 单据id
           tabTitle: '退换货订单详情', // tab中文名
-          statusName: row.RETURN_STATUS_NAME, // 行的退单状态
-        }), // 带的参数
+          statusName: row.RETURN_STATUS_NAME // 行的退单状态
+        }) // 带的参数
       });
     },
     // 分页change 事件
@@ -1159,7 +1151,7 @@ export default {
     // 修改
     modify() {
       if (this.$refs.agGridChild.AGTABLE.getSelect().length != 1) {
-        this.$Message.error(this.vmI18n.t('modalTips.k3'));// 请选中一项修改!
+        this.$Message.error(this.vmI18n.t('modalTips.k3')); // 请选中一项修改!
         return;
       }
       this.$store.commit('customize/TabHref', {
@@ -1170,56 +1162,46 @@ export default {
         query: Object.assign({
           id: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID, // 单据id
           tabTitle: this.vmI18n.t('panel_label.ReturnOrderDetails'), // 退换货订单详情 tab中文名
-          statusName: this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME, // 选中行的退单状态
-        }), // 带的参数
+          statusName: this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME // 选中行的退单状态
+        }) // 带的参数
       });
     },
     // 扫描入库按钮
     scanIncoming() {
       const _this = this;
-      if (this.$refs.agGridChild.AGTABLE.getSelect().length !== 1) {
-        this.$Message.error(this.vmI18n.t('modalTips.k3'));// 请选中一项修改!
+      const tempArr = this.$refs.agGridChild.AGTABLE.getSelect();
+      if (tempArr.length !== 1) {
+        this.$Message.error(this.vmI18n.t('modalTips.k3')); // 请选中一项修改!
         return;
       }
-      this.service.orderCenter.getScanIncomingInfo({ ID: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID })
-      // this.$network
-      //   .axios({
-      //     url: '/p/cs/getScanIncomingInfo',
-      //     method: 'post',
-      //     cancelToken: true,
-      //     data: { ID: this.returnSelectData[0].ID },
-      //   })
-        .then((res) => {
-          if (res.data.code === 0) {
-            this.$store.commit('customize/TabOpen', {
-              id: -1, // 单据id
-              type: 'action', // 类型action
-              name: 'scanIn', // 文件名
-              label: this.vmI18n.t('panel_label.scannAndWarehous'), // 扫描入库 tab中文名
-              query: Object.assign({
-                id: -1,
-                returnId: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID, // 单据id
-                isOrderHrefReturn: 'order',
-                tabTitle: this.vmI18n.t('panel_label.scannAndWarehous'), // 扫描入库 tab中文名
-              }), // 带的参数
-            });
-          } else {
-            this.$Message.warning(this.vmI18n.t('modalTips.k4'));// 此退换单状态不允许扫描入库,请重新选择!
-          }
-        });
+      this.service.orderCenter.getScanIncomingInfo({ ID: tempArr[0].ID }).then(res => {
+        if (res.data.code === 0) {
+          this.$store.commit('customize/TabOpen', {
+            id: -1, // 单据id
+            type: 'action', // 类型action
+            name: 'scanIn', // 文件名
+            label: this.vmI18n.t('panel_label.scannAndWarehous'), // 扫描入库 tab中文名
+            query: Object.assign({
+              id: -1,
+              returnId: _this.tempArr[0].ID, // 单据id
+              isOrderHrefReturn: 'order',
+              tabTitle: this.vmI18n.t('panel_label.scannAndWarehous') // 扫描入库 tab中文名
+            }) // 带的参数
+          });
+        } else {
+          this.$Message.warning(this.vmI18n.t('modalTips.k4')); // 此退换单状态不允许扫描入库,请重新选择!
+        }
+      });
     },
     // 售后审核接口
     afterAudit() {
       const _this = this;
       if (this.$refs.agGridChild.AGTABLE.getSelect().length == 0) {
-        _this.$Message.error(this.vmI18n.t('modalTips.k3'));// 请选中一项修改!
+        _this.$Message.error(this.vmI18n.t('modalTips.k3')); // 请选中一项修改!
         return;
       }
-      if (
-        this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME != '等待售后确认'
-        && this.$refs.agGridChild.AGTABLE.getSelect().length == 1
-      ) {
-        _this.$Message.warning(this.vmI18n.t('modalTips.k5'));// 当前选中行，无法使用此按钮!
+      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME != '等待售后确认' && this.$refs.agGridChild.AGTABLE.getSelect().length == 1) {
+        _this.$Message.warning(this.vmI18n.t('modalTips.k5')); // 当前选中行，无法使用此按钮!
         return;
       }
       const ids = [];
@@ -1229,7 +1211,7 @@ export default {
         }
       }
       if (ids.length == 0) {
-        _this.$Message.warning(this.vmI18n.t('modalTips.k6'));// 单据状态不符合审核条件，请重新选择
+        _this.$Message.warning(this.vmI18n.t('modalTips.k6')); // 单据状态不符合审核条件，请重新选择
         return;
       }
       this.$Modal.info({
@@ -1240,41 +1222,38 @@ export default {
         okText: this.vmI18n.t('common.determine'), // 确定
         cancelText: this.vmI18n.t('common.cancel'), // 取消
         onOk: () => {
-          _this.service.common.chargebackcheck({ ID: ids.join(',') })
-            .then((res) => {
-              if (res.data.code == 0) {
-                const mes = res.data.message || _this.vmI18n.t('modalTips.k8');// 售后审核成功！
-                _this.$Message.success(mes);
-                _this.getList(_this.statusTab);
-              } else {
-                const err = res.data.message || _this.vmI18n.t('modalTips.k9');// 售后审核失败！
-                _this.$Message.error(err);
-              }
-            });
-        },
+          _this.service.common.chargebackcheck({ ID: ids.join(',') }).then(res => {
+            if (res.data.code == 0) {
+              const mes = res.data.message || _this.vmI18n.t('modalTips.k8'); // 售后审核成功！
+              _this.$Message.success(mes);
+              _this.getList(_this.statusTab);
+            } else {
+              const err = res.data.message || _this.vmI18n.t('modalTips.k9'); // 售后审核失败！
+              _this.$Message.error(err);
+            }
+          });
+        }
       });
     },
     // 取消按钮
     cancelBtn() {
-      if (this.$refs.agGridChild.AGTABLE.getSelect().length == 0) {
-        this.$Message.error(this.vmI18n.t('modalTips.l0'));// 请至少选中一项!
+      const selectArr = this.$refs.agGridChild.AGTABLE.getSelect();
+      if (selectArr.length == 0) {
+        this.$Message.error(this.vmI18n.t('modalTips.l0')); // 请至少选中一项!
         return;
       }
-      if (
-        this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME != '等待退货入库'
-        && this.$refs.agGridChild.AGTABLE.getSelect().length == 1
-      ) {
-        this.$Message.warning(this.vmI18n.t('modalTips.l1'));// 退换货取消失败,只有【等待退货入库】状态才可以操作取消，请检查后重试!
+      if (selectArr[0].RETURN_STATUS != 20 && selectArr.length == 1) {
+        this.$Message.warning(this.vmI18n.t('modalTips.l1')); // 退换货取消失败,只有【等待退货入库】状态才可以操作取消，请检查后重试!
         return;
       }
       const ids = [];
-      for (let i = 0; i < this.$refs.agGridChild.AGTABLE.getSelect().length; i++) {
-        if (this.$refs.agGridChild.AGTABLE.getSelect()[i].RETURN_STATUS_NAME == '等待退货入库') {
-          ids.push(this.$refs.agGridChild.AGTABLE.getSelect()[i].ID);
+      for (let i = 0; i < selectArr.length; i++) {
+        if (selectArr[i].RETURN_STATUS == 20) {
+          ids.push(selectArr[i].ID);
         }
       }
       if (ids.length == 0) {
-        this.$Message.warning(this.vmI18n.t('modalTips.l2'));// 单据状态不符合取消条件，请重新选择
+        this.$Message.warning(this.vmI18n.t('modalTips.l2')); // 单据状态不符合取消条件，请重新选择
         return;
       }
       this.$Modal.info({
@@ -1286,57 +1265,55 @@ export default {
         cancelText: this.vmI18n.t('common.cancel'), // 取消
         onOk: () => {
           this.isSaveLoading = true;
-          this.service.orderCenter.OcCancelChangingOrRefund({ ids })
-            .then((res) => {
-              this.isSaveLoading = false;
-              if (res.data.code === 0) {
-                if (res.data.data === 'comfirmFlag') {
-                  this.$Modal.info({
-                    title: this.vmI18n.t('modalTitle.tips'), // 提示
-                    content: this.vmI18n.t('modalTips.l4'), // 换货订单的状态为配货中或已经发货,是否确认直接取消退货？
-                    mask: true,
-                    showCancel: true,
-                    okText: this.vmI18n.t('common.determine'), // 确定
-                    cancelText: this.vmI18n.t('common.cancel'), // 取消
-                    onOk: () => {
-                      this.isSaveLoading = true;
-                      this.service.orderCenter.OcCancelChangingOrRefund({ ids, comfirmFlag: 'comfirmFlag' })
-                        .then((res) => {
-                          this.isSaveLoading = false;
-                          if (res.data.code === 0) {
-                            this.$Message.success(res.data.message);
-                            setTimeout(() => {
-                              this.getList(this.statusTab);
-                            }, 500);
-                          } else {
-                            const err = res.data.message || this.vmI18n.t('modalTips.l5');// 取消失败！
-                            this.$Message.info(err);
-                          }
-                        });
-                    },
-                  });
-                } else {
-                  this.$Message.success(res.data.message);
-                  setTimeout(() => {
-                    this.getList(this.statusTab);
-                  }, 500);
-                }
+          this.service.orderCenter.OcCancelChangingOrRefund({ ids }).then(res => {
+            this.isSaveLoading = false;
+            if (res.data.code === 0) {
+              if (res.data.data === 'comfirmFlag') {
+                this.$Modal.info({
+                  title: this.vmI18n.t('modalTitle.tips'), // 提示
+                  content: this.vmI18n.t('modalTips.l4'), // 换货订单的状态为配货中或已经发货,是否确认直接取消退货？
+                  mask: true,
+                  showCancel: true,
+                  okText: this.vmI18n.t('common.determine'), // 确定
+                  cancelText: this.vmI18n.t('common.cancel'), // 取消
+                  onOk: () => {
+                    this.isSaveLoading = true;
+                    this.service.orderCenter.OcCancelChangingOrRefund({ ids, comfirmFlag: 'comfirmFlag' }).then(res => {
+                      this.isSaveLoading = false;
+                      if (res.data.code === 0) {
+                        this.$Message.success(res.data.message);
+                        setTimeout(() => {
+                          this.getList(this.statusTab);
+                        }, 500);
+                      } else {
+                        const err = res.data.message || this.vmI18n.t('modalTips.l5'); // 取消失败！
+                        this.$Message.info(err);
+                      }
+                    });
+                  }
+                });
               } else {
-                const err = res.data.message || this.vmI18n.t('modalTips.l5');// 取消失败！
-                this.$Message.info(err);
+                this.$Message.success(res.data.message);
+                setTimeout(() => {
+                  this.getList(this.statusTab);
+                }, 500);
               }
-            });
-        },
+            } else {
+              const err = res.data.message || this.vmI18n.t('modalTips.l5'); // 取消失败！
+              this.$Message.info(err);
+            }
+          });
+        }
       });
     },
     // 虚拟入库
     virtualLibrary() {
       if (this.$refs.agGridChild.AGTABLE.getSelect().length != 1) {
-        this.$Message.error(this.vmI18n.t('modalTips.k3'));// 请选中一项修改!
+        this.$Message.error(this.vmI18n.t('modalTips.k3')); // 请选中一项修改!
         return;
       }
       if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME !== '等待退货入库') {
-        this.$Message.error(this.vmI18n.t('modalTips.l6'));// 此退换单状态不允许虚拟入库!
+        this.$Message.error(this.vmI18n.t('modalTips.l6')); // 此退换单状态不允许虚拟入库!
         return;
       }
       this.$Modal.info({
@@ -1347,24 +1324,23 @@ export default {
         okText: this.vmI18n.t('common.determine'), // 确定
         cancelText: this.vmI18n.t('common.cancel'), // 取消
         onOk: () => {
-          this.service.orderCenter.updateVirtualLibrary({ ID: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID })
-            .then((res) => {
-              if (res.data.code == 0) {
-                this.$Message.success(res.data.message);
-                setTimeout(() => {
-                  this.getList(this.statusTab);
-                }, 500);
-              } else {
-                const err = res.data.message || this.vmI18n.t('modalTips.l5');// 虚拟入库失败！
-                this.$Message.info(err);
-              }
-            });
-        },
+          this.service.orderCenter.updateVirtualLibrary({ ID: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID }).then(res => {
+            if (res.data.code == 0) {
+              this.$Message.success(res.data.message);
+              setTimeout(() => {
+                this.getList(this.statusTab);
+              }, 500);
+            } else {
+              const err = res.data.message || this.vmI18n.t('modalTips.l5'); // 虚拟入库失败！
+              this.$Message.info(err);
+            }
+          });
+        }
       });
     },
     virtualWarehouseLibraryWarn() {
       if (this.$refs.agGridChild.AGTABLE.getSelect().length === 0) {
-        this.$Message.error(this.vmI18n.t('modalTips.l0'));// 请至少选中一项!
+        this.$Message.error(this.vmI18n.t('modalTips.l0')); // 请至少选中一项!
         return;
       }
       this.virtualWarehouseModal = true;
@@ -1372,23 +1348,24 @@ export default {
     // 虚拟仓库入库
     virtualWarehouseLibrary() {
       const ids = [];
-      this.$refs.agGridChild.AGTABLE.getSelect().forEach((item) => {
+      this.$refs.agGridChild.AGTABLE.getSelect().forEach(item => {
         ids.push(item.ID);
       });
-      this.service.orderCenter.virtualWarehouseStorage({ ids })
-      // this.$network
-      //   .axios({
-      //     url: '/p/cs/virtualWarehouseStorage',
-      //     method: 'post',
-      //     cancelToken: true,
-      //     data: { ids },
-      //   })
-        .then((res) => {
+      this.service.orderCenter
+        .virtualWarehouseStorage({ ids })
+        // this.$network
+        //   .axios({
+        //     url: '/p/cs/virtualWarehouseStorage',
+        //     method: 'post',
+        //     cancelToken: true,
+        //     data: { ids },
+        //   })
+        .then(res => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);
             this.$Message.success(res.data.message);
           } else {
-            const err = res.data.message || this.vmI18n.t('modalTips.l9');// 虚拟仓库入库失败！
+            const err = res.data.message || this.vmI18n.t('modalTips.l9'); // 虚拟仓库入库失败！
             this.$Message.info(err);
           }
         });
@@ -1396,23 +1373,24 @@ export default {
     // 取消自动退款
     cancelRefund() {
       if (this.$refs.agGridChild.AGTABLE.getSelect().length != 1) {
-        this.$Message.error(this.vmI18n.t('modalTips.k3'));// 请选中一项修改!
+        this.$Message.error(this.vmI18n.t('modalTips.k3')); // 请选中一项修改!
         return;
       }
-      this.service.orderCenter.cancelautorefund({ ID: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID })
-      // this.$network
-      //   .axios({
-      //     url: '/api/cs/oc/oms/v1/cancelautorefund',
-      //     method: 'post',
-      //     cancelToken: true,
-      //     data: { ID: this.returnSelectData[0].ID },
-      //   })
-        .then((res) => {
+      this.service.orderCenter
+        .cancelautorefund({ ID: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID })
+        // this.$network
+        //   .axios({
+        //     url: '/api/cs/oc/oms/v1/cancelautorefund',
+        //     method: 'post',
+        //     cancelToken: true,
+        //     data: { ID: this.returnSelectData[0].ID },
+        //   })
+        .then(res => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);
             this.$Message.success(res.data.message);
           } else {
-            const err = res.data.message || this.vmI18n.t('modalTips.m0');// 取消自动退款失败！
+            const err = res.data.message || this.vmI18n.t('modalTips.m0'); // 取消自动退款失败！
             this.$Message.info(err);
           }
         });
@@ -1420,14 +1398,11 @@ export default {
     // 修改备注
     bounced() {
       if (!this.$refs.agGridChild.AGTABLE.getSelect().length) {
-        this.$Message.error(this.vmI18n.t('modalTips.m1'));// 请至少选中一项修改!
+        this.$Message.error(this.vmI18n.t('modalTips.m1')); // 请至少选中一项修改!
         return;
       }
-      if (
-        this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME == '取消'
-        && this.$refs.agGridChild.AGTABLE.getSelect().length == 1
-      ) {
-        this.$Message.error(this.vmI18n.t('modalTips.m2'));// 取消状态不允许修改备注!
+      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME == '取消' && this.$refs.agGridChild.AGTABLE.getSelect().length == 1) {
+        this.$Message.error(this.vmI18n.t('modalTips.m2')); // 取消状态不允许修改备注!
         return;
       }
       const ids = [];
@@ -1439,16 +1414,14 @@ export default {
       this.changeRemarkConfig.componentData = {
         ids: ids.join(','),
         status: this.statusTab,
-        type: 1,
+        type: 1
       };
-      this.$children
-        .find(item => item.name === 'rturngoodModifyRemarks')
-        .openConfirm();
+      this.$children.find(item => item.name === 'rturngoodModifyRemarks').openConfirm();
     },
     // 修改卖家备注
     bounced2() {
       if (!this.$refs.agGridChild.AGTABLE.getSelect().length) {
-        this.$Message.error(this.vmI18n.t('modalTips.m1'));// 请至少选中一项修改!
+        this.$Message.error(this.vmI18n.t('modalTips.m1')); // 请至少选中一项修改!
         return;
       }
       const ids = [];
@@ -1458,16 +1431,14 @@ export default {
       this.changeRemarkConfig.componentData = {
         ids: ids.join(','),
         status: this.statusTab,
-        type: 2,
+        type: 2
       };
-      this.$children
-        .find(item => item.name === 'rturngoodModifyRemarks')
-        .openConfirm();
+      this.$children.find(item => item.name === 'rturngoodModifyRemarks').openConfirm();
     },
     // 修改退货仓库
     Warehouse() {
       if (!this.$refs.agGridChild.AGTABLE.getSelect().length) {
-        this.$Message.error(this.vmI18n.t('modalTips.m1'));// 请至少选中一项修改!
+        this.$Message.error(this.vmI18n.t('modalTips.m1')); // 请至少选中一项修改!
         return;
       }
       // if (this.returnSelectData[0].RETURN_STATUS_NAME != '等待退货入库' && this.returnSelectData.length == 1) {
@@ -1481,13 +1452,11 @@ export default {
         // }
       }
       this.modifyWarehouse.componentData = { ids };
-      this.$children
-        .find(item => item.name === 'modifyWarehouse')
-        .openConfirm();
+      this.$children.find(item => item.name === 'modifyWarehouse').openConfirm();
     },
     OrderLogistics() {
       if (!this.$refs.agGridChild.AGTABLE.getSelect().length) {
-        this.$Message.error(this.vmI18n.t('modalTips.m1'));// 请至少选中一项修改!
+        this.$Message.error(this.vmI18n.t('modalTips.m1')); // 请至少选中一项修改!
         return;
       }
       const ids = [];
@@ -1495,14 +1464,12 @@ export default {
         ids.push(this.$refs.agGridChild.AGTABLE.getSelect()[i].ID);
       }
       this.modifyReturnOrderLogistics.componentData = { ids };
-      this.$children
-        .find(item => item.name === 'modifyReturnOrderLogistics')
-        .openConfirm();
+      this.$children.find(item => item.name === 'modifyReturnOrderLogistics').openConfirm();
     },
     // 批量原退
     batchOriginalBack() {
       if (this.$refs.agGridChild.AGTABLE.getSelect().length == 0) {
-        this.$Message.error(this.vmI18n.t('modalTips.l0'));// 请至少选中一项!
+        this.$Message.error(this.vmI18n.t('modalTips.l0')); // 请至少选中一项!
         return;
       }
       const ids = [];
@@ -1517,21 +1484,20 @@ export default {
         okText: this.vmI18n.t('common.determine'), // 确定
         cancelText: this.vmI18n.t('common.cancel'), // 取消
         onOk: () => {
-          this.service.orderCenter.updateReturnBOrder({ ids })
-            .then((res) => {
-              if (res.data.code === 0) {
-                this.getList(this.statusTab);
-                this.$Message.success(res.data.message);
-                if (res.data.data.length) {
-                  this.errModal = true;
-                  this.errdataList = res.data.data;
-                }
-              } else {
-                const err = res.data.message || this.vmI18n.t('modalTips.m4');// 批量原退失败！
-                this.$Message.info(err);
+          this.service.orderCenter.updateReturnBOrder({ ids }).then(res => {
+            if (res.data.code === 0) {
+              this.getList(this.statusTab);
+              this.$Message.success(res.data.message);
+              if (res.data.data.length) {
+                this.errModal = true;
+                this.errdataList = res.data.data;
               }
-            });
-        },
+            } else {
+              const err = res.data.message || this.vmI18n.t('modalTips.m4'); // 批量原退失败！
+              this.$Message.info(err);
+            }
+          });
+        }
       });
     },
     keyenter() {
@@ -1540,14 +1506,11 @@ export default {
     // 从wms撤回
     withdrawWMS() {
       if (this.$refs.agGridChild.AGTABLE.getSelect().length == 0) {
-        this.$Message.error(this.vmI18n.t('modalTips.l0'));// 请至少选中一项!
+        this.$Message.error(this.vmI18n.t('modalTips.l0')); // 请至少选中一项!
         return;
       }
-      if (
-        this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME != '等待退货入库'
-        && this.$refs.agGridChild.AGTABLE.getSelect().length == 1
-      ) {
-        this.$Message.error(this.vmI18n.t('modalTips.m5'));// 只有等待退货入库状态可以从WMS撤回!
+      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME != '等待退货入库' && this.$refs.agGridChild.AGTABLE.getSelect().length == 1) {
+        this.$Message.error(this.vmI18n.t('modalTips.m5')); // 只有等待退货入库状态可以从WMS撤回!
         return;
       }
       const ids = [];
@@ -1556,20 +1519,21 @@ export default {
           ids.push(this.$refs.agGridChild.AGTABLE.getSelect()[i].ID);
         }
       }
-      this.service.orderCenter.orderReturnRecallFromWms({ ID: ids })
-      // this.$network
-      //   .axios({
-      //     url: '/p/cs/orderReturnRecallFromWms',
-      //     method: 'post',
-      //     cancelToken: true,
-      //     data: { ID: ids },
-      //   })
-        .then((res) => {
+      this.service.orderCenter
+        .orderReturnRecallFromWms({ ID: ids })
+        // this.$network
+        //   .axios({
+        //     url: '/p/cs/orderReturnRecallFromWms',
+        //     method: 'post',
+        //     cancelToken: true,
+        //     data: { ID: ids },
+        //   })
+        .then(res => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);
             this.$Message.success(res.data.message);
           } else {
-            const err = res.data.message || this.vmI18n.t('modalTips.m6');// 从wms撤回失败！
+            const err = res.data.message || this.vmI18n.t('modalTips.m6'); // 从wms撤回失败！
             this.$Message.info(err);
           }
         });
@@ -1577,27 +1541,28 @@ export default {
     // 重传wms
     againWMS() {
       if (this.$refs.agGridChild.AGTABLE.getSelect().length == 0) {
-        this.$Message.error(this.vmI18n.t('modalTips.l0'));// 请至少选中一项!
+        this.$Message.error(this.vmI18n.t('modalTips.l0')); // 请至少选中一项!
         return;
       }
       const ids = [];
       for (let i = 0; i < this.$refs.agGridChild.AGTABLE.getSelect().length; i++) {
         ids.push(this.$refs.agGridChild.AGTABLE.getSelect()[i].ID);
       }
-      this.service.orderCenter.retransmissionWms({ returnOrderIds: ids.join(',') })
-      // this.$network
-      //   .axios({
-      //     url: '/p/cs/retransmissionWms',
-      //     method: 'post',
-      //     cancelToken: true,
-      //     data: { returnOrderIds: ids.join(',') },
-      //   })
-        .then((res) => {
+      this.service.orderCenter
+        .retransmissionWms({ returnOrderIds: ids.join(',') })
+        // this.$network
+        //   .axios({
+        //     url: '/p/cs/retransmissionWms',
+        //     method: 'post',
+        //     cancelToken: true,
+        //     data: { returnOrderIds: ids.join(',') },
+        //   })
+        .then(res => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);
             this.$Message.success(res.data.message);
           } else {
-            const err = res.data.message || this.vmI18n.t('modalTips.m7');// 重WMS失败！
+            const err = res.data.message || this.vmI18n.t('modalTips.m7'); // 重WMS失败！
             this.$Message.info(err);
           }
         });
@@ -1605,18 +1570,15 @@ export default {
     // 强制完成
     forcedCompletion() {
       if (this.$refs.agGridChild.AGTABLE.getSelect().length == 0) {
-        this.$Message.error(this.vmI18n.t('modalTips.l0'));// 请至少选中一项!
+        this.$Message.error(this.vmI18n.t('modalTips.l0')); // 请至少选中一项!
         return;
       }
-      if (
-        this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME != '等待售后确认'
-        && this.$refs.agGridChild.AGTABLE.getSelect().length == 1
-      ) {
-        this.$Message.error(this.vmI18n.t('modalTips.m8'));// 只有等待售后确认状态可以强制完成!
+      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME != '等待售后确认' && this.$refs.agGridChild.AGTABLE.getSelect().length == 1) {
+        this.$Message.error(this.vmI18n.t('modalTips.m8')); // 只有等待售后确认状态可以强制完成!
         return;
       }
       const ids = [];
-      this.$refs.agGridChild.AGTABLE.getSelect().forEach((item) => {
+      this.$refs.agGridChild.AGTABLE.getSelect().forEach(item => {
         ids.push(item.ID);
       });
       this.$Modal.info({
@@ -1627,23 +1589,25 @@ export default {
         okText: this.vmI18n.t('common.determine'), // 确定
         cancelText: this.vmI18n.t('common.cancel'), // 取消
         onOk: () => {
-          this.service.orderCenter.forcedCompletion({ ids })
-            .then((res) => {
-              if (res.data.code === 0) {
-                this.getList(this.statusTab);
-                this.$Message.success(res.data.message);
-              } else {
-                const err = res.data.message || this.vmI18n.t('modalTips.n0');// 强制完成失败！
-                this.$Message.info(err);
-              }
-            });
-        },
+          this.service.orderCenter.forcedCompletion({ ids }).then(res => {
+            if (res.data.code === 0) {
+              this.getList(this.statusTab);
+              this.$Message.success(res.data.message);
+            } else {
+              const err = res.data.message || this.vmI18n.t('modalTips.n0'); // 强制完成失败！
+              this.$Message.info(err);
+            }
+          });
+        }
       });
     },
     // 复制退单
     cloneRenturnGood() {
       const _this = this;
-      if (this.$refs.agGridChild.AGTABLE.getSelect().length !== 1) { return this.$Message.error(this.vmI18n.t('modalTips.n1')); }// 请选中一条单据进行复制!
+      if (this.$refs.agGridChild.AGTABLE.getSelect().length !== 1) {
+        this.$Message.error(this.vmI18n.t('modalTips.n1'));
+        return;
+      } // 请选中一条单据进行复制!
       _this.$store.commit('customize/TabOpen', {
         id: -1,
         type: 'action',
@@ -1652,8 +1616,8 @@ export default {
         query: {
           id: -1,
           cloneReturnGoodId: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID,
-          tabTitle: _this.vmI18n.t('panel_label.addReturnOrder'), // 退换货订单新增
-        },
+          tabTitle: _this.vmI18n.t('panel_label.addReturnOrder') // 退换货订单新增
+        }
       });
     },
     // 导入
@@ -1664,35 +1628,33 @@ export default {
     exportClick() {
       const _this = this;
       if (this.$refs.agGridChild.AGTABLE.getSelect().length) {
-        if (this.isExport) return this.$Message.error(_this.vmI18n.t('modalTips.f8'));// 有一项导出正在进行中
+        if (this.isExport) {
+          this.$Message.error(_this.vmI18n.t('modalTips.f8')); // 有一项导出正在进行中
+          return;
+        }
         this.isExport = true;
         const ids = [];
         for (let i = 0; i < this.$refs.agGridChild.AGTABLE.getSelect().length; i++) {
           ids.push(this.$refs.agGridChild.AGTABLE.getSelect()[i].ID);
         }
         const idList = { idList: ids };
-        this.service.orderCenter.exportReturnOrder(idList)
-        // this.$network
-        //   .axios({
-        //     url: '/p/cs/exportReturnOrder',
-        //     method: 'post',
-        //     cancelToken: true,
-        //     data: idList,
-        //   })
-          .then((res) => {
-            _this.isExport = false;
-            if (res.data.code == 0 && res.data.data !== null) {
-              const mes = res.data.message || _this.vmI18n.t('modalTips.z2');// 导出成功！
-              _this.$Message.success(mes);
-              _this.downloadUrlFile(res.data.data);
-              // return (window.location = res.data.data);
-            } else {
-              const err = res.data.message || _this.vmI18n.t('modalTips.z3');// 失败！
-              _this.$Message.error(err);
-            }
-          });
+        this.service.orderCenter.exportReturnOrder(idList).then(res => {
+          _this.isExport = false;
+          if (res.data.code == 0 && res.data.data !== null) {
+            const mes = res.data.message || _this.vmI18n.t('modalTips.z2'); // 导出成功！
+            _this.$Message.success(mes);
+            _this.downloadUrlFile(res.data.data);
+            // return (window.location = res.data.data);
+          } else {
+            const err = res.data.message || _this.vmI18n.t('modalTips.z3'); // 失败！
+            _this.$Message.error(err);
+          }
+        });
       } else {
-        if (_this.agTableConfig.rowData.length === 0) { return _this.$Message.error(_this.vmI18n.t('modalTips.z4')); }// 列表没有数据,无法导出!
+        if (_this.agTableConfig.rowData.length === 0) {
+          _this.$Message.error(_this.vmI18n.t('modalTips.z4'));
+          return;
+        } // 列表没有数据,无法导出!
         if (_this.statusTab == '') {
           _this.warningModal = true;
         } else {
@@ -1704,62 +1666,54 @@ export default {
     // 警告框确认
     warningOk() {
       const _this = this;
-      if (this.isExport) return this.$Message.error(_this.vmI18n.t('modalTips.f8'));// 有一项导出正在进行中
+      if (this.isExport) {
+        this.$Message.error(_this.vmI18n.t('modalTips.f8')); // 有一项导出正在进行中
+        return;
+      }
       this.isExport = true;
       const param = {
         start: _this.agTableConfig.pagenation.current,
         count: 999999,
-        RETURN_STATUS: status == undefined ? '' : status,
+        RETURN_STATUS: _this.status == undefined ? '' : _this.status
       };
       _this.formConfig.formValue.RECEIVE_PROVINCE = '';
       _this.formConfig.formValue.RECEIVE_PROVINCE_ID = '';
       if (_this.formConfig.formData.length) {
-        _this.formConfig.formData.forEach((item) => {
-          if (
-            item.itemdata !== undefined
-            && item.itemdata.name == '原始订单编号'
-          ) {
+        _this.formConfig.formData.forEach(item => {
+          if (item.itemdata !== undefined && item.itemdata.name == '原始订单编号') {
             _this.formConfig.formValue.ORIG_ORDER_ID = item.itemdata.valuedata;
           }
         });
       }
-      if (status) {
-        _this.formConfig.formValue.RETURN_STATUS = status;
+      if (this.status) {
+        _this.formConfig.formValue.RETURN_STATUS = this.status;
       }
-      this.service.orderCenter.exportReturnOrder(Object.assign(param, _this.formConfig.formValue))
-      // this.$network
-      //   .axios({
-      //     url: '/p/cs/exportReturnOrder',
-      //     method: 'post',
-      //     cancelToken: true,
-      //     data: Object.assign(param, _this.formConfig.formValue),
-      //   })
-        .then((res) => {
-          _this.isExport = false;
-          if (res.data.code == 0 && res.data.data !== null) {
-            const mes = res.data.message || this.vmI18n.t('modalTips.z2');// 导出成功！
-            _this.$Message.success(mes);
-            // return (window.location = res.data.data);
-            _this.downloadUrlFile(res.data.data);
-          } else {
-            const err = res.data.message || this.vmI18n.t('modalTips.z3');// 失败！
-            _this.$Message.error(err);
-          }
-        });
+      this.service.orderCenter.exportReturnOrder(Object.assign(param, _this.formConfig.formValue)).then(res => {
+        _this.isExport = false;
+        if (res.data.code == 0 && res.data.data !== null) {
+          const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
+          _this.$Message.success(mes);
+          // return (window.location = res.data.data);
+          _this.downloadUrlFile(res.data.data);
+        } else {
+          const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
+          _this.$Message.error(err);
+        }
+      });
     },
     // 导出
     downloadUrlFile(src) {
-      const download_file = {};
-      if (typeof download_file.iframe === 'undefined') {
+      const downloadFile = {};
+      if (typeof downloadFile.iframe === 'undefined') {
         const iframe = document.createElement('iframe');
-        download_file.iframe = iframe;
-        document.body.appendChild(download_file.iframe);
+        downloadFile.iframe = iframe;
+        document.body.appendChild(downloadFile.iframe);
       }
-      download_file.iframe.src = src;
-      download_file.iframe.style.display = 'none';
-    },
+      downloadFile.iframe.src = src;
+      downloadFile.iframe.style.display = 'none';
+    }
   },
   destroyed() {
     window.removeEventListener('keydown', this, false);
-  },
+  }
 };
