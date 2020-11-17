@@ -165,9 +165,8 @@ export default {
     },
     async getData() {
       const self = this;
-      let params = { orderId: self.$route.query.id }
+      const params = { orderId: self.$route.query.id };
       const res = await this.service.orderCenter.querySkuListAndStorageInfo(params);
-      console.log('getData::res::',res);
       let total = 0;
       if (res.data.code === 0) {
         self.old_cp_c_phy_warehouse_ename = res.data.data[0].cp_c_phy_warehouse_ename;
