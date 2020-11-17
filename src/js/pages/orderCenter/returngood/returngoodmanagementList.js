@@ -823,7 +823,7 @@ export default {
               if (item.CREATIONDATE) {
                 item.CREATIONDATE = publicMethodsUtil.DatesTime(item.CREATIONDATE);
               } // 创建时间
-              item.RETURN_STATUS = item.RETURN_STATUS_NAME; // 退单状态
+              // item.RETURN_STATUS = item.RETURN_STATUS_NAME; // 退单状态
               item.IS_ADD = item.IS_ADD == 0 ? '否' : '是'; // 是否手工新增
               if (item.INVENTED_STATUS == 0) {
                 item.INVENTED_STATUS = '未虚拟入库';
