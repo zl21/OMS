@@ -440,7 +440,7 @@ export default {
           {
             text: window.vmI18n.t('btn.offline'), // 按钮文本,
             btnclick: () => {
-              this.actOffline();
+              this.downLine();
             }
           },
           {
@@ -669,7 +669,7 @@ export default {
     actOffline() {
       const newList = [];
       const newIds = [];
-      const agGridChild = `agGridChild${this.activeName + 1}`;
+      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
         agGridTable.getSelect().forEach(item => {
@@ -690,7 +690,7 @@ export default {
       this.dataError.show = true;
     },
     copy() {
-      const agGridChild = `agGridChild${this.activeName + 1}`;
+      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
         const selectedData = agGridTable.getSelect();
@@ -760,7 +760,8 @@ export default {
       const newList = [];
       let flag = false;
       const newIds = [];
-      const agGridChild = `agGridChild${this.activeName + 1}`;
+
+      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
         agGridTable.getSelect().forEach(item => {
@@ -770,12 +771,12 @@ export default {
       }
       if (newList.length < 1) {
         this.$Message.warning(window.vmI18n.t('modalTips.r9')); // 请至少选择一个
-        return false;
+        return;
       }
       flag = newList.every(item => item.STATUS === 1);
       if (!flag) {
         this.$Message.warning(window.vmI18n.t('modalTips.q3')); // 选择的促销活动已经发布
-        return false;
+        return;
       }
       this.dataError.show = false; // 关闭弹框
 
@@ -809,7 +810,7 @@ export default {
     async deleteActi() {
       const newIds = [];
       const newList = [];
-      const agGridChild = `agGridChild${this.activeName + 1}`;
+      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
         agGridTable.getSelect().forEach(item => {
@@ -844,7 +845,7 @@ export default {
       // 设置分组
       const newList = [];
       const newIds = [];
-      const agGridChild = `agGridChild${this.activeName + 1}`;
+      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
         agGridTable.getSelect().forEach(item => {
@@ -921,7 +922,7 @@ export default {
       this.release_name = ''; // 操作人
       this.STATUS = [1, 2]; // 状态
     }, // 重置
-    async handDblClick(row, index) {
+    async handDblClick(row) {
       // 双击事件
       const ACTI_ID = row.ACTI_ID;
       const typeId = row.PROM_TYPE_ID;
@@ -971,7 +972,7 @@ export default {
     async downLine() {
       const newList = [];
       const newIds = [];
-      const agGridChild = `agGridChild${this.activeName + 1}`;
+      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
       if (agGridTable.getSelect().length) {
         agGridTable.getSelect().forEach(item => {
@@ -999,11 +1000,11 @@ export default {
           status: 2 // 3表示下线
         }
       };
-      // const formData = new FormData();
-      // formData.append('param', JSON.stringify(params));
+      const formData = new FormData();
+      formData.append('param', JSON.stringify(params));
       const {
         data: { code, message }
-      } = await this.service.promotionCenter.updatePmStatus(JSON.stringify(params));
+      } = await this.service.promotionCenter.updatePmStatus(formData);
       if (code === 0) {
         this.getData();
         this.$Message.success(message);
