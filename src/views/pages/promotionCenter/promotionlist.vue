@@ -135,9 +135,9 @@
   </div>
 </template>
 <script>
-import promotionlist from '@/js/pages/promotionCenter/promotionlist';
+  import promotionlist from '@/js/pages/promotionCenter/promotionlist';
 
-export default promotionlist;
+  export default promotionlist;
 </script>
 <style lang="less">
 @import '~@/css/pages/promotionCenter/promotionlist.less';

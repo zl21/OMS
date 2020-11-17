@@ -1152,7 +1152,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.return'), // 返回 按钮文本
+            text: window.vmI18n.t('common.return'), // 返回 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               // this.$router.push({ path: "/m/action/returngoodList?id=2661" });
