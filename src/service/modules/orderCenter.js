@@ -47,7 +47,6 @@ export default {
   objectTableItem: params => network.post('/p/cs/objectTableItem', params),
   DynamicList: params => network.post('/api/cs/oc/oms/v1/DynamicList', params),
   querySalesReturn: params => network.post('/api/cs/oc/oms/v1/querySalesReturn', params),
-  chargebackcheck: params => network.post('/p/cs/chargebackcheck', params),
   OcCancelChangingOrRefund: params => network.post('/api/cs/oc/oms/v1/OcCancelChangingOrRefund', params),
   updateVirtualLibrary: params => network.post('/p/cs/updateVirtualLibrary', params),
   virtualWarehouseStorage: params => network.post('p/cs/virtualWarehouseStorage', params),

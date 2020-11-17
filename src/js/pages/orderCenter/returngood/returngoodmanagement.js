@@ -3535,16 +3535,10 @@ export default {
           content: _this.vmI18n.t('modalTips.av'), // 申请数量与入库数量不一致，是否确定售后审核？
           mask: true,
           showCancel: true,
-          okText: _this.vmI18n.t('common.determine'), // 取消
-          cancelText: _this.vmI18n.t('common.cancel'), // 确定
+          okText: _this.vmI18n.t('common.determine'), 
+          cancelText: _this.vmI18n.t('common.cancel'), 
           onOk: () => {
-            _this.service.orderCenter.chargebackcheck({ ID: _this.$route.query.id })
-            // axios({
-            //   url: '/p/cs/chargebackcheck',
-            //   method: 'post',
-            //   cancelToken: true,
-            //   data: { ID: _this.$route.query.id }
-            // })
+            _this.service.common.chargebackcheck({ ID: _this.$route.query.id })
               .then((res) => {
                 if (res.data.code === 0) {
                   _this.$Message.success(res.data.message);
