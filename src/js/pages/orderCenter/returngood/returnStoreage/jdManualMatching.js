@@ -580,13 +580,11 @@ export default {
     // 选中的退货明细赋值
     returnArr(data, itemId) {
       this.jordanTableConfig.data[this.index].OC_B_JD_RETURN_ORDER_ID = data;
-      // this.jordanTableConfig.data.RESERVE_BIGINT01 = itemId;
     },
     // 选中的退货明细赋值
     returnArr1(data, data1, itemId) {
       this.jordanTableConfig.data[this.index].OC_B_JD_RETURN_ORDER_ID = data;
       this.jordanTableConfig.data[this.index].REAL_SEND_SKU = data1;
-      // this.jordanTableConfig.data[this.index].RESERVE_BIGINT01 = itemId;
     },
     // 保存
     saveData() {

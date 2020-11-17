@@ -643,7 +643,6 @@ export default {
         {
           key: 'PRICE_ACTUAL',
           title: '成交单价',
-          dataAcessKey: 'PRICE',
           render: (h, params) => h('span', {}, params.row.PRICE_ACTUAL)
         },
         {

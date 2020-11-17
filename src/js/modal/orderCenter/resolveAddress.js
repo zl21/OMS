@@ -277,7 +277,7 @@ export default {
         ID: null,
         REGIONTYPE: 'COUN',
       };
-      const res = await this.service.common.regionBySelect();
+      const res = await this.service.common.regionBySelect(query);
       // this.clearCity();
       if (res.data ? res.data.code === 0 : false) {
         this.provList = res.data.data.data.map(row => ({

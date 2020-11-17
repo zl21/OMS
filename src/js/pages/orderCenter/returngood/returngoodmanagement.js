@@ -3348,7 +3348,7 @@ export default {
         if (!item[i].PS_C_SKU_ECODE) return _this.$Message.error(_this.vmI18n.t('modalTips.ao'));// 退货明细条码不能为空
         Rlist.push({
           ID: item[i].ID != -1 ? item[i].ID : -1,
-          reserve_bigint10: item[i].reserve_bigint10, // 与后端没找到该字段,不清楚意义
+          OC_B_ORDER_ITEM_ID: item[i].reserve_bigint10, // 与后端没找到该字段,不清楚意义
           ps_c_sku_ecode: item[i].PS_C_SKU_ECODE,
           barcode: item[i].BARCODE,
           ps_c_pro_ecode: item[i].PS_C_PRO_ECODE,

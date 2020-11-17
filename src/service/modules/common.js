@@ -67,7 +67,7 @@ export default {
   getOrderDetailList: params => network.post('/p/cs/getOrderDetailList', params),
   returnOrderquery: params => network.post('/api/cs/oc/oms/v1/returnOrderquery', params),
   returnSkuDb: params => network.post('/p/cs/returnSkuDb', params),
-  checkAllStroreStock: params => network.post('/p/cs/checkAllStroreStock', params),
+  checkAllStroreStock: params => network.post('/api/cs/oc/oms/v1/checkAllStroreStock', params),
   returnOrder: params => network.post('/api/cs/oc/oms/v1/returnOrder', params),
   chargebackcheck: params => network.post('/api/cs/oc/oms/v1/chargebackcheck', params),
   OcCancelChangingOrRefund: params => network.post('/api/cs/oc/oms/v1/OcCancelChangingOrRefund', params),

@@ -218,7 +218,7 @@ export default {
                 }
                 if (
                   item.itemdata
-                  && item.itemdata.name === self.vmI18n.t('form_label.orderShop')
+                  && item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
                 ) {
                   ocBorderDto.CP_C_REGION_AREA_ENAME = item.itemdata.valuedata;
                   ocBorderDto.CP_C_REGION_AREA_ID = item.itemdata.pid;
@@ -911,7 +911,6 @@ export default {
           {
             title: window.vmI18n.t('table_label.unitPrice'), // 成交单价
             key: 'PRICE_ACTUAL',
-            dataAcessKey: 'PRICE',
             render: (h, params) => {
               const self = this;
               return h(
