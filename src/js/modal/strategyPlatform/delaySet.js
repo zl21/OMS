@@ -2,15 +2,16 @@
   import axios from 'axios';
   import businessButton from 'professionalComponents/businessButton';
   import businessForm from 'professionalComponents/businessForm';
+
   const { getModuleName } = R3;
   export default {
     props: {
       objid: {
         default: ''
       },
-      objList:Array,  
-      rowArr:Array,
-      rowData:Array,
+      objList: Array,  
+      rowArr: Array,
+      rowData: Array,
       idArr: Array, // 明细ids
       webid: '', // 动作定义id
       tablename: '' // 动作定义关联的表格
@@ -93,7 +94,8 @@
           }
         });
       },
-      refreshData() {p
+      refreshData() {
+ p;
         this.$emit('confirmImport');
       },
       closeActionDialog() {

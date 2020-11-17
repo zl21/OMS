@@ -1,9 +1,12 @@
 <template>
-  <div class="time-dialog" v-loading="dialogLoad">
+  <div
+    v-loading="dialogLoad"
+    class="time-dialog"
+  >
     <div class="time-dialog-form">
-      <businessForm :formConfig="formConfig" />
+      <businessForm :form-config="formConfig" />
     </div>
-    <businessButton :btnConfig="btnConfig" />
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 

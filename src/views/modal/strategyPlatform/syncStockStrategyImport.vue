@@ -1,6 +1,6 @@
 <template>
   <div class="import-page">
-    <importTable :componentData="componentData"></importTable>
+    <importTable :component-data="componentData" />
   </div>
 </template>
 
@@ -39,7 +39,7 @@
     },
     methods: {
     },
-  }
+  };
 </script>
 
 <style lang="less" scoped>

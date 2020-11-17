@@ -47,7 +47,7 @@
 </template>
 
 <script>
-  import sgChannelStorageBuffer from '@/js/pages/InventoryCenter/sgChannelStorageBuffer.js';
+  import sgChannelStorageBuffer from '@/js/pages/InventoryCenter/sgChannelStorageBuffer';
 
   export default sgChannelStorageBuffer;
 </script>

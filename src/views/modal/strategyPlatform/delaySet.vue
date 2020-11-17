@@ -1,17 +1,13 @@
 <template>
   <div>
-    <businessForm :formConfig="formConfig"></businessForm>
-    <businessButton :btnConfig="btnConfig"></businessButton>
+    <businessForm :form-config="formConfig" />
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 
 <script>
 
-  import delaySet from '@/js/modal/strategyPlatform/delaySet.js';
+  import delaySet from '@/js/modal/strategyPlatform/delaySet';
 
   export default delaySet;
 </script>
-
-<style lang="less">
-</style>
-

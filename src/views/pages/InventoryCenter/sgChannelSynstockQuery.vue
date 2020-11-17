@@ -47,7 +47,7 @@
 </template>
 
 <script>
-  import sgChannelSynstockQuery from '@/js/pages/InventoryCenter/sgChannelSynstockQuery.js';
+  import sgChannelSynstockQuery from '@/js/pages/InventoryCenter/sgChannelSynstockQuery';
 
   export default sgChannelSynstockQuery;
 </script>
