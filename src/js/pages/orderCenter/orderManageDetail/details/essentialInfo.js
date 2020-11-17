@@ -27,7 +27,7 @@ export default {
           title: '添加赠品',
           titleAlign: 'center',
           data: {},
-          url: 'order/addGiftItem',
+          url: 'modal/orderCenter/addGiftItem',
           name: 'addGiftDialog',
           keepAlive: true,
           width: 600,
@@ -35,7 +35,7 @@ export default {
           footerHide: true,
         },
         changeSku: {
-          title: '更换商品',
+          title: '替换商品',
           titleAlign: 'center',
           data: {},
           url: 'order/changeProduct',
@@ -276,7 +276,7 @@ export default {
         publicDialogConfig.replaceGoodsDetailConfig,
         {
           componentData: {
-            ids: [self.$route.query.id],
+            ids: [self.$route.params.customizedModuleId],
             itemId: data[0].ID
           }
         }

@@ -231,7 +231,7 @@ export default {
         this.$Message.warning('请选择需要替换的商品!');
         return;
       }
-      this.$emit('replaceGoodsDetail', this.selection);
+      this.$emit('replaceGoodsDetail', this.checkSelection);
     },
     modifyGoodsCheck() {
       const self = this;
