@@ -1,4 +1,25 @@
 .ff-user-permission {
+  /deep/ .ztree li a.curSelectedNode {
+    // background-color:initial !important;
+    border: none;
+    opacity: 0.8;
+    padding-top: 0px;
+    color: #575757;
+    height: 24px;
+    margin-bottom: 0px;
+  }
+  /deep/ .myTree .ztree li a > .node_name {
+    line-height: 24px;
+    position: absolute;
+    padding: 0px 6px;
+    border-radius: 3px;
+    &:hover {
+      background-color: #f4f4f4;
+    }
+    &:focus{
+      background-color: #c4e2ff !important;
+    }
+  }
   display: flex;
   position: absolute;
   box-sizing: border-box;

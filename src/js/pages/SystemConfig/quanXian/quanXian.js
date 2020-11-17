@@ -113,8 +113,8 @@ export default {
         key: 'IS_WRITE'
       }
     ];
-    this.searchBtnConfig.buttons = {
-      text: this.buttonsvmI18n.t('btn.search'),
+    let btnSearchObj = {
+      text: window.vmI18n.t('btn.search'),
       icon: '',
       btnClick: () => {
         const self = this;
@@ -128,6 +128,7 @@ export default {
         self.getTableData(obj);
       }
     };
+    this.searchBtnConfig.buttons.push(btnSearchObj); 
     this.filterTreeConfig.placeholder = this.vmI18n.t('pHolder.enter');
   },
   methods: {
@@ -178,7 +179,7 @@ export default {
     // 获取搜索框
     async getSearchForm() {
       // 
-      const { data: { code, datas } } = await this.service.systemConfig.selectPermissionColumn(fromdata);
+      const { data: { code, datas } } = await this.service.systemConfig.selectPermissionColumn();
       if (code === 0) {
         const dataArray = form.refactoringData(datas.dataarry);
         dataArray.forEach(item => {

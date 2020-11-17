@@ -8,6 +8,18 @@
       height: 100%;
       .FilterTree {
         height: 100%;
+        /deep/ .ark-tree-arrow {
+          margin-right: 2px;
+        }
+        /deep/ .ark-tree ul li {
+          line-height: 20px;
+          & .ark-tree-title {
+            line-height: 24px;
+          }
+          & > span {
+            margin-bottom: 4px;
+          }
+        }
       }
     }
     .right_col {
