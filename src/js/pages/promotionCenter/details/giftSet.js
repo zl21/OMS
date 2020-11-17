@@ -27,10 +27,6 @@ export default {
     },
     objid: {
       type: String
-    },
-    dialog_visible: {
-      type: Boolean,
-      default: false
     }
   },
   computed: {
@@ -233,7 +229,7 @@ export default {
     /**
      *  设置商品池
      */
-    setCommodityEvent() {
+    setCommodity() {
       this.$emit('setcommodity');
     },
     /**

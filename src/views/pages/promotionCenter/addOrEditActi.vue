@@ -23,11 +23,10 @@
         <GiftSet
           ref="area_2"
           :objid="objid"
-          :dialog_visible="dialog_visible"
           :load-dis="loadDis"
           :basic-data="basic_info"
           :gift-data="gift_info_setting"
-          @setcommodity="setCommodityEvent"
+          @setcommodity="setCommodity"
           @closeDialog="closeDialog"
           @confirm="confirm"
         />

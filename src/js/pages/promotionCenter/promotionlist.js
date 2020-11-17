@@ -442,6 +442,7 @@ export default {
             text: window.vmI18n.t('btn.offline'), // 按钮文本,
             btnclick: () => {
               this.actOffline();
+
             }
           },
           {
@@ -495,7 +496,7 @@ export default {
     Favorite,
     TableInput
   },
-  created() {},
+  created() { },
   computed: {
     commodity() {
       return this.inputList[0].valuedata;
@@ -668,7 +669,8 @@ export default {
     //   }
     //   this.buttons = buttons;
     // },
-    errorDialogClose(option) {
+    errorDialogClose(value, option) {
+      console.log(value, option);
       if (option) {
         this.downLine();
       } else {
@@ -701,43 +703,42 @@ export default {
     copy() {
       const agGridChild = `agGridChild${this.activeName + 1}`;
       const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
+      console.log(agGridTable.getSelect().length);
       if (agGridTable.getSelect().length) {
         const selectedData = agGridTable.getSelect();
-        if (selectedData.length === 0) {
-          this.$Message.warning(window.vmI18n.t('modalTips.q1')); // 请选择一条数据进行复制操作
-          return;
-        }
         if (selectedData.length > 1) {
           this.$Message.warning(window.vmI18n.t('modalTips.q2')); // 只能选取一条数据
-        } else {
-          const ACTI_ID = selectedData[0].ACTI_ID;
-          const IS_BATCH = selectedData[0].IS_BATCH;
-          if (IS_BATCH) {
-            this.$store.commit('customize/TabOpen', {
-              id: -1, // id
-              type: 'action', // 类型action
-              name: 'batchActivity', // 文件名
-              label: window.vmI18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
-              query: Object.assign({
-                id: -1, // id
-                copy: ACTI_ID,
-                tabTitle: window.vmI18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
-              }) // 带的参数
-            });
-          } else {
-            this.$store.commit('customize/TabOpen', {
-              id: -1, // id
-              type: 'action', // 类型action
-              name: 'addOrEditActi', // 文件名
-              label: window.vmI18n.t('panel_label.addPromotion'), // 新增促销活动
-              query: Object.assign({
-                id: -1, // id
-                copy: ACTI_ID,
-                tabTitle: window.vmI18n.t('panel_label.addPromotion') // 新增促销活动
-              }) // 带的参数
-            });
-          }
+          return;
         }
+        const ACTI_ID = selectedData[0].ACTI_ID;
+        const IS_BATCH = selectedData[0].IS_BATCH;
+        if (IS_BATCH) {
+          this.$store.commit('customize/TabOpen', {
+            id: -1, // id
+            type: 'action', // 类型action
+            name: 'batchActivity', // 文件名
+            label: window.vmI18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
+            query: Object.assign({
+              id: -1, // id
+              copy: ACTI_ID,
+              tabTitle: window.vmI18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
+            }) // 带的参数
+          });
+        } else {
+          this.$store.commit('customize/TabOpen', {
+            id: -1, // id
+            type: 'action', // 类型action
+            name: 'addOrEditActi', // 文件名
+            label: window.vmI18n.t('panel_label.addPromotion'), // 新增促销活动
+            query: Object.assign({
+              id: -1, // id
+              copy: ACTI_ID,
+              tabTitle: window.vmI18n.t('panel_label.addPromotion') // 新增促销活动
+            }) // 带的参数
+          });
+        }
+      } else {
+        this.$Message.warning(window.vmI18n.t('modalTips.r9')); // 请至少选择一条
       }
     },
     promotionClick() {
@@ -1008,11 +1009,11 @@ export default {
           status: 2 // 3表示下线
         }
       };
-      // const formData = new FormData();
-      // formData.append('param', JSON.stringify(params));
+      const formData = new FormData();
+      formData.append('param', JSON.stringify(params));
       const {
         data: { code, message }
-      } = await this.service.promotionCenter.updatePmStatus(JSON.stringify(params));
+      } = await this.service.promotionCenter.updatePmStatus(formData);
       if (code === 0) {
         this.getData();
         this.$Message.success(message);
