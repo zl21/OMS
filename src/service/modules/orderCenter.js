@@ -67,6 +67,7 @@ export default {
   getDetail: params => network.post('/api/cs/oc/oms/v1/getDetail', params),
   export: params => network.post('/p/outpro/export', params),
   amendBody: (tableName, params) => network.post(port[tableName].amendBody, params),
+  objectAdd: params => ('/p/cs/objectAdd', params),
   prodel: params => network.post('/p/cs/prodel', params),
   updateDicunot: params => network.post('/p/cs/oc/v1/sale/updateDicunot', params),
   updateLogisticsBeforePacking: params => network.post('/api/cs/vip/distribution/Logistics/v1/updateLogisticsBeforePacking', params),
