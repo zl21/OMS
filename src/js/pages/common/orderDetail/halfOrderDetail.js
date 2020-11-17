@@ -148,8 +148,7 @@ export default {
     save(val) {
       if (val) {
         this.activeSub = false; // 改变高亮行
-        this.saveAmendData()
-          .then((res) => {
+        this.saveAmendData().then((res) => {
             if (res === 1) return; // 空保存
             const resData = res.data;
             if (resData.code === 0) {
@@ -244,7 +243,7 @@ export default {
       formdata.append('table', this.$route.params.tableName);
       formdata.append('objid', this.$route.params.itemId);
 
-      this.service.common.objectSave(formdata).then((res) => {
+      this.service.orderCenter.amendBody(this.tablename, formdata).then((res) => {
         if (res.data.code === 0) {
           this.getData();
           this.save = false;
@@ -313,12 +312,10 @@ export default {
     noContent() {
       this.$emit('changeHasContent', false);
     }, // 定制页面没有明细
-    newLySave(e) {
-      // this.$emit("changeHasContent", true);
-      // this.$emit("objectSave");
-      // this.isNewCustom = true;
+    async newLySave(e) {
       this.singleData = e;
       $('#actionMODIFY')[0].click();
+      // 因为框架主表保存后会跳转路由,导致字表本身数据被刷新,无法保存字表
     }, // 新增tab明细保存
     changeSave(val) {
       this.$emit('changeSave', val);

@@ -69,7 +69,7 @@ export default {
   returnSkuDb: params => network.post('/p/cs/returnSkuDb', params),
   checkAllStroreStock: params => network.post('/p/cs/checkAllStroreStock', params),
   returnOrder: params => network.post('/api/cs/oc/oms/v1/returnOrder', params),
-  chargebackcheck: params => network.post('/p/cs/chargebackcheck', params),
+  chargebackcheck: params => network.post('/api/cs/oc/oms/v1/chargebackcheck', params),
   OcCancelChangingOrRefund: params => network.post('/api/cs/oc/oms/v1/OcCancelChangingOrRefund', params),
   updateVirtualLibrary: params => network.post('/p/cs/updateVirtualLibrary', params),
   cancelautorefund: params => network.post('/api/cs/oc/oms/v1/cancelautorefund', params),
