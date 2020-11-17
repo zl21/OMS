@@ -169,6 +169,7 @@ export default {
       const res = await this.service.orderCenter.querySkuListAndStorageInfo(params);
       let total = 0;
       if (res.data.code === 0) {
+        self.data = [];
         self.old_cp_c_phy_warehouse_ename = res.data.data[0].cp_c_phy_warehouse_ename;
         res.data.data.forEach(item => {
           item.waiting_split_num = Number(item.waiting_split_num || 0);
