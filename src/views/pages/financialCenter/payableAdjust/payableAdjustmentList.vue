@@ -1,7 +1,6 @@
 <template>
   <div class="payableAdjustmentList">
     <div
-      style="margin-top: 8px"
       class="returnBtn"
     >
       <!-- 按钮 -->
