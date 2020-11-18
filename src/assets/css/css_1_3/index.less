@@ -761,7 +761,6 @@ body {
   padding: 0 8px;
   min-width: 50px;
   margin-right:8px;
-
   &>.ark-icon {
     font-size: 14px;
 
@@ -932,4 +931,28 @@ body {
 .show-dialog .ark-btn-primary{
   background-color: #0068b7;
   border-color: #0068b7;
+}
+
+// 统一定制页面(动作定义)按钮样式
+/*
+.btn：OrderCenter-零售发货单
+.order-btn：OrderCenter-零售发货单详情
+ */
+.btn, .order-btn {
+  .one_button .buttonBox .buttonGroup {
+    .ark-dropdown {
+      .ark-dropdown-rel {
+        button, .ark-btn, .ark-btn-error, .ark-btn-small, .ark-btn-ghost {
+          line-height: 22px;
+          span {
+            vertical-align: baseline!important;
+            .ark-icon, .iconfont {
+              margin-bottom: 2px;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
