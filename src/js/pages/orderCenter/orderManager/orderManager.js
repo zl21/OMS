@@ -3614,7 +3614,7 @@ export default {
       for (let i = 0; i < selection.length; i++) {
         const item = selection[i];
         if (!(item.ORDER_STATUS === self.orderStatus.warehouseDelivery || item.ORDER_STATUS === self.orderStatus.platformDelivery)) {
-          throw new Error('只允许仓库发货、平台发货状态订单允许批量退单');
+          throw new Error('只允许仓库发货、平台发货状态订单批量退单');
         }
       }
       // for (let i = 0; i < selection.length; i++) {
