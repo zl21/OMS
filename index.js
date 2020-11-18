@@ -32,7 +32,6 @@ import './static/promotion.icofont/iconfont.css'; //促销iconfont
 import '@/assets/css/css_1_3/index.less'; // customize-1.3自定义界面icon,下拉单选
 import '@/assets/css/css_1_3/common.less';
 import '@/assets/css/css_1_3/reset.less';
-import '@/assets/css/css_1_3/theme.less';
 
 // 老框架引入的 自定义界面内需要的js资源
 import request, {
