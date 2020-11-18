@@ -2,39 +2,31 @@
   <!-- 手工拆单 -->
   <div class="splitOrder">
     <div class="manual_button">
-      <div class="button1">
-        <Button
-          type="primary"
-          icon="ios-add-circle-outline"
-          @click="addPendingOrder"
-        >
-          添加到待拆单
-        </Button>
-        <Button
-          style="background:#FDF4F2;border:1px solid #EB4832;color:#EB4832"
-          icon="ios-photos-outline"
-          @click="confirm"
-        >
-          确认拆单
-        </Button>
-      </div>
-      <div class="button2">
-        <Button
-          type="error"
-          ghost
-          @click="getData"
-        >
-          刷新
-        </Button>
-        <Button
-          type="error"
-          ghost
-          icon="ios-arrow-dropleft"
-          @click="back"
-        >
-          返回
-        </Button>
-      </div>
+      <Button
+        type="default"
+        @click="getData"
+      >
+        刷新
+      </Button>
+      <Button
+        type="default"
+        @click="back"
+      >
+        返回
+      </Button>
+      <Button
+        type="default"
+        icon="ios-add-circle-outline"
+        @click="addPendingOrder"
+      >
+        添加到待拆单
+      </Button>
+      <Button
+        icon="ios-photos-outline"
+        @click="confirm"
+      >
+        确认拆单
+      </Button>
     </div>
     <div class="manual_list">
       <div class="list_left">
