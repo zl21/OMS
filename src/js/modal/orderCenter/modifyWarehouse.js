@@ -9,7 +9,7 @@ export default {
   components: {
     businessForm,
     jordanBtn,
-    businessActionTable,
+    businessActionTable
   },
   props: {},
   computed: {
@@ -17,7 +17,7 @@ export default {
     rowData: () => {
       console.log(this);
       return vm.$store.state[getModuleName()].buttons.selectArr;
-    },
+    }
   },
   data() {
     return {
@@ -51,15 +51,15 @@ export default {
               }
               const param = {
                 ids: self.idArr[0],
-                warehouseId: self.pid,
+                warehouseId: self.pid
               };
               const fromdata = new FormData();
               fromdata.append('param', JSON.stringify(param));
               axios({
                 url: '/api/cs/vip/distribution/v1/updateBeforeWarehouse',
                 method: 'post',
-                data: fromdata,
-              }).then((res) => {
+                data: fromdata
+              }).then(res => {
                 if (res.data.code === 0) {
                   self.$Message.success(res.data.message);
                   self.$emit('confirmImport');
@@ -68,7 +68,7 @@ export default {
                 }
                 self.closeActionDialog();
               });
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             type: '', // 按钮类型
@@ -79,10 +79,10 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.closeActionDialog();
-            }, // 按钮点击事件
-          },
-        ],
-      },
+            } // 按钮点击事件
+          }
+        ]
+      }
     };
   },
   mounted() {
@@ -95,26 +95,31 @@ export default {
       const fromdata = new FormData();
       const rowData = self.rowData;
       const checkId = self.idArr[0];
-      let shopId = '';
-      rowData.map((item) => {
+      this.shopId = '';
+      rowData.forEach(item => {
         const rowId = item.ID.val;
         if (rowId === checkId) {
-          shopId = item.CP_C_SHOP_ID.refobjid;
+          this.shopId = item.CP_C_SHOP_ID.refobjid;
         }
       });
-      fromdata.append('shopId', shopId);
+      fromdata.append('shopId', this.shopId);
       fromdata.append('pageNum', self.pageNum);
       fromdata.append('pageSize', self.pageSize);
+      // const params = {
+      //   shopId: this.shopId,
+      //   pageNum: self.pageNum,
+      //   pageSize: self.pageSize
+      // };
       const res = await this.service.common.getWarehouseLogisticsTree(fromdata);
-      res.data.data.forEach((element) => {
+      res.data.data.forEach(element => {
         element.ecode = {
-          val: element.ecode,
+          val: element.ecode
         };
         element.ename = {
-          val: element.ename,
+          val: element.ename
         };
         element.ID = {
-          val: element.id,
+          val: element.id
         };
       });
       self.foreignKeyLink = {
@@ -123,22 +128,22 @@ export default {
           {
             colname: 'ID',
             name: 'ID',
-            show: false,
+            show: false
           },
           {
             colname: 'ename',
             // name: "发货仓库名称",
             name: window.vmI18n.t('table_label.deliveryWarehouse_name'),
-            show: true,
+            show: true
           },
           {
             colname: 'ecode',
             // name: "发货仓库编码",
             name: window.vmI18n.t('table_label.deliveryWarehouse_code'),
-            show: false,
-          },
+            show: false
+          }
         ],
-        row: res.data.data,
+        row: res.data.data
       };
       self.totalRowCount = res.data.count;
     },
@@ -151,6 +156,6 @@ export default {
     },
     closeActionDialog() {
       this.$emit('closeActionDialog');
-    },
-  },
+    }
+  }
 };
