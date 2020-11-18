@@ -3182,16 +3182,16 @@ export default {
     // 设置普通搜索默认选项
     setSearchOption() {
       // TODO 调试了下貌似没用到这个方法 暂注释
-      // setTimeout(() => {
-      //   var slideBox = document.getElementById("IntegrateSearchFilter");
-      //   if (slideBox) {
-      //     setTimeout(() => {
-      //       var pageUl = document.querySelector(".from .burgeon-dropdown-menu")
-      //         .childNodes[0];
-      //       pageUl.click();
-      //     }, 200);
-      //   }
-      // }, 100);
+      setTimeout(() => {
+        const slideBox = document.getElementById('IntegrateSearchFilter');
+        if (slideBox) {
+          setTimeout(() => {
+            const pageUl = document.querySelector('.from .ark-dropdown-menu')
+              .childNodes[0];
+            pageUl.click();
+          }, 200);
+        }
+      }, 100);
     },
     // 判断使用正则
     determineTheRegular(val) {
