@@ -60,11 +60,11 @@
           this.is_click = true;
           this.service.inventoryCenter.sgPhyOutNoticesSendWMSAgainCondition(formdata).then(res=>{
             console.log(res);
-            if (res.data.code == 0) {
-              this.$Message.success(res.data.data);
+            if (res.code == 0) {
+              this.$Message.success(res.data);
             } else {
               this.is_click = false;
-              this.$Message.error(res.data.data);
+              this.$Message.error(res.data);
             }
           });
         } else {

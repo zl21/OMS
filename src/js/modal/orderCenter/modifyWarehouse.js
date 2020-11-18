@@ -105,7 +105,7 @@ export default {
       fromdata.append('shopId', shopId);
       fromdata.append('pageNum', self.pageNum);
       fromdata.append('pageSize', self.pageSize);
-      const res = await this.service.common.getWarehouseLogisticsTree(fromdata);
+      const res = await this.service.common.getWarehourseByShopId(fromdata);
       res.data.data.forEach((element) => {
         element.ecode = {
           val: element.ecode,
