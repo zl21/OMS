@@ -120,13 +120,9 @@ export default {
       fromdata.append('cLogisticsId', self.pid);
       fromdata.append('expressCode', self.expressCode);
       fromdata.append('type', self.type);
-      axios({
-        // url: "/p/cs/updateLogistics",
-        url: '/api/cs/oc/oms/v1/updateLogistics', // 切换接口服务
-        method: 'post',
-        cancelToken: true,
-        data: fromdata,
-      }).then((res) => {
+     
+      this.service.orderCenter.updateLogistics(fromdata)
+      .then((res) => {
         if (res.data.code === 0) {
           console.log(self.$route.query.id);
           if (self.$route.query.id == 2627) {
