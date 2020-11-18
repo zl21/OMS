@@ -33,7 +33,7 @@
                 class="content"
               >
                 <Row>
-                  <Col span="8" />
+                  <Col span="6">
                   <FormItem label="店铺名称：">
                     <Input
                       v-model="info.CP_C_SHOP_TITLE"
@@ -42,7 +42,7 @@
                     />
                   </FormItem>
                   </Col>
-                  <Col span="4" />
+                  <Col span="6">
                   <FormItem label="启用自动审核：">
                     <Checkbox
                       v-model="IS_AUTOCHECK_ORDER"
@@ -53,7 +53,7 @@
                     </Checkbox>
                   </FormItem>
                   </Col>
-                  <Col span="4" />
+                  <Col span="6">
                   <FormItem label="检查可合并订单：">
                     <Checkbox
                       v-model="IS_MERGE_ORDER"
@@ -65,7 +65,7 @@
                   </FormItem>
                   </Col>
 
-                  <Col span="4" />
+                  <Col span="6">
                   <FormItem label="全赠品订单开启自动审核：">
                     <Checkbox
                       v-model="IS_FULL_GIFT_ORDER"
@@ -77,9 +77,9 @@
                   </FormItem>
                   </Col>
 
-                  <Col span="8" />
-                  <FormItem label="等待审核时间">
-                    <Col span="20" />
+                  <Col span="6">
+                  <FormItem label="等待审核时间：">
+                    <Col span="21">
                     <Input
                       v-model="info.WAIT_TIME"
                       size="small"
@@ -87,13 +87,13 @@
                       @on-change="setResult('WAIT_TIME')"
                     />
                     </Col>
-                    <Col span="4" /> 分钟 </Col>
+                    <Col span="3" style="text-align: right"> 分钟 </Col>
                   </FormItem>
                   </Col>
 
-                  <Col span="8" />
+                  <Col span="6">
                   <FormItem label="反审核等待时间">
-                    <Col span="20" />
+                    <Col span="21">
                     <Input
                       v-model="info.ANTI_AUDIT_WAIT_TIME"
                       size="small"
@@ -101,13 +101,13 @@
                       @on-change="setResult('ANTI_AUDIT_WAIT_TIME')"
                     />
                     </Col>
-                    <Col span="4" /> 分钟 </Col>
+                    <Col span="3" style="text-align: right"> 分钟 </Col>
                   </FormItem>
                   </Col>
 
-                  <Col span="8" />
+                  <Col span="6">
                   <FormItem label="hold单等待时间：">
-                    <Col span="20" />
+                    <Col span="21">
                     <Input
                       v-model="info.HOLD_WAIT_TIME"
                       size="small"
@@ -115,10 +115,10 @@
                       @on-change="setResult('HOLD_WAIT_TIME')"
                     />
                     </Col>
-                    <Col span="4" /> 分钟 </Col>
+                    <Col span="3" style="text-align: right"> 分钟 </Col>
                   </FormItem>
                   </Col>
-                  <Col span="4" />
+                  <Col span="6">
                   <FormItem label="自动审核货到付款：">
                     <Checkbox
                       v-model="IS_AUTOCHECK_PAY"
@@ -130,9 +130,9 @@
                   </FormItem>
                   </Col>
 
-                  <Col span="8" />
+                  <Col span="6">
                   <FormItem label="排除物流公司：">
-                    <Col span="20" />
+                    <Col span="24">
                     <Select
                       v-model="info.CP_C_LOGISTICS_ID"
                       @on-change="setResult('CP_C_LOGISTICS_ID')"
@@ -148,7 +148,7 @@
                     </Col>
                   </FormItem>
                   </Col>
-                  <Col span="4" />
+                  <Col span="6">
                   <FormItem label="手工订单：">
                     <Checkbox
                       v-model="IS_MANUAL_ORDER"
@@ -172,7 +172,7 @@
                   <Col
                     span="24"
                     style="margin-bottom: 10px"
-                  />满足以下条件的订单需要人工审核</Col>
+                  >满足以下条件的订单需要人工审核</Col>
                 </Row>
                 <Row>
                   <FormItem label="订单类型：">
@@ -212,10 +212,10 @@
                 </Row>
                 <Row>
                   <Col
-                    colspan="2"
-                    span="2"
+                    colspan="1"
+                    span="1"
                     style="padding-top: 10px"
-                  />
+                  >
                   <Checkbox
                     v-model="effectiveCondition[1].value"
                     size="small"
@@ -224,10 +224,10 @@
 &nbsp;
                   </Checkbox>
                   </Col>
-                  <Col span="20" />
+                  <Col span="11">
                   <FormItem label="付款时间：">
                     <Row>
-                      <Col span="10" />
+                      <Col span="11">
                       <DatePicker
                         v-model="info.beginTime"
                         format="yyyy-MM-dd HH:mm:ss"
@@ -238,10 +238,10 @@
                       />
                       </Col>
                       <Col
-                        span="4"
+                        span="2"
                         style="text-align: center"
-                      />-</Col>
-                      <Col span="10" />
+                      >-</Col>
+                      <Col span="11">
                       <DatePicker
                         v-model="info.endTime"
                         format="yyyy-MM-dd HH:mm:ss"
@@ -257,10 +257,10 @@
                 </Row>
                 <Row>
                   <Col
-                    colspan="2"
-                    span="2"
+                    colspan="1"
+                    span="1"
                     style="padding-top: 10px"
-                  />
+                  >
                   <Checkbox
                     v-model="effectiveCondition[2].value"
                     size="small"
@@ -269,10 +269,10 @@
 &nbsp;
                   </Checkbox>
                   </Col>
-                  <Col span="20" />
-                  <FormItem label="订单金额（元）">
+                  <Col span="11">
+                  <FormItem label="订单金额（元）:">
                     <Row>
-                      <Col span="10" />
+                      <Col span="11">
                       <Input
                         v-model="info.LIMIT_PRICE_DOWN"
                         placeholder
@@ -282,10 +282,10 @@
                       />
                       </Col>
                       <Col
-                        span="4"
+                        span="2"
                         style="text-align: center"
-                      />-</Col>
-                      <Col span="10" />
+                      >-</Col>
+                      <Col span="11">
                       <Input
                         v-model="info.LIMIT_PRICE_UP"
                         placeholder
@@ -300,10 +300,10 @@
                 </Row>
                 <Row>
                   <Col
-                    colspan="2"
-                    span="2"
+                    colspan="1"
+                    span="1"
                     style="padding-top: 10px"
-                  />
+                  >
                   <Checkbox
                     v-model="effectiveCondition[3].value"
                     size="small"
@@ -312,8 +312,8 @@
 &nbsp;
                   </Checkbox>
                   </Col>
-                  <Col span="20" />
-                  <FormItem label="收货省份">
+                  <Col span="11">
+                  <FormItem label="收货省份:">
                     <DropDownSelectFilter
                       :data="data1"
                       :data-empty-message="dataEmptyMessage"
@@ -333,10 +333,10 @@
                 </Row>
                 <Row>
                   <Col
-                    colspan="2"
-                    span="2"
+                    colspan="1"
+                    span="1"
                     style="padding-top: 10px"
-                  />
+                  >
                   <Checkbox
                     v-model="effectiveCondition[4].value"
                     size="small"
@@ -345,8 +345,8 @@
 &nbsp;
                   </Checkbox>
                   </Col>
-                  <Col span="20" />
-                  <FormItem label="收货地址">
+                  <Col span="11">
+                  <FormItem label="收货地址:">
                     <Input
                       v-model="info.RECEIVER_ADDRESS"
                       placeholder="包含关键字进行人工审核；多个关键字可依次填写，使用中文“，”隔开"
@@ -358,10 +358,10 @@
                 </Row>
                 <Row>
                   <Col
-                    colspan="2"
-                    span="2"
+                    colspan="1"
+                    span="1"
                     style="padding-top: 10px"
-                  />
+                  >
                   <Checkbox
                     v-model="effectiveCondition[5].value"
                     size="small"
@@ -370,8 +370,8 @@
 &nbsp;
                   </Checkbox>
                   </Col>
-                  <Col span="20" />
-                  <FormItem label="买家留言">
+                  <Col span="11">
+                  <FormItem label="买家留言:">
                     <Input
                       v-model="info.BUYER_REMARK"
                       placeholder="为空默认为有备注信息进行人工审核；多个关键字可依次填写，使用中文“，”隔开。"
@@ -383,10 +383,10 @@
                 </Row>
                 <Row>
                   <Col
-                    colspan="2"
-                    span="2"
+                    colspan="1"
+                    span="1"
                     style="padding-top: 10px"
-                  />
+                  >
                   <Checkbox
                     v-model="effectiveCondition[6].value"
                     size="small"
@@ -395,7 +395,7 @@
 &nbsp;
                   </Checkbox>
                   </Col>
-                  <Col span="20" />
+                  <Col span="11">
                   <FormItem label="卖家备注">
                     <Input
                       v-model="info.SELLER_REMARK"
@@ -408,22 +408,22 @@
                 </Row>
                 <Row>
                   <Col
-                    colspan="2"
-                    span="2"
+                    colspan="1"
+                    span="1"
                     style="padding-top: 10px"
-                  />
-                  <!-- <Checkbox
+                  >
+                  <Checkbox
                     v-model="effectiveCondition[7].value"
                     size="small"
                     @on-change="setResult('effectiveCondition')"
                   >
 &nbsp;
-                  </Checkbox> -->
-                  <!-- </Col>
-                  <Col span="20" />
+                  </Checkbox>
+                 </Col>
+                  <Col span="11">
                   <FormItem label="平台SKU编码">
                     <Row>
-                      <Col span="6" />
+                      <Col span="6" >
                       <RadioGroup
                         v-model="EXCLUDE_SKU_TYPE"
                         @on-change="setResult('EXCLUDE_SKU_TYPE')"
@@ -442,7 +442,7 @@
                         </Radio>
                       </RadioGroup>
                       </Col>
-                      <Col span="18" />
+                      <Col span="18" >
                       <Input
                         v-model="info.SKU_CONTENT"
                         placeholder="输入多个商品条码，使用中文“，”隔开"
@@ -452,7 +452,7 @@
                       </Col>
                     </Row>
                   </FormItem>
-                  </Col> -->
+                  </Col>
                 </Row>
               </div>
             </Panel>
