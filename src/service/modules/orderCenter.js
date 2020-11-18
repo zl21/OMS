@@ -72,6 +72,7 @@ export default {
   updateLogisticsBeforePacking: params => network.post('/api/cs/vip/distribution/Logistics/v1/updateLogisticsBeforePacking', params),
   querySkuListAndStorageInfo: params => network.post('/api/cs/oc/oms/v1/querySkuListAndStorageInfo', params),
   updateLogistics: params => network.post('/api/cs/oc/oms/v1/updateLogistics', params),
+  manualMatchingList: params => network.post('/api/cs/oc/oms/v1/manualMatchingList', params),
   // 半定制弹框
   //
   updateWarehouse: params => network.post('/api/cs/oc/oms/v1/updateWarehouse', params),
