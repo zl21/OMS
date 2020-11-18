@@ -904,7 +904,7 @@ export default {
       _this.returnSelectData = [];
       if (code === 0 && data.payableAdjustmentList.length) {
         // Table表单赋值
-        _this.allTableArr = data.payableAdjustmentList.forEach(
+        _this.allTableArr = data.payableAdjustmentList.map(
           item => 
             // 过滤不需要展示的模糊搜索项
             ({
