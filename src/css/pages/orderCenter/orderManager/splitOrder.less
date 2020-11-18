@@ -1,8 +1,26 @@
 .splitOrder {
   .manual_button {
     display: flex;
-    justify-content: space-between;
-    margin: 8px 0;
+    justify-content: flex-start;
+    padding: 8px 0;
+    button {
+      border-color: #0068b7;
+      color: #0068b7;
+      height: 22px;
+      line-height: 20px;
+      margin-left: 0;
+      margin-right: 8px;
+      padding: 1px 7px 2px;
+      span {
+        vertical-align: baseline;
+      }
+      .ark-icon,
+      .iconfont {
+        margin-bottom: 2px;
+        font-size: 14px;
+        margin-left: 2px;
+      }
+    }
   }
 
   .manual_list {
@@ -49,10 +67,17 @@
         }
         li:first-child {
           height: 80px;
-          background: #ee4f39;
           line-height: 80px;
+          background-color: rgba(23,125,76,.1);
+          text-align: center;
+          color: #177d4c;
+          font-size: 14px;
           position: relative;
           overflow: hidden;
+          &:hover {
+            border: 1px solid #177d4c;
+          }
+          
           .subscript {
             height: 30px;
             width: 100px;
