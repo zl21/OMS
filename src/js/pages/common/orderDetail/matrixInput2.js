@@ -189,6 +189,7 @@ export default {
       this.visible = false;
     },//商品编码input失焦 */
     entry() {
+      debugger;
       this.findId();
       this.NoImport = true;
       if (this.sub !== -1) {
@@ -221,11 +222,11 @@ export default {
           this.judgeSingle = false;
         } else { // SKU编码
           const obj = {};
-          obj[(this.tablename === 'DL_B_TRAN_OUT' || this.tablename === 'DL_B_TRAN_OUT_POS') ? port[this.tablename].special : port[this.tablename].tableName] = {
+          obj[(this.tablename === 'DL_B_TRAN_OUT' || this.tablename === 'DL_B_TRAN_OUT_POS') ? port[this.tablename].special : port[this.tablename].tableName] = [{
             /* ID: this.selectItem.tableid,//子表ID */
             PS_C_SKU_ECODE: this.search, // SKU编码
-            PS_C_SKU_ID: data.PS_C_SKU_ID, // skuID
-          };
+            PS_C_SKU_ID: -1, // skuID
+          }];
           obj[(this.tablename === 'DL_B_TRAN_OUT' || this.tablename === 'DL_B_TRAN_OUT_POS') ? (port[this.tablename].special) : port[this.tablename].tableName][`${this.matrixcoll}`] = this.count === '' ? this.matrixnum : this.count;// 数量
           if (this.objid == -1) {
             if (index !== -1) {
