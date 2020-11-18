@@ -360,7 +360,7 @@ export default {
       try {
         const {
           data: { code, message, data }
-        } = await this.service.promotionCenter.selectPm(formData);
+        } = await this.service.promotionCenter.savePm(formData);
         if (code === 0) {
           this.$message({
             type: 'success',
