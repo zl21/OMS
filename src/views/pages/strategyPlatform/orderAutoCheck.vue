@@ -66,7 +66,7 @@
                   </Col>
 
                   <Col span="6">
-                  <FormItem label="全赠品订单开启自动审核：">
+                  <FormItem label="全赠品订单开启自动审核：" class="width">
                     <Checkbox
                       v-model="IS_FULL_GIFT_ORDER"
                       size="small"
@@ -79,7 +79,7 @@
 
                   <Col span="6">
                   <FormItem label="等待审核时间：">
-                    <Col span="21">
+                    <Col span="20">
                     <Input
                       v-model="info.WAIT_TIME"
                       size="small"
@@ -87,13 +87,13 @@
                       @on-change="setResult('WAIT_TIME')"
                     />
                     </Col>
-                    <Col span="3" style="text-align: right"> 分钟 </Col>
+                    <Col span="4" style="text-align: right"> 分钟 </Col>
                   </FormItem>
                   </Col>
 
                   <Col span="6">
-                  <FormItem label="反审核等待时间">
-                    <Col span="21">
+                  <FormItem label="反审核等待时间：">
+                    <Col span="20">
                     <Input
                       v-model="info.ANTI_AUDIT_WAIT_TIME"
                       size="small"
@@ -101,13 +101,13 @@
                       @on-change="setResult('ANTI_AUDIT_WAIT_TIME')"
                     />
                     </Col>
-                    <Col span="3" style="text-align: right"> 分钟 </Col>
+                    <Col span="4" style="text-align: right"> 分钟 </Col>
                   </FormItem>
                   </Col>
 
                   <Col span="6">
                   <FormItem label="hold单等待时间：">
-                    <Col span="21">
+                    <Col span="20">
                     <Input
                       v-model="info.HOLD_WAIT_TIME"
                       size="small"
@@ -115,11 +115,11 @@
                       @on-change="setResult('HOLD_WAIT_TIME')"
                     />
                     </Col>
-                    <Col span="3" style="text-align: right"> 分钟 </Col>
+                    <Col span="4" style="text-align: right"> 分钟 </Col>
                   </FormItem>
                   </Col>
                   <Col span="6">
-                  <FormItem label="自动审核货到付款：">
+                  <FormItem label="自动审核货到付款：" class="width">
                     <Checkbox
                       v-model="IS_AUTOCHECK_PAY"
                       size="small"
