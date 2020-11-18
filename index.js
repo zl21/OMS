@@ -9,6 +9,7 @@ import WelcomePage from './src/component/WelcomePage.vue';
 import projectRouterConfig from './src/config/router.config';
 import customizedPageConfig from './src/config/customized.page.config';
 import customizedModalConfig from './src/config/customized.modal.config';
+import customizeWaterMarkConfig from './src/config/customized.watermark.config';
 import apiPath from '@/assets/js/api/path/index.js'
 
 const projectConfig = require("./project.config");  //-------------引入框架项目配置文件;
@@ -80,9 +81,7 @@ R3.launchApplication({
   // ignoreGateWayPattern: [/\/jflow\/*/g, /\/api\/*/g], // 框架默认禁用的网关逻辑的正则模式匹配
   enableJflow: false, // 默认禁用JFlow插件功能
   // jflowRequestDomain: 'http://jflow-shangfei.dev.burgeononline.com/', // jflow后台地址（商飞）
-  customizeWaterMark: {
-    // submit: { text: '测试水印', color: '#e80000' },
-  }, // 启用外部自定义水印配置,
+  customizeWaterMark: customizeWaterMarkConfig, // 水印配置,
   isItemTableNewValidation: true, // 是否允许子表新增有必填项时，输入值才触发子表必填项校验，不输入值则只校验主表
   isCommonTable: false, // 是否开启普通表格，默认关闭
   projectRoutes: projectRouterConfig, // 项目自定义路由，一般情况下用不到此配置
