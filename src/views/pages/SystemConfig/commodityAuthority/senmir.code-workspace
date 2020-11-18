@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../../../../../../R3-Web-Senma-V1.3"
+		},
+		{
+			"path": "../../../../../../burgeon-private-npm"
 		}
 	],
 	"settings": {
