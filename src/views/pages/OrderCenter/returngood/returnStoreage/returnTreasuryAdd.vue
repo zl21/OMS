@@ -2,7 +2,7 @@
 <template>
   <div class="returnTreasurys">
     <!--按钮块-->
-    <div style="margin-top: 8px">
+    <div class="returnTreasurysBtn">
       <businessButton :btn-config="btnConfig" />
     </div>
     <!-- form表单 -->

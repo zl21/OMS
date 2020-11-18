@@ -756,19 +756,6 @@ body {
     }
   }
 }
-.one_button .buttonGroup button {
-  height: 24px;
-  padding: 0 8px;
-  min-width: 50px;
-  margin-right:8px;
-  &>.ark-icon {
-    font-size: 14px;
-
-    &+span {
-      margin-left: 0;
-    }
-  }
-}
 
 .dialog-footer {
   text-align: right;
@@ -933,26 +920,51 @@ body {
   border-color: #0068b7;
 }
 
-// 统一定制页面(动作定义)按钮样式
+// 统一定制页面(动作定义)按钮样式----按照框架标准
 /*
 .btn：OrderCenter-零售发货单
 .order-btn：OrderCenter-零售发货单详情
+.returnBtn：OrderCenter-退换货单
+.returnAddBtn：OrderCenter-退换货单详情
+.re_button：OrderCenter-额外退款新增/详情
+.returnstoreageBtn：OrderCenter-退货入库
+.returnTreasurysBtn：OrderCenter-退货入库新增/详情
  */
-.btn, .order-btn {
-  .one_button .buttonBox .buttonGroup {
-    .ark-dropdown {
-      .ark-dropdown-rel {
-        button, .ark-btn, .ark-btn-error, .ark-btn-small, .ark-btn-ghost {
-          line-height: 22px;
-          span {
-            vertical-align: baseline!important;
-            .ark-icon, .iconfont {
-              margin-bottom: 2px;
-              font-size: 14px;
-            }
-          }
+ .orderManager-box .btn, .order-btn, .returnBtn, .returnAddBtn, .re_button, .returnstoreageBtn, .returnTreasurysBtn {
+  padding: 0;
+  margin: 0;
+
+  .one_button {
+    padding: 8px 0;
+
+    .buttonBox {
+      .buttonGroup {
+        margin: 0;
+      }
+      button, .ark-btn, .ark-btn-error, .ark-btn-small, .ark-btn-ghost {
+        height: 22px;
+        line-height: 18px;
+        margin-right: 8px;
+        margin-left: 0;
+        padding: 0 8px;
+        margin-bottom: 4px;
+        // min-width: 50px;
+        border-radius: 2px;
+        span {
+          vertical-align: baseline!important;
+        }
+        .ark-icon, .iconfont {
+          margin-bottom: 2px;
+          font-size: 14px;
+          margin-left: 2px;
         }
       }
     }
   }
 }
+// 框架按钮(查找、重置、导出等)的空白节点
+.R3-button-group {
+  font-size: 0;  
+}
+  
+  

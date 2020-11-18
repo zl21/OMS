@@ -529,7 +529,7 @@ export default {
           {
             text: window.vmI18n.t('btn.save'), // 保存
             // class: 'save',
-            icon: 'md-download',
+            // icon: 'md-download',
             btnclick: () => {
               this.save();
             },
@@ -537,7 +537,7 @@ export default {
           {
             text: window.vmI18n.t('btn.back'), // 返回
             // class: 'cancel',
-            icon: 'md-arrow-round-back',
+            // icon: 'md-arrow-round-back',
             btnclick: () => {
               if (this.$route.query.tabTitle === '额外退款编辑') {
                 R3.store.commit('global/tabOpen', {
