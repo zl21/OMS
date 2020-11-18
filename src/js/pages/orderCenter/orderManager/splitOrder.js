@@ -38,8 +38,7 @@ export default {
           key: 'advise_phy_warehouse_id',
           render: (h, params) => {
             console.log(params);
-            const options = params.row.sgBPhyInStorageItemExt.map(item =>
-              h('Option', {
+            const options = params.row.sgBPhyInStorageItemExt.map(item => h('Option', {
                 style: {
                   'font-style': item.total_qty_available === 0 ? 'italic' : 'normal'
                 },
@@ -47,8 +46,7 @@ export default {
                   value: item.advise_phy_warehouse_id,
                   label: item.advise_phy_warehouse_ename
                 }
-              })
-            );
+              }));
             return h('div', [
               h(
                 'Select',

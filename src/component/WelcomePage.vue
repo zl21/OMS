@@ -60,13 +60,13 @@
         });
       },
     },
-    mounted(){
-      let domContent = document.getElementById('content');
-      domContent.style.padding = "0 0";
+    mounted() {
+      const domContent = document.getElementById('content');
+      domContent.style.padding = '0 0';
     },
-    destroyed(){
-      let domContent = document.getElementById('content');
-      domContent.style.padding = "0 15px";
+    destroyed() {
+      const domContent = document.getElementById('content');
+      domContent.style.padding = '0 15px';
     }
   };
 </script>

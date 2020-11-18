@@ -1,10 +1,8 @@
-
 import axios from 'axios';
 
 export default {
   data() {
     return {
-
       radioValue: '2',
       searchValue: '',
       qty: '1',
@@ -31,7 +29,7 @@ export default {
   },
   props: {
     componentData: {
-      type: Object,
+      type: Object
     }
   },
   mounted() {
@@ -41,21 +39,24 @@ export default {
     radioChange(value) {
       console.log(value);
     },
-    search(value) { // sku查询
+    search() {
+      // sku查询
       const self = this;
       axios({
         url: '/p/cs/skuQuery',
         method: 'post',
         data: { isBlur: 'N', psCSku: { ECODE: self.searchValue } }
-      }).then((res) => {
+      }).then(res => {
         console.log(res);
-        if (res.data.code == 0) {
-          if (res.data.data.data.length == 0) {
-            this.$Message.warning('查询数据为空!');
-            return;
+        if (res.data.code) {
+          if (res.data.code == 0) {
+            if (res.data.data.data.length == 0) {
+              this.$Message.warning('查询数据为空!');
+              return;
+            }
+            res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是';
+            self.data = res.data.data.data;
           }
-          res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是';
-          self.data = res.data.data.data;
         } else {
           this.$Message.warning('sku查询失败!');
         }
@@ -76,7 +77,7 @@ export default {
         url: '/api/cs/oc/oms/v1/bathChangeGoods',
         method: 'post',
         data: result
-      }).then((res) => {
+      }).then(res => {
         console.log(res);
         if (res.data.code == 0) {
           self.$Message.success(res.data.message);
@@ -93,16 +94,16 @@ export default {
             title: res.data.message,
             width: 500,
             render: h => h('Table', {
-              props: {
-                columns: [
-                  {
-                    title: '提示信息',
-                    key: 'message'
-                  }
-                ],
-                data: res.data.data
-              }
-            })
+                props: {
+                  columns: [
+                    {
+                      title: '提示信息',
+                      key: 'message'
+                    }
+                  ],
+                  data: res.data.data
+                }
+              })
           });
         }
       });
