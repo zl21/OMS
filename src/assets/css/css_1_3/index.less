@@ -1,12 +1,16 @@
 body {
   margin: 0;
+
   ::-webkit-scrollbar {
     width: 0;
   }
-  .history-and-favorite .favorite div.label, .history-and-favorite .history div.label{
+
+  .history-and-favorite .favorite div.label,
+  .history-and-favorite .history div.label {
     padding: 0 20px 0 16px !important;
   }
-  .ark-form-item-required .ark-form-item-label:before{
+
+  .ark-form-item-required .ark-form-item-label:before {
     vertical-align: middle;
     font-size: 12px !important;
   }
@@ -756,20 +760,6 @@ body {
     }
   }
 }
-.one_button .buttonGroup button {
-  height: 24px;
-  padding: 0 8px;
-  min-width: 50px;
-  margin-right:8px;
-
-  &>.ark-icon {
-    font-size: 14px;
-
-    &+span {
-      margin-left: 0;
-    }
-  }
-}
 
 .dialog-footer {
   text-align: right;
@@ -793,9 +783,11 @@ body {
 .orderManageEdit {
   .ark-form-item {
     margin-bottom: 0;
-    .ark-date-picker{
+
+    .ark-date-picker {
       width: 100%;
     }
+
     &.popInput {
       .el-input__inner {
         height: 24px;
@@ -815,20 +807,22 @@ body {
         .add-input {
           height: 26px;
           border: 1px solid #d8d8d8;
-          .el-input__inner{
+
+          .el-input__inner {
             padding: 0 10px !important;
           }
         }
 
         label.title {
           padding: 10px 12px 10px 0 !important;
-          i{
+
+          i {
             top: auto;
-                left: -2px !important;
-                font-size: 12px;
-                height: auto;
-                line-height: inherit;
-                vertical-align: inherit;
+            left: -2px !important;
+            font-size: 12px;
+            height: auto;
+            line-height: inherit;
+            vertical-align: inherit;
           }
         }
 
@@ -839,33 +833,40 @@ body {
     }
   }
 }
+
 // element popover 箭头（很重要 关乎显示位置）
-.fktable{
+.fktable {
   background-color: #fff;
 }
-.input-wrap .el-autocomplete .el-input{
+
+.input-wrap .el-autocomplete .el-input {
   position: relative;
 }
+
 .el-popper .popper__arrow {
-    top: -6px;
-    left: 50%;
-    margin-right: 3px;
-    border-top-width: 0;
-    border-bottom-color: #ebeef5;
+  top: -6px;
+  left: 50%;
+  margin-right: 3px;
+  border-top-width: 0;
+  border-bottom-color: #ebeef5;
 }
+
 .el-popper .popper__arrow {
-    border-width: 6px;
-    -webkit-filter: drop-shadow(0 2px 12px rgba(0,0,0,.03));
-    filter: drop-shadow(0 2px 12px rgba(0,0,0,.03));
+  border-width: 6px;
+  -webkit-filter: drop-shadow(0 2px 12px rgba(0, 0, 0, .03));
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, .03));
 }
-.el-popper .popper__arrow, .el-popper .popper__arrow:after {
-    position: absolute;
-    display: block;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
+
+.el-popper .popper__arrow,
+.el-popper .popper__arrow:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
 }
+
 // element pages
 .fktable .page ul li {
   height: 14px;
@@ -875,35 +876,45 @@ body {
   width: auto;
   border: none;
 }
+
 .el-icon-arrow-left:before {
   content: "<";
 }
+
 .el-icon-more:before {
   content: "...";
 }
+
 .el-icon-arrow-right:before {
   content: ">";
 }
+
 .el-icon-d-arrow-right:before {
   content: ">>";
 }
+
 .el-icon-d-arrow-left:before {
   content: "<<";
 }
+
 .el-pagination button:disabled {
   color: #c0c4cc;
   background-color: #fff;
   cursor: not-allowed;
 }
-.el-pager, .el-pager li {
+
+.el-pager,
+.el-pager li {
   vertical-align: top;
   margin: 0;
   display: inline-block;
 }
+
 //侧边栏
-.importDialog .fileInput{
+.importDialog .fileInput {
   cursor: pointer;
 }
+
 // 退换货订单 详情
 .sales {
   display: flex;
@@ -911,17 +922,21 @@ body {
   height: 100%;
   width: 100%;
 }
+
 .returngood .sales ul {
   display: flex;
 }
+
 .returngood .sales ul li {
   flex: auto;
   text-align: center;
 }
+
 .returngood .sales ul li p {
   line-height: 20px;
   text-align: center;
 }
+
 .returngood .sales ul li input {
   width: 100px;
   height: 20px;
@@ -929,7 +944,124 @@ body {
   margin: 0 auto;
   border: 1px solid #dcdee2;
 }
-.show-dialog .ark-btn-primary{
+
+.show-dialog .ark-btn-primary {
   background-color: #0068b7;
   border-color: #0068b7;
+}
+
+// 统一定制页面(动作定义)按钮样式
+.one_button {
+  padding: 8px 0;
+
+  .buttonBox {
+    button {
+      height: 22px;
+      line-height: 18px;
+      margin-left: 0;
+      border-radius: 2px;
+      min-width: 50px;
+      span {
+        vertical-align: baseline !important;
+      }
+
+      .ark-icon,
+      .iconfont {
+        margin-bottom: 2px;
+        font-size: 14px;
+        margin-left: 4px;
+      }
+    }
+  }
+}
+
+// 框架按钮(查找、重置、导出等)的空白节点
+.R3-button-group {
+  font-size: 0;
+}
+
+// 详情的car 统一修改
+.ark-collapse-content>.ark-collapse-content-box {
+  padding-top: 0px !important;
+}
+.auto-check,
+.returnAddColl,
+.compositeAllform,
+.order-add,
+.TreasuryDefault,
+.jq-combined-commodity-edit,
+.re_form {
+  .ark-collapse {
+    background-color: #fff;
+    border-radius: 0;
+    border: none;
+
+    &>.ark-collapse-item {
+      border-top: none;
+      margin-bottom: 10px;
+
+      &.ark-collapse-item-active {
+        &>.ark-collapse-header>i {
+          transform: inherit;
+        }
+      }
+
+      &>.ark-collapse-header {
+        text-align: left;
+        padding: 0 20px;
+        background: #f7f8fa;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom: none;
+        height: 35px !important;
+        line-height: 36px !important;
+
+        &>.iconios-arrow-forward:before,
+        &>.iconmd-arrow-dropdown:before {
+          position: absolute;
+          top: 50%;
+          left: 12px;
+          transform: translateY(-50%);
+          content: "";
+          width: 3px;
+          height: 14px;
+          background: #155bd4;
+        }
+      }
+
+      &>.ark-collapse-content {
+        padding: 10px 16px;
+        border: 1px solid #f7f8fa;
+      }
+    }
+  }
+}
+
+// .orderManageEdit.unFlodStyle {
+//   padding-right: 0;
+// }
+
+//agtable 修改
+.agTable {
+  .ag-header {}
+
+  .ag-theme-balham {
+    .ag-cell {
+      line-height: 36px;
+    }
+    .ag-header-cell-label .ag-header-cell-text{
+      line-height: 36px;
+    }
+    .ag-header-select-all,.ag-selection-checkbox span{
+      margin-right: 12px;
+    }
+  }
+}
+// loading修改
+body .ark-spin-fix{
+  position: fixed;
+  z-index: 1002 !important;
+}
+.orderManageEdit{
+  padding: 5px 0;
 }

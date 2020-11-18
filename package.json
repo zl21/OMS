@@ -4,7 +4,6 @@
   "description": "",
   "scripts": {
     "start": "webpack-dev-server --progress --env.develop",
-    "lint": "eslint --fix --ext .js,.vue src",
     "build": "webpack --color --progress --env.production"
   },
   "husky": {
@@ -63,7 +62,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "@burgeon/business-components": "^1.0.9",
+    "@burgeon/business-components": "^1.0.12",
     "@burgeon/internationalization": "^1.0.2",
     "@burgeon/oms-theme": "^1.0.0",
     "@syman/ark-ui": "^1.1.3",
