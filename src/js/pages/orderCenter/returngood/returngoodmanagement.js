@@ -1916,14 +1916,12 @@ export default {
                           }
                         }
                       },
-                      list.forEach(item =>
-                        h('Option', {
+                      list.forEach(item => h('Option', {
                           props: {
                             value: item.psCSpec1objId,
                             label: item.psCSpec1objName
                           }
-                        })
-                      )
+                        }))
                     )
                   ]
                 );
@@ -2047,14 +2045,12 @@ export default {
                           }
                         }
                       },
-                      list.forEach(item =>
-                        h('Option', {
+                      list.forEach(item => h('Option', {
                           props: {
                             value: item.psCSpec2objId,
                             label: item.psCSpec2objName
                           }
-                        })
-                      )
+                        }))
                     )
                   ]
                 );
@@ -2272,14 +2268,12 @@ export default {
                     }
                   }
                 },
-                list.forEach(item =>
-                  h('Option', {
+                list.forEach(item => h('Option', {
                     props: {
                       value: item.SPEC,
                       label: item.SPEC
                     }
-                  })
-                )
+                  }))
               );
             }
           }
@@ -2416,14 +2410,12 @@ export default {
                           }
                         }
                       },
-                      list.forEach(item =>
-                        h('Option', {
+                      list.forEach(item => h('Option', {
                           props: {
                             value: item.psCSpec1objId,
                             label: item.psCSpec1objName
                           }
-                        })
-                      )
+                        }))
                     )
                   ]
                 );
@@ -2531,14 +2523,12 @@ export default {
                           }
                         }
                       },
-                      list.forEach(item =>
-                        h('Option', {
+                      list.forEach(item => h('Option', {
                           props: {
                             value: item.psCSpec2objId,
                             label: item.psCSpec2objName
                           }
-                        })
-                      )
+                        }))
                     )
                   ]
                 );
@@ -3591,13 +3581,13 @@ export default {
       const _this = this;
       const lists = _this.order.orderform.formValue;
       if (
-        (lists.bill_no == '' || lists.bill_no == undefined) &&
-        (lists.source_code == '' || lists.source_code == undefined) &&
-        (lists.receiver_name == '' || lists.receiver_name == undefined) &&
-        (lists.user_nick == '' || lists.user_nick == undefined) &&
-        (lists.receiver_mobile == '' || lists.receiver_mobile == undefined) &&
-        (lists.cp_c_store_ename == '' || lists.cp_c_store_ename == undefined) &&
-        num == undefined
+        (lists.bill_no == '' || lists.bill_no == undefined)
+        && (lists.source_code == '' || lists.source_code == undefined)
+        && (lists.receiver_name == '' || lists.receiver_name == undefined)
+        && (lists.user_nick == '' || lists.user_nick == undefined)
+        && (lists.receiver_mobile == '' || lists.receiver_mobile == undefined)
+        && (lists.cp_c_store_ename == '' || lists.cp_c_store_ename == undefined)
+        && num == undefined
       ) {
         _this.$Message.error(_this.vmI18n.t('modalTips.i8')); // 请输入查询条件！
         return;
