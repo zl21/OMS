@@ -2,7 +2,9 @@
 <template>
   <div class="returnstoreage tableList">
     <!-- <input  type='hidden'  :value=IsDisabled /> -->
-    <businessButton :btn-config="btnConfig" />
+    <div class="returnstoreageBtn">
+      <businessButton :btn-config="btnConfig" />
+    </div>
     <div class="form">
       <businessForm
         :form-config="formConfig"

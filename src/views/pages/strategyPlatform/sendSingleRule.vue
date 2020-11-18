@@ -1,7 +1,6 @@
 <template>
   <div class="sendSingleRule">
     <jordanButton
-      style="margin-top: 8px;"
       :btn-config="btnConfig"
     />
     <Collapse v-model="openDefault">
