@@ -1,5 +1,5 @@
 import axios from 'axios';
-import businessActionTable from 'professionalComponents/businessActionTable';
+import jordanBtn from 'professionalComponents/businessButton';
 import R3 from '@syman/burgeon-r3';
 
 const { getModuleName } = R3;
@@ -10,6 +10,7 @@ export default {
   props: {},
   data() {
     return {
+      vmI18n: window.vmI18n,
       corfirmFlag: false,
       corfirmMessage: '',
       // distributionIds:"",
