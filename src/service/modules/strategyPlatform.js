@@ -49,7 +49,7 @@ export default {
   getAutoCheck: params => network.post('/p/cs/st/v1/getAutoCheck', params),
   QueryList: params => network.post('/p/cs/QueryList', params),
   addAutoCheck: params => network.post('/p/cs/st/v1/addAutoCheck', params),
-  queryLogisticsCompany: ()=> network.post('/p/cs/cpext/v1/queryLogisticsList'),
+  queryLogisticsCompany: ()=> network.get('/p/cs/cpext/v1/queryLogisticsList'),
   saveSendRule: params => network.post('/p/cs/saveSendRule', params),
   getSendRuleMain: params => network.post('/p/cs/getSendRuleMain', params),
   getWarehouseRateResultTable: params => network.post('/p/cs/getWarehouseRateResultTable', params),

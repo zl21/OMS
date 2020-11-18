@@ -89,15 +89,33 @@ export default {
       ],
       EXCLUDE_SKU_TYPE: 1,
       CREATIONDATE: '',
-      MODIFIEDDATE: ''
+      MODIFIEDDATE: '',
+      CP_C_LOGISTICS_ID_SELECT: [],
+      CP_C_LOGISTICS_ID: ','
     };
   },
   mounted() {
     this.getAutoCheck().then(() => {
       this.QueryList();
     });
+    this.queryLogisticsCompany();
   },
   methods: {
+    queryLogisticsCompany() {
+      const self = this;
+      self.service.strategyPlatform.queryLogisticsCompany().then((res) => {
+        if (res.data.code === 0) {
+          const arr = [];
+          res.data.data.forEach(item=>{
+            const obj = {};
+            obj.value = String(item.ID);
+            obj.label = item.ENAME;
+            arr.push(obj);
+          });
+          this.CP_C_LOGISTICS_ID_SELECT = arr;
+        }
+      });
+    },
     selected(value) {
       console.log(value);
       this.providesList = value;
@@ -245,7 +263,7 @@ export default {
         this.result.IS_MANUAL_ORDER = this.IS_MANUAL_ORDER ? 'Y' : 'N';
       } else if (type == 'IS_MERGE_ORDER') {
         this.result.IS_MERGE_ORDER = this.IS_MERGE_ORDER ? 'Y' : 'N';
-      } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME') {
+      } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME' || type === 'CP_C_LOGISTICS_ID') {
         this.result[type] = this.info[type];
       } else if (type == 'orderType') {
         if (this.orderType.length === 7) {
