@@ -220,7 +220,7 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.vmI18n.t('form_label.biNo'), // 单据编号
+              label: window.vmI18n.t('form_label.billNo'), // 单据编号
               props: {
                 value: '',
               },
