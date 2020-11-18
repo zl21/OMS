@@ -10,7 +10,7 @@ export default {
   selectLimitGroups: params => network.post('/p/cs/selectLimitGroups', params),
   objectTableItem: params => network.post('/p/cs/objectTableItem', params),
   saveWarehouseLogistics: params => network.post('/p/cs/saveWarehouseLogistics', params),
-  getWarehouseLogisticsTree: params => network.post('/p/cs/getWarehouseLogisticsTree', params),
+  getWarehouseLogisticsTree: params => network.post('/p/cs/getWarehourseByShopId', params),
   getLogisticsRankResultTable: params => network.post('/p/cs/getLogisticsRankResultTable', params),
   getLogisticsLikeRankResultTable: params => network.post('/p/cs/getLogisticsLikeRankResultTable', params),
   voidWarehouseLogistics: params => network.post('/p/cs/voidWarehouseLogistics', params),

@@ -88,7 +88,7 @@ export default {
     };
     const fromdata = new FormData();
     fromdata.append('param', JSON.stringify(param));
-    const res = await this.service.common.itemDownload(fromdata);
+    const res = await self.service.common.itemDownload(fromdata);
     if (res.data.code === 0) {
       self.$Message.success(res.data.message);
       self.$emit('confirmImport');

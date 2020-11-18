@@ -7,7 +7,7 @@ import qxBtnData from './qxBtnData';
 
 console.log('R3::', R3);
 const { FilterTree, SelectTree, SearchForm } = R3.components;
-const { network,urlSearchParams } = R3;
+const { network, urlSearchParams } = R3;
 export default {
   components: {
     customButton,
@@ -90,8 +90,8 @@ export default {
     // 获取角色
     this.getRoleData();
       this.getSearchForm();
-    this.buttonConfig.buttons = this.permissionType === "brand" || this.permissionType === "sensitivecol"
-    ? this.normal.buttons.filter(item => item.text != "复制权限")
+    this.buttonConfig.buttons = this.permissionType === 'brand' || this.permissionType === 'sensitivecol'
+    ? this.normal.buttons.filter(item => item.text != '复制权限')
     : this.normal.buttons;
   },
   mounted() {
@@ -180,12 +180,12 @@ export default {
     async getSearchForm() {
       network
         .post(
-          "/p/cs/permission/v1/selectPermissionColumn",
+          '/p/cs/permission/v1/selectPermissionColumn',
           urlSearchParams({ permissionType: this.permissionType })
         )
         .then(res => {
           if (res.data.code === 0) {
-            let dataArray = form.refactoringData(res.data.datas.dataarry);
+            const dataArray = form.refactoringData(res.data.datas.dataarry);
             dataArray.map(item => {
               if (item.item.value) {
                 item.item.props.value = item.item.value;

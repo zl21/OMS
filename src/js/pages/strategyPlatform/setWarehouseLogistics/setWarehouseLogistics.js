@@ -419,51 +419,6 @@ export default {
         }
         _this.provinceSynchronous();
       }
-      // axios({
-      //   url: "/p/cs/getWarehouseLogisticsTree",
-      //   method: "post",
-      //   data: params,
-      // }).then((res) => {
-      //   _this.isSaveLoading = false;
-      //   if (res.data.code === 0) {
-      //     _this.treeData = res.data.data.warehouseLogisticsTree;
-      //     if (res.data.data.warehouseLogistics) {
-      //       _this.information.formData[0].itemdata.pid =
-      //         res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ID;
-      //       _this.information.formData[0].itemdata.valuedata =
-      //         res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ENAME;
-      //       _this.information.formValue.REMARK =
-      //         res.data.data.warehouseLogistics.REMARK;
-      //       if (res.data.data.warehouseLogistics.ISACTIVE === "N") {
-      //         // _this.statusName = "已作废";
-      //         _this.statusName = window.vmI18n.t("common.voided");
-      //         _this.btnConfig.buttons.forEach((item) => {
-      //           // if (item.text === ("修改物流" || "作废" || "导入" || "导出" || "保存"))
-      //           if (
-      //             item.text ===
-      //             (vmI18n.t("btn.modify_logistics") ||
-      //               vmI18n.t("btn.void") ||
-      //               vmI18n.t("btn.import") ||
-      //               vmI18n.t("btn.export") ||
-      //               vmI18n.t("btn.save"))
-      //           )
-      //             item.disabled = true;
-      //         });
-      //       }
-      //     }
-      //     if (res.data.data.warehouseLogisticsItems.length) {
-      //       this.theadArr = [];
-      //       res.data.data.warehouseLogisticsItems.forEach((item) => {
-      //         this.theadArr.push({
-      //           name: item.CP_C_LOGISTICS_ENAME,
-      //         });
-      //       });
-      //     } else {
-      //       this.theadArr = [];
-      //     }
-      //     _this.provinceSynchronous();
-      //   }
-      // });
     },
     // 同步查询
     async synchronous() {
