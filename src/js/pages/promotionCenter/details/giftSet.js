@@ -516,7 +516,7 @@ export default {
     returnOneTableData(data, tabindex) {
       if (data && data.length > 0) {
         if (this.giftData.give_num_share == '1') {
-          data.forEach((item, index) => {
+          data.forEach((item) => {
             item.SUM = 0;
           });
         }
