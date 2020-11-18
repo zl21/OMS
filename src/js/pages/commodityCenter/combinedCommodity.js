@@ -256,7 +256,7 @@ export default {
 
       // 条码明细表格配置数据
       jordanTableConfig1: {
-        jordanFormConfig: {
+        businessFormConfig: {
           formValue: {
             ECODE: '', // 虚拟条码
             PS_C_PRO_ENAME: '', // 商品名称
@@ -440,7 +440,7 @@ export default {
       },
       // 组合商品明细表格配置数据
       jordanTableConfig2: {
-        jordanFormConfig: {
+        businessFormConfig: {
           formValue: {
             dimdata: '', // 商品编码
             NUM: '', // 商品数量
@@ -457,7 +457,7 @@ export default {
               disabled: false,
               // datalist:[],//下拉框的内容
               dimChange: (val) => {
-                this.jordanTableConfig2.jordanFormConfig.formValue.dimdata = val.toUpperCase();
+                this.jordanTableConfig2.businessFormConfig.formValue.dimdata = val.toUpperCase();
                 // 模糊查询的方法
                 if (val) this.findCommodityData(val);
               }, // change事件
@@ -498,7 +498,7 @@ export default {
               },
               dimEnter: () => {
                 const _this = this;
-                const code = this.jordanTableConfig2.jordanFormConfig.formValue
+                const code = this.jordanTableConfig2.businessFormConfig.formValue
                   .dimdata;
                 axios({
                   url: '/p/cs/skuQuery',
@@ -533,7 +533,7 @@ export default {
               }, // 回车事件
               dimblur: () => {
                 const _this = this;
-                const code = this.jordanTableConfig2.jordanFormConfig.formValue
+                const code = this.jordanTableConfig2.businessFormConfig.formValue
                   .dimdata;
                 axios({
                   url: '/p/cs/skuQuery',
@@ -862,8 +862,8 @@ export default {
       const _this = this;
       if (type === 1) _this.formConfig1.formValue.ECODE = _this.formConfig1.formValue.ECODE.toUpperCase();
       else if (type === 2) _this.formConfig1.formValue.ENAME = _this.formConfig1.formValue.ENAME.toUpperCase();
-      else if (type === 3) _this.jordanTableConfig1.jordanFormConfig.formValue.ECODE = _this.jordanTableConfig1.jordanFormConfig.formValue.ECODE.toUpperCase();
-      else if (type === 4) _this.jordanTableConfig1.jordanFormConfig.formValue.PS_C_PRO_ENAME = _this.jordanTableConfig1.jordanFormConfig.formValue.PS_C_PRO_ENAME.toUpperCase();
+      else if (type === 3) _this.jordanTableConfig1.businessFormConfig.formValue.ECODE = _this.jordanTableConfig1.businessFormConfig.formValue.ECODE.toUpperCase();
+      else if (type === 4) _this.jordanTableConfig1.businessFormConfig.formValue.PS_C_PRO_ENAME = _this.jordanTableConfig1.businessFormConfig.formValue.PS_C_PRO_ENAME.toUpperCase();
     },
     // 查找商品编码的
     findCommodityData(val) {
@@ -881,7 +881,7 @@ export default {
       }).then((res) => {
         if (res.status === 200) {
           const data = res.data.data.data;
-          const dimList = self.jordanTableConfig2.jordanFormConfig.formData;
+          const dimList = self.jordanTableConfig2.businessFormConfig.formData;
           const arr = []; // 展示的数据
           data.map((item) => {
             // 获取想要展示的
@@ -901,7 +901,7 @@ export default {
     selecttype(type) {
       if (type === 2) {
         // 普通类型
-        this.jordanTableConfig1.jordanFormConfig.formData.map((item, index) => {
+        this.jordanTableConfig1.businessFormConfig.formData.map((item, index) => {
           if (item.label === '每组抽取行数') {
             this.$set(item, 'style', '');
             this.$delete(item, 'inputenter');
@@ -916,19 +916,19 @@ export default {
           this.$set(item, 'width', '12');
         });
         if (
-          this.jordanTableConfig1.jordanFormConfig.formValue.hasOwnProperty(
+          this.jordanTableConfig1.businessFormConfig.formValue.hasOwnProperty(
             'GROUP_EXTRACT_NUM'
           )
         ) {
           // 删除每组抽取行数
           this.$delete(
-            this.jordanTableConfig1.jordanFormConfig.formValue,
+            this.jordanTableConfig1.businessFormConfig.formValue,
             'GROUP_EXTRACT_NUM'
           );
           const table1Index = this.jordanTableConfig1.columns.length - 1;
           this.$delete(this.jordanTableConfig1.columns, table1Index);
         }
-        this.jordanTableConfig2.jordanFormConfig.formData.map((item) => {
+        this.jordanTableConfig2.businessFormConfig.formData.map((item) => {
           if (item.label === '分组') {
             this.$set(item, 'style', '');
             this.$delete(item, 'inputenter');
@@ -943,12 +943,12 @@ export default {
           this.$set(item, 'width', '12');
         });
         if (
-          this.jordanTableConfig2.jordanFormConfig.formValue.hasOwnProperty(
+          this.jordanTableConfig2.businessFormConfig.formValue.hasOwnProperty(
             'GROUPNUM'
           )
         ) {
           this.$delete(
-            this.jordanTableConfig2.jordanFormConfig.formValue,
+            this.jordanTableConfig2.businessFormConfig.formValue,
             'GROUPNUM'
           );
           const table2Index = this.jordanTableConfig2.columns.length - 1;
@@ -956,11 +956,11 @@ export default {
         }
       } else {
         // 福袋类型
-        if (this.jordanTableConfig1.jordanFormConfig.formData.length < 3) {
-          const tab1index = this.jordanTableConfig1.jordanFormConfig.formData
+        if (this.jordanTableConfig1.businessFormConfig.formData.length < 3) {
+          const tab1index = this.jordanTableConfig1.businessFormConfig.formData
             .length;
           this.$set(
-            this.jordanTableConfig1.jordanFormConfig.formData,
+            this.jordanTableConfig1.businessFormConfig.formData,
             tab1index,
             {
               style: 'input', // 输入框类型
@@ -974,14 +974,14 @@ export default {
               }, // 表单回车事件});
             }
           );
-          this.jordanTableConfig1.jordanFormConfig.formData.map((item) => {
+          this.jordanTableConfig1.businessFormConfig.formData.map((item) => {
             this.$set(item, 'width', '8');
             if (item.label === '商品名称') {
               this.$delete(item, 'inputenter');
             }
           });
         } else {
-          this.jordanTableConfig1.jordanFormConfig.formData.map((item) => {
+          this.jordanTableConfig1.businessFormConfig.formData.map((item) => {
             this.$set(item, 'width', '8');
             if (item.label === '每组抽取行数') {
               this.$set(item, 'style', 'input');
@@ -994,7 +994,7 @@ export default {
           });
         }
         this.$set(
-          this.jordanTableConfig1.jordanFormConfig.formValue,
+          this.jordanTableConfig1.businessFormConfig.formValue,
           'GROUP_EXTRACT_NUM',
           ''
         );
@@ -1067,11 +1067,11 @@ export default {
             },
           });
         }
-        if (this.jordanTableConfig2.jordanFormConfig.formData.length < 3) {
-          const table2col = this.jordanTableConfig2.jordanFormConfig.formData
+        if (this.jordanTableConfig2.businessFormConfig.formData.length < 3) {
+          const table2col = this.jordanTableConfig2.businessFormConfig.formData
             .length;
           this.$set(
-            this.jordanTableConfig2.jordanFormConfig.formData,
+            this.jordanTableConfig2.businessFormConfig.formData,
             table2col,
             {
               style: 'input', // 输入框类型
@@ -1085,7 +1085,7 @@ export default {
               }, // 表单回车事件
             }
           );
-          this.jordanTableConfig2.jordanFormConfig.formData.map((item) => {
+          this.jordanTableConfig2.businessFormConfig.formData.map((item) => {
             if (item.label === '商品条码') {
               this.$set(item, 'width', '9');
             }
@@ -1097,7 +1097,7 @@ export default {
             }
           });
         } else {
-          this.jordanTableConfig2.jordanFormConfig.formData.map((item) => {
+          this.jordanTableConfig2.businessFormConfig.formData.map((item) => {
             if (item.label === '商品条码') {
               this.$set(item, 'width', '9');
             }
@@ -1116,7 +1116,7 @@ export default {
           });
         }
         this.$set(
-          this.jordanTableConfig2.jordanFormConfig.formValue,
+          this.jordanTableConfig2.businessFormConfig.formValue,
           'GROUPNUM',
           ''
         );
@@ -1214,7 +1214,7 @@ export default {
     },
     // 按钮配置数据操作
     pageconfigData(objid) {
-      if (objid === '-1') {
+      if (objid === -1) {
         // 新增页面
         this.btnConfig.buttons = [];
         const buttonconfig = [
@@ -1356,7 +1356,7 @@ export default {
     codedetailEvent() {
       const inputData = Object.assign(
         {},
-        this.jordanTableConfig1.jordanFormConfig.formValue
+        this.jordanTableConfig1.businessFormConfig.formValue
       );
       inputData.isChecked = false; // 选中
       inputData.isActive = false; // 控制是否可以进行商品明细录入
@@ -1404,11 +1404,11 @@ export default {
         this.jordanTableConfig2.data = []; // 清空右边明细的数据
       }
       this.jordanTableConfig1.total++;
-      Object.keys(this.jordanTableConfig1.jordanFormConfig.formValue).map(
+      Object.keys(this.jordanTableConfig1.businessFormConfig.formValue).map(
         (item) => {
           // 回车完后清空输入框
           this.$set(
-            this.jordanTableConfig1.jordanFormConfig.formValue,
+            this.jordanTableConfig1.businessFormConfig.formValue,
             item,
             ''
           );
@@ -1419,7 +1419,7 @@ export default {
     comodityDetailEvent() {
       let t_data = {};
       let strkey = '';
-      if (this.jordanTableConfig2.jordanFormConfig.formValue.dimdata === '') {
+      if (this.jordanTableConfig2.businessFormConfig.formValue.dimdata === '') {
         // this.$Message.warning("商品条码不能为空！");
         this.$Message.warning(window.vmI18n.t('modalTips.w9'));
         return false;
@@ -1434,7 +1434,7 @@ export default {
         return false;
       }
       
-      if (this.jordanTableConfig2.jordanFormConfig.formValue.NUM === '') {
+      if (this.jordanTableConfig2.businessFormConfig.formValue.NUM === '') {
         // this.$message.warning("商品数量不能为空！");
         this.$Message.warning(window.vmI18n.t('modalTips.v1'));
         return false;
@@ -1443,22 +1443,22 @@ export default {
       const numReg = /^[0-9]+$/;
       const numRe = new RegExp(numReg);
       if (
-        !numRe.test(this.jordanTableConfig2.jordanFormConfig.formValue.NUM)
+        !numRe.test(this.jordanTableConfig2.businessFormConfig.formValue.NUM)
       ) {
         // this.$Message.warning("商品数量是一个数字，请合理输入");
         this.$Message.warning(window.vmI18n.t('modalTips.v2'));
         return false;
       }
-      t_data.NUM = this.jordanTableConfig2.jordanFormConfig.formValue.NUM;
+      t_data.NUM = this.jordanTableConfig2.businessFormConfig.formValue.NUM;
       
       if (
-        this.jordanTableConfig2.jordanFormConfig.formValue.hasOwnProperty(
+        this.jordanTableConfig2.businessFormConfig.formValue.hasOwnProperty(
           // 判断是否是福袋类型
           'GROUPNUM'
         )
       ) {
         if (
-          this.jordanTableConfig2.jordanFormConfig.formValue.GROUPNUM === ''
+          this.jordanTableConfig2.businessFormConfig.formValue.GROUPNUM === ''
         ) {
           // this.$Message.warning("分组不能为空！");
           this.$Message.warning(window.vmI18n.t('modalTips.v3'));
@@ -1469,14 +1469,14 @@ export default {
         const numRe = new RegExp(numReg);
         if (
           !numRe.test(
-            this.jordanTableConfig2.jordanFormConfig.formValue.GROUPNUM
+            this.jordanTableConfig2.businessFormConfig.formValue.GROUPNUM
           )
         ) {
           // this.$Message.warning("分组是一个数字，请合理输入");
           this.$Message.warning(window.vmI18n.t('modalTips.v4'));
           return false;
         }
-        t_data.GROUPNUM = this.jordanTableConfig2.jordanFormConfig.formValue.GROUPNUM;
+        t_data.GROUPNUM = this.jordanTableConfig2.businessFormConfig.formValue.GROUPNUM;
         strkey += t_data.GROUPNUM;
       }
       t_data.isChecked = false; // 这个用来设置没有选中
@@ -1527,10 +1527,10 @@ export default {
       ].psCSkugroupList;
       this.selectData = {}; // 回车之后将数据清掉
       // 回车完后清空输入框
-      Object.keys(this.jordanTableConfig2.jordanFormConfig.formValue).map(
+      Object.keys(this.jordanTableConfig2.businessFormConfig.formValue).map(
         (item) => {
           this.$set(
-            this.jordanTableConfig2.jordanFormConfig.formValue,
+            this.jordanTableConfig2.businessFormConfig.formValue,
             item,
             ''
           );
@@ -2272,8 +2272,8 @@ export default {
             this.selecttype(this.formConfig1.formValue.GROUP_TYPE); // 调用组合类型改变函数 保证界面一致
           } else {
             this.selecttype(this.formConfig1.formValue.GROUP_TYPE); // 调用组合类型改变函数 保证界面一致
-            this.jordanTableConfig1.jordanFormConfig.formData = [];
-            this.jordanTableConfig2.jordanFormConfig.formData = [];
+            this.jordanTableConfig1.businessFormConfig.formData = [];
+            this.jordanTableConfig2.businessFormConfig.formData = [];
           }
         }
       });
@@ -2310,12 +2310,12 @@ export default {
           }
         }
       });
-      this.jordanTableConfig1.jordanFormConfig.formData.map((item) => {
+      this.jordanTableConfig1.businessFormConfig.formData.map((item) => {
         if ('disabled' in item) {
           item.disabled = true;
         }
       });
-      this.jordanTableConfig2.jordanFormConfig.formData.map((item) => {
+      this.jordanTableConfig2.businessFormConfig.formData.map((item) => {
         if ('disabled' in item) {
           item.disabled = true;
         }
@@ -2323,8 +2323,8 @@ export default {
       this.jordanTableConfig1.isShowDeleteDetailBtn = false;
       this.jordanTableConfig2.isShowDeleteDetailBtn = false;
       this.jordanTableConfig2.isShowImportBtn = false;
-      this.jordanTableConfig1.jordanFormConfig.formData = [];
-      this.jordanTableConfig2.jordanFormConfig.formData = [];
+      this.jordanTableConfig1.businessFormConfig.formData = [];
+      this.jordanTableConfig2.businessFormConfig.formData = [];
       this.btnConfig.buttons.map((item) => {
         if (item.text !== '返回') {
           this.$set(item, 'disabled', true);
@@ -2463,7 +2463,7 @@ export default {
     this.objid = customizedModuleId === 'New' ? -1 : customizedModuleId;
     console.log('this.objid::', this.objid);
     this.pageconfigData(this.objid);
-    this.objid != -1 && this.IniData(); // 初始化数据
+    this.IniData(); // 初始化数据
   },
   mounted() {
     this.setTableHeight();
