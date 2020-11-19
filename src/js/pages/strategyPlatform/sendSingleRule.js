@@ -1,21 +1,21 @@
 import axios from 'axios';
 import { setTimeout } from 'timers';
-import jordanButton from 'professionalComponents/businessButton';
-import jordanForm from 'professionalComponents/businessForm';
-import jordanLabel from 'professionalComponents/businessLabel';
-import jordanModal from 'professionalComponents/businessDialog';
-import jordanActionTable from 'professionalComponents/businessActionTable';
-import jordanStatusFlag from 'professionalComponents/businessStatusFlag';
+import businessButton from 'professionalComponents/businessButton';
+import businessForm from 'professionalComponents/businessForm';
+import businessLabel from 'professionalComponents/businessLabel';
+import businessDialog from 'professionalComponents/businessDialog';
+import businessActionTable from 'professionalComponents/businessActionTable';
+import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 
 export default {
   components: {
-    jordanButton,
-    jordanForm,
-    jordanLabel,
-    jordanModal,
-    jordanActionTable,
-    jordanStatusFlag
+    businessButton,
+    businessForm,
+    businessLabel,
+    businessDialog,
+    businessActionTable,
+    businessStatusFlag
   },
   data() {
     return {
