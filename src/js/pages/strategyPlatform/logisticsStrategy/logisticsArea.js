@@ -444,10 +444,11 @@ export default {
       const params = {
         objid: this.$route.params.customizedModuleId,
         treeNode: treeList
-      };
+      }; 
       const {
         data: { code, data }
       } = await this.service.strategyPlatform.getExpressAreaItemTable(params);
+      _this.tableLoading = false;
       if (code === 0 && data !== null) {
         if (data.ST_C_EXPRESS_AREA_ITEM_RESULT.length) _this.dataArr = data.ST_C_EXPRESS_AREA_ITEM_RESULT;
         _this.tableSize = data.TABLE_SIZE;
@@ -458,23 +459,6 @@ export default {
       } else {
         _this.tableSize = 0;
       }
-      // _this.$network
-      //   .post("/p/cs/getExpressAreaItemTable", params)
-      //   .then((res) => {
-      //     _this.tableLoading = false;
-      //     _this.isDelivery = false;
-      //     if (res.data.code === 0 && res.data.data !== null) {
-      //       if (res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT.length)
-      //         _this.dataArr = res.data.data.ST_C_EXPRESS_AREA_ITEM_RESULT;
-      //       _this.tableSize = res.data.data.TABLE_SIZE;
-      //       _this.dataArr.forEach((item) => {
-      //         if (item.IS_ARRIVE === "Y") item.IS_ARRIVE = true;
-      //         else if (item.IS_ARRIVE === "N") item.IS_ARRIVE = false;
-      //       });
-      //     } else {
-      //       _this.tableSize = 0;
-      //     }
-      //   });
     },
     selectChange(e) {
       console.log(e);

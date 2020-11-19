@@ -3,6 +3,41 @@
 .logisticsArea {
   position: relative;
 
+  .retrieveBox {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 0;
+    width: 100%;
+
+    .retrieveTitle {
+      display: inline-block;
+      vertical-align: middle;
+      width: 36px;
+      height: 26px;
+      line-height: 26px;
+      font-size: 12px;
+      font-weight: 400;
+      color: #575757;
+      text-align: center;
+      background-color: #f8f8f8;
+      border: 1px solid #d8d8d8;
+      border-right: none;
+      border-radius: 2px;
+
+    }
+    .retrieve {
+      height: 26px;
+      width: 60%;
+      display: inline-block;
+      .ark-input {
+        border-radius: 0 2px 2px 0;
+      }
+    }
+    .ark-icon {
+      color: #808695;
+    }
+  }
+
   .jordanLabel {
     padding-bottom: 10px;
   }
@@ -16,28 +51,6 @@
       margin-right: 15px;
       border: 1px solid #d3d3d3;
       overflow: hidden;
-
-      .retrieveBox {
-        text-align: center;
-        margin: 20px 0;
-        font-size: 0;
-        width: 100%;
-
-        .retrieveTitle {
-          display: inline-block;
-          vertical-align: middle;
-          background: #ddd;
-          width: 36px;
-          height: 26px;
-          line-height: 26px;
-          font-size: 14px;
-        }
-
-        .retrieve {
-          width: 60%;
-          display: inline-block;
-        }
-      }
 
       .treeBox {
         height: 90%;
@@ -63,28 +76,6 @@
         height: 100%;
         border-right: 1px solid #d3d3d3;
         overflow: hidden;
-
-        .retrieveBox {
-          text-align: center;
-          margin: 20px 0;
-          font-size: 0;
-          width: 100%;
-
-          .retrieveTitle {
-            display: inline-block;
-            vertical-align: middle;
-            background: #ddd;
-            width: 36px;
-            height: 26px;
-            line-height: 26px;
-            font-size: 14px;
-          }
-
-          .retrieve {
-            width: 60%;
-            display: inline-block;
-          }
-        }
 
         .treeBox2 {
           height: 90%;
@@ -184,19 +175,6 @@
           }
         }
       }
-
-      .fromLoading {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: rgba(255, 255, 255, 0.9);
-        z-index: 1000 !important;
-      }
     }
   }
 
@@ -213,12 +191,4 @@
     z-index: 1000 !important;
   }
 
-  .retrieve {
-    height: 26px;
-
-    .burgeon-input {
-      padding: 0 0 0 5px !important;
-      height: 24px !important;
-    }
-  }
 }
