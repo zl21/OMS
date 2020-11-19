@@ -169,7 +169,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.vmI18n.t('other.pickingOrder_no'), // 拣货单号
+            label: window.vmI18n.t('form_label.pickingOrder_no'), // 拣货单号
             value: 'PICK_NO',
             width: '24',
           },
