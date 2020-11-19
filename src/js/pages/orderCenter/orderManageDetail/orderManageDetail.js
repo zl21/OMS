@@ -159,7 +159,8 @@ export default {
                       self.modal = true;
                       self.autoRefresh();
                     } else {
-                      self.$Message.error(res.data.message);
+                      // self.$Message.error(res.data.message);
+                      console.log('审核失败');
                     }
                   }
                 });
