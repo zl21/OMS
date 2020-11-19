@@ -1168,30 +1168,30 @@ export default {
     },
     // 扫描入库按钮
     scanIncoming() {
-      const _this = this;
       const tempArr = this.$refs.agGridChild.AGTABLE.getSelect();
-      if (tempArr.length !== 1) {
+      const recordID = tempArr[0].ID;
+      if (tempArr.length > 0) {
+        this.service.orderCenter.getScanIncomingInfo({ ID: recordID }).then(res => {
+          if (res.data.code === 0) {
+            this.$store.commit('customize/TabOpen', {
+              id: -1, // 单据id
+              type: 'action', // 类型action
+              name: 'scanIn', // 文件名
+              label: this.vmI18n.t('panel_label.scannAndWarehous'), // 扫描入库 tab中文名
+              query: Object.assign({
+                id: -1,
+                returnId: recordID, // 单据id
+                isOrderHrefReturn: 'order',
+                tabTitle: this.vmI18n.t('panel_label.scannAndWarehous') // 扫描入库 tab中文名
+              }) // 带的参数
+            });
+          } else {
+            this.$Message.warning(this.vmI18n.t('modalTips.k4')); // 此退换单状态不允许扫描入库,请重新选择!
+          }
+        });
+      } else {
         this.$Message.error(this.vmI18n.t('modalTips.k3')); // 请选中一项修改!
-        return;
       }
-      this.service.orderCenter.getScanIncomingInfo({ ID: tempArr[0].ID }).then(res => {
-        if (res.data.code === 0) {
-          this.$store.commit('customize/TabOpen', {
-            id: -1, // 单据id
-            type: 'action', // 类型action
-            name: 'scanIn', // 文件名
-            label: this.vmI18n.t('panel_label.scannAndWarehous'), // 扫描入库 tab中文名
-            query: Object.assign({
-              id: -1,
-              returnId: _this.tempArr[0].ID, // 单据id
-              isOrderHrefReturn: 'order',
-              tabTitle: this.vmI18n.t('panel_label.scannAndWarehous') // 扫描入库 tab中文名
-            }) // 带的参数
-          });
-        } else {
-          this.$Message.warning(this.vmI18n.t('modalTips.k4')); // 此退换单状态不允许扫描入库,请重新选择!
-        }
-      });
     },
     // 售后审核接口
     afterAudit() {

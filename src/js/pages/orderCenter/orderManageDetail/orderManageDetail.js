@@ -15,7 +15,7 @@ export default {
     EssentialInfo,
     OrderItem,
     businessStatusFlag,
-    businessDialog,
+    businessDialog
   },
   mixins: [buttonPermissionsMixin],
   data() {
@@ -29,39 +29,39 @@ export default {
       labelList: [
         {
           label: window.vmI18n.t('common.baseInformation'), // 基本信息
-          value: 'OC_B_ORDER',
+          value: 'OC_B_ORDER'
         },
         {
           label: window.vmI18n.t('form_label.preferential_info'), // 优惠信息
-          value: 'OC_B_ORDER_PROMOTION',
+          value: 'OC_B_ORDER_PROMOTION'
         },
         {
           label: window.vmI18n.t('form_label.payment_info'), // 支付信息
-          value: 'OC_B_ORDER_PAYMENT',
+          value: 'OC_B_ORDER_PAYMENT'
         },
         {
           label: window.vmI18n.t('form_label.shipping_info'), // 发货信息
-          value: 'OC_B_ORDER_DELIVERY',
+          value: 'OC_B_ORDER_DELIVERY'
         },
         {
           label: window.vmI18n.t('form_label.workOrder'), // 工单
           value: '5',
-          isShow: false,
+          isShow: false
         },
         {
           label: window.vmI18n.t('form_label.status_in_warehouse'), // 仓内状态
           value: 'OC_B_ORDER_WMS_STATUS',
-          isShow: false,
+          isShow: false
         },
         {
           label: window.vmI18n.t('form_label.routing_info'), // 路由信息
           value: 'OC_B_ORDER_ROUTE',
-          isShow: false,
+          isShow: false
         },
         {
           label: window.vmI18n.t('panel_label.operationLog'), // 操作日志
-          value: 'OC_B_ORDER_LOG',
-        },
+          value: 'OC_B_ORDER_LOG'
+        }
       ],
       tab1: {},
       tab1_default: {
@@ -100,12 +100,12 @@ export default {
           SOURCE_CODE: '',
           USER_NICK: '',
           WEIGHT: '',
-          CP_C_PHY_WAREHOUSE_ENAME: '',
-        },
+          CP_C_PHY_WAREHOUSE_ENAME: ''
+        }
       },
       tab2: {
         tablename: '',
-        objid: '',
+        objid: ''
       },
       refresh: true,
       modal: false, // 模态框
@@ -122,7 +122,7 @@ export default {
           name: 'addressDialog',
           excludeString: 'addressDialog',
           footerHide: true,
-          maskClosable: false,
+          maskClosable: false
         },
         blacklist: {
           title: window.vmI18n.t('modalTitle.blacklist'), // 加入黑名单
@@ -132,8 +132,8 @@ export default {
           keepAlive: true,
           url: 'order/joinBlackList',
           name: 'blackListDialog',
-          footerHide: true,
-        },
+          footerHide: true
+        }
       },
       btnConfig: {
         typeAll: 'error',
@@ -144,27 +144,24 @@ export default {
               const self = this;
               const ids = [];
               ids.push(self.tab1.order.ID);
-              self.service.orderCenter.auditOrder({ ids, type: '1' })
-              // self.$network
-              //   .post('/api/cs/oc/oms/v1/auditOrder', { ids, type: '1' })
-                .then((res) => {
-                  if (res.data.code === 0) {
-                    self.$Message.info(res.data.message);
+              self.service.orderCenter.auditOrder({ ids, type: '1' }).then(res => {
+                if (res.data.code === 0) {
+                  self.$Message.success(res.data.message);
+                  self.autoRefresh();
+                } else {
+                  const data = res.data.data || {};
+                  if (res.data.data && res.data.data.message) {
+                    self.error_type = 'auditing';
+                    self.error_tip = data.message;
+                    self.modal = true;
                     self.autoRefresh();
                   } else {
-                    const data = res.data.data || {};
-                    if (res.data.data && res.data.data.message) {
-                      self.error_type = 'auditing';
-                      self.error_tip = data.message;
-                      self.modal = true;
-                      self.autoRefresh();
-                    } else {
-                      // self.$Message.error(res.data.message);
-                      console.log('审核失败');
-                    }
+                    // self.$Message.error(res.data.message);
+                    console.log('审核失败');
                   }
-                });
-            }, // 按钮点击事件
+                }
+              });
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.deAudit'), // 反审核
@@ -180,16 +177,17 @@ export default {
                 okText: vmI18n.t('common.cancel'), // 取消
                 cancelText: vmI18n.t('common.determine'), // 确定
                 onCancel: () => {
-                  this.service.orderCenter.auditOrderReserve({
-                    ids,
-                    type: '1',
-                  })
-                  // self.$network
-                  //   .post('/api/cs/oc/oms/v1/auditOrderReserve', {
-                  //     ids,
-                  //     type: '1',
-                  //   })
-                    .then((res) => {
+                  this.service.orderCenter
+                    .auditOrderReserve({
+                      ids,
+                      type: '1'
+                    })
+                    // self.$network
+                    //   .post('/api/cs/oc/oms/v1/auditOrderReserve', {
+                    //     ids,
+                    //     type: '1',
+                    //   })
+                    .then(res => {
                       if (res.data.code === 0) {
                         self.$Message.success(res.data.message);
                         self.load();
@@ -201,17 +199,17 @@ export default {
                           titleAlign: 'left',
                           mask: true,
                           draggable: true,
-                          keyDown: (event) => {
+                          keyDown: event => {
                             if (event.keyCode == 27 || event.keyCode == 13) {
                               self.$Modal.remove();
                             }
-                          },
+                          }
                         });
                       }
                     });
-                },
+                }
               });
-            },
+            }
           },
           {
             text: window.vmI18n.t('btn.batchModify_warehouse'), // 订单取消
@@ -227,10 +225,11 @@ export default {
                 okText: self.vmI18n.t('common.determine'), // 取消
                 cancelText: self.vmI18n.t('common.cancel'), // 确定
                 onCancel: () => {
-                  self.service.orderCenter.cancelOrder({ ids, type: '1' })
-                  // self.$network
-                  //   .post('/api/cs/oc/oms/v1/cancelOrder', { ids, type: '1' })
-                    .then((res) => {
+                  self.service.orderCenter
+                    .cancelOrder({ ids, type: '1' })
+                    // self.$network
+                    //   .post('/api/cs/oc/oms/v1/cancelOrder', { ids, type: '1' })
+                    .then(res => {
                       if (res.data.code === 0) {
                         self.$Message.success(res.data.message);
                         self.load();
@@ -243,52 +242,44 @@ export default {
                           titleAlign: 'left',
                           mask: true,
                           draggable: true,
-                          keyDown: (event) => {
+                          keyDown: event => {
                             if (event.keyCode == 27 || event.keyCode == 13) {
                               self.$Modal.remove();
                             }
-                          },
+                          }
                         });
                       }
                       self.btnConfig.loading = false;
                     });
-                },
+                }
               });
-            },
+            }
           },
           {
             text: window.vmI18n.t('btn.holdOrder'), // Hold单
             btnclick: () => {
               const self = this;
               const ids = self.$route.params.customizedModuleId;
-              const publicBouncedConfig = JSON.parse(
-                JSON.stringify(publicDialogConfig.holdOrderConfig)
-              );
+              const publicBouncedConfig = JSON.parse(JSON.stringify(publicDialogConfig.holdOrderConfig));
               publicBouncedConfig.componentData = {
-                ids,
+                ids
               };
               self.publicBouncedConfig = publicBouncedConfig;
               this.$nextTick(() => {
-                self.$children
-                  .find(item => item.name === 'holdOrderDialog')
-                  .openConfirm();
+                self.$children.find(item => item.name === 'holdOrderDialog').openConfirm();
               });
-            },
+            }
           },
           {
             text: window.vmI18n.t('btn.splitOrder'), // 拆分订单
             btnclick: () => {
               const self = this;
               const data = self.tab1.order;
-              if (
-                (data.PLATFORM === 4 && data.PAY_TYPE === 2)
-                || data.PLATFORM === 7
-                || data.PLATFORM === 50
-              ) {
+              if ((data.PLATFORM === 4 && data.PAY_TYPE === 2) || data.PLATFORM === 7 || data.PLATFORM === 50) {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.b1'), // 交易平台为当当，唯品会jitx，京东（货到付款）的订单不允许拆单
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
                 return;
               }
@@ -296,7 +287,7 @@ export default {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.b2'), // 拦截、退款中的订单不允许拆单！
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
                 return;
               }
@@ -308,17 +299,17 @@ export default {
                   label: self.vmI18n.t('panel_label.orderSplit'), // 订单拆分
                   query: {
                     id: self.$route.params.customizedModuleId,
-                    tabTitle: self.vmI18n.t('panel_label.orderSplit'), // 订单拆分
-                  },
+                    tabTitle: self.vmI18n.t('panel_label.orderSplit') // 订单拆分
+                  }
                 });
               } else {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.b3'), // 只允许拆分待审核和缺货状态的订单！
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
               }
-            },
+            }
           },
           {
             text: window.vmI18n.t('btn.modify_logistics'), // 修改物流
@@ -330,22 +321,21 @@ export default {
               CP_C_PHY_WAREHOUSE_ID[0] = self.tab1.order.CP_C_PHY_WAREHOUSE_ID;
               const fromdata = new FormData();
               fromdata.append('ids', ids);
-              self.service.orderCenter.checkOrderBeforeLogistics(fromdata)
-              // self.$network
-              //   .post('/api/cs/oc/oms/v1/checkOrderBeforeLogistics', fromdata)
-                .then((res) => {
+              self.service.orderCenter
+                .checkOrderBeforeLogistics(fromdata)
+                // self.$network
+                //   .post('/api/cs/oc/oms/v1/checkOrderBeforeLogistics', fromdata)
+                .then(res => {
                   if (res.data.code === 0) {
                     self.publicBouncedConfig = publicDialogConfig.modifyLogisticsConfig;
                     self.publicBouncedConfig.componentData = {
                       ids,
                       cLogisticsId: 0,
                       platform: self.tab1.order.PLATFORM,
-                      CP_C_PHY_WAREHOUSE_ID: CP_C_PHY_WAREHOUSE_ID[0],
+                      CP_C_PHY_WAREHOUSE_ID: CP_C_PHY_WAREHOUSE_ID[0]
                     };
                     setTimeout(() => {
-                      self.$children
-                        .find(item => item.name === 'modifyLogistics')
-                        .openConfirm();
+                      self.$children.find(item => item.name === 'modifyLogistics').openConfirm();
                     }, 100);
                   } else {
                     self.$Modal.error({
@@ -355,16 +345,16 @@ export default {
                       titleAlign: 'left',
                       mask: true,
                       draggable: true,
-                      keyDown: (event) => {
+                      keyDown: event => {
                         if (event.keyCode == 27 || event.keyCode == 13) {
                           self.$Modal.remove();
                         }
-                      },
+                      }
                     });
                   }
                   self.btnConfig.loading = false;
                 });
-            },
+            }
           },
           {
             text: window.vmI18n.t('btn.modifyWarehouse'), // 修改仓库
@@ -376,20 +366,19 @@ export default {
               CP_C_SHOP_ID[0] = self.tab1.order.CP_C_SHOP_ID;
               const fromdata = new FormData();
               fromdata.append('ids', ids);
-              self.service.orderCenter.checkOrderBeforeWarehouse(fromdata)
-              // self.$network
-              //   .post('/api/cs/oc/oms/v1/checkOrderBeforeWarehouse', fromdata)
-                .then((res) => {
+              self.service.orderCenter
+                .checkOrderBeforeWarehouse(fromdata)
+                // self.$network
+                //   .post('/api/cs/oc/oms/v1/checkOrderBeforeWarehouse', fromdata)
+                .then(res => {
                   if (res.data.code === 0) {
                     self.publicBouncedConfig = publicDialogConfig.changeWarehouseConfig;
                     self.publicBouncedConfig.componentData = {
                       ids,
-                      CP_C_SHOP_ID: CP_C_SHOP_ID[0],
+                      CP_C_SHOP_ID: CP_C_SHOP_ID[0]
                     };
                     setTimeout(() => {
-                      self.$children
-                        .find(item => item.name === 'changeWarehouse')
-                        .openConfirm();
+                      self.$children.find(item => item.name === 'changeWarehouse').openConfirm();
                     }, 100);
                   } else {
                     self.$Modal.error({
@@ -399,16 +388,16 @@ export default {
                       titleAlign: 'left',
                       mask: true,
                       draggable: true,
-                      keyDown: (event) => {
+                      keyDown: event => {
                         if (event.keyCode == 27 || event.keyCode == 13) {
                           self.$Modal.remove();
                         }
-                      },
+                      }
                     });
                   }
                   self.btnConfig.loading = false;
                 });
-            },
+            }
           },
           {
             text: window.vmI18n.t('btn.modifyRemarks'), // 修改备注
@@ -421,14 +410,12 @@ export default {
               self.publicBouncedConfig = publicDialogConfig.changeRemarkConfig;
               self.publicBouncedConfig.componentData = {
                 ids,
-                status: ORDER_STATUS,
+                status: ORDER_STATUS
               };
               setTimeout(() => {
-                self.$children
-                  .find(item => item.name === 'changeRemark')
-                  .openConfirm();
+                self.$children.find(item => item.name === 'changeRemark').openConfirm();
               }, 100);
-            },
+            }
           },
           {
             text: window.vmI18n.t('btn.beOut_of_stock'), // 缺货重新占单
@@ -437,10 +424,11 @@ export default {
               if (self.tab1.order.ID > 0) {
                 const ids = [];
                 ids.push(self.tab1.order.ID);
-                self.service.orderCenter.queryshortagSearchOrder({ ids })
-                // self.$network
-                //   .post('/api/cs/oc/oms/v1/queryshortagSearchOrder', { ids })
-                  .then((res) => {
+                self.service.orderCenter
+                  .queryshortagSearchOrder({ ids })
+                  // self.$network
+                  //   .post('/api/cs/oc/oms/v1/queryshortagSearchOrder', { ids })
+                  .then(res => {
                     if (res.data.code === 0) {
                       self.$Message.success(res.data.message);
                       self.autoRefresh();
@@ -449,7 +437,7 @@ export default {
                     }
                   });
               }
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.fubaoOut_of_stock'), // 福袋缺货重新占单text: "福袋缺货重新占单", // 按钮文本
@@ -458,10 +446,11 @@ export default {
               if (self.tab1.order.ID > 0) {
                 const ids = [];
                 ids.push(self.tab1.order.ID);
-                self.service.orderCenter.queryFortuneBagShortage({ ids })
-                // self.$network
-                //   .post('/api/cs/oc/oms/v1/queryFortuneBagShortage', { ids })
-                  .then((res) => {
+                self.service.orderCenter
+                  .queryFortuneBagShortage({ ids })
+                  // self.$network
+                  //   .post('/api/cs/oc/oms/v1/queryFortuneBagShortage', { ids })
+                  .then(res => {
                     if (res.data.code === 0) {
                       self.$Message.success(res.data.message);
                       self.autoRefresh();
@@ -470,7 +459,7 @@ export default {
                     }
                   });
               }
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.changeAddress'), // 修改地址
@@ -486,7 +475,7 @@ export default {
                 self.$Message.warning(window.vmI18n.t('modalTips.g9')); // "订单状态非未确认、缺货、已审核、配货中，不允许修改地址"
                 return;
               }
-              self.getWritData().then((res) => {
+              self.getWritData().then(res => {
                 if (res.data && res.data.code === 0) {
                   const order = res.data.data;
                   self.dialogs.address.data = {
@@ -504,15 +493,17 @@ export default {
                     RECEIVER_PHONE: order.RECEIVER_PHONE,
                     RECEIVER_ZIP: order.RECEIVER_ZIP,
                     CALLBACK: '',
-                    ck: order.PLATFORM,
+                    ck: order.PLATFORM
                   };
-                  if (self.$refs.addressDialog) { self.$refs.addressDialog[0].openConfirm(); }
+                  if (self.$refs.addressDialog) {
+                    self.$refs.addressDialog[0].openConfirm();
+                  }
                 } else {
                   this.tab1 = this.tab1_default;
                   this.$message.error(vmI18n.t('modalTips.h0')); // 地址信息获取失败
                 }
               });
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.orderBlocking'), // 订单拦截
@@ -521,10 +512,11 @@ export default {
               const id = self.tab1.order.ID || -1;
               const ids = [];
               ids.push(id);
-              self.service.orderCenter.orderInterception({ ids })
-              // self.$network
-              //   .post('/api/cs/oc/oms/v1/orderInterception', { ids })
-                .then((res) => {
+              self.service.orderCenter
+                .orderInterception({ ids })
+                // self.$network
+                //   .post('/api/cs/oc/oms/v1/orderInterception', { ids })
+                .then(res => {
                   if (res.data.code === 0) {
                     self.$Message.success(res.data.message);
                     self.autoRefresh();
@@ -532,45 +524,42 @@ export default {
                     self.$Message.error(res.data.message);
                   }
                 });
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.cancelBlocking'), // 取消拦截
             btnclick: () => {
               const self = this;
               const id = self.tab1.order.ID || -1;
-              self.$network
-                .post('/api/cs/oc/oms/v1/cancelInterception', { ids: [id] })
-                .then((res) => {
-                  if (res.data.code === 0) {
-                    self.$Message.success(res.data.message);
-                    self.autoRefresh();
-                  } else {
-                    self.$Message.error(res.data.message);
-                  }
-                });
-            }, // 按钮点击事件
+              self.$network.post('/api/cs/oc/oms/v1/cancelInterception', { ids: [id] }).then(res => {
+                if (res.data.code === 0) {
+                  self.$Message.success(res.data.message);
+                  self.autoRefresh();
+                } else {
+                  self.$Message.error(res.data.message);
+                }
+              });
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('modalTitle.blacklist'), // 加入黑名单
             btnclick: () => {
               this.dialogs.blacklist.data = {
-                ID: this.tab1.order.ID || -1,
+                ID: this.tab1.order.ID || -1
               };
-              if (this.$refs.blackListDialog) { this.$refs.blackListDialog[0].openConfirm(); }
-            }, // 按钮点击事件
+              if (this.$refs.blackListDialog) {
+                this.$refs.blackListDialog[0].openConfirm();
+              }
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.new_workOrder'), // 新增工单
-            btnclick: () => {}, // 按钮点击事件
+            btnclick: () => {} // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.additionalRefund'), // 额外退款
             btnclick: () => {
-              if (
-                this.statusName === this.vmI18n.t('other.warehouseDelivery')
-                || this.statusName === this.vmI18n.t('other.platformDelivery')
-              ) {
+              if (this.statusName === this.vmI18n.t('other.warehouseDelivery') || this.statusName === this.vmI18n.t('other.platformDelivery')) {
                 this.$store.commit('customize/TabOpen', {
                   id: -1,
                   type: 'action',
@@ -580,13 +569,13 @@ export default {
                     oid: this.$route.params.customizedModuleId,
                     tabTitle: window.vmI18n.t('panel_label.extraRefundEdit'), // 额外退款编辑
                     fromOrder: true,
-                    new: true,
-                  }),
+                    new: true
+                  })
                 });
               } else {
                 this.$Message.warning(window.vmI18n.t('modalTips.h1')); // "只有仓库发货或者平台发货的订单才能操作!"
               }
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.new_chargeback'), // 新增退单
@@ -606,16 +595,16 @@ export default {
                   id: -1,
                   orderHrefReturnid: orderDetails.ID,
                   isOrderHrefReturn: 'order',
-                  tabTitle: window.vmI18n.t('panel_label.addReturnOrder'), // 退换货单新增
-                },
+                  tabTitle: window.vmI18n.t('panel_label.addReturnOrder') // 退换货单新增
+                }
               });
-            },
+            }
           },
           {
             text: window.vmI18n.t('btn.refresh'), // 刷新 按钮文本
             btnclick: () => {
               this.autoRefresh();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.back'), // 返回 按钮文本
@@ -628,32 +617,32 @@ export default {
                 back: true,
                 query: Object.assign({
                   id: 2627,
-                  tabTitle: '零售发货单',
-                }),
+                  tabTitle: '零售发货单'
+                })
               });
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.copyOrder'), // 复制订单
+            text: window.vmI18n.t('btn.copyOrder') // 复制订单
           },
           {
-            text: window.vmI18n.t('btn.lostOrder_copy'), // 丢单复制
+            text: window.vmI18n.t('btn.lostOrder_copy') // 丢单复制
           },
           {
-            text: window.vmI18n.t('btn.wrongCopy'), // 错发复制
+            text: window.vmI18n.t('btn.wrongCopy') // 错发复制
           },
           {
-            text: window.vmI18n.t('btn.missedCopy'), // 漏发复制
+            text: window.vmI18n.t('btn.missedCopy') // 漏发复制
           },
           {
-            text: window.vmI18n.t('btn.giftDelivery_copy'), // 赠品出库复制
+            text: window.vmI18n.t('btn.giftDelivery_copy') // 赠品出库复制
           },
           {
-            text: window.vmI18n.t('btn.original_single_null_and_void_copy'), // 原单无效复制
-          },
-        ],
+            text: window.vmI18n.t('btn.original_single_null_and_void_copy') // 原单无效复制
+          }
+        ]
       },
-      enumerationList: {},
+      enumerationList: {}
     };
   },
   watch: {
@@ -664,7 +653,7 @@ export default {
       const id = this.$route.params ? this.$route.params.customizedModuleId : -1;
       this.objId = id;
       this.load();
-    },
+    }
   },
   methods: {
     dropDownClickChange(val) {
@@ -706,18 +695,12 @@ export default {
       }
       if (type === this.vmI18n.t('btn.original_single_null_and_void_copy')) {
         // 已取消  系统作废
-        if (
-          ORDERSTATUSNAME
-          !== '已取消' && ORDERSTATUSNAME !== this.vmI18n.t('other.systemVoid')
-        ) {
+        if (ORDERSTATUSNAME !== '已取消' && ORDERSTATUSNAME !== this.vmI18n.t('other.systemVoid')) {
           self.$Message.error(this.vmI18n.t('modalTips.a3'));
           return;
         }
         // 仓库发货&&平台发货
-      } else if (
-        ORDERSTATUSNAME
-        !== this.vmI18n.t('other.warehouseDelivery')
-          && ORDERSTATUSNAME !== this.vmI18n.t('other.platformDelivery')) {
+      } else if (ORDERSTATUSNAME !== this.vmI18n.t('other.warehouseDelivery') && ORDERSTATUSNAME !== this.vmI18n.t('other.platformDelivery')) {
         // 只能对【仓库发货，平台发货】订单状态的原单进行复制操作
         self.$Message.error(this.vmI18n.t('modalTips.a4'));
         return;
@@ -725,7 +708,7 @@ export default {
       // 默认是丢单复制的query
       const query = {
         id: self.$route.params.customizedModuleId,
-        pageTitle: type,
+        pageTitle: type
       };
       // 丢单复制
       if (type === this.vmI18n.t('btn.lostOrder_copy')) {
@@ -738,7 +721,7 @@ export default {
         type: 'action',
         name: 'orderManageAdd',
         label: window.vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
-        query,
+        query
       });
     },
     labelClick(item) {
@@ -746,13 +729,13 @@ export default {
       if (item.value === 'OC_B_ORDER') return;
       this.tab2 = {
         tablename: this.labelDefaultValue,
-        objid: this.objId,
+        objid: this.objId
       };
     },
     autoRefresh() {
       const self = this;
       this.refresh = false;
-      self.$nextTick(function () {
+      self.$nextTick(() => {
         this.load();
         this.refresh = true;
       });
@@ -766,33 +749,19 @@ export default {
         data.isShowPii = true;
       }
       this.pageLoad = true;
-      this.service.orderCenter.getDetail(data)
-      // this.$network
-      //   .post('/api/cs/oc/oms/v1/getDetail', data)
-        .then((res) => {
+      this.service.orderCenter
+        .getDetail(data)
+        // this.$network
+        //   .post('/api/cs/oc/oms/v1/getDetail', data)
+        .then(res => {
           this.pageLoad = false;
           if (res.data && res.data.code === 0) {
             const resData = res.data.data;
-            resData.TO_SETTLE_STATUS_TAG = data.RESERVE_BIGINT02 === null
-              ? this.vmI18n.t('common.no')
-              : this.vmI18n.t('common.yes');
+            resData.TO_SETTLE_STATUS_TAG = data.RESERVE_BIGINT02 === null ? this.vmI18n.t('common.no') : this.vmI18n.t('common.yes');
             const TO_SETTLE_STATUS_NAME = (this.enumerationList.UPLOAD_SAP_STATUS.find(val => val.value === resData.TO_SAP_STATUS) || {}).label;
             resData.TO_SETTLE_STATUS_NAME = TO_SETTLE_STATUS_NAME || '';
             this.tab1.order = resData;
-            const statusList = [
-              '未确认',
-              '已审核',
-              '配货中',
-              '仓库发货',
-              '平台发货',
-              '已确认收货',
-              '已取消',
-              '系统作废',
-              '交易完成',
-              '预售待发货',
-              '预售缺货',
-              '缺货',
-            ];
+            const statusList = ['未确认', '已审核', '配货中', '仓库发货', '平台发货', '已确认收货', '已取消', '系统作废', '交易完成', '预售待发货', '预售缺货', '缺货'];
             if (statusList.includes(res.data.data.ORDER_STATUS_NAME)) {
               this.statusName = res.data.data.ORDER_STATUS_NAME;
             } else {
@@ -801,7 +770,7 @@ export default {
           } else {
             this.tab1 = this.tab1_default;
             // 订单详情获取失败
-            this.$message.error(vmI18n.t('modalTips.h3'));
+            this.$message.error(this.vmI18n.t('modalTips.h3'));
           }
         })
         .catch(() => {
@@ -810,26 +779,22 @@ export default {
     },
     getWritData() {
       const data = { ID: this.objId, isShowPii: true };
-      return this.service.orderCenter.getDetail(data);
-      // return this.$network.post('/api/cs/oc/oms/v1/getDetail', data);
+      this.service.orderCenter.getDetail(data);
     },
     asyncOK() {
       const self = this;
       const ids = [];
       ids.push(this.tab1.order.ID);
       if (this.error_type === 'auditing') {
-        self.service.orderCenter.auditOrder({ ids, type: '2', isCheck: 1 })
-        // self.$network
-        //   .post('/api/cs/oc/oms/v1/auditOrder', { ids, type: '2', isCheck: 1 })
-          .then((res) => {
-            self.$Message.info(res.data.message);
-            self.modal = false;
-          });
+        self.service.orderCenter.auditOrder({ ids, type: '2', isCheck: 1 }).then(res => {
+          self.$Message.info(res.data.message);
+          self.modal = false;
+        });
       }
-    },
+    }
   },
- async created() {
-  this.getPermissions('btnConfig', 'orderManager');
+  async created() {
+    this.getPermissions('btnConfig', 'orderManager');
     const id = this.$route.params.customizedModuleId ? this.$route.params.customizedModuleId : -1;
     this.objId = id;
     this.tab1 = {
@@ -868,24 +833,27 @@ export default {
         SOURCE_CODE: '',
         USER_NICK: '',
         WEIGHT: '',
-        CP_C_PHY_WAREHOUSE_ENAME: '',
-      },
+        CP_C_PHY_WAREHOUSE_ENAME: ''
+      }
     };
     this.pageLoad = true;
-     await this.service.common.selectLimitGroups(['UPLOAD_SAP_STATUS']).then(res=>{
+    await this.service.common
+      .selectLimitGroups(['UPLOAD_SAP_STATUS'])
+      .then(res => {
         if (Array.isArray(res.data)) {
-        res.data.forEach((item) => {
-          this.enumerationList[item.name] = item.adLimitvalues.map(val => ({
-            label: val.description,
-            value: Number(val.value),
-          }));
-        });
-      } else {
-        this.enumerationList.UPLOAD_SAP_STATUS = [];
-      }
-      }).catch(() => {
-      this.pageLoad = false;
-    });
-      await this.load();
-  },
+          res.data.forEach(item => {
+            this.enumerationList[item.name] = item.adLimitvalues.map(val => ({
+              label: val.description,
+              value: Number(val.value)
+            }));
+          });
+        } else {
+          this.enumerationList.UPLOAD_SAP_STATUS = [];
+        }
+      })
+      .catch(() => {
+        this.pageLoad = false;
+      });
+    await this.load();
+  }
 };

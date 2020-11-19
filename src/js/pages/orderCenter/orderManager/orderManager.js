@@ -1122,12 +1122,6 @@ export default {
                   type: '1',
                   isCheck: 0,
                 })
-                // self.$network
-                //   .post("/api/cs/oc/oms/v1/auditOrder", {
-                //     ids,
-                //     type: "1",
-                //     isCheck: 0,
-                //   })
                   .then((res) => {
                     if (res.data.code === 0) {
                       // self.$Message.success(res.data.message);
