@@ -29,7 +29,7 @@
       />
       <!-- 列表组件 -->
       <div class="tableBox">
-        <jordan-action-table
+        <businessActionTable
           v-if="labelDefaultValue"
           :jordan-table-config="jordanTableConfig"
           @on-select="returnOnSelect"
@@ -55,7 +55,7 @@
           <businessForm :form-config="order.orderform" />
           <businessButton :btn-config="order.btn" />
         </div>
-        <jordan-action-table
+        <businessActionTable
           :jordan-table-config="order.table"
           @on-select="onquerySelect"
           @on-select-cancel="onqueryCancel"
