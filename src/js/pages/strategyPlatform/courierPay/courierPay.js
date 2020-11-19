@@ -145,6 +145,7 @@ export default {
   },
   mounted() {
     const self = this;
+    // console.log('self.$route.query.id',self.$route.params.customizedModuleId);
     self.objid = Number(self.$route.query.id);
     this.formConfig.formData = [
       {
@@ -498,7 +499,7 @@ export default {
       },
       {
         // title: "赔付标准",
-        label: this.vmI18n.t('table_label.payableAdjustStandard'),
+        label: this.vmI18n.t('form_label.payableAdjustStandard'),
         key: 'COMPENSATE_STANDARD'
       },
       {
@@ -741,6 +742,7 @@ export default {
       // 接口
       const res = await this.service.strategyPlatform.delCompenstate(formdata);
       if (res.status === 200) {
+        console.log('res.data',res.data);
         if (res.data.ST_C_COMPENSATE.BILL_STATUS) self.identifying = res.data.ST_C_COMPENSATE.BILL_STATUS;
         if (res.data.ST_C_COMPENSATE.BILL_STATUS !== 1) self.jordanTableConfig.isShowDeleteDetailBtn = false;
         if (res.data.ST_C_COMPENSATE.END_TIME === null) res.data.ST_C_COMPENSATE.END_TIME = '';
