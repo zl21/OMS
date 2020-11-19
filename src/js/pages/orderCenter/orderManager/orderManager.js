@@ -161,7 +161,7 @@ export default {
       // 判断显示高级搜索还是正常搜素
       isShowSeniorOrOrdinary: true,
       // icon 样式
-      iconDownIcon: 'iconfont iconbj_down',
+      iconDownIcon: 'ark-icon iconfont iconios-arrow-down icon-xiadown',
 
       // tabs
       // 设置tabs默认值
@@ -2066,10 +2066,10 @@ export default {
             icon: 'iconfont iconbj_setup', // 按钮图标
             btnclick: () => {
               const self = this;
-              if (self.iconDownIcon === 'iconfont iconbj_down') {
-                self.iconDownIcon = 'iconfont iconbj_up';
+              if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down icon-xiadown') {
+                self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
               } else {
-                self.iconDownIcon = 'iconfont iconbj_down';
+                self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down icon-xiadown';
               }
               self.isShowSeniorOrOrdinary = true;
               self.publicBouncedConfig = {
