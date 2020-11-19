@@ -960,16 +960,25 @@ body {
       margin-left: 0;
       border-radius: 2px;
       min-width: 50px;
-      padding: 1px 7px 1px;
-      span {
-        vertical-align: baseline !important;
+      padding: 0 7px;
+      position: relative;
+      &>i.iconfont{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        & + span{
+          display: none;
+        }
       }
-
+      span {
+        display: block;
+        height: 26px;
+        line-height: 26px;
+      }
       .ark-icon,
       .iconfont {
-        margin-bottom: 2px;
         font-size: 14px;
-        margin-left: 4px;
       }
     }
   }
@@ -997,6 +1006,7 @@ body {
 .sendSingleRule,
 .setWarehouseLogistics,
 .courierPay,
+.financialManageCenter,
 .re_form {
   .ark-collapse {
     background-color: #fff;
