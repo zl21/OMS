@@ -1312,7 +1312,7 @@ export default {
         this.$Message.error(this.vmI18n.t('modalTips.k3')); // 请选中一项修改!
         return;
       }
-      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME !== '等待退货入库') {
+      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS !== 20) {
         this.$Message.error(this.vmI18n.t('modalTips.l6')); // 此退换单状态不允许虚拟入库!
         return;
       }
@@ -1324,7 +1324,7 @@ export default {
         okText: this.vmI18n.t('common.determine'), // 确定
         cancelText: this.vmI18n.t('common.cancel'), // 取消
         onOk: () => {
-          this.service.orderCenter.updateVirtualLibrary({ ID: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID }).then(res => {
+          this.service.common.updateVirtualLibrary({ ID: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID }).then(res => {
             if (res.data.code == 0) {
               this.$Message.success(res.data.message);
               setTimeout(() => {
@@ -1509,13 +1509,13 @@ export default {
         this.$Message.error(this.vmI18n.t('modalTips.l0')); // 请至少选中一项!
         return;
       }
-      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME != '等待退货入库' && this.$refs.agGridChild.AGTABLE.getSelect().length == 1) {
+      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS != 20 && this.$refs.agGridChild.AGTABLE.getSelect().length == 1) {
         this.$Message.error(this.vmI18n.t('modalTips.m5')); // 只有等待退货入库状态可以从WMS撤回!
         return;
       }
       const ids = [];
       for (let i = 0; i < this.$refs.agGridChild.AGTABLE.getSelect().length; i++) {
-        if (this.$refs.agGridChild.AGTABLE.getSelect()[i].RETURN_STATUS_NAME == '等待退货入库') {
+        if (this.$refs.agGridChild.AGTABLE.getSelect()[i].RETURN_STATUS == 20) {
           ids.push(this.$refs.agGridChild.AGTABLE.getSelect()[i].ID);
         }
       }

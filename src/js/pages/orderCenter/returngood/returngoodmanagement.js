@@ -3218,7 +3218,7 @@ export default {
         okText: _this.vmI18n.t('common.determine'), // 取消
         cancelText: _this.vmI18n.t('common.cancel'), // 确定
         onCancel: () => {
-          this.service.orderCenter.updateVirtualLibrary({ ID: _this.$route.query.id }).then(res => {
+          this.service.common.updateVirtualLibrary({ ID: _this.$route.query.id }).then(res => {
             if (res.data.code == 0) {
               _this.$Message.success(res.data.message);
               _this.getList();
