@@ -1,9 +1,36 @@
 import axios from 'axios';
+import businessButton from 'professionalComponents/businessButton';
 
 export default {
   name: 'splitOrder',
+  components :{
+    businessButton,
+  },
   data() {
     return {
+      btnConfig: {
+        typeAll: 'error',
+        buttons: [
+          {
+            text: '刷新',
+            btnclick: this.getData,
+          },
+          {
+            text: window.vmI18n.t('btn.back'), // 返回
+            btnclick: this.back,
+          },
+          {
+            text: '添加到待拆单',
+            btnclick: this.addPendingOrder,
+            icon: 'ios-add-circle-outline',
+          },
+          {
+            text: '确认拆单',
+            btnclick: this.confirm,
+            icon: 'ios-photos-outline',
+          },
+        ],
+      },
       old_cp_c_phy_warehouse_ename: '', // 保存原仓库
       columns: [
         {
@@ -37,7 +64,7 @@ export default {
           title: '建议发货仓库',
           key: 'advise_phy_warehouse_id',
           render: (h, params) => {
-            console.log(params);
+            // console.log(params);
             const options = params.row.sgBPhyInStorageItemExt.map(item => h('Option', {
                 style: {
                   'font-style': item.total_qty_available === 0 ? 'italic' : 'normal'
@@ -100,7 +127,7 @@ export default {
           key: 'split_num',
           width: 100,
           render: (h, params) => {
-            console.log(params);
+            // console.log(params);
             return h('div', [
               h('Input', {
                 props: {
@@ -162,6 +189,7 @@ export default {
       this.$destroy();
     },
     async getData() {
+      console.log('getData::');
       const self = this;
       const params = { orderId: self.$route.query.id };
       const res = await this.service.orderCenter.querySkuListAndStorageInfo(params);
