@@ -1,7 +1,8 @@
 <template>
   <div class="auto-check">
     <div class="operate left">
-      <Button
+      <businessButton :btn-config="btnConfig" />
+      <!-- <Button
         v-for="(item, i) in oc"
         :key="i"
         :custom-icon="''"
@@ -12,7 +13,7 @@
         @click.native="item.clickEv"
       >
         {{ item.text }}
-      </Button>
+      </Button> -->
     </div>
 
     <Tabs value="name1">
@@ -22,7 +23,7 @@
       >
         <Form
           ref="formValidate"
-          :label-width="150"
+          :label-width="120"
           :model="info"
         >
           <Collapse v-model="collapseShow">
@@ -406,7 +407,7 @@
                   </FormItem>
                   </Col>
                 </Row>
-                <Row>
+                <!-- <Row>
                   <Col
                     colspan="1"
                     span="1"
@@ -453,7 +454,7 @@
                     </Row>
                   </FormItem>
                   </Col>
-                </Row>
+                </Row> -->
               </div>
             </Panel>
           </Collapse>

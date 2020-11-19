@@ -1,11 +1,11 @@
 <template>
   <div class="order-add">
-    <div
+    <!-- <div
       v-show="isShowFromLoading" 
       class="order_add_loading"
     >
       <Spin />
-    </div>
+    </div> -->
     <div class="orderButtons">
       <businessButton :btn-config="btnConfig" />
     </div>
