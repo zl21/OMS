@@ -9,6 +9,7 @@ import returnGood from 'allpages/OrderCenter/returngood/returngoodmanagement.vue
 import returnStorageList from 'allpages/OrderCenter/returngood/returnStoreage/returnStoreageList.vue'; // 退货入库-列表
 import returnTreasuryAdd from 'allpages/OrderCenter/returngood/returnStoreage/returnTreasuryAdd.vue'; // 退货入库-新增 退货入库-新增
 import refundAfterShipment from 'allpages/OrderCenter/returngood/refundAfterShipment.vue'; // 订单中心-已发货退款单-编辑 额外退款
+import distributionOrderList from 'allpages/OrderCenter/vipJit/distributionOrderList.vue';
 
 export default {
   // 订单中心-扫描入库
@@ -59,4 +60,7 @@ export default {
     // 退货入库-手工匹配
     component: () => import('@/views/pages/OrderCenter/returngood/returnStoreage/manualMatching.vue')
   },
+  DISTRIBUTIONORDERLIST: {
+    component: distributionOrderList
+  }
 };

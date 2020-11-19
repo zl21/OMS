@@ -27,6 +27,9 @@ export default {
   MODIFYLOGISTICSNUMBER: {
     component: () => import('@/views/modal/orderCenter/modifyLogisticsNumber.vue')
   },
+  MODIFYWMS: {
+    component: () => import('@/views/modal/orderCenter/modifyWms.vue')
+  },
 
   EXTRARETURNIMPORT: {
     component: () => import('@/views/modal/orderCenter/extraReturnImport.vue')
