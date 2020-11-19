@@ -1526,25 +1526,21 @@ export default {
                   || self.selection[0].ORDER_STATUS
                     === self.orderStatus.orderOutofstock
                 ) {
-                  // self.$store.commit('customize/('TabHref', {
-                  //   id: self.selection[0].ID,
-                  //   type: 'action',
-                  //   name: 'splitOrder',
-                  //   label: '订单拆分',
-                  //   query: {
-                  //     id: self.selection[0].ID,
-                  //     tabTitle: '订单拆分',
-                  //   },
-                  // })
-                  self.$store.commit('customize/TabHref', {
-                    id: self.selection[0].ID,
-                    type: 'action',
-                    name: 'splitOrder',
-                    label: self.vmI18n.t('panel_label.orderSplit'), // 订单拆分
-                    query: {
-                      id: self.selection[0].ID,
-                      tabTitle: self.vmI18n.t('panel_label.orderSplit'), // 订单拆分
-                    },
+                  this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.selection[0].ID }).then(res=>{ // 提前判断下该单据是否可拆单
+                    if (res.data.code == 0) {
+                        self.$store.commit('customize/TabHref', {
+                                            id: self.selection[0].ID,
+                                            type: 'action',
+                                            name: 'splitOrder',
+                                            label: self.vmI18n.t('panel_label.orderSplit'), // 订单拆分
+                                            query: {
+                                              id: self.selection[0].ID,
+                                              tabTitle: self.vmI18n.t('panel_label.orderSplit'), // 订单拆分
+                                            },
+                                          });
+                    } else {
+                      this.$Message.warning(res.data.message);
+                    }
                   });
                 } else {
                   self.$Message.warning({
