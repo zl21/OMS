@@ -994,6 +994,9 @@ body {
 .TreasuryDefault,
 .jq-combined-commodity-edit,
 .logisticsArea,
+.sendSingleRule,
+.setWarehouseLogistics,
+.courierPay,
 .re_form {
   .ark-collapse {
     background-color: #fff;
@@ -1089,5 +1092,47 @@ body .ark-spin-fix{
 .refundAfterShipment {
   .orderManageEdit{
     padding: 0;
+  }
+}
+
+// 物流区域设置-详情，发货单派单规则-新增/详情，仓库物流优先级方案-新增/详情
+.logisticsArea, 
+.sendSingleRule, 
+.setWarehouseLogistics {
+  position: relative;
+
+  .retrieveBox {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 0;
+    width: 100%;
+
+    .retrieveTitle {
+      display: inline-block;
+      vertical-align: middle;
+      width: 36px;
+      height: 26px;
+      line-height: 26px;
+      font-size: 12px;
+      font-weight: 400;
+      color: #575757;
+      text-align: center;
+      background-color: #f8f8f8;
+      border: 1px solid #d8d8d8;
+      border-right: none;
+      border-radius: 2px;
+
+    }
+    .retrieve {
+      height: 26px;
+      width: 60%;
+      display: inline-block;
+      .ark-input {
+        border-radius: 0 2px 2px 0;
+      }
+    }
+    .ark-icon {
+      color: #808695;
+    }
   }
 }
