@@ -18,6 +18,7 @@ export default {
   // 策略平台-快递赔付方案(新增/详情)
   COURIERPAY: {
     component: courierPay,
+    labelName: '快递赔付方案编辑',
   },
   ORDERAUTOCHECK: {
     component: orderAutoCheck,
