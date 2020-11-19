@@ -2053,11 +2053,11 @@ export default {
               this.cancelMergeOrder();
             },
           },
+          // {
+          //   text: window.vmI18n.t('btn.export'), // 导入
+          // },
           {
-            text: window.vmI18n.t('btn.export'), // 导入
-          },
-          {
-            text: window.vmI18n.t('btn.import'), // 导出
+            text: window.vmI18n.t('btn.export'), // 导出
             btnclick: () => {
               this.exportClick();
             }, // 按钮点击事件
