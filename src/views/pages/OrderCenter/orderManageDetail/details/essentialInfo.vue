@@ -3,7 +3,7 @@
   <div class="order-content-tab">
     <div class="order-tab-content">
       <div class="order-tab-title">
-        <i class="iconfont">&#xe653;</i>
+        <!-- <i class="iconfont">&#xe653;</i> -->
         <span>基础资料</span>
       </div>
       <div class="order-tab-detail">
@@ -48,7 +48,7 @@
     </div>
     <div class="order-tab-content">
       <div class="order-tab-title">
-        <i class="iconfont">&#xe653;</i>
+        <!-- <i class="iconfont">&#xe653;</i> -->
         <span>订单金额</span>
       </div>
       <div class="order-tab-detail2">
@@ -122,10 +122,10 @@
     </div>
     <div class="order-tab-content">
       <div class="order-tab-title">
-        <i class="iconfont">&#xe653;</i>
+        <!-- <i class="iconfont">&#xe653;</i> -->
         <span>订单收货地址</span>
         <Icon
-          style="fontSize:35px;paddingBottom:2px;marginLeft:15px"
+          style="fontSize:24px;paddingBottom:2px;marginLeft:15px"
           type="ios-eye"
           @click="eyeClick"
         />
@@ -148,7 +148,7 @@
     </div>
     <div class="order-tab-content">
       <div class="order-tab-title">
-        <i class="iconfont">&#xe653;</i>
+        <!-- <i class="iconfont">&#xe653;</i> -->
         <span>订单明细</span>
         <span
           v-if="isQh && isQhChild"

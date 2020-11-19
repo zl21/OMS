@@ -1,16 +1,40 @@
 import { timestampToTime } from '@/assets/js/__utils__/usual';
 import logTable from 'professionalComponents/LogTable';
+import businessButton from 'professionalComponents/businessButton.vue';
 
 export default {
   components: {
-    logTable
+    logTable,
+    businessButton
   },
   data() {
     return {
       show: '',
       s: [],
       providesList: [],
-      // showColnameKey: [],
+      btnConfig: {
+        typeAll: 'error', // 按钮统一风格样式
+        buttons: [
+          {
+            text: '保存', // 查找 按钮文本
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.save();
+            } // 按钮点击事件
+          },
+          {
+            text: '返回', // 查找 按钮文本
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              R3.store.commit('global/tabOpen', {
+                type: 'S',
+                tableName: 'ST_C_AUTOCHECK',
+                tableId: 24634
+              });
+            } // 按钮点击事件
+          },
+        ]
+      },
       oc: [
         {
           text: '保存',
@@ -21,11 +45,7 @@ export default {
         {
           text: '返回',
           clickEv: () => {
-            R3.store.commit('global/tabOpen', {
-              type: 'S',
-              tableName: 'ST_C_AUTOCHECK',
-              tableId: 24634
-            });
+            
           }
         }
       ],
