@@ -956,11 +956,11 @@ body {
 
   .buttonBox {
     button {
-      height: 22px;
-      line-height: 18px;
+      height: 28px;
       margin-left: 0;
       border-radius: 2px;
       min-width: 50px;
+      padding: 1px 7px 1px;
       span {
         vertical-align: baseline !important;
       }
@@ -978,6 +978,9 @@ body {
 // 框架按钮(查找、重置、导出等)的空白节点
 .R3-button-group {
   font-size: 0;
+  button {
+    height: 28px;
+  }
 }
 
 // 详情的car 统一修改
@@ -990,6 +993,7 @@ body {
 .order-add,
 .TreasuryDefault,
 .jq-combined-commodity-edit,
+.logisticsArea,
 .re_form {
   .ark-collapse {
     background-color: #fff;
@@ -1015,6 +1019,8 @@ body {
         border-bottom: none;
         height: 35px !important;
         line-height: 36px !important;
+        font-size: 14px;
+        color: #1f2d3d;
 
         &>.iconios-arrow-forward:before,
         &>.iconmd-arrow-dropdown:before {
@@ -1064,4 +1070,11 @@ body .ark-spin-fix{
 }
 .orderManageEdit{
   padding: 5px 0;
+}
+
+// 特别的
+.refundAfterShipment {
+  .orderManageEdit{
+    padding: 0;
+  }
 }

@@ -140,7 +140,7 @@ export default {
           },
           {
             // title: "收货人",
-            title: window.vmI18n.t('table_label.consignee'),
+            title: window.vmI18n.t('form_label.consignee'),
             key: 'demo2',
           },
           {

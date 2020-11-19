@@ -2,31 +2,7 @@
   <!-- 手工拆单 -->
   <div class="splitOrder">
     <div class="manual_button">
-      <Button
-        type="default"
-        @click="getData"
-      >
-        刷新
-      </Button>
-      <Button
-        type="default"
-        @click="back"
-      >
-        返回
-      </Button>
-      <Button
-        type="default"
-        icon="ios-add-circle-outline"
-        @click="addPendingOrder"
-      >
-        添加到待拆单
-      </Button>
-      <Button
-        icon="ios-photos-outline"
-        @click="confirm"
-      >
-        确认拆单
-      </Button>
+      <businessButton :btn-config="btnConfig" />
     </div>
     <div class="manual_list">
       <div class="list_left">
