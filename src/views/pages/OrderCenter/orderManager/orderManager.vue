@@ -14,7 +14,7 @@
         v-show="isShowFromLoading"
         class="from_loading"
       >
-        <Spin />
+        <loading :loading="agTableConfig.agLoading"></loading>
       </div>
       <IntegrateSearchFilter
         v-if="isShowSeniorOrOrdinary"
@@ -53,18 +53,7 @@
         @labelClick="labelClick"
       />
       <div class="aTable">
-        <div
-          v-show="agTableConfig.agLoading"
-          class="agLoading"
-        >
-           <Spin fix>
-                <div class="loader">
-                    <svg class="circular" viewBox="25 25 50 50">
-                        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="10"></circle>
-                    </svg>
-                </div>
-            </Spin>
-        </div>
+        <loading :loading="agTableConfig.agLoading"></loading>
         <aTable
           ref="agGridChild"
           :ag-table-config="agTableConfig"

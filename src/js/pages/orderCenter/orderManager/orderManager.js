@@ -10,6 +10,7 @@ import unzipXv from '@/assets/js/dataToSmall.js';
 import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
 import labelListConfig from './publicConfig/labelList.js';
 import orderLogo from './publicConfig/orderLogo.js';
+import loading from '@/component/loading.vue';
 
 export default {
   components: {
@@ -18,6 +19,7 @@ export default {
     businessLabel,
     jordanModal,
     aTable,
+    loading
   },
   mixins: [isFavoriteMixin, buttonPermissionsMixin, dataAccessMixin],
   watch: {
