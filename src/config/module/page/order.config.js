@@ -55,4 +55,8 @@ export default {
     component: refundAfterShipment,
     labelName: '额外退款编辑',
   },
+  MANUALMATCHING: {
+    // 退货入库-手工匹配
+    component: () => import('@/views/pages/OrderCenter/returngood/returnStoreage/manualMatching.vue')
+  },
 };
