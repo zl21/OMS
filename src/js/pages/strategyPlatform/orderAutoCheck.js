@@ -1,9 +1,11 @@
 import { timestampToTime } from '@/assets/js/__utils__/usual';
 import logTable from 'professionalComponents/LogTable';
+import businessButton from 'professionalComponents/businessButton';
 
 export default {
   components: {
-    logTable
+    logTable,
+    businessButton
   },
   data() {
     return {
@@ -33,18 +35,6 @@ export default {
           }
         ]
       },
-      oc: [
-        {
-          text: '保存',
-          clickEv: () => {
-            this.save();
-          }
-        },
-        {
-          text: '返回',
-          clickEv: () => {}
-        }
-      ],
       isChange: {
         orderType: false,
         beginEndTimeChange: false
@@ -259,7 +249,7 @@ export default {
         this.result.IS_MANUAL_ORDER = this.IS_MANUAL_ORDER ? 'Y' : 'N';
       } else if (type == 'IS_MERGE_ORDER') {
         this.result.IS_MERGE_ORDER = this.IS_MERGE_ORDER ? 'Y' : 'N';
-      } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME' || type === 'CP_C_LOGISTICS_ID') {
+      } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME' || type === 'CP_C_LOGISTICS_ID' || type === 'ANTI_AUDIT_WAIT_TIME') {
         this.result[type] = this.info[type];
       } else if (type == 'orderType') {
         if (this.orderType.length === 7) {
@@ -313,8 +303,8 @@ export default {
       });
     },
     save() {
-      this.providesList.map(item => item.Label);
-      this.result.CP_C_REGION_PROVINCE_ENAME = this.providesList.join(',');
+      const list = this.providesList.map(item => item.Label);
+      this.result.CP_C_REGION_PROVINCE_ENAME = list.join(',');
       this.service.strategyPlatform
         .addAutoCheck({
           fixcolumn: {
@@ -325,7 +315,11 @@ export default {
         .then(({ data }) => {
           if (data.data.code == 0) {
             this.$Message.success(data.data.message);
-            this.oc[1].clickEv();
+            R3.store.commit('global/tabOpen', {
+              type: 'S',
+              tableName: 'ST_C_AUTOCHECK',
+              tableId: 24634
+            });
             this.$destroy();
             return;
           }
