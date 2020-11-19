@@ -111,12 +111,12 @@ export default {
             {
               key: 'ID',
               // title: "退换货单号",
-              title: window.vmI18n.t('table_label.returnOrder_no')
+              title: window.vmI18n.t('form_label.returnOrder_no'),
             },
             {
               key: 'ORIG_ORDER_NO',
               // title: "原单单号",
-              title: window.vmI18n.t('table_label.originalOrder_No')
+              title: window.vmI18n.t('form_label.originalOrder_No'),
             },
             {
               key: 'BUYER_NICK',
@@ -126,17 +126,17 @@ export default {
             {
               key: 'LOGISTICS_CODE',
               // title: "物流单号",
-              title: window.vmI18n.t('table_label.logisticsOrder_No')
+              title: window.vmI18n.t('form_label.logisticsOrder_No'),
             },
             {
               key: 'RECEIVE_NAME',
               // title: "收货人",
-              title: window.vmI18n.t('table_label.consignee')
+              title: window.vmI18n.t('form_label.consignee'),
             },
             {
               key: 'RECEIVE_MOBILE',
               // title: "收货人手机号",
-              title: window.vmI18n.t('table_label.consignee_phone')
+              title: window.vmI18n.t('form_label.consignee_phone'),
             },
             {
               key: 'shopName',
@@ -445,14 +445,12 @@ export default {
                     }
                   }
                 },
-                list.map(item =>
-                  h('Option', {
+                list.map(item => h('Option', {
                     props: {
                       value: item.SPEC,
                       label: item.SPEC
                     }
-                  })
-                )
+                  }))
               );
             }
           },
