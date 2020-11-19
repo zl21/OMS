@@ -22,20 +22,7 @@
       />
     </div>
     <div class="i_food">
-      <Button
-        style="marginLeft:8px;"
-        type="error"
-        @click="confirm"
-      >
-        确定
-      </Button>
-      <Button
-        type="error"
-        ghost
-        @click="()=>{this.$parent.$parent.closeConfirm();}"
-      >
-        取消
-      </Button>
+      <businessButton :btn-config="btnConfig" />
     </div>
   </div>
 </template>

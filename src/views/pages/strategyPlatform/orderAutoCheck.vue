@@ -2,18 +2,6 @@
   <div class="auto-check">
     <div class="operate left">
       <businessButton :btn-config="btnConfig" />
-      <!-- <Button
-        v-for="(item, i) in oc"
-        :key="i"
-        :custom-icon="''"
-        :ghost="true"
-        :size="'small'"
-        :type="'error'"
-        class="operate-btn"
-        @click.native="item.clickEv"
-      >
-        {{ item.text }}
-      </Button> -->
     </div>
 
     <Tabs value="name1">

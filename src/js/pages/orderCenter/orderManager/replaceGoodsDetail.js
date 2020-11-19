@@ -1,6 +1,9 @@
 import axios from 'axios';
-
+import businessButton from 'professionalComponents/businessButton';
 export default {
+  components: {
+    businessButton
+  },
   data() {
     return {
       radioValue: '2',
@@ -24,7 +27,26 @@ export default {
           key: 'IS_GIFT'
         }
       ],
-      data: []
+      data: [],
+      btnConfig: {
+        typeAll: 'error', // 按钮统一风格样式
+        buttons: [
+          {
+            text: '取消', // 查找 按钮文本
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.$parent.$parent.closeConfirm();
+            } // 按钮点击事件
+          },
+          {
+            text: '确定', // 查找 按钮文本
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.confirm();
+            } // 按钮点击事件
+          },
+        ]
+      },
     };
   },
   props: {
