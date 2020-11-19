@@ -16,7 +16,7 @@
               <i v-if="list.flag">*</i>
               {{ list.label }}
             </label>
-            <Tooltip
+            <!-- <Tooltip
               v-if="list.label==='平台编号:'"
               max-width="250"
             >
@@ -29,7 +29,10 @@
               >
                 {{ componentData.order[list.column] }}
               </p>
-            </Tooltip>
+            </Tooltip> -->
+            <p v-if="list.label==='平台编号:'" class="text-ellipsis">
+                {{ componentData.order[list.column] }}
+            </p>
             <p v-if="list.label ==='物流单号:'">
               {{ componentData.order[list.column] }}
               <span
@@ -178,7 +181,7 @@
     <!-- freshLoad -->
     <div class="order-tab-content">
       <div class="order-tab-title">
-        <i class="iconfont">&#xe653;</i>
+        <!-- <i class="iconfont">&#xe653;</i> -->
         <span>备注</span>
       </div>
       <div class="order-tab-detail3">

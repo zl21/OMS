@@ -1,13 +1,13 @@
 <template>
   <div class="sendSingleRule">
-    <jordanButton
+    <businessButton
       :btn-config="btnConfig"
     />
     <Collapse v-model="openDefault">
       <Panel name="1">
         基本信息
         <p slot="content">
-          <jordanForm :form-config="information" />
+          <businessForm :form-config="information" />
         </p>
       </Panel>
     </Collapse>
@@ -17,12 +17,12 @@
       class="tableContent"
     >
       <!-- tab切换 -->
-      <jordanLabel
+      <business-label
         class="jordanLabel"
         :label-list="labelList"
         :label-default-value="labelDefaultValue"
       />
-      <jordan-action-table
+      <business-action-table
         v-if="showFlag"
         :jordan-table-config="jordanTableConfig"
         @on-select="OnSelect"
@@ -259,7 +259,7 @@
       </div>
     </div>
     <!-- 修改仓库-->
-    <jordanModal
+    <businessDialog
       :title="modifyWarehouse.confirmTitle"
       :title-align="modifyWarehouse.titleAlign"
       :width="modifyWarehouse.width"
@@ -276,7 +276,7 @@
       :component-data="modifyWarehouse.componentData"
     />
     <!-- 导入 -->
-    <jordanModal
+    <businessDialog
       :title="importTable.confirmTitle"
       :title-align="importTable.titleAlign"
       :width="importTable.width"
@@ -297,7 +297,7 @@
       <p>是否确认导出？</p>
     </Modal>-->
     <!--单据状态图片展示 -->
-    <jordanStatusFlag :status-name="statusName" />
+    <businessStatusFlag :status-name="statusName" />
     <div
       v-show="saveLoading"
       class="fromLoading"
@@ -308,9 +308,9 @@
 </template>
 
 <script>
-  import sendSingleRule from '@/js/pages/strategyPlatform/sendSingleRule';
+import sendSingleRule from '@/js/pages/strategyPlatform/sendSingleRule';
 
-  export default sendSingleRule;
+export default sendSingleRule;
 </script>
 
 <style lang="less">

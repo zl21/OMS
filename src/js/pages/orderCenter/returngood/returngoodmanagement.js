@@ -8,6 +8,8 @@ import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
+import loading from '@/component/loading.vue';
+
 // import OrderItem from './orderItem';
 
 import OrderItem from 'allpages/OrderCenter/returngood/orderItem.vue';
@@ -25,7 +27,8 @@ export default {
     jordanModal,
     OrderItem,
     businessLabel,
-    businessStatusFlag
+    businessStatusFlag,
+    loading
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
@@ -3218,7 +3221,7 @@ export default {
         okText: _this.vmI18n.t('common.determine'), // 取消
         cancelText: _this.vmI18n.t('common.cancel'), // 确定
         onCancel: () => {
-          this.service.orderCenter.updateVirtualLibrary({ ID: _this.$route.query.id }).then(res => {
+          this.service.common.updateVirtualLibrary({ ID: _this.$route.query.id }).then(res => {
             if (res.data.code == 0) {
               _this.$Message.success(res.data.message);
               _this.getList();

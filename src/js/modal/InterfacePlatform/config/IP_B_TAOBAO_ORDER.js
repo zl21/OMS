@@ -82,59 +82,41 @@ export default {
         icon: '', // 输入框后带的图标,暂只有输入框支持
         placeholder: '', // 占位文本，默认为请输入
         ghost: false, // 是否关闭幽灵按钮，默认开启
-        inputenter: () => { }, // 表单回车事件
-        iconclick: () => { } // 点击icon图标事件
+        inputenter: () => {}, // 表单回车事件
+        iconclick: () => {} // 点击icon图标事件
         // setRequired: "required" //必选标识,值不为required时无标识
       }
     ]
   },
   // 确定按钮
-  determine: async (self) => {
-    if (
-      !self.downLoadFormConfig.formData[0].itemdata.pid
-    ) {
-      self.$Message.warning(self.vmI18n.t('modalTips.be'));// 请选择需要下载的店铺
-      return false;
+  determine: async self => {
+    if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
+      self.$Message.warning(self.vmI18n.t('modalTips.be')); // 请选择需要下载的店铺
+      return;
     }
-    if (
-      self.downLoadFormConfig.formValue.startEndTimes
-        .length === 0
-      && self.downLoadFormConfig.formValue.orderNum === ''
-    ) {
-      self.$Message.warning(self.vmI18n.t('modalTips.bs'));// 请选择输入的日期或输入订单编号
-      return false;
+    if (self.downLoadFormConfig.formValue.startEndTimes.length === 0 && self.downLoadFormConfig.formValue.orderNum === '') {
+      self.$Message.warning(self.vmI18n.t('modalTips.bs')); // 请选择输入的日期或输入订单编号
+      return;
     }
     const param = {
-      shop_id:
-        self.downLoadFormConfig.formData[0].itemdata.pid,
+      shop_id: self.downLoadFormConfig.formData[0].itemdata.pid,
       bill_no: self.downLoadFormConfig.formValue.orderNum, // 订单编号
-      start_time: self.standardTimeConversiondateToStr(
-        self.downLoadFormConfig.formValue.startEndTimes[0]
-      ), // 开始时间
-      end_time: self.standardTimeConversiondateToStr(
-        self.downLoadFormConfig.formValue.startEndTimes[1]
-      ), // 结束时间
-      status:
-        self.downLoadFormConfig.formValue.orderStatus, // 状态 必传 给默认值
+      start_time: self.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.startEndTimes[0]), // 开始时间
+      end_time: self.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.startEndTimes[1]), // 结束时间
+      status: self.downLoadFormConfig.formValue.orderStatus, // 状态 必传 给默认值
       table: self.$route.params.tableName // 当前表名 必传
     };
     const fromdata = new FormData();
     fromdata.append('param', JSON.stringify(param));
     // 请求下载订单接口
-    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(fromdata);
+    const {
+      data: { code, message }
+    } = await self.service.interfacePlatform.orderDownload(fromdata);
     if (code === 0) {
       self.taskId = message.match(/\d+/)[0];
       self.downLoadModal = true;
     } else {
       self.$Message.error(message);
     }
-    // axios({
-    //   url: "/p/cs/orderDownload",
-    //   method: "post",
-    //   data: fromdata
-    // }).then(function (res) {
-    //   console.log(res);
-    //
-    // });
   }
 };

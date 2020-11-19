@@ -44,7 +44,6 @@ import groups from '@/assets/js/promotion/groups.js';// 促销需要
 import connector from './src/js/pages/common/orderDetail/connector.js';
 request
 // import 'omsTheme/skin/skyBlue/index.min.css'
-
 groups.load();
 Vue.prototype.$ajax = ajax;
 Vue.prototype.axios = request;

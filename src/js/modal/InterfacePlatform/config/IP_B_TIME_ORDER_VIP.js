@@ -27,7 +27,7 @@ export default {
           },
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: window.vmI18n.t('other.shop'), // 店铺 
+          fkdesc: window.vmI18n.t('other.shop'), // 店铺
           inputname: 'CP_C_SHOP_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
@@ -51,7 +51,7 @@ export default {
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''
-      },
+      }
     ],
     // 表单非空提示
     ruleValidate: {
@@ -60,13 +60,13 @@ export default {
     }
   },
   // 确定按钮
-  determine: async (self) => {
+  determine: async self => {
     if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
-      self.$Message.warning(self.vmI18n.t('modalTips.be'));// 请选择需要下载的店铺
+      self.$Message.warning(self.vmI18n.t('modalTips.be')); // 请选择需要下载的店铺
       return;
     }
     if (!self.downLoadFormConfig.formValue.query_date[0]) {
-      self.$Message.warning(this.vmI18n.t('modalTips.br'));// 请选择需要下载的查询时间
+      self.$Message.warning(self.vmI18n.t('modalTips.br')); // 请选择需要下载的查询时间
       return;
     }
     let startTime = self.downLoadFormConfig.formValue.query_date[0];
@@ -86,7 +86,9 @@ export default {
     fromdata.append('param', JSON.stringify(param));
 
     // 实效订单下载
-    const { data: { code, message } } = await self.service.interfacePlatform.downLoadVipTimeOrder(fromdata);
+    const {
+      data: { code, message }
+    } = await self.service.interfacePlatform.downLoadVipTimeOrder(fromdata);
     if (code === 0) {
       self.$Message.success(message);
       self.$emit('confirmImport');
@@ -95,18 +97,5 @@ export default {
       self.$Message.error(message);
       self.$emit('closeActionDialog', true);
     }
-    // axios({
-    //   url: "/p/cs/downLoadVipTimeOrder",
-    //   method: "post",
-    //   data: fromdata
-    // }).then(function (res) {
-    //   if (res.data.code === 0) {
-    //     self.$Message.success(res.data.message);
-    //     self.$emit("confirmImport");
-    //     self.$emit("closeActionDialog");
-    //   } else {
-    //     self.$Message.error(res.data.message);
-    //   }
-    // });
   }
 };

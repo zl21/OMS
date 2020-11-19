@@ -29,7 +29,7 @@
       />
       <!-- 列表组件 -->
       <div class="tableBox">
-        <jordan-action-table
+        <business-action-table
           v-if="labelDefaultValue"
           :jordan-table-config="jordanTableConfig"
           @on-select="returnOnSelect"
@@ -57,7 +57,7 @@
           <businessButton :btn-config="order.btn" />
         </div>
         <div class="orderTable">
-          <jordan-action-table
+          <business-action-table
             :jordan-table-config="order.table"
             @on-select="onquerySelect"
             @on-select-cancel="onqueryCancel"
@@ -68,7 +68,7 @@
       </Modal>
     </div>
     <!-- 退单编号-->
-    <jordanModal
+    <businessDialog
       :title="returnNumber.confirmTitle"
       :title-align="returnNumber.titleAlign"
       :width="returnNumber.width"

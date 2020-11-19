@@ -8,6 +8,7 @@ import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
 import dialogVisible from '@/views/pages/promotionCenter/setGroup';
 import Favorite from '@/views/pages/promotionCenter/components/favorite';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
+import loading from '@/component/loading.vue';
 
 const baseColumnDefs = [
   {
@@ -493,7 +494,8 @@ export default {
     errorMessage,
     dialogVisible,
     Favorite,
-    TableInput
+    TableInput,
+    loading
   },
   created() { },
   computed: {

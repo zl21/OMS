@@ -4,22 +4,22 @@
       class="returnBtn"
     >
       <!-- 按钮 -->
-      <jordanButton :btn-config="btnConfig" />
+      <business-button :btn-config="btnConfig" />
     </div>
     <div class="returnForm">
       <!-- form表单 -->
-      <jordanForm :form-config="formConfig" />
+      <business-form :form-config="formConfig" />
     </div>
     <div class="salesTable">
       <!-- tab切换 -->
-      <jordanLabel
+      <business-label
         class="jordanLabel"
         :label-list="labelList"
         :label-default-value="labelDefaultValue"
       />
       <!-- 列表组件 -->
       <div class="tableBox">
-        <jordan-action-table
+        <business-action-table
           :jordan-table-config="jordanTableConfig"
           @on-select="returnOnSelect"
           @table-import="returnImport"

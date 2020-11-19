@@ -10,6 +10,7 @@ import unzipXv from '@/assets/js/dataToSmall.js';
 import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
 import labelListConfig from './publicConfig/labelList.js';
 import orderLogo from './publicConfig/orderLogo.js';
+import loading from '@/component/loading.vue';
 
 export default {
   components: {
@@ -18,6 +19,7 @@ export default {
     businessLabel,
     jordanModal,
     aTable,
+    loading
   },
   mixins: [isFavoriteMixin, buttonPermissionsMixin, dataAccessMixin],
   watch: {
@@ -1122,12 +1124,6 @@ export default {
                   type: '1',
                   isCheck: 0,
                 })
-                // self.$network
-                //   .post("/api/cs/oc/oms/v1/auditOrder", {
-                //     ids,
-                //     type: "1",
-                //     isCheck: 0,
-                //   })
                   .then((res) => {
                     if (res.data.code === 0) {
                       // self.$Message.success(res.data.message);
