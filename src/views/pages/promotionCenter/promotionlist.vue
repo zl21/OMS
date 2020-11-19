@@ -1,6 +1,7 @@
 <template>
   <!-- promactiqueryList -->
-  <div v-loading="loadings" class="promotion-content">
+  <div class="promotion-content">
+    <loading :loading="loadings"></loading>
     <div class="operation-content">
       <!-- 按钮 head_botton-->
       <div class="operation-botton">

@@ -6,6 +6,7 @@ import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import EssentialInfo from '@/views/pages/OrderCenter/orderManageDetail/details/essentialInfo';
 import OrderItem from '@/views/pages/OrderCenter/orderManageDetail/details/orderItem';
 import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
+import loading from '@/component/loading.vue';
 
 export default {
   name: 'OrderManageDetail',
@@ -15,7 +16,8 @@ export default {
     EssentialInfo,
     OrderItem,
     businessStatusFlag,
-    businessDialog
+    businessDialog,
+    loading
   },
   mixins: [buttonPermissionsMixin],
   data() {

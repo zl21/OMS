@@ -8,6 +8,8 @@ import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
+import loading from '@/component/loading.vue';
+
 // import OrderItem from './orderItem';
 
 import OrderItem from 'allpages/OrderCenter/returngood/orderItem.vue';
@@ -25,7 +27,8 @@ export default {
     jordanModal,
     OrderItem,
     businessLabel,
-    businessStatusFlag
+    businessStatusFlag,
+    loading
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {

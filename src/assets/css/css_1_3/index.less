@@ -1034,6 +1034,7 @@ body {
         line-height: 36px !important;
         font-size: 14px;
         color: #1f2d3d;
+        border-bottom:none;
 
         &>.iconios-arrow-forward:before,
         &>.iconmd-arrow-dropdown:before {
@@ -1091,8 +1092,8 @@ body {
 }
 // loading修改
 body .ark-spin-fix{
-  position: fixed;
-  z-index: 1002 !important;
+  // position: fixed;
+  // z-index: 1002 !important;
 }
 .orderManageEdit{
   padding: 5px 0;
@@ -1168,5 +1169,11 @@ body .ark-spin-fix{
   }
   .ark-date-picker-cells-cell-today em:after{
     background: #0068b7;
+  }
+}
+// tree 
+.ark-tree{
+  .ark-tree-arrow-open i:after{
+    left: 6px;
   }
 }

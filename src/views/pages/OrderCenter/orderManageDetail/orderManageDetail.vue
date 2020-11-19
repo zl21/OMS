@@ -5,9 +5,11 @@ feature : 订单中心-零售发货单详情
 -->
 <template>
   <div
-    v-loading="pageLoad"
+    v-loading=""
     class="order"
   >
+   <!-- 弹框 -->
+   <loading :loading="pageLoad"></loading>
     <div class="order-btn">
       <businessButton
         :btn-config="btnConfig"
