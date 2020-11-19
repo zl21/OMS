@@ -36,7 +36,7 @@ export default {
       searchFormConfig: {
         setHeight: 34,
         rowAll: 3,
-        searchFoldnum: 2,
+        searchFoldnum: 3,
         defaultColumn: 3,
         defaultconfig: []
       },
