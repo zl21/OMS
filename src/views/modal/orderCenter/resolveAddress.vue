@@ -9,11 +9,11 @@
     </div>
     <Form :label-width="80">
       <!-- <FormItem label="收货信息"> -->
-      <FormItem :title="vmI18n.t('table_label.receivingInfo')">
+      <FormItem :label="vmI18n.t('table_label.receivingInfo')">
         <span v-html="componentData.OLDRECEIVERADDRESS" />
       </FormItem>
       <!-- <FormItem label="新收货信息"> -->
-      <FormItem :title="vmI18n.t('table_label.new_receivingInfo')">
+      <FormItem :label="vmI18n.t('table_label.new_receivingInfo')">
         <Input
           ref="newReceivAddress"
           v-model="newReceivAddress"
@@ -23,7 +23,7 @@
         /></Input>
       </FormItem>
       <!-- <FormItem label="新地址"> -->
-      <FormItem :title="vmI18n.t('table_label.new_address')">
+      <FormItem :label="vmI18n.t('table_label.new_address')">
         <div class="province_city_area">
           <Select
             v-model="data.cp_c_region_province_id"
@@ -86,14 +86,14 @@
         </div>
       </FormItem>
       <!-- <FormItem label="新详细地址"> -->
-      <FormItem :title="vmI18n.t('table_label.new_detailed_address')">
+      <FormItem :label="vmI18n.t('table_label.new_detailed_address')">
         <Input
           v-model="data.receiver_address"
           placeholder
         /></Input>
       </FormItem>
       <!-- <FormItem label="收货人"> -->
-      <FormItem :title="vmI18n.t('form_label.consignee')">
+      <FormItem :label="vmI18n.t('form_label.consignee')">
         <Input
           v-model="data.receiver_name"
           placeholder
@@ -101,21 +101,21 @@
         /></Input>
       </FormItem>
       <!-- <FormItem label="收货人手机"> -->
-      <FormItem :title="vmI18n.t('form_label.consignee_phone')">
+      <FormItem :label="vmI18n.t('form_label.consignee_phone')">
         <Input
           v-model="data.receiver_mobile"
           placeholder
         /></Input>
       </FormItem>
       <!-- <FormItem label="收货人电话"> -->
-      <FormItem :title="vmI18n.t('table_label.consignee_tel')">
+      <FormItem :label="vmI18n.t('form_label.consignee_tel')">
         <Input
           v-model="data.receiver_phone"
           placeholder
         /></Input>
       </FormItem>
       <!-- <FormItem label="收货人邮编"> -->
-      <FormItem :title="vmI18n.t('table_label.consignee_postcode')">
+      <FormItem :label="vmI18n.t('form_label.consignee_postcode')">
         <Input
           v-model="data.receiver_zip"
           placeholder
@@ -125,15 +125,15 @@
         <Input v-model="data.ship_amt" placeholder :regx="regx.shipamt"></Input>
       </FormItem>-->
       <!-- <FormItem label="买家备注"> -->
-      <FormItem :title="vmI18n.t('form_label.buyerNotes')">
+      <FormItem :label="vmI18n.t('form_label.buyerNotes')">
         <span>{{ componentData.BUYER_MESSAGE }}</span>
       </FormItem>
       <!-- <FormItem label="卖家备注"> -->
-      <FormItem :title="vmI18n.t('form_label.sellerNotes')">
+      <FormItem :label="vmI18n.t('form_label.sellerNotes')">
         <span>{{ componentData.SELLER_MEMO }}</span>
       </FormItem>
       <!-- <FormItem label="系统备注"> -->
-      <FormItem :title="vmI18n.t('other.systemNotes')">
+      <FormItem :label="vmI18n.t('other.systemNotes')">
         <span>{{ componentData.SYSREMARK }}</span>
       </FormItem>
     </Form>
