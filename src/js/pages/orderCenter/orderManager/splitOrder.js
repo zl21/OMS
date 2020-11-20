@@ -22,12 +22,12 @@ export default {
           {
             text: '添加到待拆单',
             btnclick: this.addPendingOrder,
-            icon: 'ios-add-circle-outline',
+            // icon: 'ios-add-circle-outline',
           },
           {
             text: '确认拆单',
             btnclick: this.confirm,
-            icon: 'ios-photos-outline',
+            // icon: 'ios-photos-outline',
           },
         ],
       },
