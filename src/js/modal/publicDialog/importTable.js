@@ -1,7 +1,11 @@
 // <!-- 导入组件-->
 import axios from 'axios';
+import loading from '@/component/loading.vue';
 
 export default {
+  components: {
+    loading,
+  },
   props: {
     componentData: {
       type: Object,
@@ -332,12 +336,12 @@ export default {
             const err = res.data.message || this.vmI18n.t('modalTips.ze');
             _this.isError = true;
             _this.errorMessage = err;
-            _this.$Message.error(_this.errorMessage);
+            // _this.$Message.error(_this.errorMessage);
           } else if (res.data.data) {
             _this.loading = false;
             _this.isError = true;
             _this.errorMessage = res.data.message;
-            _this.$Message.error(_this.errorMessage);
+            // _this.$Message.error(_this.errorMessage);
             this.downloadUrlFile(res.data.data);
           }
           _this.loading = false;
