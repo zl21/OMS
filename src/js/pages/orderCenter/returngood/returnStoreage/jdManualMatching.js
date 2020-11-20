@@ -3,7 +3,7 @@ import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessActionTable from 'professionalComponents/businessActionTable';
-import jordanModal from 'professionalComponents/businessDialog';
+import businessDialog from 'professionalComponents/businessDialog';
 import OrderItem from '@/views/pages/OrderCenter/orderManageDetail/details/orderItem.vue';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 
@@ -12,7 +12,7 @@ export default {
     businessButton,
     businessForm,
     businessActionTable,
-    jordanModal,
+    businessDialog,
     OrderItem,
     businessLabel
   },

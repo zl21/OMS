@@ -163,7 +163,7 @@ export default {
       // 判断显示高级搜索还是正常搜素
       isShowSeniorOrOrdinary: true,
       // icon 样式
-      iconDownIcon: 'iconfont iconbj_down',
+      iconDownIcon: 'ark-icon iconfont iconios-arrow-down icon-xiadown',
 
       // tabs
       // 设置tabs默认值
@@ -1124,12 +1124,6 @@ export default {
                   type: '1',
                   isCheck: 0,
                 })
-                // self.$network
-                //   .post("/api/cs/oc/oms/v1/auditOrder", {
-                //     ids,
-                //     type: "1",
-                //     isCheck: 0,
-                //   })
                   .then((res) => {
                     if (res.data.code === 0) {
                       // self.$Message.success(res.data.message);
@@ -1528,25 +1522,21 @@ export default {
                   || self.selection[0].ORDER_STATUS
                     === self.orderStatus.orderOutofstock
                 ) {
-                  // self.$store.commit('customize/('TabHref', {
-                  //   id: self.selection[0].ID,
-                  //   type: 'action',
-                  //   name: 'splitOrder',
-                  //   label: '订单拆分',
-                  //   query: {
-                  //     id: self.selection[0].ID,
-                  //     tabTitle: '订单拆分',
-                  //   },
-                  // })
-                  self.$store.commit('customize/TabHref', {
-                    id: self.selection[0].ID,
-                    type: 'action',
-                    name: 'splitOrder',
-                    label: self.vmI18n.t('panel_label.orderSplit'), // 订单拆分
-                    query: {
-                      id: self.selection[0].ID,
-                      tabTitle: self.vmI18n.t('panel_label.orderSplit'), // 订单拆分
-                    },
+                  this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.selection[0].ID }).then(res=>{ // 提前判断下该单据是否可拆单
+                    if (res.data.code == 0) {
+                        self.$store.commit('customize/TabHref', {
+                                            id: self.selection[0].ID,
+                                            type: 'action',
+                                            name: 'splitOrder',
+                                            label: self.vmI18n.t('panel_label.orderSplit'), // 订单拆分
+                                            query: {
+                                              id: self.selection[0].ID,
+                                              tabTitle: self.vmI18n.t('panel_label.orderSplit'), // 订单拆分
+                                            },
+                                          });
+                    } else {
+                      this.$Message.warning(res.data.message);
+                    }
                   });
                 } else {
                   self.$Message.warning({
@@ -2056,10 +2046,10 @@ export default {
             },
           },
           {
-            text: window.vmI18n.t('btn.export'), // 导入
+            text: window.vmI18n.t('btn.import'), // 导入
           },
           {
-            text: window.vmI18n.t('btn.import'), // 导出
+            text: window.vmI18n.t('btn.export'), // 导出
             btnclick: () => {
               this.exportClick();
             }, // 按钮点击事件
@@ -2068,10 +2058,10 @@ export default {
             icon: 'iconfont iconbj_setup', // 按钮图标
             btnclick: () => {
               const self = this;
-              if (self.iconDownIcon === 'iconfont iconbj_down') {
-                self.iconDownIcon = 'iconfont iconbj_up';
+              if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down icon-xiadown') {
+                self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
               } else {
-                self.iconDownIcon = 'iconfont iconbj_down';
+                self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down icon-xiadown';
               }
               self.isShowSeniorOrOrdinary = true;
               self.publicBouncedConfig = {
@@ -3184,16 +3174,16 @@ export default {
     // 设置普通搜索默认选项
     setSearchOption() {
       // TODO 调试了下貌似没用到这个方法 暂注释
-      // setTimeout(() => {
-      //   var slideBox = document.getElementById("IntegrateSearchFilter");
-      //   if (slideBox) {
-      //     setTimeout(() => {
-      //       var pageUl = document.querySelector(".from .burgeon-dropdown-menu")
-      //         .childNodes[0];
-      //       pageUl.click();
-      //     }, 200);
-      //   }
-      // }, 100);
+      setTimeout(() => {
+        const slideBox = document.getElementById('IntegrateSearchFilter');
+        if (slideBox) {
+          setTimeout(() => {
+            const pageUl = document.querySelector('.from .ark-dropdown-menu')
+              .childNodes[0];
+            pageUl.click();
+          }, 200);
+        }
+      }, 100);
     },
     // 判断使用正则
     determineTheRegular(val) {

@@ -48,7 +48,6 @@ export default {
   DynamicList: params => network.post('/api/cs/oc/oms/v1/DynamicList', params),
   querySalesReturn: params => network.post('/api/cs/oc/oms/v1/querySalesReturn', params),
   OcCancelChangingOrRefund: params => network.post('/api/cs/oc/oms/v1/OcCancelChangingOrRefund', params),
-  updateVirtualLibrary: params => network.post('/p/cs/updateVirtualLibrary', params),
   virtualWarehouseStorage: params => network.post('/api/cs/oc/oms/v1/virtualWarehouseStorage', params),
   cancelautorefund: params => network.post('/api/cs/oc/oms/v1/cancelautorefund', params),
   updateReturnBOrder: params => network.post('/p/cs/updateReturnBOrder', params),
@@ -72,6 +71,13 @@ export default {
   updateLogisticsBeforePacking: params => network.post('/api/cs/vip/distribution/Logistics/v1/updateLogisticsBeforePacking', params),
   querySkuListAndStorageInfo: params => network.post('/api/cs/oc/oms/v1/querySkuListAndStorageInfo', params),
   updateLogistics: params => network.post('/api/cs/oc/oms/v1/updateLogistics', params),
+  manualMatchingList: params => network.post('/api/cs/oc/oms/v1/manualMatchingList', params),
+  distributionFindBydistributionId: params => network.post('/api/cs/vip/distributionItem/v1/findBydistributionId', params), // 根据配货单id查询配货单明细
+  distributionChangeTag: params => network.post('/api/cs/vip/distribution/v1/changeTag', params), // 配货单换吊牌的保存 
+  managementOrderHold: params => network.post('/api/cs/oc/oms/v1/holdOrder', params), // 零售发货单-HOLD单
+  returnTypeItemquery: params => network.post('/p/cs/objectTableItem', params), // 退款分类-退款分类描述
+  extraReturnTableLogQuery: params => network.post('/api/cs/oc/oms/v1/getOcBReturnAfSendLog', params), // 额外退款单-额外退款单日志
+
   // 半定制弹框
   //
   updateWarehouse: params => network.post('/api/cs/oc/oms/v1/updateWarehouse', params),

@@ -291,7 +291,6 @@ export default {
       const res = await this.service.common.manualJdMatchingConfirmationButton(param);
       if (res.data.code == 0) {
         _this.$parent.$parent.$parent.returnArr(_this.selectData[0].ID);
-        // _this.$parent.$parent.$parent.getList();
         _this.$parent.$parent.closeConfirm();
       } else {
         _this.$Message.warning(res.data.message);

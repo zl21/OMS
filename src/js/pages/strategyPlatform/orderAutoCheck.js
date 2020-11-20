@@ -1,6 +1,6 @@
 import { timestampToTime } from '@/assets/js/__utils__/usual';
 import logTable from 'professionalComponents/LogTable';
-import businessButton from 'professionalComponents/businessButton.vue';
+import businessButton from 'professionalComponents/businessButton';
 
 export default {
   components: {
@@ -32,23 +32,9 @@ export default {
                 tableId: 24634
               });
             } // 按钮点击事件
-          },
+          }
         ]
       },
-      oc: [
-        {
-          text: '保存',
-          clickEv: () => {
-            this.save();
-          }
-        },
-        {
-          text: '返回',
-          clickEv: () => {
-            
-          }
-        }
-      ],
       isChange: {
         orderType: false,
         beginEndTimeChange: false
@@ -109,15 +95,33 @@ export default {
       ],
       EXCLUDE_SKU_TYPE: 1,
       CREATIONDATE: '',
-      MODIFIEDDATE: ''
+      MODIFIEDDATE: '',
+      CP_C_LOGISTICS_ID_SELECT: [],
+      CP_C_LOGISTICS_ID: ','
     };
   },
   mounted() {
     this.getAutoCheck().then(() => {
       this.QueryList();
     });
+    this.queryLogisticsCompany();
   },
   methods: {
+    queryLogisticsCompany() {
+      const self = this;
+      self.service.strategyPlatform.queryLogisticsCompany().then(res => {
+        if (res.data.code === 0) {
+          const arr = [];
+          res.data.data.forEach(item => {
+            const obj = {};
+            obj.value = String(item.ID);
+            obj.label = item.ENAME;
+            arr.push(obj);
+          });
+          this.CP_C_LOGISTICS_ID_SELECT = arr;
+        }
+      });
+    },
     selected(value) {
       console.log(value);
       this.providesList = value;
@@ -153,10 +157,6 @@ export default {
               this.checkAll = this.orderType.length == 7;
               this.info.beginTime = this.info.BEGIN_TIME ? timestampToTime(this.info.BEGIN_TIME) : '';
               this.info.endTime = this.info.END_TIME ? timestampToTime(this.info.END_TIME) : '';
-              // this.info.CP_C_REGION_PROVINCE_ENAME =
-              // this.effectiveCondition = this.info.EFFECTIVE_CONDITION
-              //   ? this.info.EFFECTIVE_CONDITION.split(",")
-              //   : [];
               const arr = new Set(this.info.EFFECTIVE_CONDITION ? this.info.EFFECTIVE_CONDITION.split(',') : []);
 
               if (this.info.CP_C_REGION_PROVINCE_ENAME) {
@@ -164,15 +164,6 @@ export default {
                   this.providesList.push({ ID: '-1', Label: item });
                 });
               }
-
-              // this.effectiveCondition.map((item, i) => {
-              //   arr.map(ele => {
-              //     if (item.key == parseInt(ele)) {
-              //       item.value = true;
-              //     }
-              //   });
-              // });
-
               this.effectiveCondition.forEach(item => {
                 if (arr.has(item.key.toString())) {
                   item.value = true;
@@ -199,45 +190,38 @@ export default {
           range: this.pageSize
         })
       );
-      this.service.strategyPlatform
-        .QueryList(params)
-        .then(({ data }) => {
-          if (data.code == 0) {
-            this.totalRowCount = data.datas.totalRowCount;
-            const d = data.datas.tabth;
-            d.forEach(item => {
-              item.show = true;
+      this.service.strategyPlatform.QueryList(params).then(({ data }) => {
+        if (data.code == 0) {
+          this.totalRowCount = data.datas.totalRowCount;
+          const d = data.datas.tabth;
+          d.forEach(item => {
+            item.show = true;
+          });
+          this.data1 = data.datas;
+          const tempArr = (this.info.CP_C_REGION_PROVINCE_ENAME || '').split(',');
+          tempArr.forEach(item => {
+            // 翻页选择的时候防止多次输入到收货省份
+            let flag = true;
+            for (let i = 0; i < this.defaultSelected.length; i++) {
+              const selectedItem = this.defaultSelected[i];
+              if (item == selectedItem.Label) {
+                flag = false;
+                break;
+              }
+            }
+            if (flag) {
+              this.defaultSelected.push({ ID: -1, Label: item });
+            }
+          });
+          this.defaultSelected.forEach(item => {
+            this.data1.row.forEach(ele => {
+              if (ele.ENAME.val == item.Label) {
+                item.ID = ele.ID.val;
+              }
             });
-            this.data1 = data.datas;
-            this.info.CP_C_REGION_PROVINCE_ENAME
-              ? this.info.CP_C_REGION_PROVINCE_ENAME.split(',').map(item => {
-                  const o = {
-                    ID: -1,
-                    Label: item
-                  };
-                  // 翻页选择的时候防止多次输入到收货省份
-                  let flag = true;
-                  for (let i = 0; i < this.defaultSelected.length; i++) {
-                    const selectedItem = this.defaultSelected[i];
-                    if (item == selectedItem.Label) {
-                      flag = false;
-                      break;
-                    }
-                  }
-                  if (flag) {
-                    this.defaultSelected.push(o);
-                  }
-                })
-              : '';
-            this.defaultSelected.map(item => {
-              this.data1.row.map(ele => {
-                if (ele.ENAME.val == item.Label) {
-                  item.ID = ele.ID.val;
-                }
-              });
-            });
-          }
-        });
+          });
+        }
+      });
     },
     handleCheckAll() {
       if (this.indeterminate) {
@@ -265,7 +249,7 @@ export default {
         this.result.IS_MANUAL_ORDER = this.IS_MANUAL_ORDER ? 'Y' : 'N';
       } else if (type == 'IS_MERGE_ORDER') {
         this.result.IS_MERGE_ORDER = this.IS_MERGE_ORDER ? 'Y' : 'N';
-      } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME') {
+      } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME' || type === 'CP_C_LOGISTICS_ID' || type === 'ANTI_AUDIT_WAIT_TIME') {
         this.result[type] = this.info[type];
       } else if (type == 'orderType') {
         if (this.orderType.length === 7) {
@@ -319,8 +303,8 @@ export default {
       });
     },
     save() {
-      const p = this.providesList.map(item => item.Label);
-      this.result.CP_C_REGION_PROVINCE_ENAME = p.join(',');
+      const list = this.providesList.map(item => item.Label);
+      this.result.CP_C_REGION_PROVINCE_ENAME = list.join(',');
       this.service.strategyPlatform
         .addAutoCheck({
           fixcolumn: {
@@ -331,7 +315,11 @@ export default {
         .then(({ data }) => {
           if (data.data.code == 0) {
             this.$Message.success(data.data.message);
-            this.oc[1].clickEv();
+            R3.store.commit('global/tabOpen', {
+              type: 'S',
+              tableName: 'ST_C_AUTOCHECK',
+              tableId: 24634
+            });
             this.$destroy();
             return;
           }

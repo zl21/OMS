@@ -8,22 +8,22 @@ export default {
   },
   methods: {
     // 勾选事件
-    onSelect(row, index) {
+    onSelect(row) {
       const self = this;
       self.dilogList = row;
     },
     // 取消事件
-    onSelectCancel(row, index) {
+    onSelectCancel(row) {
       const self = this;
       self.dilogList = row;
     },
     // 全选事件
-    onSelectAll(row, index) {
+    onSelectAll(row) {
       const self = this;
       self.dilogList = row;
     },
     // 全选取消事件
-    onSelectAllCancel(row, index) {
+    onSelectAllCancel(row) {
       const self = this;
       self.dilogList = row;
     }

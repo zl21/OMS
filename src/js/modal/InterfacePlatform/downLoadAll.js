@@ -1,8 +1,5 @@
-import axios from 'axios';
-import httpServer from 'framework/__utils__/request';
 import businessForm from 'professionalComponents/businessForm';
 import jordanBtn from 'professionalComponents/businessButton';
-import R3 from '@syman/burgeon-r3';
 
 const formConfig = file => require(`./config/${file}.js`).default;
 export default {

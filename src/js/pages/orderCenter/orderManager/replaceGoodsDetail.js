@@ -70,15 +70,13 @@ export default {
         data: { isBlur: 'N', psCSku: { ECODE: self.searchValue } }
       }).then(res => {
         console.log(res);
-        if (res.data.code) {
-          if (res.data.code == 0) {
-            if (res.data.data.data.length == 0) {
-              this.$Message.warning('查询数据为空!');
-              return;
-            }
-            res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是';
-            self.data = res.data.data.data;
+        if (res.data.code == 0) {
+          if (res.data.data.data.length == 0) {
+            this.$Message.warning('查询数据为空!');
+            return;
           }
+          res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是';
+          self.data = res.data.data.data;
         } else {
           this.$Message.warning('sku查询失败!');
         }

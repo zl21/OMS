@@ -1,13 +1,12 @@
 import axios from 'axios';
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
-import businessActionTable from 'professionalComponents/businessActionTable';
-// import { setTimeout } from 'timers';
+import businessActionTable from 'professionalComponents/businessActionTable.vue';
 export default {
   components: {
     businessButton,
     businessForm,
-    businessActionTable,
+    businessActionTable
   },
   data() {
     return {
@@ -50,25 +49,29 @@ export default {
               value: 'id',
               width: '8',
               inputenter: () => this.queryBounced()
-            }, {
+            },
+            {
               style: 'input',
               label: '平台单号',
               value: 'tid',
               width: '8',
               inputenter: () => this.queryBounced()
-            }, {
+            },
+            {
               style: 'input',
               label: '收货人',
               value: 'receive_name',
               width: '8',
               inputenter: () => this.queryBounced()
-            }, {
+            },
+            {
               style: 'input',
               label: '买家昵称',
               value: 'buyer_nick',
               width: '8',
               inputenter: () => this.queryBounced()
-            }, {
+            },
+            {
               style: 'input',
               label: '收货人手机',
               value: 'receive_mobile',
@@ -95,10 +98,7 @@ export default {
               key: 'PRODUCTITEMS',
               title: '商品信息',
               render: (h, params) => {
-                if (
-                  params.row.PRODUCTITEMS
-                  && params.row.PRODUCTITEMS.length !== 0
-                ) {
+                if (params.row.PRODUCTITEMS && params.row.PRODUCTITEMS.length !== 0) {
                   return h(
                     'div',
                     {
@@ -107,41 +107,43 @@ export default {
                         'justify-content': 'space-between'
                       }
                     },
-                    params.row.PRODUCTITEMS.map(item => h(
-                      'div',
-                      {
-                        style: {
-                          padding: '4px 6px',
-                          border: '1px solid #d3d3d3',
-                          position: 'relative',
-                          marginRight: '10px'
-                        }
-                      },
-                      [
-                        h('span', {}, `${item.PS_C_PRO_ECODE},${item.PS_C_CLR_ENAME},${item.PS_C_SIZE_ENAME},${item.PS_C_SKU_ECODE}`),
-                        h(
-                          'div',
-                          {
-                            style: {
-                              'min-width': '16px',
-                              height: '16px',
-                              'line-height': '14px',
-                              border: '1px solid #DCDEE2',
-                              borderRadius: '9px',
-                              backgroundColor: '#84C9E2',
-                              'font-size': '6px',
-                              position: 'absolute',
-                              top: '-1px',
-                              right: '-8px',
-                              zIndex: '1',
-                              color: 'white',
-                              'text-align': 'center'
-                            }
-                          },
-                          item.QTY_REFUND
-                        ),
-                      ]
-                    ))
+                    params.row.PRODUCTITEMS.map(item =>
+                      h(
+                        'div',
+                        {
+                          style: {
+                            padding: '4px 6px',
+                            border: '1px solid #d3d3d3',
+                            position: 'relative',
+                            marginRight: '10px'
+                          }
+                        },
+                        [
+                          h('span', {}, `${item.PS_C_PRO_ECODE},${item.PS_C_CLR_ENAME},${item.PS_C_SIZE_ENAME},${item.PS_C_SKU_ECODE}`),
+                          h(
+                            'div',
+                            {
+                              style: {
+                                'min-width': '16px',
+                                height: '16px',
+                                'line-height': '14px',
+                                border: '1px solid #DCDEE2',
+                                borderRadius: '9px',
+                                backgroundColor: '#84C9E2',
+                                'font-size': '6px',
+                                position: 'absolute',
+                                top: '-1px',
+                                right: '-8px',
+                                zIndex: '1',
+                                color: 'white',
+                                'text-align': 'center'
+                              }
+                            },
+                            item.QTY_REFUND
+                          )
+                        ]
+                      )
+                    )
                   );
                 }
               }
@@ -209,7 +211,7 @@ export default {
           height: '300',
           loading: false,
           isShowSelection: true // 是否显示checkedbox
-        },
+        }
       },
       btnConfig: {
         typeAll: 'error', // 按钮统一风格样式
@@ -221,7 +223,10 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
-              if (_this.selectData.length !== 1) return _this.$Message.error('请选择一条数据');
+              if (_this.selectData.length !== 1) {
+                _this.$Message.error('请选择一条数据');
+                return;
+              }
               if (_this.componentData.type == 2) _this.okClick();
               else if (_this.componentData.type == 3) _this.okClick2();
             } // 按钮点击事件
@@ -238,7 +243,7 @@ export default {
         ]
       }, // 确定取消按钮
       selectData: [], // 选中的数据
-      wrongSelectData: [], // 明细选中的数据
+      wrongSelectData: [] // 明细选中的数据
     };
   },
   props: {
@@ -277,18 +282,20 @@ export default {
         url: '/api/cs/oc/oms/v1/searchButtonsInDetail',
         method: 'post',
         data: param
-      }).then((res) => {
-        if (res.data.code == 0 && res.data.data !== null) {
-          for (let i = 0, list = res.data.data.length; i < list; i++) {
-            res.data.data[i].ORIG_ORDER_NO = res.data.data[i].ORIG_ORDER_ID;
-            _this.order.table.data.push(res.data.data[i]);
+      })
+        .then(res => {
+          if (res.data.code == 0 && res.data.data !== null) {
+            for (let i = 0, list = res.data.data.length; i < list; i++) {
+              res.data.data[i].ORIG_ORDER_NO = res.data.data[i].ORIG_ORDER_ID;
+              _this.order.table.data.push(res.data.data[i]);
+            }
           }
-        }
-        _this.order.table.loading = false;
-      }).catch((err) => {
-        _this.$Message.error(err.message);
-        _this.order.table.loading = false;
-      });
+          _this.order.table.loading = false;
+        })
+        .catch(err => {
+          _this.$Message.error(err.message);
+          _this.order.table.loading = false;
+        });
     },
     // 手工匹配确定
     okClick() {
@@ -301,9 +308,9 @@ export default {
       axios({
         url: '/api/cs/oc/oms/v1/manualMatchingConfirmationButton',
         method: 'post',
-        cancelToken: true,
+        // cancelToken: true,
         data: param
-      }).then((res) => {
+      }).then(res => {
         if (res.data.code == 0) {
           _this.$parent.$parent.$parent.returnArr(_this.selectData[0].ID);
           // _this.$parent.$parent.$parent.getList();
@@ -328,9 +335,9 @@ export default {
         axios({
           url: '/api/cs/oc/oms/v1/seachForced',
           method: 'post',
-          cancelToken: true,
+          // cancelToken: true,
           data: param
-        }).then((res) => {
+        }).then(res => {
           if (res.data.code == 0) {
             _this.$parent.$parent.$parent.returnArr1(_this.selectData[0].ID, res.data.data.PS_C_SKU_ECODE_ACTUAL, _this.selectData[0].PRODUCTITEMS[0].ID);
             // _this.$parent.$parent.$parent.getList();
@@ -343,7 +350,8 @@ export default {
     },
     wrongForce() {
       if (this.wrongSelectData.length !== 1) {
-        return this.$Message.error('请选择一条明细！');
+        this.$Message.error('请选择一条明细！');
+        return;
       }
       const param = {
         refundId: this.componentData.ids,
@@ -354,9 +362,9 @@ export default {
       axios({
         url: '/api/cs/oc/oms/v1/seachForced',
         method: 'post',
-        cancelToken: true,
+        // cancelToken: true,
         data: param
-      }).then((res) => {
+      }).then(res => {
         this.$parent.$parent.closeConfirm();
         if (res.data.code == 0) {
           this.$parent.$parent.$parent.returnArr1(res.data.data.returnId, res.data.data.PS_C_SKU_ECODE_ACTUAL, this.wrongSelectData[0].ID);
@@ -365,7 +373,7 @@ export default {
         }
       });
     },
-    querycancel() { },
+    querycancel() {},
     wrongForceSelect(e) {
       this.wrongSelectData = e;
     },
@@ -394,12 +402,12 @@ export default {
     }, // 选中的数据
     onqueryCancel(e) {
       this.selectData = e;
-    },	// 取消选中
-    threeObjs() { },
+    }, // 取消选中
+    threeObjs() {}
   },
   created() {
     const _this = this;
-    window.addEventListener('keydown', (e) => {
+    window.addEventListener('keydown', e => {
       const key = e.keyCode;
       if (key == 13) {
         if (_this.order.table.data.length && _this.componentData.type == 2) {

@@ -2,7 +2,7 @@ import businessButton from 'professionalComponents/businessButton.vue';
 import businessForm from 'professionalComponents/businessForm.vue';
 import businessLabel from 'professionalComponents/businessLabel.vue';
 import businessActionTable from 'professionalComponents/businessActionTable.vue';
-import jordanModal from 'professionalComponents/businessDialog.vue';
+import businessDialog from 'professionalComponents/businessDialog.vue';
 import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite.js';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
@@ -14,7 +14,7 @@ export default {
     businessForm,
     businessActionTable,
     businessLabel,
-    jordanModal,
+    businessDialog,
     aTable,
     loading
   },
@@ -1169,30 +1169,30 @@ export default {
     },
     // 扫描入库按钮
     scanIncoming() {
-      const _this = this;
       const tempArr = this.$refs.agGridChild.AGTABLE.getSelect();
-      if (tempArr.length !== 1) {
+      const recordID = tempArr[0].ID;
+      if (tempArr.length > 0) {
+        this.service.orderCenter.getScanIncomingInfo({ ID: recordID }).then(res => {
+          if (res.data.code === 0) {
+            this.$store.commit('customize/TabOpen', {
+              id: -1, // 单据id
+              type: 'action', // 类型action
+              name: 'scanIn', // 文件名
+              label: this.vmI18n.t('panel_label.scannAndWarehous'), // 扫描入库 tab中文名
+              query: Object.assign({
+                id: -1,
+                returnId: recordID, // 单据id
+                isOrderHrefReturn: 'order',
+                tabTitle: this.vmI18n.t('panel_label.scannAndWarehous') // 扫描入库 tab中文名
+              }) // 带的参数
+            });
+          } else {
+            this.$Message.warning(this.vmI18n.t('modalTips.k4')); // 此退换单状态不允许扫描入库,请重新选择!
+          }
+        });
+      } else {
         this.$Message.error(this.vmI18n.t('modalTips.k3')); // 请选中一项修改!
-        return;
       }
-      this.service.orderCenter.getScanIncomingInfo({ ID: tempArr[0].ID }).then(res => {
-        if (res.data.code === 0) {
-          this.$store.commit('customize/TabOpen', {
-            id: -1, // 单据id
-            type: 'action', // 类型action
-            name: 'scanIn', // 文件名
-            label: this.vmI18n.t('panel_label.scannAndWarehous'), // 扫描入库 tab中文名
-            query: Object.assign({
-              id: -1,
-              returnId: _this.tempArr[0].ID, // 单据id
-              isOrderHrefReturn: 'order',
-              tabTitle: this.vmI18n.t('panel_label.scannAndWarehous') // 扫描入库 tab中文名
-            }) // 带的参数
-          });
-        } else {
-          this.$Message.warning(this.vmI18n.t('modalTips.k4')); // 此退换单状态不允许扫描入库,请重新选择!
-        }
-      });
     },
     // 售后审核接口
     afterAudit() {
@@ -1313,7 +1313,7 @@ export default {
         this.$Message.error(this.vmI18n.t('modalTips.k3')); // 请选中一项修改!
         return;
       }
-      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME !== '等待退货入库') {
+      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS !== 20) {
         this.$Message.error(this.vmI18n.t('modalTips.l6')); // 此退换单状态不允许虚拟入库!
         return;
       }
@@ -1325,7 +1325,7 @@ export default {
         okText: this.vmI18n.t('common.determine'), // 确定
         cancelText: this.vmI18n.t('common.cancel'), // 取消
         onOk: () => {
-          this.service.orderCenter.updateVirtualLibrary({ ID: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID }).then(res => {
+          this.service.common.updateVirtualLibrary({ ID: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID }).then(res => {
             if (res.data.code == 0) {
               this.$Message.success(res.data.message);
               setTimeout(() => {
@@ -1510,13 +1510,13 @@ export default {
         this.$Message.error(this.vmI18n.t('modalTips.l0')); // 请至少选中一项!
         return;
       }
-      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME != '等待退货入库' && this.$refs.agGridChild.AGTABLE.getSelect().length == 1) {
+      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS != 20 && this.$refs.agGridChild.AGTABLE.getSelect().length == 1) {
         this.$Message.error(this.vmI18n.t('modalTips.m5')); // 只有等待退货入库状态可以从WMS撤回!
         return;
       }
       const ids = [];
       for (let i = 0; i < this.$refs.agGridChild.AGTABLE.getSelect().length; i++) {
-        if (this.$refs.agGridChild.AGTABLE.getSelect()[i].RETURN_STATUS_NAME == '等待退货入库') {
+        if (this.$refs.agGridChild.AGTABLE.getSelect()[i].RETURN_STATUS == 20) {
           ids.push(this.$refs.agGridChild.AGTABLE.getSelect()[i].ID);
         }
       }

@@ -31,7 +31,7 @@
       </div>
     </div>
     <!-- 导入 -->
-    <jordanModal
+    <businessDialog
       :title="importTable.confirmTitle"
       :title-align="importTable.titleAlign"
       :width="importTable.width"

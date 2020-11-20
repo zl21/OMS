@@ -27,7 +27,7 @@
         type="primary"
         @click="download"
       >
-        {{ vmI18n.t('btn.determine') }}
+        {{ vmI18n.t('common.determine') }}
       </Button>
       <!-- 取消 -->
       <Button
@@ -40,7 +40,7 @@
           }
         "
       >
-        {{ vmI18n.t('btn.cacel') }}
+        {{ vmI18n.t('common.cancel') }}
       </Button>
     </div>
   </div>

@@ -3,7 +3,7 @@
   <div class="scanIn">
     <!-- 按钮 -->
     <div class="scan_button">
-      <jordan-button :btn-config="btnConfig" />
+      <business-button :btn-config="btnConfig" />
     </div>
     <!-- 高级搜索 -->
     <!--<div class="scan_search">-->
@@ -12,26 +12,26 @@
     <!-- 扫描信息 -->
     <div class="scan_info">
       <div class="titles"><Icon size="18" style="margin-right: 5px" type="md-paper" />扫描信息</div>
-      <jordan-form :form-config="formConfig1" />
+      <business-form :form-config="formConfig1" />
     </div>
     <!-- 录入信息 -->
     <div class="scan_logg">
       <div class="titles"><Icon size="18" style="margin-right: 5px" type="md-paper" />录入信息</div>
-      <jordan-form :form-config="formConfig2" />
+      <business-form :form-config="formConfig2" />
     </div>
     <!-- 特殊处理 -->
     <div class="scan_special">
-      <jordan-form :form-config="formConfig3" />
+      <business-form :form-config="formConfig3" />
     </div>
     <!-- 扫描明细 -->
     <div class="scan_details">
       <div class="titles"><Icon size="18" style="margin-right: 5px" type="md-paper" />扫描明细</div>
-      <jordan-action-table :jordan-table-config="jordanTableConfig" @on-row-click="onRowClick" />
+      <business-action-table :jordan-table-config="jordanTableConfig" @on-row-click="onRowClick" />
     </div>
     <!-- 退换货信息 -->
     <div class="scan_returngood">
       <div class="titles"><Icon size="18" style="margin-right: 5px" type="md-paper" />退换货信息</div>
-      <jordan-form :form-config="formConfig4" />
+      <business-form :form-config="formConfig4" />
     </div>
     <!-- 弹框 -->
     <div class="dilog">

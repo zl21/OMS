@@ -1,9 +1,7 @@
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
-// import businessLabel from 'professionalComponents/businessLabel';
 import publicMethods from '@/assets/js/public/publicMethods';
-// import port from "@/assets/js/connector.js";
 
 import areaList from '@/assets/js/address/area-list';
 import { parseArea } from '@/assets/js/address/address-parse';
@@ -14,7 +12,6 @@ export default {
     businessButton,
     businessForm,
     businessActionTable
-    // businessLabel
   },
   data() {
     return {

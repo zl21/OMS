@@ -323,7 +323,8 @@ export default {
             if (_this.configTableName.includes(_this.componentData.tableName)) {
               _this.$parent.$emit('closeActionDialog');
             } else {
-              _this.$parent.$parent.closeConfirm();
+              // _this.$parent.$parent.closeConfirm();
+              _this.$parent.$emit('closeActionDialog');
             }
             _this.customizeInvoke(_this.componentData.tableName);
           } else if (res.data.code === -1) {

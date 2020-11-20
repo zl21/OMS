@@ -4,7 +4,6 @@
   "description": "",
   "scripts": {
     "start": "webpack-dev-server --progress --env.develop",
-    "lint": "eslint --fix --ext .js,.vue src",
     "build": "webpack --color --progress --env.production"
   },
   "husky": {
@@ -63,12 +62,12 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "@burgeon/business-components": "^1.0.12",
+    "@burgeon/business-components": "^1.0.15",
     "@burgeon/internationalization": "^1.0.2",
     "@burgeon/oms-theme": "^1.0.0",
     "@syman/ark-ui": "^1.1.3",
     "@syman/burgeon-r3": "^1.3.8",
-    "@syman/burgeon-r3-components": "^1.0.10",
+    "@syman/burgeon-r3-components": "^1.0.12",
     "axios": "^0.18.0",
     "burgeon-ui": "^1.0.56",
     "element-ui": "^2.14.0",

@@ -1,8 +1,8 @@
 
-import jordanButton from 'professionalComponents/businessButton';
-import jordanForm from 'professionalComponents/businessForm';
-import jordanLabel from 'professionalComponents/businessLabel';
-import jordanActionTable from 'professionalComponents/businessActionTable.vue';
+import businessButton from 'professionalComponents/businessButton';
+import businessForm from 'professionalComponents/businessForm';
+import businessLabel from 'professionalComponents/businessLabel';
+import businessActionTable from 'professionalComponents/businessActionTable.vue';
 // import { debug, debuglog } from "util";
 import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite.js';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
@@ -11,10 +11,10 @@ import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions.js'
 // import dateUtil from  "../../js/utils/date.js";
 export default {
   components: {
-    jordanButton,
-    jordanForm,
-    jordanActionTable,
-    jordanLabel
+    businessButton,
+    businessForm,
+    businessActionTable,
+    businessLabel
   },
   mixins: [isFavoriteMixin, customPagingMixins, buttonPermissionsMixin],
   data() {
