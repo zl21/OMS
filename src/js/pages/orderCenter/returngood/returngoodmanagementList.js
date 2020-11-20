@@ -7,7 +7,7 @@ import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite.js';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import aTable from 'professionalComponents/agGridTable.vue';
-
+import loading from '@/component/loading.vue';
 export default {
   components: {
     businessButton,
@@ -15,7 +15,8 @@ export default {
     businessActionTable,
     businessLabel,
     jordanModal,
-    aTable
+    aTable,
+    loading
   },
   // mixins: [isFavoriteMixin],
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
