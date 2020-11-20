@@ -2,7 +2,7 @@ import businessButton from 'professionalComponents/businessButton.vue';
 import businessForm from 'professionalComponents/businessForm.vue';
 import businessLabel from 'professionalComponents/businessLabel.vue';
 import businessActionTable from 'professionalComponents/businessActionTable.vue';
-import jordanModal from 'professionalComponents/businessDialog.vue';
+import businessDialog from 'professionalComponents/businessDialog.vue';
 import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite.js';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
@@ -14,7 +14,7 @@ export default {
     businessForm,
     businessActionTable,
     businessLabel,
-    jordanModal,
+    businessDialog,
     aTable
   },
   // mixins: [isFavoriteMixin],
