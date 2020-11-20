@@ -839,7 +839,7 @@ export default {
         // 是否无原单条码
         item.IS_WITHOUT_ORIG = item.IS_WITHOUT_ORIG == '是' ? 1 : 0;
         // 是否匹配
-        item.IS_MATC = item.IS_MATCH == '是' ? 1 : 0;
+        item.IS_MATCH = item.IS_MATCH == '是' ? 1 : 0;
         // 是否生成调整单
         item.IS_GEN_ADJUST = item.IS_GEN_ADJUST == '是' ? 1 : 0;
         item.IS_GEN_IN_ORDER = item.IS_GEN_IN_ORDER == '是' ? 1 : 0;
