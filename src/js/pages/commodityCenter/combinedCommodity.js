@@ -1193,7 +1193,7 @@ export default {
     ok() {
       this.isOk = true;
       if (this.isOk) {
-        if (this.objid === '-1') {
+        if (this.objid === -1) {
           // 新增页面
           this.selecttype(this.formConfig1.formValue.GROUP_TYPE); // 点击确认执行
           if (this.jordanTableConfig1.data.length > 0) {
