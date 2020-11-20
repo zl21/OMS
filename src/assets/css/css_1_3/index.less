@@ -962,20 +962,24 @@ body {
       min-width: 50px;
       padding: 0 7px;
       position: relative;
-      &>i.iconfont{
+
+      &>i.iconfont {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        & + span{
+
+        &+span {
           display: none;
         }
       }
+
       span {
         display: block;
         height: 26px;
         line-height: 26px;
       }
+
       .ark-icon,
       .iconfont {
         font-size: 14px;
@@ -987,6 +991,7 @@ body {
 // 框架按钮(查找、重置、导出等)的空白节点
 .R3-button-group {
   font-size: 0;
+
   button {
     height: 28px;
   }
@@ -996,6 +1001,7 @@ body {
 .ark-collapse-content>.ark-collapse-content-box {
   padding-top: 0px !important;
 }
+
 .auto-check,
 .returnAddColl,
 .compositeAllform,
@@ -1034,7 +1040,7 @@ body {
         line-height: 36px !important;
         font-size: 14px;
         color: #1f2d3d;
-        border-bottom:none;
+        border-bottom: none !important;
 
         &>.iconios-arrow-forward:before,
         &>.iconmd-arrow-dropdown:before {
@@ -1056,23 +1062,22 @@ body {
     }
   }
 }
-.el-input__inner{
+
+.ark-form-item .el-input__inner {
   font-size: 12px;
 }
-.popSelect{
-  .ark-select{
+
+.popSelect {
+  .ark-select {
+
     // border: 1px solid #dcdee2;
-    .ark-select-selection{
+    .ark-select-selection {
       // border:none;
       height: 26px;
       line-height: 26px;
     }
   }
 }
-
-// .orderManageEdit.unFlodStyle {
-//   padding-right: 0;
-// }
 
 //agtable 修改
 .agTable {
@@ -1082,33 +1087,35 @@ body {
     .ag-cell {
       line-height: 36px;
     }
-    .ag-header-cell-label .ag-header-cell-text{
+
+    .ag-header-cell-label .ag-header-cell-text {
       line-height: 36px;
     }
-    .ag-header-select-all,.ag-selection-checkbox span{
+
+    .ag-header-select-all,
+    .ag-selection-checkbox span {
       margin-right: 12px;
     }
   }
 }
+
 // loading修改
-body .ark-spin-fix{
+body .ark-spin-fix {
   // position: fixed;
   // z-index: 1002 !important;
 }
-.orderManageEdit{
-  padding: 5px 0;
-}
 
-// 特别的
-.refundAfterShipment {
-  .orderManageEdit{
-    padding: 0;
+// 定制界面 搜边距
+.returnForm {
+  .orderManageEdit {
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 }
 
 // 物流区域设置-详情，发货单派单规则-新增/详情，仓库物流优先级方案-新增/详情
-.logisticsArea, 
-.sendSingleRule, 
+.logisticsArea,
+.sendSingleRule,
 .setWarehouseLogistics {
   position: relative;
 
@@ -1134,19 +1141,23 @@ body .ark-spin-fix{
       border-radius: 2px;
 
     }
+
     .retrieve {
       height: 26px;
       width: 60%;
       display: inline-block;
+
       .ark-input {
         border-radius: 0 2px 2px 0;
       }
     }
+
     .ark-icon {
       color: #808695;
     }
   }
 }
+
 // 日历修改颜色
 .ark-picker-panel-body {
   em {
@@ -1167,13 +1178,15 @@ body .ark-spin-fix{
     background-color: #0068b7;
     border-color: #0068b7;
   }
-  .ark-date-picker-cells-cell-today em:after{
+
+  .ark-date-picker-cells-cell-today em:after {
     background: #0068b7;
   }
 }
+
 // tree 
-.ark-tree{
-  .ark-tree-arrow-open i:after{
+.ark-tree {
+  .ark-tree-arrow-open i:after {
     left: 6px;
   }
 }
