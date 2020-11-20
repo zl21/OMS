@@ -1,161 +1,111 @@
-@borderStyle: 1px solid #dcdee2;
-.refundAfterShipment {
-  .burgeon-collapse {
-    background: rgba(238, 241, 246, 1) !important;
-  }
+// @borderStyle: 1px solid #dcdee2;
+// .refundAfterShipment {
 
-  .re_form /deep/ .burgeon-collapse-header {
-    text-align: left;
-    font-size: 18px !important;
-  }
+//   .cbx {
+//     display: flex;
+//     padding-left: 38px;
+//     margin-bottom: 8px;
+//   }
 
-  .re_form /deep/ .burgeon-icon-ios-arrow-forward {
-    display: none !important;
-  }
+//   .queryorderB {
 
-  .re_form {
-    /deep/ .burgeon-collapse-content-box {
-      padding: 16px 0 !important;
+//     .queryorder .orderContent .buttonBox {
+//       height: 30px;
+//       margin-top: 40px;
+//     }
 
-      div,
-      input {
-        box-sizing: border-box !important;
-      }
-    }
-  }
+//     .queryorder .jordan-table-box .page-box {
+//       margin-top: 0 !important;
+//       padding-top: 0 !important;
+//     }
+//   }
 
-  .cbx {
-    display: flex;
-    padding-left: 38px;
-    margin-bottom: 8px;
-  }
+//   .basic-message {
+//     display: flex;
+//     width: 100%;
 
-  .queryorderB {
-    .queryorder .burgeon-modal {
-      width: 800px !important;
-    }
+//     .basic-message-form {
+//       flex: 1;
 
-    .queryorder .burgeon-modal-body {
-      overflow: hidden;
-    }
+//       /deep/ .formlayout-Item {
+//         .burgeon-date-picker {
+//           width: 100%;
+//         }
 
-    .queryorder
-      .burgeon-modal-content
-      .burgeon-modal-body
-      .burgeon-form-item-content {
-      margin-right: 0 !important;
-    }
+//         .returnType {
+//           display: flex;
+//           width: 100%;
+//           max-width: 100%;
+//           height: 32px;
+//           overflow: hidden;
 
-    .queryorder .burgeon-form-item {
-      margin-bottom: 0 !important;
-    }
+//           .orderManageEdit {
+//             width: 100%;
+//             padding-right: 0;
 
-    .queryorder .burgeon-modal-body .orderContent {
-      display: flex;
-      justify-content: space-between;
-    }
+//             .burgeon-form {
+//               padding-bottom: 0;
 
-    .queryorder .orderContent .buttonBox {
-      height: 30px;
-      margin-top: 40px;
-    }
+//               .title {
+//                 width: 120px;
+//                 padding-right: 14px !important;
+//               }
+//             }
+//           }
 
-    .queryorder .jordan-table-box .page-box {
-      margin-top: 0 !important;
-      padding-top: 0 !important;
-    }
+//           .popSelect {
+//             /deep/ .burgeon-form-item-label {
+//               width: 120px !important;
+//               padding-right: 14px !important;
+//             }
 
-    .queryorder .jordan-table-box .burgeon-table-wrapper {
-      margin-top: 0 !important;
-    }
-  }
+//             /deep/ .burgeon-form-item-content {
+//               margin-left: 120px !important;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
 
-  .basic-message {
-    display: flex;
-    width: 100%;
+//   .page-footer {
+//     display: flex;
+//     width: 100%;
+//     padding: 10px;
+//     margin-top: 15px;
+//     border: @borderStyle;
+//     box-sizing: border-box;
+//     flex-direction: column;
 
-    .basic-message-form {
-      flex: 1;
+//     .page-footer-navTab {
+//       position: relative;
+//       display: flex;
+//       width: 100%;
+//       padding: 0 15px;
+//       border-bottom: @borderStyle;
+//       box-sizing: border-box;
 
-      /deep/ .formlayout-Item {
-        .burgeon-date-picker {
-          width: 100%;
-        }
+//       > p {
+//         position: relative;
+//         display: inline-flex;
+//         top: 1px;
+//         padding: 8px 15px;
+//         border: @borderStyle;
+//         border-right: 0;
 
-        .returnType {
-          display: flex;
-          width: 100%;
-          max-width: 100%;
-          height: 32px;
-          overflow: hidden;
+//         &.action {
+//           color: #fd6442;
+//           border-bottom-color: #ffffff;
+//         }
 
-          .orderManageEdit {
-            width: 100%;
-            padding-right: 0;
+//         &:last-of-type {
+//           border-right: @borderStyle;
+//         }
+//       }
+//     }
 
-            .burgeon-form {
-              padding-bottom: 0;
-
-              .title {
-                width: 120px;
-                padding-right: 14px !important;
-              }
-            }
-          }
-
-          .popSelect {
-            /deep/ .burgeon-form-item-label {
-              width: 120px !important;
-              padding-right: 14px !important;
-            }
-
-            /deep/ .burgeon-form-item-content {
-              margin-left: 120px !important;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .page-footer {
-    display: flex;
-    width: 100%;
-    padding: 10px;
-    margin-top: 15px;
-    border: @borderStyle;
-    box-sizing: border-box;
-    flex-direction: column;
-
-    .page-footer-navTab {
-      position: relative;
-      display: flex;
-      width: 100%;
-      padding: 0 15px;
-      border-bottom: @borderStyle;
-      box-sizing: border-box;
-
-      > p {
-        position: relative;
-        display: inline-flex;
-        top: 1px;
-        padding: 8px 15px;
-        border: @borderStyle;
-        border-right: 0;
-
-        &.action {
-          color: #fd6442;
-          border-bottom-color: #ffffff;
-        }
-
-        &:last-of-type {
-          border-right: @borderStyle;
-        }
-      }
-    }
-
-    > div {
-      width: 100%;
-    }
-  }
-}
+//     > div {
+//       width: 100%;
+//     }
+//   }
+// }
