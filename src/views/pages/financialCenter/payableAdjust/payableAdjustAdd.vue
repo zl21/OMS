@@ -98,12 +98,8 @@
         />
       </div>
     </div>
-    <div
-      v-show="isSaveLoading"
-      class="fromLoading"
-    >
-      <Spin />
-    </div>
+    <!-- loading -->
+    <loading :loading="isSaveLoading"></loading>
   </div>
 </template>
 

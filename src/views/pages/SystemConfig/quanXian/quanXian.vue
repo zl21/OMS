@@ -1,10 +1,7 @@
 <template>
   <div class="jurisdiction">
-    <Spin
-      v-if="spinShow"
-      size="large"
-      fix
-    />
+    <loading :loading="spinShow"></loading>
+
     <customButton :button-config="buttonConfig" />
     <div class="content">
       <div class="FilterTree_box left_col">

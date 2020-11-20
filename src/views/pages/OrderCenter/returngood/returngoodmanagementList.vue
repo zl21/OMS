@@ -37,7 +37,7 @@
       </div>
     </div>
     <!-- 修改备注-->
-    <jordanModal
+    <businessDialog
       :title="changeRemarkConfig.confirmTitle"
       :title-align="changeRemarkConfig.titleAlign"
       :width="changeRemarkConfig.width"
@@ -54,7 +54,7 @@
       :component-data="changeRemarkConfig.componentData"
     />
     <!-- 修改退回仓库-->
-    <jordanModal
+    <businessDialog
       :title="modifyWarehouse.confirmTitle"
       :title-align="modifyWarehouse.titleAlign"
       :width="modifyWarehouse.width"
@@ -71,7 +71,7 @@
       :component-data="modifyWarehouse.componentData"
     />
     <!-- 修改物流公司-->
-    <jordanModal
+    <businessDialog
       :title="modifyReturnOrderLogistics.confirmTitle"
       :title-align="modifyReturnOrderLogistics.titleAlign"
       :width="modifyReturnOrderLogistics.width"
@@ -88,7 +88,7 @@
       :component-data="modifyReturnOrderLogistics.componentData"
     />
     <!-- 修改from表单 -->
-    <jordanModal
+    <businessDialog
       :title="setFromInput.confirmTitle"
       :title-align="setFromInput.titleAlign"
       :width="setFromInput.width"
@@ -105,7 +105,7 @@
       :component-data="setFromInput.componentData"
     />
     <!-- 导入 -->
-    <jordanModal
+    <businessDialog
       :title="importTable.confirmTitle"
       :title-align="importTable.titleAlign"
       :width="importTable.width"
