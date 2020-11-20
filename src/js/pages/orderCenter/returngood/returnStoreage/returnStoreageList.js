@@ -4,8 +4,6 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import businessDialog from 'professionalComponents/businessDialog';
 import strUtil from '@/assets/js/__utils__/util';
 import DateUtil from '@/assets/js/__utils__/date';
-// import publicMethods from "@/assets/js/public/publicMethods";
-import jordanModal from 'professionalComponents/businessDialog';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
 
@@ -28,14 +26,13 @@ export default {
     businessForm,
     businessActionTable,
     businessDialog,
-    jordanModal,
     aTable
   },
   mixins: [buttonPermissionsMixin, isFavoriteMixin],
   props: {},
   watch: {
     selection: {
-      handler(list, oldlist) {
+      handler() {
         this.btnConfig.buttons[2].disabled = !(this.selection && this.selection.length <= 1);
       }
     }
@@ -119,48 +116,43 @@ export default {
               const ids = this.selection.map(item => item.ID);
               if (ids.length === 0) {
                 // return this.$Message.error("请选择一条明细手工匹配");
-                return this.$Message.error(window.vmI18n.t('modalTips.p4'));
+                this.$Message.error(window.vmI18n.t('modalTips.p4'));
+                return;
               }
               if (ids.length > 1) {
                 // return this.$Message.error("只能选择一条明细手工匹配");
-                return this.$Message.error(window.vmI18n.t('modalTips.p5'));
+                this.$Message.error(window.vmI18n.t('modalTips.p5'));
+                return;
               }
               if (this.selection[0].IS_OFF_MATCH == 1) {
                 // return this.$Message.error("此退货入库单已经关闭匹配，不允许选择");
-                return this.$Message.error(window.vmI18n.t('modalTips.q6'));
+                this.$Message.error(window.vmI18n.t('modalTips.q6'));
+                return;
               }
               const id = ids[0];
               // 需要验证是否能够进入手工匹配界面
-              this.service.orderCenter
-                .manualMatchingCheck({ id })
-                // this.$network
-                //   .axios({
-                //     url: '/api/cs/oc/oms/v1/manualMatchingCheck',
-                //     method: 'post',
-                //     data: { id },
-                //   })
-                .then(res => {
-                  if (res.data.code === 0) {
-                    self.$store.commit('customize/TabHref', {
+              this.service.orderCenter.manualMatchingCheck({ id }).then(res => {
+                if (res.data.code === 0) {
+                  self.$store.commit('customize/TabHref', {
+                    id, // id
+                    type: 'action', // 类型action
+                    name: 'manualMatching', // 文件名
+                    // label: "退货入库-手工匹配", //tab中文名
+                    label: window.vmI18n.t('panel_label.return_warehousing_manual_matching'),
+                    query: Object.assign({
                       id, // id
-                      type: 'action', // 类型action
-                      name: 'manualMatching', // 文件名
-                      // label: "退货入库-手工匹配", //tab中文名
-                      label: window.vmI18n.t('panel_label.return_warehousing_manual_matching'),
-                      query: Object.assign({
-                        id, // id
-                        // tabTitle: "退货入库-手工匹配", //tab中文名
-                        tabTitle: window.vmI18n.t('panel_label.return_warehousing_manual_matching'),
-                        source: 2,
-                        form: 'list'
-                      }) // 带的参数
-                    });
-                  } else {
-                    // let mes = res.data.message || "状态不匹配不能进入手动匹配";
-                    const mes = res.data.message || window.vmI18n.t('modalTips.p6');
-                    self.$Message.error(mes);
-                  }
-                });
+                      // tabTitle: "退货入库-手工匹配", //tab中文名
+                      tabTitle: window.vmI18n.t('panel_label.return_warehousing_manual_matching'),
+                      source: 2,
+                      form: 'list'
+                    }) // 带的参数
+                  });
+                } else {
+                  // let mes = res.data.message || "状态不匹配不能进入手动匹配";
+                  const mes = res.data.message || window.vmI18n.t('modalTips.p6');
+                  self.$Message.error(mes);
+                }
+              });
             }
           },
           {
@@ -173,49 +165,43 @@ export default {
               const ids = this.selection.map(item => item.ID);
               if (ids.length === 0) {
                 // return this.$Message.error("请选择一条明细错发强制匹配");
-                return this.$Message.error(window.vmI18n.t('modalTips.p7'));
+
+                this.$Message.error(window.vmI18n.t('modalTips.p7'));
+                return;
               }
               if (ids.length > 1) {
                 // return this.$Message.error("只能选择一条明细错发强制匹配");
-                return this.$Message.error(window.vmI18n.t('modalTips.p8'));
+                this.$Message.error(window.vmI18n.t('modalTips.p8'));
+                return;
               }
               if (this.selection[0].IS_OFF_MATCH == 1) {
                 // return this.$Message.error("此退货入库单已经关闭匹配，不允许选择");
-                return this.$Message.error(window.vmI18n.t('modalTips.q6'));
+                this.$Message.error(window.vmI18n.t('modalTips.q6'));
+                return;
               }
               const id = ids[0];
               // 需要验证是否能够进入错发强制匹配界面
-              this.service.orderCenter
-                .manualMatchingCheck({ id })
-                // this.$network
-                //   .axios({
-                //     url: '/api/cs/oc/oms/v1/manualMatchingCheck',
-                //     method: 'post',
-                //     data: { id },
-                //   })
-                .then(res => {
-                  if (res.data.code === 0) {
-                    self.$store.commit('customize/TabHref', {
-                      id, // id
-                      type: 'action', // 类型action
-                      name: 'manualMatching', // 文件名
-                      // label: "退货入库-错发强制匹配", //tab中文名
-                      label: window.vmI18n.t('panel_label.return_warehousing_wrong_delivery_forced_matching'),
-                      query: Object.assign({
-                        id, //
-                        // tabTitle: "退货入库-错发强制匹配", //tab中文名
-                        tabTitle: window.vmI18n.t('panel_label.return_warehousing_wrong_delivery_forced_matching'),
-                        source: 3,
-                        form: 'list'
-                      }) // 带的参数
-                    });
-                  } else {
-                    const mes =
-                      // res.data.message || "状态不匹配不能进入错发强制匹配";
-                      res.data.message || window.vmI18n.t('modalTips.p9');
-                    self.$Message.error(mes);
-                  }
-                });
+              this.service.orderCenter.manualMatchingCheck({ id }).then(res => {
+                if (res.data.code === 0) {
+                  self.$store.commit('customize/TabHref', {
+                    id, // id
+                    type: 'action', // 类型action
+                    name: 'manualMatching', // 文件名
+                    // label: "退货入库-错发强制匹配", //tab中文名
+                    label: window.vmI18n.t('panel_label.return_warehousing_wrong_delivery_forced_matching'),
+                    query: Object.assign({
+                      id, //
+                      // tabTitle: "退货入库-错发强制匹配", //tab中文名
+                      tabTitle: window.vmI18n.t('panel_label.return_warehousing_wrong_delivery_forced_matching'),
+                      source: 3,
+                      form: 'list'
+                    }) // 带的参数
+                  });
+                } else {
+                  const mes = res.data.message || window.vmI18n.t('modalTips.p9');
+                  self.$Message.error(mes);
+                }
+              });
             }
           },
           {
@@ -228,27 +214,18 @@ export default {
               const ids = this.selection.map(item => item.ID);
               if (ids.length === 0) {
                 // return this.$Message.error("未选择退货入库单,请选择一条数据后再操作！");
-                return this.$Message.error(window.vmI18n.t('modalTips.o0'));
+                this.$Message.error(window.vmI18n.t('modalTips.o0'));
+                return;
               }
-              this.service.orderCenter
-                .returnCancel({ ids })
-                // this.$network
-                //   .axios({
-                //     url: '/api/cs/oc/oms/v1/returnCancel',
-                //     method: 'post',
-                //     data: { ids },
-                //   })
-                .then(res => {
-                  if (res.data.code === 0) {
-                    // let mes = res.data.message || "作废操作成功";
-                    const mes = res.data.message || window.vmI18n.t('modalTips.q9');
-                    this.$Message.success(mes);
-                  } else {
-                    // let mes = res.data.message || "作废操作失败";
-                    const mes = res.data.message || window.vmI18n.t('modalTips.p0');
-                    this.$Message.error(mes);
-                  }
-                });
+              this.service.orderCenter.returnCancel({ ids }).then(res => {
+                if (res.data.code === 0) {
+                  const mes = res.data.message || window.vmI18n.t('modalTips.q9');
+                  this.$Message.success(mes);
+                } else {
+                  const mes = res.data.message || window.vmI18n.t('modalTips.p0');
+                  this.$Message.error(mes);
+                }
+              });
             }
           },
           {
@@ -349,159 +326,151 @@ export default {
         multiple: [],
         startindex: 0
       };
-      this.service.orderCenter
-        .DynamicList(params)
-        // this.$network
-        //   .axios({
-        //     url: '/api/cs/oc/oms/v1/DynamicList',
-        //     method: 'post',
-        //     data: params,
-        //   })
-        .then(res => {
-          // 高级查询
-          const formData = [];
-          res.data.data.search.date.map((item, index) => {
-            switch (item.type) {
-              case 'date':
-                formData[index] = {
-                  style: item.tabth.isfilter ? 'date' : '', // 输入框类型
-                  type: 'datetimerange', // 文本框类型的input
-                  label: item.tabth.name, // 输入框前文字
-                  value: item.tabth.colname, // 输入框的值
-                  format: 'yyyy-MM-dd HH:mm:ss',
-                  width: '12', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-                  icon: 'md-alarm', // 输入框后带的图标,暂只有输入框支持
-                  placeholder: '', // 占位文本，默认为请输入
-                  transfer: true,
-                  ghost: false, // 是否关闭幽灵按钮，默认开启
-                  inputenter: () => {
-                    _this.request();
-                  }, // 表单回车事件
-                  iconclick: () => {}, // 点击icon图标事件
-                  clearable: true
-                };
-                item.tabth.name === '创建时间' ? (_this.formConfig.formValue[item.tabth.colname] = [addSevenDay, getCurrentTime]) : (_this.formConfig.formValue[item.tabth.colname] = []);
-                break;
-              case 'propInput':
-                formData[index] = {
-                  style: item.tabth.isfilter ? 'popInput' : '', // 输入框弹框单多选
-                  width: '6',
-                  itemdata: {
-                    col: 1,
-                    colid: item.tabth.colid,
-                    colname: item.tabth.colname, // 当前字段的名称
-                    datelimit: 'all',
-                    display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-                    fkdisplay: item.tabth.fkdisplay, // 外键关联类型
-                    fkdesc: item.tabth.fkdesc,
-                    inputname: item.tabth.inputname, // 这个是做中文类型的模糊查询字段，例如ENAME
-                    isfk: true, // 是否有fk键
-                    isnotnull: false, // 是否必填
-                    isuppercase: false, // 是否转大写
-                    length: 65535, // 最大长度是多少
-                    name: item.tabth.name, // input前面显示的lable值
-                    readonly: false, // 是否可编辑，对应input   readonly属性
-                    reftable: item.tabth.reftable,
-                    reftableid: item.tabth.reftableid,
-                    row: 1,
-                    scale: 0,
-                    statsize: -1,
-                    type: item.tabth.type, // 这个是后台用的
-                    pid: '',
-                    valuedata: '' // 这个是选择的值
-                  },
-                  oneObj: e => {
-                    _this.oneObjs(e);
-                  }
-                };
-                if (item.tabth.precolnameslist) {
-                  formData[index].itemdata.precolnameslist = item.tabth.precolnameslist ? item.tabth.precolnameslist : [];
+      this.service.orderCenter.DynamicList(params).then(res => {
+        // 高级查询
+        const formData = [];
+        res.data.data.search.date.forEach((item, index) => {
+          switch (item.type) {
+            case 'date':
+              formData[index] = {
+                style: item.tabth.isfilter ? 'date' : '', // 输入框类型
+                type: 'datetimerange', // 文本框类型的input
+                label: item.tabth.name, // 输入框前文字
+                value: item.tabth.colname, // 输入框的值
+                format: 'yyyy-MM-dd HH:mm:ss',
+                width: '12', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                icon: 'md-alarm', // 输入框后带的图标,暂只有输入框支持
+                placeholder: '', // 占位文本，默认为请输入
+                transfer: true,
+                ghost: false, // 是否关闭幽灵按钮，默认开启
+                inputenter: () => {
+                  _this.request();
+                }, // 表单回车事件
+                iconclick: () => {}, // 点击icon图标事件
+                clearable: true
+              };
+              _this.formConfig.formValue[item.tabth.colname] = item.tabth.name === '创建时间' ? [addSevenDay, getCurrentTime] : [];
+              break;
+            case 'propInput':
+              formData[index] = {
+                style: item.tabth.isfilter ? 'popInput' : '', // 输入框弹框单多选
+                width: '6',
+                itemdata: {
+                  col: 1,
+                  colid: item.tabth.colid,
+                  colname: item.tabth.colname, // 当前字段的名称
+                  datelimit: 'all',
+                  display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+                  fkdisplay: item.tabth.fkdisplay, // 外键关联类型
+                  fkdesc: item.tabth.fkdesc,
+                  inputname: item.tabth.inputname, // 这个是做中文类型的模糊查询字段，例如ENAME
+                  isfk: true, // 是否有fk键
+                  isnotnull: false, // 是否必填
+                  isuppercase: false, // 是否转大写
+                  length: 65535, // 最大长度是多少
+                  name: item.tabth.name, // input前面显示的lable值
+                  readonly: false, // 是否可编辑，对应input   readonly属性
+                  reftable: item.tabth.reftable,
+                  reftableid: item.tabth.reftableid,
+                  row: 1,
+                  scale: 0,
+                  statsize: -1,
+                  type: item.tabth.type, // 这个是后台用的
+                  pid: '',
+                  valuedata: '' // 这个是选择的值
+                },
+                oneObj: e => {
+                  _this.oneObjs(e);
                 }
-                break;
-              case 'text':
-                formData[index] = {
-                  style: item.tabth.isfilter ? 'input' : '', // 输入框类型
-                  // type: "", //文本框类型的input
-                  label: item.tabth.name, // 输入框前文字
-                  value: item.tabth.colname, // 输入框的值
-                  width: item.tabth.name == '备注' ? '12' : '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-                  icon: '', // 输入框后带的图标,暂只有输入框支持
-                  clearable: true,
-                  placeholder: '', // 占位文本，默认为请输入
-                  ghost: false, // 是否关闭幽灵按钮，默认开启
-                  inputenter: () => {
-                    _this.request();
-                  }, // 表单回车事件
-                  iconclick: () => {} // 点击icon图标事件
-                };
-                _this.formConfig.formValue[item.tabth.colname] = '';
-                break;
-              case 'number':
-                formData[index] = {
-                  style: item.tabth.isfilter ? 'input' : '', // 输入框类型
-                  // type: "", //文本框类型的input
-                  label: item.tabth.name, // 输入框前文字
-                  value: item.tabth.colname, // 输入框的值
-                  clearable: true,
-                  width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-                  icon: '', // 输入框后带的图标,暂只有输入框支持
-                  placeholder: '', // 占位文本，默认为请输入
-                  ghost: false, // 是否关闭幽灵按钮，默认开启
-                  inputenter: () => {
-                    _this.request();
-                  }, // 表单回车事件
-                  iconclick: () => {} // 点击icon图标事件
-                };
-                _this.formConfig.formValue[item.tabth.colname] = '';
-                break;
-              case 'select':
-                formData[index] = {
-                  style: item.tabth.isfilter ? 'select' : '', // 下拉框类型
-                  label: item.tabth.name, // 下拉框前的值
-                  width: '6', // 所占宽度宽度
-                  clearable: true, // 是否显示下来清空按钮
-                  value: item.tabth.colname, // 输入框的值
-                  multiple: true, // 布尔值,下拉框是否开启多选,默认为不开启
-                  selectChange: () => {}, // 选中事件，默认返回选中的值
-                  clearSelect: e => {
-                    if (e == 'RETURN_STATUS') {
-                      _this.formConfig.formValue.RETURN_STATUS = '';
-                    } else if (e == 'IS_ADD') {
-                      _this.formConfig.formValue.IS_ADD = '';
-                    } else if (e == 'IS_TOAG') {
-                      _this.formConfig.formValue.IS_TOAG = '';
-                    } else if (e == 'IS_TOWMS') {
-                      _this.formConfig.formValue.IS_TOWMS = '';
-                    } else if (e == 'BILL_TYPE') {
-                      _this.formConfig.formValue.BILL_TYPE = '';
-                    } else if (e == 'IS_EXAMINE') {
-                      _this.formConfig.formValue.IS_EXAMINE = '';
-                    } else if (e == 'IS_TODRP') {
-                      _this.formConfig.formValue.IS_TODRP = '';
-                    } else if (e == 'IS_TRANSFER') {
-                      _this.formConfig.formValue.IS_TRANSFER = '';
-                    }
-                  }, // 点击清空按钮回调
-                  options: _this.converSelect(item.tabth.combobox)
-                };
-                _this.formConfig.formValue[item.tabth.colname] = [];
-                break;
-            }
-          });
-          _this.formConfig.formData = formData;
-          // 表头赋值
-          res.data.data.columns.forEach(item => {
-            item.field = item.key;
-            item.headerName = item.title;
-            delete item.key;
-            delete item.title;
-          });
-          _this.agTableConfig.columnDefs = res.data.data.columns;
-          _this.isShowFromLoading = false;
-          setTimeout(() => {
-            _this.request();
-          }, 100);
+              };
+              if (item.tabth.precolnameslist) {
+                formData[index].itemdata.precolnameslist = item.tabth.precolnameslist ? item.tabth.precolnameslist : [];
+              }
+              break;
+            case 'text':
+              formData[index] = {
+                style: item.tabth.isfilter ? 'input' : '', // 输入框类型
+                // type: "", //文本框类型的input
+                label: item.tabth.name, // 输入框前文字
+                value: item.tabth.colname, // 输入框的值
+                width: item.tabth.name == '备注' ? '12' : '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                icon: '', // 输入框后带的图标,暂只有输入框支持
+                clearable: true,
+                placeholder: '', // 占位文本，默认为请输入
+                ghost: false, // 是否关闭幽灵按钮，默认开启
+                inputenter: () => {
+                  _this.request();
+                }, // 表单回车事件
+                iconclick: () => {} // 点击icon图标事件
+              };
+              _this.formConfig.formValue[item.tabth.colname] = '';
+              break;
+            case 'number':
+              formData[index] = {
+                style: item.tabth.isfilter ? 'input' : '', // 输入框类型
+                // type: "", //文本框类型的input
+                label: item.tabth.name, // 输入框前文字
+                value: item.tabth.colname, // 输入框的值
+                clearable: true,
+                width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                icon: '', // 输入框后带的图标,暂只有输入框支持
+                placeholder: '', // 占位文本，默认为请输入
+                ghost: false, // 是否关闭幽灵按钮，默认开启
+                inputenter: () => {
+                  _this.request();
+                }, // 表单回车事件
+                iconclick: () => {} // 点击icon图标事件
+              };
+              _this.formConfig.formValue[item.tabth.colname] = '';
+              break;
+            case 'select':
+              formData[index] = {
+                style: item.tabth.isfilter ? 'select' : '', // 下拉框类型
+                label: item.tabth.name, // 下拉框前的值
+                width: '6', // 所占宽度宽度
+                clearable: true, // 是否显示下来清空按钮
+                value: item.tabth.colname, // 输入框的值
+                multiple: true, // 布尔值,下拉框是否开启多选,默认为不开启
+                selectChange: () => {}, // 选中事件，默认返回选中的值
+                clearSelect: e => {
+                  if (e == 'RETURN_STATUS') {
+                    _this.formConfig.formValue.RETURN_STATUS = '';
+                  } else if (e == 'IS_ADD') {
+                    _this.formConfig.formValue.IS_ADD = '';
+                  } else if (e == 'IS_TOAG') {
+                    _this.formConfig.formValue.IS_TOAG = '';
+                  } else if (e == 'IS_TOWMS') {
+                    _this.formConfig.formValue.IS_TOWMS = '';
+                  } else if (e == 'BILL_TYPE') {
+                    _this.formConfig.formValue.BILL_TYPE = '';
+                  } else if (e == 'IS_EXAMINE') {
+                    _this.formConfig.formValue.IS_EXAMINE = '';
+                  } else if (e == 'IS_TODRP') {
+                    _this.formConfig.formValue.IS_TODRP = '';
+                  } else if (e == 'IS_TRANSFER') {
+                    _this.formConfig.formValue.IS_TRANSFER = '';
+                  }
+                }, // 点击清空按钮回调
+                options: _this.converSelect(item.tabth.combobox)
+              };
+              _this.formConfig.formValue[item.tabth.colname] = [];
+              break;
+          }
         });
+        _this.formConfig.formData = formData;
+        // 表头赋值
+        res.data.data.columns.forEach(item => {
+          item.field = item.key;
+          item.headerName = item.title;
+          delete item.key;
+          delete item.title;
+        });
+        _this.agTableConfig.columnDefs = res.data.data.columns;
+        _this.isShowFromLoading = false;
+        setTimeout(() => {
+          _this.request();
+        }, 100);
+      });
     },
     oneObjs(e) {
       const _this = this;
@@ -527,6 +496,7 @@ export default {
       val.forEach(item => {
         list.push({ label: item.limitdesc, value: item.limitval });
       });
+      return list; 
     },
     parentClass() {
       return '';
@@ -584,13 +554,7 @@ export default {
       });
     },
     // 单击某二行时触发
-    onRowDblclick(row, index) {
-      // this.$store.commit("global/tabOpen", {
-      //   customizedModuleId: row.ID,
-      //   type: "C",
-      //   customizedModuleName: "returnTreasuryAdd",
-      //   label: "退货入库详情"
-      // });
+    onRowDblclick(row) {
       this.$store.commit('customize/TabHref', {
         id: row.ID,
         type: 'action',
@@ -620,7 +584,10 @@ export default {
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
       if (self.selection.length) {
         // if (this.isExport) return this.$Message.error("有一项导出正在进行中");
-        if (this.isExport) return this.$Message.error(window.vmI18n.t('modalTips.f8'));
+        if (this.isExport) {
+          this.$Message.error(window.vmI18n.t('modalTips.f8'));
+          return;
+        }
         this.isExport = true;
         const ids = [];
         for (let i = 0; i < self.selection.length; i++) {
@@ -629,79 +596,66 @@ export default {
         const fromdata = new FormData();
         const idList = { idList: ids };
         fromdata.append('param', JSON.stringify(idList));
-        this.service.orderCenter
-          .exportOcBRefundIn(idList)
-          // this.$network
-          //   .axios({
-          //     url: '/api/cs/oc/oms/v1/exportOcBRefundIn',
-          //     method: 'post',
-          //     // cancelToken: true,
-          //     data: idList,
-          //   })
-          .then(res => {
-            self.isExport = false;
-            if (res.data.code == 0 && res.data.data !== null) {
-              // let mes = res.data.message || "导出成功！";
-              const mes = res.data.message || window.vmI18n.t('modalTips.z2');
-              self.$Message.success(mes);
-              self.downloadUrlFile(res.data.data);
-              // return (window.location = res.data.data);
-            } else {
-              // let err = res.data.message || "失败！";
-              const err = res.data.message || window.vmI18n.t('modalTips.z3');
-              self.$Message.error(err);
-            }
-          });
-      } else {
-        if (self.tableConfig.data.length === 0) {
-          // return self.$Message.error("列表没有数据,无法导出!");
-          return self.$Message.error(window.vmI18n.t('modalTips.z4'));
-        }
-        self.warningModal = true;
-      }
-    },
-    // 导出
-    downloadUrlFile(src) {
-      const download_file = {};
-      if (typeof download_file.iframe === 'undefined') {
-        const iframe = document.createElement('iframe');
-        download_file.iframe = iframe;
-        document.body.appendChild(download_file.iframe);
-      }
-      download_file.iframe.src = src;
-      download_file.iframe.style.display = 'none';
-    },
-    // 警告框确认
-    warningOk() {
-      const self = this;
-      // if (this.isExport) return this.$Message.error("有一项导出正在进行中");
-      if (this.isExport) return this.$Message.error(window.vmI18n.t('modalTips.f8'));
-      this.isExport = true;
-      const arr = this.requestParams();
-      arr.pageSize = 999999;
-      const params = JSON.parse(JSON.stringify(arr));
-      this.service.orderCenter
-        .exportOcBRefundIn(params)
-        // this.$network
-        //   .axios({
-        //     url: '/api/cs/oc/oms/v1/exportOcBRefundIn',
-        //     method: 'post',
-        //     data: params,
-        //   })
-        .then(res => {
+        this.service.orderCenter.exportOcBRefundIn(idList).then(res => {
           self.isExport = false;
           if (res.data.code == 0 && res.data.data !== null) {
             // let mes = res.data.message || "导出成功！";
             const mes = res.data.message || window.vmI18n.t('modalTips.z2');
             self.$Message.success(mes);
-            // return (window.location = res.data.data);
             self.downloadUrlFile(res.data.data);
+            // return (window.location = res.data.data);
           } else {
             // let err = res.data.message || "失败！";
             const err = res.data.message || window.vmI18n.t('modalTips.z3');
             self.$Message.error(err);
           }
         });
+      } else {
+        if (self.tableConfig.data.length === 0) {
+          // return self.$Message.error("列表没有数据,无法导出!");
+          self.$Message.error(window.vmI18n.t('modalTips.z4'));
+          return;
+        }
+        self.warningModal = true;
+      }
+    },
+    // 导出
+    downloadUrlFile(src) {
+      const downloadFile = {};
+      if (typeof downloadFile.iframe === 'undefined') {
+        const iframe = document.createElement('iframe');
+        downloadFile.iframe = iframe;
+        document.body.appendChild(downloadFile.iframe);
+      }
+      downloadFile.iframe.src = src;
+      downloadFile.iframe.style.display = 'none';
+    },
+    // 警告框确认
+    warningOk() {
+      const self = this;
+      // if (this.isExport) return this.$Message.error("有一项导出正在进行中");
+      if (this.isExport) {
+        this.$Message.error(window.vmI18n.t('modalTips.f8'));
+        return;
+      }
+      this.isExport = true;
+      const arr = this.requestParams();
+      arr.pageSize = 999999;
+      const params = JSON.parse(JSON.stringify(arr));
+      this.service.orderCenter.exportOcBRefundIn(params).then(res => {
+        self.isExport = false;
+        if (res.data.code == 0 && res.data.data !== null) {
+          // let mes = res.data.message || "导出成功！";
+          const mes = res.data.message || window.vmI18n.t('modalTips.z2');
+          self.$Message.success(mes);
+          // return (window.location = res.data.data);
+          self.downloadUrlFile(res.data.data);
+        } else {
+          // let err = res.data.message || "失败！";
+          const err = res.data.message || window.vmI18n.t('modalTips.z3');
+          self.$Message.error(err);
+        }
+      });
     }
   }
 };
