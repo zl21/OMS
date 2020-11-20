@@ -1293,8 +1293,8 @@ export default {
                 if (_this.status === 60) {
                   _this.statusName = '已取消';
                 }
-                if (_this.statusName === '待退货入库') {
-                  _this.statusName ='等待退货入库';
+                if (_this.status === 20) {
+                  _this.statusName = '等待退货入库';
                 }
               }
               _this.defectiveList = res.data.data.orderDefects;

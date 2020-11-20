@@ -40,7 +40,7 @@
       />
     </div>
     <!-- 修改from表单 -->
-    <jordanModal
+    <businessDialog
       :title="setFromInput.confirmTitle"
       :title-align="setFromInput.titleAlign"
       :width="setFromInput.width"
@@ -57,7 +57,7 @@
       :component-data="setFromInput.componentData"
     />
     <!-- 导入 -->
-    <jordanModal
+    <businessDialog
       :title="importTable.confirmTitle"
       :title-align="importTable.titleAlign"
       :width="importTable.width"
