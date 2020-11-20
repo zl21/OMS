@@ -8,6 +8,7 @@ import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import tableInput from 'professionalComponents/businessTableInput.vue';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
+import loading from '@/component/loading.vue';
 
 export default {
   name: 'payableAdjustAdd',
@@ -17,6 +18,7 @@ export default {
     businessActionTable,
     businessLabel,
     businessStatusFlag,
+    loading
   },
   mixins: [customPagingMixins, buttonPermissionsMixin],
   data() {

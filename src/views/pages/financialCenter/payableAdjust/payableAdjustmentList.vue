@@ -3,6 +3,8 @@
     <div
       class="returnBtn"
     >
+      <!-- loading -->
+      <loading :loading="agTableConfig.loading"></loading>
       <!-- 按钮 -->
       <businessButton :btn-config="btnConfig" />
     </div>
