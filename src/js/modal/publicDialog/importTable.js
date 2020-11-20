@@ -318,7 +318,7 @@ export default {
         .then(res => {
           if (res.data.code === 0) {
             // _this.$Message.success(res.data.message || "导入成功");
-            _this.$Message.success(res.data.message || this.vmI18n.t('modalTips.zd'));
+            _this.$Message.success(res.data.message || this.vmI18n.t('modalTips.ze'));
             _this.$emit('returnData', res.data.data);
             if (_this.configTableName.includes(_this.componentData.tableName)) {
               _this.$parent.$emit('closeActionDialog');
@@ -329,7 +329,7 @@ export default {
             _this.customizeInvoke(_this.componentData.tableName);
           } else if (res.data.code === -1) {
             // let err = res.data.message || "导入失败";
-            const err = res.data.message || this.vmI18n.t('modalTips.ze');
+            const err = res.data.message || this.vmI18n.t('modalTips.zd');
             _this.isError = true;
             _this.errorMessage = err;
             _this.$Message.error(_this.errorMessage);

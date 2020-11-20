@@ -8,6 +8,7 @@ import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import aTable from 'professionalComponents/agGridTable.vue';
 import loading from '@/component/loading.vue';
+
 export default {
   components: {
     businessButton,
@@ -747,7 +748,7 @@ export default {
       return list;
     },
     // 获取列表数据
-    getList(status = '') {
+    getList(status) {
       const _this = this;
       if (_this.agTableConfig.agLoading) {
         return;
