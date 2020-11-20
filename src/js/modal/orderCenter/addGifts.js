@@ -17,27 +17,27 @@ export default {
           {
             key: 'ECODE',
             // title: "条码"
-            title: window.vmI18n.t('form_label.barCode'),
+            title: window.vmI18n.t('form_label.barCode')
           },
           {
             key: 'sizeName',
             // title: "尺码",
-            title: window.vmI18n.t('other.size'),
+            title: window.vmI18n.t('other.size')
           },
           {
             key: 'colorName',
             // title: "颜色",
-            title: window.vmI18n.t('other.color'),
+            title: window.vmI18n.t('other.color')
           },
           {
             key: 'QTY',
             // title: "数量",
-            title: window.vmI18n.t('table_label.quantities'),
+            title: window.vmI18n.t('table_label.quantities')
           },
           {
             key: 'PS_C_PRO_ENAME',
             // title: "商品名称",
-            title: window.vmI18n.t('table_label.productName'),
+            title: window.vmI18n.t('table_label.productName')
           },
           {
             key: 'IS_GIFT',
@@ -46,26 +46,27 @@ export default {
             render: (h, params) => {
               const IS_GIFT = params.row.IS_GIFT == 1 ? '是' : '否';
               return h('span', {}, IS_GIFT);
-            },
+            }
           },
           {
             key: 'IS_DELETE',
             // title: "操作",
             title: window.vmI18n.t('table_label.operation'),
-            render: (h, params) => h(
-              'a',
-              {
-                on: {
-                  click: () => {
-                    const index = params.index;
-                    this.tableConfig.data.splice(index, 1);
-                  },
+            render: (h, params) =>
+              h(
+                'a',
+                {
+                  on: {
+                    click: () => {
+                      const index = params.index;
+                      this.tableConfig.data.splice(index, 1);
+                    }
+                  }
                 },
-              },
-              // "删除"
-              vmI18n.t('btn.delete')
-            ),
-          },
+                // "删除"
+                window.vmI18n.t('btn.delete')
+              )
+          }
         ],
         data: [],
         pageShow: false, // 控制分页是否显示
@@ -76,14 +77,14 @@ export default {
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
-        pageSize: 10, // 每页条数
+        pageSize: 10 // 每页条数
       },
       matrixData: {
         // 条码  数量  回调函数
-        fun: (obj) => {
+        fun: obj => {
           const self = this;
           self.add(obj);
-        },
+        }
       },
       objid: '',
       options: {}, // 自定义属性（选填）
@@ -96,46 +97,40 @@ export default {
             text: window.vmI18n.t('common.determine'), // 按钮文本
             btnclick: () => {
               this.submit();
-            },
+            }
           },
           {
             // text: "取消", //按钮文本
             text: window.vmI18n.t('common.cancel'), // 按钮文本
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
-            }, // 按钮点击事件
-          },
-        ],
-      },
+            } // 按钮点击事件
+          }
+        ]
+      }
     };
   },
   components: {
     businessActionTable,
     EasyMatrix,
-    businessButton,
+    businessButton
   },
   props: {
-    componentData: {},
+    componentData: {}
   },
   methods: {
     // 选中某一项时触发
-    onSelect(selection, row) {
-    },
+    onSelect() {},
     // 取消选中某一项时触发
-    onSelectCancel(selection, row) {
-    },
+    onSelectCancel() {},
     // 点击全选时触发
-    onSelectAll(selection) {
-    },
+    onSelectAll() {},
     // 点击取消全选时触发
-    onSelectAllCancel(selection) {
-    },
+    onSelectAllCancel() {},
     // 单击某一行时触发
-    onRowClick(row, index) {
-    },
+    onRowClick() {},
     // 单击某二行时触发
-    onRowDblclick(row, index) {
-    },
+    onRowDblclick() {},
     // 分页change 事件
     // 添加赠品
     add(obj) {
@@ -155,20 +150,23 @@ export default {
       const rows = this.tableConfig.data.map(item => ({
         PS_C_SKU_ECODE: item.ECODE,
         QTY: item.QTY,
-        IS_GIFT: item.IS_GIFT,
+        IS_GIFT: item.IS_GIFT
       }));
-      if (rows.length === 0) return self.$Message.error('无赠品可添加！');
+      if (rows.length === 0) {
+        self.$Message.error('无赠品可添加！');
+        return;
+      }
 
       const param = {
         OcBorderDto: { id: self.componentData.objid },
-        OcBorderItemDto: rows,
+        OcBorderItemDto: rows
       };
       axios({
         url: '/api/cs/oc/oms/v1/addGit',
         method: 'post',
-        cancelToken: true,
-        data: param,
-      }).then((res) => {
+        // cancelToken: true,
+        data: param
+      }).then(res => {
         if (res.data.code === 0) {
           self.$Message.success(res.data.message);
           self.$parent.$parent.$parent.getData();
@@ -191,34 +189,33 @@ export default {
         {
           key: 'ECODE',
           // title: "条码",
-          title: window.vmI18n.t('form_label.barCode'),
+          title: window.vmI18n.t('form_label.barCode')
         },
         {
           key: 'QTY',
           // title: "数量",
-          title: window.vmI18n.t('table_label.quantities'),
+          title: window.vmI18n.t('table_label.quantities')
         },
         {
           key: 'PS_C_PRO_ENAME',
           // title: "商品名称",
-          title: window.vmI18n.t('table_label.productName'),
+          title: window.vmI18n.t('table_label.productName')
         },
         {
           key: 'GBCODE',
           // title: "国标码",
-          title: window.vmI18n.t('form_label.gBCode'),
+          title: window.vmI18n.t('form_label.gBCode')
         },
         {
           key: 'IS_GIFT',
           // title: "是否赠品",
-          title: window.vmI18n.t('table_label.whetherGift'),
-        },
+          title: window.vmI18n.t('table_label.whetherGift')
+        }
       ];
       this.columns = cols;
     },
     showTable(obj) {
       const tbody = obj;
-      const tabname = obj.tabname;
       this.tableConfig = Object.assign(this.tableConfig, {
         columns: this.columns,
         indexColumn: true, // 是否展示需要
@@ -231,7 +228,7 @@ export default {
         border: true, // 是否显示纵向边框
         total: obj.totalRowCount, // 设置总条数
         pageSizeOpts: obj.selectRange, // 每页条数切换的配置
-        pageSize: obj.defaultrange, // 每页条数
+        pageSize: obj.defaultrange // 每页条数
       });
     },
     confirm() {
@@ -241,7 +238,7 @@ export default {
       if (e.keyCode == 27) {
         this.$parent.$parent.closeConfirm();
         this.$parent.$parent.$parent.publicBouncedIndex = {
-          name: 'testModal',
+          name: 'testModal'
         };
       }
       if (e.keyCode == 13) {
@@ -249,6 +246,6 @@ export default {
         //   this.submit();
         // }, 500);
       }
-    },
-  },
+    }
+  }
 };

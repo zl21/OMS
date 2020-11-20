@@ -2,7 +2,7 @@ import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import aTable from 'professionalComponents/agGridTable.vue';
-import jordanModal from 'professionalComponents/businessDialog';
+import businessDialog from 'professionalComponents/businessDialog';
 // import axios from 'axios';
 // import { debug, debuglog } from 'util';
 import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
@@ -12,124 +12,124 @@ import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import loading from '@/component/loading.vue';
 
 // 表头的基本配置
-const baseColumnDefs = [
-  {
-    headerName: '单据状态',
-    field: 'BILL_STATUS_NAME',
-  },
-  {
-    headerName: '单据编号',
-    field: 'BILL_NO',
-  },
-  {
-    headerName: '平台单号',
-    field: 'TID',
-  },
-  {
-    headerName: '单据类型',
-    field: 'BILL_TYPE_NAME',
-  },
-  {
-    headerName: '调整类型',
-    field: 'ADJUST_TYPE_NAME',
-  },
-  {
-    headerName: '店铺名称',
-    field: 'CP_C_SHOP_TITLE',
-  },
-  {
-    headerName: '实体仓',
-    field: 'CP_C_PHY_WAREHOUSE_ENAME',
-  },
-  {
-    headerName: '赔付快递公司',
-    field: 'CP_C_LOGISTICS_ENAME',
-  },
-  {
-    headerName: '快递单号',
-    field: 'LOGISTICS_NO',
-  },
-  {
-    headerName: '总应付金额',
-    field: 'PAYABLE_PRICE',
-  },
-  {
-    headerName: '支付方式',
-    field: 'PAY_TYPE_NAME',
-  },
-  {
-    headerName: '备注',
-    field: 'REMARK',
-  },
-  {
-    headerName: '来源单据编号',
-    field: 'ORDER_NO',
-  },
-  {
-    headerName: '顾客电话',
-    field: 'CUSTOMER_TEL',
-  },
-  {
-    headerName: '顾客姓名',
-    field: 'CUSTOMER_NAME',
-  },
-  {
-    headerName: '支付宝号',
-    field: 'ALIPAY_ACCOUNT',
-  },
-  {
-    headerName: '会员昵称',
-    field: 'CUSTOMER_NICK',
-  },
-  {
-    headerName: '付款时间',
-    field: 'PAY_TIME',
-  },
-  {
-    headerName: '创建时间',
-    field: 'CREATIONDATE',
-  },
-  {
-    headerName: '创建人',
-    field: 'OWNERENAME',
-  },
-  {
-    headerName: '修改时间',
-    field: 'MODIFIEDDATE',
-  },
-  {
-    headerName: '修改人',
-    field: 'MODIFIERENAME',
-  },
-  {
-    headerName: '客审时间',
-    field: 'GUEST_TRIAL_TIME',
-  },
-  {
-    headerName: '客审人',
-    field: 'GUEST_TRIAL_ENAME',
-  },
-  {
-    headerName: '财审时间',
-    field: 'FINANCIAL_TRIAL_TIME',
-  },
-  {
-    headerName: '财审人',
-    field: 'FINANCIAL_TRIAL_ENAME',
-  },
-  {
-    headerName: '作废时间',
-    field: 'DEL_TIME',
-  },
-  {
-    headerName: '作废人',
-    field: 'DELENAME',
-  },
-  {
-    headerName: '可用',
-    field: 'ISACTIVE',
-  },
-];
+// const baseColumnDefs = [
+//   {
+//     headerName: '单据状态',
+//     field: 'BILL_STATUS_NAME',
+//   },
+//   {
+//     headerName: '单据编号',
+//     field: 'BILL_NO',
+//   },
+//   {
+//     headerName: '平台单号',
+//     field: 'TID',
+//   },
+//   {
+//     headerName: '单据类型',
+//     field: 'BILL_TYPE_NAME',
+//   },
+//   {
+//     headerName: '调整类型',
+//     field: 'ADJUST_TYPE_NAME',
+//   },
+//   {
+//     headerName: '店铺名称',
+//     field: 'CP_C_SHOP_TITLE',
+//   },
+//   {
+//     headerName: '实体仓',
+//     field: 'CP_C_PHY_WAREHOUSE_ENAME',
+//   },
+//   {
+//     headerName: '赔付快递公司',
+//     field: 'CP_C_LOGISTICS_ENAME',
+//   },
+//   {
+//     headerName: '快递单号',
+//     field: 'LOGISTICS_NO',
+//   },
+//   {
+//     headerName: '总应付金额',
+//     field: 'PAYABLE_PRICE',
+//   },
+//   {
+//     headerName: '支付方式',
+//     field: 'PAY_TYPE_NAME',
+//   },
+//   {
+//     headerName: '备注',
+//     field: 'REMARK',
+//   },
+//   {
+//     headerName: '来源单据编号',
+//     field: 'ORDER_NO',
+//   },
+//   {
+//     headerName: '顾客电话',
+//     field: 'CUSTOMER_TEL',
+//   },
+//   {
+//     headerName: '顾客姓名',
+//     field: 'CUSTOMER_NAME',
+//   },
+//   {
+//     headerName: '支付宝号',
+//     field: 'ALIPAY_ACCOUNT',
+//   },
+//   {
+//     headerName: '会员昵称',
+//     field: 'CUSTOMER_NICK',
+//   },
+//   {
+//     headerName: '付款时间',
+//     field: 'PAY_TIME',
+//   },
+//   {
+//     headerName: '创建时间',
+//     field: 'CREATIONDATE',
+//   },
+//   {
+//     headerName: '创建人',
+//     field: 'OWNERENAME',
+//   },
+//   {
+//     headerName: '修改时间',
+//     field: 'MODIFIEDDATE',
+//   },
+//   {
+//     headerName: '修改人',
+//     field: 'MODIFIERENAME',
+//   },
+//   {
+//     headerName: '客审时间',
+//     field: 'GUEST_TRIAL_TIME',
+//   },
+//   {
+//     headerName: '客审人',
+//     field: 'GUEST_TRIAL_ENAME',
+//   },
+//   {
+//     headerName: '财审时间',
+//     field: 'FINANCIAL_TRIAL_TIME',
+//   },
+//   {
+//     headerName: '财审人',
+//     field: 'FINANCIAL_TRIAL_ENAME',
+//   },
+//   {
+//     headerName: '作废时间',
+//     field: 'DEL_TIME',
+//   },
+//   {
+//     headerName: '作废人',
+//     field: 'DELENAME',
+//   },
+//   {
+//     headerName: '可用',
+//     field: 'ISACTIVE',
+//   },
+// ];
 
 export default {
   components: {
@@ -137,7 +137,7 @@ export default {
     businessForm,
     aTable,
     businessLabel,
-    jordanModal,
+    businessDialog,
     loading
   },
   mixins: [isFavoriteMixin, customPagingMixins, buttonPermissionsMixin],
@@ -195,16 +195,6 @@ export default {
               });
             }, // 按钮点击事件
           },
-          // {
-          //   type: "", //按钮类型
-          //   text: "导入", //按钮文本
-          //   disabled: false, //按钮禁用控制
-          //   btnclick: () => {
-          //     const _this = this;
-          //     _this.importTable.componentData = {tableName: 'AC_F_PAYABLE_ADJUSTMENT'};
-          //     _this.$children.find(item => item.name === "importTable") .openConfirm();
-          //   } //按钮点击事件
-          // },
           {
             // text: "导出", //按钮文本
             text: window.vmI18n.t('btn.export'), // 按钮文本
@@ -971,79 +961,6 @@ export default {
         this.agTableConfig.rowData,
         this.getExtendObj()
       );
-      // axios({
-      //   url: "/p/cs/getPayableAdjustmentList",
-      //   method: "post",
-      //   data: fromdata,
-      // }).then((res) => {
-      //   _this.agTableConfig.loading = false;
-      //   _this.returnSelectData = [];
-      //   if (res.data.code === 0 && res.data.data.payableAdjustmentList.length) {
-      //     //Table表单赋值
-      //     _this.allTableArr = res.data.data.payableAdjustmentList.map(
-      //       (item) => {
-      //         //过滤不需要展示的模糊搜索项
-      //         return {
-      //           ID: item.ID,
-      //           BILL_STATUS: item.BILL_STATUS,
-      //           BILL_STATUS_NAME: item.BILL_STATUS_NAME,
-      //           BILL_NO: item.BILL_NO,
-      //           TID: item.TID,
-      //           BILL_TYPE: item.BILL_TYPE,
-      //           BILL_TYPE_NAME: item.BILL_TYPE_NAME,
-      //           ADJUST_TYPE_NAME: item.ADJUST_TYPE_NAME,
-      //           CP_C_SHOP_TITLE: item.CP_C_SHOP_TITLE,
-      //           CP_C_PHY_WAREHOUSE_ENAME: item.CP_C_PHY_WAREHOUSE_ENAME,
-      //           CP_C_LOGISTICS_ENAME: item.CP_C_LOGISTICS_ENAME,
-      //           LOGISTICS_NO: item.LOGISTICS_NO,
-      //           PAYABLE_PRICE: item.PAYABLE_PRICE,
-      //           PAY_TYPE: item.PAY_TYPE,
-      //           PAY_TYPE_NAME: item.PAY_TYPE_NAME,
-      //           REMARK: item.REMARK,
-      //           ORDER_NO: item.ORDER_NO,
-      //           CUSTOMER_TEL: item.CUSTOMER_TEL,
-      //           CUSTOMER_NAME: item.CUSTOMER_NAME,
-      //           ALIPAY_ACCOUNT: item.ALIPAY_ACCOUNT,
-      //           CUSTOMER_NICK: item.CUSTOMER_NICK,
-      //           OWNERENAME: item.OWNERENAME,
-      //           FINANCIAL_TRIAL_ENAME: item.FINANCIAL_TRIAL_ENAME,
-      //           MODIFIERENAME: item.MODIFIERENAME,
-      //           GUEST_TRIAL_ENAME: item.GUEST_TRIAL_ENAME,
-      //           DELENAME: item.DELENAME,
-      //           ISACTIVE: item.ISACTIVE === "Y" ? "是" : "否",
-      //           CREATIONDATE: item.CREATIONDATE
-      //             ? publicMethodsUtil.DatesTime(item.CREATIONDATE)
-      //             : "",
-      //           PAY_TIME: item.PAY_TIME
-      //             ? publicMethodsUtil.DatesTime(item.PAY_TIME)
-      //             : "",
-      //           MODIFIEDDATE: item.MODIFIEDDATE
-      //             ? publicMethodsUtil.DatesTime(item.MODIFIEDDATE)
-      //             : "",
-      //           GUEST_TRIAL_TIME: item.GUEST_TRIAL_TIME
-      //             ? publicMethodsUtil.DatesTime(item.GUEST_TRIAL_TIME)
-      //             : "",
-      //           FINANCIAL_TRIAL_TIME: item.FINANCIAL_TRIAL_TIME
-      //             ? publicMethodsUtil.DatesTime(item.FINANCIAL_TRIAL_TIME)
-      //             : "",
-      //           DEL_TIME: item.DEL_TIME
-      //             ? publicMethodsUtil.DatesTime(item.DEL_TIME)
-      //             : "",
-      //         };
-      //       }
-      //     );
-      //     _this.agTableConfig.pagenation.total = res.data.data.page.totalSize;
-      //     _this.agTableConfig.rowData = _this.allTableArr;
-      //   } else {
-      //     _this.agTableConfig.rowData = [];
-      //     _this.agTableConfig.pagenation.total = 0;
-      //   }
-      //   this.$refs.agtable.agGridTable(
-      //     this.agTableConfig.columnDefs,
-      //     this.agTableConfig.rowData,
-      //     this.getExtendObj()
-      //   );
-      // });
     },
     // 双击时触发
     onRowDblclick(row) {
@@ -1131,22 +1048,6 @@ export default {
           const err = message || window.vmI18n.t('modalTips.z3');// 失败！
           _this.$Message.error(err);
         }
-        // axios({
-        //   url: "/p/cs/exportPayableAdjustment",
-        //   method: "post",
-        //   cancelToken: false,
-        //   data: idList,
-        // }).then((res) => {
-        //   console.log(res);
-        //   if (res.data.code === 0 && res.data.data !== null) {
-        //     let mes = res.data.message || window.vmI18n.t("modalTips.z2");//导出成功！
-        //     _this.$Message.success(mes);
-        //     _this.downloadUrlFile(res.data.data);
-        //   } else {
-        //     let err = res.data.message || window.vmI18n.t("modalTips.z3");//失败！
-        //     _this.$Message.error(err);
-        //   }
-        // });
       } else {
         if (_this.agTableConfig.rowData.length === 0) {
           return _this.$Message.error(window.vmI18n.t('modalTips.z4'));// 列表没有数据,无法导出!
