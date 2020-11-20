@@ -22,6 +22,10 @@ export default {
         return false;
       }
       const url = '';
+      if (!this.allFormData.CP_C_SHOP_ID && !this.allFormData.SKU_ID && !this.allFormData.PS_C_SKU_ECODE && !this.allFormData.NUMIID) {
+        this.$Message.warning('查询条件【平台店铺、平台条码ID、平台商品ID、条码编码、商品编码】至少选择一个！');
+        return;
+      }
       // 库存按查询条件同步
       // if (self.$parent.title === self.vmI18n.t('modalTitle.z0')) url = '/p/cs/storage/manualSynchChannelStorageByQuery';
       // // 商品按查询条件同步
