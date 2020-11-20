@@ -163,7 +163,7 @@ export default {
       // 判断显示高级搜索还是正常搜素
       isShowSeniorOrOrdinary: true,
       // icon 样式
-      iconDownIcon: 'ark-icon iconfont iconios-arrow-down icon-xiadown',
+      iconDownIcon: 'ark-icon iconfont iconios-arrow-down',
 
       // tabs
       // 设置tabs默认值
@@ -2058,10 +2058,10 @@ export default {
             icon: 'iconfont iconbj_setup', // 按钮图标
             btnclick: () => {
               const self = this;
-              if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down icon-xiadown') {
-                self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
+              if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
+                self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
               } else {
-                self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down icon-xiadown';
+                self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
               }
               self.isShowSeniorOrOrdinary = true;
               self.publicBouncedConfig = {
@@ -3150,9 +3150,9 @@ export default {
     shutDownOrbounceOff() {
       const self = this;
       self.isShowFromLoading = true;
-      if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down icon-xiadown') {
+      if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
         // 打开高级搜索
-        self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down ';
+        self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up ';
         self.labelData = [];
         self.queryInfoData = [];
         self.clearFromListValue = true;
@@ -3160,7 +3160,7 @@ export default {
       } else {
         // 关闭高级搜索
         self.clearFromListValue = false;
-        self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down icon-xiadown';
+        self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
         self.highSearchData = [];
         self.isShowSeniorOrOrdinary = !self.isShowSeniorOrOrdinary;
         // 设置普通搜索默认选项
@@ -3168,8 +3168,6 @@ export default {
       }
       self.isShowFromLoading = false;
       self.getHeaderList();
-
-      // self.getData();
     },
     // 设置普通搜索默认选项
     setSearchOption() {
