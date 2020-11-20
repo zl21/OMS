@@ -136,60 +136,9 @@ export default {
     },
     // 发送请求,获取用户的action权限
     axiosAction() {
-      // let param = { AD_ACTION_NAME: this.$route.params[0].split("action/")[1] };
       this.actionFlag.deleteFlag = true;
       this.actionFlag.saveFlag = true;
-      // fetch('/p/cs/fetchActionsInCustomizePage', {param: param}).then(res => {
-      //   let result = res.data.data;
-      //   for(let r of result){
-      //     if(r.webname === "CusersproDelCmd") this.actionFlag.deleteFlag = true;
-      //     else if(r.webname === "CusersproSaveCmd") this.actionFlag.saveFlag = true;
-      //   }
-      // });
     },
-    // 发送请求,用户模糊搜索---弃用
-    // async axiosUser(query, flag) {
-    //   $('.table-scroll-body').scrollTop(0);
-    //   const _self = this;
-    //   const param = new URLSearchParams();
-    //   _self.searchQuery.userList = query;
-    //   param.append(
-    //     'QUERY',
-    //     JSON.stringify({
-    //       QUERY: _self.searchQuery.userList,
-    //       PAGENUM: 1,
-    //       PAGESIZE: _self.loadSize
-    //     })
-    //   );
-    //   try {
-    //     const res = await this.service.common.chrusersquery(param);
-    //     if (res.data.code === 0) {
-    //       const result = res.data.data;
-    //       _self.loadFlag = false;
-    //       _self.userList = result.list;
-
-    //       _self.loadNumber.userList = result.endRow;
-    //       _self.totalNumber.userList = result.total;
-
-    //       if (_self.userList.length > 0) {
-    //         _self.selectOne(_self.userList[0]);
-    //         //              _self.$set(_self.userList[0], "checked", true);
-    //         //              _self.userId = _self.userList[0].ID;
-    //         //              _self.axiosUserAuthority();
-    //       } else {
-    //         _self.userId = 0;
-    //         _self.userAuthorityList = [];
-    //         // 判断是否是刷新操作,添加提示信息
-    //         if (_self.actionFlag.freshFlag) {
-    //           _self.$message({ message: '刷新成功', type: 'success' });
-    //           _self.actionFlag.freshFlag = false;
-    //         }
-    //       }
-    //     } else if (_self.actionFlag.freshFlag) _self.actionFlag.freshFlag = false;
-    //   } catch (e) {
-    //     if (_self.actionFlag.freshFlag) _self.actionFlag.freshFlag = false;
-    //   }
-    // },
     // 用户组模糊搜索
     axiosGroup() {
       this.userSearchFlag = true;

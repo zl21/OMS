@@ -43,8 +43,8 @@ export const buttonPermissionsMixin = {
       const ar = [];
       obj.menuText = ele.caption;
       obj.dropDown = true;
-      ele.child.map((item) => {
-        btns.map((s_item) => {
+      ele.child.forEach(item => {
+        btns.forEach(s_item => {
           if (item.webdesc == s_item.text) {
             ar.push(s_item);
           }
