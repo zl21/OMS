@@ -9,6 +9,7 @@ import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import { customPagingMixins } from '@/assets/js/mixins/customPaging.js';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
+import loading from '@/component/loading.vue';
 
 // 表头的基本配置
 const baseColumnDefs = [
@@ -137,6 +138,7 @@ export default {
     aTable,
     businessLabel,
     jordanModal,
+    loading
   },
   mixins: [isFavoriteMixin, customPagingMixins, buttonPermissionsMixin],
   data() {
@@ -495,6 +497,8 @@ export default {
       labelDefaultValue: '1',
 
       agTableConfig: {
+
+        loading: false,
         // isIndex: true, // 如果要自定义序号，则将此key的值设置为true，而后自己定义序号生成器，可参考promotionlist.vue
         tableHeight: '440px',
         columnDefs: [

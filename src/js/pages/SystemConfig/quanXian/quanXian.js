@@ -4,6 +4,7 @@ import copyModal from '@/views/pages/SystemConfig/quanXian/copyModal';
 import R3 from '@syman/burgeon-r3';
 import form from '@/assets/js/__utils__/form';
 import qxBtnData from './qxBtnData';
+import loading from '@/component/loading.vue';
 
 console.log('R3::', R3);
 const { FilterTree, SelectTree, SearchForm } = R3.components;
@@ -15,7 +16,8 @@ export default {
     FilterTree,
     SelectTree,
     SearchForm,
-    copyModal
+    copyModal,
+    loading
   },
   mixins: [qxBtnData],
   data() {
