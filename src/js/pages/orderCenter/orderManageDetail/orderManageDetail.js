@@ -176,19 +176,14 @@ export default {
                 content: window.vmI18n.t('modalTips.g7'), // 是否确定反审核订单？
                 mask: true,
                 showCancel: true,
-                okText: vmI18n.t('common.cancel'), // 取消
-                cancelText: vmI18n.t('common.determine'), // 确定
-                onCancel: () => {
+                okText: window.vmI18n.t('common.determine'), // 取消
+                cancelText: window.vmI18n.t('common.cancel'), // 确定
+                onOk: () => {
                   this.service.orderCenter
                     .auditOrderReserve({
                       ids,
                       type: '1'
                     })
-                    // self.$network
-                    //   .post('/api/cs/oc/oms/v1/auditOrderReserve', {
-                    //     ids,
-                    //     type: '1',
-                    //   })
                     .then(res => {
                       if (res.data.code === 0) {
                         self.$Message.success(res.data.message);
@@ -224,9 +219,9 @@ export default {
                 content: self.vmI18n.t('modalTips.e0'), // 是否确定取消订单？
                 mask: true,
                 showCancel: true,
-                okText: self.vmI18n.t('common.determine'), // 取消
-                cancelText: self.vmI18n.t('common.cancel'), // 确定
-                onCancel: () => {
+                okText: self.vmI18n.t('common.determine'), // 确定
+                cancelText: self.vmI18n.t('common.cancel'), // 取消
+                onOk: () => {
                   self.service.orderCenter
                     .cancelOrder({ ids, type: '1' })
                     // self.$network
@@ -477,7 +472,7 @@ export default {
                 self.$Message.warning(window.vmI18n.t('modalTips.g9')); // "订单状态非未确认、缺货、已审核、配货中，不允许修改地址"
                 return;
               }
-              self.getWritData().then(res => {
+              this.service.orderCenter.getDetail({ ID: this.objId, isShowPii: true }).then(res => {
                 if (res.data && res.data.code === 0) {
                   const order = res.data.data;
                   self.dialogs.address.data = {
@@ -502,7 +497,7 @@ export default {
                   }
                 } else {
                   this.tab1 = this.tab1_default;
-                  this.$message.error(vmI18n.t('modalTips.h0')); // 地址信息获取失败
+                  this.$message.error(window.vmI18n.t('modalTips.h0')); // 地址信息获取失败
                 }
               });
             } // 按钮点击事件
@@ -778,10 +773,6 @@ export default {
         .catch(() => {
           this.pageLoad = false;
         });
-    },
-    getWritData() {
-      const data = { ID: this.objId, isShowPii: true };
-      this.service.orderCenter.getDetail(data);
     },
     asyncOK() {
       const self = this;

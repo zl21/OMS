@@ -1,10 +1,10 @@
 import businessForm from 'professionalComponents/businessForm';
-import jordanDialog from 'professionalComponents/businessDialog';
+import businessDialog from 'professionalComponents/businessDialog';
 
 export default {
   components: {
     businessForm,
-    jordanDialog
+    businessDialog
   },
   props: {
     objList: {

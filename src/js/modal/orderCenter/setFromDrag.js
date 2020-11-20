@@ -1,14 +1,8 @@
 import axios from 'axios';
-import jordanForm from 'professionalComponents/businessForm';
-import jordanBtn from 'professionalComponents/businessButton';
 import { listeningToKeydownMixin } from '@/assets/js/mixins/listeningToKeydown.js';
 
 export default {
   mixins: [listeningToKeydownMixin],
-  components: {
-    jordanForm,
-    jordanBtn
-  },
   data() {
     return {
       vmI18n: window.vmI18n,
@@ -50,11 +44,11 @@ export default {
     self.getData();
     const node = document.querySelector('#container');
     let draging = null;
-    node.ondragstart = function (event) {
+    node.ondragstart = (event)=> {
       event.dataTransfer.setData('te', event.target.innerText);
       draging = event.target;
     };
-    node.ondragover = function (event) {
+    node.ondragover = (event) => {
       event.preventDefault();
       const target = event.target;
       if (target.nodeName === 'LI' && target !== draging) {
@@ -79,7 +73,7 @@ export default {
       self.childArr = childArr;
     };
     // 完成拖拽后
-    node.ondrop = function (event) {
+    node.ondrop = () => {
       const param = {
         tableName: 'OC_B_ORDER',
         useronfigList: self.childArr
@@ -88,7 +82,7 @@ export default {
         url: '/api/cs/oc/oms/v1/saveQueryListConfig',
         method: 'post',
         data: param
-      }).then((res) => {
+      }).then(() => {
         self.$parent.$parent.$parent.getHeaderList();
       });
     };
@@ -113,7 +107,7 @@ export default {
         axios({
           url: '/api/cs/oc/oms/v1/saveQueryListConfig',
           method: 'post',
-          cancelToken: true,
+          // cancelToken: true,
           data: param
         }).then((res) => {
           if (res.data.code === 0) {
@@ -147,8 +141,7 @@ export default {
         data: fromdata
       }).then((res) => {
         const formArr = [];
-        const homearr = [];
-        res.data.date.map((item, index) => {
+        res.data.date.forEach((item, index) => {
           formArr[index] = {
             isfilter: item.tabth.isfilter,
             label: item.tabth.name,
@@ -166,7 +159,7 @@ export default {
       if (!el || !el.parentNode) {
         return -1;
       }
-      while (el && (el = el.previousElementSibling)) {
+      while (el && el.previousElementSibling) {
         index++;
       }
       return index;

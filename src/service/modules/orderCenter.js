@@ -73,6 +73,12 @@ export default {
   querySkuListAndStorageInfo: params => network.post('/api/cs/oc/oms/v1/querySkuListAndStorageInfo', params),
   updateLogistics: params => network.post('/api/cs/oc/oms/v1/updateLogistics', params),
   manualMatchingList: params => network.post('/api/cs/oc/oms/v1/manualMatchingList', params),
+  distributionFindBydistributionId: params => network.post('/api/cs/vip/distributionItem/v1/findBydistributionId', params), // 根据配货单id查询配货单明细
+  distributionChangeTag: params => network.post('/api/cs/vip/distribution/v1/changeTag', params), // 配货单换吊牌的保存 
+  managementOrderHold: params => network.post('/api/cs/oc/oms/v1/holdOrder', params), // 零售发货单-HOLD单
+  returnTypeItemquery: params => network.post('/p/cs/objectTableItem', params), // 退款分类-退款分类描述
+  extraReturnTableLogQuery: params => network.post('/api/cs/oc/oms/v1/getOcBReturnAfSendLog', params), // 额外退款单-额外退款单日志
+
   // 半定制弹框
   //
   updateWarehouse: params => network.post('/api/cs/oc/oms/v1/updateWarehouse', params),

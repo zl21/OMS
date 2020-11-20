@@ -1,6 +1,6 @@
 <template>
   <div class="dialog">
-    <jordan-table
+    <business-action-table
       :jordan-table-config="jordanTableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
@@ -8,7 +8,7 @@
       @on-select-all-cancel="onSelectAllCancel"
     />
     <div class="dialogBtn">
-      <jordan-button :btn-config="btnConfig" />
+      <business-button :btn-config="btnConfig" />
     </div>
   </div>
 </template>

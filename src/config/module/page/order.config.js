@@ -62,5 +62,9 @@ export default {
   },
   DISTRIBUTIONORDERLIST: {
     component: distributionOrderList
-  }
+  },
+  SPLITDISTRIBUTIONORDER: {
+    // JIT配货单-换吊牌
+    component: () => import('@/views/pages/OrderCenter/distribution/splitDistributionOrder.vue')
+  },
 };
