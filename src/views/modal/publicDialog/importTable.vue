@@ -2,6 +2,7 @@
 <template>
   <div>
     <div class="content">
+      <loading :loading="loading"></loading>
       <div class="iconclass">
         <i class="burgeon-icon iconfont icondaoru" />
       </div>
