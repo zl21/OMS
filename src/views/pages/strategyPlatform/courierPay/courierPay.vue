@@ -46,8 +46,6 @@
         </p>
       </Panel>
     </Collapse>
-    <!-- tab切换 -->
-    <!-- <jordan-label :labelList="labelList" :labelDefaultValue="labelDefaultValue"></jordan-label> -->
   </div>
 </template>
 <script>

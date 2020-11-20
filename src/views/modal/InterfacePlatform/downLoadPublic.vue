@@ -36,7 +36,7 @@
         {{ vmI18n.t("common.cancel") }}
       </Button>
     </div>
-    <jordan-dialog
+    <businessDialog
       ref="dialog"
       :title="dialogConfig.title"
       :component-data="dialogConfig.componentData"
