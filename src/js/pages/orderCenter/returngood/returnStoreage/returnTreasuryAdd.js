@@ -3,7 +3,7 @@ import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
-import OrderItem from '@/views/pages/OrderCenter/orderManageDetail/details/orderItem.vue';
+import OrderItem from 'allpages/OrderCenter/orderManageDetail/details/orderItem.vue';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
 
@@ -875,12 +875,6 @@ export default {
       _this.isSaveLoading = true;
       _this.service.orderCenter
         .ReturnStorageSave(params)
-        // axios({
-        //   url: '/api/cs/oc/oms/v1/ReturnStorageSave',
-        //   method: 'post',
-        //   // cancelToken: true,
-        //   data: params,
-        // })
         .then(res => {
           if (res.data.code == 0) {
             _this.isSaveLoading = false;
@@ -1062,12 +1056,6 @@ export default {
       };
       this.service.orderCenter
         .searchButtonsInDetail(param)
-        // axios({
-        //   url: '/api/cs/oc/oms/v1/searchButtonsInDetail',
-        //   method: 'post',
-        //   // cancelToken: true,
-        //   data: param,
-        // })
         .then(res => {
           if (res.data.code == 0 && res.data.data !== null) {
             // _this.order.table.data = res.data.data;
