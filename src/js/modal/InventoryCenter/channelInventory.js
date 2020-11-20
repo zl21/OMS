@@ -22,7 +22,7 @@ export default {
         return false;
       }
       const url = '';
-      if (!this.allFormData.CP_C_SHOP_ID && !this.allFormData.SKU_ID && !this.allFormData.PS_C_SKU_ECODE && !this.allFormData.NUMIID) {
+      if (!this.allFormData.CP_C_SHOP_ID && !this.allFormData.SKU_ID && !this.allFormData.PS_C_SKU_ECODE && !this.allFormData.NUMIID && !this.allFormData.PS_C_PRO_ECODE) {
         this.$Message.warning('查询条件【平台店铺、平台条码ID、平台商品ID、条码编码、商品编码】至少选择一个！');
         return;
       }

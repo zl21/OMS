@@ -748,8 +748,6 @@ export default {
       this.pageLoad = true;
       this.service.orderCenter
         .getDetail(data)
-        // this.$network
-        //   .post('/api/cs/oc/oms/v1/getDetail', data)
         .then(res => {
           this.pageLoad = false;
           if (res.data && res.data.code === 0) {

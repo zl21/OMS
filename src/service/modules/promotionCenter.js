@@ -12,8 +12,6 @@ export default {
   // 查看日志
   cpromLogQuery: params => network.post('/p/cs/cpromLogQuery', params),
   // 获取button数组
-  // fetchActionsInCustomizePage: params => network.get('/p/cs/fetchActionsInCustomizePage', params),
-  // network.get(`/p/cs/v2/fetchActionsInCustomizePage?${qs.stringify(params)}`)
   // 发布
   updatePmStatus: params => network.post('/p/cs/pm/v1/updatePmStatus', params),
   // 删除

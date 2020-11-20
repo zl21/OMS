@@ -31,12 +31,15 @@
         }
       };
     },
+    mounted() {
+      this.query();
+    },
     methods: {
-      // query(){
-      //     network.get(`/api/cs/vip/distribution/v1/out/storage?outStorageCode=${}&pageNum=${}&pageSize=${}`).then(res=>{
-
-      //     })
-      // }
+      query() {
+        network.get(`/api/cs/vip/distribution/v1/out/storage?OcBVipcomDeliveryId=${this.$route.params.tableId}&pageNum=${1}&pageSize=${10}`).then(res=>{
+          console.log(res);
+        });
+      }
     }
   };
 </script>

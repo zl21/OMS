@@ -651,25 +651,6 @@ export default {
         self.$message.error(message);
       }
     },
-    // 获取button数组
-    // async getPermissions() {
-    //   const buttons = [];
-    //   const params = {
-    //     param: {
-    //       AD_ACTION_NAME: 'promactiquerylist'
-    //     }
-    //   };
-    //   // 获取button数组
-    //   const {
-    //     data: { code, data }
-    //   } = await this.service.promotionCenter.fetchActionsInCustomizePage(params);
-    //   if (code === 0) {
-    //     data.forEach(item => {
-    //       buttons.push(item.webid);
-    //     });
-    //   }
-    //   this.buttons = buttons;
-    // },
     errorDialogClose(value, option) {
       console.log(value, option);
       if (option) {
