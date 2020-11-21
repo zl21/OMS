@@ -16,7 +16,7 @@
             :label="index"
           >
             <img
-              :src="'/src/assets/image/img/'+index+'.png'"
+              :src="require(`@/assets/image/img/${index}.png`)"
               alt
             >
           </Radio>
@@ -74,12 +74,12 @@
   </div>
 </template>
 <script>
-  import changeRemark from '@/js/modal/orderCenter/changeRemark';
+import changeRemark from '@/js/modal/orderCenter/changeRemark';
 
-  export default changeRemark;
+export default changeRemark;
 </script>
 
 <style lang='less'>
-  /* radio框样式调整 */
-  @import "~@/css/modal/orderCenter/changeRemark.less";
+/* radio框样式调整 */
+@import '~@/css/modal/orderCenter/changeRemark.less';
 </style>

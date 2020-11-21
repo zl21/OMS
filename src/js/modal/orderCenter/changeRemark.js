@@ -83,9 +83,6 @@ export default {
       if (e.keyCode == 13 && this.btnConfig.buttons[0].disabled == false) {
         this.determine();
       }
-      //  else if(e.keyCode == 13 && this.btnConfig.buttons[0].disabled == true){
-      //   this.saveRemark();
-      // }
     },
     determine() {
       const self = this;
