@@ -1023,15 +1023,18 @@ body {
       border-top: none;
       margin-bottom: 10px;
 
-      &.ark-collapse-item-active {
-        &>.ark-collapse-header>i {
-          transform: inherit;
-        }
-      }
+      // &.ark-collapse-item-active {
+      //   &>.ark-collapse-header {
+      //     &>i {
+      //       display: none;
+      //       transform: inherit;
+      //     }
+      //   }
+      // }
 
       &>.ark-collapse-header {
         text-align: left;
-        padding: 0 5px;
+        padding: 0 20px;
         background: #f7f8fa;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
@@ -1041,18 +1044,33 @@ body {
         font-size: 14px;
         color: #1f2d3d;
         border-bottom: none !important;
-
-        &>.iconios-arrow-forward:before,
-        &>.iconmd-arrow-dropdown:before {
+        &::before{
           position: absolute;
           top: 50%;
           left: 12px;
           transform: translateY(-50%);
+          display: block;
           content: "";
           width: 3px;
           height: 14px;
           background: #155bd4;
         }
+        &>i{
+          display: none;
+        }
+        // &>.iconios-arrow-forward:before,
+        // &>.iconmd-arrow-dropdown:before {
+        //   display: none;
+        //   position: absolute;
+        //   top: 50%;
+        //   left: 12px;
+        //   transform: translateY(-50%);
+        //   display: block;
+        //   content: "";
+        //   width: 3px;
+        //   height: 14px;
+        //   background: #155bd4;
+        // }
       }
 
       &>.ark-collapse-content {
@@ -1106,7 +1124,8 @@ body .ark-spin-fix {
 }
 
 // 定制界面 搜边距
-.returnForm,.returnstoreage {
+.returnForm,
+.returnstoreage {
   .orderManageEdit {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -1190,11 +1209,15 @@ body .ark-spin-fix {
     left: 6px;
   }
 }
-.jordan-table{
-  .ark-table-fixed tfoot tr, .ark-table-fixed-right tfoot tr{
+
+.jordan-table {
+
+  .ark-table-fixed tfoot tr,
+  .ark-table-fixed-right tfoot tr {
     height: 30px;
   }
-  .ark-table-tfoot{
+
+  .ark-table-tfoot {
     transform: inherit !important;
   }
 }
