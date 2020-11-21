@@ -10,6 +10,7 @@ export const buttonPermissionsMixin = {
           AD_ACTION_NAME: params
         })
       };
+      console.log('this[arrry].buttons===', this[arrry].buttons)
       this.service.common.fetchActionsInCustomizePage(query).then(res => {
         const result = res.data.data || [];
         independent = result;
@@ -19,6 +20,7 @@ export const buttonPermissionsMixin = {
             a.push(item);
           }
         });
+        
         const c = [];
         result.forEach((element, index) => {
           if (element.child) {
@@ -34,7 +36,7 @@ export const buttonPermissionsMixin = {
         if (isIndependent) {
           return independent;
         }
-        console.log('c-----', c);
+        // console.log('c-----', c);
         this[arrry].buttons = [...c, ...a];
       });
     },
@@ -44,6 +46,7 @@ export const buttonPermissionsMixin = {
       obj.menuText = ele.caption;
       obj.dropDown = true;
       ele.child.forEach(item => {
+
         btns.forEach(s_item => {
           if (item.webdesc == s_item.text) {
             ar.push(s_item);

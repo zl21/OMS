@@ -209,50 +209,6 @@ export default {
             }
           },
           {
-            text: window.vmI18n.t('btn.batchModify_warehouse'), // 订单取消
-            btnclick: () => {
-              const self = this;
-              const ids = [];
-              ids[0] = this.$route.params.customizedModuleId;
-              this.$Modal.info({
-                title: self.vmI18n.t('modalTitle.tips'), // 提示
-                content: self.vmI18n.t('modalTips.e0'), // 是否确定取消订单？
-                mask: true,
-                showCancel: true,
-                okText: self.vmI18n.t('common.determine'), // 确定
-                cancelText: self.vmI18n.t('common.cancel'), // 取消
-                onOk: () => {
-                  self.service.orderCenter
-                    .cancelOrder({ ids, type: '1' })
-                    // self.$network
-                    //   .post('/api/cs/oc/oms/v1/cancelOrder', { ids, type: '1' })
-                    .then(res => {
-                      if (res.data.code === 0) {
-                        self.$Message.success(res.data.message);
-                        self.load();
-                        self.selection = [];
-                      } else {
-                        self.$Modal.error({
-                          title: self.vmI18n.t('modalTitle.tips'), // 提示
-                          content: res.data.message,
-                          cancelType: true,
-                          titleAlign: 'left',
-                          mask: true,
-                          draggable: true,
-                          keyDown: event => {
-                            if (event.keyCode == 27 || event.keyCode == 13) {
-                              self.$Modal.remove();
-                            }
-                          }
-                        });
-                      }
-                      self.btnConfig.loading = false;
-                    });
-                }
-              });
-            }
-          },
-          {
             text: window.vmI18n.t('btn.holdOrder'), // Hold单
             btnclick: () => {
               const self = this;
@@ -365,8 +321,6 @@ export default {
               fromdata.append('ids', ids);
               self.service.orderCenter
                 .checkOrderBeforeWarehouse(fromdata)
-                // self.$network
-                //   .post('/api/cs/oc/oms/v1/checkOrderBeforeWarehouse', fromdata)
                 .then(res => {
                   if (res.data.code === 0) {
                     self.publicBouncedConfig = publicDialogConfig.changeWarehouseConfig;
