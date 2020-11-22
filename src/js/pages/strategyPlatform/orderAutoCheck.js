@@ -250,7 +250,7 @@ export default {
       } else if (type == 'IS_MERGE_ORDER') {
         this.result.IS_MERGE_ORDER = this.IS_MERGE_ORDER ? 'Y' : 'N';
       } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME' || type === 'CP_C_LOGISTICS_ID' || type === 'ANTI_AUDIT_WAIT_TIME') {
-        this.result[type] = this.info[type];
+        this.result[type] = this.info[type] ? this.info[type] : '';
       } else if (type == 'orderType') {
         if (this.orderType.length === 7) {
           this.indeterminate = false;

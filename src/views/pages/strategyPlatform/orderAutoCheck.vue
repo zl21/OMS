@@ -125,6 +125,7 @@
                     <Select
                       v-model="info.CP_C_LOGISTICS_ID"
                       @on-change="setResult('CP_C_LOGISTICS_ID')"
+                      clearable
                     >
                       <Option
                         v-for="(item, index) in CP_C_LOGISTICS_ID_SELECT"
