@@ -1,4 +1,4 @@
-
+import axios from 'axios';
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
@@ -117,11 +117,10 @@ export default {
             label: '国标码',
             value: 'GBCODE',
             width: '6'
-          },
+          }
         ],
         formValue: {},
-        ruleValidate: {
-        },
+        ruleValidate: {},
         flodClick: () => {
           setTimeout(() => {
             this.setTableHeight();
@@ -197,13 +196,7 @@ export default {
       statusTab: '' // 单据类型
     };
   },
-  // activated() {
-  //   // 获取默认数据
-  //   this.jordanTableConfig.current = 1;
-  //   this.getList();
-  // },
-  created() {
-  },
+  created() {},
   mounted() {
     this.$nextTick(() => {
       this.getPermissions('btnConfig', 'sgStorageChangeFtpQuery');
@@ -245,8 +238,7 @@ export default {
       _this.jordanTableConfig.data = [];
       _this.jordanTableConfig.total = 0;
       _this.jordanTableConfig.loading = true;
-      const dealForm = {
-      };
+      const dealForm = {};
       const whereInfoForm = Object.assign(mainData, dealForm);
       const param = {
         whereInfo: whereInfoForm,
@@ -255,11 +247,13 @@ export default {
       };
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
-      const { data: { data, code } } = await this.service.inventoryCenter.getChannelStorageFtpQuery(fromdata);
+      const {
+        data: { data, code }
+      } = await this.service.inventoryCenter.getChannelStorageFtpQuery(fromdata);
       _this.jordanTableConfig.loading = false;
       _this.returnSelectData = [];
       if (code === 0 && data.sgChannelStorageFtpResultList.length) {
-        data.sgChannelStorageFtpResultList.map(item => {
+        data.sgChannelStorageFtpResultList.forEach(item => {
           item.CREATIONDATE = item.CREATIONDATE ? publicMethodsUtil.DatesTime(item.CREATIONDATE) : '';
         });
         _this.jordanTableConfig.total = data.totalSize;
@@ -268,26 +262,8 @@ export default {
         _this.jordanTableConfig.data = [];
         _this.jordanTableConfig.total = 0;
       }
-      // axios({
-      //   url: "/p/cs/getChannelStorageFtpQuery",
-      //   method: "post",
-      //   data: fromdata
-      // }).then(res => {
-      //   _this.jordanTableConfig.loading = false;
-      //   _this.returnSelectData = [];
-      //   if (res.data.code === 0 && res.data.data.sgChannelStorageFtpResultList.length) {
-      //     res.data.data.sgChannelStorageFtpResultList.map(item => {
-      //       item.CREATIONDATE = item.CREATIONDATE ? publicMethodsUtil.DatesTime(item.CREATIONDATE) : "";
-      //     });
-      //     _this.jordanTableConfig.total = res.data.data.totalSize;
-      //     _this.jordanTableConfig.data = res.data.data.sgChannelStorageFtpResultList;
-      //   } else {
-      //     _this.jordanTableConfig.data = [];
-      //     _this.jordanTableConfig.total = 0;
-      //   }
-      // });
     },
-    oneObjs(e) { },
+    oneObjs() {},
     // 列表勾选
     returnOnSelect(e) {
       this.returnSelectData = e;
@@ -316,19 +292,16 @@ export default {
       this.jordanTableConfig.pageSize = val;
     },
     // 导入
-    returnExport() { },
+    returnExport() {},
     // 导出
-    returnImport() { },
+    returnImport() {},
     // 设置表格高度
     setTableHeight() {
       const _this = this;
-      const contentHeight = document.getElementById('ContentDisplayArea')
-        .clientHeight;
+      const contentHeight = document.getElementById('ContentDisplayArea').clientHeight;
       let returnHeight = 25;
-      returnHeight += document.getElementsByClassName('returnBtn')[0]
-        .clientHeight;
-      returnHeight += document.getElementsByClassName('returnForm')[0]
-        .clientHeight;
+      returnHeight += document.getElementsByClassName('returnBtn')[0].clientHeight;
+      returnHeight += document.getElementsByClassName('returnForm')[0].clientHeight;
       const tableHeight = contentHeight - returnHeight;
       _this.jordanTableConfig.height = tableHeight - 130;
     },
@@ -344,7 +317,7 @@ export default {
         axios({
           url: '/p/cs/exportPayableAdjustment',
           method: 'post',
-          cancelToken: true,
+          // cancelToken: true,
           data: idList
         }).then(res => {
           if (res.data.code === 0 && res.data.data !== null) {
@@ -358,7 +331,10 @@ export default {
           }
         });
       } else {
-        if (_this.jordanTableConfig.data.length === 0) return _this.$Message.error('列表没有数据,无法导出!');
+        if (_this.jordanTableConfig.data.length === 0) {
+          _this.$Message.error('列表没有数据,无法导出!');
+          return;
+        }
         if (_this.statusTab === '') {
           _this.warningModal = true;
         } else {
@@ -368,14 +344,14 @@ export default {
     },
     // 导出
     downloadUrlFile(src) {
-      const download_file = {};
-      if (typeof download_file.iframe == 'undefined') {
+      const downloadFile = {};
+      if (typeof downloadFile.iframe == 'undefined') {
         const iframe = document.createElement('iframe');
-        download_file.iframe = iframe;
-        document.body.appendChild(download_file.iframe);
+        downloadFile.iframe = iframe;
+        document.body.appendChild(downloadFile.iframe);
       }
-      download_file.iframe.src = src;
-      download_file.iframe.style.display = 'none';
+      downloadFile.iframe.src = src;
+      downloadFile.iframe.style.display = 'none';
     },
     // 警告框确认
     warningOk() {
@@ -387,7 +363,7 @@ export default {
       axios({
         url: '/p/cs/exportPayableAdjustment',
         method: 'post',
-        cancelToken: true,
+        // cancelToken: true,
         data: Object.assign(param, _this.formConfig.formValue)
       }).then(res => {
         if (res.data.code === 0 && res.data.data !== null) {

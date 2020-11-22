@@ -15,7 +15,7 @@ export default {
   },
   watch: {
     componentData: {
-      handler(newVal, oldVal) {
+      handler(newVal) {
         this.request(newVal);
       },
       deep: true
@@ -157,19 +157,19 @@ export default {
   },
   methods: {
     // 选中某一项时触发
-    onSelect(selection, row) { },
+    onSelect() {},
     // 取消选中某一项时触发
-    onSelectCancel(selection, row) { },
+    onSelectCancel() {},
     // 点击全选时触发
-    onSelectAll(selection) { },
+    onSelectAll() {},
     // 点击取消全选时触发
-    onSelectAllCancel(selection) { },
+    onSelectAllCancel() {},
     // 单击某一行时触发
-    onRowClick(row, index) {
+    onRowClick(row) {
       this.selection = row;
     },
     // 单击某二行时触发
-    onRowDblclick(row, index) {
+    onRowDblclick(row) {
       this.selection = row;
     },
     // 分页change 事件
@@ -182,7 +182,7 @@ export default {
       this.tableConfig.pageSize = val;
       this.search();
     },
-    tableDeleteDetail() { },
+    tableDeleteDetail() {},
     async request(req) {
       const self = this;
       self.objid = req.objid || -1;
@@ -193,15 +193,11 @@ export default {
         isBlur: 'Y',
         psCSku: {}
       };
-      list.forEach((item) => {
+      list.forEach(item => {
         if (item.column === 'IS_GIFT' && self.componentData.order) {
           param.isGift = self.componentData.order.IS_GIFT || 'Y';
         } else if (self.componentData && self.componentData.order) {
-          param.psCSku[item.column] = self.componentData
-              && self.componentData.order
-              && self.componentData.order[item.column]
-            ? self.componentData.order[item.column]
-            : '';
+          param.psCSku[item.column] = self.componentData && self.componentData.order && self.componentData.order[item.column] ? self.componentData.order[item.column] : '';
         }
       });
     },
@@ -209,9 +205,13 @@ export default {
       const self = this;
       const ECODE = this.selection && this.selection.ECODE ? this.selection.ECODE : '';
       if (ECODE === '') {
-        return self.$Message.error('请选择需要更换的商品');
+        self.$Message.error('请选择需要更换的商品');
+        return;
       }
-      if (self.itemskuid === this.selection.skuId) return self.$Message.error('不可以选择更换当前商品！');
+      if (self.itemskuid === this.selection.skuId) {
+        self.$Message.error('不可以选择更换当前商品！');
+        return;
+      }
       const keys = {
         colorCode: 'COLOR_CODE',
         colorId: 'COLOR_ID',
@@ -246,9 +246,9 @@ export default {
       axios({
         url: '/api/cs/oc/oms/v1/modifygoods',
         method: 'post',
-        cancelToken: true,
+        // cancelToken: true,
         data: param
-      }).then((res) => {
+      }).then(res => {
         if (res.data.code === 0) {
           self.$Message.info(res.data.message);
           self.$parent.$parent.$parent.getData();
@@ -266,9 +266,14 @@ export default {
       // 检验搜索条件是否所有都为空，如果是，不允许搜索 2019-5-29
       const isNull = Object.values(p).every(item => item === '' || item === null);
       if (isNull) {
-        return self.$Message.warning('请填写筛选条件');
+        self.$Message.warning('请填写筛选条件');
+        return;
       }
-      p.IS_GIFT = p.IS_GIFT != '' ? (p.IS_GIFT === '是' ? 'Y' : 'N') : '';
+      if (p.IS_GIFT != '') {
+        p.IS_GIFT = p.IS_GIFT === '是' ? 'Y' : 'N';
+      } else {
+        p.IS_GIFT = '';
+      }
       const param = {
         isBlur: 'Y',
         offSet: this.tableConfig.current || 1, // 当前页
@@ -286,10 +291,10 @@ export default {
     reaptData(obj) {
       if (obj instanceof Array) {
         const temp = [];
-        obj.forEach((item, index) => {
+        obj.forEach(item => {
           const temp2 = [];
           if (item instanceof Array) {
-            item.forEach((item2, index) => {
+            item.forEach(item2 => {
               temp2.push(item2);
             });
             temp.push(temp2);
@@ -298,7 +303,7 @@ export default {
           }
         });
         return temp;
-      } 
+      }
       const temp = {};
       for (const item in obj) {
         temp[item] = obj[item];
@@ -317,5 +322,5 @@ export default {
   mounted() {
     this.request(this.componentData);
   },
-  created() { }
+  created() {}
 };

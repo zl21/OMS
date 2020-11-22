@@ -331,7 +331,7 @@ export default {
       axios({
         url: '/api/cs/oc/oms/v1/seachForced',
         method: 'post',
-        cancelToken: true,
+        // cancelToken: true,
         data: param
       }).then((res) => {
         this.$parent.$parent.closeConfirm();

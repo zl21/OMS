@@ -1180,11 +1180,6 @@ export default {
                   ids[index] = item.ID;
                 });
                 self.service.orderCenter.auditOrderReserve({ ids, type: '1' })
-                // self.$network
-                //   .post('/api/cs/oc/oms/v1/auditOrderReserve', {
-                //     ids,
-                //     type: '1',
-                //   })
                   .then((res) => {
                     if (res.data.code === 0) {
                       self.$Message.success(res.data.message);
@@ -1215,55 +1210,6 @@ export default {
                 });
               }
             }, // 按钮点击事件
-          },
-          // {
-          //   text: "WMS撤回", //按钮文本
-          //   btnclick: () => {
-          //     let self = this;
-          //     if (self.selection.length > 0) {
-          //       self.btnConfig.loading = true;
-          //       let ids = [];
-          //       self.selection.forEach((item, index) => {
-          //         ids[index] = item.ID;
-          //       });
-          //       axios({
-          //         url: "/p/cs/auditingContrary",
-          //         method: "post",
-          //         cancelToken: true,
-          //         data: { ids: ids,  type: '3'}
-          //       }).then(function(res) {
-          //         if (res.data.code === 0) {
-          //           self.selection = [];
-          //           self.getData();
-          //           self.$Message.success(res.data.message);
-          //         } else {
-          //           self.$Modal.error({
-          //             title: self.vmI18n.t('modalTitle.tips'),//提示,
-          //             content: res.data.message,
-          //             cancelType: true,
-          //             titleAlign: "left",
-          //             mask: true,
-          //             draggable: true,
-          //             keyDown: event => {
-          //               if (event.keyCode == 27 || event.keyCode == 13) {
-          //                 self.$Modal.remove();
-          //               }
-          //             }
-          //           });
-          //         }
-          //         self.btnConfig.loading = false;
-          //       });
-          //     } else {
-          //       self.$Message.warning({
-          //         content: "请选择需要WMS撤回记录！",
-          //         duration: 5,
-          //         top: 80
-          //       });
-          //     }
-          //   } //按钮点击事件
-          // },
-          {
-            text: window.vmI18n.t('btn.batchModify'), // 批量修改
           },
           {
             text: window.vmI18n.t('btn.batchModify_logistics'), // 批量修改物流
