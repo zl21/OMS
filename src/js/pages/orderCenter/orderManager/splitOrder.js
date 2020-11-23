@@ -132,7 +132,8 @@ export default {
               h('Input', {
                 props: {
                   value: params.row.split_num,
-                  disabled: this.dataIndex !== 0
+                  disabled: this.dataIndex !== 0,
+                  regx: /^[0-9]/,
                 },
                 on: {
                   'on-change': value => {
@@ -156,6 +157,9 @@ export default {
                       });
                     }
                     this.data[0][params.index] = params.row;
+                  },
+                  'on-regx-check': (value,errorValue) => {
+                    console.log('拆分数量不能为负');
                   }
                 },
                 style: {
