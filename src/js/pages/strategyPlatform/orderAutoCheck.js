@@ -29,7 +29,8 @@ export default {
               R3.store.commit('global/tabOpen', {
                 type: 'S',
                 tableName: 'ST_C_AUTOCHECK',
-                tableId: 24634
+                tableId: 24634,
+                back: true,
               });
             } // 按钮点击事件
           }
@@ -318,7 +319,8 @@ export default {
             R3.store.commit('global/tabOpen', {
               type: 'S',
               tableName: 'ST_C_AUTOCHECK',
-              tableId: 24634
+              tableId: 24634,
+              back: true,
             });
             this.$destroy();
             return;
