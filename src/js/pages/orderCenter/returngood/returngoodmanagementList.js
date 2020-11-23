@@ -794,12 +794,6 @@ export default {
       }
       this.service.orderCenter
         .querySalesReturn(Object.assign(param, _this.formConfig.formValue))
-        // this.$network
-        //   .axios({
-        //     url: '/api/cs/oc/oms/v1/querySalesReturn',
-        //     method: 'post',
-        //     data: Object.assign(param, _this.formConfig.formValue),
-        //   })
         .then(res => {
           if (res.data.code == 0 && res.data.data.queryResult.length) {
             _this.agTableConfig.agLoading = false;
@@ -959,12 +953,6 @@ export default {
       }
       this.service.orderCenter
         .querySalesReturn(Object.assign(param, _this.formConfig.formValue))
-        // this.$network
-        //   .axios({
-        //     url: '/api/cs/oc/oms/v1/querySalesReturn',
-        //     method: 'post',
-        //     data: Object.assign(param, _this.formConfig.formValue),
-        //   })
         .then(res => {
           if (res.data.code == 0 && res.data.data.queryResult.length) {
             _this.agTableConfig.agLoading = false;
@@ -1202,13 +1190,13 @@ export default {
         _this.$Message.error(this.vmI18n.t('modalTips.k3')); // 请选中一项修改!
         return;
       }
-      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME != '等待售后确认' && this.$refs.agGridChild.AGTABLE.getSelect().length == 1) {
+      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS != 30 && this.$refs.agGridChild.AGTABLE.getSelect().length == 1) {
         _this.$Message.warning(this.vmI18n.t('modalTips.k5')); // 当前选中行，无法使用此按钮!
         return;
       }
       const ids = [];
       for (let i = 0; i < this.$refs.agGridChild.AGTABLE.getSelect().length; i++) {
-        if (this.$refs.agGridChild.AGTABLE.getSelect()[i].RETURN_STATUS_NAME == '等待售后确认') {
+        if (this.$refs.agGridChild.AGTABLE.getSelect()[i].RETURN_STATUS == 30) {
           ids.push(this.$refs.agGridChild.AGTABLE.getSelect()[i].ID);
         }
       }
@@ -1355,13 +1343,6 @@ export default {
       });
       this.service.orderCenter
         .virtualWarehouseStorage({ ids })
-        // this.$network
-        //   .axios({
-        //     url: '/p/cs/virtualWarehouseStorage',
-        //     method: 'post',
-        //     cancelToken: true,
-        //     data: { ids },
-        //   })
         .then(res => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);
@@ -1380,13 +1361,6 @@ export default {
       }
       this.service.orderCenter
         .cancelautorefund({ ID: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID })
-        // this.$network
-        //   .axios({
-        //     url: '/api/cs/oc/oms/v1/cancelautorefund',
-        //     method: 'post',
-        //     cancelToken: true,
-        //     data: { ID: this.returnSelectData[0].ID },
-        //   })
         .then(res => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);
@@ -1403,13 +1377,13 @@ export default {
         this.$Message.error(this.vmI18n.t('modalTips.m1')); // 请至少选中一项修改!
         return;
       }
-      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME == '取消' && this.$refs.agGridChild.AGTABLE.getSelect().length == 1) {
+      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS == 60 && this.$refs.agGridChild.AGTABLE.getSelect().length == 1) {
         this.$Message.error(this.vmI18n.t('modalTips.m2')); // 取消状态不允许修改备注!
         return;
       }
       const ids = [];
       for (let i = 0; i < this.$refs.agGridChild.AGTABLE.getSelect().length; i++) {
-        if (this.$refs.agGridChild.AGTABLE.getSelect()[i].RETURN_STATUS_NAME != '取消') {
+        if (this.$refs.agGridChild.AGTABLE.getSelect()[i].RETURN_STATUS != 60) {
           ids.push(this.$refs.agGridChild.AGTABLE.getSelect()[i].ID);
         }
       }
@@ -1523,13 +1497,6 @@ export default {
       }
       this.service.orderCenter
         .orderReturnRecallFromWms({ ID: ids })
-        // this.$network
-        //   .axios({
-        //     url: '/p/cs/orderReturnRecallFromWms',
-        //     method: 'post',
-        //     cancelToken: true,
-        //     data: { ID: ids },
-        //   })
         .then(res => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);
@@ -1552,13 +1519,6 @@ export default {
       }
       this.service.orderCenter
         .retransmissionWms({ returnOrderIds: ids.join(',') })
-        // this.$network
-        //   .axios({
-        //     url: '/p/cs/retransmissionWms',
-        //     method: 'post',
-        //     cancelToken: true,
-        //     data: { returnOrderIds: ids.join(',') },
-        //   })
         .then(res => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);
@@ -1575,7 +1535,7 @@ export default {
         this.$Message.error(this.vmI18n.t('modalTips.l0')); // 请至少选中一项!
         return;
       }
-      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS_NAME != '等待售后确认' && this.$refs.agGridChild.AGTABLE.getSelect().length == 1) {
+      if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS != 30 && this.$refs.agGridChild.AGTABLE.getSelect().length == 1) {
         this.$Message.error(this.vmI18n.t('modalTips.m8')); // 只有等待售后确认状态可以强制完成!
         return;
       }

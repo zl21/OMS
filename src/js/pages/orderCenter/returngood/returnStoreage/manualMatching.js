@@ -655,7 +655,7 @@ export default {
       axios({
         url,
         method: 'post',
-        cancelToken: true,
+        // cancelToken: true,
         data: params
       }).then((res) => {
         if (res.data.code == 0) {
@@ -812,7 +812,7 @@ export default {
       axios({
         url: '/api/cs/oc/oms/v1/searchButtonsInDetail',
         method: 'post',
-        cancelToken: true,
+        // cancelToken: true,
         data: param
       }).then((res) => {
         if (res.data.code == 0) {
@@ -844,7 +844,7 @@ export default {
         axios({
           url: '/api/cs/oc/oms/v1/searchButtonsInDetail',
           method: 'post',
-          cancelToken: true,
+          // cancelToken: true,
           data: params
         }).then((res) => {
           if (res.data.code === 0) {

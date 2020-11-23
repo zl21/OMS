@@ -578,11 +578,11 @@ export default {
   },
   methods: {
     // 选中的退货明细赋值
-    returnArr(data, itemId) {
+    returnArr(data) {
       this.jordanTableConfig.data[this.index].OC_B_JD_RETURN_ORDER_ID = data;
     },
     // 选中的退货明细赋值
-    returnArr1(data, data1, itemId) {
+    returnArr1(data, data1) {
       this.jordanTableConfig.data[this.index].OC_B_JD_RETURN_ORDER_ID = data;
       this.jordanTableConfig.data[this.index].REAL_SEND_SKU = data1;
     },
@@ -640,7 +640,7 @@ export default {
       axios({
         url,
         method: 'post',
-        cancelToken: true,
+        // cancelToken: true,
         data: params
       }).then((res) => {
         if (res.data.code === 0) {
@@ -717,7 +717,6 @@ export default {
     },
     // 获取特殊处理类型字段选项组
     async obtainWarehouse() {
-      const _this = this;
       const fromdata = new FormData();
       fromdata.append('table', 'OC_B_JD_REFUND_IN');
       fromdata.append('objid', -1);
@@ -752,7 +751,7 @@ export default {
         if (res.data.code === 0) {
           _this.optionsData = res.data.data;
           const options = res.data.data;
-          options.map((item) => {
+          options.forEach((item) => {
             item.label = item.BATCH_NO;
             item.value = item.ID;
           });
@@ -804,7 +803,7 @@ export default {
         }
         _this.order.table.loading = false;
       } catch (e) {
-        _this.$Message.error(err.message);
+        _this.$Message.error(e.message);
         _this.order.table.loading = false;
       }
     },
