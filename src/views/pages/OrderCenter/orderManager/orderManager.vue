@@ -17,6 +17,7 @@
         <loading :loading="agTableConfig.agLoading"></loading>
       </div>
       <IntegrateSearchFilter
+        ref="integrateSearchFilter"
         v-if="isShowSeniorOrOrdinary"
         id="IntegrateSearchFilter"
         v-model="selectValue"
