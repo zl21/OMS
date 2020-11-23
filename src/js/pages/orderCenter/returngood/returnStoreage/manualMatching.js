@@ -426,6 +426,11 @@ export default {
     };
   },
   mounted() {
+    const that = this;
+    // eslint-disable-next-line no-unused-expressions
+    window.onresize = () => {
+      that.setTableHeight();
+    },
     this.$nextTick(() => {
       // 前提:公共逻辑处理必须使用jordanButton组件才可以使用公共逻辑
       // 参数1  关于是否是定制页面:action 半定制页面:halfaCustom （目前不生效）
