@@ -322,29 +322,31 @@ export default {
         .then(res => {
           if (res.data.code === 0) {
             // _this.$Message.success(res.data.message || "导入成功");
-            _this.$Message.success(res.data.message || this.vmI18n.t('modalTips.zd'));
-            _this.$emit('returnData', res.data.data);
-            if (_this.configTableName.includes(_this.componentData.tableName)) {
+            _this.$Message.success(res.data.message || this.vmI18n.t('modalTips.ze'));
+            /* if (_this.configTableName.includes(_this.componentData.tableName)) {
               _this.$parent.$emit('closeActionDialog');
             } else {
-              // _this.$parent.$parent.closeConfirm();
-              _this.$parent.$emit('closeActionDialog');
-            }
+              _this.closeConfirm()
+            } */
+            _this.$emit('returnData', res.data.data);
             _this.customizeInvoke(_this.componentData.tableName);
+            // _this.closeConfirm();
+            _this.loading = false;
           } else if (res.data.code === -1) {
             // let err = res.data.message || "导入失败";
             const err = res.data.message || this.vmI18n.t('modalTips.ze');
             _this.isError = true;
             _this.errorMessage = err;
             // _this.$Message.error(_this.errorMessage);
+            _this.loading = false;
           } else if (res.data.data) {
             _this.loading = false;
             _this.isError = true;
             _this.errorMessage = res.data.message;
             // _this.$Message.error(_this.errorMessage);
             this.downloadUrlFile(res.data.data);
+            _this.loading = false;
           }
-          _this.loading = false;
         })
         .catch(() => {
           _this.loading = false;
