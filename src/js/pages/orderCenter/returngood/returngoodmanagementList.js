@@ -794,12 +794,6 @@ export default {
       }
       this.service.orderCenter
         .querySalesReturn(Object.assign(param, _this.formConfig.formValue))
-        // this.$network
-        //   .axios({
-        //     url: '/api/cs/oc/oms/v1/querySalesReturn',
-        //     method: 'post',
-        //     data: Object.assign(param, _this.formConfig.formValue),
-        //   })
         .then(res => {
           if (res.data.code == 0 && res.data.data.queryResult.length) {
             _this.agTableConfig.agLoading = false;
@@ -959,12 +953,6 @@ export default {
       }
       this.service.orderCenter
         .querySalesReturn(Object.assign(param, _this.formConfig.formValue))
-        // this.$network
-        //   .axios({
-        //     url: '/api/cs/oc/oms/v1/querySalesReturn',
-        //     method: 'post',
-        //     data: Object.assign(param, _this.formConfig.formValue),
-        //   })
         .then(res => {
           if (res.data.code == 0 && res.data.data.queryResult.length) {
             _this.agTableConfig.agLoading = false;
@@ -1355,13 +1343,6 @@ export default {
       });
       this.service.orderCenter
         .virtualWarehouseStorage({ ids })
-        // this.$network
-        //   .axios({
-        //     url: '/p/cs/virtualWarehouseStorage',
-        //     method: 'post',
-        //     cancelToken: true,
-        //     data: { ids },
-        //   })
         .then(res => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);
@@ -1380,13 +1361,6 @@ export default {
       }
       this.service.orderCenter
         .cancelautorefund({ ID: this.$refs.agGridChild.AGTABLE.getSelect()[0].ID })
-        // this.$network
-        //   .axios({
-        //     url: '/api/cs/oc/oms/v1/cancelautorefund',
-        //     method: 'post',
-        //     cancelToken: true,
-        //     data: { ID: this.returnSelectData[0].ID },
-        //   })
         .then(res => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);
@@ -1523,13 +1497,6 @@ export default {
       }
       this.service.orderCenter
         .orderReturnRecallFromWms({ ID: ids })
-        // this.$network
-        //   .axios({
-        //     url: '/p/cs/orderReturnRecallFromWms',
-        //     method: 'post',
-        //     cancelToken: true,
-        //     data: { ID: ids },
-        //   })
         .then(res => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);
@@ -1552,13 +1519,6 @@ export default {
       }
       this.service.orderCenter
         .retransmissionWms({ returnOrderIds: ids.join(',') })
-        // this.$network
-        //   .axios({
-        //     url: '/p/cs/retransmissionWms',
-        //     method: 'post',
-        //     cancelToken: true,
-        //     data: { returnOrderIds: ids.join(',') },
-        //   })
         .then(res => {
           if (res.data.code === 0) {
             this.getList(this.statusTab);

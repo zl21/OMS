@@ -4,7 +4,7 @@
     class="orderManager-box"
   >
     <div class="btn">
-      <jordanBtn
+      <businessButton
         :btn-config="btnConfig"
         @dropDownClick="dropDownClickChange"
       />
@@ -34,7 +34,7 @@
         :form-config="formConfig"
         style="margin-top: 10px"
       />
-      <jordanBtn
+      <businessButton
         v-show="!isShowSeniorOrOrdinary"
         :btn-config="btnsSearch"
       />
@@ -66,7 +66,7 @@
     </div>
     <dir />
     <!-- 公共弹框 -->
-    <jordanModal
+    <businessDialog
       :batch-closed="publicBouncedConfig.batchClosed"
       :closable="publicBouncedConfig.closable"
       :component-data="publicBouncedConfig.componentData"
@@ -85,7 +85,7 @@
       :width="publicBouncedConfig.width"
     />
     <!-- 导入 -->
-    <jordanModal
+    <businessDialog
       :closable="importTable.closable"
       :component-data="importTable.componentData"
       :draggable="importTable.draggable"
