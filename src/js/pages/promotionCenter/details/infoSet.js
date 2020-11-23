@@ -4,6 +4,7 @@ import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDia
 import detailtable from '@/views/pages/promotionCenter/details/table.vue';
 import detailtabs from '@/views/pages/promotionCenter/details/tableTabs.vue';
 import CTSIT from '@/views/pages/promotionCenter/details/CTSIT';
+import Vue from 'vue';
 
 // const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
 export default {
@@ -29,16 +30,19 @@ export default {
   },
   watch: {
     'infoData.products_origin': {
-      handler(val, old) {
+      handler(val) {
         const self = this;
-        if (val === '1') {
-          this.columns = self.tableCols.infoColumns;
-        } else if (val === '2') {
-          this.columns = self.tableCols.infoColumns;
-        } else if (val === '3') {
-          this.columns = self.tableCols.infoColumnsxt;
-        } else {
-          this.columns = self.tableCols.infoColumnspt;
+        switch (val) {
+          case '1':
+          case '2':
+            this.columns = self.tableCols.infoColumns;
+            break;
+          case '3':
+            this.columns = self.tableCols.infoColumnsxt;
+            break;
+          default:
+            this.columns = self.tableCols.infoColumnspt;
+            break;
         }
       }
     },
@@ -178,20 +182,20 @@ export default {
   },
   computed: {
     itemdata() {
-      const self = this;
       let rs;
-      if (this.infoData.products_origin === '1') {
-        rs = this.itemdata_xitong;
-        // this.columns = self.tableCols.infoColumns
-      } else if (this.infoData.products_origin === '2') {
-        rs = this.itemdata_channel;
-        // this.columns = self.tableCols.infoColumns
-      } else if (this.infoData.products_origin === '3') {
-        rs = this.itemdata_xitong_pro;
-        // this.columns = self.tableCols.infoColumnsxt
-      } else {
-        rs = this.itemdata_channel_pro;
-        // this.columns = self.tableCols.infoColumnspt
+      switch (this.infoData.products_origin) {
+        case '1':
+          rs = this.itemdata_xitong;
+          break;
+        case '2':
+          rs = this.itemdata_channel;
+          break;
+        case '3':
+          rs = this.itemdata_xitong_pro;
+          break;
+        default:
+          rs = this.itemdata_channel_pro;
+          break;
       }
       const itemdata = JSON.parse(JSON.stringify(rs));
       if (this.infoData.products_origin === '2') {
@@ -329,12 +333,6 @@ export default {
       this.columns.forEach(col => {
         obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : '';
       });
-      // obj.itemdata = JSON.parse(JSON.stringify(this.itemdata));
-      // if(rowObj){
-      //     obj.itemdata.pid = rowObj.ID;
-      //     obj.itemdata.valuedata  = rowObj.ECODE;
-      // }
-      // obj.itemdata.colname = obj.itemdata.colname + Math.floor(Math.random()*1000000);
       if (rowObj) {
         obj.ID = rowObj.ID || '';
         obj.SKU_ID = rowObj.SKU_ID || '';
@@ -368,10 +366,6 @@ export default {
       this.columns.forEach(col => {
         obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : '';
       });
-      // obj.itemdata = JSON.parse(JSON.stringify(this.itemdata));
-      //  if(rowObj){
-      //     obj.itemdata.valuedata  = rowObj.ECODE;
-      // }
       if (rowObj) {
         obj.ID = rowObj.ID || '';
         obj.SKU_ID = rowObj.SKU_ID || '';
@@ -387,7 +381,9 @@ export default {
         const arrs = this.infoData.productsArrs[tabindex].productslist || [];
         arrs.splice(rowindex, 1);
         this.countOneTablelistView(tabindex);
-      } catch (e) {}
+      } catch (e) {
+        throw new Error(e);
+      }
     },
     getGroupIndex() {
       return `组${Number(this.getProductsArrsIndex + 1)}`;
@@ -647,15 +643,15 @@ export default {
      * 导入
      */
     importData() {
-      const self = this;
       this.dialogModal = {};
       this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
       this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
       const _component = 'popdialog';
-      Vue.component(_component, Vue.extend(_import('onlinePromotion/components/importDialog')));
-      self.currentView = _component;
-      self.dialogSet.dialogTitle = '导入';
-      self.show_dialog = true;
+
+      Vue.component(_component, Vue.extend('@/views/pages/promotionCenter/components/importDialog.vue'));
+      this.currentView = _component;
+      this.dialogSet.dialogTitle = '导入';
+      this.show_dialog = true;
     },
     /**
      * 返回值，用于弹框导入返回调添加单个表

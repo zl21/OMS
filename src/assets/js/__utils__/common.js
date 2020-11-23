@@ -55,7 +55,23 @@ const dateFormat = (newDate, format) => {
   return format;
 };
 
+/**
+ * 关闭当前tab
+ * @param _self 指向当前this
+ */
+const tabCloseAppoint = (_self) => {
+  const { fullPath } = _self.$route;
+  const { keepAliveModuleName, tableName } = _self.$store.state.global.activeTab;
+    R3.store.commit('global/tabCloseAppoint',{
+    routeFullPath: fullPath,
+    stopRouterPush: true,
+    keepAliveModuleName,
+    tableName,
+  });
+};
+
 export default {
   pagingInit,
-  dateFormat
+  dateFormat,
+  tabCloseAppoint,
 };

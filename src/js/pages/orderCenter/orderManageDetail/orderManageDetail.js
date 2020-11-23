@@ -7,6 +7,7 @@ import EssentialInfo from '@/views/pages/OrderCenter/orderManageDetail/details/e
 import OrderItem from '@/views/pages/OrderCenter/orderManageDetail/details/orderItem';
 import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
 import loading from '@/component/loading.vue';
+import comUtils from '@/assets/js/__utils__/common.js';
 
 export default {
   name: 'OrderManageDetail',
@@ -560,10 +561,7 @@ export default {
           {
             text: window.vmI18n.t('btn.back'), // 返回 按钮文本
             btnclick: () => {
-              const { path } = this.$route;
-              const { keepAliveModuleName, tableName } = this.$store.state.global.activeTab;
-              console.log('keepAliveModuleName',keepAliveModuleName,'tableName:',tableName);
-              console.log('this.$store.state.global',this.$store.state.global);
+              comUtils.tabCloseAppoint(this);
               this.$store.commit('customize/TabHref', {
                 id: 2627,
                 type: 'action',
@@ -575,12 +573,6 @@ export default {
                   tabTitle: '零售发货单'
                 })
               });
-              R3.store.commit('global/tabCloseAppoint',{
-                routeFullPath: path,//当前路由path
-                stopRouterPush: true, //默认参数
-                keepAliveModuleName,//当前模块名称
-                tableName//当前自定义表标识
-              })
             } // 按钮点击事件
           },
           {

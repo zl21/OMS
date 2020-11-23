@@ -114,12 +114,6 @@ export default {
       this.dialogModal = {};
       this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
       this.dialogModal.mode = this.moduleMode;
-      // let  _component = "poptabdialog";
-      // Vue.component(
-      //   _component,
-      //   Vue.extend(_import("onlinePromotion/components/importDialog"))
-      // );
-      // self.currentView = _component;
       self.dialogSet.dialogTitle = '导入';
       self.show_dialog = true;
     },
