@@ -9,6 +9,7 @@ import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
 import loading from '@/component/loading.vue';
+import comUtils from '@/assets/js/__utils__/common.js';
 
 // import OrderItem from './orderItem';
 
@@ -1063,14 +1064,7 @@ export default {
             text: window.vmI18n.t('btn.back'), // 返回 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              const { fullPath } = this.$route;
-              const { keepAliveModuleName, tableName } = this.$store.state.global.activeTab;
-              R3.store.commit('global/tabCloseAppoint',{
-                routeFullPath: fullPath,
-                stopRouterPush: true,
-                keepAliveModuleName,
-                tableName,
-              });
+              comUtils.tabCloseAppoint(this);
               this.$store.commit('customize/TabHref', {
                 id: 2661,
                 type: 'action',
@@ -1141,14 +1135,7 @@ export default {
             text: window.vmI18n.t('common.return'), // 返回 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              const { fullPath } = this.$route;
-              const { keepAliveModuleName, tableName } = this.$store.state.global.activeTab;
-              R3.store.commit('global/tabCloseAppoint',{
-                routeFullPath: fullPath,
-                stopRouterPush: true,
-                keepAliveModuleName,
-                tableName,
-              });
+              comUtils.tabCloseAppoint(this);
               this.$store.commit('customize/TabHref', {
                 id: 2661,
                 type: 'action',
@@ -1519,7 +1506,7 @@ export default {
               _this.statusName = '已取消';
             }
             if (_this.statusName === '待退货入库') {
-              _this.statusName ='等待退货入库';
+              _this.statusName = '等待退货入库';
             }
           }
           _this.defectiveList = res.data.data.orderDefects;
@@ -2012,7 +1999,7 @@ export default {
                             _this.jordanTableConfig.data[params.index].PS_C_SIZE_ID = value;
                             const clrId = params.row.PS_C_CLR_ID;
                             if (clrId) {
-                               _this.getDataByProinfo(proEcode, 2, value, clrId);
+                              _this.getDataByProinfo(proEcode, 2, value, clrId);
                               if (!_this.itemSkuEcode) {
                                 _this.jordanTableConfig.data[params.index].PS_C_SKU_ECODE = '';
                                 _this.jordanTableConfig.data[params.index].PS_C_SKU_ID = '';
@@ -2387,7 +2374,7 @@ export default {
                             _this.jordanTableConfig2.data[params.index].PS_C_CLR_ID = value;
                             const sizeId = params.row.PS_C_SIZE_ID;
                             if (sizeId) {
-                               _this.getDataByProinfo(proEcode, 2, sizeId, value);
+                              _this.getDataByProinfo(proEcode, 2, sizeId, value);
                               if (!_this.itemSkuEcode) {
                                 _this.jordanTableConfig2.data[params.index].PS_C_SKU_ECODE = '';
                                 _this.jordanTableConfig2.data[params.index].PS_C_SKU_ID = '';

@@ -67,5 +67,15 @@ export default [{
   label: '待分配',
   value: '50',
   isShow: true
-}
+},
+{
+  label: '审核失败',
+  value: 'AUDIT',
+  isShow: true
+},
+{
+  label: '多次缺货',
+  value: 'LACKSTOCK',
+  isShow: true
+},
 ];

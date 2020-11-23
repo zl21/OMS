@@ -33,5 +33,8 @@ export default {
 
   EXTRARETURNIMPORT: {
     component: () => import('@/views/modal/orderCenter/extraReturnImport.vue')
+  },
+  CREATEGRN: {
+    component: () => import('@/views/modal/orderCenter/createGrn.vue')
   }
 };

@@ -4,6 +4,7 @@ import SingleBox from '@/views/pages/promotionCenter/components/singleBox';
 import tableCols from '@/assets/js/promotion/columns.js';
 import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDialog';
 import SetCommodity from '@/views/pages/promotionCenter/details/setCommodity';
+import Vue from 'vue';
 // const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
 export default {
   name: 'giftSet',
@@ -162,15 +163,17 @@ export default {
         }
         arrs.splice(rowindex, 1);
         this.countOneTablelistView(tabindex);
-      } catch (e) {}
+      } catch (e) {
+        throw e;
+      }
     },
     addOneTableRowData(tabindex, rowObj) {
       // 搭配-增加行数据
       const obj = {};
-      this.giftData.gift_productsArrs[tabindex].productslist;
+      const tempArr = this.giftData.gift_productsArrs[tabindex].productslist;
       this.columns.forEach(col => {
         obj[col.key] = rowObj && rowObj[col.key] ? rowObj[col.key] : '';
-        if (col.key === 'ORDER') obj[col.key] = this.giftData.gift_productsArrs[tabindex].productslist.length + 1;
+        if (col.key === 'ORDER') obj[col.key] = tempArr.length + 1;
       });
       if (rowObj) {
         obj.ID = rowObj.ID || '';
@@ -456,7 +459,7 @@ export default {
         }
         if (column.key === 'SEND_QTY') {
           if (this.basicData.status === '1' || this.objid == '-1') {
-            column.render = (h, params) => h('div', {}, 0);
+            column.render = h => h('div', {}, 0);
           } else {
             delete column.render;
             this.$set(column, 'render', null);
@@ -496,7 +499,7 @@ export default {
       this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
       this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
       const _component = 'popdialog';
-      Vue.component(_component, Vue.extend('@/views/pages/promotionCenter/components/importDialog'));
+      Vue.component(_component, Vue.extend('allpages/promotionCenter/components/importDialog'));
       self.currentView = _component;
       self.dialogSet.dialogTitle = '导入';
       self.show_dialog = true;
@@ -516,7 +519,7 @@ export default {
     returnOneTableData(data, tabindex) {
       if (data && data.length > 0) {
         if (this.giftData.give_num_share == '1') {
-          data.forEach((item) => {
+          data.forEach(item => {
             item.SUM = 0;
           });
         }
