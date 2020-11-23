@@ -8,9 +8,9 @@ import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
 import aTable from 'professionalComponents/agGridTable.vue';
 import unzipXv from '@/assets/js/dataToSmall.js';
 import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
+import loading from '@/component/loading.vue';
 import labelListConfig from './publicConfig/labelList.js';
 import orderLogo from './publicConfig/orderLogo.js';
-import loading from '@/component/loading.vue';
 
 export default {
   components: {
@@ -302,8 +302,7 @@ export default {
                     }
                   },
                   [
-                    params.row.ORDERTAGLIST.forEach(item =>
-                      h(
+                    params.row.ORDERTAGLIST.forEach(item => h(
                         'Poptip',
                         {
                           props: {
@@ -337,8 +336,7 @@ export default {
                             item.message
                           )
                         ]
-                      )
-                    )
+                      ))
                   ]
                 );
               }
@@ -399,8 +397,7 @@ export default {
           {
             title: window.vmI18n.t('table_label.shippingAddress'), // 收货地址
             key: 'REGION_RECEIVER_ADDRESS',
-            render: (h, params) =>
-              h('span', [
+            render: (h, params) => h('span', [
                 h(
                   'Poptip',
                   {
@@ -724,8 +721,7 @@ export default {
           {
             title: window.vmI18n.t('other.systemNotes'), // 系统备注
             key: 'SYSREMARK',
-            render: (h, params) =>
-              h('span', [
+            render: (h, params) => h('span', [
                 h(
                   'Poptip',
                   {
@@ -824,8 +820,7 @@ export default {
             key: 'JOIN_RECEIVER_ADDRESS',
             align: 'center',
             ellipsis: true,
-            render: (h, params) =>
-              h('div', [
+            render: (h, params) => h('div', [
                 h(
                   'span',
                   {
@@ -1610,16 +1605,16 @@ export default {
             } // 按钮点击事件
           },
           // {
-          //   text: "重新分配快递", //按钮文本
+          //   text: '重新分配快递', // 按钮文本
           //   btnclick: () => {
           //     this.distributeLogisticsModal = true;
-          //   } //按钮点击事件
+          //   } // 按钮点击事件
           // },
           // {
-          //   text: "重新分配仓库", //按钮文本
+          //   text: '重新分配仓库', // 按钮文本
           //   btnclick: () => {
           //     this.distributeWarehouseModal = true;
-          //   } //按钮点击事件
+          //   } // 按钮点击事件
           // },
           {
             text: window.vmI18n.t('btn.changeTo_platformShipment'), // 更改为平台发货
@@ -3057,46 +3052,46 @@ export default {
         this.getData();
       }
     },
-    // distributeLogistics() {
-    //   const self = this;
-    //   self.selection = [];
-    //   if (self.clearFromListValue) self.queryInfoData = [];
-    //   const param = {
-    //     page: {
-    //       pageSize: self.jordanTableConfig.pageSize,
-    //       pageNum: self.jordanTableConfig.current
-    //     },
-    //     label: self.labelData, // 标签
-    //     queryInfo: self.queryInfoData, // 普通搜索
-    //     status: self.statusData,
-    //     highSearch: self.highSearchData
-    //   };
-    //   const fromdata = new FormData();
-    //   fromdata.append('param', JSON.stringify(param));
-    //   self.service.orderCenter.reallocateLogistics(fromdata).then(res => {
-    //     // this.$Message.success("后台重新分配快递中...");
-    //   });
-    // },
-    // distributeWarehouse() {
-    //   const self = this;
-    //   self.selection = [];
-    //   if (self.clearFromListValue) self.queryInfoData = [];
-    //   const param = {
-    //     page: {
-    //       pageSize: self.jordanTableConfig.pageSize,
-    //       pageNum: self.jordanTableConfig.current
-    //     },
-    //     label: self.labelData, // 标签
-    //     queryInfo: self.queryInfoData, // 普通搜索
-    //     status: self.statusData,
-    //     highSearch: self.highSearchData
-    //   };
-    //   const fromdata = new FormData();
-    //   fromdata.append('param', JSON.stringify(param));
-    //   self.service.orderCenter.reallocateWarehouse(fromdata).then(res => {
-    //     // this.$Message.success("后台重新分配快递中...");
-    //   });
-    // },
+    distributeLogistics() {
+      const self = this;
+      self.selection = [];
+      if (self.clearFromListValue) self.queryInfoData = [];
+      const param = {
+        page: {
+          pageSize: self.jordanTableConfig.pageSize,
+          pageNum: self.jordanTableConfig.current
+        },
+        label: self.labelData, // 标签
+        queryInfo: self.queryInfoData, // 普通搜索
+        status: self.statusData,
+        highSearch: self.highSearchData
+      };
+      const fromdata = new FormData();
+      fromdata.append('param', JSON.stringify(param));
+      self.service.orderCenter.reallocateLogistics(fromdata).then(res => {
+        // this.$Message.success("后台重新分配快递中...");
+      });
+    },
+    distributeWarehouse() {
+      const self = this;
+      self.selection = [];
+      if (self.clearFromListValue) self.queryInfoData = [];
+      const param = {
+        page: {
+          pageSize: self.jordanTableConfig.pageSize,
+          pageNum: self.jordanTableConfig.current
+        },
+        label: self.labelData, // 标签
+        queryInfo: self.queryInfoData, // 普通搜索
+        status: self.statusData,
+        highSearch: self.highSearchData
+      };
+      const fromdata = new FormData();
+      fromdata.append('param', JSON.stringify(param));
+      self.service.orderCenter.reallocateWarehouse(fromdata).then(res => {
+        // this.$Message.success("后台重新分配快递中...");
+      });
+    },
     loadData() {
       const arr = [];
       this.formConfig.formData.forEach((item, index) => {
@@ -3162,10 +3157,16 @@ export default {
         },
         label: self.labelData, // 标签
         queryInfo: self.queryInfoData, // 普通搜索
-        status: self.statusData,
         highSearch: self.highSearchData,
         sort: self.sort
       };
+      // 零售发货单列表tab 区分审核失败/多次缺货类型订单查询
+      if (self.statusData.label == '审核失败' || self.statusData.label == '多次缺货') {
+        param.lackstockOrAudit = self.statusData.value;
+      } else {
+        param.status = self.statusData;
+      }
+      
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
       self.service.orderCenter
