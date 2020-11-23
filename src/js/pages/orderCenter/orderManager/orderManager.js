@@ -2073,6 +2073,7 @@ export default {
     // this.getData();
   },
   mounted() {
+    window.orderManager = this;
     // 获取普通搜索的标签数据
     // this.getSearchData();
     // 获取from数据
@@ -3281,6 +3282,7 @@ export default {
     // 清除检索项
     clearAll() {
       this.selectValue = [];
+      this.$refs.integrateSearchFilter.dropDownSelectFilterSelectedValue = [];
       setTimeout(() => {
         this.searchMethod();
       }, 100);
