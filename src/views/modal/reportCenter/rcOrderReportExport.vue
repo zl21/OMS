@@ -17,6 +17,7 @@
   export default {
     data() {
       return {
+        tablename: '',
         tableList: {
           V_OC_B_VIPCOM_DISTRIBUTION: {
             table: 'V_OC_B_VIPCOM_DISTRIBUTION',
@@ -57,18 +58,21 @@
     props: {
       objList: {
         type: Array,
+        defalut: () => []
       },
       idArr: {
         type: Array,
+        defalut: () => []
       },
       webid: {
-        type: Number,
+        type: Number
       },
-      tablename: {
-        type: String,
-      },
+      // tablename: {
+      //   type: String,
+      // },
       rowData: {
         type: Array,
+        defalut: () => []
       },
     },
     created() {
@@ -88,8 +92,9 @@
         let type = '';
         // 获取主表的所有信息
         const tableInfo = this.$store.state[getModuleName()].buttons;
-        this.tablename = '';
+        // this.tablename = '';
         // 获取table的Name和主表名
+        console.log(tableInfo.tableName);
         if (tableInfo.tabledesc || tableInfo.tabledesc !== undefined) {
           type = tableInfo.tabledesc;
           this.tablename = tableInfo.tableName;
@@ -119,6 +124,7 @@
           method: 'post',
           data: fromdata,
         }).then((res) => {
+          console.log(res);
           self.$emit('closeActionDialog');
           if (res.data.code === 0) {
             const mes = res.data.message || '导出成功！';
