@@ -1278,6 +1278,8 @@ export default {
     keyDown(e) {},
     // 返回
     back() {
+      const { path } = this.$route;
+      const { keepAliveModuleName, tableName } = this.$store.state.global.activeTab;
       this.$store.commit('customize/TabHref', {
         id: 2627,
         type: 'action',
@@ -1288,6 +1290,12 @@ export default {
           id: 2627,
           tabTitle: window.vmI18n.t('panel_label.orderManager'), // 订单管理
         }),
+      });
+      R3.store.commit('global/tabCloseAppoint',{
+        routeFullPath: path,//当前路由path
+        stopRouterPush: true, //默认参数
+        keepAliveModuleName,//当前模块名称
+        tableName//当前自定义表标识
       });
     },
     // 合计
