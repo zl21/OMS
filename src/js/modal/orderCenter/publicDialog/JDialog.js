@@ -1,6 +1,6 @@
 // 引入曼卡龙的弹框组件
 const _import = file => require(`@/views/${file}.vue`).default;
-
+import Vue from 'vue';
 export default {
   name: 'jordanDialog',
   props: {
@@ -12,7 +12,7 @@ export default {
     title: {
       type: String,
       // default: () => "标题"
-      default: () => vmI18n.t('modalTips.title'),
+      default: () => window.vmI18n.t('modalTips.title'),
     }, // 设置标题title
     titleAlign: {
       type: String,
@@ -66,12 +66,12 @@ export default {
     okText: {
       type: String,
       // default: () => "确定"
-      default: () => vmI18n.t('common.determine'),
+      default: () => window.vmI18n.t('common.determine'),
     },
     cancelText: {
       type: String,
       // default: () => "取消"
-      default: () => vmI18n.t('common.cancel'),
+      default: () => window.vmI18n.t('common.cancel'),
     },
     confirm: {
       type: Function,

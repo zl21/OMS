@@ -27,8 +27,6 @@ export default {
    * 仓库物流规则 新增
    * */
   saveWarehouseLogistics: params => network.post('/p/cs/saveWarehouseLogistics', params),
-  // 省同步查询 /p/cs/getLogisticsRankResultTable
-  getLogisticsRankResultTable: params => network.post('/p/cs/getLogisticsRankResultTable', params),
   // 检索
   getLogisticsLikeRankResultTable: params => network.post('/p/cs/getLogisticsLikeRankResultTable', params),
   // 作废

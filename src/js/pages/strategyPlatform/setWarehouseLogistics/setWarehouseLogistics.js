@@ -313,112 +313,75 @@ export default {
       };
       fromData.append('param', JSON.stringify(param));
       // 保存
-      const {
-        data: {
-          data: { code, data }
-        }
-      } = await this.service.strategyPlatform.saveWarehouseLogistics(fromData);
-      _this.isSaveLoading = false;
-      if (code === 0) {
-        _this.$Message.success(this.vmI18n.t('modalTips.z9')); // 保存成功
-        if (this.$route.params.customizedModuleId !== 'New') {
-          this.refresh();
+      this.service.strategyPlatform.saveWarehouseLogistics(fromData).then(res => {
+        _this.isSaveLoading = false;
+        if (res.data.code === 0) {
+          _this.$Message.success(window.vmI18n.t('modalTips.z9')); // 保存成功
+          if (this.$route.params.customizedModuleId !== 'New') {
+            this.refresh();
+          } else {
+            this.$store.commit('customize/TabHref', {
+              id: res.data.data.btnConfigobjid, // 单据id
+              type: 'action', // 类型action
+              name: 'setWarehouseLogistics', // 文件名
+              label: window.vmI18n.t('panel_label.setWarehouseLogistics'), // 仓库物流优先级设置
+              query: Object.assign({
+                id: res.data.data.objid, // 单据id
+                tabTitle: window.vmI18n.t('panel_label.setWarehouseLogistics') // 仓库物流优先级设置
+              }) // 带的参数
+            });
+          }
         } else {
-          this.$store.commit('customize/TabHref', {
-            id: data.objid, // 单据id
-            type: 'action', // 类型action
-            name: 'setWarehouseLogistics', // 文件名
-            label: this.vmI18n.t('panel_label.setWarehouseLogistics'), // 仓库物流优先级设置
-            query: Object.assign({
-              id: data.objid, // 单据id
-              tabTitle: this.vmI18n.t('panel_label.setWarehouseLogistics') // 仓库物流优先级设置
-            }) // 带的参数
-          });
+          const err = res.data.data.message || window.vmI18n.t('modalTips.y0'); // 保存失败
+          _this.$Message.error(err);
+          _this.refresh();
         }
-      } else {
-        const err = data.data.message || this.vmI18n.t('modalTips.y0'); // 保存失败
-        _this.$Message.error(err);
-        _this.refresh();
-      }
-      // axios({
-      //   url: "/p/cs/saveWarehouseLogistics",
-      //   method: "post",
-      //   data: fromData,
-      // }).then((res) => {
-      //   _this.isSaveLoading = false;
-      //   if (res.data.data.code === 0) {
-      //     // _this.$Message.success("保存成功");
-      //     _this.$Message.success(vmI18n.t("modalTips.z9"));
-      //     if (this.$route.query.id !== "-1") {
-      //       this.refresh();
-      //     } else {
-      //       this.$store.commit("customize/TabHref", {
-      //         id: res.data.data.data.objid, // 单据id
-      //         type: "action", // 类型action
-      //         name: "setWarehouseLogistics", // 文件名
-      //         // label: "仓库物流优先级设置", // tab中文名
-      //         label: window.vmI18n.t("panel_label.setWarehouseLogistics"),
-      //         query: Object.assign({
-      //           id: res.data.data.data.objid, // 单据id
-      //           // tabTitle: "仓库物流优先级设置", // tab中文名
-      //           tabTitle: window.vmI18n.t("panel_label.setWarehouseLogistics"),
-      //         }), // 带的参数
-      //       });
-      //     }
-      //   } else {
-      //     // const err = res.data.data.message || "保存失败";
-      //     const err = res.data.data.message || window.vmI18n.t("modalTips.y0");
-      //     _this.$Message.error(err);
-      //     _this.refresh();
-      //   }
-      // });
+      });
     },
-    async getTreeData() {
+    getTreeData() {
       const _this = this;
       _this.isSaveLoading = true;
       const fromData = new FormData();
       const param = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId };
       fromData.append('param', JSON.stringify(param));
 
-      // 保存
-      const {
-        data: { oK, data }
-      } = await this.service.strategyPlatform.saveWarehouseLogistics(fromData);
-      _this.isSaveLoading = false;
-      if (oK) {
-        _this.treeData = data.warehouseLogisticsTree;
-        if (data.warehouseLogistics) {
-          _this.information.formData[0].itemdata.pid = data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ID;
-          _this.information.formData[0].itemdata.valuedata = data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ENAME;
-          _this.information.formValue.REMARK = data.warehouseLogistics.REMARK;
-          if (data.warehouseLogistics.ISACTIVE === 'N') {
-            // _this.statusName = "已作废";
-            _this.statusName = this.vmI18n.t('common.voided');
-            _this.btnConfig.buttons.forEach(item => {
-              // if (item.text === ("修改物流" || "作废" || "导入" || "导出" || "保存"))
-              switch (item.text) {
-                case this.vmI18n.t('btn.modify_logistics'):
-                case this.vmI18n.t('btn.void'):
-                case this.vmI18n.t('btn.import'):
-                case this.vmI18n.t('btn.refresh'):
-                  item.disabled = true;
-                  break;
-              }
+      this.service.common.getWarehouseLogisticsTree(fromData).then(res => {
+        _this.isSaveLoading = false;
+        if (res.data.oK) {
+          _this.treeData = res.data.warehouseLogisticsTree;
+          if (res.data.warehouseLogistics) {
+            _this.information.formData[0].itemdata.pid = data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ID;
+            _this.information.formData[0].itemdata.valuedata = data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ENAME;
+            _this.information.formValue.REMARK = data.warehouseLogistics.REMARK;
+            if (data.warehouseLogistics.ISACTIVE === 'N') {
+              // _this.statusName = "已作废";
+              _this.statusName = this.vmI18n.t('common.voided');
+              _this.btnConfig.buttons.forEach(item => {
+                // if (item.text === ("修改物流" || "作废" || "导入" || "导出" || "保存"))
+                switch (item.text) {
+                  case this.vmI18n.t('btn.modify_logistics'):
+                  case this.vmI18n.t('btn.void'):
+                  case this.vmI18n.t('btn.import'):
+                  case this.vmI18n.t('btn.refresh'):
+                    item.disabled = true;
+                    break;
+                }
+              });
+            }
+          }
+          if (res.data.warehouseLogisticsItems && res.data.warehouseLogisticsItems.length) {
+            this.theadArr = [];
+            res.data.warehouseLogisticsItems.forEach(item => {
+              this.theadArr.push({
+                name: item.CP_C_LOGISTICS_ENAME
+              });
             });
           }
-        }
-        if (data.warehouseLogisticsItems && data.warehouseLogisticsItems.length) {
-          this.theadArr = [];
-          data.warehouseLogisticsItems.forEach(item => {
-            this.theadArr.push({
-              name: item.CP_C_LOGISTICS_ENAME
-            });
-          });
         } else {
           this.theadArr = [];
         }
         _this.provinceSynchronous();
-      }
+      });
     },
     // 同步查询
     async synchronous() {
@@ -477,17 +440,18 @@ export default {
       const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeNode: treeList };
       fromData.append('param', JSON.stringify(params));
       // 接口
-      const {
-        data: { oK, data }
-      } = await this.service.strategyPlatform.saveWarehouseLogistics(fromData);
-      console.log(oK, data);
-      if (oK) {
-        _this.cityThead = false;
-        _this.listArr = data !== undefined ? data : [];
-        _this.listArr.forEach(item => {
-          item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK);
-        });
-      }
+      this.service.common.getLogisticsRankResultTable(fromData)
+      .then((res)=>{
+        // console.log(res.data.oK, data);
+        if (res.data.oK) {
+          _this.cityThead = false;
+          _this.listArr = res.data.data !== undefined ? res.data.data : [];
+          _this.listArr.forEach(item => {
+            item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK);
+          });
+        }
+      });
+
       // axios({
       //   url: "/p/cs/getLogisticsRankResultTable",
       //   method: "post",
