@@ -5,6 +5,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import jordanModal from 'professionalComponents/businessDialog';
 import axios from 'axios';
+import comUtils from '@/assets/js/__utils__/common.js';
 
 export default {
   components: {
@@ -1238,14 +1239,7 @@ export default {
             // text: "返回",
             text: window.vmI18n.t('btn.back'), // 按钮文本
             btnclick: () => {
-              const { fullPath } = this.$route;
-              const { keepAliveModuleName, tableName } = this.$store.state.global.activeTab;
-                R3.store.commit('global/tabCloseAppoint',{
-                routeFullPath: fullPath,
-                stopRouterPush: true,
-                keepAliveModuleName,
-                tableName,
-              });
+              comUtils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {
                 tableId: 24525,
                 type: 'S',
@@ -1337,14 +1331,7 @@ export default {
             // text: "返回",
             text: window.vmI18n.t('btn.back'), // 按钮文本
             btnclick: () => {
-              const { fullPath } = this.$route;
-              const { keepAliveModuleName, tableName } = this.$store.state.global.activeTab;
-                R3.store.commit('global/tabCloseAppoint',{
-                routeFullPath: fullPath,
-                stopRouterPush: true,
-                keepAliveModuleName,
-                tableName,
-              });
+              comUtils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {
                 back: true,
                 tableId: 24525,
@@ -2284,7 +2271,7 @@ export default {
               item.itemdata.pid = data.data.CP_C_STORE_IDS; // 虚拟仓的id
             }
           });
-          if (this.objList.psCPro.ISACTIVE === 'N') {
+          if (this.objList.psCPro && this.objList.psCPro.ISACTIVE === 'N') {
             this.selecttype(this.formConfig1.formValue.GROUP_TYPE); // 调用组合类型改变函数 保证界面一致
           } else {
             this.selecttype(this.formConfig1.formValue.GROUP_TYPE); // 调用组合类型改变函数 保证界面一致
@@ -2394,7 +2381,7 @@ export default {
           }
         }
 
-        if (CurrentData.skuGroupRequestList.length > 0) {
+        if (CurrentData.skuGroupRequestList && CurrentData.skuGroupRequestList.length > 0) {
           // 判断 明细表数据
           for (let i = 0; i < CurrentData.skuGroupRequestList.length; i++) {
             // 条码明细和组合商品明细数据

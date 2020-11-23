@@ -9,6 +9,7 @@ import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
 import loading from '@/component/loading.vue';
+import comUtils from '@/assets/js/__utils__/common.js';
 
 // import OrderItem from './orderItem';
 
@@ -1063,14 +1064,7 @@ export default {
             text: window.vmI18n.t('btn.back'), // 返回 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              const { fullPath } = this.$route;
-              const { keepAliveModuleName, tableName } = this.$store.state.global.activeTab;
-              R3.store.commit('global/tabCloseAppoint',{
-                routeFullPath: fullPath,
-                stopRouterPush: true,
-                keepAliveModuleName,
-                tableName,
-              });
+              comUtils.tabCloseAppoint(this);
               this.$store.commit('customize/TabHref', {
                 id: 2661,
                 type: 'action',
@@ -1141,14 +1135,7 @@ export default {
             text: window.vmI18n.t('common.return'), // 返回 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              const { fullPath } = this.$route;
-              const { keepAliveModuleName, tableName } = this.$store.state.global.activeTab;
-              R3.store.commit('global/tabCloseAppoint',{
-                routeFullPath: fullPath,
-                stopRouterPush: true,
-                keepAliveModuleName,
-                tableName,
-              });
+              comUtils.tabCloseAppoint(this);
               this.$store.commit('customize/TabHref', {
                 id: 2661,
                 type: 'action',
