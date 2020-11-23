@@ -231,12 +231,6 @@ export default {
       this.dialogModal = {};
       this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
       this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
-      // let  _component = "popdialog";
-      // Vue.component(
-      //   _component,
-      //   Vue.extend(_import("onlinePromotion/components/importDialog"))
-      // );
-      // self.currentView = _component;
       self.dialogSet.dialogTitle = '导入';
       self.show_dialog = true;
     },

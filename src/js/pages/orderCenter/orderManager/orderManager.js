@@ -3029,7 +3029,7 @@ export default {
                     AutoData: [],
                   }, // 组件属性
                   componentEvent: {
-                    'on-popper-show': (e) => {
+                    'on-popper-show': () => {
                       const self = this;
                       let premtype = '';
                       if (item.selectTab.tabth.name === '店铺') {

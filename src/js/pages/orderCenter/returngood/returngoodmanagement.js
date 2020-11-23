@@ -1503,7 +1503,7 @@ export default {
               _this.statusName = '已取消';
             }
             if (_this.statusName === '待退货入库') {
-              _this.statusName ='等待退货入库';
+              _this.statusName = '等待退货入库';
             }
           }
           _this.defectiveList = res.data.data.orderDefects;
@@ -1996,7 +1996,7 @@ export default {
                             _this.jordanTableConfig.data[params.index].PS_C_SIZE_ID = value;
                             const clrId = params.row.PS_C_CLR_ID;
                             if (clrId) {
-                               _this.getDataByProinfo(proEcode, 2, value, clrId);
+                              _this.getDataByProinfo(proEcode, 2, value, clrId);
                               if (!_this.itemSkuEcode) {
                                 _this.jordanTableConfig.data[params.index].PS_C_SKU_ECODE = '';
                                 _this.jordanTableConfig.data[params.index].PS_C_SKU_ID = '';
@@ -2371,7 +2371,7 @@ export default {
                             _this.jordanTableConfig2.data[params.index].PS_C_CLR_ID = value;
                             const sizeId = params.row.PS_C_SIZE_ID;
                             if (sizeId) {
-                               _this.getDataByProinfo(proEcode, 2, sizeId, value);
+                              _this.getDataByProinfo(proEcode, 2, sizeId, value);
                               if (!_this.itemSkuEcode) {
                                 _this.jordanTableConfig2.data[params.index].PS_C_SKU_ECODE = '';
                                 _this.jordanTableConfig2.data[params.index].PS_C_SKU_ID = '';
