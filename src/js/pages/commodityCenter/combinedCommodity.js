@@ -1238,6 +1238,14 @@ export default {
             // text: "返回",
             text: window.vmI18n.t('btn.back'), // 按钮文本
             btnclick: () => {
+              const { fullPath } = this.$route;
+              const { keepAliveModuleName, tableName } = this.$store.state.global.activeTab;
+                R3.store.commit('global/tabCloseAppoint',{
+                routeFullPath: fullPath,
+                stopRouterPush: true,
+                keepAliveModuleName,
+                tableName,
+              });
               this.$store.commit('global/tabOpen', {
                 tableId: 24525,
                 type: 'S',
@@ -1329,6 +1337,14 @@ export default {
             // text: "返回",
             text: window.vmI18n.t('btn.back'), // 按钮文本
             btnclick: () => {
+              const { fullPath } = this.$route;
+              const { keepAliveModuleName, tableName } = this.$store.state.global.activeTab;
+                R3.store.commit('global/tabCloseAppoint',{
+                routeFullPath: fullPath,
+                stopRouterPush: true,
+                keepAliveModuleName,
+                tableName,
+              });
               this.$store.commit('global/tabOpen', {
                 back: true,
                 tableId: 24525,

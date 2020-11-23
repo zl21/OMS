@@ -10,7 +10,8 @@ export const buttonPermissionsMixin = {
           AD_ACTION_NAME: params
         })
       };
-      console.log('this[arrry].buttons===', this[arrry].buttons)
+      // console.log('this[arrry].buttons===', this[arrry].buttons)
+      if (this[arrry] == undefined) return;
       this.service.common.fetchActionsInCustomizePage(query).then(res => {
         const result = res.data.data || [];
         independent = result;

@@ -548,6 +548,14 @@ export default {
             text: window.vmI18n.t('btn.back'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
+              const { fullPath } = this.$route;
+              const { keepAliveModuleName, tableName } = this.$store.state.global.activeTab;
+                R3.store.commit('global/tabCloseAppoint',{
+                routeFullPath: fullPath,
+                stopRouterPush: true,
+                keepAliveModuleName,
+                tableName,
+              });
               this.$store.commit('customize/TabHref', {
                 id: 2809,
                 type: 'action',
@@ -685,6 +693,14 @@ export default {
             text: window.vmI18n.t('btn.back'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
+              const { fullPath } = this.$route;
+              const { keepAliveModuleName, tableName } = this.$store.state.global.activeTab;
+                R3.store.commit('global/tabCloseAppoint',{
+                routeFullPath: fullPath,
+                stopRouterPush: true,
+                keepAliveModuleName,
+                tableName,
+              });
               this.$store.commit('customize/TabHref', {
                 id: 2809,
                 type: 'action',
