@@ -12,7 +12,7 @@
       objList: Array,  
       rowArr: Array,
       rowData: Array,
-      idArr: Array, // 明细ids
+      idArray: Array, // 明细ids
       webid: '', // 动作定义id
       tablename: '' // 动作定义关联的表格
     },
@@ -76,8 +76,8 @@
         }
         const param = {
           delayDate: this.formConfig.formValue.lockTime.Format('yyyy-MM-dd hh:mm:ss'),
-          tablename: this.tablename,
-          ids: this.idArr,
+          tablename: this.$route.params.tableName,
+          ids: this.idArray,
         };
         axios({
           url: '/p/cs/delayButtonFunction',
