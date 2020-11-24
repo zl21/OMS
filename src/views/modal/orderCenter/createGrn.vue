@@ -4,15 +4,18 @@
       <div style="display:flex">
         <label>档期</label>
         <DropMultiSelectFilter
-          :data="data1"
+          :data="datas"
           :total-row-count="totalRowCount"
           :page-size="pageSize"
           :show-colname-key="'show'"
           :columns="columns"
-          :data-empty-message="dataEmptyMessage"
           :auto-data="AutoData"
-          @on-page-change="changePage1"
+          :default-selected="defaultSelected"
+          @on-page-change="changePage"
           @on-input-value-change="InputValueChange"
+          @on-popper-show="popperShow"
+          @on-fkrp-selected="fkrpSelected"
+          @on-clear="clear"
         />
       </div>
       <div style="display:flex">
@@ -52,7 +55,9 @@
     data() {
       return {
         vmI18n: window.vmI18n,
-        data1: {
+        defaultSelected: [{ ID: '1', Label: '唯品会日程归属' }], // 默认展示项
+        selectDatas: [],
+        datas: {
           start: 0,
           tabth: [
             {
@@ -61,76 +66,45 @@
               show: false
             },
             {
-              colname: 'ECODE',
-              name: '编码',
-              show: false
-            },
-            {
-              colname: 'MIXNAME',
-              name: '[编码]名称',
+              colname: 'ENAME',
+              name: '日程归属名称',
               show: true
             },
-            {
-              colname: 'ENAME',
-              name: '名称',
-              show: false
-            }
           ],
-          row: [
-            {
-              ENAME: {
-                val: '总部'
-              },
-              ECODE: {
-                val: '00'
-              },
-              MIXNAME: {
-                val: '[00]总部'
-              },
-              ID: {
-                val: '4919'
-              }
-            },
-            {
-              ENAME: {
-                val: '中央仓仓库'
-              },
-              ECODE: {
-                val: '000'
-              },
-              MIXNAME: {
-                val: '[000]中央仓仓库'
-              },
-              ID: {
-                val: '1250'
-              }
-            },
-            {
-              ENAME: {
-                val: '001'
-              },
-              ECODE: {
-                val: '001'
-              },
-              MIXNAME: {
-                val: '[001]001'
-              },
-              ID: {
-                val: '4970'
-              }
-            }
-          ]
+          row: []
         },
-        totalRowCount: 39,
+        totalRowCount: 100,
         pageSize: 10,
-        AutoData: [],
-        dataEmptyMessage: '数据加载中...', // 无数据的提示
-        columns: ['name', 'value']// 展现的组
       };
+    },
+    mounted() {
+      this.getDataList();
     },
     methods: {
       determine() {
             
+      },
+      getDataList() {
+        const formdata = new FormData();
+        const obj = { 
+          table: 'ST_C_VIPCOM_ASCRIPTION', startindex: this.datas.start, range: this.pageSize, fixedcolumns: {}, column_include_uicontroller: true, isolr: false 
+        };
+        formdata.append('searchdata', JSON.stringify(obj));
+        this.service.common.QueryList(formdata).then(res=>{
+          this.datas.row = res.data.datas.row;
+          this.totalRowCount = res.data.datas.totalRowCount;
+        });
+      },
+      fkrpSelected(e) {
+        this.selectDatas = e;
+      },
+      clear() {
+        this.selectDatas = [];
+      },
+      changePage(e) {
+        this.datas.start = this.pageSize * (e - 1);
+        this.getDataList();
+        this.datas = this.datas;
       }
     }
   };
