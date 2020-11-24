@@ -95,7 +95,6 @@
         });
       },
       refreshData() {
- p;
         this.$emit('confirmImport');
       },
       closeActionDialog() {
