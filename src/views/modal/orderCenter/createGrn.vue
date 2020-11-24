@@ -8,21 +8,18 @@
           :total-row-count="totalRowCount"
           :page-size="pageSize"
           :show-colname-key="'show'"
-          :columns="columns"
-          :auto-data="AutoData"
           :default-selected="defaultSelected"
           @on-page-change="changePage"
-          @on-input-value-change="InputValueChange"
-          @on-popper-show="popperShow"
           @on-fkrp-selected="fkrpSelected"
           @on-clear="clear"
+          @on-input-value-change="inputValueChange"
         />
       </div>
       <div style="display:flex">
         <label>运输方式</label>
-        <Select>
+        <!-- <Select>
           <Option>1</Option>
-        </Select>
+        </Select> -->
       </div>
     </div>
     <div class="dialog-footer">
@@ -84,15 +81,17 @@
       determine() {
             
       },
-      getDataList() {
+      getDataList(fixedcolumns = {}) {
         const formdata = new FormData();
         const obj = { 
-          table: 'ST_C_VIPCOM_ASCRIPTION', startindex: this.datas.start, range: this.pageSize, fixedcolumns: {}, column_include_uicontroller: true, isolr: false 
+          table: 'ST_C_VIPCOM_ASCRIPTION', startindex: this.datas.start, range: this.pageSize, fixedcolumns, column_include_uicontroller: true, isolr: false 
         };
         formdata.append('searchdata', JSON.stringify(obj));
         this.service.common.QueryList(formdata).then(res=>{
-          this.datas.row = res.data.datas.row;
-          this.totalRowCount = res.data.datas.totalRowCount;
+          this.$nextTick(()=>{
+            this.datas.row = res.data.datas.row;
+            this.totalRowCount = res.data.datas.totalRowCount;
+          });
         });
       },
       fkrpSelected(e) {
@@ -104,7 +103,10 @@
       changePage(e) {
         this.datas.start = this.pageSize * (e - 1);
         this.getDataList();
-        this.datas = this.datas;
+      },
+      inputValueChange(e) {
+        console.log(e);
+        this.getDataList({ ENAME: e });
       }
     }
   };
