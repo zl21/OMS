@@ -1,37 +1,53 @@
 <template>
   <div class="wphemail">
     <Form :label-width="80">
-      <FormItem label="插入字段：" class="mailFormItem">
+      <FormItem
+        label="插入字段："
+        class="mailFormItem"
+      >
         <ul>
-          <li v-for="(row,index) of lists" :key="index">
-            <a @click="row.click">{{row.label}}</a>
+          <li
+            v-for="(row,index) of lists"
+            :key="index"
+          >
+            <a @click="row.click">{{ row.label }}</a>
           </li>
         </ul>
       </FormItem>
-      <FormItem label="标题：" class="mailFormItem" style="width:25%;">
-        <Input v-model="saveObj.MAIL_TITLE" placeholder="JIT订单下发通知"/>
+      <FormItem
+        label="标题："
+        class="mailFormItem"
+        style="width:25%;"
+      >
+        <Input
+          v-model="saveObj.MAIL_TITLE"
+          placeholder="JIT订单下发通知"
+        />
       </FormItem>
-      <FormItem label="内容：" class="mailFormItem">
+      <FormItem
+        label="内容："
+        class="mailFormItem"
+      >
         <div class="item-area">
           <component
-            v-bind:is="currentView"
+            :is="currentView"
             :ref="currentView+objid"
-            :storageItem="storageItem"
+            :storage-item="storageItem"
             :itemdata="itemdata"
-            :tabAction="!modify"
-            v-on:getChangeItem="getChangeItem"
-          ></component>
+            :tab-action="!modify"
+            @getChangeItem="getChangeItem"
+          />
         </div>
       </FormItem>
     </Form>
   </div>
 </template>
 <script>
-  import editor from "framework/components/wang-editor/wang-editor";
-  import axios from "axios";
+  import editor from 'framework/components/wang-editor/wang-editor';
+  import axios from 'axios';
 
   export default {
-    name: 'wphEmailSend',
+    name: 'WphEmailSend',
     components: {
       editor
     },
@@ -57,55 +73,55 @@
       stopsave: Boolean,
       selectItem: {},
       tabConfig: {},
-      status: {}, //整体状态,是否可编辑
-      ExportFlag: {} //导入状态
+      status: {}, // 整体状态,是否可编辑
+      ExportFlag: {} // 导入状态
     },
     data() {
       return {
         lists: [
           {
-            label: "品牌",
-            click: () => this.setVariable("品牌")
+            label: '品牌',
+            click: () => this.setVariable('品牌')
           },
           {
-            label: "订单号",
-            click: () => this.setVariable("订单号")
+            label: '订单号',
+            click: () => this.setVariable('订单号')
           },
           {
-            label: "入库单号",
-            click: () => this.setVariable("入库单号")
+            label: '入库单号',
+            click: () => this.setVariable('入库单号')
           },
           {
-            label: "到货仓",
-            click: () => this.setVariable("到货仓")
+            label: '到货仓',
+            click: () => this.setVariable('到货仓')
           },
           {
-            label: "商品总数量",
-            click: () => this.setVariable("商品总数量")
+            label: '商品总数量',
+            click: () => this.setVariable('商品总数量')
           }
         ],
-        modify: false, //是否修改
-        currentView: "", //控制富文本
+        modify: false, // 是否修改
+        currentView: '', // 控制富文本
         storageItem: {
-          //存储表
-          name: "PS_C_PRO",
+          // 存储表
+          name: 'PS_C_PRO',
           id: this.objid
         },
         itemdata: {
-          //富文本的传值
+          // 富文本的传值
           colid: this.objid,
-          valuedata: ""
+          valuedata: ''
         },
         saveObj: {
-          //保存数据
-          MAIL_TITLE: "",
-          MAIL_CONTENT: ""
+          // 保存数据
+          MAIL_TITLE: '',
+          MAIL_CONTENT: ''
         }
       };
     },
     watch: {
       refresh(val) {
-        console.log("refresh");
+        console.log('refresh');
       },
       save(val) {
         if (val) {
@@ -113,7 +129,7 @@
         }
       },
       editsave(val) {
-        console.log("editsave");
+        console.log('editsave');
       },
       itemdata: {
         handler(obj, oldobj) {
@@ -127,9 +143,9 @@
       getChangeItem(value) {
         this.itemdata.valuedata = value.valuedata;
       },
-      //获取变量
+      // 获取变量
       getVariableRest() {
-        let self = this;
+        const self = this;
         // axios({
         //   method: "post",
         //   url: "/p/cs/selectVipcomMailSetColumn",
@@ -146,102 +162,99 @@
         //    }
         // });
 
-        let rows = ['品牌', '订单号', '入库单号', '到货仓', '商品总数量', '预计发货时间', '预计到货时间', '箱号', '物流公司', '发货实体仓'];
-        self.lists = rows.map((row) => {
-          return {
-            label: row,
-            click: () => self.setVariable(row)
-          }
-        })
+        const rows = ['品牌', '订单号', '入库单号', '到货仓', '商品总数量', '预计发货时间', '预计到货时间', '箱号', '物流公司', '发货实体仓'];
+        self.lists = rows.map((row) => ({
+          label: row,
+          click: () => self.setVariable(row)
+        }));
       },
       setVariable(s) {
-        let self = this;
-        let val = self.itemdata.valuedata || "";
-        self.itemdata.valuedata =
-          val + '<font color="#4d80bf">$' + s + "$&nbsp;</font>";
-        self.$refs["editor" + self.objid].getData(self.itemdata);
+        const self = this;
+        const val = self.itemdata.valuedata || '';
+        self.itemdata.valuedata = `${val}<font color="#4d80bf">$${s}$&nbsp;</font>`;
+        self.$refs[`editor${self.objid}`].getData(self.itemdata);
       },
       setDetail(details) {
-        let self = this;
-        self.$set(self.itemdata, "valuedata", details);
-        self.currentView = "editor";
+        const self = this;
+        self.$set(self.itemdata, 'valuedata', details);
+        self.currentView = 'editor';
         self.formObj = null;
 
-        self.$nextTick(function () {
-          if (self.$refs["editor" + self.objid]) {
-            self.$refs["editor" + self.objid].getData(self.itemdata);
+        self.$nextTick(() => {
+          if (self.$refs[`editor${self.objid}`]) {
+            self.$refs[`editor${self.objid}`].getData(self.itemdata);
           }
         });
       },
-      //获取当前数据
+      // 获取当前数据
       getData() {
-        let self = this;
-        let obj = {
-          //table:self.tablename,
-          objid: self.$route.params.itemId,
-        }
+        const self = this;
+        const obj = {
+          // table:self.tablename,
+          objid: self.$route.params.itemId === 'New' ? '-1' : self.$route.params.itemId,
+        };
         axios({
-          method: "post",
-          url: "/p/cs/selectVipcomMailSetColumn",
+          method: 'post',
+          url: '/p/cs/selectVipcomMailSetColumn',
           data: obj
-        }).then(function (res) {
+        }).then((res) => {
           if (res.data.code === 0) {
-            let row = res.data.data;
-            self.saveObj["MAIL_CONTENT"] = row.MAIL_CONTENT;
+            const row = res.data.data;
+            self.saveObj.MAIL_CONTENT = row.MAIL_CONTENT;
             self.itemdata.valuedata = row.MAIL_CONTENT;
-            self.saveObj["MAIL_TITLE"] = row.MAIL_TITLE;
-            self.$nextTick(function () {
-              if (self.$refs["editor" + self.objid]) {
-                self.$refs["editor" + self.objid].getData(self.itemdata);
+            self.saveObj.MAIL_TITLE = row.MAIL_TITLE;
+            self.$nextTick(() => {
+              if (self.$refs[`editor${self.objid}`]) {
+                self.$refs[`editor${self.objid}`].getData(self.itemdata);
               }
             });
           }
         });
       },
-      //保存当前单据
+      // 保存当前单据
       saveCurrent() {
-        let self = this;
-        let obj = {
+        const self = this;
+        const obj = {
           objid: self.objid,
           fixcolumn: {
             ST_C_VIPCOM_MAIL: self.saveObj
           }
-        }
-        let data = new URLSearchParams();
-        data.append("param", JSON.stringify(obj));
+        };
+        const data = new URLSearchParams();
+        data.append('param', JSON.stringify(obj));
         return axios({
-          url: "/p/cs/saveVipcomMail",
-          method: "post",
-          data: data
+          url: '/p/cs/saveVipcomMail',
+          method: 'post',
+          data
         }).then(res => {
           if (res.data.code !== 0) {
-            self.$Message.error("保存失败");
+            self.$Message.error('保存失败');
           }
         });
       },
       refreshGetData() {
-        this.$emit("changeRefresh", false);
+        this.$emit('changeRefresh', false);
       },
       changeSave() {
-        this.$emit("changeSave", val);
+        this.$emit('changeSave', val);
       },
       newLySave() {
-        this.$emit("changeHasContent", true);
-        this.$emit("objectSave");
+        this.$emit('changeHasContent', true);
+        this.$emit('objectSave');
       },
       noContent() {
-        //定制界面没有明细
-        this.$emit("changeHasContent", false);
+        // 定制界面没有明细
+        this.$emit('changeHasContent', false);
       },
       errorHasContent() {
-        //定制界面存在明细，且走上面的保存
-        this.$emit("changeHasContent", true);
+        // 定制界面存在明细，且走上面的保存
+        this.$emit('changeHasContent', true);
       },
       changeEditSave() {
-        this.$emit("changeEditSave");
+        this.$emit('changeEditSave');
       },
       objectEdit() {
-        this.$emit("objectEdit");
+        this.$emit('objectEdit');
       },
       changeStopSave() {
       }
@@ -249,10 +262,12 @@
     mounted() {
       this.modify = true;
       this.getVariableRest();
-      this.setDetail("");
-      //默认子明细需要保存
+      this.setDetail('');
+      // 默认子明细需要保存
       this.errorHasContent();
-      this.getData();
+      if (this.$route.params.itemId !== 'New') {
+        this.getData();
+      }
     },
     created() {
     }
