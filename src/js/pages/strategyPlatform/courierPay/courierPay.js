@@ -136,6 +136,7 @@ export default {
       if (value !== -1) {
         // self.jordanTableConfig.jordanFormConfig = {};
         // 获取详情
+        console.log('self.objid::',self);
         self.query(self.objid);
       }
     }
@@ -737,7 +738,7 @@ export default {
       const formdata = new FormData();
       formdata.append('param', JSON.stringify(param));
       // 接口
-      const res = await this.service.strategyPlatform.delCompenstate(formdata);
+      const res = await this.service.strategyPlatform.selectCompenstateLogistic(formdata);
       if (res.status === 200) {
         console.log('res.data',res.data);
         if (res.data.ST_C_COMPENSATE.BILL_STATUS) self.identifying = res.data.ST_C_COMPENSATE.BILL_STATUS;
