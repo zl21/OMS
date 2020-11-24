@@ -2476,14 +2476,13 @@ export default {
         if (selectItem.COPY_REASON) {
           // 订单只能是原单才能复制
           self.$Message.warning(this.vmI18n.t('modalTips.a2'));
-
           return;
         }
         // 原单无效复制
         if (type === this.vmI18n.t('btn.original_single_null_and_void_copy')) {
           // 已取消
-          if (ORDERSTATUSNAME !== '已取消') {
-            // 非已取消订单，不允许复制
+          if (selectItem.ORDER_STATUS != 7 || selectItem.ORDER_STATUS != 8) {
+            // 非已取消或系统作废订单，不允许复制
             self.$Message.error(this.vmI18n.t('modalTips.a3'));
             return;
           }
@@ -2512,12 +2511,6 @@ export default {
           label: '零售发货单新增',
           query
         });
-        // R3.store.commit('global/tabOpen', {
-        //   type: 'C',
-        //   label: window.vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
-        //   customizedModuleName: 'ORDERMANAGEADD',
-        //   customizedModuleId: '-1',
-        // });
       } else {
         self.$Message.warning({
           content: this.vmI18n.t('modalTips.a5'), // 请选择一条需要复制的订单！
@@ -3344,6 +3337,10 @@ export default {
       self.selection = [];
       self.jordanTableConfig.loading = true;
       self.agTableConfig.agLoading = true;
+      // 当出现loading，禁止页面滚动
+      document.getElementById('content').style.overflow = 'hidden';
+      document.getElementById('content').style.position = '';
+      console.log('1', document.getElementById('content'));
       if (self.clearFromListValue) self.queryInfoData = [];
       const param = {
         page: {
@@ -3371,6 +3368,9 @@ export default {
         .getOrderList(fromdata)
         .then(res => {
           self.agTableConfig.agLoading = false;
+           // 当loading结束，页面滚动
+          document.getElementById('content').style.overflow = 'auto';
+          document.getElementById('content').style.position = 'relative';
           if (!res.data.data) {
             self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
             // 初始化表格
@@ -3570,40 +3570,38 @@ export default {
       };
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
-      self.service.orderCenter
-        .queryOrderList(fromdata)
-        .then(res => {
-          self.jordanTableConfig.loading = false;
-          self.agTableConfig.agLoading = false;
-          if (res.data.code === 0) {
-            if (!res.data.data) {
-              self.jordanTableConfig.data = [];
-              self.jordanTableConfig.total = 0;
-              self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
-            } else {
-              // self.jordanTableConfig.total = res.data.data.totalSize;
-              self.agTableConfig.pagenation.total = res.data.data.totalSize;
-              self.jordanTableConfig.data = res.data.data.queryOrderResultList;
-              self.jordanTableConfig.data.forEach(item => {
-                if (item.ORDER_STATUS === self.orderStatus.orderCancel || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid) {
-                  item.isColorGray = true;
-                } else {
-                  item.isColorGray = false;
-                }
-              });
-            }
+      try {
+        const res = await self.service.orderCenter.queryOrderList(fromdata);
+        self.jordanTableConfig.loading = false;
+        self.agTableConfig.agLoading = false;
+        if (res.data.code === 0) {
+          if (!res.data.data) {
+            self.jordanTableConfig.data = [];
+            self.jordanTableConfig.total = 0;
+            self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
           } else {
-            self.$Message.warning({
-              content: res.data.message,
-              duration: 5,
-              top: 80
+            // self.jordanTableConfig.total = res.data.data.totalSize;
+            self.agTableConfig.pagenation.total = res.data.data.totalSize;
+            self.jordanTableConfig.data = res.data.data.queryOrderResultList;
+            self.jordanTableConfig.data.forEach(item => {
+              if (item.ORDER_STATUS === self.orderStatus.orderCancel || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid) {
+                item.isColorGray = true;
+              } else {
+                item.isColorGray = false;
+              }
             });
           }
-        })
-        .catch(() => {
-          self.jordanTableConfig.loading = false;
-          self.agTableConfig.agLoading = false;
-        });
+        } else {
+          self.$Message.warning({
+            content: res.data.message,
+            duration: 5,
+            top: 80
+          });
+        }
+      } catch (err) {
+        self.jordanTableConfig.loading = false;
+        self.agTableConfig.agLoading = false;
+      }
       this.selectValue = [];
     },
     // 标准时间转化为yyyy-mm-dd

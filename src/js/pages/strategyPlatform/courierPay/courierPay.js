@@ -136,15 +136,17 @@ export default {
       if (value !== -1) {
         // self.jordanTableConfig.jordanFormConfig = {};
         // 获取详情
-        console.log('self.objid::',self);
         self.query(self.objid);
       }
     }
   },
   mounted() {
     const self = this;
-    // console.log('self.$route.query.id',self.$route.params.customizedModuleId);
-    self.objid = Number(self.$route.query.id);
+    if (self.$route.params.customizedModuleId == 'New') {
+      self.objid = -1;
+    } else {
+      self.objid = Number(self.$route.params.customizedModuleId);
+    }
     this.formConfig.formData = [
       {
         style: 'input',
@@ -333,7 +335,7 @@ export default {
           isnotnull: true,
           fkdesc: '物流公司档案',
           // name: "快递公司名称",
-          label: this.vmI18n.t('form_label.expressCompanyName'),
+          name: this.vmI18n.t('form_label.expressCompanyName'),
           fkdisplay: 'drp',
           row: 1,
           inputname: 'CP_C_LOGISTICS_ID:ENAME',
@@ -481,7 +483,7 @@ export default {
     this.jordanTableConfig.columns = [
       {
         // title: "快递名称",
-        label: this.vmI18n.t('table_label.expressName'),
+        title: this.vmI18n.t('table_label.expressName'),
         sortable: true,
         key: 'CP_C_LOGISTICS_ENAME',
         width: '',
@@ -492,22 +494,22 @@ export default {
       },
       {
         // title: "赔付类型",
-        label: this.vmI18n.t('form_label.payableAdjustType'),
+        title: this.vmI18n.t('form_label.payableAdjustType'),
         key: 'COMPENSATE_TYPE'
       },
       {
         // title: "赔付标准",
-        label: this.vmI18n.t('form_label.payableAdjustStandard'),
+        title: this.vmI18n.t('form_label.payableAdjustStandard'),
         key: 'COMPENSATE_STANDARD'
       },
       {
         // title: "倍数",
-        label: this.vmI18n.t('form_label.multiple'),
+        title: this.vmI18n.t('form_label.multiple'),
         key: 'MULTIPLE'
       },
       {
         // title: "结算价",
-        label: this.vmI18n.t('form_label.settlement_price'),
+        title: this.vmI18n.t('form_label.settlement_price'),
         key: 'SETTLEMENTPRICE'
       }
     ];
@@ -541,8 +543,7 @@ export default {
     // 保存方法
     async sava() {
       const self = this;
-      const a = self.getData(self.$route.query.id);
-      console.log(a);
+      const a = self.getData(self.$route.params.customizedModuleId);
       const param = a;
       // 非空效验
       if (String(a.fixcolumn.ST_C_COMPENSATE.CP_C_PHY_WAREHOUSE_ID) == 'undefined' || !a.fixcolumn.ST_C_COMPENSATE.CP_C_PHY_WAREHOUSE_ID) {
@@ -746,22 +747,6 @@ export default {
         if (res.data.ST_C_COMPENSATE.END_TIME === null) res.data.ST_C_COMPENSATE.END_TIME = '';
         self.setData(res.data);
       }
-      // axios({
-      //   url: "/p/cs/selectCompenstateLogistic",
-      //   method: "post",
-      //   data: formdata,
-      // }).then((res) => {
-      //   console.log(res);
-      //   if (res.status === 200) {
-      //     if (res.data.ST_C_COMPENSATE.BILL_STATUS)
-      //       self.identifying = res.data.ST_C_COMPENSATE.BILL_STATUS;
-      //     if (res.data.ST_C_COMPENSATE.BILL_STATUS !== 1)
-      //       self.jordanTableConfig.isShowDeleteDetailBtn = false;
-      //     if (res.data.ST_C_COMPENSATE.END_TIME === null)
-      //       res.data.ST_C_COMPENSATE.END_TIME = "";
-      //     self.setData(res.data);
-      //   }
-      // });
     },
     // 新增明细方法
     async addDetail() {

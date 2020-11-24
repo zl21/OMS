@@ -648,7 +648,7 @@ export default {
       }
       if (type === this.vmI18n.t('btn.original_single_null_and_void_copy')) {
         // 已取消  系统作废
-        if (ORDERSTATUSNAME !== '已取消' && ORDERSTATUSNAME !== this.vmI18n.t('other.systemVoid')) {
+        if (selectItem.ORDER_STATUS != 7 || selectItem.ORDER_STATUS != 8) {
           self.$Message.error(this.vmI18n.t('modalTips.a3'));
           return;
         }
