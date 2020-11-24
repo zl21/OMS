@@ -62,7 +62,7 @@
             <button class="white" v-show="giftData.give_num_share==1" @click="setCommodity">设置商品池</button>
             <button class="white" @click="addSteps">
               <!-- 添加阶梯 -->
-              { vmI18n.t("btn.add_ladder") }}
+              {{ vmI18n.t("btn.add_ladder") }}
             </button>
             <button class="white" @click="removeSteps">
               <!-- 删除阶梯 -->
