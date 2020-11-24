@@ -1236,6 +1236,7 @@ export default {
         this.$Message.warning(this.vmI18n.t('modalTips.l1')); // 退换货取消失败,只有【等待退货入库】状态才可以操作取消，请检查后重试!
         return;
       }
+      
       const ids = [];
       for (let i = 0; i < selectArr.length; i++) {
         if (selectArr[i].RETURN_STATUS == 20) {
@@ -1246,51 +1247,73 @@ export default {
         this.$Message.warning(this.vmI18n.t('modalTips.l2')); // 单据状态不符合取消条件，请重新选择
         return;
       }
-      this.$Modal.info({
-        title: this.vmI18n.t('modalTitle.tips'), // 提示
-        content: this.vmI18n.t('modalTips.l3'), // 是否确定取消退单？
-        mask: true,
-        showCancel: true,
-        okText: this.vmI18n.t('common.determine'), // 确定
-        cancelText: this.vmI18n.t('common.cancel'), // 取消
-        onOk: () => {
-          this.isSaveLoading = true;
-          this.service.orderCenter.OcCancelChangingOrRefund({ ids }).then(res => {
-            this.isSaveLoading = false;
-            if (res.data.code === 0) {
-              if (res.data.data === 'comfirmFlag') {
-                this.$Modal.info({
-                  title: this.vmI18n.t('modalTitle.tips'), // 提示
-                  content: this.vmI18n.t('modalTips.l4'), // 换货订单的状态为配货中或已经发货,是否确认直接取消退货？
-                  mask: true,
-                  showCancel: true,
-                  okText: this.vmI18n.t('common.determine'), // 确定
-                  cancelText: this.vmI18n.t('common.cancel'), // 取消
-                  onOk: () => {
-                    this.isSaveLoading = true;
-                    this.service.orderCenter.OcCancelChangingOrRefund({ ids, comfirmFlag: 'comfirmFlag' }).then(res => {
-                      this.isSaveLoading = false;
-                      if (res.data.code === 0) {
-                        this.$Message.success(res.data.message);
-                        setTimeout(() => {
-                          this.getList(this.statusTab);
-                        }, 500);
-                      } else {
-                        const err = res.data.message || this.vmI18n.t('modalTips.l5'); // 取消失败！
-                        this.$Message.info(err);
+      this.service.orderCenter.checkCancelParams({ ids }).then(res=>{
+        if (res.data.code == 0 || res.data.code == 1) {
+          const message = res.data.code == 0 ? this.vmI18n.t('modalTips.l3') : '此退换货单已生成未作废的换货类型零售发货单,不允许取消,继续将作废换货类型零售发货单以及退换订单';
+          this.$Modal.info({
+            title: this.vmI18n.t('modalTitle.tips'), // 提示
+            content: message,
+            mask: true,
+            showCancel: true,
+            okText: this.vmI18n.t('common.determine'), // 确定
+            cancelText: this.vmI18n.t('common.cancel'), // 取消
+            onOk: () => {
+              this.isSaveLoading = true;
+              this.service.orderCenter.OcCancelChangingOrRefund({ ids }).then(res => {
+                this.isSaveLoading = false;
+                if (res.data.code === 0) {
+                  if (res.data.data === 'comfirmFlag') {
+                    this.$Modal.info({
+                      title: this.vmI18n.t('modalTitle.tips'), // 提示
+                      content: this.vmI18n.t('modalTips.l4'), // 换货订单的状态为配货中或已经发货,是否确认直接取消退货？
+                      mask: true,
+                      showCancel: true,
+                      okText: this.vmI18n.t('common.determine'), // 确定
+                      cancelText: this.vmI18n.t('common.cancel'), // 取消
+                      onOk: () => {
+                        this.isSaveLoading = true;
+                        this.service.orderCenter.OcCancelChangingOrRefund({ ids, comfirmFlag: 'comfirmFlag' }).then(res => {
+                          this.isSaveLoading = false;
+                          if (res.data.code === 0) {
+                            this.$Message.success(res.data.message);
+                            setTimeout(() => {
+                              this.getList(this.statusTab);
+                            }, 500);
+                          } else {
+                            const err = res.data.message || this.vmI18n.t('modalTips.l5'); // 取消失败！
+                            this.$Message.info(err);
+                          }
+                        });
                       }
                     });
+                  } else {
+                    this.$Message.success(res.data.message);
+                    setTimeout(() => {
+                      this.getList(this.statusTab);
+                    }, 500);
                   }
-                });
-              } else {
-                this.$Message.success(res.data.message);
-                setTimeout(() => {
-                  this.getList(this.statusTab);
-                }, 500);
-              }
-            } else {
-              const err = res.data.message || this.vmI18n.t('modalTips.l5'); // 取消失败！
-              this.$Message.info(err);
+                } else {
+                  this.$Modal.fcError({
+                    width: 500,
+                    render: h => h('Table', {
+                      props: {
+                        columns: [
+                          {
+                            // title: "提示信息",
+                            title: 'ID',
+                            key: 'objid',
+                          },
+                          {
+                            title: '报错信息',
+                            key: 'message'
+                          }
+                        ],
+                        data: res.data.data,
+                      },
+                    }),
+                  });
+                }
+              });
             }
           });
         }

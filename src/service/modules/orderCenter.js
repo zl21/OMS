@@ -78,7 +78,8 @@ export default {
   managementOrderHold: params => network.post('/api/cs/oc/oms/v1/holdOrder', params), // 零售发货单-HOLD单
   returnTypeItemquery: params => network.post('/p/cs/objectTableItem', params), // 退款分类-退款分类描述
   extraReturnTableLogQuery: params => network.post('/api/cs/oc/oms/v1/getOcBReturnAfSendLog', params), // 额外退款单-额外退款单日志
-  modifyReturnOrderWarehouse: params => network.post('/api/cs/oc/oms/v1/modifyReturnOrderWarehouse', params),  //退换货单修改退回仓库
+  modifyReturnOrderWarehouse: params => network.post('/api/cs/oc/oms/v1/modifyReturnOrderWarehouse', params), // 退换货单修改退回仓库
+  checkCancelParams: params => network.post('/api/cs/oc/oms/v1/checkCancelParams', params), // 检查接口
 
   // 半定制弹框
   //
