@@ -68,7 +68,7 @@ export default {
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              this.$parent.$parent.actionDialog.show = false;
+              this.$emit('closeActionDialog', false);
             } // 按钮点击事件
           }
         ]
@@ -100,43 +100,25 @@ export default {
       const { data: { data: { code, data, message } } } = await this.service.financeCenter.getVendorCodeAndBillNumber({ params });
       this.pageLoad = false;
       if (code === 0) {
-        this.generateFormConfig.formData[0].options = data.vendorIds.map(
-          item => ({
-            label: String(item),
-            value: String(item)
-          })
-        );
-        this.generateFormConfig.formData[1].options = data.billNumbers.map(
-          item => ({
-            label: item,
-            value: item
-          })
-        );
+        if (data.vendorIds) {
+          this.generateFormConfig.formData[0].options = data.vendorIds.map(
+            item => ({
+              label: String(item),
+              value: String(item)
+            })
+          );
+        }
+        if (data.billNumbers) {
+          this.generateFormConfig.formData[1].options = data.billNumbers.map(
+            item => ({
+              label: item,
+              value: item
+            })
+          );
+        }
       } else {
         this.$message.error(message);
       }
-      // R3.network.get("/p/cs/ac/v1/getVendorCodeAndBillNumber", {params})
-      //   .then(res => {
-      //     this.pageLoad = false;
-      //     let resData = res.data.data;
-      //     if (resData.code === 0) {
-      //       console.log(resData);
-      //       this.generateFormConfig.formData[0].options = resData.data.vendorIds.map(
-      //         item => ({
-      //           label: String(item),
-      //           value: String(item)
-      //         })
-      //       );
-      //       this.generateFormConfig.formData[1].options = resData.data.billNumbers.map(
-      //         item => ({
-      //           label: item,
-      //           value: item
-      //         })
-      //       );
-      //     } else {
-      //       this.$Message.error(res.data.message);
-      //     }
-      //   });
     },
     // 打印
     async printData() {
@@ -161,25 +143,10 @@ export default {
       const { data: { data: { code, message } } } = await this.service.financeCenter.generateVipSalesOrder({ params });
       if (code === 0) {
         this.$message.success(message);
-        this.$parent.$parent.actionDialog.show = false;
+        this.$emit('closeActionDialog', true);
       } else {
         this.$message.error(message);
       }
-      // if (res.data.data.code === 0) {
-      //   this.$Message.success(res.data.data.message);
-      //   this.$parent.$parent.actionDialog.show = false;
-      // } else {
-      //   this.$Message.error(res.data.data.message);
-      // }
-      // R3.network.get("/p/cs/ac/v1/generateVipSalesOrder", {params})
-      //   .then(res => {
-      //     if (res.data.data.code === 0) {
-      //       this.$Message.success(res.data.data.message);
-      //       this.$parent.$parent.actionDialog.show = false;
-      //     } else {
-      //       this.$Message.error(res.data.data.message);
-      //     }
-      //   });
     }
   },
   mounted() {

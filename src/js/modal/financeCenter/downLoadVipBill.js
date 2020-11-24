@@ -117,7 +117,6 @@ export default {
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              // this.$parent.$parent.actionDialog.show = false;
               this.$emit('closeActionDialog', false);
             } // 按钮点击事件
           }
@@ -175,18 +174,10 @@ export default {
       const { data: { data } } = await this.service.financeCenter.triggerVipBill(formdata); 
       if (data.Code === 0) {
         this.$message.success(data.Execmsg);
-        this.$parent.$parent.actionDialog.show = false;
+        this.$emit('closeActionDialog', true);
       } else {
         this.$message.error(data.Execmsg);
       }
-      // R3.network.post( "/p/cs/ac/v1/triggerVipBill",fromdata).then(res => {
-      //   if (res.data.data.Code === 0) {
-      //     this.$Message.success(res.data.data.Execmsg);
-      //     this.$parent.$parent.actionDialog.show = false;
-      //   } else {
-      //     this.$Message.error(res.data.data.Execmsg);
-      //   }
-      // });
     }
   },
   mounted() {
