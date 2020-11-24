@@ -288,39 +288,39 @@
                   </FormItem>
                   </Col>
                 </Row>
-                <Row>
-                  <Col
-                    colspan="1"
-                    span="1"
-                    style="padding-top: 10px"
-                  >
-                  <Checkbox
-                    v-model="effectiveCondition[3].value"
-                    size="small"
-                    @on-change="setResult('effectiveCondition')"
-                  >
-&nbsp;
-                  </Checkbox>
-                  </Col>
-                  <Col span="11">
-                  <FormItem label="收货省份:">
-                    <DropDownSelectFilter
-                      :data="data1"
-                      :data-empty-message="dataEmptyMessage"
-                      :default-selected="defaultSelected"
-                      :is-back-row-item="true"
-                      :page-size="pageSize"
-                      :show-colname-key="'show'"
-                      :single="false"
-                      :total-row-count="totalRowCount"
-                      @on-clear="clearSelect"
-                      @on-fkrp-selected="selected"
-                      @on-input-value-change="InputValueChange"
-                      @on-page-change="changePage1"
-                    />
-                  </FormItem>
-                  </Col>
-                </Row>
+<!--                <Row>-->
+<!--                  <Col-->
+<!--                    colspan="1"-->
+<!--                    span="1"-->
+<!--                    style="padding-top: 10px"-->
+<!--                  >-->
+<!--                  <Checkbox-->
+<!--                    v-model="effectiveCondition[3].value"-->
+<!--                    size="small"-->
+<!--                    @on-change="setResult('effectiveCondition')"-->
+<!--                  >-->
+<!--&nbsp;-->
+<!--                  </Checkbox>-->
+<!--                  </Col>-->
+<!--                  <Col span="11">-->
+<!--                  <FormItem label="收货省份:">-->
+<!--                    <DropDownSelectFilter-->
+<!--                      :data="data1"-->
+<!--                      :data-empty-message="dataEmptyMessage"-->
+<!--                      :default-selected="defaultSelected"-->
+<!--                      :is-back-row-item="true"-->
+<!--                      :page-size="pageSize"-->
+<!--                      :show-colname-key="'show'"-->
+<!--                      :single="false"-->
+<!--                      :total-row-count="totalRowCount"-->
+<!--                      @on-clear="clearSelect"-->
+<!--                      @on-fkrp-selected="selected"-->
+<!--                      @on-input-value-change="InputValueChange"-->
+<!--                      @on-page-change="changePage1"-->
+<!--                    />-->
+<!--                  </FormItem>-->
+<!--                  </Col>-->
+<!--                </Row>-->
                 <Row>
                   <Col
                     colspan="1"
