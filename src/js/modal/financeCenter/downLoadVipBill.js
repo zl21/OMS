@@ -185,7 +185,7 @@ export default {
     // 月结,进度
     if (this.$route.params.tableName == 'AC_F_VIP_BILL_MONTH') {
       this.downLoadFormConfig.formValue.type = 'billMonthDownload';
-      this.downLoadFormConfig.formData[1].options[0].label = this.vmI18n.t('modalTips.monthlyBillDownload');// 月结账单下载
+      this.downLoadFormConfig.formData[1].options[0].label = this.vmI18n.t('btn.monthlyBillDownload');// 月结账单下载
       this.downLoadFormConfig.formData[1].options[0].value = 'billMonthDownload';
     } else {
       this.downLoadFormConfig.formValue.type = 'billDownload';
