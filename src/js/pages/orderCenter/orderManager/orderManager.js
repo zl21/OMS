@@ -25,7 +25,7 @@ export default {
   watch: {
     publicBouncedConfig(newvalue) {
       this.publicBouncedIndex = newvalue;
-    },
+    }
   },
   data() {
     return {
@@ -37,7 +37,7 @@ export default {
         columnDefs: [],
         rowData: [],
         renderArr: {
-          EXPRESSCODE: (params) => {
+          EXPRESSCODE: params => {
             // render渲染的执行方法
             const resultElement = document.createElement('span');
             resultElement.innerText = params.value;
@@ -46,17 +46,13 @@ export default {
             resultElement.onclick = () => {
               const iTop = (window.screen.availHeight - 30 - 800) / 2;
               const iLeft = (window.screen.availWidth - 10 - 1200) / 2;
-              window.open(
-                `http://www.kuaidi100.com/chaxun?com=${params.data.PY_SHORT_NAME}&nu=${params.data.EXPRESSCODE}`,
-                '',
-                `height=800, width=1200 , top=${iTop} , left=${iLeft}`
-              );
+              window.open(`http://www.kuaidi100.com/chaxun?com=${params.data.PY_SHORT_NAME}&nu=${params.data.EXPRESSCODE}`, '', `height=800, width=1200 , top=${iTop} , left=${iLeft}`);
             };
             return resultElement;
           },
-          ORDER_TAG: (params) => {
+          ORDER_TAG: params => {
             const resultElement = document.createElement('div');
-            params.data.ORDERTAGLIST.forEach((item) => {
+            params.data.ORDERTAGLIST.forEach(item => {
               const tag = document.createElement('span');
               tag.innerText = item.text;
               tag.style.color = item.clr;
@@ -70,37 +66,23 @@ export default {
           },
           PAY_TIME: params =>
             // 付款时间
-            (params.data.PAY_TIME
-              ? this.standardTimeConversiondateToStr(params.data.PAY_TIME)
-              : ''),
+            params.data.PAY_TIME ? this.standardTimeConversiondateToStr(params.data.PAY_TIME) : '',
           AUDIT_TIME: params =>
             // 审核时间
-            (params.data.AUDIT_TIME
-              ? this.standardTimeConversiondateToStr(params.data.AUDIT_TIME)
-              : ''),
+            params.data.AUDIT_TIME ? this.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : '',
           DISTRIBUTION_TIME: params =>
             // 配货时间
-            (params.data.AUDIT_TIME
-              ? this.standardTimeConversiondateToStr(params.data.AUDIT_TIME)
-              : ''),
+            params.data.AUDIT_TIME ? this.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : '',
           CREATIONDATE: params =>
             // 创建时间
-            (params.data.CREATIONDATE
-              ? this.standardTimeConversiondateToStr(params.data.CREATIONDATE)
-              : ''),
+            params.data.CREATIONDATE ? this.standardTimeConversiondateToStr(params.data.CREATIONDATE) : '',
           HOLD_RELEASE_TIME: params =>
             // HOLD单释放时间
-            (params.data.HOLD_RELEASE_TIME
-              ? this.standardTimeConversiondateToStr(
-                params.data.HOLD_RELEASE_TIME
-              )
-              : ''),
+            params.data.HOLD_RELEASE_TIME ? this.standardTimeConversiondateToStr(params.data.HOLD_RELEASE_TIME) : '',
           SCAN_TIME: params =>
             // 出库时间
-            (params.data.SCAN_TIME
-              ? this.standardTimeConversiondateToStr(params.data.SCAN_TIME)
-              : ''),
-          ORDER_FLAG: (params) => {},
+            params.data.SCAN_TIME ? this.standardTimeConversiondateToStr(params.data.SCAN_TIME) : '',
+          ORDER_FLAG: params => {}
         },
         pagenation: {
           // 设置总条数
@@ -109,8 +91,8 @@ export default {
           pageSize: 20,
           // 页数
           current: 1,
-          pageSizeOpts: [50, 200, 500, 2000],
-        },
+          pageSizeOpts: [50, 200, 500, 2000]
+        }
       },
       // 弹框配置 导入
       importTable: {
@@ -128,7 +110,7 @@ export default {
         url: 'modal/publicDialog/importTable',
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
-        componentData: {},
+        componentData: {}
       },
       warningModal: false, // 警告弹框
       distributeLogisticsModal: false, // 警告弹框
@@ -140,7 +122,7 @@ export default {
       statusData: {
         label: window.vmI18n.t('common.toBeReviewed'), // 全部
         value: '1',
-        isShow: true,
+        isShow: true
       },
       // tag 搜索
       queryInfoData: [],
@@ -156,7 +138,7 @@ export default {
       isShowFromLoading: false,
       // 弹框判断
       publicBouncedIndex: {
-        name: 'testModal',
+        name: 'testModal'
       },
       // 公共弹框
       publicBouncedConfig: {},
@@ -180,7 +162,7 @@ export default {
         renderArr: [
           {
             title: window.vmI18n.t('table_label.replicationReason'), // 复制原因
-            key: 'COPY_REASON',
+            key: 'COPY_REASON'
           },
           {
             title: window.vmI18n.t('table_label.flag'), // 旗帜
@@ -200,40 +182,35 @@ export default {
                   {
                     style: {
                       display: 'flex',
-                      'align-items': 'center',
-                    },
+                      'align-items': 'center'
+                    }
                   },
                   [
                     h('img', {
                       attrs: {
-                        src: imgSrc,
+                        src: imgSrc
                       },
                       style: {
                         width: '14px',
                         height: 'auto',
-                        cursor: 'pointer',
+                        cursor: 'pointer'
                       },
                       on: {
                         click: () => {
                           // "是否确认修改备注！"
                           const self = this;
-                          self.publicBouncedConfig = Object.assign(
-                            publicDialogConfig.changeRemarkConfig,
-                            {
-                              componentData: {
-                                ids: params.row.ID,
-                                status: `${params.row.ORDER_STATUS}`,
-                              },
+                          self.publicBouncedConfig = Object.assign(publicDialogConfig.changeRemarkConfig, {
+                            componentData: {
+                              ids: params.row.ID,
+                              status: `${params.row.ORDER_STATUS}`
                             }
-                          );
+                          });
                           setTimeout(() => {
-                            self.$children
-                              .find(item => item.name === 'changeRemark')
-                              .openConfirm();
+                            self.$children.find(item => item.name === 'changeRemark').openConfirm();
                           }, 100);
-                        },
-                      },
-                    }),
+                        }
+                      }
+                    })
                   ]
                 );
               }
@@ -243,52 +220,47 @@ export default {
                   props: {
                     placement: 'bottom',
                     trigger: 'hover',
-                    transfer: true,
-                  },
+                    transfer: true
+                  }
                 },
                 [
                   h('img', {
                     attrs: {
-                      src: imgSrc,
+                      src: imgSrc
                     },
                     style: {
                       width: '14px',
                       height: 'auto',
-                      cursor: 'pointer',
+                      cursor: 'pointer'
                     },
                     on: {
                       click: () => {
                         // "是否确认修改备注！"
                         const self = this;
-                        self.publicBouncedConfig = Object.assign(
-                          publicDialogConfig.changeRemarkConfig,
-                          {
-                            componentData: {
-                              ids: params.row.ID,
-                              status: `${params.row.ORDER_STATUS}`,
-                              ORDER_FLAG: params.row.ORDER_FLAG,
-                              SELLER_MEMO: params.row.SELLER_MEMO,
-                            },
+                        self.publicBouncedConfig = Object.assign(publicDialogConfig.changeRemarkConfig, {
+                          componentData: {
+                            ids: params.row.ID,
+                            status: `${params.row.ORDER_STATUS}`,
+                            ORDER_FLAG: params.row.ORDER_FLAG,
+                            SELLER_MEMO: params.row.SELLER_MEMO
                           }
-                        );
+                        });
                         setTimeout(() => {
-                          self.$children
-                            .find(item => item.name === 'changeRemark')
-                            .openConfirm();
+                          self.$children.find(item => item.name === 'changeRemark').openConfirm();
                         }, 100);
-                      },
-                    },
+                      }
+                    }
                   }),
                   h(
                     'p',
                     {
-                      slot: 'content',
+                      slot: 'content'
                     },
                     params.row.SELLER_MEMO
-                  ),
+                  )
                 ]
               );
-            },
+            }
           },
           {
             title: window.vmI18n.t('table_label.orderIdentification'), // 订单标识
@@ -298,7 +270,7 @@ export default {
             key: 'ORDER_TAG',
             render: (h, params) => {
               if (params.row.ORDERTAGLIST) {
-                params.row.ORDERTAGLIST.forEach((ORDERTAGLISTItem, Index) => {
+                params.row.ORDERTAGLIST.forEach(ORDERTAGLISTItem => {
                   ORDERTAGLISTItem.message = orderLogo[ORDERTAGLISTItem.text];
                 });
                 return h(
@@ -310,49 +282,51 @@ export default {
                       justifyContent: 'center',
                       flexDirection: 'row',
                       cursor: 'pointer',
-                      padding: '6px 8px',
-                    },
+                      padding: '6px 8px'
+                    }
                   },
                   [
-                    params.row.ORDERTAGLIST.forEach(item => h(
-                      'Poptip',
-                      {
-                        props: {
-                          placement: 'right',
-                          trigger: 'hover',
-                          width: '100%',
-                          transfer: true,
+                    params.row.ORDERTAGLIST.forEach(item =>
+                      h(
+                        'Poptip',
+                        {
+                          props: {
+                            placement: 'right',
+                            trigger: 'hover',
+                            width: '100%',
+                            transfer: true
+                          }
                         },
-                      },
-                      [
-                        h(
-                          'div',
-                          {
-                            style: {
-                              border: `1px solid ${item.clr}`,
-                              color: item.clr,
-                              fontSize: '10px',
-                              borderRadius: '6px',
-                              padding: '2px 2px',
-                              marginRight: '4px',
-                              cursor: 'pointer',
+                        [
+                          h(
+                            'div',
+                            {
+                              style: {
+                                border: `1px solid ${item.clr}`,
+                                color: item.clr,
+                                fontSize: '10px',
+                                borderRadius: '6px',
+                                padding: '2px 2px',
+                                marginRight: '4px',
+                                cursor: 'pointer'
+                              }
                             },
-                          },
-                          item.text
-                        ),
-                        h(
-                          'span',
-                          {
-                            slot: 'content',
-                          },
-                          item.message
-                        ),
-                      ]
-                    )),
+                            item.text
+                          ),
+                          h(
+                            'span',
+                            {
+                              slot: 'content'
+                            },
+                            item.message
+                          )
+                        ]
+                      )
+                    )
                   ]
                 );
               }
-            },
+            }
           },
           {
             title: window.vmI18n.t('table_label.platform_orderNo'), // 平台单号
@@ -373,8 +347,8 @@ export default {
                       props: {
                         placement: 'bottom',
                         transfer: true,
-                        trigger: 'hover',
-                      },
+                        trigger: 'hover'
+                      }
                     },
                     [
                       h(
@@ -388,68 +362,61 @@ export default {
                             cursor: 'pointer',
                             color:
                               // eslint-disable-next-line no-nested-ternary
-                              params.row.ORDER_STATUS
-                                === this.orderStatus.orderCancel
-                              || params.row.ORDER_STATUS
-                                === this.orderStatus.orderSystemInvalid
-                                ? '#c5c5c5'
-                                : params.row.SYSREMARK === null
-                                  || !params.row.SYSREMARK
-                                  ? '#0F8EE9'
-                                  : 'red',
-                          },
+                              params.row.ORDER_STATUS === this.orderStatus.orderCancel || params.row.ORDER_STATUS === this.orderStatus.orderSystemInvalid ? '#c5c5c5' : params.row.SYSREMARK === null || !params.row.SYSREMARK ? '#0F8EE9' : 'red'
+                          }
                         },
                         sourceCode
                       ),
                       h(
                         'span',
                         {
-                          slot: 'content',
+                          slot: 'content'
                         },
                         sourceCode
-                      ),
+                      )
                     ]
-                  ),
+                  )
                 ]);
               }
-            },
+            }
           },
           {
             title: window.vmI18n.t('table_label.shippingAddress'), // 收货地址
             key: 'REGION_RECEIVER_ADDRESS',
-            render: (h, params) => h('span', [
-              h(
-                'Poptip',
-                {
-                  props: {
-                    placement: 'bottom',
-                    transfer: true,
-                    trigger: 'hover',
+            render: (h, params) =>
+              h('span', [
+                h(
+                  'Poptip',
+                  {
+                    props: {
+                      placement: 'bottom',
+                      transfer: true,
+                      trigger: 'hover'
+                    }
                   },
-                },
-                [
-                  h(
-                    'span',
-                    {
-                      style: {
-                        width: '300px',
-                        'white-space': 'nowrap',
-                        'text-overflow': 'ellipsis',
-                        overflow: 'hidden',
+                  [
+                    h(
+                      'span',
+                      {
+                        style: {
+                          width: '300px',
+                          'white-space': 'nowrap',
+                          'text-overflow': 'ellipsis',
+                          overflow: 'hidden'
+                        }
                       },
-                    },
-                    params.row.REGION_RECEIVER_ADDRESS
-                  ),
-                  h(
-                    'span',
-                    {
-                      slot: 'content',
-                    },
-                    params.row.REGION_RECEIVER_ADDRESS
-                  ),
-                ]
-              ),
-            ]),
+                      params.row.REGION_RECEIVER_ADDRESS
+                    ),
+                    h(
+                      'span',
+                      {
+                        slot: 'content'
+                      },
+                      params.row.REGION_RECEIVER_ADDRESS
+                    )
+                  ]
+                )
+              ])
           },
           {
             title: window.vmI18n.t('table_label.goodsInfo'), // 商品信息
@@ -458,32 +425,27 @@ export default {
             ellipsis: false,
             key: 'QUERYORDERITEMRESULTLIST',
             render: (h, params) => {
-              if (
-                params.row.QUERYORDERITEMRESULTLIST
-                && params.row.QUERYORDERITEMRESULTLIST.length !== 0
-              ) {
+              if (params.row.QUERYORDERITEMRESULTLIST && params.row.QUERYORDERITEMRESULTLIST.length !== 0) {
                 const popList = [];
                 params.row.QUERYORDERITEMRESULTLIST.forEach((item, index) => {
                   const ecode = item.ecode || window.vmI18n.t('other.goods'); // 商品
                   const sizes = item.sizes || window.vmI18n.t('other.sizes'); // 尺寸
                   const clrs = item.clrs || window.vmI18n.t('other.color'); // 颜色
                   const dataArr = [];
-                  let dataMore = this.reaptData(
-                    params.row.QUERYORDERITEMRESULTLIST
-                  );
+                  let dataMore = this.reaptData(params.row.QUERYORDERITEMRESULTLIST);
                   dataArr.push(item);
                   // BUG  超过6还是会展示...   add  by  wdq 20190612
                   if (index > 2) return;
                   if (index == 2) {
                     dataMore = dataMore.splice(2);
                     popList[2] = {
-                      jsonShow: vmI18n.t('other.more'), // 更多
-                      data: dataMore,
+                      jsonShow: window.vmI18n.t('other.more'), // 更多
+                      data: dataMore
                     };
                   }
                   popList[index] = {
                     jsonShow: `${ecode} , ${sizes} , ${clrs}`,
-                    data: dataArr,
+                    data: dataArr
                   };
                 });
                 // const goodsThead = [
@@ -533,8 +495,8 @@ export default {
                   {
                     style: {
                       display: 'flex',
-                      'justify-content': 'space-between',
-                    },
+                      'justify-content': 'space-between'
+                    }
                   },
                   [
                     h(
@@ -544,10 +506,10 @@ export default {
                           width: '86%',
                           'padding-bottom': '6px',
                           display: 'flex',
-                          'flex-wrap': 'wrap',
-                        },
+                          'flex-wrap': 'wrap'
+                        }
                       },
-                      popList.map((item) => {
+                      popList.map(item => {
                         // 缺货标识
                         let lostGoods = false;
                         // 缺货数量
@@ -563,8 +525,8 @@ export default {
                           'div',
                           {
                             style: {
-                              padding: '6px 4px 0px 4px',
-                            },
+                              padding: '6px 4px 0px 4px'
+                            }
                           },
                           [
                             h(
@@ -576,11 +538,8 @@ export default {
                                   position: 'relative',
                                   marginLeft: '10px',
                                   marginRight: '10px',
-                                  background:
-                                    item.data[0].refundStatus === 6
-                                      ? '#e6e6e6'
-                                      : 'none',
-                                },
+                                  background: item.data[0].refundStatus === 6 ? '#e6e6e6' : 'none'
+                                }
                               },
                               [
                                 h('span', {}, item.jsonShow),
@@ -599,13 +558,10 @@ export default {
                                       top: '-6px',
                                       right: '-8px',
                                       zIndex: '1',
-                                      color: 'white',
-                                    },
+                                      color: 'white'
+                                    }
                                   },
-                                  item.data.reduce(
-                                    (cur, next) => cur + next.qty,
-                                    0
-                                  )
+                                  item.data.reduce((cur, next) => cur + next.qty, 0)
                                 ),
                                 h(
                                   'div',
@@ -623,15 +579,13 @@ export default {
                                       right: '-8px',
                                       zIndex: '1',
                                       color: 'white',
-                                      visibility: lostGoods
-                                        ? 'hidden'
-                                        : 'visible',
-                                    },
+                                      visibility: lostGoods ? 'hidden' : 'visible'
+                                    }
                                   },
                                   qtyLost
-                                ),
+                                )
                               ]
-                            ),
+                            )
                           ]
                           // [
                           //   h(
@@ -707,15 +661,15 @@ export default {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'space-around',
-                          marginLeft: '10px',
-                        },
+                          marginLeft: '10px'
+                        }
                       },
                       [
                         h(
                           'span',
                           {
                             style: {
-                              cursor: 'pointer',
+                              cursor: 'pointer'
                             },
                             on: {
                               click: () => {
@@ -739,80 +693,74 @@ export default {
                                 //     [params.row.ID]
                                 //   );
                                 // });
-                                self.publicBouncedConfig = Object.assign(
-                                  publicDialogConfig.goodsDetailConfig,
-                                  {
-                                    componentData: {
-                                      id: params.row.ID,
-                                      ocBorderDtoID: params.row.ID,
-                                      objid: [params.row.ID],
-                                      order: params.row,
-                                    },
+                                self.publicBouncedConfig = Object.assign(publicDialogConfig.goodsDetailConfig, {
+                                  componentData: {
+                                    id: params.row.ID,
+                                    ocBorderDtoID: params.row.ID,
+                                    objid: [params.row.ID],
+                                    order: params.row
                                   }
-                                );
+                                });
 
                                 setTimeout(() => {
-                                  self.$children
-                                    .find(item => item.name === 'goodsDetail')
-                                    .openConfirm();
+                                  self.$children.find(item => item.name === 'goodsDetail').openConfirm();
                                 }, 100);
 
                                 setTimeout(() => {
-                                  this.$children
-                                    .find(item => item.name === 'goodsDetail')
-                                    .$children[0].$children[1].getData();
+                                  this.$children.find(item => item.name === 'goodsDetail').$children[0].$children[1].getData();
                                 }, 200);
-                              },
-                            },
+                              }
+                            }
                           },
-                          self.vmI18n.t('common.details')
+                          window.vmI18n.t('common.details')
                         ),
                         h('i', {
-                          class: 'burgeon-icon iconfont iconyoujiantou-copy',
-                        }),
+                          class: 'burgeon-icon iconfont iconyoujiantou-copy'
+                        })
                       ]
-                    ),
+                    )
                   ]
                 );
               }
-            },
+            }
           },
           {
-            title: self.vmI18n.t('other.systemNotes'), // 系统备注
+            title: window.vmI18n.t('other.systemNotes'), // 系统备注
             key: 'SYSREMARK',
-            render: (h, params) => h('span', [
-              h(
-                'Poptip',
-                {
-                  props: {
-                    placement: 'bottom',
-                    transfer: true,
-                    trigger: 'hover',
+            render: (h, params) =>
+              h('span', [
+                h(
+                  'Poptip',
+                  {
+                    props: {
+                      placement: 'bottom',
+                      transfer: true,
+                      trigger: 'hover'
+                    }
                   },
-                },
-                [
-                  h(
-                    'span',
-                    {
-                      style: {
-                        width: '300px',
-                        'white-space': 'nowrap',
-                        'text-overflow': 'ellipsis',
-                        overflow: 'hidden',
+                  [
+                    h(
+                      'span',
+                      {
+                        style: {
+                          width: '300px',
+                          'white-space': 'nowrap',
+                          'text-overflow': 'ellipsis',
+                          overflow: 'hidden'
+                        }
                       },
-                    },
-                    params.row.SYSREMARK
-                  ),
-                  h(
-                    'span',
-                    {
-                      slot: 'content',
-                    },
-                    params.row.SYSREMARK
-                  ),
-                ]
-              ),
-            ]),
+                      params.row.SYSREMARK
+                    ),
+                    h(
+                      'span',
+                      {
+                        slot: 'content'
+                      },
+                      params.row.SYSREMARK
+                    )
+                  ]
+                )
+              ])
           },
           {
             title: window.vmI18n.t('table_label.buyerNickname'), // 买家昵称
@@ -829,36 +777,33 @@ export default {
                       style: {
                         padding: '4px 6px',
                         display: 'flex',
-                        flexDirection: 'column',
-                      },
+                        flexDirection: 'column'
+                      }
                     },
                     [
                       h('p', [
                         h('i', {
-                          class:
-                            'burgeon-icon iconfont iconjo_wang iconwangwang',
+                          class: 'burgeon-icon iconfont iconjo_wang iconwangwang',
                           style: {
                             fontSize: '14px',
                             color: '#62A2F2',
-                            marginRight: '4px',
+                            marginRight: '4px'
                           },
                           on: {
                             click: () => {
                               if (params.row.PLATFORM === 2) {
-                                window.open(
-                                  `https://amos.alicdn.com/getcid.aw?v=3&uid=${params.row.USER_NICK}&charset=utf-8&site=cntaobao&fromid=cntaobao${params.row.CP_C_SHOP_TITLE}`
-                                );
+                                window.open(`https://amos.alicdn.com/getcid.aw?v=3&uid=${params.row.USER_NICK}&charset=utf-8&site=cntaobao&fromid=cntaobao${params.row.CP_C_SHOP_TITLE}`);
                               } else {
                                 // console.log("其他平台订单");
                               }
-                            },
-                          },
+                            }
+                          }
                         }),
-                        h('span', `${params.row.USER_NICK}`),
-                      ]),
+                        h('span', `${params.row.USER_NICK}`)
+                      ])
                       // h("p", params.row.CP_C_SHOP_TITLE || "")
                     ]
-                  ),
+                  )
                 ]);
               }
               return h(
@@ -867,80 +812,78 @@ export default {
                   style: {
                     padding: '4px 6px',
                     display: 'flex',
-                    flexDirection: 'column',
-                  },
+                    flexDirection: 'column'
+                  }
                 },
                 [
-                  h('p', params.row.USER_NICK || ''),
+                  h('p', params.row.USER_NICK || '')
                   // h("p", params.row.CP_C_SHOP_TITLE || "")
                 ]
               );
-            },
+            }
           },
           {
             title: window.vmI18n.t('table_label.receivingInfo'), // 收货信息
             key: 'JOIN_RECEIVER_ADDRESS',
             align: 'center',
             ellipsis: true,
-            render: (h, params) => h('div', [
-              h(
-                'span',
-                {
-                  on: {
-                    click: () => {
-                      const self = this;
-                      const param = {
-                        ID: params.row.ID,
-                        OLDRECEIVERADDRESS: `${params.row.RECEIVER_NAME},${params.row.RECEIVER_MOBILE},${params.row.CP_C_REGION_PROVINCE_ENAME}${params.row.CP_C_REGION_CITY_ENAME}${params.row.CP_C_REGION_AREA_ENAME}${params.row.RECEIVER_ADDRESS}`,
-                        BUYER_MESSAGE: params.row.BUYER_MESSAGE,
-                        SELLER_MEMO: params.row.SELLER_MEMO,
-                        SYSREMARK: params.row.SYSREMARK,
-                        CP_C_REGION_PROVINCE_ID:
-                            params.row.CP_C_REGION_PROVINCE_ID,
-                        CP_C_REGION_CITY_ID: params.row.CP_C_REGION_CITY_ID,
-                        CP_C_REGION_AREA_ID: params.row.CP_C_REGION_AREA_ID,
-                        RECEIVER_ADDRESS: params.row.RECEIVER_ADDRESS,
-                        RECEIVER_NAME: params.row.RECEIVER_NAME,
-                        RECEIVER_MOBILE: params.row.RECEIVER_MOBILE,
-                        RECEIVER_PHONE: params.row.RECEIVER_PHONE,
-                        RECEIVER_ZIP: params.row.RECEIVER_ZIP,
-                        CALLBACK: () => {
-                          self.getData();
-                        },
-                      };
+            render: (h, params) =>
+              h('div', [
+                h(
+                  'span',
+                  {
+                    on: {
+                      click: () => {
+                        const self = this;
+                        const param = {
+                          ID: params.row.ID,
+                          OLDRECEIVERADDRESS: `${params.row.RECEIVER_NAME},${params.row.RECEIVER_MOBILE},${params.row.CP_C_REGION_PROVINCE_ENAME}${params.row.CP_C_REGION_CITY_ENAME}${params.row.CP_C_REGION_AREA_ENAME}${params.row.RECEIVER_ADDRESS}`,
+                          BUYER_MESSAGE: params.row.BUYER_MESSAGE,
+                          SELLER_MEMO: params.row.SELLER_MEMO,
+                          SYSREMARK: params.row.SYSREMARK,
+                          CP_C_REGION_PROVINCE_ID: params.row.CP_C_REGION_PROVINCE_ID,
+                          CP_C_REGION_CITY_ID: params.row.CP_C_REGION_CITY_ID,
+                          CP_C_REGION_AREA_ID: params.row.CP_C_REGION_AREA_ID,
+                          RECEIVER_ADDRESS: params.row.RECEIVER_ADDRESS,
+                          RECEIVER_NAME: params.row.RECEIVER_NAME,
+                          RECEIVER_MOBILE: params.row.RECEIVER_MOBILE,
+                          RECEIVER_PHONE: params.row.RECEIVER_PHONE,
+                          RECEIVER_ZIP: params.row.RECEIVER_ZIP,
+                          CALLBACK: () => {
+                            self.getData();
+                          }
+                        };
 
-                      self.publicBouncedConfig = publicDialogConfig.receivingInformationConfig;
-                      self.publicBouncedConfig.componentData = param;
-                      setTimeout(() => {
-                        self.$children
-                          .find(item => item.name === 'resolveAddress')
-                          .openConfirm();
-                      }, 100);
-                    },
+                        self.publicBouncedConfig = publicDialogConfig.receivingInformationConfig;
+                        self.publicBouncedConfig.componentData = param;
+                        setTimeout(() => {
+                          self.$children.find(item => item.name === 'resolveAddress').openConfirm();
+                        }, 100);
+                      }
+                    }
                   },
-                },
-                [
-                  h(
-                    'div',
-                    {
-                      style: {
-                        padding: '4px 6px',
-                        display: 'flex',
-                        flexDirection: 'column',
+                  [
+                    h(
+                      'div',
+                      {
+                        style: {
+                          padding: '4px 6px',
+                          display: 'flex',
+                          flexDirection: 'column'
+                        }
                       },
-                    },
-                    [
-                      h(
-                        'p',
-                        `${params.row.RECEIVER_NAME},${params.row.RECEIVER_MOBILE},
+                      [
+                        h(
+                          'p',
+                          `${params.row.RECEIVER_NAME},${params.row.RECEIVER_MOBILE},
                             ${params.row.CP_C_REGION_PROVINCE_ENAME}${params.row.CP_C_REGION_CITY_ENAME}${params.row.CP_C_REGION_AREA_ENAME}`
-                      ),
-                      h('p', `${params.row.RECEIVER_ADDRESS}`),
-                    ]
-                  ),
-                ]
-              ),
-            ]),
+                        ),
+                        h('p', `${params.row.RECEIVER_ADDRESS}`)
+                      ]
+                    )
+                  ]
+                )
+              ])
           },
           {
             title: window.vmI18n.t('table_label.orderTime'), // 下单时间
@@ -949,11 +892,8 @@ export default {
               if (!params.row.ORDER_DATE) {
                 return h('span', '');
               }
-              return h(
-                'span',
-                this.standardTimeConversiondateToStr(params.row.ORDER_DATE)
-              );
-            },
+              return h('span', this.standardTimeConversiondateToStr(params.row.ORDER_DATE));
+            }
           },
           {
             title: window.vmI18n.t('table_label.paymentTime'), // 付款时间
@@ -962,11 +902,8 @@ export default {
               if (!params.row.PAY_TIME) {
                 return h('span', '');
               }
-              return h(
-                'span',
-                this.standardTimeConversiondateToStr(params.row.PAY_TIME)
-              );
-            },
+              return h('span', this.standardTimeConversiondateToStr(params.row.PAY_TIME));
+            }
           },
           {
             title: window.vmI18n.t('table_label.creationTime'), // 创建时间
@@ -975,11 +912,8 @@ export default {
               if (!params.row.CREATIONDATE) {
                 return h('span', '');
               }
-              return h(
-                'span',
-                this.standardTimeConversiondateToStr(params.row.CREATIONDATE)
-              );
-            },
+              return h('span', this.standardTimeConversiondateToStr(params.row.CREATIONDATE));
+            }
           },
           {
             title: window.vmI18n.t('table_label.auditTime'), // 审核时间
@@ -988,11 +922,8 @@ export default {
               if (!params.row.AUDIT_TIME) {
                 return h('span', '');
               }
-              return h(
-                'span',
-                this.standardTimeConversiondateToStr(params.row.AUDIT_TIME)
-              );
-            },
+              return h('span', this.standardTimeConversiondateToStr(params.row.AUDIT_TIME));
+            }
           },
           {
             title: window.vmI18n.t('table_label.distributionTime'), // 配货时间
@@ -1001,13 +932,8 @@ export default {
               if (!params.row.DISTRIBUTION_TIME) {
                 return h('span', '');
               }
-              return h(
-                'span',
-                this.standardTimeConversiondateToStr(
-                  params.row.DISTRIBUTION_TIME
-                )
-              );
-            },
+              return h('span', this.standardTimeConversiondateToStr(params.row.DISTRIBUTION_TIME));
+            }
           },
           {
             title: window.vmI18n.t('table_label.scanDeliveryTime'),
@@ -1016,12 +942,9 @@ export default {
               if (!params.row.SCAN_TIME) {
                 return h('span', '');
               }
-              return h(
-                'span',
-                this.standardTimeConversiondateToStr(params.row.SCAN_TIME)
-              );
-            },
-          },
+              return h('span', this.standardTimeConversiondateToStr(params.row.SCAN_TIME));
+            }
+          }
         ],
         // 设置总条数
         total: 0,
@@ -1058,7 +981,7 @@ export default {
         border: false, // 是否显示纵向边框
         pageSizeOpts: [20, 40, 60, 80], // 每页条数切换的配置
         columns: [],
-        data: [],
+        data: []
       },
       // 普通搜索
       dropList: [],
@@ -1067,8 +990,8 @@ export default {
           label: '标签', // 标签字段名称
           column: 'tag', // 标签字段
           trigger: '', // 触发方式
-          list: [], // 选项
-        },
+          list: [] // 选项
+        }
       ],
       selectValue: [],
       // 表单搜索
@@ -1079,7 +1002,7 @@ export default {
             text: window.vmI18n.t('btn.search'), // 按钮文本
             btnclick: () => {
               this.loadData();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.empty'), // 按钮文本
@@ -1089,9 +1012,9 @@ export default {
               _this.queryInfoData = [];
               _this.labelData = [];
               _this.getHeaderList();
-            }, // 按钮点击事件
-          },
-        ],
+            } // 按钮点击事件
+          }
+        ]
       },
       // 列表按钮
       // btnConfig: {
@@ -1103,10 +1026,10 @@ export default {
         loading: false, // 按钮加载
         buttons: [
           {
-            text: window.vmI18n.t('btn.manualCreation'), // 手工创建
+            text: window.vmI18n.t('btn.manualCreation') // 手工创建
           },
           {
-            text: window.vmI18n.t('btn.add'), // 新增
+            text: window.vmI18n.t('btn.add') // 新增
           },
           {
             text: window.vmI18n.t('btn.audit'), // 审核
@@ -1119,12 +1042,13 @@ export default {
                 self.selection.forEach((item, index) => {
                   ids[index] = item.ID;
                 });
-                this.service.orderCenter.auditOrder({
-                  ids,
-                  type: '1',
-                  isCheck: 0,
-                })
-                  .then((res) => {
+                this.service.orderCenter
+                  .auditOrder({
+                    ids,
+                    type: '1',
+                    isCheck: 0
+                  })
+                  .then(res => {
                     if (res.data.code === 0) {
                       // self.$Message.success(res.data.message);
                       self.$Modal.success({
@@ -1134,11 +1058,11 @@ export default {
                         titleAlign: 'left',
                         mask: true,
                         draggable: true,
-                        keyDown: (event) => {
+                        keyDown: event => {
                           if (event.keyCode == 27 || event.keyCode == 13) {
                             self.$Modal.remove();
                           }
-                        },
+                        }
                       });
                       self.selection = [];
                       self.getData();
@@ -1150,11 +1074,11 @@ export default {
                         titleAlign: 'left',
                         mask: true,
                         draggable: true,
-                        keyDown: (event) => {
+                        keyDown: event => {
                           if (event.keyCode == 27 || event.keyCode == 13) {
                             self.$Modal.remove();
                           }
-                        },
+                        }
                       });
                     }
                     self.btnConfig.loading = false;
@@ -1163,10 +1087,10 @@ export default {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.a6'), // 请选择需要审核的记录！
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
               }
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.deAudit'), // 反审核
@@ -1176,16 +1100,17 @@ export default {
               if (self.selection.length > 0) {
                 self.btnConfig.loading = true;
                 const ids = [];
-                self.selection.map((item, index) => {
+                self.selection.forEach((item, index) => {
                   ids[index] = item.ID;
                 });
-                self.service.orderCenter.auditOrderReserve({ ids, type: '1' })
-                // self.$network
-                //   .post('/api/cs/oc/oms/v1/auditOrderReserve', {
-                //     ids,
-                //     type: '1',
-                //   })
-                  .then((res) => {
+                self.service.orderCenter
+                  .auditOrderReserve({ ids, type: '1' })
+                  // self.$network
+                  //   .post('/api/cs/oc/oms/v1/auditOrderReserve', {
+                  //     ids,
+                  //     type: '1',
+                  //   })
+                  .then(res => {
                     if (res.data.code === 0) {
                       self.$Message.success(res.data.message);
                       self.getData();
@@ -1198,11 +1123,11 @@ export default {
                         titleAlign: 'left',
                         mask: true,
                         draggable: true,
-                        keyDown: (event) => {
+                        keyDown: event => {
                           if (event.keyCode == 27 || event.keyCode == 13) {
                             self.$Modal.remove();
                           }
-                        },
+                        }
                       });
                     }
                     self.btnConfig.loading = false;
@@ -1211,10 +1136,10 @@ export default {
                 self.$Message.warning({
                   content: this.vmI18n.t('modalTips.a6'), // 请选择需要反审核的记录！
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
               }
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           // {
           //   text: "WMS撤回", //按钮文本
@@ -1263,19 +1188,19 @@ export default {
           //   } //按钮点击事件
           // },
           {
-            text: window.vmI18n.t('btn.batchModify'), // 批量修改
+            text: window.vmI18n.t('btn.batchModify') // 批量修改
           },
           {
-            text: window.vmI18n.t('btn.batchModify_logistics'), // 批量修改物流
+            text: window.vmI18n.t('btn.batchModify_logistics') // 批量修改物流
           },
           {
-            text: window.vmI18n.t('btn.lostOrder_copy'), // 丢单复制
+            text: window.vmI18n.t('btn.lostOrder_copy') // 丢单复制
           },
           {
-            text: window.vmI18n.t('btn.batch_holdOrder'), // 批量Hold单
+            text: window.vmI18n.t('btn.batch_holdOrder') // 批量Hold单
           },
           {
-            text: window.vmI18n.t('btn.cancelHold'), // 取消Hold
+            text: window.vmI18n.t('btn.cancelHold') // 取消Hold
           },
           {
             text: window.vmI18n.t('btn.invoice_otice'), // 开票通知
@@ -1289,10 +1214,11 @@ export default {
                 const ids = self.sonList(self.selection, 'ID'); // 选中订单的单据号
                 const fromdata = new FormData();
                 fromdata.append('param', JSON.stringify({ IDS: ids }));
-                self.service.orderCenter.checkAddOrderInvoicing(fromdata)
-                // self.$network
-                //   .post('/api/cs/oc/oms/v1/checkAddOrderInvoicing', fromdata)
-                  .then((res) => {
+                self.service.orderCenter
+                  .checkAddOrderInvoicing(fromdata)
+                  // self.$network
+                  //   .post('/api/cs/oc/oms/v1/checkAddOrderInvoicing', fromdata)
+                  .then(res => {
                     if (res.data.code === 0) {
                       self.$store.commit('customize/TabOpen', {
                         id: -1,
@@ -1303,11 +1229,11 @@ export default {
                           highSearchData: JSON.stringify({
                             type: 'Input',
                             queryName: 'ID',
-                            value: res.data.data.join(),
+                            value: res.data.data.join()
                           }),
                           isOrder: 'ture',
-                          id: -1,
-                        },
+                          id: -1
+                        }
                       });
                       // R3.store.commit('global/tabOpen', {
                       //   type: 'C',
@@ -1330,7 +1256,7 @@ export default {
                     self.btnConfig.loading = false;
                   });
               }
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.recordInvoice'), // 记录发票
@@ -1342,21 +1268,17 @@ export default {
                 const id = self.sonList(self.selection, 'ID').join(); // 选中订单的单据号
                 const fromdata = new FormData();
                 fromdata.append('param', JSON.stringify({ ID: id }));
-                self.service.orderCenter.checkRecordInvoicing(fromdata)
-                // self.$network
-                //   .post('/api/cs/oc/oms/v1/checkRecordInvoicing', fromdata)
-                  .then((res) => {
+                self.service.orderCenter
+                  .checkRecordInvoicing(fromdata)
+                  // self.$network
+                  //   .post('/api/cs/oc/oms/v1/checkRecordInvoicing', fromdata)
+                  .then(res => {
                     if (res.data.code === 0) {
-                      self.publicBouncedConfig = Object.assign(
-                        publicDialogConfig.makeOutInvoiceConfig,
-                        {
-                          componentData: res.data.data,
-                        }
-                      );
+                      self.publicBouncedConfig = Object.assign(publicDialogConfig.makeOutInvoiceConfig, {
+                        componentData: res.data.data
+                      });
                       setTimeout(() => {
-                        self.$children
-                          .find(item => item.name === 'makeOutInvoice')
-                          .openConfirm();
+                        self.$children.find(item => item.name === 'makeOutInvoice').openConfirm();
                       }, 100);
                     } else {
                       self.$Message.warning(res.data.message);
@@ -1366,10 +1288,10 @@ export default {
               } else {
                 self.$Message.warning(self.vmI18n.t('modalTips.a8')); // 请选择一条订单
               }
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.batchModify_warehouse'), // 批量修改仓库
+            text: window.vmI18n.t('btn.batchModify_warehouse') // 批量修改仓库
           },
           {
             text: window.vmI18n.t('btn.orderCancel'), // 订单取消
@@ -1390,10 +1312,11 @@ export default {
                   okText: self.vmI18n.t('common.determine'), // 取消
                   cancelText: self.vmI18n.t('common.cancel'), // 确定
                   onOk: () => {
-                    self.service.orderCenter.cancelOrder({ ids, type: '1' })
-                    // self.$network
-                    //   .post('/api/cs/oc/oms/v1/cancelOrder', { ids, type: '1' })
-                      .then((res) => {
+                    self.service.orderCenter
+                      .cancelOrder({ ids, type: '1' })
+                      // self.$network
+                      //   .post('/api/cs/oc/oms/v1/cancelOrder', { ids, type: '1' })
+                      .then(res => {
                         if (res.data.code === 0) {
                           self.$Message.success(res.data.message);
                           self.getData();
@@ -1406,11 +1329,11 @@ export default {
                             titleAlign: 'left',
                             mask: true,
                             draggable: true,
-                            keyDown: (event) => {
+                            keyDown: event => {
                               if (event.keyCode == 27 || event.keyCode == 13) {
                                 self.$Modal.remove();
                               }
-                            },
+                            }
                           });
                         }
                         self.btnConfig.loading = false;
@@ -1418,16 +1341,16 @@ export default {
                   },
                   onCancel: () => {
                     self.btnConfig.loading = false;
-                  },
+                  }
                 });
               } else {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.a9'), // 请选择需要取消的订单！
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
               }
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.orderBlocking'), // 订单拦截
@@ -1441,12 +1364,13 @@ export default {
                   ids[index] = item.ID;
                 });
                 const param = {
-                  ids,
+                  ids
                 };
-                self.service.orderCenter.orderInterception(param)
-                // self.$network
-                //   .post('/api/cs/oc/oms/v1/orderInterception', param)
-                  .then((res) => {
+                self.service.orderCenter
+                  .orderInterception(param)
+                  // self.$network
+                  //   .post('/api/cs/oc/oms/v1/orderInterception', param)
+                  .then(res => {
                     if (res.data.code === 0) {
                       self.$Message.success(res.data.message);
                       self.getData();
@@ -1459,11 +1383,11 @@ export default {
                         titleAlign: 'left',
                         mask: true,
                         draggable: true,
-                        keyDown: (event) => {
+                        keyDown: event => {
                           if (event.keyCode == 27 || event.keyCode == 13) {
                             self.$Modal.remove();
                           }
-                        },
+                        }
                       });
                     }
                     self.btnConfig.loading = false;
@@ -1472,19 +1396,19 @@ export default {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.b1'), // 请选择需要拦截的记录！
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
               }
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.manualMarking'), // 手工打标
+            text: window.vmI18n.t('btn.manualMarking') // 手工打标
           },
           // {
           //   text: '定金预售提前发货'
           // },
           {
-            text: window.vmI18n.t('btn.expedited_shipment'), // 加急发货
+            text: window.vmI18n.t('btn.expedited_shipment') // 加急发货
           },
           {
             text: window.vmI18n.t('btn.splitOrder'), // 拆分订单
@@ -1492,48 +1416,36 @@ export default {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               if (self.selection.length === 1) {
-                if (
-                  (self.selection[0].PLATFORM === 4
-                    && self.selection[0].PAY_TYPE === 2)
-                  || self.selection[0].PLATFORM === 7
-                  || self.selection[0].PLATFORM === 50
-                ) {
+                if ((self.selection[0].PLATFORM === 4 && self.selection[0].PAY_TYPE === 2) || self.selection[0].PLATFORM === 7 || self.selection[0].PLATFORM === 50) {
                   self.$Message.warning({
                     content: self.vmI18n.t('modalTips.b1'), // 交易平台为当当，唯品会jitx，京东（货到付款）的订单不允许拆单
                     duration: 5,
-                    top: 80,
+                    top: 80
                   });
                   return;
                 }
-                if (
-                  self.selection[0].IS_INRETURNING === 1
-                  || self.selection[0].IS_INTERECEPT === 1
-                ) {
+                if (self.selection[0].IS_INRETURNING === 1 || self.selection[0].IS_INTERECEPT === 1) {
                   self.$Message.warning({
                     content: self.vmI18n.t('modalTips.b2'), // 拦截、退款中的订单不允许拆单！
                     duration: 5,
-                    top: 80,
+                    top: 80
                   });
                   return;
                 }
-                if (
-                  self.selection[0].ORDER_STATUS
-                    === self.orderStatus.orderUnconfirmed
-                  || self.selection[0].ORDER_STATUS
-                    === self.orderStatus.orderOutofstock
-                ) {
-                  this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.selection[0].ID }).then(res=>{ // 提前判断下该单据是否可拆单
+                if (self.selection[0].ORDER_STATUS === self.orderStatus.orderUnconfirmed || self.selection[0].ORDER_STATUS === self.orderStatus.orderOutofstock) {
+                  this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.selection[0].ID }).then(res => {
+                    // 提前判断下该单据是否可拆单
                     if (res.data.code == 0) {
-                        self.$store.commit('customize/TabHref', {
-                                            id: self.selection[0].ID,
-                                            type: 'action',
-                                            name: 'splitOrder',
-                                            label: self.vmI18n.t('panel_label.orderSplit'), // 订单拆分
-                                            query: {
-                                              id: self.selection[0].ID,
-                                              tabTitle: self.vmI18n.t('panel_label.orderSplit'), // 订单拆分
-                                            },
-                                          });
+                      self.$store.commit('customize/TabHref', {
+                        id: self.selection[0].ID,
+                        type: 'action',
+                        name: 'splitOrder',
+                        label: self.vmI18n.t('panel_label.orderSplit'), // 订单拆分
+                        query: {
+                          id: self.selection[0].ID,
+                          tabTitle: self.vmI18n.t('panel_label.orderSplit') // 订单拆分
+                        }
+                      });
                     } else {
                       this.$Message.warning(res.data.message);
                     }
@@ -1542,17 +1454,17 @@ export default {
                   self.$Message.warning({
                     content: self.vmI18n.t('modalTips.b3'), // 只允许拆分待审核和缺货状态的订单！
                     duration: 5,
-                    top: 80,
+                    top: 80
                   });
                 }
               } else {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.b4'), // 一次只能对一个订单进行拆分！
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
               }
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           // {
           //   text: "添加赠品", //按钮文本
@@ -1633,49 +1545,35 @@ export default {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.b5'), // 请选择需要新增退单记录！
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
-                return false;
+                return;
               }
               if (self.selection.length > 1) {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.b6'), // 请选择一条记录！
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
-                return false;
+                return;
               }
-              if (
-                // 已取消，系统作废
-                self.selection[0].ORDER_STATUS == 7
-                || self.selection[0].ORDER_STATUS == 8
-              ) {
+              // 已取消，系统作废
+              if (self.selection[0].ORDER_STATUS == 7 || self.selection[0].ORDER_STATUS == 8) {
                 self.$Message.warning({
-                  content: `${self.selection[0].ID}${self.vmI18n.t(
-                    'modalTips.b7'
-                  )}`, // 订单需要生成退换货单的订单状态不能已取消、系统作废！
+                  content: `${self.selection[0].ID}${self.vmI18n.t('modalTips.b7')}`, // 订单需要生成退换货单的订单状态不能已取消、系统作废！
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
-                return false;
+                return;
               }
-              if (
-                // “待分配”、“待审核”、“缺货”、“已审核”、“传WMS中”、“配货中
-                self.selection[0].ORDER_STATUS == 1 // 待审核
-                || self.selection[0].ORDER_STATUS == 2 // 缺货
-                || self.selection[0].ORDER_STATUS == 3 // 已审核
-                || self.selection[0].ORDER_STATUS == 4 // 配货中
-                || self.selection[0].ORDER_STATUS == 50 // 待分配
-                || self.selection[0].ORDER_STATUS == 21 // 待传wms
-              ) {
+              // “待分配”、“待审核”、“缺货”、“已审核”、“传WMS中”、“配货中
+              if (self.selection[0].ORDER_STATUS == 1 || self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 3 || self.selection[0].ORDER_STATUS == 4 || self.selection[0].ORDER_STATUS == 50 || self.selection[0].ORDER_STATUS == 21) {
                 self.$Message.warning({
-                  content: `${self.selection[0].ID}${self.vmI18n.t(
-                    'modalTips.b8'
-                  )}`, // 订单需要发货后才能新增退单!
+                  content: `${self.selection[0].ID}${self.vmI18n.t('modalTips.b8')}`, // 订单需要发货后才能新增退单!
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
-                return false;
+                return;
               }
               // self.$store.commit('customize/('TabOpen', {
               //   id: -1,
@@ -1699,14 +1597,14 @@ export default {
                   id: -1,
                   orderHrefReturnid: self.selection[0].ID,
                   isOrderHrefReturn: 'order',
-                  tabTitle: window.vmI18n.t('panel_label.addReturnOrder'), // 退换货单新增
-                },
+                  tabTitle: window.vmI18n.t('panel_label.addReturnOrder') // 退换货单新增
+                }
               });
               // self.selection = [];
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.batchModify_remarks'), // 批量修改备注
+            text: window.vmI18n.t('btn.batchModify_remarks') // 批量修改备注
           },
           // {
           //   text: "工单", //按钮文本
@@ -1723,10 +1621,11 @@ export default {
                 self.selection.forEach((item, index) => {
                   ids[index] = item.ID;
                 });
-                self.service.orderCenter.queryshortagSearchOrder({ ids })
-                // self.$network
-                //   .post('/api/cs/oc/oms/v1/queryshortagSearchOrder', { ids })
-                  .then((res) => {
+                self.service.orderCenter
+                  .queryshortagSearchOrder({ ids })
+                  // self.$network
+                  //   .post('/api/cs/oc/oms/v1/queryshortagSearchOrder', { ids })
+                  .then(res => {
                     if (res.data.code === 0) {
                       self.$Message.success(res.data.message);
                       self.getData();
@@ -1739,11 +1638,11 @@ export default {
                         titleAlign: 'left',
                         mask: true,
                         draggable: true,
-                        keyDown: (event) => {
+                        keyDown: event => {
                           if (event.keyCode == 27 || event.keyCode == 13) {
                             self.$Modal.remove();
                           }
-                        },
+                        }
                       });
                     }
                     self.btnConfig.loading = false;
@@ -1752,10 +1651,10 @@ export default {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.b9'),
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
               }
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.fubaoOut_of_stock'), // 福袋缺货重新占单
@@ -1768,10 +1667,11 @@ export default {
                 self.selection.forEach((item, index) => {
                   ids[index] = item.ID;
                 });
-                self.service.orderCenter.queryFortuneBagShortage({ ids })
-                // self.$network
-                //   .post('/api/cs/oc/oms/v1/queryFortuneBagShortage', { ids })
-                  .then((res) => {
+                self.service.orderCenter
+                  .queryFortuneBagShortage({ ids })
+                  // self.$network
+                  //   .post('/api/cs/oc/oms/v1/queryFortuneBagShortage', { ids })
+                  .then(res => {
                     if (res.data.code === 0) {
                       self.$Message.success(res.data.message);
                       self.getData();
@@ -1784,11 +1684,11 @@ export default {
                         titleAlign: 'left',
                         mask: true,
                         draggable: true,
-                        keyDown: (event) => {
+                        keyDown: event => {
                           if (event.keyCode == 27 || event.keyCode == 13) {
                             self.$Modal.remove();
                           }
-                        },
+                        }
                       });
                     }
                     self.btnConfig.loading = false;
@@ -1797,10 +1697,10 @@ export default {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.c0'), // 请选择需要福袋缺货重新占单的记录！
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
               }
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           // {
           //   text: "复制订单", //按钮文本
@@ -1829,32 +1729,30 @@ export default {
           //   } //按钮点击事件
           // },
           {
-            text: window.vmI18n.t('btn.copyOrder'), // 复制订单
+            text: window.vmI18n.t('btn.copyOrder') // 复制订单
           },
           {
-            text: window.vmI18n.t('btn.wrongCopy'), // 错发复制
+            text: window.vmI18n.t('btn.wrongCopy') // 错发复制
           },
           {
-            text: window.vmI18n.t('btn.missedCopy'), // 漏发复制
+            text: window.vmI18n.t('btn.missedCopy') // 漏发复制
           },
           {
-            text: window.vmI18n.t('btn.giftDelivery_copy'), // 赠品出库复制
+            text: window.vmI18n.t('btn.giftDelivery_copy') // 赠品出库复制
           },
           {
-            text: window.vmI18n.t('btn.original_single_null_and_void_copy'), // 原单无效复制
+            text: window.vmI18n.t('btn.original_single_null_and_void_copy') // 原单无效复制
           },
           {
             text: window.vmI18n.t('btn.note_import'), // 备注导入
             btnclick: () => {
               const _this = this;
               _this.importTable.componentData = {
-                tableName: 'OUT_OF_STOCK_MEMO',
+                tableName: 'OUT_OF_STOCK_MEMO'
               };
               _this.importTable.confirmTitle = window.vmI18n.t('btn.note_import');
-              _this.$children
-                .find(item => item.name === 'importTable')
-                .openConfirm();
-            }, // 按钮点击事件
+              _this.$children.find(item => item.name === 'importTable').openConfirm();
+            } // 按钮点击事件
           },
           // {
           //   text: "重新分配快递", //按钮文本
@@ -1880,12 +1778,13 @@ export default {
                   ids[index] = item.ID;
                 });
                 const param = {
-                  ids,
+                  ids
                 };
-                self.service.orderCenter.doManualDeliveryOrder(param)
-                // self.$network
-                //   .post('/api/cs/oc/oms/v1/doManualDeliveryOrder', param)
-                  .then((res) => {
+                self.service.orderCenter
+                  .doManualDeliveryOrder(param)
+                  // self.$network
+                  //   .post('/api/cs/oc/oms/v1/doManualDeliveryOrder', param)
+                  .then(res => {
                     if (res.data.code === 0) {
                       self.$Message.success(res.data.message);
                       self.getData();
@@ -1898,44 +1797,44 @@ export default {
                         titleAlign: 'left',
                         mask: true,
                         draggable: true,
-                        keyDown: (event) => {
+                        keyDown: event => {
                           if (event.keyCode === 27 || event.keyCode === 13) {
                             self.$Modal.remove();
                           }
-                        },
+                        }
                       });
                     }
                     self.btnConfig.loading = false;
                   });
               } else {
                 self.$Message.warning({
-                  content: selfvmI18n.t('modalTips.c1'), // 请选择需要更改为平台发货的记录!
+                  content: self.vmI18n.t('modalTips.c1'), // 请选择需要更改为平台发货的记录!
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
               }
-            },
+            }
           },
           {
-            text: window.vmI18n.t('btn.batchModifyGoods'), // 批量改商品
+            text: window.vmI18n.t('btn.batchModifyGoods') // 批量改商品
           },
           {
-            text: window.vmI18n.t('btn.replaceGoods'), // 替换商品
+            text: window.vmI18n.t('btn.replaceGoods') // 替换商品
           },
           {
-            text: window.vmI18n.t('btn.addGift'), // 添加赠品
+            text: window.vmI18n.t('btn.addGift') // 添加赠品
           },
           {
-            text: window.vmI18n.t('btn.deleteGift'), // 删除赠品
+            text: window.vmI18n.t('btn.deleteGift') // 删除赠品
           },
           {
-            text: window.vmI18n.t('btn.batchSplitOrder'), // 批量拆单
+            text: window.vmI18n.t('btn.batchSplitOrder') // 批量拆单
           },
           {
-            text: window.vmI18n.t('btn.appointGoods_splitOrder'), // 指定商品拆单
+            text: window.vmI18n.t('btn.appointGoods_splitOrder') // 指定商品拆单
           },
           {
-            text: window.vmI18n.t('btn.out_of_stock_splitOrder'), // 缺货拆单
+            text: window.vmI18n.t('btn.out_of_stock_splitOrder') // 缺货拆单
           },
           {
             text: window.vmI18n.t('btn.batch_chargeback'), // 批量退单
@@ -1955,10 +1854,10 @@ export default {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.c2'), // 请选择需要批量退单的记录！
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
               }
-            },
+            }
           },
           {
             text: window.vmI18n.t('btn.release_inventory'), // 释放库存
@@ -1978,7 +1877,7 @@ export default {
                   self.$Message.warning({
                     content: self.vmI18n.t('modalTips.c3'), // 选择的订单中存在非待审核订单, 不允许释放库存！
                     duration: 5,
-                    top: 80,
+                    top: 80
                   });
                   return;
                 }
@@ -1991,10 +1890,11 @@ export default {
                   okText: self.vmI18n.t('common.determine'), // 取消
                   cancelText: self.vmI18n.t('common.cancel'), // 确定
                   onCancel: () => {
-                    self.service.orderCenter.releaseInventory({ ids })
-                    // self.$network
-                    //   .post('/p/cs/releaseInventory', { ids })
-                      .then((res) => {
+                    self.service.orderCenter
+                      .releaseInventory({ ids })
+                      // self.$network
+                      //   .post('/p/cs/releaseInventory', { ids })
+                      .then(res => {
                         if (res.data.code === 0) {
                           self.$Message.success(res.data.message);
                           self.getData();
@@ -2007,14 +1907,11 @@ export default {
                             titleAlign: 'left',
                             mask: true,
                             draggable: true,
-                            keyDown: (event) => {
-                              if (
-                                event.keyCode === 27
-                                || event.keyCode === 13
-                              ) {
+                            keyDown: event => {
+                              if (event.keyCode === 27 || event.keyCode === 13) {
                                 self.$Modal.remove();
                               }
-                            },
+                            }
                           });
                         }
                         self.btnConfig.loading = false;
@@ -2022,37 +1919,37 @@ export default {
                   },
                   onOk: () => {
                     self.btnConfig.loading = false;
-                  },
+                  }
                 });
               } else {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.c'), // 请选择需要库存释放的订单！
                   duration: 5,
-                  top: 80,
+                  top: 80
                 });
               }
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.mergeOrders'), // 合并订单
             btnclick: () => {
               this.mergeOrder();
-            },
+            }
           },
           {
             text: window.vmI18n.t('btn.cancel_mergeOrders'), // 取消合并订单
             btnclick: () => {
               this.cancelMergeOrder();
-            },
+            }
           },
           {
-            text: window.vmI18n.t('btn.import'), // 导入
+            text: window.vmI18n.t('btn.import') // 导入
           },
           {
             text: window.vmI18n.t('btn.export'), // 导出
             btnclick: () => {
               this.exportClick();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             icon: 'iconfont iconbj_setup', // 按钮图标
@@ -2065,14 +1962,12 @@ export default {
               }
               self.isShowSeniorOrOrdinary = true;
               self.publicBouncedConfig = {
-                ...publicDialogConfig.dropSortConfig,
+                ...publicDialogConfig.dropSortConfig
               };
               setTimeout(() => {
-                self.$children
-                  .find(item => item.name === 'setFromDrag')
-                  .openConfirm();
+                self.$children.find(item => item.name === 'setFromDrag').openConfirm();
               }, 100);
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             icon: 'iconfont iconbj_col', // 收藏图标
@@ -2080,13 +1975,13 @@ export default {
             btnclick: () => {
               const self = this;
               self.setFavorite();
-            }, // 按钮点击事件
-          },
-        ],
+            } // 按钮点击事件
+          }
+        ]
       },
       batchReturnFormConfig: {
         formValue: {
-          IS_BACK: false,
+          IS_BACK: false
         },
         formData: [
           {
@@ -2094,14 +1989,14 @@ export default {
             label: window.vmI18n.t('form_label.whether_returned'), // 前面的文字
             value: 'IS_BACK', // 输入框的值
             width: '6', // 所占的宽度
-            checked: false, // 是否勾选控制
-          },
-        ],
+            checked: false // 是否勾选控制
+          }
+        ]
       },
       // 高级搜索表单
       formConfig: {
         formValue: {},
-        formData: [],
+        formData: []
       },
       // 状态枚举
       orderStatus: {
@@ -2114,10 +2009,10 @@ export default {
         orderCancel: 7, // 已取消
         orderSystemInvalid: 8, // 系统作废
         warehouseDelivery: 5, // 仓库发货
-        platformDelivery: 6, // 平台发货
+        platformDelivery: 6 // 平台发货
       },
       formValObj: {},
-      isExport: false,
+      isExport: false
     };
   },
   activated() {
@@ -2142,11 +2037,7 @@ export default {
     self.setTableHeight();
   },
   methods: {
-    onSortChanged(val) {
-      const obj = {
-        key: val[0].colId,
-        value: val[0].sort == 'asc',
-      };
+    onSortChanged() {
       this.getData();
     },
     dropDownClickChange(val) {
@@ -2161,7 +2052,7 @@ export default {
             type: 'C',
             label: window.vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
             customizedModuleName: 'orderManageAdd',
-            customizedModuleId: '-1',
+            customizedModuleId: '-1'
           });
           break;
         }
@@ -2171,9 +2062,7 @@ export default {
         }
         case '导入': {
           self.importTable.componentData = { tableName: 'OC_B_ORDER' };
-          self.$children
-            .find(item => item.name === 'importTable')
-            .openConfirm();
+          self.$children.find(item => item.name === 'importTable').openConfirm();
           break;
         }
         case '批量修改物流': {
@@ -2187,22 +2076,21 @@ export default {
             });
             const fromdata = new FormData();
             fromdata.append('ids', ids);
-            self.service.orderCenter.checkOrderBeforeLogistics(fromdata)
-            // self.$network
-            //   .post('/api/cs/oc/oms/v1/checkOrderBeforeLogistics', fromdata)
-              .then((res) => {
+            self.service.orderCenter
+              .checkOrderBeforeLogistics(fromdata)
+              // self.$network
+              //   .post('/api/cs/oc/oms/v1/checkOrderBeforeLogistics', fromdata)
+              .then(res => {
                 if (res.data.code === 0) {
                   self.publicBouncedConfig = publicDialogConfig.modifyLogisticsConfig;
                   self.publicBouncedConfig.componentData = {
                     ids,
                     cLogisticsId: 0,
                     platform: self.selection[0].PLATFORM,
-                    CP_C_PHY_WAREHOUSE_ID: CP_C_PHY_WAREHOUSE_ID[0],
+                    CP_C_PHY_WAREHOUSE_ID: CP_C_PHY_WAREHOUSE_ID[0]
                   };
                   setTimeout(() => {
-                    self.$children
-                      .find(item => item.name === 'modifyLogistics')
-                      .openConfirm();
+                    self.$children.find(item => item.name === 'modifyLogistics').openConfirm();
                   }, 100);
                 } else {
                   self.$Modal.error({
@@ -2212,11 +2100,11 @@ export default {
                     titleAlign: 'left',
                     mask: true,
                     draggable: true,
-                    keyDown: (event) => {
+                    keyDown: event => {
                       if (event.keyCode == 27 || event.keyCode == 13) {
                         self.$Modal.remove();
                       }
-                    },
+                    }
                   });
                 }
                 self.btnConfig.loading = false;
@@ -2225,7 +2113,7 @@ export default {
             self.$Message.warning({
               content: self.vmI18n.t('modalTips.c6'), // 请选择需要修改物流记录！
               duration: 5,
-              top: 80,
+              top: 80
             });
           }
           break;
@@ -2241,20 +2129,19 @@ export default {
             });
             const fromdata = new FormData();
             fromdata.append('ids', ids);
-            self.service.orderCenter.checkOrderBeforeWarehouse(fromdata)
-            // self.$network
-            //   .post('/api/cs/oc/oms/v1/checkOrderBeforeWarehouse', fromdata)
-              .then((res) => {
+            self.service.orderCenter
+              .checkOrderBeforeWarehouse(fromdata)
+              // self.$network
+              //   .post('/api/cs/oc/oms/v1/checkOrderBeforeWarehouse', fromdata)
+              .then(res => {
                 if (res.data.code === 0) {
                   self.publicBouncedConfig = publicDialogConfig.changeWarehouseConfig;
                   self.publicBouncedConfig.componentData = {
                     ids,
-                    CP_C_SHOP_ID: CP_C_SHOP_ID[0],
+                    CP_C_SHOP_ID: CP_C_SHOP_ID[0]
                   };
                   setTimeout(() => {
-                    self.$children
-                      .find(item => item.name === 'changeWarehouse')
-                      .openConfirm();
+                    self.$children.find(item => item.name === 'changeWarehouse').openConfirm();
                   }, 100);
                 } else {
                   self.$Modal.error({
@@ -2264,11 +2151,11 @@ export default {
                     titleAlign: 'left',
                     mask: true,
                     draggable: true,
-                    keyDown: (event) => {
+                    keyDown: event => {
                       if (event.keyCode == 27 || event.keyCode == 13) {
                         self.$Modal.remove();
                       }
-                    },
+                    }
                   });
                 }
                 self.btnConfig.loading = false;
@@ -2277,7 +2164,7 @@ export default {
             self.$Message.warning({
               content: self.vmI18n.t('modalTips.c7'), // 请选择需要修改发货仓库记录！
               duration: 5,
-              top: 80,
+              top: 80
             });
           }
           break;
@@ -2293,18 +2180,16 @@ export default {
             self.publicBouncedConfig = publicDialogConfig.changeRemarkConfig;
             self.publicBouncedConfig.componentData = {
               ids,
-              status: ORDER_STATUS,
+              status: ORDER_STATUS
             };
             setTimeout(() => {
-              self.$children
-                .find(item => item.name === 'changeRemark')
-                .openConfirm();
+              self.$children.find(item => item.name === 'changeRemark').openConfirm();
             }, 100);
           } else {
             self.$Message.warning({
               content: self.vmI18n.t('modalTips.c8'), // 请选择需要修改备注的记录！
               duration: 5,
-              top: 80,
+              top: 80
             });
           }
           break;
@@ -2314,25 +2199,21 @@ export default {
             self.$Message.warning({
               content: self.vmI18n.t('modalTips.c9'), // 请选择需要定金预售提前发货的记录！
               duration: 5,
-              top: 80,
+              top: 80
             });
             return;
           }
           const ids = self.selection.map(item => item.ID);
-          const publicBouncedConfig = JSON.parse(
-            JSON.stringify(publicDialogConfig.depositPresaleConfig)
-          );
+          const publicBouncedConfig = JSON.parse(JSON.stringify(publicDialogConfig.depositPresaleConfig));
           publicBouncedConfig.componentData = {
             params: {
-              ids,
+              ids
             },
-            pageType: 'deposit',
+            pageType: 'deposit'
           };
           self.publicBouncedConfig = publicBouncedConfig;
           this.$nextTick(() => {
-            self.$children
-              .find(item => item.name === 'manualMarking')
-              .openConfirm();
+            self.$children.find(item => item.name === 'manualMarking').openConfirm();
           });
           break;
         }
@@ -2341,25 +2222,21 @@ export default {
             self.$Message.warning({
               content: self.vmI18n.t('modalTips.d0'), // 请选择需要加急发货的记录！
               duration: 5,
-              top: 80,
+              top: 80
             });
             return;
           }
           const ids = self.selection.map(item => item.ID);
-          const publicBouncedConfig = JSON.parse(
-            JSON.stringify(publicDialogConfig.vipSpeedDispatchConfig)
-          );
+          const publicBouncedConfig = JSON.parse(JSON.stringify(publicDialogConfig.vipSpeedDispatchConfig));
           publicBouncedConfig.componentData = {
             params: {
-              ids,
+              ids
             },
-            pageType: 'vip',
+            pageType: 'vip'
           };
           self.publicBouncedConfig = publicBouncedConfig;
           this.$nextTick(() => {
-            self.$children
-              .find(item => item.name === 'manualMarking')
-              .openConfirm();
+            self.$children.find(item => item.name === 'manualMarking').openConfirm();
           });
           break;
         }
@@ -2368,7 +2245,7 @@ export default {
             self.$Message.warning({
               content: self.vmI18n.t('modalTips.d1'), // 请选择需要替换赠品的记录！
               duration: 5,
-              top: 80,
+              top: 80
             });
             return;
           }
@@ -2391,9 +2268,7 @@ export default {
           self.publicBouncedConfig.componentData.a_1 = param;
           self.publicBouncedConfig.componentData.a_2 = ids;
           setTimeout(() => {
-            self.$children
-              .find(item => item.name === 'replaceTheGoods')
-              .openConfirm();
+            self.$children.find(item => item.name === 'replaceTheGoods').openConfirm();
           }, 100);
           break;
         }
@@ -2402,7 +2277,7 @@ export default {
             self.$Message.warning({
               content: self.vmI18n.t('modalTips.d2'), // 请选择需要添加赠品的记录！
               duration: 5,
-              top: 80,
+              top: 80
             });
             return;
           }
@@ -2411,12 +2286,12 @@ export default {
           const param = {
             page: {
               pageSize: self.jordanTableConfig.pageSize,
-              pageNum: self.jordanTableConfig.current,
+              pageNum: self.jordanTableConfig.current
             },
             label: self.labelData, // 标签
             queryInfo: self.queryInfoData, // 普通搜索
             status: self.statusData,
-            highSearch: self.highSearchData,
+            highSearch: self.highSearchData
           };
           // 列表勾选数据
           const ids = [];
@@ -2425,12 +2300,10 @@ export default {
           });
           self.publicBouncedConfig.componentData = {
             a_1: param,
-            a_2: ids,
+            a_2: ids
           };
           setTimeout(() => {
-            self.$children
-              .find(item => item.name === 'pushProduce')
-              .openConfirm();
+            self.$children.find(item => item.name === 'pushProduce').openConfirm();
           }, 100);
           break;
         }
@@ -2439,7 +2312,7 @@ export default {
             self.$Message.warning({
               content: self.vmI18n.t('modalTips.d3'), // 请选择需要删除赠品的记录！
               duration: 5,
-              top: 80,
+              top: 80
             });
             return;
           }
@@ -2448,12 +2321,12 @@ export default {
           const param = {
             page: {
               pageSize: self.jordanTableConfig.pageSize,
-              pageNum: self.jordanTableConfig.current,
+              pageNum: self.jordanTableConfig.current
             },
             label: self.labelData, // 标签
             queryInfo: self.queryInfoData, // 普通搜索
             status: self.statusData,
-            highSearch: self.highSearchData,
+            highSearch: self.highSearchData
           };
 
           // 列表勾选数据
@@ -2463,12 +2336,10 @@ export default {
           });
           self.publicBouncedConfig.componentData = {
             a_1: param,
-            a_2: ids,
+            a_2: ids
           };
           setTimeout(() => {
-            self.$children
-              .find(item => item.name === 'itemDelete')
-              .openConfirm();
+            self.$children.find(item => item.name === 'itemDelete').openConfirm();
           }, 100);
           break;
         }
@@ -2487,10 +2358,11 @@ export default {
                 isAddGit = false;
               }
             });
-            this.service.orderCenter.splitOrder({ ids })
-            // this.$network
-            //   .post('/api/cs/oc/oms/v1/splitOrder', { ids })
-              .then((res) => {
+            this.service.orderCenter
+              .splitOrder({ ids })
+              // this.$network
+              //   .post('/api/cs/oc/oms/v1/splitOrder', { ids })
+              .then(res => {
                 console.log(res);
                 this.pageLoad = false;
                 if (res.data.code == 0) {
@@ -2506,7 +2378,7 @@ export default {
             self.$Message.warning({
               content: self.vmI18n.t('modalTips.d4'), // 请选择需要拆单的记录！
               duration: 5,
-              top: 80,
+              top: 80
             });
           }
           break;
@@ -2532,22 +2404,18 @@ export default {
             self.$Message.warning({
               content: self.vmI18n.t('modalTips.e2'), // 请选择需要Hold单的记录！
               duration: 5,
-              top: 80,
+              top: 80
             });
             return;
           }
           const ids = self.selection.map(item => item.ID);
-          const publicBouncedConfig = JSON.parse(
-            JSON.stringify(publicDialogConfig.holdOrderConfig)
-          );
+          const publicBouncedConfig = JSON.parse(JSON.stringify(publicDialogConfig.holdOrderConfig));
           publicBouncedConfig.componentData = {
-            ids,
+            ids
           };
           self.publicBouncedConfig = publicBouncedConfig;
           this.$nextTick(() => {
-            self.$children
-              .find(item => item.name === 'holdOrderDialog')
-              .openConfirm();
+            self.$children.find(item => item.name === 'holdOrderDialog').openConfirm();
           });
           break;
         }
@@ -2556,12 +2424,12 @@ export default {
             self.$Message.warning({
               content: self.vmI18n.t('modalTips.d5'), // 请选择需要取消Hold单的记录！
               duration: 5,
-              top: 80,
+              top: 80
             });
             return;
           }
           const data = {
-            ids: self.selection.map(item => item.ID),
+            ids: self.selection.map(item => item.ID)
           };
           this.$Modal.info({
             title: self.vmI18n.t('modalTitle.tips'), // 提示,
@@ -2572,8 +2440,9 @@ export default {
             cancelText: self.vmI18n.t('common.determine'), // 确定
             onCancel: () => {
               self.btnConfig.loading = true;
-              self.service.orderCenter.manualUnHoldOrder(data)
-                .then((res) => {
+              self.service.orderCenter
+                .manualUnHoldOrder(data)
+                .then(res => {
                   self.btnConfig.loading = false;
                   if (res.data.code === 0) {
                     self.$Message.success(res.data.message);
@@ -2587,7 +2456,7 @@ export default {
                   self.$Message.error(self.vmI18n.t('modalTips.6')); // 服务器请求失败
                   self.btnConfig.loading = false;
                 });
-            },
+            }
           });
           break;
         }
@@ -2620,12 +2489,7 @@ export default {
           }
           // 仓库发货
           // 平台发货
-        } else if (
-          // ORDERSTATUSNAME
-          // !== (this.vmI18n.t('other.warehouseDelivery')
-          //   && this.vmI18n.t('other.platformDelivery'))
-          ORDERSTATUSNAME !== this.vmI18n.t('other.warehouseDelivery') && ORDERSTATUSNAME !== this.vmI18n.t('other.platformDelivery')
-        ) {
+        } else if (ORDERSTATUSNAME !== this.vmI18n.t('other.warehouseDelivery') && ORDERSTATUSNAME !== this.vmI18n.t('other.platformDelivery')) {
           // 只能对【仓库发货，平台发货】订单状态的原单进行复制操作
           self.$Message.error(this.vmI18n.t('modalTips.a4'));
           return;
@@ -2633,7 +2497,7 @@ export default {
         // 默认是丢单复制的query
         const query = {
           id: selectItem.ID,
-          pageTitle: type,
+          pageTitle: type
         };
         // 丢单复制
         if (type === this.vmI18n.t('btn.lostOrder_copy')) {
@@ -2646,7 +2510,7 @@ export default {
           type: 'action',
           name: 'orderManageAdd',
           label: '零售发货单新增',
-          query,
+          query
         });
         // R3.store.commit('global/tabOpen', {
         //   type: 'C',
@@ -2658,50 +2522,46 @@ export default {
         self.$Message.warning({
           content: this.vmI18n.t('modalTips.a5'), // 请选择一条需要复制的订单！
           duration: 5,
-          top: 80,
+          top: 80
         });
       }
     },
     // 指定商品拆单
     sgto() {
-      {
-        const self = this;
-        // 表单筛选条件
-        const param = {
-          page: {
-            pageSize: self.jordanTableConfig.pageSize,
-            pageNum: self.jordanTableConfig.current,
-          },
-          label: self.labelData, // 标签
-          queryInfo: self.queryInfoData, // 普通搜索
-          status: self.statusData,
-          highSearch: self.highSearchData,
-        };
-        // 列表勾选数据
-        // if (self.selection.length == 0) {
-        //   self.$Message.warning('请原则需要拆单商品!');
-        //   return;
-        // }
-        const ids = [];
-        self.selection.forEach((item, index) => {
-          ids[index] = item.ID;
-        });
-        // self.publicBouncedConfig.componentData = {
-        //   a_1: param,
-        //   a_2: ids
-        // };
-        self.publicBouncedConfig = publicDialogConfig.specifyGoodsAssignConfig;
-        self.publicBouncedConfig.componentData.a_1 = param;
-        self.publicBouncedConfig.componentData.a_2 = ids;
-        // self.publicBouncedConfig.componentData = {
-        //       objid: ids
-        //     };
-        setTimeout(() => {
-          self.$children
-            .find(item => item.name === 'specifyGoodsAssign')
-            .openConfirm();
-        }, 100);
-      }
+      const self = this;
+      // 表单筛选条件
+      const param = {
+        page: {
+          pageSize: self.jordanTableConfig.pageSize,
+          pageNum: self.jordanTableConfig.current
+        },
+        label: self.labelData, // 标签
+        queryInfo: self.queryInfoData, // 普通搜索
+        status: self.statusData,
+        highSearch: self.highSearchData
+      };
+      // 列表勾选数据
+      // if (self.selection.length == 0) {
+      //   self.$Message.warning('请原则需要拆单商品!');
+      //   return;
+      // }
+      const ids = [];
+      self.selection.forEach((item, index) => {
+        ids[index] = item.ID;
+      });
+      // self.publicBouncedConfig.componentData = {
+      //   a_1: param,
+      //   a_2: ids
+      // };
+      self.publicBouncedConfig = publicDialogConfig.specifyGoodsAssignConfig;
+      self.publicBouncedConfig.componentData.a_1 = param;
+      self.publicBouncedConfig.componentData.a_2 = ids;
+      // self.publicBouncedConfig.componentData = {
+      //       objid: ids
+      //     };
+      setTimeout(() => {
+        self.$children.find(item => item.name === 'specifyGoodsAssign').openConfirm();
+      }, 100);
     },
     // 合并订单
     mergeOrder() {
@@ -2713,15 +2573,13 @@ export default {
         self.$Message.warning({
           content: self.vmI18n.t('modalTips.d7'), // 请选择要合并的单据！
           duration: 5,
-          top: 80,
+          top: 80
         });
         return;
       }
       for (const item of self.selection) {
-        if (
-          // 待审核  已审核
-          item.ORDERSTATUSNAME !== '待审核' && item.ORDERSTATUSNAME !== '已审核'
-        ) {
+        // 待审核  已审核
+        if (item.ORDERSTATUSNAME !== '待审核' && item.ORDERSTATUSNAME !== '已审核') {
           // 要合并的单据的订单状态只能为待审核或已审核
           message = self.vmI18n.t('modalTips.e7');
           break;
@@ -2743,7 +2601,7 @@ export default {
         self.$Message.warning({
           content: message,
           duration: 5,
-          top: 80,
+          top: 80
         });
         return;
       }
@@ -2751,27 +2609,24 @@ export default {
       const param = {
         tableid: self.$route.query.id,
         ids: self.selection.map(val => val.ID),
-        menu: '合并订单',
+        menu: '合并订单'
       };
       fromdata.append('param', JSON.stringify(param));
       self.pageLoad = true;
-      self.service.orderCenter.mergeOrderOne(fromdata)
-      // self.$network
-      //   .post('/api/cs/oc/oms/v1/mergeOrderOne', formdata)
-        .then((res) => {
+      self.service.orderCenter
+        .mergeOrderOne(fromdata)
+        // self.$network
+        //   .post('/api/cs/oc/oms/v1/mergeOrderOne', formdata)
+        .then(res => {
           self.pageLoad = false;
           if (res.data.code === 0) {
             // 合并订单成功
-            self.$Message.success(
-              res.data.message || self.vmI18n.t('modalTips.f1')
-            );
+            self.$Message.success(res.data.message || self.vmI18n.t('modalTips.f1'));
             self.getData();
             self.selection = [];
           } else {
             // 合并订单失败
-            self.$Message.error(
-              res.data.message || self.vmI18n.t('modalTips.f2')
-            );
+            self.$Message.error(res.data.message || self.vmI18n.t('modalTips.f2'));
           }
         })
         .catch(() => {
@@ -2781,7 +2636,6 @@ export default {
     // 取消合并订单
     cancelMergeOrder() {
       const self = this;
-      const message = '';
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
       if (self.selection.length === 0) {
         // 请选择需要操作的单据！
@@ -2799,27 +2653,22 @@ export default {
       const param = {
         tableid: self.$route.query.id,
         ids: self.selection.map(val => val.ID),
-        menu: '取消合并订单',
+        menu: '取消合并订单'
       };
       fromdata.append('param', JSON.stringify(param));
       self.pageLoad = true;
-      self.service.orderCenter.cancelMergeOrder(fromdata)
-      // self.$network
-      //   .post('/api/cs/oc/oms/v1/cancelMergeOrder', formdata)
-        .then((res) => {
+      self.service.orderCenter
+        .cancelMergeOrder(fromdata)
+        .then(res => {
           self.pageLoad = false;
           if (res.data.code === 0) {
             // 取消合并订单成功
-            self.$Message.success(
-              res.data.message || self.vmI18n.t('modalTips.f3')
-            );
+            self.$Message.success(res.data.message || self.vmI18n.t('modalTips.f3'));
             self.getData();
             self.selection = [];
           } else {
             // 取消合并订单失败
-            self.$Message.error(
-              res.data.message || self.vmI18n.t('modalTips.f4')
-            );
+            self.$Message.error(res.data.message || self.vmI18n.t('modalTips.f4'));
           }
         })
         .catch(() => {
@@ -2841,15 +2690,15 @@ export default {
         SELLER_MEMO: '',
         QTY_ALL: {
           value1: '',
-          value2: '',
+          value2: ''
         },
         BILL_NO: '',
         USER_NICK: '',
         ORDER_AMT: {
           value1: '',
-          value2: '',
+          value2: ''
         },
-        PS_C_PRO_ECODE: '', // 商品款号
+        PS_C_PRO_ECODE: '' // 商品款号
       };
       const fromdata = new FormData();
       const params = {
@@ -2857,14 +2706,15 @@ export default {
         column_include_uicontroller: true,
         fixedcolumns: {},
         multiple: [],
-        startindex: 0,
+        startindex: 0
       };
       fromdata.append('param', JSON.stringify(params));
       _this.jordanTableConfig.loading = true;
-      _this.service.orderCenter.getSeniorQueryCondition(fromdata)
-      // _this.$network
-      //   .post('/api/cs/oc/oms/v1/getSeniorQueryCondition', fromdata)
-        .then((res) => {
+      _this.service.orderCenter
+        .getSeniorQueryCondition(fromdata)
+        // _this.$network
+        //   .post('/api/cs/oc/oms/v1/getSeniorQueryCondition', fromdata)
+        .then(res => {
           // 高级查询
           const formData = [];
           if (res.data.data) {
@@ -2884,7 +2734,7 @@ export default {
                     _this.loadData();
                   }, // 表单回车事件
                   iconclick: () => {}, // 点击icon图标事件
-                  clearable: true,
+                  clearable: true
                 };
                 _this.formConfig.formValue[item.tabth.colname] = [];
               }
@@ -2912,14 +2762,11 @@ export default {
                     row: 1,
                     statsize: -1,
                     type: item.tabth.type, // 这个是后台用的
-                    valuedata: '', // 这个是选择的值
-                  },
+                    valuedata: '' // 这个是选择的值
+                  }
                 };
                 if (item.tabth.precolnameslist) {
-                  formData[index].itemdata.precolnameslist = item.tabth
-                    .precolnameslist
-                    ? item.tabth.precolnameslist
-                    : [];
+                  formData[index].itemdata.precolnameslist = item.tabth.precolnameslist ? item.tabth.precolnameslist : [];
                 }
               }
               if (item.type === 'text') {
@@ -2935,7 +2782,7 @@ export default {
                   inputenter: () => {
                     _this.loadData();
                   }, // 表单回车事件
-                  iconclick: () => {}, // 点击icon图标事件
+                  iconclick: () => {} // 点击icon图标事件
                 };
                 _this.formConfig.formValue[item.tabth.colname] = '';
               }
@@ -2954,11 +2801,11 @@ export default {
                   inputenter: () => {
                     _this.loadData();
                   }, // 表单回车事件
-                  iconclick: () => {}, // 点击icon图标事件
+                  iconclick: () => {} // 点击icon图标事件
                 };
                 _this.formConfig.formValue[item.tabth.colname] = {
                   value1: '', // 第一个数字框绑定的值
-                  value2: '', // 第二个数字框绑定的值
+                  value2: '' // 第二个数字框绑定的值
                 };
               }
               if (item.type === 'select') {
@@ -2970,14 +2817,14 @@ export default {
                   value: item.tabth.colname, // 输入框的值
                   multiple: true, // 布尔值,下拉框是否开启多选,默认为不开启
                   selectChange: () => {}, // 选中事件，默认返回选中的值
-                  options: _this.converSelect(item.tabth.combobox),
+                  options: _this.converSelect(item.tabth.combobox)
                 };
                 _this.formConfig.formValue[item.tabth.colname] = [];
               }
             });
             _this.formConfig.formData = formData;
             const arr = [];
-            res.data.data.tableHeader.forEach((item) => {
+            res.data.data.tableHeader.forEach(item => {
               const obj = {};
               obj.headerName = item.title;
               obj.field = item.key;
@@ -3003,10 +2850,10 @@ export default {
                   type: item.type === 'date' ? 'DatePicker' : item.type, // 类型
                   componentAttribute: {
                     multiple: true,
-                    'label-in-value': true,
+                    'label-in-value': true
                   }, // 组件属性
                   list: item.list, // 选项
-                  value: '', // 选中值
+                  value: '' // 选中值
                 };
               } else if (item.type === 'DropDownSelectFilter') {
                 dropList[index] = {
@@ -3021,10 +2868,10 @@ export default {
                     data: {
                       start: 0,
                       tabth: [],
-                      row: [],
+                      row: []
                     },
                     pageSize: 10,
-                    AutoData: [],
+                    AutoData: []
                   }, // 组件属性
                   componentEvent: {
                     'on-popper-show': () => {
@@ -3045,21 +2892,22 @@ export default {
                           {
                             iswrite: 'false',
                             refcol: 'ID',
-                            premtype,
-                          },
-                        ],
+                            premtype
+                          }
+                        ]
                       };
                       const data = new URLSearchParams();
                       data.append('searchdata', JSON.stringify(params));
-                      self.service.orderCenter.QueryList(data)
-                      // self.$network
-                      //   .post('/p/cs/QueryList', data)
-                        .then((res) => {
+                      self.service.orderCenter
+                        .QueryList(data)
+                        // self.$network
+                        //   .post('/p/cs/QueryList', data)
+                        .then(res => {
                           dropList[index].componentAttribute.data = res.data.datas;
                           dropList[index].componentAttribute.totalRowCount = res.data.datas.totalRowCount;
                         });
                     },
-                    'on-page-change': (e) => {
+                    'on-page-change': e => {
                       const self = this;
                       let premtype = '';
                       if (item.selectTab.tabth.name === '店铺') {
@@ -3077,21 +2925,22 @@ export default {
                           {
                             iswrite: 'false',
                             refcol: 'ID',
-                            premtype,
-                          },
-                        ],
+                            premtype
+                          }
+                        ]
                       };
                       const data = new URLSearchParams();
                       data.append('searchdata', JSON.stringify(params));
-                      self.service.orderCenter.QueryList(data)
-                      // self.$network
-                      //   .post('/p/cs/QueryList', data)
-                        .then((res) => {
+                      self.service.orderCenter
+                        .QueryList(data)
+                        // self.$network
+                        //   .post('/p/cs/QueryList', data)
+                        .then(res => {
                           dropList[index].componentAttribute.data = res.data.datas;
                           dropList[index].componentAttribute.totalRowCount = res.data.datas.totalRowCount;
                         });
-                    },
-                  },
+                    }
+                  }
                 };
               } else {
                 dropList[index] = {
@@ -3102,26 +2951,24 @@ export default {
                   componentAttribute:
                     item.type === 'date'
                       ? {
-                        type: 'datetimerange',
-                        value: _this.getCurrentTime(), // ["2018-09-07 09:09:09","2018-09-07 09:09:10"]
-                        isEmitOnChange: true,
-                      }
+                          type: 'datetimerange',
+                          value: _this.getCurrentTime(), // ["2018-09-07 09:09:09","2018-09-07 09:09:10"]
+                          isEmitOnChange: true
+                        }
                       : {}, // 组件属性
                   componentEvent: {
                     'on-enter': () => {
                       setTimeout(() => {
                         _this.searchMethod();
                       }, 100);
-                    },
+                    }
                   }, // 组件事件
                   list: item.list, // 选项
-                  value: '', // 选中值
+                  value: '' // 选中值
                 };
               }
               if (item.queryName === 'PAY_TIME') {
-                dropList[index].value = `${_this.getCurrentTime()[0]}~${
-                  _this.getCurrentTime()[1]
-                }`;
+                dropList[index].value = `${_this.getCurrentTime()[0]}~${_this.getCurrentTime()[1]}`;
                 if (_this.selectValue.length === 0) {
                   _this.selectValue.push(dropList[index]);
                 }
@@ -3136,7 +2983,7 @@ export default {
                 value: `${item.val}`,
                 key: item.key,
                 sort: item.sort,
-                trigger: 'click',
+                trigger: 'click'
               };
             });
             _this.tagList[0].list = tagList;
@@ -3176,8 +3023,7 @@ export default {
         const slideBox = document.getElementById('IntegrateSearchFilter');
         if (slideBox) {
           setTimeout(() => {
-            const pageUl = document.querySelector('.from .ark-dropdown-menu')
-              .childNodes[0];
+            const pageUl = document.querySelector('.from .ark-dropdown-menu').childNodes[0];
             pageUl.click();
           }, 200);
         }
@@ -3204,9 +3050,7 @@ export default {
       const timestamp = Date.parse(new Date());
       const SevenDaysTimestamp = Date.parse(new Date()) - 7 * 24 * 3600 * 1000;
       const defaultTimeArr = [];
-      defaultTimeArr[0] = `${self.dateLong2String(
-        SevenDaysTimestamp
-      )} 00:00:00`;
+      defaultTimeArr[0] = `${self.dateLong2String(SevenDaysTimestamp)} 00:00:00`;
       defaultTimeArr[1] = `${self.dateLong2String(timestamp)} 23:59:59`;
       return defaultTimeArr;
     },
@@ -3294,7 +3138,7 @@ export default {
       val.forEach((item, index) => {
         list[index] = {
           label: item.limitdesc,
-          value: item.limitval,
+          value: item.limitval
         };
       });
       return list;
@@ -3305,10 +3149,10 @@ export default {
       if (obj instanceof Array) {
         // array
         const temp = [];
-        obj.forEach((item, index) => {
+        obj.forEach(item => {
           const temp2 = [];
           if (item instanceof Array) {
-            item.forEach((item2, index) => {
+            item.forEach(item2 => {
               temp2.push(item2);
             });
             temp.push(temp2);
@@ -3353,7 +3197,7 @@ export default {
             displayName: item.label,
             queryName: item.column,
             list: item.list,
-            value: item.value,
+            value: item.value
           };
         } else if (item.type === 'Select') {
           queryInfo[index] = {
@@ -3361,7 +3205,7 @@ export default {
             displayName: item.label,
             queryName: item.column,
             value: item.value,
-            list: item.selectedList,
+            list: item.selectedList
           };
         } else if (item.type === 'DropDownSelectFilter') {
           queryInfo[index] = {
@@ -3369,7 +3213,7 @@ export default {
             displayName: item.label,
             queryName: item.column,
             value: item.value,
-            list: item.selectedList,
+            list: item.selectedList
           };
         } else {
           queryInfo[index] = {
@@ -3377,7 +3221,7 @@ export default {
             displayName: item.label,
             queryName: item.column,
             value: item.value.replace(/(^\s*)|(\s*$)/g, ''),
-            list: item.list,
+            list: item.list
           };
         }
       });
@@ -3387,7 +3231,7 @@ export default {
           val: item.value,
           text: item.label,
           sort: item.sort,
-          key: item.key,
+          key: item.key
         };
       });
       if (this.$route.query.type === 'workID' && isWork === 'workID') {
@@ -3408,21 +3252,19 @@ export default {
       const param = {
         page: {
           pageSize: self.jordanTableConfig.pageSize,
-          pageNum: self.jordanTableConfig.current,
+          pageNum: self.jordanTableConfig.current
         },
         label: self.labelData, // 标签
         queryInfo: self.queryInfoData, // 普通搜索
         status: self.statusData,
-        highSearch: self.highSearchData,
+        highSearch: self.highSearchData
       };
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
-      self.service.orderCenter.reallocateLogistics(fromdata)
-      // self.$network
-      //   .post('/api/cs/oc/oms/v1/reallocateLogistics', fromdata)
-        .then((res) => {
-          // this.$Message.success("后台重新分配快递中...");
-        });
+      self.service.orderCenter.reallocateLogistics(fromdata).then(res => {
+        console.log(res);
+        // this.$Message.success("后台重新分配快递中...");
+      });
     },
     distributeWarehouse() {
       const self = this;
@@ -3431,21 +3273,19 @@ export default {
       const param = {
         page: {
           pageSize: self.jordanTableConfig.pageSize,
-          pageNum: self.jordanTableConfig.current,
+          pageNum: self.jordanTableConfig.current
         },
         label: self.labelData, // 标签
         queryInfo: self.queryInfoData, // 普通搜索
         status: self.statusData,
-        highSearch: self.highSearchData,
+        highSearch: self.highSearchData
       };
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
-      self.service.orderCenter.reallocateWarehouse(formdata)
-      // self.$network
-      //   .post('/api/cs/oc/oms/v1/reallocateWarehouse', formdata)
-        .then((res) => {
-          // this.$Message.success("后台重新分配快递中...");
-        });
+      self.service.orderCenter.reallocateWarehouse(fromdata).then(res => {
+        console.log(res);
+        // this.$Message.success("后台重新分配快递中...");
+      });
     },
     loadData() {
       const arr = [];
@@ -3454,7 +3294,7 @@ export default {
           arr[index] = {
             type: 'Select',
             queryName: item.itemdata.colname,
-            value: item.itemdata.pid === undefined ? '' : item.itemdata.pid,
+            value: item.itemdata.pid === undefined ? '' : item.itemdata.pid
           };
         }
       });
@@ -3467,34 +3307,25 @@ export default {
                 keyArr[index] = {
                   type: item.style,
                   queryName: item.value,
-                  value: this.getTimesValue(this.formConfig.formValue[key]),
+                  value: this.getTimesValue(this.formConfig.formValue[key])
                 };
               } else if (item.style === 'input') {
                 keyArr[index] = {
                   type: 'Input',
                   queryName: item.value,
-                  value: this.formConfig.formValue[key],
+                  value: this.formConfig.formValue[key]
                 };
               } else if (item.style === 'bothInput') {
                 keyArr[index] = {
                   type: 'Input',
                   queryName: item.value,
-                  value: `${this.formConfig.formValue[key].value1.replace(
-                    /(^\s*)|(\s*$)/g,
-                    ''
-                  )}~${this.formConfig.formValue[key].value2.replace(
-                    /(^\s*)|(\s*$)/g,
-                    ''
-                  )}`,
+                  value: `${this.formConfig.formValue[key].value1.replace(/(^\s*)|(\s*$)/g, '')}~${this.formConfig.formValue[key].value2.replace(/(^\s*)|(\s*$)/g, '')}`
                 };
               } else if (item.style === 'select') {
                 keyArr[index] = {
                   type: 'Select',
                   queryName: item.value,
-                  value:
-                    this.formConfig.formValue[key].join(',') === 'bSelect-all'
-                      ? ''
-                      : this.formConfig.formValue[key].join(','),
+                  value: this.formConfig.formValue[key].join(',') === 'bSelect-all' ? '' : this.formConfig.formValue[key].join(',')
                 };
               }
             }
@@ -3517,13 +3348,13 @@ export default {
       const param = {
         page: {
           pageSize: self.jordanTableConfig.pageSize,
-          pageNum: self.jordanTableConfig.current,
+          pageNum: self.jordanTableConfig.current
         },
         label: self.labelData, // 标签
         queryInfo: self.queryInfoData, // 普通搜索
         status: self.statusData,
         highSearch: self.highSearchData,
-        sort: self.sort,
+        sort: self.sort
       };
       // 零售发货单列表tab 区分审核失败/多次缺货类型订单查询
       if (self.statusData.label == '审核失败') {
@@ -3536,74 +3367,63 @@ export default {
 
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
-      try {
-        const res = await self.service.orderCenter.getOrderList(fromdata);
-        // const res = await self.$network.post(
-        //   '/api/cs/oc/oms/v1/getOrderList',
-        //   fromdata
-        // );
-        self.agTableConfig.agLoading = false;
-        if (!res.data.data) {
-          self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
-          // 初始化表格
-          self.agTableConfig.pagenation.goodsSum = 0;
-          self.agTableConfig.pagenation.total = 0;
-          self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, []);
-          self.$Message.warning({
-            content: res.data.message,
-            duration: 5,
-            top: 80,
-          });
-          return;
-        }
-        // self.jordanTableConfig.loading = false;
-        res.data.data = JSON.parse(unzipXv(res.data.data));
-        console.log(res.data.data);
-        if (res.data.code === 0) {
+      self.service.orderCenter
+        .getOrderList(fromdata)
+        .then(res => {
+          self.agTableConfig.agLoading = false;
           if (!res.data.data) {
-            self.jordanTableConfig.data = [];
-            // self.jordanTableConfig.total = 0;
-            self.agTableConfig.pagenation.total = 0;
             self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
-          } else {
-            const queryOrderResultList = res.data.data.queryOrderResultList;
-            // self.jordanTableConfig.total = res.data.data.totalSize;
-            self.agTableConfig.pagenation.total = res.data.data.totalSize;
-            // self.jordanTableConfig.data = res.data.data.queryOrderResultList;
-            self.agTableConfig.rowData = queryOrderResultList;
-            self.agTableConfig.rowData.forEach((item) => {
-              // self.jordanTableConfig.data.forEach(item => {
-              if (
-                item.ORDER_STATUS === self.orderStatus.orderCancel
-                || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid
-              ) {
-                item.isColorGray = true;
-              } else {
-                item.isColorGray = false;
-              }
+            // 初始化表格
+            self.agTableConfig.pagenation.goodsSum = 0;
+            self.agTableConfig.pagenation.total = 0;
+            self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, []);
+            self.$Message.warning({
+              content: res.data.message,
+              duration: 5,
+              top: 80
             });
-            // 统计商品总数
-            self.agTableConfig.pagenation.goodsSum = queryOrderResultList.reduce(
-              (sum, item) => sum + Number(item.QTY_ALL || 0),
-              0
-            );
-            self.$refs.agGridChild.agGridTable(
-              self.agTableConfig.columnDefs,
-              self.agTableConfig.rowData
-            );
+            return;
           }
-        } else {
-          self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
-          self.$Message.warning({
-            content: res.data.message,
-            duration: 5,
-            top: 80,
-          });
-        }
-      } catch (err) {
-        self.jordanTableConfig.loading = false;
-        self.agTableConfig.agLoading = false;
-      }
+          // self.jordanTableConfig.loading = false;
+          res.data.data = JSON.parse(unzipXv(res.data.data));
+          console.log(res.data.data);
+          if (res.data.code === 0) {
+            if (!res.data.data) {
+              self.jordanTableConfig.data = [];
+              // self.jordanTableConfig.total = 0;
+              self.agTableConfig.pagenation.total = 0;
+              self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
+            } else {
+              const queryOrderResultList = res.data.data.queryOrderResultList;
+              // self.jordanTableConfig.total = res.data.data.totalSize;
+              self.agTableConfig.pagenation.total = res.data.data.totalSize;
+              // self.jordanTableConfig.data = res.data.data.queryOrderResultList;
+              self.agTableConfig.rowData = queryOrderResultList;
+              self.agTableConfig.rowData.forEach(item => {
+                // self.jordanTableConfig.data.forEach(item => {
+                if (item.ORDER_STATUS === self.orderStatus.orderCancel || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid) {
+                  item.isColorGray = true;
+                } else {
+                  item.isColorGray = false;
+                }
+              });
+              // 统计商品总数
+              self.agTableConfig.pagenation.goodsSum = queryOrderResultList.reduce((sum, item) => sum + Number(item.QTY_ALL || 0), 0);
+              self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
+            }
+          } else {
+            self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
+            self.$Message.warning({
+              content: res.data.message,
+              duration: 5,
+              top: 80
+            });
+          }
+        })
+        .catch(() => {
+          self.jordanTableConfig.loading = false;
+          self.agTableConfig.agLoading = false;
+        });
     },
     checkBatchReturnOrder(selection) {
       const self = this;
@@ -3649,12 +3469,12 @@ export default {
       });
       const param = {
         ids,
-        is_back: self.batchReturnFormConfig.formValue.IS_BACK,
+        is_back: self.batchReturnFormConfig.formValue.IS_BACK
       };
       const searchdata = {
         table: 'OC_B_ORDER',
         column_include_uicontroller: true,
-        fixedcolumns: param,
+        fixedcolumns: param
       };
       const fromdata = new FormData();
       fromdata.append('searchdata', JSON.stringify(searchdata));
@@ -3662,10 +3482,11 @@ export default {
       fromdata.append('filetype', ' .xlsx');
       fromdata.append('showColumnName', true);
       fromdata.append('menu', '批量退单');
-      self.service.orderCenter.doBatchReturnOrder(fromdata)
-      // self.$network
-      //   .post('/api/cs/oc/oms/v1/doBatchReturnOrder', formdata)
-        .then((res) => {
+      self.service.orderCenter
+        .doBatchReturnOrder(fromdata)
+        // self.$network
+        //   .post('/api/cs/oc/oms/v1/doBatchReturnOrder', formdata)
+        .then(res => {
           self.batchReturnFormConfig.formValue.IS_BACK = false;
           if (res.data.code === 0) {
             self.$Message.success(res.data.message);
@@ -3696,8 +3517,8 @@ export default {
                 ptitle: self.vmI18n.t('other.myMission'),
                 ptype: 'table',
                 tabTitle: self.vmI18n.t('other.myMission'),
-                tableName: 'CP_C_TASK',
-              },
+                tableName: 'CP_C_TASK'
+              }
             });
           } else {
             self.$Modal.error({
@@ -3707,11 +3528,11 @@ export default {
               titleAlign: 'left',
               mask: true,
               draggable: true,
-              keyDown: (event) => {
+              keyDown: event => {
                 if (event.keyCode === 27 || event.keyCode === 13) {
                   self.$Modal.remove();
                 }
-              },
+              }
             });
           }
           self.btnConfig.loading = false;
@@ -3722,16 +3543,15 @@ export default {
       const self = this;
       self.jordanTableConfig.loading = true;
       if (self.clearFromListValue) self.queryInfoData = [];
-      if (
-        self.$route.query.type == 'workID'
-        && self.$route.query.ID !== undefined
-      ) {
-        const arr = [
-          { type: 'Input', queryName: 'ID', value: self.$route.query.ID },
-        ];
-        if (!self.highSearchData.length) { self.highSearchData = self.highSearchData.concat(arr); }
+      if (self.$route.query.type == 'workID' && self.$route.query.ID !== undefined) {
+        const arr = [{ type: 'Input', queryName: 'ID', value: self.$route.query.ID }];
+        if (!self.highSearchData.length) {
+          self.highSearchData = self.highSearchData.concat(arr);
+        }
       } else {
-        if (!self.highSearchData.length) { self.highSearchData = JSON.parse(self.$route.query.param); }
+        if (!self.highSearchData.length) {
+          self.highSearchData = JSON.parse(self.$route.query.param);
+        }
 
         if (self.$route.query.label !== undefined) {
           self.labelData = JSON.parse(self.$route.query.label);
@@ -3741,12 +3561,12 @@ export default {
       const param = {
         page: {
           pageSize: self.jordanTableConfig.pageSize,
-          pageNum: self.jordanTableConfig.current,
+          pageNum: self.jordanTableConfig.current
         },
         label: self.labelData, // 标签
         queryInfo: self.queryInfoData, // 普通搜索
         status: self.statusData,
-        highSearch: self.highSearchData,
+        highSearch: self.highSearchData
       };
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
@@ -3767,11 +3587,8 @@ export default {
             // self.jordanTableConfig.total = res.data.data.totalSize;
             self.agTableConfig.pagenation.total = res.data.data.totalSize;
             self.jordanTableConfig.data = res.data.data.queryOrderResultList;
-            self.jordanTableConfig.data.forEach((item) => {
-              if (
-                item.ORDER_STATUS === self.orderStatus.orderCancel
-                || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid
-              ) {
+            self.jordanTableConfig.data.forEach(item => {
+              if (item.ORDER_STATUS === self.orderStatus.orderCancel || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid) {
                 item.isColorGray = true;
               } else {
                 item.isColorGray = false;
@@ -3782,7 +3599,7 @@ export default {
           self.$Message.warning({
             content: res.data.message,
             duration: 5,
-            top: 80,
+            top: 80
           });
         }
       } catch (err) {
@@ -3815,11 +3632,11 @@ export default {
     },
 
     // 选中某一项时触发
-    onSelect(selection, row) {
+    onSelect(selection) {
       this.selection = selection;
     },
     // 取消选中某一项时触发
-    onSelectCancel(selection, row) {
+    onSelectCancel(selection) {
       this.selection = selection;
     },
     // 点击全选时触发
@@ -3832,14 +3649,14 @@ export default {
       this.selection = selection;
     },
     // 单击某一行时触发
-    onRowClick(row, index) {},
+    onRowClick() {},
     // 单击某二行时触发
-    onRowDblclick(row, index) {
+    onRowDblclick(row) {
       R3.store.commit('global/tabOpen', {
         type: 'C',
         customizedModuleName: 'orderManageDetail',
         customizedModuleId: row.ID,
-        label: this.vmI18n.t('panel_label.retailInvoice_details'),
+        label: this.vmI18n.t('panel_label.retailInvoice_details')
       });
     },
     // 返回置换两行索引
@@ -3875,52 +3692,56 @@ export default {
     },
     // 导出
     exportChange(list = []) {
-      if (this.isExport)
-      // 有一项导出正在进行中
-      { return this.$Message.error(this.vmI18n.t('modalTips.f8')); }
+      if (this.isExport) {
+        // 有一项导出正在进行中
+
+        this.$Message.error(this.vmI18n.t('modalTips.f8'));
+        return;
+      }
       this.isExport = true;
       const ids = list.map(item => item.ID);
       const fromdata = new FormData();
       const idList = { idList: ids };
       fromdata.append('param', JSON.stringify(idList));
-      this.service.orderCenter.exportOcBOrder(fromdata)
-      // this.$network
-      //   .post('/api/cs/oc/oms/v1/exportOcBOrder', fromdata)
-        .then((res) => {
-          this.isExport = false;
-          if (res.data.code == 0 && res.data.data !== null) {
-            const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
-            this.$Message.success(mes);
-            this.downloadUrlFile(res.data.data);
-            // return (window.location = res.data.data);
-          } else {
-            const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
-            this.$Message.error(err);
-          }
-        });
+      this.service.orderCenter.exportOcBOrder(fromdata).then(res => {
+        this.isExport = false;
+        if (res.data.code == 0 && res.data.data !== null) {
+          const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
+          this.$Message.success(mes);
+          this.downloadUrlFile(res.data.data);
+          // return (window.location = res.data.data);
+        } else {
+          const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
+          this.$Message.error(err);
+        }
+      });
     },
     // 警告框确认
     warningOk() {
       const _this = this;
       // 有一项导出正在进行中
-      if (this.isExport) { return this.$Message.error(this.vmI18n.t('modalTips.f8')); }
+      if (this.isExport) {
+        this.$Message.error(this.vmI18n.t('modalTips.f8'));
+        return;
+      }
       this.isExport = true;
       const param = {
         page: {
           pageSize: 999999,
-          pageNum: 1,
+          pageNum: 1
         },
         label: _this.labelData, // 标签
         queryInfo: _this.queryInfoData, // 普通搜索
         status: _this.statusData,
-        highSearch: _this.highSearchData,
+        highSearch: _this.highSearchData
       };
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
-      self.service.orderCenter.exportOcBOrder(fromdata)
-      // self.$network
-      //   .post('/api/cs/oc/oms/v1/exportOcBOrder', fromdata)
-        .then((res) => {
+      _this.service.orderCenter
+        .exportOcBOrder(fromdata)
+        // self.$network
+        //   .post('/api/cs/oc/oms/v1/exportOcBOrder', fromdata)
+        .then(res => {
           this.isExport = false;
           if (res.data.code == 0 && res.data.data !== null) {
             const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
@@ -3936,21 +3757,21 @@ export default {
     // 数组对象根据子元素某各个key合并分组
     sonList(arr, key) {
       const obj = [];
-      arr.forEach((item) => {
+      arr.forEach(item => {
         obj.push(item[key]);
       });
       return obj;
     },
     // 导出
     downloadUrlFile(src) {
-      const download_file = {};
-      if (typeof download_file.iframe === 'undefined') {
+      const downloadFile = {};
+      if (typeof downloadFile.iframe === 'undefined') {
         const iframe = document.createElement('iframe');
-        download_file.iframe = iframe;
-        document.body.appendChild(download_file.iframe);
+        downloadFile.iframe = iframe;
+        document.body.appendChild(downloadFile.iframe);
       }
-      download_file.iframe.src = src;
-      download_file.iframe.style.display = 'none';
-    },
-  },
+      downloadFile.iframe.src = src;
+      downloadFile.iframe.style.display = 'none';
+    }
+  }
 };
