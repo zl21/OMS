@@ -4,7 +4,7 @@ import loading from '@/component/loading.vue';
 
 export default {
   components: {
-    loading,
+    loading
   },
   props: {
     componentData: {
@@ -39,6 +39,10 @@ export default {
       if (this.componentData.tableName === 'OC_B_ORDER') {
         // 零售发货单
         this.getDownloadTemp('/api/cs/oc/oms/v1/downloadOrderTemp');
+      } else if (this.componentData.tableName === 'PS_C_SKU' || this.componentData.tableName === 'SG_B_CHANNEL_PRODUCT' || this.componentData.tableName === 'PS_C_PRO' || this.componentData.tableName === 'IP_C_TAOBAO_PRODUCT') {
+        const searchParam = new URLSearchParams();
+        searchParam.append('param', JSON.stringify({ mode: this.componentData.mode }));
+        this.getDownloadTemp('/p/cs/pm/v1/getModuleUrl', searchParam);
       } else if (this.componentData.tableName === 'OC_B_RETURN_ORDER') {
         // 退换货订单
         this.getDownloadTemp('/api/cs/oc/oms/v1/downloadReturnOrderTemp');
@@ -246,7 +250,7 @@ export default {
       } else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY_SHOP') {
         // 店铺商品特殊设置 - 多店铺比例-明细导入
         this.getImportDialog('/p/cs/productStrategy/import/multiShopItem', this.componentData.objid);
-      } 
+      }
     },
     closeConfirm() {
       const _this = this;

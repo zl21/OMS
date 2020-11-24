@@ -1,8 +1,7 @@
-
-import BasicInfo from '@/views/pages/promotionCenter/details/basicInfo';
-import InfoSet from '@/views/pages/promotionCenter/details/infoSet';
-import GiftSet from '@/views/pages/promotionCenter/details/giftSet';
-import stepsBars from '@/views/pages/promotionCenter/components/steps';
+import BasicInfo from 'allpages/promotionCenter/details/basicInfo';
+import InfoSet from 'allpages/promotionCenter/details/infoSet';
+import GiftSet from 'allpages/promotionCenter/details/giftSet';
+import stepsBars from 'allpages/promotionCenter/components/steps';
 
 export default {
   components: {

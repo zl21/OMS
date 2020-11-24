@@ -2481,7 +2481,7 @@ export default {
         // 原单无效复制
         if (type === this.vmI18n.t('btn.original_single_null_and_void_copy')) {
           // 已取消
-          if (selectItem.ORDER_STATUS != 7 || selectItem.ORDER_STATUS != 8) {
+          if (selectItem.ORDER_STATUS != 7 && selectItem.ORDER_STATUS != 8) {
             // 非已取消或系统作废订单，不允许复制
             self.$Message.error(this.vmI18n.t('modalTips.a3'));
             return;

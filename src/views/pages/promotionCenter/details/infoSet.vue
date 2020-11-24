@@ -160,7 +160,23 @@
       </div>
     </div>
     <!--导入组件-->
-    <div v-if="show_dialog">
+    <businessDialog
+      :closable="importTable.closable"
+      :component-data="importTable.componentData"
+      :draggable="importTable.draggable"
+      :exclude-string="importTable.excludeString"
+      :keep-alive="importTable.keepAlive"
+      :mask="importTable.mask"
+      :mask-closable="importTable.maskClosable"
+      :name="importTable.name"
+      :scrollable="importTable.scrollable"
+      :title="importTable.confirmTitle"
+      :title-align="importTable.titleAlign"
+      :transfer="importTable.transfer"
+      :url="importTable.url"
+      :width="importTable.width"
+    />
+    <!-- <div v-if="show_dialog">
       <Modal
         v-model="show_dialog"
         class="dialog"
@@ -175,7 +191,7 @@
           @returnData="returnData"
         />
       </Modal>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
