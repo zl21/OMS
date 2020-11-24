@@ -31,10 +31,6 @@
         <!-- 明细信息 -->
         {{ vmI18n.t("common.detailed_info") }}
         <p slot="content">
-          <!-- 表格 -->
-          <!-- <div class="table"> -->
-          <!-- 订单明细 -->
-          <!-- <div class="barcodeDetails"> -->
           <business-action-table
             :jordan-table-config="jordanTableConfig"
             @on-select="onSelect"

@@ -72,7 +72,7 @@ export default {
         isShowAddDetailBtn: false,
         indexColumn: true,
         isShowSelection: true, // 是否存在多选框
-        jordanFormConfig: {
+        businessFormConfig: {
           img: {},
 
           formValue: {
@@ -134,7 +134,7 @@ export default {
     objid(value) {
       const self = this;
       if (value !== -1) {
-        // self.jordanTableConfig.jordanFormConfig = {};
+        // self.jordanTableConfig.businessFormConfig = {};
         // 获取详情
         self.query(self.objid);
       }
@@ -142,6 +142,7 @@ export default {
   },
   mounted() {
     const self = this;
+    // console.log('self.$route.query.id',self.$route.params.customizedModuleId);
     if (self.$route.params.customizedModuleId == 'New') {
       self.objid = -1;
     } else {
@@ -316,7 +317,7 @@ export default {
         disabled: true
       }
     ];
-    this.jordanTableConfig.jordanFormConfig.formData = [
+    this.jordanTableConfig.businessFormConfig.formData = [
       {
         style: 'popInput',
         width: '6',
@@ -334,8 +335,7 @@ export default {
           isuppercase: false,
           isnotnull: true,
           fkdesc: '物流公司档案',
-          // name: "快递公司名称",
-          name: this.vmI18n.t('form_label.expressCompanyName'),
+          name: this.vmI18n.t('form_label.expressCompanyName'), // 快递公司名称
           fkdisplay: 'drp',
           row: 1,
           inputname: 'CP_C_LOGISTICS_ID:ENAME',
@@ -358,10 +358,10 @@ export default {
         value: 'COMPENSATE_TYPE', // 输入框的值
         selectChange: () => {
           const self = this;
-          const formValue = self.jordanTableConfig.jordanFormConfig.formValue;
-          const formData = self.jordanTableConfig.jordanFormConfig.formData;
-          let ruleValidate = self.jordanTableConfig.jordanFormConfig.ruleValidate;
-          switch (self.jordanTableConfig.jordanFormConfig.formValue.COMPENSATE_TYPE) {
+          const formValue = self.jordanTableConfig.businessFormConfig.formValue;
+          const formData = self.jordanTableConfig.businessFormConfig.formData;
+          let ruleValidate = self.jordanTableConfig.businessFormConfig.ruleValidate;
+          switch (self.jordanTableConfig.businessFormConfig.formValue.COMPENSATE_TYPE) {
             case 1:
               formValue.COMPENSATE_STANDARD = ''; // 赔付标准置空
               formValue.SETTLEMENTPRICE = ''; // 结算价置空
@@ -543,7 +543,8 @@ export default {
     // 保存方法
     async sava() {
       const self = this;
-      const a = self.getData(self.$route.params.customizedModuleId);
+      const a = self.getData(self.objid);
+      console.log(a);
       const param = a;
       // 非空效验
       if (String(a.fixcolumn.ST_C_COMPENSATE.CP_C_PHY_WAREHOUSE_ID) == 'undefined' || !a.fixcolumn.ST_C_COMPENSATE.CP_C_PHY_WAREHOUSE_ID) {
@@ -741,12 +742,28 @@ export default {
       // 接口
       const res = await this.service.strategyPlatform.selectCompenstateLogistic(formdata);
       if (res.status === 200) {
-        console.log('res.data',res.data);
+        console.log('res.data', res.data);
         if (res.data.ST_C_COMPENSATE.BILL_STATUS) self.identifying = res.data.ST_C_COMPENSATE.BILL_STATUS;
         if (res.data.ST_C_COMPENSATE.BILL_STATUS !== 1) self.jordanTableConfig.isShowDeleteDetailBtn = false;
         if (res.data.ST_C_COMPENSATE.END_TIME === null) res.data.ST_C_COMPENSATE.END_TIME = '';
         self.setData(res.data);
       }
+      // axios({
+      //   url: "/p/cs/selectCompenstateLogistic",
+      //   method: "post",
+      //   data: formdata,
+      // }).then((res) => {
+      //   console.log(res);
+      //   if (res.status === 200) {
+      //     if (res.data.ST_C_COMPENSATE.BILL_STATUS)
+      //       self.identifying = res.data.ST_C_COMPENSATE.BILL_STATUS;
+      //     if (res.data.ST_C_COMPENSATE.BILL_STATUS !== 1)
+      //       self.jordanTableConfig.isShowDeleteDetailBtn = false;
+      //     if (res.data.ST_C_COMPENSATE.END_TIME === null)
+      //       res.data.ST_C_COMPENSATE.END_TIME = "";
+      //     self.setData(res.data);
+      //   }
+      // });
     },
     // 新增明细方法
     async addDetail() {
@@ -754,9 +771,9 @@ export default {
       const a = self.getData(self.objid);
       const param = a;
       // 获取新增明细栏所有值
-      const addList = self.jordanTableConfig.jordanFormConfig.formValue;
+      const addList = self.jordanTableConfig.businessFormConfig.formValue;
       // 根据赔付类型,判断必选值
-      const valueType = self.jordanTableConfig.jordanFormConfig.formValue;
+      const valueType = self.jordanTableConfig.businessFormConfig.formValue;
       if ((valueType.COMPENSATE_TYPE === 1 || valueType.COMPENSATE_TYPE === 2) && (valueType.COMPENSATE_STANDARD === '' || valueType.MULTIPLE === '')) {
         self.$message.warning('赔付标准和倍数不能为空');
         self.$message.warning(this.vmI18n.t('modalTips.x5'));
@@ -767,13 +784,13 @@ export default {
         self.$message.warning(this.vmI18n.t('modalTips.x6'));
         return;
       }
-      if (self.jordanTableConfig.jordanFormConfig.formData[0].itemdata.pid === '') {
+      if (self.jordanTableConfig.businessFormConfig.formData[0].itemdata.pid === '') {
         self.$message.warning('快递公司名称不能为空');
         self.$message.warning(this.vmI18n.t('modalTips.x7'));
         return;
       }
-      addList.CP_C_LOGISTICS_ENAME = self.jordanTableConfig.jordanFormConfig.formData[0].itemdata.valuedata;
-      addList.CP_C_LOGISTICS_ID = Number(self.jordanTableConfig.jordanFormConfig.formData[0].itemdata.pid);
+      addList.CP_C_LOGISTICS_ENAME = self.jordanTableConfig.businessFormConfig.formData[0].itemdata.valuedata;
+      addList.CP_C_LOGISTICS_ID = Number(self.jordanTableConfig.businessFormConfig.formData[0].itemdata.pid);
 
       // 新增明细标识
       addList.ID = -1;
@@ -808,9 +825,9 @@ export default {
     },
     // 保存清除明细条件
     removeDetail() {
-      this.jordanTableConfig.jordanFormConfig.formValue = {};
-      this.jordanTableConfig.jordanFormConfig.formData[0].itemdata.valuedata = '';
-      this.jordanTableConfig.jordanFormConfig.formData[0].itemdata.pid = '';
+      this.jordanTableConfig.businessFormConfig.formValue = {};
+      this.jordanTableConfig.businessFormConfig.formData[0].itemdata.valuedata = '';
+      this.jordanTableConfig.businessFormConfig.formData[0].itemdata.pid = '';
     },
     // 选中明细列表
     onSelect(row) {

@@ -13,7 +13,26 @@ export default {
         buttons: [
           {
             text: '刷新',
-            btnclick: this.getData,
+            btnclick: () => {
+              if (this.canFresh) {
+                this.$Modal.confirm({
+                  title:'提示',
+                  content:'当前操作未确认拆单，是否确认刷新？',
+                  titleAlign:'center',
+                  mask: true, // 显示蒙层
+                  draggable: true, // 拖拽
+                  closable: true, // 右上角小叉
+                  showCancel: true,
+                  okText: '确认',
+                  cancelText: '取消',
+                  onOk: ()=> {
+                    this.getData();
+                  },
+                })
+              } else {
+                this.$Message.warning('已是原始状态，不执行操作!');
+              }
+            },
           },
           {
             text: window.vmI18n.t('btn.back'), // 返回
@@ -64,7 +83,6 @@ export default {
           title: '建议发货仓库',
           key: 'advise_phy_warehouse_id',
           render: (h, params) => {
-            // console.log(params);
             const options = params.row.sgBPhyInStorageItemExt.map(item => h('Option', {
                 style: {
                   'font-style': item.total_qty_available === 0 ? 'italic' : 'normal'
@@ -109,7 +127,6 @@ export default {
             ]);
           }
         },
-
         {
           title: '购买数量',
           key: 'qty'
@@ -137,6 +154,7 @@ export default {
                 },
                 on: {
                   'on-change': value => {
+                    // this.canFresh = params.row.split_num != value.target.value;
                     params.row.split_num = value.target.value;
                     if (params.row.waiting_split_num - value.target.value < 0) {
                       this.$Message.warning('拆分数量不能大于待拆数量；不进行拆单');
@@ -172,7 +190,8 @@ export default {
       ],
       data: [],
       dataIndex: 0,
-      onSelectData: []
+      onSelectData: [],
+      canFresh: false, // 刷新与否
     };
   },
   watch: {},
@@ -195,11 +214,12 @@ export default {
     async getData() {
       console.log('getData::');
       const self = this;
-      const params = { orderId: self.$route.query.id };
+      const params = { orderId: self.$route.params.customizedModuleId };
       const res = await this.service.orderCenter.querySkuListAndStorageInfo(params);
       let total = 0;
       if (res.data.code === 0) {
         self.data = [];
+        if(!res.data.data) return;
         self.old_cp_c_phy_warehouse_ename = res.data.data[0].cp_c_phy_warehouse_ename;
         res.data.data.forEach(item => {
           item.waiting_split_num = Number(item.waiting_split_num || 0);
@@ -224,7 +244,6 @@ export default {
       this.onSelectData = selection;
     },
     onSelectAllCancel(selection) {
-      console.log(selection);
       this.onSelectData = selection;
     },
     // 添加到带拆单按钮方法
@@ -248,11 +267,10 @@ export default {
         self.$Message.warning('拆分数量不能为0!');
         return;
       }
-      console.log(self.onSelectData);
       self.onSelectData[0].total = 0;
       self.onSelectData.forEach(item => {
         item._index = undefined;
-        item.orig_order_id = self.$route.query.id;
+        item.orig_order_id = self.$route.params.customizedModuleId;
         self.onSelectData[0].total = Number(item.split_num) + Number(self.onSelectData[0].total);
         // self.data[0][0].total -= item.split_num;
       });
@@ -274,6 +292,7 @@ export default {
       self.data.push(JSON.parse(JSON.stringify(self.onSelectData)));
       self.data[0] = arr;
       self.onSelectData = [];
+      self.canFresh = true;
     },
     isNullToArr(code, arr) {
       const flag = arr.find(item => code == item.orig_order_item_id);
@@ -287,7 +306,6 @@ export default {
     // 确认拆单
     confirm() {
       const self = this;
-      console.log(self.data);
       if (self.data.length <= 1) {
         self.$Message.warning('请先选择拆单明细添加到待拆单，再进行拆单');
         return;
@@ -299,6 +317,7 @@ export default {
       }).then(res => {
         console.log(res);
         if (res.data.code == 0) {
+          self.canFresh = false;
           self.$Message.success(res.data.message);
           self.back();
         } else {

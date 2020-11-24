@@ -171,12 +171,14 @@ export default {
       };
       const formdata = new FormData();
       formdata.append('param', JSON.stringify(param));
-      const { data: { data } } = await this.service.financeCenter.triggerVipBill(formdata); 
-      if (data.Code === 0) {
-        this.$message.success(data.Execmsg);
+      const { data: { oK } } = await this.service.financeCenter.triggerVipBill(formdata); 
+      if (oK) {
+        this.$message.success('成功!');
         this.$emit('closeActionDialog', true);
       } else {
-        this.$message.error(data.Execmsg);
+        // this.$message.error(data.Execmsg);
+        this.$message.error('失败！');
+        this.$emit('closeActionDialog', true);
       }
     }
   },
