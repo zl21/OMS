@@ -3344,6 +3344,10 @@ export default {
       self.selection = [];
       self.jordanTableConfig.loading = true;
       self.agTableConfig.agLoading = true;
+      // 当出现loading，禁止页面滚动
+      document.getElementById('content').style.overflow = 'hidden';
+      document.getElementById('content').style.position = '';
+      console.log('1', document.getElementById('content'));
       if (self.clearFromListValue) self.queryInfoData = [];
       const param = {
         page: {
@@ -3371,6 +3375,9 @@ export default {
         .getOrderList(fromdata)
         .then(res => {
           self.agTableConfig.agLoading = false;
+           // 当loading结束，页面滚动
+          document.getElementById('content').style.overflow = 'auto';
+          document.getElementById('content').style.position = 'relative';
           if (!res.data.data) {
             self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
             // 初始化表格
@@ -3572,10 +3579,6 @@ export default {
       fromdata.append('param', JSON.stringify(param));
       try {
         const res = await self.service.orderCenter.queryOrderList(fromdata);
-        // const res = await self.$network.post(
-        //   '/api/cs/oc/oms/v1/queryOrderList',
-        //   formdata
-        // );
         self.jordanTableConfig.loading = false;
         self.agTableConfig.agLoading = false;
         if (res.data.code === 0) {
