@@ -1,7 +1,7 @@
-import jordanBtn from 'professionalComponents/businessButton';
+import businessButton from 'professionalComponents/businessButton';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessForm from 'professionalComponents/businessForm';
-import jordanModal from 'professionalComponents/businessDialog';
+import businessDialog from 'professionalComponents/businessDialog';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
 import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
@@ -14,10 +14,10 @@ import orderLogo from './publicConfig/orderLogo.js';
 
 export default {
   components: {
-    jordanBtn,
+    businessButton,
     businessForm,
     businessLabel,
-    jordanModal,
+    businessDialog,
     aTable,
     loading
   },
@@ -2573,8 +2573,6 @@ export default {
             onCancel: () => {
               self.btnConfig.loading = true;
               self.service.orderCenter.manualUnHoldOrder(data)
-              // self.$network
-              //   .post('/api/cs/oc/oms/v1/manualUnHoldOrder', data)
                 .then((res) => {
                   self.btnConfig.loading = false;
                   if (res.data.code === 0) {

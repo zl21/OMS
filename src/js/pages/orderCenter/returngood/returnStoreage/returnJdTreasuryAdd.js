@@ -385,7 +385,7 @@ export default {
                           axios({
                             url: '/api/cs/oc/oms/v1/getOneRefundItem',
                             method: 'post',
-                            cancelToken: true,
+                            // cancelToken: true,
                             data: { PS_C_SKU_ECODE: e.target.value }
                           }).then((res) => {
                             if (res.data.code == 0) {
