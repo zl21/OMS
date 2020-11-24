@@ -345,11 +345,9 @@ export default {
     getTreeData() {
       const _this = this;
       _this.isSaveLoading = true;
-      const fromData = new FormData();
       const param = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId };
-      fromData.append('param', JSON.stringify(param));
 
-      this.service.common.getWarehouseLogisticsTree(fromData).then(res => {
+      this.service.common.getWarehouseLogisticsTree(param).then(res => {
         _this.isSaveLoading = false;
         if (res.data.oK) {
           _this.treeData = res.data.warehouseLogisticsTree;
