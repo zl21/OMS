@@ -1069,6 +1069,7 @@ export default {
     // 警告框确认
     async warningOk() {
       const _this = this;
+      _this.agTableConfig.loading = true;
       const mainData = _this.formConfig.formValue;
       let creationdateStart = '';
       let creationdateEnd = '';
@@ -1115,14 +1116,15 @@ export default {
         RESERVE_BIGINT01: mainData.RESERVE_BIGINT01,
       };
       const { data: { code, data, message } } = await this.service.financeCenter.exportPayableAdjustment(param); 
-      console.log(code, data, message);
       if (code === 0 && data !== null) {
         const mes = message || window.vmI18n.t('modalTips.z2');// 导出成功！
         _this.$Message.success(mes);
         _this.downloadUrlFile(data);
+        _this.agTableConfig.loading = false;
       } else {
         const err = message || window.vmI18n.t('modalTips.z3');// 失败！
         _this.$Message.error(err);
+        _this.agTableConfig.loading = false;
       }
       // axios({
       //   url: "/p/cs/exportPayableAdjustment",
