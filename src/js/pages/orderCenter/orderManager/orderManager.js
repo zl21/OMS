@@ -2476,14 +2476,13 @@ export default {
         if (selectItem.COPY_REASON) {
           // 订单只能是原单才能复制
           self.$Message.warning(this.vmI18n.t('modalTips.a2'));
-
           return;
         }
         // 原单无效复制
         if (type === this.vmI18n.t('btn.original_single_null_and_void_copy')) {
           // 已取消
-          if (ORDERSTATUSNAME !== '已取消') {
-            // 非已取消订单，不允许复制
+          if (selectItem.ORDER_STATUS != 7 || selectItem.ORDER_STATUS != 8) {
+            // 非已取消或系统作废订单，不允许复制
             self.$Message.error(this.vmI18n.t('modalTips.a3'));
             return;
           }
@@ -2512,12 +2511,6 @@ export default {
           label: '零售发货单新增',
           query
         });
-        // R3.store.commit('global/tabOpen', {
-        //   type: 'C',
-        //   label: window.vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
-        //   customizedModuleName: 'ORDERMANAGEADD',
-        //   customizedModuleId: '-1',
-        // });
       } else {
         self.$Message.warning({
           content: this.vmI18n.t('modalTips.a5'), // 请选择一条需要复制的订单！
