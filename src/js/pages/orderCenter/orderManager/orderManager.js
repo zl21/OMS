@@ -3570,42 +3570,40 @@ export default {
       };
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
-      try {
-        const res = await self.service.orderCenter.queryOrderList(fromdata);
-        // const res = await self.$network.post(
-        //   '/api/cs/oc/oms/v1/queryOrderList',
-        //   formdata
-        // );
-        self.jordanTableConfig.loading = false;
-        self.agTableConfig.agLoading = false;
-        if (res.data.code === 0) {
-          if (!res.data.data) {
-            self.jordanTableConfig.data = [];
-            self.jordanTableConfig.total = 0;
-            self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
+      self.service.orderCenter
+        .queryOrderList(fromdata)
+        .then(res => {
+          self.jordanTableConfig.loading = false;
+          self.agTableConfig.agLoading = false;
+          if (res.data.code === 0) {
+            if (!res.data.data) {
+              self.jordanTableConfig.data = [];
+              self.jordanTableConfig.total = 0;
+              self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
+            } else {
+              // self.jordanTableConfig.total = res.data.data.totalSize;
+              self.agTableConfig.pagenation.total = res.data.data.totalSize;
+              self.jordanTableConfig.data = res.data.data.queryOrderResultList;
+              self.jordanTableConfig.data.forEach(item => {
+                if (item.ORDER_STATUS === self.orderStatus.orderCancel || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid) {
+                  item.isColorGray = true;
+                } else {
+                  item.isColorGray = false;
+                }
+              });
+            }
           } else {
-            // self.jordanTableConfig.total = res.data.data.totalSize;
-            self.agTableConfig.pagenation.total = res.data.data.totalSize;
-            self.jordanTableConfig.data = res.data.data.queryOrderResultList;
-            self.jordanTableConfig.data.forEach(item => {
-              if (item.ORDER_STATUS === self.orderStatus.orderCancel || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid) {
-                item.isColorGray = true;
-              } else {
-                item.isColorGray = false;
-              }
+            self.$Message.warning({
+              content: res.data.message,
+              duration: 5,
+              top: 80
             });
           }
-        } else {
-          self.$Message.warning({
-            content: res.data.message,
-            duration: 5,
-            top: 80
-          });
-        }
-      } catch (err) {
-        self.jordanTableConfig.loading = false;
-        self.agTableConfig.agLoading = false;
-      }
+        })
+        .catch(() => {
+          self.jordanTableConfig.loading = false;
+          self.agTableConfig.agLoading = false;
+        });
       this.selectValue = [];
     },
     // 标准时间转化为yyyy-mm-dd
