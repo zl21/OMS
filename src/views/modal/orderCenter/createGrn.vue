@@ -1,26 +1,30 @@
 <template>
   <div class="createGrn">
     <div class="form-body">
-      <div style="display:flex">
-        <label>档期</label>
-        <DropMultiSelectFilter
-          :data="datas"
-          :total-row-count="totalRowCount"
-          :page-size="pageSize"
-          :show-colname-key="'show'"
-          :default-selected="defaultSelected"
-          @on-page-change="changePage"
-          @on-fkrp-selected="fkrpSelected"
-          @on-clear="clear"
-          @on-input-value-change="inputValueChange"
-        />
-      </div>
-      <div style="display:flex">
-        <label>运输方式</label>
-        <!-- <Select>
+      <Form
+        :model="formItem"
+        :label-width="80"
+      >
+        <FormItem label="档期">
+          <DropMultiSelectFilter
+            :data="datas"
+            :total-row-count="totalRowCount"
+            :page-size="pageSize"
+            :show-colname-key="'show'"
+            :default-selected="defaultSelected"
+            :auto-data="AutoData"
+            @on-page-change="changePage"
+            @on-fkrp-selected="fkrpSelected"
+            @on-clear="clear"
+            @on-input-value-change="inputValueChange"
+          />
+        </FormItem>
+        <FormItem label:"运输方式">
+          <!-- <Select>
           <Option>1</Option>
-        </Select> -->
-      </div>
+          </Select> -->
+        </FormItem>
+      </Form>
     </div>
     <div class="dialog-footer">
       <!-- 确定 -->
@@ -52,8 +56,9 @@
     data() {
       return {
         vmI18n: window.vmI18n,
-        defaultSelected: [{ ID: '1', Label: '唯品会日程归属' }], // 默认展示项
+        defaultSelected: [], // 默认展示项
         selectDatas: [],
+        AutoData: [],
         datas: {
           start: 0,
           tabth: [
@@ -81,10 +86,10 @@
       determine() {
             
       },
-      getDataList(fixedcolumns = {}) {
+      getDataList() {
         const formdata = new FormData();
         const obj = { 
-          table: 'ST_C_VIPCOM_ASCRIPTION', startindex: this.datas.start, range: this.pageSize, fixedcolumns, column_include_uicontroller: true, isolr: false 
+          table: 'ST_C_VIPCOM_ASCRIPTION', startindex: 0, range: 1000, fixedcolumns: {}, column_include_uicontroller: true, isolr: false 
         };
         formdata.append('searchdata', JSON.stringify(obj));
         this.service.common.QueryList(formdata).then(res=>{
@@ -101,12 +106,19 @@
         this.selectDatas = [];
       },
       changePage(e) {
-        this.datas.start = this.pageSize * (e - 1);
-        this.getDataList();
+        // this.datas.start = this.pageSize * (e - 1);
+        // this.getDataList();
       },
       inputValueChange(e) {
         console.log(e);
-        this.getDataList({ ENAME: e });
+        const formdata = new FormData();
+        const obj = { 
+          table: 'ST_C_VIPCOM_ASCRIPTION', startindex: this.datas.start, range: this.pageSize, fixedcolumns: { ENAME: e }, column_include_uicontroller: true, isolr: false 
+        };
+        formdata.append('searchdata', JSON.stringify(obj));
+        this.service.common.QueryList(formdata).then(res=>{
+          console.log(res);
+        });
       }
     }
   };
