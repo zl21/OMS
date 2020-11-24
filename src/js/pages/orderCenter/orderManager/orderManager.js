@@ -3530,6 +3530,7 @@ export default {
       // 零售发货单列表tab 区分审核失败/多次缺货类型订单查询
       if (self.statusData.label == '审核失败') {
         param.status = { label: '待审核', value: '1', isShow: true };
+        param.lackstockOrAudit = self.statusData.value;
       } else if (self.statusData.label == '多次缺货') {
         param.lackstockOrAudit = self.statusData.value;
         param.status = { label: '缺货', value: '2', isShow: true };
