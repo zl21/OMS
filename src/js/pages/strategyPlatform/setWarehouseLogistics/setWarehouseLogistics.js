@@ -315,13 +315,13 @@ export default {
       // 保存
       this.service.strategyPlatform.saveWarehouseLogistics(fromData).then(res => {
         _this.isSaveLoading = false;
-        if (res.data.code === 0) {
+        if (res.data.oK) {
           _this.$Message.success(window.vmI18n.t('modalTips.z9')); // 保存成功
           if (this.$route.params.customizedModuleId !== 'New') {
             this.refresh();
           } else {
             this.$store.commit('customize/TabHref', {
-              id: res.data.data.btnConfigobjid, // 单据id
+              id: res.data.data.objid, // 单据id
               type: 'action', // 类型action
               name: 'setWarehouseLogistics', // 文件名
               label: window.vmI18n.t('panel_label.setWarehouseLogistics'), // 仓库物流优先级设置
@@ -334,8 +334,12 @@ export default {
         } else {
           const err = res.data.data.message || window.vmI18n.t('modalTips.y0'); // 保存失败
           _this.$Message.error(err);
-          _this.refresh();
+          // _this.refresh();
         }
+      }).catch((error)=>{
+        const err = error || window.vmI18n.t('modalTips.y0'); // 保存失败
+        _this.$Message.error(err);
+        _this.refresh();        
       });
     },
     getTreeData() {
@@ -350,19 +354,19 @@ export default {
         if (res.data.oK) {
           _this.treeData = res.data.warehouseLogisticsTree;
           if (res.data.warehouseLogistics) {
-            _this.information.formData[0].itemdata.pid = data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ID;
-            _this.information.formData[0].itemdata.valuedata = data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ENAME;
-            _this.information.formValue.REMARK = data.warehouseLogistics.REMARK;
-            if (data.warehouseLogistics.ISACTIVE === 'N') {
+            _this.information.formData[0].itemdata.pid = res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ID;
+            _this.information.formData[0].itemdata.valuedata = res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ENAME;
+            _this.information.formValue.REMARK = res.data.data.warehouseLogistics.REMARK;
+            if (res.data.data.warehouseLogistics.ISACTIVE === 'N') {
               // _this.statusName = "已作废";
-              _this.statusName = this.vmI18n.t('common.voided');
+              _this.statusName = _this.vmI18n.t('common.voided');
               _this.btnConfig.buttons.forEach(item => {
                 // if (item.text === ("修改物流" || "作废" || "导入" || "导出" || "保存"))
                 switch (item.text) {
-                  case this.vmI18n.t('btn.modify_logistics'):
-                  case this.vmI18n.t('btn.void'):
-                  case this.vmI18n.t('btn.import'):
-                  case this.vmI18n.t('btn.refresh'):
+                  case _this.vmI18n.t('btn.modify_logistics'):
+                  case _this.vmI18n.t('btn.void'):
+                  case _this.vmI18n.t('btn.import'):
+                  case _this.vmI18n.t('btn.refresh'):
                     item.disabled = true;
                     break;
                 }
@@ -370,9 +374,9 @@ export default {
             }
           }
           if (res.data.warehouseLogisticsItems && res.data.warehouseLogisticsItems.length) {
-            this.theadArr = [];
+            _this.theadArr = [];
             res.data.warehouseLogisticsItems.forEach(item => {
-              this.theadArr.push({
+              _this.theadArr.push({
                 name: item.CP_C_LOGISTICS_ENAME
               });
             });
@@ -380,7 +384,7 @@ export default {
         } else {
           this.theadArr = [];
         }
-        _this.provinceSynchronous();
+        // _this.provinceSynchronous();
       });
     },
     // 同步查询
