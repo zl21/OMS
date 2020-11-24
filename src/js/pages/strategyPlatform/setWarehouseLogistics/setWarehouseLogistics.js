@@ -321,12 +321,12 @@ export default {
             this.refresh();
           } else {
             this.$store.commit('customize/TabHref', {
-              id: res.data.data.objid, // 单据id
+              id: res.data.data.data.objid, // 单据id
               type: 'action', // 类型action
               name: 'setWarehouseLogistics', // 文件名
               label: window.vmI18n.t('panel_label.setWarehouseLogistics'), // 仓库物流优先级设置
               query: Object.assign({
-                id: res.data.data.objid, // 单据id
+                id: res.data.data.data.objid, // 单据id
                 tabTitle: window.vmI18n.t('panel_label.setWarehouseLogistics') // 仓库物流优先级设置
               }) // 带的参数
             });
@@ -339,7 +339,7 @@ export default {
       }).catch((error)=>{
         const err = error || window.vmI18n.t('modalTips.y0'); // 保存失败
         _this.$Message.error(err);
-        _this.refresh();        
+        // _this.refresh();        
       });
     },
     getTreeData() {
