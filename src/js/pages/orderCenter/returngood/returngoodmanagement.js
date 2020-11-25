@@ -3,7 +3,7 @@ import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessLabel from 'professionalComponents/businessLabel';
 import { setTimeout } from 'timers';
-import jordanModal from 'professionalComponents/businessDialog';
+import businessDialog from 'professionalComponents/businessDialog';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
@@ -25,7 +25,7 @@ export default {
     businessButton,
     businessForm,
     businessActionTable,
-    jordanModal,
+    businessDialog,
     OrderItem,
     businessLabel,
     businessStatusFlag,
@@ -301,6 +301,7 @@ export default {
       information: {
         formValue: {
           // 存储表单得所有值
+          PRO_RETURN_STATUS: '', // 退状货态
           ORIG_ORDER_ID: '', // 原始订单编号
           BILL_TYPE: '', // 单据类型
           BUYER_NICK: '', // 买家昵称
@@ -650,7 +651,14 @@ export default {
             value: 'SELLER_MEMO',
             disabled: true, // 按钮禁用控制
             width: '12'
-          }
+          },
+          {
+            style: 'input',
+            label: window.vmI18n.t('form_label.proReturnStatus'), // 退货状态,
+            disabled: true,
+            value: 'PRO_RETURN_STATUS',
+            width: '6'
+          },
         ]
       }, // 基本信息
       returnDetailAddTable: {
@@ -797,7 +805,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.vmI18n.t('common.consigneeInformation'), // 收货人
+            label: window.vmI18n.t('form_label.consignee'), // 收货人
             dataAcessKey: 'RECEIVE_NAME',
             value: 'RECEIVE_NAME',
             disabled: false, // 按钮禁用控制
@@ -1185,6 +1193,7 @@ export default {
               _this.information.formData[14].itemdata.valuedata = item.CP_C_PHY_WAREHOUSE_ENAME;
               _this.information.formValue.CP_C_PHY_WAREHOUSE_ID = this.warehouseId;
               _this.information.formValue.ORIG_ORDER_ID = item.ID; // 编号
+              _this.information.formValue.PRO_RETURN_STATUS = item.PRO_RETURN_STATUS; // 退货状态
               _this.information.formValue.BUYER_NICK = item.USER_NICK;
               _this.information.formValue.ORIG_SOURCE_CODE = item.SOURCE_CODE;
               _this.information.formValue.CP_C_SHOP_TITLE = item.CP_C_SHOP_TITLE;
@@ -1634,6 +1643,8 @@ export default {
         });
       }
       // item.RESERVE_BIGINT07_type = data.RESERVE_BIGINT07_type;
+      const PRO_RETURN_STATUS_DATA = { 0: '待入库', 1: '部分入库', 2: '全部入库' };
+      item.PRO_RETURN_STATUS = PRO_RETURN_STATUS_DATA[data.PRO_RETURN_STATUS];
       item.SELLER_MEMO = data.BACK_MESSAGE;
       item.BILL_TYPE = String(data.BILL_TYPE) ? String(data.BILL_TYPE) : '';
       item.BUYER_NICK = data.BUYER_NICK ? data.BUYER_NICK : '';
@@ -1921,14 +1932,12 @@ export default {
                           }
                         }
                       },
-                      list.forEach(item =>
-                        h('Option', {
+                      list.forEach(item => h('Option', {
                           props: {
                             value: item.psCSpec1objId,
                             label: item.psCSpec1objName
                           }
-                        })
-                      )
+                        }))
                     )
                   ]
                 );
@@ -2043,14 +2052,12 @@ export default {
                           }
                         }
                       },
-                      list.forEach(item =>
-                        h('Option', {
+                      list.forEach(item => h('Option', {
                           props: {
                             value: item.psCSpec2objId,
                             label: item.psCSpec2objName
                           }
-                        })
-                      )
+                        }))
                     )
                   ]
                 );
@@ -2268,14 +2275,12 @@ export default {
                     }
                   }
                 },
-                list.forEach(item =>
-                  h('Option', {
+                list.forEach(item => h('Option', {
                     props: {
                       value: item.SPEC,
                       label: item.SPEC
                     }
-                  })
-                )
+                  }))
               );
             }
           }
@@ -2412,14 +2417,12 @@ export default {
                           }
                         }
                       },
-                      list.forEach(item =>
-                        h('Option', {
+                      list.forEach(item => h('Option', {
                           props: {
                             value: item.psCSpec1objId,
                             label: item.psCSpec1objName
                           }
-                        })
-                      )
+                        }))
                     )
                   ]
                 );
@@ -2527,14 +2530,12 @@ export default {
                           }
                         }
                       },
-                      list.forEach(item =>
-                        h('Option', {
+                      list.forEach(item => h('Option', {
                           props: {
                             value: item.psCSpec2objId,
                             label: item.psCSpec2objName
                           }
-                        })
-                      )
+                        }))
                     )
                   ]
                 );
@@ -2567,7 +2568,6 @@ export default {
           },
           {
             key: 'QTY_EXCHANGE',
-            dataAcessKey: 'ORIG_ORDER_ID',
             title: _this.vmI18n.t('table_label.exchangeQuantity'), // 换货数量
             render: (h, params) => {
               const _this = this;
@@ -3547,13 +3547,13 @@ export default {
       const _this = this;
       const lists = _this.order.orderform.formValue;
       if (
-        (lists.bill_no == '' || lists.bill_no == undefined) &&
-        (lists.source_code == '' || lists.source_code == undefined) &&
-        (lists.receiver_name == '' || lists.receiver_name == undefined) &&
-        (lists.user_nick == '' || lists.user_nick == undefined) &&
-        (lists.receiver_mobile == '' || lists.receiver_mobile == undefined) &&
-        (lists.cp_c_store_ename == '' || lists.cp_c_store_ename == undefined) &&
-        num == undefined
+        (lists.bill_no == '' || lists.bill_no == undefined)
+        && (lists.source_code == '' || lists.source_code == undefined)
+        && (lists.receiver_name == '' || lists.receiver_name == undefined)
+        && (lists.user_nick == '' || lists.user_nick == undefined)
+        && (lists.receiver_mobile == '' || lists.receiver_mobile == undefined)
+        && (lists.cp_c_store_ename == '' || lists.cp_c_store_ename == undefined)
+        && num == undefined
       ) {
         _this.$Message.error(_this.vmI18n.t('modalTips.i8')); // 请输入查询条件！
         return;
@@ -3791,7 +3791,7 @@ export default {
         if (selection.refundStatus !== 6) {
           const queryListItem = {};
           queryListItem.ID = -1;
-          queryListItem.RESERVE_BIGINT10 = selection.proId;
+          queryListItem.OC_B_ORDER_ITEM_ID = selection.proId;
           queryListItem.skuId = selection.skuId;
           queryListItem.PS_C_PRO_ID = selection.psCproId; // 商品id
           queryListItem.PS_C_SKU_ECODE = selection.skuEcode;

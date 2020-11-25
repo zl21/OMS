@@ -125,6 +125,29 @@ const form = {
               colid: '1700823465',
               fixedcolumns: {}
             };
+
+            fkQueryList({
+              searchObject: {
+                isdroplistsearch: true,
+                refcolid: ele.colid,
+                startindex: 0,
+                range: 100
+              },
+              serviceId: ele.fkobj.serviceId,
+              success: (res) => {
+               res.data.datas.row.forEach( function(item) {
+               if (item.ENAME.val.indexOf(value) != "-1") { //匹配用户输入的字段
+                let nobj = {}
+                obj.item.props.AutoData = []
+                res.data.datas.tabth.forEach(function(em) {
+                    nobj[em.name] = item[em.colname].val
+                    nobj.value = item[em.colname].val
+                })
+                obj.item.props.AutoData.push(nobj)
+                }
+               });
+              }
+            });
             // fkFuzzyquerybyak(params)
           },
           'on-fkrp-selected': (value) => {
