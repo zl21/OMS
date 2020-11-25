@@ -504,7 +504,7 @@ export default {
                 _this.information.formData[11].style = 'select';
                 _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = 1;
                 setTimeout(() => {
-                  document.getElementsByClassName('burgeon-select-selected-value')[1].className = 'burgeon-select-selected-value inputBgcolor';
+                  document.getElementsByClassName('ark-select-selected-value')[1].className = 'ark-select-selected-value inputBgcolor';
                 }, 10);
               } else {
                 _this.information.formData[11].style = '';
