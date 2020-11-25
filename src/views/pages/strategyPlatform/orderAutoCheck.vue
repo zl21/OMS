@@ -263,12 +263,12 @@
                   <FormItem label="订单金额（元）:">
                     <Row>
                       <Col span="11">
+                        <!--去除:maxlength="10"-->
                       <Input
-                        v-model="info.LIMIT_PRICE_DOWN"
+                        v-model.number="info.LIMIT_PRICE_DOWN"
                         placeholder
                         size="small"
-                        :maxlength="10"
-                        @on-change="setResult('LIMIT_PRICE')"
+                        @on-change="setResult('LIMIT_PRICE_DOWN',$event)"
                       />
                       </Col>
                       <Col
@@ -281,7 +281,7 @@
                         placeholder
                         size="small"
                         :maxlength="10"
-                        @on-change="setResult('LIMIT_PRICE')"
+                        @on-change="setResult('LIMIT_PRICE_UP',$event)"
                       />
                       </Col>
                     </Row>
