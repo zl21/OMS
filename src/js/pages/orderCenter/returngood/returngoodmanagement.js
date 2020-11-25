@@ -3222,9 +3222,9 @@ export default {
         content: _this.vmI18n.t('modalTips.l7'), // 是否确定虚拟入库？
         mask: true,
         showCancel: true,
-        okText: _this.vmI18n.t('common.determine'), // 取消
-        cancelText: _this.vmI18n.t('common.cancel'), // 确定
-        onCancel: () => {
+        okText: _this.vmI18n.t('common.determine'), // 确定
+        cancelText: _this.vmI18n.t('common.cancel'), // 取消 
+        onOk: () => {
           this.service.common.updateVirtualLibrary({ ID: _this.$route.query.id }).then(res => {
             if (res.data.code == 0) {
               _this.$Message.success(res.data.message);
