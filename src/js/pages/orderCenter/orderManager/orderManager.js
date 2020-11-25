@@ -1842,7 +1842,6 @@ export default {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               if (self.selection.length > 0) {
-                console.log(self.selection);
                 try {
                   self.checkBatchReturnOrder(self.selection);
                 } catch (err) {
@@ -2363,7 +2362,6 @@ export default {
               // this.$network
               //   .post('/api/cs/oc/oms/v1/splitOrder', { ids })
               .then(res => {
-                console.log(res);
                 this.pageLoad = false;
                 if (res.data.code == 0) {
                   self.$Message.success(res.data.message);
@@ -3340,7 +3338,6 @@ export default {
       // 当出现loading，禁止页面滚动
       document.getElementById('content').style.overflow = 'hidden';
       document.getElementById('content').style.position = '';
-      console.log('1', document.getElementById('content'));
       if (self.clearFromListValue) self.queryInfoData = [];
       const param = {
         page: {
@@ -3386,7 +3383,6 @@ export default {
           }
           // self.jordanTableConfig.loading = false;
           res.data.data = JSON.parse(unzipXv(res.data.data));
-          console.log(res.data.data);
           if (res.data.code === 0) {
             if (!res.data.data) {
               self.jordanTableConfig.data = [];

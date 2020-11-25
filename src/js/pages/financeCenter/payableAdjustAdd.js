@@ -241,13 +241,13 @@ export default {
                 ],
               };
               fromdata.append('param', JSON.stringify(param));
-              const { data: { code, data } } = await this.service.financeCenter.queryOrderList(fromdata); 
+              const { data: { code, data } } = await this.service.financeCenter.queryOrderList(fromdata);
               if (code === 0) {
                 const resData = data || {};
                 const dataBySourceCode = resData.queryOrderResultList || [];
                 const dimList = self.formConfig.formData;
                 // let arr;
-                const filterData = dataBySourceCode.map(item => 
+                const filterData = dataBySourceCode.map(item =>
                   // 过滤不需要展示的模糊搜索项
                   ({
                     LOGISTICS_NO: item.EXPRESSCODE,
@@ -270,7 +270,7 @@ export default {
               const self = this;
               self.getSourceCodeDetail(obj);
             },
-            dimEnter: () => {},
+            dimEnter: () => { },
           },
           {
             style: 'input',
@@ -710,7 +710,7 @@ export default {
                     },
                   },
                 });
-              } 
+              }
               const self = this;
               return h(tableInput, {
                 style: {
@@ -817,7 +817,7 @@ export default {
                     ),
                   ]
                 );
-              } 
+              }
               return h(
                 'div',
                 {
@@ -946,7 +946,7 @@ export default {
                     ),
                   ]
                 );
-              } 
+              }
               return h(
                 'div',
                 {
@@ -1054,7 +1054,7 @@ export default {
     async queryBIllCause(val) {
       const formdata = new FormData();
       formdata.append('id', val);
-      const { data: { code, data, message } } = await this.service.financeCenter.getCompensationReason(formdata); 
+      const { data: { code, data, message } } = await this.service.financeCenter.getCompensationReason(formdata);
       console.log(code, data, message);
       if (code == 0) {
         const arr = [];
@@ -1098,7 +1098,7 @@ export default {
       //   }
       // });
     },
-    labelClick(item, index) {
+    labelClick(item) {
       this.labelDefaultValue = item.value;
     },
     async getPayableAdjustment() {
@@ -1108,7 +1108,7 @@ export default {
       };
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
-      const { data: { code, data, message } } = await this.service.financeCenter.getPayableAdjustment(fromdata); 
+      const { data: { code, data, message } } = await this.service.financeCenter.getPayableAdjustment(fromdata);
       if (code === 0) {
         self.labelList = [
           {
@@ -1131,34 +1131,6 @@ export default {
         self.$Message.warning(message || window.vmI18n.t('modalTips.z8'));
       }
       self.isSaveLoading = false;
-      // axios({
-      //   url: "/p/cs/getPayableAdjustment",
-      //   method: "post",
-      //   data: fromdata,
-      // }).then((res) => {
-      //   if (res.data.code === 0) {
-      //     self.labelList = [
-      //       {
-      //         // label: "赔付单明细",
-      //         label: window.vmI18n.t("panel_label.payableAdjust_details"),
-      //         value: "1",
-      //         isShow: true,
-      //       },
-      //       {
-      //         // label: "操作日志",
-      //         label: window.vmI18n.t("panel_label.operationLog"),
-      //         value: "2",
-      //       },
-      //     ];
-      //     let mainData = res.data.data.acFPayableAdjustment;
-      //     let itemData = res.data.data.acFPayableAdjustmentItemList;
-      //     let logData = res.data.data.acFPayableAdjustmentLogList;
-      //     self.setPayableAdjustData(mainData, itemData, logData);
-      //   } else {
-      //     self.$Message.warning(res.data.message || window.vmI18n.t("modalTips.z8"));
-      //   }
-      //   self.isSaveLoading = false;
-      // });
     },
     // 分页change 事件
     pageChange(val) {
@@ -1249,7 +1221,7 @@ export default {
         ],
       };
       fromdata.append('param', JSON.stringify(param));
-      const { data: { code, data } } = await this.service.financeCenter.queryOrderList(fromdata); 
+      const { data: { code, data } } = await this.service.financeCenter.queryOrderList(fromdata);
       if (code === 0) {
         const dataByBillNo = data.queryOrderResultList;
         const item = dataByBillNo[0];
@@ -1298,7 +1270,7 @@ export default {
           } else if (
             formItem.itemdata
             && formItem.itemdata.name
-              === window.vmI18n.t('form_label.physicalWarehouseName')
+            === window.vmI18n.t('form_label.physicalWarehouseName')
           ) {
             formItem.itemdata.valuedata = item.CP_C_PHY_WAREHOUSE_ENAME;
             formItem.itemdata.pid = item.CP_C_PHY_WAREHOUSE_ID;
@@ -1352,7 +1324,7 @@ export default {
       // }).then((res) => {
       //   if (res.status === 200) {
       //   // 同上
-        
+
       //   }
       // });
     },
@@ -1378,12 +1350,12 @@ export default {
           self.formConfig.ruleValidate
         );
         // 接口
-        const { data: { code, data, message } } = await this.service.financeCenter.getCompensate(formdata); 
+        const { data: { code, data, message } } = await this.service.financeCenter.getCompensate(formdata);
         console.log('formdata:', code, data, message);
         if (code === 0) {
           self.formConfig.formValue.PAYABLE_PRICE = data.payablePrice;
           const itemList = data.acFPayableAdjustmentItemList;
-          const filterItemData = itemList.map(subItem => 
+          const filterItemData = itemList.map(subItem =>
             // let priceActual = parseFloat((subItem.TRUE_PRICE / subItem.ORDER_QTY).toFixed(2));
             // 过滤不需要展示的模糊搜索项
             ({
@@ -1483,6 +1455,13 @@ export default {
     },
     // 填充表单数据
     setPayableAdjustData(mainData, itemData, logData) {
+      console.log('mainData, itemData, logData', mainData, itemData, logData);
+      // 将null转为''
+      for (const x in mainData) {
+        if (!mainData[x]) {
+          mainData[x] = '';
+        }
+      }
       const self = this;
       let payType = mainData.PAY_TYPE;
       const billStatus = mainData.BILL_STATUS;
@@ -1506,14 +1485,14 @@ export default {
         adjustType = adjustType.toString();
         self.formConfig.formValue.ADJUST_TYPE = adjustType;
       }
-      self.formConfig.formValue.CUSTOMER_NAME = mainData.CUSTOMER_NAME;
-      self.formConfig.formValue.CUSTOMER_TEL = mainData.CUSTOMER_TEL;
-      self.formConfig.formValue.ALIPAY_ACCOUNT = mainData.ALIPAY_ACCOUNT;
-      self.formConfig.formValue.CUSTOMER_NICK = mainData.CUSTOMER_NICK;
-      self.formConfig.formValue.LOGISTICS_NO = mainData.LOGISTICS_NO;
-      self.formConfig.formValue.EXPRESS_OUTLETS = mainData.EXPRESS_OUTLETS;
-      self.formConfig.formValue.PAYABLE_PRICE = mainData.PAYABLE_PRICE;
-      self.formConfig.formValue.REMARK = mainData.REMARK;
+      self.formConfig.formValue.CUSTOMER_NAME = mainData.CUSTOMER_NAME ? mainData.CUSTOMER_NAME : '';
+      self.formConfig.formValue.CUSTOMER_TEL = mainData.CUSTOMER_TEL ? mainData.CUSTOMER_TEL : '';
+      self.formConfig.formValue.ALIPAY_ACCOUNT = mainData.ALIPAY_ACCOUNT ? mainData.ALIPAY_ACCOUNT : '';
+      self.formConfig.formValue.CUSTOMER_NICK = mainData.CUSTOMER_NICK ? mainData.CUSTOMER_NICK : '';
+      self.formConfig.formValue.LOGISTICS_NO = mainData.LOGISTICS_NO ? mainData.LOGISTICS_NO : '';
+      self.formConfig.formValue.EXPRESS_OUTLETS = mainData.EXPRESS_OUTLETS ? mainData.EXPRESS_OUTLETS : '';
+      self.formConfig.formValue.PAYABLE_PRICE = mainData.PAYABLE_PRICE ? mainData.PAYABLE_PRICE : '';
+      self.formConfig.formValue.REMARK = mainData.REMARK ? mainData.REMARK : '';
       self.formConfig.formValue.PAY_TIME = this.formatDate(mainData.PAY_TIME);
       self.formConfig.formValue.SOURCE_OUTSOURCE_DATE = this.formatDate(
         mainData.SOURCE_OUTSOURCE_DATE
@@ -1915,7 +1894,7 @@ export default {
       );
       this.calTableTable(this.jordanTableConfig.data);
     },
-    detailAddCancel() {},
+    detailAddCancel() { },
     tableObjs(e, params) {
       const _this = this;
       _this.jordanTableConfig.data.forEach((item, index) => {
