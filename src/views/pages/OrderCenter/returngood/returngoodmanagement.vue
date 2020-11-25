@@ -167,7 +167,7 @@
       </Modal>
     </div>
     <!-- 修改备注 11-->
-    <jordanModal
+    <businessDialog
       :title="changeRemarkConfig.confirmTitle"
       :title-align="changeRemarkConfig.titleAlign"
       :width="changeRemarkConfig.width"
@@ -223,7 +223,7 @@
       />
     </Modal>
     <!-- 矩阵框-->
-    <jordanModal
+    <businessDialog
       :title="matrixBox.confirmTitle"
       :title-align="matrixBox.titleAlign"
       :width="matrixBox.width"

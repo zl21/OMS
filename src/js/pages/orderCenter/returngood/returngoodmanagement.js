@@ -3,7 +3,7 @@ import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessLabel from 'professionalComponents/businessLabel';
 import { setTimeout } from 'timers';
-import jordanModal from 'professionalComponents/businessDialog';
+import businessDialog from 'professionalComponents/businessDialog';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
@@ -25,7 +25,7 @@ export default {
     businessButton,
     businessForm,
     businessActionTable,
-    jordanModal,
+    businessDialog,
     OrderItem,
     businessLabel,
     businessStatusFlag,

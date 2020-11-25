@@ -122,19 +122,19 @@
                   <Col span="6">
                   <FormItem label="排除物流公司：">
                     <Col span="24">
-                    <Select
-                      v-model="info.CP_C_LOGISTICS_ID"
-                      @on-change="setResult('CP_C_LOGISTICS_ID')"
-                      clearable
-                    >
-                      <Option
-                        v-for="(item, index) in CP_C_LOGISTICS_ID_SELECT"
-                        :key="index"
-                        :value="item.value"
-                      >
-                        {{ item.label }}
-                      </Option>
-                    </Select>
+                      <DropDownSelectFilter
+                        :single="false"
+                        :data="CP_C_LOGISTICS_ID_SELECT.datas"
+                        :total-row-count="CP_C_LOGISTICS_ID_SELECT.totalRowCount"
+                        :page-size="CP_C_LOGISTICS_ID_SELECT.pageSize"
+                        :show-colname-key="'show'"
+                        :data-empty-message="'暂无数据'"
+                        :columns="CP_C_LOGISTICS_ID_SELECT.datas.tabth"
+                        @on-page-change="changePage1"
+                        @on-fkrp-selected="logisticSelected"
+                        @on-clear="logisticClear"
+                        @on-input-value-change="logisticInputValueChange"
+                      />
                     </Col>
                   </FormItem>
                   </Col>

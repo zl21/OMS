@@ -98,7 +98,7 @@ export default {
     const fromdata = new FormData();
     fromdata.append('param', JSON.stringify(param));
     // 换货单下载订单
-    const { data: { code, message } } = await self.service.interfacePlatform.refundDownload(fromdata);
+    const { data: { code, message } } = await self.service.interfacePlatform.exchangeDownload(fromdata);
     if (code === 0) {
       self.$Message.success(message);
       self.$emit('closeActionDialog', true);

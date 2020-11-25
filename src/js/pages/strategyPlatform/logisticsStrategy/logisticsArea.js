@@ -103,7 +103,7 @@ export default {
             text: window.vmI18n.t('btn.refresh'), // 按钮文本
             btnclick: () => {
               const _this = this;
-              _this.getTree();
+              _this.getTree('',this._objid);
             }
           },
           {
@@ -186,15 +186,19 @@ export default {
       name2: '',
       single: false,
       tableSize: 0,
-      statusName: ''
+      statusName: '',
+      _objid: -1,
     };
   },
   mounted() {
-    if (this.$route.params.customizedModuleId !== 'New') {
-      this.information.formData[0].itemdata.readonly = true;
-      this.setTableHeight();
-      this.getTree();
+    if (this.$route.params.customizedModuleId == 'New') {
+      this._objid = -1;
+    } else {
+      this._objid = this.$route.params.customizedModuleId;
     }
+    this.information.formData[0].itemdata.readonly = true;
+    this.setTableHeight();
+    this.getTree('',this._objid);
   },
   methods: {
     // 保存
@@ -228,7 +232,7 @@ export default {
           },
           ST_C_EXPRESS_AREA_ITEM: _this.dataArr
         },
-        objid: this.$route.params.customizedModuleId
+        objid: _this._objid,
       };
       formData.append('param', JSON.stringify(param));
       // 保存
@@ -262,7 +266,7 @@ export default {
       const _this = this;
       _this.isSaveLoading = true;
       const formData = new FormData();
-      const param = { objid: this.$route.params.customizedModuleId };
+      const param = { objid: _this._objid };
       formData.append('param', JSON.stringify(param));
       const {
         data: {
@@ -273,7 +277,7 @@ export default {
       _this.isSaveLoading = false;
       if (code === 0) {
         const ess = data.message || _this.vmI18n.t('modalTips.y4'); // 作废成功
-        _this.getTree();
+        _this.getTree('',_this._objid);
         _this.$message.success(ess);
       } else {
         const err = data.message || _this.vmI18n.t('modalTips.y5'); // 作废失败
@@ -287,7 +291,7 @@ export default {
       const {
         data: { code, data }
       } = await this.service.strategyPlatform.getExpressAreaTree({
-        objid: objid || this.$route.params.customizedModuleId
+        objid: objid
       });
       _this.isSaveLoading = false;
       if (code === 0) {
@@ -375,7 +379,7 @@ export default {
       const _this = this;
       _this.listArr = [];
       _this.tableLoading = true;
-      const param = { objid: _this.$route.params.customizedModuleId, treeLikeKey: e };
+      const param = { objid: _this._objid, treeLikeKey: e };
       const {
         data: { code, message, data }
       } = await this.service.strategyPlatform.getExpressAreaItemLikeTable(param);
@@ -442,7 +446,7 @@ export default {
       });
       // 明细
       const params = {
-        objid: this.$route.params.customizedModuleId,
+        objid: this._objid,
         treeNode: treeList
       }; 
       const {
@@ -502,7 +506,7 @@ export default {
         });
       });
       const param = {
-        objid: _this.$route.params.customizedModuleId,
+        objid: _this._objid,
         treeNode: treeList
       };
       // 导出

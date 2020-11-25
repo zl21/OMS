@@ -37,7 +37,6 @@ export default {
   downLoadVipCancelTimeOrder: params => network.post('/p/cs/downLoadVipCancelTimeOrder', params),
   downLoadVipOrderRefund: params => network.post('/p/cs/downLoadVipOrderRefund', params),
   addToFavorite: params => network.post('/p/cs/addToFavorite', params),
-  exchangeDownload: params => network.post('/p/cs/exchangeDownload', params),
   groupTreeload: params => network.post('/p/cs/groupTreeload', params),
   removeFromFavorite: params => network.post('/p/cs/removeFromFavorite', params),
   refundDownload: params => network.post('/p/cs/refundDownload', params),

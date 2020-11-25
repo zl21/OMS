@@ -97,7 +97,27 @@ export default {
       EXCLUDE_SKU_TYPE: 1,
       CREATIONDATE: '',
       MODIFIEDDATE: '',
-      CP_C_LOGISTICS_ID_SELECT: [],
+      CP_C_LOGISTICS_ID_SELECT: {
+        selectDatas: [],
+        datas: {
+          start: 0,
+          tabth: [
+            {
+              colname: 'ID',
+              name: 'ID',
+              show: false
+            },
+            {
+              colname: 'ENAME',
+              name: '物流公司',
+              show: true
+            },
+          ],
+          row: []
+        },
+        totalRowCount: 100,
+        pageSize: 999999,
+      },
       CP_C_LOGISTICS_ID: ','
     };
   },
@@ -109,18 +129,23 @@ export default {
   },
   methods: {
     queryLogisticsCompany() {
-      const self = this;
-      self.service.strategyPlatform.queryLogisticsCompany().then(res => {
-        if (res.data.code === 0) {
-          const arr = [];
-          res.data.data.forEach(item => {
-            const obj = {};
-            obj.value = String(item.ID);
-            obj.label = item.ENAME;
-            arr.push(obj);
-          });
-          this.CP_C_LOGISTICS_ID_SELECT = arr;
-        }
+      // TODO refcolid
+      const query = new FormData();
+      query.append('searchdata', JSON.stringify({
+        refcolid :167630,
+        isdroplistsearch: true,
+        column_include_uicontroller: true,
+        startindex: (this.CP_C_LOGISTICS_ID_SELECT.start - 1) * this.pageSize, // 起始下标
+        range: this.CP_C_LOGISTICS_ID_SELECT.pageSize, // 每页个数
+        fixedcolumns:{},
+        multiple: [],
+      }));
+      this.service.common.QueryList(query).then(res=>{
+        this.$nextTick(()=>{
+          console.log("CP_C_LOGISTICS_ID_SELECT::res", res);
+          this.CP_C_LOGISTICS_ID_SELECT.datas.row = res.data.datas.row;
+          this.CP_C_LOGISTICS_ID_SELECT.totalRowCount = res.data.datas.totalRowCount;
+        });
       });
     },
     selected(value) {
@@ -288,8 +313,29 @@ export default {
       }
     },
     changePage1(value) {
+      console.log('changePage1::val', value);
       this.startindex = (value - 1) * this.pageSize;
       this.QueryList();
+    },
+    logisticSelected(e) {
+      console.log('logisticSelected::e', e);
+      this.CP_C_LOGISTICS_ID_SELECT.selectDatas = e;
+      this.result.CP_C_LOGISTICS_ID = e.map(item=>item.ID).join(',');
+    },
+    logisticClear() {
+      console.log('logisticClear');
+      this.CP_C_LOGISTICS_ID_SELECT.selectDatas = [];
+    },
+    logisticInputValueChange() {
+      console.log('logisticInputValueChange');
+      const formdata = new FormData();
+      const obj = {
+        table: 'ST_C_VIPCOM_ASCRIPTION', startindex: this.datas.start, range: this.pageSize, fixedcolumns: { ENAME: e }, column_include_uicontroller: true, isolr: false
+      };
+      formdata.append('searchdata', JSON.stringify(obj));
+      this.service.common.QueryList(formdata).then(res=>{
+        console.log(res);
+      });
     },
     InputValueChange(value) {
       this.AutoData = [];
