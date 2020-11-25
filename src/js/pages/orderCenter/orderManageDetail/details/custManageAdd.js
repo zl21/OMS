@@ -193,7 +193,7 @@ export default {
       axios({
         url: '/api/cs/oc/oms/v1/markrefund',
         method: 'post',
-        data: { IDS: ids.join(','), ISJITX: 50 }
+        data: { id: this.$route.params.customizedModuleId, itemIds: ids, ISJITX: 50 }
       }).then((res) => {
         if (res.data.code === 0) {
           self.$parent.$parent.load();

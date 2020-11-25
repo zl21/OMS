@@ -301,7 +301,7 @@ export default {
       information: {
         formValue: {
           // 存储表单得所有值
-          PRO_RETURN_STATUS: '', // 退单状态
+          PRO_RETURN_STATUS: '', // 退状货态
           ORIG_ORDER_ID: '', // 原始订单编号
           BILL_TYPE: '', // 单据类型
           BUYER_NICK: '', // 买家昵称
@@ -325,13 +325,6 @@ export default {
           BILL_TYPE: [{ required: true, message: ' ', trigger: 'blur' }]
         },
         formData: [
-          {
-            style: 'input',
-            label: window.vmI18n.t('form_label.proReturnStatus'), // 退货状态,
-            disabled: true,
-            value: 'PRO_RETURN_STATUS',
-            width: '6'
-          },
           {
             style: '',
             label: window.vmI18n.t('form_label.chargebackNumber'), // 退单编号
@@ -658,7 +651,14 @@ export default {
             value: 'SELLER_MEMO',
             disabled: true, // 按钮禁用控制
             width: '12'
-          }
+          },
+          {
+            style: 'input',
+            label: window.vmI18n.t('form_label.proReturnStatus'), // 退货状态,
+            disabled: true,
+            value: 'PRO_RETURN_STATUS',
+            width: '6'
+          },
         ]
       }, // 基本信息
       returnDetailAddTable: {
@@ -805,7 +805,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.vmI18n.t('common.consigneeInformation'), // 收货人
+            label: window.vmI18n.t('form_label.consignee'), // 收货人
             dataAcessKey: 'RECEIVE_NAME',
             value: 'RECEIVE_NAME',
             disabled: false, // 按钮禁用控制
@@ -3792,7 +3792,7 @@ export default {
         if (selection.refundStatus !== 6) {
           const queryListItem = {};
           queryListItem.ID = -1;
-          queryListItem.RESERVE_BIGINT10 = selection.proId;
+          queryListItem.OC_B_ORDER_ITEM_ID = selection.proId;
           queryListItem.skuId = selection.skuId;
           queryListItem.PS_C_PRO_ID = selection.psCproId; // 商品id
           queryListItem.PS_C_SKU_ECODE = selection.skuEcode;
