@@ -2,7 +2,7 @@
 <template>
   <div class="jq-combined-commodity">
     <div
-      v-if="objid === '-1'"
+      v-if="objid == '-1'"
       class="jq-combined-commodity-new"
     >
       <div class="btn-operate">

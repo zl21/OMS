@@ -1,5 +1,5 @@
 <template>
-  <div class="courierPay">
+  <div class="courierPay public-main">
     <div
       v-if="identifying === 3"
       class="img"
@@ -12,36 +12,38 @@
     <div class="buttons">
       <business-button :btn-config="btnConfig" />
     </div>
-    <Collapse v-model="value1">
-      <Panel name="1">
-        <!-- 基本信息 -->
-        {{ vmI18n.t("common.baseInformation") }}
-        <p slot="content">
-          <business-form :form-config="formConfig" />
-        </p>
-      </Panel>
-      <Panel name="2">
-        <!-- 日志 -->
-        {{ vmI18n.t("common.journal") }}
-        <p slot="content">
-          <business-form :form-config="formConfig1" />
-        </p>
-      </Panel>
-      <Panel name="3">
-        <!-- 明细信息 -->
-        {{ vmI18n.t("common.detailed_info") }}
-        <p slot="content">
-          <business-action-table
-            :jordan-table-config="jordanTableConfig"
-            @on-select="onSelect"
-            @on-select-all="onSelect"
-            @on-select-all-cancel="onSelectAllCancel"
-            @on-select-cancel="onSelect"
-            @table-delete-detail="tableDeleteDetail"
-          />
-        </p>
-      </Panel>
-    </Collapse>
+    <div class="public-content">
+      <Collapse v-model="value1">
+        <Panel name="1">
+          <!-- 基本信息 -->
+          {{ vmI18n.t("common.baseInformation") }}
+          <p slot="content">
+            <business-form :form-config="formConfig" />
+          </p>
+        </Panel>
+        <Panel name="2">
+          <!-- 日志 -->
+          {{ vmI18n.t("common.journal") }}
+          <p slot="content">
+            <business-form :form-config="formConfig1" />
+          </p>
+        </Panel>
+        <Panel name="3">
+          <!-- 明细信息 -->
+          {{ vmI18n.t("common.detailed_info") }}
+          <p slot="content">
+            <business-action-table
+              :jordan-table-config="jordanTableConfig"
+              @on-select="onSelect"
+              @on-select-all="onSelect"
+              @on-select-all-cancel="onSelectAllCancel"
+              @on-select-cancel="onSelect"
+              @table-delete-detail="tableDeleteDetail"
+            />
+          </p>
+        </Panel>
+      </Collapse>
+    </div>
   </div>
 </template>
 <script>

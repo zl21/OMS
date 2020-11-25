@@ -9,7 +9,18 @@ body {
   #ContentDisplayArea {
     margin: 0 !important;
   }
-
+  // 标准页面 按钮固定
+  .public-main{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .public-content{
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+  }
   ::-webkit-scrollbar {
     width: 0;
   }
@@ -1039,7 +1050,7 @@ body {
 .ark-collapse-content>.ark-collapse-content-box {
   padding-top: 0px !important;
 }
-
+.jq-combined-commodity,
 .horizontalTableDetail,
 .auto-check,
 .returnAddColl,

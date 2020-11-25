@@ -1,170 +1,172 @@
 <template>
-  <div class="setWarehouseLogistics">
-    <div class="tableTop">
-      <businessButton :btn-config="btnConfig" />
-      <Collapse v-model="openDefault">
-        <Panel name="1">
-          <!-- 基本信息 -->
-          {{ vmI18n.t("common.baseInformation") }}
-          <p slot="content">
-            <businessForm :form-config="information" />
-          </p>
-        </Panel>
-      </Collapse>
-    </div>
-    <div
-      v-if="this.$route.params.customizedModuleId !== 'New'"
-      class="tableContent"
-    >
-      <!-- tab切换 -->
-      <businessLabel
-        class="jordanLabel"
-        :label-list="labelList"
-        :label-default-value="labelDefaultValue"
-      />
-      <div class="tableBox">
-        <div class="tableLeft">
-          <div class="retrieveBox">
-            <!-- <span class="retrieveTitle">检索</span> -->
-            <span class="retrieveTitle">{{ vmI18n.t('common.searching') }}</span>
-            <Input
-              v-model="name"
-              class="retrieve"
-              :expand="false"
-              @on-enter="enter(name)"
-            />
-            <Icon
-              slot="suffix"
-              type="ios-search"
-              @click="enter(name)"
-            />
-            </Input>
-          </div>
-          <Checkbox
-            v-model="single"
-            style="margin: 0 0 7px 32px;"
-            @on-change="checkAll(single)"
-          >
-            <!-- 全选 -->
-            {{ vmI18n.t('common.selectAll') }}
-          </Checkbox>
-          <div class="treeBox">
-            <Tree
-              id="tree"
-              :data="treeData"
-              :disabled="true"
-              :query="query"
-              show-checkbox
-            />
-          </div>
-        </div>
-        <div class="tableSynchronous">
-          <Button
-            class="btn1"
-            size="small"
-            @click="synchronous"
-          >
-            <!-- 市 -->
-            {{ vmI18n.t('common.city') }}->
-          </Button>
-          <Button
-            class="btn2"
-            size="small"
-            @click="provinceSynchronous"
-          >
-            <!-- 省 -->
-            {{ vmI18n.t('common.province') }}->
-          </Button>
-        </div>
-        <!-- table -->
-        <div class="tableRight">
-          <div class="all-table">
-            <div
-              id="conTop"
-              class="conTop"
+  <div class="setWarehouseLogistics public-main">
+    <businessButton :btn-config="btnConfig" />
+    <div class="public-content">
+      <div class="tableTop">
+        <Collapse v-model="openDefault">
+          <Panel name="1">
+            <!-- 基本信息 -->
+            {{ vmI18n.t("common.baseInformation") }}
+            <p slot="content">
+              <businessForm :form-config="information" />
+            </p>
+          </Panel>
+        </Collapse>
+      </div>
+      <div
+        v-if="this.$route.params.customizedModuleId !== 'New'"
+        class="tableContent"
+      >
+        <!-- tab切换 -->
+        <businessLabel
+          class="jordanLabel"
+          :label-list="labelList"
+          :label-default-value="labelDefaultValue"
+        />
+        <div class="tableBox">
+          <div class="tableLeft">
+            <div class="retrieveBox">
+              <!-- <span class="retrieveTitle">检索</span> -->
+              <span class="retrieveTitle">{{ vmI18n.t('common.searching') }}</span>
+              <Input
+                v-model="name"
+                class="retrieve"
+                :expand="false"
+                @on-enter="enter(name)"
+              />
+              <Icon
+                slot="suffix"
+                type="ios-search"
+                @click="enter(name)"
+              />
+              </Input>
+            </div>
+            <Checkbox
+              v-model="single"
+              style="margin: 0 0 7px 32px;"
+              @on-change="checkAll(single)"
             >
-              <div id="contenter">
-                <table id="fixedDiv">
-                  <thead>
-                    <tr>
-                      <th style="min-width: 50px !important;">
-                        <!-- 序号 -->
-                        {{ vmI18n.t('table_label.serialNo') }}
-                      </th>
-                      <!-- <th>省</th> -->
-                      <th>{{ vmI18n.t('common.province') }}</th>
-                      <th v-if="cityThead">
-                        <!-- 市 -->
-                        {{ vmI18n.t('common.city') }}
-                      </th>
-                      <th
-                        v-for="(item, index) in theadArr"
-                        :key="index"
-                      >
-                        {{ item.name }}
-                      </th>
-                    </tr>
-                  </thead>
-                </table>
-              </div>
-              <div
-                id="mainDiv"
-                class="list-table"
-                @scroll="paperScroll($event)"
-              >
-                <table>
-                  <thead style="display:none;">
-                    <tr>
-                      <th style="min-width: 50px !important;">
-                        {{ vmI18n.t('table_label.serialNo') }}
-                      </th>
-                      <th>{{ vmI18n.t('common.province') }}</th>
-                      <th v-if="cityThead">
-                        {{ vmI18n.t('common.city') }}
-                      </th>
-                      <th
-                        v-for="(item, index) in theadArr"
-                        :key="index"
-                      >
-                        {{ item.name }}
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-content">
-                    <tr
-                      v-for="(data, index) of listArr"
-                      :key="index"
-                    >
-                      <td style="min-width: 50px !important;">
-                        {{ index+1 }}
-                      </td>
-                      <td>{{ data.CP_C_REGION_PROVINCE_ENAME }}</td>
-                      <td v-if="cityThead">
-                        {{ data.CP_C_REGION_CITY_ENAME }}
-                      </td>
-                      <td
-                        v-for="(item, j) of data.LOGISTICS_RANK"
-                        :key="j"
-                        class="tdColor"
-                      >
-                        <Input
-                          v-model="item.rank"
-                          :placeholder="item.provDiffRank ? item.provDiffRank : ''"
-                          :regx="/^[1-9]\d*$/"
-                          @on-blur="inputBlur(data.LOGISTICS_RANK, item, j)"
-                        />
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <!-- 全选 -->
+              {{ vmI18n.t('common.selectAll') }}
+            </Checkbox>
+            <div class="treeBox">
+              <Tree
+                id="tree"
+                :data="treeData"
+                :disabled="true"
+                :query="query"
+                show-checkbox
+              />
             </div>
           </div>
-          <div
-            v-show="tableLoading"
-            class="fromLoading"
-          >
-            <Spin />
+          <div class="tableSynchronous">
+            <Button
+              class="btn1"
+              size="small"
+              @click="synchronous"
+            >
+              <!-- 市 -->
+              {{ vmI18n.t('common.city') }}->
+            </Button>
+            <Button
+              class="btn2"
+              size="small"
+              @click="provinceSynchronous"
+            >
+              <!-- 省 -->
+              {{ vmI18n.t('common.province') }}->
+            </Button>
+          </div>
+          <!-- table -->
+          <div class="tableRight">
+            <div class="all-table">
+              <div
+                id="conTop"
+                class="conTop"
+              >
+                <div id="contenter">
+                  <table id="fixedDiv">
+                    <thead>
+                      <tr>
+                        <th style="min-width: 50px !important;">
+                          <!-- 序号 -->
+                          {{ vmI18n.t('table_label.serialNo') }}
+                        </th>
+                        <!-- <th>省</th> -->
+                        <th>{{ vmI18n.t('common.province') }}</th>
+                        <th v-if="cityThead">
+                          <!-- 市 -->
+                          {{ vmI18n.t('common.city') }}
+                        </th>
+                        <th
+                          v-for="(item, index) in theadArr"
+                          :key="index"
+                        >
+                          {{ item.name }}
+                        </th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <div
+                  id="mainDiv"
+                  class="list-table"
+                  @scroll="paperScroll($event)"
+                >
+                  <table>
+                    <thead style="display:none;">
+                      <tr>
+                        <th style="min-width: 50px !important;">
+                          {{ vmI18n.t('table_label.serialNo') }}
+                        </th>
+                        <th>{{ vmI18n.t('common.province') }}</th>
+                        <th v-if="cityThead">
+                          {{ vmI18n.t('common.city') }}
+                        </th>
+                        <th
+                          v-for="(item, index) in theadArr"
+                          :key="index"
+                        >
+                          {{ item.name }}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-content">
+                      <tr
+                        v-for="(data, index) of listArr"
+                        :key="index"
+                      >
+                        <td style="min-width: 50px !important;">
+                          {{ index+1 }}
+                        </td>
+                        <td>{{ data.CP_C_REGION_PROVINCE_ENAME }}</td>
+                        <td v-if="cityThead">
+                          {{ data.CP_C_REGION_CITY_ENAME }}
+                        </td>
+                        <td
+                          v-for="(item, j) of data.LOGISTICS_RANK"
+                          :key="j"
+                          class="tdColor"
+                        >
+                          <Input
+                            v-model="item.rank"
+                            :placeholder="item.provDiffRank ? item.provDiffRank : ''"
+                            :regx="/^[1-9]\d*$/"
+                            @on-blur="inputBlur(data.LOGISTICS_RANK, item, j)"
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div
+              v-show="tableLoading"
+              class="fromLoading"
+            >
+              <Spin />
+            </div>
           </div>
         </div>
       </div>

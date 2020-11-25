@@ -6,7 +6,7 @@ feature : 订单中心-零售发货单详情
 <template>
   <div
     v-loading=""
-    class="order"
+    class="order public-main"
   >
    <!-- 弹框 -->
    <loading :loading="pageLoad"></loading>
@@ -16,7 +16,8 @@ feature : 订单中心-零售发货单详情
         @dropDownClick="dropDownClickChange"
       />
     </div>
-    <div class="order-header">
+    <div class="public-content">
+      <div class="order-header">
       <businessLabel
         :label-default-value="labelDefaultValue"
         :label-list="labelList"
@@ -42,6 +43,7 @@ feature : 订单中心-零售发货单详情
       :status-name="statusName"
       class="statusFlag"
     />
+    </div>
     <!--错误弹框-->
     <Modal
       v-model="modal"
