@@ -177,6 +177,12 @@ export default {
       if (this.componentData.tableName === 'OC_B_ORDER') {
         // 零售发货单
         this.getImportDialog('/api/cs/oc/oms/v1/importOcBOrder');
+      } else if (this.componentData.tableName === 'PS_C_SKU' || this.componentData.tableName === 'SG_B_CHANNEL_PRODUCT' || this.componentData.tableName === 'PS_C_PRO' || this.componentData.tableName === 'IP_C_TAOBAO_PRODUCT') {
+        if (this.componentData.mode == 'batch') {
+          this.getImportDialog('/p/cs/pm/v1/parseActiExcelCmd');
+        } else {
+          this.getImportDialog('/p/cs/pm/v1/parseExcel');
+        }
       } else if (this.componentData.tableName === 'OC_B_RETURN_ORDER') {
         // 退换货订单
         this.getImportDialog('/api/cs/oc/oms/v1/importReturnOrder');
