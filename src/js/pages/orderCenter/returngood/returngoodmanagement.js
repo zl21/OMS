@@ -964,7 +964,7 @@ export default {
         pageSize: 15 // 每页条数
       }, // 退货明细
       jordanTableConfig2: {
-        jordanFormConfig: {}, // 表单配置
+        businessFormConfig: {}, // 表单配置
         columns: [],
         data: [], // 数据配置
         pageShow: false, // 控制分页是否显示
@@ -3304,7 +3304,7 @@ export default {
       this.service.common.skuQuery(param).then(res => {
         if (res.data.code === 0) {
           if (index) {
-            self.jordanTableConfig2.jordanFormConfig.formData[1].AuotData = res.data.data.data.map(row => ({
+            self.jordanTableConfig2.businessFormConfig.formData[1].AuotData = res.data.data.data.map(row => ({
               ECODE: row.ECODE,
               PS_C_PRO_ENAME: row.PS_C_PRO_ENAME,
               SPEC: row.SPEC
@@ -3328,7 +3328,7 @@ export default {
         if (res.data.code === 0) {
           let dataList = [];
           if (index === 2) {
-            self.jordanTableConfig2.jordanFormConfig.formValue.sku = '';
+            self.jordanTableConfig2.businessFormConfig.formValue.sku = '';
             dataList = self.jordanTableConfig2.data;
           }
           const lists = res.data.data.data || [];
@@ -3914,7 +3914,7 @@ export default {
         _this.exchangeDtoList.data = _this.jordanTableConfig2.data;
         _this.exchangeAmount = _this.calculateMoney(_this.jordanTableConfig2.data, 1).toFixed(2);
         _this.returnTotal();
-        _this.jordanTableConfig2.jordanFormConfig.formValue.gbCode = '';
+        _this.jordanTableConfig2.businessFormConfig.formValue.gbCode = '';
       }
       _this.$children.find(item => item.name === 'matrixBox').closeConfirm();
     },
