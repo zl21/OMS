@@ -123,7 +123,7 @@ export default {
             text: '新增',
             btnclick: () => {
               const _this = this;
-              _this.$store.commit('TabHref', {
+              _this.$store.commit('customize/TabHref', {
                 id: -1, // 单据id
                 type: 'action', // 类型action
                 name: 'sendSingleRule', // 文件名
@@ -198,7 +198,7 @@ export default {
         ]
       },
       jordanTableConfig: {
-        jordanFormConfig: {
+        businessFormConfig: {
           formValue: {
             SEND_RATE: '',
             RANK: ''
@@ -405,7 +405,7 @@ export default {
         _this.$Message.info('请先保存主表信息');
         return;
       }
-      if (!_this.jordanTableConfig.jordanFormConfig.formData[0].itemdata.pid) {
+      if (!_this.jordanTableConfig.businessFormConfig.formData[0].itemdata.pid) {
         _this.$Message.error('仓库必填');
         return;
       }
@@ -421,9 +421,9 @@ export default {
           ST_C_SEND_RULE_ADDRESS_RENT: [],
           ST_C_SEND_RULE_WAREHOUSE_RATE: [
             {
-              CP_C_PHY_WAREHOUSE_ID: _this.jordanTableConfig.jordanFormConfig.formData[0].itemdata.pid,
-              RANK: _this.jordanTableConfig.jordanFormConfig.formValue.RANK,
-              SEND_RATE: _this.jordanTableConfig.jordanFormConfig.formValue.SEND_RATE,
+              CP_C_PHY_WAREHOUSE_ID: _this.jordanTableConfig.businessFormConfig.formData[0].itemdata.pid,
+              RANK: _this.jordanTableConfig.businessFormConfig.formValue.RANK,
+              SEND_RATE: _this.jordanTableConfig.businessFormConfig.formValue.SEND_RATE,
               ID: -1
             }
           ],
@@ -443,10 +443,10 @@ export default {
           if (res.data.data.code === 0) {
             _this.$Message.success('新增成功');
             _this.getWarehouseRateResult();
-            _this.jordanTableConfig.jordanFormConfig.formData[0].itemdata.pid = '';
-            _this.jordanTableConfig.jordanFormConfig.formData[0].itemdata.valuedata = '';
-            _this.jordanTableConfig.jordanFormConfig.formValue.RANK = '';
-            _this.jordanTableConfig.jordanFormConfig.formValue.SEND_RATE = '';
+            _this.jordanTableConfig.businessFormConfig.formData[0].itemdata.pid = '';
+            _this.jordanTableConfig.businessFormConfig.formData[0].itemdata.valuedata = '';
+            _this.jordanTableConfig.businessFormConfig.formValue.RANK = '';
+            _this.jordanTableConfig.businessFormConfig.formValue.SEND_RATE = '';
           } else {
             _this.$Message.error(res.data.data.message || '新增失败');
           }
@@ -474,7 +474,7 @@ export default {
               _this.jordanTableConfig.isShowImportBtn = false;
               _this.jordanTableConfig.isShowExportBtn = false;
               _this.jordanTableConfig.isShowDeleteDetailBtn = false;
-              _this.jordanTableConfig.jordanFormConfig = {};
+              _this.jordanTableConfig.businessFormConfig = {};
               _this.btnConfig.buttons.forEach(item => {
                 if (item.text === '修改仓库') item.disabled = true;
                 else if (item.text === '作废') item.disabled = true;
