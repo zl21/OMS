@@ -3810,7 +3810,7 @@ export default {
           queryListItem.QTY_EXCHANGE = selection.qty;
           queryListItem.SEX_NAME = selection.sexName;
           queryListItem.SEX = selection.sex;
-          queryListItem.PRICE = selection.PRICE_SETTLE;
+          queryListItem.PRICE = selection.price;
           queryListItem.SKU_SPEC = selection.skuSpec; // 原单带出的规格
           queryListItem.AMT_REFUND = publicMethodsUtil.accMul(selection.qty, selection.amtRefundSingle).toFixed(2); // 退货金额realAmt
           // queryList[i].AMT_REFUND = queryList[i].realAmt ? publicMethodsUtil.accMul(queryList[i].amtRefundSingle, queryList[i].qty) : publicMethodsUtil.accMul(queryList[i].price, queryList[i].qty); // 退货金额
