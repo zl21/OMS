@@ -66,22 +66,22 @@ export default {
           },
           PAY_TIME: params =>
             // 付款时间
-            params.data.PAY_TIME ? this.standardTimeConversiondateToStr(params.data.PAY_TIME) : '',
+            (params.data.PAY_TIME ? this.standardTimeConversiondateToStr(params.data.PAY_TIME) : ''),
           AUDIT_TIME: params =>
             // 审核时间
-            params.data.AUDIT_TIME ? this.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : '',
+            (params.data.AUDIT_TIME ? this.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''),
           DISTRIBUTION_TIME: params =>
             // 配货时间
-            params.data.AUDIT_TIME ? this.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : '',
+            (params.data.AUDIT_TIME ? this.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''),
           CREATIONDATE: params =>
             // 创建时间
-            params.data.CREATIONDATE ? this.standardTimeConversiondateToStr(params.data.CREATIONDATE) : '',
+            (params.data.CREATIONDATE ? this.standardTimeConversiondateToStr(params.data.CREATIONDATE) : ''),
           HOLD_RELEASE_TIME: params =>
             // HOLD单释放时间
-            params.data.HOLD_RELEASE_TIME ? this.standardTimeConversiondateToStr(params.data.HOLD_RELEASE_TIME) : '',
+            (params.data.HOLD_RELEASE_TIME ? this.standardTimeConversiondateToStr(params.data.HOLD_RELEASE_TIME) : ''),
           SCAN_TIME: params =>
             // 出库时间
-            params.data.SCAN_TIME ? this.standardTimeConversiondateToStr(params.data.SCAN_TIME) : '',
+            (params.data.SCAN_TIME ? this.standardTimeConversiondateToStr(params.data.SCAN_TIME) : ''),
           ORDER_FLAG: params => {}
         },
         pagenation: {
@@ -286,8 +286,7 @@ export default {
                     }
                   },
                   [
-                    params.row.ORDERTAGLIST.forEach(item =>
-                      h(
+                    params.row.ORDERTAGLIST.forEach(item => h(
                         'Poptip',
                         {
                           props: {
@@ -321,8 +320,7 @@ export default {
                             item.message
                           )
                         ]
-                      )
-                    )
+                      ))
                   ]
                 );
               }
@@ -383,8 +381,7 @@ export default {
           {
             title: window.vmI18n.t('table_label.shippingAddress'), // 收货地址
             key: 'REGION_RECEIVER_ADDRESS',
-            render: (h, params) =>
-              h('span', [
+            render: (h, params) => h('span', [
                 h(
                   'Poptip',
                   {
@@ -727,8 +724,7 @@ export default {
           {
             title: window.vmI18n.t('other.systemNotes'), // 系统备注
             key: 'SYSREMARK',
-            render: (h, params) =>
-              h('span', [
+            render: (h, params) => h('span', [
                 h(
                   'Poptip',
                   {
@@ -827,8 +823,7 @@ export default {
             key: 'JOIN_RECEIVER_ADDRESS',
             align: 'center',
             ellipsis: true,
-            render: (h, params) =>
-              h('div', [
+            render: (h, params) => h('div', [
                 h(
                   'span',
                   {
@@ -3163,6 +3158,17 @@ export default {
 
     // 高级搜索
     search() {},
+    // DropDownSelectFilter禁止用户输入
+    onDropChange(value) {
+      console.log('onDropChange::', value);
+      if (value.type === 'DropDownSelectFilter') {
+        this.$nextTick(()=>{
+          const input = document.querySelector('.ark-integrate-search-filter-container').querySelector('input');
+          input.setAttribute('disabled', true);
+          input.classList.add('forceWhite');
+        });
+      }
+    },
     // 清除某个检索项值
     clearItem() {
       this.searchMethod();
