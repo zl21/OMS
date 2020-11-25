@@ -2685,7 +2685,7 @@ export default {
           this.jordanTableConfig2.columns = this.setTablePermissions(this.jordanTableConfig2.columns, res);
         });
         if (_this.$route.query.id === '-1') {
-          _this.jordanTableConfig2.jordanFormConfig = {
+          _this.jordanTableConfig2.businessFormConfig = {
             formValue: {
               sku: '',
               number: '1',
@@ -2702,7 +2702,7 @@ export default {
                 dimChange: val => {
                   // 模糊查询的方法
                   const _this = this;
-                  _this.jordanTableConfig2.jordanFormConfig.formValue.gbCode = val.trim();
+                  _this.jordanTableConfig2.businessFormConfig.formValue.gbCode = val.trim();
                   const fromdata = new FormData();
                   const params = {
                     GLOBAL: val.trim(),
@@ -2714,7 +2714,7 @@ export default {
                   fromdata.append('param', JSON.stringify(params));
                   _this.service.orderCenter.screenresult(fromdata).then(res => {
                     if (res.data.code === 0) {
-                      const dimList = _this.jordanTableConfig2.jordanFormConfig.formData;
+                      const dimList = _this.jordanTableConfig2.businessFormConfig.formData;
 
                       dimList.forEach(item => {
                         // 商品编码
@@ -2768,16 +2768,16 @@ export default {
                 columns: ['ECODE'],
                 AuotData: [], // 匹配的选项
                 dimChange: search => {
-                  _this.jordanTableConfig2.jordanFormConfig.formValue.sku = _this.jordanTableConfig2.jordanFormConfig.formValue.sku.replace(/(^\s*)|(\s*$)/g, '');
+                  _this.jordanTableConfig2.businessFormConfig.formValue.sku = _this.jordanTableConfig2.businessFormConfig.formValue.sku.replace(/(^\s*)|(\s*$)/g, '');
                   // 模糊查询的方法
                   _this.getData(search, 2);
                 },
-                dimEnter: val => {
-                  _this.jordanTableConfig2.jordanFormConfig.formValue.sku = _this.jordanTableConfig2.jordanFormConfig.formValue.sku.replace(/(^\s*)|(\s*$)/g, '');
-                  _this.entry(_this.jordanTableConfig2.jordanFormConfig.formValue.sku, 2);
+                dimEnter: () => {
+                  _this.jordanTableConfig2.businessFormConfig.formValue.sku = _this.jordanTableConfig2.businessFormConfig.formValue.sku.replace(/(^\s*)|(\s*$)/g, '');
+                  _this.entry(_this.jordanTableConfig2.businessFormConfig.formValue.sku, 2);
                 },
                 dimSelect: obj => {
-                  _this.jordanTableConfig2.jordanFormConfig.formValue.sku = obj.label;
+                  _this.jordanTableConfig2.businessFormConfig.formValue.sku = obj.label;
                   // document.getElementById("Enumber").focus();
                 }
               }
@@ -2787,12 +2787,13 @@ export default {
           _this.jordanTableConfig2.isShowImportBtn = true;
           _this.jordanTableConfig2.isShowExportBtn = true;
         } else {
-          _this.jordanTableConfig2.jordanFormConfig = {};
+          _this.jordanTableConfig2.businessFormConfig = {};
           _this.jordanTableConfig2.isShowDeleteDetailBtn = false;
           _this.jordanTableConfig2.isShowImportBtn = false;
           _this.jordanTableConfig2.isShowExportBtn = false;
         }
         // _this.returnSelectData = [];
+        console.log(_this.jordanTableConfig2);
       } else if (index === 2) {
         _this.labelDefaultValue = 3;
         _this.tab2 = {
