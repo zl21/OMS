@@ -1,11 +1,15 @@
 body {
   margin: 0;
-  .history-and-favorite{
+
+  // 森马要求 不要空隙
+  .history-and-favorite {
     padding: 0 !important;
   }
-  #ContentDisplayArea{
+
+  #ContentDisplayArea {
     margin: 0 !important;
   }
+
   ::-webkit-scrollbar {
     width: 0;
   }
@@ -742,19 +746,44 @@ body {
   transition: left 0.5s ease;
 }
 
-// 导航条的logo
-.navigator .left #navBrandImg img {
-  &.banner {
-    width: auto;
-    left: 30px;
-  }
+// 导航条的logo 展开
 
-  // &.logo {
+.banner + ::after{
+  background: #f00;
+}
+.navigator .left{
+  position: relative;
+  // #navBrandImg:after{
   //   position: absolute;
-  //   width: 30px;
-  //   top: 18px;
-  //   left: 18px;
-  // }
+  //   left:0;
+  //   top: 0;
+  //   display: block;
+  //   content: '';
+  //   height: 50px;
+  //   width: 50px;
+  //   background:url(../../image/stretch.jpg) no-repeat center;
+  //   background-size: 100% 100%;
+  //   transition:border 2s;
+  //   -moz-transition:border 2s; /* Firefox 4 */
+  //   -webkit-transition:border 2s; /* Safari and Chrome */
+  //   -o-transition:border 2s; /* Opera */
+  //  }
+  img {
+    &.trigger{
+      // position: absolute;
+      // left: 0;
+      // width: 50px;
+      // z-index: 10;
+      // opacity: 0;
+    }
+    &.banner {
+      left: 30px;
+      width: auto;
+    }
+    &.logo{
+      // display: none;
+    }
+  }
 }
 
 // modal 右上角小x图标的样式修改
@@ -1010,6 +1039,7 @@ body {
 .ark-collapse-content>.ark-collapse-content-box {
   padding-top: 0px !important;
 }
+
 .horizontalTableDetail,
 .auto-check,
 .returnAddColl,
@@ -1221,7 +1251,8 @@ body .ark-spin-fix {
     left: 6px;
   }
 }
-.ztree li ul.line{
+
+.ztree li ul.line {
   display: none;
 }
 
@@ -1246,11 +1277,30 @@ body .ark-spin-fix {
   color: #8a8a8a;
   right: 10px;
 }
+
 // 批量导入弹框 - - 多选
-.dislogtree .node ul li{
+.dislogtree .node ul li {
   text-align: left;
 }
+
 // 组织中心 - - tab
-.horizontalTableDetail .ark-tabs-panels-ink-bar{
+.horizontalTableDetail .ark-tabs-panels-ink-bar {
   background-color: #0068b7;
+}
+
+// form input左右边距
+.returngood,
+.jq-combined-commodity,
+.returnTreasurys,
+.logisticsArea,
+.setWarehouseLogistics {
+
+  .orderManageEdit {
+    .businessForm_a .popInput .item-input .table-input {
+      padding: 0 10px;
+    }
+    .ark-form-item.popInput .item-input .add-input .el-input__inner {
+      padding: 0 !important;
+    }
+  }
 }

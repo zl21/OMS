@@ -756,6 +756,9 @@ export default {
       _this.agTableConfig.rowData = [];
       _this.agTableConfig.pagenation.total = 0;
       _this.agTableConfig.agLoading = true;
+      // 当出现loading，禁止页面滚动
+      document.getElementById('content').style.overflow = 'hidden';
+      document.getElementById('content').style.position = '';
       const param = {
         start: _this.agTableConfig.pagenation.current,
         count: _this.agTableConfig.pagenation.pageSize,
@@ -792,11 +795,20 @@ export default {
       } else if (Obj.STATUS_DEFECTIVE_TRANS && Obj.STATUS_DEFECTIVE_TRANS[0] === 'bSelect-all') {
         Obj.STATUS_DEFECTIVE_TRANS = '';
       }
+      const arr = document.getElementsByClassName('ark-input');
+      
+      // 防止多次连续多次点击回车，去除焦点
+      for (let i = 0; i < arr.length; i++) {
+        arr[i].blur();
+      }
       this.service.orderCenter
         .querySalesReturn(Object.assign(param, _this.formConfig.formValue))
         .then(res => {
+          // 当loading结束，页面滚动
+          _this.agTableConfig.agLoading = false;
+          document.getElementById('content').style.overflow = 'auto';
+          document.getElementById('content').style.position = 'relative';
           if (res.data.code == 0 && res.data.data.queryResult.length) {
-            _this.agTableConfig.agLoading = false;
             _this.agTableConfig.rowData = res.data.data.queryResult;
             _this.agTableConfig.pagenation.total = res.data.data.totalNum;
             for (let i = 0; i < _this.agTableConfig.rowData.length; i++) {

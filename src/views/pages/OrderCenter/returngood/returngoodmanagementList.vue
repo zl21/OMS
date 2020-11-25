@@ -9,12 +9,6 @@
     <div class="returnForm">
       <!-- form表单 -->
       <businessForm :form-config="formConfig" />
-      <div
-        v-show="isShowFromLoading"
-        class="fromLoading"
-      >
-        <Spin />
-      </div>
     </div>
     <div class="salesTable">
       <!-- tab切换 -->

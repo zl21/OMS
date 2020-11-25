@@ -504,7 +504,7 @@ export default {
                 _this.information.formData[11].style = 'select';
                 _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = 1;
                 setTimeout(() => {
-                  document.getElementsByClassName('burgeon-select-selected-value')[1].className = 'burgeon-select-selected-value inputBgcolor';
+                  document.getElementsByClassName('ark-select-selected-value')[1].className = 'ark-select-selected-value inputBgcolor';
                 }, 10);
               } else {
                 _this.information.formData[11].style = '';
@@ -805,7 +805,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.vmI18n.t('common.consigneeInformation'), // 收货人
+            label: window.vmI18n.t('form_label.consignee'), // 收货人
             dataAcessKey: 'RECEIVE_NAME',
             value: 'RECEIVE_NAME',
             disabled: false, // 按钮禁用控制
@@ -964,7 +964,7 @@ export default {
         pageSize: 15 // 每页条数
       }, // 退货明细
       jordanTableConfig2: {
-        jordanFormConfig: {}, // 表单配置
+        businessFormConfig: {}, // 表单配置
         columns: [],
         data: [], // 数据配置
         pageShow: false, // 控制分页是否显示
@@ -2685,7 +2685,7 @@ export default {
           this.jordanTableConfig2.columns = this.setTablePermissions(this.jordanTableConfig2.columns, res);
         });
         if (_this.$route.query.id === '-1') {
-          _this.jordanTableConfig2.jordanFormConfig = {
+          _this.jordanTableConfig2.businessFormConfig = {
             formValue: {
               sku: '',
               number: '1',
@@ -2702,7 +2702,7 @@ export default {
                 dimChange: val => {
                   // 模糊查询的方法
                   const _this = this;
-                  _this.jordanTableConfig2.jordanFormConfig.formValue.gbCode = val.trim();
+                  _this.jordanTableConfig2.businessFormConfig.formValue.gbCode = val.trim();
                   const fromdata = new FormData();
                   const params = {
                     GLOBAL: val.trim(),
@@ -2714,7 +2714,7 @@ export default {
                   fromdata.append('param', JSON.stringify(params));
                   _this.service.orderCenter.screenresult(fromdata).then(res => {
                     if (res.data.code === 0) {
-                      const dimList = _this.jordanTableConfig2.jordanFormConfig.formData;
+                      const dimList = _this.jordanTableConfig2.businessFormConfig.formData;
 
                       dimList.forEach(item => {
                         // 商品编码
@@ -2768,16 +2768,16 @@ export default {
                 columns: ['ECODE'],
                 AuotData: [], // 匹配的选项
                 dimChange: search => {
-                  _this.jordanTableConfig2.jordanFormConfig.formValue.sku = _this.jordanTableConfig2.jordanFormConfig.formValue.sku.replace(/(^\s*)|(\s*$)/g, '');
+                  _this.jordanTableConfig2.businessFormConfig.formValue.sku = _this.jordanTableConfig2.businessFormConfig.formValue.sku.replace(/(^\s*)|(\s*$)/g, '');
                   // 模糊查询的方法
                   _this.getData(search, 2);
                 },
-                dimEnter: val => {
-                  _this.jordanTableConfig2.jordanFormConfig.formValue.sku = _this.jordanTableConfig2.jordanFormConfig.formValue.sku.replace(/(^\s*)|(\s*$)/g, '');
-                  _this.entry(_this.jordanTableConfig2.jordanFormConfig.formValue.sku, 2);
+                dimEnter: () => {
+                  _this.jordanTableConfig2.businessFormConfig.formValue.sku = _this.jordanTableConfig2.businessFormConfig.formValue.sku.replace(/(^\s*)|(\s*$)/g, '');
+                  _this.entry(_this.jordanTableConfig2.businessFormConfig.formValue.sku, 2);
                 },
                 dimSelect: obj => {
-                  _this.jordanTableConfig2.jordanFormConfig.formValue.sku = obj.label;
+                  _this.jordanTableConfig2.businessFormConfig.formValue.sku = obj.label;
                   // document.getElementById("Enumber").focus();
                 }
               }
@@ -2787,12 +2787,13 @@ export default {
           _this.jordanTableConfig2.isShowImportBtn = true;
           _this.jordanTableConfig2.isShowExportBtn = true;
         } else {
-          _this.jordanTableConfig2.jordanFormConfig = {};
+          _this.jordanTableConfig2.businessFormConfig = {};
           _this.jordanTableConfig2.isShowDeleteDetailBtn = false;
           _this.jordanTableConfig2.isShowImportBtn = false;
           _this.jordanTableConfig2.isShowExportBtn = false;
         }
         // _this.returnSelectData = [];
+        console.log(_this.jordanTableConfig2);
       } else if (index === 2) {
         _this.labelDefaultValue = 3;
         _this.tab2 = {
@@ -3303,7 +3304,7 @@ export default {
       this.service.common.skuQuery(param).then(res => {
         if (res.data.code === 0) {
           if (index) {
-            self.jordanTableConfig2.jordanFormConfig.formData[1].AuotData = res.data.data.data.map(row => ({
+            self.jordanTableConfig2.businessFormConfig.formData[1].AuotData = res.data.data.data.map(row => ({
               ECODE: row.ECODE,
               PS_C_PRO_ENAME: row.PS_C_PRO_ENAME,
               SPEC: row.SPEC
@@ -3327,7 +3328,7 @@ export default {
         if (res.data.code === 0) {
           let dataList = [];
           if (index === 2) {
-            self.jordanTableConfig2.jordanFormConfig.formValue.sku = '';
+            self.jordanTableConfig2.businessFormConfig.formValue.sku = '';
             dataList = self.jordanTableConfig2.data;
           }
           const lists = res.data.data.data || [];
@@ -3913,7 +3914,7 @@ export default {
         _this.exchangeDtoList.data = _this.jordanTableConfig2.data;
         _this.exchangeAmount = _this.calculateMoney(_this.jordanTableConfig2.data, 1).toFixed(2);
         _this.returnTotal();
-        _this.jordanTableConfig2.jordanFormConfig.formValue.gbCode = '';
+        _this.jordanTableConfig2.businessFormConfig.formValue.gbCode = '';
       }
       _this.$children.find(item => item.name === 'matrixBox').closeConfirm();
     },

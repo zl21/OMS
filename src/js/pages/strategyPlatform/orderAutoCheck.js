@@ -264,7 +264,7 @@ export default {
       }
       this.setResult('orderType');
     },
-    setResult(type) {
+    setResult(type, e) {
       if (type == 'IS_AUTOCHECK_ORDER') {
         this.result.IS_AUTOCHECK_ORDER = this.IS_AUTOCHECK_ORDER ? 'Y' : 'N';
       } else if (type == 'IS_AUTOCHECK_PAY') {
@@ -296,9 +296,26 @@ export default {
       } else if (type == 'AUDIT_PRICE') {
         this.result.AUDIT_PRICE_DOWN = parseFloat(this.info.AUDIT_PRICE_DOWN);
         this.result.AUDIT_PRICE_UP = parseFloat(this.info.AUDIT_PRICE_UP);
-      } else if (type == 'LIMIT_PRICE') {
-        this.result.LIMIT_PRICE_DOWN = parseFloat(this.info.LIMIT_PRICE_DOWN);
-        this.result.LIMIT_PRICE_UP = parseFloat(this.info.LIMIT_PRICE_UP);
+      } else if (type.indexOf('LIMIT_PRICE') > -1) {
+        let price = `${e.target.value}`;
+        price = price
+          .replace(/[^\d.]/g, '') // 清除“数字”和“.”以外的字符
+          .replace(/\.{2,}/g, '.') // 只保留第一个. 清除多余的
+          .replace('.', '$#$')
+          .replace(/\./g, '')
+          .replace('$#$', '.')
+          .replace(/^(\-)*(\d+)\.(\d\d\d\d).*$/, '$1$2.$3'); // 只能输入两个小数
+        if (price.indexOf('.') < 0 && price != '') {
+          // 以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+          price = parseFloat(price);
+        }
+        this.$nextTick(()=>{
+          this.info[type] = price;
+          this.result[type] = price;
+        });
+        // deprecated
+        // this.result.LIMIT_PRICE_DOWN = parseFloat(this.info.LIMIT_PRICE_DOWN);
+        // this.result.LIMIT_PRICE_UP = parseFloat(this.info.LIMIT_PRICE_UP);
       } else if (type == 'EXCLUDE_SKU_TYPE' || type == 'SKU_CONTENT') {
         this.result.EXCLUDE_SKU_TYPE = this.EXCLUDE_SKU_TYPE;
         this.result.SKU_CONTENT = this.info.SKU_CONTENT;

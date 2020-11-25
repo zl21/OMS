@@ -81,6 +81,7 @@ R3.launchApplication({
   externalModals: customizedModalConfig, // 自定义弹框
   Version: '1.3', // 版本号
   enableGateWay: false, // 网关是否打开,
+  requestPenddingExpire: 100, // 全局设置请求代理防暴力点击
   // ignoreGateWayPattern: [/\/jflow\/*/g, /\/api\/*/g], // 框架默认禁用的网关逻辑的正则模式匹配
   enableJflow: false, // 默认禁用JFlow插件功能
   // jflowRequestDomain: 'http://jflow-shangfei.dev.burgeononline.com/', // jflow后台地址（商飞）
