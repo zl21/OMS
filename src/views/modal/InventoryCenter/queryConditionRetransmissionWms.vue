@@ -78,7 +78,3 @@
     }
   };
 </script>
-实体仓:"CP_C_PHY_WAREHOUSE_ID"
-单据日期:"BILL_DATE"
-来源单据类型:"SOURCE_BILL_NO"
-传WMS状态:"WMS_STATUS"

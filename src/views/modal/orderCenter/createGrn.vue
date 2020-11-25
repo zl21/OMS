@@ -2,14 +2,16 @@
   <div class="createGrn">
     <div class="form-body">
       <Form
-        :model="formItem"
-        :label-width="80"
+        :label-width="120"
       >
         <FormItem label="档期日程归属">
           <DropDownSelectFilter
             :single="true"
             :data="datas"
+            :auto-data="autoData"
+            :columns="columns"
             @on-fkrp-selected="fkrpSelected"
+            @on-input-value-change="inputValueChange"
           />
         </FormItem>
         <FormItem label="运输方式">
@@ -51,10 +53,17 @@
 </template>
 <script>
   export default {
+    props: {
+      idArray: {
+        default: []
+      }
+    },
     data() {
       return {
         vmI18n: window.vmI18n,
         transportStyle: '',
+        autoData: [],
+        columns: ['ENAME', 'value'],
         datas: {
           start: 0,
           tabth: [
@@ -96,6 +105,18 @@
       },
       fkrpSelected(e) {
         console.log(e);
+      },
+      inputValueChange(e) {
+        const formdata = new FormData();
+        formdata.append('ak', e);
+        formdata.append('colid', '168138');
+        formdata.append('fixedcolumns', JSON.stringify({}));
+        this.service.common.fuzzyquerybyak(formdata).then(res=>{
+          console.log(res);
+          if (res.data.code == 0) {
+            this.autoData = res.data.data;
+          }
+        });
       }
     }
   };
