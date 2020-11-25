@@ -6,9 +6,15 @@
       <!-- 按钮 -->
       <businessButton :btn-config="btnConfig" />
     </div>
-    <div class="returnForm">
+    <div
+      
+      class="returnForm"
+    >
       <!-- form表单 -->
-      <businessForm :form-config="formConfig" />
+      <businessForm
+        v-if="resetForm"
+        :form-config="formConfig"
+      />
     </div>
     <div class="salesTable">
       <!-- tab切换 -->
@@ -20,7 +26,7 @@
       />
       <!-- 列表组件 -->
       <div class="tableBox">
-        <loading :loading="agTableConfig.agLoading"></loading>
+        <loading :loading="agTableConfig.agLoading" />
         <aTable
           ref="agGridChild"
           :ag-table-config="agTableConfig"

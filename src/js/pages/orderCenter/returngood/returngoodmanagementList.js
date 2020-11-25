@@ -23,6 +23,7 @@ export default {
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
   data() {
     return {
+      resetForm: true,
       vmI18n: window.vmI18n,
       errThData: [
         {
@@ -134,6 +135,13 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.find();
+            } // 按钮点击事件
+          },
+          {
+            text: window.vmI18n.t('btn.reset'), // 查找 按钮文本
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.reset();
             } // 按钮点击事件
           },
           {
@@ -735,6 +743,19 @@ export default {
     find() {
       this.agTableConfig.pagenation.current = 1;
       this.getList(this.statusTab);
+    },
+    // 重置
+    reset() {
+      this.resetForm = false;
+      this.$nextTick(()=>{
+        this.resetForm = true;
+        this.getHeaderList();
+    if (this.$route.query.type == 'workID') {
+      this.getListWork();
+    } else {
+      this.getList();
+    }
+      });
     },
     // 字段选项组转换
     converSelect(val) {
