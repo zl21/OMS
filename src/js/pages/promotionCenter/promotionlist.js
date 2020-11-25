@@ -119,7 +119,7 @@ export default {
       acti_date: [], // 时间
       checkList: [], // 表格复选框选中的id
       setGroupTableData: [], // 设置分组列表
-      STATUS: [1, 2], // 状态 1.草稿，2.已发布，3.下线
+      STATUS: [1, 2, 3], // 状态 1.草稿，2.已发布，3.下线
       logData: {
         columns: [
           {
@@ -989,7 +989,7 @@ export default {
         isBatch: true, // 是否批量 传true
         fixcolumn: {
           ids: newIds, // 促销活动ID
-          status: 2 // 3表示下线
+          status: 3 // 3表示下线
         }
       };
       const formData = new FormData();
