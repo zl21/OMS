@@ -805,7 +805,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.vmI18n.t('common.consigneeInformation'), // 收货人
+            label: window.vmI18n.t('form_label.consignee'), // 收货人
             dataAcessKey: 'RECEIVE_NAME',
             value: 'RECEIVE_NAME',
             disabled: false, // 按钮禁用控制
