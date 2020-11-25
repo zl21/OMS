@@ -343,15 +343,16 @@ export default {
       });
     },
     getTreeData() {
+      console.log('getTreeData::');
       const _this = this;
       _this.isSaveLoading = true;
       const param = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId };
 
       this.service.common.getWarehouseLogisticsTree(param).then(res => {
         _this.isSaveLoading = false;
-        if (res.data.oK) {
-          _this.treeData = res.data.warehouseLogisticsTree;
-          if (res.data.warehouseLogistics) {
+          if (res.data.code == 0) {
+          _this.treeData = res.data.data.warehouseLogisticsTree;
+          if (res.data.data.warehouseLogistics) {
             _this.information.formData[0].itemdata.pid = res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ID;
             _this.information.formData[0].itemdata.valuedata = res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ENAME;
             _this.information.formValue.REMARK = res.data.data.warehouseLogistics.REMARK;
