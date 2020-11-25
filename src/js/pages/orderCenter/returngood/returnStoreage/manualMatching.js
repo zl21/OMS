@@ -594,7 +594,15 @@ export default {
   methods: {
     // 选中的退货明细赋值
     returnArr(data) {
-      this.jordanTableConfig.data[this.index].OC_B_RETURN_ORDER_ID = data;
+      this.returnSelectData.forEach((firstItem) => {
+        this.jordanTableConfig.data.forEach((secondItem) => {
+          if (firstItem.ID === secondItem.ID && secondItem.IS_WITHOUT_ORIG === '是') {
+            secondItem.OC_B_RETURN_ORDER_ID = data;
+          }
+        });
+      });
+      // deprecated
+      // this.jordanTableConfig.data[this.index].OC_B_RETURN_ORDER_ID = data;
     },
     // 选中的退货明细赋值
     returnArr1(data, data1) {
@@ -959,6 +967,11 @@ export default {
     },
     onSelectAllCancel(e) {
       this.returnSelectData = e;
+    },
+    onRowClick(row,index) {
+      // 点击表格行禁止选中
+      this.$refs.inStoreHouseTable.$refs.selections.toggleSelect(index);
+      console.log('manuMatching::row::index', row, index);
     },
     oneObjs(val) {
       if (val.name == '物流公司') {
