@@ -579,6 +579,53 @@ export default {
             text: window.vmI18n.t('btn.copyOrder') // 复制订单
           },
           {
+            text: window.vmI18n.t('btn.orderCancel'), // 订单取消
+            btnclick: () => {
+              const self = this;
+              console.log('self.$refs',self.$route);
+              self.btnConfig.loading = true;
+              const ids = [];
+              const id = self.$route.params.customizedModuleId; // 此id为订单编号
+              ids.push(id);
+              this.$Modal.info({
+                title: self.vmI18n.t('modalTitle.tips'), // 提示
+                content: self.vmI18n.t('modalTips.e0'), // 是否确定取消订单？
+                mask: true,
+                showCancel: true,
+                okText: self.vmI18n.t('common.determine'), // 取消
+                cancelText: self.vmI18n.t('common.cancel'), // 确定
+                onOk: () => {
+                  self.service.orderCenter
+                    .cancelOrder({ ids, type: '1' })
+                    .then(res => {
+                      if (res.data.code === 0) {
+                        self.$Message.success(res.data.message);
+                        this.load();
+                      } else {
+                        self.$Modal.error({
+                          title: self.vmI18n.t('modalTitle.tips'), // 提示
+                          content: res.data.message,
+                          cancelType: true,
+                          titleAlign: 'left',
+                          mask: true,
+                          draggable: true,
+                          keyDown: event => {
+                            if (event.keyCode == 27 || event.keyCode == 13) {
+                              self.$Modal.remove();
+                            }
+                          }
+                        });
+                      }
+                      self.btnConfig.loading = false;
+                    });
+                },
+                onCancel: () => {
+                  self.btnConfig.loading = false;
+                }
+              });
+            } // 按钮点击事件
+          },
+          {
             text: window.vmI18n.t('btn.lostOrder_copy') // 丢单复制
           },
           {
