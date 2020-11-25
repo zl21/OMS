@@ -795,12 +795,12 @@ export default {
       } else if (Obj.STATUS_DEFECTIVE_TRANS && Obj.STATUS_DEFECTIVE_TRANS[0] === 'bSelect-all') {
         Obj.STATUS_DEFECTIVE_TRANS = '';
       }
-      const arr = document.getElementsByClassName('ark-input');
+      // const arr = document.getElementsByClassName('ark-input');
       
       // 防止多次连续多次点击回车，去除焦点
-      for (let i = 0; i < arr.length; i++) {
-        arr[i].blur();
-      }
+      // for (let i = 0; i < arr.length; i++) {
+      //   arr[i].blur();
+      // }
       this.service.orderCenter
         .querySalesReturn(Object.assign(param, _this.formConfig.formValue))
         .then(res => {
@@ -910,8 +910,10 @@ export default {
             _this.agTableConfig.rowData = [];
             _this.agTableConfig.pagenation.total = 0;
             _this.agTableConfig.agLoading = false;
+            _this.$refs.agGridChild.agGridTable(_this.agTableConfig.columnDefs, _this.agTableConfig.rowData);
           }
         });
+        console.log(_this.agTableConfig.rowData);
     },
     // 客服工作台跳转获取列表数据
     getListWork(status = '') {

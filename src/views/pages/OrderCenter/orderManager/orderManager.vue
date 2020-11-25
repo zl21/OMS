@@ -28,6 +28,7 @@
         @on-clear-all="clearAll"
         @on-clear-item="clearItem"
         @on-search="search"
+        @on-drop-change="onDropChange"
       />
       <!-- trigger="click" -->
       <businessForm
