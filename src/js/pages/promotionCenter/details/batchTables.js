@@ -2,8 +2,7 @@ import myInputLd from '@/views/pages/promotionCenter/components/tableinput';
 import detailtable from '@/views/pages/promotionCenter/details/table.vue';
 import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDialog';
 import TableSku from '@/views/pages/promotionCenter/components/tableSku';
-import importDialog from '@/views/pages/promotionCenter/components/importDialog';
-
+import businessDialog from 'professionalComponents/businessDialog';
 export default {
   name: 'batchTables',
   components: {
@@ -11,7 +10,7 @@ export default {
     detailtable,
     ButtonFkDialog,
     TableSku,
-    importDialog
+    businessDialog
   },
   props: {
     productList: { type: Array },
@@ -38,6 +37,24 @@ export default {
         dialogTitle: '',
         footerHide: true,
         mask: true
+      },
+      // 弹框配置 导入
+      importTable: {
+        refFuns: 'confirmFun',
+        confirmTitle: '批量新增条件信息导入',
+        titleAlign: 'center', // 设置标题是否居中 center left
+        width: '400',
+        scrollable: false, // 是否可以滚动
+        closable: true, // 是否可以按esc关闭
+        draggable: true, // 是否可以拖动
+        mask: true, // 是否显示遮罩层
+        maskClosable: true, // 是否可以点击叉号关闭
+        transfer: true, // 是否将弹层放在body内
+        name: 'importTable', // 组件名称
+        url: 'modal/publicDialog/importTable',
+        keepAlive: true,
+        excludeString: 'importTable', // 将name传进去，确认不缓存
+        componentData: {}
       },
       moduleMode: 'batch'
     };
@@ -227,12 +244,14 @@ export default {
      * 导入
      */
     importData() {
-      const self = this;
-      this.dialogModal = {};
-      this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
-      this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
-      self.dialogSet.dialogTitle = '导入';
-      self.show_dialog = true;
+      // const self = this;
+      // this.dialogModal = {};
+      // this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
+      // this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
+      // self.dialogSet.dialogTitle = '导入';
+      // self.show_dialog = true;
+      this.importTable.componentData = { tableName: this.itemdata.reftable || 'PS_C_SKU', mode: this.moduleMode };
+      this.$children.find(item => item.name === 'importTable').openConfirm();
     },
     /**
      * 返回值，用于弹框导入返回调添加单个表
