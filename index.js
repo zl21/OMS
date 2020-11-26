@@ -45,7 +45,7 @@ import connector from './src/js/pages/common/orderDetail/connector.js';
 
 const projectConfig = require('./project.config');
  // -------------引入框架项目配置文件;
-// const customizedTheme = require(`@burgeon/oms-theme/skin/${projectConfig.omsTheme}/index.min.css`);
+const customizedTheme = require(`@burgeon/oms-theme/skin/${projectConfig.omsTheme}/index.min.css`);
 // import 'omsTheme/skin/skyBlue/index.min.css'
 groups.load();
 Vue.prototype.$ajax = ajax;
@@ -58,7 +58,7 @@ Vue.prototype.service = service;
 Vue.prototype.qs = qs;
 window.R3 = R3; // 暴露R3为全局变量
 window.vmI18n = i18n; // 挂载国际化
-// Vue.prototype.$theme = customizedTheme;// 将主题方法挂载到原型上
+Vue.prototype.$theme = customizedTheme;// 将主题方法挂载到原型上
 Vue.prototype.$comUtils = comUtils;
 
 
