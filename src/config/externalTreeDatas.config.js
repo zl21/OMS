@@ -10,6 +10,21 @@ const {
 Vue.prototype.$network = network;
 Vue.prototype.$urlSearchParams = urlSearchParams;
 
+const paramObj = {
+  // 供应商档案
+  CP_C_SUPPLIER: 'cpcsupplier',
+  // 内部组织
+  CP_C_INORG: 'CP_C_INORG',
+  // 伙伴组织
+  CP_C_OUTORG: 'CP_C_OUTORG',
+  // 员工档案
+  CP_C_EMP: 'emp',
+  // 用户档案
+  CP_C_HRUSERS: 'users',
+  // 角色
+  CP_C_GROUPS: 'group',
+}
+
 export default {
   restructureMenuTreeData(data) {
     return data.map((item) => {
@@ -38,7 +53,6 @@ export default {
     formdata.append('param', 'cpcsupplier');
     const res = await service.common.cpCHrorgTree(formdata);
     data = res.data;
-    if (res.data.code === 0) {}
     const treeData = {
       data,
       name: 'CP_C_HRORG_ID'
@@ -106,7 +120,6 @@ export default {
     formdata.append('param', 'IN');
     const res = await service.common.cpCHrorgTree(formdata);
     data = res.data;
-    if (res.data.code === 0) {}
     const treeData = {
       data,
       name: 'CP_C_HRORG_ID'
