@@ -10,27 +10,22 @@ const {
 Vue.prototype.$network = network;
 Vue.prototype.$urlSearchParams = urlSearchParams;
 
+const paramObj = {
+  // 供应商档案
+  CP_C_SUPPLIER: 'cpcsupplier',
+  // 内部组织
+  CP_C_INORG: 'inorg',
+  // 伙伴组织
+  CP_C_OUTORG: 'outorg',
+  // 员工档案
+  CP_C_EMP: 'emp',
+  // 用户档案
+  CP_C_HRUSERS: 'users',
+  // 角色
+  CP_C_GROUPS: 'group',
+}
+
 export default {
-  restructureMenuTreeData(data) {
-    return data.map((item) => {
-      item.NAME = item.ENAME;
-      // item.id = item.ID;
-      if (item.children && item.children.length > 0) {
-        restructureMenuTreeData(item.children);
-      }
-      return item;
-    });
-  },
-  getTreeChildren(pnode, arr) {
-    pnode.children = arr.filter(item => item.CP_C_ORGUP_ID === pnode.ID);
-    pnode.children.forEach((item) => {
-      item.lastChild = false;
-      item.ID = item.ENAME;
-      // item.expand = true;
-      pnode.children[pnode.children.length - 1].lastChild = true;
-      getTreeChildren(item, arr);
-    });
-  },
   // 供应商档案
   CP_C_SUPPLIER: () => async () => {
     let data = [];
@@ -38,7 +33,6 @@ export default {
     formdata.append('param', 'cpcsupplier');
     const res = await service.common.cpCHrorgTree(formdata);
     data = res.data;
-    if (res.data.code === 0) {}
     const treeData = {
       data,
       name: 'CP_C_HRORG_ID'
@@ -50,21 +44,19 @@ export default {
     let data = [];
     const formdata = new FormData();
     formdata.append('param', 'emp');
-    await network.post('http://yapi.dev.syman.cn/mock/624/p/c/standardTree', formdata).then((res) => {
-      data = res.data;
-      if (res.data.code === 0) {}
-    });
+    const res = await service.common.cpCHrorgTree(formdata);
+    data = res.data;
     const treeData = {
       data,
       name: 'ID'
     };
     return treeData;
   },
-  // 组织中心
+  // 内部组织
   CP_C_INORG: () => async () => {
     let data = [];
     const formdata = new FormData();
-    formdata.append('param', 'cpcHrorg');
+    formdata.append('param', 'inorg');
     const res = await service.common.cpCHrorgTree(formdata);
     data = res.data;
     const treeData = {
@@ -103,10 +95,9 @@ export default {
   CP_C_OUTORG: () => async () => {
     let data = [];
     const formdata = new FormData();
-    formdata.append('param', 'IN');
+    formdata.append('param', 'outorg');
     const res = await service.common.cpCHrorgTree(formdata);
     data = res.data;
-    if (res.data.code === 0) {}
     const treeData = {
       data,
       name: 'CP_C_HRORG_ID'
