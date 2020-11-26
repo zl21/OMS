@@ -67,6 +67,13 @@ export default {
           },
         ],
       },
+      datas: {
+        start: 0,
+        tabth: [],
+        row: []
+      },
+      autoData: [],
+      columns: ['OUTSTORAGE_CODE'],
       formConfig: {
         formValue: {},
         formData: [
@@ -120,7 +127,37 @@ export default {
     };
   },
   mounted() {
-    const self = this;
-    console.log(self.idArr);
+    this.getData();
   },
+  methods: {
+    getData() {
+      const formdata = new FormData();
+      const obj = { 
+isdroplistsearch: true, refcolid: 173684, fixedcolumns: { STATUS: '=0' }, startindex: 0, range: 10 
+};
+      formdata.append('searchdata', JSON.stringify(obj));
+      this.service.common.QueryList(formdata).then(res=>{
+        console.log(res);
+        if (res.data.code === 0) {
+          this.datas.tabth = res.data.datas.tabth;
+          this.datas.row = res.data.datas.row;
+        }
+      });
+    },
+    fkrpSelected(e) {
+      console.log(e);
+    },
+    inputValueChange(e) {
+      const formdata = new FormData();
+      formdata.append('ak', e);
+      formdata.append('colid', 173684);
+      formdata.append('fixedcolumns', JSON.stringify({ whereKeys: { STATUS: '=0' } }));
+      this.service.common.fuzzyquerybyak(formdata).then(res=>{
+        console.log(res);
+        if (res.data.code === 0) {
+          this.autoData = res.data.data;
+        }
+      });
+    }
+  }
 };
