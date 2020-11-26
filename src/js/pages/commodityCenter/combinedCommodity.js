@@ -304,7 +304,7 @@ export default {
         indexColumn: true,
         loading: false, // 加载
         // 是否存在多选框
-        isShowSelection: true,
+        isShowSelection: false,
         width: '', // 表格宽度
         height: '200', // 表格高度
         border: true, // 是否显示纵向边框
