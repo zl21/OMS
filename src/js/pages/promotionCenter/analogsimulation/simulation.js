@@ -266,7 +266,7 @@ export default {
       return new Promise(async (resolve) => {
         const {
           data: { code, message, data }
-        } = await this.service.promotionCenter.selectProInfo(formData);
+        } = await this.service.promotionCenter.selectProInfo(simParam);
         console.log(code, message, data);
         if (code === 0) {
           resolve(data);

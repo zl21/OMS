@@ -2126,6 +2126,7 @@ export default {
       }).then(res => {
         const data = res.data;
         if (data.code === 0) {
+          if (!data.data) return;
           this.objList = data.data.data;
           this.jordanTableConfig1.total = data.data.skuTotal; // 条码数据总条数
           this.jordanTableConfig2.total = data.data.skuGroupTotal; // 组合商品数据总条数
