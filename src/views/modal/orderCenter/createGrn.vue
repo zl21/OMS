@@ -83,12 +83,20 @@
         }
       };
     },
-    mounted() {
-      this.getData();
+    async mounted() {
+      await this.getData();
+      await this.init();
     },
     methods: {
       determine() {
             
+      },
+      init() {
+        const formdata = new FormData();
+        formdata.append('param', JSON.stringify({ ids: this.idArray }));
+        this.service.orderCenter.checkBeforeCreateVipDelivery(formdata).then(res=>{
+          console.log(res);
+        });
       },
       getData() {
         const formdata = new FormData();

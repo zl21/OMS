@@ -80,6 +80,7 @@ export default {
   extraReturnTableLogQuery: params => network.post('/api/cs/oc/oms/v1/getOcBReturnAfSendLog', params), // 额外退款单-额外退款单日志
   modifyReturnOrderWarehouse: params => network.post('/api/cs/oc/oms/v1/modifyReturnOrderWarehouse', params), // 退换货单修改退回仓库
   checkCancelParams: params => network.post('/api/cs/oc/oms/v1/checkCancelParams', params), // 检查接口
+  checkBeforeCreateVipDelivery: params => network.post('/api/cs/vip/distribution/v1/checkBeforeCreateVipDelivery', params), // 创建出仓单初始化接口
 
   // 半定制弹框
   //

@@ -175,10 +175,10 @@
                 <!-- 新增 -->
                 {{ vmI18n.t("btn.add") }}
               </button>
-              <button class="btn">
-                <!-- 导入 -->
+              <!-- <button class="btn" @click="importData">
+                
                 {{ vmI18n.t("btn.import") }}
-              </button>
+              </button> -->
             </div>
           </detailtable>
         </div>

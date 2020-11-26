@@ -1251,7 +1251,7 @@ export default {
               newItem.PS_C_SIZE_ENAME = queryList[i].PS_C_SIZE_ENAME;
               newItem.PS_C_PRO_ENAME = queryList[i].PS_C_PRO_ENAME;
               newItem.QTY_CAN_REFUND = queryList[i].QTY;
-              newItem.QTY_REFUND = queryList[i].QTY - queryList[i].PRICE_LIST;
+              newItem.QTY_REFUND = Number(queryList[i].QTY || 0) - Number(queryList[i].QTY_RETURN_APPLY || 0);
               newItem.QTY_EXCHANGE = queryList[i].QTY;
               newItem.SEX_NAME = queryList[i].SEX_NAME;
               newItem.SEX = queryList[i].SEX;
