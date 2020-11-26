@@ -165,9 +165,9 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: '导入',
+        confirmTitle: '条件信息导入',
         titleAlign: 'center', // 设置标题是否居中 center left
-        width: '600',
+        width: '400',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
         draggable: true, // 是否可以拖动
@@ -662,24 +662,8 @@ export default {
      * 导入
      */
     importData() {
-      // this.dialogModal = {};
-      // this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
-      // this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
-      // const _component = 'popdialog';
-
-      // Vue.component(_component, Vue.extend('@/views/pages/promotionCenter/components/importDialog.vue'));
-      // this.currentView = _component;
-      // this.dialogSet.dialogTitle = '导入';
-      // this.show_dialog = true;
-
       this.importTable.componentData = { tableName: this.itemdata.reftable || 'PS_C_SKU', mode: this.moduleMode };
       this.$children.find(item => item.name === 'importTable').openConfirm();
-      // const self = this;
-      // this.dialogModal = {};
-      // this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
-      // this.dialogModal.mode = this.moduleMode;
-      // self.dialogSet.dialogTitle = '导入';
-      // self.show_dialog = true;
     },
     /**
      * 返回值，用于弹框导入返回调添加单个表

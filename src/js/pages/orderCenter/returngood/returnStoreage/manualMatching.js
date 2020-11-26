@@ -397,6 +397,7 @@ export default {
         isShowExportBtn: false, // 控制是否显示导出
         indexColumn: true, // 是否显示序号
         isShowSelection: true, // 是否显示checkedbox
+        rowClickNoSelected: true,
         width: '', // 表格宽度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
@@ -594,12 +595,11 @@ export default {
   methods: {
     // 选中的退货明细赋值
     returnArr(data) {
-      this.returnSelectData.forEach((firstItem) => {
-        this.jordanTableConfig.data.forEach((secondItem) => {
-          if (firstItem.ID === secondItem.ID && secondItem.IS_WITHOUT_ORIG === '是') {
-            secondItem.OC_B_RETURN_ORDER_ID = data;
-          }
-        });
+      const tmpArr = this.returnSelectData.map(item => item.ID);
+      this.jordanTableConfig.data.forEach(item => {
+        if (tmpArr.includes(item.ID) && item.IS_WITHOUT_ORIG === '是') {
+          item.OC_B_RETURN_ORDER_ID = data;
+        }
       });
       // deprecated
       // this.jordanTableConfig.data[this.index].OC_B_RETURN_ORDER_ID = data;
@@ -967,11 +967,6 @@ export default {
     },
     onSelectAllCancel(e) {
       this.returnSelectData = e;
-    },
-    onRowClick(row,index) {
-      // 点击表格行禁止选中
-      this.$refs.inStoreHouseTable.$refs.selections.toggleSelect(index);
-      console.log('manuMatching::row::index', row, index);
     },
     oneObjs(val) {
       if (val.name == '物流公司') {

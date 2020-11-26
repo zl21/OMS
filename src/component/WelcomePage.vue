@@ -76,7 +76,7 @@
 .welcomepage {
   width: 100%;
   height: 100%;
-  background: url("../assets/image/loginBg.jpg") center / 105% no-repeat;
+  background: url("../assets/image/loginBg.jpg") center / 100% no-repeat;
   /deep/ .ark-dropdown {
     margin: 10px 10px 20px;
   }

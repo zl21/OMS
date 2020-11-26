@@ -1,10 +1,9 @@
 import myInput from 'framework/components/element/input';
-import axios from 'axios';
 import detailtable from '@/views/pages/promotionCenter/details/table.vue';
 import MultipleBox from '@/views/pages/promotionCenter/components/multipleBox.vue';
 import SingleBox from '@/views/pages/promotionCenter/components/singleBox.vue';
 import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDialog.vue';
-import tabList from '@/assets/js/promotion/columns.js';
+import tabList from '@/assets/js/promotion/columns';
 
 export default {
   data() {
@@ -256,7 +255,7 @@ export default {
       const arr = [];
       console.log('nameList++++++', nameList);
       const simParam = new URLSearchParams();
-      nameList.forEach((item, index) => {
+      nameList.forEach((item) => {
         arr.push(item.ID);
       });
       const params = {
@@ -264,18 +263,20 @@ export default {
         ids: arr
       };
       simParam.append('param', JSON.stringify(params));
-      const {
-        data: { code, message, data }
-      } = await this.service.promotionCenter.selectProInfo(formData);
-      console.log(code, message, data);
-      if (code === 0) {
-        resolve(data);
-      } else {
-        this.$message({
-          type: 'error',
-          message
-        });
-      }
+      return new Promise(async (resolve) => {
+        const {
+          data: { code, message, data }
+        } = await this.service.promotionCenter.selectProInfo(formData);
+        console.log(code, message, data);
+        if (code === 0) {
+          resolve(data);
+        } else {
+          this.$message({
+            type: 'error',
+            message
+          });
+        }
+      })
       // return new Promise((resolve) => {
       //   axios({
       //     // 根据id获取表格其他数据

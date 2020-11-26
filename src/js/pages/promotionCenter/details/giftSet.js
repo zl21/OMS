@@ -1,9 +1,10 @@
 import detailtable from '@/views/pages/promotionCenter/details/table.vue';
 import detailtabs from '@/views/pages/promotionCenter/details/tableTabs.vue';
 import SingleBox from '@/views/pages/promotionCenter/components/singleBox';
-import tableCols from '@/assets/js/promotion/columns.js';
+import tableCols from '@/assets/js/promotion/columns';
 import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDialog';
 import SetCommodity from '@/views/pages/promotionCenter/details/setCommodity';
+import businessDialog from 'professionalComponents/businessDialog';
 import Vue from 'vue';
 // const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
 export default {
@@ -13,6 +14,7 @@ export default {
     detailtabs,
     SingleBox,
     ButtonFkDialog,
+    businessDialog,
     SetCommodity
   },
   props: {
@@ -118,6 +120,24 @@ export default {
         dialogTitle: '',
         footerHide: true,
         mask: true
+      },
+      // 弹框配置 导入
+      importTable: {
+        refFuns: 'confirmFun',
+        confirmTitle: '赠品信息导入',
+        titleAlign: 'center', // 设置标题是否居中 center left
+        width: '400',
+        scrollable: false, // 是否可以滚动
+        closable: true, // 是否可以按esc关闭
+        draggable: true, // 是否可以拖动
+        mask: true, // 是否显示遮罩层
+        maskClosable: true, // 是否可以点击叉号关闭
+        transfer: true, // 是否将弹层放在body内
+        name: 'importTable', // 组件名称
+        url: 'modal/publicDialog/importTable',
+        keepAlive: true,
+        excludeString: 'importTable', // 将name传进去，确认不缓存
+        componentData: {}
       },
       moduleMode: 'gift'
     };
@@ -494,15 +514,17 @@ export default {
      * 导入
      */
     importData() {
-      const self = this;
-      this.dialogModal = {};
-      this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
-      this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
-      const _component = 'popdialog';
-      Vue.component(_component, Vue.extend('allpages/promotionCenter/components/importDialog'));
-      self.currentView = _component;
-      self.dialogSet.dialogTitle = '导入';
-      self.show_dialog = true;
+      // const self = this;
+      // this.dialogModal = {};
+      // this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
+      // this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
+      // const _component = 'popdialog';
+      // Vue.component(_component, Vue.extend('allpages/promotionCenter/components/importDialog'));
+      // self.currentView = _component;
+      // self.dialogSet.dialogTitle = '导入';
+      // self.show_dialog = true;
+      this.importTable.componentData = { tableName: this.itemdata.reftable || 'PS_C_SKU', mode: this.moduleMode };
+      this.$children.find(item => item.name === 'importTable').openConfirm();
     },
     /**
      * 返回值，用于弹框返回解析
