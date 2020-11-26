@@ -33,7 +33,7 @@ export default {
   jdReturnStorageSave: params => network.get('/p/cs/jdReturnStorageSave', params),
   manualJdMatchingList: params => network.post('/p/cs/manualJdMatchingList', params),
   screenresult: params => network.post('/p/cs/screenresult', params),
-  cpCHrorgTree: params => network.post('http://yapi.dev.syman.cn/mock/624/p/c/standardTree', params),
+  cpCHrorgTree: params => network.post('/p/c/cpCHrorgTree', params),
   downLoadVipCancelTimeOrder: params => network.post('/p/cs/downLoadVipCancelTimeOrder', params),
   downLoadVipOrderRefund: params => network.post('/p/cs/downLoadVipOrderRefund', params),
   addToFavorite: params => network.post('/p/cs/addToFavorite', params),
