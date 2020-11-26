@@ -10,8 +10,10 @@
             :data="datas"
             :auto-data="autoData"
             :columns="columns"
+            :default-selected="defaultSelected"
             @on-fkrp-selected="fkrpSelected"
             @on-input-value-change="inputValueChange"
+            @on-clear="clear"
           />
         </FormItem>
         <FormItem label="运输方式">
@@ -65,6 +67,7 @@
         autoData: [],
         columns: ['ENAME', 'value'],
         defaultSelected: [],
+        selectData: [],
         datas: {
           start: 0,
           tabth: [
@@ -90,7 +93,23 @@
     },
     methods: {
       determine() {
-            
+        const formdata = new FormData();
+        const obj = {
+          ids: this.idArray,
+          ascriptionId: this.selectData[0].ID || this.defaultSelected[0].ID,
+          deliveryMethod: this.transportStyle
+        };
+        formdata.append('param', JSON.stringify(obj));
+        this.service.orderCenter.distributionCreateDelivery(formdata)
+          .then(res=>{
+            console.log(res);
+            if (res.data.code === 0) {
+              this.$Message.success(res.data.message);
+              this.$emit('closeActionDialog');
+            } else {
+              this.$Message.error(res.data.message);
+            }
+          });
       },
       init() {
         const formdata = new FormData();
@@ -100,6 +119,7 @@
           if (res.data.code === 0) {
             this.transportStyle = res.data.data.deliveryMethod;
             this.defaultSelected = [{ ID: res.data.data.id, Label: res.data.data.eName }];
+            this.selectData = this.defaultSelected;
           }
         });
       },
@@ -117,7 +137,12 @@
         });
       },
       fkrpSelected(e) {
-        console.log(e);
+        this.selectData = e;
+        this.getDeliveryMethod();
+      },
+      clear() {
+        this.defaultSelected = [];
+        this.selectData = [];
       },
       inputValueChange(e) {
         const formdata = new FormData();
@@ -128,6 +153,22 @@
           console.log(res);
           if (res.data.code == 0) {
             this.autoData = res.data.data;
+          }
+        });
+      },
+      getDeliveryMethod() {
+        if (!this.selectData.length && !this.defaultSelected.length) {
+          this.$Message.warning('档案日程归属不能为空!');
+          return;
+        }
+        const formdata = new FormData();
+        formdata.append('param', JSON.stringify({ ids: this.idArray, ascriptionId: this.selectData[0].ID || this.defaultSelected[0].ID }));
+        this.service.orderCenter.getDeliveryMethod(formdata).then(res=>{
+          console.log(res);
+          if (res.data.code === 0) {
+            this.transportStyle = res.data.data;
+          } else {
+            this.$Message.error(res.data.message);
           }
         });
       }
