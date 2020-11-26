@@ -1,6 +1,7 @@
 <!--增加赠品-->
 <template>
   <div>
+    <loading :loading="loading"></loading>
     <EasyMatrix :component-data="matrixData" />
     <jordanActionTable
       :jordan-table-config="tableConfig"
@@ -26,11 +27,13 @@
   import EasyMatrix from 'professionalComponents/easyMatrix';
   import { listeningToKeydownMixin } from '@/assets/js/mixins/listeningToKeydown';
   import axios from 'axios';
+  import loading from '@/component/loading.vue';
 
   export default {
     mixins: [listeningToKeydownMixin],
     data() {
       return {
+        loading: false,
         onRowData: '', // 选中数据
         tableItemUrl: '/api/cs/oc/oms/v1/getOrderDetailList',
         tableConfig: {
@@ -129,7 +132,8 @@
     components: {
       jordanActionTable,
       EasyMatrix,
-      jordanButton
+      jordanButton,
+      loading,
     },
     props: {
       componentData: {}
@@ -190,6 +194,7 @@
         } 
         const ids = [];
         ids.push(self.objid);
+        self.loading = true;
         const param = {
           ids,
           changeGoodsSku: self.onRowData.ECODE,
@@ -208,10 +213,12 @@
             self.$parent.$parent.$parent.$parent.autoRefresh();
             self.$parent.$parent.closeConfirm();
             this.btnConfig.buttons[0].loading = false;
+            self.loading = false;
           } else {
             // let mes = res.data.message || "失败";
             // self.$Message.error(mes);
             this.btnConfig.buttons[0].loading = false;
+            self.loading = false;
             if (res.data.code === -1) {
               self.$Modal.confirm({
                 title: res.data.message,
