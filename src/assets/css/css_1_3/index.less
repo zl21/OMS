@@ -1,3 +1,5 @@
+@import '~@burgeon/oms-theme/skin/public.less';
+
 body {
   margin: 0;
 
@@ -9,18 +11,21 @@ body {
   #ContentDisplayArea {
     margin: 0 !important;
   }
+
   // 标准页面 按钮固定
-  .public-main{
+  .public-main {
     height: 100%;
     display: flex;
     flex-direction: column;
   }
-  .public-content{
+
+  .public-content {
     flex: 1;
     overflow: auto;
     display: flex;
     flex-direction: column;
   }
+
   ::-webkit-scrollbar {
     width: 0;
   }
@@ -86,7 +91,6 @@ body {
   height: 100%;
   width: 100%;
   font-family: 'Microsoft YaHei' !important;
-  @import './page.less';
 
   .el-loading-mask {
     z-index: 1000;
@@ -187,13 +191,13 @@ body {
         padding: 8px 30px 8px 24px;
 
         &:hover {
-          background-color: #0068b7;
+          background-color: @base-color;
           color: white;
         }
       }
 
       .el-cascader-menu__item.is-active {
-        background-color: #0068b7;
+        background-color: @base-color;
       }
 
       .el-cascader-menu__item--extensible:after {
@@ -223,7 +227,7 @@ body {
     }
 
     .el-input__icon {
-      color: #0f8ee9;
+      color: @base-color;
       height: 20px;
       line-height: 20px;
       width: 20px;
@@ -759,40 +763,16 @@ body {
 
 // 导航条的logo 展开
 
-.banner + ::after{
+.banner+ ::after {
   background: #f00;
 }
-.navigator .left{
+
+.navigator .left {
   position: relative;
-  // #navBrandImg:after{
-  //   position: absolute;
-  //   left:0;
-  //   top: 0;
-  //   display: block;
-  //   content: '';
-  //   height: 50px;
-  //   width: 50px;
-  //   background:url(../../image/stretch.jpg) no-repeat center;
-  //   background-size: 100% 100%;
-  //   transition:border 2s;
-  //   -moz-transition:border 2s; /* Firefox 4 */
-  //   -webkit-transition:border 2s; /* Safari and Chrome */
-  //   -o-transition:border 2s; /* Opera */
-  //  }
   img {
-    &.trigger{
-      // position: absolute;
-      // left: 0;
-      // width: 50px;
-      // z-index: 10;
-      // opacity: 0;
-    }
     &.banner {
       left: 30px;
       width: auto;
-    }
-    &.logo{
-      // display: none;
     }
   }
 }
@@ -995,8 +975,8 @@ body {
 }
 
 .show-dialog .ark-btn-primary {
-  background-color: #0068b7;
-  border-color: #0068b7;
+  background-color: @base-color;
+  border-color: @base-color;
 }
 
 // 统一定制页面(动作定义)按钮样式
@@ -1050,6 +1030,7 @@ body {
 .ark-collapse-content>.ark-collapse-content-box {
   padding-top: 0px !important;
 }
+
 .jq-combined-commodity,
 .horizontalTableDetail,
 .auto-check,
@@ -1073,15 +1054,6 @@ body {
       border-top: none;
       margin-bottom: 10px;
 
-      // &.ark-collapse-item-active {
-      //   &>.ark-collapse-header {
-      //     &>i {
-      //       display: none;
-      //       transform: inherit;
-      //     }
-      //   }
-      // }
-
       &>.ark-collapse-header {
         text-align: left;
         padding: 0 20px;
@@ -1104,26 +1076,13 @@ body {
           content: "";
           width: 3px;
           height: 14px;
-          background: #155bd4;
+          background: #f00;
         }
 
         &>i {
           display: none;
         }
-
-        // &>.iconios-arrow-forward:before,
-        // &>.iconmd-arrow-dropdown:before {
-        //   display: none;
-        //   position: absolute;
-        //   top: 50%;
-        //   left: 12px;
-        //   transform: translateY(-50%);
-        //   display: block;
-        //   content: "";
-        //   width: 3px;
-        //   height: 14px;
-        //   background: #155bd4;
-        // }
+        
       }
 
       &>.ark-collapse-content {
@@ -1141,9 +1100,7 @@ body {
 .popSelect {
   .ark-select {
 
-    // border: 1px solid #dcdee2;
     .ark-select-selection {
-      // border:none;
       height: 26px;
       line-height: 26px;
     }
@@ -1152,7 +1109,6 @@ body {
 
 //agtable 修改
 .agTable {
-  .ag-header {}
 
   .ag-theme-balham {
     .ag-cell {
@@ -1168,12 +1124,6 @@ body {
       margin-right: 12px;
     }
   }
-}
-
-// loading修改
-body .ark-spin-fix {
-  // position: fixed;
-  // z-index: 1002 !important;
 }
 
 // 定制界面 搜边距
@@ -1230,32 +1180,6 @@ body .ark-spin-fix {
   }
 }
 
-// 日历修改颜色
-.ark-picker-panel-body {
-  em {
-    color: #0068b7;
-  }
-
-  .ark-date-picker-cells-cell-selected em,
-  .ark-date-picker-cells-cell-selected:hover em {
-    background: #0068b7;
-    color: #fff;
-  }
-
-  .ark-date-picker-cells-focused em {
-    box-shadow: 0 0 0 1px #0068b7 inset;
-  }
-
-  .ark-btn-primary {
-    background-color: #0068b7;
-    border-color: #0068b7;
-  }
-
-  .ark-date-picker-cells-cell-today em:after {
-    background: #0068b7;
-  }
-}
-
 // tree 
 .ark-tree {
   .ark-tree-arrow-open i:after {
@@ -1296,7 +1220,7 @@ body .ark-spin-fix {
 
 // 组织中心 - - tab
 .horizontalTableDetail .ark-tabs-panels-ink-bar {
-  background-color: #0068b7;
+  background-color: @base-color;
 }
 
 // form input左右边距
@@ -1310,6 +1234,7 @@ body .ark-spin-fix {
     .businessForm_a .popInput .item-input .table-input {
       padding: 0 10px;
     }
+
     .ark-form-item.popInput .item-input .add-input .el-input__inner {
       padding: 0 !important;
     }

@@ -6,7 +6,7 @@ module.exports = {
   projectIconPath: path.join(__dirname, './favicon.ico'), // 项目icon,
   burgeonProxy: ['/p/c', '/p/cs', '/api'],
   target: 'http://47.103.6.45:27777', // 项目后端服务地址(OMS2.0)
-  omsTheme: 'skyBlue', // 标品样式主题包[coralRed,skyBlue]; 
+  omsTheme: 'senmir', // 标品样式主题包[coralRed,skyBlue]; 
 
   build: {
     //  Gzip  off  by  default  as  many  popular  static  hosts  such  as

@@ -1,16 +1,18 @@
+@import '~@burgeon/oms-theme/skin/public.less';
+
 .promotion-content {
   .operation-content {
     .operation-botton {
       font-size: 0;
       margin: 12px 0;
       .active {
-        background: #0068b7;
+        background: @base-color;
         color: #fff;
         margin-right: 8px;
       }
       .favoriteForm {
-        border: 1px solid #0068b7;
-        color: #0068b7;
+        border: 1px solid @base-color;
+        color: @base-color;
         vertical-align: bottom;
       }
     }
@@ -65,9 +67,10 @@
     }
     .ark-tabs{
       margin-top: 10px;
+      font-size: 12px;
       .ark-tabs-nav .ark-tabs-tab-active {
-          color: #0068b7;
-          border: 1px solid #dcdee2;
+          color: @base-color;
+          // border: 1px solid #dcdee2;
           border-top-left-radius: 3px;
           border-top-right-radius: 3px;
       }
@@ -85,7 +88,7 @@
           padding: 0px 3px;
         }
         .color-blue {
-          color: #00f;
+          color: #0000ff;
           font-weight: 400;
         }
         .color-italic-grey {
@@ -99,4 +102,3 @@
     }
   }
 }
-// 
