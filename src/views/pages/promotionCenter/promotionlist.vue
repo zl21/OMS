@@ -34,7 +34,7 @@
         <Col span="6" class="form-item tableInput">
           <span class="form-label"> 店铺名称: </span>
           <div class="form-input">
-            <TableInput :is-active="true" :has-label="false" :is-disabled="false" :itemdata="my_input_sh.itemdata" />
+            <TableInput :is-active="true" :has-label="true" :is-disabled="false" :itemdata="my_input_sh.itemdata" />
           </div>
         </Col>
         <!-- 商品 -->
