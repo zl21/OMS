@@ -81,6 +81,9 @@ export default {
   modifyReturnOrderWarehouse: params => network.post('/api/cs/oc/oms/v1/modifyReturnOrderWarehouse', params), // 退换货单修改退回仓库
   checkCancelParams: params => network.post('/api/cs/oc/oms/v1/checkCancelParams', params), // 检查接口
   checkBeforeCreateVipDelivery: params => network.post('/api/cs/vip/distribution/v1/checkBeforeCreateVipDelivery', params), // 创建出仓单初始化接口
+  getDeliveryMethod: params => network.post('/api/cs/vip/distribution/v1/getDeliveryMethod', params), // 创建出仓单获取运输方式
+  distributionCreateDelivery: params => network.post('/api/cs/vip/distribution/v1/distributionCreateDelivery', params), // 创建出仓单接口
+
 
   // 半定制弹框
   //
