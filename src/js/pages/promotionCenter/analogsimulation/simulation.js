@@ -264,18 +264,20 @@ export default {
         ids: arr
       };
       simParam.append('param', JSON.stringify(params));
-      const {
-        data: { code, message, data }
-      } = await this.service.promotionCenter.selectProInfo(formData);
-      console.log(code, message, data);
-      if (code === 0) {
-        resolve(data);
-      } else {
-        this.$message({
-          type: 'error',
-          message
-        });
-      }
+      return new Promise(async (resolve) => {
+        const {
+          data: { code, message, data }
+        } = await this.service.promotionCenter.selectProInfo(formData);
+        console.log(code, message, data);
+        if (code === 0) {
+          resolve(data);
+        } else {
+          this.$message({
+            type: 'error',
+            message
+          });
+        }
+      })
       // return new Promise((resolve) => {
       //   axios({
       //     // 根据id获取表格其他数据
