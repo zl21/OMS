@@ -60,7 +60,7 @@
         type: Array,
         defalut: () => []
       },
-      idArr: {
+      idArray: {
         type: Array,
         defalut: () => []
       },
@@ -70,7 +70,7 @@
       // tablename: {
       //   type: String,
       // },
-      rowData: {
+      selectRowData: {
         type: Array,
         defalut: () => []
       },

@@ -3,7 +3,7 @@ import axios from 'axios';
   export default {
     props: {
 
-      idArr: {
+      idArray: {
         type: Array
       }
     },
@@ -21,7 +21,7 @@ import axios from 'axios';
         const data = {
           title: '延期',
           tablename: 'ST_C_SHOP_ITEM_VIRTUAL_HIGH_STOCK',
-          objids: this.idArr,
+          objids: this.idArray,
           newEndTime: this.renderTime(this.time)
         };
         const formdata = new FormData();

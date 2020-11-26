@@ -17,7 +17,7 @@ export default {
     tablename: {
       type: String,
     },
-    rowData: {
+    selectRowData: {
       type: Array,
     },
   },

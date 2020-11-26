@@ -23,7 +23,7 @@ export default {
       type: String,
       default: () => ''
     },
-    rowData: {
+    selectRowData: {
       type: Array,
       default: () => []
     },

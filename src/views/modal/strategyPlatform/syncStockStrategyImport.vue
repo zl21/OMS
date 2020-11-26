@@ -6,7 +6,7 @@
 
 <script>
   import importTable from '@/views/modal/publicDialog/importTable.vue';
-  
+
   export default {
     components: {
       importTable
@@ -15,7 +15,7 @@
       objList: {
         type: Array
       },
-      idArr: {
+      idArray: {
         type: Array
       },
       webid: {
@@ -24,7 +24,7 @@
       tablename: {
         type: String
       },
-      rowData: {
+      selectRowData: {
         type: Array
       }
     },

@@ -11,7 +11,7 @@ export default {
       type: Array,
       defalut: () => []
     },
-    idArr: {
+    idArray: {
       type: Array,
       defalut: () => []
     },
@@ -21,7 +21,7 @@ export default {
     tablename: {
       type: String
     },
-    rowData: {
+    selectRowData: {
       type: Array,
       defalut: () => []
     },

@@ -12,13 +12,13 @@
 
 <script>
   // import { post } from '@/utils/request';
-  
+
   import businessButton from 'professionalComponents/businessButton';
-  
+
   import businessForm from 'professionalComponents/businessForm';
 
   // import { standardTimeConversion } from  '@/assets/js/__utils__/date.js';
-  
+
   const { getModuleName } = R3;
   export default {
     components: {
@@ -32,9 +32,9 @@
      * @property {Object} activeTabAction 元数据定义的数据
      * @property {Array} rowData 表格的所有数据
      * @property {Array} rowArr 选中的数据
-    */ 
+    */
     // eslint-disable-next-line vue/require-prop-types
-    props: ['idArr', 'objList', 'tablename', 'rowArr'],
+    props: ['idArray', 'objList', 'tablename', 'rowArr'],
     data() {
       return {
         dialogLoad: false,

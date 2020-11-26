@@ -5,7 +5,7 @@
   >
     <div class="time-dialog-form">
       <businessForm
-        :form-config="formConfig"  
+        :form-config="formConfig"
       />
     </div>
     <businessButton
@@ -33,8 +33,8 @@
      * @property {Object} activeTabAction 元数据定义的数据
      * @property {Array} rowData 表格的所有数据
      * @property {Array} rowArr 选中的数据
-    */ 
-    props: ['idArr', 'objList', 'tablename', 'rowArr'],
+    */
+    props: ['idArray', 'objList', 'tablename', 'rowArr'],
     data() {
       return {
         dialogLoad: false,

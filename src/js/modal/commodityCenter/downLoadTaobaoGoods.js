@@ -11,7 +11,7 @@ export default {
     objList: {
       type: Array
     },
-    idArr: {
+    idArray: {
       type: Array
     },
     webid: {
@@ -20,7 +20,7 @@ export default {
     tablename: {
       type: String
     },
-    rowData: {
+    selectRowData: {
       type: Array
     }
   },

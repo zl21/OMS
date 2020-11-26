@@ -9,9 +9,9 @@
       objid: {
         default: ''
       },
-      objList: Array,  
+      objList: Array,
       rowArr: Array,
-      rowData: Array,
+      selectRowData: Array,
       idArray: Array, // 明细ids
       webid: '', // 动作定义id
       tablename: '' // 动作定义关联的表格
