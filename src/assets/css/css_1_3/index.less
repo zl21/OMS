@@ -767,7 +767,14 @@ body {
   background: #f00;
 }
 
-.navigator .left {
+.navigator {
+  .middle{
+    margin-left: 0px !important;
+  }
+  .open{
+    left: 180px !important;
+  }
+  .left {
   position: relative;
   img {
     &.banner {
@@ -775,6 +782,7 @@ body {
       width: auto;
     }
   }
+}
 }
 
 // modal 右上角小x图标的样式修改
