@@ -312,7 +312,7 @@ export default {
         data: param
       }).then(res => {
         if (res.data.code == 0) {
-          _this.$parent.$parent.$parent.returnArr(res.data.data || '');
+          _this.$parent.$parent.$parent.returnArr(res.data.data.oc_b_refund_in_id || '');
           // _this.$parent.$parent.$parent.returnArr(_this.selectData[0].ID);
           // _this.$parent.$parent.$parent.getList();
           _this.$parent.$parent.closeConfirm();
