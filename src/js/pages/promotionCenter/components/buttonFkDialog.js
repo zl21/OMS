@@ -1,5 +1,6 @@
 import fkdialog from 'framework/components/tablelist/fkdialog.vue';
 
+
 export default {
   name: 'ButtonFk',
   components: {
@@ -16,6 +17,7 @@ export default {
   },
   data() {
     return {
+      vmI18n: window.vmI18n,
       fkDialog: {
         // 弹框多选
         dialog: false,

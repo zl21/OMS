@@ -317,8 +317,8 @@ export default {
           param.append('objid', objid);
         }
       }
-
-      if (objid && (this.componentData.tableName === 'PS_C_SKU' || this.componentData.tableName === 'SG_B_CHANNEL_PRODUCT' || this.componentData.tableName === 'PS_C_PRO' || this.componentData.tableName === 'IP_C_TAOBAO_PRODUCT')) {
+      // 促销导入;
+      if (this.componentData.tableName === 'PS_C_SKU' || this.componentData.tableName === 'SG_B_CHANNEL_PRODUCT' || this.componentData.tableName === 'PS_C_PRO' || this.componentData.tableName === 'IP_C_TAOBAO_PRODUCT') {
         param.append('table', this.componentData.tableName);
         if (this.componentData.mode) {
           param.append('mode', this.componentData.mode);
