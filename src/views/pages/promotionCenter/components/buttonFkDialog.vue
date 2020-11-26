@@ -5,7 +5,8 @@
       class="white"
       @click="add"
     >
-      批量新增
+    <!-- 批量新增 -->
+    {{ vmI18n.t("btn.batch_add") }}
     </button>
     <fkdialog
       v-if="fkDialog.dialog && itemdata.reftable !== 'VP_C_VIP_ACC'"

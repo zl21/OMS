@@ -662,24 +662,8 @@ export default {
      * 导入
      */
     importData() {
-      // this.dialogModal = {};
-      // this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
-      // this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
-      // const _component = 'popdialog';
-
-      // Vue.component(_component, Vue.extend('@/views/pages/promotionCenter/components/importDialog.vue'));
-      // this.currentView = _component;
-      // this.dialogSet.dialogTitle = '导入';
-      // this.show_dialog = true;
-
       this.importTable.componentData = { tableName: this.itemdata.reftable || 'PS_C_SKU', mode: this.moduleMode };
       this.$children.find(item => item.name === 'importTable').openConfirm();
-      // const self = this;
-      // this.dialogModal = {};
-      // this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
-      // this.dialogModal.mode = this.moduleMode;
-      // self.dialogSet.dialogTitle = '导入';
-      // self.show_dialog = true;
     },
     /**
      * 返回值，用于弹框导入返回调添加单个表
