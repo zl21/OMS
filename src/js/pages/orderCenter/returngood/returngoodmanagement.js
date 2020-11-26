@@ -2639,7 +2639,7 @@ export default {
           {
             key: 'AMT_REFUND',
             dataAcessKey: 'AMT_REFUND',
-            title: _this.vmI18n.t('panel_label.returnAmount'), // 退货金额
+            title: _this.vmI18n.t('other.exchangeAmounts'), // 退货金额
             render: (h, params) => {
               const _this = this;
               return h(
