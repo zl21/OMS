@@ -30,14 +30,12 @@
       <!-- 列表组件 -->
       <div class="tableBox">
         <businessActionTable
-          ref="inStoreHouseTable"
           v-if="labelDefaultValue"
           :jordan-table-config="jordanTableConfig"
           @on-select="returnOnSelect"
           @on-select-cancel="returnCancel"
           @on-select-all="onSelectAll"
           @on-select-all-cancel="onSelectAllCancel"
-          @on-row-click="onRowClick"
         />
         <OrderItem
           v-if="!labelDefaultValue"
