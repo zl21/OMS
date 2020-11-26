@@ -6,7 +6,8 @@
         class="import"
         @click="importData"
       >
-        批量导入
+        <!-- 批量导入 -->
+        {{vmI18n.t("modalTitle.batchImport")}}
       </Button>
     </div>
     <div
@@ -33,7 +34,8 @@
             class="white"
             @click="addRowData(listIndex, 'product')"
           >
-            添加
+            <!-- 添加 -->
+            {{vmI18n.t("btn.increase")}}
           </button>
         </div>
         <Table
@@ -77,7 +79,8 @@
               :row="row"
               @click="deleteRowData(row, listIndex, 'product')"
             >
-              删除
+              {{vmI18n.t("btn.delete")}}
+              <!-- 删除 -->
             </Button>
           </template>
         </Table>
@@ -95,7 +98,8 @@
             class="white"
             @click="addRowData(listIndex, 'gift')"
           >
-            添加
+            {{vmI18n.t("btn.increase")}}
+            <!-- 添加 -->
           </button>
         </div>
         <Table
@@ -152,7 +156,8 @@
               :row="row"
               @click="deleteRowData(row, listIndex, 'gift')"
             >
-              删除
+              {{vmI18n.t("btn.delete")}}
+              <!-- 删除 -->
             </Button>
           </template>
         </Table>

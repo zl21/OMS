@@ -25,6 +25,7 @@ export default {
   },
   data() {
     return {
+      vmI18n: window.vmI18n,
       AutoRight: true,
       currentTab: 0,
       list_index: '',
@@ -41,7 +42,8 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: '批量新增条件信息导入',
+        // confirmTitle: '批量新增条件信息导入',
+        confirmTitle: window.vmI18n.t('modalTitle.a2'), // 批量新增条件信息导入
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '400',
         scrollable: false, // 是否可以滚动
