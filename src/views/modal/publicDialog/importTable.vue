@@ -4,7 +4,7 @@
     <div class="content">
       <loading :loading="loading"></loading>
       <div class="iconclass">
-        <i class="burgeon-icon iconfont icondaoru" />
+        <Icon type="md-cloud-upload" />
       </div>
       <div class="text">
         <!-- <span>注意：上传文件中，不要放置宏或图标，不要更改列的顺序，数据中不要使用公式。</span -->

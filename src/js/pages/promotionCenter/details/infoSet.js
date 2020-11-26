@@ -165,9 +165,9 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: '导入',
+        confirmTitle: '条件信息导入',
         titleAlign: 'center', // 设置标题是否居中 center left
-        width: '600',
+        width: '400',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
         draggable: true, // 是否可以拖动

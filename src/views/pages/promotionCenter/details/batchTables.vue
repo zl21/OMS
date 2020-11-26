@@ -6,7 +6,8 @@
         class="import"
         @click="importData"
       >
-        批量导入
+        <!-- 批量导入 -->
+        {{vmI18n.t("modalTitle.batchImport")}}
       </Button>
     </div>
     <div
@@ -33,7 +34,8 @@
             class="white"
             @click="addRowData(listIndex, 'product')"
           >
-            添加
+            <!-- 添加 -->
+            {{vmI18n.t("btn.increase")}}
           </button>
         </div>
         <Table
@@ -77,7 +79,8 @@
               :row="row"
               @click="deleteRowData(row, listIndex, 'product')"
             >
-              删除
+              {{vmI18n.t("btn.delete")}}
+              <!-- 删除 -->
             </Button>
           </template>
         </Table>
@@ -95,7 +98,8 @@
             class="white"
             @click="addRowData(listIndex, 'gift')"
           >
-            添加
+            {{vmI18n.t("btn.increase")}}
+            <!-- 添加 -->
           </button>
         </div>
         <Table
@@ -152,7 +156,8 @@
               :row="row"
               @click="deleteRowData(row, listIndex, 'gift')"
             >
-              删除
+              {{vmI18n.t("btn.delete")}}
+              <!-- 删除 -->
             </Button>
           </template>
         </Table>
@@ -168,20 +173,22 @@
       />
     </div>
     
-    <div v-if="show_dialog">
-      <Modal
-        v-model="show_dialog"
-        class="dialog"
-        :footer-hide="dialogSet.footerHide"
-        :title="dialogSet.dialogTitle"
-        :mask="dialogSet.mask"
-      >
-        <importDialog
-          :component-data="dialogModal"
-          @returnData="returnData"
-        />
-      </Modal>
-    </div>
+    <businessDialog
+      :closable="importTable.closable"
+      :component-data="importTable.componentData"
+      :draggable="importTable.draggable"
+      :exclude-string="importTable.excludeString"
+      :keep-alive="importTable.keepAlive"
+      :mask="importTable.mask"
+      :mask-closable="importTable.maskClosable"
+      :name="importTable.name"
+      :scrollable="importTable.scrollable"
+      :title="importTable.confirmTitle"
+      :title-align="importTable.titleAlign"
+      :transfer="importTable.transfer"
+      :url="importTable.url"
+      :width="importTable.width"
+    />
   </div>
 </template>
 <script>
