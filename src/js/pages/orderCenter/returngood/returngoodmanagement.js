@@ -2939,6 +2939,8 @@ export default {
 
       // 换货预留库存
       _this.information.formValue.IS_RESERVED = _this.information.formValue.IS_RESERVED ? 1 : 0;
+      // 退单状态
+      _this.information.formValue.PRO_RETURN_STATUS = { 待入库: 0, 部分入库: 1, 全部入库: 2 }[_this.information.formValue.PRO_RETURN_STATUS];
 
       if (_this.RESERVE_BIGINT07_type == '无次品调拨') _this.information.formValue.STATUS_DEFECTIVE_TRANS = 0;
       else if (_this.RESERVE_BIGINT07_type == '次品已调拨') _this.information.formValue.STATUS_DEFECTIVE_TRANS = 2;
@@ -2970,7 +2972,8 @@ export default {
         }
         Rlist.push({
           ID: item[i].ID != -1 ? item[i].ID : -1,
-          reserve_bigint10: item[i].reserve_bigint10, // 与后端没找到该字段,不清楚意义
+          // reserve_bigint10: item[i].reserve_bigint10, // 与后端没找到该字段,不清楚意义
+          OC_B_ORDER_ITEM_ID: item[i].OC_B_ORDER_ITEM_ID,
           ps_c_sku_ecode: item[i].PS_C_SKU_ECODE,
           barcode: item[i].BARCODE,
           ps_c_pro_ecode: item[i].PS_C_PRO_ECODE,
@@ -3023,6 +3026,7 @@ export default {
         }
         Elist.push({
           ID: Eitem[i].ID != -1 ? Eitem[i].ID : -1,
+          OC_B_ORDER_ITEM_ID: Eitem[i].OC_B_ORDER_ITEM_ID,
           ps_c_sku_ecode: Eitem[i].PS_C_SKU_ECODE,
           barcode: Eitem[i].BARCODE,
           ps_c_pro_ecode: Eitem[i].PS_C_PRO_ECODE,

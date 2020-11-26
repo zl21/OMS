@@ -64,6 +64,7 @@
         transportStyle: '',
         autoData: [],
         columns: ['ENAME', 'value'],
+        defaultSelected: [],
         datas: {
           start: 0,
           tabth: [
@@ -84,8 +85,8 @@
       };
     },
     async mounted() {
-      await this.getData();
       await this.init();
+      await this.getData();
     },
     methods: {
       determine() {
@@ -96,6 +97,10 @@
         formdata.append('param', JSON.stringify({ ids: this.idArray }));
         this.service.orderCenter.checkBeforeCreateVipDelivery(formdata).then(res=>{
           console.log(res);
+          if (res.data.code === 0) {
+            this.transportStyle = res.data.data.deliveryMethod;
+            this.defaultSelected = [{ ID: res.data.data.id, Label: res.data.data.eName }];
+          }
         });
       },
       getData() {
