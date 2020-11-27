@@ -18,19 +18,8 @@
       </div>
     </div>
     <div class="tableContent">
-      <div
-        v-show="agTableConfig.agLoading"
-        class="agLoading"
-      >
-        <Spin fix>
-          <Icon
-            type="ios-loading"
-            size="18"
-            class="demo-spin-icon-load"
-          />
-          <div>Loading</div>
-        </Spin>
-      </div>
+      <!-- loading -->
+      <loading :loading="agTableConfig.agLoading"></loading>
       <aTable
         ref="agGridChild"
         :ag-table-config="agTableConfig"

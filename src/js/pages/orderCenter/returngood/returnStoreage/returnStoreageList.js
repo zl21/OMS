@@ -7,7 +7,7 @@ import DateUtil from '@/assets/js/__utils__/date';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
 import comUtils from '@/assets/js/__utils__/common.js';
-// import util from "@/assets/js/__utils__/util";
+import loading from '@/component/loading.vue';
 import aTable from 'professionalComponents/agGridTable.vue';
 
 const getCurrentTime = (() => {
@@ -26,7 +26,8 @@ export default {
     businessForm,
     businessActionTable,
     businessDialog,
-    aTable
+    aTable,
+    loading
   },
   mixins: [buttonPermissionsMixin, isFavoriteMixin],
   props: {},
