@@ -462,35 +462,36 @@ export default {
                 // 选中事件
                 const self = this;
                 const code = val.tem.PS_C_SKU_ECODE;
-                axios({
-                  url: '/p/cs/skuQuery',
-                  method: 'post',
-                  data: {
-                    isBlur: 'N', // N为精确匹配
-                    psCSku: {
-                      ECODE: code
-                    }
-                  }
-                }).then(res => {
-                  if (res.status === 200) {
-                    const data = res.data.data.data;
-                    const arr = []; // 展示的数据
-                    data.forEach(item => {
-                      // 获取想要展示的
-                      arr.push({
-                        PS_C_SKU_ECODE: item.ECODE, // 条码
-                        PS_C_PRO_ECODE: item.PS_C_PRO_ECODE, // 商品编码
-                        PS_C_PRO_ENAME: item.PS_C_PRO_ENAME, // 商品名称
-                        PS_C_CLR_ID: item.colorId, // 颜色id
-                        PS_C_CLR_ENAME: item.colorName, // 颜色
-                        PS_C_SIZE_ID: item.sizeId, // 尺寸id
-                        PS_C_SIZE_ENAME: item.sizeName // 尺寸
-                      });
-                    });
-                    self.jordanTableConfig2SelectStatus = true;
-                    this.selectData = Object.assign({}, arr[0]);
-                  }
-                });
+                self.jordanTableConfig2.businessFormConfig.formValue.dimdata = code;
+                // axios({
+                //   url: '/p/cs/skuQuery',
+                //   method: 'post',
+                //   data: {
+                //     isBlur: 'N', // N为精确匹配
+                //     psCSku: {
+                //       ECODE: code
+                //     }
+                //   }
+                // }).then(res => {
+                //   if (res.status === 200) {
+                //     const data = res.data.data.data;
+                //     const arr = []; // 展示的数据
+                //     data.forEach(item => {
+                //       // 获取想要展示的
+                //       arr.push({
+                //         PS_C_SKU_ECODE: item.ECODE, // 条码
+                //         PS_C_PRO_ECODE: item.PS_C_PRO_ECODE, // 商品编码
+                //         PS_C_PRO_ENAME: item.PS_C_PRO_ENAME, // 商品名称
+                //         PS_C_CLR_ID: item.colorId, // 颜色id
+                //         PS_C_CLR_ENAME: item.colorName, // 颜色
+                //         PS_C_SIZE_ID: item.sizeId, // 尺寸id
+                //         PS_C_SIZE_ENAME: item.sizeName // 尺寸
+                //       });
+                //     });
+                //     self.jordanTableConfig2SelectStatus = true;
+                //     this.selectData = Object.assign({}, arr[0]);
+                //   }
+                // });
                 document.getElementById('Num').focus();
               },
               dimEnter: () => {
