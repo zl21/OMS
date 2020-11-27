@@ -64,12 +64,12 @@ export default {
     const formValue = self.downLoadFormConfig.formValue;
     const shopId = self.downLoadFormConfig.formData[0].itemdata.pid;
     if (!shopId || !formValue.query_date[0]) {
-      self.$message.error(vmI18n.t('modalTips.bt'));// 店铺和平台时间不能为空
+      self.$message.error(window.vmI18n.t('modalTips.bt'));// 店铺和平台时间不能为空
       return;
     }
     self.dialogLoad = true;
     const params = {
-      table: self.tablename,
+      table: self.$route.params.tableName,
       shop_id: shopId,
       start_time: self.standardTimeConversiondateToStr(formValue.query_date[0]),
       end_time: self.standardTimeConversiondateToStr(formValue.query_date[1])

@@ -265,6 +265,8 @@
           </div>
         </div>
       </div>
+      <!--单据状态图片展示 -->
+      <businessStatusFlag :status-name="statusName" />
     </div>
     <!-- 修改仓库-->
     <businessDialog
@@ -304,8 +306,6 @@
     <!-- <Modal v-model="warningModal" title="提示" width="420" @on-ok="warningOk" :mask="true">
       <p>是否确认导出？</p>
     </Modal>-->
-    <!--单据状态图片展示 -->
-    <businessStatusFlag :status-name="statusName" />
     <div
       v-show="saveLoading"
       class="fromLoading"

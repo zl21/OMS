@@ -183,6 +183,8 @@
           </div>
         </div>
       </div>
+      <!--单据状态图片展示 -->
+      <businessStatusFlag :status-name="statusName" />
     </div>
     <!-- 导入 -->
     <businessModal
@@ -212,8 +214,6 @@
       <!-- <p>是否确认导出？</p> -->
       <p>{{ vmI18n.t('modalTips.y2') }}</p>
     </Modal>
-    <!--单据状态图片展示 -->
-    <businessStatusFlag :status-name="statusName" />
     <div
       v-show="isSaveLoading"
       class="fromLoading"

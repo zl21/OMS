@@ -35,7 +35,7 @@ export default {
     data = res.data;
     const treeData = {
       data,
-      name: 'CP_C_HRORG_ID'
+      name: 'ID'
     };
     return treeData;
   },
@@ -100,7 +100,7 @@ export default {
     data = res.data;
     const treeData = {
       data,
-      name: 'CP_C_HRORG_ID'
+      name: 'ID'
     };
     return treeData;
   },
