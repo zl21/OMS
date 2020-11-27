@@ -1,21 +1,21 @@
 <template>
   <div class="payableAdjustmentList">
     <div
-      class="returnBtn"
+      class="returnBtn totalHeight"
     >
       <!-- loading -->
       <loading :loading="agTableConfig.loading"></loading>
       <!-- 按钮 -->
       <businessButton :btn-config="btnConfig" />
     </div>
-    <div class="returnForm">
+    <div class="returnForm totalHeight">
       <!-- form表单 -->
       <businessForm :form-config="formConfig" />
     </div>
     <div class="salesTable">
       <!-- tab切换 -->
       <businessLabel
-        class="businessLabel"
+        class="businessLabel totalHeight"
         :label-list="labelList"
         :label-default-value="labelDefaultValue"
       />

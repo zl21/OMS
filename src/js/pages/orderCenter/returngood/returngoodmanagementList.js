@@ -8,7 +8,7 @@ import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import aTable from 'professionalComponents/agGridTable.vue';
 import loading from '@/component/loading.vue';
-
+import comUtils from '@/assets/js/__utils__/common.js';
 export default {
   components: {
     businessButton,
@@ -587,6 +587,8 @@ export default {
     } else {
       this.getList();
     }
+    // 计算高度 通过设置节点 'totalHeight'
+    comUtils.setTableHeight(this, 100);
   },
   methods: {
     // 获取高级查询&表头

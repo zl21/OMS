@@ -2,10 +2,10 @@
 <template>
   <div class="returnstoreage tableList">
     <!-- <input  type='hidden'  :value=IsDisabled /> -->
-    <div class="returnstoreageBtn">
+    <div class="returnstoreageBtn totalHeight">
       <businessButton :btn-config="btnConfig" />
     </div>
-    <div class="form">
+    <div class="form totalHeight">
       <businessForm
         :form-config="formConfig"
         class="searchList"

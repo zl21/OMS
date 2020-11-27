@@ -6,7 +6,7 @@ import strUtil from '@/assets/js/__utils__/util';
 import DateUtil from '@/assets/js/__utils__/date';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
-
+import comUtils from '@/assets/js/__utils__/common.js';
 // import util from "@/assets/js/__utils__/util";
 import aTable from 'professionalComponents/agGridTable.vue';
 
@@ -310,6 +310,8 @@ export default {
       this.getPermissions('btnConfig', 'returnStoreageList');
     });
     this.getHeaderList();
+    // 计算高度 通过设置节点 'totalHeight'
+    comUtils.setTableHeight(this, 100);
   },
   activated() {
     this.agTableConfig.pagenation.current = 1;

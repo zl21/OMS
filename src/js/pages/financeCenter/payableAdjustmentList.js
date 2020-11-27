@@ -10,6 +10,7 @@ import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import { customPagingMixins } from '@/assets/js/mixins/customPaging.js';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import loading from '@/component/loading.vue';
+import comUtils from '@/assets/js/__utils__/common.js';
 
 // 表头的基本配置
 // const baseColumnDefs = [
@@ -695,7 +696,9 @@ export default {
       }
     });
     this.getList();
-    this.setTableHeight();
+
+    // 计算高度 通过设置节点 'totalHeight'
+    comUtils.setTableHeight(this, 50);
   },
   methods: {
     // 填充下拉选项框
@@ -1017,17 +1020,17 @@ export default {
     // 导出
     returnImport() {},
     // 设置表格高度
-    setTableHeight() {
-      const _this = this;
-      const contentHeight = document.getElementById('content').clientHeight;
-      let returnHeight = 25;
-      returnHeight += document.getElementsByClassName('returnBtn')[0]
-        .clientHeight;
-      returnHeight += document.getElementsByClassName('returnForm')[0]
-        .clientHeight;
-      const tableHeight = contentHeight - returnHeight;
-      _this.agTableConfig.height = tableHeight - 130;
-    },
+    // setTableHeight() {
+    //   const _this = this;
+    //   const contentHeight = document.getElementById('content').clientHeight;
+    //   let returnHeight = 25;
+    //   returnHeight += document.getElementsByClassName('returnBtn')[0]
+    //     .clientHeight;
+    //   returnHeight += document.getElementsByClassName('returnForm')[0]
+    //     .clientHeight;
+    //   const tableHeight = contentHeight - returnHeight;
+    //   _this.agTableConfig.height = tableHeight - 130;
+    // },
     // 导出
     async exportClick() {
       const _this = this;

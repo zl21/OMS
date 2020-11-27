@@ -3,13 +3,13 @@
     v-loading="pageLoad"
     class="orderManager-box"
   >
-    <div class="btn">
+    <div class="btn totalHeight">
       <businessButton
         :btn-config="btnConfig"
         @dropDownClick="dropDownClickChange"
       />
     </div>
-    <div class="from">
+    <div class="from totalHeight">
       <div
         v-show="isShowFromLoading"
         class="from_loading"
@@ -51,7 +51,7 @@
       <businessLabel
         :label-default-value="labelDefaultValue"
         :label-list="labelList"
-        class="businessLabel"
+        class="businessLabel totalHeight"
         @labelClick="labelClick"
       />
       <div class="aTable">
