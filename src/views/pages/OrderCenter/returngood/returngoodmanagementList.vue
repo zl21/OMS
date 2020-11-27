@@ -1,39 +1,20 @@
 <template>
   <div class="returnGoodList">
-    <div
-      class="returnBtn"
-    >
+    <div class="returnBtn totalHeight">
       <!-- 按钮 -->
       <businessButton :btn-config="btnConfig" />
     </div>
-    <div
-      
-      class="returnForm"
-    >
+    <div class="returnForm totalHeight">
       <!-- form表单 -->
-      <businessForm
-        v-if="resetForm"
-        :form-config="formConfig"
-      />
+      <businessForm v-if="resetForm" :form-config="formConfig" />
     </div>
     <div class="salesTable">
       <!-- tab切换 -->
-      <businessLabel
-        class="businessLabel"
-        :label-list="labelList"
-        :label-default-value="labelDefaultValue"
-        @labelClick="labelClick"
-      />
+      <businessLabel class="businessLabel totalHeight" :label-list="labelList" :label-default-value="labelDefaultValue" @labelClick="labelClick" />
       <!-- 列表组件 -->
       <div class="tableBox">
         <loading :loading="agTableConfig.agLoading" />
-        <aTable
-          ref="agGridChild"
-          :ag-table-config="agTableConfig"
-          @on-page-change="pageChange"
-          @on-page-size-change="pageSizeChange"
-          @on-row-dblclick="onRowDblclick"
-        />
+        <aTable ref="agGridChild" :ag-table-config="agTableConfig" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" @on-row-dblclick="onRowDblclick" />
       </div>
     </div>
     <!-- 修改备注-->
@@ -123,55 +104,30 @@
     />
     <!-- 导出 -->
     <!-- 警告 -->
-    <Modal
-      v-model="warningModal"
-      :title="vmI18n.t('common.warning')"
-      width="420"
-      :mask="true"
-      @on-ok="warningOk"
-    >
+    <Modal v-model="warningModal" :title="vmI18n.t('common.warning')" width="420" :mask="true" @on-ok="warningOk">
       <!-- 当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？ -->
-      <p>{{ vmI18n.t("modalTips.e3") }}</p>
+      <p>{{ vmI18n.t('modalTips.e3') }}</p>
     </Modal>
-    <Modal
-      v-model="virtualWarehouseModal"
-      :title="vmI18n.t('modalTitle.manualWarehous')"
-      width="420"
-      :mask="true"
-      @on-ok="virtualWarehouseLibrary"
-    >
+    <Modal v-model="virtualWarehouseModal" :title="vmI18n.t('modalTitle.manualWarehous')" width="420" :mask="true" @on-ok="virtualWarehouseLibrary">
       <!-- <p>当前的操作会执行手动入库，是否继续？</p> -->
-      <p>{{ vmI18n.t("modalTips.k2") }}</p>
+      <p>{{ vmI18n.t('modalTips.k2') }}</p>
     </Modal>
     <!-- 批量原退 提示 -->
-    <Modal
-      v-model="errModal"
-      :title="vmI18n.t('common.tips')"
-      width="500"
-      :mask="true"
-      @on-keydown="keyenter"
-    >
-      <Table
-        :columns="errThData"
-        height="300"
-        :data="errdataList"
-      />
+    <Modal v-model="errModal" :title="vmI18n.t('common.tips')" width="500" :mask="true" @on-keydown="keyenter">
+      <Table :columns="errThData" height="300" :data="errdataList" />
     </Modal>
-    <div
-      v-show="isSaveLoading"
-      class="fromLoading"
-    >
+    <div v-show="isSaveLoading" class="fromLoading">
       <Spin />
     </div>
   </div>
 </template>
 
 <script>
-  import returngoodmanagementList from '@/js/pages/orderCenter/returngood/returngoodmanagementList';
+import returngoodmanagementList from '@/js/pages/orderCenter/returngood/returngoodmanagementList';
 
-  export default returngoodmanagementList;
+export default returngoodmanagementList;
 </script>
 
 <style lang="less">
-@import "~@/css/pages/orderCenter/returngood/returngoodmanagementList.less";
+@import '~@/css/pages/orderCenter/returngood/returngoodmanagementList.less';
 </style>
