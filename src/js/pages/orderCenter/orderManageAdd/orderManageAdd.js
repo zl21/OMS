@@ -461,6 +461,7 @@ export default {
           COD_AMT: [{ required: true, message: ' ', trigger: 'blur' }], // 代收金额
           // USER_NICK: [{ required: true, message: " ", trigger: "blur" }],
           PAY_TYPE: [{ required: true, message: ' ', trigger: 'blur' }],
+          CP_C_PHY_WAREHOUSE_ID: [{ required: true, message: ' ', trigger: 'blur' }],
         },
       },
       // 表单二
@@ -2177,8 +2178,13 @@ export default {
           `${promptMessage}${window.vmI18n.t('modalTips.y1')}`
         );
         return false;
+      } else if (isNaN(masterTable.RECEIVER_MOBILE)) {
+        this.$Message.warning('手机号码必须为数字,请修改')
+      } else if (masterTable.RECEIVER_MOBILE.length !== 11) {
+        this.$Message.warning('手机位数不正确,请修改')
+      } else {
+        return true;
       }
-      return true;
     },
 
     // 新增表单赋值
