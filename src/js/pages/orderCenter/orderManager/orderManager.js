@@ -11,7 +11,7 @@ import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js
 import loading from '@/component/loading.vue';
 import labelListConfig from './publicConfig/labelList.js';
 import orderLogo from './publicConfig/orderLogo.js';
-
+import comUtils from '@/assets/js/__utils__/common.js';
 export default {
   components: {
     businessButton,
@@ -2024,11 +2024,8 @@ export default {
     this.$nextTick(() => {
       this.getPermissions('btnConfig', 'orderManager');
     });
-
-    // // 获取默认数据
-    // 计算高度
-    const self = this;
-    self.setTableHeight();
+    // 计算高度 通过设置节点 'totalHeight'
+    comUtils.setTableHeight(this, 40);
   },
   methods: {
     onSortChanged() {
@@ -3101,23 +3098,6 @@ export default {
     tableRefreshDetail() {
       this.getData();
     },
-    // 设置表格高度
-    setTableHeight() {
-      // let self = this;
-      // const contentWidth = document.getElementsByClassName("main-content")[0]
-      //   .clientWidth;
-      // const contentHeight = document.getElementsByClassName("main-content")[0]
-      //   .clientHeight;
-      // let sumHeight = 25;
-      // sumHeight += document.getElementsByClassName("btn")[0].clientHeight;
-      // sumHeight += document.getElementsByClassName("from")[0].clientHeight;
-      // sumHeight += document.getElementsByClassName("jordan-label-box")[0]
-      //   .clientHeight;
-      // sumHeight += document.getElementsByClassName("page-box")[0].clientHeight;
-      // let tableHeight = contentHeight - sumHeight;
-      // this.jordanTableConfig.height = tableHeight - 40;
-    },
-
     // 字段选项组转换
     converSelect(val) {
       const list = [];

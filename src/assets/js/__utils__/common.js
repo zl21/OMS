@@ -70,8 +70,28 @@ const tabCloseAppoint = (_self) => {
   });
 };
 
+/**
+ * 关闭当前tab
+ * @param _self 指向当前this
+ * @param defaultHeight 指向当前this
+ * 获取agTable高度
+ * 通过 totalHeight 节点
+ */
+const setTableHeight = (_self, defaultHeight) => {
+  const contentHeight = document.getElementById('content').clientHeight;
+  // 获取需要除了agTable之外的节点
+  const arr = document.getElementsByClassName('totalHeight');
+  let sumHeight = 34 + defaultHeight;
+  Object.getOwnPropertyNames(arr).forEach((item) => {
+    sumHeight += parseInt(arr[item].clientHeight);
+  });
+  _self.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
+  console.log(contentHeight, sumHeight, _self.agTableConfig.tableHeight);
+};
+
 export default {
   pagingInit,
   dateFormat,
   tabCloseAppoint,
+  setTableHeight
 };

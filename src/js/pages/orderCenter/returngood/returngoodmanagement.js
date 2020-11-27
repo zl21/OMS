@@ -2398,7 +2398,7 @@ export default {
                           }
                         }
                       },
-                      list.forEach(item =>
+                      list.map(item =>
                         h('Option', {
                           props: {
                             value: item.psCSpec1objId,
@@ -2513,7 +2513,7 @@ export default {
                           }
                         }
                       },
-                      list.forEach(item =>
+                      list.map(item =>
                         h('Option', {
                           props: {
                             value: item.psCSpec2objId,
