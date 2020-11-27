@@ -23,6 +23,17 @@ export default {
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
+    const validatePhoneNumber = (rule, value, callback) => {
+      const pNumver = this.formConfig1.formValue.RECEIVER_MOBILE;
+      if(!pNumver) {
+        return callback(new Error('手机号不能为空!'))
+      }
+      if(/^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/.test(pNumver)){
+        return callback();
+      }else {
+        return callback(new Error('手机号格式不正确!'))
+      }
+    };
     return {
       vmI18n: window.vmI18n,
       isShowFromLoading: false, // 加载
@@ -637,7 +648,7 @@ export default {
         ruleValidate: {
           RECEIVER_NAME: [{ required: true, message: ' ', trigger: 'blur' }],
           RECEIVER_ADDRESS: [{ required: true, message: ' ', trigger: 'blur' }],
-          RECEIVER_MOBILE: [{ required: true, message: ' ', trigger: 'blur' }],
+          RECEIVER_MOBILE: [{ validator: validatePhoneNumber,required: true, trigger: 'blur' }],
         },
       },
       // 表单三
