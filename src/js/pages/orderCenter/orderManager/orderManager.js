@@ -32,7 +32,7 @@ export default {
       vmI18n: window.vmI18n,
       pageLoad: false,
       agTableConfig: {
-        tableHeight: '600px',
+        tableHeight: '480px',
         agLoading: false,
         columnDefs: [],
         rowData: [],

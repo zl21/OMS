@@ -377,7 +377,7 @@ export default {
             return resDom;
           }
         },
-        tableHeight: '600px',
+        tableHeight: '480px',
         pagenation: {
           // 设置总条数
           total: 0,
