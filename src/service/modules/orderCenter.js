@@ -50,7 +50,7 @@ export default {
   OcCancelChangingOrRefund: params => network.post('/api/cs/oc/oms/v1/OcCancelChangingOrRefund', params),
   virtualWarehouseStorage: params => network.post('/api/cs/oc/oms/v1/virtualWarehouseStorage', params),
   cancelautorefund: params => network.post('/api/cs/oc/oms/v1/cancelautorefund', params),
-  updateReturnBOrder: params => network.post('/p/cs/updateReturnBOrder', params),
+  updateReturnBOrder: params => network.post('/api/cs/oc/oms/v1/updateReturnBOrder', params),
   orderReturnRecallFromWms: params => network.post('/p/cs/orderReturnRecallFromWms', params),
   retransmissionWms: params => network.post('/api/cs/oc/oms/v1/retransmissionWms', params),
   forcedCompletion: params => network.post('/api/cs/oc/oms/v1/forcedCompletion', params),
