@@ -170,6 +170,8 @@
           </div>
         </div>
       </div>
+      <!--单据状态图片展示 -->
+      <businessStatusFlag :status-name="statusName" />
     </div>
     <!-- 导入 -->
     <businessModal
@@ -225,8 +227,6 @@
       :exclude-string="modifyLogistics.excludeString"
       :component-data="modifyLogistics.componentData"
     />
-    <!--单据状态图片展示 -->
-    <businessStatusFlag :status-name="statusName" />
     <div
       v-show="isSaveLoading"
       class="fromLoading"

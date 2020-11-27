@@ -167,6 +167,8 @@
           />
         </Modal>
       </div>
+      <!--单据状态图片展示 -->
+      <businessStatusFlag :status-name="statusName" />
     </div>
     <!-- 修改备注 11-->
     <businessDialog
@@ -185,8 +187,6 @@
       :exclude-string="changeRemarkConfig.excludeString"
       :component-data="changeRemarkConfig.componentData"
     />
-    <!--单据状态图片展示 -->
-    <businessStatusFlag :status-name="statusName" />
     <div
       v-show="isSaveLoading"
       class="fromLoading"
