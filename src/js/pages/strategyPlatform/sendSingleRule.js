@@ -597,7 +597,7 @@ export default {
         }
       });
       const param = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeNode: treeList };
-      const url = ETYPE === '1' ? '/p/cs/getWarehouseRankResultTable' : ' /p/cs/getVipWarehouseRankResultTable';
+      const url = ETYPE === '1' ? '/p/cs/getWarehouseRankResultTable' : '/p/cs/getVipWarehouseRankResultTable';
       axios({
         url,
         method: 'post',

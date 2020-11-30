@@ -3,6 +3,7 @@ import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessModal from 'professionalComponents/businessDialog';
+import comUtils from '@/assets/js/__utils__/common';
 
 export default {
   components: {
@@ -110,11 +111,12 @@ export default {
             // text: '返回',
             text: window.vmI18n.t('btn.back'), // 按钮文本
             btnclick: () => {
+              comUtils.tabCloseAppoint(this);
               R3.store.commit('global/tabOpen', {
                 type: 'S',
                 tableId: 24639,
                 tableName: 'ST_C_EXPRESS_AREA',
-                label: '物流区域设置',
+                label: window.vmI18n.t('panel_label.logisticsAreaSetting'), // label: '物流区域设置',
                 back: true
               });
             }

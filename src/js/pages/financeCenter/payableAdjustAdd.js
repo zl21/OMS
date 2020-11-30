@@ -9,6 +9,7 @@ import dateUtil from '@/assets/js/__utils__/date.js';
 import tableInput from 'professionalComponents/businessTableInput.vue';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import loading from '@/component/loading.vue';
+import comUtils from '@/assets/js/__utils__/common.js';
 
 export default {
   name: 'payableAdjustAdd',
@@ -112,6 +113,7 @@ export default {
             // text: "返回",
             text: window.vmI18n.t('btn.back'),
             btnclick: () => {
+              comUtils.tabCloseAppoint(this);
               this.$destroy(true);
               this.$store.commit('customize/TabHref', {
                 id: 2986,
