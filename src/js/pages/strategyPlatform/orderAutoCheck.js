@@ -366,34 +366,72 @@ export default {
         }
       });
     },
+    judgeCondition() {
+      // 限制条件勾选非空判断
+      const effectiveCondition = this.effectiveCondition;
+      if (effectiveCondition[1].value) {
+        if (!this.info.beginTime || !this.info.endTime) {
+          this.$Message.error('付款时间不能为空!');
+          return false;
+        }
+      }
+      if (effectiveCondition[2].value) {
+        if (!this.info.LIMIT_PRICE_DOWN || !this.info.LIMIT_PRICE_UP) {
+          this.$Message.error('订单金额（元）不能为空!');
+          return false;
+        }
+      }
+      if (effectiveCondition[4].value) {
+        if (!this.info.RECEIVER_ADDRESS) {
+          this.$Message.error('收货地址不能为空!');
+          return false;
+        }
+      }
+      if (effectiveCondition[5].value) {
+        if (!this.info.BUYER_REMARK) {
+          this.$Message.error('买家留言不能为空!');
+          return false;
+        }
+      }
+      if (effectiveCondition[6].value) {
+        if (!this.info.SELLER_REMARK) {
+          this.$Message.error('买家留言不能为空!');
+          return false;
+        }
+      }
+      return true;
+    },
     save() {
-      const list = this.providesList.map(item => item.Label);
-      this.result.CP_C_REGION_PROVINCE_ENAME = list.join(',');
-      this.service.strategyPlatform
-        .addAutoCheck({
-          fixcolumn: {
-            ST_C_AUTOCHECK: this.result
-          },
-          objid: this.$route.params.customizedModuleId
-        })
-        .then(({ data }) => {
-          if (data.data.code == 0) {
-            this.$Message.success(data.data.message);
-            R3.store.commit('global/tabOpen', {
-              type: 'S',
-              tableName: 'ST_C_AUTOCHECK',
-              tableId: 24634,
-              back: true,
-            });
-            this.$destroy();
-            return;
-          }
-          if (data.data.message) {
-            this.$Message.error(data.data.message);
-          } else {
-            console.log('/p/cs/st/v1/addAutoCheck error');
-          }
-        });
+      const flag = this.judgeCondition();
+      if (flag) {
+        const list = this.providesList.map(item => item.Label);
+        this.result.CP_C_REGION_PROVINCE_ENAME = list.join(',');
+        this.service.strategyPlatform
+          .addAutoCheck({
+            fixcolumn: {
+              ST_C_AUTOCHECK: this.result
+            },
+            objid: this.$route.params.customizedModuleId
+          })
+          .then(({ data }) => {
+            if (data.data.code == 0) {
+              this.$Message.success(data.data.message);
+              R3.store.commit('global/tabOpen', {
+                type: 'S',
+                tableName: 'ST_C_AUTOCHECK',
+                tableId: 24634,
+                back: true,
+              });
+              this.$destroy();
+              return;
+            }
+            if (data.data.message) {
+              this.$Message.error(data.data.message);
+            } else {
+              console.log('/p/cs/st/v1/addAutoCheck error');
+            }
+          });
+      }
     }
   }
 };
