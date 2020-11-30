@@ -94,13 +94,11 @@ const setTableHeight = (_self, defaultHeight) => {
     sumHeight += parseInt(arr[item].clientHeight);
   });
   if (_self.$refs.agGridChild1) {
-    console.log('促销中心列表');
     _self.tabConfig.forEach((item) => {
       item.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
       console.log(item.agTableConfig.tableHeight);
     });
   } else {
-    console.log('其他');
     _self.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
   }
   // _self.tabConfig.forEach((item) => {

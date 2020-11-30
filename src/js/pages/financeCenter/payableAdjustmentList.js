@@ -471,8 +471,8 @@ export default {
           },
         ],
         formValue: {},
-        flodClick: () => {
-          setTimeout(() => {
+        flodClick() {
+          setTimeout(function () {
             this.setTableHeight();
           }, 10);
         },
