@@ -699,6 +699,12 @@ export default {
 
     // 计算高度 通过设置节点 'totalHeight'
     comUtils.setTableHeight(this, 50);
+    // 检测屏幕变化 设置高度 重新渲染agTabe
+    window.onresize = () => {
+      comUtils.setTableHeight(this, 10);
+      console.log(this, 50);
+      this.$refs.agtable.agGridTable(this.agTableConfig.columnDefs, this.agTableConfig.rowData);
+    };
   },
   methods: {
     // 填充下拉选项框

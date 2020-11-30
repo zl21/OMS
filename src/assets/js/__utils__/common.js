@@ -86,7 +86,6 @@ const setTableHeight = (_self, defaultHeight) => {
     sumHeight += parseInt(arr[item].clientHeight);
   });
   _self.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
-  console.log(contentHeight, sumHeight, _self.agTableConfig.tableHeight);
 };
 
 export default {
