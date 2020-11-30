@@ -1,6 +1,27 @@
 <template>
   <div style="width: 400px; padding-right: 20px">
-    <businessForm :form-config="formConfig" />
+<!--    <businessForm :form-config="formConfig" />-->
+    <Form
+      :label-width="120"
+    >
+      <FormItem label="出仓单">
+        <DropDownSelectFilter
+          :single="true"
+          :data="datas"
+          :total-row-count="totalRowCount"
+          :page-size="pageSize"
+          :auto-data="autoData"
+          :columns="columns"
+          :columnsKey="columnsKey"
+          :hidecolumns="hidecolumns"
+          :data-empty-message="'数据加载中...'"
+          @on-popper-show="onPoperShow"
+          @on-page-change="onPageChange"
+          @on-fkrp-selected="fkrpSelected"
+          @on-input-value-change="inputValueChange"
+        />
+      </FormItem>
+    </Form>
     <jordanBtn :btn-config="btnConfig" />
   </div>
 </template>

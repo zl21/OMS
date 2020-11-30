@@ -3,7 +3,16 @@ import businessForm from 'professionalComponents/businessForm';
 import jordanBtn from 'professionalComponents/businessButton';
 
 export default {
-  props: {},
+  props: {
+    idArray: {
+      type: Array,
+      defalut: () => []
+    },
+    selectRowData: {
+      type: Array,
+      defalut: () => []
+    },
+  },
   components: {
     businessForm,
     jordanBtn,
@@ -24,18 +33,18 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const self = this;
-              const valuedata = self.formConfig.formData[0].itemdata.valuedata;
-              const pid = self.formConfig.formData[0].itemdata.pid;
               const param = {
-                deliver_id: pid,
-                delivery_no: valuedata,
+                deliver_id: this.deliver_id,
+                delivery_no: this.delivery_no,
                 ids: self.$store.state[R3.getModuleName()].buttons.selectIdArr,
               };
               const formdata = new FormData();
               formdata.append('param', JSON.stringify(param));
-              if (valuedata === '' || pid === '') {
+              console.log(formdata);
+              if (param.delivery_id === '' || param.delivery_no === '') {
                 // self.$Message.warning("出仓单不能为空");
                 self.$Message.warning(window.vmI18n.t('modalTips.zj'));
+                return false;
               }
               axios({
                 url: '/api/cs/vip/distribution/v1/matchingDelivery',
@@ -67,6 +76,20 @@ export default {
           },
         ],
       },
+      deliver_id: '',
+      delivery_no: '',
+      datas: {
+        start: 0,
+        range: 10,
+        row: [],
+      },
+      columns: [],
+      columnsKey: ['OUTSTORAGE_CODE'],
+      hidecolumns: [],
+      pageSize: 10,
+      pageNum: 1,
+      totalRowCount: 10,
+      autoData: [],
       formConfig: {
         formValue: {},
         formData: [
@@ -120,7 +143,107 @@ export default {
     };
   },
   mounted() {
-    const self = this;
-    console.log(self.idArr);
+    this.getData();
   },
+  methods: {
+    async getData() {
+      const selected = this.selectRowData[0];
+      const query = {
+        cpCShopTitle: selected.CP_C_SHOP_ID.val,
+        cpCPhyWarehouseName: selected.CP_C_PHY_WAREHOUSE_ID.val,
+        warehouseName: selected.WAREHOUSE_CODE.val,
+        jitTypeName: selected.BILL_TYPE.val,
+        PO_NO: selected.PO_NO.val,
+        pageNum: this.pageNum,
+        pageSize: this.pageSize,
+      };
+      const res = await this.service.orderCenter.deliveryV1List(query);
+      if (res.data.code == 0) {
+        const tabth = res.data.data.headers.map(item => {
+          item.name = item.label;
+          item.inputname = item.prop;
+          item.colname = item.prop;
+          item.isak = item.inputname === 'OUTSTORAGE_CODE';
+          return item;
+        });
+        const row = res.data.data.records.map(item => {
+          item.ID = {
+            val: item.ID
+          };
+          item.OUTSTORAGE_CODE = {
+            val: item.OUTSTORAGE_CODE
+          };
+          item.WAREHOUSE_NAME = {
+            val: item.WAREHOUSE_NAME
+          };
+          item.CP_C_PHY_WAREHOUSE_ENAME = {
+            val: item.CP_C_PHY_WAREHOUSE_ENAME
+          };
+          return item;
+        });
+        console.log('tabth', tabth);
+        console.log('row', row);
+        // this.datas.tabth = tabth;
+        // this.datas.row = row;
+        this.datas = {
+          start: (res.data.data.current - 1) * this.pageSize,
+          tabth,
+          row,
+        };
+        this.totalRowCount = res.data.data.total;
+        const records0 = JSON.parse(JSON.stringify(res.data.data.records[0]));
+        const hideColumns = [];
+        for (const key in records0) {
+          if (!['ID', 'OUTSTORAGE_CODE', 'WAREHOUSE_NAME', 'CP_C_PHY_WAREHOUSE_ENAME'].includes(key)) {
+            hideColumns.push(key);
+          }
+        }
+        console.log('hideColumns', hideColumns);
+        this.hidecolumns = hideColumns;
+      } else {
+        this.$message.error(res.data.message);
+      }
+    },
+    onPoperShow() {
+      this.getData();
+    },
+    onPageChange(val) {
+      this.pageNum = val;
+      this.getData();
+    },
+    fkrpSelected(val) {
+      console.log(val);
+      this.deliver_id = val[0].ID;
+      this.delivery_no = val[0].Label;
+    },
+    async inputValueChange(e) {
+      // const formdata = new FormData();
+      // formdata.append('ak', e);
+      // formdata.append('colid', 173684);
+      // formdata.append('fixedcolumns', JSON.stringify({ whereKeys: { STATUS: '=0' } }));
+      // this.service.common.fuzzyquerybyak(formdata).then(res=>{
+      //   console.log(res);
+      //   if (res.data.code === 0) {
+      //     this.autoData = res.data.data;
+      //   }
+      // });
+
+      // new
+      const selected = this.selectRowData[0];
+      const query = {
+        keyword: e,
+        cpCShopTitle: selected.CP_C_SHOP_ID.val,
+        cpCPhyWarehouseName: selected.CP_C_PHY_WAREHOUSE_ID.val,
+        warehouseCode: selected.WAREHOUSE_CODE.val,
+        jitTypeName: selected.BILL_TYPE.val,
+        PO_NO: selected.PO_NO.val,
+        pageNum: this.pageNum,
+        pageSize: this.pageSize,
+      };
+      const res = await this.service.orderCenter.deliveryV1List(query);
+      if (res.data.code === 0) {
+        this.autoData = res.data.data.records;
+      }
+    }
+  }
 };

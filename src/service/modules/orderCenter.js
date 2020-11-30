@@ -1,6 +1,7 @@
 // 订单中心
 import R3 from '@syman/burgeon-r3';
 import port from '@/js/pages/common/orderDetail/connector';
+import qs from "qs";
 
 const { network } = R3;
 export default {
@@ -48,10 +49,9 @@ export default {
   DynamicList: params => network.post('/api/cs/oc/oms/v1/DynamicList', params),
   querySalesReturn: params => network.post('/api/cs/oc/oms/v1/querySalesReturn', params),
   OcCancelChangingOrRefund: params => network.post('/api/cs/oc/oms/v1/OcCancelChangingOrRefund', params),
-  updateVirtualLibrary: params => network.post('/p/cs/updateVirtualLibrary', params),
   virtualWarehouseStorage: params => network.post('/api/cs/oc/oms/v1/virtualWarehouseStorage', params),
   cancelautorefund: params => network.post('/api/cs/oc/oms/v1/cancelautorefund', params),
-  updateReturnBOrder: params => network.post('/p/cs/updateReturnBOrder', params),
+  updateReturnBOrder: params => network.post('/api/cs/oc/oms/v1/updateReturnBOrder', params),
   orderReturnRecallFromWms: params => network.post('/p/cs/orderReturnRecallFromWms', params),
   retransmissionWms: params => network.post('/api/cs/oc/oms/v1/retransmissionWms', params),
   forcedCompletion: params => network.post('/api/cs/oc/oms/v1/forcedCompletion', params),
@@ -70,11 +70,25 @@ export default {
   prodel: params => network.post('/p/cs/prodel', params),
   updateDicunot: params => network.post('/p/cs/oc/v1/sale/updateDicunot', params),
   updateLogisticsBeforePacking: params => network.post('/api/cs/vip/distribution/Logistics/v1/updateLogisticsBeforePacking', params),
+  sendWmsPick: params => network.post('/api/cs/vip/distribution//add/sendWmsPick', params),
   querySkuListAndStorageInfo: params => network.post('/api/cs/oc/oms/v1/querySkuListAndStorageInfo', params),
   updateLogistics: params => network.post('/api/cs/oc/oms/v1/updateLogistics', params),
+  manualMatchingList: params => network.post('/api/cs/oc/oms/v1/manualMatchingList', params),
+  distributionFindBydistributionId: params => network.post('/api/cs/vip/distributionItem/v1/findBydistributionId', params), // 根据配货单id查询配货单明细
+  distributionChangeTag: params => network.post('/api/cs/vip/distribution/v1/changeTag', params), // 配货单换吊牌的保存
+  managementOrderHold: params => network.post('/api/cs/oc/oms/v1/holdOrder', params), // 零售发货单-HOLD单
+  returnTypeItemquery: params => network.post('/p/cs/objectTableItem', params), // 退款分类-退款分类描述
+  extraReturnTableLogQuery: params => network.post('/api/cs/oc/oms/v1/getOcBReturnAfSendLog', params), // 额外退款单-额外退款单日志
+  modifyReturnOrderWarehouse: params => network.post('/api/cs/oc/oms/v1/modifyReturnOrderWarehouse', params), // 退换货单修改退回仓库
+  checkCancelParams: params => network.post('/api/cs/oc/oms/v1/checkCancelParams', params), // 检查接口
+  checkBeforeCreateVipDelivery: params => network.post('/api/cs/vip/distribution/v1/checkBeforeCreateVipDelivery', params), // 创建出仓单初始化接口
+  getDeliveryMethod: params => network.post('/api/cs/vip/distribution/v1/getDeliveryMethod', params), // 创建出仓单获取运输方式
+  distributionCreateDelivery: params => network.post('/api/cs/vip/distribution/v1/distributionCreateDelivery', params), // 创建出仓单接口
+  deliveryV1List: params => network.get(`/api/cs/vip/delivery/v1/list?${qs.stringify(params)}`),
+
   // 半定制弹框
   //
   updateWarehouse: params => network.post('/api/cs/oc/oms/v1/updateWarehouse', params),
-  // 
+  //
   getQueryList: params => network.post('/api/cs/oc/oms/v1/getQueryList', params)
 };
