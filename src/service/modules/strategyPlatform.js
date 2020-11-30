@@ -40,7 +40,7 @@ export default {
 
   // 保存
   saveCompensate: params => network.post('/p/cs/saveCompensate', params),
-  // 删除明细 /p/cs/delCompenstate
+  // 删除明细 
   delCompenstate: params => network.post('/p/cs/delCompenstate', params),
   // 查询方法
   selectCompenstateLogistic: params => network.post('/p/cs/selectCompenstateLogistic', params),
