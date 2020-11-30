@@ -9,7 +9,7 @@ import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
 import loading from '@/component/loading.vue';
-import comUtils from '@/assets/js/__utils__/common.js';
+import comUtils from '@/assets/js/__utils__/common';
 
 // import OrderItem from './orderItem';
 
@@ -1234,38 +1234,37 @@ export default {
               if (item.REFUND_STATUS != 6) queryList.push(item);
             });
             const newQueryList = [];
-            for (let i = 0; i < queryList.length; i++) {
-              let newItem = {};
-              newItem.reserve_bigint10 = queryList[i].ID;
+
+            for await (const subitem of queryList) {
+              const newItem = {};
+              newItem.reserve_bigint10 = subitem.ID;
               newItem.ID = -1;
-              newItem.oOid = queryList[i].OOID; // 子订单id
-              newItem.PS_C_SKU_ECODE = queryList[i].PS_C_SKU_ECODE;
-              newItem.BARCODE = queryList[i].BARCODE;
-              newItem.PS_C_PRO_ID = queryList[i].PS_C_PRO_ID;
-              newItem.PS_C_PRO_ECODE = queryList[i].PS_C_PRO_ECODE;
-              newItem.PS_C_CLR_ID = queryList[i].PS_C_CLR_ID; // 颜色
-              newItem.PS_C_CLR_ECODE = queryList[i].PS_C_CLR_ECODE;
-              newItem.PS_C_CLR_ENAME = queryList[i].PS_C_CLR_ENAME;
-              newItem.PS_C_SIZE_ID = queryList[i].PS_C_SIZE_ID; // 尺寸
-              newItem.PS_C_SIZE_ECODE = queryList[i].PS_C_SIZE_ECODE;
-              newItem.PS_C_SIZE_ENAME = queryList[i].PS_C_SIZE_ENAME;
-              newItem.PS_C_PRO_ENAME = queryList[i].PS_C_PRO_ENAME;
-              newItem.QTY_CAN_REFUND = queryList[i].QTY;
-              newItem.QTY_REFUND = Number(queryList[i].QTY || 0) - Number(queryList[i].QTY_RETURN_APPLY || 0);
-              newItem.QTY_EXCHANGE = queryList[i].QTY;
-              newItem.SEX_NAME = queryList[i].SEX_NAME;
-              newItem.SEX = queryList[i].SEX;
-              newItem.PRICE = queryList[i].PRICE_SETTLE;
-              newItem.amt_refund_single = queryList[i].PRICE_ACTUAL;
-              newItem.AMT_REFUND = publicMethodsUtil.accMul(queryList[i].QTY, queryList[i].PRICE_ACTUAL).toFixed(2); // 退货金额realAmt
+              newItem.oOid = subitem.OOID; // 子订单id
+              newItem.PS_C_SKU_ECODE = subitem.PS_C_SKU_ECODE;
+              newItem.BARCODE = subitem.BARCODE;
+              newItem.PS_C_PRO_ID = subitem.PS_C_PRO_ID;
+              newItem.PS_C_PRO_ECODE = subitem.PS_C_PRO_ECODE;
+              newItem.PS_C_CLR_ID = subitem.PS_C_CLR_ID; // 颜色
+              newItem.PS_C_CLR_ECODE = subitem.PS_C_CLR_ECODE;
+              newItem.PS_C_CLR_ENAME = subitem.PS_C_CLR_ENAME;
+              newItem.PS_C_SIZE_ID = subitem.PS_C_SIZE_ID; // 尺寸
+              newItem.PS_C_SIZE_ECODE = subitem.PS_C_SIZE_ECODE;
+              newItem.PS_C_SIZE_ENAME = subitem.PS_C_SIZE_ENAME;
+              newItem.PS_C_PRO_ENAME = subitem.PS_C_PRO_ENAME;
+              newItem.QTY_CAN_REFUND = subitem.QTY;
+              newItem.QTY_REFUND = Number(subitem.QTY || 0) - Number(subitem.QTY_RETURN_APPLY || 0);
+              newItem.QTY_EXCHANGE = subitem.QTY;
+              newItem.SEX_NAME = subitem.SEX_NAME;
+              newItem.SEX = subitem.SEX;
+              newItem.PRICE = subitem.PRICE_SETTLE;
+              newItem.amt_refund_single = subitem.PRICE_ACTUAL;
+              newItem.AMT_REFUND = publicMethodsUtil.accMul(subitem.QTY, subitem.PRICE_ACTUAL).toFixed(2); // 退货金额realAmt
               newItem.QTY_IN = 0;
               newItem.PRODUCT_MARK = '正品';
-              newItem.skuId = queryList[i].PS_C_SKU_ID;
-              _this.reconstructionGetDetail(queryList[i], newItem, queryList[i].PS_C_PRO_ECODE);
-              newItem.clrList = _this.clrListArr;
-              newItem.sizeList = _this.sizeListArr;
-              newItem.PRICE_SETTLE = queryList[i].PRICE_SETTLE; // 结算单价
-              newItem.AMT_SETTLE_TOT = queryList[i].TOT_PRICE_SETTLE; // 结算金额
+              newItem.skuId = subitem.PS_C_SKU_ID;
+              await _this.reconstructionGetDetail(subitem, newItem, subitem.PS_C_PRO_ECODE);
+              newItem.PRICE_SETTLE = subitem.PRICE_SETTLE; // 结算单价
+              newItem.AMT_SETTLE_TOT = subitem.TOT_PRICE_SETTLE; // 结算金额
               newQueryList.push(newItem);
             }
             _this.jordanTableConfig.data = newQueryList;
@@ -1310,25 +1309,17 @@ export default {
                 }
               }
               _this.defectiveList = res.data.data.orderDefects;
-              const tempRefundDtoList = res.data.data.refundDtoList;
-              for (let i = 0; i < tempRefundDtoList.length; i++) {
-                tempRefundDtoList[i].PRODUCT_MARK = tempRefundDtoList[i].PRODUCT_MARK == 1 ? '正品' : '次品';
-                tempRefundDtoList[i].amt_refund_single = tempRefundDtoList[i].AMT_REFUND_SINGLE;
-                tempRefundDtoList[i].SEX_NAME = tempRefundDtoList[i].SEX_ENAME;
-                tempRefundDtoList[i].PRICE = tempRefundDtoList[i].PRICE_LIST;
-                _this.reconstructionGetDetail(tempRefundDtoList[i], tempRefundDtoList[i], tempRefundDtoList[i].PS_C_PRO_ECODE);
-                tempRefundDtoList[i].clrList = _this.clrListArr;
-                tempRefundDtoList[i].sizeList = _this.sizeListArr;
+              for await (const tempItem of res.data.data.refundDtoList) {
+                tempItem.PRODUCT_MARK = tempItem.PRODUCT_MARK == 1 ? '正品' : '次品';
+                tempItem.amt_refund_single = tempItem.AMT_REFUND_SINGLE;
+                tempItem.SEX_NAME = tempItem.SEX_ENAME;
+                tempItem.PRICE = tempItem.PRICE_LIST;
+                await _this.reconstructionGetDetail(tempItem, tempItem, tempItem.PS_C_PRO_ECODE);
               }
-
-              res.data.data.refundDtoList = tempRefundDtoList;
-              for (let i = 0; i < res.data.data.exchangeDtoList.length; i++) {
-                const item = res.data.data.exchangeDtoList[i];
-                item.SEX_NAME = item.SEX_ENAME;
-                item.PRICE = item.PRICE_LIST;
-                _this.reconstructionGetDetail(item, item, item.PS_C_PRO_ECODE);
-                item.clrList = _this.clrListArr;
-                item.sizeList = _this.sizeListArr;
+              for await (const exchangeItem of res.data.data.exchangeDtoList) {
+                exchangeItem.SEX_NAME = exchangeItem.SEX_ENAME;
+                exchangeItem.PRICE = exchangeItem.PRICE_LIST;
+                await _this.reconstructionGetDetail(exchangeItem, exchangeItem, exchangeItem.PS_C_PRO_ECODE);
               }
               const replace = _this.replacement.formValue;
               replace.platform = res.data.data.returnOrders.PLATFORM; // 平台
@@ -3776,8 +3767,8 @@ export default {
       const queryList = [];
       _this.addSelection = [];
       _this.returnDetailAddTable.table.data = _this.addSelection;
-      for (let i = 0; i < this.onSelectData[0].QUERYORDERITEMRESULTLIST.length; i++) {
-        const selection = this.onSelectData[0].QUERYORDERITEMRESULTLIST[i];
+      for await (const selection of this.onSelectData[0].QUERYORDERITEMRESULTLIST) {
+        // const selection = this.onSelectData[0].QUERYORDERITEMRESULTLIST[i];
         if (selection.refundStatus !== 6) {
           const queryListItem = {};
           queryListItem.ID = -1;
@@ -3809,7 +3800,7 @@ export default {
           queryListItem.amt_refund_single = selection.amtRefundSingle;
           queryListItem.PRICE_SETTLE = selection.priceSettle;
           queryListItem.AMT_SETTLE_TOT = selection.totPriceSettle;
-          _this.reconstructionGetDetail(selection, queryListItem, selection.ecode);
+          await _this.reconstructionGetDetail(selection, queryListItem, selection.ecode);
           queryListItem.clrList = _this.clrListArr;
           queryListItem.sizeList = _this.sizeListArr;
           queryList.push(queryListItem);
