@@ -19,8 +19,6 @@ export default {
   getPromField: params => network.get('/p/cs/getPromField', params),
   getWarehouseLogisticsInfo: params => network.post('/p/cs/getWarehouseLogisticsInfo', params),
   delWarehouseLogistics: params => network.post('/p/cs/delWarehouseLogistics', params),
-  saveCompensate: params => network.post('/p/cs/saveCompensate', params),
-  delCompenstate: params => network.post('/p/cs/delCompenstate', params),
   selectCompenstateLogistic: params => network.post('/p/cs/selectCompenstateLogistic', params),
   expressAreaSaveCmd: params => network.post('/p/cs/expressAreaSaveCmd', params),
   getExpressAreaTree: params => network.post('/p/cs/getExpressAreaTree', params),
