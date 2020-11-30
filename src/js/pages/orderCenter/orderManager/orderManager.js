@@ -144,832 +144,6 @@ export default {
       labelDefaultValue: '1',
       // 设置tabs列表
       labelList: labelListConfig,
-      // 表格
-      jordanTableConfig: {
-        // 配合拖拽事件使用
-        // ellipsis: true,
-        // 控制是否可以单选
-        // highlightRow:true,
-        // 自定义操作列
-        renderArr: [
-          {
-            title: window.vmI18n.t('table_label.replicationReason'), // 复制原因
-            key: 'COPY_REASON'
-          },
-          {
-            title: window.vmI18n.t('table_label.flag'), // 旗帜
-            key: 'ORDER_FLAG',
-            // draggable: true,
-            render: (h, params) => {
-              let imgSrc = '';
-              if (!params.row.ORDER_FLAG) {
-                imgSrc = require('@/assets/image/img/0.png');
-              } else {
-                imgSrc = require(`@/assets/image/img/${params.row.ORDER_FLAG}.png`);
-              }
-
-              if (!params.row.SELLER_MEMO) {
-                return h(
-                  'div',
-                  {
-                    style: {
-                      display: 'flex',
-                      'align-items': 'center'
-                    }
-                  },
-                  [
-                    h('img', {
-                      attrs: {
-                        src: imgSrc
-                      },
-                      style: {
-                        width: '14px',
-                        height: 'auto',
-                        cursor: 'pointer'
-                      },
-                      on: {
-                        click: () => {
-                          // "是否确认修改备注！"
-                          const self = this;
-                          self.publicBouncedConfig = Object.assign(publicDialogConfig.changeRemarkConfig, {
-                            componentData: {
-                              ids: params.row.ID,
-                              status: `${params.row.ORDER_STATUS}`
-                            }
-                          });
-                          setTimeout(() => {
-                            self.$children.find(item => item.name === 'changeRemark').openConfirm();
-                          }, 100);
-                        }
-                      }
-                    })
-                  ]
-                );
-              }
-              return h(
-                'Poptip',
-                {
-                  props: {
-                    placement: 'bottom',
-                    trigger: 'hover',
-                    transfer: true
-                  }
-                },
-                [
-                  h('img', {
-                    attrs: {
-                      src: imgSrc
-                    },
-                    style: {
-                      width: '14px',
-                      height: 'auto',
-                      cursor: 'pointer'
-                    },
-                    on: {
-                      click: () => {
-                        // "是否确认修改备注！"
-                        const self = this;
-                        self.publicBouncedConfig = Object.assign(publicDialogConfig.changeRemarkConfig, {
-                          componentData: {
-                            ids: params.row.ID,
-                            status: `${params.row.ORDER_STATUS}`,
-                            ORDER_FLAG: params.row.ORDER_FLAG,
-                            SELLER_MEMO: params.row.SELLER_MEMO
-                          }
-                        });
-                        setTimeout(() => {
-                          self.$children.find(item => item.name === 'changeRemark').openConfirm();
-                        }, 100);
-                      }
-                    }
-                  }),
-                  h(
-                    'p',
-                    {
-                      slot: 'content'
-                    },
-                    params.row.SELLER_MEMO
-                  )
-                ]
-              );
-            }
-          },
-          {
-            title: window.vmI18n.t('table_label.orderIdentification'), // 订单标识
-            sortable: true,
-            // draggable: true,
-            align: 'center',
-            key: 'ORDER_TAG',
-            render: (h, params) => {
-              if (params.row.ORDERTAGLIST) {
-                params.row.ORDERTAGLIST.forEach(ORDERTAGLISTItem => {
-                  ORDERTAGLISTItem.message = orderLogo[ORDERTAGLISTItem.text];
-                });
-                return h(
-                  'div',
-                  {
-                    style: {
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexDirection: 'row',
-                      cursor: 'pointer',
-                      padding: '6px 8px'
-                    }
-                  },
-                  [
-                    params.row.ORDERTAGLIST.forEach(item => h(
-                        'Poptip',
-                        {
-                          props: {
-                            placement: 'right',
-                            trigger: 'hover',
-                            width: '100%',
-                            transfer: true
-                          }
-                        },
-                        [
-                          h(
-                            'div',
-                            {
-                              style: {
-                                border: `1px solid ${item.clr}`,
-                                color: item.clr,
-                                fontSize: '10px',
-                                borderRadius: '6px',
-                                padding: '2px 2px',
-                                marginRight: '4px',
-                                cursor: 'pointer'
-                              }
-                            },
-                            item.text
-                          ),
-                          h(
-                            'span',
-                            {
-                              slot: 'content'
-                            },
-                            item.message
-                          )
-                        ]
-                      ))
-                  ]
-                );
-              }
-            }
-          },
-          {
-            title: window.vmI18n.t('table_label.platform_orderNo'), // 平台单号
-            align: 'center',
-            key: 'SOURCE_CODE',
-            render: (h, params) => {
-              if (params.row.SOURCE_CODE) {
-                const arrs = params.row.SOURCE_CODE.split(',');
-                const len = arrs.length;
-                let sourceCode = '';
-                arrs.forEach((item, index) => {
-                  sourceCode += item + (index + 1 === len ? '' : ' , ');
-                });
-                return h('div', [
-                  h(
-                    'Poptip',
-                    {
-                      props: {
-                        placement: 'bottom',
-                        transfer: true,
-                        trigger: 'hover'
-                      }
-                    },
-                    [
-                      h(
-                        'span',
-                        {
-                          style: {
-                            width: '200px',
-                            'white-space': 'nowrap',
-                            'text-overflow': 'ellipsis',
-                            overflow: 'hidden',
-                            cursor: 'pointer',
-                            color:
-                              // eslint-disable-next-line no-nested-ternary
-                              params.row.ORDER_STATUS === this.orderStatus.orderCancel || params.row.ORDER_STATUS === this.orderStatus.orderSystemInvalid ? '#c5c5c5' : params.row.SYSREMARK === null || !params.row.SYSREMARK ? '#0F8EE9' : 'red'
-                          }
-                        },
-                        sourceCode
-                      ),
-                      h(
-                        'span',
-                        {
-                          slot: 'content'
-                        },
-                        sourceCode
-                      )
-                    ]
-                  )
-                ]);
-              }
-            }
-          },
-          {
-            title: window.vmI18n.t('table_label.shippingAddress'), // 收货地址
-            key: 'REGION_RECEIVER_ADDRESS',
-            render: (h, params) => h('span', [
-                h(
-                  'Poptip',
-                  {
-                    props: {
-                      placement: 'bottom',
-                      transfer: true,
-                      trigger: 'hover'
-                    }
-                  },
-                  [
-                    h(
-                      'span',
-                      {
-                        style: {
-                          width: '300px',
-                          'white-space': 'nowrap',
-                          'text-overflow': 'ellipsis',
-                          overflow: 'hidden'
-                        }
-                      },
-                      params.row.REGION_RECEIVER_ADDRESS
-                    ),
-                    h(
-                      'span',
-                      {
-                        slot: 'content'
-                      },
-                      params.row.REGION_RECEIVER_ADDRESS
-                    )
-                  ]
-                )
-              ])
-          },
-          {
-            title: window.vmI18n.t('table_label.goodsInfo'), // 商品信息
-            align: 'center',
-            width: 610,
-            ellipsis: false,
-            key: 'QUERYORDERITEMRESULTLIST',
-            render: (h, params) => {
-              if (params.row.QUERYORDERITEMRESULTLIST && params.row.QUERYORDERITEMRESULTLIST.length !== 0) {
-                const popList = [];
-                params.row.QUERYORDERITEMRESULTLIST.forEach((item, index) => {
-                  const ecode = item.ecode || window.vmI18n.t('other.goods'); // 商品
-                  const sizes = item.sizes || window.vmI18n.t('other.sizes'); // 尺寸
-                  const clrs = item.clrs || window.vmI18n.t('other.color'); // 颜色
-                  const dataArr = [];
-                  let dataMore = this.reaptData(params.row.QUERYORDERITEMRESULTLIST);
-                  dataArr.push(item);
-                  // BUG  超过6还是会展示...   add  by  wdq 20190612
-                  if (index > 2) return;
-                  if (index == 2) {
-                    dataMore = dataMore.splice(2);
-                    popList[2] = {
-                      jsonShow: window.vmI18n.t('other.more'), // 更多
-                      data: dataMore
-                    };
-                  }
-                  popList[index] = {
-                    jsonShow: `${ecode} , ${sizes} , ${clrs}`,
-                    data: dataArr
-                  };
-                });
-                // const goodsThead = [
-                //   {
-                //     key: 'image',
-                //     render: (h, params) => {
-                //       const imgSrc = params.row.image
-                //         ? params.row.image
-                //         : require('@/assets/image/img/defaultphoto.png');
-                //       return h('div', [
-                //         h('img', {
-                //           attrs: {
-                //             src: imgSrc,
-                //           },
-                //           style: {
-                //             width: '20px',
-                //             height: 'auto',
-                //             cursor: 'pointer',
-                //           },
-                //         }),
-                //       ]);
-                //     },
-                //   },
-                //   {
-                //     render: (h, params) => h('div', [
-                //       h(
-                //         'span',
-                //         `${params.row.ecode},${params.row.sizes},${params.row.clrs}`
-                //       ),
-                //     ]),
-                //   },
-                //   {
-                //     render: (h, params) => h('span', params.row.price.toFixed(2)),
-                //   },
-                //   {
-                //     key: 'qty',
-                //   },
-                //   {
-                //     render: (h, params) => h('span', params.row.realAmt.toFixed(2)),
-                //   },
-                //   {
-                //     key: 'weight',
-                //   },
-                // ];
-                return h(
-                  'div',
-                  {
-                    style: {
-                      display: 'flex',
-                      'justify-content': 'space-between'
-                    }
-                  },
-                  [
-                    h(
-                      'div',
-                      {
-                        style: {
-                          width: '86%',
-                          'padding-bottom': '6px',
-                          display: 'flex',
-                          'flex-wrap': 'wrap'
-                        }
-                      },
-                      popList.map(item => {
-                        // 缺货标识
-                        let lostGoods = false;
-                        // 缺货数量
-                        const qtyLost = item.data.reduce((cur, next) => {
-                          if (next.qtyLost > 0) {
-                            lostGoods = false;
-                          } else {
-                            lostGoods = true;
-                          }
-                          return cur + next.qtyLost;
-                        }, 0);
-                        return h(
-                          'div',
-                          {
-                            style: {
-                              padding: '6px 4px 0px 4px'
-                            }
-                          },
-                          [
-                            h(
-                              'div',
-                              {
-                                style: {
-                                  padding: '4px 6px',
-                                  border: '1px solid #d3d3d3',
-                                  position: 'relative',
-                                  marginLeft: '10px',
-                                  marginRight: '10px',
-                                  background: item.data[0].refundStatus === 6 ? '#e6e6e6' : 'none'
-                                }
-                              },
-                              [
-                                h('span', {}, item.jsonShow),
-                                h(
-                                  'div',
-                                  {
-                                    style: {
-                                      'min-width': '16px',
-                                      height: '16px',
-                                      'line-height': '13px',
-                                      border: '1px solid #DCDEE2',
-                                      borderRadius: '9px',
-                                      backgroundColor: '#84C9E2',
-                                      'font-size': '6px',
-                                      position: 'absolute',
-                                      top: '-6px',
-                                      right: '-8px',
-                                      zIndex: '1',
-                                      color: 'white'
-                                    }
-                                  },
-                                  item.data.reduce((cur, next) => cur + next.qty, 0)
-                                ),
-                                h(
-                                  'div',
-                                  {
-                                    style: {
-                                      'min-width': '16px',
-                                      height: '16px',
-                                      'line-height': '13px',
-                                      border: '1px solid #DCDEE2',
-                                      borderRadius: '9px',
-                                      backgroundColor: '#fd6442',
-                                      'font-size': '6px',
-                                      position: 'absolute',
-                                      top: '14px',
-                                      right: '-8px',
-                                      zIndex: '1',
-                                      color: 'white',
-                                      visibility: lostGoods ? 'hidden' : 'visible'
-                                    }
-                                  },
-                                  qtyLost
-                                )
-                              ]
-                            )
-                          ]
-                          // [
-                          //   h(
-                          //     "Poptip",
-                          //     {
-                          //       attrs: {
-                          //         id: "poptipId"
-                          //       },
-                          //       props: {
-                          //         placement: "bottom",
-                          //         trigger: "hover",
-                          //         width: "100%",
-                          //         transfer: true
-                          //       }
-                          //     },
-                          //     [
-                          //       h(
-                          //         "div",
-                          //         {
-                          //           style: {
-                          //             padding: "6px 8px",
-                          //             border: "1px solid #d3d3d3",
-                          //             position: "releative",
-                          //             marginLeft: "10px",
-                          //             marginRight: "10px"
-                          //           }
-                          //         },
-                          //         item.jsonShow
-                          //       ),
-                          //       h(
-                          //         "div",
-                          //         {
-                          //           style: {
-                          //             width: "15px",
-                          //             height: "15px",
-                          //             border: "1px solid #DCDEE2",
-                          //             borderRadius: "2px",
-                          //             borderRadius: "50%",
-                          //             backgroundColor: "#84C9E2",
-                          //             fontSize: "10px",
-                          //             position: "absolute",
-                          //             top: "-6px",
-                          //             right: "0px",
-                          //             zIndex: "1",
-                          //             color: "white"
-                          //           }
-                          //         },
-                          //         item.data.reduce((cur, next) => {
-                          //           return cur + next.qty;
-                          //         }, 0)
-                          //       ),
-                          //       h("i-table", {
-                          //         slot: "content",
-                          //         props: {
-                          //           "show-header": false,
-                          //           "disabled-hover": true,
-                          //           "highlight-row": false,
-                          //           "no-data-text": "暂无数据",
-                          //           columns: goodsThead,
-                          //           data: item.data
-                          //         }
-                          //       })
-                          //     ]
-                          //   )
-                          // ]
-                        );
-                      })
-                    ),
-                    h(
-                      'div',
-                      {
-                        style: {
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-around',
-                          marginLeft: '10px'
-                        }
-                      },
-                      [
-                        h(
-                          'span',
-                          {
-                            style: {
-                              cursor: 'pointer'
-                            },
-                            on: {
-                              click: () => {
-                                const self = this;
-                                // self.publicBouncedConfig =
-                                //   publicDialogConfig.goodsDetailConfig;
-                                // self.$nextTick(function() {
-                                //   self.$set(
-                                //     self.publicBouncedConfig.componentData,
-                                //     "id",
-                                //     params.row.ID
-                                //   );
-                                //   self.$set(
-                                //     self.publicBouncedConfig.componentData,
-                                //     "ocBorderDtoID",
-                                //     params.row.ID
-                                //   );
-                                //   self.$set(
-                                //     self.publicBouncedConfig.componentData,
-                                //     "objid",
-                                //     [params.row.ID]
-                                //   );
-                                // });
-                                self.publicBouncedConfig = Object.assign(publicDialogConfig.goodsDetailConfig, {
-                                  componentData: {
-                                    id: params.row.ID,
-                                    ocBorderDtoID: params.row.ID,
-                                    objid: [params.row.ID],
-                                    order: params.row
-                                  }
-                                });
-
-                                setTimeout(() => {
-                                  self.$children.find(item => item.name === 'goodsDetail').openConfirm();
-                                }, 100);
-
-                                setTimeout(() => {
-                                  this.$children.find(item => item.name === 'goodsDetail').$children[0].$children[1].getData();
-                                }, 200);
-                              }
-                            }
-                          },
-                          window.vmI18n.t('common.details')
-                        ),
-                        h('i', {
-                          class: 'burgeon-icon iconfont iconyoujiantou-copy'
-                        })
-                      ]
-                    )
-                  ]
-                );
-              }
-            }
-          },
-          {
-            title: window.vmI18n.t('other.systemNotes'), // 系统备注
-            key: 'SYSREMARK',
-            render: (h, params) => h('span', [
-                h(
-                  'Poptip',
-                  {
-                    props: {
-                      placement: 'bottom',
-                      transfer: true,
-                      trigger: 'hover'
-                    }
-                  },
-                  [
-                    h(
-                      'span',
-                      {
-                        style: {
-                          width: '300px',
-                          'white-space': 'nowrap',
-                          'text-overflow': 'ellipsis',
-                          overflow: 'hidden'
-                        }
-                      },
-                      params.row.SYSREMARK
-                    ),
-                    h(
-                      'span',
-                      {
-                        slot: 'content'
-                      },
-                      params.row.SYSREMARK
-                    )
-                  ]
-                )
-              ])
-          },
-          {
-            title: window.vmI18n.t('table_label.buyerNickname'), // 买家昵称
-            align: 'center',
-            key: 'USER_NICK',
-            // width: 220,
-            ellipsis: true,
-            render: (h, params) => {
-              if (params.row.PLATFORM === 2) {
-                return h('div', [
-                  h(
-                    'div',
-                    {
-                      style: {
-                        padding: '4px 6px',
-                        display: 'flex',
-                        flexDirection: 'column'
-                      }
-                    },
-                    [
-                      h('p', [
-                        h('i', {
-                          class: 'burgeon-icon iconfont iconjo_wang iconwangwang',
-                          style: {
-                            fontSize: '14px',
-                            color: '#62A2F2',
-                            marginRight: '4px'
-                          },
-                          on: {
-                            click: () => {
-                              if (params.row.PLATFORM === 2) {
-                                window.open(`https://amos.alicdn.com/getcid.aw?v=3&uid=${params.row.USER_NICK}&charset=utf-8&site=cntaobao&fromid=cntaobao${params.row.CP_C_SHOP_TITLE}`);
-                              } else {
-                                // console.log("其他平台订单");
-                              }
-                            }
-                          }
-                        }),
-                        h('span', `${params.row.USER_NICK}`)
-                      ])
-                      // h("p", params.row.CP_C_SHOP_TITLE || "")
-                    ]
-                  )
-                ]);
-              }
-              return h(
-                'div',
-                {
-                  style: {
-                    padding: '4px 6px',
-                    display: 'flex',
-                    flexDirection: 'column'
-                  }
-                },
-                [
-                  h('p', params.row.USER_NICK || '')
-                  // h("p", params.row.CP_C_SHOP_TITLE || "")
-                ]
-              );
-            }
-          },
-          {
-            title: window.vmI18n.t('table_label.receivingInfo'), // 收货信息
-            key: 'JOIN_RECEIVER_ADDRESS',
-            align: 'center',
-            ellipsis: true,
-            render: (h, params) => h('div', [
-                h(
-                  'span',
-                  {
-                    on: {
-                      click: () => {
-                        const self = this;
-                        const param = {
-                          ID: params.row.ID,
-                          OLDRECEIVERADDRESS: `${params.row.RECEIVER_NAME},${params.row.RECEIVER_MOBILE},${params.row.CP_C_REGION_PROVINCE_ENAME}${params.row.CP_C_REGION_CITY_ENAME}${params.row.CP_C_REGION_AREA_ENAME}${params.row.RECEIVER_ADDRESS}`,
-                          BUYER_MESSAGE: params.row.BUYER_MESSAGE,
-                          SELLER_MEMO: params.row.SELLER_MEMO,
-                          SYSREMARK: params.row.SYSREMARK,
-                          CP_C_REGION_PROVINCE_ID: params.row.CP_C_REGION_PROVINCE_ID,
-                          CP_C_REGION_CITY_ID: params.row.CP_C_REGION_CITY_ID,
-                          CP_C_REGION_AREA_ID: params.row.CP_C_REGION_AREA_ID,
-                          RECEIVER_ADDRESS: params.row.RECEIVER_ADDRESS,
-                          RECEIVER_NAME: params.row.RECEIVER_NAME,
-                          RECEIVER_MOBILE: params.row.RECEIVER_MOBILE,
-                          RECEIVER_PHONE: params.row.RECEIVER_PHONE,
-                          RECEIVER_ZIP: params.row.RECEIVER_ZIP,
-                          CALLBACK: () => {
-                            self.getData();
-                          }
-                        };
-
-                        self.publicBouncedConfig = publicDialogConfig.receivingInformationConfig;
-                        self.publicBouncedConfig.componentData = param;
-                        setTimeout(() => {
-                          self.$children.find(item => item.name === 'resolveAddress').openConfirm();
-                        }, 100);
-                      }
-                    }
-                  },
-                  [
-                    h(
-                      'div',
-                      {
-                        style: {
-                          padding: '4px 6px',
-                          display: 'flex',
-                          flexDirection: 'column'
-                        }
-                      },
-                      [
-                        h(
-                          'p',
-                          `${params.row.RECEIVER_NAME},${params.row.RECEIVER_MOBILE},
-                            ${params.row.CP_C_REGION_PROVINCE_ENAME}${params.row.CP_C_REGION_CITY_ENAME}${params.row.CP_C_REGION_AREA_ENAME}`
-                        ),
-                        h('p', `${params.row.RECEIVER_ADDRESS}`)
-                      ]
-                    )
-                  ]
-                )
-              ])
-          },
-          {
-            title: window.vmI18n.t('table_label.orderTime'), // 下单时间
-            key: 'ORDER_DATE',
-            render: (h, params) => {
-              if (!params.row.ORDER_DATE) {
-                return h('span', '');
-              }
-              return h('span', this.standardTimeConversiondateToStr(params.row.ORDER_DATE));
-            }
-          },
-          {
-            title: window.vmI18n.t('table_label.paymentTime'), // 付款时间
-            key: 'PAY_TIME',
-            render: (h, params) => {
-              if (!params.row.PAY_TIME) {
-                return h('span', '');
-              }
-              return h('span', this.standardTimeConversiondateToStr(params.row.PAY_TIME));
-            }
-          },
-          {
-            title: window.vmI18n.t('table_label.creationTime'), // 创建时间
-            key: 'CREATIONDATE',
-            render: (h, params) => {
-              if (!params.row.CREATIONDATE) {
-                return h('span', '');
-              }
-              return h('span', this.standardTimeConversiondateToStr(params.row.CREATIONDATE));
-            }
-          },
-          {
-            title: window.vmI18n.t('table_label.auditTime'), // 审核时间
-            key: 'AUDIT_TIME',
-            render: (h, params) => {
-              if (!params.row.AUDIT_TIME) {
-                return h('span', '');
-              }
-              return h('span', this.standardTimeConversiondateToStr(params.row.AUDIT_TIME));
-            }
-          },
-          {
-            title: window.vmI18n.t('table_label.distributionTime'), // 配货时间
-            key: 'DISTRIBUTION_TIME',
-            render: (h, params) => {
-              if (!params.row.DISTRIBUTION_TIME) {
-                return h('span', '');
-              }
-              return h('span', this.standardTimeConversiondateToStr(params.row.DISTRIBUTION_TIME));
-            }
-          },
-          {
-            title: window.vmI18n.t('table_label.scanDeliveryTime'),
-            key: 'SCAN_TIME',
-            render: (h, params) => {
-              if (!params.row.SCAN_TIME) {
-                return h('span', '');
-              }
-              return h('span', this.standardTimeConversiondateToStr(params.row.SCAN_TIME));
-            }
-          }
-        ],
-        // 设置总条数
-        total: 0,
-        // 条数
-        pageSize: 20,
-        // 页数
-        current: 1,
-        // 请求搜索json
-        searchObject: {},
-        searchMethod: '', // 请求方法
-        componentData: {},
-        // 加载中
-        loading: false,
-        // 是否存在操作列
-        isShowAction: false,
-        // 是否存在序号列
-        indexColumn: true,
-        // 是否存在多选框
-        isShowSelection: true,
-        // 是否修改搜索框为select
-        isSearchText: true,
-        // isSearchText为false的情况下使用 搜索框list
-        searchSelectList: [],
-        pageShow: true, // 控制分页是否显示
-        // btnsShow: true, //控制操作按钮是否显示
-        searchInputShow: false, // 控制搜索框是否显示
-        isShowRefreshBtn: true, // 控制是否显示刷新按钮
-        isShowAddDetailBtn: false, // 是否存在新增明细
-        isShowDeleteDetailBtn: false, // 控制是否显示删除明细
-        isShowImportBtn: false, // 控制是否显示导入
-        isShowExportBtn: false, // 控制是否显示导出
-        width: '', // 表格宽度
-        height: 440, // 表格高度
-        border: false, // 是否显示纵向边框
-        pageSizeOpts: [20, 40, 60, 80], // 每页条数切换的配置
-        columns: [],
-        data: []
-      },
       // 普通搜索
       dropList: [],
       tagList: [
@@ -2003,7 +1177,7 @@ export default {
   },
   activated() {
     // 获取默认数据
-    this.jordanTableConfig.current = 1;
+    this.agTableConfig.pagenation.current = 1;
     // this.selection = [];
     // this.getData();
   },
@@ -2241,8 +1415,8 @@ export default {
           // 表单筛选条件
           const param = {};
           param.page = {};
-          param.page.pageSize = self.jordanTableConfig.pageSize;
-          param.page.pageNum = self.jordanTableConfig.current;
+          param.page.pageSize = self.agTableConfig.pagenation.pageSize;
+          param.page.pageNum = self.agTableConfig.pagenation.current;
           param.label = self.labelData; // 标签
           param.queryInfo = self.queryInfoData; // 普通搜索
           param.status = self.statusData;
@@ -2273,8 +1447,8 @@ export default {
           // 表单筛选条件
           const param = {
             page: {
-              pageSize: self.jordanTableConfig.pageSize,
-              pageNum: self.jordanTableConfig.current
+              pageSize: self.agTableConfig.pagenation.pageSize,
+              pageNum: self.agTableConfig.pagenation.current
             },
             label: self.labelData, // 标签
             queryInfo: self.queryInfoData, // 普通搜索
@@ -2308,8 +1482,8 @@ export default {
           // 表单筛选条件
           const param = {
             page: {
-              pageSize: self.jordanTableConfig.pageSize,
-              pageNum: self.jordanTableConfig.current
+              pageSize: self.agTableConfig.pagenation.pageSize,
+              pageNum: self.agTableConfig.pagenation.current
             },
             label: self.labelData, // 标签
             queryInfo: self.queryInfoData, // 普通搜索
@@ -2512,8 +1686,8 @@ export default {
       // 表单筛选条件
       const param = {
         page: {
-          pageSize: self.jordanTableConfig.pageSize,
-          pageNum: self.jordanTableConfig.current
+          pageSize: self.agTableConfig.pagenation.pageSize,
+          pageNum: self.agTableConfig.pagenation.current
         },
         label: self.labelData, // 标签
         queryInfo: self.queryInfoData, // 普通搜索
@@ -2689,11 +1863,9 @@ export default {
         startindex: 0
       };
       fromdata.append('param', JSON.stringify(params));
-      _this.jordanTableConfig.loading = true;
+      _this.agTableConfig.agLoading = true;
       _this.service.orderCenter
         .getSeniorQueryCondition(fromdata)
-        // _this.$network
-        //   .post('/api/cs/oc/oms/v1/getSeniorQueryCondition', fromdata)
         .then(res => {
           // 高级查询
           const formData = [];
@@ -2811,7 +1983,7 @@ export default {
               arr.push(obj);
             });
             _this.agTableConfig.columnDefs = arr;
-            _this.jordanTableConfig.loading = false;
+            _this.agTableConfig.agLoading = false;
             if (this.$route.query.type === 'workID') {
               this.searchMethod('workID');
               this.selectValue = [];
@@ -3210,12 +2382,12 @@ export default {
       });
       if (this.$route.query.type === 'workID' && isWork === 'workID') {
         this.selectValue = [];
-        this.jordanTableConfig.current = 1;
+        this.agTableConfig.pagenation.current = 1;
         this.getData1();
       } else {
         this.queryInfoData = this.notempty(queryInfo);
         this.labelData = this.notempty(labelData);
-        this.jordanTableConfig.current = 1;
+        this.agTableConfig.pagenation.current = 1;
         this.getData();
       }
     },
@@ -3225,8 +2397,8 @@ export default {
       if (self.clearFromListValue) self.queryInfoData = [];
       const param = {
         page: {
-          pageSize: self.jordanTableConfig.pageSize,
-          pageNum: self.jordanTableConfig.current
+          pageSize: self.agTableConfig.pagenation.pageSize,
+          pageNum: self.agTableConfig.pagenation.current
         },
         label: self.labelData, // 标签
         queryInfo: self.queryInfoData, // 普通搜索
@@ -3246,8 +2418,8 @@ export default {
       if (self.clearFromListValue) self.queryInfoData = [];
       const param = {
         page: {
-          pageSize: self.jordanTableConfig.pageSize,
-          pageNum: self.jordanTableConfig.current
+          pageSize: self.agTableConfig.pagenation.pageSize,
+          pageNum: self.agTableConfig.pagenation.current
         },
         label: self.labelData, // 标签
         queryInfo: self.queryInfoData, // 普通搜索
@@ -3308,7 +2480,7 @@ export default {
       }
       const highSearchData = [...this.notempty(arr), ...keyArr];
       this.highSearchData = this.notempty(highSearchData);
-      this.jordanTableConfig.current = 1;
+      this.agTableConfig.pagenation.current = 1;
       this.getData();
     },
 
@@ -3316,7 +2488,6 @@ export default {
     async getData() {
       const self = this;
       self.selection = [];
-      self.jordanTableConfig.loading = true;
       self.agTableConfig.agLoading = true;
       // 当出现loading，禁止页面滚动
       document.getElementById('content').style.overflow = 'hidden';
@@ -3324,8 +2495,8 @@ export default {
       if (self.clearFromListValue) self.queryInfoData = [];
       const param = {
         page: {
-          pageSize: self.jordanTableConfig.pageSize,
-          pageNum: self.jordanTableConfig.current
+          pageSize: self.agTableConfig.pagenation.pageSize,
+          pageNum: self.agTableConfig.pagenation.current
         },
         label: self.labelData, // 标签
         queryInfo: self.queryInfoData, // 普通搜索
@@ -3364,22 +2535,16 @@ export default {
             });
             return;
           }
-          // self.jordanTableConfig.loading = false;
           res.data.data = JSON.parse(unzipXv(res.data.data));
           if (res.data.code === 0) {
             if (!res.data.data) {
-              self.jordanTableConfig.data = [];
-              // self.jordanTableConfig.total = 0;
               self.agTableConfig.pagenation.total = 0;
               self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
             } else {
               const queryOrderResultList = res.data.data.queryOrderResultList;
-              // self.jordanTableConfig.total = res.data.data.totalSize;
               self.agTableConfig.pagenation.total = res.data.data.totalSize;
-              // self.jordanTableConfig.data = res.data.data.queryOrderResultList;
               self.agTableConfig.rowData = queryOrderResultList;
               self.agTableConfig.rowData.forEach(item => {
-                // self.jordanTableConfig.data.forEach(item => {
                 if (item.ORDER_STATUS === self.orderStatus.orderCancel || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid) {
                   item.isColorGray = true;
                 } else {
@@ -3400,7 +2565,6 @@ export default {
           }
         })
         .catch(() => {
-          self.jordanTableConfig.loading = false;
           self.agTableConfig.agLoading = false;
         });
     },
@@ -3520,7 +2684,7 @@ export default {
     //  获取页面数据
     async getData1() {
       const self = this;
-      self.jordanTableConfig.loading = true;
+      self.agTableConfig.agLoading = true;
       if (self.clearFromListValue) self.queryInfoData = [];
       if (self.$route.query.type == 'workID' && self.$route.query.ID !== undefined) {
         const arr = [{ type: 'Input', queryName: 'ID', value: self.$route.query.ID }];
@@ -3539,8 +2703,8 @@ export default {
 
       const param = {
         page: {
-          pageSize: self.jordanTableConfig.pageSize,
-          pageNum: self.jordanTableConfig.current
+          pageSize: self.agTableConfig.pagenation.pageSize,
+          pageNum: self.agTableConfig.pagenation.current
         },
         label: self.labelData, // 标签
         queryInfo: self.queryInfoData, // 普通搜索
@@ -3553,17 +2717,15 @@ export default {
       self.service.orderCenter
         .queryOrderList(fromdata)
         .then(res => {
-          self.jordanTableConfig.loading = false;
           self.agTableConfig.agLoading = false;
           if (res.data.code === 0) {
             if (!res.data.data) {
-              self.jordanTableConfig.data = [];
               self.jordanTableConfig.total = 0;
               self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
             } else {
-              // self.jordanTableConfig.total = res.data.data.totalSize;
+              const queryOrderResultList = res.data.data.queryOrderResultList;
               self.agTableConfig.pagenation.total = res.data.data.totalSize;
-              self.jordanTableConfig.data = res.data.data.queryOrderResultList;
+              self.agTableConfig.rowData = queryOrderResultList;
               self.jordanTableConfig.data.forEach(item => {
                 if (item.ORDER_STATUS === self.orderStatus.orderCancel || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid) {
                   item.isColorGray = true;
@@ -3581,7 +2743,6 @@ export default {
           }
         })
         .catch(() => {
-          self.jordanTableConfig.loading = false;
           self.agTableConfig.agLoading = false;
         });
       this.selectValue = [];
@@ -3594,18 +2755,18 @@ export default {
     },
     // 分页change 事件
     pageChange(val) {
-      this.jordanTableConfig.current = val;
+      this.agTableConfig.pagenation.current = val;
       this.getData();
     },
     // 切换分页条数
     pageSizeChange(val) {
-      this.jordanTableConfig.pageSize = val;
+      this.agTableConfig.pagenation.pageSize = val;
       this.getData();
     },
     // 切换标签 执行搜索
     labelClick(item) {
       this.statusData = item;
-      this.jordanTableConfig.current = 1;
+      this.agTableConfig.pagenation.current = 1;
       this.getData();
     },
 

@@ -658,15 +658,7 @@ export default {
             return resultElement;
           },
         },
-        pagenation: {
-          // 设置总条数
-          total: 0,
-          // 条数
-          pageSize: 20,
-          // 页数
-          current: 1,
-          pageSizeOpts: [20, 50, 150, 1000],
-        },
+        pagenation: comUtils.pageConfig,
       }, // 全部
       // returnSelectData: [], // 列表选中数据
       isShowFromLoading: false,
