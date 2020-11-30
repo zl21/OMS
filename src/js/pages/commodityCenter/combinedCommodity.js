@@ -44,8 +44,7 @@ export default {
         formData: [
           {
             style: 'input', // 输入框类型
-            // label: "商品编码", //输入框前文字
-            label: window.vmI18n.t('table_label.productNo'),
+            label: window.vmI18n.t('table_label.productNo'), // 商品编码
             value: 'ECODE', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             disabled: false,
@@ -55,8 +54,7 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            // label: "商品名称", //输入框前文字
-            label: window.vmI18n.t('table_label.productName'),
+            label: window.vmI18n.t('table_label.productName'), //商品名称
             value: 'ENAME', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             placeholder: '', // 占位文本，默认为请输入
@@ -100,8 +98,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            // label: "组合商品类型", //下拉框前的值
-            label: window.vmI18n.t('form_label.combinedCommodityType'),
+            label: window.vmI18n.t('form_label.combinedCommodityType'), //组合商品类型
             width: '6', // 所占宽度宽度
             value: 'GROUP_TYPE', // 输入框的值
             multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启

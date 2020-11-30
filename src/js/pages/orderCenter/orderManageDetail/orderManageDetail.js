@@ -566,11 +566,11 @@ export default {
                 id: 2627,
                 type: 'action',
                 name: 'orderManager',
-                label: '零售发货单',
+                label: window.vmI18n.t('panel_label.retail_shipping_order'), // label: '零售发货单',
                 back: true,
                 query: Object.assign({
                   id: 2627,
-                  tabTitle: '零售发货单'
+                  tabTitle: window.vmI18n.t('panel_label.retail_shipping_order'), // tabTitle: '零售发货单'
                 })
               });
             } // 按钮点击事件
