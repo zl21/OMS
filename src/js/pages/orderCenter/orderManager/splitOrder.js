@@ -1,5 +1,6 @@
 import axios from 'axios';
 import businessButton from 'professionalComponents/businessButton';
+import comUtils from '@/assets/js/__utils__/common';
 
 export default {
   name: 'splitOrder',
@@ -8,29 +9,32 @@ export default {
   },
   data() {
     return {
+      vmI18n: window.vmI18n,
       btnConfig: {
         typeAll: 'error',
         buttons: [
           {
-            text: '刷新',
+            text: window.vmI18n.t('btn.refresh'), // text: '刷新',
             btnclick: () => {
               if (this.canFresh) {
                 this.$Modal.confirm({
-                  title:'提示',
-                  content:'当前操作未确认拆单，是否确认刷新？',
+                  title: window.vmI18n.t('modalTitle.tips'), // title:'提示',
+                  content: window.vmI18n.t('modalTips.ch'), // content:'当前操作未确认拆单，是否确认刷新？'
                   titleAlign:'center',
                   mask: true, // 显示蒙层
                   draggable: true, // 拖拽
                   closable: true, // 右上角小叉
                   showCancel: true,
                   okText: '确认',
+                  okText: window.vmI18n.t('modalTips.ch'),
                   cancelText: '取消',
+                  cancelText: window.vmI18n.t('modalTips.ch'),
                   onOk: ()=> {
                     this.getData();
                   },
                 })
               } else {
-                this.$Message.warning('已是原始状态，不执行操作!');
+                this.$Message.warning(window.vmI18n.t('modalTips.ci')); // 已是原始状态，不执行操作!
               }
             },
           },
@@ -39,12 +43,12 @@ export default {
             btnclick: this.back,
           },
           {
-            text: '添加到待拆单',
+            text: window.vmI18n.t('btn.add_splitOrder'), // 添加到待拆单
             btnclick: this.addPendingOrder,
             // icon: 'ios-add-circle-outline',
           },
           {
-            text: '确认拆单',
+            text: window.vmI18n.t('btn.confirm_splitOrder'), // 确认拆单
             btnclick: this.confirm,
             // icon: 'ios-photos-outline',
           },
@@ -56,15 +60,15 @@ export default {
           type: 'selection'
         },
         {
-          title: '是否赠品',
+          title: window.vmI18n.t('table_label.whetherGift'), // 是否赠品
           key: 'is_gift_name'
         },
         {
-          title: '商品SKU',
+          title: window.vmI18n.t('table_label.commoditySKU'), // 商品SKU
           key: 'ps_c_sku_ecode'
         },
         {
-          title: '商品名称',
+          title: window.vmI18n.t('table_label.productName'), // 商品名称
           key: 'ps_c_pro_ename'
         },
         // {
@@ -72,15 +76,15 @@ export default {
         //   key: 'ps_c_clr_ename'
         // },
         {
-          title: '商品SKU名称',
+          title: window.vmI18n.t('table_label.productSKUname'), // 商品SKU名称
           key: 'ps_c_sku_ename'
         },
         {
-          title: '原发货仓库',
+          title: window.vmI18n.t('table_label.original_deliveryWarehouse'), // 原发货仓库
           key: 'cp_c_phy_warehouse_ename'
         },
         {
-          title: '建议发货仓库',
+          title: window.vmI18n.t('table_label.suggested_deliveryWarehouse'), // 建议发货仓库
           key: 'advise_phy_warehouse_id',
           render: (h, params) => {
             const options = params.row.sgBPhyInStorageItemExt.map(item => h('Option', {
@@ -128,19 +132,19 @@ export default {
           }
         },
         {
-          title: '购买数量',
+          title: window.vmI18n.t('form_label.purchaseQuantity'), // 购买数量
           key: 'qty'
         },
         {
-          title: '可售数量',
+          title: window.vmI18n.t('table_label.quantity_availableSale'), // 可售数量
           key: 'total_qty_available'
         },
         {
-          title: '待拆数量',
+          title: window.vmI18n.t('table_label.quantity_demolished'), // 待拆数量
           key: 'waiting_split_num'
         },
         {
-          title: '拆分数量',
+          title: window.vmI18n.t('table_label.quantity_split'), // 拆分数量
           key: 'split_num',
           width: 100,
           render: (h, params) => {
@@ -157,7 +161,7 @@ export default {
                     // this.canFresh = params.row.split_num != value.target.value;
                     params.row.split_num = value.target.value;
                     if (params.row.waiting_split_num - value.target.value < 0) {
-                      this.$Message.warning('拆分数量不能大于待拆数量；不进行拆单');
+                      this.$Message.warning(window.vmI18n.t('modalTips.cj')); // 拆分数量不能大于待拆数量；不进行拆单
                       this.$nextTick(() => {
                         params.row.split_num = params.row.waiting_split_num;
                         this.data[0][params.index] = params.row;
@@ -201,11 +205,12 @@ export default {
   },
   methods: {
     back() {
+      comUtils.tabCloseAppoint(this);
       this.$store.commit('customize/TabHref', {
         id: 2627,
         type: 'action',
         name: 'orderManager',
-        label: '零售发货单',
+        label: window.vmI18n.t('panel_label.retail_shipping_order'), // label: '零售发货单',
         back: true,
         query: {} // row.id
       });
@@ -231,7 +236,7 @@ export default {
         res.data.data[0].total = total;
         self.data.push(res.data.data);
       } else {
-        self.$Message.error('查询失败!');
+        self.$Message.error(window.vmI18n.t('modalTips.ck')); // 查询失败
       }
     },
     onSelect(selection) {
@@ -251,11 +256,11 @@ export default {
       const self = this;
       let flag = true;
       if (self.onSelectData.length === 0) {
-        self.$Message.warning('请选择需要拆分的明细!');
+        self.$Message.warning(window.vmI18n.t('modalTips.cl')); // 请选择需要拆分的明细
         return;
       }
       if (self.data[0].length == 0 || self.data[0][0].total <= 1) {
-        self.$Message.warning('没有可拆分的订单');
+        self.$Message.warning(window.vmI18n.t('modalTips.cm')); // 没有可拆分的订单
         return;
       }
       self.onSelectData.forEach(item => {
@@ -264,7 +269,7 @@ export default {
         }
       });
       if (!flag) {
-        self.$Message.warning('拆分数量不能为0!');
+        self.$Message.warning(window.vmI18n.t('modalTips.cn')); // 拆分数量不能为0
         return;
       }
       self.onSelectData[0].total = 0;
@@ -307,7 +312,7 @@ export default {
     confirm() {
       const self = this;
       if (self.data.length <= 1) {
-        self.$Message.warning('请先选择拆单明细添加到待拆单，再进行拆单');
+        self.$Message.warning(window.vmI18n.t('modalTips.co')); // 请先选择拆单明细添加到待拆单，再进行拆单
         return;
       }
       axios({

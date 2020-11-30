@@ -5,9 +5,9 @@ import businessDialog from 'professionalComponents/businessDialog';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import EssentialInfo from '@/views/pages/OrderCenter/orderManageDetail/details/essentialInfo';
 import OrderItem from '@/views/pages/OrderCenter/orderManageDetail/details/orderItem';
-import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
+import publicDialogConfig from 'professionalComponents/common/js/publicDialog';
 import loading from '@/component/loading.vue';
-import comUtils from '@/assets/js/__utils__/common.js';
+import comUtils from '@/assets/js/__utils__/common';
 
 export default {
   name: 'OrderManageDetail',
@@ -566,11 +566,11 @@ export default {
                 id: 2627,
                 type: 'action',
                 name: 'orderManager',
-                label: '零售发货单',
+                label: window.vmI18n.t('panel_label.retail_shipping_order'), // label: '零售发货单',
                 back: true,
                 query: Object.assign({
                   id: 2627,
-                  tabTitle: '零售发货单'
+                  tabTitle: window.vmI18n.t('panel_label.retail_shipping_order'), // tabTitle: '零售发货单'
                 })
               });
             } // 按钮点击事件

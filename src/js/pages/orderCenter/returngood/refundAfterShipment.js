@@ -4,6 +4,7 @@ import reTable from 'professionalComponents/businessActionTable';
 import reForm from 'professionalComponents/businessForm';
 import dateFormat from '@/assets/js/__utils__/common';
 import refundAfterShipment from './constants/refundAfterShipment';
+import comUtils from '@/assets/js/__utils__/common';
 
 export default {
   components: {
@@ -539,6 +540,7 @@ export default {
             // class: 'cancel',
             // icon: 'md-arrow-round-back',
             btnclick: () => {
+              comUtils.tabCloseAppoint(this);
               if (this.$route.query.tabTitle === '额外退款编辑') {
                 R3.store.commit('global/tabOpen', {
                   type: 'S',

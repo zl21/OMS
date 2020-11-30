@@ -5,6 +5,7 @@ import businessModal from 'professionalComponents/businessDialog.vue';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag.vue';
 import { setTimeout } from 'timers';
+import comUtils from '@/assets/js/__utils__/common';
 
 export default {
   components: {
@@ -211,6 +212,7 @@ export default {
         text: this.vmI18n.t('btn.back'), // 按钮文本
         btnclick: () => {
           const _this = this;
+          comUtils.tabCloseAppoint(_this);
           _this.$store.commit('global/tabOpen', {
             type: 'S',
             tableName: 'ST_C_WAREHOUSE_LOGISTICS',

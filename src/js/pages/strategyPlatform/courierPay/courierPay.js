@@ -5,6 +5,7 @@ import publicMethods from '@/assets/js/public/publicMethods';
 
 import areaList from '@/assets/js/address/area-list';
 import { parseArea } from '@/assets/js/address/address-parse';
+import comUtils from '@/assets/js/__utils__/common';
 
 parseArea(areaList);
 export default {
@@ -528,6 +529,7 @@ export default {
         // text: "返回",
         text: this.vmI18n.t('btn.back'), // 按钮文本
         btnclick: () => {
+          comUtils.tabCloseAppoint(this);
           R3.store.commit('global/tabOpen', {
             type: 'S',
             tableId: 24613,
@@ -568,23 +570,22 @@ export default {
         return;
       }
       if (!self.jordanTableConfig.data.length) {
-         self.$message.error(self.vmI18n.t('modalTips.x4'));
-         return;
+        self.$message.error(self.vmI18n.t('modalTips.x4'));
+        return;
       }
       const formdata = new FormData();
       formdata.append('param', JSON.stringify(param));
-      const {
-        data: { code, data }
-      } = await this.service.strategyPlatform.saveCompensate(formdata);
-      if (code === 0) {
-        if (JSON.stringify(data.data) !== '{}') {
-          self.removeDetail();
+      this.service.strategyPlatform.saveCompensate(formdata).then(res => {
+        if (res.data.data.code === 0) {
+          if (JSON.stringify(res.data.data.data) !== '{}') {
+            self.removeDetail();
+          }
+          self.query(res.data.data.data.objid);
+          self.$message.success(res.data.data.message);
+        } else {
+          self.$message.error(res.data.data.message);
         }
-        self.query(self.objid);
-        self.$message.success(data.message);
-      } else {
-        self.$message.error(data.message);
-      }
+      });
     },
     setData(data) {
       // 页面赋值方法
@@ -718,17 +719,6 @@ export default {
         self.$message.success(res.data.data.message);
         self.query(self.objid);
       }
-      // axios({
-      //   url: "/p/cs/delCompenstate",
-      //   method: "post",
-      //   data: formdata,
-      // }).then((res) => {
-      //   console.log(res);
-      //   if (res.status === 200) {
-      //     self.$Message.success(res.data.data.message);
-      //     self.query(self.objid);
-      //   }
-      // });
     },
     // 查询方法
     async query(id) {
@@ -797,31 +787,30 @@ export default {
       param.fixcolumn.ST_C_COMPENSATE_LOGISTICS.push(addList);
       const formdata = new FormData();
       formdata.append('param', JSON.stringify(param));
-      const {
-        data: { code, data }
-      } = await this.service.strategyPlatform.saveCompensate(formdata);
-      if (code === 0) {
-        self.removeDetail();
-        if (JSON.stringify(data.data) !== '{}') {
-          self.$store.commit('TabHref', {
-            id: data.data.objid,
-            type: 'action',
-            name: 'courierPay',
-            // label: "快递赔付方案",
-            label: self.vmI18n.t('panel_label.express_compensation_scheme'),
-            query: Object.assign({
-              id: data.data.objid,
-              // tabTitle: "快递赔付方案",
-              tabTitle: self.vmI18n.t('panel_label.express_compensation_scheme')
-            })
-          });
+      this.service.strategyPlatform.saveCompensate(formdata).then(res => {
+        if (res.data.data.code === 0) {
+          self.removeDetail();
+          if (JSON.stringify(res.data.data.data) !== '{}') {
+            self.$store.commit('customize/TabHref', {
+              id: res.data.data.data.objid,
+              type: 'action',
+              name: 'courierPay',
+              // label: "快递赔付方案",
+              label: self.vmI18n.t('panel_label.express_compensation_scheme'),
+              query: Object.assign({
+                id: res.data.data.data.objid,
+                // tabTitle: "快递赔付方案",
+                tabTitle: self.vmI18n.t('panel_label.express_compensation_scheme')
+              })
+            });
+          }
+          self.$message.success(res.data.data.message);
+        } else {
+          self.$message.error(res.data.data.message);
+          return;
         }
-        self.$message.success(data.message);
-      } else {
-        self.$message.error(data.message);
-        return;
-      }
-      self.query(self.objid);
+        self.query(res.data.data.data.objid);
+      });
     },
     // 保存清除明细条件
     removeDetail() {

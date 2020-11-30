@@ -9,6 +9,7 @@ import dialogVisible from '@/views/pages/promotionCenter/setGroup';
 import Favorite from '@/views/pages/promotionCenter/components/favorite';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import loading from '@/component/loading.vue';
+import comUtils from '@/assets/js/__utils__/common.js';
 
 const baseColumnDefs = [
   {
@@ -234,7 +235,7 @@ export default {
           label: window.vmI18n.t('common.all'), // 全部
           agTableConfig: {
             isIndex: true,
-            tableHeight: '450px',
+            tableHeight: '100px',
             columnDefs: baseColumnDefs,
             rowData: [],
             renderArr: {
@@ -252,22 +253,14 @@ export default {
                 resultElement.appendChild(iTag);
               }
             },
-            pagenation: {
-              // 设置总条数
-              total: 0,
-              // 条数
-              pageSize: 20,
-              // 页数
-              current: 1,
-              pageSizeOpts: [20, 50, 150, 1000]
-            }
+            pagenation: comUtils.pageConfig,
           }
         },
         {
           label: window.vmI18n.t('btn.published'), // 已发布
           agTableConfig: {
             isIndex: true,
-            tableHeight: '450px',
+            tableHeight: '',
             columnDefs: baseColumnDefs,
             rowData: [],
             renderArr: {
@@ -301,7 +294,7 @@ export default {
           label: window.vmI18n.t('btn.draft'), // 草稿
           agTableConfig: {
             isIndex: true,
-            tableHeight: '450px',
+            tableHeight: '',
             columnDefs: baseColumnDefs,
             rowData: [],
             renderArr: {
@@ -335,7 +328,7 @@ export default {
           label: window.vmI18n.t('other.offline_expired'), // 下线/过期
           agTableConfig: {
             isIndex: true,
-            tableHeight: '450px',
+            tableHeight: '',
             columnDefs: baseColumnDefs,
             rowData: [],
             renderArr: {
@@ -507,9 +500,20 @@ export default {
     this.$nextTick(() => {
       this.getPermissions('btnConfig', 'promactiquerylist');
     });
+
+    // 计算高度 通过设置节点 'totalHeight'
+    await comUtils.setTableHeight(this, 100);
+
     await this.times(); // 默认时间
-    // await this.getPermissions();
+
     await this.getData();
+
+    // 检测屏幕变化 设置高度 重新渲染agTabe
+    window.onresize = () => {
+      comUtils.setTableHeight(this, 100);
+      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
+      this.$refs[`${agGridChild}`][0].agGridTable(this.tabConfig[this.activeName].agTableConfig.columnDefs, this.tabConfig[this.activeName].agTableConfig.rowData);
+    };
   },
   methods: {
     // 处理时间

@@ -77,8 +77,8 @@
           </Panel>
         </Collapse>
       </div>
-      <div class="page-footer">
-        <div class="page-footer-navTab">
+      <div class="tab-content">
+        <div class="tab-content-navTab">
           <p
             :class="navStatus === 0 ? 'action' : ''"
             @click="navStatus = 0"

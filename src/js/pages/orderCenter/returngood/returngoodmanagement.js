@@ -1235,7 +1235,7 @@ export default {
             });
             const newQueryList = [];
             for (let i = 0; i < queryList.length; i++) {
-              const newItem = {};
+              let newItem = {};
               newItem.reserve_bigint10 = queryList[i].ID;
               newItem.ID = -1;
               newItem.oOid = queryList[i].OOID; // 子订单id
@@ -1261,8 +1261,9 @@ export default {
               newItem.QTY_IN = 0;
               newItem.PRODUCT_MARK = '正品';
               newItem.skuId = queryList[i].PS_C_SKU_ID;
-              newItem.clrList = queryList[i].selected.psCSpec1objList;
-              newItem.sizeList = queryList[i].selected.psCSpec2objList;
+              _this.reconstructionGetDetail(queryList[i], newItem, queryList[i].PS_C_PRO_ECODE);
+              newItem.clrList = _this.clrListArr;
+              newItem.sizeList = _this.sizeListArr;
               newItem.PRICE_SETTLE = queryList[i].PRICE_SETTLE; // 结算单价
               newItem.AMT_SETTLE_TOT = queryList[i].TOT_PRICE_SETTLE; // 结算金额
               newQueryList.push(newItem);
@@ -1315,8 +1316,9 @@ export default {
                 tempRefundDtoList[i].amt_refund_single = tempRefundDtoList[i].AMT_REFUND_SINGLE;
                 tempRefundDtoList[i].SEX_NAME = tempRefundDtoList[i].SEX_ENAME;
                 tempRefundDtoList[i].PRICE = tempRefundDtoList[i].PRICE_LIST;
-                tempRefundDtoList[i].clrList = tempRefundDtoList[i].selected.psCSpec1objList;
-                tempRefundDtoList[i].sizeList = tempRefundDtoList[i].selected.psCSpec2objList;
+                _this.reconstructionGetDetail(tempRefundDtoList[i], tempRefundDtoList[i], tempRefundDtoList[i].PS_C_PRO_ECODE);
+                tempRefundDtoList[i].clrList = _this.clrListArr;
+                tempRefundDtoList[i].sizeList = _this.sizeListArr;
               }
 
               res.data.data.refundDtoList = tempRefundDtoList;
@@ -1324,8 +1326,9 @@ export default {
                 const item = res.data.data.exchangeDtoList[i];
                 item.SEX_NAME = item.SEX_ENAME;
                 item.PRICE = item.PRICE_LIST;
-                item.clrList = item.selected.psCSpec1objList;
-                item.sizeList = item.selected.psCSpec2objList;
+                _this.reconstructionGetDetail(item, item, item.PS_C_PRO_ECODE);
+                item.clrList = _this.clrListArr;
+                item.sizeList = _this.sizeListArr;
               }
               const replace = _this.replacement.formValue;
               replace.platform = res.data.data.returnOrders.PLATFORM; // 平台
@@ -1520,8 +1523,7 @@ export default {
             tempRefundDtoList[i].amt_refund_single = tempRefundDtoList[i].AMT_REFUND_SINGLE;
             tempRefundDtoList[i].SEX_NAME = tempRefundDtoList[i].SEX_ENAME;
             tempRefundDtoList[i].PRICE = tempRefundDtoList[i].PRICE_LIST;
-            tempRefundDtoList[i].clrList = tempRefundDtoList[i].selected.psCSpec1objList;
-            tempRefundDtoList[i].sizeList = tempRefundDtoList[i].selected.psCSpec2objList;
+            _this.reconstructionGetDetail(tempRefundDtoList[i], tempRefundDtoList[i]);
           }
 
           res.data.data.refundDtoList = tempRefundDtoList;
@@ -1529,8 +1531,7 @@ export default {
             const item = res.data.data.exchangeDtoList[i];
             item.SEX_NAME = item.SEX_ENAME;
             item.PRICE = item.PRICE_LIST;
-            item.clrList = item.selected.psCSpec1objList;
-            item.sizeList = item.selected.psCSpec2objList;
+            _this.reconstructionGetDetail(item, item);
           }
           _this.refundDtoList.data = res.data.data.refundDtoList;
           _this.exchangeDtoList.data = res.data.data.exchangeDtoList;
@@ -1912,12 +1913,14 @@ export default {
                           }
                         }
                       },
-                      list.map(item => h('Option', {
+                      list.map(item =>
+                        h('Option', {
                           props: {
                             value: item.psCSpec1objId,
                             label: item.psCSpec1objName
                           }
-                        }))
+                        })
+                      )
                     )
                   ]
                 );
@@ -2032,12 +2035,14 @@ export default {
                           }
                         }
                       },
-                      list.map(item => h('Option', {
+                      list.map(item =>
+                        h('Option', {
                           props: {
                             value: item.psCSpec2objId,
                             label: item.psCSpec2objName
                           }
-                        }))
+                        })
+                      )
                     )
                   ]
                 );
@@ -2255,12 +2260,14 @@ export default {
                     }
                   }
                 },
-                list.map(item => h('Option', {
+                list.map(item =>
+                  h('Option', {
                     props: {
                       value: item.SPEC,
                       label: item.SPEC
                     }
-                  }))
+                  })
+                )
               );
             }
           }
@@ -2392,12 +2399,14 @@ export default {
                           }
                         }
                       },
-                      list.map(item => h('Option', {
+                      list.map(item =>
+                        h('Option', {
                           props: {
                             value: item.psCSpec1objId,
                             label: item.psCSpec1objName
                           }
-                        }))
+                        })
+                      )
                     )
                   ]
                 );
@@ -2505,12 +2514,14 @@ export default {
                           }
                         }
                       },
-                      list.map(item => h('Option', {
+                      list.map(item =>
+                        h('Option', {
                           props: {
                             value: item.psCSpec2objId,
                             label: item.psCSpec2objName
                           }
-                        }))
+                        })
+                      )
                     )
                   ]
                 );
@@ -3526,13 +3537,13 @@ export default {
       const _this = this;
       const lists = _this.order.orderform.formValue;
       if (
-        (lists.bill_no == '' || lists.bill_no == undefined)
-        && (lists.source_code == '' || lists.source_code == undefined)
-        && (lists.receiver_name == '' || lists.receiver_name == undefined)
-        && (lists.user_nick == '' || lists.user_nick == undefined)
-        && (lists.receiver_mobile == '' || lists.receiver_mobile == undefined)
-        && (lists.cp_c_store_ename == '' || lists.cp_c_store_ename == undefined)
-        && num == undefined
+        (lists.bill_no == '' || lists.bill_no == undefined) &&
+        (lists.source_code == '' || lists.source_code == undefined) &&
+        (lists.receiver_name == '' || lists.receiver_name == undefined) &&
+        (lists.user_nick == '' || lists.user_nick == undefined) &&
+        (lists.receiver_mobile == '' || lists.receiver_mobile == undefined) &&
+        (lists.cp_c_store_ename == '' || lists.cp_c_store_ename == undefined) &&
+        num == undefined
       ) {
         _this.$Message.error(_this.vmI18n.t('modalTips.i8')); // 请输入查询条件！
         return;
@@ -3798,9 +3809,7 @@ export default {
           queryListItem.amt_refund_single = selection.amtRefundSingle;
           queryListItem.PRICE_SETTLE = selection.priceSettle;
           queryListItem.AMT_SETTLE_TOT = selection.totPriceSettle;
-          // queryListItem.clrList = selection.selected.psCSpec1objList;
-          // queryListItem.sizeList = selection.selected.psCSpec2objList;
-          await _this.getDataByProinfo(selection.ecode, 1);
+          _this.reconstructionGetDetail(selection, queryListItem, selection.ecode);
           queryListItem.clrList = _this.clrListArr;
           queryListItem.sizeList = _this.sizeListArr;
           queryList.push(queryListItem);
@@ -4051,6 +4060,19 @@ export default {
       // 新增明细表单回填记录
       this.enterQuerySave(selection, '1');
     },
+
+    async reconstructionGetDetail(item, returnItem, ecode = '') {
+      // 重构明细拉取请求, 由于项目时间比较紧, 目前只修改了部分接口, 老接口结构保持不变;
+      if (ecode != '') {
+        await this.getDataByProinfo(ecode, 1);
+        returnItem.clrList = this.clrListArr;
+        returnItem.sizeList = this.sizeListArr;
+      } else {
+        returnItem.clrList = item.selected.psCSpec1objList;
+        returnItem.sizeList = item.selected.psCSpec2objList;
+      }
+      // return returnItem;
+    },
     async getDataByProinfo(proEcode, dataType, sizeId, clrId) {
       const _this = this;
       let param = {
@@ -4065,7 +4087,7 @@ export default {
       }
       const formdata = new FormData();
       formdata.append('param', JSON.stringify(param));
-      this.service.common.extInfoQuery(formdata).then(res => {
+      await this.service.common.extInfoQuery(formdata).then(res => {
         if (dataType === 1) {
           _this.clrListArr = res.data.data.psCSpec1objList;
           _this.sizeListArr = res.data.data.psCSpec2objList;

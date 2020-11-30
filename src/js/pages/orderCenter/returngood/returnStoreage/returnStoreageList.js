@@ -289,15 +289,7 @@ export default {
           }
         },
         tableHeight: '560px',
-        pagenation: {
-          // 设置总条数
-          total: 0,
-          // 条数
-          pageSize: 20,
-          // 页数
-          current: 1,
-          pageSizeOpts: [50, 200, 500, 2000]
-        }
+        pagenation: comUtils.pageConfig
       },
       selection: [],
       searchObj: {},
@@ -313,6 +305,11 @@ export default {
     this.getHeaderList();
     // 计算高度 通过设置节点 'totalHeight'
     comUtils.setTableHeight(this, 100);
+    // 检测屏幕变化 设置高度 重新渲染agTabe
+    window.onresize = () => {
+      comUtils.setTableHeight(this, 40);
+      this.$refs.agGridChild.agGridTable(this.agTableConfig.columnDefs, this.agTableConfig.rowData);
+    };
   },
   activated() {
     this.agTableConfig.pagenation.current = 1;

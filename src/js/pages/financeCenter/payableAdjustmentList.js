@@ -471,8 +471,8 @@ export default {
           },
         ],
         formValue: {},
-        flodClick: () => {
-          setTimeout(() => {
+        flodClick() {
+          setTimeout(function () {
             this.setTableHeight();
           }, 10);
         },
@@ -658,15 +658,7 @@ export default {
             return resultElement;
           },
         },
-        pagenation: {
-          // 设置总条数
-          total: 0,
-          // 条数
-          pageSize: 20,
-          // 页数
-          current: 1,
-          pageSizeOpts: [20, 50, 150, 1000],
-        },
+        pagenation: comUtils.pageConfig,
       }, // 全部
       // returnSelectData: [], // 列表选中数据
       isShowFromLoading: false,
@@ -699,6 +691,12 @@ export default {
 
     // 计算高度 通过设置节点 'totalHeight'
     comUtils.setTableHeight(this, 50);
+    // 检测屏幕变化 设置高度 重新渲染agTabe
+    window.onresize = () => {
+      comUtils.setTableHeight(this, 10);
+      console.log(this, 50);
+      this.$refs.agtable.agGridTable(this.agTableConfig.columnDefs, this.agTableConfig.rowData);
+    };
   },
   methods: {
     // 填充下拉选项框
