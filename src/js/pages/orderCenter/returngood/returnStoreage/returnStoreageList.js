@@ -289,15 +289,7 @@ export default {
           }
         },
         tableHeight: '560px',
-        pagenation: {
-          // 设置总条数
-          total: 0,
-          // 条数
-          pageSize: 20,
-          // 页数
-          current: 1,
-          pageSizeOpts: [50, 200, 500, 2000]
-        }
+        pagenation: comUtils.pageConfig
       },
       selection: [],
       searchObj: {},

@@ -84,15 +84,7 @@ export default {
             (params.data.SCAN_TIME ? this.standardTimeConversiondateToStr(params.data.SCAN_TIME) : ''),
           ORDER_FLAG: params => {}
         },
-        pagenation: {
-          // 设置总条数
-          total: 0,
-          // 条数
-          pageSize: 20,
-          // 页数
-          current: 1,
-          pageSizeOpts: [50, 200, 500, 2000]
-        }
+        pagenation: comUtils.pageConfig
       },
       // 弹框配置 导入
       importTable: {

@@ -1,7 +1,15 @@
 /** 
- * 共用方法
+ * 共用对象
 */
-
+const pageConfig = {
+  // 设置总条数
+  total: 0,
+  // 条数
+  pageSize: 50,
+  // 页数
+  current: 1,
+  pageSizeOpts: [50, 200, 500, 2000]
+};
 /**
  * 适用于前端分页
  * @method 分页初始化方法
@@ -92,5 +100,6 @@ export default {
   pagingInit,
   dateFormat,
   tabCloseAppoint,
-  setTableHeight
+  setTableHeight,
+  pageConfig
 };
