@@ -316,9 +316,9 @@
 </template>
 
 <script>
-import sendSingleRule from '@/js/pages/strategyPlatform/sendSingleRule';
+  import sendSingleRule from '@/js/pages/strategyPlatform/sendSingleRule';
 
-export default sendSingleRule;
+  export default sendSingleRule;
 </script>
 
 <style lang="less">
