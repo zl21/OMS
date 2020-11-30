@@ -1181,16 +1181,20 @@ export default {
     // this.getSearchData();
     // 获取from数据
     // this.getFromData();
-    this.getHeaderList();
-    this.$nextTick(() => {
-      this.getPermissions('btnConfig', 'orderManager');
+    const _this = this;
+    _this.getHeaderList();
+    _this.$nextTick(() => {
+      _this.getPermissions('btnConfig', 'orderManager');
     });
     // 计算高度 通过设置节点 'totalHeight'
-    comUtils.setTableHeight(this, 80);
+    comUtils.setTableHeight(_this, 80);
     // 检测屏幕变化 设置高度 重新渲染agTabe
     window.onresize = () => {
-      comUtils.setTableHeight(this, 40);
-      this.$refs.agGridChild.agGridTable(this.agTableConfig.columnDefs, this.agTableConfig.rowData);
+      // 判断 如果不是高级搜索 自适应高度
+      if (_this.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
+        comUtils.setTableHeight(_this, 40);
+        _this.$refs.agGridChild.agGridTable(_this.agTableConfig.columnDefs, _this.agTableConfig.rowData);
+      }
     };
   },
   methods: {
@@ -2155,12 +2159,15 @@ export default {
         self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
         self.highSearchData = [];
         self.isShowSeniorOrOrdinary = !self.isShowSeniorOrOrdinary;
+        setTimeout(() => {
+          comUtils.setTableHeight(this, 30);
+          this.$refs.agGridChild.agGridTable(this.agTableConfig.columnDefs, this.agTableConfig.rowData);
+        }, 500);
         // 设置普通搜索默认选项
         self.setSearchOption();
       }
       self.isShowFromLoading = false;
       self.getHeaderList();
-
       // self.getData();
     },
     // 设置普通搜索默认选项
