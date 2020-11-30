@@ -177,11 +177,6 @@ export default {
           }
         ]
       },
-      // 列表按钮
-      // btnConfig: {
-      //   typeAll: "error", //按钮统一风格样式
-      //   buttons: []
-      // },
       btnConfig: {
         typeAll: 'error', // 按钮统一风格样式
         loading: false, // 按钮加载

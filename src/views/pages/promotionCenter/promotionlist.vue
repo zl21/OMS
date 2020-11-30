@@ -2,7 +2,7 @@
   <!-- promactiqueryList -->
   <div class="promotion-content">
     <loading :loading="loadings"></loading>
-    <div class="operation-content">
+    <div class="operation-content totalHeight">
       <!-- 按钮 head_botton-->
       <div class="operation-botton">
         <jordanBtn :btn-config="btnConfig" />

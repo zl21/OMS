@@ -93,7 +93,21 @@ const setTableHeight = (_self, defaultHeight) => {
   Object.getOwnPropertyNames(arr).forEach((item) => {
     sumHeight += parseInt(arr[item].clientHeight);
   });
-  _self.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
+  if (_self.$refs.agGridChild1) {
+    console.log('促销中心列表');
+    _self.tabConfig.forEach((item) => {
+      item.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
+      console.log(item.agTableConfig.tableHeight);
+    });
+  } else {
+    console.log('其他');
+    _self.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
+  }
+  // _self.tabConfig.forEach((item) => {
+  //   item.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
+  //   console.log(item.agTableConfig.tableHeight);
+  // });
+  // _self.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
 };
 
 export default {
