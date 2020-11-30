@@ -119,22 +119,22 @@ export default {
       btnConfig: {
         typeAll: 'error',
         buttons: [
-          {
-            text: '新增',
-            btnclick: () => {
-              const _this = this;
-              _this.$store.commit('customize/TabHref', {
-                id: -1, // 单据id
-                type: 'action', // 类型action
-                name: 'sendSingleRule', // 文件名
-                label: '订单派单规则编辑', // tab中文名
-                query: Object.assign({
-                  id: -1, // 单据id
-                  tabTitle: '订单派单规则编辑' // tab中文名
-                }) // 带的参数
-              });
-            }
-          },
+          // {
+          //   text: '新增',
+          //   btnclick: () => {
+          //     const _this = this;
+          //     _this.$store.commit('customize/TabHref', {
+          //       id: -1, // 单据id
+          //       type: 'action', // 类型action
+          //       name: 'sendSingleRule', // 文件名
+          //       label: '订单派单规则编辑', // tab中文名
+          //       query: Object.assign({
+          //         id: -1, // 单据id
+          //         tabTitle: '订单派单规则编辑' // tab中文名
+          //       }) // 带的参数
+          //     });
+          //   }
+          // },
           {
             text: '保存',
             btnclick: () => {

@@ -96,11 +96,11 @@ const setTableHeight = (_self, defaultHeight) => {
   if (_self.$refs.agGridChild1) {
     _self.tabConfig.forEach((item) => {
       item.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
-      console.log(item.agTableConfig.tableHeight);
     });
   } else {
     _self.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
   }
+  console.log(contentHeight, sumHeight);
   // _self.tabConfig.forEach((item) => {
   //   item.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
   //   console.log(item.agTableConfig.tableHeight);
