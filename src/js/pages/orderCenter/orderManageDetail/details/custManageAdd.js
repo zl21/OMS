@@ -163,14 +163,17 @@ export default {
     },
     deleteItem() {
       const self = this;
-      const ids = this.checkSelection.map(row => row.ID);
-      if (ids.length === 0) return self.$Message.error('至少选择一条订单明细');
+      const itemId = this.checkSelection.map(row => row.ID);
+      // const changeGoodsSKu = this.checkSelection.map(row => row.PS_C_PRO_ECODE);
+      if (itemId.length === 0) return self.$Message.error('至少选择一条订单明细');
       const param = {
-        orderId: self.objid,
-        ids
+        ids: [self.objid],
+        itemId,
+        // changeGoodsSKu
       };
       axios({
-        url: '/api/cs/oc/oms/v1/deleteGit',
+        // url: '/api/cs/oc/oms/v1/deleteGit',
+        url: '/api/cs/oc/oms/v1/batchDeleteGoods',
         method: 'post',
         data: param
       }).then((res) => {
