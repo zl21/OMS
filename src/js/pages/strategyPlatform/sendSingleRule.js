@@ -382,7 +382,7 @@ export default {
               if (ETYPE === '2') _this.getWarehouseRateResult();
               else if (ETYPE === '1' || ETYPE === '3') _this.getTree();
             } else {
-              this.$store.commit('TabHref', {
+              this.$store.commit('customize/TabHref', {
                 id: res.data.data.data.objid, // 单据id
                 type: 'action', // 类型action
                 name: 'sendSingleRule', // 文件名

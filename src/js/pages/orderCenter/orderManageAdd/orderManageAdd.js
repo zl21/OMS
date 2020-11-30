@@ -2109,7 +2109,7 @@ export default {
           && item.itemdata.name === window.vmI18n.t('form_label.orderShop')
           && !item.itemdata.pid
         ) {
-          promptMessage += window.vmI18n.t('form_label.orderShop');
+          promptMessage += `${window.vmI18n.t('form_label.orderShop')},`;
         }
         // if (
         //   item.itemdata &&
@@ -2120,11 +2120,11 @@ export default {
         // }
       });
       if (masterTable.SHIP_AMT === '') {
-        promptMessage += window.vmI18n.t('form_label.distribution_costs'); // 配送费用
+        promptMessage += `${window.vmI18n.t('form_label.distribution_costs')},`; // 配送费用
       }
       // if (!masterTable.CP_C_PHY_WAREHOUSE_ID || !masterTable.CP_C_PHY_WAREHOUSE_ENAME) promptMessage += "发货仓库,";
       if (!masterTable.SOURCE_CODE) {
-        promptMessage += window.vmI18n.t('form_label.platform_billNo'); // 平台单号
+        promptMessage += `${window.vmI18n.t('form_label.platform_billNo')},`; // 平台单号
       }
       // if (!masterTable.USER_NICK) {
       //   promptMessage += "买家昵称,";
