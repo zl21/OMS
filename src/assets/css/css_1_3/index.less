@@ -1351,7 +1351,7 @@ body {
       padding-right: 3px;
     }
 
-    p {
+    &>p {
       display: inline-block;
       margin-right: 3px;
 
@@ -1366,12 +1366,11 @@ body {
         height: 20px;
         line-height: 12px;
         font-size: 12px;
-        margin-right: 5px;
-        padding: 0px 8px;
+        margin-right: 5px !important;
+        padding: 0px 8px !important;
         border-radius: 10px;
-        border: 1px solid #b4bbbf;
+        border: 1px solid #b4bbbf !important;
         font-style: normal;
-        background: #FFFFFF;
         font-weight: normal;
       }
 
@@ -1420,10 +1419,10 @@ body {
 
 // 标准详情/新增页明细-布局更改
 .tabComponent .TableDetailCollection .detail-collection, .tabComponent .TableDetailCollection {
-  flex-direction: column-reverse;
+  flex-direction: column-reverse !important;
   
   .detail-top {
-    margin: 8px 0 2px;
-    justify-content: center;
+    margin: 8px 0 2px !important;
+    justify-content: center !important;
   }
 }
