@@ -107,9 +107,8 @@
                 </table>
               </div>
             </div>
-            <div v-show="tableLoading" class="fromLoading">
-              <Spin />
-            </div>
+            <!-- 弹框 -->
+            <loading :loading="tableLoading"></loading>
           </div>
         </div>
       </div>
@@ -138,9 +137,8 @@
       <!-- <p>是否确认导出？</p> -->
       <p>{{ vmI18n.t('modalTips.y2') }}</p>
     </Modal>
-    <div v-show="isSaveLoading" class="fromLoading">
-      <Spin />
-    </div>
+    <!-- 弹框 -->
+    <loading :loading="isSaveLoading"></loading>
   </div>
 </template>
 

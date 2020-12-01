@@ -162,12 +162,8 @@
                 </div>
               </div>
             </div>
-            <div
-              v-show="tableLoading"
-              class="fromLoading"
-            >
-              <Spin />
-            </div>
+            <!-- 弹框 -->
+            <loading :loading="tableLoading"></loading>
           </div>
         </div>
       </div>
@@ -228,12 +224,8 @@
       :exclude-string="modifyLogistics.excludeString"
       :component-data="modifyLogistics.componentData"
     />
-    <div
-      v-show="isSaveLoading"
-      class="fromLoading"
-    >
-      <Spin />
-    </div>
+    <!-- 弹框 -->
+    <loading :loading="isSaveLoading"></loading>
   </div>
 </template>
 

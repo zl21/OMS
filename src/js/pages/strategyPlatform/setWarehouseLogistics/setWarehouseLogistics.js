@@ -6,6 +6,7 @@ import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag.vue';
 import { setTimeout } from 'timers';
 import comUtils from '@/assets/js/__utils__/common';
+import loading from '@/component/loading.vue';
 
 export default {
   components: {
@@ -13,7 +14,8 @@ export default {
     businessForm,
     businessLabel,
     businessModal,
-    businessStatusFlag
+    businessStatusFlag,
+    loading
   },
   data() {
     return {
