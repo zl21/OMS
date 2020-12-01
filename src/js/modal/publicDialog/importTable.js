@@ -1,7 +1,7 @@
 // <!-- 导入组件-->
 import axios from 'axios';
 import loading from '@/component/loading.vue';
-
+import businessButton from 'professionalComponents/businessButton';
 export default {
   components: {
     loading
