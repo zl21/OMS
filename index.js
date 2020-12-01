@@ -6,9 +6,7 @@ import apiPath from '@/assets/js/api/path/index';
 import i18n from '@burgeon/internationalization/i18n/i18n'; // 国际化
 import service from '@/service/index';
 import qs from 'qs';
-import request, {
-  httpFormdata,
-} from 'framework/__utils__/request';
+import request, { httpFormdata } from 'framework/__utils__/request';
 import ajax from 'framework/__utils__/ajax';
 import store from '@/config/store/store'; // 将老框架公共状态注册为customize模块
 import groups from '@/assets/js/promotion/groups';
@@ -44,8 +42,9 @@ import '@/assets/css/css_1_3/reset.less';
 import connector from './src/js/pages/common/orderDetail/connector';
 
 const projectConfig = require('./project.config');
- // -------------引入框架项目配置文件;
-const customizedTheme = require(`@burgeon/oms-theme/skin/${projectConfig.omsTheme}/index.min.css`).default;
+// -------------引入框架项目配置文件;
+
+const customizedTheme = require(`./node_modules/@burgeon/oms-theme/skin/${projectConfig.omsTheme}/index.min.css`).default;
 // const customizedTheme = require('@burgeon/oms-theme/skin/senmir/index.min.css');
 // import 'omsTheme/skin/skyBlue/index.min.css'
 groups.load();
@@ -59,9 +58,8 @@ Vue.prototype.service = service;
 Vue.prototype.qs = qs;
 window.R3 = R3; // 暴露R3为全局变量
 window.vmI18n = i18n; // 挂载国际化
-Vue.prototype.$theme = customizedTheme;// 将主题方法挂载到原型上
+Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
 Vue.prototype.$comUtils = comUtils;
-
 
 // window.skin=omsSkin;
 // 设置主题调用方法
@@ -71,7 +69,7 @@ Vue.prototype.$comUtils = comUtils;
 R3.launchApplication({
   image: {
     enterpriseLogo,
-    enterpriseBanner,
+    enterpriseBanner
   },
   globalComponent: {
     Login,
@@ -91,5 +89,5 @@ R3.launchApplication({
   isCommonTable: false, // 是否开启普通表格，默认关闭
   projectRoutes: projectRouterConfig, // 项目自定义路由，一般情况下用不到此配置
   // quietRoutes: ['/register', '/password', '/forgotPassword'], // 外置路由
-  externalTreeDatas: externalTreeDatasConfig,
+  externalTreeDatas: externalTreeDatasConfig
 });
