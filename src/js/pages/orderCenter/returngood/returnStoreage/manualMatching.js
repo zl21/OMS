@@ -6,6 +6,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import jordanModal from 'professionalComponents/businessDialog';
 import OrderItem from '@/views/pages/OrderCenter/orderManageDetail/details/orderItem.vue';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
+import loading from '@/component/loading.vue';
 
 export default {
   components: {
@@ -14,7 +15,8 @@ export default {
     businessActionTable,
     jordanModal,
     OrderItem,
-    businessLabel
+    businessLabel,
+    loading
   },
   mixins: [buttonPermissionsMixin],
   data() {

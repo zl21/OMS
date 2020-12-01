@@ -81,12 +81,13 @@
       :exclude-string="returnNumber.excludeString"
       :component-data="returnNumber.componentData"
     />
-    <div
+    <!-- <div
       v-show="isSaveLoading"
       class="fromLoading"
     >
       <Spin />
-    </div>
+    </div> -->
+     <loading :loading="isSaveLoading"></loading>
   </div>
 </template>
 
