@@ -28,8 +28,8 @@
         </div>
       </div>
       <div class="queryorderBox">
-        <!-- :title="'查询原始订单编号'" -->
-        <Modal v-model="order.modal" class="queryorder" :mask="true" :title="vmI18n.t('modalTitle.query_OriginalOrderNo')" @on-ok="queryorder" @on-cancel="querycancel">
+        <!-- 查询原始订单编号 -->
+        <Modal v-model="order.modal" width="900" class="queryorder" :mask="true" :title="vmI18n.t('modalTitle.query_OriginalOrderNo')" @on-ok="queryorder" @on-cancel="querycancel">
           <div class="orderContent">
             <businessForm :form-config="order.orderform" />
             <businessButton :btn-config="order.btn" />
@@ -38,6 +38,7 @@
             <business-action-table :jordan-table-config="order.table" @on-select="onquerySelect" @on-select-cancel="onqueryCancel" />
           </div>
         </Modal>
+
       </div>
       <!-- 水印图片 -->
       <businessStatusFlag :status-name="statusName" />

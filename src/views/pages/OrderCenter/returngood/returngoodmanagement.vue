@@ -149,6 +149,7 @@
         <Modal
           v-model="order.modal"
           class="queryorder"
+          width="900"
           :mask="true"
           :title="vmI18n.t('modalTitle.query_OriginalOrderNo')"
           @on-ok="queryorder"
