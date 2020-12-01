@@ -60,22 +60,23 @@
             </div>
           </div>
           <div class="tableSynchronous">
-            <Button
-              class="btn1"
-              size="small"
-              @click="synchronous"
-            >
-              <!-- 市 -->
-              {{ vmI18n.t('common.city') }}->
-            </Button>
-            <Button
-              class="btn2"
-              size="small"
-              @click="provinceSynchronous"
-            >
-              <!-- 省 -->
-              {{ vmI18n.t('common.province') }}->
-            </Button>
+            <div class="iconButton">
+              <Button
+                size="small"
+                @click="synchronous"
+              >
+                <!-- 市 -->
+                {{ vmI18n.t('common.city') }}->
+              </Button>
+              <Button
+                style="margin-top:20px"
+                size="small"
+                @click="provinceSynchronous"
+              >
+                <!-- 省 -->
+                {{ vmI18n.t('common.province') }}->
+              </Button>
+            </div>
           </div>
           <!-- table -->
           <div class="tableRight">

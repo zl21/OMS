@@ -1,7 +1,7 @@
-@import "~professionalComponents/common/css/theme.less";
+@import "~@burgeon/oms-theme/skin/public.less";
 
 .logisticsArea {
-  
+
   .jordanLabel {
     padding-bottom: 10px;
   }
@@ -55,21 +55,25 @@
       }
 
       .synchronous {
-        width: 40px;
+        position: relative;
+        width: 50px;
         height: 100%;
         position: relative;
         border-right: 1px solid #d3d3d3;
 
-        Button {
-          border-color: #0068b7;
-          color: #0068b7;
+        .iconButton {
           position: absolute;
           top: 50%;
           left: 50%;
-          margin: -12px 0 0 -17px;
+          transform: translate(-50%, -50%);
+        }
+
+        Button {
+          border-color: @base-color;
+          color: @base-color;
 
           span {
-            vertical-align: top !important;
+            vertical-align: middle !important;
           }
         }
       }

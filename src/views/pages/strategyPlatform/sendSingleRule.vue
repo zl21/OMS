@@ -78,12 +78,14 @@
             </div>
           </div>
           <div class="tableSynchronous">
-            <Button
-              size="small"
-              @click="synchronous"
-            >
-              >>
-            </Button>
+            <div class="iconButton">
+              <Button
+                size="small"
+                @click="synchronous"
+              >
+                >>
+              </Button>
+            </div>
           </div>
           <!-- table -->
           <div class="tableRight">
