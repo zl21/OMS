@@ -46,7 +46,7 @@ import connector from './src/js/pages/common/orderDetail/connector';
 // const projectConfig = require('./project.config');
  // -------------引入框架项目配置文件;
 // const customizedTheme = require(`@burgeon/oms-theme/skin/${projectConfig.omsTheme}/index.min.css`).default;
-const customizedTheme = '@burgeon/oms-theme/skin/senmir/index.min.css';
+const customizedTheme = require('@burgeon/oms-theme/skin/senmir/index.min.css');
 // import 'omsTheme/skin/skyBlue/index.min.css'
 groups.load();
 Vue.prototype.$ajax = ajax;
