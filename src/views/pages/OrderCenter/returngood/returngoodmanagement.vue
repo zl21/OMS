@@ -150,6 +150,7 @@
           v-model="order.modal"
           class="queryorder"
           width="900"
+          :closable="true" 
           :mask="true"
           :title="vmI18n.t('modalTitle.query_OriginalOrderNo')"
           @on-ok="queryorder"

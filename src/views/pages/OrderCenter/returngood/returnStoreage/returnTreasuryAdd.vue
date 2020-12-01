@@ -29,7 +29,7 @@
       </div>
       <div class="queryorderBox">
         <!-- 查询原始订单编号 -->
-        <Modal v-model="order.modal" width="900" class="queryorder" :mask="true" :title="vmI18n.t('modalTitle.query_OriginalOrderNo')" @on-ok="queryorder" @on-cancel="querycancel">
+        <Modal v-model="order.modal" width="900" class="queryorder" :closable="true" :mask="true" :title="vmI18n.t('modalTitle.query_OriginalOrderNo')" @on-ok="queryorder" @on-cancel="querycancel">
           <div class="orderContent">
             <businessForm :form-config="order.orderform" />
             <businessButton :btn-config="order.btn" />
