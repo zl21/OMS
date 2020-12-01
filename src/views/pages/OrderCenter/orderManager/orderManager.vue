@@ -14,12 +14,12 @@
         v-show="isShowFromLoading"
         class="from_loading"
       >
-        <loading :loading="agTableConfig.agLoading"></loading>
+        <loading :loading="agTableConfig.agLoading" />
       </div>
       <IntegrateSearchFilter
-        ref="integrateSearchFilter"
         v-if="isShowSeniorOrOrdinary"
         id="IntegrateSearchFilter"
+        ref="integrateSearchFilter"
         v-model="selectValue"
         :drop-down-list="dropList"
         :search-method="searchMethod"
@@ -55,7 +55,7 @@
         @labelClick="labelClick"
       />
       <div class="aTable">
-        <loading :loading="agTableConfig.agLoading"></loading>
+        <loading :loading="agTableConfig.agLoading" />
         <aTable
           ref="agGridChild"
           :ag-table-config="agTableConfig"

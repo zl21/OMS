@@ -41,9 +41,7 @@
       </div>
       <!-- 水印图片 -->
       <businessStatusFlag :status-name="statusName" />
-      <div v-show="isSaveLoading" class="fromLoading">
-        <Spin />
-      </div>
+      <loading :loading="isSaveLoading" />
     </div>
   </div>
 </template>

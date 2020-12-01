@@ -46,7 +46,7 @@
                 class="retrieve"
                 :expand="false"
                 @on-enter="enter(name)"
-              />
+              >
               <Icon
                 slot="suffix"
                 type="ios-search"
