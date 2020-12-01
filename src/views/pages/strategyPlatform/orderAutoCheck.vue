@@ -78,6 +78,8 @@
                             :show-colname-key="'show'"
                             :data-empty-message="'暂无数据'"
                             :columns="CP_C_LOGISTICS_ID_SELECT.datas.tabth"
+                            :auto-data="CP_C_LOGISTICS_ID_SELECT.autoData"
+                            :defaultSelected="CP_C_LOGISTICS_ID_SELECT.defaultSelected"
                             @on-page-change="changePage1"
                             @on-fkrp-selected="logisticSelected"
                             @on-clear="logisticClear"

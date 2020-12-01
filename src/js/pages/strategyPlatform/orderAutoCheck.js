@@ -99,6 +99,7 @@ export default {
       MODIFIEDDATE: '',
       CP_C_LOGISTICS_ID_SELECT: {
         selectDatas: [],
+        defaultSelected: [],
         datas: {
           start: 0,
           tabth: [
@@ -115,37 +116,38 @@ export default {
           ],
           row: []
         },
+        inputValue: '',
+        modalValue: [],
+        autoData: [],
         totalRowCount: 100,
         pageSize: 999999,
       },
-      CP_C_LOGISTICS_ID: ','
     };
   },
-  mounted() {
+  async mounted() {
+    await this.queryLogisticsCompany();
     this.getAutoCheck().then(() => {
       this.QueryList();
     });
-    this.queryLogisticsCompany();
   },
   methods: {
-    queryLogisticsCompany() {
+    async queryLogisticsCompany() {
       // TODO refcolid
       const query = new FormData();
       query.append('searchdata', JSON.stringify({
-        refcolid :167630,
+        refcolid: 167630,
         isdroplistsearch: true,
         column_include_uicontroller: true,
         startindex: (this.CP_C_LOGISTICS_ID_SELECT.start - 1) * this.pageSize, // 起始下标
         range: this.CP_C_LOGISTICS_ID_SELECT.pageSize, // 每页个数
-        fixedcolumns:{},
+        fixedcolumns: {},
         multiple: [],
       }));
-      this.service.common.QueryList(query).then(res=>{
-        this.$nextTick(()=>{
-          console.log("CP_C_LOGISTICS_ID_SELECT::res", res);
-          this.CP_C_LOGISTICS_ID_SELECT.datas.row = res.data.datas.row;
-          this.CP_C_LOGISTICS_ID_SELECT.totalRowCount = res.data.datas.totalRowCount;
-        });
+      const res = await this.service.common.QueryList(query);
+      this.$nextTick(()=>{
+        console.log('CP_C_LOGISTICS_ID_SELECT::res', res);
+        this.CP_C_LOGISTICS_ID_SELECT.datas.row = res.data.datas.row;
+        this.CP_C_LOGISTICS_ID_SELECT.totalRowCount = res.data.datas.totalRowCount;
       });
     },
     selected(value) {
@@ -181,6 +183,21 @@ export default {
               this.IS_MERGE_ORDER = this.info.IS_MERGE_ORDER == 'Y';
               this.orderType = this.info.ORDER_TYPE ? this.info.ORDER_TYPE.split(',') : [];
               this.checkAll = this.orderType.length == 7;
+              // 设置保存的排除物流公司
+              // this.CP_C_LOGISTICS_ID_SELECT.defaultSelected =  [{"ID":"5000000110805","Label":"顺丰特惠"},{"ID":"5000000110809","Label":"自提"}]
+              if (this.info.CP_C_LOGISTICS_ID) {
+                const tmpArr = this.info.CP_C_LOGISTICS_ID.split(',');
+                this.CP_C_LOGISTICS_ID_SELECT.defaultSelected = tmpArr.map(parent => {
+                  const tmpObj = {};
+                  this.CP_C_LOGISTICS_ID_SELECT.datas.row.forEach(child => {
+                    if (child.ID.val === parent) {
+                      tmpObj.ID = child.ID.val;
+                      tmpObj.Label = child.ENAME.val;
+                    }
+                  });
+                  return tmpObj;
+                });
+              }
               this.info.beginTime = this.info.BEGIN_TIME ? timestampToTime(this.info.BEGIN_TIME) : '';
               this.info.endTime = this.info.END_TIME ? timestampToTime(this.info.END_TIME) : '';
               const arr = new Set(this.info.EFFECTIVE_CONDITION ? this.info.EFFECTIVE_CONDITION.split(',') : []);
@@ -343,16 +360,24 @@ export default {
       console.log('logisticClear');
       this.CP_C_LOGISTICS_ID_SELECT.selectDatas = [];
     },
-    logisticInputValueChange() {
+    async logisticInputValueChange(e) {
       console.log('logisticInputValueChange');
       const formdata = new FormData();
-      const obj = {
-        table: 'ST_C_VIPCOM_ASCRIPTION', startindex: this.datas.start, range: this.pageSize, fixedcolumns: { ENAME: e }, column_include_uicontroller: true, isolr: false
-      };
-      formdata.append('searchdata', JSON.stringify(obj));
-      this.service.common.QueryList(formdata).then(res=>{
-        console.log(res);
-      });
+      // const query = {
+      //   ak: e.trim(),
+      //   colid: 167630, // 排除物流公司
+      //   fixedcolumns: {},
+      // };
+      // formdata.append('searchdata', JSON.stringify(query));
+      formdata.append('ak', e.trim());
+      formdata.append('colid', 167630);
+      formdata.append('fixedcolumns', JSON.stringify({}));
+      const res = await this.service.common.fuzzyquerybyak(formdata);
+      if (res.data.code == 0) {
+        this.CP_C_LOGISTICS_ID_SELECT.autoData = res.data.data;
+      } else {
+        this.CP_C_LOGISTICS_ID_SELECT.autoData = [];
+      }
     },
     InputValueChange(value) {
       this.AutoData = [];
