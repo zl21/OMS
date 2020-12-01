@@ -396,31 +396,31 @@ export default {
       const effectiveCondition = this.effectiveCondition;
       if (effectiveCondition[1].value) {
         if (!this.info.beginTime || !this.info.endTime) {
-          this.$Message.error('付款时间不能为空!');
+          this.$Message.error('付款时间为必填项,没有选择值!');
           return false;
         }
       }
       if (effectiveCondition[2].value) {
         if (!this.info.LIMIT_PRICE_DOWN || !this.info.LIMIT_PRICE_UP) {
-          this.$Message.error('订单金额（元）不能为空!');
+          this.$Message.error('订单金额（元）为必填项,没有输入值!');
           return false;
         }
       }
       if (effectiveCondition[4].value) {
         if (!this.info.RECEIVER_ADDRESS) {
-          this.$Message.error('收货地址不能为空!');
+          this.$Message.error('收货地址为必填项,没有输入值!');
           return false;
         }
       }
       if (effectiveCondition[5].value) {
         if (!this.info.BUYER_REMARK) {
-          this.$Message.error('买家留言不能为空!');
+          this.$Message.error('买家留言为必填项,没有输入值!');
           return false;
         }
       }
       if (effectiveCondition[6].value) {
         if (!this.info.SELLER_REMARK) {
-          this.$Message.error('买家留言不能为空!');
+          this.$Message.error('卖家备注为必填项,没有输入值!');
           return false;
         }
       }

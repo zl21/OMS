@@ -2,17 +2,17 @@
 import R3 from '@syman/burgeon-r3';
 
 // 企业Logo、Banner配置信息
-import apiPath from '@/assets/js/api/path/index.js';
-import i18n from '@burgeon/internationalization/i18n/i18n.js'; // 国际化
-import service from '@/service/index.js';
+import apiPath from '@/assets/js/api/path/index';
+import i18n from '@burgeon/internationalization/i18n/i18n'; // 国际化
+import service from '@/service/index';
 import qs from 'qs';
 import request, {
   httpFormdata,
 } from 'framework/__utils__/request';
 import ajax from 'framework/__utils__/ajax';
 import store from '@/config/store/store'; // 将老框架公共状态注册为customize模块
-import groups from '@/assets/js/promotion/groups.js';
-import comUtils from '@/assets/js/__utils__/common.js';
+import groups from '@/assets/js/promotion/groups';
+import comUtils from '@/assets/js/__utils__/common';
 import enterpriseLogo from './src/assets/image/logo.png';
 import enterpriseBanner from './src/assets/image/banner.png';
 import Login from './src/component/Login.vue';
@@ -41,7 +41,7 @@ import '@/assets/css/css_1_3/reset.less';
 
 // 老框架引入的 自定义界面内需要的js资源
 // 促销需要
-import connector from './src/js/pages/common/orderDetail/connector.js';
+import connector from './src/js/pages/common/orderDetail/connector';
 
 const projectConfig = require('./project.config');
  // -------------引入框架项目配置文件;
