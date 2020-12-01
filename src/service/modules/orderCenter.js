@@ -1,6 +1,7 @@
 // 订单中心
 import R3 from '@syman/burgeon-r3';
 import port from '@/js/pages/common/orderDetail/connector';
+import qs from "qs";
 
 const { network } = R3;
 export default {
@@ -83,7 +84,7 @@ export default {
   checkBeforeCreateVipDelivery: params => network.post('/api/cs/vip/distribution/v1/checkBeforeCreateVipDelivery', params), // 创建出仓单初始化接口
   getDeliveryMethod: params => network.post('/api/cs/vip/distribution/v1/getDeliveryMethod', params), // 创建出仓单获取运输方式
   distributionCreateDelivery: params => network.post('/api/cs/vip/distribution/v1/distributionCreateDelivery', params), // 创建出仓单接口
-
+  deliveryV1List: params => network.get(`/api/cs/vip/delivery/v1/list?${qs.stringify(params)}`),
 
   // 半定制弹框
   //
