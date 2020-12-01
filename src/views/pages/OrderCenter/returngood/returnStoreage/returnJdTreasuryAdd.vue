@@ -1,6 +1,6 @@
 <!-- 退货入库新增、详情 -->
 <template>
-  <div class="returnJdTreasurys public-main">
+  <div class="returnTreasurys public-main">
     <!--按钮块-->
     <div style="margin-top: 8px">
       <businessButton :btn-config="btnConfig" />
@@ -53,5 +53,5 @@ export default returnJdTreasuryAdd;
 </script>
 
 <style lang="less">
-@import '~@/css/pages/orderCenter/returngood/returnStoreage/returnJdTreasuryAdd.less';
+@import '~@/css/pages/orderCenter/returngood/returnStoreage/returnTreasuryAdd.less';
 </style>

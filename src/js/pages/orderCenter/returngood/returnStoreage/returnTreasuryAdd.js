@@ -7,6 +7,7 @@ import OrderItem from 'allpages/OrderCenter/orderManageDetail/details/orderItem.
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
 import comUtils from '@/assets/js/__utils__/common.js';
+import loading from '@/component/loading.vue';
 
 export default {
   components: {
@@ -15,7 +16,8 @@ export default {
     businessActionTable,
     OrderItem,
     businessLabel,
-    businessStatusFlag
+    businessStatusFlag,
+    loading
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
