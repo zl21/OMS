@@ -26,9 +26,8 @@ export default {
                   closable: true, // 右上角小叉
                   showCancel: true,
                   okText: '确认',
-                  okText: window.vmI18n.t('modalTips.ch'),
-                  cancelText: '取消',
-                  cancelText: window.vmI18n.t('modalTips.ch'),
+                  // okText: window.vmI18n.t('modalTips.ch'),
+                  cancelText: window.vmI18n.t('common.cancel'), // 取消
                   onOk: ()=> {
                     this.getData();
                   },
