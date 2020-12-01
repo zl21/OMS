@@ -384,6 +384,10 @@ export default {
       this.save = true;
     },
     saveAmendData() {
+      if (
+        Object.keys(this.amend).length === 0
+        && Object.keys(this.bodyChangeData).length === 0
+      ) { return Promise.resolve(1); } // 无变化
       const data = {};
       data[
         `${
