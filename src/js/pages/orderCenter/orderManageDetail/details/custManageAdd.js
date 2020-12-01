@@ -169,6 +169,7 @@ export default {
       const param = {
         ids: [self.objid],
         itemId,
+        detail: 'Y'
         // changeGoodsSKu
       };
       axios({
