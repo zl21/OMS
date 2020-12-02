@@ -131,6 +131,13 @@ export default {
     top: '38px',
     left: '25px'
   },
+  check_not_in: {
+    text: '已审核未入库',
+    color: '#e80000',
+    width: '55px',
+    top: '38px',
+    left: '25px'
+  },
   boxing: {
     text: '装箱中',
     color: '#4bcd61'

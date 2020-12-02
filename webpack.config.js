@@ -33,6 +33,9 @@ const burgeonPlugins = [
       ignore: ['.*']
     }
   ]),
+  new webpack.DefinePlugin({
+    omsSkinTheme: JSON.stringify(projectConfig.omsTheme)
+  }),
 
   new webpack.ProvidePlugin({
     $: 'jquery',

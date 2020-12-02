@@ -4,6 +4,7 @@ import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessModal from 'professionalComponents/businessDialog';
 import comUtils from '@/assets/js/__utils__/common';
+import loading from '@/component/loading.vue';
 
 export default {
   components: {
@@ -11,7 +12,8 @@ export default {
     businessForm,
     businessLabel,
     businessModal,
-    businessStatusFlag
+    businessStatusFlag,
+    loading
   },
   data() {
     return {

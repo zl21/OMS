@@ -736,21 +736,24 @@ export default {
       fromdata.append('objid', -1);
       return new Promise(async (resolve) => {
         let optionData = [];
+        let selectData = [];
         const res = await this.service.common.getObject(fromdata);
-        const selectData = res.data.data.addcolums;
-        selectData.forEach((item) => {
-          if (item.parentdesc === parentColName) {
-            const childItem = item.childs;
-            childItem.forEach((item) => {
-              if (item.colname === childColName) {
-                optionData = item.combobox.map(subItem => ({
-                  label: subItem.limitdesc,
-                  value: subItem.limitval,
-                }));
-              }
-            });
-          }
-        });
+        if (res.data.data) {
+          selectData = res.data.data.addcolums;
+          selectData.forEach((item) => {
+            if (item.parentdesc === parentColName) {
+              const childItem = item.childs;
+              childItem.forEach((item) => {
+                if (item.colname === childColName) {
+                  optionData = item.combobox.map(subItem => ({
+                    label: subItem.limitdesc,
+                    value: subItem.limitval,
+                  }));
+                }
+              });
+            }
+          });
+        }
         resolve(optionData);
       });
     },
