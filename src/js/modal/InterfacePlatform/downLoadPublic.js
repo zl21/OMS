@@ -375,14 +375,15 @@ export default {
       } else if (this.$parent.title === this.vmI18n.t('btn.distributionChargeback_download')) {
         // 分销商品下载
         this.downloadDisGood(this.pulicUrl);
-      } else if (this.tablename === 'IP_B_STANDPLAT_REFUND') {
+      } else if (this.$route.params.tableName === 'IP_B_STANDPLAT_REFUND') {
+        // console.log('通用退单接口-下载退单');
         this.downloadRenterOrder(this.pulicUrl);
       }
     },
     // 淘宝分销、淘宝经销、通用订单
     async downloadPublic(url) {
       const _this = this;
-      const downData = _this.downLoadPublicFormConfig;
+      const downData = _this.pulicdownLoadConfig;
       if (!downData.formData[0].itemdata.pid) {
         // 请选择需要下载的店铺
 
@@ -483,14 +484,15 @@ export default {
     async downloadRenterOrder(url) {
       // 通用退单下载方法
       const _this = this;
-      const downData = _this.downLoadPublicFormConfig;
+      // const downData = _this.downLoadPublicFormConfig;
+      const downData = _this.pulicdownLoadConfig;
       if (!downData.formData[0].itemdata.pid) {
         // 请选择需要下载的店铺
 
         _this.$Message.warning(this.vmI18n.t('modalTips.be'));
         return;
       }
-      if (downData.formValue.startEndTimes[0] === '' && downData.formValue.orderNum === '') {
+      if (downData.formValue.startEndTimes[0] === '' && !downData.formValue.orderNum) {
         _this.$Message.warning(this.vmI18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
         return;
       }
