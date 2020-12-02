@@ -695,7 +695,7 @@ export default {
         },
         {
           key: 'REFUND_STATUS_EXT',
-          title: '退款状态',
+          title: '取消状态',
           dataAcessKey: 'REFUND_STATUS',
         },
         {
