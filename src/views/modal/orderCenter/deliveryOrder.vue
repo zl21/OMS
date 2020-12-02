@@ -4,7 +4,7 @@
     <Form
       :label-width="120"
     >
-      <FormItem label="出仓单">
+      <FormItem label="唯品会入库单">
         <DropDownSelectFilter
           :single="true"
           :data="datas"
