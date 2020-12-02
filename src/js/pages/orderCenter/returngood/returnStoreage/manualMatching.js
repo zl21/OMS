@@ -372,7 +372,8 @@ export default {
                       }
                       _this.index = params.index;
                       _this.returnNumber.componentData = {
-                        ids: params.row.ID,
+                        // ids: params.row.ID,
+                        ids: _this.returnSelectData.map(item=> item.ID),
                         type: _this.isManual
                       };
                       _this.$children
