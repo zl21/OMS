@@ -33,22 +33,24 @@ const initializeAgTable = (container, opt, obj) => {
       agGridTableContainer.agTable.customizeOptions = options;
       return agGridTableContainer.agTable;
     }
+    // eslint-disable-next-line no-unused-expressions
     (options.onBodyScroll = function (params) {
       const {
         columnApi,
         direction
       } = params;
       clearTimeout(updateBodyScrollDelay);
-      if (direction === 'horizontal') {
-        updateBodyScrollDelay = setTimeout(() => {
-          columnApi.autoSizeAllColumns();
-        }, 10); // 当检测到滚动条为横向滚动时，自适应当前视口范围内的所有列
-      }
+      // if (direction === 'horizontal') {
+      //   updateBodyScrollDelay = setTimeout(() => {
+      //     columnApi.autoSizeAllColumns();
+      //   }, 10); // 当检测到滚动条为横向滚动时，自适应当前视口范围内的所有列
+      // }
       agGridTableContainer.setAttribute('data-scroll-left', params.left);
       agGridTableContainer.setAttribute('data-scroll-top', params.top);
     }), // 当表体发生滚动时候触发该事件
-    options.floatingFilter = options && options.floatingFilter ? options.floatingFilter : true, // 是否显表头下方的浮动筛选框
-    options.toolPanelSuppressSideButtons = true; // 隐藏右侧工具栏
+      options.floatingFilter = options && options.floatingFilter ? options.floatingFilter : true, // 是否显表头下方的浮动筛选框
+      options.toolPanelSuppressSideButtons = true; // 隐藏右侧工具栏
+    // eslint-disable-next-line no-new
     new Grid(agGridTableContainer, options);
     const {
       api,
@@ -117,11 +119,11 @@ const initializeAgTable = (container, opt, obj) => {
       api.setRowData([]);
       return agTable;
     };
-    agTable.getSelect = () => 
+    agTable.getSelect = () =>
       // 获取表格勾选数据
       // console.log(api.getSelectedRows());
       api.getSelectedRows();
-    
+
     agTable.deselectAll = () => {
       api.deselectAll();
     };
