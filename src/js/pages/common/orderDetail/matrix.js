@@ -722,8 +722,8 @@ export default {
           }); */
           // 以上先获取color和size集合
           this.SKUID = data.data.SKU;
-          this.priceList = data.data.PRO_PRICELIST;
-          this.ename = data.data.PRO_NAME;
+          // this.priceList = data.data.PRO_PRICELIST;
+          // this.ename = data.data.PRO_NAME;
         } else if (this.tablename === 'OC_B_RETURN_ORDER' || this.tablename === 'OC_B_ORDER') {
           this.$emit('refreshData', {
             status: false,
