@@ -9,9 +9,10 @@ import aTable from 'professionalComponents/agGridTable.vue';
 import unzipXv from '@/assets/js/dataToSmall.js';
 import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
 import loading from '@/component/loading.vue';
+import comUtils from '@/assets/js/__utils__/common.js';
 import labelListConfig from './publicConfig/labelList.js';
 import orderLogo from './publicConfig/orderLogo.js';
-import comUtils from '@/assets/js/__utils__/common.js';
+
 export default {
   components: {
     businessButton,
@@ -1851,7 +1852,8 @@ export default {
           value1: '',
           value2: ''
         },
-        PS_C_PRO_ECODE: '' // 商品款号
+        PS_C_PRO_ECODE: '', // 商品款号
+        IS_EXCHANGE_NO_IN: ['0']
       };
       const fromdata = new FormData();
       const params = {
@@ -1971,6 +1973,7 @@ export default {
                   options: _this.converSelect(item.tabth.combobox)
                 };
                 _this.formConfig.formValue[item.tabth.colname] = [];
+                if (item.tabth.colname === 'IS_EXCHANGE_NO_IN') _this.formConfig.formValue[item.tabth.colname] = ['0'];
               }
             });
             _this.formConfig.formData = formData;
