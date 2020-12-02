@@ -126,8 +126,6 @@ export default {
     if (code === 0) {
       self.taskId = message.match(/\d+/)[0];
       self.downLoadModal = true;
-    } else {
-      self.$Message.error(message);
     }
   }
 };

@@ -93,9 +93,6 @@ export default {
       self.$Message.success(message);
       self.$emit('confirmImport');
       self.$emit('closeActionDialog', true);
-    } else {
-      self.$Message.error(message);
-      self.$emit('closeActionDialog', true);
     }
   }
 };
