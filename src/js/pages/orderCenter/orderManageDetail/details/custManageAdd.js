@@ -322,7 +322,7 @@ export default {
             if (item.PRO_TYPE == 1 || item.PRO_TYPE == 2) {
               self.$emit('isQhMethod', true);
             }
-            if (item.REFUND_STATUS_EXT === '退款成功') {
+            if (item.REFUND_STATUS == 6) {
               item.isGray = true;
             } else {
               item.isGray = false;
@@ -346,6 +346,10 @@ export default {
           key: 'PS_C_PRO_ECODE',
           title: '商品款号',
           dataAcessKey: 'PS_C_PRO_ECODE'
+        },
+        {
+          key: 'PT_RETURN_STATUS_EXT',
+          title: '平台退款状态',
         },
         // 颜色
         {
