@@ -3161,20 +3161,24 @@ export default {
     cancelBtn() {
       const _this = this;
       if (this.$route.query.id == '-1') return;
-      this.$Modal.info({
-        title: _this.vmI18n.t('modalTitle.tips'), // 提示
-        content: _this.vmI18n.t('modalTips.l3'), // 是否确定取消退单？
-        mask: true,
-        showCancel: true,
-        okText: _this.vmI18n.t('common.cancel'), // 取消
-        cancelText: _this.vmI18n.t('common.determine'), // 确定
-        onCancel: () => {
-          this.service.orderCenter.OcCancelChangingOrRefund({ ids: [this.$route.query.id] }).then(res => {
-            if (res.data.code == 0) {
-              _this.$Message.success(res.data.message);
-              _this.getList();
-            } else {
-              _this.$Message.error(res.data.message);
+      this.service.orderCenter.checkCancelParams({ ids: [this.$route.query.id] }).then(res=>{
+        if (res.data.code == 0 || res.data.code == 1) {
+          this.$Modal.info({
+            title: _this.vmI18n.t('modalTitle.tips'), // 提示
+            content: res.data.code === 0 ? _this.vmI18n.t('modalTips.l3') : '此退换货单已生成未作废的换货类型零售发货单,不允许取消,继续将作废换货类型零售发货单以及退换订单', // 是否确定取消退单？
+            mask: true,
+            showCancel: true,
+            okText: _this.vmI18n.t('common.cancel'), // 取消
+            cancelText: _this.vmI18n.t('common.determine'), // 确定
+            onCancel: () => {
+              this.service.orderCenter.OcCancelChangingOrRefund({ ids: [this.$route.query.id] }).then(res => {
+                if (res.data.code == 0) {
+                  _this.$Message.success(res.data.message);
+                  _this.getList();
+                } else {
+                  _this.$Message.error(res.data.message);
+                }
+              });
             }
           });
         }
