@@ -1118,13 +1118,13 @@ export default {
               this.virtualLibrary();
             } // 按钮点击事件
           },
-          {
-            text: window.vmI18n.t('btn.cancel_automaticRefund'), // 取消自动退款
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.cancelRefund();
-            } // 按钮点击事件
-          },
+          // {
+          //   text: window.vmI18n.t('btn.cancel_automaticRefund'), // 取消自动退款
+          //   disabled: false, // 按钮禁用控制
+          //   btnclick: () => {
+          //     this.cancelRefund();
+          //   } // 按钮点击事件
+          // },
           {
             text: window.vmI18n.t('btn.modifyRemarks'), // 修改备注 按钮文本
             disabled: false, // 按钮禁用控制
@@ -1132,13 +1132,13 @@ export default {
               this.bounced();
             } // 按钮点击事件
           },
-          {
-            text: window.vmI18n.t('btn.mark_efective_product_transferred'), // 标记次品已调拨 按钮文本
-            disabled: true, // 按钮禁用控制
-            btnclick: () => {
-              this.defectiveGoods();
-            } // 按钮点击事件
-          },
+          // {
+          //   text: window.vmI18n.t('btn.mark_efective_product_transferred'), // 标记次品已调拨 按钮文本
+          //   disabled: true, // 按钮禁用控制
+          //   btnclick: () => {
+          //     this.defectiveGoods();
+          //   } // 按钮点击事件
+          // },
           {
             text: window.vmI18n.t('common.return'), // 返回 按钮文本
             disabled: false, // 按钮禁用控制
@@ -1904,14 +1904,12 @@ export default {
                           }
                         }
                       },
-                      list.map(item =>
-                        h('Option', {
+                      list.map(item => h('Option', {
                           props: {
                             value: item.psCSpec1objId,
                             label: item.psCSpec1objName
                           }
-                        })
-                      )
+                        }))
                     )
                   ]
                 );
@@ -2026,14 +2024,12 @@ export default {
                           }
                         }
                       },
-                      list.map(item =>
-                        h('Option', {
+                      list.map(item => h('Option', {
                           props: {
                             value: item.psCSpec2objId,
                             label: item.psCSpec2objName
                           }
-                        })
-                      )
+                        }))
                     )
                   ]
                 );
@@ -2251,14 +2247,12 @@ export default {
                     }
                   }
                 },
-                list.map(item =>
-                  h('Option', {
+                list.map(item => h('Option', {
                     props: {
                       value: item.SPEC,
                       label: item.SPEC
                     }
-                  })
-                )
+                  }))
               );
             }
           }
@@ -2390,14 +2384,12 @@ export default {
                           }
                         }
                       },
-                      list.map(item =>
-                        h('Option', {
+                      list.map(item => h('Option', {
                           props: {
                             value: item.psCSpec1objId,
                             label: item.psCSpec1objName
                           }
-                        })
-                      )
+                        }))
                     )
                   ]
                 );
@@ -2505,14 +2497,12 @@ export default {
                           }
                         }
                       },
-                      list.map(item =>
-                        h('Option', {
+                      list.map(item => h('Option', {
                           props: {
                             value: item.psCSpec2objId,
                             label: item.psCSpec2objName
                           }
-                        })
-                      )
+                        }))
                     )
                   ]
                 );
@@ -3528,13 +3518,13 @@ export default {
       const _this = this;
       const lists = _this.order.orderform.formValue;
       if (
-        (lists.bill_no == '' || lists.bill_no == undefined) &&
-        (lists.source_code == '' || lists.source_code == undefined) &&
-        (lists.receiver_name == '' || lists.receiver_name == undefined) &&
-        (lists.user_nick == '' || lists.user_nick == undefined) &&
-        (lists.receiver_mobile == '' || lists.receiver_mobile == undefined) &&
-        (lists.cp_c_store_ename == '' || lists.cp_c_store_ename == undefined) &&
-        num == undefined
+        (lists.bill_no == '' || lists.bill_no == undefined)
+        && (lists.source_code == '' || lists.source_code == undefined)
+        && (lists.receiver_name == '' || lists.receiver_name == undefined)
+        && (lists.user_nick == '' || lists.user_nick == undefined)
+        && (lists.receiver_mobile == '' || lists.receiver_mobile == undefined)
+        && (lists.cp_c_store_ename == '' || lists.cp_c_store_ename == undefined)
+        && num == undefined
       ) {
         _this.$Message.error(_this.vmI18n.t('modalTips.i8')); // 请输入查询条件！
         return;

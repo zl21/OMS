@@ -4,7 +4,7 @@ import comUtils from '@/assets/js/__utils__/common';
 
 export default {
   name: 'splitOrder',
-  components :{
+  components: {
     businessButton,
   },
   data() {
@@ -20,7 +20,7 @@ export default {
                 this.$Modal.confirm({
                   title: window.vmI18n.t('modalTitle.tips'), // title:'提示',
                   content: window.vmI18n.t('modalTips.ch'), // content:'当前操作未确认拆单，是否确认刷新？'
-                  titleAlign:'center',
+                  titleAlign: 'center',
                   mask: true, // 显示蒙层
                   draggable: true, // 拖拽
                   closable: true, // 右上角小叉
@@ -31,7 +31,7 @@ export default {
                   onOk: ()=> {
                     this.getData();
                   },
-                })
+                });
               } else {
                 this.$Message.warning(window.vmI18n.t('modalTips.ci')); // 已是原始状态，不执行操作!
               }
@@ -146,9 +146,9 @@ export default {
           title: window.vmI18n.t('table_label.quantity_split'), // 拆分数量
           key: 'split_num',
           width: 100,
-          render: (h, params) => {
+          render: (h, params) => 
             // console.log(params);
-            return h('div', [
+             h('div', [
               h('Input', {
                 props: {
                   value: params.row.split_num,
@@ -179,7 +179,7 @@ export default {
                     }
                     this.data[0][params.index] = params.row;
                   },
-                  'on-regx-check': (value,errorValue) => {
+                  'on-regx-check': (value, errorValue) => {
                     console.log('拆分数量不能为负');
                   }
                 },
@@ -187,8 +187,8 @@ export default {
                   'text-align': 'center'
                 }
               })
-            ]);
-          }
+            ])
+          
         }
       ],
       data: [],
@@ -223,7 +223,7 @@ export default {
       let total = 0;
       if (res.data.code === 0) {
         self.data = [];
-        if(!res.data.data) return;
+        if (!res.data.data) return;
         self.old_cp_c_phy_warehouse_ename = res.data.data[0].cp_c_phy_warehouse_ename;
         res.data.data.forEach(item => {
           item.waiting_split_num = Number(item.waiting_split_num || 0);
@@ -234,6 +234,7 @@ export default {
         });
         res.data.data[0].total = total;
         self.data.push(res.data.data);
+        self.switchList(0);
       } else {
         self.$Message.error(window.vmI18n.t('modalTips.ck')); // 查询失败
       }
