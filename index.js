@@ -41,12 +41,8 @@ import '@/assets/css/css_1_3/reset.less';
 // 促销需要
 import connector from './src/js/pages/common/orderDetail/connector';
 
-// const projectConfig = require('./project.config');
 // -------------引入框架项目配置文件;
-// console.log('skinPath===', `./node_modules/@burgeon/oms-theme/skin/${omsSkinTheme}/index.min.css`);
 const customizedTheme = require(`@burgeon/oms-theme/skin/${omsSkinTheme}/index.min.css`).default;
-// const customizedTheme = require('@burgeon/oms-theme/skin/senmir/index.min.css');
-// import 'omsTheme/skin/skyBlue/index.min.css'
 groups.load();
 Vue.prototype.$ajax = ajax;
 Vue.prototype.axios = request;
@@ -60,10 +56,6 @@ window.R3 = R3; // 暴露R3为全局变量
 window.vmI18n = i18n; // 挂载国际化
 Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
 Vue.prototype.$comUtils = comUtils;
-
-// window.skin=omsSkin;
-// 设置主题调用方法
-// customizedTheme.appendLink('skyBlue')
 
 // 老框架引入的 自定义界面内需要的资源
 R3.launchApplication({
