@@ -390,7 +390,7 @@ export default {
         _this.$Message.warning(_this.vmI18n.t('modalTips.be'));
         return;
       }
-      if (downData.formValue.startEndTimes[0] === '' && downData.formValue.orderNum === '') {
+      if (downData.formValue.startEndTimes[0] === '' && !downData.formValue.orderNum) {
         _this.$Message.warning(_this.vmI18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
         return;
       }
@@ -412,7 +412,7 @@ export default {
         _this.$Message.success(message);
         _this.$emit('closeActionDialog', true);
       } else {
-        _this.$Message.error(message);
+        // _this.$Message.error(message);
       }
     },
     // 通用商品下载
@@ -442,7 +442,7 @@ export default {
         _this.$Message.success(message);
         _this.$emit('closeActionDialog', true);
       } else {
-        _this.$Message.error(message);
+        // _this.$Message.error(message);
       }
     },
     // 分销商品
@@ -477,7 +477,7 @@ export default {
         _this.$Message.success(message);
         _this.$emit('closeActionDialog', true);
       } else {
-        _this.$Message.error(message);
+        // _this.$Message.error(message);
       }
     },
     // IP_B_STANDPLAT_REFUND
@@ -498,11 +498,11 @@ export default {
       }
       const param = {
         shop_id: downData.formData[0].itemdata.pid,
-        bill_no: downData.formValue.orderNum, // 订单编号
+        bill_no: downData.formValue.orderNum || '', // 订单编号
         start_time: _this.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
         end_time: _this.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
-        status: downData.formValue.orderStatus, // 状态 必传 给默认值
-        table: _this.tablename // 当前表名 必传
+        status: downData.formValue.orderStatus || '', // 状态 必传 给默认值
+        table: _this.$route.params.tableName // 当前表名 必传
       };
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
@@ -514,7 +514,7 @@ export default {
         _this.$Message.success(message);
         _this.$emit('closeActionDialog', true);
       } else {
-        _this.$Message.error(message);
+        // _this.$Message.error(message);
       }
     },
     // 时间格式化
