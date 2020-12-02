@@ -134,9 +134,6 @@ export default {
         self.taskId = message.match(/\d+/)[0];
         self.downLoadModal = true;
       }
-    } else {
-      self.$Message.error(message);
-      self.$emit('closeActionDialog', true);
-    } 
+    }
   }
 };
