@@ -1767,7 +1767,7 @@ export default {
                       style: {
                         width: '150',
                         height: '100%',
-                        border: '1px solid #dcdee2',
+                        // border: '1px solid #dcdee2',
                         'text-align': 'center'
                       },
                       props: {
@@ -2087,7 +2087,7 @@ export default {
                       style: {
                         width: '150',
                         height: '100%',
-                        border: '1px solid #dcdee2',
+                        // border: '1px solid #dcdee2',
                         'text-align': 'center'
                       },
                       props: {
