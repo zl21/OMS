@@ -178,8 +178,8 @@ export default {
                 content: window.vmI18n.t('modalTips.g7'), // 是否确定反审核订单？
                 mask: true,
                 showCancel: true,
-                okText: vmI18n.t('common.cancel'), // 取消
-                cancelText: vmI18n.t('common.determine'), // 确定
+                okText: self.vmI18n.t('common.cancel'), // 取消
+                cancelText: self.vmI18n.t('common.determine'), // 确定
                 onCancel: () => {
                   this.service.orderCenter.auditOrderReserve({
                     ids,
@@ -275,6 +275,39 @@ export default {
                   .openConfirm();
               });
             },
+          },
+          {
+            text: window.vmI18n.t('btn.cancelHold'), // 审核
+            btnclick: () => {
+              const self = this;
+              const ids = [];
+              ids.push(self.tab1.order.ID);
+              const data = {
+                ids,
+              };
+              this.$Modal.info({
+                title: self.vmI18n.t('modalTitle.tips'), // 提示,
+                content: self.vmI18n.t('modalTips.e1'), // 是否确定取消Hold？
+                mask: true,
+                showCancel: true,
+                okText: self.vmI18n.t('common.cancel'), // 取消
+                cancelText: self.vmI18n.t('common.determine'), // 确定
+                onCancel: () => {
+                  self.btnConfig.loading = true;
+                  self.service.orderCenter.manualUnHoldOrder(data)
+                  // self.$network
+                  //   .post('/api/cs/oc/oms/v1/manualUnHoldOrder', data)
+                    .then((res) => {
+                      if (res.data.code === 0) {
+                        self.$Message.success(res.data.message);
+                        self.autoRefresh();
+                      } else {
+                        self.$Message.warning(res.data.message);
+                      }
+                    });
+                },
+              });
+            }, // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.splitOrder'), // 拆分订单
@@ -510,7 +543,7 @@ export default {
                   if (self.$refs.addressDialog) { self.$refs.addressDialog[0].openConfirm(); }
                 } else {
                   this.tab1 = this.tab1_default;
-                  this.$message.error(vmI18n.t('modalTips.h0')); // 地址信息获取失败
+                  this.$message.error(window.vmI18n.t('modalTips.h0')); // 地址信息获取失败
                 }
               });
             }, // 按钮点击事件
@@ -802,7 +835,7 @@ export default {
           } else {
             this.tab1 = this.tab1_default;
             // 订单详情获取失败
-            this.$message.error(vmI18n.t('modalTips.h3'));
+            this.$message.error(window.vmI18n.t('modalTips.h3'));
           }
         })
         .catch(() => {
