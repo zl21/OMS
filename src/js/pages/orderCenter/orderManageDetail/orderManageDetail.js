@@ -5,7 +5,7 @@ import businessDialog from 'professionalComponents/businessDialog';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import EssentialInfo from '@/views/pages/OrderCenter/orderManageDetail/details/essentialInfo';
 import OrderItem from '@/views/pages/OrderCenter/orderManageDetail/details/orderItem';
-import publicDialogConfig from 'professionalComponents/common/js/publicDialog';
+import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
 import loading from '@/component/loading.vue';
 import comUtils from '@/assets/js/__utils__/common';
 
@@ -177,11 +177,10 @@ export default {
                 content: window.vmI18n.t('modalTips.g7'), // 是否确定反审核订单？
                 mask: true,
                 showCancel: true,
-                okText: window.vmI18n.t('common.determine'), // 取消
-                cancelText: window.vmI18n.t('common.cancel'), // 确定
-                onOk: () => {
-                  this.service.orderCenter
-                    .auditOrderReserve({
+                okText: self.vmI18n.t('common.cancel'), // 取消
+                cancelText: self.vmI18n.t('common.determine'), // 确定
+                onCancel: () => {
+                  this.service.orderCenter.auditOrderReserve({
                       ids,
                       type: '1'
                     })
@@ -223,6 +222,39 @@ export default {
                 self.$children.find(item => item.name === 'holdOrderDialog').openConfirm();
               });
             }
+          },
+          {
+            text: window.vmI18n.t('btn.cancelHold'), // 审核
+            btnclick: () => {
+              const self = this;
+              const ids = [];
+              ids.push(self.tab1.order.ID);
+              const data = {
+                ids,
+              };
+              this.$Modal.info({
+                title: self.vmI18n.t('modalTitle.tips'), // 提示,
+                content: self.vmI18n.t('modalTips.e1'), // 是否确定取消Hold？
+                mask: true,
+                showCancel: true,
+                okText: self.vmI18n.t('common.cancel'), // 取消
+                cancelText: self.vmI18n.t('common.determine'), // 确定
+                onCancel: () => {
+                  self.btnConfig.loading = true;
+                  self.service.orderCenter.manualUnHoldOrder(data)
+                  // self.$network
+                  //   .post('/api/cs/oc/oms/v1/manualUnHoldOrder', data)
+                    .then((res) => {
+                      if (res.data.code === 0) {
+                        self.$Message.success(res.data.message);
+                        self.autoRefresh();
+                      } else {
+                        self.$Message.warning(res.data.message);
+                      }
+                    });
+                },
+              });
+            }, // 按钮点击事件
           },
           {
             text: window.vmI18n.t('btn.splitOrder'), // 拆分订单

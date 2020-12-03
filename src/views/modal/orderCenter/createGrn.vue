@@ -1,7 +1,11 @@
 <template>
   <div class="createGrn">
     <div class="form-body">
+      <p v-if="isError">
+        {{ errorMessage }}
+      </p>
       <Form
+        v-if="!isError"
         :label-width="120"
       >
         <FormItem label="档期日程归属">
@@ -31,6 +35,7 @@
     <div class="dialog-footer">
       <!-- 确定 -->
       <Button
+        v-if="!isError"
         type="primary"
         size="small"
         @click="determine"
@@ -63,6 +68,8 @@
     data() {
       return {
         vmI18n: window.vmI18n,
+        isError: false,
+        errorMessage: '',
         transportStyle: '',
         autoData: [],
         columns: ['ENAME', 'value'],
@@ -87,9 +94,8 @@
         }
       };
     },
-    async mounted() {
-      await this.init();
-      await this.getData();
+    mounted() {
+      this.init();
     },
     methods: {
       determine() {
@@ -120,6 +126,10 @@
             this.transportStyle = res.data.data.deliveryMethod;
             this.defaultSelected = [{ ID: res.data.data.id, Label: res.data.data.eName }];
             this.selectData = this.defaultSelected;
+            this.getData();
+          } else {
+            this.isError = true;
+            this.errorMessage = res.data.message;
           }
         });
       },

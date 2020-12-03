@@ -124,7 +124,7 @@ export default {
                 childs: [
                   {
                     colname: 'CP_C_SHOP_ID',
-                    refobjid: 'IN (19,999999)',
+                    refobjid: ' IN (19,999999)',
                     valuedata: 2,
                   },
                 ],

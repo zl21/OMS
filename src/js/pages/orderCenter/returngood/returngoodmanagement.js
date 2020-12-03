@@ -1865,7 +1865,7 @@ export default {
                             _this.jordanTableConfig.data[params.index].PS_C_CLR_ID = value;
                             const sizeId = params.row.PS_C_SIZE_ID;
                             if (sizeId) {
-                              _this.getDataByProinfo(proEcode, 2, sizeId, value);
+                              await _this.getDataByProinfo(proEcode, 2, sizeId, value);
                               if (!_this.itemSkuEcode) {
                                 _this.jordanTableConfig.data[params.index].PS_C_SKU_ECODE = '';
                                 _this.jordanTableConfig.data[params.index].PS_C_SKU_ID = '';
@@ -1980,7 +1980,7 @@ export default {
                             _this.jordanTableConfig.data[params.index].PS_C_SIZE_ID = value;
                             const clrId = params.row.PS_C_CLR_ID;
                             if (clrId) {
-                              _this.getDataByProinfo(proEcode, 2, value, clrId);
+                              await _this.getDataByProinfo(proEcode, 2, value, clrId);
                               if (!_this.itemSkuEcode) {
                                 _this.jordanTableConfig.data[params.index].PS_C_SKU_ECODE = '';
                                 _this.jordanTableConfig.data[params.index].PS_C_SKU_ID = '';
@@ -2346,7 +2346,7 @@ export default {
                             _this.jordanTableConfig2.data[params.index].PS_C_CLR_ID = value;
                             const sizeId = params.row.PS_C_SIZE_ID;
                             if (sizeId) {
-                              _this.getDataByProinfo(proEcode, 2, sizeId, value);
+                              await _this.getDataByProinfo(proEcode, 2, sizeId, value);
                               if (!_this.itemSkuEcode) {
                                 _this.jordanTableConfig2.data[params.index].PS_C_SKU_ECODE = '';
                                 _this.jordanTableConfig2.data[params.index].PS_C_SKU_ID = '';
@@ -2459,7 +2459,7 @@ export default {
                             _this.jordanTableConfig2.data[params.index].PS_C_SIZE_ID = value;
                             const clrId = params.row.PS_C_CLR_ID;
                             if (clrId) {
-                              _this.getDataByProinfo(proEcode, 2, value, clrId);
+                              await _this.getDataByProinfo(proEcode, 2, value, clrId);
                               if (!_this.itemSkuEcode) {
                                 _this.jordanTableConfig2.data[params.index].PS_C_SKU_ECODE = '';
                                 _this.jordanTableConfig2.data[params.index].PS_C_SKU_ID = '';
