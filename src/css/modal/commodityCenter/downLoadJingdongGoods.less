@@ -2,22 +2,23 @@
 .timeBox {
   display: flex;
   width: 100%;
-  // padding-right: 28px;
   align-items: center;
   height: 30px;
   margin-bottom: 10px;
   box-sizing: border-box;
   > label {
-    width: 100px;
+    width: 120px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    padding: 10px 4px 10px 0;
+    padding: 10px 12px 10px 0;
     text-align: right;
   }
   /deep/ .timeBox-input {
     flex: 1;
-    max-width: calc(100% - 100px);
+    max-width: calc(100% - 148px);
+    height: 26px;
+    border-radius: 2px;
     .el-range-input {
       width: 44%;
       font-size: 12px;

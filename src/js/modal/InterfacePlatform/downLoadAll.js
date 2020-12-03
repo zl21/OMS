@@ -1,11 +1,11 @@
 import businessForm from 'professionalComponents/businessForm';
-import jordanBtn from 'professionalComponents/businessButton';
+import businessButton from 'professionalComponents/businessButton';
 
 const formConfig = file => require(`./config/${file}.js`).default;
 export default {
   components: {
     businessForm,
-    jordanBtn
+    businessButton
   },
   props: {
     objList: {
@@ -68,7 +68,7 @@ export default {
     // self.downLoadFormConfig = formConfig('IP_B_CANCEL_TIME_ORDER_VIP').formConfig
 
     if (this.$route.params.tableName == 'IP_B_JITX_DELIVERY') {
-      console.log('self.downLoadFormConfig.formValue', self.downLoadFormConfig);
+      // console.log('self.downLoadFormConfig.formValue', self.downLoadFormConfig);
       self.downLoadFormConfig.formValue.order_status = 'NEW';
     }
   },

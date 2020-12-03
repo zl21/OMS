@@ -1,10 +1,10 @@
 <template>
   <div
     class="downLoadTaobaoOrder"
-    style="width:430px;padding-right:20px"
+    style="width:430px"
   >
     <businessForm :form-config="downLoadFormConfig" />
-    <jordanBtn :btn-config="downLoadBtnConfig" />
+    <businessButton :btn-config="downLoadBtnConfig" />
     <!-- 确认下载弹框 订单下载-->
     <Modal
       v-model="downLoadModal"
