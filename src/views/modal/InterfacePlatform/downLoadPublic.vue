@@ -1,7 +1,7 @@
 <template>
   <div
     class="public"
-    style="width: 400px; padding-right: 20px"
+    style="width: 400px;"
   >
     <businessForm :form-config="pulicdownLoadConfig">
       <template #compile="{ rowData }">
@@ -14,28 +14,9 @@
         </div>
       </template>
     </businessForm>
-    <div class="dialog-footer">
-      <!-- 确定 -->
-      <Button
-        type="primary"
-        @click="downloadPublicAll"
-      >
-        {{
-          vmI18n.t("common.determine")
-        }}
-      </Button>
-      <Button
-        type="error"
-        ghost
-        @click="
-          () => {
-            this.$emit('closeActionDialog');
-          }
-        "
-      >
-        {{ vmI18n.t("common.cancel") }}
-      </Button>
-    </div>
+    <!-- footer -->
+    <businessButton :btn-config="downLoadBtnConfig" />
+
     <businessDialog
       ref="dialog"
       :title="dialogConfig.title"

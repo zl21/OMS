@@ -2314,7 +2314,7 @@ export default {
     search() {},
     // DropDownSelectFilter禁止用户输入
     onDropChange(value) {
-      console.log('onDropChange::', value);
+      // console.log('onDropChange::', value);
       if (value.type === 'DropDownSelectFilter') {
         this.$nextTick(()=>{
           const input = document.querySelector('.ark-integrate-search-filter-container').querySelector('input');

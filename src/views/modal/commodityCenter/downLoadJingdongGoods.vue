@@ -1,5 +1,5 @@
 <template>
-  <div style="width:440px;padding-right:20px">
+  <div style="width:440px;">
     <businessForm :form-config="downLoadFormConfig" />
     <div class="timeBox">
       <!-- 修改时间 -->
@@ -19,30 +19,7 @@
         @focus="monthSearchStartDate = null"
       />
     </div>
-    <div class="dialog-footer">
-      <!-- 确定 -->
-      <Button
-        ghost
-        size="small"
-        type="primary"
-        @click="download"
-      >
-        {{ vmI18n.t('common.determine') }}
-      </Button>
-      <!-- 取消 -->
-      <Button
-        ghost
-        size="small"
-        type="error"
-        @click="
-          () => {
-            this.$emit('closeActionDialog');
-          }
-        "
-      >
-        {{ vmI18n.t('common.cancel') }}
-      </Button>
-    </div>
+    <businessButton :btn-config="buttonConfig"></businessButton>
   </div>
 </template>
 

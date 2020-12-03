@@ -1,9 +1,11 @@
 import axios from 'axios';
 import businessForm from 'professionalComponents/businessForm';
+import businessButton from 'professionalComponents/businessButton';
 
 export default {
   components: {
-    businessForm
+    businessForm,
+    businessButton
   },
   data() {
     const _this = this;
@@ -61,8 +63,8 @@ export default {
             icon: '', // 输入框后带的图标,暂只有输入框支持
             placeholder: '', // 占位文本，默认为请输入
             ghost: false, // 是否关闭幽灵按钮，默认开启
-            inputenter: () => {}, // 表单回车事件
-            iconclick: () => {} // 点击icon图标事件
+            inputenter: () => { }, // 表单回车事件
+            iconclick: () => { } // 点击icon图标事件
           } /* ,
            {
             style: "input", //输入框类型
@@ -76,6 +78,32 @@ export default {
             iconclick: () => {} //点击icon图标事件
           } */
         ],
+      },
+      buttonConfig: {
+        typeAll: 'error', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
+        buttons: [
+          {
+            type: '', // 按钮类型
+            text: window.vmI18n.t('btn.download'), // 下载 按钮文本
+            icon: '', // 按钮图标
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.download();
+            } // 按钮点击事件
+          },
+          {
+            type: '', // 按钮类型
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            icon: '', // 按钮图标
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.$emit('closeActionDialog', false);
+            } // 按钮点击事件
+          }
+        ]
       },
       monthSearchStartDate: null,
       timeConfig: {
@@ -97,10 +125,10 @@ export default {
               if (_this.monthSearchStartDate) {
                 return (
                   time.getTime()
-                    >= _this.monthSearchStartDate.getTime() + oneWeekTime
+                  >= _this.monthSearchStartDate.getTime() + oneWeekTime
                   || time.getTime()
-                    <= _this.monthSearchStartDate.getTime() - oneWeekTime
-                ); 
+                  <= _this.monthSearchStartDate.getTime() - oneWeekTime
+                );
               }
             }
           }
