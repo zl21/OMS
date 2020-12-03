@@ -179,10 +179,10 @@ export default {
         data: param
       }).then((res) => {
         if (res.data.code === 0) {
-          self.$Message.info(res.data.message);
+          self.$Message.success(res.data.message);
           self.$parent.$parent.autoRefresh();
         } else {
-          self.$Message.error(res.data.message);
+          // self.$Message.error(res.data.message);
         }
       });
     },
@@ -695,7 +695,7 @@ export default {
         },
         {
           key: 'REFUND_STATUS_EXT',
-          title: '退款状态',
+          title: '取消状态',
           dataAcessKey: 'REFUND_STATUS',
         },
         {
