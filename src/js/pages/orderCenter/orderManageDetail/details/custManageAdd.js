@@ -179,10 +179,10 @@ export default {
         data: param
       }).then((res) => {
         if (res.data.code === 0) {
-          self.$Message.info(res.data.message);
+          self.$Message.success(res.data.message);
           self.$parent.$parent.autoRefresh();
         } else {
-          self.$Message.error(res.data.message);
+          // self.$Message.error(res.data.message);
         }
       });
     },

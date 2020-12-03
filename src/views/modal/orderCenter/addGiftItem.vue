@@ -207,9 +207,9 @@
           method: 'post',
           data: param
         }).then((res) =>{
-          console.log(res);
+          // console.log(res);
           if (res.data.code === 0) {
-            self.$Message.info(res.data.message);
+            self.$Message.success(res.data.message);
             self.$parent.$parent.$parent.$parent.autoRefresh();
             self.$parent.$parent.closeConfirm();
             this.btnConfig.buttons[0].loading = false;
@@ -246,7 +246,7 @@
       },
       request(req) {
         const self = this;
-        console.log('addGift', req);
+        // console.log('addGift', req);
         self.objid = req.objid;
       },
       getColumns() {
