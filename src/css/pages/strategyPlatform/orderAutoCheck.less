@@ -1,6 +1,10 @@
+@import '~@burgeon/oms-theme/skin/public.less';
+
 .auto-check {
   .ark-tabs{
-    overflow: auto;
+    .ark-tabs-nav .ark-tabs-tab:hover{ 
+     color: @base-color;
+    }
   }
   .operate {
     padding-top: 8px;
@@ -9,8 +13,8 @@
 
     .operate-btn {
       margin: 0px 8px 8px 0px;
-      border-color: #0068b7;
-      color: #0068b7;
+      border-color:@base-color;
+      color: @base-color;
       height: 22px;
       line-height: 18px;
       margin-left: 0;
