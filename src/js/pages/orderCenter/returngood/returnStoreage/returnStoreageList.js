@@ -338,7 +338,7 @@ export default {
                 label: item.tabth.name, // 输入框前文字
                 value: item.tabth.colname, // 输入框的值
                 format: 'yyyy-MM-dd HH:mm:ss',
-                width: '12', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
                 icon: 'md-alarm', // 输入框后带的图标,暂只有输入框支持
                 placeholder: '', // 占位文本，默认为请输入
                 transfer: true,
@@ -393,7 +393,8 @@ export default {
                 // type: "", //文本框类型的input
                 label: item.tabth.name, // 输入框前文字
                 value: item.tabth.colname, // 输入框的值
-                width: item.tabth.name == '备注' ? '12' : '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                width: '6',
+                // width: item.tabth.name == '备注' ? '12' : '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
                 icon: '', // 输入框后带的图标,暂只有输入框支持
                 clearable: true,
                 placeholder: '', // 占位文本，默认为请输入
