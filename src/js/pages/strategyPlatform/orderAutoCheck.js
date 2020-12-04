@@ -441,13 +441,15 @@ export default {
           .then(({ data }) => {
             if (data.data.code == 0) {
               this.$Message.success(data.data.message);
-              R3.store.commit('global/tabOpen', {
-                type: 'S',
-                tableName: 'ST_C_AUTOCHECK',
-                tableId: 24634,
-                back: true,
-              });
-              this.$destroy();
+              
+              // R3.store.commit('global/tabOpen', {
+              //   type: 'S',
+              //   tableName: 'ST_C_AUTOCHECK',
+              //   tableId: 24634,
+              //   back: true,
+              // });
+              // this.$destroy();
+              this.QueryList();
               return;
             }
             if (data.data.message) {

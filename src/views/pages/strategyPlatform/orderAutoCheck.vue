@@ -125,6 +125,7 @@
                       <Checkbox v-model="effectiveCondition[1].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox>
                     </Col>
                     <Col span="11">
+                      <i style="position:absolute;top:10px;left:20px;color:red" v-show="effectiveCondition[1].value">*</i>
                       <FormItem label="付款时间：">
                         <Row>
                           <Col span="11">
@@ -143,6 +144,7 @@
                       <Checkbox v-model="effectiveCondition[2].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox>
                     </Col>
                     <Col span="11">
+                    <i style="position:absolute;top:10px;left:-4px;color:red" v-show="effectiveCondition[2].value">*</i>
                       <FormItem label="订单金额（元）:">
                         <Row>
                           <Col span="11">
