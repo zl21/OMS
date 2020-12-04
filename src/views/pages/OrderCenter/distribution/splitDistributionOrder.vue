@@ -28,9 +28,10 @@
 import reButton from 'professionalComponents/businessButton';
 import reTable from 'professionalComponents/businessActionTable';
 import reDialog from 'professionalComponents/businessDialog';
-
 import { pagingInit } from '@/assets/js/__utils__/common.js';
 // import { post } from '@/utils/request';
+import comUtils from '@/assets/js/__utils__/common.js';
+
 export default {
   components: {
     reButton,
@@ -53,10 +54,11 @@ export default {
           {
             text: '返回',
             btnclick: () => {
-              this.$store.commit('TabHref', {
-                id: 24733,
-                type: 'table',
-                name: 'OC_B_VIPCOM_DISTRIBUTION',
+              comUtils.tabCloseAppoint(this);
+              this.$store.commit('global/tabOpen', {
+                tableId: 24733,
+                type: 'S',
+                tableName: 'OC_B_VIPCOM_DISTRIBUTION',
                 label: 'JIT配货单',
                 back: true,
               });
@@ -231,13 +233,13 @@ export default {
     };
   },
   mounted() {
-    this.pageConfig = this.$route.query;
+    this.pageConfig = this.$route.params;
     this.pageInfo();
   },
   methods: {
     pageInfo() {
       let params = {
-        distributionId: this.pageConfig.cid,
+        distributionId: this.pageConfig.customizedModuleId,
       };
       this.pageLoading = true;
       let self = this;
@@ -430,7 +432,7 @@ export default {
 
 <style lang="less" scoped>
 .page {
-  padding: 20px 0;
+  // padding: 20px 0;
 }
 /deep/ .dialogFooter {
   margin-top: 20px;
