@@ -697,8 +697,7 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        // confirmTitle: "导入",
-        confirmTitle: window.vmI18n.t('modalTitle.import'),
+        confirmTitle: window.vmI18n.t('modalTitle.import'), // 导入
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -708,7 +707,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        url: 'importTable',
+        url: 'modal/publicDialog/importTable',
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {
@@ -1161,24 +1160,20 @@ export default {
         this.btnConfig.buttons = [];
         const buttonconfig = [
           {
-            // type: '',  //按钮类型
-            // text: "保存", //按钮文本
-            text: window.vmI18n.t('btn.save'), // 按钮文本
+            text: window.vmI18n.t('btn.save'), // 保存
             btnclick: () => {
               this.saveAll(objid);
             }
           },
           {
-            // text: "导入", //按钮文本
-            text: window.vmI18n.t('btn.import'), // 按钮文本
+            text: window.vmI18n.t('btn.import'), // 导入
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.importskuGroup('baseInfo');
             }
           },
           {
-            // text: "返回",
-            text: window.vmI18n.t('btn.back'), // 按钮文本
+            text: window.vmI18n.t('btn.back'), // 返回
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {
@@ -1254,7 +1249,7 @@ export default {
           //   btnclick: () => {}
           // },
           {
-            text: window.vmI18n.t('btn.import'), // 按钮文本
+            text: window.vmI18n.t('btn.import'), // 导入
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.importskuGroup('baseInfo');
