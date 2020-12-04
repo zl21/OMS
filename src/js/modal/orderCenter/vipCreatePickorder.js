@@ -124,7 +124,7 @@ export default {
                 childs: [
                   {
                     colname: 'CP_C_SHOP_ID',
-                    refobjid: ' IN (19,999999)',
+                    refobjid: 'IN (19,999999)',
                     valuedata: 2,
                   },
                 ],
@@ -138,6 +138,7 @@ export default {
                 fixcolumn: 'CP_C_PLATFORM_ID',
                 // expre: "equal",
                 srccol: 'CP_C_SHOP_ID',
+                custom: true
               },
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
