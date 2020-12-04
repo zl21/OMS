@@ -357,7 +357,7 @@ export default {
             text: window.vmI18n.t('btn.batch_holdOrder') // 批量Hold单
           },
           {
-            text: window.vmI18n.t('btn.cancelHold') // 取消Hold
+            text: window.vmI18n.t('btn.batch_cancelHold') // 批量取消Hold
           },
           {
             text: window.vmI18n.t('btn.invoice_otice'), // 开票通知
