@@ -708,7 +708,7 @@ export default {
                   TABLENAME: 'PS_C_PRO',
                 };
                 fromdata.append('param', JSON.stringify(params));
-                this.service.orderCenter.screenresult(fromdata)
+                this.service.common.screenresult(fromdata)
                 // this.$network
                 //   .post("/p/cs/screenresult", fromdata)
                   .then((res) => {
