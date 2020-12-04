@@ -75,7 +75,7 @@ export default {
       };
       this.downLoadPublicFormConfig.formData[1].style = '';
       this.pulicUrl = '/p/cs/stdp/order/get';
-    } else if (this.$parent.title === this.vmI18n.t('btn.distributionChargeback_download')) {
+    } else if (this.$parent.title === this.vmI18n.t('btn.generalGoods_download') || this.$parent.title === this.vmI18n.t('btn.distributionChargeback_download')) {
       // 通用商品下载
       this.downLoadPublicFormConfig = this.pulicdownLoadConfig;
       this.pulicUrl = '/p/cs/stdp/item/get';
@@ -445,7 +445,7 @@ export default {
     // 通用商品下载
     async downloadPublicGoods(url) {
       const _this = this;
-      const downData = _this.downLoadPublicFormConfig;
+      const downData = _this.pulicdownLoadConfig;
       if (!downData.formData[0].itemdata.pid) {
         // 请选择需要下载的店铺
 
