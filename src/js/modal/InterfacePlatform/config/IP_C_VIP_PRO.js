@@ -65,8 +65,8 @@ export default {
   },
   // 确定按钮
   determine: (self) => {
-    const formValue = self.formConfig.formValue;
-    const shopId = self.formConfig.formData[0].itemdata.pid;
+    const formValue = self.downLoadFormConfig.formValue;
+    const shopId = self.downLoadFormConfig.formData[0].itemdata.pid;
     if (!shopId || !formValue.query_date[0]) {
       self.$message.error(self.vmI18n.t('modalTips.bt'));// 店铺和平台时间不能为空
       return;
