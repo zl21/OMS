@@ -65,6 +65,7 @@ export default {
   },
   SPLITDISTRIBUTIONORDER: {
     // JIT配货单-换吊牌
-    component: () => import('@/views/pages/OrderCenter/distribution/splitDistributionOrder.vue')
+    component: () => import('@/views/pages/OrderCenter/distribution/splitDistributionOrder.vue'),
+    labelName: 'JIT配货单-换吊牌',
   },
 };
