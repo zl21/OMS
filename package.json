@@ -65,7 +65,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "@burgeon/business-components": "^1.0.24",
+    "@burgeon/business-components": "^1.0.23",
     "@burgeon/internationalization": "^1.0.9",
     "@burgeon/oms-theme": "^1.0.3",
     "@syman/ark-ui": "^1.1.5",

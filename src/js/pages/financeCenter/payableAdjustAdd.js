@@ -272,7 +272,11 @@ export default {
             // label: "快递单号",
             label: window.vmI18n.t('table_label.expressNo'),
             value: 'LOGISTICS_NO',
-            width: '8'
+            width: '8',
+            inputenter: () => {
+              const formValue = this.formConfig.formValue;
+              if (formValue.LOGISTICS_NO && !formValue.TID) this.getSourceCodeDetail();
+            }
           },
           {
             style: 'input',
@@ -1169,19 +1173,24 @@ export default {
     },
     async getSourceCodeDetail(obj) {
       const self = this;
-      const sourceCode = obj.tem.SOURCE_CODE;
+      let sourceCode = '';
+      if (obj) sourceCode = obj.tem.SOURCE_CODE;
       if (sourceCode === '平台单号' || sourceCode === 'platform_billNo') {
         self.formConfig.formValue.TID = '';
         return;
       }
       const fromdata = new FormData();
-      const param = {
+      let param = {
         highSearch: [
           {
             type: 'select',
             queryName: 'ORDER_STATUS',
             value: '5,6'
-          },
+          }
+        ]
+      };
+      if (obj) {
+        param.highSearch.push(
           {
             type: 'input',
             queryName: 'SOURCE_CODE',
@@ -1192,8 +1201,14 @@ export default {
             queryName: 'BILL_NO',
             value: obj.tem.BILL_NO
           }
-        ]
-      };
+        );
+      } else {
+        param.highSearch.push({
+          type: 'input',
+          queryName: 'EXPRESSCODE',
+          value: this.formConfig.formValue.LOGISTICS_NO
+        });
+      }
       fromdata.append('param', JSON.stringify(param));
       const {
         data: { code, data }
@@ -1274,16 +1289,6 @@ export default {
         self.allTableArr = filterItemData;
         self.getTableAfterCalPayablePrice();
       }
-      // axios({
-      //   url: "/api/cs/oc/oms/v1/queryOrderList",
-      //   method: "post",
-      //   data: fromdataReq,
-      // }).then((res) => {
-      //   if (res.status === 200) {
-      //   // 同上
-
-      //   }
-      // });
     },
     // 计算应付金额
     async getTableAfterCalPayablePrice() {
