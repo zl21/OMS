@@ -224,7 +224,7 @@ export default {
             }
           },
           {
-            text: window.vmI18n.t('btn.cancelHold'), // 审核
+            text: window.vmI18n.t('btn.cancelHold'), // 取消Hold
             btnclick: () => {
               const self = this;
               const ids = [];

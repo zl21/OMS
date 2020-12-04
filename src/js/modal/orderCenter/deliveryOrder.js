@@ -55,11 +55,13 @@ export default {
                 if (res.data.code === 0) {
                   self.$Message.success(res.data.message);
                   // self.$emit('confirmImport');
+                  self.$emit('closeActionDialog');
                 } else {
                   self.$Message.error(res.data.message);
+                  const moduleComponentName = `S.${this.$route.params.tableName}.${ this.$route.params.tableId}`;// 当前模块名称
+                  self.$emit('closeActionDialog', true, res.data.data, moduleComponentName); // 关闭弹框
                   // this.$emit('uploadError', res.data.data);
                 }
-                self.$emit('closeActionDialog');
               });
             },
           },

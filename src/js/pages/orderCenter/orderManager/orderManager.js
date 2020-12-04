@@ -1580,7 +1580,7 @@ export default {
           });
           break;
         }
-        case '取消Hold': {
+        case '批量取消Hold': {
           if (self.selection.length === 0) {
             self.$Message.warning({
               content: self.vmI18n.t('modalTips.d5'), // 请选择需要取消Hold单的记录！
