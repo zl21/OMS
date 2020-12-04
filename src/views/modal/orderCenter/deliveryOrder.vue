@@ -14,7 +14,7 @@
           :columns="columns"
           :columnsKey="columnsKey"
           :hidecolumns="hidecolumns"
-          :data-empty-message="'数据加载中...'"
+          :dataEmptyMessage="dataEmptyMessage"
           @on-popper-show="onPoperShow"
           @on-page-change="onPageChange"
           @on-fkrp-selected="fkrpSelected"
