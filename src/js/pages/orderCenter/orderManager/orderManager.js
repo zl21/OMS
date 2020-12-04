@@ -357,7 +357,7 @@ export default {
             text: window.vmI18n.t('btn.batch_holdOrder') // 批量Hold单
           },
           {
-            text: window.vmI18n.t('btn.cancelHold') // 取消Hold
+            text: window.vmI18n.t('btn.batch_cancelHold') // 批量取消Hold
           },
           {
             text: window.vmI18n.t('btn.invoice_otice'), // 开票通知
@@ -1580,7 +1580,7 @@ export default {
           });
           break;
         }
-        case '取消Hold': {
+        case '批量取消Hold': {
           if (self.selection.length === 0) {
             self.$Message.warning({
               content: self.vmI18n.t('modalTips.d5'), // 请选择需要取消Hold单的记录！

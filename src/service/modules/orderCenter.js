@@ -102,7 +102,8 @@ export default {
   getDeliveryMethod: params => network.post('/api/cs/vip/distribution/v1/getDeliveryMethod', params), // 创建出仓单获取运输方式
   distributionCreateDelivery: params => network.post('/api/cs/vip/distribution/v1/distributionCreateDelivery', params), // 创建出仓单接口
   deliveryV1List: params => network.get(`/api/cs/vip/delivery/v1/list?${qs.stringify(params)}`),
-
+  refund2Exchange: params => network.post('/api/cs/oc/oms/v1/refund2Exchange', params), // 退货转换货
+  refund2ExchangeValidate: params => network.post('/api/cs/oc/oms/v1/refund2Exchange/before/validate', params), // 退货转换货校验
   // 半定制弹框
   //
   updateWarehouse: params => network.post('/api/cs/oc/oms/v1/updateWarehouse', params),

@@ -40,12 +40,12 @@ export default {
       // 以上为模糊搜索测试数据
       theadTitle: [
         {
-          LOGISTICS_NO: vmI18n.t('table_label.expressNo'),
-          CP_C_LOGISTICS_ENAME: vmI18n.t('table_label.expressCompany'),
-          BILL_NO: vmI18n.t('table_label.orderNo'),
-          SOURCE_CODE: vmI18n.t('form_label.platform_billNo'),
-          CP_C_PHY_WAREHOUSE_ENAME: vmI18n.t('table_label.warehouseName'),
-        },
+          LOGISTICS_NO: window.vmI18n.t('table_label.expressNo'),
+          CP_C_LOGISTICS_ENAME: window.vmI18n.t('table_label.expressCompany'),
+          BILL_NO: window.vmI18n.t('table_label.orderNo'),
+          SOURCE_CODE: window.vmI18n.t('form_label.platform_billNo'),
+          CP_C_PHY_WAREHOUSE_ENAME: window.vmI18n.t('table_label.warehouseName')
+        }
       ],
       isActive: true, // 商品编码搜索框是否显示 true为显示,false隐藏
       spreadPanel: ['panel_baseInfo', 'panel_log'],
@@ -77,13 +77,10 @@ export default {
               }
               if (promptMessage) {
                 // this.$Message.warning(promptMessage + "不能为空");
-                this.$Message.warning(promptMessage + vmI18n.t('modalTips.y1'));
+                this.$Message.warning(promptMessage + window.vmI18n.t('modalTips.y1'));
                 return;
               }
-              if (
-                masterForm.BILL_TYPE === '1'
-                || masterForm.BILL_TYPE === '4'
-              ) {
+              if (masterForm.BILL_TYPE === '1' || masterForm.BILL_TYPE === '4') {
                 if (!masterForm.CP_C_LOGISTICS_ID) {
                   promptMessage += window.vmI18n.t('form_label.expressCompanyName');
                 } else if (!masterForm.CP_C_PHY_WAREHOUSE_ID) {
@@ -93,21 +90,19 @@ export default {
                 }
               }
               if (promptMessage) {
-                this.$Message.warning(promptMessage + vmI18n.t('modalTips.y1'));
+                this.$Message.warning(promptMessage + window.vmI18n.t('modalTips.y1'));
                 return;
               }
               // 2.特殊字段正则校验
-              const telFlag = self.CheckRegx(
-                /^1[34578]\d{9}$/,
-                masterForm.CUSTOMER_TEL
-              ); // 电话校验
+              const telFlag = self.CheckRegx(/^1[34578]\d{9}$/, masterForm.CUSTOMER_TEL); // 电话校验
               if (!telFlag) {
-                return self.$Message.error('顾客电话不合法!');
+                self.$Message.error('顾客电话不合法!');
+                return;
               }
 
               // 3.保存
               self.save();
-            },
+            }
           },
           {
             // text: "返回",
@@ -121,20 +116,20 @@ export default {
                 name: 'payableAdjustmentList',
                 // label: "赔付单",
                 label: window.vmI18n.t('panel_label.payableAdjustmentList'),
-                back: true,
+                back: true
                 /* query: Object.assign({
                   id: 2986,
                   tabTitle: "赔付单",
                 }), */
               });
-            },
-          },
-        ],
+            }
+          }
+        ]
       },
       dataitem: {
         url: '/p/cs/upload2',
         sendData: {
-          path: 'AC_F_PAYABLE_ADJUSTMENT/-1/',
+          path: 'AC_F_PAYABLE_ADJUSTMENT/-1/'
         },
         width: 250,
         height: 170,
@@ -142,7 +137,7 @@ export default {
         // name: "上传凭证",
         name: window.vmI18n.t('other.uploadVoucher'),
         readonly: false,
-        valuedata: [],
+        valuedata: []
       },
       detailAddTable: {
         modal: false,
@@ -152,7 +147,7 @@ export default {
             {
               // title: "商品编码",
               title: window.vmI18n.t('table_label.productNo'),
-              key: 'PS_C_PRO_ECODE',
+              key: 'PS_C_PRO_ECODE'
             },
             {
               // title: "商品名称",
@@ -160,50 +155,50 @@ export default {
               sortable: true,
               key: 'PS_C_PRO_ENAME',
               width: '',
-              type: 'asc',
+              type: 'asc'
             },
             {
               // title: "颜色",
               title: window.vmI18n.t('other.color'),
-              key: 'PS_C_CLR_ENAME',
+              key: 'PS_C_CLR_ENAME'
             },
             {
               // title: "尺寸",
               title: window.vmI18n.t('other.sizes'),
-              key: 'PS_C_SIZE_ENAME',
+              key: 'PS_C_SIZE_ENAME'
             },
             {
               // title: "商品条码",
               title: window.vmI18n.t('form_label.commodityCode'),
-              key: 'PS_C_SKU_ECODE',
+              key: 'PS_C_SKU_ECODE'
             },
             {
               // title: "数量",
               title: window.vmI18n.t('table_label.quantities'),
-              key: 'QTY',
+              key: 'QTY'
             },
             {
               // title: "标准价",
               title: window.vmI18n.t('table_label.standardPrice'),
-              key: 'STANDARD_PRICE',
+              key: 'STANDARD_PRICE'
             },
             {
               // title: "实际成交价",
               title: window.vmI18n.t('table_label.actual_transactionPrice'),
-              key: 'TRUE_PRICE',
+              key: 'TRUE_PRICE'
             },
             {
               // title: "应付金额",
               title: window.vmI18n.t('table_label.amountDue'),
-              key: 'PAYABLE_PRICE',
-            },
+              key: 'PAYABLE_PRICE'
+            }
           ], // 表头
           data: [], // 数据配置
           indexColumn: true, // 是否显示序号
           loading: false,
-          isShowSelection: true, // 是否显示checkedbox
+          isShowSelection: true // 是否显示checkedbox
         },
-        value: '',
+        value: ''
       },
       formConfig: {
         formData: [
@@ -213,7 +208,7 @@ export default {
             label: window.vmI18n.t('form_label.billNo'),
             value: 'BILL_NO',
             width: '8',
-            disabled: true,
+            disabled: true
           },
           {
             style: 'dimSearch',
@@ -224,7 +219,7 @@ export default {
             columns: ['SOURCE_CODE'],
             AuotData: [{}], // 模糊搜索的数据
             // 匹配的选项
-            dimChange: async (val) => {
+            dimChange: async val => {
               // 模糊查询的方法
               const self = this;
               const fromdata = new FormData();
@@ -233,46 +228,44 @@ export default {
                   {
                     type: 'select',
                     queryName: 'ORDER_STATUS',
-                    value: '5,6',
+                    value: '5,6'
                   },
                   {
                     type: 'input',
                     queryName: 'SOURCE_CODE',
-                    value: val,
-                  },
-                ],
+                    value: val
+                  }
+                ]
               };
               fromdata.append('param', JSON.stringify(param));
-              const { data: { code, data } } = await this.service.financeCenter.queryOrderList(fromdata);
+              const {
+                data: { code, data }
+              } = await this.service.financeCenter.queryOrderList(fromdata);
               if (code === 0) {
                 const resData = data || {};
                 const dataBySourceCode = resData.queryOrderResultList || [];
                 const dimList = self.formConfig.formData;
                 // let arr;
-                const filterData = dataBySourceCode.map(item =>
-                  // 过滤不需要展示的模糊搜索项
-                  ({
-                    LOGISTICS_NO: item.EXPRESSCODE,
-                    CP_C_LOGISTICS_ENAME: item.CP_C_LOGISTICS_ENAME,
-                    BILL_NO: item.BILL_NO,
-                    SOURCE_CODE: item.SOURCE_CODE,
-                    CP_C_PHY_WAREHOUSE_ENAME: item.CP_C_PHY_WAREHOUSE_ENAME,
-                  }));
-                dimList.map((item) => {
-                  if (
-                    item.label === '平台单号'
-                    || item.label === 'platform_billNo'
-                  ) {
+                // 过滤不需要展示的模糊搜索项
+                const filterData = dataBySourceCode.map(item => ({
+                  LOGISTICS_NO: item.EXPRESSCODE,
+                  CP_C_LOGISTICS_ENAME: item.CP_C_LOGISTICS_ENAME,
+                  BILL_NO: item.BILL_NO,
+                  SOURCE_CODE: item.SOURCE_CODE,
+                  CP_C_PHY_WAREHOUSE_ENAME: item.CP_C_PHY_WAREHOUSE_ENAME
+                }));
+                dimList.forEach(item => {
+                  if (item.label === '平台单号' || item.label === 'platform_billNo') {
                     item.AuotData = self.theadTitle.concat(filterData);
                   }
                 });
               }
             },
-            dimSelect: (obj) => {
+            dimSelect: obj => {
               const self = this;
               self.getSourceCodeDetail(obj);
             },
-            dimEnter: () => { },
+            dimEnter: () => {}
           },
           {
             style: 'input',
@@ -280,13 +273,17 @@ export default {
             label: window.vmI18n.t('table_label.expressNo'),
             value: 'LOGISTICS_NO',
             width: '8',
+            inputenter: () => {
+              const formValue = this.formConfig.formValue;
+              if (formValue.LOGISTICS_NO && !formValue.TID) this.getSourceCodeDetail();
+            }
           },
           {
             style: 'input',
             // label: "快递网点",
             label: window.vmI18n.t('form_label.expressOutlets'),
             value: 'EXPRESS_OUTLETS',
-            width: '8',
+            width: '8'
           },
           {
             style: 'select', // 下拉框类型
@@ -299,7 +296,7 @@ export default {
             },
             options: [
               // 下拉框选项值
-            ],
+            ]
           },
           {
             style: 'popInput', // 输入框弹框单多选
@@ -326,14 +323,14 @@ export default {
               statsize: -1,
               type: 'STRING', // 这个是后台用的
               valuedata: '', // 这个是选择的值
-              pid: '',
+              pid: ''
             },
-            oneObj: (val) => {
+            oneObj: val => {
               this.formConfig.formValue.AC_F_COMPENSATION_TYPE_ID = val.pid;
               this.getTableAfterCalPayablePrice();
               console.log(val);
               this.queryBIllCause(val.pid);
-            },
+            }
           },
           {
             style: 'select', // 下拉框类型
@@ -343,7 +340,7 @@ export default {
             value: 'AC_F_COMPENSATION_REASON_ID', // 输入框的值
             options: [
               // 下拉框选项值
-            ],
+            ]
           },
           {
             style: 'popInput', // 输入框弹框单多选
@@ -370,12 +367,12 @@ export default {
               statsize: -1,
               type: 'STRING', // 这个是后台用的
               valuedata: '', // 这个是选择的值
-              pid: '',
+              pid: ''
             },
-            oneObj: (val) => {
+            oneObj: val => {
               this.formConfig.formValue.CP_C_SHOP_ID = val.pid;
               this.formConfig.formValue.CP_C_SHOP_TITLE = val.valuedata;
-            },
+            }
           },
 
           {
@@ -386,7 +383,7 @@ export default {
             value: 'PAY_TYPE', // 输入框的值
             options: [
               // 下拉框选项值
-            ],
+            ]
           },
           {
             style: 'input',
@@ -394,7 +391,7 @@ export default {
             label: window.vmI18n.t('form_label.source_billNo'),
             value: 'ORDER_NO',
             width: '8',
-            disabled: true,
+            disabled: true
           },
           {
             style: 'date', // 输入框类型
@@ -403,7 +400,7 @@ export default {
             value: 'PAY_TIME', // 输入框的值
             width: '8', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             format: 'yyyy-MM-dd HH:mm:ss',
-            disabled: true,
+            disabled: true
           },
           {
             style: 'select', // 下拉框类型
@@ -413,7 +410,7 @@ export default {
             value: 'ADJUST_TYPE', // 输入框的值
             options: [
               // 下拉框选项值
-            ],
+            ]
           },
           {
             style: 'input',
@@ -421,14 +418,14 @@ export default {
             label: window.vmI18n.t('table_label.custName'),
             value: 'CUSTOMER_NAME',
             width: '8',
-            disabled: true,
+            disabled: true
           },
           {
             style: 'input',
             // label: "顾客电话",
             label: window.vmI18n.t('table_label.custTelephone'),
             value: 'CUSTOMER_TEL',
-            width: '8',
+            width: '8'
           },
           {
             style: 'input',
@@ -436,7 +433,7 @@ export default {
             label: window.vmI18n.t('table_label.alipay'),
             value: 'ALIPAY_ACCOUNT',
             width: '8',
-            disabled: true,
+            disabled: true
           },
           {
             style: 'input', // 文本录入
@@ -444,7 +441,7 @@ export default {
             label: window.vmI18n.t('table_label.vip_nickname'),
             value: 'CUSTOMER_NICK',
             width: '8',
-            disabled: true,
+            disabled: true
           },
           {
             style: 'input',
@@ -452,7 +449,7 @@ export default {
             label: window.vmI18n.t('table_label.total_amountDue'),
             value: 'PAYABLE_PRICE',
             width: '8',
-            disabled: true,
+            disabled: true
           },
           {
             style: 'popInput', // 输入框弹框单多选
@@ -479,13 +476,13 @@ export default {
               statsize: -1,
               type: 'STRING', // 这个是后台用的
               valuedata: '', // 这个是选择的值
-              pid: '',
+              pid: ''
             },
-            oneObj: (val) => {
+            oneObj: val => {
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = val.pid;
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = val.valuedata;
               this.getTableAfterCalPayablePrice();
-            },
+            }
           },
           {
             style: 'popInput', // 输入框弹框单多选
@@ -511,13 +508,13 @@ export default {
               statsize: -1,
               type: 'STRING', // 这个是后台用的
               valuedata: '', // 这个是选择的值
-              pid: '',
+              pid: ''
             },
-            oneObj: (val) => {
+            oneObj: val => {
               this.formConfig.formValue.CP_C_LOGISTICS_ID = val.pid;
               this.formConfig.formValue.CP_C_LOGISTICS_ENAME = val.valuedata;
               this.getTableAfterCalPayablePrice();
-            },
+            }
           },
           {
             style: 'date', // 输入框类型
@@ -525,7 +522,7 @@ export default {
             label: window.vmI18n.t('form_label.original_out_date'),
             value: 'SOURCE_OUTSOURCE_DATE', // 输入框的值
             width: '8', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-            format: 'yyyy-MM-dd HH:mm:ss',
+            format: 'yyyy-MM-dd HH:mm:ss'
           },
           {
             style: 'input',
@@ -533,8 +530,8 @@ export default {
             // label: "备注",
             label: window.vmI18n.t('table_label.remarks'),
             value: 'REMARK',
-            width: '16',
-          },
+            width: '16'
+          }
         ],
         // 表单一
         formValue: {
@@ -551,14 +548,14 @@ export default {
           PAY_TIME: '',
           CP_C_PHY_WAREHOUSE_ID: '',
           IMAGE: '',
-          PAYABLE_PRICE: '',
+          PAYABLE_PRICE: ''
         },
         ruleValidate: {
           BILL_TYPE: [{ required: true, message: ' ' }],
           TID: [{ required: true, message: ' ' }],
           LOGISTICS_NO: [{ required: false, message: ' ' }],
-          SOURCE_OUTSOURCE_DATE: [{ required: true, message: ' ' }],
-        },
+          SOURCE_OUTSOURCE_DATE: [{ required: true, message: ' ' }]
+        }
       },
 
       formConfigLog: {
@@ -569,7 +566,7 @@ export default {
             label: window.vmI18n.t('table_label.creator'),
             value: 'OWNERENAME',
             width: '6',
-            disabled: true,
+            disabled: true
           },
           {
             style: 'date',
@@ -579,7 +576,7 @@ export default {
             value: 'CREATIONDATE',
             width: '6',
             format: 'yyyy-MM-dd HH:mm:ss',
-            disabled: true,
+            disabled: true
           },
           {
             style: 'input',
@@ -587,7 +584,7 @@ export default {
             label: window.vmI18n.t('table_label.reviser'),
             value: 'MODIFIERNAME',
             width: '6',
-            disabled: true,
+            disabled: true
           },
           {
             style: 'date', // 输入框类型
@@ -596,16 +593,16 @@ export default {
             value: 'MODIFIEDDATE',
             width: '6',
             format: 'yyyy-MM-dd HH:mm:ss',
-            disabled: true,
-          },
+            disabled: true
+          }
         ],
         // 日志表单
         formValue: {
           OWNERENAME: '',
           CREATIONDATE: '',
           MODIFIERNAME: '',
-          MODIFIEDDATE: '',
-        },
+          MODIFIEDDATE: ''
+        }
       },
       // 表格
       jordanTableConfig: {
@@ -630,12 +627,12 @@ export default {
             key: 'selection',
             type: 'selection',
             width: '50',
-            align: 'center',
+            align: 'center'
           },
           {
             // title: "商品编码",
             title: window.vmI18n.t('table_label.productNo'),
-            key: 'PS_C_PRO_ECODE',
+            key: 'PS_C_PRO_ECODE'
           },
           {
             // title: "商品名称",
@@ -643,27 +640,27 @@ export default {
             sortable: true,
             key: 'PS_C_PRO_ENAME',
             width: '',
-            type: 'asc',
+            type: 'asc'
           },
           {
             // title: "颜色",
             title: window.vmI18n.t('other.color'),
-            key: 'PS_C_CLR_ENAME',
+            key: 'PS_C_CLR_ENAME'
           },
           {
             // title: "尺寸",
             title: window.vmI18n.t('other.sizes'),
-            key: 'PS_C_SIZE_ENAME',
+            key: 'PS_C_SIZE_ENAME'
           },
           {
             // title: "商品条码",
             title: window.vmI18n.t('form_label.commodityCode'),
-            key: 'PS_C_SKU_ECODE',
+            key: 'PS_C_SKU_ECODE'
           },
           {
             // title: "国标码",
             title: window.vmI18n.t('form_label.gBCode'),
-            key: 'GBCODE',
+            key: 'GBCODE'
           },
           {
             // title: "逻辑仓",
@@ -674,7 +671,7 @@ export default {
                 const self = this;
                 return h(tableInput, {
                   style: {
-                    width: '100%',
+                    width: '100%'
                   },
                   props: {
                     tableFormConfig: {
@@ -702,21 +699,21 @@ export default {
                             statsize: -1,
                             type: 'STRING',
                             pid: params.row.LOGICAL_STORE_ID,
-                            valuedata: params.row.LOGICAL_STORE_NAME,
+                            valuedata: params.row.LOGICAL_STORE_NAME
                           },
-                          tableObj: (e) => {
+                          tableObj: e => {
                             self.tableObjs(e, params);
-                          },
-                        },
-                      ],
-                    },
-                  },
+                          }
+                        }
+                      ]
+                    }
+                  }
                 });
               }
               const self = this;
               return h(tableInput, {
                 style: {
-                  width: '100%',
+                  width: '100%'
                 },
                 props: {
                   tableFormConfig: {
@@ -744,17 +741,17 @@ export default {
                           statsize: -1,
                           type: 'STRING',
                           pid: params.row.LOGICAL_STORE_ID,
-                          valuedata: params.row.LOGICAL_STORE_NAME,
+                          valuedata: params.row.LOGICAL_STORE_NAME
                         },
-                        tableObj: (e) => {
+                        tableObj: e => {
                           self.tableObjs(e, params);
-                        },
-                      },
-                    ],
-                  },
-                },
+                        }
+                      }
+                    ]
+                  }
+                }
               });
-            },
+            }
           },
           {
             // title: "数量",
@@ -769,8 +766,8 @@ export default {
                       width: '100%',
                       display: 'flex',
                       alignitems: 'center',
-                      justifyContent: 'space-between',
-                    },
+                      justifyContent: 'space-between'
+                    }
                   },
                   [
                     h(
@@ -779,15 +776,15 @@ export default {
                         class: 'isNone',
                         style: {
                           width: '100%',
-                          height: '100%',
+                          height: '100%'
                         },
                         props: {
                           value: params.row.QTY,
                           autosize: true,
-                          regx: /^[0-9]*$/,
+                          regx: /^[0-9]*$/
                         },
                         on: {
-                          'on-blur': (e) => {
+                          'on-blur': e => {
                             const self = this;
                             self.jordanTableConfig.data[`${params.index}`].QTY = e.target.value;
                             const reg = /^[0-9]*$/;
@@ -799,11 +796,7 @@ export default {
                             // self.getTableAfterCalPayablePrice();
                             if (e.target.value > 0) {
                               if (params.row.DEAL_AMT) {
-                                self.jordanTableConfig.data[
-                                  params.index
-                                ].TRUE_PRICE = (
-                                  params.row.DEAL_AMT * e.target.value
-                                ).toFixed(2);
+                                self.jordanTableConfig.data[params.index].TRUE_PRICE = (params.row.DEAL_AMT * e.target.value).toFixed(2);
                               }
                               // if(params.row.PAY_AMT){
                               //   self.jordanTableConfig.data[
@@ -812,11 +805,11 @@ export default {
                               // }
                               self.getTableAfterCalPayablePrice();
                             }
-                          },
-                        },
+                          }
+                        }
                       },
                       params.row.QTY
-                    ),
+                    )
                   ]
                 );
               }
@@ -827,8 +820,8 @@ export default {
                     width: '100%',
                     display: 'flex',
                     alignitems: 'center',
-                    justifyContent: 'space-between',
-                  },
+                    justifyContent: 'space-between'
+                  }
                 },
                 [
                   h(
@@ -837,43 +830,43 @@ export default {
                       class: 'isNone',
                       style: {
                         width: '100%',
-                        height: '100%',
+                        height: '100%'
                       },
                       props: {
                         value: params.row.QTY,
-                        autosize: true,
-                      },
+                        autosize: true
+                      }
                     },
                     params.row.QTY
-                  ),
+                  )
                 ]
               );
-            },
+            }
           },
           {
             // title: "订单数量",
             title: window.vmI18n.t('table_label.orderQuantity'),
-            key: 'ORDER_QTY',
+            key: 'ORDER_QTY'
           },
           {
             // title: "标准价",
             title: window.vmI18n.t('table_label.standardPrice'),
-            key: 'STANDARD_PRICE',
+            key: 'STANDARD_PRICE'
           },
           {
             // title: "成交单价",
             title: window.vmI18n.t('table_label.unitPrice'),
-            key: 'DEAL_AMT',
+            key: 'DEAL_AMT'
           },
           {
             // title: "实际成交价",
             title: window.vmI18n.t('table_label.actual_transactionPrice'),
-            key: 'TRUE_PRICE',
+            key: 'TRUE_PRICE'
           },
           {
             // title: "应付单价",
             title: window.vmI18n.t('table_label.payable_unitPrice'),
-            key: 'PAY_AMT',
+            key: 'PAY_AMT'
           },
           {
             // title: "应付金额",
@@ -888,8 +881,8 @@ export default {
                       width: '100%',
                       display: 'flex',
                       alignitems: 'center',
-                      justifyContent: 'space-between',
-                    },
+                      justifyContent: 'space-between'
+                    }
                   },
                   [
                     h(
@@ -898,20 +891,18 @@ export default {
                         class: 'isNone',
                         style: {
                           width: '100%',
-                          height: '100%',
+                          height: '100%'
                         },
                         props: {
                           value: params.row.PAYABLE_PRICE,
                           autosize: true,
-                          regx: /^\d*\.{0,1}\d{0,4}$/,
+                          regx: /^\d*\.{0,1}\d{0,4}$/
                         },
                         on: {
-                          'on-blur': (e) => {
+                          'on-blur': e => {
                             const self = this;
                             let changeAmt = e.target.value;
-                            self.jordanTableConfig.data[
-                              `${params.index}`
-                            ].PAYABLE_PRICE = changeAmt;
+                            self.jordanTableConfig.data[`${params.index}`].PAYABLE_PRICE = changeAmt;
                             const reg = /^\d*\.{0,1}\d{0,4}$/;
                             if (!reg.test(changeAmt)) {
                               // self.$Message.warning("应付金额只能录入大于0的数字");
@@ -928,24 +919,18 @@ export default {
                             }
                             let preAllPayablePrice = self.formConfig.formValue.PAYABLE_PRICE;
                             if (preAllPayablePrice) {
-                              preAllPayablePrice = parseFloat(
-                                preAllPayablePrice
-                              );
+                              preAllPayablePrice = parseFloat(preAllPayablePrice);
                             }
                             if (params.row.QTY > 0 && e.target.value) {
-                              self.jordanTableConfig.data[
-                                params.index
-                              ].PAY_AMT = (
-                                e.target.value / params.row.QTY
-                              ).toFixed(2);
+                              self.jordanTableConfig.data[params.index].PAY_AMT = (e.target.value / params.row.QTY).toFixed(2);
                             }
                             self.formConfig.formValue.PAYABLE_PRICE = preAllPayablePrice - preAmt + changeAmt;
                             self.calTableTable(self.jordanTableConfig.data);
-                          },
-                        },
+                          }
+                        }
                       },
                       params.row.PAYABLE_PRICE
-                    ),
+                    )
                   ]
                 );
               }
@@ -956,8 +941,8 @@ export default {
                     width: '100%',
                     display: 'flex',
                     alignitems: 'center',
-                    justifyContent: 'space-between',
-                  },
+                    justifyContent: 'space-between'
+                  }
                 },
                 [
                   h(
@@ -966,21 +951,21 @@ export default {
                       class: 'isNone',
                       style: {
                         width: '100%',
-                        height: '100%',
+                        height: '100%'
                       },
                       props: {
                         value: params.row.PAYABLE_PRICE,
-                        autosize: true,
-                      },
+                        autosize: true
+                      }
                     },
                     params.row.PAYABLE_PRICE
-                  ),
+                  )
                 ]
               );
-            },
-          },
+            }
+          }
         ],
-        data: [],
+        data: []
       },
       payableAdjustLog: {
         // 是否修改搜索框为select
@@ -1002,20 +987,20 @@ export default {
           {
             // title: "日志内容",
             title: window.vmI18n.t('table_label.logContent'),
-            key: 'LOG_CONTENT',
+            key: 'LOG_CONTENT'
           },
           {
             // title: "操作姓名",
             title: window.vmI18n.t('table_label.operatorName'),
-            key: 'OWNERENAME',
+            key: 'OWNERENAME'
           },
           {
             // title: "操作时间",
             title: window.vmI18n.t('table_label.operatorTime'),
-            key: 'CREATIONDATE',
-          },
+            key: 'CREATIONDATE'
+          }
         ],
-        data: [],
+        data: []
       },
       // tab切换配置
       labelList: [
@@ -1023,10 +1008,10 @@ export default {
           // label: "赔付单明细",
           label: window.vmI18n.t('panel_label.payableAdjust_details'),
           value: '1',
-          isShow: true,
-        },
+          isShow: true
+        }
       ],
-      labelDefaultValue: '1', // 设置tab默认值
+      labelDefaultValue: '1' // 设置tab默认值
     };
   },
   watch: {},
@@ -1056,21 +1041,20 @@ export default {
     async queryBIllCause(val) {
       const formdata = new FormData();
       formdata.append('id', val);
-      const { data: { code, data, message } } = await this.service.financeCenter.getCompensationReason(formdata);
+      const {
+        data: { code, data, message }
+      } = await this.service.financeCenter.getCompensationReason(formdata);
       console.log(code, data, message);
       if (code == 0) {
         const arr = [];
-        data.forEach((item) => {
+        data.forEach(item => {
           const obj = {};
           obj.value = item.ID;
           obj.label = item.ac_f_compensation_type_ename;
           arr.push(obj);
         });
-        this.formConfig.formData.forEach((item) => {
-          if (
-            item.label == '赔付原因'
-            || item.label == 'payableAdjustReason'
-          ) {
+        this.formConfig.formData.forEach(item => {
+          if (item.label == '赔付原因' || item.label == 'payableAdjustReason') {
             item.options = arr;
           }
         });
@@ -1106,24 +1090,26 @@ export default {
     async getPayableAdjustment() {
       const self = this;
       const param = {
-        objid: self.ID,
+        objid: self.ID
       };
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
-      const { data: { code, data, message } } = await this.service.financeCenter.getPayableAdjustment(fromdata);
+      const {
+        data: { code, data, message }
+      } = await this.service.financeCenter.getPayableAdjustment(fromdata);
       if (code === 0) {
         self.labelList = [
           {
             // label: "赔付单明细",
             label: window.vmI18n.t('panel_label.payableAdjust_details'),
             value: '1',
-            isShow: true,
+            isShow: true
           },
           {
             // label: "操作日志",
             label: window.vmI18n.t('panel_label.operationLog'),
-            value: '2',
-          },
+            value: '2'
+          }
         ];
         const mainData = data.acFPayableAdjustment;
         const itemData = data.acFPayableAdjustmentItemList;
@@ -1145,22 +1131,12 @@ export default {
     // 切换分页条数
     pageSizeChange(val) {
       this.jordanTableConfig.pageSize = val;
-      this.mixinPageSizeChange(
-        this.allTableArr,
-        val,
-        this.jordanTableConfig,
-        'jordanTableConfig'
-      );
+      this.mixinPageSizeChange(this.allTableArr, val, this.jordanTableConfig, 'jordanTableConfig');
     },
     // 切换分页条数
     logPageSizeChange(val) {
       this.payableAdjustLog.pageSize = val;
-      this.mixinPageSizeChange(
-        this.allLogTableArr,
-        val,
-        this.payableAdjustLog,
-        'payableAdjustLog'
-      );
+      this.mixinPageSizeChange(this.allLogTableArr, val, this.payableAdjustLog, 'payableAdjustLog');
     },
     deleteImg(imgInfo, imgIndex) {
       this.imgIndex = imgIndex;
@@ -1174,7 +1150,7 @@ export default {
       const self = this;
       self.dataitem.valuedata.push({
         name: res.data.Name,
-        URL: res.data.Url,
+        URL: res.data.Url
       });
       self.formConfig.formValue.IMAGE = self.dataitem.valuedata;
     },
@@ -1185,11 +1161,11 @@ export default {
       const payableAdjustmentItemDO = this.mixinTableArr('jordanTableConfig');
       const data = {
         AC_F_PAYABLE_ADJUSTMENT: payableAdjustmentDO,
-        AC_F_PAYABLE_ADJUSTMENT_ITEM: payableAdjustmentItemDO,
+        AC_F_PAYABLE_ADJUSTMENT_ITEM: payableAdjustmentItemDO
       };
       const param = {
         objid: self.ID,
-        fixcolumn: data,
+        fixcolumn: data
       };
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
@@ -1197,33 +1173,46 @@ export default {
     },
     async getSourceCodeDetail(obj) {
       const self = this;
-      const sourceCode = obj.tem.SOURCE_CODE;
+      let sourceCode = '';
+      if (obj) sourceCode = obj.tem.SOURCE_CODE;
       if (sourceCode === '平台单号' || sourceCode === 'platform_billNo') {
         self.formConfig.formValue.TID = '';
         return;
       }
       const fromdata = new FormData();
-      const param = {
+      let param = {
         highSearch: [
           {
             type: 'select',
             queryName: 'ORDER_STATUS',
-            value: '5,6',
-          },
+            value: '5,6'
+          }
+        ]
+      };
+      if (obj) {
+        param.highSearch.push(
           {
             type: 'input',
             queryName: 'SOURCE_CODE',
-            value: obj.tem.SOURCE_CODE,
+            value: obj.tem.SOURCE_CODE
           },
           {
             type: 'input',
             queryName: 'BILL_NO',
-            value: obj.tem.BILL_NO,
-          },
-        ],
-      };
+            value: obj.tem.BILL_NO
+          }
+        );
+      } else {
+        param.highSearch.push({
+          type: 'input',
+          queryName: 'EXPRESSCODE',
+          value: this.formConfig.formValue.LOGISTICS_NO
+        });
+      }
       fromdata.append('param', JSON.stringify(param));
-      const { data: { code, data } } = await this.service.financeCenter.queryOrderList(fromdata);
+      const {
+        data: { code, data }
+      } = await this.service.financeCenter.queryOrderList(fromdata);
       if (code === 0) {
         const dataByBillNo = data.queryOrderResultList;
         const item = dataByBillNo[0];
@@ -1249,17 +1238,11 @@ export default {
         self.addSelection = [];
         self.detailAddTable.table.data = self.addSelection;
         if (item.SCAN_TIME) {
-          self.formConfig.formValue.SOURCE_OUTSOURCE_DATE = this.formatDate(
-            item.SCAN_TIME
-          );
+          self.formConfig.formValue.SOURCE_OUTSOURCE_DATE = this.formatDate(item.SCAN_TIME);
         }
         const queryData = self.formConfig.formData;
-        queryData.map((formItem) => {
-          if (
-            formItem.itemdata
-            && (formItem.itemdata.name === '快递公司名称'
-              || formItem.itemdata.name === 'expressCompanyName')
-          ) {
+        queryData.forEach(formItem => {
+          if (formItem.itemdata && (formItem.itemdata.name === '快递公司名称' || formItem.itemdata.name === 'expressCompanyName')) {
             formItem.itemdata.valuedata = item.CP_C_LOGISTICS_ENAME;
             formItem.itemdata.pid = item.CP_C_LOGISTICS_ID;
             this.formConfig.formValue.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ID;
@@ -1269,11 +1252,7 @@ export default {
             formItem.itemdata.pid = item.CP_C_SHOP_ID;
             this.formConfig.formValue.CP_C_SHOP_ID = item.CP_C_SHOP_ID;
             this.formConfig.formValue.CP_C_SHOP_TITLE = item.CP_C_SHOP_TITLE;
-          } else if (
-            formItem.itemdata
-            && formItem.itemdata.name
-            === window.vmI18n.t('form_label.physicalWarehouseName')
-          ) {
+          } else if (formItem.itemdata && formItem.itemdata.name === window.vmI18n.t('form_label.physicalWarehouseName')) {
             formItem.itemdata.valuedata = item.CP_C_PHY_WAREHOUSE_ENAME;
             formItem.itemdata.pid = item.CP_C_PHY_WAREHOUSE_ID;
             this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = item.CP_C_PHY_WAREHOUSE_ID;
@@ -1281,14 +1260,10 @@ export default {
           }
         });
         // Table表单赋值
-        let truePrice = 0;
-        let orderQty = 0;
-        const filterItemData = item.QUERYORDERITEMRESULTLIST.map((subItem) => {
-          const priceActual = parseFloat(
-            (subItem.realAmt / subItem.qty).toFixed(2)
-          );
-          truePrice += parseFloat(subItem.realAmt);
-          orderQty += subItem.qty;
+        const filterItemData = item.QUERYORDERITEMRESULTLIST.map(subItem => {
+          const priceActual = parseFloat((subItem.realAmt / subItem.qty).toFixed(2));
+          this.truePrice += parseFloat(subItem.realAmt);
+          this.orderQty += subItem.qty;
           // 过滤不需要展示的模糊搜索项
           return {
             ID: subItem.proId,
@@ -1307,28 +1282,13 @@ export default {
             PS_C_SKU_ID: subItem.skuId,
             GBCODE: subItem.barCode,
             PAYABLE_PRICE: 0, // 应付金额初始默认为0
-            checked: false,
+            checked: false
           };
         });
-        self.customPagingFun(
-          filterItemData,
-          self.jordanTableConfig.pageSize,
-          self.jordanTableConfig,
-          'jordanTableConfig'
-        );
+        self.customPagingFun(filterItemData, self.jordanTableConfig.pageSize, self.jordanTableConfig, 'jordanTableConfig');
         self.allTableArr = filterItemData;
         self.getTableAfterCalPayablePrice();
       }
-      // axios({
-      //   url: "/api/cs/oc/oms/v1/queryOrderList",
-      //   method: "post",
-      //   data: fromdataReq,
-      // }).then((res) => {
-      //   if (res.status === 200) {
-      //   // 同上
-
-      //   }
-      // });
     },
     // 计算应付金额
     async getTableAfterCalPayablePrice() {
@@ -1336,59 +1296,47 @@ export default {
       const formdata = self.generateFromdata();
       const billType = self.formConfig.formValue.BILL_TYPE;
       if (billType === '1' || billType === '4') {
-        self.formConfig.formData.map((item) => {
-          if (
-            item.itemdata
-            && (item.itemdata.name
-              === window.vmI18n.t('form_label.physicalWarehouseName')
-              || item.itemdata.name === window.vmI18n.t('form_label.expressCompanyName'))
-          ) {
+        self.formConfig.formData.forEach(item => {
+          if (item.itemdata && (item.itemdata.name === window.vmI18n.t('form_label.physicalWarehouseName') || item.itemdata.name === window.vmI18n.t('form_label.expressCompanyName'))) {
             item.itemdata.isnotnull = true;
           }
         });
         self.formConfig.ruleValidate.LOGISTICS_NO[0].required = true;
-        self.formConfig.ruleValidate = Object.assign(
-          {},
-          self.formConfig.ruleValidate
-        );
+        self.formConfig.ruleValidate = Object.assign({}, self.formConfig.ruleValidate);
         // 接口
-        const { data: { code, data, message } } = await this.service.financeCenter.getCompensate(formdata);
+        const {
+          data: { code, data, message }
+        } = await this.service.financeCenter.getCompensate(formdata);
         console.log('formdata:', code, data, message);
         if (code === 0) {
           self.formConfig.formValue.PAYABLE_PRICE = data.payablePrice;
           const itemList = data.acFPayableAdjustmentItemList;
-          const filterItemData = itemList.map(subItem =>
-            // let priceActual = parseFloat((subItem.TRUE_PRICE / subItem.ORDER_QTY).toFixed(2));
-            // 过滤不需要展示的模糊搜索项
-            ({
-              ID: subItem.ID,
-              ORDER_ITEM_ID: subItem.ORDER_ITEM_ID,
-              PS_C_PRO_ID: subItem.PS_C_PRO_ID,
-              PS_C_PRO_ECODE: subItem.PS_C_PRO_ECODE,
-              PS_C_PRO_ENAME: subItem.PS_C_PRO_ENAME,
-              PS_C_CLR_ENAME: subItem.PS_C_CLR_ENAME,
-              PS_C_SIZE_ENAME: subItem.PS_C_SIZE_ENAME,
-              PS_C_SKU_ECODE: subItem.PS_C_SKU_ECODE,
-              QTY: subItem.QTY,
-              ORDER_QTY: subItem.ORDER_QTY,
-              STANDARD_PRICE: subItem.STANDARD_PRICE,
-              DEAL_AMT: subItem.DEAL_AMT,
-              PAY_AMT: subItem.PAY_AMT,
-              TRUE_PRICE: subItem.TRUE_PRICE,
-              PS_C_SKU_ID: subItem.PS_C_SKU_ID,
-              GBCODE: subItem.GBCODE,
-              PAYABLE_PRICE: subItem.PAYABLE_PRICE,
-              checked: false,
-            }));
+          // let priceActual = parseFloat((subItem.TRUE_PRICE / subItem.ORDER_QTY).toFixed(2));
+          // 过滤不需要展示的模糊搜索项
+          const filterItemData = itemList.map(subItem => ({
+            ID: subItem.ID,
+            ORDER_ITEM_ID: subItem.ORDER_ITEM_ID,
+            PS_C_PRO_ID: subItem.PS_C_PRO_ID,
+            PS_C_PRO_ECODE: subItem.PS_C_PRO_ECODE,
+            PS_C_PRO_ENAME: subItem.PS_C_PRO_ENAME,
+            PS_C_CLR_ENAME: subItem.PS_C_CLR_ENAME,
+            PS_C_SIZE_ENAME: subItem.PS_C_SIZE_ENAME,
+            PS_C_SKU_ECODE: subItem.PS_C_SKU_ECODE,
+            QTY: subItem.QTY,
+            ORDER_QTY: subItem.ORDER_QTY,
+            STANDARD_PRICE: subItem.STANDARD_PRICE,
+            DEAL_AMT: subItem.DEAL_AMT,
+            PAY_AMT: subItem.PAY_AMT,
+            TRUE_PRICE: subItem.TRUE_PRICE,
+            PS_C_SKU_ID: subItem.PS_C_SKU_ID,
+            GBCODE: subItem.GBCODE,
+            PAYABLE_PRICE: subItem.PAYABLE_PRICE,
+            checked: false
+          }));
           self.jordanTableConfig.data = filterItemData;
           self.allTableArr = filterItemData;
           self.selectArr = [];
-          self.customPagingFun(
-            filterItemData,
-            self.jordanTableConfig.pageSize,
-            self.jordanTableConfig,
-            'jordanTableConfig'
-          );
+          self.customPagingFun(filterItemData, self.jordanTableConfig.pageSize, self.jordanTableConfig, 'jordanTableConfig');
           self.calTableTable(self.jordanTableConfig.data);
         }
         // axios({
@@ -1437,21 +1385,13 @@ export default {
         //   }
         // });
       } else {
-        self.formConfig.formData.map((item) => {
-          if (
-            item.itemdata
-            && (item.itemdata.name
-              === window.vmI18n.t('form_label.physicalWarehouseName')
-              || item.itemdata.name === window.vmI18n.t('form_label.expressCompanyName'))
-          ) {
+        self.formConfig.formData.forEach(item => {
+          if (item.itemdata && (item.itemdata.name === window.vmI18n.t('form_label.physicalWarehouseName') || item.itemdata.name === window.vmI18n.t('form_label.expressCompanyName'))) {
             item.itemdata.isnotnull = false;
           }
         });
         self.formConfig.ruleValidate.LOGISTICS_NO[0].required = false;
-        self.formConfig.ruleValidate = Object.assign(
-          {},
-          self.formConfig.ruleValidate
-        );
+        self.formConfig.ruleValidate = Object.assign({}, self.formConfig.ruleValidate);
         self.calTableTable(self.jordanTableConfig.data);
       }
     },
@@ -1496,9 +1436,7 @@ export default {
       self.formConfig.formValue.PAYABLE_PRICE = mainData.PAYABLE_PRICE ? mainData.PAYABLE_PRICE : '';
       self.formConfig.formValue.REMARK = mainData.REMARK ? mainData.REMARK : '';
       self.formConfig.formValue.PAY_TIME = this.formatDate(mainData.PAY_TIME);
-      self.formConfig.formValue.SOURCE_OUTSOURCE_DATE = this.formatDate(
-        mainData.SOURCE_OUTSOURCE_DATE
-      );
+      self.formConfig.formValue.SOURCE_OUTSOURCE_DATE = this.formatDate(mainData.SOURCE_OUTSOURCE_DATE);
       self.formConfig.formValue.CP_C_LOGISTICS_ID = mainData.CP_C_LOGISTICS_ID;
       self.formConfig.formValue.CP_C_SHOP_ID = mainData.CP_C_SHOP_ID;
       self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = mainData.CP_C_PHY_WAREHOUSE_ID;
@@ -1507,26 +1445,16 @@ export default {
       self.formConfigLog.formValue.OWNERENAME = mainData.OWNERENAME;
       self.formConfigLog.formValue.MODIFIERNAME = mainData.MODIFIERNAME;
       self.formConfigLog.formValue.SOURCE_OUTSOURCE_DATE = mainData.SOURCE_OUTSOURCE_DATE;
-      self.formConfigLog.formValue.CREATIONDATE = this.formatDate(
-        mainData.CREATIONDATE
-      );
-      self.formConfigLog.formValue.MODIFIEDDATE = this.formatDate(
-        mainData.MODIFIEDDATE
-      );
-      self.formConfig.formData.map((item) => {
-        if (
-          item.itemdata
-          && item.itemdata.name === window.vmI18n.t('form_label.expressCompanyName')
-        ) {
+      self.formConfigLog.formValue.CREATIONDATE = this.formatDate(mainData.CREATIONDATE);
+      self.formConfigLog.formValue.MODIFIEDDATE = this.formatDate(mainData.MODIFIEDDATE);
+      self.formConfig.formData.forEach(item => {
+        if (item.itemdata && item.itemdata.name === window.vmI18n.t('form_label.expressCompanyName')) {
           item.itemdata.valuedata = mainData.CP_C_LOGISTICS_ENAME;
           item.itemdata.pid = mainData.CP_C_LOGISTICS_ID;
         } else if (item.itemdata && item.itemdata.name === '店铺') {
           item.itemdata.valuedata = mainData.CP_C_SHOP_TITLE;
           item.itemdata.pid = mainData.CP_C_SHOP_ID;
-        } else if (
-          item.itemdata
-          && item.itemdata.name === window.vmI18n.t('form_label.physicalWarehouseName')
-        ) {
+        } else if (item.itemdata && item.itemdata.name === window.vmI18n.t('form_label.physicalWarehouseName')) {
           item.itemdata.valuedata = mainData.CP_C_PHY_WAREHOUSE_ENAME;
           item.itemdata.pid = mainData.CP_C_PHY_WAREHOUSE_ID;
         } else if (item.itemdata && item.itemdata.name === '赔付类型') {
@@ -1536,34 +1464,22 @@ export default {
           item.options = [
             {
               value: mainData.AC_F_COMPENSATION_REASON_ID,
-              label: mainData.COMPENSATION_REASON,
-            },
+              label: mainData.COMPENSATION_REASON
+            }
           ];
         }
       });
       if (mainData.IMAGE) {
         self.dataitem.valuedata = JSON.parse(mainData.IMAGE);
       }
-      self.customPagingFun(
-        itemData,
-        self.jordanTableConfig.pageSize,
-        self.jordanTableConfig,
-        'jordanTableConfig'
-      );
+      self.customPagingFun(itemData, self.jordanTableConfig.pageSize, self.jordanTableConfig, 'jordanTableConfig');
       const filterLogData = logData.map(item => ({
         LOG_CONTENT: item.LOG_CONTENT,
         OWNERENAME: item.OWNERENAME,
-        CREATIONDATE: item.CREATIONDATE
-          ? publicMethodsUtil.DatesTime(item.CREATIONDATE)
-          : '',
+        CREATIONDATE: item.CREATIONDATE ? publicMethodsUtil.DatesTime(item.CREATIONDATE) : ''
       }));
       self.allLogTableArr = filterLogData;
-      self.customPagingFun(
-        filterLogData,
-        self.payableAdjustLog.pageSize,
-        self.payableAdjustLog,
-        'payableAdjustLog'
-      );
+      self.customPagingFun(filterLogData, self.payableAdjustLog.pageSize, self.payableAdjustLog, 'payableAdjustLog');
       self.allTableArr = itemData;
       // self.jordanTableConfig.data = itemData;
       self.calTableTable(self.jordanTableConfig.data);
@@ -1572,7 +1488,7 @@ export default {
     setupByAuditOrVoid(billStatus) {
       const self = this;
       // 保存按钮隐藏
-      self.btnConfig.buttons.map((btn) => {
+      self.btnConfig.buttons.forEach(btn => {
         if (btn.text === '保存') {
           btn.isShow = false;
         }
@@ -1589,7 +1505,7 @@ export default {
       self.jordanTableConfig.isShowAddDetailBtn = false;
       self.jordanTableConfig.isShowDeleteDetailBtn = false;
       // 主表数据设为只读
-      self.formConfig.formData.map((formItem) => {
+      self.formConfig.formData.forEach(formItem => {
         if (formItem.style === 'popInput') {
           formItem.itemdata.readonly = true;
         } else if (formItem.style === 'dimSearch') {
@@ -1615,40 +1531,28 @@ export default {
       const arrPayType = [];
       const arrAdjustType = [];
       const arrBillType = [];
-      await this.getColOption(
-        'AC_F_PAYABLE_ADJUSTMENT',
-        vmI18n.t('common.baseInformation'),
-        'PAY_TYPE'
-      );
-      self.selectData.map((item) => {
+      await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', this.vmI18n.t('common.baseInformation'), 'PAY_TYPE');
+      self.selectData.forEach(item => {
         const obj = {};
         obj.label = item.limitdesc;
         obj.value = item.limitval;
         arrPayType.push(obj);
       });
-      await this.getColOption(
-        'AC_F_PAYABLE_ADJUSTMENT',
-        vmI18n.t('common.baseInformation'),
-        'ADJUST_TYPE'
-      );
-      self.selectData.map((item) => {
+      await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', this.vmI18n.t('common.baseInformation'), 'ADJUST_TYPE');
+      self.selectData.forEach(item => {
         const obj = {};
         obj.label = item.limitdesc;
         obj.value = item.limitval;
         arrAdjustType.push(obj);
       });
-      await this.getColOption(
-        'AC_F_PAYABLE_ADJUSTMENT',
-        vmI18n.t('common.baseInformation'),
-        'BILL_TYPE'
-      );
-      self.selectData.map((item) => {
+      await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', this.vmI18n.t('common.baseInformation'), 'BILL_TYPE');
+      self.selectData.forEach(item => {
         const obj = {};
         obj.label = item.limitdesc;
         obj.value = item.limitval;
         arrBillType.push(obj);
       });
-      self.formConfig.formData.map((item) => {
+      self.formConfig.formData.forEach(item => {
         if (item.value === 'PAY_TYPE') {
           item.options = arrPayType;
         } else if (item.value === 'ADJUST_TYPE') {
@@ -1666,10 +1570,10 @@ export default {
       fromdata.append('objid', -1);
       const res = await self.service.common.getObject(fromdata);
       const selectData = res.data.data.addcolums;
-      selectData.forEach((item) => {
+      selectData.forEach(item => {
         if (item.parentdesc === parentColName) {
           const childItem = item.childs;
-          childItem.forEach((item) => {
+          childItem.forEach(item => {
             if (item.colname === childColName) {
               self.selectData = item.combobox;
             }
@@ -1687,7 +1591,9 @@ export default {
       const self = this;
       self.isSaveLoading = true;
       const fromdata = self.generateFromdata();
-      const { data: { code, data, message } } = await self.service.financeCenter.savePayableAdjustment(fromdata);
+      const {
+        data: { code, data, message }
+      } = await self.service.financeCenter.savePayableAdjustment(fromdata);
       if (code === 0) {
         self.$Message.success(message || window.vmI18n.t('modalTips.z9'));
         self.ID = data.objid;
@@ -1696,20 +1602,6 @@ export default {
         self.$Message.error(message || window.vmI18n.t('modalTips.y0'));
       }
       self.isSaveLoading = false;
-      // axios({
-      //   url: "/p/cs/savePayableAdjustment",
-      //   method: "post",
-      //   data: fromdata,
-      // }).then(function (res) {
-      //   if (res.data.code === 0) {
-      //     self.$Message.success(res.data.message || window.vmI18n.t("modalTips.z9"));
-      //     self.ID = res.data.data.objid;
-      //     self.getPayableAdjustment();
-      //   } else {
-      //     self.$Message.error(res.data.message || window.vmI18n.t("modalTips.y0"));
-      //   }
-      //   self.isSaveLoading = false;
-      // });
     }, // 保存方法
 
     async enterSave() {
@@ -1719,23 +1611,12 @@ export default {
 
       const data = {
         AC_F_PAYABLE_ADJUSTMENT: payableAdjustmentDO,
-        AC_F_PAYABLE_ADJUSTMENT_ITEM: payableAdjustmentItemDO,
+        AC_F_PAYABLE_ADJUSTMENT_ITEM: payableAdjustmentItemDO
       };
       const res = await self.service.financeCenter.savePayableAdjustment(data);
       if (res.data.code === 0) {
         self.$Message.success(res.data.message || window.vmI18n.t('modalTips.z9'));
-        // self.ID = res.data.data;
       }
-      // axios({
-      //   url: "/p/cs/savePayableAdjustment",
-      //   method: "post",
-      //   data: data,
-      // }).then(function (res) {
-      //   if (res.data.code === 0) {
-      //     self.$Message.success(res.data.message || window.vmI18n.t("modalTips.z9"));
-      //     // self.ID = res.data.data;
-      //   }
-      // });
     },
     onSelectCancel(selection, row) {
       const selectArr = this.selectArr;
@@ -1753,7 +1634,7 @@ export default {
     }, // 全选勾选事件
     onSelectAll() {
       const self = this;
-      self.jordanTableConfig.data.map((item) => {
+      self.jordanTableConfig.data.forEach(item => {
         this.selectArr.push(item.ID);
       });
     }, // 全选选中事件
@@ -1763,7 +1644,7 @@ export default {
       let orderQty = 0;
       let payablePrice = 0;
       if (tableArr && tableArr.length > 0) {
-        tableArr.map((tableItem) => {
+        tableArr.forEach(tableItem => {
           truePrice += parseFloat(tableItem.TRUE_PRICE);
           payablePrice += parseFloat(tableItem.PAYABLE_PRICE);
           orderQty += tableItem.ORDER_QTY;
@@ -1777,8 +1658,8 @@ export default {
               selection: '合计:',
               ORDER_QTY: orderQty,
               TRUE_PRICE: self.toFixed(truePrice, 2),
-              PAYABLE_PRICE: self.toFixed(payablePrice, 2),
-            },
+              PAYABLE_PRICE: self.toFixed(payablePrice, 2)
+            }
           ];
         } else {
           self.jordanTableConfig.totalData = [{}];
@@ -1810,6 +1691,7 @@ export default {
         }
         return value;
       }
+      return value;
     },
     // 删除明细
     delTableDetail() {
@@ -1832,12 +1714,7 @@ export default {
         }
       }
       // 分页
-      this.customPagingFun(
-        tableArr,
-        this.jordanTableConfig.pageSize,
-        this.jordanTableConfig,
-        'jordanTableConfig'
-      );
+      this.customPagingFun(tableArr, this.jordanTableConfig.pageSize, this.jordanTableConfig, 'jordanTableConfig');
       // 重置选中记录
       this.selectArr = [];
       // 新增明细表单回填记录
@@ -1865,7 +1742,7 @@ export default {
     }, // 全选勾选事件
     detailAddOnSelectAll() {
       const self = this;
-      self.detailAddTable.table.data.map((item) => {
+      self.detailAddTable.table.data.forEach(item => {
         this.addDetailSelectArr.push(item.ID);
       });
     }, // 全选选中事件
@@ -1888,15 +1765,10 @@ export default {
       // 新增明细表单回填记录
       this.allTableArr = this.allTableArr.concat(selection);
       const mainTableArr = this.allTableArr;
-      this.customPagingFun(
-        mainTableArr,
-        this.jordanTableConfig.pageSize,
-        this.jordanTableConfig,
-        'jordanTableConfig'
-      );
+      this.customPagingFun(mainTableArr, this.jordanTableConfig.pageSize, this.jordanTableConfig, 'jordanTableConfig');
       this.calTableTable(this.jordanTableConfig.data);
     },
-    detailAddCancel() { },
+    detailAddCancel() {},
     tableObjs(e, params) {
       const _this = this;
       _this.jordanTableConfig.data.forEach((item, index) => {
@@ -1905,6 +1777,6 @@ export default {
           item.LOGICAL_STORE_ID = e.pid;
         }
       });
-    },
-  },
+    }
+  }
 };

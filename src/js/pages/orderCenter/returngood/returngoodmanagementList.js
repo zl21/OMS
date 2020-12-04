@@ -68,7 +68,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'modifyWarehouse', // 组件名称
-        url: 'modal/orderCenter/returngood/modifyWarehouse', 
+        url: 'modal/orderCenter/returngood/modifyWarehouse',
         keepAlive: true,
         excludeString: 'modifyWarehouse', // 将name传进去，确认不缓存
         componentData: {}
@@ -267,6 +267,13 @@ export default {
             disabled: false,
             btnclick: () => {
               this.cloneRenturnGood();
+            }
+          },
+          {
+            text: '退货转换货',
+            disabled: false,
+            btnclick: () => {
+              this.refund2ExchangeValidate();
             }
           },
           {
@@ -816,7 +823,7 @@ export default {
         Obj.STATUS_DEFECTIVE_TRANS = '';
       }
       // const arr = document.getElementsByClassName('ark-input');
-      
+
       // 防止多次连续多次点击回车，去除焦点
       // for (let i = 0; i < arr.length; i++) {
       //   arr[i].blur();
@@ -1270,7 +1277,7 @@ export default {
         this.$Message.warning(this.vmI18n.t('modalTips.l1')); // 退换货取消失败,只有【等待退货入库】状态才可以操作取消，请检查后重试!
         return;
       }
-      
+
       const ids = [];
       for (let i = 0; i < selectArr.length; i++) {
         if (selectArr[i].RETURN_STATUS == 20) {
@@ -1638,6 +1645,50 @@ export default {
           tabTitle: _this.vmI18n.t('panel_label.addReturnOrder') // 退换货订单新增
         }
       });
+    },
+    // 退货转换货校验
+    async refund2ExchangeValidate() {
+      const _this = this;
+      if (this.$refs.agGridChild.AGTABLE.getSelect().length !== 1) {
+        _this.$Message.error(this.vmI18n.t('modalTips.k3')); // 请选中一项修改!
+        return;
+      }
+      const selected = this.$refs.agGridChild.AGTABLE.getSelect()[0];
+      const query = {
+        ids: [selected.ID],
+      };
+      const res = await _this.service.orderCenter.refund2ExchangeValidate(query);
+      if (res.data.code === 0) {
+        this.refund2Exchange();
+      } else {
+        const err = res.data.message || '转换失败'; // 售后审核失败！
+        _this.$Message.error(err);
+      }
+    },
+    // 退货转换货
+    async refund2Exchange() {
+      const _this = this;
+      const selected = this.$refs.agGridChild.AGTABLE.getSelect()[0];
+      const query = {
+        ids: [selected.ID],
+      };
+      const res = await _this.service.orderCenter.refund2Exchange(query);
+      if (res.data.code == 0) {
+        this.$store.commit('customize/TabHref', {
+          id: query.ID, // 单据id
+          type: 'action', // 类型action
+          name: 'RETURNGOOD', // 文件名
+          label: '退换货订单详情', // tab中文名
+          query: Object.assign({
+            id: query.ID, // 单据id
+            tabTitle: '退换货订单详情', // tab中文名
+            statusName: selected.RETURN_STATUS_NAME // 行的退单状态
+          }) // 带的参数
+        });
+      } else {
+        const err = res.data.message || '转换失败'; // 售后审核失败！
+        _this.$Message.error(err);
+      }
     },
     // 导入
     returnExport() {},
