@@ -175,6 +175,7 @@ module.exports = env => ({
       '@': path.resolve(__dirname, 'src'),
       libs: path.resolve(__dirname, 'node_modules'),
       allpages: path.resolve(__dirname, 'src/views/pages'),
+      burgeonConfig: path.resolve(__dirname, 'src/config'),
       framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
       professionalComponents: path.resolve(__dirname, 'node_modules/@burgeon/business-components'),
       omsTheme: path.resolve(__dirname, '/node_modules/@burgeon/oms-theme/skin')
