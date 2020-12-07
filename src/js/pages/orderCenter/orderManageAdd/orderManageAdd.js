@@ -8,9 +8,10 @@ import jordanModal from 'professionalComponents/businessDialog';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
 
+import comUtils from '@/assets/js/__utils__/common.js';
+
 const areaList = require('@/assets/js/address/area-list');
 const { parse, parseArea } = require('@/assets/js/address/address-parse');
-import comUtils from '@/assets/js/__utils__/common.js';
 
 parseArea(areaList);
 export default {
@@ -25,14 +26,13 @@ export default {
   data() {
     const validatePhoneNumber = (rule, value, callback) => {
       const pNumver = this.formConfig1.formValue.RECEIVER_MOBILE;
-      if(!pNumver) {
-        return callback(new Error('手机号不能为空!'))
+      if (!pNumver) {
+        return callback(new Error('手机号不能为空!'));
       }
-      if(/^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/.test(pNumver)){
+      if (/^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/.test(pNumver)) {
         return callback();
-      }else {
-        return callback(new Error('手机号格式不正确!'))
       }
+        return callback(new Error('手机号格式不正确!'));
     };
     return {
       vmI18n: window.vmI18n,
@@ -160,6 +160,7 @@ export default {
       value1: ['1', '2', '3'],
       btnConfig: {
         typeAll: 'error',
+        loading: false,
         buttons: [
           {
             text: window.vmI18n.t('btn.save'), // 按钮文本
@@ -649,7 +650,7 @@ export default {
         ruleValidate: {
           RECEIVER_NAME: [{ required: true, message: ' ', trigger: 'blur' }],
           RECEIVER_ADDRESS: [{ required: true, message: ' ', trigger: 'blur' }],
-          RECEIVER_MOBILE: [{ validator: validatePhoneNumber,required: true, trigger: 'blur' }],
+          RECEIVER_MOBILE: [{ validator: validatePhoneNumber, required: true, trigger: 'blur' }],
         },
       },
       // 表单三
@@ -1452,11 +1453,13 @@ export default {
           cancelText: self.vmI18n.t('common.cancel'), // 取消
           onOk: () => {
             self.isShowFromLoading = true;
+            self.btnConfig.loading = true;
             self.service.orderCenter.saveBill(data)
             // self.$network.post('/p/cs/saveBill', data)
               .then((res) => {
                 self.isShowFromLoading = false;
                 if (res.data.code === 0) {
+                  self.btnConfig.loading = false;
                   self.$Message.success(res.data.message);
                   self.btnConfig.buttons[0].disabled = false;
                   self.$store.commit('customize/TabHref', {
@@ -1472,6 +1475,7 @@ export default {
                   // 销毁当前实例
                   self.$destroy();
                 } else {
+                  self.btnConfig.loading = false;
                 // 保存未成功
                   self.$Message.warning(
                     res.data.message || self.vmI18n.t('modalTips.g2')
@@ -1483,11 +1487,13 @@ export default {
         });
       } else {
         self.isShowFromLoading = true;
+        self.btnConfig.loading = true;
         self.service.orderCenter.saveBill(data)
         // self.$network.post('/p/cs/saveBill', data)
           .then((res) => {
             self.isShowFromLoading = false;
             if (res.data.code === 0) {
+              self.btnConfig.loading = false;
               self.$Message.success(res.data.message);
               self.btnConfig.buttons[0].disabled = false;
               self.$store.commit('customize/TabHref', {
@@ -1503,6 +1509,7 @@ export default {
               // 销毁当前实例
               self.$destroy();
             } else {
+              self.btnConfig.loading = false;
             // 保存未成功
               self.$Message.warning(
                 res.data.message || self.vmI18n.t('modalTips.g2')
@@ -2178,10 +2185,10 @@ export default {
           `${promptMessage}${window.vmI18n.t('modalTips.y1')}`
         );
         return false;
-      } else if (isNaN(masterTable.RECEIVER_MOBILE)) {
-        this.$Message.warning('手机号码必须为数字,请修改')
+      } if (isNaN(masterTable.RECEIVER_MOBILE)) {
+        this.$Message.warning('手机号码必须为数字,请修改');
       } else if (masterTable.RECEIVER_MOBILE.length !== 11) {
-        this.$Message.warning('手机位数不正确,请修改')
+        this.$Message.warning('手机位数不正确,请修改');
       } else {
         return true;
       }
