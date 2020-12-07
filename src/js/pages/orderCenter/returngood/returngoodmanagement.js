@@ -498,19 +498,20 @@ export default {
             value: 'IS_RESERVED',
             disabled: false, // 按钮禁用控制
             checked: false, // 是否勾选控制
-            checkboxChange: e => {
-              const _this = this;
-              if (e) {
-                _this.information.formData[11].style = 'select';
-                _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = 1;
-                setTimeout(() => {
-                  document.getElementsByClassName('ark-select-selected-value')[1].className = 'ark-select-selected-value inputBgcolor';
-                }, 10);
-              } else {
-                _this.information.formData[11].style = '';
-                _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = '';
-              }
-            }
+            // 新加需求,换货预留库存不勾选不显示是否生成换货单
+            // checkboxChange: e => {
+              // const _this = this;
+              // if (e) {
+                // _this.information.formData[11].style = 'select';
+                // _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = 1;
+                // setTimeout(() => {
+                //   document.getElementsByClassName('ark-select-selected-value')[1].className = 'ark-select-selected-value inputBgcolor';
+                // }, 10);
+              // } else {
+              //   _this.information.formData[11].style = '';
+              //   _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = '';
+              // }
+            // }
           },
           {
             style: '',
