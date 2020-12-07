@@ -347,10 +347,6 @@ export default {
           title: '商品款号',
           dataAcessKey: 'PS_C_PRO_ECODE'
         },
-        {
-          key: 'PT_RETURN_STATUS_EXT',
-          title: '平台退款状态',
-        },
         // 颜色
         {
           title: '颜色',
@@ -697,6 +693,10 @@ export default {
           key: 'REFUND_STATUS_EXT',
           title: '取消状态',
           dataAcessKey: 'REFUND_STATUS',
+        },
+        {
+          key: 'PT_RETURN_STATUS_EXT',
+          title: '平台退款状态',
         },
         {
           key: 'DISTRIBUTION_PRICE',
