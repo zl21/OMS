@@ -330,7 +330,12 @@ export default {
               const _this = this;
               _this.setFavorite();
             } // 按钮点击事件
-          }
+          },
+          {
+            text: '退货转换货' || window.vmI18n.t('btn.import'), // 导入 按钮文本
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {} // 按钮点击事件
+          },
         ]
       }, // 按钮数据
       formConfig: {
