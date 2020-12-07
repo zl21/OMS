@@ -424,7 +424,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.fubaoOut_of_stock'), // 福袋缺货重新占单text: "福袋缺货重新占单", // 按钮文本
+            text: window.vmI18n.t('btn.fubaoOut_of_stock'), // 福袋缺货重新占单
             btnclick: () => {
               const self = this;
               if (self.tab1.order.ID > 0) {
@@ -515,14 +515,18 @@ export default {
             btnclick: () => {
               const self = this;
               const id = self.tab1.order.ID || -1;
-              self.$network.post('/api/cs/oc/oms/v1/cancelInterception', { ids: [id] }).then(res => {
-                if (res.data.code === 0) {
-                  self.$Message.success(res.data.message);
-                  self.autoRefresh();
-                } else {
-                  self.$Message.error(res.data.message);
-                }
-              });
+              self.service.orderCenter
+                .cancelInterception({ ids: [id] })
+                // self.$network
+                //   .post('/api/cs/oc/oms/v1/orderInterception', { ids })
+                .then(res => {
+                  if (res.data.code === 0) {
+                    self.$Message.success(res.data.message);
+                    self.autoRefresh();
+                  } else {
+                    self.$Message.error(res.data.message);
+                  }
+                });
             } // 按钮点击事件
           },
           {

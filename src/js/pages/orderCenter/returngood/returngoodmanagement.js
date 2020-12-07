@@ -2679,7 +2679,7 @@ export default {
                     TABLENAME: 'PS_C_PRO'
                   };
                   fromdata.append('param', JSON.stringify(params));
-                  _this.service.orderCenter.screenresult(fromdata).then(res => {
+                  _this.service.common.screenresult(fromdata).then(res => {
                     if (res.data.code === 0) {
                       const dimList = _this.jordanTableConfig2.businessFormConfig.formData;
 
