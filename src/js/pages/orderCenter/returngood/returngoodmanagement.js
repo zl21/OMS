@@ -1059,7 +1059,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       //    配置详情页上的功能按钮;
-      if (this.$route.query.id === '-1') {
+      if (this.$route.query.id === '-1' || this.$route.query.flag === 'RefundToExchange') { // 新增 或者退货转换货单状态
         this.btnConfig.buttons = [
           {
             text: this.vmI18n.t('btn.save'), // 保存 按钮文本
