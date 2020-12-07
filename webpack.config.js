@@ -12,7 +12,8 @@ const target = projectConfig.target; // 框架研发网关开启环境
 const proxyLists = projectConfig.burgeonProxy;
 const indexProHtml = path.posix.join('/', 'index.pro.html');
 const indexHtml = path.posix.join('/', 'index.html');
-
+const envFlag = Boolean(process.env && process.env.production);
+// const devtoolFlag = envFlag ? 'source-map' : 'cheap-module-eval-source-map';
 const burgeonPlugins = [
   new MiniCssExtractPlugin({
     filename: 'r3.css'
@@ -50,7 +51,7 @@ if (projectConfig.build.bundleAnalyzerReport) {
   burgeonPlugins.push(new BundleAnalyzerPlugin());
 }
 
-module.exports = env => ({
+module.exports = () => ({
   entry: {
     index: './index.js'
   },
@@ -73,7 +74,7 @@ module.exports = env => ({
       rewrites: [
         {
           from: /.*/,
-          to: env && env.production ? indexProHtml : indexHtml
+          to: envFlag ? indexProHtml : indexHtml
         }
       ]
     },
@@ -91,7 +92,8 @@ module.exports = env => ({
     ]
   },
   target: 'web',
-  devtool: env && env.production ? 'source-map' : 'cheap-module-eval-source-map',
+  devtool: 'cheap-module-source-map',
+  // devtool: devtoolFlag,
   output: {
     filename: '[name].js',
     chunkFilename: '[name].js',
@@ -120,7 +122,7 @@ module.exports = env => ({
         // include: [path.resolve('./node_modules/@burgeon/oms-theme/')],
         use: [
           {
-            loader: env && env.production ? MiniCssExtractPlugin.loader : 'style-loader'
+            loader: envFlag ? MiniCssExtractPlugin.loader : 'style-loader'
           },
           {
             loader: 'css-loader'
@@ -168,9 +170,10 @@ module.exports = env => ({
     ]
   },
   plugins: burgeonPlugins,
-  mode: env && env.production ? 'production' : 'development',
+  mode: envFlag ? 'production' : 'development',
   resolve: {
     extensions: ['.js', '.json', '.vue', '.css'],
+    fallback: { timers: require.resolve('timers-browserify') },
     alias: {
       '@': path.resolve(__dirname, 'src'),
       libs: path.resolve(__dirname, 'node_modules'),
