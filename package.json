@@ -81,6 +81,8 @@
     "vue-i18n": "^8.22.0",
     "vue-router": "^3.0.2",
     "vuex": "^3.1.0",
-    "webpack-bundle-analyzer": "^3.9.0"
+    "webpack-bundle-analyzer": "^3.9.0",
+    "ag-grid": "^17.1.1",
+    "ag-grid-enterprise": "^17.1.1"
   }
 }

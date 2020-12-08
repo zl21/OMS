@@ -165,20 +165,24 @@ export default {
     // 定制下载模板
     getDownloadTemp(url, param) {
       if (param) {
+        this.loading = true;
         axios({
           url,
           method: 'post',
           data: param
         }).then(res => {
+          this.loading = false;
           if (res.data.code === 0) {
             this.downloadUrlFile(res.data.data);
           }
         });
       } else {
+        this.loading = true;
         axios({
           url,
           method: 'post'
         }).then(res => {
+          this.loading = false;
           if (res.data.code === 0) {
             this.downloadUrlFile(res.data.data);
           }
