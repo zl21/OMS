@@ -1109,7 +1109,6 @@ body {
 .ark-collapse-content>.ark-collapse-content-box {
   padding-top: 0px !important;
 }
-
 .jq-combined-commodity,
 .horizontalTableDetail,
 .auto-check,
@@ -1132,7 +1131,17 @@ body {
     &>.ark-collapse-item {
       border-top: none;
       margin-bottom: 10px;
-
+      &.ark-collapse-item-active{
+          &>.ark-collapse-header {
+            &>i {
+              left: 8px;
+              &.ark-icon:before{
+                width: 10px;
+                height: 3px;
+              }
+            }
+          }
+      }
       &>.ark-collapse-header {
         text-align: left;
         padding: 0 20px;
@@ -1146,20 +1155,18 @@ body {
         color: #1f2d3d;
         border-bottom: none !important;
 
-        &::before {
+        &>i {
           position: absolute;
           top: 50%;
           left: 12px;
           transform: translateY(-50%);
-          display: block;
-          content: "";
-          width: 3px;
-          height: 14px;
-          background: #f00;
-        }
-
-        &>i {
-          display: none;
+          &.ark-icon:before{
+            display: block;
+            content: "";
+            width: 3px;
+            height: 14px;
+            background: #fd6442;
+          }
         }
 
       }
@@ -1168,6 +1175,7 @@ body {
         padding: 10px 16px;
         border: 1px solid #f7f8fa;
       }
+      
     }
   }
 }

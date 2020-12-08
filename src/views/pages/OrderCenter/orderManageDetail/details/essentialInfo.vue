@@ -155,14 +155,14 @@
         <span>订单明细</span>
         <span
           v-if="isQh && isQhChild"
-          style="float: right;marginTop:16px;fontSize:12px;color:red;fontWeight:300;marginRight:8px;cursor:pointer;"
+          style="float: right;fontSize:12px;color:red;fontWeight:300;marginRight:8px;cursor:pointer;"
           @click="checkCombination"
         >
           <Icon type="ios-repeat" />切换为sku商品显示
         </span>
         <span
           v-if="!isQh && isQhChild"
-          style="float: right;marginTop:16px;fontSize:12px;color:red;fontWeight:300;marginRight:8px;cursor:pointer;"
+          style="float: right;fontSize:12px;color:red;fontWeight:300;marginRight:8px;cursor:pointer;"
           @click="checkCombination"
         >
           <Icon type="ios-repeat" />切换为平台商品明细
