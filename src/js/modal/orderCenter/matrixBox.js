@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import matrix from '@/views/pages/common/orderDetail/matrix.vue';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
@@ -9,8 +8,7 @@ export default {
     matrix
   },
   data() {
-    return {
-    };
+    return {};
   },
   props: {
     componentData: {
@@ -28,11 +26,11 @@ export default {
       if (num) {
         const arr = [];
         const arrList = [];
-        Object.keys(val).map((keys) => {
+        Object.keys(val).forEach(keys => {
           const obj = val[keys];
           arr.push(obj.PS_C_SKU_ECODE.trim());
         });
-        Object.keys(val).map((keys) => {
+        Object.keys(val).forEach(keys => {
           const obj = val[keys];
           arrList.push({ sku: obj.PS_C_SKU_ECODE.trim(), qty: obj.count === '' ? 0 : obj.count.trim() });
         });
@@ -42,43 +40,41 @@ export default {
           url: '/p/cs/skuListQuery',
           method: 'post',
           data: fromdata
-        }).then(async (res) => {
+        }).then(async res => {
           if (res.data.code === 0) {
             const queryList = res.data.data;
-            for (let i = 0; i < arrList.length; i++) {
-              const list = arrList[i];
+            for await (const list of arrList) {
               const resData = res.data.data;
-              for (let index = 0; index < resData.length; index++) {
-                const item = resData[index];
+              let count = 0;
+              for await (const item of resData) {
                 if (item) {
                   if (list.sku === item.ECODE) {
-                    queryList[index].skuId = item.ID;
-                    queryList[index].PS_C_SKU_ECODE = item.ECODE;
-                    queryList[index].BARCODE = item.GBCODE;
-                    queryList[index].PS_C_PRO_ECODE = item.PS_C_PRO_ECODE;
-                    queryList[index].PS_C_CLR_ID = item.PS_C_SPEC1OBJ_ID; // 颜色
-                    queryList[index].PS_C_CLR_ECODE = item.CLRSECODE;
-                    queryList[index].PS_C_CLR_ENAME = item.CLRSENAME;
-                    queryList[index].PS_C_SIZE_ID = item.PS_C_SPEC2OBJ_ID; // 尺寸
-                    queryList[index].PS_C_SIZE_ECODE = item.SIZESECODE;
-                    queryList[index].PS_C_SIZE_ENAME = item.SIZESENAME;
-                    queryList[index].PS_C_PRO_ENAME = item.PS_C_PRO_ENAME;
-                    queryList[index].QTY_CAN_REFUND = list.qty; // 申请数量
-                    queryList[index].QTY_REFUND = list.qty;
-                    queryList[index].QTY_EXCHANGE = list.qty;
-                    queryList[index].SEX_NAME = item.SEX_NAME;
-                    queryList[index].SEX = item.SEX;
-                    queryList[index].PRICE = item.PRICELIST;
-                    queryList[index].amt_refund_single = item.PRICELIST;
-                    queryList[index].AMT_REFUND = publicMethodsUtil
-                      .accMul(list.qty, item.PRICELIST)
-                      .toFixed(2); // 退货金额realAmt
-                    queryList[index].QTY_IN = 0;
-                    queryList[index].PRODUCT_MARK = '正品';
-                    queryList[index].ID = -1;
+                    queryList[count].skuId = item.ID;
+                    queryList[count].PS_C_SKU_ECODE = item.ECODE;
+                    queryList[count].BARCODE = item.GBCODE;
+                    queryList[count].PS_C_PRO_ECODE = item.PS_C_PRO_ECODE;
+                    queryList[count].PS_C_CLR_ID = item.PS_C_SPEC1OBJ_ID; // 颜色
+                    queryList[count].PS_C_CLR_ECODE = item.CLRSECODE;
+                    queryList[count].PS_C_CLR_ENAME = item.CLRSENAME;
+                    queryList[count].PS_C_SIZE_ID = item.PS_C_SPEC2OBJ_ID; // 尺寸
+                    queryList[count].PS_C_SIZE_ECODE = item.SIZESECODE;
+                    queryList[count].PS_C_SIZE_ENAME = item.SIZESENAME;
+                    queryList[count].PS_C_PRO_ENAME = item.PS_C_PRO_ENAME;
+                    queryList[count].QTY_CAN_REFUND = list.qty; // 申请数量
+                    queryList[count].QTY_REFUND = list.qty;
+                    queryList[count].QTY_EXCHANGE = list.qty;
+                    queryList[count].SEX_NAME = item.SEX_NAME;
+                    queryList[count].SEX = item.SEX;
+                    queryList[count].PRICE = item.PRICELIST;
+                    queryList[count].amt_refund_single = item.PRICELIST;
+                    queryList[count].AMT_REFUND = publicMethodsUtil.accMul(list.qty, item.PRICELIST).toFixed(2); // 退货金额realAmt
+                    queryList[count].QTY_IN = 0;
+                    queryList[count].PRODUCT_MARK = '正品';
+                    queryList[count].ID = -1;
                     await this.$parent.$parent.$parent.getDataByProinfo(item.PS_C_PRO_ECODE, 1);
-                    queryList[index].clrList = this.$parent.$parent.$parent.clrListArr;
-                    queryList[index].sizeList = this.$parent.$parent.$parent.sizeListArr;
+                    queryList[count].clrList = this.$parent.$parent.$parent.clrListArr;
+                    queryList[count].sizeList = this.$parent.$parent.$parent.sizeListArr;
+                    count++;
                   }
                 }
               }
@@ -89,11 +85,11 @@ export default {
       } else {
         const arr = [];
         const arrList = [];
-        Object.keys(val).map((keys) => {
+        Object.keys(val).forEach(keys => {
           const obj = val[keys];
           arr.push(obj.PS_C_SKU_ECODE.trim());
         });
-        Object.keys(val).map((keys) => {
+        Object.keys(val).forEach(keys => {
           const obj = val[keys];
           arrList.push({ sku: obj.PS_C_SKU_ECODE.trim(), qty: obj.count === '' ? 0 : obj.count.trim() });
         });
@@ -103,13 +99,13 @@ export default {
           url: '/p/cs/skuListQuery',
           method: 'post',
           data: fromdata
-        }).then((res) => {
+        }).then(res => {
           if (res.data.code === 0) {
             const queryList = [];
 
             // 熊伟，15703766695，浙江省杭州市江干区九堡
-            arrList.forEach((list) => {
-              res.data.data.forEach((item, index) => {
+            arrList.forEach(list => {
+              res.data.data.forEach(item => {
                 if (list.sku === item.ECODE) {
                   if (item.IS_GIFT === 'Y') item.IS_GIFT = '1';
                   else if (item.IS_GIFT === 'N') item.IS_GIFT = '0';

@@ -57,7 +57,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'matrixBox', // 组件名称
-        url: 'orderCenter/matrixBox',
+        url: 'modal/orderCenter/matrixBox',
         keepAlive: true,
         excludeString: 'matrixBox', // 将name传进去，确认不缓存
         componentData: {}
@@ -3358,8 +3358,11 @@ export default {
           obj.amt_refund_single = 0; // 单件退货金额
           obj.PRODUCT_MARK = '正品'; // 商品标记
           obj.AMT_REFUND = 0; // 换货金额
-          obj.clrList = obj.selected.psCSpec1objList;
-          obj.sizeList = obj.selected.psCSpec2objList;
+          await self.reconstructionGetDetail(obj, obj, obj.ECODE);
+          // await self.reconstructionGetDetail()
+          //  obj.ECODE
+          // obj.clrList = obj.selected.psCSpec1objList; 
+          // obj.sizeList = obj.selected.psCSpec2objList; 
           // 新增换货明细时判断退货明细中是否存在此商品编号
           // 存在 ==> 将退货明细中数据拿过来
           // 不存在 ==> 新增
@@ -3825,8 +3828,6 @@ export default {
           queryListItem.PRICE_SETTLE = selection.priceSettle;
           queryListItem.AMT_SETTLE_TOT = selection.totPriceSettle;
           await _this.reconstructionGetDetail(selection, queryListItem, selection.ecode);
-          queryListItem.clrList = _this.clrListArr;
-          queryListItem.sizeList = _this.sizeListArr;
           queryList.push(queryListItem);
         }
       }
