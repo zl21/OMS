@@ -1,7 +1,7 @@
 // 订单中心
 import R3 from '@syman/burgeon-r3';
 import port from '@/js/pages/common/orderDetail/connector';
-import qs from "qs";
+import qs from 'qs';
 
 const { network } = R3;
 export default {
@@ -104,6 +104,7 @@ export default {
   deliveryV1List: params => network.get(`/api/cs/vip/delivery/v1/list?${qs.stringify(params)}`),
   refund2Exchange: params => network.post('/api/cs/oc/oms/v1/refund2Exchange', params), // 退货转换货
   refund2ExchangeValidate: params => network.post('/api/cs/oc/oms/v1/refund2Exchange/before/validate', params), // 退货转换货校验
+  getOrderId: params => network.post('/api/cs/oc/oms/v1/getOrderId', params), // 根据平台单号,查询零售发货单id
   // 半定制弹框
   //
   updateWarehouse: params => network.post('/api/cs/oc/oms/v1/updateWarehouse', params),
