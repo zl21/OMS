@@ -23,6 +23,15 @@ export default {
             } // 按钮点击事件
           },
           {
+            text: '刷新',
+            btnclick: async ()=>{
+              await this.queryLogisticsCompany();
+              this.getAutoCheck().then(() => {
+                this.QueryList();
+              });
+            }
+          },
+          {
             text: '返回', // 查找 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -412,18 +421,18 @@ export default {
           return false;
         }
       }
-      if (effectiveCondition[5].value) {
-        if (!this.info.BUYER_REMARK) {
-          this.$Message.error('买家留言为必填项,没有输入值!');
-          return false;
-        }
-      }
-      if (effectiveCondition[6].value) {
-        if (!this.info.SELLER_REMARK) {
-          this.$Message.error('卖家备注为必填项,没有输入值!');
-          return false;
-        }
-      }
+      // if (effectiveCondition[5].value) {
+      //   if (!this.info.BUYER_REMARK) {
+      //     this.$Message.error('买家留言为必填项,没有输入值!');
+      //     return false;
+      //   }
+      // }
+      // if (effectiveCondition[6].value) {
+      //   if (!this.info.SELLER_REMARK) {
+      //     this.$Message.error('卖家备注为必填项,没有输入值!');
+      //     return false;
+      //   }
+      // }
       return true;
     },
     save() {
