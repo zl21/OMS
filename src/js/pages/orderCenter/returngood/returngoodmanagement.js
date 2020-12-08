@@ -57,7 +57,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'matrixBox', // 组件名称
-        url: 'orderCenter/matrixBox',
+        url: 'modal/orderCenter/matrixBox',
         keepAlive: true,
         excludeString: 'matrixBox', // 将name传进去，确认不缓存
         componentData: {}
@@ -3933,7 +3933,7 @@ export default {
                 this.information.formValue.CP_C_SHOP_ID = item.itemdata.pid;
                 this.information.formValue.CP_C_SHOP_TITLE = item.itemdata.valuedata;
                 break;
-              case _this.vmI18n.t('table_label.returnLogisticsCompany'):
+              case _this.vmI18n.t('form_label.returnLogisticsCompany'):
                 this.information.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid;
                 this.information.formValue.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
                 break;
