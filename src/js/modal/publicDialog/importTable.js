@@ -4,7 +4,8 @@ import loading from '@/component/loading.vue';
 import businessButton from 'professionalComponents/businessButton';
 export default {
   components: {
-    loading
+    loading,
+    businessButton
   },
   props: {
     componentData: {
@@ -21,7 +22,31 @@ export default {
       isError: false, // 是否导入失败
       errorMessage: '', // 导入失败原因
       configTableName: ['ST_C_PRODUCT_STRATEGY', 'AC_F_RECEIVABLES_ADJUSTMENT', 'SG_B_PHY_OUT_RESULT', 'SC_B_TRANSFER', 'OC_B_MULTI_STORE_DISTRIBUTION', 'OC_B_SEND_OUT', 'OC_B_JD_RETURN_ORDER'],
-      cover: 'false' // 缺货备注单选默认选择
+      cover: 'false', // 缺货备注单选默认选择
+      btnConfig: {
+        typeAll: 'error', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
+        buttons: [
+          {
+            type: '', // 按钮类型
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            icon: '', // 按钮图标
+            size: 'small', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.closeConfirm();
+            }, // 按钮点击事件
+          },
+          {
+            text: window.vmI18n.t('common.determine'), // 确定 按钮文本
+            size: 'small', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.importDialog();
+            }, // 按钮点击事件
+          }
+        ],
+      },
     };
   },
   methods: {
@@ -140,20 +165,24 @@ export default {
     // 定制下载模板
     getDownloadTemp(url, param) {
       if (param) {
+        this.loading = true;
         axios({
           url,
           method: 'post',
           data: param
         }).then(res => {
+          this.loading = false;
           if (res.data.code === 0) {
             this.downloadUrlFile(res.data.data);
           }
         });
       } else {
+        this.loading = true;
         axios({
           url,
           method: 'post'
         }).then(res => {
+          this.loading = false;
           if (res.data.code === 0) {
             this.downloadUrlFile(res.data.data);
           }

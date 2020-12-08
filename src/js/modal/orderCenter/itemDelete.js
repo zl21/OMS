@@ -27,7 +27,7 @@ export default {
           {
             text: window.vmI18n.t('common.determine'), // 确定 按钮文本
             size: 'small', // 按钮大小
-            disabled: true, // 按钮禁用控制
+            disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.confirm();
             }, // 按钮点击事件
