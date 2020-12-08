@@ -293,9 +293,10 @@ export default {
       // 元数据配置窗口特殊处理
       if (_this.configTableName.includes(_this.componentData.tableName)) {
         _this.$parent.$emit('closeActionDialog');
+      } else if (_this.$parent.$parent.closeConfirm){
+        _this.$parent.$parent.closeConfirm();
       } else {
         _this.$parent.$emit('closeActionDialog');
-        // _this.$parent.$parent.closeConfirm();
       }
     },
     // 导入请求
