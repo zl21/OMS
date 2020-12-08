@@ -298,6 +298,16 @@ export default {
               formdata.append('param', JSON.stringify({ sourceCode: param.data.SOURCE_CODE }));
               self.service.orderCenter.getOrderId(formdata).then(res=>{
                 console.log(res);
+                if (res.data.code === 0) {
+                  R3.store.commit('global/tabOpen', {
+                    type: 'C',
+                    customizedModuleName: 'orderManageDetail',
+                    customizedModuleId: res.data.data,
+                    label: window.vmI18n.t('panel_label.retailInvoice_details')
+                  });
+                } else {
+                  self.$Message.warning(res.data.message);
+                }
               });
             };
             return resDom;

@@ -383,6 +383,31 @@ export default {
             resDom.style.justifyContent = 'space-between';
             resDom.innerHTML = param.data.CP_C_SHOP_TITLE;
             return resDom;
+          },
+          ORIG_SOURCE_CODE: param => {
+            const self = this;
+            const resDom = document.createElement('a');
+            resDom.style['text-decoration'] = 'underline';
+            resDom.innerHTML = param.data.ORIG_SOURCE_CODE;
+            resDom.onclick = function () {
+              console.log(self);
+              const formdata = new FormData();
+              formdata.append('param', JSON.stringify({ sourceCode: param.data.ORIG_SOURCE_CODE }));
+              self.service.orderCenter.getOrderId(formdata).then(res=>{
+                console.log(res);
+                if (res.data.code === 0) {
+                  R3.store.commit('global/tabOpen', {
+                    type: 'C',
+                    customizedModuleName: 'orderManageDetail',
+                    customizedModuleId: res.data.data,
+                    label: window.vmI18n.t('panel_label.retailInvoice_details')
+                  });
+                } else {
+                  self.$Message.warning(res.data.message);
+                }
+              });
+            };
+            return resDom;
           }
         },
         tableHeight: '480px',
