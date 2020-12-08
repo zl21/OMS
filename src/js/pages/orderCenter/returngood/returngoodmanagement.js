@@ -97,7 +97,7 @@ export default {
         },
         orderform: {
           formValue: {
-            bill_no: '',
+            ID: '',
             source_code: '',
             receiver_name: '',
             user_nick: '',
@@ -108,7 +108,14 @@ export default {
             {
               style: 'input',
               label: window.vmI18n.t('form_label.orderNumber'), // 订单号
-              value: 'bill_no',
+              value: 'ID',
+              width: '8',
+              inputenter: () => this.queryBounced()
+            },
+            {
+              style: 'input',
+              label: window.vmI18n.t('table_label.orderNo'), // 订单编号
+              value: 'BILL_NO',
               width: '8',
               inputenter: () => this.queryBounced()
             },
@@ -317,7 +324,8 @@ export default {
           IS_RETURN_ORDER_EXCHANGE: '',
           CP_C_STORE_ENAME: '', // 仓库
           REMARK: '', // 备注
-          SELLER_MEMO: '' // 卖家备注
+          SELLER_MEMO: '', // 卖家备注
+          BILL_NO: '', // 订单编号
         },
         // 表单非空提示
         ruleValidate: {
@@ -350,8 +358,8 @@ export default {
               const _this = this;
               _this.onSelectData = [];
               _this.order.orderform.formValue = {};
-              _this.order.orderform.formData[5].itemdata.pid = '';
-              _this.order.orderform.formData[5].itemdata.valuedata = '';
+              _this.order.orderform.formData[6].itemdata.pid = '';
+              _this.order.orderform.formData[6].itemdata.valuedata = '';
               _this.order.table.data = [];
               // document.getElementsByClassName(
               //   "SELLER_NICK"
@@ -498,19 +506,20 @@ export default {
             value: 'IS_RESERVED',
             disabled: false, // 按钮禁用控制
             checked: false, // 是否勾选控制
-            checkboxChange: e => {
-              const _this = this;
-              if (e) {
-                _this.information.formData[11].style = 'select';
-                _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = 1;
-                setTimeout(() => {
-                  document.getElementsByClassName('ark-select-selected-value')[1].className = 'ark-select-selected-value inputBgcolor';
-                }, 10);
-              } else {
-                _this.information.formData[11].style = '';
-                _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = '';
-              }
-            }
+            // 新加需求,换货预留库存不勾选不显示是否生成换货单
+            // checkboxChange: e => {
+              // const _this = this;
+              // if (e) {
+                // _this.information.formData[11].style = 'select';
+                // _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = 1;
+                // setTimeout(() => {
+                //   document.getElementsByClassName('ark-select-selected-value')[1].className = 'ark-select-selected-value inputBgcolor';
+                // }, 10);
+              // } else {
+              //   _this.information.formData[11].style = '';
+              //   _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = '';
+              // }
+            // }
           },
           {
             style: '',
@@ -657,6 +666,13 @@ export default {
             label: window.vmI18n.t('form_label.proReturnStatus'), // 退货状态,
             disabled: true,
             value: 'PRO_RETURN_STATUS',
+            width: '6'
+          },
+          {
+            style: 'input',
+            label: window.vmI18n.t('form_label.billNo'), // 单据编号,
+            disabled: true,
+            value: 'BILL_NO',
             width: '6'
           }
         ]
@@ -3522,7 +3538,8 @@ export default {
       const _this = this;
       const lists = _this.order.orderform.formValue;
       if (
-        (lists.bill_no == '' || lists.bill_no == undefined)
+        (lists.ID == '' || lists.ID == undefined)
+        && (lists.BILL_NO == '' || lists.BILL_NO == undefined)
         && (lists.source_code == '' || lists.source_code == undefined)
         && (lists.receiver_name == '' || lists.receiver_name == undefined)
         && (lists.user_nick == '' || lists.user_nick == undefined)
@@ -3545,7 +3562,12 @@ export default {
           {
             type: 'Select',
             queryName: 'ID',
-            value: lists.bill_no
+            value: num || lists.ID
+          },
+          {
+            type: 'Input',
+            queryName: 'BILL_NO',
+            value: lists.BILL_NO
           },
           {
             type: 'Input',
@@ -3572,11 +3594,11 @@ export default {
             queryName: 'CP_C_SHOP_ID',
             value: lists.cp_c_store_id
           },
-          {
-            type: 'Select',
-            queryName: 'ID',
-            value: num
-          },
+          // {
+          //   type: 'Select',
+          //   queryName: 'ID',
+          //   value: num
+          // },
           {
             type: 'Select',
             queryName: 'ORDER_STATUS',
@@ -3731,6 +3753,7 @@ export default {
         _this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID = phyIn.pid;
       }
       this.information.formValue.ORIG_ORDER_ID = this.onSelectData[0].ID; // 编号
+      this.information.formValue.BILL_NO = this.onSelectData[0].BILL_NO; // 单据编号
       this.information.formValue.BUYER_NICK = this.onSelectData[0].USER_NICK;
       this.information.formValue.ORIG_SOURCE_CODE = this.onSelectData[0].SOURCE_CODE;
       this.information.formValue.CP_C_SHOP_TITLE = this.onSelectData[0].CP_C_SHOP_TITLE;
