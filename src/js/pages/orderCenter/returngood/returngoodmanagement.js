@@ -2731,7 +2731,7 @@ export default {
                   const self = this;
                   if (!self.information.formData[14].itemdata.pid) {
                     // 发货店仓，不能为空
-                    self.$Message.warning(self.vmI18n.t('modalTips.n'));
+                    self.$Message.warning(self.vmI18n.t('modalTips.g0'));
                     return;
                   }
                   self.matrixBox.componentData = {
