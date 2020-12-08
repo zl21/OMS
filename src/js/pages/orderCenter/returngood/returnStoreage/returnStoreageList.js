@@ -286,6 +286,21 @@ export default {
             resDom.style['text-decoration'] = 'underline';
             resDom.innerHTML = param.data.ID;
             return resDom;
+          },
+          SOURCE_CODE: param=>{
+            const self = this;
+            const resDom = document.createElement('a');
+            resDom.style['text-decoration'] = 'underline';
+            resDom.innerHTML = param.data.SOURCE_CODE;
+            resDom.onclick = function () {
+              console.log(self);
+              const formdata = new FormData();
+              formdata.append('param', JSON.stringify({ sourceCode: param.data.SOURCE_CODE }));
+              self.service.orderCenter.getOrderId(formdata).then(res=>{
+                console.log(res);
+              });
+            };
+            return resDom;
           }
         },
         tableHeight: '560px',

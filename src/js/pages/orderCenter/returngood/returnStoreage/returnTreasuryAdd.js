@@ -400,11 +400,38 @@ export default {
             // title: "国标码",
             title: window.vmI18n.t('form_label.gBCode')
           },
+          // {
+          //   key: 'OC_B_RETURN_ORDER_ID',
+          //   dataAcessKey: 'OC_B_RETURN_ORDER_ID',
+          //   // title: "退单编号",
+          //   title: window.vmI18n.t('form_label.chargebackNumber')
+          // },
           {
             key: 'OC_B_RETURN_ORDER_ID',
             dataAcessKey: 'OC_B_RETURN_ORDER_ID',
             // title: "退单编号",
-            title: window.vmI18n.t('form_label.chargebackNumber')
+            title: window.vmI18n.t('form_label.chargebackNumber'),
+            render: (h, params) => h(
+                'a',
+                {
+                  style: {},
+                  on: {
+                    click: ()=>{
+                      console.log(params.row);
+                      this.$store.commit('customize/TabHref', {
+                        id: params.row.OC_B_RETURN_ORDER_ID, // 单据id
+                        type: 'action', // 类型action
+                        name: 'RETURNGOOD', // 文件名
+                        label: '退换货订单详情', // tab中文名
+                        query: Object.assign({
+                          id: params.row.OC_B_RETURN_ORDER_ID, // 单据id
+                          tabTitle: '退换货订单详情', // tab中文名
+                        }) // 带的参数
+                      });
+                    }
+                  }
+                }, params.row.OC_B_RETURN_ORDER_ID
+)
           },
           {
             key: 'PS_C_SKU_ECODE_ACTUAL',
