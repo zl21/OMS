@@ -28,22 +28,22 @@
           buttons: [
             {
               type: '', // 按钮类型
-              text: '确定', // 按钮文本
-              icon: '', // 按钮图标
-              size: '', // 按钮大小
-              disabled: false, // 按钮禁用控制
-              btnclick: () => {
-                this.submit();
-              }
-            },
-            {
-              type: '', // 按钮类型
-              text: '取消', // 按钮文本
+              text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
               icon: '', // 按钮图标
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.$emit('closeActionDialog', false);
+              }
+            },
+            {
+              type: '', // 按钮类型
+              text: window.vmI18n.t('common.determine'), // 确定 按钮文本
+              icon: '', // 按钮图标
+              size: '', // 按钮大小
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {
+                this.submit();
               }
             }
           ]

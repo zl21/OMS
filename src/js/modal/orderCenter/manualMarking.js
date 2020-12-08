@@ -1,11 +1,11 @@
-import jordanBtn from 'professionalComponents/businessButton';
+import businessButton from 'professionalComponents/businessButton';
 import reActionTable from 'professionalComponents/businessActionTable';
 
 export default {
   name: 'ManualMarking',
   components: {
     reActionTable,
-    jordanBtn,
+    businessButton,
   },
   props: {
     componentData: {
@@ -176,23 +176,20 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            // text: "确定", // 按钮文本
-            text: window.vmI18n.t('common.determine'),
+            text: window.vmI18n.t('common.cancel'), // 取消 
+            size: 'small', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.$parent.$parent.closeConfirm();
+            }, // 按钮点击事件
+          },
+          {
+            text: window.vmI18n.t('common.determine'), // 确定
             size: 'small', // 按钮大小
             btnclick: () => {
               this.confirmChange();
             }, // 按钮点击事件
-          },
-          {
-            // text: "取消", // 按钮文本
-            text: window.vmI18n.t('common.cancel'),
-            size: 'small', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              // this.$refs.changeLogistics.close();
-              this.$parent.$parent.closeConfirm();
-            }, // 按钮点击事件
-          },
+          }
         ],
       },
     };

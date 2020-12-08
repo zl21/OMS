@@ -22,7 +22,7 @@
         />
       </FormItem>
     </Form>
-    <jordanBtn :btn-config="btnConfig" />
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 

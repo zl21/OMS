@@ -2,14 +2,37 @@ import axios from 'axios';
 
   export default {
     props: {
-
       idArray: {
         type: Array
       }
     },
     data() {
       return {
-        time: new Date()
+        time: new Date(),
+        btnConfig: {
+          typeAll: 'error', // 按钮统一风格样式
+          btnsite: 'right', // 按钮位置 (right , center , left)
+          buttons: [
+            {
+              type: '', // 按钮类型
+              text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+              icon: '', // 按钮图标
+              size: 'small', // 按钮大小
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {
+                this.$emit('closeActionDialog');
+              }, // 按钮点击事件
+            },
+            {
+              text: window.vmI18n.t('common.determine'), // 确定 按钮文本
+              size: 'small', // 按钮大小
+              disabled: true, // 按钮禁用控制
+              btnclick: () => {
+                this.confirm();
+              }, // 按钮点击事件
+            }
+          ],
+        },
       };
     },
     methods: {
@@ -53,9 +76,6 @@ import axios from 'axios';
           }
           console.log(res);
         });
-      },
-      closeActionDialog() {
-        this.$emit('closeActionDialog');
       }
     }
   };

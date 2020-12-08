@@ -1,7 +1,7 @@
 <template>
   <div style="width: 400px; padding-right: 20px">
     <businessForm :form-config="warehouseManagementFromConfig" />
-    <jordanBtn :btn-config="warehouseManagementBtnConfig" />
+    <businessButton :btn-config="warehouseManagementBtnConfig" />
   </div>
 </template>
 

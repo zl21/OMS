@@ -16,9 +16,7 @@
       v-focus
       class="focusStyle"
     >
-    <div class="order-footer">
-      <businessButton :btn-config="btnConfig" />
-    </div>
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 

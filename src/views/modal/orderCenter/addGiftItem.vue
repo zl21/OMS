@@ -15,9 +15,7 @@
       @on-page-change="pageChange"
       @on-page-size-change="pageSizeChange"
     />
-    <div class="order-footer">
-      <jordanButton :btn-config="btnConfig" />
-    </div>
+    <jordanButton :btn-config="btnConfig" />
   </div>
 </template>
 

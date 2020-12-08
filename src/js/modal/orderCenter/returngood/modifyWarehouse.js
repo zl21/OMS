@@ -4,6 +4,7 @@ import businessBtn from 'professionalComponents/businessButton';
 export default {
   data() {
     return {
+      vmI18n: window.vmI18n,
       formConfig: {
         formValue: {},
         ruleValidate: {},
@@ -41,18 +42,18 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: '确定',
+            text: window.vmI18n.t('common.cancel'),
+            btnclick: () => {
+              this.$parent.$parent.closeConfirm();
+            }
+          },
+          {
+            text: window.vmI18n.t('common.determine'),
             btnclick: () => {
               const _this = this;
               _this.okClick();
             }
           },
-          {
-            text: '取消',
-            btnclick: () => {
-              this.$parent.$parent.closeConfirm();
-            }
-          }
         ]
       }
     };

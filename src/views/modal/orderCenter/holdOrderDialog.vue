@@ -41,7 +41,7 @@
         </template>
       </re-form>
     </div>
-    <re-button :btn-config="btnConfig" />
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 

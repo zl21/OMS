@@ -1,3 +1,22 @@
 export default {
-    OC_B_VIPCOM_DISTRIBUTION: '/api/cs/vip/distribution/v1/checkBeforeCreateVipDelivery',
+  configPage: {
+    OC_B_VIPCOM_DISTRIBUTION: ['/api/cs/vip/distribution/v1/checkBeforeCreateVipDelivery']
+  },
+
+  customizePage: [
+    // 订单中心
+    ['ORDERMANAGER', 'ORDERMANAGEDETAIL', 'ORDERMANAGEADD', 'SPLITORDER', 'SCANIN', 'RETURNGOODLIST', 'RETURNGOOD', 'RETURNSTOREAGELIST', 'RETURNTREASURYADD', 'REFUNDAFTERSHIPMENT', 'EXTRAREFUND', 'MANUALMATCHING', 'DISTRIBUTIONORDERLIST', 'SPLITDISTRIBUTIONORDER'],
+    // 财务中心
+    ['payableAdjustmentList', 'PAYABLEADJUSTADD'],
+    // 促销中心
+    ['PROMACTIQUERYLIST', 'ADDOREDITACTI', 'BATCHACTIVITY', 'SIMULATION'],
+    // 商品中心
+    ['COMBINEDCOMMODITY'],
+    // 策略平台
+    ['LOGISTICSAREA', 'SETWAREHOUSELOGISTICS', 'COURIERPAY', 'ORDERAUTOCHECK', 'SENDSINGLERULE', 'WPHEMAILSEND'],
+    // 库存中心
+    ['OUTBOUNDPICKORDER', 'SGCHANNELSYNSTOCKQUERY', 'SGCHANNELSTORAGEBUFFER', 'SGSTORAGECHANGEFTPQUERY'],
+    // 系统配置
+    ['USERPERMISSION', 'COMMODITYAUTHORITY', 'storeWarehousePermissions', 'sensitiveColumnPermissions', 'CP_C_GROUPS', 'CP_C_HRUSERS', 'physicalStorageAuthority', 'brandPermissions', 'salesChannelAuthority']
+  ]
 };

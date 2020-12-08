@@ -1,5 +1,5 @@
 
-import businessActionTable from 'professionalComponents/businessActionTable.vue';
+import businessActionTable from 'professionalComponents/businessActionTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
@@ -173,7 +173,6 @@ export default {
         // changeGoodsSKu
       };
       axios({
-        // url: '/api/cs/oc/oms/v1/deleteGit',
         url: '/api/cs/oc/oms/v1/batchDeleteGoods',
         method: 'post',
         data: param
@@ -182,7 +181,7 @@ export default {
           self.$Message.success(res.data.message);
           self.$parent.$parent.autoRefresh();
         } else {
-          // self.$Message.error(res.data.message);
+          self.$Message.error(res.data.message);
         }
       });
     },

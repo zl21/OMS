@@ -15,10 +15,7 @@
     >
       <re-action-table :jordan-table-config="depositConfig" />
     </div>
-    <jordanBtn
-      style="padding-top: 15px"
-      :btn-config="btnConfig"
-    />
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 

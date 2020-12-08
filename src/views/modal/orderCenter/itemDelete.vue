@@ -55,26 +55,7 @@
         @on-row-click="onRowClick"
       />
     </div>
-    <div class="dialog-footer">
-      <Button
-        style="marginleft: 8px"
-        type="primary"
-        @click="confirm"
-      >
-        <!-- 确定 -->
-        {{ vmI18n.t("common.determine") }}
-      </Button>
-      <Button
-        @click="
-          () => {
-            this.$parent.$parent.closeConfirm();
-          }
-        "
-      >
-        <!-- 取消 -->
-        {{ vmI18n.t("common.cancel") }}
-      </Button>
-    </div>
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 

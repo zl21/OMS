@@ -87,10 +87,10 @@ export default {
         this.getDownloadTemp('/p/cs/downloadSendRuleWarehouseRate', {
           objid: this.componentData.objid
         });
-      } else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY') {
+      } /* else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY') {
         // 店铺商品特殊设置
         this.getDownloadTemp('/p/cs/downloadProductStrategyItem');
-      } else if (this.componentData.tableName === 'OC_B_RETURN_ORDER_remark') {
+      } */ else if (this.componentData.tableName === 'OC_B_RETURN_ORDER_remark') {
         // 退换货卖家备注导入
         this.getDownloadTemp('/api/cs/oc/oms/v1/downloadReturnRemarkTemp');
       } else if (this.componentData.tableName === 'AC_F_RECEIVABLES_ADJUSTMENT') {
@@ -131,7 +131,7 @@ export default {
       } else if (this.componentData.tableName === 'ST_C_SYNC_STOCK_STRATEGY') {
         // 店铺同步库存策略
         this.getDownloadTemp('/p/cs/downLoadSyncStockStrategyImportTemp');
-      } else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY_SHOP') {
+      } else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY') {
         // 店铺商品特殊设置 - 多店铺比例-明细导入
         this.getDownloadTemp('/p/cs/productStrategy/import/downloadMultiShopTemp');
       }
@@ -219,10 +219,10 @@ export default {
       } else if (this.componentData.tableName === 'ST_C_SEND_RULE_RATE') {
         // 订单派单规则-比例
         this.getImportDialog('/p/cs/importSendRuleWarehouseRate', this.componentData.objid);
-      } else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY') {
+      } /* else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY') {
         // 店铺商品特殊设置
         this.getImportDialog('/p/cs/importProductStrategyItem', this.componentData.objid);
-      } else if (this.componentData.tableName === 'OC_B_RETURN_ORDER_remark') {
+      } */ else if (this.componentData.tableName === 'OC_B_RETURN_ORDER_remark') {
         // 退换货卖家备注导入
         this.getImportDialog('/api/cs/oc/oms/v1/importReturnSellerRemark', this.componentData.objid);
       } else if (this.componentData.tableName === 'AC_F_RECEIVABLES_ADJUSTMENT') {
@@ -254,7 +254,7 @@ export default {
       } else if (this.componentData.tableName === 'ST_C_SYNC_STOCK_STRATEGY') {
         // 店铺同步库存策略
         this.getImportDialog('/p/cs/importSyncStockStrategy');
-      } else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY_SHOP') {
+      } else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY') {
         // 店铺商品特殊设置 - 多店铺比例-明细导入
         this.getImportDialog('/p/cs/productStrategy/import/multiShopItem', this.componentData.objid);
       }
@@ -265,7 +265,8 @@ export default {
       if (_this.configTableName.includes(_this.componentData.tableName)) {
         _this.$parent.$emit('closeActionDialog');
       } else {
-        _this.$parent.$parent.closeConfirm();
+        _this.$parent.$emit('closeActionDialog');
+        // _this.$parent.$parent.closeConfirm();
       }
     },
     // 导入请求
@@ -292,7 +293,7 @@ export default {
       // 店铺商品特殊设置
       if (objid && this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY') {
         param.append('mainId', objid);
-        param.append('channelType', this.componentData.channelType);
+        // param.append('channelType', this.componentData.channelType);
         param.append('table', 'ST_C_PRODUCT_STRATEGY_ITEM');
         param.append('mainTable', 'ST_C_PRODUCT_STRATEGY');
         // param.append("menu", "店铺商品特殊设置明细");

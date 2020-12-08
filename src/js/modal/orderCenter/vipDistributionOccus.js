@@ -1,11 +1,11 @@
 import axios from 'axios';
-import jordanBtn from 'professionalComponents/businessButton';
+import businessButton from 'professionalComponents/businessButton';
 import R3 from '@syman/burgeon-r3';
 
 const { getModuleName } = R3;
 export default {
   components: {
-    jordanBtn
+    businessButton
   },
   props: {},
   data() {
@@ -23,17 +23,6 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.determine'), // 确定 按钮文本
-            icon: '', // 按钮图标
-            size: '', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              const self = this;
-              self.mergeDistributionOccus();
-            }
-          },
-          {
-            type: '', // 按钮类型
             text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
@@ -41,6 +30,17 @@ export default {
             btnclick: () => {
               const self = this;
               self.singleDistributionOccus();
+            }
+          },
+          {
+            type: '', // 按钮类型
+            text: window.vmI18n.t('common.determine'), // 确定 按钮文本
+            icon: '', // 按钮图标
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              const self = this;
+              self.mergeDistributionOccus();
             }
           }
         ]

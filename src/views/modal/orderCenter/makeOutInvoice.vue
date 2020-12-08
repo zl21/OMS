@@ -66,10 +66,7 @@
       </Divider>
       <businessForm :form-config="formConfig2" />
     </div>
-    <jordanBtn
-      :btn-config="btnConfig"
-      style="margin-top: 10px"
-    />
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 <script>

@@ -13,6 +13,10 @@ export default {
     component: () => import('@/views/modal/strategyPlatform/strategyTimeDialog.vue'), // 修改结束时间
   },
   SYNCSTOCKSTRATEGYIMPORT: {
-    component: () => import('@/views/modal/strategyPlatform/syncStockStrategyImport.vue'), // 导入
+    component: () => import('@/views/modal/strategyPlatform/syncStockStrategyImport.vue'), // 店铺同步库存策略-（导入-同步策略明细
+  },
+  PRODUCTSTRATEGYSHOPSCALEIMPORT: {
+    // 店铺商品特殊设置-编辑-多店铺比例-明细导入
+    component: () => import('@/views/modal/strategyPlatform/productStrategyShopScaleImport.vue'),
   }
 };

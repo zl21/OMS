@@ -92,29 +92,7 @@
         <span>{{ vmI18n.t("modalTips.zg") }}</span>
         <span style="color: #003200">{{ onRowClickReplaceText }}</span>
       </span>
-      <div class="dialog-footer">
-        <Button
-          type="error"
-          ghost
-          size="small"
-          @click="
-            () => {
-              this.$parent.$parent.closeConfirm();
-            }
-          "
-        >
-          <!-- 取消 -->
-          {{ vmI18n.t("common.cancel") }}
-        </Button>
-        <Button
-          type="primary"
-          size="small"
-          @click="confirm"
-        >
-          <!-- 确定 -->
-          {{ vmI18n.t("common.determine") }}
-        </Button>
-      </div>
+      <businessButton :btn-config="btnConfig" />
     </div>
   </div>
 </template>
