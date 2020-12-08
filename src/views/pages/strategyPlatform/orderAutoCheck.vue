@@ -197,6 +197,7 @@
                       <Checkbox v-model="effectiveCondition[4].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox>
                     </Col>
                     <Col span="11">
+                    <i style="position:absolute;top:10px;left:30px;color:red" v-show="effectiveCondition[4].value">*</i>
                       <FormItem label="收货地址:">
                         <Input v-model="info.RECEIVER_ADDRESS" placeholder="包含关键字进行人工审核；多个关键字可依次填写，使用中文“，”隔开" size="small" @on-change="setResult('RECEIVER_ADDRESS')" />
                       </FormItem>
@@ -207,6 +208,7 @@
                       <Checkbox v-model="effectiveCondition[5].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox>
                     </Col>
                     <Col span="11">
+                    <i style="position:absolute;top:10px;left:30px;color:red" v-show="effectiveCondition[5].value">*</i>
                       <FormItem label="买家留言:">
                         <Input v-model="info.BUYER_REMARK" placeholder="为空默认为有备注信息进行人工审核；多个关键字可依次填写，使用中文“，”隔开。" size="small" @on-change="setResult('BUYER_REMARK')" />
                       </FormItem>
@@ -217,6 +219,7 @@
                       <Checkbox v-model="effectiveCondition[6].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox>
                     </Col>
                     <Col span="11">
+                    <i style="position:absolute;top:10px;left:30px;color:red" v-show="effectiveCondition[6].value">*</i>
                       <FormItem label="卖家备注">
                         <Input v-model="info.SELLER_REMARK" placeholder="为空默认为有备注信息进行人工审核；多个关键字可依次填写，使用中文“，”隔开。" size="small" @on-change="setResult('SELLER_REMARK')" />
                       </FormItem>

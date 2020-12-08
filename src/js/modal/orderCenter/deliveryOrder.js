@@ -92,6 +92,7 @@ export default {
       pageNum: 1,
       totalRowCount: 10,
       autoData: [],
+      dataEmptyMessage: '数据加载中...',
       formConfig: {
         formValue: {},
         formData: [
@@ -151,13 +152,15 @@ export default {
     async getData() {
       const selected = this.selectRowData[0];
       const query = {
-        cpCShopTitle: selected.CP_C_SHOP_ID.val,
-        cpCPhyWarehouseName: selected.CP_C_PHY_WAREHOUSE_ID.val,
-        warehouseName: selected.WAREHOUSE_CODE.val,
-        jitTypeName: selected.BILL_TYPE.val,
-        PO_NO: selected.PO_NO.val,
-        pageNum: this.pageNum,
-        pageSize: this.pageSize,
+        distributionId: selected.ID.val,
+        // deprecated
+        // cpCShopTitle: selected.CP_C_SHOP_ID.val,
+        // cpCPhyWarehouseName: selected.CP_C_PHY_WAREHOUSE_ID.val,
+        // warehouseName: selected.WAREHOUSE_CODE.val,
+        // jitTypeName: selected.BILL_TYPE.val,
+        // PO_NO: selected.PO_NO.val,
+        // pageNum: this.pageNum,
+        // pageSize: this.pageSize,
       };
       const res = await this.service.orderCenter.deliveryV1List(query);
       if (res.data.code == 0) {
@@ -193,7 +196,12 @@ export default {
           row,
         };
         this.totalRowCount = res.data.data.total;
-        const records0 = JSON.parse(JSON.stringify(res.data.data.records[0]));
+        const records0 = JSON.parse(JSON.stringify(res.data.data.records[0] || []));
+        if (!records0.length) {
+          this.dataEmptyMessage = '暂无数据!';
+        } else {
+          this.dataEmptyMessage = '数据加载中...';
+        }
         const hideColumns = [];
         for (const key in records0) {
           if (!['ID', 'OUTSTORAGE_CODE', 'WAREHOUSE_NAME', 'CP_C_PHY_WAREHOUSE_ENAME'].includes(key)) {

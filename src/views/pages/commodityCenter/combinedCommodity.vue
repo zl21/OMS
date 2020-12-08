@@ -24,6 +24,7 @@
           <div class="bar-code-detail">
             <businessLabel :label-default-value="tabconfig1.labelDefaultValue" :label-list="tabconfig1.labelList" />
             <div class="tab-content">
+              <p style="color:red;padding-left:56px;padding-top:5px">提示: 平台维护条码也需大写</p>
               <businessActionTable
                 ref="codeTable"
                 :jordan-table-config="jordanTableConfig1"
@@ -42,6 +43,7 @@
             <businessLabel :label-default-value="tabconfig2.labelDefaultValue" :label-list="tabconfig2.labelList" />
             <div class="tab-content">
               <div class="wrap">
+                <p style="color:#fff;padding-left:55px;padding-top:5px">1</p>
                 <businessActionTable
                   :jordan-table-config="jordanTableConfig2"
                   @table-delete-detail="commodityDeleteDetail"

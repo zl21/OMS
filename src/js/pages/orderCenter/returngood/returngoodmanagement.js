@@ -97,7 +97,7 @@ export default {
         },
         orderform: {
           formValue: {
-            bill_no: '',
+            ID: '',
             source_code: '',
             receiver_name: '',
             user_nick: '',
@@ -108,7 +108,14 @@ export default {
             {
               style: 'input',
               label: window.vmI18n.t('form_label.orderNumber'), // 订单号
-              value: 'bill_no',
+              value: 'ID',
+              width: '8',
+              inputenter: () => this.queryBounced()
+            },
+            {
+              style: 'input',
+              label: window.vmI18n.t('form_label.billNo'), // 订单编号
+              value: 'BILL_NO',
               width: '8',
               inputenter: () => this.queryBounced()
             },
@@ -317,7 +324,9 @@ export default {
           IS_RETURN_ORDER_EXCHANGE: '',
           CP_C_STORE_ENAME: '', // 仓库
           REMARK: '', // 备注
-          SELLER_MEMO: '' // 卖家备注
+          SELLER_MEMO: '', // 卖家备注
+          BILL_NO: '', // 订单编号
+          PLATFORM: '', // 平台
         },
         // 表单非空提示
         ruleValidate: {
@@ -350,8 +359,8 @@ export default {
               const _this = this;
               _this.onSelectData = [];
               _this.order.orderform.formValue = {};
-              _this.order.orderform.formData[5].itemdata.pid = '';
-              _this.order.orderform.formData[5].itemdata.valuedata = '';
+              _this.order.orderform.formData[6].itemdata.pid = '';
+              _this.order.orderform.formData[6].itemdata.valuedata = '';
               _this.order.table.data = [];
               // document.getElementsByClassName(
               //   "SELLER_NICK"
@@ -498,19 +507,20 @@ export default {
             value: 'IS_RESERVED',
             disabled: false, // 按钮禁用控制
             checked: false, // 是否勾选控制
-            checkboxChange: e => {
-              const _this = this;
-              if (e) {
-                _this.information.formData[11].style = 'select';
-                _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = 1;
-                setTimeout(() => {
-                  document.getElementsByClassName('ark-select-selected-value')[1].className = 'ark-select-selected-value inputBgcolor';
-                }, 10);
-              } else {
-                _this.information.formData[11].style = '';
-                _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = '';
-              }
-            }
+            // 新加需求,换货预留库存不勾选不显示是否生成换货单
+            // checkboxChange: e => {
+              // const _this = this;
+              // if (e) {
+                // _this.information.formData[11].style = 'select';
+                // _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = 1;
+                // setTimeout(() => {
+                //   document.getElementsByClassName('ark-select-selected-value')[1].className = 'ark-select-selected-value inputBgcolor';
+                // }, 10);
+              // } else {
+              //   _this.information.formData[11].style = '';
+              //   _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = '';
+              // }
+            // }
           },
           {
             style: '',
@@ -657,6 +667,13 @@ export default {
             label: window.vmI18n.t('form_label.proReturnStatus'), // 退货状态,
             disabled: true,
             value: 'PRO_RETURN_STATUS',
+            width: '6'
+          },
+          {
+            style: 'input',
+            label: window.vmI18n.t('form_label.billNo'), // 单据编号,
+            disabled: true,
+            value: 'BILL_NO',
             width: '6'
           }
         ]
@@ -1059,7 +1076,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       //    配置详情页上的功能按钮;
-      if (this.$route.query.id === '-1') {
+      if (this.$route.query.id === '-1' || this.$route.query.flag === 'RefundToExchange') { // 新增 或者退货转换货单状态
         this.btnConfig.buttons = [
           {
             text: this.vmI18n.t('btn.save'), // 保存 按钮文本
@@ -1393,7 +1410,7 @@ export default {
       this.getList();
       this.information.formData[1].disabled = true;
       this.information.formData[1].icon = '';
-      this.information.formData[2].disabled = true;
+      this.information.formData[2].disabled = this.$route.query.flag !== 'RefundToExchange'; // 如果为退货转换货过来的,单据类型可编辑
       this.information.formData[3].disabled = true;
       this.information.formData[4].disabled = true;
       this.information.formData[5].itemdata.readonly = true;
@@ -1528,6 +1545,7 @@ export default {
           _this.exchangeDtoList.data = res.data.data.exchangeDtoList;
 
           _this.jordanTableConfig.data = res.data.data.refundDtoList;
+          _this.tId = res.data.data.returnOrders.TID;
           _this.onSelectData.push(res.data.data.returnOrders);
           _this.assignment(res.data.data.returnOrders);
           _this.amountReturned = _this.calculateMoney(res.data.data.refundDtoList, 1).toFixed(2); // 商品退回合计
@@ -1625,6 +1643,7 @@ export default {
           if (item.text == '标记次品已调拨') item.disabled = false;
         });
       }
+      item.PLATFORM = data.PLATFORM;
       // item.RESERVE_BIGINT07_type = data.RESERVE_BIGINT07_type;
       const PRO_RETURN_STATUS_DATA = { 0: '待入库', 1: '部分入库', 2: '全部入库' };
       item.PRO_RETURN_STATUS = PRO_RETURN_STATUS_DATA[data.PRO_RETURN_STATUS];
@@ -2824,7 +2843,7 @@ export default {
         return;
       }
       // 只有等待退货入库和等待售后确认状态的可以修改
-      if (_this.$route.query.id !== '-1') {
+      if (_this.$route.query.id !== '-1' && _this.$route.query.flag !== 'RefundToExchange') {
         if ((_this.status != 20 && _this.status != 30 && _this.status != 50) || (_this.status == 50 && _this.inventedStatus != 1)) {
           // "只有等待退货入库和等待售后确认状态的单据 或 完成状态且虚拟入库未入库状态的单据可修改!"
           this.$Message.warning(this.vmI18n.t('modalTips.n8'));
@@ -2834,6 +2853,9 @@ export default {
           this.$Message.warning(this.vmI18n.t('modalTips.n9')); // "等待退货入库且传WMS成功状态的单据不可修改！"
           return;
         }
+      }
+      if (_this.$route.query.flag === 'RefundToExchange' && _this.status == 60) {
+        this.$Message.warning('取消状态单据无法修改!');
       }
       if (!_this.information.formValue.ORIG_ORDER_ID) {
         // 原始订单编号不能为空!
@@ -3033,7 +3055,8 @@ export default {
         objid: _this.$route.query.id,
         OcBreturnOrder: Object.assign(_this.information.formValue, _this.replacement.formValue, money), // 主表信息
         OcBreturnOrderExchange: Elist, // 换货明细
-        OcBreturnOrderRefund: Rlist // 退货明细
+        OcBreturnOrderRefund: Rlist, // 退货明细
+        isRefund2Exchange: this.$route.query.flag === 'RefundToExchange' ? 1 : 0, // 如果未退货转换货订单,保存需传isRefund2Exchange
       };
       // 复制订单标识
       if (_this.$route.query.cloneReturnGoodId) params.copytype = 1;
@@ -3522,7 +3545,8 @@ export default {
       const _this = this;
       const lists = _this.order.orderform.formValue;
       if (
-        (lists.bill_no == '' || lists.bill_no == undefined)
+        (lists.ID == '' || lists.ID == undefined)
+        && (lists.BILL_NO == '' || lists.BILL_NO == undefined)
         && (lists.source_code == '' || lists.source_code == undefined)
         && (lists.receiver_name == '' || lists.receiver_name == undefined)
         && (lists.user_nick == '' || lists.user_nick == undefined)
@@ -3545,7 +3569,12 @@ export default {
           {
             type: 'Select',
             queryName: 'ID',
-            value: lists.bill_no
+            value: num || lists.ID
+          },
+          {
+            type: 'Input',
+            queryName: 'BILL_NO',
+            value: lists.BILL_NO
           },
           {
             type: 'Input',
@@ -3572,11 +3601,11 @@ export default {
             queryName: 'CP_C_SHOP_ID',
             value: lists.cp_c_store_id
           },
-          {
-            type: 'Select',
-            queryName: 'ID',
-            value: num
-          },
+          // {
+          //   type: 'Select',
+          //   queryName: 'ID',
+          //   value: num
+          // },
           {
             type: 'Select',
             queryName: 'ORDER_STATUS',
@@ -3731,6 +3760,7 @@ export default {
         _this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID = phyIn.pid;
       }
       this.information.formValue.ORIG_ORDER_ID = this.onSelectData[0].ID; // 编号
+      this.information.formValue.BILL_NO = this.onSelectData[0].BILL_NO; // 单据编号
       this.information.formValue.BUYER_NICK = this.onSelectData[0].USER_NICK;
       this.information.formValue.ORIG_SOURCE_CODE = this.onSelectData[0].SOURCE_CODE;
       this.information.formValue.CP_C_SHOP_TITLE = this.onSelectData[0].CP_C_SHOP_TITLE;

@@ -8,17 +8,18 @@ import service from '@/service/index';
 import qs from 'qs';
 import request, { httpFormdata } from 'framework/__utils__/request';
 import ajax from 'framework/__utils__/ajax';
-import store from '@/config/store/store'; // 将老框架公共状态注册为customize模块
+import store from 'burgeonConfig/store/store'; // 将老框架公共状态注册为customize模块
 import groups from '@/assets/js/promotion/groups';
 import comUtils from '@/assets/js/__utils__/common';
 import enterpriseLogo from './src/assets/image/logo.png';
 import enterpriseBanner from './src/assets/image/banner.png';
 import Login from './src/component/Login.vue';
 import WelcomePage from './src/component/WelcomePage.vue';
-import projectRouterConfig from './src/config/router.config';
-import customizedPageConfig from './src/config/customized.page.config';
-import customizedModalConfig from './src/config/customized.modal.config';
-import customizeWaterMarkConfig from './src/config/customized.watermark.config';
+import projectRouterConfig from 'burgeonConfig/router.config';
+import customizedPageConfig from 'burgeonConfig/customized.page.config';
+import customizedModalConfig from 'burgeonConfig/customized.modal.config';
+import customizeWaterMarkConfig from 'burgeonConfig/customized.watermark.config';
+import filterUrlConfig from 'burgeonConfig/config/filterUrl.config';
 // ----------动态加载主题库皮肤包;
 
 import '@burgeon/oms-theme/theme/custom.less'; // 主题文件
@@ -81,5 +82,6 @@ R3.launchApplication({
   isCommonTable: false, // 是否开启普通表格，默认关闭
   projectRoutes: projectRouterConfig, // 项目自定义路由，一般情况下用不到此配置
   // quietRoutes: ['/register', '/password', '/forgotPassword'], // 外置路由
-  externalTreeDatas: externalTreeDatasConfig
+  externalTreeDatas: externalTreeDatasConfig,
+  filterUrlForNetwork: filterUrlConfig // 过滤不需要用框架报错提示信息的接口请求
 });

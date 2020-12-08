@@ -260,7 +260,13 @@ export default {
             text: window.vmI18n.t('btn.splitOrder'), // 拆分订单
             btnclick: () => {
               const self = this;
-              const data = self.tab1.order;
+
+              this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.$route.params.customizedModuleId }).then(res => {
+                // 提前判断下该单据是否可拆单
+                if (res.data.code !== 0) {
+                  this.$Message.warning(res.data.message);
+                } else {
+                  const data = self.tab1.order;
               if ((data.PLATFORM === 4 && data.PAY_TYPE === 2) || data.PLATFORM === 7 || data.PLATFORM === 50) {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.b1'), // 交易平台为当当，唯品会jitx，京东（货到付款）的订单不允许拆单
@@ -295,6 +301,8 @@ export default {
                   top: 80
                 });
               }
+                }
+              });
             }
           },
           {
@@ -618,7 +626,7 @@ export default {
             text: window.vmI18n.t('btn.orderCancel'), // 订单取消
             btnclick: () => {
               const self = this;
-              console.log('self.$refs',self.$route);
+              console.log('self.$refs', self.$route);
               self.btnConfig.loading = true;
               const ids = [];
               const id = self.$route.params.customizedModuleId; // 此id为订单编号

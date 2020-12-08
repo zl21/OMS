@@ -9,6 +9,7 @@ import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import aTable from 'professionalComponents/agGridTable.vue';
 import loading from '@/component/loading.vue';
 import comUtils from '@/assets/js/__utils__/common.js';
+
 export default {
   components: {
     businessButton,
@@ -330,7 +331,7 @@ export default {
               const _this = this;
               _this.setFavorite();
             } // 按钮点击事件
-          }
+          },
         ]
       }, // 按钮数据
       formConfig: {
@@ -1659,7 +1660,19 @@ export default {
       };
       const res = await _this.service.orderCenter.refund2ExchangeValidate(query);
       if (res.data.code === 0) {
-        this.refund2Exchange();
+        // this.refund2Exchange();
+        this.$store.commit('customize/TabHref', {
+          id: selected.ID, // 单据id
+          type: 'action', // 类型action
+          name: 'RETURNGOOD', // 文件名
+          label: '退换货订单详情', // tab中文名
+          query: Object.assign({
+            id: selected.ID, // 单据id
+            tabTitle: '退换货订单详情', // tab中文名
+            statusName: selected.RETURN_STATUS_NAME, // 行的退单状态
+            flag: 'RefundToExchange'
+          }) // 带的参数
+        });
       } else {
         const err = res.data.message || '转换失败'; // 售后审核失败！
         _this.$Message.error(err);

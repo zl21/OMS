@@ -1,5 +1,5 @@
 
-import businessActionTable from 'professionalComponents/businessActionTable.vue';
+import businessActionTable from 'professionalComponents/businessActionTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
@@ -173,7 +173,6 @@ export default {
         // changeGoodsSKu
       };
       axios({
-        // url: '/api/cs/oc/oms/v1/deleteGit',
         url: '/api/cs/oc/oms/v1/batchDeleteGoods',
         method: 'post',
         data: param
@@ -182,7 +181,7 @@ export default {
           self.$Message.success(res.data.message);
           self.$parent.$parent.autoRefresh();
         } else {
-          // self.$Message.error(res.data.message);
+          self.$Message.error(res.data.message);
         }
       });
     },
@@ -346,10 +345,6 @@ export default {
           key: 'PS_C_PRO_ECODE',
           title: '商品款号',
           dataAcessKey: 'PS_C_PRO_ECODE'
-        },
-        {
-          key: 'PT_RETURN_STATUS_EXT',
-          title: '平台退款状态',
         },
         // 颜色
         {
@@ -697,6 +692,10 @@ export default {
           key: 'REFUND_STATUS_EXT',
           title: '取消状态',
           dataAcessKey: 'REFUND_STATUS',
+        },
+        {
+          key: 'PT_RETURN_STATUS_EXT',
+          title: '平台退款状态',
         },
         {
           key: 'DISTRIBUTION_PRICE',
