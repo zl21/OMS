@@ -2731,7 +2731,7 @@ export default {
                   const self = this;
                   if (!self.information.formData[14].itemdata.pid) {
                     // 发货店仓，不能为空
-                    self.$Message.warning(self.vmI18n.t('modalTips.n'));
+                    self.$Message.warning(self.vmI18n.t('modalTips.g0'));
                     return;
                   }
                   self.matrixBox.componentData = {
@@ -3934,7 +3934,7 @@ export default {
                 this.information.formValue.CP_C_SHOP_ID = item.itemdata.pid;
                 this.information.formValue.CP_C_SHOP_TITLE = item.itemdata.valuedata;
                 break;
-              case _this.vmI18n.t('table_label.returnLogisticsCompany'):
+              case _this.vmI18n.t('form_label.returnLogisticsCompany'):
                 this.information.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid;
                 this.information.formValue.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
                 break;
