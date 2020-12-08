@@ -22,10 +22,7 @@
         @on-fkrp-selected="onFkrpSelected"
       />
     </div>
-    <jordanBtn
-      :btn-config="btnConfig"
-      style="margin-top: 10px"
-    />
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 <script>

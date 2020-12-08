@@ -130,22 +130,22 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('btn.download'), // 下载 按钮文本
-            icon: '', // 按钮图标
-            size: '', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.downloadPublicAll();
-            } // 按钮点击事件
-          },
-          {
-            type: '', // 按钮类型
             text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$emit('closeActionDialog', false);
+            } // 按钮点击事件
+          },
+          {
+            type: '', // 按钮类型
+            text: window.vmI18n.t('btn.download'), // 下载 按钮文本
+            icon: '', // 按钮图标
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.downloadPublicAll();
             } // 按钮点击事件
           }
         ]

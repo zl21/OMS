@@ -1,10 +1,7 @@
 <template>
   <div class="jordanModal">
     <!-- 修改仓库 -->
-    <div
-      v-show="isShowFromLoading"
-      class="order_warehouse_loading"
-    >
+    <div v-show="isShowFromLoading" class="order_warehouse_loading">
       <Spin />
     </div>
     <div class="jordanModal_box">
@@ -30,30 +27,19 @@
     <div class="jordanModal-input-box">
       <!-- 改仓原因-->
       <label for>{{ vmI18n.t('form_label.changeWarehouse_reasons') }}:</label>
-      <Select
-        v-model="updateRemark"
-        class="jordanModal-input"
-        style="width: 200px"
-      >
-        <Option
-          v-for="item in updateRemarkOptions"
-          :key="item.value"
-          :value="item.value"
-        >
+      <Select v-model="updateRemark" class="jordanModal-input" style="width: 200px">
+        <Option v-for="item in updateRemarkOptions" :key="item.value" :value="item.value">
           {{ item.label }}
         </Option>
       </Select>
     </div>
-    <jordanBtn
-      :btn-config="btnConfig"
-      style="margin-top: 10px"
-    />
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 <script>
-  import changeWarehouse from '@/js/modal/orderCenter/changeWarehouse';
+import changeWarehouse from '@/js/modal/orderCenter/changeWarehouse';
 
-  export default changeWarehouse;
+export default changeWarehouse;
 </script>
 <style scoped lang='less'>
 @import '~@/css/modal/orderCenter/changeWarehouse.less';

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import businessForm from 'professionalComponents/businessForm';
-import jordanBtn from 'professionalComponents/businessButton';
+import businessButton from 'professionalComponents/businessButton';
 import businessActionTable from 'professionalComponents/businessActionTable.vue';
 import { listeningToKeydownMixin } from '@/assets/js/mixins/listeningToKeydown.js';
 
@@ -14,7 +14,7 @@ export default {
   },
   components: {
     businessForm,
-    jordanBtn,
+    businessButton,
     businessActionTable,
   },
   computed: {},
@@ -39,22 +39,9 @@ export default {
       btnConfig: {
         typeAll: 'error', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
-        buttons: [
-          {
+        buttons: [{
             type: '', // 按钮类型
-            // text: "确定", //按钮文本
-            text: window.vmI18n.t('common.determine'), // 按钮文本
-            icon: '', // 按钮图标
-            size: 'small', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.determine();
-            }, // 按钮点击事件
-          },
-          {
-            type: '', // 按钮类型
-            // text: "取消", //按钮文本
-            text: window.vmI18n.t('common.cancel'), // 按钮文本
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -62,6 +49,16 @@ export default {
               this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
+          {
+            type: '', // 按钮类型
+            text: window.vmI18n.t('common.determine'), // 确定 按钮文本
+            icon: '', // 按钮图标
+            size: 'small', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.determine();
+            }, // 按钮点击事件
+          }
         ],
       },
     };

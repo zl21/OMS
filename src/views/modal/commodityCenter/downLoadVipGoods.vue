@@ -1,29 +1,7 @@
 <template>
   <div style="width:400px;padding-right:15px">
     <businessForm :form-config="formConfig" />
-    <div class="dialog-footer">
-      <!-- 确定 -->
-      <Button
-        type="primary"
-        ghost
-        size="small"
-        @click="confirmChange"
-      >
-        {{ vmI18n.t('common.determine') }}
-      </Button>
-      <!-- 取消 -->
-      <Button
-        type="error"
-        size="small"
-        @click="
-          () => {
-            this.$emit('closeActionDialog');
-          }
-        "
-      >
-        {{ vmI18n.t('common.cancel') }}
-      </Button>
-    </div>
+    <businessButton :btn-config="buttonConfig" />
   </div>
 </template>
 

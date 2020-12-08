@@ -137,9 +137,7 @@
         <span>{{ componentData.SYSREMARK }}</span>
       </FormItem>
     </Form>
-    <div class="order-footer">
-      <jordanButton :btn-config="btnConfig" />
-    </div>
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 

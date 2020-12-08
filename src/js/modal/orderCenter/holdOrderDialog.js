@@ -1,12 +1,12 @@
 // import httpServer, { post } from '@/utils/request'
 import reForm from 'professionalComponents/businessForm';
-import reButton from 'professionalComponents/businessButton';
+import businessButton from 'professionalComponents/businessButton';
 import axios from 'axios';
 
 export default {
   components: {
     reForm,
-    reButton,
+    businessButton,
   },
   props: ['componentData'],
   data() {
@@ -142,19 +142,17 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            // text: "取消",
-            text: window.vmI18n.t('common.cancel'), // 按钮文本
-            btnclick: () => {
-              this.$parent.$parent.closeConfirm();
-            },
-          },
-          {
-            // text: "确定",
-            text: window.vmI18n.t('common.determine'), // 按钮文本
+            text: window.vmI18n.t('common.determine'), // 确定 按钮文本
             btnclick: () => {
               this.confirmChange();
             },
           },
+          {
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            btnclick: () => {
+              this.$parent.$parent.closeConfirm();
+            },
+          }
         ],
       },
     };

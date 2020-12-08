@@ -1,9 +1,11 @@
 import axios from 'axios';
 import reForm from 'professionalComponents/businessForm';
+import businessButton from 'professionalComponents/businessButton';
 
 export default {
   components: {
     reForm,
+    businessButton
   },
   data() {
     return {
@@ -11,6 +13,24 @@ export default {
       pro: '',
       replace_pro: '',
       radioValue: '2',
+      btnConfig: {
+        typeAll: 'error', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
+        buttons: [
+          {
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            btnclick: () => {
+              this.$parent.$parent.closeConfirm();
+            } // 按钮点击事件
+          },
+          {
+            text: window.vmI18n.t('common.determine'), // 确定 按钮文本
+            btnclick: () => {
+              this.confirm();
+            }
+          }
+        ]
+      },
       formConfig: {
         formValue: {
           searchValue: '',
@@ -207,11 +227,7 @@ export default {
           },
         ],
       },
-      // searchValue: "",
-      // proEcode: "",
       proName: '',
-      // replace_searchValue: "",
-      // replace_proEcode: "",
       replace_proName: '',
       replaceTableLoad: false,
       tableLoad: false,
@@ -245,9 +261,6 @@ export default {
       type: Object,
     },
   },
-  mounted() {
-    // console.log("componentData=>",this.componentData);
-  },
   methods: {
     radioChange(value) {
       console.log(value);
@@ -255,7 +268,6 @@ export default {
     async search(value) {
       // sku查询
       const self = this;
-      // console.log(value) "two"
       const loadName = value === 'one' ? 'tableLoad' : 'replaceTableLoad';
       this[loadName] = true;
       const query = {

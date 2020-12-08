@@ -11,7 +11,8 @@
         format="yyyy-MM-dd HH:mm:ss"
       />
     </div>
-    <div class="button">
+    <businessButton :btn-config="btnConfig" />
+    <!-- <div class="button">
       <Button
         type="error"
         style="marginright: 35px"
@@ -22,7 +23,7 @@
       <Button @click="closeActionDialog">
         取消
       </Button>
-    </div>
+    </div> -->
   </div>
 </template>
 

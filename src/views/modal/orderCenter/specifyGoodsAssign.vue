@@ -40,24 +40,7 @@
         :data="data"
       />
     </div>
-    <div class="dialog-footer">
-      <!-- 确定 -->
-      <Button
-        style="marginLeft:8px;"
-        type="error"
-        @click="confirm"
-      >
-        {{ vmI18n.t("common.determine") }}
-      </Button>
-      <!-- 取消 -->
-      <Button
-        type="error"
-        ghost
-        @click="()=>{this.$parent.$parent.closeConfirm();}"
-      >
-        {{ vmI18n.t("common.cancel") }}
-      </Button>
-    </div>
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 

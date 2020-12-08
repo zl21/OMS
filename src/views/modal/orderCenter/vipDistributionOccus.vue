@@ -5,7 +5,7 @@
         {{ corfirmMessage }}
       </p>
       <br>
-      <jordanBtn :btn-config="confirmBtnConfig" />
+      <businessButton :btn-config="confirmBtnConfig" />
     </div>
   </div>
 </template>

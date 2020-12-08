@@ -33,10 +33,7 @@
         :disabled="expressCodeFlag"
       />
     </div>
-     <jordanBtn
-      :btn-config="btnConfig"
-      style="margin: 10px 13px 0 0"
-    />
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 <script>

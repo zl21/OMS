@@ -1,6 +1,6 @@
 // 订单中心->智能地址解析页面
 
-import jordanButton from 'professionalComponents/businessButton';
+import businessButton from 'professionalComponents/businessButton';
 import { listeningToKeydownMixin } from '@/assets/js/mixins/listeningToKeydown.js';
 import axios from 'axios';
 
@@ -15,7 +15,7 @@ export default {
   },
   mixins: [listeningToKeydownMixin],
   components: {
-    jordanButton,
+    businessButton,
   },
   data() {
     return {

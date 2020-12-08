@@ -38,6 +38,16 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            icon: '', // 按钮图标
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.$emit('closeActionDialog', false);
+            } // 按钮点击事件
+          },
+          {
+            type: '', // 按钮类型
             text: window.vmI18n.t('btn.download'), // 下载 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
@@ -45,16 +55,6 @@ export default {
             btnclick: () => {
               formConfig(this.$route.params.tableName).determine(this);
               // formConfig('IP_B_TAOBAO_ORDER').determine(this)
-            } // 按钮点击事件
-          },
-          {
-            type: '', // 按钮类型
-            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
-            icon: '', // 按钮图标
-            size: '', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.$emit('closeActionDialog', false);
             } // 按钮点击事件
           }
         ]

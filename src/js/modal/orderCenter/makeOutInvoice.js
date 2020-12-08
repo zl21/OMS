@@ -1,12 +1,12 @@
 import axios from 'axios';
 import businessForm from 'professionalComponents/businessForm';
-import jordanBtn from 'professionalComponents/businessButton';
+import businessButton from 'professionalComponents/businessButton';
 import businessActionTable from 'professionalComponents/businessActionTable';
 
 export default {
   components: {
     businessForm,
-    jordanBtn,
+    businessButton,
     businessActionTable
   },
   props: {
@@ -70,8 +70,17 @@ export default {
     this.btnConfig.buttons = [
       {
         type: '', // 按钮类型
-        // text: "保存", //按钮文本
-        text: this.vmI18n.t('btn.save'), // 按钮文本
+        text: this.vmI18n.t('common.cancel'), // 取消 按钮文本
+        icon: '', // 按钮图标
+        size: 'small', // 按钮大小
+        disabled: false, // 按钮禁用控制
+        btnclick: () => {
+          this.$parent.$parent.closeConfirm();
+        } // 按钮点击事件
+      },
+      {
+        type: '', // 按钮类型
+        text: this.vmI18n.t('btn.save'), // 保存 按钮文本
         icon: '', // 按钮图标
         size: 'small', // 按钮大小
         disabled: false, // 按钮禁用控制
@@ -101,17 +110,6 @@ export default {
           const fromdata = new FormData();
           fromdata.append('param', JSON.stringify(params));
           self.save(fromdata);
-        } // 按钮点击事件
-      },
-      {
-        type: '', // 按钮类型
-        // text: "取消", //按钮文本
-        text: this.vmI18n.t('common.cancel'), // 按钮文本
-        icon: '', // 按钮图标
-        size: 'small', // 按钮大小
-        disabled: false, // 按钮禁用控制
-        btnclick: () => {
-          this.$parent.$parent.closeConfirm();
         } // 按钮点击事件
       }
     ];

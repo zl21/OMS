@@ -37,18 +37,18 @@ export default {
         loading: false, // 按钮组件是否有loading样式,值为true false
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
-            btnclick: () => {
-              this.$emit('closeActionDialog', false);
-            }, // 按钮点击事件
-          },
-          {
             text: window.vmI18n.t('other.confirmPrinting'), // 确定打印 按钮文本
             disabled: false,
             btnclick: () => {
               this.print();
             },
           },
+          {
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            btnclick: () => {
+              this.$emit('closeActionDialog', false);
+            }, // 按钮点击事件
+          }
         ],
       },
       websock: null,

@@ -16,6 +16,7 @@ export default {
   },
   data() {
     return {
+      vmI18n: window.vmI18n,
       jordanTableConfig: {
         columns: [
           {
@@ -40,20 +41,20 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: '确定', // 按钮文本
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            size: 'small', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.$parent.$parent.closeConfirm();
+            } // 按钮点击事件
+          },
+          {
+            text: window.vmI18n.t('common.determine'), // 确定 按钮文本
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
               _this.determine();
-            } // 按钮点击事件
-          },
-          {
-            text: '取消', // 按钮文本
-            size: 'small', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.$parent.$parent.closeConfirm();
             } // 按钮点击事件
           }
         ]
