@@ -150,9 +150,9 @@ export default {
   },
   methods: {
     async getData() {
-      const selected = this.selectRowData[0].ID.val;
+      const selected = this.selectRowData[0];
       const query = {
-        distributionId: selected.CP_C_SHOP_ID.val,
+        distributionId: selected.ID.val,
         // deprecated
         // cpCShopTitle: selected.CP_C_SHOP_ID.val,
         // cpCPhyWarehouseName: selected.CP_C_PHY_WAREHOUSE_ID.val,
