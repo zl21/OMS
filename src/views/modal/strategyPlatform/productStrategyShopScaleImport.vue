@@ -44,6 +44,6 @@ export default {
 
 <style lang="less" scoped>
 .import-page {
-  width: 550px;
+  width: 568px;
 }
 </style>

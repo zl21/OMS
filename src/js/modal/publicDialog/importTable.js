@@ -265,7 +265,8 @@ export default {
       if (_this.configTableName.includes(_this.componentData.tableName)) {
         _this.$parent.$emit('closeActionDialog');
       } else {
-        _this.$parent.$parent.closeConfirm();
+        _this.$parent.$emit('closeActionDialog');
+        // _this.$parent.$parent.closeConfirm();
       }
     },
     // 导入请求
