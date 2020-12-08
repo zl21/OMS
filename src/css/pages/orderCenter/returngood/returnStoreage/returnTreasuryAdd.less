@@ -1,8 +1,14 @@
 @import "~@/assets/css/css_1_3/theme.less";
 .queryorder {
-  
-  .orderContent .buttonBox {
-    justify-content: flex-end;
+  .orderContent{
+    display: grid;
+    grid-template-columns: auto 40px;
+    align-items: end;
+  }
+  .orderContent /deep/ .buttonBox {
+    .buttonGroup{
+      margin: 0;
+    }
     button{
       margin-right: 0;
     }
