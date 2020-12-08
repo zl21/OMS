@@ -4,7 +4,6 @@ node_modules
 .history
 .vscode
 # files
-package-lock.json
 __test_script__/
 dist/
 *.tgz
