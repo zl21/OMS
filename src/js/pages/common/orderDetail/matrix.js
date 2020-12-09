@@ -1,8 +1,12 @@
 import chineseDiction from 'framework/assets/js/ChineseDictionary.js';
 import axios from 'framework/__utils__/request';
 import port from './connector.js';
+import businessButton from 'professionalComponents/businessButton';
 
 export default {
+  components: {
+    businessButton,
+  },
   name: 'matrix',
   props: {
     encode: {
@@ -81,6 +85,32 @@ export default {
   },
   data() {
     return {
+      buttonConfig: {
+        typeAll: 'error', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
+        buttons: [
+          {
+            type: '', // 按钮类型
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            icon: '', // 按钮图标
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.cancel();
+            } // 按钮点击事件
+          },
+          {
+            type: '', // 按钮类型
+            text: window.vmI18n.t('common.determine'), // 下载 按钮文本
+            icon: '', // 按钮图标
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.confirm();
+            }, // 按钮点击事件
+          }
+        ]
+      },
       /* lists: {
         color: [
           {
@@ -692,8 +722,12 @@ export default {
         }
       }).then((res) => {
         const data = res.data;
+        if (data.code === -1) {
+          this.$Message.error(data.message);
+          // return
+        }
         if (data.code === 0) {
-          const tHead = data.data.SIZE.map(obj => 
+          const tHead = data.data.SIZE.map(obj =>
             /* if(!obj['STATUS']) this.isFooter = true; */
             Object.assign(obj, {
               id: obj.ID, // 尺寸id
@@ -701,7 +735,7 @@ export default {
               /* status: obj['STATUS']//是否不可编辑状态 */
             }));
           this.tHead = tHead.sort((a, b) => a.MATRIXCOLNO - b.MATRIXCOLNO);
-          this.tColor = data.data.COLOR.map(obj => 
+          this.tColor = data.data.COLOR.map(obj =>
             /* if(!obj['STATUS']) this.isFooter = true; */
             Object.assign(obj, {
               id: obj.ID, // 尺寸id
@@ -729,8 +763,6 @@ export default {
             status: false,
             clear: true // 是否清空input数据
           }); // 关闭弹框
-        } else {
-          this.$Message.error(data.message)
         }
       });
     }, // 获取头部信息

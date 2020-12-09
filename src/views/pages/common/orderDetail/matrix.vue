@@ -337,6 +337,13 @@
       v-if="general && btnFlag"
       class="ff-matrix--box-btn"
     >
+      <businessButton :btn-config="buttonConfig"></businessButton>
+      <!-- <button
+        class="ff-matrix-btn ff-matrix-btn-cancel"
+        @click="cancel"
+      >
+        <span>{{ chinese.CANCEL }}</span>
+      </button>
       <button
         ref="btnConfirm"
         class="ff-matrix-btn ff-matrix-btn-cancel"
@@ -344,13 +351,7 @@
         @keyup.enter="confirm"
       >
         <span>{{ chinese.CONFIRM }}</span>
-      </button>
-      <button
-        class="ff-matrix-btn ff-matrix-btn-cancel"
-        @click="cancel"
-      >
-        <span>{{ chinese.CANCEL }}</span>
-      </button>
+      </button> -->
     </div>
   </div>
 </template>

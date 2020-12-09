@@ -1,8 +1,9 @@
+@import '~@burgeon/oms-theme/skin/public.less';
 .showColor {
   /*margin-left: 700px;*/
   float: right;
   cursor: pointer;
-  color: #0089ea;
+  color: @base-color;
 }
 .span-style () {
   display: inline-block;
@@ -383,9 +384,9 @@
     }
 
     .ff-matrix-btn-cancel {
-      color: #0068b7;
+      color: @base-color;
       padding: 3px 20px;
-      border: 1px solid #0068b7;
+      border: 1px solid @button-bg;
       background-color: #fff;
 
       &:hover {
