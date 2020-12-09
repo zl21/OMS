@@ -443,13 +443,14 @@ export default {
           });
         });
       }
-      const fromData = new FormData();
+      // const fromData = new FormData();
       const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeNode: treeList };
-      fromData.append('param', JSON.stringify(params));
+      // fromData.append('param', JSON.stringify(params));
       // 接口
-      this.service.common.getLogisticsRankResultTable(fromData)
+      this.service.common.getLogisticsRankResultTable(params)
       .then((res)=>{
         // console.log(res.data.oK, data);
+        _this.tableLoading = false;
         if (res.data.oK) {
           _this.cityThead = false;
           _this.listArr = res.data.data !== undefined ? res.data.data : [];
