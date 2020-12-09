@@ -1478,3 +1478,24 @@ body {
 .ark-table-body .ark-table-tfoot{
   transform: inherit !important;
 }
+.ark-table-tfoot tr:first-child td{
+  border-top: none;
+}
+.ark-table-border th,.ark-table-border td{
+  box-sizing: content-box;
+}
+// 标准界面 详情页 page修改
+.TableDetailCollection{
+  position: relative;
+  padding-bottom: 40px;
+  .page-buttons .table-page{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
