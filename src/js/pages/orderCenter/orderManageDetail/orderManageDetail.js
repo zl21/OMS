@@ -260,7 +260,6 @@ export default {
             text: window.vmI18n.t('btn.splitOrder'), // 拆分订单
             btnclick: () => {
               const self = this;
-
               this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.$route.params.customizedModuleId }).then(res => {
                 // 提前判断下该单据是否可拆单
                 if (res.data.code !== 0) {
