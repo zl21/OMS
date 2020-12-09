@@ -66,7 +66,7 @@
       </Divider>
       <businessForm :form-config="formConfig2" />
     </div>
-    <businessButton :btn-config="btnConfig" />
+    <businessButton class="modalBth" :btn-config="btnConfig" />
   </div>
 </template>
 <script>

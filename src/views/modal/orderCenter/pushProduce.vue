@@ -45,7 +45,7 @@
         @on-row-click="onRowClick"
       />
     </div>
-    <businessButton :btn-config="btnConfig" />
+    <businessButton class="modalBth" :btn-config="btnConfig" />
   </div>
 </template>
 

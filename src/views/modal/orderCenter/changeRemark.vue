@@ -58,7 +58,7 @@
         </RadioGroup>
       </FormItem>
     </Form>
-    <businessButton :btn-config="btnConfig" />
+    <businessButton class="modalBth" :btn-config="btnConfig" />
     <Modal
       v-model="confirmModal"
       :mask="true"
