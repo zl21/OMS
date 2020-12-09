@@ -1501,6 +1501,39 @@ body {
     justify-content: center;
   }
 }
+.v-transfer-dom{
+  .one_button .buttonBox div:last-child{
+    .buttonGroup button{
+      background-color: @base-color;
+      color: @button-bg-font;
+      opacity: 1;
+      &.ark-btn:hover{
+        background-color: @base-color;
+        color: @button-bg-font;
+        border:1px solid transparent;
+        opacity:1;
+      }
+    }
+  }
+  .one_button .buttonBox div{
+    .buttonGroup button.ark-btn:hover{
+      background-color: @button-transparent-hover;
+      color: @button-bg-font;
+      border:1px solid transparent;
+      opacity: 1;
+    }
+  }
+}
+.rk-modal-confirm-footer{
+  button:last-child{
+    background-color: @base-color;
+    color: @button-bg-font;
+  }
+  button:hover{
+    background-color:@base-color;
+    color: @button-bg-font;
+  }
+}
 // 定制弹框 按钮
 .modalBth{
   .buttonBox div:last-child{
