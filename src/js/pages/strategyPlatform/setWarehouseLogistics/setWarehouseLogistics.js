@@ -418,9 +418,8 @@ export default {
       const {
         data: { oK, data }
       } = await this.service.common.getLogisticsRankResultTable(params);
-      if (oK) {params
+      if (oK) {
         _this.cityThead = true;
-        console.log(data);
         if (!data || !data.length) return
         _this.listArr = data;
         _this.listArr.forEach(item => {
