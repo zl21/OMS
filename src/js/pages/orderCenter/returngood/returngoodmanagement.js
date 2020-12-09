@@ -1282,6 +1282,7 @@ export default {
               await _this.reconstructionGetDetail(subitem, newItem, subitem.PS_C_PRO_ECODE);
               newItem.PRICE_SETTLE = subitem.PRICE_SETTLE; // 结算单价
               newItem.AMT_SETTLE_TOT = subitem.TOT_PRICE_SETTLE; // 结算金额
+              newItem.OC_B_ORDER_ITEM_ID = subitem.OC_B_ORDER_ITEM_ID;
               newQueryList.push(newItem);
             }
             _this.jordanTableConfig.data = newQueryList;
@@ -3035,7 +3036,8 @@ export default {
           product_mark: Eitem[i].PRODUCT_MARK == '正品' ? '1' : '0',
           ps_c_sku_id: Eitem[i].skuId ? Eitem[i].skuId : Eitem[i].PS_C_SKU_ID,
           ps_c_pro_id: Eitem[i].PS_C_PRO_ID,
-          sku_spec: Eitem[i].SPEC
+          sku_spec: Eitem[i].SPEC,
+          oid: Eitem[i].oOId
         });
       }
 
@@ -3799,6 +3801,7 @@ export default {
         if (selection.refundStatus !== 6) {
           const queryListItem = {};
           queryListItem.ID = -1;
+          queryListItem.oOId = selection.oOId;
           queryListItem.OC_B_ORDER_ITEM_ID = selection.proId;
           queryListItem.skuId = selection.skuId;
           queryListItem.PS_C_PRO_ID = selection.psCproId; // 商品id

@@ -290,6 +290,10 @@
               key: 'QTY_STORAGE'
             },
             {
+              title: '计算虚高库存前库存',
+              key: 'QTY_STORAGE_REALY'
+            },
+            {
               title: '平台条码ID',
               key: 'SKU_ID'
             },
