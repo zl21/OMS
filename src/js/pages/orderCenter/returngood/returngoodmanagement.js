@@ -3799,6 +3799,7 @@ export default {
         if (selection.refundStatus !== 6) {
           const queryListItem = {};
           queryListItem.ID = -1;
+          queryListItem.oOId = selection.oOId;
           queryListItem.OC_B_ORDER_ITEM_ID = selection.proId;
           queryListItem.skuId = selection.skuId;
           queryListItem.PS_C_PRO_ID = selection.psCproId; // 商品id
