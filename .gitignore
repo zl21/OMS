@@ -8,4 +8,5 @@ __test_script__/
 dist/
 *.tgz
 __ignore__/
+project.config.js
 
