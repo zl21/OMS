@@ -572,7 +572,11 @@ export default {
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
-              if (self.selection.length === 1) {
+              this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.selection[0].ID }).then(res => {
+                // 提前判断下该单据是否可拆单
+                if (res.data.code !== 0) {
+                  this.$Message.warning(res.data.message);
+                } else if (self.selection.length === 1) {
                 if ((self.selection[0].PLATFORM === 4 && self.selection[0].PAY_TYPE === 2) || self.selection[0].PLATFORM === 7 || self.selection[0].PLATFORM === 50) {
                   self.$Message.warning({
                     content: self.vmI18n.t('modalTips.b1'), // 交易平台为当当，唯品会jitx，京东（货到付款）的订单不允许拆单
@@ -621,6 +625,7 @@ export default {
                   top: 80
                 });
               }
+              });
             } // 按钮点击事件
           },
           // {
