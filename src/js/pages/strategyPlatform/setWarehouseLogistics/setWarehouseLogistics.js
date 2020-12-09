@@ -220,14 +220,6 @@ export default {
             tableName: 'ST_C_WAREHOUSE_LOGISTICS',
             tableId: 1111113
           });
-          // _this.$store.commit('customize/TabHref', {
-          //   id: 1111113,
-          //   type: 'table',
-          //   name: 'ST_C_WAREHOUSE_LOGISTICS',
-          //   // label: "仓库物流优先级方案",warehouse_logistics_priority_scheme
-          //   label: this.vmI18n.t('panel_label.warehouse_logistics_priority_scheme'),
-          //   back: true
-          // });
         }
       }
     ];
@@ -352,6 +344,7 @@ export default {
           // _this.refresh();
         });
     },
+    // 获取树
     getTreeData() {
       console.log('getTreeData::');
       const _this = this;
@@ -382,9 +375,9 @@ export default {
               });
             }
           }
-          if (res.data.warehouseLogisticsItems && res.data.warehouseLogisticsItems.length) {
+          if (res.data.data.warehouseLogisticsItems && res.data.data.warehouseLogisticsItems.length) {
             _this.theadArr = [];
-            res.data.warehouseLogisticsItems.forEach(item => {
+            res.data.data.warehouseLogisticsItems.forEach(item => {
               _this.theadArr.push({
                 name: item.CP_C_LOGISTICS_ENAME
               });
