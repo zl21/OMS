@@ -91,6 +91,8 @@ export default {
           self.$message.success(res.data.message);
           self.$emit('confirmImport');
           self.$emit('closeActionDialog');
+        } else {
+          self.$Message.error(message);
         }
       })
       .catch(() => {
