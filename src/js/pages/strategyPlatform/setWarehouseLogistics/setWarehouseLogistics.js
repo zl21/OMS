@@ -413,16 +413,16 @@ export default {
       }
       // 接口
       _this.tableLoading = false;
-      const fromData = new FormData();
       const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeNode: treeList };
-      fromData.append('param', JSON.stringify(params));
       // 接口
       const {
         data: { oK, data }
-      } = await this.service.strategyPlatform.saveWarehouseLogistics(fromData);
-      if (oK) {
+      } = await this.service.common.getLogisticsRankResultTable(params);
+      if (oK) {params
         _this.cityThead = true;
-        _this.listArr = data !== undefined ? data : [];
+        console.log(data);
+        if (!data || !data.length) return
+        _this.listArr = data;
         _this.listArr.forEach(item => {
           item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK);
         });
@@ -446,13 +446,10 @@ export default {
           });
         });
       }
-      // const fromData = new FormData();
       const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeNode: treeList };
-      // fromData.append('param', JSON.stringify(params));
       // 接口
       this.service.common.getLogisticsRankResultTable(params)
       .then((res)=>{
-        // console.log(res.data.oK, data);
         _this.tableLoading = false;
         if (res.data.oK) {
           _this.cityThead = false;
@@ -462,25 +459,6 @@ export default {
           });
         }
       });
-
-      // axios({
-      //   url: "/p/cs/getLogisticsRankResultTable",
-      //   method: "post",
-      //   data: {
-      //     objid: this.$route.query.id,
-      //     cityleave: "PROV",
-      //     treeNode: treeList,
-      //   },
-      // }).then((res) => {
-      //   _this.tableLoading = false;
-      //   if (res.data.code === 0) {
-      //     _this.cityThead = false;
-      //     _this.listArr = res.data.data !== undefined ? res.data.data : [];
-      //     _this.listArr.forEach(
-      //       (item) => (item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK))
-      //     );
-      //   }
-      // });
     },
     // 全选树
     checkAll(e) {
@@ -546,37 +524,6 @@ export default {
           data.message || this.vmI18n.t('modalTips.z3') // 失败
         );
       }
-      // axios({
-      //   url: "/p/cs/getLogisticsLikeRankResultTable",
-      //   method: "post",
-      //   data: param,
-      // }).then((res) => {
-      //   _this.tableLoading = false;
-      //   if (res.data.code === 0) {
-      //     _this.cityThead = true;
-      //     _this.listArr =
-      //       res.data.data.warehouseLogisticsRanks !== undefined
-      //         ? res.data.data.warehouseLogisticsRanks
-      //         : [];
-      //     _this.listArr.forEach(
-      //       (item) => (item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK))
-      //     );
-      //     _this.treeData = res.data.data.warehouseLogisticsTree;
-      //     _this.query = e;
-      //     _this.treeData.forEach((item) => {
-      //       item.children.forEach((list) => {
-      //         if (list.title.indexOf(`${e}`) != -1) {
-      //           item.expand = true;
-      //         }
-      //       });
-      //     });
-      //   } else {
-      //     // _this.$Message.error(res.data.data.message || "失败");
-      //     _this.$Message.error(
-      //       res.data.data.message || window.vmI18n.t("modalTips.z3")
-      //     );
-      //   }
-      // });
     },
     // 刷新
     refresh() {
