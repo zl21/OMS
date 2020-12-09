@@ -643,12 +643,15 @@ export default {
     // 设置表格高度
     setTableHeight() {
       const contentHeight = document.getElementById('content').clientHeight;
-      let logisticsAreaHeight = 25;
-      logisticsAreaHeight += document.getElementsByClassName('tableTop')[0].clientHeight;
+      let logisticsAreaHeight = 0;
+      this.$nextTick(() => {
+        logisticsAreaHeight += document.getElementsByClassName('one_button')[0].clientHeight;
+        logisticsAreaHeight += document.getElementsByClassName('tableTop')[0].clientHeight;
+        logisticsAreaHeight += document.getElementsByClassName('jordanLabel')[0].clientHeight;
+      });
       const tableHeight = contentHeight - logisticsAreaHeight;
       const Theight = document.getElementsByClassName('tableBox')[0];
-      document.getElementsByClassName('list-table')[0].style = `height: ${tableHeight - 140}px;`;
-      Theight.style = `height: ${tableHeight - 110}px;`;
+      Theight.style = `height: ${tableHeight - 270}px;`;
     },
     paperScroll(e) {
       const sLefts = document.getElementById('fixedDiv');
