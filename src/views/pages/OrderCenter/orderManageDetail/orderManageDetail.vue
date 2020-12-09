@@ -8,8 +8,8 @@ feature : 订单中心-零售发货单详情
     v-loading=""
     class="order public-main"
   >
-   <!-- 弹框 -->
-   <loading :loading="pageLoad"></loading>
+    <!-- 弹框 -->
+    <loading :loading="pageLoad" />
     <div class="order-btn">
       <businessButton
         :btn-config="btnConfig"
@@ -18,31 +18,31 @@ feature : 订单中心-零售发货单详情
     </div>
     <div class="public-content">
       <div class="order-header">
-      <businessLabel
-        :label-default-value="labelDefaultValue"
-        :label-list="labelList"
-        @labelClick="labelClick"
+        <businessLabel
+          :label-default-value="labelDefaultValue"
+          :label-list="labelList"
+          @labelClick="labelClick"
+        />
+      </div>
+      <div
+        v-if="refresh"
+        class="order-content"
+      >
+        <EssentialInfo
+          v-show="labelDefaultValue === 'OC_B_ORDER'"
+          :component-data="tab1"
+          @freshLoad="freshLoad"
+        />
+        <OrderItem
+          v-show="labelDefaultValue !== 'OC_B_ORDER'"
+          :component-data="tab2"
+        />
+      </div>
+      <!--单据状态图片展示 -->
+      <businessStatusFlag
+        :status-name="statusName"
+        class="statusFlag"
       />
-    </div>
-    <div
-      v-if="refresh"
-      class="order-content"
-    >
-      <EssentialInfo
-        v-show="labelDefaultValue === 'OC_B_ORDER'"
-        :component-data="tab1"
-        @freshLoad="freshLoad"
-      />
-      <OrderItem
-        v-show="labelDefaultValue !== 'OC_B_ORDER'"
-        :component-data="tab2"
-      />
-    </div>
-    <!--单据状态图片展示 -->
-    <businessStatusFlag
-      :status-name="statusName"
-      class="statusFlag"
-    />
     </div>
     <!--错误弹框-->
     <Modal
