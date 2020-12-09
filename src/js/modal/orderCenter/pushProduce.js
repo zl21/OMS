@@ -252,6 +252,7 @@ export default {
         delete result.gift_type;
       }
       self.loading = true;
+      self.btnConfig.buttons[1].disabled = true;
       axios({
         url,
         method: 'post',
@@ -263,8 +264,10 @@ export default {
           self.$parent.$parent.$parent.getData();
           this.$parent.$parent.closeConfirm();
           this.loading = false;
+          self.btnConfig.buttons[1].disabled = false;
         } else {
           this.loading = false;
+          self.btnConfig.buttons[1].disabled = false;
           if (res.data.code === -1) {
             self.$Modal.confirm({
               title: res.data.message,
