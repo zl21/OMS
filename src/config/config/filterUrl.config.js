@@ -3,17 +3,17 @@ export default {
 
     /* ------------ interfacePlatform ------------ */
     // 淘宝订单--IP_B_TAOBAO_ORDER
-    IP_B_TAOBAO_ORDER: ['/p/cs/orderDownload', ],
+    // IP_B_TAOBAO_ORDER: ['/p/cs/orderDownload', ],
     // 京东订单--IP_B_JINGDONG_ORDER
-    IP_B_JINGDONG_ORDER: ['/p/cs/orderDownload', ],
+    // IP_B_JINGDONG_ORDER: ['/p/cs/orderDownload', ],
     // JITX订单--IP_B_JITX_ORDER
-    IP_B_JITX_ORDER: ['/p/cs/orderDownload', ],
+    // IP_B_JITX_ORDER: ['/p/cs/orderDownload', ],
     // 淘宝退单--IP_B_TAOBAO_REFUND
-    IP_B_TAOBAO_REFUND: ['/p/cs/refundDownload', ],
+    // IP_B_TAOBAO_REFUND: ['/p/cs/refundDownload', ],
     // 京东退单--IP_B_JINGDONG_REFUND
-    IP_B_JINGDONG_REFUND: ['/p/cs/refundDownload', ],
+    // IP_B_JINGDONG_REFUND: ['/p/cs/refundDownload', ],
     // 通用接口退单-退单下载--IP_B_STANDPLAT_REFUND
-    IP_B_STANDPLAT_REFUND: ['/p/cs/refundDownload', ],
+    // IP_B_STANDPLAT_REFUND: ['/p/cs/refundDownload', ],
     // 淘宝换货单接口--IP_B_TAOBAO_EXCHANGE
     // IP_B_TAOBAO_EXCHANGE: ['/p/cs/exchangeDownload', ], 
     // JITX寻仓接口-寻仓订单下载--IP_B_JITX_DELIVERY
@@ -30,7 +30,7 @@ export default {
     // IP_B_STANDPLAT_REFUND: ['/api/cs/vip/distribution/v1/out/storage', ], 
     // 创建出仓单初始化接口
     OC_B_VIPCOM_DISTRIBUTION: ['/api/cs/vip/distribution/v1/checkBeforeCreateVipDelivery', ],
-    
+
     /* ------------ commodityCenter ------------ */
     // 淘宝商品(下载商品)-IP_C_TAOBAO_PRODUCT
     IP_C_TAOBAO_PRODUCT: ['/p/cs/itemDownload', ],
