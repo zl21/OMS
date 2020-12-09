@@ -283,6 +283,9 @@ export default {
         }
       });
     }
+    window.onresize = () => {
+     this.setTableHeight();
+    };
     this.importTable.confirmTitle = this.vmI18n.t('modalTitle.import');
     this.modifyLogistics.confirmTitle = this.vmI18n.t('modalTitle.select_logisticsCompany');
   },
