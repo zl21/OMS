@@ -1282,6 +1282,7 @@ export default {
               await _this.reconstructionGetDetail(subitem, newItem, subitem.PS_C_PRO_ECODE);
               newItem.PRICE_SETTLE = subitem.PRICE_SETTLE; // 结算单价
               newItem.AMT_SETTLE_TOT = subitem.TOT_PRICE_SETTLE; // 结算金额
+              newItem.OC_B_ORDER_ITEM_ID = subitem.OC_B_ORDER_ITEM_ID;
               newQueryList.push(newItem);
             }
             _this.jordanTableConfig.data = newQueryList;
