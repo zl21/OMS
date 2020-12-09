@@ -6,7 +6,7 @@
       class="vip"
     >
       <!-- <span>当前操作会给订单打上加急发货【急】标识，请确认！</span> -->
-      <span>{{ vmI18n.t("modalTips.yc") }}</span>
+      <p>{{ vmI18n.t("modalTips.yc") }}</p>
     </div>
     <!-- 定金预售提前发货 -->
     <div

@@ -729,6 +729,8 @@ export default {
             status: false,
             clear: true // 是否清空input数据
           }); // 关闭弹框
+        } else {
+          this.$Message.error(data.message)
         }
       });
     }, // 获取头部信息

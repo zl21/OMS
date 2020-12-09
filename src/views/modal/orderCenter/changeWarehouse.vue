@@ -8,7 +8,7 @@
       <!-- 修改仓库-->
       <label for>{{ vmI18n.t('btn.modifyWarehouse') }}:</label>
       <DropDownSelectFilter
-        style="width: 250px"
+        style="width: 285px"
         :single="true"
         :data="foreignKeyLink"
         :z-index="zIndex"
@@ -27,7 +27,11 @@
     <div class="jordanModal-input-box">
       <!-- 改仓原因-->
       <label for>{{ vmI18n.t('form_label.changeWarehouse_reasons') }}:</label>
-      <Select v-model="updateRemark" class="jordanModal-input" style="width: 200px">
+      <Select 
+        v-model="updateRemark" 
+        class="jordanModal-input" 
+        style="width: 285px !important"
+      >
         <Option v-for="item in updateRemarkOptions" :key="item.value" :value="item.value">
           {{ item.label }}
         </Option>

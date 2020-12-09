@@ -6,7 +6,7 @@
       <!-- <label for>物流公司:</label> -->
       <label for>{{ vmI18n.t("form_label.logisticsCompany") }}:</label>
       <DropDownSelectFilter
-        style="width: 250px"
+        style="width: 285px"
         :single="true"
         :data="foreignKeyLink"
         :z-index="zIndex"
@@ -29,7 +29,7 @@
       <label for>{{ vmI18n.t("form_label.logisticsOrder_No") }}:</label>
       <Input
         v-model="expressCode"
-        style="width: 250px"
+        style="width: 285px"
         :disabled="expressCodeFlag"
       />
     </div>

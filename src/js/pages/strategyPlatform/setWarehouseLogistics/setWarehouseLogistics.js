@@ -220,14 +220,6 @@ export default {
             tableName: 'ST_C_WAREHOUSE_LOGISTICS',
             tableId: 1111113
           });
-          // _this.$store.commit('customize/TabHref', {
-          //   id: 1111113,
-          //   type: 'table',
-          //   name: 'ST_C_WAREHOUSE_LOGISTICS',
-          //   // label: "仓库物流优先级方案",warehouse_logistics_priority_scheme
-          //   label: this.vmI18n.t('panel_label.warehouse_logistics_priority_scheme'),
-          //   back: true
-          // });
         }
       }
     ];
@@ -283,6 +275,9 @@ export default {
         }
       });
     }
+    window.onresize = () => {
+      this.setTableHeight();
+    };
     this.importTable.confirmTitle = this.vmI18n.t('modalTitle.import');
     this.modifyLogistics.confirmTitle = this.vmI18n.t('modalTitle.select_logisticsCompany');
   },
@@ -317,35 +312,39 @@ export default {
       };
       fromData.append('param', JSON.stringify(param));
       // 保存
-      this.service.strategyPlatform.saveWarehouseLogistics(fromData).then(res => {
-        _this.isSaveLoading = false;
-        if (res.data.oK) {
-          _this.$Message.success(window.vmI18n.t('modalTips.z9')); // 保存成功
-          if (this.$route.params.customizedModuleId !== 'New') {
-            this.refresh();
-          } else {
-            this.$store.commit('customize/TabHref', {
-              id: res.data.data.data.objid, // 单据id
-              type: 'action', // 类型action
-              name: 'setWarehouseLogistics', // 文件名
-              label: window.vmI18n.t('panel_label.setWarehouseLogistics'), // 仓库物流优先级设置
-              query: Object.assign({
+      this.service.strategyPlatform
+        .saveWarehouseLogistics(fromData)
+        .then(res => {
+          _this.isSaveLoading = false;
+          if (res.data.oK) {
+            _this.$Message.success(window.vmI18n.t('modalTips.z9')); // 保存成功
+            if (this.$route.params.customizedModuleId !== 'New') {
+              this.refresh();
+            } else {
+              this.$store.commit('customize/TabHref', {
                 id: res.data.data.data.objid, // 单据id
-                tabTitle: window.vmI18n.t('panel_label.setWarehouseLogistics') // 仓库物流优先级设置
-              }) // 带的参数
-            });
+                type: 'action', // 类型action
+                name: 'setWarehouseLogistics', // 文件名
+                label: window.vmI18n.t('panel_label.setWarehouseLogistics'), // 仓库物流优先级设置
+                query: Object.assign({
+                  id: res.data.data.data.objid, // 单据id
+                  tabTitle: window.vmI18n.t('panel_label.setWarehouseLogistics') // 仓库物流优先级设置
+                }) // 带的参数
+              });
+            }
+          } else {
+            const err = res.data.data.message || window.vmI18n.t('modalTips.y0'); // 保存失败
+            _this.$Message.error(err);
+            // _this.refresh();
           }
-        } else {
-          const err = res.data.data.message || window.vmI18n.t('modalTips.y0'); // 保存失败
+        })
+        .catch(error => {
+          const err = error || window.vmI18n.t('modalTips.y0'); // 保存失败
           _this.$Message.error(err);
           // _this.refresh();
-        }
-      }).catch((error)=>{
-        const err = error || window.vmI18n.t('modalTips.y0'); // 保存失败
-        _this.$Message.error(err);
-        // _this.refresh();        
-      });
+        });
     },
+    // 获取树
     getTreeData() {
       console.log('getTreeData::');
       const _this = this;
@@ -354,7 +353,7 @@ export default {
 
       this.service.common.getWarehouseLogisticsTree(param).then(res => {
         _this.isSaveLoading = false;
-          if (res.data.code == 0) {
+        if (res.data.code == 0) {
           _this.treeData = res.data.data.warehouseLogisticsTree;
           if (res.data.data.warehouseLogistics) {
             _this.information.formData[0].itemdata.pid = res.data.data.warehouseLogistics.CP_C_PHY_WAREHOUSE_ID;
@@ -376,9 +375,9 @@ export default {
               });
             }
           }
-          if (res.data.warehouseLogisticsItems && res.data.warehouseLogisticsItems.length) {
+          if (res.data.data.warehouseLogisticsItems && res.data.data.warehouseLogisticsItems.length) {
             _this.theadArr = [];
-            res.data.warehouseLogisticsItems.forEach(item => {
+            res.data.data.warehouseLogisticsItems.forEach(item => {
               _this.theadArr.push({
                 name: item.CP_C_LOGISTICS_ENAME
               });
@@ -410,16 +409,16 @@ export default {
       }
       // 接口
       _this.tableLoading = false;
-      const fromData = new FormData();
       const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeNode: treeList };
-      fromData.append('param', JSON.stringify(params));
       // 接口
       const {
         data: { oK, data }
-      } = await this.service.strategyPlatform.saveWarehouseLogistics(fromData);
+      } = await this.service.common.getLogisticsRankResultTable(params);
       if (oK) {
         _this.cityThead = true;
-        _this.listArr = data !== undefined ? data : [];
+        console.log(data);
+        if (!data || !data.length) return;
+        _this.listArr = data;
         _this.listArr.forEach(item => {
           item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK);
         });
@@ -443,13 +442,10 @@ export default {
           });
         });
       }
-      const fromData = new FormData();
       const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeNode: treeList };
-      fromData.append('param', JSON.stringify(params));
       // 接口
-      this.service.common.getLogisticsRankResultTable(fromData)
-      .then((res)=>{
-        // console.log(res.data.oK, data);
+      this.service.common.getLogisticsRankResultTable(params).then(res => {
+        _this.tableLoading = false;
         if (res.data.oK) {
           _this.cityThead = false;
           _this.listArr = res.data.data !== undefined ? res.data.data : [];
@@ -458,25 +454,6 @@ export default {
           });
         }
       });
-
-      // axios({
-      //   url: "/p/cs/getLogisticsRankResultTable",
-      //   method: "post",
-      //   data: {
-      //     objid: this.$route.query.id,
-      //     cityleave: "PROV",
-      //     treeNode: treeList,
-      //   },
-      // }).then((res) => {
-      //   _this.tableLoading = false;
-      //   if (res.data.code === 0) {
-      //     _this.cityThead = false;
-      //     _this.listArr = res.data.data !== undefined ? res.data.data : [];
-      //     _this.listArr.forEach(
-      //       (item) => (item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK))
-      //     );
-      //   }
-      // });
     },
     // 全选树
     checkAll(e) {
@@ -542,37 +519,6 @@ export default {
           data.message || this.vmI18n.t('modalTips.z3') // 失败
         );
       }
-      // axios({
-      //   url: "/p/cs/getLogisticsLikeRankResultTable",
-      //   method: "post",
-      //   data: param,
-      // }).then((res) => {
-      //   _this.tableLoading = false;
-      //   if (res.data.code === 0) {
-      //     _this.cityThead = true;
-      //     _this.listArr =
-      //       res.data.data.warehouseLogisticsRanks !== undefined
-      //         ? res.data.data.warehouseLogisticsRanks
-      //         : [];
-      //     _this.listArr.forEach(
-      //       (item) => (item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK))
-      //     );
-      //     _this.treeData = res.data.data.warehouseLogisticsTree;
-      //     _this.query = e;
-      //     _this.treeData.forEach((item) => {
-      //       item.children.forEach((list) => {
-      //         if (list.title.indexOf(`${e}`) != -1) {
-      //           item.expand = true;
-      //         }
-      //       });
-      //     });
-      //   } else {
-      //     // _this.$Message.error(res.data.data.message || "失败");
-      //     _this.$Message.error(
-      //       res.data.data.message || window.vmI18n.t("modalTips.z3")
-      //     );
-      //   }
-      // });
     },
     // 刷新
     refresh() {
@@ -639,12 +585,15 @@ export default {
     // 设置表格高度
     setTableHeight() {
       const contentHeight = document.getElementById('content').clientHeight;
-      let logisticsAreaHeight = 25;
-      logisticsAreaHeight += document.getElementsByClassName('tableTop')[0].clientHeight;
+      let logisticsAreaHeight = 0;
+      this.$nextTick(() => {
+        logisticsAreaHeight += document.getElementsByClassName('one_button')[0].clientHeight;
+        logisticsAreaHeight += document.getElementsByClassName('tableTop')[0].clientHeight;
+        logisticsAreaHeight += document.getElementsByClassName('jordanLabel')[0].clientHeight;
+      });
       const tableHeight = contentHeight - logisticsAreaHeight;
       const Theight = document.getElementsByClassName('tableBox')[0];
-      document.getElementsByClassName('list-table')[0].style = `height: ${tableHeight - 140}px;`;
-      Theight.style = `height: ${tableHeight - 110}px;`;
+      Theight.style = `height: ${tableHeight - 270}px;`;
     },
     paperScroll(e) {
       const sLefts = document.getElementById('fixedDiv');

@@ -146,7 +146,6 @@
     >
       <!-- 批量生成退换货订单，是否继续? -->
       <p>{{ vmI18n.t("modalTips.e6") }}</p>
-      <br>
       <div class="orderContent">
         <businessForm :form-config="batchReturnFormConfig" />
       </div>

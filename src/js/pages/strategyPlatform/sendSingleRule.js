@@ -7,6 +7,7 @@ import businessDialog from 'professionalComponents/businessDialog';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
+import comUtils from '@/assets/js/__utils__/common.js';
 
 export default {
   components: {
@@ -19,6 +20,7 @@ export default {
   },
   data() {
     return {
+      vmI18n: window.vmI18n,
       name: '',
       single: false,
       treeData: [],
@@ -34,6 +36,7 @@ export default {
       modifyWarehouse: {
         refFuns: 'confirmFun',
         confirmTitle: '请选择仓库',
+        // confirmTitle: window.vmI18n.t('modalTitle.import'), // 请选择仓库
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '760',
         scrollable: false, // 是否可以滚动
@@ -187,6 +190,7 @@ export default {
           {
             text: '返回',
             btnclick: () => {
+              comUtils.tabCloseAppoint(this);
               const _this = this;
               _this.$store.commit('global/tabOpen', {
                 type: 'S',

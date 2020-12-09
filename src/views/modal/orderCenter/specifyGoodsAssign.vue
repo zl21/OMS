@@ -26,7 +26,7 @@
         <Input
           v-model="searchValue"
           icon="ios-search"
-          style="width: 150px; marginRight:8px"
+          style="width: 150px;"
           @on-enter="search"
           @on-click="search"
         />
@@ -40,7 +40,7 @@
         :data="data"
       />
     </div>
-    <businessButton :btn-config="btnConfig" />
+    <businessButton class="modalBth" :btn-config="btnConfig" />
   </div>
 </template>
 
