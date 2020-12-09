@@ -93,6 +93,8 @@ export default {
       self.$Message.success(res.data.message);
       self.$emit('confirmImport');
       self.$emit('closeActionDialog');
+    } else {
+      self.$Message.error(res.data.message);
     }
   }
 };

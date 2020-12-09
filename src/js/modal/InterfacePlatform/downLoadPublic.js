@@ -439,7 +439,7 @@ export default {
         _this.$Message.success(message);
         _this.$emit('closeActionDialog', true);
       } else {
-        // _this.$Message.error(message);
+        _this.$Message.error(message);
       }
     },
     // 通用商品下载
@@ -469,7 +469,7 @@ export default {
         _this.$Message.success(message);
         _this.$emit('closeActionDialog', true);
       } else {
-        // _this.$Message.error(message);
+        _this.$Message.error(message);
       }
     },
     // 分销商品
@@ -504,7 +504,7 @@ export default {
         _this.$Message.success(message);
         _this.$emit('closeActionDialog', true);
       } else {
-        // _this.$Message.error(message);
+        _this.$Message.error(message);
       }
     },
     // IP_B_STANDPLAT_REFUND
@@ -541,7 +541,7 @@ export default {
         _this.$Message.success(message);
         _this.$emit('closeActionDialog', true);
       } else {
-        // _this.$Message.error(message);
+        _this.$Message.error(message);
       }
     },
     // 时间格式化

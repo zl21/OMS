@@ -108,21 +108,5 @@ export default {
     } catch (error) {
       self.dialogLoad = false;
     }
-    // httpServer({
-    //   url: '/p/cs/downLoadVipOrderRefund',
-    //   method: 'post',
-    //   data: {
-    //     param: JSON.stringify(params)
-    //   }
-    // }).then(res => {
-    //   self.dialogLoad = false
-    //   if (res.data.code === 0) {
-    //     self.$message.success(res.data.message)
-    //     self.$emit('confirmImport')
-    //     self.$emit('closeActionDialog')
-    //   }
-    // }).catch(() => {
-    //   self.dialogLoad = false
-    // })
   }
 };
