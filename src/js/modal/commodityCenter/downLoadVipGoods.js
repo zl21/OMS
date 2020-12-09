@@ -148,6 +148,8 @@ export default {
             this.$message.success(res.data.message);
             this.$emit('confirmImport');
             this.$emit('closeActionDialog');
+          } else {
+            this.$Message.error(message);
           }
         })
         .catch(() => {

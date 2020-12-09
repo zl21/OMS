@@ -572,31 +572,27 @@ export default {
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
-              this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.selection[0].ID }).then(res => {
-                // 提前判断下该单据是否可拆单
-                if (res.data.code !== 0) {
-                  this.$Message.warning(res.data.message);
-                } else if (self.selection.length === 1) {
-                if ((self.selection[0].PLATFORM === 4 && self.selection[0].PAY_TYPE === 2) || self.selection[0].PLATFORM === 7 || self.selection[0].PLATFORM === 50) {
-                  self.$Message.warning({
-                    content: self.vmI18n.t('modalTips.b1'), // 交易平台为当当，唯品会jitx，京东（货到付款）的订单不允许拆单
-                    duration: 5,
-                    top: 80
-                  });
-                  return;
-                }
-                if (self.selection[0].IS_INRETURNING === 1 || self.selection[0].IS_INTERECEPT === 1) {
-                  self.$Message.warning({
-                    content: self.vmI18n.t('modalTips.b2'), // 拦截、退款中的订单不允许拆单！
-                    duration: 5,
-                    top: 80
-                  });
-                  return;
-                }
-                if (self.selection[0].ORDER_STATUS === self.orderStatus.orderUnconfirmed || self.selection[0].ORDER_STATUS === self.orderStatus.orderOutofstock) {
-                  this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.selection[0].ID }).then(res => {
-                    // 提前判断下该单据是否可拆单
-                    if (res.data.code == 0) {
+              if (self.selection.length === 1) {
+                this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.selection[0].ID }).then(res => {
+                  // 提前判断下该单据是否可拆单
+                  if (res.data.code == 0) {
+                    if ((self.selection[0].PLATFORM === 4 && self.selection[0].PAY_TYPE === 2) || self.selection[0].PLATFORM === 7 || self.selection[0].PLATFORM === 50) {
+                      self.$Message.warning({
+                        content: self.vmI18n.t('modalTips.b1'), // 交易平台为当当，唯品会jitx，京东（货到付款）的订单不允许拆单
+                        duration: 5,
+                        top: 80
+                      });
+                      return;
+                    }
+                    if (self.selection[0].IS_INRETURNING === 1 || self.selection[0].IS_INTERECEPT === 1) {
+                      self.$Message.warning({
+                        content: self.vmI18n.t('modalTips.b2'), // 拦截、退款中的订单不允许拆单！
+                        duration: 5,
+                        top: 80
+                      });
+                      return;
+                    }
+                    if (self.selection[0].ORDER_STATUS === self.orderStatus.orderUnconfirmed || self.selection[0].ORDER_STATUS === self.orderStatus.orderOutofstock) {
                       self.$store.commit('customize/TabHref', {
                         id: self.selection[0].ID,
                         type: 'action',
@@ -608,16 +604,16 @@ export default {
                         }
                       });
                     } else {
-                      this.$Message.warning(res.data.message);
+                      self.$Message.warning({
+                        content: self.vmI18n.t('modalTips.b3'), // 只允许拆分待审核和缺货状态的订单！
+                        duration: 5,
+                        top: 80
+                      });
                     }
-                  });
-                } else {
-                  self.$Message.warning({
-                    content: self.vmI18n.t('modalTips.b3'), // 只允许拆分待审核和缺货状态的订单！
-                    duration: 5,
-                    top: 80
-                  });
-                }
+                  } else {
+                    this.$Message.warning(res.data.message);
+                  }
+                });
               } else {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.b4'), // 一次只能对一个订单进行拆分！
@@ -625,7 +621,6 @@ export default {
                   top: 80
                 });
               }
-              });
             } // 按钮点击事件
           },
           // {
