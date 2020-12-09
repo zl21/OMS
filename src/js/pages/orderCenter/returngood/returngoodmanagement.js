@@ -1222,7 +1222,7 @@ export default {
               _this.replacement.formValue.RECEIVE_PHONE = res.data.data.receivingGoods.RECEIVER_PHONE; // 收货人电话
               _this.replacement.formValue.RECEIVE_ZIP = res.data.data.receivingGoods.RECEIVER_ZIP; // 换货人邮编
               _this.settlementAmount = item.CONSIGN_AMT; // 代销结算金额
-              replace.platform = item.PLATFORM; // 平台
+              replace.PLATFORM = item.PLATFORM; // 平台
               replace.orde_source = item.ORDER_SOURCE; // 订单来源
               replace.receiver_province_id = res.data.data.receivingGoods.CP_C_REGION_PROVINCE_ID; // 省id
               replace.receiver_province_name = res.data.data.receivingGoods.CP_C_REGION_PROVINCE_ENAME; // 收货人省份
@@ -1339,7 +1339,7 @@ export default {
                 await _this.reconstructionGetDetail(exchangeItem, exchangeItem, exchangeItem.PS_C_PRO_ECODE);
               }
               const replace = _this.replacement.formValue;
-              replace.platform = res.data.data.returnOrders.PLATFORM; // 平台
+              replace.PLATFORM = res.data.data.returnOrders.PLATFORM; // 平台
 
               res.data.data.refundDtoList.forEach(item => {
                 item.QTY_EXCHANGE = item.QTY_REFUND;
@@ -3772,7 +3772,7 @@ export default {
       this.replacement.formValue.RECEIVE_NAME = this.onSelectData[0].RECEIVER_NAME; // 收货人姓名
       this.replacement.formValue.RECEIVE_MOBILE = this.onSelectData[0].RECEIVER_MOBILE; // 收货人电话
       this.settlementAmount = this.onSelectData[0].CONSIGN_AMT; // 代销结算金额
-      replace.platform = this.onSelectData[0].PLATFORM; // 平台
+      replace.PLATFORM = this.onSelectData[0].PLATFORM; // 平台
       replace.orde_source = this.onSelectData[0].ORDER_SOURCE; // 订单来源
       replace.receiver_province_id = this.onSelectData[0].CP_C_REGION_PROVINCE_ID; // 省id
       replace.receiver_province_name = this.onSelectData[0].CP_C_REGION_PROVINCE_ENAME; // 收货人省份
