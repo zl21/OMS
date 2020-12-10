@@ -1501,12 +1501,14 @@ body {
     justify-content: center;
   }
 }
-// 标准弹框
+// 所有弹框修改
 .v-transfer-dom{
+  //标准弹框
   .ark-modal-confirm-footer{
     button{
         height: 28px;
         min-width:50px;
+        padding: 0;
         &:hover{
           opacity: 1;
           background-color: @button-transparent-hover;
@@ -1522,22 +1524,19 @@ body {
       }
     }
   }
-}
-// 定制弹框 按钮
-.modalBth{
-  .buttonBox div:last-child{
-    .buttonGroup button{
-      margin-right: 0;
-    }
-  }
-}
-.v-transfer-dom{
+  // 定制弹窗
   .one_button .buttonBox div{
-    .buttonGroup button.ark-btn:hover{
-      background-color: @button-transparent-hover;
-      color: @button-bg-font;
-      border:1px solid transparent;
-      opacity: 1;
+    .buttonGroup button.ark-btn{
+
+       & > span{
+        vertical-align: middle !important;
+       }
+        &:hover{
+        background-color: @button-transparent-hover;
+        color: @button-bg-font;
+        border:1px solid transparent;
+        opacity: 1;
+      }
     }
     &:last-child{
       .buttonGroup button{
@@ -1553,7 +1552,18 @@ body {
       }
     }
   }
-  
+  // ark组件弹窗
+  .ark-modal-footer{
+    
+  }
+}
+// 定制弹框 按钮
+.modalBth{
+  .buttonBox div:last-child{
+    .buttonGroup button{
+      margin-right: 0;
+    }
+  }
 }
 .rk-modal-confirm-footer{
   button:last-child{
