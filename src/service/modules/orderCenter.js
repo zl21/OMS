@@ -15,7 +15,6 @@ export default {
   reallocateWarehouse: params => network.post('/api/cs/oc/oms/v1/reallocateWarehouse', params), // 配送仓库
   getOrderList: params => network.post('/api/cs/oc/oms/v1/getOrderList', params),
   doBatchReturnOrder: params => network.post('/api/cs/oc/oms/v1/doBatchReturnOrder', params), // 批量退单
-  queryOrderList: params => network.post('/api/cs/oc/oms/v1/queryOrderList', params),
   exportOcBOrder: params => network.post('/api/cs/oc/oms/v1/exportOcBOrder', params), // 导出
   auditOrderReserve: params => network.post('/api/cs/oc/oms/v1/auditOrderReserve', params), // 反审核
   checkAddOrderInvoicing: params => network.post('/api/cs/oc/oms/v1/checkAddOrderInvoicing', params),

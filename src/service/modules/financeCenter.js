@@ -6,8 +6,6 @@ export default {
   /**
    * 赔付单(列表)
    */
-  // 导出 
-  exportPayableAdjustment: params => network.post('/p/cs/exportPayableAdjustment', params),
   // 列表 
   getPayableAdjustmentList: params => network.post('/p/cs/getPayableAdjustmentList', params),
   // 反客审 
@@ -24,12 +22,10 @@ export default {
   getCompensationReason: params => network.post('/p/cs/getCompensationReason', params),
   // 计算应付金额
   getCompensate: params => network.post('/p/cs/getCompensate', params),
-  // 保存 /p/cs/savePayableAdjustment
+  // 保存 
   savePayableAdjustment: params => network.post('/p/cs/savePayableAdjustment', params),
   // 
   getPayableAdjustment: params => network.post('/p/cs/getPayableAdjustment', params),
-  //
-  queryOrderList: params => network.post('/api/cs/oc/oms/v1/queryOrderList', params),
   // 弹框 下载账单
   triggerVipBill: params => network.post('/p/cs/ac/v1/triggerVipBill', params),
   // 弹框 生成销售单

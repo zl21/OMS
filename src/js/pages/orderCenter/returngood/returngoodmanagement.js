@@ -3620,14 +3620,7 @@ export default {
         detailType: 2 // 退换货订单使用
       };
       fromdata.append('param', JSON.stringify(param));
-      this.service.orderCenter
-        .queryOrderList(fromdata)
-        // axios({
-        //   url: '/p/cs/getOrderList',
-        //   method: 'post',
-        //   cancelToken: true,
-        //   data: fromdata
-        // })
+      this.service.common.queryOrderList(fromdata)
         .then(res => {
           if (res.data.data) {
             res.data.data.queryOrderResultList.forEach(item => {
