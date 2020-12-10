@@ -1025,13 +1025,6 @@ export default {
         .getCurrentBatch({
           BATCH_TYPE: ''
         })
-        // axios({
-        //   url: '/api/cs/oc/oms/v1/getCurrentBatch',
-        //   method: 'post',
-        //   data: {
-        //     BATCH_TYPE: '',
-        //   },
-        // })
         .then(res => {
           if (res.data.code === 0) {
             _this.optionsData = res.data.data;

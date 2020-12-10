@@ -1236,6 +1236,8 @@ export default {
               _this.replacement.formData[5].itemdata.valuedata = res.data.data.receivingGoods.CP_C_REGION_PROVINCE_ENAME; // 省
               _this.replacement.formData[6].itemdata.valuedata = res.data.data.receivingGoods.CP_C_REGION_CITY_ENAME; // 市
               _this.replacement.formData[7].itemdata.valuedata = res.data.data.receivingGoods.CP_C_REGION_AREA_ENAME; // 区
+            } else {
+              _this.$message.warning(res.data.message);
             }
           });
         this.service.orderCenter
@@ -1246,6 +1248,10 @@ export default {
             detailType: 2 // 退换货订单使用
           })
           .then(async res => {
+            if (res.data.code != 0) {
+              _this.$Message.warning(res.data.message);
+              return
+            }
             const queryList = [];
             res.data.data.records.forEach(item => {
               if (item.REFUND_STATUS != 6) queryList.push(item);

@@ -527,8 +527,6 @@ export default {
               const id = self.tab1.order.ID || -1;
               self.service.orderCenter
                 .cancelInterception({ ids: [id] })
-                // self.$network
-                //   .post('/api/cs/oc/oms/v1/orderInterception', { ids })
                 .then(res => {
                   if (res.data.code === 0) {
                     self.$Message.success(res.data.message);
