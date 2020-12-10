@@ -9,6 +9,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       show: '',
       s: [],
       providesList: [],
@@ -25,6 +26,7 @@ export default {
           {
             text: '刷新',
             btnclick: async ()=>{
+              this.loading = true;
               await this.queryLogisticsCompany();
               this.getAutoCheck().then(() => {
                 this.QueryList();
@@ -244,6 +246,7 @@ export default {
       );
       this.service.strategyPlatform.QueryList(params).then(({ data }) => {
         if (data.code == 0) {
+          this.loading = false;
           this.totalRowCount = data.datas.totalRowCount;
           const d = data.datas.tabth;
           d.forEach(item => {

@@ -1,5 +1,16 @@
 <template>
   <div class="auto-check public-main">
+    <Spin
+      v-show="loading"
+      fix
+    >
+      <Icon
+        type="ios-loading"
+        size="18"
+        class="demo-spin-icon-load"
+      />
+      <div>Loading</div>
+    </Spin>
     <div class="operate left">
       <businessButton :btn-config="btnConfig" />
     </div>
