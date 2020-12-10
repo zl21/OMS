@@ -314,12 +314,8 @@ export default {
           ids.push(_this.returnSelectData[i].ID);
         }
         const idList = { idList: ids };
-        axios({
-          url: '/p/cs/exportPayableAdjustment',
-          method: 'post',
-          // cancelToken: true,
-          data: idList
-        }).then(res => {
+        this.service.common.exportPayableAdjustment(idList)
+          .then(res => {
           if (res.data.code === 0 && res.data.data !== null) {
             const mes = res.data.message || '导出成功！';
             _this.$Message.success(mes);
@@ -360,12 +356,8 @@ export default {
         start: _this.jordanTableConfig.current,
         count: 999999
       };
-      axios({
-        url: '/p/cs/exportPayableAdjustment',
-        method: 'post',
-        // cancelToken: true,
-        data: Object.assign(param, _this.formConfig.formValue)
-      }).then(res => {
+      this.service.common.exportPayableAdjustment(Object.assign(param, _this.formConfig.formValue))
+        .then(res => {
         if (res.data.code === 0 && res.data.data !== null) {
           const mes = res.data.message || '导出成功！';
           _this.$Message.success(mes);

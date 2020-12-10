@@ -1087,9 +1087,7 @@ export default {
         ],
       };
       fromdata.append('param', JSON.stringify(param));
-      this.service.orderCenter.queryOrderList(fromdata)
-      // this.$network
-      //   .post("/api/cs/oc/oms/v1/queryOrderList", fromdata)
+      this.service.common.queryOrderList(fromdata)
         .then((res) => {
           const query = _this.$route.query;
           if (res.data.data) {
@@ -1279,9 +1277,7 @@ export default {
         ],
       };
       formData.append('param', JSON.stringify(requestData));
-      this.service.orderCenter.queryOrderList(formData)
-      // this.$network
-      //   .post('/api/cs/oc/oms/v1/queryOrderList', formData)
+      this.service.common.queryOrderList(formData)
         .then((res) => {
           console.log(res);
           if (res.data.code == 0) {

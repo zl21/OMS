@@ -897,7 +897,7 @@ export default {
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
       // 接口
-      const { data: { code, data } } = await this.service.financeCenter.getPayableAdjustmentList(fromdata); 
+      const { data: { code, data, message } } = await this.service.financeCenter.getPayableAdjustmentList(fromdata); 
       _this.agTableConfig.loading = false;
       _this.returnSelectData = [];
       if (code === 0 && data.payableAdjustmentList.length) {
@@ -959,6 +959,7 @@ export default {
       } else {
         _this.agTableConfig.rowData = [];
         _this.agTableConfig.pagenation.total = 0;
+        _this.$Message.warning(message);
       }
       this.$refs.agtable.agGridTable(
         this.agTableConfig.columnDefs,
@@ -1043,7 +1044,7 @@ export default {
           ids.push(_this.selection[i].ID);
         }
         const idList = { idList: ids };
-        const { data: { code, data, message } } = await this.service.financeCenter.exportPayableAdjustment(idList); 
+        const { data: { code, data, message } } = await this.service.common.exportPayableAdjustment(idList); 
         if (code === 0 && data !== null) {
           const mes = message || window.vmI18n.t('modalTips.z2');// 导出成功！
           _this.$Message.success(mes);
@@ -1119,7 +1120,7 @@ export default {
         ORDER_NO: mainData.ORDER_NO,
         RESERVE_BIGINT01: mainData.RESERVE_BIGINT01,
       };
-      const { data: { code, data, message } } = await this.service.financeCenter.exportPayableAdjustment(param); 
+      const { data: { code, data, message } } = await this.service.common.exportPayableAdjustment(param); 
       if (code === 0 && data !== null) {
         const mes = message || window.vmI18n.t('modalTips.z2');// 导出成功！
         _this.$Message.success(mes);
@@ -1130,21 +1131,6 @@ export default {
         _this.$Message.error(err);
         _this.agTableConfig.loading = false;
       }
-      // axios({
-      //   url: "/p/cs/exportPayableAdjustment",
-      //   method: "post",
-      //   cancelToken: true,
-      //   data: param,
-      // }).then((res) => {
-      //   if (res.data.code === 0 && res.data.data !== null) {
-      //     let mes = res.data.message || window.vmI18n.t("modalTips.z2");//导出成功！
-      //     _this.$Message.success(mes);
-      //     _this.downloadUrlFile(res.data.data);
-      //   } else {
-      //     let err = res.data.message || window.vmI18n.t("modalTips.z3");//失败！
-      //     _this.$Message.error(err);
-      //   }
-      // });
     },
   },
   destroyed() {

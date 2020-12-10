@@ -79,6 +79,11 @@ export default {
   cprolikequery: params => network.post('/p/cs/cprolikequery', params),
   cgroupsquery: params => network.get(`/p/cs/cgroupsquery?${qs.stringify(params)}`),
   getCopyTargetGroups: params => network.get(`/p/cs/getCopyTargetGroups?${qs.stringify(params)}`),
+  // 导出接口。共用于：financeCenter、inventoryCenter
+  exportPayableAdjustment: params => network.post('/p/cs/exportPayableAdjustment', params),
+  // 查询接口。共用于：financeCenter、orderCenter
+  queryOrderList: params => network.post('/api/cs/oc/oms/v1/queryOrderList', params),
+
   // 通用接口下载
   /**
    * 经销订单下载 分销商订单下载 /p/cs/orderDownload
