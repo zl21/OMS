@@ -1135,8 +1135,9 @@ body {
             &>i {
               left: 8px;
               &.ark-icon:before{
-                width: 10px;
-                height: 3px;
+                width: 3px;
+                height: 14px;
+                border-radius: 3px;
               }
             }
           }
@@ -1157,14 +1158,16 @@ body {
         &>i {
           position: absolute;
           top: 50%;
-          left: 12px;
+          left: 8px;
           transform: translateY(-50%);
           &.ark-icon:before{
             display: block;
             content: "";
-            width: 3px;
-            height: 14px;
+            width: 8px;
+            height: 4px;
+            border-radius: 3px;
             background: #fd6442;
+            transition: all .5s ;
           }
         }
 
