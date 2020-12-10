@@ -35,7 +35,6 @@ export default {
   /**
    * 零售发货单 - 详情
    */
-  getObject: params => network.post('/p/cs/getObject', params),
   billCopy: params => network.post('/api/cs/oc/oms/v1/billCopy', params), // 丢单赋值或复制订单赋值
   getOrderDetailList: params => network.post('/api/cs/oc/oms/v1/getOrderDetailList', params), // 获取订单详情
   saveBill: params => network.post('/api/cs/oc/oms/v1/saveBill', params), // 保存

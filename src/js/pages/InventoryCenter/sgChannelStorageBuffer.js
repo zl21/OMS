@@ -254,11 +254,6 @@ export default {
       fromdata.append('param', JSON.stringify(param));
       this.service.inventoryCenter
         .getChannelStorageBufferQuery(fromdata)
-        // axios({
-        //   url: '/p/cs/getChannelStorageBufferQuery',
-        //   method: 'post',
-        //   data: fromdata
-        // })
         .then(res => {
           _this.jordanTableConfig.loading = false;
           _this.returnSelectData = [];
@@ -273,6 +268,7 @@ export default {
           } else {
             _this.jordanTableConfig.data = [];
             _this.jordanTableConfig.total = 0;
+            _this.$Message.warning(res.data.message);
           }
         });
     },
