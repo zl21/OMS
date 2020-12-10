@@ -460,50 +460,18 @@ export default {
                 const self = this;
                 const code = val.tem.PS_C_SKU_ECODE;
                 self.jordanTableConfig2.businessFormConfig.formValue.dimdata = code;
-                // axios({
-                //   url: '/p/cs/skuQuery',
-                //   method: 'post',
-                //   data: {
-                //     isBlur: 'N', // N为精确匹配
-                //     psCSku: {
-                //       ECODE: code
-                //     }
-                //   }
-                // }).then(res => {
-                //   if (res.status === 200) {
-                //     const data = res.data.data.data;
-                //     const arr = []; // 展示的数据
-                //     data.forEach(item => {
-                //       // 获取想要展示的
-                //       arr.push({
-                //         PS_C_SKU_ECODE: item.ECODE, // 条码
-                //         PS_C_PRO_ECODE: item.PS_C_PRO_ECODE, // 商品编码
-                //         PS_C_PRO_ENAME: item.PS_C_PRO_ENAME, // 商品名称
-                //         PS_C_CLR_ID: item.colorId, // 颜色id
-                //         PS_C_CLR_ENAME: item.colorName, // 颜色
-                //         PS_C_SIZE_ID: item.sizeId, // 尺寸id
-                //         PS_C_SIZE_ENAME: item.sizeName // 尺寸
-                //       });
-                //     });
-                //     self.jordanTableConfig2SelectStatus = true;
-                //     this.selectData = Object.assign({}, arr[0]);
-                //   }
-                // });
                 document.getElementById('Num').focus();
               },
               dimEnter: () => {
                 const _this = this;
                 const code = this.jordanTableConfig2.businessFormConfig.formValue.dimdata;
-                axios({
-                  url: '/p/cs/skuQuery',
-                  method: 'post',
-                  data: {
-                    isBlur: 'N', // N为精确匹配
-                    psCSku: {
-                      ECODE: code
-                    }
+                const data = {
+                  isBlur: 'N', // N为精确匹配
+                  psCSku: {
+                    ECODE: code
                   }
-                }).then(res => {
+                };
+                _this.service.common.skuQuery(data).then(res => {
                   if (res.status === 200) {
                     const data = res.data.data.data;
                     const arr = []; // 展示的数据
@@ -522,22 +490,23 @@ export default {
                     _this.jordanTableConfig2SelectStatus = true;
                     this.selectData = Object.assign({}, arr[0]);
                     this.comodityDetailEvent();
+                    if (res.data.code && res.data.code != 0 || res.data.data.code && res.data.data.code != 0) {
+                      const message = res.data.message ? res.data.message : res.data.data.message;
+                      this.$Message.warning(message);
+                    }
                   }
                 });
               }, // 回车事件
               dimblur: () => {
                 const _this = this;
                 const code = this.jordanTableConfig2.businessFormConfig.formValue.dimdata;
-                axios({
-                  url: '/p/cs/skuQuery',
-                  method: 'post',
-                  data: {
-                    isBlur: 'N', // N为精确匹配
-                    psCSku: {
-                      ECODE: code
-                    }
+                const data = {
+                  isBlur: 'N', // N为精确匹配
+                  psCSku: {
+                    ECODE: code
                   }
-                }).then(res => {
+                };
+                _this.service.common.skuQuery(data).then(res => {
                   if (res.status === 200) {
                     const data = res.data.data.data;
                     const arr = []; // 展示的数据
@@ -555,6 +524,9 @@ export default {
                     });
                     _this.jordanTableConfig2SelectStatus = true;
                     this.selectData = Object.assign({}, arr[0]);
+                    if (res.data.code != 0) {
+                      this.$Message.warning(res.data.message);
+                    }
                   }
                 });
               } // 失去焦点事件
@@ -848,16 +820,13 @@ export default {
     findCommodityData(val) {
       const self = this;
       const str = val.trim();
-      axios({
-        url: '/p/cs/skuQuery',
-        method: 'post',
-        data: {
-          isBlur: 'Y', // N为精确匹配
-          psCSku: {
-            ECODE: str
-          }
+      const data = {
+        isBlur: 'Y', // N为精确匹配
+        psCSku: {
+          ECODE: str
         }
-      }).then(res => {
+      };
+      _this.service.common.skuQuery(data).then(res => {
         if (res.status === 200) {
           const data = res.data.data.data;
           const dimList = self.jordanTableConfig2.businessFormConfig.formData;
@@ -873,6 +842,9 @@ export default {
               item.AuotData = arr;
             }
           });
+          if (res.data.code != 0) {
+            this.$Message.warning(res.data.message);
+          }
         }
       });
     },
@@ -1714,11 +1686,7 @@ export default {
         psCPro: baseData,
         SkuGroupRequestList: t_SkuGroupRequestList
       };
-      axios({
-        url: '/p/cs/product/skuGroupSave',
-        method: 'post',
-        data
-      }).then(res => {
+      this.service.commodityCenter.skuGroupSave(data).then(res => {
         const data = res.data;
         if (data.code === 0) {
           this.$Message.success(data.message);
@@ -1862,16 +1830,12 @@ export default {
         }
         if (selectcuu.length > 0) {
           if (selectTableRow.length > 0) {
-            const param = {
+            const data = {
               delID: 1,
               objid: selectTableRow,
               mainId: this.objList.psCPro.ID
             };
-            axios({
-              url: '/p/cs/product/skuGroupDelDetail',
-              method: 'post',
-              data: param
-            }).then(res => {
+            this.service.commodityCenter.skuGroupDelDetail(data).then(res => {
               if (res.data.code === 0) {
                 this.IniData();
               } else {
@@ -1941,16 +1905,12 @@ export default {
         }
         if (selectTableRow.length > 0) {
           if (selectdedidata.length > 0) {
-            const param = {
+            const data = {
               delID: 2,
               objid: selectdedidata,
               mainId: this.objList.psCPro.ID
             };
-            axios({
-              url: '/p/cs/product/skuGroupDelDetail',
-              method: 'post',
-              data: param
-            }).then(res => {
+            this.service.commodityCenter.skuGroupDelDetail(data).then(res => {
               if (res.data.code === 0) {
                 this.IniData();
               } else {
@@ -1981,13 +1941,10 @@ export default {
     },
     // 提交
     submitData() {
-      axios({
-        url: '/p/cs/product/skuGroupSubmit',
-        method: 'post',
-        data: {
-          objid: this.objid
-        }
-      }).then(res => {
+      const data = {
+        objid: this.objid
+      };
+      this.service.commodityCenter.skuGroupSubmit(data).then(res => {
         const data = res.data;
         if (data.code === 0) {
           this.$Message.success(data.message);
@@ -1998,13 +1955,10 @@ export default {
     },
     // 作废
     toVoid() {
-      axios({
-        url: '/p/cs/product/skuGroupVoid',
-        method: 'post',
-        data: {
-          objid: this.objid
-        }
-      }).then(res => {
+      const data = {
+        objid: this.objid
+      };
+      this.service.commodityCenter.skuGroupVoid(data).then(res => {
         const data = res.data;
         if (data.code === 0) {
           this.$Message.success(data.message);
@@ -2016,16 +1970,12 @@ export default {
     // 分页触发的函数
     pageSizeGetData() {
       this.jordanTableConfig1.loading = true;
-      const param = {
+      const data = {
         objid: this.objid,
         start: this.jordanTableConfig1.current === undefined ? 1 : this.jordanTableConfig1.current,
         count: this.jordanTableConfig1.pageSize === undefined ? 1 : this.jordanTableConfig1.pageSize
       };
-      axios({
-        url: '/p/cs/product/skuPage',
-        method: 'post',
-        data: param
-      }).then(res => {
+      this.service.commodityCenter.skuPage(data).then(res => {
         this.jordanTableConfig1.loading = false;
         const data = res.data;
         if (data.code == 0) {
@@ -2037,6 +1987,8 @@ export default {
             item.psCSkugroupList = [];
             this.jordanTableConfig1.data.push(item);
           });
+        } else {
+          this.$Message.warning(data.message);
         }
       });
     },
@@ -2059,16 +2011,12 @@ export default {
         this.$Message.warning(window.vmI18n.t('modalTips.t3'));
         return;
       }
-      const param = {
+      const data = {
         objid: this.selectId,
         start: this.jordanTableConfig2.current === undefined ? 1 : this.jordanTableConfig2.current,
         count: this.jordanTableConfig2.pageSize === undefined ? 1 : this.jordanTableConfig2.pageSize
       };
-      axios({
-        url: '/p/cs/product/skuGroupDetailSearch',
-        method: 'post',
-        data: param
-      }).then(res => {
+      this.service.commodityCenter.skuGroupDetailSearch(data).then(res => {
         this.jordanTableConfig2.loading = false;
         const data = res.data;
         if (data.code === 0) {
@@ -2101,15 +2049,12 @@ export default {
     },
     // 初始化数据
     IniData() {
-      axios({
-        url: '/p/cs/product/skuGroupEditorSearch',
-        method: 'post',
-        data: {
-          objid: this.objid,
-          pageNum: this.jordanTableConfig1.current,
-          pageSize: this.jordanTableConfig1.pageSize
-        }
-      }).then(res => {
+      const data = {
+        objid: this.objid,
+        pageNum: this.jordanTableConfig1.current,
+        pageSize: this.jordanTableConfig1.pageSize
+      };
+      this.service.commodityCenter.skuGroupEditorSearch(data).then(res => {
         const data = res.data;
         if (data.code === 0) {
           if (!data.data) return;
@@ -2134,6 +2079,8 @@ export default {
             this.jordanTableConfig1.businessFormConfig.formData = [];
             this.jordanTableConfig2.businessFormConfig.formData = [];
           }
+        } else {
+          this.$Message.warning(data.message);
         }
       });
     },

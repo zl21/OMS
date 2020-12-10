@@ -11,5 +11,4 @@ export default {
   skuPage: params => network.post('/p/cs/product/skuPage', params), // 触发分页
   skuGroupDetailSearch: params => network.post('/p/cs/product/skuGroupDetailSearch', params), // 分页请求数据
   skuGroupEditorSearch: params => network.post('/p/cs/product/skuGroupEditorSearch', params), // 初始化数据
-  skuQuery: params => network.post('/p/cs/skuQuery', params), // 表单检索
 };
