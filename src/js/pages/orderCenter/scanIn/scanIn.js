@@ -369,6 +369,8 @@ export default {
               }
             }
           });
+        } else {
+          this.$Message.warning(res.data.message);
         }
       });
     },
@@ -1319,8 +1321,6 @@ export default {
                   // }
                   this.service.orderCenter
                     .saveScanIncoming(a)
-                    // this.$network
-                    //   .post('/api/cs/oc/oms/v1/saveScanIncoming', a)
                     .then(res => {
                       console.log(res);
                       if (res.data.code === 0) {

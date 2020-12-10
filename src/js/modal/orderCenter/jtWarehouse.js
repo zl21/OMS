@@ -242,6 +242,8 @@ export default {
           tem.label = tem.limitdesc;
         });
         self.warehouseManagementFromConfig.formData[3].options = arr;
+      } else {
+        this.$Message.warning(res.data.message);
       }
     },
   },

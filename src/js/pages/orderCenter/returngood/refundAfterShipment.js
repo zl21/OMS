@@ -1160,8 +1160,6 @@ export default {
       data.AfSend = AfSend;
       data.AfSendItem = AfSendItem;
       this.service.orderCenter.saveAfterDeliver(data)
-      // this.$network
-      //   .post("/api/cs/oc/oms/v1/saveAfterDeliver", data)
         .then((res) => {
           if (res.data.code == 0) {
             self.$Message.success(res.data.message);
@@ -1412,8 +1410,6 @@ export default {
         });
         data.OcBReturnAfSendItem = OcBReturnAfSendItem;
         this.service.orderCenter.saveAfterDeliverItem(data)
-        // this.$network
-        //   .post('/api/cs/oc/oms/v1/saveAfterDeliverItem', data)
           .then((res) => {
             if (res.data.code == 0) {
               self.$Message.success(res.data.message);
@@ -1485,8 +1481,6 @@ export default {
             });
             data.AfSendItemIds = arr;
             this.service.orderCenter.deleteAfterDeliverItem(data)
-            // this.$network
-            //   .post('/api/cs/oc/oms/v1/deleteAfterDeliverItem', data)
               .then((res) => {
                 console.log(res);
                 if (res.data.code == 0) {
@@ -1522,8 +1516,6 @@ export default {
       const self = this;
       const query = { ID: self.$route.params.customizedModuleId };
       self.service.orderCenter.copyAfterDeliver(query)
-      // self.$network
-      //   .post('/api/cs/oc/oms/v1/copyAfterDeliver', query)
         .then((res) => {
           console.log(res);
           if (res.data.code == 0) {
@@ -1769,8 +1761,6 @@ export default {
                                             fixedcolumns: {},
                                           }));
       this.service.orderCenter.objectTableItem(formdata)
-      // this.$network
-      //   .post(this.$httpApi.order.returnTypeItemquery, params)
         .then((res) => {
           const resData = res.data;
           if (resData.code === 0) {
