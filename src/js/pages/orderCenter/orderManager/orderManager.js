@@ -2096,7 +2096,7 @@ export default {
                         });
                     },
                     'on-input-value-change': e => {
-                      this.dropList.filter(item => item.label == '下单店铺')[0].componentAttribute.AutoData = [{ ID: '257', Label: '测试' }];
+                      this.dropList.filter(item => item.label == '下单店铺')[0].componentAttribute.AutoData = [{ ID: '257', Label: '测试' }, { ID: '258', Label: '测试1' }, { ID: '259', Label: '测试2' }];
                     }
                   }
                 };

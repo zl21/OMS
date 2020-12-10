@@ -68,7 +68,7 @@
     "@burgeon/business-components": "^1.0.25",
     "@burgeon/internationalization": "^1.0.9",
     "@burgeon/oms-theme": "^1.0.3",
-    "@syman/ark-ui": "1.1.6",
+    "@syman/ark-ui": "^1.1.4",
     "@syman/burgeon-r3": "1.3.24",
     "@syman/burgeon-r3-components": "1.0.14",
     "ag-grid": "^17.1.1",
