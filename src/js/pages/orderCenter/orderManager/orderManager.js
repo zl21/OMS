@@ -2025,7 +2025,8 @@ export default {
                       row: []
                     },
                     pageSize: 10,
-                    AutoData: []
+                    AutoData: [],
+                    hidecolumns: ['ID']
                   }, // 组件属性
                   componentEvent: {
                     'on-popper-show': () => {
@@ -2093,6 +2094,9 @@ export default {
                           dropList[index].componentAttribute.data = res.data.datas;
                           dropList[index].componentAttribute.totalRowCount = res.data.datas.totalRowCount;
                         });
+                    },
+                    'on-input-value-change': e => {
+                      this.dropList.filter(item => item.label == '下单店铺')[0].componentAttribute.AutoData = [{ ID: '257', Label: '测试' }];
                     }
                   }
                 };
@@ -2315,13 +2319,13 @@ export default {
     // DropDownSelectFilter禁止用户输入
     onDropChange(value) {
       // console.log('onDropChange::', value);
-      if (value.type === 'DropDownSelectFilter') {
-        this.$nextTick(()=>{
-          const input = document.querySelector('.ark-integrate-search-filter-container').querySelector('input');
-          input.setAttribute('disabled', true);
-          input.classList.add('forceWhite');
-        });
-      }
+      // if (value.type === 'DropDownSelectFilter') {
+      //   this.$nextTick(()=>{
+      //     const input = document.querySelector('.ark-integrate-search-filter-container').querySelector('input');
+      //     input.setAttribute('disabled', true);
+      //     input.classList.add('forceWhite');
+      //   });
+      // }
     },
     // 清除某个检索项值
     clearItem() {
