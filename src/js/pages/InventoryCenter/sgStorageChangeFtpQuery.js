@@ -248,7 +248,7 @@ export default {
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
       const {
-        data: { data, code }
+        data: { data, code, message }
       } = await this.service.inventoryCenter.getChannelStorageFtpQuery(fromdata);
       _this.jordanTableConfig.loading = false;
       _this.returnSelectData = [];
@@ -261,6 +261,7 @@ export default {
       } else {
         _this.jordanTableConfig.data = [];
         _this.jordanTableConfig.total = 0;
+        _this.$Message.warning(message);
       }
     },
     oneObjs() {},

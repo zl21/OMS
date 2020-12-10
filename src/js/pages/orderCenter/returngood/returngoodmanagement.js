@@ -3255,7 +3255,7 @@ export default {
       const fromdata = new FormData();
       fromdata.append('table', 'OC_B_RETURN_ORDER');
       fromdata.append('objid', -1);
-      _this.service.orderCenter.getObject(fromdata).then(res => {
+      _this.service.common.getObject(fromdata).then(res => {
         if (res.data.code == 0) {
           this.information.formData.forEach(value => {
             // 退款原因
@@ -3276,6 +3276,8 @@ export default {
               }
             }
           });
+        } else {
+          this.$Message.warning(res.data.message);
         }
       });
     },

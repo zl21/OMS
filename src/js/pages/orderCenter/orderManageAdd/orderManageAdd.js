@@ -1241,8 +1241,7 @@ export default {
     const fromdata = new FormData();
     fromdata.append('table', 'OC_B_ORDER');
     fromdata.append('objid', -1);
-    self.service.orderCenter.getObject(fromdata)
-      // self.$network.post('/p/cs/getObject', fromdata)
+    self.service.common.getObject(fromdata)
       .then((res) => {
         res.data.data.addcolums.forEach((item) => {
           if (item.parentdesc === '基本信息') {

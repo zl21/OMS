@@ -5,12 +5,12 @@ import qs from 'qs';
 const { network } = R3;
 
 export default {
+  // 详情页数据查询接口。共用于：inventoryCenter、orderCenter
   getObject: params => network.post('/p/cs/getObject', params),
   queryPhyWareHouseList: params => network.post('/p/cs/queryPhyWareHouseList', params),
   selectLimitGroups: params => network.post('/p/cs/selectLimitGroups', params),
   objectTableItem: params => network.post('/p/cs/objectTableItem', params),
   saveWarehouseLogistics: params => network.post('/p/cs/saveWarehouseLogistics', params),
-  // getWarehouseLogisticsTree: params => network.post('/p/cs/getWarehourseByShopId', params),
   getWarehouseLogisticsTree: params => network.post('/p/cs/getWarehouseLogisticsTree', params),
   getLogisticsRankResultTable: params => network.post('/p/cs/getLogisticsRankResultTable', params),
   getLogisticsLikeRankResultTable: params => network.post('/p/cs/getLogisticsLikeRankResultTable', params),
