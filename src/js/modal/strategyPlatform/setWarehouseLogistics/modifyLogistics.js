@@ -31,7 +31,7 @@ export default {
         data: [], // 数据配置
         pageShow: false, // 控制分页是否显示
         loading: false,
-        height: 358, // 表格高度
+        height: 338, // 表格高度
         indexColumn: true, // 是否显示序号
         isShowSelection: true, // 是否显示checkedbox
         border: true // 是否显示纵向边框
@@ -100,7 +100,7 @@ export default {
           ST_C_WAREHOUSE_LOGISTICS_ITEM: _this.selectData,
           ST_C_WAREHOUSE_LOGISTICS_RANK_RESULT: []
         },
-        objid: this.$route.query.id
+        objid: _this.componentData.id
       };
       fromdata.append('param', JSON.stringify(param));
       const res = await this.service.common.saveWarehouseLogistics(fromdata);
@@ -108,6 +108,7 @@ export default {
         _this.$parent.$parent.$parent.getTreeData();
         _this.$parent.$parent.$parent.provinceSynchronous();
         _this.$parent.$parent.closeConfirm();
+        _this.$Message.success(res.data.data.message);
       } else {
         const err = res.data.data.message || '设置失败';
         _this.$Message.error(err);

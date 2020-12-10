@@ -2723,8 +2723,7 @@ export default {
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
 
-      self.service.orderCenter
-        .queryOrderList(fromdata)
+      self.service.common.queryOrderList(fromdata)
         .then(res => {
           self.agTableConfig.agLoading = false;
           if (res.data.code === 0) {

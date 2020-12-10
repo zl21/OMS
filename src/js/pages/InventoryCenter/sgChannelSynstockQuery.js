@@ -403,12 +403,7 @@
         fromdata.append('objid', -1);
         return new Promise(resolve => {
           let optionData = [];
-          this.service.inventoryCenter.getObject(fromdata)
-            //   axios({
-            //     url: '/p/cs/getObject',
-            //     method: 'post',
-            //     data: fromdata
-            //   })
+          this.service.common.getObject(fromdata)
             .then(res => {
               const selectData = res.data.data.addcolums;
               selectData.forEach(item => {
@@ -486,11 +481,6 @@
         const fromdata = new FormData();
         fromdata.append('param', JSON.stringify(param));
         this.service.inventoryCenter.getChannelSynstockQuery(fromdata)
-          // axios({
-          //   url: '/p/cs/getChannelSynstockQuery',
-          //   method: 'post',
-          //   data: fromdata
-          // })
           .then(res => {
             _this.jordanTableConfig.loading = false;
             _this.returnSelectData = [];
@@ -505,7 +495,8 @@
             } else {
               _this.jordanTableConfig.data = [];
               _this.jordanTableConfig.total = 0;
-            }
+              _this.$Message.warning(res.data.message);
+          }
           });
       },
       oneObjs(e) { },
@@ -562,13 +553,7 @@
             ids.push(_this.returnSelectData[i].ID);
           }
           const idList = { idList: ids };
-          this.service.inventoryCenter.exportPayableAdjustment(idList)
-            //   axios({
-            //     url: '/p/cs/exportPayableAdjustment',
-            //     method: 'post',
-            //     cancelToken: true,
-            //     data: idList
-            //   })
+          this.service.common.exportPayableAdjustment(idList)
             .then(res => {
               if (res.data.code === 0 && res.data.data !== null) {
                 const mes = res.data.message || '导出成功！';
@@ -607,13 +592,7 @@
           start: _this.jordanTableConfig.current,
           count: 999999
         };
-        this.service.inventoryCenter.exportPayableAdjustment(Object.assign(param, _this.formConfig.formValue))
-          // axios({
-          //   url: '/p/cs/exportPayableAdjustment',
-          //   method: 'post',
-          //   cancelToken: true,
-          //   data: Object.assign(param, _this.formConfig.formValue)
-          // })
+        this.service.common.exportPayableAdjustment(Object.assign(param, _this.formConfig.formValue))
           .then(res => {
             if (res.data.code === 0 && res.data.data !== null) {
               const mes = res.data.message || '导出成功！';

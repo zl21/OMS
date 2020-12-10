@@ -5,12 +5,12 @@ import qs from 'qs';
 const { network } = R3;
 
 export default {
+  // 详情页数据查询接口。共用于：inventoryCenter、orderCenter
   getObject: params => network.post('/p/cs/getObject', params),
   queryPhyWareHouseList: params => network.post('/p/cs/queryPhyWareHouseList', params),
   selectLimitGroups: params => network.post('/p/cs/selectLimitGroups', params),
   objectTableItem: params => network.post('/p/cs/objectTableItem', params),
   saveWarehouseLogistics: params => network.post('/p/cs/saveWarehouseLogistics', params),
-  // getWarehouseLogisticsTree: params => network.post('/p/cs/getWarehourseByShopId', params),
   getWarehouseLogisticsTree: params => network.post('/p/cs/getWarehouseLogisticsTree', params),
   getLogisticsRankResultTable: params => network.post('/p/cs/getLogisticsRankResultTable', params),
   getLogisticsLikeRankResultTable: params => network.post('/p/cs/getLogisticsLikeRankResultTable', params),
@@ -79,6 +79,11 @@ export default {
   cprolikequery: params => network.post('/p/cs/cprolikequery', params),
   cgroupsquery: params => network.get(`/p/cs/cgroupsquery?${qs.stringify(params)}`),
   getCopyTargetGroups: params => network.get(`/p/cs/getCopyTargetGroups?${qs.stringify(params)}`),
+  // 导出接口。共用于：financeCenter、inventoryCenter
+  exportPayableAdjustment: params => network.post('/p/cs/exportPayableAdjustment', params),
+  // 查询接口。共用于：financeCenter、orderCenter
+  queryOrderList: params => network.post('/api/cs/oc/oms/v1/queryOrderList', params),
+
   // 通用接口下载
   /**
    * 经销订单下载 分销商订单下载 /p/cs/orderDownload

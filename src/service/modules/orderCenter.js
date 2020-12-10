@@ -15,7 +15,6 @@ export default {
   reallocateWarehouse: params => network.post('/api/cs/oc/oms/v1/reallocateWarehouse', params), // 配送仓库
   getOrderList: params => network.post('/api/cs/oc/oms/v1/getOrderList', params),
   doBatchReturnOrder: params => network.post('/api/cs/oc/oms/v1/doBatchReturnOrder', params), // 批量退单
-  queryOrderList: params => network.post('/api/cs/oc/oms/v1/queryOrderList', params),
   exportOcBOrder: params => network.post('/api/cs/oc/oms/v1/exportOcBOrder', params), // 导出
   auditOrderReserve: params => network.post('/api/cs/oc/oms/v1/auditOrderReserve', params), // 反审核
   checkAddOrderInvoicing: params => network.post('/api/cs/oc/oms/v1/checkAddOrderInvoicing', params),
@@ -36,7 +35,6 @@ export default {
   /**
    * 零售发货单 - 详情
    */
-  getObject: params => network.post('/p/cs/getObject', params),
   billCopy: params => network.post('/api/cs/oc/oms/v1/billCopy', params), // 丢单赋值或复制订单赋值
   getOrderDetailList: params => network.post('/api/cs/oc/oms/v1/getOrderDetailList', params), // 获取订单详情
   saveBill: params => network.post('/api/cs/oc/oms/v1/saveBill', params), // 保存

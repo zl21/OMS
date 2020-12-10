@@ -248,7 +248,7 @@ export default {
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
       const {
-        data: { data, code }
+        data: { data, code, message }
       } = await this.service.inventoryCenter.getChannelStorageFtpQuery(fromdata);
       _this.jordanTableConfig.loading = false;
       _this.returnSelectData = [];
@@ -261,6 +261,7 @@ export default {
       } else {
         _this.jordanTableConfig.data = [];
         _this.jordanTableConfig.total = 0;
+        _this.$Message.warning(message);
       }
     },
     oneObjs() {},
@@ -314,12 +315,8 @@ export default {
           ids.push(_this.returnSelectData[i].ID);
         }
         const idList = { idList: ids };
-        axios({
-          url: '/p/cs/exportPayableAdjustment',
-          method: 'post',
-          // cancelToken: true,
-          data: idList
-        }).then(res => {
+        this.service.common.exportPayableAdjustment(idList)
+          .then(res => {
           if (res.data.code === 0 && res.data.data !== null) {
             const mes = res.data.message || '导出成功！';
             _this.$Message.success(mes);
@@ -360,12 +357,8 @@ export default {
         start: _this.jordanTableConfig.current,
         count: 999999
       };
-      axios({
-        url: '/p/cs/exportPayableAdjustment',
-        method: 'post',
-        // cancelToken: true,
-        data: Object.assign(param, _this.formConfig.formValue)
-      }).then(res => {
+      this.service.common.exportPayableAdjustment(Object.assign(param, _this.formConfig.formValue))
+        .then(res => {
         if (res.data.code === 0 && res.data.data !== null) {
           const mes = res.data.message || '导出成功！';
           _this.$Message.success(mes);

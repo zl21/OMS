@@ -941,11 +941,7 @@ export default {
     //   let fromdata = new FormData();
     //   fromdata.append("table", "OC_B_JD_REFUND_IN");
     //   fromdata.append("objid", -1);
-    //   axios({
-    //     url: "/p/cs/getObject",
-    //     method: "post",
-    //     data: fromdata
-    //   }).then(res => {
+    //   _this.service.common.getObject(fromdata).then(res => {
     //     this.information.formData.forEach(value => {
     //       if (value.label === "特殊处理类型") {
     //         res.data.data.addcolums.forEach((item) => {
