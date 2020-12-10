@@ -1,17 +1,23 @@
-
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessLabel from 'professionalComponents/businessLabel';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import jordanModal from 'professionalComponents/businessDialog';
-import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
-import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
+import {
+  buttonPermissionsMixin
+} from '@/assets/js/mixins/buttonPermissions';
+import {
+  dataAccessMixin
+} from '@/assets/js/mixins/dataAccess';
 
 import comUtils from '@/assets/js/__utils__/common.js';
 
 const areaList = require('@/assets/js/address/area-list');
-const { parse, parseArea } = require('@/assets/js/address/address-parse');
+const {
+  parse,
+  parseArea
+} = require('@/assets/js/address/address-parse');
 
 parseArea(areaList);
 export default {
@@ -32,7 +38,7 @@ export default {
       if (/^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/.test(pNumver)) {
         return callback();
       }
-        return callback(new Error('手机号格式不正确!'));
+      return callback(new Error('手机号格式不正确!'));
     };
     return {
       vmI18n: window.vmI18n,
@@ -55,8 +61,7 @@ export default {
         componentData: {},
       }, // 退单编号查询
       ORDER_TYPE: '', // 丢单的值
-      isgift: [
-        {
+      isgift: [{
           label: window.vmI18n.t('common.yes'),
           value: '1',
         },
@@ -146,13 +151,11 @@ export default {
           statsize: -1,
           type: 'STRING', // 这个是后台用的
           valuedata: '', // 这个是选择的值
-          precolnameslist: [
-            {
-              premtype: 'CP_C_SHOP_PERMISSION_ID',
-              refcol: 'ID',
-              iswrite: 'true',
-            },
-          ],
+          precolnameslist: [{
+            premtype: 'CP_C_SHOP_PERMISSION_ID',
+            refcol: 'ID',
+            iswrite: 'true',
+          }, ],
         },
       },
 
@@ -161,8 +164,7 @@ export default {
       btnConfig: {
         typeAll: 'error',
         loading: false,
-        buttons: [
-          {
+        buttons: [{
             text: window.vmI18n.t('btn.save'), // 按钮文本
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -198,15 +200,15 @@ export default {
               // 基本信息模块下拉单选数据取值
               self.formConfig.formData.forEach((item) => {
                 if (
-                  item.itemdata
-                  && item.itemdata.name === self.vmI18n.t('form_label.orderShop')
+                  item.itemdata &&
+                  item.itemdata.name === self.vmI18n.t('form_label.orderShop')
                 ) {
                   ocBorderDto.CP_C_SHOP_TITLE = item.itemdata.valuedata;
                   ocBorderDto.CP_C_SHOP_ID = item.itemdata.pid;
                 } else if (
-                  item.itemdata
-                  && item.itemdata.name
-                    === self.vmI18n.t('form_label.distribution_logistics')
+                  item.itemdata &&
+                  item.itemdata.name ===
+                  self.vmI18n.t('form_label.distribution_logistics')
                 ) {
                   ocBorderDto.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
                   ocBorderDto.CP_C_LOGISTICS_ID = item.itemdata.pid;
@@ -215,23 +217,23 @@ export default {
               // 收货人信息下拉单选数据取值 收货人省 收货人市 下单店铺
               self.formConfig1.formData.forEach((item) => {
                 if (
-                  item.itemdata
-                  && item.itemdata.name
-                    === self.vmI18n.t('form_label.consignee_province')
+                  item.itemdata &&
+                  item.itemdata.name ===
+                  self.vmI18n.t('form_label.consignee_province')
                 ) {
                   ocBorderDto.CP_C_REGION_PROVINCE_ENAME = item.itemdata.valuedata;
                   ocBorderDto.CP_C_REGION_PROVINCE_ID = item.itemdata.pid;
                 } else if (
-                  item.itemdata
-                  && item.itemdata.name
-                    === self.vmI18n.t('form_label.consignee_city')
+                  item.itemdata &&
+                  item.itemdata.name ===
+                  self.vmI18n.t('form_label.consignee_city')
                 ) {
                   ocBorderDto.CP_C_REGION_CITY_ENAME = item.itemdata.valuedata;
                   ocBorderDto.CP_C_REGION_CITY_ID = item.itemdata.pid;
                 }
                 if (
-                  item.itemdata
-                  && item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
+                  item.itemdata &&
+                  item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
                 ) {
                   ocBorderDto.CP_C_REGION_AREA_ENAME = item.itemdata.valuedata;
                   ocBorderDto.CP_C_REGION_AREA_ID = item.itemdata.pid;
@@ -244,7 +246,7 @@ export default {
               };
               const copyID = self.$route.query;
               // 新增订单走新保存（去掉草稿模式）
-              
+
               if (self.$route.params.customizedModuleId === '-1' && !(copyID.orderCopy || copyID.copyOrder)) {
                 self.saveAdd(data);
                 return;
@@ -276,8 +278,7 @@ export default {
         ],
       },
       formConfig: {
-        formData: [
-          {
+        formData: [{
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_SHOP_TITLE',
@@ -383,8 +384,8 @@ export default {
               const optionsArr = _this.formConfig.formData[8].options;
               for (let i = 0; i < optionsArr.length; i++) {
                 if (
-                  optionsArr[i].value
-                  === _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID
+                  optionsArr[i].value ===
+                  _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID
                 ) {
                   _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = optionsArr[i].label;
                   return;
@@ -458,17 +459,32 @@ export default {
         },
         // 表单非空提示
         ruleValidate: {
-          SOURCE_CODE: [{ required: true, message: ' ', trigger: 'blur' }],
-          COD_AMT: [{ required: true, message: ' ', trigger: 'blur' }], // 代收金额
+          SOURCE_CODE: [{
+            required: true,
+            message: ' ',
+            trigger: 'blur'
+          }],
+          COD_AMT: [{
+            required: true,
+            message: ' ',
+            trigger: 'blur'
+          }], // 代收金额
           // USER_NICK: [{ required: true, message: " ", trigger: "blur" }],
-          PAY_TYPE: [{ required: true, message: ' ', trigger: 'blur' }],
-          CP_C_PHY_WAREHOUSE_ID: [{ required: true, message: ' ', trigger: 'blur' }],
+          PAY_TYPE: [{
+            required: true,
+            message: ' ',
+            trigger: 'blur'
+          }],
+          CP_C_PHY_WAREHOUSE_ID: [{
+            required: true,
+            message: ' ',
+            trigger: 'blur'
+          }],
         },
       },
       // 表单二
       formConfig1: {
-        formData: [
-          {
+        formData: [{
             style: 'input',
             label: window.vmI18n.t('form_label.match_smart_address'), // 智能匹配地址
             value: 'site',
@@ -479,12 +495,12 @@ export default {
               const self = this;
               self.address = parse(self.formConfig1.formValue.site);
               if (
-                self.address.addr == ''
-                || self.address.area == ''
-                || self.address.city == ''
-                || self.address.name == ''
-                || self.address.mobile == ''
-                || self.address.province == ''
+                self.address.addr == '' ||
+                self.address.area == '' ||
+                self.address.city == '' ||
+                self.address.name == '' ||
+                self.address.mobile == '' ||
+                self.address.province == ''
               ) {
                 // "请填入完整信息,如:XX,17788888888,上海上海市闵行区XXXXXXXXXXX"
                 self.$Message.warning(self.vmI18n.t('modalTips.f9'));
@@ -648,15 +664,26 @@ export default {
         },
         // 表单非空提示
         ruleValidate: {
-          RECEIVER_NAME: [{ required: true, message: ' ', trigger: 'blur' }],
-          RECEIVER_ADDRESS: [{ required: true, message: ' ', trigger: 'blur' }],
-          RECEIVER_MOBILE: [{ validator: validatePhoneNumber, required: true, trigger: 'blur' }],
+          RECEIVER_NAME: [{
+            required: true,
+            message: ' ',
+            trigger: 'blur'
+          }],
+          RECEIVER_ADDRESS: [{
+            required: true,
+            message: ' ',
+            trigger: 'blur'
+          }],
+          RECEIVER_MOBILE: [{
+            validator: validatePhoneNumber,
+            required: true,
+            trigger: 'blur'
+          }],
         },
       },
       // 表单三
       formConfig2: {
-        formData: [
-          {
+        formData: [{
             style: 'input',
             label: window.vmI18n.t('form_label.buyerNotes'), // 买家备注
             value: 'BUYER_MESSAGE',
@@ -688,8 +715,7 @@ export default {
             Num: '',
             gbCode: '',
           },
-          formData: [
-            {
+          formData: [{
               label: window.vmI18n.t('table_label.productNo'), // 商品编码
               style: 'dimSearch',
               width: '6',
@@ -710,8 +736,8 @@ export default {
                 };
                 fromdata.append('param', JSON.stringify(params));
                 this.service.common.screenresult(fromdata)
-                // this.$network
-                //   .post("/p/cs/screenresult", fromdata)
+                  // this.$network
+                  //   .post("/p/cs/screenresult", fromdata)
                   .then((res) => {
                     if (res.data.code === 0) {
                       const dimList = _this.jordanTableConfig.businessFormConfig.formData;
@@ -772,11 +798,11 @@ export default {
                 const _this = this;
                 _this.jordanTableConfig.businessFormConfig.formValue.dimData = val.trim();
                 this.service.common.skuQuery({
-                  isBlur: 'Y', // N为精确匹配
-                  psCSku: {
-                    ECODE: val.trim(),
-                  },
-                })
+                    isBlur: 'Y', // N为精确匹配
+                    psCSku: {
+                      ECODE: val.trim(),
+                    },
+                  })
                   .then((res) => {
                     if (res.status === 200) {
                       const data = res.data.data.data;
@@ -823,8 +849,7 @@ export default {
         isSearchText: true,
         isShowDeleteDetailBtn: true, // 控制是否显示删除明细
         // isSearchText为false的情况下使用 搜索框list
-        searchSelectList: [
-          {
+        searchSelectList: [{
             value: '1',
             label: 'aa',
           },
@@ -842,8 +867,7 @@ export default {
         total: 1, // 设置总条数
         pageSizeOpts: [10, 30, 45, 60], // 每页条数切换的配置
         pageSize: 10, // 每页条数
-        columns: [
-          {
+        columns: [{
             key: 'selection',
             type: 'selection',
             width: '50',
@@ -878,8 +902,7 @@ export default {
             width: 100,
             render: (h, params) => h('span', [
               h(
-                'Poptip',
-                {
+                'Poptip', {
                   props: {
                     placement: 'bottom',
                     transfer: true,
@@ -888,8 +911,7 @@ export default {
                 },
                 [
                   h(
-                    'span',
-                    {
+                    'span', {
                       style: {
                         width: '100px',
                         'white-space': 'nowrap',
@@ -900,8 +922,7 @@ export default {
                     params.row.PS_C_PRO_ENAME
                   ),
                   h(
-                    'span',
-                    {
+                    'span', {
                       slot: 'content',
                     },
                     params.row.PS_C_PRO_ENAME
@@ -928,8 +949,7 @@ export default {
             render: (h, params) => {
               const self = this;
               return h(
-                'div',
-                {
+                'div', {
                   style: {
                     width: '100%',
                     display: 'flex',
@@ -978,8 +998,7 @@ export default {
             render: (h, params) => {
               const self = this;
               return h(
-                'div',
-                {
+                'div', {
                   style: {
                     width: '100%',
                     display: 'flex',
@@ -989,8 +1008,7 @@ export default {
                 },
                 [
                   h(
-                    'Input',
-                    {
+                    'Input', {
                       class: 'isNone',
                       style: {
                         width: '150',
@@ -1030,8 +1048,7 @@ export default {
             render: (h, params) => {
               const self = this;
               return h(
-                'div',
-                {
+                'div', {
                   style: {
                     width: '100%',
                     display: 'flex',
@@ -1078,8 +1095,7 @@ export default {
             key: 'IS_GIFT',
             dataAcessKey: 'IS_GIFT',
             render: (h, params) => h(
-              'Select',
-              {
+              'Select', {
                 style: {
                   width: '150px',
                 },
@@ -1123,13 +1139,11 @@ export default {
         totalData: [], // 合计
       },
       // tab切换配置
-      labelList: [
-        {
-          label: window.vmI18n.t('panel_label.order_detailed'), // 订单明细
-          value: '1',
-          isShow: true,
-        },
-      ],
+      labelList: [{
+        label: window.vmI18n.t('panel_label.order_detailed'), // 订单明细
+        value: '1',
+        isShow: true,
+      }, ],
       labelDefaultValue: '1', // 设置tab默认值
       orderNo: {
         refFuns: 'confirmFun',
@@ -1228,7 +1242,7 @@ export default {
     fromdata.append('table', 'OC_B_ORDER');
     fromdata.append('objid', -1);
     self.service.orderCenter.getObject(fromdata)
-    // self.$network.post('/p/cs/getObject', fromdata)
+      // self.$network.post('/p/cs/getObject', fromdata)
       .then((res) => {
         res.data.data.addcolums.forEach((item) => {
           if (item.parentdesc === '基本信息') {
@@ -1260,7 +1274,9 @@ export default {
       } else {
         formData.append(
           'param',
-          JSON.stringify({ shopId: _this.formConfig.formData[0].itemdata.pid })
+          JSON.stringify({
+            shopId: _this.formConfig.formData[0].itemdata.pid
+          })
         );
       }
       if (_this.formConfig.formData[0].itemdata.pid) {
@@ -1376,14 +1392,14 @@ export default {
         return;
       }
       self.service.orderCenter.billCopy({
-        IDS: [copyID.id],
-        TYPE: type,
-      })
-      // self.$network
-      //   .post('/p/cs/billCopy', {
-      //     IDS: [copyID.id],
-      //     TYPE: type,
-      //   })
+          IDS: [copyID.id],
+          TYPE: type,
+        })
+        // self.$network
+        //   .post('/p/cs/billCopy', {
+        //     IDS: [copyID.id],
+        //     TYPE: type,
+        //   })
         .then((res) => {
           if (res.data.code === 0) {
             const obj = Object.assign(
@@ -1404,16 +1420,16 @@ export default {
     getOrderDatail(copyID) {
       const self = this;
       self.service.orderCenter.getOrderDetailList({
-        id: copyID.id,
-        currentPage: 1,
-        pageSize: 1000,
-      })
-      // self.$network
-      //   .post('/p/cs/getOrderDetailList', {
-      //     id: copyID.id,
-      //     currentPage: 1,
-      //     pageSize: 1000,
-      //   })
+          id: copyID.id,
+          currentPage: 1,
+          pageSize: 1000,
+        })
+        // self.$network
+        //   .post('/p/cs/getOrderDetailList', {
+        //     id: copyID.id,
+        //     currentPage: 1,
+        //     pageSize: 1000,
+        //   })
         .then((res) => {
           if (res.data.code === 0) {
             self.jordanTableConfig.data = res.data.data.records;
@@ -1428,13 +1444,11 @@ export default {
               );
               qty += item.QTY;
             });
-            self.jordanTableConfig.totalData = [
-              {
-                selection: `${self.vmI18n.t('other.total')}:`, // 合计
-                REAL_AMT: amt,
-                QTY: qty,
-              },
-            ];
+            self.jordanTableConfig.totalData = [{
+              selection: `${self.vmI18n.t('other.total')}:`, // 合计
+              REAL_AMT: amt,
+              QTY: qty,
+            }, ];
           } else {
             self.$Message.warning(res.data.message);
           }
@@ -1455,7 +1469,7 @@ export default {
             self.isShowFromLoading = true;
             self.btnConfig.loading = true;
             self.service.orderCenter.saveBill(data)
-            // self.$network.post('/p/cs/saveBill', data)
+              // self.$network.post('/p/cs/saveBill', data)
               .then((res) => {
                 self.isShowFromLoading = false;
                 if (res.data.code === 0) {
@@ -1476,7 +1490,7 @@ export default {
                   self.$destroy();
                 } else {
                   self.btnConfig.loading = false;
-                // 保存未成功
+                  // 保存未成功
                   self.$Message.warning(
                     res.data.message || self.vmI18n.t('modalTips.g2')
                   );
@@ -1489,7 +1503,7 @@ export default {
         self.isShowFromLoading = true;
         self.btnConfig.loading = true;
         self.service.orderCenter.saveBill(data)
-        // self.$network.post('/p/cs/saveBill', data)
+          // self.$network.post('/p/cs/saveBill', data)
           .then((res) => {
             self.isShowFromLoading = false;
             if (res.data.code === 0) {
@@ -1510,7 +1524,7 @@ export default {
               self.$destroy();
             } else {
               self.btnConfig.loading = false;
-            // 保存未成功
+              // 保存未成功
               self.$Message.warning(
                 res.data.message || self.vmI18n.t('modalTips.g2')
               );
@@ -1535,7 +1549,7 @@ export default {
           onOk: () => {
             self.isShowFromLoading = true;
             self.service.orderCenter.saveBill(data)
-            // self.$network.post('/p/cs/saveBill', data)
+              // self.$network.post('/p/cs/saveBill', data)
               .then((res) => {
                 self.isShowFromLoading = false;
                 if (res.data.code === 0) {
@@ -1571,7 +1585,7 @@ export default {
       } else {
         self.isShowFromLoading = true;
         self.service.orderCenter.saveBill(data)
-        // self.$network.post('/p/cs/saveBill', data)
+          // self.$network.post('/p/cs/saveBill', data)
           .then((res) => {
             self.isShowFromLoading = false;
             if (res.data.code === 0) {
@@ -1596,7 +1610,7 @@ export default {
               // 销毁当前实例
               self.$destroy();
             } else {
-            // 保存未成功
+              // 保存未成功
               self.$Message.warning(
                 res.data.message || self.vmI18n.t('modalTips.g2')
               );
@@ -1671,14 +1685,12 @@ export default {
         };
         ocBorderItemDto.push(oc); // 保存时将明细里所有数据传给后端
       } else {
-        ocBorderItemDto = [
-          {
-            PS_C_SKU_ECODE: ecode.trim(),
-            QTY: Num.trim(),
-            REAL_AMT: '',
-            IS_GIFT: -1,
-          },
-        ];
+        ocBorderItemDto = [{
+          PS_C_SKU_ECODE: ecode.trim(),
+          QTY: Num.trim(),
+          REAL_AMT: '',
+          IS_GIFT: -1,
+        }, ];
       }
       if (ecode || value) {
         const ocBorderDto = Object.assign(
@@ -1703,15 +1715,15 @@ export default {
         self.formConfig.formData.forEach((item) => {
           // 下单店铺 配送物流 收货人省份 收货人市 收货人区
           if (
-            item.itemdata
-            && item.itemdata.name === self.vmI18n.t('form_label.orderShop')
+            item.itemdata &&
+            item.itemdata.name === self.vmI18n.t('form_label.orderShop')
           ) {
             ocBorderDto.CP_C_SHOP_TITLE = item.itemdata.valuedata;
             ocBorderDto.CP_C_SHOP_ID = item.itemdata.pid;
           } else if (
-            item.itemdata
-            && item.itemdata.name
-              === self.vmI18n.t('form_label.distribution_logistics')
+            item.itemdata &&
+            item.itemdata.name ===
+            self.vmI18n.t('form_label.distribution_logistics')
           ) {
             ocBorderDto.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_LOGISTICS_ID = item.itemdata.pid;
@@ -1719,22 +1731,22 @@ export default {
         }); // 基本信息模块下拉单选数据取值
         self.formConfig1.formData.forEach((item) => {
           if (
-            item.itemdata
-            && item.itemdata.name
-              === self.vmI18n.t('form_label.consignee_province')
+            item.itemdata &&
+            item.itemdata.name ===
+            self.vmI18n.t('form_label.consignee_province')
           ) {
             ocBorderDto.CP_C_REGION_PROVINCE_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_REGION_PROVINCE_ID = item.itemdata.pid;
           } else if (
-            item.itemdata
-            && item.itemdata.name === self.vmI18n.t('form_label.consignee_city')
+            item.itemdata &&
+            item.itemdata.name === self.vmI18n.t('form_label.consignee_city')
           ) {
             ocBorderDto.CP_C_REGION_CITY_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_REGION_CITY_ID = item.itemdata.pid;
           }
           if (
-            item.itemdata
-            && item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
+            item.itemdata &&
+            item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
           ) {
             ocBorderDto.CP_C_REGION_AREA_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_REGION_AREA_ID = item.itemdata.pid;
@@ -1749,7 +1761,7 @@ export default {
           data.orderId = self.$route.query.id;
         }
         self.service.orderCenter.saveBill(data)
-        // self.$network.post('/p/cs/saveBill', data)
+          // self.$network.post('/p/cs/saveBill', data)
           .then((res) => {
             if (res.data.code === 0) {
               if (res.data.data) {
@@ -1760,16 +1772,16 @@ export default {
 
               // 调用查询明细接口
               self.service.orderCenter.getOrderDetailList({
-                id: self.ID,
-                currentPage: 1,
-                pageSize: 1000,
-              })
-              // self.$network
-              //   .post('/p/cs/getOrderDetailList', {
-              //     id: self.ID,
-              //     currentPage: 1,
-              //     pageSize: 1000,
-              //   })
+                  id: self.ID,
+                  currentPage: 1,
+                  pageSize: 1000,
+                })
+                // self.$network
+                //   .post('/p/cs/getOrderDetailList', {
+                //     id: self.ID,
+                //     currentPage: 1,
+                //     pageSize: 1000,
+                //   })
                 .then((result) => {
                   if (result.data.code == '0') {
                     self.jordanTableConfig.data = result.data.data.records;
@@ -1785,13 +1797,11 @@ export default {
                       );
                       qty += item.QTY;
                     });
-                    self.jordanTableConfig.totalData = [
-                      {
-                        selection: `${self.vmI18n.t('other.total')}:`, // 合计
-                        REAL_AMT: amt,
-                        QTY: qty,
-                      },
-                    ];
+                    self.jordanTableConfig.totalData = [{
+                      selection: `${self.vmI18n.t('other.total')}:`, // 合计
+                      REAL_AMT: amt,
+                      QTY: qty,
+                    }, ];
                     // self.$children.$children.refreshData();
                     self.$children
                       .find(item => item.name === 'matrixBox')
@@ -1800,12 +1810,12 @@ export default {
                       self.isCopy = false;
                     }
                   } else {
-                  // 明细查询失败
+                    // 明细查询失败
                     self.$Message.warning(self.vmI18n.t('modalTips.g3'));
                   }
                 });
             } else {
-            // 明细保存失败
+              // 明细保存失败
               self.$Message.warning(
                 res.data.message || self.vmI18n.t('modalTips.g4')
               );
@@ -1863,60 +1873,54 @@ export default {
         psCSku: {
           ECODE: val,
         },
-      })
-      // _this.$network
-      //   .post('/p/cs/skuQuery', {
-      //     isBlur: 'Y', // N为精确匹配
-      //     psCSku: {
-      //       ECODE: val,
-      //     },
-      //   })
-        .then((res) => {
-          if (res.data.code === 0) {
-            const data = [];
-            data.push(res.data.data.data[0]);
-            const cloneArr = [];
-            if (!data.length) { return _this.$Message.error(_this.vmI18n.t('modalTips.g6')); } // 不存在该条码！
-            data.forEach((item) => {
-              cloneArr.push({
-                RESERVE_DECIMAL02: item.tagPrice,
-                PRICE_ACTUAL: item.tagPrice,
-                REAL_AMT: publicMethodsUtil.accMul(item.tagPrice, 1),
-                PS_C_CLR_ENAME: item.colorName,
-                PS_C_SIZE_ENAME: item.sizeName,
-                PS_C_SKU_ECODE: item.ECODE,
-                QTY: 1,
-                ADJUST_AMT: 0,
-                AMT_DISCOUNT: 0,
-                IS_GIFT: item.IS_GIFT,
-                SEX_NAME: item.sexName,
-                PS_C_PRO_ENAME: item.PS_C_PRO_ENAME,
-                PS_C_PRO_ECODE: item.PS_C_PRO_ECODE,
-              });
+      }).then((res) => {
+        if (res.data.code === 0) {
+          const data = [];
+          data.push(res.data.data.data[0]);
+          const cloneArr = [];
+          if (!data.length) {
+            return _this.$Message.error(_this.vmI18n.t('modalTips.g6'));
+          } // 不存在该条码！
+          data.forEach((item) => {
+            cloneArr.push({
+              RESERVE_DECIMAL02: item.tagPrice,
+              PRICE_ACTUAL: item.tagPrice,
+              REAL_AMT: publicMethodsUtil.accMul(item.tagPrice, 1),
+              PS_C_CLR_ENAME: item.colorName,
+              PS_C_SIZE_ENAME: item.sizeName,
+              PS_C_SKU_ECODE: item.ECODE,
+              QTY: 1,
+              ADJUST_AMT: 0,
+              AMT_DISCOUNT: 0,
+              IS_GIFT: item.IS_GIFT,
+              SEX_NAME: item.sexName,
+              PS_C_PRO_ENAME: item.PS_C_PRO_ENAME,
+              PS_C_PRO_ECODE: item.PS_C_PRO_ECODE,
             });
-            if (_this.jordanTableConfig.data.length) {
-              const x = JSON.parse(
-                JSON.stringify(_this.jordanTableConfig.data)
-              );
-              const d = x.find(
-                item => item.PS_C_SKU_ECODE === cloneArr[0].PS_C_SKU_ECODE
-              );
-              if (d) {
-                d.QTY += parseInt(cloneArr[0].QTY);
-                d.REAL_AMT = publicMethodsUtil.accMul(d.PRICE_ACTUAL, d.QTY);
-                _this.jordanTableConfig.data = [...x];
-              } else {
-                _this.jordanTableConfig.data = _this.jordanTableConfig.data.concat(
-                  cloneArr
-                );
-              }
+          });
+          if (_this.jordanTableConfig.data.length) {
+            const x = JSON.parse(
+              JSON.stringify(_this.jordanTableConfig.data)
+            );
+            const d = x.find(
+              item => item.PS_C_SKU_ECODE === cloneArr[0].PS_C_SKU_ECODE
+            );
+            if (d) {
+              d.QTY += parseInt(cloneArr[0].QTY);
+              d.REAL_AMT = publicMethodsUtil.accMul(d.PRICE_ACTUAL, d.QTY);
+              _this.jordanTableConfig.data = [...x];
             } else {
-              _this.jordanTableConfig.data = cloneArr;
+              _this.jordanTableConfig.data = _this.jordanTableConfig.data.concat(
+                cloneArr
+              );
             }
-            _this.jordanTableConfig.businessFormConfig.formValue.dimData = '';
-            _this.totalNum();
+          } else {
+            _this.jordanTableConfig.data = cloneArr;
           }
-        });
+          _this.jordanTableConfig.businessFormConfig.formValue.dimData = '';
+          _this.totalNum();
+        }
+      });
     },
     oneObjs(e) {
       const _this = this;
@@ -1924,8 +1928,8 @@ export default {
         if (item.itemdata) {
           // 发货仓库
           if (
-            item.itemdata.name == e.name
-            && item.itemdata.name == window.vmI18n.t('form_label.delivery_warehouse')
+            item.itemdata.name == e.name &&
+            item.itemdata.name == window.vmI18n.t('form_label.delivery_warehouse')
           ) {
             _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = item.itemdata.pid;
           }
@@ -1996,13 +2000,11 @@ export default {
               );
               qty += item.QTY;
             });
-            self.jordanTableConfig.totalData = [
-              {
-                selection: `${self.vmI18n.t('other.total')}:`, // 合计
-                REAL_AMT: amt,
-                QTY: qty,
-              },
-            ];
+            self.jordanTableConfig.totalData = [{
+              selection: `${self.vmI18n.t('other.total')}:`, // 合计
+              REAL_AMT: amt,
+              QTY: qty,
+            }, ];
           }
         }
       }
@@ -2021,25 +2023,25 @@ export default {
       };
       if (self.ID) {
         self.service.orderCenter.delOrderItem(data)
-        // self.$network.post('/p/cs/delOrderItem', data)
+          // self.$network.post('/p/cs/delOrderItem', data)
           .then((res) => {
             if (res.data.code == 0) {
               self.$Message.success(res.data.message);
               // self.jordanTableConfig.data = arr;
               self.service.orderCenter.getOrderDetailList({
-                id: self.ID,
-                currentPage: 1,
-                pageSize: 1000,
-              })
-              // self.$network
-              //   .post('/p/cs/getOrderDetailList', {
-              //     id: self.ID,
-              //     currentPage: 1,
-              //     pageSize: 1000,
-              //   })
+                  id: self.ID,
+                  currentPage: 1,
+                  pageSize: 1000,
+                })
+                // self.$network
+                //   .post('/p/cs/getOrderDetailList', {
+                //     id: self.ID,
+                //     currentPage: 1,
+                //     pageSize: 1000,
+                //   })
                 .then((result) => {
                   if (result.data.code == '0') {
-                  // 对是否赠品,实物报缺进行映射
+                    // 对是否赠品,实物报缺进行映射
                     result.data.data.records.forEach((item) => {
                       if (item.IS_GIFT === 1) {
                         item.IS_GIFT = self.vmI18n.t('common.yes'); // 是
@@ -2065,13 +2067,11 @@ export default {
                       );
                       qty += item.QTY;
                     });
-                    self.jordanTableConfig.totalData = [
-                      {
-                        selection: `${self.vmI18n.t('other.total')}:`, // 合计
-                        REAL_AMT: amt,
-                        QTY: qty,
-                      },
-                    ];
+                    self.jordanTableConfig.totalData = [{
+                      selection: `${self.vmI18n.t('other.total')}:`, // 合计
+                      REAL_AMT: amt,
+                      QTY: qty,
+                    }, ];
 
                     // 动态添加总条数
                     self.jordanTableConfig.total = result.data.data.total;
@@ -2079,7 +2079,7 @@ export default {
                     self.$Message.warning('明细查询失败!');
                   }
                 });
-            // self.$Message.success(res.data.message);
+              // self.$Message.success(res.data.message);
             } else {
               self.$Message.warning(res.data.message);
             }
@@ -2112,9 +2112,9 @@ export default {
       this.formConfig.formData.forEach((item) => {
         // 下单店铺
         if (
-          item.itemdata
-          && item.itemdata.name === window.vmI18n.t('form_label.orderShop')
-          && !item.itemdata.pid
+          item.itemdata &&
+          item.itemdata.name === window.vmI18n.t('form_label.orderShop') &&
+          !item.itemdata.pid
         ) {
           promptMessage += `${window.vmI18n.t('form_label.orderShop')},`;
         }
@@ -2163,16 +2163,16 @@ export default {
       this.formConfig1.formData.forEach((item) => {
         // 收货人省份 收货人市 收货人地址
         if (
-          item.itemdata
-          && item.itemdata.name
-            === window.vmI18n.t('form_label.consignee_province')
-          && !item.itemdata.pid
+          item.itemdata &&
+          item.itemdata.name ===
+          window.vmI18n.t('form_label.consignee_province') &&
+          !item.itemdata.pid
         ) {
           promptMessage += `${window.vmI18n.t('form_label.consignee_province')},`;
         } else if (
-          item.itemdata
-          && item.itemdata.name === window.vmI18n.t('form_label.consignee_city')
-          && !item.itemdata.pid
+          item.itemdata &&
+          item.itemdata.name === window.vmI18n.t('form_label.consignee_city') &&
+          !item.itemdata.pid
         ) {
           promptMessage += `${window.vmI18n.t('form_label.consignee_city')},`;
         }
@@ -2185,7 +2185,8 @@ export default {
           `${promptMessage}${window.vmI18n.t('modalTips.y1')}`
         );
         return false;
-      } if (isNaN(masterTable.RECEIVER_MOBILE)) {
+      }
+      if (isNaN(masterTable.RECEIVER_MOBILE)) {
         this.$Message.warning('手机号码必须为数字,请修改');
       } else if (masterTable.RECEIVER_MOBILE.length !== 11) {
         this.$Message.warning('手机位数不正确,请修改');
@@ -2216,15 +2217,15 @@ export default {
       self.formConfig.formData.forEach((item) => {
         // 下单店铺 配送物流
         if (
-          item.itemdata
-          && item.itemdata.name === self.vmI18n.t('form_label.orderShop')
+          item.itemdata &&
+          item.itemdata.name === self.vmI18n.t('form_label.orderShop')
         ) {
           item.itemdata.valuedata = data.CP_C_SHOP_TITLE;
           item.itemdata.pid = data.CP_C_SHOP_ID;
         } else if (
-          item.itemdata
-          && item.itemdata.name
-            === self.vmI18n.t('form_label.distribution_logistics')
+          item.itemdata &&
+          item.itemdata.name ===
+          self.vmI18n.t('form_label.distribution_logistics')
         ) {
           item.itemdata.valuedata = data.CP_C_LOGISTICS_ENAME;
           item.itemdata.pid = data.CP_C_LOGISTICS_ID;
@@ -2250,20 +2251,20 @@ export default {
       self.formConfig1.formData.forEach((item) => {
         // 收货人省份 收货人市 收货人区
         if (
-          item.itemdata
-          && item.itemdata.name === self.vmI18n.t('form_label.consignee_province')
+          item.itemdata &&
+          item.itemdata.name === self.vmI18n.t('form_label.consignee_province')
         ) {
           item.itemdata.valuedata = data.CP_C_REGION_PROVINCE_ENAME;
           item.itemdata.pid = data.CP_C_REGION_PROVINCE_ID;
         } else if (
-          item.itemdata
-          && item.itemdata.name === self.vmI18n.t('form_label.consignee_city')
+          item.itemdata &&
+          item.itemdata.name === self.vmI18n.t('form_label.consignee_city')
         ) {
           item.itemdata.valuedata = data.CP_C_REGION_CITY_ENAME;
           item.itemdata.pid = data.CP_C_REGION_CITY_ID;
         } else if (
-          item.itemdata
-          && item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
+          item.itemdata &&
+          item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
         ) {
           item.itemdata.valuedata = data.CP_C_REGION_AREA_ENAME;
           item.itemdata.pid = data.CP_C_REGION_AREA_ID;
