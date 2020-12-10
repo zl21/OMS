@@ -9,7 +9,7 @@
             :expand="false"
             class="retrieve"
             @on-enter="getLogistics(name, 1)"
-          />
+          >
           <Icon
             slot="suffix"
             type="ios-search"

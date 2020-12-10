@@ -1206,7 +1206,6 @@ body {
 //agtable 修改
 // 标准
 // .detailTable {
-
 //   .ag-header-select-all,
 //   .ag-selection-checkbox span {
 //     margin-right: 12px;
@@ -1557,7 +1556,25 @@ body {
   }
   // ark组件弹窗
   .ark-modal-footer{
-    
+    button{
+      & + button{
+        &> span{
+          color: @button-bg-font;
+        }
+      }
+      &:hover{
+        background-color: @button-transparent-hover;
+        border:1px solid transparent;
+        opacity: 1;
+        &> span{
+          color: @button-bg-font;
+        }
+      }
+      border:1px solid  @base-color;
+      &> span{
+        color: @base-color;
+      }
+    }
   }
 }
 // 定制弹框 按钮

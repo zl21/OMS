@@ -31,7 +31,7 @@ export default {
         data: [], // 数据配置
         pageShow: false, // 控制分页是否显示
         loading: false,
-        height: 358, // 表格高度
+        height: 338, // 表格高度
         indexColumn: true, // 是否显示序号
         isShowSelection: true, // 是否显示checkedbox
         border: true // 是否显示纵向边框
