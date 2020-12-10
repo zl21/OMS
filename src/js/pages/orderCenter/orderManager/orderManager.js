@@ -466,8 +466,8 @@ export default {
                   content: self.vmI18n.t('modalTips.e0'), // 是否确定取消订单？
                   mask: true,
                   showCancel: true,
-                  okText: self.vmI18n.t('common.determine'), // 取消
-                  cancelText: self.vmI18n.t('common.cancel'), // 确定
+                  okText: self.vmI18n.t('common.determine'), // 确定
+                  cancelText: self.vmI18n.t('common.cancel'), // 取消
                   onOk: () => {
                     self.service.orderCenter
                       .cancelOrder({ ids, type: '1' })
@@ -1043,8 +1043,8 @@ export default {
                   content: self.vmI18n.t('modalTips.c4'), // 是否确定将选择的订单占用的库存释放？
                   mask: true,
                   showCancel: true,
-                  okText: self.vmI18n.t('common.determine'), // 取消
-                  cancelText: self.vmI18n.t('common.cancel'), // 确定
+                  okText: self.vmI18n.t('common.determine'), // 确定
+                  cancelText: self.vmI18n.t('common.cancel'), // 取消
                   onCancel: () => {
                     self.service.orderCenter
                       .releaseInventory({ ids })
@@ -1597,9 +1597,9 @@ export default {
             content: self.vmI18n.t('modalTips.e1'), // 是否确定取消Hold？
             mask: true,
             showCancel: true,
-            okText: self.vmI18n.t('common.cancel'), // 取消
-            cancelText: self.vmI18n.t('common.determine'), // 确定
-            onCancel: () => {
+            okText: self.vmI18n.t('common.determine'), // 确定
+            cancelText: self.vmI18n.t('common.cancel'), // 取消
+            onOk: () => {
               self.btnConfig.loading = true;
               self.service.orderCenter
                 .manualUnHoldOrder(data)
@@ -1614,7 +1614,7 @@ export default {
                   }
                 })
                 .catch(() => {
-                  self.$Message.error(self.vmI18n.t('modalTips.6')); // 服务器请求失败
+                  self.$Message.error(self.vmI18n.t('modalTips.d6')); // 服务器请求失败
                   self.btnConfig.loading = false;
                 });
             }
