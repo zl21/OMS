@@ -1501,20 +1501,37 @@ body {
     justify-content: center;
   }
 }
+// 标准弹框
 .v-transfer-dom{
-  .one_button .buttonBox div:last-child{
-    .buttonGroup button{
-      background-color: @base-color;
-      color: @button-bg-font;
-      opacity: 1;
-      &.ark-btn:hover{
+  .ark-modal-confirm-footer{
+    button{
+        height: 28px;
+        min-width:50px;
+        &:hover{
+          opacity: 1;
+          background-color: @button-transparent-hover;
+          color: @button-bg-font;
+        }
+        &:last-child{
         background-color: @base-color;
         color: @button-bg-font;
-        border:1px solid transparent;
-        opacity:1;
+          &:hover{
+            opacity: 1;
+            background-color: @base-color;
+          }
       }
     }
   }
+}
+// 定制弹框 按钮
+.modalBth{
+  .buttonBox div:last-child{
+    .buttonGroup button{
+      margin-right: 0;
+    }
+  }
+}
+.v-transfer-dom{
   .one_button .buttonBox div{
     .buttonGroup button.ark-btn:hover{
       background-color: @button-transparent-hover;
@@ -1522,7 +1539,21 @@ body {
       border:1px solid transparent;
       opacity: 1;
     }
+    &:last-child{
+      .buttonGroup button{
+        background-color: @base-color;
+        color: @button-bg-font;
+        opacity: 1;
+        &.ark-btn:hover{
+          background-color: @base-color;
+          color: @button-bg-font;
+          border:1px solid transparent;
+          opacity:1;
+        }
+      }
+    }
   }
+  
 }
 .rk-modal-confirm-footer{
   button:last-child{
@@ -1532,13 +1563,5 @@ body {
   button:hover{
     background-color:@base-color;
     color: @button-bg-font;
-  }
-}
-// 定制弹框 按钮
-.modalBth{
-  .buttonBox div:last-child{
-    .buttonGroup button{
-      margin-right: 0;
-    }
   }
 }
