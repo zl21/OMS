@@ -64,6 +64,12 @@
               width: '6'
             },
             {
+              style: 'input', // 来源单号
+              label: '来源单号',
+              value: 'SOURCE_NO',
+              width: '6'
+            },
+            {
               style: 'input', // 文本录入
               label: '卖家昵称',
               value: 'SELLER_NICK',
@@ -292,6 +298,10 @@
             {
               title: '计算虚高库存前库存',
               key: 'QTY_STORAGE_REALY'
+            },
+            {
+              title: '来源单号',
+              key: 'SOURCE_NO'
             },
             {
               title: '平台条码ID',
