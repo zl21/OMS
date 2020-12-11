@@ -248,8 +248,8 @@ export default {
           row: 1,
           statsize: -1,
           type: 'STRING',
-          valuedata: ''
-        }
+          valuedata: '',
+        },
       },
       {
         style: 'input',
@@ -285,6 +285,7 @@ export default {
     // 保存
     async save() {
       const _this = this;
+      if (!_this.information.formData[0].itemdata.pid) return _this.$Message.warning('仓库不能为空!');
       _this.isSaveLoading = true;
       _this.name = '';
       _this.query = '';
