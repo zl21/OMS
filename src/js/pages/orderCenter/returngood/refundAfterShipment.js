@@ -541,11 +541,11 @@ export default {
             // icon: 'md-arrow-round-back',
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
-              if (this.$route.query.tabTitle === '额外退款编辑') {
+              if (this.$route.params.customizedModuleName === 'EXTRAREFUND') {
                 R3.store.commit('global/tabOpen', {
                   type: 'S',
-                  tableId: 249130393,
-                  tableName: 'OC_B_RETURN_AF_SEND',
+                  tableId: 249230545,
+                  tableName: 'OC_B_RETURN_AF_SEND_MANUAL',
                   back: true,
                   label: window.vmI18n.t('btn.additionalRefund'), // 额外退款
                 });
