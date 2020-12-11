@@ -65,7 +65,7 @@ export default {
       // sku查询
       const self = this;
       const data = { isBlur: 'N', psCSku: { ECODE: self.searchValue } };
-      _this.service.common.skuQuery(data).then(res => {
+      self.service.common.skuQuery(data).then(res => {
         console.log(res);
         if (res.data.code == 0) {
           if (res.data.data.data.length == 0) {
