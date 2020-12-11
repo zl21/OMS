@@ -246,6 +246,7 @@ export default {
       const dealForm = {};
       const whereInfoForm = Object.assign(mainData, dealForm);
       const param = {
+        table: this.$route.params.customizedModuleName,
         whereInfo: whereInfoForm,
         pageNum: _this.jordanTableConfig.current,
         pageSize: _this.jordanTableConfig.pageSize
