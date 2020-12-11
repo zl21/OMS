@@ -87,22 +87,23 @@
       </div>
     </div>
     <div class="dialog-footer">
-      <businessButton :btn-config="btnConfig" />
-      <!-- <Button 
+      <Button 
         type="error" 
         ghost 
         size="small" 
         @click="closeConfirm"
       >
-        取消
+        <!-- 取消 -->
+        {{ vmI18n.t('common.cancel') }}
       </Button>
       <Button 
         type="primary" 
         size="small" 
         @click="importDialog"
       >
-        确定
-      </Button> -->
+        <!-- 确定 -->
+        {{ vmI18n.t('common.determine') }}
+      </Button>
     </div>
   </div>
 </template>

@@ -121,12 +121,6 @@
       :url="importTable.url"
       :width="importTable.width"
     />
-
-    <!-- <div v-if="show_dialog">
-      <Modal v-model="show_dialog" class="dialog" :footer-hide="dialogSet.footerHide" :title="dialogSet.dialogTitle" :mask="dialogSet.mask">
-        <component :is="currentView" :ref="popDialog" :component-data="dialogModal" @returnData="returnData" />
-      </Modal>
-    </div> -->
   </div>
 </template>
 <script>

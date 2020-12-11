@@ -12,24 +12,6 @@
       'line-height': itemdata.row * 24 + (itemdata.row - 1) * 8 + 'px'
     }"
   >
-    <!-- <label
-      class="title"
-      :title="itemdata.name"
-      :style="{'line-height':itemdata.row*24 + (itemdata.row-1)*8 + 'px'}"
-      v-if="hasLabel"
-    >
-      <el-tooltip
-        class="item"
-        effect="light"
-        v-if="itemdata.comment"
-        :content="itemdata.comment"
-        placement="top"
-      >
-        <i class="iconfont" @click.stop>&#xe640;</i>
-      </el-tooltip>
-      <i v-if="itemdata.isnotnull">*</i>
-      {{itemdata.name}}:&nbsp;
-    </label> -->
     <div
       v-if="!isActive || isdisabled"
       class="input-wrap"
@@ -87,12 +69,6 @@
           @keyup.enter.native="autocompleteEnter(itemdata, $event)"
           @blur="autocompleteBlur"
         >
-          <!-- <template slot-scope="props">
-
-            <span class="addr">{{ props.item.value }}</span>
-            <div class="name">{{ props.item.DBNAME }}</div>
-            <span class="addr">{{ props.item.DESCRIPTION }}</span>
-          </template>-->
           <template slot-scope="{ item }">
             <span
               v-for="(value, key, index) of item"
@@ -310,6 +286,23 @@
       :tablename="storageItem.name"
       @confirmImport="searchData('fresh')"
     />
+
+    <!-- <businessDialog
+      :closable="importTable.closable"
+      :component-data="importTable.componentData"
+      :draggable="importTable.draggable"
+      :exclude-string="importTable.excludeString"
+      :keep-alive="importTable.keepAlive"
+      :mask="importTable.mask"
+      :mask-closable="importTable.maskClosable"
+      :name="importTable.name"
+      :scrollable="importTable.scrollable"
+      :title="importTable.confirmTitle"
+      :title-align="importTable.titleAlign"
+      :transfer="importTable.transfer"
+      :url="importTable.url"
+      :width="importTable.width"
+    />     -->
 
     <!-- 消息提示 -->
     <my-dialog

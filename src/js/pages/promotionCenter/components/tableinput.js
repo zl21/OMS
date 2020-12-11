@@ -1,30 +1,9 @@
-import axios from 'axios';
-// import SelectDialog from '../../components/dialog/selectDialog.vue'
 import SelectDialog from 'framework/components/dialog/popDialog.vue';
 import fkdialog from 'framework/components/tablelist/fkdialog.vue';
 import advancedSearch from 'framework/components/views/custompage/crm/advancedSearch.vue';
 import FkTable from 'framework/components/tablelist/fktable.vue';
 import ChineseDictionary from '@/assets/js/ChineseDictionary.js';
 import ImportDialog from '@/js/pages/promotionCenter/components/importDialog';
-// import mAutocomplete from './autocomplete.vue'
-/* import Vue from 'vue' */
-
-/* Vue.component('my-item-zh', {
-    functional: true,
-    render: function (h, ctx) {
-      var item = ctx.props.item;
-      let arr = []
-      for (var i in item) {
-        if (i != 'id' && i != 'value') {
-          arr.push(h('span', {attrs: {class: 'length' + (Object.keys(item).length - 2), title: item[i]}}, [item[i]]))
-        }
-      }
-      return h('li', ctx.data, arr);
-    },
-    props: {
-      item: {type: Object, required: true}
-    }
-  }); */
 
 export default {
   // '单对象属性表格中的文本输入框',
@@ -147,21 +126,13 @@ export default {
       if (self.itemdata.reftable === 'VP_C_VIP_ACC') {
         if (self.itemdata.valuedata) {
           self.mopDefaultValue = self.itemdata.pid;
-          // self.mopDefaultValue = self.itemdata.valuedata;
-          // self.itemdata.pid = self.itemdata.valuedata;
           self.fkDialog.lists = self.mopDefaultValue;
-          // self.itemdata.valuedata =
-          //   "已选中" + JSON.parse(self.mopDefaultValue).count + "条数据";
         } else {
           self.fkDialog.lists = {};
         }
       } else if (self.itemdata.valuedata) {
-        // self.mopDefaultValue = self.itemdata.valuedata;
         self.mopDefaultValue = self.itemdata.pid;
         self.fkDialog.lists = self.mopDefaultValue;
-        // self.itemdata.pid = self.itemdata.valuedata;
-        // self.itemdata.valuedata =
-        //   "已选中" + JSON.parse(self.mopDefaultValue).total + "条数据";
       } else {
         self.fkDialog.lists = {};
       }
@@ -173,33 +144,18 @@ export default {
   },
   mounted() {
     const self = this;
-    // $(document).mouseup(function(e){
-    //   var _con = $('.selection-dialog');   // 设置目标区域
-    //   if(!_con.is(e.target) && _con.has(e.target).length === 0){ // Mark 1
-    //      self.SingleSelect.show = false  // 功能代码
-    //   }
-    // })
-    $('.main-content,.basicSteps').scroll(e => {
+    $('.main-content,.basicSteps').scroll(() => {
       $.each(self.popoverShow, item => {
         self.popoverShow[item] = false;
       });
     });
-    $(document).on('click', e => {
+    $(document).on('click', () => {
       $.each(self.popoverShow, item => {
         self.popoverShow[item] = false;
       });
     });
   },
   computed: {
-    /* autoval: {
-        get () {
-          return this.autocompleteIputData
-        },
-        set (val) {
-          console.log('vvvvvvvvv')
-          this.autocompleteIputData = val;
-        },
-      }, */
     hasQuery() {
       // 判断单选框是否有输入值
       const self = this;
@@ -238,7 +194,7 @@ export default {
           reg = new RegExp(`^[\\-\\+]?\\d+(\\.\\d{0,${val.scale}})?$`); // 匹配小数点位数 /^\d+(\.\d{0,2})?$/
         }
         if (!reg.test(val.valuedata) && val.type === 'NUMBER' && val.valuedata && val.valuedata !== '-') {
-          if (isNaN(val.valuedata)) {
+          if (Number.isNaN(val.valuedata)) {
             val.valuedata = val.valuedata.length === 1 ? '' : oldVal.valuedata.substr(0, oldVal.valuedata.length - 1);
           } else if (val.scale === 0) {
             val.valuedata = val.valuedata.substring(0, val.valuedata.length - 1);
@@ -248,17 +204,10 @@ export default {
         }
         // 弹框多选
         if (self.itemdata.fkdisplay == 'mop') {
-          // console.log(self.itemdata)
           if (self.itemdata.valuedata && self.itemdata.valuedata.indexOf('{') >= 0) {
             self.mopDefaultValue = self.itemdata.valuedata;
             self.itemdata.pid = self.itemdata.valuedata;
             self.fkDialog.lists = self.mopDefaultValue;
-            // self.itemdata.valuedata =
-            //   "已选中" +
-            //   (self.itemdata.reftable === "VP_C_VIP_ACC"
-            //     ? JSON.parse(self.mopDefaultValue).count
-            //     : JSON.parse(self.mopDefaultValue).total) +
-            //   "条数据";
             self.itemdata.valuedata = self.itemdata.pid;
           } else if (!self.itemdata.valuedata) {
             self.mopDefaultValue = '';
@@ -270,7 +219,7 @@ export default {
       deep: true
     },
     refaddcol: {
-      handler(val, oldVal) {
+      handler(val) {
         const _self = this;
         // 判断是否可编辑,不可编辑则不做默认值处理
         if (!_self.isActive || _self.isdisabled) return;
@@ -306,8 +255,7 @@ export default {
     dialogClose() {
       this.fkDialog.dialog = false;
     },
-    visibleChange(val) {
-      // console.log('visibleChange',val)
+    visibleChange() {
       this.SingleSelect.show = false;
       this.selectOperation.pageSize = 10;
       this.selectOperation.curpage = 1;
@@ -343,7 +291,7 @@ export default {
       if (self.itemdata.dynamicforcompute) {
         let strdynamicforcompute = self.itemdata.dynamicforcompute.express;
 
-        self.itemdata.dynamicforcompute.refcolumns.forEach((refcolumns, index) => {
+        self.itemdata.dynamicforcompute.refcolumns.forEach((refcolumns) => {
           for (let i = 0; i < self.objList.length; i++) {
             const item = self.objList[i];
 
@@ -358,12 +306,11 @@ export default {
                   }
                 }
               }
-            } else {
             }
           }
         });
 
-        vm.$nextTick(() => {
+        self.vm.$nextTick(() => {
           setTimeout(() => {
             for (let i = 0; i < self.objList.length; i++) {
               const item = self.objList[i];
@@ -372,12 +319,10 @@ export default {
                 for (let j = 0; j < item.childs.length; j++) {
                   const temp = item.childs[j];
                   if (temp.colname == self.itemdata.dynamicforcompute.computecolumn) {
-                    if (self.itemdata.dynamicforcompute.refact) {
-                    } else if (eval(strdynamicforcompute) == 'NaN') {
+                    if (eval(strdynamicforcompute) == 'NaN') {
                       temp.valuedata = String('-');
                       // self.$set(temp,'valuedata',String('-'))
-                      if (temp.readonly && !self.itemdata.dynamicforcompute.isSave) {
-                      } else {
+                      if (!temp.readonly && self.itemdata.dynamicforcompute.isSave) {
                         self.$emit('getChangeItem', temp);
                       }
                     } else {
@@ -392,7 +337,6 @@ export default {
                     }
                   }
                 }
-              } else {
               }
             }
           });
@@ -438,11 +382,9 @@ export default {
                 }
               }
             }
-          } else {
+          } else if (item.colname === itemdata.refcolval.srccol) {
             // 添加到明细输入框
-            if (item.colname === itemdata.refcolval.srccol) {
-              params[itemdata.refcolval.fixcolumn] = item.pid ? str + item.pid : str + item.refobjid;
-            }
+            params[itemdata.refcolval.fixcolumn] = item.pid ? str + item.pid : str + item.refobjid;
           }
         });
       }
@@ -472,9 +414,10 @@ export default {
                   $(`.el-autocomplete.${child.name}`)
                     .find('input')
                     .focus();
-                  return false;
+                  return params;
                 }
               }
+              return params;
             });
           } else if (!findflag) {
             if (item.child.colname === itemdata.refcolprem.srccol) {
@@ -499,10 +442,11 @@ export default {
                 $(`.el-autocomplete.${item.child.name}`)
                   .find('input')
                   .focus();
-                return false;
+                return params;
               }
             }
           }
+          return params;
         });
       }
 
@@ -529,7 +473,6 @@ export default {
                   if (!child.pid && !child.valuedata) {
                     params[itemdata.refcolval.fixcolumn] = null;
                   }
-                  // params[itemdata.refcolval.fixcolumn] = child.pid
                   tipsname[itemdata.refcolval.fixcolumn] = child;
                 } else {
                   params[itemdata.refcolval.fixcolumn] = child.valuedata ? str + child.valuedata : null;
@@ -537,7 +480,6 @@ export default {
                   if (!child.valuedata) {
                     params[itemdata.refcolval.fixcolumn] = null;
                   }
-                  // params[itemdata.refcolval.fixcolumn] = child.pid
                   tipsname[itemdata.refcolval.fixcolumn] = child;
                 }
               }
@@ -550,7 +492,6 @@ export default {
                 if (!item.child.pid && !item.child.valuedata) {
                   params[itemdata.refcolval.fixcolumn] = null;
                 }
-                // params[itemdata.refcolval.fixcolumn] = item.child.pid
                 tipsname[itemdata.refcolval.fixcolumn] = item.child;
               } else {
                 params[itemdata.refcolval.fixcolumn] = item.child.valuedata ? str + item.child.valuedata : null;
@@ -558,7 +499,6 @@ export default {
                 if (!item.child.valuedata) {
                   params[itemdata.refcolval.fixcolumn] = null;
                 }
-                // params[itemdata.refcolval.fixcolumn] = item.child.pid
                 tipsname[itemdata.refcolval.fixcolumn] = item.child;
               }
             }
@@ -631,7 +571,7 @@ export default {
                   $(`.el-autocomplete.${child.name}`)
                     .find('input')
                     .focus();
-                  return false;
+                  return;
                 }
                 if (itemdata.fkdisplay === 'pop' || itemdata.fkdisplay === 'drp' || itemdata.fkdisplay === 'mrp') {
                   callback();
@@ -661,7 +601,7 @@ export default {
                 $(`.el-autocomplete.${item.child.name}`)
                   .find('input')
                   .focus();
-                return false;
+                return;
               }
               if (itemdata.fkdisplay === 'pop' || itemdata.fkdisplay === 'drp' || itemdata.fkdisplay === 'mrp') {
                 callback();
@@ -671,7 +611,7 @@ export default {
         });
       }
     },
-    getQueryParams(itemdata, callback) {
+    getQueryParams(itemdata) {
       const self = this;
       const params = {};
       const tipsname = {};
@@ -688,7 +628,6 @@ export default {
                   if (!child.pid && !child.valuedata) {
                     params[itemdata.refcolval.fixcolumn] = null;
                   }
-                  // params[itemdata.refcolval.fixcolumn] = child.pid
                   tipsname[itemdata.refcolval.fixcolumn] = child;
                 } else {
                   params[itemdata.refcolval.fixcolumn] = child.valuedata ? str + child.valuedata : null;
@@ -696,7 +635,6 @@ export default {
                   if (!child.valuedata) {
                     params[itemdata.refcolval.fixcolumn] = null;
                   }
-                  // params[itemdata.refcolval.fixcolumn] = child.pid
                   tipsname[itemdata.refcolval.fixcolumn] = child;
                 }
               }
@@ -708,7 +646,6 @@ export default {
               if (!item.child.pid && !item.child.valuedata) {
                 params[itemdata.refcolval.fixcolumn] = null;
               }
-              // params[itemdata.refcolval.fixcolumn] = item.child.pid
               tipsname[itemdata.refcolval.fixcolumn] = item.child;
             } else {
               params[itemdata.refcolval.fixcolumn] = item.child.valuedata ? str + item.child.valuedata : null;
@@ -716,7 +653,6 @@ export default {
               if (!item.child.valuedata) {
                 params[itemdata.refcolval.fixcolumn] = null;
               }
-              // params[itemdata.refcolval.fixcolumn] = item.child.pid
               tipsname[itemdata.refcolval.fixcolumn] = item.child;
             }
           }
@@ -726,8 +662,8 @@ export default {
       self.queryParams = params;
       for (const key in params) {
         if (params[key] != -1 && params[key]) {
-          return params;
           self.drpPopoverShow = true;
+          return params;
         }
         self.$message({
           message: `请先选择${tipsname[key].name}`,
@@ -774,15 +710,11 @@ export default {
         itemdata.valuedata = null;
         self.$emit('clearInputValue', itemdata);
       }
-      // hidden ? itemdata.valuedata = null : console.log('itemdata.valuedata',itemdata.valuedata)
-      // this.$emit('getChangeItem',itemdata)
       return hidden;
     },
     fktableShow(val) {
       const self = this;
       const item = val.item;
-      // this.$refs['autocomplete'+this.itemdata.colname].$refs['input']['currentValue'] = item.value
-
       if (jQuery.isArray(item)) {
         // 多选
         self.SingleSelect.show = false;
@@ -826,10 +758,7 @@ export default {
       if (self.itemdata.dynamicforcompute) {
         if (self.itemdata.dynamicforcompute.refact) {
           // 字段联动
-          // if(self.itemdata.dynamicforcompute){
-          const str = self.itemdata.dynamicforcompute.express;
-
-          self.itemdata.dynamicforcompute.refcolumns.forEach((refcolumns, index) => {
+          self.itemdata.dynamicforcompute.refcolumns.forEach(refcolumns => {
             for (let i = 0; i < self.objList.length; i++) {
               const item = self.objList[i];
               // console.log(refcolumns)
@@ -838,8 +767,6 @@ export default {
                   const temp = item.childs[j];
 
                   if (String(temp.colname).trim() == String(refcolumns).trim()) {
-                    // let regExp = new RegExp(temp.colname,'g');
-
                     if (temp.isfk) {
                       if (self.itemdata.colname == temp) {
                         self.dynamicforcomputeObj[temp.colname] = self.itemdata.pid;
@@ -849,11 +776,8 @@ export default {
                     } else {
                       self.dynamicforcomputeObj[temp.colname] = temp.valuedata;
                     }
-
-                    // str =  str.replace(regExp,temp.valuedata?temp.valuedata:0)
                   }
                 }
-              } else {
               }
             }
           });
@@ -882,24 +806,16 @@ export default {
                     const temp = item.childs[j];
 
                     if (temp.colname.trim() == self.itemdata.dynamicforcompute.computecolumn.trim()) {
-                      // self.itemdata.dynamicforcompute.computecolumn.trim()
                       self.$set(temp, 'valuedata', String(value));
-                      if (temp.readonly && !self.itemdata.dynamicforcompute.isSave) {
-                      } else {
+                      if (!temp.readonly && self.itemdata.dynamicforcompute.isSave) {
                         self.$emit('getChangeItem', temp);
                       }
                     }
                   }
-                } else {
                 }
               }
             });
-
-            // console.log(self.itemdata.hidecolumn.express)
           });
-          // })
-
-          // }
         }
       }
       // 外键关联,选中后,当前input获取焦点
@@ -985,17 +901,13 @@ export default {
       if (self.itemdata.dynamicforcompute) {
         if (self.itemdata.dynamicforcompute.refact) {
           // 字段联动
-          // if(self.itemdata.dynamicforcompute){
-          const str = self.itemdata.dynamicforcompute.express;
-          self.itemdata.dynamicforcompute.refcolumns.forEach((refcolumns, index) => {
+          self.itemdata.dynamicforcompute.refcolumns.forEach(refcolumns => {
             for (let i = 0; i < self.objList.length; i++) {
               const item = self.objList[i];
-              // console.log(refcolumns)
               if (item.childs) {
                 for (let j = 0; j < item.childs.length; j++) {
                   const temp = item.childs[j];
                   if (String(temp.colname).trim() == String(refcolumns).trim()) {
-                    // let regExp = new RegExp(temp.colname,'g');
                     if (temp.isfk) {
                       if (self.itemdata.colname == temp) {
                         self.dynamicforcomputeObj[temp.colname] = self.itemdata.pid;
@@ -1005,10 +917,8 @@ export default {
                     } else {
                       self.dynamicforcomputeObj[temp.colname] = temp.valuedata;
                     }
-                    // str =  str.replace(regExp,temp.valuedata?temp.valuedata:0)
                   }
                 }
-              } else {
               }
             }
           });
@@ -1038,13 +948,11 @@ export default {
                     if (temp.colname.trim() == self.itemdata.dynamicforcompute.computecolumn.trim()) {
                       // self.itemdata.dynamicforcompute.computecolumn.trim()
                       self.$set(temp, 'valuedata', String(value));
-                      if (temp.readonly && !self.itemdata.dynamicforcompute.isSave) {
-                      } else {
+                      if (!temp.readonly && self.itemdata.dynamicforcompute.isSave) {
                         self.$emit('getChangeItem', temp);
                       }
                     }
                   }
-                } else {
                 }
               }
             });
@@ -1093,9 +1001,7 @@ export default {
       }
       if (!self.isHandleSelect) {
         if (self.queryList.length > 0 && !self.autocomplete && itemdata.valuedata) {
-          itemdata.pid = self.hasLabel
-            ? self.queryList[0].id
-            : self.queryList[0].ECODE;
+          itemdata.pid = self.hasLabel ? self.queryList[0].id : self.queryList[0].ECODE;
           itemdata.valuedata = self.queryList[0].value;
           // add  by wdq  2020-04-07   表格嵌入单选控件
           const item = self.queryList[0] || {};
@@ -1106,21 +1012,14 @@ export default {
           if (self.itemdata.dynamicforcompute) {
             if (self.itemdata.dynamicforcompute.refact) {
               // 字段联动
-
-              // if(self.itemdata.dynamicforcompute){
-              const str = self.itemdata.dynamicforcompute.express;
-
-              self.itemdata.dynamicforcompute.refcolumns.forEach((refcolumns, index) => {
+              self.itemdata.dynamicforcompute.refcolumns.forEach(refcolumns => {
                 for (let i = 0; i < self.objList.length; i++) {
                   const item = self.objList[i];
-                  // console.log(refcolumns)
                   if (item.childs) {
                     for (let j = 0; j < item.childs.length; j++) {
                       const temp = item.childs[j];
 
                       if (String(temp.colname).trim() == String(refcolumns).trim()) {
-                        // let regExp = new RegExp(temp.colname,'g');
-
                         if (temp.isfk) {
                           if (self.itemdata.colname == temp) {
                             self.dynamicforcomputeObj[temp.colname] = self.queryList[0].id;
@@ -1134,12 +1033,9 @@ export default {
                         // str =  str.replace(regExp,temp.valuedata?temp.valuedata:0)
                       }
                     }
-                  } else {
                   }
                 }
               });
-
-              // vm.$nextTick(() => {
               setTimeout(() => {
                 let value = '';
 
@@ -1165,47 +1061,32 @@ export default {
                         if (temp.colname.trim() == self.itemdata.dynamicforcompute.computecolumn.trim()) {
                           // self.itemdata.dynamicforcompute.computecolumn.trim()
                           self.$set(temp, 'valuedata', String(value));
-                          if (temp.readonly && !self.itemdata.dynamicforcompute.isSave) {
-                          } else {
+                          if (!temp.readonly && self.itemdata.dynamicforcompute.isSave) {
                             self.$emit('getChangeItem', temp);
                           }
                         }
                       }
-                    } else {
                     }
                   }
                 });
-
-                // console.log(self.itemdata.hidecolumn.express)
               });
-              // })
-
-              // }
             }
           }
         } else if (itemdata.valuedata) {
           self.inQueryList(itemdata, () => {
-            // console.log('callback')
             self.$emit('itemInputEnter', event);
           });
           if (self.itemdata.dynamicforcompute) {
             if (self.itemdata.dynamicforcompute.refact) {
               // 字段联动
-
-              // if(self.itemdata.dynamicforcompute){
-              const str = self.itemdata.dynamicforcompute.express;
-
-              self.itemdata.dynamicforcompute.refcolumns.forEach((refcolumns, index) => {
+              self.itemdata.dynamicforcompute.refcolumns.forEach(refcolumns => {
                 for (let i = 0; i < self.objList.length; i++) {
                   const item = self.objList[i];
-                  // console.log(refcolumns)
                   if (item.childs) {
                     for (let j = 0; j < item.childs.length; j++) {
                       const temp = item.childs[j];
 
                       if (String(temp.colname).trim() == String(refcolumns).trim()) {
-                        // let regExp = new RegExp(temp.colname,'g');
-
                         if (temp.isfk) {
                           if (self.itemdata.colname == temp) {
                             self.dynamicforcomputeObj[temp.colname] = self.itemdata.pid;
@@ -1215,16 +1096,11 @@ export default {
                         } else {
                           self.dynamicforcomputeObj[temp.colname] = temp.valuedata;
                         }
-
-                        // str =  str.replace(regExp,temp.valuedata?temp.valuedata:0)
                       }
                     }
-                  } else {
                   }
                 }
               });
-
-              // vm.$nextTick(() => {
               setTimeout(() => {
                 let value = '';
 
@@ -1246,26 +1122,17 @@ export default {
                     if (item.childs) {
                       for (let j = 0; j < item.childs.length; j++) {
                         const temp = item.childs[j];
-
                         if (temp.colname.trim() == self.itemdata.dynamicforcompute.computecolumn.trim()) {
-                          // self.itemdata.dynamicforcompute.computecolumn.trim()
                           self.$set(temp, 'valuedata', String(value));
-                          if (temp.readonly && !self.itemdata.dynamicforcompute.isSave) {
-                          } else {
+                          if (!temp.readonly && self.itemdata.dynamicforcompute.isSave) {
                             self.$emit('getChangeItem', temp);
                           }
                         }
                       }
-                    } else {
                     }
                   }
                 });
-
-                // console.log(self.itemdata.hidecolumn.express)
               });
-              // })
-
-              // }
             }
           }
         } else {
@@ -1273,21 +1140,14 @@ export default {
           if (self.itemdata.dynamicforcompute) {
             if (self.itemdata.dynamicforcompute.refact) {
               // 字段联动
-
-              // if(self.itemdata.dynamicforcompute){
-              const str = self.itemdata.dynamicforcompute.express;
-
-              self.itemdata.dynamicforcompute.refcolumns.forEach((refcolumns, index) => {
+              self.itemdata.dynamicforcompute.refcolumns.forEach(refcolumns => {
                 for (let i = 0; i < self.objList.length; i++) {
                   const item = self.objList[i];
-                  // console.log(refcolumns)
                   if (item.childs) {
                     for (let j = 0; j < item.childs.length; j++) {
                       const temp = item.childs[j];
 
                       if (String(temp.colname).trim() == String(refcolumns).trim()) {
-                        // let regExp = new RegExp(temp.colname,'g');
-
                         if (temp.isfk) {
                           if (self.itemdata.colname == temp) {
                             self.dynamicforcomputeObj[temp.colname] = self.itemdata.pid;
@@ -1297,11 +1157,8 @@ export default {
                         } else {
                           self.dynamicforcomputeObj[temp.colname] = temp.valuedata;
                         }
-
-                        // str =  str.replace(regExp,temp.valuedata?temp.valuedata:0)
                       }
                     }
-                  } else {
                   }
                 }
               });
@@ -1328,32 +1185,22 @@ export default {
                     if (item.childs) {
                       for (let j = 0; j < item.childs.length; j++) {
                         const temp = item.childs[j];
-
                         if (temp.colname.trim() == self.itemdata.dynamicforcompute.computecolumn.trim()) {
                           // self.itemdata.dynamicforcompute.computecolumn.trim()
                           self.$set(temp, 'valuedata', String(value));
-                          if (temp.readonly && !self.itemdata.dynamicforcompute.isSave) {
-                          } else {
+                          if (!temp.readonly && self.itemdata.dynamicforcompute.isSave) {
                             self.$emit('getChangeItem', temp);
                           }
                         }
                       }
-                    } else {
                     }
                   }
                 });
-
-                // console.log(self.itemdata.hidecolumn.express)
               });
-              // })
-
-              // }
             }
           }
         }
       }
-
-      //        self.isHandleSelect = false
     },
     async inQueryList(itemdata, callback) {
       const self = this;
@@ -1447,11 +1294,7 @@ export default {
       // this.$refs['autocomplete'+this.itemdata.colname].$refs['input']['currentValue'] = item.value
 
       if (self.itemdata.fkdisplay == 'mrp' || self.itemdata.fkdisplay == 'mop') {
-        if (self.itemdata.pid && self.itemdata.pid != -1) {
-        } else {
-          // self.itemdata.valuedata = null
-          // self.itemdata.pid = null
-
+        if (!self.itemdata.pid && self.itemdata.pid == -1) {
           self.$set(self.itemdata, 'pid', null);
           self.$set(self.itemdata, 'valuedata', null);
           $(event.target).val(null);
@@ -1480,19 +1323,13 @@ export default {
             if (self.itemdata.dynamicforcompute) {
               if (self.itemdata.dynamicforcompute.refact) {
                 // 字段联动
-                // if(self.itemdata.dynamicforcompute){
-
                 self.itemdata.dynamicforcompute.refcolumns.forEach(refcolumns => {
                   for (let i = 0; i < self.objList.length; i++) {
                     const item = self.objList[i];
-                    // console.log(refcolumns)
                     if (item.childs) {
                       for (let j = 0; j < item.childs.length; j++) {
                         const temp = item.childs[j];
-
                         if (String(temp.colname).trim() == String(refcolumns).trim()) {
-                          // let regExp = new RegExp(temp.colname,'g');
-
                           if (temp.isfk) {
                             if (self.itemdata.colname == temp) {
                               self.dynamicforcomputeObj[temp.colname] = self.itemdata.pid;
@@ -1502,16 +1339,12 @@ export default {
                           } else {
                             self.dynamicforcomputeObj[temp.colname] = temp.valuedata;
                           }
-
-                          // str =  str.replace(regExp,temp.valuedata?temp.valuedata:0)
                         }
                       }
-                    } else {
                     }
                   }
                 });
 
-                // vm.$nextTick(() => {
                 setTimeout(() => {
                   let value = '';
 
@@ -1535,15 +1368,12 @@ export default {
                           const temp = item.childs[j];
 
                           if (temp.colname.trim() == self.itemdata.dynamicforcompute.computecolumn.trim()) {
-                            // self.itemdata.dynamicforcompute.computecolumn.trim()
                             self.$set(temp, 'valuedata', String(value));
-                            if (temp.readonly && !self.itemdata.dynamicforcompute.isSave) {
-                            } else {
+                            if (!temp.readonly && self.itemdata.dynamicforcompute.isSave) {
                               self.$emit('getChangeItem', temp);
                             }
                           }
                         }
-                      } else {
                       }
                     }
                   });
@@ -1554,7 +1384,6 @@ export default {
             self.inQueryList(self.itemdata, () => {
               self.$emit('itemInputEnter', event);
             });
-          } else {
           }
         }
       }, 300);
@@ -1593,33 +1422,31 @@ export default {
       $(`.mop${itemdata.colname} span i`).trigger('click');
       $(`#${self.itemdata.colname}mopfile`).trigger('click');
     }, // 导入
-    async uploadFileChange(itemdata, event) {
+    async uploadFileChange() {
       const self = this;
       const file = $(`#${self.itemdata.colname}mopfile`)[0].files;
       const data = new FormData();
-      // let param = {
-      //   'tablename':self.storageItem.name
-      // }
       data.append('file', file[0]);
       data.append('table', self.itemdata.reftable);
 
-      const res = await self.service.common.menuimport(data);
-      if (res.code == 0) {
-        self.fkDialog.dialog = true;
-        self.fkDialog.lists = res.data.text;
-      } else {
-        const data = {
-          message: res.message
-        };
-        self.errorData = data;
-        self.errorDialog = true;
-        self.errorDialogClass = 'error';
-        self.errorDialogTitle = self.ChineseDictionary.ERROR;
-        self.errorDialogBack = false;
-      }
+      await self.service.common.menuimport(data).then(res => {
+        if (res.code == 0) {
+          self.fkDialog.dialog = true;
+          self.fkDialog.lists = res.data.text;
+        } else {
+          const data = {
+            message: res.message
+          };
+          self.errorData = data;
+          self.errorDialog = true;
+          self.errorDialogClass = 'error';
+          self.errorDialogTitle = self.ChineseDictionary.ERROR;
+          self.errorDialogBack = false;
+        }
 
-      setTimeout(() => {
-        $(`#${self.itemdata.colname}mopfile`).val('');
+        setTimeout(() => {
+          $(`#${self.itemdata.colname}mopfile`).val('');
+        });
       });
     },
     modelIconShow(item, index) {
@@ -1631,7 +1458,7 @@ export default {
           .css('display', 'inline');
       });
     },
-    modelIconHidden(item, index) {
+    modelIconHidden(item) {
       const self = this;
       self.$nextTick(() => {
         $(`.el-popover .mop${item.colname} li i`).css('display', 'none');
@@ -1649,20 +1476,6 @@ export default {
           self.showFkMore();
         }
       });
-      // $.ajax({
-      //   url:'/p/cs/delMultiQuery',
-      //   type:'POST',
-      //   dataType:'json',
-      //   data:obj,
-      //   success:function(res){
-      //     if(res.code == 0){
-      //      self.showFkMore()
-      //     }
-      //   },
-      //   error:function(res){
-
-      //   }
-      // })
     },
     modelClick(item) {
       const self = this;
@@ -1742,16 +1555,6 @@ export default {
         self.itemdata.pid = item;
         self.mopDefaultValue = item;
         self.itemdata.valuedata = `已选中${ITEM.total}条数据`;
-        // ITEM.lists.forEach((item, index) => {
-        //   if(index == (ITEM.lists.length-1)){
-        //     self.itemdata.pid += ITEM.screen
-        //     self.itemdata.valuedata += ITEM.screen_string
-        //   }else{
-        //     self.itemdata.pid += ITEM.screen+','
-        //     self.itemdata.valuedata += ITEM.screen_string+','
-        //   }
-
-        // })
         self.fkDialog.lists = item;
       } else {
         self.fkDialog.lists = {};
@@ -1772,16 +1575,7 @@ export default {
           table: item.reftable
         }
       };
-      const res = await this.service.common.getTableQuery(query);
-      axios({
-        url: '/p/cs/getTableQuery',
-        type: 'post',
-        params: {
-          tableid: item.reftableid,
-          getcmd: 'n',
-          table: item.reftable
-        }
-      }).then(res => {
+      await this.service.common.getTableQuery(query).then(res => {
         for (let i = 0; i < res.data.datas.dataarry.length; i++) {
           const element = res.data.datas.dataarry[i];
           element.value = '';
@@ -1793,7 +1587,6 @@ export default {
           }
           self.SelectionData.config.push(element);
         }
-        // self.SelectionData.config = res.data.datas.dataarry
         callback();
       });
     },
@@ -1809,51 +1602,33 @@ export default {
         startindex: self.selectOperation.startindex,
         range: self.selectOperation.pageSize
       };
-      // console.log('query',self.hasQuery,query)
       if (self.hasQuery) {
-        // searchdata.fixedcolumns = self.selectConfigChanged
         searchdata.fixedcolumns = query;
       }
       params.append('searchdata', JSON.stringify(searchdata));
-      const res = await this.service.common.QueryList(params);
-      if (res.data.code === 0) {
-        self.SelectionData.row = res.data.datas.row;
-        self.SelectionData.thead = res.data.datas.tabth;
-        self.SelectionData.tableAllDatas = res.data.datas;
-        self.selectOperation.page.totalRowCount = res.data.datas.totalRowCount;
-      }
-      // axios({
-      //   url: '/p/cs/QueryList',
-      //   type: 'post',
-      //   params: {
-      //     searchdata
-      //   }
-      // }).then((res) => {
-      //   if (res.data.code === 0) {
-      //     self.SelectionData.row = res.data.datas.row;
-      //     self.SelectionData.thead = res.data.datas.tabth;
-      //     self.SelectionData.tableAllDatas = res.data.datas;
-      //     self.selectOperation.page.totalRowCount = res.data.datas.totalRowCount;
-      //   }
-      // });
+      await this.service.common.QueryList(params).then(res => {
+        if (res.data.code === 0) {
+          self.SelectionData.row = res.data.datas.row;
+          self.SelectionData.thead = res.data.datas.tabth;
+          self.SelectionData.tableAllDatas = res.data.datas;
+          self.selectOperation.page.totalRowCount = res.data.datas.totalRowCount;
+        }
+      });
     },
 
     selectionQueryTable(val) {
-      const self = this;
-      // console.log('getSelectData',val)
-      self.getSelectData(val);
+      this.getSelectData(val);
     },
     getSelectChooseItem(val) {
       // 获取单选框选择数据
-      const self = this;
-      self.SingleSelect.show = false;
+      this.SingleSelect.show = false;
       this.selectOperation.pageSize = 10;
       this.selectOperation.curpage = 1;
       this.selectOperation.startindex = 0;
-      self.itemdata.pid = self.hasLabel ? val.ID.val : val.ECODE.val;
-      self.itemdata.valuedata = val[val.DISPLAY].val;
+      this.itemdata.pid = this.hasLabel ? val.ID.val : val.ECODE.val;
+      this.itemdata.valuedata = val[val.DISPLAY].val;
 
-      self.$emit('getFkChooseItem', val, self.row);
+      this.$emit('getFkChooseItem', val, this.row);
     },
     /**
      * 定制返回结果
