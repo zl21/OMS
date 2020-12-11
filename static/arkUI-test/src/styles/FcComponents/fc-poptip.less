@@ -1,0 +1,101 @@
+@fc-poptip: ~"@{css-prefix}fkrp-poptip";
+@fc-poptip-bar: ~"fkrp-poptip-bar";
+@fc-poptip-bar-tip: ~"fkrp-poptip-tip";
+@fc-poptip-bar-two: ~"fkrp-poptip-two";
+@fc-poptip-bar-text: ~"fkrp-poptip-text";
+@fc-poptip-right: 5px;
+@fc-icon-closed: ~"@{css-prefix}icon-ios-close-circle";
+@input-prefix-cls: ~"@{css-prefix}input";
+
+.@{fc-poptip} {
+  position: relative;
+
+  div {
+    outline: none;
+  }
+  
+  .@{fc-poptip-bar-text} {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+   
+    
+  }
+
+  .text-oveflow {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .iconfont {
+    font-size: @icon-font
+  }
+
+  .@{fc-poptip-bar-tip} {
+    .@{fc-icon-closed} {
+      right: @icon-font*1+4px;
+    }
+
+    .@{input-prefix-cls} {
+      padding-right: @icon-font*1+5px;
+    }
+  }
+}
+
+.@{fc-poptip-bar-two} {
+  .@{fc-icon-closed} {
+    right: @icon-font*2+8px;
+    width: 14px;
+  }
+
+  .@{input-prefix-cls} {
+    padding-right: @icon-font*3+6px;
+  }
+
+}
+
+.@{fc-poptip-bar-tip} {
+  .@{fc-icon-closed} {
+    right: @icon-font*1+8px;
+    width: 14px;
+  }
+
+  .@{input-prefix-cls} {
+    padding-right: @icon-font*2+6px;
+  }
+
+}
+
+.attachFiter-daigo {
+  .@{css-prefix}-modal-body {
+    padding: 0px;
+  }
+}
+
+.attachfiter-pop {
+  overflow: hidden;
+
+  li {
+    position: relative;
+  }
+
+  .fileForm {
+    filter: alpha(opacity=0);
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+
+  }
+}
+.attachfiter-pop-content{
+    padding: 0px;
+}
+.attachFiter-daigo-opctiy{
+    opacity: 0;
+}

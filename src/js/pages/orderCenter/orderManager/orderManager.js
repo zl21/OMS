@@ -2026,7 +2026,7 @@ export default {
                     },
                     pageSize: 10,
                     AutoData: [],
-                    hidecolumns: ['ID']
+                    hidecolumns: ['ID', 'SELLER_NICK', 'ECODE', 'CP_C_PLATFORM_ENAME', 'CONTACT_NAME', 'CP_C_STORE_NATURE_ID', 'JIT_WAREHOUSE_ECODE', 'MOBILEPHONE_NUM', 'ORIGINAL_RETURN_PHY_WAREHOUSE_ID', 'OWNER_CODE', 'PHONE_NUM', 'REMARK', 'SELLER_AREA_ID', 'SELLER_CITY_ID', 'SELLER_PROVINCE_ID', 'SELLER_ZIP', 'SEND_ADDRESS', 'WH_TYPE', 'WMS_ACCOUNT', 'WMS_WAREHOUSE_CODE']
                   }, // 组件属性
                   componentEvent: {
                     'on-popper-show': () => {
@@ -2096,7 +2096,41 @@ export default {
                         });
                     },
                     'on-input-value-change': e => {
-                      this.dropList.filter(item => item.label == '下单店铺')[0].componentAttribute.AutoData = [{ ID: '257', Label: '测试' }, { ID: '258', Label: '测试1' }, { ID: '259', Label: '测试2' }];
+                      const self = this;
+                      let premtype = '';
+                      if (item.selectTab.tabth.name === '店铺') {
+                        premtype = 'CP_C_SHOP_PERMISSION_ID';
+                      } else if (item.selectTab.tabth.name === '发货仓库') {
+                        premtype = 'CP_C_WAREHOUSE_ID';
+                      }
+                      const params = {
+                        isdroplistsearch: true,
+                        refcolid: item.selectTab.tabth.colid,
+                        fixedcolumns: {},
+                        startindex: (e - 1) * 10,
+                        range: 10,
+                        precolnameslist: [
+                          {
+                            iswrite: 'false',
+                            refcol: 'ID',
+                            premtype
+                          }
+                        ]
+                      };
+                      const data = new URLSearchParams();
+                      data.append('searchdata', JSON.stringify(params));
+                      self.service.orderCenter
+                        .QueryList(data)
+                        // self.$network
+                        //   .post('/p/cs/QueryList', data)
+                        .then(res => {
+                          console.log(res);
+                          if (res.data.code == 0) {
+                            this.dropList.filter(key => key.label == item.displayName)[0].componentAttribute.AutoData = this.setData(res.data.datas.row);
+                          } else {
+                            this.dropList.filter(item => item.label == item.displayName)[0].componentAttribute.AutoData = [];
+                          }
+                        });
                     }
                   }
                 };
@@ -2148,6 +2182,19 @@ export default {
             _this.setSearchOption();
           }
         });
+    },
+    // 处理数据
+    setData(array) {
+      const arr = [];
+      array.forEach(item=>{
+        const obj = {};
+        for (const key in item) {
+          console.log(key, item[key].val);
+          obj[key] = item[key].val;
+        }
+        arr.push(obj);
+      });
+      return arr;
     },
     // 展开 并获取from页面数据
     shutDownOrbounceOff() {
@@ -2318,14 +2365,14 @@ export default {
     search() {},
     // DropDownSelectFilter禁止用户输入
     onDropChange(value) {
-      // console.log('onDropChange::', value);
-      // if (value.type === 'DropDownSelectFilter') {
-      //   this.$nextTick(()=>{
-      //     const input = document.querySelector('.ark-integrate-search-filter-container').querySelector('input');
-      //     input.setAttribute('disabled', true);
-      //     input.classList.add('forceWhite');
-      //   });
-      // }
+      console.log('onDropChange::', value);
+      if (value.type === 'DropDownSelectFilter') {
+        this.$nextTick(()=>{
+          const input = document.querySelector('.ark-integrate-search-filter-container').querySelector('input');
+          input.setAttribute('disabled', true);
+          input.classList.add('forceWhite');
+        });
+      }
     },
     // 清除某个检索项值
     clearItem() {
