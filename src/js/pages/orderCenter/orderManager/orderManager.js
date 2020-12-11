@@ -2365,14 +2365,14 @@ export default {
     search() {},
     // DropDownSelectFilter禁止用户输入
     onDropChange(value) {
-      // console.log('onDropChange::', value);
-      // if (value.type === 'DropDownSelectFilter') {
-      //   this.$nextTick(()=>{
-      //     const input = document.querySelector('.ark-integrate-search-filter-container').querySelector('input');
-      //     input.setAttribute('disabled', true);
-      //     input.classList.add('forceWhite');
-      //   });
-      // }
+      console.log('onDropChange::', value);
+      if (value.type === 'DropDownSelectFilter') {
+        this.$nextTick(()=>{
+          const input = document.querySelector('.ark-integrate-search-filter-container').querySelector('input');
+          input.setAttribute('disabled', true);
+          input.classList.add('forceWhite');
+        });
+      }
     },
     // 清除某个检索项值
     clearItem() {
