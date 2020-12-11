@@ -60,19 +60,19 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            // text: "确定", //按钮文本
-            text: window.vmI18n.t('common.determine'), // 按钮文本
-            btnclick: () => {
-              this.update();
-            },
-          },
-          {
             // text: "取消", //按钮文本
             text: window.vmI18n.t('common.cancel'), // 按钮文本
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
+          {
+            // text: "确定", //按钮文本
+            text: window.vmI18n.t('common.determine'), // 按钮文本
+            btnclick: () => {
+              this.update();
+            },
+          }
         ],
       },
     };
