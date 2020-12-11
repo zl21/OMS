@@ -1236,6 +1236,8 @@ export default {
               _this.replacement.formData[5].itemdata.valuedata = res.data.data.receivingGoods.CP_C_REGION_PROVINCE_ENAME; // 省
               _this.replacement.formData[6].itemdata.valuedata = res.data.data.receivingGoods.CP_C_REGION_CITY_ENAME; // 市
               _this.replacement.formData[7].itemdata.valuedata = res.data.data.receivingGoods.CP_C_REGION_AREA_ENAME; // 区
+            } else {
+              _this.$message.warning(res.data.message);
             }
           });
         this.service.orderCenter
@@ -1246,6 +1248,10 @@ export default {
             detailType: 2 // 退换货订单使用
           })
           .then(async res => {
+            if (res.data.code != 0) {
+              _this.$Message.warning(res.data.message);
+              return
+            }
             const queryList = [];
             res.data.data.records.forEach(item => {
               if (item.REFUND_STATUS != 6) queryList.push(item);
@@ -3167,8 +3173,8 @@ export default {
           content: _this.vmI18n.t('modalTips.k7'), // 是否确定售后审核？
           mask: true,
           showCancel: true,
-          okText: _this.vmI18n.t('common.determine'), // 取消
-          cancelText: _this.vmI18n.t('common.cancel'), // 确定
+          okText: _this.vmI18n.t('common.determine'),
+          cancelText: _this.vmI18n.t('common.cancel'),
           onOk: () => {
             _this.service.common.chargebackcheck({ ID: _this.$route.query.id }).then(res => {
               if (res.data.code === 0) {
@@ -3193,9 +3199,9 @@ export default {
             content: res.data.code === 0 ? _this.vmI18n.t('modalTips.l3') : '此退换货单已生成未作废的换货类型零售发货单,不允许取消,继续将作废换货类型零售发货单以及退换订单', // 是否确定取消退单？
             mask: true,
             showCancel: true,
-            okText: _this.vmI18n.t('common.cancel'), // 取消
-            cancelText: _this.vmI18n.t('common.determine'), // 确定
-            onCancel: () => {
+            okText: _this.vmI18n.t('common.determine'),
+            cancelText: _this.vmI18n.t('common.cancel'),
+            onOk: () => {
               this.service.orderCenter.OcCancelChangingOrRefund({ ids: [this.$route.query.id] }).then(res => {
                 if (res.data.code == 0) {
                   _this.$Message.success(res.data.message);

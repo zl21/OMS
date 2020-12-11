@@ -119,7 +119,7 @@ export default {
       const { data: { data, code, message } } = await self.service.orderCenter.updateWarehouse(fromdata);
       self.isShowFromLoading = false;
       if (code === 0) {
-        if (self.$route.query.id == 2627) {
+        if (self.$route.params.customizedModuleId == 2627) {
           self.$parent.$parent.$parent.getData();
           if (!data) {
             self.$Message.success(message);
@@ -209,6 +209,8 @@ export default {
           self.$Message.success(message);
           self.$parent.$parent.closeConfirm();
         }
+      } else if (code === -1 && !data) {
+        self.$Message.error(message);
       } else {
         self.$Modal.error({
           title: window.vmI18n.t('modalTitle.tips'), // 提示

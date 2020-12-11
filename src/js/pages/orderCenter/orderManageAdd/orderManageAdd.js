@@ -1423,12 +1423,6 @@ export default {
           currentPage: 1,
           pageSize: 1000,
         })
-        // self.$network
-        //   .post('/p/cs/getOrderDetailList', {
-        //     id: copyID.id,
-        //     currentPage: 1,
-        //     pageSize: 1000,
-        //   })
         .then((res) => {
           if (res.data.code === 0) {
             self.jordanTableConfig.data = res.data.data.records;
@@ -1468,7 +1462,6 @@ export default {
             self.isShowFromLoading = true;
             self.btnConfig.loading = true;
             self.service.orderCenter.saveBill(data)
-              // self.$network.post('/p/cs/saveBill', data)
               .then((res) => {
                 self.isShowFromLoading = false;
                 if (res.data.code === 0) {
@@ -1502,7 +1495,6 @@ export default {
         self.isShowFromLoading = true;
         self.btnConfig.loading = true;
         self.service.orderCenter.saveBill(data)
-          // self.$network.post('/p/cs/saveBill', data)
           .then((res) => {
             self.isShowFromLoading = false;
             if (res.data.code === 0) {
@@ -1548,7 +1540,6 @@ export default {
           onOk: () => {
             self.isShowFromLoading = true;
             self.service.orderCenter.saveBill(data)
-              // self.$network.post('/p/cs/saveBill', data)
               .then((res) => {
                 self.isShowFromLoading = false;
                 if (res.data.code === 0) {
@@ -1584,7 +1575,6 @@ export default {
       } else {
         self.isShowFromLoading = true;
         self.service.orderCenter.saveBill(data)
-          // self.$network.post('/p/cs/saveBill', data)
           .then((res) => {
             self.isShowFromLoading = false;
             if (res.data.code === 0) {
@@ -1760,7 +1750,6 @@ export default {
           data.orderId = self.$route.query.id;
         }
         self.service.orderCenter.saveBill(data)
-          // self.$network.post('/p/cs/saveBill', data)
           .then((res) => {
             if (res.data.code === 0) {
               if (res.data.data) {
@@ -1775,12 +1764,6 @@ export default {
                   currentPage: 1,
                   pageSize: 1000,
                 })
-                // self.$network
-                //   .post('/p/cs/getOrderDetailList', {
-                //     id: self.ID,
-                //     currentPage: 1,
-                //     pageSize: 1000,
-                //   })
                 .then((result) => {
                   if (result.data.code == '0') {
                     self.jordanTableConfig.data = result.data.data.records;
@@ -2022,7 +2005,6 @@ export default {
       };
       if (self.ID) {
         self.service.orderCenter.delOrderItem(data)
-          // self.$network.post('/p/cs/delOrderItem', data)
           .then((res) => {
             if (res.data.code == 0) {
               self.$Message.success(res.data.message);
@@ -2032,12 +2014,6 @@ export default {
                   currentPage: 1,
                   pageSize: 1000,
                 })
-                // self.$network
-                //   .post('/p/cs/getOrderDetailList', {
-                //     id: self.ID,
-                //     currentPage: 1,
-                //     pageSize: 1000,
-                //   })
                 .then((result) => {
                   if (result.data.code == '0') {
                     // 对是否赠品,实物报缺进行映射
@@ -2093,11 +2069,6 @@ export default {
         cityName,
         areaName,
       });
-      // self.$network.post('/p/cs/queryResionByName', {
-      //   provinceName,
-      //   cityName,
-      //   areaName,
-      // });
     },
     // 获取市id
     // 获取区id

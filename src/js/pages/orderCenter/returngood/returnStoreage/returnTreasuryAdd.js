@@ -691,13 +691,6 @@ export default {
                 .returnCancel({
                   ids: [this.$route.query.id]
                 })
-                // axios({
-                //   url: '/api/cs/oc/oms/v1/returnCancel',
-                //   method: 'post',
-                //   data: {
-                //     ids: [this.$route.query.id],
-                //   },
-                // })
                 .then(res => {
                   if (res.data.code === 0) {
                     // let mes = res.data.message || "作废操作成功";
@@ -1025,13 +1018,6 @@ export default {
         .getCurrentBatch({
           BATCH_TYPE: ''
         })
-        // axios({
-        //   url: '/api/cs/oc/oms/v1/getCurrentBatch',
-        //   method: 'post',
-        //   data: {
-        //     BATCH_TYPE: '',
-        //   },
-        // })
         .then(res => {
           if (res.data.code === 0) {
             _this.optionsData = res.data.data;

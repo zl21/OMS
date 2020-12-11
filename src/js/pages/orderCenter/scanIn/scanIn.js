@@ -369,6 +369,8 @@ export default {
               }
             }
           });
+        } else {
+          this.$Message.warning(res.data.message);
         }
       });
     },
@@ -1017,10 +1019,6 @@ export default {
                     .getOneRefundItem({
                       PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE
                     })
-                    // self.$network
-                    //   .post('/api/cs/oc/oms/v1/getOneRefundItem', {
-                    //     PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE,
-                    //   })
                     .then(res => {
                       if (res.data.code === 0) {
                         res.data.data.IS_WITHOUT_ORIG = '是';
@@ -1078,11 +1076,6 @@ export default {
                       .getOneRefundItem({
                         PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE
                       })
-                      // this.$network
-                      //   .post('/api/cs/oc/oms/v1/getOneRefundItem', {
-                      //     PS_C_SKU_ECODE:
-                      //       self.formConfig3.formValue.PS_C_SKU_ECODE,
-                      //   })
                       .then(res => {
                         // console.log(res);
                         if (res.data.code === 0) {
@@ -1182,10 +1175,6 @@ export default {
                     .getOneRefundItem({
                       PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE
                     })
-                    // self.$network
-                    //   .post('/api/cs/oc/oms/v1/getOneRefundItem', {
-                    //     PS_C_SKU_ECODE: self.formConfig3.formValue.PS_C_SKU_ECODE,
-                    //   })
                     .then(res => {
                       if (res.data.code === 0) {
                         res.data.data.IS_WITHOUT_ORIG = '是';
@@ -1332,8 +1321,6 @@ export default {
                   // }
                   this.service.orderCenter
                     .saveScanIncoming(a)
-                    // this.$network
-                    //   .post('/api/cs/oc/oms/v1/saveScanIncoming', a)
                     .then(res => {
                       console.log(res);
                       if (res.data.code === 0) {
@@ -1499,10 +1486,6 @@ export default {
                   .getOneRefundItem({
                     PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE
                   })
-                  // self.$network
-                  //   .post('/api/cs/oc/oms/v1/getOneRefundItem', {
-                  //     PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE,
-                  //   })
                   .then(res => {
                     if (res.data.code === 0) {
                       const self = this;
@@ -1537,10 +1520,6 @@ export default {
                   .getOneRefundItem({
                     PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE
                   })
-                  // self.$network
-                  //   .post('/api/cs/oc/oms/v1/getOneRefundItem', {
-                  //     PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE,
-                  //   })
                   .then(res => {
                     if (res.data.code === 0) {
                       console.log(res);
@@ -1566,10 +1545,6 @@ export default {
                   .getOneRefundItem({
                     PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE
                   })
-                  // self.$network
-                  //   .post('/api/cs/oc/oms/v1/getOneRefundItem', {
-                  //     PS_C_SKU_ECODE: self.formConfig3.formValue.REAL_SKU_ECODE,
-                  //   })
                   .then(res => {
                     if (res.data.code === 0) {
                       if (res.data.data.PS_C_SKU_ECODE == self.onRowClickData.PS_C_SKU_ECODE) {

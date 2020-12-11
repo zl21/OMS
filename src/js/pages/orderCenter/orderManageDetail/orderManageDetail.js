@@ -176,9 +176,9 @@ export default {
                 content: window.vmI18n.t('modalTips.g7'), // 是否确定反审核订单？
                 mask: true,
                 showCancel: true,
-                okText: self.vmI18n.t('common.cancel'), // 取消
-                cancelText: self.vmI18n.t('common.determine'), // 确定
-                onCancel: () => {
+                okText: self.vmI18n.t('common.determine'), // 确定
+                cancelText: self.vmI18n.t('common.cancel'), // 取消
+                onOk: () => {
                   this.service.orderCenter.auditOrderReserve({
                       ids,
                       type: '1'
@@ -203,6 +203,9 @@ export default {
                         });
                       }
                     });
+                },
+                onCancel:()=> {
+                  this.$emit('closeActionDialog', false);
                 }
               });
             }
@@ -236,22 +239,23 @@ export default {
                 content: self.vmI18n.t('modalTips.e1'), // 是否确定取消Hold？
                 mask: true,
                 showCancel: true,
-                okText: self.vmI18n.t('common.cancel'), // 取消
-                cancelText: self.vmI18n.t('common.determine'), // 确定
-                onCancel: () => {
+                okText: self.vmI18n.t('common.determine'), // 确定
+                cancelText: self.vmI18n.t('common.cancel'), // 取消
+                onOk: () => {
                   self.btnConfig.loading = true;
                   self.service.orderCenter.manualUnHoldOrder(data)
-                  // self.$network
-                  //   .post('/api/cs/oc/oms/v1/manualUnHoldOrder', data)
                     .then((res) => {
                       if (res.data.code === 0) {
                         self.$Message.success(res.data.message);
                         self.autoRefresh();
                       } else {
-                        self.$Message.warning(res.data.message);
+                        self.$Message.warning(res.data.message || self.vmI18n.t('modalTips.d6')); // 服务器请求失败
                       }
                     });
                 },
+                onCancel:()=> {
+                  this.$emit('closeActionDialog', false);
+                }
               });
             }, // 按钮点击事件
           },
@@ -523,8 +527,6 @@ export default {
               const id = self.tab1.order.ID || -1;
               self.service.orderCenter
                 .cancelInterception({ ids: [id] })
-                // self.$network
-                //   .post('/api/cs/oc/oms/v1/orderInterception', { ids })
                 .then(res => {
                   if (res.data.code === 0) {
                     self.$Message.success(res.data.message);
@@ -634,8 +636,8 @@ export default {
                 content: self.vmI18n.t('modalTips.e0'), // 是否确定取消订单？
                 mask: true,
                 showCancel: true,
-                okText: self.vmI18n.t('common.determine'), // 取消
-                cancelText: self.vmI18n.t('common.cancel'), // 确定
+                okText: self.vmI18n.t('common.determine'), // 确定
+                cancelText: self.vmI18n.t('common.cancel'), // 取消
                 onOk: () => {
                   self.service.orderCenter
                     .cancelOrder({ ids, type: '1' })
