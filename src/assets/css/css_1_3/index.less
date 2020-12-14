@@ -1504,6 +1504,34 @@ body {
   }
 }
 // 所有弹框修改
+.importDialog.v-transfer-dom{
+  .ark-modal-footer{
+    div > div {
+      overflow: hidden;
+      button{
+        float: right ;
+        margin-left: 10px;
+        background: #fd6442;
+        color: #fff;
+        &:hover{
+          background: #fd6442;
+          color: #fff;
+          opacity: 1;
+        }
+        & + button{
+          background: transparent;
+          color: #fd6442;
+        
+          &:hover{
+            background: #fd6442;
+            color: #fff;
+            opacity: 1;
+          }
+        }
+      }
+  }
+  }
+}
 .v-transfer-dom{
   //标准弹框
   .ark-modal-confirm-footer{

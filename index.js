@@ -11,16 +11,16 @@ import ajax from 'framework/__utils__/ajax';
 import store from 'burgeonConfig/store/store'; // 将老框架公共状态注册为customize模块
 import groups from '@/assets/js/promotion/groups';
 import comUtils from '@/assets/js/__utils__/common';
-import enterpriseLogo from './src/assets/image/logo.png';
-import enterpriseBanner from './src/assets/image/banner.png';
-import Login from './src/component/Login';
-import WelcomePage from './src/component/WelcomePage';
 import projectRouterConfig from 'burgeonConfig/router.config';
 import customizedPageConfig from 'burgeonConfig/customized.page.config';
 import customizedModalConfig from 'burgeonConfig/customized.modal.config';
 import customizeWaterMarkConfig from 'burgeonConfig/customized.watermark.config';
 import filterUrlConfig from 'burgeonConfig/config/filterUrl.config';
 import myfilterUrlForNetworkScript from '@/service/filterUrlForNetwork';
+import WelcomePage from './src/component/WelcomePage';
+import Login from './src/component/Login';
+import enterpriseBanner from './src/assets/image/banner.png';
+import enterpriseLogo from './src/assets/image/logo.png';
 // ----------动态加载主题库皮肤包;
 
 import '@burgeon/oms-theme/theme/custom.less'; // 主题文件

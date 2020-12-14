@@ -99,25 +99,25 @@ export default {
       }
     ];
     this.btnConfig.buttons = [
-      {
-        // text: "新增",
-        text: this.vmI18n.t('btn.add'), // 按钮文本
-        btnclick: () => {
-          const _this = this;
-          _this.$store.commit('customize/TabHref', {
-            id: -1, // 单据id
-            type: 'action', // 类型action
-            name: 'setWarehouseLogistics', // 文件名
-            // label: "仓库物流优先级设置", // tab中文名
-            label: this.vmI18n.t('panel_label.setWarehouseLogistics'),
-            query: Object.assign({
-              id: -1, // 单据id
-              // tabTitle: "仓库物流优先级设置", // tab中文名
-              tabTitle: this.vmI18n.t('panel_label.setWarehouseLogistics')
-            }) // 带的参数
-          });
-        }
-      },
+      // {
+      //   // text: "新增",
+      //   text: this.vmI18n.t('btn.add'), // 按钮文本
+      //   btnclick: () => {
+      //     const _this = this;
+      //     _this.$store.commit('customize/TabHref', {
+      //       id: -1, // 单据id
+      //       type: 'action', // 类型action
+      //       name: 'setWarehouseLogistics', // 文件名
+      //       // label: "仓库物流优先级设置", // tab中文名
+      //       label: this.vmI18n.t('panel_label.setWarehouseLogistics'),
+      //       query: Object.assign({
+      //         id: -1, // 单据id
+      //         // tabTitle: "仓库物流优先级设置", // tab中文名
+      //         tabTitle: this.vmI18n.t('panel_label.setWarehouseLogistics')
+      //       }) // 带的参数
+      //     });
+      //   }
+      // },
       {
         // text: "保存",
         text: this.vmI18n.t('btn.save'), // 按钮文本
@@ -248,8 +248,8 @@ export default {
           row: 1,
           statsize: -1,
           type: 'STRING',
-          valuedata: ''
-        }
+          valuedata: '',
+        },
       },
       {
         style: 'input',
@@ -285,6 +285,7 @@ export default {
     // 保存
     async save() {
       const _this = this;
+      if (!_this.information.formData[0].itemdata.pid) return _this.$Message.warning('仓库不能为空!');
       _this.isSaveLoading = true;
       _this.name = '';
       _this.query = '';

@@ -43,23 +43,23 @@ export default {
       btnConfig: {
         typeAll: 'error',
         buttons: [
-          {
-            // text: '新增',
-            text: window.vmI18n.t('btn.add'), // 按钮文本
-            btnclick: () => {
-              const _this = this;
-              _this.$store.commit('customize/TabHref', {
-                id: -1, // 单据id
-                type: 'action', // 类型action
-                name: 'logisticsArea', // 文件名
-                label: '物流区域设置', // tab中文名
-                query: Object.assign({
-                  id: -1, // 单据id
-                  tabTitle: '物流区域设置' // tab中文名
-                }) // 带的参数
-              });
-            }
-          },
+          // {
+          //   // text: '新增',
+          //   text: window.vmI18n.t('btn.add'), // 按钮文本
+          //   btnclick: () => {
+          //     const _this = this;
+          //     _this.$store.commit('customize/TabHref', {
+          //       id: -1, // 单据id
+          //       type: 'action', // 类型action
+          //       name: 'logisticsArea', // 文件名
+          //       label: '物流区域设置', // tab中文名
+          //       query: Object.assign({
+          //         id: -1, // 单据id
+          //         tabTitle: '物流区域设置' // tab中文名
+          //       }) // 带的参数
+          //     });
+          //   }
+          // },
           {
             // text: '保存',
             text: window.vmI18n.t('btn.save'), // 按钮文本

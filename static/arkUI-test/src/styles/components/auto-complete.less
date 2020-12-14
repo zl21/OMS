@@ -1,0 +1,31 @@
+@auto-complete-prefix-cls: ~"@{css-prefix}auto-complete";
+
+.@{auto-complete-prefix-cls} {
+    .@{select-prefix-cls} {
+        &-not-found{
+            display: none;
+        }
+    }
+    .@{icon-prefix-cls}-ios-close{
+        display: none;
+    }
+    &:hover .@{icon-prefix-cls}-ios-close{
+        display: inline-block;
+    }
+    max-height: 200px;
+}
+.auto-com-table{
+    width: 100%;
+    border-spacing: 0px;
+    tr{
+        height: 28px;
+        td{
+            min-width: 20px;
+            max-width: 80px;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+            padding:0 6px;
+        }
+    }
+}

@@ -1,0 +1,78 @@
+@split-panel-prefix-cls: ~"@{css-prefix}split-panel";
+
+.@{split-panel-prefix-cls} {
+    &-container {
+        height: 100%;
+        width: 100%;
+    }
+    &-wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        .@{split-panel-prefix-cls}-split-panel {
+            height: 100%;
+            .@{split-panel-prefix-cls}-divide {
+                overflow: hidden;
+                cursor: col-resize;
+                height: 100%;
+                &-moving {
+                    -webkit-touch-callout: none;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+            }
+            .@{split-panel-prefix-cls}-pane {
+                overflow: auto;
+                height: 100%;
+                &-moving {
+                    -webkit-touch-callout: none;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+            }
+        }
+    }
+    &-wrapper-vertical {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        .@{split-panel-prefix-cls}-split-panel {
+            width: 100%;
+            .@{split-panel-prefix-cls}-divide {
+                overflow: hidden;
+                cursor: row-resize;
+                width: 100%;
+                &-moving {
+                    -webkit-touch-callout: none;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+            }
+            .@{split-panel-prefix-cls}-pane {
+                overflow: auto;
+                height: 100%;
+                &-moving {
+                    -webkit-touch-callout: none;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+            }
+        }
+    }
+    .no-select {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+}

@@ -153,16 +153,35 @@ export default {
         });
       }
     },
-    // 导出
-    downloadUrlFile(src) {
+    // 动态创建iframe标签用于下载模板
+    downloadUrlFile(url) {
+      const self = this;
+      const domFrame = window.parent.document.getElementById("downLoadListFrame");
+      if (domFrame != null) {
+        window.parent.document.body.removeChild(domFrame);
+      }
       const downloadFile = {};
       if (typeof downloadFile.iframe === 'undefined') {
         const iframe = document.createElement('iframe');
+        iframe.setAttribute("id", "downLoadListFrame");
+        self.addEvent('load',iframe,function () {self.iframeLoad(iframe);});
+        iframe.src = url;
         downloadFile.iframe = iframe;
         document.body.appendChild(downloadFile.iframe);
+        setTimeout(function () {
+          iframe.src = '';
+        },1000);
       }
-      downloadFile.iframe.src = src;
-      downloadFile.iframe.style.display = 'none';
+    },
+    // 判断iframe的src
+    iframeLoad(iframe) {
+      const src = (iframe.src) ? iframe.src : iframe.contentWindow.locatiion.href;
+      console.log('src::',src);
+    },
+    // 调用方法时绑定iframe的load事件
+    addEvent(eventName,element,fn){
+      if (element.attachEvent) element.attachEvent("on"+eventName,fn);
+      else element.addEventListener(eventName,fn,false);
     },
     // 导入
     importDialog() {

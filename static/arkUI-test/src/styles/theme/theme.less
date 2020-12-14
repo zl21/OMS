@@ -1,0 +1,233 @@
+
+//接收主题参数，设置变量
+  // Prefix
+
+// Color
+@primary-color          : #2d8cf0;  //主题色
+@info-color             : #2db7f5;  // info类型颜色
+@success-color          : #19be6b;  // 成功类型颜色
+@processing-color       : @primary-color; // 进度条颜色
+@warning-color          : #ff9900;  //警告类型颜色
+@error-color            : #ed4014;  //错误类型颜色
+@normal-color           : #e6ebf1;  //normal类型颜色
+@link-color             : #2D8cF0;  // 链接文字颜色
+@link-hover-color       : tint(@link-color, 20%); // 链接鼠标移上去颜色
+@link-active-color      : shade(@link-color, 5%); // 链接点击上去颜色
+@selected-color         : fade(@primary-color, 90%); // 选中状态颜色
+@tooltip-color          : #fff;  // tooltip文字颜色
+@subsidiary-color       : #808695;  //
+@rate-star-color        : #f5a623;  //Rate组件颜色
+
+// Base
+@body-background        : #fff;  //body背景色
+@font-family            : "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;  //字体
+@code-family            : Consolas,Menlo,Courier,monospace;  // code,kbd,pre,samp标签字体
+@title-color            : #17233d;  // title 字体颜色
+@text-color             : #515a6e; // 文本颜色
+@font-size-base         : 14px;  // 基本字体大小
+@font-size-small        : 12px;  //小号字体
+@font-size-large        : 16px;  // 大号字体
+@line-height-base       : 1.5;  //基础行高
+@line-height-computed   : floor((@font-size-base * @line-height-base));  //integrate-search-filter组件行高控制
+@border-radius-base     : 6px;  //基础圆角
+@border-radius-small    : 4px; //小号圆角
+@cursor-disabled        : not-allowed; //鼠标禁用
+@modal-radius-base      : @border-radius-base;   //弹框圆角  @modal-pos-radius-base此配置参数是因为原来有两个样式，现在合为一个
+@modal-pos-radius-base      : @modal-radius-base;  // 弹框圆角
+@modal-mask-background: rgba(0, 0, 0, 0.3);  //弹窗蒙层背景色
+
+@table-height-base: 32px;  //table基础行高
+@table-th-height-base: 32px; //table th基础行高
+@table-padding-base:8px;  // table单元格的padding
+
+// Border color
+@border-color-base      : #dcdee2;  // outside 边框颜色
+@border-color-split     : #e8eaec;  // inside
+@border-width-base      : 1px;            // width of the border for a component
+@border-style-base      : solid;          // style of a components border
+
+// Background color
+@background-color-base        : #f7f7f7;  // collapse,radio,tag背景色控制
+@background-color-select-hover: @input-disabled-bg;  //选中状态鼠标上移颜色
+@tooltip-bg                   : rgba(70, 76, 91, .9);  //tooltip 背景色
+@head-bg                      : #f9fafc;  // transfer head背景色
+@table-thead-bg               : #f8f8f9;  //表头背景色
+@table-td-stripe-bg           : #f8f8f9;  //表格分割线颜色
+@table-td-hover-bg            : #ebf7ff;  // td hover时td背景色
+@table-td-highlight-bg        : #ebf7ff;  // td高亮背景色
+@table-td-highlight-color     : #515a6e;  // td 高亮文字颜色
+@menu-dark-title              : #515a6e;  // menu 组件 dark主题的title颜色
+@menu-dark-active-bg          : #363e4f;  // menu 组件 dark主题激活状态背景色
+@menu-dark-subsidiary-color: rgba(255,255,255,.7); //menu 组件 二级菜单文字颜色
+@menu-dark-group-title-color  : rgba(255,255,255,.36); // menu 组件 dark主题group中title文字颜色
+@date-picker-cell-hover-bg    : #e1f0fe;  //日期控件面板中cell鼠标上移颜色
+
+
+// Shadow
+@shadow-color           : rgba(0, 0, 0, .2);  //  Shadow color
+@shadow-base            : @shadow-down; //默认的Shadow样式
+@shadow-card            : 0 1px 1px 0 rgba(0,0,0,.1);  //card 组件 shadow
+@shadow-up              : 0 -1px 6px @shadow-color;  //上
+@shadow-down            : 0 1px 6px @shadow-color;  //下
+@shadow-left            : -1px 0 6px @shadow-color;  //左
+@shadow-right           : 1px 0 6px @shadow-color;  //右
+
+// Button
+@btn-font-weight        : normal;  //按钮 font-weight
+@btn-padding-base       : 5px 15px 6px;  //按钮padding
+@btn-padding-large      : 6px 15px 6px 15px;  // large 按钮padding
+@btn-padding-small      : 1px 7px 2px; // small 按钮padding
+@btn-padding-base-icon  : 5px 15px 6px;  // 按钮中icon padding
+@btn-padding-large-icon : 6px 15px 6px 15px; // large 按钮中icon padding
+@btn-padding-small-icon : 1px 7px 2px; // small 按钮中icon padding
+@btn-font-size          : 12px;  //按钮字体大小
+@btn-font-size-large    : 14px;  // large 按钮字体大小
+@btn-border-radius      : 4px;  // 按钮 border-radius
+@btn-border-radius-small: 3px;  // small 按钮 border-radius
+@btn-group-border       : shade(@primary-color, 5%);  // 按钮组的 border
+
+@btn-disable-color      : #c5c8ce;  //按钮禁用文字颜色
+@btn-disable-bg         : @background-color-base;  //按钮禁用背景色
+@btn-disable-border     : @border-color-base; //按钮禁用border
+
+@btn-default-color      : @text-color;  //  default类型按钮文字颜色
+@btn-default-bg         : #fff;  //  default类型按钮背景色
+@btn-default-border     : @border-color-base; //  default类型按钮border
+
+//fc default button
+@btn-fcdefault-color: @primary-color;  // fcdefault类型按钮文字颜色
+@btn-fcdefault-bg         : #fff;  //  fcdefault类型按钮背景颜色
+@btn-fcdefault-border     : @primary-color; // fcdefault类型按钮border
+// @btn-fcdefault-disabled     : #D8D8D8 ; // fcdefault类型按钮disabled时的文字颜色
+@btn-fcdefault-disabled-bg     : #F4F4F4 ; // fcdefault类型按钮disabled时的背景色
+@btn-fcdefault-disabled-color:#D8D8D8;  // fcdefault类型按钮disabled时的文字颜色
+@btn-fcdefault-width:50px;  // fcdefault类型按钮默认宽度
+
+//pos default button
+@btn-posdefault-color: #fff;  // posdefault类型按钮文字颜色
+@btn-posdefault-bg         : @primary-color ; //  posdefault类型按钮背景颜色
+@btn-posdefault-border     : @btn-posdefault-bg  ; // posdefault类型按钮border
+@btn-posdefault-hover-bg     : @primary-color; // posdefault类型按钮hover 背景色
+// @btn-posdefault-disabled     : #D8D8D8 ;
+@btn-posdefault-disabled-bg     : #F4F4F4;  // posdefault类型按钮disabled时的背景色
+@btn-posdefault-disabled-color:#D8D8D8;  // posdefault类型按钮disabled时的文字颜色
+
+@btn-primary-color      : #fff;  // primary 类型按钮文字颜色
+@btn-primary-bg         : @primary-color; // primary 类型按钮背景颜色
+
+@btn-ghost-color        : @text-color; // ghost 类型按钮文字颜色
+@btn-ghost-bg           : #fff;  // ghost 类型按钮背景颜色
+@btn-ghost-border       : @border-color-base; // ghost 类型按钮border
+
+@btn-circle-size        : 32px;  // 圆形按钮的尺寸
+@btn-circle-size-large  : 36px; // large 圆形按钮的尺寸
+@btn-circle-size-small  : 24px; // small 圆形按钮的尺寸
+
+// Layout and Grid
+@grid-columns                : 24;  //栅栏布局的默认列数
+@grid-gutter-width           : 0;
+@layout-body-background      : #f5f7f9;  //背景色
+@layout-header-background    : #515a6e;  // layout header 背景色
+@layout-header-height        : 64px; // layout header 高度
+@layout-header-padding       : 0 50px; // layout header padding
+@layout-footer-padding       : 24px 50px; // layout footer padding
+@layout-footer-background    : @layout-body-background; // layout footer 背景色
+@layout-sider-background     : @layout-header-background; // layout sider 背景色
+@layout-trigger-height       : 48px;  // layout trigger 高度
+@layout-trigger-color        : #fff;  // layout trigger 颜色
+@layout-zero-trigger-width   : 36px;   // layout zero-trigger 宽度
+@layout-zero-trigger-height  : 42px;   // layout zero-trigger 高度
+
+// Legend
+@legend-color           : #999;
+
+// Input
+@input-height-base           : 26px;  // input 基础高度
+@input-height-large          : 36px; // large input 基础高度
+@input-height-small          : 24px; // small input 基础高度
+
+@input-padding-horizontal    : 7px; // 水平方向 padding
+@input-padding-vertical-base : 4px; // 垂直方向 base padding
+@input-padding-vertical-small: 1px; // 垂直方向 small padding
+@input-padding-vertical-large: 6px; // 垂直方向 large padding
+
+@input-placeholder-color     : @btn-disable-color; // input placeholder 颜色
+@input-color                 : @text-color; // input 文字颜色
+@input-disabled-color        : #ccc; // input disabled 文字颜色
+@input-border-radius         : 4px;  // input border-radius
+@input-border-color          : @border-color-base;  // input border-color
+@input-bg                    : #fff;  // input 背景色
+@input-group-bg              : #f8f8f9;  // input prepend,append slot 的背景色
+
+@input-hover-border-color    : @primary-color; // input hover border-color
+@input-focus-border-color    : @primary-color; // input focus border-color
+@input-disabled-bg           : #f3f3f3;  //input disabled 背景色
+
+// Tag
+@tag-font-size          : 12px;  // tag组件 font-size
+
+// Media queries breakpoints
+// Extra small screen / phone
+@screen-xs              : 480px;
+@screen-xs-min          : @screen-xs;
+@screen-xs-max          : (@screen-xs-min - 1);
+
+// Small screen / tablet
+@screen-sm              : 768px;
+@screen-sm-min          : @screen-sm;
+@screen-sm-max          : (@screen-sm-min - 1);
+
+// Medium screen / desktop
+@screen-md              : 992px;
+@screen-md-min          : @screen-md;
+@screen-md-max          : (@screen-md-min - 1);
+
+// Large screen / wide desktop
+@screen-lg              : 1200px;  // layout 布局的媒体查询
+@screen-lg-min          : @screen-lg;  // layout min 布局的媒体查询
+@screen-lg-max          : (@screen-lg-min - 1);  // layout max 布局的媒体查询
+
+// Z-index  各组件初始化zindex
+@zindex-spin            : 8;
+@zindex-affix           : 10;
+@zindex-back-top        : 10;
+@zindex-select          : 900;
+@zindex-modal           : 1000;
+@zindex-drawer          : 1000;
+@zindex-message         : 1010;
+@zindex-notification    : 1010;
+@zindex-tooltip         : 1060;
+@zindex-transfer        : 1060;
+@zindex-loading-bar     : 2000;
+@zindex-spin-fullscreen : 2010;
+
+// Animation
+@animation-time         : .3s; //animation时间
+@transition-time        : .2s; // transition时间
+@ease-in-out            : ease-in-out;  //动画效果
+@collapse-transition-time : 0.4s; //collapse 组件动画时间
+
+// Slider
+@slider-color              : tint(@primary-color, 20%);  //silder 文字颜色
+@slider-height             : 4px; //silder 高度
+@slider-margin             : 16px 0; //silder margin
+@slider-button-wrap-size   : 18px; //silder button 大小
+@slider-button-wrap-offset : -4px; //silder button offset 大小
+@slider-disabled-color     : #ccc; //silder 禁用颜色
+
+// Avatar
+@avatar-size-base: 32px; // Avatar base 大小
+@avatar-size-lg: 40px;  //Avatar lg 大小
+@avatar-size-sm: 24px;  //Avatar sm 大小
+@avatar-font-size-base: 18px;  //Avatar 字体 base 大小
+@avatar-font-size-lg: 24px; //Avatar 字体 lg 大小
+@avatar-font-size-sm: 14px; //Avatar 字体 sm 大小
+@avatar-bg: #ccc; //Avatar 背景色
+@avatar-color: #fff; //Avatar 文字颜色
+@avatar-border-radius: @border-radius-small; //Avatar border-radius
+
+// Anchor
+@anchor-border-width: 2px; // Anchor border-width
+
+ //icon 字体大小
+ @icon-font:16px;
