@@ -1,7 +1,8 @@
 @import '~@burgeon/oms-theme/skin/public.less';
 
 .auto-check {
-  .ark-tabs{
+  & /deep/ .ark-tabs{
+    height: 100%;
     .ark-tabs-nav .ark-tabs-tab:hover{ 
      color: @base-color;
     }
@@ -33,10 +34,14 @@
     }
   }
 
-  .ark-form {
+  & /deep/ .ark-form {
     .ark-form-item {
       margin-bottom: 0;
-
+      .ark-fkrp-select-icon{
+        top: 6px;
+        height: 24px;
+        line-height: 24px;
+      }
       .ark-form-item-label {
         overflow: hidden;
         white-space: nowrap;
