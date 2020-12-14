@@ -201,15 +201,15 @@ export default {
               // 基本信息模块下拉单选数据取值
               self.formConfig.formData.forEach((item) => {
                 if (
-                  item.itemdata &&
-                  item.itemdata.name === self.vmI18n.t('form_label.orderShop')
+                  item.itemdata
+                  && item.itemdata.name === self.vmI18n.t('form_label.orderShop')
                 ) {
                   ocBorderDto.CP_C_SHOP_TITLE = item.itemdata.valuedata;
                   ocBorderDto.CP_C_SHOP_ID = item.itemdata.pid;
                 } else if (
-                  item.itemdata &&
-                  item.itemdata.name ===
-                  self.vmI18n.t('form_label.distribution_logistics')
+                  item.itemdata
+                  && item.itemdata.name
+                  === self.vmI18n.t('form_label.distribution_logistics')
                 ) {
                   ocBorderDto.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
                   ocBorderDto.CP_C_LOGISTICS_ID = item.itemdata.pid;
@@ -218,23 +218,23 @@ export default {
               // 收货人信息下拉单选数据取值 收货人省 收货人市 下单店铺
               self.formConfig1.formData.forEach((item) => {
                 if (
-                  item.itemdata &&
-                  item.itemdata.name ===
-                  self.vmI18n.t('form_label.consignee_province')
+                  item.itemdata
+                  && item.itemdata.name
+                  === self.vmI18n.t('form_label.consignee_province')
                 ) {
                   ocBorderDto.CP_C_REGION_PROVINCE_ENAME = item.itemdata.valuedata;
                   ocBorderDto.CP_C_REGION_PROVINCE_ID = item.itemdata.pid;
                 } else if (
-                  item.itemdata &&
-                  item.itemdata.name ===
-                  self.vmI18n.t('form_label.consignee_city')
+                  item.itemdata
+                  && item.itemdata.name
+                  === self.vmI18n.t('form_label.consignee_city')
                 ) {
                   ocBorderDto.CP_C_REGION_CITY_ENAME = item.itemdata.valuedata;
                   ocBorderDto.CP_C_REGION_CITY_ID = item.itemdata.pid;
                 }
                 if (
-                  item.itemdata &&
-                  item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
+                  item.itemdata
+                  && item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
                 ) {
                   ocBorderDto.CP_C_REGION_AREA_ENAME = item.itemdata.valuedata;
                   ocBorderDto.CP_C_REGION_AREA_ID = item.itemdata.pid;
@@ -254,14 +254,17 @@ export default {
               }
               // 如果是丢单复制或者复制订单的保存，传被复制订单的id
               // 如果为丢单复制,则新增一个标识
+              const copyTitle = { 
+丢单复制: '1', 原单无效复制: '2', 错发复制: '3', 漏发复制: '4', 赠品出库复制: '5' 
+};
               if (copyID.orderCopy) {
-                data.type = '2';
+                data.type = copyTitle[this.$route.query.pageTitle];
                 data.orderId = copyID.id;
                 data.ocBorderDto.ORDER_TYPE = self.ORDER_TYPE;
               }
               // 如果为复制订单,则新增一个标识
               if (copyID.copyOrder) {
-                data.type = '1';
+                data.type = copyTitle[this.$route.query.pageTitle];
                 data.orderId = copyID.id;
               }
               self.btnConfig.buttons[0].disabled = true;
@@ -385,8 +388,8 @@ export default {
               const optionsArr = _this.formConfig.formData[8].options;
               for (let i = 0; i < optionsArr.length; i++) {
                 if (
-                  optionsArr[i].value ===
-                  _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID
+                  optionsArr[i].value
+                  === _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID
                 ) {
                   _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = optionsArr[i].label;
                   return;
@@ -496,12 +499,12 @@ export default {
               const self = this;
               self.address = parse(self.formConfig1.formValue.site);
               if (
-                self.address.addr == '' ||
-                self.address.area == '' ||
-                self.address.city == '' ||
-                self.address.name == '' ||
-                self.address.mobile == '' ||
-                self.address.province == ''
+                self.address.addr == ''
+                || self.address.area == ''
+                || self.address.city == ''
+                || self.address.name == ''
+                || self.address.mobile == ''
+                || self.address.province == ''
               ) {
                 // "请填入完整信息,如:XX,17788888888,上海上海市闵行区XXXXXXXXXXX"
                 self.$Message.warning(self.vmI18n.t('modalTips.f9'));
@@ -1705,15 +1708,15 @@ export default {
         self.formConfig.formData.forEach((item) => {
           // 下单店铺 配送物流 收货人省份 收货人市 收货人区
           if (
-            item.itemdata &&
-            item.itemdata.name === self.vmI18n.t('form_label.orderShop')
+            item.itemdata
+            && item.itemdata.name === self.vmI18n.t('form_label.orderShop')
           ) {
             ocBorderDto.CP_C_SHOP_TITLE = item.itemdata.valuedata;
             ocBorderDto.CP_C_SHOP_ID = item.itemdata.pid;
           } else if (
-            item.itemdata &&
-            item.itemdata.name ===
-            self.vmI18n.t('form_label.distribution_logistics')
+            item.itemdata
+            && item.itemdata.name
+            === self.vmI18n.t('form_label.distribution_logistics')
           ) {
             ocBorderDto.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_LOGISTICS_ID = item.itemdata.pid;
@@ -1721,22 +1724,22 @@ export default {
         }); // 基本信息模块下拉单选数据取值
         self.formConfig1.formData.forEach((item) => {
           if (
-            item.itemdata &&
-            item.itemdata.name ===
-            self.vmI18n.t('form_label.consignee_province')
+            item.itemdata
+            && item.itemdata.name
+            === self.vmI18n.t('form_label.consignee_province')
           ) {
             ocBorderDto.CP_C_REGION_PROVINCE_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_REGION_PROVINCE_ID = item.itemdata.pid;
           } else if (
-            item.itemdata &&
-            item.itemdata.name === self.vmI18n.t('form_label.consignee_city')
+            item.itemdata
+            && item.itemdata.name === self.vmI18n.t('form_label.consignee_city')
           ) {
             ocBorderDto.CP_C_REGION_CITY_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_REGION_CITY_ID = item.itemdata.pid;
           }
           if (
-            item.itemdata &&
-            item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
+            item.itemdata
+            && item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
           ) {
             ocBorderDto.CP_C_REGION_AREA_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_REGION_AREA_ID = item.itemdata.pid;
@@ -1911,8 +1914,8 @@ export default {
         if (item.itemdata) {
           // 发货仓库
           if (
-            item.itemdata.name == e.name &&
-            item.itemdata.name == window.vmI18n.t('form_label.delivery_warehouse')
+            item.itemdata.name == e.name
+            && item.itemdata.name == window.vmI18n.t('form_label.delivery_warehouse')
           ) {
             _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = item.itemdata.pid;
           }
@@ -2083,9 +2086,9 @@ export default {
       this.formConfig.formData.forEach((item) => {
         // 下单店铺
         if (
-          item.itemdata &&
-          item.itemdata.name === window.vmI18n.t('form_label.orderShop') &&
-          !item.itemdata.pid
+          item.itemdata
+          && item.itemdata.name === window.vmI18n.t('form_label.orderShop')
+          && !item.itemdata.pid
         ) {
           promptMessage += `${window.vmI18n.t('form_label.orderShop')},`;
         }
@@ -2134,16 +2137,16 @@ export default {
       this.formConfig1.formData.forEach((item) => {
         // 收货人省份 收货人市 收货人地址
         if (
-          item.itemdata &&
-          item.itemdata.name ===
-          window.vmI18n.t('form_label.consignee_province') &&
-          !item.itemdata.pid
+          item.itemdata
+          && item.itemdata.name
+          === window.vmI18n.t('form_label.consignee_province')
+          && !item.itemdata.pid
         ) {
           promptMessage += `${window.vmI18n.t('form_label.consignee_province')},`;
         } else if (
-          item.itemdata &&
-          item.itemdata.name === window.vmI18n.t('form_label.consignee_city') &&
-          !item.itemdata.pid
+          item.itemdata
+          && item.itemdata.name === window.vmI18n.t('form_label.consignee_city')
+          && !item.itemdata.pid
         ) {
           promptMessage += `${window.vmI18n.t('form_label.consignee_city')},`;
         }
@@ -2188,15 +2191,15 @@ export default {
       self.formConfig.formData.forEach((item) => {
         // 下单店铺 配送物流
         if (
-          item.itemdata &&
-          item.itemdata.name === self.vmI18n.t('form_label.orderShop')
+          item.itemdata
+          && item.itemdata.name === self.vmI18n.t('form_label.orderShop')
         ) {
           item.itemdata.valuedata = data.CP_C_SHOP_TITLE;
           item.itemdata.pid = data.CP_C_SHOP_ID;
         } else if (
-          item.itemdata &&
-          item.itemdata.name ===
-          self.vmI18n.t('form_label.distribution_logistics')
+          item.itemdata
+          && item.itemdata.name
+          === self.vmI18n.t('form_label.distribution_logistics')
         ) {
           item.itemdata.valuedata = data.CP_C_LOGISTICS_ENAME;
           item.itemdata.pid = data.CP_C_LOGISTICS_ID;
@@ -2222,20 +2225,20 @@ export default {
       self.formConfig1.formData.forEach((item) => {
         // 收货人省份 收货人市 收货人区
         if (
-          item.itemdata &&
-          item.itemdata.name === self.vmI18n.t('form_label.consignee_province')
+          item.itemdata
+          && item.itemdata.name === self.vmI18n.t('form_label.consignee_province')
         ) {
           item.itemdata.valuedata = data.CP_C_REGION_PROVINCE_ENAME;
           item.itemdata.pid = data.CP_C_REGION_PROVINCE_ID;
         } else if (
-          item.itemdata &&
-          item.itemdata.name === self.vmI18n.t('form_label.consignee_city')
+          item.itemdata
+          && item.itemdata.name === self.vmI18n.t('form_label.consignee_city')
         ) {
           item.itemdata.valuedata = data.CP_C_REGION_CITY_ENAME;
           item.itemdata.pid = data.CP_C_REGION_CITY_ID;
         } else if (
-          item.itemdata &&
-          item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
+          item.itemdata
+          && item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
         ) {
           item.itemdata.valuedata = data.CP_C_REGION_AREA_ENAME;
           item.itemdata.pid = data.CP_C_REGION_AREA_ID;
