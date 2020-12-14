@@ -1,3 +1,5 @@
+import formatData from '@/assets/js/__utils__/date.js';
+
 export default {
   // 京东退单接口列表界面(下载退单)
   formConfig: {
@@ -71,8 +73,8 @@ export default {
     const params = {
       table: self.$route.params.tableName,
       shop_id: shopId,
-      start_time: self.standardTimeConversiondateToStr(formValue.query_date[0]),
-      end_time: self.standardTimeConversiondateToStr(formValue.query_date[1])
+      start_time: formatData.standardTimeConversiondateToStr(formValue.query_date[0]),
+      end_time: formatData.standardTimeConversiondateToStr(formValue.query_date[1])
     };
     const fromdata = new FormData();
     fromdata.append('param', JSON.stringify(params));

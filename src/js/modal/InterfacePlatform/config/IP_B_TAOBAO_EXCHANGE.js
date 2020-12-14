@@ -1,3 +1,5 @@
+import formatData from '@/assets/js/__utils__/date.js';
+
 export default {
   // 淘宝换货单接口列表界面
   formConfig: {
@@ -90,8 +92,8 @@ export default {
     const param = {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid,
       bill_no: self.downLoadFormConfig.formValue.bill_no,
-      start_time: self.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[0]),
-      end_time: self.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[1]),
+      start_time: formatData.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[0]),
+      end_time: formatData.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[1]),
       status: self.downLoadFormConfig.formValue.status,
       table: 'IP_B_TAOBAO_EXCHANGE'
     };

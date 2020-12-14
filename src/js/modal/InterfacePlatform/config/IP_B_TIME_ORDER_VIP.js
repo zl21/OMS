@@ -1,3 +1,5 @@
+import formatData from '@/assets/js/__utils__/date.js';
+
 export default {
   // 京东订单接口列表界面(下载订单)
   formConfig: {
@@ -72,10 +74,10 @@ export default {
     let startTime = self.downLoadFormConfig.formValue.query_date[0];
     let endTime = self.downLoadFormConfig.formValue.query_date[1];
     if (startTime) {
-      startTime = self.standardTimeConversiondateToStr(startTime);
+      startTime = formatData.standardTimeConversiondateToStr(startTime);
     }
     if (endTime) {
-      endTime = self.standardTimeConversiondateToStr(endTime);
+      endTime = formatData.standardTimeConversiondateToStr(endTime);
     }
     const param = {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
