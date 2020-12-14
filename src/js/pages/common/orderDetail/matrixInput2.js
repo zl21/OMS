@@ -2,9 +2,10 @@ import R3 from '@syman/burgeon-r3';
 import matrix from 'framework/components/views/custompage/matrix.vue';
 import DragDialog from 'framework/components/dialog/dragDialog.vue';
 import axios from 'framework/__utils__/request';
+// import port from '@/js/pages/common/orderDetail/connector',
 
 const { store } = R3;
-const port = R3.connector;
+const port = require('@/js/pages/common/orderDetail/connector').default;
 
 export default {
   props: {

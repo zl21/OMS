@@ -1,7 +1,7 @@
 import chineseDiction from 'framework/assets/js/ChineseDictionary.js';
 import axios from 'framework/__utils__/request';
-import port from './connector.js';
 import businessButton from 'professionalComponents/businessButton';
+import port from './connector.js';
 
 export default {
   components: {
@@ -895,7 +895,7 @@ export default {
     }, // 纯展示匹配按钮
     findId() {
       if (Object.prototype.toString.call(this.objList) === '[object Array]') {
-        let id = '';
+        let id;
         let istrue = false; // 判断修改的值是否相同
         this.objList.map((obj) => {
           if (obj.childs) {
