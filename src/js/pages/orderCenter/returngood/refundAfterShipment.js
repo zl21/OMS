@@ -539,6 +539,7 @@ export default {
             text: window.vmI18n.t('btn.audit'), // 审核
             // class: 'save',
             // icon: 'md-download',
+            disabled: this.$route.params.customizedModuleId === 'New',
             btnclick: () => {
               this.audit();
             },
@@ -1197,7 +1198,7 @@ export default {
     },
     audit() {
       const self = this;
-      self.service.orderCenter.examineTheRefundAfterDelivery({ ids: [1, 2] }).then(res=>{
+      self.service.orderCenter.examineTheRefundAfterDelivery({ ids: [this.$route.params.customizedModuleId] }).then(res=>{
         console.log(res);
         if (res.data.data.code == 0) {
           this.$Message.success(res.data.data.message);
