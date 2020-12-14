@@ -1556,7 +1556,7 @@ body {
   }
   // ark组件弹窗
   .ark-modal-footer{
-    button{
+    & > button{
       & + button{
         &> span{
           color: @button-bg-font;
@@ -1593,5 +1593,12 @@ body {
   button:hover{
     background-color:@base-color;
     color: @button-bg-font;
+  }
+}
+.fkdialog .dialog_right .right_bottom {
+  display: flex;
+  justify-content: flex-end;
+  button + button{
+    order: 2;
   }
 }

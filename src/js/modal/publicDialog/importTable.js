@@ -61,104 +61,68 @@ export default {
     },
     // 下载模板
     downloadTemplate() {
-      if (this.componentData.tableName === 'OC_B_ORDER') {
-        // 零售发货单
-        this.getDownloadTemp('/api/cs/oc/oms/v1/downloadOrderTemp');
-      } else if (this.componentData.tableName === 'PS_C_SKU' || this.componentData.tableName === 'SG_B_CHANNEL_PRODUCT' || this.componentData.tableName === 'PS_C_PRO' || this.componentData.tableName === 'IP_C_TAOBAO_PRODUCT') {
-        const searchParam = new URLSearchParams();
-        searchParam.append('param', JSON.stringify({ mode: this.componentData.mode }));
-        this.getDownloadTemp('/p/cs/pm/v1/getModuleUrl', searchParam);
-      } else if (this.componentData.tableName === 'OC_B_RETURN_ORDER') {
-        // 退换货订单
-        this.getDownloadTemp('/api/cs/oc/oms/v1/downloadReturnOrderTemp');
-      } else if (this.componentData.tableName === 'PS_C_SKUGROUP') {
-        if (this.componentData.operationType === 'baseInfo') {
-          // 组合商品明细表与虚拟明细
-          this.getDownloadTemp('/p/cs/product/downloadSkuGroupTemp', {
-            type: this.componentData.type
+      // 获取接口数组
+      const objArr = this.service.common.importApiArr(this.componentData.objid ? this.componentData.objid : '');
+      // 筛选出当前表的接口对象
+      const itemObj = objArr.filter(item => item.tableName === this.componentData.tableName);
+      switch (itemObj[0].tableName) {
+        case 'PS_C_SKU' || 'SG_B_CHANNEL_PRODUCT' || 'PS_C_PRO' || 'IP_C_TAOBAO_PRODUCT':
+          console.log(itemObj[0]);
+          // eslint-disable-next-line no-case-declarations
+          const searchParam = new URLSearchParams();
+          searchParam.append('param', JSON.stringify({ mode: this.componentData.mode }));
+          this.getDownloadTemp(itemObj[0].downLoadUrl, searchParam);
+          break;
+        case 'PS_C_SKUGROUP': 
+          if (this.componentData.operationType === 'baseInfo') {
+            // 组合商品明细表与虚拟明细
+            this.getDownloadTemp(itemObj[0].downloadUrlType, {
+              type: this.componentData.type
+            });
+          } else {
+            // 组合商品档案明细
+            this.getDownloadTemp(itemObj[0].downLoadUrl, {
+              type: this.componentData.type
+            });
+          }
+          break;
+        case 'ST_C_WAREHOUSE_LOGISTICS' || 'ST_C_SEND_RULE' || 'ST_C_SEND_RULE_RATE' || '':
+          this.getDownloadTemp(itemObj[0].downLoadUrl, {
+            objid: this.componentData.objid
           });
-        } else {
-          this.getDownloadTemp('/p/cs/product/downloadRealSkuGroupTemp', {
-            type: this.componentData.type
+          break;
+        case 'AC_F_RECEIVABLES_ADJUSTMENT':
+          this.getDownloadTemp(itemObj[0].downLoadUrl, {
+            billType: this.componentData.billType
           });
-        }
-      } else if (this.componentData.tableName === 'OC_B_INVOICE_NOTICE') {
-        // 开票信息
-        this.getDownloadTemp('/api/cs/oc/oms/v1/downloadInvoiceNotice');
-      } else if (this.componentData.tableName === 'AC_F_DISTRIBUTION') {
-        // 分销代销商品明细
-        this.getDownloadTemp('/p/cs/downloadDistributionItem');
-      } else if (this.componentData.tableName === 'ST_C_EXPRESS_AREA') {
-        // 物流区域设置
-        this.getDownloadTemp('/p/cs/downloadExpressAreaItem');
-      } else if (this.componentData.tableName === 'OUT_OF_STOCK_MEMO') {
-        // 缺货备注
-        this.getDownloadTemp('/api/cs/oc/oms/v1/downloadUpdateRemarkTemp');
-      } else if (this.componentData.tableName === 'ST_C_WAREHOUSE_LOGISTICS') {
-        // 仓库物流优先级设置
-        this.getDownloadTemp('/p/cs/downloadWarehouseLogisticsRank', {
-          objid: this.componentData.objid
-        });
-      } else if (this.componentData.tableName === 'OC_B_REFUND_IN') {
-        // 退货入库
-        this.getDownloadTemp('/api/cs/oc/oms/v1/downloadRdfundInRemarkTemp');
-      } else if (this.componentData.tableName === 'ST_C_SEND_RULE') {
-        // 订单派单规则-优先级
-        this.getDownloadTemp('/p/cs/downloadSendRuleWarehouseRank', {
-          objid: this.componentData.objid
-        });
-      } else if (this.componentData.tableName === 'ST_C_SEND_RULE_RATE') {
-        // 订单派单规则-比例
-        this.getDownloadTemp('/p/cs/downloadSendRuleWarehouseRate', {
-          objid: this.componentData.objid
-        });
-      } /* else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY') {
-        // 店铺商品特殊设置
-        this.getDownloadTemp('/p/cs/downloadProductStrategyItem');
-      } */ else if (this.componentData.tableName === 'OC_B_RETURN_ORDER_remark') {
-        // 退换货卖家备注导入
-        this.getDownloadTemp('/api/cs/oc/oms/v1/downloadReturnRemarkTemp');
-      } else if (this.componentData.tableName === 'AC_F_RECEIVABLES_ADJUSTMENT') {
-        // 应收款调整单导入
-        this.getDownloadTemp('/p/cs/receivableAdjustmentDownload', {
-          billType: this.componentData.billType
-        });
-      } else if (this.componentData.tableName === 'SC_B_TRANSFER') {
-        if (this.componentData.importType === 3) {
-          const downloadUrl = 'http://qd-r3-upload-dev.oss-cn-shanghai.aliyuncs.com/import/template/sc_b_transfer/dbd_template.xlsx';
-          this.downloadUrlFile(downloadUrl);
-        } else {
-          // 导入-调拨单
-          this.getDownloadTemp('/p/cs/transfer/downloadTemp');
-        }
-      } else if (this.componentData.tableName === 'SG_B_PHY_OUT_RESULT') {
-        if (this.componentData.importType === 1) {
-          this.getDownloadTemp('/p/cs/downLoadSgPhyOutResultTemp');
-        }
-      } else if (this.componentData.tableName === 'OC_B_MULTI_STORE_DISTRIBUTION') {
-        this.getDownloadTemp('/p/cs/oc/v1/sale/downloadMultiStoreDistributionSku');
-      } else if (this.componentData.tableName === 'OC_B_SEND_OUT') {
-        if (this.componentData.importType === 1) {
-          // this.getDownloadTemp("/p/cs/oc/v1/send/downloadSendOut");
-          const downloadUrl = 'http://qd-r3-upload-dev.oss-cn-shanghai.aliyuncs.com/import/template/saleorder/importTemplate_batch.xlsx';
-          this.downloadUrlFile(downloadUrl);
-        } else {
-          const downloadUrl = 'http://qd-r3-upload-dev.oss-cn-shanghai.aliyuncs.com/import/template/saleorder/importTemplate.xlsx';
-          this.downloadUrlFile(downloadUrl);
-        }
-      } else if (this.componentData.tableName === 'OC_B_JD_RETURN_ORDER') {
-        // 导入-调拨单
-        this.getDownloadTemp('/p/cs/ocBJdReturnOrder/downloadTemple');
-      } else if (this.componentData.tableName === 'IP_C_STANDPLAT_PRO') {
-        // 通用商品下载
-        const downloadUrl = 'http://smtools.oss-cn-shanghai.aliyuncs.com/import/template/893/商品下载-商品代码上传模板-root-20200622161110098.xlsx';
-        this.downloadUrlFile(downloadUrl);
-      } else if (this.componentData.tableName === 'ST_C_SYNC_STOCK_STRATEGY') {
-        // 店铺同步库存策略
-        this.getDownloadTemp('/p/cs/downLoadSyncStockStrategyImportTemp');
-      } else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY') {
-        // 店铺商品特殊设置 - 多店铺比例-明细导入
-        this.getDownloadTemp('/p/cs/productStrategy/import/downloadMultiShopTemp');
+          break;
+        case 'SC_B_TRANSFER':
+          if (this.componentData.importType === 3) {
+            this.downloadUrlFile(itemObj[0].downloadUrlType);
+          } else {
+            // 导入-调拨单
+            this.getDownloadTemp(itemObj[0].downLoadUrl);
+          }
+          break;
+        case 'SG_B_PHY_OUT_RESULT':
+          if (this.componentData.importType === 1) {
+            this.getDownloadTemp(itemObj[0].downLoadUrl);
+          }
+          break;
+        case 'OC_B_SEND_OUT':
+          if (this.componentData.importType === 1) {
+            this.downloadUrlFile(itemObj[0].downloadUrlType);
+          } else {
+            // 导入-调拨单
+            this.downloadUrlFile(itemObj[0].downLoadUrl);
+          }
+          break;
+        case 'IP_C_STANDPLAT_PRO':
+          this.downloadUrlFile(itemObj[0].downLoadUrl);
+          break;
+        default:
+          this.getDownloadTemp(itemObj[0].downloadUrl);
+          break;
       }
     },
 
@@ -203,97 +167,71 @@ export default {
     // 导入
     importDialog() {
       if (this.handleBefore(this.files)) return;
-      if (this.componentData.tableName === 'OC_B_ORDER') {
-        // 零售发货单
-        this.getImportDialog('/api/cs/oc/oms/v1/importOcBOrder');
-      } else if (this.componentData.tableName === 'PS_C_SKU' || this.componentData.tableName === 'SG_B_CHANNEL_PRODUCT' || this.componentData.tableName === 'PS_C_PRO' || this.componentData.tableName === 'IP_C_TAOBAO_PRODUCT') {
-        // 促销中心导入弹窗
-        if (this.componentData.mode == 'batch') {
-          this.getImportDialog('/p/cs/pm/v1/parseActiExcelCmd');
-        } else {
-          this.getImportDialog('/p/cs/pm/v1/parseExcel');
-        }
-      } else if (this.componentData.tableName === 'OC_B_RETURN_ORDER') {
-        // 退换货订单
-        this.getImportDialog('/api/cs/oc/oms/v1/importReturnOrder');
-      } else if (this.componentData.tableName === 'PS_C_SKUGROUP') {
-        if (this.componentData.operationType === 'baseInfo') {
-          // 组合商品档案明细与虚拟条码
-          this.getImportDialog('/p/cs/product/skuGroupImport');
-        } else {
-          // 组合商品档案明细
-          this.getImportDialog('/p/cs/product/realSkuGroupImport');
-        }
-      } else if (this.componentData.tableName === 'OC_B_INVOICE_NOTICE') {
-        // 开票信息
-        this.getImportDialog('/api/cs/oc/oms/v1/importInvoiceNotice');
-      } else if (this.componentData.tableName === 'AC_F_DISTRIBUTION') {
-        // 分销代销商品明细
-        this.getImportDialog('/p/cs/importDistributionItem');
-      } else if (this.componentData.tableName === 'ST_C_EXPRESS_AREA') {
-        // 物流区域设置
-        this.getImportDialog('/p/cs/importExpressAreaItem', this.componentData.objid);
-      } else if (this.componentData.tableName === 'OUT_OF_STOCK_MEMO') {
-        // 缺货备注
-        this.getImportDialog('/api/cs/oc/oms/v1/batchImport', this.componentData.objid);
-      } else if (this.componentData.tableName === 'ST_C_WAREHOUSE_LOGISTICS') {
-        // 仓库物流优先级设置
-        this.getImportDialog('/p/cs/importWarehouseLogisticsRank', this.componentData.objid);
-      } else if (this.componentData.tableName === 'OC_B_REFUND_IN') {
-        // 退货入库
-        this.getImportDialog('/api/cs/oc/oms/v1/refundInImport');
-      } else if (this.componentData.tableName === 'ST_C_SEND_RULE') {
-        // 订单派单规则-优先级
-        this.getImportDialog('/p/cs/importSendRuleWarehouseRank', this.componentData.objid);
-      } else if (this.componentData.tableName === 'ST_C_SEND_RULE_RATE') {
-        // 订单派单规则-比例
-        this.getImportDialog('/p/cs/importSendRuleWarehouseRate', this.componentData.objid);
-      } /* else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY') {
-        // 店铺商品特殊设置
-        this.getImportDialog('/p/cs/importProductStrategyItem', this.componentData.objid);
-      } */ else if (this.componentData.tableName === 'OC_B_RETURN_ORDER_remark') {
-        // 退换货卖家备注导入
-        this.getImportDialog('/api/cs/oc/oms/v1/importReturnSellerRemark', this.componentData.objid);
-      } else if (this.componentData.tableName === 'AC_F_RECEIVABLES_ADJUSTMENT') {
-        // 应收款调整单导入
-        this.getImportDialog('/p/cs/receivableAdjustmentImport', this.componentData.billType);
-      } else if (this.componentData.tableName === 'SC_B_TRANSFER') {
-        if (this.componentData.importType === 3) {
-          this.getImportDialog('/p/cs/store/transfer/importTransferItems', this.componentData.objid);
-        } else {
-          this.getImportDialog('/p/cs/transfer/sgTransferImport');
-        }
-      } else if (this.componentData.tableName === 'SG_B_PHY_OUT_RESULT') {
-        if (this.componentData.importType === 1) {
-          this.getImportDialog('/p/cs/importSgPhyOutResult');
-        }
-      } else if (this.componentData.tableName === 'OC_B_MULTI_STORE_DISTRIBUTION') {
-        this.getImportDialog('/p/cs/oc/v1/sale/importMultiStoreDistributionSku', this.componentData.objid);
-      } else if (this.componentData.tableName === 'OC_B_SEND_OUT') {
-        if (this.componentData.importType === 1) {
-          this.getImportDialog('/p/cs/oc/v1/send/importSendOut');
-        } else {
-          this.getImportDialog('/p/cs/oc/v1/send/importSendOutSku', this.componentData.objid);
-        }
-      } else if (this.componentData.tableName === 'OC_B_JD_RETURN_ORDER') {
-        this.getImportDialog('/p/cs/ocBJdReturnOrder/importTemple');
-      } else if (this.componentData.tableName === 'IP_C_STANDPLAT_PRO') {
-        // 通用商品下载
-        this.getImportDialog('/p/cs/getItemIdsForExcel');
-      } else if (this.componentData.tableName === 'ST_C_SYNC_STOCK_STRATEGY') {
-        // 店铺同步库存策略
-        this.getImportDialog('/p/cs/importSyncStockStrategy');
-      } else if (this.componentData.tableName === 'ST_C_PRODUCT_STRATEGY') {
-        // 店铺商品特殊设置 - 多店铺比例-明细导入
-        this.getImportDialog('/p/cs/productStrategy/import/multiShopItem', this.componentData.objid);
+      // 获取接口数组
+      const objArr = this.service.common.importApiArr();
+      // 筛选出当前表的接口对象
+      const itemObj = objArr.filter(item => item.tableName === this.componentData.tableName);
+      console.log(itemObj[0].tableName);
+      switch (itemObj[0].tableName) {
+        case 'PS_C_SKU' || 'SG_B_CHANNEL_PRODUCT' || 'PS_C_PRO' || 'IP_C_TAOBAO_PRODUCT':
+          // 促销中心导入弹窗
+          if (this.componentData.mode == 'batch') {
+            this.getImportDialog(itemObj[0].urlType);
+          } else {
+            this.getImportDialog(itemObj[0].url);
+          }
+          break;
+        case 'PS_C_SKUGROUP': 
+          if (this.componentData.operationType === 'baseInfo') {
+            // 组合商品档案明细与虚拟条码
+            this.getImportDialog(itemObj[0].urlType);
+          } else {
+            // 组合商品档案明细
+            this.getImportDialog(itemObj[0].url);
+          }
+          break;
+        case 'ST_C_EXPRESS_AREA' || 'OUT_OF_STOCK_MEMO' || 'ST_C_WAREHOUSE_LOGISTICS' || 'ST_C_SEND_RULE' || 'ST_C_SEND_RULE_RATE' || 'OC_B_RETURN_ORDER_remark' || 'OC_B_MULTI_STORE_DISTRIBUTION' || 'ST_C_PRODUCT_STRATEGY':
+          this.getImportDialog(itemObj[0].url, this.componentData.objid);
+          break;
+        case 'AC_F_RECEIVABLES_ADJUSTMENT':
+          this.getImportDialog(itemObj[0].url, this.componentData.billType);
+          break;
+        case 'SC_B_TRANSFER':
+          if (this.componentData.importType === 3) {
+            this.getImportDialog(itemObj[0].urlType, this.componentData.objid);
+          } else {
+            this.getImportDialog(itemObj[0].url);
+          }
+          break;
+        case 'SG_B_PHY_OUT_RESULT':
+          if (this.componentData.importType === 1) {
+            this.getImportDialog(itemObj[0].url);
+          }
+          break;
+        case 'OC_B_SEND_OUT':
+          if (this.componentData.importType === 1) {
+            this.getImportDialog(itemObj[0].urlType);
+          } else {
+            this.getImportDialog(itemObj[0].url, this.componentData.objid);
+          }
+          break;
+        default:
+          this.getImportDialog(itemObj[0].url);
+          break;
       }
+      // 判断如果有其他类型
+      // if (this.componentData.mode || this.componentData.operationType || this.componentData.importType) {
+      //   this.getImportDialog(itemObj[0].urlType, this.componentData.objid ? this.componentData.objid : '');
+      // } else {
+      //   this.getImportDialog(itemObj[0].url, this.componentData.objid ? this.componentData.objid : '');
+      // }
     },
     closeConfirm() {
       const _this = this;
       // 元数据配置窗口特殊处理
       if (_this.configTableName.includes(_this.componentData.tableName)) {
         _this.$parent.$emit('closeActionDialog');
-      } else if (_this.$parent.$parent.closeConfirm){
+      } else if (_this.$parent.$parent.closeConfirm) {
         _this.$parent.$parent.closeConfirm();
       } else {
         _this.$parent.$emit('closeActionDialog');
@@ -370,29 +308,21 @@ export default {
       })
         .then(res => {
           if (res.data.code === 0) {
-            // _this.$Message.success(res.data.message || "导入成功");
+            // 导入成功
             _this.$Message.success(res.data.message || this.vmI18n.t('modalTips.ze'));
-            /* if (_this.configTableName.includes(_this.componentData.tableName)) {
-              _this.$parent.$emit('closeActionDialog');
-            } else {
-              _this.closeConfirm()
-            } */
             _this.$emit('returnData', res.data.data);
             _this.customizeInvoke(_this.componentData.tableName);
-            // _this.closeConfirm();
             _this.loading = false;
           } else if (res.data.code === -1) {
-            // let err = res.data.message || "导入失败";
+            // 导入失败
             const err = res.data.message || this.vmI18n.t('modalTips.zd');
             _this.isError = true;
             _this.errorMessage = err;
-            // _this.$Message.error(_this.errorMessage);
             _this.loading = false;
           } else if (res.data.data) {
             _this.loading = false;
             _this.isError = true;
             _this.errorMessage = res.data.message;
-            // _this.$Message.error(_this.errorMessage);
             this.downloadUrlFile(res.data.data);
             _this.loading = false;
           }
