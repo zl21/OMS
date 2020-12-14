@@ -3,8 +3,8 @@ import reButton from 'professionalComponents/businessButton';
 import reTable from 'professionalComponents/businessActionTable';
 import reForm from 'professionalComponents/businessForm';
 import dateFormat from '@/assets/js/__utils__/common';
-import refundAfterShipment from './constants/refundAfterShipment';
 import comUtils from '@/assets/js/__utils__/common';
+import refundAfterShipment from './constants/refundAfterShipment';
 
 export default {
   components: {
@@ -533,6 +533,14 @@ export default {
             // icon: 'md-download',
             btnclick: () => {
               this.save();
+            },
+          },
+          {
+            text: window.vmI18n.t('btn.audit'), // 审核
+            // class: 'save',
+            // icon: 'md-download',
+            btnclick: () => {
+              this.audit();
             },
           },
           {
@@ -1186,6 +1194,34 @@ export default {
             self.$Message.error(res.data.message);
           }
         });
+    },
+    audit() {
+      const self = this;
+      self.service.orderCenter.examineTheRefundAfterDelivery({ ids: [1, 2] }).then(res=>{
+        console.log(res);
+        if (res.data.data.code == 0) {
+          this.$Message.success(res.data.data.message);
+        } else {
+          this.$Modal.confirm({
+            title: res.data.data.message,
+            render: (h) => h('Table', {
+                props: {
+                  columns: [
+                    {
+                      title: 'id',
+                      key: 'objid'
+                    },
+                    {
+                      title: '报错信息',
+                      key: 'message'
+                    }
+                  ],
+                  data: res.data.data.data
+                }
+              })
+          });
+        }
+      });
     },
     // 赋值表单数据
     setForm(data) {
