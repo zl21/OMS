@@ -3,7 +3,8 @@ import setWarehouseLogistics from 'allpages/strategyPlatform/setWarehouseLogisti
 import courierPay from 'allpages/strategyPlatform/courierPay/courierPay'; // 策略平台-快递赔付方案(新增/详情)
 import orderAutoCheck from 'allpages/strategyPlatform/orderAutoCheck'; // 订单自动审核
 import sendSingleRule from 'allpages/strategyPlatform/sendSingleRule'; // 发货单派单规则
-import wphEmailSend from "allpages/strategyPlatform/wphEmailSend";
+import wphEmailSend from "allpages/strategyPlatform/wphEmailSend"; // 唯品会预警通知-新增/详情-内容设置
+import smsStrategy from "allpages/strategyPlatform/smsStrategy"; // 短信策略-新增/详情-内容设置
 
 export default {
   // 策略平台-物流区域设置
@@ -32,5 +33,8 @@ export default {
   WPHEMAILSEND: {
     component: wphEmailSend,
     labelName: '唯品会预警通知'
+  },
+  SMSSTRATEGY: {
+    component: smsStrategy,
   },
 };
