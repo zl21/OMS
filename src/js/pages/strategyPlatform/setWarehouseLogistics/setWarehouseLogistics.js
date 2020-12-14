@@ -384,8 +384,10 @@ export default {
               });
             });
           }
+          _this.synchronous();
         } else {
           this.theadArr = [];
+          _this.synchronous();
         }
         // _this.provinceSynchronous();
       });
@@ -409,13 +411,13 @@ export default {
         });
       }
       // 接口
-      _this.tableLoading = false;
       const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeNode: treeList };
       // 接口
       const {
         data: { oK, data }
       } = await this.service.common.getLogisticsRankResultTable(params);
       if (oK) {
+        _this.tableLoading = false;
         _this.cityThead = true;
         console.log(data);
         if (!data || !data.length) return;

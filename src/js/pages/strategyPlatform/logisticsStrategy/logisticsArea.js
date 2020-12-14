@@ -194,15 +194,16 @@ export default {
       _objid: -1,
     };
   },
-  mounted() {
+  async mounted() {
     if (this.$route.params.customizedModuleId == 'New') {
       this._objid = -1;
     } else {
       this._objid = this.$route.params.customizedModuleId;
     }
     this.information.formData[0].itemdata.readonly = true;
-    this.setTableHeight();
-    this.getTree('',this._objid);
+    await this.setTableHeight();
+    await this.getTree('',this._objid);
+    await this.synchronous();
   },
   methods: {
     // 保存
@@ -260,9 +261,11 @@ export default {
             tabTitle: _this.vmI18n.t('panel_label.logisticsAreaSetting') // 物流区域设置
           }) // 带的参数
         });
+        this.synchronous();
       } else {
         const err = message || _this.vmI18n.t('modalTips.y0'); // '保存失败';
         _this.$message.error(err);
+        this.synchronous();
       }
     },
     // 作废
