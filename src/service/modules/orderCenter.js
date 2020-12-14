@@ -103,6 +103,7 @@ export default {
   refund2Exchange: params => network.post('/api/cs/oc/oms/v1/refund2Exchange', params), // 退货转换货
   refund2ExchangeValidate: params => network.post('/api/cs/oc/oms/v1/refund2Exchange/before/validate', params), // 退货转换货校验
   getOrderId: params => network.post('/api/cs/oc/oms/v1/getOrderId', params), // 根据平台单号,查询零售发货单id
+  examineTheRefundAfterDelivery: params => network.post('/api/cs/oc/oms/v1/examineTheRefundAfterDelivery', params), // 额外退款审核
   // 半定制弹框
   //
   updateWarehouse: params => network.post('/api/cs/oc/oms/v1/updateWarehouse', params),
