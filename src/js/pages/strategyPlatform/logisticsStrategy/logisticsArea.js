@@ -542,11 +542,15 @@ export default {
     // 设置表格高度
     setTableHeight() {
       const contentHeight = document.getElementById('content').clientHeight;
-      let logisticsAreaHeight = 25;
-      logisticsAreaHeight += document.getElementsByClassName('tableTop')[0].clientHeight;
+      let logisticsAreaHeight = 0;
+      this.$nextTick(() => {
+        logisticsAreaHeight += document.getElementsByClassName('one_button')[0].clientHeight;
+        logisticsAreaHeight += document.getElementsByClassName('tableTop')[0].clientHeight;
+        logisticsAreaHeight += document.getElementsByClassName('jordanLabel')[0].clientHeight;
+      });
       const tableHeight = contentHeight - logisticsAreaHeight;
       const Theight = document.getElementsByClassName('tableBox')[0];
-      Theight.style = `height: ${tableHeight - 100}px;`;
+      Theight.style = `height: ${tableHeight - 250}px;`;
     }
   }
 };

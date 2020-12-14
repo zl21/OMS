@@ -594,7 +594,7 @@ export default {
       });
       const tableHeight = contentHeight - logisticsAreaHeight;
       const Theight = document.getElementsByClassName('tableBox')[0];
-      Theight.style = `height: ${tableHeight - 270}px;`;
+      Theight.style = `height: ${tableHeight - 260}px;`;
     },
     paperScroll(e) {
       const sLefts = document.getElementById('fixedDiv');
