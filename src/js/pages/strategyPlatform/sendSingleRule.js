@@ -805,7 +805,7 @@ export default {
       let logisticsAreaHeight = 0;
       this.$nextTick(() => {
         logisticsAreaHeight += document.getElementsByClassName('one_button')[0].clientHeight;
-        logisticsAreaHeight += document.getElementsByClassName('tableTop')[0].clientHeight;
+        logisticsAreaHeight += document.getElementsByClassName('jordanLabel')[0].clientHeight;
         logisticsAreaHeight += document.getElementsByClassName('jordanLabel')[0].clientHeight;
       });
       const tableHeight = contentHeight - logisticsAreaHeight;
