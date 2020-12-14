@@ -86,24 +86,7 @@
         </div>
       </div>
     </div>
-    <div class="dialog-footer">
-      <businessButton :btn-config="btnConfig" />
-      <!-- <Button 
-        type="error" 
-        ghost 
-        size="small" 
-        @click="closeConfirm"
-      >
-        取消
-      </Button>
-      <Button 
-        type="primary" 
-        size="small" 
-        @click="importDialog"
-      >
-        确定
-      </Button> -->
-    </div>
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 
