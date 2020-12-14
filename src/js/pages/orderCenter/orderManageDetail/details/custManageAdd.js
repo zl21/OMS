@@ -1,4 +1,4 @@
-
+// 零售发货单-详情-订单明细
 import businessActionTable from 'professionalComponents/businessActionTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';

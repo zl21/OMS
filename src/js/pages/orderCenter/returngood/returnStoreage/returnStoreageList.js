@@ -85,6 +85,7 @@ export default {
           {
             // text: "查找",
             text: window.vmI18n.t('btn.find'), // 按钮文本
+            webname: 'lookup_tuihuoruku',
             btnclick: () => {
               this.requestBefore();
             }
@@ -92,6 +93,7 @@ export default {
           {
             // text: "新增",
             text: window.vmI18n.t('btn.add'), // 按钮文本
+            webname: 'Newlyadded_tuihuoruku',
             btnclick: () => {
               this.$store.commit('customize/TabHref', {
                 id: -1, // id
@@ -110,6 +112,7 @@ export default {
           {
             // text: "手工匹配",
             text: window.vmI18n.t('btn.manual_matching'), // 按钮文本
+            webname: 'ManualMatching_tuihuoruku',
             disabled: false,
             btnclick: () => {
               const self = this;
@@ -159,6 +162,7 @@ export default {
           {
             // text: "错发强制匹配",
             text: window.vmI18n.t('btn.wrong_sending_forced_matching'), // 按钮文本
+            webname: 'Mismatchingmandatorymatching_cuofa',
             disabled: false,
             btnclick: () => {
               const self = this;
@@ -209,6 +213,7 @@ export default {
             // =======================================================暂时影藏
             // text: "作废",
             text: window.vmI18n.t('btn.void'), // 按钮文本
+            webname: '',
             isShow: false,
             btnclick: () => {
               this.selection = this.$refs.agGridChild.AGTABLE.getSelect();
@@ -233,6 +238,7 @@ export default {
             type: '', // 按钮类型
             // text: "导入", //按钮文本
             text: window.vmI18n.t('btn.import'), // 按钮文本
+            webname: 'refundInImport',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
@@ -243,6 +249,7 @@ export default {
           {
             // text: "导出", //按钮文本
             text: window.vmI18n.t('btn.export'), // 按钮文本
+            webname: 'export_tuihuoruku',
             btnclick: () => {
               this.exportClick();
             } // 按钮点击事件

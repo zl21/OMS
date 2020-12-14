@@ -1,3 +1,4 @@
+// 退换货单详情
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
@@ -1080,6 +1081,7 @@ export default {
         this.btnConfig.buttons = [
           {
             text: this.vmI18n.t('btn.save'), // 保存 按钮文本
+            webname: 'refund_save',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.saveData();
@@ -1087,6 +1089,7 @@ export default {
           },
           {
             text: window.vmI18n.t('btn.back'), // 返回 按钮文本
+            webname: 'refund_return',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
@@ -1108,6 +1111,7 @@ export default {
         this.btnConfig.buttons = [
           {
             text: window.vmI18n.t('btn.save'), // 保存 按钮文本
+            webname: 'refund_save',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.saveData();
@@ -1116,6 +1120,7 @@ export default {
           {
             isShow: '',
             text: window.vmI18n.t('btn.afterSalesAudit'), // 售后审核 按钮文本
+            webname: 'shenhe_tuihuanhuo',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.afterAudit();
@@ -1123,6 +1128,7 @@ export default {
           },
           {
             text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            webname: 'quxiao_tuihuanhuo',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.cancelBtn();
@@ -1130,6 +1136,7 @@ export default {
           },
           {
             text: window.vmI18n.t('btn.virtualWarehous'), // 虚拟入库 按钮文本
+            webname: 'xuniruku_tuihuanhuo',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.virtualLibrary();
@@ -1144,6 +1151,7 @@ export default {
           // },
           {
             text: window.vmI18n.t('btn.modifyRemarks'), // 修改备注 按钮文本
+            webname: 'beizhu_tuihuanh',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.bounced();
@@ -1151,6 +1159,7 @@ export default {
           },
           // {
           //   text: window.vmI18n.t('btn.mark_efective_product_transferred'), // 标记次品已调拨 按钮文本
+          //   webname: 'return_order_goods_db',
           //   disabled: true, // 按钮禁用控制
           //   btnclick: () => {
           //     this.defectiveGoods();
@@ -1158,6 +1167,7 @@ export default {
           // },
           {
             text: window.vmI18n.t('common.return'), // 返回 按钮文本
+            webname: 'refund_return',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
@@ -1381,7 +1391,7 @@ export default {
               if (res.data.data.returnOrders.RETURN_STATUS != 30) {
                 _this.btnConfig.buttons.forEach(item => {
                   // 售后审核
-                  if (item.text == _this.vmI18n.t('btn.afterSalesAudit')) {
+                  if (item.webname == 'shenhe_tuihuanhuo') {
                     item.disabled = true;
                   }
                 });
@@ -1389,11 +1399,11 @@ export default {
               if (res.data.data.returnOrders.RETURN_STATUS != 20) {
                 _this.btnConfig.buttons.forEach(item => {
                   // 取消
-                  if (item.text == _this.vmI18n.t('common.cancel')) {
+                  if (item.webname == 'quxiao_tuihuanhuo') {
                     item.disabled = true;
                   }
                   // 虚拟入库
-                  if (item.text == _this.vmI18n.t('btn.virtualWarehous')) {
+                  if (item.webname == 'xuniruku_tuihuanhuo') {
                     item.disabled = true;
                   }
                 });
@@ -1401,7 +1411,7 @@ export default {
               if (res.data.data.returnOrders.RETURN_STATUS == 60) {
                 _this.btnConfig.buttons.forEach(item => {
                   // 修改备注
-                  if (item.text == _this.vmI18n.t('btn.modifyRemarks')) {
+                  if (item.webname == 'beizhu_tuihuanh') {
                     item.disabled = true;
                   }
                 });
@@ -1576,7 +1586,7 @@ export default {
           if (res.data.data.returnOrders.RETURN_STATUS != 30) {
             _this.btnConfig.buttons.forEach(item => {
               // 售后审核
-              if (item.text == _this.vmI18n.t('btn.afterSalesAudit')) {
+              if (item.webname == 'shenhe_tuihuanhuo') {
                 item.disabled = true;
               }
             });
@@ -1584,11 +1594,11 @@ export default {
           if (res.data.data.returnOrders.RETURN_STATUS != 20) {
             _this.btnConfig.buttons.forEach(item => {
               // 取消
-              if (item.text == _this.vmI18n.t('common.cancel')) {
+              if (item.webname == 'quxiao_tuihuanhuo') {
                 item.disabled = true;
               }
               // 虚拟入库
-              if (item.text == _this.vmI18n.t('btn.virtualWarehous')) {
+              if (item.webname == 'xuniruku_tuihuanhuo') {
                 item.disabled = true;
               }
             });
@@ -1596,7 +1606,7 @@ export default {
           if (res.data.data.returnOrders.RETURN_STATUS == 60) {
             _this.btnConfig.buttons.forEach(item => {
               // 修改备注
-              if (item.text == _this.vmI18n.t('btn.modifyRemarks')) {
+              if (item.webname == 'beizhu_tuihuanh') {
                 item.disabled = true;
               }
             });
@@ -1647,7 +1657,7 @@ export default {
       } else if (data.STATUS_DEFECTIVE_TRANS == 1) {
         item.RESERVE_BIGINT07_type = '次品未调拨';
         this.btnConfig.buttons.forEach(item => {
-          if (item.text == '标记次品已调拨') item.disabled = false;
+          if (item.webname == 'return_order_goods_db') item.disabled = false;
         });
       }
       item.PLATFORM = data.PLATFORM;

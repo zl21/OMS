@@ -2132,7 +2132,7 @@ export default {
       this.jordanTableConfig1.businessFormConfig.formData = [];
       this.jordanTableConfig2.businessFormConfig.formData = [];
       this.btnConfig.buttons.forEach(item => {
-        if (item.text !== '返回') {
+        if (item.text !== window.vmI18n.t('btn.back')) {
           this.$set(item, 'disabled', true);
         }
       });

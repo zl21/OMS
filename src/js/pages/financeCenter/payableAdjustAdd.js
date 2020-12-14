@@ -59,8 +59,7 @@ export default {
         typeAll: 'error',
         buttons: [
           {
-            // text: "保存", //按钮文本
-            text: window.vmI18n.t('btn.save'),
+            webname: 'lookup_save', // 保存
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -105,7 +104,7 @@ export default {
             }
           },
           {
-            // text: "返回",
+            webname: 'lookup_return', // 返回
             text: window.vmI18n.t('btn.back'),
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
@@ -1428,7 +1427,7 @@ export default {
       const self = this;
       // 保存按钮隐藏
       self.btnConfig.buttons.forEach(btn => {
-        if (btn.text === '保存') {
+        if (btn.webname === 'lookup_save') {
           btn.isShow = false;
         }
       });

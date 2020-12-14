@@ -27,8 +27,8 @@
           typeAll: 'error', // 按钮统一风格样式
           buttons: [
             {
-              text: '查找', // 按钮文本
-              disabled: false, // 按钮禁用控制
+            webname: 'lookup_kucuntongbuduilie', // 查找
+            disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.find();
               } // 按钮点击事件

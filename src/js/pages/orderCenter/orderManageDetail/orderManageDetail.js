@@ -142,7 +142,7 @@ export default {
         typeAll: 'error',
         buttons: [
           {
-            text: window.vmI18n.t('btn.audit'), // 审核
+            webname: 'To examine', // 审核
             btnclick: () => {
               const self = this;
               const ids = [];
@@ -166,7 +166,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.deAudit'), // 反审核
+            webname: 'Counter-audit', // 反审核
             btnclick: () => {
               const self = this;
               const ids = [];
@@ -211,7 +211,7 @@ export default {
             }
           },
           {
-            text: window.vmI18n.t('btn.holdOrder'), // Hold单
+            webname: 'holdOrder2', // Hold单
             btnclick: () => {
               const self = this;
               const ids = self.$route.params.customizedModuleId;
@@ -226,7 +226,7 @@ export default {
             }
           },
           {
-            text: window.vmI18n.t('btn.cancelHold'), // 取消Hold
+            webname: 'cancelHoldOrder2', // 取消Hold
             btnclick: () => {
               const self = this;
               const ids = [];
@@ -260,7 +260,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.splitOrder'), // 拆分订单
+            webname: 'Split the order', // 拆分订单
             btnclick: () => {
               const self = this;
               this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.$route.params.customizedModuleId }).then(res => {
@@ -308,7 +308,7 @@ export default {
             }
           },
           {
-            text: window.vmI18n.t('btn.modify_logistics'), // 修改物流
+            webname: 'Revisinguupdate', // 修改物流
             btnclick: () => {
               const self = this;
               const ids = [];
@@ -353,7 +353,7 @@ export default {
             }
           },
           {
-            text: window.vmI18n.t('btn.modifyWarehouse'), // 修改仓库
+            webname: 'updatestore', // 修改仓库
             btnclick: () => {
               const self = this;
               const ids = [];
@@ -394,7 +394,7 @@ export default {
             }
           },
           {
-            text: window.vmI18n.t('btn.modifyRemarks'), // 修改备注
+            webname: 'updateremark', // 修改备注
             btnclick: () => {
               const self = this;
               const ids = [];
@@ -412,7 +412,7 @@ export default {
             }
           },
           {
-            text: window.vmI18n.t('btn.beOut_of_stock'), // 缺货重新占单
+            webname: 'Out-of-stock reopening', // 缺货重新占单
             btnclick: () => {
               const self = this;
               if (self.tab1.order.ID > 0) {
@@ -434,7 +434,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.fubaoOut_of_stock'), // 福袋缺货重新占单
+            webname: 'FortuneBag-Out-of-stock reopening', // 福袋缺货重新占单
             btnclick: () => {
               const self = this;
               if (self.tab1.order.ID > 0) {
@@ -456,7 +456,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.changeAddress'), // 修改地址
+            webname: 'order_update_addrr', // 修改地址
             btnclick: () => {
               // 判断条件是否符合
               const self = this;
@@ -553,7 +553,7 @@ export default {
             btnclick: () => {} // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.additionalRefund'), // 额外退款
+            webname: 'refund_price', // 额外退款
             btnclick: () => {
               if (this.statusName === this.vmI18n.t('other.warehouseDelivery') || this.statusName === this.vmI18n.t('other.platformDelivery')) {
                 this.$store.commit('customize/TabOpen', {
@@ -574,7 +574,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.new_chargeback'), // 新增退单
+            webname: 'New refund receipt', // 新增退单
             btnclick: () => {
               const orderDetails = this.tab1.order;
               // “仓库发货”、“平台发货”
@@ -597,13 +597,13 @@ export default {
             }
           },
           {
-            text: window.vmI18n.t('btn.refresh'), // 刷新 按钮文本
+            webname: 'order_refreceing', // 刷新
             btnclick: () => {
               this.autoRefresh();
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.back'), // 返回 按钮文本
+            webname: 'order_fund', // 返回
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
               this.$store.commit('customize/TabHref', {
@@ -619,11 +619,12 @@ export default {
               });
             } // 按钮点击事件
           },
-          {
+          /* {
             text: window.vmI18n.t('btn.copyOrder') // 复制订单
-          },
+          }, */
           {
-            text: window.vmI18n.t('btn.orderCancel'), // 订单取消
+            // text: window.vmI18n.t('btn.orderCancel'), // 
+            webname: 'Order Cancellation', // 订单取消
             btnclick: () => {
               const self = this;
               console.log('self.$refs', self.$route);
@@ -670,19 +671,19 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.lostOrder_copy') // 丢单复制
+            webname: 'Drop-out copy', // 丢单复制
           },
           {
-            text: window.vmI18n.t('btn.wrongCopy') // 错发复制
+            webname: 'OrderWrongCopy', // 错发复制
           },
           {
-            text: window.vmI18n.t('btn.missedCopy') // 漏发复制
+            webname: 'OrderMissSendCopy', // 漏发复制
           },
           {
-            text: window.vmI18n.t('btn.giftDelivery_copy') // 赠品出库复制
+            webname: 'OrderGiftsOutCopy', // 赠品出库复制
           },
           {
-            text: window.vmI18n.t('btn.original_single_null_and_void_copy') // 原单无效复制
+            webname: 'oriInvalidCopy', // 原单无效复制
           }
         ]
       },
@@ -702,23 +703,23 @@ export default {
   methods: {
     dropDownClickChange(val) {
       switch (val) {
-        case '丢单复制': {
+        case 'Drop-out copy': {
           this.copyRouteChange(val);
           break;
         }
-        case '错发复制': {
+        case 'OrderWrongCopy': {
           this.copyRouteChange(val);
           break;
         }
-        case '漏发复制': {
+        case 'OrderMissSendCopy': {
           this.copyRouteChange(val);
           break;
         }
-        case '赠品出库复制': {
+        case 'OrderGiftsOutCopy': {
           this.copyRouteChange(val);
           break;
         }
-        case '原单无效复制': {
+        case 'oriInvalidCopy': {
           this.copyRouteChange(val);
           break;
         }
@@ -731,13 +732,24 @@ export default {
     copyRouteChange(type) {
       const self = this;
       const selectItem = this.tab1.order;
+      let pageTitle = '';
+      const dropDownArr = self.btnConfig.buttons.filter( item => {
+        return item.dropDown == true && item.menus.length > 0
+      });
+      dropDownArr.forEach(item => {
+        item.menus.forEach (it => {
+          if(it.webname == type) {
+            pageTitle = it.text;
+          }
+        })
+      })
       const ORDERSTATUSNAME = selectItem.ORDER_STATUS_NAME;
       if (selectItem.COPY_REASON) {
         // 订单只能是原单才能复制!
         self.$Message.warning(this.vmI18n.t('modalTips.a2'));
         return;
       }
-      if (type === this.vmI18n.t('btn.original_single_null_and_void_copy')) {
+      if (type === 'oriInvalidCopy') {
         // 已取消  系统作废
         if (selectItem.ORDER_STATUS != 7 && selectItem.ORDER_STATUS != 8) {
           self.$Message.error(this.vmI18n.t('modalTips.a3'));
@@ -750,12 +762,13 @@ export default {
         return;
       }
       // 默认是丢单复制的query
+      
       const query = {
         id: self.$route.params.customizedModuleId,
-        pageTitle: type
+        pageTitle: pageTitle
       };
       // 丢单复制
-      if (type === this.vmI18n.t('btn.lostOrder_copy')) {
+      if (type === 'Drop-out copy') {
         query.orderCopy = true;
       } else {
         query.copyOrder = true;

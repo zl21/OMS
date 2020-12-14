@@ -170,16 +170,14 @@ export default {
         typeAll: 'error', // 按钮统一风格样式
         buttons: [
           {
-            // text: "查找", //按钮文本
-            text: window.vmI18n.t('btn.find'), // 按钮文本
+            webname: 'lookup_yingfukuantiaozhengdan', // 查找
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.find();
             }, // 按钮点击事件
           },
           {
-            // text: "新增", //按钮文本
-            text: window.vmI18n.t('btn.add'), // 按钮文本
+            webname: 'Newlyadded_yingfukuantiaozhengdan', // 新增
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$store.commit('customize/TabHref', {
@@ -197,15 +195,14 @@ export default {
             }, // 按钮点击事件
           },
           {
-            // text: "导出", //按钮文本
-            text: window.vmI18n.t('btn.export'), // 按钮文本
+            webname: 'export_yingfukuantiaozhengdan', // 导出
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.exportClick();
             }, // 按钮点击事件
           },
           {
-            // text: "作废", //按钮文本
+            webname: 'Tovoid_yingfukuantiaozhengdan', // 作废
             text: window.vmI18n.t('btn.void'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -213,7 +210,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            // text: "财审", //按钮文本
+            webname: 'Financialtrial_yingfukuantiaozhengdan', // 财审
             text: window.vmI18n.t('btn.financeAudit'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -221,7 +218,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            // text: "客审", //按钮文本
+            webname: 'Guesttrial_yingfukuantiaozhengdan', // 客审
             text: window.vmI18n.t('btn.custAudit'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -229,8 +226,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            // text: "反客审", //按钮文本
-            text: window.vmI18n.t('btn.deCustAudit'), // 按钮文本
+            webname: 'AcReceivableAdjustmentUnAuditCwListCmd01', // 反客审
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.unCustAudit();
