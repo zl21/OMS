@@ -225,43 +225,44 @@ export default {
     // 获取列表数据
     async getList() {
       const _this = this;
-      if (_this.jordanTableConfig.loading) {
-        return;
-      }
+      // if (_this.jordanTableConfig.loading) {
+      //   return;
+      // }
       const mainData = _this.formConfig.formValue;
       if (!mainData.CP_C_SHOP_ID) {
         _this.$Message.error('店铺不能为空!');
       } else if (!mainData.PS_C_SKU_ID) {
         _this.$Message.error('条码不能为空!');
-        return;
-      }
-      _this.jordanTableConfig.data = [];
-      _this.jordanTableConfig.total = 0;
-      _this.jordanTableConfig.loading = true;
-      const dealForm = {};
-      const whereInfoForm = Object.assign(mainData, dealForm);
-      const param = {
-        whereInfo: whereInfoForm,
-        pageNum: _this.jordanTableConfig.current,
-        pageSize: _this.jordanTableConfig.pageSize
-      };
-      const fromdata = new FormData();
-      fromdata.append('param', JSON.stringify(param));
-      const {
-        data: { data, code, message }
-      } = await this.service.inventoryCenter.getChannelStorageFtpQuery(fromdata);
-      _this.jordanTableConfig.loading = false;
-      _this.returnSelectData = [];
-      if (code === 0 && data.sgChannelStorageFtpResultList.length) {
-        data.sgChannelStorageFtpResultList.forEach(item => {
-          item.CREATIONDATE = item.CREATIONDATE ? publicMethodsUtil.DatesTime(item.CREATIONDATE) : '';
-        });
-        _this.jordanTableConfig.total = data.totalSize;
-        _this.jordanTableConfig.data = data.sgChannelStorageFtpResultList;
       } else {
         _this.jordanTableConfig.data = [];
         _this.jordanTableConfig.total = 0;
-        _this.$Message.warning(message);
+        _this.jordanTableConfig.loading = true;
+        const dealForm = {};
+        const whereInfoForm = Object.assign(mainData, dealForm);
+        const param = {
+          whereInfo: whereInfoForm,
+          pageNum: _this.jordanTableConfig.current,
+          pageSize: _this.jordanTableConfig.pageSize
+        };
+        const fromdata = new FormData();
+        fromdata.append('param', JSON.stringify(param));
+        const {
+          data: { data, code, message }
+        } = await this.service.inventoryCenter.getChannelStorageFtpQuery(fromdata);
+        _this.jordanTableConfig.loading = false;
+        _this.returnSelectData = [];
+        console.log(data, code, message);
+        if (code === 0 && data.sgChannelStorageFtpResultList.length) {
+          data.sgChannelStorageFtpResultList.forEach(item => {
+            item.CREATIONDATE = item.CREATIONDATE ? publicMethodsUtil.DatesTime(item.CREATIONDATE) : '';
+          });
+          _this.jordanTableConfig.total = data.totalSize;
+          _this.jordanTableConfig.data = data.sgChannelStorageFtpResultList;
+        } else {
+          _this.jordanTableConfig.data = [];
+          _this.jordanTableConfig.total = 0;
+          _this.$Message.warning({ message });
+        }
       }
     },
     oneObjs() {},
