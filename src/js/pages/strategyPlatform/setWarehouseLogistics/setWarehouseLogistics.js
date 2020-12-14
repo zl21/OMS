@@ -491,13 +491,11 @@ export default {
       const _this = this;
       _this.listArr = [];
       _this.tableLoading = true;
-      const fromData = new FormData();
       const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeLikeKey: e };
-      fromData.append('param', JSON.stringify(params));
       // 接口
       const {
         data: { oK, data }
-      } = await this.service.strategyPlatform.saveWarehouseLogistics(fromData);
+      } = await this.service.strategyPlatform.getLogisticsLikeRankResultTable(params);
       console.log(oK, data);
       _this.tableLoading = false;
       if (oK) {
