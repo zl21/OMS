@@ -61,27 +61,23 @@
         </div>
       </div>  
     </tabList>
-
     <!--导入组件-->
-    <!-- <div  v-if="show_dialog">
-      <Modal class="dialog" v-model="show_dialog" :footer-hide="dialogSet.footerHide"  :title="dialogSet.dialogTitle"   :mask="dialogSet.mask"  >
-          <component :ref="popDialog"   :componentData="dialogModal"  v-bind:is="currentView"  @returnData="returnData"  ></component>
-      </Modal>
-    </div> -->
-    <div v-if="show_dialog">
-      <Modal
-        v-model="show_dialog"
-        class="dialog"
-        :footer-hide="dialogSet.footerHide"
-        :title="dialogSet.dialogTitle"
-        :mask="dialogSet.mask"
-      >
-        <importDialog
-          :component-data="dialogModal"
-          @returnData="returnData"
-        />
-      </Modal>
-    </div>
+    <businessDialog
+      :closable="importTable.closable"
+      :component-data="importTable.componentData"
+      :draggable="importTable.draggable"
+      :exclude-string="importTable.excludeString"
+      :keep-alive="importTable.keepAlive"
+      :mask="importTable.mask"
+      :mask-closable="importTable.maskClosable"
+      :name="importTable.name"
+      :scrollable="importTable.scrollable"
+      :title="importTable.confirmTitle"
+      :title-align="importTable.titleAlign"
+      :transfer="importTable.transfer"
+      :url="importTable.url"
+      :width="importTable.width"
+    />
   </div>
 </template>
 <script>

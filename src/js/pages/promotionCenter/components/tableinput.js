@@ -3,8 +3,8 @@ import fkdialog from 'framework/components/tablelist/fkdialog.vue';
 import advancedSearch from 'framework/components/views/custompage/crm/advancedSearch.vue';
 import FkTable from 'framework/components/tablelist/fktable.vue';
 import ChineseDictionary from '@/assets/js/ChineseDictionary.js';
-import ImportDialog from '@/js/pages/promotionCenter/components/importDialog';
-
+// import ImportDialog from '@/js/pages/promotionCenter/components/importDialog';
+import importTable from 'professionalComponents/importTable';
 export default {
   // '单对象属性表格中的文本输入框',
   props: {
@@ -173,7 +173,8 @@ export default {
     SelectDialog,
     FkTable,
     fkdialog,
-    ImportDialog,
+    // ImportDialog,
+    importTable,
     advancedSearch
   },
   watch: {

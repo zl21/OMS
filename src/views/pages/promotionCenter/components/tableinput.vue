@@ -278,14 +278,15 @@
       @advancedData="advancedData"
     />
     <!-- 导入提示 -->
-    <import-dialog
+    <!-- <import-dialog
       v-if="importData.importDialog"
       :visible.sync="importData.importDialog"
       :show-close="true"
       :title="importData.importDialogTitle"
       :tablename="storageItem.name"
       @confirmImport="searchData('fresh')"
-    />
+    /> -->
+    <importTable :component-data="importData" />
 
     <!-- <businessDialog
       :closable="importTable.closable"

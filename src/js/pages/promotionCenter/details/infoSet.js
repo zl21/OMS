@@ -1,4 +1,4 @@
-import tableCols from '@/assets/js/promotion/columns.js';
+import tableCols from '@/assets/js/promotion/columns';
 import SingleBox from '@/views/pages/promotionCenter/components/singleBox.vue';
 import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDialog.vue';
 import detailtable from '@/views/pages/promotionCenter/details/table.vue';
@@ -389,6 +389,7 @@ export default {
         obj.ID = rowObj.ID || '';
         obj.SKU_ID = rowObj.SKU_ID || '';
       }
+      // this.infoData.productsArrs[tabindex].productslist = [];
       this.infoData.productsArrs[tabindex].productslist.push(obj);
       this.countOneTablelistView(tabindex);
     },
@@ -413,6 +414,7 @@ export default {
       this.columns.forEach(col => {
         obj[col.key] = '';
       });
+      obj.length = this.columns.length;
       const group = {
         group: this.getGroupIndex(),
         rules: [
@@ -423,7 +425,8 @@ export default {
             value: '' // 条件值
           }
         ],
-        productslist: [...obj]
+        // productslist: [...obj]
+        productslist: Array.from(obj)
       };
       this.infoData.productsArrs.push(group);
       this.currentTab = this.getProductsArrsIndex - 1;
