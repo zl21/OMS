@@ -505,7 +505,7 @@
             } else {
               _this.jordanTableConfig.data = [];
               _this.jordanTableConfig.total = 0;
-              _this.$Message.warning(res.data.message);
+              _this.$Message.warning({ message: res.data.message });
           }
           });
       },
