@@ -1260,7 +1260,7 @@ export default {
           .then(async res => {
             if (res.data.code != 0) {
               _this.$Message.warning(res.data.message);
-              return
+              return;
             }
             const queryList = [];
             res.data.data.records.forEach(item => {
@@ -3827,7 +3827,7 @@ export default {
           queryListItem.PS_C_SIZE_ENAME = selection.sizes;
           queryListItem.PS_C_PRO_ENAME = selection.proEname;
           queryListItem.QTY_CAN_REFUND = selection.qty;
-          queryListItem.QTY_REFUND = selection.qty - selection.PRICE_LIST;
+          queryListItem.QTY_REFUND = selection.qty - selection.QTY_RETURN_APPLY;
           queryListItem.QTY_EXCHANGE = selection.qty;
           queryListItem.SEX_NAME = selection.sexName;
           queryListItem.SEX = selection.sex;

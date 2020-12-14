@@ -27,17 +27,12 @@ class dateFuns {
       second = `0${second}`;
     }
     return (
-      `${year 
-      }-${ 
-        month 
-      }-${ 
-        date 
-      } ${ 
-        hour 
-      }:${ 
-        minutes 
-      }:${ 
-        second}`
+      `${year
+      }-${month
+      }-${date
+      } ${hour
+      }:${minutes
+      }:${second}`
     );
   }
 
@@ -80,7 +75,7 @@ class dateFuns {
     const d2 = new Date(date2);
     if (d1.getTime() > d2.getTime()) {
       return true;
-    } 
+    }
     return false;
   }
 }
@@ -206,7 +201,7 @@ Date.prototype.convert = function (maybe) {
     maybe = maybe.replace(/-/g, '/');
     const values = maybe.match(/(\d+)+/g);
     return new Date(values[0], parseInt(values[1]) - 1, values[2] || '', values[3] || '', values[4] || '', values[5] || '', values[6] || '');
-  } 
+  }
   return new Date(Number(maybe));
 };
 

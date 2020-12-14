@@ -12,7 +12,7 @@ import loading from '@/component/loading.vue';
 import comUtils from '@/assets/js/__utils__/common.js';
 import labelListConfig from './publicConfig/labelList.js';
 import orderLogo from './publicConfig/orderLogo.js';
-
+import formatData from '@/assets/js/__utils__/date.js';
 export default {
   components: {
     businessButton,
@@ -67,22 +67,22 @@ export default {
           },
           PAY_TIME: params =>
             // 付款时间
-            (params.data.PAY_TIME ? this.standardTimeConversiondateToStr(params.data.PAY_TIME) : ''),
+            (params.data.PAY_TIME ? formatData.standardTimeConversiondateToStr(params.data.PAY_TIME) : ''),
           AUDIT_TIME: params =>
             // 审核时间
-            (params.data.AUDIT_TIME ? this.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''),
+            (params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''),
           DISTRIBUTION_TIME: params =>
             // 配货时间
-            (params.data.AUDIT_TIME ? this.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''),
+            (params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''),
           CREATIONDATE: params =>
             // 创建时间
-            (params.data.CREATIONDATE ? this.standardTimeConversiondateToStr(params.data.CREATIONDATE) : ''),
+            (params.data.CREATIONDATE ? formatData.standardTimeConversiondateToStr(params.data.CREATIONDATE) : ''),
           HOLD_RELEASE_TIME: params =>
             // HOLD单释放时间
-            (params.data.HOLD_RELEASE_TIME ? this.standardTimeConversiondateToStr(params.data.HOLD_RELEASE_TIME) : ''),
+            (params.data.HOLD_RELEASE_TIME ? formatData.standardTimeConversiondateToStr(params.data.HOLD_RELEASE_TIME) : ''),
           SCAN_TIME: params =>
             // 出库时间
-            (params.data.SCAN_TIME ? this.standardTimeConversiondateToStr(params.data.SCAN_TIME) : ''),
+            (params.data.SCAN_TIME ? formatData.standardTimeConversiondateToStr(params.data.SCAN_TIME) : ''),
           ORDER_FLAG: params => {}
         },
         pagenation: comUtils.pageConfig
@@ -2301,33 +2301,6 @@ export default {
         timeValue = '';
       }
       return timeValue;
-    },
-
-    // 时间戳转化为yyyy-mm-dd hh:mm:ss
-    standardTimeConversiondateToStr(val) {
-      const dateTime = new Date(val);
-      const year = dateTime.getFullYear();
-      let month = dateTime.getMonth() + 1; // js从0开始取
-      let date = dateTime.getDate();
-      let hour = dateTime.getHours();
-      let minutes = dateTime.getMinutes();
-      let second = dateTime.getSeconds();
-      if (month < 10) {
-        month = `0${month}`;
-      }
-      if (date < 10) {
-        date = `0${date}`;
-      }
-      if (hour < 10) {
-        hour = `0${hour}`;
-      }
-      if (minutes < 10) {
-        minutes = `0${minutes}`;
-      }
-      if (second < 10) {
-        second = `0${second}`;
-      }
-      return `${year}-${month}-${date} ${hour}:${minutes}:${second}`;
     },
     // 刷新按钮
     tableRefreshDetail() {

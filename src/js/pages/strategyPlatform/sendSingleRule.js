@@ -801,14 +801,16 @@ export default {
     },
     // 设置表格高度
     setTableHeight() {
-      const _this = this;
       const contentHeight = document.getElementById('content').clientHeight;
+      let logisticsAreaHeight = 0;
+      this.$nextTick(() => {
+        logisticsAreaHeight += document.getElementsByClassName('one_button')[0].clientHeight;
+        logisticsAreaHeight += document.getElementsByClassName('tableTop')[0].clientHeight;
+        logisticsAreaHeight += document.getElementsByClassName('jordanLabel')[0].clientHeight;
+      });
+      const tableHeight = contentHeight - logisticsAreaHeight;
       const Theight = document.getElementsByClassName('tableBox')[0];
-      if (Theight !== undefined) {
-        document.getElementsByClassName('list-table')[0].style = `height: ${contentHeight - 240}px;`;
-        Theight.style = `height: ${contentHeight - 200}px;`;
-      }
-      _this.jordanTableConfig.height = contentHeight - 250;
+      Theight.style = `height: ${tableHeight - 240}px;`;
     },
     paperScroll(e) {
       const sLefts = document.getElementById('fixedDiv');
