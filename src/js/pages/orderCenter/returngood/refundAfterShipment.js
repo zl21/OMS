@@ -539,6 +539,7 @@ export default {
             text: window.vmI18n.t('btn.audit'), // 审核
             // class: 'save',
             // icon: 'md-download',
+            disabled: this.$route.params.customizedModuleId === 'New',
             btnclick: () => {
               this.audit();
             },
