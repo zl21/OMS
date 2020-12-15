@@ -156,7 +156,7 @@
           <input
             v-model="basicData.order_note_content"
             oninput="this.value=this.value.replace(/ /g,'')"
-            :placeholder="vmI18n.t('pHolder.a1')"
+            :placeholder="vmI18n.t('pHolder.a0')"
           >
         </div>
       </div>
@@ -179,7 +179,7 @@
           @changeSingle="checkBuyerLimitFrequencyChange"
         />
         <div class="form_item">
-          ,{{ vmI18n.t("form_label.max_times") }}
+          {{ vmI18n.t("form_label.max_times") }}
         </div>
         <div class="form_el_input form_item limitinput">
           <input

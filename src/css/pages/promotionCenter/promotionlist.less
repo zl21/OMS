@@ -124,4 +124,19 @@
       }
     }
   }
+  
+  /deep/ .setGroup{
+      /deep/ table{
+        .el-button--text{
+          color: @base-color;
+        }
+      }
+      .el-radio__input.is-checked+.el-radio__label{
+        color: @base-color;
+      }
+      .el-radio__input.is-checked .el-radio__inner{
+        border-color: @base-color;
+        background: @base-color;
+    }
+  }
 }
