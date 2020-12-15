@@ -68,11 +68,10 @@ export default {
       const itemObj = objArr.filter(item => item.tableName === this.componentData.tableName);
       switch (itemObj[0].tableName) {
         case 'PS_C_SKU' || 'SG_B_CHANNEL_PRODUCT' || 'PS_C_PRO' || 'IP_C_TAOBAO_PRODUCT':
-          console.log(itemObj[0]);
           // eslint-disable-next-line no-case-declarations
           const searchParam = new URLSearchParams();
           searchParam.append('param', JSON.stringify({ mode: this.componentData.mode }));
-          this.getDownloadTemp(itemObj[0].downLoadUrl, searchParam);
+          this.getDownloadTemp(itemObj[0].downloadUrl, searchParam);
           break;
         case 'PS_C_SKUGROUP': 
           if (this.componentData.operationType === 'baseInfo') {
@@ -87,12 +86,13 @@ export default {
             });
           }
           break;
+        // 仓库物流优先级 订单派单规则-优先级 订单派单规则-比例
         case 'ST_C_WAREHOUSE_LOGISTICS' || 'ST_C_SEND_RULE' || 'ST_C_SEND_RULE_RATE' || '':
           this.getDownloadTemp(itemObj[0].downloadUrl, {
             objid: this.componentData.objid
           });
           break;
-        case 'AC_F_RECEIVABLES_ADJUSTMENT':
+        case 'AC_F_RECEIVABLES_ADJUSTMENT': // 退换货卖家备注导入
           this.getDownloadTemp(itemObj[0].downloadUrl, {
             billType: this.componentData.billType
           });
@@ -110,7 +110,7 @@ export default {
             this.getDownloadTemp(itemObj[0].downloadUrl);
           }
           break;
-        case 'OC_B_SEND_OUT':
+        case 'OC_B_SEND_OUT': // 出库结果单
           if (this.componentData.importType === 1) {
             this.downloadUrlFile(itemObj[0].downloadUrlType);
           } else {
@@ -118,11 +118,10 @@ export default {
             this.downloadUrlFile(itemObj[0].downloadUrl);
           }
           break;
-        case 'IP_C_STANDPLAT_PRO':
+        case 'IP_C_STANDPLAT_PRO': // 通用商品下载
           this.downloadUrlFile(itemObj[0].downloadUrl);
           break;
         default:
-          console.log();
           this.getDownloadTemp(itemObj[0].downloadUrl);
           break;
       }
@@ -241,17 +240,6 @@ export default {
         default:
           this.getImportDialog(itemObj[0].url);
           break;
-      }
-    },
-    closeConfirm() {
-      const _this = this;
-      // 元数据配置窗口特殊处理
-      if (_this.configTableName.includes(_this.componentData.tableName)) {
-        _this.$parent.$emit('closeActionDialog');
-      } else if (_this.$parent.$parent.closeConfirm) {
-        _this.$parent.$parent.closeConfirm();
-      } else {
-        _this.$parent.$emit('closeActionDialog');
       }
     },
     // 导入请求
@@ -383,6 +371,17 @@ export default {
         return true;
       }
       return false;
-    }
+    },
+    closeConfirm() {
+      const _this = this;
+      // 元数据配置窗口特殊处理
+      if (_this.configTableName.includes(_this.componentData.tableName)) {
+        _this.$parent.$emit('closeActionDialog');
+      } else if (_this.$parent.$parent.closeConfirm) {
+        _this.$parent.$parent.closeConfirm();
+      } else {
+        _this.$parent.$emit('closeActionDialog');
+      }
+    },
   }
 };

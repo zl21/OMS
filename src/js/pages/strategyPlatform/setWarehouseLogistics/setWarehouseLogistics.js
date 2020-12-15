@@ -263,9 +263,9 @@ export default {
       this.information.formData[0].itemdata.readonly = true;
       this.setTableHeight();
       this.refresh();
-      const btnTxetArr1 = [_this.vmI18n.t('btn.modify_logistics'), _this.vmI18n.t('btn.void'), _this.vmI18n.t('btn.import'), _this.vmI18n.t('btn.refresh')];
+      const btnTxetArr1 = [window.vmI18n.t('btn.modify_logistics'), window.vmI18n.t('btn.void'), window.vmI18n.t('btn.export'), window.vmI18n.t('btn.import'), window.vmI18n.t('btn.refresh')];
       this.btnConfig.buttons.forEach(item => {
-        // "修改物流" || "作废" || "导入" || "刷新"
+        // "修改物流" || "作废" || "导出" || "导入" || "刷新"
         if (btnTxetArr1.includes(item.text)) {
           item.disabled = false;
         }
@@ -274,8 +274,8 @@ export default {
     window.onresize = () => {
       this.setTableHeight();
     };
-    this.importTable.confirmTitle = this.vmI18n.t('modalTitle.import');
-    this.modifyLogistics.confirmTitle = this.vmI18n.t('modalTitle.select_logisticsCompany');
+    this.importTable.confirmTitle = window.vmI18n.t('modalTitle.import');
+    this.modifyLogistics.confirmTitle = window.vmI18n.t('modalTitle.select_logisticsCompany');
   },
   methods: {
     // 保存

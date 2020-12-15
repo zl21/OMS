@@ -186,7 +186,7 @@ export default {
       { 
         tableName: 'OC_B_RETURN_ORDER_remark',
         url: '/api/cs/oc/oms/v1/importReturnSellerRemark',
-        downloadUrl: '/api/cs/oc/oms/v1/importReturnSellerRemark'
+        downloadUrl: '/api/cs/oc/oms/v1/downloadReturnRemarkTemp'
       }, // 退换货卖家备注导入
       { 
         tableName: 'AC_F_RECEIVABLES_ADJUSTMENT',
