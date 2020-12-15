@@ -553,15 +553,16 @@ export default {
         });
       });
 
-      const fromData = new FormData();
+      // const fromData = new FormData();
       const param = {
         objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId,
         treeNode: treeList
       };
-      fromData.append('param', JSON.stringify(param));
+      // fromData.append('param', JSON.stringify(param));
       const {
         data: { code, data }
-      } = await this.service.strategyPlatform.exportWarehouseLogisticsRank(fromData);
+      } = await this.service.strategyPlatform.exportWarehouseLogisticsRank(param);
+      console.log(code, data);
       if (code === 0) {
         const ess = data.message || this.vmI18n.t('modalTips.z2'); // 导出成功
         _this.$Message.success(ess);
