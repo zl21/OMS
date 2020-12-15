@@ -1,5 +1,5 @@
 import businessLabel from 'professionalComponents/businessLabel';
-import jordanBtn from 'professionalComponents/businessButton';
+import businessButton from 'professionalComponents/businessButton';
 import errorMessage from 'framework/components/tablelist/error.vue';
 import Mydialog from 'framework/components/dialog/mydialog.vue';
 import TableInput from 'framework/components/element/input';
@@ -9,7 +9,7 @@ import dialogVisible from '@/views/pages/promotionCenter/setGroup';
 import Favorite from '@/views/pages/promotionCenter/components/favorite';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import loading from '@/component/loading.vue';
-import comUtils from '@/assets/js/__utils__/common.js';
+import comUtils from '@/assets/js/__utils__/common';
 
 const baseColumnDefs = [
   {
@@ -490,7 +490,7 @@ export default {
     }
   },
   components: {
-    jordanBtn,
+    businessButton,
     businessLabel,
     aTable,
     Mydialog,

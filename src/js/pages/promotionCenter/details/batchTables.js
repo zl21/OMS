@@ -1,4 +1,3 @@
-// import myInputLd from '@/views/pages/promotionCenter/components/tableinput';
 import detailtable from '@/views/pages/promotionCenter/details/table.vue';
 import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDialog';
 import TableSku from '@/views/pages/promotionCenter/components/tableSku';
@@ -6,7 +5,6 @@ import businessDialog from 'professionalComponents/businessDialog';
 export default {
   name: 'batchTables',
   components: {
-    // myInputLd,
     detailtable,
     ButtonFkDialog,
     TableSku,
