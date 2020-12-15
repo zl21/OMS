@@ -88,5 +88,5 @@
 </script>
 
 <style scoped lang="less">
-@import "~@/css/pages/promotionCenter/components/importDialog.less";
+@import '~@/css/modal/publicDialog/importTable.less';
 </style>
