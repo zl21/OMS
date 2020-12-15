@@ -426,7 +426,7 @@ export default {
           }
         ],
         // productslist: [...obj]
-        productslist: Array.from(obj)
+        productslist: []
       };
       this.infoData.productsArrs.push(group);
       this.currentTab = this.getProductsArrsIndex - 1;

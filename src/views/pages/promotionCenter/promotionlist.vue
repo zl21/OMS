@@ -5,7 +5,7 @@
     <div class="operation-content totalHeight">
       <!-- 按钮 head_botton-->
       <div class="operation-botton">
-        <jordanBtn :btn-config="btnConfig" />
+        <businessButton :btn-config="btnConfig" />
       </div>
       <!-- 过滤器 -->
       <Row class="operation-form">
