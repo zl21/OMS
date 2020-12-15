@@ -1437,7 +1437,7 @@ export default {
         const data = {};
         const OcBReturnAfSendItem = [];
         data.orderId = self.reForm.config[3].item.props.value;
-        data.id = self.$route.params.customizedModuleId;
+        data.id = self.$route.params.customizedModuleId == 'New' ? -1 : self.$route.params.customizedModuleId;
         self.addItem.addList.forEach((item) => {
           const obj = {};
           obj.id = item.proId;
