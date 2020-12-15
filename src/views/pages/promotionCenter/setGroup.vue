@@ -87,23 +87,6 @@
         </el-table>
       </div>
       <businessButton :btn-config="buttonConfig" />
-      <!-- <div
-        slot="footer"
-        class="footer"
-      >
-        <button
-          class="white"
-          @click="closeDialog"
-        >
-          取 消
-        </button>
-        <button
-          class="active"
-          @click="confirm"
-        >
-          确 定
-        </button> -->
-      <!-- </div> -->
     </el-dialog>
   </div>
 </template>

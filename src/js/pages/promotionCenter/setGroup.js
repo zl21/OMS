@@ -16,7 +16,7 @@ export default {
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              this.$emit('closeActionDialog', false);
+              this.closeDialog();
             } // 按钮点击事件
           },
           {
@@ -26,7 +26,7 @@ export default {
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              this.download();
+              this.confirm();
             } // 按钮点击事件
           }
         ]
