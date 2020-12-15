@@ -1605,6 +1605,29 @@ body {
     }
   }
 }
+// 矩阵录入
+.ff-order-detail .el-dialog{ 
+  overflow: hidden;
+  button.ff-matrix-btn-cancel{
+    float: right;
+    min-width: 50px;
+    padding: 0;
+    &:first-child{
+      margin-left:10px;
+      background-color: @base-color;
+      color: @button-bg-font;
+      &:hover{
+        opacity: 1;
+        background-color: @base-color;
+      }
+    }
+    &:hover{
+      opacity: 1 !important;
+      background-color: @button-transparent-hover;
+      color: @button-bg-font;
+    }
+  }
+}
 // 框架内嵌定制页面(功能权限)弹框 按钮
 .modalContent .modalButton {
   width: 370px;
