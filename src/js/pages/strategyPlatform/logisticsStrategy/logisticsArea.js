@@ -106,7 +106,7 @@ export default {
             text: window.vmI18n.t('btn.refresh'), // 按钮文本
             btnclick: () => {
               const _this = this;
-              _this.getTree('',this._objid);
+              _this.getTree('', this._objid);
             }
           },
           {
@@ -199,11 +199,11 @@ export default {
       this._objid = -1;
     } else {
       this._objid = this.$route.params.customizedModuleId;
+      this.information.formData[0].itemdata.readonly = true;
+      await this.setTableHeight();
+      await this.getTree('', this._objid);
+      await this.synchronous();
     }
-    this.information.formData[0].itemdata.readonly = true;
-    await this.setTableHeight();
-    await this.getTree('',this._objid);
-    await this.synchronous();
   },
   methods: {
     // 保存
@@ -284,7 +284,7 @@ export default {
       _this.isSaveLoading = false;
       if (code === 0) {
         const ess = data.message || _this.vmI18n.t('modalTips.y4'); // 作废成功
-        _this.getTree('',_this._objid);
+        _this.getTree('', _this._objid);
         _this.$message.success(ess);
       } else {
         const err = data.message || _this.vmI18n.t('modalTips.y5'); // 作废失败
@@ -298,7 +298,7 @@ export default {
       const {
         data: { code, data }
       } = await this.service.strategyPlatform.getExpressAreaTree({
-        objid: objid
+        objid
       });
       _this.isSaveLoading = false;
       if (code === 0) {
@@ -319,9 +319,10 @@ export default {
         });
         if (data.expressArea.ISACTIVE === 'N') {
           _this.statusName = '已作废';
+          const btnTxetArr = [_this.vmI18n.t('btn.save'), _this.vmI18n.t('btn.void'), _this.vmI18n.t('btn.import'), _this.vmI18n.t('btn.export'), _this.vmI18n.t('btn.refresh')];
           _this.btnConfig.buttons.forEach(item => {
             // ['保存', '作废', '导入', '导出', '刷新']
-            if ([_this.vmI18n.t('btn.save'), _this.vmI18n.t('btn.void'), _this.vmI18n.t('btn.import'), _this.vmI18n.t('btn.export'), _this.vmI18n.t('btn.refresh')].includes(item.text)) {
+            if (btnTxetArr.includes(item.text)) {
               item.disabled = true;
             }
           });

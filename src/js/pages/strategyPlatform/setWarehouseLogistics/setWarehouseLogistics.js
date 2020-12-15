@@ -263,15 +263,11 @@ export default {
       this.information.formData[0].itemdata.readonly = true;
       this.setTableHeight();
       this.refresh();
+      const btnTxetArr1 = [_this.vmI18n.t('btn.modify_logistics'), _this.vmI18n.t('btn.void'), _this.vmI18n.t('btn.import'), _this.vmI18n.t('btn.refresh')];
       this.btnConfig.buttons.forEach(item => {
         // "修改物流" || "作废" || "导入" || "刷新"
-        switch (item.text) {
-          case this.vmI18n.t('btn.modify_logistics'):
-          case this.vmI18n.t('btn.void'):
-          case this.vmI18n.t('btn.import'):
-          case this.vmI18n.t('btn.refresh'):
-            item.disabled = false;
-            break;
+        if (btnTxetArr1.includes(item.text)) {
+          item.disabled = false;
         }
       });
     }
@@ -363,15 +359,11 @@ export default {
             if (res.data.data.warehouseLogistics.ISACTIVE === 'N') {
               // _this.statusName = "已作废";
               _this.statusName = _this.vmI18n.t('common.voided');
+              const btnTxetArr = [_this.vmI18n.t('btn.modify_logistics'), _this.vmI18n.t('btn.void'), _this.vmI18n.t('btn.import'), _this.vmI18n.t('btn.export'), _this.vmI18n.t('btn.save')]
               _this.btnConfig.buttons.forEach(item => {
-                // if (item.text === ("修改物流" || "作废" || "导入" || "导出" || "保存"))
-                switch (item.text) {
-                  case _this.vmI18n.t('btn.modify_logistics'):
-                  case _this.vmI18n.t('btn.void'):
-                  case _this.vmI18n.t('btn.import'):
-                  case _this.vmI18n.t('btn.refresh'):
-                    item.disabled = true;
-                    break;
+                // ["修改物流" || "作废" || "导入" || "导出" || "保存"]
+                if (btnTxetArr.includes(item.text)) {
+                  item.disabled = true;
                 }
               });
             }
@@ -561,15 +553,16 @@ export default {
         });
       });
 
-      const fromData = new FormData();
+      // const fromData = new FormData();
       const param = {
         objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId,
         treeNode: treeList
       };
-      fromData.append('param', JSON.stringify(param));
+      // fromData.append('param', JSON.stringify(param));
       const {
         data: { code, data }
-      } = await this.service.strategyPlatform.exportWarehouseLogisticsRank(fromData);
+      } = await this.service.strategyPlatform.exportWarehouseLogisticsRank(param);
+      console.log(code, data);
       if (code === 0) {
         const ess = data.message || this.vmI18n.t('modalTips.z2'); // 导出成功
         _this.$Message.success(ess);
