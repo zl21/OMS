@@ -106,7 +106,7 @@ export default {
             text: window.vmI18n.t('btn.refresh'), // 按钮文本
             btnclick: () => {
               const _this = this;
-              _this.getTree('',this._objid);
+              _this.getTree('', this._objid);
             }
           },
           {
@@ -199,11 +199,11 @@ export default {
       this._objid = -1;
     } else {
       this._objid = this.$route.params.customizedModuleId;
+      this.information.formData[0].itemdata.readonly = true;
+      await this.setTableHeight();
+      await this.getTree('', this._objid);
+      await this.synchronous();
     }
-    this.information.formData[0].itemdata.readonly = true;
-    await this.setTableHeight();
-    await this.getTree('',this._objid);
-    await this.synchronous();
   },
   methods: {
     // 保存
@@ -284,7 +284,7 @@ export default {
       _this.isSaveLoading = false;
       if (code === 0) {
         const ess = data.message || _this.vmI18n.t('modalTips.y4'); // 作废成功
-        _this.getTree('',_this._objid);
+        _this.getTree('', _this._objid);
         _this.$message.success(ess);
       } else {
         const err = data.message || _this.vmI18n.t('modalTips.y5'); // 作废失败
@@ -298,7 +298,7 @@ export default {
       const {
         data: { code, data }
       } = await this.service.strategyPlatform.getExpressAreaTree({
-        objid: objid
+        objid
       });
       _this.isSaveLoading = false;
       if (code === 0) {
