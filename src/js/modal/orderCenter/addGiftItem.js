@@ -47,21 +47,26 @@ export default {
               const IS_GIFT = params.row.IS_GIFT == 1 ? '是' : '否';
               return h('span', {}, IS_GIFT);
             }
-          }, {
+          },
+          {
             key: 'IS_DELETE',
             title: '操作',
-            render: (h, params) => h('a', {
-              on: {
-                click: () => {
-                  const index = params.index;
-                  this.tableConfig.data.splice(index, 1);
-                  if (this.onRowData.ECODE == params.row.ECODE) {
-                    this.onRowData = '';
+            render: (h, params) =>
+              h(
+                'a',
+                {
+                  on: {
+                    click: () => {
+                      const index = params.index;
+                      this.tableConfig.data.splice(index, 1);
+                      if (this.onRowData.ECODE == params.row.ECODE) {
+                        this.onRowData = '';
+                      }
+                    }
                   }
-                }
-              }
-            }, '删除')
-
+                },
+                '删除'
+              )
           }
         ],
         data: [],
@@ -109,7 +114,7 @@ export default {
     businessActionTable,
     EasyMatrix,
     businessButton,
-    loading,
+    loading
   },
   props: {
     componentData: {}
@@ -124,19 +129,19 @@ export default {
   },
   methods: {
     // 选中某一项时触发
-    onSelect() { },
+    onSelect() {},
     // 取消选中某一项时触发
-    onSelectCancel() { },
+    onSelectCancel() {},
     // 点击全选时触发
-    onSelectAll() { },
+    onSelectAll() {},
     // 点击取消全选时触发
-    onSelectAllCancel() { },
+    onSelectAllCancel() {},
     // 单击某一行时触发
     onRowClick(row) {
       this.onRowData = row;
     },
     // 单击某二行时触发
-    onRowDblclick() { },
+    onRowDblclick() {},
     // 分页change 事件
     pageChange(val) {
       this.tableConfig.current = val;
@@ -147,7 +152,7 @@ export default {
       this.tableConfig.pageSize = val;
       this.request(this.componentData);
     },
-    tableDeleteDetail() { },
+    tableDeleteDetail() {},
     // 添加赠品
     add(obj) {
       // 判断是否是要加一行明细  还是更新数量
@@ -167,7 +172,7 @@ export default {
       if (!self.onRowData) {
         self.$Message.error('无赠品可添加！');
         return;
-      } 
+      }
       const ids = [];
       ids.push(self.objid);
       self.loading = true;
@@ -182,7 +187,7 @@ export default {
         url: '/api/cs/oc/oms/v1/batchAddGoods',
         method: 'post',
         data: param
-      }).then((res) =>{
+      }).then(res => {
         // console.log(res);
         if (res.data.code === 0) {
           self.$Message.success(res.data.message);
