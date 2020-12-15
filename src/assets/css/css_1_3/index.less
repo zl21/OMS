@@ -1582,7 +1582,7 @@ body {
       }
     }
   }
-  // ark组件弹窗
+  // ark组件弹窗 按钮
   .ark-modal-footer{
     & > button{
       & + button{
@@ -1603,6 +1603,22 @@ body {
         color: @base-color;
       }
     }
+  }
+}
+// 框架内嵌定制页面(功能权限)弹框 按钮
+.modalContent .modalButton {
+  width: 370px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  padding-top: 8px;
+  button:first-child{
+    background-color: @base-color;
+    color: @button-bg-font;
+  }
+  button:hover{
+    background-color:@base-color;
+    color: @button-bg-font;
   }
 }
 // 定制弹框 按钮
