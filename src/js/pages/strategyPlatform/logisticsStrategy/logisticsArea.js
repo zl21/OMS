@@ -319,9 +319,10 @@ export default {
         });
         if (data.expressArea.ISACTIVE === 'N') {
           _this.statusName = '已作废';
+          const btnTxetArr = [_this.vmI18n.t('btn.save'), _this.vmI18n.t('btn.void'), _this.vmI18n.t('btn.import'), _this.vmI18n.t('btn.export'), _this.vmI18n.t('btn.refresh')];
           _this.btnConfig.buttons.forEach(item => {
             // ['保存', '作废', '导入', '导出', '刷新']
-            if ([_this.vmI18n.t('btn.save'), _this.vmI18n.t('btn.void'), _this.vmI18n.t('btn.import'), _this.vmI18n.t('btn.export'), _this.vmI18n.t('btn.refresh')].includes(item.text)) {
+            if (btnTxetArr.includes(item.text)) {
               item.disabled = true;
             }
           });
