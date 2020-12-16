@@ -258,7 +258,7 @@ export default {
         } else {
           _this.jordanTableConfig.data = [];
           _this.jordanTableConfig.total = 0;
-          _this.$Message.warning({ message });
+          _this.$Message.warning(message);
         }
       }
     },

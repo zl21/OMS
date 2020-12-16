@@ -842,7 +842,7 @@ export default {
     this.sessionStorageData = JSON.parse(sessionStorage.getItem('customizeMessage'))[this.$route.params.customizedModuleId == '41460334' ? 'undefined' : this.$route.params.customizedModuleId];
     console.log(this.sessionStorageData);
     // if (this.$route.query.id && !this.$route.query.new) {
-      if (this.sessionStorageData.standardTableurlCustomized) { // 已发货退款单详情跳转
+      if (this.sessionStorageData && this.sessionStorageData.standardTableurlCustomized) { // 已发货退款单详情跳转
       this.reForm.config.splice(14, 0, {
         item: {
           type: 'Input',
@@ -1561,7 +1561,8 @@ export default {
     // 详情 复制查询方法
     query() {
       const self = this;
-      const query = { ID: self.$route.params.customizedModuleId };
+      const ID = self.$route.params.customizedModuleId;
+      const query = { ID: ID === 'New' ? '-1' : ID };
       self.service.orderCenter.copyAfterDeliver(query)
         .then((res) => {
           console.log(res);
