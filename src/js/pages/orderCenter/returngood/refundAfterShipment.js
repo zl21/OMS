@@ -2,7 +2,7 @@
 import reButton from 'professionalComponents/businessButton';
 import reTable from 'professionalComponents/businessActionTable';
 import reForm from 'professionalComponents/businessForm';
-import dateFormat from '@/assets/js/__utils__/common';
+import commonUtil from '@/assets/js/__utils__/common';
 import comUtils from '@/assets/js/__utils__/common';
 import refundAfterShipment from './constants/refundAfterShipment';
 
@@ -50,7 +50,7 @@ export default {
                     if (val.item.label === '单据来源') {
                       this.reForm.config[index].item.props.value = '手动';
                     } else if (val.item.label === '单据日期') {
-                      this.reForm.config[index].item.props.value = dateFormat(
+                      this.reForm.config[index].item.props.value = commonUtil.dateFormat(
                         new Date(),
                         'yyyy-MM-dd'
                       );
@@ -550,7 +550,7 @@ export default {
             // icon: 'md-arrow-round-back',
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
-              if (this.$route.params.customizedModuleName === 'EXTRAREFUND' ) {
+              if (this.$route.params.customizedModuleName === 'EXTRAREFUND') {
                 R3.store.commit('global/tabOpen', {
                   type: 'S',
                   tableId: 249230545,
@@ -567,8 +567,7 @@ export default {
                   label: this.vmI18n.t('panel_label.retailInvoice_details'),
                   dynamicRoutingForCustomizePage: true,
                 });
-              } 
-              else {
+              } else {
                 R3.store.commit('global/tabOpen', {
                   type: 'S',
                   tableId: 249130393,
@@ -863,7 +862,7 @@ export default {
           if (val.item.label === '单据来源') {
             this.reForm.config[index].item.props.value = '手动';
           } else if (val.item.label === '单据日期') {
-            this.reForm.config[index].item.props.value = dateFormat(
+            this.reForm.config[index].item.props.value = commonUtil.dateFormat(
               new Date(),
               'yyyy-MM-dd'
             );
@@ -876,7 +875,7 @@ export default {
           if (val.item.label === '单据来源') {
             this.reForm.config[index].item.props.value = '手动';
           } else if (val.item.label === '单据日期') {
-            this.reForm.config[index].item.props.value = dateFormat(
+            this.reForm.config[index].item.props.value = commonUtil.dateFormat(
               new Date(),
               'yyyy-MM-dd'
             );
@@ -1009,7 +1008,7 @@ export default {
     },
     // 取消
     querycancel() {},
-    onCurrentChange(val, oldval) {
+    onCurrentChange(val) {
       this.selectData = val;
     },
     threeObjs() {
@@ -1148,7 +1147,8 @@ export default {
         : self.$route.params.customizedModuleId;
       const AfSend = self.getForm();
       if (AfSend.VIP_PHONE && !/^1[3456789]\d{9}$/.test(AfSend.VIP_PHONE)) {
-        return self.$Message.warning(self.vmI18n.t('modalTips.j0')); // 请输入正确的买家手机号
+        self.$Message.warning(self.vmI18n.t('modalTips.j0')); // 请输入正确的买家手机号
+        return;
       }
       AfSend.ID = self.$route.query.cid || self.$route.params.customizedModuleId;
       const AfSendItem = self.tableConfig.data.map(item => ({
@@ -1495,7 +1495,7 @@ export default {
           }
         });
         const total = self.tableConfig.data.reduce(
-          (sum, item) => sum + number(item.returnPrice || 0),
+          (sum, item) => sum + Number(item.returnPrice || 0),
           0
         );
         // self.tableConfig.data.forEach(item => {
@@ -1580,14 +1580,14 @@ export default {
               OWNERENAME: AfSend.OWNERNAME,
               CREATIONDATE:
                 AfSend.CREATIONDATE
-                && dateFormat(
+                && commonUtil.dateFormat(
                   new Date(AfSend.CREATIONDATE),
                   'yyyy-MM-dd hh:mm:ss'
                 ),
               MODIFIERENAME: AfSend.MODIFIERENAME || AfSend.MODIFIERNAME,
               MODIFIEDDATE:
                 AfSend.MODIFIEDDATE
-                && dateFormat(
+                && commonUtil.dateFormat(
                   new Date(AfSend.MODIFIEDDATE),
                   'yyyy-MM-dd hh:mm:ss'
                 ),
@@ -1610,13 +1610,12 @@ export default {
       self.reForm.config.forEach(async (item) => {
         const itemLabel = item.item.label;
         // 单据日期 退款分类 退款描述 单据来源
-        if (
-          itemLabel
-          !== (self.vmI18n.t('form_label.documentDate')
-            && self.vmI18n.t('form_label.refundClass')
-            && self.vmI18n.t('form_label.refundDescription')
-            && self.vmI18n.t('form_label.sourceDocuments'))
-        ) {
+        const itemLabelArr = [self.vmI18n.t('form_label.documentDate'),
+          self.vmI18n.t('form_label.refundClass'),
+          self.vmI18n.t('form_label.refundDescription'),
+          self.vmI18n.t('form_label.sourceDocuments')
+        ];
+        if (!itemLabelArr.includes(itemLabel)) {
           item.item.props.value = data[dataConfig[itemLabel]];
           // 退款分类
         } else if (itemLabel === self.vmI18n.t('form_label.refundClass')) {
@@ -1635,9 +1634,9 @@ export default {
           item.item.props.value = data[dataConfig[itemLabel]] == 1 ? '手动' : '自动';
         } else {
           // item.item.props.value = self.$route.query.cid ? 0 : data[dataConfig[itemLabel]]
-          item.item.props.value = dateFormat(
+          item.item.props.value = commonUtil.dateFormat(
             new Date(data[dataConfig[itemLabel]]),
-            'yyyy-MM-dd'
+            'yyyy-MM-dd hh:mm:ss'
           );
         }
         // switch (item.item.label) {
@@ -1798,6 +1797,7 @@ export default {
     },
     // 退款分类联动查询退描述
     returnTypeChange() {
+      const self = this;
       const formdata = new FormData();
       formdata.append('table', 'OC_B_RETURN_TYPE_ITEM');
       formdata.append('objid', this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ID);
@@ -1833,6 +1833,7 @@ export default {
      * @param { string | {} } value
      */
     sellerRemarkValueChange(type = '', value) {
+      const self = this;
       const config = this.reForm.config;
       const index = config.length - 1;
       const sellerRemarkData = this.sellerRemarkData;
@@ -1926,6 +1927,7 @@ export default {
   watch: {
     // 监听申请退款金额进行卖家备注赋值
     applyAmt(newValue) {
+      const self = this;
       const index = this.reForm.config.length - 1;
       const sellerRemarkData = this.sellerRemarkData;
       // 当不是新增的同时又是第一次相应数据（用于组织第一次查询的时候申请退款金额的改变，导致卖家备注被赋值）
