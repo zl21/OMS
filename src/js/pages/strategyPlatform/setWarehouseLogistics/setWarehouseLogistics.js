@@ -440,7 +440,7 @@ export default {
           });
         });
       }
-      const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeNode: treeList };
+      const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, "cityleave": "PROV", treeNode: treeList };
       // 接口
       this.service.common.getLogisticsRankResultTable(params).then(res => {
         _this.tableLoading = false;
