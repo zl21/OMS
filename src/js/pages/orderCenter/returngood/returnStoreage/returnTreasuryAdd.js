@@ -286,7 +286,7 @@ export default {
               row: 1,
               scale: 0,
               statsize: -1,
-              type: 'NUMBER'
+              type: 'STRING'
             },
             oneObj: e => {
               this.oneObjs(e);
