@@ -273,24 +273,33 @@ export default {
       /* e.stopPropagation(); */
     }, // 快捷键选择编码
     findId() {
-      let id;
+      let id = '';
       const data = this.selectItem.updateData[this.tablename];
       if (this.$route.params.itemId == 'New' && Object.keys(data.add).length !== 0) {
         if (data.add[this.tablename].CP_C_STORE_ID) id = data.add[this.tablename].CP_C_STORE_ID;
-        if (id === '' && data.add[this.tablename].CP_C_DEST_ID) id = data.add[this.tablename].CP_C_DEST_ID;
-        if (id === '' && data.add[this.tablename].CP_C_ORIG_ID) id = data.add[this.tablename].CP_C_ORIG_ID;
-        if (id === '' && data.add[this.tablename].CP_C_PHY_WAREHOUSE_ID) this.cp_c_phy_warehouse_id = data.add[this.tablename].CP_C_PHY_WAREHOUSE_ID;
+        if (!id && data.add[this.tablename].CP_C_DEST_ID) id = data.add[this.tablename].CP_C_DEST_ID;
+        if (!id && data.add[this.tablename].CP_C_ORIG_ID) id = data.add[this.tablename].CP_C_ORIG_ID;
+        if (!id && data.add[this.tablename].CP_C_PHY_WAREHOUSE_ID) this.cp_c_phy_warehouse_id = data.add[this.tablename].CP_C_PHY_WAREHOUSE_ID;
+
+        if (!id && data.add[this.tablename].CP_C_ORG_CHANNEL_ID_IN) id = data.add[this.tablename].CP_C_ORG_CHANNEL_ID_IN; // 组货单必填项效验
+        if (!id && data.add[this.tablename].CP_C_ORG_CHANNEL_ID_OUT) id = data.add[this.tablename].CP_C_ORG_CHANNEL_ID_OUT;
       } else if (Object.keys(data.modify).length !== 0) {
         if (Object.keys(data.default).length && data.modify[this.tablename].CP_C_STORE_ID) id = data.modify[this.tablename].CP_C_STORE_ID;
-        if (id === '' && data.modify[this.tablename].CP_C_DEST_ID) id = data.modify[this.tablename].CP_C_DEST_ID;
-        if (id === '' && data.modify[this.tablename].CP_C_ORIG_ID) id = data.modify[this.tablename].CP_C_ORIG_ID;
-        if (id === '' && data.modify[this.tablename].CP_C_PHY_WAREHOUSE_ID) this.cp_c_phy_warehouse_id = data.modify[this.tablename].CP_C_PHY_WAREHOUSE_ID;
+        if (!id && data.modify[this.tablename].CP_C_DEST_ID) id = data.modify[this.tablename].CP_C_DEST_ID;
+        if (!id && data.modify[this.tablename].CP_C_ORIG_ID) id = data.modify[this.tablename].CP_C_ORIG_ID;
+        if (!id == '' && data.modify[this.tablename].CP_C_PHY_WAREHOUSE_ID) this.cp_c_phy_warehouse_id = data.modify[this.tablename].CP_C_PHY_WAREHOUSE_ID;
+
+        if (!id && data.modify[this.tablename].CP_C_ORG_CHANNEL_ID_IN) id = data.modify[this.tablename].CP_C_ORG_CHANNEL_ID_IN; // 组货单必填项效验
+        if (!id && data.modify[this.tablename].CP_C_ORG_CHANNEL_ID_OUT) id = data.modify[this.tablename].CP_C_ORG_CHANNEL_ID_OUT;
       }
-      if (id === '' && Object.keys(data.default).length !== 0) {
+      if (!id && Object.keys(data.default).length !== 0) {
         if (data.default[this.tablename].CP_C_STORE_ID) id = data.default[this.tablename].CP_C_STORE_ID;
-        if (id === '' && data.default[this.tablename].CP_C_DEST_ID) id = data.default[this.tablename].CP_C_DEST_ID;
-        if (id === '' && data.default[this.tablename].CP_C_ORIG_ID) id = data.default[this.tablename].CP_C_ORIG_ID;
-        if (id === '' && data.default[this.tablename].CP_C_PHY_WAREHOUSE_ID) this.cp_c_phy_warehouse_id = data.default[this.tablename].CP_C_PHY_WAREHOUSE_ID;
+        if (!id && data.default[this.tablename].CP_C_DEST_ID) id = data.default[this.tablename].CP_C_DEST_ID;
+        if (!id && data.default[this.tablename].CP_C_ORIG_ID) id = data.default[this.tablename].CP_C_ORIG_ID;
+        if (!id && data.default[this.tablename].CP_C_PHY_WAREHOUSE_ID) this.cp_c_phy_warehouse_id = data.default[this.tablename].CP_C_PHY_WAREHOUSE_ID;
+
+        if (!id && data.default[this.tablename].CP_C_ORG_CHANNEL_ID_IN) id = data.default[this.tablename].CP_C_ORG_CHANNEL_ID_IN; // 组货单必填项效验
+        if (!id && data.default[this.tablename].CP_C_ORG_CHANNEL_ID_OUT) id = data.default[this.tablename].CP_C_ORG_CHANNEL_ID_OUT;
       }
 
       this.distribId = id;
