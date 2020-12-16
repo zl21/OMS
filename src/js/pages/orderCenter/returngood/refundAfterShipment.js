@@ -1561,7 +1561,8 @@ export default {
     // 详情 复制查询方法
     query() {
       const self = this;
-      const query = { ID: self.$route.params.customizedModuleId };
+      const ID = self.$route.params.customizedModuleId;
+      const query = { ID: ID === 'New' ? '-1' : ID };
       self.service.orderCenter.copyAfterDeliver(query)
         .then((res) => {
           console.log(res);
