@@ -842,7 +842,7 @@ export default {
     this.sessionStorageData = JSON.parse(sessionStorage.getItem('customizeMessage'))[this.$route.params.customizedModuleId == '41460334' ? 'undefined' : this.$route.params.customizedModuleId];
     console.log(this.sessionStorageData);
     // if (this.$route.query.id && !this.$route.query.new) {
-      if (this.sessionStorageData.standardTableurlCustomized) { // 已发货退款单详情跳转
+      if (this.sessionStorageData && this.sessionStorageData.standardTableurlCustomized) { // 已发货退款单详情跳转
       this.reForm.config.splice(14, 0, {
         item: {
           type: 'Input',
