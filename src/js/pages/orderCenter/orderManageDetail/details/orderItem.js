@@ -107,7 +107,7 @@ export default {
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
         total: obj.totalRowCount, // 设置总条数
-        pageSizeOpts: obj.selectRange, // 每页条数切换的配置
+        pageSizeOpts: obj.selectrange, // 每页条数切换的配置
         pageSize: obj.defaultrange // 每页条数
       };
     }
