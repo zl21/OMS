@@ -550,7 +550,7 @@ export default {
             // icon: 'md-arrow-round-back',
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
-              if (this.$route.params.customizedModuleName === 'EXTRAREFUND' || this.$route.query.fromOrder === 'true') {
+              if (this.$route.params.customizedModuleName === 'EXTRAREFUND' ) {
                 R3.store.commit('global/tabOpen', {
                   type: 'S',
                   tableId: 249230545,
@@ -558,7 +558,7 @@ export default {
                   back: true,
                   label: window.vmI18n.t('btn.additionalRefund'), // 额外退款
                 });
-              } /* else if (this.$route.query.fromOrder === 'true') {
+              } else if (this.$route.query.fromOrder === 'true') {
                 // 返回零售发货单详情
                 R3.store.commit('global/tabOpen', {
                   type: 'C',
@@ -566,9 +566,8 @@ export default {
                   customizedModuleId: this.$route.query.oid,
                   label: this.vmI18n.t('panel_label.retailInvoice_details'),
                   dynamicRoutingForCustomizePage: true,
-                  back: true,
                 });
-              }  */
+              } 
               else {
                 R3.store.commit('global/tabOpen', {
                   type: 'S',
