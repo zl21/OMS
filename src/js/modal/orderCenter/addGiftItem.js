@@ -51,8 +51,7 @@ export default {
           {
             key: 'IS_DELETE',
             title: '操作',
-            render: (h, params) =>
-              h(
+            render: (h, params) => h(
                 'a',
                 {
                   on: {
@@ -163,7 +162,8 @@ export default {
         this.tableConfig.data = [...data];
         this.onRowData = this.tableConfig.data[0];
       } else {
-        this.tableConfig.data.push(obj);
+        // this.tableConfig.data.push(obj);
+        this.tableConfig.data = [obj];
         this.onRowData = this.tableConfig.data[0];
       }
     },
