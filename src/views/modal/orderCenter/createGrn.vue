@@ -16,7 +16,6 @@
             :columns="columns"
             :default-selected="defaultSelected"
             @on-fkrp-selected="fkrpSelected"
-            @on-input-value-change="inputValueChange"
             @on-clear="clear"
           />
         </FormItem>
@@ -177,18 +176,6 @@
         this.selectData = [];
         this.transportStyle.value = '';
         this.transportStyle.text = '';
-      },
-      inputValueChange(e) {
-        const formdata = new FormData();
-        formdata.append('ak', e);
-        formdata.append('colid', '168138');
-        formdata.append('fixedcolumns', JSON.stringify({}));
-        this.service.common.fuzzyquerybyak(formdata).then(res=>{
-          console.log(res);
-          if (res.data.code == 0) {
-            this.autoData = res.data.data;
-          }
-        });
       },
       getDeliveryMethod(e) {
         const val = this.list.filter(item => item.ID == e[0].ID)[0];
