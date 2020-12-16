@@ -4,7 +4,7 @@
     <div class="i_head">
       <div class="i_body">
         <!-- <p>被替换商品SKU</p> -->
-        <p>{{ vmI18n.t("modalTips.a1") }}</p>
+        <p>{{ vmI18n.t("modalTitle.a1") }}</p>
         <div class="search">
           <div class="skuBox">
             <re-form :form-config="formConfig" />
@@ -42,7 +42,7 @@
       </div>
       <div class="i_body1">
         <!-- <p>替换后商品SKU</p> -->
-        <p>{{ vmI18n.t("modalTips.a1") }}</p>
+        <p>{{ vmI18n.t("modalTitle.a4") }}</p>
         <div class="search">
           <div class="skuBox">
             <re-form :form-config="replaceFormConfig" />

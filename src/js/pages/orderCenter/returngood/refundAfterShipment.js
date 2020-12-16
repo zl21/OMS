@@ -550,7 +550,7 @@ export default {
             // icon: 'md-arrow-round-back',
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
-              if (this.$route.params.customizedModuleName === 'EXTRAREFUND') {
+              if (this.$route.params.customizedModuleName === 'EXTRAREFUND' ) {
                 R3.store.commit('global/tabOpen', {
                   type: 'S',
                   tableId: 249230545,
@@ -558,7 +558,17 @@ export default {
                   back: true,
                   label: window.vmI18n.t('btn.additionalRefund'), // 额外退款
                 });
-              } else {
+              } else if (this.$route.query.fromOrder === 'true') {
+                // 返回零售发货单详情
+                R3.store.commit('global/tabOpen', {
+                  type: 'C',
+                  customizedModuleName: 'ORDERMANAGEDETAIL',
+                  customizedModuleId: this.$route.query.oid,
+                  label: this.vmI18n.t('panel_label.retailInvoice_details'),
+                  dynamicRoutingForCustomizePage: true,
+                });
+              } 
+              else {
                 R3.store.commit('global/tabOpen', {
                   type: 'S',
                   tableId: 249130393,
@@ -1437,7 +1447,7 @@ export default {
         const data = {};
         const OcBReturnAfSendItem = [];
         data.orderId = self.reForm.config[3].item.props.value;
-        data.id = self.$route.params.customizedModuleId;
+        data.id = self.$route.params.customizedModuleId == 'New' ? -1 : self.$route.params.customizedModuleId;
         self.addItem.addList.forEach((item) => {
           const obj = {};
           obj.id = item.proId;

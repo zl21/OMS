@@ -32,7 +32,7 @@
         />
         <!--最大翻倍次数 -->
         <div class="form_item">
-          ,{{ vmI18n.t("form_label.max_doubling_times") }}
+          {{ vmI18n.t("form_label.max_doubling_times") }}
         </div>
         <div class="form_el_input form_item doubleNum">
           <input

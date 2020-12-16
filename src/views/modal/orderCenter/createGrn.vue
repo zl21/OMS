@@ -16,19 +16,22 @@
             :columns="columns"
             :default-selected="defaultSelected"
             @on-fkrp-selected="fkrpSelected"
-            @on-input-value-change="inputValueChange"
             @on-clear="clear"
           />
         </FormItem>
         <FormItem label="运输方式">
-          <Select v-model="transportStyle">
+          <!-- <Select v-model="transportStyle">
             <Option value="1">
               汽运
             </Option>
             <Option value="2">
               空运
             </Option>
-          </Select>
+          </Select> -->
+          <Input
+            v-model="transportStyle.text"
+            disabled
+          /></Input>
         </FormItem>
       </Form>
     </div>
@@ -53,34 +56,28 @@
         vmI18n: window.vmI18n,
         isError: false,
         errorMessage: '',
-        transportStyle: '',
+        transportStyle: {
+          text: '',
+          value: ''
+        },
         autoData: [],
         columns: ['ENAME', 'value'],
         defaultSelected: [],
         selectData: [],
+        list: [],
         btnConfig: {
           typeAll: 'error', // 按钮统一风格样式
           btnsite: 'right', // 按钮位置 (right , center , left)
           buttons: [{
-                      type: '', // 按钮类型
-                      text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
-                      icon: '', // 按钮图标
-                      size: 'small', // 按钮大小
-                      disabled: false, // 按钮禁用控制
-                      btnclick: () => {
-                        this.$emit('closeActionDialog');
-                      }, // 按钮点击事件
-                    },
-                    {
-                      type: '', // 按钮类型
-                      text: window.vmI18n.t('common.determine'), // 确定 按钮文本
-                      icon: '', // 按钮图标
-                      size: 'small', // 按钮大小
-                      disabled: false, // 按钮禁用控制
-                      btnclick: () => {
-                        this.determine();
-                      }, // 按钮点击事件
-                    }
+            type: '', // 按钮类型
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            icon: '', // 按钮图标
+            size: 'small', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.$emit('closeActionDialog');
+            }, // 按钮点击事件
+          }
           ],
         },
         datas: {
@@ -108,10 +105,13 @@
     methods: {
       determine() {
         const formdata = new FormData();
+        if (!this.selectData.length && !this.defaultSelected.length) {
+          return this.$Message.warning('档案日程归属不能为空!');
+        }
         const obj = {
           ids: this.idArray,
           ascriptionId: this.selectData[0].ID || this.defaultSelected[0].ID,
-          deliveryMethod: this.transportStyle
+          deliveryMethod: this.transportStyle.value
         };
         formdata.append('param', JSON.stringify(obj));
         this.service.orderCenter.distributionCreateDelivery(formdata)
@@ -131,64 +131,56 @@
         this.service.orderCenter.checkBeforeCreateVipDelivery(formdata).then(res=>{
           console.log(res);
           if (res.data.code === 0) {
-            this.transportStyle = res.data.data.deliveryMethod;
-            this.defaultSelected = [{ ID: res.data.data.id, Label: res.data.data.eName }];
+            const def = res.data.data.filter(item => item.SELECTED == 1)[0];
+            this.transportStyle.text = def.DELIVERY_METHOD_NAME;
+            this.transportStyle.value = def.DELIVERY_METHOD;
+            this.defaultSelected = [{ ID: def.ID, Label: def.ENAME }];
             this.selectData = this.defaultSelected;
-            this.getData();
+            this.btnConfig.buttons.push({
+              type: '', // 按钮类型
+              text: window.vmI18n.t('common.determine'), // 确定 按钮文本
+              icon: '', // 按钮图标
+              size: 'small', // 按钮大小
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {
+                this.determine();
+              }, // 按钮点击事件
+            });
+            this.list = JSON.parse(JSON.stringify(res.data.data));
+            this.datas.row = this.getData(res.data.data);
           } else {
             this.isError = true;
             this.errorMessage = res.data.message;
           }
         });
       },
-      getData() {
-        const formdata = new FormData();
-        const obj = { 
-          table: 'ST_C_VIPCOM_ASCRIPTION', startindex: 0, fixedcolumns: {}, column_include_uicontroller: true, isolr: false 
-        };
-        formdata.append('searchdata', JSON.stringify(obj));
-        this.service.common.QueryList(formdata).then(res=>{
-          console.log(res);
-          if (res.data.code == 0) {
-            this.datas.row = res.data.datas.row;
+      getData(row) {
+        const arr = [];
+        row.forEach(item=>{
+          const obj = {};
+          for (const key in item) {
+            const val = {};
+            val.val = item[key];
+            obj[key] = val;
           }
+          arr.push(obj);
         });
+        return arr;
       },
       fkrpSelected(e) {
         this.selectData = e;
-        this.getDeliveryMethod();
+        this.getDeliveryMethod(e);
       },
       clear() {
         this.defaultSelected = [];
         this.selectData = [];
+        this.transportStyle.value = '';
+        this.transportStyle.text = '';
       },
-      inputValueChange(e) {
-        const formdata = new FormData();
-        formdata.append('ak', e);
-        formdata.append('colid', '168138');
-        formdata.append('fixedcolumns', JSON.stringify({}));
-        this.service.common.fuzzyquerybyak(formdata).then(res=>{
-          console.log(res);
-          if (res.data.code == 0) {
-            this.autoData = res.data.data;
-          }
-        });
-      },
-      getDeliveryMethod() {
-        if (!this.selectData.length && !this.defaultSelected.length) {
-          this.$Message.warning('档案日程归属不能为空!');
-          return;
-        }
-        const formdata = new FormData();
-        formdata.append('param', JSON.stringify({ ids: this.idArray, ascriptionId: this.selectData[0].ID || this.defaultSelected[0].ID }));
-        this.service.orderCenter.getDeliveryMethod(formdata).then(res=>{
-          console.log(res);
-          if (res.data.code === 0) {
-            this.transportStyle = res.data.data;
-          } else {
-            this.$Message.error(res.data.message);
-          }
-        });
+      getDeliveryMethod(e) {
+        const val = this.list.filter(item => item.ID == e[0].ID)[0];
+        this.transportStyle.value = val.DELIVERY_METHOD;
+        this.transportStyle.text = val.DELIVERY_METHOD_NAME;
       }
     }
   };

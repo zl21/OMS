@@ -1482,9 +1482,9 @@ body {
 .ark-table-tfoot tr:first-child td{
   border-top: none;
 }
-.ark-table-border th,.ark-table-border td{
-  // box-sizing: content-box;
-}
+// .ark-table-border th,.ark-table-border td{
+//   box-sizing: content-box;
+// }
 // 标准界面 详情页 page修改
 .TableDetailCollection{
   position: relative;
@@ -1501,6 +1501,34 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+.color_container {
+  .right_container .right_input{
+    position: relative;
+    padding-left: 115px;
+    .ark-input-wrapper {
+      input{
+        height: 28px;
+      }
+    }
+    & > button{
+      position: absolute;
+      top: 0;
+      left: 0;
+      &:hover{
+        border: 1px solid #dcdee2;
+        color: #575757;
+      }
+    }
+  }
+  .center_container{
+    .iconbj_right{
+      &:before{
+        content: "\e69e";
+      }
+      transform: rotate(180deg);
+    }
   }
 }
 // 所有弹框修改

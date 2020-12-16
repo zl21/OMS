@@ -20,8 +20,8 @@ export default {
   data() {
     return {
       publicBouncedConfig: {},
-      isQh: false,
-      isQhChild: false,
+      isQh: true,
+      isQhChild: true,
       dialogs: {
         addGift: {
           title: '添加赠品',

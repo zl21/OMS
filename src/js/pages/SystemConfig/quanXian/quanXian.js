@@ -93,7 +93,7 @@ export default {
     this.getRoleData();
       this.getSearchForm();
     this.buttonConfig.buttons = this.permissionType === 'brand' || this.permissionType === 'sensitivecol'
-    ? this.normal.buttons.filter(item => item.text != '复制权限')
+    ? this.normal.buttons.filter(item => item.text != window.vmI18n.t('btn.copyPermissions'))
     : this.normal.buttons;
   },
   mounted() {

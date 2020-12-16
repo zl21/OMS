@@ -18,7 +18,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本 
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             } // 按钮点击事件
@@ -38,7 +38,7 @@ export default {
         },
         formData: [
           {
-            label: '商品SKU',
+            label: window.vmI18n.t('table_label.commoditySKU'), // '商品SKU',
             style: 'dimSearch',
             width: '12',
             value: 'searchValue',
@@ -74,7 +74,8 @@ export default {
                   delete item.skuId;
                 });
                 dimList.map((item) => {
-                  if (item.label === '商品SKU') {
+                  // '商品SKU'
+                  if (item.label === window.vmI18n.t('table_label.commoditySKU')) {
                     item.AuotData = data;
                     // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
                   }
@@ -89,7 +90,7 @@ export default {
             },
           },
           {
-            label: '商品款号',
+            label: window.vmI18n.t('table_label.itemNo'), //'商品款号',
             style: 'dimSearch',
             width: '12',
             value: 'psCProEcode',
@@ -113,7 +114,8 @@ export default {
                 const dimList = _this.formConfig.formData;
 
                 dimList.map((item) => {
-                  if (item.label === '商品款号') {
+                  // '商品款号'
+                  if (item.label === window.vmI18n.t('table_label.itemNo')) {
                     item.AuotData = res.data.data.list;
                   }
                 });
@@ -136,7 +138,7 @@ export default {
         },
         formData: [
           {
-            label: '商品SKU',
+            label: window.vmI18n.t('table_label.commoditySKU'), //'商品SKU',
             style: 'dimSearch',
             width: '12',
             value: 'searchValue',
@@ -172,7 +174,8 @@ export default {
                   delete item.skuId;
                 });
                 dimList.map((item) => {
-                  if (item.label === '商品SKU') {
+                  // '商品SKU'
+                  if (item.label === window.vmI18n.t('table_label.commoditySKU')) {
                     item.AuotData = data;
                     // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
                   }
@@ -187,7 +190,7 @@ export default {
             },
           },
           {
-            label: '商品款号',
+            label: window.vmI18n.t('table_label.itemNo'), //'商品款号',
             style: 'dimSearch',
             width: '12',
             value: 'psCProEcode',
@@ -211,7 +214,8 @@ export default {
                 const dimList = _this.replaceFormConfig.formData;
 
                 dimList.map((item) => {
-                  if (item.label === '商品款号') {
+                  // '商品款号'
+                  if (item.label === window.vmI18n.t('table_label.itemNo')) {
                     item.AuotData = res.data.data.list;
                   }
                 });
@@ -288,7 +292,7 @@ export default {
         },
       };
       try {
-        const res = await _this.service.common.skuQuery(query);
+        const res = await self.service.common.skuQuery(query);
         if (res.data.code == 0) {
           res.data.data.data.map((item) => {
             item.IS_GIFT == '0' ? '否' : '是';

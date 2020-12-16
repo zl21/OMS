@@ -9,7 +9,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      isCombination: 2, // 1:组合商品 2:组合商品下挂商品
+      isCombination: 1, // 1:组合商品 2:组合商品下挂商品
       tableItemUrl: '/api/cs/oc/oms/v1/getOrderDetailList',
       tableConfig: {
         businessButtonConfig: {
