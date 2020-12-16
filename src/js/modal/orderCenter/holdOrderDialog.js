@@ -142,15 +142,15 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: window.vmI18n.t('common.determine'), // 确定 按钮文本
-            btnclick: () => {
-              this.confirmChange();
-            },
-          },
-          {
             text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
+            },
+          },
+          {
+            text: window.vmI18n.t('common.determine'), // 确定 按钮文本
+            btnclick: () => {
+              this.confirmChange();
             },
           }
         ],
