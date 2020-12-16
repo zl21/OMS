@@ -94,17 +94,17 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
+            text: '取消', // 按钮文本
+            btnclick: () => {
+              this.$parent.$parent.closeConfirm();
+            } // 按钮点击事件
+          },
+          {
             text: '确定', // 按钮文本
             loading: false,
             btnclick: () => {
               this.submit();
             }
-          },
-          {
-            text: '取消', // 按钮文本
-            btnclick: () => {
-              this.$parent.$parent.closeConfirm();
-            } // 按钮点击事件
           }
         ]
       }
