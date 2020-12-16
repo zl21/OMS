@@ -1,14 +1,14 @@
-import businessButton from 'professionalComponents/businessButton.vue';
-import businessForm from 'professionalComponents/businessForm.vue';
-import businessLabel from 'professionalComponents/businessLabel.vue';
-import businessActionTable from 'professionalComponents/businessActionTable.vue';
-import businessDialog from 'professionalComponents/businessDialog.vue';
-import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite.js';
+import businessButton from 'professionalComponents/businessButton';
+import businessForm from 'professionalComponents/businessForm';
+import businessLabel from 'professionalComponents/businessLabel';
+import businessActionTable from 'professionalComponents/businessActionTable';
+import businessDialog from 'professionalComponents/businessDialog';
+import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
-import aTable from 'professionalComponents/agGridTable.vue';
-import loading from '@/component/loading.vue';
-import comUtils from '@/assets/js/__utils__/common.js';
+import aTable from 'professionalComponents/agGridTable';
+import loading from '@/component/loading';
+import comUtils from '@/assets/js/__utils__/common';
 
 export default {
   components: {
@@ -1772,8 +1772,7 @@ export default {
           if (res.data.code == 0 && res.data.data !== null) {
             const mes = res.data.message || _this.vmI18n.t('modalTips.z2'); // 导出成功！
             _this.$Message.success(mes);
-            _this.downloadUrlFile(res.data.data);
-            // return (window.location = res.data.data);
+            publicMethodsUtil.downloadUrlFile(res.data.data);
           } else {
             const err = res.data.message || _this.vmI18n.t('modalTips.z3'); // 失败！
             _this.$Message.error(err);
@@ -1823,24 +1822,13 @@ export default {
           const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
           _this.$Message.success(mes);
           // return (window.location = res.data.data);
-          _this.downloadUrlFile(res.data.data);
+          publicMethodsUtil.downloadUrlFile(res.data.data);
         } else {
           const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
           _this.$Message.error(err);
         }
       });
     },
-    // 导出
-    downloadUrlFile(src) {
-      const downloadFile = {};
-      if (typeof downloadFile.iframe === 'undefined') {
-        const iframe = document.createElement('iframe');
-        downloadFile.iframe = iframe;
-        document.body.appendChild(downloadFile.iframe);
-      }
-      downloadFile.iframe.src = src;
-      downloadFile.iframe.style.display = 'none';
-    }
   },
   destroyed() {
     window.removeEventListener('keydown', this, false);

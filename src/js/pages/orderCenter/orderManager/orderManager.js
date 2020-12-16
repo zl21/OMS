@@ -5,14 +5,14 @@ import businessDialog from 'professionalComponents/businessDialog';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
 import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
-import aTable from 'professionalComponents/agGridTable.vue';
-import unzipXv from '@/assets/js/dataToSmall.js';
-import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
+import aTable from 'professionalComponents/agGridTable';
+import unzipXv from '@/assets/js/dataToSmall';
+import publicDialogConfig from 'professionalComponents/common/js/publicDialog';
 import loading from '@/component/loading.vue';
-import comUtils from '@/assets/js/__utils__/common.js';
-import labelListConfig from './publicConfig/labelList.js';
-import orderLogo from './publicConfig/orderLogo.js';
-import formatData from '@/assets/js/__utils__/date.js';
+import comUtils from '@/assets/js/__utils__/common';
+import labelListConfig from './publicConfig/labelList';
+import formatData from '@/assets/js/__utils__/date';
+import publicMethodsUtil from '@/assets/js/public/publicMethods';
 export default {
   components: {
     businessButton,
@@ -65,24 +65,12 @@ export default {
             });
             return resultElement;
           },
-          PAY_TIME: params =>
-            // 付款时间
-            (params.data.PAY_TIME ? formatData.standardTimeConversiondateToStr(params.data.PAY_TIME) : ''),
-          AUDIT_TIME: params =>
-            // 审核时间
-            (params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''),
-          DISTRIBUTION_TIME: params =>
-            // 配货时间
-            (params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''),
-          CREATIONDATE: params =>
-            // 创建时间
-            (params.data.CREATIONDATE ? formatData.standardTimeConversiondateToStr(params.data.CREATIONDATE) : ''),
-          HOLD_RELEASE_TIME: params =>
-            // HOLD单释放时间
-            (params.data.HOLD_RELEASE_TIME ? formatData.standardTimeConversiondateToStr(params.data.HOLD_RELEASE_TIME) : ''),
-          SCAN_TIME: params =>
-            // 出库时间
-            (params.data.SCAN_TIME ? formatData.standardTimeConversiondateToStr(params.data.SCAN_TIME) : ''),
+          PAY_TIME: params => (params.data.PAY_TIME ? formatData.standardTimeConversiondateToStr(params.data.PAY_TIME) : ''), // 付款时间
+          AUDIT_TIME: params => (params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''), // 审核时间
+          DISTRIBUTION_TIME: params => (params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''), // 配货时间
+          CREATIONDATE: params => (params.data.CREATIONDATE ? formatData.standardTimeConversiondateToStr(params.data.CREATIONDATE) : ''), // 创建时间
+          HOLD_RELEASE_TIME: params => (params.data.HOLD_RELEASE_TIME ? formatData.standardTimeConversiondateToStr(params.data.HOLD_RELEASE_TIME) : ''), // HOLD单释放时间
+          SCAN_TIME: params => (params.data.SCAN_TIME ? formatData.standardTimeConversiondateToStr(params.data.SCAN_TIME) : ''), // 出库时间
           ORDER_FLAG: params => {}
         },
         pagenation: comUtils.pageConfig
@@ -186,10 +174,10 @@ export default {
             text: window.vmI18n.t('btn.manualCreation') // 手工创建
           },
           {
-            webname: "Newly added",// 新增
+            webname: 'Newly added' // 新增
           },
           {
-            webname: "To examine",// 审核
+            webname: 'To examine', // 审核
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -207,7 +195,6 @@ export default {
                   })
                   .then(res => {
                     if (res.data.code === 0) {
-                      // self.$Message.success(res.data.message);
                       self.$Modal.success({
                         title: self.vmI18n.t('modalTitle.tips'), // 提示
                         content: res.data.message,
@@ -260,35 +247,28 @@ export default {
                 self.selection.forEach((item, index) => {
                   ids[index] = item.ID;
                 });
-                self.service.orderCenter
-                  .auditOrderReserve({ ids, type: '1' })
-                  // self.$network
-                  //   .post('/api/cs/oc/oms/v1/auditOrderReserve', {
-                  //     ids,
-                  //     type: '1',
-                  //   })
-                  .then(res => {
-                    if (res.data.code === 0) {
-                      self.$Message.success(res.data.message);
-                      self.getData();
-                      self.selection = [];
-                    } else {
-                      self.$Modal.error({
-                        title: self.vmI18n.t('modalTitle.tips'), // 提示
-                        content: res.data.message,
-                        cancelType: true,
-                        titleAlign: 'left',
-                        mask: true,
-                        draggable: true,
-                        keyDown: event => {
-                          if (event.keyCode == 27 || event.keyCode == 13) {
-                            self.$Modal.remove();
-                          }
+                self.service.orderCenter.auditOrderReserve({ ids, type: '1' }).then(res => {
+                  if (res.data.code === 0) {
+                    self.$Message.success(res.data.message);
+                    self.getData();
+                    self.selection = [];
+                  } else {
+                    self.$Modal.error({
+                      title: self.vmI18n.t('modalTitle.tips'), // 提示
+                      content: res.data.message,
+                      cancelType: true,
+                      titleAlign: 'left',
+                      mask: true,
+                      draggable: true,
+                      keyDown: event => {
+                        if (event.keyCode == 27 || event.keyCode == 13) {
+                          self.$Modal.remove();
                         }
-                      });
-                    }
-                    self.btnConfig.loading = false;
-                  });
+                      }
+                    });
+                  }
+                  self.btnConfig.loading = false;
+                });
               } else {
                 self.$Message.warning({
                   content: this.vmI18n.t('modalTips.a6'), // 请选择需要反审核的记录！
@@ -298,66 +278,17 @@ export default {
               }
             } // 按钮点击事件
           },
-          // {
-          //   text: "WMS撤回", //按钮文本
-          //   btnclick: () => {
-          //     let self = this;
-          //     if (self.selection.length > 0) {
-          //       self.btnConfig.loading = true;
-          //       let ids = [];
-          //       self.selection.forEach((item, index) => {
-          //         ids[index] = item.ID;
-          //       });
-          //       axios({
-          //         url: "/p/cs/auditingContrary",
-          //         method: "post",
-          //         cancelToken: true,
-          //         data: { ids: ids,  type: '3'}
-          //       }).then(function(res) {
-          //         if (res.data.code === 0) {
-          //           self.selection = [];
-          //           self.getData();
-          //           self.$Message.success(res.data.message);
-          //         } else {
-          //           self.$Modal.error({
-          //             title: self.vmI18n.t('modalTitle.tips'),//提示,
-          //             content: res.data.message,
-          //             cancelType: true,
-          //             titleAlign: "left",
-          //             mask: true,
-          //             draggable: true,
-          //             keyDown: event => {
-          //               if (event.keyCode == 27 || event.keyCode == 13) {
-          //                 self.$Modal.remove();
-          //               }
-          //             }
-          //           });
-          //         }
-          //         self.btnConfig.loading = false;
-          //       });
-          //     } else {
-          //       self.$Message.warning({
-          //         content: "请选择需要WMS撤回记录！",
-          //         duration: 5,
-          //         top: 80
-          //       });
-          //     }
-          //   } //按钮点击事件
-          // },
-          /* {
-            text: window.vmI18n.t('btn.batchModify') // 批量修改
-          }, */
           {
-            webname: 'Revising Logistics', // 批量修改物流
+            webname: 'Revising Logistics' // 批量修改物流
           },
           {
-            webname: 'Drop-out copy', // 丢单复制
+            webname: 'Drop-out copy' // 丢单复制
           },
           {
-            webname: 'holdOrder', // 批量Hold单
+            webname: 'holdOrder' // 批量Hold单
           },
           {
-            webname: 'cancelHoldOrder', // 批量取消Hold
+            webname: 'cancelHoldOrder' // 批量取消Hold
           },
           {
             text: window.vmI18n.t('btn.invoice_otice'), // 开票通知
@@ -449,7 +380,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            webname: 'Modify warehouse', // 批量修改仓库
+            webname: 'Modify warehouse' // 批量修改仓库
           },
           {
             text: window.vmI18n.t('btn.orderCancel'), // 订单取消
@@ -561,7 +492,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            webname: 'OrderDeliveryUrgent', // 加急发货
+            webname: 'OrderDeliveryUrgent' // 加急发货
           },
           {
             text: window.vmI18n.t('btn.splitOrder'), // 拆分订单
@@ -759,7 +690,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            webname: 'Amendment Notes', // 批量修改备注
+            webname: 'Amendment Notes' // 批量修改备注
           },
           // {
           //   text: "工单", //按钮文本
@@ -889,16 +820,16 @@ export default {
             text: window.vmI18n.t('btn.copyOrder') // 复制订单
           }, */
           {
-            webname: 'OrderWrongCopy', // 错发复制
+            webname: 'OrderWrongCopy' // 错发复制
           },
           {
-            webname: 'OrderMissSendCopy', // 漏发复制
+            webname: 'OrderMissSendCopy' // 漏发复制
           },
           {
-            webname: 'OrderGiftsOutCopy', // 赠品出库复制
+            webname: 'OrderGiftsOutCopy' // 赠品出库复制
           },
           {
-            webname: 'oriInvalidCopy', // 原单无效复制
+            webname: 'oriInvalidCopy' // 原单无效复制
           },
           {
             text: window.vmI18n.t('btn.note_import'), // 备注导入
@@ -977,26 +908,26 @@ export default {
             text: window.vmI18n.t('btn.batchModifyGoods') // 批量改商品
           }, */
           {
-            webname: 'order_gh',// 替换商品
+            webname: 'order_gh' // 替换商品
           },
           {
-            webname: 'Adding gifts', // 添加赠品
+            webname: 'Adding gifts' // 添加赠品
           },
           {
-            webname: 'Delete_Merchandise', // 删除赠品
+            webname: 'Delete_Merchandise' // 删除赠品
           },
           /* {
             text: window.vmI18n.t('btn.batchSplitOrder') // 批量拆单
           }, */
           {
-            webname:"appointSplit", // 指定商品拆单
+            webname: 'appointSplit' // 指定商品拆单
           },
           {
-            webname:"shortageSplit", // 缺货拆单
+            webname: 'shortageSplit' // 缺货拆单
           },
           {
             // text: window.vmI18n.t('btn.batch_chargeback'), // 批量退单
-            webname:"batchReturnOrder",
+            webname: 'batchReturnOrder',
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -1090,24 +1021,24 @@ export default {
           },
           {
             // text: window.vmI18n.t('btn.mergeOrders'), // 合并订单
-            webname:"mergeOrderOne",
+            webname: 'mergeOrderOne',
             btnclick: () => {
               this.mergeOrder();
             }
           },
           {
             text: window.vmI18n.t('btn.cancel_mergeOrders'), // 取消合并订单
-            webname:"cancelMergeOrder",
+            webname: 'cancelMergeOrder',
             btnclick: () => {
               this.cancelMergeOrder();
             }
           },
           {
-            webname:"OcBOrderImportCmd", // 导入
-            webid: 3025,
+            webname: 'OcBOrderImportCmd', // 导入
+            webid: 3025
           },
           {
-            webname:"OcBOrderExportCmd", // 导出
+            webname: 'OcBOrderExportCmd', // 导出
             btnclick: () => {
               this.exportClick();
             } // 按钮点击事件
@@ -1187,7 +1118,7 @@ export default {
     // this.getSearchData();
     // 获取from数据
     // this.getFromData();
-    console.log('btnConfig',this.btnConfig);
+    console.log('btnConfig', this.btnConfig);
     const _this = this;
     _this.getHeaderList();
     _this.$nextTick(() => {
@@ -1209,7 +1140,7 @@ export default {
       this.getData();
     },
     dropDownClickChange(val) {
-      console.log(val,'val');
+      console.log(val, 'val');
       const self = this;
       // val !== '新增'
       if (val !== 'Newly added') {
@@ -1531,20 +1462,16 @@ export default {
                 isAddGit = false;
               }
             });
-            this.service.orderCenter
-              .splitOrder({ ids })
-              // this.$network
-              //   .post('/api/cs/oc/oms/v1/splitOrder', { ids })
-              .then(res => {
-                this.pageLoad = false;
-                if (res.data.code == 0) {
-                  self.$Message.success(res.data.message);
-                  self.selection = [];
-                  self.getData();
-                } else {
-                  self.$Message.error(res.data.message);
-                }
-              });
+            this.service.orderCenter.splitOrder({ ids }).then(res => {
+              this.pageLoad = false;
+              if (res.data.code == 0) {
+                self.$Message.success(res.data.message);
+                self.selection = [];
+                self.getData();
+              } else {
+                self.$Message.error(res.data.message);
+              }
+            });
           } else {
             this.pageLoad = false;
             self.$Message.warning({
@@ -1875,328 +1802,347 @@ export default {
       };
       fromdata.append('param', JSON.stringify(params));
       _this.agTableConfig.agLoading = true;
-      _this.service.orderCenter
-        .getSeniorQueryCondition(fromdata)
-        .then(res => {
-          // 高级查询
-          const formData = [];
-          if (res.data.data) {
-            res.data.data.highSearch.forEach((item, index) => {
-              if (item.type === 'date') {
-                formData[index] = {
-                  style: item.tabth.isfilter ? 'date' : '', // 输入框类型
-                  type: 'datetimerange', // 文本框类型的input
-                  label: item.tabth.name, // 输入框前文字
-                  value: item.tabth.colname, // 输入框的值
-                  // format: "yyyy-MM-dd hh:mm:ss",
-                  width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-                  icon: 'md-alarm', // 输入框后带的图标,暂只有输入框支持
-                  placeholder: '', // 占位文本，默认为请输入
-                  ghost: false, // 是否关闭幽灵按钮，默认开启
-                  inputenter: () => {
-                    _this.loadData();
-                  }, // 表单回车事件
-                  iconclick: () => {}, // 点击icon图标事件
-                  clearable: true
-                };
-                _this.formConfig.formValue[item.tabth.colname] = [];
-              }
-              if (item.type === 'propInput') {
-                formData[index] = {
-                  style: item.tabth.isfilter ? 'popInput' : '', // 输入框弹框单多选
-                  width: '6',
-                  itemdata: {
-                    col: 1,
-                    colid: item.tabth.colid,
-                    colname: item.tabth.colname, // 当前字段的名称
-                    datelimit: 'all',
-                    display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-                    fkdisplay: item.tabth.fkdisplay, // 外键关联类型
-                    fkdesc: item.tabth.fkdesc,
-                    inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
-                    isfk: true, // 是否有fk键
-                    isnotnull: false, // 是否必填
-                    isuppercase: false, // 是否转大写
-                    length: 65535, // 最大长度是多少
-                    name: item.tabth.name, // input前面显示的lable值
-                    readonly: false, // 是否可编辑，对应input   readonly属性
-                    reftable: item.tabth.reftable,
-                    reftableid: item.tabth.reftableid,
-                    row: 1,
-                    statsize: -1,
-                    type: item.tabth.type, // 这个是后台用的
-                    valuedata: '' // 这个是选择的值
-                  }
-                };
-                if (item.tabth.precolnameslist) {
-                  formData[index].itemdata.precolnameslist = item.tabth.precolnameslist ? item.tabth.precolnameslist : [];
-                }
-              }
-              if (item.type === 'text') {
-                formData[index] = {
-                  style: item.tabth.isfilter ? 'input' : '', // 输入框类型
-                  label: item.tabth.name, // 输入框前文字
-                  value: item.tabth.colname, // 输入框的值
-                  width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-                  icon: '', // 输入框后带的图标,暂只有输入框支持
-                  clearable: true,
-                  placeholder: '', // 占位文本，默认为请输入
-                  ghost: false, // 是否关闭幽灵按钮，默认开启
-                  inputenter: () => {
-                    _this.loadData();
-                  }, // 表单回车事件
-                  iconclick: () => {} // 点击icon图标事件
-                };
-                _this.formConfig.formValue[item.tabth.colname] = '';
-              }
-              if (item.type === 'number') {
-                formData[index] = {
-                  // style: item.tabth.isfilter ? "input" : "", //输入框类型
-                  style: item.tabth.isfilter ? 'bothInput' : '', // 输入框类型
-                  label: item.tabth.name, // 输入框前文字
-                  value: item.tabth.colname, // 输入框的值
-                  clearable: true,
-                  regx: _this.determineTheRegular(item.tabth.colname),
-                  width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-                  icon: '', // 输入框后带的图标,暂只有输入框支持
-                  placeholder: '', // 占位文本，默认为请输入
-                  ghost: false, // 是否关闭幽灵按钮，默认开启
-                  inputenter: () => {
-                    _this.loadData();
-                  }, // 表单回车事件
-                  iconclick: () => {} // 点击icon图标事件
-                };
-                _this.formConfig.formValue[item.tabth.colname] = {
-                  value1: '', // 第一个数字框绑定的值
-                  value2: '' // 第二个数字框绑定的值
-                };
-              }
-              if (item.type === 'select') {
-                formData[index] = {
-                  style: item.tabth.isfilter ? 'select' : '', // 下拉框类型
-                  label: item.tabth.name, // 下拉框前的值
-                  width: '6', // 所占宽度宽度
-                  placeholder: '', // 占位文本，默认为请输入
-                  value: item.tabth.colname, // 输入框的值
-                  multiple: true, // 布尔值,下拉框是否开启多选,默认为不开启
-                  selectChange: () => {}, // 选中事件，默认返回选中的值
-                  options: _this.converSelect(item.tabth.combobox)
-                };
-                _this.formConfig.formValue[item.tabth.colname] = [];
-                if (item.tabth.colname === 'IS_EXCHANGE_NO_IN') _this.formConfig.formValue[item.tabth.colname] = ['0'];
-              }
-            });
-            _this.formConfig.formData = formData;
-            const arr = [];
-            res.data.data.tableHeader.forEach(item => {
-              const obj = {};
-              obj.headerName = item.title;
-              obj.field = item.key;
-              arr.push(obj);
-            });
-            _this.agTableConfig.columnDefs = arr;
-            _this.agTableConfig.agLoading = false;
-            if (this.$route.query.type === 'workID') {
-              this.searchMethod('workID');
-              this.selectValue = [];
-            } else {
-              this.searchMethod();
-            }
-
-            // 下拉数据 定义
-            const dropList = [];
-            res.data.data.queryInfo.forEach((item, index) => {
-              if (item.type === 'Select') {
-                dropList[index] = {
-                  label: item.displayName, // 字段名称
-                  column: item.queryName, // 字段
-                  placeholder: '', // 占位文本
-                  type: item.type === 'date' ? 'DatePicker' : item.type, // 类型
-                  componentAttribute: {
-                    multiple: true,
-                    'label-in-value': true
-                  }, // 组件属性
-                  list: item.list, // 选项
-                  value: '' // 选中值
-                };
-              } else if (item.type === 'DropDownSelectFilter') {
-                dropList[index] = {
-                  label: item.displayName, // 字段名称
-                  column: item.queryName, // 字段
-                  placeholder: '', // 占位文本
-                  type: item.type, // 类型 item.type
-                  value: '',
-                  componentAttribute: {
-                    totalRowCount: 0,
-                    single: false, // 是否是单选
-                    data: {
-                      start: 0,
-                      tabth: [],
-                      row: []
-                    },
-                    pageSize: 10,
-                    AutoData: [],
-                    hidecolumns: ['ID', 'SELLER_NICK', 'ECODE', 'CP_C_PLATFORM_ENAME', 'CONTACT_NAME', 'CP_C_STORE_NATURE_ID', 'JIT_WAREHOUSE_ECODE', 'MOBILEPHONE_NUM', 'ORIGINAL_RETURN_PHY_WAREHOUSE_ID', 'OWNER_CODE', 'PHONE_NUM', 'REMARK', 'SELLER_AREA_ID', 'SELLER_CITY_ID', 'SELLER_PROVINCE_ID', 'SELLER_ZIP', 'SEND_ADDRESS', 'WH_TYPE', 'WMS_ACCOUNT', 'WMS_WAREHOUSE_CODE']
-                  }, // 组件属性
-                  componentEvent: {
-                    'on-popper-show': () => {
-                      const self = this;
-                      let premtype = '';
-                      if (item.selectTab.tabth.name === '店铺') {
-                        premtype = 'CP_C_SHOP_PERMISSION_ID';
-                      } else if (item.selectTab.tabth.name === '发货仓库') {
-                        premtype = 'CP_C_WAREHOUSE_ID';
-                      }
-                      const params = {
-                        isdroplistsearch: true,
-                        refcolid: item.selectTab.tabth.colid,
-                        fixedcolumns: {},
-                        startindex: 0,
-                        range: 10,
-                        precolnameslist: [
-                          {
-                            iswrite: 'false',
-                            refcol: 'ID',
-                            premtype
-                          }
-                        ]
-                      };
-                      const data = new URLSearchParams();
-                      data.append('searchdata', JSON.stringify(params));
-                      self.service.orderCenter
-                        .QueryList(data)
-                        // self.$network
-                        //   .post('/p/cs/QueryList', data)
-                        .then(res => {
-                          dropList[index].componentAttribute.data = res.data.datas;
-                          dropList[index].componentAttribute.totalRowCount = res.data.datas.totalRowCount;
-                        });
-                    },
-                    'on-page-change': e => {
-                      const self = this;
-                      let premtype = '';
-                      if (item.selectTab.tabth.name === '店铺') {
-                        premtype = 'CP_C_SHOP_PERMISSION_ID';
-                      } else if (item.selectTab.tabth.name === '发货仓库') {
-                        premtype = 'CP_C_WAREHOUSE_ID';
-                      }
-                      const params = {
-                        isdroplistsearch: true,
-                        refcolid: item.selectTab.tabth.colid,
-                        fixedcolumns: {},
-                        startindex: (e - 1) * 10,
-                        range: 10,
-                        precolnameslist: [
-                          {
-                            iswrite: 'false',
-                            refcol: 'ID',
-                            premtype
-                          }
-                        ]
-                      };
-                      const data = new URLSearchParams();
-                      data.append('searchdata', JSON.stringify(params));
-                      self.service.orderCenter
-                        .QueryList(data)
-                        // self.$network
-                        //   .post('/p/cs/QueryList', data)
-                        .then(res => {
-                          dropList[index].componentAttribute.data = res.data.datas;
-                          dropList[index].componentAttribute.totalRowCount = res.data.datas.totalRowCount;
-                        });
-                    },
-                    'on-input-value-change': e => {
-                      const self = this;
-                      let premtype = '';
-                      if (item.selectTab.tabth.name === '店铺') {
-                        premtype = 'CP_C_SHOP_PERMISSION_ID';
-                      } else if (item.selectTab.tabth.name === '发货仓库') {
-                        premtype = 'CP_C_WAREHOUSE_ID';
-                      }
-                      const params = {
-                        isdroplistsearch: true,
-                        refcolid: item.selectTab.tabth.colid,
-                        fixedcolumns: {},
-                        startindex: (e - 1) * 10,
-                        range: 10,
-                        precolnameslist: [
-                          {
-                            iswrite: 'false',
-                            refcol: 'ID',
-                            premtype
-                          }
-                        ]
-                      };
-                      const data = new URLSearchParams();
-                      data.append('searchdata', JSON.stringify(params));
-                      self.service.orderCenter
-                        .QueryList(data)
-                        // self.$network
-                        //   .post('/p/cs/QueryList', data)
-                        .then(res => {
-                          console.log(res);
-                          if (res.data.code == 0) {
-                            this.dropList.filter(key => key.label == item.displayName)[0].componentAttribute.AutoData = this.setData(res.data.datas.row);
-                          } else {
-                            this.dropList.filter(item => item.label == item.displayName)[0].componentAttribute.AutoData = [];
-                          }
-                        });
-                    }
-                  }
-                };
-              } else {
-                dropList[index] = {
-                  label: item.displayName, // 字段名称
-                  column: item.queryName, // 字段
-                  placeholder: '', // 占位文本
-                  type: item.type === 'date' ? 'DatePicker' : item.type, // 类型
-                  componentAttribute:
-                    item.type === 'date'
-                      ? {
-                          type: 'datetimerange',
-                          value: _this.getCurrentTime(), // ["2018-09-07 09:09:09","2018-09-07 09:09:10"]
-                          isEmitOnChange: true
-                        }
-                      : {}, // 组件属性
-                  componentEvent: {
-                    'on-enter': () => {
-                      setTimeout(() => {
-                        _this.searchMethod();
-                      }, 100);
-                    }
-                  }, // 组件事件
-                  list: item.list, // 选项
-                  value: '' // 选中值
-                };
-              }
-              if (item.queryName === 'PAY_TIME') {
-                dropList[index].value = `${_this.getCurrentTime()[0]}~${_this.getCurrentTime()[1]}`;
-                if (_this.selectValue.length === 0) {
-                  _this.selectValue.push(dropList[index]);
-                }
-              }
-            });
-            _this.dropList = dropList;
-            // 标签数据 定义
-            const tagList = [];
-            res.data.data.label.forEach((item, index) => {
-              tagList[index] = {
-                label: item.text,
-                value: `${item.val}`,
-                key: item.key,
-                sort: item.sort,
-                trigger: 'click'
+      _this.service.orderCenter.getSeniorQueryCondition(fromdata).then(res => {
+        // 高级查询
+        const formData = [];
+        if (res.data.data) {
+          res.data.data.highSearch.forEach((item, index) => {
+            if (item.type === 'date') {
+              formData[index] = {
+                style: item.tabth.isfilter ? 'date' : '', // 输入框类型
+                type: 'datetimerange', // 文本框类型的input
+                label: item.tabth.name, // 输入框前文字
+                value: item.tabth.colname, // 输入框的值
+                // format: "yyyy-MM-dd hh:mm:ss",
+                width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                icon: 'md-alarm', // 输入框后带的图标,暂只有输入框支持
+                placeholder: '', // 占位文本，默认为请输入
+                ghost: false, // 是否关闭幽灵按钮，默认开启
+                inputenter: () => {
+                  _this.loadData();
+                }, // 表单回车事件
+                iconclick: () => {}, // 点击icon图标事件
+                clearable: true
               };
-            });
-            _this.tagList[0].list = tagList;
-            _this.setSearchOption();
+              _this.formConfig.formValue[item.tabth.colname] = [];
+            }
+            if (item.type === 'propInput') {
+              formData[index] = {
+                style: item.tabth.isfilter ? 'popInput' : '', // 输入框弹框单多选
+                width: '6',
+                itemdata: {
+                  col: 1,
+                  colid: item.tabth.colid,
+                  colname: item.tabth.colname, // 当前字段的名称
+                  datelimit: 'all',
+                  display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+                  fkdisplay: item.tabth.fkdisplay, // 外键关联类型
+                  fkdesc: item.tabth.fkdesc,
+                  inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
+                  isfk: true, // 是否有fk键
+                  isnotnull: false, // 是否必填
+                  isuppercase: false, // 是否转大写
+                  length: 65535, // 最大长度是多少
+                  name: item.tabth.name, // input前面显示的lable值
+                  readonly: false, // 是否可编辑，对应input   readonly属性
+                  reftable: item.tabth.reftable,
+                  reftableid: item.tabth.reftableid,
+                  row: 1,
+                  statsize: -1,
+                  type: item.tabth.type, // 这个是后台用的
+                  valuedata: '' // 这个是选择的值
+                }
+              };
+              if (item.tabth.precolnameslist) {
+                formData[index].itemdata.precolnameslist = item.tabth.precolnameslist ? item.tabth.precolnameslist : [];
+              }
+            }
+            if (item.type === 'text') {
+              formData[index] = {
+                style: item.tabth.isfilter ? 'input' : '', // 输入框类型
+                label: item.tabth.name, // 输入框前文字
+                value: item.tabth.colname, // 输入框的值
+                width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                icon: '', // 输入框后带的图标,暂只有输入框支持
+                clearable: true,
+                placeholder: '', // 占位文本，默认为请输入
+                ghost: false, // 是否关闭幽灵按钮，默认开启
+                inputenter: () => {
+                  _this.loadData();
+                }, // 表单回车事件
+                iconclick: () => {} // 点击icon图标事件
+              };
+              _this.formConfig.formValue[item.tabth.colname] = '';
+            }
+            if (item.type === 'number') {
+              formData[index] = {
+                // style: item.tabth.isfilter ? "input" : "", //输入框类型
+                style: item.tabth.isfilter ? 'bothInput' : '', // 输入框类型
+                label: item.tabth.name, // 输入框前文字
+                value: item.tabth.colname, // 输入框的值
+                clearable: true,
+                regx: _this.determineTheRegular(item.tabth.colname),
+                width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+                icon: '', // 输入框后带的图标,暂只有输入框支持
+                placeholder: '', // 占位文本，默认为请输入
+                ghost: false, // 是否关闭幽灵按钮，默认开启
+                inputenter: () => {
+                  _this.loadData();
+                }, // 表单回车事件
+                iconclick: () => {} // 点击icon图标事件
+              };
+              _this.formConfig.formValue[item.tabth.colname] = {
+                value1: '', // 第一个数字框绑定的值
+                value2: '' // 第二个数字框绑定的值
+              };
+            }
+            if (item.type === 'select') {
+              formData[index] = {
+                style: item.tabth.isfilter ? 'select' : '', // 下拉框类型
+                label: item.tabth.name, // 下拉框前的值
+                width: '6', // 所占宽度宽度
+                placeholder: '', // 占位文本，默认为请输入
+                value: item.tabth.colname, // 输入框的值
+                multiple: true, // 布尔值,下拉框是否开启多选,默认为不开启
+                selectChange: () => {}, // 选中事件，默认返回选中的值
+                options: _this.converSelect(item.tabth.combobox)
+              };
+              _this.formConfig.formValue[item.tabth.colname] = [];
+              if (item.tabth.colname === 'IS_EXCHANGE_NO_IN') _this.formConfig.formValue[item.tabth.colname] = ['0'];
+            }
+          });
+          _this.formConfig.formData = formData;
+          const arr = [];
+          res.data.data.tableHeader.forEach(item => {
+            const obj = {};
+            obj.headerName = item.title;
+            obj.field = item.key;
+            arr.push(obj);
+          });
+          _this.agTableConfig.columnDefs = arr;
+          _this.agTableConfig.agLoading = false;
+          if (this.$route.query.type === 'workID') {
+            this.searchMethod('workID');
+            this.selectValue = [];
+          } else {
+            this.searchMethod();
           }
-        });
+
+          // 下拉数据 定义
+          const dropList = [];
+          res.data.data.queryInfo.forEach((item, index) => {
+            if (item.type === 'Select') {
+              dropList[index] = {
+                label: item.displayName, // 字段名称
+                column: item.queryName, // 字段
+                placeholder: '', // 占位文本
+                type: item.type === 'date' ? 'DatePicker' : item.type, // 类型
+                componentAttribute: {
+                  multiple: true,
+                  'label-in-value': true
+                }, // 组件属性
+                list: item.list, // 选项
+                value: '' // 选中值
+              };
+            } else if (item.type === 'DropDownSelectFilter') {
+              dropList[index] = {
+                label: item.displayName, // 字段名称
+                column: item.queryName, // 字段
+                placeholder: '', // 占位文本
+                type: item.type, // 类型 item.type
+                value: '',
+                componentAttribute: {
+                  totalRowCount: 0,
+                  single: false, // 是否是单选
+                  data: {
+                    start: 0,
+                    tabth: [],
+                    row: []
+                  },
+                  pageSize: 10,
+                  AutoData: [],
+                  hidecolumns: [
+                    'ID',
+                    'SELLER_NICK',
+                    'ECODE',
+                    'CP_C_PLATFORM_ENAME',
+                    'CONTACT_NAME',
+                    'CP_C_STORE_NATURE_ID',
+                    'JIT_WAREHOUSE_ECODE',
+                    'MOBILEPHONE_NUM',
+                    'ORIGINAL_RETURN_PHY_WAREHOUSE_ID',
+                    'OWNER_CODE',
+                    'PHONE_NUM',
+                    'REMARK',
+                    'SELLER_AREA_ID',
+                    'SELLER_CITY_ID',
+                    'SELLER_PROVINCE_ID',
+                    'SELLER_ZIP',
+                    'SEND_ADDRESS',
+                    'WH_TYPE',
+                    'WMS_ACCOUNT',
+                    'WMS_WAREHOUSE_CODE'
+                  ]
+                }, // 组件属性
+                componentEvent: {
+                  'on-popper-show': () => {
+                    const self = this;
+                    let premtype = '';
+                    if (item.selectTab.tabth.name === '店铺') {
+                      premtype = 'CP_C_SHOP_PERMISSION_ID';
+                    } else if (item.selectTab.tabth.name === '发货仓库') {
+                      premtype = 'CP_C_WAREHOUSE_ID';
+                    }
+                    const params = {
+                      isdroplistsearch: true,
+                      refcolid: item.selectTab.tabth.colid,
+                      fixedcolumns: {},
+                      startindex: 0,
+                      range: 10,
+                      precolnameslist: [
+                        {
+                          iswrite: 'false',
+                          refcol: 'ID',
+                          premtype
+                        }
+                      ]
+                    };
+                    const data = new URLSearchParams();
+                    data.append('searchdata', JSON.stringify(params));
+                    self.service.orderCenter
+                      .QueryList(data)
+                      // self.$network
+                      //   .post('/p/cs/QueryList', data)
+                      .then(res => {
+                        dropList[index].componentAttribute.data = res.data.datas;
+                        dropList[index].componentAttribute.totalRowCount = res.data.datas.totalRowCount;
+                      });
+                  },
+                  'on-page-change': e => {
+                    const self = this;
+                    let premtype = '';
+                    if (item.selectTab.tabth.name === '店铺') {
+                      premtype = 'CP_C_SHOP_PERMISSION_ID';
+                    } else if (item.selectTab.tabth.name === '发货仓库') {
+                      premtype = 'CP_C_WAREHOUSE_ID';
+                    }
+                    const params = {
+                      isdroplistsearch: true,
+                      refcolid: item.selectTab.tabth.colid,
+                      fixedcolumns: {},
+                      startindex: (e - 1) * 10,
+                      range: 10,
+                      precolnameslist: [
+                        {
+                          iswrite: 'false',
+                          refcol: 'ID',
+                          premtype
+                        }
+                      ]
+                    };
+                    const data = new URLSearchParams();
+                    data.append('searchdata', JSON.stringify(params));
+                    self.service.orderCenter
+                      .QueryList(data)
+                      // self.$network
+                      //   .post('/p/cs/QueryList', data)
+                      .then(res => {
+                        dropList[index].componentAttribute.data = res.data.datas;
+                        dropList[index].componentAttribute.totalRowCount = res.data.datas.totalRowCount;
+                      });
+                  },
+                  'on-input-value-change': e => {
+                    const self = this;
+                    let premtype = '';
+                    if (item.selectTab.tabth.name === '店铺') {
+                      premtype = 'CP_C_SHOP_PERMISSION_ID';
+                    } else if (item.selectTab.tabth.name === '发货仓库') {
+                      premtype = 'CP_C_WAREHOUSE_ID';
+                    }
+                    const params = {
+                      isdroplistsearch: true,
+                      refcolid: item.selectTab.tabth.colid,
+                      fixedcolumns: {},
+                      startindex: (e - 1) * 10,
+                      range: 10,
+                      precolnameslist: [
+                        {
+                          iswrite: 'false',
+                          refcol: 'ID',
+                          premtype
+                        }
+                      ]
+                    };
+                    const data = new URLSearchParams();
+                    data.append('searchdata', JSON.stringify(params));
+                    self.service.orderCenter
+                      .QueryList(data)
+                      // self.$network
+                      //   .post('/p/cs/QueryList', data)
+                      .then(res => {
+                        console.log(res);
+                        if (res.data.code == 0) {
+                          this.dropList.filter(key => key.label == item.displayName)[0].componentAttribute.AutoData = this.setData(res.data.datas.row);
+                        } else {
+                          this.dropList.filter(item => item.label == item.displayName)[0].componentAttribute.AutoData = [];
+                        }
+                      });
+                  }
+                }
+              };
+            } else {
+              dropList[index] = {
+                label: item.displayName, // 字段名称
+                column: item.queryName, // 字段
+                placeholder: '', // 占位文本
+                type: item.type === 'date' ? 'DatePicker' : item.type, // 类型
+                componentAttribute:
+                  item.type === 'date'
+                    ? {
+                        type: 'datetimerange',
+                        value: _this.getCurrentTime(), // ["2018-09-07 09:09:09","2018-09-07 09:09:10"]
+                        isEmitOnChange: true
+                      }
+                    : {}, // 组件属性
+                componentEvent: {
+                  'on-enter': () => {
+                    setTimeout(() => {
+                      _this.searchMethod();
+                    }, 100);
+                  }
+                }, // 组件事件
+                list: item.list, // 选项
+                value: '' // 选中值
+              };
+            }
+            if (item.queryName === 'PAY_TIME') {
+              dropList[index].value = `${_this.getCurrentTime()[0]}~${_this.getCurrentTime()[1]}`;
+              if (_this.selectValue.length === 0) {
+                _this.selectValue.push(dropList[index]);
+              }
+            }
+          });
+          _this.dropList = dropList;
+          // 标签数据 定义
+          const tagList = [];
+          res.data.data.label.forEach((item, index) => {
+            tagList[index] = {
+              label: item.text,
+              value: `${item.val}`,
+              key: item.key,
+              sort: item.sort,
+              trigger: 'click'
+            };
+          });
+          _this.tagList[0].list = tagList;
+          _this.setSearchOption();
+        }
+      });
     },
     // 处理数据
     setData(array) {
       const arr = [];
-      array.forEach(item=>{
+      array.forEach(item => {
         const obj = {};
         for (const key in item) {
           console.log(key, item[key].val);
@@ -2350,7 +2296,7 @@ export default {
     onDropChange(value) {
       console.log('onDropChange::', value);
       if (value.type === 'DropDownSelectFilter') {
-        this.$nextTick(()=>{
+        this.$nextTick(() => {
           const input = document.querySelector('.ark-integrate-search-filter-container').querySelector('input');
           input.setAttribute('disabled', true);
           input.classList.add('forceWhite');
@@ -2618,26 +2564,6 @@ export default {
           throw new Error('只允许仓库发货、平台发货状态订单批量退单');
         }
       }
-      // for (let i = 0; i < selection.length; i++) {
-      //   const item = selection[i];
-      //   if (
-      //     item.ORDER_STATUS === self.orderStatus.orderCancel
-      //     || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid
-      //   ) {
-      //     // 订单需要生成退换货单的订单状态不能已取消、系统作废！
-      //     throw new Error(`${item.ID}${self.vmI18n.t('modalTips.f6')}`);
-      //   } else if (
-      //     item.ORDER_STATUS === self.orderStatus.waitDistribution
-      //     || item.ORDER_STATUS === self.orderStatus.orderUnconfirmed
-      //     || item.ORDER_STATUS === self.orderStatus.orderOutofstock
-      //     || item.ORDER_STATUS === self.orderStatus.audited
-      //     || item.ORDER_STATUS === self.orderStatus.waitSendWMS
-      //     || item.ORDER_STATUS === self.orderStatus.distributioning
-      //   ) {
-      //     // 存在未发货订单,不能进行批量新增退换货订单操作
-      //     throw new Error(self.vmI18n.t('modalTips.f7'));
-      //   }
-      // }
     },
     onBatchReturnOrderCancel() {
       this.batchReturnFormConfig.formValue.IS_BACK = false;
@@ -2666,27 +2592,10 @@ export default {
       fromdata.append('menu', '批量退单');
       self.service.orderCenter
         .doBatchReturnOrder(fromdata)
-        // self.$network
-        //   .post('/api/cs/oc/oms/v1/doBatchReturnOrder', formdata)
         .then(res => {
           self.batchReturnFormConfig.formValue.IS_BACK = false;
           if (res.data.code === 0) {
             self.$Message.success(res.data.message);
-            // self.selection = [];
-            // self.$store.commit("customize/TabOpen", {
-            //   id: res.data.data,
-            //   type: 'singleView',
-            //   name: 'singleView',
-            //   label: '我的任务',
-            //   query: {
-            //     id: res.data.data,
-            //     pid: '10010',
-            //     ptitle: '我的任务',
-            //     ptype: 'table',
-            //     tabTitle: '我的任务',
-            //     tableName: 'CP_C_TASK',
-            //   },
-            // })
             R3.store.commit('global/tabOpen', {
               type: 'V',
               tableName: 'CP_C_TASK',
@@ -2753,7 +2662,8 @@ export default {
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
 
-      self.service.common.queryOrderList(fromdata)
+      self.service.common
+        .queryOrderList(fromdata)
         .then(res => {
           self.agTableConfig.agLoading = false;
           if (res.data.code === 0) {
@@ -2859,7 +2769,6 @@ export default {
           this.exportChange(_this.agTableConfig.rowData);
           return;
         }
-        // return _this.$Message.error("列表没有数据,无法导出!");
         if (_this.statusData.value == 0) {
           _this.warningModal = true;
         } else {
@@ -2885,8 +2794,7 @@ export default {
         if (res.data.code == 0 && res.data.data !== null) {
           const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
           this.$Message.success(mes);
-          this.downloadUrlFile(res.data.data);
-          // return (window.location = res.data.data);
+          publicMethodsUtil.downloadUrlFile(res.data.data);
         } else {
           const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
           this.$Message.error(err);
@@ -2916,15 +2824,12 @@ export default {
       fromdata.append('param', JSON.stringify(param));
       _this.service.orderCenter
         .exportOcBOrder(fromdata)
-        // self.$network
-        //   .post('/api/cs/oc/oms/v1/exportOcBOrder', fromdata)
         .then(res => {
           this.isExport = false;
           if (res.data.code == 0 && res.data.data !== null) {
             const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
             _this.$Message.success(mes);
-            _this.downloadUrlFile(res.data.data);
-            // return (window.location = res.data.data);
+            publicMethodsUtil.downloadUrlFile(res.data.data);
           } else {
             const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
             _this.$Message.error(err);
@@ -2938,17 +2843,6 @@ export default {
         obj.push(item[key]);
       });
       return obj;
-    },
-    // 导出
-    downloadUrlFile(src) {
-      const downloadFile = {};
-      if (typeof downloadFile.iframe === 'undefined') {
-        const iframe = document.createElement('iframe');
-        downloadFile.iframe = iframe;
-        document.body.appendChild(downloadFile.iframe);
-      }
-      downloadFile.iframe.src = src;
-      downloadFile.iframe.style.display = 'none';
     }
   }
 };

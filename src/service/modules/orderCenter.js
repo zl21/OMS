@@ -27,11 +27,10 @@ export default {
   releaseInventory: params => network.post('/p/cs/releaseInventory', params), // 释放库存
   checkOrderBeforeLogistics: params => network.post('/api/cs/oc/oms/v1/checkOrderBeforeLogistics', params), // 修改物流
   checkOrderBeforeWarehouse: params => network.post('/api/cs/oc/oms/v1/checkOrderBeforeWarehouse', params), // 修改仓库
-  splitOrder: params => network.post('/api/cs/oc/oms/v1/splitOrder', params), // 缺货拆单 
+  splitOrder: params => network.post('/api/cs/oc/oms/v1/splitOrder', params), // 缺货拆单
   manualUnHoldOrder: params => network.post('/api/cs/oc/oms/v1/manualUnHoldOrder', params), // 审核
   mergeOrderOne: params => network.post('/api/cs/oc/oms/v1/mergeOrderOne', params), // 合并订单
   cancelMergeOrder: params => network.post('/api/cs/oc/oms/v1/cancelMergeOrder', params), // 取消合并订单
-  // screenresult: params => network.post('/p/cs/screenresult', params),
   /**
    * 零售发货单 - 详情
    */
@@ -41,7 +40,7 @@ export default {
   delOrderItem: params => network.post('/p/cs/delOrderItem', params), // 删除明细
   queryResionByName: params => network.post('/api/cs/oc/oms/v1/queryResionByName', params), // 获取省份id
   cancelInterception: params => network.post('/api/cs/oc/oms/v1/cancelInterception', params), // 取消拦截
-  
+
   /**
    * 扫描入库
    */
@@ -62,7 +61,7 @@ export default {
    * 额外退款、已发货退款列表
    */
   DynamicList: params => network.post('/api/cs/oc/oms/v1/DynamicList', params), // 获取高级查询&表头
-  querySalesReturn: params => network.post('/api/cs/oc/oms/v1/querySalesReturn', params), // 获取列表数据 
+  querySalesReturn: params => network.post('/api/cs/oc/oms/v1/querySalesReturn', params), // 获取列表数据
   OcCancelChangingOrRefund: params => network.post('/api/cs/oc/oms/v1/OcCancelChangingOrRefund', params), // 取消退单
   virtualWarehouseStorage: params => network.post('/api/cs/oc/oms/v1/virtualWarehouseStorage', params), // 虚拟仓库入库
   cancelautorefund: params => network.post('/api/cs/oc/oms/v1/cancelautorefund', params), // 取消自动退款
@@ -81,7 +80,7 @@ export default {
   getDetail: params => network.post('/api/cs/oc/oms/v1/getDetail', params),
   export: params => network.post('/p/outpro/export', params),
   amendBody: (tableName, params) => network.post(port[tableName].amendBody, params),
-  objectAdd: params => ('/p/cs/objectAdd', params),
+  objectAdd: params => network.post('/p/cs/objectAdd', params),
   prodel: params => network.post('/p/cs/prodel', params),
   updateDicunot: params => network.post('/p/cs/oc/v1/sale/updateDicunot', params),
   updateLogisticsBeforePacking: params => network.post('/api/cs/vip/distribution/Logistics/v1/updateLogisticsBeforePacking', params),
@@ -105,8 +104,6 @@ export default {
   getOrderId: params => network.post('/api/cs/oc/oms/v1/getOrderId', params), // 根据平台单号,查询零售发货单id
   examineTheRefundAfterDelivery: params => network.post('/api/cs/oc/oms/v1/examineTheRefundAfterDelivery', params), // 额外退款审核
   // 半定制弹框
-  //
   updateWarehouse: params => network.post('/api/cs/oc/oms/v1/updateWarehouse', params),
-  //
   getQueryList: params => network.post('/api/cs/oc/oms/v1/getQueryList', params)
 };

@@ -36,7 +36,7 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.closeConfirm();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('common.determine'), // 确定 按钮文本
@@ -44,10 +44,10 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.importDialog();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           }
-        ],
-      },
+        ]
+      }
     };
   },
   methods: {
@@ -73,7 +73,7 @@ export default {
           searchParam.append('param', JSON.stringify({ mode: this.componentData.mode }));
           this.getDownloadTemp(itemObj[0].downloadUrl, searchParam);
           break;
-        case 'PS_C_SKUGROUP': 
+        case 'PS_C_SKUGROUP':
           if (this.componentData.operationType === 'baseInfo') {
             // 组合商品明细表与虚拟明细
             this.getDownloadTemp(itemObj[0].downloadUrlType, {
@@ -165,7 +165,9 @@ export default {
       if (typeof downloadFile.iframe === 'undefined') {
         const iframe = document.createElement('iframe');
         iframe.setAttribute('id', 'downLoadListFrame');
-        self.addEvent('load', iframe, () => { self.iframeLoad(iframe); });
+        self.addEvent('load', iframe, () => {
+          self.iframeLoad(iframe);
+        });
         iframe.src = url;
         downloadFile.iframe = iframe;
         document.body.appendChild(downloadFile.iframe);
@@ -176,7 +178,7 @@ export default {
     },
     // 判断iframe的src
     iframeLoad(iframe) {
-      const src = (iframe.src) ? iframe.src : iframe.contentWindow.locatiion.href;
+      const src = iframe.src ? iframe.src : iframe.contentWindow.locatiion.href;
       console.log('src::', src);
     },
     // 调用方法时绑定iframe的load事件
@@ -194,16 +196,16 @@ export default {
       // 促销
       const promotionTableName = ['PS_C_SKU', 'SG_B_CHANNEL_PRODUCT', 'PS_C_PRO', 'IP_C_TAOBAO_PRODUCT'];
       // 物流区域设置 缺货备注 仓库物流优先级设置 订单派单规则-优先级 订单派单规则-比例 退换货卖家备注导入  OC_B_MULTI_STORE_DISTRIBUTION  店铺商品特殊设置 - 多店铺比例-明细导入
-      const objidParamsTableName = ['ST_C_EXPRESS_AREA', 'OUT_OF_STOCK_MEMO', 'ST_C_WAREHOUSE_LOGISTICS', 'ST_C_SEND_RULE', 'ST_C_SEND_RULE_RATE', 'OC_B_RETURN_ORDER_remark', 'OC_B_MULTI_STORE_DISTRIBUTION', 'ST_C_PRODUCT_STRATEGY']
+      const objidParamsTableName = ['ST_C_EXPRESS_AREA', 'OUT_OF_STOCK_MEMO', 'ST_C_WAREHOUSE_LOGISTICS', 'ST_C_SEND_RULE', 'ST_C_SEND_RULE_RATE', 'OC_B_RETURN_ORDER_remark', 'OC_B_MULTI_STORE_DISTRIBUTION', 'ST_C_PRODUCT_STRATEGY'];
       switch (itemObj[0].tableName) {
-        case promotionTableName.find((n) => n === this.componentData.tableName):
+        case promotionTableName.find(n => n === this.componentData.tableName):
           if (this.componentData.mode == 'batch') {
             this.getImportDialog(itemObj[0].urlType);
           } else {
             this.getImportDialog(itemObj[0].url);
           }
           break;
-        case 'PS_C_SKUGROUP': 
+        case 'PS_C_SKUGROUP':
           if (this.componentData.operationType === 'baseInfo') {
             // 组合商品档案明细与虚拟条码
             this.getImportDialog(itemObj[0].urlType);
@@ -212,7 +214,7 @@ export default {
             this.getImportDialog(itemObj[0].url);
           }
           break;
-        case objidParamsTableName.find((n) => n === this.componentData.tableName):
+        case objidParamsTableName.find(n => n === this.componentData.tableName):
           this.getImportDialog(itemObj[0].url, this.componentData.objid);
           break;
         case 'AC_F_RECEIVABLES_ADJUSTMENT': // 应收款调整单导入
@@ -256,12 +258,12 @@ export default {
       // 缺货备注特殊处理 退换货卖家备注导入
       const coverParamsTableName = ['OUT_OF_STOCK_MEMO', 'OC_B_RETURN_ORDER_remark'];
       // 促销活动
-      const promotionTableName = ['PS_C_SKU', 'SG_B_CHANNEL_PRODUCT', 'PS_C_PRO', 'IP_C_TAOBAO_PRODUCT']; 
+      const promotionTableName = ['PS_C_SKU', 'SG_B_CHANNEL_PRODUCT', 'PS_C_PRO', 'IP_C_TAOBAO_PRODUCT'];
       switch (this.componentData.tableName) {
-        case objidParamsTableName.find((n) => n === this.componentData.tableName): 
+        case objidParamsTableName.find(n => n === this.componentData.tableName):
           if (objid) param.append('objid', objid);
           break;
-        case coverParamsTableName.find((n) => n === this.componentData.tableName):
+        case coverParamsTableName.find(n => n === this.componentData.tableName):
           param.append('cover', this.cover);
           break;
         case 'OC_B_REFUND_IN': // 退货入库
@@ -286,12 +288,12 @@ export default {
             param.append('objId', objid);
           }
           break;
-        case 'SC_B_TRANSFER': 
+        case 'SC_B_TRANSFER':
           if (objid && this.componentData.importType === 3) {
             param.append('objid', objid);
           }
           break;
-        case promotionTableName.find((n) => n === this.componentData.tableName): // 促销导入
+        case promotionTableName.find(n => n === this.componentData.tableName): // 促销导入
           param.append('table', this.componentData.tableName);
           if (this.componentData.mode) {
             param.append('mode', this.componentData.mode);
@@ -382,6 +384,6 @@ export default {
       } else {
         _this.$parent.$emit('closeActionDialog');
       }
-    },
+    }
   }
 };

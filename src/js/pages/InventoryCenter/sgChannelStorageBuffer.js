@@ -328,7 +328,7 @@ export default {
           if (res.data.code === 0 && res.data.data !== null) {
             const mes = res.data.message || '导出成功！';
             _this.$Message.success(mes);
-            _this.downloadUrlFile(res.data.data);
+            publicMethodsUtil.downloadUrlFile(res.data.data);
             // return (window.location = res.data.data);
           } else {
             const err = res.data.message || '失败！';
@@ -347,17 +347,6 @@ export default {
         }
       }
     },
-    // 导出
-    downloadUrlFile(src) {
-      const downloadFile = {};
-      if (typeof downloadFile.iframe == 'undefined') {
-        const iframe = document.createElement('iframe');
-        downloadFile.iframe = iframe;
-        document.body.appendChild(downloadFile.iframe);
-      }
-      downloadFile.iframe.src = src;
-      downloadFile.iframe.style.display = 'none';
-    },
     // 警告框确认
     warningOk() {
       const _this = this;
@@ -369,8 +358,7 @@ export default {
         if (res.data.code === 0 && res.data.data !== null) {
           const mes = res.data.message || '导出成功！';
           _this.$Message.success(mes);
-          _this.downloadUrlFile(res.data.data);
-          // return (window.location = res.data.data);
+          publicMethodsUtil.downloadUrlFile(res.data.data);
         } else {
           const err = res.data.message || '失败！';
           _this.$Message.error(err);

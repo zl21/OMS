@@ -188,7 +188,6 @@ export default {
         method: 'post',
         data: param
       }).then(res => {
-        // console.log(res);
         if (res.data.code === 0) {
           self.$Message.success(res.data.message);
           self.$parent.$parent.$parent.$parent.autoRefresh();
@@ -196,8 +195,6 @@ export default {
           this.btnConfig.buttons[0].loading = false;
           self.loading = false;
         } else {
-          // let mes = res.data.message || "失败";
-          // self.$Message.error(mes);
           this.btnConfig.buttons[0].loading = false;
           self.loading = false;
           if (res.data.code === -1) {
@@ -219,6 +216,7 @@ export default {
                     }
                   });
                 }
+                return false;
               }
             });
           }

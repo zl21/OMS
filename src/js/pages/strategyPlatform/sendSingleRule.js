@@ -7,7 +7,7 @@ import businessDialog from 'professionalComponents/businessDialog';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
-import comUtils from '@/assets/js/__utils__/common.js';
+import comUtils from '@/assets/js/__utils__/common';
 
 export default {
   components: {
@@ -53,7 +53,7 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: window.vmI18n.t('modalTitle.import'), //'导入',
+        confirmTitle: window.vmI18n.t('modalTitle.import'),
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -77,14 +77,14 @@ export default {
         formData: [
           {
             style: 'input',
-            label: window.vmI18n.t('form_label.ruleName'), //'规则名称',
+            label: window.vmI18n.t('form_label.ruleName'),
             value: 'ENAME',
             width: '6'
           },
           {
             style: 'select',
-            label: window.vmI18n.t('form_label.type'), //'类型',
-            width: '6', 
+            label: window.vmI18n.t('form_label.type'),
+            width: '6',
             value: 'ETYPE',
             selectChange: () => {
               // this.selectSelectt();
@@ -93,7 +93,7 @@ export default {
               // 下拉框选项值
               {
                 value: '1',
-                label: window.vmI18n.t('form_label.a0'), //'收货地址就近'
+                label: window.vmI18n.t('form_label.a0')
               },
               // {
               //   value: "2",
@@ -101,13 +101,13 @@ export default {
               // },
               {
                 value: '3',
-                label: window.vmI18n.t('form_label.a1'), //'唯品会'
+                label: window.vmI18n.t('form_label.a1')
               }
             ]
           },
           {
             style: 'input',
-            label: window.vmI18n.t('table_label.remarks'), //'备注',
+            label: window.vmI18n.t('table_label.remarks'),
             value: 'REMARK',
             width: '6'
           }
@@ -231,7 +231,7 @@ export default {
                 statsize: -1,
                 type: 'STRING',
                 valuedata: ''
-              },
+              }
             },
             {
               style: 'input',
@@ -262,19 +262,19 @@ export default {
         columns: [
           {
             key: 'CP_C_PHY_WAREHOUSE_ENAME',
-            title: window.vmI18n.t('form_label.warehouse'), // '仓库'
+            title: window.vmI18n.t('form_label.warehouse') // '仓库'
           },
           {
             key: 'RANK',
-            title: window.vmI18n.t('form_label.a2'), // '仓库优先级'
+            title: window.vmI18n.t('form_label.a2') // '仓库优先级'
           },
           {
             key: 'SEND_RATE',
-            title: window.vmI18n.t('form_label.a3'), // '发货比例'
+            title: window.vmI18n.t('form_label.a3') // '发货比例'
           },
           {
             key: 'QTY_SEND',
-            title: window.vmI18n.t('form_label.a4'), // '发货数量'
+            title: window.vmI18n.t('form_label.a4') // '发货数量'
           }
         ],
         isShowImportBtn: true,
@@ -302,16 +302,16 @@ export default {
       selectAllList: [],
       statusName: '',
       warningModal: false,
-      btnTxetArr: [],
+      btnTxetArr: []
     };
   },
   mounted() {
     const _this = this;
     // [修改仓库,导入,导出,作废,刷新]
-    _this.btnTxetArr = [window.vmI18n.t('btn.modifyWarehouse'),window.vmI18n.t('btn.import'),window.vmI18n.t('btn.export'),window.vmI18n.t('btn.void'),window.vmI18n.t('btn.refresh'),]
+    _this.btnTxetArr = [window.vmI18n.t('btn.modifyWarehouse'), window.vmI18n.t('btn.import'), window.vmI18n.t('btn.export'), window.vmI18n.t('btn.void'), window.vmI18n.t('btn.refresh')];
     if (_this.$route.params.customizedModuleId !== 'New') {
       // [规则名称,类型]
-      const formLabelArr = [window.vmI18n.t('form_label.ruleName'),window.vmI18n.t('form_label.type'),];
+      const formLabelArr = [window.vmI18n.t('form_label.ruleName'), window.vmI18n.t('form_label.type')];
       _this.information.formData.forEach(item => {
         if (formLabelArr.includes(item.label)) {
           item.disabled = true;
@@ -375,11 +375,6 @@ export default {
       formData.append('param', JSON.stringify(param));
       this.service.strategyPlatform
         .saveSendRule(formData)
-        // axios({
-        //   url: '/p/cs/saveSendRule',
-        //   method: 'post',
-        //   data: formData
-        // })
         .then(res => {
           _this.saveLoading = false;
           if (res.data.data.code === 0) {
@@ -395,7 +390,7 @@ export default {
                 label: window.vmI18n.t('panel_label.edit_order_dispatch_rule'), // '订单派单规则编辑', // tab中文名
                 query: Object.assign({
                   id: res.data.data.data.objid, // 单据id
-                  tabTitle: window.vmI18n.t('panel_label.edit_order_dispatch_rule'), // '订单派单规则编辑' // tab中文名
+                  tabTitle: window.vmI18n.t('panel_label.edit_order_dispatch_rule') // '订单派单规则编辑' // tab中文名
                 }) // 带的参数
               });
             }
@@ -464,11 +459,6 @@ export default {
       _this.saveLoading = true;
       this.service.strategyPlatform
         .getSendRuleMain({ objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId })
-        // axios({
-        //   url: '/p/cs/getSendRuleMain',
-        //   method: 'post',
-        //   data: { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId }
-        // })
         .then(res => {
           _this.saveLoading = false;
           if (res.data.code === 0) {
@@ -476,13 +466,13 @@ export default {
             _this.information.formValue.ETYPE = res.data.data.ETYPE;
             _this.information.formValue.REMARK = res.data.data.REMARK;
             if (res.data.data.ISACTIVE === 'N') {
-              _this.statusName = window.vmI18n.t('common.voided'), // '已作废';
+              _this.statusName = window.vmI18n.t('common.voided'); // '已作废';
               _this.jordanTableConfig.isShowImportBtn = false;
               _this.jordanTableConfig.isShowExportBtn = false;
               _this.jordanTableConfig.isShowDeleteDetailBtn = false;
               _this.jordanTableConfig.businessFormConfig = {};
               // [修改仓库,导入,导出,作废,保存]
-              _this.btnTxetArr.splice(-1,1,window.vmI18n.t('btn.save'));
+              _this.btnTxetArr.splice(-1, 1, window.vmI18n.t('btn.save'));
               _this.btnConfig.buttons.forEach(item => {
                 if (_this.btnTxetArr.includes(item.text)) {
                   item.disabled = true;
@@ -501,13 +491,13 @@ export default {
               _this.showFlag = true;
               _this.getWarehouseRateResult();
               // [修改仓库,导入,导出]
-              _this.btnTxetArr.splice(-1,2);
+              _this.btnTxetArr.splice(-1, 2);
               _this.btnConfig.buttons.forEach(item => {
                 if (_this.btnTxetArr.includes(item.text)) {
                   item.disabled = true;
                 }
               });
-               // '分仓比例'
+              // '分仓比例'
               this.labelList[0].label = window.vmI18n.t('form_label.a7');
             }
           }
@@ -519,11 +509,6 @@ export default {
       _this.jordanTableConfig.loading = true;
       this.service.strategyPlatform
         .getWarehouseRateResultTable({ objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId })
-        // axios({
-        //   url: '/p/cs/getWarehouseRateResultTable',
-        //   method: 'post',
-        //   data: { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId }
-        // })
         .then(res => {
           _this.jordanTableConfig.loading = false;
           if (res.data.code === 0) {
@@ -535,15 +520,7 @@ export default {
     getTree() {
       const _this = this;
       const param = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId };
-      // let [url, treeName] = ['', '']
       const ETYPE = _this.information.formValue.ETYPE;
-      // if (ETYPE === '1') {
-      //   url = '/p/cs/getSendRuleTree'
-      //   treeName = 'sendRuleTree'
-      // } else {
-      //   url = '/p/cs/getSendRuleVipWarehouseTree'
-      //   treeName = 'sendRuleVipWarehouseTree'
-      // }
       const url = ETYPE === '1' ? '/p/cs/getSendRuleTree' : '/p/cs/getSendRuleVipWarehouseTree';
       this.contentLoading = true;
       axios({
@@ -555,12 +532,6 @@ export default {
           this.contentLoading = false;
           if (res.data.code === 0) {
             const treeData = res.data.data.sendRuleTree || [];
-            // if (ETYPE === '3') {
-            //   treeData.forEach(val => {
-            //     val.title = val.warehouseName
-            //     val.ecode = val.warehouseCode
-            //   })
-            // }
             _this.treeData = treeData;
             this.synchronous();
             if (res.data.data.sendRuleAddressRents !== null && res.data.data.sendRuleAddressRents.length) {
@@ -617,7 +588,6 @@ export default {
         if (res.data.code === 0) {
           const listArr = res.data.data !== undefined ? res.data.data : [];
           listArr.forEach(item => {
-            // if ( ETYPE === '3') item.CP_C_REGION_PROVINCE_ENAME = item.CP_C_VIPCOM_WAHOUSE_WAREHOUSE_NAME
             item.WAREHOUSE_RANK = JSON.parse(item.WAREHOUSE_RANK);
           });
           _this.listArr = listArr;
@@ -706,11 +676,6 @@ export default {
       };
       this.service.strategyPlatform
         .exportSendRuleWarehouseRate(param)
-        // axios({
-        //   url: '/p/cs/exportSendRuleWarehouseRate',
-        //   method: 'post',
-        //   data: param
-        // })
         .then(res => {
           if (res.data.code === 0) {
             const ess = res.data.message || window.vmI18n.t('modalTips.z2'); // '导出成功';
@@ -742,11 +707,6 @@ export default {
       fromdata.append('param', JSON.stringify(param));
       this.service.strategyPlatform
         .delSendRule(fromdata)
-        // axios({
-        //   url: '/p/cs/delSendRule',
-        //   method: 'post',
-        //   data: fromdata
-        // })
         .then(res => {
           if (res.data.data.code === 0) {
             const ess = res.data.data.message || window.vmI18n.t('modalTips.ay'); // '删除成功';
@@ -776,11 +736,6 @@ export default {
       };
       this.service.strategyPlatform
         .exportSendRuleWarehouseRank(param)
-        // axios({
-        //   url: '/p/cs/exportSendRuleWarehouseRank',
-        //   method: 'post',
-        //   data: param
-        // })
         .then(res => {
           if (res.data.code === 0) {
             const ess = res.data.message || window.vmI18n.t('modalTips.z2'); // '导出成功';

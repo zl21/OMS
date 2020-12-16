@@ -3,13 +3,12 @@ import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessDialog from 'professionalComponents/businessDialog';
 import strUtil from '@/assets/js/__utils__/util';
-import DateUtil from '@/assets/js/__utils__/date';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
-import comUtils from '@/assets/js/__utils__/common.js';
+import comUtils from '@/assets/js/__utils__/common';
 import loading from '@/component/loading.vue';
-import aTable from 'professionalComponents/agGridTable.vue';
-
+import aTable from 'professionalComponents/agGridTable';
+import publicMethodsUtil from '@/assets/js/public/publicMethods';
 const getCurrentTime = (() => {
   const t = new Date();
   return t.Format('yyyy-MM-dd 23:59:59');
@@ -632,36 +631,21 @@ export default {
         this.service.orderCenter.exportOcBRefundIn(idList).then(res => {
           self.isExport = false;
           if (res.data.code == 0 && res.data.data !== null) {
-            // let mes = res.data.message || "导出成功！";
             const mes = res.data.message || window.vmI18n.t('modalTips.z2');
             self.$Message.success(mes);
-            self.downloadUrlFile(res.data.data);
-            // return (window.location = res.data.data);
+            publicMethodsUtil.downloadUrlFile(res.data.data);
           } else {
-            // let err = res.data.message || "失败！";
             const err = res.data.message || window.vmI18n.t('modalTips.z3');
             self.$Message.error(err);
           }
         });
       } else {
         if (self.tableConfig.data.length === 0) {
-          // return self.$Message.error("列表没有数据,无法导出!");
           self.$Message.error(window.vmI18n.t('modalTips.z4'));
           return;
         }
         self.warningModal = true;
       }
-    },
-    // 导出
-    downloadUrlFile(src) {
-      const downloadFile = {};
-      if (typeof downloadFile.iframe === 'undefined') {
-        const iframe = document.createElement('iframe');
-        downloadFile.iframe = iframe;
-        document.body.appendChild(downloadFile.iframe);
-      }
-      downloadFile.iframe.src = src;
-      downloadFile.iframe.style.display = 'none';
     },
     // 警告框确认
     warningOk() {
@@ -682,7 +666,7 @@ export default {
           const mes = res.data.message || window.vmI18n.t('modalTips.z2');
           self.$Message.success(mes);
           // return (window.location = res.data.data);
-          self.downloadUrlFile(res.data.data);
+          publicMethodsUtil.downloadUrlFile(res.data.data);
         } else {
           // let err = res.data.message || "失败！";
           const err = res.data.message || window.vmI18n.t('modalTips.z3');
