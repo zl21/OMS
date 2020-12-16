@@ -1,5 +1,5 @@
 import R3 from '@syman/burgeon-r3';
-import matrix from 'framework/components/views/custompage/matrix.vue';
+import matrix from '@/views/pages/common/orderDetail/matrix1.vue';
 import DragDialog from 'framework/components/dialog/dragDialog.vue';
 import axios from 'framework/__utils__/request';
 // import port from '@/js/pages/common/orderDetail/connector',
@@ -273,7 +273,7 @@ export default {
       /* e.stopPropagation(); */
     }, // 快捷键选择编码
     findId() {
-      let id = '';
+      let id;
       const data = this.selectItem.updateData[this.tablename];
       if (this.$route.params.itemId == 'New' && Object.keys(data.add).length !== 0) {
         if (data.add[this.tablename].CP_C_STORE_ID) id = data.add[this.tablename].CP_C_STORE_ID;
