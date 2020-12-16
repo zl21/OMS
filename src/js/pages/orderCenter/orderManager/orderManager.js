@@ -10,9 +10,10 @@ import unzipXv from '@/assets/js/dataToSmall';
 import publicDialogConfig from 'professionalComponents/common/js/publicDialog';
 import loading from '@/component/loading.vue';
 import comUtils from '@/assets/js/__utils__/common';
-import labelListConfig from './publicConfig/labelList';
 import formatData from '@/assets/js/__utils__/date';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
+import labelListConfig from './publicConfig/labelList';
+
 export default {
   components: {
     businessButton,
@@ -2295,13 +2296,13 @@ export default {
     // DropDownSelectFilter禁止用户输入
     onDropChange(value) {
       console.log('onDropChange::', value);
-      if (value.type === 'DropDownSelectFilter') {
-        this.$nextTick(() => {
-          const input = document.querySelector('.ark-integrate-search-filter-container').querySelector('input');
-          input.setAttribute('disabled', true);
-          input.classList.add('forceWhite');
-        });
-      }
+      // if (value.type === 'DropDownSelectFilter') {
+      //   this.$nextTick(() => {
+      //     const input = document.querySelector('.ark-integrate-search-filter-container').querySelector('input');
+      //     input.setAttribute('disabled', true);
+      //     input.classList.add('forceWhite');
+      //   });
+      // }
     },
     // 清除某个检索项值
     clearItem() {
