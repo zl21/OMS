@@ -1,5 +1,5 @@
 import R3 from '@syman/burgeon-r3';
-import matrix from '@/views/pages/common/orderDetail/matrix1.vue';
+import matrix from '@/views/pages/common/orderDetail/matrixPop.vue';
 import DragDialog from 'framework/components/dialog/dragDialog.vue';
 import axios from 'framework/__utils__/request';
 // import port from '@/js/pages/common/orderDetail/connector',
@@ -206,7 +206,9 @@ export default {
         }
       }// 新增先初始化
       this.visible = false;// 关闭下拉框
-      if ((this.distribId === '' || this.distribId === undefined) && (this.cp_c_phy_warehouse_id === '' || this.cp_c_phy_warehouse_id === undefined)) {
+      if ((this.distribId === '' || this.distribId === undefined)
+      && (this.cp_c_phy_warehouse_id === '' || this.cp_c_phy_warehouse_id === undefined)
+      && !port[this.tablename].isStoreId) { // 店仓id为空 或者 isStoreId参数为false
         return this.$message({
           message: '请先选择店仓',
           center: true,
@@ -280,26 +282,17 @@ export default {
         if (!id && data.add[this.tablename].CP_C_DEST_ID) id = data.add[this.tablename].CP_C_DEST_ID;
         if (!id && data.add[this.tablename].CP_C_ORIG_ID) id = data.add[this.tablename].CP_C_ORIG_ID;
         if (!id && data.add[this.tablename].CP_C_PHY_WAREHOUSE_ID) this.cp_c_phy_warehouse_id = data.add[this.tablename].CP_C_PHY_WAREHOUSE_ID;
-
-        if (!id && data.add[this.tablename].CP_C_ORG_CHANNEL_ID_IN) id = data.add[this.tablename].CP_C_ORG_CHANNEL_ID_IN; // 组货单必填项效验
-        if (!id && data.add[this.tablename].CP_C_ORG_CHANNEL_ID_OUT) id = data.add[this.tablename].CP_C_ORG_CHANNEL_ID_OUT;
       } else if (Object.keys(data.modify).length !== 0) {
         if (Object.keys(data.default).length && data.modify[this.tablename].CP_C_STORE_ID) id = data.modify[this.tablename].CP_C_STORE_ID;
         if (!id && data.modify[this.tablename].CP_C_DEST_ID) id = data.modify[this.tablename].CP_C_DEST_ID;
         if (!id && data.modify[this.tablename].CP_C_ORIG_ID) id = data.modify[this.tablename].CP_C_ORIG_ID;
         if (!id == '' && data.modify[this.tablename].CP_C_PHY_WAREHOUSE_ID) this.cp_c_phy_warehouse_id = data.modify[this.tablename].CP_C_PHY_WAREHOUSE_ID;
-
-        if (!id && data.modify[this.tablename].CP_C_ORG_CHANNEL_ID_IN) id = data.modify[this.tablename].CP_C_ORG_CHANNEL_ID_IN; // 组货单必填项效验
-        if (!id && data.modify[this.tablename].CP_C_ORG_CHANNEL_ID_OUT) id = data.modify[this.tablename].CP_C_ORG_CHANNEL_ID_OUT;
       }
       if (!id && Object.keys(data.default).length !== 0) {
         if (data.default[this.tablename].CP_C_STORE_ID) id = data.default[this.tablename].CP_C_STORE_ID;
         if (!id && data.default[this.tablename].CP_C_DEST_ID) id = data.default[this.tablename].CP_C_DEST_ID;
         if (!id && data.default[this.tablename].CP_C_ORIG_ID) id = data.default[this.tablename].CP_C_ORIG_ID;
         if (!id && data.default[this.tablename].CP_C_PHY_WAREHOUSE_ID) this.cp_c_phy_warehouse_id = data.default[this.tablename].CP_C_PHY_WAREHOUSE_ID;
-
-        if (!id && data.default[this.tablename].CP_C_ORG_CHANNEL_ID_IN) id = data.default[this.tablename].CP_C_ORG_CHANNEL_ID_IN; // 组货单必填项效验
-        if (!id && data.default[this.tablename].CP_C_ORG_CHANNEL_ID_OUT) id = data.default[this.tablename].CP_C_ORG_CHANNEL_ID_OUT;
       }
 
       this.distribId = id;
