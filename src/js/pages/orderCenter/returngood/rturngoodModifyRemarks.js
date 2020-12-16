@@ -17,17 +17,6 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: '确定', // 按钮文本
-            icon: '', // 按钮图标
-            size: 'small', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              const _this = this;
-              _this.okClick();
-            } // 按钮点击事件
-          },
-          {
-            type: '', // 按钮类型
             text: '取消', // 按钮文本
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
@@ -35,6 +24,17 @@ export default {
             btnclick: () => {
               // this.$refs.changeLogistics.close();
               this.$parent.$parent.closeConfirm();
+            } // 按钮点击事件
+          },
+          {
+            type: '', // 按钮类型
+            text: '确定', // 按钮文本
+            icon: '', // 按钮图标
+            size: 'small', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              const _this = this;
+              _this.okClick();
             } // 按钮点击事件
           }
         ]
