@@ -19,6 +19,7 @@ export default {
             {
               type: '', // 按钮类型
               text: '删除赠品', // 按钮文本
+              isShow: true,
               btnclick: () => {
                 this.deleteItem();
               } // 按钮点击事件
@@ -26,6 +27,7 @@ export default {
             {
               type: '', // 按钮类型
               text: '添加赠品', // 按钮文本
+              isShow: true,
               btnclick: () => {
                 // 判断条件是否符合
                 const self = this;
@@ -51,6 +53,7 @@ export default {
             {
               type: '', // 按钮类型
               text: '标记退款完成', // 按钮文本
+              isShow: true,
               btnclick: () => {
                 this.returnAccount();
               } // 按钮点击事件
@@ -58,6 +61,7 @@ export default {
             {
               type: '', // 按钮类型
               text: '替换商品', // 按钮文本
+              isShow: true,
               btnclick: () => {
                 // 是否可以更换商品
                 // this.modifyGoodsCheck();
@@ -66,6 +70,7 @@ export default {
             },
             {
               text: '标记取消退款',
+              isShow: true,
               btnclick: () => {
                 this.flagCalcelRefund();
               }
@@ -125,7 +130,7 @@ export default {
     },
     isQh() {
       this.tableConfig.businessButtonConfig.buttons.forEach((item) => {
-        item.isShow = !this.isQh;
+        item.isShow = this.isQh;
       });
     }
   },
@@ -230,8 +235,8 @@ export default {
     },
     // 替换商品
     replaceGoodsDetail() {
-      if (this.checkSelection.length == 0) {
-        this.$Message.warning('请选择需要替换的商品!');
+      if (this.checkSelection.length !== 1) {
+        this.$Message.warning('目前仅支持单条商品替换！');
         return;
       }
       this.$emit('replaceGoodsDetail', this.checkSelection);
