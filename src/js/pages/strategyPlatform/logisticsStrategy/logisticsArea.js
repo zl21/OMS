@@ -5,7 +5,7 @@ import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessModal from 'professionalComponents/businessDialog';
 import comUtils from '@/assets/js/__utils__/common';
 import loading from '@/component/loading.vue';
-
+import publicMethodsUtil from '@/assets/js/public/publicMethods';
 export default {
   components: {
     businessButton,
@@ -43,23 +43,6 @@ export default {
       btnConfig: {
         typeAll: 'error',
         buttons: [
-          // {
-          //   // text: '新增',
-          //   text: window.vmI18n.t('btn.add'), // 按钮文本
-          //   btnclick: () => {
-          //     const _this = this;
-          //     _this.$store.commit('customize/TabHref', {
-          //       id: -1, // 单据id
-          //       type: 'action', // 类型action
-          //       name: 'logisticsArea', // 文件名
-          //       label: '物流区域设置', // tab中文名
-          //       query: Object.assign({
-          //         id: -1, // 单据id
-          //         tabTitle: '物流区域设置' // tab中文名
-          //       }) // 带的参数
-          //     });
-          //   }
-          // },
           {
             // text: '保存',
             text: window.vmI18n.t('btn.save'), // 按钮文本
@@ -319,9 +302,10 @@ export default {
         });
         if (data.expressArea.ISACTIVE === 'N') {
           _this.statusName = '已作废';
+          const btnTxetArr = [_this.vmI18n.t('btn.save'), _this.vmI18n.t('btn.void'), _this.vmI18n.t('btn.import'), _this.vmI18n.t('btn.export'), _this.vmI18n.t('btn.refresh')];
           _this.btnConfig.buttons.forEach(item => {
             // ['保存', '作废', '导入', '导出', '刷新']
-            if ([_this.vmI18n.t('btn.save'), _this.vmI18n.t('btn.void'), _this.vmI18n.t('btn.import'), _this.vmI18n.t('btn.export'), _this.vmI18n.t('btn.refresh')].includes(item.text)) {
+            if (btnTxetArr.includes(item.text)) {
               item.disabled = true;
             }
           });
@@ -524,23 +508,12 @@ export default {
       if (code === 0) {
         const ess = message || _this.vmI18n.t('modalTips.z2'); // 导出成功
         _this.$message.success(ess);
-        _this.downloadUrlFile(data);
+        publicMethodsUtil.downloadUrlFile(data);
       } else {
         const err = message || _this.vmI18n.t('modalTips.y6'); // 导出失败
         _this.$message.success(err);
-        _this.downloadUrlFile(data);
+        publicMethodsUtil.downloadUrlFile(data);
       }
-    },
-    // 导出
-    downloadUrlFile(src) {
-      const downloadFile = {};
-      if (typeof downloadFile.iframe === 'undefined') {
-        const iframe = document.createElement('iframe');
-        downloadFile.iframe = iframe;
-        document.body.appendChild(downloadFile.iframe);
-      }
-      downloadFile.iframe.src = src;
-      downloadFile.iframe.style.display = 'none';
     },
     // 设置表格高度
     setTableHeight() {

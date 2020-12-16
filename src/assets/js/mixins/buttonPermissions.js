@@ -2,7 +2,7 @@
 
 export const buttonPermissionsMixin = {
   methods: {
-    // 获取表单或表头数组
+    // 获取表单或表头数组,arrry=btnConfig
     getPermissions(arrry, params, isIndependent) {
       let independent = [];
       const query = {
@@ -17,18 +17,24 @@ export const buttonPermissionsMixin = {
         independent = result;
         const a = [];
         this[arrry].buttons.forEach((item, i) => {
+          // 设置、收藏等图标按钮的配置
           if (!item.text && item.icon) {
             a.push(item);
           }
         });
-        
+
         const c = [];
         result.forEach((element, index) => {
+          // 有下拉项的处理
           if (element.child) {
             this.buttonChild(element, this[arrry].buttons, c);
           }
+          // 普通btn（无child）的处理
           this[arrry].buttons.forEach((btn, btnIndex) => {
-            if (element.webdesc && element.webdesc == btn.text) {
+            if (element.webname && element.webname == btn.webname) {
+              btn.webid = element.webid;
+              btn.webname = element.webname;
+              btn.text = element.webdesc;
               c.push(btn);
             }
           });
@@ -37,7 +43,6 @@ export const buttonPermissionsMixin = {
         if (isIndependent) {
           return independent;
         }
-        // console.log('c-----', c);
         this[arrry].buttons = [...c, ...a];
       });
     },
@@ -49,7 +54,10 @@ export const buttonPermissionsMixin = {
       ele.child.forEach(item => {
 
         btns.forEach(s_item => {
-          if (item.webdesc == s_item.text) {
+          if (item.webname == s_item.webname) {
+            s_item.webid == item.webid
+            s_item.webname = item.webname;
+            s_item.text = item.webdesc;
             ar.push(s_item);
           }
         });

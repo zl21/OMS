@@ -1,4 +1,3 @@
-import myInputLd from '@/views/pages/promotionCenter/components/tableinput';
 import detailtable from '@/views/pages/promotionCenter/details/table.vue';
 import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDialog';
 import TableSku from '@/views/pages/promotionCenter/components/tableSku';
@@ -6,7 +5,6 @@ import businessDialog from 'professionalComponents/businessDialog';
 export default {
   name: 'batchTables',
   components: {
-    myInputLd,
     detailtable,
     ButtonFkDialog,
     TableSku,
@@ -45,7 +43,7 @@ export default {
         // confirmTitle: '批量新增条件信息导入',
         confirmTitle: window.vmI18n.t('modalTitle.a2'), // 批量新增条件信息导入
         titleAlign: 'center', // 设置标题是否居中 center left
-        width: '400',
+        width: '600',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
         draggable: true, // 是否可以拖动
@@ -140,36 +138,52 @@ export default {
       } else {
         obj = this.productList[listIndex].products[index];
       }
+      const rs = from === 'product' ? this.itemdataFk : this.itemdata_giftFk;
       if (!itemdata.pid) {
-        itemdata.ENAMECOL = itemdata.ECODECOL = '';
+        itemdata.ENAMECOL = '';
+        itemdata.ECODECOL = '';
         if (itemdata.reftable === 'SG_B_CHANNEL_PRODUCT') {
-          obj.ENAME = itemdata.ENAMECOL = '';
-          obj.ECODE = itemdata.ECODECOL = '';
+          obj.ENAME = '';
+          itemdata.ENAMECOL = '';
+          obj.ECODE = '';
+          itemdata.ECODECOL = '';
           obj.SKU_ID = '';
           obj.SUM = '';
         } else if (rs.reftable === 'IP_C_TAOBAO_PRODUCT') {
-          obj.ECODE = itemdata.NUM_IID = '';
-          obj.ENAME = itemdata.TITLE = '';
-          obj.ID = itemdata.ID = '';
+          obj.ECODE = '';
+          itemdata.NUM_IID = '';
+          obj.ENAME = '';
+          itemdata.TITLE = '';
+          obj.ID = '';
+          itemdata.ID = '';
         } else if (rs.reftable === 'PS_C_PRO') {
-          obj.ECODE = itemdata.ECODE = '';
-          obj.ENAME = itemdata.ENAME = '';
-          obj.ID = itemdata.ID = '';
+          obj.ECODE = '';
+          itemdata.ECODE = '';
+          obj.ENAME = '';
+          itemdata.ENAME = '';
+          obj.ID = '';
+          itemdata.ID = '';
         } else {
-          obj.ENAME = itemdata.ENAMECOL = '';
-          obj.ECODE = itemdata.ECODECOL = '';
+          obj.ENAME = '';
+          itemdata.ENAMECOL = '';
+          obj.ECODE = '';
+          itemdata.ECODECOL = '';
           obj.ID = '';
         }
       }
       const channelList = itemdata.channelList;
       if (itemdata.reftable === 'SG_B_CHANNEL_PRODUCT') {
-        obj.ENAME = itemdata.ENAMECOL = channelList.PS_C_PRO_ENAME;
-        obj.ECODE = itemdata.ENAMECOL = channelList.PS_C_SKU_ECODE;
+        obj.ENAME = channelList.PS_C_PRO_ENAME;
+        itemdata.ENAMECOL = channelList.PS_C_PRO_ENAME;
+        obj.ECODE = channelList.PS_C_SKU_ECODE;
+        itemdata.ENAMECOL = channelList.PS_C_SKU_ECODE;
         obj.SKU_ID = channelList.SKU_ID;
         obj.SUM = channelList.PRICE;
       } else {
-        obj.ENAME = itemdata.ENAMECOL = channelList.ENAME;
-        obj.ECODE = itemdata.ECODECOL = channelList.ECODE;
+        obj.ENAME = channelList.ENAME;
+        itemdata.ENAMECOL = channelList.ENAME;
+        obj.ECODE = channelList.ECODE;
+        itemdata.ECODECOL = channelList.ECODE;
         obj.ID = channelList.ID;
       }
       obj.itemdata = itemdata;
@@ -180,7 +194,6 @@ export default {
      * @row 行信息
      */
     getFilterChooseItem(item, row, listIndex, index, from) {
-      const self = this;
       let obj = {};
       const rs = from === 'product' ? this.itemdataFk : this.itemdata_giftFk;
       if (from === 'gift') {
@@ -246,12 +259,6 @@ export default {
      * 导入
      */
     importData() {
-      // const self = this;
-      // this.dialogModal = {};
-      // this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
-      // this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
-      // self.dialogSet.dialogTitle = '导入';
-      // self.show_dialog = true;
       this.importTable.componentData = { tableName: this.itemdata.reftable || 'PS_C_SKU', mode: this.moduleMode };
       this.$children.find(item => item.name === 'importTable').openConfirm();
     },

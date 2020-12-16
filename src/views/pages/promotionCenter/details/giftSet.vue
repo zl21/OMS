@@ -18,7 +18,7 @@
       <div class="form_label"><i class="red">*</i>{{ vmI18n.t('form_label.double_gifts') }}：</div>
       <div class="form_content">
         <SingleBox :value="giftData.gift_doubles" :options="groups.giftDoubles" @changeSingle="checkGiftDoublesChange" />
-        <div class="form_item">,{{ vmI18n.t('form_label.max_doubling_times') }}</div>
+        <div class="form_item">{{ vmI18n.t('form_label.max_doubling_times') }}</div>
         <div class="form_el_input form_item limitinput">
           <input v-model="giftData.max_doubles_limits" oninput="this.value= this.value.match(/^[1-9]\d{0,2}/) ? this.value.match(/^[1-9]\d{0,2}/)[0] : ''" placeholder />
         </div>
@@ -121,12 +121,6 @@
       :url="importTable.url"
       :width="importTable.width"
     />
-
-    <!-- <div v-if="show_dialog">
-      <Modal v-model="show_dialog" class="dialog" :footer-hide="dialogSet.footerHide" :title="dialogSet.dialogTitle" :mask="dialogSet.mask">
-        <component :is="currentView" :ref="popDialog" :component-data="dialogModal" @returnData="returnData" />
-      </Modal>
-    </div> -->
   </div>
 </template>
 <script>

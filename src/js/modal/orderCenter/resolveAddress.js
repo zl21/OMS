@@ -72,7 +72,7 @@ export default {
             btnclick: () => {
               this.update();
             },
-          },
+          }
         ],
       },
     };

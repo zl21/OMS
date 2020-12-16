@@ -568,6 +568,7 @@ export default {
           {
             // text: "保存", //按钮文本
             text: window.vmI18n.t('btn.save'), // 按钮文本
+            webname: 'ManualMatching_save',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.saveData();
@@ -576,6 +577,7 @@ export default {
           {
             // text: "返回", //按钮文本
             text: window.vmI18n.t('btn.back'), // 按钮文本
+            webname: 'Mismatchingmandatorymatching_return',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
@@ -600,6 +602,7 @@ export default {
           {
             // text: "保存", //按钮文本
             text: window.vmI18n.t('btn.save'), // 按钮文本
+            webname: 'ManualMatching_save',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.saveData();
@@ -608,6 +611,7 @@ export default {
           {
             // text: "手工匹配", //按钮文本
             text: window.vmI18n.t('btn.manual_matching'), // 按钮文本
+            webname: 'ManualMatching_tuihuoruku',
             isShow: '',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -645,6 +649,7 @@ export default {
           {
             // text: "错发强制匹配",
             text: window.vmI18n.t('btn.wrong_sending_forced_matching'), // 按钮文本
+            webname: 'Mismatchingmandatorymatching_cuofa',
             disabled: false,
             btnclick: () => {
               const _this = this;
@@ -683,6 +688,7 @@ export default {
             // ========================================暂时影藏
             // text: "作废", //按钮文本
             text: window.vmI18n.t('btn.void'), // 按钮文本
+            webname: '',
             isShow: false,
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -707,6 +713,7 @@ export default {
           {
             // text: "返回", //按钮文本
             text: window.vmI18n.t('btn.back'), // 按钮文本
+            webname: 'Mismatchingmandatorymatching_return',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
@@ -733,19 +740,19 @@ export default {
     if (this.$route.query.id == -1) {
       this.information.formValue.SPECIAL_TYPE = '0';
       this.btnConfig.buttons.forEach(item => {
-        switch (item.text) {
+        switch (item.webname) {
           // case "手工匹配":
-          case window.vmI18n.t('btn.manual_matching'):
+          case 'ManualMatching_tuihuoruku':
             item.isShow = false;
             break;
           // case "错发强制匹配":
-          case window.vmI18n.t('btn.wrong_sending_forced_matching'):
+          case 'Mismatchingmandatorymatching_cuofa':
             item.isShow = false;
             break;
           // case "作废":
-          case window.vmI18n.t('btn.void'):
+          /* case window.vmI18n.t('btn.void'):
             item.isShow = false;
-            break;
+            break; */
         }
       });
       this.getReturnBatch();

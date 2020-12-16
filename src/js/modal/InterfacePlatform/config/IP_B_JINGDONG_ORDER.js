@@ -1,3 +1,5 @@
+import formatData from '@/assets/js/__utils__/date.js';
+
 export default {
   // 京东订单接口列表界面(下载订单)
   formConfig: {
@@ -107,10 +109,10 @@ export default {
       shop_id:
         self.downLoadFormConfig.formData[0].itemdata.pid,
       bill_no: self.downLoadFormConfig.formValue.orderNum, // 订单编号
-      start_time: self.standardTimeConversiondateToStr(
+      start_time: formatData.standardTimeConversiondateToStr(
         self.downLoadFormConfig.formValue.startEndTimes[0]
       ), // 开始时间
-      end_time: self.standardTimeConversiondateToStr(
+      end_time: formatData.standardTimeConversiondateToStr(
         self.downLoadFormConfig.formValue.startEndTimes[1]
       ), // 结束时间
       status:

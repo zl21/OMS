@@ -22,12 +22,14 @@ export default {
         buttons: [
           {
             text: '删除', // 按钮文本
+            webname: '',
             btnclick: () => {
               this.deleteAuthority();
             } // 按钮点击事件
           },
           {
             text: '刷新', // 按钮文本
+            webname: '',
             btnclick: () => {
               this.refresh();
             } // 按钮点击事件

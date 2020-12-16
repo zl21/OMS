@@ -153,6 +153,7 @@ export default {
         buttons: [
           {
             text: '保存', // 按钮文本
+            webname: 'ManualMatching_save',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.saveData();
@@ -160,6 +161,7 @@ export default {
             } // 按钮点击事件
           }, {
             text: '返回', // 按钮文本
+            webname: 'Mismatchingmandatorymatching_return',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;

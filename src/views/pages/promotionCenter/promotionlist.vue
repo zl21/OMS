@@ -5,7 +5,7 @@
     <div class="operation-content totalHeight">
       <!-- 按钮 head_botton-->
       <div class="operation-botton">
-        <jordanBtn :btn-config="btnConfig" />
+        <businessButton :btn-config="btnConfig" />
       </div>
       <!-- 过滤器 -->
       <Row class="operation-form">
@@ -136,9 +136,9 @@
   </div>
 </template>
 <script>
-import promotionlist from '@/js/pages/promotionCenter/promotionlist';
+  import promotionlist from '@/js/pages/promotionCenter/promotionlist';
 
-export default promotionlist;
+  export default promotionlist;
 </script>
 <style lang="less">
 @import '~@/css/pages/promotionCenter/promotionlist.less';

@@ -1,14 +1,11 @@
-import axios from 'axios';
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
-import businessActionTable from 'professionalComponents/businessActionTable.vue';
-// import { debug, debuglog } from "util";
-import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite.js';
-import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
-import { customPagingMixins } from '@/assets/js/mixins/customPaging.js';
-import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions.js';
-// import dateUtil from  "../../js/utils/date.js";
+import businessActionTable from 'professionalComponents/businessActionTable';
+import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
+import publicMethodsUtil from '@/assets/js/public/publicMethods';
+import { customPagingMixins } from '@/assets/js/mixins/customPaging';
+import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 export default {
   components: {
     businessButton,
@@ -26,7 +23,7 @@ export default {
         typeAll: 'error', // 按钮统一风格样式
         buttons: [
           {
-            text: '查找', // 按钮文本
+            webname: 'lookup_qdkucunbiandongliushui', // 查找
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.find();
@@ -321,7 +318,7 @@ export default {
           if (res.data.code === 0 && res.data.data !== null) {
             const mes = res.data.message || '导出成功！';
             _this.$Message.success(mes);
-            _this.downloadUrlFile(res.data.data);
+            publicMethodsUtil.downloadUrlFile(res.data.data);
             // return (window.location = res.data.data);
           } else {
             const err = res.data.message || '失败！';
@@ -340,17 +337,6 @@ export default {
         }
       }
     },
-    // 导出
-    downloadUrlFile(src) {
-      const downloadFile = {};
-      if (typeof downloadFile.iframe == 'undefined') {
-        const iframe = document.createElement('iframe');
-        downloadFile.iframe = iframe;
-        document.body.appendChild(downloadFile.iframe);
-      }
-      downloadFile.iframe.src = src;
-      downloadFile.iframe.style.display = 'none';
-    },
     // 警告框确认
     warningOk() {
       const _this = this;
@@ -363,7 +349,7 @@ export default {
         if (res.data.code === 0 && res.data.data !== null) {
           const mes = res.data.message || '导出成功！';
           _this.$Message.success(mes);
-          _this.downloadUrlFile(res.data.data);
+          publicMethodsUtil.downloadUrlFile(res.data.data);
           // return (window.location = res.data.data);
         } else {
           const err = res.data.message || '失败！';

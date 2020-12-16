@@ -1,3 +1,5 @@
+import formatData from '@/assets/js/__utils__/date.js';
+
 export default {
   // 淘宝订单接口列表界面(下载订单)
   formConfig: {
@@ -101,8 +103,8 @@ export default {
     const param = {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid,
       bill_no: self.downLoadFormConfig.formValue.orderNum, // 订单编号
-      start_time: self.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.startEndTimes[0]), // 开始时间
-      end_time: self.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.startEndTimes[1]), // 结束时间
+      start_time: formatData.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.startEndTimes[0]), // 开始时间
+      end_time: formatData.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.startEndTimes[1]), // 结束时间
       status: self.downLoadFormConfig.formValue.orderStatus, // 状态 必传 给默认值
       table: self.$route.params.tableName // 当前表名 必传
     };

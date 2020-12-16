@@ -1,5 +1,5 @@
 import businessLabel from 'professionalComponents/businessLabel';
-import jordanBtn from 'professionalComponents/businessButton';
+import businessButton from 'professionalComponents/businessButton';
 import errorMessage from 'framework/components/tablelist/error.vue';
 import Mydialog from 'framework/components/dialog/mydialog.vue';
 import TableInput from 'framework/components/element/input';
@@ -9,7 +9,7 @@ import dialogVisible from '@/views/pages/promotionCenter/setGroup';
 import Favorite from '@/views/pages/promotionCenter/components/favorite';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import loading from '@/component/loading.vue';
-import comUtils from '@/assets/js/__utils__/common.js';
+import comUtils from '@/assets/js/__utils__/common';
 
 const baseColumnDefs = [
   {
@@ -404,60 +404,70 @@ export default {
         buttons: [
           {
             text: window.vmI18n.t('btn.find'), // 按钮文本,
+            webname: 'lookup_cuxiaohuodomg',
             btnclick: () => {
               this.getData();
             }
           },
           {
             text: window.vmI18n.t('btn.reset'), // 按钮文本,
+            webname: 'chongzhicux_cuxiaohuodomg',
             btnclick: () => {
               this.Reset();
             }
           },
           {
             text: window.vmI18n.t('btn.add'), // 按钮文本,
+            webname: 'xinzengcux_cuxiaohuodomg',
             btnclick: () => {
               this.promotionClick();
             }
           },
           {
             text: window.vmI18n.t('btn.batch_add'), // 按钮文本,
+            webname: 'piliangxinzengcux_cuxiaohuodomg',
             btnclick: () => {
               this.promotionBlukClick();
             }
           },
           {
             text: window.vmI18n.t('btn.publish'), // 按钮文本,
+            webname: 'fabucux_cuxiaohuodomg',
             btnclick: () => {
               this.publish();
             }
           },
           {
             text: window.vmI18n.t('btn.offline'), // 按钮文本,
+            webname: 'xiaxiancux_cuxiaohuodomg',
             btnclick: () => {
               this.actOffline();
             }
           },
           {
             text: window.vmI18n.t('common.copy'), // 按钮文本,
+            webname: 'copy_cuxiaohuodomg',
             btnclick: () => {
               this.copy();
             }
           },
           {
             text: window.vmI18n.t('btn.delete'), // 按钮文本,
+            webname: 'deletecux_cuxiaohuodomg',
             btnclick: () => {
               this.deleteActi();
             }
           },
           {
             text: window.vmI18n.t('btn.set_groups'), // 按钮文本,
+            webname: 'shezhifenzucux_cuxiaohuodomg',
             btnclick: () => {
               this.setGroup();
             }
           },
           {
             text: window.vmI18n.t('btn.simulation'), // 按钮文本,
+            webname: 'fangzhencux_cuxiaohuodomg',
             btnclick: () => {
               this.simulation();
             }
@@ -480,7 +490,7 @@ export default {
     }
   },
   components: {
-    jordanBtn,
+    businessButton,
     businessLabel,
     aTable,
     Mydialog,

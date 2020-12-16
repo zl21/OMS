@@ -1,12 +1,10 @@
-import detailtable from '@/views/pages/promotionCenter/details/table.vue';
-import detailtabs from '@/views/pages/promotionCenter/details/tableTabs.vue';
-import SingleBox from '@/views/pages/promotionCenter/components/singleBox';
+import detailtable from 'allpages/promotionCenter/details/table.vue';
+import detailtabs from 'allpages/promotionCenter/details/tableTabs.vue';
+import SingleBox from 'allpages/promotionCenter/components/singleBox';
 import tableCols from '@/assets/js/promotion/columns';
-import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDialog';
-import SetCommodity from '@/views/pages/promotionCenter/details/setCommodity';
+import ButtonFkDialog from 'allpages/promotionCenter/components/buttonFkDialog';
+import SetCommodity from 'allpages/promotionCenter/details/setCommodity';
 import businessDialog from 'professionalComponents/businessDialog';
-import Vue from 'vue';
-// const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
 export default {
   name: 'giftSet',
   components: {
@@ -514,15 +512,6 @@ export default {
      * 导入
      */
     importData() {
-      // const self = this;
-      // this.dialogModal = {};
-      // this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
-      // this.dialogModal.mode = this.moduleMode; // 区分模块 条件设置  赠品设置 还是批量设置
-      // const _component = 'popdialog';
-      // Vue.component(_component, Vue.extend('allpages/promotionCenter/components/importDialog'));
-      // self.currentView = _component;
-      // self.dialogSet.dialogTitle = '导入';
-      // self.show_dialog = true;
       this.importTable.componentData = { tableName: this.itemdata.reftable || 'PS_C_SKU', mode: this.moduleMode };
       this.$children.find(item => item.name === 'importTable').openConfirm();
     },

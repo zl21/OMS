@@ -1,4 +1,5 @@
 import httpServer from 'framework/__utils__/request';
+import formatData from '@/assets/js/__utils__/date.js';
 
 export default {
   // 唯品会 - 淘宝商品（下载商品）
@@ -73,8 +74,8 @@ export default {
     }
     const params = JSON.stringify({
       shop_id: shopId,
-      start_time: self.standardTimeConversiondateToStr(formValue.query_date[0]),
-      end_time: self.standardTimeConversiondateToStr(formValue.query_date[1])
+      start_time: formatData.standardTimeConversiondateToStr(formValue.query_date[0]),
+      end_time: formatData.standardTimeConversiondateToStr(formValue.query_date[1])
     });
     self.dialogLoad = true;
     console.log(R3.network);

@@ -3,13 +3,12 @@ import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessDialog from 'professionalComponents/businessDialog';
 import strUtil from '@/assets/js/__utils__/util';
-import DateUtil from '@/assets/js/__utils__/date';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { isFavoriteMixin } from '@/assets/js/mixins/isFavorite';
-import comUtils from '@/assets/js/__utils__/common.js';
+import comUtils from '@/assets/js/__utils__/common';
 import loading from '@/component/loading.vue';
-import aTable from 'professionalComponents/agGridTable.vue';
-
+import aTable from 'professionalComponents/agGridTable';
+import publicMethodsUtil from '@/assets/js/public/publicMethods';
 const getCurrentTime = (() => {
   const t = new Date();
   return t.Format('yyyy-MM-dd 23:59:59');
@@ -85,6 +84,7 @@ export default {
           {
             // text: "查找",
             text: window.vmI18n.t('btn.find'), // 按钮文本
+            webname: 'lookup_tuihuoruku',
             btnclick: () => {
               this.requestBefore();
             }
@@ -92,6 +92,7 @@ export default {
           {
             // text: "新增",
             text: window.vmI18n.t('btn.add'), // 按钮文本
+            webname: 'Newlyadded_tuihuoruku',
             btnclick: () => {
               this.$store.commit('customize/TabHref', {
                 id: -1, // id
@@ -110,6 +111,7 @@ export default {
           {
             // text: "手工匹配",
             text: window.vmI18n.t('btn.manual_matching'), // 按钮文本
+            webname: 'ManualMatching_tuihuoruku',
             disabled: false,
             btnclick: () => {
               const self = this;
@@ -159,6 +161,7 @@ export default {
           {
             // text: "错发强制匹配",
             text: window.vmI18n.t('btn.wrong_sending_forced_matching'), // 按钮文本
+            webname: 'Mismatchingmandatorymatching_cuofa',
             disabled: false,
             btnclick: () => {
               const self = this;
@@ -209,6 +212,7 @@ export default {
             // =======================================================暂时影藏
             // text: "作废",
             text: window.vmI18n.t('btn.void'), // 按钮文本
+            webname: '',
             isShow: false,
             btnclick: () => {
               this.selection = this.$refs.agGridChild.AGTABLE.getSelect();
@@ -233,6 +237,7 @@ export default {
             type: '', // 按钮类型
             // text: "导入", //按钮文本
             text: window.vmI18n.t('btn.import'), // 按钮文本
+            webname: 'refundInImport',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
@@ -243,6 +248,7 @@ export default {
           {
             // text: "导出", //按钮文本
             text: window.vmI18n.t('btn.export'), // 按钮文本
+            webname: 'export_tuihuoruku',
             btnclick: () => {
               this.exportClick();
             } // 按钮点击事件
@@ -625,36 +631,21 @@ export default {
         this.service.orderCenter.exportOcBRefundIn(idList).then(res => {
           self.isExport = false;
           if (res.data.code == 0 && res.data.data !== null) {
-            // let mes = res.data.message || "导出成功！";
             const mes = res.data.message || window.vmI18n.t('modalTips.z2');
             self.$Message.success(mes);
-            self.downloadUrlFile(res.data.data);
-            // return (window.location = res.data.data);
+            publicMethodsUtil.downloadUrlFile(res.data.data);
           } else {
-            // let err = res.data.message || "失败！";
             const err = res.data.message || window.vmI18n.t('modalTips.z3');
             self.$Message.error(err);
           }
         });
       } else {
         if (self.tableConfig.data.length === 0) {
-          // return self.$Message.error("列表没有数据,无法导出!");
           self.$Message.error(window.vmI18n.t('modalTips.z4'));
           return;
         }
         self.warningModal = true;
       }
-    },
-    // 导出
-    downloadUrlFile(src) {
-      const downloadFile = {};
-      if (typeof downloadFile.iframe === 'undefined') {
-        const iframe = document.createElement('iframe');
-        downloadFile.iframe = iframe;
-        document.body.appendChild(downloadFile.iframe);
-      }
-      downloadFile.iframe.src = src;
-      downloadFile.iframe.style.display = 'none';
     },
     // 警告框确认
     warningOk() {
@@ -675,7 +666,7 @@ export default {
           const mes = res.data.message || window.vmI18n.t('modalTips.z2');
           self.$Message.success(mes);
           // return (window.location = res.data.data);
-          self.downloadUrlFile(res.data.data);
+          publicMethodsUtil.downloadUrlFile(res.data.data);
         } else {
           // let err = res.data.message || "失败！";
           const err = res.data.message || window.vmI18n.t('modalTips.z3');

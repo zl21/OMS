@@ -1,5 +1,4 @@
-import httpServer from 'framework/__utils__/request';
-
+import formatData from '@/assets/js/__utils__/date.js';
 export default {
   // 京东订单接口列表界面(下载订单)
   formConfig: {
@@ -89,8 +88,8 @@ export default {
       refund_nos: formValue.refund_nos
     };
     if (formValue.query_date[0]) {
-      params.start_time = self.standardTimeConversiondateToStr(formValue.query_date[0]);
-      params.end_time = self.standardTimeConversiondateToStr(formValue.query_date[1]);
+      params.start_time = formatData.standardTimeConversiondateToStr(formValue.query_date[0]);
+      params.end_time = formatData.standardTimeConversiondateToStr(formValue.query_date[1]);
     }
 
     const fromdata = new FormData();

@@ -2,10 +2,7 @@ import detailTable from '@/views/pages/promotionCenter/details/table';
 import CTSIT from '@/views/pages/promotionCenter/details/CTSIT';
 import tabList from '@/views/pages/promotionCenter/details/tabList';
 import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDialog';
-// const _import = file =>
-//   require("@/jordanComponents/views/" + file + ".vue").default;
-import importDialog from '@/js/pages/promotionCenter/components/importDialog';
-
+import businessDialog from 'professionalComponents/businessDialog';
 export default {
   name: 'detailTabs',
   components: {
@@ -13,7 +10,7 @@ export default {
     CTSIT,
     tabList,
     ButtonFkDialog,
-    importDialog
+    businessDialog
   },
   computed: {
     currentTab: {
@@ -67,7 +64,25 @@ export default {
         dialogTitle: '',
         footerHide: true,
         mask: true
-      }
+      },
+      // 弹框配置 导入
+      importTable: {
+        refFuns: 'confirmFun',
+        confirmTitle: '条件信息导入',
+        titleAlign: 'center', // 设置标题是否居中 center left
+        width: '400',
+        scrollable: false, // 是否可以滚动
+        closable: true, // 是否可以按esc关闭
+        draggable: true, // 是否可以拖动
+        mask: true, // 是否显示遮罩层
+        maskClosable: true, // 是否可以点击叉号关闭
+        transfer: true, // 是否将弹层放在body内
+        name: 'importTable', // 组件名称
+        url: 'modal/publicDialog/importTable',
+        keepAlive: true,
+        excludeString: 'importTable', // 将name传进去，确认不缓存
+        componentData: {}
+      },
     };
   },
   methods: {
@@ -110,12 +125,8 @@ export default {
      * 导入
      */
     importData() {
-      const self = this;
-      this.dialogModal = {};
-      this.dialogModal.tableName = this.itemdata.reftable || 'PS_C_SKU';
-      this.dialogModal.mode = this.moduleMode;
-      self.dialogSet.dialogTitle = '导入';
-      self.show_dialog = true;
+      this.importTable.componentData = { tableName: this.itemdata.reftable || 'PS_C_SKU', mode: this.moduleMode };
+      this.$children.find(item => item.name === 'importTable').openConfirm();
     },
     /**
      * 返回值，用于弹框返回解析

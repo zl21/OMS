@@ -164,8 +164,9 @@ export default {
       btnConfig: {
         typeAll: 'error',
         loading: false,
-        buttons: [{
-            text: window.vmI18n.t('btn.save'), // 按钮文本
+        buttons: [
+          {
+            webname: 'save_order_1', // 保存
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -271,7 +272,7 @@ export default {
             },
           },
           {
-            text: window.vmI18n.t('common.return'), // 返回
+            webname: 'order_fund', // 返回
             btnclick: () => {
               this.back();
               // 销毁当前实例

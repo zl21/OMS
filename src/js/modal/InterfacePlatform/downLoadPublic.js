@@ -1,6 +1,7 @@
 import businessForm from 'professionalComponents/businessForm';
 import businessDialog from 'professionalComponents/businessDialog';
 import businessButton from 'professionalComponents/businessButton';
+import formatData from '@/assets/js/__utils__/date.js';
 export default {
   components: {
     businessForm,
@@ -424,8 +425,8 @@ export default {
       const param = {
         shop_id: downData.formData[0].itemdata.pid,
         bill_no: downData.formValue.orderNum, // 订单编号
-        start_time: _this.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
-        end_time: _this.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
+        start_time: formatData.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
+        end_time: formatData.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
         status: downData.formValue.orderStatus, // 状态 必传 给默认值
         table: _this.tablename // 当前表名 必传
       };
@@ -455,8 +456,8 @@ export default {
       const param = {
         shop_id: downData.formData[0].itemdata.pid,
         sp_ids: downData.formValue.sp_ids,
-        start_time: downData.formValue.startEndTimes[0] ? _this.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]) : undefined, // 开始时间
-        end_time: downData.formValue.startEndTimes[1] ? _this.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]) : undefined, // 结束时间
+        start_time: downData.formValue.startEndTimes[0] ? formatData.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]) : undefined, // 开始时间
+        end_time: downData.formValue.startEndTimes[1] ? formatData.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]) : undefined, // 结束时间
         table: _this.tablename // 当前表名 必传
       };
       const fromdata = new FormData();
@@ -490,8 +491,8 @@ export default {
         shop_id: downData.formData[0].itemdata.pid,
         ware_id: downData.formValue.ware_id, // 商品id
         item_num: downData.formValue.item_num, // 商品编码
-        start_time: _this.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
-        end_time: _this.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
+        start_time: formatData.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
+        end_time: formatData.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
         table: _this.tablename // 当前表名 必传
       };
       const fromdata = new FormData();
@@ -526,8 +527,8 @@ export default {
       const param = {
         shop_id: downData.formData[0].itemdata.pid,
         bill_no: downData.formValue.orderNum || '', // 订单编号
-        start_time: _this.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
-        end_time: _this.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
+        start_time: formatData.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
+        end_time: formatData.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
         status: downData.formValue.orderStatus || '', // 状态 必传 给默认值
         table: _this.$route.params.tableName // 当前表名 必传
       };
@@ -543,32 +544,6 @@ export default {
       } else {
         _this.$Message.error(message);
       }
-    },
-    // 时间格式化
-    standardTimeConversiondateToStr(val) {
-      const dateTime = new Date(val);
-      const year = dateTime.getFullYear();
-      let month = dateTime.getMonth() + 1; // js从0开始取
-      let date = dateTime.getDate();
-      let hour = dateTime.getHours();
-      let minutes = dateTime.getMinutes();
-      let second = dateTime.getSeconds();
-      if (month < 10) {
-        month = `0${month}`;
-      }
-      if (date < 10) {
-        date = `0${date}`;
-      }
-      if (hour < 10) {
-        hour = `0${hour}`;
-      }
-      if (minutes < 10) {
-        minutes = `0${minutes}`;
-      }
-      if (second < 10) {
-        second = `0${second}`;
-      }
-      return `${year}-${month}-${date} ${hour}:${minutes}:${second}`;
     },
     // 打开导入弹窗
     importBoxOpen() {

@@ -1,3 +1,5 @@
+import formatData from '@/assets/js/__utils__/date.js';
+
 export default {
   // 商品中心 - 淘宝商品（下载商品）
   formConfig: {
@@ -83,8 +85,8 @@ export default {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
       item_num: self.downLoadFormConfig.formValue.numNumber, // 数字编号 必传
       table: 'IP_C_TAOBAO_PRODUCT', // 表名字 必传
-      start_time: self.standardTimeConversiondateToStr(paramTime[0]),
-      end_time: self.standardTimeConversiondateToStr(paramTime[1])
+      start_time: formatData.standardTimeConversiondateToStr(paramTime[0]),
+      end_time: formatData.standardTimeConversiondateToStr(paramTime[1])
     };
     const fromdata = new FormData();
     fromdata.append('param', JSON.stringify(param));

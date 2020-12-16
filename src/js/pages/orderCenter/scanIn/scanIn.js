@@ -677,6 +677,7 @@ export default {
           // },
           {
             text: window.vmI18n.t('btn.forcedStorage'), // 强制入库
+            webname: 'Forcedwarehousing_saomiaoruku',
             disabled: false,
             btnclick: () => {
               const _this = this;
@@ -685,6 +686,7 @@ export default {
           },
           {
             text: window.vmI18n.t('btn.refresh'), // 刷新
+            webname: 'Refresh_saomiaoruku',
             btnclick: () => {
               const _this = this;
               _this.getReturnBatch();
@@ -692,6 +694,7 @@ export default {
           },
           {
             text: window.vmI18n.t('btn.empty'), // 清除
+            webname: 'Eliminate_saomiaoruku',
             btnclick: () => {
               const _this = this;
               _this.removeData();

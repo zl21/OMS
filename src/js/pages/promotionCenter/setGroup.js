@@ -1,10 +1,36 @@
 import axios from 'axios';
 import myInputLd from 'framework/components/element/input';
-
+import businessButton from 'professionalComponents/businessButton';
 export default {
   name: 'DialogVisible',
   data() {
     return {
+      buttonConfig: {
+        typeAll: 'error', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
+        buttons: [
+          {
+            type: '', // 按钮类型
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            icon: '', // 按钮图标
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.closeDialog();
+            } // 按钮点击事件
+          },
+          {
+            type: '', // 按钮类型
+            text: window.vmI18n.t('common.determine'), // 确定 按钮文本
+            icon: '', // 按钮图标
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.confirm();
+            } // 按钮点击事件
+          }
+        ]
+      },
       itemdata: {
         name: '分组名称：',
         setGroupName: '',
@@ -46,7 +72,8 @@ export default {
   },
   props: ['dialogVisible', 'checkList', 'setGroupTableData'],
   components: {
-    myInputLd
+    myInputLd,
+    businessButton
   },
   computed: {},
   watch: {
