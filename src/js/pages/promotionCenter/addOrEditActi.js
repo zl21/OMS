@@ -375,9 +375,12 @@ export default {
           this.objid = String(data.objid) || -1;
           this.$nextTick(() => {
             this.$store.commit(action, {
-              id: this.objid, // id
-              type: 'action', // 类型action
-              name: 'addOrEditActi', // 文件名
+              type: 'C', // 类型action
+              customizedModuleId: this.objid, // id
+              customizedModuleName: 'addOrEditActi', // 文件名
+              // id: this.objid, // id
+              // type: 'action', // 类型action
+              // name: 'addOrEditActi', // 文件名
               label: this.vmI18n.t('panel_label.editPromotion'), // 编辑促销活动
               query: Object.assign({
                 id: this.objid, // id
