@@ -36,5 +36,8 @@ export default {
   },
   CREATEGRN: {
     component: () => import('@/views/modal/orderCenter/createGrn.vue')
+  },
+  REFUSETOPAYOCBRETURNAFSEND: {
+    component: () => import('@/views/modal/orderCenter/returngood/refuseToPayOcBReturnAfSend.vue')
   }
 };
