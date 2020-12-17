@@ -282,7 +282,8 @@ export default {
         ],
       },
       formConfig: {
-        formData: [{
+        formData: [
+          {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_SHOP_TITLE',
@@ -300,7 +301,21 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_LOGISTICS_ENAME',
+            inputList: [
+              {
+                childs: [
+                  {
+ colname: 'CP_C_PLATFORM_ID', refobjid: '', valuedata: '', name: '发货仓库' 
+}
+                ]
+              }
+            ],
             itemdata: {
+              refcolval: {
+                fixcolumn: 'CP_C_PHY_WAREHOUSE_ID',
+                expre: 'equal',
+                srccol: 'CP_C_PLATFORM_ID'
+              },
               col: 1,
               colid: 167630,
               colname: 'AD_C_LOGISTIC_COMPANY_ID', // 当前字段的名称
@@ -392,6 +407,13 @@ export default {
                   === _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID
                 ) {
                   _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = optionsArr[i].label;
+                  this.formConfig.formData[1].inputList = [
+                    {
+                      childs: [
+                        { colname: 'CP_C_PLATFORM_ID', refobjid: _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID, valuedata: optionsArr[i].label }
+                      ]
+                    }
+                  ];
                   return;
                 }
               }
