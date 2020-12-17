@@ -1142,7 +1142,7 @@ export default {
         return;
       }
       const data = {};
-      data.objId = self.$route.query.new || self.$route.query.cid || self.$route.query.oid
+      data.objId = self.$route.query.new || self.$route.query.cid || self.$route.query.oid || self.$route.params.customizedModuleId == 'New'
         ? -1
         : self.$route.params.customizedModuleId;
       const AfSend = self.getForm();
@@ -1150,7 +1150,7 @@ export default {
         self.$Message.warning(self.vmI18n.t('modalTips.j0')); // 请输入正确的买家手机号
         return;
       }
-      AfSend.ID = self.$route.query.cid || self.$route.params.customizedModuleId;
+      AfSend.ID = self.$route.query.cid || self.$route.params.customizedModuleId == 'New' ? -1 : self.$route.params.customizedModuleId;
       const AfSendItem = self.tableConfig.data.map(item => ({
         id: item.ID,
         AMT_RETURN: item.returnPrice,
@@ -1182,14 +1182,20 @@ export default {
         .then((res) => {
           if (res.data.code == 0) {
             self.$Message.success(res.data.message);
-            if (this.$route.query.tabTitle === '额外退款编辑') {
-              this.$store.commit('customize/TabHref', {
-                id: 249230545,
-                type: 'table',
-                name: 'OC_B_RETURN_AF_SEND_MANUAL',
-                label: window.vmI18n.t('btn.additionalRefund'), // 额外退款
-                back: true,
+            if (this.$route.query.tabTitle === '额外退款编辑' || this.$route.params.customizedModuleId == 'New') {
+              // this.$store.commit('customize/TabHref', {
+              //   id: 249230545,
+              //   type: 'table',
+              //   name: 'OC_B_RETURN_AF_SEND_MANUAL',
+              //   label: window.vmI18n.t('btn.additionalRefund'), // 额外退款
+              //   back: true,
+              // });
+              R3.store.commit('global/tabOpen', {
+                type: 'S',
+                tableName: 'OC_B_RETURN_AF_SEND_MANUAL',
+                tableId: 249230545
               });
+              comUtils.tabCloseAppoint(this);
             } else {
               this.$store.commit('customize/TabHref', {
                 id: 249130393,
@@ -1356,7 +1362,7 @@ export default {
     onAddItem() {
       const self = this;
       // 新增界面逻辑
-      if (self.$route.query.new || self.$route.query.cid) {
+      if (self.$route.query.new || self.$route.query.cid || self.$route.params.customizedModuleId == 'New') {
         if (!self.isOne) {
           const data = self.onSelectData;
           // 通过原始订单编号二次弹框确定
@@ -1368,7 +1374,7 @@ export default {
             // 店铺名称
             if (configItemLabel === self.vmI18n.t('table_label.shopName')) configItem.props.value = data.CP_C_SHOP_TITLE;
             // 原始平台单号
-            if (configItemLabel === self.vmI18n.t('form_label.originalOrderNo')) configItem.props.value = data.SOURCE_CODE;
+            if (configItemLabel === self.vmI18n.t('form_label.originalPlatformNo')) configItem.props.value = data.SOURCE_CODE;
             // 买家昵称
             if (configItemLabel === self.vmI18n.t('table_label.buyerNickname')) configItem.props.value = data.USER_NICK;
             // 买家手机号
