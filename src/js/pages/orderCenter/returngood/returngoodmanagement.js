@@ -38,6 +38,14 @@ export default {
       vmI18n: window.vmI18n,
       // 显示水印标识
       statusName: '',
+      // 水印标识集合
+      waterMarkMap: {
+        // 单据状态为等待退货入库（20）、等待售后确认（30）、完成（50）、取消（60）时，显示水印
+        20: window.vmI18n.t('form_label.waitFor_return_warehous'), // '等待退货入库',
+        30: window.vmI18n.t('form_label.waitFor_afterSale_review'), // '等待售后审核',
+        50: window.vmI18n.t('form_label.complete'), // '完成',
+        60: window.vmI18n.t('common.canceled'), // '已取消',
+      },
       // 可用库存不足弹窗提示
       availableStock: false,
       qtyRefundEditFlag: true,
@@ -1328,30 +1336,8 @@ export default {
                 }, 10);
               }
               _this.status = res.data.data.returnOrders.RETURN_STATUS;
-              // 单据状态为等待退货入库（20）、等待售后确认（30）、完成（50）、取消（60）时，显示水印
-              if ([20, 30, 50, 60].includes(_this.status)) {
-                if (_this.$route.query.statusName) {
-                  _this.statusName = _this.$route.query.statusName;
-                }
-                // 由于后台状态和水印不相同
-                switch (_this.status) {
-                  case 30:
-                    _this.statusName = '等待售后审核';
-                    break;
-                  case 60:
-                    _this.statusName = '已取消';
-                    break;
-                  case 20:
-                    _this.statusName = '等待退货入库';
-                    break;
-                  case 50:
-                    _this.statusName = '完成';
-                    break;
-                  default:
-                    _this.statusName = '此RETURN_STATUS对应的水印待添加';
-                    break
-                }
-              }
+              // 设置水印
+              _this.statusName = _this.waterMarkMap[_this.status] ? _this.waterMarkMap[_this.status] : 'Watermark to be added';
               _this.defectiveList = res.data.data.orderDefects;
               for await (const tempItem of res.data.data.refundDtoList) {
                 tempItem.PRODUCT_MARK = tempItem.PRODUCT_MARK == 1 ? '正品' : '次品';
@@ -1537,27 +1523,8 @@ export default {
             }, 10);
           }
           _this.status = res.data.data.returnOrders.RETURN_STATUS;
-          // 单据状态为等待退货入库（20）、等待售后确认（30）、完成（50）、取消（60）时，显示水印
-          if ([20, 30, 50, 60].includes(_this.status)) {
-            if (_this.$route.query.statusName) {
-              _this.statusName = _this.$route.query.statusName;
-            }
-            // 由于后台状态和水印不相同
-            if (_this.status === 30) {
-              _this.statusName = '等待售后审核';
-            }
-            if (_this.status === 60) {
-              _this.statusName = '已取消';
-            }
-            if (_this.status === 20 || _this.statusName === '待退货入库') {
-              _this.statusName = '等待退货入库';
-            }
-            if (_this.status === 50) {
-              _this.statusName = '完成';
-            }
-          } else {
-            _this.statusName = '此RETURN_STATUS对应的水印待添加';
-          }
+          // 设置水印
+          _this.statusName = _this.waterMarkMap[_this.status] ? _this.waterMarkMap[_this.status] : 'Watermark to be added';
           _this.defectiveList = res.data.data.orderDefects;
           const tempRefundDtoList = res.data.data.refundDtoList;
           for (let i = 0; i < tempRefundDtoList.length; i++) {
