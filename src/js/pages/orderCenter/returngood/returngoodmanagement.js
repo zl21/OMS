@@ -1330,16 +1330,26 @@ export default {
               _this.status = res.data.data.returnOrders.RETURN_STATUS;
               // 单据状态为等待退货入库（20）、等待售后确认（30）、完成（50）、取消（60）时，显示水印
               if ([20, 30, 50, 60].includes(_this.status)) {
-                _this.statusName = _this.$route.query.statusName;
+                if (_this.$route.query.statusName) {
+                  _this.statusName = _this.$route.query.statusName;
+                }
                 // 由于后台状态和水印不相同
-                if (_this.status === 30) {
-                  _this.statusName = '等待售后审核';
-                }
-                if (_this.status === 60) {
-                  _this.statusName = '已取消';
-                }
-                if (_this.status === 20) {
-                  _this.statusName = '等待退货入库';
+                switch (_this.status) {
+                  case 30:
+                    _this.statusName = '等待售后审核';
+                    break;
+                  case 60:
+                    _this.statusName = '已取消';
+                    break;
+                  case 20:
+                    _this.statusName = '等待退货入库';
+                    break;
+                  case 50:
+                    _this.statusName = '完成';
+                    break;
+                  default:
+                    _this.statusName = '此RETURN_STATUS对应的水印待添加';
+                    break
                 }
               }
               _this.defectiveList = res.data.data.orderDefects;
@@ -1529,7 +1539,9 @@ export default {
           _this.status = res.data.data.returnOrders.RETURN_STATUS;
           // 单据状态为等待退货入库（20）、等待售后确认（30）、完成（50）、取消（60）时，显示水印
           if ([20, 30, 50, 60].includes(_this.status)) {
-            _this.statusName = _this.$route.query.statusName;
+            if (_this.$route.query.statusName) {
+              _this.statusName = _this.$route.query.statusName;
+            }
             // 由于后台状态和水印不相同
             if (_this.status === 30) {
               _this.statusName = '等待售后审核';
@@ -1537,9 +1549,14 @@ export default {
             if (_this.status === 60) {
               _this.statusName = '已取消';
             }
-            if (_this.statusName === '待退货入库') {
+            if (_this.status === 20 || _this.statusName === '待退货入库') {
               _this.statusName = '等待退货入库';
             }
+            if (_this.status === 50) {
+              _this.statusName = '完成';
+            }
+          } else {
+            _this.statusName = '此RETURN_STATUS对应的水印待添加';
           }
           _this.defectiveList = res.data.data.orderDefects;
           const tempRefundDtoList = res.data.data.refundDtoList;
