@@ -24,6 +24,7 @@ export default {
   },
   methods: {
     showItem(index, item) {
+      console.log(item);
       return item.class ? item.class : '';
     },
     showActive(index, item) { // 激活
