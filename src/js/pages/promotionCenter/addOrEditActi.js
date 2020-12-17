@@ -2,6 +2,7 @@ import BasicInfo from 'allpages/promotionCenter/details/basicInfo';
 import InfoSet from 'allpages/promotionCenter/details/infoSet';
 import GiftSet from 'allpages/promotionCenter/details/giftSet';
 import stepsBars from 'allpages/promotionCenter/components/steps';
+import comUtils from '@/assets/js/__utils__/common.js';
 
 export default {
   components: {
@@ -374,13 +375,16 @@ export default {
           this.objid = String(data.objid) || -1;
           this.$nextTick(() => {
             this.$store.commit(action, {
-              id: this.objid, // id
-              type: 'action', // 类型action
-              name: 'addOrEditActi', // 文件名
+              type: 'C', // 类型action
+              customizedModuleId: this.objid, // id
+              customizedModuleName: 'addOrEditActi', // 文件名
+              // id: this.objid, // id
+              // type: 'action', // 类型action
+              // name: 'addOrEditActi', // 文件名
               label: this.vmI18n.t('panel_label.editPromotion'), // 编辑促销活动
               query: Object.assign({
                 id: this.objid, // id
-                tabTitle: this.vmI18n.t('panel_label.editPromotion') // 编辑促销活动
+                // tabTitle: this.vmI18n.t('panel_label.editPromotion') // 编辑促销活动
               }) // 带的参数
             });
           });
@@ -461,17 +465,15 @@ export default {
      * 取消(关闭) 返回列表界面
      */
     close() {
-      this.$store.commit('customize/TabClose', {
-        id: 31460113, // id
-        type: 'CUSTOMIZED', // 类型action
-        name: 'PROMACTIQUERYLIST', // 文件名
-        // label: "促销活动", // tab中文名
-        label: this.vmI18n.t('panel_label.promotionList'),
-        query: Object.assign({
-          id: 31460113
-        }) // 带的参数
+      comUtils.tabCloseAppoint(this);
+      this.$store.commit('global/tabOpen', {
+        type: 'C', // 类型action
+        customizedModuleId: 2895, // id
+        customizedModuleName: 'PROMACTIQUERYLIST', // 文件名
+        label: this.vmI18n.t('panel_label.promotionList'), // 促销活动
+        dynamicRoutingForCustomizePage: true,
       });
-      this.$destroy();
+      // this.$destroy();
     },
     /**
      * 新增 初始化数据
@@ -538,7 +540,8 @@ export default {
       try {
         area1 = this.$refs.area_1.$el.offsetHeight; // 第二个模块可能没有
       } catch (e) {
-        this.throw(e);
+        console.log(e);
+        // this.throw(e);
       }
       const area2 = this.$refs.area_2.$el.offsetHeight;
       if (scroll < area0) {

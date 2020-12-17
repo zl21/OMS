@@ -65,11 +65,11 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "@burgeon/business-components": "^1.0.28",
+    "@burgeon/business-components": "^1.0.29",
     "@burgeon/internationalization": "^1.0.14",
     "@burgeon/oms-theme": "^1.0.4",
     "@syman/ark-ui": "1.1.8",
-    "@syman/burgeon-r3": "1.3.24",
+    "@syman/burgeon-r3": "1.4.20",
     "@syman/burgeon-r3-components": "1.0.14",
     "ag-grid": "^17.1.1",
     "ag-grid-enterprise": "^17.1.1",
