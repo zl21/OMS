@@ -1182,14 +1182,20 @@ export default {
         .then((res) => {
           if (res.data.code == 0) {
             self.$Message.success(res.data.message);
-            if (this.$route.query.tabTitle === '额外退款编辑') {
-              this.$store.commit('customize/TabHref', {
-                id: 249230545,
-                type: 'table',
-                name: 'OC_B_RETURN_AF_SEND_MANUAL',
-                label: window.vmI18n.t('btn.additionalRefund'), // 额外退款
-                back: true,
+            if (this.$route.query.tabTitle === '额外退款编辑' || this.$route.params.customizedModuleId == 'New') {
+              // this.$store.commit('customize/TabHref', {
+              //   id: 249230545,
+              //   type: 'table',
+              //   name: 'OC_B_RETURN_AF_SEND_MANUAL',
+              //   label: window.vmI18n.t('btn.additionalRefund'), // 额外退款
+              //   back: true,
+              // });
+              R3.store.commit('global/tabOpen', {
+                type: 'S',
+                tableName: 'OC_B_RETURN_AF_SEND_MANUAL',
+                tableId: 249230545
               });
+              comUtils.tabCloseAppoint(this);
             } else {
               this.$store.commit('customize/TabHref', {
                 id: 249130393,
@@ -1368,7 +1374,7 @@ export default {
             // 店铺名称
             if (configItemLabel === self.vmI18n.t('table_label.shopName')) configItem.props.value = data.CP_C_SHOP_TITLE;
             // 原始平台单号
-            if (configItemLabel === self.vmI18n.t('form_label.originalOrderNo')) configItem.props.value = data.SOURCE_CODE;
+            if (configItemLabel === self.vmI18n.t('form_label.originalPlatformNo')) configItem.props.value = data.SOURCE_CODE;
             // 买家昵称
             if (configItemLabel === self.vmI18n.t('table_label.buyerNickname')) configItem.props.value = data.USER_NICK;
             // 买家手机号
