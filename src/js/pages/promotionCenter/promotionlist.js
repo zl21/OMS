@@ -969,7 +969,7 @@ export default {
             label: window.vmI18n.t('panel_label.editPromotion'), // 编辑促销活动
             query: Object.assign({
               id: ACTI_ID, // id
-              tabTitle: window.vmI18n.t('panel_label.editPromotion') // 编辑促销活动
+              // tabTitle: window.vmI18n.t('panel_label.editPromotion') // 编辑促销活动
             }) // 带的参数
           });
         }

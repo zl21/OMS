@@ -13,6 +13,7 @@ import simulation from 'allpages/promotionCenter/analogsimulation/simulation.vue
 export default {
   PROMACTIQUERYLIST: {
     component: promactiquerylist,
+    labelName: '促销活动',
   },
   ADDOREDITACTI: {
     component: addOrEditActi,
