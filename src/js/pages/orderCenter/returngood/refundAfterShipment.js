@@ -1142,7 +1142,7 @@ export default {
         return;
       }
       const data = {};
-      data.objId = self.$route.query.new || self.$route.query.cid || self.$route.query.oid
+      data.objId = self.$route.params.customizedModuleId === 'New' || self.$route.query.cid || self.$route.query.oid
         ? -1
         : self.$route.params.customizedModuleId;
       const AfSend = self.getForm();
@@ -1362,7 +1362,7 @@ export default {
     onAddItem() {
       const self = this;
       // 新增界面逻辑
-      if (self.$route.query.new || self.$route.query.cid) {
+      if (self.$route.params.customizedModuleId === 'New' || self.$route.query.cid) {
         if (!self.isOne) {
           const data = self.onSelectData;
           // 通过原始订单编号二次弹框确定
@@ -1432,7 +1432,7 @@ export default {
                 : item.price;
               self.tableConfig.data.push(item);
             }
-            if (self.$route.query.new || self.$route.query.cid) {
+            if (self.$route.params.customizedModuleId === 'New' || self.$route.query.cid) {
               self.tableConfig.data.forEach((item) => {
                 item.returnPrice = item.price > item.RETURNABLE_AMOUNT
                   ? item.RETURNABLE_AMOUNT
@@ -1485,7 +1485,7 @@ export default {
       // 删除明细
       const self = this;
       if (
-        self.$route.query.new
+        self.$route.params.customizedModuleId === 'New'
         || self.$route.query.cid
         || self.$route.query.oid
       ) {
