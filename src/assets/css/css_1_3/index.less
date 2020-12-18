@@ -1697,3 +1697,53 @@ body {
     order: 2;
   }
 }
+
+// 定制界面fkTable组件兼容标准页面fkTable样式 
+#dropDownSelectPopper {
+  .ark-page{
+    .ark-page-item-jump-next a{
+      color: @base-color;
+    }
+  }
+}
+.el-popover{
+  .view-fktable{
+    & > input{
+      border: 1px solid #d8d8d8;
+      height: 26px;
+      line-height: 1;
+      padding: 5px 10px;
+      border-radius: 2px;
+      margin-bottom: 5px;
+    }
+    .page{
+      height: auto;
+      .el-pagination{
+        padding: 0;
+        button{
+          min-width: 19px;
+          height: 19px;
+          line-height: 19px;
+          margin-left: 5px;
+        }
+        .el-pager{
+          .more:hover{
+            color: @base-color;
+          }
+          .number{
+            min-width: 19px;
+            height: 19px;
+            line-height: 19px;
+            margin-left: 5px;
+              &.active,&:hover{
+                color: @button-bg-font;
+                background-color: @base-color;
+                border-radius: 2px;
+            }
+          }
+        }
+      }
+      
+    }
+  }
+}
