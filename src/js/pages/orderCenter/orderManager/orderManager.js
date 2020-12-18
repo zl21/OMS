@@ -1579,7 +1579,7 @@ export default {
           return;
         }
         // 原单无效复制
-        if (type === this.vmI18n.t('btn.original_single_null_and_void_copy')) {
+        if (type === 'oriInvalidCopy') {
           // 已取消
           if (selectItem.ORDER_STATUS != 7 && selectItem.ORDER_STATUS != 8) {
             // 非已取消或系统作废订单，不允许复制
@@ -1599,7 +1599,7 @@ export default {
           pageTitle: type
         };
         // 丢单复制
-        if (type === this.vmI18n.t('btn.lostOrder_copy')) {
+        if (type === 'Drop-out copy') {
           query.orderCopy = true;
         } else {
           query.copyOrder = true;
