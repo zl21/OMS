@@ -64,8 +64,31 @@
     },
     methods: {
       determine() {
-        this.service.orderCenter.refuseToPayOcBReturnAfSend({ ids: this.idArr, reason: this.reason }).then(res=>{
+        this.service.orderCenter.refuseToPayOcBReturnAfSend({ ids: this.idArray, reason: this.reason }).then(res=>{
           console.log(res);
+          if (res.data.data.code == 0) {
+            this.$Message.success(res.data.data.message);
+            this.$emit('closeActionDialog');
+          } else {
+            this.$Modal.confirm({
+              title: res.data.data.message,
+              render: (h) => h('Table', {
+                props: {
+                  columns: [
+                    {
+                      title: 'id',
+                      key: 'objid'
+                    },
+                    {
+                      title: '报错信息',
+                      key: 'message'
+                    }
+                  ],
+                  data: res.data.data.data
+                }
+              })
+            });
+          }
         });
       }
     }
