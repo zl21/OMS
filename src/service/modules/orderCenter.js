@@ -104,6 +104,7 @@ export default {
   getOrderId: params => network.post('/api/cs/oc/oms/v1/getOrderId', params), // 根据平台单号,查询零售发货单id
   examineTheRefundAfterDelivery: params => network.post('/api/cs/oc/oms/v1/examineTheRefundAfterDelivery', params), // 额外退款审核
   refuseToPayOcBReturnAfSend: params => network.post('/api/cs/oc/oms/v1/refuseToPayOcBReturnAfSend', params), // 拒绝打款
+  pickOrderExport: params => network.post('/api/cs/vip/pick/v1/export', params),  
   // 半定制弹框
   updateWarehouse: params => network.post('/api/cs/oc/oms/v1/updateWarehouse', params),
   getQueryList: params => network.post('/api/cs/oc/oms/v1/getQueryList', params)

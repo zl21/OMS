@@ -39,5 +39,8 @@ export default {
   },
   REFUSETOPAYOCBRETURNAFSEND: {
     component: () => import('@/views/modal/orderCenter/returngood/refuseToPayOcBReturnAfSend.vue')
-  }
+  },
+  PICKORDEREXPORT: {
+    component: () => import('@/views/modal/orderCenter/returngood/pickorderExport.vue')
+  },
 };
