@@ -371,6 +371,11 @@ export default {
     logisticClear() {
       console.log('logisticClear');
       this.CP_C_LOGISTICS_ID_SELECT.selectDatas = [];
+      this.CP_C_LOGISTICS_ID_SELECT.defaultSelected = [];
+      this.info.CP_C_LOGISTICS_ID = '';
+      this.info.CP_C_SHOP_TITLE = '';
+      this.result.CP_C_LOGISTICS_ID = '';
+      this.result.CP_C_SHOP_TITLE = '';
     },
     async logisticInputValueChange(e) {
       console.log('logisticInputValueChange');
@@ -453,7 +458,7 @@ export default {
           .then(({ data }) => {
             if (data.data.code == 0) {
               this.$Message.success(data.data.message);
-              
+
               // R3.store.commit('global/tabOpen', {
               //   type: 'S',
               //   tableName: 'ST_C_AUTOCHECK',
