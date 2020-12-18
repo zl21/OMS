@@ -839,7 +839,10 @@ export default {
     };
   },
   mounted() {
-    this.sessionStorageData = JSON.parse(sessionStorage.getItem('customizeMessage'))[this.$route.params.customizedModuleId == '41460334' ? 'undefined' : this.$route.params.customizedModuleId];
+    const customizeMessage = sessionStorage.getItem('customizeMessage');
+    if (customizeMessage) {
+      this.sessionStorageData = JSON.parse(sessionStorage.getItem('customizeMessage'))[this.$route.params.customizedModuleId == '41460334' ? 'undefined' : this.$route.params.customizedModuleId];
+    }
     console.log(this.sessionStorageData);
     // if (this.$route.query.id && !this.$route.query.new) {
       if (this.sessionStorageData && this.sessionStorageData.standardTableurlCustomized) { // 已发货退款单详情跳转
