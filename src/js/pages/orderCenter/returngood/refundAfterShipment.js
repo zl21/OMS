@@ -1150,7 +1150,7 @@ export default {
         self.$Message.warning(self.vmI18n.t('modalTips.j0')); // 请输入正确的买家手机号
         return;
       }
-      AfSend.ID = self.$route.query.cid || self.$route.params.customizedModuleId;
+      AfSend.ID = self.$route.query.cid || self.$route.params.customizedModuleId === 'New' ? '-1' : '';
       const AfSendItem = self.tableConfig.data.map(item => ({
         id: item.ID,
         AMT_RETURN: item.returnPrice,
