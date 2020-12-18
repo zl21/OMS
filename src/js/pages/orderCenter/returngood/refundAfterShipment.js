@@ -943,7 +943,7 @@ export default {
         // 店铺名称
         if (item.item.label == _this.vmI18n.t('table_label.shopName')) item.item.props.value = data.CP_C_SHOP_TITLE;
         // 原始平台单号
-        if (item.item.label == _this.vmI18n.t('form_label.originalOrderNo')) item.item.props.value = data.SOURCE_CODE;
+        if (item.item.label == _this.vmI18n.t('form_label.originalPlatformNo')) item.item.props.value = data.SOURCE_CODE;
         // 买家昵称
         if (item.item.label == _this.vmI18n.t('table_label.buyerNickname')) item.item.props.value = data.USER_NICK;
         // 买家手机号;
@@ -1142,7 +1142,7 @@ export default {
         return;
       }
       const data = {};
-      data.objId = self.$route.query.new || self.$route.query.cid || self.$route.query.oid || self.$route.params.customizedModuleId == 'New'
+      data.objId = self.$route.query.new || self.$route.query.cid || self.$route.query.oid
         ? -1
         : self.$route.params.customizedModuleId;
       const AfSend = self.getForm();
@@ -1150,7 +1150,7 @@ export default {
         self.$Message.warning(self.vmI18n.t('modalTips.j0')); // 请输入正确的买家手机号
         return;
       }
-      AfSend.ID = self.$route.query.cid || self.$route.params.customizedModuleId == 'New' ? -1 : self.$route.params.customizedModuleId;
+      AfSend.ID = self.$route.query.cid || self.$route.params.customizedModuleId;
       const AfSendItem = self.tableConfig.data.map(item => ({
         id: item.ID,
         AMT_RETURN: item.returnPrice,
@@ -1362,7 +1362,7 @@ export default {
     onAddItem() {
       const self = this;
       // 新增界面逻辑
-      if (self.$route.query.new || self.$route.query.cid || self.$route.params.customizedModuleId == 'New') {
+      if (self.$route.query.new || self.$route.query.cid) {
         if (!self.isOne) {
           const data = self.onSelectData;
           // 通过原始订单编号二次弹框确定
