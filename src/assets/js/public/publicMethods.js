@@ -81,8 +81,8 @@ class publicUtil {
 
   // 乘法
   accMul(arg1, arg2) {
-    let m = 0; const s1 = arg1.toString(); const 
-      s2 = arg2.toString();
+    let m = 0; const s1 = arg1.toString(); 
+    const s2 = arg2.toString();
     try {
       m += s1.split('.')[1].length;
     } catch (e) {
