@@ -277,18 +277,18 @@ export default {
               event: {},
             },
           },
-          {
-            item: {
-              type: 'Input',
-              label: window.vmI18n.t('form_label.originalOrderNo'), // 原始平台单号
-              required: true,
-              props: {
-                value: '',
-                disabled: true,
-              },
-              event: {},
-            },
-          },
+          // {
+          //   item: {
+          //     type: 'Input',
+          //     label: window.vmI18n.t('form_label.originalOrderNo'), // 原始平台单号
+          //     required: true,
+          //     props: {
+          //       value: '',
+          //       disabled: true,
+          //     },
+          //     event: {},
+          //   },
+          // },
           {
             item: {
               type: 'Input',
@@ -1315,10 +1315,6 @@ export default {
     // 新增明细按钮调用
     tableAddDetail() {
       const self = this;
-      if (!self.reForm.config[3].item.props.value) {
-        self.$Message.warning(self.vmI18n.t('modalTips.j1')); // 原始订单编号不能为空!
-        return;
-      }
       const formData = new FormData();
       const requestData = {
         page: { pageSize: '500', pageNum: '1' },
@@ -1326,10 +1322,19 @@ export default {
           {
             type: 'Select',
             queryName: 'ID',
-            value: self.reForm.config[3].item.props.value,
+            value: '',
           },
         ],
       };
+      for (let i = 0; i < this.reForm.config.length; i++) {
+        if (self.reForm.config[i].item.label == '原始订单编号') {
+          if (!self.reForm.config[i].item.props.value) {
+            self.$Message.warning(self.vmI18n.t('modalTips.j1')); // 原始订单编号不能为空!
+            return;
+          }
+          requestData.highSearch[0].value = self.reForm.config[i].item.value;
+        }
+      }
       formData.append('param', JSON.stringify(requestData));
       this.service.common.queryOrderList(formData)
         .then((res) => {
@@ -1455,7 +1460,7 @@ export default {
         // 详情/复制页面新增明细逻辑
         const data = {};
         const OcBReturnAfSendItem = [];
-        data.orderId = self.reForm.config[3].item.props.value;
+        data.orderId = this.reForm.config.filter(item => item.item.label == this.vmI18n.t('form_label.originalOrderNo')).item.props.value;
         data.id = self.$route.params.customizedModuleId == 'New' ? -1 : self.$route.params.customizedModuleId;
         self.addItem.addList.forEach((item) => {
           const obj = {};
@@ -1931,7 +1936,7 @@ export default {
   computed: {
     // 同步计算申请退款金额
     applyAmt() {
-      return this.reForm.config[13].item.props.value;
+      return this.reForm.config.filter(item => item.item.label == this.vmI18n.t('form_label.refundAmount')).item.props.value;
     },
   },
   watch: {
