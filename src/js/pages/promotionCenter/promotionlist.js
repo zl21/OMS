@@ -474,7 +474,7 @@ export default {
           },
           {
             icon: 'iconfont iconbj_col', // 按钮图标
-            name: '收藏',
+            name: window.vmI18n.t('btn.collection'), // 收藏
             btnclick: () => {
               const self = this;
               self.setFavorite();

@@ -19,6 +19,7 @@ export default {
   mixins: [isFavoriteMixin, customPagingMixins, buttonPermissionsMixin],
   data() {
     return {
+      vmI18n: window.vmI18n,
       allTableArr: [],
       selectArr: [],
       warningModal: false, // 警告弹框
@@ -35,7 +36,7 @@ export default {
           {
             icon: 'iconfont iconbj_col', // 按钮图标
             size: 'small', // 按钮大小
-            name: '收藏',
+            name: window.vmI18n.t('btn.collection'), // 收藏
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
@@ -50,7 +51,7 @@ export default {
             style: 'date',
             type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
             value: 'CREATIONDATE',
-            label: '创建日期',
+            label: window.vmI18n.t('form_label.creationDate'), // '创建日期',
             width: '6',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
             placeholder: ''
@@ -71,7 +72,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '店铺', // input前面显示的lable值
+              name: window.vmI18n.t('other.shop'), // '店铺', // input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               row: 1,
@@ -86,25 +87,25 @@ export default {
           },
           {
             style: 'input', // 文本录入
-            label: '平台条码ID',
+            label: window.vmI18n.t('table_label.platform_barcode_ID'), // '平台条码ID',
             value: 'SKU_ID',
             width: '6'
           },
           {
             style: 'input', // 文本录入
-            label: '来源单号',
+            label: window.vmI18n.t('form_label.sourceNo'), // '来源单号',
             value: 'SOURCE_NO',
             width: '6'
           },
           {
             style: 'input', // 文本录入
-            label: '条码',
+            label: window.vmI18n.t('form_label.barCode'), // '条码',
             value: 'SKU_ECODE',
             width: '6'
           },
           {
             style: 'input', // 文本录入
-            label: '批次号',
+            label: window.vmI18n.t('form_label.batchNumber'), // '批次号',
             value: 'BATCH_NO',
             width: '6'
           }
@@ -123,7 +124,7 @@ export default {
       }, // form表单
       labelList: [
         {
-          label: '全部',
+          label: window.vmI18n.t('form_label.creationDate'), // '全部',
           value: '1',
           isShow: true
         }
@@ -132,31 +133,31 @@ export default {
       jordanTableConfig: {
         columns: [
           {
-            title: '店铺',
+            title: window.vmI18n.t('other.shop'), // '店铺',
             key: 'CP_C_SHOP_TITLE'
           },
           {
-            title: '平台条码ID',
+            title: window.vmI18n.t('table_label.platform_barcode_ID'), // '平台条码ID',
             key: 'SKU_ID'
           },
           {
-            title: '来源单号',
+            title: window.vmI18n.t('form_label.sourceNo'), // '来源单号',
             key: 'SOURCE_NO'
           },
           {
-            title: '条码',
+            title: window.vmI18n.t('form_label.barCode'), // '条码',
             key: 'SKU_ECODE'
           },
           {
-            title: '批次号',
+            title: window.vmI18n.t('form_label.batchNumber'), // '批次号',
             key: 'BATCH_NO'
           },
           {
-            title: '处理状态',
+            title: window.vmI18n.t('form_label.processing_status'), // '处理状态',
             key: 'DEL_STATUS'
           },
           {
-            title: '创建时间',
+            title: window.vmI18n.t('table_label.creationDate'), // '创建时间',
             key: 'CREATIONDATE'
           } /* ,
             {
@@ -226,18 +227,18 @@ export default {
       }
       const mainData = _this.formConfig.formValue;
       if (!mainData.CREATIONDATE[0]) {
-        _this.$Message.error('创建日期不能为空!');
+        _this.$Message.error(window.vmI18n.t('modalTips.dk')); // '创建日期不能为空!'
         return;
       }
       const endDate = new Date(mainData.CREATIONDATE[1]).getTime();
       const startDate = new Date(mainData.CREATIONDATE[0]).getTime();
       const oneDayTime = 24 * 60 * 60 * 1000;
       if (endDate - startDate > oneDayTime) {
-        _this.$Message.error('时间范围不能超过24小时');
+        _this.$Message.error(window.vmI18n.t('modalTips.dl')); // '时间范围不能超过24小时'
         return;
       }
       if (!mainData.SKU_ID && !mainData.SKU_ECODE && !mainData.BATCH_NO) {
-        _this.$Message.error('【平台条码id、条码、批次编码】不能同时为空！');
+        _this.$Message.error(window.vmI18n.t('modalTips.dm')); // '【平台条码id、条码、批次编码】不能同时为空！'
         return;
       }
       _this.jordanTableConfig.data = [];
@@ -326,18 +327,18 @@ export default {
         const idList = { idList: ids };
         this.service.common.exportPayableAdjustment(idList).then(res => {
           if (res.data.code === 0 && res.data.data !== null) {
-            const mes = res.data.message || '导出成功！';
+            const mes = res.data.message || window.vmI18n.t('modalTips.z2'); // '导出成功！'
             _this.$Message.success(mes);
             publicMethodsUtil.downloadUrlFile(res.data.data);
             // return (window.location = res.data.data);
           } else {
-            const err = res.data.message || '失败！';
+            const err = res.data.message || window.vmI18n.t('modalTips.z3'); // '失败！'
             _this.$Message.error(err);
           }
         });
       } else {
         if (_this.jordanTableConfig.data.length === 0) {
-          _this.$Message.error('列表没有数据,无法导出!');
+          _this.$Message.error(window.vmI18n.t('modalTips.z4')); // '列表没有数据,无法导出!'
           return;
         }
         if (_this.statusTab === '') {
@@ -356,11 +357,11 @@ export default {
       };
       this.service.common.exportPayableAdjustment(Object.assign(param, _this.formConfig.formValue)).then(res => {
         if (res.data.code === 0 && res.data.data !== null) {
-          const mes = res.data.message || '导出成功！';
+          const mes = res.data.message || window.vmI18n.t('modalTips.z2'); // '导出成功！';
           _this.$Message.success(mes);
           publicMethodsUtil.downloadUrlFile(res.data.data);
         } else {
-          const err = res.data.message || '失败！';
+          const err = res.data.message || window.vmI18n.t('modalTips.z3'); // '失败！';
           _this.$Message.error(err);
         }
       });

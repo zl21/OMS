@@ -44,7 +44,7 @@ export default {
         20: window.vmI18n.t('form_label.waitFor_return_warehous'), // '等待退货入库',
         30: window.vmI18n.t('form_label.waitFor_afterSale_review'), // '等待售后审核',
         50: window.vmI18n.t('form_label.complete'), // '完成',
-        60: window.vmI18n.t('common.canceled'), // '已取消',
+        60: window.vmI18n.t('common.cancelled'), // '已取消',
       },
       // 可用库存不足弹窗提示
       availableStock: false,

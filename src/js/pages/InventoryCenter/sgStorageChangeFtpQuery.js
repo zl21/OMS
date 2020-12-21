@@ -16,6 +16,7 @@ export default {
   mixins: [isFavoriteMixin, customPagingMixins, buttonPermissionsMixin],
   data() {
     return {
+      vmI18n: window.vmI18n,
       allTableArr: [],
       selectArr: [],
       warningModal: false, // 警告弹框
@@ -32,7 +33,7 @@ export default {
           {
             icon: 'iconfont iconbj_col', // 按钮图标
             size: 'small', // 按钮大小
-            name: '收藏',
+            name: window.vmI18n.t('btn.collection'), // 收藏
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
@@ -59,7 +60,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '平台店铺标题', // input前面显示的lable值
+              name: window.vmI18n.t('table_label.platform_store_title'), // '平台店铺标题',
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               row: 1,
@@ -88,7 +89,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '条码', // input前面显示的lable值
+              name: window.vmI18n.t('form_label.barCode'), // '条码',
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_SKU', // 对应的表
               row: 1,
@@ -104,14 +105,14 @@ export default {
           },
           {
             style: 'input',
-            label: '商品编码',
+            label: window.vmI18n.t('table_label.productNo'), // '商品编码',
             value: 'PS_C_SKU_ECODE',
             width: '6'
           },
 
           {
             style: 'input', // 文本录入
-            label: '国标码',
+            label: window.vmI18n.t('form_label.gBCode'), // '国标码',
             value: 'GBCODE',
             width: '6'
           }
@@ -126,7 +127,7 @@ export default {
       }, // form表单
       labelList: [
         {
-          label: '全部',
+          label: window.vmI18n.t('common.all'), // '全部',
           value: '1',
           isShow: true
         }
@@ -135,39 +136,39 @@ export default {
       jordanTableConfig: {
         columns: [
           {
-            title: '平台店铺标题',
+            title: window.vmI18n.t('table_label.platform_store_title'), // '平台店铺标题',
             key: 'CP_C_SHOP_TITLE'
           },
           {
-            title: '期初可售数',
+            title: window.vmI18n.t('table_label.a0'), // '期初可售数',
             key: 'QTY_BEGIN'
           },
           {
-            title: '变化数量',
+            title: window.vmI18n.t('table_label.a1'), // '变化数量',
             key: 'QTY_CHANGE'
           },
           {
-            title: '期末可售数',
+            title: window.vmI18n.t('table_label.a2'), // '期末可售数',
             key: 'QTY_END'
           },
           {
-            title: '条码编码',
+            title: window.vmI18n.t('form_label.bar_code'), // '条码编码',
             key: 'PS_C_SKU_ECODE'
           },
           {
-            title: '商品编码',
+            title: window.vmI18n.t('table_label.productNo'), // '商品编码',
             key: 'PS_C_PRO_ECODE'
           },
           {
-            title: '商品名称',
+            title: window.vmI18n.t('table_label.productName'), // '商品名称',
             key: 'PS_C_PRO_ENAME'
           },
           {
-            title: '国标码',
+            title: window.vmI18n.t('form_label.gBCode'), // '国标码',
             key: 'GBCODE'
           },
           {
-            title: '创建时间',
+            title: window.vmI18n.t('table_label.creationTime'), // '创建时间',
             key: 'CREATIONDATE'
           }
         ], // 表头
@@ -227,9 +228,9 @@ export default {
       // }
       const mainData = _this.formConfig.formValue;
       if (!mainData.CP_C_SHOP_ID) {
-        _this.$Message.error('店铺不能为空!');
+        _this.$Message.error(window.vmI18n.t('modalTips.do')); // '店铺不能为空!');
       } else if (!mainData.PS_C_SKU_ID) {
-        _this.$Message.error('条码不能为空!');
+        _this.$Message.error(window.vmI18n.t('modalTips.dp')); // '条码不能为空!');
       } else {
         _this.jordanTableConfig.data = [];
         _this.jordanTableConfig.total = 0;
@@ -316,18 +317,18 @@ export default {
         this.service.common.exportPayableAdjustment(idList)
           .then(res => {
           if (res.data.code === 0 && res.data.data !== null) {
-            const mes = res.data.message || '导出成功！';
+            const mes = res.data.message || window.vmI18n.t('modalTips.z2'); // '导出成功！';
             _this.$Message.success(mes);
             publicMethodsUtil.downloadUrlFile(res.data.data);
             // return (window.location = res.data.data);
           } else {
-            const err = res.data.message || '失败！';
+            const err = res.data.message || window.vmI18n.t('modalTips.z3'); // '失败！';
             _this.$Message.error(err);
           }
         });
       } else {
         if (_this.jordanTableConfig.data.length === 0) {
-          _this.$Message.error('列表没有数据,无法导出!');
+          _this.$Message.error(window.vmI18n.t('modalTips.z4')); // '列表没有数据,无法导出!';
           return;
         }
         if (_this.statusTab === '') {
@@ -347,12 +348,12 @@ export default {
       this.service.common.exportPayableAdjustment(Object.assign(param, _this.formConfig.formValue))
         .then(res => {
         if (res.data.code === 0 && res.data.data !== null) {
-          const mes = res.data.message || '导出成功！';
+          const mes = res.data.message || window.vmI18n.t('modalTips.z2'); // '导出成功！';
           _this.$Message.success(mes);
           publicMethodsUtil.downloadUrlFile(res.data.data);
           // return (window.location = res.data.data);
         } else {
-          const err = res.data.message || '失败！';
+          const err = res.data.message || window.vmI18n.t('modalTips.z3'); // '失败！';
           _this.$Message.error(err);
         }
       });

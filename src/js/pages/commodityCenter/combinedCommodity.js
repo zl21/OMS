@@ -21,7 +21,8 @@ export default {
       vmI18n: window.vmI18n,
       objid: '',
       value1: '1', // 折叠框绑定的数据
-      statusName: '', // 水印标识  单据状态
+      statusName: '', // 水印字样  单据状态
+      statusMark: '', // 单据状态标识 用于替换原来statusName中文做的判断
       importType: '',
       // isReadOnly: false, //判断是否可以编辑
       // 按钮配置
@@ -358,7 +359,7 @@ export default {
             title: window.vmI18n.t('table_label.productName'), // 商品名称
             key: 'PS_C_PRO_ENAME',
             render: (h, params) => {
-              if (params.row.ID && this.statusName === '已提交') {
+              if (params.row.ID && this.statusMark === 'Y') {
                 return h(
                   'div',
                   {
@@ -573,7 +574,7 @@ export default {
             title: window.vmI18n.t('form_label.free_quantity'), // 赠送数量
             key: 'NUM',
             render: (h, params) => {
-              if (params.row.ID && this.statusName === '已提交') {
+              if (params.row.ID && this.statusMark === 'Y') {
                 return h(
                   'div',
                   {
@@ -904,7 +905,7 @@ export default {
             title: window.vmI18n.t('table_label.number_of_rows_per_group'),
             key: 'GROUP_EXTRACT_NUM',
             render: (h, params) => {
-              if (params.row.ID && this.statusName === '已提交') {
+              if (params.row.ID && this.statusMark === 'Y') {
                 return h(
                   'div',
                   {
@@ -1010,7 +1011,7 @@ export default {
             title: window.vmI18n.t('table_label.grouping'), // 分组
             key: 'GROUPNUM',
             render: (h, params) => {
-              if (params.row.ID && this.statusName === '已提交') {
+              if (params.row.ID && this.statusMark === 'Y') {
                 return h(
                   'div',
                   {
@@ -1543,7 +1544,7 @@ export default {
           });
         });
       } else {
-        if (this.statusName === '已提交') {
+        if (this.statusMark === 'Y') {
           this.$Message.warning(window.vmI18n.t('modalTips.u8')); // 已提交的组合商品不能修改！
           return false;
         }
@@ -1738,7 +1739,7 @@ export default {
       const selectcuu = []; // 存放选中的
       const selectTableRow = []; //
       if (this.objid !== '-1') {
-        if (this.statusName === '已提交') {
+        if (this.statusMark === 'Y') {
           this.$Message.warning(window.vmI18n.t('modalTips.u9')); // 已提交的组合商品不能执行删除！
           return;
         }
@@ -1806,7 +1807,7 @@ export default {
       const selectTableRow = []; // 存放选中的
       const selectdedidata = []; // 修改页面之前保存的数据
       if (this.objid !== '-1') {
-        if (this.statusName === '已提交') {
+        if (this.statusMark === 'Y') {
           this.$Message.warning(window.vmI18n.t('modalTips.u9')); // 已提交的组合商品不能执行删除！
           return;
         }
@@ -2075,11 +2076,13 @@ export default {
       if (CurrentData) {
         if (CurrentData.psCPro) {
           if (CurrentData.psCPro.ISACTIVE === 'Y') {
-            this.statusName = '已提交'; // 提交状态
+            this.statusName = window.vmI18n.t('common.submitted'); // '已提交';
+            this.statusMark = 'Y'; // 提交状态
             this.changeReadStatus();
           }
           if (CurrentData.psCPro.ISACTIVE === 'N') {
-            this.statusName = '已作废'; // 作废状态
+            this.statusName = window.vmI18n.t('common.voided'); // '已作废';
+            this.statusMark = 'N'; // 作废状态
             this.formConfig1.formData.forEach(item => {
               if (item.label === window.vmI18n.t('table_label.productNo')) {
                 item.disabled = true;
