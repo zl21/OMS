@@ -1,39 +1,33 @@
 <template>
-  <div class="createGrn">
-    <div class="form-body">
+  <div 
+    class="semiCustomModal"
+    style="width: 400px;"
+  >
+    <div class="Modal-Form">
       <p v-if="isError">
         {{ errorMessage }}
       </p>
-      <Form
-        v-if="!isError"
-        :label-width="120"
-      >
-        <FormItem label="档期日程归属">
-          <DropDownSelectFilter
-            :single="true"
-            :data="datas"
-            :auto-data="autoData"
-            :columns="columns"
-            :default-selected="defaultSelected"
-            @on-fkrp-selected="fkrpSelected"
-            @on-clear="clear"
-          />
-        </FormItem>
-        <FormItem label="运输方式">
-          <!-- <Select v-model="transportStyle">
-            <Option value="1">
-              汽运
-            </Option>
-            <Option value="2">
-              空运
-            </Option>
-          </Select> -->
-          <Input
-            v-model="transportStyle.text"
-            disabled
-          /></Input>
-        </FormItem>
-      </Form>
+      <div class="Modal-Form-Item">
+        <!-- 档期日程归属 -->
+        <label>{{ vmI18n.t("form_label.scheduleOwnership") }}:</label>
+        <DropDownSelectFilter
+          :single="true"
+          :data="datas"
+          :auto-data="autoData"
+          :columns="columns"
+          :default-selected="defaultSelected"
+          @on-fkrp-selected="fkrpSelected"
+          @on-clear="clear"
+        />
+      </div>
+      <div class="Modal-Form-Item">
+        <!--  运输方式 -->
+        <label>{{ vmI18n.t("form_label.transportationMode") }}:</label>
+        <Input
+          v-model="transportStyle.text"
+          disabled
+        />
+      </div>
     </div>
 
     <businessButton :btn-config="btnConfig" />
@@ -100,7 +94,7 @@
       };
     },
     mounted() {
-      this.init();
+      // this.init();
     },
     methods: {
       determine() {
