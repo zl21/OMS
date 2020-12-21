@@ -1936,7 +1936,8 @@ export default {
   computed: {
     // 同步计算申请退款金额
     applyAmt() {
-      return this.reForm.config.filter(item => item.item.label == this.vmI18n.t('form_label.refundAmount')).item.props.value;
+      // return this.reForm.config.filter(item => item.item.label == this.vmI18n.t('form_label.refundAmount')).item.props.value;
+      return this.reForm.config.filter(item => item.item.label == this.vmI18n.t('form_label.refundAmount'));
     },
   },
   watch: {
