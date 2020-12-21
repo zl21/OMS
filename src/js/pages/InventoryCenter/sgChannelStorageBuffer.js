@@ -157,7 +157,7 @@ export default {
             key: 'DEL_STATUS'
           },
           {
-            title: window.vmI18n.t('table_label.creationDate'), // '创建时间',
+            title: window.vmI18n.t('table_label.creationTime'), // '创建时间',
             key: 'CREATIONDATE'
           } /* ,
             {

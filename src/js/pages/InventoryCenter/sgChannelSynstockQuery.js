@@ -312,7 +312,7 @@ export default {
             key: 'PS_C_SKU_ECODE'
           },
           {
-            title: window.vmI18n.t('table_label.shopNam'), // '店铺名称',
+            title: window.vmI18n.t('table_label.shopName'), // '店铺名称',
             key: 'CP_C_SHOP_TITLE'
           },
           {
