@@ -6,6 +6,34 @@
   "description": "定制页面iconfont",
   "glyphs": [
     {
+      "icon_id": "2996692",
+      "name": "下拉单选",
+      "font_class": "xialadanxuan",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "2996693",
+      "name": "下拉多选",
+      "font_class": "xialaduoxuan",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "4739870",
+      "name": "设计条件与要求",
+      "font_class": "liuchengtiaojian",
+      "unicode": "e6b2",
+      "unicode_decimal": 59058
+    },
+    {
+      "icon_id": "6183154",
+      "name": "流程",
+      "font_class": "flow-line",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
       "icon_id": "902029",
       "name": "标签",
       "font_class": "huodong",
@@ -25,13 +53,6 @@
       "font_class": "jibenxinxi",
       "unicode": "e67c",
       "unicode_decimal": 59004
-    },
-    {
-      "icon_id": "10595638",
-      "name": "流程清单-状态-已发流程_jurassic",
-      "font_class": "liuchengtiaojian",
-      "unicode": "e6b2",
-      "unicode_decimal": 59058
     },
     {
       "icon_id": "11641868",
