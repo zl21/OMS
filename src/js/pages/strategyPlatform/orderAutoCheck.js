@@ -146,7 +146,7 @@ export default {
       // TODO refcolid
       const query = new FormData();
       query.append('searchdata', JSON.stringify({
-        refcolid: 167630,
+        refcolid: 169275,
         isdroplistsearch: true,
         column_include_uicontroller: true,
         startindex: (this.CP_C_LOGISTICS_ID_SELECT.start - 1) * this.pageSize, // 起始下标
@@ -382,12 +382,12 @@ export default {
       const formdata = new FormData();
       // const query = {
       //   ak: e.trim(),
-      //   colid: 167630, // 排除物流公司
+      //   colid: 169275, // 排除物流公司
       //   fixedcolumns: {},
       // };
       // formdata.append('searchdata', JSON.stringify(query));
       formdata.append('ak', e.trim());
-      formdata.append('colid', 167630);
+      formdata.append('colid', 169275);
       formdata.append('fixedcolumns', JSON.stringify({}));
       const res = await this.service.common.fuzzyquerybyak(formdata);
       if (res.data.code == 0) {
