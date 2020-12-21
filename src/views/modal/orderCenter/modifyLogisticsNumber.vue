@@ -1,8 +1,13 @@
 <template>
-  <div class="modifyLogisticsNumber">
-    <div class="form">
-      <label>修改物流单号 : </label>
-      <Input v-model="sticsNumber" />
+  <div 
+    class="semiCustomModal" 
+    style="width: 400px;"
+  >
+    <div class="Modal-Form">
+      <div class="Modal-Form-Item">
+        <label>修改物流单号 : </label>
+        <Input v-model="sticsNumber" />
+      </div>
     </div>
     <businessButton :btn-config="btnConfig" />
   </div>

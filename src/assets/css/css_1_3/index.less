@@ -2,7 +2,6 @@
 
 body {
   margin: 0;
-
   // page
   .ark-select-small.ark-select-single .ark-select-selection .ark-select-placeholder,
   .ark-select-small.ark-select-single .ark-select-selection .ark-select-selected-value {
@@ -1109,7 +1108,6 @@ body {
 .ark-collapse-content>.ark-collapse-content-box {
   padding-top: 0px !important;
 }
-
 .jq-combined-commodity,
 .horizontalTableDetail,
 .auto-check,
@@ -1132,21 +1130,18 @@ body {
     &>.ark-collapse-item {
       border-top: none;
       margin-bottom: 10px;
-
-      &.ark-collapse-item-active {
-        &>.ark-collapse-header {
-          &>i {
-            left: 8px;
-
-            &.ark-icon:before {
-              width: 3px;
-              height: 14px;
-              border-radius: 3px;
+      &.ark-collapse-item-active{
+          &>.ark-collapse-header {
+            &>i {
+              left: 8px;
+              &.ark-icon:before{
+                width: 3px;
+                height: 14px;
+                border-radius: 3px;
+              }
             }
           }
-        }
       }
-
       &>.ark-collapse-header {
         text-align: left;
         padding: 0 20px;
@@ -1165,15 +1160,14 @@ body {
           top: 50%;
           left: 8px;
           transform: translateY(-50%);
-
-          &.ark-icon:before {
+          &.ark-icon:before{
             display: block;
             content: "";
             width: 8px;
             height: 4px;
             border-radius: 3px;
             background: #fd6442;
-            transition: all .5s;
+            transition: all .5s ;
           }
         }
 
@@ -1183,7 +1177,7 @@ body {
         padding: 10px 16px;
         border: 1px solid #f7f8fa;
       }
-
+      
     }
   }
 }
@@ -1479,33 +1473,26 @@ body {
     padding-right: 20px;
   }
 }
-
-.ag-bl-overlay {
+.ag-bl-overlay{
   top: 65px;
 }
-
-.ark-table-body .ark-table-tfoot {
+.ark-table-body .ark-table-tfoot{
   transform: inherit !important;
 }
-
-.ark-table-tfoot tr:first-child td {
+.ark-table-tfoot tr:first-child td{
   border-top: none;
 }
-
 // .ark-table-border th,.ark-table-border td{
 //   box-sizing: content-box;
 // }
 // 标准界面 详情页 page修改
-.TableDetailCollection {
+.TableDetailCollection{
   position: relative;
   padding-bottom: 40px;
-
-  .ark-table-border th,
-  .ark-table-border td {
+  .ark-table-border th,.ark-table-border td{
     box-sizing: border-box;
   }
-
-  .page-buttons .table-page {
+  .page-buttons .table-page{
     position: absolute;
     bottom: 0;
     left: 0;
@@ -1516,191 +1503,151 @@ body {
     justify-content: center;
   }
 }
-
 .color_container {
-  .right_container .right_input {
+  .right_container .right_input{
     position: relative;
     padding-left: 115px;
-
     .ark-input-wrapper {
-      input {
+      input{
         height: 28px;
       }
     }
-
-    &>button {
+    & > button{
       position: absolute;
       top: 0;
       left: 0;
-
-      &:hover {
+      &:hover{
         border: 1px solid #dcdee2;
         color: #575757;
       }
     }
   }
-
-  .center_container {
-    .iconbj_right {
-      &:before {
-        content: "\e69e";
-      }
-
-      transform: rotate(180deg);
-    }
-  }
 }
-
 // 所有弹框修改
-.importDialog.v-transfer-dom {
-  .ark-modal-footer {
-    div>div {
+.importDialog.v-transfer-dom{
+  .ark-modal-footer{
+    div > div {
       overflow: hidden;
-
-      button {
-        float: right;
+      button{
+        float: right ;
         margin-left: 10px;
         background: #fd6442;
         color: #fff;
-
-        &:hover {
+        &:hover{
           background: #fd6442;
           color: #fff;
           opacity: 1;
         }
-
-        &+button {
+        & + button{
           background: transparent;
           color: #fd6442;
-
-          &:hover {
+        
+          &:hover{
             background: #fd6442;
             color: #fff;
             opacity: 1;
           }
         }
       }
-    }
+  }
   }
 }
-
-.v-transfer-dom,
-.setGroup {
-
+.v-transfer-dom,.setGroup{
   //标准弹框
-  .ark-modal-confirm-footer,
-  .modifyButton.R3-button-group {
-    button {
-      height: 28px;
-      min-width: 50px !important;
-      padding: 0;
-
-      &:hover {
-        opacity: 1;
-        background-color: @button-transparent-hover;
-        color: @button-bg-font;
-      }
-
-      &:last-child {
+  .ark-modal-confirm-footer,.modifyButton.R3-button-group{
+    button{
+        height: 28px;
+        min-width:50px !important;
+        padding: 0;
+        &:hover{
+          opacity: 1;
+          background-color: @button-transparent-hover;
+          color: @button-bg-font;
+        }
+        &:last-child{
         background-color: @base-color;
         color: @button-bg-font;
-
-        &:hover {
-          opacity: 1;
-          background-color: @base-color;
-        }
+          &:hover{
+            opacity: 1;
+            background-color: @base-color;
+          }
       }
     }
   }
-
   // 定制弹窗
-  .one_button .buttonBox div {
-    .buttonGroup button.ark-btn {
+  .one_button .buttonBox div{
+    .buttonGroup button.ark-btn{
 
-      &>span {
+       & > span{
         vertical-align: middle !important;
-      }
-
-      &:hover {
+       }
+        &:hover{
         background-color: @button-transparent-hover;
         color: @button-bg-font;
-        border: 1px solid transparent;
+        border:1px solid transparent;
         opacity: 1;
       }
     }
-
-    &:last-child {
-      .buttonGroup button {
+    &:last-child{
+      .buttonGroup button{
         background-color: @base-color;
         color: @button-bg-font;
         opacity: 1;
-
-        &.ark-btn:hover {
+        &.ark-btn:hover{
           background-color: @base-color;
           color: @button-bg-font;
-          border: 1px solid transparent;
-          opacity: 1;
+          border:1px solid transparent;
+          opacity:1;
         }
       }
     }
   }
-
   // ark组件弹窗 按钮
-  .ark-modal-footer {
-    &>button {
-      &+button {
-        &>span {
+  .ark-modal-footer{
+    & > button{
+      & + button{
+        &> span{
           color: @button-bg-font;
         }
       }
-
-      &:hover {
+      &:hover{
         background-color: @button-transparent-hover;
-        border: 1px solid transparent;
+        border:1px solid transparent;
         opacity: 1;
-
-        &>span {
+        &> span{
           color: @button-bg-font;
         }
       }
-
-      border:1px solid @base-color;
-
-      &>span {
+      border:1px solid  @base-color;
+      &> span{
         color: @base-color;
       }
     }
   }
 }
-
 // 矩阵录入
-.ff-order-detail .el-dialog {
+.ff-order-detail .el-dialog{ 
   overflow: hidden;
-
-  button.ff-matrix-btn-cancel {
+  button.ff-matrix-btn-cancel{
     float: right;
     min-width: 50px;
     padding: 0;
-
-    &:first-child {
-      margin-left: 10px;
+    &:first-child{
+      margin-left:10px;
       background-color: @base-color;
       color: @button-bg-font;
-
-      &:hover {
+      &:hover{
         opacity: 1;
         background-color: @base-color;
       }
     }
-
-    &:hover {
+    &:hover{
       opacity: 1 !important;
       background-color: @button-transparent-hover;
       color: @button-bg-font;
     }
   }
 }
-
 // 框架内嵌定制页面(功能权限)弹框 按钮
 .modalContent .modalButton {
   width: 370px;
@@ -1708,139 +1655,63 @@ body {
   flex-direction: row-reverse;
   justify-content: flex-start;
   padding-top: 8px;
-
-  button:first-child {
+  button:first-child{
     background-color: @base-color;
     color: @button-bg-font;
   }
-
-  button:hover {
-    background-color: @base-color;
+  button:hover{
+    background-color:@base-color;
     color: @button-bg-font;
   }
 }
-
 // 定制弹框 按钮
-.modalBth {
-  .buttonBox div:last-child {
-    .buttonGroup button {
+.modalBth{
+  .buttonBox div:last-child{
+    .buttonGroup button{
       margin-right: 0;
     }
   }
 }
-
-.rk-modal-confirm-footer {
-  button:last-child {
+.rk-modal-confirm-footer{
+  button:last-child{
     background-color: @base-color;
     color: @button-bg-font;
   }
-
-  button:hover {
-    background-color: @base-color;
+  button:hover{
+    background-color:@base-color;
     color: @button-bg-font;
   }
 }
-
 .fkdialog .dialog_right .right_bottom {
   display: flex;
   justify-content: flex-end;
-
-  button+button {
+  button + button{
     order: 2;
   }
 }
-
-// 定制界面fkTable组件兼容标准页面fkTable样式 
-#dropDownSelectPopper {
-  .ark-page {
-    .ark-page-item-jump-next a {
-      color: @base-color;
+// 半定制弹框 部分公用样式
+.semiCustomModal {
+  .Modal-Form{
+    .Modal-Form-Item {
+      display: flex;
+      margin-bottom: 10px;
+      label {
+        width: 120px;
+        padding-right: 10px;
+        text-align: right;
+        line-height: 26px;
+      }
+      .ark-fkrp-select{
+        position: relative;
+        width: 100%;
+      }
     }
   }
-}
-
-.el-popover {
-  .view-fktable {
-    &>input {
-      border: 1px solid #d8d8d8;
-      height: 26px;
-      line-height: 1;
-      padding: 5px 10px;
-      border-radius: 2px;
-      margin-bottom: 5px;
-
-      &:focus {
-        border-color: #3fa5ed;
-        outline: 0;
-        box-shadow: 0 0 0 2px rgba(15, 142, 233, 0.2);
+  .one_button .buttonBox{
+    div:last-child{
+      .buttonGroup button{
+        margin-right: 0;
       }
-    }
-
-    .table {
-      tr:hover {
-        background-color: #F8F7F7;
-      }
-
-      input {
-        color: #dcdee2;
-      }
-
-      input[type=checkbox]::after {
-        display: inline-block;
-        width: 13px;
-        height: 13px;
-        line-height: 13px;
-        text-align: center;
-        position: relative;
-        top: -1px;
-        left: 0;
-        border: 1px solid @base-color;
-        border-radius: 2px;
-        background-color: @base-color;
-        transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-      }
-
-      input[type=checkbox]:checked::after {
-        content: '✔';
-        font-size: 12px;
-        color: #fff;
-      }
-    }
-
-    .page {
-      height: auto;
-
-      .el-pagination {
-        padding: 0;
-
-        button {
-          min-width: 19px;
-          height: 19px;
-          line-height: 19px;
-          margin-left: 5px;
-        }
-
-        .el-pager {
-          .more:hover {
-            color: @base-color;
-          }
-
-          .number {
-            min-width: 19px;
-            height: 19px;
-            line-height: 19px;
-            margin-left: 5px;
-
-            &.active,
-            &:hover {
-              color: @button-bg-font;
-              background-color: @base-color;
-              border-radius: 2px;
-            }
-          }
-        }
-      }
-
     }
   }
 }
