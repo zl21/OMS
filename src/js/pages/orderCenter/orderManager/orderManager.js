@@ -1348,7 +1348,7 @@ export default {
         case 'order_gh': {
           if (self.selection.length === 0) {
             self.$Message.warning({
-              content: self.vmI18n.t('modalTips.d1'), // 请选择需要替换赠品的记录！
+              content: self.vmI18n.t('modalTips.dq'), // 请选择需要替换商品的记录！
               duration: 5,
               top: 80
             });
