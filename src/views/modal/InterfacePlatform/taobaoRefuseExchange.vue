@@ -22,7 +22,7 @@
       objList: {
         type: Array
       },
-      idArr: {
+      idArray: {
         type: Array
       },
       webid: {
@@ -132,12 +132,12 @@
           this.$message.warning('拒绝换货原因不能为空');
           return;
         }
-        if (this.idArr.length === 0) {
+        if (this.idArray.length === 0) {
           this.$message.error('请先选择需要拒绝换货的单据！');
           return;
         }
         const param = {
-          ids: this.idArr,
+          ids: this.idArray,
           menu: '淘宝换货单接口',
           refuseReasonId: formValue.refuseReasonId,
           outRefuseCopywriting: formValue.outRefuseCopywriting
