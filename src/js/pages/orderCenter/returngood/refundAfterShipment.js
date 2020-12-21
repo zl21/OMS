@@ -844,7 +844,8 @@ export default {
       this.sessionStorageData = JSON.parse(customizeMessage)[this.$route.params.customizedModuleId == '41460334' ? 'undefined' : this.$route.params.customizedModuleId];
     }
     // if (this.$route.query.id && !this.$route.query.new) {
-    if (this.sessionStorageData && this.sessionStorageData.standardCustomizeButton) { // 已发货退款单详情跳转
+    // eslint-disable-next-line no-mixed-operators
+    if (this.sessionStorageData && this.sessionStorageData.standardTableurlCustomized || this.sessionStorageData.standardCustomizeButton) { // 已发货退款单详情跳转
       this.reForm.config.splice(14, 0, {
         item: {
           type: 'Input',
