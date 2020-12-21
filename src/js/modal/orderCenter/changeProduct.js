@@ -359,7 +359,7 @@ export default {
       }).then((res) => {
         console.log(res);
         if (res.data.code == 0) {
-          self.$Message.error(res.data.message);
+          self.$Message.success(res.data.message);
           this.$parent.$parent.closeConfirm();
         } else {
           self.$Modal.confirm({
