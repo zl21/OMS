@@ -233,6 +233,7 @@ export default {
               },
             }),
           });
+          this.$parent.$parent.closeConfirm();
         }
       });
     },
