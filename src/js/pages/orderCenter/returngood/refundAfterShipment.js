@@ -1640,7 +1640,7 @@ export default {
           this.returnTypeFormConfig.formData[0].itemdata.valuedata = data.OC_B_RETURN_TYPE_ENAME;
           // 退款描述
         } else if (
-          itemLabel === self.vmI18n.t('form_label.refundDescription')
+          itemLabel === self.vmI18n.t('form_label.refundDescription') && data.OC_B_RETURN_TYPE_ITEM_ID
         ) {
           await this.returnTypeChange();
           this.returnTypeItemConfig.formValue.OC_B_RETURN_TYPE_ITEM_ID = data.OC_B_RETURN_TYPE_ITEM_ID;
