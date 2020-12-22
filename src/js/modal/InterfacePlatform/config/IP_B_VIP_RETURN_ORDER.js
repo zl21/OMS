@@ -1,4 +1,5 @@
 import formatData from '@/assets/js/__utils__/date.js';
+
 export default {
   // 京东订单接口列表界面(下载订单)
   formConfig: {
@@ -74,11 +75,11 @@ export default {
     const formValue = self.downLoadFormConfig.formValue;
     const shopId = self.downLoadFormConfig.formData[0].itemdata.pid;
     if (!shopId) {
-      self.$message.error(self.vmI18n.t('modalTips.bw'));// 店铺不能为空
+      self.$message.error(self.vmI18n.t('modalTips.do'));// 店铺不能为空
       return;
     }
     if (!formValue.query_date[0] && !formValue.refund_nos) {
-      self.$message.error(self.vmI18n.t('pHolder.bw'));// 请输入平台时间或退供单号
+      self.$message.error(self.vmI18n.t('modalTips.bw'));// 请输入平台时间或退供单号
       return;
     }
     self.dialogLoad = true;
