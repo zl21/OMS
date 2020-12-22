@@ -94,6 +94,9 @@ export default {
             dimSelect: (val) => {
               this.formConfig.formValue.searchValue = val.label;
             },
+            dimClear: () => {
+              this.formConfig.formValue.searchValue = '';
+            }
           },
           {
             // label: "商品款号",
@@ -132,7 +135,9 @@ export default {
             },
             dimSelect: (val) => {
               this.formConfig.formValue.psCProEcode = val.label;
-              // this.psCProEcode = val.label;
+            },
+            dimClear: () => {
+              this.formConfig.formValue.psCProEcode = '';
             },
           },
         ],
@@ -204,7 +209,7 @@ export default {
           if (res.data.data.data.length == 0) {
             // this.$Message.warning("查询数据为空!");
             this.$Message.warning(window.vmI18n.t('modalTips.r8'));
-            elf.data = [];
+            self.data = [];
             self.tableLoading = false;
             return;
           }
