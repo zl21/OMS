@@ -862,7 +862,8 @@ export default {
     }
     // if (this.$route.query.id && !this.$route.query.new) {
     // eslint-disable-next-line no-mixed-operators
-    if (this.sessionStorageData && this.sessionStorageData.standardTableurlCustomized || this.sessionStorageData.standardCustomizeButton) { // 已发货退款单详情跳转
+    if ((this.sessionStorageData && this.sessionStorageData.standardTableurlCustomized)
+      || (this.sessionStorageData && this.sessionStorageData.standardCustomizeButton)) { // 已发货退款单详情跳转
       this.reForm.config.splice(14, 0, {
         item: {
           type: 'Input',
