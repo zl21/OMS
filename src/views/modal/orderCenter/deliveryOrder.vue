@@ -15,13 +15,12 @@
           :page-size="pageSize"
           :auto-data="autoData"
           :columns="columns"
-          :columnsKey="columnsKey"
+          :columns-key="columnsKey"
           :hidecolumns="hidecolumns"
-          :dataEmptyMessage="dataEmptyMessage"
+          :data-empty-message="dataEmptyMessage"
           @on-popper-show="onPoperShow"
           @on-page-change="onPageChange"
           @on-fkrp-selected="fkrpSelected"
-          @on-input-value-change="inputValueChange"
         />
       </div>
     </div>
