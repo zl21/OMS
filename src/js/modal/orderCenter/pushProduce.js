@@ -152,7 +152,7 @@ export default {
       columns: [
         {
           // title: "商品SKU",
-          label: window.vmI18n.t('table_label.commoditySKU'),
+          title: window.vmI18n.t('table_label.commoditySKU'),
           key: 'ECODE',
         },
         {
@@ -162,12 +162,12 @@ export default {
         },
         {
           // title: "商品SKU名称",
-          label: window.vmI18n.t('table_label.productSKUname'),
+          title: window.vmI18n.t('table_label.productSKUname'),
           key: 'SPEC',
         },
         {
           // title: "数量",
-          label: window.vmI18n.t('table_label.quantities'),
+          title: window.vmI18n.t('table_label.quantities'),
           key: 'qty',
         },
       ],
