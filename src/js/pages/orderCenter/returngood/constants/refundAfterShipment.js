@@ -100,6 +100,26 @@ const logFormConfig = {
   }]
 };
 
+// 日志table字段
+const returnLogTableConfig = [
+  {
+    key: 'IP_ADDRESS',
+    title: 'IP地址'
+  }, {
+    key: 'LOG_TYPE',
+    title: '日志类型'
+  }, {
+    key: 'LOG_MESSAGE',
+    title: '日志内容'
+  }, {
+    key: 'OWNERENAME',
+    title: '创建人姓名'
+  }, {
+    key: 'CREATIONDATE',
+    title: '创建时间'
+  }
+];
+
 const reFormDataConfig = {
   单据编号: 'BILL_NO',
   单据来源: 'REFUND_ORDER_SOURCE_TYPE',
@@ -127,5 +147,6 @@ export default {
   addItemTableColumns,
   recordTableConfig,
   logFormConfig,
+  returnLogTableConfig,
   reFormDataConfig
 };
