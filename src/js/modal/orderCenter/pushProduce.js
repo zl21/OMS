@@ -225,7 +225,6 @@ export default {
     },
     confirm() {
       const self = this;
-      this.btnConfig.buttons[1].disabled = true;
       let url = '/api/cs/oc/oms/v1/batchAddGoods'; // 添加商品接口
       const result = {};
       if (self.componentData.a_2.length == 0) {
