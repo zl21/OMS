@@ -1619,7 +1619,7 @@ export default {
         _this.qtyRefundEditFlag = false;
       }
       // 设置颜色尺码是否可编辑
-      if ([20].includes(returnStatus)) {
+      if ([20].includes(returnStatus) || (this.$route.query.flag === 'RefundToExchange' && ([20, 30, 50].includes(returnStatus)))) {
         _this.clrAndSizeFlag = true;
         _this.returnIdEditFlag = true;
       } else {
