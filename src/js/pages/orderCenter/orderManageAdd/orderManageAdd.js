@@ -155,7 +155,7 @@ export default {
             premtype: 'CP_C_SHOP_PERMISSION_ID',
             refcol: 'ID',
             iswrite: 'true',
-          }, ],
+          },],
         },
       },
 
@@ -255,7 +255,7 @@ export default {
               // 如果是丢单复制或者复制订单的保存，传被复制订单的id
               // 如果为丢单复制,则新增一个标识
               const copyTitle = { 
-丢单复制: '1', 原单无效复制: '2', 错发复制: '3', 漏发复制: '4', 赠品出库复制: '5' 
+'Drop-out copy': '1', oriInvalidCopy: '2', OrderWrongCopy: '3', OrderMissSendCopy: '4', OrderGiftsOutCopy: '5' 
 };
               if (copyID.orderCopy) {
                 data.type = copyTitle[this.$route.query.pageTitle];
@@ -1169,7 +1169,7 @@ export default {
         label: window.vmI18n.t('panel_label.order_detailed'), // 订单明细
         value: '1',
         isShow: true,
-      }, ],
+      },],
       labelDefaultValue: '1', // 设置tab默认值
       orderNo: {
         refFuns: 'confirmFun',
@@ -1467,7 +1467,7 @@ export default {
               selection: `${self.vmI18n.t('other.total')}:`, // 合计
               REAL_AMT: amt,
               QTY: qty,
-            }, ];
+            },];
           } else {
             self.$Message.warning(res.data.message);
           }
@@ -1705,7 +1705,7 @@ export default {
           QTY: Num.trim(),
           REAL_AMT: '',
           IS_GIFT: -1,
-        }, ];
+        },];
       }
       if (ecode || value) {
         const ocBorderDto = Object.assign(
@@ -1809,7 +1809,7 @@ export default {
                       selection: `${self.vmI18n.t('other.total')}:`, // 合计
                       REAL_AMT: amt,
                       QTY: qty,
-                    }, ];
+                    },];
                     // self.$children.$children.refreshData();
                     self.$children
                       .find(item => item.name === 'matrixBox')
@@ -2012,7 +2012,7 @@ export default {
               selection: `${self.vmI18n.t('other.total')}:`, // 合计
               REAL_AMT: amt,
               QTY: qty,
-            }, ];
+            },];
           }
         }
       }
@@ -2072,7 +2072,7 @@ export default {
                       selection: `${self.vmI18n.t('other.total')}:`, // 合计
                       REAL_AMT: amt,
                       QTY: qty,
-                    }, ];
+                    },];
 
                     // 动态添加总条数
                     self.jordanTableConfig.total = result.data.data.total;
