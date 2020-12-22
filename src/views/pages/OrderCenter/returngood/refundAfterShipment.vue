@@ -86,6 +86,7 @@
             <!-- 退款单详情 -->
             {{ vmI18n.t("panel_label.refundSlipDetails") }}
           </p>
+          <p :class="navStatus === 1 ? 'action' : ''" v-if="$route.query.customizedModuleId !== 'New'" @click="navStatus = 1">日志</p>
         </div>
         <div
           v-show="navStatus === 0"
@@ -102,6 +103,13 @@
             @table-add-detail="tableAddDetail"
             @table-delete-detail="tableDeleteDetail"
           />
+        </div>
+        <!-- 日志 -->
+        <div class="re_table" v-show="navStatus === 1">
+          <reTable
+            v-loading="returnLogTableLoad"
+            :jordanTableConfig="returnLogTableConfig"
+          ></reTable>
         </div>
       </div>
       <div class="queryorderB">

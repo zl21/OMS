@@ -4,6 +4,7 @@ import reTable from 'professionalComponents/businessActionTable';
 import reForm from 'professionalComponents/businessForm';
 import commonUtil from '@/assets/js/__utils__/common';
 import comUtils from '@/assets/js/__utils__/common';
+import axios from 'axios';
 import refundAfterShipment from './constants/refundAfterShipment';
 
 export default {
@@ -836,6 +837,22 @@ export default {
       selectOptions: {
         payType: [],
       },
+      returnLogTableLoad: false,
+      returnLogTableConfig: {
+        columns: refundAfterShipment.returnLogTableConfig,
+        data: [],
+        pageShow: false, // 控制分页是否显示
+        btnsShow: false, // 控制操作按钮是否显示
+        searchInputShow: false, // 控制搜索框是否显示
+        indexColumn: true,
+        width: '', // 表格宽度
+        height: '', // 表格高度
+        border: true, // 是否显示纵向边框
+        total: 0, // 设置总条数
+        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSize: 10, // 每页条数
+        current: '', // 当前页
+      },
     };
   },
   mounted() {
@@ -886,9 +903,52 @@ export default {
         });
       });
     }
+    if(this.$route.params.customizedModuleId !== 'New') {
+      this.logTableInfo();
+    }
     this.getDownUp();
   },
   methods: {
+    // 日志明细请求
+    async logTableInfo() {
+      this.returnLogTableLoad = true;
+      const query = {
+        ocBReturnAfSendId: this.$route.params.customizedModuleId
+      };
+      const res = await this.service.orderCenter.extraReturnTableLogQuery(query);
+      this.returnLogTableLoad = false;
+      if (res.data.code === 0) {
+        const resData = res.data.data;
+        const dateFormat = this.$comUtils.dateFormat;
+        resData.forEach(val => {
+          val.CREATIONDATE = dateFormat(new Date(val.CREATIONDATE || ''), 'yyyy-MM-dd hh:mm:ss');
+        });
+        this.returnLogTableConfig.data = resData;
+        this.returnLogTableConfig.total = resData.length;
+      } else {
+        this.$Message.error('日志明细请求失败');
+      }
+      // axios({
+      //   url: this.$httpApi.order.extraReturnTableLogQuery,
+      //   methods: 'get',
+      //   params: {
+      //     ocBReturnAfSendId: this.$route.params.customizedModuleId
+      //   }
+      // }).then(res => {
+      //   this.returnLogTableLoad = false;
+      //   if (res.data.code === 0) {
+      //     const resData = res.data.data;
+      //     const dateFormat = this.$comUtils.dateFormat;
+      //     resData.forEach(val => {
+      //       val.CREATIONDATE = dateFormat(new Date(val.CREATIONDATE || ''), 'yyyy-MM-dd hh:mm:ss');
+      //     });
+      //     this.returnLogTableConfig.data = resData;
+      //     this.returnLogTableConfig.total = resData.length;
+      //   } else {
+      //     this.$Message.error('日志明细请求失败');
+      //   }
+      // });
+    },
     billTypeChange(val) {
       // 退款完成的订单不进行操作
       if (this.RETURN_STATUS === 2) return;

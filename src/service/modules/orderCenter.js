@@ -92,7 +92,7 @@ export default {
   distributionChangeTag: params => network.post('/api/cs/vip/distribution/v1/changeTag', params), // 配货单换吊牌的保存
   managementOrderHold: params => network.post('/api/cs/oc/oms/v1/holdOrder', params), // 零售发货单-HOLD单
   returnTypeItemquery: params => network.post('/p/cs/objectTableItem', params), // 退款分类-退款分类描述
-  extraReturnTableLogQuery: params => network.post('/api/cs/oc/oms/v1/getOcBReturnAfSendLog', params), // 额外退款单-额外退款单日志
+  extraReturnTableLogQuery: params => network.get(`/api/cs/oc/oms/v1/getOcBReturnAfSendLog?${qs.stringify(params)}`), // 额外退款单-额外退款单日志
   modifyReturnOrderWarehouse: params => network.post('/api/cs/oc/oms/v1/modifyReturnOrderWarehouse', params), // 退换货单修改退回仓库
   checkCancelParams: params => network.post('/api/cs/oc/oms/v1/checkCancelParams', params), // 检查接口
   checkBeforeCreateVipDelivery: params => network.post('/api/cs/vip/distribution/v1/checkBeforeCreateVipDelivery', params), // 创建出仓单初始化接口
@@ -104,7 +104,7 @@ export default {
   getOrderId: params => network.post('/api/cs/oc/oms/v1/getOrderId', params), // 根据平台单号,查询零售发货单id
   examineTheRefundAfterDelivery: params => network.post('/api/cs/oc/oms/v1/examineTheRefundAfterDelivery', params), // 额外退款审核
   refuseToPayOcBReturnAfSend: params => network.post('/api/cs/oc/oms/v1/refuseToPayOcBReturnAfSend', params), // 拒绝打款
-  pickOrderExport: params => network.post('/api/cs/vip/pick/v1/export', params),  
+  pickOrderExport: params => network.post('/api/cs/vip/pick/v1/export', params),
   // 半定制弹框
   updateWarehouse: params => network.post('/api/cs/oc/oms/v1/updateWarehouse', params),
   getQueryList: params => network.post('/api/cs/oc/oms/v1/getQueryList', params)
