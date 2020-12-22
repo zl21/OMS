@@ -158,7 +158,8 @@ export default {
       const data = this.tableConfig.data;
       const d = data.find(item => item.ECODE === obj.ECODE);
       if (d) {
-        d.QTY = parseInt(d.QTY) + parseInt(obj.QTY);
+        // d.QTY = parseInt(d.QTY) + parseInt(obj.QTY);
+        d.QTY = parseInt(obj.QTY); // 计算逻辑与列表页添加赠品同步
         this.tableConfig.data = [...data];
         this.onRowData = this.tableConfig.data[0];
       } else {

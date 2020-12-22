@@ -52,8 +52,7 @@ export default {
             key: 'IS_DELETE',
             // title: "操作",
             title: window.vmI18n.t('table_label.operation'),
-            render: (h, params) =>
-              h(
+            render: (h, params) => h(
                 'a',
                 {
                   on: {
