@@ -236,7 +236,7 @@ export default {
     // 替换商品
     replaceGoodsDetail() {
       if (this.checkSelection.length !== 1) {
-        this.$Message.warning('目前仅支持单条商品替换！');
+        this.$Message.warning('请选择一条需要替换的明细!');
         return;
       }
       this.$emit('replaceGoodsDetail', this.checkSelection);

@@ -68,7 +68,7 @@ export default {
       return;
     }
     if (!self.downLoadFormConfig.formValue.query_date[0]) {
-      self.$Message.warning(this.vmI18n.t('modalTips.br'));// 请选择需要下载的查询时间
+      self.$Message.warning(self.vmI18n.t('modalTips.br'));// 请选择需要下载的查询时间
       return;
     }
     let startTime = self.downLoadFormConfig.formValue.query_date[0];

@@ -35,7 +35,7 @@ export default {
             btnclick: () => {
               const self = this;
               let promptMessage = ''; // 非空提示信息
-              const formData = formData;
+              const formData = this.warehouseManagementFromConfig.formData;
               if (!formData[0].itemdata.pid) {
                 // promptMessage = "店铺";
                 promptMessage = window.vmI18n.t('other.shop');
@@ -92,7 +92,7 @@ export default {
           DELIVERYTYPE: '',
         },
         ruleValidate: {
-          DELIVERYTYPE: [{ required: true }],
+          DELIVERYTYPE: [{ required: true, message: ' ' }],
         },
         formData: [
           {
