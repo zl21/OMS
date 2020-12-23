@@ -111,7 +111,7 @@ export default {
     const fromdata = new FormData();
     fromdata.append('param', JSON.stringify(param));
     // 寻仓订单下载
-    const { data: { code, message } } = await self.service.interfacePlatform.refundDownload(fromdata);
+    const { data: { code, message } } = await self.service.interfacePlatform.downLoadVipDelivery(fromdata);
     if (code === 0) {
       self.$Message.success(message);
       self.$emit('confirmImport');
