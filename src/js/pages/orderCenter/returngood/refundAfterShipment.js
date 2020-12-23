@@ -537,15 +537,6 @@ export default {
             },
           },
           {
-            text: window.vmI18n.t('btn.audit'), // 审核
-            // class: 'save',
-            // icon: 'md-download',
-            disabled: this.$route.params.customizedModuleId === 'New',
-            btnclick: () => {
-              this.audit();
-            },
-          },
-          {
             text: window.vmI18n.t('btn.back'), // 返回
             // class: 'cancel',
             // icon: 'md-arrow-round-back',
@@ -582,6 +573,15 @@ export default {
             },
           },
         ],
+      },
+      auditBtn: {
+        text: window.vmI18n.t('btn.audit'), // 审核
+        // class: 'save',
+        // icon: 'md-download',
+        disabled: this.$route.params.customizedModuleId === 'New',
+        btnclick: () => {
+          this.audit();
+        },
       },
       tableConfig: {
         // jordanBtnConfig: {
@@ -856,6 +856,7 @@ export default {
     };
   },
   mounted() {
+    this.handleAuditBtnDisplay();
     const customizeMessage = sessionStorage.getItem('customizeMessage');
     if (customizeMessage) {
       this.sessionStorageData = JSON.parse(customizeMessage)[this.$route.params.customizedModuleId == '41460334' ? 'undefined' : this.$route.params.customizedModuleId];
@@ -904,12 +905,18 @@ export default {
         });
       });
     }
-    if(this.$route.params.customizedModuleId !== 'New') {
+    if (this.$route.params.customizedModuleId !== 'New') {
       this.logTableInfo();
     }
     this.getDownUp();
   },
   methods: {
+    // 处理审核按钮的展示 已发货退款单-审核按钮隐藏
+    handleAuditBtnDisplay() {
+      if (this.$store.state.global.activeTab.label.indexOf('已发货退款单') < 0) {
+        this.btnConfig.buttons.splice(1, 0, this.auditBtn);
+      }
+    },
     // 日志明细请求
     async logTableInfo() {
       this.returnLogTableLoad = true;
