@@ -1518,25 +1518,30 @@ body {
 }
 
 .color_container {
-  .right_container .right_input {
+  .right_container .right_input{
     position: relative;
     padding-left: 115px;
-
     .ark-input-wrapper {
-      input {
+      input{
         height: 28px;
       }
     }
-
-    &>button {
+    & > button{
       position: absolute;
       top: 0;
       left: 0;
-
-      &:hover {
+      &:hover{
         border: 1px solid #dcdee2;
         color: #575757;
       }
+    }
+  }
+  .center_container{
+    .iconbj_right{
+      &:before{
+        content: "\e69e";
+      }
+      transform: rotate(180deg);
     }
   }
 }
@@ -1783,7 +1788,7 @@ body {
     &>input {
       border: 1px solid #d8d8d8;
       height: 26px;
-      line-height: 1;
+      line-height: 1; 
       padding: 5px 10px;
       border-radius: 2px;
       margin-bottom: 5px;
