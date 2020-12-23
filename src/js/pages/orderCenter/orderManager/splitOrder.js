@@ -277,6 +277,7 @@ export default {
         item._index = undefined;
         item.orig_order_id = self.$route.params.customizedModuleId;
         self.onSelectData[0].total = Number(item.split_num) + Number(self.onSelectData[0].total);
+        item.waiting_split_num = item.split_num;
         // self.data[0][0].total -= item.split_num;
       });
       // 更新原单拆单数量
@@ -334,6 +335,29 @@ export default {
     switchList(index) {
       const self = this;
       self.dataIndex = index;
+    },
+    // 撤销
+    undo(index) {
+      console.log(this.data);
+      const map = new Map();
+      this.data[index].forEach(item=>{
+        map.set(item.orig_order_item_id, item);
+      });
+      console.log(map);
+      this.data[0].forEach(item=>{
+        if (map.get(item.orig_order_item_id)) {
+          item.split_num += Number(map.get(item.orig_order_item_id).split_num);
+          item.waiting_split_num += Number(map.get(item.orig_order_item_id).waiting_split_num);
+          map.delete(item.orig_order_item_id);
+        }
+      });
+      map.forEach(value => {
+        this.data[0].push(value);
+      });
+      this.$nextTick(()=>{
+        this.data.splice(index, 1);
+      this.switchList(0);
+      });
     }
   },
   computed: {
