@@ -213,7 +213,7 @@ export default {
         data: result,
       }).then((res) => {
         if (res.data.code == 0) {
-          self.$Message.error(res.data.message);
+          self.$Message.success(res.data.message);
           self.$parent.$parent.$parent.getData();
           this.$parent.$parent.closeConfirm();
         } else if (res.data.code == -1) {
