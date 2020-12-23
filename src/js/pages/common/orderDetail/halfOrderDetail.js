@@ -380,7 +380,9 @@ export default {
         });
       }
       if (e.detail.type !== 'save') return;
-      this.save = true;
+      if (e.detail.itemTableParame) {
+        this.save = true;
+      }
     },
     saveAmendData() {
       if (Object.keys(this.amend).length === 0 && Object.keys(this.bodyChangeData).length === 0) {
