@@ -1,4 +1,3 @@
-
 import CustomTable from 'framework/components/table/customTable.vue';
 import matrix from '@/views/pages/common/orderDetail/matrix.vue';
 import DragDialog from 'framework/components/dialog/dragDialog.vue';
@@ -25,7 +24,7 @@ export default {
     isdisabled: {
       type: Boolean
     }, // 用于判断状态是否变更
-    editsave: Boolean, // 判断编辑的时候主表是否保存完毕
+    editsave: Boolean // 判断编辑的时候主表是否保存完毕
   },
   data() {
     return {
@@ -67,11 +66,11 @@ export default {
       updateTypeArr: [
         {
           key: 0,
-          showName: window.vmI18n.t('table_label.discount'), // 折扣
+          showName: window.vmI18n.t('table_label.discount') // 折扣
         },
         {
           key: 1,
-          showName: window.vmI18n.t('form_label.price'), // '价格'
+          showName: window.vmI18n.t('form_label.price') // '价格'
         }
       ],
       loading: false, // 加载动态
@@ -91,7 +90,7 @@ export default {
         backBtn: true, // 是否显示返回按钮
         errorList: [
           {
-            message: window.vmI18n.t('modalTips.a0'), // '是否保存已经修改的数据?'
+            message: window.vmI18n.t('modalTips.a0') // '是否保存已经修改的数据?'
           }
         ] // 提示内容
       }, // 警告弹出框信息
@@ -149,7 +148,8 @@ export default {
     save(val) {
       if (val) {
         this.activeSub = false; // 改变高亮行
-        this.saveAmendData().then((res) => {
+        this.saveAmendData()
+          .then(res => {
             if (res === 1) return; // 空保存
             const resData = res.data;
             if (resData.code === 0) {
@@ -190,7 +190,7 @@ export default {
     }, // 保存数据
     editsave(val) {
       if (val && !this.isDialogMatrixSave) {
-        this.saveAmendData().then((res) => {
+        this.saveAmendData().then(res => {
           // 保存数据
           const resData = res.data;
           if (resData.code === 0) {
@@ -244,7 +244,7 @@ export default {
       formdata.append('table', this.$route.params.tableName);
       formdata.append('objid', this.$route.params.itemId);
 
-      this.service.orderCenter.amendBody(this.tablename, formdata).then((res) => {
+      this.service.orderCenter.amendBody(this.tablename, formdata).then(res => {
         if (res.data.code === 0) {
           this.getData();
           this.save = false;
@@ -263,7 +263,7 @@ export default {
     detailImport() {
       this.fileImport = true;
       const arr = [];
-      this.tBody.map((obj) => {
+      this.tBody.map(obj => {
         if (obj.checked) arr.push(obj.ID);
       });
       const searchdata = {
@@ -274,23 +274,24 @@ export default {
           ID: arr.length === 0 ? null : arr
         }
       };
-      this.service.orderCenter.export({
-        searchdata: JSON.stringify(searchdata),
-        filename: this.selectItem.tabledesc,
-        filetype: '.xlsx',
-        showColumnName: true
-      })
-      // axios({
-      //   url: "/p/outpro/export",
-      //   method: "post",
-      //   data: {
-      //     searchdata: JSON.stringify(searchdata),
-      //     filename: this.selectItem.tabledesc,
-      //     filetype: ".xlsx",
-      //     showColumnName: true
-      //   }
-      // })
-        .then((res) => {
+      this.service.orderCenter
+        .export({
+          searchdata: JSON.stringify(searchdata),
+          filename: this.selectItem.tabledesc,
+          filetype: '.xlsx',
+          showColumnName: true
+        })
+        // axios({
+        //   url: "/p/outpro/export",
+        //   method: "post",
+        //   data: {
+        //     searchdata: JSON.stringify(searchdata),
+        //     filename: this.selectItem.tabledesc,
+        //     filetype: ".xlsx",
+        //     showColumnName: true
+        //   }
+        // })
+        .then(res => {
           this.fileImport = false;
           const data = res.data;
           if (data.code === 0) {
@@ -303,7 +304,7 @@ export default {
             });
           }
         })
-        .catch((res) => {
+        .catch(res => {
           store.commit('errorDialog', {
             // 其它报错
             message: res.data.message
@@ -332,14 +333,7 @@ export default {
       this.activeSub = false; // 改变高亮行
       this.orderby = [
         {
-          column: `${
-            this.tablename === 'DL_B_PAND'
-              || this.tablename === 'DL_B_INV_ADJ'
-              || this.tablename === 'DL_B_INV_ADJ_WORK_PICK'
-              || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS'
-              ? port[this.tablename].virtualName
-              : port[this.tablename].tableName
-          }.${this.tHead[index].name}`,
+          column: `${this.tablename === 'DL_B_PAND' || this.tablename === 'DL_B_INV_ADJ' || this.tablename === 'DL_B_INV_ADJ_WORK_PICK' || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS' ? port[this.tablename].virtualName : port[this.tablename].tableName}.${this.tHead[index].name}`,
           asc: true
         }
       ];
@@ -349,14 +343,7 @@ export default {
       this.activeSub = false; // 改变高亮行
       this.orderby = [
         {
-          column: `${
-            this.tablename === 'DL_B_PAND'
-              || this.tablename === 'DL_B_INV_ADJ'
-              || this.tablename === 'DL_B_INV_ADJ_WORK_PICK'
-              || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS'
-              ? port[this.tablename].virtualName
-              : port[this.tablename].tableName
-          }.${this.tHead[index].name}`,
+          column: `${this.tablename === 'DL_B_PAND' || this.tablename === 'DL_B_INV_ADJ' || this.tablename === 'DL_B_INV_ADJ_WORK_PICK' || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS' ? port[this.tablename].virtualName : port[this.tablename].tableName}.${this.tHead[index].name}`,
           asc: false
         }
       ];
@@ -364,7 +351,7 @@ export default {
     }, // 降序
     checkChange() {
       const arr = [];
-      this.tBody.map((obj) => {
+      this.tBody.map(obj => {
         if (obj.checked) arr.push(obj);
       });
       this.$emit('checkData', arr); // 向上传递选中的数据
@@ -381,26 +368,29 @@ export default {
       this.amend = val;
     },//保存弹框 */
     bigSave(e) {
+      console.log(e);
+      if (e.detail.type == 'refresh') {
+        // 刷新字表
+        if (this.queryListPort) return;
+        this.activeSub = false;
+        this.visible = false;
+        this.getData().then(() => {
+          if (this.tBody.length == 0) return;
+          this.visible = true; // 显示弹框
+        });
+      }
       if (e.detail.type !== 'save') return;
       this.save = true;
     },
     saveAmendData() {
-      if (
-        Object.keys(this.amend).length === 0
-        && Object.keys(this.bodyChangeData).length === 0
-      ) { return Promise.resolve(1); } // 无变化
+      if (Object.keys(this.amend).length === 0 && Object.keys(this.bodyChangeData).length === 0) {
+        return Promise.resolve(1);
+      } // 无变化
       const data = {};
-      data[
-        `${
-          this.tablename === 'DL_B_TRAN_OUT'
-          || this.tablename === 'DL_B_TRAN_OUT_POS'
-            ? port[this.tablename].special
-            : port[this.tablename].tableName
-        }`
-      ] = [];
+      data[`${this.tablename === 'DL_B_TRAN_OUT' || this.tablename === 'DL_B_TRAN_OUT_POS' ? port[this.tablename].special : port[this.tablename].tableName}`] = [];
       /* 右边矩阵保存参数 */
       if (Object.keys(this.amend).length !== 0) {
-        Object.keys(this.amend).map((keys) => {
+        Object.keys(this.amend).map(keys => {
           const obj = this.amend[keys];
           const tableObj = {
             ID: obj.ID === undefined ? -1 : obj.ID, // 子表ID
@@ -418,33 +408,19 @@ export default {
               tableObj.OLD_QTY_BILL = obj.MATRIX_DATA.OLD_QTY_BILL;
             }
           }
-          data[
-            `${
-              this.tablename === 'DL_B_TRAN_OUT'
-              || this.tablename === 'DL_B_TRAN_OUT_POS'
-                ? port[this.tablename].special
-                : port[this.tablename].tableName
-            }`
-          ].push(tableObj);
+          data[`${this.tablename === 'DL_B_TRAN_OUT' || this.tablename === 'DL_B_TRAN_OUT_POS' ? port[this.tablename].special : port[this.tablename].tableName}`].push(tableObj);
         });
       }
       /* 左边列表保存参数 */
       if (Object.keys(this.bodyChangeData).length !== 0) {
-        Object.keys(this.bodyChangeData).map((keys) => {
+        Object.keys(this.bodyChangeData).map(keys => {
           const obj = {
             PS_C_PRO_ECODE: this.bodyChangeData[keys].PS_C_PRO_ECODE
           };
-          this.changeFields.map((list) => {
+          this.changeFields.map(list => {
             obj[list] = this.bodyChangeData[keys][list];
           });
-          data[
-            `${
-              this.tablename === 'DL_B_TRAN_OUT'
-              || this.tablename === 'DL_B_TRAN_OUT_POS'
-                ? port[this.tablename].special
-                : port[this.tablename].tableName
-            }`
-          ].push(obj);
+          data[`${this.tablename === 'DL_B_TRAN_OUT' || this.tablename === 'DL_B_TRAN_OUT_POS' ? port[this.tablename].special : port[this.tablename].tableName}`].push(obj);
         });
       }
       if (Object.keys(this.singleData).length !== 0) {
@@ -453,14 +429,7 @@ export default {
         obj.PS_C_SKU_ECODE = this.singleData[port[this.tablename].queryObjSave].PS_C_SKU_ECODE;
         obj.PS_C_SKU_ID = this.singleData[port[this.tablename].queryObjSave].PS_C_SKU_ID;
         obj.QTY = 1;
-        data[
-          `${
-            this.tablename === 'DL_B_TRAN_OUT'
-            || this.tablename === 'DL_B_TRAN_OUT_POS'
-              ? port[this.tablename].special
-              : port[this.tablename].tableName
-          }`
-        ].push(obj);
+        data[`${this.tablename === 'DL_B_TRAN_OUT' || this.tablename === 'DL_B_TRAN_OUT_POS' ? port[this.tablename].special : port[this.tablename].tableName}`].push(obj);
       }
       const formdata = new FormData();
       formdata.append('table', this.tablename === 'DL_B_TRAN_OUT_POS' ? this.tablename.replace('_POS', '') : this.tablename);
@@ -490,7 +459,7 @@ export default {
     }, // 警告弹框关闭时(参数true为确认，false为返回)
     changeMatrix(obj) {
       const m = String(obj.scrollTop / 24).split('.')[1]; // 计算出滚动的距离是否是24的倍数
-      const num = Number.parseFloat(m === undefined ? 0 : (`0.${m}`) * 24); // 不是就算出(多余24的倍数)多少距离
+      const num = Number.parseFloat(m === undefined ? 0 : `0.${m}` * 24); // 不是就算出(多余24的倍数)多少距离
       this.translate = Number.parseInt(obj.y / 24 + 1) * 24 + 10 + (num === 0 ? 0 : 24 - num);
       // 鼠标距离到最外面包裹table的滚动box的距离/24取整，在加上tr高度的一般，在加上(没滚动完的tr底部border距离最外面那个box的距离)
       this.$nextTick(() => {
@@ -501,40 +470,42 @@ export default {
     }, // 弹出新的矩阵框
     detailDelete() {
       const arr = [];
-      this.tBody.map((obj) => {
+      this.tBody.map(obj => {
         if (obj.checked) arr.push(obj.PS_C_PRO_ECODE);
       });
       if (arr.length === 0) {
         return this.$message({
           message: window.vmI18n.t('modalTips.ct'), // '请选择要删除的明细',
           type: 'warning'
-        }); 
+        });
       }
       const formdata = new FormData();
-      formdata.append('param', JSON.stringify({
-        objid: this.objid,
-        maintable: this.tablename,
-        tablename: port[this.tablename].tableName,
-        fixcolumn: {
-          PRO_ECODES: arr
-        }
-      }));
-      this.service.orderCenter.prodel(formdata)
-        .then((res) => {
-          const data = res.data;
-          if (data.code === 0) {
-            this.activeSub = false; // 改变高亮行
-            this.$message({
-              message: window.vmI18n.t('modalTips.cz'), // '删除明细成功',
-              type: 'success'
-            });
-            this.getData();
+      formdata.append(
+        'param',
+        JSON.stringify({
+          objid: this.objid,
+          maintable: this.tablename,
+          tablename: port[this.tablename].tableName,
+          fixcolumn: {
+            PRO_ECODES: arr
           }
-        });
+        })
+      );
+      this.service.orderCenter.prodel(formdata).then(res => {
+        const data = res.data;
+        if (data.code === 0) {
+          this.activeSub = false; // 改变高亮行
+          this.$message({
+            message: window.vmI18n.t('modalTips.cz'), // '删除明细成功',
+            type: 'success'
+          });
+          this.getData();
+        }
+      });
     }, // 删除明细
     updateDiscount() {
       const arr = [];
-      this.tBody.map((obj) => {
+      this.tBody.map(obj => {
         if (obj.checked) arr.push(obj.PS_C_PRO_ECODE);
       });
       this.updateSalePriceModal = {
@@ -568,7 +539,7 @@ export default {
     salePriceChange() {
       this.loadingClose();
     },
-    loadingClose() { },
+    loadingClose() {},
     updateDiscountCorfirm() {
       const arr = [];
       this.discountLoading = true;
@@ -583,41 +554,42 @@ export default {
           type: 'warning'
         });
       }
-      this.tBody.map((obj) => {
+      this.tBody.map(obj => {
         if (obj.checked) arr.push(obj.PS_C_PRO_ECODE);
       });
       const proEcodeStr = arr.join(',');
-      this.service.orderCenter.updateDicunot({
-        param: JSON.stringify({
-          objid: this.objid,
-          maintable: this.tablename,
-          tablename: port[this.tablename].tableName,
-          fixcolumn: {
-            PRO_ECODES: proEcodeStr,
-            UPDATE_TYPE: this.updateSalePriceModal.UPDATE_TYPE,
-            SALE_DISCOUNT: this.updateSalePriceModal.SALE_DISCOUNT,
-            SALE_PRICE: this.updateSalePriceModal.SALE_PRICE
-          }
+      this.service.orderCenter
+        .updateDicunot({
+          param: JSON.stringify({
+            objid: this.objid,
+            maintable: this.tablename,
+            tablename: port[this.tablename].tableName,
+            fixcolumn: {
+              PRO_ECODES: proEcodeStr,
+              UPDATE_TYPE: this.updateSalePriceModal.UPDATE_TYPE,
+              SALE_DISCOUNT: this.updateSalePriceModal.SALE_DISCOUNT,
+              SALE_PRICE: this.updateSalePriceModal.SALE_PRICE
+            }
+          })
         })
-      })
-      // axios({
-      //   url: '/p/cs/oc/v1/sale/updateDicunot',
-      //   method: 'post',
-      //   data: {
-      //     param: JSON.stringify({
-      //       objid: this.objid,
-      //       maintable: this.tablename,
-      //       tablename: port[this.tablename].tableName,
-      //       fixcolumn: {
-      //         PRO_ECODES: proEcodeStr,
-      //         UPDATE_TYPE: this.updateSalePriceModal.UPDATE_TYPE,
-      //         SALE_DISCOUNT: this.updateSalePriceModal.SALE_DISCOUNT,
-      //         SALE_PRICE: this.updateSalePriceModal.SALE_PRICE
-      //       }
-      //     })
-      //   }
-      // })
-        .then((res) => {
+        // axios({
+        //   url: '/p/cs/oc/v1/sale/updateDicunot',
+        //   method: 'post',
+        //   data: {
+        //     param: JSON.stringify({
+        //       objid: this.objid,
+        //       maintable: this.tablename,
+        //       tablename: port[this.tablename].tableName,
+        //       fixcolumn: {
+        //         PRO_ECODES: proEcodeStr,
+        //         UPDATE_TYPE: this.updateSalePriceModal.UPDATE_TYPE,
+        //         SALE_DISCOUNT: this.updateSalePriceModal.SALE_DISCOUNT,
+        //         SALE_PRICE: this.updateSalePriceModal.SALE_PRICE
+        //       }
+        //     })
+        //   }
+        // })
+        .then(res => {
           const data = res.data;
           if (data.code === 0) {
             this.activeSub = false; // 改变高亮行
@@ -726,38 +698,36 @@ export default {
       const fixedcolumns = {};
       fixedcolumns[
         `${
-          this.tablename === 'DL_B_INV_ADJ_WORK_PICK'
-          || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS'
+          this.tablename === 'DL_B_INV_ADJ_WORK_PICK' || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS'
             ? 'DL_B_INV_ADJ'
-            : this.tablename === 'DL_B_TRAN_OUT'
-            || this.tablename === 'DL_B_TRAN_OUT_POS'
-            || this.tablename === 'SG_B_PHY_IN_NOTICES_POS'
-              ? this.tablename.replace(/(_OUT)|(_POS)/g, '')
-              : this.tablename === 'POS_SC_B_TRANSFER'
-                ? this.tablename.replace(/POS_/g, '')
-                : this.tablename
+            : this.tablename === 'DL_B_TRAN_OUT' || this.tablename === 'DL_B_TRAN_OUT_POS' || this.tablename === 'SG_B_PHY_IN_NOTICES_POS'
+            ? this.tablename.replace(/(_OUT)|(_POS)/g, '')
+            : this.tablename === 'POS_SC_B_TRANSFER'
+            ? this.tablename.replace(/POS_/g, '')
+            : this.tablename
         }_ID`
       ] = this.objid; // 主表ID
       const query = new FormData();
-      query.append('searchdata', JSON.stringify({
-        table: port[this.tablename].virtualName, // 虚表表名
-        column_include_uicontroller: true,
-        startindex: (this.currentPage - 1) * this.pageSize, // 起始下标
-        range: this.pageSize, // 每页个数
-        fixedcolumns,
-        multiple: [],
-        orderby: this.orderby // 按什么排序
-      }));
-      return this.service.common.QueryList(query).then((res) => {
+      query.append(
+        'searchdata',
+        JSON.stringify({
+          table: port[this.tablename].virtualName, // 虚表表名
+          column_include_uicontroller: true,
+          startindex: (this.currentPage - 1) * this.pageSize, // 起始下标
+          range: this.pageSize, // 每页个数
+          fixedcolumns,
+          multiple: [],
+          orderby: this.orderby // 按什么排序
+        })
+      );
+      return this.service.common.QueryList(query).then(res => {
         const data = res.data;
         if (data.code === 0) {
           const arrTh = []; // 表头
-          const subtotalRow = data.datas.subtotalRow
-            ? Object.keys(data.datas.subtotalRow)
-            : []; // 总计那行
+          const subtotalRow = data.datas.subtotalRow ? Object.keys(data.datas.subtotalRow) : []; // 总计那行
           this.total = data.datas.totalRowCount; // 总数
           /* this.subtotalRow = data.datas.subtotalRow;//总计那行 */
-          data.datas.tabth.map((obj) => {
+          data.datas.tabth.map(obj => {
             if (obj.name === 'ID') return;
             if (obj.ismodify) this.changeFields.push(obj.colname);
             arrTh.push(
@@ -765,35 +735,25 @@ export default {
                 {},
                 obj,
                 {
-                  label:
-                    (this.tablename === 'DL_B_INV_ADJ_WORK_PICK'
-                      || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS')
-                      && obj.colname === 'QTY_BILL'
-                      ? window.vmI18n.t('table_label.quantities')
-                      : obj.name, // 名字
+                  label: (this.tablename === 'DL_B_INV_ADJ_WORK_PICK' || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS') && obj.colname === 'QTY_BILL' ? window.vmI18n.t('table_label.quantities') : obj.name, // 名字
                   name: obj.colname, // 字段
                   order: obj.isorder // 是否有排序
                 },
                 obj.ismodify
                   ? {
-                    type: 'input',
-                    genre: obj.type,
-                    fixed: obj.scale // 保留几位小数
-                  }
+                      type: 'input',
+                      genre: obj.type,
+                      fixed: obj.scale // 保留几位小数
+                    }
                   : {}
               )
             );
           });
-          if (
-            subtotalRow.length !== 0
-            && data.datas.isFullRangeSubTotalEnabled
-          ) {
-            this.subtotalRow = arrTh.map((obj) => {
+          if (subtotalRow.length !== 0 && data.datas.isFullRangeSubTotalEnabled) {
+            this.subtotalRow = arrTh.map(obj => {
               const row = subtotalRow.find(x => x == obj.name);
               if (!row) return '';
-              return data.datas.subtotalRow[
-                row
-              ];
+              return data.datas.subtotalRow[row];
             });
           }
           this.tHead = arrTh;
@@ -802,15 +762,9 @@ export default {
               start: (this.currentPage - 1) * this.pageSize + index + 1,
               checked: false
             };
-            Object.keys(obj).map((key) => {
-              if (
-                (this.tablename === 'DL_B_INV_ADJ_WORK_PICK'
-                  || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS')
-                && (key === 'AMT_LIST' || key === 'QTY_BILL')
-              ) {
-                row[key] = obj[key].val.includes('-')
-                  ? obj[key].val.replace('-', '')
-                  : obj[key].val;
+            Object.keys(obj).map(key => {
+              if ((this.tablename === 'DL_B_INV_ADJ_WORK_PICK' || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS') && (key === 'AMT_LIST' || key === 'QTY_BILL')) {
+                row[key] = obj[key].val.includes('-') ? obj[key].val.replace('-', '') : obj[key].val;
               } else {
                 row[key] = obj[key].val;
               }
@@ -846,7 +800,7 @@ export default {
     }, // 确定刷新数据
     match(val) {
       this.matchTableData = val;
-    }, // 匹配
+    } // 匹配
   },
   components: {
     CustomTable,
@@ -866,14 +820,7 @@ export default {
     this.isUpdateDiscountBtn = port[this.tablename].isUpdateDiscountBtn; // 是否有修改折扣按钮
     this.hasMatch = port[this.tablename].hasMatch;
     this.orderby.push({
-      column: `${
-        this.tablename === 'DL_B_PAND'
-          || this.tablename === 'DL_B_INV_ADJ'
-          || this.tablename === 'DL_B_INV_ADJ_WORK_PICK'
-          || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS'
-          ? port[this.tablename].virtualName
-          : port[this.tablename].tableName
-      }.ID`,
+      column: `${this.tablename === 'DL_B_PAND' || this.tablename === 'DL_B_INV_ADJ' || this.tablename === 'DL_B_INV_ADJ_WORK_PICK' || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS' ? port[this.tablename].virtualName : port[this.tablename].tableName}.ID`,
       asc: true
     });
     this.getData()
