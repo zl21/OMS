@@ -193,7 +193,7 @@ export default {
               this.IS_MANUAL_ORDER = this.info.IS_MANUAL_ORDER == 'Y';
               this.IS_MERGE_ORDER = this.info.IS_MERGE_ORDER == 'Y';
               this.orderType = this.info.ORDER_TYPE ? this.info.ORDER_TYPE.split(',') : [];
-              this.checkAll = this.orderType.length == 7;
+              this.checkAll = this.orderType.length == 3;
               // 设置保存的排除物流公司
               // this.CP_C_LOGISTICS_ID_SELECT.defaultSelected =  [{"ID":"5000000110805","Label":"顺丰特惠"},{"ID":"5000000110809","Label":"自提"}]
               if (this.info.CP_C_LOGISTICS_ID) {
@@ -287,7 +287,8 @@ export default {
       this.indeterminate = false;
 
       if (this.checkAll) {
-        this.orderType = ['1', '2', '3', '4', '5', '6', '7'];
+        // this.orderType = ['1', '2', '3', '4', '5', '6', '7'];
+        this.orderType = ['1', '2', '5'];
       } else {
         this.orderType = [];
       }
@@ -307,7 +308,7 @@ export default {
       } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME' || type === 'CP_C_LOGISTICS_ID' || type === 'ANTI_AUDIT_WAIT_TIME') {
         this.result[type] = this.info[type] ? this.info[type] : '';
       } else if (type == 'orderType') {
-        if (this.orderType.length === 7) {
+        if (this.orderType.length === 3) {
           this.indeterminate = false;
           this.checkAll = true;
         } else if (this.orderType.length > 0) {

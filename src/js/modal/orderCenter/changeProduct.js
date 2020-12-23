@@ -90,7 +90,7 @@ export default {
             },
           },
           {
-            label: window.vmI18n.t('table_label.itemNo'), //'商品款号',
+            label: window.vmI18n.t('table_label.itemNo'), // '商品款号',
             style: 'dimSearch',
             width: '12',
             value: 'psCProEcode',
@@ -138,7 +138,7 @@ export default {
         },
         formData: [
           {
-            label: window.vmI18n.t('table_label.commoditySKU'), //'商品SKU',
+            label: window.vmI18n.t('table_label.commoditySKU'), // '商品SKU',
             style: 'dimSearch',
             width: '12',
             value: 'searchValue',
@@ -190,7 +190,7 @@ export default {
             },
           },
           {
-            label: window.vmI18n.t('table_label.itemNo'), //'商品款号',
+            label: window.vmI18n.t('table_label.itemNo'), // '商品款号',
             style: 'dimSearch',
             width: '12',
             value: 'psCProEcode',
@@ -327,11 +327,11 @@ export default {
         self.$Message.warning(window.vmI18n.t('modalTips.yg'));
         return;
       }
-      if (self.onRowClickData.ECODE == self.onRowClickReplaceData.ECODE) {
-        // self.$Message.warning("替换商品与被替换商品不能相同!");
-        self.$Message.warning(window.vmI18n.t('modalTips.yh'));
-        return;
-      }
+      // if (self.onRowClickData.ECODE == self.onRowClickReplaceData.ECODE) {
+      //   // self.$Message.warning("替换商品与被替换商品不能相同!");
+      //   self.$Message.warning(window.vmI18n.t('modalTips.yh'));
+      //   return;
+      // }
       const result = {};
       const needParam = {
         IS_GIFT: self.onRowClickReplaceData.IS_GIFT == '是' ? '0' : '1',
