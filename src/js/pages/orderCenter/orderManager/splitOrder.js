@@ -338,23 +338,25 @@ export default {
     },
     // 撤销
     undo(index) {
-      console.log(this.data);
+      let total = 0;
       const map = new Map();
       this.data[index].forEach(item=>{
-        map.set(item.orig_order_item_id, item);
+        map.set(item.orig_order_item_id, item); // 记录明细唯一标识
       });
-      console.log(map);
       this.data[0].forEach(item=>{
         if (map.get(item.orig_order_item_id)) {
           item.split_num += Number(map.get(item.orig_order_item_id).split_num);
+          total += Number(map.get(item.orig_order_item_id).split_num);
           item.waiting_split_num += Number(map.get(item.orig_order_item_id).waiting_split_num);
           map.delete(item.orig_order_item_id);
         }
       });
       map.forEach(value => {
+        total += Number(value.split_num);
         this.data[0].push(value);
       });
       this.$nextTick(()=>{
+        this.data[0][0].total += total;
         this.data.splice(index, 1);
       this.switchList(0);
       });
