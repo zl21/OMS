@@ -122,9 +122,12 @@
           const res = await this.service.strategyPlatform.liveCastStrategyUpdateEndTime(params);
           this.dialogLoad = false;
           if (res.data.data.code === 0) {
-            this.$Message.success('修改时间成功');
+            this.$Message.success(res.data.data.message);
             this.$emit('confirmImport');
             this.$emit('closeActionDialog');
+          } else {
+            this.dialogLoad = false;
+            this.$Message.error(res.data.data.message);
           }
         } catch (error) {
           this.dialogLoad = false;
