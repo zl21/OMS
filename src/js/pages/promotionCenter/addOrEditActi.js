@@ -221,7 +221,7 @@ export default {
       if (rs.code === -1) {
         rs.message = `${tablename},${rs.message}`;
         return this.$message({ type: 'error', message: rs.message });
-      } 
+      }
         rs.message = `${tablename},` + '保存成功';
         this.$message({ type: 'success', message: rs.message });
         this.closeDialog();
@@ -374,19 +374,20 @@ export default {
           }
           this.objid = String(data.objid) || -1;
           this.$nextTick(() => {
-            this.$store.commit(action, {
-              type: 'C', // 类型action
-              customizedModuleId: this.objid, // id
-              customizedModuleName: 'addOrEditActi', // 文件名
-              // id: this.objid, // id
-              // type: 'action', // 类型action
-              // name: 'addOrEditActi', // 文件名
-              label: this.vmI18n.t('panel_label.editPromotion'), // 编辑促销活动
-              query: Object.assign({
-                id: this.objid, // id
-                // tabTitle: this.vmI18n.t('panel_label.editPromotion') // 编辑促销活动
-              }) // 带的参数
-            });
+            this.getData(data.objid);
+            // this.$store.commit(action, {
+            //   type: 'C', // 类型action
+            //   customizedModuleId: this.objid, // id
+            //   customizedModuleName: 'addOrEditActi', // 文件名
+            //   // id: this.objid, // id
+            //   // type: 'action', // 类型action
+            //   // name: 'addOrEditActi', // 文件名
+            //   label: this.vmI18n.t('panel_label.editPromotion'), // 编辑促销活动
+            //   query: Object.assign({
+            //     id: this.objid, // id
+            //     // tabTitle: this.vmI18n.t('panel_label.editPromotion') // 编辑促销活动
+            //   }) // 带的参数
+            // });
           });
         } else {
           this.$message({
@@ -626,13 +627,13 @@ export default {
         if (this.condition_info_setting.products_join === '1') {
           // 非搭配
           const arrs = this.condition_info_setting.productslist || [];
-          if (arrs.length === 0) return { code: -1, message: this.vmI18n.t('modalTips.r6') }; // 无数据
+          if (arrs.length === 0) return { code: -1, message: tablename + this.vmI18n.t('modalTips.r6') }; // 无数据
           rs = this.checkTable(arrs);
         }
         if (this.condition_info_setting.products_join === '2') {
           // 搭配
           const arrs = this.condition_info_setting.productsArrs || [];
-          if (arrs.length === 0) return { code: -1, message: this.vmI18n.t('modalTips.r6') }; // 无数据
+          if (arrs.length === 0) return { code: -1, message: tablename + this.vmI18n.t('modalTips.r6') }; // 无数据
           rs = this.checkTableTab(arrs, 'info');
         }
       }
@@ -647,15 +648,15 @@ export default {
       if (this.basic_info.gradient_gift === '0') {
         // 不梯度
         const arrs = this.gift_info_setting.gift_productslist || [];
-        if (arrs.length === 0) return { code: -1, message: this.vmI18n.t('modalTips.r6') };
+        if (arrs.length === 0) return { code: -1, message: tablename + this.vmI18n.t('modalTips.r6') };
         rs = this.checkTable(arrs);
       } else {
-        const arrs = this.gift_info_setting.gift_productsArrs || [];
-        if (arrs.length === 0) return { code: -1, message: this.vmI18n.t('modalTips.r6') };
+        const arrs = this.gift_info_setting.gift_productslist || [];
+        if (arrs.length === 0) return { code: -1, message: tablename + this.vmI18n.t('modalTips.r6') };
         rs = this.checkTableTab(arrs, 'gift');
       }
       if (rs.code === -1) {
-        rs.message = `${tablename},${rs.message}`;
+        rs.message = `${tablename}${rs.message}`;
       }
       return rs;
     },
@@ -675,14 +676,19 @@ export default {
           rows = tab.productslist || [];
           if (rows.length === 0) return { code: -1, message: `表格【${tab.group}】,无数据` };
         } else {
-          rows = tab.productslist || [];
-          if (rows.length === 0) return { code: -1, message: `表格【${tab.group}】,无数据` };
+          // WARNING:这块赠品信息提示有问题 提到下面的if(type === 'gift')逻辑中
+          // rows = tab.productslist || [];
+          // if (rows.length === 0) return { code: -1, message: '无数据' };
         }
         const res = this.checkTable(rows);
         if (res.code === -1) {
           res.message = `表格【${tab.group}】,${res.message}`;
           return res;
         }
+      }
+      if (type === 'gift') {
+        const giftRows = tabs || [];
+        if (giftRows.length === 0) return { code: -1, message: '无数据' };
       }
       return { code: 0, message: this.vmI18n.t('modalTips.s4') };
     },
