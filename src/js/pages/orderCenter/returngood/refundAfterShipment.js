@@ -1258,7 +1258,8 @@ export default {
         .then((res) => {
           if (res.data.code == 0) {
             self.$Message.success(res.data.message);
-            if (this.$route.query.tabTitle === '额外退款编辑' || this.$route.params.customizedModuleId == 'New') {
+            comUtils.tabCloseAppoint(this);
+            if (this.$route.params.customizedModuleName === 'EXTRAREFUND') {
               // this.$store.commit('customize/TabHref', {
               //   id: 249230545,
               //   type: 'table',
@@ -1271,20 +1272,24 @@ export default {
                 tableName: 'OC_B_RETURN_AF_SEND_MANUAL',
                 tableId: 249230545
               });
-              comUtils.tabCloseAppoint(this);
             } else {
-              this.$store.commit('customize/TabHref', {
-                id: 249130393,
-                type: 'table',
-                name: 'OC_B_RETURN_AF_SEND',
-                label: window.vmI18n.t('form_label.refundNoteDelivered'), // 已发货退款单
-                back: true,
+              R3.store.commit('global/tabOpen', {
+                type: 'S',
+                tableName: 'OC_B_RETURN_AF_SEND',
+                tableId: 249130393
               });
+              // this.$store.commit('customize/TabHref', {
+              //   id: 249130393,
+              //   type: 'table',
+              //   name: 'OC_B_RETURN_AF_SEND',
+              //   label: window.vmI18n.t('form_label.refundNoteDelivered'), // 已发货退款单
+              //   back: true,
+              // });
             }
             // 销毁当前实例
             this.$destroy();
           } else {
-            self.$Message.error(res.data.message);
+            self.$Message.error(res.data.message || '保存出错');
           }
         });
     },
