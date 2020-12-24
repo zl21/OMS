@@ -44,7 +44,7 @@ export default {
           {
             text: window.vmI18n.t('common.determine'), // 确定 按钮文本
             size: 'small', // 按钮大小
-            disabled: true, // 按钮禁用控制
+            disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.determine();
             }, // 按钮点击事件
@@ -56,7 +56,6 @@ export default {
   mounted() {
     if (this.componentData.ORDER_FLAG) {
       this.formItem.flag = this.componentData.ORDER_FLAG;
-      this.btnConfig.buttons[0].disabled = false;
     }
     // ORDER_FLAG
   },
