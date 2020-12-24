@@ -86,10 +86,10 @@ module.exports = () => ({
         target,
         changeOrigin: true
       },
-      {
-        '/yapi': 'http://yapi.dev.syman.cn/mock/624',
-        changeOrigin: true
-      }
+      // {
+      //   '/yapi': 'http://yapi.dev.syman.cn/mock/624',
+      //   changeOrigin: true
+      // }
     ]
   },
   target: 'web',
