@@ -1650,6 +1650,7 @@ export default {
       item.PRO_RETURN_STATUS = PRO_RETURN_STATUS_DATA[data.PRO_RETURN_STATUS];
       item.SELLER_MEMO = data.BACK_MESSAGE;
       item.BILL_TYPE = String(data.BILL_TYPE) ? String(data.BILL_TYPE) : '';
+      item.BILL_NO = data.BILL_NO;
       item.BUYER_NICK = data.BUYER_NICK ? data.BUYER_NICK : '';
       item.CP_C_LOGISTICS_ENAME = data.CP_C_LOGISTICS_ENAME ? data.CP_C_LOGISTICS_ENAME : '';
       item.ORIG_SOURCE_CODE = data.ORIG_SOURCE_CODE ? data.ORIG_SOURCE_CODE : '';
