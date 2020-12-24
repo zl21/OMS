@@ -100,7 +100,8 @@
       determine() {
         const formdata = new FormData();
         if (!this.selectData.length && !this.defaultSelected.length) {
-          return this.$Message.warning('档案日程归属不能为空!');
+          this.$Message.warning('档案日程归属不能为空!');
+          return;
         }
         const obj = {
           ids: this.idArray,
@@ -144,7 +145,7 @@
             this.datas.row = this.getData(res.data.data);
           } else {
             this.isError = true;
-            this.errorMessage = res.data.message;
+            this.$Message.error(res.data.message);
           }
         });
       },
