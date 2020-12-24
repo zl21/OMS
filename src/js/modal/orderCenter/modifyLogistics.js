@@ -117,10 +117,11 @@ export default {
       fromdata.append('cLogisticsId', self.pid);
       fromdata.append('expressCode', self.expressCode);
       fromdata.append('type', self.type);
-     
+      this.btnConfig.buttons[1].disabled = true;
       this.service.orderCenter.updateLogistics(fromdata)
       .then((res) => {
         if (res.data.code === 0) {
+          this.btnConfig.buttons[1].disabled = false;
           console.log(self.$route.query.id);
           if (self.$route.query.id == 2627) {
             self.$parent.$parent.$parent.getData();
@@ -181,6 +182,7 @@ export default {
             duration: 5,
             top: 80,
           });
+          this.btnConfig.buttons[1].disabled = false;
         }
       });
     },
