@@ -1329,7 +1329,7 @@ export default {
               _this.information.formValue.BILL_TYPE = String(res.data.data.returnOrders.BILL_TYPE);
               _this.selectSelectt();
               if (_this.information.formValue.BILL_TYPE == '2' && !res.data.data.returnOrders.IS_RESERVED) {
-                _this.information.formData[11].style = 'select';
+                // _this.information.formData[11].style = 'select';
                 _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = res.data.data.returnOrders.IS_RETURN_ORDER_EXCHANGE;
                 setTimeout(() => {
                   document.getElementsByClassName('burgeon-select-selected-value')[1].className = 'burgeon-select-selected-value inputBgcolor';
@@ -1516,7 +1516,7 @@ export default {
           _this.information.formValue.BILL_TYPE = String(res.data.data.returnOrders.BILL_TYPE);
           _this.selectSelectt();
           if (_this.information.formValue.BILL_TYPE == '2' && !res.data.data.returnOrders.IS_RESERVED) {
-            _this.information.formData[11].style = 'select';
+            // _this.information.formData[11].style = 'select';
             _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = res.data.data.returnOrders.IS_RETURN_ORDER_EXCHANGE;
             setTimeout(() => {
               document.getElementsByClassName('burgeon-select-selected-value')[1].className = 'burgeon-select-selected-value inputBgcolor';
