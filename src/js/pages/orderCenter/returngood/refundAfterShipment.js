@@ -865,17 +865,13 @@ export default {
     // eslint-disable-next-line no-mixed-operators
     if ((this.sessionStorageData && this.sessionStorageData.standardTableurlCustomized)
       || (this.sessionStorageData && this.sessionStorageData.standardCustomizeButton)) { // 已发货退款单详情跳转
-      let disabled = false; // 实际退款金额是否可编辑控制
-      if (this.$route.params.customizedModuleName === 'REFUNDAFTERSHIPMENT') {
-        disabled = true;
-      }
       this.reForm.config.splice(14, 0, {
         item: {
           type: 'Input',
           label: window.vmI18n.t('form_label.actualRefundAmount'), // 实际退款金额
           props: {
             value: '',
-            disabled,
+            disabled: this.$route.params.customizedModuleName === 'REFUNDAFTERSHIPMENT' ? true : false,
           },
           event: {},
         },
@@ -1258,7 +1254,8 @@ export default {
         .then((res) => {
           if (res.data.code == 0) {
             self.$Message.success(res.data.message);
-            if (this.$route.query.tabTitle === '额外退款编辑' || this.$route.params.customizedModuleId == 'New') {
+            comUtils.tabCloseAppoint(this);
+            if (this.$route.params.customizedModuleName === 'EXTRAREFUND') {
               // this.$store.commit('customize/TabHref', {
               //   id: 249230545,
               //   type: 'table',
@@ -1271,20 +1268,24 @@ export default {
                 tableName: 'OC_B_RETURN_AF_SEND_MANUAL',
                 tableId: 249230545
               });
-              comUtils.tabCloseAppoint(this);
             } else {
-              this.$store.commit('customize/TabHref', {
-                id: 249130393,
-                type: 'table',
-                name: 'OC_B_RETURN_AF_SEND',
-                label: window.vmI18n.t('form_label.refundNoteDelivered'), // 已发货退款单
-                back: true,
+              R3.store.commit('global/tabOpen', {
+                type: 'S',
+                tableName: 'OC_B_RETURN_AF_SEND',
+                tableId: 249130393
               });
+              // this.$store.commit('customize/TabHref', {
+              //   id: 249130393,
+              //   type: 'table',
+              //   name: 'OC_B_RETURN_AF_SEND',
+              //   label: window.vmI18n.t('form_label.refundNoteDelivered'), // 已发货退款单
+              //   back: true,
+              // });
             }
             // 销毁当前实例
             this.$destroy();
           } else {
-            self.$Message.error(res.data.message);
+            self.$Message.error(res.data.message || '保存出错');
           }
         });
     },

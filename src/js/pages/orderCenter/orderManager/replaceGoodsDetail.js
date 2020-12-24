@@ -6,6 +6,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       radioValue: '2',
       searchValue: '',
       qty: '1',
@@ -90,12 +91,14 @@ export default {
       result.sku_code = self.data[0].ECODE;
       result.itemId = self.componentData.itemId;
       result.type = 1;
+      self.loading = true;
       axios({
         url: '/api/cs/oc/oms/v1/bathChangeGoods',
         method: 'post',
         data: result
       }).then(res => {
         console.log(res);
+        self.loading = false;
         if (res.data.code == 0) {
           self.$Message.success(res.data.message);
           if (self.componentData.list) {
@@ -123,6 +126,8 @@ export default {
               })
           });
         }
+      }).catch(() => {
+        self.loading = false;
       });
     }
   }
