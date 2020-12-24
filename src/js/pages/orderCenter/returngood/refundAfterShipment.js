@@ -1715,12 +1715,14 @@ export default {
           // 单据来源
         } else if (itemLabel === self.vmI18n.t('form_label.sourceDocuments')) {
           item.item.props.value = data[dataConfig[itemLabel]] == 1 ? '手动' : '自动';
-        } else {
-          // item.item.props.value = self.$route.query.cid ? 0 : data[dataConfig[itemLabel]]
+        } else if (itemLabel === self.vmI18n.t('form_label.documentDate')) {
+          // 单据日期
           item.item.props.value = commonUtil.dateFormat(
             new Date(data[dataConfig[itemLabel]]),
             'yyyy-MM-dd hh:mm:ss'
           );
+        } else {
+          item.item.props.value = data[dataConfig[itemLabel]];
         }
         // switch (item.item.label) {
         //   case '单据编号':
@@ -1985,7 +1987,7 @@ export default {
             case '原始平台单号':
               sellerRemarkData.SOURCE_CODE = itemValue;
               break;
-            case '申请退款金额':
+            case '退款金额':
               sellerRemarkData.AMT_RETURN_APPLY = itemValue;
               break;
             case '支付方式':

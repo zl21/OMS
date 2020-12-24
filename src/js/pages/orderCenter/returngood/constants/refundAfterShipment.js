@@ -134,7 +134,7 @@ const reFormDataConfig = {
   支付方式: 'PAY_MODE',
   支付账号: 'PAY_ACCOUNT',
   单据日期: 'RETURN_APPLY_TIME',
-  申请退款金额: 'AMT_RETURN_APPLY',
+  退款金额: 'AMT_RETURN_APPLY',
   实际退款金额: 'AMT_RETURN_ACTUAL',
   判责方: 'RESPONSIBLE_PARTY',
   判责方备注: 'RESPONSIBLE_PARTY_REMARK',
