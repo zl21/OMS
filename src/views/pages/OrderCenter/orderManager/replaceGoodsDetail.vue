@@ -1,6 +1,6 @@
 <template>
   <!-- 订单详情 替换商品商品 -->
-  <div class="replaceGoodsDetail">
+  <div class="replaceGoodsDetail" v-loading="loading">
     <div class="i_head">
       <div>
         商品SKU:
