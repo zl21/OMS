@@ -865,17 +865,13 @@ export default {
     // eslint-disable-next-line no-mixed-operators
     if ((this.sessionStorageData && this.sessionStorageData.standardTableurlCustomized)
       || (this.sessionStorageData && this.sessionStorageData.standardCustomizeButton)) { // 已发货退款单详情跳转
-      let disabled = false; // 实际退款金额是否可编辑控制
-      if (this.$route.params.customizedModuleName === 'REFUNDAFTERSHIPMENT') {
-        disabled = true;
-      }
       this.reForm.config.splice(14, 0, {
         item: {
           type: 'Input',
           label: window.vmI18n.t('form_label.actualRefundAmount'), // 实际退款金额
           props: {
             value: '',
-            disabled,
+            disabled: this.$route.params.customizedModuleName === 'REFUNDAFTERSHIPMENT' ? true : false,
           },
           event: {},
         },
