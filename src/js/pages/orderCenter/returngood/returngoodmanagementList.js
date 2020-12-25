@@ -868,6 +868,8 @@ export default {
         Obj.IS_BACK = '';
       } else if (Obj.STATUS_DEFECTIVE_TRANS && Obj.STATUS_DEFECTIVE_TRANS[0] === 'bSelect-all') {
         Obj.STATUS_DEFECTIVE_TRANS = '';
+      } else if (Obj.IS_RESERVED && Obj.IS_RESERVED[0] === 'bSelect-all') {
+        Obj.IS_RESERVED = '';
       }
       // const arr = document.getElementsByClassName('ark-input');
 
