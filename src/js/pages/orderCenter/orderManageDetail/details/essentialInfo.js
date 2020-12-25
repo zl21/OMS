@@ -6,6 +6,8 @@ import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js
 
 const _importA = file => require(`${file}.vue`).default;
 // import axios from "axios";
+var val = false;
+
 export default {
   name: 'EssentialInfo',
   props: {
@@ -227,7 +229,8 @@ export default {
   },
   methods: {
     eyeClick() {
-      this.$emit('freshLoad', true);
+      val = !val;
+      this.$emit('freshLoad', val);
     },
     isQhMethod(data) {
       this.isQhChild = data;

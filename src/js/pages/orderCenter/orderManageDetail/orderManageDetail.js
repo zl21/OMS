@@ -803,7 +803,7 @@ export default {
     load(val) {
       const data = { ID: this.objId };
       if (val) {
-        data.isShowPii = true;
+        data.isShowPii = val;
       }
       this.pageLoad = true;
       this.service.orderCenter
