@@ -1227,6 +1227,7 @@ export default {
               _this.information.formData[14].itemdata.pid = this.warehouseId;
               _this.information.formData[14].itemdata.valuedata = item.CP_C_PHY_WAREHOUSE_ENAME;
               _this.information.formValue.CP_C_PHY_WAREHOUSE_ID = this.warehouseId;
+              _this.information.formValue.BILL_NO = item.BILL_NO;
               _this.information.formValue.ORIG_ORDER_ID = item.ID; // 编号
               _this.information.formValue.PRO_RETURN_STATUS = item.PRO_RETURN_STATUS; // 退货状态
               _this.information.formValue.BUYER_NICK = item.USER_NICK;
