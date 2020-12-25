@@ -1,40 +1,35 @@
 <template>
-  <div
-    class="downLoadTaobaoOrder"
-    style="width:430px"
-  >
-    <businessForm :form-config="downLoadFormConfig" />
-    <businessButton :btn-config="downLoadBtnConfig" />
-    <!-- 确认下载弹框 订单下载-->
-    <Modal
-      v-model="downLoadModal"
-      class="downLoadModal"
-      :title="vmI18n.t('modalTitle.orderDownload')"
-      width="450"
-      :mask="true"
-      @on-ok="downLoadOk"
-      @on-cancel="downLoadCancel"
-    >
-      <p>
-        <!-- 订单下载任务已经发送，任务ID： -->
-        {{ vmI18n.t("modalTips.bn") }}
-        <span
-          class="taskID"
-          @click="taskIDClick"
-        >{{ taskId }}</span>
-        <!-- ，请前往接口下载任务表查看下载进度！ -->
-        {{ vmI18n.t("modalTips.bo") }}
-      </p>
-    </Modal>
-  </div>
+  <div style="width:440px;" />
 </template>
 
 <script>
-  import downLoadAll from '@/js/modal/InterfacePlatform/downLoadAll';
-
-  export default downLoadAll;
+  export default {
+    components: {},
+    props: {
+      idArray: {
+        type: Array,
+        default: () => []
+      },
+      objList: {
+        type: Array
+      },
+    },
+    data() {
+      return {};
+    },
+    methods: {
+      init() {
+        if (this.props.idArray.length !== 1) {
+          this.$message.error('请先选择一条数据更换吊牌！');
+        }
+        // if () {
+        //   this.$message.error('当前单据状态不可操作!')
+        // }
+      }
+    },
+    mounted() {
+      // this.$emit('closeActionDialog');
+      this.init();
+    }
+  };
 </script>
-
-<style >
-  @import "~@/css/modal/InterfacePlatform/downLoadAll.less";
-</style>

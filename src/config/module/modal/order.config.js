@@ -43,4 +43,8 @@ export default {
   PICKORDEREXPORT: {
     component: () => import('@/views/modal/orderCenter/returngood/pickorderExport.vue')
   },
+  // JIT配货单-换吊牌
+  EXCHANGETAG: {
+    component: () => import('@/views/modal/orderCenter/exchangeTag.vue')
+  }
 };
