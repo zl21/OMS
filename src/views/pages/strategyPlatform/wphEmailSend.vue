@@ -215,7 +215,7 @@
       saveCurrent() {
         const self = this;
         const obj = {
-          objid: self.objid,
+          objid: self.$route.params.itemId === 'New' ? '-1' : self.$route.params.itemId,
           fixcolumn: {
             ST_C_VIPCOM_MAIL: self.saveObj
           }
@@ -268,6 +268,12 @@
       if (this.$route.params.itemId !== 'New') {
         this.getData();
       }
+      // 监听主表的保存成功事件
+      window.addEventListener('customizeClick', (data) => {
+        if (data.detail.type === 'save' && data.detail.mainTableParame) {
+          this.saveCurrent();
+        }
+      });
     },
     created() {
     }
