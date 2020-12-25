@@ -30,6 +30,7 @@ export default {
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
+    // 电话号码校验
     const validatePhoneNumber = (rule, value, callback) => {
       const pNumver = this.formConfig1.formValue.RECEIVER_MOBILE;
       if (!pNumver) {
@@ -39,6 +40,18 @@ export default {
         return callback();
       }
       return callback(new Error('手机号格式不正确!'));
+    };
+    // 收货人地址校验：不能为纯数字
+    const validateReceiveAddress = (rule, value, callback) => {
+      const rAddress = this.formConfig1.formValue.RECEIVER_ADDRESS;
+      console.log('rAddress',rAddress);
+      if (!rAddress) {
+        return callback(new Error('收货人地址不能为空!'));
+      }
+      if (/[^0-9](.)*/.test(rAddress)) {
+        return callback();
+      }
+      return callback(new Error('收货人地址格式不正确!'));
     };
     return {
       vmI18n: window.vmI18n,
@@ -528,7 +541,7 @@ export default {
                 || self.address.mobile == ''
                 || self.address.province == ''
               ) {
-                // "请填入完整信息,如:XX,17788888888,上海上海市闵行区XXXXXXXXXXX"
+                // "请填入完整信息,如:张三,17788888888,上海上海市闵行区黎安路999号"
                 self.$Message.warning(self.vmI18n.t('modalTips.f9'));
               } else {
                 self.formConfig1.formValue.RECEIVER_NAME = self.address.name; // 收货人赋值
@@ -662,7 +675,7 @@ export default {
           // },
           {
             style: 'input',
-            label: window.vmI18n.t('form_label.aconsignee_address'), // 收获人地址
+            label: window.vmI18n.t('form_label.aconsignee_address'), // 收货人地址
             value: 'RECEIVER_ADDRESS',
             dataAcessKey: 'RECEIVER_ADDRESS',
             width: '12',
@@ -696,8 +709,8 @@ export default {
             trigger: 'blur'
           }],
           RECEIVER_ADDRESS: [{
+            validator: validateReceiveAddress,
             required: true,
-            message: ' ',
             trigger: 'blur'
           }],
           RECEIVER_MOBILE: [{
