@@ -123,11 +123,11 @@
       refresh(val) {
         console.log('refresh');
       },
-      save(val) {
-        if (val) {
-          this.saveCurrent().then(() => this.$emit('changeSave', false)).catch(() => this.$emit('changeSave', false));
-        }
-      },
+      // save(val) {
+      //   if (val) {
+      //     this.saveCurrent().then(() => this.$emit('changeSave', false)).catch(() => this.$emit('changeSave', false));
+      //   }
+      // },
       editsave(val) {
         console.log('editsave');
       },
@@ -212,7 +212,8 @@
         });
       },
       // 保存当前单据
-      saveCurrent() {
+      // flag 主表保存成功后的标志
+      saveCurrent(flag) {
         const self = this;
         const obj = {
           objid: self.$route.params.itemId === 'New' ? '-1' : self.$route.params.itemId,
@@ -227,8 +228,14 @@
           method: 'post',
           data
         }).then(res => {
-          if (res.data.code !== 0) {
-            self.$Message.error('保存失败');
+          if (!flag) {
+            if (res.data.code === 0) {
+              if (!flag) {
+                self.$Message.success('保存成功!');
+              }
+            } else {
+              self.$Message.error('保存失败');
+            }
           }
         });
       },
@@ -270,7 +277,12 @@
       }
       // 监听主表的保存成功事件
       window.addEventListener('customizeClick', (data) => {
+        console.log('customizeClick::data', data);
         if (data.detail.type === 'save' && data.detail.mainTableParame) {
+          // 主表有修改保存
+          this.saveCurrent(true);
+        } else {
+          // 主表没有修改保存
           this.saveCurrent();
         }
       });
