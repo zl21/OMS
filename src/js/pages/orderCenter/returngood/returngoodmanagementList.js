@@ -1708,9 +1708,10 @@ export default {
     // 退货转换货校验
     async refund2ExchangeValidate() {
       const _this = this;
-      if (this.$refs.agGridChild.AGTABLE.getSelect().length !== 1) {
-        _this.$Message.error(this.vmI18n.t('modalTips.k3')); // 请选中一项修改!
-        return;
+      const seLen = this.$refs.agGridChild.AGTABLE.getSelect().length;
+      if (seLen !== 1) {
+        // <1时,请选中一项修改!    >1时,不允许批量处理！
+        return (seLen < 1) ? (_this.$Message.error(this.vmI18n.t('modalTips.k3'))) : (_this.$Message.error(this.vmI18n.t('modalTips.dr')));
       }
       const selected = this.$refs.agGridChild.AGTABLE.getSelect()[0];
       const query = {
