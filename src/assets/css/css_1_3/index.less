@@ -1879,3 +1879,20 @@ body {
 .ark--dialog .dialog-operation i.iconbj_open::before{
   content: '》';
 }
+
+// 错误弹框-滚动条
+.ark-modal-confirm-footer {
+  padding-top: 15px !important;
+}
+.ark-modal-confirm-body textarea {
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #c5c2c2;
+  }
+}
+ 
