@@ -1509,20 +1509,30 @@ export default {
     },
     // 修改卖家备注
     bounced2() {
-      if (!this.$refs.agGridChild.AGTABLE.getSelect().length) {
+      const selectArr = this.$refs.agGridChild.AGTABLE.getSelect();
+      if (!selectArr.length) {
         this.$Message.error(this.vmI18n.t('modalTips.m1')); // 请至少选中一项修改!
         return;
       }
       const ids = [];
-      for (let i = 0; i < this.$refs.agGridChild.AGTABLE.getSelect().length; i++) {
-        ids.push(this.$refs.agGridChild.AGTABLE.getSelect()[i].ID);
+      let iSstate = true;
+      selectArr.forEach(element => {
+          if (element.RETURN_STATUS_NAME === this.vmI18n.t('common.cancel')) {
+            this.$Message.error(this.vmI18n.t('modalTips.ds')); // 单据状态是取消状态不能修改卖家备注！
+            iSstate = false;
+          }
+      });
+      if (iSstate) {
+        for (let i = 0; i < this.$refs.agGridChild.AGTABLE.getSelect().length; i++) {
+          ids.push(this.$refs.agGridChild.AGTABLE.getSelect()[i].ID);
+        }
+        this.changeRemarkConfig.componentData = {
+          ids: ids.join(','),
+          status: this.statusTab,
+          type: 2
+        };
+        this.$children.find(item => item.name === 'rturngoodModifyRemarks').openConfirm();
       }
-      this.changeRemarkConfig.componentData = {
-        ids: ids.join(','),
-        status: this.statusTab,
-        type: 2
-      };
-      this.$children.find(item => item.name === 'rturngoodModifyRemarks').openConfirm();
     },
     // 修改退货仓库
     Warehouse() {
@@ -1698,9 +1708,10 @@ export default {
     // 退货转换货校验
     async refund2ExchangeValidate() {
       const _this = this;
-      if (this.$refs.agGridChild.AGTABLE.getSelect().length !== 1) {
-        _this.$Message.error(this.vmI18n.t('modalTips.k3')); // 请选中一项修改!
-        return;
+      const seLen = this.$refs.agGridChild.AGTABLE.getSelect().length;
+      if (seLen !== 1) {
+        // <1时,请选中一项修改!    >1时,不允许批量处理！
+        return (seLen < 1) ? (_this.$Message.error(this.vmI18n.t('modalTips.k3'))) : (_this.$Message.error(this.vmI18n.t('modalTips.dr')));
       }
       const selected = this.$refs.agGridChild.AGTABLE.getSelect()[0];
       const query = {

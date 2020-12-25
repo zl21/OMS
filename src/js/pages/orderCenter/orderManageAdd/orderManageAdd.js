@@ -48,7 +48,7 @@ export default {
       if (!rAddress) {
         return callback(new Error('收货人地址不能为空!'));
       }
-      if (/[^0-9](.)*/.test(rAddress)) {
+      if (/^[^\d#\$\*\+@!%\^&-=]{1,}/.test(rAddress)) {
         return callback();
       }
       return callback(new Error('收货人地址格式不正确!'));
