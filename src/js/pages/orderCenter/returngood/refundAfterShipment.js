@@ -1534,7 +1534,7 @@ export default {
         // 详情/复制页面新增明细逻辑
         const data = {};
         const OcBReturnAfSendItem = [];
-        data.orderId = this.reForm.config.filter(item => item.item.label == this.vmI18n.t('form_label.originalOrderNo')).item.props.value;
+        data.orderId = this.reForm.config.filter(item => item.item.label == this.vmI18n.t('form_label.originalOrderNo'))[0].item.props.value;
         data.id = self.$route.params.customizedModuleId == 'New' ? -1 : self.$route.params.customizedModuleId;
         self.addItem.addList.forEach((item) => {
           const obj = {};
