@@ -137,7 +137,7 @@ export default {
         data: param,
       }).then((res) => {
         if (res.data.code === 0) {
-          if (self.$route.query.id == 2627) {
+          if (self.$route.params.customizedModuleId == 2627) {
             self.$Message.success(res.data.message);
             self.$parent.$parent.$parent.getData();
             self.$parent.$parent.closeConfirm();
