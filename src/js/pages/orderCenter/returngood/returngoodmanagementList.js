@@ -1281,7 +1281,8 @@ export default {
         return;
       }
       if (this.$refs.agGridChild.AGTABLE.getSelect()[0].RETURN_STATUS != 30 && this.$refs.agGridChild.AGTABLE.getSelect().length == 1) {
-        _this.$Message.warning(this.vmI18n.t('modalTips.k5')); // 当前选中行，无法使用此按钮!
+        // _this.$Message.warning(this.vmI18n.t('modalTips.k5')); // 当前选中行，无法使用此按钮!
+        _this.$Message.warning(this.vmI18n.t('modalTips.dt')); // 只有待售后审核状态的退单可以售后审核，请重新选择数据！
         return;
       }
       const ids = [];
@@ -1291,7 +1292,8 @@ export default {
         }
       }
       if (ids.length == 0) {
-        _this.$Message.warning(this.vmI18n.t('modalTips.k6')); // 单据状态不符合审核条件，请重新选择
+        // _this.$Message.warning(this.vmI18n.t('modalTips.k6')); // 单据状态不符合审核条件，请重新选择
+        _this.$Message.warning(this.vmI18n.t('modalTips.dt')); // 只有待售后审核状态的退单可以售后审核，请重新选择数据！
         return;
       }
       this.$Modal.info({

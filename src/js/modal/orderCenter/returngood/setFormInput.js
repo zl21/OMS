@@ -24,7 +24,7 @@ export default {
             btnclick: () => {
               // this.$refs.changeLogistics.close();
               this.$parent.$parent.closeConfirm();
-            } //按钮点击事件
+            }
           }
         ]
       },
@@ -80,7 +80,7 @@ export default {
       };
       console.log(param);
       axios({
-        url: '/p/cs/saveQueryListConfig',
+        url: '/api/cs/oc/oms/v1/saveQueryListConfig',
         method: 'post',
         data: param
       }).then(res => {
@@ -98,7 +98,7 @@ export default {
           useronfigList: self.childArr
         };
         axios({
-          url: '/p/cs/saveQueryListConfig',
+          url: '/api/cs/oc/oms/v1/saveQueryListConfig',
           method: 'post',
           data: param
         }).then(res => {
@@ -171,7 +171,7 @@ export default {
       };
       console.log(param);
       axios({
-        url: '/p/cs/saveQueryListConfig',
+        url: '/api/cs/oc/oms/v1/saveQueryListConfig',
         method: 'post',
         data: param
       }).then(res => {
