@@ -871,7 +871,7 @@ export default {
           label: window.vmI18n.t('form_label.actualRefundAmount'), // 实际退款金额
           props: {
             value: '',
-            disabled: this.$route.params.customizedModuleName === 'REFUNDAFTERSHIPMENT' ? true : false,
+            disabled: this.$route.params.customizedModuleName === 'REFUNDAFTERSHIPMENT',
           },
           event: {},
         },
@@ -1222,7 +1222,7 @@ export default {
         self.$Message.warning(self.vmI18n.t('modalTips.j0')); // 请输入正确的买家手机号
         return;
       }
-      AfSend.ID = self.$route.query.cid || self.$route.params.customizedModuleId === 'New' ? '-1' : '';
+      AfSend.ID = self.$route.query.cid || self.$route.params.customizedModuleId === 'New' ? '-1' : self.$route.params.customizedModuleId;
       const AfSendItem = self.tableConfig.data.map(item => ({
         id: item.ID,
         AMT_RETURN: item.returnPrice,
