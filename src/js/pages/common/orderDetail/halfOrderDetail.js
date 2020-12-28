@@ -368,7 +368,6 @@ export default {
       this.amend = val;
     },//保存弹框 */
     bigSave(e) {
-      console.log(e);
       if (e.detail.type == 'refresh') {
         // 刷新字表
         if (this.queryListPort) return;
@@ -380,7 +379,11 @@ export default {
         });
       }
       if (e.detail.type !== 'save') return;
-      if (e.detail.itemTableParame) {
+      if (this.$route.params.itemId == 'New') { // 如果为新增页面,则先保存主表成功之后再保存子表
+        if (e.detail.itemTableParame) {
+        this.save = true;
+      }
+      } else {
         this.save = true;
       }
     },
