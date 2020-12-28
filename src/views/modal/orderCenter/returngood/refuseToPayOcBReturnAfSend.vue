@@ -3,8 +3,12 @@
     <div class="form">
       <Form
         :label-width="100"
+        :rules="ruleValidate"
       >
-        <FormItem label="拒绝打款原因">
+        <FormItem
+          label="拒绝打款原因"
+          prop="reason"
+        >
           <Input
             v-model="reason"
             type="textarea"
@@ -35,6 +39,11 @@
     data() {
       return {
         reason: '',
+        ruleValidate: {
+          reason: [
+            { required: true, message: '拒绝打款原因不能为空!', trigger: 'blur' }
+          ],
+        },
         btnConfig: {
           typeAll: 'error', // 按钮统一风格样式
           btnsite: 'right', // 按钮位置 (right , center , left)
@@ -64,6 +73,7 @@
     },
     methods: {
       determine() {
+        if (!this.reason) return this.$Message.warning('拒绝打款原因不能为空!');
         this.service.orderCenter.refuseToPayOcBReturnAfSend({ ids: this.idArray, reason: this.reason }).then(res=>{
           console.log(res);
           if (res.data.data.code == 0) {
@@ -88,6 +98,7 @@
                 }
               })
             });
+            this.$emit('closeActionDialog');
           }
         });
       }
