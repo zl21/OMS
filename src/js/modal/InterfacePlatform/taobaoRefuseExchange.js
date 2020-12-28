@@ -142,10 +142,10 @@ export default {
         this.pageLoad = false;
         if (res.data.code === 0) {
           this.$message.success(res.data.message);
-
-          this.$emit('confirmImport');
+          this.$emit('closeActionDialog', true);
         } else {
-          this.$message.error(res.data.message || '拒绝换货失败');
+          // this.$message.error(res.data.message || '拒绝换货失败');
+          this.$emit('closeActionDialog', true);
         }
       }).catch(() => {
         this.pageLoad = false;
