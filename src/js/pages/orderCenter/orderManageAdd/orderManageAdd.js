@@ -267,8 +267,8 @@ export default {
               }
               // 如果是丢单复制或者复制订单的保存，传被复制订单的id
               // 如果为丢单复制,则新增一个标识
-              const copyTitle = { 
-'Drop-out copy': '1', oriInvalidCopy: '2', OrderWrongCopy: '3', OrderMissSendCopy: '4', OrderGiftsOutCopy: '5' 
+              const copyTitle = {
+'Drop-out copy': '1', oriInvalidCopy: '2', OrderWrongCopy: '3', OrderMissSendCopy: '4', OrderGiftsOutCopy: '5'
 };
               if (copyID.orderCopy) {
                 data.type = copyTitle[this.$route.query.pageTitle];
@@ -318,7 +318,7 @@ export default {
               {
                 childs: [
                   {
- colname: 'CP_C_PLATFORM_ID', refobjid: '', valuedata: '', name: '发货仓库' 
+ colname: 'CP_C_PLATFORM_ID', refobjid: '', valuedata: '', name: '发货仓库'
 }
                 ]
               }
@@ -1444,9 +1444,9 @@ export default {
             this.formConfig.formData[1].inputList = [
               {
                 childs: [
-                  { 
-                    colname: 'CP_C_PLATFORM_ID', 
-                    refobjid: res.data.data.baseInfo.CP_C_PHY_WAREHOUSE_ID, 
+                  {
+                    colname: 'CP_C_PLATFORM_ID',
+                    refobjid: res.data.data.baseInfo.CP_C_PHY_WAREHOUSE_ID,
                     valuedata: res.data.data.baseInfo.CP_C_PHY_WAREHOUSE_ENAME,
                   }
                 ]
@@ -1481,13 +1481,13 @@ export default {
                 parseFloat(item.REAL_AMT).toFixed(2),
                 amt
               );
-              qty += item.QTY;
+              qty += parseInt(item.QTY);
             });
             self.jordanTableConfig.totalData = [{
               selection: `${self.vmI18n.t('other.total')}:`, // 合计
               REAL_AMT: amt,
               QTY: qty,
-            },];
+            }];
           } else {
             self.$Message.warning(res.data.message);
           }
