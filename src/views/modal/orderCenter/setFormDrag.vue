@@ -1,7 +1,6 @@
 <template>
   <ul
     id="container"
-    class="setFromDrag"
   >
     <li
       v-for="(item,index) in dragList"
@@ -26,11 +25,11 @@
 </template>
 
 <script>
-  import setFromDrag from '@/js/modal/orderCenter/setFromDrag';
+  import setFormDrag from '@/js/modal/orderCenter/setFormDrag';
 
-  export default setFromDrag;
+  export default setFormDrag;
 </script>
 
 <style lang="less" scoped>
-  @import "~@/css/modal/orderCenter/setFromDrag.less";
+  @import "~@/css/modal/orderCenter/setFormDrag.less";
 </style>

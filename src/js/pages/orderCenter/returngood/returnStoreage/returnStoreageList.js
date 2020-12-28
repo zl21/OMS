@@ -562,10 +562,10 @@ export default {
       const CREATETIME = this.formConfig.formValue.CREATETIME;
       if (CREATETIME && CREATETIME !== []) {
         if (CREATETIME[0] !== '') {
-          params.beginDate = CREATETIME[0] ? CREATETIME[0].Format('yyyy-MM-dd hh:mm:ss') : '';
+          params.beginDate = CREATETIME[0] ? new Date(CREATETIME[0]).Format('yyyy-MM-dd hh:mm:ss') : '';
         }
         if (CREATETIME[1] !== '') {
-          params.endDate = CREATETIME[1] ? CREATETIME[1].Format('yyyy-MM-dd hh:mm:ss') : '';
+          params.endDate = CREATETIME[1] ? new Date(CREATETIME[1]).Format('yyyy-MM-dd hh:mm:ss') : '';
         }
       }
       return params;

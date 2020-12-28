@@ -143,7 +143,7 @@
           pageSize: 10,
           current: 1,
           isShowSelection: true,
-          jordanFormConfig: {
+          businessFormConfig: {
             formValue: {
               NEW_PS_C_SKU_ECODE: '',
               NEW_PS_C_SKU_ID: '',
@@ -167,7 +167,7 @@
                   valuedata: '',
                 },
                 oneObj: (data) => {
-                  let formValue = this.dialogTableConfig.jordanFormConfig.formValue;
+                  let formValue = this.dialogTableConfig.businessFormConfig.formValue;
                   formValue.NEW_PS_C_SKU_ECODE = data.valuedata;
                   formValue.NEW_PS_C_SKU_ID = data.pid;
                 },
@@ -286,7 +286,7 @@
       },
       // 弹窗的input回车事件
       dialogInputEnter() {
-        let formValue = this.dialogTableConfig.jordanFormConfig.formValue;
+        let formValue = this.dialogTableConfig.businessFormConfig.formValue;
         let message = '';
         if (!formValue.NEW_PS_C_SKU_ECODE || !formValue.NEW_PS_C_SKU_ID) {
           message = '实际条码为空或不正确';
@@ -333,8 +333,8 @@
         let pagingData = pagingInit(this.dialogTableData, this.dialogTableConfig);
         this.dialogTableConfig.data = pagingData.data;
         // 清除上次输入的条码
-        this.dialogTableConfig.jordanFormConfig.formData[0].itemdata.pid = '';
-        this.dialogTableConfig.jordanFormConfig.formData[0].itemdata.valuedata = '';
+        this.dialogTableConfig.businessFormConfig.formData[0].itemdata.pid = '';
+        this.dialogTableConfig.businessFormConfig.formData[0].itemdata.valuedata = '';
       },
       // 选中的table数组
       dialogTableSelect(selection) {

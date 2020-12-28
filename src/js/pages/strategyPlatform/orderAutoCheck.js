@@ -374,9 +374,7 @@ export default {
       this.CP_C_LOGISTICS_ID_SELECT.selectDatas = [];
       this.CP_C_LOGISTICS_ID_SELECT.defaultSelected = [];
       this.info.CP_C_LOGISTICS_ID = '';
-      this.info.CP_C_SHOP_TITLE = '';
       this.result.CP_C_LOGISTICS_ID = '';
-      this.result.CP_C_SHOP_TITLE = '';
     },
     async logisticInputValueChange(e) {
       console.log('logisticInputValueChange');

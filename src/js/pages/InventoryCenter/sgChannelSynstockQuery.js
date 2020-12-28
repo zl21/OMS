@@ -530,12 +530,12 @@ export default {
     // 设置表格高度
     setTableHeight() {
       const _this = this;
-      const contentHeight = document.getElementsByClassName('main-content')[0].clientHeight;
+      const contentHeight = document.getElementById('content').clientHeight;
       let returnHeight = 25;
       returnHeight += document.getElementsByClassName('returnBtn')[0].clientHeight;
       returnHeight += document.getElementsByClassName('returnForm')[0].clientHeight;
       const tableHeight = contentHeight - returnHeight;
-      _this.jordanTableConfig.height = tableHeight - 130;
+      _this.jordanTableConfig.height = tableHeight - 100;
     },
     // 导出
     exportClick() {
