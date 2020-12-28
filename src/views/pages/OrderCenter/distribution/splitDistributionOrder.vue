@@ -31,7 +31,6 @@
   import reDialog from 'professionalComponents/businessDialog';
   import comUtils, { pagingInit } from '@/assets/js/__utils__/common.js';
   // import { post } from '@/utils/request';
-  import comUtils from '@/assets/js/__utils__/common.js';
 
   export default {
     components: {
