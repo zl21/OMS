@@ -259,7 +259,7 @@ export default {
         self.$Message.warning(window.vmI18n.t('modalTips.cl')); // 请选择需要拆分的明细
         return;
       }
-      if (self.data[0].length == 0 || self.data[0][0].total <= 1) {
+      if ((self.data[0].length == 1 && self.data[0][0].split_num >= self.data[0][0].waiting_split_num) || self.data[0][0].total <= 1) {
         self.$Message.warning(window.vmI18n.t('modalTips.cm')); // 没有可拆分的订单
         return;
       }
