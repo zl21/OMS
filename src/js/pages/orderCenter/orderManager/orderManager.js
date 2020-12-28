@@ -1058,7 +1058,7 @@ export default {
                 ...publicDialogConfig.dropSortConfig
               };
               setTimeout(() => {
-                self.$children.find(item => item.name === 'setFromDrag').openConfirm();
+                self.$children.find(item => item.name === 'setFormDrag').openConfirm();
               }, 100);
             } // 按钮点击事件
           },
