@@ -204,7 +204,7 @@ export default {
                       }
                     });
                 },
-                onCancel:()=> {
+                onCancel: ()=> {
                   this.$emit('closeActionDialog', false);
                 }
               });
@@ -253,7 +253,7 @@ export default {
                       }
                     });
                 },
-                onCancel:()=> {
+                onCancel: ()=> {
                   this.$emit('closeActionDialog', false);
                 }
               });
@@ -733,16 +733,14 @@ export default {
       const self = this;
       const selectItem = this.tab1.order;
       let pageTitle = '';
-      const dropDownArr = self.btnConfig.buttons.filter( item => {
-        return item.dropDown == true && item.menus.length > 0
-      });
+      const dropDownArr = self.btnConfig.buttons.filter(item => item.dropDown == true && item.menus.length > 0);
       dropDownArr.forEach(item => {
-        item.menus.forEach (it => {
-          if(it.webname == type) {
-            pageTitle = it.text;
+        item.menus.forEach(it => {
+          if (it.webname == type) {
+            pageTitle = it.webname;
           }
-        })
-      })
+        });
+      });
       const ORDERSTATUSNAME = selectItem.ORDER_STATUS_NAME;
       if (selectItem.COPY_REASON) {
         // 订单只能是原单才能复制!
@@ -765,7 +763,7 @@ export default {
       
       const query = {
         id: self.$route.params.customizedModuleId,
-        pageTitle: pageTitle
+        pageTitle
       };
       // 丢单复制
       if (type === 'Drop-out copy') {

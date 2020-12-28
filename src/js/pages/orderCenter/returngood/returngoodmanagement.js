@@ -44,7 +44,7 @@ export default {
         20: window.vmI18n.t('form_label.waitFor_return_warehous'), // '等待退货入库',
         30: window.vmI18n.t('form_label.waitFor_afterSale_review'), // '等待售后审核',
         50: window.vmI18n.t('form_label.complete'), // '完成',
-        60: window.vmI18n.t('common.cancelled'), // '已取消',
+        60: window.vmI18n.t('common.cancelled') // '已取消',
       },
       // 可用库存不足弹窗提示
       availableStock: false,
@@ -335,7 +335,7 @@ export default {
           REMARK: '', // 备注
           SELLER_MEMO: '', // 卖家备注
           BILL_NO: '', // 订单编号
-          PLATFORM: '', // 平台
+          PLATFORM: '' // 平台
         },
         // 表单非空提示
         ruleValidate: {
@@ -515,20 +515,20 @@ export default {
             width: '6', // 所占的宽度
             value: 'IS_RESERVED',
             disabled: false, // 按钮禁用控制
-            checked: false, // 是否勾选控制
+            checked: false // 是否勾选控制
             // 新加需求,换货预留库存不勾选不显示是否生成换货单
             // checkboxChange: e => {
-              // const _this = this;
-              // if (e) {
-                // _this.information.formData[11].style = 'select';
-                // _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = 1;
-                // setTimeout(() => {
-                //   document.getElementsByClassName('ark-select-selected-value')[1].className = 'ark-select-selected-value inputBgcolor';
-                // }, 10);
-              // } else {
-              //   _this.information.formData[11].style = '';
-              //   _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = '';
-              // }
+            // const _this = this;
+            // if (e) {
+            // _this.information.formData[11].style = 'select';
+            // _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = 1;
+            // setTimeout(() => {
+            //   document.getElementsByClassName('ark-select-selected-value')[1].className = 'ark-select-selected-value inputBgcolor';
+            // }, 10);
+            // } else {
+            //   _this.information.formData[11].style = '';
+            //   _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = '';
+            // }
             // }
           },
           {
@@ -1085,7 +1085,8 @@ export default {
   mounted() {
     this.$nextTick(() => {
       //    配置详情页上的功能按钮;
-      if (this.$route.query.id === '-1' || this.$route.query.flag === 'RefundToExchange') { // 新增 或者退货转换货单状态
+      if (this.$route.query.id === '-1' || this.$route.query.flag === 'RefundToExchange') {
+        // 新增 或者退货转换货单状态
         this.btnConfig.buttons = [
           {
             text: this.vmI18n.t('btn.save'), // 保存 按钮文本
@@ -1422,6 +1423,7 @@ export default {
       }
     } else {
       this.getList();
+      console.log(this.$route.query);
       this.information.formData[1].disabled = true;
       this.information.formData[1].icon = '';
       this.information.formData[2].disabled = this.$route.query.flag !== 'RefundToExchange'; // 如果为退货转换货过来的,单据类型可编辑
@@ -1429,6 +1431,14 @@ export default {
       this.information.formData[4].disabled = true;
       this.information.formData[5].itemdata.readonly = true;
       this.information.formData[10].disabled = true;
+
+      this.information.formData.forEach(item => {
+        if (item.value == 'SELLER_MEMO') {
+          if (this.$route.query.statusName == '待退货入库' || this.$route.query.statusName == '等待售后确认') {
+            item.disabled = false;
+          }
+        }
+      });
       const informationArr = [
         {
           style: 'input',
@@ -1508,7 +1518,7 @@ export default {
       });
     },
     // 获取详情数据
-    getList() {
+    async getList() {
       const _this = this;
       _this.jordanTableConfig.loading = true;
       _this.service.orderCenter.findDetail({ id: _this.$route.query.id, start: 1, count: 50 }).then(async res => {
@@ -1620,7 +1630,7 @@ export default {
         _this.qtyRefundEditFlag = false;
       }
       // 设置颜色尺码是否可编辑
-      if ([20].includes(returnStatus) || (this.$route.query.flag === 'RefundToExchange' && ([20, 30, 50].includes(returnStatus)))) {
+      if ([20].includes(returnStatus) || (this.$route.query.flag === 'RefundToExchange' && [20, 30, 50].includes(returnStatus))) {
         _this.clrAndSizeFlag = true;
         _this.returnIdEditFlag = true;
       } else {
@@ -1926,12 +1936,14 @@ export default {
                           }
                         }
                       },
-                      list.map(item => h('Option', {
+                      list.map(item =>
+                        h('Option', {
                           props: {
                             value: item.psCSpec1objId,
                             label: item.psCSpec1objName
                           }
-                        }))
+                        })
+                      )
                     )
                   ]
                 );
@@ -2046,12 +2058,14 @@ export default {
                           }
                         }
                       },
-                      list.map(item => h('Option', {
+                      list.map(item =>
+                        h('Option', {
                           props: {
                             value: item.psCSpec2objId,
                             label: item.psCSpec2objName
                           }
-                        }))
+                        })
+                      )
                     )
                   ]
                 );
@@ -2269,12 +2283,14 @@ export default {
                     }
                   }
                 },
-                list.map(item => h('Option', {
+                list.map(item =>
+                  h('Option', {
                     props: {
                       value: item.SPEC,
                       label: item.SPEC
                     }
-                  }))
+                  })
+                )
               );
             }
           }
@@ -2406,12 +2422,14 @@ export default {
                           }
                         }
                       },
-                      list.map(item => h('Option', {
+                      list.map(item =>
+                        h('Option', {
                           props: {
                             value: item.psCSpec1objId,
                             label: item.psCSpec1objName
                           }
-                        }))
+                        })
+                      )
                     )
                   ]
                 );
@@ -2519,12 +2537,14 @@ export default {
                           }
                         }
                       },
-                      list.map(item => h('Option', {
+                      list.map(item =>
+                        h('Option', {
                           props: {
                             value: item.psCSpec2objId,
                             label: item.psCSpec2objName
                           }
-                        }))
+                        })
+                      )
                     )
                   ]
                 );
@@ -3060,7 +3080,7 @@ export default {
         OcBreturnOrder: Object.assign(_this.information.formValue, _this.replacement.formValue, money), // 主表信息
         OcBreturnOrderExchange: Elist, // 换货明细
         OcBreturnOrderRefund: Rlist, // 退货明细
-        isRefund2Exchange: this.$route.query.flag === 'RefundToExchange' ? 1 : 0, // 如果未退货转换货订单,保存需传isRefund2Exchange
+        isRefund2Exchange: this.$route.query.flag === 'RefundToExchange' ? 1 : 0 // 如果未退货转换货订单,保存需传isRefund2Exchange
       };
       // 复制订单标识
       if (_this.$route.query.cloneReturnGoodId) params.copytype = 1;
@@ -3188,7 +3208,7 @@ export default {
     cancelBtn() {
       const _this = this;
       if (this.$route.query.id == '-1') return;
-      this.service.orderCenter.checkCancelParams({ ids: [this.$route.query.id] }).then(res=>{
+      this.service.orderCenter.checkCancelParams({ ids: [this.$route.query.id] }).then(res => {
         if (res.data.code == 0 || res.data.code == 1) {
           this.$Modal.info({
             title: _this.vmI18n.t('modalTitle.tips'), // 提示
@@ -3367,8 +3387,8 @@ export default {
           await self.reconstructionGetDetail(obj, obj, obj.ECODE);
           // await self.reconstructionGetDetail()
           //  obj.ECODE
-          // obj.clrList = obj.selected.psCSpec1objList; 
-          // obj.sizeList = obj.selected.psCSpec2objList; 
+          // obj.clrList = obj.selected.psCSpec1objList;
+          // obj.sizeList = obj.selected.psCSpec2objList;
           // 新增换货明细时判断退货明细中是否存在此商品编号
           // 存在 ==> 将退货明细中数据拿过来
           // 不存在 ==> 新增
@@ -3554,14 +3574,14 @@ export default {
       const _this = this;
       const lists = _this.order.orderform.formValue;
       if (
-        (lists.ID == '' || lists.ID == undefined)
-        && (lists.BILL_NO == '' || lists.BILL_NO == undefined)
-        && (lists.source_code == '' || lists.source_code == undefined)
-        && (lists.receiver_name == '' || lists.receiver_name == undefined)
-        && (lists.user_nick == '' || lists.user_nick == undefined)
-        && (lists.receiver_mobile == '' || lists.receiver_mobile == undefined)
-        && (lists.cp_c_store_ename == '' || lists.cp_c_store_ename == undefined)
-        && num == undefined
+        (lists.ID == '' || lists.ID == undefined) &&
+        (lists.BILL_NO == '' || lists.BILL_NO == undefined) &&
+        (lists.source_code == '' || lists.source_code == undefined) &&
+        (lists.receiver_name == '' || lists.receiver_name == undefined) &&
+        (lists.user_nick == '' || lists.user_nick == undefined) &&
+        (lists.receiver_mobile == '' || lists.receiver_mobile == undefined) &&
+        (lists.cp_c_store_ename == '' || lists.cp_c_store_ename == undefined) &&
+        num == undefined
       ) {
         _this.$Message.error(_this.vmI18n.t('modalTips.i8')); // 请输入查询条件！
         return;
@@ -3624,7 +3644,8 @@ export default {
         detailType: 2 // 退换货订单使用
       };
       fromdata.append('param', JSON.stringify(param));
-      this.service.common.queryOrderList(fromdata)
+      this.service.common
+        .queryOrderList(fromdata)
         .then(res => {
           if (res.data.data) {
             res.data.data.queryOrderResultList.forEach(item => {

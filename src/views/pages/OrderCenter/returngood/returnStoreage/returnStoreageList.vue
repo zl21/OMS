@@ -30,20 +30,20 @@
     </div>
     <!-- 修改from表单 -->
     <businessDialog
-      :title="setFromInput.confirmTitle"
-      :title-align="setFromInput.titleAlign"
-      :width="setFromInput.width"
-      :scrollable="setFromInput.scrollable"
-      :closable="setFromInput.closable"
-      :draggable="setFromInput.draggable"
-      :mask="setFromInput.mask"
-      :mask-closable="setFromInput.maskClosable"
-      :transfer="setFromInput.transfer"
-      :name="setFromInput.name"
-      :url="setFromInput.url"
-      :keep-alive="setFromInput.keepAlive"
-      :exclude-string="setFromInput.excludeString"
-      :component-data="setFromInput.componentData"
+      :title="setFormInput.confirmTitle"
+      :title-align="setFormInput.titleAlign"
+      :width="setFormInput.width"
+      :scrollable="setFormInput.scrollable"
+      :closable="setFormInput.closable"
+      :draggable="setFormInput.draggable"
+      :mask="setFormInput.mask"
+      :mask-closable="setFormInput.maskClosable"
+      :transfer="setFormInput.transfer"
+      :name="setFormInput.name"
+      :url="setFormInput.url"
+      :keep-alive="setFormInput.keepAlive"
+      :exclude-string="setFormInput.excludeString"
+      :component-data="setFormInput.componentData"
     />
     <!-- 导入 -->
     <businessDialog

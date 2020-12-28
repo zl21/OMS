@@ -60,7 +60,7 @@ export default {
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {}
       },
-      setFromInput: {
+      setFormInput: {
         refFuns: 'confirmFun',
         // confirmTitle: "排序表单",
         confirmTitle: window.vmI18n.t('modalTitle.sortForm'),
@@ -72,10 +72,10 @@ export default {
         mask: true, // 是否显示遮罩层
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
-        name: 'setFromInput', // 组件名称
-        url: 'returngood/setFromInput',
+        name: 'setFormInput', // 组件名称
+        url: 'modal/orderCenter/returngood/setFormInput',
         keepAlive: true,
-        excludeString: 'setFromInput', // 将name传进去，确认不缓存
+        excludeString: 'setFormInput', // 将name传进去，确认不缓存
         componentData: {}
       },
       btnConfig: {
@@ -257,11 +257,11 @@ export default {
             icon: 'iconfont iconbj_setup', // 按钮图标
             btnclick: () => {
               const self = this;
-              self.setFromInput.componentData = {
+              self.setFormInput.componentData = {
                 typeName: 'OC_B_REFUND_IN'
               };
               setTimeout(() => {
-                self.$children.find(item => item.name === 'setFromInput').openConfirm();
+                self.$children.find(item => item.name === 'setFormInput').openConfirm();
               }, 100);
             } // 按钮点击事件
           },
