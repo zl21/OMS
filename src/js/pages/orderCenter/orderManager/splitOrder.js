@@ -345,13 +345,19 @@ export default {
       this.data[index].forEach(item=>{
         map.set(item.orig_order_item_id, item); // 记录明细唯一标识
       });
+      const Rarr = []; // 新建组数,更新data[0],为了触发表格视图刷新
       this.data[0].forEach((item)=>{
         if (map.get(item.orig_order_item_id)) {
+          Rarr.push(item);
           item.split_num = Number(item.split_num) + Number(map.get(item.orig_order_item_id).split_num);
           total = Number(total) + Number(map.get(item.orig_order_item_id).split_num);
           item.waiting_split_num = Number(item.waiting_split_num) + Number(map.get(item.orig_order_item_id).waiting_split_num);
           map.delete(item.orig_order_item_id);
+        } else {
+          Rarr.push(item);
         }
+        this.data[0] = [];
+          this.data[0] = Rarr;
       });
       map.forEach(value => {
         total += Number(value.split_num);
