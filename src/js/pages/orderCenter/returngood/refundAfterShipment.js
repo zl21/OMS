@@ -1389,14 +1389,6 @@ export default {
     // 新增明细按钮调用
     tableAddDetail() {
       const self = this;
-      for (let i = 0; i < this.reForm.config.length; i++) {
-        if (self.reForm.config[i].item.label == '原始订单编号') {
-          if (!self.reForm.config[i].item.props.value) {
-            self.$Message.warning(self.vmI18n.t('modalTips.j1')); // 原始订单编号不能为空!
-            return;
-          }
-        }
-      }
       const formData = new FormData();
       const requestData = {
         page: { pageSize: '500', pageNum: '1' },
@@ -1404,10 +1396,20 @@ export default {
           {
             type: 'Select',
             queryName: 'ID',
-            value: self.reForm.config[1].item.props.value,
+            value: '',
           },
         ],
       };
+      for (let i = 0; i < this.reForm.config.length; i++) {
+        if (self.reForm.config[i].item.label == '原始订单编号') {
+          if (!self.reForm.config[i].item.props.value) {
+            self.$Message.warning(self.vmI18n.t('modalTips.j1')); // 原始订单编号不能为空!
+            return;
+          } else {
+            requestData.highSearch[0].value = self.reForm.config[i].item.props.value;
+          }
+        }
+      }
       formData.append('param', JSON.stringify(requestData));
       this.service.common.queryOrderList(formData)
         .then((res) => {
