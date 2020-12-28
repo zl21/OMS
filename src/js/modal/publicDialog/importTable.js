@@ -67,7 +67,10 @@ export default {
       // 筛选出当前表的接口对象
       const itemObj = objArr.filter(item => item.tableName === this.componentData.tableName);
       switch (itemObj[0].tableName) {
-        case 'PS_C_SKU' || 'SG_B_CHANNEL_PRODUCT' || 'PS_C_PRO' || 'IP_C_TAOBAO_PRODUCT':
+        case 'PS_C_SKU':
+        case 'SG_B_CHANNEL_PRODUCT':
+        case 'PS_C_PRO':
+        case 'IP_C_TAOBAO_PRODUCT':
           // eslint-disable-next-line no-case-declarations
           const searchParam = new URLSearchParams();
           searchParam.append('param', JSON.stringify({ mode: this.componentData.mode }));
@@ -87,7 +90,9 @@ export default {
           }
           break;
         // 仓库物流优先级 订单派单规则-优先级 订单派单规则-比例
-        case 'ST_C_WAREHOUSE_LOGISTICS' || 'ST_C_SEND_RULE' || 'ST_C_SEND_RULE_RATE' || '':
+        case 'ST_C_WAREHOUSE_LOGISTICS':
+        case 'ST_C_SEND_RULE':
+        case 'ST_C_SEND_RULE_RATE':
           this.getDownloadTemp(itemObj[0].downloadUrl, {
             objid: this.componentData.objid
           });
