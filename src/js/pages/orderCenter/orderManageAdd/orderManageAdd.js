@@ -1336,7 +1336,7 @@ export default {
           if (cid) {
             setTimeout(() => {
               _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = cidStr;
-            }, 100);
+            }, 1);
           }
         }
       } else {
@@ -1433,11 +1433,6 @@ export default {
           IDS: [copyID.id],
           TYPE: type,
         })
-        // self.$network
-        //   .post('/p/cs/billCopy', {
-        //     IDS: [copyID.id],
-        //     TYPE: type,
-        //   })
         .then((res) => {
           if (res.data.code === 0) {
             const obj = Object.assign(
@@ -1445,6 +1440,18 @@ export default {
               res.data.data.receivingGoods,
               res.data.data.remarksInfo
             );
+            // 配置初始化页面时'配送物流'的默认项
+            this.formConfig.formData[1].inputList = [
+              {
+                childs: [
+                  { 
+                    colname: 'CP_C_PLATFORM_ID', 
+                    refobjid: res.data.data.baseInfo.CP_C_PHY_WAREHOUSE_ID, 
+                    valuedata: res.data.data.baseInfo.CP_C_PHY_WAREHOUSE_ENAME,
+                  }
+                ]
+              }
+            ];
             self.isCopy = true;
             self.setOrderData(obj);
             self.getOrderDatail(copyID);
