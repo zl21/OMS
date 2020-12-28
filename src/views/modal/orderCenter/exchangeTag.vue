@@ -26,8 +26,8 @@
           this.$message.error('请先选择一条数据更换吊牌！');
           return;
         }
-        if (this.selectRowData[0].STATUS && this.selectRowData[0].STATUS.val === '缺货') {
-          this.$message.error('缺货状态的单据不能执行换吊牌操作！');
+        if (this.selectRowData[0].STATUS && this.selectRowData[0].STATUS.val !== '缺货') {
+          this.$message.error('非【缺货】状态，不能进行换吊牌操作！');
           return;
         }
         this.$store.commit('customize/TabHref', {
