@@ -2133,7 +2133,8 @@ export default {
                           if (parseInt(_this.jordanTableConfig.data[params.index].QTY_CAN_REFUND) < parseInt(e.target.value)) {
                             _this.$Message.warning('申请数量不允许大于可退数量!');
                             setTimeout(() => {
-                              document.getElementsByClassName('qtyRefund')[params.index].childNodes[6].value = _this.jordanTableConfig.data[params.index].QTY_REFUND;
+                              e.target.value = _this.jordanTableConfig.data[params.index].QTY_REFUND;
+                              // document.getElementsByClassName('qtyRefund')[params.index].childNodes[6].value = _this.jordanTableConfig.data[params.index].QTY_REFUND;
                             }, 100);
                             return;
                           }
@@ -2967,7 +2968,8 @@ export default {
       }
       for (let i = 0; i < item.length; i++) {
         if (!item[i].QTY_REFUND) {
-          _this.$Message.error(_this.vmI18n.t('modalTips.al')); // 退货明细数量不能为空
+          // _this.$Message.error(_this.vmI18n.t('modalTips.al')); // 退货明细数量不能为空
+          _this.$Message.error('申请数量不能为空！'); // 退货明细数量不能为空
           return;
         }
         if (!item[i].PS_C_CLR_ID) {
