@@ -255,6 +255,7 @@ export default {
     addPendingOrder() {
       const self = this;
       let flag = true;
+      let isIndex = true; // 主仓库第一条total是否已重置为0;
       if (self.onSelectData.length === 0) {
         self.$Message.warning(window.vmI18n.t('modalTips.cl')); // 请选择需要拆分的明细
         return;
@@ -283,7 +284,7 @@ export default {
       // 更新原单拆单数量
       const arr = [];
       self.data[0][0].total = 0; // 重置促使仓库数量,一下重新计算总件数
-      self.data[0].forEach(item => {
+      self.data[0].forEach((item, index) => {
         if (self.isNullToArr(item.orig_order_item_id, self.onSelectData)) {
           item.waiting_split_num -= item.split_num;
         }
@@ -291,6 +292,7 @@ export default {
         if (item.waiting_split_num !== 0) {
           item._index = undefined;
           arr.push(item);
+          if (isIndex) { arr[0].total = 0; isIndex = false; } // 第一次累计主仓库总数是重置total为0;
           if (arr[0].total) arr[0].total += item.waiting_split_num;
           else arr[0].total = item.waiting_split_num;
         }
@@ -343,17 +345,21 @@ export default {
       this.data[index].forEach(item=>{
         map.set(item.orig_order_item_id, item); // 记录明细唯一标识
       });
-      this.data[0].forEach(item=>{
+      this.data[0].forEach((item)=>{
         if (map.get(item.orig_order_item_id)) {
-          item.split_num += Number(map.get(item.orig_order_item_id).split_num);
-          total += Number(map.get(item.orig_order_item_id).split_num);
-          item.waiting_split_num += Number(map.get(item.orig_order_item_id).waiting_split_num);
+          item.split_num = Number(item.split_num) + Number(map.get(item.orig_order_item_id).split_num);
+          total = Number(total) + Number(map.get(item.orig_order_item_id).split_num);
+          item.waiting_split_num = Number(item.waiting_split_num) + Number(map.get(item.orig_order_item_id).waiting_split_num);
           map.delete(item.orig_order_item_id);
         }
       });
       map.forEach(value => {
         total += Number(value.split_num);
+        let newArr = [];
         this.data[0].push(value);
+        newArr = JSON.parse(JSON.stringify(this.data[0]));
+        this.data[0] = [];
+        this.data[0] = newArr;
       });
       this.$nextTick(()=>{
         this.data[0][0].total += total;
