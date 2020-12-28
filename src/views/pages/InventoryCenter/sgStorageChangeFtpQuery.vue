@@ -1,12 +1,12 @@
 <template>
   <div class="sgStorageChangeFtpQuery">
     <div
-      class="returnBtn"
+      class="returnBtn totalHeight"
     >
       <!-- 按钮 -->
       <business-button :btn-config="btnConfig" />
     </div>
-    <div class="returnForm">
+    <div class="returnForm totalHeight">
       <!-- form表单 -->
       <business-form :form-config="formConfig" />
     </div>
