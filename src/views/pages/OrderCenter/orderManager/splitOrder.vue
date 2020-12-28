@@ -31,7 +31,7 @@
             />
             {{ item[0]?item[0].cp_c_phy_warehouse_ename:old_cp_c_phy_warehouse_ename }}: 共{{ item[0]?item[0].total:0 }}件
             <div
-              v-if="isOutStore"
+              v-if="isOutStore && index==0"
               class="subscript"
             >
               缺货
