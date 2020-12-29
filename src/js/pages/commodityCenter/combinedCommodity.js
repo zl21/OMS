@@ -795,7 +795,7 @@ export default {
           ECODE: str
         }
       };
-      _this.service.common.skuQuery(data).then(res => {
+      self.service.common.skuQuery(data).then(res => {
         if (res.status === 200) {
           const data = res.data.data.data;
           const dimList = self.jordanTableConfig2.businessFormConfig.formData;
