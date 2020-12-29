@@ -122,8 +122,7 @@ export default {
       .then((res) => {
         if (res.data.code === 0) {
           this.btnConfig.buttons[1].disabled = false;
-          console.log(self.$route.query.id);
-          if (self.$route.query.id == 2627) {
+          if (self.$route.params.customizedModuleId == 2627) {
             self.$parent.$parent.$parent.getData();
             if (!res.data.data) {
               self.$Message.success(res.data.message);
@@ -172,6 +171,7 @@ export default {
               });
             }
           } else {
+            // 订单管理详情的刷新方法load()
             self.$parent.$parent.$parent.load();
             self.$Message.success(res.data.message);
             self.$parent.$parent.closeConfirm();
