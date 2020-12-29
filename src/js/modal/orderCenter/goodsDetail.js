@@ -3,29 +3,29 @@ import businessForm from 'professionalComponents/businessForm';
 import jordanBtn from 'professionalComponents/businessButton';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import jordanModal from 'professionalComponents/businessDialog';
-import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
-import { listeningToKeydownMixin } from '@/assets/js/mixins/listeningToKeydown.js';
+import publicDialogConfig from 'professionalComponents/common/js/publicDialog';
+import { listeningToKeydownMixin } from '@/assets/js/mixins/listeningToKeydown';
 
 export default {
   components: {
     businessForm,
     jordanBtn,
     businessActionTable,
-    jordanModal,
+    jordanModal
   },
   props: {
     componentData: {
       type: Object,
-      default: {},
-    },
+      default: {}
+    }
   },
   mixins: [listeningToKeydownMixin],
   watch: {
-    publicBouncedConfig(newvalue, oldvalue) {
+    publicBouncedConfig(newvalue) {
       console.log(newvalue);
       this.publicBouncedIndex = newvalue;
       console.log(this.publicBouncedIndex);
-    },
+    }
   },
   // computed:{
   //   publicBouncedConfig(){
@@ -40,19 +40,19 @@ export default {
       // 公共弹框
       publicBouncedConfig: {},
       publicBouncedIndex: {
-        name: 'testModal', // 组件名称
+        name: 'testModal' // 组件名称
       },
       islackstock: [
         {
           // label: "是",
           label: window.vmI18n.t('common.yes'),
-          value: '1',
+          value: '1'
         },
         {
           // label: "否",
           label: window.vmI18n.t('common.no'),
-          value: '0',
-        },
+          value: '0'
+        }
       ],
       // 表格
       jordanTableConfig: {
@@ -70,18 +70,20 @@ export default {
               btnclick: () => {
                 const self = this;
                 const ids = this.selection.map(row => row.ID);
-                if (ids.length === 0)
-                // return self.$Message.error("至少选择一条订单明细");
-                { return self.$Message.error(window.vmI18n.t('modalTips.zk')); }
+                if (ids.length === 0) {
+                  // return self.$Message.error("至少选择一条订单明细");
+                  self.$Message.error(window.vmI18n.t('modalTips.zk'));
+                  return;
+                }
                 const param = {
                   orderId: self.componentData.id,
-                  ids,
+                  ids
                 };
                 axios({
                   url: '/api/cs/oc/oms/v1/deleteGit',
                   method: 'post',
-                  data: param,
-                }).then((res) => {
+                  data: param
+                }).then(res => {
                   if (res.data.code === 0) {
                     self.getData();
                     self.$parent.$parent.$parent.getData();
@@ -90,7 +92,7 @@ export default {
                     self.$Message.error(res.data.message);
                   }
                 });
-              }, // 按钮点击事件
+              } // 按钮点击事件
             },
             {
               type: '', // 按钮类型
@@ -102,40 +104,28 @@ export default {
               btnclick: () => {
                 const self = this;
                 const ids = [];
-                self.selection.map((item, index) => {
+                self.selection.forEach((item, index) => {
                   ids[index] = item.ID;
                 });
 
                 const arr = [];
                 arr.push(self.componentData.id);
                 const param = {
-                  ids: arr,
+                  ids: arr
                 };
 
                 axios({
                   url: '/api/cs/oc/oms/v1/checkGit',
                   method: 'post',
-                  data: param,
-                }).then((res) => {
+                  data: param
+                }).then(res => {
                   if (res.data.code === 0) {
                     self.publicBouncedConfig = publicDialogConfig.addGiftsConfig;
                     self.publicBouncedIndex = publicDialogConfig.addGiftsConfig;
                     self.$nextTick(() => {
-                      self.$set(
-                        self.publicBouncedConfig.componentData,
-                        'ocBorderDtoItemID',
-                        ids
-                      );
-                      self.$set(
-                        self.publicBouncedConfig.componentData,
-                        'ocBorderDtoID',
-                        self.componentData.id
-                      );
-                      self.$set(
-                        self.publicBouncedConfig.componentData,
-                        'objid',
-                        self.componentData.objid
-                      );
+                      self.$set(self.publicBouncedConfig.componentData, 'ocBorderDtoItemID', ids);
+                      self.$set(self.publicBouncedConfig.componentData, 'ocBorderDtoID', self.componentData.id);
+                      self.$set(self.publicBouncedConfig.componentData, 'objid', self.componentData.objid);
                     });
                     // self.publicBouncedConfig.componentData = {
                     //   ocBorderDtoItemID: ids,
@@ -143,19 +133,17 @@ export default {
                     //   objid: ids
                     // };
                     setTimeout(() => {
-                      self.$children
-                        .find(item => item.name === 'addGifts')
-                        .openConfirm();
+                      self.$children.find(item => item.name === 'addGifts').openConfirm();
                     }, 100);
                   } else {
                     self.$Message.warning({
                       content: res.data.message,
                       duration: 5,
-                      top: 80,
+                      top: 80
                     });
                   }
                 });
-              }, // 按钮点击事件
+              } // 按钮点击事件
             },
             {
               // text: "标记退款完成", //按钮文本
@@ -163,17 +151,19 @@ export default {
               btnclick: () => {
                 const self = this;
                 const ids = this.selection.map(row => row.ID);
-                if (ids.length === 0)
-                // return self.$Message.error("至少选择一条订单明细");
-                { return self.$Message.error(window.vmI18n.t('modalTips.zk')); }
+                if (ids.length === 0) {
+                  // return self.$Message.error("至少选择一条订单明细");
+                  self.$Message.error(window.vmI18n.t('modalTips.zk'));
+                  return;
+                }
                 const param = {
-                  IDS: ids.join(','),
+                  IDS: ids.join(',')
                 };
                 axios({
                   url: '/api/cs/oc/oms/v1/markrefund',
                   method: 'post',
-                  data: param,
-                }).then((res) => {
+                  data: param
+                }).then(res => {
                   if (res.data.code === 0) {
                     self.$parent.$parent.$parent.getData();
                     self.$Message.success(res.data.message);
@@ -181,11 +171,11 @@ export default {
                     self.$Message.warning({
                       content: res.data.message,
                       duration: 5,
-                      top: 80,
+                      top: 80
                     });
                   }
                 });
-              }, // 按钮点击事件
+              } // 按钮点击事件
             },
             {
               type: '', // 按钮类型
@@ -202,27 +192,28 @@ export default {
                     // content: "请选中其中一条记录",
                     content: window.vmI18n.t('modalTips.al'),
                     duration: 5,
-                    top: 80,
+                    top: 80
                   });
-                  return false;
-                } if (ids.length > 1) {
+                  return;
+                }
+                if (ids.length > 1) {
                   self.$Message.warning({
                     // content: "请选中一条记录",
                     content: window.vmI18n.t('modalTips.am'),
                     duration: 5,
-                    top: 80,
+                    top: 80
                   });
-                  return false;
+                  return;
                 }
 
                 const param = {
-                  ID: ids.join(','),
+                  ID: ids.join(',')
                 };
                 axios({
                   url: '/api/cs/oc/oms/v1/modifygoodscheck',
                   method: 'post',
-                  data: param,
-                }).then((res) => {
+                  data: param
+                }).then(res => {
                   if (res.data.code === 0) {
                     self.publicBouncedConfig = publicDialogConfig.replaceConfig;
                     self.publicBouncedIndex = publicDialogConfig.replaceConfig;
@@ -234,28 +225,26 @@ export default {
 
                       itemobjid: ids[0],
                       itemskuid: self.selection[0].PS_C_SKU_ID,
-                      objid: self.componentData.id || -1,
+                      objid: self.componentData.id || -1
                     };
 
                     // let itemobjid = rows[0].ID;
                     // let itemskuid = rows[0].SKU_ID;
 
                     setTimeout(() => {
-                      self.$children
-                        .find(item => item.name === 'replaceTheGoods')
-                        .openConfirm();
+                      self.$children.find(item => item.name === 'replaceTheGoods').openConfirm();
                     }, 100);
                   } else {
                     self.$Message.warning({
                       content: res.data.message,
                       duration: 5,
-                      top: 80,
+                      top: 80
                     });
                   }
                 });
-              }, // 按钮点击事件
-            },
-          ],
+              } // 按钮点击事件
+            }
+          ]
         }, // 按钮配置
         // 设置总条数
         total: 0,
@@ -290,7 +279,7 @@ export default {
           {
             key: 'PS_C_PRO_ECODE',
             // title: "商品编码",
-            title: window.vmI18n.t('table_label.productNo'),
+            title: window.vmI18n.t('table_label.productNo')
           },
           {
             // title: "颜色",
@@ -302,59 +291,47 @@ export default {
               const list = params.row.CLR_LIST;
               if (!self.componentData.order || list === null) return h('span', {}, params.row.PS_C_CLR_ENAME);
               const status = self.componentData.order.ORDER_STATUS || '';
-              const wms_cancel_status = self.componentData.order.WMS_CANCEL_STATUS || '';
+              const wmsCancelStatus = self.componentData.order.WMS_CANCEL_STATUS || '';
               // 订单状态非未确认、缺货、配货中且WMS撤回状态为已撤回
-              if (
-                ![1, 2].includes(status)
-                && !(status === 4 && wms_cancel_status === 1)
-              ) {
+              if (![1, 2].includes(status) && !(status === 4 && wmsCancelStatus === 1)) {
                 return h('span', {}, params.row.PS_C_CLR_ENAME);
               }
               return h(
                 'Select',
                 {
                   attrs: {
-                    transfer: true,
+                    transfer: true
                   },
                   style: {
-                    width: '70px',
+                    width: '70px'
                   },
                   props: {
-                    value: params.row.PS_C_CLR_ID,
+                    value: params.row.PS_C_CLR_ID
                   },
                   on: {
-                    'on-change': (value, ev) => {
+                    'on-change': (value) => {
                       if (value) {
-                        const colorObj = list.find(
-                          item => item.COLOR_ID === value
-                        );
-                        self.jordanTableConfig.data[
-                          params.index
-                        ].PS_C_CLR_ECODE = colorObj.COLOR_CODE;
-                        self.jordanTableConfig.data[
-                          params.index
-                        ].PS_C_CLR_ENAME = colorObj.COLOR_NAME;
+                        const colorObj = list.find(item => item.COLOR_ID === value);
+                        self.jordanTableConfig.data[params.index].PS_C_CLR_ECODE = colorObj.COLOR_CODE;
+                        self.jordanTableConfig.data[params.index].PS_C_CLR_ENAME = colorObj.COLOR_NAME;
                         self.jordanTableConfig.data[params.index].PS_C_CLR_ID = colorObj.COLOR_ID;
-                        if (
-                          self.jordanTableConfig.data[params.index]
-                            .PS_C_SIZE_ENAME
-                        ) {
-                          self.saveStandards(
-                            self.jordanTableConfig.data[params.index]
-                          );
+                        if (self.jordanTableConfig.data[params.index].PS_C_SIZE_ENAME) {
+                          self.saveStandards(self.jordanTableConfig.data[params.index]);
                         }
                       }
-                    },
-                  },
+                    }
+                  }
                 },
-                list.map(item => h('Option', {
-                  props: {
-                    value: item.COLOR_ID || '',
-                    label: item.COLOR_NAME || '',
-                  },
-                }))
+                list.map(item =>
+                  h('Option', {
+                    props: {
+                      value: item.COLOR_ID || '',
+                      label: item.COLOR_NAME || ''
+                    }
+                  })
+                )
               );
-            },
+            }
           },
           // 尺寸
           {
@@ -367,71 +344,59 @@ export default {
               const list = params.row.SIZE_LIST;
               if (!self.componentData.order || list === null) return h('span', {}, params.row.PS_C_SIZE_ENAME);
               const status = self.componentData.order.ORDER_STATUS || '';
-              const wms_cancel_status = self.componentData.order.WMS_CANCEL_STATUS || '';
+              const wmsCancelStatus = self.componentData.order.WMS_CANCEL_STATUS || '';
               // 订单状态非未确认、缺货、配货中且WMS撤回状态为已撤回
-              if (
-                ![1, 2].includes(status)
-                && !(status === 4 && wms_cancel_status === 1)
-              ) {
+              if (![1, 2].includes(status) && !(status === 4 && wmsCancelStatus === 1)) {
                 return h('span', {}, params.row.PS_C_SIZE_ENAME);
               }
               return h(
                 'Select',
                 {
                   attrs: {
-                    transfer: true,
+                    transfer: true
                   },
                   style: {
-                    width: '70px',
+                    width: '70px'
                   },
                   props: {
-                    value: params.row.PS_C_SIZE_ID,
+                    value: params.row.PS_C_SIZE_ID
                   },
                   on: {
-                    'on-change': (value, ev) => {
+                    'on-change': (value) => {
                       if (value) {
-                        const sizeObj = list.find(
-                          item => item.SIZE_ID === value
-                        );
-                        self.jordanTableConfig.data[
-                          params.index
-                        ].PS_C_SIZE_ECODE = sizeObj.SIZE_CODE;
-                        self.jordanTableConfig.data[
-                          params.index
-                        ].PS_C_SIZE_ENAME = sizeObj.SIZE_NAME;
+                        const sizeObj = list.find(item => item.SIZE_ID === value);
+                        self.jordanTableConfig.data[params.index].PS_C_SIZE_ECODE = sizeObj.SIZE_CODE;
+                        self.jordanTableConfig.data[params.index].PS_C_SIZE_ENAME = sizeObj.SIZE_NAME;
                         self.jordanTableConfig.data[params.index].PS_C_SIZE_ID = sizeObj.SIZE_ID;
-                        if (
-                          self.jordanTableConfig.data[params.index]
-                            .PS_C_CLR_ENAME
-                        ) {
-                          self.saveStandards(
-                            self.jordanTableConfig.data[params.index]
-                          );
+                        if (self.jordanTableConfig.data[params.index].PS_C_CLR_ENAME) {
+                          self.saveStandards(self.jordanTableConfig.data[params.index]);
                         }
                       }
-                    },
-                  },
+                    }
+                  }
                 },
-                list.map(item => h('Option', {
-                  props: {
-                    value: item.SIZE_ID || '',
-                    label: item.SIZE_NAME || '',
-                  },
-                }))
+                list.map(item =>
+                  h('Option', {
+                    props: {
+                      value: item.SIZE_ID || '',
+                      label: item.SIZE_NAME || ''
+                    }
+                  })
+                )
               );
-            },
+            }
           },
           {
             key: 'PS_C_SKU_ECODE',
             // title: "条码",
-            title: window.vmI18n.t('form_label.barCode'),
+            title: window.vmI18n.t('form_label.barCode')
           },
           {
             key: 'PS_C_PRO_ENAME',
             // title: "商品名称",
             title: window.vmI18n.t('table_label.productName'),
             width: 200,
-            ellipsis: true,
+            ellipsis: true
           },
           // 性别
           // {
@@ -441,18 +406,18 @@ export default {
           {
             key: 'QTY',
             // title: "数量",
-            title: window.vmI18n.t('table_label.quantities'),
+            title: window.vmI18n.t('table_label.quantities')
           },
           // 缺货数量
           {
             key: 'QTY_LOST',
             // title: "缺货数量",
-            title: window.vmI18n.t('table_label.outOfStock_quantit'),
+            title: window.vmI18n.t('table_label.outOfStock_quantit')
           },
           {
             key: 'STOCK',
             // title: "库存",
-            title: window.vmI18n.t('table_label.stock'),
+            title: window.vmI18n.t('table_label.stock')
           },
           {
             key: 'IS_LACKSTOCK',
@@ -468,50 +433,48 @@ export default {
                   {
                     style: {
                       width: '70px',
-                      color:
-                        params.row.IS_LACKSTOCK == 1 ? '#fd6442' : '#575757',
+                      color: params.row.IS_LACKSTOCK == 1 ? '#fd6442' : '#575757'
                     },
                     attrs: {
-                      disabled: false,
+                      disabled: false
                     },
                     props: {
                       value: String(params.row.IS_LACKSTOCK),
-                      transfer: true,
+                      transfer: true
                     },
                     on: {
-                      'on-change': (value, ev) => {
-                        self.jordanTableConfig.data[
-                          params.index
-                        ].IS_LACKSTOCK = Number(value);
+                      'on-change': (value) => {
+                        self.jordanTableConfig.data[params.index].IS_LACKSTOCK = Number(value);
                         const obj = {
                           itemId: params.row.ID,
                           orderId: self.componentData.objid.join(),
-                          isLackstock: value,
+                          isLackstock: value
                         };
                         self.saveLackStock(obj);
-                      },
-                    },
+                      }
+                    }
                   },
-                  self.islackstock.map(item => h('Option', {
-                    props: {
-                      value: item.value,
-                      label: item.label,
-                    },
-                  }))
+                  self.islackstock.map(item =>
+                    h('Option', {
+                      props: {
+                        value: item.value,
+                        label: item.label
+                      }
+                    })
+                  )
                 );
-              } 
+              }
               const IS_LACKSTOCK = params.row.IS_LACKSTOCK === 1 ? '是' : '否';
               return h(
                 'span',
                 {
                   style: {
-                    color:
-                        params.row.IS_LACKSTOCK === 1 ? '#fd8368' : '#575757',
-                  },
+                    color: params.row.IS_LACKSTOCK === 1 ? '#fd8368' : '#575757'
+                  }
                 },
                 IS_LACKSTOCK
               );
-            },
+            }
           },
           {
             key: 'IS_GIFT',
@@ -520,62 +483,62 @@ export default {
             render: (h, params) => {
               const IS_GIFT = params.row.IS_GIFT === 1 ? '是' : '否';
               return h('span', {}, IS_GIFT);
-            },
+            }
           },
           {
             key: 'PRICE_LIST',
             // title: "吊牌价",
-            title: window.vmI18n.t('table_label.tagPrice'),
+            title: window.vmI18n.t('table_label.tagPrice')
           },
           {
             key: 'PRICE_ACTUAL',
             // title: "成交单价",
-            title: window.vmI18n.t('table_label.unitPrice'),
+            title: window.vmI18n.t('table_label.unitPrice')
           },
           {
             key: 'REAL_AMT',
             // title: "成交金额",
-            title: window.vmI18n.t('table_label.transactionAmount'),
+            title: window.vmI18n.t('table_label.transactionAmount')
           },
           {
             key: 'PRICE_SETTLE',
             // title: "结算单价",
-            title: window.vmI18n.t('table_label.unitPriceSettlement'),
+            title: window.vmI18n.t('table_label.unitPriceSettlement')
           },
           {
             key: 'TOT_PRICE_SETTLE',
             // title: "结算总额",
-            title: window.vmI18n.t('table_label.totalSettlement'),
+            title: window.vmI18n.t('table_label.totalSettlement')
           },
           {
             key: 'AMT_DISCOUNT',
             // title: "优惠金额",
-            title: window.vmI18n.t('table_label.preferential_amount'),
+            title: window.vmI18n.t('table_label.preferential_amount')
           },
           {
             key: 'ADJUST_AMT',
             // title: "调整金额",
-            title: window.vmI18n.t('table_label.adjustment_amount'),
+            title: window.vmI18n.t('table_label.adjustment_amount')
           },
           {
             key: 'ORDER_SPLIT_AMT',
             // title: "平摊金额",
             title: window.vmI18n.t('table_label.equal_amount'),
-            render: (h, params) => h('span', {}, Number(params.row.ORDER_SPLIT_AMT).toFixed(2)),
+            render: (h, params) => h('span', {}, Number(params.row.ORDER_SPLIT_AMT).toFixed(2))
           },
           {
             key: 'REFUND_STATUS_EXT',
             // title: "退款状态",
-            title: window.vmI18n.t('table_label.refund_status'),
+            title: window.vmI18n.t('table_label.refund_status')
           },
           {
             key: 'DISTRIBUTION_PRICE',
             // title: "分销金额",
-            title: window.vmI18n.t('table_label.distribution_amount'),
-          },
+            title: window.vmI18n.t('table_label.distribution_amount')
+          }
         ],
-        data: [],
-      },
+        data: []
+      }
     };
   },
   methods: {
@@ -592,11 +555,8 @@ export default {
       const self = this;
       let obj = {};
       let isExit = false;
-      data.STANDARDS_LIST.map((item) => {
-        if (
-          item.COLOR_ID === data.PS_C_CLR_ID
-          && item.SIZE_ID === data.PS_C_SIZE_ID
-        ) {
+      data.STANDARDS_LIST.forEach(item => {
+        if (item.COLOR_ID === data.PS_C_CLR_ID && item.SIZE_ID === data.PS_C_SIZE_ID) {
           obj = item;
           isExit = true;
         }
@@ -605,17 +565,17 @@ export default {
         this.$Message.warning('此商品中不存在该颜色和尺寸');
         return;
       }
-      const oc_b_order_item_id = data.ID || -1;
+      const ocBOrderItemId = data.ID || -1;
       let param = {
-        oc_b_order_item_id, // 行ID
-        oc_b_order_id: self.objid, // 订单ID
+        ocBOrderItemId, // 行ID
+        oc_b_order_id: self.objid // 订单ID
       };
       param = Object.assign(param, obj);
       axios({
         url: '/api/cs/oc/oms/v1/saveStandards',
         method: 'post',
-        data: param,
-      }).then((res) => {
+        data: param
+      }).then(res => {
         if (res.data.code === 0) {
           self.$Message.info(res.data.message);
           self.getData();
@@ -630,8 +590,8 @@ export default {
       axios({
         url: '/api/cs/oc/oms/v1/updateIsLackstock',
         method: 'post',
-        data: param,
-      }).then((res) => {
+        data: param
+      }).then(res => {
         if (res.data.code === 0) {
           self.$Message.success(res.data.message);
           self.getData();
@@ -654,14 +614,14 @@ export default {
         data: {
           id: self.componentData.id,
           currentPage: 1,
-          pageSize: 1000,
-        },
-      }).then((res) => {
+          pageSize: 1000
+        }
+      }).then(res => {
         self.jordanTableConfig.loading = false;
         self.jordanTableConfig.data = res.data.data.records;
         self.jordanTableConfig.total = res.data.data.total;
 
-        self.jordanTableConfig.data.forEach((item) => {
+        self.jordanTableConfig.data.forEach(item => {
           if (item.REFUND_STATUS_EXT === '退款成功') {
             item.isGray = true;
           } else {
@@ -683,11 +643,11 @@ export default {
       self.getData();
     },
     // 选中某一项时触发
-    onSelect(selection, row) {
+    onSelect(selection) {
       this.selection = selection;
     },
     // 取消选中某一项时触发
-    onSelectCancel(selection, row) {
+    onSelectCancel(selection) {
       this.selection = selection;
     },
     // 点击全选时触发
@@ -698,6 +658,6 @@ export default {
     // 点击取消全选时触发
     onSelectAllCancel(selection) {
       this.selection = selection;
-    },
-  },
+    }
+  }
 };
