@@ -9,6 +9,7 @@ import comUtils from '@/assets/js/__utils__/common';
 import loading from '@/component/loading.vue';
 import aTable from 'professionalComponents/agGridTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
+import publicDialogConfig from 'professionalComponents/common/js/publicDialog';
 const getCurrentTime = (() => {
   const t = new Date();
   return t.Format('yyyy-MM-dd 23:59:59');
@@ -41,6 +42,8 @@ export default {
     return {
       vmI18n: window.vmI18n,
       isFavorite: false,
+      // 公共弹框
+      publicBouncedConfig: {},
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
@@ -58,24 +61,6 @@ export default {
         url: 'modal/publicDialog/importTable',
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
-        componentData: {}
-      },
-      setFormInput: {
-        refFuns: 'confirmFun',
-        // confirmTitle: "排序表单",
-        confirmTitle: window.vmI18n.t('modalTitle.sortForm'),
-        titleAlign: 'center', // 设置标题是否居中 center left
-        width: '300',
-        scrollable: false, // 是否可以滚动
-        closable: true, // 是否可以按esc关闭
-        draggable: true, // 是否可以拖动
-        mask: true, // 是否显示遮罩层
-        maskClosable: true, // 是否可以点击叉号关闭
-        transfer: true, // 是否将弹层放在body内
-        name: 'setFormInput', // 组件名称
-        url: 'modal/orderCenter/returngood/setFormInput',
-        keepAlive: true,
-        excludeString: 'setFormInput', // 将name传进去，确认不缓存
         componentData: {}
       },
       btnConfig: {
@@ -257,11 +242,15 @@ export default {
             icon: 'iconfont iconbj_setup', // 按钮图标
             btnclick: () => {
               const self = this;
-              self.setFormInput.componentData = {
+              self.isShowSeniorOrOrdinary = true;
+              self.publicBouncedConfig = {
+                ...publicDialogConfig.dropSortConfig
+              };
+              self.publicBouncedConfig.componentData = {
                 typeName: 'OC_B_REFUND_IN'
               };
               setTimeout(() => {
-                self.$children.find(item => item.name === 'setFormInput').openConfirm();
+                self.$children.find(item => item.name === 'setFormDrag').openConfirm();
               }, 100);
             } // 按钮点击事件
           },
@@ -293,16 +282,16 @@ export default {
             resDom.innerHTML = param.data.ID;
             return resDom;
           },
-          SOURCE_CODE: param=>{
+          SOURCE_CODE: param => {
             const self = this;
             const resDom = document.createElement('a');
             resDom.style['text-decoration'] = 'underline';
             resDom.innerHTML = param.data.SOURCE_CODE;
-            resDom.onclick = function () {
+            resDom.onclick = function() {
               console.log(self);
               const formdata = new FormData();
               formdata.append('param', JSON.stringify({ sourceCode: param.data.SOURCE_CODE }));
-              self.service.orderCenter.getOrderId(formdata).then(res=>{
+              self.service.orderCenter.getOrderId(formdata).then(res => {
                 console.log(res);
                 if (res.data.code === 0) {
                   R3.store.commit('global/tabOpen', {
@@ -528,7 +517,7 @@ export default {
       val.forEach(item => {
         list.push({ label: item.limitdesc, value: item.limitval });
       });
-      return list; 
+      return list;
     },
     parentClass() {
       return '';

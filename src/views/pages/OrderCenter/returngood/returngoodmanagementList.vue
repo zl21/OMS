@@ -70,20 +70,22 @@
     />
     <!-- 修改from表单 -->
     <businessDialog
-      :title="setFormInput.confirmTitle"
-      :title-align="setFormInput.titleAlign"
-      :width="setFormInput.width"
-      :scrollable="setFormInput.scrollable"
-      :closable="setFormInput.closable"
-      :draggable="setFormInput.draggable"
-      :mask="setFormInput.mask"
-      :mask-closable="setFormInput.maskClosable"
-      :transfer="setFormInput.transfer"
-      :name="setFormInput.name"
-      :url="setFormInput.url"
-      :keep-alive="setFormInput.keepAlive"
-      :exclude-string="setFormInput.excludeString"
-      :component-data="setFormInput.componentData"
+      :batch-closed="publicBouncedConfig.batchClosed"
+      :closable="publicBouncedConfig.closable"
+      :component-data="publicBouncedConfig.componentData"
+      :draggable="publicBouncedConfig.draggable"
+      :exclude-string="publicBouncedConfig.excludeString"
+      :keep-alive="publicBouncedConfig.keepAlive"
+      :mask="publicBouncedConfig.mask"
+      :mask-closable="publicBouncedConfig.maskClosable"
+      :name="publicBouncedConfig.name"
+      :quit="publicBouncedConfig.quit"
+      :scrollable="publicBouncedConfig.scrollable"
+      :title="publicBouncedConfig.confirmTitle"
+      :title-align="publicBouncedConfig.titleAlign"
+      :transfer="publicBouncedConfig.transfer"
+      :url="publicBouncedConfig.url"
+      :width="publicBouncedConfig.width"
     />
     <!-- 导入 -->
     <businessDialog
@@ -123,9 +125,9 @@
 </template>
 
 <script>
-import returngoodmanagementList from '@/js/pages/orderCenter/returngood/returngoodmanagementList';
+  import returngoodmanagementList from '@/js/pages/orderCenter/returngood/returngoodmanagementList';
 
-export default returngoodmanagementList;
+  export default returngoodmanagementList;
 </script>
 
 <style lang="less">
