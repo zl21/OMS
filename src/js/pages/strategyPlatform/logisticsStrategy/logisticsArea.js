@@ -246,8 +246,8 @@ export default {
         });
         this.synchronous();
       } else {
-        const err = message || _this.vmI18n.t('modalTips.y0'); // '保存失败';
-        _this.$message.error(err);
+        // const err = message || _this.vmI18n.t('modalTips.y0'); // '保存失败';
+        // _this.$message.error(err);
         this.synchronous();
       }
     },
@@ -270,8 +270,8 @@ export default {
         _this.getTree('', _this._objid);
         _this.$message.success(ess);
       } else {
-        const err = data.message || _this.vmI18n.t('modalTips.y5'); // 作废失败
-        _this.$message.success(err);
+        // const err = data.message || _this.vmI18n.t('modalTips.y5'); // 作废失败
+        // _this.$message.success(err);
       }
     },
     // 获取树
@@ -400,9 +400,7 @@ export default {
           }
         });
       } else {
-        _this.$message.error(
-          message || _this.vmI18n.t('modalTips.z3') // 失败
-        );
+        // _this.$message.error(message || _this.vmI18n.t('modalTips.z3')); // 失败
       }
     },
     // 同步table数据
@@ -510,8 +508,8 @@ export default {
         _this.$message.success(ess);
         publicMethodsUtil.downloadUrlFile(data);
       } else {
-        const err = message || _this.vmI18n.t('modalTips.y6'); // 导出失败
-        _this.$message.success(err);
+        // const err = message || _this.vmI18n.t('modalTips.y6'); // 导出失败
+        // _this.$message.success(err);
         publicMethodsUtil.downloadUrlFile(data);
       }
     },
