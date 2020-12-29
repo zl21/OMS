@@ -3,6 +3,7 @@ import axios from 'axios';
 import loading from '@/component/loading.vue';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import businessButton from 'professionalComponents/businessButton';
+
 export default {
   components: {
     loading,
@@ -174,6 +175,7 @@ export default {
           self.iframeLoad(iframe);
         });
         iframe.src = url;
+        iframe.style.display = 'none';
         downloadFile.iframe = iframe;
         document.body.appendChild(downloadFile.iframe);
         setTimeout(() => {

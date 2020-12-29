@@ -1524,6 +1524,14 @@ export default {
     tableDeleteDetail() {
       // 删除明细
       const self = this;
+      if (self.delTableData.length == 0) {
+        self.$Message.warning(self.vmI18n.t('modalTips.j3')); // 请选择需要删除的明细!
+        return;
+      }
+      if (self.delTableData.length == self.tableConfig.data.length) {
+        self.$Message.warning(self.vmI18n.t('modalTips.j4')); // 至少保留一条明细,不允许全部删除
+        return;
+      }
       if (self.$route.params.customizedModuleId === 'New' || self.$route.query.cid || self.$route.query.oid) {
         // 新增的请求方式
         if (self.tableConfig.data.length == self.delTableData.length) self.tableConfig.data = [];
@@ -1544,14 +1552,6 @@ export default {
         self.delTableData = [];
       } else {
         // 编辑状态,删除明细
-        if (self.delTableData.length == 0) {
-          self.$Message.warning(self.vmI18n.t('modalTips.j3')); // 请选择需要删除的明细!
-          return;
-        }
-        if (self.delTableData.length == self.tableConfig.data.length) {
-          self.$Message.warning(self.vmI18n.t('modalTips.j4')); // 至少保留一条明细,不允许全部删除
-          return;
-        }
         this.$Modal.fcError({
           title: self.vmI18n.t('modalTitle.deleteDetails'), // 删除明细
           content: self.vmI18n.t('modalTips.j5'), // 确定删除所选明细?

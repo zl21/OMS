@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { listeningToKeydownMixin } from '@/assets/js/mixins/listeningToKeydown.js';
+import { listeningToKeydownMixin } from '@/assets/js/mixins/listeningToKeydown';
 
 export default {
   mixins: [listeningToKeydownMixin],
@@ -36,9 +36,16 @@ export default {
       dragList: []
     };
   },
+  props: {
+    componentData: {
+      type: Object,
+      default: {}
+    }
+  },
   mounted() {
     const self = this;
     // 请求数据
+    self.typeName = self.componentData.typeName;
     self.getData();
     const node = document.querySelector('#container');
     let draging = null;
@@ -73,7 +80,7 @@ export default {
     // 完成拖拽后
     node.ondrop = () => {
       const param = {
-        tableName: 'OC_B_ORDER',
+        tableName: self.typeName,
         useronfigList: self.childArr
       };
       axios({
@@ -99,7 +106,7 @@ export default {
       if (self.childArr.length !== 0) {
         // 保存
         const param = {
-          tableName: 'OC_B_ORDER',
+          tableName: self.typeName,
           useronfigList: self.childArr
         };
         axios({
@@ -126,7 +133,7 @@ export default {
       const self = this;
       const fromdata = new FormData();
       const param = {
-        table: 'OC_B_ORDER',
+        table: self.typeName,
         column_include_uicontroller: true,
         fixedcolumns: {},
         multiple: [],
@@ -176,7 +183,7 @@ export default {
       });
       // 保存
       const param = {
-        tableName: 'OC_B_ORDER',
+        tableName: self.typeName,
         useronfigList: self.dragList
       };
       console.log(param);
@@ -186,6 +193,7 @@ export default {
         data: param
       }).then((res) => {
         console.log(res);
+        self.$parent.$parent.$parent.getHeaderList();
       });
     }
   }
