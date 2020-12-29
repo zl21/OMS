@@ -423,6 +423,8 @@
                 label: 'JIT配货单',
                 back: true,
               });
+            } else {
+              this.$message.error(res.message);
             }
             this.pageLoading = false;
           })
