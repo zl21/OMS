@@ -2,6 +2,7 @@ import axios from 'axios';
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable.vue';
+
 export default {
   components: {
     businessButton,
@@ -107,8 +108,7 @@ export default {
                         'justify-content': 'space-between'
                       }
                     },
-                    params.row.PRODUCTITEMS.map(item =>
-                      h(
+                    params.row.PRODUCTITEMS.map(item => h(
                         'div',
                         {
                           style: {
@@ -142,8 +142,7 @@ export default {
                             item.QTY_REFUND
                           )
                         ]
-                      )
-                    )
+                      ))
                   );
                 }
               }
@@ -327,8 +326,10 @@ export default {
       if (_this.selectData[0].PRODUCTITEMS.length !== 1 && _this.selectData[0].PRODUCTITEMS !== undefined) {
         _this.wrong.modal = true;
       } else if (_this.selectData[0].PRODUCTITEMS.length === 1) {
+        // 手工匹配该字段传数组,错发强制匹配该字段传字符串
+        // const refundId = _this.$route.query.tabTitle.indexOf('手工匹配') !== -1 ? _this.componentData.ids : _this.componentData.ids[0];
         const param = {
-          refundId: _this.componentData.ids,
+          refundId: _this.componentData.ids[0],
           returnOrderId: _this.selectData[0].ID,
           refundInId: this.$route.query.id,
           returnItem: _this.selectData[0].PRODUCTITEMS[0].ID
