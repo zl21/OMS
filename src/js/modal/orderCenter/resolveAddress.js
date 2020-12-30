@@ -172,6 +172,9 @@ export default {
         if (!f) return this.CheckRegxZip();
       }
       const info = this.data;
+      if (!info.cp_c_region_area_id) {
+        delete info.cp_c_region_area_id;
+      }
       const self = this;
       self.isShowFromLoading = true;
       const param = {
@@ -309,7 +312,7 @@ export default {
           ENAME: row.ENAME,
         }));
         this.clearArea();
-        this.data.cp_c_region_area_id = this.componentData.CP_C_REGION_AREA_ID;
+        // this.data.cp_c_region_area_id = this.componentData.CP_C_REGION_AREA_ID;
       } else {
         // this.$Message.error("城市查询失败");
         this.$Message.error(window.vmI18n.t('modalTips.yw'));
