@@ -400,7 +400,7 @@ export default {
             const resDom = document.createElement('a');
             resDom.style['text-decoration'] = 'underline';
             resDom.innerHTML = param.data.ORIG_SOURCE_CODE;
-            resDom.onclick = function() {
+            resDom.onclick = function () {
               console.log(self);
               const formdata = new FormData();
               formdata.append('param', JSON.stringify({ sourceCode: param.data.ORIG_SOURCE_CODE }));
@@ -1373,8 +1373,7 @@ export default {
                 } else {
                   this.$Modal.fcError({
                     width: 500,
-                    render: h =>
-                      h('Table', {
+                    render: h => h('Table', {
                         props: {
                           columns: [
                             {
@@ -1449,7 +1448,25 @@ export default {
           this.$Message.success(res.data.message);
         } else {
           const err = res.data.message || this.vmI18n.t('modalTips.l9'); // 虚拟仓库入库失败！
-          this.$Message.info(err);
+          // this.$Message.info(err);
+          this.$Modal.confirm({
+            title: err,
+            render: h => h('Table', {
+              props: {
+                columns: [
+                  {
+                    title: 'id',
+                    key: 'objid'
+                  },
+                  {
+                    title: '报错信息',
+                    key: 'message'
+                  }
+                ],
+                data: res.data.data
+              }
+            })
+          });
         }
       });
     },
