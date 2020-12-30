@@ -33,6 +33,7 @@ export default {
     return {
       vmI18n: window.vmI18n,
       pageLoad: false,
+      isActive: false,
       agTableConfig: {
         tableHeight: '480px',
         agLoading: false,
@@ -1053,13 +1054,9 @@ export default {
               } else {
                 self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
               }
-
               self.isShowSeniorOrOrdinary = true;
               self.publicBouncedConfig = {
                 ...publicDialogConfig.dropSortConfig
-              };
-              self.publicBouncedConfig.componentData = {
-                typeName: 'OC_B_ORDER'
               };
               setTimeout(() => {
                 self.$children.find(item => item.name === 'setFormDrag').openConfirm();
@@ -1806,7 +1803,7 @@ export default {
         startindex: 0
       };
       fromdata.append('param', JSON.stringify(params));
-      _this.agTableConfig.agLoading = true;
+      // _this.agTableConfig.agLoading = true;
       _this.service.orderCenter.getSeniorQueryCondition(fromdata).then(res => {
         // 高级查询
         const formData = [];
@@ -1925,7 +1922,7 @@ export default {
             arr.push(obj);
           });
           _this.agTableConfig.columnDefs = arr;
-          _this.agTableConfig.agLoading = false;
+          // _this.agTableConfig.agLoading = false;
           if (this.$route.query.type === 'workID') {
             this.searchMethod('workID');
             this.selectValue = [];
@@ -2160,7 +2157,7 @@ export default {
     // 展开 并获取from页面数据
     shutDownOrbounceOff() {
       const self = this;
-      self.isShowFromLoading = true;
+      // self.isShowFromLoading = true;
       if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
         // 打开高级搜索
         self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
@@ -2181,7 +2178,7 @@ export default {
         // 设置普通搜索默认选项
         self.setSearchOption();
       }
-      self.isShowFromLoading = false;
+      // self.isShowFromLoading = false;
       self.getHeaderList();
       // self.getData();
     },
@@ -2479,6 +2476,7 @@ export default {
       const self = this;
       self.selection = [];
       self.agTableConfig.agLoading = true;
+      self.isActive = true;
       // 当出现loading，禁止页面滚动
       document.getElementById('content').style.overflow = 'hidden';
       document.getElementById('content').style.position = '';
@@ -2512,6 +2510,7 @@ export default {
           // 当loading结束，页面滚动
           document.getElementById('content').style.overflow = 'auto';
           document.getElementById('content').style.position = 'relative';
+          self.isActive = false;
           if (!res.data.data) {
             self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
             // 初始化表格

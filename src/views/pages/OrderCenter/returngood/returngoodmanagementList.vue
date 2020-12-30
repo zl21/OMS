@@ -13,7 +13,7 @@
       <businessLabel class="businessLabel totalHeight" :label-list="labelList" :label-default-value="labelDefaultValue" @labelClick="labelClick" />
       <!-- 列表组件 -->
       <div class="tableBox">
-        <loading :loading="agTableConfig.agLoading" />
+        <loading :loading="agTableConfig.agLoading"  :class="{ 'loadingActive': loadingActive }" />
         <aTable ref="agGridChild" :ag-table-config="agTableConfig" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" @on-row-dblclick="onRowDblclick" />
       </div>
     </div>

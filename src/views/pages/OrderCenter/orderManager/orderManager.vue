@@ -14,7 +14,7 @@
         v-show="isShowFromLoading"
         class="from_loading"
       >
-        <loading :loading="agTableConfig.agLoading" />
+        <!-- <loading :loading="agTableConfig.agLoading" /> -->
       </div>
       <IntegrateSearchFilter
         v-if="isShowSeniorOrOrdinary"
@@ -55,7 +55,10 @@
         @labelClick="labelClick"
       />
       <div class="aTable">
-        <loading :loading="agTableConfig.agLoading" />
+        <loading 
+          :loading="agTableConfig.agLoading"
+          :class="{ 'loadingActive': isActive }" 
+        />
         <aTable
           ref="agGridChild"
           :ag-table-config="agTableConfig"

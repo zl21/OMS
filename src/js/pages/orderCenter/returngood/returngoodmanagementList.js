@@ -25,6 +25,7 @@ export default {
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
   data() {
     return {
+      loadingActive: false,
       resetForm: true,
       vmI18n: window.vmI18n,
       errThData: [
@@ -823,6 +824,7 @@ export default {
       // 当出现loading，禁止页面滚动
       document.getElementById('content').style.overflow = 'hidden';
       document.getElementById('content').style.position = '';
+      _this.loadingActive = true;
       const param = {
         start: _this.agTableConfig.pagenation.current,
         count: _this.agTableConfig.pagenation.pageSize,
@@ -870,6 +872,7 @@ export default {
       this.service.orderCenter.querySalesReturn(Object.assign(param, _this.formConfig.formValue)).then(res => {
         // 当loading结束，页面滚动
         _this.agTableConfig.agLoading = false;
+        _this.loadingActive = false;
         document.getElementById('content').style.overflow = 'auto';
         document.getElementById('content').style.position = 'relative';
         if (res.data.code == 0 && res.data.data.queryResult.length) {
