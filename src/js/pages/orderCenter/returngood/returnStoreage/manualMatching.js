@@ -372,6 +372,17 @@ export default {
                         _this.$Message.error('此明细已经匹配，不允许修改退换货单号！');
                         return;
                       }
+                      if (!_this.returnSelectData.length) {
+                        _this.$Message.error('请选择需要操作的明细！');
+                        return;
+                      }
+                      // 错发匹配只能选择一条明细
+                      if (_this.$route.query.tabTitle.indexOf('错发强制匹配') > -1) {
+                        if (_this.returnSelectData.length > 1) {
+                          _this.$Message.error('错发强制匹配一次只能选中一条明细！');
+                          return;
+                        }
+                      }
                       _this.index = params.index;
                       _this.returnNumber.componentData = {
                         // ids: params.row.ID,
