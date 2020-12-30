@@ -230,9 +230,7 @@
         }).then(res => {
           if (!flag) {
             if (res.data.code === 0) {
-              if (!flag) {
                 self.$Message.success('保存成功!');
-              }
             } else {
               self.$Message.error('保存失败');
             }
@@ -278,13 +276,17 @@
       // 监听主表的保存成功事件
       window.addEventListener('customizeClick', (data) => {
         console.log('customizeClick::data', data);
-        if (data.detail.type === 'save' && data.detail.mainTableParame) {
-          // 主表有修改保存
-          this.saveCurrent(true);
-        } else {
-          // 主表没有修改保存
-          this.saveCurrent();
+        if(data.detail.type === 'save'){
+          let flag = typeof(data.detail.mainTableParame)=== "undefined"?false:true;
+          this.saveCurrent(flag);
         }
+        // if ( && ) {
+        //   // 主表有修改保存
+        //   this.saveCurrent(true);
+        // } else {
+        //   // 主表没有修改保存
+        //   this.saveCurrent();
+        // }
       });
     },
     created() {
