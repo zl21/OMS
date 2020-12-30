@@ -333,6 +333,11 @@ export default {
             _this.isError = true;
             _this.errorMessage = err;
             _this.loading = false;
+            // 清空已上传文件
+            const xFile = document.getElementById('xFile');
+            xFile.value = '';
+            this.text = '';
+            this.file = {};
           } else if (res.data.data) {
             _this.loading = false;
             _this.isError = true;
