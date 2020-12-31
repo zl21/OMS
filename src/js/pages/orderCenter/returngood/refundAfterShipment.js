@@ -1405,7 +1405,7 @@ export default {
     onAddItem() {
       const self = this;
       // 新增界面逻辑
-      if (self.$route.params.customizedModuleId === 'New' || self.$route.query.cid) {
+      if (self.$route.params.customizedModuleId === 'New' || self.$route.query.cid || self.$route.query.new === 'true') {
         if (!self.isOne) {
           const data = self.onSelectData;
           // 通过原始订单编号二次弹框确定
