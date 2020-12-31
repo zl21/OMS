@@ -316,7 +316,11 @@ export default {
     }, // 定制页面没有明细
     async newLySave(e) {
       this.singleData = e;
-      $('#actionMODIFY')[0].click();
+      // $('#actionMODIFY')[0].click();
+      window.updataClickSave(()=>new Promise((resolve)=>{
+        this.save = true;
+        resolve();
+        }));
       // 因为框架主表保存后会跳转路由,导致字表本身数据被刷新,无法保存字表
     }, // 新增tab明细保存
     changeSave(val) {
