@@ -65,15 +65,124 @@ export default {
           },
           {
             style: 'input',
+            label: window.vmI18n.t('form_label.bar_code'), // '条码编码',
+            value: 'PS_C_SKU_ECODE',
+            width: '6'
+          },
+          {
+            style: 'input',
+            label: window.vmI18n.t('form_label.platformCommodityID'), // '平台商品ID',
+            value: 'NUMIID',
+            width: '6'
+          },
+          {
+            style: 'input',
+            label: window.vmI18n.t('table_label.platform_barcode_ID'), // '平台条码ID',
+            value: 'SKU_ID',
+            width: '6'
+          },
+          {
+            style: 'input',
+            label: window.vmI18n.t('form_label.gBCode'), // '国标码',
+            value: 'GBCODE',
+            width: '6'
+          },
+          {
+            label: window.vmI18n.t('table_label.shopName'), // '店铺名称',
+            value: 'CP_C_SHOP_TITLE',
+              style: 'popInput', // 输入框弹框单多选
+            width: '6',
+            itemdata: {
+              col: 1,
+              colid: 174382,
+              colname: 'CP_C_SHOP_ID', // 当前字段的名称
+              datelimit: 'all',
+              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+              fkdisplay: 'mrp', // 外键关联类型
+              fkdesc: '店铺ID',
+              inputname: 'ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
+              isfk: true, // 是否有fk键
+              isnotnull: false, // 是否必填
+              isuppercase: false, // 是否转大写
+              length: 65535, // 最大长度是多少
+              name: window.vmI18n.t('table_label.shopName'), // '店铺名称',
+              readonly: false, // 是否可编辑，对应input   readonly属性
+              reftable: 'CP_C_SHOP', // 对应的表
+              row: 1,
+              statsize: -1,
+              type: 'STRING', // 这个是后台用的
+              valuedata: '', // 这个是选择的值
+              pid: ''
+            },
+            oneObj: val => {
+              this.formConfig.formValue.CP_C_SHOP_TITLE = val.valuedata;
+            }
+          },
+          {
+            style: 'input',
+            label: window.vmI18n.t('form_label.storeID'), // '店铺ID',
+            value: 'CP_C_SHOP_ID',
+            width: '6'
+          },
+          // {
+          //   style: 'popInput', // 输入框弹框单多选
+          //   width: '6',
+          //   itemdata: {
+          //     col: 1,
+          //     colid: 174382,
+          //     colname: 'CP_C_SHOP_ID', // 当前字段的名称
+          //     datelimit: 'all',
+          //     display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+          //     fkdisplay: 'mrp', // 外键关联类型
+          //     fkdesc: '店铺ID',
+          //     inputname: 'ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
+          //     isfk: true, // 是否有fk键
+          //     isnotnull: false, // 是否必填
+          //     isuppercase: false, // 是否转大写
+          //     length: 65535, // 最大长度是多少
+          //     name: window.vmI18n.t('form_label.storeID'), // '店铺ID',
+          //     readonly: false, // 是否可编辑，对应input   readonly属性
+          //     reftable: 'CP_C_SHOP', // 对应的表
+          //     row: 1,
+          //     statsize: -1,
+          //     type: 'STRING', // 这个是后台用的
+          //     valuedata: '', // 这个是选择的值
+          //     pid: ''
+          //   },
+          //   oneObj: val => {
+          //     this.formConfig.formValue.CP_C_SHOP_ID = val.pid;
+          //   }
+          // },
+          {
+            style: 'input',
             label: window.vmI18n.t('form_label.sourceNo'), // '来源单号',
             value: 'SOURCE_NO',
             width: '6'
           },
           {
-            style: 'input',
-            label: window.vmI18n.t('table_label.seller_nickname'), // '卖家昵称',
-            value: 'SELLER_NICK',
-            width: '6'
+            style: 'select', // 下拉框类型
+            label: window.vmI18n.t('form_label.synchronizationStatus'), // '同步状态',
+            width: '6', // 所占宽度宽度
+            value: 'SYN_STATUS', // 输入框的值
+            multiple: true,
+            options: [
+              {
+                label: window.vmI18n.t('common.unAudit'), // '未审核',
+                value: '1'
+              },
+              {
+                label: window.vmI18n.t('common.custAudited'), // '已客审',
+                value: '2'
+              },
+              {
+                label: window.vmI18n.t('common.financeAudited'), // '已财审',
+                value: '3'
+              },
+              {
+                label: window.vmI18n.t('common.voided'), // '已作废',
+                value: '4'
+              }
+            ]
           },
           {
             style: 'select', // 下拉框类型
@@ -102,66 +211,35 @@ export default {
           },
           {
             style: 'input',
-            label: window.vmI18n.t('form_label.platformCommodityID'), // '平台商品ID',
-            value: 'NUMIID',
+            label: window.vmI18n.t('table_label.seller_nickname'), // '卖家昵称',
+            value: 'SELLER_NICK',
             width: '6'
           },
-          {
-            style: 'input',
-            label: window.vmI18n.t('table_label.platform_barcode_ID'), // '平台条码ID',
-            value: 'SKU_ID',
-            width: '6'
-          },
-          {
-            style: 'select', // 下拉框类型
-            label: window.vmI18n.t('form_label.wrongOrNot'), // '是否错误',
-            width: '6', // 所占宽度宽度
-            value: 'IS_ERROR', // 输入框的值
-            multiple: true,
-            options: [
-              {
-                label: window.vmI18n.t('common.unAudit'), // '未审核',
-                value: '1'
-              },
-              {
-                label: window.vmI18n.t('common.custAudited'), // '已客审',
-                value: '2'
-              },
-              {
-                label: window.vmI18n.t('common.financeAudited'), // '已财审',
-                value: '3'
-              },
-              {
-                label: window.vmI18n.t('common.voided'), // '已作废',
-                value: '4'
-              }
-            ]
-          },
-          {
-            style: 'select', // 下拉框类型
-            label: window.vmI18n.t('form_label.synchronizationStatus'), // '同步状态',
-            width: '6', // 所占宽度宽度
-            value: 'SYN_STATUS', // 输入框的值
-            multiple: true,
-            options: [
-              {
-                label: window.vmI18n.t('common.unAudit'), // '未审核',
-                value: '1'
-              },
-              {
-                label: window.vmI18n.t('common.custAudited'), // '已客审',
-                value: '2'
-              },
-              {
-                label: window.vmI18n.t('common.financeAudited'), // '已财审',
-                value: '3'
-              },
-              {
-                label: window.vmI18n.t('common.voided'), // '已作废',
-                value: '4'
-              }
-            ]
-          },
+          // {
+          //   style: 'select', // 下拉框类型
+          //   label: window.vmI18n.t('form_label.wrongOrNot'), // '是否错误',
+          //   width: '6', // 所占宽度宽度
+          //   value: 'IS_ERROR', // 输入框的值
+          //   multiple: true,
+          //   options: [
+          //     {
+          //       label: window.vmI18n.t('common.unAudit'), // '未审核',
+          //       value: '1'
+          //     },
+          //     {
+          //       label: window.vmI18n.t('common.custAudited'), // '已客审',
+          //       value: '2'
+          //     },
+          //     {
+          //       label: window.vmI18n.t('common.financeAudited'), // '已财审',
+          //       value: '3'
+          //     },
+          //     {
+          //       label: window.vmI18n.t('common.voided'), // '已作废',
+          //       value: '4'
+          //     }
+          //   ]
+          // },
           {
             style: 'input',
             label: window.vmI18n.t('form_label.synchronizedInventory'), // '同步库存数',
@@ -198,57 +276,10 @@ export default {
           //     this.formConfig.formValue.PS_C_SKU_ECODE = val.valuedata;
           //   }
           // },
-          {
-            style: 'input',
-            label: window.vmI18n.t('form_label.bar_code'), // '条码编码',
-            value: 'PS_C_SKU_ECODE',
-            width: '6'
-          },
-          {
-            style: 'popInput', // 输入框弹框单多选
-            width: '6',
-            itemdata: {
-              col: 1,
-              colid: 174382,
-              colname: 'CP_C_SHOP_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-              fkdisplay: 'mrp', // 外键关联类型
-              fkdesc: '店铺ID',
-              inputname: 'ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
-              isfk: true, // 是否有fk键
-              isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
-              name: window.vmI18n.t('form_label.storeID'), // '店铺ID',
-              readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'CP_C_SHOP', // 对应的表
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
-              valuedata: '', // 这个是选择的值
-              pid: ''
-            },
-            oneObj: val => {
-              this.formConfig.formValue.CP_C_SHOP_ID = val.pid;
-            }
-          },
-          {
-            style: 'input',
-            label: window.vmI18n.t('table_label.shopName'), // '店铺名称',
-            value: 'CP_C_SHOP_TITLE',
-            width: '6'
-          },
-          {
-            style: 'input',
-            label: window.vmI18n.t('form_label.gBCode'), // '国标码',
-            value: 'GBCODE',
-            width: '6'
-          }
         ],
-        formValue: {},
+        formValue: {
+        },
         ruleValidate: {
-          NUMIID: [{ required: true, message: ' ' }],
           CREATIONDATE: [{ required: true, message: ' ' }]
         },
         flodClick: () => {
@@ -268,28 +299,32 @@ export default {
       jordanTableConfig: {
         columns: [
           {
-            title: window.vmI18n.t('form_label.batch_number'), // '批次编号',
-            key: 'BATCHNO'
+            title: window.vmI18n.t('table_label.creationTime'), // '创建时间',
+            key: 'CREATIONDATE'
           },
           {
-            title: window.vmI18n.t('table_label.seller_nickname'), // '卖家昵称',
-            key: 'SELLER_NICK'
+            title: window.vmI18n.t('table_label.shopName'), // '店铺名称',
+            key: 'CP_C_SHOP_TITLE'
+          },
+          {
+            title: window.vmI18n.t('form_label.bar_code'), // '条码编码',
+            key: 'PS_C_SKU_ECODE'
           },
           {
             title: window.vmI18n.t('form_label.platformCommodityID'), // '平台商品ID',
             key: 'NUMIID'
           },
           {
-            title: window.vmI18n.t('form_label.wrongOrNot'), // '是否错误',
-            key: 'IS_ERROR'
-          },
-          {
-            title: window.vmI18n.t('form_label.returnInformation'), // '返回信息',
-            key: 'ERROR_MSG'
+            title: window.vmI18n.t('table_label.platform_barcode_ID'), // '平台条码ID',
+            key: 'SKU_ID'
           },
           {
             title: window.vmI18n.t('form_label.synchronizationStatus'), // '同步状态',
             key: 'SYN_STATUS_NAME'
+          },
+          {
+            title: window.vmI18n.t('form_label.returnInformation'), // '返回信息',
+            key: 'ERROR_MSG'
           },
           {
             title: window.vmI18n.t('form_label.synchronizedInventory'), // '同步库存数',
@@ -304,29 +339,29 @@ export default {
             key: 'SOURCE_NO'
           },
           {
-            title: window.vmI18n.t('table_label.platform_barcode_ID'), // '平台条码ID',
-            key: 'SKU_ID'
-          },
-          {
-            title: window.vmI18n.t('form_label.bar_code'), // '条码编码',
-            key: 'PS_C_SKU_ECODE'
-          },
-          {
-            title: window.vmI18n.t('table_label.shopName'), // '店铺名称',
-            key: 'CP_C_SHOP_TITLE'
-          },
-          {
-            title: window.vmI18n.t('table_label.creationTime'), // '创建时间',
-            key: 'CREATIONDATE'
-          },
-          {
-            title: window.vmI18n.t('form_label.gBCode'), // '国标码',
-            key: 'GBCODE'
+            title: window.vmI18n.t('form_label.batch_number'), // '批次编号',
+            key: 'BATCHNO'
           },
           {
             title: window.vmI18n.t('table_label.extendedProperties'), // '扩展属性',
             key: 'PROPERTIES'
-          }
+          },
+          {
+            title: window.vmI18n.t('table_label.seller_nickname'), // '卖家昵称',
+            key: 'SELLER_NICK'
+          },
+          {
+            title: window.vmI18n.t('table_label.remarks'), // 备注
+            key: 'REMARK'
+          },
+          // {
+          //   title: window.vmI18n.t('form_label.wrongOrNot'), // '是否错误',
+          //   key: 'IS_ERROR'
+          // },
+          {
+            title: window.vmI18n.t('form_label.gBCode'), // '国标码',
+            key: 'GBCODE'
+          },
         ], // 表头
         pageShow: true, // 控制分页是否显示
         loading: false,
@@ -373,9 +408,13 @@ export default {
       }
     });
     // this.getList();
-    const today = new Date();
-    const preDay = today.addDays(today, -1);
+    // const today = new Date();
+    // const preDay = today.addDays(today, -1);
+    const preDay = new Date(new Date(new Date().toLocaleDateString()).getTime());
+    const today = new Date(new Date(new Date().toLocaleDateString()).getTime() + 24 * 60 * 60 * 1000 - 1);
+    console.log(preDay, today);
     this.formConfig.formValue.CREATIONDATE = [preDay, today];
+    console.log(this.formConfig.formValue.CREATIONDATE);
     this.setTableHeight();
   },
   methods: {
@@ -444,8 +483,9 @@ export default {
         return;
       }
       const mainData = _this.formConfig.formValue;
-      if (!mainData.NUMIID) {
-        _this.$Message.error(window.vmI18n.t('modalTips.dn')); // '平台商品ID不能为空!'
+      if (!mainData.NUMIID && !mainData.BATCHNO && !mainData.SKU_ID && !mainData.PS_C_SKU_ECODE) {
+        // _this.$Message.error(window.vmI18n.t('modalTips.dn')); // '平台商品ID不能为空!'
+        _this.$Message.error('批次编号,平台商品ID,平台条码ID,条码编码中需最少一项不为空!');
         return;
       }
       let creationdateStart = '';
