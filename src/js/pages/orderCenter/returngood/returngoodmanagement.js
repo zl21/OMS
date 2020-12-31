@@ -3162,16 +3162,27 @@ export default {
         _this.isSaveLoading = false;
         if (res.data.code === 0) {
           _this.$Message.success(res.data.message);
+          // _this.$store.commit('customize/TabHref', {
+          //   id: 2661,
+          //   type: 'action',
+          //   name: 'returngoodList',
+          //   label: _this.vmI18n.t('panel_label.forcedStorage'), // 退换货订单
+          //   query: Object.assign({
+          //     id: 2661,
+          //     tabTitle: _this.vmI18n.t('panel_label.forcedStorage') // 退换货订单
+          //   }),
+          //   back: true
+          // });
           _this.$store.commit('customize/TabHref', {
-            id: 2661,
+            id: res.data.objid,
             type: 'action',
-            name: 'returngoodList',
-            label: _this.vmI18n.t('panel_label.forcedStorage'), // 退换货订单
+            name: 'RETURNGOOD',
+            label: _this.vmI18n.t('panel_label.ReturnOrderDetails'), // 退换货订单
             query: Object.assign({
-              id: 2661,
-              tabTitle: _this.vmI18n.t('panel_label.forcedStorage') // 退换货订单
+              id: res.data.objid,
+              tabTitle: _this.vmI18n.t('panel_label.ReturnOrderDetails'), // 退换货订单
+              statusName: res.data.RETURN_STATUS_NAME
             }),
-            back: true
           });
         } else {
           const err = res.data.message || _this.vmI18n.t('modalTips.au'); // 新增退换货订单失败
