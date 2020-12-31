@@ -1277,8 +1277,42 @@ export default {
               if (item.REFUND_STATUS != 6) queryList.push(item);
             });
             const newQueryList = [];
+            
+            queryList.forEach(subitem => {
+              const newItem = {};
+              newItem.reserve_bigint10 = subitem.ID;
+              newItem.ID = -1;
+              newItem.oOid = subitem.OOID; // 子订单id
+              newItem.PS_C_SKU_ECODE = subitem.PS_C_SKU_ECODE;
+              newItem.BARCODE = subitem.BARCODE;
+              newItem.PS_C_PRO_ID = subitem.PS_C_PRO_ID;
+              newItem.PS_C_PRO_ECODE = subitem.PS_C_PRO_ECODE;
+              newItem.PS_C_CLR_ID = subitem.PS_C_CLR_ID; // 颜色
+              newItem.PS_C_CLR_ECODE = subitem.PS_C_CLR_ECODE;
+              newItem.PS_C_CLR_ENAME = subitem.PS_C_CLR_ENAME;
+              newItem.PS_C_SIZE_ID = subitem.PS_C_SIZE_ID; // 尺寸
+              newItem.PS_C_SIZE_ECODE = subitem.PS_C_SIZE_ECODE;
+              newItem.PS_C_SIZE_ENAME = subitem.PS_C_SIZE_ENAME;
+              newItem.PS_C_PRO_ENAME = subitem.PS_C_PRO_ENAME;
+              newItem.QTY_CAN_REFUND = subitem.QTY;
+              newItem.QTY_REFUND = Number(subitem.QTY || 0) - Number(subitem.QTY_RETURN_APPLY || 0);
+              newItem.QTY_EXCHANGE = subitem.QTY;
+              newItem.SEX_NAME = subitem.SEX_NAME;
+              newItem.SEX = subitem.SEX;
+              newItem.PRICE = subitem.PRICE_SETTLE;
+              newItem.amt_refund_single = subitem.PRICE_ACTUAL;
+              newItem.AMT_REFUND = publicMethodsUtil.accMul(newItem.QTY_REFUND, subitem.PRICE_ACTUAL).toFixed(2); // 退货金额realAmt
+              newItem.QTY_IN = 0;
+              newItem.PRODUCT_MARK = '正品';
+              newItem.skuId = subitem.PS_C_SKU_ID;
+              _this.reconstructionGetDetail(subitem, newItem, subitem.PS_C_PRO_ECODE);
+              newItem.PRICE_SETTLE = subitem.PRICE_SETTLE; // 结算单价
+              newItem.AMT_SETTLE_TOT = subitem.TOT_PRICE_SETTLE; // 结算金额
+              newItem.OC_B_ORDER_ITEM_ID = subitem.OC_B_ORDER_ITEM_ID;
+              newQueryList.push(newItem);
+            });
 
-            for await (const subitem of queryList) {
+            /* for await (const subitem of queryList) {
               const newItem = {};
               newItem.reserve_bigint10 = subitem.ID;
               newItem.ID = -1;
@@ -1310,7 +1344,7 @@ export default {
               newItem.AMT_SETTLE_TOT = subitem.TOT_PRICE_SETTLE; // 结算金额
               newItem.OC_B_ORDER_ITEM_ID = subitem.OC_B_ORDER_ITEM_ID;
               newQueryList.push(newItem);
-            }
+            } */
             _this.jordanTableConfig.data = newQueryList;
             _this.refundDtoList.data = _this.jordanTableConfig.data;
             _this.amountReturned = _this.calculateMoney(_this.jordanTableConfig.data, 1).toFixed(2);
