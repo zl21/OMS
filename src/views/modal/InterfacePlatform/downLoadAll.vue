@@ -3,6 +3,11 @@
     class="downLoadTaobaoOrder"
     style="width:430px"
   >
+    <Spin
+      v-if="spinShow"
+      size="large"
+      fix
+    />
     <businessForm :form-config="downLoadFormConfig" />
     <businessButton :btn-config="downLoadBtnConfig" />
     <!-- 确认下载弹框 订单下载-->

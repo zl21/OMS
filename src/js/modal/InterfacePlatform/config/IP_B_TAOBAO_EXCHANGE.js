@@ -100,10 +100,14 @@ export default {
     const fromdata = new FormData();
     fromdata.append('param', JSON.stringify(param));
     // 换货单下载订单
+    self.spinShow = true;
     const { data: { code, message } } = await self.service.interfacePlatform.exchangeDownload(fromdata);
     if (code === 0) {
       self.$Message.success(message);
       self.$emit('closeActionDialog', true);
+      self.spinShow = false;
+    } else {
+      self.spinShow = false;
     }
   }
 };
