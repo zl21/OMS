@@ -74,6 +74,9 @@ export default {
         type: 'STRING',
         valuedata: '' // 这个是选择的值
       };
+      this.pulicdownLoadConfig.formData[2].label = '订单ID';
+      this.pulicdownLoadConfig.formData[2].width = 24;
+      this.pulicdownLoadConfig.formData.splice(-1,1);
       this.downLoadPublicFormConfig.formData[1].style = '';
       this.pulicUrl = '/p/cs/stdp/order/get';
     } else if (this.$parent.title === this.vmI18n.t('btn.generalGoods_download') || this.$parent.title === this.vmI18n.t('btn.distributionChargeback_download')) {
@@ -440,7 +443,7 @@ export default {
         _this.$Message.success(message);
         _this.$emit('closeActionDialog', true);
       } else {
-        _this.$Message.error(message);
+        // _this.$Message.error(message);
       }
     },
     // 通用商品下载
@@ -470,7 +473,7 @@ export default {
         _this.$Message.success(message);
         _this.$emit('closeActionDialog', true);
       } else {
-        _this.$Message.error(message);
+        // _this.$Message.error(message);
       }
     },
     // 分销商品
@@ -505,7 +508,7 @@ export default {
         _this.$Message.success(message);
         _this.$emit('closeActionDialog', true);
       } else {
-        _this.$Message.error(message);
+        // _this.$Message.error(message);
       }
     },
     // IP_B_STANDPLAT_REFUND
@@ -542,7 +545,7 @@ export default {
         _this.$Message.success(message);
         _this.$emit('closeActionDialog', true);
       } else {
-        _this.$Message.error(message);
+        // _this.$Message.error(message);
       }
     },
     // 打开导入弹窗
