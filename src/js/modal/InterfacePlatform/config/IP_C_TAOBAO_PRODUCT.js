@@ -47,7 +47,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: window.vmI18n.t('form_label.numberCode'), // 数字编号 输入框前文字 输入框前文字
+        label: window.vmI18n.t('form_label.platformCommodityID'), // 平台商品ID 输入框前文字 输入框前文字
         value: 'numNumber', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持
