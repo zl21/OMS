@@ -334,7 +334,7 @@ export default {
     }, // 控制下拉
     search(val, oldval) {
       $('.pinyin').val(val);
-      this.search = val.match(/[\w]*/ig)[0].toLocaleUpperCase();
+      this.search = val.match(/[\w,-]*/ig)[0].toLocaleUpperCase();
       if (oldval.toLocaleUpperCase() === val) return;
       const index = this.inputList.findIndex(n => n.cusurl === 'custompage/matrix');
       /* if(index !== -1) {
