@@ -559,7 +559,7 @@ export default {
                 this.$store.commit('customize/TabOpen', {
                   id: -1,
                   type: 'action',
-                  name: 'refundAfterShipment',
+                  name: 'EXTRAREFUND',
                   label: window.vmI18n.t('panel_label.extraRefundEdit'), // 额外退款编辑
                   query: Object.assign({
                     oid: this.$route.params.customizedModuleId,
@@ -623,7 +623,7 @@ export default {
             text: window.vmI18n.t('btn.copyOrder') // 复制订单
           }, */
           {
-            // text: window.vmI18n.t('btn.orderCancel'), // 
+            // text: window.vmI18n.t('btn.orderCancel'), //
             webname: 'Order Cancellation', // 订单取消
             btnclick: () => {
               const self = this;
@@ -760,7 +760,7 @@ export default {
         return;
       }
       // 默认是丢单复制的query
-      
+
       const query = {
         id: self.$route.params.customizedModuleId,
         pageTitle
