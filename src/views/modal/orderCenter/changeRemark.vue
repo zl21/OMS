@@ -1,5 +1,10 @@
 <template>
   <div class="jordanModal--">
+    <Spin
+      v-if="spinShow"
+      size="large"
+      fix
+    />
     <Form
       :label-width="80"
       :model="formItem"
@@ -58,7 +63,10 @@
         </RadioGroup>
       </FormItem>
     </Form>
-    <businessButton class="modalBth" :btn-config="btnConfig" />
+    <businessButton
+      class="modalBth"
+      :btn-config="btnConfig"
+    />
     <Modal
       v-model="confirmModal"
       :mask="true"
@@ -67,6 +75,7 @@
       width="300"
       @on-keydown="onKeydownModal"
       @on-ok="ok"
+      @on-cancel="cancel"
     >
       <!-- <p>是否确认修改备注！</p> -->
       <p>{{ vmI18n.t("modalTips.zh") }}</p>
@@ -74,9 +83,9 @@
   </div>
 </template>
 <script>
-import changeRemark from '@/js/modal/orderCenter/changeRemark';
+  import changeRemark from '@/js/modal/orderCenter/changeRemark';
 
-export default changeRemark;
+  export default changeRemark;
 </script>
 
 <style lang='less'>

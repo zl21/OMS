@@ -18,6 +18,7 @@ export default {
   computed: {},
   data() {
     return {
+      spinShow: false,
       vmI18n: window.vmI18n,
       // 提示
       confirmModal: false,
@@ -89,6 +90,8 @@ export default {
           || self.componentData.status.includes(1)
         ) {
           self.confirmModal = true;
+          self.btnConfig.buttons[1].disabled = true;
+          this.spinShow = true;
         } else {
           self.saveRemark();
         }
@@ -116,6 +119,10 @@ export default {
     ok() {
       this.saveRemark();
     },
+    cancel() {
+      this.btnConfig.buttons[1].disabled = false;
+      this.spinShow = false;
+    },
     // 保存备注
     saveRemark() {
       const self = this;
@@ -137,6 +144,8 @@ export default {
         data: param,
       }).then((res) => {
         if (res.data.code === 0) {
+          self.btnConfig.buttons[1].disabled = false;
+          this.spinShow = false;
           if (self.$route.params.customizedModuleId == 2627) {
             self.$Message.success(res.data.message);
             self.$parent.$parent.$parent.getData();
@@ -149,6 +158,8 @@ export default {
           }
         } else {
           self.$Message.error(res.data.message);
+          self.btnConfig.buttons[1].disabled = false;
+          this.spinShow = false;
         }
       });
     },
