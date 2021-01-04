@@ -44,7 +44,7 @@ export default {
     // 收货人地址校验：不能为纯数字
     const validateReceiveAddress = (rule, value, callback) => {
       const rAddress = this.formConfig1.formValue.RECEIVER_ADDRESS;
-      console.log('rAddress',rAddress);
+      console.log('rAddress', rAddress);
       if (!rAddress) {
         return callback(new Error('收货人地址不能为空!'));
       }
@@ -168,7 +168,7 @@ export default {
             premtype: 'CP_C_SHOP_PERMISSION_ID',
             refcol: 'ID',
             iswrite: 'true',
-          },],
+          }, ],
         },
       },
 
@@ -300,6 +300,7 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_SHOP_TITLE',
+            label: window.vmI18n.t('form_label.orderShop'), // 下单店铺 // input前面显示的lable值
             itemdata: {},
             oneObj: () => {
               // 点击选中事件
@@ -311,9 +312,43 @@ export default {
             },
           },
           {
+            style: 'select', // 下拉框类型
+            label: window.vmI18n.t('form_label.delivery_warehouse'), // 发货仓库 下拉框前的值
+            width: '6', // 所占宽度宽度
+            dataAcessKey: 'CP_C_PHY_WAREHOUSE_ENAME',
+            value: 'CP_C_PHY_WAREHOUSE_ID', // 输入框的值
+            selectChange: () => {
+              const _this = this;
+              // _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME
+              // const optionsArr = _this.formConfig.formData[8].options;
+              const optionsArr = _this.queryFormItem(_this.formConfig.formData, window.vmI18n.t('form_label.delivery_warehouse')).options;
+              for (let i = 0; i < optionsArr.length; i++) {
+                if (
+                  optionsArr[i].value
+                  === _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID
+                ) {
+                  _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = optionsArr[i].label;
+                  // this.formConfig.formData[1].inputList = [
+                    this.queryFormItem(this.formConfig.formData, window.vmI18n.t('form_label.distribution_logistics')).inputList = [
+                    {
+                      childs: [
+                        { colname: 'CP_C_PLATFORM_ID', refobjid: _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID, valuedata: optionsArr[i].label }
+                      ]
+                    }
+                  ];
+                  return;
+                }
+              }
+            }, // 选中事件，默认返回选中的值
+            options: [
+              // 下拉框选项值
+            ],
+          },
+          {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_LOGISTICS_ENAME',
+            label: window.vmI18n.t('form_label.distribution_logistics'), // 配送物流 input前面显示的lable值
             inputList: [
               {
                 childs: [
@@ -405,37 +440,6 @@ export default {
             width: '6',
           },
           {
-            style: 'select', // 下拉框类型
-            label: window.vmI18n.t('form_label.delivery_warehouse'), // 发货仓库 下拉框前的值
-            width: '6', // 所占宽度宽度
-            dataAcessKey: 'CP_C_PHY_WAREHOUSE_ENAME',
-            value: 'CP_C_PHY_WAREHOUSE_ID', // 输入框的值
-            selectChange: () => {
-              const _this = this;
-              // _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME
-              const optionsArr = _this.formConfig.formData[8].options;
-              for (let i = 0; i < optionsArr.length; i++) {
-                if (
-                  optionsArr[i].value
-                  === _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID
-                ) {
-                  _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = optionsArr[i].label;
-                  this.formConfig.formData[1].inputList = [
-                    {
-                      childs: [
-                        { colname: 'CP_C_PLATFORM_ID', refobjid: _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID, valuedata: optionsArr[i].label }
-                      ]
-                    }
-                  ];
-                  return;
-                }
-              }
-            }, // 选中事件，默认返回选中的值
-            options: [
-              // 下拉框选项值
-            ],
-          },
-          {
             style: 'date', // 输入框类型
             type: 'datetime', // 文本框类型的input
             label: window.vmI18n.t('table_label.paymentTime'), // 付款时间 输入框前文字
@@ -523,7 +527,8 @@ export default {
       },
       // 表单二
       formConfig1: {
-        formData: [{
+        formData: [
+          {
             style: 'input',
             label: window.vmI18n.t('form_label.match_smart_address'), // 智能匹配地址
             value: 'site',
@@ -606,16 +611,21 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_REGION_PROVINCE_ENAME',
+            label: window.vmI18n.t('form_label.consignee_province'), // 收货人省份 // input前面显示的lable值
             itemdata: {},
             oneObj: () => {
               // 点击选中事件
               // 市 区/县值为空
-              this.formConfig1.formData[6].itemdata.pid = '';
-              this.formConfig1.formData[6].itemdata.valuedata = '';
+              // this.formConfig1.formData[6].itemdata.pid = '';
+              // this.formConfig1.formData[6].itemdata.valuedata = '';
+              this.queryFormItem(this.formConfig1.formData, window.vmI18n.t('form_label.consignee_city')).itemdata.pid = '';
+              this.queryFormItem(this.formConfig1.formData, window.vmI18n.t('form_label.consignee_city')).itemdata.valuedata = '';
               this.formConfig1.formValue.CP_C_REGION_CITY_ID = '';
               this.formConfig1.formValue.CP_C_REGION_CITY_ENAME = '';
-              this.formConfig1.formData[7].itemdata.pid = '';
-              this.formConfig1.formData[7].itemdata.valuedata = '';
+              // this.formConfig1.formData[7].itemdata.pid = '';
+              // this.formConfig1.formData[7].itemdata.valuedata = '';
+              this.queryFormItem(this.formConfig1.formData, window.vmI18n.t('form_label.aconsignee_area')).itemdata.pid = '';
+              this.queryFormItem(this.formConfig1.formData, window.vmI18n.t('form_label.aconsignee_area')).itemdata.valuedata = '';
               this.formConfig1.formValue.CP_C_REGION_AREA_ID = '';
             },
           },
@@ -623,13 +633,16 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_REGION_CITY_ENAME',
+            label: window.vmI18n.t('form_label.consignee_city'), // 收货人市 // input前面显示的lable值
             inputList: [],
             objList: [],
             itemdata: {},
             oneObj: () => {
               // 市 区/县值为空
-              this.formConfig1.formData[7].itemdata.pid = '';
-              this.formConfig1.formData[7].itemdata.valuedata = '';
+              // this.formConfig1.formData[7].itemdata.pid = '';
+              // this.formConfig1.formData[7].itemdata.valuedata = '';
+              this.queryFormItem(this.formConfig1.formData, window.vmI18n.t('form_label.aconsignee_area')).itemdata.pid = '';
+              this.queryFormItem(this.formConfig1.formData, window.vmI18n.t('form_label.aconsignee_area')).itemdata.valuedata = '';
               this.formConfig1.formValue.CP_C_REGION_AREA_ID = '';
             },
           },
@@ -638,6 +651,7 @@ export default {
             width: '6',
             inputList: [],
             dataAcessKey: 'CP_C_REGION_AREA_ENAME',
+            label: window.vmI18n.t('form_label.aconsignee_area'), // 收货人区 input前面显示的lable值
             itemdata: {
               col: 1,
               colid: 167816,
@@ -1182,7 +1196,7 @@ export default {
         label: window.vmI18n.t('panel_label.order_detailed'), // 订单明细
         value: '1',
         isShow: true,
-      },],
+      }, ],
       labelDefaultValue: '1', // 设置tab默认值
       orderNo: {
         refFuns: 'confirmFun',
@@ -1299,7 +1313,8 @@ export default {
     // 发货仓库
     async getWarehouse(id, cid) {
       const _this = this;
-      _this.formConfig.formData[8].options = [];
+      // _this.formConfig.formData[8].options = [];
+      _this.queryFormItem(_this.formConfig.formData, window.vmI18n.t('form_label.delivery_warehouse')).options = [];
       const formData = new FormData();
       if (id) {
         formData.append(
@@ -1313,11 +1328,13 @@ export default {
         formData.append(
           'param',
           JSON.stringify({
-            shopId: _this.formConfig.formData[0].itemdata.pid
+            // shopId: _this.formConfig.formData[0].itemdata.pid
+            shopId: _this.queryFormItem(_this.formConfig.formData, window.vmI18n.t('form_label.orderShop')).itemdata.pid
           })
         );
       }
-      if (_this.formConfig.formData[0].itemdata.pid) {
+      // if (_this.formConfig.formData[0].itemdata.pid) {
+        if (_this.queryFormItem(_this.formConfig.formData, window.vmI18n.t('form_label.orderShop')).itemdata.pid) {
         const res = await _this.service.common.queryPhyWareHouseList(formData);
         if (res.data.code === 0) {
           _this.formConfig.formData.forEach((item) => {
@@ -1441,7 +1458,8 @@ export default {
               res.data.data.remarksInfo
             );
             // 配置初始化页面时'配送物流'的默认项
-            this.formConfig.formData[1].inputList = [
+            // this.formConfig.formData[1].inputList = [
+              this.queryFormItem(this.formConfig.formData, window.vmI18n.t('form_label.distribution_logistics')).inputList = [
               {
                 childs: [
                   {
@@ -1725,7 +1743,7 @@ export default {
           QTY: Num.trim(),
           REAL_AMT: '',
           IS_GIFT: -1,
-        },];
+        }, ];
       }
       if (ecode || value) {
         const ocBorderDto = Object.assign(
@@ -1829,7 +1847,7 @@ export default {
                       selection: `${self.vmI18n.t('other.total')}:`, // 合计
                       REAL_AMT: amt,
                       QTY: qty,
-                    },];
+                    }, ];
                     // self.$children.$children.refreshData();
                     self.$children
                       .find(item => item.name === 'matrixBox')
@@ -2032,7 +2050,7 @@ export default {
               selection: `${self.vmI18n.t('other.total')}:`, // 合计
               REAL_AMT: amt,
               QTY: qty,
-            },];
+            }, ];
           }
         }
       }
@@ -2092,7 +2110,7 @@ export default {
                       selection: `${self.vmI18n.t('other.total')}:`, // 合计
                       REAL_AMT: amt,
                       QTY: qty,
-                    },];
+                    }, ];
 
                     // 动态添加总条数
                     self.jordanTableConfig.total = result.data.data.total;
@@ -2293,15 +2311,23 @@ export default {
     },
     // 过滤条件
     relationShip() {
-      this.formConfig1.formData[5].itemdata = this.fkcolumn.PROV;
-      this.formConfig1.formData[6].inputList.push(this.fkcolumn.PROV);
+      // this.formConfig1.formData[5].itemdata = this.fkcolumn.PROV;
+      this.queryFormItem(this.formConfig1.formData, window.vmI18n.t('form_label.consignee_province')).itemdata = this.fkcolumn.PROV;
+      // this.formConfig1.formData[6].inputList.push(this.fkcolumn.PROV);
+      this.queryFormItem(this.formConfig1.formData, window.vmI18n.t('form_label.consignee_city')).inputList.push(this.fkcolumn.PROV);
 
-      this.formConfig1.formData[6].itemdata = this.fkcolumn.CITY;
-      this.formConfig1.formData[7].inputList.push(this.fkcolumn.CITY);
+      // this.formConfig1.formData[6].itemdata = this.fkcolumn.CITY;
+      this.queryFormItem(this.formConfig1.formData, window.vmI18n.t('form_label.consignee_city')).itemdata = this.fkcolumn.CITY;
+      // this.formConfig1.formData[7].inputList.push(this.fkcolumn.CITY);
+      this.queryFormItem(this.formConfig1.formData, window.vmI18n.t('form_label.aconsignee_area')).inputList.push(this.fkcolumn.CITY);
 
-      this.formConfig.formData[0].itemdata = this.fkcolumn.STORE;
+      // this.formConfig.formData[0].itemdata = this.fkcolumn.STORE;
+      this.queryFormItem(this.formConfig.formData, window.vmI18n.t('form_label.orderShop')).itemdata = this.fkcolumn.STORE;
       // this.formConfig.formData[8].inputList.push(this.fkcolumn.STORE);
       // this.formConfig1.formData[6].objList.push(this.fkcolumn.PROV);
     },
+    queryFormItem(arr, name) { // 根据label遍历查询formData子项
+      return arr.find(item=>item.label == name);
+    }
   },
 };
