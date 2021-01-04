@@ -904,6 +904,10 @@ export default {
       if (this.$store.state.global.activeTab.label.indexOf('已发货退款单') < 0) {
         this.btnConfig.buttons.splice(1, 0, this.auditBtn);
       }
+      if (this.$route.params.customizedModuleName == 'REFUNDAFTERSHIPMENT') { // 如果为已发货退款单,明细表格不显示增加删除明细操作按钮
+        this.tableConfig.isShowDeleteDetailBtn = false;
+        this.tableConfig.isShowAddDetailBtn = false;
+      }
     },
     // 日志明细请求
     async logTableInfo() {
