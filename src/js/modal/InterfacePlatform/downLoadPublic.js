@@ -74,7 +74,7 @@ export default {
         type: 'STRING',
         valuedata: '' // 这个是选择的值
       };
-      this.pulicdownLoadConfig.formData[2].label = '订单ID';
+      this.pulicdownLoadConfig.formData[2].label = '平台单号';
       this.pulicdownLoadConfig.formData[2].width = 24;
       this.pulicdownLoadConfig.formData.splice(-1,1);
       this.downLoadPublicFormConfig.formData[1].style = '';
@@ -118,6 +118,9 @@ export default {
         type: 'STRING',
         valuedata: '' // 这个是选择的值
       };
+      this.pulicdownLoadConfig.formData[2].label = '平台退款单号';
+      this.pulicdownLoadConfig.formData[2].width = 24;
+      this.pulicdownLoadConfig.formData.splice(-1,1);
       this.pulicUrl = '/p/cs/refundDownload';
       this.downLoadPublicFormConfig.formData[1].style = '';
       this.downLoadPublicFormConfig.formData[3].label = this.vmI18n.t('other.refundNumber'); // 退单号
@@ -417,17 +420,16 @@ export default {
       const downData = _this.pulicdownLoadConfig;
       if (!downData.formData[0].itemdata.pid) {
         // 请选择需要下载的店铺
-
         _this.$Message.warning(_this.vmI18n.t('modalTips.be'));
         return;
       }
-      if (downData.formValue.startEndTimes[0] === '' && !downData.formValue.orderNum) {
+      if (downData.formValue.startEndTimes[0] === '' && !downData.formValue.sp_ids && !downData.formValue.orderNum) {
         _this.$Message.warning(_this.vmI18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
         return;
       }
       const param = {
         shop_id: downData.formData[0].itemdata.pid,
-        bill_no: downData.formValue.orderNum, // 订单编号
+        bill_no: downData.formValue.sp_ids ? downData.formValue.sp_ids : downData.formValue.orderNum, // 订单编号
         start_time: formatData.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
         end_time: formatData.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
         status: downData.formValue.orderStatus, // 状态 必传 给默认值
@@ -514,6 +516,9 @@ export default {
     // IP_B_STANDPLAT_REFUND
     async downloadRenterOrder(url) {
       // 通用退单下载方法
+      /* 
+        1. 通用退单下载 - 下载退单
+      */
       const _this = this;
       // const downData = _this.downLoadPublicFormConfig;
       const downData = _this.pulicdownLoadConfig;
@@ -523,13 +528,13 @@ export default {
         _this.$Message.warning(this.vmI18n.t('modalTips.be'));
         return;
       }
-      if (downData.formValue.startEndTimes[0] === '' && !downData.formValue.orderNum) {
+      if (downData.formValue.startEndTimes[0] === '' && !downData.formValue.sp_ids && !downData.formValue.orderNum) {
         _this.$Message.warning(this.vmI18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
         return;
       }
       const param = {
         shop_id: downData.formData[0].itemdata.pid,
-        bill_no: downData.formValue.orderNum || '', // 订单编号
+        bill_no: downData.formValue.sp_ids ? downData.formValue.sp_ids : downData.formValue.orderNum, // 订单编号
         start_time: formatData.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
         end_time: formatData.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
         status: downData.formValue.orderStatus || '', // 状态 必传 给默认值

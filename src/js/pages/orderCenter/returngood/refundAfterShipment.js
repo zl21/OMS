@@ -1253,8 +1253,7 @@ export default {
         } else {
           this.$Modal.confirm({
             title: res.data.data.message,
-            render: h =>
-              h('Table', {
+            render: h => h('Table', {
                 props: {
                   columns: [
                     {
@@ -1292,6 +1291,14 @@ export default {
         if (itemLabel == '单据来源') {
           AfSend[dataConfig[itemLabel]] = item.item.props.value == '手动' ? 1 : 2;
         }
+        // 实际退款金额如果没值的话,取明细中的退款金额
+        if (itemLabel == '实际退款金额') {
+          let total = 0;
+          self.tableConfig.data.forEach(item => {
+            total += item.AMT_RETURN || 0;
+          });
+          AfSend[dataConfig[itemLabel]] = total;
+        }
       });
       // self.reForm.config.map(item => {
       //   AfSend['BILL_TYPE'] = self.BILL_TYPE; //单据类型
@@ -1307,7 +1314,7 @@ export default {
       //   if (item.item.label == '支付账号') AfSend['PAY_ACCOUNT'] = item.item.props.value;
       //   if (item.item.label == '退款金额') AfSend['AMT_RETURN_APPLY'] = item.item.props.value;
       //   if (item.item.label == '判责方备注') AfSend['RESPONSIBLE_PARTY_REMARK'] = item.item.props.value;
-      //   if (item.item.label == '备注') AfSend['REMARK'] = item.item.props.value;
+      //   if (item.item.label == '备注') AfSend['REMARK'] = ite m.item.props.value;
       // });
       AfSend.CP_C_SHOP_ECODE = self.onSelectData.CP_C_SHOP_ECODE; // 店铺编码
       AfSend.CP_C_SHOP_ID = self.onSelectData.CP_C_SHOP_ID; // 店铺ID
@@ -1359,9 +1366,8 @@ export default {
           if (!self.reForm.config[i].item.props.value) {
             self.$Message.warning(self.vmI18n.t('modalTips.j1')); // 原始订单编号不能为空!
             return;
-          } else {
-            requestData.highSearch[0].value = self.reForm.config[i].item.props.value;
           }
+          requestData.highSearch[0].value = self.reForm.config[i].item.props.value;
         }
       }
       formData.append('param', JSON.stringify(requestData));
