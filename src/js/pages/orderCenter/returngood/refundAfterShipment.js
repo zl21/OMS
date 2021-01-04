@@ -1297,7 +1297,7 @@ export default {
           self.tableConfig.data.forEach(item => {
             total += item.AMT_RETURN || 0;
           });
-          AfSend[dataConfig[itemLabel]] = total;
+          AfSend[dataConfig[itemLabel]] = item.item.props.value ? item.item.props.value : total;
         }
       });
       // self.reForm.config.map(item => {
