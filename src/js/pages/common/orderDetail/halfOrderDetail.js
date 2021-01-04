@@ -315,8 +315,22 @@ export default {
       this.$emit('changeHasContent', false);
     }, // 定制页面没有明细
     async newLySave(e) {
-      this.singleData = e;
-      $('#actionMODIFY')[0].click();
+      window.updataClickSave((objid)=>new Promise((resolve)=>{
+        // 新增逻辑
+        const formdata = new FormData();
+        formdata.append('data', JSON.stringify(e));
+        formdata.append('table', this.$route.params.tableName);
+        formdata.append('objid', objid);
+
+        this.service.orderCenter.amendBody(this.tablename, formdata).then(res => {
+          if (res.data.code === 0) {
+            this.getData();
+            this.save = false;
+            this.$children[0].Dialog = false;
+            resolve();
+          }
+        });
+        }));
       // 因为框架主表保存后会跳转路由,导致字表本身数据被刷新,无法保存字表
     }, // 新增tab明细保存
     changeSave(val) {
@@ -378,12 +392,7 @@ export default {
           this.visible = true; // 显示弹框
         });
       }
-      if (e.detail.type !== 'save') return;
-      if (this.$route.params.itemId == 'New') { // 如果为新增页面,则先保存主表成功之后再保存子表
-        if (e.detail.itemTableParame) {
-        this.save = true;
-      }
-      } else {
+      if (e.detail.type == 'save' && this.$route.params.itemId !== 'New') { // 如果为新增页面,则不触发监听保存字表
         this.save = true;
       }
     },
