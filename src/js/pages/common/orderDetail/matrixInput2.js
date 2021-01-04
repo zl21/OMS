@@ -62,8 +62,8 @@ export default {
     changeEditSave() {
       this.$emit('changeEditSave');
     }, // 初始化主表保存完毕的变量
-    newLySave() {
-      this.$emit('newLySave', this.singleData);
+    newLySave(e) {
+      this.$emit('newLySave', e);
     }, // 触发保存
     changeSave(val) {
       this.$emit('changeSave', val);
