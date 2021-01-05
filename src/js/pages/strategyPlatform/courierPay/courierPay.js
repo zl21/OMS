@@ -583,7 +583,7 @@ export default {
           self.query(res.data.data.data.objid);
           self.$message.success(res.data.data.message);
         } else {
-          self.$message.error(res.data.data.message);
+          // self.$message.error(res.data.data.message);
         }
       });
     },
@@ -738,22 +738,6 @@ export default {
         if (res.data.ST_C_COMPENSATE.END_TIME === null) res.data.ST_C_COMPENSATE.END_TIME = '';
         self.setData(res.data);
       }
-      // axios({
-      //   url: "/p/cs/selectCompenstateLogistic",
-      //   method: "post",
-      //   data: formdata,
-      // }).then((res) => {
-      //   console.log(res);
-      //   if (res.status === 200) {
-      //     if (res.data.ST_C_COMPENSATE.BILL_STATUS)
-      //       self.identifying = res.data.ST_C_COMPENSATE.BILL_STATUS;
-      //     if (res.data.ST_C_COMPENSATE.BILL_STATUS !== 1)
-      //       self.jordanTableConfig.isShowDeleteDetailBtn = false;
-      //     if (res.data.ST_C_COMPENSATE.END_TIME === null)
-      //       res.data.ST_C_COMPENSATE.END_TIME = "";
-      //     self.setData(res.data);
-      //   }
-      // });
     },
     // 新增明细方法
     async addDetail() {
@@ -806,7 +790,7 @@ export default {
           }
           self.$message.success(res.data.data.message);
         } else {
-          self.$message.error(res.data.data.message);
+          // self.$message.error(res.data.data.message);
           return;
         }
         self.query(res.data.data.data.objid);

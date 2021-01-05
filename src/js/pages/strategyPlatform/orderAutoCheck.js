@@ -176,14 +176,6 @@ export default {
       return (
         this.service.strategyPlatform
           .getAutoCheck(params)
-          // return httpFormdata({
-          //   method: 'post',
-          //   url: '/p/cs/st/v1/getAutoCheck',
-          //   headers: {
-          //     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-          //   },
-          //   data: params
-          // })
           .then(({ data }) => {
             if (data.data.code == 0) {
               this.info = data.data.data;
@@ -228,7 +220,7 @@ export default {
               this.MODIFIEDDATE = this.info.MODIFIEDDATE ? timestampToTime(this.info.MODIFIEDDATE) : '';
               return;
             }
-            this.$Message.error(data.data.message);
+            // this.$Message.error(data.data.message);
           })
       );
     },
@@ -457,19 +449,11 @@ export default {
           .then(({ data }) => {
             if (data.data.code == 0) {
               this.$Message.success(data.data.message);
-
-              // R3.store.commit('global/tabOpen', {
-              //   type: 'S',
-              //   tableName: 'ST_C_AUTOCHECK',
-              //   tableId: 24634,
-              //   back: true,
-              // });
-              // this.$destroy();
               this.QueryList();
               return;
             }
             if (data.data.message) {
-              this.$Message.error(data.data.message);
+              // this.$Message.error(data.data.message);
             } else {
               console.log('/p/cs/st/v1/addAutoCheck error');
             }

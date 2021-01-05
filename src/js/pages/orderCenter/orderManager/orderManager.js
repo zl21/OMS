@@ -2053,43 +2053,71 @@ export default {
                         dropList[index].componentAttribute.totalRowCount = res.data.datas.totalRowCount;
                       });
                   },
-                  'on-input-value-change': e => {
-                    const self = this;
-                    let premtype = '';
+                  'on-input-value-change': async e => {
+                    let colid;
                     if (item.selectTab.tabth.name === '店铺') {
-                      premtype = 'CP_C_SHOP_PERMISSION_ID';
+                      colid = '167606';
                     } else if (item.selectTab.tabth.name === '发货仓库') {
-                      premtype = 'CP_C_WAREHOUSE_ID';
+                      colid = '167640';
                     }
-                    const params = {
-                      isdroplistsearch: true,
-                      refcolid: item.selectTab.tabth.colid,
-                      fixedcolumns: {},
-                      startindex: (e - 1) * 10,
-                      range: 10,
-                      precolnameslist: [
-                        {
-                          iswrite: 'false',
-                          refcol: 'ID',
-                          premtype
-                        }
-                      ]
-                    };
-                    const data = new URLSearchParams();
-                    data.append('searchdata', JSON.stringify(params));
-                    self.service.orderCenter
-                      .QueryList(data)
-                      // self.$network
-                      //   .post('/p/cs/QueryList', data)
-                      .then(res => {
-                        console.log(res);
-                        if (res.data.code == 0) {
-                          this.dropList.filter(key => key.label == item.displayName)[0].componentAttribute.AutoData = this.setData(res.data.datas.row);
-                        } else {
-                          this.dropList.filter(item => item.label == item.displayName)[0].componentAttribute.AutoData = [];
-                        }
-                      });
-                  }
+                    const formdata = new FormData();
+                    formdata.append('ak', e.trim());
+                    formdata.append('colid', colid);
+                    formdata.append('fixedcolumns', JSON.stringify({}));
+                    const res = await this.service.common.fuzzyquerybyak(formdata);
+                    if (res.data.code == 0) {
+                      this.dropList.filter(key => key.label == item.displayName)[0].componentAttribute.AutoData = res.data.data;
+                    } else {
+                      this.dropList.filter(key => key.label == key.displayName)[0].componentAttribute.AutoData = [];
+                    }
+                    // const self = this;
+                    // let premtype = '';
+                    // if (item.selectTab.tabth.name === '店铺') {
+                    //   premtype = 'CP_C_SHOP_PERMISSION_ID';
+                    // } else if (item.selectTab.tabth.name === '发货仓库') {
+                    //   premtype = 'CP_C_WAREHOUSE_ID';
+                    // }
+                    // const params = {
+                    //   isdroplistsearch: true,
+                    //   refcolid: item.selectTab.tabth.colid,
+                    //   fixedcolumns: {},
+                    //   startindex: (e - 1) * 10,
+                    //   range: 10,
+                    //   precolnameslist: [
+                    //     {
+                    //       iswrite: 'false',
+                    //       refcol: 'ID',
+                    //       premtype
+                    //     }
+                    //   ]
+                    // };
+                    // const data = new URLSearchParams();
+                    // data.append('searchdata', JSON.stringify(params));
+                    // self.service.orderCenter
+                    //   .QueryList(data)
+                    //   // self.$network
+                    //   //   .post('/p/cs/QueryList', data)
+                    //   .then(res => {
+                    //     console.log(res);
+                    //     if (res.data.code == 0) {
+                    //       this.dropList.filter(key => key.label == item.displayName)[0].componentAttribute.AutoData = this.setData(res.data.datas.row);
+                    //     } else {
+                    //       this.dropList.filter(item => item.label == item.displayName)[0].componentAttribute.AutoData = [];
+                    //     }
+                    //   });
+                  },
+                  // 集合搜索的下拉多选组件清空后,去除上次选中的数据
+                  'on-clear': (e) => {
+                    console.log('on-clear:', e);
+                    e.modelValue = [];
+                    this.$refs.integrateSearchFilter.dropDownSelectFilterSelectedValue = [];
+                    this.dropList.forEach(item => {
+                      if (item.type === 'DropDownSelectFilter') {
+                        item.selectedList = [];
+                        item.value = '';
+                      }
+                    });
+                  },
                 }
               };
             } else {
