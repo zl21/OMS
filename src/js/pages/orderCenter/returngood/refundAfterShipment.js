@@ -1470,7 +1470,7 @@ export default {
             item.IS_GIFT_NAME = tempStr;
             item.IS_GIFT = item.GIFT_TYPE;
             item.BILL_NO = self.selectData.BILL_NO;
-            item.QTY_IN = self.BILL_TYPE === '1' ? 0 : Number(item.qty || 1);
+            item.QTY_IN = self.BILL_TYPE === '1' ? 1 : Number(item.qty || 1);
           });
           self.tableConfig.data = self.addItem.addList;
           this.sellerRemarkValueChange('originalOrder', data);
