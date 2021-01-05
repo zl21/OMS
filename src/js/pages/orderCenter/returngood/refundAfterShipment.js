@@ -1447,6 +1447,10 @@ export default {
             if (configItemLabel === self.vmI18n.t('form_label.apply_refundAmount')) {
               configItem.props.value = self.addItem.addList.reduce((sum, n) => sum + Number(n.RETURNABLE_AMOUNT || 0), 0);
             }
+            // 退款金额
+            if (configItemLabel === self.vmI18n.t('form_label.refundAmount')) {
+              configItem.props.value = self.addItem.addList.reduce((sum, n) => sum + n.RETURNABLE_AMOUNT, 0);
+            }
             // if (item.item.label == '判责方备注') item.item.props.value = '10';
           });
           self.addItem.addList.forEach(item => {
