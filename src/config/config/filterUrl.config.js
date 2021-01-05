@@ -52,9 +52,9 @@ export default {
     // 店铺同步库存策略-ST_C_SYNC_STOCK_STRATEGY
     ST_C_SYNC_STOCK_STRATEGY: ['/p/cs/importSyncStockStrategy'],
     // 店铺商品特殊设置-ST_C_PRODUCT_STRATEGY
-    ST_C_PRODUCT_STRATEGY: ['/p/cs/delayButtonFunction'],
+    // ST_C_PRODUCT_STRATEGY: ['/p/cs/delayButtonFunction'],
     // 店铺锁库条码特殊设置-ST_C_LOCK_SKU_STRATEGY
-    ST_C_LOCK_SKU_STRATEGY: ['/p/cs/delayButtonFunction'],
+    // ST_C_LOCK_SKU_STRATEGY: ['/p/cs/delayButtonFunction'],
     // 店铺商品虚高库存设置-ST_C_SHOP_VIRTUAL_HIGH_STOCK
     ST_C_SHOP_VIRTUAL_HIGH_STOCK: ['/p/cs/st/v1/delayEndTime'],
     // 直播解析策略-ST_C_LIVE_CAST_STRATEGY
@@ -62,9 +62,9 @@ export default {
     // HOLD单策略-ST_C_HOLD_ORDER
     // ST_C_HOLD_ORDER: ['/p/cs/st/holdOrderUpdateStrategyEndTime', ],
     // 物流方案-ST_C_EXPRESS
-    ST_C_EXPRESS: ['/p/cs/delayButtonFunction'],
+    // ST_C_EXPRESS: ['/p/cs/delayButtonFunction'],
     // 发货单派单方案-ST_C_SEND_PLAN
-    ST_C_SEND_PLAN: ['/p/cs/delayButtonFunction'],
+    // ST_C_SEND_PLAN: ['/p/cs/delayButtonFunction'],
 
     /* ------------ financeCenter ------------ */
     // 唯品会进度账单-AC_F_VIP_BILL_PROGRESS
