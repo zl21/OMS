@@ -146,21 +146,6 @@
       // 获取变量
       getVariableRest() {
         const self = this;
-        // axios({
-        //   method: "post",
-        //   url: "/p/cs/selectVipcomMailSetColumn",
-        //   data: {}
-        // }).then(function(res) {
-        //    if(res.data.data.code === 0){
-        //      let  rows = res.data.data.data;
-        //      self.lists = rows.map((row)=>{
-        //          return {
-        //             label: row.description,
-        //             click: () => self.setVariable(row.DESCRIPTION)
-        //          }
-        //      })
-        //    }
-        // });
 
         const rows = ['品牌', '订单号', '入库单号', '到货仓', '商品总数量', '预计发货时间', '预计到货时间', '箱号', '物流公司', '发货实体仓'];
         self.lists = rows.map((row) => ({
@@ -232,7 +217,7 @@
             if (res.data.code === 0) {
                 self.$Message.success('保存成功!');
             } else {
-              self.$Message.error('保存失败');
+              // self.$Message.error('保存失败');
             }
           }
         });

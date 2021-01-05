@@ -395,7 +395,7 @@ export default {
               });
             }
           } else {
-            _this.$Message.success(res.data.data.message || window.vmI18n.t('modalTips.y0')); // '保存失败'
+            // _this.$Message.success(res.data.data.message || window.vmI18n.t('modalTips.y0')); // '保存失败'
           }
         });
     },
@@ -435,11 +435,6 @@ export default {
       formData.append('param', JSON.stringify(param));
       this.service.strategyPlatform
         .saveSendRule(formData)
-        // axios({
-        //   url: '/p/cs/saveSendRule',
-        //   method: 'post',
-        //   data: formData
-        // })
         .then(res => {
           if (res.data.data.code === 0) {
             _this.$Message.success(window.vmI18n.t('modalTips.cx')); // '新增成功'
@@ -449,7 +444,7 @@ export default {
             _this.jordanTableConfig.businessFormConfig.formValue.RANK = '';
             _this.jordanTableConfig.businessFormConfig.formValue.SEND_RATE = '';
           } else {
-            _this.$Message.error(res.data.data.message || window.vmI18n.t('modalTips.cy')); // '新增失败'
+            // _this.$Message.error(res.data.data.message || window.vmI18n.t('modalTips.cy')); // '新增失败'
           }
         });
     },
@@ -620,11 +615,6 @@ export default {
       const param = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeLikeKey: e };
       this.service.strategyPlatform
         .getLikeRankResultTable(param)
-        // axios({
-        //   url: '/p/cs/getLikeRankResultTable',
-        //   method: 'post',
-        //   data: param
-        // })
         .then(res => {
           _this.tableLoading = false;
           if (res.data.code === 0) {
@@ -634,7 +624,7 @@ export default {
             });
             _this.treeData = res.data.data.sendRuleTree;
           } else {
-            _this.$Message.error(res.data.data.message || window.vmI18n.t('modalTips.z3')); // '失败'
+            // _this.$Message.error(res.data.data.message || window.vmI18n.t('modalTips.z3')); // '失败'
           }
         });
     },
@@ -647,11 +637,6 @@ export default {
       fromdata.append('param', JSON.stringify(param));
       this.service.strategyPlatform
         .voidSendRule(fromdata)
-        // axios({
-        //   url: '/p/cs/voidSendRule',
-        //   method: 'post',
-        //   data: fromdata
-        // })
         .then(res => {
           _this.saveLoading = false;
           if (res.data.data.code === 0) {
@@ -659,8 +644,8 @@ export default {
             _this.getMianTable();
             _this.$Message.success(ess);
           } else {
-            const err = res.data.data.message || window.vmI18n.t('modalTips.y5'); // '作废失败';
-            _this.$Message.success(err);
+            // const err = res.data.data.message || window.vmI18n.t('modalTips.y5'); // '作废失败';
+            // _this.$Message.error(err);
           }
         });
     },
@@ -682,8 +667,8 @@ export default {
             _this.$Message.success(ess);
             publicMethodsUtil.downloadUrlFile(res.data.data);
           } else {
-            const err = res.data.message || window.vmI18n.t('modalTips.y6'); // '导出失败';
-            _this.$Message.success(err);
+            // const err = res.data.message || window.vmI18n.t('modalTips.y6'); // '导出失败';
+            // _this.$Message.error(err);
             publicMethodsUtil.downloadUrlFile(res.data.data);
           }
         });
@@ -713,8 +698,8 @@ export default {
             _this.getMianTable();
             _this.$Message.success(ess);
           } else {
-            const err = res.data.data.message || window.vmI18n.t('modalTips.cs'); // '删除失败';
-            _this.$Message.error(err);
+            // const err = res.data.data.message || window.vmI18n.t('modalTips.cs'); // '删除失败';
+            // _this.$Message.error(err);
           }
         });
     },
@@ -742,8 +727,8 @@ export default {
             _this.$Message.success(ess);
             publicMethodsUtil.downloadUrlFile(res.data.data);
           } else {
-            const err = res.data.message || window.vmI18n.t('modalTips.y6'); // '导出失败';
-            _this.$Message.error(err);
+            // const err = res.data.message || window.vmI18n.t('modalTips.y6'); // '导出失败';
+            // _this.$Message.error(err);
             publicMethodsUtil.downloadUrlFile(res.data.data);
           }
         });
