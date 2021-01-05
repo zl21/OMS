@@ -42,10 +42,10 @@ export default {
       errdataList: [],
       // 公共弹框
       publicBouncedConfig: {},
-      // 弹框配置 修改备注
+      // 弹框配置
       changeRemarkConfig: {
         refFuns: 'confirmFun',
-        confirmTitle: window.vmI18n.t('modalTitle.modify_sellerNotes'), // 修改卖家备注
+        confirmTitle: window.vmI18n.t('modalTitle.modify_sellerNotes'), // 修改备注/修改卖家备注
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
@@ -119,7 +119,7 @@ export default {
         typeAll: 'error', // 按钮统一风格样式
         buttons: [
           {
-            text: window.vmI18n.t('btn.find'), // 查找 按钮文本
+            text: window.vmI18n.t('btn.find'), // 查找
             webname: 'lookup_tuihuanhuo',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -127,7 +127,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.reset'), // 重置 按钮文本
+            text: window.vmI18n.t('btn.reset'), // 重置
             webname: 'lookup_chongzhi',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -135,7 +135,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.add'), // 新增  按钮文本
+            text: window.vmI18n.t('btn.add'), // 新增 
             webname: 'new_tuihuanhuo',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -152,7 +152,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.modify'), // 修改 按钮文本
+            text: window.vmI18n.t('btn.modify'), // 修改
             webname: 'modify_yuihuanhuo',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -160,7 +160,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('panel_label.scannAndWarehous'), // 扫描入库 按钮文本
+            text: window.vmI18n.t('panel_label.scannAndWarehous'), // 扫描入库
             webname: 'in_tuihuanhuo',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -168,7 +168,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.afterSalesAudit'), // 售后审核 按钮文本
+            text: window.vmI18n.t('btn.afterSalesAudit'), // 售后审核
             webname: 'shenhe_tuihuanhuo',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -176,7 +176,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            text: window.vmI18n.t('common.cancel'), // 取消
             webname: 'quxiao_tuihuanhuo',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -184,7 +184,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.virtualWarehous'), // 虚拟入库 按钮文本
+            text: window.vmI18n.t('btn.virtualWarehous'), // 虚拟入库
             webname: 'xuniruku_tuihuanhuo',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -192,7 +192,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('modalTitle.manualWarehous'), // 手动入库 按钮文本
+            text: window.vmI18n.t('modalTitle.manualWarehous'), // 手动入库
             webname: 'VirtualWarehouseStorageCmd',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -200,7 +200,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.cancel_automaticRefund'), // 取消自动退款 按钮文本
+            text: window.vmI18n.t('btn.cancel_automaticRefund'), // 取消自动退款
             webname: 'quxiaozidongtuikuan_tuihuanhuo',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -208,18 +208,20 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.modifyRemarks'), // 修改备注 按钮文本
+            text: window.vmI18n.t('btn.modifyRemarks'), // 修改备注
             webname: 'beizhu_tuihuanh',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
+              this.changeRemarkConfig.confirmTitle = '修改备注';
               this.bounced();
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('modalTitle.modify_sellerNotes'), // 修改卖家备注 按钮文本
+            text: window.vmI18n.t('modalTitle.modify_sellerNotes'), // 修改卖家备注
             webname: 'modifyReturnSellerRemark',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
+              this.changeRemarkConfig.confirmTitle = '修改卖家备注';
               this.bounced2();
             } // 按钮点击事件
           },
@@ -284,7 +286,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            // text: window.vmI18n.t('btn.sellerNotesImport'), 按钮文本
+            // text: window.vmI18n.t('btn.sellerNotesImport'),
             webname: 'oc_b_return_order_import_seller_remark', // 卖家备注导入
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -299,7 +301,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('btn.import'), // 导入 按钮文本
+            text: window.vmI18n.t('btn.import'), // 导入
             webname: 'daoru_tuihuanhuo',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -311,7 +313,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.export'), // 导出 按钮文本
+            text: window.vmI18n.t('btn.export'), // 导出
             webname: 'daochu_tuihuanhuo',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
