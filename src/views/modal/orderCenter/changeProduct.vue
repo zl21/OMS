@@ -1,6 +1,6 @@
 <template>
   <!-- 替换商品 -->
-  <div class="changeProduct">
+  <div class="changeProduct" v-loading="loading">
     <div class="i_head">
       <div class="i_body">
         <!-- <p>被替换商品SKU</p> -->
