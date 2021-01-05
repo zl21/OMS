@@ -86,11 +86,14 @@
         }).then((res) => {
           this.$emit('closeActionDialog', false);
           if (res.data.code === 0) {
-            self.$Message.info(res.data.message);
+            self.$Message.success(res.data.message);
             self.refreshData();
             self.closeActionDialog();
           } else {
             // self.$Message.error(res.data.message);
+            const failInfo = res.data.data;
+            const moduleComponentName = `S.${this.$route.params.tableName}.${ this.$route.params.tableId}`;// 当前模块名称
+            this.$emit('closeActionDialog', true, failInfo, moduleComponentName); // 关闭弹框
           }
         });
       },
