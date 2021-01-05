@@ -2105,7 +2105,19 @@ export default {
                     //       this.dropList.filter(item => item.label == item.displayName)[0].componentAttribute.AutoData = [];
                     //     }
                     //   });
-                  }
+                  },
+                  // 集合搜索的下拉多选组件清空后,去除上次选中的数据
+                  'on-clear': (e) => {
+                    console.log('on-clear:', e);
+                    e.modelValue = [];
+                    this.$refs.integrateSearchFilter.dropDownSelectFilterSelectedValue = [];
+                    this.dropList.forEach(item => {
+                      if (item.type === 'DropDownSelectFilter') {
+                        item.selectedList = [];
+                        item.value = '';
+                      }
+                    });
+                  },
                 }
               };
             } else {
