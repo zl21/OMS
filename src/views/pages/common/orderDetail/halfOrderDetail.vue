@@ -16,7 +16,6 @@
         :input-list="inputList"
         :isdisabled="isdisabled"
         :is-active="isActive"
-        :save="save"
         :editsave="editsave"
         @refreshGetData="refreshData"
         @changeSave="changeSave"

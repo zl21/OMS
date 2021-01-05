@@ -1177,7 +1177,7 @@
             this.$emit('customize', JSON.parse(JSON.stringify(data)));
             this.$emit('refreshData', {
               status: false,
-              clear: false // 是否清空input数据
+              clear: true // 是否清空input数据
             });
             setTimeout(() => {
               this.evenPoint = false;
@@ -1187,6 +1187,10 @@
           this.saveLoading = true;
           this.$set(this, 'paramsObj', data);
           this.$emit('objectEdit', data);
+          this.$emit('refreshData', {
+            status: false,
+            clear: true // 是否清空input数据
+          });
         }
       }, // 确认
       waitObjSave() {

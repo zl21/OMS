@@ -251,7 +251,8 @@ export default {
           this.$children[0].Dialog = false;
         }
       });
-      // document.getElementById('actionMODIFY').click();
+      // 清空输入框参数
+      this.$refs.inputMatrix.search = '';
     }, // 告诉父组件先保存主表
     changeEditSave() {
       this.isDialogMatrixSave = false;
@@ -398,6 +399,7 @@ export default {
     },
     saveAmendData() {
       if (Object.keys(this.amend).length === 0 && Object.keys(this.bodyChangeData).length === 0) {
+        this.save = false;
         return Promise.resolve(1);
       } // 无变化
       const data = {};
