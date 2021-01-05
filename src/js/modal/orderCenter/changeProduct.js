@@ -10,6 +10,7 @@ export default {
   data() {
     return {
       vmI18n: window.vmI18n,
+      loading: false,
       pro: '',
       replace_pro: '',
       radioValue: '2',
@@ -18,7 +19,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本 
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             } // 按钮点击事件
@@ -352,11 +353,13 @@ export default {
       result.sku_code = needParam.SKU_ECODE;
       result.type = 1;
       console.log(this.componentData.a_1, result);
+      this.loading = true;
       axios({
         url: '/api/cs/oc/oms/v1/bathChangeGoods',
         method: 'post',
         data: result,
       }).then((res) => {
+        this.loading = false;
         console.log(res);
         if (res.data.code == 0) {
           self.$Message.success(res.data.message);
