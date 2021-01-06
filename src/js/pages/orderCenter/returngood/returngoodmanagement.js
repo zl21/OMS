@@ -1555,7 +1555,9 @@ export default {
     async getList() {
       const _this = this;
       _this.jordanTableConfig.loading = true;
-      _this.service.orderCenter.findDetail({ id: _this.$route.query.id, start: 1, count: 50 }).then(async res => {
+      _this.service.orderCenter.findDetail({
+ id: _this.$route.query.id, start: 1, count: 50, isRefund2Exchange: this.$route.query.flag == 'RefundToExchange' ? 1 : undefined 
+}).then(async res => {
         if (res.data.code === 0) {
           _this.jordanTableConfig.loading = false;
           _this.information.formValue.BILL_TYPE = String(res.data.data.returnOrders.BILL_TYPE);
