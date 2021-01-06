@@ -33,11 +33,11 @@
 </template>
 
 <script>
-  import orderItem from '@/js/pages/orderCenter/distribution/splitDistributionOrder';
+  import splitDistributionOrder from '@/js/pages/orderCenter/distribution/splitDistributionOrder';
 
-  export default orderItem;
+  export default splitDistributionOrder;
 </script>
 
 <style lang="less" scoped>
-  @import '~@/css/pages/OrderCenter/distribution/splitDistributionOrder.less';
+  @import '~@/css/pages/orderCenter/distribution/splitDistributionOrder.less';
 </style>
