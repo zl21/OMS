@@ -72,10 +72,10 @@ export default {
         componentData: {}
       }, // 退单编号查询
 
-      // 弹框配置 修改备注
+      // 弹框配置
       changeRemarkConfig: {
         refFuns: 'confirmFun',
-        confirmTitle: window.vmI18n.t('modalTitle.modify_sellerNotes'), // 修改卖家备注
+        confirmTitle: window.vmI18n.t('btn.modifyRemarks'), // 修改备注
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
