@@ -232,7 +232,7 @@ export default {
       _this.isSaveLoading = false;
       _this.dataArr = [];
       if (code === 0) {
-        _this.$message.success('保存成功');
+        _this.$message.success(message);
         _this.getTree('', data.objid);
         this.$store.commit('customize/TabHref', {
           id: data.objid, // 单据id
@@ -246,8 +246,8 @@ export default {
         });
         this.synchronous();
       } else {
-        // const err = message || _this.vmI18n.t('modalTips.y0'); // '保存失败';
-        // _this.$message.error(err);
+        const err = message || _this.vmI18n.t('modalTips.y0'); // '保存失败';
+        _this.$message.error(err);
         this.synchronous();
       }
     },
@@ -262,16 +262,16 @@ export default {
         data: {
           data: { code, message, data }
         }
-      } = await this.service.strategyPlatform.expressAreaSaveCmd(formData);
+      } = await this.service.strategyPlatform.expressAreaVoidCmd(formData);
       console.log(code, message, data);
       _this.isSaveLoading = false;
       if (code === 0) {
-        const ess = data.message || _this.vmI18n.t('modalTips.y4'); // 作废成功
+        const ess = message || _this.vmI18n.t('modalTips.y4'); // 作废成功
         _this.getTree('', _this._objid);
         _this.$message.success(ess);
       } else {
-        // const err = data.message || _this.vmI18n.t('modalTips.y5'); // 作废失败
-        // _this.$message.success(err);
+        const err = message || _this.vmI18n.t('modalTips.y5'); // 作废失败
+        _this.$message.error(err);
       }
     },
     // 获取树
