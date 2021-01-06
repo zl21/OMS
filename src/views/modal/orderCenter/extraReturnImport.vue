@@ -11,7 +11,5 @@
 </script>
 
 <style lang="less" scoped>
-.import-page {
-  width: 550px;
-}
+  @import "~@/css/modal/orderCenter/extraReturnImport.less";
 </style>
