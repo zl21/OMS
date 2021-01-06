@@ -13,7 +13,7 @@ const mArea = {};
  */
 function parseArea(list, init) {
   if (!init && defaultData.length) {
-    return true;
+    return;
   }
   defaultData = list;
   defaultData.forEach(province => {
