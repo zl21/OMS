@@ -214,12 +214,30 @@ class publicUtil {
    * src 导出路径
    */
   downloadUrlFile(src) {
-    const eleLink = document.createElement('a');
-    eleLink.setAttribute('href', src);
-    eleLink.style.display = 'none';
-    document.body.appendChild(eleLink);
-    eleLink.click();
-    document.body.removeChild(eleLink);
+    const self = this;
+    const domFrame = window.parent.document.getElementById('downLoadListFrame');
+    if (domFrame != null) {
+      window.parent.document.body.removeChild(domFrame);
+    }
+    const downloadFile = {};
+    if (typeof downloadFile.iframe === 'undefined') {
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute('id', 'downLoadListFrame');
+      self.addEvent('load', iframe, () => { self.iframeLoad(iframe); });
+      iframe.src = src;
+      downloadFile.iframe = iframe;
+      document.body.appendChild(downloadFile.iframe);
+      setTimeout(() => {
+        iframe.src = '';
+      }, 1000);
+    }
+
+    // const eleLink = document.createElement('a');
+    // eleLink.setAttribute('href', src);
+    // eleLink.style.display = 'none';
+    // document.body.appendChild(eleLink);
+    // eleLink.click();
+    // document.body.removeChild(eleLink);
 
     // const download_file = {};
     // if (typeof (download_file.iframe) === 'undefined') {
