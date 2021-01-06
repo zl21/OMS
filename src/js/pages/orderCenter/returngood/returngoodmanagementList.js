@@ -1301,8 +1301,23 @@ export default {
               _this.$Message.success(mes);
               _this.getList(_this.statusTab);
             } else {
-              const err = res.data.message || _this.vmI18n.t('modalTips.k9'); // 售后审核失败！
-              _this.$Message.error(err);
+              _this.$Modal.confirm({
+                title: res.data.message,
+                width: 500,
+                render: h=>h('Table', {
+                    props: {
+                      columns: [
+                        {
+                          title: '提示信息',
+                          key: 'message'
+                        }
+                      ],
+                      data: res.data.data
+                    }
+                  })
+              });
+              // const err = res.data.message || _this.vmI18n.t('modalTips.k9'); // 售后审核失败！
+              // _this.$Message.error(err);
             }
           });
         }
