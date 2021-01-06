@@ -30,7 +30,7 @@ class publicUtil {
 
   // 加法函数
   accAdd(arg1, arg2) {
-    let r1; let r2; let m; let 
+    let r1; let r2; let m; let
       c;
     try {
       r1 = arg1.toString().split('.')[1].length;
@@ -62,7 +62,7 @@ class publicUtil {
 
   // 減法函數
   accSub(arg1, arg2) {
-    let r1; let r2; let m; let 
+    let r1; let r2; let m; let
       n;
     try {
       r1 = arg1.toString().split('.')[1].length;
@@ -81,7 +81,7 @@ class publicUtil {
 
   // 乘法
   accMul(arg1, arg2) {
-    let m = 0; const s1 = arg1.toString(); 
+    let m = 0; const s1 = arg1.toString();
     const s2 = arg2.toString();
     try {
       m += s1.split('.')[1].length;
@@ -96,7 +96,7 @@ class publicUtil {
 
   // 除法
   accDiv(arg1, arg2) {
-    let t1 = 0; let t2 = 0; let r1; let 
+    let t1 = 0; let t2 = 0; let r1; let
       r2;
     arg1 = arg1 || 0;
     arg2 = arg2 || 0;
@@ -170,7 +170,7 @@ class publicUtil {
    * 获取两个字符串日期相差天数
    */
   dateDiff(startDate, endDate) {
-    let aDate; let oDate1; let oDate2; let 
+    let aDate; let oDate1; let oDate2; let
       iDays;
     aDate = startDate.split('-');
     oDate1 = new Date(`${aDate[1]}-${aDate[2]}-${aDate[0]}`);
@@ -214,14 +214,21 @@ class publicUtil {
    * src 导出路径
    */
   downloadUrlFile(src) {
-    const download_file = {};
-    if (typeof (download_file.iframe) === 'undefined') {
-      const iframe = document.createElement('iframe');
-      download_file.iframe = iframe;
-      document.body.appendChild(download_file.iframe);
-    }
-    download_file.iframe.src = src;
-    download_file.iframe.style.display = 'none';
+    const eleLink = document.createElement('a');
+    eleLink.setAttribute('href', src);
+    eleLink.style.display = 'none';
+    document.body.appendChild(eleLink);
+    eleLink.click();
+    document.body.removeChild(eleLink);
+
+    // const download_file = {};
+    // if (typeof (download_file.iframe) === 'undefined') {
+    //   const iframe = document.createElement('iframe');
+    //   download_file.iframe = iframe;
+    //   document.body.appendChild(download_file.iframe);
+    // }
+    // download_file.iframe.src = src;
+    // download_file.iframe.style.display = 'none';
   }
 }
 
@@ -242,7 +249,7 @@ Number.prototype.div = function (arg) {
 // }
 Number.prototype.toFixed = function (length) {
   let carry = 0; // 存放进位标志
-  let num; let 
+  let num; let
     multiple; // num为原浮点数放大multiple倍后的数，multiple为10的length次方
   const str = `${this}`; // 将调用该方法的数字转为字符串
   let dot = str.indexOf('.'); // 找到小数点的位置
