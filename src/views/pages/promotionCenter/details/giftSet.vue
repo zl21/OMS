@@ -2,7 +2,7 @@
 <template>
   <div class="giftSet">
     <div class="title">
-      <i class="iconfontPromotion iconzengpin" />
+      <i class="iconfont icon-zengpin" />
       <!-- <span>赠品信息设置</span> -->
       <span>{{ vmI18n.t('other.gift_set') }}</span>
     </div>

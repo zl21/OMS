@@ -143,25 +143,25 @@ export default {
       },
       stepsBar: [
         {
-          class: 'iconjibenxinxi',
+          class: 'icon-jibenxinxi',
           // content: "基础信息",
           content: window.vmI18n.t('other.basic_info'),
           finish: false
         },
         {
-          class: 'iconliuchengtiaojian',
+          class: 'icon-liuchengtiaojian',
           // content: "条件信息",
           content: window.vmI18n.t('other.condition_info'),
           finish: false
         },
         {
-          class: 'iconzengpin',
+          class: 'icon-zengpin',
           // content: "赠品信息",
           content: window.vmI18n.t('other.gift_info'),
           finish: false
         },
         {
-          class: 'iconhuodong',
+          class: 'icon-huodong',
           // content: "活动概览",
           content: window.vmI18n.t('other.activity_overview'),
           finish: false

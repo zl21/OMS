@@ -2,7 +2,7 @@
 <template>
   <div class="basicInfo">
     <div class="title">
-      <i class="iconfontPromotion iconjibenxinxi" />
+      <i class="iconfont icon-jibenxinxi" />
       <!-- 基础活动 -->
       <span>{{ vmI18n.t("other.basic_info") }}</span>
     </div>
