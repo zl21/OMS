@@ -33,16 +33,11 @@
 </template>
 
 <script>
-  import orderItem from '@/js/pages/orderCenter/distribution/splitDistributionOrder';
+  import splitDistributionOrder from '@/js/pages/orderCenter/distribution/splitDistributionOrder';
 
-  export default orderItem;
+  export default splitDistributionOrder;
 </script>
 
 <style lang="less" scoped>
-.page {
-  // padding: 20px 0;
-}
-/deep/ .dialogFooter {
-  margin-top: 20px;
-}
+  @import '~@/css/pages/orderCenter/distribution/splitDistributionOrder.less';
 </style>

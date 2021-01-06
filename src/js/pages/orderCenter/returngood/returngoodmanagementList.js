@@ -135,7 +135,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.add'), // 新增 
+            text: window.vmI18n.t('btn.add'), // 新增
             webname: 'new_tuihuanhuo',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -403,7 +403,7 @@ export default {
             const resDom = document.createElement('a');
             resDom.style['text-decoration'] = 'underline';
             resDom.innerHTML = param.data.ORIG_SOURCE_CODE;
-            resDom.onclick = function () {
+            resDom.onclick = () => {
               console.log(self);
               const formdata = new FormData();
               formdata.append('param', JSON.stringify({ sourceCode: param.data.ORIG_SOURCE_CODE }));
@@ -1304,7 +1304,8 @@ export default {
               _this.$Modal.confirm({
                 title: res.data.message,
                 width: 500,
-                render: h=>h('Table', {
+                render: h =>
+                  h('Table', {
                     props: {
                       columns: [
                         {
@@ -1393,7 +1394,8 @@ export default {
                 } else {
                   this.$Modal.fcError({
                     width: 500,
-                    render: h => h('Table', {
+                    render: h =>
+                      h('Table', {
                         props: {
                           columns: [
                             {
@@ -1471,21 +1473,22 @@ export default {
           // this.$Message.info(err);
           this.$Modal.confirm({
             title: err,
-            render: h => h('Table', {
-              props: {
-                columns: [
-                  {
-                    title: 'id',
-                    key: 'objid'
-                  },
-                  {
-                    title: '报错信息',
-                    key: 'message'
-                  }
-                ],
-                data: res.data.data
-              }
-            })
+            render: h =>
+              h('Table', {
+                props: {
+                  columns: [
+                    {
+                      title: 'id',
+                      key: 'objid'
+                    },
+                    {
+                      title: '报错信息',
+                      key: 'message'
+                    }
+                  ],
+                  data: res.data.data
+                }
+              })
           });
         }
       });
@@ -1729,7 +1732,9 @@ export default {
       const seLen = this.$refs.agGridChild.AGTABLE.getSelect().length;
       if (seLen !== 1) {
         // <1时,请选中一项修改!    >1时,不允许批量处理！
-        return seLen < 1 ? _this.$Message.error(this.vmI18n.t('modalTips.k3')) : _this.$Message.error(this.vmI18n.t('modalTips.dr'));
+        const str = seLen < 1 ? this.vmI18n.t('modalTips.k3') : this.vmI18n.t('modalTips.dr');
+        _this.$Message.error(str);
+        return;
       }
       const selected = this.$refs.agGridChild.AGTABLE.getSelect()[0];
       const query = {

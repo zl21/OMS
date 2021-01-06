@@ -218,7 +218,6 @@ export default {
               this.EXCLUDE_SKU_TYPE = `${this.info.EXCLUDE_SKU_TYPE}`;
               this.CREATIONDATE = this.info.CREATIONDATE ? timestampToTime(this.info.CREATIONDATE) : '';
               this.MODIFIEDDATE = this.info.MODIFIEDDATE ? timestampToTime(this.info.MODIFIEDDATE) : '';
-              return;
             }
             // this.$Message.error(data.data.message);
           })
@@ -331,6 +330,12 @@ export default {
           // 以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
           price = parseFloat(price);
         }
+        // 订单金额下限不能大于上限
+        if(type === 'LIMIT_PRICE_DOWN') {
+          if(price > this.info.LIMIT_PRICE_UP) {
+            price = this.info.LIMIT_PRICE_UP;
+          }
+        }
         this.$nextTick(()=>{
           this.info[type] = price;
           this.result[type] = price;
@@ -408,11 +413,19 @@ export default {
           return false;
         }
       }
+      if(this.info.beginTime > this.info.endTime) {
+        this.$Message.error('付款时间范围有误!');
+        return false;
+      }
       if (effectiveCondition[2].value) {
         if (!this.info.LIMIT_PRICE_DOWN || !this.info.LIMIT_PRICE_UP) {
           this.$Message.error('订单金额（元）为必填项,没有输入值!');
           return false;
         }
+      }
+      if (this.info.LIMIT_PRICE_DOWN > this.info.LIMIT_PRICE_UP) {
+        this.$Message.error('订单金额范围设置有误!');
+        return false;
       }
       if (effectiveCondition[4].value) {
         if (!this.info.RECEIVER_ADDRESS) {

@@ -1464,7 +1464,7 @@ export default {
       this.information.formData[3].disabled = true;
       this.information.formData[4].disabled = true;
       this.information.formData[5].itemdata.readonly = true;
-      this.information.formData[10].disabled = true;
+      this.information.formData[10].disabled = this.$route.query.flag !== 'RefundToExchange';// 如果为退货转换货过来的,单据类型可编辑
 
       this.information.formData.forEach(item => {
         if (item.value == 'SELLER_MEMO') {
@@ -1555,7 +1555,9 @@ export default {
     async getList() {
       const _this = this;
       _this.jordanTableConfig.loading = true;
-      _this.service.orderCenter.findDetail({ id: _this.$route.query.id, start: 1, count: 50 }).then(async res => {
+      _this.service.orderCenter.findDetail({
+ id: _this.$route.query.id, start: 1, count: 50, isRefund2Exchange: this.$route.query.flag == 'RefundToExchange' ? 1 : undefined 
+}).then(async res => {
         if (res.data.code === 0) {
           _this.jordanTableConfig.loading = false;
           _this.information.formValue.BILL_TYPE = String(res.data.data.returnOrders.BILL_TYPE);
@@ -2364,6 +2366,7 @@ export default {
             }
           }
           _this.exchangeDtoList.data = newArr;
+          this.exchangeDtoList.data.forEach(item=>{ item.QTY_EXCHANGE = item.QTY_REFUND; });
           _this.exchangeAmount = _this.calculateMoney(_this.exchangeDtoList.data, 2).toFixed(2);
           _this.returnTotal();
         }
