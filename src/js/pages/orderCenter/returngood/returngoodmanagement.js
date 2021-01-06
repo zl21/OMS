@@ -1464,7 +1464,7 @@ export default {
       this.information.formData[3].disabled = true;
       this.information.formData[4].disabled = true;
       this.information.formData[5].itemdata.readonly = true;
-      this.information.formData[10].disabled = true;
+      this.information.formData[10].disabled = this.$route.query.flag !== 'RefundToExchange';// 如果为退货转换货过来的,单据类型可编辑
 
       this.information.formData.forEach(item => {
         if (item.value == 'SELLER_MEMO') {

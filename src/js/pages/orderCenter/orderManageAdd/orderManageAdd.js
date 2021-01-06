@@ -168,7 +168,7 @@ export default {
             premtype: 'CP_C_SHOP_PERMISSION_ID',
             refcol: 'ID',
             iswrite: 'true',
-          }, ],
+          },],
         },
       },
 
@@ -1196,7 +1196,7 @@ export default {
         label: window.vmI18n.t('panel_label.order_detailed'), // 订单明细
         value: '1',
         isShow: true,
-      }, ],
+      },],
       labelDefaultValue: '1', // 设置tab默认值
       orderNo: {
         refFuns: 'confirmFun',
@@ -1603,9 +1603,11 @@ export default {
           cancelText: self.vmI18n.t('common.cancel'), // 取消
           onOk: () => {
             self.isShowFromLoading = true;
+            this.btnConfig.loading = true;
             self.service.orderCenter.saveBill(data)
               .then((res) => {
                 self.isShowFromLoading = false;
+                self.btnConfig.loading = true;
                 if (res.data.code === 0) {
                   self.$Message.success(res.data.message);
                   self.btnConfig.buttons[0].disabled = false;
@@ -1638,9 +1640,11 @@ export default {
         });
       } else {
         self.isShowFromLoading = true;
+        self.btnConfig.loading = true;
         self.service.orderCenter.saveBill(data)
           .then((res) => {
             self.isShowFromLoading = false;
+            self.btnConfig.loading = false;
             if (res.data.code === 0) {
               self.$Message.success(res.data.message);
               self.btnConfig.buttons[0].disabled = false;
@@ -1743,7 +1747,7 @@ export default {
           QTY: Num.trim(),
           REAL_AMT: '',
           IS_GIFT: -1,
-        }, ];
+        },];
       }
       if (ecode || value) {
         const ocBorderDto = Object.assign(
@@ -1847,7 +1851,7 @@ export default {
                       selection: `${self.vmI18n.t('other.total')}:`, // 合计
                       REAL_AMT: amt,
                       QTY: qty,
-                    }, ];
+                    },];
                     // self.$children.$children.refreshData();
                     self.$children
                       .find(item => item.name === 'matrixBox')
@@ -2050,7 +2054,7 @@ export default {
               selection: `${self.vmI18n.t('other.total')}:`, // 合计
               REAL_AMT: amt,
               QTY: qty,
-            }, ];
+            },];
           }
         }
       }
@@ -2110,7 +2114,7 @@ export default {
                       selection: `${self.vmI18n.t('other.total')}:`, // 合计
                       REAL_AMT: amt,
                       QTY: qty,
-                    }, ];
+                    },];
 
                     // 动态添加总条数
                     self.jordanTableConfig.total = result.data.data.total;
@@ -2143,6 +2147,9 @@ export default {
       // if (!masterTable.CP_C_SHOP_ID) {
       //   promptMessage += "下单店铺,";
       // }
+      if (masterTable.RECEIVER_ADDRESS && !/^[^\d#\$\*\+@!%\^&-=]{1,}/.test(masterTable.RECEIVER_ADDRESS)) {
+        promptMessage += '收货人地址格式不正确,';
+      }
       this.formConfig.formData.forEach((item) => {
         // 下单店铺
         if (
