@@ -3053,11 +3053,11 @@ export default {
           _this.$Message.error(_this.vmI18n.t('modalTips.ap')); // 换货明细换货数量不能为空
           return;
         }
-        if (!Eitem[i].PS_C_CLR_ID) {
+        if (!Eitem[i].PS_C_CLR_ID && Eitem[i].IS_GROUP != 'Y') {
           _this.$Message.error(_this.vmI18n.t('modalTips.aq')); // 换货明细颜色不能为空
           return;
         }
-        if (!Eitem[i].PS_C_SIZE_ID) {
+        if (!Eitem[i].PS_C_SIZE_ID && Eitem[i].IS_GROUP != 'Y') {
           _this.$Message.error(_this.vmI18n.t('modalTips.ar')); // 换货明细尺码不能为空
           return;
         }
