@@ -2624,7 +2624,7 @@ export default {
                       'text-align': 'center'
                     },
                     props: {
-                      value: params.row.QTY_EXCHANGE,
+                      value: params.row.QTY_REFUND,
                       autosize: true,
                       regx: /^[1-9]\d*$/
                     },
