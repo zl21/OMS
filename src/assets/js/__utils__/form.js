@@ -1,13 +1,10 @@
-import {
-  fkQueryList,
-  fkFuzzyquerybyak
-} from '../fkRequest';
+import { fkQueryList } from '../fkRequest';
 
 const form = {
   // 表单操作
   refactoringData(defaultFormItemsLists) {
     const list = [];
-    defaultFormItemsLists.forEach((ele) => {
+    defaultFormItemsLists.forEach(ele => {
       const obj = {};
       obj.row = ele.row ? ele.row : 1;
       obj.col = ele.col ? ele.col : 1;
@@ -20,13 +17,13 @@ const form = {
         props: {
           clearable: true
         },
-        event: {},
+        event: {}
       };
 
       // 带有combobox的添加到options属性中
       if (ele.combobox) {
         const arr = [];
-        ele.combobox.forEach((item) => {
+        ele.combobox.forEach(item => {
           arr.push({
             label: item.limitdesc,
             value: item.limitval
@@ -84,7 +81,7 @@ const form = {
             // 初始化清空数据
             obj.item.props.data = {};
           },
-          'on-popper-show': ($this) => {
+          'on-popper-show': $this => {
             // 当外键下拉站开始去请求数据
             fkQueryList({
               searchObject: {
@@ -94,7 +91,7 @@ const form = {
                 range: $this.pageSize
               },
               serviceId: ele.fkobj.serviceId,
-              success: (res) => {
+              success: res => {
                 obj.item.props.data = Object.assign({}, res.data.datas);
                 obj.item.props.totalRowCount = res.data.datas.totalRowCount;
                 obj.item.props.pageSize = res.data.datas.defaultrange;
@@ -110,7 +107,7 @@ const form = {
                 range: $this.pageSize
               },
               serviceId: ele.fkobj.serviceId,
-              success: (res) => {
+              success: res => {
                 obj.item.props.data = Object.assign({}, res.data.datas);
                 obj.item.props.totalRowCount = res.data.datas.totalRowCount;
                 obj.item.props.pageSize = res.data.datas.defaultrange;
@@ -120,11 +117,6 @@ const form = {
           'on-input-value-change': (value, $this) => {
             // 下拉多选模糊搜索事件
             console.log(value, $this);
-            const params = {
-              ak: '北京市',
-              colid: '1700823465',
-              fixedcolumns: {}
-            };
 
             fkQueryList({
               searchObject: {
@@ -134,23 +126,22 @@ const form = {
                 range: 100
               },
               serviceId: ele.fkobj.serviceId,
-              success: (res) => {
-               res.data.datas.row.forEach( function(item) {
-               if (item.ENAME.val.indexOf(value) != "-1") { //匹配用户输入的字段
-                let nobj = {}
-                obj.item.props.AutoData = []
-                res.data.datas.tabth.forEach(function(em) {
-                    nobj[em.name] = item[em.colname].val
-                    nobj.value = item[em.colname].val
-                })
-                obj.item.props.AutoData.push(nobj)
-                }
-               });
+              success: res => {
+                res.data.datas.row.forEach(item => {
+                  if (item.ENAME.val.indexOf(value) != '-1') {
+                    this.nobj = {};
+                    obj.item.props.AutoData = [];
+                    res.data.datas.tabth.forEach(em => {
+                      this.nobj[em.name] = item[em.colname].val;
+                      this.nobj.value = item[em.colname].val;
+                    });
+                    obj.item.props.AutoData.push(this.nobj);
+                  }
+                });
               }
             });
-            // fkFuzzyquerybyak(params)
           },
-          'on-fkrp-selected': (value) => {
+          'on-fkrp-selected': value => {
             // 下拉单选选中事件
             console.log(value);
             obj.item.value = value[0].ID;
@@ -161,7 +152,7 @@ const form = {
         };
       } else if (ele.display == 'OBJ_SELECT') {
         obj.item.event = {
-          'on-change': (value) => {
+          'on-change': value => {
             obj.item.value = value;
           },
           'on-clear': () => {
@@ -173,6 +164,7 @@ const form = {
     });
     return list;
   },
+
   checkDisplay(item) {
     if (!item.display || item.display === 'text') {
       return 'Input';
@@ -215,6 +207,6 @@ const form = {
       return arr;
     }
     return item.default;
-  },
+  }
 };
 export default form;

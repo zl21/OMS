@@ -2,7 +2,7 @@
 <template>
   <div class="infoSet">
     <div class="title">
-      <i class="iconfontPromotion iconliuchengtiaojian" />
+      <i class="iconfont icon-liuchengtiaojian" />
       <!-- <span>条件信息设置</span>  -->
       <span>{{ vmI18n.t("other.info_set") }}</span>
     </div>

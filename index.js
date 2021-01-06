@@ -30,7 +30,7 @@ import '@syman/burgeon-r3/r3.publish/r3.min.css';
 
 // 老框架引入的 自定义界面内需要的css资源
 import './static/iconfont/iconfont.css'; // customize-1.3自定义界面icon,下拉单选,此样式会影响框架样式，
-import './static/promotion.icofont/iconfont.css'; // 促销iconfont
+// import './static/promotion.icofont/iconfont.css'; // 促销iconfont
 import '@/assets/css/css_1_3/index.less'; // customize-1.3自定义界面icon,下拉单选
 import '@/assets/css/css_1_3/common.less';
 import '@/assets/css/css_1_3/reset.less';
