@@ -973,8 +973,8 @@ export default {
             // item.IS_TOWMS = item.IS_TOWMS == 0 ? '否' : '是'; // 是否
             item.IS_TRANSFER = item.IS_TRANSFER == 0 ? '否' : '是'; // 是否
             item.IS_FORCE = item.IS_FORCE == 0 ? '否' : '是'; // 是否
-            _this.$refs.agGridChild.agGridTable(_this.agTableConfig.columnDefs, _this.agTableConfig.rowData);
           }
+          _this.$refs.agGridChild.agGridTable(_this.agTableConfig.columnDefs, _this.agTableConfig.rowData);
         } else {
           _this.agTableConfig.rowData = [];
           _this.agTableConfig.pagenation.total = 0;
