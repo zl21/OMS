@@ -30,7 +30,7 @@ export default {
       type: 'LOGISTICCOMPANY',
       pageNum: 1,
       // dataEmptyMessage: "数据加载中...", // 无数据的提示
-      dataEmptyMessage: vmI18n.t('modalTips.ye'), // 无数据的提示
+      dataEmptyMessage: vmI18n.t('modalTips.du'), // 无数据的提示
       columns: ['ename'], // 展现的组
       AutoData: [],
       foreignKeyLink: {},
