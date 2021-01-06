@@ -402,6 +402,7 @@ export default {
               const ORDER_STATUS = [];
               ORDER_STATUS[0] = self.tab1.order.ORDER_STATUS;
               self.publicBouncedConfig = publicDialogConfig.changeRemarkConfig;
+              self.publicBouncedConfig.confirmTitle = self.btnConfig.buttons.find(item => item.webname === 'updateremark').text;
               self.publicBouncedConfig.componentData = {
                 ids,
                 status: ORDER_STATUS
@@ -420,8 +421,6 @@ export default {
                 ids.push(self.tab1.order.ID);
                 self.service.orderCenter
                   .queryshortagSearchOrder({ ids })
-                  // self.$network
-                  //   .post('/api/cs/oc/oms/v1/queryshortagSearchOrder', { ids })
                   .then(res => {
                     if (res.data.code === 0) {
                       self.$Message.success(res.data.message);
@@ -442,8 +441,6 @@ export default {
                 ids.push(self.tab1.order.ID);
                 self.service.orderCenter
                   .queryFortuneBagShortage({ ids })
-                  // self.$network
-                  //   .post('/api/cs/oc/oms/v1/queryFortuneBagShortage', { ids })
                   .then(res => {
                     if (res.data.code === 0) {
                       self.$Message.success(res.data.message);
