@@ -2366,6 +2366,7 @@ export default {
             }
           }
           _this.exchangeDtoList.data = newArr;
+          this.exchangeDtoList.data.forEach(item=>{ item.QTY_EXCHANGE = item.QTY_REFUND; });
           _this.exchangeAmount = _this.calculateMoney(_this.exchangeDtoList.data, 2).toFixed(2);
           _this.returnTotal();
         }
@@ -2626,7 +2627,7 @@ export default {
                       'text-align': 'center'
                     },
                     props: {
-                      value: params.row.QTY_REFUND,
+                      value: params.row.QTY_EXCHANGE,
                       autosize: true,
                       regx: /^[1-9]\d*$/
                     },
