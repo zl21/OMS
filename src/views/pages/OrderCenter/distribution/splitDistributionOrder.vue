@@ -39,10 +39,5 @@
 </script>
 
 <style lang="less" scoped>
-.page {
-  // padding: 20px 0;
-}
-/deep/ .dialogFooter {
-  margin-top: 20px;
-}
+  @import '~@/css/pages/OrderCenter/distribution/splitDistributionOrder.less';
 </style>
