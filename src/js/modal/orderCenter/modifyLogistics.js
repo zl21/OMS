@@ -21,6 +21,7 @@ export default {
   data() {
     return {
       vmI18n: window.vmI18n,
+      isClice: false, // 防抖标识
       zIndex: 2500,
       totalRowCount: 0,
       pageSize: 10,
@@ -30,7 +31,7 @@ export default {
       type: 'LOGISTICCOMPANY',
       pageNum: 1,
       // dataEmptyMessage: "数据加载中...", // 无数据的提示
-      dataEmptyMessage: vmI18n.t('modalTips.ye'), // 无数据的提示
+      dataEmptyMessage: vmI18n.t('modalTips.du'), // 无数据的提示
       columns: ['ename'], // 展现的组
       AutoData: [],
       foreignKeyLink: {},
@@ -56,7 +57,7 @@ export default {
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              this.determine();
+              this.debounce(this.determine, 500);
             }, // 按钮点击事件
           }
         ],
@@ -78,7 +79,7 @@ export default {
         };
       }
       if (e.keyCode === 13) {
-        this.determine();
+        this.debounce(this.determine, 500);
       }
     },
     setupByDeliver() {
@@ -90,6 +91,17 @@ export default {
       } else {
         this.getListData();
       }
+    },
+    // 防抖
+    debounce(fun, time) {
+      if (this.isClice) {
+        return false;
+      }
+      this.isClice = true;
+      setTimeout(()=>{
+        fun();
+        this.isClice = false;
+      }, time);
     },
     determine() {
       const self = this;
