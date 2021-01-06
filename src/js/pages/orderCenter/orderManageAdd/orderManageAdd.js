@@ -268,8 +268,8 @@ export default {
               // 如果是丢单复制或者复制订单的保存，传被复制订单的id
               // 如果为丢单复制,则新增一个标识
               const copyTitle = {
-'Drop-out copy': '1', oriInvalidCopy: '2', OrderWrongCopy: '3', OrderMissSendCopy: '4', OrderGiftsOutCopy: '5'
-};
+                'Drop-out copy': '1', oriInvalidCopy: '2', OrderWrongCopy: '3', OrderMissSendCopy: '4', OrderGiftsOutCopy: '5'
+              };
               if (copyID.orderCopy) {
                 data.type = copyTitle[this.$route.query.pageTitle];
                 data.orderId = copyID.id;
@@ -1565,6 +1565,9 @@ export default {
               self.btnConfig.loading = false;
               self.$Message.success(res.data.message);
               self.btnConfig.buttons[0].disabled = false;
+              if (self.$route.query.orderCopy || self.$route.query.copyOrder) {
+                comUtils.tabCloseAppoint(this);
+              }
               self.$store.commit('customize/TabHref', {
                 id: res.data.data,
                 type: 'action',
