@@ -248,7 +248,7 @@ export default {
             });/* 专为促销而增向上传递数据 */
             this.singleData = obj;
             this.judgeSingle = true;
-            this.newLySave();
+            this.newLySave(obj);
           } else {
             this.singleData = obj;
             this.judgeSingle = true;
