@@ -5,13 +5,13 @@ export default {
   name: 'ManualMarking',
   components: {
     reActionTable,
-    businessButton,
+    businessButton
   },
   props: {
     componentData: {
       type: Object,
-      default: {},
-    },
+      default: {}
+    }
   },
   data() {
     const _this = this;
@@ -25,28 +25,28 @@ export default {
               // label: "押金订单号",
               label: window.vmI18n.t('form_label.depositOrderNo'),
               value: 'demo1',
-              width: '8',
+              width: '8'
             },
             {
               style: 'input',
               // label: "收货人",
               label: window.vmI18n.t('form_label.consignee'),
               value: 'demo2',
-              width: '8',
+              width: '8'
             },
             {
               style: 'input',
               // label: "收货人手机号",
               label: window.vmI18n.t('form_label.consignee_phone'),
               value: 'demo3',
-              width: '8',
+              width: '8'
             },
             {
               style: 'input',
               // label: "买家昵称",
               label: window.vmI18n.t('table_label.buyerNickname'),
               value: 'demo4',
-              width: '8',
+              width: '8'
             },
             {
               style: 'popInput', // 输入框弹框单多选
@@ -73,16 +73,16 @@ export default {
                 statsize: -1,
                 type: 'STRING', // 这个是后台用的
                 valuedata: '', // 这个是选择的值
-                pid: '',
+                pid: ''
               },
-              oneObj: (val) => {
+              oneObj: val => {
                 _this.depositConfig.jordanFormConfig.formValue.CP_C_SHOP_TITLE = val.valuedata;
                 _this.depositConfig.jordanFormConfig.formValue.CP_C_SHOP_ID = val.pid;
                 _this.depositConfig.jordanFormConfig.formValue.CP_C_PHY_WAREHOUSE_ID = '';
                 _this.depositConfig.jordanFormConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = '';
                 _this.depositConfig.jordanFormConfig.formData[5].options = [];
                 _this.getWarehouse.call();
-              },
+              }
             },
             {
               style: 'select', // 下拉框类型
@@ -93,10 +93,7 @@ export default {
               selectChange: () => {
                 const optionsArr = _this.formConfig.formData[8].options;
                 for (let i = 0; i < optionsArr.length; i++) {
-                  if (
-                    optionsArr[i].value
-                    === _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID
-                  ) {
+                  if (optionsArr[i].value === _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID) {
                     _this.depositConfig.jordanFormConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = optionsArr[i].label;
                     return;
                   }
@@ -104,16 +101,16 @@ export default {
               }, // 选中事件，默认返回选中的值
               options: [
                 // 下拉框选项值
-              ],
-            },
+              ]
+            }
           ],
           formValue: {
             demo1: '',
             demo2: '',
             demo3: '',
             CP_C_PHY_WAREHOUSE_ID: '',
-            CP_C_PHY_WAREHOUSE_ENAME: '',
-          },
+            CP_C_PHY_WAREHOUSE_ENAME: ''
+          }
         },
         jordanBtnConfig: {
           typeAll: 'error', // 按钮统一风格样式
@@ -125,9 +122,9 @@ export default {
               size: 'small',
               brnclick: () => {
                 this.searchChange();
-              },
-            },
-          ],
+              }
+            }
+          ]
         },
         pageShow: false,
         isShowSelection: true,
@@ -136,62 +133,62 @@ export default {
           {
             // title: "押金订单号",
             title: window.vmI18n.t('form_label.depositOrderNo'),
-            key: 'demo1',
+            key: 'demo1'
           },
           {
             // title: "收货人",
             title: window.vmI18n.t('form_label.consignee'),
-            key: 'demo2',
+            key: 'demo2'
           },
           {
             // title: "卖家昵称",
             title: window.vmI18n.t('table_label.seller_nickname'),
-            key: 'demo3',
+            key: 'demo3'
           },
           {
             // title: "收货人手机",
             title: window.vmI18n.t('form_label.consignee_phone'),
-            key: 'demo4',
+            key: 'demo4'
           },
           {
             // title: "发货仓库",
             title: window.vmI18n.t('form_label.delivery_warehouse'),
-            key: 'demo5',
+            key: 'demo5'
           },
           {
             // title: "物流单号",
             title: window.vmI18n.t('form_label.logisticsOrder_No'),
-            key: 'demo6',
+            key: 'demo6'
           },
           {
             // title: "下单店铺",
             title: window.vmI18n.t('form_label.orderShop'),
-            key: 'demo7',
-          },
+            key: 'demo7'
+          }
         ],
-        data: [],
+        data: []
       },
       btnConfig: {
         typeAll: 'error', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'), // 取消 
+            text: window.vmI18n.t('common.cancel'), // 取消
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
             text: window.vmI18n.t('common.determine'), // 确定
             size: 'small', // 按钮大小
             btnclick: () => {
               this.confirmChange();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           }
-        ],
-      },
+        ]
+      }
     };
   },
   methods: {
@@ -199,12 +196,14 @@ export default {
     vipConfirmInfo(params) {
       this.$network
         .post('/api/cs/oc/oms/v1/orderDeliveryUrgent', params)
-        .then((res) => {
+        .then(res => {
           if (res.data.code === 0) {
             // this.$Message.success(res.data.message || "会员加急发货打标成功");
             this.$Message.success(res.data.message || window.vmI18n.t('modalTips.yd'));
             this.$parent.$parent.$parent.selection = [];
             this.$parent.$parent.$parent.getData();
+          } else {
+            this.$Message.error(res.data.message);
           }
           this.$parent.$parent.closeConfirm();
         })
@@ -218,25 +217,24 @@ export default {
       formData.append(
         'param',
         JSON.stringify({
-          shopId: this.depositConfig.jordanFormConfig.formValue.CP_C_SHOP_ID,
+          shopId: this.depositConfig.jordanFormConfig.formValue.CP_C_SHOP_ID
         })
       );
       if (this.depositConfig.jordanFormConfig.formValue.CP_C_SHOP_ID) {
         const res = await this.service.common.queryPhyWareHouseList(formData);
         if (res.data.code === 0) {
-          this.depositConfig.jordanFormConfig.formData.forEach((item) => {
+          this.depositConfig.jordanFormConfig.formData.forEach(item => {
             if (item.label === '发货仓库') item.options = res.data.data;
           });
         }
       }
     },
     // 查询
-    searchChange() {
-    },
+    searchChange() {},
     // 弹窗确定事件
     confirmChange() {
       const componentData = this.$props.componentData;
       if (componentData.pageType === 'vip') this.vipConfirmInfo(componentData.params);
-    },
-  },
+    }
+  }
 };
