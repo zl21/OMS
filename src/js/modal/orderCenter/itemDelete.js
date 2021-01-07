@@ -199,6 +199,7 @@ export default {
     confirm() {
       const self = this;
       const result = {};
+      self.btnConfig.buttons[1].disabled = true;
       if (self.componentData.a_2.length == 0) {
         // self.$Message.warning("请勾选订单数据!");
         self.$Message.warning(window.vmI18n.t('modalTips.zu'));
@@ -216,6 +217,7 @@ export default {
           self.$Message.success(res.data.message);
           self.$parent.$parent.$parent.getData();
           this.$parent.$parent.closeConfirm();
+          self.btnConfig.buttons[1].disabled = false;
         } else if (res.data.code == -1) {
           self.$Modal.confirm({
             title: res.data.message,
@@ -234,6 +236,7 @@ export default {
             }),
           });
           this.$parent.$parent.closeConfirm();
+          self.btnConfig.buttons[1].disabled = false;
         }
       });
     },

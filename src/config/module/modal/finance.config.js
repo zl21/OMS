@@ -8,4 +8,8 @@ export default {
   GENERATESALESORDER: {
     component: () => import('@/views/modal/financeCenter/generateSalesOrder.vue'),
   },
+  // 支付宝下载账单
+  DOWNLOADALIPAYBILL: {
+    component: () => import('@/views/modal/financeCenter/downLoadAlipayBill.vue'),
+  }
 };
