@@ -3176,7 +3176,18 @@ export default {
           //   }),
           //   back: true
           // });
-          _this.$store.commit('customize/TabHref', {
+          comUtils.tabCloseAppoint(_this);
+          _this.$store.commit('customize/TabHref', { // 更改下跳转id,防止缓存
+            id: -1,
+            type: 'action',
+            name: 'RETURNGOOD',
+            label: _this.vmI18n.t('panel_label.ReturnOrderDetails'), // 退换货订单
+            query: Object.assign({
+              id: -1,
+            }),
+          });
+          _this.$nextTick(()=>{
+             _this.$store.commit('customize/TabOpen', {
             id: res.data.objid,
             type: 'action',
             name: 'RETURNGOOD',
@@ -3186,6 +3197,7 @@ export default {
               tabTitle: _this.vmI18n.t('panel_label.ReturnOrderDetails'), // 退换货订单
               statusName: res.data.RETURN_STATUS_NAME
             }),
+          });
           });
         } else {
           const err = res.data.message || _this.vmI18n.t('modalTips.au'); // 新增退换货订单失败
