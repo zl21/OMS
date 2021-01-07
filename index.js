@@ -6,7 +6,7 @@ import i18n from '@burgeon/internationalization/i18n/i18n'; // 国际化
 import service from '@/service/index';
 
 import qs from 'qs';
-import request, { httpFormdata } from 'framework/__utils__/request';
+import request, { httpFormdata, fetch } from 'framework/__utils__/request';
 import ajax from 'framework/__utils__/ajax';
 import store from 'burgeonConfig/store/store'; // 将老框架公共状态注册为customize模块
 import groups from '@/assets/js/promotion/groups';
@@ -38,6 +38,16 @@ import '@/assets/css/css_1_3/reset.less';
 // 老框架引入的 自定义界面内需要的js资源
 // 促销需要
 import connector from './src/js/pages/common/orderDetail/connector';
+
+// 根据接口调整title
+const appTitle = '森马电商';
+  fetch('/p/c/getAppTitle').then((res) => {
+    if (res.status == 200) {
+      document.title = res.data || appTitle;
+    }
+  }).catch((err) => {
+    document.title = appTitle;
+  });
 
 // -------------引入框架项目配置文件;
 const customizedTheme = require(`@burgeon/oms-theme/skin/${omsSkinTheme}/index.min.css`).default;
