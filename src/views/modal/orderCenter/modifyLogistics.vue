@@ -1,5 +1,6 @@
 <template>
   <div class="jordanModal">
+    <loading :loading="loading"></loading>
     <!-- 修改物流 -->
     <!-- <businessForm style="margin-top:10px;" :formConfig="formConfig"></businessForm> -->
     <div class="jordanModal_box">

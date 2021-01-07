@@ -2,6 +2,7 @@ import axios from 'axios';
 import businessForm from 'professionalComponents/businessForm';
 import businessButton from 'professionalComponents/businessButton';
 import businessActionTable from 'professionalComponents/businessActionTable.vue';
+import loading from '@/component/loading.vue';
 import { listeningToKeydownMixin } from '@/assets/js/mixins/listeningToKeydown.js';
 
 export default {
@@ -16,6 +17,7 @@ export default {
     businessForm,
     businessButton,
     businessActionTable,
+    loading,
   },
   computed: {},
   data() {
@@ -62,6 +64,7 @@ export default {
           }
         ],
       },
+      loading: false,
     };
   },
   mounted() {
@@ -124,6 +127,7 @@ export default {
         });
         return false;
       }
+      this.loading = true;
       const fromdata = new FormData();
       fromdata.append('ids', self.componentData.ids);
       fromdata.append('cLogisticsId', self.pid);
@@ -196,6 +200,7 @@ export default {
           });
           this.btnConfig.buttons[1].disabled = false;
         }
+        this.loading = false;
       });
     },
     getListData() {
