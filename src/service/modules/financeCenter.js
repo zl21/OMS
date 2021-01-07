@@ -31,5 +31,7 @@ export default {
   // 弹框 生成销售单
   getVendorCodeAndBillNumber: params => network.get('/p/cs/ac/v1/getVendorCodeAndBillNumber', params),
   generateVipSalesOrder: params => network.get('/p/cs/ac/v1/generateVipSalesOrder', params),
+  // 支付宝账单原始数据
+  triggerAlipayBill: params => network.post(' /p/cs/ac/v1/triggerAlipayBill', params),
 
 };
