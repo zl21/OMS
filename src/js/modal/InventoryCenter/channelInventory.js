@@ -40,6 +40,9 @@ export default {
     allFormData() {
       return this.$store.state[`S.${this.$route.params.tableName}.${this.$route.params.tableId}`].formItems.data;
     },
+    title() {
+      return this.$parent.title;
+    }
   },
   mounted() {
     console.log(this.$store.state[`S.${this.$route.params.tableName}.${this.$route.params.tableId}`]);
@@ -50,7 +53,7 @@ export default {
       if (self.is_click) {
         return false;
       }
-      const url = '';
+      let url = '/p/cs/storage/manualCalcAndSynchChannelProduct';
       if (!this.allFormData.CP_C_SHOP_ID && !this.allFormData.SKU_ID && !this.allFormData.PS_C_SKU_ECODE && !this.allFormData.NUMIID && !this.allFormData.PS_C_PRO_ECODE) {
         this.$Message.warning('查询条件【平台店铺、平台条码ID、平台商品ID、条码编码、商品编码】至少选择一个！');
         return;
@@ -75,7 +78,10 @@ export default {
           });
         }
         self.is_click = true;
-      R3.network.post('/p/cs/storage/manualCalcAndSynchChannelProduct', param).then((res) => {
+        if (this.title == '按筛选条件手工同步到页面') {
+          url = '/p/cs/storage/manualCalcSyncPageChannelProduct';
+        }
+      R3.network.post(url, param).then((res) => {
         if (res.data.code === 0) {
           self.$emit('closeActionDialog');
           self.$Message.success(res.data.message);

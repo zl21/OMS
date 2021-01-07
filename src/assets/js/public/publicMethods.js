@@ -213,7 +213,7 @@ class publicUtil {
    * 导出
    * src 导出路径
    */
-  downloadUrlFile(src) {
+  downloadUrlFile(url) {
     const self = this;
     const domFrame = window.parent.document.getElementById('downLoadListFrame');
     if (domFrame != null) {
@@ -223,8 +223,11 @@ class publicUtil {
     if (typeof downloadFile.iframe === 'undefined') {
       const iframe = document.createElement('iframe');
       iframe.setAttribute('id', 'downLoadListFrame');
-      self.addEvent('load', iframe, () => { self.iframeLoad(iframe); });
-      iframe.src = src;
+      self.addEvent('load', iframe, () => {
+        self.iframeLoad(iframe);
+      });
+      iframe.src = url;
+      iframe.style.display = 'none';
       downloadFile.iframe = iframe;
       document.body.appendChild(downloadFile.iframe);
       setTimeout(() => {
@@ -247,6 +250,18 @@ class publicUtil {
     // }
     // download_file.iframe.src = src;
     // download_file.iframe.style.display = 'none';
+  }
+
+  // 判断iframe的src
+  iframeLoad(iframe) {
+    const src = iframe.src ? iframe.src : iframe.contentWindow.locatiion.href;
+    console.log('src::', src);
+  }
+
+  // 调用方法时绑定iframe的load事件
+  addEvent(eventName, element, fn) {
+    if (element.attachEvent) element.attachEvent(`on${eventName}`, fn);
+    else element.addEventListener(eventName, fn, false);
   }
 }
 

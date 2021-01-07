@@ -337,10 +337,17 @@ export default {
             const xFile = document.getElementById('xFile');
             xFile.value = '';
             this.text = '';
+            this.files = {};
             this.file = {};
           } else if (res.data.data) {
             _this.loading = false;
             _this.isError = true;
+            // 清空已上传文件
+            const xFile = document.getElementById('xFile');
+            xFile.value = '';
+            this.text = '';
+            this.files = {};
+            this.file = {};
             _this.errorMessage = res.data.message;
             this.downloadUrlFile(res.data.data);
             _this.loading = false;
