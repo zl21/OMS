@@ -330,12 +330,6 @@ export default {
           // 以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
           price = parseFloat(price);
         }
-        // 订单金额下限不能大于上限
-        if(type === 'LIMIT_PRICE_DOWN') {
-          if(price > this.info.LIMIT_PRICE_UP) {
-            price = this.info.LIMIT_PRICE_UP;
-          }
-        }
         this.$nextTick(()=>{
           this.info[type] = price;
           this.result[type] = price;
