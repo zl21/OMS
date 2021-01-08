@@ -1976,15 +1976,15 @@ export default {
                       },
                       list.map(item => h('Option', {
                           props: {
-                            value: item.psCSpec1objId,
-                            label: item.psCSpec1objName
+                            value: item.psCSpec1objId || item.COLOR_ID, // item.COLOR_ID item.COLOR_NAME为零售发货单点击新增退单按钮进来查询给的颜色尺寸列表字段
+                            label: item.psCSpec1objName || item.COLOR_NAME
                           }
                         }))
                     )
                   ]
                 );
               }
-              return h(
+                return h(
                 'div',
                 {
                   style: {
@@ -2096,38 +2096,38 @@ export default {
                       },
                       list.map(item => h('Option', {
                           props: {
-                            value: item.psCSpec2objId,
-                            label: item.psCSpec2objName
+                            value: item.psCSpec2objId || item.SIZE_ID, // item.SIZE_ID item.SIZE_NAME为零售发货单点击新增退单按钮进来查询给的颜色尺寸列表字段
+                            label: item.psCSpec2objName || item.SIZE_NAME
                           }
                         }))
                     )
                   ]
                 );
               }
-              return h(
-                'div',
-                {
-                  style: {
-                    width: '100%',
-                    height: '100%'
-                  }
-                },
-                [
-                  h(
-                    'Label',
-                    {
-                      style: {
-                        width: '150px'
+                return h(
+                  'div',
+                  {
+                    style: {
+                      width: '100%',
+                      height: '100%'
+                    }
+                  },
+                  [
+                    h(
+                      'Label',
+                      {
+                        style: {
+                          width: '150px'
+                        },
+                        props: {
+                          value: params.row.PS_C_SIZE_ID,
+                          autosize: true
+                        }
                       },
-                      props: {
-                        value: params.row.PS_C_SIZE_ID,
-                        autosize: true
-                      }
-                    },
-                    params.row.PS_C_SIZE_ENAME
-                  )
-                ]
-              );
+                      params.row.PS_C_SIZE_ENAME
+                    )
+                  ]
+                );
             }
           },
           {

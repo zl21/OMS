@@ -815,6 +815,7 @@ export default {
             const TO_SETTLE_STATUS_NAME = (this.enumerationList.UPLOAD_SAP_STATUS.find(val => val.value === resData.TO_SAP_STATUS) || {}).label;
             resData.TO_SETTLE_STATUS_NAME = TO_SETTLE_STATUS_NAME || '';
             this.tab1.order = resData;
+            this.orderStatus = resData.ORDER_STATUS;
             // const statusList = ['未确认', '已审核', '配货中', '仓库发货', '平台发货', '已确认收货', '已取消', '系统作废', '交易完成', '预售待发货', '预售缺货', '缺货', '待审核'];
             const statusList = [1, 2, 3, 4, 5, 6, 7, 8, 12];
             if (statusList.includes(res.data.data.ORDER_STATUS)) {
