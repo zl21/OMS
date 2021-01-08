@@ -10,6 +10,7 @@ import publicDialogConfig from 'professionalComponents/common/js/publicDialog';
 import aTable from 'professionalComponents/agGridTable';
 import loading from '@/component/loading';
 import comUtils from '@/assets/js/__utils__/common';
+import unzipXv from '@/assets/js/dataToSmall';
 
 export default {
   components: {
@@ -877,6 +878,7 @@ export default {
         _this.loadingActive = false;
         document.getElementById('content').style.overflow = 'auto';
         document.getElementById('content').style.position = 'relative';
+        res.data.data = JSON.parse(unzipXv(res.data.data));
         if (res.data.code == 0 && res.data.data.queryResult.length) {
           _this.agTableConfig.rowData = res.data.data.queryResult;
           _this.agTableConfig.pagenation.total = res.data.data.totalNum;
@@ -1035,6 +1037,7 @@ export default {
         } // 入库实体仓库
       }
       this.service.orderCenter.querySalesReturn(Object.assign(param, _this.formConfig.formValue)).then(res => {
+        res.data.data = JSON.parse(unzipXv(res.data.data));
         if (res.data.code == 0 && res.data.data.queryResult.length) {
           _this.agTableConfig.agLoading = false;
           _this.agTableConfig.rowData = res.data.data.queryResult;
@@ -1304,8 +1307,7 @@ export default {
               _this.$Modal.confirm({
                 title: res.data.message,
                 width: 500,
-                render: h =>
-                  h('Table', {
+                render: h => h('Table', {
                     props: {
                       columns: [
                         {
@@ -1394,8 +1396,7 @@ export default {
                 } else {
                   this.$Modal.fcError({
                     width: 500,
-                    render: h =>
-                      h('Table', {
+                    render: h => h('Table', {
                         props: {
                           columns: [
                             {
@@ -1473,8 +1474,7 @@ export default {
           // this.$Message.info(err);
           this.$Modal.confirm({
             title: err,
-            render: h =>
-              h('Table', {
+            render: h => h('Table', {
                 props: {
                   columns: [
                     {
