@@ -750,12 +750,12 @@ export default {
       }
       if (type === 'oriInvalidCopy') {
         // 已取消  系统作废
-        if (orderStatus != 7 && orderStatus != 8) {
+        if (self.orderStatus != 7 && self.orderStatus != 8) {
           self.$Message.error(this.vmI18n.t('modalTips.a3'));
           return;
         }
         // 仓库发货&&平台发货
-      } else if (orderStatus !== 6 && orderStatus !== 5) {
+      } else if (self.orderStatus !== 6 && self.orderStatus !== 5) {
         // 只能对【仓库发货，平台发货】订单状态的原单进行复制操作
         self.$Message.error(this.vmI18n.t('modalTips.a4'));
         return;
@@ -816,7 +816,7 @@ export default {
             resData.TO_SETTLE_STATUS_NAME = TO_SETTLE_STATUS_NAME || '';
             this.tab1.order = resData;
             // const statusList = ['未确认', '已审核', '配货中', '仓库发货', '平台发货', '已确认收货', '已取消', '系统作废', '交易完成', '预售待发货', '预售缺货', '缺货', '待审核'];
-            const statusList = [1,2,3,4,5,6,7,8,12];
+            const statusList = [1, 2, 3, 4, 5, 6, 7, 8, 12];
             if (statusList.includes(res.data.data.ORDER_STATUS)) {
               this.statusName = res.data.data.ORDER_STATUS_NAME;
             } else {
