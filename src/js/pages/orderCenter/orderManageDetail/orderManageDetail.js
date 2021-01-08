@@ -27,6 +27,9 @@ export default {
       pageLoad: false,
       publicBouncedConfig: {},
       statusName: '', // 水印标识
+      // 订单状态对应的状态码‘ORDER_STATUS’ => ['未确认', '已审核-3', '配货中-4', '仓库发货-5', '平台发货-6', '已确认收货', '已取消-7', '系统作废-8', '交易完成-12', '预售待发货', '预售缺货', '缺货-2', '待审核-1'];
+      // * 后端(孙继东)给的：1,待审核 2,缺货 3,已审核 4,配货中 5,仓库发货 6,平台发货 7,已取消 8,系统作废 9,预售 10,代发 11,物流已送达 12,交易完成 13,未付款 21,传wms中 50,待分配,0,新增订单暂存草稿状态
+      orderStatus: '', // 订单状态 - 水印标识码
       objId: -1,
       labelDefaultValue: 'OC_B_ORDER',
       labelList: [
@@ -552,7 +555,8 @@ export default {
           {
             webname: 'refund_price', // 额外退款
             btnclick: () => {
-              if (this.statusName === this.vmI18n.t('other.warehouseDelivery') || this.statusName === this.vmI18n.t('other.platformDelivery')) {
+              // if 仓库发货 或 平台发货
+              if (this.orderStatus === 5 || this.orderStatus === 6) {
                 this.$store.commit('customize/TabOpen', {
                   id: -1,
                   type: 'action',
@@ -738,7 +742,7 @@ export default {
           }
         });
       });
-      const ORDERSTATUSNAME = selectItem.ORDER_STATUS_NAME;
+      self.orderStatus = selectItem.ORDER_STATUS;
       if (selectItem.COPY_REASON) {
         // 订单只能是原单才能复制!
         self.$Message.warning(this.vmI18n.t('modalTips.a2'));
@@ -746,12 +750,12 @@ export default {
       }
       if (type === 'oriInvalidCopy') {
         // 已取消  系统作废
-        if (selectItem.ORDER_STATUS != 7 && selectItem.ORDER_STATUS != 8) {
+        if (orderStatus != 7 && orderStatus != 8) {
           self.$Message.error(this.vmI18n.t('modalTips.a3'));
           return;
         }
         // 仓库发货&&平台发货
-      } else if (ORDERSTATUSNAME !== this.vmI18n.t('other.warehouseDelivery') && ORDERSTATUSNAME !== this.vmI18n.t('other.platformDelivery')) {
+      } else if (orderStatus !== 6 && orderStatus !== 5) {
         // 只能对【仓库发货，平台发货】订单状态的原单进行复制操作
         self.$Message.error(this.vmI18n.t('modalTips.a4'));
         return;
@@ -811,8 +815,9 @@ export default {
             const TO_SETTLE_STATUS_NAME = (this.enumerationList.UPLOAD_SAP_STATUS.find(val => val.value === resData.TO_SAP_STATUS) || {}).label;
             resData.TO_SETTLE_STATUS_NAME = TO_SETTLE_STATUS_NAME || '';
             this.tab1.order = resData;
-            const statusList = ['未确认', '已审核', '配货中', '仓库发货', '平台发货', '已确认收货', '已取消', '系统作废', '交易完成', '预售待发货', '预售缺货', '缺货', '待审核'];
-            if (statusList.includes(res.data.data.ORDER_STATUS_NAME)) {
+            // const statusList = ['未确认', '已审核', '配货中', '仓库发货', '平台发货', '已确认收货', '已取消', '系统作废', '交易完成', '预售待发货', '预售缺货', '缺货', '待审核'];
+            const statusList = [1,2,3,4,5,6,7,8,12];
+            if (statusList.includes(res.data.data.ORDER_STATUS)) {
               this.statusName = res.data.data.ORDER_STATUS_NAME;
             } else {
               this.statusName = '';

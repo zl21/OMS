@@ -205,12 +205,6 @@ export default {
     },
     getListData() {
       const self = this;
-      // let fromdata = new FormData();
-      // fromdata.append("flag", 1);
-      // fromdata.append("id", self.componentData.CP_C_PHY_WAREHOUSE_ID);
-      // fromdata.append("num", self.pageNum);
-      // fromdata.append("size", self.pageSize);
-      // fromdata.append("inputValue", "");
       const data = {
         flag: 1,
         id: self.componentData.CP_C_PHY_WAREHOUSE_ID,
