@@ -1293,6 +1293,8 @@ export default {
               newItem.PS_C_SIZE_ID = subitem.PS_C_SIZE_ID; // 尺寸
               newItem.PS_C_SIZE_ECODE = subitem.PS_C_SIZE_ECODE;
               newItem.PS_C_SIZE_ENAME = subitem.PS_C_SIZE_ENAME;
+              newItem.clrList = subitem.CLR_LIST;
+              newItem.sizeList = subitem.SIZE_LIST;
               newItem.PS_C_PRO_ENAME = subitem.PS_C_PRO_ENAME;
               newItem.QTY_CAN_REFUND = subitem.QTY;
               newItem.QTY_REFUND = Number(subitem.QTY || 0) - Number(subitem.QTY_RETURN_APPLY || 0);
