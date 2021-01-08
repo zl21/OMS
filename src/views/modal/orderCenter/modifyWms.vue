@@ -9,11 +9,11 @@
 </template>
 
 <script>
-  import modifyWarehouse from '@/js/modal/orderCenter/modifyWarehouse';
+  import modifyWms from '@/js/modal/orderCenter/modifyWms';
 
-  export default modifyWarehouse;
+  export default modifyWms;
 </script>
 
 <style lang="less" scoped>
-  @import "~@/css/modal/orderCenter/modifyWarehouse.less";
+  @import "~@/css/modal/orderCenter/modifyWms.less";
 </style>
