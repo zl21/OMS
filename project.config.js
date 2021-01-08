@@ -5,9 +5,9 @@ module.exports = {
   // qiaochuTitle: '巧厨电商',
   projectIconPath: path.join(__dirname, './favicon.ico'), // 项目icon,
   burgeonProxy: ['/p/c', '/p/cs', '/api'],
-  // target: 'http://47.103.6.45:27777', // 项目后端服务地址(OMS2.0)
+  target: 'http://47.103.6.45:27777', // 项目后端服务地址(OMS2.0)
   // target: 'http://r3.ecsemir.com', // 项目后端服务地址(OMS2.0)
-  target: 'http://47.103.203.32:26666', // 项目后端服务地址(OMS2.0)
+  // target: 'http://47.103.203.32:26666', // 项目后端服务地址(OMS2.0)
   omsTheme: 'senmir', // 标品样式主题包[coralRed,skyBlue]; 
 
   build: {

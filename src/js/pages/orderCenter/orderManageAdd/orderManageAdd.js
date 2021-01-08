@@ -168,7 +168,7 @@ export default {
             premtype: 'CP_C_SHOP_PERMISSION_ID',
             refcol: 'ID',
             iswrite: 'true',
-          },],
+          }, ],
         },
       },
 
@@ -1196,7 +1196,7 @@ export default {
         label: window.vmI18n.t('panel_label.order_detailed'), // 订单明细
         value: '1',
         isShow: true,
-      },],
+      }, ],
       labelDefaultValue: '1', // 设置tab默认值
       orderNo: {
         refFuns: 'confirmFun',
@@ -1489,7 +1489,8 @@ export default {
         })
         .then((res) => {
           if (res.data.code === 0) {
-            self.jordanTableConfig.data = res.data.data.records;
+            // self.jordanTableConfig.data = res.data.data.records;
+            self.jordanTableConfig.data = self.filterRfundStatus(res.data.data.records);
             self.jordanTableConfig.total = res.data.data.total;
             // 明细合计
             let amt = 0;
@@ -1510,6 +1511,10 @@ export default {
             self.$Message.warning(res.data.message);
           }
         });
+    },
+    // 过滤明细 REFUND_STATUS=6 的明细
+    filterRfundStatus(arr) {
+      return arr.filter(item=> item.REFUND_STATUS !== 6);
     },
     sava(data) {
       const self = this;
@@ -1750,7 +1755,7 @@ export default {
           QTY: Num.trim(),
           REAL_AMT: '',
           IS_GIFT: -1,
-        },];
+        }, ];
       }
       if (ecode || value) {
         const ocBorderDto = Object.assign(
@@ -1837,7 +1842,8 @@ export default {
                 })
                 .then((result) => {
                   if (result.data.code == '0') {
-                    self.jordanTableConfig.data = result.data.data.records;
+                    // self.jordanTableConfig.data = result.data.data.records;
+                    self.jordanTableConfig.data = self.filterRfundStatus(result.data.data.records);
                     // 动态添加总条数
                     self.jordanTableConfig.total = result.data.data.total;
                     // 明细合计
@@ -1854,7 +1860,7 @@ export default {
                       selection: `${self.vmI18n.t('other.total')}:`, // 合计
                       REAL_AMT: amt,
                       QTY: qty,
-                    },];
+                    }, ];
                     // self.$children.$children.refreshData();
                     self.$children
                       .find(item => item.name === 'matrixBox')
@@ -2057,7 +2063,7 @@ export default {
               selection: `${self.vmI18n.t('other.total')}:`, // 合计
               REAL_AMT: amt,
               QTY: qty,
-            },];
+            }, ];
           }
         }
       }
@@ -2102,7 +2108,8 @@ export default {
                     //     item.IS_LACKSTOCK = "否";
                     //   }
                     // });
-                    self.jordanTableConfig.data = result.data.data.records;
+                    // self.jordanTableConfig.data = result.data.data.records;
+                    self.jordanTableConfig.data = self.filterRfundStatus(result.data.data.records);
                     // 明细合计
                     let amt = 0;
                     let qty = 0;
@@ -2117,7 +2124,7 @@ export default {
                       selection: `${self.vmI18n.t('other.total')}:`, // 合计
                       REAL_AMT: amt,
                       QTY: qty,
-                    },];
+                    }, ];
 
                     // 动态添加总条数
                     self.jordanTableConfig.total = result.data.data.total;
