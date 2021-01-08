@@ -593,12 +593,6 @@ export default {
   created() {
     // 获取默认数据
     this.agTableConfig.pagenation.current = 1;
-    if (this.$route.query.type === 'workID') {
-      this.formConfig.formValue = {};
-      this.getListWork();
-    } else {
-      this.getList();
-    }
   },
   mounted() {
     this.$nextTick(() => {
@@ -622,11 +616,6 @@ export default {
       }
     });
     this.getHeaderList();
-    if (_this.$route.query.type == 'workID') {
-      this.getListWork();
-    } else {
-      this.getList();
-    }
     // 计算高度 通过设置节点 'totalHeight'
     comUtils.setTableHeight(this, 100);
     // 检测屏幕变化 设置高度 重新渲染agTabe
@@ -784,6 +773,11 @@ export default {
           delete item.title;
         });
         _this.agTableConfig.columnDefs = res.data.data.columns;
+        if (_this.$route.query.type == 'workID') {
+          this.getListWork();
+        } else {
+          this.getList();
+        }
       });
     },
     // 查找
@@ -797,11 +791,6 @@ export default {
       this.$nextTick(() => {
         this.resetForm = true;
         this.getHeaderList();
-        if (this.$route.query.type == 'workID') {
-          this.getListWork();
-        } else {
-          this.getList();
-        }
       });
     },
     // 字段选项组转换
