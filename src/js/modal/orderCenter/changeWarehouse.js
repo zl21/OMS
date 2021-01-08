@@ -208,6 +208,7 @@ export default {
           // self.$parent.$parent.$parent.load();
           self.$Message.success(message);
           self.$parent.$parent.closeConfirm();
+          self.$parent.$parent.$parent.load();
         }
       } else if (code === -1 && !data) {
         self.$Message.error(message);
