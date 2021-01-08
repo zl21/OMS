@@ -1,6 +1,6 @@
-/** 
+/**
  * 共用对象
-*/
+ */
 const pageConfig = {
   // 设置总条数
   total: 0,
@@ -16,7 +16,7 @@ const pageConfig = {
  * @param {Array} sumData 总数据
  * @param {Object} config 分页的配置（含有current（页数）、pageSize（每页个数））
  * @returns {Object} data: 当前页数据；config: 分页的配置
-*/
+ */
 export const pagingInit = (sumData, config) => {
   const sumTableData = JSON.parse(JSON.stringify(sumData)); // 所有数据
   let listData = [];
@@ -58,8 +58,8 @@ const dateFormat = (newDate, format) => {
     'm+': newDate.getMinutes(),
     's+': newDate.getSeconds()
   };
-  /(y+)/.test(format) && (format = format.replace(RegExp.$1, (`${newDate.getFullYear()}`).substr(4 - RegExp.$1.length)));
-  for (const n in e) new RegExp(`(${n})`).test(format) && (format = format.replace(RegExp.$1, RegExp.$1.length === 1 ? e[n] : (`00${e[n]}`).substr((`${e[n]}`).length)));
+  /(y+)/.test(format) && (format = format.replace(RegExp.$1, `${newDate.getFullYear()}`.substr(4 - RegExp.$1.length)));
+  for (const n in e) new RegExp(`(${n})`).test(format) && (format = format.replace(RegExp.$1, RegExp.$1.length === 1 ? e[n] : `00${e[n]}`.substr(`${e[n]}`.length)));
   return format;
 };
 
@@ -67,14 +67,14 @@ const dateFormat = (newDate, format) => {
  * 关闭当前tab
  * @param _self 指向当前this
  */
-const tabCloseAppoint = (_self) => {
+const tabCloseAppoint = _self => {
   const { fullPath } = _self.$route;
   const { keepAliveModuleName, tableName } = _self.$store.state.global.activeTab;
-    R3.store.commit('global/tabCloseAppoint',{
+  R3.store.commit('global/tabCloseAppoint', {
     routeFullPath: fullPath,
     stopRouterPush: true,
     keepAliveModuleName,
-    tableName,
+    tableName
   });
 };
 
@@ -90,11 +90,11 @@ const setTableHeight = (_self, defaultHeight) => {
   // 获取需要除了agTable之外的节点
   const arr = document.getElementsByClassName('totalHeight');
   let sumHeight = 34 + defaultHeight;
-  Object.getOwnPropertyNames(arr).forEach((item) => {
+  Object.getOwnPropertyNames(arr).forEach(item => {
     sumHeight += parseInt(arr[item].clientHeight);
   });
   if (_self.$refs.agGridChild1) {
-    _self.tabConfig.forEach((item) => {
+    _self.tabConfig.forEach(item => {
       item.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
     });
   } else {
