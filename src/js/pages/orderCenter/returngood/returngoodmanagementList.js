@@ -831,7 +831,8 @@ export default {
       const param = {
         start: _this.agTableConfig.pagenation.current,
         count: _this.agTableConfig.pagenation.pageSize,
-        RETURN_STATUS: status == undefined || !status ? [] : [status]
+        RETURN_STATUS: status == undefined || !status ? [] : [status],
+        IS_GZIP: true
       };
       _this.formConfig.formValue.RECEIVE_PROVINCE = '';
       _this.formConfig.formValue.RECEIVE_PROVINCE_ID = '';
@@ -998,7 +999,8 @@ export default {
       const param = {
         start: _this.agTableConfig.pagenation.current,
         count: _this.agTableConfig.pagenation.pageSize,
-        RETURN_STATUS: status == undefined || !status ? [] : [status]
+        RETURN_STATUS: status == undefined || !status ? [] : [status],
+        IS_GZIP: true
       };
       _this.formConfig.formValue.RECEIVE_PROVINCE = '';
       _this.formConfig.formValue.RECEIVE_PROVINCE_ID = '';
