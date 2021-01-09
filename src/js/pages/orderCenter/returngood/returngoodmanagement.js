@@ -411,7 +411,7 @@ export default {
             width: '6'
           },
           {
-            style: 'input',
+            style: '',
             label: window.vmI18n.t('form_label.originalPlatformNo'), // 原始平台单号
             value: 'ORIG_SOURCE_CODE',
             dataAcessKey: 'ORIG_SOURCE_CODE',
@@ -1557,6 +1557,7 @@ export default {
     async getList() {
       const _this = this;
       _this.jordanTableConfig.loading = true;
+      this.information.formData[4].style = 'input';
       _this.service.orderCenter.findDetail({
  id: _this.$route.query.id, start: 1, count: 50, isRefund2Exchange: this.$route.query.flag == 'RefundToExchange' ? 1 : undefined 
 }).then(async res => {
@@ -1702,7 +1703,7 @@ export default {
       item.BILL_NO = data.BILL_NO;
       item.BUYER_NICK = data.BUYER_NICK ? data.BUYER_NICK : '';
       item.CP_C_LOGISTICS_ENAME = data.CP_C_LOGISTICS_ENAME ? data.CP_C_LOGISTICS_ENAME : '';
-      item.ORIG_SOURCE_CODE = data.ORIG_SOURCE_CODE ? data.ORIG_SOURCE_CODE : '';
+      item.ORIG_SOURCE_CODE = data.TID ? data.TID : '';
       item.CP_C_SHOP_TITLE = data.CP_C_SHOP_TITLE ? data.CP_C_SHOP_TITLE : '';
       item.CP_C_SHOP_ID = data.CP_C_SHOP_ID ? data.CP_C_SHOP_ID : '';
       item.RETURN_ID = data.RETURN_ID ? data.RETURN_ID : '';
