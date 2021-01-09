@@ -58,18 +58,18 @@ export default {
           column: 'BILL_NO',
           label: '单据编号:'
         },
+        // {
+        //   flag: false, // 是否需要加 *
+        //   column: 'MERGE_SOURCE_CODE', // 字段
+        //   type: 'select', // 类型
+        //   label: '合并平台单号:' // 标签
+        // },
         {
           flag: false, // 是否需要加 *
           column: 'MERGE_SOURCE_CODE', // 字段
           type: 'select', // 类型
-          label: '合并平台单号:' // 标签
-        },
-        // {
-        //   flag: false, // 是否需要加 *
-        //   column: 'SOURCE_CODE', // 字段
-        //   type: 'select', // 类型
-        //   label: '平台编号:' // 标签
-        // },        
+          label: '平台编号:' // 标签
+        },        
         {
           flag: false,
           column: 'PLATFORM_STATUS_NAME',
