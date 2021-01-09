@@ -103,7 +103,7 @@ export default {
           RECEIVER_ZIP: '',
           SYSREMARK: '',
           SHIP_AMT: '',
-          SOURCE_CODE: '',
+          MERGE_SOURCE_CODE: '',
           USER_NICK: '',
           WEIGHT: '',
           CP_C_PHY_WAREHOUSE_ENAME: ''
@@ -882,7 +882,7 @@ export default {
         RECEIVER_ZIP: '',
         SYSREMARK: '',
         SHIP_AMT: '',
-        SOURCE_CODE: '',
+        MERGE_SOURCE_CODE: '',
         USER_NICK: '',
         WEIGHT: '',
         CP_C_PHY_WAREHOUSE_ENAME: ''

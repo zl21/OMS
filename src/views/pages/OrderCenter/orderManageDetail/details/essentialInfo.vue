@@ -16,20 +16,6 @@
               <i v-if="list.flag">*</i>
               {{ list.label }}
             </label>
-            <!-- <Tooltip
-              v-if="list.label==='平台编号:'"
-              max-width="250"
-            >
-              <p class="text-ellipsis">
-                {{ componentData.order[list.column] }}
-              </p>
-              <p
-                slot="content"
-                class="wordBr"
-              >
-                {{ componentData.order[list.column] }}
-              </p>
-            </Tooltip> -->
             <p v-if="list.label==='平台编号:'" class="text-ellipsis">
                 {{ componentData.order[list.column] }}
             </p>
