@@ -60,6 +60,10 @@ export default {
     // 退货入库-手工匹配
     component: () => import('@/views/pages/OrderCenter/returngood/returnStoreage/manualMatching.vue')
   },
+  WARNSENDMATCHING: {
+    // 退货入库-错发匹配
+    component: () => import('@/views/pages/OrderCenter/returngood/returnStoreage/manualMatching.vue')
+  },
   DISTRIBUTIONORDERLIST: {
     component: distributionOrderList
   },
