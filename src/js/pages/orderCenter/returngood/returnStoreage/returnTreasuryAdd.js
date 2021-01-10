@@ -663,7 +663,7 @@ export default {
                     _this.$store.commit('customize/TabHref', {
                       id: _this.$route.query.id, // id
                       type: 'action', // 类型action
-                      name: 'manualMatching', // 文件名
+                      name: 'WARNSENDMATCHING', // 文件名
                       // label: "退货入库-错发强制匹配", //tab中文名
                       label: window.vmI18n.t('panel_label.return_warehousing_wrong_delivery_forced_matching'),
                       query: Object.assign({
