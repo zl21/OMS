@@ -1057,6 +1057,9 @@ export default {
               self.isShowSeniorOrOrdinary = true;
               self.publicBouncedConfig = {
                 ...publicDialogConfig.dropSortConfig
+              }; 
+              self.publicBouncedConfig.componentData = {
+                typeName: 'OC_B_ORDER'
               };
               setTimeout(() => {
                 self.$children.find(item => item.name === 'setFormDrag').openConfirm();

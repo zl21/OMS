@@ -27,9 +27,7 @@ export default {
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              
-            } // 按钮点击事件
+            btnclick: () => {} // 按钮点击事件
           }
         ]
       },
@@ -49,11 +47,11 @@ export default {
     self.getData();
     const node = document.querySelector('#container');
     let draging = null;
-    node.ondragstart = (event)=> {
+    node.ondragstart = event => {
       event.dataTransfer.setData('te', event.target.innerText);
       draging = event.target;
     };
-    node.ondragover = (event) => {
+    node.ondragover = event => {
       event.preventDefault();
       const target = event.target;
       if (target.nodeName === 'LI' && target !== draging) {
@@ -67,8 +65,7 @@ export default {
       const childArr = [];
       for (let i = 0; i < parentNode.length; i++) {
         childArr[i] = {
-          isfilter:
-            parentNode[i].getAttribute('isfilter') != null,
+          isfilter: parentNode[i].getAttribute('isfilter') != null,
           label: parentNode[i].getAttribute('label'),
           orderno: (i + 1) * 10,
           colname: parentNode[i].getAttribute('colname'),
@@ -114,7 +111,7 @@ export default {
           method: 'post',
           // cancelToken: true,
           data: param
-        }).then((res) => {
+        }).then(res => {
           if (res.data.code === 0) {
             // self.$Message.success("保存成功");
             self.$parent.$parent.$parent.getHeaderList();
@@ -144,7 +141,7 @@ export default {
         url: '/api/cs/oc/oms/v1/queryListConfig',
         method: 'post',
         data: fromdata
-      }).then((res) => {
+      }).then(res => {
         const formArr = [];
         res.data.date.forEach((item, index) => {
           formArr[index] = {
@@ -172,7 +169,7 @@ export default {
     // 判断当前是否显示
     checkbox(e, item) {
       const self = this;
-      self.dragList.forEach((ele) => {
+      self.dragList.forEach(ele => {
         if (item.label === ele.label) {
           if (e.target.checked) {
             ele.isfilter = true;
@@ -191,7 +188,7 @@ export default {
         url: '/api/cs/oc/oms/v1/saveQueryListConfig',
         method: 'post',
         data: param
-      }).then((res) => {
+      }).then(res => {
         console.log(res);
         self.$parent.$parent.$parent.getHeaderList();
       });
