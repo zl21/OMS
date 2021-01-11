@@ -399,15 +399,16 @@ export default {
             resDom.innerHTML = param.data.CP_C_SHOP_TITLE;
             return resDom;
           },
-          ORIG_SOURCE_CODE: param => {
+          TID: param => {
             const self = this;
             const resDom = document.createElement('a');
             resDom.style['text-decoration'] = 'underline';
-            resDom.innerHTML = param.data.ORIG_SOURCE_CODE;
-            resDom.onclick = () => {
+            resDom.innerHTML = param.data.TID;
+            if (param.data.TID.split(',').length == 1) {
+              resDom.onclick = () => {
               console.log(self);
               const formdata = new FormData();
-              formdata.append('param', JSON.stringify({ sourceCode: param.data.ORIG_SOURCE_CODE }));
+              formdata.append('param', JSON.stringify({ sourceCode: param.data.TID }));
               self.service.orderCenter.getOrderId(formdata).then(res => {
                 console.log(res);
                 if (res.data.code === 0) {
@@ -422,6 +423,12 @@ export default {
                 }
               });
             };
+            } else {
+              resDom.onclick = ()=>{
+                self.$Message.warning('当前平台单号存在多个零售发货单，请进入零售发货单页面查找查看');
+              };
+            }
+            
             return resDom;
           }
         },
@@ -869,6 +876,7 @@ export default {
         document.getElementById('content').style.overflow = 'auto';
         document.getElementById('content').style.position = 'relative';
         res.data.data = JSON.parse(unzipXv(res.data.data));
+        console.log(res.data.data);
         if (res.data.code == 0 && res.data.data.queryResult.length) {
           _this.agTableConfig.rowData = res.data.data.queryResult;
           _this.agTableConfig.pagenation.total = res.data.data.totalNum;
