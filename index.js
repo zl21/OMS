@@ -67,6 +67,14 @@ window.vmI18n = i18n; // 挂载国际化
 Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
 Vue.prototype.$comUtils = comUtils;
 
+// 路由守卫 去掉部分定制界面onresize方法
+R3.router.afterEach((to)=>{
+  const tableNameArr = ['ORDERMANAGER', 'PAYABLEADJUSTMENTLIST', 'returngoodmanagementList', 'manualMatching', 'RETURNSTOREAGELIST', 'PROMACTIQUERYLIST', 'SETWAREHOUSELOGISTICS'];
+  const currentTable = to.params.tableName || to.params.customizedModuleName;
+  if (!tableNameArr.includes(currentTable)) {
+    window.onresize = null;
+  }
+});
 // 老框架引入的 自定义界面内需要的资源
 R3.launchApplication({
   image: {
