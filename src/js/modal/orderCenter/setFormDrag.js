@@ -161,7 +161,7 @@ export default {
       if (!el || !el.parentNode) {
         return -1;
       }
-      while (el && el.previousElementSibling) {
+      while (el && (el = el.previousElementSibling)) {
         index++;
       }
       return index;
@@ -190,7 +190,7 @@ export default {
         data: param
       }).then(res => {
         console.log(res);
-        self.$parent.$parent.$parent.getHeaderList();
+        // self.$parent.$parent.$parent.getHeaderList();
       });
     }
   }
