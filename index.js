@@ -17,15 +17,15 @@ import customizedModalConfig from 'burgeonConfig/customized.modal.config';
 import customizeWaterMarkConfig from 'burgeonConfig/customized.watermark.config';
 import filterUrlConfig from 'burgeonConfig/config/filterUrl.config';
 import myfilterUrlForNetworkScript from '@/service/filterUrlForNetwork';
-import WelcomePage from './src/component/WelcomePage';
-import Login from './src/component/Login';
-import enterpriseBanner from './src/assets/image/banner.png';
-import enterpriseLogo from './src/assets/image/logo.png';
+import WelcomePage from '@/component/WelcomePage';
+import Login from '@/component/Login';
+import enterpriseBanner from '@/assets/image/banner.png';
+import enterpriseLogo from '@/assets/image/logo.png';
 // ----------动态加载主题库皮肤包;
 
 import '@burgeon/oms-theme/theme/custom.less'; // 主题文件
 
-import externalTreeDatasConfig from './src/config/externalTreeDatas.config'; // 树结构配置
+import externalTreeDatasConfig from '@/config/externalTreeDatas.config'; // 树结构配置
 import '@syman/burgeon-r3/r3.publish/r3.min.css';
 
 // 老框架引入的 自定义界面内需要的css资源
@@ -37,7 +37,7 @@ import '@/assets/css/css_1_3/reset.less';
 
 // 老框架引入的 自定义界面内需要的js资源
 // 促销需要
-import connector from './src/js/pages/common/orderDetail/connector';
+import connector from '@/js/pages/common/orderDetail/connector';
 
 // 根据接口调整title
 const appTitle = '森马电商';
@@ -45,7 +45,7 @@ const appTitle = '森马电商';
     if (res.status == 200) {
       document.title = res.data || appTitle;
     }
-  }).catch((err) => {
+  }).catch(() => {
     document.title = appTitle;
   });
 
