@@ -190,7 +190,7 @@ export default {
         data: param
       }).then(res => {
         console.log(res);
-        // self.$parent.$parent.$parent.getHeaderList();
+        self.$parent.$parent.$parent.getHeaderList();
       });
     }
   }
