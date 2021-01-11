@@ -16,10 +16,10 @@ body {
 
   // page 布局
   .standardTable {
-    padding-top: 0;
+    padding-top: 10px;
 
     .ark-page {
-      margin: 10px 0;
+      margin: 9px 0 8px;
       text-align: center;
       -webkit-box-ordinal-group: 2;
       -moz-box-ordinal-group: 2;
@@ -34,6 +34,7 @@ body {
       -ms-flex-order: 1;
       -webkit-order: 1;
       order: 1;
+      margin-top: 0;
     }
 
     .queryDesc {
@@ -42,6 +43,7 @@ body {
       -ms-flex-order: 3;
       -webkit-order: 3;
       order: 3;
+      margin: 0;
     }
   }
 
@@ -1384,10 +1386,10 @@ body {
 // 左下角图例样式
 .queryDesc,
 .promactiIcon {
-  height: 26px !important;
-  line-height: 26px !important;
+  // height: 26px !important;
+  // line-height: 26px !important;
   font-family: PingFangSC-Medium;
-  margin: 0 0 13px !important;
+  // margin: 0 0 13px !important;
 
   .legend {
     flex: 1;
@@ -1412,7 +1414,7 @@ body {
       }
 
       button {
-        height: 20px;
+        height: 18px;
         line-height: 12px;
         font-size: 12px;
         margin-right: 5px !important;
@@ -1911,4 +1913,8 @@ body {
 body .history-and-favorite .history-favorite-container div.favorite ul li, body .history-and-favorite .history-favorite-container div.history ul li{
   padding-right: 20px;
   margin-right: 0 !important;
+}
+// 标准form label的左边
+.FormItemComponent-item .itemLabel {
+  padding-left: 5px !important;
 }
