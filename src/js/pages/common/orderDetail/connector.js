@@ -419,7 +419,7 @@ const port = {
     matchData: {},
     hasMatch: false, // 是否有匹配矩阵
     noZeroShwoFlag: true,
-    hasStock: true, // 获取库存接口
+    hasStock: false, // 获取库存接口
     isStock: false, // 配置默认显示在库的还是可用的
     inputList: [{
       name: '数量',
@@ -441,7 +441,7 @@ const port = {
     isDeleteBtn: true, // 是否有删除明细按钮
     matchData: {},
     hasMatch: false, // 是否有匹配矩阵
-    hasStock: true, // 获取库存接口
+    hasStock: false, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
     inputList: [{
       name: '数量',
@@ -461,7 +461,7 @@ const port = {
     isDeleteBtn: true, // 是否有删除明细按钮
     matchData: {},
     hasMatch: false, // 是否有匹配矩阵
-    hasStock: true, // 获取库存接口
+    hasStock: false, // 获取库存接口
     noZeroShwoFlag: true, // 不展示0
     isStock: false, // 配置默认显示在库的还是可用的
     inputList: [{
@@ -473,7 +473,7 @@ const port = {
     hasReceiving: true,
     hasQtyPrein: true,
     hasRetail: true
-  },
+  }, // 调拨单
   V_SC_B_TRANSFER_BETWEEN: { // 仓间调拨
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
     amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
@@ -484,7 +484,7 @@ const port = {
     isDeleteBtn: true, // 是否有删除明细按钮
     matchData: {},
     hasMatch: false, // 是否有匹配矩阵
-    hasStock: true, // 获取库存接口
+    hasStock: false, // 获取库存接口
     noZeroShwoFlag: true, // 不展示0
     isStock: false, // 配置默认显示在库的还是可用的
     inputList: [{
@@ -507,7 +507,7 @@ const port = {
     isDeleteBtn: true, // 是否有删除明细按钮
     matchData: {},
     hasMatch: false, // 是否有匹配矩阵
-    hasStock: true, // 获取库存接口
+    hasStock: false, // 获取库存接口
     noZeroShwoFlag: true, // 不展示0
     isStock: false, // 配置默认显示在库的还是可用的
     inputList: [{
@@ -592,7 +592,7 @@ const port = {
     isUpdateDiscountBtn: false, // 是否有修改折扣明细按钮
     matchData: {},
     hasMatch: false, // 是否有匹配矩阵
-    hasStock: true, // 获取库存接口
+    hasStock: false, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
     inputList: [{
       name: '数量',
@@ -601,7 +601,7 @@ const port = {
     }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
     hasReceiving: false
-  },
+  }, // 销售退货单
   OC_B_REFUND_PURCHASE: {
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
     amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
@@ -612,7 +612,7 @@ const port = {
     isDeleteBtn: true, // 是否有删除明细按钮
     matchData: {},
     hasMatch: false, // 是否有匹配矩阵
-    hasStock: true, // 获取库存接口
+    hasStock: false, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
     inputList: [{
       name: '数量',
@@ -675,7 +675,7 @@ const port = {
     isDeleteBtn: true, // 是否有删除明细按钮
     matchData: {},
     hasMatch: false, // 是否有匹配矩阵
-    hasStock: true, // 获取库存接口
+    hasStock: false, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
     inputList: [{
       name: '数量',
@@ -881,6 +881,6 @@ const port = {
     isMatchSize: 0,
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
     amendBody: '/p/cs/objectSave' // 保存修改的商品编码各个SKU数量
-  }
+  } // 组货单
 };
 export default port;
