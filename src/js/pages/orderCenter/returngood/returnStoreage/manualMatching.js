@@ -1013,11 +1013,12 @@ export default {
     });
   },
   activated() {
-    window.onresize = () => {
+    $(window).on('resize', () => {
       this.setTableHeight();
-    };
+    });
   },
   destroyed() {
+    $(window).off('resize');
     window.removeEventListener('keydown', this, false);
   }
 };

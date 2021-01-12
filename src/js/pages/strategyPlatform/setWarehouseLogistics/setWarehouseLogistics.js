@@ -271,9 +271,6 @@ export default {
         }
       });
     }
-    window.onresize = () => {
-      this.setTableHeight();
-    };
     this.importTable.confirmTitle = window.vmI18n.t('modalTitle.import');
     this.modifyLogistics.confirmTitle = window.vmI18n.t('modalTitle.select_logisticsCompany');
   },
@@ -596,5 +593,13 @@ export default {
       const sLefts = document.getElementById('fixedDiv');
       sLefts.setAttribute('style', `margin-left: ${-e.target.scrollLeft}px`);
     }
+  },
+  activated() {
+    $(window).on('resize', () => {
+      this.setTableHeight();
+    });
+  },
+  destroyed() {
+    $(window).off('resize');
   }
 };
