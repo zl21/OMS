@@ -452,6 +452,7 @@ export default {
       this.getPermissions('btnConfig', 'returnStoreageList');
       // 定制页面自行处理
       // let buttonList = this.getPermissions("action", "btnConfig",true);
+      this.setTableHeight();
     });
 
     // 判断是手工匹配2 / 错发强制匹配3
@@ -600,7 +601,6 @@ export default {
         }
       );
     }
-    this.setTableHeight();
     this.obtainWarehouse();
   },
   methods: {
@@ -989,11 +989,13 @@ export default {
     setTableHeight() {
       const _this = this;
       const contentHeight = document.getElementById('content').clientHeight;
-      let returnHeight = 25;
-      returnHeight += document.getElementsByClassName('buttonBox')[0].clientHeight;
-      returnHeight += document.getElementsByClassName('TreasuryDefault')[0].clientHeight;
-      const tableHeight = contentHeight - returnHeight;
-      _this.jordanTableConfig.height = tableHeight - 220;
+      let sumHeight = 0;
+      setTimeout(() => {
+        sumHeight += document.getElementsByClassName('one_button')[0].clientHeight; // 46
+        sumHeight += document.getElementsByClassName('TreasuryDefault')[0].clientHeight;
+        sumHeight += document.getElementsByClassName('jordan-label-box')[0].clientHeight; // 37
+        _this.jordanTableConfig.height = contentHeight - sumHeight - 60;
+      }, 500);
     },
   },
   created() {
@@ -1009,8 +1011,10 @@ export default {
         _this.order.modal = false;
       }
     });
+  },
+  activated() {
     window.onresize = () => {
-      _this.setTableHeight();
+      this.setTableHeight();
     };
   },
   destroyed() {
