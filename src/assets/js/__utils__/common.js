@@ -153,14 +153,19 @@ const onresizes = (_self, defaultHeight) => {
     default:
       break;
   }
-  // 添加监听屏幕变化方法
-  window.addEventListener('resize', option);
+  // 添加监听屏幕变化方法 js
+  // window.addEventListener('resize', option);
+  // jquery
+  $(window).on('resize', option);
 };
 /**
  * 销毁resize方法
  */
 const removeOnresize = () =>{
-  window.removeEventListener('resize', option);
+  //  移除监听屏幕变化方法 js
+  // window.removeEventListener('resize', option);
+  // jquery
+  $(window).off('resize');
 };
 
 export default {
