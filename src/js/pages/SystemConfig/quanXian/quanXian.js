@@ -228,6 +228,7 @@ export default {
           searchCondition
         };
       }
+      this.spinShow = true;
       const { data: { data, code } } = await this.service.systemConfig.selectDataPermission(url, urlSearchParams(params));
       if (code === 0) {
         this.tableArr.isReadValueTotal = 0;
@@ -312,6 +313,7 @@ export default {
           this.$Message.success(this.vmI18n.t('common.refresh_succee')); // 刷新成功
         }
       }
+      this.spinShow = false;
     },
 
     async sureBtn(params) {
@@ -338,7 +340,7 @@ export default {
           }
         });
       } else {
-        this.$Modal.error({
+        /* this.$Modal.error({
           title: self.vmI18n.t('modalTitle.tips'),
           content: self.message,
           cancelType: true,
@@ -350,7 +352,7 @@ export default {
               self.$Modal.remove();
             }
           }
-        });
+        }); */
       }
     },
     cancelBtn() {

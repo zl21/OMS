@@ -102,7 +102,7 @@ export default {
     [],
     // 库存中心
     ['OUTBOUNDPICKORDER', 'SGCHANNELSYNSTOCKQUERY', 'SGCHANNELSTORAGEBUFFER', 'SGSTORAGECHANGEFTPQUERY'],
-    // 系统配置
-    ['USERPERMISSION', 'COMMODITYAUTHORITY', 'storeWarehousePermissions', 'sensitiveColumnPermissions', 'CP_C_GROUPS', 'CP_C_HRUSERS', 'physicalStorageAuthority', 'brandPermissions', 'salesChannelAuthority']
+    // 系统配置 - 'physicalStorageAuthority','brandPermissions','sensitiveColumnPermissions','storeWarehousePermissions','salesChannelAuthority'
+    ['USERPERMISSION', 'COMMODITYAUTHORITY', 'CP_C_GROUPS', 'CP_C_HRUSERS',]
   ]
 };
