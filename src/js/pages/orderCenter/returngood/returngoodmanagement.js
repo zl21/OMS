@@ -2359,7 +2359,7 @@ export default {
           for (let i = 0; i < _this.exchangeDtoList.data.length; i++) {
             let status = 0;
             for (let j = 0; j < newArr.length; j++) {
-              if (_this.exchangeDtoList.data[i].PS_C_SKU_ECODE == newArr[j].PS_C_SKU_ECODE) {
+              if (_this.exchangeDtoList.data[i].OC_B_ORDER_ITEM_ID == newArr[j].OC_B_ORDER_ITEM_ID) {
                 status = 1;
                 break;
               }
@@ -2459,8 +2459,8 @@ export default {
                       },
                       list.map(item => h('Option', {
                           props: {
-                            value: item.psCSpec1objId,
-                            label: item.psCSpec1objName
+                            value: item.psCSpec1objId || item.COLOR_ID,
+                            label: item.psCSpec1objName || item.COLOR_NAME
                           }
                         }))
                     )
@@ -2572,8 +2572,8 @@ export default {
                       },
                       list.map(item => h('Option', {
                           props: {
-                            value: item.psCSpec2objId,
-                            label: item.psCSpec2objName
+                            value: item.psCSpec2objId || item.SIZE_ID,
+                            label: item.psCSpec2objName || item.SIZE_NAME
                           }
                         }))
                     )
