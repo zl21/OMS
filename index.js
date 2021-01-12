@@ -4,7 +4,6 @@ import R3 from '@syman/burgeon-r3';
 import apiPath from '@/assets/js/api/path/index';
 import i18n from '@burgeon/internationalization/i18n/i18n'; // 国际化
 import service from '@/service/index';
-
 import qs from 'qs';
 import request, { httpFormdata, fetch } from 'framework/__utils__/request';
 import ajax from 'framework/__utils__/ajax';
@@ -72,7 +71,9 @@ R3.router.afterEach((to)=>{
   const tableNameArr = ['ORDERMANAGER', 'PAYABLEADJUSTMENTLIST', 'returngoodmanagementList', 'manualMatching', 'RETURNSTOREAGELIST', 'PROMACTIQUERYLIST', 'SETWAREHOUSELOGISTICS'];
   const currentTable = to.params.tableName || to.params.customizedModuleName;
   if (!tableNameArr.includes(currentTable)) {
-    window.onresize = null;
+    // window.onresize = null;
+    // 销毁resize方法
+    comUtils.removeOnresize();
   }
 });
 // 老框架引入的 自定义界面内需要的资源

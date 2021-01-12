@@ -1114,9 +1114,10 @@ export default {
   },
   activated() {
     // 获取默认数据
-    this.agTableConfig.pagenation.current = 1;
-    // this.selection = [];
-    // this.getData();
+    const _self = this;
+    _self.agTableConfig.pagenation.current = 1;
+    // 检测屏幕变化 设置高度 重新渲染agTabe
+    comUtils.onresizes(_self, 40);
   },
   mounted() {
     // 获取普通搜索的标签数据
@@ -1131,14 +1132,6 @@ export default {
     });
     // 计算高度 通过设置节点 'totalHeight'
     comUtils.setTableHeight(_this, 80);
-    // 检测屏幕变化 设置高度 重新渲染agTabe
-    window.onresize = () => {
-      // 判断 如果不是高级搜索 自适应高度
-      if (_this.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
-        comUtils.setTableHeight(_this, 40);
-        _this.$refs.agGridChild.agGridTable(_this.agTableConfig.columnDefs, _this.agTableConfig.rowData);
-      }
-    };
   },
   methods: {
     onSortChanged() {
@@ -2879,5 +2872,8 @@ export default {
       });
       return obj;
     }
-  }
+  },
+  // destroyed() {
+    
+  // }
 };

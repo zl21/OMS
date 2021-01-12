@@ -102,10 +102,73 @@ const setTableHeight = (_self, defaultHeight) => {
   }
 };
 
+/**
+ * 计算表格高度
+ */
+let option = () => {};
+const onresizes = (_self, defaultHeight) => {
+  // 获取当前主表名
+  const tableName = _self.$route.params.customizedModuleName;
+  // 匹配当前的定制界面执行当前逻辑
+  switch (tableName) {
+    // 零售发货单
+    case 'ORDERMANAGER':
+      option = () => {
+        // 判断 如果不是高级搜索 自适应高度
+        if (_self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
+          setTableHeight(_self, defaultHeight);
+          _self.$refs.agGridChild.agGridTable(_self.agTableConfig.columnDefs, _self.agTableConfig.rowData);
+        }
+      };
+      break;
+      // 赔付单
+    case 'PAYABLEADJUSTMENTLIST':
+      option = () => {
+        setTableHeight(_self, defaultHeight);
+        _self.$refs.agtable.agGridTable(_self.agTableConfig.columnDefs, _self.agTableConfig.rowData);
+      };
+      break;
+    // 退换货单
+    case 'RETURNGOODLIST':
+      option = () => {
+        setTableHeight(_self, defaultHeight);
+        _self.$refs.agGridChild.agGridTable(_self.agTableConfig.columnDefs, _self.agTableConfig.rowData);
+      };
+      break;
+    // 退货入库
+    case 'RETURNSTOREAGELIST':
+      option = () => {
+        setTableHeight(_self, defaultHeight);
+        _self.$refs.agGridChild.agGridTable(_self.agTableConfig.columnDefs, _self.agTableConfig.rowData);
+      };
+      break;
+    // 促销活动
+    case 'PROMACTIQUERYLIST':
+      option = () => {
+        setTableHeight(_self, 100);
+        const agGridChild = `agGridChild${Number(_self.activeName) + 1}`;
+        _self.$refs[`${agGridChild}`][0].agGridTable(_self.tabConfig[_self.activeName].agTableConfig.columnDefs, _self.tabConfig[_self.activeName].agTableConfig.rowData);
+      };
+      break;
+    default:
+      break;
+  }
+  // 添加监听屏幕变化方法
+  window.addEventListener('resize', option);
+};
+/**
+ * 销毁resize方法
+ */
+const removeOnresize = () =>{
+  window.removeEventListener('resize', option);
+};
+
 export default {
   pagingInit,
   dateFormat,
   tabCloseAppoint,
   setTableHeight,
-  pageConfig
+  pageConfig,
+  onresizes,
+  removeOnresize
 };

@@ -517,13 +517,8 @@ export default {
     await this.times(); // 默认时间
 
     await this.getData();
-
     // 检测屏幕变化 设置高度 重新渲染agTabe
-    window.onresize = () => {
-      comUtils.setTableHeight(this, 100);
-      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
-      this.$refs[`${agGridChild}`][0].agGridTable(this.tabConfig[this.activeName].agTableConfig.columnDefs, this.tabConfig[this.activeName].agTableConfig.rowData);
-    };
+    comUtils.onresizes(this, 100);
   },
   methods: {
     // 处理时间
