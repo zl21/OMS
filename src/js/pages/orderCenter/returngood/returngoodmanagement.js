@@ -1816,9 +1816,9 @@ export default {
         this.jordanTableConfig.data = this.refundDtoList.data;
         this.jordanTableConfig.columns = [
           {
-            key: 'WMS_BILL_NO',
+            key: 'REFUND_BILL_NO',
             title: _this.vmI18n.t('form_label.platformRefundNo'), // 平台退款单号
-            dataAcessKey: 'WMS_BILL_NO',
+            dataAcessKey: 'REFUND_BILL_NO',
             render: (h, params) => {
               const _this = this;
               if (_this.returnIdEditFlag) {
@@ -1842,16 +1842,16 @@ export default {
                         'text-align': 'center'
                       },
                       props: {
-                        value: params.row.WMS_BILL_NO,
+                        value: params.row.REFUND_BILL_NO,
                         autosize: true
                       },
                       on: {
                         'on-change': e => {
-                          params.row.WMS_BILL_NO = e.target.value;
+                          params.row.REFUND_BILL_NO = e.target.value;
                           _this.refundDtoList.data[params.index] = params.row;
                           _this.returnSelectData.forEach(item => {
                             if (item.PS_C_SKU_ECODE === params.row.PS_C_SKU_ECODE) {
-                              item.WMS_BILL_NO = params.row.WMS_BILL_NO;
+                              item.REFUND_BILL_NO = params.row.REFUND_BILL_NO;
                             }
                           });
                         }
@@ -1880,11 +1880,11 @@ export default {
                         height: '100%'
                       },
                       props: {
-                        value: params.row.WMS_BILL_NO,
+                        value: params.row.REFUND_BILL_NO,
                         autosize: true
                       }
                     },
-                    params.row.WMS_BILL_NO
+                    params.row.REFUND_BILL_NO
                   )
                 ]
               );
@@ -3045,7 +3045,7 @@ export default {
           amt_adjust: parseInt(item[i].AMT_REFUND) - parseInt(item[i].PRICE) * parseInt(item[i].QTY_REFUND), // 总调整金额
           PRICE_SETTLE: item[i].PRICE_SETTLE,
           AMT_SETTLE_TOT: item[i].AMT_SETTLE_TOT,
-          WMS_BILL_NO: item[i].WMS_BILL_NO
+          REFUND_BILL_NO: item[i].REFUND_BILL_NO
         });
         total += parseInt(item[i].QTY_REFUND); // 商品数量
       }
