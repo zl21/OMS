@@ -14,7 +14,7 @@ const proxyLists = projectConfig.burgeonProxy;
 const indexProHtml = path.posix.join('/', 'index.pro.html');
 const indexHtml = path.posix.join('/', 'index.html');
 const envFlag = Boolean(process.env && process.env.production);
-const devtoolFlag = envFlag ? 'source-map' : 'cheap-module-eval-source-map';
+const devtoolFlag = envFlag ? 'source-map' : 'cheap-module-source-map';
 const burgeonPlugins = [
   new MiniCssExtractPlugin({
     filename: 'r3.css'
