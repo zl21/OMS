@@ -1937,10 +1937,12 @@ export default {
                 type: item.type === 'date' ? 'DatePicker' : item.type, // 类型
                 componentAttribute: {
                   multiple: true,
-                  'label-in-value': true
+                  'label-in-value': true,
+                  clearable: true
                 }, // 组件属性
                 list: item.list, // 选项
-                value: '' // 选中值
+                value: '', // 选中值
+                noClearSearchValue: true // 查询后是否清除输入框内的值,默认false-清除,true:不清除
               };
             } else if (item.type === 'DropDownSelectFilter') {
               dropList[index] = {
