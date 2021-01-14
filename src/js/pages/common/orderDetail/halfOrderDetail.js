@@ -249,6 +249,7 @@ export default {
           this.getData();
           this.save = false;
           this.$children[0].Dialog = false;
+          this.singleData = '';
         }
       });
       // 清空输入框参数
