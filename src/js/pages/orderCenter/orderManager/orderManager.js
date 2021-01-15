@@ -1799,7 +1799,7 @@ export default {
         startindex: 0
       };
       fromdata.append('param', JSON.stringify(params));
-      // _this.agTableConfig.agLoading = true;
+      _this.agTableConfig.agLoading = true;
       _this.service.orderCenter.getSeniorQueryCondition(fromdata).then(res => {
         // 高级查询
         const formData = [];
@@ -1919,12 +1919,6 @@ export default {
           });
           _this.agTableConfig.columnDefs = arr;
           // _this.agTableConfig.agLoading = false;
-          if (this.$route.query.type === 'workID') {
-            this.searchMethod('workID');
-            this.selectValue = [];
-          } else {
-            this.searchMethod();
-          }
 
           // 下拉数据 定义
           const dropList = [];
@@ -2163,7 +2157,15 @@ export default {
             };
           });
           _this.tagList[0].list = tagList;
+          if (this.$route.query.type === 'workID') {
+            this.searchMethod('workID');
+            this.selectValue = [];
+          } else {
+            this.searchMethod();
+          }
           _this.setSearchOption();
+        } else {
+          _this.agTableConfig.agLoading = false;
         }
       });
     },
