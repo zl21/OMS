@@ -2187,8 +2187,9 @@ export default {
       if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
         // 打开高级搜索
         self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
-        self.labelData = [];
-        self.queryInfoData = [];
+        // self.labelData = [];
+        // self.queryInfoData = [];
+        self.selectValue = []; // 清空高级搜索项
         self.clearFromListValue = true;
         self.isShowSeniorOrOrdinary = !self.isShowSeniorOrOrdinary;
       } else {
@@ -2407,7 +2408,6 @@ export default {
     distributeLogistics() {
       const self = this;
       self.selection = [];
-      if (self.clearFromListValue) self.queryInfoData = [];
       const param = {
         page: {
           pageSize: self.agTableConfig.pagenation.pageSize,
@@ -2428,7 +2428,6 @@ export default {
     distributeWarehouse() {
       const self = this;
       self.selection = [];
-      if (self.clearFromListValue) self.queryInfoData = [];
       const param = {
         page: {
           pageSize: self.agTableConfig.pagenation.pageSize,
@@ -2506,7 +2505,6 @@ export default {
       // 当出现loading，禁止页面滚动
       document.getElementById('content').style.overflow = 'hidden';
       document.getElementById('content').style.position = '';
-      if (self.clearFromListValue) self.queryInfoData = [];
       const param = {
         page: {
           pageSize: self.agTableConfig.pagenation.pageSize,
@@ -2663,7 +2661,6 @@ export default {
     async getData1() {
       const self = this;
       self.agTableConfig.agLoading = true;
-      if (self.clearFromListValue) self.queryInfoData = [];
       if (self.$route.query.type == 'workID' && self.$route.query.ID !== undefined) {
         const arr = [{ type: 'Input', queryName: 'ID', value: self.$route.query.ID }];
         if (!self.highSearchData.length) {
