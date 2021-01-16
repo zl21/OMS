@@ -2350,43 +2350,45 @@ export default {
       // 取的标签值
       let label = [];
       const queryInfo = [];
-      this.selectValue.forEach((item, index) => {
-        if (item.column === 'tag') {
-          label = item.selectedList;
-        } else if (item.type === 'DatePicker') {
-          queryInfo[index] = {
-            type: 'date',
-            displayName: item.label,
-            queryName: item.column,
-            list: item.list,
-            value: item.value
-          };
-        } else if (item.type === 'Select') {
-          queryInfo[index] = {
-            type: item.type,
-            displayName: item.label,
-            queryName: item.column,
-            value: item.value,
-            list: item.selectedList
-          };
-        } else if (item.type === 'DropDownSelectFilter') {
-          queryInfo[index] = {
-            type: item.type,
-            displayName: item.label,
-            queryName: item.column,
-            value: item.value,
-            list: item.selectedList
-          };
-        } else {
-          queryInfo[index] = {
-            type: item.type,
-            displayName: item.label,
-            queryName: item.column,
-            value: item.value.replace(/(^\s*)|(\s*$)/g, ''),
-            list: item.list
-          };
-        }
-      });
+      if (this.isShowSeniorOrOrdinary) { // 只有高级搜索时queryInfo条件才有效
+        this.selectValue.forEach((item, index) => {
+          if (item.column === 'tag') {
+            label = item.selectedList;
+          } else if (item.type === 'DatePicker') {
+            queryInfo[index] = {
+              type: 'date',
+              displayName: item.label,
+              queryName: item.column,
+              list: item.list,
+              value: item.value
+            };
+          } else if (item.type === 'Select') {
+            queryInfo[index] = {
+              type: item.type,
+              displayName: item.label,
+              queryName: item.column,
+              value: item.value,
+              list: item.selectedList
+            };
+          } else if (item.type === 'DropDownSelectFilter') {
+            queryInfo[index] = {
+              type: item.type,
+              displayName: item.label,
+              queryName: item.column,
+              value: item.value,
+              list: item.selectedList
+            };
+          } else {
+            queryInfo[index] = {
+              type: item.type,
+              displayName: item.label,
+              queryName: item.column,
+              value: item.value.replace(/(^\s*)|(\s*$)/g, ''),
+              list: item.list
+            };
+          }
+        });
+      }
       const labelData = [];
       label.forEach((item, index) => {
         labelData[index] = {
