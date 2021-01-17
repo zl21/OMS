@@ -1981,25 +1981,26 @@ export default {
                 componentEvent: {
                   'on-popper-show': () => {
                     const self = this;
-                    let premtype = '';
-                    if (item.selectTab.tabth.name === '店铺') {
-                      premtype = 'CP_C_SHOP_PERMISSION_ID';
-                    } else if (item.selectTab.tabth.name === '发货仓库') {
-                      premtype = 'CP_C_WAREHOUSE_ID';
-                    }
+                    // let premtype = '';
+                    // if (item.selectTab.tabth.name === '店铺') {
+                    //   premtype = 'CP_C_SHOP_PERMISSION_ID';
+                    // } else if (item.selectTab.tabth.name === '发货仓库') {
+                    //   premtype = 'CP_C_WAREHOUSE_ID';
+                    // }
                     const params = {
                       isdroplistsearch: true,
                       refcolid: item.selectTab.tabth.colid,
                       fixedcolumns: {},
                       startindex: 0,
                       range: 10,
-                      precolnameslist: [
-                        {
-                          iswrite: 'false',
-                          refcol: 'ID',
-                          premtype
-                        }
-                      ]
+                      precolnameslist: item.selectTab.tabth.precolnameslist
+                      // precolnameslist: [
+                      //   {
+                      //     iswrite: 'false',
+                      //     refcol: 'ID',
+                      //     premtype
+                      //   }
+                      // ]
                     };
                     const data = new URLSearchParams();
                     data.append('searchdata', JSON.stringify(params));
@@ -2014,25 +2015,26 @@ export default {
                   },
                   'on-page-change': e => {
                     const self = this;
-                    let premtype = '';
-                    if (item.selectTab.tabth.name === '店铺') {
-                      premtype = 'CP_C_SHOP_PERMISSION_ID';
-                    } else if (item.selectTab.tabth.name === '发货仓库') {
-                      premtype = 'CP_C_WAREHOUSE_ID';
-                    }
+                    // let premtype = '';
+                    // if (item.selectTab.tabth.name === '店铺') {
+                    //   premtype = 'CP_C_SHOP_PERMISSION_ID';
+                    // } else if (item.selectTab.tabth.name === '发货仓库') {
+                    //   premtype = 'CP_C_WAREHOUSE_ID';
+                    // }
                     const params = {
                       isdroplistsearch: true,
                       refcolid: item.selectTab.tabth.colid,
                       fixedcolumns: {},
                       startindex: (e - 1) * 10,
                       range: 10,
-                      precolnameslist: [
-                        {
-                          iswrite: 'false',
-                          refcol: 'ID',
-                          premtype
-                        }
-                      ]
+                      precolnameslist: item.selectTab.tabth.precolnameslist
+                      // precolnameslist: [
+                      //   {
+                      //     iswrite: 'false',
+                      //     refcol: 'ID',
+                      //     premtype
+                      //   }
+                      // ]
                     };
                     const data = new URLSearchParams();
                     data.append('searchdata', JSON.stringify(params));
@@ -2046,15 +2048,16 @@ export default {
                       });
                   },
                   'on-input-value-change': async e => {
-                    let colid;
-                    if (item.selectTab.tabth.name === '店铺') {
-                      colid = '167606';
-                    } else if (item.selectTab.tabth.name === '发货仓库') {
-                      colid = '167640';
-                    }
+                    // let colid;
+                    // if (item.selectTab.tabth.name === '店铺') {
+                    //   colid = '167606';
+                    // } else if (item.selectTab.tabth.name === '发货仓库') {
+                    //   colid = '167640';
+                    // }
                     const formdata = new FormData();
                     formdata.append('ak', e.trim());
-                    formdata.append('colid', colid);
+                    // formdata.append('colid', colid);
+                    formdata.append('colid', item.selectTab.tabth.colid);
                     formdata.append('fixedcolumns', JSON.stringify({}));
                     const res = await this.service.common.fuzzyquerybyak(formdata);
                     if (res.data.code == 0) {
