@@ -598,9 +598,9 @@ export default {
   },
   activated() {
     // 计算高度 通过设置节点 'totalHeight'
-    comUtils.setTableHeight(this, 115);
+    // comUtils.setTableHeight(this, 115);
     // 检测屏幕变化 设置高度 重新渲染agTabe
-    comUtils.onresizes(this, 40);
+    // comUtils.onresizes(this, 40);
   },
   created() {
     // 获取默认数据
@@ -628,7 +628,6 @@ export default {
       }
     });
     this.getHeaderList();
-    
   },
   methods: {
     // 获取高级查询&表头
