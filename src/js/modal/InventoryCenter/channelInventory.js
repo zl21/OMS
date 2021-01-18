@@ -54,8 +54,8 @@ export default {
         return false;
       }
       let url = '/p/cs/storage/manualCalcAndSynchChannelProduct';
-      if (!this.allFormData.CP_C_SHOP_ID && !this.allFormData.SKU_ID && !this.allFormData.PS_C_SKU_ECODE && !this.allFormData.NUMIID && !this.allFormData.PS_C_PRO_ECODE) {
-        this.$Message.warning('查询条件【平台店铺、平台条码ID、平台商品ID、条码编码、商品编码】至少选择一个！');
+      if (!this.allFormData.CP_C_SHOP_ID && !this.allFormData.SKU_ID && !this.allFormData.PS_C_SKU_ECODE && !this.allFormData.NUMIID && !this.allFormData.PS_C_PRO_ECODE && !(this.allFormData.STATUS && this.allFormData.STATUS.length) && !(this.allFormData.SYNC_STATUS && this.allFormData.SYNC_STATUS.length) && !this.allFormData.SYNC_FAILED_REASON) {
+        this.$Message.warning('查询条件【平台店铺、平台条码ID、平台商品ID、条码编码、商品编码、商品状态、同步状态、同步失败原因】至少选择一个！');
         return;
       }
       // 库存按查询条件同步
@@ -71,6 +71,9 @@ export default {
         param.psCProEcode = this.allFormData.PS_C_PRO_ECODE;// 商品编码(条码编码)
         param.numiid = this.allFormData.NUMIID;// 平台商品id
         param.cpCPlatformIdList = [];
+        param.statusList = this.allFormData.STATUS; // 商品状态
+        param.syncStatusList = this.allFormData.SYNC_STATUS; // 同步状态
+        param.syncFailedReason = this.allFormData.SYNC_FAILED_REASON; // 同步失败原因
         if (this.allFormData.CP_C_PLATFORM_ID) { // 平台类型
           this.allFormData.CP_C_PLATFORM_ID.forEach((item) => {
             const obj = item.toString();
