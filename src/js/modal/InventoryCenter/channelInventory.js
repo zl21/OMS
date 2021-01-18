@@ -73,7 +73,7 @@ export default {
         param.cpCPlatformIdList = [];
         param.statusList = this.allFormData.STATUS; // 商品状态
         param.syncStatusList = this.allFormData.SYNC_STATUS; // 同步状态
-        param.syncFailedReason = this.allFormData.SYNC_FAILED_REASON; // 同步失败原因
+        param.syncFailedReason = [this.allFormData.SYNC_FAILED_REASON]; // 同步失败原因 PS:后端存在多条失败原因,故改为数组格式
         if (this.allFormData.CP_C_PLATFORM_ID) { // 平台类型
           this.allFormData.CP_C_PLATFORM_ID.forEach((item) => {
             const obj = item.toString();
