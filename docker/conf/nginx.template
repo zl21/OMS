@@ -6,6 +6,25 @@ server {
     root /opt/tengine/www/dist;
     #index /opt/tengine/www/dist/index.html;
 
+
+	#开启和关闭gzip模式
+	gzip on;
+	
+	#gizp压缩起点，文件大于1k才进行压缩
+	gzip_min_length 1k;
+	
+	# gzip 压缩级别，1-9，数字越大压缩的越好，也越占用CPU时间
+	gzip_comp_level 6;
+	
+	# 进行压缩的文件类型。
+	gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/xml text/javascript application/json image/png image/gif image/jpeg;
+	
+	#nginx对于静态文件的处理模块，开启后会寻找以.gz结尾的文件，直接返回，不会占用cpu进行压缩，如果找不到则不进行压缩
+	gzip_static on;
+
+    add_header X-Frame-Options DENY;
+    #add_header Strict-Transport-Security "max-age=31536000; includeSubDomains";	
+
     location ~ .*_BRAND_PIC\.(gif|jpg|jpeg|png)$ {
       expires 0d;
       root /opt/tengine/www/brandpic;
