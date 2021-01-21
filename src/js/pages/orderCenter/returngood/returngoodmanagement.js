@@ -2890,7 +2890,7 @@ export default {
     saveData() {
       const _this = this;
       // 传WMS成功的单据不允许修改
-      if (_this.isTowwms == 2) {
+      if (_this.isTowwms == 2 && _this.$route.query.flag !== 'RefundToExchange') {
         // 传WMS成功状态的单据不可修改！
         this.$Message.warning(this.vmI18n.t('modalTips.n7'));
         return;
