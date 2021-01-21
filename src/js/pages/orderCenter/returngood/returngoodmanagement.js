@@ -1467,7 +1467,6 @@ export default {
       this.information.formData[4].disabled = true;
       this.information.formData[5].itemdata.readonly = true;
       this.information.formData[10].disabled = this.$route.query.flag !== 'RefundToExchange';// 如果为退货转换货过来的,单据类型可编辑
-
       this.information.formData.forEach(item => {
         if (item.value == 'SELLER_MEMO') {
           if (this.$route.query.statusName == '待退货入库' || this.$route.query.statusName == '等待售后确认') {
@@ -1479,7 +1478,7 @@ export default {
         {
           style: 'input',
           label: this.vmI18n.t('form_label.exchangePlatform_no'), // 换货平台单号
-          disabled: true,
+          disabled: this.$route.query.flag !== 'RefundToExchange',
           dataAcessKey: 'TB_DISPUTE_ID',
           value: 'TB_DISPUTE_ID',
           width: '6'
