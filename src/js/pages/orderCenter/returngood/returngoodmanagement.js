@@ -1466,7 +1466,7 @@ export default {
       this.information.formData[3].disabled = true;
       this.information.formData[4].disabled = true;
       this.information.formData[5].itemdata.readonly = true;
-      this.information.formData[10].disabled = this.$route.query.flag !== 'RefundToExchange';// 如果为退货转换货过来的,单据类型可编辑
+      this.information.formData[10].disabled = this.$route.query.flag !== 'RefundToExchange';// 如果为退货转换货过来的,换货平台单号可编辑
       this.information.formData.forEach(item => {
         if (item.value == 'SELLER_MEMO') {
           if (this.$route.query.statusName == '待退货入库' || this.$route.query.statusName == '等待售后确认') {
@@ -1572,7 +1572,7 @@ export default {
             }, 10);
           }
           _this.status = res.data.data.returnOrders.RETURN_STATUS;
-          // 设置水印
+          // // 设置水印
           _this.statusName = _this.waterMarkMap[_this.status] ? _this.waterMarkMap[_this.status] : 'Watermark to be added';
           _this.defectiveList = res.data.data.orderDefects;
           const tempRefundDtoList = res.data.data.refundDtoList;
@@ -1601,14 +1601,14 @@ export default {
           _this.amountReturned = _this.calculateMoney(res.data.data.refundDtoList, 1).toFixed(2); // 商品退回合计
           _this.exchangeAmount = _this.calculateMoney(res.data.data.exchangeDtoList, 2).toFixed(2); // 换货金额合计
           _this.returnTotal();
-          // 是否原退
+          // // 是否原退
           _this.isTowwms = res.data.data.returnOrders.IS_TOWMS;
           if (res.data.data.returnOrders.RETURN_STATUS == 20 && (res.data.data.returnOrders.IS_TOWMS == 0 || res.data.data.returnOrders.IS_TOWMS == 2)) {
             _this.information.formData[12].disabled = false;
           } else {
             _this.information.formData[12].disabled = true;
           }
-          if ((res.data.data.returnOrders.RETURN_STATUS == 20 && res.data.data.returnOrders.IS_TOWMS == 2) || res.data.data.returnOrders.IS_TOWMS == 2) {
+          if (this.$route.query.flag !== 'RefundToExchange' && ((res.data.data.returnOrders.RETURN_STATUS == 20 && res.data.data.returnOrders.IS_TOWMS == 2) || res.data.data.returnOrders.IS_TOWMS == 2)) {
             _this.information.formData.forEach(item => {
               if (item.style == 'input' || item.style == 'checkbox' || item.style == 'select') {
                 item.disabled = true;
