@@ -1057,7 +1057,7 @@ export default {
               self.isShowSeniorOrOrdinary = true;
               self.publicBouncedConfig = {
                 ...publicDialogConfig.dropSortConfig
-              }; 
+              };
               self.publicBouncedConfig.componentData = {
                 typeName: 'OC_B_ORDER'
               };
@@ -1453,13 +1453,23 @@ export default {
           if (self.selection.length > 0) {
             // self.btnConfig.loading = true;
             const ids = [];
+            let noSplit = false;
             this.pageLoad = true;
             self.selection.forEach((item, index) => {
               ids[index] = item.ID;
               if (item.PLATFORM === 50) {
-                isAddGit = false;
+                noSplit = true;
               }
             });
+            if (noSplit) {
+              self.$Message.warning({
+                content: 'JITX的订单不允许拆分！',
+                duration: 5,
+                top: 80
+              });
+              this.pageLoad = false;
+              return;
+            }
             this.service.orderCenter.splitOrder({ ids }).then(res => {
               this.pageLoad = false;
               if (res.data.code == 0) {
@@ -2102,7 +2112,7 @@ export default {
                     //   });
                   },
                   // 集合搜索的下拉多选组件清空后,去除上次选中的数据
-                  'on-clear': (e) => {
+                  'on-clear': e => {
                     console.log('on-clear:', e);
                     e.modelValue = [];
                     this.$refs.integrateSearchFilter.dropDownSelectFilterSelectedValue = [];
@@ -2112,7 +2122,7 @@ export default {
                         item.value = '';
                       }
                     });
-                  },
+                  }
                 }
               };
             } else {
@@ -2353,7 +2363,8 @@ export default {
       // 取的标签值
       let label = [];
       const queryInfo = [];
-      if (this.isShowSeniorOrOrdinary) { // 只有高级搜索时queryInfo条件才有效
+      if (this.isShowSeniorOrOrdinary) {
+        // 只有高级搜索时queryInfo条件才有效
         this.selectValue.forEach((item, index) => {
           if (item.column === 'tag') {
             label = item.selectedList;
@@ -2625,44 +2636,42 @@ export default {
       fromdata.append('filetype', ' .xlsx');
       fromdata.append('showColumnName', true);
       fromdata.append('menu', '批量退单');
-      self.service.orderCenter
-        .doBatchReturnOrder(fromdata)
-        .then(res => {
-          self.batchReturnFormConfig.formValue.IS_BACK = false;
-          if (res.data.code === 0) {
-            self.$Message.success(res.data.message);
-            R3.store.commit('global/tabOpen', {
-              type: 'V',
-              tableName: 'CP_C_TASK',
-              label: self.vmI18n.t('other.myMission'),
-              tableId: 24386,
+      self.service.orderCenter.doBatchReturnOrder(fromdata).then(res => {
+        self.batchReturnFormConfig.formValue.IS_BACK = false;
+        if (res.data.code === 0) {
+          self.$Message.success(res.data.message);
+          R3.store.commit('global/tabOpen', {
+            type: 'V',
+            tableName: 'CP_C_TASK',
+            label: self.vmI18n.t('other.myMission'),
+            tableId: 24386,
+            id: res.data.data,
+            query: {
               id: res.data.data,
-              query: {
-                id: res.data.data,
-                pid: '10010',
-                ptitle: self.vmI18n.t('other.myMission'),
-                ptype: 'table',
-                tabTitle: self.vmI18n.t('other.myMission'),
-                tableName: 'CP_C_TASK'
+              pid: '10010',
+              ptitle: self.vmI18n.t('other.myMission'),
+              ptype: 'table',
+              tabTitle: self.vmI18n.t('other.myMission'),
+              tableName: 'CP_C_TASK'
+            }
+          });
+        } else {
+          self.$Modal.error({
+            title: self.vmI18n.t('modalTitle.tips'), // 提示
+            content: res.data.message,
+            cancelType: true,
+            titleAlign: 'left',
+            mask: true,
+            draggable: true,
+            keyDown: event => {
+              if (event.keyCode === 27 || event.keyCode === 13) {
+                self.$Modal.remove();
               }
-            });
-          } else {
-            self.$Modal.error({
-              title: self.vmI18n.t('modalTitle.tips'), // 提示
-              content: res.data.message,
-              cancelType: true,
-              titleAlign: 'left',
-              mask: true,
-              draggable: true,
-              keyDown: event => {
-                if (event.keyCode === 27 || event.keyCode === 13) {
-                  self.$Modal.remove();
-                }
-              }
-            });
-          }
-          self.btnConfig.loading = false;
-        });
+            }
+          });
+        }
+        self.btnConfig.loading = false;
+      });
     },
     //  获取页面数据
     async getData1() {
@@ -2856,19 +2865,17 @@ export default {
       };
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
-      _this.service.orderCenter
-        .exportOcBOrder(fromdata)
-        .then(res => {
-          this.isExport = false;
-          if (res.data.code == 0 && res.data.data !== null) {
-            const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
-            _this.$Message.success(mes);
-            publicMethodsUtil.downloadUrlFile(res.data.data);
-          } else {
-            const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
-            _this.$Message.error(err);
-          }
-        });
+      _this.service.orderCenter.exportOcBOrder(fromdata).then(res => {
+        this.isExport = false;
+        if (res.data.code == 0 && res.data.data !== null) {
+          const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
+          _this.$Message.success(mes);
+          publicMethodsUtil.downloadUrlFile(res.data.data);
+        } else {
+          const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
+          _this.$Message.error(err);
+        }
+      });
     },
     // 数组对象根据子元素某各个key合并分组
     sonList(arr, key) {
@@ -2878,8 +2885,8 @@ export default {
       });
       return obj;
     }
-  },
+  }
   // destroyed() {
-    
+
   // }
 };
