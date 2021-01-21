@@ -1057,7 +1057,7 @@ export default {
               self.isShowSeniorOrOrdinary = true;
               self.publicBouncedConfig = {
                 ...publicDialogConfig.dropSortConfig
-              }; 
+              };
               self.publicBouncedConfig.componentData = {
                 typeName: 'OC_B_ORDER'
               };
@@ -2819,10 +2819,34 @@ export default {
         return;
       }
       this.isExport = true;
-      const ids = list.map(item => item.ID);
       const fromdata = new FormData();
-      const idList = { idList: ids };
-      fromdata.append('param', JSON.stringify(idList));
+      this.selection = this.$refs.agGridChild.AGTABLE.getSelect();
+      if (this.selection.length) {
+        const ids = list.map(item => item.ID);
+        const idList = { idList: ids };
+        fromdata.append('param', JSON.stringify(idList));
+      } else {
+        const param = {
+          page: {
+            pageSize: 999999,
+            pageNum: 1
+          },
+          label: this.labelData, // 标签
+          queryInfo: this.queryInfoData, // 普通搜索
+          status: this.statusData,
+          highSearch: this.highSearchData,
+          sort: this.sort
+        };
+        // 零售发货单列表tab 区分审核失败/多次缺货类型订单查询
+        if (this.statusData.label == '审核失败') {
+          param.status = { label: '待审核', value: '1', isShow: true };
+          param.lackstockOrAudit = this.statusData.value;
+        } else if (this.statusData.label == '多次缺货') {
+          param.lackstockOrAudit = this.statusData.value;
+          param.status = { label: '缺货', value: '2', isShow: true };
+        }
+        fromdata.append('param', JSON.stringify(param));
+      }
       this.service.orderCenter.exportOcBOrder(fromdata).then(res => {
         this.isExport = false;
         if (res.data.code == 0 && res.data.data !== null) {
@@ -2880,6 +2904,6 @@ export default {
     }
   },
   // destroyed() {
-    
+
   // }
 };
