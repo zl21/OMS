@@ -6,6 +6,7 @@ import businessModal from 'professionalComponents/businessDialog';
 import comUtils from '@/assets/js/__utils__/common';
 import loading from '@/component/loading.vue';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
+
 export default {
   components: {
     businessButton,
@@ -193,12 +194,12 @@ export default {
     async save() {
       const _this = this;
       if (_this.information.formData[0].itemdata.pid === undefined || !_this.information.formData[0].itemdata.pid) {
-        _this.$message('物流公司必填');
+        _this.$Message.warning('物流公司必填');
         return;
       }
       // if (_this.tableSize > 1000) return _this.$Message.error('数量过大，请使用导入功能设置是否到达');
       if (_this.tableSize > 1000) {
-        _this.$message.error(this.vmI18n.t('modalTips.y3'));
+        _this.$Message.error(this.vmI18n.t('modalTips.y3'));
         return;
       }
       _this.dataArr.forEach(item => {
@@ -232,7 +233,7 @@ export default {
       _this.isSaveLoading = false;
       _this.dataArr = [];
       if (code === 0) {
-        _this.$message.success(message);
+        _this.$Message.success(message);
         _this.getTree('', data.objid);
         this.$store.commit('customize/TabHref', {
           id: data.objid, // 单据id
@@ -247,7 +248,7 @@ export default {
         this.synchronous();
       } else {
         const err = message || _this.vmI18n.t('modalTips.y0'); // '保存失败';
-        _this.$message.error(err);
+        _this.$Message.error(err);
         this.synchronous();
       }
     },
@@ -268,10 +269,10 @@ export default {
       if (code === 0) {
         const ess = message || _this.vmI18n.t('modalTips.y4'); // 作废成功
         _this.getTree('', _this._objid);
-        _this.$message.success(ess);
+        _this.$Message.success(ess);
       } else {
         const err = message || _this.vmI18n.t('modalTips.y5'); // 作废失败
-        _this.$message.error(err);
+        _this.$Message.error(err);
       }
     },
     // 获取树
@@ -400,7 +401,7 @@ export default {
           }
         });
       } else {
-        // _this.$message.error(message || _this.vmI18n.t('modalTips.z3')); // 失败
+        // _this.$Message.error(message || _this.vmI18n.t('modalTips.z3')); // 失败
       }
     },
     // 同步table数据
@@ -505,11 +506,11 @@ export default {
       console.log(code, message, data);
       if (code === 0) {
         const ess = message || _this.vmI18n.t('modalTips.z2'); // 导出成功
-        _this.$message.success(ess);
+        _this.$Message.success(ess);
         publicMethodsUtil.downloadUrlFile(data);
       } else {
         // const err = message || _this.vmI18n.t('modalTips.y6'); // 导出失败
-        // _this.$message.success(err);
+        // _this.$Message.success(err);
         publicMethodsUtil.downloadUrlFile(data);
       }
     },
