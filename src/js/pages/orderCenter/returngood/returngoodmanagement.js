@@ -1562,7 +1562,8 @@ export default {
 }).then(async res => {
         if (res.data.code === 0) {
           _this.jordanTableConfig.loading = false;
-          _this.information.formValue.BILL_TYPE = String(res.data.data.returnOrders.BILL_TYPE);
+          _this.information.formValue.BILL_TYPE = _this.$route.query.flag == 'RefundToExchange' ? '2' : String(res.data.data.returnOrders.BILL_TYPE); // 如果退货单通过列表按钮(退货转换过过来的,则单据类型默认为退换货)
+          res.data.data.returnOrders.BILL_TYPE = Number(_this.information.formValue.BILL_TYPE);
           _this.selectSelectt();
           if (_this.information.formValue.BILL_TYPE == '2' && !res.data.data.returnOrders.IS_RESERVED) {
             // _this.information.formData[11].style = 'select';
