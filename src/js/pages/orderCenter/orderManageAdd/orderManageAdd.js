@@ -268,7 +268,7 @@ export default {
               // 如果是丢单复制或者复制订单的保存，传被复制订单的id
               // 如果为丢单复制,则新增一个标识
               const copyTitle = {
-                'Drop-out copy': '1', oriInvalidCopy: '2', OrderWrongCopy: '3', OrderMissSendCopy: '4', OrderGiftsOutCopy: '5'
+                'Drop-out copy': '1', oriInvalidCopy: '2', OrderWrongCopy: '3', OrderMissSendCopy: '4', OrderGiftsOutCopy: '5', 'Warehouse-Copy': '6', 'Other-Copy': '7'
               };
               if (copyID.orderCopy) {
                 data.type = copyTitle[this.$route.query.pageTitle];

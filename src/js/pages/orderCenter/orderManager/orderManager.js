@@ -287,6 +287,12 @@ export default {
             webname: 'Drop-out copy' // 丢单复制
           },
           {
+            webname: 'Warehouse-Copy' // 仓库丢件
+          },
+          {
+            webname: 'Other-Copy' // 其他
+          },
+          {
             webname: 'holdOrder' // 批量Hold单
           },
           {
@@ -1158,6 +1164,16 @@ export default {
         }
         case 'Drop-out copy': {
           // 丢单复制
+          this.copyRouteChange(val);
+          break;
+        }
+        case 'Warehouse-Copy': {
+          // 仓库丢件
+          this.copyRouteChange(val);
+          break;
+        }
+        case 'Other-Copy': {
+          // 其他
           this.copyRouteChange(val);
           break;
         }
