@@ -2289,45 +2289,45 @@ export default {
             dataAcessKey: 'AMT_SETTLE_TOT',
             title: _this.vmI18n.t('table_label.settlementAmount') // 结算金额
           },
-          {
-            key: 'PRODUCT_MARK',
-            title: _this.vmI18n.t('form_label.goodsMark'), // 商品标记
-            dataAcessKey: 'PRODUCT_MARK',
-            render: (h, params) => {
-              const list = [
-                {
-                  SPEC: '正品'
-                },
-                {
-                  SPEC: '次品'
-                }
-              ];
-              return h(
-                'Select',
-                {
-                  style: {
-                    width: '150px'
-                  },
-                  props: {
-                    value: params.row.PRODUCT_MARK, // 结算方式
-                    transfer: true
-                  },
-                  on: {
-                    'on-change': value => {
-                      console.log(params);
-                      _this.jordanTableConfig.data[params.index].PRODUCT_MARK = value;
-                    }
-                  }
-                },
-                list.map(item => h('Option', {
-                    props: {
-                      value: item.SPEC,
-                      label: item.SPEC
-                    }
-                  }))
-              );
-            }
-          }
+          // { // 2021-01-26 森马优化功能去掉该商品标记
+          //   key: 'PRODUCT_MARK',
+          //   title: _this.vmI18n.t('form_label.goodsMark'), // 商品标记
+          //   dataAcessKey: 'PRODUCT_MARK',
+          //   render: (h, params) => {
+          //     const list = [
+          //       {
+          //         SPEC: '正品'
+          //       },
+          //       {
+          //         SPEC: '次品'
+          //       }
+          //     ];
+          //     return h(
+          //       'Select',
+          //       {
+          //         style: {
+          //           width: '150px'
+          //         },
+          //         props: {
+          //           value: params.row.PRODUCT_MARK, // 结算方式
+          //           transfer: true
+          //         },
+          //         on: {
+          //           'on-change': value => {
+          //             console.log(params);
+          //             _this.jordanTableConfig.data[params.index].PRODUCT_MARK = value;
+          //           }
+          //         }
+          //       },
+          //       list.map(item => h('Option', {
+          //           props: {
+          //             value: item.SPEC,
+          //             label: item.SPEC
+          //           }
+          //         }))
+          //     );
+          //   }
+          // }
         ]; // 表头
         this.getDataAccess('OC_B_RETURN_ORDER', res => {
           this.jordanTableConfig.columns = this.setTablePermissions(this.jordanTableConfig.columns, res);
@@ -3578,27 +3578,48 @@ export default {
     },
     // 退货删除明细
     returnDeleteDetail() {
+      // const _this = this;
+      // if (_this.returnSelectData.length == 0 || _this.returnSelectData.length == null) {
+      //   _this.$Message.error(_this.vmI18n.t('modalTips.aw')); // 请选择一条需要删除的明细!
+      // } else if (_this.returnSelectData.length > 1) {
+      //   _this.$Message.error(_this.vmI18n.t('modalTips.ax')); // 不允许批量删除明细!
+      // } else {
+      //   const item = _this.jordanTableConfig.data;
+      //   for (let i = 0; i < item.length; i++) {
+      //     if (item[i].PS_C_SKU_ECODE === _this.returnSelectData[0].PS_C_SKU_ECODE && _this.returnSelectData[0].PS_C_SKU_ECODE !== undefined) {
+      //       _this.jordanTableConfig.data.splice(i, 1);
+      //       // 新增明细列表填充
+      //       _this.addSelection = this.addSelection.concat(_this.returnSelectData);
+      //       _this.returnDetailAddTable.table.data = this.addSelection;
+      //       _this.returnSelectData = [];
+      //       _this.refundDtoList.data = _this.jordanTableConfig.data;
+      //       _this.amountReturned = _this.calculateMoney(_this.refundDtoList.data, 1).toFixed(2);
+      //       _this.returnTotal();
+      //       _this.$Message.success(_this.vmI18n.t('modalTips.ay')); // 删除成功
+      //       return;
+      //     }
+      //   }
+      // }
+      // 2021-01-26:森马优化,允许批量删除明细
       const _this = this;
       if (_this.returnSelectData.length == 0 || _this.returnSelectData.length == null) {
         _this.$Message.error(_this.vmI18n.t('modalTips.aw')); // 请选择一条需要删除的明细!
-      } else if (_this.returnSelectData.length > 1) {
-        _this.$Message.error(_this.vmI18n.t('modalTips.ax')); // 不允许批量删除明细!
       } else {
         const item = _this.jordanTableConfig.data;
-        for (let i = 0; i < item.length; i++) {
-          if (item[i].PS_C_SKU_ECODE === _this.returnSelectData[0].PS_C_SKU_ECODE && _this.returnSelectData[0].PS_C_SKU_ECODE !== undefined) {
-            _this.jordanTableConfig.data.splice(i, 1);
-            // 新增明细列表填充
-            _this.addSelection = this.addSelection.concat(_this.returnSelectData);
-            _this.returnDetailAddTable.table.data = this.addSelection;
-            _this.returnSelectData = [];
-            _this.refundDtoList.data = _this.jordanTableConfig.data;
-            _this.amountReturned = _this.calculateMoney(_this.refundDtoList.data, 1).toFixed(2);
-            _this.returnTotal();
-            _this.$Message.success(_this.vmI18n.t('modalTips.ay')); // 删除成功
-            return;
-          }
-        }
+        const arr = item.filter(item=>{
+          const ecode = _this.returnSelectData.map(v => v.PS_C_SKU_ECODE);
+          return !ecode.includes(item.PS_C_SKU_ECODE);
+        });
+        console.log(arr);
+        _this.jordanTableConfig.data = arr;
+        // 新增明细列表填充
+        _this.addSelection = this.addSelection.concat(_this.returnSelectData);
+        _this.returnDetailAddTable.table.data = this.addSelection;
+        _this.returnSelectData = [];
+        _this.refundDtoList.data = _this.jordanTableConfig.data;
+        _this.amountReturned = _this.calculateMoney(_this.refundDtoList.data, 1).toFixed(2);
+        _this.returnTotal();
+        _this.$Message.success(_this.vmI18n.t('modalTips.ay')); // 删除成功
       }
     },
     // 换货删除明细
