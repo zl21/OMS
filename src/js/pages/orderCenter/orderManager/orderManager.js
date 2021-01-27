@@ -281,6 +281,48 @@ export default {
             } // 按钮点击事件
           },
           {
+            webname: 'shortageNotice', // 缺货回传
+            btnclick: ()=>{
+              const self = this;
+              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              console.log(self.selection);
+              if (self.selection.some(item=>item.ORDER_STATUS !== 2)) return self.$Message.warning('只有缺货状态订单允许缺货回传!');
+              const ids = self.selection.map(item=>item.ID);
+              if (self.selection.length > 0) {
+                self.btnConfig.loading = true;
+                self.service.orderCenter.shortageNotice({ ids }).then(res=>{
+                  console.log(res);
+                  if (res.data.code == 0) {
+                    self.$Message.success(res.data.message);
+                    self.getData();
+                    self.selection = [];
+                  } else {
+                    self.$Modal.error({
+                      title: self.vmI18n.t('modalTitle.tips'), // 提示
+                      content: res.data.message,
+                      cancelType: true,
+                      titleAlign: 'left',
+                      mask: true,
+                      draggable: true,
+                      keyDown: event => {
+                        if (event.keyCode == 27 || event.keyCode == 13) {
+                          self.$Modal.remove();
+                        }
+                      }
+                    });
+                  }
+                  self.btnConfig.loading = false;
+                });
+              } else {
+                self.$Message.warning({
+                  content: self.vmI18n.t('请选择需要缺货回传的明细!'), // 请选择需要缺货回传的明细!
+                  duration: 5,
+                  top: 80
+                });
+              }
+            }
+          },
+          {
             webname: 'Revising Logistics' // 批量修改物流
           },
           {

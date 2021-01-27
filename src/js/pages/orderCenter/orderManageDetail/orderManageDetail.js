@@ -214,6 +214,49 @@ export default {
             }
           },
           {
+            webname: 'shortageNotice', // 缺货回传
+            btnclick: ()=>{
+              const self = this;
+              if (self.orderStatus !== 2) return self.$Message.warning('只有缺货状态订单允许缺货回传!');
+              const ids = [];
+              ids[0] = this.$route.params.customizedModuleId;
+              this.$Modal.info({
+                title: self.vmI18n.t('modalTitle.tips'), // 提示
+                content: window.vmI18n.t('是否确定缺货回传订单!'), // 是否确定缺货回传订单!
+                mask: true,
+                showCancel: true,
+                okText: self.vmI18n.t('common.determine'), // 确定
+                cancelText: self.vmI18n.t('common.cancel'), // 取消
+                onOk: () => {
+                  self.service.orderCenter.shortageNotice({ ids })
+                    .then(res => {
+                      if (res.data.code === 0) {
+                        self.$Message.success(res.data.message);
+                        self.load();
+                      } else {
+                        self.$Modal.error({
+                          title: self.vmI18n.t('modalTitle.tips'), // 提示
+                          content: res.data.message,
+                          cancelType: true,
+                          titleAlign: 'left',
+                          mask: true,
+                          draggable: true,
+                          keyDown: event => {
+                            if (event.keyCode == 27 || event.keyCode == 13) {
+                              self.$Modal.remove();
+                            }
+                          }
+                        });
+                      }
+                    });
+                },
+                onCancel: ()=> {
+                  this.$emit('closeActionDialog', false);
+                }
+              });
+            }
+          },
+          {
             webname: 'holdOrder2', // Hold单
             btnclick: () => {
               const self = this;
