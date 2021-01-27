@@ -91,10 +91,13 @@ export default {
         console.log(res);
         if (res.data.code === 0) {
           const def = res.data.data.filter(item => item.SELECTED == 1)[0];
-          this.transportStyle.text = def.DELIVERY_METHOD_NAME;
+          if(def){
+            this.transportStyle.text = def.DELIVERY_METHOD_NAME;
           this.transportStyle.value = def.DELIVERY_METHOD;
           this.defaultSelected = [{ ID: def.ID, Label: def.ENAME }];
           this.selectData = this.defaultSelected;
+          }
+          
           this.btnConfig.buttons.push({
             type: '', // 按钮类型
             text: window.vmI18n.t('common.determine'), // 确定 按钮文本
