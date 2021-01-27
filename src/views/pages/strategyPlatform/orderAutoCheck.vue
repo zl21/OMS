@@ -39,7 +39,11 @@
                         <Checkbox v-model="IS_MERGE_ORDER" size="small" @on-change="setResult('IS_MERGE_ORDER')"> &nbsp; </Checkbox>
                       </FormItem>
                     </Col>
-
+                    <Col span="6">
+                      <FormItem label="零元订单自动审核：">
+                        <Checkbox v-model="IS_ZERO_AUTOCHECK" size="small" @on-change="setResult('IS_ZERO_AUTOCHECK')"> &nbsp; </Checkbox>
+                      </FormItem>
+                    </Col>
                     <Col span="6">
                       <FormItem label="全赠品订单开启自动审核：" class="width">
                         <Checkbox v-model="IS_FULL_GIFT_ORDER" size="small" @on-change="setResult('IS_FULL_GIFT_ORDER')"> &nbsp; </Checkbox>

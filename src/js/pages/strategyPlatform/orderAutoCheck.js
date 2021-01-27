@@ -66,6 +66,7 @@ export default {
       IS_AUTOCHECK_ORDER: false,
       IS_AUTOCHECK_PAY: false,
       IS_FULL_GIFT_ORDER: false,
+      IS_ZERO_AUTOCHECK: false,
       IS_MANUAL_ORDER: false,
       IS_MERGE_ORDER: false, // 是否可合并
       orderType: [''],
@@ -182,6 +183,7 @@ export default {
               this.IS_AUTOCHECK_ORDER = this.info.IS_AUTOCHECK_ORDER == 'Y';
               this.IS_AUTOCHECK_PAY = this.info.IS_AUTOCHECK_PAY == 'Y';
               this.IS_FULL_GIFT_ORDER = this.info.IS_FULL_GIFT_ORDER == 'Y';
+              this.IS_ZERO_AUTOCHECK = this.info.IS_ZERO_AUTOCHECK == 'Y';
               this.IS_MANUAL_ORDER = this.info.IS_MANUAL_ORDER == 'Y';
               this.IS_MERGE_ORDER = this.info.IS_MERGE_ORDER == 'Y';
               this.orderType = this.info.ORDER_TYPE ? this.info.ORDER_TYPE.split(',') : [];
@@ -292,6 +294,8 @@ export default {
         this.result.IS_AUTOCHECK_PAY = this.IS_AUTOCHECK_PAY ? 'Y' : 'N';
       } else if (type == 'IS_FULL_GIFT_ORDER') {
         this.result.IS_FULL_GIFT_ORDER = this.IS_FULL_GIFT_ORDER ? 'Y' : 'N';
+      } else if (type == 'IS_ZERO_AUTOCHECK') {
+        this.result.IS_ZERO_AUTOCHECK = this.IS_ZERO_AUTOCHECK ? 'Y' : 'N'
       } else if (type == 'IS_MANUAL_ORDER') {
         this.result.IS_MANUAL_ORDER = this.IS_MANUAL_ORDER ? 'Y' : 'N';
       } else if (type == 'IS_MERGE_ORDER') {
