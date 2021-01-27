@@ -215,7 +215,7 @@ export default {
           },
           {
             webname: 'shortageNotice', // 缺货回传
-            btnclick: ()=>{
+            btnclick: () => {
               const self = this;
               if (self.orderStatus !== 2) return self.$Message.warning('只有缺货状态订单允许缺货回传!');
               const ids = [];
@@ -728,7 +728,13 @@ export default {
           },
           {
             webname: 'oriInvalidCopy', // 原单无效复制
-          }
+          },
+          {
+            webname: 'Warehouse-Copy' // 仓库丢件
+          },
+          {
+            webname: 'Other-Copy' // 其他
+          },
         ]
       },
       enumerationList: {}
@@ -764,6 +770,14 @@ export default {
           break;
         }
         case 'oriInvalidCopy': {
+          this.copyRouteChange(val);
+          break;
+        }
+        case 'Warehouse-Copy': {
+          this.copyRouteChange(val);
+          break;
+        }
+        case 'Other-Copy': {
           this.copyRouteChange(val);
           break;
         }
