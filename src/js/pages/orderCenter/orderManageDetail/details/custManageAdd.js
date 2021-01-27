@@ -503,15 +503,15 @@ export default {
             )
           ])
         },
-        // 性别
+
         {
-          title: '商品重量(KG)',
-          key: 'STANDARD_WEIGHT',
+          key: 'REFUND_STATUS_EXT',
+          title: '取消状态',
+          dataAcessKey: 'REFUND_STATUS',
         },
         {
-          title: '性别',
-          key: 'SEX_NAME',
-          dataAcessKey: 'SEX'
+          key: 'PT_RETURN_STATUS_EXT',
+          title: '平台退款状态',
         },
         {
           key: 'QTY',
@@ -528,6 +528,10 @@ export default {
           key: 'STOCK',
           title: '可用库存',
           dataAcessKey: 'STOCK'
+        },
+        {
+          key: 'QTY_RETURN_APPLY',
+          title: '已申请退货数量',
         },
         // {
         //   key: "IS_LACKSTOCK",
@@ -591,47 +595,6 @@ export default {
         //   }
         // },
         {
-          key: 'IS_GIFT',
-          title: '是否赠品',
-          dataAcessKey: 'IS_GIFT',
-          render: (h, params) => {
-            const IS_GIFT = params.row.IS_GIFT === 1 ? '是' : '否';
-            return h('span', {}, IS_GIFT);
-          }
-        },
-        {
-          key: 'GIFT_RELATION',
-          title: '赠品挂靠关系',
-          dataAcessKey: 'GIFT_RELATION',
-        },
-        {
-          key: 'GIFT_TYPE',
-          title: '赠品类型',
-          dataAcessKey: 'GIFT_TYPE',
-          render: (h, params) => {
-            const self = this;
-            const list = self.giftTypeArr;
-            return h(
-              'Select',
-              {
-                attrs: {
-                  disabled: true,
-                  placeholder: ''
-                },
-                style: {
-                  width: '100px'
-                },
-                props: {
-                  value: params.row.GIFT_TYPE
-                }
-              },
-              list.map(item => h('Option', {
-                props: item
-              }))
-            );
-          }
-        },
-        {
           key: 'PRICE_TAG',
           title: '吊牌价',
           dataAcessKey: 'PRICE_TAG',
@@ -694,15 +657,6 @@ export default {
           render: (h, params) => h('span', {}, params.row.ORDER_SPLIT_AMT)
         },
         {
-          key: 'REFUND_STATUS_EXT',
-          title: '取消状态',
-          dataAcessKey: 'REFUND_STATUS',
-        },
-        {
-          key: 'PT_RETURN_STATUS_EXT',
-          title: '平台退款状态',
-        },
-        {
           key: 'DISTRIBUTION_PRICE',
           title: '分销金额',
           dataAcessKey: 'DISTRIBUTION_PRICE',
@@ -763,7 +717,57 @@ export default {
           key: 'OOID',
           title: '子订单编号',
           dataAcessKey: 'OOID'
-        }
+        },
+        {
+          title: '商品重量(KG)',
+          key: 'STANDARD_WEIGHT',
+        },
+        {
+          title: '性别',
+          key: 'SEX_NAME',
+          dataAcessKey: 'SEX'
+        },
+        {
+          key: 'IS_GIFT',
+          title: '是否赠品',
+          dataAcessKey: 'IS_GIFT',
+          render: (h, params) => {
+            const IS_GIFT = params.row.IS_GIFT === 1 ? '是' : '否';
+            return h('span', {}, IS_GIFT);
+          }
+        },
+        {
+          key: 'GIFT_RELATION',
+          title: '赠品挂靠关系',
+          dataAcessKey: 'GIFT_RELATION',
+        },
+        {
+          key: 'GIFT_TYPE',
+          title: '赠品类型',
+          dataAcessKey: 'GIFT_TYPE',
+          render: (h, params) => {
+            const self = this;
+            const list = self.giftTypeArr;
+            return h(
+              'Select',
+              {
+                attrs: {
+                  disabled: true,
+                  placeholder: ''
+                },
+                style: {
+                  width: '100px'
+                },
+                props: {
+                  value: params.row.GIFT_TYPE
+                }
+              },
+              list.map(item => h('Option', {
+                props: item
+              }))
+            );
+          }
+        },
         // {
         //   key: "SKU_SPEC",
         //   title: "规格",

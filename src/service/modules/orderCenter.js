@@ -107,5 +107,6 @@ export default {
   pickOrderExport: params => network.post('/api/cs/vip/pick/v1/export', params),
   // 半定制弹框
   updateWarehouse: params => network.post('/api/cs/oc/oms/v1/updateWarehouse', params),
-  getQueryList: params => network.post('/api/cs/oc/oms/v1/getQueryList', params)
+  getQueryList: params => network.post('/api/cs/oc/oms/v1/getQueryList', params),
+  shortageNotice: params => network.post('/api/cs/oc/oms/v1/shortageNotice', params),
 };
