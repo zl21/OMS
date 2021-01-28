@@ -1856,7 +1856,9 @@ export default {
           value2: ''
         },
         PS_C_PRO_ECODE: '', // 商品款号
-        IS_EXCHANGE_NO_IN: ['0']
+        IS_EXCHANGE_NO_IN: ['0'],
+        RECEIVER_ADDRESS: '', // 收货地址
+        SYSREMARK: '', // 系统备注
       };
       const fromdata = new FormData();
       const params = {
