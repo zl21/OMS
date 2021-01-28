@@ -335,6 +335,7 @@ export default {
           REMARK: '', // 备注
           SELLER_MEMO: '', // 卖家备注
           BILL_NO: '', // 订单编号
+          ORIG_ORDER_NO: '', // 原始订单编号
           PLATFORM: '' // 平台
         },
         // 表单非空提示
@@ -683,6 +684,13 @@ export default {
             label: window.vmI18n.t('form_label.billNo'), // 单据编号,
             disabled: true,
             value: 'BILL_NO',
+            width: '6'
+          },
+          {
+            style: 'input',
+            label: window.vmI18n.t('原始单据编号'), // 单据编号,
+            disabled: true,
+            value: 'ORIG_ORDER_NO',
             width: '6'
           }
         ]
@@ -1229,6 +1237,7 @@ export default {
               _this.information.formData[14].itemdata.valuedata = item.CP_C_PHY_WAREHOUSE_ENAME;
               _this.information.formValue.CP_C_PHY_WAREHOUSE_ID = this.warehouseId;
               _this.information.formValue.BILL_NO = item.BILL_NO;
+              _this.information.formValue.ORIG_ORDER_NO = item.ORIG_ORDER_NO;
               _this.information.formValue.ORIG_ORDER_ID = item.ID; // 编号
               _this.information.formValue.PRO_RETURN_STATUS = item.PRO_RETURN_STATUS; // 退货状态
               _this.information.formValue.BUYER_NICK = item.USER_NICK;
@@ -1701,6 +1710,7 @@ export default {
       item.SELLER_MEMO = data.BACK_MESSAGE;
       item.BILL_TYPE = String(data.BILL_TYPE) ? String(data.BILL_TYPE) : '';
       item.BILL_NO = data.BILL_NO;
+      item.ORIG_ORDER_NO = data.ORIG_ORDER_NO;
       item.BUYER_NICK = data.BUYER_NICK ? data.BUYER_NICK : '';
       item.CP_C_LOGISTICS_ENAME = data.CP_C_LOGISTICS_ENAME ? data.CP_C_LOGISTICS_ENAME : '';
       item.ORIG_SOURCE_CODE = data.TID ? data.TID : '';
@@ -3860,6 +3870,7 @@ export default {
       }
       this.information.formValue.ORIG_ORDER_ID = this.onSelectData[0].ID; // 编号
       this.information.formValue.BILL_NO = this.onSelectData[0].BILL_NO; // 单据编号
+      this.information.formValue.ORIG_ORDER_NO = this.onSelectData[0].ORIG_ORDER_NO;
       this.information.formValue.BUYER_NICK = this.onSelectData[0].USER_NICK;
       this.information.formValue.ORIG_SOURCE_CODE = this.onSelectData[0].SOURCE_CODE;
       this.information.formValue.CP_C_SHOP_TITLE = this.onSelectData[0].CP_C_SHOP_TITLE;
