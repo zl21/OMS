@@ -306,6 +306,7 @@ export default {
               pid: ''
             },
             oneObj: val => {
+              if (!val.pid) return;
               this.formConfig.formValue.AC_F_COMPENSATION_TYPE_ID = val.pid;
               this.getTableAfterCalPayablePrice();
               console.log(val);
@@ -1099,7 +1100,7 @@ export default {
         return;
       }
       const fromdata = new FormData();
-      let param = {
+      const param = {
         highSearch: [
           {
             type: 'select',
