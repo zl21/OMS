@@ -346,7 +346,15 @@ export default {
               const _this = this;
               _this.setFavorite();
             } // 按钮点击事件
-          }
+          },
+          {
+            text: '重新生成订单', // 导出
+            webname: 'refund_to_order',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.regenerateTheOrder();
+            } // 按钮点击事件
+          },
         ]
       }, // 按钮数据
       formConfig: {
@@ -630,6 +638,51 @@ export default {
     this.getHeaderList();
   },
   methods: {
+    // 重新生成订单
+    regenerateTheOrder() {
+      const self = this;
+      const arr = self.$refs.agGridChild.AGTABLE.getSelect();
+      if (arr.length !== 1) {
+        self.$Message.warning('请选中一条单据进行生成!'); // 请选中一条单据进行生成!
+        return;
+      }
+      this.service.orderCenter.validateRefundChange({ objid: arr[0].ID }).then(res=>{
+        console.log(res);
+        if (res.data.code == 0) {
+          self.$store.commit('customize/TabHref', {
+                id: arr.ID, // 单据id
+                type: 'action', // 类型action
+                name: 'RETURNGOOD', // 文件名
+                label: '退换货订单详情', // tab中文名
+                query: Object.assign({
+                  id: arr.ID, // 单据id
+                  tabTitle: '退换货订单详情', // tab中文名
+                  statusName: arr[0].RETURN_STATUS_NAME, // 行的退单状态
+                  flag: 'validateRefundChange'
+                }) // 带的参数
+              });
+        } else {
+          self.$Message.error(res.data.message);
+        }
+      });
+      // if (true) {
+      //   self.$store.commit('customize/TabHref', {
+      //     id: 250406, // 单据id
+      //     type: 'action', // 类型action
+      //     name: 'RETURNGOOD', // 文件名
+      //     label: '退换货订单详情', // tab中文名
+      //     query: Object.assign({
+      //       id: 250406, // 单据id
+      //       tabTitle: '退换货订单详情', // tab中文名
+      //       statusName: arr[0].RETURN_STATUS_NAME, // 行的退单状态
+      //       flag: 'validateRefundChange'
+      //     }) // 带的参数
+      //   });
+      // } else {
+      //   // const err = res.data.message || '转换失败'; // 售后审核失败！
+      //   self.$Message.error('err');
+      // }
+    },
     // 获取高级查询&表头
     getHeaderList() {
       const _this = this;
