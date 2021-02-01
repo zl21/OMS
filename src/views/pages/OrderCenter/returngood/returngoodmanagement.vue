@@ -46,6 +46,7 @@
                     <input
                       v-model="returnPostage"
                       type="text"
+                      :disabled="disabled.shouldReturnPostage"
                       @input="returnTotal(returnPostage, 1)"
                     >
                   </li>
@@ -58,6 +59,7 @@
                     <input
                       v-model="otherAmount"
                       type="text"
+                      :disabled="disabled.otherAmount"
                       @input="returnTotal(otherAmount, 2)"
                     >
                   </li>
@@ -92,6 +94,7 @@
                     <input
                       v-model="settlementAmount"
                       type="text"
+                      :disabled="disabled.settlementAmountOfConsignmentSales"
                       @input="isSettlementAmount(settlementAmount)"
                     >
                   </li>

@@ -650,12 +650,12 @@ export default {
         console.log(res);
         if (res.data.code == 0) {
           self.$store.commit('customize/TabHref', {
-                id: arr.ID, // 单据id
+                id: arr[0].ID, // 单据id
                 type: 'action', // 类型action
                 name: 'RETURNGOOD', // 文件名
                 label: '退换货订单详情', // tab中文名
                 query: Object.assign({
-                  id: arr.ID, // 单据id
+                  id: arr[0].ID, // 单据id
                   tabTitle: '退换货订单详情', // tab中文名
                   statusName: arr[0].RETURN_STATUS_NAME, // 行的退单状态
                   flag: 'validateRefundChange'

@@ -46,6 +46,11 @@ export default {
         50: window.vmI18n.t('form_label.complete'), // '完成',
         60: window.vmI18n.t('common.cancelled') // '已取消',
       },
+      disabled: {
+        shouldReturnPostage: false,
+        otherAmount: false,
+        settlementAmountOfConsignmentSales: false
+      },
       // 可用库存不足弹窗提示
       availableStock: false,
       qtyRefundEditFlag: true,
@@ -1535,8 +1540,34 @@ export default {
     this.replacement.formData[6].inputList.push(this.fkcolumn.PROV);
     this.replacement.formData[6].itemdata = this.fkcolumn.CITY;
     this.replacement.formData[7].inputList.push(this.fkcolumn.CITY);
+    if (this.$route.query.flag == 'validateRefundChange') {
+      this.allDisabled();
+    }
   },
   methods: {
+    allDisabled() {
+      const self = this;
+      const baseInfo = self.information.formData;
+      const personInfo = self.replacement.formData;
+      const disableds = self.disabled;
+      baseInfo.forEach(item=>{
+        if (item.itemdata) {
+          item.itemdata.readonly = true;
+        } else {
+          item.disabled = true;
+        }
+      });
+      personInfo.forEach(item=>{
+        if (item.itemdata) {
+          item.itemdata.readonly = true;
+        } else {
+          item.disabled = true;
+        }
+      });
+      for (const key in disableds) {
+        disableds[key] = true;
+      }
+    },
     getQueryResionByName(data) {
       const _this = this;
       const queryData = _this.replacement.formData;
@@ -2901,13 +2932,13 @@ export default {
     saveData() {
       const _this = this;
       // 传WMS成功的单据不允许修改
-      if (_this.isTowwms == 2 && _this.$route.query.flag !== 'RefundToExchange') {
+      if (_this.isTowwms == 2 && _this.$route.query.flag !== 'RefundToExchange' && this.$route.query.flag !== 'validateRefundChange') {
         // 传WMS成功状态的单据不可修改！
         this.$Message.warning(this.vmI18n.t('modalTips.n7'));
         return;
       }
       // 只有等待退货入库和等待售后确认状态的可以修改
-      if (_this.$route.query.id !== '-1' && _this.$route.query.flag !== 'RefundToExchange') {
+      if (_this.$route.query.id !== '-1' && _this.$route.query.flag !== 'RefundToExchange' && this.$route.query.flag !== 'validateRefundChange') {
         if ((_this.status != 20 && _this.status != 30 && _this.status != 50) || (_this.status == 50 && _this.inventedStatus != 1)) {
           // "只有等待退货入库和等待售后确认状态的单据 或 完成状态且虚拟入库未入库状态的单据可修改!"
           this.$Message.warning(this.vmI18n.t('modalTips.n8'));
@@ -2918,7 +2949,7 @@ export default {
           return;
         }
       }
-      if (_this.$route.query.flag === 'RefundToExchange' && _this.status == 60) {
+      if (_this.$route.query.flag === 'RefundToExchange' && _this.status == 60 && this.$route.query.flag !== 'validateRefundChange') {
         this.$Message.warning('取消状态单据无法修改!');
       }
       if (!_this.information.formValue.ORIG_ORDER_ID) {
