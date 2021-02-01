@@ -71,7 +71,7 @@ export default {
                 promptMessage += window.vmI18n.t('form_label.billType'); // '单据类型'
               } else if (!masterForm.CP_C_SHOP_ID) {
                 promptMessage += window.vmI18n.t('other.shop');
-              } else if (!masterForm.SOURCE_OUTSOURCE_DATE) {
+              } else if (!masterForm.SOURCE_OUTSOURCE_DATE || masterForm.SOURCE_OUTSOURCE_DATE == 'NaN-aN-aN aN:aN:aN') {
                 promptMessage += window.vmI18n.t('form_label.out_date'); // '出库日期'
               }
               if (promptMessage) {
@@ -514,7 +514,8 @@ export default {
           PAY_TIME: '',
           CP_C_PHY_WAREHOUSE_ID: '',
           IMAGE: '',
-          PAYABLE_PRICE: ''
+          PAYABLE_PRICE: '',
+          SOURCE_OUTSOURCE_DATE: ''
         },
         ruleValidate: {
           BILL_TYPE: [{ required: true, message: ' ' }],
