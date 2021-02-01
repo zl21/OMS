@@ -3117,12 +3117,20 @@ export default {
         QTY_INSTORE: total,
         BACK_MESSAGE: _this.information.formValue.SELLER_MEMO
       };
+      let isRefund2Exchange; // 如果为退货转换货订单,保存需传isRefund2Exchange=1,如果为退货单 重新生成订单进来,保存需传isRefund2Exchange=2;
+      if (this.$route.query.flag === 'RefundToExchange') {
+        isRefund2Exchange = 1;
+      } else if (this.$route.query.flag === 'validateRefundChange') {
+        isRefund2Exchange = 2;
+      } else {
+        isRefund2Exchange = 0;
+      }
       const params = {
         objid: _this.$route.query.id,
         OcBreturnOrder: Object.assign(_this.information.formValue, _this.replacement.formValue, money), // 主表信息
         OcBreturnOrderExchange: Elist, // 换货明细
         OcBreturnOrderRefund: Rlist, // 退货明细
-        isRefund2Exchange: this.$route.query.flag === 'RefundToExchange' ? 1 : 0 // 如果未退货转换货订单,保存需传isRefund2Exchange
+        isRefund2Exchange 
       };
       // 复制订单标识
       if (_this.$route.query.cloneReturnGoodId) params.copytype = 1;

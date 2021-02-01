@@ -109,4 +109,5 @@ export default {
   updateWarehouse: params => network.post('/api/cs/oc/oms/v1/updateWarehouse', params),
   getQueryList: params => network.post('/api/cs/oc/oms/v1/getQueryList', params),
   shortageNotice: params => network.post('/api/cs/oc/oms/v1/shortageNotice', params),
+  validateRefundChange: params => network.post('/api/cs/oc/oms/v1/validateRefundChange', params), // 退换货单列表效验能否重新生成订单接口
 };
