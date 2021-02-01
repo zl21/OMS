@@ -400,6 +400,16 @@ export default {
             // title: "国标码",
             title: window.vmI18n.t('form_label.gBCode')
           },
+          {
+            key: 'PS_C_BRAND_ECODE',
+            dataAcessKey: 'PS_C_BRAND_ECODE',
+            title: '品牌编号'
+          },
+          {
+            key: 'PS_C_BRAND_ENAME',
+            dataAcessKey: 'PS_C_BRAND_ENAME',
+            title: '品牌名称'
+          },
           // {
           //   key: 'OC_B_RETURN_ORDER_ID',
           //   dataAcessKey: 'OC_B_RETURN_ORDER_ID',
