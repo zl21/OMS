@@ -10,6 +10,7 @@ import loading from '@/component/loading.vue';
 import aTable from 'professionalComponents/agGridTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import publicDialogConfig from 'professionalComponents/common/js/publicDialog';
+
 const getCurrentTime = (() => {
   const t = new Date();
   return t.Format('yyyy-MM-dd 23:59:59');
@@ -287,7 +288,7 @@ export default {
             const resDom = document.createElement('a');
             resDom.style['text-decoration'] = 'underline';
             resDom.innerHTML = param.data.SOURCE_CODE;
-            resDom.onclick = function() {
+            resDom.onclick = function () {
               console.log(self);
               const formdata = new FormData();
               formdata.append('param', JSON.stringify({ sourceCode: param.data.SOURCE_CODE }));
@@ -626,7 +627,7 @@ export default {
           }
         });
       } else {
-        if (self.tableConfig.data.length === 0) {
+        if (self.selection.length === 0) {
           self.$Message.error(window.vmI18n.t('modalTips.z4'));
           return;
         }
