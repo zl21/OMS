@@ -2997,7 +2997,7 @@ export default {
           this.$Message.info(this.vmI18n.t('modalTips.ah')); // 换货明细必须有行数据！
           return;
         }
-        if (_this.returnTotalAmount != 0) {
+        if (_this.returnTotalAmount != 0 && _this.$route.query.flag !== 'validateRefundChange') {
           this.$Message.info(this.vmI18n.t('modalTips.ai')); // 换货金额必须等于退货金额！
           return;
         }
@@ -3091,7 +3091,18 @@ export default {
         total += parseInt(item[i].QTY_REFUND); // 商品数量
       }
       const Elist = [];
-      const Eitem = _this.exchangeDtoList.data;
+      let Eitem = [];
+      // 退换货单重新生成订单逻辑->如果换货明细未勾选数据,不允许保存,且只能保存已勾选数据
+      if (_this.exchangeSelectData.length == 0) {
+        _this.$Message.warning('请勾选需要生成的订单明细!');
+        return;
+      }
+      if (_this.$route.query.flag == 'validateRefundChange') {
+         Eitem = _this.exchangeSelectData;
+      } else {
+         Eitem = _this.exchangeDtoList.data;
+      }
+      
       for (let i = 0; i < Eitem.length; i++) {
         if (!Eitem[i].QTY_EXCHANGE) {
           _this.$Message.error(_this.vmI18n.t('modalTips.ap')); // 换货明细换货数量不能为空
