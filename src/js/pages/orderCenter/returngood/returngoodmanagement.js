@@ -2681,7 +2681,7 @@ export default {
                         // _this.jordanTableConfig.data[params.index].QTY_EXCHANGE = e.target.value;
                         // _this.jordanTableConfig.data[params.index].AMT_REFUND = publicMethodsUtil.accMul(e.target.value, _this.jordanTableConfig.data[params.index].PRICE);
                         params.row.QTY_EXCHANGE = e.target.value;
-                        params.row.AMT_REFUND = publicMethodsUtil.accMul(e.target.value, params.row.AMT_REFUND);
+                        params.row.AMT_REFUND = publicMethodsUtil.accMul(e.target.value, params.row.PRICE);
                         _this.exchangeDtoList.data[params.index] = params.row;
                         _this.exchangeAmount = _this.calculateMoney(_this.exchangeDtoList.data, 2).toFixed(2);
                         _this.returnTotal();
