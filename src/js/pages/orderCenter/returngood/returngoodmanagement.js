@@ -2932,13 +2932,13 @@ export default {
     saveData() {
       const _this = this;
       // 传WMS成功的单据不允许修改
-      if (_this.isTowwms == 2 && _this.$route.query.flag !== 'RefundToExchange' && this.$route.query.flag !== 'validateRefundChange') {
+      if (_this.isTowwms == 2 && _this.$route.query.flag !== 'RefundToExchange') {
         // 传WMS成功状态的单据不可修改！
         this.$Message.warning(this.vmI18n.t('modalTips.n7'));
         return;
       }
       // 只有等待退货入库和等待售后确认状态的可以修改
-      if (_this.$route.query.id !== '-1' && _this.$route.query.flag !== 'RefundToExchange' && this.$route.query.flag !== 'validateRefundChange') {
+      if (_this.$route.query.id !== '-1' && _this.$route.query.flag !== 'RefundToExchange') {
         if ((_this.status != 20 && _this.status != 30 && _this.status != 50) || (_this.status == 50 && _this.inventedStatus != 1)) {
           // "只有等待退货入库和等待售后确认状态的单据 或 完成状态且虚拟入库未入库状态的单据可修改!"
           this.$Message.warning(this.vmI18n.t('modalTips.n8'));
@@ -2949,7 +2949,7 @@ export default {
           return;
         }
       }
-      if (_this.$route.query.flag === 'RefundToExchange' && _this.status == 60 && this.$route.query.flag !== 'validateRefundChange') {
+      if (_this.$route.query.flag === 'RefundToExchange' && _this.status == 60) {
         this.$Message.warning('取消状态单据无法修改!');
       }
       if (!_this.information.formValue.ORIG_ORDER_ID) {
