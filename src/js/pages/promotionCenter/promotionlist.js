@@ -61,7 +61,7 @@ const baseColumnDefs = [
   {
     headerName: '状态',
     // headerName: vmI18n.t("table_label.status"),
-    field: 'STATUS'
+    field: 'STATUS_NAME'
   },
   {
     headerName: '分组名称',
