@@ -3093,7 +3093,7 @@ export default {
       const Elist = [];
       let Eitem = [];
       // 退换货单重新生成订单逻辑->如果换货明细未勾选数据,不允许保存,且只能保存已勾选数据
-      if (_this.exchangeSelectData.length == 0) {
+      if (_this.exchangeSelectData.length == 0 && _this.$route.query.flag == 'validateRefundChange') {
         _this.$Message.warning('请勾选需要生成的订单明细!');
         return;
       }
