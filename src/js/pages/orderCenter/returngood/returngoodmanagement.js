@@ -3100,9 +3100,13 @@ export default {
       if (_this.$route.query.flag == 'validateRefundChange') {
         //  Eitem = _this.exchangeSelectData;
         const idArr = _this.exchangeSelectData.map(item => item.PS_C_SKU_ID);
-        Eitem = _this.exchangeDtoList.data.map(item => {
-          if (idArr.includes(item.PS_C_SKU_ID)) return item;
+        const arr = [];
+        _this.exchangeDtoList.data.forEach(item => {
+          if (idArr.includes(item.PS_C_SKU_ID)) {
+            arr.push(item);
+          }
         });
+        Eitem = arr;
       } else {
          Eitem = _this.exchangeDtoList.data;
       }
