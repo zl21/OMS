@@ -2938,7 +2938,7 @@ export default {
         return;
       }
       // 只有等待退货入库和等待售后确认状态的可以修改
-      if (_this.$route.query.id !== '-1' && _this.$route.query.flag !== 'RefundToExchange') {
+      if (_this.$route.query.id !== '-1' && _this.$route.query.flag !== 'RefundToExchange' && _this.$route.query.flag !== 'validateRefundChange') {
         if ((_this.status != 20 && _this.status != 30 && _this.status != 50) || (_this.status == 50 && _this.inventedStatus != 1)) {
           // "只有等待退货入库和等待售后确认状态的单据 或 完成状态且虚拟入库未入库状态的单据可修改!"
           this.$Message.warning(this.vmI18n.t('modalTips.n8'));
