@@ -3098,11 +3098,14 @@ export default {
         return;
       }
       if (_this.$route.query.flag == 'validateRefundChange') {
-         Eitem = _this.exchangeSelectData;
+        //  Eitem = _this.exchangeSelectData;
+        const idArr = _this.exchangeSelectData.map(item => item.PS_C_SKU_ID);
+        Eitem = _this.exchangeDtoList.data.map(item => {
+          if (idArr.includes(item.PS_C_SKU_ID)) return item;
+        });
       } else {
          Eitem = _this.exchangeDtoList.data;
       }
-      
       for (let i = 0; i < Eitem.length; i++) {
         if (!Eitem[i].QTY_EXCHANGE) {
           _this.$Message.error(_this.vmI18n.t('modalTips.ap')); // 换货明细换货数量不能为空
