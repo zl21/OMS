@@ -3674,8 +3674,8 @@ export default {
       } else {
         const item = _this.jordanTableConfig.data;
         const arr = item.filter(item=>{
-          const ecode = _this.returnSelectData.map(v => v.PS_C_SKU_ECODE);
-          return !ecode.includes(item.PS_C_SKU_ECODE);
+          const ecode = _this.returnSelectData.map(v => v.OC_B_ORDER_ITEM_ID);
+          return !ecode.includes(item.OC_B_ORDER_ITEM_ID);
         });
         console.log(arr);
         _this.jordanTableConfig.data = arr;
@@ -4032,10 +4032,10 @@ export default {
       if (type == 1 && val.length) {
         if (_this.jordanTableConfig.data.length) {
           val.forEach(item => {
-            const d = _this.jordanTableConfig.data.find(list => list.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE);
+            const d = _this.jordanTableConfig.data.find(list => list.OC_B_ORDER_ITEM_ID === item.OC_B_ORDER_ITEM_ID);
             if (d) {
               val.forEach(data => {
-                if (data.PS_C_SKU_ECODE === d.PS_C_SKU_ECODE) {
+                if (data.OC_B_ORDER_ITEM_ID === d.OC_B_ORDER_ITEM_ID) {
                   d.QTY_REFUND = parseInt(d.QTY_REFUND) + parseInt(data.QTY_REFUND);
                   d.QTY_EXCHANGE = parseInt(d.QTY_EXCHANGE) + parseInt(data.QTY_EXCHANGE);
                   d.QTY_CAN_REFUND = parseInt(d.QTY_CAN_REFUND) + parseInt(data.QTY_CAN_REFUND);
@@ -4061,10 +4061,10 @@ export default {
       } else {
         if (_this.jordanTableConfig2.data.length) {
           val.forEach(item => {
-            const d = _this.jordanTableConfig2.data.find(list => list.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE);
+            const d = _this.jordanTableConfig2.data.find(list => list.OC_B_ORDER_ITEM_ID === item.OC_B_ORDER_ITEM_ID);
             if (d) {
               val.forEach(data => {
-                if (data.PS_C_SKU_ECODE === d.PS_C_SKU_ECODE) {
+                if (data.OC_B_ORDER_ITEM_ID === d.OC_B_ORDER_ITEM_ID) {
                   d.QTY_EXCHANGE = parseInt(d.QTY_EXCHANGE) + parseInt(data.QTY_EXCHANGE);
 
                   d.AMT_REFUND = publicMethodsUtil.accMul(d.QTY_EXCHANGE, d.PRICE);
@@ -4204,13 +4204,13 @@ export default {
     returnDetailAddOnCancel(selection, row) {
       const selectArr = this.addReturnDetailSelectArr;
       for (let j = 0, len = selectArr.length; j < len; j++) {
-        if (selectArr[j] === row.PS_C_SKU_ECODE) {
+        if (selectArr[j] === row.OC_B_ORDER_ITEM_ID) {
           selectArr.splice(j, 1);
         }
       }
     },
     returnDetailAddOnSelect(selection, row) {
-      this.addReturnDetailSelectArr.push(row.PS_C_SKU_ECODE);
+      this.addReturnDetailSelectArr.push(row.OC_B_ORDER_ITEM_ID);
     },
     returnDetailAddOnSelectAllCancel() {
       this.addReturnDetailSelectArr = [];
@@ -4218,7 +4218,7 @@ export default {
     returnDetailAddOnSelectAll() {
       const self = this;
       self.returnDetailAddTable.table.data.forEach(item => {
-        this.addReturnDetailSelectArr.push(item.PS_C_SKU_ECODE);
+        this.addReturnDetailSelectArr.push(item.OC_B_ORDER_ITEM_ID);
       });
     }, // 全选选中事件
     detailAddCancel() {},
@@ -4229,7 +4229,7 @@ export default {
       // 确认后删除明细对应记录
       for (let i = tableArr.length - 1; i >= 0; i--) {
         for (let j = 0, len = selectArr.length; j < len; j++) {
-          if (selectArr[j] === tableArr[i].PS_C_SKU_ECODE) {
+          if (selectArr[j] === tableArr[i].OC_B_ORDER_ITEM_ID) {
             selection.push(tableArr[i]);
             tableArr.splice(i, 1);
             break;
