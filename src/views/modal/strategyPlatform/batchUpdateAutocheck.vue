@@ -21,22 +21,34 @@
                   <Row>
                     <Col span="6">
                       <FormItem label="启用自动审核：">
-                        <Checkbox v-model="IS_AUTOCHECK_ORDER" size="small" @on-change="setResult('IS_AUTOCHECK_ORDER')"> &nbsp; </Checkbox>
+                        <Select v-model="IS_AUTOCHECK_ORDER" @on-change="setResult('IS_AUTOCHECK_ORDER')">
+                            <Option value="Y">是</Option>
+                            <Option value="N">否</Option>
+                        </Select>
                       </FormItem>
                     </Col>
                     <Col span="6">
                       <FormItem label="检查可合并订单：">
-                        <Checkbox v-model="IS_MERGE_ORDER" size="small" @on-change="setResult('IS_MERGE_ORDER')"> &nbsp; </Checkbox>
+                        <Select v-model="IS_MERGE_ORDER" @on-change="setResult('IS_MERGE_ORDER')">
+                            <Option value="Y">是</Option>
+                            <Option value="N">否</Option>
+                        </Select>
                       </FormItem>
                     </Col>
                     <Col span="6">
                       <FormItem label="零元订单自动审核：">
-                        <Checkbox v-model="IS_ZERO_AUTOCHECK" size="small" @on-change="setResult('IS_ZERO_AUTOCHECK')"> &nbsp; </Checkbox>
+                        <Select v-model="IS_ZERO_AUTOCHECK" @on-change="setResult('IS_ZERO_AUTOCHECK')">
+                            <Option value="Y">是</Option>
+                            <Option value="N">否</Option>
+                        </Select>
                       </FormItem>
                     </Col>
                     <Col span="6">
                       <FormItem label="全赠品订单开启自动审核：" class="width">
-                        <Checkbox v-model="IS_FULL_GIFT_ORDER" size="small" @on-change="setResult('IS_FULL_GIFT_ORDER')"> &nbsp; </Checkbox>
+                        <Select v-model="IS_FULL_GIFT_ORDER" @on-change="setResult('IS_FULL_GIFT_ORDER')">
+                            <Option value="Y">是</Option>
+                            <Option value="N">否</Option>
+                        </Select>
                       </FormItem>
                     </Col>
 
@@ -68,7 +80,10 @@
                     </Col>
                     <Col span="6">
                       <FormItem label="自动审核货到付款：" class="width">
-                        <Checkbox v-model="IS_AUTOCHECK_PAY" size="small" @on-change="setResult('IS_AUTOCHECK_PAY')"> &nbsp; </Checkbox>
+                        <Select v-model="IS_AUTOCHECK_PAY" @on-change="setResult('IS_AUTOCHECK_PAY')">
+                            <Option value="Y">是</Option>
+                            <Option value="N">否</Option>
+                        </Select>
                       </FormItem>
                     </Col>
 

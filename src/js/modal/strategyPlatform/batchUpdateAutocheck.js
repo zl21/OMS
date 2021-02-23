@@ -49,12 +49,12 @@ export default {
       AutoData: [],
       dataEmptyMessage: '数据加载中...', // c
       columns: ['name', 'value'], // 展现的组
-      IS_AUTOCHECK_ORDER: false,
-      IS_AUTOCHECK_PAY: false,
-      IS_FULL_GIFT_ORDER: false,
-      IS_ZERO_AUTOCHECK: false,
+      IS_AUTOCHECK_ORDER: '',
+      IS_AUTOCHECK_PAY: '',
+      IS_FULL_GIFT_ORDER: '',
+      IS_ZERO_AUTOCHECK: '',
       IS_MANUAL_ORDER: false,
-      IS_MERGE_ORDER: false, // 是否可合并
+      IS_MERGE_ORDER: '', // 是否可合并
       orderType: [''],
       indeterminate: false,
       checkAll: false,
@@ -218,17 +218,17 @@ export default {
     },
     setResult(type, e) {
       if (type == 'IS_AUTOCHECK_ORDER') {
-        this.result.IS_AUTOCHECK_ORDER = this.IS_AUTOCHECK_ORDER ? 'Y' : 'N';
+        this.result.IS_AUTOCHECK_ORDER = this.IS_AUTOCHECK_ORDER;
       } else if (type == 'IS_AUTOCHECK_PAY') {
-        this.result.IS_AUTOCHECK_PAY = this.IS_AUTOCHECK_PAY ? 'Y' : 'N';
+        this.result.IS_AUTOCHECK_PAY = this.IS_AUTOCHECK_PAY;
       } else if (type == 'IS_FULL_GIFT_ORDER') {
-        this.result.IS_FULL_GIFT_ORDER = this.IS_FULL_GIFT_ORDER ? 'Y' : 'N';
+        this.result.IS_FULL_GIFT_ORDER = this.IS_FULL_GIFT_ORDER;
       } else if (type == 'IS_ZERO_AUTOCHECK') {
-        this.result.IS_ZERO_AUTOCHECK = this.IS_ZERO_AUTOCHECK ? 'Y' : 'N'
+        this.result.IS_ZERO_AUTOCHECK = this.IS_ZERO_AUTOCHECK;
       } else if (type == 'IS_MANUAL_ORDER') {
         this.result.IS_MANUAL_ORDER = this.IS_MANUAL_ORDER ? 'Y' : 'N';
       } else if (type == 'IS_MERGE_ORDER') {
-        this.result.IS_MERGE_ORDER = this.IS_MERGE_ORDER ? 'Y' : 'N';
+        this.result.IS_MERGE_ORDER = this.IS_MERGE_ORDER;
       } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME' || type === 'CP_C_LOGISTICS_ID' || type === 'ANTI_AUDIT_WAIT_TIME') {
         this.result[type] = this.info[type] ? this.info[type] : '';
       } else if (type == 'orderType') {
