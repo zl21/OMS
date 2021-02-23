@@ -55,7 +55,7 @@ export default {
   voidSendRule: params => network.post('/p/cs/voidSendRule', params),
   exportSendRuleWarehouseRate: params => network.post('p/cs/exportSendRuleWarehouseRate', params),
   delSendRule: params => network.post('/p/cs/delSendRule', params),
-  exportSendRuleWarehouseRank: params => network.post('/p/cs/exportSendRuleWarehouseRank', params)
-
+  exportSendRuleWarehouseRank: params => network.post('/p/cs/exportSendRuleWarehouseRank', params),
+  batchUpdateAutoCheck: params => network.post('/p/cs/st/v1/batchUpdateAutoCheck' , params)
 
 };

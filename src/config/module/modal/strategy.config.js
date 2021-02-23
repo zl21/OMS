@@ -18,5 +18,9 @@ export default {
   PRODUCTSTRATEGYSHOPSCALEIMPORT: {
     // 店铺商品特殊设置-编辑-多店铺比例-明细导入
     component: () => import('@/views/modal/strategyPlatform/productStrategyShopScaleImport.vue'),
+  },
+  BATCHUPDATEAUTOCHECK: {
+    //订单自动审核列表->批量修改
+    component: () => import('@/views/modal/strategyPlatform/batchUpdateAutocheck.vue')
   }
 };

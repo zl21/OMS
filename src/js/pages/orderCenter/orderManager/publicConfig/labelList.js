@@ -1,4 +1,4 @@
-export default [{
+const labelList =  [{
   label: '全部',
   value: '0',
   isShow: true
@@ -79,3 +79,5 @@ export default [{
   isShow: true
 },
 ];
+
+export default labelList;
