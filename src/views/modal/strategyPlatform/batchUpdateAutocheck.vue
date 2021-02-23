@@ -11,7 +11,7 @@
       />
       <div>Loading</div>
     </Spin>
-
+    <p>已选中批量修改记录数: {{idArray.length}}行</p>
     <div class="public-content" >
       <Form ref="formValidate" :label-width="120" :model="info">
             <Collapse v-model="collapseShow">
@@ -220,6 +220,6 @@ export default batchUpdateAutocheck
 
 <style lang="less">
 .batchUpdateAutocheck {
-    width:1200px
+    width:1200px;
 }
 </style>

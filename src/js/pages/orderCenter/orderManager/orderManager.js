@@ -13,6 +13,7 @@ import comUtils from '@/assets/js/__utils__/common';
 import formatData from '@/assets/js/__utils__/date';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import labelListConfig from './publicConfig/labelList';
+import orderLogo from './publicConfig/orderLogo';
 
 export default {
   components: {
@@ -63,6 +64,7 @@ export default {
               tag.style.margin = '0 2px';
               tag.style.borderRadius = '6px';
               tag.style.padding = '2px';
+              tag.title = orderLogo[item.key];
               resultElement.appendChild(tag);
             });
             return resultElement;

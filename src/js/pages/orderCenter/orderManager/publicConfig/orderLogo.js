@@ -1,25 +1,32 @@
-export default {
-  合: '是否合并订单为是',
-  拦: '是否已经拦截为是',
-  赠: '是否有赠品为是',
-  退: '是否退款中为是',
-  拆: '是否拆分订单为是',
-  换: '订单类型为换货订单',
-  手: '订单来源为“手工新增”',
-  票: '顾客需要开发票',
-  11: '双11预售状态',
-  预: '系统预售状态',
-  京: '京仓订单为是',
-  催: '是否催发货为是',
-  缺: '实缺标记为是',
-  代: '是否为分销订单为是',
-  到: '付款方式为货到付款',
-  工: '是否有工单为是',
-  村: '订单来源为“村淘”文字',
-  虚: '是否为虚拟标识为是',
-  组: '是否为组合商品为是',
-  价: '是补差价订单',
-  锁: '是订单为锁单状态',
-  退回: '发货退回状态为退回',
-  超退: '发货退回状态为超时退回',
+const orderLogo =  {
+  IS_MERGE: '是否合并订单为是', //合
+  IS_WOS_CUT: '是否已经拦截为是', //截
+  IS_HASGIFT: '是否有赠品为是', //赠
+  IS_INRETURNING: '是否退款中为是', //退款中
+  IS_SPLIT: '是否拆分订单为是', //拆
+  ORDER_TYPE: '订单类型为换货订单', //换
+  ORDER_SOURCE: '订单来源为“手工新增”', //手
+  IS_INVOICE: '顾客需要开发票', //票
+  DOUBLE11_PRESALE_STATUS: '系统预售状态',  //预
+  IS_WOS_URGE: '是否催发货为是',  //催
+  IS_LACKSTOCK: '实缺标记为是', //缺
+  PAY_TYPE: '付款方式为货到付款', //到
+  IS_COMBINATION: '是否为组合商品为是', //组
+  PRICE_LABEL: '是补差价订单',  //虚
+  LOCK_STATUS: '是订单为锁单状态',  //锁
+  IS_COPY_ORDER: '复',  //复
+  IS_MODIFIED_ORDER: '改',  //改
+  IS_PROM_ORDER: '促',  //促
+  IS_INTERECEPT: 'Hold', //Hold
+  CP_C_LABEL_ID: '标',  //标
+  LIVE_FLAG: '播',  //播
+  HAS_LIGHT_SUPPLY_PROD: '轻',  //轻
+  IS_DELIVERY_URGENT: '急', //急
+  IS_O2O_ORDER: 'O2O',  //O2O
+  IS_REAL_LACKSTOCK: '实缺',  //实缺
+  IS_EXTRA: '额', //额
+  RESERVE_BIGINT01: '禁', //禁
+
 };
+
+export default orderLogo;

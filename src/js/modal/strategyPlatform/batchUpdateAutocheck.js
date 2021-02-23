@@ -19,17 +19,17 @@ export default {
         btnsite: 'center', // 按钮位置 (right , center , left)
         buttons: [
           {
+            text: '取消',
+            btnclick: async ()=>{
+                this.$emit('closeActionDialog', false);
+            }
+          },
+          {
             text: '确定', // 查找 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.save();
             } // 按钮点击事件
-          },
-          {
-            text: '取消',
-            btnclick: async ()=>{
-                this.$emit('closeActionDialog', false);
-            }
           }
         ]
       },
@@ -370,10 +370,39 @@ export default {
             fixcolumn: {
               ST_C_AUTOCHECK: this.result
             },
-            objid: this.idArray.join(',')
+            objid: this.idArray.join(',') + ',99999'
           })
           .then(({ data }) => {
               console.log(data);
+              if(data.code == 0){
+                  this.$Message.success(data.message);
+                  this.$emit('closeActionDialog', false);
+              }else {
+                this.$Modal.confirm({
+                    title: data.message,
+                    width: 350,
+                    mask: true,
+                    render: h => {
+                      if (data.data) {
+                        return h('Table', {
+                          props: {
+                            columns: [
+                              {
+                                  title: 'ID',
+                                  key: 'id'
+                              },
+                              {
+                                title: '提示信息',
+                                key: 'message'
+                              }
+                            ],
+                            data: data.data
+                          }
+                        });
+                      }
+                    }
+                  });
+              }
           });
     }
   }
