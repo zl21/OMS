@@ -123,21 +123,51 @@
                     <Col span="24" style="margin-bottom: 10px">满足以下条件的订单需要人工审核</Col>
                   </Row>
                   <Row>
-                    <FormItem label="订单类型：">
+                    <Col span='2' style="padding-top:8px">订单类型: </Col>
+                    <Col span='5'>
+                      <FormItem label="是否正常订单：">
+                        <Select v-model="orderType[0]" @on-change="setResult('orderType')">
+                          <Option value='1'>是</Option>
+                          <Option value='N'>否</Option>
+                        </Select>
+                      </FormItem>
+                    </Col>
+                    <Col span='5'>
+                      <FormItem label="是否预售订单：">
+                        <Select v-model="orderType[1]" @on-change="setResult('orderType')">
+                          <Option value='2'>是</Option>
+                          <Option value='N'>否</Option>
+                        </Select>
+                      </FormItem>
+                    </Col>
+                    <Col span='5'>
+                      <FormItem label="是否换货订单：">
+                        <Select v-model="orderType[2]" @on-change="setResult('orderType')">
+                          <Option value='5'>是</Option>
+                          <Option value='N'>否</Option>
+                        </Select>
+                      </FormItem>
+                    </Col>
+                    <!-- <FormItem label="订单类型：">
                       <Checkbox :indeterminate="indeterminate" :value="checkAll" size="small" style="float: left; display: inline-block" @click.prevent.native="handleCheckAll()"> 全选 </Checkbox>
                       <CheckboxGroup v-model="orderType" size="small" @on-change="setResult('orderType')">
                         <Checkbox label="1"> 正常订单 </Checkbox>
                         <Checkbox label="2"> 预售订单 </Checkbox>
                         <Checkbox label="5"> 换货订单 </Checkbox>
                       </CheckboxGroup>
-                    </FormItem>
+                    </FormItem> -->
                   </Row>
                   <Row>
-                    <Col colspan="1" span="1" style="padding-top: 10px">
-                      <Checkbox v-model="effectiveCondition[1].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox>
+                      <!-- <Checkbox v-model="effectiveCondition[1].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox> -->
+                      <Col colspan="1"  span="1" style="padding-top:5px"><span>启用:</span></Col>
+                    <Col colspan="1" span="1">
+                          <Select v-model="effectiveCondition[1].value" @on-change="setResult('effectiveCondition')">
+                              <Option value="Y">是</Option>
+                              <Option value="N">否</Option>
+                          </Select>
                     </Col>
                     <Col span="11">
-                      <i style="position:absolute;top:10px;left:20px;color:red" v-show="effectiveCondition[1].value">*</i>
+                      <i style="position:absolute;top:10px;left:20px;color:red" v-show="effectiveCondition[1].value== 'Y'">*</i>
                       <FormItem label="付款时间：">
                         <Row>
                           <Col span="11">
@@ -152,11 +182,15 @@
                     </Col>
                   </Row>
                   <Row>
-                    <Col colspan="1" span="1" style="padding-top: 10px">
-                      <Checkbox v-model="effectiveCondition[2].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox>
+                    <Col colspan="1"  span="1" style="padding-top:5px"><span>启用:</span></Col>
+                    <Col colspan="1" span="1">
+                          <Select v-model="effectiveCondition[2].value" @on-change="setResult('effectiveCondition')">
+                              <Option value="Y">是</Option>
+                              <Option value="N">否</Option>
+                          </Select>
                     </Col>
                     <Col span="11">
-                    <i style="position:absolute;top:10px;left:-4px;color:red" v-show="effectiveCondition[2].value">*</i>
+                    <i style="position:absolute;top:10px;left:8px;color:red" v-show="effectiveCondition[2].value == 'Y'">*</i>
                       <FormItem label="订单金额（元）:">
                         <Row>
                           <Col span="11">
@@ -172,20 +206,30 @@
                     </Col>
                   </Row>
                   <Row>
-                    <Col colspan="1" span="1" style="padding-top: 10px">
-                      <Checkbox v-model="effectiveCondition[4].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox>
-                    </Col>
+                      <!-- <Checkbox v-model="effectiveCondition[4].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox> -->
+                      <Col colspan="1"  span="1" style="padding-top:5px"><span>启用:</span></Col>
+                      <Col colspan="1" span="1">
+                            <Select v-model="effectiveCondition[4].value" @on-change="setResult('effectiveCondition')">
+                                <Option value="Y">是</Option>
+                                <Option value="N">否</Option>
+                            </Select>
+                      </Col>
                     <Col span="11">
-                    <i style="position:absolute;top:10px;left:30px;color:red" v-show="effectiveCondition[4].value">*</i>
+                    <i style="position:absolute;top:10px;left:30px;color:red" v-show="effectiveCondition[4].value == 'Y'">*</i>
                       <FormItem label="收货地址:">
                         <Input v-model="info.RECEIVER_ADDRESS" placeholder="包含关键字进行人工审核；多个关键字可依次填写，使用中文“，”隔开" size="small" @on-change="setResult('RECEIVER_ADDRESS')" />
                       </FormItem>
                     </Col>
                   </Row>
                   <Row>
-                    <Col colspan="1" span="1" style="padding-top: 10px">
-                      <Checkbox v-model="effectiveCondition[5].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox>
-                    </Col>
+                      <!-- <Checkbox v-model="effectiveCondition[5].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox> -->
+                      <Col colspan="1"  span="1" style="padding-top:5px"><span>启用:</span></Col>
+                      <Col colspan="1" span="1">
+                            <Select v-model="effectiveCondition[5].value" @on-change="setResult('effectiveCondition')">
+                                <Option value="Y">是</Option>
+                                <Option value="N">否</Option>
+                            </Select>
+                      </Col>
                     <Col span="11">
                       <FormItem label="买家留言:">
                         <Input v-model="info.BUYER_REMARK" placeholder="为空默认为有备注信息进行人工审核；多个关键字可依次填写，使用中文“，”隔开。" size="small" @on-change="setResult('BUYER_REMARK')" />
@@ -193,9 +237,14 @@
                     </Col>
                   </Row>
                   <Row>
-                    <Col colspan="1" span="1" style="padding-top: 10px">
-                      <Checkbox v-model="effectiveCondition[6].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox>
-                    </Col>
+                      <!-- <Checkbox v-model="effectiveCondition[6].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox> -->
+                      <Col colspan="1"  span="1" style="padding-top:5px"><span>启用:</span></Col>
+                      <Col colspan="1" span="1">
+                            <Select v-model="effectiveCondition[6].value" @on-change="setResult('effectiveCondition')">
+                                <Option value="Y">是</Option>
+                                <Option value="N">否</Option>
+                            </Select>
+                      </Col>
                     <Col span="11">
                       <FormItem label="卖家备注">
                         <Input v-model="info.SELLER_REMARK" placeholder="为空默认为有备注信息进行人工审核；多个关键字可依次填写，使用中文“，”隔开。" size="small" @on-change="setResult('SELLER_REMARK')" />

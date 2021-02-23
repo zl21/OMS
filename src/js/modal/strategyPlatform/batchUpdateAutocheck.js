@@ -6,10 +6,13 @@ export default {
     businessButton
   },
   props:{
-    idArray:[]
+    idArray:{
+      type: Array
+    }
   },
   data() {
     return {
+
       loading: false,
       show: '',
       s: [],
@@ -55,41 +58,41 @@ export default {
       IS_ZERO_AUTOCHECK: '',
       IS_MANUAL_ORDER: false,
       IS_MERGE_ORDER: '', // 是否可合并
-      orderType: [''],
+      orderType: [],
       indeterminate: false,
       checkAll: false,
       effectiveCondition: [
         {
           key: 0,
-          value: false
+          value: ''
         },
         {
           key: 1,
-          value: false
+          value: ''
         },
         {
           key: 2,
-          value: false
+          value: ''
         },
         {
           key: 3,
-          value: false
+          value: ''
         },
         {
           key: 4,
-          value: false
+          value: ''
         },
         {
           key: 5,
-          value: false
+          value: ''
         },
         {
           key: 6,
-          value: false
+          value: ''
         },
         {
           key: 7,
-          value: false
+          value: ''
         }
       ],
       EXCLUDE_SKU_TYPE: 1,
@@ -200,22 +203,6 @@ export default {
         }
       });
     },
-    handleCheckAll() {
-      if (this.indeterminate) {
-        this.checkAll = false;
-      } else {
-        this.checkAll = !this.checkAll;
-      }
-      this.indeterminate = false;
-
-      if (this.checkAll) {
-        // this.orderType = ['1', '2', '3', '4', '5', '6', '7'];
-        this.orderType = ['1', '2', '5'];
-      } else {
-        this.orderType = [];
-      }
-      this.setResult('orderType');
-    },
     setResult(type, e) {
       if (type == 'IS_AUTOCHECK_ORDER') {
         this.result.IS_AUTOCHECK_ORDER = this.IS_AUTOCHECK_ORDER;
@@ -232,18 +219,13 @@ export default {
       } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME' || type === 'CP_C_LOGISTICS_ID' || type === 'ANTI_AUDIT_WAIT_TIME') {
         this.result[type] = this.info[type] ? this.info[type] : '';
       } else if (type == 'orderType') {
-        if (this.orderType.length === 3) {
-          this.indeterminate = false;
-          this.checkAll = true;
-        } else if (this.orderType.length > 0) {
-          this.indeterminate = false;
-          this.checkAll = false;
-        } else {
-          this.indeterminate = false;
-          this.checkAll = false;
-        }
-        console.log('this.orderType:::', this.orderType);
-        this.result.ORDER_TYPE = this.orderType.join(',');
+        let arr = []
+        this.orderType.map(item=>{
+          if(item !== 'N'){
+            arr.push(item);
+          }
+        })
+        this.result.ORDER_TYPE = arr.join(',');
       } else if (type == 'beginEndTime') {
         this.result.BEGIN_TIME = new Date(this.info.beginTime).getTime();
         this.result.END_TIME = new Date(this.info.endTime).getTime();
@@ -276,7 +258,7 @@ export default {
       } else if (type == 'effectiveCondition') {
         const a = [];
         this.effectiveCondition.forEach((item, i) => {
-          if (item.value) {
+          if (item.value == 'Y') {
             a.push(i);
           }
         });
@@ -334,7 +316,7 @@ export default {
     judgeCondition() {
       // 限制条件勾选非空判断
       const effectiveCondition = this.effectiveCondition;
-      if (effectiveCondition[1].value) {
+      if (effectiveCondition[1].value == 'Y') {
         if (!this.info.beginTime || !this.info.endTime) {
           this.$Message.error('付款时间为必填项,没有选择值!');
           return false;
@@ -344,7 +326,7 @@ export default {
         this.$Message.error('付款时间范围有误!');
         return false;
       }
-      if (effectiveCondition[2].value) {
+      if (effectiveCondition[2].value == 'Y') {
         if (!this.info.LIMIT_PRICE_DOWN || !this.info.LIMIT_PRICE_UP) {
           this.$Message.error('订单金额（元）为必填项,没有输入值!');
           return false;
@@ -354,7 +336,7 @@ export default {
         this.$Message.error('订单金额范围设置有误!');
         return false;
       }
-      if (effectiveCondition[4].value) {
+      if (effectiveCondition[4].value == 'Y') {
         if (!this.info.RECEIVER_ADDRESS) {
           this.$Message.error('收货地址为必填项,没有输入值!');
           return false;
@@ -363,6 +345,7 @@ export default {
       return true;
     },
     save() {
+        if(!this.judgeCondition()) return;
         const list = this.providesList.map(item => item.Label);
         this.result.CP_C_REGION_PROVINCE_ENAME = list.join(',');
         this.service.strategyPlatform
@@ -370,13 +353,14 @@ export default {
             fixcolumn: {
               ST_C_AUTOCHECK: this.result
             },
-            objid: this.idArray.join(',') + ',99999'
+            objid: this.idArray.join(',')
           })
           .then(({ data }) => {
               console.log(data);
               if(data.code == 0){
                   this.$Message.success(data.message);
                   this.$emit('closeActionDialog', false);
+                  document.getElementById('reset').click();
               }else {
                 this.$Modal.confirm({
                     title: data.message,
@@ -402,6 +386,7 @@ export default {
                       }
                     }
                   });
+                  document.getElementById('reset').click();
               }
           });
     }
