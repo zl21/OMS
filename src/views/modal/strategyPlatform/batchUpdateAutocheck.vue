@@ -18,10 +18,10 @@
               <Panel name="1">
                 基础资料
                 <div slot="content" class="content">
-                  <Row>
+                  <Row :gutter="1">
                     <Col span="6">
                       <FormItem label="启用自动审核：">
-                        <Select v-model="IS_AUTOCHECK_ORDER" @on-change="setResult('IS_AUTOCHECK_ORDER')">
+                        <Select v-model="IS_AUTOCHECK_ORDER" @on-change="setResult('IS_AUTOCHECK_ORDER')" style="width:100px">
                             <Option value="Y">是</Option>
                             <Option value="N">否</Option>
                         </Select>
@@ -29,7 +29,7 @@
                     </Col>
                     <Col span="6">
                       <FormItem label="检查可合并订单：">
-                        <Select v-model="IS_MERGE_ORDER" @on-change="setResult('IS_MERGE_ORDER')">
+                        <Select v-model="IS_MERGE_ORDER" @on-change="setResult('IS_MERGE_ORDER')" style="width:100px">
                             <Option value="Y">是</Option>
                             <Option value="N">否</Option>
                         </Select>
@@ -37,7 +37,7 @@
                     </Col>
                     <Col span="6">
                       <FormItem label="零元订单自动审核：">
-                        <Select v-model="IS_ZERO_AUTOCHECK" @on-change="setResult('IS_ZERO_AUTOCHECK')">
+                        <Select v-model="IS_ZERO_AUTOCHECK" @on-change="setResult('IS_ZERO_AUTOCHECK')" style="width:100px">
                             <Option value="Y">是</Option>
                             <Option value="N">否</Option>
                         </Select>
@@ -45,7 +45,7 @@
                     </Col>
                     <Col span="6">
                       <FormItem label="全赠品订单开启自动审核：" class="width">
-                        <Select v-model="IS_FULL_GIFT_ORDER" @on-change="setResult('IS_FULL_GIFT_ORDER')">
+                        <Select v-model="IS_FULL_GIFT_ORDER" @on-change="setResult('IS_FULL_GIFT_ORDER')" style="width:100px">
                             <Option value="Y">是</Option>
                             <Option value="N">否</Option>
                         </Select>
@@ -54,33 +54,33 @@
 
                     <Col span="6">
                       <FormItem label="等待审核时间：">
-                        <Col span="20">
-                          <Input v-model="info.WAIT_TIME" size="small" :maxlength="5" @on-change="setResult('WAIT_TIME')" />
+                        <Col span="16">
+                          <Input v-model="info.WAIT_TIME" size="small" :maxlength="5" @on-change="setResult('WAIT_TIME')" style="width:100px"/>
                         </Col>
-                        <Col span="4" style="text-align: right"> 分钟 </Col>
+                        <Col span="8" style="text-align: center"> 分钟 </Col>
                       </FormItem>
                     </Col>
 
                     <Col span="6">
                       <FormItem label="反审核等待时间：">
-                        <Col span="20">
-                          <Input v-model="info.ANTI_AUDIT_WAIT_TIME" size="small" :maxlength="5" @on-change="setResult('ANTI_AUDIT_WAIT_TIME')" />
+                        <Col span="16">
+                          <Input v-model="info.ANTI_AUDIT_WAIT_TIME" size="small" :maxlength="5" @on-change="setResult('ANTI_AUDIT_WAIT_TIME')" style="width:100px"/>
                         </Col>
-                        <Col span="4" style="text-align: right"> 分钟 </Col>
+                        <Col span="8" style="text-align: center"> 分钟 </Col>
                       </FormItem>
                     </Col>
 
                     <Col span="6">
                       <FormItem label="hold单等待时间：">
-                        <Col span="20">
-                          <Input v-model="info.HOLD_WAIT_TIME" size="small" :maxlength="5" @on-change="setResult('HOLD_WAIT_TIME')" />
+                        <Col span="16">
+                          <Input v-model="info.HOLD_WAIT_TIME" size="small" :maxlength="5" @on-change="setResult('HOLD_WAIT_TIME')" style="width:100px"/>
                         </Col>
-                        <Col span="4" style="text-align: right"> 分钟 </Col>
+                        <Col span="8" style="text-align: center"> 分钟 </Col>
                       </FormItem>
                     </Col>
                     <Col span="6">
                       <FormItem label="自动审核货到付款：" class="width">
-                        <Select v-model="IS_AUTOCHECK_PAY" @on-change="setResult('IS_AUTOCHECK_PAY')">
+                        <Select v-model="IS_AUTOCHECK_PAY" @on-change="setResult('IS_AUTOCHECK_PAY')" style="width:100px">
                             <Option value="Y">是</Option>
                             <Option value="N">否</Option>
                         </Select>
@@ -89,7 +89,7 @@
 
                     <Col span="6">
                       <FormItem label="排除物流公司：">
-                        <Col span="24">
+                        <Col span="16">
                           <DropDownSelectFilter
                             :single="false"
                             :data="CP_C_LOGISTICS_ID_SELECT.datas"
@@ -110,7 +110,7 @@
                     </Col>
                     <Col span="6">
                       <FormItem label="手工订单：">
-                        <Select v-model="IS_MANUAL_ORDER" @on-change="setResult('IS_MANUAL_ORDER')">
+                        <Select v-model="IS_MANUAL_ORDER" @on-change="setResult('IS_MANUAL_ORDER')" style="width:100px">
                             <Option value="Y">是</Option>
                             <Option value="N">否</Option>
                         </Select>
@@ -129,7 +129,7 @@
                     <Col span='2' style="padding-top:8px">订单类型: </Col>
                     <Col span='5'>
                       <FormItem label="是否正常订单：">
-                        <Select v-model="orderType[0]" @on-change="setResult('orderType')">
+                        <Select v-model="orderType[0]" @on-change="setResult('orderType')" style="width:100px">
                           <Option value='1'>是</Option>
                           <Option value='N'>否</Option>
                         </Select>
@@ -137,7 +137,7 @@
                     </Col>
                     <Col span='5'>
                       <FormItem label="是否预售订单：">
-                        <Select v-model="orderType[1]" @on-change="setResult('orderType')">
+                        <Select v-model="orderType[1]" @on-change="setResult('orderType')" style="width:100px">
                           <Option value='2'>是</Option>
                           <Option value='N'>否</Option>
                         </Select>
@@ -145,7 +145,7 @@
                     </Col>
                     <Col span='5'>
                       <FormItem label="是否换货订单：">
-                        <Select v-model="orderType[2]" @on-change="setResult('orderType')">
+                        <Select v-model="orderType[2]" @on-change="setResult('orderType')" style="width:100px">
                           <Option value='5'>是</Option>
                           <Option value='N'>否</Option>
                         </Select>
@@ -272,6 +272,9 @@ export default batchUpdateAutocheck
 
 <style lang="less">
 .batchUpdateAutocheck {
-    width:1200px;
+    width:1100px;
+    .ark-form-item {
+      margin-bottom: 0
+    }
 }
 </style>
