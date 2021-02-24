@@ -11,7 +11,7 @@
       />
       <div>Loading</div>
     </Spin>
-    <p>已选中批量修改记录数: {{idArray.length}}行</p>
+    <p style="margin-bottom:5px">已选中批量修改记录数: {{idArray.length}}行</p>
     <div class="public-content" >
       <Form ref="formValidate" :label-width="120" :model="info">
             <Collapse v-model="collapseShow">
@@ -110,7 +110,10 @@
                     </Col>
                     <Col span="6">
                       <FormItem label="手工订单：">
-                        <Checkbox v-model="IS_MANUAL_ORDER" size="small" @on-change="setResult('IS_MANUAL_ORDER')"> &nbsp; </Checkbox>
+                        <Select v-model="IS_MANUAL_ORDER" @on-change="setResult('IS_MANUAL_ORDER')">
+                            <Option value="Y">是</Option>
+                            <Option value="N">否</Option>
+                        </Select>
                       </FormItem>
                     </Col>
                   </Row>
@@ -120,7 +123,7 @@
                 限制条件
                 <div slot="content" class="content">
                   <Row>
-                    <Col span="24" style="margin-bottom: 10px">满足以下条件的订单需要人工审核</Col>
+                    <Col span="24" style="margin-bottom: 10px; margin-top:5px">满足以下条件的订单需要人工审核</Col>
                   </Row>
                   <Row>
                     <Col span='2' style="padding-top:8px">订单类型: </Col>

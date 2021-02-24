@@ -66,7 +66,7 @@
   },
   "dependencies": {
     "@burgeon/business-components": "1.0.36",
-    "@burgeon/internationalization": "^1.0.21",
+    "@burgeon/internationalization": "^1.0.27",
     "@burgeon/oms-theme": "1.0.6",
     "@syman/ark-ui": "^1.1.12",
     "@syman/burgeon-r3": "1.4.28",

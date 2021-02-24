@@ -56,7 +56,7 @@ export default {
       IS_AUTOCHECK_PAY: '',
       IS_FULL_GIFT_ORDER: '',
       IS_ZERO_AUTOCHECK: '',
-      IS_MANUAL_ORDER: false,
+      IS_MANUAL_ORDER: '',
       IS_MERGE_ORDER: '', // 是否可合并
       orderType: [],
       indeterminate: false,
@@ -213,7 +213,7 @@ export default {
       } else if (type == 'IS_ZERO_AUTOCHECK') {
         this.result.IS_ZERO_AUTOCHECK = this.IS_ZERO_AUTOCHECK;
       } else if (type == 'IS_MANUAL_ORDER') {
-        this.result.IS_MANUAL_ORDER = this.IS_MANUAL_ORDER ? 'Y' : 'N';
+        this.result.IS_MANUAL_ORDER = this.IS_MANUAL_ORDER;
       } else if (type == 'IS_MERGE_ORDER') {
         this.result.IS_MERGE_ORDER = this.IS_MERGE_ORDER;
       } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME' || type === 'CP_C_LOGISTICS_ID' || type === 'ANTI_AUDIT_WAIT_TIME') {
