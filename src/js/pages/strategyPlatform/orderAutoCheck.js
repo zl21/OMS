@@ -142,6 +142,13 @@ export default {
       this.QueryList();
     });
   },
+  async activated(){
+    this.loading = true;
+    await this.queryLogisticsCompany();
+    this.getAutoCheck().then(() => {
+      this.QueryList();
+    });
+  },
   methods: {
     async queryLogisticsCompany() {
       // TODO refcolid
