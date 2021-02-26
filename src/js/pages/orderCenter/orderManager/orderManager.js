@@ -2639,28 +2639,31 @@ export default {
               self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
             } else {
               const queryOrderResultList = res.data.data.queryOrderResultList;
-              let qty_all = 0;
-              let product_amt = 0;
-              queryOrderResultList.forEach(item=>{
-                qty_all+=item.QTY_ALL;
-                product_amt+=item.PRODUCT_AMT;
-              })
-              const combined = [
-                {__ag_sequence_column_name__:"合计" , QTY_ALL:qty_all , PRODUCT_AMT:product_amt},
-                {__ag_sequence_column_name__:"总计" ,  QTY_ALL:res.data.data.sumProductQty , PRODUCT_AMT:res.data.data.sumOrderAmt}
-              ]
-              self.agTableConfig.pagenation.total = res.data.data.totalSize;
-              self.agTableConfig.rowData = queryOrderResultList;
-              self.agTableConfig.rowData.forEach(item => {
-                if (item.ORDER_STATUS === self.orderStatus.orderCancel || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid) {
-                  item.isColorGray = true;
-                } else {
-                  item.isColorGray = false;
+              let combined = [];
+                if(queryOrderResultList.length !==0){
+                  let qty_all = 0;
+                  let product_amt = 0;
+                  queryOrderResultList.forEach(item=>{
+                    qty_all+=item.QTY_ALL;
+                    product_amt+=item.PRODUCT_AMT;
+                  })
+                  combined = [
+                    {__ag_sequence_column_name__:"合计" , QTY_ALL:qty_all , PRODUCT_AMT:product_amt},
+                    {__ag_sequence_column_name__:"总计" ,  QTY_ALL:res.data.data.sumProductQty , PRODUCT_AMT:res.data.data.sumOrderAmt}
+                  ]
                 }
-              });
-              // 统计商品总数
-              self.agTableConfig.pagenation.goodsSum = queryOrderResultList.reduce((sum, item) => sum + Number(item.QTY_ALL || 0), 0);
-              self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData , {} , combined);
+                self.agTableConfig.pagenation.total = res.data.data.totalSize;
+                self.agTableConfig.rowData = queryOrderResultList;
+                self.agTableConfig.rowData.forEach(item => {
+                  if (item.ORDER_STATUS === self.orderStatus.orderCancel || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid) {
+                    item.isColorGray = true;
+                  } else {
+                    item.isColorGray = false;
+                  }
+                });
+                // 统计商品总数
+                self.agTableConfig.pagenation.goodsSum = queryOrderResultList.reduce((sum, item) => sum + Number(item.QTY_ALL || 0), 0);
+                self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData , {} , combined);
             }
           } else {
             self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
