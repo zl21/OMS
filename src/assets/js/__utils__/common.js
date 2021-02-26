@@ -89,6 +89,7 @@ const setTableHeight = (_self, defaultHeight) => {
   const contentHeight = document.getElementById('content').clientHeight;
   // 获取需要除了agTable之外的节点
   const arr = document.getElementsByClassName('totalHeight');
+  const agTableDom = document.getElementsByClassName('ag-theme-balham')[0];
   let sumHeight = 34 + defaultHeight;
   Object.getOwnPropertyNames(arr).forEach(item => {
     sumHeight += parseInt(arr[item].clientHeight);
@@ -96,9 +97,11 @@ const setTableHeight = (_self, defaultHeight) => {
   if (_self.$refs.agGridChild1) {
     _self.tabConfig.forEach(item => {
       item.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
+      agTableDom.style.height = `${contentHeight - sumHeight}px`;
     });
   } else {
     _self.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
+    agTableDom.style.height = `${contentHeight - sumHeight}px`;
   }
 };
 
@@ -117,7 +120,6 @@ const onresizes = (_self, defaultHeight) => {
         // 判断 如果不是高级搜索 自适应高度
         if (_self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
           setTableHeight(_self, defaultHeight);
-          _self.$refs.agGridChild.agGridTable(_self.agTableConfig.columnDefs, _self.agTableConfig.rowData);
         }
       };
       break;
@@ -125,21 +127,18 @@ const onresizes = (_self, defaultHeight) => {
     case 'PAYABLEADJUSTMENTLIST':
       option = () => {
         setTableHeight(_self, defaultHeight);
-        _self.$refs.agtable.agGridTable(_self.agTableConfig.columnDefs, _self.agTableConfig.rowData);
       };
       break;
     // 退换货单
     case 'RETURNGOODLIST':
       option = () => {
         setTableHeight(_self, defaultHeight);
-        _self.$refs.agGridChild.agGridTable(_self.agTableConfig.columnDefs, _self.agTableConfig.rowData);
       };
       break;
     // 退货入库
     case 'RETURNSTOREAGELIST':
       option = () => {
         setTableHeight(_self, defaultHeight);
-        _self.$refs.agGridChild.agGridTable(_self.agTableConfig.columnDefs, _self.agTableConfig.rowData);
       };
       break;
     // 促销活动
