@@ -241,6 +241,66 @@ export default {
             } // 按钮点击事件
           },
           {
+            webname: 'auditingForce', // 强制审核
+            btnclick: () => {
+              const self = this;
+              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if (self.selection.length > 0) {
+                self.btnConfig.loading = true;
+                const ids = [];
+                self.selection.forEach((item, index) => {
+                  ids[index] = item.ID;
+                });
+                this.service.orderCenter
+                  .auditOrderForce({
+                    ids,
+                    type: '1',
+                    isCheck: 0
+                  })
+                  .then(res => {
+                    if (res.data.code === 0) {
+                      self.$Modal.success({
+                        title: self.vmI18n.t('modalTitle.tips'), // 提示
+                        content: res.data.message,
+                        cancelType: true,
+                        titleAlign: 'left',
+                        mask: true,
+                        draggable: true,
+                        keyDown: event => {
+                          if (event.keyCode == 27 || event.keyCode == 13) {
+                            self.$Modal.remove();
+                          }
+                        }
+                      });
+                      self.selection = [];
+                      self.getData();
+                    } else {
+                      self.$Modal.error({
+                        title: self.vmI18n.t('modalTitle.tips'), // 提示
+                        content: res.data.message,
+                        cancelType: true,
+                        titleAlign: 'left',
+                        mask: true,
+                        draggable: true,
+                        keyDown: event => {
+                          if (event.keyCode == 27 || event.keyCode == 13) {
+                            self.$Modal.remove();
+                          }
+                        }
+                      });
+                    }
+                    self.btnConfig.loading = false;
+                  });
+              } else {
+                self.$Message.warning({
+                  content: self.vmI18n.t('modalTips.a6'), // 请选择需要审核的记录！
+                  duration: 5,
+                  top: 80
+                });
+              }
+            } // 按钮点击事件
+          },
+          {
             webname: 'Counter-audit', // 反审核
             btnclick: () => {
               const self = this;
