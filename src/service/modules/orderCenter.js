@@ -9,6 +9,7 @@ export default {
    * 零售发货单
    */
   auditOrder: params => network.post('/api/cs/oc/oms/v1/auditOrder', params), // 审核
+  auditOrderForce: params => network.post('/api/cs/oc/oms/v1/auditOrderForce', params), // 强制审核
   getSeniorQueryCondition: params => network.post('/api/cs/oc/oms/v1/getSeniorQueryCondition', params), // 高级搜索项
   QueryList: params => network.post('/p/cs/QueryList', params),
   reallocateLogistics: params => network.post('/api/cs/oc/oms/v1/reallocateLogistics', params), // 配送物流
