@@ -485,14 +485,23 @@ export default {
       const treeList = [];
       this.treeData2.forEach(item => {
         item.children.forEach(list => {
-          list.children.forEach(data => {
-            if (data.checked) {
+          if (list.children.length) {
+            list.children.forEach(data => {
+              if (data.checked) {
+                treeList.push({
+                  id: data.id,
+                  regiontype: data.regiontype
+                });
+              }
+            });
+          } else {
+            if (list.checked) {
               treeList.push({
-                id: data.id,
-                regiontype: data.regiontype
+                id: list.id,
+                regiontype: list.regiontype
               });
             }
-          });
+          }
         });
       });
       const param = {
