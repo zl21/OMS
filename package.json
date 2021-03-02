@@ -66,10 +66,10 @@
   },
   "dependencies": {
     "@burgeon/business-components": "1.0.36",
-    "@burgeon/internationalization": "^1.0.27",
+    "@burgeon/internationalization": "1.0.21",
     "@burgeon/oms-theme": "1.0.6",
-    "@syman/ark-ui": "^1.1.12",
-    "@syman/burgeon-r3": "1.4.28",
+    "@syman/ark-ui": "1.1.9",
+    "@syman/burgeon-r3": "^1.4.38",
     "@syman/burgeon-r3-components": "1.0.15",
     "ag-grid": "17.1.1",
     "ag-grid-enterprise": "17.1.1",
