@@ -43,6 +43,7 @@ export default {
         renderArr: {
           EXPRESSCODE: params => {
             // render渲染的执行方法
+            if(params.data.EXPRESSCODE === undefined) return;
             const resultElement = document.createElement('span');
             resultElement.innerText = params.value;
             resultElement.style.color = '#36A2EB';
@@ -55,6 +56,7 @@ export default {
             return resultElement;
           },
           ORDER_TAG: params => {
+            if(params.data.ORDER_TAG === undefined) return;
             const resultElement = document.createElement('div');
             params.data.ORDERTAGLIST.forEach(item => {
               const tag = document.createElement('span');
@@ -69,13 +71,15 @@ export default {
             });
             return resultElement;
           },
-          PAY_TIME: params => (params.data.PAY_TIME ? formatData.standardTimeConversiondateToStr(params.data.PAY_TIME) : ''), // 付款时间
-          AUDIT_TIME: params => (params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''), // 审核时间
-          DISTRIBUTION_TIME: params => (params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''), // 配货时间
-          CREATIONDATE: params => (params.data.CREATIONDATE ? formatData.standardTimeConversiondateToStr(params.data.CREATIONDATE) : ''), // 创建时间
-          HOLD_RELEASE_TIME: params => (params.data.HOLD_RELEASE_TIME ? formatData.standardTimeConversiondateToStr(params.data.HOLD_RELEASE_TIME) : ''), // HOLD单释放时间
-          SCAN_TIME: params => (params.data.SCAN_TIME ? formatData.standardTimeConversiondateToStr(params.data.SCAN_TIME) : ''), // 出库时间
-          ORDER_FLAG: params => {}
+          PAY_TIME: params => {
+            if(params.data.PAY_TIME === undefined) return; 
+            return params.data.PAY_TIME ? formatData.standardTimeConversiondateToStr(params.data.PAY_TIME) : ''
+           }, // 付款时间
+         AUDIT_TIME: params => { if(params.data.AUDIT_TIME === undefined) return; return params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''}, // 审核时间
+         DISTRIBUTION_TIME: params => {if(params.data.DISTRIBUTION_TIME === undefined) return; return params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''}, // 配货时间
+         CREATIONDATE: params => { if(params.data.CREATIONDATE === undefined) return; return params.data.CREATIONDATE ? formatData.standardTimeConversiondateToStr(params.data.CREATIONDATE) : ''}, // 创建时间
+         HOLD_RELEASE_TIME: params => { if(params.data.HOLD_RELEASE_TIME === undefined) return; return params.data.HOLD_RELEASE_TIME ? formatData.standardTimeConversiondateToStr(params.data.HOLD_RELEASE_TIME) : ''}, // HOLD单释放时间
+         SCAN_TIME: params => {if(params.data.SCAN_TIME === undefined) return; return params.data.SCAN_TIME ? formatData.standardTimeConversiondateToStr(params.data.SCAN_TIME) : ''}, // 出库时间
         },
         pagenation: comUtils.pageConfig
       },
@@ -2695,18 +2699,31 @@ export default {
               self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
             } else {
               const queryOrderResultList = res.data.data.queryOrderResultList;
-              self.agTableConfig.pagenation.total = res.data.data.totalSize;
-              self.agTableConfig.rowData = queryOrderResultList;
-              self.agTableConfig.rowData.forEach(item => {
-                if (item.ORDER_STATUS === self.orderStatus.orderCancel || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid) {
-                  item.isColorGray = true;
-                } else {
-                  item.isColorGray = false;
+              let combined = [];
+                if(queryOrderResultList.length !==0){
+                  let qty_all = 0;
+                  let product_amt = 0;
+                  queryOrderResultList.forEach(item=>{
+                    qty_all+=item.QTY_ALL;
+                    product_amt+=item.PRODUCT_AMT;
+                  })
+                  combined = [
+                    {__ag_sequence_column_name__:"合计" , QTY_ALL:qty_all , PRODUCT_AMT:product_amt},
+                    {__ag_sequence_column_name__:"总计" ,  QTY_ALL:res.data.data.sumProductQty , PRODUCT_AMT:res.data.data.sumOrderAmt}
+                  ]
                 }
-              });
-              // 统计商品总数
-              self.agTableConfig.pagenation.goodsSum = queryOrderResultList.reduce((sum, item) => sum + Number(item.QTY_ALL || 0), 0);
-              self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
+                self.agTableConfig.pagenation.total = res.data.data.totalSize;
+                self.agTableConfig.rowData = queryOrderResultList;
+                self.agTableConfig.rowData.forEach(item => {
+                  if (item.ORDER_STATUS === self.orderStatus.orderCancel || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid) {
+                    item.isColorGray = true;
+                  } else {
+                    item.isColorGray = false;
+                  }
+                });
+                // 统计商品总数
+                self.agTableConfig.pagenation.goodsSum = queryOrderResultList.reduce((sum, item) => sum + Number(item.QTY_ALL || 0), 0);
+                self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData , {} , combined);
             }
           } else {
             self.$refs.agGridChild.AGTABLE.cleanRows(); // 清空表格数据
