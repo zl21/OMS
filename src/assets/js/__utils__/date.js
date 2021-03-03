@@ -4,6 +4,7 @@ class dateFuns {
   constructor() { }
 
   standardTimeConversiondateToStr(val) {
+    if (!val) return '';
     const dateTime = new Date(val);
     const year = dateTime.getFullYear();
     let month = dateTime.getMonth() + 1; // js从0开始取

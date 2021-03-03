@@ -53,20 +53,43 @@ export default {
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''
+      },
+      {
+        style: 'input', // 输入框类型
+        label: '订单号', // 订单号 输入框前文字
+        value: 'bill_no', // 输入框的值
+        width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+        icon: '', // 输入框后带的图标,暂只有输入框支持
+        ghost: false, // 是否关闭幽灵按钮，默认开启
+        inputenter: () => { }, // 表单回车事件
+        iconclick: () => { }, // 点击icon图标事件
+      },
+      {
+        style: 'input', // 输入框类型
+        label: '服务单号', // 订单号 输入框前文字
+        value: 'service_no', // 输入框的值
+        width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+        icon: '', // 输入框后带的图标,暂只有输入框支持
+        ghost: false, // 是否关闭幽灵按钮，默认开启
+        inputenter: () => { }, // 表单回车事件
+        iconclick: () => { }, // 点击icon图标事件
       }
     ],
     // 表单非空提示
     ruleValidate: {
       numNumber: [{ required: true, message: ' ', trigger: 'blur' }],
-      query_date: [{ required: true }]
+      query_date: [{ required: true }],
+      bill_no: [{ required: true }],
+      service_no: [{ required: true }]
     }
   },
   // 确定按钮
   determine: async (self) => {
     const formValue = self.downLoadFormConfig.formValue;
     const shopId = self.downLoadFormConfig.formData[0].itemdata.pid;
-    if (!shopId || !formValue.query_date[0]) {
-      self.$message.error(window.vmI18n.t('modalTips.bt'));// 店铺和平台时间不能为空
+    if (!shopId) return self.$message.error('店铺不能为空'); // 店铺不能为空
+    if (!formValue.query_date[0] && !formValue.bill_no && !formValue.service_no) {
+      self.$message.error('平台时间,订单号,服务号需不能全部为空!');// 店铺和平台时间不能为空
       return;
     }
     self.dialogLoad = true;
@@ -74,7 +97,9 @@ export default {
       table: self.$route.params.tableName,
       shop_id: shopId,
       start_time: formatData.standardTimeConversiondateToStr(formValue.query_date[0]),
-      end_time: formatData.standardTimeConversiondateToStr(formValue.query_date[1])
+      end_time: formatData.standardTimeConversiondateToStr(formValue.query_date[1]),
+      bill_no: formValue.bill_no,
+      service_no: formValue.service_no
     };
     const fromdata = new FormData();
     fromdata.append('param', JSON.stringify(params));
