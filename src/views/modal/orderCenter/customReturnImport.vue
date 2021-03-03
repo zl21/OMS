@@ -27,6 +27,9 @@
         return R3.store.state[`S.${str[3]}.${str[4]}`];
       }, // 表信息
     },
+    mounted() {
+      console.log(this.selectItem);
+    },
     data() {
       return {
         btnConfig: {
@@ -36,7 +39,7 @@
             {
               text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
               btnclick: () => {
-                this.$parent.$parent.closeConfirm();
+                this.$emit('closeActionDialog');
               } // 按钮点击事件
             },
             {
@@ -51,15 +54,29 @@
     },
     methods: {
       confirm() {
+        let obj = {};
+        if (this.idArray.length) {
+          obj = {
+            ids: this.idArray,
+            table: this.$route.params.tableName
+          };
+        } else {
+          obj = {
+            table: this.$route.params.tableName,
+            fixedcolumns: this.selectItem.formItems.data
+          };
+        }
         axios({
           url: '/api/cs/oc/oms/v1/exportOcBReturnAfSendManual',
           method: 'post',
-          data: {
-            ids: this.idArray,
-            table: this.$route.params.tableName
-          }
+          data: obj
         }).then(res=>{
-          console.log(res);
+          if (res.data.code == 0) {
+            window.location.href = res.data.data;
+            this.$emit('closeActionDialog');
+          } else {
+            this.$Message.error(res.data.message);
+          }
         });
       }
     }
