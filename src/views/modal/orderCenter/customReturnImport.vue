@@ -61,6 +61,17 @@
             table: this.$route.params.tableName
           };
         } else {
+          const data = this.selectItem.formItems.data;
+          for (const key in data) {
+            if (!data[key]) {
+              delete data[key];
+            }
+            if (data[key] instanceof Array) { // 过滤数组值为空问题
+              if (!data[key][0]) {
+                delete data[key];
+              }
+            }
+          }
           obj = {
             table: this.$route.params.tableName,
             fixedcolumns: this.selectItem.formItems.data
