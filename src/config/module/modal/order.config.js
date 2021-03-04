@@ -34,6 +34,9 @@ export default {
   EXTRARETURNIMPORT: {
     component: () => import('@/views/modal/orderCenter/extraReturnImport.vue')
   },
+  CUSTOMSTANDPLATIMPORT: {
+    component: () => import('@/views/modal/orderCenter/customstandplatimport.vue')
+  },
   CREATEGRN: {
     component: () => import('@/views/modal/orderCenter/createGrn.vue')
   },
