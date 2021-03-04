@@ -78,9 +78,9 @@ export default {
     // 表单非空提示
     ruleValidate: {
       numNumber: [{ required: true, message: ' ', trigger: 'blur' }],
-      query_date: [{ required: true }],
-      bill_no: [{ required: true }],
-      service_no: [{ required: true }]
+      // query_date: [{ required: true }],
+      // bill_no: [{ required: true, message: ' ' }],
+      // service_no: [{ required: true, message: ' ' }]
     }
   },
   // 确定按钮
