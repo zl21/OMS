@@ -198,10 +198,10 @@ export default {
         return;
       }
       // if (_this.tableSize > 1000) return _this.$Message.error('数量过大，请使用导入功能设置是否到达');
-      if (_this.tableSize > 1000) {
-        _this.$Message.error(this.vmI18n.t('modalTips.y3'));
-        return;
-      }
+      // if (_this.tableSize > 1000) {
+      //   _this.$Message.error(this.vmI18n.t('modalTips.y3'));
+      //   return;
+      // }
       _this.dataArr.forEach(item => {
         if (item.IS_ARRIVE) {
           item.IS_ARRIVE = 'Y';

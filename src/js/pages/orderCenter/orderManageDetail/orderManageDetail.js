@@ -169,6 +169,30 @@ export default {
             } // 按钮点击事件
           },
           {
+            webname: 'auditingForce', // 强制审核
+            btnclick: () => {
+              const self = this;
+              const ids = [];
+              ids.push(self.tab1.order.ID);
+              self.service.orderCenter.auditOrderForce({ ids, type: '1' }).then(res => {
+                if (res.data.code === 0) {
+                  self.$Message.success(res.data.message);
+                  self.autoRefresh();
+                } else {
+                  const data = res.data.data || {};
+                  if (res.data.data && res.data.data.message) {
+                    self.error_type = 'auditing';
+                    self.error_tip = data.message;
+                    self.modal = true;
+                    self.autoRefresh();
+                  } else {
+                    self.$Message.error(res.data.message);
+                  }
+                }
+              });
+            } // 按钮点击事件
+          },
+          {
             webname: 'Counter-audit', // 反审核
             btnclick: () => {
               const self = this;
