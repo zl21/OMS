@@ -46,5 +46,9 @@ export default {
   // JIT配货单-换吊牌
   EXCHANGETAG: {
     component: () => import('@/views/modal/orderCenter/exchangeTag.vue')
+  },
+  // 额外退款-定制导出
+  CUSTOMRETURNIMPORT: {
+    component: () => import('@/views/modal/orderCenter/customReturnImport.vue')
   }
 };

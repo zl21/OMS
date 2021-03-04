@@ -102,5 +102,6 @@ R3.launchApplication({
   // quietRoutes: ['/register', '/password', '/forgotPassword'], // 外置路由
   externalTreeDatas: externalTreeDatasConfig,
   filterUrlForNetwork: filterUrlConfig, // 过滤不需要用框架报错提示信息的接口请求
+  enableActivateSameCustomizePage: false, // 控制列表页面是否能打开多个详情页
   filterUrlForNetworkScript: myfilterUrlForNetworkScript // 导入的filterUrlForNetworkScript脚本文件
 });
