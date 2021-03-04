@@ -127,6 +127,9 @@ export default {
         case 'IP_C_STANDPLAT_PRO': // 通用商品下载
           this.downloadUrlFile(itemObj[0].downloadUrl);
           break;
+        case 'IP_C_STANDPLAT_PRO_mcdr': // 通用商品-猫超商品导入
+          this.downloadUrlFile(itemObj[0].downloadUrl);
+          break;
         default:
           this.getDownloadTemp(itemObj[0].downloadUrl);
           break;
@@ -246,6 +249,11 @@ export default {
             this.getImportDialog(itemObj[0].url, this.componentData.objid);
           }
           break;
+        // case 'IP_C_STANDPLAT_PRO_mcdr':
+        //   if (this.componentData.importType === 1) {
+        //     this.getImportDialog(itemObj[0].url);
+        //   }
+        //   break;
         default:
           this.getImportDialog(itemObj[0].url);
           break;
