@@ -89,19 +89,21 @@ const setTableHeight = (_self, defaultHeight) => {
   const contentHeight = document.getElementById('content').clientHeight;
   // 获取需要除了agTable之外的节点
   const arr = document.getElementsByClassName('totalHeight');
-  const agTableDom = document.getElementsByClassName('ag-theme-balham')[0];
   let sumHeight = 34 + defaultHeight;
   Object.getOwnPropertyNames(arr).forEach(item => {
     sumHeight += parseInt(arr[item].clientHeight);
   });
+  const tableHeight = `${contentHeight - sumHeight}px`;
   if (_self.$refs.agGridChild1) {
     _self.tabConfig.forEach(item => {
-      item.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
-      agTableDom.style.height = `${contentHeight - sumHeight}px`;
+      item.agTableConfig.tableHeight = tableHeight;
     });
   } else {
-    _self.agTableConfig.tableHeight = `${contentHeight - sumHeight}px`;
-    agTableDom.style.height = `${contentHeight - sumHeight}px`;
+    _self.agTableConfig.tableHeight = tableHeight;
+  }
+  const agTableDom = document.getElementsByClassName('ag-theme-balham')[0];
+  if (agTableDom) {
+    agTableDom.style.height = tableHeight;
   }
 };
 
