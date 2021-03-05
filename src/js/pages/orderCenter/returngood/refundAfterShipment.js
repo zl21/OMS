@@ -1000,7 +1000,7 @@ export default {
         // 店铺名称
         if (item.item.label == _this.vmI18n.t('table_label.shopName')) item.item.props.value = data.CP_C_SHOP_TITLE;
         // 原始平台单号
-        if (item.item.label == _this.vmI18n.t('form_label.originalPlatformNo')) item.item.props.value = data.SOURCE_CODE;
+        if (item.item.label == _this.vmI18n.t('form_label.originalPlatformNo')) item.item.props.value = data.MERGE_SOURCE_CODE ? data.MERGE_SOURCE_CODE : data.SOURCE_CODE;
         // 买家昵称
         if (item.item.label == _this.vmI18n.t('table_label.buyerNickname')) item.item.props.value = data.USER_NICK;
         // 买家手机号;
@@ -1427,7 +1427,7 @@ export default {
             // 店铺名称
             if (configItemLabel === self.vmI18n.t('table_label.shopName')) configItem.props.value = data.CP_C_SHOP_TITLE;
             // 原始平台单号
-            if (configItemLabel === self.vmI18n.t('form_label.originalPlatformNo')) configItem.props.value = data.SOURCE_CODE;
+            if (configItemLabel === self.vmI18n.t('form_label.originalPlatformNo')) configItem.props.value = data.MERGE_SOURCE_CODE ? data.MERGE_SOURCE_CODE : data.SOURCE_CODE;
             // 买家昵称
             if (configItemLabel === self.vmI18n.t('table_label.buyerNickname')) configItem.props.value = data.USER_NICK;
             // 买家手机号
