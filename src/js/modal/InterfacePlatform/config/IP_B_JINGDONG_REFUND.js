@@ -88,8 +88,12 @@ export default {
     const formValue = self.downLoadFormConfig.formValue;
     const shopId = self.downLoadFormConfig.formData[0].itemdata.pid;
     if (!shopId) return self.$message.error('店铺不能为空'); // 店铺不能为空
-    if (!formValue.query_date[0] && !formValue.bill_no && !formValue.service_no) {
-      self.$message.error('平台时间,订单号,服务号需不能全部为空!');// 店铺和平台时间不能为空
+    let index = 0
+    if (formValue.query_date[0]) index += 1
+    if (formValue.bill_no) index += 1
+    if (formValue.service_no) index += 1
+    if (index != 1) {
+      self.$message.error('平台时间,订单号,服务单号只能三选一!');// 店铺和平台时间不能为空
       return;
     }
     self.dialogLoad = true;
