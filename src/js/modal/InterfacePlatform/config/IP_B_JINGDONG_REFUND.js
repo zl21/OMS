@@ -100,7 +100,9 @@ export default {
     // 平台时间 和 (订单号, 服务单号) 是二选一的,  而且没有时间的话,  订单号, 服务单号必须同时有
     console.log(formValue.query_date)
     if (formValue.query_date[0]) {
-      if (formValue.bill_no !== undefined || formValue.service_no !== undefined) {
+      if (formValue.bill_no === undefined) formValue.bill_no = ''
+      if (formValue.service_no === undefined) formValue.service_no = ''
+      if (formValue.bill_no || formValue.service_no) {
         return self.$message.error('平台时间存在时,订单号、服务单号必须为空!');
       }
     } else {
