@@ -2701,15 +2701,20 @@ export default {
               const queryOrderResultList = res.data.data.queryOrderResultList;
               let combined = [];
                 if(queryOrderResultList.length !==0){
-                  let qty_all = 0;
-                  let product_amt = 0;
-                  queryOrderResultList.forEach(item=>{
-                    qty_all+=item.QTY_ALL;
-                    product_amt+=item.PRODUCT_AMT;
-                  })
+                  // let qty_all = 0;
+                  // let product_amt = 0;
+                  // queryOrderResultList.forEach(item=>{
+                  //   qty_all+=item.QTY_ALL;
+                  //   product_amt+=item.PRODUCT_AMT;
+                  // })
+                  // 2021-03-09 小东
+                  // sumProductQty：合计：当前页列表商品总数；
+                  // sumOrderAmt：合计：当前页列表订单总额；
+                  // totalProdQty：总计：管理列表 所有商品总数；
+                  // totalOrderAmt：总计：管理列表 所有订单总额
                   combined = [
-                    {__ag_sequence_column_name__:"合计" , QTY_ALL:qty_all , PRODUCT_AMT:product_amt},
-                    {__ag_sequence_column_name__:"总计" ,  QTY_ALL:res.data.data.sumProductQty , PRODUCT_AMT:res.data.data.sumOrderAmt}
+                    {__ag_sequence_column_name__:"合计" , QTY_ALL: res.data.data.sumProductQty , PRODUCT_AMT: res.data.data.sumOrderAmt},
+                    {__ag_sequence_column_name__:"总计" ,  QTY_ALL:res.data.data.totalProdQty , PRODUCT_AMT:res.data.data.totalOrderAmt}
                   ]
                 }
                 self.agTableConfig.pagenation.total = res.data.data.totalSize;
