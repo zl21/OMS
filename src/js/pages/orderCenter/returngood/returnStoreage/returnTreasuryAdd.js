@@ -188,6 +188,7 @@ export default {
           RECEIVER_ADDRESS: '', // 发件地址
           HANDLER: '', // 处理人
           REMARK_HANDLE: '', // 处理人备注
+          NO_NAME_MATCH_REMARKS: '',
           IS_OFF_MATCH: false
         },
         // 表单非空提示
@@ -831,6 +832,14 @@ export default {
           disabled: true, // 按钮禁用控制
           value: 'WMS_BILL_NO',
           width: '6'
+        },
+        {
+          style: 'input',
+          label: '无名件匹配备',
+          dataAcessKey: 'NO_NAME_MATCH_REMARKS',
+          disabled: false, // 按钮禁用控制
+          value: 'NO_NAME_MATCH_REMARKS',
+          width: '6'
         }
       );
     }
@@ -909,6 +918,7 @@ export default {
           RECEIVER_ADDRESS: item.RECEIVER_ADDRESS, // 发件地址
           HANDLER: item.HANDLER,
           REMARK_HANDLE: item.REMARK_HANDLE,
+          NO_NAME_MATCH_REMARKS: item.NO_NAME_MATCH_REMARKS,
           IS_OFF_MATCH: item.IS_OFF_MATCH ? 1 : 0
         }, // 退货入库主表数据
         ID: this.ID
