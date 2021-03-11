@@ -834,12 +834,14 @@ export default {
           width: '6'
         },
         {
-          style: 'input',
+          style: 'select', // 下拉框类型
+          // label: "退货批次", //下拉框前的值
           label: '无名件匹配备',
+          width: '6', // 所占宽度宽度
+          value: 'NO_NAME_MATCH_REMARKS',
           dataAcessKey: 'NO_NAME_MATCH_REMARKS',
           disabled: false, // 按钮禁用控制
-          value: 'NO_NAME_MATCH_REMARKS',
-          width: '6'
+          options: []
         }
       );
     }
@@ -1025,6 +1027,25 @@ export default {
               const childItem = item.childs;
               childItem.forEach(item => {
                 if (item.colname === 'SPECIAL_TYPE') {
+                  for (let i = 0; i < item.combobox.length; i++) {
+                    value.options.push({
+                      value: item.combobox[i].limitval,
+                      label: item.combobox[i].limitdesc
+                    });
+                  }
+                }
+              });
+            }
+          });
+        }
+        if (value.label === '无名件匹配备') {
+          res.data.data.addcolums.forEach(item => {
+            if (item.parentdesc === window.vmI18n.t('common.baseInformation')) {
+              
+              const childItem = item.childs;
+              childItem.forEach(item => {
+                // 无名件匹配备
+                if (item.colname === 'NO_NAME_MATCH_REMARKS') {
                   for (let i = 0; i < item.combobox.length; i++) {
                     value.options.push({
                       value: item.combobox[i].limitval,
