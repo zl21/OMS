@@ -64,7 +64,9 @@
           const data = JSON.parse(JSON.stringify(this.selectItem.formItems.data));
           for (const key in data) {
             if (key == 'CHECK_TIME' || key == 'FINANCIAL_AUDIT_TIME' || key == 'CREATIONDATE') {
-              data[key] = `${data[key][0]}~${data[key][1]}`
+              if(data[key][0]) {
+                data[key] = `${data[key][0]}~${data[key][1]}`
+              }
             }
             if (!data[key]) {
               delete data[key];
@@ -79,6 +81,7 @@
             table: this.$route.params.tableName,
             fixedcolumns: data
           };
+          debugger
         }
         axios({
           url: '/api/cs/oc/oms/v1/exportOcBReturnAfSendManual',
