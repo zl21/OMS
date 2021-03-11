@@ -188,6 +188,7 @@ export default {
           RECEIVER_ADDRESS: '', // 发件地址
           HANDLER: '', // 处理人
           REMARK_HANDLE: '', // 处理人备注
+          NO_NAME_MATCH_REMARKS: '',
           IS_OFF_MATCH: false
         },
         // 表单非空提示
@@ -831,6 +832,16 @@ export default {
           disabled: true, // 按钮禁用控制
           value: 'WMS_BILL_NO',
           width: '6'
+        },
+        {
+          style: 'select', // 下拉框类型
+          // label: "退货批次", //下拉框前的值
+          label: '无名件匹配备',
+          width: '6', // 所占宽度宽度
+          value: 'NO_NAME_MATCH_REMARKS',
+          dataAcessKey: 'NO_NAME_MATCH_REMARKS',
+          disabled: false, // 按钮禁用控制
+          options: []
         }
       );
     }
@@ -909,6 +920,7 @@ export default {
           RECEIVER_ADDRESS: item.RECEIVER_ADDRESS, // 发件地址
           HANDLER: item.HANDLER,
           REMARK_HANDLE: item.REMARK_HANDLE,
+          NO_NAME_MATCH_REMARKS: item.NO_NAME_MATCH_REMARKS,
           IS_OFF_MATCH: item.IS_OFF_MATCH ? 1 : 0
         }, // 退货入库主表数据
         ID: this.ID
@@ -1015,6 +1027,25 @@ export default {
               const childItem = item.childs;
               childItem.forEach(item => {
                 if (item.colname === 'SPECIAL_TYPE') {
+                  for (let i = 0; i < item.combobox.length; i++) {
+                    value.options.push({
+                      value: item.combobox[i].limitval,
+                      label: item.combobox[i].limitdesc
+                    });
+                  }
+                }
+              });
+            }
+          });
+        }
+        if (value.label === '无名件匹配备') {
+          res.data.data.addcolums.forEach(item => {
+            if (item.parentdesc === window.vmI18n.t('common.baseInformation')) {
+              
+              const childItem = item.childs;
+              childItem.forEach(item => {
+                // 无名件匹配备
+                if (item.colname === 'NO_NAME_MATCH_REMARKS') {
                   for (let i = 0; i < item.combobox.length; i++) {
                     value.options.push({
                       value: item.combobox[i].limitval,
