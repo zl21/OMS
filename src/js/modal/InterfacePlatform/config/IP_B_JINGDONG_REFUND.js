@@ -88,9 +88,27 @@ export default {
     const formValue = self.downLoadFormConfig.formValue;
     const shopId = self.downLoadFormConfig.formData[0].itemdata.pid;
     if (!shopId) return self.$message.error('店铺不能为空'); // 店铺不能为空
-    if (!formValue.query_date[0] && !formValue.bill_no && !formValue.service_no) {
-      self.$message.error('平台时间,订单号,服务号需不能全部为空!');// 店铺和平台时间不能为空
-      return;
+    // let index = 0
+    // if (formValue.query_date[0]) index += 1
+    // if (formValue.bill_no) index += 1
+    // if (formValue.service_no) index += 1
+    // if (index != 1) {
+    //   self.$message.error('平台时间,订单号,服务单号只能三选一!');// 店铺和平台时间不能为空
+    //   return;
+    // }
+    // 2021-03/08 再次修改
+    // 平台时间 和 (订单号, 服务单号) 是二选一的,  而且没有时间的话,  订单号, 服务单号必须同时有
+    console.log(formValue.query_date)
+    if (formValue.query_date[0]) {
+      if (formValue.bill_no === undefined) formValue.bill_no = ''
+      if (formValue.service_no === undefined) formValue.service_no = ''
+      if (formValue.bill_no || formValue.service_no) {
+        return self.$message.error('平台时间存在时,订单号、服务单号必须为空!');
+      }
+    } else {
+      if (!formValue.bill_no || !formValue.service_no) {
+        return self.$message.error('平台时间不存在时,订单号、服务单号必须同时有!');
+      }
     }
     self.dialogLoad = true;
     const params = {
