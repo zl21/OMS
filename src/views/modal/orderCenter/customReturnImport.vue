@@ -61,8 +61,13 @@
             table: this.$route.params.tableName
           };
         } else {
-          const data = this.selectItem.formItems.data;
+          const data = JSON.parse(JSON.stringify(this.selectItem.formItems.data));
           for (const key in data) {
+            if (key == 'CHECK_TIME' || key == 'FINANCIAL_AUDIT_TIME' || key == 'CREATIONDATE') {
+              if(data[key][0]) {
+                data[key] = `${data[key][0]}~${data[key][1]}`
+              }
+            }
             if (!data[key]) {
               delete data[key];
             }
@@ -74,8 +79,9 @@
           }
           obj = {
             table: this.$route.params.tableName,
-            fixedcolumns: this.selectItem.formItems.data
+            fixedcolumns: data
           };
+          debugger
         }
         axios({
           url: '/api/cs/oc/oms/v1/exportOcBReturnAfSendManual',
