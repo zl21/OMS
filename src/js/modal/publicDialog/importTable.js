@@ -325,7 +325,7 @@ export default {
             // 导入成功
             _this.$Message.success(res.data.message || this.vmI18n.t('modalTips.ze'));
             _this.$emit('returnData', res.data.data);
-            _this.customizeInvoke(_this.componentData.tableName);
+            _this.customizeInvoke(_this.componentData.tableName, res.data.data);
             _this.loading = false;
           } else if (res.data.code === -1) {
             // 导入失败
@@ -358,7 +358,7 @@ export default {
         });
     },
     // 导入成功后操作
-    customizeInvoke(table) {
+    customizeInvoke(table, data) {
       const _this = this;
       if (table === 'AC_F_DISTRIBUTION') {
         _this.$parent.$parent.$parent.getDetail();
@@ -380,6 +380,8 @@ export default {
         _this.$parent.$parent.$parent.objectAddRefresh();
       } else if (table === 'AC_F_RECEIVABLES_ADJUSTMENT' || table === 'SG_B_PHY_OUT_RESULT' || table === 'SC_B_TRANSFER' || table === 'OC_B_JD_RETURN_ORDER') {
         _this.$parent.$emit('confirmImport');
+      } else if (table === 'PS_C_SKU') {
+        _this.$parent.$parent.$parent.returnData(data);
       }
     },
     // 上传文件前判断文件大小

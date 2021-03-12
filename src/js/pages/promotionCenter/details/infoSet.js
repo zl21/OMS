@@ -672,6 +672,7 @@ export default {
      * 返回值，用于弹框导入返回调添加单个表
      */
     returnData(data) {
+      this.$children.find(item => item.name === 'importTable').closeConfirm();
       if (data && data.length > 0) {
         this.infoData.productslist = this.infoData.productslist.concat(data);
         this.countTablelistView();
