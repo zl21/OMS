@@ -388,7 +388,7 @@ export default {
         _this.$parent.$parent.$parent.objectAddRefresh();
       } else if (table === 'AC_F_RECEIVABLES_ADJUSTMENT' || table === 'SG_B_PHY_OUT_RESULT' || table === 'SC_B_TRANSFER' || table === 'OC_B_JD_RETURN_ORDER') {
         _this.$parent.$emit('confirmImport');
-      } else if (table === 'PS_C_SKU') {
+      } else if (table === 'PS_C_SKU' || table === 'SG_B_CHANNEL_PRODUCT' || table === 'PS_C_PRO' || table === 'IP_C_TAOBAO_PRODUCT') {
         _this.$parent.$parent.$parent.returnData(data);
       }
     },
