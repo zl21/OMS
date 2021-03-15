@@ -233,7 +233,11 @@ export default {
         row.ENAME = item.PS_C_PRO_ENAME || '';
         row.ECODE = item.PS_C_PRO_ECODE || '';
         row.ID = item.ID;
-      } else if (this.itemdata.reftable === 'PS_C_PRO') {
+      } else if (this.itemdata.reftable === 'PS_C_SKU') {
+        row.ENAME = item.PS_C_PRO_ENAME || '';
+        row.ECODE = item.PS_C_SKU_ECODE || '';
+        row.ID = item.ID;
+      }  else if (this.itemdata.reftable === 'PS_C_PRO') {
         row.ENAME = item.PS_C_PRO_ENAME || '';
         row.ECODE = item.PS_C_PRO_ECODE || '';
         row.ID = item.ID;

@@ -210,6 +210,10 @@ export default {
         obj.ENAME = item.PS_C_PRO_ENAME || '';
         obj.ECODE = item.PS_C_PRO_ECODE || '';
         obj.ID = item.ID;
+      } else if (rs.reftable === 'PS_C_SKU') {
+        obj.ENAME = item.PS_C_PRO_ENAME || '';
+        obj.ECODE = item.PS_C_SKU_ECODE || '';
+        obj.ID = item.ID;
       } else if (rs.reftable === 'PS_C_PRO') {
         obj.ENAME = item.PS_C_PRO_ENAME || '';
         obj.ECODE = item.PS_C_PRO_ECODE || '';
