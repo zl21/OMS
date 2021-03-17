@@ -231,6 +231,11 @@ export default {
         downloadUrl: '/p/cs/downLoadSyncStockStrategyImportTemp' 
       }, // 店铺同步库存策略
       { 
+        tableName: 'AC_F_LIVE_ORDER',
+        url: '/p/cs/liveOrderImport',
+        downloadUrl: '/p/cs/liveOrderImportTemp'
+      }, // O2O直播订单设置
+      { 
         tableName: 'ST_C_PRODUCT_STRATEGY',
         url: '/p/cs/productStrategy/import/multiShopItem',
         downloadUrl: '/p/cs/productStrategy/import/downloadMultiShopTemp'

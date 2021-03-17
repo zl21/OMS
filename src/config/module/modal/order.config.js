@@ -40,6 +40,9 @@ export default {
   REFUSETOPAYOCBRETURNAFSEND: {
     component: () => import('@/views/modal/orderCenter/returngood/refuseToPayOcBReturnAfSend.vue')
   },
+  CUSTOMSTANDLIVEORDERIMPORT: {
+    component: () => import('@/views/modal/orderCenter/customstandliveorderimport.vue')
+  },
   PICKORDEREXPORT: {
     component: () => import('@/views/modal/orderCenter/returngood/pickorderExport.vue')
   },
