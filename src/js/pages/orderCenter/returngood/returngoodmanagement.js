@@ -697,6 +697,22 @@ export default {
             disabled: true,
             value: 'ORIG_ORDER_NO',
             width: '6'
+          },
+          {
+            style: 'input',
+            label: '退货门店编码', // 退货门店编码
+            dataAcessKey: 'STORE_CODE',
+            value: 'STORE_CODE',
+            disabled: true, // 按钮禁用控制
+            width: '6'
+          },
+          {
+            style: 'input',
+            label: '退货门店名称', // 退货门店名称
+            dataAcessKey: 'STORE_NAME',
+            value: 'STORE_NAME',
+            disabled: true, // 按钮禁用控制
+            width: '6'
           }
         ]
       }, // 基本信息
@@ -1742,6 +1758,8 @@ export default {
       item.BILL_TYPE = String(data.BILL_TYPE) ? String(data.BILL_TYPE) : '';
       item.BILL_NO = data.BILL_NO;
       item.ORIG_ORDER_NO = data.ORIG_ORDER_NO;
+      item.STORE_CODE = data.STORE_CODE;
+      item.STORE_NAME = data.STORE_NAME;
       item.BUYER_NICK = data.BUYER_NICK ? data.BUYER_NICK : '';
       item.CP_C_LOGISTICS_ENAME = data.CP_C_LOGISTICS_ENAME ? data.CP_C_LOGISTICS_ENAME : '';
       item.ORIG_SOURCE_CODE = data.TID ? data.TID : '';
