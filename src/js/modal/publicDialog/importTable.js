@@ -124,6 +124,9 @@ export default {
             this.downloadUrlFile(itemObj[0].downloadUrl);
           }
           break;
+        case 'AC_F_LIVE_ORDER': // O2O直播订单设置
+          this.downloadUrlFile(itemObj[0].downloadUrl);
+          break;
         case 'IP_C_STANDPLAT_PRO': // 通用商品下载
           this.downloadUrlFile(itemObj[0].downloadUrl);
           break;
