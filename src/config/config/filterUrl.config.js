@@ -36,7 +36,7 @@ export default {
     // 京东商品(下载商品)-IP_C_JINGDONG_PRODUCT
     IP_C_JINGDONG_PRODUCT: ['/p/cs/itemDownload'],
     // 通用商品(通用商品下载,导入)-IP_C_STANDPLAT_PRO
-    IP_C_STANDPLAT_PRO: ['/p/cs/stdp/order/get', '/p/cs/getItemIdsForExcel'],
+    IP_C_STANDPLAT_PRO: ['/p/cs/stdp/order/get', '/p/cs/getItemIdsForExcel', '/p/cs/alibabaProductImport'],
     // 唯品会商品(下载商品)-IP_C_VIP_PRO
     IP_C_VIP_PRO: ['/p/cs/vip/item/get'],
 
