@@ -176,6 +176,7 @@
           <li>卖家备注: {{ componentData.order.SELLER_MEMO }}</li>
           <li>系统备注: {{ componentData.order.SYSREMARK }}</li>
           <li>内部备注: {{ componentData.order.INSIDE_REMARK }}</li>
+          <li>WMS备注: {{ componentData.order.WMS_REMARK }}</li>
         </ul>
       </div>
     </div>
