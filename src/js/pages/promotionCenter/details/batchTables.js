@@ -208,6 +208,11 @@ export default {
         obj.ID = item.ID || '';
       } else if (rs.reftable === 'IP_C_TAOBAO_PRODUCT') {
         obj.ENAME = item.PS_C_PRO_ENAME || '';
+        obj.ECODE = item.PS_C_PRO_ECODE || '';
+        obj.SKU_ID = item.SKU_ID || '';
+        obj.ID = item.ID;
+      } else if (rs.reftable === 'PS_C_SKU') {
+        obj.ENAME = item.PS_C_PRO_ENAME || '';
         obj.ECODE = item.PS_C_SKU_ECODE || '';
         obj.ID = item.ID;
       } else if (rs.reftable === 'PS_C_PRO') {

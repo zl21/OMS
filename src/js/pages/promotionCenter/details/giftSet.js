@@ -519,6 +519,7 @@ export default {
      * 返回值，用于弹框返回解析
      */
     returnData(data) {
+      this.$children.find(item => item.name === 'importTable').closeConfirm();
       if (data && data.length > 0) {
         this.giftData.gift_productslist = this.giftData.gift_productslist.concat(data);
         this.countTablelistView();
