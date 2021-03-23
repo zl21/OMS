@@ -231,15 +231,20 @@ export default {
         }
       } else if (this.itemdata.reftable === 'IP_C_TAOBAO_PRODUCT') {
         row.ENAME = item.PS_C_PRO_ENAME || '';
+        row.ECODE = item.PS_C_PRO_ECODE || '';
+        row.SKU_ID = item.SKU_ID || '';
+        row.ID = item.ID;
+      } else if (this.itemdata.reftable === 'PS_C_SKU') {
+        row.ENAME = item.PS_C_PRO_ENAME || '';
         row.ECODE = item.PS_C_SKU_ECODE || '';
         row.ID = item.ID;
-      } else if (this.itemdata.reftable === 'PS_C_PRO') {
+      }  else if (this.itemdata.reftable === 'PS_C_PRO') {
         row.ENAME = item.PS_C_PRO_ENAME || '';
         row.ECODE = item.PS_C_PRO_ECODE || '';
         row.ID = item.ID;
       } else {
         row.ENAME = item.PS_C_PRO_ENAME;
-        row.ECODE = item.PS_C_SKU_ECODE;
+        row.ECODE = item.PS_C_PRO_ECODE;
         row.ID = item.ID;
       }
       const current = this.current || 1;

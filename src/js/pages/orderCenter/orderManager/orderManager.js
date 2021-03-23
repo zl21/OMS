@@ -616,6 +616,13 @@ export default {
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if (!self.selection.length) {
+                return self.$Message.warning({
+                  content: '请选择要拆分的订单！',
+                  duration: 5,
+                  top: 80
+                });
+              }
               if (self.selection.length === 1) {
                 this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.selection[0].ID }).then(res => {
                   // 提前判断下该单据是否可拆单

@@ -665,6 +665,21 @@ export default {
             }
           },
           {
+            webname: 'getSupplyPrice', // 获取猫超供货价
+            btnclick: () => {
+              const _this = this;
+              if (_this.orderStatus != 1) return this.$Message.warning('只有待审核状态可以获取猫超供货价！');
+              _this.service.orderCenter.getSupplyPrice({ id: _this.tab1.order.ID }).then(res => {
+                if (res.data.code === 0) {
+                  _this.$Message.success(res.data.message);
+                  _this.autoRefresh();
+                } else {
+                  _this.$Message.error(res.data.message);
+                }
+              });
+            } // 按钮点击事件
+          },
+          {
             webname: 'order_refreceing', // 刷新
             btnclick: () => {
               this.autoRefresh();
