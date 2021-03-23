@@ -79,6 +79,7 @@
                 <!-- 全选 -->
                 {{ vmI18n.t('common.selectAll') }}
               </Checkbox>
+              <span @click="checkFx" style="margin-left: 15px;cursor: pointer;">反选</span>
               <div class="treeBox2">
                 <Tree
                   id="tree2"

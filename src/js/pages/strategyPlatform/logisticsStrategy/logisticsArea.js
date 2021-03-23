@@ -340,6 +340,17 @@ export default {
         });
       }
     },
+    checkFx() {
+      this.treeData2.forEach(item => {
+        item.checked = !item.checked;
+        item.children.forEach(list => {
+          list.checked = !list.checked;
+          list.children.forEach(data => {
+            data.checked = !data.checked;
+          });
+        });
+      });
+    },
     // 省市区搜索
     enter(e) {
       this.treeData1.forEach(item => {
