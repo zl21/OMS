@@ -342,9 +342,9 @@ export default {
     },
     checkFx() {
       this.treeData2.forEach(item => {
-        item.checked = !item.checked;
+        if (item.checked) item.checked = !item.checked;
         item.children.forEach(list => {
-          list.checked = !list.checked;
+          if (list.checked || !list.children.length) list.checked = !list.checked;
           list.children.forEach(data => {
             data.checked = !data.checked;
           });
