@@ -1224,7 +1224,7 @@ export default {
           },
           {
             text: '跳转零售发货单', // 跳转零售发货单
-            webname: 'refund_return',
+            webname: 'refund_jump_to_order',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this
@@ -1506,6 +1506,13 @@ export default {
             }
           });
       }
+
+      _this.btnConfig.buttons.forEach(item => {
+        // 跳转零售发货单
+        if (item.webname == 'refund_jump_to_order') {
+          item.disabled = true;
+        }
+      });
     } else {
       this.getList();
       console.log(this.$route.query);
@@ -1543,6 +1550,15 @@ export default {
       ];
       this.information.formData[0].style = 'input';
       this.information.formData = this.information.formData.concat(informationArr);
+
+      if (!this.information.formValue.ORIG_ORDER_ID) {
+        _this.btnConfig.buttons.forEach(item => {
+          // 跳转零售发货单
+          if (item.webname == 'refund_jump_to_order') {
+            item.disabled = true;
+          }
+        });
+      }
     }
 
     this.$nextTick(() => {
