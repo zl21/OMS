@@ -614,6 +614,16 @@ export default {
     // 获取默认数据
     this.agTableConfig.pagenation.current = 1;
   },
+  watch: {
+    "$route.path": function(newVal, oldVal) {
+      const _this = this
+      if (newVal.indexOf('RETURNGOODLIST') != -1 && oldVal.indexOf('ORDERMANAGEDETAIL') != -1) {
+        setTimeout(() => {
+          _this.getListWork()
+        })
+      }
+    }
+  },
   mounted() {
     this.$nextTick(() => {
       // 前提:公共逻辑处理必须使用jordanButton组件才可以使用公共逻辑
@@ -1085,6 +1095,9 @@ export default {
         if (returnParam.CP_C_PHY_WAREHOUSE_ID) {
           _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = returnParam.CP_C_PHY_WAREHOUSE_ID;
         } // 入库实体仓库
+        if (returnParam.TID) {
+          _this.formConfig.formValue.TID = returnParam.TID;
+        }
       }
       this.service.orderCenter.querySalesReturn(Object.assign(param, _this.formConfig.formValue)).then(res => {
         res.data.data = JSON.parse(unzipXv(res.data.data));
