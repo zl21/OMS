@@ -686,6 +686,25 @@ export default {
             } // 按钮点击事件
           },
           {
+            webname: 'order_jump_to_refund', // 跳转退单
+            btnclick: () => {
+              comUtils.tabCloseAppoint(this);
+              this.$store.commit('customize/TabHref', {
+                id: 2661,
+                type: 'action',
+                name: 'returngoodList',
+                label: this.vmI18n.t('panel_label.forcedStorage'), // 退换货订单
+                query: Object.assign({
+                  id: 2661,
+                  type: 'workID',
+                  returnParam: JSON.stringify({TID:this.tab1.order.TID}),
+                  tabTitle: this.vmI18n.t('panel_label.forcedStorage') // 退换货订单
+                }),
+                back: true
+              });
+            } // 按钮点击事件
+          },
+          {
             webname: 'order_fund', // 返回
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
