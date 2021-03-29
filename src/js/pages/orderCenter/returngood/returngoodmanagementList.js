@@ -614,6 +614,16 @@ export default {
     // 获取默认数据
     this.agTableConfig.pagenation.current = 1;
   },
+  watch: {
+    "$route.path": function(newVal, oldVal) {
+      const _this = this
+      if (newVal.indexOf('RETURNGOODLIST') != -1 && oldVal.indexOf('ORDERMANAGEDETAIL') != -1) {
+        setTimeout(() => {
+          _this.getListWork()
+        })
+      }
+    }
+  },
   mounted() {
     this.$nextTick(() => {
       // 前提:公共逻辑处理必须使用jordanButton组件才可以使用公共逻辑
@@ -1085,6 +1095,9 @@ export default {
         if (returnParam.CP_C_PHY_WAREHOUSE_ID) {
           _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = returnParam.CP_C_PHY_WAREHOUSE_ID;
         } // 入库实体仓库
+        if (returnParam.TID) {
+          _this.formConfig.formValue.TID = returnParam.TID;
+        }
       }
       this.service.orderCenter.querySalesReturn(Object.assign(param, _this.formConfig.formValue)).then(res => {
         res.data.data = JSON.parse(unzipXv(res.data.data));
@@ -1112,7 +1125,7 @@ export default {
             if (item.CREATIONDATE) {
               item.CREATIONDATE = publicMethodsUtil.DatesTime(item.CREATIONDATE);
             } // 创建时间
-            item.RETURN_STATUS = item.RETURN_STATUS_NAME; // 退单状态
+            // item.RETURN_STATUS = item.RETURN_STATUS_NAME; // 退单状态
             item.IS_ADD = item.IS_ADD == 0 ? '否' : '是'; // 是否手工新增
             if (item.INVENTED_STATUS == 0) {
               item.INVENTED_STATUS = '未虚拟入库';
