@@ -461,7 +461,7 @@ export default {
       if (this.treeData) {
         this.treeData.forEach(item => {
         // 系统配置省编码变动前端需要相应变动
-          // if (item.ecode == 110000 || item.ecode == 120000 || item.ecode == 310000 || item.ecode == 500000) {
+          if (item.ecode == 110000 || item.ecode == 120000 || item.ecode == 310000 || item.ecode == 500000) {
             item.children.forEach(list => {
               if (list.children.length) {
                 list.children.forEach(j => {
@@ -474,7 +474,7 @@ export default {
                 })
               }
             });
-          // }
+          }
         });
       }
       const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeNode: treeList };
