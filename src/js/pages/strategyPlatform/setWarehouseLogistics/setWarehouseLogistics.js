@@ -145,7 +145,7 @@ export default {
                   }
                 });
                 if (flag) {
-                  text += `${item.CP_C_REGION_CITY_ENAME || item.CP_C_REGION_PROVINCE_ENAME},`;
+                  text += `${item.CP_C_REGION_AREA_ENAME || item.CP_C_REGION_CITY_ENAME || item.CP_C_REGION_PROVINCE_ENAME},`;
                 }
               });
               if (text) {
