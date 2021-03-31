@@ -331,9 +331,9 @@ export default {
               });
             }
           } else {
-            // const err = res.data.data.message || window.vmI18n.t('modalTips.y0'); // 保存失败
-            // _this.$Message.error(err);
-            // _this.refresh();
+            const err = res.data.data.message || window.vmI18n.t('modalTips.y0'); // 保存失败
+            _this.$Message.error(err);
+            _this.refresh();
           }
         })
         .catch(error => {
