@@ -51,6 +51,8 @@ export default {
     /* ------------ strategyPlatfor ------------ */
     // 店铺同步库存策略-ST_C_SYNC_STOCK_STRATEGY
     ST_C_SYNC_STOCK_STRATEGY: ['/p/cs/importSyncStockStrategy'],
+    // O2O直播订单设置-AC_F_LIVE_ORDER
+    AC_F_LIVE_ORDER: ['/p/cs/ac/v1/liveOrderImport'],
     // 店铺商品特殊设置-ST_C_PRODUCT_STRATEGY
     // ST_C_PRODUCT_STRATEGY: ['/p/cs/delayButtonFunction'],
     // 店铺锁库条码特殊设置-ST_C_LOCK_SKU_STRATEGY
