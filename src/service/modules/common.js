@@ -232,8 +232,8 @@ export default {
       }, // 店铺同步库存策略
       { 
         tableName: 'AC_F_LIVE_ORDER',
-        url: '/p/cs/liveOrderImport',
-        downloadUrl: '/p/cs/liveOrderImportTemp'
+        url: '/p/cs/ac/v1/liveOrderImport',
+        downloadUrl: '/p/cs/ac/v1/liveOrderImportTemp'
       }, // O2O直播订单设置
       { 
         tableName: 'ST_C_PRODUCT_STRATEGY',
