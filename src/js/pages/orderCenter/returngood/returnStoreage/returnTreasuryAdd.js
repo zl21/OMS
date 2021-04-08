@@ -844,7 +844,7 @@ export default {
         },
         {
           style: 'select', // 下拉框类型
-          label: '单据类型',
+          label: '单据类别',
           width: '6', // 所占宽度宽度
           value: 'ORDER_TYPE',
           dataAcessKey: 'ORDER_TYPE',
@@ -1065,13 +1065,13 @@ export default {
             }
           });
         }
-        if (value.label === '单据类型') {
+        if (value.label === '单据类别') {
           res.data.data.addcolums.forEach(item => {
             if (item.parentdesc === window.vmI18n.t('common.baseInformation')) {
               
               const childItem = item.childs;
               childItem.forEach(item => {
-                // 单据类型
+                // 单据类别
                 if (item.colname === 'ORDER_TYPE') {
                   for (let i = 0; i < item.combobox.length; i++) {
                     value.options.push({
