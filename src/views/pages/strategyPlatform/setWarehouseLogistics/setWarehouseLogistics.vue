@@ -63,18 +63,26 @@
             <div class="iconButton">
               <Button
                 size="small"
-                @click="synchronous"
-              >
-                <!-- 市 -->
-                {{ vmI18n.t('common.city') }}->
-              </Button>
-              <Button
-                style="margin-top:20px"
-                size="small"
                 @click="provinceSynchronous"
               >
                 <!-- 省 -->
                 {{ vmI18n.t('common.province') }}->
+              </Button>
+              <Button
+                size="small"
+                style="margin-top:20px"
+                @click="synchronous"
+              >
+                <!-- 市  -->
+                {{ vmI18n.t('common.city') }}->
+              </Button>
+              <Button
+                size="small"
+                style="margin-top:20px"
+                @click="areaSynchronous"
+              >
+                <!-- 区  -->
+                区->
               </Button>
             </div>
           </div>
@@ -98,6 +106,10 @@
                         <th v-if="cityThead">
                           <!-- 市 -->
                           {{ vmI18n.t('common.city') }}
+                        </th>
+                        <th v-if="areaThead">
+                          <!-- 区 -->
+                          区
                         </th>
                         <th
                           v-for="(item, index) in theadArr"
@@ -124,6 +136,10 @@
                         <th v-if="cityThead">
                           {{ vmI18n.t('common.city') }}
                         </th>
+                        <th v-if="areaThead">
+                          <!-- 区 -->
+                          区
+                        </th>
                         <th
                           v-for="(item, index) in theadArr"
                           :key="index"
@@ -143,6 +159,9 @@
                         <td>{{ data.CP_C_REGION_PROVINCE_ENAME }}</td>
                         <td v-if="cityThead">
                           {{ data.CP_C_REGION_CITY_ENAME }}
+                        </td>
+                        <td v-if="areaThead">
+                          {{ data.CP_C_REGION_AREA_ENAME }}
                         </td>
                         <td
                           v-for="(item, j) of data.LOGISTICS_RANK"

@@ -26,6 +26,7 @@ export default {
       isSaveLoading: false,
       tableLoading: false,
       cityThead: true,
+      areaThead: true,
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
@@ -144,7 +145,7 @@ export default {
                   }
                 });
                 if (flag) {
-                  text += `${item.CP_C_REGION_CITY_ENAME || item.CP_C_REGION_PROVINCE_ENAME},`;
+                  text += `${item.CP_C_REGION_AREA_ENAME || item.CP_C_REGION_CITY_ENAME || item.CP_C_REGION_PROVINCE_ENAME},`;
                 }
               });
               if (text) {
@@ -330,9 +331,9 @@ export default {
               });
             }
           } else {
-            // const err = res.data.data.message || window.vmI18n.t('modalTips.y0'); // 保存失败
-            // _this.$Message.error(err);
-            // _this.refresh();
+            const err = res.data.data.message || window.vmI18n.t('modalTips.y0'); // 保存失败
+            _this.$Message.error(err);
+            _this.refresh();
           }
         })
         .catch(error => {
@@ -411,6 +412,7 @@ export default {
       if (oK) {
         _this.tableLoading = false;
         _this.cityThead = true;
+        _this.areaThead = false;
         console.log(data);
         if (!data || !data.length) return;
         _this.listArr = data;
@@ -443,6 +445,45 @@ export default {
         _this.tableLoading = false;
         if (res.data.oK) {
           _this.cityThead = false;
+          _this.areaThead = false;
+          _this.listArr = res.data.data !== undefined ? res.data.data : [];
+          _this.listArr.forEach(item => {
+            item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK);
+          });
+        }
+      });
+    },
+    async areaSynchronous() {
+      const _this = this;
+      _this.tableLoading = true;
+      _this.listArr = [];
+      const treeList = [];
+      if (this.treeData) {
+        this.treeData.forEach(item => {
+        // 系统配置省编码变动前端需要相应变动
+          if (item.ecode == 110000 || item.ecode == 120000 || item.ecode == 310000 || item.ecode == 500000) {
+            item.children.forEach(list => {
+              if (list.children.length) {
+                list.children.forEach(j => {
+                  if (j.checked) {
+                    treeList.push({
+                      id: j.id,
+                      regiontype: j.regiontype
+                    });
+                  }
+                })
+              }
+            });
+          }
+        });
+      }
+      const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeNode: treeList };
+      // 接口
+      this.service.common.getLogisticsRankResultTable(params).then(res => {
+        _this.tableLoading = false;
+        if (res.data.oK) {
+          _this.cityThead = true;
+          _this.areaThead = true;
           _this.listArr = res.data.data !== undefined ? res.data.data : [];
           _this.listArr.forEach(item => {
             item.LOGISTICS_RANK = JSON.parse(item.LOGISTICS_RANK);
@@ -456,6 +497,9 @@ export default {
         this.treeData.forEach(item => {
           item.children.forEach(list => {
             list.checked = true;
+            list.children.forEach(data => {
+              data.checked = true;
+            });
           });
         });
       } else {
@@ -463,6 +507,9 @@ export default {
           item.checked = false;
           item.children.forEach(list => {
             list.checked = false;
+            list.children.forEach(data => {
+              data.checked = false;
+            });
           });
         });
       }
