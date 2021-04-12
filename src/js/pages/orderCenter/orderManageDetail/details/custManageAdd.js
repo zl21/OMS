@@ -843,7 +843,7 @@ export default {
       obj.forEach((item) => {
         if (item.REAL_AMT !== null) {
           amt = publicMethodsUtil.accAdd(
-            parseFloat(item.REAL_AMT).toFixed(2),
+            parseFloat(item.REAL_AMT),
             amt
           );
           qty += Number(item.QTY);
@@ -852,7 +852,7 @@ export default {
       totalData = [
         {
           index: '总计',
-          REAL_AMT: amt,
+          REAL_AMT: amt.toFixed(2),
           QTY: qty
         }
       ];
