@@ -382,7 +382,7 @@ export default {
               type: 'Input',
               label: window.vmI18n.t('form_label.refundAmount'), // 申请退款金额
               props: {
-                value: 0,
+                value: '',
                 disabled: true
               },
               event: {}
@@ -732,11 +732,25 @@ export default {
                       value: params.row.returnPrice,
                       autosize: true,
                       // regx:/^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$/,
-                      regx: /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
+                      // regx: /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
                     },
 
                     on: {
                       'on-change': e => {
+                        const tag = /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
+                        if (!tag.test(e.target.value)) {
+                          setTimeout(() => {
+                            params.row.returnPrice = 0
+                            let total = 0;
+                            self.tableConfig.data.forEach(item => {
+                              total = total + (item.returnPrice || 0) + item.FREIGHT;
+                            });
+                            // self.reForm.config[12].item.props.value = total;
+                            self.reForm.config.find(
+                              item => item.item.label == self.vmI18n.t('form_label.refundAmount') // 申请退款金额
+                            ).item.props.value = total;
+                          })
+                        }
                         params.row.returnPrice = Number(e.target.value);
                         if (this.$route.query.new) {
                           // if (params.row.returnPrice > params.row.RETURNABLE_AMOUNT) {
@@ -755,6 +769,20 @@ export default {
                         self.reForm.config.find(
                           item => item.item.label == self.vmI18n.t('form_label.refundAmount') // 申请退款金额
                         ).item.props.value = total;
+                      },
+                      'on-blur': e => {
+                        const tag = /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
+                        if (!tag.test(e)) {
+                          params.row.returnPrice = 0
+
+                          let total = 0;
+                          self.tableConfig.data.forEach(item => {
+                            total = total + (item.returnPrice || 0) + item.FREIGHT;
+                          });
+                          self.reForm.config.find(
+                            item => item.item.label == self.vmI18n.t('form_label.refundAmount') // 申请退款金额
+                          ).item.props.value = total;
+                        }
                       }
                     }
                   })
@@ -1449,12 +1477,13 @@ export default {
             }
             // 退款金额
             if (configItemLabel === self.vmI18n.t('form_label.refundAmount')) {
-              configItem.props.value = self.addItem.addList.reduce((sum, n) => sum + n.RETURNABLE_AMOUNT, 0);
+              // configItem.props.value = self.addItem.addList.reduce((sum, n) => sum + n.RETURNABLE_AMOUNT, 0);
+              configItem.props.value = 0
             }
             // if (item.item.label == '判责方备注') item.item.props.value = '10';
           });
           self.addItem.addList.forEach(item => {
-            item.returnPrice = item.RETURNABLE_AMOUNT;
+            item.returnPrice = 0;
             item.ID = item.proId;
             let tempStr = '';
             switch (item.GIFT_TYPE) {
