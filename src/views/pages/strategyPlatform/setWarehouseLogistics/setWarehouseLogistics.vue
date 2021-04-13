@@ -171,7 +171,6 @@
                           <Input
                             v-model="item.rank"
                             :placeholder="item.provDiffRank ? item.provDiffRank : ''"
-                            :regx="/^[1-9]\d*$/"
                             @on-blur="inputBlur(data.LOGISTICS_RANK, item, j)"
                           />
                         </td>

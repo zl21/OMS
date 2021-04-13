@@ -515,6 +515,10 @@ export default {
       }
     },
     inputBlur(item, rank, index) {
+      const reg = /^[1-9]\d*$/
+      if (!reg.test(item[index].rank)) {
+        item[index].rank = '';
+      }
       for (let i = 0; i < item.length; i++) {
         if (!rank.rank) return;
         if (item[i].logisticsEcode !== rank.logisticsEcode && item[i].rank === rank.rank) {
