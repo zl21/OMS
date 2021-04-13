@@ -382,7 +382,7 @@ export default {
               type: 'Input',
               label: window.vmI18n.t('form_label.refundAmount'), // 申请退款金额
               props: {
-                value: '',
+                value: 0,
                 disabled: true
               },
               event: {}
