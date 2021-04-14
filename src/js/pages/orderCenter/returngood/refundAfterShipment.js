@@ -772,7 +772,7 @@ export default {
                       },
                       'on-blur': e => {
                         const tag = /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
-                        if (!tag.test(e)) {
+                        if (!tag.test(e.target.value)) {
                           params.row.returnPrice = 0
 
                           let total = 0;
@@ -1677,6 +1677,7 @@ export default {
       self.BILL_TYPE = String(data.BILL_TYPE);
       self.reForm.config.forEach(async item => {
         const itemLabel = item.item.label;
+        
         // 单据日期 退款分类 退款描述 单据来源
         const itemLabelArr = [self.vmI18n.t('form_label.documentDate'), self.vmI18n.t('form_label.refundClass'), self.vmI18n.t('form_label.refundDescription'), self.vmI18n.t('form_label.sourceDocuments')];
         if (!itemLabelArr.includes(itemLabel)) {
@@ -1699,6 +1700,13 @@ export default {
           item.item.props.value = commonUtil.dateFormat(new Date(data[dataConfig[itemLabel]]), 'yyyy-MM-dd hh:mm:ss');
         } else {
           item.item.props.value = data[dataConfig[itemLabel]];
+        }
+        if (itemLabel == '退款金额') {
+          let total = 0;
+          self.tableConfig.data.forEach(item => {
+            total = total + (item.returnPrice || 0) + item.FREIGHT;
+          });
+          item.item.props.value = total
         }
       });
       this.sellerRemarkValueChange('originalOrder', data);
