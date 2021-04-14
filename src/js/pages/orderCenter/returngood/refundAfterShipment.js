@@ -1161,7 +1161,7 @@ export default {
           {
             type: 'Select',
             queryName: 'ORDER_STATUS',
-            value: '5,6,12'
+            value: '1,2,3,4,5,6,12'
           }
         ]
       };
