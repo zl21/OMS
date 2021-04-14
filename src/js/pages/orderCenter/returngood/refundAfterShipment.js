@@ -1052,10 +1052,10 @@ export default {
             item.item.props.value = _this.addItem.addList.reduce((sum, n) => sum + Number(n.RETURNABLE_AMOUNT || 0), 0);
           }
         }
-        // if (item.item.label == '判责方备注') item.item.props.value = '10';
+        if (item.item.label == '退款金额') item.item.props.value = 0;
       });
       QUERYORDERITEMRESULTLIST.forEach(item => {
-        item.returnPrice = item.RETURNABLE_AMOUNT;
+        item.returnPrice = this.$route.query.fromOrder === 'true' ? 0 : item.RETURNABLE_AMOUNT;
         item.ID = item.proId;
         item.IS_GIFT_NAME = item.GIFT_TYPE == '2' ? '平台赠品' : item.GIFT_TYPE == '1' ? '系统赠品' : '否';
         item.IS_GIFT = item.GIFT_TYPE;
