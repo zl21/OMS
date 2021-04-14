@@ -623,7 +623,8 @@ export default {
             webname: 'refund_price', // 额外退款
             btnclick: () => {
               // if 仓库发货 或 平台发货
-              if (this.orderStatus === 5 || this.orderStatus === 6) {
+              // +待审核/缺货/已审核/配货中
+              if (this.orderStatus === 5 || this.orderStatus === 6 || this.orderStatus === 1 || this.orderStatus === 2 || this.orderStatus === 3 || this.orderStatus === 4) {
                 this.$store.commit('customize/TabOpen', {
                   id: -1,
                   type: 'action',
