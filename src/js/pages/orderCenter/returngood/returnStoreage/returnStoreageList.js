@@ -627,10 +627,10 @@ export default {
           }
         });
       } else {
-        if (self.selection.length === 0) {
-          self.$Message.error(window.vmI18n.t('modalTips.z4'));
-          return;
-        }
+        // if (self.selection.length === 0) {
+        //   self.$Message.error(window.vmI18n.t('modalTips.z4'));
+        //   return;
+        // }
         self.warningModal = true;
       }
     },
