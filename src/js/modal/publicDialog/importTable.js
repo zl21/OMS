@@ -390,6 +390,9 @@ export default {
         _this.$parent.$emit('confirmImport');
       } else if (table === 'PS_C_SKU' || table === 'SG_B_CHANNEL_PRODUCT' || table === 'PS_C_PRO' || table === 'IP_C_TAOBAO_PRODUCT') {
         _this.$parent.$parent.$parent.returnData(data);
+      } else if (table === 'AC_F_LIVE_ORDER') {
+        // 关闭导入弹框
+        _this.$parent.$parent.$parent.showModal = false
       }
     },
     // 上传文件前判断文件大小
