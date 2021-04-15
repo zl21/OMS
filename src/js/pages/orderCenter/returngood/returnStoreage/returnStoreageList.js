@@ -645,7 +645,8 @@ export default {
       this.isExport = true;
       const arr = this.requestParams();
       arr.pageSize = 999999;
-      const params = JSON.parse(JSON.stringify(arr));
+      let params = JSON.parse(JSON.stringify(arr));
+      params.selectAll = true;
       this.service.orderCenter.exportOcBRefundIn(params).then(res => {
         self.isExport = false;
         if (res.data.code == 0 && res.data.data !== null) {
