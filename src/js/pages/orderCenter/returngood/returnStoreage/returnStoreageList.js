@@ -627,10 +627,10 @@ export default {
           }
         });
       } else {
-        if (self.selection.length === 0) {
-          self.$Message.error(window.vmI18n.t('modalTips.z4'));
-          return;
-        }
+        // if (self.selection.length === 0) {
+        //   self.$Message.error(window.vmI18n.t('modalTips.z4'));
+        //   return;
+        // }
         self.warningModal = true;
       }
     },
@@ -645,7 +645,8 @@ export default {
       this.isExport = true;
       const arr = this.requestParams();
       arr.pageSize = 999999;
-      const params = JSON.parse(JSON.stringify(arr));
+      let params = JSON.parse(JSON.stringify(arr));
+      params.selectAll = true;
       this.service.orderCenter.exportOcBRefundIn(params).then(res => {
         self.isExport = false;
         if (res.data.code == 0 && res.data.data !== null) {
