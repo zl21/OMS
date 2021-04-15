@@ -624,7 +624,8 @@ export default {
             btnclick: () => {
               // if 仓库发货 或 平台发货
               // +待审核/缺货/已审核/配货中
-              if (this.orderStatus === 5 || this.orderStatus === 6 || this.orderStatus === 1 || this.orderStatus === 2 || this.orderStatus === 3 || this.orderStatus === 4) {
+              // 待分配、取消、作废不能跳转
+              if (this.orderStatus !== 7 && this.orderStatus !== 8 && this.orderStatus !== 50) {
                 this.$store.commit('customize/TabOpen', {
                   id: -1,
                   type: 'action',
@@ -638,7 +639,8 @@ export default {
                   })
                 });
               } else {
-                this.$Message.warning(window.vmI18n.t('modalTips.h1')); // "只有仓库发货或者平台发货的订单才能操作!"
+                // 待分配、取消、作废不能跳转 2021-0415 浩南
+                this.$Message.warning('待分配、取消、作废的订单不能操作!'); // "只有仓库发货或者平台发货的订单才能操作!"
               }
             } // 按钮点击事件
           },
