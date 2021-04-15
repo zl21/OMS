@@ -380,6 +380,9 @@ export default {
         _this.$parent.$parent.$parent.objectAddRefresh();
       } else if (table === 'AC_F_RECEIVABLES_ADJUSTMENT' || table === 'SG_B_PHY_OUT_RESULT' || table === 'SC_B_TRANSFER' || table === 'OC_B_JD_RETURN_ORDER') {
         _this.$parent.$emit('confirmImport');
+      } else if (table === 'AC_F_LIVE_ORDER') {
+        // 关闭导入弹框
+        _this.$parent.$parent.$parent.showModal = false
       }
     },
     // 上传文件前判断文件大小
