@@ -592,6 +592,10 @@ export default {
     inputBlur(item, rank, index) {
       for (let i = 0; i < item.length; i++) {
         if (!rank.rank) return;
+        const reg = /^[1-9]\d*$/
+        if (!reg.test(item[i].rank)) {
+          item[i].rank = '';
+        }
         if (item[i].warehouseEcode !== rank.warehouseEcode && item[i].rank === rank.rank) {
           setTimeout(() => {
             item[index].rank = '';
