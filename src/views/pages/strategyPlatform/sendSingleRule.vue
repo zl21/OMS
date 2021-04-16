@@ -165,7 +165,6 @@
                           <Input
                             v-model="item.rank"
                             placeholder
-                            :regx="/^[1-9]\d*$/"
                             @on-blur="inputBlur(data.WAREHOUSE_RANK, item, j)"
                           />
                         </td>
