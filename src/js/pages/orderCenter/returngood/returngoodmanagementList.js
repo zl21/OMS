@@ -1072,7 +1072,10 @@ export default {
       if (status) {
         _this.formConfig.formValue.RETURN_STATUS = [status];
       }
-      const returnParam = JSON.parse(_this.$route.query.returnParam);
+      const returnParam = {};
+      if (_this.$route.query.returnParam) {
+        returnParam = JSON.parse(_this.$route.query.returnParam);
+      }
       if (_this.$route.query.type == 'workID') {
         if (returnParam.time == 'IN_TIME') {
           _this.formConfig.formValue.IN_TIME = [new Date(returnParam.startTime), new Date(returnParam.endTime)];
