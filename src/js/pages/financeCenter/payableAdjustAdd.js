@@ -93,7 +93,7 @@ export default {
                 return;
               }
               // 2.特殊字段正则校验
-              const telFlag = self.CheckRegx(/^1[34578]\d{9}$/, masterForm.CUSTOMER_TEL); // 电话校验
+              const telFlag = self.CheckRegx(/^1[345789]\d{9}$/, masterForm.CUSTOMER_TEL); // 电话校验
               if (!telFlag) {
                 self.$Message.error(window.vmI18n.t('modalTips.di')); // '顾客电话不合法!'
                 return;
