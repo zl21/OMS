@@ -1,0 +1,58 @@
+@import '~@burgeon/oms-theme/skin/public.less';
+
+@bgColr: #fff6f6;
+@bgColor: #fff;
+@lineHeight: 29px;
+.simulation {
+  height: 100%;
+  position: relative;
+  padding-top: 50px;
+  // 操作栏
+  .operation_btn {
+    position: absolute;
+    top: 0;
+    background: #fff;
+    padding: 0 10px;
+    width: 100%;
+    border: 1px solid @base-border;
+  }
+  // 主要内容
+  .content {
+    height: 100%;
+    overflow: scroll;
+    // 框架及其标题（相同样式提取）
+    .orderSet,.execute_result,.products_list  {
+      border: 1px solid #dcdfe6;
+      padding: 20px;
+      margin: 20px 0 20px;
+      position: relative;
+      background-color: #fff;
+      border: 1px solid #dcdfe6;
+      .header_title {
+        display: inline-block;
+        position: absolute;
+        top: -9px;
+        left: 12px;
+        .header_name {
+          font-size: 18px;
+          padding: 0 5px;
+          background: #fff;
+          border: 1px solid #dcdfe6;
+        }
+      }
+    }
+    // 定义特殊样式
+    .products_list .header_title .header_name {
+      font-size: 14px;
+    }
+    // 适算执行结果
+    .execute_result .table {
+      width: 90%;
+      margin-left: 30px;
+    }
+    .buttonFk button{
+      color: @base-color;
+      border-color: @base-color;;
+    }
+  }
+}

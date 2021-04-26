@@ -1,0 +1,146 @@
+/* 
+  1.仓库物流优先级方案-编辑-修改物流
+  2.发货单派单规则-编辑-修改仓库
+*/
+.strategyModifyLogistics,
+.modifyLogistics {
+  .modifyBox {
+    margin-bottom: 8px;
+    display: flex;
+
+    .modifyLeft {
+      width: 65%;
+      height: 400px;
+      overflow: auto;
+      padding: 10px;
+      border: 1px solid #d3d3d3;
+
+      .retrieveBox {
+        margin: 8px 0;
+        font-size: 0;
+        width: 60%;
+        border: 1px solid #d8d8d8;
+
+        .retrieveTitle {
+          display: inline-block;
+          vertical-align: middle;
+          text-align: center;
+          background: #f8f8f8;
+          width: 36px;
+          height: 26px;
+          line-height: 26px;
+          font-size: 13px;
+          border-radius: 0;
+          border: none;
+          border-right: 1px solid #d8d8d8;
+        }
+
+        .retrieve {
+          width: calc(100% - 36px);
+          display: inline-block;
+
+          .ark-input {
+            border: none;
+          }
+        }
+      }
+
+      .jordan-table-box {
+        height: 90%;
+      }
+    }
+
+    .modifyMiddle {
+      height: 400px;
+      padding: 0 5px;
+
+      button {
+        border-color: #ec6e4e;
+        color: #ec6e4e;
+        margin-top: 180px;
+
+        span {
+          vertical-align: top !important;
+        }
+      }
+    }
+
+    .modifyRight {
+      width: 32%;
+      height: 400px;
+      overflow: auto;
+      border: 1px solid #d3d3d3;
+
+      .selectedModify {
+        .selectedTop {
+          display: flex;
+          justify-content: space-between;
+          border-bottom: 1px solid #999;
+          padding: 0 3px 3px 5px;
+          margin: 8px 16px;
+
+          p {
+            margin-top: 3px;
+            color: #999;
+            font-size: 14px;
+            line-height: 14px;
+
+            span {
+              color: red;
+            }
+          }
+
+          i {
+            color: red;
+          }
+        }
+
+        .selectedList {
+          padding: 0 16px 16px;
+          overflow: auto;
+
+          ul {
+            li {
+              position: relative;
+              text-align: center;
+              height: 26px;
+              line-height: 26px;
+              background: #f5f6fa;
+              color: blue;
+              margin-bottom: 8px;
+
+              p {
+                width: 170px;
+                padding-left: 7px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+              }
+
+              span {
+                color: #333;
+                cursor: pointer;
+                position: absolute;
+                top: 0;
+                right: 7px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .fromLoading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 1000 !important;
+  }
+}

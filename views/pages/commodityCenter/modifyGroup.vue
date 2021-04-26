@@ -1,0 +1,87 @@
+<template>
+  <!-- 组合商品编辑 -->
+  <div class="modifyGroup customized-detail">
+    <div class="buttons customized-detail-btn">
+      <businessButton :btn-config="btnConfig" />
+    </div>
+    <div class="public-content customized-detail-main">
+      <Collapse v-model="collapse">
+        <Panel name="panel_baseInfo">
+          基础资料
+          <p
+            slot="content"
+            style="float: left; width: 250px; margin-top: 15px"
+          >
+            <ImageUpload
+              :dataitem="dataitem"
+              @deleteImg="deleteImg"
+              @uploadFileChangeSuccess="uploadFileChangeSuccess"
+            />
+          </p>
+          <p slot="content">
+            <businessForm :form-config="formConfig" />
+          </p>
+        </Panel>
+        <Modal
+          v-model="isModal"
+          :title="vmI18n.t('modalTitle.tips')"
+          @on-ok="deleteImgBySure"
+        >
+          <!-- <p>点击后将删除凭证,是否继续?</p> -->
+          <p>{{ vmI18n.t('modalTips.z5') }}</p>
+        </Modal>
+      </Collapse>
+      <Modal
+        v-model="isClearItem"
+        :title="vmI18n.t('modalTitle.tips')"
+        @on-ok="clearItem"
+        @on-cancel="unClearItem"
+      >
+        <!-- <p>点击后将删除凭证,是否继续?</p> -->
+        <p>切换类型会清空当前类型明细,是否继续?</p>
+      </Modal>
+      <!-- tab切换 -->
+      <div class="customized-detail-table">
+        <businessLabel
+          :label-list="formConfig.formValue.group_type == '2' ? label.labelList : label.labelTagList"
+          :label-default-value="label.labelDefaultValue"
+          @labelClick="labelClick"
+        />
+        <div
+          v-show="label.labelValue === 'generalGroupItem'"
+          class="generalGroupItem"
+        >
+          <businessActionTable
+            :jordan-table-config="jordanTableConfigGenera"
+            @on-select="onSelect"
+            @on-select-cancel="onSelect"
+            @on-select-all="onSelect"
+            @on-select-all-cancel="onSelect"
+          />
+        </div>
+        <div
+          v-show="label.labelValue === 'luckbagGroupItem'"
+          class="luckbagGroupItem"
+        >
+          <businessActionTable
+            :jordan-table-config="jordanTableConfigLuck"
+            @on-select="onSelect"
+            @on-select-cancel="onSelect"
+            @on-select-all="onSelect"
+            @on-select-all-cancel="onSelect"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import modifyGroup from '@/js/pages/commodityCenter/modifyGroup.js';
+
+  export default modifyGroup;
+</script>
+
+<style lang="less">
+@import '~professionalComponents/common/css/theme.less';
+</style>

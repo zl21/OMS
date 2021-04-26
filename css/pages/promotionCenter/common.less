@@ -1,0 +1,421 @@
+@import '~@burgeon/oms-theme/skin/public.less';
+// 公共样式定义
+.nowrap{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fontHeight{
+  min-height: 24px;
+  line-height: 24px;
+}
+.PromotionInput{
+  width: 100%;
+  height: 24px;
+  font-size: 12px;
+  padding: 0 5px;
+  border-radius: 2px;
+  background: #fff;
+  color: #606266;
+  border-radius: 2px;
+  border: 1px solid #dcdfe6;
+  box-sizing: border-box;
+}
+//详情页布局
+.addOrEditActi,.batchActivity{
+  display: flex;
+  height: 100%;
+  .steps_content {
+    position: relative;
+    height: 100%;
+    width: 92%;
+    display: flex;
+    flex-direction: column;
+    .basic{
+      border:1px solid #d8d8d8;
+      margin-top: 10px;
+      padding: 0 10px 10px;
+      background-color: #fff;
+      &:first-child{
+        margin-top: 0;
+      }
+    }
+    .basicSteps {
+      overflow: scroll;
+    }
+    .footer {
+      height: 50px;
+      line-height: 50px;
+      background: @base-bg;
+      border: 1px solid @base-border;
+      width: 100%;
+      text-align: right;
+      > button {
+        height: 24px;
+        line-height: 24px;
+        padding: 0 8px;
+        border: 1px solid @button-border;
+        font-size: 12px;
+        color: @button-border;
+        border-radius: 2px;
+        margin-right: 10px;
+        background: transparent;
+      }
+    }
+  }
+  .steps_bar{
+    padding: 20px;
+    width: 15%;
+    background-color: #fff;
+  }
+}
+// 详情页 组件的公共样式
+.basicInfo,.infoSet,.giftSet,.batchInfoSet{
+  & > .title {
+    height: 50px;
+    line-height: 50px;
+    i {
+      font-size: 24px;
+      color: rgb(236, 110, 78);
+      vertical-align: middle;
+    }
+    > span {
+      line-height: 36px;
+      font-size: 20px;
+      font-weight: 600;
+      vertical-align: middle;
+    }
+  }
+}
+// table
+.detailtable{
+  // button
+  .form_button {
+    padding: 5px 0 5px;
+    text-align: right;
+    > button {
+      height: 24px;
+      line-height: 24px;
+      padding: 0 8px;
+      border: 1px solid @base-color;
+      font-size: 12px;
+      background: #fff;
+      color: @base-color;
+      border-radius: 2px;
+    }
+    .buttonFk {
+      display: inline-block;
+    }
+  }
+  .el-autocomplete {
+    width: 300px;
+    .el-input {
+      font-size: 12px;
+      .el-input__inner {
+        text-align: left;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        border-radius: 2px;
+      }
+    }
+  }
+  .ark-table{
+    td{
+      height: 32px;
+    }
+    .ark-table-cell-ellipsis{
+      input {
+        border-radius: 2px;
+        border: 1px solid #dcdfe6;
+        height: 24px;
+        padding: 0 15px;
+        text-align: inherit;
+        color: #606266;
+      }
+      .ark-btn {
+        height: 24px;
+        padding: 0 21px;
+        color: #575757 !important;
+  
+        &:hover {
+          color: @button-transparent-hover  !important;
+          border-color: @button-transparent-hover;
+        }
+      }
+    }
+  }
+  // 促销table
+  &.promotionTable{
+    .page-box {
+      margin-top: 5px;
+      .page_content {
+        display: flex;
+        justify-content: center;
+        .page-allSizes {
+          padding-right: 10px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+}
+// 所有的 form表单
+.formList {
+
+  .row {
+    font-size: 0;
+    padding: 10px 0;
+    .item-input {
+      height: 24px !important;
+      line-height: 22px !important;
+      font-size: 12px;
+      width: 560px;
+      border-radius: 0;
+
+      label {
+        line-height: 24px !important;
+        width: 150px;
+        text-align: center;
+
+        i {
+          font-size: 12px;
+          position: initial;
+          top: 0;
+          right: 0;
+        }
+      }
+
+      .input-wrap {
+        .popover-icon i{
+          font-size: 12px;
+          color: #808695;
+        }
+        .el-autocomplete {
+            width: 100%;
+            font-size: 12px;
+        }
+        .el-input input {
+          .PromotionInput
+        }
+      }
+    }
+    .form_label {
+      display: inline-block;
+      font-size: 12px;
+      width: 150px;
+      text-align: center;
+      vertical-align: top;
+      .fontHeight;
+    }
+    .form_content {
+      display: inline-block;
+      font-size: 12px;
+      width: calc(100% - 150px);
+      // vertical-align: middle;
+      .fontHeight;
+      // 输入框
+      .form_el_input.doubleNum {
+        display: inline-block;
+        width: 60px;
+        height: 24px;
+      }
+      .limitinput {
+        width: 60px !important;
+      }
+      .form_item {
+        display: inline-block;
+      }
+      .form_el_input {
+        width: 410px;
+        input {
+          .PromotionInput;
+        }
+      }
+      // select
+      .el-select{
+        .el-input {
+          font-size: 12px;
+        }
+      }
+    }
+    // 必填
+    .red {
+      height: 14px;
+      width: 8px;
+      line-height: 14px;
+      vertical-align: middle;
+      display: inline-block;
+      font-size: 12px;
+      color: #fd6442;
+    }
+    .buttonFk button{
+      color: @base-color;
+      border-color: @base-color;;
+    }
+  }
+}
+// 针对具体组件
+// batchTables
+.batchTables {
+
+  .AutoRight {
+    text-align: right;
+    padding: 0 15px;
+  }
+  // 批量导入按钮
+  .import {
+    display: inline-block;
+    background: @base-color;
+    color: #fff;
+    border: 1px solid @base-color;
+    border-radius: 3px;
+    padding: 5px;
+  }
+  // 新增table
+  .form_content {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .detailtable {
+      width: calc(50% - 5px);
+    }
+
+    .closeBtn {
+      position: absolute;
+      right: -7px;
+      top: 30px;
+      z-index: 10;
+      font-size: 16px;
+      border: 1px solid #666;
+      border-radius: 50%;
+      color: #666;
+      background: #fff;
+    }
+  }
+  // 新增table按钮
+  .add {
+    display: inline-block;
+    color: #fff;
+    width: 40px;
+    height: 20px;
+    line-height: 18px;
+    text-align: center;
+    margin-top: 10px;
+    i {
+      font-size: 18px;
+    }
+  }
+}
+// CTSIT
+.proodis_cisit {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  margin: 0px 0px 12px 0px;
+
+  .el-select {
+    .el-input input {
+      width: 80px;
+      height: 24px !important;
+      line-height: 24px !important;
+      padding: 0 3px;
+    }
+  }
+
+  input {
+    width: 60px;
+    height: 24px;
+    border-radius: 2px;
+    color: #606266;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #d8d8d8;
+    padding-left: 3px;
+    margin: 0 2px;
+
+    &.input-number {
+      text-align: center;
+    }
+  }
+  .desc2 {
+    padding-right: 10px;
+  }
+} 
+// setCommodity
+.setCommodityModal{
+  .modal_footer{
+      text-align: right;
+      font-size: 0;
+      margin-top: 10px;
+      button{
+          display: inline-block;
+          min-width: 50px;
+          height: 28px;
+          line-height: 26px;
+          font-size: 12px;
+          color: #fff;
+          border: 1px solid #fd6442;
+          background: #fd6442;
+          border-radius: 3px;
+          margin-left: 8px;
+          &.white{
+              background: transparent;
+              color: #fd6442;
+              &:hover{
+                  color: #fff;
+                  border: 1px solid #fd6442;
+                  background: #fd6442;
+              }
+          }  
+      }
+  }
+}
+// tabList
+.tablists {
+  .tabs_header {
+    position: relative;
+    .nav_wrap_scroll {
+      overflow: hidden;
+      .tab_item {
+        padding: 0 20px;
+        height: 40px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        line-height: 40px;
+        display: inline-block;
+        list-style: none;
+        font-size: 14px;
+        font-weight: 500;
+        color: #303133;
+        position: relative;
+      }
+      .tab_item:first-child{
+          padding-left: 0;
+      }
+       .tab_item:last-child{
+          padding-right: 0;
+      }
+      .tab_active{
+          z-index: 2;
+          border-bottom:2px solid #ec6e4e;
+          color: #ec6e4e;
+      }
+    }
+    .nav_wrap_scroll::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #e4e7ed;
+      z-index: 1;
+    }
+  }
+  .tabs_content{
+      margin: 10px 0;
+  }
+}

@@ -1,0 +1,432 @@
+//定制下拉菜单按钮配置类
+import commonUtils from './commonUtils';
+import publicDialogConfig from 'professionalComponents/common/js/publicDialog';
+class DropDownConfig {
+
+  constructor() { }
+
+  static configHandler(val, singleType = 0, eventList = []) {
+    let self = DropDownConfig.target;
+    this.singleType = singleType;
+    switch (val) {
+      case 'Newly added': {
+        // 新增
+        this.newOrderHander();
+        break;
+      }
+      case 'OcBOrderImportCmd': {
+        this.cmdOrderImportHandler();
+        break;
+      }
+      case 'Revising Logistics': {
+        this.dropDownMainHandler('modifyLogistics');
+        break;
+      }
+      case 'Modify warehouse': {
+        this.dropDownMainHandler('modifyWarehouse');
+        break;
+      }
+      case 'Amendment Notes': {
+        this.dropDownMainHandler('modifyNotes');
+        break;
+      }
+      case 'OrderDeliveryFirst': {
+        // 定金预售提前发货
+        this.dropDownMainHandler('orderDelivery');
+        break;
+      }
+      case 'OrderDeliveryUrgent': {
+        this.dropDownMainHandler('orderDeliveryUrgent');
+        break;
+      }
+      case 'order_gh': {
+        this.dropDownMainHandler('replaceProduct');
+        break;
+      }
+      case 'Adding gifts': {
+        this.dropDownMainHandler('addGifts');
+        break;
+      }
+      case 'Delete_Merchandise': {
+        this.dropDownMainHandler('deleteProduct');
+        break;
+      }
+      case 'appointSplit': {
+        this.dropDownMainHandler('appointSplit');
+        break;
+      }
+      case 'shortageSplit': {
+        this.dropDownMainHandler('shortageSplit');
+        break;
+      }
+      case 'Drop-out copy':
+      case 'OrderWrongCopy':
+      case 'OrderMissSendCopy':
+      case 'OrderGiftsOutCopy':
+      case 'oriInvalidCopy': {
+        this.dropDownMainHandler(val, singleType);
+        break;
+      }
+      case 'holdOrder': {
+        this.dropDownMainHandler('holdOrder');
+        break;
+      }
+      case 'cancelHoldOrder': {
+        this.dropDownMainHandler('cancelHoldOrder');
+        break;
+      }
+      default:
+        eventList.some((item) => {
+          item.webname == val && eval(item.btnclick)()
+          // if(item.webname==val){
+          //   ;
+          //   return true;
+          // }
+        })
+        break;
+    }
+  }
+  //新增订单处理
+  static newOrderHander() {
+    R3.store.commit('global/tabOpen', {
+      type: 'C',
+      label: window.vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
+      customizedModuleName: 'orderManageAdd',
+      customizedModuleId: '-1',
+    });
+  }
+  //框架导入处理
+  static cmdOrderImportHandler() {
+    let self = DropDownConfig.target;
+    self.$children.find((item) => item.name === 'importTable').openConfirm();
+  }
+
+  static dropDownMainHandler(type, ...singleType) {
+    let funName, tips, paramsType;
+    switch (type) {
+      case 'modifyLogistics':
+        funName = 'modifyLogisticsHandler';
+        tips = 'c6';
+        paramsType = 2;
+        break;
+      case 'modifyWarehouse':
+        funName = 'modifyWarehouseHandler';
+        tips = 'c7';
+        paramsType = 2;
+        break;
+      case 'modifyNotes':
+        funName = 'modifyNotesHandler';
+        tips = 'c8';
+        paramsType = 1;
+        break;
+      case 'orderDelivery':
+        funName = 'orderDeliveryHandler';
+        tips = 'c9';
+        paramsType = 1;
+        break;
+
+      case 'Drop-out copy':
+      case 'OrderWrongCopy':
+      case 'OrderMissSendCopy':
+      case 'OrderGiftsOutCopy':
+      case 'oriInvalidCopy': {
+        funName = 'copyRouteChangeHandler';
+        tips = 'a1';
+        paramsType = 4;
+        break;
+      }
+
+      case 'orderDeliveryUrgent':
+        funName = 'orderDeliveryUrgentHandler';
+        tips = 'd0';
+        paramsType = 1;
+        break;
+      case 'replaceProduct':
+        funName = 'replaceProductHandler';
+        tips = 'dq';
+        paramsType = 1;
+        break;
+      case 'addGifts':
+        funName = 'addGiftsHandler';
+        tips = 'd2';
+        paramsType = 1;
+        break;
+      case 'deleteProduct':
+        funName = 'deleteProductHandler';
+        tips = 'd3';
+        paramsType = 1;
+        break;
+      case 'appointSplit':
+        funName = 'appointSplitHandler';
+        tips = 'd4';
+        paramsType = 1;
+        break;
+
+      case 'holdOrder':
+        funName = 'holdOrderHandler';
+        tips = 'e2';
+        paramsType = 1;
+        break;
+
+      case 'shortageSplit':
+        funName = 'shortageSplitHandler';
+        tips = 'd4';
+        paramsType = 3;
+        break;
+      case 'cancelHoldOrder':
+        funName = 'cancelHoldOrderHandler';
+        tips = 'd5';
+        paramsType = 1;
+        break;
+    }
+
+    const self = DropDownConfig.target;
+    if (self.selection.length > 0) {
+      self.btnConfig.loading = true;
+      const ids = commonUtils.sonList(self.selection, 'ID');
+      let myData;
+      switch (paramsType) {
+        case 1:
+          myData = ids;
+          break;
+        case 2:
+          const fromdata = new FormData();
+          fromdata.append('ids', ids);
+          myData = fromdata;
+          break;
+        case 3:
+          self.selection.forEach((item, index) => {
+            if (item.PLATFORM === 50) {
+              commonUtils.msgTips(self, 'warning', 'ex');
+              self.btnConfig.loading = false;
+            }
+          });
+          break;
+        case 4:
+          myData = self.selection;
+          break;
+      }
+      this[funName](myData, type);
+    } /* else if (singleObjType) {
+      //是否新增或详情界面
+      myData = this.tab1.order;
+      this[funName](myData, type);
+    } */ else {
+      commonUtils.msgTips(self, 'warning', tips);
+      self.btnConfig.loading = false;
+    }
+  }
+
+  //请求主体处理
+  static serviceHandler(funName, params, tableType) {
+    let self = DropDownConfig.target;
+    self.service.orderCenter[funName](params)
+      .then((res) => {
+        if (res.data.code === 0) {
+          let objName, propertyName;
+          switch (tableType) {
+            case 'modifyLogistics':
+              objName = 'modifyLogisticsConfig';
+              propertyName = 'CP_C_PHY_WAREHOUSE_ID';
+              break;
+            case 'changeWarehouse':
+              objName = 'changeWarehouseConfig';
+              propertyName = 'CP_C_SHOP_ID';
+              break;
+          }
+          this.successHandler(params, objName, propertyName, tableType);
+        } else {
+          commonUtils.tipShow('error', self, res);
+        }
+      })
+      .finally(() => {
+        self.btnConfig.loading = false;
+      });
+  }
+
+  static successHandler(ids, objName, componentDataType, tableType) {
+    let self = DropDownConfig.target;
+    self.publicBouncedConfig = JSON.parse(
+      JSON.stringify(publicDialogConfig[objName])
+    );
+    let componentDataObj = {};
+
+    switch (componentDataType) {
+      case 'CP_C_PHY_WAREHOUSE_ID':
+        componentDataObj = {
+          ids,
+          cLogisticsId: 0,
+          platform: self.selection[0].PLATFORM,
+          [componentDataType]: self.selection[0][componentDataType],
+        };
+        break;
+      case 'CP_C_SHOP_ID':
+        componentDataObj = {
+          ids,
+          [componentDataType]: self.selection[0][componentDataType],
+        };
+        break;
+      case 'ORDER_STATUS':
+        componentDataObj = {
+          ids,
+          status: commonUtils.sonList(self.selection, componentDataType),
+        };
+        break;
+      case 'deposit':
+      case 'vip':
+        componentDataObj = {
+          params: {
+            ids,
+          },
+          pageType: componentDataType,
+        };
+        break;
+      case 'product':
+        let param = {
+          page: {
+            pageSize: self.agTableConfig.pagenation.pageSize,
+            pageNum: self.agTableConfig.pagenation.current,
+          },
+          label: self.labelData, // 标签
+          queryInfo: self.queryInfoData, // 普通搜索
+          status: self.statusData,
+          highSearch: self.highSearchData,
+        };
+        // 列表勾选数据
+        self.publicBouncedConfig.componentData = {
+          a_1: param,
+          a_2: ids,
+        };
+        break;
+      case 'holdOrder':
+        componentDataObj = {
+          ids,
+        };
+        break;
+    }
+
+    // 表单筛选条件
+
+    self.publicBouncedConfig.componentData = componentDataObj;
+    self.$nextTick(() => {
+      self.$children.find((item) => item.name === tableType).openConfirm();
+      self.btnConfig.loading = false;
+    }, 100);
+  }
+  //修改物流;
+  static modifyLogisticsHandler(fromdata) {
+    this.serviceHandler(
+      'checkOrderBeforeLogistics',
+      fromdata,
+      'modifyLogistics'
+    );
+  }
+  //修改仓库
+  static modifyWarehouseHandler(fromdata) {
+    this.serviceHandler(
+      'checkOrderBeforeWarehouse',
+      fromdata,
+      'changeWarehouse'
+    );
+  }
+  //修改备注
+  static modifyNotesHandler(ids) {
+    this.successHandler(
+      ids,
+      'changeRemarkConfig',
+      'ORDER_STATUS',
+      'changeRemark'
+    );
+  }
+  //现金预售提前发货
+  static orderDeliveryHandler(ids) {
+    this.successHandler(
+      ids,
+      'depositPresaleConfig',
+      'deposit',
+      'manualMarking'
+    );
+  }
+  //现金预售紧急发货
+  static orderDeliveryUrgentHandler(ids) {
+    this.successHandler(ids, 'vipSpeedDispatchConfig', 'vip', 'manualMarking');
+  }
+  //替换商品
+  static replaceProductHandler(ids) {
+    this.successHandler(ids, 'replaceConfig', 'product', 'replaceTheGoods');
+  }
+  //新增赠品
+  static addGiftsHandler(ids) {
+    this.successHandler(ids, 'pushProduceConfig', 'product', 'pushProduce');
+  }
+  //删除商品
+  static deleteProductHandler(ids) {
+    this.successHandler(ids, 'itemDeleteConfig', 'product', 'itemDelete');
+  }
+  //缺货拆分
+  static shortageSplitHandler(ids) {
+    let self = DropDownConfig.target;
+    commonUtils.serviceHandler(self, 'splitOrder', { ids });
+  }
+
+  appointSplitHandler(ids) {
+    this.successHandler(
+      ids,
+      'specifyGoodsAssignConfig',
+      'product',
+      'specifyGoodsAssign'
+    );
+  }
+  //hold单处理
+  static holdOrderHandler(ids) {
+    this.successHandler(ids, 'holdOrderConfig', 'holdOrder', 'holdOrderDialog');
+  }
+  //取消hold单处理
+  static cancelHoldOrderHandler(ids) {
+    let self = DropDownConfig.target;
+    commonUtils.modalShow(self, 'e1', 'orderCenter.manualUnHoldOrder', { ids });
+    self.btnConfig.loading = false;
+  }
+
+  // 丢单复制、错发复制、漏发复制、赠品出库复制
+  static copyRouteChangeHandler(ids, type = '') {
+    const selectItem = Array.isArray(ids) ? ids[0] : ids;
+    if (ids.length === 1) {
+      if (selectItem.COPY_REASON) {
+        // 订单只能是原单才能复制
+        commonUtils.msgTips(DropDownConfig.target, 'warning', 'a2');
+      } else if (
+        type === 'oriInvalidCopy' &&
+        ![7, 8].includes(selectItem.ORDER_STATUS)
+      ) {
+        // 原单无效复制
+        // 已取消
+        // 非已取消或系统作废订单，不允许复制
+        commonUtils.msgTips(DropDownConfig.target, 'error', 'a3');
+        // 仓库发货
+        // 平台发货
+      } else if (![5, 6].includes(selectItem.ORDER_STATUS)) {
+        // 只能对【仓库发货，平台发货】订单状态的原单进行复制操作
+        commonUtils.msgTips(DropDownConfig.target, 'error', 'a4');
+      } else {
+        // 默认是丢单复制的query
+        const query = {
+          id: selectItem.ID,
+          pageTitle: type,
+        };
+        // 丢单复制
+        let tempParams = type === 'Drop-out copy' ? 'orderCopy' : 'orderCopy';
+        let extendObj = {};
+        extendObj[tempParams] = true;
+        commonUtils.navigateMain(selectItem.ID, 'TabOpen', type, 'panel_label.add_retail_shipping_order', extendObj);
+      }
+    } else {
+      commonUtils.msgTips(DropDownConfig.target, 'warning', 'a5');
+    }
+  }
+}
+
+DropDownConfig.target;
+DropDownConfig.singleType;
+
+export default DropDownConfig;

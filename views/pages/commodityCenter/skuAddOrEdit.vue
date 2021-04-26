@@ -1,0 +1,98 @@
+<template>
+  <div class="skuAddOrEdit customized-detail" :id="this.customizedModuleName">
+    <loading :loading="loading" />
+    <div class="buttons customized-detail-btn">
+      <businessButton :btn-config="btnConfig" />
+    </div>
+    <div class="customized-detail-main">
+      <Collapse v-model="panelDefaultValue">
+        <Panel name="panel_baseInfo">
+          SKU基本信息
+          <div slot="content" class="customized_Info_img">
+            <ImageUpload
+              :dataitem="dataitem"
+              @deleteImg="deleteImg"
+              @uploadFileChangeSuccess="uploadFileChangeSuccess"
+            />
+          </div>
+          <div slot="content" class="customized_Info_form">
+            <businessForm :form-config="formConfig" @keyDown="keyDown" :key="forceFresh" >
+              <template #spec01="{ rowData }">
+                <DropDownSelectFilter
+                  isBackRowItem
+                  :single="true"
+                  :data="rowData.value[rowData.item.defVal].data"
+                  :total-row-count="
+                    rowData.value[rowData.item.defVal].totalRowCount
+                  "
+                  :auto-data="rowData.value[rowData.item.defVal].autoData"
+                  :defaultSelected="
+                    rowData.value[rowData.item.defVal].defaultSelected
+                  "
+                  :page-size="rowData.item.pageSize"
+                  :columns-key="rowData.item.columnsKey || []"
+                  :hidecolumns="rowData.item.hidecolumns || []"
+                  @on-popper-show="rowData.item.popShow"
+                  @on-page-change="rowData.item.changePage"
+                  @on-fkrp-selected="rowData.item.fkrpSelected"
+                  @on-input-value-change="rowData.item.inputValueChange"
+                  @on-clear="rowData.item.clearInput"
+                />
+              </template>
+            </businessForm>
+          </div>
+          <div class="clear"></div>
+        </Panel>
+        <Modal
+          v-model="isModal"
+          :title="vmI18n.t('modalTitle.tips')"
+          @on-ok="deleteImgBySure"
+        >
+          <!-- <p>点击后将删除凭证,是否继续?</p> -->
+          <p>{{ vmI18n.t("modalTips.z5") }}</p>
+        </Modal>
+        <Panel name="panel_cusAttr">
+          自定义属性
+          <p slot="content" class="panel-title">固定属性：</p>
+          <p slot="content">
+            <businessForm :form-config="fixAttrFormConfig" @keyDown="keyDown" />
+          </p>
+          <p slot="content" class="panel-title">自定义属性：</p>
+          <p slot="content">
+            <businessForm :form-config="cusAttrFormConfig" @keyDown="keyDown" />
+          </p>
+        </Panel>
+      </Collapse>
+      <div class="customized-detail-table">
+        <!-- tab切换 -->
+        <businessLabel
+          :label-list="labelList"
+          :label-default-value="labelDefaultValue"
+          @labelClick="labelClick"
+        />
+        <!-- 子表Part -->
+        <div class="subtablePart">
+          <!-- <businessForm v-show="labelDefaultValue === 'PROPERTY'" :form-config="propertiesFormConfig"></businessForm> -->
+          <orderItem
+            v-show="labelDefaultValue == 'PS_C_ALTERNATE_SKU'"
+            :component-data="subTableConfig"
+          ></orderItem>
+          <orderItem
+            v-show="labelDefaultValue == 'PS_C_ALTERNATE_SKU_1'"
+            :component-data="subTableConfig"
+          ></orderItem>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import skuAddOrEdit from "@/js/pages/commodityCenter/skuAddOrEdit.js";
+export default skuAddOrEdit;
+</script>
+
+<style lang="less" scoped>
+// @import '~@/css/pages/commodityCenter/skuAddOrEdit.less';
+@import "~professionalComponents/common/css/theme.less";
+</style>

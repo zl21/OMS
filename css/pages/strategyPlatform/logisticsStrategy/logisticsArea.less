@@ -1,0 +1,162 @@
+@import "~@burgeon/oms-theme/skin/public.less";
+
+.logisticsArea {
+
+  .jordanLabel {
+    padding-bottom: 10px;
+  }
+
+  .tableBox {
+    display: flex;
+    height: 100%;
+
+    .tableLeft {
+      width: 20%;
+      margin-right: 15px;
+      border: 1px solid #d3d3d3;
+      overflow: hidden;
+
+      .treeBox {
+        height: 90%;
+        padding: 0 10px;
+        overflow: scroll;
+
+        #tree {
+          .iconbj_on:before {
+            content: "\ea03";
+          }
+        }
+      }
+    }
+
+    .tableRight {
+      position: relative;
+      width: 80%;
+      display: flex;
+      border: 1px solid #d3d3d3;
+
+      .setTree {
+        width: 22%;
+        height: 100%;
+        border-right: 1px solid #d3d3d3;
+        overflow: hidden;
+
+        .treeBox2 {
+          height: 90%;
+          padding: 0 10px;
+          overflow: scroll;
+
+          #tree2 {
+            .iconbj_on:before {
+              content: "\ea03";
+            }
+          }
+        }
+      }
+
+      .synchronous {
+        position: relative;
+        width: 50px;
+        height: 100%;
+        position: relative;
+        border-right: 1px solid #d3d3d3;
+
+        .iconButton {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        Button {
+          border-color: @base-color;
+          color: @base-color;
+
+          span {
+            vertical-align: middle !important;
+          }
+        }
+      }
+
+      .actionPermissionsTable {
+        width: 75%;
+        overflow-y: auto;
+
+        .scrollTable {
+          overflow: auto;
+
+          .borderInput {
+            border: 1px solid #d3d3d3;
+          }
+        }
+
+        table {
+          color: #575757;
+          text-align: left;
+          width: 100%;
+          text-indent: 5px;
+          table-layout: fixed;
+
+          thead {
+            tr {
+              th {
+                text-align: left;
+                background-color: #eeeff0;
+                height: 26px;
+                line-height: 26px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+              }
+            }
+          }
+
+          tbody {
+            tr {
+              border-bottom: 1px solid #d8d8d8;
+              height: 23px;
+              line-height: 23px;
+
+              td {
+                height: 23px;
+                line-height: 23px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+              }
+            }
+          }
+
+          .textEllipsis {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
+          }
+
+          .paddingleft18 {
+            padding-left: 18px;
+          }
+
+          .paddingleft10 {
+            padding-left: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .fromLoading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 1000 !important;
+  }
+
+}

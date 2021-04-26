@@ -1,0 +1,73 @@
+.splitOrder {
+  .manual_button {
+    display: flex;
+    justify-content: flex-start;
+    .one_button .buttonBox button .iconfont {
+      margin-bottom: 0px;
+      font-size: 12px;
+      margin-left: 0px;
+    }
+  }
+
+  .manual_list {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    .list_left {
+      flex: 1;
+      width: calc(100% - 210px);
+      max-width: calc(100% - 210px);
+    }
+    .list_right {
+      // flex: 0 0 200px;
+      width: 200px;
+      margin-left: 10px;
+      ul {
+        li {
+          width: 200px;
+          height: 60px;
+          background: #c8c6c6;
+          margin-bottom: 5px;
+          text-align: center;
+          line-height: 60px;
+          position: relative;
+        }
+        i {
+          position: absolute;
+          top: 0;
+          right: 0;
+          &:hover {
+            color: #fff;
+          }
+        }
+        li:first-child {
+          height: 80px;
+          line-height: 80px;
+          background-color: rgba(23,125,76,.1);
+          text-align: center;
+          color: #177d4c;
+          font-size: 14px;
+          position: relative;
+          overflow: hidden;
+          &:hover {
+            border: 1px solid #177d4c;
+          }
+          
+          .subscript {
+            height: 30px;
+            width: 100px;
+            right: -36px;
+            top: 0px;
+            position: absolute;
+            text-align: center;
+            line-height: 30px;
+            font-family: "黑体";
+            background-color: #ffd800;
+            transform: rotate(45deg);
+          }
+        }
+      }
+    }
+  }
+}

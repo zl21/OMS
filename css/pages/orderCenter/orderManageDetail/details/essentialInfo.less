@@ -1,0 +1,184 @@
+@import '~@burgeon/oms-theme/skin/public.less';
+
+.order-content-tab {
+  margin-left: @base-mr / 2 !important;
+  margin-right: @base-mr / 2 !important;
+  .ark-col{
+    margin-top: @base-mr;
+  }
+  .order-tab-content {
+    border-radius: @base-radius;
+    overflow: auto;
+    background: #fff;
+    box-shadow: @base-shadow;
+    .order-tab-title {
+      position: relative;
+      padding: 0 32px;
+      height: @base-title-height;
+      line-height:  @base-title-height;
+      font-weight: 400;
+      font-size: 14px;
+      border-bottom: 1px solid #f2f2f2;
+      background-color: rgba(231, 234, 245, 0.06);
+      &:after{
+        position: absolute;
+        top: 50%;
+        left: @base-mr;
+        transform: translateY(-50%);
+        display: block;
+        content: '';
+        width: 3px;
+        height: 14px;
+        border-radius: 3px;
+        background: @base-color;
+      }
+      .title-right{
+        display: grid;
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 40px;
+        line-height: 40px;
+        grid-template-columns: 50px 100px;
+        font-size: 12px;
+        color: @base-color;
+        grid-column-gap: 20px;
+      }
+      .title-sign{
+        position: absolute;
+        left: 200px;
+        top: 0;
+        height: 40px;
+        line-height: 40px;
+        span{
+          display: inline-block;
+          vertical-align: middle;
+          text-align: center;
+          padding: 0 5px;
+          margin: 0 5px;
+          height: 24px;
+          border: 1px solid #aeadb0;
+          line-height: 22px;
+          border-radius: 5px;
+          // &.one{
+          //   color: #ffae34;
+          //   background: fade(#ffae34,10%);
+          //   border: 1px solid fade(#ffae34,30%);
+          // }
+          // &.two{
+          //   color: #ff6951;
+          //   background: fade(#ff6951,10%);
+          //   border:  1px solid fade(#ff6951,30%);
+          // }
+          // &.three{
+          //   color: #5461b8;
+          //   background: fade(#5461b8,10%);
+          //   border:  1px solid fade(#5461b8,30%);
+          // }
+          // &.four{
+          //   color: #62bbf5;
+          //   background: fade(#62bbf5,10%);
+          //   border:  1px solid fade(#62bbf5,30%);
+          // }
+        }
+      }
+    }
+    .order-tab-detail{
+      min-height: 310px;
+      .detail-ul {
+        .detail-li{
+          height: 30px;
+          line-height: 30px;
+          display: grid;
+          grid-template-columns:80px calc(100% - 80px);
+          label{
+            text-align: right;
+            color: #aeadb0;
+          }
+          p{
+            margin-left: 10px;
+            color: #292f43;
+            overflow: hidden;
+            text-overflow:ellipsis; 
+            white-space: nowrap;
+            .edit{
+              vertical-align: middle; 
+              cursor: pointer;
+              color: @base-color;
+            }
+          }
+        }
+      }
+    }
+    .order-money{
+      display: grid;
+      grid-template-columns: 24px calc(60% - 24px) 40%;
+      align-items: center;
+      position: absolute;
+      left: 18px;
+      bottom: 12px;
+      width: calc(100% - 36px);
+      .order-money-title{
+        background: rgba(69,96,171,0.16);
+        line-height: 24px;
+        letter-spacing: 2px;
+        text-align: center;
+        writing-mode: vertical-lr;
+        height: 80px;
+        color: rgba(84,97,184,0.60);
+        font-weight: bold;
+      }
+      .totalAmount{
+        grid-template-columns: repeat(4,auto 20px);
+        background-color: #F0F2F9;
+        height: 80px;
+        align-content: center;
+        li.symbol{
+          color: #c3c6d2;
+          font-size: 32px;
+        }
+      }
+      .amountActually{
+        grid-template-columns: repeat(3, auto);
+        background-color: #F5F7FB;
+        height: 80px;
+        align-content: center;
+      }
+      .totalAmount,.amountActually{
+        display: grid;
+        li{
+          display: grid;
+          align-items: center;
+          text-align: center;
+          label{
+            height: 25px;
+            line-height: 25px;
+            color: #8d91a1;
+          }
+          p{
+            font-size: 16px;
+            height: 25px;
+            line-height: 25px;
+            color: #ff6951;
+          }
+          &.resulf-text{
+            label{
+              font-weight: bold;
+              color: #292f43;
+            }
+            p{
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.text-ellipsis {
+  max-width: 175px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+}

@@ -1,0 +1,38 @@
+.pushProduce {
+  .i_head {
+    height: 30px;
+  }
+  .i_body {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .i_food {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .skuBox {
+    width: 430px;
+    overflow: hidden;
+    margin-top: -2px;
+    /deep/ .orderManageEdit {
+      padding-right: 0;
+    }
+  }
+  .number-box {
+    label {
+      width: 100px;
+      text-align: right;
+      padding: 10px 12px 10px 0;
+      display: inline-block;
+    }
+  }
+  .search-button {
+    text-align: right;
+    width: 100px;
+    margin-top: 2px;
+    .ark-btn-error {
+      background-color: @button-bg;
+      border-color: @button-border;
+    }
+  }
+}
