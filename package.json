@@ -1,0 +1,18 @@
+{
+  "name": "@burgeon/internationalization",
+  "version": "1.0.36",
+  "description": "burgeon company's internationalization lib for private npm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitee.com:product_centerfront_end/burgeon-private-npm.git"
+  },
+  "author": "flybird <duan.ry@burgeon.cn>",
+  "license": "ISC",
+  "dependencies": {
+    "vue-i18n": "^8.24.3"
+  }
+}
