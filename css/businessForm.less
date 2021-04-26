@@ -1,0 +1,158 @@
+@import '~omsTheme/public.less';
+
+.ark-form-item-content {
+  position: relative;
+}
+
+.orderManageEdit {
+  display: flex;
+  // border: 1px solid #d8d8d8;
+  .businessForm_a {
+    // padding-bottom: 10px;
+    box-sizing: border-box;
+
+    &.burgeon-col-span-6,
+    &.burgeon-col-span-8,
+    &.burgeon-col-span-12,
+    &.burgeon-col-span-24 {
+      height: 30px;
+    }
+
+    .ark-form-item {
+      margin-bottom: 0;
+
+      .ark-form-item-label {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:hover {
+          overflow: inherit;
+          white-space: normal;
+        }
+      }
+
+      // .ark-input-wrapper {
+      //   line-height: 30px;
+
+      //   .ark-input {
+      //     box-sizing: border-box;
+      //     line-height: 26px;
+      //     height: 26px;
+      //   }
+      // }
+
+    }
+
+    // 类型为popInput的 input
+    .popInput {
+      .item-input {
+        .title {
+          width: 120px;
+          padding: 10px 12px 10px 0;
+          box-sizing: border-box;
+          line-height: 1 !important;
+          text-align: right;
+        }
+
+        .add-input {
+          width: 100%;
+          background-color: transparent;
+          &.disabled{
+            background-color: #fafafa;
+          }
+          .el-input.is-disabled .el-input__inner {
+            border-color: transparent;
+            background-color: transparent;
+          }
+        }
+        .table-input{
+          margin: 0px;
+          padding: 0 10px;
+          .el-input__inner{
+            border: 0;
+          }
+        }
+      }
+    }
+
+    /* 日期组件宽度调整 */
+    .ark-date-picker {
+      width: 100%;
+    }
+
+    // 类型为popSelect的 input
+    /* select下拉框样式调整 */
+    // .popSelect .ark-select-single .ark-select-selection {
+    //   height: 26px;
+    //   line-height: 26px;
+    // }
+
+    // .popSelect .ark-select-single .ark-select-selection .ark-select-placeholder,
+    // .ark-select-single .ark-select-selection .ark-select-selected-value {
+    //   height: 26px;
+    //   line-height: 26px;
+    // }
+
+    /* 双数字输入框样式 */
+    .bothNumInput {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .ark-time-picker-cells .ark-time-picker-cells-list {
+      box-sizing: border-box;
+    }
+
+    /* 标注图标样式 */
+    .ark-tooltip {
+      position: absolute;
+      right: -20px;
+      top: 8px;
+
+      .ark-icon {
+        font-size: 18px;
+        color: #ed4014;
+      }
+    }
+
+  }
+
+  /* 折叠按钮 */
+  .flodBtn {
+    width: 28px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    background: @base-color;
+    position: relative;
+    right: 0px;
+    top: 0;
+    color: #fff;
+    margin-left: 2px;
+  }
+}
+
+/* 未折叠情况下的样式 */
+.unFlodStyle {
+  padding-right: 28px;
+  border: none;
+}
+
+/* 必选标识字体样式调整为框架相同 */
+.ark-form-item-required .ark-form-item-label:before {
+  vertical-align: -webkit-baseline-middle;
+  display: inline-block;
+  font-style: italic !important;
+  font-family: auto !important;
+  font-size: 18px !important;
+  line-height: 10px !important;
+}
+
+/* 日期组件样式 */
+html *,
+:after,
+:before {
+  box-sizing: border-box;
+}

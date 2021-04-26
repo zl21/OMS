@@ -1,0 +1,474 @@
+@import "~libs/ag-grid/dist/styles/ag-grid.css";
+@import "~libs/ag-grid/dist/styles/ag-theme-balham.css";
+@import "~libs/element-ui/lib/theme-chalk/index.css";
+
+// 所有ag-grid tabe 样式调整
+// 表头高度以及行高 修改 1.ag-grid-table-pure.js  2.agGridTable.vue 里面的属性(headerHeight rowHeight)
+
+.dateilTable,
+.agTable {
+  .ag-theme-balham {
+    .ag-row-selected {
+      background-color: #f5f5f5;
+      border-bottom: 1px solid #d9dcde;
+    }
+
+    .ag-pinned-left-cols-container {
+      .ag-cell-focus {
+        border: 1px solid transparent !important;
+        border-left: none !important;
+        border-right: 1px solid #ebedf0 !important;
+      }
+    }
+
+    .ag-cell-focus {
+      border: 1px solid #0091ea !important;
+    }
+
+    .ag-row.ag-row-hover {
+      background-color: #edf7ff;
+    }
+
+    .ag-row.ag-row-hover .ag-cell {
+      border-right: 1px solid #ebedf0;
+    }
+
+    .ag-root {
+      border: none;
+    }
+
+    .ag-header {
+      background-color: #f7f8fa;
+      border-bottom: 1px solid #ebedf0;
+    }
+
+    .ag-header-row {
+      border-bottom: 1px solid #ebedf0;
+
+      &:last-child {
+        border: none;
+      }
+    }
+
+    .ag-header-row {
+      &:first-child {
+
+        .ag-header-cell,
+        .ag-header-group-cell {
+          line-height: 36px;
+        }
+      }
+    }
+
+    // .ag-pinned-right-header .ag-header-cell {
+    //   &:first-child {
+    //     border-right: none;
+    //   }
+    // }
+
+    .ag-header-cell,
+    .ag-header-group-cell {
+      text-align: center;
+      border-right: 1px solid #ebedf0;
+
+      &:after {
+        display: none;
+      }
+
+      .ag-header-cell-resize {
+        text-align: center;
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+
+    .ag-header-viewport {
+      .ag-header-cell {
+        &:last-child {
+          // border-right: none;
+        }
+      }
+    }
+
+    .ag-header-group-cell {
+      line-height: 36px;
+    }
+
+    .ag-header-cell-label {
+      justify-content: center;
+    }
+
+    .ag-cell {
+      // color: #323233; // 这行会影响全局自定义table的字体颜色无法自定义颜色
+      line-height: 36px;
+      border-right: 1px solid #ebedf0;
+
+      &:last-child {
+        // border-right: none;
+      }
+    }
+
+    .ag-ltr .ag-cell-last-left-pinned {
+      // border-right: none;
+      border-right: 1px solid #ebedf0;
+    }
+
+    .ag-floating-filter-body {
+      width: 100%;
+
+      input {
+        border: none;
+        padding-right: 15px;
+        background-color: #ededed;
+      }
+    }
+
+    .ag-floating-filter-button {
+      position: absolute;
+      right: 15px;
+    }
+
+    .ag-header-cell-menu-button {
+      margin-top: 3px;
+    }
+  }
+  .agGridTable {
+    border-bottom: 1px solid #ebedf0;
+  }
+  .isagTable{
+      .ag-bl-east{
+          display:none;
+      }
+  }
+  .burgeon-form-item-content {
+    position: relative;
+    vertical-align: middle;
+    line-height: 24px !important;
+  }
+  .ag-tool-panel .ag-side-buttons {
+    border-left: 1px solid #ebedf0;
+    background: #fff;
+  }
+  .ag-theme-balham .ag-tool-panel {
+    border-top: 1px solid #ebedf0;
+    border-right: 1px solid #ebedf0;
+    border-bottom: none;
+  }
+  .ag-theme-balham .ag-tool-panel .ag-side-buttons {
+    border-bottom: none;
+  }
+}
+
+.jordan-table.burgeon-table-wrapper {
+
+  th.burgeon-table-column-left,
+  td.burgeon-table-column-left {
+    text-align: left;
+    height: 36px;
+    border-bottom: none;
+    border-right: 1px solid #e8eaec;
+  }
+
+  td.burgeon-table-column-left {
+    border-bottom: 1px solid #e8eaec;
+  }
+
+  th.burgeon-table-column-center,
+  td.burgeon-table-column-center {
+    text-align: center;
+    border-right: 1px solid #e8eaec;
+    border-bottom: 1px solid #e8eaec;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+
+
+
+//搜索按钮
+.formButton {
+  button.burgeon-btn-posdefault {
+    background-color: #0068b7 !important;
+    border-color: #0068b7 !important;
+    border-radius: 2px !important;
+
+    &:hover {
+      background-color: #008ae3 !important;
+      background: #008ae3 !important;
+      border-color: #008ae3 !important;
+      color: #fff !important;
+    }
+
+    &:last-child>span,
+    &:last-child>.burgeon-icon {
+      color: rgba(0, 0, 0, 0.65) !important;
+    }
+
+    &:last-child {
+      margin-left: 10px;
+      background-color: #fff !important;
+      border-color: #d9d9d9 !important;
+
+      &:hover {
+        background-color: #008ae3 !important;
+        background: #008ae3 !important;
+        border-color: #008ae3 !important;
+
+        >span {
+          color: #fff !important;
+        }
+      }
+    }
+  }
+}
+
+//搜索
+.from,
+.list {
+  .burgeon-form-item {
+    .burgeon-icon-ios-arrow-down:before {
+      content: "\F116";
+    }
+  }
+
+  .burgeon-select-arrow {
+    margin-top: -5px;
+  }
+
+  &>.one_button {
+    margin: 0 !important;
+    padding: 0;
+
+    .buttonBox {
+      justify-content: flex-end;
+      margin-top: 5px;
+
+      .buttonGroup {
+        margin: 0 !important;
+
+        .burgeon-btn-ghost.burgeon-btn-error {
+          background-color: #0068b7 !important;
+          border-color: #0068b7 !important;
+          border-radius: 2px !important;
+          border: 1px solid #0068b7;
+          width: 60px;
+          height: 28px;
+
+          &:hover {
+            background-color: #008ae3 !important;
+            border-color: #008ae3 !important;
+            color: #fff !important;
+          }
+
+          &>span {
+            margin-left: 0;
+            font-size: 12px;
+          }
+        }
+      }
+
+      &>div:last-child {
+        .burgeon-btn-ghost.burgeon-btn-error {
+          color: rgba(0, 0, 0, 0.65) !important;
+          background-color: #fff !important;
+          border: 1px solid #d9d9d9 !important;
+          margin-right: 0 !important;
+        }
+      }
+    }
+  }
+
+  .burgeon-select-multiple .burgeon-select-selection {
+    height: 26px;
+    box-shadow: none !important;
+    border: 1px solid #dedede;
+  }
+}
+
+// singleView
+.contentView {
+  .table-generate .el-pager li.active {
+    color: #fff;
+  }
+
+  .table-generate .table-wrap .table-tab {
+    margin-bottom: 16px;
+  }
+}
+
+.orderManageEdit .one_button {
+  padding: 0;
+}
+
+// 标准页面按钮修改
+.bth {
+  .burgeon-btn-error {
+    color: #fff;
+    background-color: #fd6442;
+    border-color: #fd6442;
+  }
+}
+
+// 弹框
+.burgeon-modal {
+  .burgeon-modal-content {
+    .burgeon-modal-confirm-footer {
+      // text-align: center !important;
+
+      .burgeon-btn:first-child {
+        height: 28px;
+        width: 60px !important;
+        padding: 0 !important;
+        color: rgba(0, 0, 0, 0.65) !important;
+        border: 1px solid #0068b7 !important;
+        background-color: #0068b7 !important;
+
+        span {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.burgeon-modal,
+.jordanModal,
+.jordanModal-- {
+
+
+  .one_button .right {
+
+    // justify-content: center !important;
+    // 预退货单>手工新增>新增明细>btn
+    .burgeon-btn-ghost {
+      border: 1px solid #d9d9d9 !important;
+      color: rgba(0, 0, 0, 0.65) !important;
+      background: #fff !important;
+
+      &:hover {
+        border-color: #008ae3 !important;
+        background: #008ae3 !important;
+        color: #fff !important;
+      }
+    }
+
+    div:nth-child(2) {
+      button {
+        color: #fff !important;
+      }
+    }
+
+  }
+
+  .one_button .buttonBox {
+    .buttonGroup button {
+      height: 28px;
+      width: 60px;
+      text-align: center;
+    }
+
+    >div:first-child {
+      .buttonGroup button {
+        border: 1px solid #0068b7;
+        color: #fff;
+        background: #0068b7;
+      }
+
+    }
+
+  }
+}
+
+// 预退货订单页(hover,table不对齐)
+tr.burgeon-table-row-hover td {
+  background-color: #edf7ff;
+}
+
+.jordan-table.burgeon-table-wrapper {
+
+  .burgeon-table th,
+  .burgeon-table td {
+    border-top: 1px solid #dcdee2;
+    border-bottom: none;
+
+  }
+
+  .burgeon-table-row-highlight td {
+    background-color: #f5f5f5;
+  }
+}
+
+.burgeon-modal-footer {
+  button {
+    width: 60px;
+    border-radius: 2px;
+    height: 28px;
+    line-height: 26px;
+    padding: 0;
+    border: 1px solid #d9d9d9;
+    color: rgba(0, 0, 0, 0.65);
+
+    &:last-child {
+      color: #fff;
+    }
+
+    &:hover {
+      background: #57a3f3;
+      color: #fff;
+      border: 1px solid #57a3f3;
+    }
+  }
+}
+
+.jordan-table.burgeon-table-wrapper .burgeon-table th {
+  border-top: none;
+}
+
+// 所有修改日志的边框(无)
+.burgeon-table:after,
+.burgeon-table:before {
+  content: '';
+  width: 0;
+  height: 0;
+}
+
+.burgeon-table-wrapper {
+  border: none !important;
+}
+
+/* 
+所有表格:
+ 1.右边框(无);
+ 2.下边框1px
+*/
+.burgeon-table-tbody {
+  border-bottom: 1px solid #d9dcde;
+}
+
+thead tr th,
+table tbody tr td {
+  &:last-child {
+    border-right: none !important;
+  }
+}
+
+.burgeon-table-fixed-header thead tr th {
+  &:first-child {
+    border-right: none !important;
+  }
+}
+
+// 已发货退款单 > 详情 > 查询原始订单编号 > footerBtn
+.queryOriginalNu .burgeon-modal-footer {
+  display: flex !important;
+  // justify-content: center !important;
+  justify-content: flex-end;
+
+  .burgeon-btn span {
+    font-size: 12px;
+  }
+}

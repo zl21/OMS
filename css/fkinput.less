@@ -1,0 +1,107 @@
+
+
+.hidden {
+  display: none !important;
+}
+.item-input:hover {
+  .clear {
+    display: inline-block;
+  }
+}
+.item-input {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  margin: 4px 0;
+  //border: 1px dashed #000;
+  box-sizing: border-box;
+  border-radius: 6px;
+  position: relative;
+
+  > div {
+    flex: 1;
+    display: flex;
+  }
+  .disabled {
+    border: none;
+  }
+  .table-input {
+    margin: 0 0 0 4px;
+  }
+  .clear {
+    display: none;
+    position: absolute;
+    right: 25px;
+    bottom: 10px;
+    z-index: 99;
+    font-size: 12px;
+  }
+  .clickbox {
+    width: 85%;
+    height: 100%;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+  }
+  .add-input {
+    height: 24px;
+    // max-width: 136px;
+    border-radius: 2px;
+    font-size: 12px;
+    padding: 0 0 0 4px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #bfcbd9;
+    box-sizing: border-box;
+    color: #1f2d3d;
+    line-height: 1;
+    outline: 0;
+    transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  input.add-input {
+    width: calc(~"100% - 102px");
+  }
+  .name {
+    padding: 0 10px;
+  }
+  .ffish-icon.danxuan {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    z-index: 999;
+    position: absolute;
+    top: 7px;
+    margin-left: 3px;
+  }
+  label {
+    i {
+      height: 14px;
+      line-height: 14px;
+      vertical-align: -webkit-baseline-middle;
+      display: inline-block;
+      position: relative;
+      color: #f52f2f;
+      font-size: 18px;
+    }
+  }
+
+  input {
+    border: none;
+    border-bottom: 1px solid #bfcbd9;
+    flex: 1;
+    padding: 0 15px 2px 2px;
+    margin-right: 10px;
+  }
+  input:focus {
+    border-color: #0f8ee9;
+  }
+  .el-input {
+    flex: 1;
+  }
+}

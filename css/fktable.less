@@ -1,0 +1,175 @@
+
+.fktable {
+  width: 300px;
+  min-width: 150px;
+  max-height: 398px;
+  box-sizing: border-box;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #d1dbe5;
+  padding: 5px;
+
+  .searchlist {
+    margin-bottom: 6px;
+    height: 24px;
+    .el-autocomplete {
+      float: left;
+      input[type="text"] {
+        height: 24px;
+        border-radius: 2px;
+        border: 1px solid #d2d2d2;
+        font-size: 12px;
+        padding: 3px 10px;
+        width: 200px;
+      }
+    }
+
+    .buttonGrops {
+      float: right;
+      font-size: 0px;
+      button {
+        width: 66px;
+        height: 24px;
+        border-radius: 2px;
+        text-align: center;
+        font-size: 12px;
+      }
+
+      button:first-child {
+        margin-right: 6px;
+        background-color: #fd6442;
+        color: #fff;
+
+        &:hover {
+          background-color: #e6502f;
+          color: #f3cec5;
+        }
+      }
+
+      button:last-child {
+        border: 1px solid #fd6442;
+        color: #fd6442;
+        background-color: white;
+
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+
+  .table {
+    flex: 1;
+    width: 100%;
+    overflow: auto;
+    table {
+      width: 100%;
+      flex-direction: column;
+
+      flex: 1;
+      color: #575757;
+      thead {
+        background-color: #f5f6fa;
+        height: 26px;
+        min-width: 100%;
+
+        tr {
+          th {
+            height: 26px;
+            line-height: 26px;
+            white-space: nowrap;
+            padding: 0 5px;
+            text-align: left;
+            min-width: 50px;
+          }
+
+          th:first-child {
+            min-width: 30px;
+          }
+        }
+      }
+
+      tbody {
+        flex: 1;
+        min-width: 100%;
+
+        tr {
+          border-bottom: 1px solid #d8d8d8;
+
+          td {
+            height: 23px;
+
+            line-height: 23px;
+            white-space: nowrap;
+            padding: 0 5px;
+            text-align: left;
+            min-width: 50px;
+          }
+
+          td:first-child {
+            min-width: 30px;
+            span {
+              margin-left: 5px;
+            }
+          }
+        }
+
+        tr.selected {
+          background-color: #f8f7f7;
+        }
+      }
+    }
+
+    p {
+      text-align: center;
+      font-weight: normal;
+      color: #575757;
+    }
+  }
+
+  .page {
+    height: 14px;
+    margin-top: 6px;
+    button {
+      height: 14px;
+      width: 14px;
+      line-height: 14px;
+      padding: 0;
+      min-width: 14px;
+      border-width: 0;
+
+      &:hover {
+        color: #d4dade;
+      }
+    }
+
+    ul {
+      li {
+        height: 14px;
+        padding: 0 4px;
+        line-height: 14px;
+        min-width: auto;
+        width: auto;
+        border: none;
+      }
+
+      li:last-child {
+        height: 14px;
+        padding: 0;
+        line-height: 14px;
+        min-width: 14px;
+      }
+    }
+  }
+
+  /* 覆盖饿了么UI原有样式 */
+    .el-pagination--small li.more::before {
+      line-height: 14px;
+    }
+    .el-pagination--small .el-pager li,
+    .el-pagination--small .el-pager li.btn-quicknext {
+      height: 14px;
+      line-height: 14px;
+    }
+}

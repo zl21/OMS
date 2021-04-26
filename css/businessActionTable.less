@@ -1,0 +1,114 @@
+.jordan-table-box {
+  height: 100%;
+  .ark-table:before{
+    z-index: 5;
+  }
+  .ark-table-border td,
+  .ark-table-border th {
+    height: 30px;
+    line-height: 30px;
+    &.ark-table-column-center{
+      box-sizing: initial;
+    }
+  }
+  .jordan-table-box .businessForm-box {
+    background-color: #eee;
+  }
+
+  .jordan-table-box .businessForm-box .businessForm_a {
+    height: 100%;
+    padding-bottom: 4px;
+  }
+
+  .page-box {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 8px;
+
+    .page-box-left {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .burgeon-page-options-elevator input {
+      box-sizing: border-box !important;
+    }
+
+    .page_content {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+
+      .page-allSizes {
+        margin-right: 6px;
+      }
+    }
+
+    .page-input {
+      margin-left: 4px;
+      justify-content: flex-end;
+    }
+  }
+
+  .detailButtons {
+    padding: 8px 0;
+    font-size: 0;
+
+    button {
+      height: 28px;
+      margin-left: 0;
+      border-radius: 2px;
+      min-width: 50px;
+      padding: 0 7px;
+      position: relative;
+      border-color: #fd6442;
+      color: #fd6442;
+      font-size: 12px;
+      margin-right: 8px;
+
+      &>i.iconfont {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        &+span {
+          display: none;
+        }
+      }
+
+      span {
+        display: block;
+        height: 26px;
+        line-height: 26px;
+      }
+
+      .ark-icon,
+      .iconfont {
+        font-size: 14px;
+      }
+
+      &:hover {
+        background: #fff;
+        opacity: 0.6;
+      }
+    }
+  }
+  .table-gray-row td {
+    background: #f1f1f1 !important;
+  }
+  .color-gray-row td {
+    color: #c5c5c5 !important;
+  }
+  .color-red-row td {
+    color: #fd6442 !important;
+  }
+  .table-yellow-row td {
+    background: #ffff99 !important;
+  }
+}
