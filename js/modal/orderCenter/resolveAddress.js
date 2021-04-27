@@ -22,11 +22,12 @@ export default {
   },
   data() {
     return {
+      isTooltip:false,
       vmI18n: window.vmI18n,
       objId: -1,
       loading: false,
       newReceivAddress: '',
-      ReceivAddress: '魏萧萧，13564875782，山东省临沂市兰山区莘庄镇大虹桥国际3楼上海伯俊软件科技有限公司', // 新地址
+      ReceivAddress: '魏萧萧，13564875782，上海上海市闵行区黎安路999号', // 新地址
       formConfig:{
         labelWidth:'80',
         formValue:{},
@@ -58,8 +59,11 @@ export default {
           },
           oneObj: (val) => {
             // 选中触发事件
-            console.log("val::", val);
             this.data.cp_c_region_province_id = val.pid;
+            this.formConfig.formData[1].itemdata.pid = '';
+            this.formConfig.formData[1].itemdata.valuedata = '';
+            this.formConfig.formData[2].itemdata.pid = '';
+            this.formConfig.formData[2].itemdata.valuedata = '';
           },
         },
         {
@@ -97,7 +101,9 @@ export default {
           oneObj: (val) => {
             // 选中触发事件
             console.log("val::", val);
-            this.data.cp_c_region_city_id = val.pid
+            this.data.cp_c_region_city_id = val.pid;
+            this.formConfig.formData[2].itemdata.pid = '';
+            this.formConfig.formData[2].itemdata.valuedata = '';
           },
         },
         {
@@ -160,6 +166,17 @@ export default {
         receiver_zip: '', // 邮编
         ship_amt: '', // 
       }, // 需要提交的数据
+      ruleValidate:{
+        receiver_address: [
+            { required: true, message: ' ', trigger: 'blur' }
+        ],
+        receiver_name: [
+            { required: true, message: ' ', trigger: 'blur' }
+        ],
+        receiver_mobile: [
+            { required: true, message: ' ', trigger: 'blur' }
+        ]
+      },
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
@@ -181,7 +198,7 @@ export default {
     };
   },
   methods: {
-   async initAddress(){
+    async initAddress(){
       this.loading = true;
       let params = {
         ID: this.objId,
@@ -214,23 +231,34 @@ export default {
       }
     },
     async parseAddress() {
-      if (this.newReceivAddress === '') return;
+      if (!this.newReceivAddress) {
+        this.isTooltip = true;
+        console.log(this.isTooltip);
+        return;
+      };
       const result = parse(this.newReceivAddress);
-      console.log('result:', result);
-      this.data.receiver_name = result.name;
-      this.data.receiver_mobile = result.mobile;
-      this.data.receiver_address = result.addr;
-      this.formConfig.formData[0].itemdata.valuedata = result.province;
-      this.formConfig.formData[1].itemdata.valuedata = result.city;
-      this.formConfig.formData[2].itemdata.valuedata = result.area;
-      // 地址解析默认是正确状态
-      this.dataAysis = true;
-      // 获取省市区的id
-      await this.getSelection(166974,result.province);
-      await this.getSelection(167077,result.city,this.province_id);
-      await this.getSelection(167091,result.area,this.province_id);
-      // 判断是收货人基础信息是否正确
-      await this.intelligentReciver();
+      if (result.province == '' || result.area == '' || result.city == '') {
+        // "请填入完整信息,如:张三,17788888888,上海上海市闵行区黎安路999号"
+        this.$Message.warning(self.vmI18n.t('modalTips.f9'));
+      }else{
+        this.data.receiver_name = result.name;
+        this.data.receiver_mobile = result.mobile;
+        this.data.receiver_address = result.addr;
+        this.data.receiver_phone = result.receiver_phone;
+        this.data.receiver_zip = result.receiver_zip;
+        this.newReceivAddress = result.newReceivAddress;
+        this.formConfig.formData[0].itemdata.valuedata = result.province;
+        this.formConfig.formData[1].itemdata.valuedata = result.city;
+        this.formConfig.formData[2].itemdata.valuedata = result.area;
+        // 地址解析默认是正确状态
+        this.dataAysis = true;
+        // 获取省市区的id
+        await this.getSelection(166974,result.province);
+        await this.getSelection(167077,result.city,this.province_id);
+        await this.getSelection(167091,result.area,this.province_id);
+        // 判断是收货人基础信息是否正确
+        await this.intelligentReciver();
+      }
     },
     async intelligentReciver() {
       if (!this.dataAysis) return;

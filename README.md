@@ -285,6 +285,7 @@ R3.launchApplication({
 | v1.1.64  | npm link 前置工作(npmrc/gitignore……) |
 | v1.1.65  | 订单取消,审核反审核结构修改 |
 | v1.1.66  | 详情 - 明细添加新增修改 |
+| v1.1.67  | 详情 - 修改地址添加提示 |
 
 #### Extends-Api 版本说明
 
