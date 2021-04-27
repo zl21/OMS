@@ -12,11 +12,11 @@
         <Input
           ref="newReceivAddress"
           v-model="newReceivAddress"
-          placeholder="如:张三,17788888888,上海上海市闵行区黎安路999号（输入后请按Enter键）"
+          placeholder="请输入规范收货地址后，按Enter键"
           @on-blur="parseAddress"
           @on-enter="parseAddress"
         /></Input>
-         <Tooltip :class="[isTooltip ? 'showTooltip' : '']" max-width ="400" theme = "dark" content="格式:张三,17788888888,上海上海市闵行区黎安路999号" placement="top-start">
+         <Tooltip class="showTooltip" max-width ="400" theme = "dark" content="格式:张三,17788888888,上海上海市闵行区黎安路999号" placement="top-start">
            <Icon type="ios-alert-outline" />
          </Tooltip>
       </FormItem>

@@ -22,7 +22,6 @@ export default {
   },
   data() {
     return {
-      isTooltip:false,
       vmI18n: window.vmI18n,
       objId: -1,
       loading: false,
@@ -231,13 +230,9 @@ export default {
       }
     },
     async parseAddress() {
-      if (!this.newReceivAddress) {
-        this.isTooltip = true;
-        console.log(this.isTooltip);
-        return;
-      };
+      if (!this.newReceivAddress) return;
       const result = parse(this.newReceivAddress);
-      if (result.province == '' || result.area == '' || result.city == '') {
+      if (result.province == '' && (result.area == '' || result.city == '')) {
         // "请填入完整信息,如:张三,17788888888,上海上海市闵行区黎安路999号"
         this.$Message.warning(self.vmI18n.t('modalTips.f9'));
       }else{
