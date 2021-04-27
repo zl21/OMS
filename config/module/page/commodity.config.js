@@ -15,11 +15,15 @@ export default {
     labelName: '组合福袋商品编辑',
   },
   /* 2.0: */
-  SPURECORD: {
+  PS_C_PRO: {
     component: spuRecord,
     labelName: 'SPU新增'
   },
-  SKUADDOREDIT: {
+  // SKUADDOREDIT: {
+  //   component: skuAddOrEdit,
+  //   labelName: '商品SKU编辑',
+  // },
+  PS_C_SKU: {
     component: skuAddOrEdit,
     labelName: '商品SKU编辑',
   },
