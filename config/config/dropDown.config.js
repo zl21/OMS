@@ -102,6 +102,15 @@ class DropDownConfig {
   }
 
   static dropDownMainHandler(type, ...singleType) {
+    /**
+     * 1、根据传入的type判断具体走那个方法以及传入什么参数
+     * 2、switch case 结束后统一做 当前是否有选中行的判断
+     * 3、根据paramsType统一处理入参：
+     *    1. paramsType：=1，入参仅传ids数组（eg.[9528,12]）
+     *    2. paramsType：=2，入参为FormData格式类型的ids
+     *    3. paramsType：=3，？
+     *    4. paramsType：=4，入参为选中的数据的所有信息
+     */
     let funName, tips, paramsType;
     switch (type) {
       case 'modifyLogistics':
@@ -179,7 +188,6 @@ class DropDownConfig {
         paramsType = 1;
         break;
     }
-
     const self = DropDownConfig.target;
     if (self.selection.length > 0) {
       self.btnConfig.loading = true;

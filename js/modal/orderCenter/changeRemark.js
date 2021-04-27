@@ -22,19 +22,16 @@ export default {
       // 提示
       confirmModal: false,
       formItem: {
-        cover: 'false',
-        flag: '1',
+        cover: 0,
+        flag: 1,
         textarea: '',
       },
-      btnConfig: {
+        btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            type: '', // 按钮类型
             text: window.vmI18n.t('common.cancel'), // 取消
-            icon: '', // 按钮图标
-            size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               // this.$refs.changeLogistics.close();
@@ -43,7 +40,6 @@ export default {
           },
           {
             text: window.vmI18n.t('common.determine'), // 确定
-            size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.determine();
@@ -57,7 +53,6 @@ export default {
     if (this.componentData.ORDER_FLAG) {
       this.formItem.flag = this.componentData.ORDER_FLAG;
     }
-    // ORDER_FLAG
   },
   methods: {
     onKeydownModal(event) {
@@ -125,15 +120,15 @@ export default {
     // 保存备注
     async saveRemark() {
       const self = this;
-      const data = typeof self.componentData.ids === 'number'
-        ? self.componentData.ids
-        : self.componentData.ids.join(',');
+      // const data = typeof self.componentData.ids === 'number'
+      //   ? self.componentData.ids
+      //   : self.componentData.ids.join(',');
       const fromdata = new FormData();
       const param = {
-        ids: data,
-        remark: self.formItem.textarea,
-        order_flag: self.formItem.flag,
-        cover: self.formItem.cover,
+        IDS: self.componentData.ids,
+        REMARK: self.formItem.textarea,
+        ORDER_FLAG: self.formItem.flag,
+        COVER: Boolean(self.formItem.cover * 1),
       };
       fromdata.append('param', JSON.stringify(param));
       const { data: { code, message } } = await this.service.orderCenter.remarkUpdate(param);

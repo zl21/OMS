@@ -1,5 +1,5 @@
 <template>
-  <div class="jordanModal--">
+  <div class="jordanModal-- customized-modal">
     <Spin
       v-if="spinShow"
       size="large"
@@ -49,13 +49,13 @@
           @on-change="coverRadioChange"
         >
           <!-- <Radio label="true">覆盖原备注</Radio> -->
-          <Radio label="true">
+          <Radio :label='1'>
             {{
               vmI18n.t("other.override_original_remarks")
             }}
           </Radio>
           <!-- <Radio label="false">追加到原备注</Radio> -->
-          <Radio label="false">
+          <Radio :label='0'>
             {{
               vmI18n.t("other.addTo_original_remarks")
             }}
@@ -64,7 +64,7 @@
       </FormItem>
     </Form>
     <businessButton
-      class="modalBth"
+      class="modalBth modal-footer"
       :btn-config="btnConfig"
     />
     <Modal

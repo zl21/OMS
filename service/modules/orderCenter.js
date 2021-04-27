@@ -34,7 +34,7 @@ export default {
   batchAddGoods: params => network.post('/api/cs/oc/oms/v1/batchAddGoods', params), // 零售发货单详情 - 添加赠品
   addGit: params => network.post('/api/cs/oc/oms/v1/addGit', params),
   bathChangeGoods: params => network.post('/api/cs/oc/oms/v1/bathChangeGoods', params), // 零售发货单详情 - 替换商品
-  remarkUpdate: params => network.post('/api/cs/oc/oms/v1/remarkUpdate', params), // 零售发货单 - 修改备注
+  remarkUpdate: params => network.post('/p/cs/oc/b/oms/v1/ocborder/orderDeliveryUrgent', params), // 零售发货单 - 修改备注
   deleteGit: params => network.post('/api/cs/oc/oms/v1/deleteGit', params),
   checkGit: params => network.post('/api/cs/oc/oms/v1/checkGit', params),
   markrefund: params => network.post('/api/cs/oc/oms/v1/markrefund', params),
