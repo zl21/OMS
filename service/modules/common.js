@@ -12,9 +12,9 @@ export default {
   queryCommonStorageByPro: params => $network.post('/p/cs/sg/storage/queryCommonStorageByPro', params),
 
   // 详情页数据查询接口。共用于：inventoryCenter、orderCenter
-  getObject: params => $network.post('/ad-app/p/cs/getObject', params),
+  getObject: params => $network.post('/p/cs/getObject', params),
   queryPhyWareHouseList: params => $network.post('/p/cs/queryPhyWareHouseList', params),
-  objectTableItem: params => $network.post('/ad-app/p/cs/objectTableItem', params),
+  objectTableItem: params => $network.post('/p/cs/objectTableItem', params),
   getWarehouseLogisticsTree: params => $network.post('/p/cs/getWarehouseLogisticsTree', params),
   getLogisticsRankResultTable: params => $network.post('/p/cs/getLogisticsRankResultTable', params),
   getPromField: params => $network.get('/p/cs/getPromField', params),
@@ -31,7 +31,7 @@ export default {
   removeFromFavorite: params => $network.post('/p/cs/removeFromFavorite', params),
   itemDownload: params => $network.post('/p/cs/itemDownload', params),
   getUserConfig: params => $network.post('/p/cs/getUserConfig', params),
-  QueryList: params => $network.post('/ad-app/p/cs/QueryList', params),
+  QueryList: params => $network.post('/p/cs/QueryList', params),
   SgOutNoticePrint: params => $network.post('/p/cs/SgOutNoticePrint', params),
   fuzzyquerybyak: params => $network.post('/p/cs/fuzzyquerybyak', params),
   cgroupcolumnquery: params => $network.get(`/p/cs/cgroupcolumnquery?${qs.stringify(params)}`),

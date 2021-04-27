@@ -30,7 +30,6 @@ export default {
   batchAddGoods: params => $network.post('/api/cs/oc/oms/v1/batchAddGoods', params), // 零售发货单详情 - 添加赠品
   addGit: params => $network.post('/api/cs/oc/oms/v1/addGit', params),
   bathChangeGoods: params => $network.post('/api/cs/oc/oms/v1/bathChangeGoods', params), // 零售发货单详情 - 替换商品
-  remarkUpdate: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/orderDeliveryUrgent', params), // 零售发货单 - 修改备注
   deleteGit: params => $network.post('/api/cs/oc/oms/v1/deleteGit', params),
   checkGit: params => $network.post('/api/cs/oc/oms/v1/checkGit', params),
   markrefund: params => $network.post('/api/cs/oc/oms/v1/markrefund', params),
@@ -44,16 +43,15 @@ export default {
   /**
    * 零售发货单 - 详情
    */
-   billCopy: params => $network.post('/api/cs/oc/oms/v1/billCopy', params), // 丢单赋值或复制订单赋值
-   queryObject: params => $network.post('/p/cs/oc/oms/v1/queryObject', params), // 获取订单详情
-   saveBill: params => $network.post('/api/cs/oc/oms/v1/saveBill', params), // 保存
-   delOrderItem: params => $network.post('/p/cs/delOrderItem', params), // 删除明细
-   queryResionByName: params => $network.post('/api/cs/oc/oms/v1/queryResionByName', params), // 获取省份id
-   cancelInterception: params => $network.post('/api/cs/oc/oms/v1/cancelInterception', params), // 取消拦截
-   batchDeleteGoods: params => $network.post('/api/cs/oc/oms/v1/batchDeleteGoods', params), // 取消拦截
-   selectLimitGroups: params => $network.post('/p/cs/selectLimitGroups', params), // 取消拦截
-   initObject: params => $network.post('/p/cs/oc/oms/v1/initObject', params),  // 订单详情明细表头
-   updateOrderAddr: params => $network.post('/p/cs/oc/oms/v1/updateOrderAddr', params),  // 订单详情 - 修改地址
+  billCopy: params => $network.post('/api/cs/oc/oms/v1/billCopy', params), // 丢单赋值或复制订单赋值
+  queryObject: params => $network.post('/p/cs/oc/oms/v1/queryObject', params), // 获取订单详情
+  delOrderItem: params => $network.post('/p/cs/delOrderItem', params), // 删除明细
+  queryResionByName: params => $network.post('/api/cs/oc/oms/v1/queryResionByName', params), // 获取省份id
+  cancelInterception: params => $network.post('/api/cs/oc/oms/v1/cancelInterception', params), // 取消拦截
+  batchDeleteGoods: params => $network.post('/api/cs/oc/oms/v1/batchDeleteGoods', params), // 取消拦截
+  selectLimitGroups: params => $network.post('/p/cs/selectLimitGroups', params), // 取消拦截
+  initObject: params => $network.post('/p/cs/oc/oms/v1/initObject', params),  // 订单详情明细表头
+  updateOrderAddr: params => $network.post('/p/cs/oc/oms/v1/updateOrderAddr', params),  // 订单详情 - 修改地址
 
   /**
    * 扫描入库
@@ -152,6 +150,33 @@ export default {
   forcedMatching: params => $network.post('/api/cs/oc/oms/v1/forcedMatching', params), // 错发强制匹配保存
   seachForced: params => $network.post('/api/cs/oc/oms/v1/seachForced', params), // 错发强制匹配保存
   manualMatchingConfirmationButton: params => $network.post('/api/cs/oc/oms/v1/manualMatchingConfirmationButton', params), // 手工匹配确定
-  downloadPO: params=>$network.post('/p/cs/vip/v2/po/download', params), // PO单-下载PO单
+  downloadPO: params => $network.post('/p/cs/vip/v2/po/download', params), // PO单-下载PO单
 
+  /* 2.0: */
+  remarkUpdate: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/orderDeliveryUrgent', params), // 零售发货单 - 修改备注
+  initList: params => $network.post('/p/cs/oc/oms/v1/initList', params), // 零售发货单初始化列表接口
+  changeTagQuery: params => $network.post('/p/cs/vip/v2/distribution/item/query', params), // 换吊牌-初始化
+  changeTagSave: params => $network.post('/p/cs/vip/v2/distribution/change/tag', params), // 换吊牌-保存
+  stockGet: params => $network.post('/p/cs/vip/v2/project/stock/in/item/get', params), // 创建入库单-初始化
+  stockSave: params => $network.post('/p/cs/vip/v2/distribution/create/delivery/order', params), // 创建入库单-保存
+  matchSave: params => $network.post('/p/cs/vip/v2/distribution/match/delivery', params), // 匹配入库单-保存
+  customSettings: params => $network.post('/p/cs/oc/oms/v1/customSettings', params), // 排序组件接口汇总
+  getStockInDetail: params => $network.post('/p/cs/vip/v2/project/stock/in/item/get', params), // 创建入库单初始化
+  stockInSave: params => $network.post('/p/cs/vip/v2/distribution/create/delivery/order', params), // 创建入库单保存
+  getMatchDetail: params => $network.post('/p/cs/vip/v2/distribution/get/delivery', params), // 手动匹配入库单初始化
+  matchStockInSave: params => $network.post('/p/cs/vip/v2/distribution/match/delivery', params), // 手动匹配入库单保存
+  queryList: params => $network.post('/p/cs/oc/oms/v1/queryList', params), // 查询列表
+  queryStatistics: params => $network.post('/p/cs/oc/oms/v1/queryStatistics', params), // 查询异常数量(tabs标头显示数量)
+  getOcBOrderExceptions: params => $network.post('/p/cs/oc/oms/v1/ocborder/getOcBOrderExceptions', params), // 异常数据列表查询
+  batchSaveOcBOrderException: params => $network.post('/p/cs/oc/oms/v1/ocborder/batchSaveOcBOrderException', params), // 异常数据处理
+  billOcBOrderCopy: params => $network.post('/p/cs/oc/oms/v1/billOcBOrderCopy', params), // 零售发货单-复制-初始化主表信息
+  billOcBOrderItemCopy: params => $network.post('/p/cs/oc/oms/v1/billOcBOrderItemCopy', params), // 零售发货单-复制-初始化子表信息
+  queryResionByNames: params => $network.post('/r3-cp/p/cs/cp/v1/region/v1/queryRegionByName', params), // 零售发货单-新增/复制-智能地址赋值-查询省市区
+  saveBill: params => $network.post('/p/cs/st/vip/v1/ocborder/saveBill', params), // 零售发货单-新增/复制-保存
+  backAudit: params => $network.post('/p/cs/oc/oms/v1/backAudit', params), // 零售发货单反审核
+  audit: params => $network.post('/p/cs/oc/oms/v1/audit', params), // 零售发货单审核
+  queryPhyWareHouseList: params => $network.post('/r3-cp/p/cs/cp/v1/phyWarehouse/queryPhyWareHouseList', params), // 零售发货单-初始化发货仓库options
+  getOcBOrderItemBySkuECode: params => $network.post('/p/cs/oc/oms/v1/getOcBOrderItemBySkuECode', params), // 零售发货单-新增/复制-根据sku编码新增订单明细
+  initObjectList: params => $network.post('/p/cs/oc/oms/v1/initObject', params), // 零售发货单列表(包裹详情,商品详情表头查询)
+  queryObjectList: params => $network.post('/p/cs/oc/oms/v1/queryObject', params) // 零售发货单列表(包裹详情,商品详情明细查询)
 };
