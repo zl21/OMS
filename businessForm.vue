@@ -176,9 +176,9 @@
             </template>
             <template v-else-if="item.options">
               <CheckboxGroup v-model="formConfig.formValue[`${item.value || item.colname}`]" 
-                             @on-change="(val) => runMethodsPlus(item.checkboxChange, val)">
+                             @on-change="(val) => runMethods(item.checkboxChange ? item.checkboxChange(val) : '')">
                 <Checkbox v-for="(option, index) in item.options"
-                          :label="option.value" 
+                          :label="option.value"
                           :key="index"
                           :disabled="option.disabled">{{ option.label }}</Checkbox>
               </CheckboxGroup>

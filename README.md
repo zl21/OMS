@@ -146,3 +146,4 @@
 | v1.1.00 |  subTable配置项Api封装
 | v1.1.01 |  解决businessForm无key导致的warning
 | v1.1.02 |  businessForm/importTable优化
+| v1.1.03 |  businessForm-checkbox修复
