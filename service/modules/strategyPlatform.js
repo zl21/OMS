@@ -138,6 +138,16 @@ export default {
   // 订单HOLD单策略 - 调整策略时间
   holdOrderUpdateStrategyEndTime: (params) =>
     $network.post('/p/cs/st/holdOrderUpdateStrategyEndTime', params),
+  // 订单HOLD单策略 - 编辑
+  holdOrderHoldStrategySave: (params) =>
+    $network.post('/p/cs/st/v1/holdStrategy/save', params),  // 订单HOLD单策略 - 编辑
+  // 订单HOLD单策略 - 详情
+  holdOrderHoldStrategyDetails: (params) =>
+    $network.post('/p/cs/st/v1/holdStrategy/selById', params),
+  // 订单HOLD单策略 - 禁用
+  holdOrderHoldStrategyEnable: (params) =>
+    $network.post('/p/cs/st/v1/holdStrategy/enable', params),
+
   /**
    * 物流区域设置 新增
    * */
