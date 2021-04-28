@@ -50,15 +50,11 @@
     watch:{
       data: {
         handler(newVal) {
-         newVal.PRODUCT_AMT = newVal.order.PRODUCT_AMT ?? 0.00;
-         this.orderOrder.PRODUCT_AMT =  newVal.PRODUCT_AMT
-         newVal.PRODUCT_DISCOUNT_AMT = newVal.order.PRODUCT_DISCOUNT_AMT ?? 0.00;
-         this.orderOrder.PRODUCT_DISCOUNT_AMT =  newVal.PRODUCT_DISCOUNT_AMT
-         newVal.ORDER_DISCOUNT_AMT = newVal.order.ORDER_DISCOUNT_AMT ?? 0.00;
-         this.orderOrder.ORDER_DISCOUNT_AMT =  newVal.ORDER_DISCOUNT_AMT
-         newVal.ADJUST_AMT = newVal.order.ADJUST_AMT ?? 0.00;
-         this.orderOrder.ADJUST_AMT =  newVal.ADJUST_AMT
-         this.retailPriceTotal = Number(newVal.order.PRODUCT_AMT) - Number(newVal.order.PRODUCT_DISCOUNT_AMT) - Number(newVal.order.ORDER_DISCOUNT_AMT) + Number(newVal.order.ADJUST_AMT);
+         this.orderOrder.PRODUCT_DISCOUNT_AMT =  newVal.order.PRODUCT_DISCOUNT_AMT || 0.00;
+         this.orderOrder.ORDER_DISCOUNT_AMT =  newVal.order.ORDER_DISCOUNT_AMT || 0.00;
+         this.orderOrder.PRODUCT_AMT =  newVal.order.PRODUCT_AMT || 0.00;
+         this.orderOrder.ADJUST_AMT =   newVal.order.ADJUST_AMT || 0.00;
+         this.retailPriceTotal = Number(newVal.order.PRODUCT_AMT || 0.00) - Number(newVal.order.PRODUCT_DISCOUNT_AMT || 0.00) - Number(newVal.order.ORDER_DISCOUNT_AMT || 0.00) + Number(newVal.order.ADJUST_AMT || 0.00);
          this.retailPriceTotal = this.$OMS2.omsUtils.floatNumber(this.retailPriceTotal)
          this.$emit('retailPriceTotal', this.retailPriceTotal);
         },
