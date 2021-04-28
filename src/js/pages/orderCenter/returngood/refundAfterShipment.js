@@ -732,11 +732,25 @@ export default {
                       value: params.row.returnPrice,
                       autosize: true,
                       // regx:/^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$/,
-                      regx: /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
+                      // regx: /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
                     },
 
                     on: {
                       'on-change': e => {
+                        const tag = /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
+                        if (!tag.test(e.target.value)) {
+                          setTimeout(() => {
+                            params.row.returnPrice = 0
+                            let total = 0;
+                            self.tableConfig.data.forEach(item => {
+                              total = total + (item.returnPrice || 0) + item.FREIGHT;
+                            });
+                            // self.reForm.config[12].item.props.value = total;
+                            self.reForm.config.find(
+                              item => item.item.label == self.vmI18n.t('form_label.refundAmount') // 申请退款金额
+                            ).item.props.value = total;
+                          })
+                        }
                         params.row.returnPrice = Number(e.target.value);
                         if (this.$route.query.new) {
                           // if (params.row.returnPrice > params.row.RETURNABLE_AMOUNT) {
@@ -755,6 +769,20 @@ export default {
                         self.reForm.config.find(
                           item => item.item.label == self.vmI18n.t('form_label.refundAmount') // 申请退款金额
                         ).item.props.value = total;
+                      },
+                      'on-blur': e => {
+                        const tag = /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
+                        if (!tag.test(e.target.value)) {
+                          params.row.returnPrice = 0
+
+                          let total = 0;
+                          self.tableConfig.data.forEach(item => {
+                            total = total + (item.returnPrice || 0) + item.FREIGHT;
+                          });
+                          self.reForm.config.find(
+                            item => item.item.label == self.vmI18n.t('form_label.refundAmount') // 申请退款金额
+                          ).item.props.value = total;
+                        }
                       }
                     }
                   })
@@ -1024,10 +1052,10 @@ export default {
             item.item.props.value = _this.addItem.addList.reduce((sum, n) => sum + Number(n.RETURNABLE_AMOUNT || 0), 0);
           }
         }
-        // if (item.item.label == '判责方备注') item.item.props.value = '10';
+        if (item.item.label == '退款金额') item.item.props.value = 0;
       });
       QUERYORDERITEMRESULTLIST.forEach(item => {
-        item.returnPrice = item.RETURNABLE_AMOUNT;
+        item.returnPrice = this.$route.query.fromOrder === 'true' ? 0 : item.RETURNABLE_AMOUNT;
         item.ID = item.proId;
         item.IS_GIFT_NAME = item.GIFT_TYPE == '2' ? '平台赠品' : item.GIFT_TYPE == '1' ? '系统赠品' : '否';
         item.IS_GIFT = item.GIFT_TYPE;
@@ -1133,7 +1161,7 @@ export default {
           {
             type: 'Select',
             queryName: 'ORDER_STATUS',
-            value: '5,6,12'
+            value: '1,2,3,4,5,6,9,10,11,12,13,21,51,52'
           }
         ]
       };
@@ -1449,12 +1477,13 @@ export default {
             }
             // 退款金额
             if (configItemLabel === self.vmI18n.t('form_label.refundAmount')) {
-              configItem.props.value = self.addItem.addList.reduce((sum, n) => sum + n.RETURNABLE_AMOUNT, 0);
+              // configItem.props.value = self.addItem.addList.reduce((sum, n) => sum + n.RETURNABLE_AMOUNT, 0);
+              configItem.props.value = 0
             }
             // if (item.item.label == '判责方备注') item.item.props.value = '10';
           });
           self.addItem.addList.forEach(item => {
-            item.returnPrice = item.RETURNABLE_AMOUNT;
+            item.returnPrice = 0;
             item.ID = item.proId;
             let tempStr = '';
             switch (item.GIFT_TYPE) {
@@ -1648,6 +1677,7 @@ export default {
       self.BILL_TYPE = String(data.BILL_TYPE);
       self.reForm.config.forEach(async item => {
         const itemLabel = item.item.label;
+        
         // 单据日期 退款分类 退款描述 单据来源
         const itemLabelArr = [self.vmI18n.t('form_label.documentDate'), self.vmI18n.t('form_label.refundClass'), self.vmI18n.t('form_label.refundDescription'), self.vmI18n.t('form_label.sourceDocuments')];
         if (!itemLabelArr.includes(itemLabel)) {
@@ -1670,6 +1700,13 @@ export default {
           item.item.props.value = commonUtil.dateFormat(new Date(data[dataConfig[itemLabel]]), 'yyyy-MM-dd hh:mm:ss');
         } else {
           item.item.props.value = data[dataConfig[itemLabel]];
+        }
+        if (itemLabel == '退款金额') {
+          let total = 0;
+          self.tableConfig.data.forEach(item => {
+            total = total + (item.returnPrice || 0) + item.FREIGHT;
+          });
+          item.item.props.value = total
         }
       });
       this.sellerRemarkValueChange('originalOrder', data);
