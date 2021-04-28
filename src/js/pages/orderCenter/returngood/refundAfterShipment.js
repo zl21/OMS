@@ -442,7 +442,7 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.vmI18n.t('table_label.remarks'), // 备注
+              label: window.vmI18n.t('form_label.sellerNotes'), // 卖家备注
               props: {
                 value: ''
               },
@@ -452,7 +452,7 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.vmI18n.t('form_label.sellerNotes'), // 卖家备注
+              label: window.vmI18n.t('table_label.remarks'), // 备注
               props: {
                 value: ''
               },
