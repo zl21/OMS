@@ -288,6 +288,7 @@ R3.launchApplication({
 | v1.1.67  | 详情 - 修改地址添加提示 |
 | v1.1.68  | 列表-修改卖家备注 |
 | v1.1.69  | 接口迁移、网关处理 |
+| v1.1.70  | strategyPlatform接口迁移 |
 
 #### Extends-Api 版本说明
 
