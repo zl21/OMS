@@ -1328,17 +1328,6 @@ class BtnConfig {
   setupHandler() {
     const self = BtnConfig.target;
     self.modal = true;  //最新筛选排序组件
-    // if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
-    //   self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
-    // } else {
-    //   self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
-    // }
-    // self.isShowSeniorOrOrdinary = true;
-    // self.publicBouncedConfig = { ...publicDialogConfig.dropSortConfig };
-    // self.publicBouncedConfig.componentData = { typeName: 'OC_B_ORDER' };
-    // setTimeout(() => {
-    //   self.$children.find((item) => item.name === 'setFormDrag').openConfirm();
-    // }, 100);
   }
 }
 
