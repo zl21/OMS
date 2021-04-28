@@ -128,7 +128,7 @@ export default {
         IDS: self.componentData.ids,
         REMARK: self.formItem.textarea,
         ORDER_FLAG: self.formItem.flag,
-        COVER: Boolean(self.formItem.cover * 1),
+        SELLER_MEMO: self.formItem.cover,
       };
       fromdata.append('param', JSON.stringify(param));
       const { data: { code, message } } = await this.service.orderCenter.remarkUpdate(param);

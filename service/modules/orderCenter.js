@@ -153,7 +153,7 @@ export default {
   downloadPO: params => $network.post('/p/cs/vip/v2/po/download', params), // PO单-下载PO单
 
   /* 2.0: */
-  remarkUpdate: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/orderDeliveryUrgent', params), // 零售发货单 - 修改备注
+  remarkUpdate: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/remarkUpdate', params), // 零售发货单 - 修改备注
   initList: params => $network.post('/p/cs/oc/oms/v1/initList', params), // 零售发货单初始化列表接口
   changeTagQuery: params => $network.post('/p/cs/vip/v2/distribution/item/query', params), // 换吊牌-初始化
   changeTagSave: params => $network.post('/p/cs/vip/v2/distribution/change/tag', params), // 换吊牌-保存
@@ -172,7 +172,7 @@ export default {
   billOcBOrderCopy: params => $network.post('/p/cs/oc/oms/v1/billOcBOrderCopy', params), // 零售发货单-复制-初始化主表信息
   billOcBOrderItemCopy: params => $network.post('/p/cs/oc/oms/v1/billOcBOrderItemCopy', params), // 零售发货单-复制-初始化子表信息
   queryResionByNames: params => $network.post('/r3-cp/p/cs/cp/v1/region/v1/queryRegionByName', params), // 零售发货单-新增/复制-智能地址赋值-查询省市区
-  saveBill: params => $network.post('/p/cs/st/vip/v1/ocborder/saveBill', params), // 零售发货单-新增/复制-保存
+  saveBill: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/saveBill', params), // 零售发货单-新增/复制-保存
   backAudit: params => $network.post('/p/cs/oc/oms/v1/backAudit', params), // 零售发货单反审核
   audit: params => $network.post('/p/cs/oc/oms/v1/audit', params), // 零售发货单审核
   queryPhyWareHouseList: params => $network.post('/r3-cp/p/cs/cp/v1/phyWarehouse/queryPhyWareHouseList', params), // 零售发货单-初始化发货仓库options
