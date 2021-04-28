@@ -685,7 +685,8 @@ export default {
           {
             webname: 'order_refreceing', // 刷新
             btnclick: () => {
-              this.autoRefresh();
+              // this.autoRefresh();
+              this.load();
             } // 按钮点击事件
           },
           {
