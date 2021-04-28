@@ -1,5 +1,6 @@
 // 策略平台
 import R3 from '@syman/burgeon-r3'
+import qs from 'qs';
 
 const { network } = R3
 export default {
