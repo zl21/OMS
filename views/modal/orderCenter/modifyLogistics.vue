@@ -1,5 +1,5 @@
 <template>
-  <div class="jordanModal" :id="this.$router.currentRoute.params.customizedModuleName">
+  <div class="jordanModal customized-modal">
     <!-- 修改物流 -->
     <!-- <businessForm style="margin-top:10px;" :formConfig="formConfig"></businessForm> -->
     <div class="jordanModal_box">
@@ -21,10 +21,7 @@
         @on-fkrp-selected="onFkrpSelected"
       />
     </div>
-    <div
-      v-if="type == 'EXPRESSCODE'"
-      class="jordanModal_box"
-    >
+    <div v-if="type == 'EXPRESSCODE'" class="jordanModal_box">
       <!-- <label for>物流单号:</label> -->
       <label for>{{ vmI18n.t("form_label.logisticsOrder_No") }}:</label>
       <Input
@@ -33,15 +30,18 @@
         :disabled="expressCodeFlag"
       />
     </div>
-    <businessButton :btn-config="btnConfig" />
+    <businessButton :btn-config="btnConfig" class="modal-footer" />
   </div>
 </template>
 <script>
-  import modifyLogistics from '@/js/modal/orderCenter/modifyLogistics';
+import modifyLogistics from "@/js/modal/orderCenter/modifyLogistics";
 
-  export default modifyLogistics;
+export default modifyLogistics;
 </script>
 
 <style scoped lang='less'>
-  @import "~@/css/modal/orderCenter/modifyLogistics.less";
+@import "~@/css/modal/orderCenter/modifyLogistics.less";
+.jordanModal {
+  min-height: initial;
+}
 </style>

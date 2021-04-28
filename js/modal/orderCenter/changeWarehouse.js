@@ -81,7 +81,7 @@ export default {
   },
   mounted() {
     this.zIndex = Number(document.getElementsByClassName('ark-modal-wrap')[0].style.zIndex) + 50;
-    this.getListData();
+    // this.getListData();
     document.addEventListener('keydown', this.onKeyDown);
   },
   methods: {

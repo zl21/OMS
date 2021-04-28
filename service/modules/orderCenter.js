@@ -21,8 +21,8 @@ export default {
   queryFortuneBagShortage: params => $network.post('/api/cs/oc/oms/v1/queryFortuneBagShortage', params), // 福袋缺货重新占单
   doManualDeliveryOrder: params => $network.post('/api/cs/oc/oms/v1/doManualDeliveryOrder', params), // 更改为平台发货
   releaseInventory: params => $network.post('/p/cs/releaseInventory', params), // 释放库存
-  checkOrderBeforeLogistics: params => $network.post('/api/cs/oc/oms/v1/checkOrderBeforeLogistics', params), // 修改物流
-  checkOrderBeforeWarehouse: params => $network.post('/api/cs/oc/oms/v1/checkOrderBeforeWarehouse', params), // 修改仓库
+  checkOrderBeforeLogistics: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/checkOrderBeforeLogistics', params), // 订单列表-修改物流前校验
+  checkOrderBeforeWarehouse: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/checkOrderBeforeWarehouse', params), // 订单列表-修改仓库前校验
   splitOrder: params => $network.post('/api/cs/oc/oms/v1/splitOrder', params), // 缺货拆单
   manualUnHoldOrder: params => $network.post('/p/cs/oc/oms/v2/order/batch/hold/cancel', params), // 零售发货单-取消HOLD单
   mergeOrderOne: params => $network.post('/api/cs/oc/oms/v1/mergeOrderOne', params), // 合并订单
@@ -97,7 +97,7 @@ export default {
   updateLogisticsBeforePacking: params => $network.post('/api/cs/vip/distribution/Logistics/v1/updateLogisticsBeforePacking', params),
   sendWmsPick: params => $network.post('/api/cs/vip/distribution//add/sendWmsPick', params),
   querySkuListAndStorageInfo: params => $network.post('/api/cs/oc/oms/v1/querySkuListAndStorageInfo', params), // 提前判断下该单据是否可拆单
-  updateLogistics: params => $network.post('/api/cs/oc/oms/v1/updateLogistics', params),
+  updateLogistics: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/updateLogistics', params), // 零售发货单列表-改物流
   manualMatchingList: params => $network.post('/api/cs/oc/oms/v1/manualMatchingList', params), // 获取退货批次数据
   distributionFindBydistributionId: params => $network.post('/api/cs/vip/distributionItem/v1/findBydistributionId', params), // 根据配货单id查询配货单明细
   distributionChangeTag: params => $network.post('/api/cs/vip/distribution/v1/changeTag', params), // 配货单换吊牌的保存
@@ -117,7 +117,7 @@ export default {
   refuseToPayOcBReturnAfSend: params => $network.post('/api/cs/oc/oms/v1/refuseToPayOcBReturnAfSend', params), // 拒绝打款
   pickOrderExport: params => $network.post('/api/cs/vip/pick/v1/export', params),
   // 半定制弹框
-  updateWarehouse: params => $network.post('/api/cs/oc/oms/v1/updateWarehouse', params),
+  updateWarehouse: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/updateWarehouse', params), // 订单管理列表-改仓库
   getQueryList: params => $network.post('/api/cs/oc/oms/v1/getQueryList', params),
   reRemarkUpdate: params => $network.post('/api/cs/oc/oms/v1/reRemarkUpdate', params),
   modifyReturnSellerRemark: params => $network.post('/api/cs/oc/oms/v1/modifyReturnSellerRemark', params),

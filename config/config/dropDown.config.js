@@ -116,12 +116,12 @@ class DropDownConfig {
       case 'modifyLogistics':
         funName = 'modifyLogisticsHandler';
         tips = 'c6';
-        paramsType = 2;
+        paramsType = 1;
         break;
       case 'modifyWarehouse':
         funName = 'modifyWarehouseHandler';
         tips = 'c7';
-        paramsType = 2;
+        paramsType = 1;
         break;
       case 'modifyNotes':
         funName = 'modifyNotesHandler';
@@ -225,7 +225,12 @@ class DropDownConfig {
     }
   }
 
-  //请求主体处理
+/**
+ * 请求主体处理
+ * @funName {String} 方法名/service下对应的key
+ * @params {*} params 接口入参
+ * @tableType {String} 组件名 
+ */
   static serviceHandler(funName, params, tableType) {
     let self = DropDownConfig.target;
     self.service.orderCenter[funName](params)
@@ -240,8 +245,15 @@ class DropDownConfig {
             case 'changeWarehouse':
               objName = 'changeWarehouseConfig';
               propertyName = 'CP_C_SHOP_ID';
+              // 接口返回店铺ID，用于查询可选的仓库列表
+              params.CP_C_SHOP_ID = res.data.data;
               break;
           }
+          /**
+           * objName：burgeon-business-components/common/js/publicDialog.js下对应的key
+           * propertyName：用于判断要填充什么给子组件（弹窗里的那个组件）的componentData
+           * tableType：组件名
+           */
           this.successHandler(params, objName, propertyName, tableType);
         } else {
           commonUtils.tipShow('error', self, res);
@@ -271,7 +283,7 @@ class DropDownConfig {
       case 'CP_C_SHOP_ID':
         componentDataObj = {
           ids,
-          [componentDataType]: self.selection[0][componentDataType],
+          // [componentDataType]: self.selection[0][componentDataType],
         };
         break;
       case 'ORDER_STATUS':
@@ -311,6 +323,10 @@ class DropDownConfig {
           ids,
         };
         break;
+      default :
+        componentDataObj = {
+          ids,
+        }
     }
 
     // 表单筛选条件
@@ -325,7 +341,7 @@ class DropDownConfig {
   static modifyLogisticsHandler(fromdata) {
     this.serviceHandler(
       'checkOrderBeforeLogistics',
-      fromdata,
+      {IDS:fromdata},
       'modifyLogistics'
     );
   }
@@ -333,7 +349,7 @@ class DropDownConfig {
   static modifyWarehouseHandler(fromdata) {
     this.serviceHandler(
       'checkOrderBeforeWarehouse',
-      fromdata,
+      {IDS:fromdata},
       'changeWarehouse'
     );
   }
