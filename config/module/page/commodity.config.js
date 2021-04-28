@@ -31,15 +31,15 @@ export default {
     component: quicklyGenerate,
     labelName: 'SKU快速生成'
   },
-  COMMODITYCUSTOMPROPERTIESADDOREDIT: {
+  BS_C_EXTRA_ATTRIBUTE_DEF: {
     component: commodityCusPropertiesAddOrEdit,
     labelName: '商品自定义属性编辑'
   },
-  MODIFYGROUP: {
+  PS_C_PRO_GROUP: {
     component: modifyGroup,
     labelName: '组合商品新增'
   },
-  COMMODITYCLASSIFYADDOREDIT: {
+  PS_C_PRO_CLASSIFY: {
     component: commodityClassifyAddOrEdit,
     labelName: '商品分类编辑'
   },

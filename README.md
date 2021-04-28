@@ -292,6 +292,7 @@ R3.launchApplication({
 | v1.1.71  | strategyPlatform 接口迁移                                                      |
 | v1.1.72  | 档期日程规划接口 url                                                           |
 | v1.1.73  | 增加策略中心的接口                                                             |
+| v1.1.74  | 增加策略中心的接口                                                             |
 
 #### Extends-Api 版本说明
 

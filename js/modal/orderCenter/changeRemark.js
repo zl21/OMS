@@ -26,7 +26,7 @@ export default {
         flag: 1,
         textarea: '',
       },
-        btnConfig: {
+      btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
@@ -120,9 +120,6 @@ export default {
     // 保存备注
     async saveRemark() {
       const self = this;
-      // const data = typeof self.componentData.ids === 'number'
-      //   ? self.componentData.ids
-      //   : self.componentData.ids.join(',');
       const fromdata = new FormData();
       const param = {
         IDS: self.componentData.ids,
@@ -135,9 +132,9 @@ export default {
       if (code === 0) {
         self.btnConfig.buttons[1].disabled = false;
         this.spinShow = false;
-        if (self.$route.params.customizedModuleId == 2627) {
+        if (self.$route.params.customizedModuleId == 2307) {
           self.$Message.success(message);
-          self.$parent.$parent.$parent.getData();
+          self.$parent.$parent.$parent.query();
           self.$parent.$parent.closeConfirm();
           self.$parent.$parent.$parent.selection = [];
         } else {
@@ -146,7 +143,6 @@ export default {
           self.$parent.$parent.closeConfirm();
         }
       } else {
-        self.$Message.error(message);
         self.btnConfig.buttons[1].disabled = false;
         this.spinShow = false;
       }

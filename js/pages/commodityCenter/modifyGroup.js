@@ -574,7 +574,7 @@ export default {
           self.$store.commit('customize/TabOpen', {
             id: res.data.data,
             type: 'action',
-            name: 'MODIFYGROUP',
+            name: 'PS_C_PRO_GROUP',
             label: '组合商品编辑', // 额外退款编辑
           });
         } else {
