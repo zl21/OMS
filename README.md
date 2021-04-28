@@ -290,6 +290,7 @@ R3.launchApplication({
 | v1.1.69  | 接口迁移、网关处理 |
 | v1.1.70  | strategyPlatform接口迁移 |
 | v1.1.71  | strategyPlatform接口迁移 |
+| v1.1.72  | 档期日程规划接口url |
 
 #### Extends-Api 版本说明
 

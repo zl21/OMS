@@ -96,14 +96,14 @@ export default {
   getWarehouseInfo: params => $network.get('/p/cs/st/v1/orderWarehouse/getWarehouseInfo', params), // 分仓策略-详情查询
   orderWarehouseSetIsActive: params => $network.post(`/p/cs/st/v1/orderWarehouse/setIsActive?id=${params.id}&isActive=${params.isActive}`), // 分仓策略-启用停用 详情页单对象
 
-  querySchedule: params => $network.post('/vip/v1/ListStCVipcomProjectAndItems', params), // 档期日程规划-查询
-  wphScheduleSave: params => $network.post('/vip/v1/saveOrUpdateStCVipcomProject', params), // 档期日程规划-主表保存
-  pickSave: params => $network.post('/vip/v1/saveOrUpdateStCVipcomProjectPickItem', params), // 拣货单-保存
-  pickDelete: params => $network.post('/vip/v1/deleteStCVipcomProjectPickItem', params), // 拣货单-删除
-  warehouseInSave: params => $network.post('/vip/v1/saveOrUpdateStCVipcomProjectStockInItem', params), // 入库单-保存
-  warehouseInDelete: params => $network.post('/vip/v1/deleteStCVipcomProjectStockInItem', params), // 入库单-删除
-  carrierDropList: params => $network.post('/vip/v1/carrierDropList', params), // 承运商
-  getScheduleTree: params => $network.post('/vip/v1/AllStCVipcomProject', params), // 档期日程规划-tree
+  querySchedule: params => $network.post('/p/cs/st/v1/ListStCVipcomProjectAndItems', params), // 档期日程规划-查询
+  wphScheduleSave: params => $network.post('/p/cs/st/v1/saveOrUpdateStCVipcomProject', params), // 档期日程规划-主表保存
+  pickSave: params => $network.post('/p/cs/st/v1/saveOrUpdateStCVipcomProjectPickItem', params), // 拣货单-保存
+  pickDelete: params => $network.post('/p/cs/st/v1/deleteStCVipcomProjectPickItem', params), // 拣货单-删除
+  warehouseInSave: params => $network.post('/p/cs/st/v1/saveOrUpdateStCVipcomProjectStockInItem', params), // 入库单-保存
+  warehouseInDelete: params => $network.post('/p/cs/st/v1/deleteStCVipcomProjectStockInItem', params), // 入库单-删除
+  carrierDropList: params => $network.post('/p/cs/st/v1/carrierDropList', params), // 承运商
+  getScheduleTree: params => $network.post('/p/cs/st/v1/AllStCVipcomProject', params), // 档期日程规划-tree
 
   saveLogisticsCorp: params => $network.post('/p/cs/st/v1/expressAllocation/save', params), // 仓库物流设置-保存
   queryLogistics: params => $network.post('/p/cs/st/v1/expressAllocation/queryById', params), // 仓库物流设置-查询
