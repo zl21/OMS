@@ -301,6 +301,7 @@ R3.launchApplication({
 | v1.1.80  | modifyLogistics                                                                |
 | v1.1.81  | 零售发货单列表取消订单                                                               |
 | v1.1.82  | 修改格式错误                                                              |
+| v1.1.83  | changeWarehouse                                                              |
 #### Extends-Api 版本说明
 
 | Version | Description                                   |

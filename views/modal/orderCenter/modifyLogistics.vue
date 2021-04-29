@@ -71,7 +71,7 @@ export default {
               {
                 childs: [
                   {
-                    colname: "CP_C_PLATFORM_ID",
+                    colname: "CP_C_LOGISTICS_ID",
                     refobjid: "",
                     valuedata: "",
                     name: "发货仓库",
@@ -83,7 +83,7 @@ export default {
               refcolval: {
                 fixcolumn: "CP_C_PHY_WAREHOUSE_ID",
                 expre: "equal",
-                srccol: "CP_C_PLATFORM_ID",
+                srccol: "CP_C_LOGISTICS_ID",
               },
               colid: 171280,
               colname: "CP_C_LOGISTICS_ID",
@@ -173,7 +173,7 @@ export default {
       {
         childs: [
           {
-            colname: "CP_C_PLATFORM_ID",
+            colname: "CP_C_LOGISTICS_ID",
             refobjid: _this.componentData.CP_C_PHY_WAREHOUSE_ID || 177,
             valuedata: _this.componentData.CP_C_PHY_WAREHOUSE_ENAME || "_",
           },
