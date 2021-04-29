@@ -281,6 +281,7 @@ export default {
   },
   mounted() {
     const self = this;
+    console.log(this.componentData);
     if (this.componentData && this.componentData.ID) {
       self.objid = this.componentData.ID;
     }
