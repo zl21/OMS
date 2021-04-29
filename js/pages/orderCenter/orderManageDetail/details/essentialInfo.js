@@ -23,7 +23,7 @@ export default {
       publicBouncedConfig: {},
       isQh: true, 
       isQhChild: true,
-      is_combination:0, // 是否为组合
+      is_combination:false, // 是否为组合
       dialogs: DialogConfig.config(),
       queryList: [
         {

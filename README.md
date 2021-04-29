@@ -303,6 +303,8 @@ R3.launchApplication({
 | v1.1.82  | 修改格式错误                                                              |
 | v1.1.83  | changeWarehouse                                                              |
 | v1.1.84  | $network自定义网关                                                              |
+| v1.1.85  | 零售发货单详情 -- 修改如果明细是组合商品则明细不可切换                                                              |
+
 #### Extends-Api 版本说明
 
 | Version | Description                                   |

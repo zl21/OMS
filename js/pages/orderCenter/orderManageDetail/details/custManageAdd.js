@@ -108,7 +108,11 @@ export default {
   watch: {
     componentData: {
       handler(newVal) {
+        console.log('newVal:',newVal);
         this.request(newVal);
+        if(newVal.order.IS_COMBINATION){
+          this.tableConfig.businessButtonConfig = {}
+        }
       },
       deep: true
     },
