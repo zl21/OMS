@@ -709,7 +709,15 @@ class commonUtils {
    * @param {Object} origin 源对象
    */
   static intersectFormValue(target, origin) {
-    Object.keys(target).forEach(key => origin[key] && (target[key] = origin[key]))
+    Object.keys(target).forEach(key => {
+      if (origin[key]) {
+        if (typeof origin[key] == 'object') {
+          target[key] = JSON.parse(JSON.stringify(origin[key]))
+        } else {
+          target[key] = origin[key]
+        }
+      }
+    })
   }
   /**
    * 保留小数点几两位 不足自动补0

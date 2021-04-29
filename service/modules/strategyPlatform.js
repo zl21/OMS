@@ -335,9 +335,14 @@ export default {
     $network.post('/p/cs/st/v1/price/exportData', params), // 商品价格策略-导出
   getPriceTree: (params) =>
     $network.post('/p/cs/st/v1/ST_C_EXPRESS_ALLOCATION/selectTree', params), // 商品价格策略-tree
+
   saveOrUpdate: (params) =>
     $network.post('/p/cs/st/v1/autoAudit/saveOrUpdate', params), // 审单策略保存
   getAutoAuditInfo: (params) =>
     $network.get(`/p/cs/st/v1/autoAudit/getAutoAuditInfo?id=${params}`), // 审单策略查询
   strategy: (params) => $network.post('/p/cs/st/v1/strategy/tree', params), // 审单策略组织树查询
+
+  liveParsingSave: (params) => $network.post('/p/cs/st/v1/liveCast/saveOrUpdate', params), // 直播解析-保存
+  queryLiveParsing: (params) => $network.get(`/p/cs/st/v1/liveCast/geLiveCastInfo?${qs.stringify(params)}`), // 直播解析-查询
+  liveParsingSetIsActive: (params) => $network.post('/p/cs/st/v1/liveCast/setIsActive', params), // 直播解析-启用停用
 }
