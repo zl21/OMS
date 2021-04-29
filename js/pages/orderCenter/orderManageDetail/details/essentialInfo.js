@@ -21,8 +21,9 @@ export default {
   data() {
     return {
       publicBouncedConfig: {},
-      isQh: true,
+      isQh: true, 
       isQhChild: true,
+      is_combination:0, // 是否为组合
       dialogs: DialogConfig.config(),
       queryList: [
         {
@@ -292,5 +293,6 @@ export default {
     let dataProps = this.componentData;
     this.tableConfig.objid = dataProps.order.ID || -1;
     this.tableConfig.order = dataProps.order || {};
+    this.is_combination = this.tableConfig.order.is_combination ? true : false
   }
 };
