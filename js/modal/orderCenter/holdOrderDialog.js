@@ -40,7 +40,7 @@ export default {
               {
                 value: '2',
                 // label: '买家HOLD单'
-                label: window.vmI18n.t('form_label.buyer_HOLD')
+                label: '其它HOLD单'
               }
             ]
           },
@@ -213,41 +213,35 @@ export default {
       // 判断是否有勾选自动释放
       if (formValue.IS_AUTO_RELEASE) {
         // params.IS_AUTO_RELEASE = 'Y';
-        params.isAutoRelease = true;
+        params.IS_AUTO_RELEASE = true;
         params.RELEASE_TIME_TYPE = formValue.RELEASE_TIME_TYPE;
         // 判断释放时点
         if (formValue.RELEASE_TIME_TYPE === '1') {
           // 判断指定时点释放的时间
           if (!formValue.RELEASE_TIME) {
-            // return { message: "指定时点释放的时间不能为空" };
-            return { message: window.vmI18n.t('modalTips.zo') };
+            return { message: window.vmI18n.t('modalTips.zo') }; // 指定时点释放的时间不能为空
           }
           if (new Date(formValue.RELEASE_TIME).getTime() < Date.now()) {
-            // return { message: "指定时点释放的时间不能小于当前时间" };
-            return { message: window.vmI18n.t('modalTips.zp') };
+            return { message: window.vmI18n.t('modalTips.zp') }; // 指定时点释放的时间不能小于当前时间
           }
           params.RELEASE_TIME = this.$comUtils.dateFormat(formValue.RELEASE_TIME, 'yyyy-MM-dd hh:mm:ss');
         } else if (formValue.RELEASE_TIME_TYPE === '2') {
           // 判断固定时长后释放的相应参数
           if (formValue.DAY_TYPE && formValue.FIXED_DURATION && formValue.TIME_UNIT) {
             if (formValue.FIXED_DURATION.toString().indexOf('.') >= 0) {
-              // return { message: "固定时长后释放的固定时长只能是整数" };
-              return { message: window.vmI18n.t('modalTips.zq') };
+              return { message: window.vmI18n.t('modalTips.zq') }; // 固定时长后释放的固定时长只能是整数
             }
-            params.DAY_TYPE = formValue.DAY_TYPE;
+            params.RELEASE_DAY_TYPE = +formValue.DAY_TYPE;
             params.FIXED_DURATION = formValue.FIXED_DURATION;
-            params.TIME_UNIT = formValue.TIME_UNIT;
+            params.TIME_UNIT = +formValue.TIME_UNIT;
           } else {
-            // return { message: "固定时长后释放的相关数据不能为空" };
-            return { message: window.vmI18n.t('modalTips.zr') };
+            return { message: window.vmI18n.t('modalTips.zr') }; // 固定时长后释放的相关数据不能为空
           }
         } else {
-          // return { message: "释放时点不能为空" };
-          return { message: window.vmI18n.t('modalTips.zs') };
+          return { message: window.vmI18n.t('modalTips.zs') }; // 释放时点不能为空
         }
       } else {
-        // params.IS_AUTO_RELEASE = 'N';
-        params.isAutoRelease = false;
+        params.IS_AUTO_RELEASE = false;
       }
       return {
         params
@@ -256,11 +250,16 @@ export default {
     // 确定事件
     confirmChange() {
       const requestData = this.confirmVerifyAssignment();
-      if (requestData.message) return this.$message.error(requestData.message);
+      if (requestData.message) {
+        this.$message.error(requestData.message);
+        return
+      } 
       const params = {
         ids: this.componentData.ids,
         ...requestData.params
       };
+      params.HOLD_ORDER_REASON *= 1;
+      params.RELEASE_TIME_TYPE *= 1;
       this.confirmInfo(params);
     }
   }

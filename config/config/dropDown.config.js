@@ -410,7 +410,43 @@ class DropDownConfig {
   //取消hold单处理
   static cancelHoldOrderHandler(ids) {
     let self = DropDownConfig.target;
-    commonUtils.modalShow(self, 'e1', 'orderCenter.manualUnHoldOrder', { ids });
+    commonUtils.modalShow(self, 'e1', 'orderCenter.manualUnHoldOrder', { ids }, 'all', function (res) {
+      if (res.data.code === 0) {
+        this.msgTips(self, 'success', res, 2);
+        self.selection = [];
+        self.query();
+      } else if (res.data.code == -1 && res.data.data) {
+        // commonUtils.tipShow('error', self, res.data.data.message);
+        let tabData = res.data.data.map((row,index) => {
+          row.INDEX = ++index;
+          row.BILL_NO = row.objid;
+          row.RESULT_MSG = row.message;
+          return row
+        });
+        commonUtils.tipShow('confirm' , self , res , res.data.message , function(h){
+          return h('Table' , {
+            props:{
+              columns:[
+                {
+                  title:'序号',
+                  key:'INDEX'
+                },
+                {
+                  title:'单据编号',
+                  key:'BILL_NO'
+                },
+                {
+                  title:'失败原因',
+                  key:'RESULT_MSG'
+                }
+              ],
+              // data:res.data.data.CANCEL_ORDER_ERROR_INFOS
+              data:tabData
+            }
+          })
+        })
+      }
+    });
     self.btnConfig.loading = false;
   }
 
