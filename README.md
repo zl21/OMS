@@ -298,6 +298,7 @@ R3.launchApplication({
 | v1.1.77  | 详情-订单金额计算修改                                                                |
 | v1.1.78  | 直播解析策略接口                                                                |
 | v1.1.79  | hold策略接口添加                                                                |
+| v1.1.80  | modifyLogistics                                                                |
 #### Extends-Api 版本说明
 
 | Version | Description                                   |

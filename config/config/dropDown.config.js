@@ -241,6 +241,7 @@ class DropDownConfig {
             case 'modifyLogistics':
               objName = 'modifyLogisticsConfig';
               propertyName = 'CP_C_PHY_WAREHOUSE_ID';
+              params.CP_C_PHY_WAREHOUSE_ID = res.data.data;
               break;
             case 'changeWarehouse':
               objName = 'changeWarehouseConfig';
@@ -273,18 +274,19 @@ class DropDownConfig {
 
     switch (componentDataType) {
       case 'CP_C_PHY_WAREHOUSE_ID':
-        componentDataObj = {
-          ids,
-          cLogisticsId: 0,
-          platform: self.selection[0].PLATFORM,
-          [componentDataType]: self.selection[0][componentDataType],
-        };
+        componentDataObj = ids;
+          // IDS:ids.IDS,
+          // data:ids,
+          // cLogisticsId: 0,
+          // platform: self.selection[0].PLATFORM,
+          // [componentDataType]: self.selection[0][componentDataType],
+        // };
         break;
       case 'CP_C_SHOP_ID':
-        componentDataObj = {
-          ids,
+        componentDataObj = ids;
+          // data:ids
           // [componentDataType]: self.selection[0][componentDataType],
-        };
+        // };
         break;
       case 'ORDER_STATUS':
         componentDataObj = {
