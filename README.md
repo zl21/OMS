@@ -149,3 +149,4 @@
 | v1.1.03 |  businessForm-checkbox修复
 | v1.1.4 |  迁移库加入静态资源;
 | v1.1.5 |  补齐遗漏的组件资源;
+| v1.1.6 |  businessForm插槽必填标识

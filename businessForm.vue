@@ -282,7 +282,7 @@
 
           <!-- 插槽 -->
           <FormItem :label="`${item.label}`+':'"
-                    :class="item.class || ''"
+                    :class="[item.class, { 'req-star': item.reqStar }]"
                     v-else-if="item.style === 'formCompile'">
             <slot :rowData="{ item, value: formConfig.formValue }"
                   :rowIndex="index"

@@ -156,3 +156,10 @@ html *,
 :before {
   box-sizing: border-box;
 }
+
+/* 插槽字段的必填标识 */
+.req-star .ark-form-item-label::before {
+  color: red;
+  position: relative;
+  content: '* ';
+}
