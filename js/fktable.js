@@ -1,7 +1,4 @@
-
-import R3 from '@syman/burgeon-r3';
 import commonUtils from '@burgeon/project-logic/config/config/commonUtils.js';
-import axios from 'axios';
 import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
 export default {
   props: {
@@ -323,12 +320,7 @@ export default {
       let _self = this;
       const params = new FormData();
       params.append('searchdata', JSON.stringify(this.formObj));
-      // R3.network.post(this.queryListUrl, params)
-      axios({
-        url:'/ad-app/p/cs/QueryList',
-        method: 'post',
-        data:params
-      })
+      this.service.common.QueryList(params)
       .then((res) => {
         console.log(res);
         if (res.data.code == 0) {

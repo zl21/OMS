@@ -1,5 +1,4 @@
 import jordanForm from "../businessForm";
-import axios from "axios";
 export default {
   components: {
     jordanForm
@@ -131,11 +130,7 @@ export default {
       } else {
         self.formConfig.formValue[str] = search;
       }
-      axios({
-        url: "/p/cs/skuQuery",
-        method: "post",
-        data: param
-      }).then(res => {
+      this.service.common.serskuQuery(params).then(res => {
         if (res.data.code === 0) {
           if (str == 'search') {
             self.formConfig.formData[0].AuotData = res.data.data.data.map(row => {
@@ -171,11 +166,7 @@ export default {
         }
       };
       this.pageLoad = true
-      axios({
-        url: "/p/cs/skuQuery",
-        method: "post",
-        data: param
-      }).then(res => {
+      this.service.common.serskuQuery(params).then(res => {
         this.pageLoad = false
         if (res.data.code === 0) {
           //this.formConfig.formValue.search = '';

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import businessButton from 'professionalComponents/businessButton';
 // import importConfig from './importTable.config.js';(此文件迁移至project-logic了)
 import loading from 'professionalComponents/loading';
@@ -94,20 +93,13 @@ export default {
     // 通过Api下载模板-Handel
     getDownloadTemp(url, param = null) {
       if (param) {
-        axios({
-          url,
-          method: 'post',
-          data: param,
-        }).then((res) => {
+        $network.post(url,param).then((res) => {
           if (res.data.code === 0) {
             this.downloadUrlFile(res.data.data);
           }
         });
       } else {
-        axios({
-          url,
-          method: 'post',
-        }).then((res) => {
+        $network.post(url).then((res) => {
           if (res.data.code === 0) {
             this.downloadUrlFile(res.data.data);
           }
@@ -140,15 +132,7 @@ export default {
           btn.disabled = true;
         });
       }
-      axios({
-        url,
-        method: 'post',
-        // cancelToken: true,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        data: param,
-      }).then((res) => {
+      $network.post(url,param).then((res) => {
         console.log(res);
         if (res.data.code === 0 || res.data.code === 1) {
           if (res.data.message) _this.$Message.success(res.data.message);

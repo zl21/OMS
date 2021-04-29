@@ -140,20 +140,6 @@ export default {
           message: res.data.message
         });
       }
-      // axios({
-      //   method: 'post',
-      //   url: '/p/cs/pm/v1/selectProInfo',
-      //   data: serachParams
-      // }).then((res) => {
-      //   if (res.data.code === 0) {
-      //     console.log(res.data.data);
-      //   } else {
-      //     this.$message({
-      //       type: 'error',
-      //       message: res.data.message
-      //     });
-      //   }
-      // });
     },
     /**
      * 确认选中结果

@@ -1,4 +1,3 @@
-import axios from 'axios'
 export default {
   name: 'LogTable',
   data() {
@@ -21,14 +20,11 @@ export default {
   methods: {
     getData() {
       //请求表头和表数据
-      axios({
-        url: '/p/cs/selectlog',
-        method: 'post',
-        data: {
+      let params={
           tableName: this.tableName || this.$route.query.tableName,
           objid: this.id || this.$route.query.id
         }
-      }).then(res => {
+      this.service.common.SelectLog(params).then(res => {
         if (res.data.data.code == 0) {
           if (!res.data.data.data) return;
           this.columns = res.data.data.data.title;

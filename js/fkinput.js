@@ -1,4 +1,3 @@
-import axios from 'axios';
 import commonUtils from '@burgeon/project-logic/config/config/commonUtils.js';
 // import SelectDialog from '../dialog/selectDialog.vue';
 // import FkTable from '../tablelist/fktable.vue';
@@ -236,11 +235,8 @@ export default {
       searchParam.append('ak', queryString);
       searchParam.append('colid', id);
       searchParam.append('fixedcolumns', query.fixedcolumns);
-      axios({
-        method: 'post',
-        url: this.fuzzyquerybyakUrl,
-        data: searchParam
-      }).then((res) => {
+
+      this.service.common.fuzzyquerybyak(searchParam).then((res) => {
         for (let i = 0; i < res.data.data.length; i++) {
           const element = res.data.data[i];
           if (
@@ -374,11 +370,7 @@ export default {
       searchParam.append('ak', queryString);
       searchParam.append('colid', id);
       searchParam.append('fixedcolumns', query.fixedcolumns);
-      axios({
-        method: 'post',
-        url: this.fuzzyquerybyakUrl,
-        data: searchParam
-      }).then((res) => {
+      this.service.common.fuzzyquerybyak(searchParam).then((res) => {
         self.queryList = res.data.data;
 
         if (res.data.data.length > 0) {
@@ -495,15 +487,12 @@ export default {
       // 更新数据: SelectionData.config 弹出框输入配置
       const self = this;
       self.SelectionData.config = []; // 请求前清空旧数据
-      axios({
-        url: this.getTableQueryUrl,
-        type: 'post',
-        params: {
-          tableid: item.reftableid,
-          getcmd: 'n',
-          table: item.reftable
-        }
-      }).then((res) => {
+      let params= {
+        tableid: item.reftableid,
+        getcmd: 'n',
+        table: item.reftable
+      }
+      this.service.common.getTableQuery(params).then((res) => {
         for (let i = 0; i < res.data.datas.dataarry.length; i++) {
           const element = res.data.datas.dataarry[i];
           element.value = '';
@@ -528,13 +517,7 @@ export default {
       if (self.hasQuery) {
         searchdata.fixedcolumns = self.selectConfigChanged;
       }
-      axios({
-        url: this.queryListkUrl,
-        type: 'post',
-        params: {
-          searchdata
-        }
-      }).then((res) => {
+      this.service.common.QueryList(searchdata).then((res) => {
         self.SelectionData.tableAllDatas = res.data.datas;
         self.SelectionData.row = res.data.datas.row;
         self.SelectionData.thead = res.data.datas.tabth;

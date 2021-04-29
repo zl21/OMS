@@ -1,4 +1,3 @@
-import axios from 'axios'
 // const _import = (file) =>
 //   require(`commonPage/${process.env.BRANCH_ENV}/page/${file}.vue`).default
 import businessButton from '../businessButton'
