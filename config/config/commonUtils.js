@@ -36,10 +36,31 @@ class commonUtils {
             } else {
               this.tipShow('success', self, res);
               self.selection = [];
-              self.getData();
+              self.query();
             }
           } else {
-            this.tipShow('error', self, res);
+            // this.tipShow('error', self, res);
+            this.tipShow('confirm' , self , res , `订单取消成功${res.data.data.SUCCESS_COUNT}条失败${res.data.data.ERROR_COUNT}条!` , function(h){  //因为后端复用列列表详情界面的取消接口,需要区分
+              return h('Table' , {
+                props:{
+                  columns:[
+                    {
+                      title:'序号',
+                      key:'INDEX'
+                    },
+                    {
+                      title:'单据编号',
+                      key:'BILL_NO'
+                    },
+                    {
+                      title:'失败原因',
+                      key:'RESULT_MSG'
+                    }
+                  ],
+                  data:res.data.data.CANCEL_ORDER_ERROR_INFOS
+                }
+              })
+            })
           }
         }
       })
@@ -47,11 +68,18 @@ class commonUtils {
         self.btnConfig.loading = false;
       });
   }
-
-  static tipShow(type, self, res) {
+  /**
+   * 
+   * @param {消息框类型} type 
+   * @param {当前页面实例} self 
+   * @param {接口返回结果} res 
+   * @param {是否定制消息框title} isTitle 
+   * @param {消息框自定义render} renderFun 
+   */
+  static tipShow(type, self, res , isTitle , renderFun) {
     self.$Modal[type]({
-      title: window.vmI18n.t('modalTitle.tips'), // 提示
-      content: res.data.message,
+      title: isTitle ? isTitle : window.vmI18n.t('modalTitle.tips'), // 提示
+      content: renderFun ? renderFun : res.data.message,
       cancelType: true,
       titleAlign: 'left',
       mask: true,
@@ -61,6 +89,7 @@ class commonUtils {
           self.$Modal.remove();
         }
       },
+      render:renderFun
     });
   }
   /**

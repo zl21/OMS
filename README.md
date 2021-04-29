@@ -299,6 +299,7 @@ R3.launchApplication({
 | v1.1.78  | 直播解析策略接口                                                                |
 | v1.1.79  | hold策略接口添加                                                                |
 | v1.1.80  | modifyLogistics                                                                |
+| v1.1.81  | 零售发货单列表取消订单                                                               |
 #### Extends-Api 版本说明
 
 | Version | Description                                   |

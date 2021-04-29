@@ -418,7 +418,7 @@ class BtnConfig {
       case 'cancelOrder':
         funName = 'cancelOrderHandler';
         tips = 'a9';
-        paramsType = 1;
+        paramsType = 4;
         break;
       case 'interceptOrder':
         funName = 'interceptOrderHandler';
@@ -543,7 +543,7 @@ class BtnConfig {
         let ids = [];
         let myData;
         ids = commonUtils.sonList(self.selection, 'ID');
-        if (paramsType == 1) {
+        if (paramsType == 1 || (paramsType == 4) {
           myData = ids;
         } else if (paramsType == 2 || paramsType == 3) {
           const fromdata = new FormData();
@@ -553,7 +553,7 @@ class BtnConfig {
         } else {
           myData = self.selection;
         }
-        if (self.selection.length !== 1 && ![3, 5, 7].includes(paramsType)) {
+        if (self.selection.length !== 1 && ![3, 4, 5, 7].includes(paramsType)) {
           commonUtils.msgTips(self, 'warning', tips);
           self.btnConfig.loading = false;
         } else {
