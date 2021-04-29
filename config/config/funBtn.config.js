@@ -543,7 +543,7 @@ class BtnConfig {
         let ids = [];
         let myData;
         ids = commonUtils.sonList(self.selection, 'ID');
-        if (paramsType == 1 || (paramsType == 4) {
+        if (paramsType == 1 || paramsType == 4) {
           myData = ids;
         } else if (paramsType == 2 || paramsType == 3) {
           const fromdata = new FormData();
