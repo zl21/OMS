@@ -171,11 +171,13 @@ export default {
   batchSaveOcBOrderException: params => $network.post('/p/cs/oc/oms/v1/ocborder/batchSaveOcBOrderException', params), // 异常数据处理
   billOcBOrderCopy: params => $network.post('/p/cs/oc/oms/v1/billOcBOrderCopy', params), // 零售发货单-复制-初始化主表信息
   billOcBOrderItemCopy: params => $network.post('/p/cs/oc/oms/v1/billOcBOrderItemCopy', params), // 零售发货单-复制-初始化子表信息
-  queryResionByNames: params => $network.post('/r3-cp/p/cs/cp/v1/region/v1/queryRegionByName', params), // 零售发货单-新增/复制-智能地址赋值-查询省市区
+  // queryResionByNames: params => $network.post('/r3-cp/p/cs/cp/v1/region/v1/queryRegionByName', params), // 零售发货单-新增/复制-智能地址赋值-查询省市区
+  queryResionByNames: params => $network.post('/p/cs/cp/v1/region/v1/queryRegionByName', params, { serviceId: 'r3-cp' }), // 零售发货单-新增/复制-智能地址赋值-查询省市区
   saveBill: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/saveBill', params), // 零售发货单-新增/复制-保存
   backAudit: params => $network.post('/p/cs/oc/oms/v1/backAudit', params), // 零售发货单反审核
   audit: params => $network.post('/p/cs/oc/oms/v1/audit', params), // 零售发货单审核
-  queryPhyWareHouseList: params => $network.post('/r3-cp/p/cs/cp/v1/phyWarehouse/queryPhyWareHouseList', params), // 零售发货单-初始化发货仓库options
+  // queryPhyWareHouseList: params => $network.post('/p/cs/cp/v1/phyWarehouse/queryPhyWareHouseList', params), // 零售发货单-初始化发货仓库options
+  queryPhyWareHouseList: params => $network.post('/p/cs/cp/v1/phyWarehouse/queryPhyWareHouseList', params, { serviceId: 'r3-cp' }), // 零售发货单-初始化发货仓库options
   getOcBOrderItemBySkuECode: params => $network.post('/p/cs/oc/oms/v1/getOcBOrderItemBySkuECode', params), // 零售发货单-新增/复制-根据sku编码新增订单明细
   initObjectList: params => $network.post('/p/cs/oc/oms/v1/initObject', params), // 零售发货单列表(包裹详情,商品详情表头查询)
   queryObjectList: params => $network.post('/p/cs/oc/oms/v1/queryObject', params) // 零售发货单列表(包裹详情,商品详情明细查询)
