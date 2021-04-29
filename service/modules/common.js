@@ -3,6 +3,11 @@ import qs from 'qs';
 import importApiArr from '@/config/config/importApiArr';
 
 export default {
+  /* 框架标准公共接口： */
+  fuzzyquerybyak: (params, serviceId = { serviceId: 'ad-app' }) => $network.post('/p/cs/fuzzyquerybyak', params, serviceId),
+  QueryList: (params, serviceId = { serviceId: 'ad-app' }) => $network.post('/p/cs/QueryList', params, serviceId),
+  getTableQuery: (params, serviceId = { serviceId: 'ad-app' }) => $network.post('/p/cs/getTableQuery', params, serviceId),
+  
   // 获取页面title
   getAppTitle: () => $network.get('/p/c/getAppTitle'),
   //登录
@@ -31,9 +36,7 @@ export default {
   removeFromFavorite: params => $network.post('/p/cs/removeFromFavorite', params),
   itemDownload: params => $network.post('/p/cs/itemDownload', params),
   getUserConfig: params => $network.post('/p/cs/getUserConfig', params),
-  QueryList: params => $network.post('/p/cs/QueryList', params),
   SgOutNoticePrint: params => $network.post('/p/cs/SgOutNoticePrint', params),
-  fuzzyquerybyak: params => $network.post('/p/cs/fuzzyquerybyak', params),
   cgroupcolumnquery: params => $network.get(`/p/cs/cgroupcolumnquery?${qs.stringify(params)}`),
   queryShopPermission: params => $network.get('/p/cs/queryShopPermission', params),
   screenresultcheck: params => $network.post('/p/cs/screenresultcheck', params),
@@ -59,7 +62,6 @@ export default {
   seachJdForced: params => $network.post('/p/cs/seachJdForced', params),
   getJdScanIncomingInfo: params => $network.post('/p/cs/getJdScanIncomingInfo', params),
   saveJdScanIncoming: params => $network.post('/p/cs/saveJdScanIncoming', params),
-  getTableQuery: params => $network.post('/p/cs/getTableQuery', params),
   groupQueryName: params => $network.post('/p/cs/groupQueryName', params),
   cuserspro: params => $network.post('/p/cs/cuserspro', params),
   objectDelete: params => $network.post('/p/cs/objectDelete', params),
