@@ -442,7 +442,7 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.vmI18n.t('table_label.remarks'), // 备注
+              label: window.vmI18n.t('form_label.sellerNotes'), // 卖家备注
               props: {
                 value: ''
               },
@@ -452,7 +452,7 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.vmI18n.t('form_label.sellerNotes'), // 卖家备注
+              label: window.vmI18n.t('table_label.remarks'), // 备注
               props: {
                 value: ''
               },
@@ -930,7 +930,8 @@ export default {
     // 处理审核按钮的展示 已发货退款单-审核按钮隐藏
     handleAuditBtnDisplay() {
       if (this.$store.state.global.activeTab.label.indexOf('已发货退款单') < 0) {
-        this.btnConfig.buttons.splice(1, 0, this.auditBtn);
+        // 37553 【产线】【订单中心】额外退款【审核】权限，只能控制到列表界面，无法控制到详情界面
+        // this.btnConfig.buttons.splice(1, 0, this.auditBtn);
       }
       if (this.$route.params.customizedModuleName == 'REFUNDAFTERSHIPMENT') { // 如果为已发货退款单,明细表格不显示增加删除明细操作按钮
         this.tableConfig.isShowDeleteDetailBtn = false;
