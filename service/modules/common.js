@@ -52,6 +52,7 @@ export default {
   chargebackcheck: params => $network.post('/api/cs/oc/oms/v1/chargebackcheck', params),
   OcCancelChangingOrRefund: params => $network.post('/api/cs/oc/oms/v1/OcCancelChangingOrRefund', params), // 取消退单
   updateVirtualLibrary: params => $network.post('/api/cs/oc/oms/v1/updateVirtualLibrary', params),
+  SelectLog: params => $network.post('/p/cs/selectlog', params),
   getOrderList: params => $network.post('/p/cs/getOrderList', params),
   extInfoQuery: params => $network.post('/p/cs/extInfoQuery', params),
   manualJdMatchingConfirmationButton: params => $network.post('/p/cs/manualJdMatchingConfirmationButton', params),
