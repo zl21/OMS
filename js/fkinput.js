@@ -153,15 +153,6 @@ export default {
       }
       return params;
     },
-    fuzzyquerybyakUrl() {
-      return commonUtils.splitServiceID('/p/cs/fuzzyquerybyak');
-    },
-    queryListUrl() {
-      return commonUtils.splitServiceID('/p/cs/QueryList');
-    },
-    getTableQueryUrl() {
-      return commonUtils.splitServiceID('/p/cs/getTableQuery');
-    },
   },
   components: {
     SelectDialog,
@@ -236,7 +227,7 @@ export default {
       searchParam.append('colid', id);
       searchParam.append('fixedcolumns', query.fixedcolumns);
 
-      this.service.common.fuzzyquerybyak(searchParam).then((res) => {
+      this.service.common.fuzzyquerybyak(searchParam, { serviceId: itemdata.serviceId || 'ad-app' }).then((res) => {
         for (let i = 0; i < res.data.data.length; i++) {
           const element = res.data.data[i];
           if (
@@ -293,20 +284,6 @@ export default {
     itemInputEnter(event) {
       this.$emit('itemInputEnter', event);
     },
-    // 外键下拉模糊查询
-    // querySearchAsync(queryString, cb) {
-    //   let self = this
-    //   self.autocomplete = false
-    //   self.getQueryList(queryString,self.itemdata.colid,function(list){
-    //     var queryList = list;
-    //     //var results = queryString ? queryList.filter(self.createStateFilter(queryString)) : queryList;
-    //     clearTimeout(self.timeout);
-    //     self.timeout = setTimeout(() => {
-    //       cb(queryList);
-    //     });
-    //   })
-
-    // },
     // 外键下拉模糊查询
     querySearchAsync(queryString, cb) {
       const self = this;
@@ -370,7 +347,7 @@ export default {
       searchParam.append('ak', queryString);
       searchParam.append('colid', id);
       searchParam.append('fixedcolumns', query.fixedcolumns);
-      this.service.common.fuzzyquerybyak(searchParam).then((res) => {
+      this.service.common.fuzzyquerybyak(searchParam, { serviceId: self.itemdata.serviceId || 'ad-app' }).then((res) => {
         self.queryList = res.data.data;
 
         if (res.data.data.length > 0) {
@@ -487,12 +464,12 @@ export default {
       // 更新数据: SelectionData.config 弹出框输入配置
       const self = this;
       self.SelectionData.config = []; // 请求前清空旧数据
-      let params= {
+      let params = {
         tableid: item.reftableid,
         getcmd: 'n',
         table: item.reftable
       }
-      this.service.common.getTableQuery(params).then((res) => {
+      this.service.common.getTableQuery(params, { serviceId: self.itemdata.serviceId || 'ad-app' }).then((res) => {
         for (let i = 0; i < res.data.datas.dataarry.length; i++) {
           const element = res.data.datas.dataarry[i];
           element.value = '';
@@ -517,7 +494,7 @@ export default {
       if (self.hasQuery) {
         searchdata.fixedcolumns = self.selectConfigChanged;
       }
-      this.service.common.QueryList(searchdata).then((res) => {
+      this.service.common.QueryList(searchdata, { serviceId: self.itemdata.serviceId || 'ad-app' }).then((res) => {
         self.SelectionData.tableAllDatas = res.data.datas;
         self.SelectionData.row = res.data.datas.row;
         self.SelectionData.thead = res.data.datas.tabth;
@@ -547,41 +524,59 @@ export default {
       }
       return hidden;
     },
+    /* ------------------------ 入参处理 start  ------------------------ */
+    /**
+     * 处理请求QueryList的入参
+     * @param {*} formData.item.itemdata 
+     * @returns 
+     * 1. 拼接'='：精准匹配
+     */
     getFixedColumns(itemdata) {
       const self = this;
-      const params = {};
+      let params = {};
 
       if (itemdata.refcolval) {
         const str = itemdata.refcolval.expre == 'equal' ? '=' : '';
         const queryColumnsList = itemdata.refcolval.maintable
           ? this.objList
-          : this.inputList; // 判断是主表关联字段还是子表关联字段
+          : this.inputList; // 判断是主表关联字段还是子表关联字段（可以不需要 直接取inputList）
         queryColumnsList.forEach((item) => {
           if (item.childs) {
             item.childs.forEach((child) => {
-              if (child.colname === itemdata.refcolval.srccol) {
+              params = self.handleParamsFromInputList(child);
+              /* if (child.colname === itemdata.refcolval.srccol) {
                 params[itemdata.refcolval.fixcolumn] = child.pid
                   ? str + child.pid
                   : str + child.refobjid;
-              }
+              } */
             });
           } else if (item.child) {
-            if (item.child.colname === itemdata.refcolval.srccol) {
-              params[itemdata.refcolval.fixcolumn] = item.child.pid
-                ? str + item.child.pid
-                : str + item.child.refobjid;
-            }
+            params = self.handleParamsFromInputList(child);
+            /* if (item.child.colname === itemdata.refcolval.srccol) {
+            params[itemdata.refcolval.fixcolumn] = item.child.pid
+              ? str + item.child.pid
+              : str + item.child.refobjid;
+          } */
           } else {
-            // 添加到明细输入框
-            if (item.colname === itemdata.refcolval.srccol) {
+            params = self.handleParamsFromInputList(item);
+            /* if (item.colname === itemdata.refcolval.srccol) {
               params[itemdata.refcolval.fixcolumn] = item.pid
                 ? str + item.pid
                 : str + item.refobjid;
-            }
+            } */
           }
         });
       }
       return params;
+    },
+    handleParamsFromInputList(inputList_item) {
+      let params = {};
+      if (inputList_item.colname === itemdata.refcolval.srccol) {
+        params[itemdata.refcolval.fixcolumn] = inputList_item.pid
+          ? str + inputList_item.pid
+          : str + inputList_item.refobjid;
+      }
+      return params
     },
     getQueryClick(itemdata, callback) {
       const self = this;
@@ -697,6 +692,9 @@ export default {
 
       return tipsname;
     },
+
+    /* ------------------------ 入参处理 start  ------------------------ */
+
     selectionQueryTable() {
       const self = this;
       self.getSelectData('query');

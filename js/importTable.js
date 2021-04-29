@@ -231,10 +231,10 @@ export default {
   },
   created() {
     const _this = this;
-    console.log('$OMS2.cusImport::', _this.$OMS2.cusImport);
-    console.log('webname::', _this.webname);
-    console.log('tableName::', this.tableName);
-    console.log('prefix::', this.prefix);
+    // console.log('$OMS2.cusImport::', _this.$OMS2.cusImport);
+    // console.log('webname::', _this.webname);
+    // console.log('tableName::', this.tableName);
+    // console.log('prefix::', this.prefix);
     if (this.prefix == 'SYSTEM') {
       this.key = this.tableName + '__' + this.webname;
       this.currentConfig = _this.$OMS2.cusImport[this.key];

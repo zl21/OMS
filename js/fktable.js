@@ -43,11 +43,7 @@ export default {
       deep: true
     },
   },
-  computed: {
-    queryListUrl() {
-      return commonUtils.splitServiceID('/p/cs/QueryList');
-    },
-  },
+  computed: {},
   data() {
     return {
       fkDimVal: '',
@@ -320,7 +316,7 @@ export default {
       let _self = this;
       const params = new FormData();
       params.append('searchdata', JSON.stringify(this.formObj));
-      this.service.common.QueryList(params)
+      this.service.common.QueryList(params,{ serviceId: _self.itemdata.serviceId || 'ad-app' })
       .then((res) => {
         console.log(res);
         if (res.data.code == 0) {
