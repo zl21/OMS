@@ -296,6 +296,7 @@ R3.launchApplication({
 | v1.1.75  | 策略中心接口qs                                                                |
 | v1.1.76  | hold策略接口添加                                                                |
 | v1.1.77  | 详情-订单金额计算修改                                                                |
+| v1.1.78  | hold策略接口添加                                                                |
 
 #### Extends-Api 版本说明
 
