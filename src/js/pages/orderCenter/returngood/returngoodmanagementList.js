@@ -1206,6 +1206,7 @@ export default {
           _this.agTableConfig.rowData = [];
           _this.agTableConfig.pagenation.total = 0;
           _this.agTableConfig.agLoading = false;
+          _this.$refs.agGridChild.agGridTable(_this.agTableConfig.columnDefs, _this.agTableConfig.rowData);
         }
       });
     },
