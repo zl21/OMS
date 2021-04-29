@@ -1072,7 +1072,7 @@ export default {
       if (status) {
         _this.formConfig.formValue.RETURN_STATUS = [status];
       }
-      const returnParam = {};
+      let returnParam = {};
       if (_this.$route.query.returnParam) {
         returnParam = JSON.parse(_this.$route.query.returnParam);
       }
@@ -1206,6 +1206,7 @@ export default {
           _this.agTableConfig.rowData = [];
           _this.agTableConfig.pagenation.total = 0;
           _this.agTableConfig.agLoading = false;
+          _this.$refs.agGridChild.agGridTable(_this.agTableConfig.columnDefs, _this.agTableConfig.rowData);
         }
       });
     },

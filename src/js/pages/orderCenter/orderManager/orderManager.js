@@ -1236,7 +1236,8 @@ export default {
   activated() {
     // 获取默认数据
     const _self = this;
-    _self.agTableConfig.pagenation.current = 1;
+    // _self.agTableConfig.pagenation.current = 1;
+    this.getData();
     // 检测屏幕变化 设置高度 重新渲染agTabe
     comUtils.onresizes(_self, 40);
   },
