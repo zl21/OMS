@@ -305,7 +305,8 @@ R3.launchApplication({
 | v1.1.84  | $network 自定义网关                                                            |
 | v1.1.85  | 零售发货单详情 -- 修改如果明细是组合商品则明细不可切换                         |
 | v1.1.86  | cancelHoldOrderHandler 入参及错误信息处理                                      |
-| v1.1.87  | 增加物流派送范围查询公司是否可用                                               |
+| v1.1.87  | 增加物流派送范围查询公司是否可用                                             |
+| v1.1.88  | cancelHoldOrderHandler报错处理                                              |
 
 #### Extends-Api 版本说明
 
