@@ -534,42 +534,26 @@ export default {
     getFixedColumns(itemdata) {
       const self = this;
       let params = {};
-
       if (itemdata.refcolval) {
-        const str = itemdata.refcolval.expre == 'equal' ? '=' : '';
         const queryColumnsList = itemdata.refcolval.maintable
           ? this.objList
           : this.inputList; // 判断是主表关联字段还是子表关联字段（可以不需要 直接取inputList）
         queryColumnsList.forEach((item) => {
           if (item.childs) {
             item.childs.forEach((child) => {
-              params = self.handleParamsFromInputList(child);
-              /* if (child.colname === itemdata.refcolval.srccol) {
-                params[itemdata.refcolval.fixcolumn] = child.pid
-                  ? str + child.pid
-                  : str + child.refobjid;
-              } */
+              params = self.handleParamsFromInputList(child, itemdata);
             });
           } else if (item.child) {
-            params = self.handleParamsFromInputList(child);
-            /* if (item.child.colname === itemdata.refcolval.srccol) {
-            params[itemdata.refcolval.fixcolumn] = item.child.pid
-              ? str + item.child.pid
-              : str + item.child.refobjid;
-          } */
+            params = self.handleParamsFromInputList(item.child, itemdata);
           } else {
-            params = self.handleParamsFromInputList(item);
-            /* if (item.colname === itemdata.refcolval.srccol) {
-              params[itemdata.refcolval.fixcolumn] = item.pid
-                ? str + item.pid
-                : str + item.refobjid;
-            } */
+            params = self.handleParamsFromInputList(item, itemdata);
           }
         });
       }
       return params;
     },
-    handleParamsFromInputList(inputList_item) {
+    handleParamsFromInputList(inputList_item, itemdata) {
+      const str = itemdata.refcolval ? (itemdata.refcolval.expre == 'equal' ? '=' : '') : '';
       let params = {};
       if (inputList_item.colname === itemdata.refcolval.srccol) {
         params[itemdata.refcolval.fixcolumn] = inputList_item.pid
