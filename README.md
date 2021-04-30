@@ -310,6 +310,7 @@ R3.launchApplication({
 | v1.1.89  | hold 单/取消 hold 单失败处理                                                   |
 | v1.1.90  | 改仓库/物流 bug 修复                                                           |
 | v1.1.91  | 增加零售发货单批量定制弹窗逻辑                                                 |
+| v1.1.92  | 修改零售发货单 key                                                             |
 
 #### Extends-Api 版本说明
 
