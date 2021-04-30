@@ -4,7 +4,6 @@ import publicDialogConfig from 'professionalComponents/common/js/publicDialog';
 class DropDownConfig {
 
   constructor() { }
-
   static configHandler(val, singleType = 0, eventList = []) {
     let self = DropDownConfig.target;
     this.singleType = singleType;
