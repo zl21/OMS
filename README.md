@@ -308,6 +308,7 @@ R3.launchApplication({
 | v1.1.87  | 增加物流派送范围查询公司是否可用                                             |
 | v1.1.88  | cancelHoldOrderHandler报错处理                                              |
 | v1.1.89  | hold单/取消hold单失败处理                                              |
+| v1.1.90  | 改仓库/物流bug修复                                              |
 
 #### Extends-Api 版本说明
 

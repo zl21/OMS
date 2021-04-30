@@ -175,24 +175,20 @@ export default {
   mounted() {
     const _this = this;
     console.log("this.componentData::", _this.componentData);
-
+    if (!_this.componentData.CP_C_PHY_WAREHOUSE_ID) {
+      _this.$Message.warning("no CP_C_SHOP_ID ！");
+    }
     _this.querItem("CP_C_PHY_WAREHOUSE_ID").inputList = [
       {
         childs: [
           {
             colname: "CP_C_PHY_WAREHOUSE_ID",
-            refobjid: _this.componentData.CP_C_PHY_WAREHOUSE_ID || 46,
+            refobjid: _this.componentData.CP_C_PHY_WAREHOUSE_ID || "",
             valuedata: _this.componentData.CP_C_PHY_WAREHOUSE_ENAME || "_",
           },
         ],
       },
     ];
-    // this.zIndex =
-    //   Number(
-    //     document.getElementsByClassName("ark-modal-wrap")[0].style.zIndex
-    //   ) + 50;
-    // this.getListData();
-    // document.addEventListener("keydown", this.onKeyDown);
   },
   methods: {
     querItem(key, type) {
@@ -231,140 +227,59 @@ export default {
         data: { data, code, message },
       } = await self.service.orderCenter.updateWarehouse({
         IDS: self.componentData.IDS,
-        CP_C_LOGISTICS_ID: self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID,
+        CP_C_LOGISTICS_ID: +self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID,
       });
       self.isShowFromLoading = false;
       if (code === 0) {
         if (self.$route.params.customizedModuleId == 2307) {
+          self.$Message.success(message);
+          self.$parent.$parent.closeConfirm();
+          self.$parent.$parent.$parent.selection = [];
           self.$parent.$parent.$parent.query();
-          if (!data) {
-            self.$Message.success(message);
-            self.$parent.$parent.closeConfirm();
-            self.$parent.$parent.$parent.selection = [];
-          } else {
-            const isOutOfStockFlag = false; // 由于830不上，所以默认为false，暂注释上面的处理逻辑，之后要加，打开注释即可。
-            if (isOutOfStockFlag) {
-              self.$Modal.confirm({
-                title: window.vmI18n.t("modalTitle.tips"), // 提示
-                render: (h) =>
-                  h("div", {}, [
-                    h(
-                      "p",
-                      {
-                        style: {
-                          padding: "10px 15px 10px 0px",
-                        },
-                      },
-                      message
-                    ),
-                    h("Table", {
-                      props: {
-                        "disabled-hover": true,
-                        "highlight-row": false,
-                        "no-data-text": window.vmI18n.t(
-                          "other.noDataAvailable"
-                        ), // 暂无数据
-                        columns: data.columns,
-                        data: data.prompt_data,
-                      },
-                    }),
-                  ]),
-                cancelType: true,
-                showCancel: true,
-                titleAlign: "left",
-                mask: true,
-                width: 500,
-                draggable: true,
-                onOk: () => {
-                  self.determine(true);
-                },
-                onCancel: () => {
-                  self.$parent.$parent.closeConfirm();
-                },
-              });
-            } else {
-              self.$Modal.error({
-                title: window.vmI18n.t("modalTitle.tips"), // 提示
-                render: (h) =>
-                  h("div", {}, [
-                    h(
-                      "p",
-                      {
-                        style: {
-                          padding: "10px 15px 10px 0px",
-                        },
-                      },
-                      message
-                    ),
-                    h("Table", {
-                      props: {
-                        "disabled-hover": true,
-                        "highlight-row": false,
-                        "no-data-text": window.vmI18n.t(
-                          "other.noDataAvailable"
-                        ), // 暂无数据
-                        columns: data.columns,
-                        data: data.prompt_data,
-                      },
-                    }),
-                  ]),
-                cancelType: true,
-                titleAlign: "left",
-                mask: true,
-                width: 500,
-                draggable: true,
-                onOk: () => {
-                  self.$parent.$parent.closeConfirm();
-                },
-                keyDown: (event) => {
-                  if (event.keyCode == 27) {
-                    self.$parent.$parent.closeConfirm();
-                  } else if (event.keyCode == 13) {
-                    self.$parent.$parent.closeConfirm();
-                  }
-                },
-              });
-            }
-          }
         } else {
-          // self.$parent.$parent.$parent.load();
           self.$Message.success(message);
           self.$parent.$parent.closeConfirm();
           self.$parent.$parent.$parent.load();
         }
-      } else if (code === -1 && !data) {
-        self.$Message.error(message);
-      } else {
-        self.$Modal.error({
-          title: window.vmI18n.t("modalTitle.tips"), // 提示
-          render: (h) =>
-            h("div", {}, [
-              h(
-                "p",
-                {
-                  style: {
-                    padding: "10px 15px 10px 0px",
-                  },
-                },
-                message
-              ),
-              h("Table", {
-                props: {
-                  "disabled-hover": true,
-                  "highlight-row": false,
-                  // "no-data-text": "暂无数据",
-                  "no-data-text": window.vmI18n.t("other.noDataAvailable"),
-                  columns: data.columns,
-                  data: data.prompt_data,
-                },
-              }),
-            ]),
-          cancelType: true,
-          titleAlign: "left",
-          mask: true,
-          width: 500,
-          draggable: true,
+      } else if (code == 1 && data.data) {
+        // 多条错误信息render表格，一条错误信息code为-1走框架报错
+        let tabData = data.data.map((row, index) => {
+          row.INDEX = ++index;
+          row.BILL_NO = row.objidno;
+          row.RESULT_MSG = row.message;
+          return row;
         });
+        this.$OMS2.omsUtils.tipShow(
+          "confirm",
+          self,
+          data,
+          message,
+          function (h) {
+            return h("Table", {
+              props: {
+                columns: [
+                  {
+                    title: "序号",
+                    key: "INDEX",
+                  },
+                  {
+                    title: "ID",
+                    key: "objid",
+                  },
+                  {
+                    title: "单据编号",
+                    key: "BILL_NO",
+                  },
+                  {
+                    title: "失败原因",
+                    key: "RESULT_MSG",
+                  },
+                ],
+                data: tabData,
+              },
+            });
+          }
+        );
       }
       self.loading = false;
     },
