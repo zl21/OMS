@@ -274,49 +274,35 @@ export default {
       }, 500)
     },
     searchTable(fkDim) {
+      let url = '/p/cs/QueryList';
+      let _self = this;
+      const params = new FormData();
       if (this.tabrow.length > 0) {
       } else {
         this.dataEmpty.flag = true
         this.dataEmpty.message = '数据加载中……'
       }
-
+      this.formObj.isdroplistsearch = true;
       this.formObj.startindex = (this.visible - 1) * this.range
       this.formObj.range = this.range
-      //下拉多选接口改为newQueryList
-      // if (this.itemdata && this.itemdata.fkdisplay == 'mrp') {
-      //   // url = '/p/cs/newQueryList'
-      //   url = '/p/cs/QueryList' // 下拉多选改为QueryList，不知道为啥要用newQueryList
-      // }
-      // 配货单下拉
-      if (this.itemdata && this.itemdata.fkdisplay == 'mrp') {
-        if (this.colname == 'OC_B_PURCHASE_ORDER_ID' || this.colname == 'OC_B_SEND_OUT_ID') {
-          this.formObj.isdroplistsearch = false;
-        }
-      }
+      this.formObj.refcolid = this.fkid;
       if (fkDim) {
+        // 下拉多选处理（模糊搜索）
         if (this.fkDimVal) {
+          // fkDimVal:输入框输入的内容
           this.formObj.ak = this.fkDimVal.toString().toLocaleUpperCase()
+          params.append('ak',this.formObj.ak)
+          params.append('colid',this.formObj.refcolid)
+          params.append('fixedcolumns',JSON.stringify({}))
+          if (this.itemdata && this.itemdata.fkdisplay == 'mrp') url = '/p/cs/fuzzyquerybyak'
         } else {
           delete this.formObj.ak
         }
-        // 配货单下拉
-        if (this.itemdata && this.itemdata.fkdisplay == 'mrp') {
-          if (this.colname == 'OC_B_PURCHASE_ORDER_ID' || this.colname == 'OC_B_SEND_OUT_ID') {
-            this.formObj.isdroplistsearch = false;
-          }
-        } else {
-          this.formObj.isdroplistsearch = true;
-        }
-
-        this.formObj.refcolid = this.fkid;
-        // url = '/p/cs/newQueryList'
-        // url = '/p/cs/QueryList'
+      } else {
+        params.append('searchdata', JSON.stringify(this.formObj));
       }
-
-      let _self = this;
-      const params = new FormData();
-      params.append('searchdata', JSON.stringify(this.formObj));
-      this.service.common.QueryList(params,{ serviceId: _self.itemdata.serviceId || 'ad-app' })
+      // this.service.common.QueryList(params,{ serviceId: _self.itemdata.serviceId || 'ad-app' })
+      $network.post(url,params,{ serviceId: _self.itemdata.serviceId || 'ad-app' })
       .then((res) => {
         console.log(res);
         if (res.data.code == 0) {
@@ -450,7 +436,5 @@ export default {
     }
     // let str = ['world']
     // console.log("hello {0}".format(str))
-
-
   }
 }
