@@ -196,6 +196,35 @@ export default {
             this.$parent.$parent.$parent.load();
           });
         }
+      } else if (res.data.code == 1 && res.data.data) {
+        let tabData = res.data.data.map((row, index) => {
+          row.INDEX = ++index;
+          row.BILL_NO = row.objid;
+          row.RESULT_MSG = row.message;
+          return row
+        });
+        this.$OMS2.omsUtils.tipShow('confirm', this, res, res.data.message, function (h) {
+          return h('Table', {
+            props: {
+              columns: [
+                {
+                  title: '序号',
+                  key: 'INDEX'
+                },
+                {
+                  title: '单据编号',
+                  key: 'BILL_NO'
+                },
+                {
+                  title: '失败原因',
+                  key: 'RESULT_MSG'
+                }
+              ],
+              // data:res.data.data.CANCEL_ORDER_ERROR_INFOS
+              data: tabData
+            }
+          })
+        })
       } else {
         // this.$Message.error(res.data.message);
       }
@@ -253,7 +282,7 @@ export default {
       if (requestData.message) {
         this.$message.error(requestData.message);
         return
-      } 
+      }
       const params = {
         ids: this.componentData.ids,
         ...requestData.params
