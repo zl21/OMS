@@ -411,10 +411,10 @@ class DropDownConfig {
     let self = DropDownConfig.target;
     commonUtils.modalShow(self, 'e1', 'orderCenter.manualUnHoldOrder', { ids }, 'all', function (res) {
       if (res.data.code === 0) {
-        this.msgTips(self, 'success', res, 2);
+        commonUtils.msgTips(self, 'success', res, 2);
         self.selection = [];
         self.query();
-      } else if (res.data.code == -1 && res.data.data) {
+      } else if (res.data.code == 1 && res.data.data) {
         // commonUtils.tipShow('error', self, res.data.data.message);
         let tabData = res.data.data.map((row,index) => {
           row.INDEX = ++index;

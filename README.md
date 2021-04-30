@@ -306,7 +306,10 @@ R3.launchApplication({
 | v1.1.85  | 零售发货单详情 -- 修改如果明细是组合商品则明细不可切换                         |
 | v1.1.86  | cancelHoldOrderHandler 入参及错误信息处理                                      |
 | v1.1.87  | 增加物流派送范围查询公司是否可用                                               |
-| v1.1.88  | 增加零售发货单批量定制弹窗逻辑                                                 |
+| v1.1.88  | cancelHoldOrderHandler 报错处理                                                |
+| v1.1.89  | hold 单/取消 hold 单失败处理                                                   |
+| v1.1.90  | 改仓库/物流 bug 修复                                                           |
+| v1.1.91  | 增加零售发货单批量定制弹窗逻辑                                                 |
 
 #### Extends-Api 版本说明
 

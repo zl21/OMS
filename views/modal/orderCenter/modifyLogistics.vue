@@ -168,13 +168,17 @@ export default {
   mounted() {
     // this.getLogistics();
     const _this = this;
+    debugger
     console.log(this.componentData);
+    if (!_this.componentData.CP_C_PHY_WAREHOUSE_ID) {
+      _this.$Message.warning("no CP_C_PHY_WAREHOUSE_ID ！");
+    }
     _this.querItem("CP_C_LOGISTICS_ID").inputList = [
       {
         childs: [
           {
             colname: "CP_C_LOGISTICS_ID",
-            refobjid: _this.componentData.CP_C_PHY_WAREHOUSE_ID || 177,
+            refobjid: _this.componentData.CP_C_PHY_WAREHOUSE_ID || '',
             valuedata: _this.componentData.CP_C_PHY_WAREHOUSE_ENAME || "_",
           },
         ],
@@ -228,7 +232,7 @@ export default {
       _this.loading = true;
       const res = await this.service.orderCenter.updateLogistics({
         IDS: _this.componentData.IDS,
-        CP_C_LOGISTICS_ID: _this.formConfig.formValue.CP_C_LOGISTICS_ID,
+        CP_C_LOGISTICS_ID: +_this.formConfig.formValue.CP_C_LOGISTICS_ID,
       });
       if (res.data.code === 0) {
         // _this.$parent.$parent.$parent.getTreeData();
