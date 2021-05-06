@@ -3,7 +3,7 @@
     <loading :loading="loading" />
     <!-- 修改物流 -->
     <!-- <businessForm style="margin-top:10px;" :formConfig="formConfig"></businessForm> -->
-    <div class="jordanModal_box">
+    <div class="Modal-Form">
       <!-- <label for>物流公司:</label> -->
       <!-- <label for>{{ vmI18n.t("form_label.logisticsCompany") }}:</label>
       <DropDownSelectFilter

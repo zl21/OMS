@@ -314,6 +314,7 @@ R3.launchApplication({
 | v1.1.93  | 售后复制修复                                                             |
 | v1.1.94  | cancelHoldOrderHandler批量操作入参调整                                               |
 | v1.1.95  | 零售发货单详情 -- 添加修改备注                                               |
+| v1.1.96  | 列表-改仓库/物流样式调整                                               |
 
 #### Extends-Api 版本说明
 
