@@ -75,11 +75,11 @@ export default {
     const formValue = self.downLoadFormConfig.formValue;
     const shopId = self.downLoadFormConfig.formData[0].itemdata.pid;
     if (!shopId) {
-      self.$message.error(self.vmI18n.t('modalTips.do'));// 店铺不能为空
+      self.$message.error(window.vmI18n.t('modalTips.do'));// 店铺不能为空
       return;
     }
     if (!formValue.query_date[0] && !formValue.refund_nos) {
-      self.$message.error(self.vmI18n.t('modalTips.bw'));// 请输入平台时间或退供单号
+      self.$message.error(window.vmI18n.t('modalTips.bw'));// 请输入平台时间或退供单号
       return;
     }
     self.dialogLoad = true;
