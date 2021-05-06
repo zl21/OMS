@@ -3,7 +3,7 @@
     <loading :loading="loading" />
     <!-- 修改物流 -->
     <!-- <businessForm style="margin-top:10px;" :formConfig="formConfig"></businessForm> -->
-    <div class="jordanModal_box">
+    <div class="Modal-Form">
       <!-- <label for>物流公司:</label> -->
       <!-- <label for>{{ vmI18n.t("form_label.logisticsCompany") }}:</label>
       <DropDownSelectFilter
@@ -168,17 +168,18 @@ export default {
   mounted() {
     // this.getLogistics();
     const _this = this;
-    debugger
-    console.log(this.componentData);
     if (!_this.componentData.CP_C_PHY_WAREHOUSE_ID) {
-      _this.$Message.warning("no CP_C_PHY_WAREHOUSE_ID ！");
+      _this.$Message.warning("no CP_C_PHY_WAREHOUSE_ID ！(无仓库ID！)");
+      _this.querItem("CP_C_LOGISTICS_ID").itemdata.readonly = true;
+      _this.btnConfig.buttons[1].disabled = true;
+      return;
     }
     _this.querItem("CP_C_LOGISTICS_ID").inputList = [
       {
         childs: [
           {
             colname: "CP_C_LOGISTICS_ID",
-            refobjid: _this.componentData.CP_C_PHY_WAREHOUSE_ID || '',
+            refobjid: _this.componentData.CP_C_PHY_WAREHOUSE_ID || "",
             valuedata: _this.componentData.CP_C_PHY_WAREHOUSE_ENAME || "_",
           },
         ],

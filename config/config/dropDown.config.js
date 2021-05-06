@@ -184,7 +184,7 @@ class DropDownConfig {
       case 'cancelHoldOrder':
         funName = 'cancelHoldOrderHandler';
         tips = 'd5';
-        paramsType = 1;
+        paramsType = 4;
         break;
     }
     const self = DropDownConfig.target;
@@ -407,15 +407,16 @@ class DropDownConfig {
     this.successHandler(ids, 'holdOrderConfig', 'holdOrder', 'holdOrderDialog');
   }
   //取消hold单处理
-  static cancelHoldOrderHandler(ids) {
+  static cancelHoldOrderHandler(rows) {
     let self = DropDownConfig.target;
-    commonUtils.modalShow(self, 'e1', 'orderCenter.manualUnHoldOrder', { ids }, 'all', function (res) {
+    let list = [];
+    list = rows.map(it => ({ID:it.ID,BILL_NO:it.BILL_NO}));
+    commonUtils.modalShow(self, 'e1', 'orderCenter.manualUnHoldOrder', {ID_AND_BILL_NO_LIST:list} , 'all', function (res) {
       if (res.data.code === 0) {
         commonUtils.msgTips(self, 'success', res, 2);
         self.selection = [];
         self.query();
       } else if (res.data.code == 1 && res.data.data) {
-        // commonUtils.tipShow('error', self, res.data.data.message);
         let tabData = res.data.data.map((row,index) => {
           row.INDEX = ++index;
           row.BILL_NO = row.objid;

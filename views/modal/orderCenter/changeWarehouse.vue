@@ -175,7 +175,7 @@ export default {
   mounted() {
     const _this = this;
     console.log("this.componentData::", _this.componentData);
-    if (!_this.componentData.CP_C_PHY_WAREHOUSE_ID) {
+    if (!_this.componentData.CP_C_SHOP_ID) {
       _this.$Message.warning("no CP_C_SHOP_ID ！");
     }
     _this.querItem("CP_C_PHY_WAREHOUSE_ID").inputList = [
@@ -183,8 +183,8 @@ export default {
         childs: [
           {
             colname: "CP_C_PHY_WAREHOUSE_ID",
-            refobjid: _this.componentData.CP_C_PHY_WAREHOUSE_ID || "",
-            valuedata: _this.componentData.CP_C_PHY_WAREHOUSE_ENAME || "_",
+            refobjid: _this.componentData.CP_C_SHOP_ID || "",
+            valuedata: _this.componentData.CP_C_SHOP_ENAME || "_",
           },
         ],
       },

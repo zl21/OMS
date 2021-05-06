@@ -68,7 +68,7 @@
         <div class="order-tab-title">
           <span>基础资料</span>
           <div class="title-sign">
-            <span v-for="(item,index) in componentData.order.ORDER_TAG" :style="{ color: item.clr}">
+            <span v-for="(item,index) in componentData.order.ORDER_TAG" :key="index" :style="{ color: item.clr}">
               {{item.text}}
             </span>
             <!-- <span class="one">合</span>

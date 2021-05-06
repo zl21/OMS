@@ -287,6 +287,12 @@ export default {
     // 修改备注
     modifyRemark(){
       console.log('修改备注');
+      this.dialogs.modifyRemark.data = {
+        ids: [this.$route.params.customizedModuleId]
+      };
+      setTimeout(() => {
+        this.$children[0].$children.find(item => item.name === 'modifyRemarkDialog').openConfirm();
+      }, 100);
     }
   },
   mounted() {

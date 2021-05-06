@@ -12,7 +12,7 @@ class BtnConfig {
       loading: false, // 按钮加载
       buttons: [
         {
-          text: window.vmI18n.t('btn.manualCreation'), // 手工创建
+          webname: 'manualCreation', // 手工创建
         },
         {
           webname: 'Newly added', // 新增
@@ -147,9 +147,8 @@ class BtnConfig {
           webname: 'lookup_qdkucunbiandongliushui', // 平台店铺库存变动流水 - 查找
           btnclick: () => BtnConfig.target.find(),
         },
-        // ------------  退货入库 -----------
         {
-          webname: 'lookup_tuihuoruku',
+          webname: 'lookup_tuihuoruku',// 退货入库 - 查找
           btnclick: () => BtnConfig.target.find(),
         },
         {
@@ -163,7 +162,6 @@ class BtnConfig {
           btnclick: () => this.btnMainHandler('manualMatch'),
         },
         {
-          text: window.vmI18n.t('btn.wrong_sending_forced_matching'), // 错发强制匹配
           webname: 'Mismatchingmandatorymatching_cuofa',
           btnclick: () => this.btnMainHandler('forceMatch'),
         },
@@ -230,8 +228,7 @@ class BtnConfig {
           btnclick: () => this.btnMainHandler('splitOrder'),
         },
         {
-          webname: 'New refund receipt',
-          // 新增退单跳转页面
+          webname: 'New refund receipt',// 新增退单跳转页面
           btnclick: () => this.btnMainHandler('addReturnOrder'),
         },
         {
@@ -319,34 +316,48 @@ class BtnConfig {
         {
           webname: 'order_fund', // 返回
           btnclick: () => {
-            this.back('orderManager', 2627, 'panel_label.orderManager');
-            // 销毁当前实例
+            this.back('orderManager', 2627, 'panel_label.orderManager');// 销毁当前实例
             BtnConfig.target.$destroy();
           },
         },
         {
           webname: 'ManualMatching_save',
-          btnclick: () => {
-            BtnConfig.target.saveData();
-          }, // 按钮点击事件
+          btnclick: () => BtnConfig.target.saveData(),
         },
         {
           webname: 'Mismatchingmandatorymatching_return',
           btnclick: () => {
-            this.back('returnStoreageList', 2809, 'panel_label.returnTreasury');
-            // 销毁当前实例
+            this.back('returnStoreageList', 2809, 'panel_label.returnTreasury');// 销毁当前实例
             BtnConfig.target.$destroy();
-          }, // 按钮点击事件
+          },
         },
       ],
     };
-   }
+  }
 
 
 
   static config() {
     return BtnConfig.customConfig;
   }
+  // 单对象直接调方法;
+
+
+  /**
+   * 1. singleType：=1，为单对象页面，不需要做判断当前是否选中数据等操作
+   * 2. paramsType：=1，入参仅传ids--列表ID数组;
+   * 3. paramsType：=2，入参转成ids转换成fromData;
+   * 4. paramsType：=3，入参需将ids转成json字符串, 再转换成fromData;
+   * 5. paramsType：=4，入参传选择的selection--批量处理全属性数组;
+   * 6. paramsType：=5，？
+   * 7. paramsType：=6，导出, 可以跳转纪录选择逻辑;
+   * 
+   * 
+   * 1,2,3只取纪录ID属性, 其他传列表选择所有属性数组;
+   * 3, 5, 7 批量纪录进行操作; 其他单条操作;
+   * 6，导出, 可以跳转纪录选择逻辑;
+   * 7 定制弹窗;
+   */
   // 按钮处理程序类似
   btnMainHandler(type) {
     // 方法名 未选择提示 传参类型
@@ -386,9 +397,16 @@ class BtnConfig {
       case 'regenerateTheOrder':
       case 'manualMatch':
       case 'forceMatch':
+      case 'returnGoodsCancel':
+      case 'modifyRemark':
+      case 'modifySellerRemark':
+      case 'againWMS':
+      case 'forcedCompletion':
+      case 'batchOriginalReturn':
         funName = `${type}Handler`;
-        tips = 'k3';
+        tips = 'l0';
         paramsType = 7;
+        break;
       case 'holdOrder':
         funName = 'holdOrderHandler';
         tips = 'a8';
@@ -418,7 +436,7 @@ class BtnConfig {
       case 'cancelOrder':
         funName = 'cancelOrderHandler';
         tips = 'a9';
-        paramsType = 4;
+        paramsType = 1;
         break;
       case 'interceptOrder':
         funName = 'interceptOrderHandler';
@@ -471,63 +489,21 @@ class BtnConfig {
         paramsType = 6;
         break;
       case 'returnGoodsModify':
-        funName = 'returnGoodsModifyHandler';
-        tips = 'l0';
-        paramsType = 1;
-        break;
       case 'returnGoodsCopy':
-        funName = 'returnGoodsCopyHandler';
+        funName = `${type}Handler`;
         tips = 'l0';
         paramsType = 1;
         break;
-      case 'returnGoodsCancel':
-        funName = 'returnGoodsCancelHandler';
-        tips = 'l0';
-        paramsType = 7;
-        break;
-      case 'modifyRemark':
-        funName = 'modifyRemarkHandler';
-        tips = 'l0';
-        paramsType = 7;
-        break;
-      case 'modifySellerRemark':
-        funName = 'modifySellerRemarkHandler';
-        tips = 'l0';
-        paramsType = 7;
-        break;
+
       case 'modifyReturnWarehouse':
         funName = 'modifyReturnWarehouseHandler';
         tips = 'm1';
         paramsType = 1;
         break;
-      case 'againWMS':
-        funName = 'againWMSHandler';
-        tips = 'l0';
-        paramsType = 7;
-        break;
-      case 'forcedCompletion':
-        funName = 'forcedCompletionHandler';
-        tips = 'l0';
-        paramsType = 7;
-        break;
-      case 'batchOriginalReturn':
-        funName = 'batchOriginalReturnHandler';
-        tips = 'l0';
-        paramsType = 7;
-        break;
     }
     const self = BtnConfig.target;
     BtnConfig.btnKey = type;
-    // 单对象直接调方法;
-    /**
-     * 1. singleType：=1，为单对象页面，不需要做判断当前是否选中数据等操作
-     * 2. paramsType：=1，入参仅传ids
-     * 3. paramsType：=2，？
-     * 4. paramsType：=3，？
-     * 5. paramsType：=4，？
-     * 6. paramsType：=5，？
-     * 7. paramsType：=6，？
-     */
+
     if (BtnConfig.singleType == 1) {
       let ids;
       if (self.tab1) {
@@ -543,7 +519,7 @@ class BtnConfig {
         let ids = [];
         let myData;
         ids = commonUtils.sonList(self.selection, 'ID');
-        if (paramsType == 1 || paramsType == 4) {
+        if (paramsType == 1) {
           myData = ids;
         } else if (paramsType == 2 || paramsType == 3) {
           const fromdata = new FormData();
@@ -553,7 +529,7 @@ class BtnConfig {
         } else {
           myData = self.selection;
         }
-        if (self.selection.length !== 1 && ![3, 4, 5, 7].includes(paramsType)) {
+        if (self.selection.length !== 1 && ![3, 5, 7].includes(paramsType)) {
           commonUtils.msgTips(self, 'warning', tips);
           self.btnConfig.loading = false;
         } else {
@@ -1023,10 +999,7 @@ class BtnConfig {
             commonUtils.msgTips(self, 'warning', 'b1');
             return;
           }
-          if (
-            selectItem.IS_INRETURNING === 1 ||
-            selectItem.IS_INTERECEPT === 1
-          ) {
+          if (selectItem.IS_INRETURNING === 1 || selectItem.IS_INTERECEPT === 1) {
             commonUtils.msgTips(self, 'warning', 'b2');
             return;
           }
