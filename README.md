@@ -319,6 +319,7 @@ R3.launchApplication({
 | v1.1.97  | 页面引入配置修改为import动态加载方法                                               |
 | v1.1.98  | cancelOrderHandler-入参修改                                               |
 | v1.1.99  | 迁移店铺授权，完善零售发货单批量操作的弹窗                                     |
+| v1.2.0  | initFormConfig复杂类型isnotnull默认false                                     |
 
 #### Extends-Api 版本说明
 
