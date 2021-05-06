@@ -168,7 +168,6 @@ export default {
   mounted() {
     // this.getLogistics();
     const _this = this;
-    debugger
     console.log(this.componentData);
     if (!_this.componentData.CP_C_PHY_WAREHOUSE_ID) {
       _this.$Message.warning("no CP_C_PHY_WAREHOUSE_ID ！");

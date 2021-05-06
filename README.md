@@ -312,6 +312,7 @@ R3.launchApplication({
 | v1.1.91  | 增加零售发货单批量定制弹窗逻辑                                                 |
 | v1.1.92  | 修改零售发货单 key                                                             |
 | v1.1.93  | 售后复制修复                                                             |
+| v1.1.94  | cancelHoldOrderHandler批量操作入参调整                                               |
 
 #### Extends-Api 版本说明
 
