@@ -436,7 +436,7 @@ class BtnConfig {
       case 'cancelOrder':
         funName = 'cancelOrderHandler';
         tips = 'a9';
-        paramsType = 4;
+        paramsType = 1;
         break;
       case 'interceptOrder':
         funName = 'interceptOrderHandler';
