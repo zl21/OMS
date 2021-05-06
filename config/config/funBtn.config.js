@@ -188,9 +188,9 @@ class BtnConfig {
           webname: 'cancelHoldOrder2', // hold单
           btnclick: () => this.btnMainHandler('cancelHoldOrder'), // 按钮点击事件
         },
-        {
+        /* {
           btnclick: () => this.btnMainHandler('invoiceNotice'), // 按钮点击事件
-        },
+        }, */
         {
           webname: 'Record invoices',
           btnclick: () => this.btnMainHandler('invoiceRecord'),
@@ -201,6 +201,7 @@ class BtnConfig {
         },
         {
           text: window.vmI18n.t('btn.orderBlocking'), // 订单拦截
+          webname: 'orderBlocking',
           btnclick: () => this.btnMainHandler('interceptOrder'),
         },
         {
@@ -223,15 +224,16 @@ class BtnConfig {
           webname: 'beizhudaoru',
           btnclick: () => this.noticeImport(), // 按钮点击事件
         },
-        {
+        /* {
           btnclick: () => this.btnMainHandler('changeShipmentPlatform'),
-        },
+        }, */
         {
           webname: 'batchReturnOrder',
           btnclick: () => this.btnMainHandler('batchReturnOrder'),
         },
         {
           text: window.vmI18n.t('btn.release_inventory'), // 释放库存
+          webname: 'release_inventory',
           btnclick: () => this.btnMainHandler('releaseInventory'),
         },
         {
@@ -260,11 +262,12 @@ class BtnConfig {
         },
         {
           icon: 'iconfont iconbj_setup', // 按钮图标
+          webname: 'iconbj_setup',
           btnclick: () => this.setupHandler(),
         },
         {
           icon: 'iconfont iconbj_col', // 收藏图标
-          webname: 'isFavorite', // 必须写，用于匹配框架的收藏功能（作为key替换掉之前的中文判断）
+          webname: 'isFavorite',
           name: window.vmI18n.t('btn.collection'),
           btnclick: () => BtnConfig.target.setFavorite(),
         },
