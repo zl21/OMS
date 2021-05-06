@@ -22,6 +22,7 @@ DialogConfig.baseObj = {
 }
 
 DialogConfig.customConfig = {
+    // 零售发货单详情
     address: {
         title: window.vmI18n.t('modalTitle.modify_shipping_address'),
         width: 650,
@@ -49,6 +50,13 @@ DialogConfig.customConfig = {
         url: 'modal/orderCenter/replaceGoodsDetail',
         name: 'changeSkuDialog',
         excludeString: 'changeSkuDialog'
+    },
+    modifyRemark: {
+        title: window.vmI18n.t('btn.modifyRemarks'),
+        width: 480,
+        url: 'modal/orderCenter/changeRemark',
+        name: 'modifyRemarkDialog',
+        excludeString: 'modifyRemarkDialog'
     }
 }
 
