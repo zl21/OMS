@@ -12,7 +12,7 @@ class BtnConfig {
       loading: false, // 按钮加载
       buttons: [
         {
-          text: window.vmI18n.t('btn.manualCreation'), // 手工创建
+          webname: 'manualCreation', // 手工创建
         },
         {
           webname: 'Newly added', // 新增
