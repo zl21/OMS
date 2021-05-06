@@ -230,12 +230,7 @@ class commonUtils {
     // console.log('this[arrry].buttons===', this[arrry].buttons)
     if (self[array] == undefined) return;
     self.service.common.fetchActionsInCustomizePage(query).then(res => {
-      let result;
-      if (!res.data.data.ZIP) { //未压缩情况下数据获取
-        result = res.data.data.DATA || [];
-      } else { //压缩情况下数据获取
-
-      }
+      let result=res.data.data.ZIP || (res.data.data.DATA || []);//未压缩情况下数据获取
       independent = result;
       const a = [];
       self[array].buttons.forEach((item) => {
@@ -253,9 +248,8 @@ class commonUtils {
         }
         // 普通btn（无child）的处理
         self[array].buttons.forEach((btn) => {
-          if (element.webname && element.webname == btn.webname) {
+          if (btn.webname == element.webname || btn.webname.includes(element.webname)) {
             btn.webid = element.webid;
-            btn.webname = element.webname;
             btn.text = element.webdesc;
             c.push(btn);
           }
@@ -279,9 +273,8 @@ class commonUtils {
         return;
       }
       btns.forEach(sItem => {
-        if (item.webname == sItem.webname) {
+        if (item.webname == sItem.webname || sItem.webname.includes(item.webname)) {
           sItem.webid = item.webid;
-          sItem.webname = item.webname;
           sItem.text = item.webdesc;
           ar.push(sItem);
         }

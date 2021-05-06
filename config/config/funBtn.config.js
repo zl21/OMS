@@ -124,7 +124,7 @@ class BtnConfig {
           btnclick: () => this.btnMainHandler('forcedCompletion'),
         },
         {
-          webname: 'daochu_tuihuanhuo',
+          webname: 'daochu_tuihuanhuo,export_tuihuoruku,OcBOrderExportCmd',
           btnclick: () => this.btnMainHandler('exportClick'),
         },
         {
@@ -132,23 +132,7 @@ class BtnConfig {
           btnclick: () => BtnConfig.target.reset(),
         },
         {
-          webname: 'lookup_tuihuanhuo',
-          btnclick: () => BtnConfig.target.find(),
-        },
-        {
-          webname: 'lookup_kcjisuanhuancunchi',
-          btnclick: () => BtnConfig.target.find(),
-        },
-        {
-          webname: 'lookup_kucuntongbuduilie',
-          btnclick: () => BtnConfig.target.find(),
-        },
-        {
-          webname: 'lookup_qdkucunbiandongliushui', // 平台店铺库存变动流水 - 查找
-          btnclick: () => BtnConfig.target.find(),
-        },
-        {
-          webname: 'lookup_tuihuoruku',// 退货入库 - 查找
+          webname: 'lookup_tuihuanhuo,lookup_kcjisuanhuancunchi,lookup_kucuntongbuduilie,lookup_qdkucunbiandongliushui,lookup_tuihuoruku',
           btnclick: () => BtnConfig.target.find(),
         },
         {
@@ -171,10 +155,6 @@ class BtnConfig {
             BtnConfig.target.importTable.componentData = { tableName: 'OC_B_REFUND_IN' };
             BtnConfig.target.$children.find(item => item.name === 'importTable').openConfirm();
           }
-        },
-        {
-          webname: 'export_tuihuoruku',
-          btnclick: () => this.btnMainHandler('exportClick')
         },
         {
           webname: 'in_tuihuanhuo',
@@ -277,10 +257,6 @@ class BtnConfig {
         {
           webname: 'OcBOrderImportCmd', // 导入
           webid: 3025,
-        },
-        {
-          webname: 'OcBOrderExportCmd', // 导出
-          btnclick: () => this.btnMainHandler('exportClick'),
         },
         {
           icon: 'iconfont iconbj_setup', // 按钮图标
