@@ -154,3 +154,4 @@
 | v1.1.8 |  网关参数
 | v1.1.9 |  fkinput
 | v1.1.10 |  fktable-mrp模糊搜索
+| v1.1.11 |  fktable解决key重复问题

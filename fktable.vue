@@ -11,7 +11,7 @@
       <table>
         <thead>
           <tr>
-            <th v-for="(item, index) in fnfiltersId(tabth, 'ID')" :key="index">
+            <th v-for="(item, index) in fnfiltersId(tabth, 'ID')" :key="this">
               <input
                 type="checkbox"
                 @click.stop="checkBoxAll"
@@ -20,7 +20,7 @@
               />
               {{ ChineseDictionary.NUMBER }}
             </th>
-            <th v-for="(item, index) in fnfiltersId(tabth)" :key="index + 1">
+            <th v-for="(item, index) in fnfiltersId(tabth)" :key="this">
               {{ item.name }}
             </th>
           </tr>
