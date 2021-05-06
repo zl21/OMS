@@ -151,7 +151,11 @@ export default {
             text: window.vmI18n.t('common.determine'),
             loading: false,
             btnclick: () => {
-              if (this.url) {
+              if (this.type == "add") {       
+              this.saveOrderByPro() // 添加订单商品信息-确定添加
+              }else if(this.type == "del"){
+                this.deleteOrderGoods()
+              }else if(this.type == "replace"){
                 this.parseOrderList() //确认解析
               } else {
                 this.submit()
@@ -161,6 +165,7 @@ export default {
         ],
       },
       skuEcodes: '',
+      type:"", //组件传过来的类型，区分那里过来的
     }
   },
   components: {
@@ -172,6 +177,48 @@ export default {
     componentData: {},
   },
   methods: {
+    saveOrderByPro(){
+      let orderList = []
+      this.componentData.data.forEach((em) => {
+        let obj = {
+          orderId: em.ID, //订单id
+          billNo: em.BILL_NO, //单据编号
+        }
+        orderList.push(obj)
+      })
+
+      let data = {
+        skuEcodes: [this.skuEcodes],
+        orderList,
+      }
+      this.service.orderCenter.saveOrderByPro(data).then((res) => {
+          if (res.data.code == 0) {
+            this.$Message.success(res.data.message);
+            this.$parent.$parent.closeConfirm()
+          }
+      })
+    },
+    deleteOrderGoods(){
+      let orderList = []
+      this.componentData.data.forEach((em) => {
+        let obj = {
+          orderId: em.ID, //订单id
+          billNo: em.BILL_NO, //单据编号
+        }
+        orderList.push(obj)
+      })
+
+      let data = {
+        skuEcodes: [this.skuEcodes],
+        orderList,
+      }
+      this.service.orderCenter.deleteOrderGoods(data).then((res) => {
+          if (res.data.code == 0) {
+            this.$Message.success(res.data.message);
+            this.$parent.$parent.closeConfirm()
+          }
+      })
+    },
     parseOrderList() {
       let orderList = []
       this.componentData.data.forEach((em) => {
@@ -187,7 +234,10 @@ export default {
         orderList,
       }
       this.service.orderCenter.parseOrderList(data).then((res) => {
-        console.log(res)
+        if (res.data.code == 0) {
+          this.$Message.success(res.data.message);
+          this.$parent.$parent.closeConfirm()
+        }
       })
     },
     // 选中某一项时触发
@@ -364,7 +414,8 @@ export default {
   },
   mounted() {
     const self = this
-    console.log(this.componentData.data)
+ console.log(this.componentData);
+    this.type = this.componentData.type
     if (this.componentData && this.componentData.ID) {
       self.objid = this.componentData.ID
     }

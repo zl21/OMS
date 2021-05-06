@@ -5,6 +5,12 @@ export default {
   /**
    * 零售发货单
    */
+
+  saveOrderByPro: (params) =>
+    $network.post('/p/cs/oc/b/oms/v1/ocborder/saveOrderByPro', params), // 添加订单商品信息-确定添加
+
+  deleteOrderGoods: (params) =>
+    $network.post('/p/cs/oc/b/oms/v1/ocborder/deleteOrderGoods', params), // 批量删除商品信息-删除按钮
   parseOrderList: (params) =>
     $network.post('/p/cs/oc/b/oms/v1/ocborder/parseOrderList', params), // 批量解析组合商品-确定解析
   auditOrder: (params) => $network.post('/p/cs/oc/oms/v1/auditOrder', params), // 审核
