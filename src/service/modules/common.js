@@ -235,7 +235,7 @@ export default {
         url: '/p/cs/alibabaProductImport',
         downloadUrl: 'https://semir-r3-upload-prod.oss-cn-zhangjiakou.aliyuncs.com/tmp/maochao/%E7%8C%AB%E8%B6%85%E5%95%86%E5%93%81%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xlsx' 
       }, // 通用商品-猫超商品导入
-      {
+      { 
         tableName: 'AC_F_LIVE_ORDER',
         url: '/p/cs/ac/v1/liveOrderImport',
         downloadUrl: '/p/cs/ac/v1/liveOrderImportTemp'

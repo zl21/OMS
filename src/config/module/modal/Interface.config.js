@@ -12,4 +12,8 @@ export default {
   TAOBOREFUSEEXCHANGE: {
     component: () => import('@/views/modal/InterfacePlatform/taobaoRefuseExchange.vue')
   },
+  //  唯品会退供单-修改收货仓库
+  CUSTOMIZEDRECEIPT: {
+    component: () => import('@/views/modal/InterfacePlatform/customizedReceipt.vue')
+  }
 };

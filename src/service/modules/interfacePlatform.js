@@ -17,6 +17,8 @@ export default {
   downLoadVipTimeOrder: params => network.post('/p/cs/downLoadVipTimeOrder', params),
   // 取消实效订单下载
   downLoadVipCancelTimeOrder: params => network.post('/p/cs/downLoadVipCancelTimeOrder', params),
+  // 退货仓库修改
+  modificationReturnWarehouse: params => network.post('/api/cs/oc/oms/v1/vipReturnOrderUpdateReceipt', params),
 
 
 };
