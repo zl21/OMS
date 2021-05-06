@@ -79,14 +79,14 @@ export default {
   // 确定按钮
   determine: async (self) => {
     if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
-      self.$Message.warning(self.vmI18n.t('modalTips.be'));// 请选择需要下载的店铺
+      self.$Message.warning(window.vmI18n.t('modalTips.be'));// 请选择需要下载的店铺
       return false;
     }
     if (
       self.downLoadFormConfig.formValue.bill_no === ''
       && self.downLoadFormConfig.formValue.timerange[0] === '' && self.downLoadFormConfig.formValue.timerange[1] === ''
     ) {
-      self.$Message.warning(self.vmI18n.t('modalTips.bu'));// 换单修改时间和换单单号不能同时为空
+      self.$Message.warning(window.vmI18n.t('modalTips.bu'));// 换单修改时间和换单单号不能同时为空
       return false;
     }
     const param = {

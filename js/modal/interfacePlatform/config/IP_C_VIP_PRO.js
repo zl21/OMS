@@ -69,7 +69,7 @@ export default {
     const formValue = self.downLoadFormConfig.formValue;
     const shopId = self.downLoadFormConfig.formData[0].itemdata.pid;
     if (!shopId || !formValue.query_date[0]) {
-      self.$message.error(self.vmI18n.t('modalTips.bt'));// 店铺和平台时间不能为空
+      self.$message.error(window.vmI18n.t('modalTips.bt'));// 店铺和平台时间不能为空
       return;
     }
     const params = JSON.stringify({
