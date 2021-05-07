@@ -323,6 +323,8 @@ R3.launchApplication({
 | v1.2.1  | funBtn webname 补充                                     |
 | v1.2.2  | changeWarehouse入参调整                                    |
 | v1.2.3  | 迁移4个策略定制页面                                    |
+| v1.2.4  | changeWarehouse/modifyLogistics入参协议变更整                                    |
+| v1.2.5  | cancelMergeOrderHandler取消合并异常loading                                   |
 
 #### Extends-Api 版本说明
 

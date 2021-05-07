@@ -115,12 +115,12 @@ class DropDownConfig {
       case 'modifyLogistics':
         funName = 'modifyLogisticsHandler';
         tips = 'c6';
-        paramsType = 1;
+        paramsType = 4;
         break;
       case 'modifyWarehouse':
         funName = 'modifyWarehouseHandler';
         tips = 'c7';
-        paramsType = 1;
+        paramsType = 4;
         break;
       case 'modifyNotes':
         funName = 'modifyNotesHandler';
@@ -251,7 +251,7 @@ class DropDownConfig {
           }
           /**
            * objName：burgeon-business-components/common/js/publicDialog.js下对应的key
-           * propertyName：用于判断要填充什么给子组件（弹窗里的那个组件）的componentData
+           * propertyName：用于判断要填充给什么子组件（弹窗里的哪个组件）的componentData
            * tableType：组件名
            */
           this.successHandler(params, objName, propertyName, tableType);
@@ -339,18 +339,24 @@ class DropDownConfig {
     }, 100);
   }
   //修改物流;
-  static modifyLogisticsHandler(fromdata) {
+  static modifyLogisticsHandler(rows) {
+    let list = [];
+    const ids = commonUtils.sonList(rows, 'ID');
+    list = rows.map(it => ({ID:it.ID,BILL_NO:it.BILL_NO}));
     this.serviceHandler(
       'checkOrderBeforeLogistics',
-      {IDS:fromdata},
+      { IDS:ids, ID_AND_BILL_NO_LIST:list },
       'modifyLogistics'
     );
   }
   //修改仓库
-  static modifyWarehouseHandler(fromdata) {
+  static modifyWarehouseHandler(rows) {
+    let list = [];
+    const ids = commonUtils.sonList(rows, 'ID');
+    list = rows.map(it => ({ID:it.ID,BILL_NO:it.BILL_NO}));
     this.serviceHandler(
       'checkOrderBeforeWarehouse',
-      {IDS:fromdata},
+      { IDS:ids, ID_AND_BILL_NO_LIST:list },
       'changeWarehouse'
     );
   }

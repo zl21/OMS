@@ -213,28 +213,14 @@ export default {
     // 确定
     async determine() {
       const _this = this;
-      // const fromdata = new FormData();
-      // const param = {
-      //   fixcolumn: {
-      //     ST_C_WAREHOUSE_LOGISTICS: {},
-      //     ST_C_WAREHOUSE_LOGISTICS_ITEM: _this.selectData,
-      //     ST_C_WAREHOUSE_LOGISTICS_RANK_RESULT: [],
-      //   },
-      //   objid: _this.componentData.id,
-      // };
-      // fromdata.append("param", JSON.stringify(param));
-      // const res = await this.service.strategyPlatform.saveWarehouseLogistics(
-      //   _this.componentData
-      // );
       if (!_this.formConfig.formValue.CP_C_LOGISTICS_ID) {
         _this.$Message.warning("请选择物流公司！");
         return false;
       }
       _this.loading = true;
-      const res = await this.service.orderCenter.updateLogistics({
-        IDS: _this.componentData.IDS,
-        CP_C_LOGISTICS_ID: +_this.formConfig.formValue.CP_C_LOGISTICS_ID,
-      });
+      let param = JSON.parse(JSON.stringify(_this.componentData));
+      param.CP_C_LOGISTICS_ID = +_this.formConfig.formValue.CP_C_LOGISTICS_ID;
+      const res = await this.service.orderCenter.updateLogistics(param);
       if (res.data.code === 0) {
         // _this.$parent.$parent.$parent.getTreeData();
         // _this.$parent.$parent.$parent.provinceSynchronous();
