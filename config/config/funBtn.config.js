@@ -180,14 +180,14 @@ class BtnConfig {
           webname: 'shortageNotice', // 缺货回传
           btnclick: () => this.btnMainHandler('shortageNotice'), // 按钮点击事件
         },
-        {
+        /* {
           webname: 'holdOrder2', // hold单
           btnclick: () => this.btnMainHandler('holdOrder'), // 按钮点击事件
-        },
-        {
-          webname: 'cancelHoldOrder2', // hold单
+        }, */
+        /* {
+          webname: 'cancelHoldOrder2', // 取消hold单
           btnclick: () => this.btnMainHandler('cancelHoldOrder'), // 按钮点击事件
-        },
+        }, */
         /* {
           btnclick: () => this.btnMainHandler('invoiceNotice'), // 按钮点击事件
         }, */
