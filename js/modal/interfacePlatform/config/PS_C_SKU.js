@@ -107,15 +107,15 @@ export default {
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
-      self.$Message.warning(self.vmI18n.t('modalTips.be')); // 请选择需要下载的店铺
+      self.$Message.warning(window.vmI18n.t('modalTips.be')); // 请选择需要下载的店铺
       return false;
     }
     if (formValue.orderNum === '') {
-      self.$Message.warning(self.vmI18n.t('pHolder.z1')); // 请输入平台单号
+      self.$Message.warning(window.vmI18n.t('pHolder.z1')); // 请输入平台单号
       return;
     }
     if (formValue.orderStatus === undefined) {
-      self.$Message.warning(self.vmI18n.t('pHolder.z2')); // 请选择订单状态
+      self.$Message.warning(window.vmI18n.t('pHolder.z2')); // 请选择订单状态
       return;
     }
     const param = {

@@ -20,7 +20,7 @@ class commonUtils {
    * @callbackType {String} 用于判断何时走回调函数
    * @callbackFun {Funtion} 回调函数，具体处理接口返回的res的方法
    */
-  static serviceHandler(self, serviceUrl, params, ...callback) {
+  static serviceHandler(self, serviceUrl, params, callback) {
     const ApiUrl = serviceUrl.split('.');
     self.service[ApiUrl[0]]
     [ApiUrl[1]](params)
@@ -36,10 +36,31 @@ class commonUtils {
             } else {
               this.tipShow('success', self, res);
               self.selection = [];
-              self.getData();
+              self.query();
             }
           } else {
-            this.tipShow('error', self, res);
+            // this.tipShow('error', self, res);
+            this.tipShow('confirm' , self , res , `订单取消成功${res.data.data.SUCCESS_COUNT}条失败${res.data.data.ERROR_COUNT}条!` , function(h){  //因为后端复用列列表详情界面的取消接口,需要区分
+              return h('Table' , {
+                props:{
+                  columns:[
+                    {
+                      title:'序号',
+                      key:'INDEX'
+                    },
+                    {
+                      title:'单据编号',
+                      key:'BILL_NO'
+                    },
+                    {
+                      title:'失败原因',
+                      key:'RESULT_MSG'
+                    }
+                  ],
+                  data:res.data.data.CANCEL_ORDER_ERROR_INFOS
+                }
+              })
+            })
           }
         }
       })
@@ -47,11 +68,18 @@ class commonUtils {
         self.btnConfig.loading = false;
       });
   }
-
-  static tipShow(type, self, res) {
+  /**
+   * 
+   * @param {消息框类型} type 
+   * @param {当前页面实例} self 
+   * @param {接口返回结果} res 
+   * @param {是否定制消息框title} isTitle 
+   * @param {消息框自定义render} renderFun 
+   */
+  static tipShow(type, self, res , isTitle , renderFun) {
     self.$Modal[type]({
-      title: window.vmI18n.t('modalTitle.tips'), // 提示
-      content: res.data.message,
+      title: isTitle ? isTitle : window.vmI18n.t('modalTitle.tips'), // 提示
+      content: renderFun ? renderFun : res.data.message,
       cancelType: true,
       titleAlign: 'left',
       mask: true,
@@ -61,6 +89,7 @@ class commonUtils {
           self.$Modal.remove();
         }
       },
+      render:renderFun
     });
   }
   /**
@@ -201,12 +230,7 @@ class commonUtils {
     // console.log('this[arrry].buttons===', this[arrry].buttons)
     if (self[array] == undefined) return;
     self.service.common.fetchActionsInCustomizePage(query).then(res => {
-      let result;
-      if (!res.data.data.ZIP) { //未压缩情况下数据获取
-        result = res.data.data.DATA || [];
-      } else { //压缩情况下数据获取
-
-      }
+      let result=res.data.data.ZIP || (res.data.data.DATA || []);//未压缩情况下数据获取
       independent = result;
       const a = [];
       self[array].buttons.forEach((item) => {
@@ -224,9 +248,8 @@ class commonUtils {
         }
         // 普通btn（无child）的处理
         self[array].buttons.forEach((btn) => {
-          if (element.webname && element.webname == btn.webname) {
+          if (btn.webname == element.webname || btn.webname.includes(element.webname)) {
             btn.webid = element.webid;
-            btn.webname = element.webname;
             btn.text = element.webdesc;
             c.push(btn);
           }
@@ -250,9 +273,8 @@ class commonUtils {
         return;
       }
       btns.forEach(sItem => {
-        if (item.webname == sItem.webname) {
+        if (item.webname == sItem.webname || sItem.webname.includes(item.webname)) {
           sItem.webid = item.webid;
-          sItem.webname = item.webname;
           sItem.text = item.webdesc;
           ar.push(sItem);
         }
@@ -483,7 +505,7 @@ class commonUtils {
             fDitem.itemdata.display = item.display || 'No-text'; // 非必须，展示什么类型(eg.text、xml等)，非特殊类型不用写
             fDitem.itemdata.fkdisplay = item.fkdisplay || 'No-fkdisplay'; // 必须，复杂类型是什么类型(eg.drp、mrp等)
             fDitem.itemdata.isfk = item.isfk || false; // 必须
-            fDitem.itemdata.isnotnull = item.isnotnull || true; // 必须
+            fDitem.itemdata.isnotnull = item.isnotnull || false; // 必须
             fDitem.itemdata.name = item.name || 'No-name'; // 必须
             fDitem.itemdata.readonly = item.readonly || false; // 必须
             fDitem.itemdata.reftable = item.reftable || 'No-reftable'; // 非必须，mrp类型时必须设置(/p/cs/getTableQuery)

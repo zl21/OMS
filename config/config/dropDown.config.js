@@ -4,7 +4,6 @@ import publicDialogConfig from 'professionalComponents/common/js/publicDialog';
 class DropDownConfig {
 
   constructor() { }
-
   static configHandler(val, singleType = 0, eventList = []) {
     let self = DropDownConfig.target;
     this.singleType = singleType;
@@ -185,7 +184,7 @@ class DropDownConfig {
       case 'cancelHoldOrder':
         funName = 'cancelHoldOrderHandler';
         tips = 'd5';
-        paramsType = 1;
+        paramsType = 4;
         break;
     }
     const self = DropDownConfig.target;
@@ -241,6 +240,7 @@ class DropDownConfig {
             case 'modifyLogistics':
               objName = 'modifyLogisticsConfig';
               propertyName = 'CP_C_PHY_WAREHOUSE_ID';
+              params.CP_C_PHY_WAREHOUSE_ID = res.data.data;
               break;
             case 'changeWarehouse':
               objName = 'changeWarehouseConfig';
@@ -273,18 +273,19 @@ class DropDownConfig {
 
     switch (componentDataType) {
       case 'CP_C_PHY_WAREHOUSE_ID':
-        componentDataObj = {
-          ids,
-          cLogisticsId: 0,
-          platform: self.selection[0].PLATFORM,
-          [componentDataType]: self.selection[0][componentDataType],
-        };
+        componentDataObj = ids;
+          // IDS:ids.IDS,
+          // data:ids,
+          // cLogisticsId: 0,
+          // platform: self.selection[0].PLATFORM,
+          // [componentDataType]: self.selection[0][componentDataType],
+        // };
         break;
       case 'CP_C_SHOP_ID':
-        componentDataObj = {
-          ids,
+        componentDataObj = ids;
+          // data:ids
           // [componentDataType]: self.selection[0][componentDataType],
-        };
+        // };
         break;
       case 'ORDER_STATUS':
         componentDataObj = {
@@ -406,9 +407,46 @@ class DropDownConfig {
     this.successHandler(ids, 'holdOrderConfig', 'holdOrder', 'holdOrderDialog');
   }
   //取消hold单处理
-  static cancelHoldOrderHandler(ids) {
+  static cancelHoldOrderHandler(rows) {
     let self = DropDownConfig.target;
-    commonUtils.modalShow(self, 'e1', 'orderCenter.manualUnHoldOrder', { ids });
+    let list = [];
+    list = rows.map(it => ({ID:it.ID,BILL_NO:it.BILL_NO}));
+    commonUtils.modalShow(self, 'e1', 'orderCenter.manualUnHoldOrder', {ID_AND_BILL_NO_LIST:list} , 'all', function (res) {
+      if (res.data.code === 0) {
+        commonUtils.msgTips(self, 'success', res, 2);
+        self.selection = [];
+        self.query();
+      } else if (res.data.code == 1 && res.data.data) {
+        let tabData = res.data.data.map((row,index) => {
+          row.INDEX = ++index;
+          row.BILL_NO = row.objid;
+          row.RESULT_MSG = row.message;
+          return row
+        });
+        commonUtils.tipShow('confirm' , self , res , res.data.message , function(h){
+          return h('Table' , {
+            props:{
+              columns:[
+                {
+                  title:'序号',
+                  key:'INDEX'
+                },
+                {
+                  title:'单据编号',
+                  key:'BILL_NO'
+                },
+                {
+                  title:'失败原因',
+                  key:'RESULT_MSG'
+                }
+              ],
+              // data:res.data.data.CANCEL_ORDER_ERROR_INFOS
+              data:tabData
+            }
+          })
+        })
+      }
+    });
     self.btnConfig.loading = false;
   }
 

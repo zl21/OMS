@@ -68,7 +68,7 @@
         <div class="order-tab-title">
           <span>基础资料</span>
           <div class="title-sign">
-            <span v-for="(item,index) in componentData.order.ORDER_TAG" :style="{ color: item.clr}">
+            <span v-for="(item,index) in componentData.order.ORDER_TAG" :key="index" :style="{ color: item.clr}">
               {{item.text}}
             </span>
             <!-- <span class="one">合</span>
@@ -165,20 +165,21 @@
       <div class="order-tab-content">
         <div class="order-tab-title">
           <span>订单明细</span>
-          <span
-            v-if="isQh && isQhChild"
-            style="float: right;fontSize:12px;color:red;fontWeight:300;marginRight:8px;cursor:pointer;"
-            @click="checkCombination"
-          >
-            <Icon type="ios-repeat" />切换为sku商品显示
-          </span>
-          <span
-            v-if="!isQh && isQhChild"
-            style="float: right;fontSize:12px;color:red;fontWeight:300;marginRight:8px;cursor:pointer;"
-            @click="checkCombination"
-          >
-            <Icon type="ios-repeat" />切换为平台商品明细
-          </span>
+          <!-- 如果是组合商品不显示 -->
+          <div v-if="!is_combination" class="checkCombination">
+            <span
+              v-if="isQh && isQhChild"
+              @click="checkCombination"
+            >
+              <Icon type="ios-repeat" />切换为sku商品显示
+            </span>
+            <span
+              v-if="!isQh && isQhChild"
+              @click="checkCombination"
+            >
+              <Icon type="ios-repeat" />切换为平台商品明细
+            </span>
+          </div>
         </div>
         <CusOrderItem
           ref="cusOrderItem"

@@ -12,7 +12,7 @@ class BtnConfig {
       loading: false, // 按钮加载
       buttons: [
         {
-          text: window.vmI18n.t('btn.manualCreation'), // 手工创建
+          webname: 'manualCreation', // 手工创建
         },
         {
           webname: 'Newly added', // 新增
@@ -124,7 +124,7 @@ class BtnConfig {
           btnclick: () => this.btnMainHandler('forcedCompletion'),
         },
         {
-          webname: 'daochu_tuihuanhuo',
+          webname: 'daochu_tuihuanhuo,export_tuihuoruku,OcBOrderExportCmd',
           btnclick: () => this.btnMainHandler('exportClick'),
         },
         {
@@ -132,24 +132,7 @@ class BtnConfig {
           btnclick: () => BtnConfig.target.reset(),
         },
         {
-          webname: 'lookup_tuihuanhuo',
-          btnclick: () => BtnConfig.target.find(),
-        },
-        {
-          webname: 'lookup_kcjisuanhuancunchi',
-          btnclick: () => BtnConfig.target.find(),
-        },
-        {
-          webname: 'lookup_kucuntongbuduilie',
-          btnclick: () => BtnConfig.target.find(),
-        },
-        {
-          webname: 'lookup_qdkucunbiandongliushui', // 平台店铺库存变动流水 - 查找
-          btnclick: () => BtnConfig.target.find(),
-        },
-        // ------------  退货入库 -----------
-        {
-          webname: 'lookup_tuihuoruku',
+          webname: 'lookup_tuihuanhuo,lookup_kcjisuanhuancunchi,lookup_kucuntongbuduilie,lookup_qdkucunbiandongliushui,lookup_tuihuoruku',
           btnclick: () => BtnConfig.target.find(),
         },
         {
@@ -163,7 +146,6 @@ class BtnConfig {
           btnclick: () => this.btnMainHandler('manualMatch'),
         },
         {
-          text: window.vmI18n.t('btn.wrong_sending_forced_matching'), // 错发强制匹配
           webname: 'Mismatchingmandatorymatching_cuofa',
           btnclick: () => this.btnMainHandler('forceMatch'),
         },
@@ -173,10 +155,6 @@ class BtnConfig {
             BtnConfig.target.importTable.componentData = { tableName: 'OC_B_REFUND_IN' };
             BtnConfig.target.$children.find(item => item.name === 'importTable').openConfirm();
           }
-        },
-        {
-          webname: 'export_tuihuoruku',
-          btnclick: () => this.btnMainHandler('exportClick')
         },
         {
           webname: 'in_tuihuanhuo',
@@ -210,9 +188,9 @@ class BtnConfig {
           webname: 'cancelHoldOrder2', // hold单
           btnclick: () => this.btnMainHandler('cancelHoldOrder'), // 按钮点击事件
         },
-        {
+        /* {
           btnclick: () => this.btnMainHandler('invoiceNotice'), // 按钮点击事件
-        },
+        }, */
         {
           webname: 'Record invoices',
           btnclick: () => this.btnMainHandler('invoiceRecord'),
@@ -223,6 +201,7 @@ class BtnConfig {
         },
         {
           text: window.vmI18n.t('btn.orderBlocking'), // 订单拦截
+          webname: 'orderBlocking',
           btnclick: () => this.btnMainHandler('interceptOrder'),
         },
         {
@@ -230,8 +209,7 @@ class BtnConfig {
           btnclick: () => this.btnMainHandler('splitOrder'),
         },
         {
-          webname: 'New refund receipt',
-          // 新增退单跳转页面
+          webname: 'New refund receipt',// 新增退单跳转页面
           btnclick: () => this.btnMainHandler('addReturnOrder'),
         },
         {
@@ -246,15 +224,16 @@ class BtnConfig {
           webname: 'beizhudaoru',
           btnclick: () => this.noticeImport(), // 按钮点击事件
         },
-        {
+        /* {
           btnclick: () => this.btnMainHandler('changeShipmentPlatform'),
-        },
+        }, */
         {
           webname: 'batchReturnOrder',
           btnclick: () => this.btnMainHandler('batchReturnOrder'),
         },
         {
           text: window.vmI18n.t('btn.release_inventory'), // 释放库存
+          webname: 'release_inventory',
           btnclick: () => this.btnMainHandler('releaseInventory'),
         },
         {
@@ -282,16 +261,13 @@ class BtnConfig {
           webid: 3025,
         },
         {
-          webname: 'OcBOrderExportCmd', // 导出
-          btnclick: () => this.btnMainHandler('exportClick'),
-        },
-        {
           icon: 'iconfont iconbj_setup', // 按钮图标
+          webname: 'iconbj_setup',
           btnclick: () => this.setupHandler(),
         },
         {
           icon: 'iconfont iconbj_col', // 收藏图标
-          webname: 'isFavorite', // 必须写，用于匹配框架的收藏功能（作为key替换掉之前的中文判断）
+          webname: 'isFavorite',
           name: window.vmI18n.t('btn.collection'),
           btnclick: () => BtnConfig.target.setFavorite(),
         },
@@ -319,34 +295,48 @@ class BtnConfig {
         {
           webname: 'order_fund', // 返回
           btnclick: () => {
-            this.back('orderManager', 2627, 'panel_label.orderManager');
-            // 销毁当前实例
+            this.back('orderManager', 2627, 'panel_label.orderManager');// 销毁当前实例
             BtnConfig.target.$destroy();
           },
         },
         {
           webname: 'ManualMatching_save',
-          btnclick: () => {
-            BtnConfig.target.saveData();
-          }, // 按钮点击事件
+          btnclick: () => BtnConfig.target.saveData(),
         },
         {
           webname: 'Mismatchingmandatorymatching_return',
           btnclick: () => {
-            this.back('returnStoreageList', 2809, 'panel_label.returnTreasury');
-            // 销毁当前实例
+            this.back('returnStoreageList', 2809, 'panel_label.returnTreasury');// 销毁当前实例
             BtnConfig.target.$destroy();
-          }, // 按钮点击事件
+          },
         },
       ],
     };
-   }
+  }
 
 
 
   static config() {
     return BtnConfig.customConfig;
   }
+  // 单对象直接调方法;
+
+
+  /**
+   * 1. singleType：=1，为单对象页面，不需要做判断当前是否选中数据等操作
+   * 2. paramsType：=1，入参仅传ids--列表ID数组;
+   * 3. paramsType：=2，入参转成ids转换成fromData;
+   * 4. paramsType：=3，入参需将ids转成json字符串, 再转换成fromData;
+   * 5. paramsType：=4，入参传选择的selection--批量处理全属性数组;
+   * 6. paramsType：=5，？
+   * 7. paramsType：=6，导出, 可以跳转纪录选择逻辑;
+   * 
+   * 
+   * 1,2,3只取纪录ID属性, 其他传列表选择所有属性数组;
+   * 3, 5, 7 批量纪录进行操作; 其他单条操作;
+   * 6，导出, 可以跳转纪录选择逻辑;
+   * 7 定制弹窗;
+   */
   // 按钮处理程序类似
   btnMainHandler(type) {
     // 方法名 未选择提示 传参类型
@@ -386,9 +376,16 @@ class BtnConfig {
       case 'regenerateTheOrder':
       case 'manualMatch':
       case 'forceMatch':
+      case 'returnGoodsCancel':
+      case 'modifyRemark':
+      case 'modifySellerRemark':
+      case 'againWMS':
+      case 'forcedCompletion':
+      case 'batchOriginalReturn':
         funName = `${type}Handler`;
-        tips = 'k3';
+        tips = 'l0';
         paramsType = 7;
+        break;
       case 'holdOrder':
         funName = 'holdOrderHandler';
         tips = 'a8';
@@ -471,63 +468,21 @@ class BtnConfig {
         paramsType = 6;
         break;
       case 'returnGoodsModify':
-        funName = 'returnGoodsModifyHandler';
-        tips = 'l0';
-        paramsType = 1;
-        break;
       case 'returnGoodsCopy':
-        funName = 'returnGoodsCopyHandler';
+        funName = `${type}Handler`;
         tips = 'l0';
         paramsType = 1;
         break;
-      case 'returnGoodsCancel':
-        funName = 'returnGoodsCancelHandler';
-        tips = 'l0';
-        paramsType = 7;
-        break;
-      case 'modifyRemark':
-        funName = 'modifyRemarkHandler';
-        tips = 'l0';
-        paramsType = 7;
-        break;
-      case 'modifySellerRemark':
-        funName = 'modifySellerRemarkHandler';
-        tips = 'l0';
-        paramsType = 7;
-        break;
+
       case 'modifyReturnWarehouse':
         funName = 'modifyReturnWarehouseHandler';
         tips = 'm1';
         paramsType = 1;
         break;
-      case 'againWMS':
-        funName = 'againWMSHandler';
-        tips = 'l0';
-        paramsType = 7;
-        break;
-      case 'forcedCompletion':
-        funName = 'forcedCompletionHandler';
-        tips = 'l0';
-        paramsType = 7;
-        break;
-      case 'batchOriginalReturn':
-        funName = 'batchOriginalReturnHandler';
-        tips = 'l0';
-        paramsType = 7;
-        break;
     }
     const self = BtnConfig.target;
     BtnConfig.btnKey = type;
-    // 单对象直接调方法;
-    /**
-     * 1. singleType：=1，为单对象页面，不需要做判断当前是否选中数据等操作
-     * 2. paramsType：=1，入参仅传ids
-     * 3. paramsType：=2，？
-     * 4. paramsType：=3，？
-     * 5. paramsType：=4，？
-     * 6. paramsType：=5，？
-     * 7. paramsType：=6，？
-     */
+
     if (BtnConfig.singleType == 1) {
       let ids;
       if (self.tab1) {
@@ -1023,10 +978,7 @@ class BtnConfig {
             commonUtils.msgTips(self, 'warning', 'b1');
             return;
           }
-          if (
-            selectItem.IS_INRETURNING === 1 ||
-            selectItem.IS_INTERECEPT === 1
-          ) {
+          if (selectItem.IS_INRETURNING === 1 || selectItem.IS_INTERECEPT === 1) {
             commonUtils.msgTips(self, 'warning', 'b2');
             return;
           }

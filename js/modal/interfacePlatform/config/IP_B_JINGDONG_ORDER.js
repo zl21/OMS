@@ -94,7 +94,7 @@ export default {
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
-      self.$Message.warning(self.vmI18n.t('modalTips.be'));// 请选择需要下载的店铺
+      self.$Message.warning(window.vmI18n.t('modalTips.be'));// 请选择需要下载的店铺
       return false;
     }
     if (
@@ -102,7 +102,7 @@ export default {
         .length === 0
       && self.downLoadFormConfig.formValue.orderNum === ''
     ) {
-      self.$Message.warning(self.vmI18n.t('modalTips.bs'));// 请选择输入的日期或输入订单编号
+      self.$Message.warning(window.vmI18n.t('modalTips.bs'));// 请选择输入的日期或输入订单编号
       return false;
     }
     const param = {

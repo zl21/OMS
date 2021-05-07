@@ -71,14 +71,14 @@ export default {
   determine: async (self) => {
     const paramTime = self.downLoadFormConfig.formValue.timeArr || [];
     if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
-      self.$Message.warning(self.vmI18n.t('modalTips.be'));// 请选择需要下载的店铺
+      self.$Message.warning(window.vmI18n.t('modalTips.be'));// 请选择需要下载的店铺
       return false;
     }
     if (
       self.downLoadFormConfig.formValue.numNumber === ''
         && paramTime[0] === ''
     ) {
-      self.$Message.warning(self.vmI18n.t('modalTips.bx'));// 请输入需要下载的数字编号或修改时间中的一个
+      self.$Message.warning(window.vmI18n.t('modalTips.bx'));// 请输入需要下载的数字编号或修改时间中的一个
       return false;
     }
     const param = {

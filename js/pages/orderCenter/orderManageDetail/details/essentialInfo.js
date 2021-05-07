@@ -21,8 +21,9 @@ export default {
   data() {
     return {
       publicBouncedConfig: {},
-      isQh: true,
+      isQh: true, 
       isQhChild: true,
+      is_combination:false, // 是否为组合
       dialogs: DialogConfig.config(),
       queryList: [
         {
@@ -286,11 +287,18 @@ export default {
     // 修改备注
     modifyRemark(){
       console.log('修改备注');
+      this.dialogs.modifyRemark.data = {
+        ids: [this.$route.params.customizedModuleId]
+      };
+      setTimeout(() => {
+        this.$children[0].$children.find(item => item.name === 'modifyRemarkDialog').openConfirm();
+      }, 100);
     }
   },
   mounted() {
     let dataProps = this.componentData;
     this.tableConfig.objid = dataProps.order.ID || -1;
     this.tableConfig.order = dataProps.order || {};
+    this.is_combination = this.tableConfig.order.is_combination ? true : false
   }
 };

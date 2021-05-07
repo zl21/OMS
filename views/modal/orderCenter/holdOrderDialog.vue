@@ -64,7 +64,7 @@ export default holdOrderDialog;
   }
   .hold-form {
     /deep/ .ark-form-item {
-      margin-top: 0;
+      // margin-top: 0;
       &.releaseClass {
         .ark-form-item-label {
           color: transparent;

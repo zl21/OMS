@@ -1,103 +1,101 @@
-import businessButton from 'professionalComponents/businessButton';
-import businessActionTable from 'professionalComponents/businessActionTable';
-import businessForm from 'professionalComponents/businessForm';
-import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown';
-
+import businessButton from 'professionalComponents/businessButton'
+import businessActionTable from 'professionalComponents/businessActionTable'
+import businessForm from 'professionalComponents/businessForm'
+import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown'
+import axios from 'axios'
 export default {
   mixins: [listeningToKeydownMixin],
   data() {
     return {
       objid: '',
+      url: '',
       loading: false,
       onRowData: '', // 选中数据
       formConfig: {
         formValue: {
-          SKU_CODE: "",
-          SPU_CODE: "",
-          SPU_NAE:  ""
+          SKU_CODE: '',
+          SPU_CODE: '',
+          SPU_NAE: '',
         },
-        formData: [{
-            label: "SKU编码",
-            style: "dimSearch",
-            width: "8",
-            value: "SKU_CODE",
-            columns: ["value"],
+        formData: [
+          {
+            label: 'SKU编码',
+            style: 'dimSearch',
+            width: '8',
+            value: 'SKU_CODE',
+            columns: ['value'],
             AuotData: [], //匹配的选项
-            dimChange: search => {
+            dimChange: (search) => {
               //模糊查询的方法
-              console.log(search);
+              console.log(search)
               this.fuzzyquerybyak(search)
             },
-            dimEnter: val => {
+            dimEnter: (val) => {
               // 回车
-              console.log(val);
+              console.log(val)
             },
-            dimSelect: obj => {
+            dimSelect: (obj) => {
               // 将选中值赋值给value
-              console.log('选中之后：',obj);
+              console.log('选中之后：', obj)
             },
-            dimblur: () => {}
+            dimblur: () => {},
           },
           {
-            label: "SPU编码",
-            style: "dimSearch",
-            width: "8",
-            value: "SPU_CODE",
-            columns: ["ECODE"],
+            label: 'SPU编码',
+            style: 'dimSearch',
+            width: '8',
+            value: 'SPU_CODE',
+            columns: ['ECODE'],
             AuotData: [], //匹配的选项
-            dimChange: search => {
+            dimChange: (search) => {
               //模糊查询的方法
-              console.log('SPU编码:',search);
-              
+              console.log('SPU编码:', search)
             },
-            dimEnter: val => {
-              // 
-              console.log('SPU编码:',val);
-              
+            dimEnter: (val) => {
+              //
+              console.log('SPU编码:', val)
             },
-            dimSelect: obj => {
-              // 
-              console.log('SPU编码:',obj);
+            dimSelect: (obj) => {
+              //
+              console.log('SPU编码:', obj)
             },
-            dimblur: () => {}
+            dimblur: () => {},
           },
           {
-            style: "dimSearch", //输入框类型
-            label: "SPU名称", //输入框前文字
-            value: "SPU_NAE", //输入框的值
-            columns: ["ENAME"],
-            width: "8",
+            style: 'dimSearch', //输入框类型
+            label: 'SPU名称', //输入框前文字
+            value: 'SPU_NAE', //输入框的值
+            columns: ['ENAME'],
+            width: '8',
             AuotData: [], //匹配的选项
-            dimChange: search => {
+            dimChange: (search) => {
               //模糊查询的方法
-              console.log('SPU名称:',search);
-              
+              console.log('SPU名称:', search)
             },
-            dimEnter: val => {
-              // 
-              console.log('SPU名称:',val);
-              
+            dimEnter: (val) => {
+              //
+              console.log('SPU名称:', val)
             },
-            dimSelect: obj => {
-              // 
-              console.log('SPU名称:',obj);
+            dimSelect: (obj) => {
+              //
+              console.log('SPU名称:', obj)
             },
-            dimblur: () => {}
-          }
-        ]
+            dimblur: () => {},
+          },
+        ],
       },
       // searchBtn
-      searchBtn:{
+      searchBtn: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
             text: '搜索',
             btnclick: () => {
-              this.searchGift();
-            } // 按钮点击事件
-          }
-        ]
+              this.searchGift()
+            }, // 按钮点击事件
+          },
+        ],
       },
       tableConfig: {
         indexColumn: true,
@@ -126,18 +124,18 @@ export default {
           {
             key: 'GBCODE',
             title: window.vmI18n.t('table_label.internationalCode'), // '商品分类'
-          }
+          },
         ],
         data: [],
-        pageShow: false, // 控制分页是否显示
+        pageShow: true, // 控制分页是否显示
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
         width: '', // 表格宽度
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
-        total: 0, // 设置总条数
+        total: 10, // 设置总条数
         pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
-        pageSize: 10 // 每页条数
+        pageSize: 10, // 每页条数
       },
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
@@ -146,31 +144,107 @@ export default {
           {
             text: window.vmI18n.t('common.cancel'),
             btnclick: () => {
-              this.$parent.$parent.closeConfirm();
-            } // 按钮点击事件
+              this.$parent.$parent.closeConfirm()
+            }, // 按钮点击事件
           },
           {
             text: window.vmI18n.t('common.determine'),
             loading: false,
             btnclick: () => {
-              this.submit();
-            }
-          }
-        ]
-      }
-    };
+              if (this.type == "add") {       
+              this.saveOrderByPro() // 添加订单商品信息-确定添加
+              }else if(this.type == "del"){
+                this.deleteOrderGoods()
+              }else if(this.type == "replace"){
+                this.parseOrderList() //确认解析
+              } else {
+                this.submit()
+              }
+            },
+          },
+        ],
+      },
+      skuEcodes: '',
+      type:"", //组件传过来的类型，区分那里过来的
+    }
   },
   components: {
     businessActionTable,
     businessForm,
-    businessButton
+    businessButton,
   },
   props: {
-    componentData: {}
+    componentData: {},
   },
   methods: {
+    saveOrderByPro(){
+      let orderList = []
+      this.componentData.data.forEach((em) => {
+        let obj = {
+          orderId: em.ID, //订单id
+          billNo: em.BILL_NO, //单据编号
+        }
+        orderList.push(obj)
+      })
+
+      let data = {
+        skuEcodes: [this.skuEcodes],
+        orderList,
+      }
+      this.service.orderCenter.saveOrderByPro(data).then((res) => {
+          if (res.data.code == 0) {
+            this.$Message.success(res.data.message);
+            this.$parent.$parent.closeConfirm()
+          }
+      })
+    },
+    deleteOrderGoods(){
+      let orderList = []
+      this.componentData.data.forEach((em) => {
+        let obj = {
+          orderId: em.ID, //订单id
+          billNo: em.BILL_NO, //单据编号
+        }
+        orderList.push(obj)
+      })
+
+      let data = {
+        skuEcodes: [this.skuEcodes],
+        orderList,
+      }
+      this.service.orderCenter.deleteOrderGoods(data).then((res) => {
+          if (res.data.code == 0) {
+            this.$Message.success(res.data.message);
+            this.$parent.$parent.closeConfirm()
+          }
+      })
+    },
+    parseOrderList() {
+      let orderList = []
+      this.componentData.data.forEach((em) => {
+        let obj = {
+          orderId: em.ID, //订单id
+          billNo: em.BILL_NO, //单据编号
+        }
+        orderList.push(obj)
+      })
+
+      let data = {
+        skuEcodes: [this.skuEcodes],
+        orderList,
+      }
+      this.service.orderCenter.parseOrderList(data).then((res) => {
+        if (res.data.code == 0) {
+          this.$Message.success(res.data.message);
+          this.$parent.$parent.closeConfirm()
+        }
+      })
+    },
     // 选中某一项时触发
-    onSelect() {},
+    onSelect(v) {
+      //  this.skuEcodes = v[0].skuEcode
+      console.log(v)
+    },
     // 取消选中某一项时触发
     onSelectCancel() {},
     // 点击全选时触发
@@ -179,110 +253,176 @@ export default {
     onSelectAllCancel() {},
     // 单击某一行时触发
     onRowClick(row) {
-      this.onRowData = row;
+      console.log(row)
+      this.skuEcodes = row.skuEcode
+      this.onRowData = row
     },
     // 单击某二行时触发
     onRowDblclick() {},
     // 分页change 事件
     pageChange(val) {
-      this.tableConfig.current = val;
+      this.tableConfig.current = val
       // this.request(this.componentData);
     },
     // 切换分页条数
     pageSizeChange(val) {
-      this.tableConfig.pageSize = val;
+      this.tableConfig.pageSize = val
       // this.request(this.componentData);
     },
     tableDeleteDetail() {},
-    // 模糊搜索 
-    async fuzzyquerybyak(search){
-      let fixedcolumns = { };
-      const formData = new FormData();
-      formData.append('ak', search);
-      formData.append('colid', 171332);
-      formData.append('fixedcolumns', JSON.stringify(fixedcolumns));
-      const {data:{data}} = await this.service.common.fuzzyquerybyak(formData);
-      this.formConfig.formData[0].AuotData = data
+    // 模糊搜索
+    async fuzzyquerybyak(search) {
+      if (this.url == '') {
+        let fixedcolumns = {}
+        const formData = new FormData()
+        formData.append('ak', search)
+        formData.append('colid', 171332)
+        formData.append('fixedcolumns', JSON.stringify(fixedcolumns))
+        const {
+          data: { data },
+        } = await this.service.common.fuzzyquerybyak(formData)
+        this.formConfig.formData[0].AuotData = data
+      }
     },
     // 添加赠品
     add(obj) {
       // 判断是否是要加一行明细  还是更新数量
-      const data = this.tableConfig.data;
-      const d = data.find(item => item.ECODE === obj.ECODE);
+      const data = this.tableConfig.data
+      const d = data.find((item) => item.ECODE === obj.ECODE)
       if (d) {
         // d.QTY = parseInt(d.QTY) + parseInt(obj.QTY);
-        d.QTY = parseInt(obj.QTY); // 计算逻辑与列表页添加赠品同步
-        this.tableConfig.data = [...data];
-        this.onRowData = this.tableConfig.data[0];
+        d.QTY = parseInt(obj.QTY) // 计算逻辑与列表页添加赠品同步
+        this.tableConfig.data = [...data]
+        this.onRowData = this.tableConfig.data[0]
       } else {
         // this.tableConfig.data.push(obj);
-        this.tableConfig.data = [obj];
-        this.onRowData = this.tableConfig.data[0];
+        this.tableConfig.data = [obj]
+        this.onRowData = this.tableConfig.data[0]
       }
     },
     // 搜索赠品
-    searchGift(){
-      console.log('搜索赠品');
+    searchGift() {
+      console.log(this.formConfig.formValue)
+      console.log('搜索赠品')
     },
     // 提交
     async submit() {
-      const self = this;
+      const self = this
       if (!self.onRowData) {
-        self.$Message.error(window.vmI18n.t('modalTips.eg')); // '无赠品可添加！'
-        return;
+        self.$Message.error(window.vmI18n.t('modalTips.eg')) // '无赠品可添加！'
+        return
       }
-      const ids = [];
-      ids.push(self.objid);
-      this.$comUtils.setLoading(true);
+      const ids = []
+      ids.push(self.objid)
+      this.$comUtils.setLoading(true)
       const param = {
-        ids
-      };
-      this.btnConfig.buttons[0].loading = true;
-      const { data: { code, data, message } } = await this.service.orderCenter.batchAddGoods(param);
+        ids,
+      }
+      this.btnConfig.buttons[0].loading = true
+      const {
+        data: { code, data, message },
+      } = await this.service.orderCenter.batchAddGoods(param)
       if (code === 0) {
-        self.$Message.success(message);
-        self.$parent.$parent.$parent.$parent.autoRefresh();
-        self.$parent.$parent.closeConfirm();
-        this.btnConfig.buttons[0].loading = false;
+        self.$Message.success(message)
+        self.$parent.$parent.$parent.$parent.autoRefresh()
+        self.$parent.$parent.closeConfirm()
+        this.btnConfig.buttons[0].loading = false
       } else {
-        this.btnConfig.buttons[0].loading = false;
+        this.btnConfig.buttons[0].loading = false
         if (code === -1) {
           self.$Modal.confirm({
             title: message,
             width: 500,
             mask: true,
-            render: h => {
+            render: (h) => {
               if (data) {
                 return h('Table', {
                   props: {
                     columns: [
                       {
                         title: window.vmI18n.t('modalTitle.a6'), // '提示信息',
-                        key: 'message'
-                      }
+                        key: 'message',
+                      },
                     ],
-                    data
-                  }
-                });
+                    data,
+                  },
+                })
               }
-              return false;
-            }
-          });
+              return false
+            },
+          })
         }
       }
-      this.$comUtils.setLoading();
+      this.$comUtils.setLoading()
     },
     // 回车
     onKeyDown(e) {
       if (e.keyCode == 27) {
-        this.$parent.$parent.closeConfirm();
+        this.$parent.$parent.closeConfirm()
       }
-    }
+    },
+    selectSkuProBySkuEcodeList(url) {
+      let data = {
+        skuEcode: this.formConfig.formValue.SKU_CODE,
+        spuEcode: this.formConfig.formValue.SPU_CODE,
+        spuEname: this.formConfig.formValue.SPU_NAE,
+        isGroup: 'Y',
+        groupType: 2,
+        size: 10,
+        current: 1,
+      }
+      axios({
+        method: 'post',
+        url: '/r3-ps' + url,
+        data,
+      }).then((res) => {
+        this.tableConfig.total = res.data.data.total
+
+        this.tableConfig.columns = [
+          // {
+          //   key: 'index',
+          //   title: '序号',
+          // },
+          {
+            key: 'skuEcode',
+            title: 'SKU编码',
+          },
+          {
+            key: 'spuEcode',
+            title: 'SPU编码',
+          },
+          {
+            key: 'spuEname',
+            title: 'SPU名称',
+          },
+          {
+            key: 'skuEname',
+            title: 'SKU名称',
+          },
+          {
+            key: 'brandEname',
+            title: '品牌',
+          },
+          {
+            key: 'classifyEname',
+            title: '商品分类',
+          },
+        ]
+        this.tableConfig.data = res.data.data.records
+      })
+    },
   },
   mounted() {
-    const self = this;
+    const self = this
+ console.log(this.componentData);
+    this.type = this.componentData.type
     if (this.componentData && this.componentData.ID) {
-      self.objid = this.componentData.ID;
+      self.objid = this.componentData.ID
     }
-  }
-};
+    if (this.componentData && this.componentData.url) {
+      this.url = this.componentData.url
+
+      this.selectSkuProBySkuEcodeList(this.componentData.url)
+    }
+  },
+}
