@@ -142,7 +142,7 @@ export default {
                 this.$store.commit('customize/TabOpen', {
                   id: 2201,
                   type: 'action',
-                  name: 'SKUADDOREDIT',
+                  name: 'PS_C_SKU',
                   label: '商品SKU编辑', // 额外退款编辑
                   query: Object.assign({
                     spuid: this.spuid,
