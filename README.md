@@ -329,6 +329,7 @@ R3.launchApplication({
 | v1.2.7  | funBtn-批量操作判断                                   |
 | v1.2.8  | 新增/复制迁移                                   |
 | v1.2.9  | labelName、drp必填等属性                                   |
+| v1.2.10  | 必要的labelName补充 (元数据若配置的是'网页链接'则需前端配置labelName，若是动作定义则不用配置) |
 
 #### Extends-Api 版本说明
 
