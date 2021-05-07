@@ -102,7 +102,8 @@ export default {
 
     // 获取退供收货仓
     const query = new FormData();
-    query.append('searchdata', JSON.stringify({"table":"CP_C_WAREHOUSE","startindex":0,"range":100,"fixedcolumns":{"ISACTIVE":["=Y"]},"column_include_uicontroller":true,"isolr":false}));
+    // query.append('searchdata', JSON.stringify({"table":"CP_C_WAREHOUSE","startindex":0,"range":100,"fixedcolumns":{"ISACTIVE":["=Y"]},"column_include_uicontroller":true,"isolr":false}));
+    query.append('searchdata', JSON.stringify({"table":"CP_C_WAREHOUSE","startindex":0,"range":100,"fixedcolumns":{"STORETYPE":["=11"],"ISACTIVE":["=Y"]},"column_include_uicontroller":true,"isolr":false}));
     this.service.common.QueryList(query).then(res => {
 
       let arr = []
