@@ -60,8 +60,8 @@ export default {
               const params = new FormData();
               params.append('param', JSON.stringify({"ids": _this.idArray, "cpCStoreReceiptId": _this.receiptFormConfig.formValue.cpCStoreReceiptId, "table": "IP_B_VIP_RETURN_ORDER"}));
               _this.service.interfacePlatform.modificationReturnWarehouse(params).then(res => {
-                if (res.code === 0) {
-                  _this.$Message.success('修改收货仓成功');
+                if (res.data.code === 0) {
+                  _this.$Message.success(res.data.message);
                   this.$emit('closeActionDialog');
                 }
               })
