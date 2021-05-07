@@ -240,9 +240,49 @@ export default {
         // _this.$parent.$parent.$parent.provinceSynchronous();
         _this.$parent.$parent.closeConfirm();
         _this.$Message.success(res.data.message);
+        _this.$parent.$parent.$parent.query();
+      } else if (code == 1 && data.data) {
+        let tabData = data.data.map((row, index) => {
+          row.INDEX = ++index;
+          row.BILL_NO = row.objidno;
+          row.RESULT_MSG = row.message;
+          return row;
+        });
+        this.$OMS2.omsUtils.tipShow(
+          "confirm",
+          self,
+          data,
+          message,
+          function (h) {
+            return h("Table", {
+              props: {
+                columns: [
+                  {
+                    title: "序号",
+                    key: "INDEX",
+                  },
+                  {
+                    title: "ID",
+                    key: "objid",
+                  },
+                  {
+                    title: "单据编号",
+                    key: "BILL_NO",
+                  },
+                  {
+                    title: "失败原因",
+                    key: "RESULT_MSG",
+                  },
+                ],
+                data: tabData,
+              },
+            });
+          }
+        );
       } else {
-        const err = res.data.message || window.vmI18n.t("modalTips.z3");
-        _this.$Message.error(err);
+        // 走框架报错
+        // const err = res.data.message || window.vmI18n.t("modalTips.z3");
+        // _this.$Message.error(err);
       }
       _this.loading = false;
     },

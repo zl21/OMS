@@ -321,6 +321,7 @@ R3.launchApplication({
 | v1.1.99  | 迁移店铺授权，完善零售发货单批量操作的弹窗                                     |
 | v1.2.0  | initFormConfig复杂类型isnotnull默认false                                     |
 | v1.2.1  | funBtn webname 补充                                     |
+| v1.2.2  | changeWarehouse入参调整                                    |
 
 #### Extends-Api 版本说明
 

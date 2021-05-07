@@ -227,7 +227,7 @@ export default {
         data: { data, code, message },
       } = await self.service.orderCenter.updateWarehouse({
         IDS: self.componentData.IDS,
-        CP_C_LOGISTICS_ID: +self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID,
+        CP_C_PHY_WAREHOUSE_ID: +self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID,
       });
       self.isShowFromLoading = false;
       if (code === 0) {
@@ -280,6 +280,8 @@ export default {
             });
           }
         );
+      } else {
+        // 走框架的报错
       }
       self.loading = false;
     },
