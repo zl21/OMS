@@ -2,7 +2,7 @@ import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
-import orderItem from '@/views/pages/orderCenter/orderManageDetail/details/orderItem';
+import orderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem';
 import loading from 'professionalComponents/loading';
 import dateUtil from '@/assets/js/__utils__/date.js';
 

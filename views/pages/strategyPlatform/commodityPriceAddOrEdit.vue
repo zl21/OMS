@@ -65,10 +65,10 @@
 </template>
 
 <script>
-  import commodityPriceAddOrEdit from '_/js/pages/strategyPlatform/commodityPriceAddOrEdit.js';
+  import commodityPriceAddOrEdit from '@/js/pages/strategyPlatform/commodityPriceAddOrEdit';
 
   export default commodityPriceAddOrEdit;
 </script>
 <style lang="less" scoped>
-@import '~_/css/pages/strategyPlatform/commodityPriceAddOrEdit.less';
+@import '~@/css/pages/strategyPlatform/commodityPriceAddOrEdit.less';
 </style>

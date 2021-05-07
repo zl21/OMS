@@ -85,10 +85,10 @@
 </template>
 
 <script>
-  import scheduleAddOrEdit from '_/js/pages/strategyPlatform/scheduleAddOrEdit.js';
+  import scheduleAddOrEdit from '@/js/pages/strategyPlatform/scheduleAddOrEdit';
 
   export default scheduleAddOrEdit;
 </script>
 <style lang="less" scoped>
-@import '~_/css/pages/strategyPlatform/scheduleAddOrEdit.less';
+@import '~@/css/pages/strategyPlatform/scheduleAddOrEdit.less';
 </style>

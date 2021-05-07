@@ -3,7 +3,7 @@ import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessActionTable from 'professionalComponents/businessActionTable';
-import orderItem from '@/views/pages/orderCenter/orderManageDetail/details/orderItem';
+import orderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem';
 
 export default {
   name: 'WarehouseLogisticsAddOrEdit',

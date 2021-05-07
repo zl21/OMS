@@ -5,7 +5,7 @@ import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessDialog from 'professionalComponents/businessDialog';
 import myInput from 'professionalComponents/fkinput.vue';
-import orderItem from '@/views/pages/orderCenter/orderManageDetail/details/orderItem';
+import orderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem';
 import loading from 'professionalComponents/loading';
 import dateUtil from '@/assets/js/__utils__/date.js';
 Vue.component('myInput', myInput)

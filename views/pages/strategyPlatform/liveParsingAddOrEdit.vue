@@ -100,10 +100,10 @@
 </template>
 
 <script>
-  import liveParsingAddOrEdit from '_/js/pages/strategyPlatform/liveParsingAddOrEdit.js';
+  import liveParsingAddOrEdit from '@/js/pages/strategyPlatform/liveParsingAddOrEdit.js';
   export default liveParsingAddOrEdit;
 </script>
 
 <style lang="less" scoped>
-@import '~_/css/pages/strategyPlatform/liveParsingAddOrEdit.less';
+@import '~@/css/pages/strategyPlatform/liveParsingAddOrEdit.less';
 </style>

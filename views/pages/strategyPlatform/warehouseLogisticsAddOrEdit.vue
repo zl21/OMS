@@ -70,10 +70,10 @@
 </template>
 
 <script>
-  import warehouseLogisticsAddOrEdit from '_/js/pages/strategyPlatform/warehouseLogisticsAddOrEdit.js';
+  import warehouseLogisticsAddOrEdit from '@/js/pages/strategyPlatform/warehouseLogisticsAddOrEdit';
 
   export default warehouseLogisticsAddOrEdit;
 </script>
 <style lang="less" scoped>
-@import '~_/css/pages/strategyPlatform/warehouseLogisticsAddOrEdit.less';
+@import '~@/css/pages/strategyPlatform/warehouseLogisticsAddOrEdit.less';
 </style>
