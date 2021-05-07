@@ -96,7 +96,7 @@ class DropDownConfig {
         break;
     }
   }
-  
+
   static async canceledOrderCopyHander() {
     let self = DropDownConfig.target;
     self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
@@ -242,7 +242,7 @@ class DropDownConfig {
       case 'holdOrder':
         funName = 'holdOrderHandler';
         tips = 'e2';
-        paramsType = 1;
+        paramsType = 4;
         break;
 
       case 'shortageSplit':
@@ -333,6 +333,7 @@ class DropDownConfig {
       });
   }
 
+    // this.successHandler(rows, 'holdOrderConfig', 'holdOrder', 'holdOrderDialog');
   static successHandler(ids, objName, componentDataType, tableType) {
     let self = DropDownConfig.target;
     self.publicBouncedConfig = JSON.parse(
@@ -342,19 +343,8 @@ class DropDownConfig {
 
     switch (componentDataType) {
       case 'CP_C_PHY_WAREHOUSE_ID':
-        componentDataObj = ids;
-          // IDS:ids.IDS,
-          // data:ids,
-          // cLogisticsId: 0,
-          // platform: self.selection[0].PLATFORM,
-          // [componentDataType]: self.selection[0][componentDataType],
-        // };
-        break;
       case 'CP_C_SHOP_ID':
         componentDataObj = ids;
-          // data:ids
-          // [componentDataType]: self.selection[0][componentDataType],
-        // };
         break;
       case 'ORDER_STATUS':
         componentDataObj = {
@@ -386,11 +376,6 @@ class DropDownConfig {
         self.publicBouncedConfig.componentData = {
           a_1: param,
           a_2: ids,
-        };
-        break;
-      case 'holdOrder':
-        componentDataObj = {
-          ids,
         };
         break;
       default :
@@ -478,8 +463,8 @@ class DropDownConfig {
     );
   }
   //hold单处理
-  static holdOrderHandler(ids) {
-    this.successHandler(ids, 'holdOrderConfig', 'holdOrder', 'holdOrderDialog');
+  static holdOrderHandler(rows) {
+    this.successHandler(rows, 'holdOrderConfig', 'holdOrder', 'holdOrderDialog');
   }
   //取消hold单处理
   static cancelHoldOrderHandler(rows) {

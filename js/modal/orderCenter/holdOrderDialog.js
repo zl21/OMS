@@ -1,8 +1,10 @@
 import reForm from 'professionalComponents/businessForm';
 import businessButton from 'professionalComponents/businessButton';
+import loading from "professionalComponents/loading";
 
 export default {
   components: {
+    loading,
     reForm,
     businessButton
   },
@@ -13,6 +15,7 @@ export default {
     return {
       vmI18n: window.vmI18n,
       holdBtnClass: '',
+      loading: false,
       formConfig: {
         formValue: {
           HOLD_ORDER_REASON: '',
@@ -179,9 +182,8 @@ export default {
   methods: {
     // 确定请求
     async confirmInfo(data) {
-      this.$comUtils.setLoading(true);
+      this.loading = true;
       const res = await this.service.orderCenter.managementOrderHold(data);
-      this.$comUtils.setLoading();
       if (res.data.code === 0) {
         this.$Message.success(res.data.message); // 'HOLD单成功'
         if (this.$route.params.customizedModuleId == 2307) {
@@ -228,6 +230,7 @@ export default {
       } else {
         // this.$Message.error(res.data.message);
       }
+      this.loading = false;
     },
     // 确定事件校验和参数赋值
     confirmVerifyAssignment() {
@@ -283,8 +286,11 @@ export default {
         this.$message.error(requestData.message);
         return
       }
+      let rows = this.componentData.ids;
+      let list = [];
+      list = rows.map(it => ({ ID: it.ID, BILL_NO: it.BILL_NO }));
       const params = {
-        ids: this.componentData.ids,
+        ID_AND_BILL_NO_LIST: list,
         ...requestData.params
       };
       params.HOLD_ORDER_REASON *= 1;
