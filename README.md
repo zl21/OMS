@@ -328,6 +328,7 @@ R3.launchApplication({
 | v1.2.6  | 迁移策略定制页面                                   |
 | v1.2.7  | funBtn-批量操作判断                                   |
 | v1.2.8  | 新增/复制迁移                                   |
+| v1.2.9  | labelName、drp必填等属性                                   |
 
 #### Extends-Api 版本说明
 

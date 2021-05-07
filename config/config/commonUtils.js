@@ -504,10 +504,10 @@ class commonUtils {
             fDitem.itemdata.display = item.colname || 'No-colname'; // 必须
             fDitem.itemdata.display = item.display || 'No-text'; // 非必须，展示什么类型(eg.text、xml等)，非特殊类型不用写
             fDitem.itemdata.fkdisplay = item.fkdisplay || 'No-fkdisplay'; // 必须，复杂类型是什么类型(eg.drp、mrp等)
-            fDitem.itemdata.isfk = item.isfk || false; // 必须
-            fDitem.itemdata.isnotnull = item.isnotnull || false; // 必须
+            fDitem.itemdata.isfk = item.isfk; // 必须
+            fDitem.itemdata.isnotnull = item.isnotnull; // 必须
             fDitem.itemdata.name = item.name || 'No-name'; // 必须
-            fDitem.itemdata.readonly = item.readonly || false; // 必须
+            fDitem.itemdata.readonly = item.readonly; // 必须
             fDitem.itemdata.reftable = item.reftable || 'No-reftable'; // 非必须，mrp类型时必须设置(/p/cs/getTableQuery)
             fDitem.itemdata.reftableid = item.reftableid || 'No-reftableid'; // 同reftable
             fDitem.itemdata.valuedata = item.valuedata || ''; // 必须，展示的值
