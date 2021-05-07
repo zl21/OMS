@@ -322,6 +322,7 @@ R3.launchApplication({
 | v1.2.0  | initFormConfig复杂类型isnotnull默认false                                     |
 | v1.2.1  | funBtn webname 补充                                     |
 | v1.2.2  | changeWarehouse入参调整                                    |
+| v1.2.3  | 迁移4个策略定制页面                                    |
 
 #### Extends-Api 版本说明
 
