@@ -8,6 +8,10 @@ class DropDownConfig {
     let self = DropDownConfig.target;
     this.singleType = singleType;
     switch (val) {
+      case 'manualCreation': {
+        this.manualCreationHander();
+        break;
+      }
       case 'Newly added': {
         // 新增
         this.newOrderHander();
@@ -84,6 +88,15 @@ class DropDownConfig {
         })
         break;
     }
+  }
+  static manualCreationHander() {
+    let self = DropDownConfig.target;
+    self.$store.commit('global/tabOpen', {
+      type: 'C',
+      customizedModuleName: 'OC_B_ORDER_VIRTUAL_TABLE',
+      label: '零售发货单新增',
+      customizedModuleId: 'New',
+    });
   }
   //新增订单处理
   static newOrderHander() {
