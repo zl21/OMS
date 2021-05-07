@@ -8,12 +8,19 @@ class DropDownConfig {
     let self = DropDownConfig.target;
     this.singleType = singleType;
     switch (val) {
+      case 'ORDER_COPY_CANCELED_ORDER': {
+        this.canceledOrderCopyHander();
+        break;
+      }
+      case 'ORDER_COPY_AF_SALE': {
+        this.afterSaleCopyHander();
+        break;
+      }
       case 'manualCreation': {
         this.manualCreationHander();
         break;
       }
       case 'Newly added': {
-        // 新增
         this.newOrderHander();
         break;
       }
@@ -89,6 +96,55 @@ class DropDownConfig {
         break;
     }
   }
+  
+  static async canceledOrderCopyHander() {
+    let self = DropDownConfig.target;
+    self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+    if (self.selection.length != 1) {
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'a8');
+      return;
+    }
+    const IDS = self.$OMS2.omsUtils.sonList(self.selection, 'ID');
+    const {
+      data: { code, data, message },
+    } = await self.service.orderCenter.billOcBOrderCopy({
+      IDS,
+      TYPE: 1,
+      COPY_REASON_TYPE: 0,
+    });
+    if (code == 0) {
+      self.$store.commit('customize/TabOpen', {
+        id: 2307,
+        type: 'action',
+        name: 'OC_B_ORDER_VIRTUAL_TABLE',
+        label: '零售发货单新增',
+        query: Object.assign({
+          copyType: 1,
+          sourceId: self.selection[0].ID,
+        }),
+      });
+    } else {
+      console.log(message);
+    }
+  }
+
+  static afterSaleCopyHander() {
+    let self = DropDownConfig.target;
+    self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+    if (self.selection.length != 1) {
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'a8');
+      return;
+    }
+    self.publicBouncedConfig.name = 'ORDER_COPY_AF_SALE';
+    self.publicBouncedConfig.url = 'modal/orderCenter/afterSaleCopy';
+    self.publicBouncedConfig.confirmTitle = '售后复制';
+    self.publicBouncedConfig.componentData = { id: self.selection[0].ID };
+    self.publicBouncedConfig.width = 400;
+    setTimeout(() => {
+      self.$children.find((item) => item.name === 'ORDER_COPY_AF_SALE').openConfirm();
+    }, 100);
+  }
+
   static manualCreationHander() {
     let self = DropDownConfig.target;
     self.$store.commit('global/tabOpen', {

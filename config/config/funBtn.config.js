@@ -12,6 +12,12 @@ class BtnConfig {
       loading: false, // 按钮加载
       buttons: [
         {
+          webname: 'ORDER_COPY_CANCELED_ORDER', // 取消单复制
+        },
+        {
+          webname: 'ORDER_COPY_AF_SALE', // 售后复制
+        },
+        {
           webname: 'manualCreation', // 手工创建
         },
         {
