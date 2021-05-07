@@ -116,8 +116,6 @@ export default {
       self.receiptFormConfig.formData[0].options = arr
     })
 
-    const dom = document.getElementsByClassName('ark-modal-content')[0]
-    dom.style.marginLeft = (document.body.clientWidth - 460)/2 + 'px'
   },
   methods: {
       
