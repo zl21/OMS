@@ -1030,6 +1030,7 @@ class BtnConfig {
       if (![2, 1, 3].includes(item.ORDER_STATUS)) {
         // 当前状态异常，不允许操作！
         commonUtils.msgTips(self, 'warning', 'd9');
+        self.btnConfig.loading = false;
         return;
       }
     }
