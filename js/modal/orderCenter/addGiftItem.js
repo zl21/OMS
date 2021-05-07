@@ -21,7 +21,7 @@ export default {
           {
             label: 'SKU编码',
             style: 'dimSearch',
-            width: '8',
+            width: '7',
             value: 'SKU_CODE',
             columns: ['value'],
             AuotData: [], //匹配的选项
@@ -43,7 +43,7 @@ export default {
           {
             label: 'SPU编码',
             style: 'dimSearch',
-            width: '8',
+            width: '7',
             value: 'SPU_CODE',
             columns: ['ECODE'],
             AuotData: [], //匹配的选项
@@ -66,7 +66,7 @@ export default {
             label: 'SPU名称', //输入框前文字
             value: 'SPU_NAE', //输入框的值
             columns: ['ENAME'],
-            width: '8',
+            width: '7',
             AuotData: [], //匹配的选项
             dimChange: (search) => {
               //模糊查询的方法

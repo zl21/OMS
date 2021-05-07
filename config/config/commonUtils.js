@@ -84,6 +84,7 @@ class commonUtils {
       titleAlign: 'left',
       mask: true,
       draggable: true,
+      className:'ark-dialog',
       keyDown: (event) => {
         if ([27, 13].includes(event.keyCode)) {
           self.$Modal.remove();
