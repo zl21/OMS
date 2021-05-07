@@ -27,9 +27,6 @@ export default {
     }
 
   },
-  created() {
-    console.log(this);
-  },
   watch: {
     itemdata: {
       handler: function (val, oldval) {
@@ -67,6 +64,7 @@ export default {
         col: this.col,
         rowId: this.rowId
       },
+      fkDimData:[],
       isak: 0,
       active: -1,
       visible: 1,
@@ -168,7 +166,6 @@ export default {
     indexClick(item, rowindex) {
       let _self = this
       // _self.active = index
-
       if (_self.single) {
         _self.fkobj.desc = []
         _self.fkobj.idArr = []
@@ -181,6 +178,7 @@ export default {
 
     },
     checkBoxChange(event, rowindex, item) {
+      console.log(event, rowindex, item);
       let _self = this
       if (!_self.single) {
         // _self.submitClick()
@@ -249,7 +247,7 @@ export default {
       this.visible = index
       this.searchTable(this.fkDimVal ? true : false)
     },
-    colorChange(item, rowindex, event) {
+    colorChange(item, rowindex) {
       let _self = this
       // _self.active = index
       if (!_self.single) {
@@ -257,26 +255,37 @@ export default {
       } else {
         _self.fkobj.desc = []
         _self.fkobj.idArr = []
-
         _self.fkobj.idArr.push(item[0])
         _self.fkobj.desc.push(item[_self.isak])
         _self.fkobj.item = _self.AllRows[rowindex]
         _self.fkobj.tabth = _self.tabth[_self.isak];
         _self.$emit('pop', _self.fkobj)
       }
-
     },
-    fkDimSearch() {
+    // 模糊搜索
+    fkDimSearch(val) {
       this.visible = 1
-      clearTimeout(this.searchTimeout)
-      this.searchTimeout = setTimeout(() => {
-        this.searchTable(true)
-      }, 500)
+      let _self = this;
+      let params = new FormData();
+      params.append('ak',val)
+      params.append('colid',this.fkid)
+      params.append('fixedcolumns',JSON.stringify({}))
+      $network.post('/p/cs/fuzzyquerybyak',params,{ serviceId: _self.itemdata.serviceId || 'ad-app' })
+      .then((res) => {
+        this.fkDimData = res.data.data;
+      })
     },
-    searchTable(fkDim) {
+    // 模糊搜索选中
+    vagenChange(option){
+      let _self = this
+      _self.fkobj.idArr.push(option.value)
+      _self.fkobj.desc.push(option.label)
+      _self.$emit('pop', _self.fkobj)
+    },
+    searchTable() {
       let url = '/p/cs/QueryList';
       let _self = this;
-      const params = new FormData();
+      let params = new FormData();
       if (this.tabrow.length > 0) {
       } else {
         this.dataEmpty.flag = true
@@ -286,29 +295,11 @@ export default {
       this.formObj.startindex = (this.visible - 1) * this.range
       this.formObj.range = this.range
       this.formObj.refcolid = this.fkid;
-      if (fkDim) {
-        // 下拉多选处理（模糊搜索）
-        if (this.fkDimVal) {
-          // fkDimVal:输入框输入的内容
-          this.formObj.ak = this.fkDimVal.toString().toLocaleUpperCase()
-          params.append('ak',this.formObj.ak)
-          params.append('colid',this.formObj.refcolid)
-          params.append('fixedcolumns',JSON.stringify({}))
-          if (this.itemdata && this.itemdata.fkdisplay == 'mrp') url = '/p/cs/fuzzyquerybyak'
-        } else {
-          delete this.formObj.ak
-        }
-      } else {
-        params.append('searchdata', JSON.stringify(this.formObj));
-      }
-      // this.service.common.QueryList(params,{ serviceId: _self.itemdata.serviceId || 'ad-app' })
+      params.append('searchdata', JSON.stringify(this.formObj));
       $network.post(url,params,{ serviceId: _self.itemdata.serviceId || 'ad-app' })
       .then((res) => {
-        console.log(res);
         if (res.data.code == 0) {
-          console.log(_self.version);
           let dataArr = _self.version === '1.4' ? res.data.data : res.data.datas
-          console.log(dataArr);
           _self.tabrow = []
           _self.tabth = dataArr.tabth
           _self.totalRowCount = dataArr.totalRowCount
@@ -365,10 +356,11 @@ export default {
 
     }
   },
-  created: function () {
+  created() {
     let _self = this
     _self.ChineseDictionary = ChineseDictionary
-
+    console.log(_self.itemdata);
+    // 判断是否是外键关联
     if (_self.fkid) {
       _self.formObj.refcolid = _self.fkid
     } else {
@@ -384,8 +376,6 @@ export default {
       _self.formObj.precolnameslist = [_self.refcolprem];
     }
 
-    // C_UP_ID 99
-    // _self.item = {C_UP_ID:99}
     if (_self.item) {
       _self.formObj.fixedcolumns = _self.item
     }

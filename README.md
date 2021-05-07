@@ -155,3 +155,4 @@
 | v1.1.9 |  fkinput
 | v1.1.10 |  fktable-mrp模糊搜索
 | v1.1.11 |  fktable解决key重复问题
+| v1.1.12 |  fktable添加模糊搜索

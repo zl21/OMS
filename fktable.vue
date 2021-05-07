@@ -1,12 +1,22 @@
 <template>
   <div class="fktable">
-    <input
+    <!-- <input
       v-if="inputBox == true"
       type="text"
       id="fkDim"
       v-model="fkDimVal"
       @input="fkDimSearch()"
-    />
+    /> -->
+    <Select
+        v-if="inputBox == true"
+        v-model="fkDimVal"
+        filterable
+        remote
+        @on-change="vagenChange"
+        :label-in-value = true
+        :remote-method="fkDimSearch">
+        <Option v-for="(option, index) in fkDimData" :value="option.id" :key="index">{{option.value}}</Option>
+    </Select>
     <div class="table">
       <table>
         <thead>
