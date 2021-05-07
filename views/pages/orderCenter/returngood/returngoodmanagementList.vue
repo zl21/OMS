@@ -121,30 +121,9 @@
       :component-data="importTable.componentData"
       :basePathName="importTable.basePathName"
     />
-    <!-- 导出 -->
-    <!-- 警告 -->
-    <Modal
-      v-model="warningModal"
-      :title="vmI18n.t('common.warning')"
-      width="420"
-      :mask="true"
-      @on-ok="warningOk"
-    >
-      <!-- 当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？ -->
-      <p>{{ vmI18n.t("modalTips.e3") }}</p>
-    </Modal>
-    <Modal
-      v-model="virtualWarehouseModal"
-      :title="vmI18n.t('modalTitle.manualWarehous')"
-      width="420"
-      :mask="true"
-      @on-ok="virtualWarehouseLibrary"
-    >
-      <!-- <p>当前的操作会执行手动入库，是否继续？</p> -->
-      <p>{{ vmI18n.t("modalTips.k2") }}</p>
-    </Modal>
+
     <!-- 批量原退 提示 -->
-    <Modal
+    <!-- <Modal
       v-model="errModal"
       :title="vmI18n.t('common.tips')"
       width="500"
@@ -152,7 +131,7 @@
       @on-keydown="keyenter"
     >
       <Table :columns="errThData" height="300" :data="errdataList" />
-    </Modal>
+    </Modal> -->
   </div>
 </template>
 

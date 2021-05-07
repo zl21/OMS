@@ -82,6 +82,10 @@ class BtnConfig {
           btnclick: () => this.btnMainHandler('returnGoodsModify'),
         },
         {
+          webname: 'VirtualWarehouseStorageCmd', // 虚拟仓库入库
+          btnclick: () => this.btnMainHandler('virtualWarehouseLibraryWarn'),
+        },
+        {
           webname: 'shenhe_tuihuanhuo', // 退货换单 - 售后审核
           btnclick: () => this.btnMainHandler('afterAuditOrder'),
         },
@@ -130,9 +134,13 @@ class BtnConfig {
           btnclick: () => this.btnMainHandler('forcedCompletion'),
         },
         {
-          webname: 'daochu_tuihuanhuo,export_tuihuoruku,OcBOrderExportCmd',
+          webname: 'OcBOrderExportCmd',
           btnclick: () => this.btnMainHandler('exportClick'),
         },
+        {
+          webname: 'daochu_tuihuanhuo,export_tuihuoruku',
+          btnclick: () => this.btnMainHandler('tuihuoExportClick'),
+        },        
         {
           webname: 'lookup_chongzhi',
           btnclick: () => BtnConfig.target.reset(),
@@ -470,12 +478,14 @@ class BtnConfig {
         paramsType = 5;
         break;
       case 'exportClick':
-        funName = 'exportClickHandler';
+      case 'tuihuoExportClick':
+        funName = `${type}Handler`;
         tips = '';
         paramsType = 6;
         break;
       case 'returnGoodsModify':
       case 'returnGoodsCopy':
+      case 'virtualWarehouseLibraryWarn':
         funName = `${type}Handler`;
         tips = 'l0';
         paramsType = 1;
@@ -523,14 +533,14 @@ class BtnConfig {
         }
         this[funName](self, myData);
         self.btnConfig.loading = false;
-          /* 
-        if (self.selection.length !== 1 && ![3, 5, 7].includes(paramsType)) {
-          commonUtils.msgTips(self, 'warning', tips);
-          self.btnConfig.loading = false;
-        } else {
-          this[funName](self, myData);
-        } 
-        */
+        /* 
+      if (self.selection.length !== 1 && ![3, 5, 7].includes(paramsType)) {
+        commonUtils.msgTips(self, 'warning', tips);
+        self.btnConfig.loading = false;
+      } else {
+        this[funName](self, myData);
+      } 
+      */
       } else if (paramsType != 6) {
         commonUtils.msgTips(self, 'warning', tips);
         self.btnConfig.loading = false;
@@ -1131,6 +1141,36 @@ class BtnConfig {
       commonUtils.msgTips(self, 'warning', tips);
     }
   }
+  //手动入库处理;
+  virtualWarehouseLibraryWarnHandler(self, ids) {
+    commonUtils.modalShow(self, 'k2', 'orderCenter.virtualWarehouseStorage', { ids }, 'all', function (res) {
+      if (res.data.code === 0) {
+        commonUtils.msgTips(self, 'sucess', res.data.message);
+        self.getList(self.statusTab);
+      } else {
+        const err = res.data.message || this.vmI18n.t('modalTips.l9'); // 虚拟仓库入库失败！
+        let renderInfo = {
+          props: {
+            columns: [
+              {
+                title: 'id',
+                key: 'objid'
+              },
+              {
+                title: '报错信息',
+                key: 'message'
+              }
+            ],
+            data: res.data.data
+          }
+        }
+        this.$Modal.confirm({
+          title: err,
+          render: h => h('Table', renderInfo)
+        });
+      }
+    });
+  }
   //释放库存处理
   releaseInventoryHandler(self, ids) {
     self.selection.forEach((item) => {
@@ -1237,6 +1277,32 @@ class BtnConfig {
         fromdata.append('param', JSON.stringify(param));
       }
       commonUtils.serviceHandler(self, 'orderCenter.exportOcBOrder', fromdata, 'part', function (res) {
+        publicMethodsUtil.downloadUrlFile(res.data.data);
+      });
+      self.isExport = false;
+    }
+  }
+  //退货导出
+  tuihuoExportClickHandler(self, list = []){
+    if (self.isExport) {
+      // 有一项导出正在进行中
+      commonUtils.msgTips(self, 'warning', 'f8');
+    } else {
+      self.isExport = true;
+      const fromdata = new FormData();
+      if (list.length) {
+        const idList = { idList: list.map((item) => item.ID) };
+        fromdata.append('param', JSON.stringify(idList));
+      } else {
+        const param = {
+          start: self.agTableConfig.pagenation.current,
+          count: 999999,
+          RETURN_STATUS: self.status ?? ''
+        };
+        const fromdata = new FormData();
+        fromdata.append('param', JSON.stringify(param));
+      }
+      commonUtils.serviceHandler(self, 'orderCenter.exportReturnOrder', fromdata, 'part', function (res) {
         publicMethodsUtil.downloadUrlFile(res.data.data);
       });
       self.isExport = false;

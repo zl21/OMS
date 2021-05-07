@@ -257,6 +257,7 @@ export const globalStore = {
         // 暂不处理
       } else {
         let url = '';
+        
         if (tab.query && Object.keys(tab.query).length > 0) {
           // 有传参时
           // const url = '/CUSTOMIZED/promotion/-1?id=-1&tabTitle=新增促销活动';
@@ -269,17 +270,7 @@ export const globalStore = {
             }
           }
           url += param.join('&');
-        } else {
-          // 无传参
-          const type = 'C';
-          const data = {
-            type,
-            label: tab.label,
-            customizedModuleName: tab.name,
-            customizedModuleId: tab.id
-          };
-          store.commit('global/tabOpen', data);
-        }
+        } 
         const type = 'C';
         const data = {
           type,
