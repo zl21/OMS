@@ -326,6 +326,7 @@ R3.launchApplication({
 | v1.2.4  | changeWarehouse/modifyLogistics入参协议变更整                                    |
 | v1.2.5  | cancelMergeOrderHandler取消合并异常loading                                   |
 | v1.2.6  | 迁移策略定制页面                                   |
+| v1.2.7  | funBtn-批量操作判断                                   |
 
 #### Extends-Api 版本说明
 

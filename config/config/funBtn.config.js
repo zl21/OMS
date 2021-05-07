@@ -324,12 +324,13 @@ class BtnConfig {
 
   /**
    * 1. singleType：=1，为单对象页面，不需要做判断当前是否选中数据等操作
-   * 2. paramsType：=1，入参仅传ids--列表ID数组;
-   * 3. paramsType：=2，入参转成ids转换成fromData;
+   * 2. paramsType：=1，入参仅传ids--列表ID数组--json类型;
+   * 3. paramsType：=2，入参仅传ids--列表ID数组--fromData类型;
    * 4. paramsType：=3，入参需将ids转成json字符串, 再转换成fromData;
-   * 5. paramsType：=4，入参传选择的selection--批量处理全属性数组;
+   * 5. paramsType：=4，入参为选择的selection--rowsData;
    * 6. paramsType：=5，？
    * 7. paramsType：=6，导出, 可以跳转纪录选择逻辑;
+   * 8. isSingle：当前操作按钮是否是单量操作，默认为false(可批量)
    * 
    * 
    * 1,2,3只取纪录ID属性, 其他传列表选择所有属性数组;
@@ -341,7 +342,7 @@ class BtnConfig {
   btnMainHandler(type) {
     // 方法名 未选择提示 传参类型
     let funName, tips, paramsType;
-
+    let isSingle = false;
     switch (type) {
       case 'auditOrder':
       case 'auditingForce':
@@ -484,6 +485,7 @@ class BtnConfig {
     BtnConfig.btnKey = type;
 
     if (BtnConfig.singleType == 1) {
+      // 单对象界面
       let ids;
       if (self.tab1) {
         ids = [paramsType == 5 ? self.tab1.order : self.tab1.order.ID];
@@ -492,8 +494,13 @@ class BtnConfig {
       }
       this[funName](self, ids);
     } else {
+      // 非单对象界面
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
       if (self.selection.length > 0) {
+        if (isSingle && self.selection.length > 1) {
+          commonUtils.msgTips(self, 'warning', '不支持批量操作！', 2);
+          return
+        }
         self.btnConfig.loading = true;
         let ids = [];
         let myData;
@@ -508,12 +515,16 @@ class BtnConfig {
         } else {
           myData = self.selection;
         }
+        this[funName](self, myData);
+        self.btnConfig.loading = false;
+          /* 
         if (self.selection.length !== 1 && ![3, 5, 7].includes(paramsType)) {
           commonUtils.msgTips(self, 'warning', tips);
           self.btnConfig.loading = false;
         } else {
           this[funName](self, myData);
-        }
+        } 
+        */
       } else if (paramsType != 6) {
         commonUtils.msgTips(self, 'warning', tips);
         self.btnConfig.loading = false;
