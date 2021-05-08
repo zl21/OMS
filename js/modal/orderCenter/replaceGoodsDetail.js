@@ -109,6 +109,7 @@ export default {
         self.$Modal.confirm({
           title: message,
           width: 500,
+          className:'ark-dialog',
           render: h => h('Table', {
               props: {
                 columns: [
