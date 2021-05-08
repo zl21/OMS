@@ -333,6 +333,7 @@ R3.launchApplication({
 | v1.2.11  | holdOrderDialog批量操作入参调整                                               |
 | v1.2.12  | 取消hold单tips   
 | v1.2.13  | 增加零售发货单的批量操作按钮                                             |
+| v1.2.14  | 取消hold单新增一个options                                             |
 
 #### Extends-Api 版本说明
 

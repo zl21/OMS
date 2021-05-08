@@ -118,6 +118,10 @@ export default {
               // label: "付款时间",
               label: window.vmI18n.t('table_label.paymentTime'),
               value: '2'
+            },
+            {
+              label: '创建时间',
+              value: '3'
             }
           ],
           options2: [
