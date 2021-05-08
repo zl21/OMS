@@ -218,17 +218,11 @@ export default {
         return false;
       }
       self.loading = true;
-      // const fromdata = new FormData();
-      // fromdata.append("ids", self.componentData.ids);
-      // fromdata.append("warehouseId", self.pid);
-      // fromdata.append("isOutOfStockFlag ", isOutOfStockFlag);
-      // fromdata.append("updateRemark", self.updateRemark);
+      let param = JSON.parse(JSON.stringify(self.componentData));
+      param.CP_C_PHY_WAREHOUSE_ID = +self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID;
       const {
         data: { data, code, message },
-      } = await self.service.orderCenter.updateWarehouse({
-        IDS: self.componentData.IDS,
-        CP_C_LOGISTICS_ID: +self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID,
-      });
+      } = await self.service.orderCenter.updateWarehouse(param);
       self.isShowFromLoading = false;
       if (code === 0) {
         if (self.$route.params.customizedModuleId == 2307) {
@@ -280,6 +274,8 @@ export default {
             });
           }
         );
+      } else {
+        // 走框架的报错
       }
       self.loading = false;
     },

@@ -1,6 +1,7 @@
 <template>
   <!-- 订单管理/订单详情 - 批量Hold单/Hold单 -->
   <div class="hold-dialog customized-modal">
+    <loading :loading="loading" />
     <div class="hold-form">
       <re-form :form-config="formConfig">
         <template #formCompile="{ rowData }">
@@ -59,6 +60,7 @@ export default holdOrderDialog;
   display: flex;
   width: 100%;
   flex-direction: column;
+  padding-bottom: 45px;
   .holdBtnClass {
     bottom: -14px !important;
   }

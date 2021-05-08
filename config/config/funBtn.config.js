@@ -12,6 +12,12 @@ class BtnConfig {
       loading: false, // 按钮加载
       buttons: [
         {
+          webname: 'ORDER_COPY_CANCELED_ORDER', // 取消单复制
+        },
+        {
+          webname: 'ORDER_COPY_AF_SALE', // 售后复制
+        },
+        {
           webname: 'manualCreation', // 手工创建
         },
         {
@@ -76,6 +82,10 @@ class BtnConfig {
           btnclick: () => this.btnMainHandler('returnGoodsModify'),
         },
         {
+          webname: 'VirtualWarehouseStorageCmd', // 虚拟仓库入库
+          btnclick: () => this.btnMainHandler('virtualWarehouseLibraryWarn'),
+        },
+        {
           webname: 'shenhe_tuihuanhuo', // 退货换单 - 售后审核
           btnclick: () => this.btnMainHandler('afterAuditOrder'),
         },
@@ -124,9 +134,13 @@ class BtnConfig {
           btnclick: () => this.btnMainHandler('forcedCompletion'),
         },
         {
-          webname: 'daochu_tuihuanhuo,export_tuihuoruku,OcBOrderExportCmd',
+          webname: 'OcBOrderExportCmd',
           btnclick: () => this.btnMainHandler('exportClick'),
         },
+        {
+          webname: 'daochu_tuihuanhuo,export_tuihuoruku',
+          btnclick: () => this.btnMainHandler('tuihuoExportClick'),
+        },        
         {
           webname: 'lookup_chongzhi',
           btnclick: () => BtnConfig.target.reset(),
@@ -180,14 +194,14 @@ class BtnConfig {
           webname: 'shortageNotice', // 缺货回传
           btnclick: () => this.btnMainHandler('shortageNotice'), // 按钮点击事件
         },
-        {
+        /* {
           webname: 'holdOrder2', // hold单
           btnclick: () => this.btnMainHandler('holdOrder'), // 按钮点击事件
-        },
-        {
-          webname: 'cancelHoldOrder2', // hold单
+        }, */
+        /* {
+          webname: 'cancelHoldOrder2', // 取消hold单
           btnclick: () => this.btnMainHandler('cancelHoldOrder'), // 按钮点击事件
-        },
+        }, */
         /* {
           btnclick: () => this.btnMainHandler('invoiceNotice'), // 按钮点击事件
         }, */
@@ -324,12 +338,13 @@ class BtnConfig {
 
   /**
    * 1. singleType：=1，为单对象页面，不需要做判断当前是否选中数据等操作
-   * 2. paramsType：=1，入参仅传ids--列表ID数组;
-   * 3. paramsType：=2，入参转成ids转换成fromData;
+   * 2. paramsType：=1，入参仅传ids--列表ID数组--json类型;
+   * 3. paramsType：=2，入参仅传ids--列表ID数组--fromData类型;
    * 4. paramsType：=3，入参需将ids转成json字符串, 再转换成fromData;
-   * 5. paramsType：=4，入参传选择的selection--批量处理全属性数组;
+   * 5. paramsType：=4，入参为选择的selection--rowsData;
    * 6. paramsType：=5，？
    * 7. paramsType：=6，导出, 可以跳转纪录选择逻辑;
+   * 8. isSingle：当前操作按钮是否是单量操作，默认为false(可批量)
    * 
    * 
    * 1,2,3只取纪录ID属性, 其他传列表选择所有属性数组;
@@ -341,7 +356,7 @@ class BtnConfig {
   btnMainHandler(type) {
     // 方法名 未选择提示 传参类型
     let funName, tips, paramsType;
-
+    let isSingle = false;
     switch (type) {
       case 'auditOrder':
       case 'auditingForce':
@@ -463,12 +478,14 @@ class BtnConfig {
         paramsType = 5;
         break;
       case 'exportClick':
-        funName = 'exportClickHandler';
+      case 'tuihuoExportClick':
+        funName = `${type}Handler`;
         tips = '';
         paramsType = 6;
         break;
       case 'returnGoodsModify':
       case 'returnGoodsCopy':
+      case 'virtualWarehouseLibraryWarn':
         funName = `${type}Handler`;
         tips = 'l0';
         paramsType = 1;
@@ -484,6 +501,7 @@ class BtnConfig {
     BtnConfig.btnKey = type;
 
     if (BtnConfig.singleType == 1) {
+      // 单对象界面
       let ids;
       if (self.tab1) {
         ids = [paramsType == 5 ? self.tab1.order : self.tab1.order.ID];
@@ -492,8 +510,13 @@ class BtnConfig {
       }
       this[funName](self, ids);
     } else {
+      // 非单对象界面
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
       if (self.selection.length > 0) {
+        if (isSingle && self.selection.length > 1) {
+          commonUtils.msgTips(self, 'warning', '不支持批量操作！', 2);
+          return
+        }
         self.btnConfig.loading = true;
         let ids = [];
         let myData;
@@ -508,12 +531,16 @@ class BtnConfig {
         } else {
           myData = self.selection;
         }
-        if (self.selection.length !== 1 && ![3, 5, 7].includes(paramsType)) {
-          commonUtils.msgTips(self, 'warning', tips);
-          self.btnConfig.loading = false;
-        } else {
-          this[funName](self, myData);
-        }
+        this[funName](self, myData);
+        self.btnConfig.loading = false;
+        /* 
+      if (self.selection.length !== 1 && ![3, 5, 7].includes(paramsType)) {
+        commonUtils.msgTips(self, 'warning', tips);
+        self.btnConfig.loading = false;
+      } else {
+        this[funName](self, myData);
+      } 
+      */
       } else if (paramsType != 6) {
         commonUtils.msgTips(self, 'warning', tips);
         self.btnConfig.loading = false;
@@ -1030,6 +1057,7 @@ class BtnConfig {
       if (![2, 1, 3].includes(item.ORDER_STATUS)) {
         // 当前状态异常，不允许操作！
         commonUtils.msgTips(self, 'warning', 'd9');
+        self.btnConfig.loading = false;
         return;
       }
     }
@@ -1112,6 +1140,36 @@ class BtnConfig {
     if (tips.length) {
       commonUtils.msgTips(self, 'warning', tips);
     }
+  }
+  //手动入库处理;
+  virtualWarehouseLibraryWarnHandler(self, ids) {
+    commonUtils.modalShow(self, 'k2', 'orderCenter.virtualWarehouseStorage', { ids }, 'all', function (res) {
+      if (res.data.code === 0) {
+        commonUtils.msgTips(self, 'sucess', res.data.message);
+        self.getList(self.statusTab);
+      } else {
+        const err = res.data.message || this.vmI18n.t('modalTips.l9'); // 虚拟仓库入库失败！
+        let renderInfo = {
+          props: {
+            columns: [
+              {
+                title: 'id',
+                key: 'objid'
+              },
+              {
+                title: '报错信息',
+                key: 'message'
+              }
+            ],
+            data: res.data.data
+          }
+        }
+        this.$Modal.confirm({
+          title: err,
+          render: h => h('Table', renderInfo)
+        });
+      }
+    });
   }
   //释放库存处理
   releaseInventoryHandler(self, ids) {
@@ -1219,6 +1277,32 @@ class BtnConfig {
         fromdata.append('param', JSON.stringify(param));
       }
       commonUtils.serviceHandler(self, 'orderCenter.exportOcBOrder', fromdata, 'part', function (res) {
+        publicMethodsUtil.downloadUrlFile(res.data.data);
+      });
+      self.isExport = false;
+    }
+  }
+  //退货导出
+  tuihuoExportClickHandler(self, list = []){
+    if (self.isExport) {
+      // 有一项导出正在进行中
+      commonUtils.msgTips(self, 'warning', 'f8');
+    } else {
+      self.isExport = true;
+      const fromdata = new FormData();
+      if (list.length) {
+        const idList = { idList: list.map((item) => item.ID) };
+        fromdata.append('param', JSON.stringify(idList));
+      } else {
+        const param = {
+          start: self.agTableConfig.pagenation.current,
+          count: 999999,
+          RETURN_STATUS: self.status ?? ''
+        };
+        const fromdata = new FormData();
+        fromdata.append('param', JSON.stringify(param));
+      }
+      commonUtils.serviceHandler(self, 'orderCenter.exportReturnOrder', fromdata, 'part', function (res) {
         publicMethodsUtil.downloadUrlFile(res.data.data);
       });
       self.isExport = false;

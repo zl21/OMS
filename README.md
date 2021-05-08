@@ -321,7 +321,18 @@ R3.launchApplication({
 | v1.1.99  | 迁移店铺授权，完善零售发货单批量操作的弹窗                                     |
 | v1.2.0   | initFormConfig 复杂类型 isnotnull 默认 false                                   |
 | v1.2.1   | funBtn webname 补充                                                            |
-| v1.2.2   | 增加零售发货单的批量操作按钮                                                   |
+| v1.2.2  | changeWarehouse入参调整                                    |
+| v1.2.3  | 迁移4个策略定制页面                                    |
+| v1.2.4  | changeWarehouse/modifyLogistics入参协议变更整                                    |
+| v1.2.5  | cancelMergeOrderHandler取消合并异常loading                                   |
+| v1.2.6  | 迁移策略定制页面                                   |
+| v1.2.7  | funBtn-批量操作判断                                   |
+| v1.2.8  | 新增/复制迁移                                   |
+| v1.2.9  | labelName、drp必填等属性                                   |
+| v1.2.10  | 必要的labelName补充 (元数据若配置的是'网页链接'则需前端配置labelName，若是动作定义则不用配置) |
+| v1.2.11  | holdOrderDialog批量操作入参调整                                               |
+| v1.2.12  | 取消hold单tips   
+| v1.2.13  | 增加零售发货单的批量操作按钮                                             |
 
 #### Extends-Api 版本说明
 

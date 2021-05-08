@@ -89,7 +89,7 @@ export default {
               colname: "CP_C_LOGISTICS_ID",
               fkdisplay: "drp",
               isfk: true, // 是否有fk键
-              isnotnull: false, // 是否必填
+              isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               name: "物流公司",
               readonly: false, // 是否可编辑，对应input   readonly属性
@@ -213,36 +213,60 @@ export default {
     // 确定
     async determine() {
       const _this = this;
-      // const fromdata = new FormData();
-      // const param = {
-      //   fixcolumn: {
-      //     ST_C_WAREHOUSE_LOGISTICS: {},
-      //     ST_C_WAREHOUSE_LOGISTICS_ITEM: _this.selectData,
-      //     ST_C_WAREHOUSE_LOGISTICS_RANK_RESULT: [],
-      //   },
-      //   objid: _this.componentData.id,
-      // };
-      // fromdata.append("param", JSON.stringify(param));
-      // const res = await this.service.strategyPlatform.saveWarehouseLogistics(
-      //   _this.componentData
-      // );
       if (!_this.formConfig.formValue.CP_C_LOGISTICS_ID) {
         _this.$Message.warning("请选择物流公司！");
         return false;
       }
       _this.loading = true;
-      const res = await this.service.orderCenter.updateLogistics({
-        IDS: _this.componentData.IDS,
-        CP_C_LOGISTICS_ID: +_this.formConfig.formValue.CP_C_LOGISTICS_ID,
-      });
+      let param = JSON.parse(JSON.stringify(_this.componentData));
+      param.CP_C_LOGISTICS_ID = +_this.formConfig.formValue.CP_C_LOGISTICS_ID;
+      const res = await this.service.orderCenter.updateLogistics(param);
       if (res.data.code === 0) {
-        // _this.$parent.$parent.$parent.getTreeData();
-        // _this.$parent.$parent.$parent.provinceSynchronous();
         _this.$parent.$parent.closeConfirm();
         _this.$Message.success(res.data.message);
+        _this.$parent.$parent.$parent.query();
+      } else if (res.data.code == 1 && res.data.data) {
+        let tabData = data.data.map((row, index) => {
+          row.INDEX = ++index;
+          row.BILL_NO = row.objidno;
+          row.RESULT_MSG = row.message;
+          return row;
+        });
+        this.$OMS2.omsUtils.tipShow(
+          "confirm",
+          self,
+          data,
+          message,
+          function (h) {
+            return h("Table", {
+              props: {
+                columns: [
+                  {
+                    title: "序号",
+                    key: "INDEX",
+                  },
+                  {
+                    title: "ID",
+                    key: "objid",
+                  },
+                  {
+                    title: "单据编号",
+                    key: "BILL_NO",
+                  },
+                  {
+                    title: "失败原因",
+                    key: "RESULT_MSG",
+                  },
+                ],
+                data: tabData,
+              },
+            });
+          }
+        );
+      } else if (res.data.code == 1 && !res.data.data) {
+        _this.$Message.error(res.data.message);
       } else {
-        const err = res.data.message || window.vmI18n.t("modalTips.z3");
-        _this.$Message.error(err);
+        // 走框架报错
       }
       _this.loading = false;
     },

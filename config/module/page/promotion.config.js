@@ -6,8 +6,8 @@
 
 export default {
   PROMACTIQUERYLIST: {
-    component: () => import('allpages/promotionCenter/promotionlist.vue')
-    // labelName: '促销活动',
+    component: () => import('allpages/promotionCenter/promotionlist.vue'),
+    labelName: '促销活动',
   },
   ADDOREDITACTI: {
     component: () => import('allpages/promotionCenter/addOrEditActi.vue')

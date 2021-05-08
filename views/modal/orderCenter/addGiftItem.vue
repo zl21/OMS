@@ -4,7 +4,7 @@
     <!-- <EasyMatrix :component-data="matrixData" /> -->
     <businessForm :form-config="formConfig"></businessForm>
     <!-- businessButton -->
-    <businessButton :btn-config="searchBtn"></businessButton>
+    <businessButton class="absolute" :btn-config="searchBtn"></businessButton>
     <businessActionTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
@@ -28,6 +28,11 @@
 <style lang="less">
 @import '~omsTheme/public.less';
 .customized-modal{
+  .absolute{
+    position:absolute;
+    right: 0;
+    top: 3px;
+  }
   .orderManageEdit{
     &.unFlodStyle{
       padding-right:0;

@@ -18,32 +18,31 @@ export default {
     // component: logisticsCompanyFilesAddOrEdit,
     component: () =>
       import('allpages/basicData/logisticsCompanyFilesAddOrEdit.vue'),
-    // labelName: '物流公司档案编辑',
+    labelName: '物流公司档案编辑',
   },
   ADDLOGICSTORE: {
     // component: addLogicStore,
     component: () => import('allpages/basicData/addLogicStore.vue'),
-    // labelName: '逻辑仓档案新增'
   },
   ADDALIAS: {
     // component: addAliasOrRegion,
     component: () => import('allpages/basicData/addAliasOrRegion.vue'),
-    // labelName: '新增别名'
+    labelName: '新增别名'
   },
   ADDREGION: {
     // component: addAliasOrRegion,
     component: () => import('allpages/basicData/addAliasOrRegion.vue'),
-    // labelName: '新增区域'
+    labelName: '新增区域'
   },
   CHANNELSTORE: {
     // component: channelStore,
     component: () => import('allpages/basicData/channelStore.vue'),
-    // labelName: '渠道仓新增'
+    labelName: '渠道仓新增', // 元数据若配置的是'网页链接'则需前端配置labelName，若是动作定义则不用配置
   },
   NATIONALPROVINCIALMUNICIPALEDIT: {
     // component: nationalProvincialMunicipalEdit,
     component: () =>
       import('allpages/basicData/nationalProvincialMunicipalEdit.vue'),
-    // labelName: '国家省市区编辑'
+    labelName: '国家省市区编辑'
   },
 }

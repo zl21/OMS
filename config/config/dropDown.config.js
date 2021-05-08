@@ -8,8 +8,19 @@ class DropDownConfig {
     let self = DropDownConfig.target;
     this.singleType = singleType;
     switch (val) {
+      case 'ORDER_COPY_CANCELED_ORDER': {
+        this.canceledOrderCopyHander();
+        break;
+      }
+      case 'ORDER_COPY_AF_SALE': {
+        this.afterSaleCopyHander();
+        break;
+      }
+      case 'manualCreation': {
+        this.manualCreationHander();
+        break;
+      }
       case 'Newly added': {
-        // 新增
         this.newOrderHander();
         break;
       }
@@ -90,6 +101,64 @@ class DropDownConfig {
         break;
     }
   }
+
+  static async canceledOrderCopyHander() {
+    let self = DropDownConfig.target;
+    self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+    if (self.selection.length != 1) {
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'a8');
+      return;
+    }
+    const IDS = self.$OMS2.omsUtils.sonList(self.selection, 'ID');
+    const {
+      data: { code, data, message },
+    } = await self.service.orderCenter.billOcBOrderCopy({
+      IDS,
+      TYPE: 1,
+      COPY_REASON_TYPE: 0,
+    });
+    if (code == 0) {
+      self.$store.commit('customize/TabOpen', {
+        id: 2307,
+        type: 'action',
+        name: 'OC_B_ORDER_VIRTUAL_TABLE',
+        label: '零售发货单新增',
+        query: Object.assign({
+          copyType: 1,
+          sourceId: self.selection[0].ID,
+        }),
+      });
+    } else {
+      console.log(message);
+    }
+  }
+
+  static afterSaleCopyHander() {
+    let self = DropDownConfig.target;
+    self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+    if (self.selection.length != 1) {
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'a8');
+      return;
+    }
+    self.publicBouncedConfig.name = 'ORDER_COPY_AF_SALE';
+    self.publicBouncedConfig.url = 'modal/orderCenter/afterSaleCopy';
+    self.publicBouncedConfig.confirmTitle = '售后复制';
+    self.publicBouncedConfig.componentData = { id: self.selection[0].ID };
+    self.publicBouncedConfig.width = 400;
+    setTimeout(() => {
+      self.$children.find((item) => item.name === 'ORDER_COPY_AF_SALE').openConfirm();
+    }, 100);
+  }
+
+  static manualCreationHander() {
+    let self = DropDownConfig.target;
+    self.$store.commit('global/tabOpen', {
+      type: 'C',
+      customizedModuleName: 'OC_B_ORDER_VIRTUAL_TABLE',
+      label: '零售发货单新增',
+      customizedModuleId: 'New',
+    });
+  }
   //新增订单处理
   static newOrderHander() {
     R3.store.commit('global/tabOpen', {
@@ -125,12 +194,12 @@ class DropDownConfig {
       case 'modifyLogistics':
         funName = 'modifyLogisticsHandler';
         tips = 'c6';
-        paramsType = 1;
+        paramsType = 4;
         break;
       case 'modifyWarehouse':
         funName = 'modifyWarehouseHandler';
         tips = 'c7';
-        paramsType = 1;
+        paramsType = 4;
         break;
       case 'modifyNotes':
         funName = 'modifyNotesHandler';
@@ -182,7 +251,7 @@ class DropDownConfig {
       case 'holdOrder':
         funName = 'holdOrderHandler';
         tips = 'e2';
-        paramsType = 1;
+        paramsType = 4;
         break;
 
       case 'shortageSplit':
@@ -260,7 +329,7 @@ class DropDownConfig {
           }
           /**
            * objName：burgeon-business-components/common/js/publicDialog.js下对应的key
-           * propertyName：用于判断要填充什么给子组件（弹窗里的那个组件）的componentData
+           * propertyName：用于判断要填充给什么子组件（弹窗里的哪个组件）的componentData
            * tableType：组件名
            */
           this.successHandler(params, objName, propertyName, tableType);
@@ -273,6 +342,7 @@ class DropDownConfig {
       });
   }
 
+    // this.successHandler(rows, 'holdOrderConfig', 'holdOrder', 'holdOrderDialog');
   static successHandler(ids, objName, componentDataType, tableType) {
     let self = DropDownConfig.target;
     self.publicBouncedConfig = JSON.parse(
@@ -282,19 +352,8 @@ class DropDownConfig {
 
     switch (componentDataType) {
       case 'CP_C_PHY_WAREHOUSE_ID':
-        componentDataObj = ids;
-          // IDS:ids.IDS,
-          // data:ids,
-          // cLogisticsId: 0,
-          // platform: self.selection[0].PLATFORM,
-          // [componentDataType]: self.selection[0][componentDataType],
-        // };
-        break;
       case 'CP_C_SHOP_ID':
         componentDataObj = ids;
-          // data:ids
-          // [componentDataType]: self.selection[0][componentDataType],
-        // };
         break;
       case 'ORDER_STATUS':
         componentDataObj = {
@@ -328,11 +387,6 @@ class DropDownConfig {
           a_2: ids,
         };
         break;
-      case 'holdOrder':
-        componentDataObj = {
-          ids,
-        };
-        break;
       default :
         componentDataObj = {
           ids,
@@ -348,18 +402,24 @@ class DropDownConfig {
     }, 100);
   }
   //修改物流;
-  static modifyLogisticsHandler(fromdata) {
+  static modifyLogisticsHandler(rows) {
+    let list = [];
+    const ids = commonUtils.sonList(rows, 'ID');
+    list = rows.map(it => ({ID:it.ID,BILL_NO:it.BILL_NO}));
     this.serviceHandler(
       'checkOrderBeforeLogistics',
-      {IDS:fromdata},
+      { IDS:ids, ID_AND_BILL_NO_LIST:list },
       'modifyLogistics'
     );
   }
   //修改仓库
-  static modifyWarehouseHandler(fromdata) {
+  static modifyWarehouseHandler(rows) {
+    let list = [];
+    const ids = commonUtils.sonList(rows, 'ID');
+    list = rows.map(it => ({ID:it.ID,BILL_NO:it.BILL_NO}));
     this.serviceHandler(
       'checkOrderBeforeWarehouse',
-      {IDS:fromdata},
+      { IDS:ids, ID_AND_BILL_NO_LIST:list },
       'changeWarehouse'
     );
   }
@@ -413,8 +473,8 @@ class DropDownConfig {
     );
   }
   //hold单处理
-  static holdOrderHandler(ids) {
-    this.successHandler(ids, 'holdOrderConfig', 'holdOrder', 'holdOrderDialog');
+  static holdOrderHandler(rows) {
+    this.successHandler(rows, 'holdOrderConfig', 'holdOrder', 'holdOrderDialog');
   }
   //取消hold单处理
   static cancelHoldOrderHandler(rows) {
@@ -423,7 +483,7 @@ class DropDownConfig {
     list = rows.map(it => ({ID:it.ID,BILL_NO:it.BILL_NO}));
     commonUtils.modalShow(self, 'e1', 'orderCenter.manualUnHoldOrder', {ID_AND_BILL_NO_LIST:list} , 'all', function (res) {
       if (res.data.code === 0) {
-        commonUtils.msgTips(self, 'success', res, 2);
+        commonUtils.msgTips(self, 'success', res.data.message, 2);
         self.selection = [];
         self.query();
       } else if (res.data.code == 1 && res.data.data) {
@@ -450,7 +510,6 @@ class DropDownConfig {
                   key:'RESULT_MSG'
                 }
               ],
-              // data:res.data.data.CANCEL_ORDER_ERROR_INFOS
               data:tabData
             }
           })

@@ -109,7 +109,7 @@ export default {
         if (!self.expressCode) {
           self.$Message.warning({
             // content: "请选择物流单号",
-            content: window.vmI18n.t('modalTips.yd'),
+            content: window.vmI18n.t('modalTips.fn'),
             duration: 5,
             top: 80,
           });
