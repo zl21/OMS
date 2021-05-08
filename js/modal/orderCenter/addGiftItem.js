@@ -304,6 +304,7 @@ export default {
     searchGift() {
       console.log(this.formConfig.formValue)
       console.log('搜索赠品')
+      this.selectSkuProBySkuEcodeList()
     },
     // 提交
     async submit() {
@@ -361,7 +362,7 @@ export default {
         this.$parent.$parent.closeConfirm()
       }
     },
-    selectSkuProBySkuEcodeList(url) {
+    selectSkuProBySkuEcodeList() {
       let data = {
         skuEcode: this.formConfig.formValue.SKU_CODE,
         spuEcode: this.formConfig.formValue.SPU_CODE,
@@ -373,7 +374,7 @@ export default {
       }
       axios({
         method: 'post',
-        url: '/r3-ps' + url,
+        url: '/r3-ps/p/cs/ps/pro//v1/selectSkuProBySkuEcodeList',
         data,
       }).then((res) => {
         this.tableConfig.total = res.data.data.total
