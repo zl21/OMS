@@ -490,8 +490,8 @@ export default {
         orderList.push(obj)
       })
 
-      skuEcodes.push(this.onRowData)
-      skuEcodes.push(this.onRowData2)
+      skuEcodes.push(this.onRowData.skuEcode)
+      skuEcodes.push(this.onRowData2.skuEcode)
       let data = {
         skuEcodes,
         orderList,
