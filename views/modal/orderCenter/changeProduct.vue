@@ -23,14 +23,26 @@
             </Button>
           </div>
         </div>
-        <Table
+        <businessActionTable
+          :jordan-table-config="tableConfig"
+          @on-select="onSelect"
+          @on-select-cancel="onSelectCancel"
+          @on-select-all="onSelectAll"
+          @on-select-all-cancel="onSelectAllCancel"
+          @on-row-click="onRowClick"
+          @on-row-dblclick="onRowDblclick"
+          @table-delete-detail="tableDeleteDetail"
+          @on-page-change="pageChange"
+          @on-page-size-change="pageSizeChange"
+        />
+        <!-- <Table
           :columns="columns"
           :data="data"
           :loading="tableLoad"
           :highlight-row="true"
           height="250"
           @on-row-click="onRowClick"
-        />
+        />-->
       </div>
       <div class="i_body1">
         <!-- <p>替换后商品SKU</p> -->
@@ -53,13 +65,17 @@
             </Button>
           </div>
         </div>
-        <Table
-          :columns="columns"
-          :data="replace_data"
-          :loading="replaceTableLoad"
-          :highlight-row="true"
-          height="250"
-          @on-row-click="onRowClickReplace"
+        <businessActionTable
+          :jordan-table-config="tableConfig2"
+          @on-select="onSelect"
+          @on-select-cancel="onSelectCancel"
+          @on-select-all="onSelectAll"
+          @on-select-all-cancel="onSelectAllCancel"
+          @on-row-click="onRowClick"
+          @on-row-dblclick="onRowDblclick"
+          @table-delete-detail="tableDeleteDetail"
+          @on-page-change="pageChange"
+          @on-page-size-change="pageSizeChange"
         />
       </div>
       <img class="icon_switch" src="@/assets/img/switch.png" />

@@ -13,6 +13,10 @@ class DropDownConfig {
         this.newOrderHander();
         break;
       }
+      case 'manualCreation': { //手工创建
+       this.manualCreationHandler()
+        break;
+      }
       case 'OcBOrderImportCmd': {
         this.cmdOrderImportHandler();
         break;
@@ -74,6 +78,7 @@ class DropDownConfig {
         this.dropDownMainHandler('cancelHoldOrder');
         break;
       }
+    
       default:
         eventList.some((item) => {
           item.webname == val && eval(item.btnclick)()
@@ -93,6 +98,11 @@ class DropDownConfig {
       customizedModuleName: 'orderManageAdd',
       customizedModuleId: '-1',
     });
+  }
+   //现金预售提前发货
+   static manualCreationHandler() {
+ commonUtils.navigateMain("New", 'TabOpen', "OC_B_ORDER_VIRTUAL_TABLE", '零售发货单新增');
+  
   }
   //框架导入处理
   static cmdOrderImportHandler() {
@@ -143,7 +153,6 @@ class DropDownConfig {
         paramsType = 4;
         break;
       }
-
       case 'orderDeliveryUrgent':
         funName = 'orderDeliveryUrgentHandler';
         tips = 'd0';
@@ -372,6 +381,7 @@ class DropDownConfig {
       'manualMarking'
     );
   }
+ 
   //现金预售紧急发货
   static orderDeliveryUrgentHandler(ids) {
     this.successHandler(ids, 'vipSpeedDispatchConfig', 'vip', 'manualMarking');

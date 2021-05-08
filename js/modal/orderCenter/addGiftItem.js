@@ -151,11 +151,11 @@ export default {
             text: window.vmI18n.t('common.determine'),
             loading: false,
             btnclick: () => {
-              if (this.type == "add") {       
-              this.saveOrderByPro() // 添加订单商品信息-确定添加
-              }else if(this.type == "del"){
+              if (this.type == 'add') {
+                this.saveOrderByPro() // 添加订单商品信息-确定添加
+              } else if (this.type == 'del') {
                 this.deleteOrderGoods()
-              }else if(this.type == "replace"){
+              } else if (this.type == 'replace') {
                 this.parseOrderList() //确认解析
               } else {
                 this.submit()
@@ -165,7 +165,7 @@ export default {
         ],
       },
       skuEcodes: '',
-      type:"", //组件传过来的类型，区分那里过来的
+      type: '', //组件传过来的类型，区分那里过来的
     }
   },
   components: {
@@ -177,7 +177,7 @@ export default {
     componentData: {},
   },
   methods: {
-    saveOrderByPro(){
+    saveOrderByPro() {
       let orderList = []
       this.componentData.data.forEach((em) => {
         let obj = {
@@ -192,13 +192,13 @@ export default {
         orderList,
       }
       this.service.orderCenter.saveOrderByPro(data).then((res) => {
-          if (res.data.code == 0) {
-            this.$Message.success(res.data.message);
-            this.$parent.$parent.closeConfirm()
-          }
+        if (res.data.code == 0) {
+          this.$Message.success(res.data.message)
+          this.$parent.$parent.closeConfirm()
+        }
       })
     },
-    deleteOrderGoods(){
+    deleteOrderGoods() {
       let orderList = []
       this.componentData.data.forEach((em) => {
         let obj = {
@@ -213,10 +213,10 @@ export default {
         orderList,
       }
       this.service.orderCenter.deleteOrderGoods(data).then((res) => {
-          if (res.data.code == 0) {
-            this.$Message.success(res.data.message);
-            this.$parent.$parent.closeConfirm()
-          }
+        if (res.data.code == 0) {
+          this.$Message.success(res.data.message)
+          this.$parent.$parent.closeConfirm()
+        }
       })
     },
     parseOrderList() {
@@ -235,7 +235,7 @@ export default {
       }
       this.service.orderCenter.parseOrderList(data).then((res) => {
         if (res.data.code == 0) {
-          this.$Message.success(res.data.message);
+          this.$Message.success(res.data.message)
           this.$parent.$parent.closeConfirm()
         }
       })
@@ -414,7 +414,7 @@ export default {
   },
   mounted() {
     const self = this
- console.log(this.componentData);
+    console.log(this.componentData)
     this.type = this.componentData.type
     if (this.componentData && this.componentData.ID) {
       self.objid = this.componentData.ID
@@ -422,7 +422,7 @@ export default {
     if (this.componentData && this.componentData.url) {
       this.url = this.componentData.url
 
-      this.selectSkuProBySkuEcodeList(this.componentData.url)
+      // this.selectSkuProBySkuEcodeList(this.componentData.url)
     }
   },
 }
