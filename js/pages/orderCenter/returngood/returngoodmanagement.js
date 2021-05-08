@@ -309,7 +309,7 @@ export default {
       itemSkuEcode: '',
       itemSkuId: '',
       itemGbcode: '',
-      btnConfig:BtnConfig.config(),
+      btnConfig: BtnConfig.config(),
       // btnConfig: {
       //   typeAll: 'default', // 按钮统一风格样式
       //   buttons: [],
@@ -582,7 +582,7 @@ export default {
                         if (
                           list.style === 'popInput' &&
                           list.itemdata.name ===
-                            _this.vmI18n.t('form_label.returnLogisticsCompany')
+                          _this.vmI18n.t('form_label.returnLogisticsCompany')
                         ) {
                           list.itemdata.pid = arrList.CP_C_LOGISTICS_ID;
                           list.itemdata.valuedata =
@@ -823,14 +823,7 @@ export default {
                 self.$Message.warning(self.vmI18n.t('modalTips.n3')); // 请先填入原订单信息
                 return;
               }
-              if (
-                self.address.addr == '' ||
-                self.address.area == '' ||
-                self.address.city == '' ||
-                self.address.name == '' ||
-                (self.address.mobile == '' && self.address.phone == '') ||
-                self.address.province == ''
-              ) {
+              if (Object.values(self.address).includes('')) {
                 self.$Message.warning(window.vmI18n.t('modalTips.f9')); // 请填入完整信息,如:XX,17788888888,上海上海市闵行区XXXXXXXXXXX
               } else {
                 self.replacement.formValue.RECEIVE_NAME = self.address.name; // 收货人赋值
@@ -838,19 +831,13 @@ export default {
                 self.replacement.formValue.RECEIVE_MOBILE = self.address.mobile; // 收货人手机赋值
                 self.replacement.formValue.RECEIVE_ADDRESS = self.address.addr; // 收货人地址赋值
 
-                self
-                  .getAddressId(
-                    self.address.province,
-                    self.address.city,
-                    self.address.area
-                  )
-                  .then((res) => {
-                    if (res.data.code === 0) {
-                      self.getQueryResionByName(res.data.data);
-                    } else {
-                      self.$Message.warning(self.vmI18n.t('modalTips.n4')); // 省市区id获取失败
-                    }
-                  });
+                self.getAddressId(self.address.province, self.address.city, self.address.area).then((res) => {
+                  if (res.data.code === 0) {
+                    self.getQueryResionByName(res.data.data);
+                  } else {
+                    self.$Message.warning(self.vmI18n.t('modalTips.n4')); // 省市区id获取失败
+                  }
+                });
               }
             },
           },
@@ -1117,19 +1104,19 @@ export default {
         this.$route.query.flag === 'RefundToExchange'
       ) {
         // 新增 或者退货转换货单状态
-        let webnameArr = ['refund_save','refund_return'];
+        let webnameArr = ['refund_save', 'refund_return'];
         let buttonArr = []
         this.btnConfig.buttons.forEach((element) => {
-          if(element.webname && webnameArr.includes(element.webname)){
+          if (element.webname && webnameArr.includes(element.webname)) {
             buttonArr.push(element);
           }
         });
         this.btnConfig.buttons = buttonArr;
       } else {
-        let webnameArr = ['refund_save','shenhe_tuihuanhuo','quxiao_tuihuanhuo','xuniruku_tuihuanhuo','beizhu_tuihuanh','refund_return'];
+        let webnameArr = ['refund_save', 'shenhe_tuihuanhuo', 'quxiao_tuihuanhuo', 'xuniruku_tuihuanhuo', 'beizhu_tuihuanh', 'refund_return'];
         let buttonArr = []
         this.btnConfig.buttons.forEach((element) => {
-          if(element.webname && webnameArr.includes(element.webname)){
+          if (element.webname && webnameArr.includes(element.webname)) {
             buttonArr.push(element);
           }
         });
@@ -1160,7 +1147,7 @@ export default {
                 if (
                   list.style === 'popInput' &&
                   list.itemdata.name ===
-                    window.vmI18n.t('form_label.returnLogisticsCompany')
+                  window.vmI18n.t('form_label.returnLogisticsCompany')
                 ) {
                   list.itemdata.pid = item.CP_C_LOGISTICS_ID;
                   list.itemdata.valuedata = item.CP_C_LOGISTICS_ENAME;
@@ -2389,48 +2376,23 @@ export default {
 
                       on: {
                         'on-change': (e) => {
-                          if (
-                            parseInt(
-                              _this.jordanTableConfig.data[params.index]
-                                .QTY_CAN_REFUND
-                            ) < parseInt(e.target.value)
-                          ) {
-                            _this.$Message.warning(
-                              '申请数量不允许大于可退数量!'
-                            );
+                          if (parseInt(_this.jordanTableConfig.data[params.index].QTY_CAN_REFUND) < parseInt(e.target.value)) {
+                            _this.$Message.warning('申请数量不允许大于可退数量!');
                             setTimeout(() => {
-                              e.target.value =
-                                _this.jordanTableConfig.data[
-                                  params.index
-                                ].QTY_REFUND;
-                              // document.getElementsByClassName('qtyRefund')[params.index].childNodes[6].value = _this.jordanTableConfig.data[params.index].QTY_REFUND;
+                              e.target.value = _this.jordanTableConfig.data[params.index].QTY_REFUND;
                             }, 100);
                             return;
                           }
-                          if (params.row.amt_refund_single == 0) {
-                            params.row.AMT_REFUND = publicMethodsUtil.accMul(
-                              e.target.value,
-                              params.row.PRICE === null ? 0 : params.row.PRICE
-                            );
-                          } else {
-                            params.row.AMT_REFUND = publicMethodsUtil.accMul(
-                              e.target.value,
-                              params.row.amt_refund_single
-                            );
-                          }
-                          // 计算结算金额
-                          params.row.AMT_SETTLE_TOT = publicMethodsUtil.accMul(
+                          params.row.AMT_REFUND = publicMethodsUtil.accMul(
                             e.target.value,
-                            params.row.PRICE_SETTLE === null
-                              ? 0
-                              : params.row.PRICE_SETTLE
+                            params.row.amt_refund_single == 0 ? params.row.PRICE ?? 0 : params.row.amt_refund_single
                           );
+                          // 计算结算金额
+                          params.row.AMT_SETTLE_TOT = publicMethodsUtil.accMul(e.target.value, params.row.PRICE_SETTLE ?? 0);
                           params.row.QTY_REFUND = e.target.value;
                           _this.refundDtoList.data[params.index] = params.row;
                           _this.returnSelectData.forEach((item) => {
-                            if (
-                              item.PS_C_SKU_ECODE === params.row.PS_C_SKU_ECODE
-                            ) {
+                            if (item.PS_C_SKU_ECODE === params.row.PS_C_SKU_ECODE) {
                               item.QTY_CAN_REFUND = params.row.QTY_CAN_REFUND;
                               item.AMT_REFUND = params.row.AMT_REFUND;
                               item.QTY_REFUND = params.row.QTY_REFUND;
@@ -2438,17 +2400,9 @@ export default {
                               item.AMT_SETTLE_TOT = params.row.AMT_SETTLE_TOT;
                             }
                           });
-                          if (_this.returnSelectData.length > 0) {
-                            _this.amountReturned = _this
-                              .calculateMoney(_this.returnSelectData, 1)
-                              .toFixed(2);
-                            _this.returnTotal();
-                          } else {
-                            _this.amountReturned = _this
-                              .calculateMoney(_this.refundDtoList.data, 1)
-                              .toFixed(2);
-                            _this.returnTotal();
-                          }
+
+                          _this.amountReturned = _this.calculateMoney(_this.returnSelectData.length > 0 ? _this.returnSelectData : _this.refundDtoList.data, 1).toFixed(2);
+                          _this.returnTotal();
                         },
                       },
                     }),
@@ -4107,7 +4061,7 @@ export default {
         for (let i = 0; i < item.length; i++) {
           if (
             item[i].PS_C_SKU_ECODE ===
-              _this.returnSelectData[0].PS_C_SKU_ECODE &&
+            _this.returnSelectData[0].PS_C_SKU_ECODE &&
             _this.returnSelectData[0].PS_C_SKU_ECODE !== undefined
           ) {
             _this.jordanTableConfig.data.splice(i, 1);
@@ -4143,7 +4097,7 @@ export default {
         for (let i = 0; i < item.length; i++) {
           if (
             item[i].PS_C_SKU_ECODE ===
-              _this.exchangeSelectData[0].PS_C_SKU_ECODE &&
+            _this.exchangeSelectData[0].PS_C_SKU_ECODE &&
             _this.exchangeSelectData[0].PS_C_SKU_ECODE !== undefined
           ) {
             _this.jordanTableConfig2.data.splice(i, 1);
@@ -4348,7 +4302,7 @@ export default {
         if (
           list.style === 'popInput' &&
           list.itemdata.name ===
-            this.vmI18n.t('form_label.returnLogisticsCompany')
+          this.vmI18n.t('form_label.returnLogisticsCompany')
         ) {
           list.itemdata.pid = this.onSelectData[0].CP_C_LOGISTICS_ID;
           list.itemdata.valuedata = this.onSelectData[0].CP_C_LOGISTICS_ENAME;
@@ -4465,7 +4419,7 @@ export default {
       this.order.modal = false;
     },
     // 取消
-    querycancel() {},
+    querycancel() { },
     // 原始订单勾选
     onquerySelect(e) {
       // console.log(e.length);
@@ -4616,7 +4570,7 @@ export default {
           // 收货人省份
           if (
             item.itemdata.name ==
-              _this.vmI18n.t('form_label.consignee_province') &&
+            _this.vmI18n.t('form_label.consignee_province') &&
             item.itemdata.name == e.name
           ) {
             this.replacement.formValue.receiver_province_id = item.itemdata.pid;
@@ -4632,7 +4586,7 @@ export default {
               item.itemdata.valuedata;
           } else if (
             item.itemdata.name ==
-              _this.vmI18n.t('form_label.aconsignee_area') &&
+            _this.vmI18n.t('form_label.aconsignee_area') &&
             item.itemdata.name == e.name
           ) {
             // 收货人区
@@ -4731,7 +4685,7 @@ export default {
         this.addReturnDetailSelectArr.push(item.PS_C_SKU_ECODE);
       });
     }, // 全选选中事件
-    detailAddCancel() {},
+    detailAddCancel() { },
     resetReturnMainTable() {
       const selectArr = this.addReturnDetailSelectArr;
       const tableArr = this.returnDetailAddTable.table.data;
