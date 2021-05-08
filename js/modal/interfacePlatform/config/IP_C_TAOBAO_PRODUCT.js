@@ -1,5 +1,5 @@
 import BurgeonDate from '@/assets/js/__utils__/date.js';
-
+import i18n from '@burgeon/internationalization/i18n/i18n';
 export default {
   // 商品中心 - 淘宝商品（下载商品）
   formConfig: {
@@ -29,13 +29,13 @@ export default {
           },
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: window.vmI18n.t('other.shop'), // 店铺
+          fkdesc: i18n.t('other.shop'), // 店铺
           inputname: 'CP_C_SHOP_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: window.vmI18n.t('other.shop'), // 店铺input前面显示的lable值
+          name: i18n.t('other.shop'), // 店铺input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_SHOP',
           reftableid: 24475,
@@ -47,7 +47,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: window.vmI18n.t('form_label.platformCommodityID'), // 平台商品ID 输入框前文字 输入框前文字
+        label: i18n.t('form_label.platformCommodityID'), // 平台商品ID 输入框前文字 输入框前文字
         value: 'numNumber', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -60,7 +60,7 @@ export default {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'timeArr',
-        label: window.vmI18n.t('table_label.modificationTime'), // 修改时间
+        label: i18n.t('table_label.modificationTime'), // 修改时间
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''
@@ -71,14 +71,14 @@ export default {
   determine: async (self) => {
     const paramTime = self.downLoadFormConfig.formValue.timeArr || [];
     if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
-      self.$Message.warning(window.vmI18n.t('modalTips.be'));// 请选择需要下载的店铺
+      self.$Message.warning(i18n.t('modalTips.be'));// 请选择需要下载的店铺
       return false;
     }
     if (
       self.downLoadFormConfig.formValue.numNumber === ''
         && paramTime[0] === ''
     ) {
-      self.$Message.warning(window.vmI18n.t('modalTips.bx'));// 请输入需要下载的数字编号或修改时间中的一个
+      self.$Message.warning(i18n.t('modalTips.bx'));// 请输入需要下载的数字编号或修改时间中的一个
       return false;
     }
     const param = {
