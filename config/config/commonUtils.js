@@ -516,13 +516,14 @@ class commonUtils {
             fDitem.oneObj = fDitem.oneObj;
           }
           /*  ˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚ 生成formValue 并 赋值（新增时接口不会返回valuedata字段）˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚  */
-          fV[item.colname] = item.valuedata || '';
+          fV[item.colname] = item.valuedata || item.defval;
           if (item.fkdisplay) {
             // 复杂类型的formValue赋值
             if (!item.valuedata) return
             fV[item.colname] = { pid: item.refobjid || '', valuedata: item.valuedata || '' }
             fV[`${item.colname}_pid`] = item.refobjid || '';
             fV[`${item.colname}_valuedata`] = item.valuedata || '';
+            fV[`${item.colname.replace('_ID', '_ENAME')}`] = item.valuedata || '';
           } else if (item.display == 'select' || item.display == 'check') {
             // 下拉类型的接口会返回一个默认选中的值（元数据中字段的缺省值）
             fV[item.colname] = item.defval || '';
