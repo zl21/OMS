@@ -247,34 +247,36 @@ export default {
       // 商品总金额赋值
       this.retailPriceTotal = val;
     },
-    // 子组件点击按钮事件通知
+    // 添加赠品
     addGiftHandler() {
-      this.dialogs.addGift.data = this.componentData.order;
-      console.log(this.dialogs.addGift.data,this.componentData.order);
-      self.publicBouncedConfig = Object.assign(this.dialogs.addGift, {
-        componentData: {
-          ids: [this.componentData.order.ID]
-        }
-      });
+      console.log('添加赠品');
+      this.dialogs.addGift.data = {
+        data: [{
+          ID:this.componentData.order.ID,
+          BILL_NO:this.componentData.order.BILL_NO
+        }],
+        type: 'add',
+      };
       setTimeout(() => {
         this.$children[0].$children.find(item => item.name === 'addGiftDialog').openConfirm();
       }, 100);
     },
     // 详情按钮替换商品弹框
-    replaceGoodsDetail(data) {
-      this.publicBouncedConfig = Object.assign(this.dialogs.changeSku, {
-        componentData: {
-          ids: [this.$route.params.customizedModuleId],
-          itemId: data[0].ID
-        }
-      });
+    replaceGoodsDetail(itemData) {
+      this.dialogs.changeSku.data = {
+        orderList: [{
+          orderId:this.componentData.order.ID,
+          billNo:this.componentData.order.BILL_NO
+        }],
+        oldSuk:itemData[0].PS_C_PRO_ECODE
+      };
       setTimeout(() => {
         this.$children[0].$children.find(item => item.name === 'changeSkuDialog').openConfirm();
       }, 100);
     },
     // 修改地址
     modifyAddress(){
-      this.dialogs.address.data = this.componentData.order;
+      this.dialogs.address.componentData = this.componentData.order;
       this.publicBouncedConfig = Object.assign(this.dialogs.address, {
         componentData: {
           ids: [this.$route.params.customizedModuleId]
@@ -287,7 +289,7 @@ export default {
     // 修改备注
     modifyRemark(){
       console.log('修改备注');
-      this.dialogs.modifyRemark.data = {
+      this.dialogs.modifyRemark.componentData = {
         ids: [this.$route.params.customizedModuleId]
       };
       setTimeout(() => {

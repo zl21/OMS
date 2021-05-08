@@ -10,26 +10,32 @@ export default {
       vmI18n: window.vmI18n,
       radioValue: '2',
       searchValue: '',
-      qty: '1',
-      columns: [
-        {
-          title: '商品SKU',
-          key: 'ECODE'
-        },
-        {
-          title: '商品名称',
-          key: 'PS_C_PRO_ENAME'
-        },
-        {
-          title: '规格',
-          key: 'SPEC'
-        },
-        {
-          title: '是否为赠品',
-          key: 'IS_GIFT'
-        }
-      ],
+      columns: [{
+        key: 'skuEcode',
+        title: 'SKU编码',
+      },
+      {
+        key: 'spuEcode',
+        title: 'SPU编码',
+      },
+      {
+        key: 'spuEname',
+        title: 'SPU名称',
+      },
+      {
+        key: 'skuEname',
+        title: 'SKU名称',
+      },
+      {
+        key: 'brandEname',
+        title: '品牌',
+      },
+      {
+        key: 'classifyEname',
+        title: '商品分类',
+      }],
       data: [],
+      currentSkuEcode:'',
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         buttons: [
@@ -57,31 +63,33 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.$parent.$parent.$parent.reloadCus);
+    console.log('componentData:',this.componentData);
   },
   methods: {
-    radioChange(value) {
-      console.log(value);
+    // 当前选中的行数据
+    currentChange(currentData){
+      this.currentSkuEcode = currentData.skuEcode
     },
+    // 搜索
     search() {
       // sku查询
       const self = this;
-      const data = { isBlur: 'N', psCSku: { ECODE: self.searchValue } };
-      self.service.common.skuQuery(data).then(res => {
-        if (res.data.code == 0) {
-          if (res.data.data.data.length == 0) {
-            // 查询数据为空!
-            this.$Message.warning(self.vmI18n.t('modalTips.r8'));
-            return;
-          }
-          res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是';
-          self.data = res.data.data.data;
-        } else {
-          // sku查询失败!
-          this.$Message.warning(self.vmI18n.t('modalTips.zt'));
-        }
-      });
+      let data = {
+        skuEcode: self.searchValue,
+        isGroup: 'Y',
+        groupType: 2,
+        size: 10,
+        current: 1,
+      }
+      axios({
+        method: 'post',
+        url: '/r3-ps/p/cs/ps/pro/v1/selectSkuProBySkuEcodeList',
+        data,
+      }).then((res) => {
+        self.data = res.data.data.records;
+      })
     },
+    // 替换
     async confirm() {
       const self = this;
       if (self.data.length == 0) {
@@ -89,44 +97,30 @@ export default {
         self.$Message.warning(self.vmI18n.t('modalTips.cg'));
         return;
       }
-      const param = {};
-      param.ids = self.componentData.ids;
-      param.sku_code = self.data[0].ECODE;
-      param.itemId = self.componentData.itemId;
-      param.type = 1;
-      this.$comUtils.setLoading(true);
-      // bathChangeGoods
-      try {
-        const { data: { code, message, data } } = await this.service.orderCenter.bathChangeGoods(param);
-        if (code == 0) {
-          self.$Message.success(message);
-          if (self.componentData.list) {
-            self.$parent.$parent.$parent.getData();
-          } else {
-            if (self.$parent.$parent.$parent.reloadCus) self.$parent.$parent.$parent.reloadCus();
-            if (self.$parent.$parent.$parent.$parent.autoRefresh) self.$parent.$parent.$parent.$parent.autoRefresh();
-          }
-
-          self.$parent.$parent.closeConfirm();
-        } else {
-          self.$Modal.confirm({
-            title: message,
-            width: 500,
-            render: h => h('Table', {
-                props: {
-                  columns: [
-                    {
-                      title: '提示信息',
-                      key: 'message'
-                    }
-                  ],
-                  data
-                }
-              })
-          });
-        }
-      } catch (error) {
-        this.$comUtils.setLoading();
+      let params = {
+        orderList:this.componentData.orderList,
+        skuEcodes:[this.componentData.oldSuk,this.currentSkuEcode]
+      }
+      const { data: { code, message, data } } = await this.service.orderCenter.replaceOrderByPro(params);
+      console.log(code, message, data);
+      if(code ===  0){
+        self.$Message.success(message);
+      }else{
+        self.$Modal.confirm({
+          title: message,
+          width: 500,
+          render: h => h('Table', {
+              props: {
+                columns: [
+                  {
+                    title: '提示信息',
+                    key: 'message'
+                  }
+                ],
+                data
+              }
+            })
+        });
       }
     }
   }

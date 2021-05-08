@@ -44,6 +44,13 @@ DialogConfig.customConfig = {
         name: 'addGiftDialog',
         excludeString: 'addGiftDialog'
     },
+    deleteGift: {
+        title: window.vmI18n.t('btn.deleteGift'),
+        width: 1000,
+        url: 'modal/orderCenter/addGiftItem',
+        name: 'deleteGiftDialog',
+        excludeString: 'deleteGiftDialog'
+    },
     changeSku: {
         title: window.vmI18n.t('btn.replaceGoods'),
         width: 800,

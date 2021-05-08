@@ -20,6 +20,10 @@ export default {
               btnclick: () => {
                 // 判断条件是否符合
                 const self = this;
+                if(!['缺货','待审核'].includes(this.componentData.order.ORDER_STATUS)) {
+                  self.$Message.error('只有状态为待审核和缺货才能添加赠品！');
+                  return;
+                };
                 this.$emit('addGiftHandler')
               } // 按钮点击事件
             },
@@ -108,7 +112,6 @@ export default {
   watch: {
     componentData: {
       handler(newVal) {
-        console.log('newVal:',newVal);
         this.request(newVal);
         if(newVal.order.IS_COMBINATION){
           this.tableConfig.businessButtonConfig = {}
@@ -153,22 +156,27 @@ export default {
     // 删除赠品
     async deleteItem() {
       const self = this;
-      const itemId = this.checkSelection.map(row => row.ID);
-      // const changeGoodsSKu = this.checkSelection.map(row => row.PS_C_PRO_ECODE);
-      // 至少选择一条订单明细
-      if (itemId.length === 0) return self.$Message.error(self.vmI18n.t('modalTips.zk'));
-      const param = {
-        ids: [self.objid],
-        itemId,
-        detail: 'Y'
-      };
-      const { data: { code, message } } = await this.service.orderCenter.batchDeleteGoods(param);
-      if (code === 0) {
-        self.$Message.success(message || self.vmI18n.t('modalTips.ay'));
-        self.$parent.$parent.autoRefresh();
-      } else {
-        self.$Message.error(message || self.vmI18n.t('modalTips.z3'));
+      console.log('1111:',this.checkSelection);
+      const GIFT_TYPES = this.checkSelection.map(row => row.GIFT_TYPE);
+      if(GIFT_TYPES.includes('非赠品') && !['缺货','待审核'].includes(this.componentData.order.ORDER_STATUS)){
+        self.$Message.error('勾选明细含有非赠品禁止删除！');
+        return;
       }
+      const PS_C_SKU_ENAMES = this.checkSelection.map(row => row.PS_C_SKU_ENAME);
+      let data = {
+        skuEcodes: PS_C_SKU_ENAMES,
+        orderList:[{ 
+          orderId: this.componentData.order.ID, //订单id
+          billNo: this.componentData.order.BILL_NO, //单据编号
+        }],
+      }
+      this.service.orderCenter.deleteOrderGoods(data).then((res) => {
+        if (res.data.code == 0) {
+          this.$Message.success(res.data.message);
+          this.$parent.$parent.closeConfirm();
+          // this.$parent.$parent.autoRefresh();
+        }
+      })
     },
     // 标记退款
     async returnAccount() {
@@ -180,7 +188,6 @@ export default {
         return;
       }
       const { data: { code, message } } = await this.service.orderCenter.markrefund({ id: this.$route.params.customizedModuleId, itemIds: ids, ISJITX: 50 });
-      console.log(code, message);
       if (code === 0) {
         self.$parent.$parent.load();
         self.$Message.success(message);
@@ -297,14 +304,5 @@ export default {
   created(){
     // 获取表头
     this.getColumn();
-  },
-  mounted() {
-    // 获取数据
-    // if (this.componentData && this.componentData.tablename) {
-    //   // this.tableConfig.loading = true;
-    //   // setTimeout(() => {
-        
-    //   // }, 1000);
-    // }
   }
 };

@@ -19,6 +19,8 @@
     </div>
     <div class="i_body">
       <Table
+        highlight-row
+        @on-current-change="currentChange"
         :columns="columns"
         :data="data"
       />

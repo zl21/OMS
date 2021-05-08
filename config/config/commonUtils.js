@@ -768,7 +768,6 @@ class commonUtils {
    */
    static buttonHasDisable(textArr,ButtonArr,disabled) {
     ButtonArr.forEach((item) => {
-      console.log(item);
       if (textArr.includes(item.text)) {
         item.disabled = disabled;
       }
