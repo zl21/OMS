@@ -89,7 +89,7 @@ export default {
               colname: "CP_C_LOGISTICS_ID",
               fkdisplay: "drp",
               isfk: true, // 是否有fk键
-              isnotnull: false, // 是否必填
+              isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               name: "物流公司",
               readonly: false, // 是否可编辑，对应input   readonly属性
@@ -222,12 +222,10 @@ export default {
       param.CP_C_LOGISTICS_ID = +_this.formConfig.formValue.CP_C_LOGISTICS_ID;
       const res = await this.service.orderCenter.updateLogistics(param);
       if (res.data.code === 0) {
-        // _this.$parent.$parent.$parent.getTreeData();
-        // _this.$parent.$parent.$parent.provinceSynchronous();
         _this.$parent.$parent.closeConfirm();
         _this.$Message.success(res.data.message);
         _this.$parent.$parent.$parent.query();
-      } else if (code == 1 && data.data) {
+      } else if (res.data.code == 1 && res.data.data) {
         let tabData = data.data.map((row, index) => {
           row.INDEX = ++index;
           row.BILL_NO = row.objidno;
@@ -265,10 +263,10 @@ export default {
             });
           }
         );
+      } else if (res.data.code == 1 && !res.data.data) {
+        _this.$Message.error(res.data.message);
       } else {
         // 走框架报错
-        // const err = res.data.message || window.vmI18n.t("modalTips.z3");
-        // _this.$Message.error(err);
       }
       _this.loading = false;
     },

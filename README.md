@@ -331,6 +331,7 @@ R3.launchApplication({
 | v1.2.9  | labelName、drp必填等属性                                   |
 | v1.2.10  | 必要的labelName补充 (元数据若配置的是'网页链接'则需前端配置labelName，若是动作定义则不用配置) |
 | v1.2.11  | holdOrderDialog批量操作入参调整                                               |
+| v1.2.12  | 取消hold单tips                                               |
 
 #### Extends-Api 版本说明
 

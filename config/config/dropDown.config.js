@@ -473,7 +473,7 @@ class DropDownConfig {
     list = rows.map(it => ({ID:it.ID,BILL_NO:it.BILL_NO}));
     commonUtils.modalShow(self, 'e1', 'orderCenter.manualUnHoldOrder', {ID_AND_BILL_NO_LIST:list} , 'all', function (res) {
       if (res.data.code === 0) {
-        commonUtils.msgTips(self, 'success', res, 2);
+        commonUtils.msgTips(self, 'success', res.data.message, 2);
         self.selection = [];
         self.query();
       } else if (res.data.code == 1 && res.data.data) {
@@ -500,7 +500,6 @@ class DropDownConfig {
                   key:'RESULT_MSG'
                 }
               ],
-              // data:res.data.data.CANCEL_ORDER_ERROR_INFOS
               data:tabData
             }
           })
