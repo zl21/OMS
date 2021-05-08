@@ -149,7 +149,6 @@ export default {
     view_log: '查看日志',
     warehouseDelivery: "仓库发货", //仓库发货    
     nonMatchingGoods: '非搭配商品', // 非搭配商品
-    excludeFollowingItems: '排除以下商品', // 排除以下商品
     preSale: '预售', // 预售
     depositTime: '定金时间', // 定金时间
     buyAndGive: '全场买赠', // 全场买赠
@@ -257,7 +256,6 @@ export default {
     out_of_stock_splitOrder: "缺货拆单", //缺货拆单
     overdue: '过期',
     publish: '发布',
-    publish: '发布',
     published: '已发布',
     query: '查询',
     rark_refundComplete: '标记退款完成',
@@ -306,7 +304,6 @@ export default {
     add_claimForm: '赔付单新增', // 赔付单新增,Add ClaimForm
     add_retail_shipping_order: '零售发货单新增', //零售发货单新增
     addPromotion: '新增促销活动',
-    addReturnOrder: '退换货单新增', //退换货单新增
     addReturnOrder: '退换货订单新增', //退换货订单新增
     all: '全部',
     barCode_details: '条码明细',

@@ -99,3 +99,4 @@
 | v1.0.34 |  add modalTips.fe ~ ff  |
 | v1.0.35 |  add modalTips.fg  |
 | v1.0.36 |  add modalTips.fh ~ fm  |
+| v1.0.37 |  remove Duplicate keys  |
