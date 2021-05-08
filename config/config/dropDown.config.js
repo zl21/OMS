@@ -53,6 +53,11 @@ class DropDownConfig {
         this.dropDownMainHandler('replaceProduct')
         break
       }
+      case 'ORDER_ADD_GOODS': {
+        //添加商品
+        this.dropDownMainHandler('ORDER_ADD_GOODS')
+        break
+      }
       case 'Adding gifts': {
         this.dropDownMainHandler('addGifts')
         break
@@ -185,6 +190,11 @@ class DropDownConfig {
      */
     let funName, tips, paramsType
     switch (type) {
+      case 'ORDER_ADD_GOODS':
+        funName = 'addGiftsHandler'
+        tips = 'c6'
+        paramsType = 4
+        break
       case 'modifyLogistics':
         funName = 'modifyLogisticsHandler'
         tips = 'c6'
@@ -224,7 +234,7 @@ class DropDownConfig {
       case 'replaceProduct':
         funName = 'replaceProductHandler'
         tips = 'dq'
-        paramsType = 1
+        paramsType = 4
         break
       case 'addGifts':
         funName = 'addGiftsHandler'
@@ -375,8 +385,9 @@ class DropDownConfig {
           status: self.statusData,
           highSearch: self.highSearchData,
         }
+
         // 列表勾选数据
-        self.publicBouncedConfig.componentData = {
+        componentDataObj = {
           a_1: param,
           a_2: ids,
         }
@@ -388,7 +399,6 @@ class DropDownConfig {
     }
 
     // 表单筛选条件
-
     self.publicBouncedConfig.componentData = componentDataObj
     self.$nextTick(() => {
       self.$children.find((item) => item.name === tableType).openConfirm()
@@ -439,6 +449,7 @@ class DropDownConfig {
   static replaceProductHandler(ids) {
     this.successHandler(ids, 'replaceConfig', 'product', 'replaceTheGoods')
   }
+
   //新增赠品
   static addGiftsHandler(ids) {
     this.successHandler(ids, 'pushProduceConfig', 'product', 'pushProduce')

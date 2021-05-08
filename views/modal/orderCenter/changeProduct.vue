@@ -25,15 +25,15 @@
         </div>
         <businessActionTable
           :jordan-table-config="tableConfig"
-          @on-select="onSelect"
-          @on-select-cancel="onSelectCancel"
-          @on-select-all="onSelectAll"
-          @on-select-all-cancel="onSelectAllCancel"
-          @on-row-click="onRowClick"
-          @on-row-dblclick="onRowDblclick"
-          @table-delete-detail="tableDeleteDetail"
-          @on-page-change="pageChange"
-          @on-page-size-change="pageSizeChange"
+          @on-select="onSelect1"
+          @on-select-cancel="onSelectCancel1"
+          @on-select-all="onSelectAll1"
+          @on-select-all-cancel="onSelectAllCancel1"
+          @on-row-click="onRowClick1"
+          @on-row-dblclick="onRowDblclick1"
+          @table-delete-detail="tableDeleteDetail1"
+          @on-page-change="pageChange1"
+          @on-page-size-change="pageSizeChange1"
         />
         <!-- <Table
           :columns="columns"
@@ -67,15 +67,15 @@
         </div>
         <businessActionTable
           :jordan-table-config="tableConfig2"
-          @on-select="onSelect"
-          @on-select-cancel="onSelectCancel"
-          @on-select-all="onSelectAll"
-          @on-select-all-cancel="onSelectAllCancel"
-          @on-row-click="onRowClick"
-          @on-row-dblclick="onRowDblclick"
-          @table-delete-detail="tableDeleteDetail"
-          @on-page-change="pageChange"
-          @on-page-size-change="pageSizeChange"
+          @on-select="onSelect2"
+          @on-select-cancel="onSelectCancel2"
+          @on-select-all="onSelectAll2"
+          @on-select-all-cancel="onSelectAllCancel2"
+          @on-row-click="onRowClick2"
+          @on-row-dblclick="onRowDblclick2"
+          @table-delete-detail="tableDeleteDetail2"
+          @on-page-change="pageChange2"
+          @on-page-size-change="pageSizeChange2"
         />
       </div>
       <img class="icon_switch" src="@/assets/img/switch.png" />

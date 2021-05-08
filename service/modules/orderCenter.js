@@ -8,6 +8,8 @@ export default {
 
   saveOrderByPro: (params) =>
     $network.post('/p/cs/oc/b/oms/v1/ocborder/saveOrderByPro', params), // 添加订单商品信息-确定添加
+  replaceOrderByPro: (params) =>
+    $network.post('/p/cs/oc/b/oms/v1/ocborder/replaceOrderByPro', params), // 替换订单商品-确认按钮
 
   deleteOrderGoods: (params) =>
     $network.post('/p/cs/oc/b/oms/v1/ocborder/deleteOrderGoods', params), // 批量删除商品信息-删除按钮

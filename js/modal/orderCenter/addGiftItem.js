@@ -415,15 +415,10 @@ export default {
   },
   mounted() {
     const self = this
-    console.log(this.componentData)
+
     this.type = this.componentData.type
     if (this.componentData && this.componentData.ID) {
       self.objid = this.componentData.ID
-    }
-    if (this.componentData && this.componentData.url) {
-      this.url = this.componentData.url
-
-      // this.selectSkuProBySkuEcodeList(this.componentData.url)
     }
   },
 }

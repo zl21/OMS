@@ -340,35 +340,66 @@ export default {
   },
   methods: {
     // 选中某一项时触发
-    onSelect(v) {
+    onSelect1(v) {
       //  this.skuEcodes = v[0].skuEcode
       console.log(v)
+      console.log('----111')
     },
     // 取消选中某一项时触发
-    onSelectCancel() {},
+    onSelectCancel1() {},
     // 点击全选时触发
-    onSelectAll() {},
+    onSelectAll1() {},
     // 点击取消全选时触发
-    onSelectAllCancel() {},
+    onSelectAllCancel1() {},
     // 单击某一行时触发
-    onRowClick(row) {
+    onRowClick1(row) {
       console.log(row)
       this.skuEcodes = row.skuEcode
       this.onRowData = row
     },
     // 单击某二行时触发
-    onRowDblclick() {},
+    onRowDblclick1() {},
     // 分页change 事件
-    pageChange(val) {
+    pageChange1(val) {
       this.tableConfig.current = val
       // this.request(this.componentData);
     },
     // 切换分页条数
-    pageSizeChange(val) {
+    pageSizeChange1(val) {
       this.tableConfig.pageSize = val
       // this.request(this.componentData);
     },
-    tableDeleteDetail() {},
+    tableDeleteDetail1() {},
+    onSelect2(v) {
+      //  this.skuEcodes = v[0].skuEcode
+      console.log(v)
+      console.log('----111')
+    },
+    // 取消选中某一项时触发
+    onSelectCancel2() {},
+    // 点击全选时触发
+    onSelectAll2() {},
+    // 点击取消全选时触发
+    onSelectAllCancel2() {},
+    // 单击某一行时触发
+    onRowClick2(row) {
+      console.log(row)
+      this.skuEcodes2 = row.skuEcode
+      this.onRowData2 = row
+    },
+    // 单击某二行时触发
+    onRowDblclick2() {},
+    // 分页change 事件
+    pageChange2(val) {
+      this.tableConfig.current = val
+      // this.request(this.componentData);
+    },
+    // 切换分页条数
+    pageSizeChange2(val) {
+      this.tableConfig.pageSize = val
+      // this.request(this.componentData);
+    },
+    tableDeleteDetail2() {},
     radioChange(value) {
       console.log(value)
     },
@@ -448,8 +479,28 @@ export default {
       //   this[loadName] = false
       // }
     },
-    async confirm() {
-      const self = this
+    confirm() {
+      let orderList = []
+      let skuEcodes = []
+      this.componentData.a_2.forEach((em) => {
+        let obj = {
+          orderId: em.ID, //订单id
+          billNo: em.BILL_NO, //单据编号
+        }
+        orderList.push(obj)
+      })
+
+      skuEcodes.push(this.onRowData)
+      skuEcodes.push(this.onRowData2)
+      let data = {
+        skuEcodes,
+        orderList,
+      }
+
+      this.service.orderCenter.replaceOrderByPro(data).then((res) => {
+        console.log(res)
+      })
+      /* const self = this
       if (JSON.stringify(self.onRowClickData) == '{}') {
         // self.$Message.warning("替换前商品sku不能为空!");
         self.$Message.warning(window.vmI18n.t('modalTips.yf'))
@@ -516,6 +567,7 @@ export default {
             }),
         })
       }
+      */
     },
     onRowClickReplace(row) {
       this.onRowClickReplaceData = row
