@@ -9,7 +9,7 @@
       fix
     />
     <businessForm :form-config="downLoadFormConfig" />
-    <businessButton :btn-config="downLoadBtnConfig" />
+    <businessButton class="modal-footer" :btn-config="downLoadBtnConfig" />
     <!-- 确认下载弹框 订单下载-->
     <Modal
       v-model="downLoadModal"
