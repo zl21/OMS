@@ -338,7 +338,7 @@ R3.launchApplication({
 | v1.2.16  | 零售发货单详情-订单明细 添加新增/删除/替换功能                                                    |
 | v1.2.17  | 修改零售发货单的入参数据                                                                         |
 | v1.2.18  | 回退downLoadAll配置动态引入                                                                     |
-| v1.2.19  | 回退downLoadAll配置动态引入                                                                     |
+| v1.2.19  | 修改downLoadAll配置动态引入                                                                     |
 
 #### Extends-Api 版本说明
 
