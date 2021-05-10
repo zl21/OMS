@@ -243,7 +243,7 @@ class BtnConfig {
           btnclick: () => this.btnMainHandler('interceptOrder'),
         },
         {
-          webname: 'Split the order',
+          webname: 'ORDER_MANUAL_SPLIT_ORDER',
           btnclick: () => this.btnMainHandler('splitOrder'),
         },
         {
