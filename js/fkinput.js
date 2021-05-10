@@ -359,36 +359,18 @@ export default {
     },
     autocompleteEnter(itemdata) {
       const self = this;
-
       if (self.autocomplete || self.isHandleSelect) {
         // 如果完成模糊查询，回车跳下一个输入框
         self.$emit('itemInputEnter', true);
         return;
       }
-      if (!this.isHandleSelect && !this.autocomplete) {
-        if (this.queryList.length > 0) {
-          itemdata.pid = this.queryList[0].id;
-          itemdata.valuedata = this.queryList[0].value;
-          this.$emit('getFkChooseItem', itemdata);
-          $(`.item-filter .fkAutocomplete${itemdata.colname}`).css(
-            'display',
-            'none'
-          );
-
-          self.autocomplete = true;
-          self.isHandleSelect = false;
-        } else {
-          // self.$emit('itemInputEnter',event)
-          itemdata.valuedata = '';
-          itemdata.pid = null;
-          this.$emit('getFkChooseItem', itemdata);
-        }
-      }
+      self.autocompleteBlur(itemdata);
     },
     autocompleteBlur(itemdata) {
       const self = this;
       if (!this.isHandleSelect && !this.autocomplete) {
         if (this.queryList.length > 0) {
+          // 模糊匹配成功（匹配到了值）
           itemdata.pid = this.queryList[0].id;
           itemdata.valuedata = this.queryList[0].value;
           this.$emit('getFkChooseItem', itemdata);
@@ -399,13 +381,12 @@ export default {
           self.autocomplete = true;
           self.isHandleSelect = false;
         } else {
-          itemdata.valuedata = '';
+          // 模糊匹配失败
+          // itemdata.valuedata = '';
           itemdata.pid = null;
           this.$emit('getFkChooseItem', itemdata);
         }
       }
-      //        self.autocomplete = true
-      //        self.isHandleSelect = false
     },
 
     inputKeyUp(str, event) {
