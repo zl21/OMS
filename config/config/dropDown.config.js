@@ -197,14 +197,14 @@ class DropDownConfig {
   static ORDER_ADD_GOODS() {
     //添加赠品
     let self = DropDownConfig.target
-    self.publicBouncedConfig = JSON.parse(
-      JSON.stringify(publicDialogConfig.addGiftDialog)
-    )
     self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
     if (self.selection.length < 1) {
       self.$OMS2.omsUtils.msgTips(self, 'warning', 'a8')
       return
     }
+    self.publicBouncedConfig.name = 'addGiftDialog-add'
+    self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
+    self.publicBouncedConfig.confirmTitle = '添加赠品'
 
     self.publicBouncedConfig.componentData = {
       data: self.selection,
@@ -212,7 +212,9 @@ class DropDownConfig {
     }
     self.publicBouncedConfig.width = 800
     setTimeout(() => {
-      self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
+      self.$children
+        .find((item) => item.name === 'addGiftDialog-add')
+        .openConfirm()
     }, 100)
   }
 
@@ -272,16 +274,6 @@ class DropDownConfig {
      */
     let funName, tips, paramsType
     switch (type) {
-      case 'ORDER_ADD_GOODS':
-        funName = 'addGiftsHandler'
-        tips = 'c6'
-        paramsType = 4
-        break
-      case 'ORDER_DELETE_GOODS':
-        funName = 'ORDER_DELETE_GOODSHandler'
-        tips = 'c6'
-        paramsType = 4
-        break
       case 'modifyLogistics':
         funName = 'modifyLogisticsHandler'
         tips = 'c6'
