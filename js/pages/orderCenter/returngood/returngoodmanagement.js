@@ -4689,17 +4689,13 @@ export default {
     resetReturnMainTable() {
       const selectArr = this.addReturnDetailSelectArr;
       const tableArr = this.returnDetailAddTable.table.data;
-      const selection = [];
+      
       // 确认后删除明细对应记录
-      for (let i = tableArr.length - 1; i >= 0; i--) {
-        for (let j = 0, len = selectArr.length; j < len; j++) {
-          if (selectArr[j] === tableArr[i].PS_C_SKU_ECODE) {
-            selection.push(tableArr[i]);
-            tableArr.splice(i, 1);
-            break;
-          }
+      const selection = tableArr.filter((item)=>{
+        if(selectArr.includes(item.PS_C_SKU_ECODE)){
+          return item;
         }
-      }
+      });
       // 重置选中记录
       this.addReturnDetailSelectArr = [];
       // 新增明细表单回填记录
@@ -4720,15 +4716,9 @@ export default {
     },
     async getDataByProinfo(proEcode, dataType, sizeId, clrId) {
       const _this = this;
-      let param = {
-        proEcode,
-      };
+      let param = { proEcode, };
       if (sizeId && clrId) {
-        param = {
-          proEcode,
-          clrId,
-          sizeId,
-        };
+        param = { proEcode, clrId, sizeId, };
       }
       const formdata = new FormData();
       formdata.append('param', JSON.stringify(param));
