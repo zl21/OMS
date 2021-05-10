@@ -113,9 +113,9 @@ export default {
     componentData: {
       handler(newVal) {
         this.request(newVal);
-        if(newVal.order.IS_COMBINATION){
-          this.tableConfig.businessButtonConfig = {}
-        }
+        // if(newVal.order.IS_COMBINATION){
+        //   this.tableConfig.businessButtonConfig = {}
+        // }
       },
       deep: true
     },
