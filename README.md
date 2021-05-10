@@ -339,6 +339,7 @@ R3.launchApplication({
 | v1.2.17  | 修改零售发货单的入参数据                                                                         |
 | v1.2.18  | 回退downLoadAll配置动态引入                                                                     |
 | v1.2.19  | 修改downLoadAll配置动态引入                                                                     |
+| v1.2.20  | spu新增保存成功路由跳转问题处理                                                                     |
 
 #### Extends-Api 版本说明
 
