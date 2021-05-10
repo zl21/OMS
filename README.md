@@ -348,6 +348,7 @@ R3.launchApplication({
 | v1.2.26  | skuAdd报错处理                                                                    |
 | v1.2.27  | 零售发货单详情 -- 修改操作明细                                                                    |
 | v1.2.28  | 修改零售发货单详情                                                                    |
+| v1.2.29  | v-loading 指令                                                                    |
 
 #### Extends-Api 版本说明
 
