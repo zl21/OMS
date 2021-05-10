@@ -1,6 +1,6 @@
 <template>
   <!-- 仓库物流设置 -->
-  <div class="warehouseLogisticsAddOrEdit public-main customized-detail">
+  <div class="warehouseLogisticsAddOrEdit public-main customized-detail" v-loading="loading">
     <div class="buttons customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>

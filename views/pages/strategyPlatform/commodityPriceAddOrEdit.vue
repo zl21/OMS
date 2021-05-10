@@ -1,7 +1,6 @@
 <template>
   <!-- 商品价格策略 -->
-  <div class="commodity-price customized-detail">
-    <loading :loading="loading" />
+  <div class="commodity-price customized-detail" v-loading="loading">
     <div class="buttons customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>

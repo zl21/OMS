@@ -1,7 +1,6 @@
 <template>
   <!-- 档期日程规划 -->
-  <div class="wphAddOrEdit public-main customized-detail">
-    <loading :loading="loading" />
+  <div class="wphAddOrEdit public-main customized-detail" v-loading="loading">
     <div class="buttons customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>

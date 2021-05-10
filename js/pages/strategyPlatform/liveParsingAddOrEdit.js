@@ -3,7 +3,6 @@ import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import orderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem';
-import loading from 'professionalComponents/loading';
 import dateUtil from '@/assets/js/__utils__/date.js';
 
 export default {
@@ -13,8 +12,7 @@ export default {
     businessForm,
     businessLabel,
     businessStatusFlag,
-    orderItem,
-    loading
+    orderItem
   },
   data() {
     return {
@@ -485,10 +483,12 @@ export default {
     },
     // 查询
     async queryLiveParsing() {
+      this.loading = true
       // const obj = await this.$OMS2.omsUtils.getObject('ST_C_LIVE_CAST_STRATEGY', this.ID);
       this.isWatchChange = false
       // this.formConfig = this.$OMS2.omsUtils.initFormConfig(obj.addcolums[0].childs, this.formConfig);
       const { data: { code, data, message }} = await this.service.strategyPlatform.queryLiveParsing({ id: this.ID })
+      this.loading = false
       if (code == 0) {
         if (data) {
           // 按钮显示隐藏
@@ -578,7 +578,9 @@ export default {
       }
       delete params.rules
       delete params.ISACTIVE
+      this.loading = true
       const { data: { code, message }} = await this.service.strategyPlatform.liveParsingSave(params)
+      this.loading = false
       if (code == 0) {
         this.$message.success(message)
         this.onOk()
