@@ -4401,20 +4401,13 @@ export default {
           queryListItem.amt_refund_single = selection.amtRefundSingle;
           queryListItem.PRICE_SETTLE = selection.priceSettle;
           queryListItem.AMT_SETTLE_TOT = selection.totPriceSettle;
-          await _this.reconstructionGetDetail(
-            selection,
-            queryListItem,
-            selection.ecode
-          );
+          await _this.reconstructionGetDetail(selection,queryListItem,selection.ecode);
           queryList.push(queryListItem);
         }
       }
       this.jordanTableConfig.data = queryList;
       this.refundDtoList.data = this.jordanTableConfig.data;
-      this.amountReturned = this.calculateMoney(
-        this.jordanTableConfig.data,
-        1
-      ).toFixed(2);
+      this.amountReturned = this.calculateMoney(this.jordanTableConfig.data,1).toFixed(2);
       this.returnTotal();
       this.order.modal = false;
     },
@@ -4448,85 +4441,56 @@ export default {
       if (type == 1 && val.length) {
         if (_this.jordanTableConfig.data.length) {
           val.forEach((item) => {
-            const d = _this.jordanTableConfig.data.find(
-              (list) => list.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE
-            );
+            const d = _this.jordanTableConfig.data.find((list) => list.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE);
             if (d) {
               val.forEach((data) => {
                 if (data.PS_C_SKU_ECODE === d.PS_C_SKU_ECODE) {
-                  d.QTY_REFUND =
-                    parseInt(d.QTY_REFUND) + parseInt(data.QTY_REFUND);
-                  d.QTY_EXCHANGE =
-                    parseInt(d.QTY_EXCHANGE) + parseInt(data.QTY_EXCHANGE);
-                  d.QTY_CAN_REFUND =
-                    parseInt(d.QTY_CAN_REFUND) + parseInt(data.QTY_CAN_REFUND);
+                  d.QTY_REFUND = parseInt(d.QTY_REFUND) + parseInt(data.QTY_REFUND);
+                  d.QTY_EXCHANGE = parseInt(d.QTY_EXCHANGE) + parseInt(data.QTY_EXCHANGE);
+                  d.QTY_CAN_REFUND = parseInt(d.QTY_CAN_REFUND) + parseInt(data.QTY_CAN_REFUND);
 
-                  d.AMT_REFUND = publicMethodsUtil.accMul(
-                    d.QTY_REFUND,
-                    d.PRICE
-                  );
+                  d.AMT_REFUND = publicMethodsUtil.accMul(d.QTY_REFUND, d.PRICE);
                 }
               });
             } else {
               const arr = [];
               arr.push(item);
               _this.refundDtoList.data = _this.refundDtoList.data.concat(arr);
-              _this.jordanTableConfig.data = _this.jordanTableConfig.data.concat(
-                arr
-              );
+              _this.jordanTableConfig.data = _this.jordanTableConfig.data.concat(arr);
             }
           });
         } else {
-          _this.jordanTableConfig.data = _this.jordanTableConfig.data.concat(
-            val
-          );
+          _this.jordanTableConfig.data = _this.jordanTableConfig.data.concat(val);
           _this.refundDtoList.data = _this.refundDtoList.data.concat(val);
         }
         _this.refundDtoList.data = _this.jordanTableConfig.data;
-        _this.amountReturned = _this
-          .calculateMoney(_this.jordanTableConfig.data, 1)
-          .toFixed(2);
+        _this.amountReturned = _this.calculateMoney(_this.jordanTableConfig.data, 1).toFixed(2);
         _this.returnTotal();
         _this.jordanTableConfig.businessFormConfig.formValue.gbCode = '';
       } else {
         if (_this.jordanTableConfig2.data.length) {
           val.forEach((item) => {
-            const d = _this.jordanTableConfig2.data.find(
-              (list) => list.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE
-            );
+            const d = _this.jordanTableConfig2.data.find((list) => list.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE);
             if (d) {
               val.forEach((data) => {
                 if (data.PS_C_SKU_ECODE === d.PS_C_SKU_ECODE) {
-                  d.QTY_EXCHANGE =
-                    parseInt(d.QTY_EXCHANGE) + parseInt(data.QTY_EXCHANGE);
-
-                  d.AMT_REFUND = publicMethodsUtil.accMul(
-                    d.QTY_EXCHANGE,
-                    d.PRICE
-                  );
+                  d.QTY_EXCHANGE = parseInt(d.QTY_EXCHANGE) + parseInt(data.QTY_EXCHANGE);
+                  d.AMT_REFUND = publicMethodsUtil.accMul(d.QTY_EXCHANGE, d.PRICE);
                 }
               });
             } else {
               const arr = [];
               arr.push(item);
-              _this.exchangeDtoList.data = _this.exchangeDtoList.data.concat(
-                arr
-              );
-              _this.jordanTableConfig2.data = _this.jordanTableConfig2.data.concat(
-                arr
-              );
+              _this.exchangeDtoList.data = _this.exchangeDtoList.data.concat(arr);
+              _this.jordanTableConfig2.data = _this.jordanTableConfig2.data.concat(arr);
             }
           });
         } else {
-          _this.jordanTableConfig2.data = _this.jordanTableConfig2.data.concat(
-            val
-          );
+          _this.jordanTableConfig2.data = _this.jordanTableConfig2.data.concat(val);
           _this.exchangeDtoList.data = _this.exchangeDtoList.data.concat(val);
         }
         _this.exchangeDtoList.data = _this.jordanTableConfig2.data;
-        _this.exchangeAmount = _this
-          .calculateMoney(_this.jordanTableConfig2.data, 1)
-          .toFixed(2);
+        _this.exchangeAmount = _this.calculateMoney(_this.jordanTableConfig2.data, 1).toFixed(2);
         _this.returnTotal();
         _this.jordanTableConfig2.businessFormConfig.formValue.gbCode = '';
       }
@@ -4541,22 +4505,17 @@ export default {
             switch (item.itemdata.name) {
               case _this.vmI18n.t('table_label.shopName'):
                 this.information.formValue.CP_C_SHOP_ID = item.itemdata.pid;
-                this.information.formValue.CP_C_SHOP_TITLE =
-                  item.itemdata.valuedata;
+                this.information.formValue.CP_C_SHOP_TITLE = item.itemdata.valuedata;
                 break;
               case _this.vmI18n.t('form_label.returnLogisticsCompany'):
-                this.information.formValue.CP_C_LOGISTICS_ID =
-                  item.itemdata.pid;
-                this.information.formValue.CP_C_LOGISTICS_ENAME =
-                  item.itemdata.valuedata;
+                this.information.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid;
+                this.information.formValue.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
                 break;
               case _this.vmI18n.t('form_label.warehousingEntity'):
-                this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID =
-                  item.itemdata.pid;
+                this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID = item.itemdata.pid;
                 break;
               case _this.vmI18n.t('form_label.shipPhysicalWarehouse'):
-                this.information.formValue.CP_C_PHY_WAREHOUSE_ID =
-                  item.itemdata.pid;
+                this.information.formValue.CP_C_PHY_WAREHOUSE_ID = item.itemdata.pid;
                 break;
             }
           }
@@ -4568,31 +4527,19 @@ export default {
       _this.replacement.formData.forEach((item) => {
         if (item.itemdata) {
           // 收货人省份
-          if (
-            item.itemdata.name ==
-            _this.vmI18n.t('form_label.consignee_province') &&
-            item.itemdata.name == e.name
-          ) {
+          if (item.itemdata.name == _this.vmI18n.t('form_label.consignee_province') && item.itemdata.name == e.name) {
             this.replacement.formValue.receiver_province_id = item.itemdata.pid;
-            this.replacement.formValue.receiver_province_name =
-              item.itemdata.valuedata;
-          } else if (
-            item.itemdata.name == _this.vmI18n.t('form_label.consignee_city') &&
-            item.itemdata.name == e.name
-          ) {
+            this.replacement.formValue.receiver_province_name = item.itemdata.valuedata;
+          } else if (item.itemdata.name == _this.vmI18n.t('form_label.consignee_city') && item.itemdata.name == e.name) {
             // 收货人市
             this.replacement.formValue.receiver_city_id = item.itemdata.pid;
-            this.replacement.formValue.receiver_city_name =
-              item.itemdata.valuedata;
+            this.replacement.formValue.receiver_city_name = item.itemdata.valuedata;
           } else if (
-            item.itemdata.name ==
-            _this.vmI18n.t('form_label.aconsignee_area') &&
-            item.itemdata.name == e.name
+            item.itemdata.name == _this.vmI18n.t('form_label.aconsignee_area') && item.itemdata.name == e.name
           ) {
             // 收货人区
             this.replacement.formValue.receiver_area_id = item.itemdata.pid;
-            this.replacement.formValue.receiver_area_name =
-              item.itemdata.valuedata;
+            this.replacement.formValue.receiver_area_name = item.itemdata.valuedata;
           }
         }
       });
@@ -4604,8 +4551,7 @@ export default {
           switch (item.itemdata.name) {
             case '店铺名称':
               this.order.orderform.formValue.cp_c_store_id = item.itemdata.pid;
-              this.order.orderform.formValue.cp_c_store_ename =
-                item.itemdata.valuedata;
+              this.order.orderform.formValue.cp_c_store_ename = item.itemdata.valuedata;
               break;
           }
         }
@@ -4633,11 +4579,8 @@ export default {
             this.information.formData.forEach((parent) => {
               res.SENSITIVE_COLUMNS.forEach((child) => {
                 if (parent.dataAcessKey == child.ecode) {
-                  if (this.$route.query.id === '-1') {
-                    this.setFormPermissions(parent, child, 'add');
-                  } else {
-                    this.setFormPermissions(parent, child, 'detail');
-                  }
+                  let msg = (this.$route.query.id === '-1') ? 'add' : 'detail';
+                  this.setFormPermissions(parent, child, msg);
                 }
               });
             });
@@ -4689,10 +4632,10 @@ export default {
     resetReturnMainTable() {
       const selectArr = this.addReturnDetailSelectArr;
       const tableArr = this.returnDetailAddTable.table.data;
-      
+
       // 确认后删除明细对应记录
-      const selection = tableArr.filter((item)=>{
-        if(selectArr.includes(item.PS_C_SKU_ECODE)){
+      const selection = tableArr.filter((item) => {
+        if (selectArr.includes(item.PS_C_SKU_ECODE)) {
           return item;
         }
       });
@@ -4706,12 +4649,10 @@ export default {
       // 重构明细拉取请求, 由于项目时间比较紧, 目前只修改了部分接口, 老接口结构保持不变;
       if (ecode != '') {
         await this.getDataByProinfo(ecode, 1);
-        returnItem.clrList = this.clrListArr;
-        returnItem.sizeList = this.sizeListArr;
-      } else {
-        returnItem.clrList = item.selected.psCSpec1objList;
-        returnItem.sizeList = item.selected.psCSpec2objList;
       }
+
+      returnItem.clrList = ecode != '' ? this.clrListArr : item.selected.psCSpec1objList;
+      returnItem.sizeList = ecode != '' ? this.sizeListArr : item.selected.psCSpec2objList;
       // return returnItem;
     },
     async getDataByProinfo(proEcode, dataType, sizeId, clrId) {
