@@ -902,7 +902,7 @@ export default {
           self.$store.commit('customize/TabOpen', {
             id: res.data.data,
             type: 'action',
-            name: 'SPURECORD',
+            name: 'PS_C_PRO',
             label: 'SPU编辑', // 额外退款编辑
           });
           // self.modify = {

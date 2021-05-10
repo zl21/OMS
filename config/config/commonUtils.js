@@ -34,7 +34,7 @@ class commonUtils {
             if (callbackFun) {
               callbackFun(res);
             } else {
-              this.tipShow('success', self, res);
+              self.msgTips('success' , self , '取消成功' , 0);
               self.selection = [];
               self.query();
             }

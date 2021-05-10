@@ -55,7 +55,17 @@ class DropDownConfig {
       }
       case 'ORDER_ADD_GOODS': {
         //添加商品
-        this.dropDownMainHandler('ORDER_ADD_GOODS')
+        this.ORDER_ADD_GOODS()
+        break
+      }
+      case 'ORDER_DELETE_GOODS': {
+        //删除赠品
+        this.ORDER_DELETE_GOODS()
+        break
+      }
+      case 'ORDER_REPLACE_BELONGS_GOODS': {
+        //批量替换下卦赠品
+        this.ORDER_REPLACE_BELONGS_GOODS()
         break
       }
       case 'Adding gifts': {
@@ -134,6 +144,80 @@ class DropDownConfig {
     }
   }
 
+  static ORDER_REPLACE_BELONGS_GOODS() {
+    //批量删除
+    let self = DropDownConfig.target
+
+    self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
+    if (self.selection.length < 1) {
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'a8')
+      return
+    }
+    self.publicBouncedConfig.name = 'addGiftDialog-replace'
+    self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
+    self.publicBouncedConfig.confirmTitle = '批量替换下挂商品'
+    self.publicBouncedConfig.componentData = {
+      data: self.selection,
+      type: 'del',
+    }
+    self.publicBouncedConfig.width = 800
+
+    setTimeout(() => {
+      self.$children
+        .find((item) => item.name === 'addGiftDialog-replace')
+        .openConfirm()
+    }, 100)
+  }
+
+  static ORDER_DELETE_GOODS() {
+    //批量删除
+    let self = DropDownConfig.target
+
+    self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
+    if (self.selection.length < 1) {
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'a8')
+      return
+    }
+    self.publicBouncedConfig.name = 'addGiftDialog-del'
+    self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
+    self.publicBouncedConfig.confirmTitle = '删除赠品'
+    self.publicBouncedConfig.componentData = {
+      data: self.selection,
+      type: 'del',
+    }
+    self.publicBouncedConfig.width = 800
+
+    setTimeout(() => {
+      self.$children
+        .find((item) => item.name === 'addGiftDialog-del')
+        .openConfirm()
+    }, 100)
+  }
+
+  static ORDER_ADD_GOODS() {
+    //添加赠品
+    let self = DropDownConfig.target
+    self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
+    if (self.selection.length < 1) {
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'a8')
+      return
+    }
+    self.publicBouncedConfig.name = 'addGiftDialog-add'
+    self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
+    self.publicBouncedConfig.confirmTitle = '添加赠品'
+
+    self.publicBouncedConfig.componentData = {
+      data: self.selection,
+      type: 'add',
+    }
+    self.publicBouncedConfig.width = 800
+    setTimeout(() => {
+      self.$children
+        .find((item) => item.name === 'addGiftDialog-add')
+        .openConfirm()
+    }, 100)
+  }
+
   static afterSaleCopyHander() {
     let self = DropDownConfig.target
     self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
@@ -190,11 +274,6 @@ class DropDownConfig {
      */
     let funName, tips, paramsType
     switch (type) {
-      case 'ORDER_ADD_GOODS':
-        funName = 'addGiftsHandler'
-        tips = 'c6'
-        paramsType = 4
-        break
       case 'modifyLogistics':
         funName = 'modifyLogisticsHandler'
         tips = 'c6'
@@ -392,6 +471,18 @@ class DropDownConfig {
           a_2: ids,
         }
         break
+      // case 'productAdd':
+      //   componentDataObj = {
+      //     data: ids,
+      //     type: 'add',
+      //   }
+      //   break
+      // case 'productdel':
+      //   componentDataObj = {
+      //     data: ids,
+      //     type: 'del',
+      //   }
+      //   break
       default:
         componentDataObj = {
           ids,
@@ -449,11 +540,15 @@ class DropDownConfig {
   static replaceProductHandler(ids) {
     this.successHandler(ids, 'replaceConfig', 'product', 'replaceTheGoods')
   }
+  // //批量删除赠品
+  // static ORDER_DELETE_GOODSHandler(ids) {
+  //   this.successHandler(ids, 'pushProduceConfig', 'productdel', 'addGiftDialog')
+  // }
 
-  //新增赠品
-  static addGiftsHandler(ids) {
-    this.successHandler(ids, 'pushProduceConfig', 'product', 'pushProduce')
-  }
+  // //新增赠品
+  // static addGiftsHandler(ids) {
+  //   this.successHandler(ids, 'pushProduceConfig', 'productAdd', 'addGiftDialog')
+  // }
   //删除商品
   static deleteProductHandler(ids) {
     this.successHandler(ids, 'itemDeleteConfig', 'product', 'itemDelete')

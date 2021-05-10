@@ -193,38 +193,18 @@
       </div>
     </Col>
     <businessDialog
-      v-for="(list, index) in dialogs"
-      :key="index"
-      :ref="list.name"
-      :url="list.url"
-      :title="list.title"
-      :name="list.name"
-      :keep-alive="list.keepAlive||true"
-      :width="list.width||''"
-      :exclude-string="list.excludeString"
-      :component-data="list.data"
-      :footer-hide="list.footerHide"
-      :quit="list.quit"
-      :confirm="list.confirm"
-    />
-    <!-- 公共弹框 -->
-    <businessDialog
-      :title="publicBouncedConfig.confirmTitle"
-      :title-align="publicBouncedConfig.titleAlign"
-      :width="publicBouncedConfig.width"
-      :scrollable="publicBouncedConfig.scrollable"
-      :closable="publicBouncedConfig.closable"
-      :draggable="publicBouncedConfig.draggable"
-      :mask="publicBouncedConfig.mask"
-      :mask-closable="publicBouncedConfig.maskClosable"
-      :transfer="publicBouncedConfig.transfer"
-      :name="publicBouncedConfig.name"
-      :url="publicBouncedConfig.url"
-      :batch-closed="publicBouncedConfig.batchClosed"
-      :keep-alive="publicBouncedConfig.keepAlive"
-      :exclude-string="publicBouncedConfig.excludeString"
-      :component-data="publicBouncedConfig.componentData"
-      :quit="publicBouncedConfig.quit"
+      :ref="dialogsConfig.name"
+      :url="dialogsConfig.url"
+      :title="dialogsConfig.title"
+      :name="dialogsConfig.name"
+      :keep-alive="dialogsConfig.keepAlive||true"
+      :width="dialogsConfig.width||''"
+      :exclude-string="dialogsConfig.excludeString"
+      :component-data="dialogsConfig.data"
+      :footer-hide="dialogsConfig.footerHide"
+      :quit="dialogsConfig.quit"
+      :mask-closable="dialogsConfig.maskClosable"
+      :confirm="dialogsConfig.confirm"
     />
   </Row>
 </template>

@@ -11,6 +11,12 @@ class BtnConfig {
       loading: false, // 按钮加载
       buttons: [
         {
+          webname: 'ORDER_DELETE_GOODS', // 删除赠品
+        },
+        {
+          webname: 'ORDER_REPLACE_BELONGS_GOODS', // 批量替换下卦赠品
+        },
+        {
           webname: 'ORDER_COPY_CANCELED_ORDER', // 取消单复制
         },
         {
@@ -237,7 +243,7 @@ class BtnConfig {
           btnclick: () => this.btnMainHandler('interceptOrder'),
         },
         {
-          webname: 'Split the order',
+          webname: 'ORDER_MANUAL_SPLIT_ORDER',
           btnclick: () => this.btnMainHandler('splitOrder'),
         },
         {

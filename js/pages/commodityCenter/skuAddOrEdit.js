@@ -473,7 +473,7 @@ export default {
       const defValArr = ['PS_C_SPECOBJ1_ID', 'PS_C_SPECOBJ2_ID', 'PS_C_SPECOBJ3_ID'];
       this.formConfig.formData.forEach(item => {
         if (defValArr.includes(item.colname)) {
-          let itemV = JSON.parse(JSON.stringify(this.formConfig.formValue[item.colname]));
+          let itemV = this.formConfig.formValue[item.colname] ? JSON.parse(JSON.stringify(this.formConfig.formValue[item.colname])) : '';
           // itemV = { pid: 38, valuedata: 'B1' };
           let itemDefV = [];
           itemDefV.push(itemV);

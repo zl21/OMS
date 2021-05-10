@@ -2,9 +2,7 @@ import businessButton from 'professionalComponents/businessButton';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessDialog from 'professionalComponents/businessDialog';
 import CusOrderItem from 'allpages/orderCenter/orderManageDetail/details/custOrderItem';
-// import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
-// import commonUtils from 'burgeonConfig/config/commonUtils';
 import goodsTotalAmount from '@/views/pages/orderCenter/orderManageDetail/details/goodsTotalAmount.vue';
 export default {
   name: 'EssentialInfo',
@@ -20,11 +18,11 @@ export default {
   },
   data() {
     return {
-      publicBouncedConfig: {},
       isQh: true, 
       isQhChild: true,
       is_combination:false, // 是否为组合
-      dialogs: DialogConfig.config(),
+      dialogs: DialogConfig.config(), // dialog配置组合
+      dialogsConfig:{}, //当前展示的dialog配置项
       queryList: [
         {
           width: '6',
@@ -257,6 +255,7 @@ export default {
         }],
         type: 'add',
       };
+      this.dialogsConfig = this.dialogs.addGift;
       setTimeout(() => {
         this.$children[0].$children.find(item => item.name === 'addGiftDialog').openConfirm();
       }, 100);
@@ -270,18 +269,15 @@ export default {
         }],
         oldSuk:itemData[0].PS_C_PRO_ECODE
       };
+      this.dialogsConfig = this.dialogs.changeSku;
       setTimeout(() => {
         this.$children[0].$children.find(item => item.name === 'changeSkuDialog').openConfirm();
       }, 100);
     },
     // 修改地址
     modifyAddress(){
-      this.dialogs.address.componentData = this.componentData.order;
-      this.publicBouncedConfig = Object.assign(this.dialogs.address, {
-        componentData: {
-          ids: [this.$route.params.customizedModuleId]
-        }
-      });
+      this.dialogs.address.data = this.componentData.order;
+      this.dialogsConfig = this.dialogs.address;
       setTimeout(() => {
         this.$children[0].$children.find(item => item.name === 'addressDialog').openConfirm();
       }, 100);
@@ -289,9 +285,10 @@ export default {
     // 修改备注
     modifyRemark(){
       console.log('修改备注');
-      this.dialogs.modifyRemark.componentData = {
+      this.dialogs.modifyRemark.data = {
         ids: [this.$route.params.customizedModuleId]
       };
+      this.dialogsConfig = this.dialogs.modifyRemark;
       setTimeout(() => {
         this.$children[0].$children.find(item => item.name === 'modifyRemarkDialog').openConfirm();
       }, 100);
