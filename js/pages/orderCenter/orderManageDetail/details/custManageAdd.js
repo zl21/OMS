@@ -162,9 +162,9 @@ export default {
         self.$Message.error('勾选明细含有非赠品禁止删除！');
         return;
       }
-      const PS_C_SKU_ENAMES = this.checkSelection.map(row => row.PS_C_SKU_ENAME);
+      const PS_C_SKU_CODES = this.checkSelection.map(row => row.PS_C_SKU_CODE);
       let data = {
-        skuEcodes: PS_C_SKU_ENAMES,
+        skuEcodes: PS_C_SKU_CODES,
         orderList:[{ 
           orderId: this.componentData.order.ID, //订单id
           billNo: this.componentData.order.BILL_NO, //单据编号
@@ -217,6 +217,10 @@ export default {
       if (this.checkSelection.length !== 1) {
         // 请选择一条需要替换的明细!
         this.$Message.warning(this.vmI18n.t('modalTips.dv'));
+        return;
+      }
+      if(!['缺货','待审核'].includes(this.componentData.order.ORDER_STATUS)){
+        this.$Message.error('只允许缺货或待审核状态的订单进行替换！');
         return;
       }
       this.$emit('replaceGoodsDetail', this.checkSelection);
