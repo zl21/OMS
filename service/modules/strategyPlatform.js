@@ -1,112 +1,15 @@
 // 策略平台
-import R3 from '@syman/burgeon-r3'
 import qs from 'qs'
 
-const { network } = R3
 export default {
   checkLogistics: (params) =>
-    network.post('/p/cs/st/v1/deliveryArea/checkLogistics', params), // 派送范围查询公司是否可用
+    $network.post('/p/cs/st/v1/deliveryArea/checkLogistics', params), // 派送范围查询公司是否可用
   deleteLogistics: (params) =>
-    network.post('/p/cs/st/v1/specialAssignLogistics/deleteLogistics', params), // 特殊物流策略-仓库物流明细删除
+    $network.post('/p/cs/st/v1/specialAssignLogistics/deleteLogistics', params), // 特殊物流策略-仓库物流明细删除
   deleteSku: (params) =>
-    network.post('/p/cs/st/v1/specialAssignLogistics/deleteSku', params), // 特殊物流策略-商品属性删除
+    $network.post('/p/cs/st/v1/specialAssignLogistics/deleteSku', params), // 特殊物流策略-商品属性删除
   deleteAddress: (params) =>
-    network.post('/p/cs/st/v1/specialAssignLogistics/deleteAddress', params), // 特殊物流策略-删除指定地址
-  queryAddressPages: (params) =>
-    network.post(
-      '/p/cs/st/v1/specialAssignLogistics/queryAddressPages',
-      params
-    ), // 特殊物流策略-查询地址分页
-  specialAssignLogisticsqueryById: (params) =>
-    network.post('/p/cs/st/v1/specialAssignLogistics/queryById', params), // 特殊物流策略-保存
-  queryProPages: (params) =>
-    network.post('/p/cs/st/v1/specialAssignLogistics/queryProPages', params), // 物流策略-物流规则-启用停用
-  queryLogisticsWarehousePages: (params) =>
-    network.post(
-      '/p/cs/st/v1/specialAssignLogistics/queryLogisticsWarehousePages',
-      params
-    ),
-
-  specialAssignLogisticssave: (params) =>
-    network.post('/p/cs/st/v1/specialAssignLogistics/save', params), // 特殊物流策略-保存
-  tableDetailswitchById: (params) =>
-    network.post('/p/cs/st/v1/tableDetail/switchById', params), // 物流策略-物流规则-启用停用
-  deliveryAreaSave: (params) =>
-    network.post('/p/cs/st/v1/deliveryArea/save', params), // 物流策略-物流派送范围-详情新增保存
-  deliveryQueryById: (params) =>
-    network.post('/p/cs/st/v1/deliveryArea/queryById', params), // 物流策略-物流派送范围-详情查询
-  deliveryDeleteItems: (params) =>
-    network.post('/p/cs/st/v1/deliveryArea/deleteItems', params), // 物流策略-物流派送范围-删除明细
-  assignLogisticsqueryById: (params) =>
-    network.post('/p/cs/st/v1/assignLogistics/queryById', params), // 分物流-查询主表
-  assignLogisticsqueryDetailById: (params) =>
-    network.post('/p/cs/st/v1/assignLogistics/queryDetailById', params), // 分物流-查询明细表
-  assignLogisticssave: (params) =>
-    network.post('/p/cs/st/v1/assignLogistics/save', params), // 分物流-保存
-  assignLogisticsexportDetail: (params) =>
-    network.post(`/p/cs/st/v1/assignLogistics/exportDetail?ID=${params}`), // 分物流-保存
-  ST_C_ASSIGN_LOGISTICSselectTree: (params) =>
-    network.post('/p/cs/st/v1/ST_C_ASSIGN_LOGISTICS/selectTree', params), // 分物流-保存
-
-  getWarehouseRegionInfo: (params) =>
-    network.get('/p/cs/st/v1/orderWarehouse/getWarehouseRegionInfo', params), // 分仓策略-区域矩阵查询
-  orderwarehouse: (params) =>
-    network.post('/p/cs/st/v1/orderWarehouse/saveOrUpdate', params), // 档期日程规划-查询
-  oWexportData: (params) =>
-    network.post(`/p/cs/st/v1/orderWarehouse/exportData?id=${params}`), // 分仓策略-导出数据、导出模版
-  getWarehouseInfo: (params) =>
-    network.get('/p/cs/st/v1/orderWarehouse/getWarehouseInfo', params), // 分仓策略-详情查询
-  orderWarehouseSetIsActive: (params) =>
-    network.post(
-      `/p/cs/st/v1/orderWarehouse/setIsActive?id=${params.id}&isActive=${params.isActive}`
-    ), // 分仓策略-启用停用 详情页单对象
-
-  querySchedule: (params) =>
-    network.post('/vip/v1/ListStCVipcomProjectAndItems', params), // 档期日程规划-查询
-  wphScheduleSave: (params) =>
-    network.post('/vip/v1/saveOrUpdateStCVipcomProject', params), // 档期日程规划-主表保存
-  pickSave: (params) =>
-    network.post('/vip/v1/saveOrUpdateStCVipcomProjectPickItem', params), // 拣货单-保存
-  pickDelete: (params) =>
-    network.post('/vip/v1/deleteStCVipcomProjectPickItem', params), // 拣货单-删除
-  warehouseInSave: (params) =>
-    network.post('/vip/v1/saveOrUpdateStCVipcomProjectStockInItem', params), // 入库单-保存
-  warehouseInDelete: (params) =>
-    network.post('/vip/v1/deleteStCVipcomProjectStockInItem', params), // 入库单-删除
-  carrierDropList: (params) => network.post('/vip/v1/carrierDropList', params), // 承运商
-  getScheduleTree: (params) =>
-    network.post('/vip/v1/AllStCVipcomProject', params), // 档期日程规划-tree
-
-  saveLogisticsCorp: (params) =>
-    network.post('/p/cs/st/v1/expressAllocation/save', params), // 仓库物流设置-保存
-  queryLogistics: (params) =>
-    network.post('/p/cs/st/v1/expressAllocation/queryById', params), // 仓库物流设置-查询
-  deleteLogisticsCorp: (params) =>
-    network.post('/p/cs/st/v1/expressAllocation/deleteItems', params), // 仓库物流设置-删除明细
-  switchLogisticsCorp: (params) =>
-    network.post('/p/cs/st/v1/tableDetail/switchById', params), // 仓库物流设置-启用停用
-  getLogisticsTree: (params) =>
-    network.post('/p/cs/st/v1/ST_C_EXPRESS_ALLOCATION/selectTree', params), // 仓库物流设置-tree
-  checkPhyWarehouse: (params) =>
-    network.post('/p/cs/st/v1/expressAllocation/checkPhyWarehouse', params), // 仓库物流设置-仓库查询
-
-  savePrice: (params) => network.post('/p/cs/st/v1/price/saveOrUpdate', params), // 商品价格策略-保存
-  queryPrice: (params) =>
-    network.get(`/p/cs/st/v1/price/getPriceInfo?${qs.stringify(params)}`), // 商品价格策略-主表-查询
-  queryPriceItem: (params) =>
-    network.get(`/p/cs/st/v1/price/getPriceItemInfo?${qs.stringify(params)}`), // 商品价格策略-子表-查询
-  setIsActive: (params) =>
-    network.post('/p/cs/st/v1/price/setIsActive', params), // 商品价格策略-启用停用
-  deletePrice: (params) =>
-    network.post('/p/cs/st/v1/price/deletePriceItem', params), // 商品价格策略-删除
-  exportPrice: (params) => network.post('/p/cs/st/v1/price/exportData', params), // 商品价格策略-导出
-  getPriceTree: (params) =>
-    network.post('/p/cs/st/v1/ST_C_EXPRESS_ALLOCATION/selectTree', params), // 商品价格策略-tree
-  saveOrUpdate: (params) =>
-    network.post('/p/cs/st/v1/autoAudit/saveOrUpdate', params), // 审单策略保存
-  getAutoAuditInfo: (params) =>
-    network.get(`/p/cs/st/v1/autoAudit/getAutoAuditInfo?id=${params}`), // 审单策略查询
-  strategy: (params) => network.post('/p/cs/st/v1/strategy/tree', params), // 审单策略组织树查询
+    $network.post('/p/cs/st/v1/specialAssignLogistics/deleteAddress', params), // 特殊物流策略-删除指定地址
 
   // 店铺策略 -树展示
   strategyTree: (params) => $network.post('/p/cs/st/v1/strategy/tree', params),
