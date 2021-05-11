@@ -354,6 +354,7 @@ R3.launchApplication({
 | v1.2.32  | 零售发货单 - 合并订单、取消合并逻辑修改 ｜ 替换合并订单、取消合并 api                            |
 | v1.2.33  | 迁移项目工具方法，增加零售发货单错误提示                                                         |
 | v1.2.34  | businessDialog 弹窗迁移                                                       |
+| v1.2.35  | 回退 businessDialog 弹窗迁移                                                       |
 
 #### Extends-Api 版本说明
 

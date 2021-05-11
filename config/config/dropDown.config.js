@@ -1,6 +1,8 @@
 //定制下拉菜单按钮配置类
 import commonUtils from './commonUtils'
-import DialogConfig from 'burgeonConfig/config/dialogs.config';
+import publicDialogConfig from 'professionalComponents/common/js/publicDialog'
+
+// import DialogConfig from 'burgeonConfig/config/dialogs.config';
 class DropDownConfig {
   constructor() {}
   static configHandler(val, singleType = 0, eventList = []) {
@@ -432,7 +434,7 @@ class DropDownConfig {
   static successHandler(ids, objName, componentDataType, tableType) {
     let self = DropDownConfig.target
     self.publicBouncedConfig = JSON.parse(
-      JSON.stringify(DialogConfig.config()[objName])
+      JSON.stringify(publicDialogConfig[objName])
     )
     let componentDataObj = {}
 
