@@ -476,12 +476,12 @@ class BtnConfig {
       case 'mergeOrder':
         funName = 'mergeOrderHandler'
         tips = 'd7'
-        paramsType = 1
+        paramsType = 4
         break
       case 'cancelMergeOrder':
         funName = 'cancelMergeOrderHandler'
         tips = 'd8'
-        paramsType = 1
+        paramsType = 4
         break
       case 'releaseInventory':
         funName = 'releaseInventoryHandler'
@@ -1232,58 +1232,121 @@ class BtnConfig {
         }
       })
   }
-  // 合并订单
-  mergeOrderHandler(self, ids) {
-    /* 
-      使用'item.PAYTYPENAME'来作判断的地方暂未找到对应状态的单据，之后可根据项目自行替换为对应的'item.ORDER_STATUS'
-    */
-    let tips = selection.map((item) => {
-      if (item.ORDER_STATUS !== 1) {
-        // 要合并的单据的订单状态只能为待审核或已审核
-        return 'e7'
+  // 合并订单  (不要动！！！)
+  mergeOrderHandler(self, selection) {
+    // 判断勾选订单信息是否一致
+    const selectionOne = selection[0];
+    const agreement = selection.every(item => item.CP_C_PHY_WAREHOUSE_ENAME === selectionOne.CP_C_PHY_WAREHOUSE_ENAME 
+      && item.ORDER_TYPE === selectionOne.ORDER_TYPE // 订单类型
+      && item.CP_C_SHOP_TITLE === selectionOne.CP_C_SHOP_TITLE //店铺
+      && item.PAY_TYPE === selectionOne.PAY_TYPE //支付方式
+      && item.RECEIVER_ADDRESS_UNION === selectionOne.RECEIVER_ADDRESS_UNION) //收货人信息
+    if(!agreement){
+      self.$Message.warning('订单信息不一致,不允许合并');
+      return;
+    }
+    // 状态判断提示
+    let tips;
+    for (let index = 0; index < selection.length; index++) {
+      const item = selection[index];
+      if (item.ORDER_STATUS !== 1) { // 要合并的单据的订单状态只能为待审核
+        tips =  'e7';
+        break;
       }
-      if (item.PAYTYPENAME === self.vmI18n.t('btn.cashOnDelivery')) {
-        // '货到付款'
-        return 'e8'
-      } else if (
-        item.RESERVE_VARCHAR03_NAME !== self.vmI18n.t('btn.nonPreSale') &&
-        item.RESERVE_VARCHAR03_NAME !== self.vmI18n.t('btn.preSaleBalancePaid') // '非预售' && '预售尾款已付'
-      ) {
-        return 'e9'
-      } else if (item.CP_C_PHY_WAREHOUSE_ENAME === '') {
-        // 要合并的单据的发货仓库只能为非空
-        return 'f0'
+      if (item.ORDER_TAG.some(item => item.text === "hold")) {// '订单已经被HOLD，不允许合并！'
+         tips =  'e8';
+         break;
+      }
+      if (item.ORDER_TAG.some(item => item.text === "时")) {// '订单为时效订单，不允许进行合并！'
+        tips =  'e8';
+        break;
+     }
+      if (item.PAYTYPENAME === self.vmI18n.t('btn.cashOnDelivery')) { // '货到付款'
+        tips =  'e8';
+        break;
+      } else if (item.RESERVE_VARCHAR03_NAME !== '预售订单' && item.PAY_STATUS !== '全部付款') {  // '非预售' && '预售尾款已付'
+        tips =  'e9';
+        break;
+      } else if(selection.length>50){// '合并订单最大支持合并50单!'
+        tips =  'e8';
+      }
+    }
+    if(tips){
+      commonUtils.msgTips(self, 'warning', tips);
+      return ;
+    }
+    const param = {
+      IDS: selection.map(val => val.ID)
+    }
+    // 确认将选中的订单合并吗？
+    commonUtils.modalShow(self,'d9','orderCenter.mergeOrderOne',param, 'all', function (res) {
+      let {data} = res;
+      if(data.code === 0){
+        console.log('成功！');
+        self.$Message.success(data.message || '成功！')
+      }else{
+        console.log('失败！');
+        commonUtils.tipShow('confirm' , self , res ,data.message, function(h){
+          return h('Table' , {
+            props:{
+              columns:[
+                {
+                  title:'ID',
+                  key:'IDS'
+                }
+              ],
+              data:[data.data]
+            }
+          })
+        })
       }
     })
-    commonUtils.msgTips(self, 'warning', tips)
-    const fromdata = new FormData()
-    const param = {
-      tableid: self.$route.query.id,
-      ids: ids,
-      menu: self.vmI18n.t('btn.mergeOrders'),
-    }
-    fromdata.append('param', JSON.stringify(param))
-    commonUtils.serviceHandler(self, 'orderCenter.mergeOrderOne', fromdata)
   }
-  // 取消合并订单
-  cancelMergeOrderHandler(self, ids) {
+  // 取消合并订单 (不要动！！！)
+  cancelMergeOrderHandler(self, selection) {
     for (const item of self.selection) {
+      //判断合单状态
+      if(!item.IS_MERGE){
+        // 未合并的订单不允许进行取消合并!
+        self.$Message.warning('未合并的订单不允许进行取消合并!')
+        // commonUtils.msgTips(self, 'warning', 'd9');
+        self.btnConfig.loading = false
+        return
+      }
       // ['缺货', '待审核', '已审核']
-      if (![2, 1, 3].includes(item.ORDER_STATUS)) {
+      if (!['缺货', '待审核', '已审核'].includes(item.ORDER_STATUS)) {
         // 当前状态异常，不允许操作！
         commonUtils.msgTips(self, 'warning', 'd9')
         self.btnConfig.loading = false
         return
       }
     }
-    const fromdata = new FormData()
     const param = {
-      tableid: self.$route.query.id,
-      ids: ids,
-      menu: self.vmI18n.t('btn.cancel_mergeOrders'),
+      IDS: selection.map(val => val.ID)
     }
-    fromdata.append('param', JSON.stringify(param))
-    commonUtils.serviceHandler(self, 'orderCenter.cancelMergeOrder', fromdata)
+    // 确认将选中的订单取消合并吗？
+    commonUtils.modalShow(self,'d9','orderCenter.cancelMergeOrder',param, 'all', function (res) {
+      let {data} = res;
+      if(data.code === 0){
+        console.log('成功！');
+        self.$Message.success(data.message || '成功！')
+      }else{
+        console.log('失败！');
+        commonUtils.tipShow('confirm' , self , res ,data.message, function(h){
+          return h('Table' , {
+            props:{
+              columns:[
+                {
+                  title:'ID',
+                  key:'IDS'
+                }
+              ],
+              data:[data.data]
+            }
+          })
+        })
+      }
+    })
   }
   //新增退单处理
   addReturnOrderHandler(self, selection) {

@@ -70,16 +70,16 @@ class commonUtils {
   }
   /**
    * 
-   * @param {消息框类型} type 
-   * @param {当前页面实例} self 
-   * @param {接口返回结果} res 
-   * @param {是否定制消息框title} isTitle 
-   * @param {消息框自定义render} renderFun 
+   * @param {消息框类型} type :String,
+   * @param {当前页面实例} self ,
+   * @param {接口返回结果} res :Object,
+   * @param {是否定制消息框title} isTitle:String 
+   * @param {消息框自定义render} renderFun :function
    */
   static tipShow(type, self, res , isTitle , renderFun) {
     self.$Modal[type]({
-      title: isTitle ? isTitle : window.vmI18n.t('modalTitle.tips'), // 提示
-      content: renderFun ? renderFun : res.data.message,
+      title: isTitle ?? window.vmI18n.t('modalTitle.tips'), // 提示
+      content: renderFun ??  res.data.message,
       cancelType: true,
       titleAlign: 'left',
       mask: true,

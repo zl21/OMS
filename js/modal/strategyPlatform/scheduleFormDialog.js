@@ -1,13 +1,11 @@
 import businessForm from 'professionalComponents/businessForm';
 import businessButton from 'professionalComponents/businessButton';
-import loading from 'professionalComponents/loading';
 
 export default {
   name: 'ScheduleFormDialog',
   components: {
     businessButton,
-    businessForm,
-    loading
+    businessForm
   },
   props: {
     dialogConfig: {

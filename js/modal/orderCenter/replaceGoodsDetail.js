@@ -105,23 +105,31 @@ export default {
       console.log(code, message, data);
       if(code ===  0){
         self.$Message.success(message);
-      }else{
-        self.$Modal.confirm({
-          title: message,
-          width: 500,
-          className:'ark-dialog',
-          render: h => h('Table', {
-              props: {
-                columns: [
-                  {
-                    title: '提示信息',
-                    key: 'message'
-                  }
-                ],
-                data
-              }
-            })
-        });
+      }else if(data && code ===  -1){
+          self.$Modal.confirm({
+            title: message,
+            width: 500,
+            className:'ark-dialog',
+            render: h => h('Table', {
+                props: {
+                  columns: [
+                    {
+                      title: 'ID',
+                      key: 'orderId'
+                    },
+                    {
+                      title: '单据编号',
+                      key: 'billNo'
+                    }, 
+                    {
+                      title: '提示信息',
+                      key: 'message'
+                    }
+                  ],
+                  data
+                }
+              })
+          });
       }
     }
   }

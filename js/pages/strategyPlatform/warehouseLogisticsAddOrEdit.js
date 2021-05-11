@@ -518,6 +518,7 @@ export default {
     },
     // 查询
     async queryLogistics() {
+      this.loading = true;
       // const obj = await this.$OMS2.omsUtils.getObject('ST_C_EXPRESS_ALLOCATION', this.ID);
       this.isWatchChange = false;
       // this.formConfig = this.$OMS2.omsUtils.initFormConfig(obj.addcolums[0].childs, this.formConfig);
@@ -530,6 +531,7 @@ export default {
       const {
         data: { code, data, message }
       } = await this.service.strategyPlatform.queryLogistics(params);
+      this.loading = false;
       if (code == 0) {
         const { ST_C_EXPRESS_ALLOCATION, ST_C_EXPRESS_ALLOCATION_ITEM = {} } = data
         if (ST_C_EXPRESS_ALLOCATION) {

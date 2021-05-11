@@ -5,7 +5,6 @@ import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import orderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem';
 import scheduleFormDialog from '@/views/modal/strategyPlatform/scheduleFormDialog';
-import loading from 'professionalComponents/loading';
 import dateUtil from '@/assets/js/__utils__/date.js';
 
 export default {
@@ -17,8 +16,7 @@ export default {
     businessLabel,
     businessStatusFlag,
     businessActionTable,
-    scheduleFormDialog,
-    loading
+    scheduleFormDialog
   },
   data() {
     return {

@@ -1,6 +1,5 @@
 <template>
-  <div class="dialogForm customized-modal">
-    <loading :loading="loading" />
+  <div class="dialogForm customized-modal" v-loading="loading">
     <div class="subtablePart">
       <businessForm
         v-if="dialogConfig.length == 1"

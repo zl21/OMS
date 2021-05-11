@@ -1,6 +1,5 @@
 <template>
-  <div class="live-parsing customized-detail">
-    <loading :loading="loading" />
+  <div class="live-parsing customized-detail" v-loading="loading">
     <div class="buttons customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
