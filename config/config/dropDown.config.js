@@ -147,13 +147,15 @@ class DropDownConfig {
   static ORDER_REPLACE_BELONGS_GOODS() {
     //批量删除
     let self = DropDownConfig.target
-
+    self.publicBouncedConfig = JSON.parse(
+      JSON.stringify(publicDialogConfig.pushProduceConfig)
+    )
     self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
     if (self.selection.length < 1) {
       self.$OMS2.omsUtils.msgTips(self, 'warning', 'a8')
       return
     }
-    self.publicBouncedConfig.name = 'addGiftDialog-replace'
+    self.publicBouncedConfig.name = 'addGiftDialog'
     self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
     self.publicBouncedConfig.confirmTitle = '批量替换下挂商品'
     self.publicBouncedConfig.componentData = {
@@ -163,22 +165,22 @@ class DropDownConfig {
     self.publicBouncedConfig.width = 800
 
     setTimeout(() => {
-      self.$children
-        .find((item) => item.name === 'addGiftDialog-replace')
-        .openConfirm()
+      self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
     }, 100)
   }
 
   static ORDER_DELETE_GOODS() {
     //批量删除
     let self = DropDownConfig.target
-
+    self.publicBouncedConfig = JSON.parse(
+      JSON.stringify(publicDialogConfig.pushProduceConfig)
+    )
     self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
     if (self.selection.length < 1) {
       self.$OMS2.omsUtils.msgTips(self, 'warning', 'a8')
       return
     }
-    self.publicBouncedConfig.name = 'addGiftDialog-del'
+    self.publicBouncedConfig.name = 'addGiftDialog'
     self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
     self.publicBouncedConfig.confirmTitle = '删除赠品'
     self.publicBouncedConfig.componentData = {
@@ -188,21 +190,23 @@ class DropDownConfig {
     self.publicBouncedConfig.width = 800
 
     setTimeout(() => {
-      self.$children
-        .find((item) => item.name === 'addGiftDialog-del')
-        .openConfirm()
+      self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
     }, 100)
   }
 
   static ORDER_ADD_GOODS() {
     //添加赠品
     let self = DropDownConfig.target
+    self.publicBouncedConfig = JSON.parse(
+      JSON.stringify(publicDialogConfig.pushProduceConfig)
+    )
+
     self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
     if (self.selection.length < 1) {
       self.$OMS2.omsUtils.msgTips(self, 'warning', 'a8')
       return
     }
-    self.publicBouncedConfig.name = 'addGiftDialog-add'
+    self.publicBouncedConfig.name = 'addGiftDialog'
     self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
     self.publicBouncedConfig.confirmTitle = '添加赠品'
 
@@ -210,11 +214,10 @@ class DropDownConfig {
       data: self.selection,
       type: 'add',
     }
+    
     self.publicBouncedConfig.width = 800
     setTimeout(() => {
-      self.$children
-        .find((item) => item.name === 'addGiftDialog-add')
-        .openConfirm()
+      self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
     }, 100)
   }
 

@@ -102,28 +102,45 @@ export default {
         isShowSelection: false,
         columns: [
           {
-            key: 'ECODE',
-            title: window.vmI18n.t('table_label.commoditySKU'), // 'SKU编码'
+            title: '操作',
+            key: '',
+            render: (h, params) => {
+              return h('Radio', {
+                props: {
+                  value: '',
+                },
+                on: {
+                  'on-change': (v) => {
+                    console.log(v)
+                    console.log(params)
+                  },
+                },
+              })
+            },
           },
           {
-            key: 'sizeName',
-            title: window.vmI18n.t('other.size'), // 'SPU编码'
+            key: 'skuEcode',
+            title: 'SKU编码',
           },
           {
-            key: 'colorName',
-            title: window.vmI18n.t('other.color'), // 'SPU名称'
+            key: 'spuEcode',
+            title: 'SPU编码',
           },
           {
-            key: 'QTY',
-            title: window.vmI18n.t('table_label.quantities'), // 'SKU名称'
+            key: 'spuEname',
+            title: 'SPU名称',
           },
           {
-            key: 'PS_C_PRO_ENAME',
-            title: window.vmI18n.t('table_label.productName'), // '品牌'
+            key: 'skuEname',
+            title: 'SKU名称',
           },
           {
-            key: 'GBCODE',
-            title: window.vmI18n.t('table_label.internationalCode'), // '商品分类'
+            key: 'brandEname',
+            title: '品牌',
+          },
+          {
+            key: 'classifyEname',
+            title: '商品分类',
           },
         ],
         data: [],
@@ -174,8 +191,11 @@ export default {
     businessButton,
   },
   props: {
-    componentData: {},
+    componentData: {
+      type: Object,
+    },
   },
+
   methods: {
     saveOrderByPro() {
       let orderList = []
@@ -195,6 +215,29 @@ export default {
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
           this.$parent.$parent.closeConfirm()
+        } else {
+          this.$Modal.confirm({
+            title: res.data.message,
+            width: 500,
+            mask: true,
+            className: 'ark-dialog',
+            render: (h) => {
+              if (res.data.data) {
+                return h('Table', {
+                  props: {
+                    columns: [
+                      {
+                        title: window.vmI18n.t('modalTitle.a6'), // '提示信息',
+                        key: 'message',
+                      },
+                    ],
+                    data: res.data.data,
+                  },
+                })
+              }
+              return false
+            },
+          })
         }
       })
     },
@@ -381,8 +424,21 @@ export default {
 
         this.tableConfig.columns = [
           // {
-          //   key: 'index',
-          //   title: '序号',
+          //   title: '操作',
+          //   key: 'isok',
+          //   render: (h, params) => {
+          //     return h('el-radio', {
+          //       props: {
+          //         value: params.row.index,
+          //         label: params.row.index,
+          //       },
+          //       on: {
+          //         change: (v) => {
+          //           console.log(v)
+          //         },
+          //       },
+          //     })
+          //   },
           // },
           {
             key: 'skuEcode',
@@ -409,13 +465,17 @@ export default {
             title: '商品分类',
           },
         ]
-        this.tableConfig.data = res.data.data.records
+        this.tableConfig.data = res.data.data.records.map((em, index) => {
+          em.index = index + 1
+          em.isok = false
+          return em
+        })
       })
     },
   },
   mounted() {
     const self = this
-
+    console.log(this.componentData)
     this.type = this.componentData.type
     if (this.componentData && this.componentData.ID) {
       self.objid = this.componentData.ID

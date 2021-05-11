@@ -740,6 +740,7 @@ export default {
       this.shopdata = ''
       let item = this.querForm(this.formConfig1, 'retrurnNick')
       item.item.props.value = ''
+      this.REQUEST_ID = ''
     },
     fnMessage(msg) {
       this.$Message.error(`请输入${msg}!`)
