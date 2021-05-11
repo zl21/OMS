@@ -2,7 +2,8 @@
 import i18n from '@burgeon/internationalization/i18n/i18n'
 import commonUtils from './commonUtils'
 import publicMethodsUtil from '@/assets/js/public/publicMethods'
-import publicDialogConfig from 'professionalComponents/common/js/publicDialog'
+import DialogConfig from 'burgeonConfig/config/dialogs.config'
+
 window.vmI18n = i18n
 class BtnConfig {
   constructor() {
@@ -1042,7 +1043,7 @@ class BtnConfig {
   //hold单处理
   holdOrderHandler(self, ids) {
     const publicBouncedConfig = JSON.parse(
-      JSON.stringify(publicDialogConfig.holdOrderConfig)
+      JSON.stringify(DialogConfig.config().holdOrderConfig)
     )
     publicBouncedConfig.componentData = {
       ids,
@@ -1105,7 +1106,7 @@ class BtnConfig {
     self.service.orderCenter.checkRecordInvoicing(fromdata).then((res) => {
       if (res.data.code === 0) {
         self.publicBouncedConfig = Object.assign(
-          publicDialogConfig.makeOutInvoiceConfig,
+          DialogConfig.config().makeOutInvoiceConfig,
           { componentData: res.data.data }
         )
         setTimeout(() => {
@@ -1665,7 +1666,7 @@ class BtnConfig {
   //修改备注;
   updateRemarkHandler(self, data) {
     let ids = [data.ID]
-    self.publicBouncedConfig = publicDialogConfig.changeRemarkConfig
+    self.publicBouncedConfig = DialogConfig.config().changeRemarkConfig
     self.publicBouncedConfig.confirmTitle = self.btnConfig.buttons.find(
       (item) => item.webname === 'updateremark'
     ).text
@@ -1686,7 +1687,7 @@ class BtnConfig {
       'all',
       function (res) {
         if (res.data.code === 0) {
-          self.publicBouncedConfig = publicDialogConfig.changeWarehouseConfig
+          self.publicBouncedConfig = DialogConfig.config().changeWarehouseConfig
           self.publicBouncedConfig.componentData = tempObj
           setTimeout(() => {
             self.$children
@@ -1716,7 +1717,7 @@ class BtnConfig {
       'all',
       function (res) {
         if (res.data.code === 0) {
-          self.publicBouncedConfig = publicDialogConfig.modifyLogisticsConfig
+          self.publicBouncedConfig = DialogConfig.config().modifyLogisticsConfig
           self.publicBouncedConfig.componentData = tempObj
           setTimeout(() => {
             self.$children
