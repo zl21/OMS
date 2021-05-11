@@ -16,6 +16,7 @@ export default {
           SKU_CODE: '',
           SPU_CODE: '',
           SPU_NAE: '',
+          number: 1,
         },
         formData: [
           {
@@ -50,6 +51,18 @@ export default {
             label: 'SPU名称', //输入框前文字
             value: 'SPU_NAE', //输入框的值
             columns: ['ENAME'],
+            width: '7',
+            AuotData: [], //匹配的选项
+            dimChange: (search) => {},
+            dimEnter: (val) => {},
+            dimSelect: (obj) => {},
+            dimblur: () => {},
+          },
+          {
+            style: 'input', //输入框类型
+            label: '数量', //输入框前文字
+            value: 'number', //输入框的值
+            columns: ['number'],
             width: '7',
             AuotData: [], //匹配的选项
             dimChange: (search) => {},
@@ -185,6 +198,7 @@ export default {
       let data = {
         skuEcodes: [this.skuEcodes],
         orderList,
+        initNumber: this.formConfig.formValue.number,
       }
       this.service.orderCenter.saveOrderByPro(data).then((res) => {
         if (res.data.code == 0) {
