@@ -1446,15 +1446,6 @@ body {
   }
 }
 
-// 版定制弹框修改
-.unFlodStyle,
-.hold-form,
-.timeBox {
-  &+.one_button {
-    padding-right: 20px;
-  }
-}
-
 .ag-bl-overlay {
   top: 65px;
 }
@@ -1465,28 +1456,6 @@ body {
 
 .ark-table-tfoot tr:first-child td {
   border-top: none;
-}
-
-// 标准界面 详情页 page修改
-.TableDetailCollection {
-  position: relative;
-  padding-bottom: 40px;
-
-  .ark-table-border th,
-  .ark-table-border td {
-    box-sizing: border-box;
-  }
-
-  .page-buttons .table-page {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 30px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 }
 
 .color_container {
@@ -1534,153 +1503,6 @@ body {
           }
         }
       }
-    }
-  }
-}
-// .orderManager-box .from .orderSearchBtn,
-// .v-transfer-dom,
-// .setGroup {
-// // 主题库待覆盖
-
-//   //标准弹框
-//   .ark-modal-confirm-footer,
-//   .modifyButton.R3-button-group {
-//     button {
-//       height: 28px;
-//       min-width: 50px !important;
-//       padding: 0;
-//       color: #292F43;
-//       border-color: #dbdde8;
-//       border-radius: 2px;
-
-//       &:hover {
-//         opacity: 1;
-//         background: #fff;
-//         opacity: .6;
-//       }
-
-//       &:last-child {
-//         border-color: @base-color;
-//         background: @base-color;
-//         color: #fff;
-//         &:hover {
-//           opacity: .8;
-//         }
-//       }
-//     }
-//   }
-
-//   // 订单管理-(form表单中的搜索和清除按钮)
-//   .buttonBox div,
-//   // 定制弹窗-(eg.退货入库-导入)
-//   .one_button .buttonBox div {
-
-//     .buttonGroup button.ark-btn {
-
-//       &>span {
-//         vertical-align: middle !important;
-//       }
-
-//       &:hover {
-//         background: #fff;
-//         opacity: .6;
-//       }
-//     }
-
-//     &:last-child {
-//       .buttonGroup button {
-//         border-color: @base-color ;
-//         background: @base-color !important;
-//         color: #fff;
-
-//         &.ark-btn:hover {
-//           background: @base-color;
-//           opacity: .8;
-//         }
-//       }
-//     }
-//   }
-
-//   // ark组件弹窗 按钮
-//   .ark-modal-footer {
-//     &>button {
-//       &+button {
-//         &>span {
-//           color: @button-bg-font;
-//         }
-//       }
-
-//       &:hover {
-//         background-color: @button-transparent-hover;
-//         border: 1px solid transparent;
-//         opacity: 1;
-
-//         &>span {
-//           color: @button-bg-font;
-//         }
-//       }
-
-//       border:1px solid @base-color;
-
-//       &>span {
-//         color: @base-color;
-//       }
-//     }
-//   }
-// }
-
-// 矩阵录入
-.ff-order-detail .el-dialog {
-  overflow: hidden;
-
-  button.ff-matrix-btn-cancel {
-    float: right;
-    min-width: 50px;
-    padding: 0;
-
-    &:first-child {
-      margin-left: 10px;
-      background-color: @base-color;
-      color: @button-bg-font;
-
-      &:hover {
-        opacity: 1;
-        background-color: @base-color;
-      }
-    }
-
-    &:hover {
-      opacity: 1 !important;
-      background-color: @button-transparent-hover;
-      color: @button-bg-font;
-    }
-  }
-}
-
-// 框架内嵌定制页面(功能权限)弹框 按钮
-.modalContent .modalButton {
-  width: 370px;
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-start;
-  padding-top: 8px;
-
-  button:first-child {
-    background-color: @base-color;
-    color: @button-bg-font;
-  }
-
-  button:hover {
-    background-color: @base-color;
-    color: @button-bg-font;
-  }
-}
-
-// 定制弹框 按钮
-.modalBth {
-  .buttonBox div:last-child {
-    .buttonGroup button {
-      margin-right: 0;
     }
   }
 }
@@ -1862,86 +1684,6 @@ body {
 .pro_img input{
   border: 1px solid rgb(199, 199, 199);
 }
-// elementUl 日期组件
-.el-picker-panel__icon-btn {
-  font-size: 12px;
-  color: #303133;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  outline: none;
-  margin-top: 8px;
-  padding: 0 6px;
-}
-// 列表页 翻页/筛选/日期按钮修改
-.ark-page.mini .ark-page-options-elevator input{
-  text-align: center;
-  padding: 0;
-}
-.ag-theme-balham .ag-filter-filter{
-  border:1px solid #E4E4E4;
-}
-.ag-theme-balham input.ag-filter-filter:focus{
-  border-color: #3fa5ed; 
-}
-.ark-date-picker-transfer {
-  .ark-picker-confirm {
-    font-size: 0;
-  }
-  .ark-btn {
-    height: 28px;
-    min-width: 50px;
-    margin-left: 8px;
-    &.ark-btn-default {
-      border-color: @base-color;
-      color: @base-color;
-      &:hover{
-        opacity: .6;
-      }
-    }
-    &:last-child {
-      background: @base-color;
-      &:hover {
-        opacity: .8;
-      }
-    }
-  }
-}
-
-// 权限.vue 的搜索btn
-.jurisdiction .right_col {
-  .one_button .buttonBox {
-    justify-content: flex-end;
-  }
-}
-// 订单管理/零售发货单-列表-按钮样式 特殊处理
-.orderManager-box {
-  .btn {
-    padding: 0 0 5px;
-  }
-}
-// 矩阵多余小三角
-.ff-popper-class-triangle{
-  display: none;
-}
-// 框架内置半定制页面调整(eg.商品款号详情-条码、逻辑仓档案详情-店仓群)
-.detail-top {
-  .detail-search {
-    .detail-search-input button {
-      height: 26px;
-    }
-  }
-}
-
-// input框hover的样式
-.ark-integrate-search-filter-valid,
-.ark-page-options-elevator input,
-.ark-select-selection,
-.ark-input {
-  &:hover {
-    border-color: @base-color;
-  }
-}
 // 明细 -【保存】、【导入】……
 a:hover,
 .ark-picker-panel-icon-btn:hover,
@@ -1963,3 +1705,11 @@ a:hover,
   background: @base-color;
 }
 //--------------------OMS系统--------------------
+.ark-modal-confirm{
+  .ark-modal-confirm-body{
+    color: #000;
+    textarea{
+      color: #000 !important;
+    }
+  }
+}
