@@ -1,8 +1,9 @@
 //定制按钮配置类
 import i18n from '@burgeon/internationalization/i18n/i18n'
 import commonUtils from './commonUtils'
-import publicMethodsUtil from '@/assets/js/public/publicMethods'
 import publicDialogConfig from 'professionalComponents/common/js/publicDialog'
+// import DialogConfig from 'burgeonConfig/config/dialogs.config'
+
 window.vmI18n = i18n
 class BtnConfig {
   constructor() {
@@ -1250,8 +1251,8 @@ class BtnConfig {
       && item.CP_C_SHOP_TITLE === selectionOne.CP_C_SHOP_TITLE //店铺
       && item.PAY_TYPE === selectionOne.PAY_TYPE //支付方式
       && item.RECEIVER_ADDRESS_UNION === selectionOne.RECEIVER_ADDRESS_UNION) //收货人信息
-    if (!agreement) {
-      self.$Message.warning('订单信息不一致,不允许合并');
+    if(!agreement){
+      commonUtils.msgTips(self, 'warning', 'fs'); // 订单信息不一致,不允许合并!
       return;
     }
     // 状态判断提示
@@ -1263,21 +1264,19 @@ class BtnConfig {
         break;
       }
       if (item.ORDER_TAG.some(item => item.text === "hold")) {// '订单已经被HOLD，不允许合并！'
-        tips = 'e8';
-        break;
+         tips =  'ft';
+         break;
       }
       if (item.ORDER_TAG.some(item => item.text === "时")) {// '订单为时效订单，不允许进行合并！'
-        tips = 'e8';
+        tips =  'fu';
+        break;
+     }
+     if (item.RESERVE_VARCHAR03_NAME !== '预售订单' && item.PAY_STATUS !== '全部付款') {  // '非预售' && '预售尾款已付'
+        tips =  'fw';
         break;
       }
-      if (item.PAYTYPENAME === self.vmI18n.t('btn.cashOnDelivery')) { // '货到付款'
-        tips = 'e8';
-        break;
-      } else if (item.RESERVE_VARCHAR03_NAME !== '预售订单' && item.PAY_STATUS !== '全部付款') {  // '非预售' && '预售尾款已付'
-        tips = 'e9';
-        break;
-      } else if (selection.length > 50) {// '合并订单最大支持合并50单!'
-        tips = 'e8';
+      if(selection.length>50){// '合并订单最大支持合并50单!'
+        tips =  'fv';
       }
     }
     if (tips) {
@@ -1288,9 +1287,9 @@ class BtnConfig {
       IDS: selection.map(val => val.ID)
     }
     // 确认将选中的订单合并吗？
-    commonUtils.modalShow(self, 'd9', 'orderCenter.mergeOrderOne', param, 'all', function (res) {
-      let { data } = res;
-      if (data.code === 0) {
+    commonUtils.modalShow(self,'fz','orderCenter.mergeOrderOne',param, 'all', function (res) {
+      let {data} = res;
+      if(data.code === 0){
         console.log('成功！');
         self.$Message.success(data.message || '成功！')
       } else {
@@ -1317,8 +1316,7 @@ class BtnConfig {
       //判断合单状态
       if (!item.IS_MERGE) {
         // 未合并的订单不允许进行取消合并!
-        self.$Message.warning('未合并的订单不允许进行取消合并!')
-        // commonUtils.msgTips(self, 'warning', 'd9');
+        commonUtils.msgTips(self, 'warning', 'fx');
         self.btnConfig.loading = false
         return
       }
@@ -1334,9 +1332,9 @@ class BtnConfig {
       IDS: selection.map(val => val.ID)
     }
     // 确认将选中的订单取消合并吗？
-    commonUtils.modalShow(self, 'd9', 'orderCenter.cancelMergeOrder', param, 'all', function (res) {
-      let { data } = res;
-      if (data.code === 0) {
+    commonUtils.modalShow(self,'fy','orderCenter.cancelMergeOrder',param, 'all', function (res) {
+      let {data} = res;
+      if(data.code === 0){
         console.log('成功！');
         self.$Message.success(data.message || '成功！')
       } else {
@@ -1633,7 +1631,7 @@ class BtnConfig {
         fromdata,
         'part',
         function (res) {
-          publicMethodsUtil.downloadUrlFile(res.data.data)
+          publicDialogConfig.downloadUrlFile(res.data.data)
         }
       )
       self.isExport = false
@@ -1665,7 +1663,7 @@ class BtnConfig {
         fromdata,
         'part',
         function (res) {
-          publicMethodsUtil.downloadUrlFile(res.data.data)
+          publicDialogConfig.downloadUrlFile(res.data.data)
         }
       )
       self.isExport = false

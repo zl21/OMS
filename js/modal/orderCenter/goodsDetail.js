@@ -1,8 +1,9 @@
 import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessDialog from 'professionalComponents/businessDialog';
-import publicDialogConfig from 'professionalComponents/common/js/publicDialog';
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown';
+import publicDialogConfig from 'professionalComponents/common/js/publicDialog'
+// import DialogConfig from 'burgeonConfig/config/dialogs.config';
 
 export default {
   components: {
@@ -34,6 +35,7 @@ export default {
       vmI18n: window.vmI18n,
       // 暂存选中数据
       selection: [],
+      dialogs: DialogConfig.config(),
       // 公共弹框
       publicBouncedConfig: {},
       publicBouncedIndex: {

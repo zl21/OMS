@@ -7,7 +7,6 @@ import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import aTable from 'professionalComponents/agGridTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
-import publicDialogConfig from 'professionalComponents/common/js/publicDialog';
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import loading from 'professionalComponents/loading';

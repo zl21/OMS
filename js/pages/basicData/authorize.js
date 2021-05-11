@@ -2,7 +2,7 @@ import service from '@/service/index'
 import businessButton from 'professionalComponents/businessButton'
 import businessForm from 'professionalComponents/businessForm'
 import R3 from '@syman/burgeon-r3'
-import comMethods from '_/assets/js/__utils__/comMethods.js'
+import comMethods from 'burgeonConfig/config/commonUtils.js'
 export default {
   components: {
     businessButton,
@@ -740,6 +740,7 @@ export default {
       this.shopdata = ''
       let item = this.querForm(this.formConfig1, 'retrurnNick')
       item.item.props.value = ''
+      this.REQUEST_ID = ''
     },
     fnMessage(msg) {
       this.$Message.error(`请输入${msg}!`)
