@@ -75,6 +75,7 @@ export default {
   },
 
   other: {
+    fullPayment: '全部付款',
     activity_overview: '活动概览',
     addTo_original_remarks: '追加到原备注',
     basicActivity: '基础活动',

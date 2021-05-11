@@ -100,3 +100,4 @@
 | v1.0.35 |  add modalTips.fg  |
 | v1.0.36 |  add modalTips.fh ~ fm  |
 | v1.0.37 |  remove Duplicate keys  |
+| v1.0.38 |  add modalTips.fh ~ fm  |
