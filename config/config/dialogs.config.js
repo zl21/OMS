@@ -31,6 +31,7 @@ DialogConfig.customConfig = {
   // 零售发货单详情
   address: {
     title: window.vmI18n.t('modalTitle.modify_shipping_address'),
+    // title: '修改收货地址',
     width: 650,
     url: 'modal/orderCenter/resolveAddress',
     name: 'addressDialog',
@@ -38,6 +39,7 @@ DialogConfig.customConfig = {
   },
   blacklist: {
     title: window.vmI18n.t('modalTitle.blacklist'),
+    // title: '加入黑名单',
     width: 400,
     url: 'order/joinBlackList',
     name: 'blackListDialog',
@@ -45,6 +47,7 @@ DialogConfig.customConfig = {
   },
   addGift: {
     title: window.vmI18n.t('btn.addGift'),
+    // title: '添加赠品',
     width: 1000,
     url: 'modal/orderCenter/addGiftItem',
     name: 'addGiftDialog',
@@ -52,6 +55,7 @@ DialogConfig.customConfig = {
   },
   changeSku: {
     title: window.vmI18n.t('btn.replaceGoods'),
+    // title: '替换商品',
     width: 800,
     url: 'modal/orderCenter/replaceGoodsDetail',
     name: 'changeSkuDialog',
@@ -59,6 +63,7 @@ DialogConfig.customConfig = {
   },
   modifyRemark: {
     title: window.vmI18n.t('btn.modifyRemarks'),
+    // title: '修改备注',
     width: 480,
     url: 'modal/orderCenter/changeRemark',
     name: 'modifyRemarkDialog',

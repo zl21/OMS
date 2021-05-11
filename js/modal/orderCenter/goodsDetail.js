@@ -1,8 +1,8 @@
 import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessDialog from 'professionalComponents/businessDialog';
-import publicDialogConfig from 'professionalComponents/common/js/publicDialog';
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown';
+import DialogConfig from 'burgeonConfig/config/dialogs.config';
 
 export default {
   components: {
@@ -34,6 +34,7 @@ export default {
       vmI18n: window.vmI18n,
       // 暂存选中数据
       selection: [],
+      dialogs: DialogConfig.config(),
       // 公共弹框
       publicBouncedConfig: {},
       publicBouncedIndex: {
@@ -105,8 +106,8 @@ export default {
                 };
                 const { data: { code, message } } = await this.service.orderCenter.checkGit(param);
                 if (code === 0) {
-                  self.publicBouncedConfig = publicDialogConfig.addGiftsConfig;
-                  self.publicBouncedIndex = publicDialogConfig.addGiftsConfig;
+                  self.publicBouncedConfig = this.dialogs.addGiftsConfig;
+                  self.publicBouncedIndex = this.dialogs.addGiftsConfig;
                   self.$nextTick(() => {
                     self.$set(self.publicBouncedConfig.componentData, 'ocBorderDtoItemID', ids);
                     self.$set(self.publicBouncedConfig.componentData, 'ocBorderDtoID', self.componentData.id);
@@ -185,8 +186,8 @@ export default {
                 //
                 const { data: { code, message } } = await this.service.orderCenter.modifygoodscheck(param);
                 if (code === 0) {
-                  self.publicBouncedConfig = publicDialogConfig.replaceConfig;
-                  self.publicBouncedIndex = publicDialogConfig.replaceConfig;
+                  self.publicBouncedConfig = this.dialogs.replaceConfig;
+                  self.publicBouncedIndex = this.dialogs.replaceConfig;
                   self.publicBouncedConfig.componentData = {
                     ocBorderDtoItemID: ids,
                     ocBorderDtoID: self.componentData.id,
