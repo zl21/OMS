@@ -234,6 +234,29 @@ export default {
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
           this.$parent.$parent.closeConfirm()
+        } else {
+          this.$Modal.confirm({
+            title: res.data.message,
+            width: 500,
+            mask: true,
+            className: 'ark-dialog',
+            render: (h) => {
+              if (res.data.data) {
+                return h('Table', {
+                  props: {
+                    columns: [
+                      {
+                        title: window.vmI18n.t('modalTitle.a6'), // '提示信息',
+                        key: 'message',
+                      },
+                    ],
+                    data: res.data.data,
+                  },
+                })
+              }
+              return false
+            },
+          })
         }
       })
     },
@@ -255,6 +278,29 @@ export default {
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
           this.$parent.$parent.closeConfirm()
+        } else {
+          this.$Modal.confirm({
+            title: res.data.message,
+            width: 500,
+            mask: true,
+            className: 'ark-dialog',
+            render: (h) => {
+              if (res.data.data) {
+                return h('Table', {
+                  props: {
+                    columns: [
+                      {
+                        title: window.vmI18n.t('modalTitle.a6'), // '提示信息',
+                        key: 'message',
+                      },
+                    ],
+                    data: res.data.data,
+                  },
+                })
+              }
+              return false
+            },
+          })
         }
       })
     },
