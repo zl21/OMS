@@ -114,6 +114,14 @@ export default {
                 props: {
                   columns: [
                     {
+                      title: 'ID',
+                      key: 'orderId'
+                    },
+                    {
+                      title: '单据编号',
+                      key: 'billNo'
+                    }, 
+                    {
                       title: '提示信息',
                       key: 'message'
                     }

@@ -162,7 +162,7 @@ export default {
         self.$Message.error('勾选明细含有非赠品禁止删除！');
         return;
       }
-      const PS_C_SKU_CODES = this.checkSelection.map(row => row.PS_C_SKU_CODE);
+      const PS_C_SKU_CODES = this.checkSelection.map(row => row.PS_C_SKU_ECODE);
       let data = {
         skuEcodes: PS_C_SKU_CODES,
         orderList:[{ 

@@ -27,17 +27,10 @@ export default {
             AuotData: [], //匹配的选项
             dimChange: (search) => {
               //模糊查询的方法
-              console.log(search)
-              this.fuzzyquerybyak(search)
+              // this.fuzzyquerybyak(search)
             },
-            dimEnter: (val) => {
-              // 回车
-              console.log(val)
-            },
-            dimSelect: (obj) => {
-              // 将选中值赋值给value
-              console.log('选中之后：', obj)
-            },
+            dimEnter: (val) => {},
+            dimSelect: (obj) => {},
             dimblur: () => {},
           },
           {
@@ -47,18 +40,9 @@ export default {
             value: 'SPU_CODE',
             columns: ['ECODE'],
             AuotData: [], //匹配的选项
-            dimChange: (search) => {
-              //模糊查询的方法
-              console.log('SPU编码:', search)
-            },
-            dimEnter: (val) => {
-              //
-              console.log('SPU编码:', val)
-            },
-            dimSelect: (obj) => {
-              //
-              console.log('SPU编码:', obj)
-            },
+            dimChange: (search) => {},
+            dimEnter: (val) => {},
+            dimSelect: (obj) => {},
             dimblur: () => {},
           },
           {
@@ -68,18 +52,9 @@ export default {
             columns: ['ENAME'],
             width: '7',
             AuotData: [], //匹配的选项
-            dimChange: (search) => {
-              //模糊查询的方法
-              console.log('SPU名称:', search)
-            },
-            dimEnter: (val) => {
-              //
-              console.log('SPU名称:', val)
-            },
-            dimSelect: (obj) => {
-              //
-              console.log('SPU名称:', obj)
-            },
+            dimChange: (search) => {},
+            dimEnter: (val) => {},
+            dimSelect: (obj) => {},
             dimblur: () => {},
           },
         ],
