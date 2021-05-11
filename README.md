@@ -355,6 +355,7 @@ R3.launchApplication({
 | v1.2.33  | 迁移项目工具方法，增加零售发货单错误提示                                                         |
 | v1.2.34  | businessDialog 弹窗迁移                                                       |
 | v1.2.35  | 提示弹框样式修改 ｜ 国际化替换                                                       |
+| v1.2.36  | 回退 businessDialog 弹窗迁移                                                       |
 
 #### Extends-Api 版本说明
 
