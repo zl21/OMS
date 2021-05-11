@@ -1327,21 +1327,13 @@ export default {
           .then(async (res) => {
             if (res.data.code == 0) {
               _this.jordanTableConfig.loading = false;
-              _this.information.formValue.BILL_TYPE = String(
-                res.data.data.returnOrders.BILL_TYPE
-              );
+              _this.information.formValue.BILL_TYPE = String(res.data.data.returnOrders.BILL_TYPE);
               _this.selectSelectt();
-              if (
-                _this.information.formValue.BILL_TYPE == '2' &&
-                !res.data.data.returnOrders.IS_RESERVED
-              ) {
+              if (_this.information.formValue.BILL_TYPE == '2' && !res.data.data.returnOrders.IS_RESERVED) {
                 // _this.information.formData[11].style = 'select';
-                _this.information.formValue.IS_RETURN_ORDER_EXCHANGE =
-                  res.data.data.returnOrders.IS_RETURN_ORDER_EXCHANGE;
+                _this.information.formValue.IS_RETURN_ORDER_EXCHANGE = res.data.data.returnOrders.IS_RETURN_ORDER_EXCHANGE;
                 setTimeout(() => {
-                  document.getElementsByClassName(
-                    'burgeon-select-selected-value'
-                  )[1].className = 'burgeon-select-selected-value inputBgcolor';
+                  document.getElementsByClassName('burgeon-select-selected-value')[1].className = 'burgeon-select-selected-value inputBgcolor';
                 }, 10);
               }
               _this.status = res.data.data.returnOrders.RETURN_STATUS;
@@ -1351,25 +1343,16 @@ export default {
                 : 'Watermark to be added';
               _this.defectiveList = res.data.data.orderDefects;
               for await (const tempItem of res.data.data.refundDtoList) {
-                tempItem.PRODUCT_MARK =
-                  tempItem.PRODUCT_MARK == 1 ? '正品' : '次品';
+                tempItem.PRODUCT_MARK = tempItem.PRODUCT_MARK == 1 ? '正品' : '次品';
                 tempItem.amt_refund_single = tempItem.AMT_REFUND_SINGLE;
                 tempItem.SEX_NAME = tempItem.SEX_ENAME;
                 tempItem.PRICE = tempItem.PRICE_LIST;
-                await _this.reconstructionGetDetail(
-                  tempItem,
-                  tempItem,
-                  tempItem.PS_C_PRO_ECODE
-                );
+                await _this.reconstructionGetDetail(tempItem, tempItem, tempItem.PS_C_PRO_ECODE);
               }
               for await (const exchangeItem of res.data.data.exchangeDtoList) {
                 exchangeItem.SEX_NAME = exchangeItem.SEX_ENAME;
                 exchangeItem.PRICE = exchangeItem.PRICE_LIST;
-                await _this.reconstructionGetDetail(
-                  exchangeItem,
-                  exchangeItem,
-                  exchangeItem.PS_C_PRO_ECODE
-                );
+                await _this.reconstructionGetDetail(exchangeItem, exchangeItem, exchangeItem.PS_C_PRO_ECODE);
               }
               const replace = _this.replacement.formValue;
               replace.PLATFORM = res.data.data.returnOrders.PLATFORM; // 平台
@@ -1384,35 +1367,20 @@ export default {
               _this.onSelectData.push(res.data.data.returnOrders);
               _this.assignment(res.data.data.returnOrders);
               _this.tId = res.data.data.returnOrders.TID;
-              _this.amountReturned = _this
-                .calculateMoney(res.data.data.refundDtoList, 1)
-                .toFixed(2); // 商品退回合计
-              _this.exchangeAmount = _this
-                .calculateMoney(res.data.data.exchangeDtoList, 2)
-                .toFixed(2); // 换货金额合计
+              _this.amountReturned = _this.calculateMoney(res.data.data.refundDtoList, 1).toFixed(2); // 商品退回合计
+              _this.exchangeAmount = _this.calculateMoney(res.data.data.exchangeDtoList, 2).toFixed(2); // 换货金额合计
               _this.returnTotal();
               // 是否原退
               _this.isTowwms = res.data.data.returnOrders.IS_TOWMS;
-              if (
-                res.data.data.returnOrders.RETURN_STATUS == 20 &&
-                (res.data.data.returnOrders.IS_TOWMS == 0 ||
-                  res.data.data.returnOrders.IS_TOWMS == 2)
-              ) {
-                _this.information.formData[12].disabled = false;
-              } else {
-                _this.information.formData[12].disabled = true;
-              }
+              let checkFlag = res.data.data.returnOrders.RETURN_STATUS == 20 && [0, 2].includes(res.data.data.returnOrders.IS_TOWMS);
+              _this.information.formData[12].disabled = !checkFlag;
               if (
                 (res.data.data.returnOrders.RETURN_STATUS == 20 &&
                   res.data.data.returnOrders.IS_TOWMS == 2) ||
                 res.data.data.returnOrders.IS_TOWMS == 2
               ) {
                 _this.information.formData.forEach((item) => {
-                  if (
-                    item.style == 'input' ||
-                    item.style == 'checkbox' ||
-                    item.style == 'select'
-                  ) {
+                  if (['input', 'checkbox', 'select'].includes(item.style)) {
                     item.disabled = true;
                   } else if (item.style == 'popInput') {
                     item.itemdata.readonly = true;
@@ -1851,19 +1819,6 @@ export default {
       this.returnPostage = data.RETURN_AMT_SHIP; // 应退邮费
       this.otherAmount = data.RETURN_AMT_OTHER; // 其他金额
       this.settlementAmount = data.CONSIGN_AMT_SETTLE; // 代销结算金额
-    },
-    // 修改备注
-    bounced() {
-      if (this.$route.query.id == '-1') {
-        return;
-      }
-      this.changeRemarkConfig.componentData = {
-        ids: this.$route.query.id,
-        type: 1,
-      };
-      this.$children
-        .find((item) => item.name === 'rturngoodModifyRemarks')
-        .openConfirm();
     },
     // 标记次品已调拨
     async defectiveGoods() {
@@ -3528,35 +3483,6 @@ export default {
           const err = res.data.message || _this.vmI18n.t('modalTips.au'); // 新增退换货订单失败
           _this.$Message.error(err);
         }
-      });
-    },
-    // 虚拟入库
-    virtualLibrary() {
-      const _this = this;
-      if (this.$route.query.id == '-1') return;
-      if (this.status !== 20) {
-        this.$Message.error(_this.vmI18n.t('modalTips.l6')); // 此退换单状态不允许虚拟入库!
-        return;
-      }
-      this.$Modal.info({
-        title: _this.vmI18n.t('modalTitle.tips'), // 提示
-        content: _this.vmI18n.t('modalTips.l7'), // 是否确定虚拟入库？
-        mask: true,
-        showCancel: true,
-        okText: _this.vmI18n.t('common.determine'), // 确定
-        cancelText: _this.vmI18n.t('common.cancel'), // 取消
-        onOk: () => {
-          this.service.common
-            .updateVirtualLibrary({ ID: _this.$route.query.id })
-            .then((res) => {
-              if (res.data.code == 0) {
-                _this.$Message.success(res.data.message);
-                _this.getList();
-              } else {
-                _this.$Message.error(res.data.message);
-              }
-            });
-        },
       });
     },
     // 取消自动退款
