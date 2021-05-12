@@ -27,7 +27,7 @@ export default {
           fkdisplay: 'drp', // 外键关联类型
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
-          name: this.vmI18n.t('other.shop'), // 店铺 input前面显示的lable值
+          name: i18n.t('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           valuedata: '' // 这个是选择的值
         }
@@ -62,11 +62,11 @@ export default {
     const downData = _this.downLoadFormConfig;
     if (!downData.formData[0].itemdata.pid) {
       // 请选择需要下载的店铺
-      _this.$Message.warning(_this.vmI18n.t('modalTips.be'));
+      _this.$Message.warning(i18n.t('modalTips.be'));
       return;
     }
     if (downData.formValue.startEndTimes[0] === '' && !downData.formValue.sp_ids && !downData.formValue.orderNum) {
-      _this.$Message.warning(_this.vmI18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
+      _this.$Message.warning(i18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
       return;
     }
     const param = {
