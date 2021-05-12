@@ -1205,45 +1205,24 @@ class BtnConfig {
   }
   //订单拆分处理
   splitOrderHandler(self, selection) {
+    if(selection.length>1){
+      commonUtils.msgTips(self, 'warning' ,'b4');
+      return;
+    }
     let selectItem = selection[0]
-            commonUtils.navigateMain(
+    self.service.orderCenter
+      .checkManualSplit({ orderId: selectItem.ID })
+      .then((res) => {
+        console.log(res);
+        if(res.data.code == 0){
+          commonUtils.navigateMain(
               selectItem.ID,
               'TabHref',
-              'splitOrder',
+              'MANUAL_SPLIT',
               'panel_label.orderSplit'
             )
-    // self.service.orderCenter
-    //   .querySkuListAndStorageInfo({ orderId: selectItem.ID })
-    //   .then((res) => {
-    //     // 提前判断下该单据是否可拆单
-    //     if (res.data.code == 0) {
-    //       if (
-    //         (selectItem.PLATFORM === 4 && selectItem.PAY_TYPE === 2) ||
-    //         selectItem.PLATFORM === 7 ||
-    //         selectItem.PLATFORM === 50
-    //       ) {
-    //         commonUtils.msgTips(self, 'warning', 'b1')
-    //         return
-    //       }
-    //       if (
-    //         selectItem.IS_INRETURNING === 1 ||
-    //         selectItem.IS_INTERECEPT === 1
-    //       ) {
-    //         commonUtils.msgTips(self, 'warning', 'b2')
-    //         return
-    //       }
-    //       if ([1, 2].includes(selectItem.ORDER_STATUS)) {
-    //         commonUtils.navigateMain(
-    //           selectItem.ID,
-    //           'TabHref',
-    //           'splitOrder',
-    //           'panel_label.orderSplit'
-    //         )
-    //       } else {
-    //         commonUtils.msgTips(self, 'warning', 'b3')
-    //       }
-    //     }
-    //   })
+        };
+      })
   }
   // 合并订单  (不要动！！！)
   mergeOrderHandler(self, selection) {
