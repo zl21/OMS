@@ -4,7 +4,11 @@ import commonUtils from './commonUtils'
 
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
 class DropDownConfig {
-  constructor() {}
+  static target;
+  //是否单对象界面: 0否1是;
+  static singleType = 0;
+
+  constructor() { }
   static configHandler(val, singleType = 0, eventList = []) {
     let self = DropDownConfig.target
     this.singleType = singleType
@@ -123,9 +127,7 @@ class DropDownConfig {
       return
     }
     const IDS = self.$OMS2.omsUtils.sonList(self.selection, 'ID')
-    const {
-      data: { code, data, message },
-    } = await self.service.orderCenter.billOcBOrderCopy({
+    const { data: { code, data, message } } = await self.service.orderCenter.billOcBOrderCopy({
       IDS,
       TYPE: 1,
       COPY_REASON_TYPE: 0,
@@ -216,7 +218,7 @@ class DropDownConfig {
       data: self.selection,
       type: 'add',
     }
-    
+
     self.publicBouncedConfig.width = 800
     setTimeout(() => {
       self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
@@ -680,8 +682,4 @@ class DropDownConfig {
     }
   }
 }
-
-DropDownConfig.target
-DropDownConfig.singleType
-
 export default DropDownConfig

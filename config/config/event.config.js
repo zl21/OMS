@@ -1,7 +1,7 @@
 //定制事件配置类
 import DropDownConfig from 'burgeonConfig/config/dropDown.config';
 class BurgeonEvent {
-
+    static target;
     constructor() {
     }
 
@@ -87,5 +87,5 @@ class BurgeonEvent {
         self.getHeaderList();
     }
 }
-BurgeonEvent.target;
+
 export default BurgeonEvent;
