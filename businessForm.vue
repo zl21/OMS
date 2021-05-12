@@ -163,7 +163,7 @@
                     v-if="item.style === 'checkbox'" 
                     :prop="item.value || item.colname" 
                     :class="item.class || ''">
-            <template v-if="!item.options">
+            <template v-if="!item.options || item.onlyBox">
               <CheckboxGroup>
                 <input v-model="formConfig.formValue[`${item.value || item.colname}`]"
                   :checked="item.checked"
@@ -174,7 +174,7 @@
                 />
               </CheckboxGroup>
             </template>
-            <template v-else-if="item.options">
+            <template v-else-if="item.options && !item.onlyBox">
               <CheckboxGroup v-model="formConfig.formValue[`${item.value || item.colname}`]" 
                              @on-change="(val) => runMethods(item.checkboxChange ? item.checkboxChange(val) : '')">
                 <Checkbox v-for="(option, index) in item.options"

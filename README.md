@@ -160,3 +160,4 @@
 | v1.1.13 | fkinput inputEnter 处理                                                                                                                |
 | v1.1.14 | 零售发货单弹窗组件调整                                                                                                                 |
 | v1.1.15 | downLoad                                                                                                                 |
+| v1.1.16 | checkbox扩展属性onlyBox  |
