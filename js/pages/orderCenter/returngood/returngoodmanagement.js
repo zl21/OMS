@@ -11,7 +11,7 @@ import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import loading from 'professionalComponents/loading';
-import commonUtils from './commonUtils'
+import commonUtils from 'burgeonConfig/config/commonUtils'
 // import OrderItem from './orderItem';
 
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
