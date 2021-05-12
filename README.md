@@ -375,7 +375,7 @@ R3.launchApplication({
 | v1.2.53 | downLoad v2 |
 | v1.2.54 | modify改物流/仓库modalTittle |
 | v1.2.55 | bug:38264 |
-| v1.2.57 | bug:38309 | 38308 | 38286 |
+| v1.2.56 | bug:38309 | 38308 | 38286 |
 
 
 #### Extends-Api 版本说明
