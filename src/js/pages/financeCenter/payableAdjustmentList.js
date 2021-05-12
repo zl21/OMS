@@ -953,7 +953,8 @@ export default {
         TID: mainData.TID,
         BILL_STATUS: mainData.BILL_STATUS,
         ORDER_NO: mainData.ORDER_NO,
-        RESERVE_BIGINT01: mainData.RESERVE_BIGINT01
+        RESERVE_BIGINT01: mainData.RESERVE_BIGINT01,
+        CP_C_SHOP_ID: mainData.CP_C_SHOP_ID
       };
       const {
         data: { code, data, message }
