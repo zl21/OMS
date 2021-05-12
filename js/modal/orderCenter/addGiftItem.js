@@ -147,6 +147,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
+            disabled:false,
             text: window.vmI18n.t('common.cancel'),
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
@@ -154,12 +155,13 @@ export default {
           },
           {
             text: window.vmI18n.t('common.determine'),
-            loading: false,
+            disabled:false,
             btnclick: () => {
               if (!this.skuEcodes) {
                 this.$Message.warning("请选中操作的数据")
                 return
               }
+              this.btnConfig.buttons[1].disabled = true;
               if (this.type == 'add') {
                 this.saveOrderByPro() // 添加订单商品信息-确定添加
               } else if (this.type == 'del') {
@@ -206,7 +208,9 @@ export default {
         initNumber: this.formConfig.formValue.number,
       }
       this.service.orderCenter.saveOrderByPro(data).then((res) => {
-        this.btnConfig.buttons[1].disabled = false;
+        setTimeout(() => {
+          this.btnConfig.buttons[1].disabled = false;
+        }, 5000);
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
           this.$parent.$parent.closeConfirm();
@@ -238,6 +242,7 @@ export default {
       })
     },
     deleteOrderGoods() {
+      this.btnConfig.buttons[1].disabled = true;
       let orderList = []
       this.componentData.data.forEach((em) => {
         let obj = {
@@ -252,6 +257,9 @@ export default {
         orderList,
       }
       this.service.orderCenter.deleteOrderGoods(data).then((res) => {
+        setTimeout(() => {
+          this.btnConfig.buttons[1].disabled = false;
+        }, 5000);
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
           this.$parent.$parent.closeConfirm()
