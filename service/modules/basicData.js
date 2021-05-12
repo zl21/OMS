@@ -19,4 +19,6 @@ export default {
   isaothorSucceed:params => $network.post('/p/cs/cp/v1/shop/queryAuthorizationInfo',params),  //查询云枢纽授权结果
   isauthorize: params => $network.post('/p/cs/cp/v1/shop/authorizationUrl', params), // 获取授权url
   selectTree: params => $network.post('/p/cs/cp/v1/region/v1/selectTree', params), // 国家省市区-列表-树结构
+  shopqueryById: params => $network.post('/p/cs/cp/v1/shop/queryById', params), // 店铺授权弹窗查询
+  shopSave: params => $network.post('/p/cs/cp/v1/shop/save', params), // 店铺授权弹窗确认
 };
