@@ -368,6 +368,7 @@ R3.launchApplication({
 | v1.2.46 | 详情地址bug：收货信息拼接 ｜ 弹框修改配置点击弹层不关闭|
 | v1.2.47 | businessDialog 弹窗迁移 |
 | v1.2.48 | 修改地址校验问题 |
+| v1.2.49 | 修改地址校验问题/bug:38205/diologConfig |
 
 #### Extends-Api 版本说明
 

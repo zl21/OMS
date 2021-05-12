@@ -151,7 +151,7 @@ export default {
           width: '8',
           style: 'input',
           regx: /^(\s*|[A-Za-z0-9]+)$/,
-          placeholder: 'Only numbers and letters',
+          // placeholder: 'Only numbers and letters',
           inputChange: () => {
             this.masterModifyData('ECODE', 'master');
           },
@@ -355,6 +355,9 @@ export default {
         },
         ],
         formValue: {
+          ECODE:'',
+          ENAME:'',
+          PRICE_RETAIL:'',
           PS_C_SPECOBJ1_ID: '',
           PS_C_SPECOBJ2_ID: '',
           PS_C_SPECOBJ3_ID: '',
