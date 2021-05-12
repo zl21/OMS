@@ -166,7 +166,7 @@ export default {
           NAME: '', // 日程规划名称
           BEGIN_TIME: '', // 规划开始时间
           END_TIME: '', // 规划结束时间
-          RANK: '9', // 优先级 默认为“9”，数字越小优先级越高
+          RANK: '', // 优先级
           IS_OUTWAREHOUSE_ALONE: false, // 补货独立入库
           CP_C_SHOP_ID: '' // 店铺
         },
