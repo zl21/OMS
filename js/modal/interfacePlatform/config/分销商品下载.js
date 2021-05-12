@@ -70,35 +70,34 @@ export default {
   // 确定按钮
   determine: async (self) => {
     const _this = self;
-    const _this = this;
-      const downData = _this.downLoadPublicFormConfig;
-      if (!downData.formData[0].itemdata.pid) {
-        // 请选择需要下载的店铺
-        _this.$Message.warning(_this.vmI18n.t('modalTips.be'));
-        return;
-      }
-      if (downData.formValue.startEndTimes[0] === '' && downData.formValue.ware_id === '' && downData.formValue.item_num === '') {
-        _this.$Message.warning(_this.vmI18n.t('modalTips.bq')); // 修改时间、商品PID、商品编码必填其一
-        return;
-      }
-      const param = {
-        shop_id: downData.formData[0].itemdata.pid,
-        ware_id: downData.formValue.ware_id, // 商品id
-        item_num: downData.formValue.item_num, // 商品编码
-        start_time: BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
-        end_time: BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
-        table: _this.tablename // 当前表名 必传
-      };
-      const fromdata = new FormData();
-      fromdata.append('param', JSON.stringify(param));
-      const {
-        data: { code, message }
-      } = await _this.service.common.publicUrlParams('/p/cs/itemDownload', fromdata);
-      if (code === 0) {
-        _this.$Message.success(message);
-        _this.$emit('closeActionDialog', true);
-      } else {
-        // _this.$Message.error(message);
-      }
+    const downData = _this.downLoadFormConfig;
+    if (!downData.formData[0].itemdata.pid) {
+      // 请选择需要下载的店铺
+      _this.$Message.warning(_this.vmI18n.t('modalTips.be'));
+      return;
+    }
+    if (downData.formValue.startEndTimes[0] === '' && downData.formValue.ware_id === '' && downData.formValue.item_num === '') {
+      _this.$Message.warning(_this.vmI18n.t('modalTips.bq')); // 修改时间、商品PID、商品编码必填其一
+      return;
+    }
+    const param = {
+      shop_id: downData.formData[0].itemdata.pid,
+      ware_id: downData.formValue.ware_id, // 商品id
+      item_num: downData.formValue.item_num, // 商品编码
+      start_time: BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
+      end_time: BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
+      table: _this.tablename // 当前表名 必传
+    };
+    const fromdata = new FormData();
+    fromdata.append('param', JSON.stringify(param));
+    const {
+      data: { code, message }
+    } = await _this.service.common.publicUrlParams('/p/cs/itemDownload', fromdata);
+    if (code === 0) {
+      _this.$Message.success(message);
+      _this.$emit('closeActionDialog', true);
+    } else {
+      // _this.$Message.error(message);
+    }
   }
 };

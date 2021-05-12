@@ -14,11 +14,25 @@ import IP_B_TIME_ORDER_VIP from './IP_B_TIME_ORDER_VIP.js'
 import IP_B_VIP_RETURN_ORDER from './IP_B_VIP_RETURN_ORDER.js'
 import IP_C_TAOBAO_PRODUCT from './IP_C_TAOBAO_PRODUCT.js'
 
+import t1 from './分销商品下载.js'
+import t2 from './经销订单下载.js'
+import IP_B_TAOBAO_FX_ORDER from './IP_B_TAOBAO_FX_ORDER.js'
+import IP_B_STANDPLAT_REFUND from './IP_B_STANDPLAT_REFUND.js'
+import IP_B_TAOBAO_FX_REFUND from './IP_B_TAOBAO_FX_REFUND.js'
+import IP_C_STANDPLAT_PRO from './IP_C_STANDPLAT_PRO.js'
+
 /* 2.0: */
 import OC_B_VIPCOM_PO from './OC_B_VIPCOM_PO.js'
 import PS_C_SKU from './PS_C_SKU.js'
 
 export default {
+	t1,
+	t2,
+	IP_B_TAOBAO_FX_ORDER,
+	IP_B_STANDPLAT_REFUND,
+	IP_B_TAOBAO_FX_REFUND,
+	IP_C_STANDPLAT_PRO,
+	IP_B_JINGDONG_ORDER,
 	IP_B_CANCEL_TIME_ORDER_VIP,
 	IP_B_JINGDONG_REFUND,
 	IP_B_JITX_DELIVERY,

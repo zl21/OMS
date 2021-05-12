@@ -1,4 +1,4 @@
-// 通用订单下载
+// 淘宝分销退单
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 import i18n from '@burgeon/internationalization/i18n/i18n';
 
@@ -21,9 +21,14 @@ export default {
           }
         ],
         itemdata: {
-          colid: 167023,
+          colid: 167606,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
-          display: 'OBJ_FK', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+          refcolval: {
+            fixcolumn: 'CP_C_PLATFORM_ID',
+            expre: 'equal',
+            srccol: 'CP_C_SHOP_ID'
+          },
+          display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
@@ -31,6 +36,20 @@ export default {
           readonly: false, // 是否可编辑，对应input   readonly属性
           valuedata: '' // 这个是选择的值
         }
+      },
+      {
+        style: 'radio', // 单选框
+        label: '', // 订单状态 前面字段
+        width: '24', // 宽度
+        value: 'orderStatus', // 绑定到formValue的值
+        // radioChange: ()=>{alert('123')}, //切换时的方法
+        // setRequired: "required", //必选标识,值不为required时无标识
+        options: [
+          {
+            label: i18n.t('panel_label.all'), // 全部
+            value: ''
+          },
+        ]
       },
       {
         style: 'date',
@@ -62,11 +81,11 @@ export default {
     const downData = _this.downLoadFormConfig;
     if (!downData.formData[0].itemdata.pid) {
       // 请选择需要下载的店铺
-      _this.$Message.warning(i18n.t('modalTips.be'));
+      _this.$Message.warning(_this.vmI18n.t('modalTips.be'));
       return;
     }
     if (downData.formValue.startEndTimes[0] === '' && !downData.formValue.sp_ids && !downData.formValue.orderNum) {
-      _this.$Message.warning(i18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
+      _this.$Message.warning(_this.vmI18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
       return;
     }
     const param = {
@@ -81,7 +100,7 @@ export default {
     fromdata.append('param', JSON.stringify(param));
     const {
       data: { code, message }
-    } = await _this.service.common.publicUrlParams('/p/cs/stdp/order/get', fromdata);
+    } = await _this.service.common.publicUrlParams(url, fromdata);
     if (code === 0) {
       _this.$Message.success(message);
       _this.$emit('closeActionDialog', true);

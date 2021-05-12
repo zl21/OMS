@@ -23,7 +23,7 @@ export default {
     // component: orderManager,
   },
   // 订单中心-列表-拆分订单
-  SPLITORDER: {
+  MANUAL_SPLIT: {
     component: () => import('allpages/orderCenter/orderManager/splitOrder.vue'),
     // component: splitOrder,
   },

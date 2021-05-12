@@ -1,3 +1,4 @@
+// 淘宝分销订单
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 import i18n from '@burgeon/internationalization/i18n/i18n';
 
@@ -81,7 +82,7 @@ export default {
   // 确定按钮
   determine: async (self) => {
     const _this = self;
-    const downData = _this.pulicdownLoadConfig;
+    const downData = _this.downLoadFormConfig;
     if (!downData.formData[0].itemdata.pid) {
       // 请选择需要下载的店铺
       _this.$Message.warning(_this.vmI18n.t('modalTips.be'));

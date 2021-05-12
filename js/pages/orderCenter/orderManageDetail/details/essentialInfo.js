@@ -262,12 +262,13 @@ export default {
     },
     // 详情按钮替换商品弹框
     replaceGoodsDetail(itemData) {
+      console.log(itemData);
       this.dialogs.changeSku.data = {
         orderList: [{
           orderId:this.componentData.order.ID,
           billNo:this.componentData.order.BILL_NO
         }],
-        oldSuk:itemData[0].PS_C_PRO_ECODE
+        oldSuk:itemData[0].PS_C_SKU_ECODE
       };
       this.dialogsConfig = this.dialogs.changeSku;
       setTimeout(() => {

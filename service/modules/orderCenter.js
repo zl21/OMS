@@ -176,8 +176,10 @@ export default {
     ),
   sendWmsPick: (params) =>
     $network.post('/api/cs/vip/distribution//add/sendWmsPick', params),
-  querySkuListAndStorageInfo: (params) =>
-    $network.post('/api/cs/oc/oms/v1/querySkuListAndStorageInfo', params), // 提前判断下该单据是否可拆单
+    checkManualSplit: (params) =>
+    $network.post('/p/cs/oc/oms/v1/checkManualSplit', params), // 提前判断下该单据是否可拆单
+    queryManualSplit: (params) =>
+    $network.post('/p/cs/oc/oms/v1/queryManualSplit' , params), //手工拆单商品查询
   updateLogistics: (params) =>
     $network.post('/p/cs/oc/b/oms/v1/ocborder/updateLogistics', params), // 零售发货单列表-改物流
   manualMatchingList: (params) =>

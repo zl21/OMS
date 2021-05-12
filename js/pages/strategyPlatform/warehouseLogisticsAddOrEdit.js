@@ -19,6 +19,7 @@ export default {
     return {
       vmI18n: window.vmI18n,
       collapse: 'panel_baseInfo',
+      loading: false,
       isAuto: true, // 自动分配
       isModify: false,
       isWatchChange: false, // 监听

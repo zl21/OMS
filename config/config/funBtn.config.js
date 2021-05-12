@@ -1209,13 +1209,19 @@ class BtnConfig {
   }
   //订单拆分处理
   splitOrderHandler(self, selection) {
+    if(selection.length>1){
+      commonUtils.msgTips(self, 'warning' ,'b4');
+      return;
+    }
     let selectItem = selection[0]
-    commonUtils.navigateMain(
-      selectItem.ID,
-      'TabHref',
-      'splitOrder',
-      'panel_label.orderSplit'
-    )
+    self.service.orderCenter
+      .checkManualSplit({ orderId: selectItem.ID })
+      .then((res) => {
+        console.log(res);
+        if(res.data.code == 0){
+          commonUtils.navigateMain(selectItem.ID,'TabHref','MANUAL_SPLIT','panel_label.orderSplit')
+        };
+      })
   }
   // 合并订单  (不要动！！！)
   mergeOrderHandler(self, selection) {

@@ -316,11 +316,13 @@ export default {
       console.log('getData::');
       const self = this;
       const params = { orderId: self.$route.params.customizedModuleId };
-      // const res = await this.service.orderCenter.querySkuListAndStorageInfo(params);
-      const res = self.mockData;
+      const res = await this.service.orderCenter.queryManualSplit(params);
+      // const res = self.mockData;
+      console.log(res);
       let total = 0;
       if (res.data.code === 0) {
         self.data = [];
+        res.data.data = JSON.parse(res.data.data)
         if (!res.data.data) return;
         self.old_cp_c_phy_warehouse_ename = res.data.data[0].cp_c_phy_warehouse_ename;
         res.data.data.forEach(item => {

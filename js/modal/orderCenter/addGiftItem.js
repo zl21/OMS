@@ -149,13 +149,17 @@ export default {
           {
             text: window.vmI18n.t('common.cancel'),
             btnclick: () => {
-              this.$parent.$parent.closeConfirm()
+              this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
           {
             text: window.vmI18n.t('common.determine'),
             loading: false,
             btnclick: () => {
+              if (!this.skuEcodes) {
+                this.$Message.warning("请选中操作的数据")
+                return
+              }
               if (this.type == 'add') {
                 this.saveOrderByPro() // 添加订单商品信息-确定添加
               } else if (this.type == 'del') {
@@ -186,6 +190,7 @@ export default {
 
   methods: {
     saveOrderByPro() {
+      this.btnConfig.buttons[1].disabled = true;
       let orderList = []
       this.componentData.data.forEach((em) => {
         let obj = {
@@ -201,9 +206,11 @@ export default {
         initNumber: this.formConfig.formValue.number,
       }
       this.service.orderCenter.saveOrderByPro(data).then((res) => {
+        this.btnConfig.buttons[1].disabled = false;
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
-          this.$parent.$parent.closeConfirm()
+          this.$parent.$parent.closeConfirm();
+          this.$parent.$parent.$parent.$parent.$parent.getDetailsData()
         } else {
           this.$Modal.confirm({
             title: res.data.message,
@@ -402,8 +409,8 @@ export default {
         data: { code, data, message },
       } = await this.service.orderCenter.batchAddGoods(param)
       if (code === 0) {
-        self.$Message.success(message)
-        self.$parent.$parent.$parent.$parent.autoRefresh()
+        self.$Message.success(message);
+        self.$parent.$parent.$parent.$parent.autoRefresh();
         self.$parent.$parent.closeConfirm()
         this.btnConfig.buttons[0].loading = false
       } else {
@@ -445,11 +452,16 @@ export default {
         skuEcode: this.formConfig.formValue.SKU_CODE,
         spuEcode: this.formConfig.formValue.SPU_CODE,
         spuEname: this.formConfig.formValue.SPU_NAE,
-        isGroup: 'Y',
-        groupType: 2,
         size: 10,
         current: 1,
       }
+     
+      if (this.type == 'replace') {
+        data.isGroup = 'Y'
+        data.groupType = 2
+      }
+
+      
       axios({
         method: 'post',
         url: '/r3-ps/p/cs/ps/pro//v1/selectSkuProBySkuEcodeList',
