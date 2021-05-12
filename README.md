@@ -364,6 +364,7 @@ R3.launchApplication({
 | v1.2.42 | downLoad v1  |
 | v1.2.43 | scheduleAddOrEdit: onlyBox: true,  |
 | v1.2.44 | 修bug |
+| v1.2.45 | sku快速生成网关配置 |
 
 #### Extends-Api 版本说明
 
