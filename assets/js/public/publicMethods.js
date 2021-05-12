@@ -42,8 +42,8 @@ class PublicUtil {
     } catch (e) {
       r2 = 0;
     }
-    // c = Math.abs(r1 - r2);
-    // m = Math.pow(10, Math.max(r1, r2));
+    c = Math.abs(r1 - r2);
+    m = Math.pow(10, Math.max(r1, r2));
     if (c > 0) {
       const cm = 10 ** c;
       if (r1 > r2) {

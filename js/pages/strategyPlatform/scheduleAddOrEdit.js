@@ -150,6 +150,7 @@ export default {
           },
           {
             style: 'checkbox',
+            onlyBox: true,
             label: '补货独立入库',
             colname: 'IS_OUTWAREHOUSE_ALONE',
             value: 'IS_OUTWAREHOUSE_ALONE',

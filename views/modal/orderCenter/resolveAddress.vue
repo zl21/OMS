@@ -5,7 +5,7 @@
     <Form :label-width="100" :rules="ruleValidate">
       <!-- <FormItem label="收货信息"> -->
       <FormItem :label="vmI18n.t('table_label.receivingInfo')">
-        <span v-html="data.receiver_address" />
+        <span v-html="ORDER_ADDRESS" />
       </FormItem>
       <!-- 新收货信息 -->
       <FormItem :label="vmI18n.t('table_label.new_receivingInfo')">
