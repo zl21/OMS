@@ -357,7 +357,8 @@ export default {
               label: '支付账号',
               required: true,
               props: {
-                value: ''
+                value: '',
+                disabled: false
               },
               event: {
                 'on-blur': e => {
@@ -435,7 +436,8 @@ export default {
               label: window.vmI18n.t('form_label.namePayee'), // 收款人姓名
               required: true,
               props: {
-                value: ''
+                value: '',
+                disabled: false
               }
             }
           },
@@ -1648,6 +1650,17 @@ export default {
           const resData = res.data.data;
           const AfSend = resData.AfSend;
           this.RETURN_STATUS = AfSend.RETURN_STATUS;
+
+          // 额外退款审核状态后的订单，实际退款金额、收款人姓名和支付账号字段不允许编辑，需要操作反审核后进行修改
+          // 也就是说 当 RETURN_STATUS  =  1    &&  PAYMENT_STATUS  = 0 的时候，只读显示 34320
+          if (AfSend.RETURN_STATUS == 1 && AfSend.PAYMENT_STATUS == 0) {
+            this.reForm.config.forEach((val, index) => {
+              if (val.item.label === '实际退款金额' || val.item.label === '收款人姓名' || val.item.label === '支付账号') {
+                val.item.props.disabled = true
+              }
+            });
+          }
+
           // self.onSelectData['ID'] = res.data.data.AfSend.ID
           self.setDetailTable(resData.AfSendItemList);
           self.tableConfig.data = resData.AfSendItemList;
