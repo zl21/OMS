@@ -85,7 +85,7 @@ export default {
         {
           flag: false, // 需要加*
           width: '6',
-          column: 'CREATIONDATE',
+          column: 'ORDER_DATE',
           label: '下单时间:'
         },
         {
@@ -159,7 +159,7 @@ export default {
         },
         {
           flag: false,
-          width: '12',
+          width: '24',
           column: 'RECEIVER_ADDRESS',
           label: '详细地址:'
         },

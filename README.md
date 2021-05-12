@@ -363,6 +363,7 @@ R3.launchApplication({
 | v1.2.41 | 店铺授权页面 修改弹框                                                                        |
 | v1.2.42 | downLoad v1  |
 | v1.2.43 | scheduleAddOrEdit: onlyBox: true,  |
+| v1.2.44 | 修bug |
 
 #### Extends-Api 版本说明
 

@@ -1295,21 +1295,6 @@ class BtnConfig {
       if (data.code === 0) {
         console.log('成功！');
         self.$Message.success(data.message || '成功！')
-      } else {
-        console.log('失败！');
-        commonUtils.tipShow('confirm', self, res, data.message, function (h) {
-          return h('Table', {
-            props: {
-              columns: [
-                {
-                  title: 'ID',
-                  key: 'IDS'
-                }
-              ],
-              data: [data.data]
-            }
-          })
-        })
       }
     })
   }
@@ -1340,21 +1325,6 @@ class BtnConfig {
       if (data.code === 0) {
         console.log('成功！');
         self.$Message.success(data.message || '成功！')
-      } else {
-        console.log('失败！');
-        commonUtils.tipShow('confirm', self, res, data.message, function (h) {
-          return h('Table', {
-            props: {
-              columns: [
-                {
-                  title: 'ID',
-                  key: 'IDS'
-                }
-              ],
-              data: [data.data]
-            }
-          })
-        })
       }
     })
   }

@@ -26,7 +26,7 @@ export default {
       objId: -1,
       loading: false,
       newReceivAddress: '',
-      ReceivAddress: '魏萧萧，13564875782，上海上海市闵行区黎安路999号', // 新地址
+      ORDER_ADDRESS: '', // 新地址
       formConfig:{
         labelWidth:'80',
         formValue:{},
@@ -209,6 +209,7 @@ export default {
       };
       try {
         const { data: { data:{DATA} } } = await this.service.orderCenter.queryObject(params);
+        this.ORDER_ADDRESS = DATA.ORDER_ADDRESS;
         this.data.cp_c_region_province_id = DATA.ITEM.CP_C_REGION_PROVINCE_ID;
         this.data.cp_c_region_city_id = DATA.ITEM.CP_C_REGION_CITY_ID;
         this.data.cp_c_region_area_id = DATA.ITEM.CP_C_REGION_AREA_ID;
