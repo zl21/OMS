@@ -1366,13 +1366,14 @@ export default {
     },
     // 查询
     async querySchedule() {
-      this.loading = true;
       const data = await this.$OMS2.omsUtils.getObject('ST_C_VIPCOM_PROJECT', this.ID);
       this.isWatchChange = false;
       this.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, this.formConfig);
       this.formConfig.formValue.CP_C_SHOP_ID = data.addcolums[0].childs[0].refobjid;
       this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE == 'true';
 
+      if (this.ID == -1) return
+      this.loading = true;
       this.service.strategyPlatform.querySchedule({ ID: this.ID })
       .then(({ data: { code, data, message } }) => {
         this.loading = false;
