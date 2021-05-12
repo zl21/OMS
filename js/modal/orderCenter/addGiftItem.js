@@ -192,7 +192,6 @@ export default {
 
   methods: {
     saveOrderByPro() {
-      this.btnConfig.buttons[1].disabled = true;
       let orderList = []
       this.componentData.data.forEach((em) => {
         let obj = {
@@ -242,7 +241,6 @@ export default {
       })
     },
     deleteOrderGoods() {
-      this.btnConfig.buttons[1].disabled = true;
       let orderList = []
       this.componentData.data.forEach((em) => {
         let obj = {
@@ -304,6 +302,9 @@ export default {
         orderList,
       }
       this.service.orderCenter.parseOrderList(data).then((res) => {
+        setTimeout(() => {
+          this.btnConfig.buttons[1].disabled = false;
+        }, 5000);
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
           this.$parent.$parent.closeConfirm()
@@ -401,7 +402,7 @@ export default {
     },
     // 提交
     async submit() {
-      const self = this
+      const self = this;
       if (!self.onRowData) {
         self.$Message.error(window.vmI18n.t('modalTips.eg')) // '无赠品可添加！'
         return
@@ -447,6 +448,9 @@ export default {
           })
         }
       }
+      setTimeout(() => {
+        this.btnConfig.buttons[1].disabled = false;
+      }, 5000);
       this.$comUtils.setLoading()
     },
     // 回车
