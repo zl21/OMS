@@ -24,7 +24,7 @@ DialogConfig.baseObj = {
   data: {},
   keepAlive: true,
   footerHide: true,
-  maskClosable: true,
+  maskClosable: false,
 }
 
 DialogConfig.customConfig = {
