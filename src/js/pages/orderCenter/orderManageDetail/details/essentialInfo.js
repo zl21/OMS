@@ -162,7 +162,7 @@ export default {
         },
         {
           flag: false, // 需要加*
-          column: 'SEND_TIME',
+          column: 'PREDICT_SEND_TIME',
           label: '预计发货时间:'
         }
       ],
