@@ -58,9 +58,9 @@ export default {
   manualUnHoldOrder: (params) =>
     $network.post('/p/cs/oc/oms/v2/order/batch/hold/cancel', params), // 零售发货单-取消HOLD单
   mergeOrderOne: (params) =>
-    $network.post('/api/cs/oc/oms/v1/mergeOrderOne', params), // 合并订单
+    $network.post('/p/cs/oc/oms/v1/mergeOrder', params), // 合并订单
   cancelMergeOrder: (params) =>
-    $network.post('/api/cs/oc/oms/v1/cancelMergeOrder', params), // 取消合并订单
+    $network.post('/p/cs/oc/oms/v1/cancelMergeOrder', params), // 取消合并订单
   batchAddGoods: (params) =>
     $network.post('/api/cs/oc/oms/v1/batchAddGoods', params), // 零售发货单详情 - 添加赠品
   addGit: (params) => $network.post('/api/cs/oc/oms/v1/addGit', params),

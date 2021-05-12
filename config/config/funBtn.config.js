@@ -1,8 +1,9 @@
 //定制按钮配置类
 import i18n from '@burgeon/internationalization/i18n/i18n'
 import commonUtils from './commonUtils'
-import publicMethodsUtil from '@/assets/js/public/publicMethods'
 import publicDialogConfig from 'professionalComponents/common/js/publicDialog'
+// import DialogConfig from 'burgeonConfig/config/dialogs.config'
+
 window.vmI18n = i18n
 class BtnConfig {
   constructor() {
@@ -82,13 +83,7 @@ class BtnConfig {
         {
           webname: 'new_tuihuanhuo', // 退货换单 - 新增
           btnclick: () => {
-            commonUtils.navigateMain(
-              '-1',
-              'TabHref',
-              'returngood',
-              'panel_label.addReturnOrder',
-              { statusName: false }
-            )
+            commonUtils.navigateMain('-1', 'TabHref', 'returngood', 'panel_label.addReturnOrder', { statusName: false })
           }, // 按钮点击事件
         },
         {
@@ -313,6 +308,17 @@ class BtnConfig {
         {
           webname: 'save_order_1', // 保存
           btnclick: () => BtnConfig.target.saveOrderManageAdd(),
+        },
+        {
+          webname: 'refund_save', // 保存
+          btnclick: () => BtnConfig.target.saveData(),
+        },
+        {
+          webname: 'refund_return', // 退单返回
+          btnclick: () => {
+            this.back('returngoodList', 2661, 'panel_label.forcedStorage') // 销毁当前实例
+            BtnConfig.target.$destroy()
+          }
         },
         {
           webname: 'order_update_addrr', // 修改地址
@@ -630,23 +636,11 @@ class BtnConfig {
   }
   // 修改
   returnGoodsModifyHandler(self, id) {
-    commonUtils.navigateMain(
-      id[0],
-      'TabOpen',
-      'returngood',
-      'panel_label.addReturnOrder',
-      { statusName: true }
-    )
+    commonUtils.navigateMain(id[0], 'TabOpen', 'returngood', 'panel_label.addReturnOrder', { statusName: true })
   }
   // 退换货单复制
   returnGoodsCopyHandler() {
-    commonUtils.navigateMain(
-      -1,
-      'TabOpen',
-      'returngood',
-      'panel_label.addReturnOrder',
-      { cloneReturnGoodId: true, statusName: false }
-    )
+    commonUtils.navigateMain(-1, 'TabOpen', 'returngood', 'panel_label.addReturnOrder', { cloneReturnGoodId: true, statusName: false })
   }
   // 错发强制匹配
   forceMatchHandler(self, id) {
@@ -752,9 +746,7 @@ class BtnConfig {
       statusTips: '',
     })
     if (ids) {
-      commonUtils.modalShow(self, 'm3', 'orderCenter.forcedCompletion', {
-        ids,
-      })
+      commonUtils.modalShow(self, 'm3', 'orderCenter.forcedCompletion', { ids, })
     }
   }
   // 强制完成
@@ -855,26 +847,12 @@ class BtnConfig {
       type: 1,
     }
     if (BtnConfig.singleType) {
-      commonUtils.importTable(
-        self,
-        'changeRemarkConfig',
-        'rturngoodModifyRemarks',
-        'btn.modifyRemarks'
-      )
+      commonUtils.importTable(self,'changeRemarkConfig','rturngoodModifyRemarks','btn.modifyRemarks')
     } else {
-      let ids = this.orderStatusRule(self, {
-        type: 'check',
-        statusCode: '20,30,40,50',
-        statusTips: 'm2',
-      })
+      let ids = this.orderStatusRule(self, {type: 'check',statusCode: '20,30,40,50',statusTips: 'm2',})
       if (ids) {
         self.changeRemarkConfig.componentData.ids = ids.join(',')
-        commonUtils.importTable(
-          self,
-          'changeRemarkConfig',
-          'rturngoodModifyRemarks',
-          'btn.modifyRemarks'
-        )
+        commonUtils.importTable(self,'changeRemarkConfig','rturngoodModifyRemarks','btn.modifyRemarks')
       }
     }
   }
@@ -902,9 +880,20 @@ class BtnConfig {
   // 虚拟入库
   virtualStorageHandler(self, id) {
     if (BtnConfig.singleType) {
-      commonUtils.modalShow(self, 'l7', 'common.updateVirtualLibrary', {
-        ID: id,
-      })
+      if (self.$route.query.id == '-1') return;
+      if (self.status !== 20) {
+        commonUtils.msgTips(self, 'warning', 'l6');// 此退换单状态不允许虚拟入库!
+        return;
+      }
+      commonUtils.modalShow(self, 'l7', 'common.updateVirtualLibrary', { ID: id, }, 'part',
+        function (res) {
+          if (res.data.code === 0) {
+            self.$Message.success(res.data.message)
+            self.getList()
+          } else {
+            self.$Message.error(res.data.message)
+          }
+        });
     } else {
       let ids = this.orderStatusRule(self, {
         type: 'radio',
@@ -912,18 +901,29 @@ class BtnConfig {
         statusTips: 'l6',
       })
       if (ids) {
-        commonUtils.modalShow(self, 'l7', 'common.updateVirtualLibrary', {
-          ids,
-        })
+        commonUtils.modalShow(self, 'l7', 'common.updateVirtualLibrary', { ids, })
       }
     }
   }
   // 取消退单
   returnGoodsCancelHandler(self, id) {
     if (BtnConfig.singleType) {
-      commonUtils.serviceHandler(self, 'orderCenter.checkCancelParams', {
-        ID: [id],
-      })
+      commonUtils.serviceHandler(self, 'orderCenter.checkCancelParams', { ID: [id] }, 'all',
+        function (res) {
+          if (res.data.code == 0 || res.data.code == 1) {
+            let msg = res.data.code === 0 ? 'l3' : 'fp'; // 是否确定取消退单？
+            commonUtils.modalShow(self, msg, 'orderCenter.OcCancelChangingOrRefund', { ID: id }, 'part',
+              function (res) {
+                if (res.data.code === 0) {
+                  self.$Message.success(res.data.message)
+                  self.getList()
+                } else {
+                  self.$Message.error(res.data.message)
+                }
+              }
+            );
+          }
+        })
     } else {
       let ids = this.orderStatusRule(self, {
         type: 'check',
@@ -940,21 +940,28 @@ class BtnConfig {
   //售后审核
   afterAuditOrderHandler(self, id) {
     if (BtnConfig.singleType) {
-      commonUtils.serviceHandler(self, 'common.chargebackcheck', { ID: id })
+      if (id === '-1') return;
+      const checkData = self.refundDtoList.data;
+      let unMatchFlag = false;
+      checkData.forEach((item) => {
+        if (item.QTY_REFUND !== item.QTY_IN) unMatchFlag = true;
+      });
+      commonUtils.modalShow(self, unMatchFlag ? 'av' : 'k7', 'common.chargebackcheck', { ID: id }, 'part',
+        function (res) {
+          if (res.data.code === 0) {
+            self.$Message.success(res.data.message)
+            self.getList()
+          } else {
+            self.$Message.error(res.data.message)
+          }
+        }
+      );
     } else {
       // 判断是否选中或状态是否正确
-      let ids = this.orderStatusRule(self, {
-        type: 'check',
-        statusCode: '30',
-        statusTips: 'dt',
-      })
+      let ids = this.orderStatusRule(self, { type: 'check', statusCode: '30', statusTips: 'dt', })
       if (ids) {
         let params = { ID: ids.join(',') }
-        commonUtils.serviceHandler(
-          self,
-          'common.chargebackcheck',
-          params,
-          'part',
+        commonUtils.serviceHandler(self, 'common.chargebackcheck', params, 'part',
           function (res) {
             if (res.data.code === 0) {
               self.$Message.success(res.data.message)
@@ -1238,17 +1245,17 @@ class BtnConfig {
     //     }
     //   })
   }
-  // 合并订单
+  // 合并订单  (不要动！！！)
   mergeOrderHandler(self, selection) {
     // 判断勾选订单信息是否一致
     const selectionOne = selection[0];
-    const agreement = selection.every(item => item.CP_C_PHY_WAREHOUSE_ENAME === selectionOne.CP_C_PHY_WAREHOUSE_ENAME 
+    const agreement = selection.every(item => item.CP_C_PHY_WAREHOUSE_ENAME === selectionOne.CP_C_PHY_WAREHOUSE_ENAME
       && item.ORDER_TYPE === selectionOne.ORDER_TYPE // 订单类型
       && item.CP_C_SHOP_TITLE === selectionOne.CP_C_SHOP_TITLE //店铺
       && item.PAY_TYPE === selectionOne.PAY_TYPE //支付方式
       && item.RECEIVER_ADDRESS_UNION === selectionOne.RECEIVER_ADDRESS_UNION) //收货人信息
-    if(!agreement){
-      self.$Message.warning('订单信息不一致,不允许合并');
+    if (!agreement) {
+      commonUtils.msgTips(self, 'warning', 'fs'); // 订单信息不一致,不允许合并!
       return;
     }
     // 状态判断提示
@@ -1256,64 +1263,100 @@ class BtnConfig {
     for (let index = 0; index < selection.length; index++) {
       const item = selection[index];
       if (item.ORDER_STATUS !== 1) { // 要合并的单据的订单状态只能为待审核
-        tips =  'e7';
+        tips = 'e7';
         break;
       }
       if (item.ORDER_TAG.some(item => item.text === "hold")) {// '订单已经被HOLD，不允许合并！'
-         tips =  'e8';
-         break;
+        tips = 'ft';
+        break;
       }
       if (item.ORDER_TAG.some(item => item.text === "时")) {// '订单为时效订单，不允许进行合并！'
-        tips =  'e8';
+        tips = 'fu';
         break;
-     }
-      if (item.PAYTYPENAME === self.vmI18n.t('btn.cashOnDelivery')) { // '货到付款'
-        tips =  'e8';
-        break;
-      } else if (item.RESERVE_VARCHAR03_NAME !== '预售订单' && item.PAY_STATUS !== '全部付款') {  // '非预售' && '预售尾款已付'
-        tips =  'e9';
-        break;
-      } else if(selection.length>50){// '合并订单最大支持合并50单!'
-        tips =  'e8';
       }
-      // else if (item.CP_C_PHY_WAREHOUSE_ENAME === '') {
-      //   // 要合并的单据的发货仓库只能为非空
-      //   tips =  'f0';
-      //   break;
-      // }
+      if (item.RESERVE_VARCHAR03_NAME !== '预售订单' && item.PAY_STATUS !== '全部付款') {  // '非预售' && '预售尾款已付'
+        tips = 'fw';
+        break;
+      }
+      if (selection.length > 50) {// '合并订单最大支持合并50单!'
+        tips = 'fv';
+      }
     }
-    if(tips){
+    if (tips) {
       commonUtils.msgTips(self, 'warning', tips);
-      return ;
+      return;
     }
-    const fromdata = new FormData()
     const param = {
-      tableid: self.$route.params.customizedModuleId,
-      ids: selection.map(val => val.ID),
-      menu: self.vmI18n.t('btn.mergeOrders'),
+      IDS: selection.map(val => val.ID)
     }
-    fromdata.append('param', JSON.stringify(param))
-    commonUtils.serviceHandler(self, 'orderCenter.mergeOrderOne', fromdata)
+    // 确认将选中的订单合并吗？
+    commonUtils.modalShow(self, 'fz', 'orderCenter.mergeOrderOne', param, 'all', function (res) {
+      let { data } = res;
+      if (data.code === 0) {
+        console.log('成功！');
+        self.$Message.success(data.message || '成功！')
+      } else {
+        console.log('失败！');
+        commonUtils.tipShow('confirm', self, res, data.message, function (h) {
+          return h('Table', {
+            props: {
+              columns: [
+                {
+                  title: 'ID',
+                  key: 'IDS'
+                }
+              ],
+              data: [data.data]
+            }
+          })
+        })
+      }
+    })
   }
-  // 取消合并订单
-  cancelMergeOrderHandler(self, ids) {
+  // 取消合并订单 (不要动！！！)
+  cancelMergeOrderHandler(self, selection) {
     for (const item of self.selection) {
+      //判断合单状态
+      if (!item.IS_MERGE) {
+        // 未合并的订单不允许进行取消合并!
+        commonUtils.msgTips(self, 'warning', 'fx');
+        self.btnConfig.loading = false
+        return
+      }
       // ['缺货', '待审核', '已审核']
-      if (![2, 1, 3].includes(item.ORDER_STATUS)) {
+      if (!['缺货', '待审核', '已审核'].includes(item.ORDER_STATUS)) {
         // 当前状态异常，不允许操作！
         commonUtils.msgTips(self, 'warning', 'd9')
         self.btnConfig.loading = false
         return
       }
     }
-    const fromdata = new FormData()
     const param = {
-      tableid: self.$route.query.id,
-      ids: ids,
-      menu: self.vmI18n.t('btn.cancel_mergeOrders'),
+      IDS: selection.map(val => val.ID)
     }
-    fromdata.append('param', JSON.stringify(param))
-    commonUtils.serviceHandler(self, 'orderCenter.cancelMergeOrder', fromdata)
+    // 确认将选中的订单取消合并吗？
+    commonUtils.modalShow(self, 'fy', 'orderCenter.cancelMergeOrder', param, 'all', function (res) {
+      let { data } = res;
+      if (data.code === 0) {
+        console.log('成功！');
+        self.$Message.success(data.message || '成功！')
+      } else {
+        console.log('失败！');
+        commonUtils.tipShow('confirm', self, res, data.message, function (h) {
+          return h('Table', {
+            props: {
+              columns: [
+                {
+                  title: 'ID',
+                  key: 'IDS'
+                }
+              ],
+              data: [data.data]
+            }
+          })
+        })
+      }
+    })
   }
   //新增退单处理
   addReturnOrderHandler(self, selection) {
@@ -1591,7 +1634,7 @@ class BtnConfig {
         fromdata,
         'part',
         function (res) {
-          publicMethodsUtil.downloadUrlFile(res.data.data)
+          publicDialogConfig.downloadUrlFile(res.data.data)
         }
       )
       self.isExport = false
@@ -1623,7 +1666,7 @@ class BtnConfig {
         fromdata,
         'part',
         function (res) {
-          publicMethodsUtil.downloadUrlFile(res.data.data)
+          publicDialogConfig.downloadUrlFile(res.data.data)
         }
       )
       self.isExport = false
