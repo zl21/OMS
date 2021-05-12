@@ -209,7 +209,7 @@ export default {
       };
       try {
         const { data: { data:{DATA} } } = await this.service.orderCenter.queryObject(params);
-        this.ORDER_ADDRESS = DATA.ORDER_ADDRESS;
+        // this.ORDER_ADDRESS = DATA.ORDER_ADDRESS;
         this.data.cp_c_region_province_id = DATA.ITEM.CP_C_REGION_PROVINCE_ID;
         this.data.cp_c_region_city_id = DATA.ITEM.CP_C_REGION_CITY_ID;
         this.data.cp_c_region_area_id = DATA.ITEM.CP_C_REGION_AREA_ID;
@@ -226,6 +226,7 @@ export default {
         this.formConfig.formData[2].itemdata.valuedata = DATA.ITEM.CP_C_REGION_AREA_ENAME
         this.formConfig.formData[2].itemdata.pid = DATA.ITEM.CP_C_REGION_AREA_ID
         this.loading = false;
+        this.ORDER_ADDRESS = `${DATA.ITEM.RECEIVER_NAME ?? ''} ${DATA.ITEM.RECEIVER_MOBILE ?? ''} ${DATA.ITEM.CP_C_REGION_PROVINCE_ENAME ?? ''}${DATA.ITEM.CP_C_REGION_CITY_ENAME ?? ''}${DATA.ITEM.CP_C_REGION_AREA_ENAME ?? ''}${DATA.ITEM.RECEIVER_ADDRESS ?? ''}`
       } catch (error) {
         console.log(error);
       }

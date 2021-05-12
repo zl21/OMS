@@ -156,6 +156,10 @@ export default {
             text: window.vmI18n.t('common.determine'),
             loading: false,
             btnclick: () => {
+              if (!this.skuEcodes) {
+                this.$Message.warning("请选中操作的数据")
+                return
+              }
               if (this.type == 'add') {
                 this.saveOrderByPro() // 添加订单商品信息-确定添加
               } else if (this.type == 'del') {
@@ -445,11 +449,16 @@ export default {
         skuEcode: this.formConfig.formValue.SKU_CODE,
         spuEcode: this.formConfig.formValue.SPU_CODE,
         spuEname: this.formConfig.formValue.SPU_NAE,
-        isGroup: 'Y',
-        groupType: 2,
         size: 10,
         current: 1,
       }
+     
+      if (this.type == 'replace') {
+        data.isGroup = 'Y'
+        data.groupType = 2
+      }
+
+      
       axios({
         method: 'post',
         url: '/r3-ps/p/cs/ps/pro//v1/selectSkuProBySkuEcodeList',

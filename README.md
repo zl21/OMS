@@ -365,6 +365,12 @@ R3.launchApplication({
 | v1.2.43 | scheduleAddOrEdit: onlyBox: true,  |
 | v1.2.44 | 修bug |
 | v1.2.45 | sku快速生成网关配置 |
+| v1.2.46 | 详情地址bug：收货信息拼接 ｜ 弹框修改配置点击弹层不关闭|
+| v1.2.47 | businessDialog 弹窗迁移 |
+| v1.2.48 | 修改地址校验问题 |
+| v1.2.49 | 修改地址校验问题/bug:38205/diologConfig |
+| v1.2.50 | 增加店铺授权的接口地址 |
+| v1.2.51 | 修复零售发货单替换下挂入参问题 |
 
 #### Extends-Api 版本说明
 

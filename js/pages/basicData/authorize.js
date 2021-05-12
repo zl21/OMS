@@ -118,7 +118,7 @@ export default {
         buttons: [
           {
             text: '授权成功',
-            type: 'error',
+            type: 'default',
             btnclick: this.fnSucceed,
           },
           {
