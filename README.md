@@ -159,3 +159,4 @@
 | v1.1.12 | fktable 添加模糊搜索                                                                                                                   |
 | v1.1.13 | fkinput inputEnter 处理                                                                                                                |
 | v1.1.14 | 零售发货单弹窗组件调整                                                                                                                 |
+| v1.1.15 | downLoad                                                                                                                 |
