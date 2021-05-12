@@ -197,6 +197,14 @@ export default {
     };
   },
   methods: {
+    newAddressChange(){
+      if (this.newReceivAddress.length > 150) {
+        this.$nextTick(()=>{
+          this.newReceivAddress = this.newReceivAddress.substring(0,150);
+          this.$Message.warning("收货信息的最大长不能超过150");
+        })
+      }
+    },
     async initAddress(){
       this.loading = true;
       let params = {

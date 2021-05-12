@@ -13,6 +13,7 @@
           ref="newReceivAddress"
           v-model="newReceivAddress"
           placeholder="请输入规范收货地址后，按Enter键"
+          @on-change="newAddressChange"
           @on-blur="parseAddress"
           @on-enter="parseAddress"
         />
