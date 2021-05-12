@@ -378,6 +378,7 @@ R3.launchApplication({
 | v1.2.56 | bug:38309 | 38308 | 38286 |
 | v1.2.57 | 添加赠品按钮添加禁止重复点击 |
 | v1.2.58 | spu->skuAddOrEdit |
+| v1.2.59 | 零售发货单详情 - 刷新问题 |
 
 #### Extends-Api 版本说明
 
