@@ -355,9 +355,11 @@ export default {
         },
         ],
         formValue: {
-          ECODE:'',
-          ENAME:'',
-          PRICE_RETAIL:'',
+          ECODE: '',
+          ENAME: '',
+          PRICE_RETAIL: '',
+          PURCHASE_STATUS: '',
+          SALES_STATUS: '',
           PS_C_SPECOBJ1_ID: '',
           PS_C_SPECOBJ2_ID: '',
           PS_C_SPECOBJ3_ID: '',
@@ -707,7 +709,11 @@ export default {
           attributeItem: afterExPro[key] ? afterExPro[key] : ''
         });
       }
-      if (self.$route.query.spuid) this.ID = '-1';
+      if (self.$route.query.spuid) {
+        this.ID = '-1';
+        PsSku.SALES_STATUS = PsSku.SALES_STATUS ? PsSku.SALES_STATUS : self.formConfig.formValue.SALES_STATUS;
+        PsSku.ISACTIVE = 'Y';
+      }
       const param = {
         objid: this.ID,
         table: 'PS_C_SKU',
