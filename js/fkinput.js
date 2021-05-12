@@ -1,4 +1,4 @@
-import commonUtils from '@burgeon/project-logic/config/config/commonUtils.js';
+// import commonUtils from '@burgeon/project-logic/config/config/commonUtils.js';
 // import SelectDialog from '../dialog/selectDialog.vue';
 // import FkTable from '../tablelist/fktable.vue';
 // 兼容fktable1.4数据格式（云雀1.0）

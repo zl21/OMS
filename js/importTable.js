@@ -235,10 +235,8 @@ export default {
     // console.log('webname::', _this.webname);
     // console.log('tableName::', this.tableName);
     // console.log('prefix::', this.prefix);
-    if (this.prefix == 'SYSTEM') {
-      this.key = this.tableName + '__' + this.webname;
-      this.currentConfig = _this.$OMS2.cusImport[this.key];
-    } else {
+    if (this.prefix == 'CUSTOM' || !this.componentData.isAction) {
+      // 纯定制导入
       this.key = this.componentData.tableName + '__' + this.componentData.webname;
       if (_this.$OMS2.cusImport[this.key]) {
         // 配置文件中存在配置，则使用配置文件中的配置
@@ -247,6 +245,10 @@ export default {
         // 反之使用父组件传过来的配置
         this.currentConfig = this.componentData;
       }
+    } else if (this.prefix == 'SYSTEM') {
+      // 标准动作定义
+      this.key = this.tableName + '__' + this.webname;
+      this.currentConfig = _this.$OMS2.cusImport[this.key];
     }
     this.dontShowDownloadA = this.currentConfig.dontShowDownloadA || false;
     this.importNotes = this.currentConfig.importNotes || false;

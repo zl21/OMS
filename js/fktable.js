@@ -1,4 +1,4 @@
-import commonUtils from '@burgeon/project-logic/config/config/commonUtils.js';
+// import commonUtils from '@burgeon/project-logic/config/config/commonUtils.js';
 import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
 export default {
   props: {

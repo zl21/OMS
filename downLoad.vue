@@ -35,7 +35,8 @@
       :component-data="dialogConfig.componentData"
       :name="dialogConfig.name"
       :url="dialogConfig.url"
-      :width="dialogConfig.width"
+      :width="540"
+      :basePathName="dialogConfig.basePathName"
     />
   </div>
 </template>
@@ -48,8 +49,6 @@ import i18n from "@burgeon/internationalization/i18n/i18n";
 
 // import CustomConfig from "@/config/customized.config.js";
 // const modalConfig = CustomConfig.cusDownLoadAllConfig;
-
-// const formConfig = (file) => require(`./config/${file}.js`).default;
 
 export default {
   components: {
@@ -124,7 +123,6 @@ export default {
         name: "importTable",
         basePathName: "business-components",
         url: "importTable",
-        width: 600,
       },
     };
   },
@@ -218,5 +216,6 @@ export default {
   color: #0f8ee9;
   line-height: 32px;
   cursor: pointer;
+  margin-top: 10px;
 }
 </style> 
