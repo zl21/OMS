@@ -68,7 +68,7 @@ DialogConfig.customConfig = {
   },
   // 弹框配置 修改物流
   modifyLogisticsConfig: {
-    title: '修改物流',
+    title: '批量修改物流',
     width: '400',
     name: 'modifyLogistics', //组件名称
     url: 'modal/orderCenter/modifyLogistics',
@@ -119,7 +119,7 @@ DialogConfig.customConfig = {
 
   // 修改仓库
   changeWarehouseConfig: {
-    title: '修改仓库',
+    title: '批量修改仓库',
     width: '400',
     name: 'changeWarehouse', //组件名称
     url: 'modal/orderCenter/changeWarehouse',

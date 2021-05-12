@@ -373,6 +373,7 @@ R3.launchApplication({
 | v1.2.51 | 修复零售发货单替换下挂入参问题 |
 | v1.2.52 | 手工拆单检查/查询调试 |
 | v1.2.53 | downLoad v2 |
+| v1.2.54 | modify改物流/仓库modalTittle |
 
 
 #### Extends-Api 版本说明
