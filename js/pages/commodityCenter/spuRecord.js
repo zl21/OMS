@@ -139,7 +139,7 @@ export default {
                   return;
                 }
                 this.isModify = true;
-                this.$store.commit('customize/TabOpen', {
+                $store.commit('customize/TabOpen', {
                   id: 2201,
                   type: 'action',
                   name: 'PS_C_SKU',
@@ -163,10 +163,10 @@ export default {
                   return;
                 }
                 this.isModify = true;
-                this.$store.commit('customize/TabOpen', {
+                $store.commit('customize/TabOpen', {
                   id: 2200,
                   type: 'action',
-                  name: 'QUICKLYGENERATE',
+                  name: 'PS_C_SKU_QUICKLY_ADD',
                   label: '快速生成', // 额外退款编辑
                   query: Object.assign({
                     id: this.spuid, // spuid

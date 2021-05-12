@@ -34,10 +34,10 @@ export default {
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
                 this.$destroy(true);
-              this.$store.commit('customize/TabOpen', {
+              $store.commit('customize/TabOpen', {
                 id: this.spuid,
                 type: 'action',
-                name: 'SPURECORD',
+                name: 'PS_C_PRO',
                 label: '快速生成', // 额外退款编辑
               });
             }
