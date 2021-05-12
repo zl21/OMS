@@ -1,3 +1,4 @@
+// 淘宝分销退单
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 import i18n from '@burgeon/internationalization/i18n/i18n';
 
@@ -6,8 +7,7 @@ export default {
     formValue: {
       orderStatus: '',
       startEndTimes: [],
-      ware_id: '',
-      item_num: ''
+      orderNum: ''
     },
     formData: [
       {
@@ -38,6 +38,20 @@ export default {
         }
       },
       {
+        style: 'radio', // 单选框
+        label: '', // 订单状态 前面字段
+        width: '24', // 宽度
+        value: 'orderStatus', // 绑定到formValue的值
+        // radioChange: ()=>{alert('123')}, //切换时的方法
+        // setRequired: "required", //必选标识,值不为required时无标识
+        options: [
+          {
+            label: i18n.t('panel_label.all'), // 全部
+            value: ''
+          },
+        ]
+      },
+      {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'startEndTimes',
@@ -48,21 +62,15 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: i18n.t('form_label.goodsPID'), // 输入框前文字
-        value: 'ware_id', // 输入框的值
+        label: '平台单号', // 输入框前文字
+        value: 'orderNum', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持
         placeholder: '', // 占位文本，默认为请输入
-        ghost: false // 是否关闭幽灵按钮，默认开启
-      },
-      {
-        style: 'input', // 输入框类型
-        label: i18n.t('table_label.productNo'), // 商品编码 输入框前文字
-        value: 'item_num', // 输入框的值
-        width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-        icon: '', // 输入框后带的图标,暂只有输入框支持
-        placeholder: '', // 占位文本，默认为请输入
-        ghost: false // 是否关闭幽灵按钮，默认开启
+        ghost: false, // 是否关闭幽灵按钮，默认开启
+        inputenter: () => { }, // 表单回车事件
+        iconclick: () => { } // 点击icon图标事件
+        // setRequired: "required" //必选标识,值不为required时无标识
       }
     ],
     ruleValidate: {}
@@ -76,23 +84,23 @@ export default {
       _this.$Message.warning(_this.vmI18n.t('modalTips.be'));
       return;
     }
-    if (downData.formValue.startEndTimes[0] === '' && downData.formValue.ware_id === '' && downData.formValue.item_num === '') {
-      _this.$Message.warning(_this.vmI18n.t('modalTips.bq')); // 修改时间、商品PID、商品编码必填其一
+    if (downData.formValue.startEndTimes[0] === '' && !downData.formValue.sp_ids && !downData.formValue.orderNum) {
+      _this.$Message.warning(_this.vmI18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
       return;
     }
     const param = {
       shop_id: downData.formData[0].itemdata.pid,
-      ware_id: downData.formValue.ware_id, // 商品id
-      item_num: downData.formValue.item_num, // 商品编码
+      bill_no: downData.formValue.sp_ids ? downData.formValue.sp_ids : downData.formValue.orderNum, // 订单编号
       start_time: BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
       end_time: BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
+      status: downData.formValue.orderStatus, // 状态 必传 给默认值
       table: _this.tablename // 当前表名 必传
     };
     const fromdata = new FormData();
     fromdata.append('param', JSON.stringify(param));
     const {
       data: { code, message }
-    } = await _this.service.common.publicUrlParams('/p/cs/itemDownload', fromdata);
+    } = await _this.service.common.publicUrlParams(url, fromdata);
     if (code === 0) {
       _this.$Message.success(message);
       _this.$emit('closeActionDialog', true);
