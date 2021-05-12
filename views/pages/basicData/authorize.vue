@@ -22,7 +22,14 @@
       </div>
     </div>
 
-    <Modal v-model="shopShow" width="600" class="shopModal" footer-hide title="店铺新增">
+    <Modal 
+      v-model="shopShow" 
+      width="600" 
+      class="shopModal"
+      footer-hide 
+      :draggable="true"
+      :mask="true"
+      title="店铺新增">
       <div class="customized-modal">
         <!-- 步骤条 -->
         <Steps :current="2" size="small">

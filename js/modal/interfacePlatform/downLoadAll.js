@@ -1,5 +1,7 @@
 import businessForm from 'professionalComponents/businessForm';
 import businessButton from 'professionalComponents/businessButton';
+import businessDialog from 'professionalComponents/businessDialog';
+import i18n from '@burgeon/internationalization/i18n/i18n';
 
 import CustomConfig from '@/config/customized.config.js';
 const modalConfig = CustomConfig.cusDownLoadAllConfig;
@@ -8,6 +10,7 @@ const modalConfig = CustomConfig.cusDownLoadAllConfig;
 
 export default {
   components: {
+    businessDialog,
     businessForm,
     businessButton,
   },
@@ -44,7 +47,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            text: i18n.t('common.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -54,33 +57,42 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('btn.download'), // 下载 按钮文本
+            text: i18n.t('btn.download'), // 下载 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               modalConfig[this.tableName].determine(this);
-              // formConfig('IP_B_TAOBAO_ORDER').determine(this)
             }, // 按钮点击事件
           },
         ],
       },
       downLoadFormConfig: {},
+      dialogConfig: {
+        title: i18n.t('btn.import'),
+        componentData: {
+          tableName: 'IP_C_STANDPLAT_PRO',
+          returnData(data) {
+            this.downLoadFormConfig.formValue.sp_ids = data;
+          }
+        },
+        name: 'importTable',
+        basePathName: 'business-components',
+        url: 'importTable',
+        width: 600
+      }
     };
   },
   computed: {
     modalTitle() {
-      let title = modalConfig[this.tableName].modalTitle ? modalConfig[this.tableName].modalTitle : window.vmI18n.t('modalTitle.orderDownload');
+      let title = modalConfig[this.tableName].modalTitle ? modalConfig[this.tableName].modalTitle : i18n.t('modalTitle.orderDownload');
       return title;
     },
   },
   mounted() {
     const self = this;
     this.downLoadFormConfig = modalConfig[this.tableName].formConfig;
-    // self.downLoadFormConfig = formConfig('IP_B_CANCEL_TIME_ORDER_VIP').formConfig
-
     if (this.$route.params.tableName == 'IP_B_JITX_DELIVERY') {
-      // console.log('self.downLoadFormConfig.formValue', self.downLoadFormConfig);
       self.downLoadFormConfig.formValue.order_status = 'NEW';
     }
   },
@@ -104,16 +116,37 @@ export default {
         id: this.taskId,
         type: 'singleView', // 类型action
         name: 'singleView',
-        label: this.vmI18n.t('common.interface_download_taskTable_edit'), // 接口下载任务表编辑 tab中文名
+        label: i18n.t('common.interface_download_taskTable_edit'), // 接口下载任务表编辑 tab中文名
         query: {
           id: this.taskId,
           pid: '24775',
-          ptitle: this.vmI18n.t('common.interface_download_taskTable'), // 接口下载任务表
+          ptitle: i18n.t('common.interface_download_taskTable'), // 接口下载任务表
           ptype: 'table',
-          tabTitle: this.vmI18n.t('common.interface_download_taskTable_edit'), // 接口下载任务表编辑
+          tabTitle: i18n.t('common.interface_download_taskTable_edit'), // 接口下载任务表编辑
           tableName: 'IP_T_CONSUMER_LOG',
         },
       });
     },
+    // 打开导入弹窗
+    importBoxOpen() {
+      const _this = this;
+      // 导入
+      this.dialogConfig = {
+        title: i18n.t('btn.import'),
+        componentData: {
+          // 导入：key存在则在配置中找(tableName_webname)
+          tableName: 'IP_C_STANDPLAT_PRO',
+          webname: '',
+          returnData(data) {
+            this.downLoadFormConfig.formValue.sp_ids = data;
+          }
+        },
+        name: 'importTable',
+        basePathName: 'business-components',
+        url: 'importTable',
+        width: 450
+      };
+      this.$refs.dialog.openConfirm();
+    }
   },
 };
