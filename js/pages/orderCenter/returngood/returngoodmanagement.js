@@ -1130,11 +1130,7 @@ export default {
       this.information.formValue.BILL_TYPE = '1';
       _this.clrAndSizeFlag = true;
       if (this.$route.query.orderHrefReturnid) {
-        _this.service.orderCenter
-          .billCopy({
-            IDS: _this.$route.query.orderHrefReturnid.split(','),
-            TYPE: '3',
-          })
+        _this.service.orderCenter.billCopy({ IDS: _this.$route.query.orderHrefReturnid.split(','), TYPE: '3', })
           .then((res) => {
             if (res.data.code === 0) {
               const item = res.data.data.baseInfo;
@@ -1142,93 +1138,62 @@ export default {
               this.onSelectData.push(item);
               this.information.formData.forEach((list) => {
                 // '退回物流公司'
-                if (
-                  list.style === 'popInput' &&
-                  list.itemdata.name ===
-                  window.vmI18n.t('form_label.returnLogisticsCompany')
-                ) {
+                if (list.style === 'popInput' && list.itemdata.name === window.vmI18n.t('form_label.returnLogisticsCompany')) {
                   list.itemdata.pid = item.CP_C_LOGISTICS_ID;
                   list.itemdata.valuedata = item.CP_C_LOGISTICS_ENAME;
-                  this.information.formValue.CP_C_LOGISTICS_ID =
-                    item.CP_C_LOGISTICS_ID;
-                  this.information.formValue.CP_C_LOGISTICS_ENAME =
-                    item.CP_C_LOGISTICS_ENAME;
+                  this.information.formValue.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ID;
+                  this.information.formValue.CP_C_LOGISTICS_ENAME = item.CP_C_LOGISTICS_ENAME;
                 }
               });
               _this.tId = item.TID;
-              _this.warehouseId = item.CP_C_PHY_WAREHOUSE_ID
-                ? item.CP_C_PHY_WAREHOUSE_ID
-                : ''; // 发货仓库id
+              _this.warehouseId = item.CP_C_PHY_WAREHOUSE_ID || ''; // 发货仓库id
               _this.information.formData[14].itemdata.pid = this.warehouseId;
-              _this.information.formData[14].itemdata.valuedata =
-                item.CP_C_PHY_WAREHOUSE_ENAME;
+              _this.information.formData[14].itemdata.valuedata = item.CP_C_PHY_WAREHOUSE_ENAME;
               _this.information.formValue.CP_C_PHY_WAREHOUSE_ID = this.warehouseId;
               _this.information.formValue.BILL_NO = item.BILL_NO;
               _this.information.formValue.ORIG_ORDER_ID = item.ID; // 编号
-              _this.information.formValue.PRO_RETURN_STATUS =
-                item.PRO_RETURN_STATUS; // 退货状态
+              _this.information.formValue.PRO_RETURN_STATUS = item.PRO_RETURN_STATUS; // 退货状态
               _this.information.formValue.BUYER_NICK = item.USER_NICK;
               _this.information.formValue.ORIG_SOURCE_CODE = item.SOURCE_CODE;
-              _this.information.formValue.CP_C_SHOP_TITLE =
-                item.CP_C_SHOP_TITLE;
+              _this.information.formValue.CP_C_SHOP_TITLE = item.CP_C_SHOP_TITLE;
               _this.information.formValue.CP_C_SHOP_ID = item.CP_C_SHOP_ID;
               _this.information.formValue.SELLER_MEMO = item.SELLER_MEMO;
-              _this.replacement.formValue.RECEIVE_ADDRESS =
-                res.data.data.receivingGoods.RECEIVER_ADDRESS; // 收货人地址
-              _this.replacement.formValue.RECEIVE_NAME =
-                res.data.data.receivingGoods.RECEIVER_NAME; // 收货人姓名
-              _this.replacement.formValue.RECEIVE_MOBILE =
-                res.data.data.receivingGoods.RECEIVER_MOBILE; // 收货人手机
-              _this.replacement.formValue.RECEIVE_PHONE =
-                res.data.data.receivingGoods.RECEIVER_PHONE; // 收货人电话
-              _this.replacement.formValue.RECEIVE_ZIP =
-                res.data.data.receivingGoods.RECEIVER_ZIP; // 换货人邮编
+              _this.replacement.formValue.RECEIVE_ADDRESS = res.data.data.receivingGoods.RECEIVER_ADDRESS; // 收货人地址
+              _this.replacement.formValue.RECEIVE_NAME = res.data.data.receivingGoods.RECEIVER_NAME; // 收货人姓名
+              _this.replacement.formValue.RECEIVE_MOBILE = res.data.data.receivingGoods.RECEIVER_MOBILE; // 收货人手机
+              _this.replacement.formValue.RECEIVE_PHONE = res.data.data.receivingGoods.RECEIVER_PHONE; // 收货人电话
+              _this.replacement.formValue.RECEIVE_ZIP = res.data.data.receivingGoods.RECEIVER_ZIP; // 换货人邮编
               _this.settlementAmount = item.CONSIGN_AMT; // 代销结算金额
               replace.PLATFORM = item.PLATFORM; // 平台
               replace.orde_source = item.ORDER_SOURCE; // 订单来源
-              replace.receiver_province_id =
-                res.data.data.receivingGoods.CP_C_REGION_PROVINCE_ID; // 省id
-              replace.receiver_province_name =
-                res.data.data.receivingGoods.CP_C_REGION_PROVINCE_ENAME; // 收货人省份
-              replace.receiver_city_id =
-                res.data.data.receivingGoods.CP_C_REGION_CITY_ID; // 收货人市id
-              replace.receiver_city_name =
-                res.data.data.receivingGoods.CP_C_REGION_CITY_ENAME; // 收货人市
-              replace.receiver_area_id =
-                res.data.data.receivingGoods.CP_C_REGION_AREA_ID; // 收货人县id
-              replace.receiver_area_name =
-                res.data.data.receivingGoods.CP_C_REGION_AREA_ENAME; // 收货人县
+              replace.receiver_province_id = res.data.data.receivingGoods.CP_C_REGION_PROVINCE_ID; // 省id
+              replace.receiver_province_name = res.data.data.receivingGoods.CP_C_REGION_PROVINCE_ENAME; // 收货人省份
+              replace.receiver_city_id = res.data.data.receivingGoods.CP_C_REGION_CITY_ID; // 收货人市id
+              replace.receiver_city_name = res.data.data.receivingGoods.CP_C_REGION_CITY_ENAME; // 收货人市
+              replace.receiver_area_id = res.data.data.receivingGoods.CP_C_REGION_AREA_ID; // 收货人县id
+              replace.receiver_area_name = res.data.data.receivingGoods.CP_C_REGION_AREA_ENAME; // 收货人县
               // 展示
-
-              _this.information.formData[5].itemdata.valuedata = item.CP_C_SHOP_TITLE
-                ? item.CP_C_SHOP_TITLE
-                : '';
-              _this.replacement.formData[5].itemdata.valuedata =
-                res.data.data.receivingGoods.CP_C_REGION_PROVINCE_ENAME; // 省
-              _this.replacement.formData[6].itemdata.valuedata =
-                res.data.data.receivingGoods.CP_C_REGION_CITY_ENAME; // 市
-              _this.replacement.formData[7].itemdata.valuedata =
-                res.data.data.receivingGoods.CP_C_REGION_AREA_ENAME; // 区
+              _this.information.formData[5].itemdata.valuedata = item.CP_C_SHOP_TITLE || '';
+              _this.replacement.formData[5].itemdata.valuedata = res.data.data.receivingGoods.CP_C_REGION_PROVINCE_ENAME; // 省
+              _this.replacement.formData[6].itemdata.valuedata = res.data.data.receivingGoods.CP_C_REGION_CITY_ENAME; // 市
+              _this.replacement.formData[7].itemdata.valuedata = res.data.data.receivingGoods.CP_C_REGION_AREA_ENAME; // 区
             } else {
               _this.$message.warning(res.data.message);
             }
           });
-        this.service.orderCenter
-          .getOrderDetailList({
-            id: _this.$route.query.orderHrefReturnid,
-            currentPage: 1,
-            pageSize: 1000,
-            detailType: 2, // 退换货订单使用
-          })
+        this.service.orderCenter.getOrderDetailList({
+          id: _this.$route.query.orderHrefReturnid,
+          currentPage: 1,
+          pageSize: 1000,
+          detailType: 2, // 退换货订单使用
+        })
           .then(async (res) => {
             if (res.data.code != 0) {
               _this.$Message.warning(res.data.message);
               return;
             }
-            const queryList = [];
-            res.data.data.records.forEach((item) => {
-              if (item.REFUND_STATUS != 6) queryList.push(item);
-            });
+            const queryList = res.data.data.records.filter((item) => item.REFUND_STATUS != 6);
+
             const newQueryList = [];
 
             queryList.forEach((subitem) => {
@@ -1250,48 +1215,6 @@ export default {
               newItem.sizeList = subitem.SIZE_LIST;
               newItem.PS_C_PRO_ENAME = subitem.PS_C_PRO_ENAME;
               newItem.QTY_CAN_REFUND = subitem.QTY;
-              newItem.QTY_REFUND =
-                Number(subitem.QTY || 0) -
-                Number(subitem.QTY_RETURN_APPLY || 0);
-              newItem.QTY_EXCHANGE = subitem.QTY;
-              newItem.SEX_NAME = subitem.SEX_NAME;
-              newItem.SEX = subitem.SEX;
-              newItem.PRICE = subitem.PRICE_SETTLE;
-              newItem.amt_refund_single = subitem.PRICE_ACTUAL;
-              newItem.AMT_REFUND = publicMethodsUtil
-                .accMul(newItem.QTY_REFUND, subitem.PRICE_ACTUAL)
-                .toFixed(2); // 退货金额realAmt
-              newItem.QTY_IN = 0;
-              newItem.PRODUCT_MARK = '正品';
-              newItem.skuId = subitem.PS_C_SKU_ID;
-              _this.reconstructionGetDetail(
-                subitem,
-                newItem,
-                subitem.PS_C_PRO_ECODE
-              );
-              newItem.PRICE_SETTLE = subitem.PRICE_SETTLE; // 结算单价
-              newItem.AMT_SETTLE_TOT = subitem.TOT_PRICE_SETTLE; // 结算金额
-              newItem.OC_B_ORDER_ITEM_ID = subitem.OC_B_ORDER_ITEM_ID;
-              newQueryList.push(newItem);
-            });
-
-            /* for await (const subitem of queryList) {
-              const newItem = {};
-              newItem.reserve_bigint10 = subitem.ID;
-              newItem.ID = -1;
-              newItem.oOid = subitem.OOID; // 子订单id
-              newItem.PS_C_SKU_ECODE = subitem.PS_C_SKU_ECODE;
-              newItem.BARCODE = subitem.BARCODE;
-              newItem.PS_C_PRO_ID = subitem.PS_C_PRO_ID;
-              newItem.PS_C_PRO_ECODE = subitem.PS_C_PRO_ECODE;
-              newItem.PS_C_CLR_ID = subitem.PS_C_CLR_ID; // 颜色
-              newItem.PS_C_CLR_ECODE = subitem.PS_C_CLR_ECODE;
-              newItem.PS_C_CLR_ENAME = subitem.PS_C_CLR_ENAME;
-              newItem.PS_C_SIZE_ID = subitem.PS_C_SIZE_ID; // 尺寸
-              newItem.PS_C_SIZE_ECODE = subitem.PS_C_SIZE_ECODE;
-              newItem.PS_C_SIZE_ENAME = subitem.PS_C_SIZE_ENAME;
-              newItem.PS_C_PRO_ENAME = subitem.PS_C_PRO_ENAME;
-              newItem.QTY_CAN_REFUND = subitem.QTY;
               newItem.QTY_REFUND = Number(subitem.QTY || 0) - Number(subitem.QTY_RETURN_APPLY || 0);
               newItem.QTY_EXCHANGE = subitem.QTY;
               newItem.SEX_NAME = subitem.SEX_NAME;
@@ -1302,12 +1225,12 @@ export default {
               newItem.QTY_IN = 0;
               newItem.PRODUCT_MARK = '正品';
               newItem.skuId = subitem.PS_C_SKU_ID;
-              await _this.reconstructionGetDetail(subitem, newItem, subitem.PS_C_PRO_ECODE);
+              _this.reconstructionGetDetail(subitem, newItem, subitem.PS_C_PRO_ECODE);
               newItem.PRICE_SETTLE = subitem.PRICE_SETTLE; // 结算单价
               newItem.AMT_SETTLE_TOT = subitem.TOT_PRICE_SETTLE; // 结算金额
               newItem.OC_B_ORDER_ITEM_ID = subitem.OC_B_ORDER_ITEM_ID;
               newQueryList.push(newItem);
-            } */
+            });
             _this.jordanTableConfig.data = newQueryList;
             _this.refundDtoList.data = _this.jordanTableConfig.data;
             _this.amountReturned = _this
@@ -1428,22 +1351,13 @@ export default {
       console.log(this.$route.query);
       this.information.formData[1].disabled = true;
       this.information.formData[1].icon = '';
-      this.information.formData[2].disabled =
-        this.$route.query.flag !== 'RefundToExchange'; // 如果为退货转换货过来的,单据类型可编辑
+      this.information.formData[2].disabled = this.$route.query.flag !== 'RefundToExchange'; // 如果为退货转换货过来的,单据类型可编辑
       this.information.formData[3].disabled = true;
       this.information.formData[4].disabled = true;
       this.information.formData[5].itemdata.readonly = true;
-      this.information.formData[10].disabled =
-        this.$route.query.flag !== 'RefundToExchange'; // 如果为退货转换货过来的,换货平台单号可编辑
+      this.information.formData[10].disabled = this.$route.query.flag !== 'RefundToExchange'; // 如果为退货转换货过来的,换货平台单号可编辑
       this.information.formData.forEach((item) => {
-        if (item.value == 'SELLER_MEMO') {
-          if (
-            this.$route.query.statusNo == 20 ||
-            this.$route.query.statusName == 30
-          ) {
-            item.disabled = false;
-          }
-        }
+        item.disabled = !(item.value == 'SELLER_MEMO' && (this.$route.query.statusNo == 20 || this.$route.query.statusName == 30));
       });
       const informationArr = [
         {
@@ -1464,9 +1378,7 @@ export default {
         },
       ];
       this.information.formData[0].style = 'input';
-      this.information.formData = this.information.formData.concat(
-        informationArr
-      );
+      this.information.formData = [...this.information.formData, ...informationArr];
     }
 
     this.$nextTick(() => {
@@ -1507,33 +1419,19 @@ export default {
       queryData.forEach((item) => {
         if (item.itemdata) {
           // 收货人省份
-          if (
-            item.itemdata.name ===
-            _this.vmI18n.t('form_label.consignee_province')
-          ) {
+          if (item.itemdata.name === _this.vmI18n.t('form_label.consignee_province')) {
             item.itemdata.valuedata = data.CP_C_REGION_PROVINCE_ENAME;
-            _this.replacement.formValue.receiver_province_id =
-              data.CP_C_REGION_PROVINCE_ID;
-            _this.replacement.formValue.receiver_province_name =
-              data.CP_C_REGION_PROVINCE_ENAME;
-            // 收货人市
-          } else if (
-            item.itemdata.name === _this.vmI18n.t('form_label.consignee_city')
-          ) {
+            _this.replacement.formValue.receiver_province_id = data.CP_C_REGION_PROVINCE_ID;
+            _this.replacement.formValue.receiver_province_name = data.CP_C_REGION_PROVINCE_ENAME;// 收货人市
+          } else if (item.itemdata.name === _this.vmI18n.t('form_label.consignee_city')) {
             item.itemdata.valuedata = data.CP_C_REGION_CITY_ENAME;
-            _this.replacement.formValue.receiver_city_id =
-              data.CP_C_REGION_CITY_ID;
-            _this.replacement.formValue.receiver_city_name =
-              data.CP_C_REGION_CITY_ENAME;
+            _this.replacement.formValue.receiver_city_id = data.CP_C_REGION_CITY_ID;
+            _this.replacement.formValue.receiver_city_name = data.CP_C_REGION_CITY_ENAME;
             // 收货人区
-          } else if (
-            item.itemdata.name === _this.vmI18n.t('form_label.aconsignee_area')
-          ) {
+          } else if (item.itemdata.name === _this.vmI18n.t('form_label.aconsignee_area')) {
             item.itemdata.valuedata = data.CP_C_REGION_AREA_ENAME;
-            _this.replacement.formValue.receiver_area_id =
-              data.CP_C_REGION_AREA_ID;
-            _this.replacement.formValue.receiver_area_name =
-              data.CP_C_REGION_AREA_ENAME;
+            _this.replacement.formValue.receiver_area_id = data.CP_C_REGION_AREA_ID;
+            _this.replacement.formValue.receiver_area_name = data.CP_C_REGION_AREA_ENAME;
           }
         }
       });
@@ -1543,140 +1441,109 @@ export default {
       const _this = this;
       _this.jordanTableConfig.loading = true;
       this.information.formData[4].style = 'input';
-      _this.service.orderCenter
-        .findDetail({
-          id: _this.$route.query.id,
-          start: 1,
-          count: 50,
-          isRefund2Exchange:
-            this.$route.query.flag == 'RefundToExchange' ? 1 : undefined,
-        })
-        .then(async (res) => {
-          if (res.data.code === 0) {
-            _this.jordanTableConfig.loading = false;
-            _this.information.formValue.BILL_TYPE = String(
-              res.data.data.returnOrders.BILL_TYPE
-            );
-            _this.selectSelectt();
-            if (
-              _this.information.formValue.BILL_TYPE == '2' &&
-              !res.data.data.returnOrders.IS_RESERVED
-            ) {
-              // _this.information.formData[11].style = 'select';
-              _this.information.formValue.IS_RETURN_ORDER_EXCHANGE =
-                res.data.data.returnOrders.IS_RETURN_ORDER_EXCHANGE;
-              setTimeout(() => {
-                document.getElementsByClassName(
-                  'burgeon-select-selected-value'
-                )[1].className = 'burgeon-select-selected-value inputBgcolor';
-              }, 10);
-            }
-            _this.status = res.data.data.returnOrders.RETURN_STATUS;
-            // // 设置水印
-            _this.statusName = _this.waterMarkMap[_this.status]
-              ? _this.waterMarkMap[_this.status]
-              : 'Watermark to be added';
-            _this.defectiveList = res.data.data.orderDefects;
-            const tempRefundDtoList = res.data.data.refundDtoList;
-            for (let i = 0; i < tempRefundDtoList.length; i++) {
-              tempRefundDtoList[i].PRODUCT_MARK =
-                tempRefundDtoList[i].PRODUCT_MARK == 1 ? '正品' : '次品';
-              tempRefundDtoList[i].amt_refund_single =
-                tempRefundDtoList[i].AMT_REFUND_SINGLE;
-              tempRefundDtoList[i].SEX_NAME = tempRefundDtoList[i].SEX_ENAME;
-              tempRefundDtoList[i].PRICE = tempRefundDtoList[i].PRICE_LIST;
-              _this.reconstructionGetDetail(
-                tempRefundDtoList[i],
-                tempRefundDtoList[i]
-              );
-            }
-
-            res.data.data.refundDtoList = tempRefundDtoList;
-            for (let i = 0; i < res.data.data.exchangeDtoList.length; i++) {
-              const item = res.data.data.exchangeDtoList[i];
-              item.SEX_NAME = item.SEX_ENAME;
-              item.PRICE = item.PRICE_LIST;
-              _this.reconstructionGetDetail(item, item);
-            }
-            _this.refundDtoList.data = res.data.data.refundDtoList;
-            _this.exchangeDtoList.data = res.data.data.exchangeDtoList;
-
-            _this.jordanTableConfig.data = res.data.data.refundDtoList;
-            _this.tId = res.data.data.returnOrders.TID;
-            _this.onSelectData.push(res.data.data.returnOrders);
-            _this.assignment(res.data.data.returnOrders);
-            _this.amountReturned = _this
-              .calculateMoney(res.data.data.refundDtoList, 1)
-              .toFixed(2); // 商品退回合计
-            _this.exchangeAmount = _this
-              .calculateMoney(res.data.data.exchangeDtoList, 2)
-              .toFixed(2); // 换货金额合计
-            _this.returnTotal();
-            // // 是否原退
-            _this.isTowwms = res.data.data.returnOrders.IS_TOWMS;
-            if (
-              res.data.data.returnOrders.RETURN_STATUS == 20 &&
-              (res.data.data.returnOrders.IS_TOWMS == 0 ||
-                res.data.data.returnOrders.IS_TOWMS == 2)
-            ) {
-              _this.information.formData[12].disabled = false;
-            } else {
-              _this.information.formData[12].disabled = true;
-            }
-            if (
-              this.$route.query.flag !== 'RefundToExchange' &&
-              ((res.data.data.returnOrders.RETURN_STATUS == 20 &&
-                res.data.data.returnOrders.IS_TOWMS == 2) ||
-                res.data.data.returnOrders.IS_TOWMS == 2)
-            ) {
-              _this.information.formData.forEach((item) => {
-                if (
-                  item.style == 'input' ||
-                  item.style == 'checkbox' ||
-                  item.style == 'select'
-                ) {
-                  item.disabled = true;
-                } else if (item.style == 'popInput')
-                  item.itemdata.readonly = true;
-              });
-            }
-            // 按钮是否可用
-            if (res.data.data.returnOrders.RETURN_STATUS != 30) {
-              _this.btnConfig.buttons.forEach((item) => {
-                // 售后审核
-                if (item.webname == 'shenhe_tuihuanhuo') {
-                  item.disabled = true;
-                }
-              });
-            }
-            if (res.data.data.returnOrders.RETURN_STATUS != 20) {
-              _this.btnConfig.buttons.forEach((item) => {
-                // 取消
-                if (item.webname == 'quxiao_tuihuanhuo') {
-                  item.disabled = true;
-                }
-                // 虚拟入库
-                if (item.webname == 'xuniruku_tuihuanhuo') {
-                  item.disabled = true;
-                }
-              });
-            }
-            if (res.data.data.returnOrders.RETURN_STATUS == 60) {
-              _this.btnConfig.buttons.forEach((item) => {
-                // 修改备注
-                if (item.webname == 'beizhu_tuihuanh') {
-                  item.disabled = true;
-                }
-              });
-            }
-            // 设置不可编辑文本框
-            _this.setDisplayByReturnOrder(res.data.data.returnOrders);
-          } else {
-            // 获取详情失败!
-            const err = res.data.message || _this.vmI18n.t('modalTips.n6');
-            _this.$Message.error(err);
+      let params = {
+        id: _this.$route.query.id,
+        start: 1,
+        count: 50,
+        isRefund2Exchange: this.$route.query.flag == 'RefundToExchange' ? 1 : undefined,
+      }
+      _this.service.orderCenter.findDetail(params).then(async (res) => {
+        if (res.data.code === 0) {
+          _this.jordanTableConfig.loading = false;
+          _this.information.formValue.BILL_TYPE = res.data.data.returnOrders.BILL_TYPE.toString();
+          _this.selectSelectt();
+          if (_this.information.formValue.BILL_TYPE == '2' && !res.data.data.returnOrders.IS_RESERVED) {
+            // _this.information.formData[11].style = 'select';
+            _this.information.formValue.IS_RETURN_ORDER_EXCHANGE =
+              res.data.data.returnOrders.IS_RETURN_ORDER_EXCHANGE;
+            setTimeout(() => {
+              document.getElementsByClassName('burgeon-select-selected-value')[1].className = 'burgeon-select-selected-value inputBgcolor';
+            }, 10);
           }
-        });
+          _this.status = res.data.data.returnOrders.RETURN_STATUS;
+          // // 设置水印
+          _this.statusName = _this.waterMarkMap[_this.status] || 'Watermark to be added';
+          _this.defectiveList = res.data.data.orderDefects;
+          const tempRefundDtoList = res.data.data.refundDtoList;
+          for (let i = 0; i < tempRefundDtoList.length; i++) {
+            tempRefundDtoList[i].PRODUCT_MARK = tempRefundDtoList[i].PRODUCT_MARK == 1 ? '正品' : '次品';
+            tempRefundDtoList[i].amt_refund_single = tempRefundDtoList[i].AMT_REFUND_SINGLE;
+            tempRefundDtoList[i].SEX_NAME = tempRefundDtoList[i].SEX_ENAME;
+            tempRefundDtoList[i].PRICE = tempRefundDtoList[i].PRICE_LIST;
+            _this.reconstructionGetDetail(tempRefundDtoList[i], tempRefundDtoList[i]);
+          }
+
+          res.data.data.refundDtoList = tempRefundDtoList;
+          for (let i = 0; i < res.data.data.exchangeDtoList.length; i++) {
+            const item = res.data.data.exchangeDtoList[i];
+            item.SEX_NAME = item.SEX_ENAME;
+            item.PRICE = item.PRICE_LIST;
+            _this.reconstructionGetDetail(item, item);
+          }
+          _this.refundDtoList.data = res.data.data.refundDtoList;
+          _this.exchangeDtoList.data = res.data.data.exchangeDtoList;
+
+          _this.jordanTableConfig.data = res.data.data.refundDtoList;
+          _this.tId = res.data.data.returnOrders.TID;
+          _this.onSelectData.push(res.data.data.returnOrders);
+          _this.assignment(res.data.data.returnOrders);
+          _this.amountReturned = _this.calculateMoney(res.data.data.refundDtoList, 1).toFixed(2); // 商品退回合计
+          _this.exchangeAmount = _this.calculateMoney(res.data.data.exchangeDtoList, 2).toFixed(2); // 换货金额合计
+          _this.returnTotal();
+          // // 是否原退
+          _this.isTowwms = res.data.data.returnOrders.IS_TOWMS;
+          this.information.formData[12].disabled = !(res.data.data.returnOrders.RETURN_STATUS == 20 && [0, 2].includes(_this.isTowwms));
+          if (this.$route.query.flag !== 'RefundToExchange' && (res.data.data.returnOrders.RETURN_STATUS == 20 || _this.isTowwms == 2)) {
+            _this.information.formData.forEach((item) => {
+              switch (item.style) {
+                case 'input':
+                case 'checkbox':
+                case 'select':
+                  item.disabled = true;
+                  break;
+                case 'popInput':
+                  item.itemdata.readonly = true;
+                  break;
+              }
+            });
+          }
+          // 按钮是否可用
+          if (res.data.data.returnOrders.RETURN_STATUS != 30) {
+            _this.btnConfig.buttons.forEach((item) => {
+              // 售后审核
+              if (item.webname == 'shenhe_tuihuanhuo') {
+                item.disabled = true;
+              }
+            });
+          }
+          if (res.data.data.returnOrders.RETURN_STATUS != 20) {
+            _this.btnConfig.buttons.forEach((item) => {
+              // 取消
+              if (item.webname == 'quxiao_tuihuanhuo') {
+                item.disabled = true;
+              }
+              // 虚拟入库
+              if (item.webname == 'xuniruku_tuihuanhuo') {
+                item.disabled = true;
+              }
+            });
+          }
+          if (res.data.data.returnOrders.RETURN_STATUS == 60) {
+            _this.btnConfig.buttons.forEach((item) => {
+              // 修改备注
+              if (item.webname == 'beizhu_tuihuanh') {
+                item.disabled = true;
+              }
+            });
+          }
+          // 设置不可编辑文本框
+          _this.setDisplayByReturnOrder(res.data.data.returnOrders);
+        } else {
+          // 获取详情失败!
+          const err = res.data.message || _this.vmI18n.t('modalTips.n6');
+          _this.$Message.error(err);
+        }
+      });
     },
     // 设置文本框是否可编辑
     setDisplayByReturnOrder(returnOrders) {
@@ -4298,14 +4165,10 @@ export default {
         if (dataType === 1) {
           _this.clrListArr = res.data.data.psCSpec1objList;
           _this.sizeListArr = res.data.data.psCSpec2objList;
-        } else if (res.data.code === 0) {
-          _this.itemSkuEcode = res.data.data.ecode;
-          _this.itemSkuId = res.data.data.skuId;
-          _this.itemGbcode = res.data.data.gbcode;
         } else {
-          _this.itemSkuEcode = '';
-          _this.itemSkuId = '';
-          _this.itemGbcode = '';
+          _this.itemSkuEcode = (res.data.code === 0)?res.data.data.ecode:'';
+          _this.itemSkuId = (res.data.code === 0)?res.data.data.skuId:'';
+          _this.itemGbcode = (res.data.code === 0)?res.data.data.gbcode:'';
         }
       });
     },
