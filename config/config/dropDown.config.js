@@ -162,7 +162,7 @@ class DropDownConfig {
     self.publicBouncedConfig.confirmTitle = '批量替换下挂商品'
     self.publicBouncedConfig.componentData = {
       data: self.selection,
-      type: 'del',
+      type: 'replace',
     }
     self.publicBouncedConfig.width = 800
 
