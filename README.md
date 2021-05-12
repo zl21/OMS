@@ -374,6 +374,7 @@ R3.launchApplication({
 | v1.2.52 | 手工拆单检查/查询调试 |
 | v1.2.53 | downLoad v2 |
 | v1.2.54 | modify改物流/仓库modalTittle |
+| v1.2.55 | bug:38264 |
 
 
 #### Extends-Api 版本说明
