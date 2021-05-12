@@ -7,6 +7,94 @@ export default {
   },
   data() {
     return {
+      mockData:{data:{
+        "code":0,
+        "data":[
+          {
+            "waiting_split_num":2.0000,
+            "proType":0,
+            "ps_c_sku_name":null,
+            "ps_c_clr_id":850,
+            "adjust_amt":0.0000,
+            "ps_c_pro_ecode":"KASA0000001",
+            "price_list":0.0000,
+            "orig_order_id":903136,
+            "price":10.0000,
+            "cp_c_phy_warehouse_ecode":"Gale0025",
+            "ps_c_sku_id":104100,
+            "sgBPhyInStorageItemExt":[
+              {
+                "advise_phy_warehouse_id":162,
+                "ps_c_sku_name":null,
+                "total_qty_available":100.0000,
+                "ps_c_sku_ecode":"OKCKASA0000001REDS",
+                "advise_phy_warehouse_ename":"Gale实体仓",
+                "advise_phy_warehouse_ecode":"Gale0025"
+              },
+              {
+                "advise_phy_warehouse_id":161,
+                "ps_c_sku_name":null,
+                "total_qty_available":10.0000,
+                "ps_c_sku_ecode":"OKCKASA0000001REDS1",
+                "advise_phy_warehouse_ename":"常常仓",
+                "advise_phy_warehouse_ecode":"Gale00251"
+              }
+            ],
+            "ps_c_clr_ename":"red",
+            "ps_c_sku_ecode":"OKCKASA0000001REDS",
+            "ps_c_pro_ename":"卡莎",
+            "orig_order_item_id":1701170,
+            "ps_c_size_ename":"S",
+            "cp_c_phy_warehouse_id":162,
+            "is_gift":0,
+            "ps_c_size_ecode":"S",
+            "qty":1.0000,
+            "amt_discount":0.0000,
+            "ps_c_clr_ecode":"RED",
+            "ps_c_size_id":853,
+            "cp_c_phy_warehouse_ename":"Gale实体仓",
+            "split_num":0
+          },
+          {
+            "waiting_split_num":1.0000,
+            "proType":0,
+            "ps_c_sku_name":null,
+            "ps_c_clr_id":850,
+            "adjust_amt":0.0000,
+            "ps_c_pro_ecode":"KASA0000001",
+            "price_list":0.0000,
+            "orig_order_id":903136,
+            "price":10.0000,
+            "cp_c_phy_warehouse_ecode":"Gale0025",
+            "ps_c_sku_id":104100,
+            "sgBPhyInStorageItemExt":[
+              {
+                "advise_phy_warehouse_id":162,
+                "ps_c_sku_name":null,
+                "total_qty_available":100.0000,
+                "ps_c_sku_ecode":"OKCKASA0000001REDS",
+                "advise_phy_warehouse_ename":"Gale实体仓",
+                "advise_phy_warehouse_ecode":"Gale0025"
+              }
+            ],
+            "ps_c_clr_ename":"red",
+            "ps_c_sku_ecode":"OKCKASA0000001REDS",
+            "ps_c_pro_ename":"卡莎",
+            "orig_order_item_id":1701170,
+            "ps_c_size_ename":"S",
+            "cp_c_phy_warehouse_id":162,
+            "is_gift":0,
+            "ps_c_size_ecode":"S",
+            "qty":1.0000,
+            "amt_discount":0.0000,
+            "ps_c_clr_ecode":"RED",
+            "ps_c_size_id":853,
+            "cp_c_phy_warehouse_ename":"Gale实体仓",
+            "split_num":0
+          }
+        ],
+        "message":"初始化查询接口查询成功!"
+      }},
       vmI18n: window.vmI18n,
       btnConfig: {
         typeAll: 'default',
@@ -58,15 +146,18 @@ export default {
         },
         {
           title: window.vmI18n.t('table_label.whetherGift'), // 是否赠品
-          key: 'is_gift_name'
+          key: 'is_gift_name',
+          draggable:true
         },
         {
           title: window.vmI18n.t('table_label.commoditySKU'), // 商品SKU
-          key: 'ps_c_sku_ecode'
+          key: 'ps_c_sku_ecode',
+          draggable:true
         },
         {
           title: window.vmI18n.t('table_label.productName'), // 商品名称
-          key: 'ps_c_pro_ename'
+          key: 'ps_c_pro_ename',
+          draggable:true
         },
         // {
         //   title: '商品信息',
@@ -74,15 +165,18 @@ export default {
         // },
         {
           title: window.vmI18n.t('table_label.productSKUname'), // 商品SKU名称
-          key: 'ps_c_sku_ename'
+          key: 'ps_c_sku_ename',
+          draggable:true
         },
         {
           title: window.vmI18n.t('table_label.original_deliveryWarehouse'), // 原发货仓库
-          key: 'cp_c_phy_warehouse_ename'
+          key: 'cp_c_phy_warehouse_ename',
+          draggable:true
         },
         {
           title: window.vmI18n.t('table_label.suggested_deliveryWarehouse'), // 建议发货仓库
           key: 'advise_phy_warehouse_id',
+          draggable:true,
           render: (h, params) => {
             const options = params.row.sgBPhyInStorageItemExt.map(item => h('Option', {
                 style: {
@@ -130,19 +224,23 @@ export default {
         },
         {
           title: window.vmI18n.t('form_label.purchaseQuantity'), // 购买数量
-          key: 'qty'
+          key: 'qty',
+          draggable:true
         },
         {
           title: window.vmI18n.t('table_label.quantity_availableSale'), // 可售数量
-          key: 'total_qty_available'
+          key: 'total_qty_available',
+          draggable:true
         },
         {
           title: window.vmI18n.t('table_label.quantity_demolished'), // 待拆数量
-          key: 'waiting_split_num'
+          key: 'waiting_split_num',
+          draggable:true
         },
         {
           title: window.vmI18n.t('table_label.quantity_split'), // 拆分数量
           key: 'split_num',
+          draggable:true,
           width: 100,
           render(h, params) {
             // console.log(params);
@@ -205,7 +303,7 @@ export default {
     back() {
       this.$comUtils.tabCloseAppoint(this);
       this.$store.commit('customize/TabHref', {
-        id: 2627,
+        id: 2307,
         type: 'action',
         name: 'orderManager',
         label: window.vmI18n.t('panel_label.retail_shipping_order'), // label: '零售发货单',
@@ -218,7 +316,8 @@ export default {
       console.log('getData::');
       const self = this;
       const params = { orderId: self.$route.params.customizedModuleId };
-      const res = await this.service.orderCenter.querySkuListAndStorageInfo(params);
+      // const res = await this.service.orderCenter.querySkuListAndStorageInfo(params);
+      const res = self.mockData;
       let total = 0;
       if (res.data.code === 0) {
         self.data = [];
