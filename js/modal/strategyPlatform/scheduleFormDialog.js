@@ -28,7 +28,8 @@ export default {
       subTableCollapse: [],
       formConfig: {},
       btnConfig: {
-        typeAll: 'error',
+        typeAll: 'default', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
             text: '取消',

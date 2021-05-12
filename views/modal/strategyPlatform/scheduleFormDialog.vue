@@ -21,9 +21,7 @@
         </Panel>
       </Collapse>
     </div>
-    <div class="buttons">
-      <businessButton :btn-config="btnConfig" />
-    </div>
+    <businessButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
 
