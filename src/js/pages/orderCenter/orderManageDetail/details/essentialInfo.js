@@ -159,6 +159,11 @@ export default {
           flag: false, // 需要加*
           column: 'DELIVERY_STORE_CODE',
           label: '发货门店编码:'
+        },
+        {
+          flag: false, // 需要加*
+          column: 'SEND_TIME',
+          label: '预计发货时间:'
         }
       ],
       detail: [
