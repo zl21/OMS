@@ -323,6 +323,48 @@ export default {
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
             placeholder: '',
             clearable: '' // 是否显示清空按钮,默认为true   false
+          },
+          {
+            style: 'popInput', // 输入框弹框单多选
+            width: '6',
+            dataAcessKey: 'CP_C_SHOP_TITLE',
+            label: window.vmI18n.t('form_label.orderShop'), // 下单店铺 // input前面显示的lable值
+            itemdata: {
+              issubtotal: false,
+              reftable: "CP_C_SHOP",
+              agfilter: "LIST",
+              orderno: "130",
+              precolnameslist: [
+                {
+                  iswrite: "false",
+                  refcol: "ID",
+                  premtype: "CP_C_SHOP_PERMISSION_ID"
+                }
+              ],
+              isak: false,
+              display: "text",
+              length: 20,
+              reftableid: 24475,
+              type: "STRING",
+              datelimit: "all",
+              isagfilter: true,
+              isfilter: true,
+              colname: "CP_C_SHOP_ID",
+              isuppercase: false,
+              isnotnull: false,
+              fkdesc: "平台店铺档案",
+              ismodify: false,
+              name: "店铺",
+              fkdisplay: "mrp",
+              colid: 167606,
+              inputname: "CP_C_SHOP_ID",
+              isfk: true,
+              objdistype: "object"
+            },
+            oneObj: val => {
+              this.formConfig.formValue.CP_C_SHOP_ID = val.pid;
+              this.formConfig.formValue.CP_C_SHOP_NAME = val.valuedata;
+            },
           }
         ],
         formValue: {},
@@ -709,7 +751,8 @@ export default {
         TID: mainData.TID,
         BILL_STATUS: mainData.BILL_STATUS,
         ORDER_NO: mainData.ORDER_NO,
-        RESERVE_BIGINT01: mainData.RESERVE_BIGINT01
+        RESERVE_BIGINT01: mainData.RESERVE_BIGINT01,
+        CP_C_SHOP_ID: mainData.CP_C_SHOP_ID
       };
 
       const param = {
