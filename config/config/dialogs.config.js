@@ -1,4 +1,7 @@
+
 //定制弹窗配置类
+import i18n from '@burgeon/internationalization/i18n/i18n'
+window.vmI18n = i18n
 class DialogConfig {
   constructor() {}
 

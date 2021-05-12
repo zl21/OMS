@@ -1,8 +1,8 @@
 //定制下拉菜单按钮配置类
 import commonUtils from './commonUtils'
-import publicDialogConfig from 'professionalComponents/common/js/publicDialog'
+// import publicDialogConfig from 'professionalComponents/common/js/publicDialog'
 
-// import DialogConfig from 'burgeonConfig/config/dialogs.config';
+import DialogConfig from 'burgeonConfig/config/dialogs.config';
 class DropDownConfig {
   constructor() {}
   static configHandler(val, singleType = 0, eventList = []) {
@@ -150,7 +150,7 @@ class DropDownConfig {
     //批量删除
     let self = DropDownConfig.target
     self.publicBouncedConfig = JSON.parse(
-      JSON.stringify(publicDialogConfig.pushProduceConfig)
+      JSON.stringify(DialogConfig.config().pushProduceConfig)
     )
     self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
     if (self.selection.length < 1) {
@@ -175,7 +175,7 @@ class DropDownConfig {
     //批量删除
     let self = DropDownConfig.target
     self.publicBouncedConfig = JSON.parse(
-      JSON.stringify(publicDialogConfig.pushProduceConfig)
+      JSON.stringify(DialogConfig.config().pushProduceConfig)
     )
     self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
     if (self.selection.length < 1) {
@@ -200,7 +200,7 @@ class DropDownConfig {
     //添加赠品
     let self = DropDownConfig.target
     self.publicBouncedConfig = JSON.parse(
-      JSON.stringify(publicDialogConfig.pushProduceConfig)
+      JSON.stringify(DialogConfig.config().pushProduceConfig)
     )
 
     self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
@@ -434,7 +434,7 @@ class DropDownConfig {
   static successHandler(ids, objName, componentDataType, tableType) {
     let self = DropDownConfig.target
     self.publicBouncedConfig = JSON.parse(
-      JSON.stringify(publicDialogConfig[objName])
+      JSON.stringify(DialogConfig.config()[objName])
     )
     let componentDataObj = {}
 
@@ -497,7 +497,12 @@ class DropDownConfig {
     // 表单筛选条件
     self.publicBouncedConfig.componentData = componentDataObj
     self.$nextTick(() => {
-      self.$children.find((item) => item.name === tableType).openConfirm()
+      self.$children.find((item) => {
+        if (item.name === tableType) {
+          console.log(item);
+        }
+        return item.name === tableType
+      }).openConfirm()
       self.btnConfig.loading = false
     }, 100)
   }
