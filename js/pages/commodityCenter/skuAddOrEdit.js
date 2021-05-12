@@ -766,7 +766,7 @@ export default {
         this.$store.commit('customize/TabOpen', {
           id: this.$route.query.spuid,
           type: 'action',
-          name: 'SPURECORD',
+          name: 'PS_C_PRO',
           label: 'SPU编辑',
         });
       } else {

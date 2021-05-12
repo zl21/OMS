@@ -26,7 +26,7 @@ export default {
     // component: skuAddOrEdit,
     labelName: '商品SKU编辑',
   },
-  QUICKLYGENERATE: {
+  PS_C_SKU_QUICKLY_ADD: {
     component: () => import('allpages/commodityCenter/quicklyGenerate.vue'),
     // component: quicklyGenerate,
     labelName: 'SKU快速生成'
