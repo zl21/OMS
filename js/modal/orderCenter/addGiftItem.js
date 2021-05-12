@@ -149,7 +149,7 @@ export default {
           {
             text: window.vmI18n.t('common.cancel'),
             btnclick: () => {
-              this.$parent.$parent.closeConfirm()
+              this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
           {
@@ -190,6 +190,7 @@ export default {
 
   methods: {
     saveOrderByPro() {
+      this.btnConfig.buttons[1].disabled = true;
       let orderList = []
       this.componentData.data.forEach((em) => {
         let obj = {
@@ -205,9 +206,11 @@ export default {
         initNumber: this.formConfig.formValue.number,
       }
       this.service.orderCenter.saveOrderByPro(data).then((res) => {
+        this.btnConfig.buttons[1].disabled = false;
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
-          this.$parent.$parent.closeConfirm()
+          this.$parent.$parent.closeConfirm();
+          this.$parent.$parent.$parent.$parent.$parent.getDetailsData()
         } else {
           this.$Modal.confirm({
             title: res.data.message,
@@ -406,8 +409,8 @@ export default {
         data: { code, data, message },
       } = await this.service.orderCenter.batchAddGoods(param)
       if (code === 0) {
-        self.$Message.success(message)
-        self.$parent.$parent.$parent.$parent.autoRefresh()
+        self.$Message.success(message);
+        self.$parent.$parent.$parent.$parent.autoRefresh();
         self.$parent.$parent.closeConfirm()
         this.btnConfig.buttons[0].loading = false
       } else {
