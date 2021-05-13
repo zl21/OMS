@@ -156,7 +156,6 @@ export default {
     // 删除赠品
     async deleteItem() {
       const self = this;
-      console.log('1111:',this.checkSelection);
       const GIFT_TYPES = this.checkSelection.map(row => row.GIFT_TYPE);
       if(GIFT_TYPES.includes('非赠品') && !['缺货','待审核'].includes(this.componentData.order.ORDER_STATUS)){
         self.$Message.error('勾选明细含有非赠品禁止删除！');
@@ -170,7 +169,11 @@ export default {
           billNo: this.componentData.order.BILL_NO, //单据编号
         }],
       }
+      this.tableConfig.businessButtonConfig.buttons[1].disabled = true;
       this.service.orderCenter.deleteOrderGoods(data).then((res) => {
+        setTimeout(() => {
+          this.tableConfig.businessButtonConfig.buttons[1].disabled = false;
+        }, 1000);
         if (res.data.code == 0) {
           this.$Message.success(res.data.message);
           this.$parent.$parent.closeConfirm();
