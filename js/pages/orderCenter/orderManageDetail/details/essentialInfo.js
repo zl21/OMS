@@ -219,10 +219,7 @@ export default {
         }
       },
       deep: true
-    },
-    retailPriceTotal(newName) {
-      this.orderPriceTotal = this.$OMS2.omsUtils.floatNumber(Number(this.orderPriceTotal) + Number(newName));
-    },
+    }
   },
   methods: {
     eyeClick() {
@@ -244,6 +241,7 @@ export default {
     priceTotal(val){
       // 商品总金额赋值
       this.retailPriceTotal = val;
+      this.orderPriceTotal = this.$OMS2.omsUtils.floatNumber(Number(this.orderPriceTotal) + Number(val));
     },
     // 添加赠品
     addGiftHandler() {

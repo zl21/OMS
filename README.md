@@ -376,7 +376,11 @@ R3.launchApplication({
 | v1.2.54 | modify改物流/仓库modalTittle |
 | v1.2.55 | bug:38264 |
 | v1.2.56 | bug:38309 | 38308 | 38286 |
-
+| v1.2.57 | 添加赠品按钮添加禁止重复点击 |
+| v1.2.58 | spu->skuAddOrEdit |
+| v1.2.59 | 零售发货单详情 - 刷新问题 |
+| v1.2.60 | spu->sku-save渲染问题 |
+| v1.2.61 | 修改-删除赠品和替换赠品禁止重复点击 |
 
 #### Extends-Api 版本说明
 

@@ -101,10 +101,16 @@ export default {
         orderList:this.componentData.orderList,
         skuEcodes:[this.componentData.oldSuk,this.currentSkuEcode]
       }
+      this.btnConfig.buttons[1].disabled = true;
       const { data: { code, message, data } } = await this.service.orderCenter.replaceOrderByPro(params);
+      setTimeout(() => {
+        this.btnConfig.buttons[1].disabled = false;
+      }, 5000);
       console.log(code, message, data);
       if(code ===  0){
         self.$Message.success(message);
+        self.$parent.$parent.closeConfirm();
+        self.$parent.$parent.$parent.$parent.$parent.getDetailsData();
       }else if(data && code ===  -1){
           self.$Modal.confirm({
             title: message,

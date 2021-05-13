@@ -355,9 +355,22 @@ export default {
         },
         ],
         formValue: {
-          ECODE:'',
-          ENAME:'',
-          PRICE_RETAIL:'',
+          PS_C_PRO_ID: '',
+          ECODE: '',
+          ENAME: '',
+          PURCHASE_STATUS: '',
+          SALES_STATUS: '',
+          UNIT: '',
+          ISACTIVE: '',
+          SPEC_REMARK: '',
+          PRICE_RETAIL: '',
+          PRICE_COST: '',
+          PRICE_PURCHASE: '',
+          LENGTH: '',
+          HEIGHT: '',
+          WIDTH: '',
+          GROSS_WEIGHT: '',
+          NET_WEIGHT: '',
           PS_C_SPECOBJ1_ID: '',
           PS_C_SPECOBJ2_ID: '',
           PS_C_SPECOBJ3_ID: '',
@@ -707,7 +720,11 @@ export default {
           attributeItem: afterExPro[key] ? afterExPro[key] : ''
         });
       }
-      if (self.$route.query.spuid) this.ID = '-1';
+      if (self.$route.query.spuid) {
+        this.ID = '-1';
+        PsSku.SALES_STATUS = PsSku.SALES_STATUS ? PsSku.SALES_STATUS : self.formConfig.formValue.SALES_STATUS;
+        PsSku.ISACTIVE = 'Y';
+      }
       const param = {
         objid: this.ID,
         table: 'PS_C_SKU',
@@ -732,7 +749,15 @@ export default {
         self.modify.exAttr = {};
         // 数据回显
         if (data) self.ID = data;
-        await self.initObjItem(self.ID);
+        this.$comUtils.tabCloseAppoint(this);
+        this.$destroy(true);
+        $store.commit('customize/TabOpen', {
+          id: self.ID,
+          type: 'action',
+          name: 'PS_C_SKU',
+          label: 'SKU编辑',
+        });
+        // await self.initObjItem(self.ID);
       } else {
         // 走框架的报错
       }

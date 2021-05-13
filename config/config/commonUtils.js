@@ -575,7 +575,6 @@ class commonUtils {
             fDitem.oneObj = fDitem.oneObj
           }
           /*  ˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚ 生成formValue 并 赋值（新增时接口不会返回valuedata字段）˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚  */
-          fV[item.colname] = item.valuedata || item.defval
           if (item.fkdisplay) {
             // 复杂类型的formValue赋值
             if (!item.valuedata) return
@@ -589,7 +588,9 @@ class commonUtils {
               item.valuedata || ''
           } else if (item.display == 'select' || item.display == 'check') {
             // 下拉类型的接口会返回一个默认选中的值（元数据中字段的缺省值）
-            fV[item.colname] = item.defval || ''
+            fV[item.colname] = item.valuedata || item.defval || ''
+          } else {
+            fV[item.colname] = item.valuedata || item.defval || ''
           }
           /*  ˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚ 生成必填ruleValidate（针对input、select等普通类型 ˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚  */
           if (item.isnotnull) {
