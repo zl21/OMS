@@ -581,8 +581,8 @@ class DropDownConfig {
     let self = DropDownConfig.target
     commonUtils.serviceHandler(self, 'splitOrder', { ids })
   }
-
-  appointSplitHandler(ids) {
+  // 指定商品拆单
+  static appointSplitHandler(ids) {
     this.successHandler(
       ids,
       'specifyGoodsAssignConfig',
