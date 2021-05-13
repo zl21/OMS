@@ -1,5 +1,10 @@
 import service from '@/service/index'
 class commonUtils {
+   gateWayPrefix = {
+    basicData: '/r3-cp',
+    commodityCenter: '/r3-ps',
+    orderCenter: '/r3-oc-oms',
+  }
   constructor() {}
 
   //--------------工具方法区--------------------------
@@ -844,10 +849,5 @@ class commonUtils {
   }
 }
 
-commonUtils.gateWayPrefix = {
-  basicData: '/r3-cp',
-  commodityCenter: '/r3-ps',
-  orderCenter: '/r3-oc-oms',
-}
 
 export default commonUtils
