@@ -139,8 +139,8 @@ export default {
           self.$parent.$parent.$parent.selection = [];
         } else {
           self.$Message.success(message);
-          self.$parent.$parent.$parent.load();
           self.$parent.$parent.closeConfirm();
+          this.$parent.$parent.$parent.$parent.$parent.getDetailsData()
         }
       } else {
         self.btnConfig.buttons[1].disabled = false;
