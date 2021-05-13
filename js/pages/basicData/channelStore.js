@@ -10,7 +10,7 @@ import logTable from 'professionalComponents/LogTable';
 import businessActionTable from 'professionalComponents/businessActionTable';
 
 export default {
-  name: 'ChannelStore',
+  name: 'CP_C_ORG_CHANNEL',
   components: {
     orderItem,
     businessButton,
@@ -569,7 +569,7 @@ export default {
           this.$store.commit('customize/TabOpen', {
             id: res.data.data.ID,
             type: 'action',
-            name: 'CHANNELSTORE',
+            name: 'CP_C_ORG_CHANNEL',
             label: '渠道仓编辑' // 额外退款编辑
           });
           if (self.id != '-1') {

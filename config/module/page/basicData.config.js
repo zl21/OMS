@@ -34,7 +34,7 @@ export default {
     component: () => import('allpages/basicData/addAliasOrRegion.vue'),
     labelName: '新增区域'
   },
-  CHANNELSTORE: {
+  CP_C_ORG_CHANNEL: {
     // component: channelStore,
     component: () => import('allpages/basicData/channelStore.vue'),
     labelName: '渠道仓新增', // 元数据若配置的是'网页链接'则需前端配置labelName，若是动作定义则不用配置
