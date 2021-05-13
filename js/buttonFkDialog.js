@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
+      vmI18n: $i18n,
       fkDialog: {
         // 弹框多选
         dialog: false,

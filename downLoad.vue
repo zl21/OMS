@@ -79,7 +79,7 @@ export default {
   data() {
     return {
       spinShow: false, // loading动画
-      vmI18n: window.vmI18n,
+      vmI18n: i18n,
       downLoadModal: false,
       taskId: "",
       tableName: this.$route.params.tableName
