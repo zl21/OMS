@@ -73,7 +73,6 @@ export default {
   computed: {},
   data() {
     return {
-      vmI18n: window.vmI18n,
       isShowFromLoading: false, // 加载
       zIndex: 2500,
       totalRowCount: 0,
