@@ -88,7 +88,6 @@ export default {
             style: '',
             label: '策略ID',
             colname: 'PLAN_ID',
-            value: 'PLAN_ID',
             width: '6',
             disabled: false,
             inputChange: () => {
@@ -99,7 +98,6 @@ export default {
             style: 'input',
             label: '策略名称',
             colname: 'PLAN_NAME',
-            value: 'PLAN_NAME',
             width: '6',
             disabled: false,
             inputChange: () => {
@@ -147,10 +145,14 @@ export default {
             label: '生效开始时间', // 输入框前文字
             colname: 'BEGIN_TIME',
             type: 'date',
-            value: 'BEGIN_TIME', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             format: 'yyyy-MM-dd',
             disabled: false,
+            options: {
+              disabledDate (date) {
+                return date && date.valueOf() < Date.now() - 86400000;
+              }
+            },
             onChange: () => {
               this.masterModifyData('BEGIN_TIME', 'master');
             }
@@ -160,10 +162,14 @@ export default {
             label: '生效结束时间', // 输入框前文字
             colname: 'END_TIME',
             type: 'date',
-            value: 'END_TIME', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             format: 'yyyy-MM-dd',
             disabled: false,
+            options: {
+              disabledDate (date) {
+                return date && date.valueOf() < Date.now() - 86400000;
+              }
+            },
             onChange: () => {
               this.masterModifyData('END_TIME', 'master');
             }
@@ -172,7 +178,6 @@ export default {
             style: 'input',
             label: '优先级',
             colname: 'PRIORITY',
-            value: 'PRIORITY',
             width: '6',
             disabled: false,
             regx: /^[1-9]$/,
@@ -184,7 +189,6 @@ export default {
             style: 'input',
             label: '备注',
             colname: 'REMARK',
-            value: 'REMARK',
             width: '6',
             disabled: false,
             inputChange: () => {
@@ -195,7 +199,6 @@ export default {
             style: '',
             label: '启用状态',
             colname: 'ISACTIVE',
-            value: 'ISACTIVE',
             width: '6',
             disabled: true
           }
@@ -212,30 +215,12 @@ export default {
           REMARK: '' // 备注
         },
         ruleValidate: {
-          PLAN_ID: [{
-            required: false,
-            message: ' '
-          }],
-          PLAN_NAME: [{
-            required: true,
-            message: ' '
-          }],
-          BEGIN_TIME: [{
-            required: true,
-            message: ' '
-          }],
-          END_TIME: [{
-            required: true,
-            message: ' '
-          }],
-          PRIORITY: [{
-            required: true,
-            message: ' '
-          }],
-          CP_C_SHOP_ID: [{
-            required: true,
-            message: ' '
-          }]
+          PLAN_ID: [{ required: false, message: ' ' }],
+          PLAN_NAME: [{ required: true, message: ' ' }],
+          BEGIN_TIME: [{ required: true, message: ' ' }],
+          END_TIME: [{ required: true, message: ' ' }],
+          PRIORITY: [{ required: true, message: ' ' }],
+          CP_C_SHOP_ID: [{ required: true, message: ' ' }]
         }
       },
       goodsTableConfig: {
@@ -410,8 +395,7 @@ export default {
             {
               style: 'input',
               label: '最低成交单价',
-              colname: 'MIN_REAL_MIN_REAL_AMT',
-              value: 'MIN_REAL_AMT',
+              colname: 'MIN_REAL_AMT',
               width: '6',
               disabled: false,
               regx: /^\d*\.{0,1}\d{0,4}$/,
