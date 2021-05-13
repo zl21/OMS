@@ -1,8 +1,7 @@
 //公用校验配置类
 class BurgeonValidate {
+  static target;
   constructor() { }
-
-
   // 电话号码校验
   static validatePhoneNumber(rule, value, callback) {
     const pNumver = value;
@@ -128,6 +127,5 @@ class BurgeonValidate {
   }
 }
 
-BurgeonValidate.target;
 
 export default BurgeonValidate;

@@ -25,7 +25,7 @@ class InitAppConfig {
     Vue.prototype.$lodash = lodash;
     Vue.prototype.service = service;
 
-
+    console.log('window.vmI18n',window.vmI18n);
     // 路由守卫 去掉部分定制界面onresize方法
     R3.router.afterEach(to => {
       const tableNameArr = ['ORDERMANAGER', 'PAYABLEADJUSTMENTLIST', 'returngoodmanagementList', 'manualMatching', 'RETURNSTOREAGELIST', 'PROMACTIQUERYLIST', 'SETWAREHOUSELOGISTICS'];
@@ -40,4 +40,4 @@ class InitAppConfig {
 
 }
 
-export default InitAppConfig;
+export default new InitAppConfig();

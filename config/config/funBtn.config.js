@@ -1,10 +1,7 @@
 //定制按钮配置类
-import i18n from '@burgeon/internationalization/i18n/i18n'
 import commonUtils from './commonUtils'
-// import publicDialogConfig from 'professionalComponents/common/js/publicDialog'
 import DialogConfig from 'burgeonConfig/config/dialogs.config'
 
-window.vmI18n = i18n
 class BtnConfig {
   static target;
   //是否单对象界面: 0否1是;
@@ -238,7 +235,7 @@ class BtnConfig {
         btnclick: () => this.btnMainHandler('cancelOrder'), // 按钮点击事件
       },
       {
-        text: window.vmI18n.t('btn.orderBlocking'), // 订单拦截
+        text: $i18n.t('btn.orderBlocking'), // 订单拦截
         webname: 'orderBlocking',
         btnclick: () => this.btnMainHandler('interceptOrder'),
       },
@@ -270,7 +267,7 @@ class BtnConfig {
         btnclick: () => this.btnMainHandler('batchReturnOrder'),
       },
       {
-        text: window.vmI18n.t('btn.release_inventory'), // 释放库存
+        text: $i18n.t('btn.release_inventory'), // 释放库存
         webname: 'release_inventory',
         btnclick: () => this.btnMainHandler('releaseInventory'),
       },
@@ -306,7 +303,7 @@ class BtnConfig {
       {
         icon: 'iconfont iconbj_col', // 收藏图标
         webname: 'isFavorite',
-        name: window.vmI18n.t('btn.collection'),
+        name: $i18n.t('btn.collection'),
         btnclick: () => BtnConfig.target.setFavorite(),
       },
       //--------------------------------------------------单对象页面---------------------------------
@@ -1383,7 +1380,7 @@ class BtnConfig {
     _this.importTable.componentData = {
       tableName: 'OUT_OF_STOCK_MEMO',
     }
-    _this.importTable.confirmTitle = window.vmI18n.t('btn.note_import')
+    _this.importTable.confirmTitle = $i18n.t('btn.note_import')
     _this.$children.find((item) => item.name === 'importTable').openConfirm()
   }
   //变更发货平台处理
@@ -1562,11 +1559,11 @@ class BtnConfig {
         }
         // 零售发货单列表tab 区分审核失败/多次缺货类型订单查询
         // '审核失败'
-        if (self.statusData.label == window.vmI18n.t('other.auditError')) {
+        if (self.statusData.label == $i18n.t('other.auditError')) {
           param.status = { label: '待审核', value: '1', isShow: true }
           // '多次缺货'
         } else if (
-          this.statusData.label == window.vmI18n.t('other.multipleOutOfStock')
+          this.statusData.label == $i18n.t('other.multipleOutOfStock')
         ) {
           param.status = { label: '缺货', value: '2', isShow: true }
         }
