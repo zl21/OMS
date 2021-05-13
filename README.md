@@ -397,6 +397,7 @@ R3.launchApplication({
 | v1.2.75 | 仓库物流\价格策略\档期日程规划-生效时间disabledDate  |
 | v1.2.76 | importTableConfig拓展  |
 | v1.2.77 | 淘宝/京东订单下载外键关联id配置  |
+| v1.2.78 | 京东订单下载接口  |
 
 #### Extends-Api 版本说明
 

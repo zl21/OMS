@@ -6,7 +6,7 @@ export default {
   // 淘宝订单
   tbOrderDownLoad: params => network.post('/p/cs/ip/v1/order/download/tbOrderDownLoad', params),
   // 淘宝订单/京东订单/JITX订单 下载
-  orderDownload: params => network.post('/p/cs/orderDownload', params),
+  orderDownload: params => network.post('/p/cs/ip/v1/order/download/orderDownLoad', params),
   // 淘宝退单/京东退单/通用接口退单 退单下载
   refundDownload: params => network.post('/p/cs/refundDownload', params),
   // 淘宝换货单接口
