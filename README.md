@@ -392,6 +392,7 @@ R3.launchApplication({
 | v1.2.70 | 结束时间选择日期 时间默认23:59:59
 | v1.2.71 | temp i18n
 | v1.2.72 | 渠道仓新增/编辑路径改为表名
+| v1.2.73 | 找回被删掉的subTableConfig(有用到,不准删！！！！！)
 
 
 #### Extends-Api 版本说明
