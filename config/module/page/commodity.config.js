@@ -39,7 +39,7 @@ export default {
   PS_C_PRO_GROUP: {
     component: () => import('allpages/commodityCenter/modifyGroup.vue'),
     // component: modifyGroup,
-    labelName: '组合商品新增'
+    labelName: '组合商品编辑'
   },
   PS_C_PRO_CLASSIFY: {
     component: () => import('allpages/commodityCenter/commodityClassifyAddOrEdit.vue'),
