@@ -209,7 +209,8 @@ export default {
       const self = this;
       this.loading = true;
       const data = await this.$OMS2.omsUtils.getObject('CP_C_LOGISTICS', id);
-      self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基本信息');
+      // self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基本信息');
+      self.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, self.formConfig);
 
       /* 子表初始化： */
       const subData = await this.$OMS2.omsUtils.initSubtable('CP_C_LOGISTICS_ITEM', self.ID, '168321', {

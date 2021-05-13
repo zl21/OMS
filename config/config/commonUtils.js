@@ -1,4 +1,5 @@
 import service from '@/service/index'
+import BurgeonDate from '@/assets/js/__utils__/date';
 class commonUtils {
    gateWayPrefix = {
     basicData: '/r3-cp',
@@ -449,68 +450,6 @@ class commonUtils {
     } else {
       return data
     }
-  }
-
-  /**
-   * @method 根据方法(getObject)的返回,渲染formConfig,不包括formData
-   * @data 待解析的数据
-   * @foldingName {'基础信息'}
-   * @colArr 待填充的下拉类型的colname的集合
-   */
-  static analysisForm(data, form, foldingName, colArr = []) {
-    const fD = form.formData
-    const fV = form.formValue
-    data.addcolums.forEach((item) => {
-      if (item.parentdesc == foldingName) {
-        item.childs.forEach((it) => {
-          // 填充下拉类型的options，避免详情页面发两次p/cs/getObject请求
-          colArr.forEach((colArrItem) => {
-            if (it.colname == colArrItem) {
-              // 用colname来匹配需要的select类型的item
-              fD.forEach((fDitem) => {
-                // 赋值给options
-                if (fDitem.colname === colArrItem) {
-                  fDitem.options = it.combobox.map((i) => ({
-                    label: i.limitdesc,
-                    value: i.limitval,
-                  }))
-                }
-              })
-            }
-          })
-
-          // input类型的赋值
-          if (!it.fkdisplay && it.display != 'select' && it.display == 'text') {
-            for (const key in fV) {
-              if (it.colname == key) {
-                fV[key] = it.valuedata
-              }
-            }
-          }
-          // select类型的赋值
-          if (it.display == 'select' || it.display == 'check') {
-            for (const key in fV) {
-              if (it.colname == key) {
-                fV[key] = it.valuedata ? it.valuedata : ''
-              }
-            }
-          }
-          // drp类型的赋值
-          if (it.fkdisplay == 'drp') {
-            fD.forEach((i) => {
-              if (i.colname == it.colname) {
-                i.itemdata.valuedata = it.valuedata ? it.valuedata : ''
-                i.refobjid = it.refobjid
-                fV[i.colname] = it.valuedata
-              }
-            })
-          }
-        })
-      }
-    })
-    form.formData = fD
-    form.formValue = fV
-    return form
   }
 
   /**

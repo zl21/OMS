@@ -431,7 +431,8 @@ export default {
       this.loading = true;
       const data = await this.$OMS2.omsUtils.getObject('BS_C_EXTRA_ATTRIBUTE_DEF_PRO', id);
       self.watchChange = false;
-      self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基础信息', ['TYPE', 'LOCATION', 'TABLE_NAME']);
+      // self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基础信息', ['TYPE', 'LOCATION', 'TABLE_NAME']);
+      self.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, self.formConfig);
       self.showSubtablePart = true;
       if (self.formConfig.formValue.TYPE != 'LIST') {
         // 非下拉型，只展示'操作日志'
