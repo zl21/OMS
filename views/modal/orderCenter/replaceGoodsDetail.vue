@@ -18,11 +18,23 @@
       </div>
     </div>
     <div class="i_body">
-      <Table
+      <!-- <Table
         highlight-row
         @on-current-change="currentChange"
         :columns="columns"
         :data="data"
+      /> -->
+      <businessActionTable
+        :jordan-table-config="tableConfig"
+        @on-select="onSelect"
+        @on-select-cancel="onSelectCancel"
+        @on-select-all="onSelectAll"
+        @on-select-all-cancel="onSelectAllCancel"
+        @on-row-click="onRowClick"
+        @on-row-dblclick="onRowDblclick"
+        @table-delete-detail="tableDeleteDetail"
+        @on-page-change="pageChange"
+        @on-page-size-change="pageSizeChange"
       />
     </div>
     <div class="i_food">

@@ -406,8 +406,6 @@ export default {
     async search(value) {
       const self = this
       let data = {
-        isGroup: 'Y',
-        groupType: 2,
         size: 10,
         current: 1,
       }
