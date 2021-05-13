@@ -1,7 +1,5 @@
 
 //定制弹窗配置类
-import i18n from '@burgeon/internationalization/i18n/i18n'
-console.log('$i18n', window.vmI18n)
 class DialogConfig {
   static target;
   constructor() { }
@@ -16,35 +14,35 @@ class DialogConfig {
   static customConfig = {
     // 零售发货单详情
     address: {
-      title: i18n.t('modalTitle.modify_shipping_address'), // 修改收货地址
+      title: $i18n.t('modalTitle.modify_shipping_address'), // 修改收货地址
       width: 650,
       url: 'modal/orderCenter/resolveAddress',
       name: 'addressDialog',
       excludeString: 'addressDialog',
     },
     blacklist: {
-      title: i18n.t('modalTitle.blacklist'), // 加入黑名单
+      title: $i18n.t('modalTitle.blacklist'), // 加入黑名单
       width: 400,
       url: 'order/joinBlackList',
       name: 'blackListDialog',
       excludeString: 'blackListDialog',
     },
     addGift: {
-      title: i18n.t('btn.addGift'), // 添加赠品
+      title: $i18n.t('btn.addGift'), // 添加赠品
       width: 1000,
       url: 'modal/orderCenter/addGiftItem',
       name: 'addGiftDialog',
       excludeString: 'addGiftDialog',
     },
     changeSku: {
-      title: i18n.t('btn.replaceGoods'), // 替换商品
+      title: $i18n.t('btn.replaceGoods'), // 替换商品
       width: 800,
       url: 'modal/orderCenter/replaceGoodsDetail',
       name: 'changeSkuDialog',
       excludeString: 'changeSkuDialog',
     },
     modifyRemark: {
-      title: i18n.t('btn.modifyRemarks'), // 修改备注
+      title: $i18n.t('btn.modifyRemarks'), // 修改备注
       width: 480,
       url: 'modal/orderCenter/changeRemark',
       name: 'modifyRemarkDialog',
