@@ -10,6 +10,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       modal1: false,
       shopModal: true,
       panelDefaultValue: 'panel_baseInfo', // 设置默认打开'基本信息'

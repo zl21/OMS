@@ -14,6 +14,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       IMAGE: '', // 扫描图片
       load: true,
       clean: false, // 清空提示框

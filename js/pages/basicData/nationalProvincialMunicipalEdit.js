@@ -15,6 +15,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       panelDefaultValue: 'panel_baseInfo', // 设置默认打开'基本信息'
       backable: false,

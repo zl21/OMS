@@ -9,6 +9,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       defaultColumn: 1,
       config: [
         {

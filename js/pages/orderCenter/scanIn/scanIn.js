@@ -663,6 +663,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       errModelTitle: '',
       isModal3: false,
       loading: false,

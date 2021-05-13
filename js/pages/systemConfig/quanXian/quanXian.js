@@ -22,6 +22,7 @@ export default {
   mixins: [qxBtnData],
   data() {
     return {
+      vmI18n:$i18n,
       loading: false,
       saveModal: false,
 

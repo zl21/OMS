@@ -12,6 +12,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       my_input_sh: {
         itemdata: {
           col: 1,

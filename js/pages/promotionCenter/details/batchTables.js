@@ -24,6 +24,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       AutoRight: true,
       currentTab: 0,
       list_index: '',

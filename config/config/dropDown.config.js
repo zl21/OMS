@@ -225,23 +225,34 @@ class DropDownConfig {
     }, 100)
   }
 
-  static afterSaleCopyHander() {
+  static async afterSaleCopyHander() {
     let self = DropDownConfig.target
     self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
     if (self.selection.length != 1) {
       self.$OMS2.omsUtils.msgTips(self, 'warning', 'a8')
       return
     }
-    self.publicBouncedConfig.name = 'ORDER_COPY_AF_SALE'
-    self.publicBouncedConfig.url = 'modal/orderCenter/afterSaleCopy'
-    self.publicBouncedConfig.confirmTitle = '售后复制'
-    self.publicBouncedConfig.componentData = { id: self.selection[0].ID }
-    self.publicBouncedConfig.width = 400
-    setTimeout(() => {
-      self.$children
-        .find((item) => item.name === 'ORDER_COPY_AF_SALE')
-        .openConfirm()
-    }, 100)
+    const IDS = self.$OMS2.omsUtils.sonList(self.selection, 'ID')
+    const { data: { code, data, message } } = await self.service.orderCenter.billOcBOrderCopy({
+      IDS,
+      TYPE: 2,
+      COPY_REASON_TYPE: 1,
+      cause: '售后复制按钮点击校验',
+    })
+    if (code == 0) {
+      self.publicBouncedConfig.name = 'ORDER_COPY_AF_SALE'
+      self.publicBouncedConfig.url = 'modal/orderCenter/afterSaleCopy'
+      self.publicBouncedConfig.confirmTitle = '售后复制'
+      self.publicBouncedConfig.componentData = { id: self.selection[0].ID }
+      self.publicBouncedConfig.width = 400
+      setTimeout(() => {
+        self.$children
+          .find((item) => item.name === 'ORDER_COPY_AF_SALE')
+          .openConfirm()
+      }, 100)
+    } else {
+      console.log(message)
+    }
   }
 
   static manualCreationHander() {

@@ -13,6 +13,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       sessionStorageData: '',
       IMAGE: '', // 图片
       imgIndex: 0, // 当前操作图片位置

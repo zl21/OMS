@@ -21,6 +21,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       name: '',
       single: false,
       treeData: [],

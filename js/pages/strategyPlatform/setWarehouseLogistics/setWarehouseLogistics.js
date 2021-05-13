@@ -18,6 +18,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       warningModal: false,
       saveModal: false,
       saveModalText: '', // 保存空物流提示

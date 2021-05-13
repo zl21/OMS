@@ -9,6 +9,7 @@ export default {
   data() {
     const _this = this;
     return {
+      vmI18n:$i18n,
       downLoadFormConfig: {
         formValue: {
           shopID: '', // 商品id

@@ -7,6 +7,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       bouncedData: {
         animal: '覆盖原备注',
         value: ''

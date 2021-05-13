@@ -35,6 +35,7 @@ export default {
     };
     /* -------------------- input校验器 end -------------------- */
     return {
+      vmI18n:$i18n,
       subTableLogConfig: {
         centerName: '',
         tablename: '',

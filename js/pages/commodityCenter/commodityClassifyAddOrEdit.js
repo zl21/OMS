@@ -18,6 +18,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       subTableConfig: {
         centerName: '',
         tablename: '',

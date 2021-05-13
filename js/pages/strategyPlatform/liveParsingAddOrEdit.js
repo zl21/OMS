@@ -16,6 +16,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       collapse: ['panel_baseInfo', 'panel_conds', 'panel_action'],
       loading: false,
       isEnable: false,

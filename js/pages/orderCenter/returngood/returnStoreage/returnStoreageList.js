@@ -39,6 +39,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       isFavorite: false,
       // 公共弹框
       publicBouncedConfig: {},

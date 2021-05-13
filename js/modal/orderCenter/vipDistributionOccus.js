@@ -9,6 +9,7 @@ export default {
   props: {},
   data() {
     return {
+      vmI18n:$i18n,
       corfirmFlag: false,
       corfirmMessage: '',
       // distributionIds:"",

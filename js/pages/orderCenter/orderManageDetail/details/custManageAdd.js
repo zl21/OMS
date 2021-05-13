@@ -7,6 +7,7 @@ export default {
   data() {
     return {
       //isCombination: 1, // 1:组合商品 2:组合商品下挂商品
+      vmI18n:$i18n,
       tableConfig: {
         businessButtonConfig: {
           typeAll: 'default', // 按钮统一风格样式

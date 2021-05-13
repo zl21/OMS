@@ -32,6 +32,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       objid: -1,
       lists: [
         {

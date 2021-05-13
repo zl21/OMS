@@ -16,6 +16,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       objid: '',
       value1: '1', // 折叠框绑定的数据
       statusName: '', // 水印字样  单据状态

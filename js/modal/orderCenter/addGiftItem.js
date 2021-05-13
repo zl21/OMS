@@ -7,6 +7,7 @@ export default {
   mixins: [listeningToKeydownMixin],
   data() {
     return {
+      vmI18n:$i18n,
       objid: '',
       url: '',
       loading: false,

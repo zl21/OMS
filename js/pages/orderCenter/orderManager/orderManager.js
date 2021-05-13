@@ -36,6 +36,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       isActive: false,
       agTableConfig: {
         tableHeight: '480px',

@@ -33,6 +33,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       lists: [
         {
           label: '品牌',

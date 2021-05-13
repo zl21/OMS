@@ -4,6 +4,7 @@ import businessBtn from 'professionalComponents/businessButton';
 export default {
   data() {
     return {
+      vmI18n:$i18n,
       formConfig: {
         formValue: {},
         ruleValidate: {},

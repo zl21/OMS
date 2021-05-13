@@ -7,6 +7,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       radioValue: '2',
       searchValue: '',
       columns: [{
