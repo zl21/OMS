@@ -191,6 +191,9 @@ export default {
     batchModifyGoods: "批量改商品", //批量改商品
     batchOriginalReturn: '批量原退', //批量原退
     batchSplitOrder: "批量拆单", //批量拆单
+    batch_addGift: "批量添加赠品", //批量添加赠品
+    batch_deleteGift: "批量删除赠品", //批量删除赠品
+    batch_replaceGoods: "批量替换商品", //批量替换商品
     beOut_of_stock: '缺货重新占单', //缺货重新占单
     copyPermissions: '复制权限',
     cancel_automaticRefund: '取消自动退款', //取消自动退款
@@ -258,6 +261,7 @@ export default {
     overdue: '过期',
     publish: '发布',
     published: '已发布',
+    preSaleAdvanceDeliveryMarking: '定金预售提前发货打标', //定金预售提前发货打标
     query: '查询',
     rark_refundComplete: '标记退款完成',
     recordInvoice: '记录发票', //记录发票
