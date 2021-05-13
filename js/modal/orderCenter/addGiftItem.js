@@ -346,13 +346,15 @@ export default {
     onRowDblclick() {},
     // 分页change 事件
     pageChange(val) {
+      console.log(val);
       this.tableConfig.current = val
-      // this.request(this.componentData);
+      this.searchGift()
     },
     // 切换分页条数
     pageSizeChange(val) {
+      console.log(val);
       this.tableConfig.pageSize = val
-      // this.request(this.componentData);
+      this.searchGift()
     },
     tableDeleteDetail() {},
     // 模糊搜索
@@ -387,8 +389,7 @@ export default {
     },
     // 搜索赠品
     searchGift() {
-      console.log(this.formConfig.formValue)
-      console.log('搜索赠品')
+   
       this.selectSkuProBySkuEcodeList()
     },
     // 提交
@@ -452,8 +453,8 @@ export default {
         skuEcode: this.formConfig.formValue.SKU_CODE,
         spuEcode: this.formConfig.formValue.SPU_CODE,
         spuEname: this.formConfig.formValue.SPU_NAE,
-        size: 10,
-        current: 1,
+        size: this.tableConfig.pageSize,
+        current: this.tableConfig.current,
       }
      
       if (this.type == 'replace') {
