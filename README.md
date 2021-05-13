@@ -104,3 +104,4 @@
 | v1.0.39 |  update modalTips.fp  |
 | v1.0.40 |  add btn.batch_addGift/batch_deleteGift/batch_replaceGoods/preSaleAdvanceDeliveryMarking  |
 | v1.0.41 |  同步zh_CN  |
+| v1.0.42 |  默认中文  |
