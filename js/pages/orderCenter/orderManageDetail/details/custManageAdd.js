@@ -176,8 +176,7 @@ export default {
         }, 1000);
         if (res.data.code == 0) {
           this.$Message.success(res.data.message);
-          this.$parent.$parent.closeConfirm();
-          // this.$parent.$parent.autoRefresh();
+          this.$parent.$parent.$parent.$parent.getDetailsData()
         }
       })
     },

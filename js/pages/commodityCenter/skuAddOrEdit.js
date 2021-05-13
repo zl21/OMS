@@ -439,7 +439,7 @@ export default {
     if (self.ID > 0 && !self.$route.query.spuid) {
       // 详情
       self.initObjItem(self.ID);
-    } else if (self.ID > 0 && self.$route.query.spuid) {
+    } else if (self.ID == '2201' && self.$route.query.spuid) {
       // 是SPU新增/详情 跳转过来的新增
       self.labelList.splice(1, 2);
       self.spuID = self.$route.query.spuid;
@@ -449,7 +449,6 @@ export default {
       });
     } else {
       // 新增
-      // this.getSelectData(); // 初始化下拉选项
       self.initObjItem(self.ID);
       self.labelList.splice(1, 2);
     }
@@ -751,12 +750,27 @@ export default {
         if (data) self.ID = data;
         this.$comUtils.tabCloseAppoint(this);
         this.$destroy(true);
-        $store.commit('customize/TabOpen', {
-          id: self.ID,
-          type: 'action',
-          name: 'PS_C_SKU',
-          label: 'SKU编辑',
-        });
+        setTimeout(() => {
+          if (this.$route.query.spuid) {
+            $store.commit('customize/TabOpen', {
+              id: self.ID,
+              type: 'action',
+              name: 'PS_C_SKU',
+              label: 'SKU编辑',
+              query: Object.assign({
+                spuid: this.spuID,
+                spucode: this.formConfig.formValue.ECODE || ''
+              })
+            });
+          } else {
+            $store.commit('customize/TabOpen', {
+              id: self.ID,
+              type: 'action',
+              name: 'PS_C_SKU',
+              label: 'SKU编辑',
+            });
+          }
+        }, 20);
         // await self.initObjItem(self.ID);
       } else {
         // 走框架的报错
@@ -818,11 +832,6 @@ export default {
         tablename: this.labelDefaultValue,
         objid: this.ID,
       };
-    },
-    // 填充下拉选项框
-    async getSelectData() {
-      const self = this;
-      self.formConfig.formData = await publicMethodsUtil.getTypeList('PS_C_SKU', ['SALES_STATUS', 'PURCHASE_STATUS'], '基础信息', self.formConfig);
     },
     /**
      * 记录主表修改信息方法
