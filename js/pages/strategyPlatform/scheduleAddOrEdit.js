@@ -1180,9 +1180,17 @@ export default {
             break;
         }
       }
-      self.modify[obj][ecode] = type == '[object Date]'
-        ? this.formatDate(value)
-        : ecode == 'IS_OUTWAREHOUSE_ALONE' ? checkboxVal : value;
+      if (type == '[object Date]') {
+        let newTime = this.formatDate(value)
+        let oldTime = self.modify[obj][ecode]
+        if (ecode == 'END_TIME') {
+          newTime = this.$OMS2.omsUtils.defaultEndTime(newTime, oldTime)
+          self.formConfig.formValue[ecode] = newTime
+        }
+        self.modify[obj][ecode] = newTime
+      } else {
+        self.modify[obj][ecode] = ecode == 'IS_OUTWAREHOUSE_ALONE' ? checkboxVal : value;
+      }
     },
     // 是否专配
     async curSpecial() {
@@ -1369,29 +1377,32 @@ export default {
       this.isWatchChange = false;
       this.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, this.formConfig);
       this.formConfig.formValue.CP_C_SHOP_ID = data.addcolums[0].childs[0].refobjid;
-      this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE == 'true';
+      this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = false;
 
-      if (this.ID == -1) return
-      this.loading = true;
-      this.service.strategyPlatform.querySchedule({ ID: this.ID })
-      .then(({ data: { code, data, message } }) => {
-        this.loading = false;
-        if (code == 0) {
-          const {
-            PICK_CREATE_TYPE,
-            VIPCOM_PROJECT_LIST,
-            VIPCOM_PROJECT_PICK_LIST,
-            VIPCOM_PROJECT_STORE_IN_LIST
-          } = data || {};
-          VIPCOM_PROJECT_LIST && (this.isMasterRequired = true);
-          this.pickingTableConfig.data = VIPCOM_PROJECT_PICK_LIST || [];
-          this.warehouseWarrantConfig.data = VIPCOM_PROJECT_STORE_IN_LIST || [];
-          this.pickingTableConfig.businessFormConfig.formValue.PICK_CREATE_TYPE = PICK_CREATE_TYPE;
-          this.initPickTable();
-        } else {
-          this.$message.error(message);
-        }
-      }).catch(() => this.loading = false);
+      if (this.ID != -1) {
+        this.loading = true;
+        this.service.strategyPlatform.querySchedule({ ID: this.ID })
+        .then(({ data: { code, data, message } }) => {
+          this.loading = false;
+          if (code == 0) {
+            const {
+              PICK_CREATE_TYPE,
+              VIPCOM_PROJECT_LIST,
+              VIPCOM_PROJECT_PICK_LIST,
+              VIPCOM_PROJECT_STORE_IN_LIST
+            } = data || {};
+            VIPCOM_PROJECT_LIST && (this.isMasterRequired = true);
+            this.pickingTableConfig.data = VIPCOM_PROJECT_PICK_LIST || [];
+            this.warehouseWarrantConfig.data = VIPCOM_PROJECT_STORE_IN_LIST || [];
+            this.pickingTableConfig.businessFormConfig.formValue.PICK_CREATE_TYPE = PICK_CREATE_TYPE;
+            this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = VIPCOM_PROJECT_LIST.IS_OUTWAREHOUSE_ALONE;
+            this.initPickTable();
+          } else {
+            this.$message.error(message);
+          }
+        }).catch(() => this.loading = false);
+      }
+      
       this.isWatchChange = true;
     },
     // 主表保存

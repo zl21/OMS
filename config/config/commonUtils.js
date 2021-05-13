@@ -787,6 +787,22 @@ class commonUtils {
       }
     })
   }
+  /**
+   * 结束时间，只选择日期未选择时间的情况下，时间默认23:59:59
+   * @param {String} newEndTime 改变后的结束时间
+   * @param {String} oldEndTime 改变前的结束时间
+   * @returns 返回处理后的结束时间
+   */
+  static defaultEndTime(newEndTime, oldEndTime) {
+    let time = newEndTime
+    if (oldEndTime != newEndTime
+      && oldEndTime?.split(' ')[0] != newEndTime.split(' ')[0]
+      && / 00:00:00$/.test(newEndTime)
+    ) {
+      time = newEndTime.replace(/00:00:00/, '23:59:59')
+    }
+    return time
+  }
 
   /* ============================================== @/assets/js/__utils__/date ============================================== */
 
