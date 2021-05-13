@@ -4,7 +4,6 @@ import businessBtn from 'professionalComponents/businessButton';
 export default {
   data() {
     return {
-      vmI18n: window.vmI18n,
       formConfig: {
         formValue: {},
         ruleValidate: {},
@@ -25,7 +24,7 @@ export default {
             isnotnull: true, // 是否必填
             isuppercase: false, // 是否转大写
             length: 20, // 最大长度是多少
-            name: window.vmI18n.t('form_label.warehousingEntity'), // '入库实体仓库'
+            name: $i18n.t('form_label.warehousingEntity'), // '入库实体仓库'
             readonly: false, // 是否可编辑，对应input   readonly属性
             reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
             reftableid: 24486, // 对应的表ID
@@ -42,13 +41,13 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'),
+            text: $i18n.t('common.cancel'),
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }
           },
           {
-            text: window.vmI18n.t('common.determine'),
+            text: $i18n.t('common.determine'),
             btnclick: () => {
               const _this = this;
               _this.okClick();
@@ -72,7 +71,7 @@ export default {
     async okClick() {
       const _this = this;
       if (!_this.formConfig.formData[0].itemdata.pid || _this.formConfig.formData[0].itemdata.pid === undefined) {
-        _this.$Message.error(window.vmI18n.t('modalTips.ee')); // '入库实体仓库必填！'
+        _this.$Message.error($i18n.t('modalTips.ee')); // '入库实体仓库必填！'
         return;
       }
       const fromdata = new FormData();

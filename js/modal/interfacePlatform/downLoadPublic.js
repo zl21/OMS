@@ -35,15 +35,15 @@ export default {
   mounted() {
     const childList = this.downLoadPublicFormConfig.formData[0].inputList[0].childs[0];
 
-    if (this.$parent.title === this.vmI18n.t('btn.dealInOrder_download')) {
+    if (this.$parent.title === $$i18n.t('btn.dealInOrder_download')) {
       // 经销订单下载111
-    } else if (this.$parent.title === this.vmI18n.t('btn.distributionProduct_download')) {
+    } else if (this.$parent.title === $$i18n.t('btn.distributionProduct_download')) {
       // 分销商品下载111
-    } else if (this.$parent.title === this.vmI18n.t('btn.distributionOrder_download')) {
+    } else if (this.$parent.title === $$i18n.t('btn.distributionOrder_download')) {
       // 分销订单下载111
-    } else if (this.$parent.title === this.vmI18n.t('btn.generalOrder_download')) {
+    } else if (this.$parent.title === $$i18n.t('btn.generalOrder_download')) {
       // 通用订单下载111
-    } else if (this.$parent.title === this.vmI18n.t('btn.generalGoods_download') || this.$parent.title === this.vmI18n.t('btn.distributionChargeback_download')) {
+    } else if (this.$parent.title === $$i18n.t('btn.generalGoods_download') || this.$parent.title === $$i18n.t('btn.distributionChargeback_download')) {
       // 通用商品下载111
       this.downLoadPublicFormConfig = this.pulicdownLoadConfig;
       this.pulicUrl = '/p/cs/stdp/item/get';
@@ -53,10 +53,10 @@ export default {
       childList.valuedata = 3;
       this.pulicUrl = '/p/cs/refundDownload';
       this.downLoadPublicFormConfig.formData.forEach(item => {
-        if (item.label === this.vmI18n.t('other.orderState')) {
+        if (item.label === $$i18n.t('other.orderState')) {
           // 订单状态
           // 全部
-          item.options = [{ label: this.vmI18n.t('panel_label.all'), value: '' }];
+          item.options = [{ label: $$i18n.t('panel_label.all'), value: '' }];
         }
       });
     } else if (this.$route.params.tableName === 'IP_B_STANDPLAT_REFUND') {
@@ -67,13 +67,13 @@ export default {
         datelimit: 'all',
         display: 'OBJ_FK', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
         fkdisplay: 'drp', // 外键关联类型
-        fkdesc: this.vmI18n.t('other.shop'), // 店铺
+        fkdesc: $$i18n.t('other.shop'), // 店铺
         inputname: 'CP_C_SHOP_ID:CP_C_SHOP_TITLE', // 这个是做中文类型的模糊查询字段，例如ENAME
         isfk: true, // 是否有fk键
         isnotnull: true, // 是否必填
         isuppercase: false, // 是否转大写
         length: 65535, // 最大长度是多少
-        name: this.vmI18n.t('other.shop'), // 店铺 input前面显示的lable值
+        name: $$i18n.t('other.shop'), // 店铺 input前面显示的lable值
         readonly: false, // 是否可编辑，对应input   readonly属性
         reftable: 'IP_C_COMMON_SHOP',
         reftableid: 25031,
@@ -87,12 +87,11 @@ export default {
       this.pulicdownLoadConfig.formData.splice(-1, 1);
       this.pulicUrl = '/p/cs/refundDownload';
       this.downLoadPublicFormConfig.formData[1].style = '';
-      this.downLoadPublicFormConfig.formData[3].label = this.vmI18n.t('other.refundNumber'); // 退单号
+      this.downLoadPublicFormConfig.formData[3].label = $$i18n.t('other.refundNumber'); // 退单号
     }
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       refobjid: 2,
       pulicUrl: '',
       downLoadBtnConfig: {
@@ -101,7 +100,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: i18n.t('common.cancel'), // 取消 按钮文本
+            text: $i18n.t('common.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -111,7 +110,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: i18n.t('btn.download'), // 下载 按钮文本
+            text: $i18n.t('btn.download'), // 下载 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -150,7 +149,7 @@ export default {
               fkdisplay: 'drp', // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              name: i18n.t('other.shop'), // 店铺 input前面显示的lable值
+              name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: '' // 这个是选择的值
             }
@@ -164,11 +163,11 @@ export default {
             // setRequired: "required", //必选标识,值不为required时无标识
             options: [
               {
-                label: i18n.t('panel_label.all'), // 全部
+                label: $i18n.t('panel_label.all'), // 全部
                 value: ''
               },
               {
-                label: i18n.t('other.toBeDelivered'), // 待发货
+                label: $i18n.t('other.toBeDelivered'), // 待发货
                 value: 'WAIT_SELLER_SEND_GOODS'
               }
             ]
@@ -177,7 +176,7 @@ export default {
             style: 'date',
             type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
             value: 'startEndTimes',
-            label: i18n.t('form_label.PlatformModifyTime'), // 平台修改时间
+            label: $i18n.t('form_label.PlatformModifyTime'), // 平台修改时间
             width: '24',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
             placeholder: ''
@@ -216,7 +215,7 @@ export default {
               fkdisplay: 'drp', // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              name: i18n.t('other.shop'), // 店铺 input前面显示的lable值
+              name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               pid: '',
               valuedata: '' // 这个是选择的值
@@ -226,14 +225,14 @@ export default {
             style: 'date',
             type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
             value: 'startEndTimes',
-            label: i18n.t('form_label.PlatformModifyTime'), // 平台修改时间
+            label: $i18n.t('form_label.PlatformModifyTime'), // 平台修改时间
             width: '24',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
             placeholder: ''
           },
           {
             style: 'input', // 输入框类型
-            label: i18n.t('form_label.platformCommodityID'), // 平台商品ID 输入框前文字
+            label: $i18n.t('form_label.platformCommodityID'), // 平台商品ID 输入框前文字
             value: 'sp_ids', // 输入框的值
             width: '21', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -280,13 +279,13 @@ export default {
               },
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: i18n.t('other.shop'), // 店铺
+              fkdesc: $i18n.t('other.shop'), // 店铺
               inputname: 'CP_C_SHOP_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: i18n.t('other.shop'), // 店铺 input前面显示的lable值
+              name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP',
               reftableid: 24475,
@@ -300,14 +299,14 @@ export default {
             style: 'date',
             type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
             value: 'startEndTimes',
-            label: i18n.t('form_label.PlatformModifyTime'), // 平台修改时间
+            label: $i18n.t('form_label.PlatformModifyTime'), // 平台修改时间
             width: '24',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
             placeholder: ''
           },
           {
             style: 'input', // 输入框类型
-            label: i18n.t('form_label.goodsPID'), // 输入框前文字
+            label: $i18n.t('form_label.goodsPID'), // 输入框前文字
             value: 'ware_id', // 输入框的值
             width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -316,7 +315,7 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            label: i18n.t('table_label.productNo'), // 商品编码 输入框前文字
+            label: $i18n.t('table_label.productNo'), // 商品编码 输入框前文字
             value: 'item_num', // 输入框的值
             width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -340,13 +339,13 @@ export default {
     // 下载
     downloadPublicAll() {
       // 经销订单下载  通用订单下载  分销订单下载  分销退单下载
-      const arr = [this.vmI18n.t('btn.dealInOrder_download'), this.vmI18n.t('btn.generalOrder_download'), this.vmI18n.t('btn.distributionOrder_download'), this.vmI18n.t('btn.distributionChargeback_download')];
+      const arr = [$$i18n.t('btn.dealInOrder_download'), $$i18n.t('btn.generalOrder_download'), $$i18n.t('btn.distributionOrder_download'), $$i18n.t('btn.distributionChargeback_download')];
       if (arr.includes(this.$parent.title)) {
         this.downloadPublic(this.pulicUrl);
-      } else if (this.$parent.title === this.vmI18n.t('btn.generalGoods_download')) {
+      } else if (this.$parent.title === $$i18n.t('btn.generalGoods_download')) {
         // 通用商品下载
         this.downloadPublicGoods(this.pulicUrl);
-      } else if (this.$parent.title === this.vmI18n.t('btn.distributionChargeback_download')) {
+      } else if (this.$parent.title === $$i18n.t('btn.distributionChargeback_download')) {
         // 分销商品下载
         this.downloadDisGood(this.pulicUrl);
       } else if (this.$route.params.tableName === 'IP_B_STANDPLAT_REFUND') {
@@ -360,11 +359,11 @@ export default {
       const downData = _this.pulicdownLoadConfig;
       if (!downData.formData[0].itemdata.pid) {
         // 请选择需要下载的店铺
-        _this.$Message.warning(_this.vmI18n.t('modalTips.be'));
+        _this.$Message.warning($$i18n.t('modalTips.be'));
         return;
       }
       if (downData.formValue.startEndTimes[0] === '' && !downData.formValue.sp_ids && !downData.formValue.orderNum) {
-        _this.$Message.warning(_this.vmI18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
+        _this.$Message.warning($$i18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
         return;
       }
       const param = {
@@ -393,7 +392,7 @@ export default {
       const downData = _this.pulicdownLoadConfig;
       if (!downData.formData[0].itemdata.pid) {
         // 请选择需要下载的店铺
-        _this.$Message.warning(_this.vmI18n.t('modalTips.be'));
+        _this.$Message.warning($$i18n.t('modalTips.be'));
         return;
       }
       const param = {
@@ -422,11 +421,11 @@ export default {
       if (!downData.formData[0].itemdata.pid) {
         // 请选择需要下载的店铺
 
-        _this.$Message.warning(_this.vmI18n.t('modalTips.be'));
+        _this.$Message.warning($$i18n.t('modalTips.be'));
         return;
       }
       if (downData.formValue.startEndTimes[0] === '' && downData.formValue.ware_id === '' && downData.formValue.item_num === '') {
-        _this.$Message.warning(_this.vmI18n.t('modalTips.bq')); // 修改时间、商品PID、商品编码必填其一
+        _this.$Message.warning($$i18n.t('modalTips.bq')); // 修改时间、商品PID、商品编码必填其一
         return;
       }
       const param = {
@@ -462,11 +461,11 @@ export default {
       if (!downData.formData[0].itemdata.pid) {
         // 请选择需要下载的店铺
 
-        _this.$Message.warning(this.vmI18n.t('modalTips.be'));
+        _this.$Message.warning($$i18n.t('modalTips.be'));
         return;
       }
       if (downData.formValue.startEndTimes[0] === '' && !downData.formValue.sp_ids && !downData.formValue.orderNum) {
-        _this.$Message.warning(this.vmI18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
+        _this.$Message.warning($$i18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
         return;
       }
       const param = {
@@ -495,7 +494,7 @@ export default {
       const _this = this;
       // 导入
       this.dialogConfig = {
-        title: this.vmI18n.t('btn.import'),
+        title: $$i18n.t('btn.import'),
         componentData: {
           tableName: 'IP_C_STANDPLAT_PRO',
           returnData(data) {

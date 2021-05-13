@@ -18,14 +18,14 @@ class InitAppConfig {
     Vue.prototype.qs = qs;
     window.$store=store;
     window.R3 = R3; // 暴露R3为全局变量
-    window.vmI18n = i18n; // 挂载国际化
+    window.$i18n = i18n; // 挂载国际化
     window.wangEditor = wangEditor;
     Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
     Vue.prototype.$comUtils = comUtils;
     Vue.prototype.$lodash = lodash;
     Vue.prototype.service = service;
 
-
+    console.log('window.vmI18n',window.vmI18n);
     // 路由守卫 去掉部分定制界面onresize方法
     R3.router.afterEach(to => {
       const tableNameArr = ['ORDERMANAGER', 'PAYABLEADJUSTMENTLIST', 'returngoodmanagementList', 'manualMatching', 'RETURNSTOREAGELIST', 'PROMACTIQUERYLIST', 'SETWAREHOUSELOGISTICS'];
@@ -40,4 +40,4 @@ class InitAppConfig {
 
 }
 
-export default InitAppConfig;
+export default new InitAppConfig();

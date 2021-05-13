@@ -1,6 +1,6 @@
 {
   "name": "@burgeon/project-logic",
-  "version": "1.2.55",
+  "version": "1.2.68",
   "description": "burgeon company's project-logic for private npm",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,8 @@
     "@burgeon/internationalization": "^1.0.36",
     "@burgeon/oms-theme": "^1.4.7",
     "@syman/burgeon-r3": "^1.4.58",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "burgeon-ui": "^1.0.56",
     "wangeditor": "^4.6.16"
   },

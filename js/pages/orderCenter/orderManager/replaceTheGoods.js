@@ -205,12 +205,12 @@ export default {
       const ECODE = this.selection && this.selection.ECODE ? this.selection.ECODE : '';
       if (ECODE === '') {
         // 请选择需要更换的商品
-        self.$Message.error(self.vmI18n.t('modalTips.eb'));
+        self.$Message.error($i18n.t('modalTips.eb'));
         return;
       }
       if (self.itemskuid === this.selection.skuId) {
         // 不可以选择更换当前商品！
-        self.$Message.error(self.vmI18n.t('modalTips.ec'));
+        self.$Message.error($i18n.t('modalTips.ec'));
         return;
       }
       const keys = {
@@ -277,11 +277,11 @@ export default {
       const isNull = Object.values(p).every(item => item === '' || item === null);
       if (isNull) {
         // 请填写筛选条件
-        self.$Message.warning(self.vmI18n.t('modalTips.ed'));
+        self.$Message.warning($i18n.t('modalTips.ed'));
         return;
       }
       if (p.IS_GIFT != '') {
-        p.IS_GIFT = p.IS_GIFT === window.vmI18n.t('common.yes') ? 'Y' : 'N';
+        p.IS_GIFT = p.IS_GIFT === $i18n.t('common.yes') ? 'Y' : 'N';
       } else {
         p.IS_GIFT = '';
       }

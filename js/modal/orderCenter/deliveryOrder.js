@@ -18,14 +18,13 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -35,7 +34,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -97,7 +96,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: window.vmI18n.t('panel_label.warehouse_receipt'), // 出仓单
+              name: $i18n.t('panel_label.warehouse_receipt'), // 出仓单
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'OC_B_VIPCOM_DELIVERY', // 对应的表
               reftableid: 24652, // 对应的表ID
@@ -164,9 +163,9 @@ export default {
         this.totalRowCount = res.data.data.total;
         const records0 = JSON.parse(JSON.stringify(res.data.data.records[0] || []));
         if (!records0.length) {
-          this.dataEmptyMessage = window.vmI18n.t('other.noDataAvailable'); // '暂无数据!';
+          this.dataEmptyMessage = $i18n.t('other.noDataAvailable'); // '暂无数据!';
         } else {
-          this.dataEmptyMessage = window.vmI18n.t('modalTips.du'); // '数据加载中...';
+          this.dataEmptyMessage = $i18n.t('modalTips.du'); // '数据加载中...';
         }
         const hideColumns = [];
         for (const key in records0) {
@@ -233,7 +232,7 @@ export default {
       console.log(formdata);
       if (param.delivery_id === '' || param.delivery_no === '') {
         // self.$Message.warning("出仓单不能为空");
-        self.$Message.warning(window.vmI18n.t('modalTips.zj'));
+        self.$Message.warning($i18n.t('modalTips.zj'));
         return false;
       }
       const res = await this.service.orderCenter.matchingDelivery(formdata);

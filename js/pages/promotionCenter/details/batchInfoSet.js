@@ -23,7 +23,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       products_columns: tableCols.productsColumns,
       itemdata_xitong: {
         col: 1,
@@ -313,7 +312,7 @@ export default {
           }
         } catch (e) {
           // console.log("批量导入解析出现问题...");
-          self.$message({ type: 'error', message: self.vmI18n.t('modalTips.r7') });
+          self.$message({ type: 'error', message: $i18n.t('modalTips.r7') });
         }
       });
     },

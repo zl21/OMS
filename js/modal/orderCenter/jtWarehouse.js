@@ -10,14 +10,13 @@ export default {
 
   data() {
     return {
-      vmI18n: window.vmI18n,
       warehouseManagementBtnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -27,7 +26,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -37,22 +36,22 @@ export default {
               const formData = this.warehouseManagementFromConfig.formData;
               if (!formData[0].itemdata.pid) {
                 // promptMessage = "店铺";
-                promptMessage = window.vmI18n.t('other.shop');
+                promptMessage = $i18n.t('other.shop');
               } else if (!formData[1].itemdata.pid) {
                 // promptMessage = "档期日程归属";
-                promptMessage = window.vmI18n.t('form_label.scheduleOwnership');
+                promptMessage = $i18n.t('form_label.scheduleOwnership');
               } else if (!formData[2].itemdata.pid) {
                 // promptMessage = "实体仓库";
-                promptMessage = window.vmI18n.t('table_label.physical_warehouse');
+                promptMessage = $i18n.t('table_label.physical_warehouse');
               } else if (
                 !self.warehouseManagementFromConfig.formValue.DELIVERYTYPE
               ) {
                 // promptMessage = "配送方式";
-                promptMessage = window.vmI18n.t('form_label.distributionMode');
+                promptMessage = $i18n.t('form_label.distributionMode');
               }
               if (promptMessage) {
                 // this.$Message.warning(promptMessage + "不能为空");
-                this.$Message.warning(promptMessage + window.vmI18n.t('modalTips.y1'));
+                this.$Message.warning(promptMessage + $i18n.t('modalTips.y1'));
                 return;
               }
               const fromdata = new FormData();
@@ -117,7 +116,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: window.vmI18n.t('other.shop'), // 店铺
+              name: $i18n.t('other.shop'), // 店铺
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP',
               reftableid: 24475,
@@ -148,7 +147,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: window.vmI18n.t('form_label.ownership'), // 日程归属
+              name: $i18n.t('form_label.ownership'), // 日程归属
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'ST_C_VIPCOM_PROJECT_ITEM',
               reftableid: 24583,
@@ -174,7 +173,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: window.vmI18n.t('table_label.physical_warehouse'), // 实体仓库
+              name: $i18n.t('table_label.physical_warehouse'), // 实体仓库
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE',
               reftableid: 24486,
@@ -186,7 +185,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: window.vmI18n.t('form_label.distributionMode'), // 配送方式
+            label: $i18n.t('form_label.distributionMode'), // 配送方式
             width: '24', // 所占宽度宽度
             value: 'DELIVERYTYPE', // 输入框的值
             multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启
@@ -224,7 +223,7 @@ export default {
         let arr = '';
         res.data.datas.tabth.forEach((item) => {
           // '配送方式'
-          if (item.name === window.vmI18n.t('form_label.distributionMode')) {
+          if (item.name === $i18n.t('form_label.distributionMode')) {
             arr = item.combobox;
           }
         });

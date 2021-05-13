@@ -1,6 +1,12 @@
 import service from '@/service/index'
+import BurgeonDate from '@/assets/js/__utils__/date';
 class commonUtils {
-  constructor() {}
+  static gateWayPrefix = {
+    basicData: '/r3-cp',
+    commodityCenter: '/r3-ps',
+    orderCenter: '/r3-oc-oms',
+  }
+  constructor() { }
 
   //--------------工具方法区--------------------------
 
@@ -22,7 +28,7 @@ class commonUtils {
   static serviceHandler(self, serviceUrl, params, callback) {
     const ApiUrl = serviceUrl.split('.')
     self.service[ApiUrl[0]]
-      [ApiUrl[1]](params)
+    [ApiUrl[1]](params)
       .then((res) => {
         let [callbackType, callbackFun] = callback
         console.log('args', callbackType)
@@ -84,7 +90,7 @@ class commonUtils {
    */
   static tipShow(type, self, res, isTitle, renderFun) {
     self.$Modal[type]({
-      title: isTitle ?? window.vmI18n.t('modalTitle.tips'), // 提示
+      title: isTitle ?? $i18n.t('modalTitle.tips'), // 提示
       content: renderFun ?? res.data.message,
       cancelType: true,
       titleAlign: 'left',
@@ -127,12 +133,12 @@ class commonUtils {
    */
   static modalShow(self, tips, okKey, data, ...callback) {
     self.$Modal.info({
-      title: self.vmI18n.t('modalTitle.tips'), // 提示
-      content: self.vmI18n.t(`modalTips.${tips}`),
+      title: $i18n.t('modalTitle.tips'), // 提示
+      content: $i18n.t(`modalTips.${tips}`),
       mask: true,
       showCancel: true,
-      okText: self.vmI18n.t('common.determine'), // 确定
-      cancelText: self.vmI18n.t('common.cancel'), // 取消
+      okText: $i18n.t('common.determine'), // 确定
+      cancelText: $i18n.t('common.cancel'), // 取消
       onOk: () => {
         this.serviceHandler(self, okKey, data, callback)
       },
@@ -165,7 +171,7 @@ class commonUtils {
    */
   static msgTips(self, type, tips, tipsType = 1) {
     self.$Message[type]({
-      content: tipsType == 1 ? self.vmI18n.t(`modalTips.${tips}`) : tips, // 请选择需要新增退单记录！
+      content: tipsType == 1 ? $i18n.t(`modalTips.${tips}`) : tips, // 请选择需要新增退单记录！
       duration: 5,
       top: 80,
     })
@@ -180,7 +186,7 @@ class commonUtils {
   static importTable(self, modalConfig, pageName, confirmTitle) {
     console.log(confirmTitle)
     self[modalConfig].confirmTitle = confirmTitle
-      ? window.vmI18n.t(`${confirmTitle}`)
+      ? $i18n.t(`${confirmTitle}`)
       : self[modalConfig].confirmTitle // 弹框标题
     self.$children.find((item) => item.name === pageName).openConfirm() // 文件名称
   }
@@ -206,11 +212,11 @@ class commonUtils {
       id: id,
       type: 'action',
       name: moduleName,
-      label: window.vmI18n.t(`${labelName}`), // 订单管理
+      label: $i18n.t(`${labelName}`), // 订单管理
       back: isback,
       query: Object.assign({
         id: id,
-        tabTitle: window.vmI18n.t(`${labelName}`), // 订单管理
+        tabTitle: $i18n.t(`${labelName}`), // 订单管理
         ...exendObj,
       }),
     })
@@ -240,13 +246,13 @@ class commonUtils {
     R3.store.commit(`global/${eventType}`, {
       type: actionType,
       tableName: moduleName,
-      label: self.vmI18n.t(`${labelName}`),
+      label: $i18n.t(`${labelName}`),
       tableId: tableId,
       id: id,
       query: Object.assign({
         id: id,
-        ptitle: self.vmI18n.t(`${labelName}`),
-        tabTitle: self.vmI18n.t(`${labelName}`),
+        ptitle: $i18n.t(`${labelName}`),
+        tabTitle: $i18n.t(`${labelName}`),
         tableName: moduleName,
         back: isback,
         ...exendObj,
@@ -447,68 +453,6 @@ class commonUtils {
   }
 
   /**
-   * @method 根据方法(getObject)的返回,渲染formConfig,不包括formData
-   * @data 待解析的数据
-   * @foldingName {'基础信息'}
-   * @colArr 待填充的下拉类型的colname的集合
-   */
-  static analysisForm(data, form, foldingName, colArr = []) {
-    const fD = form.formData
-    const fV = form.formValue
-    data.addcolums.forEach((item) => {
-      if (item.parentdesc == foldingName) {
-        item.childs.forEach((it) => {
-          // 填充下拉类型的options，避免详情页面发两次p/cs/getObject请求
-          colArr.forEach((colArrItem) => {
-            if (it.colname == colArrItem) {
-              // 用colname来匹配需要的select类型的item
-              fD.forEach((fDitem) => {
-                // 赋值给options
-                if (fDitem.colname === colArrItem) {
-                  fDitem.options = it.combobox.map((i) => ({
-                    label: i.limitdesc,
-                    value: i.limitval,
-                  }))
-                }
-              })
-            }
-          })
-
-          // input类型的赋值
-          if (!it.fkdisplay && it.display != 'select' && it.display == 'text') {
-            for (const key in fV) {
-              if (it.colname == key) {
-                fV[key] = it.valuedata
-              }
-            }
-          }
-          // select类型的赋值
-          if (it.display == 'select' || it.display == 'check') {
-            for (const key in fV) {
-              if (it.colname == key) {
-                fV[key] = it.valuedata ? it.valuedata : ''
-              }
-            }
-          }
-          // drp类型的赋值
-          if (it.fkdisplay == 'drp') {
-            fD.forEach((i) => {
-              if (i.colname == it.colname) {
-                i.itemdata.valuedata = it.valuedata ? it.valuedata : ''
-                i.refobjid = it.refobjid
-                fV[i.colname] = it.valuedata
-              }
-            })
-          }
-        })
-      }
-    })
-    form.formData = fD
-    form.formValue = fV
-    return form
-  }
-
-  /**
    * @method 根据据方法(getObject)的返回,初始化formConfig配置,包括formData
    * @data 待解析的数据
    * @form this.formConfig
@@ -532,8 +476,8 @@ class commonUtils {
               fDitem.style == 'dynamic'
                 ? null
                 : fDitem.style
-                ? fDitem.style
-                : 'time'
+                  ? fDitem.style
+                  : 'time'
           }
           fDitem.label = item.name || ''
           fDitem.value = item.colname.toString()
@@ -570,7 +514,6 @@ class commonUtils {
             fDitem.oneObj = fDitem.oneObj
           }
           /*  ˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚ 生成formValue 并 赋值（新增时接口不会返回valuedata字段）˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚  */
-          fV[item.colname] = item.valuedata || item.defval
           if (item.fkdisplay) {
             // 复杂类型的formValue赋值
             if (!item.valuedata) return
@@ -584,7 +527,9 @@ class commonUtils {
               item.valuedata || ''
           } else if (item.display == 'select' || item.display == 'check') {
             // 下拉类型的接口会返回一个默认选中的值（元数据中字段的缺省值）
-            fV[item.colname] = item.defval || ''
+            fV[item.colname] = item.valuedata || item.defval || ''
+          } else {
+            fV[item.colname] = item.valuedata || item.defval || ''
           }
           /*  ˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚ 生成必填ruleValidate（针对input、select等普通类型 ˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚˚  */
           if (item.isnotnull) {
@@ -858,12 +803,247 @@ class commonUtils {
     }
     return time
   }
+
+  /* ============================================== @/assets/js/__utils__/date ============================================== */
+
+  /**
+   * 共用对象
+   */
+  static pageConfig = {
+    // 设置总条数
+    total: 0,
+    // 条数
+    pageSize: 50,
+    // 页数
+    current: 1,
+    pageSizeOpts: [50, 200, 500, 2000]
+  };
+
+  /**
+   * 适用于前端分页
+   * @method 分页初始化方法
+   * @param {Array} sumData 总数据
+   * @param {Object} config 分页的配置（含有current（页数）、pageSize（每页个数））
+   * @returns {Object} data: 当前页数据；config: 分页的配置
+  */
+  static pagingInit = (sumData, config) => {
+    const sumTableData = JSON.parse(JSON.stringify(sumData)); // 所有数据
+    let listData = [];
+    const dataConfig = Object.assign({}, config);
+    const pageSize = dataConfig.pageSize;
+    const start = (dataConfig.current - 1) * pageSize;
+    const end = start + pageSize;
+    const dialogTableConfigData = sumTableData.slice(start, end);
+    if (dialogTableConfigData.length === 0) {
+      // 当前页都被删除
+      if (dataConfig.current === 1) {
+        // 当前页为第一页
+        listData = [];
+      } else {
+        // 当前页不为第一页
+        listData = sumTableData.slice(start - pageSize, end - pageSize);
+        dataConfig.current--;
+      }
+    } else {
+      listData = dialogTableConfigData;
+    }
+    return {
+      data: listData,
+      config: dataConfig
+    };
+  };
+
+  /**
+   * 日期 format
+   * @method 日期转换
+   * @param {Date} newDate {Object Date}
+   * @param {String} format {String} 示例: yyyy-MM-dd hh:mm:ss
+   */
+  static dateFormat = (newDate, format) => {
+    const e = {
+      'M+': newDate.getMonth() + 1,
+      'd+': newDate.getDate(),
+      'h+': newDate.getHours(),
+      'm+': newDate.getMinutes(),
+      's+': newDate.getSeconds()
+    };
+    if (/(y+)/.test(format)) {
+      format = format.replace(RegExp.$1, (`${newDate.getFullYear()}`).substr(4 - RegExp.$1.length));
+    }
+    for (const k in e) {
+      if (new RegExp(`(${k})`).test(format)) {
+        format = format.replace(RegExp.$1, (RegExp.$1.length == 1) ? (e[k]) : ((`00${e[k]}`).substr((`${e[k]}`).length)));
+      }
+    }
+    return format;
+  };
+
+  // 获取当前时间
+  static getCurrentTime = () => {
+    let startTime = BurgeonDate.Format(new Date(), 'yyyy-MM-dd 23:59:59');
+    let endDay = BurgeonDate.addDays(new Date(), -7);
+    let endTime = BurgeonDate.Format(endDay, 'yyyy-MM-dd 00:00:00');
+    return [startTime, endTime];
+  }
+
+  // 数组标准时间转换成yyyy-mm-dd格式
+  static getTimesValue = time => {
+    let timeValue = '';
+    const dateone = new Date(time[0]).toJSON();
+    const datetwo = new Date(time[1]).toJSON();
+    const dateTimeOne = new Date(+new Date(dateone) + 8 * 3600 * 1000)
+      .toISOString()
+      .replace(/T/g, ' ')
+      .replace(/\.[\d]{3}Z/, '');
+    const dateTimeTwo = new Date(+new Date(datetwo) + 8 * 3600 * 1000)
+      .toISOString()
+      .replace(/T/g, ' ')
+      .replace(/\.[\d]{3}Z/, '');
+    timeValue = `${dateTimeOne}~${dateTimeTwo}`;
+
+    if (timeValue === '1970-01-01 08:00:00~1970-01-01 08:00:00') {
+      timeValue = '';
+    }
+    return timeValue;
+  }
+
+  /**
+   * 关闭当前tab
+   * @param _self 指向当前this
+   */
+  static tabCloseAppoint = _self => {
+    const { fullPath } = _self.$route;
+    const { keepAliveModuleName, tableName } = _self.$store.state.global.activeTab;
+    R3.store.commit('global/tabCloseAppoint', {
+      routeFullPath: fullPath,
+      stopRouterPush: true,
+      keepAliveModuleName,
+      tableName
+    });
+  };
+
+  /**
+   * @param {*} _self 
+   * @param {*} defaultHeight 
+   */
+  static tabHref = (_self, params, extendObj = {}) => {
+    // 返回--要传固定id
+    console.log(_self.$refs.agGridChild.AGTABLE.getSelect());
+    const selection = _self.$refs.agGridChild.AGTABLE.getSelect(); // 获取勾行数据;
+    let id = params.id;
+    if (params.id === 'id') {
+      id = selection[0].ID;
+    }
+    if ((selection.length != 1 && params.id !== '-1') || (selection.length != 1 && params.cloneReturnGoodId)) {
+      _self.$Message.warning($i18n.t('modalTips.zm'))
+      return;
+    }
+    _self.$store.commit('customize/TabHref', {
+      id: id,
+      type: params.type ? params.type : 'action',
+      name: params.name, // 文件名
+      label: params.label, // tab中文名
+      query: Object.assign({
+        id: id,
+        tabTitle: params.label, //  tab名
+        ...extendObj
+      })
+    });
+  }
+
+  /**
+   * 设置表格高度
+   * @param _self 指向当前this
+   * @param defaultHeight 指向当前this
+   * 获取agTable高度
+   * 通过 totalHeight 节点
+   */
+  static setTableHeight = (_self, defaultHeight) => {
+    const contentHeight = document.getElementById('content').clientHeight;
+    // 获取需要除了agTable之外的节点
+    const arr = document.getElementsByClassName('totalHeight');
+    let sumHeight = 34 + defaultHeight;
+    Object.getOwnPropertyNames(arr).forEach(item => {
+      sumHeight += parseInt(arr[item].clientHeight);
+    });
+    const tableHeight = `${contentHeight - sumHeight}px`;
+    if (_self.$refs.agGridChild1) {
+      _self.tabConfig.forEach(item => {
+        item.agTableConfig.tableHeight = tableHeight;
+      });
+    } else {
+      _self.agTableConfig.tableHeight = tableHeight;
+    }
+    const agTableDom = document.getElementsByClassName('ag-theme-balham')[0];
+    if (agTableDom) {
+      agTableDom.style.height = tableHeight;
+    }
+  };
+
+  /**
+   * 计算表格高度
+   */
+  static onresizes = (_self, defaultHeight) => {
+    let option = () => { };
+    // 获取当前主表名
+    const tableName = _self.$route.params.customizedModuleName;
+    // 匹配当前的定制界面执行当前逻辑
+    switch (tableName) {
+      case 'PAYABLEADJUSTMENTLIST':// 赔付单
+      case 'RETURNGOODLIST': // 退换货单
+      case 'RETURNSTOREAGELIST':// 退货入库
+      case 'ORDERMANAGER':// 零售发货单
+        option = () => {
+          if (tableName == 'ORDERMANAGER' && _self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
+            // 判断 如果不是高级搜索 自适应高度
+            setTableHeight(_self, defaultHeight);
+          } else if (tableName != 'ORDERMANAGER') {
+            setTableHeight(_self, defaultHeight);
+          }
+        };
+        break;
+      case 'PROMACTIQUERYLIST':// 促销活动
+        option = () => {
+          setTableHeight(_self, 100);
+          const agGridChild = `agGridChild${Number(_self.activeName) + 1}`;
+          _self.$refs[`${agGridChild}`][0].agGridTable(_self.tabConfig[_self.activeName].agTableConfig.columnDefs, _self.tabConfig[_self.activeName].agTableConfig.rowData);
+        };
+        break;
+    }
+    $(window).on('resize', option);
+  };
+
+  /**
+   * 销毁resize方法
+   */
+  static removeOnresize = () => {
+    //  移除监听屏幕变化方法 js
+    $(window).off('resize');
+  };
+
+  /**
+   * 设置局部loading
+   * @loading 是否生成loading
+   */
+  static setLoading = (loading = false) => {
+    const loadingParentDom = document.getElementsByClassName('ark-modal-body')[0];
+    let loadingDom = document.getElementsByClassName('vue-loading')[0];
+    if (loadingDom) {
+      loadingParentDom.removeChild(loadingDom);
+    }
+    loadingDom = document.createElement("div");
+    loadingParentDom.appendChild(loadingDom);
+    const loadingChildDom = document.createElement("div");
+    loadingDom.appendChild(loadingChildDom);
+    if (loading) {
+      loadingDom.setAttribute('class', 'vue-loading');
+      loadingChildDom.setAttribute('class', 'R3-Loading loader');
+    } else {
+      loadingParentDom.removeChild(loadingDom);
+    }
+  };
+
 }
 
-commonUtils.gateWayPrefix = {
-  basicData: '/r3-cp',
-  commodityCenter: '/r3-ps',
-  orderCenter: '/r3-oc-oms',
-}
 
 export default commonUtils

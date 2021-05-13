@@ -8,13 +8,12 @@ export default {
   data() {
     return {
       sticsNumber: '',
-      vmI18n: window.vmI18n,
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [{
           type: '', // 按钮类型
-          text: window.vmI18n.t('common.cancel'), // 取消
+          text: $i18n.t('common.cancel'), // 取消
           icon: '', // 按钮图标
           size: 'small', // 按钮大小
           disabled: false, // 按钮禁用控制
@@ -24,7 +23,7 @@ export default {
         },
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -61,7 +60,7 @@ export default {
           }
         });
       } else {
-        self.$Message.warning(window.vmI18n.t('modalTips.ek')); // '请输入物流单号!'
+        self.$Message.warning($i18n.t('modalTips.ek')); // '请输入物流单号!'
       }
     }
   }

@@ -1,365 +1,366 @@
 //定制按钮配置类
-import i18n from '@burgeon/internationalization/i18n/i18n'
 import commonUtils from './commonUtils'
-// import publicDialogConfig from 'professionalComponents/common/js/publicDialog'
 import DialogConfig from 'burgeonConfig/config/dialogs.config'
 
-window.vmI18n = i18n
 class BtnConfig {
-  constructor() {
-    this.myconfig = {
-      typeAll: 'default', // 按钮统一风格样式
-      loading: false, // 按钮加载
-      buttons: [
-        {
-          webname: 'ORDER_DELETE_GOODS', // 删除赠品
-        },
-        {
-          webname: 'ORDER_REPLACE_BELONGS_GOODS', // 批量替换下卦赠品
-        },
-        {
-          webname: 'ORDER_COPY_CANCELED_ORDER', // 取消单复制
-        },
-        {
-          webname: 'ORDER_COPY_AF_SALE', // 售后复制
-        },
-        {
-          webname: 'manualCreation', // 手工创建
-        },
-        {
-          webname: 'Newly added', // 新增
-        },
-        {
-          webname: 'Revising Logistics', // 批量修改物流
-        },
-        {
-          webname: 'Drop-out copy', // 丢单复制
-        },
-        {
-          webname: 'holdOrder', // 批量Hold单
-        },
-        {
-          webname: 'cancelHoldOrder', // 批量取消Hold
-        },
-        {
-          webname: 'Modify warehouse', // 批量修改仓库
-        },
-        {
-          webname: 'OrderDeliveryUrgent', // 加急发货
-        },
-        {
-          webname: 'Amendment Notes', // 批量修改备注
-        },
-        {
-          webname: 'OrderWrongCopy', // 错发复制
-        },
-        {
-          webname: 'OrderMissSendCopy', // 漏发复制
-        },
-        {
-          webname: 'OrderGiftsOutCopy', // 赠品出库复制
-        },
-        {
-          webname: 'oriInvalidCopy', // 原单无效复制
-        },
-        {
-          webname: 'order_gh', // 替换商品
-        },
-        {
-          webname: 'ORDER_ADD_GOODS', // 替换赠品
-        },
-        {
-          webname: 'Adding gifts', // 添加赠品
-        },
-        {
-          webname: 'Delete_Merchandise', // 删除赠品
-        },
-        {
-          webname: 'appointSplit', // 指定商品拆单
-        },
-        {
-          webname: 'shortageSplit', // 缺货拆单
-        },
-        {
-          webname: 'new_tuihuanhuo', // 退货换单 - 新增
-          btnclick: () => {
-            commonUtils.navigateMain('-1', 'TabHref', 'returngood', 'panel_label.addReturnOrder', { statusName: false })
-          }, // 按钮点击事件
-        },
-        {
-          webname: 'modify_yuihuanhuo', // 退货换单 - 修改
-          btnclick: () => this.btnMainHandler('returnGoodsModify'),
-        },
-        {
-          webname: 'VirtualWarehouseStorageCmd', // 虚拟仓库入库
-          btnclick: () => this.btnMainHandler('virtualWarehouseLibraryWarn'),
-        },
-        {
-          webname: 'shenhe_tuihuanhuo', // 退货换单 - 售后审核
-          btnclick: () => this.btnMainHandler('afterAuditOrder'),
-        },
-        {
-          webname: 'quxiao_tuihuanhuo', // 退货换单 - 取消
-          btnclick: () => this.btnMainHandler('returnGoodsCancel'),
-        },
-        {
-          webname: 'xuniruku_tuihuanhuo', // 退货换单 - 虚拟入库
-          btnclick: () => this.btnMainHandler('virtualStorage'),
-        },
-        {
-          webname: 'OcChangingOrRefundingDetailCmd', // 退货换单 - 退换货单复制
-          btnclick: () => () => this.btnMainHandler('returnGoodsCopy'),
-        },
-        {
-          webname: 'beizhu_tuihuanh', // 退货换单 - 修改备注
-          btnclick: () => this.btnMainHandler('modifyRemark'),
-        },
-        {
-          webname: 'quxiaozidongtuikuan_tuihuanhuo', // 取消自动退款
-          btnclick: () => this.btnMainHandler('cancelRefund'),
-        },
-        {
-          webname: 'modifyReturnSellerRemark', // 退货换单 - 修改卖家备注
-          btnclick: () => this.btnMainHandler('modifySellerRemark'),
-        },
-        {
-          webname: 'tuihuicangku_tuihuanhuo', // 退货换单 - 修改退回仓库
-          btnclick: () => this.btnMainHandler('modifyReturnWarehouse'),
-        },
-        {
-          webname: 'refund_to_exchange', // 退货换单 - 退货转换货
-          btnclick: () => this.btnMainHandler('returnGoodsOrder'),
-        },
-        {
-          webname: 'refund_to_order', // 退货换单 - 重新生成订单
-          btnclick: () => this.btnMainHandler('regenerateTheOrder'),
-        },
-        {
-          webname: 'chuanwms_tuihuanhuo',
-          btnclick: () => this.btnMainHandler('againWMS'),
-        },
-        {
-          webname: 'qiaozhiwancheng_tuihuanhuo',
-          btnclick: () => this.btnMainHandler('forcedCompletion'),
-        },
-        {
-          webname: 'OcBOrderExportCmd',
-          btnclick: () => this.btnMainHandler('exportClick'),
-        },
-        {
-          webname: 'daochu_tuihuanhuo,export_tuihuoruku',
-          btnclick: () => this.btnMainHandler('tuihuoExportClick'),
-        },
-        {
-          webname: 'lookup_chongzhi',
-          btnclick: () => BtnConfig.target.reset(),
-        },
-        {
-          webname:
-            'lookup_tuihuanhuo,lookup_kcjisuanhuancunchi,lookup_kucuntongbuduilie,lookup_qdkucunbiandongliushui,lookup_tuihuoruku',
-          btnclick: () => BtnConfig.target.find(),
-        },
-        {
-          webname: 'Newlyadded_tuihuoruku',
-          btnclick: () => {
-            commonUtils.navigateMain(
-              '-1',
-              'TabHref',
-              'returnTreasuryAdd',
-              'panel_label.returnTreasuryAdd'
-            )
-          },
-        },
-        {
-          webname: 'ManualMatching_tuihuoruku',
-          btnclick: () => this.btnMainHandler('manualMatch'),
-        },
-        {
-          webname: 'Mismatchingmandatorymatching_cuofa',
-          btnclick: () => this.btnMainHandler('forceMatch'),
-        },
-        {
-          webname: 'refundInImport',
-          btnclick: () => {
-            BtnConfig.target.importTable.componentData = {
-              tableName: 'OC_B_REFUND_IN',
-            }
-            BtnConfig.target.$children
-              .find((item) => item.name === 'importTable')
-              .openConfirm()
-          },
-        },
-        {
-          webname: 'in_tuihuanhuo',
-          btnclick: () => this.btnMainHandler('scanIncoming'),
-        },
-        {
-          webname: 'oc_b_return_order_batch',
-          btnclick: () => this.btnMainHandler('batchOriginalReturn'),
-        },
-        {
-          webname: 'To examine', // 审核
-          btnclick: () => this.btnMainHandler('auditOrder'), // 按钮点击事件
-        },
-        {
-          webname: 'auditingForce', // 强制审核
-          btnclick: () => this.btnMainHandler('auditingForce'), // 按钮点击事件
-        },
-        {
-          webname: 'Counter-audit', // 反审核
-          btnclick: () => this.btnMainHandler('reverseAuditOrder'), // 按钮点击事件
-        },
-        {
-          webname: 'shortageNotice', // 缺货回传
-          btnclick: () => this.btnMainHandler('shortageNotice'), // 按钮点击事件
-        },
-        /* {
-          webname: 'holdOrder2', // hold单
-          btnclick: () => this.btnMainHandler('holdOrder'), // 按钮点击事件
-        }, */
-        /* {
-          webname: 'cancelHoldOrder2', // 取消hold单
-          btnclick: () => this.btnMainHandler('cancelHoldOrder'), // 按钮点击事件
-        }, */
-        /* {
-          btnclick: () => this.btnMainHandler('invoiceNotice'), // 按钮点击事件
-        }, */
-        {
-          webname: 'Record invoices',
-          btnclick: () => this.btnMainHandler('invoiceRecord'),
-        },
-        {
-          webname: 'Order Cancellation',
-          btnclick: () => this.btnMainHandler('cancelOrder'), // 按钮点击事件
-        },
-        {
-          text: window.vmI18n.t('btn.orderBlocking'), // 订单拦截
-          webname: 'orderBlocking',
-          btnclick: () => this.btnMainHandler('interceptOrder'),
-        },
-        {
-          webname: 'ORDER_MANUAL_SPLIT_ORDER',
-          btnclick: () => this.btnMainHandler('splitOrder'),
-        },
-        {
-          webname: 'New refund receipt', // 新增退单跳转页面
-          btnclick: () => this.btnMainHandler('addReturnOrder'),
-        },
-        {
-          webname: 'Out-of-stock reopening',
-          btnclick: () => this.btnMainHandler('outOfStockReOpening'),
-        },
-        {
-          webname: 'FortuneBag-Out-of-stock reopening',
-          btnclick: () => this.btnMainHandler('fortuneBagReOpening'),
-        },
-        {
-          webname: 'beizhudaoru',
-          btnclick: () => this.noticeImport(), // 按钮点击事件
-        },
-        /* {
-          btnclick: () => this.btnMainHandler('changeShipmentPlatform'),
-        }, */
-        {
-          webname: 'batchReturnOrder',
-          btnclick: () => this.btnMainHandler('batchReturnOrder'),
-        },
-        {
-          text: window.vmI18n.t('btn.release_inventory'), // 释放库存
-          webname: 'release_inventory',
-          btnclick: () => this.btnMainHandler('releaseInventory'),
-        },
-        {
-          webname: 'mergeOrderOne',
-          btnclick: () => this.btnMainHandler('mergeOrder'),
-        },
-        {
-          webname: 'cancelMergeOrder',
-          btnclick: () => this.btnMainHandler('cancelMergeOrder'),
-        },
-        {
-          webname: 'order_refreceing', //刷新
-          btnclick: () => BtnConfig.target.autoRefresh(),
-        },
-        {
-          webname: 'refund_price', // 额外退款
-          btnclick: () => this.btnMainHandler('refundPrice'),
-        },
-        {
-          webname: 'cancelBlocking', // 取消订单拦截
-          btnclick: () => this.btnMainHandler('cancelBlocking'),
-        },
-        {
-          webname: 'OcBOrderImportCmd', // 导入
-          webid: 3025,
-        },
-        {
-          icon: 'iconfont iconbj_setup', // 按钮图标
-          webname: 'iconbj_setup',
-          btnclick: () => this.setupHandler(),
-        },
-        {
-          icon: 'iconfont iconbj_col', // 收藏图标
-          webname: 'isFavorite',
-          name: window.vmI18n.t('btn.collection'),
-          btnclick: () => BtnConfig.target.setFavorite(),
-        },
-        //--------------------------------------------------单对象页面---------------------------------
-        {
-          webname: 'save_order_1', // 保存
-          btnclick: () => BtnConfig.target.saveOrderManageAdd(),
-        },
-        {
-          webname: 'refund_save', // 保存
-          btnclick: () => BtnConfig.target.saveData(),
-        },
-        {
-          webname: 'refund_return', // 退单返回
-          btnclick: () => {
-            this.back('returngoodList', 2661, 'panel_label.forcedStorage') // 销毁当前实例
-            BtnConfig.target.$destroy()
+  static target;
+  //是否单对象界面: 0否1是;
+  static singleType = 0;
+  static btnKey = '';
+  constructor() { }
+
+  customConfig = {
+    typeAll: 'default', // 按钮统一风格样式
+    loading: false, // 按钮加载
+    buttons: [
+      {
+        webname: 'ORDER_DELETE_GOODS', // 删除赠品
+      },
+      {
+        webname: 'ORDER_REPLACE_BELONGS_GOODS', // 批量替换下卦赠品
+      },
+      {
+        webname: 'ORDER_COPY_CANCELED_ORDER', // 取消单复制
+      },
+      {
+        webname: 'ORDER_COPY_AF_SALE', // 售后复制
+      },
+      {
+        webname: 'manualCreation', // 手工创建
+      },
+      {
+        webname: 'Newly added', // 新增
+      },
+      {
+        webname: 'Revising Logistics', // 批量修改物流
+      },
+      {
+        webname: 'Drop-out copy', // 丢单复制
+      },
+      {
+        webname: 'holdOrder', // 批量Hold单
+      },
+      {
+        webname: 'cancelHoldOrder', // 批量取消Hold
+      },
+      {
+        webname: 'Modify warehouse', // 批量修改仓库
+      },
+      {
+        webname: 'OrderDeliveryUrgent', // 加急发货
+      },
+      {
+        webname: 'Amendment Notes', // 批量修改备注
+      },
+      {
+        webname: 'OrderWrongCopy', // 错发复制
+      },
+      {
+        webname: 'OrderMissSendCopy', // 漏发复制
+      },
+      {
+        webname: 'OrderGiftsOutCopy', // 赠品出库复制
+      },
+      {
+        webname: 'oriInvalidCopy', // 原单无效复制
+      },
+      {
+        webname: 'order_gh', // 替换商品
+      },
+      {
+        webname: 'ORDER_ADD_GOODS', // 替换赠品
+      },
+      {
+        webname: 'Adding gifts', // 添加赠品
+      },
+      {
+        webname: 'Delete_Merchandise', // 删除赠品
+      },
+      {
+        webname: 'appointSplit', // 指定商品拆单
+      },
+      {
+        webname: 'shortageSplit', // 缺货拆单
+      },
+      {
+        webname: 'new_tuihuanhuo', // 退货换单 - 新增
+        btnclick: () => {
+          commonUtils.navigateMain('-1', 'TabHref', 'returngood', 'panel_label.addReturnOrder', { statusName: false })
+        }, // 按钮点击事件
+      },
+      {
+        webname: 'modify_yuihuanhuo', // 退货换单 - 修改
+        btnclick: () => this.btnMainHandler('returnGoodsModify'),
+      },
+      {
+        webname: 'VirtualWarehouseStorageCmd', // 虚拟仓库入库
+        btnclick: () => this.btnMainHandler('virtualWarehouseLibraryWarn'),
+      },
+      {
+        webname: 'shenhe_tuihuanhuo', // 退货换单 - 售后审核
+        btnclick: () => this.btnMainHandler('afterAuditOrder'),
+      },
+      {
+        webname: 'quxiao_tuihuanhuo', // 退货换单 - 取消
+        btnclick: () => this.btnMainHandler('returnGoodsCancel'),
+      },
+      {
+        webname: 'xuniruku_tuihuanhuo', // 退货换单 - 虚拟入库
+        btnclick: () => this.btnMainHandler('virtualStorage'),
+      },
+      {
+        webname: 'OcChangingOrRefundingDetailCmd', // 退货换单 - 退换货单复制
+        btnclick: () => () => this.btnMainHandler('returnGoodsCopy'),
+      },
+      {
+        webname: 'beizhu_tuihuanh', // 退货换单 - 修改备注
+        btnclick: () => this.btnMainHandler('modifyRemark'),
+      },
+      {
+        webname: 'quxiaozidongtuikuan_tuihuanhuo', // 取消自动退款
+        btnclick: () => this.btnMainHandler('cancelRefund'),
+      },
+      {
+        webname: 'modifyReturnSellerRemark', // 退货换单 - 修改卖家备注
+        btnclick: () => this.btnMainHandler('modifySellerRemark'),
+      },
+      {
+        webname: 'tuihuicangku_tuihuanhuo', // 退货换单 - 修改退回仓库
+        btnclick: () => this.btnMainHandler('modifyReturnWarehouse'),
+      },
+      {
+        webname: 'refund_to_exchange', // 退货换单 - 退货转换货
+        btnclick: () => this.btnMainHandler('returnGoodsOrder'),
+      },
+      {
+        webname: 'refund_to_order', // 退货换单 - 重新生成订单
+        btnclick: () => this.btnMainHandler('regenerateTheOrder'),
+      },
+      {
+        webname: 'chuanwms_tuihuanhuo',
+        btnclick: () => this.btnMainHandler('againWMS'),
+      },
+      {
+        webname: 'qiaozhiwancheng_tuihuanhuo',
+        btnclick: () => this.btnMainHandler('forcedCompletion'),
+      },
+      {
+        webname: 'OcBOrderExportCmd',
+        btnclick: () => this.btnMainHandler('exportClick'),
+      },
+      {
+        webname: 'daochu_tuihuanhuo,export_tuihuoruku',
+        btnclick: () => this.btnMainHandler('tuihuoExportClick'),
+      },
+      {
+        webname: 'lookup_chongzhi',
+        btnclick: () => BtnConfig.target.reset(),
+      },
+      {
+        webname:
+          'lookup_tuihuanhuo,lookup_kcjisuanhuancunchi,lookup_kucuntongbuduilie,lookup_qdkucunbiandongliushui,lookup_tuihuoruku',
+        btnclick: () => BtnConfig.target.find(),
+      },
+      {
+        webname: 'Newlyadded_tuihuoruku',
+        btnclick: () => {
+          commonUtils.navigateMain(
+            '-1',
+            'TabHref',
+            'returnTreasuryAdd',
+            'panel_label.returnTreasuryAdd'
+          )
+        },
+      },
+      {
+        webname: 'ManualMatching_tuihuoruku',
+        btnclick: () => this.btnMainHandler('manualMatch'),
+      },
+      {
+        webname: 'Mismatchingmandatorymatching_cuofa',
+        btnclick: () => this.btnMainHandler('forceMatch'),
+      },
+      {
+        webname: 'refundInImport',
+        btnclick: () => {
+          BtnConfig.target.importTable.componentData = {
+            tableName: 'OC_B_REFUND_IN',
           }
+          BtnConfig.target.$children
+            .find((item) => item.name === 'importTable')
+            .openConfirm()
         },
-        {
-          webname: 'order_update_addrr', // 修改地址
-          btnclick: () => this.btnMainHandler('orderUpdateAddress'),
+      },
+      {
+        webname: 'in_tuihuanhuo',
+        btnclick: () => this.btnMainHandler('scanIncoming'),
+      },
+      {
+        webname: 'oc_b_return_order_batch',
+        btnclick: () => this.btnMainHandler('batchOriginalReturn'),
+      },
+      {
+        webname: 'To examine', // 审核
+        btnclick: () => this.btnMainHandler('auditOrder'), // 按钮点击事件
+      },
+      {
+        webname: 'auditingForce', // 强制审核
+        btnclick: () => this.btnMainHandler('auditingForce'), // 按钮点击事件
+      },
+      {
+        webname: 'Counter-audit', // 反审核
+        btnclick: () => this.btnMainHandler('reverseAuditOrder'), // 按钮点击事件
+      },
+      {
+        webname: 'shortageNotice', // 缺货回传
+        btnclick: () => this.btnMainHandler('shortageNotice'), // 按钮点击事件
+      },
+      /* {
+        webname: 'holdOrder2', // hold单
+        btnclick: () => this.btnMainHandler('holdOrder'), // 按钮点击事件
+      }, */
+      /* {
+        webname: 'cancelHoldOrder2', // 取消hold单
+        btnclick: () => this.btnMainHandler('cancelHoldOrder'), // 按钮点击事件
+      }, */
+      /* {
+        btnclick: () => this.btnMainHandler('invoiceNotice'), // 按钮点击事件
+      }, */
+      {
+        webname: 'Record invoices',
+        btnclick: () => this.btnMainHandler('invoiceRecord'),
+      },
+      {
+        webname: 'Order Cancellation',
+        btnclick: () => this.btnMainHandler('cancelOrder'), // 按钮点击事件
+      },
+      {
+        text: $i18n.t('btn.orderBlocking'), // 订单拦截
+        webname: 'orderBlocking',
+        btnclick: () => this.btnMainHandler('interceptOrder'),
+      },
+      {
+        webname: 'ORDER_MANUAL_SPLIT_ORDER',
+        btnclick: () => this.btnMainHandler('splitOrder'),
+      },
+      {
+        webname: 'New refund receipt', // 新增退单跳转页面
+        btnclick: () => this.btnMainHandler('addReturnOrder'),
+      },
+      {
+        webname: 'Out-of-stock reopening',
+        btnclick: () => this.btnMainHandler('outOfStockReOpening'),
+      },
+      {
+        webname: 'FortuneBag-Out-of-stock reopening',
+        btnclick: () => this.btnMainHandler('fortuneBagReOpening'),
+      },
+      {
+        webname: 'beizhudaoru',
+        btnclick: () => this.noticeImport(), // 按钮点击事件
+      },
+      /* {
+        btnclick: () => this.btnMainHandler('changeShipmentPlatform'),
+      }, */
+      {
+        webname: 'batchReturnOrder',
+        btnclick: () => this.btnMainHandler('batchReturnOrder'),
+      },
+      {
+        text: $i18n.t('btn.release_inventory'), // 释放库存
+        webname: 'release_inventory',
+        btnclick: () => this.btnMainHandler('releaseInventory'),
+      },
+      {
+        webname: 'mergeOrderOne',
+        btnclick: () => this.btnMainHandler('mergeOrder'),
+      },
+      {
+        webname: 'cancelMergeOrder',
+        btnclick: () => this.btnMainHandler('cancelMergeOrder'),
+      },
+      {
+        webname: 'order_refreceing', //刷新
+        btnclick: () => BtnConfig.target.autoRefresh(),
+      },
+      {
+        webname: 'refund_price', // 额外退款
+        btnclick: () => this.btnMainHandler('refundPrice'),
+      },
+      {
+        webname: 'cancelBlocking', // 取消订单拦截
+        btnclick: () => this.btnMainHandler('cancelBlocking'),
+      },
+      {
+        webname: 'OcBOrderImportCmd', // 导入
+        webid: 3025,
+      },
+      {
+        icon: 'iconfont iconbj_setup', // 按钮图标
+        webname: 'iconbj_setup',
+        btnclick: () => this.setupHandler(),
+      },
+      {
+        icon: 'iconfont iconbj_col', // 收藏图标
+        webname: 'isFavorite',
+        name: $i18n.t('btn.collection'),
+        btnclick: () => BtnConfig.target.setFavorite(),
+      },
+      //--------------------------------------------------单对象页面---------------------------------
+      {
+        webname: 'save_order_1', // 保存
+        btnclick: () => BtnConfig.target.saveOrderManageAdd(),
+      },
+      {
+        webname: 'refund_save', // 保存
+        btnclick: () => BtnConfig.target.saveData(),
+      },
+      {
+        webname: 'refund_return', // 退单返回
+        btnclick: () => {
+          this.back('returngoodList', 2661, 'panel_label.forcedStorage') // 销毁当前实例
+          BtnConfig.target.$destroy()
+        }
+      },
+      {
+        webname: 'order_update_addrr', // 修改地址
+        btnclick: () => this.btnMainHandler('orderUpdateAddress'),
+      },
+      {
+        webname: 'updateremark', // 修改备注
+        btnclick: () => this.btnMainHandler('updateRemark'),
+      },
+      {
+        webname: 'updatestore', // 修改仓库
+        btnclick: () => this.btnMainHandler('updateStore'),
+      },
+      {
+        webname: 'Revisinguupdate', // 修改物流
+        btnclick: () => this.btnMainHandler('revisingUpdate'),
+      },
+      {
+        webname: 'order_fund', // 返回
+        btnclick: () => {
+          this.back('orderManager', 2627, 'panel_label.orderManager') // 销毁当前实例
+          BtnConfig.target.$destroy()
         },
-        {
-          webname: 'updateremark', // 修改备注
-          btnclick: () => this.btnMainHandler('updateRemark'),
+      },
+      {
+        webname: 'ManualMatching_save',
+        btnclick: () => BtnConfig.target.saveData(),
+      },
+      {
+        webname: 'Mismatchingmandatorymatching_return',
+        btnclick: () => {
+          this.back('returnStoreageList', 2809, 'panel_label.returnTreasury') // 销毁当前实例
+          BtnConfig.target.$destroy()
         },
-        {
-          webname: 'updatestore', // 修改仓库
-          btnclick: () => this.btnMainHandler('updateStore'),
-        },
-        {
-          webname: 'Revisinguupdate', // 修改物流
-          btnclick: () => this.btnMainHandler('revisingUpdate'),
-        },
-        {
-          webname: 'order_fund', // 返回
-          btnclick: () => {
-            this.back('orderManager', 2627, 'panel_label.orderManager') // 销毁当前实例
-            BtnConfig.target.$destroy()
-          },
-        },
-        {
-          webname: 'ManualMatching_save',
-          btnclick: () => BtnConfig.target.saveData(),
-        },
-        {
-          webname: 'Mismatchingmandatorymatching_return',
-          btnclick: () => {
-            this.back('returnStoreageList', 2809, 'panel_label.returnTreasury') // 销毁当前实例
-            BtnConfig.target.$destroy()
-          },
-        },
-      ],
-    }
+      },
+    ],
   }
 
   static config() {
-    return BtnConfig.customConfig
+    return new BtnConfig().customConfig;
   }
   // 单对象直接调方法;
 
@@ -847,12 +848,12 @@ class BtnConfig {
       type: 1,
     }
     if (BtnConfig.singleType) {
-      commonUtils.importTable(self,'changeRemarkConfig','rturngoodModifyRemarks','btn.modifyRemarks')
+      commonUtils.importTable(self, 'changeRemarkConfig', 'rturngoodModifyRemarks', 'btn.modifyRemarks')
     } else {
-      let ids = this.orderStatusRule(self, {type: 'check',statusCode: '20,30,40,50',statusTips: 'm2',})
+      let ids = this.orderStatusRule(self, { type: 'check', statusCode: '20,30,40,50', statusTips: 'm2', })
       if (ids) {
         self.changeRemarkConfig.componentData.ids = ids.join(',')
-        commonUtils.importTable(self,'changeRemarkConfig','rturngoodModifyRemarks','btn.modifyRemarks')
+        commonUtils.importTable(self, 'changeRemarkConfig', 'rturngoodModifyRemarks', 'btn.modifyRemarks')
       }
     }
   }
@@ -1215,12 +1216,7 @@ class BtnConfig {
       .then((res) => {
         console.log(res);
         if(res.data.code == 0){
-          commonUtils.navigateMain(
-              selectItem.ID,
-              'TabHref',
-              'MANUAL_SPLIT',
-              'panel_label.orderSplit'
-            )
+          commonUtils.navigateMain(selectItem.ID,'TabHref','MANUAL_SPLIT','panel_label.orderSplit')
         };
       })
   }
@@ -1316,7 +1312,7 @@ class BtnConfig {
       // 已取消，系统作废, // “待分配”、“待审核”、“缺货”、“已审核”、“传WMS中”、“配货中
       if ([7, 8, 1, 2, 3, 4, 50, 21].includes(orderDetails.ORDER_STATUS)) {
         let tips = [7, 8].includes(orderDetails.ORDER_STATUS) ? 'b7' : 'b8'
-        let fixTips = `${orderDetails.ID}${self.vmI18n.t(`modalTips.${tips}`)}`
+        let fixTips = `${orderDetails.ID}${$i18n.t(`modalTips.${tips}`)}`
         commonUtils.msgTips(self, 'warning', fixTips, 2)
       } else if ([5, 6].includes(orderDetails.ORDER_STATUS)) {
         commonUtils.msgTips(self, 'warning', 'h2') // "订单状态为仓库发货和平台发货才能新增退单!"
@@ -1384,7 +1380,7 @@ class BtnConfig {
     _this.importTable.componentData = {
       tableName: 'OUT_OF_STOCK_MEMO',
     }
-    _this.importTable.confirmTitle = window.vmI18n.t('btn.note_import')
+    _this.importTable.confirmTitle = $i18n.t('btn.note_import')
     _this.$children.find((item) => item.name === 'importTable').openConfirm()
   }
   //变更发货平台处理
@@ -1418,7 +1414,7 @@ class BtnConfig {
           commonUtils.msgTips(self, 'sucess', res.data.message)
           self.getList(self.statusTab)
         } else {
-          const err = res.data.message || this.vmI18n.t('modalTips.l9') // 虚拟仓库入库失败！
+          const err = res.data.message || $i18n.t('modalTips.l9') // 虚拟仓库入库失败！
           let renderInfo = {
             props: {
               columns: [
@@ -1484,10 +1480,7 @@ class BtnConfig {
     }
     let params = { ID: self.objId, isShowPii: true }
     commonUtils.serviceHandler(
-      self,
-      'orderCenter.getDetail',
-      params,
-      'all',
+      self, 'orderCenter.getDetail', params, 'all',
       function (res) {
         if (res.data && res.data.code === 0) {
           const order = res.data.data
@@ -1566,22 +1559,18 @@ class BtnConfig {
         }
         // 零售发货单列表tab 区分审核失败/多次缺货类型订单查询
         // '审核失败'
-        if (self.statusData.label == window.vmI18n.t('other.auditError')) {
+        if (self.statusData.label == $i18n.t('other.auditError')) {
           param.status = { label: '待审核', value: '1', isShow: true }
           // '多次缺货'
         } else if (
-          this.statusData.label == window.vmI18n.t('other.multipleOutOfStock')
+          this.statusData.label == $i18n.t('other.multipleOutOfStock')
         ) {
           param.status = { label: '缺货', value: '2', isShow: true }
         }
         param.lackstockOrAudit = self.statusData.value
         fromdata.append('param', JSON.stringify(param))
       }
-      commonUtils.serviceHandler(
-        self,
-        'orderCenter.exportOcBOrder',
-        fromdata,
-        'part',
+      commonUtils.serviceHandler(self, 'orderCenter.exportOcBOrder', fromdata, 'part',
         function (res) {
           DialogConfig.config().downloadUrlFile(res.data.data)
         }
@@ -1703,9 +1692,4 @@ class BtnConfig {
   }
 }
 
-BtnConfig.target
-//是否单对象界面: 0否1是;
-BtnConfig.singleType = 0
-BtnConfig.btnKey = ''
-BtnConfig.customConfig = new BtnConfig().myconfig
 export default BtnConfig

@@ -26,7 +26,7 @@ import businessButton from 'professionalComponents/businessButton';
             },
             {
               webname: 'lookup_return', // 返回
-              text: window.vmI18n.t('btn.back'),
+              text: $i18n.t('btn.back'),
               btnclick: () => {
                 comUtils.tabCloseAppoint(this);
                 this.$destroy(true);

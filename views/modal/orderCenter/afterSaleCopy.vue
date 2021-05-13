@@ -23,7 +23,6 @@ export default {
   data() {
     const _this = this;
     return {
-      vmI18n: window.vmI18n,
       formConfig: {
         formData: [
           {
@@ -35,17 +34,17 @@ export default {
               {
                 value: 1,
                 label: "丢件复制",
-                // label: window.vmI18n.t('form_label.live_HOLD')
+                // label: $i18n.t('form_label.live_HOLD')
               },
               {
                 value: 2,
                 label: "错漏发复制",
-                // label: window.vmI18n.t('form_label.buyer_HOLD')
+                // label: $i18n.t('form_label.buyer_HOLD')
               },
               {
                 value: 3,
                 label: "赠品复制",
-                // label: window.vmI18n.t('form_label.live_HOLD')
+                // label: $i18n.t('form_label.live_HOLD')
               },
             ],
           },
@@ -62,13 +61,13 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: window.vmI18n.t("common.cancel"), // 取消
+            text: $i18n.t("common.cancel"), // 取消
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             },
           },
           {
-            text: window.vmI18n.t("common.determine"), // 确定
+            text: $i18n.t("common.determine"), // 确定
             btnclick: () => {
               this.confirmChange();
             },

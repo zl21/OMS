@@ -292,7 +292,7 @@ export default {
               isnotnull: false,
               isuppercase: false,
               length: 20,
-              name: window.vmI18n.t('form_label.logisticsCompany'), // '物流公司',
+              name: $i18n.t('form_label.logisticsCompany'), // '物流公司',
               readonly: true,
               reftable: 'ST_C_EWAYBILL_LOGISTICS',
               reftableid: 24633,
@@ -367,7 +367,7 @@ export default {
                   },
                   on: {
                     click: () => {
-                      if (params.row.IS_MATCH == window.vmI18n.t('common.yes')) {
+                      if (params.row.IS_MATCH == $i18n.t('common.yes')) {
                         _this.$Message.error('此明细已经匹配，不允许修改退换货单号！');
                         return;
                       }
@@ -607,7 +607,7 @@ export default {
     returnArr(data) {
       const tmpArr = this.returnSelectData.map(item => item.ID);
       this.jordanTableConfig.data.forEach(item => {
-        if (tmpArr.includes(item.ID) && item.IS_WITHOUT_ORIG === window.vmI18n.t('common.yes')) {
+        if (tmpArr.includes(item.ID) && item.IS_WITHOUT_ORIG === $i18n.t('common.yes')) {
           item.OC_B_RETURN_ORDER_ID = data;
         }
       });
@@ -636,14 +636,14 @@ export default {
       const dataArr = JSON.parse(JSON.stringify(this.jordanTableConfig.data));
       dataArr.forEach((item) => {
         // 是否无原单条码
-        if (item.IS_WITHOUT_ORIG == window.vmI18n.t('common.yes')) item.IS_WITHOUT_ORIG = 1;
-        else if (item.IS_WITHOUT_ORIG == window.vmI18n.t('common.no')) item.IS_WITHOUT_ORIG = 0;
+        if (item.IS_WITHOUT_ORIG == $i18n.t('common.yes')) item.IS_WITHOUT_ORIG = 1;
+        else if (item.IS_WITHOUT_ORIG == $i18n.t('common.no')) item.IS_WITHOUT_ORIG = 0;
         // 是否匹配
-        if (item.IS_MATCH == window.vmI18n.t('common.yes')) item.IS_MATCH = 1;
-        else if (item.IS_MATCH == window.vmI18n.t('common.no')) item.IS_MATCH = 0;
+        if (item.IS_MATCH == $i18n.t('common.yes')) item.IS_MATCH = 1;
+        else if (item.IS_MATCH == $i18n.t('common.no')) item.IS_MATCH = 0;
         // 是否生成调整单
-        if (item.IS_GEN_ADJUST == window.vmI18n.t('common.yes')) item.IS_GEN_ADJUST = 1;
-        else if (item.IS_GEN_ADJUST == window.vmI18n.t('common.no')) item.IS_GEN_ADJUST = 0;
+        if (item.IS_GEN_ADJUST == $i18n.t('common.yes')) item.IS_GEN_ADJUST = 1;
+        else if (item.IS_GEN_ADJUST == $i18n.t('common.no')) item.IS_GEN_ADJUST = 0;
       });
       const params = {
         OC_B_REFUND_IN_PRODUCT_ITEM: dataArr, // 退货入库明细
@@ -755,9 +755,9 @@ export default {
       fromdata.append('objid', -1);
       const res = await this.service.common.getObject(fromdata);
       this.information.formData.forEach((value) => {
-        if (value.label === window.vmI18n.t('form_label.specialTreatmentType')) { // '特殊处理类型'
+        if (value.label === $i18n.t('form_label.specialTreatmentType')) { // '特殊处理类型'
           res.data.data.addcolums.forEach((item) => {
-            if (item.parentdesc === window.vmI18n.t('common.baseInformation')) { // '基本信息'
+            if (item.parentdesc === $i18n.t('common.baseInformation')) { // '基本信息'
               const childItem = item.childs;
               childItem.forEach((item) => {
                 if (item.colname === 'SPECIAL_TYPE') {
@@ -961,7 +961,7 @@ export default {
       this.returnSelectData = e;
     },
     oneObjs(val) {
-      if (val.name == window.vmI18n.t('form_label.logisticsCompany')) { // '物流公司'
+      if (val.name == $i18n.t('form_label.logisticsCompany')) { // '物流公司'
         this.information.formValue.CP_C_LOGISTICS_ID = val.pid;
         this.information.formValue.CP_C_LOGISTICS_ENAME = val.valuedata;
       }

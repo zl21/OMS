@@ -32,7 +32,6 @@ export default {
     };
     /* -------------------- input校验器 end -------------------- */
     return {
-      vmI18n: window.vmI18n,
       subTableConfig: {
         centerName: '',
         tablename: '',
@@ -100,7 +99,7 @@ export default {
           },
         },
         {
-          text: window.vmI18n.t('btn.back'),
+          text: $i18n.t('btn.back'),
           btnclick: () => {
             this.back()
           },
@@ -115,7 +114,7 @@ export default {
         width: 250,
         height: 170,
         colname: 'IMAGE',
-        name: window.vmI18n.t('other.uploadVoucher'), // 上传凭证
+        name: $i18n.t('other.uploadVoucher'), // 上传凭证
         readonly: false,
         valuedata: [],
       },
@@ -355,9 +354,22 @@ export default {
         },
         ],
         formValue: {
-          ECODE:'',
-          ENAME:'',
-          PRICE_RETAIL:'',
+          PS_C_PRO_ID: '',
+          ECODE: '',
+          ENAME: '',
+          PURCHASE_STATUS: '',
+          SALES_STATUS: '',
+          UNIT: '',
+          ISACTIVE: '',
+          SPEC_REMARK: '',
+          PRICE_RETAIL: '',
+          PRICE_COST: '',
+          PRICE_PURCHASE: '',
+          LENGTH: '',
+          HEIGHT: '',
+          WIDTH: '',
+          GROSS_WEIGHT: '',
+          NET_WEIGHT: '',
           PS_C_SPECOBJ1_ID: '',
           PS_C_SPECOBJ2_ID: '',
           PS_C_SPECOBJ3_ID: '',
@@ -426,7 +438,7 @@ export default {
     if (self.ID > 0 && !self.$route.query.spuid) {
       // 详情
       self.initObjItem(self.ID);
-    } else if (self.ID > 0 && self.$route.query.spuid) {
+    } else if (self.ID == '2201' && self.$route.query.spuid) {
       // 是SPU新增/详情 跳转过来的新增
       self.labelList.splice(1, 2);
       self.spuID = self.$route.query.spuid;
@@ -436,7 +448,6 @@ export default {
       });
     } else {
       // 新增
-      // this.getSelectData(); // 初始化下拉选项
       self.initObjItem(self.ID);
       self.labelList.splice(1, 2);
     }
@@ -707,7 +718,11 @@ export default {
           attributeItem: afterExPro[key] ? afterExPro[key] : ''
         });
       }
-      if (self.$route.query.spuid) this.ID = '-1';
+      if (self.$route.query.spuid) {
+        this.ID = '-1';
+        PsSku.SALES_STATUS = PsSku.SALES_STATUS ? PsSku.SALES_STATUS : self.formConfig.formValue.SALES_STATUS;
+        PsSku.ISACTIVE = 'Y';
+      }
       const param = {
         objid: this.ID,
         table: 'PS_C_SKU',
@@ -727,12 +742,35 @@ export default {
       this.loading = false;
       if (code === 0) {
         this.backable = true;
-        self.$Message.success(message || window.vmI18n.t('modalTips.z9'));
+        self.$Message.success(message || $i18n.t('modalTips.z9'));
         self.modify.master = {};
         self.modify.exAttr = {};
         // 数据回显
         if (data) self.ID = data;
-        await self.initObjItem(self.ID);
+        this.$comUtils.tabCloseAppoint(this);
+        this.$destroy(true);
+        setTimeout(() => {
+          if (this.$route.query.spuid) {
+            $store.commit('customize/TabOpen', {
+              id: self.ID,
+              type: 'action',
+              name: 'PS_C_SKU',
+              label: 'SKU编辑',
+              query: Object.assign({
+                spuid: this.spuID,
+                spucode: this.formConfig.formValue.ECODE || ''
+              })
+            });
+          } else {
+            $store.commit('customize/TabOpen', {
+              id: self.ID,
+              type: 'action',
+              name: 'PS_C_SKU',
+              label: 'SKU编辑',
+            });
+          }
+        }, 20);
+        // await self.initObjItem(self.ID);
       } else {
         // 走框架的报错
       }
@@ -748,12 +786,12 @@ export default {
       const masterArr = Object.keys(self.modify.master);
       if (masterArr.length) {
         this.$Modal.info({
-          title: self.vmI18n.t('modalTitle.tips'), // 提示
+          title: $i18n.t('modalTitle.tips'), // 提示
           content: '当前修改未保存，确定返回？',
           mask: true,
           showCancel: true,
-          okText: self.vmI18n.t('common.determine'), // 确定
-          cancelText: self.vmI18n.t('common.cancel'), // 取消
+          okText: $i18n.t('common.determine'), // 确定
+          cancelText: $i18n.t('common.cancel'), // 取消
           onOk: () => {
             self.onOk()
           },
@@ -793,11 +831,6 @@ export default {
         tablename: this.labelDefaultValue,
         objid: this.ID,
       };
-    },
-    // 填充下拉选项框
-    async getSelectData() {
-      const self = this;
-      self.formConfig.formData = await publicMethodsUtil.getTypeList('PS_C_SKU', ['SALES_STATUS', 'PURCHASE_STATUS'], '基础信息', self.formConfig);
     },
     /**
      * 记录主表修改信息方法

@@ -28,15 +28,14 @@ export default {
     return {
       loadingActive: false,
       resetForm: true,
-      vmI18n: window.vmI18n,
       eventGather: BurgeonEvent,
       errThData: [
         {
-          title: window.vmI18n.t('form_label.chargebackNumber'), // 退单编号
+          title: $i18n.t('form_label.chargebackNumber'), // 退单编号
           key: 'id'
         },
         {
-          title: window.vmI18n.t('table_label.abnormalInfo'), // 异常信息
+          title: $i18n.t('table_label.abnormalInfo'), // 异常信息
           key: 'error'
         }
       ],
@@ -47,7 +46,7 @@ export default {
       // 弹框配置
       changeRemarkConfig: {
         refFuns: 'confirmFun',
-        confirmTitle: window.vmI18n.t('modalTitle.modify_sellerNotes'), // 修改备注/修改卖家备注
+        confirmTitle: $i18n.t('modalTitle.modify_sellerNotes'), // 修改备注/修改卖家备注
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
@@ -65,7 +64,7 @@ export default {
       // 修改退回仓库
       modifyWarehouse: {
         refFuns: 'confirmFun',
-        confirmTitle: window.vmI18n.t('modalTitle.modify_returnWarehouse'), // 修改退货仓库
+        confirmTitle: $i18n.t('modalTitle.modify_returnWarehouse'), // 修改退货仓库
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
@@ -82,7 +81,7 @@ export default {
       },
       modifyReturnOrderLogistics: {
         refFuns: 'confirmFun',
-        confirmTitle: window.vmI18n.t('modalTitle.modify_logisticsCompany'), // 修改物流公司
+        confirmTitle: $i18n.t('modalTitle.modify_logisticsCompany'), // 修改物流公司
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
@@ -100,7 +99,7 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: window.vmI18n.t('btn.import'), // 导入
+        confirmTitle: $i18n.t('btn.import'), // 导入
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -129,27 +128,27 @@ export default {
       }, // form表单
       labelList: [
         {
-          label: window.vmI18n.t('panel_label.all'), // 全部
+          label: $i18n.t('panel_label.all'), // 全部
           value: '',
           isShow: true
         },
         {
-          label: window.vmI18n.t('form_label.waitFor_return_warehous'), // 等待退货入库
+          label: $i18n.t('form_label.waitFor_return_warehous'), // 等待退货入库
           value: '20',
           isShow: true
         },
         {
-          label: window.vmI18n.t('form_label.waitFor_afterSale_confirm'), // 等待售后确认
+          label: $i18n.t('form_label.waitFor_afterSale_confirm'), // 等待售后确认
           value: '30',
           isShow: true
         },
         {
-          label: window.vmI18n.t('form_label.complete'), // 完成
+          label: $i18n.t('form_label.complete'), // 完成
           value: '50',
           isShow: true
         },
         {
-          label: window.vmI18n.t('common.cancel'), // 取消
+          label: $i18n.t('common.cancel'), // 取消
           value: '60',
           isShow: true
         }
@@ -186,7 +185,7 @@ export default {
                       type: 'C',
                       customizedModuleName: 'orderManageDetail',
                       customizedModuleId: res.data.data,
-                      label: window.vmI18n.t('panel_label.retailInvoice_details')
+                      label: $i18n.t('panel_label.retailInvoice_details')
                     });
                   } else {
                     self.$Message.warning(res.data.message);
@@ -221,14 +220,14 @@ export default {
               const goodsThead = [
                 {
                   key: 'id',
-                  title: window.vmI18n.t('table_label.code') // 编号
+                  title: $i18n.t('table_label.code') // 编号
                 },
                 {
                   key: 'return',
-                  title: window.vmI18n.t('table_label.returnGoods') // 退换货
+                  title: $i18n.t('table_label.returnGoods') // 退换货
                 },
                 {
-                  title: window.vmI18n.t('table_label.articleNumber'), // 货号
+                  title: $i18n.t('table_label.articleNumber'), // 货号
                   key: 'ps_c_pro_ecode'
                 },
                 // {
@@ -236,23 +235,23 @@ export default {
                 //   key: "sku_spec"
                 // },
                 {
-                  title: window.vmI18n.t('other.color'), // 颜色
+                  title: $i18n.t('other.color'), // 颜色
                   key: 'ps_c_clr_ename'
                 },
                 {
-                  title: window.vmI18n.t('other.sizes'), // 尺寸
+                  title: $i18n.t('other.sizes'), // 尺寸
                   key: 'ps_c_size_ename'
                 },
                 {
-                  title: window.vmI18n.t('form_label.refundAmount'), // 退款金额
+                  title: $i18n.t('form_label.refundAmount'), // 退款金额
                   key: 'refund_amt'
                 },
                 {
-                  title: window.vmI18n.t('table_label.appleNumber'), // 申请数量
+                  title: $i18n.t('table_label.appleNumber'), // 申请数量
                   key: 'qty_refund'
                 },
                 {
-                  title: window.vmI18n.t('table_label.storageQuantity'), // 入库数量
+                  title: $i18n.t('table_label.storageQuantity'), // 入库数量
                   key: 'qty_in'
                 }
               ]; // 浮框表头
@@ -562,7 +561,7 @@ export default {
       _this.formConfig.formValue.RECEIVE_PROVINCE_ID = '';
       _this.formConfig.formData.forEach(item => {
         // '原始订单编号'
-        if (item.itemdata?.name == window.vmI18n.t('form_label.originalOrderNo')) {
+        if (item.itemdata?.name == $i18n.t('form_label.originalOrderNo')) {
           _this.formConfig.formValue.ORIG_ORDER_ID = item.itemdata.valuedata;
         }
       });

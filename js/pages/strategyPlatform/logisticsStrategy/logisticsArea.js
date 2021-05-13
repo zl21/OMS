@@ -17,7 +17,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       warningModal: false,
       loading: false,
       tableLoading: false,
@@ -25,7 +24,7 @@ export default {
       importTable: {
         refFuns: 'confirmFun',
         // confirmTitle: '导入',
-        confirmTitle: window.vmI18n.t('modalTitle.import'),
+        confirmTitle: $i18n.t('modalTitle.import'),
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '652',
         scrollable: false, // 是否可以滚动
@@ -46,7 +45,7 @@ export default {
         buttons: [
           {
             // text: '保存',
-            text: window.vmI18n.t('btn.save'), // 按钮文本
+            text: $i18n.t('btn.save'), // 按钮文本
             disabled: false,
             btnclick: () => {
               const _this = this;
@@ -55,7 +54,7 @@ export default {
           },
           {
             // text: '作废',
-            text: window.vmI18n.t('btn.void'), // 按钮文本
+            text: $i18n.t('btn.void'), // 按钮文本
             disabled: false,
             btnclick: () => {
               const _this = this;
@@ -64,7 +63,7 @@ export default {
           },
           {
             // text: '导入',
-            text: window.vmI18n.t('btn.import'), // 按钮文本
+            text: $i18n.t('btn.import'), // 按钮文本
             disabled: false,
             btnclick: () => {
               const _this = this;
@@ -78,7 +77,7 @@ export default {
           },
           {
             // text: '导出',
-            text: window.vmI18n.t('btn.export'), // 按钮文本
+            text: $i18n.t('btn.export'), // 按钮文本
             disabled: false,
             btnclick: () => {
               const _this = this;
@@ -87,7 +86,7 @@ export default {
           },
           {
             // text: '刷新',
-            text: window.vmI18n.t('btn.refresh'), // 按钮文本
+            text: $i18n.t('btn.refresh'), // 按钮文本
             btnclick: () => {
               const _this = this;
               _this.getTree('', this._objid);
@@ -95,14 +94,14 @@ export default {
           },
           {
             // text: '返回',
-            text: window.vmI18n.t('btn.back'), // 按钮文本
+            text: $i18n.t('btn.back'), // 按钮文本
             btnclick: () => {
               this.$comUtils.tabCloseAppoint(this);
               R3.store.commit('global/tabOpen', {
                 type: 'S',
                 tableId: 24639,
                 tableName: 'ST_C_EXPRESS_AREA',
-                label: window.vmI18n.t('panel_label.logisticsAreaSetting'), // label: '物流区域设置',
+                label: $i18n.t('panel_label.logisticsAreaSetting'), // label: '物流区域设置',
                 back: true
               });
             }
@@ -131,7 +130,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: window.vmI18n.t('form_label.logisticsCompany'), // 物流公司
+              name: $i18n.t('form_label.logisticsCompany'), // 物流公司
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               reftableid: 24411, // 对应的表ID
@@ -144,7 +143,7 @@ export default {
           {
             style: 'input',
             // label: '备注',
-            label: window.vmI18n.t('table_label.remarks'),
+            label: $i18n.t('table_label.remarks'),
             value: 'REMARK',
             width: '6'
           }
@@ -156,7 +155,7 @@ export default {
       labelList: [
         {
           // label: '区域明细',
-          label: window.vmI18n.t('form_label.region_details'),
+          label: $i18n.t('form_label.region_details'),
           value: '1',
           isShow: true
         }
@@ -193,12 +192,12 @@ export default {
     async save() {
       const _this = this;
       if (_this.information.formData[0].itemdata.pid === undefined || !_this.information.formData[0].itemdata.pid) {
-        _this.$Message.warning(window.vmI18n.t('modalTips.em'));
+        _this.$Message.warning($i18n.t('modalTips.em'));
         return;
       }
       // if (_this.tableSize > 1000) return _this.$Message.error('数量过大，请使用导入功能设置是否到达');
       if (_this.tableSize > 1000) {
-        _this.$Message.error(this.vmI18n.t('modalTips.y3'));
+        _this.$Message.error($i18n.t('modalTips.y3'));
         return;
       }
       _this.dataArr.forEach(item => {
@@ -238,15 +237,15 @@ export default {
           id: data.objid, // 单据id
           type: 'action', // 类型action
           name: 'logisticsArea', // 文件名
-          label: _this.vmI18n.t('panel_label.logisticsAreaSetting'), // 物流区域设置
+          label: $i18n.t('panel_label.logisticsAreaSetting'), // 物流区域设置
           query: Object.assign({
             id: data.objid, // 单据id
-            tabTitle: _this.vmI18n.t('panel_label.logisticsAreaSetting') // 物流区域设置
+            tabTitle: $i18n.t('panel_label.logisticsAreaSetting') // 物流区域设置
           }) // 带的参数
         });
         this.synchronous();
       } else {
-        const err = message || _this.vmI18n.t('modalTips.y0'); // '保存失败';
+        const err = message || $i18n.t('modalTips.y0'); // '保存失败';
         _this.$Message.error(err);
         this.synchronous();
       }
@@ -266,11 +265,11 @@ export default {
       console.log(code, message, data);
       _this.loading = false;
       if (code === 0) {
-        const ess = message || _this.vmI18n.t('modalTips.y4'); // 作废成功
+        const ess = message || $i18n.t('modalTips.y4'); // 作废成功
         _this.getTree('', _this._objid);
         _this.$Message.success(ess);
       } else {
-        const err = message || _this.vmI18n.t('modalTips.y5'); // 作废失败
+        const err = message || $i18n.t('modalTips.y5'); // 作废失败
         _this.$Message.error(err);
       }
     },
@@ -303,7 +302,7 @@ export default {
         });
         if (data.expressArea.ISACTIVE === 'N') {
           _this.statusName = '已作废';
-          const btnTxetArr = [_this.vmI18n.t('btn.save'), _this.vmI18n.t('btn.void'), _this.vmI18n.t('btn.import'), _this.vmI18n.t('btn.export'), _this.vmI18n.t('btn.refresh')];
+          const btnTxetArr = [$i18n.t('btn.save'), $i18n.t('btn.void'), $i18n.t('btn.import'), $i18n.t('btn.export'), $i18n.t('btn.refresh')];
           _this.btnConfig.buttons.forEach(item => {
             // ['保存', '作废', '导入', '导出', '刷新']
             if (btnTxetArr.includes(item.text)) {
@@ -405,7 +404,7 @@ export default {
           }
         });
       } else {
-        // _this.$Message.error(message || _this.vmI18n.t('modalTips.z3')); // 失败
+        // _this.$Message.error(message || $i18n.t('modalTips.z3')); // 失败
       }
     },
     // 同步table数据
@@ -512,11 +511,11 @@ export default {
       } = await this.service.strategyPlatform.exportExpressAreaItem(param);
       console.log(code, message, data);
       if (code === 0) {
-        const ess = message || _this.vmI18n.t('modalTips.z2'); // 导出成功
+        const ess = message || $i18n.t('modalTips.z2'); // 导出成功
         _this.$Message.success(ess);
         publicMethodsUtil.downloadUrlFile(data);
       } else {
-        // const err = message || _this.vmI18n.t('modalTips.y6'); // 导出失败
+        // const err = message || $i18n.t('modalTips.y6'); // 导出失败
         // _this.$Message.success(err);
         publicMethodsUtil.downloadUrlFile(data);
       }

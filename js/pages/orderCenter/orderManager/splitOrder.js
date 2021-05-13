@@ -95,45 +95,44 @@ export default {
         ],
         "message":"初始化查询接口查询成功!"
       }},
-      vmI18n: window.vmI18n,
       btnConfig: {
         typeAll: 'default',
         buttons: [
           {
-            text: window.vmI18n.t('btn.refresh'), // text: '刷新',
+            text: $i18n.t('btn.refresh'), // text: '刷新',
             btnclick: () => {
               if (this.canFresh) {
                 this.$Modal.confirm({
-                  title: window.vmI18n.t('modalTitle.tips'), // title:'提示',
-                  content: window.vmI18n.t('modalTips.ch'), // content:'当前操作未确认拆单，是否确认刷新？'
+                  title: $i18n.t('modalTitle.tips'), // title:'提示',
+                  content: $i18n.t('modalTips.ch'), // content:'当前操作未确认拆单，是否确认刷新？'
                   titleAlign: 'center',
                   mask: true, // 显示蒙层
                   draggable: true, // 拖拽
                   closable: true, // 右上角小叉
                   showCancel: true,
                   okText: '确认',
-                  // okText: window.vmI18n.t('modalTips.ch'),
-                  cancelText: window.vmI18n.t('common.cancel'), // 取消
+                  // okText: $i18n.t('modalTips.ch'),
+                  cancelText: $i18n.t('common.cancel'), // 取消
                   onOk: ()=> {
                     this.getData();
                   },
                 });
               } else {
-                this.$Message.warning(window.vmI18n.t('modalTips.ci')); // 已是原始状态，不执行操作!
+                this.$Message.warning($i18n.t('modalTips.ci')); // 已是原始状态，不执行操作!
               }
             },
           },
           {
-            text: window.vmI18n.t('btn.back'), // 返回
+            text: $i18n.t('btn.back'), // 返回
             btnclick: this.back,
           },
           {
-            text: window.vmI18n.t('btn.add_splitOrder'), // 添加到待拆单
+            text: $i18n.t('btn.add_splitOrder'), // 添加到待拆单
             btnclick: this.addPendingOrder,
             // icon: 'ios-add-circle-outline',
           },
           {
-            text: window.vmI18n.t('btn.confirm_splitOrder'), // 确认拆单
+            text: $i18n.t('btn.confirm_splitOrder'), // 确认拆单
             btnclick: this.confirm,
             // icon: 'ios-photos-outline',
           },
@@ -145,17 +144,17 @@ export default {
           type: 'selection'
         },
         {
-          title: window.vmI18n.t('table_label.whetherGift'), // 是否赠品
+          title: $i18n.t('table_label.whetherGift'), // 是否赠品
           key: 'is_gift_name',
           draggable:true
         },
         {
-          title: window.vmI18n.t('table_label.commoditySKU'), // 商品SKU
+          title: $i18n.t('table_label.commoditySKU'), // 商品SKU
           key: 'ps_c_sku_ecode',
           draggable:true
         },
         {
-          title: window.vmI18n.t('table_label.productName'), // 商品名称
+          title: $i18n.t('table_label.productName'), // 商品名称
           key: 'ps_c_pro_ename',
           draggable:true
         },
@@ -164,17 +163,17 @@ export default {
         //   key: 'ps_c_clr_ename'
         // },
         {
-          title: window.vmI18n.t('table_label.productSKUname'), // 商品SKU名称
+          title: $i18n.t('table_label.productSKUname'), // 商品SKU名称
           key: 'ps_c_sku_ename',
           draggable:true
         },
         {
-          title: window.vmI18n.t('table_label.original_deliveryWarehouse'), // 原发货仓库
+          title: $i18n.t('table_label.original_deliveryWarehouse'), // 原发货仓库
           key: 'cp_c_phy_warehouse_ename',
           draggable:true
         },
         {
-          title: window.vmI18n.t('table_label.suggested_deliveryWarehouse'), // 建议发货仓库
+          title: $i18n.t('table_label.suggested_deliveryWarehouse'), // 建议发货仓库
           key: 'advise_phy_warehouse_id',
           draggable:true,
           render: (h, params) => {
@@ -223,22 +222,22 @@ export default {
           }
         },
         {
-          title: window.vmI18n.t('form_label.purchaseQuantity'), // 购买数量
+          title: $i18n.t('form_label.purchaseQuantity'), // 购买数量
           key: 'qty',
           draggable:true
         },
         {
-          title: window.vmI18n.t('table_label.quantity_availableSale'), // 可售数量
+          title: $i18n.t('table_label.quantity_availableSale'), // 可售数量
           key: 'total_qty_available',
           draggable:true
         },
         {
-          title: window.vmI18n.t('table_label.quantity_demolished'), // 待拆数量
+          title: $i18n.t('table_label.quantity_demolished'), // 待拆数量
           key: 'waiting_split_num',
           draggable:true
         },
         {
-          title: window.vmI18n.t('table_label.quantity_split'), // 拆分数量
+          title: $i18n.t('table_label.quantity_split'), // 拆分数量
           key: 'split_num',
           draggable:true,
           width: 100,
@@ -256,7 +255,7 @@ export default {
                     // this.canFresh = params.row.split_num != value.target.value;
                     params.row.split_num = value.target.value;
                     if (params.row.waiting_split_num - value.target.value < 0) {
-                      this.$Message.warning(window.vmI18n.t('modalTips.cj')); // 拆分数量不能大于待拆数量；不进行拆单
+                      this.$Message.warning($i18n.t('modalTips.cj')); // 拆分数量不能大于待拆数量；不进行拆单
                       this.$nextTick(() => {
                         params.row.split_num = params.row.waiting_split_num;
                         this.data[0][params.index] = params.row;
@@ -306,7 +305,7 @@ export default {
         id: 2307,
         type: 'action',
         name: 'orderManager',
-        label: window.vmI18n.t('panel_label.retail_shipping_order'), // label: '零售发货单',
+        label: $i18n.t('panel_label.retail_shipping_order'), // label: '零售发货单',
         back: true,
         query: {} // row.id
       });
@@ -322,7 +321,6 @@ export default {
       let total = 0;
       if (res.data.code === 0) {
         self.data = [];
-        res.data.data = JSON.parse(res.data.data)
         if (!res.data.data) return;
         self.old_cp_c_phy_warehouse_ename = res.data.data[0].cp_c_phy_warehouse_ename;
         res.data.data.forEach(item => {
@@ -336,7 +334,7 @@ export default {
         self.data.push(res.data.data);
         self.switchList(0);
       } else {
-        self.$Message.error(window.vmI18n.t('modalTips.ck')); // 查询失败
+        self.$Message.error($i18n.t('modalTips.ck')); // 查询失败
       }
     },
     onSelect(selection) {
@@ -357,11 +355,11 @@ export default {
       let flag = true;
       let isIndex = true; // 主仓库第一条total是否已重置为0;
       if (self.onSelectData.length === 0) {
-        self.$Message.warning(window.vmI18n.t('modalTips.cl')); // 请选择需要拆分的明细
+        self.$Message.warning($i18n.t('modalTips.cl')); // 请选择需要拆分的明细
         return;
       }
       if ((self.data[0].length == 1 && self.data[0][0].split_num >= self.data[0][0].waiting_split_num) || self.data[0][0].total <= 1) {
-        self.$Message.warning(window.vmI18n.t('modalTips.cm')); // 没有可拆分的订单
+        self.$Message.warning($i18n.t('modalTips.cm')); // 没有可拆分的订单
         return;
       }
       self.onSelectData.forEach(item => {
@@ -370,7 +368,7 @@ export default {
         }
       });
       if (!flag) {
-        self.$Message.warning(window.vmI18n.t('modalTips.cn')); // 拆分数量不能为0
+        self.$Message.warning($i18n.t('modalTips.cn')); // 拆分数量不能为0
         return;
       }
       self.onSelectData[0].total = 0;
@@ -415,7 +413,7 @@ export default {
     async confirm() {
       const self = this;
       if (self.data.length <= 1) {
-        self.$Message.warning(window.vmI18n.t('modalTips.co')); // 请先选择拆单明细添加到待拆单，再进行拆单
+        self.$Message.warning($i18n.t('modalTips.co')); // 请先选择拆单明细添加到待拆单，再进行拆单
         return;
       }
       const { data: { code, message } } = await this.service.orderCenter.saveSplitOrderInfo({ data: self.data });

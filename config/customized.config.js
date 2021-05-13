@@ -1,3 +1,4 @@
+import InitAppConfig from './config/init.config.js' // 首位引入
 import customizedModal from './config/customized.modal.config.js'
 import customizedPage from './config/customized.page.config.js'
 import customizedExternalTreeDatas from './config/externalTreeDatas.config.js'
@@ -11,235 +12,215 @@ import orderLogo from './config/orderLogo.js'
 import importTableConfig from './config/importTable.config.js'
 import downLoadAllConfig from '@/js/modal/interfacePlatform/config/downLoadAll.Config.js'
 import oldConfig from './config/globalComponent.config.js'
-import InitAppConfig from './config/init.config.js'
+
 import commonUtils from './config/commonUtils.js'
 import funBtn from './config/funBtn.config.js'
 import dropDownBtn from './config/dropDown.config.js'
-import subTableConfig from '../js/pages/orderCenter/orderManageDetail/details/config.js'
 import Vue from 'vue';
 
-const _customizedModal = Symbol('customizedModal');
-const _customizedPage = Symbol('customizedPage');
-const _customizedExternalTreeDatas = Symbol('customizedExternalTreeDatas');
-const _customizedService = Symbol('customizedService');
-const _customizeWaterMarkConfig = Symbol('customizeWaterMarkConfig');
-const _filterUrlConfig = Symbol('filterUrlConfig');
-const _filterUrlForNetworkSc = Symbol('filterUrlForNetworkSc');
-const _orderDetailConnector = Symbol('orderDetailConnector');
-const _labelList = Symbol('labelList');
-const _orderLogo = Symbol('orderLogo');
-const _importTableConfig = Symbol('importTableConfig');
-const _downLoadAllConfig = Symbol('downLoadAllConfig');
-
-const _cusGlobalComponent = Symbol('cusGlobalComponent');
-const _cusImage = Symbol('cusImage');
-const _commonUtils = Symbol('commonUtils');
-const _funBtn = Symbol('funBtn');
-const _dropDownBtn = Symbol('dropDownBtn');
-const _subTableConfig = Symbol('subTableConfig');
-
 class CustomizedConfig {
+	static #customizedModal = customizedModal;
+	static #customizedPage = customizedPage;
+	static #customizedExternalTreeDatas = customizedExternalTreeDatas;
+	static #customizedService = customizedService;
+	static #customizeWaterMarkConfig = customizeWaterMarkConfig;
+	static #filterUrlConfig = filterUrlConfig;
+	static #filterUrlForNetworkSc = filterUrlForNetworkSc;
+	static #orderDetailConnector = orderDetailConnector;
+	static #labelList = labelList;
+	static #orderLogo = orderLogo;
+	static #importTableConfig = importTableConfig;
+	static #downLoadAllConfig = downLoadAllConfig;
+	static #cusGlobalComponent = oldConfig.cusGlobalComponent;
+	static #cusImage = oldConfig.cusImage;
+
+	/* 初始化项目的配置项，用于挂载 */
+	static #commonUtils = commonUtils;
+	static #funBtn = funBtn;
+	static #dropDownBtn = dropDownBtn;
 	/* ------------ 挂载项 start ------------- */
 	static get omsUtils() {
-		return CustomizedConfig['_commonUtils'];
+		return this.#commonUtils;
 	}
 	static get BtnConfig() {
-		return CustomizedConfig['_funBtn'];
+		return this.#funBtn;
 	}
 	static get dropDownBtn() {
-		return  CustomizedConfig['_dropDownBtn'];
+		return this.#dropDownBtn;
 	}
 	/* ------------ 挂载项 end ------------- */
 
 	constructor() {
-		this.initConfig = new InitAppConfig();
-		console.log('hello CustomizedConfig');
+		// this.initConfig = new InitAppConfig();
+		// console.log('hello CustomizedConfig');
 	}
 
 	// R3.launchApplication.image配置
 	static get image() {
-		return CustomizedConfig['_cusImage'];
+		return this.#cusImage;
 	}
 	static editImage(configItem = {}) {
 		for (const key in configItem) {
-			CustomizedConfig['_cusImage'][key] = configItem[key];
+			this.#cusImage[key] = configItem[key];
 		}
-		return CustomizedConfig['_cusImage']
+		return this.#cusImage
 	}
 
 	// R3.launchApplication.globalComponent配置
 	static get globalComponent() {
-		return CustomizedConfig['_cusGlobalComponent'];
+		return this.#cusGlobalComponent;
 	}
 	static editGlobalComponent(configItem = {}) {
 		for (const key in configItem) {
-			CustomizedConfig['_cusGlobalComponent'][key] = configItem[key];
+			this.#cusGlobalComponent[key] = configItem[key];
 		}
-		return CustomizedConfig['_cusGlobalComponent']
-	}
-
-	// subTable组件的配置项
-	static get subTableConfig() {
-		return CustomizedConfig['_subTableConfig'];
-	}
-	static editSubTableConfig(configItem = {}) {
-		for (const centerKey in configItem) {
-			if (!Object.keys(configItem[centerKey])) return
-			for (const key in configItem[centerKey]) {
-				if (CustomizedConfig['_subTableConfig'][centerKey]) {
-					CustomizedConfig['_subTableConfig'][centerKey][key] = configItem[centerKey][key];
-				} else {
-					CustomizedConfig['_subTableConfig'][centerKey] = configItem[centerKey];
-				}
-			}
-		}
-		return CustomizedConfig['_subTableConfig']
+		return this.#cusGlobalComponent
 	}
 
 	// downLoadAll组件的配置项
 	static get cusDownLoadAllConfig() {
-		return CustomizedConfig['_downLoadAllConfig'];
+		return this.#downLoadAllConfig;
 	}
 	static editDownLoadAllConfig(configItem = {}) {
 		for (const key in configItem) {
-			CustomizedConfig['_downLoadAllConfig'][key] = configItem[key];
+			this.#downLoadAllConfig[key] = configItem[key];
 		}
-		return CustomizedConfig['_downLoadAllConfig']
+		return this.#downLoadAllConfig
 	}
 
 	// 定制弹窗配置项
 	static get cusModalConfig() {
-		return CustomizedConfig['_customizedModal'];
+		return this.#customizedModal;
 	}
 	static editCusModalConfig(configItem = {}) {
 		for (const key in configItem) {
-			CustomizedConfig['_customizedModal'][key] = configItem[key];
+			this.#customizedModal[key] = configItem[key];
 		}
-		return CustomizedConfig['_customizedModal']
+		return this.#customizedModal
 	}
 
 	// 定制页面配置项
 	static get cusPageConfig() {
-		return CustomizedConfig['_customizedPage'];
+		return this.#customizedPage;
 	}
 	static editCusPageConfig(configItem = {}) {
 		if (!Object.keys(configItem)) return
 		for (const key in configItem) {
-			CustomizedConfig['_customizedPage'][key] = configItem[key];
+			this.#customizedPage[key] = configItem[key];
 		}
-		return CustomizedConfig['_customizedPage']
+		return this.#customizedPage
 	}
 
 	// 树结构配置项
 	static get cusExternalTreeDatas() {
-		return CustomizedConfig['_customizedExternalTreeDatas'];
+		return this.#customizedExternalTreeDatas;
 	}
 	static editCusExternalTreeDatas(configItem = {}) {
 		for (const key in configItem) {
-			CustomizedConfig['_customizedExternalTreeDatas'][key] = configItem[key];
+			this.#customizedExternalTreeDatas[key] = configItem[key];
 		}
-		return CustomizedConfig['_customizedExternalTreeDatas'];
+		return this.#customizedExternalTreeDatas
 	}
 
 	// 接口配置项
 	static get cusService() {
-		return CustomizedConfig['_customizedService'];
+		return this.#customizedService;
 	}
 	static editCusService(configItem = {}) {
 		for (const centerKey in configItem) {
 			if (!Object.keys(configItem[centerKey])) return
 			for (const apiKey in configItem[centerKey]) {
-				if (CustomizedConfig['_customizedService'][centerKey]) {
+				if (this.#customizedService[centerKey]) {
 					// 存在此中心则修改apiKey
-					CustomizedConfig['_customizedService'][centerKey][apiKey] = configItem[centerKey][apiKey];
+					this.#customizedService[centerKey][apiKey] = configItem[centerKey][apiKey];
 				} else {
 					// 不存在此中心则直接新增
-					CustomizedConfig['_customizedService'][centerKey] = configItem[centerKey];
+					this.#customizedService[centerKey] = configItem[centerKey];
 				}
 			}
 		}
-		return CustomizedConfig['_customizedService']
+		return this.#customizedService
 	}
 
 	// 订单管理专用label配置项.[]
 	static get cusLabelList() {
-		return CustomizedConfig['_labelList'];
+		return this.#labelList;
 	}
 	static editCusLabelList(configItem = []) {
 		const compareLable = compareObjectFunction('label');
 		for (const x in configItem) {
-			for (const y in CustomizedConfig['_labelList']) {
-				if (compareLable(configItem[x], CustomizedConfig['_labelList'][y])) {
+			for (const y in this.#labelList) {
+				if (compareLable(configItem[x], this.#labelList[y])) {
 					// lable相同则替换
-					CustomizedConfig['_labelList'][y] = configItem[x]
+					this.#labelList[y] = configItem[x]
 				} else {
 					// 反之，新增
-					CustomizedConfig['_labelList'].push(configItem[x])
+					this.#labelList.push(configItem[x])
 				}
 			}
 		}
-		return CustomizedConfig['_labelList']
+		return this.#labelList
 	}
 
 	// orderLogo配置项
 	static get cusOrderLogo() {
-		return CustomizedConfig['_orderLogo'];
+		return this.#orderLogo;
 	}
 	static editCusOrderLogo(configItem = {}) {
 		for (const key in configItem) {
-			CustomizedConfig['_orderLogo'][key] = configItem[key];
+			this.#orderLogo[key] = configItem[key];
 		}
-		return CustomizedConfig['_orderLogo']
+		return this.#orderLogo
 	}
 
 	// 水印配置项
 	static get cusWaterMarkConfig() {
-		return CustomizedConfig['_customizeWaterMarkConfig'];
+		return this.#customizeWaterMarkConfig;
 	}
 	static editCusWaterMarkConfig(configItem = {}) {
 		for (const key in configItem) {
-			CustomizedConfig['_customizeWaterMarkConfig'][key] = configItem[key];
+			this.#customizeWaterMarkConfig[key] = configItem[key];
 		}
-		return CustomizedConfig['_customizeWaterMarkConfig']
+		return this.#customizeWaterMarkConfig
 	}
 
 	// 过滤报错接口配置项 的脚本（不提供修改）
 	static get filterUrlForNetworkScript() {
-		return CustomizedConfig['_filterUrlForNetworkSc'];
+		return this.#filterUrlForNetworkSc;
 	}
 
 	// 过滤报错接口配置项
 	static get cusFilterUrlConfig() {
-		return CustomizedConfig['_filterUrlConfig'];
+		return this.#filterUrlConfig;
 	}
 	static editCusFilterUrlConfig(configItem = {}) {
 		for (const key in configItem) {
-			CustomizedConfig['_filterUrlConfig'][key] = configItem[key];
+			this.#filterUrlConfig[key] = configItem[key];
 		}
-		return CustomizedConfig['_filterUrlConfig']
+		return this.#filterUrlConfig
 	}
 
 	// 订单详情-半定制-配置项
 	static get connector() {
-		return CustomizedConfig['_orderDetailConnector'];
+		return this.#orderDetailConnector;
 	}
 	static editConnector(configItem = {}) {
 		for (const key in configItem) {
-			CustomizedConfig['_orderDetailConnector'][key] = configItem[key];
+			this.#orderDetailConnector[key] = configItem[key];
 		}
-		return CustomizedConfig['_orderDetailConnector']
+		return this.#orderDetailConnector
 	}
 
 	// 导入接口、下载模板的模板地址（importTable.vue中需要的配置项）
 	static get cusImport() {
-		return CustomizedConfig['_importTableConfig'];
+		return this.#importTableConfig;
 	}
 	static editCusImport(configObj = {}) {
 		if (!Object.keys(configObj)) return
 		for (const tableWebnameKey in configObj) {
-			CustomizedConfig['_importTableConfig'][tableWebnameKey] = configObj[tableWebnameKey];
+			this.#importTableConfig[tableWebnameKey] = configObj[tableWebnameKey];
 		}
-		return CustomizedConfig['_importTableConfig']
+		return this.#importTableConfig
 	}
 
 	static editConfig(config, configItem = {}) {
@@ -291,28 +272,6 @@ function modifyObjectFunction(property, configObj = {}) {
 	}
 }
 
-CustomizedConfig['_subTableConfig'] = subTableConfig;
-CustomizedConfig['_customizedModal'] = customizedModal;
-CustomizedConfig['_customizedPage'] = customizedPage;
-CustomizedConfig['_customizedExternalTreeDatas'] = customizedExternalTreeDatas;
-CustomizedConfig['_customizedService'] = customizedService;
-CustomizedConfig['_customizeWaterMarkConfig'] = customizeWaterMarkConfig;
-CustomizedConfig['_filterUrlConfig'] = filterUrlConfig;
-CustomizedConfig['_filterUrlForNetworkSc'] = filterUrlForNetworkSc;
-CustomizedConfig['_orderDetailConnector'] = orderDetailConnector;
-CustomizedConfig['_labelList'] = labelList;
-CustomizedConfig['_orderLogo'] = orderLogo;
-CustomizedConfig['_importTableConfig'] = importTableConfig;
-CustomizedConfig['_downLoadAllConfig'] = downLoadAllConfig;
-CustomizedConfig['_cusGlobalComponent'] = oldConfig.cusGlobalComponent;
-CustomizedConfig['_cusImage'] = oldConfig.cusImage;
-
-/* 初始化项目的配置项，用于挂载 */
-CustomizedConfig['_commonUtils'] = commonUtils;
-CustomizedConfig['_funBtn'] = funBtn;
-CustomizedConfig['_dropDownBtn'] = dropDownBtn;
-Vue.prototype.$OMS2 = CustomizedConfig;
-
-console.log(new CustomizedConfig());
-console.clear();
+// console.log(new CustomizedConfig());
+// console.clear();
 export default CustomizedConfig;

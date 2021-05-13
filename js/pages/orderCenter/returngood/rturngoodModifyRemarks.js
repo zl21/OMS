@@ -55,7 +55,7 @@ export default {
       const self = this;
       if (!self.bouncedData.value) return;
       let cover = '';
-      if (self.bouncedData.animal === window.vmI18n.t("other.override_original_remarks")) { // '覆盖原备注'
+      if (self.bouncedData.animal === $i18n.t("other.override_original_remarks")) { // '覆盖原备注'
         cover = 'true';
       } else {
         cover = 'false';

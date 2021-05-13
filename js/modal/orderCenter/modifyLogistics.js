@@ -19,7 +19,6 @@ export default {
   computed: {},
   data() {
     return {
-      vmI18n: window.vmI18n,
       isClice: false, // 防抖标识
       zIndex: 2500,
       totalRowCount: 0,
@@ -30,7 +29,7 @@ export default {
       type: 'LOGISTICCOMPANY',
       pageNum: 1,
       // dataEmptyMessage: "数据加载中...", // 无数据的提示
-      dataEmptyMessage: window.vmI18n.t('modalTips.du'), // 无数据的提示
+      dataEmptyMessage: $i18n.t('modalTips.du'), // 无数据的提示
       columns: ['ename'], // 展现的组
       AutoData: [],
       foreignKeyLink: {},
@@ -41,7 +40,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [{
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -51,7 +50,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -109,7 +108,7 @@ export default {
         if (!self.expressCode) {
           self.$Message.warning({
             // content: "请选择物流单号",
-            content: window.vmI18n.t('modalTips.fn'),
+            content: $i18n.t('modalTips.fn'),
             duration: 5,
             top: 80,
           });
@@ -118,7 +117,7 @@ export default {
       } else if (!self.pid) {
         self.$Message.warning({
           // content: "请选择物流公司",
-          content: window.vmI18n.t('modalTips.ye'),
+          content: $i18n.t('modalTips.ye'),
           duration: 5,
           top: 80,
         });
@@ -144,7 +143,7 @@ export default {
             } else {
               self.$Modal.error({
                 // title: "提示",
-                title: window.vmI18n.t('modalTitle.tips'),
+                title: $i18n.t('modalTitle.tips'),
                 render: h => h('div', {}, [
                   h(
                     'p',
@@ -160,7 +159,7 @@ export default {
                       'disabled-hover': true,
                       'highlight-row': false,
                       // "no-data-text": "暂无数据",
-                      'no-data-text': window.vmI18n.t('other.noDataAvailable'),
+                      'no-data-text': $i18n.t('other.noDataAvailable'),
                       columns: res.data.data.columns,
                       data: res.data.data.prompt_data,
                     },
@@ -236,19 +235,19 @@ export default {
             {
               colname: 'ename',
               // name: "快递名称",
-              name: window.vmI18n.t('table_label.expressName'),
+              name: $i18n.t('table_label.expressName'),
               show: true,
             },
             {
               colname: 'ecode',
               // name: "快递编码",
-              name: window.vmI18n.t('table_label.expressCode'),
+              name: $i18n.t('table_label.expressCode'),
               show: false,
             },
             {
               colname: 'shortName',
               // name: "简称",
-              name: window.vmI18n.t('table_label.abbreviation'),
+              name: $i18n.t('table_label.abbreviation'),
               show: false,
             },
           ],

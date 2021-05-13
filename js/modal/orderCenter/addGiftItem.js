@@ -147,19 +147,21 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'),
+            disabled:false,
+            text: $i18n.t('common.cancel'),
             btnclick: () => {
-              this.$parent.$parent.closeConfirm()
+              this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('common.determine'),
-            loading: false,
+            text: $i18n.t('common.determine'),
+            disabled:false,
             btnclick: () => {
               if (!this.skuEcodes) {
                 this.$Message.warning("请选中操作的数据")
                 return
               }
+              this.btnConfig.buttons[1].disabled = true;
               if (this.type == 'add') {
                 this.saveOrderByPro() // 添加订单商品信息-确定添加
               } else if (this.type == 'del') {
@@ -205,9 +207,13 @@ export default {
         initNumber: this.formConfig.formValue.number,
       }
       this.service.orderCenter.saveOrderByPro(data).then((res) => {
+        setTimeout(() => {
+          this.btnConfig.buttons[1].disabled = false;
+        }, 5000);
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
-          this.$parent.$parent.closeConfirm()
+          this.$parent.$parent.closeConfirm();
+          this.$parent.$parent.$parent.$parent.$parent.getDetailsData()
         } else {
           this.$Modal.confirm({
             title: res.data.message,
@@ -220,7 +226,7 @@ export default {
                   props: {
                     columns: [
                       {
-                        title: window.vmI18n.t('modalTitle.a6'), // '提示信息',
+                        title: $i18n.t('modalTitle.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],
@@ -249,6 +255,9 @@ export default {
         orderList,
       }
       this.service.orderCenter.deleteOrderGoods(data).then((res) => {
+        setTimeout(() => {
+          this.btnConfig.buttons[1].disabled = false;
+        }, 5000);
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
           this.$parent.$parent.closeConfirm()
@@ -264,7 +273,7 @@ export default {
                   props: {
                     columns: [
                       {
-                        title: window.vmI18n.t('modalTitle.a6'), // '提示信息',
+                        title: $i18n.t('modalTitle.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],
@@ -293,6 +302,9 @@ export default {
         orderList,
       }
       this.service.orderCenter.parseOrderList(data).then((res) => {
+        setTimeout(() => {
+          this.btnConfig.buttons[1].disabled = false;
+        }, 5000);
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
           this.$parent.$parent.closeConfirm()
@@ -308,7 +320,7 @@ export default {
                   props: {
                     columns: [
                       {
-                        title: window.vmI18n.t('modalTitle.a6'), // '提示信息',
+                        title: $i18n.t('modalTitle.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],
@@ -343,13 +355,15 @@ export default {
     onRowDblclick() {},
     // 分页change 事件
     pageChange(val) {
+      console.log(val);
       this.tableConfig.current = val
-      // this.request(this.componentData);
+      this.searchGift()
     },
     // 切换分页条数
     pageSizeChange(val) {
+      console.log(val);
       this.tableConfig.pageSize = val
-      // this.request(this.componentData);
+      this.searchGift()
     },
     tableDeleteDetail() {},
     // 模糊搜索
@@ -384,15 +398,14 @@ export default {
     },
     // 搜索赠品
     searchGift() {
-      console.log(this.formConfig.formValue)
-      console.log('搜索赠品')
+   
       this.selectSkuProBySkuEcodeList()
     },
     // 提交
     async submit() {
-      const self = this
+      const self = this;
       if (!self.onRowData) {
-        self.$Message.error(window.vmI18n.t('modalTips.eg')) // '无赠品可添加！'
+        self.$Message.error($i18n.t('modalTips.eg')) // '无赠品可添加！'
         return
       }
       const ids = []
@@ -406,8 +419,8 @@ export default {
         data: { code, data, message },
       } = await this.service.orderCenter.batchAddGoods(param)
       if (code === 0) {
-        self.$Message.success(message)
-        self.$parent.$parent.$parent.$parent.autoRefresh()
+        self.$Message.success(message);
+        self.$parent.$parent.$parent.$parent.autoRefresh();
         self.$parent.$parent.closeConfirm()
         this.btnConfig.buttons[0].loading = false
       } else {
@@ -423,7 +436,7 @@ export default {
                   props: {
                     columns: [
                       {
-                        title: window.vmI18n.t('modalTitle.a6'), // '提示信息',
+                        title: $i18n.t('modalTitle.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],
@@ -436,6 +449,9 @@ export default {
           })
         }
       }
+      setTimeout(() => {
+        this.btnConfig.buttons[1].disabled = false;
+      }, 5000);
       this.$comUtils.setLoading()
     },
     // 回车
@@ -449,8 +465,8 @@ export default {
         skuEcode: this.formConfig.formValue.SKU_CODE,
         spuEcode: this.formConfig.formValue.SPU_CODE,
         spuEname: this.formConfig.formValue.SPU_NAE,
-        size: 10,
-        current: 1,
+        size: this.tableConfig.pageSize,
+        current: this.tableConfig.current,
       }
      
       if (this.type == 'replace') {

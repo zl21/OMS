@@ -29,7 +29,7 @@ export default {
         formData: [
           {
             style: 'select',
-            label: window.vmI18n.t('form_label.order_time'), // '订单时间',
+            label: $i18n.t('form_label.order_time'), // '订单时间',
             width: '24',
             value: 'DAY_TYPE',
             clearable: false,
@@ -38,7 +38,7 @@ export default {
           }, {
             style: 'date',
             type: 'datetime',
-            label: window.vmI18n.t('form_label.startTime'), // '开始时间',
+            label: $i18n.t('form_label.startTime'), // '开始时间',
             width: '24',
             format: 'yyyy-MM-dd HH:mm:ss',
             value: 'BEGIN_TIME',
@@ -47,7 +47,7 @@ export default {
           }, {
             style: 'date',
             type: 'datetime',
-            label: window.vmI18n.t('form_label.endTime'), // '结束时间',
+            label: $i18n.t('form_label.endTime'), // '结束时间',
             width: '24',
             format: 'yyyy-MM-dd HH:mm:ss',
             value: 'END_TIME',
@@ -60,12 +60,12 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
               this.$emit('closeActionDialog');
             } // 按钮点击事件
           }, {
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             btnclick: () => {
               this.confirmChange();
             }
@@ -88,7 +88,7 @@ export default {
       table: this.$route.params.tableName
     };
     // let timeType = '1'
-    const item = tableInfo.formItems.defaultFormItemsLists.find(item => item.coldesc === window.vmI18n.t('form_label.order_time'));
+    const item = tableInfo.formItems.defaultFormItemsLists.find(item => item.coldesc === $i18n.t('form_label.order_time'));
     this.formConfig.formData[0].options = item.combobox.map(val => {
       if (tableInfo.buttons.selectArr[0].DAY_TYPE.val === val.limitdesc) this.formConfig.formValue.DAY_TYPE = val.limitval;
       return {
@@ -112,7 +112,7 @@ export default {
         const res = await this.service.strategyPlatform.holdOrderUpdateStrategyEndTime(fromdata);
         this.$comUtils.setLoading();
         if (res.data.data.code === 0) {
-          this.$Message.success(window.vmI18n.t('modalTips.eo')); // '调整策略时间成功'
+          this.$Message.success($i18n.t('modalTips.eo')); // '调整策略时间成功'
           this.$emit('confirmImport');
           this.$emit('closeActionDialog');
         }

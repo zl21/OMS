@@ -18,7 +18,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       subTableConfig: {
         centerName: '',
         tablename: '',
@@ -46,7 +45,7 @@ export default {
           },
         },
         {
-          text: window.vmI18n.t('btn.back'),
+          text: $i18n.t('btn.back'),
           btnclick: () => {
             this.back();
           },
@@ -628,12 +627,12 @@ export default {
       const masterArr = Object.keys(self.modify.master);
       if (masterArr.length) {
         this.$Modal.info({
-          title: self.vmI18n.t('modalTitle.tips'), // 提示
+          title: $i18n.t('modalTitle.tips'), // 提示
           content: '当前修改未保存，确定返回？',
           mask: true,
           showCancel: true,
-          okText: self.vmI18n.t('common.determine'), // 确定
-          cancelText: self.vmI18n.t('common.cancel'), // 取消
+          okText: $i18n.t('common.determine'), // 确定
+          cancelText: $i18n.t('common.cancel'), // 取消
           onOk: () => {
             self.onOk();
           },

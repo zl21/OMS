@@ -9,7 +9,6 @@ export default {
   name: 'generateSalesOrder',
   data() {
     return {
-      vmI18n: window.vmI18n,
       type: '', // 月结:month 进度: progress
       generateFormConfig: {
         formValue: {
@@ -20,7 +19,7 @@ export default {
         formData: [
           {
             style: 'select', // 下拉框类型
-            label: window.vmI18n.t('form_label.supplierID'), // 供应商ID 下拉框前的值
+            label: $i18n.t('form_label.supplierID'), // 供应商ID 下拉框前的值
             width: '24', // 所占宽度宽度
             value: 'vendorId', // 输入框的值
             multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启
@@ -35,7 +34,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: window.vmI18n.t('other.billCode'), // 账单编码 下拉框前的值
+            label: $i18n.t('other.billCode'), // 账单编码 下拉框前的值
             width: '24', // 所占宽度宽度
             value: 'billNumber', // 输入框的值
             multiple: false,
@@ -53,7 +52,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            text: $i18n.t('common.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -63,7 +62,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('btn.generate'), // 生成 按钮文本
+            text: $i18n.t('btn.generate'), // 生成 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -123,12 +122,12 @@ export default {
       const formValue = this.generateFormConfig.formValue;
       if (!formValue.vendorId) {
         // 供应商ID不能为空!
-        this.$Message.warning(this.vmI18n.t('modalTips.bl'));
+        this.$Message.warning($i18n.t('modalTips.bl'));
         return false;
       }
       if (!formValue.billNumber) {
         // 账单编码不能为空!
-        this.$Message.warning(this.vmI18n.t('modalTips.bm'));
+        this.$Message.warning($i18n.t('modalTips.bm'));
         return false;
       }
       const params = {

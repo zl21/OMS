@@ -108,7 +108,6 @@ export default {
   data() {
     return {
       loading:false,
-      vmI18n: window.vmI18n,
       modal: false, // 查看日志弹框
       loadings: false, // 下拉框默认loadings值
       release_name: '', // 操作人
@@ -125,24 +124,24 @@ export default {
         columns: [
           {
             // title: "序号",
-            title: window.vmI18n.t('table_label.serialNo'),
+            title: $i18n.t('table_label.serialNo'),
             type: 'index',
             width: 60,
             align: 'center'
           },
           {
             // title: "操作时间",
-            title: window.vmI18n.t('table_label.operatorTime'),
+            title: $i18n.t('table_label.operatorTime'),
             key: 'creationdate'
           },
           {
             // title: "操作人",
-            title: window.vmI18n.t('form_label.operator'),
+            title: $i18n.t('form_label.operator'),
             key: 'operator'
           },
           {
             // title: "操作描述",
-            title: window.vmI18n.t('table_label.operation_description'),
+            title: $i18n.t('table_label.operation_description'),
             key: 'describes'
           }
         ],
@@ -163,7 +162,7 @@ export default {
           isnotnull: false, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: window.vmI18n.t('table_label.shopName'), // 店铺名称 input前面显示的lable值
+          name: $i18n.t('table_label.shopName'), // 店铺名称 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_SHOP', // 对应的表
           // reftableid: 24475, //对应的表ID
@@ -187,7 +186,7 @@ export default {
           isnotnull: false, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: window.vmI18n.t('form_label.offline_stores'), // 线下门店 input前面显示的lable值
+          name: $i18n.t('form_label.offline_stores'), // 线下门店 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_RSTORE', // 对应的表
           // reftableid: 23296, //对应的表ID
@@ -199,7 +198,7 @@ export default {
       },
       dataError: {
         show: false, // 控制警告弹框显示
-        title: window.vmI18n.t('modalTitle.error'), // 错误 弹框标题
+        title: $i18n.t('modalTitle.error'), // 错误 弹框标题
         type: 'warning', // 类型警告
         backBtn: true, // 是否显示返回按钮
         errorList: [{ message: '确定执行下线操作？' }] // 提示内容
@@ -222,7 +221,7 @@ export default {
           cusurl: 'custompage/matrix',
           display: 'text',
           // name: "商品编码",
-          name: window.vmI18n.t('table_label.productNo'),
+          name: $i18n.t('table_label.productNo'),
           pid: '',
           tablename: 'DL_B_TRAN_PLAN_ITEM',
           type: 'STRING',
@@ -232,7 +231,7 @@ export default {
       ],
       tabConfig: [
         {
-          label: window.vmI18n.t('common.all'), // 全部
+          label: $i18n.t('common.all'), // 全部
           agTableConfig: {
             isIndex: true,
             tableHeight: '100px',
@@ -257,7 +256,7 @@ export default {
           }
         },
         {
-          label: window.vmI18n.t('btn.published'), // 已发布
+          label: $i18n.t('btn.published'), // 已发布
           agTableConfig: {
             isIndex: true,
             tableHeight: '',
@@ -291,7 +290,7 @@ export default {
           }
         },
         {
-          label: window.vmI18n.t('btn.draft'), // 草稿
+          label: $i18n.t('btn.draft'), // 草稿
           agTableConfig: {
             isIndex: true,
             tableHeight: '',
@@ -325,7 +324,7 @@ export default {
           }
         },
         {
-          label: window.vmI18n.t('other.offline_expired'), // 下线/过期
+          label: $i18n.t('other.offline_expired'), // 下线/过期
           agTableConfig: {
             isIndex: true,
             tableHeight: '',
@@ -362,15 +361,15 @@ export default {
       diStatusArr: [
         {
           value: 1,
-          label: window.vmI18n.t('btn.draft') // 草稿
+          label: $i18n.t('btn.draft') // 草稿
         },
         {
           value: 2,
-          label: window.vmI18n.t('btn.published') // 已发布
+          label: $i18n.t('btn.published') // 已发布
         },
         {
           value: 3,
-          label: window.vmI18n.t('btn.offline') // 下线
+          label: $i18n.t('btn.offline') // 下线
         }
       ],
       product: {
@@ -389,7 +388,7 @@ export default {
           isuppercase: true,
           length: 65535,
           // name: "参与商品",
-          name: window.vmI18n.t('other.participating_goods'),
+          name: $i18n.t('other.participating_goods'),
           readonly: false,
           reftable: 'PS_C_PRO',
           reftableid: 23281,
@@ -403,70 +402,70 @@ export default {
         typeAll: 'default', // 按钮统一风格样式
         buttons: [
           {
-            text: window.vmI18n.t('btn.find'), // 查找,
+            text: $i18n.t('btn.find'), // 查找,
             webname: 'lookup_cuxiaohuodomg',
             btnclick: () => {
               this.getData();
             }
           },
           {
-            text: window.vmI18n.t('btn.reset'), // 重置,
+            text: $i18n.t('btn.reset'), // 重置,
             webname: 'chongzhicux_cuxiaohuodomg',
             btnclick: () => {
               this.Reset();
             }
           },
           {
-            text: window.vmI18n.t('btn.add'), // 新增,
+            text: $i18n.t('btn.add'), // 新增,
             webname: 'xinzengcux_cuxiaohuodomg',
             btnclick: () => {
               this.promotionClick();
             }
           },
           {
-            text: window.vmI18n.t('btn.batch_add'), // 批量新增,
+            text: $i18n.t('btn.batch_add'), // 批量新增,
             webname: 'piliangxinzengcux_cuxiaohuodomg',
             btnclick: () => {
               this.promotionBlukClick();
             }
           },
           {
-            text: window.vmI18n.t('btn.publish'), // 发布,
+            text: $i18n.t('btn.publish'), // 发布,
             webname: 'fabucux_cuxiaohuodomg',
             btnclick: () => {
               this.publish();
             }
           },
           {
-            text: window.vmI18n.t('btn.offline'), // 下线,
+            text: $i18n.t('btn.offline'), // 下线,
             webname: 'xiaxiancux_cuxiaohuodomg',
             btnclick: () => {
               this.actOffline();
             }
           },
           {
-            text: window.vmI18n.t('common.copy'), // 复制,
+            text: $i18n.t('common.copy'), // 复制,
             webname: 'copy_cuxiaohuodomg',
             btnclick: () => {
               this.copy();
             }
           },
           {
-            text: window.vmI18n.t('btn.delete'), // 删除,
+            text: $i18n.t('btn.delete'), // 删除,
             webname: 'deletecux_cuxiaohuodomg',
             btnclick: () => {
               this.deleteActi();
             }
           },
           {
-            text: window.vmI18n.t('btn.set_groups'), // 设置分组,
+            text: $i18n.t('btn.set_groups'), // 设置分组,
             webname: 'shezhifenzucux_cuxiaohuodomg',
             btnclick: () => {
               this.setGroup();
             }
           },
           {
-            text: window.vmI18n.t('btn.simulation'), // 模拟仿真,
+            text: $i18n.t('btn.simulation'), // 模拟仿真,
             webname: 'fangzhencux_cuxiaohuodomg',
             btnclick: () => {
               this.simulation();
@@ -475,7 +474,7 @@ export default {
           {
             icon: 'iconfont iconbj_col', // 按钮图标
             webname: 'isFavorite', // 必须写，用于匹配框架的收藏功能（作为key替换掉之前的中文判断）
-            name: window.vmI18n.t('btn.collection'), // 收藏
+            name: $i18n.t('btn.collection'), // 收藏
             btnclick: () => {
               const self = this;
               self.setFavorite();
@@ -614,7 +613,7 @@ export default {
       const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
       info.forEach((item, index) => {
         item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-        item.ACTION_LOG = window.vmI18n.t('other.view_log'); // 查看日志
+        item.ACTION_LOG = $i18n.t('other.view_log'); // 查看日志
       });
       const agGridChild = `agGridChild${index + 1}`;
       this.tabConfig[index].agTableConfig.rowData = info || [];
@@ -637,7 +636,7 @@ export default {
       } = await this.service.promotionCenter.cpromLogQuery(formData);
       if (code === 0) {
         if (data.length === 0) {
-          self.$message.warning(window.vmI18n.t('modalTips.r8')); // 查询数据为空
+          self.$message.warning($i18n.t('modalTips.r8')); // 查询数据为空
         } else {
           self.logData.data = data;
           self.$message.success(message);
@@ -661,7 +660,7 @@ export default {
         });
       }
       if (this.newList.length < 1) {
-        this.$Message.warning(window.vmI18n.t('modalTips.r9'));
+        this.$Message.warning($i18n.t('modalTips.r9'));
         return true;
       }
     },
@@ -679,7 +678,7 @@ export default {
       // STATUS === 1 草稿 ，STATUS === 2 已发布，STATUS === 3 下线过期
       const flag = this.newList.some(item => item.STATUS === 3);
       if (flag) {
-        this.$Message.warning(window.vmI18n.t('modalTips.q0')); // 选择的促销活动已经下线/过期
+        this.$Message.warning($i18n.t('modalTips.q0')); // 选择的促销活动已经下线/过期
         return;
       }
       this.dataError.show = true;
@@ -690,7 +689,7 @@ export default {
       if (agGridTable.getSelect().length) {
         const selectedData = agGridTable.getSelect();
         if (selectedData.length > 1) {
-          this.$Message.warning(window.vmI18n.t('modalTips.q2')); // 只能选取一条数据
+          this.$Message.warning($i18n.t('modalTips.q2')); // 只能选取一条数据
           return;
         }
         const ACTI_ID = selectedData[0].ACTI_ID;
@@ -700,11 +699,11 @@ export default {
             id: -1, // id
             type: 'action', // 类型action
             name: 'batchActivity', // 文件名
-            label: window.vmI18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
+            label: $i18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
             query: Object.assign({
               id: -1, // id
               copy: ACTI_ID,
-              tabTitle: window.vmI18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
+              tabTitle: $i18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
             }) // 带的参数
           });
         } else {
@@ -712,16 +711,16 @@ export default {
             id: -1, // id
             type: 'action', // 类型action
             name: 'addOrEditActi', // 文件名
-            label: window.vmI18n.t('panel_label.addPromotion'), // 新增促销活动
+            label: $i18n.t('panel_label.addPromotion'), // 新增促销活动
             query: Object.assign({
               id: -1, // id
               copy: ACTI_ID,
-              tabTitle: window.vmI18n.t('panel_label.addPromotion') // 新增促销活动
+              tabTitle: $i18n.t('panel_label.addPromotion') // 新增促销活动
             }) // 带的参数
           });
         }
       } else {
-        this.$Message.warning(window.vmI18n.t('modalTips.r9')); // 请至少选择一条
+        this.$Message.warning($i18n.t('modalTips.r9')); // 请至少选择一条
       }
     },
     promotionClick() {
@@ -729,10 +728,10 @@ export default {
         id: -1, // id
         type: 'action', // 类型action
         name: 'addOrEditActi', // 文件名
-        label: window.vmI18n.t('panel_label.addPromotion'), // 新增促销活动
+        label: $i18n.t('panel_label.addPromotion'), // 新增促销活动
         query: Object.assign({
           id: -1, // id
-          tabTitle: window.vmI18n.t('panel_label.addPromotion') // 新增促销活动
+          tabTitle: $i18n.t('panel_label.addPromotion') // 新增促销活动
         }) // 带的参数
       });
     },
@@ -742,10 +741,10 @@ export default {
         id: -1, // id
         type: 'action', // 类型action
         name: 'batchActivity', // 文件名
-        label: window.vmI18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
+        label: $i18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
         query: Object.assign({
           id: -1, // id
-          tabTitle: window.vmI18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
+          tabTitle: $i18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
         }) // 带的参数
       });
     },
@@ -755,7 +754,7 @@ export default {
       if (noSelect) return;
       flag = this.newList.every(item => item.STATUS === 1);
       if (!flag) {
-        this.$Message.warning(window.vmI18n.t('modalTips.q3')); // 选择的促销活动已经发布
+        this.$Message.warning($i18n.t('modalTips.q3')); // 选择的促销活动已经发布
         return;
       }
       this.dataError.show = false; // 关闭弹框
@@ -811,7 +810,7 @@ export default {
       // STATUS === 1 草稿 ，STATUS === 2 已发布，STATUS === 3 下线过期
       const flag = this.newList.some(item => item.STATUS === 3);
       if (flag) {
-        this.$Message.warning(window.vmI18n.t('modalTips.q5')); // 存在【下线过期】的促销，请重新选择
+        this.$Message.warning($i18n.t('modalTips.q5')); // 存在【下线过期】的促销，请重新选择
       } else {
         this.checkList = this.newList;
         // 设置分组请求接口
@@ -835,10 +834,10 @@ export default {
         id: -1, // id
         type: 'CUSTOMIZED', // 类型action
         name: 'SIMULATION', // 文件名
-        label: window.vmI18n.t('btn.simulation'), // 模拟仿真
+        label: $i18n.t('btn.simulation'), // 模拟仿真
         query: Object.assign({
           id: -1, // id
-          tabTitle: window.vmI18n.t('btn.simulation') // 模拟仿真
+          tabTitle: $i18n.t('btn.simulation') // 模拟仿真
         }) // 带的参数
       });
     },
@@ -898,10 +897,10 @@ export default {
             id: ACTI_ID, // id
             type: 'action', // 类型action
             name: 'batchActivity', // 文件名
-            label: window.vmI18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
+            label: $i18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
             query: Object.assign({
               id: ACTI_ID, // id
-              tabTitle: window.vmI18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
+              tabTitle: $i18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
             }) // 带的参数
           });
         } else {
@@ -909,10 +908,10 @@ export default {
             id: ACTI_ID, // id
             type: 'action', // 类型action
             name: 'addOrEditActi', // 文件名
-            label: window.vmI18n.t('panel_label.editPromotion'), // 编辑促销活动
+            label: $i18n.t('panel_label.editPromotion'), // 编辑促销活动
             query: Object.assign({
               id: ACTI_ID, // id
-              // tabTitle: window.vmI18n.t('panel_label.editPromotion') // 编辑促销活动
+              // tabTitle: $i18n.t('panel_label.editPromotion') // 编辑促销活动
             }) // 带的参数
           });
         }
@@ -924,7 +923,7 @@ export default {
       // STATUS === 1 草稿 ，STATUS === 2 已发布，STATUS === 3 下线过期
       const flag = this.newList.some(item => item.STATUS === 3);
       if (flag) {
-        this.$Message.warning(window.vmI18n.t('modalTips.q0')); // //选择的促销活动已经下线/过期
+        this.$Message.warning($i18n.t('modalTips.q0')); // //选择的促销活动已经下线/过期
         return;
       }
       this.dataError.show = false; // 关闭弹框

@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
+      vmI18n:$i18n,
       collapse: 'panel_baseInfo',
       btnConfig: {
         typeAll: 'default',
@@ -42,7 +42,7 @@ export default {
           },
           {
             webname: 'lookup_return', // 返回
-            text: window.vmI18n.t('btn.back'),
+            text: $i18n.t('btn.back'),
             btnclick: () => {
               if (this.isModify) {
                 this.$Modal.fcWarning({
@@ -466,7 +466,7 @@ export default {
         width: 250,
         height: 170,
         colname: 'IMAGE',
-        name: window.vmI18n.t('other.uploadVoucher'), // 上传凭证
+        name: $i18n.t('other.uploadVoucher'), // 上传凭证
         readonly: false,
         valuedata: [],
       },

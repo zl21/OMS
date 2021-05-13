@@ -6,7 +6,6 @@ import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 export default {
   data() {
     return {
-      vmI18n: window.vmI18n,
       //isCombination: 1, // 1:组合商品 2:组合商品下挂商品
       tableConfig: {
         businessButtonConfig: {
@@ -156,7 +155,6 @@ export default {
     // 删除赠品
     async deleteItem() {
       const self = this;
-      console.log('1111:',this.checkSelection);
       const GIFT_TYPES = this.checkSelection.map(row => row.GIFT_TYPE);
       if(GIFT_TYPES.includes('非赠品') && !['缺货','待审核'].includes(this.componentData.order.ORDER_STATUS)){
         self.$Message.error('勾选明细含有非赠品禁止删除！');
@@ -170,11 +168,14 @@ export default {
           billNo: this.componentData.order.BILL_NO, //单据编号
         }],
       }
+      this.tableConfig.businessButtonConfig.buttons[1].disabled = true;
       this.service.orderCenter.deleteOrderGoods(data).then((res) => {
+        setTimeout(() => {
+          this.tableConfig.businessButtonConfig.buttons[1].disabled = false;
+        }, 1000);
         if (res.data.code == 0) {
           this.$Message.success(res.data.message);
-          this.$parent.$parent.closeConfirm();
-          // this.$parent.$parent.autoRefresh();
+          this.$parent.$parent.$parent.$parent.getDetailsData()
         }
       })
     },
@@ -184,7 +185,7 @@ export default {
       const ids = this.checkSelection.map(row => row.ID);
       if (ids.length === 0) {
         // 至少选择一条订单明细
-        self.$Message.error(self.vmI18n.t('modalTips.zk'));
+        self.$Message.error($i18n.t('modalTips.zk'));
         return;
       }
       const { data: { code, message } } = await this.service.orderCenter.markrefund({ id: this.$route.params.customizedModuleId, itemIds: ids, ISJITX: 50 });
@@ -192,7 +193,7 @@ export default {
         self.$parent.$parent.load();
         self.$Message.success(message);
       } else {
-        self.$Message.error(self.vmI18n.t('modalTips.z3'));
+        self.$Message.error($i18n.t('modalTips.z3'));
       }
     },
     // 标记取消退款
@@ -201,7 +202,7 @@ export default {
       const ids = this.checkSelection.map(row => row.ID);
       if (ids.length === 0) {
         // 至少选择一条订单明细
-        self.$Message.error(self.vmI18n.t('modalTips.z3'));
+        self.$Message.error($i18n.t('modalTips.z3'));
         return;
       }
       const { data: { data: { code, message } } } = await this.service.orderCenter.markRefundCancel({ itemIds: ids.join(','), orderId: this.$route.params.customizedModuleId });
@@ -216,7 +217,7 @@ export default {
     replaceGoodsDetail() {
       if (this.checkSelection.length !== 1) {
         // 请选择一条需要替换的明细!
-        this.$Message.warning(this.vmI18n.t('modalTips.dv'));
+        this.$Message.warning($i18n.t('modalTips.dv'));
         return;
       }
       if(!['缺货','待审核'].includes(this.componentData.order.ORDER_STATUS)){

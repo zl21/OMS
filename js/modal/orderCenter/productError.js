@@ -32,8 +32,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
     },
     data() {
       return {
-        vmI18n: window.vmI18n,
-        loading: false,
+          loading: false,
         resultArr:[],
         tableConfig: {
           indexColumn: true, // 是否显示序号
@@ -144,7 +143,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
           buttons: [
             {
               type: '', // 按钮类型
-              text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+              text: $i18n.t('common.cancel'), // 取消 按钮文本
               icon: '', // 按钮图标
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制
@@ -154,7 +153,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
             },
             {
               type: '', // 按钮类型
-              text: window.vmI18n.t('common.determine'), // 确定 按钮文本
+              text: $i18n.t('common.determine'), // 确定 按钮文本
               icon: '', // 按钮图标
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制

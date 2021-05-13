@@ -24,14 +24,13 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       buttonConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            text: $i18n.t('common.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -41,7 +40,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('btn.download'), // 下载 按钮文本
+            text: $i18n.t('btn.download'), // 下载 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -120,7 +119,7 @@ export default {
       const shopId = this.formConfig.formData[0].itemdata.pid;
       if (!shopId || !formValue.query_date[0]) {
         // 店铺和平台时间不能为空
-        this.$message.error(this.vmI18n.t('modalTips.bg'));
+        this.$message.error($i18n.t('modalTips.bg'));
         return;
       }
       const params = JSON.stringify({
