@@ -393,7 +393,7 @@ R3.launchApplication({
 | v1.2.71 | temp i18n
 | v1.2.72 | 渠道仓新增/编辑路径改为表名
 | v1.2.73 | 找回被删掉的subTableConfig(有用到,不准删！！！！！)
-
+| v1.2.74 | 单独js页面-特殊处理国际化  |
 
 #### Extends-Api 版本说明
 

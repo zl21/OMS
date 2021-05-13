@@ -1,4 +1,6 @@
 import BurgeonDate from '@/assets/js/__utils__/date.js';
+import i18n from '@burgeon/internationalization/i18n/i18n';
+window.$i18n = i18n;
 export default {
   // 京东订单接口列表界面(下载订单)
   formConfig: {
