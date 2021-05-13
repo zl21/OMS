@@ -11,7 +11,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       isError: false,
       errorMessage: '',
       transportStyle: {
@@ -28,7 +27,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [{
           type: '', // 按钮类型
-          text: window.vmI18n.t('common.cancel'), // 取消
+          text: $i18n.t('common.cancel'), // 取消
           icon: '', // 按钮图标
           size: 'small', // 按钮大小
           disabled: false, // 按钮禁用控制
@@ -48,7 +47,7 @@ export default {
           },
           {
             colname: 'ENAME',
-            name: window.vmI18n.t('table_label.a3'), // '日程归属名称',
+            name: $i18n.t('table_label.a3'), // '日程归属名称',
             show: true,
             isak: true
           },
@@ -64,7 +63,7 @@ export default {
     determine() {
       const formdata = new FormData();
       if (!this.selectData.length && !this.defaultSelected.length) {
-        this.$Message.warning(window.vmI18n.t('modalTips.eh')); // '档案日程归属不能为空!'
+        this.$Message.warning($i18n.t('modalTips.eh')); // '档案日程归属不能为空!'
         return;
       }
       const obj = {
@@ -97,7 +96,7 @@ export default {
           this.selectData = this.defaultSelected;
           this.btnConfig.buttons.push({
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制

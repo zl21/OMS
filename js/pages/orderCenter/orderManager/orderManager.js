@@ -36,7 +36,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       isActive: false,
       agTableConfig: {
         tableHeight: '480px',
@@ -113,7 +112,7 @@ export default {
       clearFromListValue: false,
       // 状态json
       statusData: {
-        label: window.vmI18n.t('common.toBeReviewed'), // 全部
+        label: $i18n.t('common.toBeReviewed'), // 全部
         value: '1',
         isShow: true,
       },
@@ -161,7 +160,7 @@ export default {
         typeAll: 'default', // 按钮统一风格样式
         buttons: [
           {
-            text: window.vmI18n.t('btn.empty'), // 按钮文本
+            text: $i18n.t('btn.empty'), // 按钮文本
             btnclick: () => {
               const _this = this;
               _this.clearFromListValue = true;
@@ -171,7 +170,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('btn.search'), // 按钮文本
+            text: $i18n.t('btn.search'), // 按钮文本
             btnclick: () => {
               this.loadData();
             }, // 按钮点击事件
@@ -186,7 +185,7 @@ export default {
         formData: [
           {
             style: 'checkbox', // 勾选框类型
-            label: window.vmI18n.t('form_label.whether_returned'), // 前面的文字
+            label: $i18n.t('form_label.whether_returned'), // 前面的文字
             value: 'IS_BACK', // 输入框的值
             width: '6', // 所占的宽度
             checked: false, // 是否勾选控制
@@ -708,11 +707,11 @@ export default {
       };
       // 零售发货单列表tab 区分审核失败/多次缺货类型订单查询
       // '审核失败'
-      if (self.statusData.label == window.vmI18n.t('other.auditError')) {
+      if (self.statusData.label == $i18n.t('other.auditError')) {
         param.status = { label: '待审核', value: '1', isShow: true };
         param.lackstockOrAudit = self.statusData.value;
         // '多次缺货'
-      } else if (self.statusData.label == window.vmI18n.t('other.multipleOutOfStock')) {
+      } else if (self.statusData.label == $i18n.t('other.multipleOutOfStock')) {
         param.lackstockOrAudit = self.statusData.value;
         param.status = { label: '缺货', value: '2', isShow: true };
       }

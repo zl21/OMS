@@ -13,16 +13,15 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       jordanTableConfig: {
         columns: [
           {
             key: 'ENAME',
-            title: window.vmI18n.t('table_label.warehouseName'), // '仓库名称',
+            title: $i18n.t('table_label.warehouseName'), // '仓库名称',
           },
           {
             key: 'ECODE',
-            title: window.vmI18n.t('table_label.warehouseNo'), // '仓库编号',
+            title: $i18n.t('table_label.warehouseNo'), // '仓库编号',
           },
         ],
         data: [], // 数据配置
@@ -38,7 +37,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -46,7 +45,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -143,7 +142,7 @@ export default {
           if (this.selectData[i].CP_C_PHY_WAREHOUSE_ECODE === ecode) {
             this.selectData.splice(i, 1);
             this.total = this.selectData.length;
-            this.$Message.success(window.vmI18n.t('modalTips.ay')); // '删除成功'
+            this.$Message.success($i18n.t('modalTips.ay')); // '删除成功'
             return;
           }
         }

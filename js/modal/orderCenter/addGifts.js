@@ -8,7 +8,6 @@ export default {
   mixins: [listeningToKeydownMixin],
   data() {
     return {
-      vmI18n: window.vmI18n,
       tableItemUrl: '/api/cs/oc/oms/v1/getOrderDetailList',
       tableConfig: {
         indexColumn: true,
@@ -17,32 +16,32 @@ export default {
           {
             key: 'ECODE',
             // title: "条码"
-            title: window.vmI18n.t('form_label.barCode')
+            title: $i18n.t('form_label.barCode')
           },
           {
             key: 'sizeName',
             // title: "尺码",
-            title: window.vmI18n.t('other.size')
+            title: $i18n.t('other.size')
           },
           {
             key: 'colorName',
             // title: "颜色",
-            title: window.vmI18n.t('other.color')
+            title: $i18n.t('other.color')
           },
           {
             key: 'QTY',
             // title: "数量",
-            title: window.vmI18n.t('table_label.quantities')
+            title: $i18n.t('table_label.quantities')
           },
           {
             key: 'PS_C_PRO_ENAME',
             // title: "商品名称",
-            title: window.vmI18n.t('table_label.productName')
+            title: $i18n.t('table_label.productName')
           },
           {
             key: 'IS_GIFT',
             // title: "是否赠品",
-            title: window.vmI18n.t('table_label.whetherGift'),
+            title: $i18n.t('table_label.whetherGift'),
             render: (h, params) => {
               const IS_GIFT = params.row.IS_GIFT == 1 ? '是' : '否';
               return h('span', {}, IS_GIFT);
@@ -51,7 +50,7 @@ export default {
           {
             key: 'IS_DELETE',
             // title: "操作",
-            title: window.vmI18n.t('table_label.operation'),
+            title: $i18n.t('table_label.operation'),
             render: (h, params) => h(
                 'a',
                 {
@@ -63,7 +62,7 @@ export default {
                   }
                 },
                 // "删除"
-                window.vmI18n.t('btn.delete')
+                $i18n.t('btn.delete')
               )
           }
         ],
@@ -92,13 +91,13 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            text: $i18n.t('common.cancel'), // 取消 按钮文本
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             } // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('common.determine'), // 确定 按钮文本
+            text: $i18n.t('common.determine'), // 确定 按钮文本
             btnclick: () => {
               this.submit();
             }
@@ -150,7 +149,7 @@ export default {
         IS_GIFT: item.IS_GIFT
       }));
       if (rows.length === 0) {
-        self.$Message.error(window.vmI18n.t('modalTips.eg')); // '无赠品可添加！'
+        self.$Message.error($i18n.t('modalTips.eg')); // '无赠品可添加！'
         return;
       }
 
@@ -166,7 +165,7 @@ export default {
         self.$parent.$parent.$parent.selection = [];
       } else {
         // let mes = message || "失败";
-        const mes = message || window.vmI18n.t('modalTips.z3');
+        const mes = message || $i18n.t('modalTips.z3');
         self.$Message.error(mes);
       }
     },
@@ -180,27 +179,27 @@ export default {
         {
           key: 'ECODE',
           // title: "条码",
-          title: window.vmI18n.t('form_label.barCode')
+          title: $i18n.t('form_label.barCode')
         },
         {
           key: 'QTY',
           // title: "数量",
-          title: window.vmI18n.t('table_label.quantities')
+          title: $i18n.t('table_label.quantities')
         },
         {
           key: 'PS_C_PRO_ENAME',
           // title: "商品名称",
-          title: window.vmI18n.t('table_label.productName')
+          title: $i18n.t('table_label.productName')
         },
         {
           key: 'GBCODE',
           // title: "国标码",
-          title: window.vmI18n.t('form_label.gBCode')
+          title: $i18n.t('form_label.gBCode')
         },
         {
           key: 'IS_GIFT',
           // title: "是否赠品",
-          title: window.vmI18n.t('table_label.whetherGift')
+          title: $i18n.t('table_label.whetherGift')
         }
       ];
       this.columns = cols;

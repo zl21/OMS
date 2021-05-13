@@ -7,7 +7,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       radioValue: '2',
       searchValue: '',
       columns: [{
@@ -94,17 +93,23 @@ export default {
       const self = this;
       if (self.data.length == 0) {
         // sku不能为空!
-        self.$Message.warning(self.vmI18n.t('modalTips.cg'));
+        self.$Message.warning($i18n.t('modalTips.cg'));
         return;
       }
       let params = {
         orderList:this.componentData.orderList,
         skuEcodes:[this.componentData.oldSuk,this.currentSkuEcode]
       }
+      this.btnConfig.buttons[1].disabled = true;
       const { data: { code, message, data } } = await this.service.orderCenter.replaceOrderByPro(params);
+      setTimeout(() => {
+        this.btnConfig.buttons[1].disabled = false;
+      }, 5000);
       console.log(code, message, data);
       if(code ===  0){
         self.$Message.success(message);
+        self.$parent.$parent.closeConfirm();
+        self.$parent.$parent.$parent.$parent.$parent.getDetailsData();
       }else if(data && code ===  -1){
           self.$Modal.confirm({
             title: message,

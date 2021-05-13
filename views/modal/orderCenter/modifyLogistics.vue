@@ -59,7 +59,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       formConfig: {
         formData: [
           {
@@ -119,11 +118,11 @@ export default {
         columns: [
           {
             key: "ENAME",
-            title: window.vmI18n.t("form_label.logisticsCompany"), // '物流公司'
+            title: $i18n.t("form_label.logisticsCompany"), // '物流公司'
           },
           {
             key: "ECODE",
-            title: window.vmI18n.t("form_label.logisticsNo"), // '物流编号'
+            title: $i18n.t("form_label.logisticsNo"), // '物流编号'
           },
         ],
         data: [], // 数据配置
@@ -140,14 +139,14 @@ export default {
         btnsite: "right", // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: window.vmI18n.t("common.cancel"), // 取消
+            text: $i18n.t("common.cancel"), // 取消
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
           {
-            text: window.vmI18n.t("common.determine"), // 确定
+            text: $i18n.t("common.determine"), // 确定
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
@@ -220,13 +219,16 @@ export default {
       _this.loading = true;
       let param = JSON.parse(JSON.stringify(_this.componentData));
       param.CP_C_LOGISTICS_ID = +_this.formConfig.formValue.CP_C_LOGISTICS_ID;
-      const res = await this.service.orderCenter.updateLogistics(param);
-      if (res.data.code === 0) {
+      // const res = await this.service.orderCenter.updateLogistics(param);
+      const {
+        data: { data, code, message },
+      } = await self.service.orderCenter.updateLogistics(param);
+      if (code === 0) {
         _this.$parent.$parent.closeConfirm();
         _this.$Message.success(res.data.message);
         _this.$parent.$parent.$parent.query();
-      } else if (res.data.code == 1 && res.data.data) {
-        let tabData = data.data.map((row, index) => {
+      } else if (code == 1 && data) {
+        let tabData = data.map((row, index) => {
           row.INDEX = ++index;
           row.BILL_NO = row.objidno;
           row.RESULT_MSG = row.message;
@@ -263,8 +265,8 @@ export default {
             });
           }
         );
-      } else if (res.data.code == 1 && !res.data.data) {
-        _this.$Message.error(res.data.message);
+      } else if (code == 1 && !data) {
+        _this.$Message.error(message);
       } else {
         // 走框架报错
       }
@@ -306,7 +308,7 @@ export default {
           if (this.selectData[i].CP_C_LOGISTICS_ECODE === ecode) {
             this.selectData.splice(i, 1);
             this.total = this.selectData.length;
-            this.$Message.success(window.vmI18n.t("modalTips.ay"));
+            this.$Message.success($i18n.t("modalTips.ay"));
             break;
           }
         }
@@ -336,12 +338,12 @@ export default {
       fromdata.append("param", JSON.stringify(param));
       const res = await this.service.common.delWarehouseLogistics(fromdata);
       if (res.data.data.code === 0) {
-        const ess = res.data.data.message || window.vmI18n.t("modalTips.ay");
+        const ess = res.data.data.message || $i18n.t("modalTips.ay");
         this.getLogistics();
         this.$parent.$parent.$parent.refresh();
         this.$Message.success(ess);
       } else {
-        const err = res.data.data.message || window.vmI18n.t("modalTips.z3");
+        const err = res.data.data.message || $i18n.t("modalTips.z3");
         this.$Message.error(err);
       }
       this.total = this.selectData.length;

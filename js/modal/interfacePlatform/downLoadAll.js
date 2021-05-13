@@ -37,7 +37,6 @@ export default {
   data() {
     return {
       spinShow: false, // loading动画
-      vmI18n: window.vmI18n,
       downLoadModal: false,
       taskId: '',
       tableName: this.$route.params.tableName ? this.$route.params.tableName : 'CantNotFind_tableName',

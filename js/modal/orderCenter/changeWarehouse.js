@@ -20,7 +20,6 @@ export default {
   computed: {},
   data() {
     return {
-      vmI18n: window.vmI18n,
       isShowFromLoading: false, // 加载
       zIndex: 2500,
       totalRowCount: 0,
@@ -36,16 +35,16 @@ export default {
       updateRemark: '',
       updateRemarkOptions: [
         {
-          label: window.vmI18n.t('other.originalWarehouseOutOfStock_change'), // '原仓缺货改仓',
-          value: window.vmI18n.t('other.originalWarehouseOutOfStock_change')
+          label: $i18n.t('other.originalWarehouseOutOfStock_change'), // '原仓缺货改仓',
+          value: $i18n.t('other.originalWarehouseOutOfStock_change')
         },
         {
-          label: window.vmI18n.t('other.sysWrongJudgment_change'), // '系统错判改仓',
-          value: window.vmI18n.t('other.sysWrongJudgment_change')
+          label: $i18n.t('other.sysWrongJudgment_change'), // '系统错判改仓',
+          value: $i18n.t('other.sysWrongJudgment_change')
         },
         {
-          label: window.vmI18n.t('other.sysWrongJudgment_change'), // '新增仓库改仓',
-          value: window.vmI18n.t('other.newWarehouse_change')
+          label: $i18n.t('other.sysWrongJudgment_change'), // '新增仓库改仓',
+          value: $i18n.t('other.newWarehouse_change')
         }
       ],
       btnConfig: {
@@ -54,7 +53,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -64,7 +63,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -101,7 +100,7 @@ export default {
       const fromdata = new FormData();
       if (!self.pid) {
         self.$Message.warning({
-          content: window.vmI18n.t('modalTips.zi'), // 请选择仓库
+          content: $i18n.t('modalTips.zi'), // 请选择仓库
           duration: 5,
           top: 80
         });
@@ -128,7 +127,7 @@ export default {
             const isOutOfStockFlag = false; // 由于830不上，所以默认为false，暂注释上面的处理逻辑，之后要加，打开注释即可。
             if (isOutOfStockFlag) {
               self.$Modal.confirm({
-                title: window.vmI18n.t('modalTitle.tips'), // 提示
+                title: $i18n.t('modalTitle.tips'), // 提示
                 render: h => h('div', {}, [
                     h(
                       'p',
@@ -143,7 +142,7 @@ export default {
                       props: {
                         'disabled-hover': true,
                         'highlight-row': false,
-                        'no-data-text': window.vmI18n.t('other.noDataAvailable'), // 暂无数据
+                        'no-data-text': $i18n.t('other.noDataAvailable'), // 暂无数据
                         columns: data.columns,
                         data: data.prompt_data
                       }
@@ -164,7 +163,7 @@ export default {
               });
             } else {
               self.$Modal.error({
-                title: window.vmI18n.t('modalTitle.tips'), // 提示
+                title: $i18n.t('modalTitle.tips'), // 提示
                 render: h => h('div', {}, [
                     h(
                       'p',
@@ -179,7 +178,7 @@ export default {
                       props: {
                         'disabled-hover': true,
                         'highlight-row': false,
-                        'no-data-text': window.vmI18n.t('other.noDataAvailable'), // 暂无数据
+                        'no-data-text': $i18n.t('other.noDataAvailable'), // 暂无数据
                         columns: data.columns,
                         data: data.prompt_data
                       }
@@ -213,7 +212,7 @@ export default {
         self.$Message.error(message);
       } else {
         self.$Modal.error({
-          title: window.vmI18n.t('modalTitle.tips'), // 提示
+          title: $i18n.t('modalTitle.tips'), // 提示
           render: h => h('div', {}, [
               h(
                 'p',
@@ -229,7 +228,7 @@ export default {
                   'disabled-hover': true,
                   'highlight-row': false,
                   // "no-data-text": "暂无数据",
-                  'no-data-text': window.vmI18n.t('other.noDataAvailable'),
+                  'no-data-text': $i18n.t('other.noDataAvailable'),
                   columns: data.columns,
                   data: data.prompt_data
                 }
@@ -278,13 +277,13 @@ export default {
             {
               colname: 'ename',
               // name: "发货仓库名称",
-              name: window.vmI18n.t('table_label.deliveryWarehouse_name'),
+              name: $i18n.t('table_label.deliveryWarehouse_name'),
               show: true
             },
             {
               colname: 'ecode',
               // name: "发货仓库编码",
-              name: window.vmI18n.t('table_label.deliveryWarehouse_code'),
+              name: $i18n.t('table_label.deliveryWarehouse_code'),
               show: false
             }
           ],
@@ -327,13 +326,13 @@ export default {
           {
             colname: 'ename',
             // name: "发货仓库名称",
-            name: window.vmI18n.t('table_label.deliveryWarehouse_name'),
+            name: $i18n.t('table_label.deliveryWarehouse_name'),
             show: true
           },
           {
             colname: 'ecode',
             // name: "发货仓库编码",
-            name: window.vmI18n.t('table_label.deliveryWarehouse_code'),
+            name: $i18n.t('table_label.deliveryWarehouse_code'),
             show: false
           }
         ],

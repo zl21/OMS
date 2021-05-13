@@ -123,7 +123,7 @@ export default {
             },
             {
               colname: 'ENAME',
-              name: window.vmI18n.t('form_label.logisticsCompany'), // '物流公司',
+              name: $i18n.t('form_label.logisticsCompany'), // '物流公司',
               show: true
             },
           ],

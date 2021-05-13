@@ -1,7 +1,6 @@
 export default {
   data() {
     return {
-      vmI18n: window.vmI18n,
       is_click: false
     };
   },

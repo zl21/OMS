@@ -28,21 +28,20 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         loading: false, // 按钮组件是否有loading样式,值为true false
         buttons: [
           {
-            text: window.vmI18n.t('other.confirmPrinting'), // 确定打印 按钮文本
+            text: $i18n.t('other.confirmPrinting'), // 确定打印 按钮文本
             disabled: false,
             btnclick: () => {
               this.print();
             }
           },
           {
-            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            text: $i18n.t('common.cancel'), // 取消 按钮文本
             btnclick: () => {
               this.$emit('closeActionDialog', false);
             } // 按钮点击事件
@@ -56,41 +55,41 @@ export default {
           data: {
             recipient: {
               address: {
-                city: window.vmI18n.t('other.hzCity'), // 杭州市
-                detail: window.vmI18n.t('other.addressDetails0'), // 良睦路999号乐佳国际大厦2号楼小邮局
-                district: window.vmI18n.t('other.yhErea'), // 余杭区
-                province: window.vmI18n.t('other.zjProvince'), // 浙江省
+                city: $i18n.t('other.hzCity'), // 杭州市
+                detail: $i18n.t('other.addressDetails0'), // 良睦路999号乐佳国际大厦2号楼小邮局
+                district: $i18n.t('other.yhErea'), // 余杭区
+                province: $i18n.t('other.zjProvince'), // 浙江省
                 town: ''
               },
-              mobile: window.vmI18n.t('other.mobile0'), // 13012345678
-              name: window.vmI18n.t('other.name'), // 乾宝贝最可爱
-              phone: window.vmI18n.t('other.phone0') // 057112345678
+              mobile: $i18n.t('other.mobile0'), // 13012345678
+              name: $i18n.t('other.name'), // 乾宝贝最可爱
+              phone: $i18n.t('other.phone0') // 057112345678
             },
             routingInfo: {
               consolidation: {
-                name: window.vmI18n.t('common.address.placeName0'), // 杭州
+                name: $i18n.t('common.address.placeName0'), // 杭州
                 code: 'hangzhou'
               },
               origin: {
-                name: window.vmI18n.t('common.address.placeName0'), // 杭州
+                name: $i18n.t('common.address.placeName0'), // 杭州
                 code: 'POSTB'
               },
               sortation: {
-                name: window.vmI18n.t('common.address.placeName0') // 杭州
+                name: $i18n.t('common.address.placeName0') // 杭州
               },
               routeCode: '123A-456-789'
             },
             sender: {
               address: {
-                city: window.vmI18n.t('common.address.city1'), // 杭州市
-                detail: window.vmI18n.t('common.address.addressDetails1'), // 文一西路1001号阿里巴巴淘宝城5号小邮局
-                district: window.vmI18n.t('common.address.erea1'), // 余杭区
-                province: window.vmI18n.t('common.address.province1'), // 浙江省
+                city: $i18n.t('common.address.city1'), // 杭州市
+                detail: $i18n.t('common.address.addressDetails1'), // 文一西路1001号阿里巴巴淘宝城5号小邮局
+                district: $i18n.t('common.address.erea1'), // 余杭区
+                province: $i18n.t('common.address.province1'), // 浙江省
                 town: ''
               },
-              mobile: window.vmI18n.t('common.address.mobile1'), // 13012345678
-              name: window.vmI18n.t('common.address.name'), // 阿里巴巴
-              phone: window.vmI18n.t('common.address.phone1') // 057112345678
+              mobile: $i18n.t('common.address.mobile1'), // 13012345678
+              name: $i18n.t('common.address.name'), // 阿里巴巴
+              phone: $i18n.t('common.address.phone1') // 057112345678
             },
             shippingOption: {
               code: 'COD',
@@ -577,8 +576,8 @@ export default {
       const self = this;
       this.btnConfig.buttons[1].disabled = true;
       this.$Modal.info({
-        title: this.vmI18n.t('other.printing'), // 打印
-        content: this.vmI18n.t('modalTips.ca'), // 正在打印中，请稍后。。。
+        title: $i18n.t('other.printing'), // 打印
+        content: $i18n.t('modalTips.ca'), // 正在打印中，请稍后。。。
         mask: true,
         onOk: () => {
           self.$emit('confirmView');

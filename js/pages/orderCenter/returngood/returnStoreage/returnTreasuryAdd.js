@@ -23,7 +23,6 @@ export default {
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {
-      vmI18n: window.vmI18n,
       loading: false,
       openDefault: [1], // 默认展开
       returnSelectData: [], // 列表选中数据
@@ -38,7 +37,7 @@ export default {
             {
               type: '', // 按钮类型
               // text: "查找", //按钮文本
-              text: window.vmI18n.t('btn.find'), // 按钮文本
+              text: $i18n.t('btn.find'), // 按钮文本
               icon: '', // 按钮图标
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制
@@ -63,7 +62,7 @@ export default {
             {
               style: 'input',
               // label: "物流编号",
-              label: window.vmI18n.t('form_label.logisticsNo'),
+              label: $i18n.t('form_label.logisticsNo'),
               value: 'logistics_code',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -71,7 +70,7 @@ export default {
             {
               style: 'input',
               // label: "退换货单号",
-              label: window.vmI18n.t('form_label.returnOrder_no'),
+              label: $i18n.t('form_label.returnOrder_no'),
               value: 'id',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -79,7 +78,7 @@ export default {
             {
               style: 'input',
               // label: "平台单号",
-              label: window.vmI18n.t('form_label.platform_billNo'),
+              label: $i18n.t('form_label.platform_billNo'),
               value: 'tid',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -87,7 +86,7 @@ export default {
             {
               style: 'input',
               // label: "收货人",
-              label: window.vmI18n.t('form_label.consignee'),
+              label: $i18n.t('form_label.consignee'),
               value: 'receive_name',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -95,7 +94,7 @@ export default {
             {
               style: 'input',
               // label: "买家昵称",
-              label: window.vmI18n.t('table_label.buyerNickname'),
+              label: $i18n.t('table_label.buyerNickname'),
               value: 'buyer_nick',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -103,7 +102,7 @@ export default {
             {
               style: 'input',
               // label: "收货人手机",
-              label: window.vmI18n.t('form_label.consignee_phone'),
+              label: $i18n.t('form_label.consignee_phone'),
               value: 'receive_mobile',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -115,47 +114,47 @@ export default {
             {
               key: 'ID',
               // title: "退换货单号",
-              title: window.vmI18n.t('form_label.returnOrder_no'),
+              title: $i18n.t('form_label.returnOrder_no'),
             },
             {
               key: 'ORIG_ORDER_NO',
               // title: "原单单号",
-              title: window.vmI18n.t('form_label.originalOrder_No'),
+              title: $i18n.t('form_label.originalOrder_No'),
             },
             {
               key: 'BUYER_NICK',
               // title: "买家昵称",
-              title: window.vmI18n.t('table_label.buyerNickname'),
+              title: $i18n.t('table_label.buyerNickname'),
             },
             {
               key: 'LOGISTICS_CODE',
               // title: "物流单号",
-              title: window.vmI18n.t('form_label.logisticsOrder_No'),
+              title: $i18n.t('form_label.logisticsOrder_No'),
             },
             {
               key: 'RECEIVE_NAME',
               // title: "收货人",
-              title: window.vmI18n.t('form_label.consignee'),
+              title: $i18n.t('form_label.consignee'),
             },
             {
               key: 'RECEIVE_MOBILE',
               // title: "收货人手机号",
-              title: window.vmI18n.t('form_label.consignee_phone'),
+              title: $i18n.t('form_label.consignee_phone'),
             },
             {
               key: 'shopName',
               // title: "实体仓库",
-              title: window.vmI18n.t('table_label.physical_warehouse'),
+              title: $i18n.t('table_label.physical_warehouse'),
             },
             {
               key: 'IS_ADD',
               // title: "是否手工新增",
-              title: window.vmI18n.t('table_label.add_manually'),
+              title: $i18n.t('table_label.add_manually'),
             },
             {
               key: 'CP_C_SHOP_TITLE',
               // title: "店铺名称",
-              title: window.vmI18n.t('table_label.shopName'),
+              title: $i18n.t('table_label.shopName'),
             },
           ], // 表头
           data: [], // 数据配置
@@ -200,7 +199,7 @@ export default {
           {
             style: 'input', // 输入框类型
             // label: "原单单号", //输入框前文字
-            label: window.vmI18n.t('form_label.originalOrder_No'),
+            label: $i18n.t('form_label.originalOrder_No'),
             value: 'ORIG_ORDER_NO', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: 'ios-search', // 输入框后带的图标,暂只有输入框支持
@@ -222,7 +221,7 @@ export default {
           {
             style: 'input',
             // label: "原平台单号",
-            label: window.vmI18n.t('form_label.originalOrderPlatform'),
+            label: $i18n.t('form_label.originalOrderPlatform'),
             disabled: false, // 按钮禁用控制
             value: 'SOURCE_CODE',
             dataAcessKey: 'SOURCE_CODE',
@@ -231,7 +230,7 @@ export default {
           {
             style: 'input',
             // label: "买家昵称",
-            label: window.vmI18n.t('table_label.buyerNickname'),
+            label: $i18n.t('table_label.buyerNickname'),
             disabled: false, // 按钮禁用控制
             value: 'USER_NICK',
             dataAcessKey: 'USER_NICK',
@@ -240,7 +239,7 @@ export default {
           {
             style: 'select', // 下拉框类型
             // label: "退货批次", //下拉框前的值
-            label: window.vmI18n.t('form_label.returnBatch'),
+            label: $i18n.t('form_label.returnBatch'),
             width: '6', // 所占宽度宽度
             value: 'OC_B_REFUND_BATCH_ID',
             dataAcessKey: 'OC_B_REFUND_BATCH_ID',
@@ -253,7 +252,7 @@ export default {
           {
             style: 'input', // 下拉框类型
             // label: "入库仓库", //下拉框前的值
-            label: window.vmI18n.t('form_label.in_warehouse'),
+            label: $i18n.t('form_label.in_warehouse'),
             width: '6', // 所占宽度宽度
             disabled: true, // 按钮禁用控制
             value: 'IN_STORE_ENAME',
@@ -277,7 +276,7 @@ export default {
               isnotnull: false,
               isuppercase: false,
               length: 20,
-              name: window.vmI18n.t('form_label.logisticsCompany'), // 物流公司
+              name: $i18n.t('form_label.logisticsCompany'), // 物流公司
               readonly: false,
               reftable: 'CP_C_LOGISTICS',
               // reftableid: 24633,
@@ -295,7 +294,7 @@ export default {
             style: 'input',
             dataAcessKey: 'LOGISTIC_NUMBER',
             // label: "物流单号",
-            label: window.vmI18n.t('form_label.logisticsOrder_No'),
+            label: $i18n.t('form_label.logisticsOrder_No'),
             value: 'LOGISTIC_NUMBER',
             disabled: false, // 按钮禁用控制
             width: '6',
@@ -303,7 +302,7 @@ export default {
           {
             style: 'input',
             // label: "手机号",
-            label: window.vmI18n.t('form_label.cellPhone_number'),
+            label: $i18n.t('form_label.cellPhone_number'),
             dataAcessKey: 'RECEIVER_MOBILE',
             value: 'RECEIVER_MOBILE',
             disabled: false, // 按钮禁用控制
@@ -312,7 +311,7 @@ export default {
           {
             style: 'input',
             // label: "姓名",
-            label: window.vmI18n.t('form_label.fullName'),
+            label: $i18n.t('form_label.fullName'),
             dataAcessKey: 'RECEIVER_NAME',
             value: 'RECEIVER_NAME',
             disabled: false, // 按钮禁用控制
@@ -322,7 +321,7 @@ export default {
             style: 'select', // 下拉框类型
             dataAcessKey: 'SPECIAL_TYPE',
             // label: "特殊处理类型", //下拉框前的值
-            label: window.vmI18n.t('form_label.specialTreatmentType'),
+            label: $i18n.t('form_label.specialTreatmentType'),
             width: '6', // 所占宽度宽度
             value: 'SPECIAL_TYPE',
             disabled: false, // 按钮禁用控制
@@ -334,7 +333,7 @@ export default {
           {
             style: 'input',
             // label: "备注",
-            label: window.vmI18n.t('table_label.remarks'),
+            label: $i18n.t('table_label.remarks'),
             dataAcessKey: 'REMARK',
             value: 'REMARK',
             disabled: false, // 按钮禁用控制
@@ -343,7 +342,7 @@ export default {
           {
             style: 'input',
             // label: "发件地址",
-            label: window.vmI18n.t('form_label.sending_address'),
+            label: $i18n.t('form_label.sending_address'),
             dataAcessKey: 'RECEIVER_ADDRESS',
             disabled: false, // 按钮禁用控制
             value: 'RECEIVER_ADDRESS',
@@ -352,7 +351,7 @@ export default {
           {
             style: 'checkbox', // 勾选框类型
             // label: "是否关闭匹配", //前面的文字
-            label: window.vmI18n.t('table_label.turnOff_match'),
+            label: $i18n.t('table_label.turnOff_match'),
             dataAcessKey: 'IS_OFF_MATCH',
             width: '6', // 所占的宽度
             value: 'IS_OFF_MATCH',
@@ -367,49 +366,49 @@ export default {
             key: 'PS_C_PRO_ECODE',
             dataAcessKey: 'PS_C_PRO_ECODE',
             // title: "商品编码",
-            title: window.vmI18n.t('table_label.productNo'),
+            title: $i18n.t('table_label.productNo'),
           },
           {
             key: 'PS_C_CLR_ENAME',
             dataAcessKey: 'PS_C_CLR_ENAME',
             // title: "颜色",
-            title: window.vmI18n.t('other.color'),
+            title: $i18n.t('other.color'),
           },
           {
             key: 'PS_C_SIZE_ENAME',
             dataAcessKey: 'PS_C_SIZE_ENAME',
             // title: "尺码",
-            title: window.vmI18n.t('other.sizes'),
+            title: $i18n.t('other.sizes'),
           },
           {
             key: 'QTY',
             dataAcessKey: 'QTY',
             // title: "数量",
-            title: window.vmI18n.t('table_label.quantities'),
+            title: $i18n.t('table_label.quantities'),
           },
           {
             key: 'PS_C_SKU_ECODE',
             dataAcessKey: 'PS_C_SKU_ECODE',
             // title: "条码",
-            title: window.vmI18n.t('form_label.barCode'),
+            title: $i18n.t('form_label.barCode'),
           },
           {
             key: 'GBCODE',
             dataAcessKey: 'GBCODE',
             // title: "国标码",
-            title: window.vmI18n.t('form_label.gBCode'),
+            title: $i18n.t('form_label.gBCode'),
           },
           // {
           //   key: 'OC_B_RETURN_ORDER_ID',
           //   dataAcessKey: 'OC_B_RETURN_ORDER_ID',
           //   // title: "退单编号",
-          //   title: window.vmI18n.t('form_label.chargebackNumber')
+          //   title: $i18n.t('form_label.chargebackNumber')
           // },
           {
             key: 'OC_B_RETURN_ORDER_ID',
             dataAcessKey: 'OC_B_RETURN_ORDER_ID',
             // title: "退单编号",
-            title: window.vmI18n.t('form_label.chargebackNumber'),
+            title: $i18n.t('form_label.chargebackNumber'),
             render: (h, params) =>
               h(
                 'a',
@@ -437,19 +436,19 @@ export default {
           {
             key: 'PS_C_SKU_ECODE_ACTUAL',
             // title: "实际发出条码",
-            title: window.vmI18n.t('table_label.actual_barcode'),
+            title: $i18n.t('table_label.actual_barcode'),
           },
           {
             key: 'PS_C_PRO_ENAME',
             dataAcessKey: 'PS_C_PRO_ENAME',
             // title: "商品名称",
-            title: window.vmI18n.t('table_label.productName'),
+            title: $i18n.t('table_label.productName'),
           },
           {
             key: 'PRODUCT_MARK',
             dataAcessKey: 'PRODUCT_MARK',
             // title: "商品标记",
-            title: window.vmI18n.t('form_label.goodsMark'),
+            title: $i18n.t('form_label.goodsMark'),
             render: (h, params) => {
               const _this = this;
               const list = [
@@ -493,37 +492,37 @@ export default {
             key: 'IS_MATCH',
             dataAcessKey: 'IS_MATCH',
             // title: "是否匹配",
-            title: window.vmI18n.t('table_label.match_or_not'),
+            title: $i18n.t('table_label.match_or_not'),
           },
           {
             key: 'IS_GEN_ADJUST',
             dataAcessKey: 'IS_GEN_ADJUST',
             // title: "是否生成调整单",
-            title: window.vmI18n.t('table_label.generate_adjustment'),
+            title: $i18n.t('table_label.generate_adjustment'),
           },
           {
             key: 'IS_WITHOUT_ORIG',
             dataAcessKey: 'IS_WITHOUT_ORIG',
             // title: "是否无原单条码",
-            title: window.vmI18n.t('table_label.no_original_barcode'),
+            title: $i18n.t('table_label.no_original_barcode'),
           },
           {
             key: 'IS_GEN_IN_ORDER',
             dataAcessKey: 'IS_GEN_IN_ORDER',
             // title: "是否生成入库单",
-            title: window.vmI18n.t('table_label.generate_stock'),
+            title: $i18n.t('table_label.generate_stock'),
           },
           {
             key: 'IS_GEN_WRO_ADJUST',
             dataAcessKey: 'IS_GEN_WRO_ADJUST',
             // title: "是否生成错发调整单",
-            title: window.vmI18n.t('table_label.generate_error_adjustment'),
+            title: $i18n.t('table_label.generate_error_adjustment'),
           },
           {
             key: 'IS_GEN_MINUS_ADJUST',
             dataAcessKey: 'IS_GEN_MINUS_ADJUST',
             // title: "是否生成冲无头件调整单",
-            title: window.vmI18n.t(
+            title: $i18n.t(
               'table_label.generate_punching_headless_adjustment'
             ),
           },
@@ -546,13 +545,13 @@ export default {
       labelList: [
         {
           // label: "入库单商品明细",
-          label: window.vmI18n.t('table_label.in_warehouse_goods_details'),
+          label: $i18n.t('table_label.in_warehouse_goods_details'),
           value: '1',
           isShow: true,
         },
         {
           // label: "退货入库日志",
-          label: window.vmI18n.t('table_label.return_warehousing_log'),
+          label: $i18n.t('table_label.return_warehousing_log'),
           value: '2',
           isShow: true,
         },
@@ -610,7 +609,7 @@ export default {
             item.isShow = false;
             break;
           // case "作废":
-          /* case window.vmI18n.t('btn.void'):
+          /* case $i18n.t('btn.void'):
             item.isShow = false;
             break; */
         }
@@ -641,7 +640,7 @@ export default {
         {
           style: 'input',
           // label: "处理人",
-          label: window.vmI18n.t('form_label.handler'),
+          label: $i18n.t('form_label.handler'),
           disabled: false, // 按钮禁用控制
           dataAcessKey: 'HANDLER',
           value: 'HANDLER',
@@ -650,7 +649,7 @@ export default {
         {
           style: 'input',
           // label: "处理人备注",
-          label: window.vmI18n.t('form_label.processor_remarks'),
+          label: $i18n.t('form_label.processor_remarks'),
           dataAcessKey: 'REMARK_HANDLE',
           disabled: false, // 按钮禁用控制
           value: 'REMARK_HANDLE',
@@ -659,7 +658,7 @@ export default {
         {
           style: 'input',
           // label: "入库单单号",
-          label: window.vmI18n.t('form_label.in_order_stockNo'),
+          label: $i18n.t('form_label.in_order_stockNo'),
           dataAcessKey: 'ID',
           disabled: true, // 按钮禁用控制
           value: 'ID',
@@ -668,7 +667,7 @@ export default {
         {
           style: 'input',
           // label: "下单店铺",
-          label: window.vmI18n.t('form_label.orderShop'),
+          label: $i18n.t('form_label.orderShop'),
           dataAcessKey: 'CP_C_SHOP_TITLE',
           disabled: true, // 按钮禁用控制
           value: 'CP_C_SHOP_TITLE',
@@ -677,7 +676,7 @@ export default {
         {
           style: 'input',
           // label: "WMS单据编号",
-          label: window.vmI18n.t('form_label.wMS_billNo'),
+          label: $i18n.t('form_label.wMS_billNo'),
           dataAcessKey: 'WMS_BILL_NO',
           disabled: true, // 按钮禁用控制
           value: 'WMS_BILL_NO',
@@ -715,40 +714,40 @@ export default {
       const item = this.information.formValue;
       if (!item.OC_B_REFUND_BATCH_ID) {
         // this.$Message.warning("退货批次必填！");
-        this.$Message.warning(window.vmI18n.t('modalTips.p1'));
+        this.$Message.warning($i18n.t('modalTips.p1'));
         return;
       }
       if (!item.SPECIAL_TYPE) {
         // this.$Message.warning("特殊处理类型必填！");
-        this.$Message.warning(window.vmI18n.t('modalTips.p2'));
+        this.$Message.warning($i18n.t('modalTips.p2'));
         return;
       }
       if (!this.jordanTableConfig.data.length) {
         // this.$Message.warning("退货入库明细不能为空！");
-        this.$Message.warning(window.vmI18n.t('modalTips.p3'));
+        this.$Message.warning($i18n.t('modalTips.p3'));
         return;
       }
       const dataArr = JSON.parse(JSON.stringify(this.jordanTableConfig.data));
       dataArr.forEach((item) => {
         // 商品标记
         item.PRODUCT_MARK =
-          item.PRODUCT_MARK == window.vmI18n.t('form_label.qualityGoods')
+          item.PRODUCT_MARK == $i18n.t('form_label.qualityGoods')
             ? 1
             : 0;
         // 是否无原单条码
         item.IS_WITHOUT_ORIG =
-          item.IS_WITHOUT_ORIG == window.vmI18n.t('common.yes') ? 1 : 0;
+          item.IS_WITHOUT_ORIG == $i18n.t('common.yes') ? 1 : 0;
         // 是否匹配
-        item.IS_MATCH = item.IS_MATCH == window.vmI18n.t('common.yes') ? 1 : 0;
+        item.IS_MATCH = item.IS_MATCH == $i18n.t('common.yes') ? 1 : 0;
         // 是否生成调整单
         item.IS_GEN_ADJUST =
-          item.IS_GEN_ADJUST == window.vmI18n.t('common.yes') ? 1 : 0;
+          item.IS_GEN_ADJUST == $i18n.t('common.yes') ? 1 : 0;
         item.IS_GEN_IN_ORDER =
-          item.IS_GEN_IN_ORDER == window.vmI18n.t('common.yes') ? 1 : 0;
+          item.IS_GEN_IN_ORDER == $i18n.t('common.yes') ? 1 : 0;
         item.IS_GEN_WRO_ADJUST =
-          item.IS_GEN_WRO_ADJUST == window.vmI18n.t('common.yes') ? 1 : 0;
+          item.IS_GEN_WRO_ADJUST == $i18n.t('common.yes') ? 1 : 0;
         item.IS_GEN_MINUS_ADJUST =
-          item.IS_GEN_MINUS_ADJUST == window.vmI18n.t('common.yes') ? 1 : 0;
+          item.IS_GEN_MINUS_ADJUST == $i18n.t('common.yes') ? 1 : 0;
       });
       const params = {
         ocBRefundInProductItem: dataArr, // 退货入库明细
@@ -788,11 +787,11 @@ export default {
             type: 'action',
             name: 'returnStoreageList',
             // label: "退货入库",
-            label: window.vmI18n.t('panel_label.returnTreasury'),
+            label: $i18n.t('panel_label.returnTreasury'),
             query: Object.assign({
               id: 2809,
               // tabTitle: "退货入库",
-              tabTitle: window.vmI18n.t('panel_label.returnTreasury'),
+              tabTitle: $i18n.t('panel_label.returnTreasury'),
             }),
             back: true,
           });
@@ -884,11 +883,11 @@ export default {
       this.information.formData.forEach((value) => {
         // if (value.label === "特殊处理类型") {
         if (
-          value.label === window.vmI18n.t('form_label.specialTreatmentType')
+          value.label === $i18n.t('form_label.specialTreatmentType')
         ) {
           res.data.data.addcolums.forEach((item) => {
             // if (item.parentdesc === "基本信息") {
-            if (item.parentdesc === window.vmI18n.t('common.baseInformation')) {
+            if (item.parentdesc === $i18n.t('common.baseInformation')) {
               const childItem = item.childs;
               childItem.forEach((item) => {
                 if (item.colname === 'SPECIAL_TYPE') {
@@ -960,7 +959,7 @@ export default {
         !lists.logistics_code
       ) {
         // _this.$Message.error("请输入查询条件！");
-        _this.$Message.error(window.vmI18n.t('modalTips.i8'));
+        _this.$Message.error($i18n.t('modalTips.i8'));
         return;
       }
       _this.order.table.loading = true;
@@ -998,7 +997,7 @@ export default {
       _this.jordanTableConfig.data = [];
       if (!this.onSelectData.length) {
         // _this.$Message.error("请选择一条数据！");
-        _this.$Message.error(window.vmI18n.t('modalTips.i7'));
+        _this.$Message.error($i18n.t('modalTips.i7'));
         return;
       }
       const data = _this.information.formValue;
@@ -1086,7 +1085,7 @@ export default {
         if (item.itemdata) {
           switch (item.itemdata.name) {
             // case "物流公司":logisticsCompany
-            case _this.vmI18n.t('form_label.logisticsCompany'):
+            case $i18n.t('form_label.logisticsCompany'):
               this.information.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid;
               this.information.formValue.CP_C_LOGISTICS_ENAME =
                 item.itemdata.valuedata;

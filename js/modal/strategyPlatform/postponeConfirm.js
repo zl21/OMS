@@ -18,7 +18,7 @@ import businessButton from 'professionalComponents/businessButton';
           buttons: [
             {
               type: '', // 按钮类型
-              text: window.vmI18n.t('common.cancel'), // 取消
+              text: $i18n.t('common.cancel'), // 取消
               icon: '', // 按钮图标
               size: 'small', // 按钮大小
               disabled: false, // 按钮禁用控制
@@ -27,7 +27,7 @@ import businessButton from 'professionalComponents/businessButton';
               }, // 按钮点击事件
             },
             {
-              text: window.vmI18n.t('common.determine'), // 确定
+              text: $i18n.t('common.determine'), // 确定
               size: 'small', // 按钮大小
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -45,7 +45,7 @@ import businessButton from 'professionalComponents/businessButton';
       },
       confirm() {
         const data = {
-          title: window.vmI18n.t('modalTitle.epostponep'), // '延期',
+          title: $i18n.t('modalTitle.epostponep'), // '延期',
           tablename: 'ST_C_SHOP_ITEM_VIRTUAL_HIGH_STOCK',
           objids: this.idArray,
           newEndTime: this.renderTime(this.time)
@@ -67,7 +67,7 @@ import businessButton from 'professionalComponents/businessButton';
                 this.confirm();
               },
               onCancel: () => {
-                this.$Message.info(window.vmI18n.t('modalTips.ep')); // '点击了取消!'
+                this.$Message.info($i18n.t('modalTips.ep')); // '点击了取消!'
               }
             });
           } else {

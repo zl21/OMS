@@ -35,7 +35,6 @@ export default {
     };
     /* -------------------- input校验器 end -------------------- */
     return {
-      vmI18n: window.vmI18n,
       subTableLogConfig: {
         centerName: '',
         tablename: '',
@@ -65,7 +64,7 @@ export default {
             },
           },
           {
-            text: window.vmI18n.t('btn.back'),
+            text: $i18n.t('btn.back'),
             btnclick: () => {
               this.back();
             },
@@ -209,7 +208,8 @@ export default {
       const self = this;
       this.loading = true;
       const data = await this.$OMS2.omsUtils.getObject('CP_C_LOGISTICS', id);
-      self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基本信息');
+      // self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基本信息');
+      self.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, self.formConfig);
 
       /* 子表初始化： */
       const subData = await this.$OMS2.omsUtils.initSubtable('CP_C_LOGISTICS_ITEM', self.ID, '168321', {
@@ -334,7 +334,7 @@ export default {
         self.modify.master = {};
         if (data && data.ID) self.ID = data.ID
         await self.initObjItem(self.ID);
-        self.$Message.success(message || window.vmI18n.t('modalTips.z9'));
+        self.$Message.success(message || $i18n.t('modalTips.z9'));
       } else {
         // 走框架的报错
       }
@@ -350,12 +350,12 @@ export default {
       const masterArr = Object.keys(self.modify.master);
       if (masterArr.length) {
         this.$Modal.info({
-          title: self.vmI18n.t('modalTitle.tips'), // 提示
+          title: $i18n.t('modalTitle.tips'), // 提示
           content: '当前修改未保存，确定返回？',
           mask: true,
           showCancel: true,
-          okText: self.vmI18n.t('common.determine'), // 确定
-          cancelText: self.vmI18n.t('common.cancel'), // 取消
+          okText: $i18n.t('common.determine'), // 确定
+          cancelText: $i18n.t('common.cancel'), // 取消
           onOk: () => {
             self.onOk()
           },

@@ -4,7 +4,6 @@ export default {
   mixins: [listeningToKeydownMixin],
   data() {
     return {
-      vmI18n: window.vmI18n,
       childArr: [],
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
@@ -12,7 +11,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -22,7 +21,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
