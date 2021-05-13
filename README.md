@@ -387,6 +387,7 @@ R3.launchApplication({
 | v1.2.65 | js $i18n  |
 | v1.2.66 | config $i18n  |
 | v1.2.67 | 拆分订单bug  |
+| v1.2.68 | 订单列表 - 取消合并联调  |
 
 #### Extends-Api 版本说明
 

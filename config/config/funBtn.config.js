@@ -1292,14 +1292,35 @@ class BtnConfig {
       }
     }
     const param = {
-      IDS: selection.map(val => val.ID)
+      ID_AND_BILL_NO_LIST:selection.map((item)=>({ID:item.ID,BILL_NO:item.BILL_NO}))
     }
     // 确认将选中的订单取消合并吗？
     commonUtils.modalShow(self, 'fy', 'orderCenter.cancelMergeOrder', param, 'all', function (res) {
       let { data } = res;
-      if (data.code === 0) {
+      console.log(data);
+      if(data.code === 0){
         console.log('成功！');
         self.$Message.success(data.message || '成功！')
+      }else{
+        commonUtils.tipShow('confirm' , self , res ,data.message, function(h){
+          return h('Table' , {
+            props:{
+              columns:[
+                {
+                  title: 'ID',
+                  key: 'objid',
+                },{
+                  title: '单据编号',
+                  key: 'objno',
+                },{
+                  title: '详细信息',
+                  key: 'message',
+                }
+              ],
+              data:data.data
+            }
+          })
+        })
       }
     })
   }
