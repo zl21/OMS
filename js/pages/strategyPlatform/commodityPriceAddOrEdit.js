@@ -205,7 +205,7 @@ export default {
           PLAN_NAME: '', // 策略名称
           BEGIN_TIME: '', // 生效开始时间
           END_TIME: '', // 生效结束时间
-          PRIORITY: '9', // 优先级
+          PRIORITY: '', // 优先级
           ISACTIVE: '', // 启用状态
           CP_C_SHOP_ID: '', // 店铺
           CP_C_SHOP_ENAME: '',
