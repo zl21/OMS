@@ -18,7 +18,7 @@ export default {
         isdisabled: false,
         itemdata: {
           col: 1,
-          colid: 167606,
+          colid: 168348,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
