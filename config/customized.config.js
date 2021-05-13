@@ -1,3 +1,4 @@
+import InitAppConfig from './config/init.config.js' // 首位引入
 import customizedModal from './config/customized.modal.config.js'
 import customizedPage from './config/customized.page.config.js'
 import customizedExternalTreeDatas from './config/externalTreeDatas.config.js'
@@ -12,7 +13,6 @@ import importTableConfig from './config/importTable.config.js'
 import downLoadAllConfig from '@/js/modal/interfacePlatform/config/downLoadAll.Config.js'
 import oldConfig from './config/globalComponent.config.js'
 
-import InitAppConfig from './config/init.config.js'
 import commonUtils from './config/commonUtils.js'
 import funBtn from './config/funBtn.config.js'
 import dropDownBtn from './config/dropDown.config.js'

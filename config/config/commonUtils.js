@@ -90,7 +90,7 @@ class commonUtils {
    */
   static tipShow(type, self, res, isTitle, renderFun) {
     self.$Modal[type]({
-      title: isTitle ?? window.vmI18n.t('modalTitle.tips'), // 提示
+      title: isTitle ?? $i18n.t('modalTitle.tips'), // 提示
       content: renderFun ?? res.data.message,
       cancelType: true,
       titleAlign: 'left',
@@ -186,7 +186,7 @@ class commonUtils {
   static importTable(self, modalConfig, pageName, confirmTitle) {
     console.log(confirmTitle)
     self[modalConfig].confirmTitle = confirmTitle
-      ? window.vmI18n.t(`${confirmTitle}`)
+      ? $i18n.t(`${confirmTitle}`)
       : self[modalConfig].confirmTitle // 弹框标题
     self.$children.find((item) => item.name === pageName).openConfirm() // 文件名称
   }
@@ -212,11 +212,11 @@ class commonUtils {
       id: id,
       type: 'action',
       name: moduleName,
-      label: window.vmI18n.t(`${labelName}`), // 订单管理
+      label: $i18n.t(`${labelName}`), // 订单管理
       back: isback,
       query: Object.assign({
         id: id,
-        tabTitle: window.vmI18n.t(`${labelName}`), // 订单管理
+        tabTitle: $i18n.t(`${labelName}`), // 订单管理
         ...exendObj,
       }),
     })
@@ -919,7 +919,7 @@ class commonUtils {
       id = selection[0].ID;
     }
     if ((selection.length != 1 && params.id !== '-1') || (selection.length != 1 && params.cloneReturnGoodId)) {
-      _self.$Message.warning(window.vmI18n.t('modalTips.zm'))
+      _self.$Message.warning($i18n.t('modalTips.zm'))
       return;
     }
     _self.$store.commit('customize/TabHref', {
