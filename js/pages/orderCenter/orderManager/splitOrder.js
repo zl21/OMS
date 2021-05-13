@@ -247,7 +247,7 @@ export default {
               h('Input', {
                 props: {
                   value: params.row.split_num,
-                  disabled: this.dataIndex !== 0,
+                  // disabled: this.dataIndex !== 0,
                   regx: /^[0-9]/,
                 },
                 on: {
