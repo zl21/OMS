@@ -16,35 +16,34 @@ export default {
   data() {
     const _this = this;
     return {
-      vmI18n: window.vmI18n,
       depositConfig: {
         jordanFormConfig: {
           formData: [
             {
               style: 'input',
               // label: "押金订单号",
-              label: window.vmI18n.t('form_label.depositOrderNo'),
+              label: $i18n.t('form_label.depositOrderNo'),
               value: 'demo1',
               width: '8',
             },
             {
               style: 'input',
               // label: "收货人",
-              label: window.vmI18n.t('form_label.consignee'),
+              label: $i18n.t('form_label.consignee'),
               value: 'demo2',
               width: '8',
             },
             {
               style: 'input',
               // label: "收货人手机号",
-              label: window.vmI18n.t('form_label.consignee_phone'),
+              label: $i18n.t('form_label.consignee_phone'),
               value: 'demo3',
               width: '8',
             },
             {
               style: 'input',
               // label: "买家昵称",
-              label: window.vmI18n.t('table_label.buyerNickname'),
+              label: $i18n.t('table_label.buyerNickname'),
               value: 'demo4',
               width: '8',
             },
@@ -64,7 +63,7 @@ export default {
                 isnotnull: false, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: window.vmI18n.t('form_label.orderShop'), // 下单店铺
+                name: $i18n.t('form_label.orderShop'), // 下单店铺
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'CP_C_SHOP', // 对应的表
                 reftableid: 24475, // 对应的表ID
@@ -89,7 +88,7 @@ export default {
             },
             {
               style: 'select', // 下拉框类型
-              label: window.vmI18n.t('form_label.delivery_warehouse'), // 发货仓库
+              label: $i18n.t('form_label.delivery_warehouse'), // 发货仓库
               width: '8', // 所占宽度宽度
               value: 'CP_C_PHY_WAREHOUSE_ID', // 输入框的值
               selectChange: () => {
@@ -124,7 +123,7 @@ export default {
           buttons: [
             {
               // text: "查询",
-              text: window.vmI18n.t('btn.query'), // 按钮文本
+              text: $i18n.t('btn.query'), // 按钮文本
               size: 'small',
               brnclick: () => {
                 this.searchChange();
@@ -138,37 +137,37 @@ export default {
         columns: [
           {
             // title: "押金订单号",
-            title: window.vmI18n.t('form_label.depositOrderNo'),
+            title: $i18n.t('form_label.depositOrderNo'),
             key: 'demo1',
           },
           {
             // title: "收货人",
-            title: window.vmI18n.t('form_label.consignee'),
+            title: $i18n.t('form_label.consignee'),
             key: 'demo2',
           },
           {
             // title: "卖家昵称",
-            title: window.vmI18n.t('table_label.seller_nickname'),
+            title: $i18n.t('table_label.seller_nickname'),
             key: 'demo3',
           },
           {
             // title: "收货人手机",
-            title: window.vmI18n.t('form_label.consignee_phone'),
+            title: $i18n.t('form_label.consignee_phone'),
             key: 'demo4',
           },
           {
             // title: "发货仓库",
-            title: window.vmI18n.t('form_label.delivery_warehouse'),
+            title: $i18n.t('form_label.delivery_warehouse'),
             key: 'demo5',
           },
           {
             // title: "物流单号",
-            title: window.vmI18n.t('form_label.logisticsOrder_No'),
+            title: $i18n.t('form_label.logisticsOrder_No'),
             key: 'demo6',
           },
           {
             // title: "下单店铺",
-            title: window.vmI18n.t('form_label.orderShop'),
+            title: $i18n.t('form_label.orderShop'),
             key: 'demo7',
           },
         ],
@@ -179,7 +178,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -187,7 +186,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             size: 'small', // 按钮大小
             btnclick: () => {
               this.confirmChange();
@@ -206,7 +205,7 @@ export default {
           if (res.data.code === 0) {
             // this.$Message.success(res.data.message || "会员加急发货打标成功");
             this.$Message.success(
-              res.data.message || window.vmI18n.t('modalTips.yd')
+              res.data.message || $i18n.t('modalTips.yd')
             );
             this.$parent.$parent.$parent.selection = [];
             this.$parent.$parent.$parent.getData();
@@ -232,7 +231,7 @@ export default {
         if (res.data.code === 0) {
           this.depositConfig.jordanFormConfig.formData.forEach((item) => {
             // 发货仓库
-            if (item.label === window.vmI18n.t('form_label.delivery_warehouse'))
+            if (item.label === $i18n.t('form_label.delivery_warehouse'))
               item.options = res.data.data;
           });
         }

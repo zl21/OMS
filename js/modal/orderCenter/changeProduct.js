@@ -10,7 +10,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       pro: '',
       replace_pro: '',
       radioValue: '2',
@@ -19,13 +18,13 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
               this.$parent.$parent.closeConfirm()
             }, // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             btnclick: () => {
               this.confirm()
             },
@@ -39,7 +38,7 @@ export default {
         },
         formData: [
           {
-            label: window.vmI18n.t('table_label.commoditySKU'), // '商品SKU',
+            label: $i18n.t('table_label.commoditySKU'), // '商品SKU',
             style: 'dimSearch',
             width: '12',
             value: 'searchValue',
@@ -76,7 +75,7 @@ export default {
               //   });
               //   dimList.forEach((item) => {
               //     // '商品SKU'
-              //     if (item.label === window.vmI18n.t('table_label.commoditySKU')) {
+              //     if (item.label === $i18n.t('table_label.commoditySKU')) {
               //       item.AuotData = data;
               //       // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
               //     }
@@ -91,7 +90,7 @@ export default {
             },
           },
           {
-            label: window.vmI18n.t('table_label.itemNo'), // '商品款号',
+            label: $i18n.t('table_label.itemNo'), // '商品款号',
             style: 'dimSearch',
             width: '12',
             value: 'psCProEcode',
@@ -115,7 +114,7 @@ export default {
               //   const dimList = _this.formConfig.formData;
               //   dimList.forEach((item) => {
               //     // '商品款号'
-              //     if (item.label === window.vmI18n.t('table_label.itemNo')) {
+              //     if (item.label === $i18n.t('table_label.itemNo')) {
               //       item.AuotData = res.data.data.list;
               //     }
               //   });
@@ -138,7 +137,7 @@ export default {
         },
         formData: [
           {
-            label: window.vmI18n.t('table_label.commoditySKU'), // '商品SKU',
+            label: $i18n.t('table_label.commoditySKU'), // '商品SKU',
             style: 'dimSearch',
             width: '12',
             value: 'searchValue',
@@ -176,7 +175,7 @@ export default {
               //   dimList.forEach((item) => {
               //     // '商品SKU'
               //     if (
-              //       item.label === window.vmI18n.t('table_label.commoditySKU')
+              //       item.label === $i18n.t('table_label.commoditySKU')
               //     ) {
               //       item.AuotData = data
               //       // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
@@ -192,7 +191,7 @@ export default {
             },
           },
           {
-            label: window.vmI18n.t('table_label.itemNo'), // '商品款号',
+            label: $i18n.t('table_label.itemNo'), // '商品款号',
             style: 'dimSearch',
             width: '12',
             value: 'psCProEcode',
@@ -216,7 +215,7 @@ export default {
               //   const dimList = _this.replaceFormConfig.formData
               //   dimList.forEach((item) => {
               //     // '商品款号'
-              //     if (item.label === window.vmI18n.t('table_label.itemNo')) {
+              //     if (item.label === $i18n.t('table_label.itemNo')) {
               //       item.AuotData = res.data.data.list
               //     }
               //   })
@@ -472,7 +471,7 @@ export default {
       //     }
       //   } else {
       //     // this.$Message.warning("sku查询失败!");
-      //     this.$Message.warning(window.vmI18n.t('modalTips.zt'))
+      //     this.$Message.warning($i18n.t('modalTips.zt'))
       //   }
       //   this[loadName] = false
       // } catch (e) {
@@ -503,23 +502,23 @@ export default {
       /* const self = this
       if (JSON.stringify(self.onRowClickData) == '{}') {
         // self.$Message.warning("替换前商品sku不能为空!");
-        self.$Message.warning(window.vmI18n.t('modalTips.yf'))
+        self.$Message.warning($i18n.t('modalTips.yf'))
         return
       }
       if (JSON.stringify(self.onRowClickReplaceData) == '{}') {
         // self.$Message.warning("替换后商品sku码不能为空!");
-        self.$Message.warning(window.vmI18n.t('modalTips.yg'))
+        self.$Message.warning($i18n.t('modalTips.yg'))
         return
       }
       // if (self.onRowClickData.ECODE == self.onRowClickReplaceData.ECODE) {
       //   // self.$Message.warning("替换商品与被替换商品不能相同!");
-      //   self.$Message.warning(window.vmI18n.t('modalTips.yh'));
+      //   self.$Message.warning($i18n.t('modalTips.yh'));
       //   return;
       // }
       const result = {}
       const needParam = {
         IS_GIFT:
-          self.onRowClickReplaceData.IS_GIFT == window.vmI18n.t('common.yes')
+          self.onRowClickReplaceData.IS_GIFT == $i18n.t('common.yes')
             ? '0'
             : '1',
         PS_C_PRO_ECODE: self.onRowClickReplaceData.PS_C_PRO_ECODE,
@@ -531,7 +530,7 @@ export default {
       }
       if (self.componentData.a_2.length == 0) {
         // self.$Message.warning("请勾选订单数据!");
-        self.$Message.warning(window.vmI18n.t('modalTips.zu'))
+        self.$Message.warning($i18n.t('modalTips.zu'))
         return
       }
       result.ids = self.componentData.a_2
@@ -558,7 +557,7 @@ export default {
                 columns: [
                   {
                     // title: "提示信息",
-                    title: window.vmI18n.t('modalTitle.tips'),
+                    title: $i18n.t('modalTitle.tips'),
                     key: 'message',
                   },
                 ],

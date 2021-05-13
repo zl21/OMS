@@ -23,7 +23,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       componentData: {
         tableName: 'SC_B_TRANSFER',
       },

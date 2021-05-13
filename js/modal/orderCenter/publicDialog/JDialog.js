@@ -13,7 +13,7 @@ export default {
     title: {
       type: String,
       // default: () => "标题"
-      default: () => window.vmI18n.t('modalTips.title')
+      default: () => $i18n.t('modalTips.title')
     }, // 设置标题title
     titleAlign: {
       type: String,
@@ -66,12 +66,12 @@ export default {
     okText: {
       type: String,
       // default: () => "确定"
-      default: () => window.vmI18n.t('common.determine')
+      default: () => $i18n.t('common.determine')
     },
     cancelText: {
       type: String,
       // default: () => "取消"
-      default: () => window.vmI18n.t('common.cancel')
+      default: () => $i18n.t('common.cancel')
     },
     confirm: {
       type: Function
@@ -86,7 +86,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       modal: this.$props.visible,
       currentView: '',
       commonObj: {},

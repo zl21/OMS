@@ -7,7 +7,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       radioValue: '2',
       searchValue: '',
       columns: [{
@@ -94,7 +93,7 @@ export default {
       const self = this;
       if (self.data.length == 0) {
         // sku不能为空!
-        self.$Message.warning(self.vmI18n.t('modalTips.cg'));
+        self.$Message.warning($i18n.t('modalTips.cg'));
         return;
       }
       let params = {

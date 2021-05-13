@@ -20,7 +20,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       totalRowCount: 0,
       pageSize: 10,
       pageNum: 1,
@@ -36,7 +35,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -47,7 +46,7 @@ export default {
           {
             type: '', // 按钮类
             // text: "", //按钮文本
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -55,7 +54,7 @@ export default {
               const self = this;
               if (!self.pid) {
                 // self.$Message.warning("请选择仓库");
-                self.$Message.warning(window.vmI18n.t('modalTips.zi'));
+                self.$Message.warning($i18n.t('modalTips.zi'));
                 return false;
               }
               const param = {
@@ -122,13 +121,13 @@ export default {
           {
             colname: 'ename',
             // name: "发货仓库名称",
-            name: window.vmI18n.t('table_label.deliveryWarehouse_name'),
+            name: $i18n.t('table_label.deliveryWarehouse_name'),
             show: true
           },
           {
             colname: 'ecode',
             // name: "发货仓库编码",
-            name: window.vmI18n.t('table_label.deliveryWarehouse_code'),
+            name: $i18n.t('table_label.deliveryWarehouse_code'),
             show: false
           }
         ],

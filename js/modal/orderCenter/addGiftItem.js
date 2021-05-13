@@ -148,13 +148,13 @@ export default {
         buttons: [
           {
             disabled:false,
-            text: window.vmI18n.t('common.cancel'),
+            text: $i18n.t('common.cancel'),
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('common.determine'),
+            text: $i18n.t('common.determine'),
             disabled:false,
             btnclick: () => {
               if (!this.skuEcodes) {
@@ -226,7 +226,7 @@ export default {
                   props: {
                     columns: [
                       {
-                        title: window.vmI18n.t('modalTitle.a6'), // '提示信息',
+                        title: $i18n.t('modalTitle.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],
@@ -273,7 +273,7 @@ export default {
                   props: {
                     columns: [
                       {
-                        title: window.vmI18n.t('modalTitle.a6'), // '提示信息',
+                        title: $i18n.t('modalTitle.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],
@@ -320,7 +320,7 @@ export default {
                   props: {
                     columns: [
                       {
-                        title: window.vmI18n.t('modalTitle.a6'), // '提示信息',
+                        title: $i18n.t('modalTitle.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],
@@ -404,7 +404,7 @@ export default {
     async submit() {
       const self = this;
       if (!self.onRowData) {
-        self.$Message.error(window.vmI18n.t('modalTips.eg')) // '无赠品可添加！'
+        self.$Message.error($i18n.t('modalTips.eg')) // '无赠品可添加！'
         return
       }
       const ids = []
@@ -435,7 +435,7 @@ export default {
                   props: {
                     columns: [
                       {
-                        title: window.vmI18n.t('modalTitle.a6'), // '提示信息',
+                        title: $i18n.t('modalTitle.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],

@@ -28,7 +28,7 @@ export default {
         formData: [
           {
             style: 'select',
-            label: window.vmI18n.t('form_label.order_time'), // '订单时间',
+            label: $i18n.t('form_label.order_time'), // '订单时间',
             width: '24',
             value: 'BILL_TIME_TYPE',
             clearable: false,
@@ -37,7 +37,7 @@ export default {
           }, {
             style: 'date',
             type: 'datetime',
-            label: window.vmI18n.t('form_label.adjustEndTime'), // '调整结束时间',
+            label: $i18n.t('form_label.adjustEndTime'), // '调整结束时间',
             width: '24',
             format: 'yyyy-MM-dd HH:mm:ss',
             value: 'END_TIME',
@@ -50,12 +50,12 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
               this.$emit('closeActionDialog');
             } // 按钮点击事件
           }, {
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             btnclick: () => {
               this.confirmChange();
             }
@@ -76,7 +76,7 @@ export default {
     };
     console.log(tableInfo);
     // const timeType = '1';
-    const item = tableInfo.formItems.defaultFormItemsLists.find(item => item.coldesc === window.vmI18n.t('form_label.order_time'));
+    const item = tableInfo.formItems.defaultFormItemsLists.find(item => item.coldesc === $i18n.t('form_label.order_time'));
     console.log(item);
     this.formConfig.formData[0].options = item.combobox.forEach(val => {
       if (tableInfo.buttons.selectArr[0].BILL_TIME_TYPE.val === val.limitdesc) this.formConfig.formValue.BILL_TIME_TYPE = val.limitval;
@@ -113,7 +113,7 @@ export default {
         }
       } catch (error) {
         this.$comUtils.setLoading();
-        this.$Message.success(window.vmI18n.t('modalTips.z3')); // '修改时间失败'
+        this.$Message.success($i18n.t('modalTips.z3')); // '修改时间失败'
       }
     }
   }

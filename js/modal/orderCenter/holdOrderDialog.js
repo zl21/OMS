@@ -13,7 +13,6 @@ export default {
   data() {
     const _this = this;
     return {
-      vmI18n: window.vmI18n,
       holdBtnClass: '',
       loading: false,
       formConfig: {
@@ -30,7 +29,7 @@ export default {
           {
             style: 'select',
             // label: 'HOLD单原因',
-            label: window.vmI18n.t('form_label.hOLD_reason'),
+            label: $i18n.t('form_label.hOLD_reason'),
             width: '24',
             value: 'HOLD_ORDER_REASON',
             setRequired: 'required',
@@ -38,7 +37,7 @@ export default {
               {
                 value: '1',
                 // label: '直播HOLD单'
-                label: window.vmI18n.t('form_label.live_HOLD')
+                label: $i18n.t('form_label.live_HOLD')
               },
               {
                 value: '2',
@@ -50,7 +49,7 @@ export default {
           {
             style: 'checkbox',
             // label: "自动释放",
-            label: window.vmI18n.t('form_label.automaticRelease'),
+            label: $i18n.t('form_label.automaticRelease'),
             value: 'IS_AUTO_RELEASE',
             width: 24
           }
@@ -63,18 +62,18 @@ export default {
         {
           style: 'select',
           // label: "释放时点",
-          label: window.vmI18n.t('form_label.release_timePoint'),
+          label: $i18n.t('form_label.release_timePoint'),
           width: 24,
           value: 'RELEASE_TIME_TYPE',
           options: [
             {
               // label: "指定时点释放",
-              label: window.vmI18n.t('form_label.release_specified_timePoint'),
+              label: $i18n.t('form_label.release_specified_timePoint'),
               value: '1'
             },
             {
               // label: "固定时长后释放",
-              label: window.vmI18n.t('form_label.release_after_fixedTime'),
+              label: $i18n.t('form_label.release_after_fixedTime'),
               value: '2'
             }
           ],
@@ -111,12 +110,12 @@ export default {
           options1: [
             {
               // label: "下单时间",
-              label: window.vmI18n.t('table_label.orderTime'),
+              label: $i18n.t('table_label.orderTime'),
               value: '1'
             },
             {
               // label: "付款时间",
-              label: window.vmI18n.t('table_label.paymentTime'),
+              label: $i18n.t('table_label.paymentTime'),
               value: '2'
             },
             {
@@ -127,17 +126,17 @@ export default {
           options2: [
             {
               // label: "分钟",
-              label: window.vmI18n.t('other.minute'),
+              label: $i18n.t('other.minute'),
               value: '1'
             },
             {
               // label: "小时",
-              label: window.vmI18n.t('other.hour'),
+              label: $i18n.t('other.hour'),
               value: '2'
             },
             {
               // label: "天",
-              label: window.vmI18n.t('other.day'),
+              label: $i18n.t('other.day'),
               value: '3'
             }
           ]
@@ -148,13 +147,13 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }
           },
           {
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             btnclick: () => {
               this.confirmChange();
             }
@@ -243,7 +242,7 @@ export default {
       // 判断HOLD单原因
       if (!formValue.HOLD_ORDER_REASON) {
         // return { message: "HOLD单原因不能为空" };
-        return { message: window.vmI18n.t('modalTips.zn') };
+        return { message: $i18n.t('modalTips.zn') };
       }
       params.HOLD_ORDER_REASON = formValue.HOLD_ORDER_REASON;
       // 判断是否有勾选自动释放
@@ -255,26 +254,26 @@ export default {
         if (formValue.RELEASE_TIME_TYPE === '1') {
           // 判断指定时点释放的时间
           if (!formValue.RELEASE_TIME) {
-            return { message: window.vmI18n.t('modalTips.zo') }; // 指定时点释放的时间不能为空
+            return { message: $i18n.t('modalTips.zo') }; // 指定时点释放的时间不能为空
           }
           if (new Date(formValue.RELEASE_TIME).getTime() < Date.now()) {
-            return { message: window.vmI18n.t('modalTips.zp') }; // 指定时点释放的时间不能小于当前时间
+            return { message: $i18n.t('modalTips.zp') }; // 指定时点释放的时间不能小于当前时间
           }
           params.RELEASE_TIME = this.$comUtils.dateFormat(formValue.RELEASE_TIME, 'yyyy-MM-dd hh:mm:ss');
         } else if (formValue.RELEASE_TIME_TYPE === '2') {
           // 判断固定时长后释放的相应参数
           if (formValue.DAY_TYPE && formValue.FIXED_DURATION && formValue.TIME_UNIT) {
             if (formValue.FIXED_DURATION.toString().indexOf('.') >= 0) {
-              return { message: window.vmI18n.t('modalTips.zq') }; // 固定时长后释放的固定时长只能是整数
+              return { message: $i18n.t('modalTips.zq') }; // 固定时长后释放的固定时长只能是整数
             }
             params.RELEASE_DAY_TYPE = +formValue.DAY_TYPE;
             params.FIXED_DURATION = formValue.FIXED_DURATION;
             params.TIME_UNIT = +formValue.TIME_UNIT;
           } else {
-            return { message: window.vmI18n.t('modalTips.zr') }; // 固定时长后释放的相关数据不能为空
+            return { message: $i18n.t('modalTips.zr') }; // 固定时长后释放的相关数据不能为空
           }
         } else {
-          return { message: window.vmI18n.t('modalTips.zs') }; // 释放时点不能为空
+          return { message: $i18n.t('modalTips.zs') }; // 释放时点不能为空
         }
       } else {
         params.IS_AUTO_RELEASE = false;

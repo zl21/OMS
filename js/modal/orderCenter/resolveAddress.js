@@ -22,7 +22,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       objId: -1,
       loading: false,
       newReceivAddress: '',
@@ -181,13 +180,13 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             btnclick: () => {
               this.update();
             },
@@ -244,7 +243,7 @@ export default {
       const result = parse(this.newReceivAddress);
       if (result.province == '' && (result.area == '' || result.city == '')) {
         // "请填入完整信息,如:张三,17788888888,上海上海市闵行区黎安路999号"
-        this.$Message.warning(self.vmI18n.t('modalTips.f9'));
+        this.$Message.warning($i18n.t('modalTips.f9'));
       }else{
         this.data.receiver_name = result.name;
         this.data.receiver_mobile = result.mobile;
@@ -272,18 +271,18 @@ export default {
         if (!f) return this.CheckRegxMobile();
       } else {
         // 请填写收货人手机
-        return this.$Message.error(window.vmI18n.t('modalTips.yi'));
+        return this.$Message.error($i18n.t('modalTips.yi'));
       }
       if (!this.data.receiver_name) {
         // 请填写收货人名称
-        return this.$Message.error(window.vmI18n.t('modalTips.yj'));
+        return this.$Message.error($i18n.t('modalTips.yj'));
       }
     },
     update() {
       console.log(this.data);
       if (!this.data.receiver_address) {
         // 请填写详细地址！
-        return this.$Message.error(window.vmI18n.t('modalTips.ym'));
+        return this.$Message.error($i18n.t('modalTips.ym'));
       }
       let f = this.CheckRegx(this.regx.mobile, this.data.receiver_mobile);
       if (this.componentData.ck != 50) {
@@ -333,15 +332,15 @@ export default {
     },
     CheckRegxMobile() {
       // 收货人手机不合法
-      return this.$Message.error(window.vmI18n.t('modalTips.yn'));
+      return this.$Message.error($i18n.t('modalTips.yn'));
     },
     CheckRegxPhone() {
       // 收货人电话不合法
-      return this.$Message.error(window.vmI18n.t('modalTips.yo'));
+      return this.$Message.error($i18n.t('modalTips.yo'));
     },
     CheckRegxZip() {
       // 邮编不合法
-      return this.$Message.error(window.vmI18n.t('modalTips.yp'));
+      return this.$Message.error($i18n.t('modalTips.yp'));
     },
     onKeyDown(e) {
       if (this.$refs.newReceivAddress.$refs.input === document.activeElement) {

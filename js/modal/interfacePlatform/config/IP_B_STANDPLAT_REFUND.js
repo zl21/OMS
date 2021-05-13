@@ -57,11 +57,11 @@ export default {
     const downData = _this.downLoadFormConfig;
     if (!downData.formData[0].itemdata.pid) {
       // 请选择需要下载的店铺
-      _this.$Message.warning(this.vmI18n.t('modalTips.be'));
+      _this.$Message.warning($i18n.t('modalTips.be'));
       return;
     }
     if (downData.formValue.startEndTimes[0] === '' && !downData.formValue.sp_ids && !downData.formValue.orderNum) {
-      _this.$Message.warning(this.vmI18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
+      _this.$Message.warning($i18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
       return;
     }
     const param = {

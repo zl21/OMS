@@ -5,13 +5,12 @@ export default {
   name: 'DialogVisible',
   data() {
     return {
-      vmI18n: window.vmI18n,
       buttonConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [{
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -21,7 +20,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -32,56 +31,56 @@ export default {
         ]
       },
       itemdata: {
-        name: `${window.vmI18n.t('table_label.groupName')}：`, // '分组名称：'
+        name: `${$i18n.t('table_label.groupName')}：`, // '分组名称：'
         setGroupName: '',
         radio: '1'
       },
       visible: true,
       tableData: [],
       headOne: [{
-          label: window.vmI18n.t('form_label.activityName'), // '活动名称',
+          label: $i18n.t('form_label.activityName'), // '活动名称',
           name: 'ENAME'
         },
         {
-          label: window.vmI18n.t('table_label.participating_stores'), // '参与店铺',
+          label: $i18n.t('table_label.participating_stores'), // '参与店铺',
           name: 'SHOP_NAME'
         },
         {
-          label: window.vmI18n.t('table_label.original_groupName'), // '原分组名称',
+          label: $i18n.t('table_label.original_groupName'), // '原分组名称',
           name: 'PM_GROUP'
         },
         {
-          label: window.vmI18n.t('table_label.priority'), // '优先级',
+          label: $i18n.t('table_label.priority'), // '优先级',
           name: 'PM_PRIORITY'
         }
       ],
       headTwo: [{
-          label: window.vmI18n.t('form_label.activityName'), // '活动名称',
+          label: $i18n.t('form_label.activityName'), // '活动名称',
           name: 'ENAME'
         },
         {
-          label: window.vmI18n.t('table_label.participating_stores'), // '参与店铺',
+          label: $i18n.t('table_label.participating_stores'), // '参与店铺',
           name: 'SHOP_NAME'
         },
         {
-          label: window.vmI18n.t('table_label.original_groupName'), // '原分组名称',
+          label: $i18n.t('table_label.original_groupName'), // '原分组名称',
           name: 'PM_GROUP'
         }
       ],
       tHead: [{
-          label: window.vmI18n.t('form_label.activityName'), // '活动名称',
+          label: $i18n.t('form_label.activityName'), // '活动名称',
           name: 'ENAME'
         },
         {
-          label: window.vmI18n.t('table_label.participating_stores'), // '参与店铺',
+          label: $i18n.t('table_label.participating_stores'), // '参与店铺',
           name: 'SHOP_NAME'
         },
         {
-          label: window.vmI18n.t('table_label.original_groupName'), // '原分组名称',
+          label: $i18n.t('table_label.original_groupName'), // '原分组名称',
           name: 'PM_GROUP'
         },
         {
-          label: window.vmI18n.t('table_label.priority'), // '优先级',
+          label: $i18n.t('table_label.priority'), // '优先级',
           name: 'PM_PRIORITY'
         }
       ]
@@ -118,7 +117,7 @@ export default {
       const mapArr = [];
       const promActis = [];
       if (this.itemdata.radio == 1 && this.itemdata.setGroupName == '') {
-        self.$message.error(window.vmI18n.t('modalTips.es')); // '请填写分组名称'
+        self.$message.error($i18n.t('modalTips.es')); // '请填写分组名称'
         return;
       }
       self.tableData.forEach(item => {
@@ -131,7 +130,7 @@ export default {
       const setArr = new Set(mapArr); // 去重复
       console.log(setArr.size < mapArr.length ? '有重复' : '无重复');
       if (setArr.size < mapArr.length) {
-        self.$message.error(window.vmI18n.t('modalTips.et')); // '有重复优先级'
+        self.$message.error($i18n.t('modalTips.et')); // '有重复优先级'
         return;
       }
       const formData = new FormData();
@@ -147,7 +146,7 @@ export default {
         }
       } = await this.service.promotionCenter.updatePmGroup(formData);
       if (code === 0) {
-        self.$message.success(window.vmI18n.t('modalTips.eu')); // '设置分组成功'
+        self.$message.success($i18n.t('modalTips.eu')); // '设置分组成功'
         self.closeDialog();
       } else {
         self.$message.error(message);

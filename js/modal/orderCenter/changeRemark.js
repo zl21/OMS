@@ -18,7 +18,6 @@ export default {
   data() {
     return {
       spinShow: false,
-      vmI18n: window.vmI18n,
       // 提示
       confirmModal: false,
       formItem: {
@@ -31,7 +30,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               // this.$refs.changeLogistics.close();
@@ -39,7 +38,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: window.vmI18n.t('common.determine'), // 确定
+            text: $i18n.t('common.determine'), // 确定
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.determine();
