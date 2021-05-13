@@ -7,5 +7,8 @@ export default {
   DOWNLOADJINGDONGGOODS: {
     component: () => import('@/views/modal/commodityCenter/downLoadJingdongGoods.vue'),
   },
+  CUSTOMSTANDPLATFORMGOODSIDIMPORT: {
+    component: () => import('@/views/modal/commodityCenter/customstandplatformgoodsidimport.vue'),
+  },
 
 };

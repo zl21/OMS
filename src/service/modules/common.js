@@ -244,7 +244,12 @@ export default {
         tableName: 'ST_C_PRODUCT_STRATEGY',
         url: '/p/cs/productStrategy/import/multiShopItem',
         downloadUrl: '/p/cs/productStrategy/import/downloadMultiShopTemp'
-      } // 店铺商品特殊设置 - 多店铺比例-明细导入
+      }, // 店铺商品特殊设置 - 多店铺比例-明细导入
+      { 
+        tableName: 'PS_C_SAMECITY_DETRIMENT_REF',
+        url: '/p/cs/product/platformGoodsIdImport',
+        downloadUrl: '/p/cs/product/downloadPsPlatformGoodsIdTemp'
+      } // 同城购 - 平台商品ID导入
     ];
     return arr;
   },
