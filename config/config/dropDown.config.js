@@ -257,7 +257,7 @@ class DropDownConfig {
   static newOrderHander() {
     R3.store.commit('global/tabOpen', {
       type: 'C',
-      label: window.vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
+      label: $i18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
       customizedModuleName: 'orderManageAdd',
       customizedModuleId: '-1',
     })

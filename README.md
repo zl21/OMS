@@ -385,6 +385,7 @@ R3.launchApplication({
 | v1.2.63 | 版本更新 |
 | v1.2.64 | 改物流/仓库提示信息处理  |
 | v1.2.65 | js $i18n  |
+| v1.2.66 | config $i18n  |
 
 #### Extends-Api 版本说明
 

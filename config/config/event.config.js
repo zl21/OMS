@@ -28,7 +28,7 @@ class BurgeonEvent {
             type: 'C',
             customizedModuleName: 'orderManageDetail',
             customizedModuleId: row.ID,
-            label: window.vmI18n.t('panel_label.retailInvoice_details'),
+            label: $i18n.t('panel_label.retailInvoice_details'),
         });
     }
 

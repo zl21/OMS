@@ -133,12 +133,12 @@ class commonUtils {
    */
   static modalShow(self, tips, okKey, data, ...callback) {
     self.$Modal.info({
-      title: self.vmI18n.t('modalTitle.tips'), // 提示
-      content: self.vmI18n.t(`modalTips.${tips}`),
+      title: $i18n.t('modalTitle.tips'), // 提示
+      content: $i18n.t(`modalTips.${tips}`),
       mask: true,
       showCancel: true,
-      okText: self.vmI18n.t('common.determine'), // 确定
-      cancelText: self.vmI18n.t('common.cancel'), // 取消
+      okText: $i18n.t('common.determine'), // 确定
+      cancelText: $i18n.t('common.cancel'), // 取消
       onOk: () => {
         this.serviceHandler(self, okKey, data, callback)
       },
@@ -171,7 +171,7 @@ class commonUtils {
    */
   static msgTips(self, type, tips, tipsType = 1) {
     self.$Message[type]({
-      content: tipsType == 1 ? self.vmI18n.t(`modalTips.${tips}`) : tips, // 请选择需要新增退单记录！
+      content: tipsType == 1 ? $i18n.t(`modalTips.${tips}`) : tips, // 请选择需要新增退单记录！
       duration: 5,
       top: 80,
     })
@@ -246,13 +246,13 @@ class commonUtils {
     R3.store.commit(`global/${eventType}`, {
       type: actionType,
       tableName: moduleName,
-      label: self.vmI18n.t(`${labelName}`),
+      label: $i18n.t(`${labelName}`),
       tableId: tableId,
       id: id,
       query: Object.assign({
         id: id,
-        ptitle: self.vmI18n.t(`${labelName}`),
-        tabTitle: self.vmI18n.t(`${labelName}`),
+        ptitle: $i18n.t(`${labelName}`),
+        tabTitle: $i18n.t(`${labelName}`),
         tableName: moduleName,
         back: isback,
         ...exendObj,
