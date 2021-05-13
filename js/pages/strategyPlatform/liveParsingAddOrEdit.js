@@ -94,6 +94,11 @@ export default {
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             format: 'yyyy-MM-dd HH:mm:ss',
             disabled: false,
+            options: {
+              disabledDate (date) {
+                return date && date.valueOf() < Date.now() - 86400000;
+              }
+            },
             onChange: () => {
               this.masterModifyData('EFFECTIVE_BEGIN_TIME', 'master', 'formConfig1');
             }
@@ -106,6 +111,11 @@ export default {
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             format: 'yyyy-MM-dd HH:mm:ss',
             disabled: false,
+            options: {
+              disabledDate (date) {
+                return date && date.valueOf() < Date.now() - 86400000;
+              }
+            },
             onChange: () => {
               this.masterModifyData('EFFECTIVE_END_TIME', 'master', 'formConfig1');
             }
@@ -125,22 +135,10 @@ export default {
           EFFECTIVE_END_TIME: '' // 生效结束时间
         },
         ruleValidate: {
-          PLAN_ID: [{
-            required: false,
-            message: ' '
-          }],
-          PLAN_NAME: [{
-            required: true,
-            message: ' '
-          }],
-          EFFECTIVE_BEGIN_TIME: [{
-            required: true,
-            message: ' '
-          }],
-          EFFECTIVE_END_TIME: [{
-            required: true,
-            message: ' '
-          }],
+          PLAN_ID: [{ required: false, message: ' ' }],
+          PLAN_NAME: [{ required: true, message: ' ' }],
+          EFFECTIVE_BEGIN_TIME: [{ required: true, message: ' ' }],
+          EFFECTIVE_END_TIME: [{ required: true, message: ' ' }]
         }
       },
       formConfig2: {

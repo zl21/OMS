@@ -197,24 +197,9 @@ export default {
           ISACTIVE: '停用' // 启用状态
         },
         ruleValidate: {
-          IS_AUTO_LOGISTICS_DISTRIBUTION: [
-            {
-              required: true,
-              message: ' '
-            }
-          ],
-          CP_C_PHY_WAREHOUSE_ID: [
-            {
-              required: true,
-              message: ' '
-            }
-          ],
-          CP_C_LOGISTICS_ID: [
-            {
-              required: false,
-              message: ' '
-            }
-          ]
+          IS_AUTO_LOGISTICS_DISTRIBUTION: [{ required: true, message: ' ' }],
+          CP_C_PHY_WAREHOUSE_ID: [{ required: true, message: ' ' }],
+          CP_C_LOGISTICS_ID: [{ required: false, message: ' ' }]
         }
       },
       filterData: {

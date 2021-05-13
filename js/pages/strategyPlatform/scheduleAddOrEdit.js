@@ -119,6 +119,11 @@ export default {
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             format: 'yyyy-MM-dd HH:mm:ss',
             disabled: false,
+            options: {
+              disabledDate (date) {
+                return date && date.valueOf() < Date.now() - 86400000;
+              }
+            },
             onChange: () => {
               this.masterModifyData('BEGIN_TIME', 'master');
             }
@@ -132,6 +137,11 @@ export default {
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             format: 'yyyy-MM-dd HH:mm:ss',
             disabled: false,
+            options: {
+              disabledDate (date) {
+                return date && date.valueOf() < Date.now() - 86400000;
+              }
+            },
             onChange: () => {
               this.masterModifyData('END_TIME', 'master');
             }
@@ -171,26 +181,11 @@ export default {
           CP_C_SHOP_ID: '' // 店铺
         },
         ruleValidate: {
-          NAME: [{
-            required: true,
-            message: ' '
-          }],
-          BEGIN_TIME: [{
-            required: true,
-            message: ' '
-          }],
-          END_TIME: [{
-            required: true,
-            message: ' '
-          }],
-          RANK: [{
-            required: true,
-            message: ' '
-          }],
-          CP_C_SHOP_ID: [{
-            required: true,
-            message: ' '
-          }]
+          NAME: [{ required: true, message: ' ' }],
+          BEGIN_TIME: [{ required: true, message: ' ' }],
+          END_TIME: [{ required: true, message: ' ' }],
+          RANK: [{ required: true, message: ' ' }],
+          CP_C_SHOP_ID: [{ required: true, message: ' ' }],
         }
       }, // 主表表单
       dialogConfig: [],
