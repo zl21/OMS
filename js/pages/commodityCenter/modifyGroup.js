@@ -628,6 +628,7 @@ export default {
     // 普通商品明细添加
     addgeneralItem() {
       const self = this;
+      self.isModify = true;
       const ename = self.groupType == 2 ? this.jordanTableConfigGenera.businessFormConfig.formValue.gbCode : this.jordanTableConfigLuck.businessFormConfig.formValue.gbCode;
       if (!ename) {
         self.$OMS2.omsUtils.msgTips(self, 'warning', 'fh');
@@ -663,7 +664,6 @@ export default {
             // arr.NUM = self.jordanTableConfigLuck.businessFormConfig.formValue.NUM; // 每组抽取数
             self.jordanTableConfigLuck.data.push(arr);
             self.modify.luckGroupItem.push(arr);
-            self.isModify = true;
             self.jordanTableConfigLuck.businessFormConfig.formValue.gbCode = '';
           }
         } else {
