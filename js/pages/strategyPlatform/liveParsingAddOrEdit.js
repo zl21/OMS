@@ -428,10 +428,22 @@ export default {
           }
         } else {
           // 新增
-          self.modify[obj].rules.addData = this.formConfig2.formValue.RULES.filter(i => i.ID == -1)
+          self.modify[obj].rules.addData = self[formName].formValue.RULES.filter(i => i.ID == -1)
         }
       } else {
-        self.modify[obj][ecode] = self[formName].formValue[ecode];
+        let value = self[formName].formValue[ecode]
+        let type = Object.prototype.toString.call(value)
+        if (type == '[object Date]') {
+          let newTime = this.formatDate(value)
+          let oldTime = self.modify[obj][ecode]
+          if (ecode == 'EFFECTIVE_END_TIME') {
+            newTime = this.$OMS2.omsUtils.defaultEndTime(newTime, oldTime)
+            self[formName].formValue[ecode] = newTime
+          }
+          self.modify[obj][ecode] = newTime
+        } else {
+          self.modify[obj][ecode] = self[formName].formValue[ecode];
+        }
       }
     },
     labelClick(e) { // tab明细切换

@@ -66,124 +66,104 @@ DialogConfig.customConfig = {
     name: 'modifyRemarkDialog',
     excludeString: 'modifyRemarkDialog',
   },
-  // 弹框配置 修改物流
   modifyLogisticsConfig: {
-    title: '批量修改物流',
+    title: i18n.t('btn.batchModify_logistics'), // 批量修改物流
     width: '400',
-    name: 'modifyLogistics', //组件名称
+    name: 'modifyLogistics',
     url: 'modal/orderCenter/modifyLogistics',
     excludeString: 'modifyLogistics',
   },
-  // 弹框配置 记录发票
   makeOutInvoiceConfig: {
-    title: '记录发票',
+    title: i18n.t('btn.recordInvoice'), // 记录发票
     width: '600',
-    name: 'makeOutInvoice', //组件名称
+    name: 'makeOutInvoice',
     url: 'modal/orderCenter/makeOutInvoice',
     excludeString: 'makeOutInvoice',
   },
-  // 弹框配置 添加赠品
   addGiftsConfig: {
-    title: '添加赠品',
+    title: i18n.t('btn.addGift'), // 添加赠品
     width: '700',
-    name: 'addGifts', //组件名称
+    name: 'addGifts',
     url: 'modal/orderCenter/addGifts',
     excludeString: 'addGifts',
   },
-  // 弹框配置 修改备注
   changeRemarkConfig: {
-    title: '修改卖家备注',
+    title: i18n.t('btn.modify_sellerNotes'), // 修改卖家备注
     width: '480',
-    name: 'changeRemark', //组件名称
+    name: 'changeRemark',
     url: 'modal/orderCenter/changeRemark',
     excludeString: 'changeRemark',
   },
 
   // 弹框配置 拖拽排序
   dropSortConfig: {
-    title: '排序表单',
+    title: i18n.t('btn.sortForm'), // 排序表单
     width: '300',
-    name: 'setFormDrag', //组件名称
+    name: 'setFormDrag',
     url: 'modal/orderCenter/setFormDrag',
     excludeString: 'setFormDrag',
   },
-
-  // 订单明细 弹框
   goodsDetailConfig: {
-    title: '订单明细',
+    title: i18n.t('btn.order_detailed'), // 订单明细
     width: '900',
-    name: 'goodsDetail', //组件名称
+    name: 'goodsDetail',
     url: 'modal/orderCenter/goodsDetail',
     excludeString: 'goodsDetail',
   },
-
-  // 修改仓库
   changeWarehouseConfig: {
-    title: '批量修改仓库',
+    title: i18n.t('btn.batchModify_warehouse'), // 批量修改仓库
     width: '400',
-    name: 'changeWarehouse', //组件名称
+    name: 'changeWarehouse',
     url: 'modal/orderCenter/changeWarehouse',
     excludeString: 'changeWarehouse',
   },
-  // 收货信息
-  receivingInformationConfig: {
-    title: '修改地址',
-    width: '800',
-    name: 'resolveAddress', //组件名称
-    url: 'modal/order/resolveAddress',
-    excludeString: 'resolveAddress',
-  },
-  // 弹窗配置 定金预售提前发货
   depositPresaleConfig: {
-    title: '定金预售提前发货打标',
+    title: i18n.t('btn.preSaleAdvanceDeliveryMarking'), // 定金预售提前发货打标
     width: '800',
-    name: 'manualMarking', //组件名称
+    name: 'manualMarking',
     url: 'modal/orderCenter/manualMarking',
     excludeString: 'manualMarking',
   },
-
-  // 弹框配置 替换商品
   replaceConfig: {
-    title: '批量替换商品',
+    title: i18n.t('btn.batch_replaceGoods'), // 批量替换商品
     width: '1000',
-    name: 'replaceTheGoods', //组件名称
+    name: 'replaceTheGoods',
     url: 'modal/orderCenter/changeProduct',
     excludeString: 'replaceTheGoods',
   },
   pushProduceConfig: {
-    title: '批量添加赠品',
+    title: i18n.t('btn.batch_addGift'), // 批量添加赠品
     width: '900',
-    name: 'pushProduce', //组件名称
+    name: 'pushProduce',
     url: 'modal/orderCenter/pushProduce',
     excludeString: 'pushProduce',
   },
   itemDeleteConfig: {
-    title: '批量删除赠品',
+    title: i18n.t('btn.batch_deleteGift'), // 批量删除赠品
     width: '800',
-    name: 'itemDelete', //组件名称
+    name: 'itemDelete',
     url: 'modal/orderCenter/itemDelete',
     excludeString: 'itemDelete',
   },
   specifyGoodsAssignConfig: {
-    title: '指定商品拆单',
+    title: i18n.t('btn.appointGoods_splitOrder'), // 指定商品拆单
     width: '700',
-    name: 'specifyGoodsAssign', //组件名称
+    name: 'specifyGoodsAssign',
     url: 'modal/orderCenter/specifyGoodsAssign',
     excludeString: 'specifyGoodsAssign',
   },
   //弹框配置 零售发货单详情界面替换商品弹框
   replaceGoodsDetailConfig: {
-    title: '替换商品',
+    title: i18n.t('btn.replaceGoods'), // 替换商品
     width: '700',
-    name: 'replaceGoodsDetail', //组件名称
+    name: 'replaceGoodsDetail',
     url: 'pages/orderCenter/orderManager/replaceGoodsDetail',
     excludeString: 'replaceGoodsDetail',
   },
-  // Hold单
   holdOrderConfig: {
-    title: 'Hold单',
+    title: i18n.t('btn.holdOrder'), // Hold单
     width: '500',
-    name: 'holdOrderDialog', //组件名称
+    name: 'holdOrderDialog',
     url: 'modal/orderCenter/holdOrderDialog',
     excludeString: 'holdOrderDialog',
   },
