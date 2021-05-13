@@ -395,6 +395,7 @@ R3.launchApplication({
 | v1.2.73 | 找回被删掉的subTableConfig(有用到,不准删！！！！！)
 | v1.2.74 | 单独js页面-特殊处理国际化  |
 | v1.2.75 | 仓库物流\价格策略\档期日程规划-生效时间disabledDate  |
+| v1.2.76 | importTableConfig拓展  |
 
 #### Extends-Api 版本说明
 
