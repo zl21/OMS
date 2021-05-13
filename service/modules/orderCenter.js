@@ -80,7 +80,7 @@ export default {
   saveAppointSplitOrderInfo: (params) =>
     $network.post('/api/cs/oc/oms/v1/saveAppointSplitOrderInfo', params),
   saveSplitOrderInfo: (params) =>
-    $network.post('/api/cs/oc/oms/v1/saveSplitOrderInfo', params),
+    $network.post('/p/cs/oc/oms/v1/saveSplitOrderInfo', params),
   getSingleObjectPermission: (params) =>
     $network.post('/api/cs/oc/oms/v1/getSingleObjectPermission', params),
   /**
