@@ -272,8 +272,6 @@ function modifyObjectFunction(property, configObj = {}) {
 	}
 }
 
-// Vue.prototype.$OMS2 = CustomizedConfig;
-
-console.log(new CustomizedConfig());
+// console.log(new CustomizedConfig());
 // console.clear();
 export default CustomizedConfig;
