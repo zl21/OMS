@@ -24,7 +24,6 @@ export default {
   mixins: [buttonPermissionsMixin],
   data() {
     return {
-      vmI18n: window.vmI18n,
       pageLoad: false,
       publicBouncedConfig: {},
       statusName: '', // 水印标识
@@ -35,38 +34,38 @@ export default {
       labelDefaultValue: 'OC_B_ORDER',
       labelList: [
         {
-          label: window.vmI18n.t('common.baseInformation'), // 基本信息
+          label: $i18n.t('common.baseInformation'), // 基本信息
           value: 'OC_B_ORDER',
         },
         {
-          label: window.vmI18n.t('form_label.preferential_info'), // 优惠信息
+          label: $i18n.t('form_label.preferential_info'), // 优惠信息
           value: 'OC_B_ORDER_PROMOTION',
         },
         {
-          label: window.vmI18n.t('form_label.payment_info'), // 支付信息
+          label: $i18n.t('form_label.payment_info'), // 支付信息
           value: 'OC_B_ORDER_PAYMENT',
         },
         {
-          label: window.vmI18n.t('form_label.shipping_info'), // 发货信息
+          label: $i18n.t('form_label.shipping_info'), // 发货信息
           value: 'OC_B_ORDER_DELIVERY',
         },
         {
-          label: window.vmI18n.t('form_label.workOrder'), // 工单
+          label: $i18n.t('form_label.workOrder'), // 工单
           value: '5',
           isShow: false,
         },
         {
-          label: window.vmI18n.t('form_label.status_in_warehouse'), // 仓内状态
+          label: $i18n.t('form_label.status_in_warehouse'), // 仓内状态
           value: 'OC_B_ORDER_WMS_STATUS',
           isShow: false,
         },
         {
-          label: window.vmI18n.t('form_label.routing_info'), // 路由信息
+          label: $i18n.t('form_label.routing_info'), // 路由信息
           value: 'OC_B_ORDER_ROUTE',
           isShow: false,
         },
         {
-          label: window.vmI18n.t('panel_label.operationLog'), // 操作日志
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'OC_B_ORDER_LOG',
         },
       ],
@@ -166,7 +165,7 @@ export default {
       this.service.orderCenter.getDetail(data).then((res) => {
         if (res.data && res.data.code === 0) {
           const resData = res.data.data;
-          resData.TO_SETTLE_STATUS_TAG =  this.vmI18n.t(`common.${self.$lodash.isNull(data.RESERVE_BIGINT02) ?'no':'yes'}`);
+          resData.TO_SETTLE_STATUS_TAG =  $i18n.t(`common.${self.$lodash.isNull(data.RESERVE_BIGINT02) ?'no':'yes'}`);
           const TO_SETTLE_STATUS_NAME = (this.enumerationList.UPLOAD_SAP_STATUS.find((val) => val.value === resData.TO_SAP_STATUS) || {}).label;
           resData.TO_SETTLE_STATUS_NAME = TO_SETTLE_STATUS_NAME ?? '';
           this.tab1.order = resData;
@@ -176,7 +175,7 @@ export default {
         } else {
           this.tab1 = this.tab1_default;
           // 订单详情获取失败
-          this.$message.error(this.vmI18n.t('modalTips.h3'));
+          this.$message.error($i18n.t('modalTips.h3'));
         }
       }).finally(() => {
         this.loading = false;

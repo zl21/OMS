@@ -40,7 +40,7 @@ export default {
             {
               style: 'input',
               // label: '物流编号',
-              label: window.vmI18n.t('form_label.logisticsNo'),
+              label: $i18n.t('form_label.logisticsNo'),
               value: 'logistics_code',
               width: '8',
               inputenter: () => this.queryBounced()

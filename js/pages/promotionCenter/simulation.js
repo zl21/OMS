@@ -9,18 +9,17 @@ import businessButton from 'professionalComponents/businessButton';
 export default {
   data() {
     return {
-      vmI18n: window.vmI18n,
       btnConfig: {
         typeAll: 'default',
         buttons: [
           {
-            text: window.vmI18n.t('common.cancel'), // 取消
+            text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
               this.cancel_simulation();
             }
           },
           {
-            text: window.vmI18n.t('btn.simulation_trial_calculation'), // 仿真试算
+            text: $i18n.t('btn.simulation_trial_calculation'), // 仿真试算
             btnclick: () => {
               this.execute_simulation();
             }
@@ -52,7 +51,7 @@ export default {
             isuppercase: false,
             length: 65535,
             // name: "收货省份",
-            name: window.vmI18n.t('form_label.receiving_province'),
+            name: $i18n.t('form_label.receiving_province'),
             readonly: false,
             reftable: 'CP_C_PROVINCE',
             reftableid: 10010,
@@ -79,7 +78,7 @@ export default {
             isuppercase: false,
             length: 20,
             // name: "店铺名称",
-            name: window.vmI18n.t('table_label.shopName'),
+            name: $i18n.t('table_label.shopName'),
             readonly: false,
             refobjid: '',
             reftable: 'CP_C_SHOP',
@@ -300,7 +299,7 @@ export default {
         type: 'CUSTOMIZED', // 类型action
         name: 'PROMACTIQUERYLIST', // 文件名
         // label: "促销活动", // tab中文名
-        label: window.vmI18n.t('panel_label.promotionList'),
+        label: $i18n.t('panel_label.promotionList'),
         query: Object.assign({
           id: 2895
         }) // 带的参数
@@ -334,7 +333,7 @@ export default {
         self.$message({
           type: 'success',
           // message: "试算成功！",
-          message: window.vmI18n.t('modalTips.t5')
+          message: $i18n.t('modalTips.t5')
         });
       } else {
         self.result_data = [];
@@ -364,25 +363,25 @@ export default {
     },
     checkSimulation() {
       if (!this.basicData.stores.itemdata.pid) {
-        return { code: '-1', message: window.vmI18n.t('modalTips.t6') };
+        return { code: '-1', message: $i18n.t('modalTips.t6') };
       }
       if (this.basicData.time_type === '') {
-        return { code: '-1', message: window.vmI18n.t('modalTips.t7') };
+        return { code: '-1', message: $i18n.t('modalTips.t7') };
       }
       if (this.basicData.time_limit === '') {
-        return { code: '-1', message: window.vmI18n.t('modalTips.t8') };
+        return { code: '-1', message: $i18n.t('modalTips.t8') };
       }
       if (this.basicData.order_list === '') {
-        return { code: '-1', message: window.vmI18n.t('modalTips.t9') };
+        return { code: '-1', message: $i18n.t('modalTips.t9') };
       }
       // if(this.basicData.platform_mark === ""){
       //     return {code:"-1",message:"平台标记未填写"}
       // }
       if (!this.basicData.receiving_porvince.itemdata.pid) {
-        return { code: '-1', message: window.vmI18n.t('modalTips.s0') };
+        return { code: '-1', message: $i18n.t('modalTips.s0') };
       }
       if (this.products_data.length == 0) {
-        return { code: '-1', message: window.vmI18n.t('modalTips.s1') };
+        return { code: '-1', message: $i18n.t('modalTips.s1') };
       }
       for (let i = 0; i < this.products_data.length; i++) {
         const row = this.products_data[i];
@@ -392,14 +391,14 @@ export default {
             // return { code: -1, message: `商品列表第${i + 1}行数据未填写完毕` };
             return {
               code: -1,
-              message: `${window.vmI18n.t('modalTips.s2')}${i + 1}${window.vmI18n.t('modalTips.s3')}`
+              message: `${$i18n.t('modalTips.s2')}${i + 1}${$i18n.t('modalTips.s3')}`
             };
           }
         }
       }
 
       // return { code: 0, message: "校验完成" };
-      return { code: 0, message: window.vmI18n.t('modalTips.s4') };
+      return { code: 0, message: $i18n.t('modalTips.s4') };
     },
     /**
      *  修改行数据

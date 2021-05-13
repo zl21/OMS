@@ -22,7 +22,6 @@ export default {
   mixins: [qxBtnData],
   data() {
     return {
-      vmI18n: window.vmI18n,
       loading: false,
       saveModal: false,
 
@@ -93,7 +92,7 @@ export default {
     this.getRoleData();
       this.getSearchForm();
     this.buttonConfig.buttons = this.permissionType === 'brand' || this.permissionType === 'sensitivecol'
-    ? this.normal.buttons.filter(item => item.text != window.vmI18n.t('btn.copyPermissions'))
+    ? this.normal.buttons.filter(item => item.text != $i18n.t('btn.copyPermissions'))
     : this.normal.buttons;
     // businessButton组件中定义的点击事件是'btnclick'
     this.buttonConfig.buttons.forEach(item => {
@@ -104,23 +103,23 @@ export default {
     // const { customizedModuleName } = this.$route.params;
     this.sensitiveColumns = [
       {
-        title: this.vmI18n.t('table_label.sensitiveColumn'),
+        title: $i18n.t('table_label.sensitiveColumn'),
         // title: "敏感列",
         key: 'CP_C_COLUMN_ENAME'
       },
       {
-        title: this.vmI18n.t('table_label.view'),
+        title: $i18n.t('table_label.view'),
         // title: "查看",
         key: 'IS_READ'
       },
       {
-        title: this.vmI18n.t('table_label.edit'),
+        title: $i18n.t('table_label.edit'),
         // title: "编辑",
         key: 'IS_WRITE'
       }
     ];
     const btnSearchObj = {
-      text: window.vmI18n.t('btn.search'),
+      text: $i18n.t('btn.search'),
       icon: '',
       btnclick: () => {
         const self = this;
@@ -135,7 +134,7 @@ export default {
       }
     };
     this.searchBtnConfig.buttons.push(btnSearchObj);
-    this.filterTreeConfig.placeholder = this.vmI18n.t('pHolder.enter');
+    this.filterTreeConfig.placeholder = $i18n.t('pHolder.enter');
   },
   methods: {
     saveOk() {
@@ -305,7 +304,7 @@ export default {
 
         this.oldTableArr = JSON.parse(JSON.stringify(this.tableArr.rows));
         if (refresh) {
-          this.$Message.success(this.vmI18n.t('common.refresh_succee')); // 刷新成功
+          this.$Message.success($i18n.t('common.refresh_succee')); // 刷新成功
         }
       }
       this.loading = false;
@@ -323,7 +322,7 @@ export default {
       } = await this.service.systemConfig.copyShopPermission(param);
       if (code === 0) {
         this.$Modal.success({
-          title: self.vmI18n.t('modalTitle.tips'),
+          title: $i18n.t('modalTitle.tips'),
           content: message,
           cancelType: true,
           titleAlign: 'left',

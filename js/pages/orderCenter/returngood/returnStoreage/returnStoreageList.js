@@ -39,7 +39,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       isFavorite: false,
       // 公共弹框
       publicBouncedConfig: {},
@@ -47,7 +46,7 @@ export default {
       importTable: {
         refFuns: 'confirmFun',
         // confirmTitle: "导入",
-        confirmTitle: window.vmI18n.t('modalTitle.import'),
+        confirmTitle: $i18n.t('modalTitle.import'),
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -97,7 +96,7 @@ export default {
                     type: 'C',
                     customizedModuleName: 'orderManageDetail',
                     customizedModuleId: res.data.data,
-                    label: window.vmI18n.t('panel_label.retailInvoice_details')
+                    label: $i18n.t('panel_label.retailInvoice_details')
                   });
                 } else {
                   self.$Message.warning(res.data.message);
@@ -363,11 +362,11 @@ export default {
         type: 'action',
         name: 'returnTreasuryAdd',
         // label: "退货入库详情",
-        label: window.vmI18n.t('panel_label.returnTreasuryDetails'),
+        label: $i18n.t('panel_label.returnTreasuryDetails'),
         query: Object.assign({
           id: row.ID, // 单据id
           // tabTitle: "退货入库详情",
-          tabTitle: window.vmI18n.t('panel_label.returnTreasuryDetails'),
+          tabTitle: $i18n.t('panel_label.returnTreasuryDetails'),
           statusName: row.INVALIDSTATE
         })
       });
@@ -389,7 +388,7 @@ export default {
       if (self.selection.length) {
         // if (this.isExport) return this.$Message.error("有一项导出正在进行中");
         if (this.isExport) {
-          this.$Message.error(window.vmI18n.t('modalTips.f8'));
+          this.$Message.error($i18n.t('modalTips.f8'));
           return;
         }
         this.isExport = true;
@@ -403,17 +402,17 @@ export default {
         this.service.orderCenter.exportOcBRefundIn(idList).then(res => {
           self.isExport = false;
           if (res.data.code == 0 && res.data.data !== null) {
-            const mes = res.data.message || window.vmI18n.t('modalTips.z2');
+            const mes = res.data.message || $i18n.t('modalTips.z2');
             self.$Message.success(mes);
             publicMethodsUtil.downloadUrlFile(res.data.data);
           } else {
-            const err = res.data.message || window.vmI18n.t('modalTips.z3');
+            const err = res.data.message || $i18n.t('modalTips.z3');
             self.$Message.error(err);
           }
         });
       } else {
         if (self.agTableConfig.rowData.length === 0) {
-          self.$Message.error(window.vmI18n.t('modalTips.z4'));
+          self.$Message.error($i18n.t('modalTips.z4'));
           return;
         }
         self.warningModal = true;
@@ -424,7 +423,7 @@ export default {
       const self = this;
       // if (this.isExport) return this.$Message.error("有一项导出正在进行中");
       if (this.isExport) {
-        this.$Message.error(window.vmI18n.t('modalTips.f8'));
+        this.$Message.error($i18n.t('modalTips.f8'));
         return;
       }
       this.isExport = true;
@@ -435,13 +434,13 @@ export default {
         self.isExport = false;
         if (res.data.code == 0 && res.data.data !== null) {
           // let mes = res.data.message || "导出成功！";
-          const mes = res.data.message || window.vmI18n.t('modalTips.z2');
+          const mes = res.data.message || $i18n.t('modalTips.z2');
           self.$Message.success(mes);
           // return (window.location = res.data.data);
           publicMethodsUtil.downloadUrlFile(res.data.data);
         } else {
           // let err = res.data.message || "失败！";
-          const err = res.data.message || window.vmI18n.t('modalTips.z3');
+          const err = res.data.message || $i18n.t('modalTips.z3');
           self.$Message.error(err);
         }
       });

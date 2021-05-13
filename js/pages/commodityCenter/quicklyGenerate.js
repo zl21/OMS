@@ -16,7 +16,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       searchTreeData: '',
       endNodes: [],
       treeData: [],

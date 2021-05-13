@@ -776,11 +776,11 @@ export default {
       } else if (res.BILL_STATUS == 2) {
         self.pickOrder.logFormConfig.formValue.BILL_STATUS = '已审核';
         // self.watermark_src = '../../../../static/img/watermark/checked.png';
-        self.statusName = window.vmI18n.t('common.reviewed'); // '已审核';
+        self.statusName = $i18n.t('common.reviewed'); // '已审核';
       } else if (res.BILL_STATUS == 3) {
         self.pickOrder.logFormConfig.formValue.BILL_STATUS = '已作废';
         // self.watermark_src = '../../../../static/img/watermark/void.png';
-        self.statusName = window.vmI18n.t('common.voided'); // '已作废';
+        self.statusName = $i18n.t('common.voided'); // '已作废';
       }
       self.pickOrder.logFormConfig.formValue.STATUS_NAME = res.STATUS_NAME; // 审核人
       self.pickOrder.logFormConfig.formValue.STATUS_TIME = self.toDate(res.STATUS_TIME); // 审核时间

@@ -24,11 +24,10 @@ export default {
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {
-      vmI18n: window.vmI18n,
       isShowFromLoading: false, // 加载
       matrixBox: {
         refFuns: 'confirmFun',
-        confirmTitle: window.vmI18n.t('modalTitle.matrixEntry'), // 矩阵录入
+        confirmTitle: $i18n.t('modalTitle.matrixEntry'), // 矩阵录入
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '860',
         scrollable: false, // 是否可以滚动
@@ -46,11 +45,11 @@ export default {
       ORDER_TYPE: '', // 丢单的值
       isgift: [
         {
-          label: window.vmI18n.t('common.yes'),
+          label: $i18n.t('common.yes'),
           value: '1',
         },
         {
-          label: window.vmI18n.t('common.no'),
+          label: $i18n.t('common.no'),
           value: '0',
         },
       ],
@@ -70,13 +69,13 @@ export default {
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: window.vmI18n.t('form_label.consignee_province'), // 收货人省份
+          fkdesc: $i18n.t('form_label.consignee_province'), // 收货人省份
           inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: window.vmI18n.t('form_label.consignee_province'), // 收货人省份 // input前面显示的lable值
+          name: $i18n.t('form_label.consignee_province'), // 收货人省份 // input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_PROVINCE', // 对应的表
           reftableid: 10010, // 对应的表ID
@@ -93,13 +92,13 @@ export default {
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: window.vmI18n.t('form_label.consignee_city'), // 收货人市
+          fkdesc: $i18n.t('form_label.consignee_city'), // 收货人市
           inputname: 'RECEIVER_CITY:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: window.vmI18n.t('form_label.consignee_city'), // 收货人市 // input前面显示的lable值
+          name: $i18n.t('form_label.consignee_city'), // 收货人市 // input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_CITY', // 对应的表
           reftableid: 23864, // 对应的表ID
@@ -121,13 +120,13 @@ export default {
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: window.vmI18n.t('form_label.orderShop'), // 下单店铺
+          fkdesc: $i18n.t('form_label.orderShop'), // 下单店铺
           inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: window.vmI18n.t('form_label.orderShop'), // 下单店铺 // input前面显示的lable值
+          name: $i18n.t('form_label.orderShop'), // 下单店铺 // input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_SHOP', // 对应的表
           reftableid: 24475, // 对应的表ID
@@ -154,7 +153,7 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_SHOP_TITLE',
-            label: window.vmI18n.t('form_label.orderShop'), // 下单店铺 // input前面显示的lable值
+            label: $i18n.t('form_label.orderShop'), // 下单店铺 // input前面显示的lable值
             itemdata: {},
             oneObj: () => {
               // 点击选中事件
@@ -167,7 +166,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: window.vmI18n.t('form_label.delivery_warehouse'), // 发货仓库 下拉框前的值
+            label: $i18n.t('form_label.delivery_warehouse'), // 发货仓库 下拉框前的值
             width: '6', // 所占宽度宽度
             dataAcessKey: 'CP_C_PHY_WAREHOUSE_ENAME',
             value: 'CP_C_PHY_WAREHOUSE_ID', // 输入框的值
@@ -177,7 +176,7 @@ export default {
               // const optionsArr = _this.formConfig.formData[8].options;
               const optionsArr = _this.queryFormItem(
                 _this.formConfig.formData,
-                window.vmI18n.t('form_label.delivery_warehouse')
+                $i18n.t('form_label.delivery_warehouse')
               ).options;
               for (let i = 0; i < optionsArr.length; i++) {
                 if (
@@ -189,7 +188,7 @@ export default {
                   // this.formConfig.formData[1].inputList = [
                   this.queryFormItem(
                     this.formConfig.formData,
-                    window.vmI18n.t('form_label.distribution_logistics')
+                    $i18n.t('form_label.distribution_logistics')
                   ).inputList = [
                       {
                         childs: [
@@ -214,7 +213,7 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_LOGISTICS_ENAME',
-            label: window.vmI18n.t('form_label.distribution_logistics'), // 配送物流 input前面显示的lable值
+            label: $i18n.t('form_label.distribution_logistics'), // 配送物流 input前面显示的lable值
             inputList: [
               {
                 childs: [
@@ -239,13 +238,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: window.vmI18n.t('form_label.distribution_logistics'), // 配送物流
+              fkdesc: $i18n.t('form_label.distribution_logistics'), // 配送物流
               inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: window.vmI18n.t('form_label.distribution_logistics'), // 配送物流 input前面显示的lable值
+              name: $i18n.t('form_label.distribution_logistics'), // 配送物流 input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               reftableid: 24411, // 对应的表ID
@@ -257,7 +256,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.vmI18n.t('form_label.distribution_costs'), // 配送费用
+            label: $i18n.t('form_label.distribution_costs'), // 配送费用
             value: 'SHIP_AMT',
             dataAcessKey: 'SHIP_AMT',
             disabled: false,
@@ -265,7 +264,7 @@ export default {
           },
           {
             style: 'input', // 输入框弹框单多选
-            label: window.vmI18n.t('table_label.buyerNickname'), // 买家昵称
+            label: $i18n.t('table_label.buyerNickname'), // 买家昵称
             value: 'USER_NICK',
             dataAcessKey: 'USER_NICK',
             disabled: false,
@@ -274,14 +273,14 @@ export default {
           {
             style: 'input', // 输入框弹框单多选
             value: 'SOURCE_CODE',
-            label: window.vmI18n.t('form_label.platform_billNo'), // 平台单号
+            label: $i18n.t('form_label.platform_billNo'), // 平台单号
             disabled: false,
             dataAcessKey: 'SOURCE_CODE',
             width: '6',
           },
           {
             style: 'select', // 下拉框类型
-            label: window.vmI18n.t('form_label.paymentMethod'), // 付款方式 下拉框前的值
+            label: $i18n.t('form_label.paymentMethod'), // 付款方式 下拉框前的值
             width: '6', // 所占宽度宽度
             value: 'PAY_TYPE', // 输入框的值
             disabled: false,
@@ -296,14 +295,14 @@ export default {
           },
           {
             style: 'input',
-            label: window.vmI18n.t('form_label.collection_amount'), // 代收金额
+            label: $i18n.t('form_label.collection_amount'), // 代收金额
             value: 'COD_AMT',
             disabled: false,
             width: '6',
           },
           {
             style: 'input',
-            label: window.vmI18n.t('form_label.service_charge'), // 服务费
+            label: $i18n.t('form_label.service_charge'), // 服务费
             value: 'SERVICE_AMT',
             disabled: false,
             width: '6',
@@ -311,7 +310,7 @@ export default {
           {
             style: 'date', // 输入框类型
             type: 'datetime', // 文本框类型的input
-            label: window.vmI18n.t('table_label.paymentTime'), // 付款时间 输入框前文字
+            label: $i18n.t('table_label.paymentTime'), // 付款时间 输入框前文字
             value: 'PAY_TIME', // 输入框的值
             dataAcessKey: 'PAY_TIME',
             disabled: false,
@@ -328,14 +327,14 @@ export default {
           {
             style: '', // 输入框弹框单多选
             value: 'EXPRESS_CODE',
-            label: window.vmI18n.t('form_label.logisticsOrder_No'), // 物流单号
+            label: $i18n.t('form_label.logisticsOrder_No'), // 物流单号
             disabled: false,
             dataAcessKey: 'EXPRESS_CODE',
             width: '6',
           },
           {
             style: 'checkbox',
-            label: window.vmI18n.t('form_label.invoice_or_not'), // 是否开票
+            label: $i18n.t('form_label.invoice_or_not'), // 是否开票
             value: 'is_kaip',
             disabled: false,
             dataAcessKey: 'IS_INVOICE',
@@ -343,7 +342,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.vmI18n.t('form_label.internalRemarks'), // 内部备注
+            label: $i18n.t('form_label.internalRemarks'), // 内部备注
             value: 'INSIDE_REMARK',
             disabled: false,
             dataAcessKey: 'INSIDE_REMARK',
@@ -407,7 +406,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: window.vmI18n.t('form_label.match_smart_address'), // 智能匹配地址
+            label: $i18n.t('form_label.match_smart_address'), // 智能匹配地址
             value: 'site',
             disabled: false,
             dataAcessKey: 'RECEIVER_NAME',
@@ -424,7 +423,7 @@ export default {
                 self.address.province == ''
               ) {
                 // "请填入完整信息,如:张三,17788888888,上海上海市闵行区黎安路999号"
-                self.$Message.warning(self.vmI18n.t('modalTips.f9'));
+                self.$Message.warning($i18n.t('modalTips.f9'));
               } else {
                 self.formConfig1.formValue.RECEIVER_NAME = self.address.name; // 收货人赋值
                 // self.formConfig1.formValue.RECEIVER_PHONE = self.address.phone;
@@ -460,7 +459,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.vmI18n.t('form_label.consignee'), // 收货人
+            label: $i18n.t('form_label.consignee'), // 收货人
             disabled: false,
             value: 'RECEIVER_NAME',
             dataAcessKey: 'RECEIVER_NAME',
@@ -469,7 +468,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.vmI18n.t('form_label.consignee_phone'), // 收货人手机
+            label: $i18n.t('form_label.consignee_phone'), // 收货人手机
             disabled: false,
             value: 'RECEIVER_MOBILE',
             dataAcessKey: 'RECEIVER_MOBILE',
@@ -477,7 +476,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.vmI18n.t('form_label.consignee_tel'), // 收货人电话
+            label: $i18n.t('form_label.consignee_tel'), // 收货人电话
             disabled: false,
             value: 'RECEIVER_PHONE',
             dataAcessKey: 'RECEIVER_PHONE',
@@ -485,7 +484,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.vmI18n.t('form_label.consignee_postcode'), // 收货人邮编
+            label: $i18n.t('form_label.consignee_postcode'), // 收货人邮编
             disabled: false,
             value: 'RECEIVER_ZIP',
             dataAcessKey: 'RECEIVER_ZIP',
@@ -495,26 +494,26 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_REGION_PROVINCE_ENAME',
-            label: window.vmI18n.t('form_label.consignee_province'), // 收货人省份 // input前面显示的lable值
+            label: $i18n.t('form_label.consignee_province'), // 收货人省份 // input前面显示的lable值
             itemdata: {},
             oneObj: () => {
               this.queryFormItem(
                 this.formConfig1.formData,
-                window.vmI18n.t('form_label.consignee_city')
+                $i18n.t('form_label.consignee_city')
               ).itemdata.pid = '';
               this.queryFormItem(
                 this.formConfig1.formData,
-                window.vmI18n.t('form_label.consignee_city')
+                $i18n.t('form_label.consignee_city')
               ).itemdata.valuedata = '';
               this.formConfig1.formValue.CP_C_REGION_CITY_ID = '';
               this.formConfig1.formValue.CP_C_REGION_CITY_ENAME = '';
               this.queryFormItem(
                 this.formConfig1.formData,
-                window.vmI18n.t('form_label.aconsignee_area')
+                $i18n.t('form_label.aconsignee_area')
               ).itemdata.pid = '';
               this.queryFormItem(
                 this.formConfig1.formData,
-                window.vmI18n.t('form_label.aconsignee_area')
+                $i18n.t('form_label.aconsignee_area')
               ).itemdata.valuedata = '';
               this.formConfig1.formValue.CP_C_REGION_AREA_ID = '';
             },
@@ -523,18 +522,18 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_REGION_CITY_ENAME',
-            label: window.vmI18n.t('form_label.consignee_city'), // 收货人市 // input前面显示的lable值
+            label: $i18n.t('form_label.consignee_city'), // 收货人市 // input前面显示的lable值
             inputList: [],
             objList: [],
             itemdata: {},
             oneObj: () => {
               this.queryFormItem(
                 this.formConfig1.formData,
-                window.vmI18n.t('form_label.aconsignee_area')
+                $i18n.t('form_label.aconsignee_area')
               ).itemdata.pid = '';
               this.queryFormItem(
                 this.formConfig1.formData,
-                window.vmI18n.t('form_label.aconsignee_area')
+                $i18n.t('form_label.aconsignee_area')
               ).itemdata.valuedata = '';
               this.formConfig1.formValue.CP_C_REGION_AREA_ID = '';
             },
@@ -544,7 +543,7 @@ export default {
             width: '6',
             inputList: [],
             dataAcessKey: 'CP_C_REGION_AREA_ENAME',
-            label: window.vmI18n.t('form_label.aconsignee_area'), // 收货人区 input前面显示的lable值
+            label: $i18n.t('form_label.aconsignee_area'), // 收货人区 input前面显示的lable值
             itemdata: {
               col: 1,
               colid: 167816,
@@ -552,13 +551,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: window.vmI18n.t('form_label.aconsignee_area'), // 收货人区
+              fkdesc: $i18n.t('form_label.aconsignee_area'), // 收货人区
               inputname: 'RECEIVER_AREA:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: window.vmI18n.t('form_label.aconsignee_area'), // 收货人区 input前面显示的lable值
+              name: $i18n.t('form_label.aconsignee_area'), // 收货人区 input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_DISTAREA', // 对应的表
               reftableid: 23863, // 对应的表ID
@@ -582,7 +581,7 @@ export default {
           // },
           {
             style: 'input',
-            label: window.vmI18n.t('form_label.aconsignee_address'), // 收货人地址
+            label: $i18n.t('form_label.aconsignee_address'), // 收货人地址
             value: 'RECEIVER_ADDRESS',
             dataAcessKey: 'RECEIVER_ADDRESS',
             width: '12',
@@ -638,7 +637,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: window.vmI18n.t('form_label.buyerNotes'), // 买家备注
+            label: $i18n.t('form_label.buyerNotes'), // 买家备注
             value: 'BUYER_MESSAGE',
             disabled: false,
             dataAcessKey: 'BUYER_MESSAGE',
@@ -646,7 +645,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.vmI18n.t('form_label.sellerNotes'), // 卖家备注
+            label: $i18n.t('form_label.sellerNotes'), // 卖家备注
             value: 'SELLER_MEMO',
             disabled: false,
             dataAcessKey: 'SELLER_MEMO',
@@ -670,7 +669,7 @@ export default {
           },
           formData: [
             {
-              label: window.vmI18n.t('table_label.productNo'), // 商品编码
+              label: $i18n.t('table_label.productNo'), // 商品编码
               style: 'dimSearch',
               width: '6',
               value: 'gbCode',
@@ -696,7 +695,7 @@ export default {
 
                     dimList.forEach((item) => {
                       if (
-                        item.label === this.vmI18n.t('table_label.productNo')
+                        item.label === $i18n.t('table_label.productNo')
                       ) {
                         item.AuotData = res.data.data.list;
                       }
@@ -707,7 +706,7 @@ export default {
               dimEnter: (val) => {
                 const self = this;
                 if (!self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID) {
-                  self.$Message.warning(self.vmI18n.t('modalTips.g0')); // 发货店仓，不能为空
+                  self.$Message.warning($i18n.t('modalTips.g0')); // 发货店仓，不能为空
                   return;
                 }
                 self.matrixBox.componentData = {
@@ -723,7 +722,7 @@ export default {
               dimSelect: (val) => {
                 const self = this;
                 if (!self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID) {
-                  self.$Message.warning(self.vmI18n.t('modalTips.g0')); // 发货店仓，不能为空
+                  self.$Message.warning($i18n.t('modalTips.g0')); // 发货店仓，不能为空
                   return;
                 }
                 self.matrixBox.componentData = {
@@ -738,7 +737,7 @@ export default {
               },
             },
             {
-              label: window.vmI18n.t('form_label.barCode'), // 条码
+              label: $i18n.t('form_label.barCode'), // 条码
               style: 'dimSearch',
               width: '6',
               value: 'dimData',
@@ -779,7 +778,7 @@ export default {
                       dimList.forEach((item) => {
                         // 条码
                         if (
-                          item.label === _this.vmI18n.t('form_label.barCode')
+                          item.label === $i18n.t('form_label.barCode')
                         ) {
                           item.AuotData = data;
                           // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
@@ -832,29 +831,29 @@ export default {
             align: 'center',
           },
           {
-            title: window.vmI18n.t('table_label.productNo'), // 商品编码
+            title: $i18n.t('table_label.productNo'), // 商品编码
             key: 'PS_C_PRO_ECODE',
             dataAcessKey: 'PS_C_PRO_ECODE',
           },
           // 颜色
           {
-            title: window.vmI18n.t('other.color'), // 颜色
+            title: $i18n.t('other.color'), // 颜色
             key: 'PS_C_CLR_ENAME',
             dataAcessKey: 'PS_C_CLR_ENAME',
           },
           // 尺寸
           {
-            title: window.vmI18n.t('other.sizes'),
+            title: $i18n.t('other.sizes'),
             key: 'PS_C_SIZE_ENAME',
             dataAcessKey: 'PS_C_SIZE_ENAME',
           },
           {
-            title: window.vmI18n.t('form_label.barCode'), // 条码
+            title: $i18n.t('form_label.barCode'), // 条码
             key: 'PS_C_SKU_ECODE',
             dataAcessKey: 'PS_C_SKU_ECODE',
           },
           {
-            title: window.vmI18n.t('table_label.productName'), // 商品名称
+            title: $i18n.t('table_label.productName'), // 商品名称
             key: 'PS_C_PRO_ENAME',
             dataAcessKey: 'PS_C_PRO_ENAME',
             width: 100,
@@ -895,18 +894,18 @@ export default {
           },
           // 性别
           {
-            title: window.vmI18n.t('table_label.gender'), // 性别
+            title: $i18n.t('table_label.gender'), // 性别
             key: 'SEX_NAME',
             dataAcessKey: 'SEX',
           },
           // 性别
           {
-            title: window.vmI18n.t('table_label.tagPrice'), // 吊牌价
+            title: $i18n.t('table_label.tagPrice'), // 吊牌价
             key: 'RESERVE_DECIMAL02',
             dataAcessKey: 'RESERVE_DECIMAL02',
           },
           {
-            title: window.vmI18n.t('table_label.unitPrice'), // 成交单价
+            title: $i18n.t('table_label.unitPrice'), // 成交单价
             key: 'PRICE_ACTUAL',
             render: (h, params) => {
               const self = this;
@@ -955,7 +954,7 @@ export default {
             },
           },
           {
-            title: window.vmI18n.t('table_label.quantities'), // 数量
+            title: $i18n.t('table_label.quantities'), // 数量
             key: 'QTY',
             dataAcessKey: 'QTY',
             render: (h, params) => {
@@ -1008,7 +1007,7 @@ export default {
             },
           },
           {
-            title: window.vmI18n.t('table_label.transactionAmount'), // 成交金额
+            title: $i18n.t('table_label.transactionAmount'), // 成交金额
             key: 'REAL_AMT',
             dataAcessKey: 'REAL_AMT',
             render: (h, params) => {
@@ -1057,7 +1056,7 @@ export default {
             },
           },
           {
-            title: window.vmI18n.t('table_label.whetherGift'), // 是否赠品
+            title: $i18n.t('table_label.whetherGift'), // 是否赠品
             key: 'IS_GIFT',
             dataAcessKey: 'IS_GIFT',
             render: (h, params) =>
@@ -1093,14 +1092,14 @@ export default {
               ),
           },
           {
-            title: window.vmI18n.t('table_label.adjustment_amount'),
+            title: $i18n.t('table_label.adjustment_amount'),
             key: 'ADJUST_AMT',
             dataAcessKey: 'ADJUST_AMT',
             render: (h, params) =>
               h('span', {}, Number(params.row.ADJUST_AMT).toFixed(2)),
           },
           {
-            title: window.vmI18n.t('table_label.preferential_amount'),
+            title: $i18n.t('table_label.preferential_amount'),
             key: 'AMT_DISCOUNT',
             dataAcessKey: 'AMT_DISCOUNT',
             render: (h, params) =>
@@ -1113,7 +1112,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: window.vmI18n.t('panel_label.order_detailed'), // 订单明细
+          label: $i18n.t('panel_label.order_detailed'), // 订单明细
           value: '1',
           isShow: true,
         },
@@ -1121,7 +1120,7 @@ export default {
       labelDefaultValue: '1', // 设置tab默认值
       orderNo: {
         refFuns: 'confirmFun',
-        confirmTitle: window.vmI18n.t('modalTitle.matrixEntry'), // 矩阵录入
+        confirmTitle: $i18n.t('modalTitle.matrixEntry'), // 矩阵录入
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '800',
         scrollable: false, // 是否可以滚动
@@ -1220,11 +1219,11 @@ export default {
     self.service.common.getObject(fromdata).then((res) => {
       res.data.data.addcolums.forEach((item) => {
         // '基本信息'
-        if (item.parentdesc === window.vmI18n.t('common.baseInformation')) {
+        if (item.parentdesc === $i18n.t('common.baseInformation')) {
           const selectData = item.childs;
           selectData.forEach((item) => {
             // '支付类型'
-            if (item.name === window.vmI18n.t('other.payType')) {
+            if (item.name === $i18n.t('other.payType')) {
               self.selectData = item.combobox;
             }
           });
@@ -1239,7 +1238,7 @@ export default {
       const _this = this;
       _this.queryFormItem(
         _this.formConfig.formData,
-        window.vmI18n.t('form_label.delivery_warehouse')
+        $i18n.t('form_label.delivery_warehouse')
       ).options = [];
       const formData = new FormData();
       if (id) {
@@ -1256,7 +1255,7 @@ export default {
           JSON.stringify({
             shopId: _this.queryFormItem(
               _this.formConfig.formData,
-              window.vmI18n.t('form_label.orderShop')
+              $i18n.t('form_label.orderShop')
             ).itemdata.pid,
           })
         );
@@ -1264,7 +1263,7 @@ export default {
       if (
         _this.queryFormItem(
           _this.formConfig.formData,
-          window.vmI18n.t('form_label.orderShop')
+          $i18n.t('form_label.orderShop')
         ).itemdata.pid
       ) {
         const res = await _this.service.common.queryPhyWareHouseList(formData);
@@ -1312,9 +1311,9 @@ export default {
       const ocBorderItemDto = self.jordanTableConfig.data;
       // 将是否赠品,实物或缺是否转化为YN
       ocBorderItemDto.forEach((item) => {
-        if (item.IS_GIFT === self.vmI18n.t('common.yes')) {
+        if (item.IS_GIFT === $i18n.t('common.yes')) {
           item.IS_GIFT = 1;
-        } else if (item.IS_GIFT === self.vmI18n.t('common.no')) {
+        } else if (item.IS_GIFT === $i18n.t('common.no')) {
           item.IS_GIFT = 0;
         }
         item.PRICE_LIST = item.RESERVE_DECIMAL02;
@@ -1324,14 +1323,14 @@ export default {
       self.formConfig.formData.forEach((item) => {
         if (
           item.itemdata &&
-          item.itemdata.name === self.vmI18n.t('form_label.orderShop')
+          item.itemdata.name === $i18n.t('form_label.orderShop')
         ) {
           ocBorderDto.CP_C_SHOP_TITLE = item.itemdata.valuedata;
           ocBorderDto.CP_C_SHOP_ID = item.itemdata.pid;
         } else if (
           item.itemdata &&
           item.itemdata.name ===
-          self.vmI18n.t('form_label.distribution_logistics')
+          $i18n.t('form_label.distribution_logistics')
         ) {
           ocBorderDto.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
           ocBorderDto.CP_C_LOGISTICS_ID = item.itemdata.pid;
@@ -1341,20 +1340,20 @@ export default {
       self.formConfig1.formData.forEach((item) => {
         if (
           item.itemdata &&
-          item.itemdata.name === self.vmI18n.t('form_label.consignee_province')
+          item.itemdata.name === $i18n.t('form_label.consignee_province')
         ) {
           ocBorderDto.CP_C_REGION_PROVINCE_ENAME = item.itemdata.valuedata;
           ocBorderDto.CP_C_REGION_PROVINCE_ID = item.itemdata.pid;
         } else if (
           item.itemdata &&
-          item.itemdata.name === self.vmI18n.t('form_label.consignee_city')
+          item.itemdata.name === $i18n.t('form_label.consignee_city')
         ) {
           ocBorderDto.CP_C_REGION_CITY_ENAME = item.itemdata.valuedata;
           ocBorderDto.CP_C_REGION_CITY_ID = item.itemdata.pid;
         }
         if (
           item.itemdata &&
-          item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
+          item.itemdata.name === $i18n.t('form_label.aconsignee_area')
         ) {
           ocBorderDto.CP_C_REGION_AREA_ENAME = item.itemdata.valuedata;
           ocBorderDto.CP_C_REGION_AREA_ID = item.itemdata.pid;
@@ -1413,7 +1412,7 @@ export default {
       });
       setTimeout(() => {
         self.jordanTableConfig.totalData.push({
-          selection: `${self.vmI18n.t('other.total')}:`,
+          selection: `${$i18n.t('other.total')}:`,
           REAL_AMT: amt,
           QTY: qty,
         });
@@ -1426,8 +1425,8 @@ export default {
       if (selectData === 1) {
         showNo.forEach((item) => {
           if (
-            item.label === window.vmI18n.t('form_label.collection_amount') ||
-            item.label === window.vmI18n.t('form_label.service_charge')
+            item.label === $i18n.t('form_label.collection_amount') ||
+            item.label === $i18n.t('form_label.service_charge')
           ) {
             item.style = '';
           }
@@ -1435,8 +1434,8 @@ export default {
       } else {
         showNo.forEach((item) => {
           if (
-            item.label === window.vmI18n.t('form_label.collection_amount') ||
-            item.label === window.vmI18n.t('form_label.service_charge')
+            item.label === $i18n.t('form_label.collection_amount') ||
+            item.label === $i18n.t('form_label.service_charge')
           ) {
             item.style = 'input';
           }
@@ -1490,7 +1489,7 @@ export default {
             // this.formConfig.formData[1].inputList = [
             this.queryFormItem(
               this.formConfig.formData,
-              window.vmI18n.t('form_label.distribution_logistics')
+              $i18n.t('form_label.distribution_logistics')
             ).inputList = [
                 {
                   childs: [
@@ -1539,7 +1538,7 @@ export default {
             });
             self.jordanTableConfig.totalData = [
               {
-                selection: `${self.vmI18n.t('other.total')}:`, // 合计
+                selection: `${$i18n.t('other.total')}:`, // 合计
                 REAL_AMT: amt,
                 QTY: qty,
               },
@@ -1558,12 +1557,12 @@ export default {
       const warnFlag = self.saveWarnCheck(data);
       if (warnFlag) {
         self.$Modal.info({
-          title: self.vmI18n.t('modalTitle.tips'), // 提示
-          content: self.vmI18n.t('modalTips.g1'), // 订单存在非赠品的成交金额为0， 是否确定保存订单？
+          title: $i18n.t('modalTitle.tips'), // 提示
+          content: $i18n.t('modalTips.g1'), // 订单存在非赠品的成交金额为0， 是否确定保存订单？
           mask: true,
           showCancel: true,
-          okText: self.vmI18n.t('common.determine'), // 确定
-          cancelText: self.vmI18n.t('common.cancel'), // 取消
+          okText: $i18n.t('common.determine'), // 确定
+          cancelText: $i18n.t('common.cancel'), // 取消
           onOk: () => {
             self.isShowFromLoading = true;
             self.btnConfig.loading = true;
@@ -1577,10 +1576,10 @@ export default {
                   id: res.data.data,
                   type: 'action',
                   name: 'orderManageDetail',
-                  label: self.vmI18n.t('panel_label.orderManager_edit'), // 订单管理编辑
+                  label: $i18n.t('panel_label.orderManager_edit'), // 订单管理编辑
                   query: Object.assign({
                     id: res.data.data,
-                    tabTitle: self.vmI18n.t('panel_label.orderManager_edit'), // 订单管理编辑
+                    tabTitle: $i18n.t('panel_label.orderManager_edit'), // 订单管理编辑
                   }),
                 });
                 // 销毁当前实例
@@ -1589,7 +1588,7 @@ export default {
                 self.btnConfig.loading = false;
                 // 保存未成功
                 self.$Message.warning(
-                  res.data.message || self.vmI18n.t('modalTips.g2')
+                  res.data.message || $i18n.t('modalTips.g2')
                 );
                 self.btnConfig.buttons[0].disabled = false;
               }
@@ -1612,10 +1611,10 @@ export default {
               id: res.data.data,
               type: 'action',
               name: 'orderManageDetail',
-              label: self.vmI18n.t('panel_label.orderManager_edit'), // 订单管理编辑
+              label: $i18n.t('panel_label.orderManager_edit'), // 订单管理编辑
               query: Object.assign({
                 id: res.data.data,
-                tabTitle: self.vmI18n.t('panel_label.orderManager_edit'), // 订单管理编辑
+                tabTitle: $i18n.t('panel_label.orderManager_edit'), // 订单管理编辑
               }),
             });
             // 销毁当前实例
@@ -1624,7 +1623,7 @@ export default {
             self.btnConfig.loading = false;
             // 保存未成功
             self.$Message.warning(
-              res.data.message || self.vmI18n.t('modalTips.g2')
+              res.data.message || $i18n.t('modalTips.g2')
             );
             self.btnConfig.buttons[0].disabled = false;
           }
@@ -1638,12 +1637,12 @@ export default {
       const warnFlag = self.saveWarnCheck(data);
       if (warnFlag) {
         self.$Modal.info({
-          title: self.vmI18n.t('modalTitle.tips'), // 提示
-          content: self.vmI18n.t('modalTips.g1'), // 订单存在非赠品的成交金额为0， 是否确定保存订单？
+          title: $i18n.t('modalTitle.tips'), // 提示
+          content: $i18n.t('modalTips.g1'), // 订单存在非赠品的成交金额为0， 是否确定保存订单？
           mask: true,
           showCancel: true,
-          okText: self.vmI18n.t('common.determine'), // 确定
-          cancelText: self.vmI18n.t('common.cancel'), // 取消
+          okText: $i18n.t('common.determine'), // 确定
+          cancelText: $i18n.t('common.cancel'), // 取消
           onOk: () => {
             self.isShowFromLoading = true;
             this.btnConfig.loading = true;
@@ -1657,17 +1656,17 @@ export default {
                   id: res.data.data,
                   type: 'action',
                   name: 'orderManageDetail',
-                  label: self.vmI18n.t('panel_label.orderManager_edit'), // 订单管理编辑
+                  label: $i18n.t('panel_label.orderManager_edit'), // 订单管理编辑
                   query: Object.assign({
                     id: res.data.data,
-                    tabTitle: self.vmI18n.t('panel_label.orderManager_edit'), // 订单管理编辑
+                    tabTitle: $i18n.t('panel_label.orderManager_edit'), // 订单管理编辑
                   }),
                 });
                 // 销毁当前实例
                 self.$destroy();
               } else {
                 self.$Message.warning(
-                  res.data.message || self.vmI18n.t('modalTips.g2')
+                  res.data.message || $i18n.t('modalTips.g2')
                 );
                 self.btnConfig.buttons[0].disabled = false;
               }
@@ -1687,10 +1686,10 @@ export default {
               id: res.data.data,
               type: 'action',
               name: 'orderManageDetail',
-              label: self.vmI18n.t('panel_label.orderManager_edit'), // 订单管理编辑
+              label: $i18n.t('panel_label.orderManager_edit'), // 订单管理编辑
               query: Object.assign({
                 id: res.data.data,
-                tabTitle: self.vmI18n.t('panel_label.orderManager_edit'), // 订单管理编辑
+                tabTitle: $i18n.t('panel_label.orderManager_edit'), // 订单管理编辑
               }),
             });
             // 销毁当前实例
@@ -1698,7 +1697,7 @@ export default {
           } else {
             // 保存未成功
             self.$Message.warning(
-              res.data.message || self.vmI18n.t('modalTips.g2')
+              res.data.message || $i18n.t('modalTips.g2')
             );
             self.btnConfig.buttons[0].disabled = false;
           }
@@ -1802,14 +1801,14 @@ export default {
           // 下单店铺 配送物流 收货人省份 收货人市 收货人区
           if (
             item.itemdata &&
-            item.itemdata.name === self.vmI18n.t('form_label.orderShop')
+            item.itemdata.name === $i18n.t('form_label.orderShop')
           ) {
             ocBorderDto.CP_C_SHOP_TITLE = item.itemdata.valuedata;
             ocBorderDto.CP_C_SHOP_ID = item.itemdata.pid;
           } else if (
             item.itemdata &&
             item.itemdata.name ===
-            self.vmI18n.t('form_label.distribution_logistics')
+            $i18n.t('form_label.distribution_logistics')
           ) {
             ocBorderDto.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_LOGISTICS_ID = item.itemdata.pid;
@@ -1819,20 +1818,20 @@ export default {
           if (
             item.itemdata &&
             item.itemdata.name ===
-            self.vmI18n.t('form_label.consignee_province')
+            $i18n.t('form_label.consignee_province')
           ) {
             ocBorderDto.CP_C_REGION_PROVINCE_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_REGION_PROVINCE_ID = item.itemdata.pid;
           } else if (
             item.itemdata &&
-            item.itemdata.name === self.vmI18n.t('form_label.consignee_city')
+            item.itemdata.name === $i18n.t('form_label.consignee_city')
           ) {
             ocBorderDto.CP_C_REGION_CITY_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_REGION_CITY_ID = item.itemdata.pid;
           }
           if (
             item.itemdata &&
-            item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
+            item.itemdata.name === $i18n.t('form_label.aconsignee_area')
           ) {
             ocBorderDto.CP_C_REGION_AREA_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_REGION_AREA_ID = item.itemdata.pid;
@@ -1881,7 +1880,7 @@ export default {
                   });
                   self.jordanTableConfig.totalData = [
                     {
-                      selection: `${self.vmI18n.t('other.total')}:`, // 合计
+                      selection: `${$i18n.t('other.total')}:`, // 合计
                       REAL_AMT: amt,
                       QTY: qty,
                     },
@@ -1895,19 +1894,19 @@ export default {
                   }
                 } else {
                   // 明细查询失败
-                  self.$Message.warning(self.vmI18n.t('modalTips.g3'));
+                  self.$Message.warning($i18n.t('modalTips.g3'));
                 }
               });
           } else {
             // 明细保存失败
             self.$Message.warning(
-              res.data.message || self.vmI18n.t('modalTips.g4')
+              res.data.message || $i18n.t('modalTips.g4')
             );
           }
         });
       } else {
         // 请输入条码
-        self.$Message.warning(self.vmI18n.t('modalTips.g5'));
+        self.$Message.warning($i18n.t('modalTips.g5'));
       }
     },
     enterQuerySave1(val) {
@@ -1963,7 +1962,7 @@ export default {
             data.push(res.data.data.data[0]);
             const cloneArr = [];
             if (!data.length) {
-              return _this.$Message.error(_this.vmI18n.t('modalTips.g6'));
+              return _this.$Message.error($i18n.t('modalTips.g6'));
             } // 不存在该条码！
             data.forEach((item) => {
               cloneArr.push({
@@ -2014,7 +2013,7 @@ export default {
           if (
             item.itemdata.name == e.name &&
             item.itemdata.name ==
-            window.vmI18n.t('form_label.delivery_warehouse')
+            $i18n.t('form_label.delivery_warehouse')
           ) {
             _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID =
               item.itemdata.pid;
@@ -2088,7 +2087,7 @@ export default {
             });
             self.jordanTableConfig.totalData = [
               {
-                selection: `${self.vmI18n.t('other.total')}:`, // 合计
+                selection: `${$i18n.t('other.total')}:`, // 合计
                 REAL_AMT: amt,
                 QTY: qty,
               },
@@ -2097,7 +2096,7 @@ export default {
         }
       }
       delarr.forEach((item) => {
-        if (item.IS_GIFT === self.vmI18n.t('common.yes')) {
+        if (item.IS_GIFT === $i18n.t('common.yes')) {
           item.IS_GIFT = 1;
         } else {
           item.IS_GIFT = 0;
@@ -2125,9 +2124,9 @@ export default {
                   // 对是否赠品,实物报缺进行映射
                   result.data.data.records.forEach((item) => {
                     if (item.IS_GIFT === 1) {
-                      item.IS_GIFT = self.vmI18n.t('common.yes'); // 是
+                      item.IS_GIFT = $i18n.t('common.yes'); // 是
                     } else if (item.IS_GIFT === 0) {
-                      item.IS_GIFT = self.vmI18n.t('common.no'); // 否
+                      item.IS_GIFT = $i18n.t('common.no'); // 否
                     }
                   });
                   self.jordanTableConfig.data = self.filterRfundStatus(
@@ -2145,7 +2144,7 @@ export default {
                   });
                   self.jordanTableConfig.totalData = [
                     {
-                      selection: `${self.vmI18n.t('other.total')}:`, // 合计
+                      selection: `${$i18n.t('other.total')}:`, // 合计
                       REAL_AMT: amt,
                       QTY: qty,
                     },
@@ -2197,10 +2196,10 @@ export default {
 
       self.formConfig.formData.forEach((item) => {
         // 下单店铺 配送物流
-        if (item.itemdata?.name === self.vmI18n.t('form_label.orderShop')) {
+        if (item.itemdata?.name === $i18n.t('form_label.orderShop')) {
           item.itemdata.valuedata = data.CP_C_SHOP_TITLE;
           item.itemdata.pid = data.CP_C_SHOP_ID;
-        } else if (item.itemdata?.name === self.vmI18n.t('form_label.distribution_logistics')) {
+        } else if (item.itemdata?.name === $i18n.t('form_label.distribution_logistics')) {
           item.itemdata.valuedata = data.CP_C_LOGISTICS_ENAME;
           item.itemdata.pid = data.CP_C_LOGISTICS_ID;
         }
@@ -2222,19 +2221,19 @@ export default {
         // 收货人省份 收货人市 收货人区
         if (
           item.itemdata &&
-          item.itemdata.name === self.vmI18n.t('form_label.consignee_province')
+          item.itemdata.name === $i18n.t('form_label.consignee_province')
         ) {
           item.itemdata.valuedata = data.CP_C_REGION_PROVINCE_ENAME;
           item.itemdata.pid = data.CP_C_REGION_PROVINCE_ID;
         } else if (
           item.itemdata &&
-          item.itemdata.name === self.vmI18n.t('form_label.consignee_city')
+          item.itemdata.name === $i18n.t('form_label.consignee_city')
         ) {
           item.itemdata.valuedata = data.CP_C_REGION_CITY_ENAME;
           item.itemdata.pid = data.CP_C_REGION_CITY_ID;
         } else if (
           item.itemdata &&
-          item.itemdata.name === self.vmI18n.t('form_label.aconsignee_area')
+          item.itemdata.name === $i18n.t('form_label.aconsignee_area')
         ) {
           item.itemdata.valuedata = data.CP_C_REGION_AREA_ENAME;
           item.itemdata.pid = data.CP_C_REGION_AREA_ID;
@@ -2247,11 +2246,11 @@ export default {
     },
     // 过滤条件
     relationShip() {
-      this.queryFormItem(this.formConfig1.formData, window.vmI18n.t('form_label.consignee_province')).itemdata = this.fkcolumn.PROV;
-      this.queryFormItem(this.formConfig1.formData, window.vmI18n.t('form_label.consignee_city')).inputList.push(this.fkcolumn.PROV);
-      this.queryFormItem(this.formConfig1.formData, window.vmI18n.t('form_label.consignee_city')).itemdata = this.fkcolumn.CITY;
-      this.queryFormItem(this.formConfig1.formData, window.vmI18n.t('form_label.aconsignee_area')).inputList.push(this.fkcolumn.CITY);
-      this.queryFormItem(this.formConfig.formData, window.vmI18n.t('form_label.orderShop')).itemdata = this.fkcolumn.STORE;
+      this.queryFormItem(this.formConfig1.formData, $i18n.t('form_label.consignee_province')).itemdata = this.fkcolumn.PROV;
+      this.queryFormItem(this.formConfig1.formData, $i18n.t('form_label.consignee_city')).inputList.push(this.fkcolumn.PROV);
+      this.queryFormItem(this.formConfig1.formData, $i18n.t('form_label.consignee_city')).itemdata = this.fkcolumn.CITY;
+      this.queryFormItem(this.formConfig1.formData, $i18n.t('form_label.aconsignee_area')).inputList.push(this.fkcolumn.CITY);
+      this.queryFormItem(this.formConfig.formData, $i18n.t('form_label.orderShop')).itemdata = this.fkcolumn.STORE;
     },
     queryFormItem(arr, name) {
       // 根据label遍历查询formData子项

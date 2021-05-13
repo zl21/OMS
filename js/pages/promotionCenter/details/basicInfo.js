@@ -12,7 +12,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       my_input_sh: {
         itemdata: {
           col: 1,
@@ -27,7 +26,7 @@ export default {
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: window.vmI18n.t('table_label.shopName'), // 店铺名称
+          name: $i18n.t('table_label.shopName'), // 店铺名称
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_SHOP', // 对应的表
           // reftableid: 24475, //对应的表ID
@@ -52,7 +51,7 @@ export default {
           isnotnull: false,
           isuppercase: false,
           length: 65535,
-          name: window.vmI18n.t('common.exclude_province'), // 排除省
+          name: $i18n.t('common.exclude_province'), // 排除省
           readonly: false,
           reftable: 'CP_C_PROVINCE',
           reftableid: 23862,

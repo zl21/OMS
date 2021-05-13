@@ -32,7 +32,6 @@ export default {
     };
     /* -------------------- input校验器 end -------------------- */
     return {
-      vmI18n: window.vmI18n,
       subTableConfig: {
         centerName: '',
         tablename: '',
@@ -100,7 +99,7 @@ export default {
           },
         },
         {
-          text: window.vmI18n.t('btn.back'),
+          text: $i18n.t('btn.back'),
           btnclick: () => {
             this.back()
           },
@@ -115,7 +114,7 @@ export default {
         width: 250,
         height: 170,
         colname: 'IMAGE',
-        name: window.vmI18n.t('other.uploadVoucher'), // 上传凭证
+        name: $i18n.t('other.uploadVoucher'), // 上传凭证
         readonly: false,
         valuedata: [],
       },
@@ -743,7 +742,7 @@ export default {
       this.loading = false;
       if (code === 0) {
         this.backable = true;
-        self.$Message.success(message || window.vmI18n.t('modalTips.z9'));
+        self.$Message.success(message || $i18n.t('modalTips.z9'));
         self.modify.master = {};
         self.modify.exAttr = {};
         // 数据回显
@@ -787,12 +786,12 @@ export default {
       const masterArr = Object.keys(self.modify.master);
       if (masterArr.length) {
         this.$Modal.info({
-          title: self.vmI18n.t('modalTitle.tips'), // 提示
+          title: $i18n.t('modalTitle.tips'), // 提示
           content: '当前修改未保存，确定返回？',
           mask: true,
           showCancel: true,
-          okText: self.vmI18n.t('common.determine'), // 确定
-          cancelText: self.vmI18n.t('common.cancel'), // 取消
+          okText: $i18n.t('common.determine'), // 确定
+          cancelText: $i18n.t('common.cancel'), // 取消
           onOk: () => {
             self.onOk()
           },

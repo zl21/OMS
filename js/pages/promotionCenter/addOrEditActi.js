@@ -14,7 +14,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       objid: '-1', // 新增-1 保存的正整数
       dialogVisible: false,
       basic_info: {
@@ -36,7 +35,7 @@ export default {
             isuppercase: false, // 是否转大写
             length: 65535, // 最大长度是多少
             // name: "店铺名称", // input前面显示的lable值
-            name: window.vmI18n.t('table_label.shopName'),
+            name: $i18n.t('table_label.shopName'),
             readonly: false, // 是否可编辑，对应input   readonly属性
             reftable: 'CP_C_SHOP', // 对应的表
             // reftableid: 24475, //对应的表ID
@@ -72,7 +71,7 @@ export default {
             isuppercase: false,
             length: 65535,
             // name: "排除省",
-            name: window.vmI18n.t('common.exclude_province'),
+            name: $i18n.t('common.exclude_province'),
             readonly: false,
             reftable: 'CP_C_PROVINCE',
             reftableid: 23862,
@@ -146,25 +145,25 @@ export default {
         {
           class: 'icon-jibenxinxi',
           // content: "基础信息",
-          content: window.vmI18n.t('other.basic_info'),
+          content: $i18n.t('other.basic_info'),
           finish: false
         },
         {
           class: 'icon-liuchengtiaojian',
           // content: "条件信息",
-          content: window.vmI18n.t('other.condition_info'),
+          content: $i18n.t('other.condition_info'),
           finish: false
         },
         {
           class: 'icon-zengpin',
           // content: "赠品信息",
-          content: window.vmI18n.t('other.gift_info'),
+          content: $i18n.t('other.gift_info'),
           finish: false
         },
         {
           class: 'icon-huodong',
           // content: "活动概览",
-          content: window.vmI18n.t('other.activity_overview'),
+          content: $i18n.t('other.activity_overview'),
           finish: false
         }
       ],
@@ -342,7 +341,7 @@ export default {
         // self.$message({ type: "error", message: "获取促销详情异常" });
         self.$message({
           type: 'error',
-          message: this.vmI18n.t('modalTips.r4')
+          message: $i18n.t('modalTips.r4')
         });
       }
     },
@@ -393,7 +392,7 @@ export default {
         if (code === 0) {
           this.$message({
             type: 'success',
-            message: window.vmI18n.t('modalTips.z9') // 保存成功
+            message: $i18n.t('modalTips.z9') // 保存成功
           });
           // action never used
           // let action = 'customize/switchActiveTab';
@@ -410,10 +409,10 @@ export default {
             //   // id: this.objid, // id
             //   // type: 'action', // 类型action
             //   // name: 'addOrEditActi', // 文件名
-            //   label: this.vmI18n.t('panel_label.editPromotion'), // 编辑促销活动
+            //   label: $i18n.t('panel_label.editPromotion'), // 编辑促销活动
             //   query: Object.assign({
             //     id: this.objid, // id
-            //     // tabTitle: this.vmI18n.t('panel_label.editPromotion') // 编辑促销活动
+            //     // tabTitle: $i18n.t('panel_label.editPromotion') // 编辑促销活动
             //   }) // 带的参数
             // });
           });
@@ -502,7 +501,7 @@ export default {
         type: 'C', // 类型action
         customizedModuleId: 2895, // id
         customizedModuleName: 'PROMACTIQUERYLIST', // 文件名
-        label: this.vmI18n.t('panel_label.promotionList'), // 促销活动
+        label: $i18n.t('panel_label.promotionList'), // 促销活动
         dynamicRoutingForCustomizePage: true
       });
       // this.$destroy();
@@ -615,19 +614,19 @@ export default {
       if (this.basic_info.activity_name === '') {
         return {
           code: -1,
-          message: this.vmI18n.t('modalTips.s5')
+          message: $i18n.t('modalTips.s5')
         }; // 活动名称未填写！
       }
       if (this.basic_info.stores.itemdata.valuedata === '') {
         return {
           code: -1,
-          message: this.vmI18n.t('modalTips.s6')
+          message: $i18n.t('modalTips.s6')
         }; // 店铺名称未填写！
       }
       if (this.basic_info.order_type.length === 0) {
         return {
           code: -1,
-          message: this.vmI18n.t('modalTips.s7')
+          message: $i18n.t('modalTips.s7')
         }; // 订单类型必选！
       }
       // if(this.basic_info.platform_mark.length === 0){
@@ -636,30 +635,30 @@ export default {
       if (this.basic_info.time_limit === '' || this.basic_info.time_limit[0] === '' || this.basic_info.time_limit[1] === '') {
         return {
           code: -1,
-          message: this.vmI18n.t('modalTips.t8')
+          message: $i18n.t('modalTips.t8')
         }; // 时间范围未填写！
       }
       if (this.basic_info.offline_time === '') {
         return {
           code: -1,
-          message: this.vmI18n.t('modalTips.s8')
+          message: $i18n.t('modalTips.s8')
         }; // 下线时间未填写！
       }
       if (this.basic_info.buyer_limit_frequency === '1' && this.basic_info.buyer_max_frequency === '') {
         return {
           code: -1,
-          message: this.vmI18n.t('modalTips.s9')
+          message: $i18n.t('modalTips.s9')
         }; // 最大限制次数未填写！
       }
 
       return {
         code: 0,
-        message: this.vmI18n.t('modalTips.s4')
+        message: $i18n.t('modalTips.s4')
       }; // 校验完成
     },
     validate2() {
       // const tablename = "商品列表";
-      const tablename = this.vmI18n.t('other.product_list');
+      const tablename = $i18n.t('other.product_list');
       // 1.指定-非搭配   2.全场-不梯度, 规则至少需要选中一个
       // add  by wdq  1情况 不控制   (this.basic_info.activity_type === "GA" && this.condition_info_setting.products_join === "1")
       if ((this.basic_info.activity_type === 'PA' || (this.basic_info.activity_type === 'GA' && this.condition_info_setting.products_join === '1')) && this.basic_info.gradient_gift === '0') {
@@ -668,13 +667,13 @@ export default {
         if (!o) {
           return {
             code: -1,
-            message: this.vmI18n.t('modalTips.r5') // 【满足条件】至少要选中一项并且填写数量或金额条件
+            message: $i18n.t('modalTips.r5') // 【满足条件】至少要选中一项并且填写数量或金额条件
           };
         }
       }
       let rs = {
         code: 0,
-        message: this.vmI18n.t('modalTips.s4')
+        message: $i18n.t('modalTips.s4')
       }; // 校验完成
       if (this.basic_info.activity_type === 'GA') {
         // 指定
@@ -684,7 +683,7 @@ export default {
           if (arrs.length === 0) {
             return {
               code: -1,
-              message: tablename + this.vmI18n.t('modalTips.r6')
+              message: tablename + $i18n.t('modalTips.r6')
             };
           } // 无数据
           rs = this.checkTable(arrs);
@@ -695,7 +694,7 @@ export default {
           if (arrs.length === 0) {
             return {
               code: -1,
-              message: tablename + this.vmI18n.t('modalTips.r6')
+              message: tablename + $i18n.t('modalTips.r6')
             };
           } // 无数据
           rs = this.checkTableTab(arrs, 'info');
@@ -707,10 +706,10 @@ export default {
       return rs;
     },
     validate3() {
-      const tablename = this.vmI18n.t('other.gift_list');
+      const tablename = $i18n.t('other.gift_list');
       let rs = {
         code: 0,
-        message: this.vmI18n.t('modalTips.s4')
+        message: $i18n.t('modalTips.s4')
       }; // 赠品列表
       if (this.basic_info.gradient_gift === '0') {
         // 不梯度
@@ -718,7 +717,7 @@ export default {
         if (arrs.length === 0) {
           return {
             code: -1,
-            message: tablename + this.vmI18n.t('modalTips.r6')
+            message: tablename + $i18n.t('modalTips.r6')
           };
         }
         rs = this.checkTable(arrs);
@@ -727,7 +726,7 @@ export default {
         if (arrs.length === 0) {
           return {
             code: -1,
-            message: tablename + this.vmI18n.t('modalTips.r6')
+            message: tablename + $i18n.t('modalTips.r6')
           };
         }
         rs = this.checkTableTab(arrs, 'gift');
@@ -779,7 +778,7 @@ export default {
       }
       return {
         code: 0,
-        message: this.vmI18n.t('modalTips.s4')
+        message: $i18n.t('modalTips.s4')
       };
     },
     checkTable(rows) {
@@ -797,7 +796,7 @@ export default {
       }
       return {
         code: 0,
-        message: this.vmI18n.t('modalTips.s4')
+        message: $i18n.t('modalTips.s4')
       };
     }
   },

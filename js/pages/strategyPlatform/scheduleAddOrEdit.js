@@ -20,7 +20,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       collapse: ['panel_baseInfo', 'panel_pickInfo', 'panel_warehouseInfo'],
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       forceReload: 0, // 组件重载
@@ -56,7 +55,7 @@ export default {
           },
           {
             webname: 'lookup_return', // 返回
-            text: window.vmI18n.t('btn.back'),
+            text: $i18n.t('btn.back'),
             btnclick: () => {
               this.back();
             },
@@ -798,12 +797,12 @@ export default {
                   on: {
                     click: () => {
                       this.$Modal.info({
-                        title: self.vmI18n.t('modalTitle.tips'), // 提示
+                        title: $i18n.t('modalTitle.tips'), // 提示
                         content: '确定删除？',
                         mask: true,
                         showCancel: true,
-                        okText: self.vmI18n.t('common.determine'), // 确定
-                        cancelText: self.vmI18n.t('common.cancel'), // 取消
+                        okText: $i18n.t('common.determine'), // 确定
+                        cancelText: $i18n.t('common.cancel'), // 取消
                         onOk: () => {
                           this.subTableDelete(params.row.ID, 'pickingTableConfig');
                         },
@@ -962,12 +961,12 @@ export default {
                   on: {
                     click: () => {
                       this.$Modal.info({
-                        title: self.vmI18n.t('modalTitle.tips'), // 提示
+                        title: $i18n.t('modalTitle.tips'), // 提示
                         content: '确定删除？',
                         mask: true,
                         showCancel: true,
-                        okText: self.vmI18n.t('common.determine'), // 确定
-                        cancelText: self.vmI18n.t('common.cancel'), // 取消
+                        okText: $i18n.t('common.determine'), // 确定
+                        cancelText: $i18n.t('common.cancel'), // 取消
                         onOk: () => {
                           this.subTableDelete(params.row.ID, 'warehouseWarrantConfig');
                         },

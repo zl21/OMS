@@ -79,7 +79,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       currentTab: 0,
       tableCols,
       data: [], // 表格数据
