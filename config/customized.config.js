@@ -12,6 +12,7 @@ import orderLogo from './config/orderLogo.js'
 import importTableConfig from './config/importTable.config.js'
 import downLoadAllConfig from '@/js/modal/interfacePlatform/config/downLoadAll.Config.js'
 import oldConfig from './config/globalComponent.config.js'
+import subTableConfig from '../js/pages/orderCenter/orderManageDetail/details/config.js'
 
 import commonUtils from './config/commonUtils.js'
 import funBtn from './config/funBtn.config.js'
@@ -19,6 +20,7 @@ import dropDownBtn from './config/dropDown.config.js'
 import Vue from 'vue';
 
 class CustomizedConfig {
+	static #subTableConfig = subTableConfig;
 	static #customizedModal = customizedModal;
 	static #customizedPage = customizedPage;
 	static #customizedExternalTreeDatas = customizedExternalTreeDatas;
@@ -53,6 +55,25 @@ class CustomizedConfig {
 	constructor() {
 		// this.initConfig = new InitAppConfig();
 		// console.log('hello CustomizedConfig');
+	}
+
+	// subTable组件的配置项(有用到，不准删！！！)
+	static get subTableConfig() {
+		return this.#subTableConfig;
+	}
+	static editSubTableConfig(configItem = {}) {
+		for (const centerKey in configItem) {
+			if (!Object.keys(configItem[centerKey])) return
+			for (const key in configItem[centerKey]) {
+				if (this.#subTableConfig[centerKey]) {
+					this.#subTableConfig[centerKey][key] = configItem[centerKey][key];
+				} else {
+					this.#subTableConfig[centerKey] = configItem[centerKey];
+				}
+			}
+			this.#subTableConfig[key] = configItem[key];
+ 		}
+		return this.#subTableConfig
 	}
 
 	// R3.launchApplication.image配置
