@@ -14,6 +14,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       objid: '-1', // 新增-1 保存的正整数
       dialogVisible: false,
       basic_info: {

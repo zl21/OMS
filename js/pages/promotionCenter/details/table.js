@@ -58,6 +58,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       columns: [],
       pageShow: true,
       styles: {

@@ -20,6 +20,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       totalRowCount: 0,
       pageSize: 10,
       pageNum: 1,

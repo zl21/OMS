@@ -32,7 +32,8 @@ import businessActionTable from 'professionalComponents/businessActionTable';
     },
     data() {
       return {
-          loading: false,
+        vmI18n:$i18n,
+        loading: false,
         resultArr:[],
         tableConfig: {
           indexColumn: true, // 是否显示序号

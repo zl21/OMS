@@ -92,6 +92,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       refobjid: 2,
       pulicUrl: '',
       downLoadBtnConfig: {

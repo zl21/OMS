@@ -18,6 +18,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       isQh: true, 
       isQhChild: true,
       is_combination:false, // 是否为组合

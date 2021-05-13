@@ -32,6 +32,7 @@ export default {
   // },
   data() {
     return {
+      vmI18n:$i18n,
       // 暂存选中数据
       selection: [],
       dialogs: DialogConfig.config(),

@@ -28,6 +28,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       stopsave: false,
       refresh: Boolean, // 刷新
       save: Boolean, // 保存

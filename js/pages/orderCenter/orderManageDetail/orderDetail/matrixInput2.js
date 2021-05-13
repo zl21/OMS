@@ -29,6 +29,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       visible: false, // select框
       sub: -1, // 下拉下标
       search: '', // 搜索

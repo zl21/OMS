@@ -5,6 +5,7 @@ export default {
   name: 'DialogVisible',
   data() {
     return {
+      vmI18n:$i18n,
       buttonConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)

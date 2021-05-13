@@ -20,6 +20,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       collapse: ['panel_baseInfo', 'attr'],
       labelValue: 'skuInfo',
       dataitem: {

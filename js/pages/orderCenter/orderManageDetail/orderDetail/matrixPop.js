@@ -117,6 +117,7 @@ export default {
           }
         ]
       }, */
+      vmI18n:$i18n,
       isStoreFlag: true,
       saveLoading: false, // 保存loading
       store: '杭州店仓', // 店仓名字

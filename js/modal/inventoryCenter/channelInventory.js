@@ -6,6 +6,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       is_click: false,
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式

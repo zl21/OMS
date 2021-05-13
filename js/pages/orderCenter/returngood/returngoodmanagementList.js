@@ -26,6 +26,7 @@ export default {
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
   data() {
     return {
+      vmI18n:$i18n,
       loadingActive: false,
       resetForm: true,
       eventGather: BurgeonEvent,

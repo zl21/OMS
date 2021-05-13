@@ -11,6 +11,7 @@ import businessButton from 'professionalComponents/businessButton';
     },
     data() {
       return {
+        vmI18n:$i18n,
         collapse: ['panel_baseInfo', 'panel_businessInfo'],
         btnConfig: {
           typeAll: 'default',

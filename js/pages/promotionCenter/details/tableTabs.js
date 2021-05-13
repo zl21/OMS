@@ -56,6 +56,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       // currentView:'',  //弹框
       // popDialog:'',
       dialogModal: {}, // 弹框传参

@@ -23,6 +23,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       products_columns: tableCols.productsColumns,
       itemdata_xitong: {
         col: 1,

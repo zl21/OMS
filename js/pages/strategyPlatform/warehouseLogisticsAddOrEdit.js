@@ -17,6 +17,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       collapse: 'panel_baseInfo',
       loading: false,
       isAuto: true, // 自动分配

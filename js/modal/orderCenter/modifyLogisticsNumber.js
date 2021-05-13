@@ -7,6 +7,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       sticsNumber: '',
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式

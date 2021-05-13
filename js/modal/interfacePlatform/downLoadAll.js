@@ -35,6 +35,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       spinShow: false, // loading动画
       downLoadModal: false,
       taskId: '',

@@ -22,6 +22,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       objId: -1,
       loading: false,
       newReceivAddress: '',

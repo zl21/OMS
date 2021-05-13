@@ -17,6 +17,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       statusName: '', // 水印字样
       identifying: '',
       detailList: [], // 存储已勾选需要删除的明细id

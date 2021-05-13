@@ -6,7 +6,8 @@ import MyDialog from 'framework/components/dialog/mydialog';
      name: 'dialogVisiblex',
      data() {
          return {
-           tableCols,
+            vmI18n:$i18n,
+            tableCols,
            commodityList: {
                 current: 1,
                 total: 0,

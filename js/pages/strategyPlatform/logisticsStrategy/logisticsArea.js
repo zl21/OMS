@@ -17,6 +17,7 @@ export default {
   },
   data() {
     return {
+      vmI18n:$i18n,
       warningModal: false,
       loading: false,
       tableLoading: false,

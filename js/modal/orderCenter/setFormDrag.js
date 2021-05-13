@@ -4,6 +4,7 @@ export default {
   mixins: [listeningToKeydownMixin],
   data() {
     return {
+      vmI18n:$i18n,
       childArr: [],
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
