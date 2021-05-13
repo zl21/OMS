@@ -161,3 +161,4 @@
 | v1.1.14 | 零售发货单弹窗组件调整                                                                                                                 |
 | v1.1.15 | downLoad                                                                                                                 |
 | v1.1.16 | checkbox扩展属性onlyBox  |
+| v1.1.17 | importTable报错修复  |

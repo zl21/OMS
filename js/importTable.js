@@ -235,7 +235,7 @@ export default {
     // console.log('webname::', _this.webname);
     // console.log('tableName::', this.tableName);
     // console.log('prefix::', this.prefix);
-    if (this.prefix == 'CUSTOM' || !this.componentData.isAction) {
+    if (this.prefix == 'CUSTOM' && !this.componentData?.isAction) {
       // 纯定制导入
       this.key = this.componentData.tableName + '__' + this.componentData.webname;
       if (_this.$OMS2.cusImport[this.key]) {
