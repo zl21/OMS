@@ -352,7 +352,7 @@ export default {
     }
   },
 
-  async mounted() {
+  mounted() {
     this.init();
     this.query();
   },
@@ -573,10 +573,10 @@ export default {
             name: 'CP_C_ORG_CHANNEL',
             label: '渠道仓编辑' // 额外退款编辑
           });
-          if (self.id != '-1') {
-            this.init();
-            this.query();
-          }
+          // if (self.id != '-1') {
+          //   this.init();
+          //   this.query();
+          // }
         } else {
           self.$Message.error(res.data.message);
         }

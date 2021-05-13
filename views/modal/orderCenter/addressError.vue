@@ -19,3 +19,13 @@
   import addressError from '@/js/modal/orderCenter/addressError';
   export default addressError
 </script>
+
+<style lang="less">
+  /deep/ .item-input .add-input {
+    .el-input {
+      .el-input__inner {
+        height: 20px;
+      }
+    }
+  }
+</style>
