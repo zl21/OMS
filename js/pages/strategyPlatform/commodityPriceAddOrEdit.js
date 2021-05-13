@@ -486,9 +486,9 @@ export default {
   async mounted() {
     let copyId = this.$route.query.copy
     this.isCopy = copyId != undefined
+    if (this.ID == -1 && !this.isCopy) return
     this.reloadForm(false)
     this.setEnable(false)
-    if (this.ID == -1 && !this.isCopy) return
     await this.queryPrice(copyId)
     await this.queryPriceItem(copyId)
   },
