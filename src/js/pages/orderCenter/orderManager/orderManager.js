@@ -80,6 +80,7 @@ export default {
          CREATIONDATE: params => { if(params.data.CREATIONDATE === undefined) return; return params.data.CREATIONDATE ? formatData.standardTimeConversiondateToStr(params.data.CREATIONDATE) : ''}, // 创建时间
          HOLD_RELEASE_TIME: params => { if(params.data.HOLD_RELEASE_TIME === undefined) return; return params.data.HOLD_RELEASE_TIME ? formatData.standardTimeConversiondateToStr(params.data.HOLD_RELEASE_TIME) : ''}, // HOLD单释放时间
          SCAN_TIME: params => {if(params.data.SCAN_TIME === undefined) return; return params.data.SCAN_TIME ? formatData.standardTimeConversiondateToStr(params.data.SCAN_TIME) : ''}, // 出库时间
+         SEND_TIME: params => {if(params.data.SEND_TIME === undefined) return; return params.data.SEND_TIME ? formatData.standardTimeConversiondateToStr(params.data.SEND_TIME) : ''}, // 预计发货时间
         },
         pagenation: comUtils.pageConfig
       },
