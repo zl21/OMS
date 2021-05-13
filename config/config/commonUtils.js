@@ -1,7 +1,7 @@
 import service from '@/service/index'
 import BurgeonDate from '@/assets/js/__utils__/date';
 class commonUtils {
-  gateWayPrefix = {
+  static gateWayPrefix = {
     basicData: '/r3-cp',
     commodityCenter: '/r3-ps',
     orderCenter: '/r3-oc-oms',
