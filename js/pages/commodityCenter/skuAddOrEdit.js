@@ -717,7 +717,8 @@ export default {
           attributeItem: afterExPro[key] ? afterExPro[key] : ''
         });
       }
-      if (self.$route.query.spuid) {
+      if (self.$route.query.spuid && self.ID == '2201') {
+        // spu跳过来的新增，默认入参
         this.ID = '-1';
         PsSku.SALES_STATUS = PsSku.SALES_STATUS ? PsSku.SALES_STATUS : self.formConfig.formValue.SALES_STATUS;
         PsSku.ISACTIVE = 'Y';
