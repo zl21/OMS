@@ -21,11 +21,4 @@
 </script>
 
 <style lang="less">
-  /deep/ .item-input .add-input {
-    .el-input {
-      .el-input__inner {
-        height: 20px;
-      }
-    }
-  }
 </style>

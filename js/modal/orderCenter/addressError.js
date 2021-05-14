@@ -1,4 +1,4 @@
-import businessActionTable from 'professionalComponents/businessActionTable';
+  import businessActionTable from 'professionalComponents/businessActionTable';
   import businessButton from 'professionalComponents/businessButton';
   import loading from 'professionalComponents/loading.vue';
   import myInput from 'professionalComponents/fkinput.vue';
