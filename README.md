@@ -406,6 +406,8 @@ R3.launchApplication({
 | v1.2.84 | test-getway |
 | v1.2.85 | 修复京东订单》下载订单入参问题|
 | v1.2.86 | 修复淘宝订单》京东订单》确认订单入参问题|
+| v1.2.87 | fkinput样式调整|
+
 
 #### Extends-Api 版本说明
 
