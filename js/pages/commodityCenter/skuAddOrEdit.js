@@ -3,7 +3,6 @@ import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import dateUtil from '@/assets/js/__utils__/date.js';
-import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import orderItem from 'professionalComponents/subTable';
 import loading from 'professionalComponents/loading';
 
@@ -31,7 +30,7 @@ export default {
     };
     /* -------------------- input校验器 end -------------------- */
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       subTableConfig: {
         centerName: '',
         tablename: '',
@@ -747,10 +746,10 @@ export default {
         self.modify.exAttr = {};
         // 数据回显
         if (data) self.ID = data;
-        this.$comUtils.tabCloseAppoint(this);
-        this.$destroy(true);
         setTimeout(() => {
           if (this.$route.query.spuid) {
+            this.$comUtils.tabCloseAppoint(this);
+            this.$destroy(true);
             $store.commit('customize/TabOpen', {
               id: self.ID,
               type: 'action',
@@ -762,15 +761,9 @@ export default {
               })
             });
           } else {
-            $store.commit('customize/TabOpen', {
-              id: self.ID,
-              type: 'action',
-              name: 'PS_C_SKU',
-              label: 'SKU编辑',
-            });
+            this.initObjItem(self.ID);
           }
         }, 20);
-        // await self.initObjItem(self.ID);
       } else {
         // 走框架的报错
       }

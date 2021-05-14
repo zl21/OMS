@@ -409,6 +409,7 @@ R3.launchApplication({
 | v1.2.87 | fkinput样式调整|
 | v1.2.88 | 改物流/仓库提示信息处理 |
 | v1.2.89 | r3-ps -> r3-cp |
+| v1.2.90 | skuAddOrEdit数据回显bug |
 
 
 #### Extends-Api 版本说明
