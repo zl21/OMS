@@ -16,7 +16,9 @@ export default {
         width: '24',
         isActive: true,
         isdisabled: false,
+        version:'1.4',
         itemdata: {
+          serviceId:'r3-cp',
           col: 1,
           colid: 168348,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称

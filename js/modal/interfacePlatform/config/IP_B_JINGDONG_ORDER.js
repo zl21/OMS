@@ -97,7 +97,7 @@ export default {
     }
     const param = {
       shop_id:
-        self.downLoadFormConfig.formData[0].itemdata.pid,
+        parseInt(self.downLoadFormConfig.formData[0].itemdata.pid),
       bill_no: self.downLoadFormConfig.formValue.orderNum, // 订单编号
       start_time: BurgeonDate.standardTimeConversiondateToStr(
         self.downLoadFormConfig.formValue.startEndTimes[0]
@@ -109,11 +109,10 @@ export default {
         self.downLoadFormConfig.formValue.orderStatus, // 状态 必传 给默认值
       table: self.$route.params.tableName // 当前表名 必传
     };
-    const fromdata = new FormData();
-    fromdata.append('param', JSON.stringify(param));
+  
 
     // 请求下载订单接口
-    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(fromdata);
+    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(param);
     console.log(code, message);
     if (code === 0) {
       self.taskId = message.match(/\d+/)[0];

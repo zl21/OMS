@@ -28,11 +28,7 @@ export default {
           colid: 168348,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           datelimit: 'all',
-          // refcolval: {
-          //   fixcolumn: 'CP_C_PLATFORM_ID',
-          //   expre: 'equal',
-          //   srccol: 'CP_C_SHOP_ID'
-          // },
+          serviceId:'r3-cp',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
           fkdesc: $i18n.t('other.shop'), // 店铺
