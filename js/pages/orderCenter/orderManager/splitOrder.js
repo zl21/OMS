@@ -329,7 +329,7 @@ export default {
           item.split_num = item.waiting_split_num;
           total += item.waiting_split_num;
           item.total_qty_available = item.sgBPhyInStorageItemExt[0].total_qty_available; // 获取默认仓库可售数量
-          item.is_gift_name = item.is_gift == 0 ? '否' : '是';
+          item.is_gift_name = item.gift_type == 0 ? '否' : '是';
         });
         res.data.data[0].total = total;
         self.data.push(res.data.data);
