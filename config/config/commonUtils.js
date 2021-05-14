@@ -728,7 +728,7 @@ class commonUtils {
     const path = R3.router.history.current.fullPath
     const sysMark = path.split('/')[1]
     const routeKey = path.split('/')[2]
-    const serviceIdConfig = ['ad-app']
+    const serviceIdConfig = ['r3-ps']
     // 标准/定制(eg.零售发货单列表) - 且 菜单中存在(localStorage中存在)
     if (serviceIDMap.hasOwnProperty(routeKey)) {
       return reSrc

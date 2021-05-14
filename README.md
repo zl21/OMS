@@ -403,6 +403,7 @@ R3.launchApplication({
 | v1.2.81 | 售后复制vmI18n报错修复 |
 | v1.2.82 | 渠道仓bug确认及样式调整 |
 | v1.2.83 | 修复新增页面tab切换回来缓存失效问题 |
+| v1.2.84 | test-getway |
 
 #### Extends-Api 版本说明
 

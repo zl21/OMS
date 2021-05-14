@@ -4,10 +4,10 @@ import importApiArr from "@/config/config/importApiArr";
 
 export default {
   /* 框架标准公共接口： */
-  fuzzyquerybyak: (params, serviceId = { serviceId: "ad-app" }) => $network.post("/p/cs/fuzzyquerybyak", params, serviceId),
-  QueryList: (params, serviceId = { serviceId: "ad-app" }) => $network.post("/p/cs/QueryList", params, serviceId),
-  getTableQuery: (params, serviceId = { serviceId: "ad-app" }) => $network.post("/p/cs/getTableQuery", params, serviceId),
-  skuQuery: (params, serviceId = { serviceId: "ad-app" }) => $network.post("/p/cs/skuQuery", params, serviceId),
+  fuzzyquerybyak: (params, serviceId = { serviceId: "r3-ps" }) => $network.post("/p/cs/fuzzyquerybyak", params, serviceId),
+  QueryList: (params, serviceId = { serviceId: "r3-ps" }) => $network.post("/p/cs/QueryList", params, serviceId),
+  getTableQuery: (params, serviceId = { serviceId: "r3-ps" }) => $network.post("/p/cs/getTableQuery", params, serviceId),
+  skuQuery: (params, serviceId = { serviceId: "r3-ps" }) => $network.post("/p/cs/skuQuery", params, serviceId),
   // 获取页面title
   getAppTitle: () => $network.get("/p/c/getAppTitle"),
   //登录
