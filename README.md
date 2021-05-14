@@ -163,3 +163,4 @@
 | v1.1.16 | checkbox扩展属性onlyBox  |
 | v1.1.17 | importTable报错修复  |
 | v1.1.18 | $i18n  |
+| v1.1.19 | 网关  |
