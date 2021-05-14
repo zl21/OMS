@@ -231,7 +231,7 @@ export default {
       } else if (code == 1 && data) {
         let tabData = data.map((row, index) => {
           row.INDEX = ++index;
-          row.BILL_NO = row.objidno;
+          row.BILL_NO = row.objno;
           row.RESULT_MSG = row.message;
           return row;
         });

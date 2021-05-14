@@ -239,7 +239,7 @@ export default {
         // 多条错误信息render表格，一条错误信息code为-1走框架报错
         let tabData = data.map((row, index) => {
           row.INDEX = ++index;
-          row.BILL_NO = row.objidno;
+          row.BILL_NO = row.objno;
           row.RESULT_MSG = row.message;
           return row;
         });
