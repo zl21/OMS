@@ -7,7 +7,6 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import loading from 'professionalComponents/loading';
 
 export default {
-  name: 'CommodityClassifyAddOrEdit',
   components: {
     orderItem,
     businessButton,

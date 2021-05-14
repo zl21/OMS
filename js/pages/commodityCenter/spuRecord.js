@@ -9,7 +9,6 @@ import orderItem from 'professionalComponents/subTable';
 import logTable from 'professionalComponents/LogTable';
 
 export default {
-  name: 'SpuRecord',
   components: {
     orderItem,
     businessButton,

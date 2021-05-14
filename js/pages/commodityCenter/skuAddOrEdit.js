@@ -8,7 +8,6 @@ import orderItem from 'professionalComponents/subTable';
 import loading from 'professionalComponents/loading';
 
 export default {
-  name: 'skuAddOrEdit',
   components: {
     orderItem,
     businessButton,

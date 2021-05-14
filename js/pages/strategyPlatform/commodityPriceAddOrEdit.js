@@ -10,7 +10,6 @@ import dateUtil from '@/assets/js/__utils__/date.js';
 Vue.component('myInput', myInput)
 
 export default {
-  name: 'CommodityPriceAddOrEdit',
   components: {
     orderItem,
     businessButton,

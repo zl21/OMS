@@ -9,7 +9,6 @@ import addPlatformLogisticsCompany from '@/views/modal/commodityCenter/addPlatfo
 import loading from 'professionalComponents/loading';
 
 export default {
-  name: 'logisticsCompanyFilesAddOrEdit',
   components: {
     orderItem,
     businessButton,

@@ -6,7 +6,6 @@ import orderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem'
 import dateUtil from '@/assets/js/__utils__/date.js';
 
 export default {
-  name: 'liveParsingAddOrEdit',
   components: {
     businessButton,
     businessForm,

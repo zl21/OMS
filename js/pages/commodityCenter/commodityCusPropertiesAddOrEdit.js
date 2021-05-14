@@ -8,7 +8,6 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import loading from 'professionalComponents/loading';
 
 export default {
-  name: 'commodityCusPropertiesAddOrEdit',
   components: {
     orderItem,
     businessButton,

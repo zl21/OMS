@@ -6,7 +6,6 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import orderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem';
 
 export default {
-  name: 'WarehouseLogisticsAddOrEdit',
   components: {
     businessButton,
     businessForm,

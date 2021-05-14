@@ -8,7 +8,6 @@ import scheduleFormDialog from '@/views/modal/strategyPlatform/scheduleFormDialo
 import dateUtil from '@/assets/js/__utils__/date.js';
 
 export default {
-  name: 'ScheduleAddOrEdit',
   components: {
     orderItem,
     businessButton,
