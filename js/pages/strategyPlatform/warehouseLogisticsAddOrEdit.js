@@ -351,7 +351,7 @@ export default {
   },
   async mounted() {
     this.initPanel();
-
+    this.isWatchChange = true
     this.ID != -1 && (await this.queryLogistics());
     await this.getDropDownOptions(1); // 初始化，解决下拉多选首次渲染问题
   },

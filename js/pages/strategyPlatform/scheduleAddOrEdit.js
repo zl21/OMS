@@ -1127,6 +1127,23 @@ export default {
     },
     // 返回
     back() {
+      if (this.isModify) {
+        this.$Modal.info({
+          title: $i18n.t('modalTitle.tips'), // 提示
+          content: '当前修改未保存，确定返回？',
+          mask: true,
+          showCancel: true,
+          okText: $i18n.t('common.determine'), // 确定
+          cancelText: $i18n.t('common.cancel'), // 取消
+          onOk: () => {
+            this.onOk();
+          },
+        });
+      } else {
+        this.onOk();
+      }
+    },
+    onOk() {
       this.$comUtils.tabCloseAppoint(this);
       this.$destroy(true);
       this.$store.commit('global/tabOpen', {

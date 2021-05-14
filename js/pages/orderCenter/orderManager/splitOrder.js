@@ -165,7 +165,7 @@ export default {
         // },
         {
           title: $i18n.t('table_label.productSKUname'), // 商品SKU名称
-          key: 'ps_c_sku_ename',
+          key: 'ps_c_sku_name',
           draggable:true
         },
         {
