@@ -229,6 +229,7 @@ export default {
         _this.$Message.success(res.data.message);
         _this.$parent.$parent.$parent.query();
       } else if (code == 1 && data) {
+        _this.$parent.$parent.closeConfirm();
         let tabData = data.map((row, index) => {
           row.INDEX = ++index;
           row.BILL_NO = row.objno;
@@ -267,6 +268,7 @@ export default {
           }
         );
       } else if (code == 1 && !data) {
+        _this.$parent.$parent.closeConfirm();
         _this.$Message.error(message);
       } else {
         // 走框架报错
