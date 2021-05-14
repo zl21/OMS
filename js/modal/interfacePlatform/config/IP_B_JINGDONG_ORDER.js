@@ -14,20 +14,11 @@ export default {
       {
         style: 'popInput', // 输入框弹框单多选
         width: '24',
-        inputList: [
-          {
-            childs: [{ colname: 'CP_C_SHOP_ID', refobjid: 4, valuedata: 2 }]
-          }
-        ],
+        version:'1.4',
         isActive: true,
         isdisabled: false,
         itemdata: {
-          refcolval: {
-            fixcolumn: 'CP_C_PLATFORM_ID',
-            expre: 'equal',
-            srccol: 'CP_C_SHOP_ID'
-          },
-          col: 1,
+          serviceId:'r3-cp',
           colid: 168348,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           datelimit: 'all',
@@ -37,12 +28,10 @@ export default {
           inputname: 'CP_C_SHOP_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: false, // 是否必填
-          isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
           name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_SHOP',
-          reftableid: 24475,
           row: 1,
           statsize: -1,
           type: 'STRING',
