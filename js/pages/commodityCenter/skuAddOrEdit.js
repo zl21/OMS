@@ -278,7 +278,7 @@ export default {
           defVal: 'PS_C_SPECGROUP_ID1',
           style: 'dynamic',
           slotName: 'spec01',
-          width: '6',
+          width: '8',
           pageSize: 10, // 每页条数
           columns: ['name', 'value'],// 展现的组
           changePage: (val) => {
@@ -304,7 +304,7 @@ export default {
           defVal: 'PS_C_SPECGROUP_ID2',
           style: 'dynamic',
           slotName: 'spec01',
-          width: '6',
+          width: '8',
           pageSize: 10, // 每页条数
           columns: ['name', 'value'],
           changePage: (val) => {
@@ -330,7 +330,7 @@ export default {
           defVal: 'PS_C_SPECGROUP_ID3',
           style: 'dynamic',
           slotName: 'spec01',
-          width: '6',
+          width: '8',
           pageSize: 10, // 每页条数
           columns: ['name', 'value'],// 展现的组
           changePage: (val) => {
