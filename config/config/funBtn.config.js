@@ -1216,7 +1216,7 @@ class BtnConfig {
       .then((res) => {
         console.log(res);
         if(res.data.code == 0){
-          commonUtils.navigateMain(selectItem.ID,'TabHref','MANUAL_SPLIT','panel_label.orderSplit')
+          commonUtils.navigateMain(selectItem.ID,'TabOpen','MANUAL_SPLIT','panel_label.orderSplit')
         };
       })
   }
