@@ -217,6 +217,7 @@ export default {
           this.tableConfig.objid = newobj.order.ID;
           this.tableConfig.order = newobj.order;
           this.tableConfig.subItem = newobj.sub_item;
+          this.is_combination = this.tableConfig.order.IS_COMBINATION;
         }
       },
       deep: true
@@ -298,6 +299,6 @@ export default {
     let dataProps = this.componentData;
     this.tableConfig.objid = dataProps.order.ID || -1;
     this.tableConfig.order = dataProps.order || {};
-    this.is_combination = this.tableConfig.order.is_combination ? true : false
+    console.log('111:', this.tableConfig.order);
   }
 };

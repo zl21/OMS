@@ -410,6 +410,7 @@ R3.launchApplication({
 | v1.2.88 | 改物流/仓库提示信息处理 |
 | v1.2.89 | r3-ps -> r3-cp |
 | v1.2.90 | skuAddOrEdit数据回显bug |
+| v1.2.91 | 详情组合商品 - bug |
 
 
 #### Extends-Api 版本说明

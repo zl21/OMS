@@ -166,7 +166,7 @@
         <div class="order-tab-title">
           <span>订单明细</span>
           <!-- 如果是组合商品不显示 -->
-          <div v-if="!is_combination" class="checkCombination">
+          <div v-if="is_combination" class="checkCombination">
             <span
               v-if="isQh && isQhChild"
               @click="checkCombination"
