@@ -91,23 +91,6 @@ export default {
         isShowSelection: false,
         columns: [
           {
-            title: '操作',
-            key: '',
-            render: (h, params) => {
-              return h('Radio', {
-                props: {
-                  value: '',
-                },
-                on: {
-                  'on-change': (v) => {
-                    console.log(v)
-                    console.log(params)
-                  },
-                },
-              })
-            },
-          },
-          {
             key: 'skuEcode',
             title: 'SKU编码',
           },
@@ -139,7 +122,7 @@ export default {
         width: '', // 表格宽度
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
-        total: 10, // 设置总条数
+        total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       },
@@ -213,7 +196,6 @@ export default {
         }, 5000);
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
-          this.$parent.$parent.closeConfirm();
           this.$parent.$parent.$parent.$parent.$parent.getDetailsData()
         } else {
           this.$Modal.confirm({
@@ -239,6 +221,7 @@ export default {
             },
           })
         }
+        this.$parent.$parent.closeConfirm();
       })
     },
     deleteOrderGoods() {
@@ -259,9 +242,10 @@ export default {
         setTimeout(() => {
           this.btnConfig.buttons[1].disabled = false;
         }, 5000);
+       
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
-          this.$parent.$parent.closeConfirm()
+         
         } else {
           this.$Modal.confirm({
             title: res.data.message,
@@ -286,6 +270,7 @@ export default {
             },
           })
         }
+        this.$parent.$parent.closeConfirm()
       })
     },
     parseOrderList() {
@@ -306,9 +291,10 @@ export default {
         setTimeout(() => {
           this.btnConfig.buttons[1].disabled = false;
         }, 5000);
+       
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
-          this.$parent.$parent.closeConfirm()
+         
         } else {
           this.$Modal.confirm({
             title: res.data.message,
@@ -333,6 +319,7 @@ export default {
             },
           })
         }
+        this.$parent.$parent.closeConfirm()
       })
     },
     // 选中某一项时触发

@@ -274,7 +274,7 @@ export default {
         width: '', // 表格宽度
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
-        total: 10, // 设置总条数
+        total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       },
@@ -318,7 +318,7 @@ export default {
         width: '', // 表格宽度
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
-        total: 10, // 设置总条数
+        total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       },
@@ -363,10 +363,12 @@ export default {
     pageChange1(val) {
       this.tableConfig.current = val
       // this.request(this.componentData);
+      this.search('one')
     },
     // 切换分页条数
     pageSizeChange1(val) {
       this.tableConfig.pageSize = val
+      this.search('one')
       // this.request(this.componentData);
     },
     tableDeleteDetail1() {},
@@ -391,13 +393,13 @@ export default {
     onRowDblclick2() {},
     // 分页change 事件
     pageChange2(val) {
-      this.tableConfig.current = val
-      // this.request(this.componentData);
+      this.tableConfig2.current = val
+      this.search('two')
     },
     // 切换分页条数
     pageSizeChange2(val) {
-      this.tableConfig.pageSize = val
-      // this.request(this.componentData);
+      this.tableConfig2.pageSize = val
+      this.search('two')
     },
     tableDeleteDetail2() {},
     radioChange(value) {
@@ -405,18 +407,19 @@ export default {
     },
     async search(value) {
       const self = this
-      let data = {
-        size: 10,
-        current: 1,
-      }
+      let data = {}
       if (value == 'one') {
         data.skuEcode = self.formConfig.formValue.searchValue.trim()
         data.spuEcode = self.formConfig.formValue.psCProEcode.trim()
         data.spuEname = self.proName.trim()
+        data.size = this.tableConfig.pageSize
+        data.current =  this.tableConfig.current
       } else {
         data.skuEcode = self.replaceFormConfig.formValue.searchValue.trim()
         data.spuEcode = self.replaceFormConfig.formValue.psCProEcode.trim()
         data.spuEname = self.replace_proName.trim()
+        data.size = this.tableConfig2.pageSize
+        data.current =  this.tableConfig2.current
       }
 
       axios({
@@ -496,7 +499,34 @@ export default {
       }
 
       this.service.orderCenter.replaceOrderByPro(data).then((res) => {
-        console.log(res)
+        if (res.data.code == 0) {
+          this.$Message.success(res.data.message)
+         
+        } else {
+          this.$Modal.confirm({
+            title: res.data.message,
+            width: 500,
+            mask: true,
+            className: 'ark-dialog',
+            render: (h) => {
+              if (res.data.data) {
+                return h('Table', {
+                  props: {
+                    columns: [
+                      {
+                        title: $i18n.t('modalTitle.a6'), // '提示信息',
+                        key: 'message',
+                      },
+                    ],
+                    data: res.data.data,
+                  },
+                })
+              }
+              return false
+            },
+          })
+        }
+        this.$parent.$parent.closeConfirm()
       })
       /* const self = this
       if (JSON.stringify(self.onRowClickData) == '{}') {
