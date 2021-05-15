@@ -11,8 +11,8 @@ export default {
   // 获取页面title
   getAppTitle: () => $network.get("/p/c/getAppTitle"),
   //登录
-  getCaptcha: () => $network.get("/p/c/getCaptcha"),
-  globalLogin: (params) => $network.post("/p/c/login", params),
+  getCaptcha: (params,serviceId = { serviceId: "r3-cp" }) => $network.get("/p/c/getCaptcha", params,serviceId),
+  globalLogin: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/c/login", params, serviceId),
   // 矩阵
   queryCommonStorageByPro: (params) =>
     $network.post("/p/cs/sg/storage/queryCommonStorageByPro", params),
