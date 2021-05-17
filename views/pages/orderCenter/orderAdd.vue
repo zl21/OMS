@@ -533,7 +533,7 @@ export default {
               const self = this;
               self.address = parse(self.formConfigRe.formValue.site);
               let flag = false;
-              const { detail, phone, zip_code, result, ...addressObj } = self.address;
+              const { detail, phone, mobile, zip_code, result, ...addressObj } = self.address;
               if (Object.keys(addressObj).filter((k) => !addressObj[k]).length <= 0) flag = true; // 全部有值
               if (!flag) {
                 // "请填入完整信息,如:张三,17788888888,上海上海市闵行区黎安路999号"
@@ -542,6 +542,7 @@ export default {
                 const modifyArr = ['RECEIVER_NAME', 'RECEIVER_MOBILE', 'RECEIVER_ADDRESS'];
                 const ssqModifyArr = ['CP_C_REGION_PROVINCE_ID', 'CP_C_REGION_CITY_ID', 'CP_C_REGION_AREA_ID'];
                 self.formConfigRe.formValue.RECEIVER_NAME = self.address.name; // 收货人赋值
+                self.formConfigRe.formValue.RECEIVER_PHONE = self.address.phone; // 收货人电话赋值
                 self.formConfigRe.formValue.RECEIVER_MOBILE = self.address.mobile; // 收货人手机赋值
                 self.formConfigRe.formValue.RECEIVER_ADDRESS = self.address.addr; // 收货人地址赋值
                 const queryData = self.formConfigRe.formData;
@@ -579,6 +580,7 @@ export default {
             label: '手机号',
             colname: 'RECEIVER_MOBILE', // 手机号,N
             width: '6',
+            regx: /^(\s*|\d+)$/,
             inputChange: () => {
               this.modifyData('RECEIVER_MOBILE', 'master', 'r');
             },
