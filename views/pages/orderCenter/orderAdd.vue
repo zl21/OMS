@@ -1776,6 +1776,8 @@ export default {
       const self = this;
       const data = dataArr;
       const allDa = self.jordanTableConfig.data;
+      data.length && data.map((it) => (it.pryKey = it.OOID || "" + "_" + it.PS_C_SKU_ECODE));
+      allDa.length && allDa.map((it) => (it.pryKey = it.OOID || "" + "_" + it.PS_C_SKU_ECODE));
       let pryKeyArr = [];
       if (!allDa.length) {
         // 当前为空，则直接新增
@@ -1784,9 +1786,9 @@ export default {
         return;
       }
       data.forEach((it) => {
-        it.pryKey = it.OOID || "" + "_" + it.PS_C_SKU_ECODE;
+        it.pryKey && (it.pryKey = it.OOID || "" + "_" + it.PS_C_SKU_ECODE);
         allDa.forEach((item) => {
-          item.pryKey = item.OOID || "" + "_" + item.PS_C_SKU_ECODE;
+          !item.pryKey && (item.pryKey = item.OOID || "" + "_" + item.PS_C_SKU_ECODE);
           pryKeyArr = this.$OMS2.omsUtils.sonList(allDa, "pryKey");
           if (!it.OOID && item.pryKey == it.pryKey) {
             // 1.非复制的且已存在该条明细(已经存在的明细都是刚刚新增的，不是复制带出来的，且，即将新增的是已经存在的，累加)
