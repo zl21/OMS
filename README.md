@@ -433,6 +433,7 @@ R3.launchApplication({
 | v1.3.11 | bug:38706 |
 | v1.3.12 | bgu:38709-错误提示处理++ |
 | v1.3.13 | 修复淘宝退单下载地址不正确|
+| v1.3.14 | bug:38733/format|
 
 #### Extends-Api 版本说明
 
