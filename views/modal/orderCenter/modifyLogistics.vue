@@ -221,7 +221,7 @@ export default {
       } = await _this.service.orderCenter.updateLogistics(param);
       if (code === 0) {
         _this.$parent.$parent.closeConfirm();
-        _this.$Message.success(res.data.message);
+        _this.$Message.success(message);
         _this.$parent.$parent.$parent.query();
       } else if (code == 1 && data) {
         _this.$parent.$parent.closeConfirm();
