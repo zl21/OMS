@@ -1,6 +1,7 @@
 import reForm from 'professionalComponents/businessForm'
 import businessButton from 'professionalComponents/businessButton'
 import businessActionTable from 'professionalComponents/businessActionTable'
+import commonUtils from 'burgeonConfig/config/commonUtils'
 
 export default {
   components: {
@@ -506,28 +507,7 @@ export default {
           this.$Message.success(res.data.message)
         } else {
           if (!res.data.data) {
-            this.$Modal.error({
-            title: "提示",
-            width: 500,
-            mask: true,
-            className: 'ark-dialog',
-            render: (h) => {
-              if (res.data.data) {
-                return h('Table', {
-                  props: {
-                    columns: [
-                      {
-                        title: $i18n.t('modalTitle.a6'), // '提示信息',
-                        key: 'message',
-                      },
-                    ],
-                    data: res.data.message,
-                  },
-                })
-              }
-              return false
-            },
-            })
+            commonUtils.tipShow('error', self, res.data.message) 
             return
           }
           this.$Modal.confirm({

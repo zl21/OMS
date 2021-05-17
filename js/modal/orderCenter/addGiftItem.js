@@ -2,6 +2,7 @@ import businessButton from 'professionalComponents/businessButton'
 import businessActionTable from 'professionalComponents/businessActionTable'
 import businessForm from 'professionalComponents/businessForm'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown'
+import commonUtils from 'burgeonConfig/config/commonUtils'
 import axios from 'axios'
 export default {
   mixins: [listeningToKeydownMixin],
@@ -198,6 +199,11 @@ export default {
           this.$Message.success(res.data.message)
           this.$parent.$parent.$parent.$parent.$parent.getDetailsData()
         } else {
+          if (!res.data.data) {
+            commonUtils.tipShow('error', self, res.data.message) 
+            return
+          }
+
           this.$Modal.confirm({
             title: res.data.message,
             width: 500,
@@ -247,6 +253,10 @@ export default {
           this.$Message.success(res.data.message)
          
         } else {
+          if (!res.data.data) {
+            commonUtils.tipShow('error', self, res.data.message) 
+            return
+          }
           this.$Modal.confirm({
             title: res.data.message,
             width: 500,
@@ -296,6 +306,10 @@ export default {
           this.$Message.success(res.data.message)
          
         } else {
+          if (!res.data.data) {
+            commonUtils.tipShow('error', self, res.data.message) 
+            return
+          }
           this.$Modal.confirm({
             title: res.data.message,
             width: 500,
