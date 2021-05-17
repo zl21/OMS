@@ -1654,7 +1654,11 @@ export default {
           // 额外退款审核状态后的订单，实际退款金额、收款人姓名和支付账号字段不允许编辑，需要操作反审核后进行修改
           // 也就是说 当 RETURN_STATUS  =  1    &&  PAYMENT_STATUS  = 0 的时候，只读显示 34320
           // (RETURN_STATUS == 1 || RETURN_STATUS==2) && (PAYMENT_STATUS == 1 || PAYMENT_STATUS ==2) 只读
-          if ((AfSend.RETURN_STATUS == 1 || AfSend.RETURN_STATUS == 2) && (AfSend.PAYMENT_STATUS == 1 || AfSend.PAYMENT_STATUS == 2)) {
+          // if (  !(RETURN_STATUS == 0 ||  PAYMENT_STATUS =3 ) ){
+          // 只读
+          // console.log("单据状态:未退款,打款状态:打款失败,才可以修改")
+          // } //第三次修改 可编辑
+          if (!(AfSend.RETURN_STATUS == 0 || AfSend.PAYMENT_STATUS == 3)) {
             this.reForm.config.forEach((val, index) => {
               if (val.item.label === '实际退款金额' || val.item.label === '收款人姓名' || val.item.label === '支付账号') {
                 val.item.props.disabled = true
