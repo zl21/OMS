@@ -180,67 +180,68 @@
                 return h('span', {}, params.row.CP_C_REGION_CITY_ENAME);
               }
             },
-            {
-              key: 'CP_C_REGION_AREA_ENAME',
-              title: '区',
-              render: (h, params) => {
-                if (params.row.EXCEPTION_TYPE == 5) {
-                  return h('div', {
-                    style: {
-                      width: '150px'
-                    }
-                  }, [
-                    h('drpInput', {
-                      props: {
-                        colname: 'OLD_BARCODE',
-                        style: 'popInput',
-                        version: '1.4',
-                        isActive: true,
-                        itemdata: {
-                          colid: 167091,
-                          colname: 'CP_C_REGION_AREA_ID',
-                          fkdisplay: 'drp',
-                          isfk: true, // 是否有fk键
-                          isnotnull: false, // 是否必填
-                          name: '',
-                          readonly: false, // 是否可编辑，对应input   readonly属性
-                          pid: params.row.CP_C_REGION_AREA_ID,
-                          valuedata: params.row.CP_C_REGION_AREA_ENAME,
-                          // refcolval: {
-                          //   fixcolumn: 'C_UP_ID',
-                          //   expre: 'equal',
-                          //   srccol: 'CP_C_REGION_CITY_ID',
-                          // }, // 过滤配置
-                        },
-                      },
-                      style: {
-                        marginRight: '5px',
-                      },
-                      on: {
-                        getFkChooseItem: (val) => {
-                          if(val.ID){
-                            params.row.CP_C_REGION_AREA_ENAME = val.ENAME.val;
-                            params.row.CP_C_REGION_AREA_ID = val.ID.val;
-                            this.getResult(val , params.row)
-                          }else {
-                            params.row.CP_C_REGION_AREA_ENAME = '';
-                            params.row.CP_C_REGION_AREA_ID = '';
-                            let arr = [];
-                        this.resultArr.forEach(item=>{
-                          if(item.ID !== params.row.ID){
-                            arr.push(item)
-                          }
-                        });
-                        this.resultArr = arr;
-                          }
-                        },
-                      },
-                    })
-                  ]);
-                }
-                return h('span', {}, params.row.CP_C_REGION_AREA_ENAME);
-              }
-            },
+            //区取消,不做异常修改
+            // {
+            //   key: 'CP_C_REGION_AREA_ENAME',
+            //   title: '区',
+            //   render: (h, params) => {
+            //     if (params.row.EXCEPTION_TYPE == 5) {
+            //       return h('div', {
+            //         style: {
+            //           width: '150px'
+            //         }
+            //       }, [
+            //         h('drpInput', {
+            //           props: {
+            //             colname: 'OLD_BARCODE',
+            //             style: 'popInput',
+            //             version: '1.4',
+            //             isActive: true,
+            //             itemdata: {
+            //               colid: 167091,
+            //               colname: 'CP_C_REGION_AREA_ID',
+            //               fkdisplay: 'drp',
+            //               isfk: true, // 是否有fk键
+            //               isnotnull: false, // 是否必填
+            //               name: '',
+            //               readonly: false, // 是否可编辑，对应input   readonly属性
+            //               pid: params.row.CP_C_REGION_AREA_ID,
+            //               valuedata: params.row.CP_C_REGION_AREA_ENAME,
+            //               // refcolval: {
+            //               //   fixcolumn: 'C_UP_ID',
+            //               //   expre: 'equal',
+            //               //   srccol: 'CP_C_REGION_CITY_ID',
+            //               // }, // 过滤配置
+            //             },
+            //           },
+            //           style: {
+            //             marginRight: '5px',
+            //           },
+            //           on: {
+            //             getFkChooseItem: (val) => {
+            //               if(val.ID){
+            //                 params.row.CP_C_REGION_AREA_ENAME = val.ENAME.val;
+            //                 params.row.CP_C_REGION_AREA_ID = val.ID.val;
+            //                 this.getResult(val , params.row)
+            //               }else {
+            //                 params.row.CP_C_REGION_AREA_ENAME = '';
+            //                 params.row.CP_C_REGION_AREA_ID = '';
+            //                 let arr = [];
+            //             this.resultArr.forEach(item=>{
+            //               if(item.ID !== params.row.ID){
+            //                 arr.push(item)
+            //               }
+            //             });
+            //             this.resultArr = arr;
+            //               }
+            //             },
+            //           },
+            //         })
+            //       ]);
+            //     }
+            //     return h('span', {}, params.row.CP_C_REGION_AREA_ENAME);
+            //   }
+            // },
             {
               key: 'PLATFORM_NAME',
               title: '平台类型'
