@@ -42,7 +42,7 @@ export default {
       },
       showAddPlatformLogisticsCompany: false,
       delRowIdList: [], // 删除明细中记录选中的标识
-      // ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
+      ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       showSubtablePart: false,
       loading: false,
       addTableData: [],
@@ -182,14 +182,14 @@ export default {
     customizedModuleName() {
       return this.$router.currentRoute.params.customizedModuleName;
     },
-    ID() {
+    /* ID() {
       const id = this.$route.params.customizedModuleId;
       if (id == 'New') {
         return '-1'
       } else {
         return id
       }
-    },
+    }, */
   },
   mounted() {
     const self = this;
@@ -333,8 +333,18 @@ export default {
         // 数据回显
         self.modify.master = {};
         if (data && data.ID) self.ID = data.ID
-        await self.initObjItem(self.ID);
+        // await self.initObjItem(self.ID);
         self.$Message.success(message || $i18n.t('modalTips.z9'));
+        setTimeout(() => {
+          this.$comUtils.tabCloseAppoint(this);
+          this.$destroy(true);
+          $store.commit('customize/TabOpen', {
+            id: self.ID,
+            type: 'action',
+            name: 'LOGISTICSCOMPANYFILESADDOREDIT',
+            label: '物流公司档案编辑',
+          });
+        }, 20);
       } else {
         // 走框架的报错
       }

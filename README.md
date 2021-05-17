@@ -438,6 +438,7 @@ R3.launchApplication({
 | v1.3.16 | bug:38749 |
 | v1.3.17 | orderAddDetail合计处理 |
 | v1.3.18 | 异常处理bug:38766|
+| v1.3.19 | bug:38812  |
 
 #### Extends-Api 版本说明
 
