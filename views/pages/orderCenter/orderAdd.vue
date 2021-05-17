@@ -948,14 +948,26 @@ export default {
         total: 1, // 设置总条数
         pageSizeOpts: [10, 30, 45, 60], // 每页条数切换的配置
         pageSize: 10, // 每页条数
-        isShowSelection: true, // 多选框
-        indexColumn: true, // 序号
+        // isShowSelection: true, // 多选框
+        // indexColumn: true, // 序号
         selectData: [], // 选中的数据
         deleteData: [], // 删除的数据
         addData: [], // 添加的数据
         data: [],
         totalData: [], // 合计
         columns: [
+          {
+            key: 'selection',
+            type: 'selection',
+            width: '50',
+            align: 'center',
+          },
+          {
+            title: "序号",
+            key: "index",
+            type: "index",
+            align: 'center',
+          },
           {
             title: "SKU编码", // SKU编码
             key: "PS_C_SKU_ECODE",
