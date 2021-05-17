@@ -1,7 +1,7 @@
 /*
  * @Author: 萧萧
  * @Date: 2021-05-17 17:36:59
- * @LastEditTime: 2021-05-17 20:16:08
+ * @LastEditTime: 2021-05-17 20:54:01
  * @LastEditors: Please set LastEditors
  * @Description: 路由守卫 -- 用于切换路由时一些操作
  * @FilePath: /project-logic/config/config/routeGuardConfig.js
@@ -20,21 +20,11 @@ import cusAllPageConfig from '_/config/page/page.config.js';
  */
 let beforeEach = (to, from, next) =>{
   // 判断是否是定制界面
-  if(to.meta ?. routePrefix === '/CUSTOMIZED'){
+  if(to.meta?.routePrefix === '/CUSTOMIZED'){
     // 获取当前页面的路由的 
     let currentKey = to.params.customizedModuleName;
-    // 循环页面配置查找当前路由的配置
-    for(let i in cusAllPageConfig){
-      if(i === currentKey){
-        // 判断是不是列表页面
-        if(cusAllPageConfig[i].isList){
-          CustomizedConfig.BtnConfig.singleType = 0;
-        }else{
-          CustomizedConfig.BtnConfig.singleType = 1;
-        }
-        break;
-      }
-    }
+    // 循环页面配置查找当前路由的配置 并给singleType赋值
+    Object.keys(cusAllPageConfig).includes(currentKey) && (CustomizedConfig.BtnConfig.singleType=Number(!cusAllPageConfig[currentKey].isList));
   }
   // 其他判断
   
