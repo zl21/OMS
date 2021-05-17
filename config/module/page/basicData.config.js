@@ -23,6 +23,7 @@ export default {
   ADDLOGICSTORE: {
     // component: addLogicStore,
     component: () => import('allpages/basicData/addLogicStore.vue'),
+    labelName: '新增逻辑仓'
   },
   ADDALIAS: {
     // component: addAliasOrRegion,
