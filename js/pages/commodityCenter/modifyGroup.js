@@ -565,8 +565,9 @@ export default {
         console.log(res);
         if (res.data.code == 0) {
           self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+          self.isModify = false
           // self.query(res.data.data);
-          self.$store.commit('customize/TabOpen', {
+          $store.commit('customize/TabOpen', {
             id: res.data.data,
             type: 'action',
             name: 'PS_C_PRO_GROUP',
