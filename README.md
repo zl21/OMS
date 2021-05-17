@@ -415,6 +415,7 @@ R3.launchApplication({
 | v1.2.93 | 修复拆单bug; 策略返回修改提示 |
 | v1.2.94 | 修复零售发货单bug |
 | v1.2.95 | 订单拆单bug |
+| v1.2.96 | bug:38615 |
 
 
 #### Extends-Api 版本说明

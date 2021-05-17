@@ -591,6 +591,15 @@ export default {
       const { data: { code, message }} = await this.service.strategyPlatform.liveParsingSave(params)
       this.loading = false
       if (code == 0) {
+        this.modify = {
+          master: {
+            rules: {
+              addData: [],
+              updateData: [],
+              deleteData: []
+            }
+          }
+        }
         this.$message.success(message)
         this.onOk()
         return
