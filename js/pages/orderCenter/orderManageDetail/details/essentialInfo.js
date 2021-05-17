@@ -302,6 +302,5 @@ export default {
     let dataProps = this.componentData;
     this.tableConfig.objid = dataProps.order.ID || -1;
     this.tableConfig.order = dataProps.order || {};
-    console.log('111:', this.tableConfig.order);
   }
 };
