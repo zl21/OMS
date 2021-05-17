@@ -94,15 +94,10 @@ export default {
               name: "物流公司",
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: "",
-              oneObj: (val) => {
-                const _this = this;
-                _this.formConfig.formValue.CP_C_LOGISTICS_ID = val.pid;
-                _this.formConfig.formValue.CP_C_LOGISTICS_ENAME = val.valuedata;
-              },
             },
             oneObj: (val) => {
               const _this = this;
-              if (!val.pid) return;
+              // if (!val.pid) return;
               _this.formConfig.formValue.CP_C_LOGISTICS_ID = val.pid;
               _this.formConfig.formValue.CP_C_LOGISTICS_ENAME = val.valuedata;
             },
@@ -223,7 +218,7 @@ export default {
       // const res = await this.service.orderCenter.updateLogistics(param);
       const {
         data: { data, code, message },
-      } = await self.service.orderCenter.updateLogistics(param);
+      } = await _this.service.orderCenter.updateLogistics(param);
       if (code === 0) {
         _this.$parent.$parent.closeConfirm();
         _this.$Message.success(res.data.message);

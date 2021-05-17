@@ -155,7 +155,7 @@ export default {
             },
             oneObj: (val) => {
               const _this = this;
-              if (!val.pid) return;
+              // if (!val.pid) return;
               _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = val.pid;
               _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME =
                 val.valuedata;

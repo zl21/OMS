@@ -425,6 +425,7 @@ R3.launchApplication({
 | v1.3.3 | bug:38613 |
 | v1.3.4 | 修复零售发货单bug |
 | v1.3.5 | 实体仓档案-导入 |
+| v1.3.6 | bug:38699 |
 
 #### Extends-Api 版本说明
 
