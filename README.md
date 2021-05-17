@@ -103,3 +103,4 @@
 | v1.0.38 |  add modalTips.fh ~ fm  |
 | v1.0.39 |  update modalTips.fp  |
 | v1.0.40 |  add btn.batch_addGift/batch_deleteGift/batch_replaceGoods/preSaleAdvanceDeliveryMarking  |
+| v1.0.41 |  add btn.modify_sellerNotes/btn.sortForm/btn.order_detailed/   |

@@ -249,6 +249,7 @@ export default {
     modify: '修改', //修改
     modifyRemarks: '修改备注', //修改备注
     modifyWarehouse: '修改仓库', //修改仓库
+    modify_sellerNotes: '修改卖家备注', //修改卖家备注
     monthlyBillDownload: '月结账单下载',
     new_chargeback: '新增退单', //新增退单
     new_workOrder: '新增工单', //新增工单
@@ -259,6 +260,7 @@ export default {
     original_single_null_and_void_copy: "原单无效复制", //原单无效复制
     out_of_stock_splitOrder: "缺货拆单", //缺货拆单
     overdue: '过期',
+    order_detailed: '订单明细', //订单明细
     publish: '发布',
     published: '已发布',
     preSaleAdvanceDeliveryMarking: '定金预售提前发货打标', //定金预售提前发货打标
@@ -281,6 +283,7 @@ export default {
     simulation_trial_calculation: '仿真试算',
     simulation: '模拟仿真',
     splitOrder: '拆分订单', //拆分订单
+    sortForm: '排序表单', //排序表单
     text: '按钮',
     virtualWarehous: '虚拟入库', //虚拟入库
     void: '作废',
