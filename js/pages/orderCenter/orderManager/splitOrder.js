@@ -8,94 +8,6 @@ export default {
   data() {
     return {
       vmI18n:$i18n,
-      mockData:{data:{
-        "code":0,
-        "data":[
-          {
-            "waiting_split_num":2.0000,
-            "proType":0,
-            "ps_c_sku_name":null,
-            "ps_c_clr_id":850,
-            "adjust_amt":0.0000,
-            "ps_c_pro_ecode":"KASA0000001",
-            "price_list":0.0000,
-            "orig_order_id":903136,
-            "price":10.0000,
-            "cp_c_phy_warehouse_ecode":"Gale0025",
-            "ps_c_sku_id":104100,
-            "sgBPhyInStorageItemExt":[
-              {
-                "advise_phy_warehouse_id":162,
-                "ps_c_sku_name":null,
-                "total_qty_available":100.0000,
-                "ps_c_sku_ecode":"OKCKASA0000001REDS",
-                "advise_phy_warehouse_ename":"Gale实体仓",
-                "advise_phy_warehouse_ecode":"Gale0025"
-              },
-              {
-                "advise_phy_warehouse_id":161,
-                "ps_c_sku_name":null,
-                "total_qty_available":10.0000,
-                "ps_c_sku_ecode":"OKCKASA0000001REDS1",
-                "advise_phy_warehouse_ename":"常常仓",
-                "advise_phy_warehouse_ecode":"Gale00251"
-              }
-            ],
-            "ps_c_clr_ename":"red",
-            "ps_c_sku_ecode":"OKCKASA0000001REDS",
-            "ps_c_pro_ename":"卡莎",
-            "orig_order_item_id":1701170,
-            "ps_c_size_ename":"S",
-            "cp_c_phy_warehouse_id":162,
-            "is_gift":0,
-            "ps_c_size_ecode":"S",
-            "qty":1.0000,
-            "amt_discount":0.0000,
-            "ps_c_clr_ecode":"RED",
-            "ps_c_size_id":853,
-            "cp_c_phy_warehouse_ename":"Gale实体仓",
-            "split_num":0
-          },
-          {
-            "waiting_split_num":1.0000,
-            "proType":0,
-            "ps_c_sku_name":null,
-            "ps_c_clr_id":850,
-            "adjust_amt":0.0000,
-            "ps_c_pro_ecode":"KASA0000001",
-            "price_list":0.0000,
-            "orig_order_id":903136,
-            "price":10.0000,
-            "cp_c_phy_warehouse_ecode":"Gale0025",
-            "ps_c_sku_id":104100,
-            "sgBPhyInStorageItemExt":[
-              {
-                "advise_phy_warehouse_id":162,
-                "ps_c_sku_name":null,
-                "total_qty_available":100.0000,
-                "ps_c_sku_ecode":"OKCKASA0000001REDS",
-                "advise_phy_warehouse_ename":"Gale实体仓",
-                "advise_phy_warehouse_ecode":"Gale0025"
-              }
-            ],
-            "ps_c_clr_ename":"red",
-            "ps_c_sku_ecode":"OKCKASA0000001REDS",
-            "ps_c_pro_ename":"卡莎",
-            "orig_order_item_id":1701170,
-            "ps_c_size_ename":"S",
-            "cp_c_phy_warehouse_id":162,
-            "is_gift":0,
-            "ps_c_size_ecode":"S",
-            "qty":1.0000,
-            "amt_discount":0.0000,
-            "ps_c_clr_ecode":"RED",
-            "ps_c_size_id":853,
-            "cp_c_phy_warehouse_ename":"Gale实体仓",
-            "split_num":0
-          }
-        ],
-        "message":"初始化查询接口查询成功!"
-      }},
       btnConfig: {
         typeAll: 'default',
         buttons: [
@@ -242,13 +154,13 @@ export default {
           key: 'split_num',
           draggable:true,
           width: 100,
-          render(h, params) {
+          render:(h, params) =>{
             // console.log(params);
             return h('div', [
               h('Input', {
                 props: {
                   value: params.row.split_num,
-                  // disabled: this.dataIndex !== 0,
+                  disabled: this.dataIndex !== 0,
                   regx: /^[0-9]/,
                 },
                 on: {
@@ -294,7 +206,8 @@ export default {
       canFresh: false, // 刷新与否
     };
   },
-  watch: {},
+  watch: {
+  },
   mounted() {
     this.getData();
     window.selfInstance = this;
@@ -426,25 +339,10 @@ export default {
       } else {
         self.$Message.error(message);
       }
-      // axios({
-      //   url: '/api/cs/oc/oms/v1/saveSplitOrderInfo',
-      //   method: 'post',
-      //   data: { data: self.data }
-      // }).then(res => {
-      //   console.log(res);
-      //   if (res.data.code == 0) {
-      //     self.canFresh = false;
-      //     self.$Message.success(res.data.message);
-      //     self.back();
-      //   } else {
-      //     self.$Message.error(res.data.message);
-      //   }
-      // });
     },
     // 切换列表
     switchList(index) {
-      const self = this;
-      self.dataIndex = index;
+      this.dataIndex = index;
     },
     // 撤销
     undo(index) {
