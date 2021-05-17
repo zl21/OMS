@@ -1443,11 +1443,8 @@ export default {
       .then(({ data: { code, data, message } }) => {
         if (code == 0) {
           this.isMasterRequired = true;
-          this.modify = {
-            master: {},
-            picking: {},
-            warehouseWarrant: {}
-          },
+          this.initModify();
+          this.isModify = false
           data && (this.ID = data);
           this.querySchedule();
           this.$message.success(message);

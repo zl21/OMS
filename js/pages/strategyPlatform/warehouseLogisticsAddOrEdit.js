@@ -589,7 +589,6 @@ export default {
         this.clearTableData()
         this.queryLogistics()
         this.setFormValue(self.logisticsTableFormConfig, 'CP_C_LOGISTICS')
-        this.modify = { master: {} }
         !isSaveAll && this.$message.success(message)
         isSaveAll && this.onOk()
         return

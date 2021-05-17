@@ -600,6 +600,7 @@ export default {
             }
           }
         }
+        this.isModify = false
         this.$message.success(message)
         this.onOk()
         return

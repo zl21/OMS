@@ -880,7 +880,10 @@ export default {
             this.setFormValue(this.goodsTableConfig.businessFormConfig, 'PS_C_SPU')
           }
           this.reloadForm(params.ISACTIVE == 'Y')
-          this.modify = { master: {} }
+          if (isSaveAll) {
+            this.modify = { master: {} }
+            this.isModify = false
+          }
           data && (this.ID = data.objId)
           !this.isCopy && this.queryPrice(data.objId)
           !this.isCopy && this.queryPriceItem(data.objId)
