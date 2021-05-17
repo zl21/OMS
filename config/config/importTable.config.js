@@ -4,6 +4,17 @@
  */
 
 const importConfig = {
+  CP_C_LOGISTICS__logisticsImport: {
+    // 物流公司档案-导入
+    isAction: true,
+    tableName: 'CP_C_LOGISTICS',
+    webname: 'logisticsImport',
+    tempApi: '/p/cs/cp/import/v1/logistics/template',
+    tempParm: null,
+    okApi: '/p/cs/cp/import/v1/logistics/import',
+    okParm: null,
+    downErrorInfo: true,
+  },
   PS_C_SKU__skuImportUpdate: {
     // 商品sku-导入更新
     isAction: true,
