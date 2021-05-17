@@ -170,9 +170,13 @@ export default {
   methods: {
     clear() {
       // 清空值
-      this.itemdata.pid = '';
-      this.itemdata.valuedata = '';
-      this.$emit('getFkChooseItem', this.itemdata); // sq-20190910修改
+      if (itemdata.isBackRowItem) {
+        this.$emit('getFkChooseItem', {});
+      } else {
+        this.itemdata.pid = '';
+        this.itemdata.valuedata = '';
+        this.$emit('getFkChooseItem', this.itemdata); // sq-20190910修改
+      }
     },
     // 组件值传递
     inputChange(item) {
