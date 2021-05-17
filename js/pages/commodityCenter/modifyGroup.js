@@ -293,13 +293,8 @@ export default {
               style: 'dimSearch',
               width: '6',
               value: 'gbCode',
-              columns: ['ename'],
-              AuotData: [{
-                ecode: '111',
-                ename: 'sku名称',
-                price: '8.88',
-                num: 1
-              }], // 匹配的选项
+              columns: ['ECODE'],
+              AuotData: [], // 匹配的选项
               dimChange: (val) => {
                 if (!val) {
                   this.jordanTableConfigLuck.businessFormConfig.formData[1].AuotData = [];
@@ -392,7 +387,7 @@ export default {
               style: 'dimSearch',
               width: '6',
               value: 'gbCode',
-              columns: ['ename'],
+              columns: ['ECODE'],
               AuotData: [], // 匹配的选项
               dimChange: (val) => {
                 if (!val) {
