@@ -140,7 +140,7 @@ export default {
             itemdata: {
               colid: 171251,
               colname: "CP_C_PHY_WAREHOUSE_ID",
-              name: "修改仓库",
+              name: "仓库名称",
               valuedata: "",
               pid: "",
               fkdisplay: "drp",
