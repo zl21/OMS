@@ -789,17 +789,24 @@ class commonUtils {
   }
   /**
    * 结束时间，只选择日期未选择时间的情况下，时间默认23:59:59
-   * @param {String} newEndTime 改变后的结束时间
-   * @param {String} oldEndTime 改变前的结束时间
+   * @param {Date|String} newEndTime 改变后的结束时间
+   * @param {Date|String} oldEndTime 改变前的结束时间
    * @returns 返回处理后的结束时间
    */
   static defaultEndTime(newEndTime, oldEndTime) {
-    let time = newEndTime
-    if (oldEndTime != newEndTime
-      && oldEndTime?.split(' ')[0] != newEndTime.split(' ')[0]
-      && / 00:00:00$/.test(newEndTime)
+    let isNewDate = Object.prototype.toString.call(newEndTime) == '[object Date]'
+    let isOldDate = Object.prototype.toString.call(oldEndTime) == '[object Date]'
+    let [newDate, newTime] = (isNewDate
+      ? BurgeonDate.getFormatDate(newEndTime, 'yyyy-MM-dd HH:mm:ss') : newEndTime).split(' ')
+    let [oldDate, oldTime] = (oldEndTime && isOldDate
+      ? BurgeonDate.getFormatDate(oldEndTime, 'yyyy-MM-dd HH:mm:ss') : oldEndTime || '').split(' ')
+    
+    let time = `${newDate} ${newTime}`
+    if (time != `${oldDate} ${oldTime}`
+      && newDate != oldDate
+      && '00:00:00' == newTime
     ) {
-      time = newEndTime.replace(/00:00:00/, '23:59:59')
+      time = `${newDate} 23:59:59`
     }
     return time
   }

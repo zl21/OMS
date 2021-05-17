@@ -354,7 +354,7 @@ export default {
       }
     };
   },
-   mounted() {
+  mounted() {
     this.ID != -1 && this.queryLiveParsing()
   },
   created() {},
@@ -387,18 +387,13 @@ export default {
         back: true
       });
     },
-    setFormValue(formConfig, field, data = {}) {
-      const { formValue } = formConfig
-      const { pid, valuedata } = data
-      formValue[`${field}_ID`] = pid || '';
-      formValue[`${field}_ENAME`] = valuedata || '';
-      const obj = this.queryForm(formConfig, `${field}_ID`)
-      if (!obj) return
-      obj.itemdata.pid = pid || ''
-      obj.itemdata.valuedata = valuedata || ''
-    },
     queryForm(formConfig, field) {
       return formConfig.formData.find((item) => item.colname == field);
+    },
+    // 时间戳格式化
+    formatDate(time) {
+      const date = new Date(time);
+      return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
     },
     /**
      * 记录主表修改信息方法
@@ -437,6 +432,7 @@ export default {
             newTime = this.$OMS2.omsUtils.defaultEndTime(newTime, oldTime)
             self[formName].formValue[ecode] = newTime
           }
+          // self[formName].formValue[ecode] = newTime  // TODO END_TIME 复制失败
           self.modify[obj][ecode] = newTime
         } else {
           self.modify[obj][ecode] = self[formName].formValue[ecode];
@@ -450,26 +446,25 @@ export default {
         objid: this.ID,
       };
     },
-    /**
-     * 主表字段是否可编辑
-     * @param {*} isEnable true 启用 false 停用
-     */
-    setEnable(isEnable) {
+    // 主表字段是否可编辑
+    setEnable() {
       const FIELDS = ['PLAN_ID', 'ISACTIVE']
       this.formConfig1.formData.forEach(i => {
-        i.disabled = isEnable ? true : FIELDS.includes(i.colname)
+        i.disabled = this.isEnable ? true : FIELDS.includes(i.colname)
       })
       this.formConfig3.formData.forEach(i => {
-        i.disabled = isEnable
+        i.disabled = this.isEnable
       })
-      this.formConfig2.formData[0].itemdata.readonly = isEnable
+      this.formConfig2.formData[0].itemdata.readonly = this.isEnable
     },
     /**
      * 按钮显示隐藏
      * @param {*} btnText 按钮文本
      */
     setBtnEnable(btnText) {
-      this.btnConfig.buttons.forEach(i => ['启用','停用'].includes(i.text) && (i.isShow = i.text != btnText))
+      this.btnConfig.buttons.forEach(i => {
+        ['启用','停用'].includes(i.text) && (i.isShow = i.text != btnText)
+      })
     },
     // 表单赋值
     initForm(data) {
@@ -480,41 +475,31 @@ export default {
       this.queryForm(this.formConfig1, 'ISACTIVE').style = 'input'
   
       const { CP_C_SHOP_ID, CP_C_SHOP_ENAME, ISACTIVE, BEGIN_TIME, END_TIME } = data
-      this.setFormValue(this.formConfig2, 'CP_C_SHOP', { 
-        pid: CP_C_SHOP_ID,
-        valuedata: CP_C_SHOP_ENAME
-      })
+      const obj = this.queryForm(this.formConfig2, 'CP_C_SHOP_ID')
+      obj.itemdata.pid = CP_C_SHOP_ID
+      obj.itemdata.valuedata = CP_C_SHOP_ENAME
+
       this.isEnable = ISACTIVE == 'Y'
       this.formConfig1.formValue.ISACTIVE = ISACTIVE == 'Y' ? '启用' : '停用'
       this.formConfig2.formValue.TIME_RANGE = [BEGIN_TIME, END_TIME]
-
       this.formConfig1.ruleValidate.PLAN_ID[0].required = true
     },
     // 查询
     async queryLiveParsing() {
       this.loading = true
-      // const obj = await this.$OMS2.omsUtils.getObject('ST_C_LIVE_CAST_STRATEGY', this.ID);
       this.isWatchChange = false
-      // this.formConfig = this.$OMS2.omsUtils.initFormConfig(obj.addcolums[0].childs, this.formConfig);
       const { data: { code, data, message }} = await this.service.strategyPlatform.queryLiveParsing({ id: this.ID })
       this.loading = false
       if (code == 0) {
         if (data) {
-          // 按钮显示隐藏
-          this.btnConfig.buttons.forEach((i, index) => index > 1 && this.ID != -1 && (i.isShow = true))
-          this.initForm(data)
-          this.setEnable(data.ISACTIVE == 'Y')
           let tipText = data.ISACTIVE == 'Y' ? '启用' : '停用'
+          this.initForm(data)
+          this.setEnable()
           this.setBtnEnable(tipText)
         }
         return
       }
       this.$message.error(message)
-    },
-    // 时间戳格式化
-    formatDate(time) {
-      const date = new Date(time);
-      return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
     },
     isValid(obj, validFields) {
       let valid = true;
@@ -570,11 +555,12 @@ export default {
 
       /**
        * 编辑页面，如果直播商品识别未做操作就不传，否则就传所有数据, 其他字段，操作了就传
+       * 
+       *  const { addData, deleteData, updateData } = this.modify.master.rules
+          let RULES = this.ID != -1 && ![...addData, ...deleteData, ...updateData].length
+            ? [] : this.formConfig2.formValue.RULES
+          let masterForm = this.ID != -1 ? this.modify.master : formConfig.formValue
        */
-      // const { addData, deleteData, updateData } = this.modify.master.rules
-      // let RULES = this.ID != -1 && ![...addData, ...deleteData, ...updateData].length
-      //   ? [] : this.formConfig2.formValue.RULES
-      // let masterForm = this.ID != -1 ? this.modify.master : formConfig.formValue
       let masterForm = formConfig.formValue
       let params = {
         ID: this.ID,
@@ -622,8 +608,6 @@ export default {
       if (code == 0) {
         this.isEnable = isEnable
         this.queryLiveParsing()
-        this.setEnable(isEnable)
-        this.setBtnEnable(tipText)
         this.$message.success(message)
         return
       }

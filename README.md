@@ -439,6 +439,7 @@ R3.launchApplication({
 | v1.3.17 | orderAddDetail合计处理 |
 | v1.3.18 | 异常处理bug:38766|
 | v1.3.19 | bug:38812  |
+| v1.3.20 | commonUtils- defaultEndTime  |
 
 #### Extends-Api 版本说明
 
