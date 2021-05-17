@@ -10,7 +10,15 @@ import InterfaceConfig from '../module/modal/interface.config.js'; // ----------
 import ReportCenter from '../module/modal/report.config.js'; // ----------报表中心
 import basicDataConfig from '../module/page/basicData.config'; // -----------基础数据
 
+import importCom from 'professionalComponents/importTable';
+const common = {
+  LOGISTICSIMPORT: {
+    component: importCom,
+  },
+}
+
 const allCenterModal = Object.assign(
+  common,
   OrderCenter,
   MarketCenter,
   FinanceCenter,
