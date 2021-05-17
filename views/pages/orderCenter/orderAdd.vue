@@ -8,14 +8,14 @@
       <Collapse v-model="panelDefaultValue">
         <Panel name="1">
           <!-- 基本信息 -->
-          {{ vmI18n.t('common.baseInformation') }}
+          {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
             <businessForm :form-config="formConfigBase" @keyDown="keyDown" />
           </p>
         </Panel>
         <Panel name="2">
           <!-- 收货人信息 -->
-          {{ vmI18n.t('common.consigneeInformation') }}
+          {{ vmI18n.t("common.consigneeInformation") }}
           <p slot="content">
             <businessForm :form-config="formConfigRe" />
           </p>
@@ -31,7 +31,10 @@
       <!-- tab切换 -->
       <div class="customized-detail-table">
         <div class="custom-label">
-          <businessLabel :label-default-value="labelDefaultValue" :label-list="labelList" />
+          <businessLabel
+            :label-default-value="labelDefaultValue"
+            :label-list="labelList"
+          />
         </div>
         <div class="table custom-table">
           <!-- 订单明细 -->
@@ -55,7 +58,15 @@
               </template>
             </businessForm>
              -->
-            <businessActionTable :jordan-table-config="jordanTableConfig" @on-select="onSelect" @on-select-all="onSelectAll" @on-select-all-cancel="onSelectAllCancel" @on-select-cancel="onSelectCancel" @table-delete-detail="tableDeleteDetail" @table-import="tableImport" />
+            <businessActionTable
+              :jordan-table-config="jordanTableConfig"
+              @on-select="onSelect"
+              @on-select-all="onSelectAll"
+              @on-select-all-cancel="onSelectAllCancel"
+              @on-select-cancel="onSelectCancel"
+              @table-delete-detail="tableDeleteDetail"
+              @table-import="tableImport"
+            />
           </div>
         </div>
       </div>
@@ -100,27 +111,27 @@
   </div>
 </template>
 <script>
-import businessButton from 'professionalComponents/businessButton';
-import businessForm from 'professionalComponents/businessForm';
-import businessActionTable from 'professionalComponents/businessActionTable';
-import businessLabel from 'professionalComponents/businessLabel';
-import publicMethodsUtil from '@/assets/js/public/publicMethods';
-import businessDialog from 'professionalComponents/businessDialog';
+import businessButton from "professionalComponents/businessButton";
+import businessForm from "professionalComponents/businessForm";
+import businessActionTable from "professionalComponents/businessActionTable";
+import businessLabel from "professionalComponents/businessLabel";
+import publicMethodsUtil from "@/assets/js/public/publicMethods";
+import businessDialog from "professionalComponents/businessDialog";
 // import loading from 'professionalComponents/loading';
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 // import dataAccessMixin from '@/assets/js/mixins/dataAccess';
-import BurgeonValidate from 'burgeonConfig/config/validate.config';
+import BurgeonValidate from "burgeonConfig/config/validate.config";
 // import BtnConfig from 'burgeonConfig/config/funBtn.config';
-import dateUtil from '@/assets/js/__utils__/date.js';
-import axios from 'axios';
+import dateUtil from "@/assets/js/__utils__/date.js";
+import axios from "axios";
 
-const _ = require('lodash');
-const areaList = require('@/assets/js/address/area-list');
-const { parse, parseArea } = require('@/assets/js/address/address-parse');
+const _ = require("lodash");
+const areaList = require("@/assets/js/address/area-list");
+const { parse, parseArea } = require("@/assets/js/address/address-parse");
 
 parseArea(areaList);
 export default {
-  name: 'orderAddorCopy',
+  name: "orderAddorCopy",
   components: {
     businessButton,
     businessForm,
@@ -135,40 +146,55 @@ export default {
     const validateReceiveAddress = BurgeonValidate.validateReceiveAddress;
     return {
       vmI18n: $i18n,
-      inputArrBase: ['SELLER_MEMO', 'BUYER_MESSAGE', 'SHIP_AMT', 'BUYER_NICK', 'USER_NICK', 'SOURCE_CODE', 'PAY_TIME', 'PAY_TYPE', 'COLLECT_AMT', 'SERVICE_AMT'],
-      drpArrBase: ['CP_C_SHOP_ID', 'CP_C_PHY_WAREHOUSE_ID', 'CP_C_LOGISTICS_ID'],
+      inputArrBase: [
+        "SELLER_MEMO",
+        "BUYER_MESSAGE",
+        "SHIP_AMT",
+        "BUYER_NICK",
+        "USER_NICK",
+        "SOURCE_CODE",
+        "PAY_TIME",
+        "PAY_TYPE",
+        "COLLECT_AMT",
+        "SERVICE_AMT",
+      ],
+      drpArrBase: [
+        "CP_C_SHOP_ID",
+        "CP_C_PHY_WAREHOUSE_ID",
+        "CP_C_LOGISTICS_ID",
+      ],
       matrixBox: {
-        refFuns: 'confirmFun',
-        confirmTitle: $i18n.t('modalTitle.matrixEntry'), // 矩阵录入
-        titleAlign: 'center', // 设置标题是否居中 center left
-        width: '860',
+        refFuns: "confirmFun",
+        confirmTitle: $i18n.t("modalTitle.matrixEntry"), // 矩阵录入
+        titleAlign: "center", // 设置标题是否居中 center left
+        width: "860",
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
         draggable: true, // 是否可以拖动
         mask: true, // 是否显示遮罩层
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
-        name: 'matrixBox', // 组件名称
-        url: 'modal/orderCenter/matrixBox',
+        name: "matrixBox", // 组件名称
+        url: "modal/orderCenter/matrixBox",
         keepAlive: true,
-        excludeString: 'matrixBox', // 将name传进去，确认不缓存
+        excludeString: "matrixBox", // 将name传进去，确认不缓存
         componentData: {},
       }, // 退单编号查询
       importTable: {
-        confirmTitle: '订单明细导入',
-        titleAlign: 'center', // 设置标题是否居中 center left
-        width: '540',
+        confirmTitle: "订单明细导入",
+        titleAlign: "center", // 设置标题是否居中 center left
+        width: "540",
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
         draggable: false, // 是否可以拖动
         mask: true, // 是否显示遮罩层
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
-        name: 'importTable', // 组件名称
-        basePathName: 'business-components',
-        url: 'importTable',
+        name: "importTable", // 组件名称
+        basePathName: "business-components",
+        url: "importTable",
         keepAlive: true,
-        excludeString: 'importTable', // 将name传进去，确认不缓存
+        excludeString: "importTable", // 将name传进去，确认不缓存
         componentData: {},
       },
       watchChange: false, // 监听修改变化
@@ -180,22 +206,22 @@ export default {
       backable: false,
       // isSetOption: false, // 付款方式是否赋值options
       // isCopy: false, // 是否丢单复制和复制订单来时,第一次查询条码
-      address: '', // 存储解析后的地址
+      address: "", // 存储解析后的地址
       // payTypeSelectData: [], // 支付方式的下拉选项值
-      panelDefaultValue: ['1', '2'],
+      panelDefaultValue: ["1", "2"],
       // btnConfig: BtnConfig.config(),
       btnConfig: {
-        typeAll: 'default',
+        typeAll: "default",
         buttons: [
           {
-            text: '保存',
+            text: "保存",
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.save();
             },
           },
           {
-            text: $i18n.t('btn.back'),
+            text: $i18n.t("btn.back"),
             btnclick: () => {
               this.back();
             },
@@ -205,17 +231,17 @@ export default {
       formConfigBase: {
         formData: [
           {
-            version: '1.4',
-            style: 'popInput',
-            width: '6',
-            colname: 'CP_C_SHOP_ID',
+            version: "1.4",
+            style: "popInput",
+            width: "6",
+            colname: "CP_C_SHOP_ID",
             itemdata: {
               colid: 168864,
-              colname: 'CP_C_SHOP_ID',
-              name: '店铺',
-              valuedata: '',
-              pid: '',
-              fkdisplay: 'drp',
+              colname: "CP_C_SHOP_ID",
+              name: "店铺",
+              valuedata: "",
+              pid: "",
+              fkdisplay: "drp",
               isfk: true,
               isnotnull: true,
               readonly: false,
@@ -225,20 +251,26 @@ export default {
               // if (!val.pid) return;
               _this.formConfigBase.formValue.CP_C_SHOP_ID = val.pid;
               _this.formConfigBase.formValue.CP_C_SHOP_ENAME = val.valuedata;
-              _this.querItem('CP_C_PHY_WAREHOUSE_ID').inputList = [
+              _this.querItem("CP_C_PHY_WAREHOUSE_ID").inputList = [
                 {
                   childs: [
                     {
-                      colname: 'CP_C_PHY_WAREHOUSE_ID', // 必须是这个
+                      colname: "CP_C_PHY_WAREHOUSE_ID", // 必须是这个
                       refobjid: val.pid, // 店铺的pid
                       valuedata: val.valuedata, // 店铺的valuedate
-                      name: '店铺', // 联动的提示
+                      name: "店铺", // 联动的提示
                     },
                   ],
                 },
               ];
-              this.formConfigBase = this.emptyData(this.formConfigBase, 'CP_C_SHOP_ID', this.modify, val, ['CP_C_PHY_WAREHOUSE_ID', 'CP_C_LOGISTICS_ID']);
-              this.modifyData('CP_C_SHOP_ID', 'master');
+              this.formConfigBase = this.emptyData(
+                this.formConfigBase,
+                "CP_C_SHOP_ID",
+                this.modify,
+                val,
+                ["CP_C_PHY_WAREHOUSE_ID", "CP_C_LOGISTICS_ID"]
+              );
+              this.modifyData("CP_C_SHOP_ID", "master");
               // _this.getWarehouse(val.pid);
             },
           },
@@ -284,239 +316,248 @@ export default {
             ],
           }, */
           {
-            version: '1.4',
-            style: 'popInput',
-            width: '6',
-            colname: 'CP_C_PHY_WAREHOUSE_ID',
+            version: "1.4",
+            style: "popInput",
+            width: "6",
+            colname: "CP_C_PHY_WAREHOUSE_ID",
             inputList: [
               {
                 childs: [
                   {
-                    colname: 'CP_C_PHY_WAREHOUSE_ID',
-                    refobjid: '',
-                    valuedata: '',
-                    name: '店铺',
+                    colname: "CP_C_PHY_WAREHOUSE_ID",
+                    refobjid: "",
+                    valuedata: "",
+                    name: "店铺",
                   },
                 ],
               },
             ],
             itemdata: {
               colid: 171251,
-              colname: 'CP_C_PHY_WAREHOUSE_ID',
-              fkdisplay: 'drp',
+              colname: "CP_C_PHY_WAREHOUSE_ID",
+              fkdisplay: "drp",
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              name: '发货仓库',
+              name: "发货仓库",
               readonly: false,
-              valuedata: '',
+              valuedata: "",
               refcolval: {
-                fixcolumn: 'CP_C_SHOP_ID', // 根据什么查
-                expre: 'equal',
-                srccol: 'CP_C_PHY_WAREHOUSE_ID', // 要查什么
+                fixcolumn: "CP_C_SHOP_ID", // 根据什么查
+                expre: "equal",
+                srccol: "CP_C_PHY_WAREHOUSE_ID", // 要查什么
               },
             },
             oneObj: (val) => {
               const _this = this;
               _this.formConfigBase.formValue.CP_C_PHY_WAREHOUSE_ID = val.pid;
-              _this.formConfigBase.formValue.CP_C_PHY_WAREHOUSE_ENAME = val.valuedata;
-              _this.formConfigBase = this.emptyData(this.formConfigBase, 'CP_C_PHY_WAREHOUSE_ID', this.modify, val, ['CP_C_LOGISTICS_ID']);
-              _this.querItem('CP_C_LOGISTICS_ID').inputList = [
+              _this.formConfigBase.formValue.CP_C_PHY_WAREHOUSE_ENAME =
+                val.valuedata;
+              _this.formConfigBase = this.emptyData(
+                this.formConfigBase,
+                "CP_C_PHY_WAREHOUSE_ID",
+                this.modify,
+                val,
+                ["CP_C_LOGISTICS_ID"]
+              );
+              _this.querItem("CP_C_LOGISTICS_ID").inputList = [
                 {
                   childs: [
                     {
-                      colname: 'CP_C_LOGISTICS_ID',
+                      colname: "CP_C_LOGISTICS_ID",
                       refobjid: val.pid,
                       valuedata: val.pid,
-                      name: '发货仓库',
+                      name: "发货仓库",
                     },
                   ],
                 },
               ];
-              _this.modifyData('CP_C_PHY_WAREHOUSE_ID', 'master');
+              _this.modifyData("CP_C_PHY_WAREHOUSE_ID", "master");
             },
           },
           {
-            version: '1.4',
-            style: 'popInput',
-            width: '6',
-            colname: 'CP_C_LOGISTICS_ID',
+            version: "1.4",
+            style: "popInput",
+            width: "6",
+            colname: "CP_C_LOGISTICS_ID",
             inputList: [
               {
                 childs: [
                   {
-                    colname: 'CP_C_LOGISTICS_ID',
-                    refobjid: '',
-                    valuedata: '',
-                    name: '发货仓库',
+                    colname: "CP_C_LOGISTICS_ID",
+                    refobjid: "",
+                    valuedata: "",
+                    name: "发货仓库",
                   },
                 ],
               },
             ],
             itemdata: {
               colid: 171280,
-              colname: 'CP_C_LOGISTICS_ID',
-              fkdisplay: 'drp',
+              colname: "CP_C_LOGISTICS_ID",
+              fkdisplay: "drp",
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: '物流公司',
+              name: "物流公司",
               readonly: false, // 仅读
-              valuedata: '',
+              valuedata: "",
               refcolval: {
-                fixcolumn: 'CP_C_PHY_WAREHOUSE_ID', // queryList入参的字段
-                expre: 'equal',
-                srccol: 'CP_C_LOGISTICS_ID',
+                fixcolumn: "CP_C_PHY_WAREHOUSE_ID", // queryList入参的字段
+                expre: "equal",
+                srccol: "CP_C_LOGISTICS_ID",
               },
             },
             oneObj: (val) => {
               const _this = this;
               _this.formConfigBase.formValue.CP_C_LOGISTICS_ID = val.pid;
-              _this.formConfigBase.formValue.CP_C_LOGISTICS_ENAME = val.valuedata;
-              this.modifyData('CP_C_LOGISTICS_ID', 'master');
+              _this.formConfigBase.formValue.CP_C_LOGISTICS_ENAME =
+                val.valuedata;
+              this.modifyData("CP_C_LOGISTICS_ID", "master");
             },
           },
           {
-            style: 'input',
-            colname: 'SHIP_AMT', // 运费，默认0
-            label: '运费',
-            width: '6',
+            style: "input",
+            colname: "SHIP_AMT", // 运费，默认0
+            label: "运费",
+            width: "6",
             regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
             inputChange: () => {
-              this.modifyData('SHIP_AMT', 'master');
+              this.modifyData("SHIP_AMT", "master");
             },
           },
           {
-            style: 'input',
-            width: '6',
-            colname: 'SOURCE_CODE', // 平台单号
-            label: '平台单号',
+            style: "input",
+            width: "6",
+            colname: "SOURCE_CODE", // 平台单号
+            label: "平台单号",
             inputChange: () => {
-              this.modifyData('SOURCE_CODE', 'master');
+              this.modifyData("SOURCE_CODE", "master");
             },
           },
           {
-            style: 'select',
-            width: '6',
-            colname: 'PAY_TYPE',
-            label: '支付方式',
+            style: "select",
+            width: "6",
+            colname: "PAY_TYPE",
+            label: "支付方式",
             selectChange: () => {
-              this.modifyData('PAY_TYPE', 'master');
+              this.modifyData("PAY_TYPE", "master");
             },
             options: [],
           },
           // 支付方式为'货到付款'时才展示'代收货款'、'服务费'
           {
             style: null,
-            colname: 'COLLECT_AMT',
-            label: '代收货款',
-            width: '6',
+            colname: "COLLECT_AMT",
+            label: "代收货款",
+            width: "6",
             regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
             inputChange: () => {
-              this.modifyData('COLLECT_AMT', 'master');
+              this.modifyData("COLLECT_AMT", "master");
             },
           },
           {
             style: null,
-            colname: 'SERVICE_AMT',
-            label: '服务费',
-            width: '6',
+            colname: "SERVICE_AMT",
+            label: "服务费",
+            width: "6",
             regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
             inputChange: () => {
-              this.modifyData('SERVICE_AMT', 'master');
+              this.modifyData("SERVICE_AMT", "master");
             },
           },
           {
-            style: 'input',
-            colname: 'BUYER_NICK', // 买家昵称
-            label: '买家昵称',
-            width: '6',
+            style: "input",
+            colname: "BUYER_NICK", // 买家昵称
+            label: "买家昵称",
+            width: "6",
             inputChange: () => {
-              this.modifyData('BUYER_NICK', 'master');
+              this.modifyData("BUYER_NICK", "master");
             },
           },
           {
-            style: 'date',
-            type: 'datetime',
-            label: '支付时间',
-            colname: 'PAY_TIME',
-            format: 'yyyy-MM-dd HH:mm:ss',
-            width: '6',
-            icon: 'md-alarm',
-            placeholder: '',
+            style: "date",
+            type: "datetime",
+            label: "支付时间",
+            colname: "PAY_TIME",
+            format: "yyyy-MM-dd HH:mm:ss",
+            width: "6",
+            icon: "md-alarm",
+            placeholder: "",
             transfer: true,
             ghost: false, // 是否关闭幽灵按钮，默认开启
             onChange: () => {
               let time = this.formConfigBase.formValue.PAY_TIME;
-              if (time) this.formConfigBase.formValue.PAY_TIME = this.formatDate(time);
-              this.modifyData('PAY_TIME', 'master');
+              if (time)
+                this.formConfigBase.formValue.PAY_TIME = this.formatDate(time);
+              this.modifyData("PAY_TIME", "master");
             },
             clearable: true,
           },
           {
-            style: 'input',
-            colname: 'SELLER_MEMO', // 卖家备注
-            label: '卖家备注',
-            width: '12',
+            style: "input",
+            colname: "SELLER_MEMO", // 卖家备注
+            label: "卖家备注",
+            width: "12",
             inputChange: () => {
-              this.modifyData('SELLER_MEMO', 'master');
+              this.modifyData("SELLER_MEMO", "master");
             },
           },
           {
-            style: 'input',
-            colname: 'BUYER_MESSAGE', // 买家留言
-            label: '买家留言',
-            width: '12',
+            style: "input",
+            colname: "BUYER_MESSAGE", // 买家留言
+            label: "买家留言",
+            width: "12",
             inputChange: () => {
-              this.modifyData('BUYER_MESSAGE', 'master');
+              this.modifyData("BUYER_MESSAGE", "master");
             },
           },
         ],
         formValue: {
-          SELLER_MEMO: '', // 卖家备注
-          BUYER_MESSAGE: '', // 买家留言
+          SELLER_MEMO: "", // 卖家备注
+          BUYER_MESSAGE: "", // 买家留言
           SHIP_AMT: 0, // 费用
-          USER_NICK: '', // 买家昵称
-          BUYER_NICK: '', // 买家昵称
-          SOURCE_CODE: '', // 平台单号，Y
+          USER_NICK: "", // 买家昵称
+          BUYER_NICK: "", // 买家昵称
+          SOURCE_CODE: "", // 平台单号，Y
           is_kaip: false, // 是否开票
           PAY_TIME: new Date(), // 创建时间
           // INSIDE_REMARK: '', // 内部备注
-          CP_C_SHOP_ID: '', // 店铺，Y
-          CP_C_SHOP_TITLE: '',
-          CP_C_LOGISTICS_ID: '', // 物流公司，drp
-          CP_C_LOGISTICS_ENAME: '',
-          CP_C_PHY_WAREHOUSE_ID: '', // 发货仓库，Y
-          CP_C_PHY_WAREHOUSE_ENAME: '',
+          CP_C_SHOP_ID: "", // 店铺，Y
+          CP_C_SHOP_TITLE: "",
+          CP_C_LOGISTICS_ID: "", // 物流公司，drp
+          CP_C_LOGISTICS_ENAME: "",
+          CP_C_PHY_WAREHOUSE_ID: "", // 发货仓库，Y
+          CP_C_PHY_WAREHOUSE_ENAME: "",
           PAY_TYPE: 1, // 支付方式，Y
-          COLLECT_AMT: '', // 代收货款，Y
-          SERVICE_AMT: '', // 服务费
+          COLLECT_AMT: "", // 代收货款，Y
+          SERVICE_AMT: "", // 服务费
         },
         ruleValidate: {
           COLLECT_AMT: [
             {
               required: true,
-              message: ' ',
-              trigger: 'blur',
+              message: " ",
+              trigger: "blur",
             },
           ],
           SOURCE_CODE: [
             {
               required: true,
-              message: ' ',
-              trigger: 'blur',
+              message: " ",
+              trigger: "blur",
             },
           ],
           PAY_TYPE: [
             {
               required: true,
-              message: ' ',
-              trigger: 'blur',
+              message: " ",
+              trigger: "blur",
             },
           ],
           CP_C_PHY_WAREHOUSE_ID: [
             {
               required: true,
-              message: ' ',
-              trigger: 'blur',
+              message: " ",
+              trigger: "blur",
             },
           ],
         },
@@ -524,199 +565,258 @@ export default {
       formConfigRe: {
         formData: [
           {
-            style: 'input',
-            colname: 'site', // 智能匹配地址
-            label: '智能匹配地址',
-            width: '24',
-            placeholder: '如:张三,17788888888,上海上海市闵行区黎安路999号（输入后请按Enter键）',
+            style: "input",
+            colname: "site", // 智能匹配地址
+            label: "智能匹配地址",
+            width: "24",
+            placeholder:
+              "如:张三,17788888888,上海上海市闵行区黎安路999号（输入后请按Enter键）",
             inputenter: () => {
               const self = this;
               self.address = parse(self.formConfigRe.formValue.site);
               let flag = false;
-              const { detail, phone, zip_code, result, ...addressObj } = self.address;
-              if (Object.keys(addressObj).filter((k) => !addressObj[k]).length <= 0) flag = true; // 全部有值
+              const {
+                detail,
+                phone,
+                mobile,
+                zip_code,
+                result,
+                ...addressObj
+              } = self.address;
+              if (
+                Object.keys(addressObj).filter((k) => !addressObj[k]).length <=
+                0
+              )
+                flag = true; // 全部有值
               if (!flag) {
                 // "请填入完整信息,如:张三,17788888888,上海上海市闵行区黎安路999号"
-                self.$Message.warning($i18n.t('modalTips.f9'));
+                self.$Message.warning($i18n.t("modalTips.f9"));
               } else {
-                const modifyArr = ['RECEIVER_NAME', 'RECEIVER_MOBILE', 'RECEIVER_ADDRESS'];
-                const ssqModifyArr = ['CP_C_REGION_PROVINCE_ID', 'CP_C_REGION_CITY_ID', 'CP_C_REGION_AREA_ID'];
+                const modifyArr = [
+                  "RECEIVER_NAME",
+                  "RECEIVER_MOBILE",
+                  "RECEIVER_ADDRESS",
+                ];
+                const ssqModifyArr = [
+                  "CP_C_REGION_PROVINCE_ID",
+                  "CP_C_REGION_CITY_ID",
+                  "CP_C_REGION_AREA_ID",
+                ];
                 self.formConfigRe.formValue.RECEIVER_NAME = self.address.name; // 收货人赋值
-                self.formConfigRe.formValue.RECEIVER_MOBILE = self.address.mobile; // 收货人手机赋值
-                self.formConfigRe.formValue.RECEIVER_ADDRESS = self.address.addr; // 收货人地址赋值
+                self.formConfigRe.formValue.RECEIVER_PHONE = self.address.phone; // 收货人电话赋值
+                self.formConfigRe.formValue.RECEIVER_MOBILE =
+                  self.address.mobile; // 收货人手机赋值
+                self.formConfigRe.formValue.RECEIVER_ADDRESS =
+                  self.address.addr; // 收货人地址赋值
                 const queryData = self.formConfigRe.formData;
-                self.getAddressId(self.address.province, self.address.city, self.address.area).then((res) => {
-                  if (res.data.code === 0) {
-                    queryData[5].itemdata.pid = res.data.data.CP_C_REGION_PROVINCE_ID;
-                    queryData[5].itemdata.valuedata = res.data.data.CP_C_REGION_PROVINCE_ENAME; // 省赋值
-                    queryData[6].itemdata.pid = res.data.data.CP_C_REGION_CITY_ID;
-                    queryData[6].itemdata.valuedata = res.data.data.CP_C_REGION_CITY_ENAME; // 市赋值
-                    queryData[7].itemdata.pid = res.data.data.CP_C_REGION_AREA_ID;
-                    queryData[7].itemdata.valuedata = res.data.data.CP_C_REGION_AREA_ENAME; // 区赋值
-                    ssqModifyArr.forEach((it) => {
-                      self.formConfigRe.formValue[it] = self.querItem(it, 'formConfigRe').itemdata.pid;
-                      self.formConfigRe.formValue[it.replace('_ID', '_NAME')] = self.querItem(it, 'formConfigRe').itemdata.valuedata;
-                    });
-                    modifyArr.concat(ssqModifyArr).forEach((it) => {
-                      self.modifyData(it, 'master', 'r');
-                    });
-                  }
-                });
+                self
+                  .getAddressId(
+                    self.address.province,
+                    self.address.city,
+                    self.address.area
+                  )
+                  .then((res) => {
+                    if (res.data.code === 0) {
+                      queryData[5].itemdata.pid =
+                        res.data.data.CP_C_REGION_PROVINCE_ID;
+                      queryData[5].itemdata.valuedata =
+                        res.data.data.CP_C_REGION_PROVINCE_ENAME; // 省赋值
+                      queryData[6].itemdata.pid =
+                        res.data.data.CP_C_REGION_CITY_ID;
+                      queryData[6].itemdata.valuedata =
+                        res.data.data.CP_C_REGION_CITY_ENAME; // 市赋值
+                      queryData[7].itemdata.pid =
+                        res.data.data.CP_C_REGION_AREA_ID;
+                      queryData[7].itemdata.valuedata =
+                        res.data.data.CP_C_REGION_AREA_ENAME; // 区赋值
+                      ssqModifyArr.forEach((it) => {
+                        self.formConfigRe.formValue[it] = self.querItem(
+                          it,
+                          "formConfigRe"
+                        ).itemdata.pid;
+                        self.formConfigRe.formValue[
+                          it.replace("_ID", "_NAME")
+                        ] = self.querItem(
+                          it,
+                          "formConfigRe"
+                        ).itemdata.valuedata;
+                      });
+                      modifyArr.concat(ssqModifyArr).forEach((it) => {
+                        self.modifyData(it, "master", "r");
+                      });
+                    }
+                  });
               }
             },
           },
           {
-            style: 'input',
-            label: '收货人',
-            colname: 'RECEIVER_NAME', // 收货人,Y
-            width: '6',
+            style: "input",
+            label: "收货人",
+            colname: "RECEIVER_NAME", // 收货人,Y
+            width: "6",
             inputChange: () => {
-              this.modifyData('RECEIVER_NAME', 'master', 'r');
+              this.modifyData("RECEIVER_NAME", "master", "r");
             },
           },
           {
-            style: 'input',
-            label: '手机号',
-            colname: 'RECEIVER_MOBILE', // 手机号,N
-            width: '6',
+            style: "input",
+            label: "手机号",
+            colname: "RECEIVER_MOBILE", // 手机号,N
+            width: "6",
+            regx: /^(\s*|\d+)$/,
             inputChange: () => {
-              this.modifyData('RECEIVER_MOBILE', 'master', 'r');
+              this.modifyData("RECEIVER_MOBILE", "master", "r");
             },
           },
           {
-            style: 'input',
-            colname: 'RECEIVER_PHONE', // 电话,N
-            label: '电话',
-            width: '6',
+            style: "input",
+            colname: "RECEIVER_PHONE", // 电话,N
+            label: "电话",
+            width: "6",
             inputChange: () => {
-              this.modifyData('RECEIVER_PHONE', 'master', 'r');
+              this.modifyData("RECEIVER_PHONE", "master", "r");
             },
           },
           {
-            style: 'input',
-            colname: 'RECEIVER_ZIP', // 邮编,N
-            label: '邮编',
-            width: '6',
+            style: "input",
+            colname: "RECEIVER_ZIP", // 邮编,N
+            label: "邮编",
+            width: "6",
             inputChange: () => {
-              this.modifyData('RECEIVER_ZIP', 'master', 'r');
+              this.modifyData("RECEIVER_ZIP", "master", "r");
             },
           },
           {
-            version: '1.4',
-            style: 'popInput', // 省,Y
-            width: '6',
-            colname: 'CP_C_REGION_PROVINCE_ID',
+            version: "1.4",
+            style: "popInput", // 省,Y
+            width: "6",
+            colname: "CP_C_REGION_PROVINCE_ID",
             itemdata: {
               colid: 166974,
-              colname: 'CP_C_REGION_PROVINCE_ID',
-              fkdisplay: 'drp',
+              colname: "CP_C_REGION_PROVINCE_ID",
+              fkdisplay: "drp",
               isfk: true,
               isnotnull: true,
-              name: '省',
+              name: "省",
               readonly: false,
-              pid: '',
-              valuedata: '',
+              pid: "",
+              valuedata: "",
             },
             oneObj: (val) => {
               this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ID = val.pid;
-              this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ENAME = val.valuedata;
-              this.formConfigRe = this.emptyData(this.formConfigRe, 'CP_C_REGION_PROVINCE_ID', this.modify, val, ['CP_C_REGION_CITY_ID', 'CP_C_REGION_AREA_ID']);
-              this.modifyData('CP_C_REGION_PROVINCE_ID', 'master', 'r');
+              this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ENAME =
+                val.valuedata;
+              this.formConfigRe = this.emptyData(
+                this.formConfigRe,
+                "CP_C_REGION_PROVINCE_ID",
+                this.modify,
+                val,
+                ["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"]
+              );
+              this.modifyData("CP_C_REGION_PROVINCE_ID", "master", "r");
             },
           },
           {
-            version: '1.4',
-            style: 'popInput', // 市,Y
-            width: '6',
-            colname: 'CP_C_REGION_CITY_ID',
+            version: "1.4",
+            style: "popInput", // 市,Y
+            width: "6",
+            colname: "CP_C_REGION_CITY_ID",
             inputList: [],
             objList: [],
             itemdata: {
               colid: 167077,
-              colname: 'CP_C_REGION_CITY_ID',
-              fkdisplay: 'drp',
+              colname: "CP_C_REGION_CITY_ID",
+              fkdisplay: "drp",
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              name: '市',
+              name: "市",
               readonly: false, // 是否可编辑，对应input   readonly属性
               refcolval: {
-                fixcolumn: 'C_UP_ID',
-                expre: 'equal',
-                srccol: 'CP_C_REGION_PROVINCE_ID',
+                fixcolumn: "C_UP_ID",
+                expre: "equal",
+                srccol: "CP_C_REGION_PROVINCE_ID",
               },
-              pid: '',
-              valuedata: '',
+              pid: "",
+              valuedata: "",
             },
             oneObj: (val) => {
               this.formConfigRe.formValue.CP_C_REGION_CITY_ID = val.pid;
-              this.formConfigRe.formValue.CP_C_REGION_CITY_ENAME = val.valuedata;
-              this.formConfigRe = this.emptyData(this.formConfigRe, 'CP_C_REGION_CITY_ID', this.modify, val, ['CP_C_REGION_AREA_ID']);
-              this.modifyData('CP_C_REGION_CITY_ID', 'master', 'r');
+              this.formConfigRe.formValue.CP_C_REGION_CITY_ENAME =
+                val.valuedata;
+              this.formConfigRe = this.emptyData(
+                this.formConfigRe,
+                "CP_C_REGION_CITY_ID",
+                this.modify,
+                val,
+                ["CP_C_REGION_AREA_ID"]
+              );
+              this.modifyData("CP_C_REGION_CITY_ID", "master", "r");
             },
           },
           {
-            version: '1.4',
-            style: 'popInput', // 区,N
-            width: '6',
-            colname: 'CP_C_REGION_AREA_ID',
+            version: "1.4",
+            style: "popInput", // 区,N
+            width: "6",
+            colname: "CP_C_REGION_AREA_ID",
             inputList: [],
             itemdata: {
               colid: 167091,
-              colname: 'CP_C_REGION_AREA_ID',
-              fkdisplay: 'drp',
+              colname: "CP_C_REGION_AREA_ID",
+              fkdisplay: "drp",
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: '区',
+              name: "区",
               readonly: false, // 是否可编辑，对应input   readonly属性
-              pid: '',
-              valuedata: '',
+              pid: "",
+              valuedata: "",
               refcolval: {
-                fixcolumn: 'C_UP_ID',
-                expre: 'equal',
-                srccol: 'CP_C_REGION_CITY_ID',
+                fixcolumn: "C_UP_ID",
+                expre: "equal",
+                srccol: "CP_C_REGION_CITY_ID",
               }, // 过滤配置
             },
             oneObj: (val) => {
               this.formConfigRe.formValue.CP_C_REGION_AREA_ID = val.pid;
-              this.formConfigRe.formValue.CP_C_REGION_AREA_ENAME = val.valuedata;
-              this.modifyData('CP_C_REGION_AREA_ID', 'master', 'r');
+              this.formConfigRe.formValue.CP_C_REGION_AREA_ENAME =
+                val.valuedata;
+              this.modifyData("CP_C_REGION_AREA_ID", "master", "r");
             },
           },
           {
-            style: 'input',
-            colname: 'RECEIVER_ADDRESS', // 收货人地址
-            label: '收货人地址',
-            width: '12',
+            style: "input",
+            colname: "RECEIVER_ADDRESS", // 收货人地址
+            label: "收货人地址",
+            width: "12",
             inputChange: () => {
-              this.modifyData('RECEIVER_ADDRESS', 'master', 'r');
+              this.modifyData("RECEIVER_ADDRESS", "master", "r");
             },
           },
         ],
         formValue: {
-          time: '',
-          site: '', // 智能地址值
-          RECEIVER_NAME: '', // 收货人，Y
-          RECEIVER_MOBILE: '', // 收货人手机，Y
-          RECEIVER_PHONE: '', // 收货人电话
-          RECEIVER_ZIP: '', // 收货人邮编
+          time: "",
+          site: "", // 智能地址值
+          RECEIVER_NAME: "", // 收货人，Y
+          RECEIVER_MOBILE: "", // 收货人手机，Y
+          RECEIVER_PHONE: "", // 收货人电话
+          RECEIVER_ZIP: "", // 收货人邮编
           // CONSIGN_SHIP_AMT: "", //收货人邮费
-          RECEIVER_ADDRESS: '', // 收货人地址，Y
+          RECEIVER_ADDRESS: "", // 收货人地址，Y
 
-          CP_C_REGION_PROVINCE_ID: '', // 收货人省份id，Y
-          CP_C_REGION_PROVINCE_ENAME: '', // 收货人省名称
+          CP_C_REGION_PROVINCE_ID: "", // 收货人省份id，Y
+          CP_C_REGION_PROVINCE_ENAME: "", // 收货人省名称
 
-          CP_C_REGION_CITY_ID: '', // 收货人市id，Y
-          CP_C_REGION_CITY_ENAME: '', // 收货人市明称
+          CP_C_REGION_CITY_ID: "", // 收货人市id，Y
+          CP_C_REGION_CITY_ENAME: "", // 收货人市明称
 
-          CP_C_REGION_AREA_ID: '', // 收货人区id，Y
-          CP_C_REGION_AREA_ENAME: '', // 收货人区名称
+          CP_C_REGION_AREA_ID: "", // 收货人区id，Y
+          CP_C_REGION_AREA_ENAME: "", // 收货人区名称
         },
         ruleValidate: {
           RECEIVER_NAME: [
             {
               required: true,
-              message: ' ',
-              trigger: 'blur',
+              message: " ",
+              trigger: "blur",
             },
           ],
           RECEIVER_ADDRESS: [
@@ -724,7 +824,7 @@ export default {
               validator: validateReceiveAddress,
               required: true,
               // message: ' ',
-              trigger: 'blur',
+              trigger: "blur",
             },
           ],
           RECEIVER_MOBILE: [
@@ -732,7 +832,7 @@ export default {
               validator: validatePhoneNumber,
               required: true,
               // message: ' ',
-              trigger: 'blur',
+              trigger: "blur",
             },
           ],
         },
@@ -752,22 +852,22 @@ export default {
         },
         formData: [
           {
-            label: 'SKU编码',
-            colname: 'PS_C_SKU',
-            defVal: 'PS_C_SKU_data',
-            style: 'formCompile',
-            slotName: 'spec01',
-            width: '6',
+            label: "SKU编码",
+            colname: "PS_C_SKU",
+            defVal: "PS_C_SKU_data",
+            style: "formCompile",
+            slotName: "spec01",
+            width: "6",
             isnotonly: true,
             disabled: false,
             pageSize: 10, // 每页条数
             itemdata: {
-              colid: '171332',
-              colname: 'PS_C_SKU',
-              name: 'SKU编码',
-              valuedata: '',
-              pid: '',
-              fkdisplay: 'mrp',
+              colid: "171332",
+              colname: "PS_C_SKU",
+              name: "SKU编码",
+              valuedata: "",
+              pid: "",
+              fkdisplay: "mrp",
               isfk: true,
               isnotnull: true,
               readonly: false,
@@ -806,29 +906,29 @@ export default {
         indexColumn: false,
         businessFormConfig: {
           formValue: {
-            dimData: '',
-            Num: '',
-            gbCode: '',
+            dimData: "",
+            Num: "",
+            gbCode: "",
           },
           formData: [
             {
-              version: '1.4',
-              style: 'popInput',
-              width: '6',
-              colname: 'PS_C_SKU',
+              version: "1.4",
+              style: "popInput",
+              width: "6",
+              colname: "PS_C_SKU",
               itemdata: {
-                colid: '171332',
-                colname: 'PS_C_SKU',
-                name: 'SKU编码',
-                valuedata: '',
-                pid: '',
-                fkdisplay: 'drp',
+                colid: "171332",
+                colname: "PS_C_SKU",
+                name: "SKU编码",
+                valuedata: "",
+                pid: "",
+                fkdisplay: "drp",
                 isfk: true,
                 isnotnull: true,
                 readonly: false,
               },
               oneObj: (val) => {
-                console.log('SKU编码-oneObj::', val);
+                console.log("SKU编码-oneObj::", val);
                 if (!val.pid && !val.valuedata) return;
                 const _this = this;
                 _this.searchOrderDetail(val.valuedata);
@@ -842,14 +942,14 @@ export default {
         pageShow: false, // 控制分页是否显示
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
-        width: '', // 表格宽度
-        height: '280', // 表格高度
+        width: "", // 表格宽度
+        height: "280", // 表格高度
         border: true, // 是否显示纵向边框
         total: 1, // 设置总条数
         pageSizeOpts: [10, 30, 45, 60], // 每页条数切换的配置
         pageSize: 10, // 每页条数
-        isShowSelection: true, // 多选框
-        indexColumn: true, // 序号
+        // isShowSelection: true, // 多选框
+        // indexColumn: true, // 序号
         selectData: [], // 选中的数据
         deleteData: [], // 删除的数据
         addData: [], // 添加的数据
@@ -857,52 +957,64 @@ export default {
         totalData: [], // 合计
         columns: [
           {
-            title: 'SKU编码', // SKU编码
-            key: 'PS_C_SKU_ECODE',
-            dataAcessKey: 'PS_C_SKU_ECODE',
+            key: 'selection',
+            type: 'selection',
+            width: '50',
+            align: 'center',
           },
           {
-            title: 'SKU名称', // SKU名称
-            key: 'PS_C_SKU_ENAME',
-            dataAcessKey: 'PS_C_SKU_ENAME',
+            title: "序号",
+            key: "index",
+            type: "index",
+            align: 'center',
           },
           {
-            title: 'SPU编码', // SPU编码
-            key: 'PS_C_PRO_ECODE',
-            dataAcessKey: 'PS_C_PRO_ECODE',
+            title: "SKU编码", // SKU编码
+            key: "PS_C_SKU_ECODE",
+            dataAcessKey: "PS_C_SKU_ECODE",
           },
           {
-            title: 'SPU名称', // SPU名称
-            key: 'PS_C_PRO_ENAME',
-            dataAcessKey: 'PS_C_PRO_ENAME',
+            title: "SKU名称", // SKU名称
+            key: "PS_C_SKU_ENAME",
+            dataAcessKey: "PS_C_SKU_ENAME",
           },
           {
-            title: '零售价', // 零售价
-            key: 'PRICE',
-            dataAcessKey: 'PRICE',
+            title: "SPU编码", // SPU编码
+            key: "PS_C_PRO_ECODE",
+            dataAcessKey: "PS_C_PRO_ECODE",
           },
           {
-            title: $i18n.t('table_label.unitPrice'), // 成交单价
-            key: 'PRICE_ACTUAL',
+            title: "SPU名称", // SPU名称
+            key: "PS_C_PRO_ENAME",
+            dataAcessKey: "PS_C_PRO_ENAME",
+          },
+          {
+            title: "零售价", // 零售价
+            key: "PRICE",
+            dataAcessKey: "PRICE",
+          },
+          {
+            title: $i18n.t("table_label.unitPrice"), // 成交单价
+            key: "PRICE_ACTUAL",
             render: (h, params) => {
               const self = this;
               return h(
-                'div',
+                "div",
                 {
                   style: {
-                    width: '100%',
-                    display: 'flex',
-                    alignitems: 'center',
-                    justifyContent: 'space-between',
+                    width: "100%",
+                    display: "flex",
+                    alignitems: "center",
+                    justifyContent: "space-between",
                   },
                 },
                 [
-                  h('Input', {
-                    class: 'isNone',
+                  h("Input", {
+                    class: "isNone",
                     style: {
-                      width: '150',
-                      height: '100%',
-                      'text-align': 'center',
+                      width: "150",
+                      height: "100%",
+                      "text-align": "center",
                     },
                     props: {
                       value: params.row.PRICE_ACTUAL,
@@ -912,7 +1024,7 @@ export default {
                     },
 
                     on: {
-                      'on-change': (e) => {
+                      "on-change": (e) => {
                         let inputPA = Number(e.target.value);
                         params.row.PRICE_ACTUAL = inputPA; // 成交单价赋值
                         if (params.row.QTY && inputPA) {
@@ -921,8 +1033,18 @@ export default {
                           // 公式：【PRICE/PRICE_ACTUAL * QTY - 0 - 0 + ADJUST_AMT = REAL_AMT】
                           // 成交金额 = 零售价 * 数量 - 商品优惠 - 订单优惠 + 调整金额
                           // 调整金额 = (成交金额 + 订单优惠 + 商品优惠) - (零售价 * 数量)
-                          params.row.REAL_AMT = (inputPA * params.row.QTY - 0 - 0 + params.row.ADJUST_AMT).toFixed(2);
-                          params.row.ADJUST_AMT = (params.row.REAL_AMT + 0 + 0 - inputPA * params.row.QTY).toFixed(2);
+                          params.row.REAL_AMT = (
+                            inputPA * params.row.QTY -
+                            0 -
+                            0 +
+                            params.row.ADJUST_AMT
+                          ).toFixed(2);
+                          params.row.ADJUST_AMT = (
+                            params.row.REAL_AMT +
+                            0 +
+                            0 -
+                            inputPA * params.row.QTY
+                          ).toFixed(2);
                         } else {
                           params.row.REAL_AMT = 0;
                           params.row.ADJUST_AMT = 0;
@@ -938,28 +1060,28 @@ export default {
             },
           },
           {
-            title: $i18n.t('table_label.quantities'), // 数量
-            key: 'QTY',
-            dataAcessKey: 'QTY',
+            title: $i18n.t("table_label.quantities"), // 数量
+            key: "QTY",
+            dataAcessKey: "QTY",
             render: (h, params) => {
               const self = this;
               return h(
-                'div',
+                "div",
                 {
                   style: {
-                    width: '100%',
-                    display: 'flex',
-                    alignitems: 'center',
-                    justifyContent: 'space-between',
+                    width: "100%",
+                    display: "flex",
+                    alignitems: "center",
+                    justifyContent: "space-between",
                   },
                 },
                 [
-                  h('Input', {
-                    class: 'isNone',
+                  h("Input", {
+                    class: "isNone",
                     style: {
-                      width: '150',
-                      height: '100%',
-                      'text-align': 'center',
+                      width: "150",
+                      height: "100%",
+                      "text-align": "center",
                     },
                     props: {
                       value: params.row.QTY,
@@ -968,13 +1090,23 @@ export default {
                     },
 
                     on: {
-                      'on-change': (e) => {
+                      "on-change": (e) => {
                         // 输入数量：修改成交金额、调整金额即可
                         let inputQTY = Number(e.target.value);
                         params.row.QTY = inputQTY;
                         if (params.row.PRICE_ACTUAL && inputQTY) {
-                          params.row.REAL_AMT = (params.row.PRICE_ACTUAL * inputQTY - 0 - 0 + params.row.ADJUST_AMT).toFixed(2);
-                          params.row.ADJUST_AMT = (params.row.REAL_AMT + 0 + 0 - params.row.PRICE_ACTUAL * inputQTY).toFixed(2);
+                          params.row.REAL_AMT = (
+                            params.row.PRICE_ACTUAL * inputQTY -
+                            0 -
+                            0 +
+                            params.row.ADJUST_AMT
+                          ).toFixed(2);
+                          params.row.ADJUST_AMT = (
+                            params.row.REAL_AMT +
+                            0 +
+                            0 -
+                            params.row.PRICE_ACTUAL * inputQTY
+                          ).toFixed(2);
                         } else {
                           params.row.REAL_AMT = 0;
                           params.row.ADJUST_AMT = 0;
@@ -989,28 +1121,28 @@ export default {
             },
           },
           {
-            title: $i18n.t('table_label.transactionAmount'), // 成交金额
-            key: 'REAL_AMT',
-            dataAcessKey: 'REAL_AMT',
+            title: $i18n.t("table_label.transactionAmount"), // 成交金额
+            key: "REAL_AMT",
+            dataAcessKey: "REAL_AMT",
             render: (h, params) => {
               const self = this;
               return h(
-                'div',
+                "div",
                 {
                   style: {
-                    width: '100%',
-                    display: 'flex',
-                    alignitems: 'center',
-                    justifyContent: 'space-between',
+                    width: "100%",
+                    display: "flex",
+                    alignitems: "center",
+                    justifyContent: "space-between",
                   },
                 },
                 [
-                  h('Input', {
-                    class: 'isNone',
+                  h("Input", {
+                    class: "isNone",
                     style: {
-                      width: '150',
-                      height: '100%',
-                      'text-align': 'center',
+                      width: "150",
+                      height: "100%",
+                      "text-align": "center",
                     },
                     props: {
                       value: params.row.REAL_AMT,
@@ -1020,15 +1152,23 @@ export default {
                     },
 
                     on: {
-                      'on-change': (e) => {
+                      "on-change": (e) => {
                         // 输入成交金额：修改单价/零售价、调整金额即可
                         let inputRA = Number(e.target.value);
                         params.row.REAL_AMT = inputRA;
                         if (params.row.QTY && inputRA) {
                           // 单价 = (成交金额 - 调整金额 + 订单优惠 + 商品优惠) / 数量
-                          params.row.PRICE_ACTUAL = ((inputRA - params.row.ADJUST_AMT + 0 + 0) / params.row.QTY).toFixed(2);
+                          params.row.PRICE_ACTUAL = (
+                            (inputRA - params.row.ADJUST_AMT + 0 + 0) /
+                            params.row.QTY
+                          ).toFixed(2);
                           params.row.PRICE = params.row.PRICE_ACTUAL;
-                          params.row.ADJUST_AMT = (inputRA + 0 + 0 - params.row.PRICE_ACTUAL * params.row.QTY).toFixed(2);
+                          params.row.ADJUST_AMT = (
+                            inputRA +
+                            0 +
+                            0 -
+                            params.row.PRICE_ACTUAL * params.row.QTY
+                          ).toFixed(2);
                         } else {
                           params.row.REAL_AMT = 0;
                           params.row.ADJUST_AMT = 0;
@@ -1043,57 +1183,61 @@ export default {
             },
           },
           {
-            title: $i18n.t('table_label.adjustment_amount'), // 调整金额
-            key: 'ADJUST_AMT',
-            dataAcessKey: 'ADJUST_AMT',
-            render: (h, params) => h('span', {}, Number(params.row.ADJUST_AMT || 0).toFixed(2)),
+            title: $i18n.t("table_label.adjustment_amount"), // 调整金额
+            key: "ADJUST_AMT",
+            dataAcessKey: "ADJUST_AMT",
+            render: (h, params) =>
+              h("span", {}, Number(params.row.ADJUST_AMT || 0).toFixed(2)),
           },
         ],
       },
       // tab切换配置
       labelList: [
         {
-          label: $i18n.t('panel_label.order_detailed'), // 订单明细
-          value: '1',
+          label: $i18n.t("panel_label.order_detailed"), // 订单明细
+          value: "1",
           isShow: true,
         },
       ],
-      labelDefaultValue: '1', // 设置tab默认值
+      labelDefaultValue: "1", // 设置tab默认值
       orderNo: {
-        refFuns: 'confirmFun',
-        confirmTitle: $i18n.t('modalTitle.matrixEntry'), // 矩阵录入
-        titleAlign: 'center', // 设置标题是否居中 center left
-        width: '800',
+        refFuns: "confirmFun",
+        confirmTitle: $i18n.t("modalTitle.matrixEntry"), // 矩阵录入
+        titleAlign: "center", // 设置标题是否居中 center left
+        width: "800",
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
         draggable: true, // 是否可以拖动
         mask: false, // 是否显示遮罩层
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
-        name: 'orderNo', // 组件名称
-        url: 'modal/orderCenter/changeRemark',
+        name: "orderNo", // 组件名称
+        url: "modal/orderCenter/changeRemark",
       },
     };
   },
   watch: {
-    'formConfigBase.formValue.PAY_TYPE': {
+    "formConfigBase.formValue.PAY_TYPE": {
       handler(newValue, oldVal) {
         if (newValue == 2) {
-          this.querItem('COLLECT_AMT').style = 'input';
-          this.querItem('SERVICE_AMT').style = 'input';
+          this.querItem("COLLECT_AMT").style = "input";
+          this.querItem("SERVICE_AMT").style = "input";
         } else {
-          this.querItem('COLLECT_AMT').style = null;
-          this.querItem('SERVICE_AMT').style = null;
+          this.querItem("COLLECT_AMT").style = null;
+          this.querItem("SERVICE_AMT").style = null;
         }
       },
     },
   },
   computed: {
     ID() {
-      return this.$route.params.customizedModuleId && this.$route.params.customizedModuleId == 'New' ? '-1' : '';
+      return this.$route.params.customizedModuleId &&
+        this.$route.params.customizedModuleId == "New"
+        ? "-1"
+        : "";
     },
     sourceId() {
-      return this.$route.query.sourceId * 1 || '';
+      return this.$route.query.sourceId * 1 || "";
     },
     copyType() {
       return this.$route.query.copyType * 1 || 0;
@@ -1106,13 +1250,13 @@ export default {
     this.relationShip();
   },
   async mounted() {
-    this.querItem('PAY_TYPE').options = [
+    this.querItem("PAY_TYPE").options = [
       {
-        label: '在线支付',
+        label: "在线支付",
         value: 1,
       },
       {
-        label: '货到付款',
+        label: "货到付款",
         value: 2,
       },
     ];
@@ -1129,17 +1273,26 @@ export default {
       }
       const self = this;
       this.loading = true;
-      const data = await this.$OMS2.omsUtils.getObject('OC_B_ORDER_VIRTUAL_TABLE', id);
+      const data = await this.$OMS2.omsUtils.getObject(
+        "OC_B_ORDER_VIRTUAL_TABLE",
+        id
+      );
       let base, re;
       for (const it of data.addcolums) {
-        if (it.parentname == '(OC_B_ORDER_VIRTUAL_TABLE.ID+300)') {
+        if (it.parentname == "(OC_B_ORDER_VIRTUAL_TABLE.ID+300)") {
           re = it.childs;
-        } else if (it.parentname == '(OC_B_ORDER_VIRTUAL_TABLE.ID+10)') {
+        } else if (it.parentname == "(OC_B_ORDER_VIRTUAL_TABLE.ID+10)") {
           base = it.childs;
         }
       }
-      self.formConfigBase = this.$OMS2.omsUtils.initFormConfig(base, self.formConfigBase);
-      self.formConfigRe = this.$OMS2.omsUtils.initFormConfig(re, self.formConfigRe);
+      self.formConfigBase = this.$OMS2.omsUtils.initFormConfig(
+        base,
+        self.formConfigBase
+      );
+      self.formConfigRe = this.$OMS2.omsUtils.initFormConfig(
+        re,
+        self.formConfigRe
+      );
       setTimeout(() => {
         this.loading = false;
       }, 100);
@@ -1205,19 +1358,27 @@ export default {
         ]; */
         // self.querItem('CP_C_LOGISTICS_ID').itemdata.pid = data.CP_C_LOGISTICS_ID;
         // self.querItem('CP_C_LOGISTICS_ID').itemdata.valuedata = data.CP_C_LOGISTICS_ENAME;
-        self.formConfigBase = this.$OMS2.omsUtils.transformForm(data, self.formConfigBase, self.inputArrBase, self.drpArrBase, '_ENAME');
+        self.formConfigBase = this.$OMS2.omsUtils.transformForm(
+          data,
+          self.formConfigBase,
+          self.inputArrBase,
+          self.drpArrBase,
+          "_ENAME"
+        );
         self.drpArrBase.forEach((key) => {
           self.formConfigBase.formValue[key] = self.querItem(key).itemdata.pid;
-          self.formConfigBase.formValue[key.replace('_ID', '_ENAME')] = self.querItem(key).itemdata.valuedata;
+          self.formConfigBase.formValue[
+            key.replace("_ID", "_ENAME")
+          ] = self.querItem(key).itemdata.valuedata;
         });
         self.formConfigBase.formData[1].inputList = [
           {
             childs: [
               {
-                colname: 'CP_C_PHY_WAREHOUSE_ID',
+                colname: "CP_C_PHY_WAREHOUSE_ID",
                 refobjid: this.formConfigBase.formValue.CP_C_SHOP_ID,
                 valuedata: this.formConfigBase.formValue.CP_C_SHOP_ENAME,
-                name: '店铺',
+                name: "店铺",
               },
             ],
           },
@@ -1226,23 +1387,45 @@ export default {
           {
             childs: [
               {
-                colname: 'CP_C_LOGISTICS_ID',
+                colname: "CP_C_LOGISTICS_ID",
                 refobjid: this.formConfigBase.formValue.CP_C_PHY_WAREHOUSE_ID,
-                valuedata: this.formConfigBase.formValue.CP_C_PHY_WAREHOUSE_ENAME,
-                name: '发货仓库',
+                valuedata: this.formConfigBase.formValue
+                  .CP_C_PHY_WAREHOUSE_ENAME,
+                name: "发货仓库",
               },
             ],
           },
         ];
         // self.relationShipPlus();
 
-        const inputArrRe = ['RECEIVER_NAME', 'RECEIVER_MOBILE', 'RECEIVER_PHONE', 'RECEIVER_ZIP', 'RECEIVER_ADDRESS'];
-        const drpArrRe = ['CP_C_REGION_PROVINCE_ID', 'CP_C_REGION_CITY_ID', 'CP_C_REGION_AREA_ID'];
-        self.formConfigRe = this.$OMS2.omsUtils.transformForm(data, self.formConfigRe, inputArrRe, drpArrRe, '_ENAME');
+        const inputArrRe = [
+          "RECEIVER_NAME",
+          "RECEIVER_MOBILE",
+          "RECEIVER_PHONE",
+          "RECEIVER_ZIP",
+          "RECEIVER_ADDRESS",
+        ];
+        const drpArrRe = [
+          "CP_C_REGION_PROVINCE_ID",
+          "CP_C_REGION_CITY_ID",
+          "CP_C_REGION_AREA_ID",
+        ];
+        self.formConfigRe = this.$OMS2.omsUtils.transformForm(
+          data,
+          self.formConfigRe,
+          inputArrRe,
+          drpArrRe,
+          "_ENAME"
+        );
         self.relationShip();
         drpArrRe.forEach((key) => {
-          self.formConfigRe.formValue[key] = self.querItem(key, 'formConfigRe').itemdata.pid;
-          self.formConfigRe.formValue[key.replace('_ID', '_ENAME')] = self.querItem(key, 'formConfigRe').itemdata.valuedata;
+          self.formConfigRe.formValue[key] = self.querItem(
+            key,
+            "formConfigRe"
+          ).itemdata.pid;
+          self.formConfigRe.formValue[
+            key.replace("_ID", "_ENAME")
+          ] = self.querItem(key, "formConfigRe").itemdata.valuedata;
         });
       } else {
         self.$Message.warning(res.data.message);
@@ -1279,30 +1462,53 @@ export default {
       const self = this;
       /* =========== 保存校验 start =========== */
       if (self.sourceId) {
-        self.modify.master = Object.assign(self.formConfigBase.formValue, self.formConfigRe.formValue);
+        self.modify.master = Object.assign(
+          self.formConfigBase.formValue,
+          self.formConfigRe.formValue
+        );
       }
       const masterArr = Object.keys(self.modify.master);
       const subInfo = self.jordanTableConfig.data;
       // 未修改，不提示，不操作
       if (!masterArr.length && !subInfo.length) return false;
-      const valueArr = ['SOURCE_CODE', 'PAY_TYPE', 'RECEIVER_NAME', 'RECEIVER_MOBILE', 'RECEIVER_ADDRESS'];
+      const valueArr = [
+        "SOURCE_CODE",
+        "PAY_TYPE",
+        "RECEIVER_NAME",
+        "RECEIVER_MOBILE",
+        "RECEIVER_ADDRESS",
+      ];
       const payType = self.modify.master.PAY_TYPE;
-      if (payType == '2') {
-        if (valueArr.includes('COLLECT_AMT')) return;
-        else valueArr.splice(1, 0, 'COLLECT_AMT');
+      if (payType == "2") {
+        if (valueArr.includes("COLLECT_AMT")) return;
+        else valueArr.splice(1, 0, "COLLECT_AMT");
       } else {
-        if (valueArr.includes('COLLECT_AMT')) {
-          let no = valueArr.indexOf('COLLECT_AMT');
+        if (valueArr.includes("COLLECT_AMT")) {
+          let no = valueArr.indexOf("COLLECT_AMT");
           valueArr.splice(no, 1);
         }
         self.modify.master.PAY_TYPE = self.formConfigBase.formValue.PAY_TYPE; // 保存入参默认值
       }
       self.modify.master.PAY_TIME = self.formConfigBase.formValue.PAY_TIME; // 保存入参默认值
-      const drpArr = ['CP_C_SHOP_ID', 'CP_C_PHY_WAREHOUSE_ID', 'CP_C_REGION_PROVINCE_ID', 'CP_C_REGION_CITY_ID'];
+      const drpArr = [
+        "CP_C_SHOP_ID",
+        "CP_C_PHY_WAREHOUSE_ID",
+        "CP_C_REGION_PROVINCE_ID",
+        "CP_C_REGION_CITY_ID",
+      ];
       let formBoth = {};
-      formBoth.formData = self.formConfigBase.formData.concat(self.formConfigRe.formData);
-      formBoth.formValue = Object.assign(self.formConfigBase.formValue, self.formConfigRe.formValue);
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(formBoth, valueArr, drpArr);
+      formBoth.formData = self.formConfigBase.formData.concat(
+        self.formConfigRe.formData
+      );
+      formBoth.formValue = Object.assign(
+        self.formConfigBase.formValue,
+        self.formConfigRe.formValue
+      );
+      const mes = this.$OMS2.omsUtils.validatorNotEmpty(
+        formBoth,
+        valueArr,
+        drpArr
+      );
       if (mes !== 1) {
         this.$message.error(mes);
         return false;
@@ -1311,54 +1517,61 @@ export default {
       const valiObj = {
         mobile: {
           rule: /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/,
-          tip: '',
-          msg: '手机号格式不正确！',
+          tip: "",
+          msg: "手机号格式不正确！",
         },
         anyCharacter: {
           rule: /^.{0,100}$/,
-          tip: '',
-          msg: '存在超长录入！',
+          tip: "",
+          msg: "存在超长录入！",
         },
         sellerMemoVali: {
           rule: /^.{0,100}$/,
-          tip: '',
-          msg: '卖家备注超长！',
+          tip: "",
+          msg: "卖家备注超长！",
         },
         receiveNameVali: {
           rule: /^.{0,100}$/,
-          tip: '',
-          msg: '收货人超长！',
+          tip: "",
+          msg: "收货人超长！",
         },
         receivePhoneVali: {
           rule: /^.{0,50}$/,
-          tip: '',
-          msg: '收货人电话超长！',
+          tip: "",
+          msg: "收货人电话超长！",
         },
         receiveZipVali: {
           rule: /^.{0,20}$/,
-          tip: '',
-          msg: '收货人邮编超长！',
+          tip: "",
+          msg: "收货人邮编超长！",
         },
       };
       const formVali = JSON.parse(JSON.stringify(self.modify.master));
-      const validator = { SELLER_MEMO: 'sellerMemoVali', RECEIVER_MOBILE: 'mobile', RECEIVER_NAME: 'receiveNameVali', RECEIVER_PHONE: 'receivePhoneVali', RECEIVER_ZIP: 'receiveZipVali' };
+      const validator = {
+        SELLER_MEMO: "sellerMemoVali",
+        RECEIVER_MOBILE: "mobile",
+        RECEIVER_NAME: "receiveNameVali",
+        RECEIVER_PHONE: "receivePhoneVali",
+        RECEIVER_ZIP: "receiveZipVali",
+      };
       for (const key in validator) {
         let flag;
-        formVali[key] && (flag = valiObj[validator[key]].rule.test(formVali[key]));
+        formVali[key] &&
+          (flag = valiObj[validator[key]].rule.test(formVali[key]));
         if (formVali[key] && !flag) {
           self.$Message.warning(valiObj[validator[key]].msg);
           return false;
         }
       }
       if (!subInfo.length) {
-        this.$message.error('订单明细不能为空！');
+        this.$message.error("订单明细不能为空！");
         return false;
       }
       /* =========== 保存校验 end =========== */
       let mainTable = JSON.parse(JSON.stringify(self.modify.master));
-      mainTable.ID = self.sourceId || '-1';
+      mainTable.ID = self.sourceId || "-1";
       mainTable.COPY_REASON_TYPE = self.copyReason || 0;
-      if (!self.formConfigBase.formValue.SHIP_AMT) mainTable.SHIP_AMT = '0';
+      if (!self.formConfigBase.formValue.SHIP_AMT) mainTable.SHIP_AMT = "0";
       if (mainTable.PAY_TYPE == 1) {
         // 切换为在线支付保存订单时，代收货款和服务费字段不应该落库
         mainTable.COLLECT_AMT && delete mainTable.COLLECT_AMT;
@@ -1368,7 +1581,7 @@ export default {
         OC_B_ORDER: mainTable,
         OC_B_ORDER_ITEMS: subInfo,
       };
-      console.log('param::', param);
+      console.log("param::", param);
       // return false
       this.loading = true;
       const {
@@ -1379,7 +1592,7 @@ export default {
       this.loading = false;
       if (code === 0) {
         this.backable = true;
-        self.$Message.success(message || 'no message！');
+        self.$Message.success(message || "no message！");
         self.modify.master = {};
         self.jordanTableConfig.data = [];
         // 跳转详情
@@ -1388,10 +1601,10 @@ export default {
         setTimeout(() => {
           this.$comUtils.tabCloseAppoint(this);
           this.$destroy(true);
-          this.$store.commit('global/tabOpen', {
-            type: 'C',
-            customizedModuleName: 'OC_B_ORDER',
-            label: '零售发货单详情',
+          this.$store.commit("global/tabOpen", {
+            type: "C",
+            customizedModuleName: "OC_B_ORDER",
+            label: "零售发货单详情",
             customizedModuleId: data,
           });
         }, 200);
@@ -1409,12 +1622,13 @@ export default {
     modifyData(ecode, obj, type) {
       const self = this;
       if (!self.watchChange) return;
-      self.modify[obj][ecode] = self[type ? 'formConfigRe' : 'formConfigBase'].formValue[ecode];
+      self.modify[obj][ecode] =
+        self[type ? "formConfigRe" : "formConfigBase"].formValue[ecode];
     },
     // 时间戳格式化
     formatDate(time) {
       const date = new Date(time);
-      return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
+      return dateUtil.getFormatDate(date, "yyyy-MM-dd HH:mm:ss");
     },
     keyDown() {},
     // 生成'合计'行
@@ -1429,7 +1643,7 @@ export default {
       });
       setTimeout(() => {
         self.jordanTableConfig.totalData.push({
-          selection: `${$i18n.t('other.total')}:`, // 合计
+          selection: `${$i18n.t("other.total")}:`, // 合计
           REAL_AMT: _.ceil(amt, 2), // 精确到两位小数
           QTY: qty,
         });
@@ -1448,25 +1662,34 @@ export default {
     async getWarehouse(id) {
       const _this = this;
       const formData = new FormData();
-      formData.append('shopId', id * 1);
+      formData.append("shopId", id * 1);
       const res = await _this.service.orderCenter
         .queryPhyWareHouseList(formData)
         .then((res) => {
           if (res.data.code === 0) {
-            _this.querItem('CP_C_PHY_WAREHOUSE_ID').options = res.data.data;
+            _this.querItem("CP_C_PHY_WAREHOUSE_ID").options = res.data.data;
           }
         })
         .catch(() => {
-          console.log(res.data.message || 'catch!');
+          console.log(res.data.message || "catch!");
         });
     },
     // 省市区联动查询-inputList填充
     relationShip() {
-      this.querItem('CP_C_REGION_CITY_ID', 'formConfigRe').inputList.push(this.querItem('CP_C_REGION_PROVINCE_ID', 'formConfigRe').itemdata);
-      this.querItem('CP_C_REGION_AREA_ID', 'formConfigRe').inputList.push(this.querItem('CP_C_REGION_CITY_ID', 'formConfigRe').itemdata);
+      this.querItem("CP_C_REGION_CITY_ID", "formConfigRe").inputList.push(
+        this.querItem("CP_C_REGION_PROVINCE_ID", "formConfigRe").itemdata
+      );
+      this.querItem("CP_C_REGION_AREA_ID", "formConfigRe").inputList.push(
+        this.querItem("CP_C_REGION_CITY_ID", "formConfigRe").itemdata
+      );
     },
     // 店铺\仓库\物流联动查询-inputList填充
-    relationShipPlus(obj = { CP_C_PHY_WAREHOUSE_ID: 'CP_C_SHOP_ID', CP_C_LOGISTICS_ID: 'CP_C_PHY_WAREHOUSE_ID' }) {
+    relationShipPlus(
+      obj = {
+        CP_C_PHY_WAREHOUSE_ID: "CP_C_SHOP_ID",
+        CP_C_LOGISTICS_ID: "CP_C_PHY_WAREHOUSE_ID",
+      }
+    ) {
       for (const key in obj) {
         let inputList = [
           {
@@ -1474,8 +1697,10 @@ export default {
               {
                 colname: key,
                 refobjid: this.formConfigBase.formValue[obj[key]],
-                valuedata: this.formConfigBase.formValue[obj[key.replace('_ID', '_ENAME')]],
-                name: key == 'CP_C_PHY_WAREHOUSE_ID' ? '店铺' : '发货仓库',
+                valuedata: this.formConfigBase.formValue[
+                  obj[key.replace("_ID", "_ENAME")]
+                ],
+                name: key == "CP_C_PHY_WAREHOUSE_ID" ? "店铺" : "发货仓库",
               },
             ],
           },
@@ -1488,7 +1713,7 @@ export default {
      * @key 变更字段
      * @drpArr 待清空的drp类型
      */
-    emptyData(form, key = '', before, val, drpArr = []) {
+    emptyData(form, key = "", before, val, drpArr = []) {
       const fD = form.formData;
       const fV = form.formValue;
       let flag = false;
@@ -1499,10 +1724,10 @@ export default {
           }
         }
         if (!flag && drpArr.includes(element.colname)) {
-          element.itemdata.valuedata = '';
-          element.itemdata.pid = '';
-          fV[element.colname] = '';
-          this.modifyData(element.colname, 'master', 'r');
+          element.itemdata.valuedata = "";
+          element.itemdata.pid = "";
+          fV[element.colname] = "";
+          this.modifyData(element.colname, "master", "r");
         }
       });
       form.formData = fD;
@@ -1510,13 +1735,15 @@ export default {
     },
     // 根据colname遍历查询formData子项
     querItem(key, type) {
-      return this[type ? type : 'formConfigBase'].formData.find((item) => item.colname == key);
+      return this[type ? type : "formConfigBase"].formData.find(
+        (item) => item.colname == key
+      );
     },
     // 根据'sku编码'ID，查询添加订单明细
     async searchOrderDetail(skuCode) {
       const self = this;
       const IDS = [self.sourceId || -1]; // 后端要数组类型
-      const ecodes = skuCode.split(',');
+      const ecodes = skuCode.split(",");
       self.loading = true;
       const {
         data: { code, data, message },
@@ -1529,18 +1756,18 @@ export default {
         if (data[0].WHETHER_VIRTUAL_PRODUCTION) {
           // 虚拟字段的处理
           self.$Modal.info({
-            title: $i18n.t('modalTitle.tips'), // 提示
+            title: $i18n.t("modalTitle.tips"), // 提示
             // content: `${skuCode}条码为虚拟条码，是否继续添加？`,
             content: data[0].VIRTUAL_GOODS_NOTICE,
             mask: true,
             showCancel: true,
-            okText: $i18n.t('btn.increase'), // 添加
-            cancelText: $i18n.t('common.cancel'), // 取消
+            okText: $i18n.t("btn.increase"), // 添加
+            cancelText: $i18n.t("common.cancel"), // 取消
             onOk: () => {
               self.insertOrderDetail(data);
             },
             onCancel: () => {
-              self.$emit('closeActionDialog', false);
+              self.$emit("closeActionDialog", false);
             },
           });
         } else {
@@ -1561,6 +1788,8 @@ export default {
       const self = this;
       const data = dataArr;
       const allDa = self.jordanTableConfig.data;
+      data.length && data.map((it) => (it.pryKey = it.OOID || "" + "_" + it.PS_C_SKU_ECODE));
+      allDa.length && allDa.map((it) => (it.pryKey = it.OOID || "" + "_" + it.PS_C_SKU_ECODE));
       let pryKeyArr = [];
       if (!allDa.length) {
         // 当前为空，则直接新增
@@ -1569,10 +1798,10 @@ export default {
         return;
       }
       data.forEach((it) => {
-        it.pryKey = it.OOID || '' + '_' + it.PS_C_SKU_ECODE;
+        it.pryKey && (it.pryKey = it.OOID || "" + "_" + it.PS_C_SKU_ECODE);
         allDa.forEach((item) => {
-          item.pryKey = item.OOID || '' + '_' + item.PS_C_SKU_ECODE;
-          pryKeyArr = this.$OMS2.omsUtils.sonList(allDa, 'pryKey');
+          !item.pryKey && (item.pryKey = item.OOID || "" + "_" + item.PS_C_SKU_ECODE);
+          pryKeyArr = this.$OMS2.omsUtils.sonList(allDa, "pryKey");
           if (!it.OOID && item.pryKey == it.pryKey) {
             // 1.非复制的且已存在该条明细(已经存在的明细都是刚刚新增的，不是复制带出来的，且，即将新增的是已经存在的，累加)
             item.QTY += it.QTY;
@@ -1586,7 +1815,7 @@ export default {
             self.jordanTableConfig.data.push(it);
             // self.jordanTableConfig.addData.push(it);
           } else {
-            console.log('other!');
+            console.log("other!");
           }
         });
       });
@@ -1617,30 +1846,34 @@ export default {
       const allDa = self.jordanTableConfig.data;
       const selDa = self.jordanTableConfig.selectData;
       if (!selDa.length) {
-        this.$OMS2.omsUtils.msgTips(self, 'warning', 'a8');
+        this.$OMS2.omsUtils.msgTips(self, "warning", "a8");
         return;
       }
       // 取差集展示：
-      self.jordanTableConfig.data = this.$OMS2.omsUtils.getDifferentArr(allDa, selDa, 'pryKey');
+      self.jordanTableConfig.data = this.$OMS2.omsUtils.getDifferentArr(
+        allDa,
+        selDa,
+        "pryKey"
+      );
       // const selectKey = this.$OMS2.omsUtils.sonList(selDa, 'pryKey');
       self.jordanTableConfig.selectData = [];
     },
     tableImport() {
       const componentData = {
         isAction: false,
-        tableName: 'OC_B_ORDER_VIRTUAL_TABLE',
-        webname: 'import',
-        tempApi: '/p/cs/oc/b/oms/v1/ocborder/downLoad',
-        okApi: '/p/cs/oc/b/oms/v1/ocborder/importOrderItemSkuInfo',
+        tableName: "OC_B_ORDER_VIRTUAL_TABLE",
+        webname: "import",
+        tempApi: "/p/cs/oc/b/oms/v1/ocborder/downLoad",
+        okApi: "/p/cs/oc/b/oms/v1/ocborder/importOrderItemSkuInfo",
         returnData: this.importReturnData,
       };
       this.importTable.componentData = componentData;
-      this.$children.find((item) => item.name === 'importTable').openConfirm();
+      this.$children.find((item) => item.name === "importTable").openConfirm();
     },
     importReturnData(data) {
       if (!data) return;
       this.insertOrderDetail(data);
-      console.log('importReturnData::', data);
+      console.log("importReturnData::", data);
     },
     /* ------------------- 子表事件 part end ------------------- */
 
@@ -1655,12 +1888,12 @@ export default {
       const masterArr = Object.keys(self.modify.master);
       if (masterArr.length) {
         this.$Modal.info({
-          title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          title: $i18n.t("modalTitle.tips"), // 提示
+          content: "当前修改未保存，确定返回？",
           mask: true,
           showCancel: true,
-          okText: $i18n.t('common.determine'), // 确定
-          cancelText: $i18n.t('common.cancel'), // 取消
+          okText: $i18n.t("common.determine"), // 确定
+          cancelText: $i18n.t("common.cancel"), // 取消
           onOk: () => {
             self.onOk();
           },
@@ -1674,19 +1907,19 @@ export default {
       this.$destroy(true);
       if (this.$route.query.spuid) {
         // 保留，可能要返回退换货 ？
-        this.$store.commit('customize/TabOpen', {
-          id: '2307',
-          type: 'action',
-          name: 'ORDERMANAGER',
-          label: '零售发货单',
+        this.$store.commit("customize/TabOpen", {
+          id: "2307",
+          type: "action",
+          name: "ORDERMANAGER",
+          label: "零售发货单",
           back: true,
         });
       } else {
-        this.$store.commit('customize/TabOpen', {
-          id: '2307',
-          type: 'action',
-          name: 'ORDERMANAGER',
-          label: '零售发货单',
+        this.$store.commit("customize/TabOpen", {
+          id: "2307",
+          type: "action",
+          name: "ORDERMANAGER",
+          label: "零售发货单",
           back: true,
         });
       }
@@ -1702,25 +1935,32 @@ export default {
         options.forEach((i) => {
           // 由于默认物流切到自动配送后，可能会选中与当前默认物流公司重复而被前端去重，故改为由后端做去重处理
           // if (!storeIds.includes(Number(i.ID))) {
-          rows.push({ ID: '-1', CP_C_LOGISTICS_ID: Number(i.ID), CP_C_LOGISTICS_ENAME: i.Label });
+          rows.push({
+            ID: "-1",
+            CP_C_LOGISTICS_ID: Number(i.ID),
+            CP_C_LOGISTICS_ENAME: i.Label,
+          });
           // }
           pid.push(i.ID);
           valuedata.push(i.Label);
         });
       }
       this.jordanTableConfig.addData = rows;
-      const obj = pid.length && { pid: pid.join(','), valuedata: valuedata.join(',') };
-      this.setFormValue(this.formConfigDetail, 'PS_C_SKU', obj || '');
+      const obj = pid.length && {
+        pid: pid.join(","),
+        valuedata: valuedata.join(","),
+      };
+      this.setFormValue(this.formConfigDetail, "PS_C_SKU", obj || "");
     },
     setFormValue(formConfig, field, data = {}) {
       const { formValue } = formConfig;
       const { pid, valuedata } = data;
-      formValue[`${field}_ID`] = pid || '';
-      formValue[`${field}_ENAME`] = valuedata || '';
-      const obj = this.querItem(field, 'formConfigDetail');
+      formValue[`${field}_ID`] = pid || "";
+      formValue[`${field}_ENAME`] = valuedata || "";
+      const obj = this.querItem(field, "formConfigDetail");
       if (!obj) return;
-      obj.itemdata.pid = pid || '';
-      obj.itemdata.valuedata = valuedata || '';
+      obj.itemdata.pid = pid || "";
+      obj.itemdata.valuedata = valuedata || "";
     },
     /**
      * 获取下拉项
@@ -1737,20 +1977,25 @@ export default {
         startindex,
         range: 10,
       };
-      query.append('searchdata', JSON.stringify(search));
+      query.append("searchdata", JSON.stringify(search));
 
       const formdata = new FormData();
       if (isFilter) {
-        formdata.append('ak', val.trim());
-        formdata.append('colid', 171650);
-        formdata.append('fixedcolumns', JSON.stringify({ whereKeys: {} }));
+        formdata.append("ak", val.trim());
+        formdata.append("colid", 171650);
+        formdata.append("fixedcolumns", JSON.stringify({ whereKeys: {} }));
       }
       const {
         data: { code, data, message },
-      } = isFilter ? await axios.post('/ad-app/p/cs/fuzzyquerybyak', formdata) : await axios.post('/ad-app/p/cs/QueryList', query);
+      } = isFilter
+        ? await axios.post("/ad-app/p/cs/fuzzyquerybyak", formdata)
+        : await axios.post("/ad-app/p/cs/QueryList", query);
       if (code == 0) {
         if (isFilter) {
-          const autoData = data.map((item) => ({ ID: item.ID || item.id, value: item.ENAME }));
+          const autoData = data.map((item) => ({
+            ID: item.ID || item.id,
+            value: item.ENAME,
+          }));
           this.formConfigDetail.formValue.PS_C_SKU_data.autoData = autoData;
           return;
         }
@@ -1770,5 +2015,5 @@ export default {
 </script>
 
 <style lang="less">
-@import '~@/css/pages/orderCenter/orderManageAdd/orderManageAdd.less';
+@import "~@/css/pages/orderCenter/orderManageAdd/orderManageAdd.less";
 </style>

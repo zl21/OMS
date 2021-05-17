@@ -100,11 +100,11 @@ export default {
       status: self.downLoadFormConfig.formValue.status,
       table: 'IP_B_TAOBAO_REFUND'
     };
-    const fromdata = new FormData();
-    fromdata.append('param', JSON.stringify(params));
+    // const fromdata = new FormData();
+    // fromdata.append('param', JSON.stringify(params));
 
     // 请求退单下载订单接口
-    const { data: { code, message } } = await self.service.interfacePlatform.refundDownload(fromdata);
+    const { data: { code, message } } = await self.service.interfacePlatform.refundDownload(params);
     if (code === 0) {
       self.$Message.success(message);
       self.$emit('closeActionDialog', true);
