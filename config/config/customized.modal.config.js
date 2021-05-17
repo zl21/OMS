@@ -15,6 +15,9 @@ const common = {
   LOGISTICSIMPORT: {
     component: importCom,
   },
+  WAREHOUSEIMPORT: {
+    component: importCom,
+  },
 }
 
 const allCenterModal = Object.assign(

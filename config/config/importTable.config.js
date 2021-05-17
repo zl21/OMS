@@ -4,6 +4,16 @@
  */
 
 const importConfig = {
+  CP_C_PHY_WAREHOUSE__warehouseImport: {
+    isAction: true,
+    tableName: 'CP_C_PHY_WAREHOUSE',
+    webname: 'warehouseImport',
+    tempApi: '/p/cs/cp/import/v1/warehouse/template',
+    tempParm: null,
+    okApi: '/p/cs/cp/import/v1/warehouse/import',
+    okParm: null,
+    downErrorInfo: true,
+  },
   CP_C_LOGISTICS__logisticsImport: {
     // 物流公司档案-导入
     isAction: true,
