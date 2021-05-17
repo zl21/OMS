@@ -1,6 +1,6 @@
 <template>
   <!-- 订单管理 - 批量拆弹 - 指定商品拆单 -->
-  <div class="specifyGoods">
+  <div class="specifyGoods customized-modal">
     <div class="i_head">
       <div style="float: left; margin-top: 7px">
         <RadioGroup v-model="radioValue" @on-change="radioChange">
@@ -28,7 +28,6 @@
           colname="PS_C_SKU"
           style="popInput"
           version="1.4"
-          isActive="true"
           :itemdata="itemdata"
           @getFkChooseItem="oneObj"
         ></myInput>
@@ -39,7 +38,7 @@
     <div class="i_body">
       <Table :columns="columns" :data="data" />
     </div>
-    <businessButton class="modalBth" :btn-config="btnConfig" />
+    <businessButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
 
@@ -256,10 +255,6 @@ export default {
   .i_body {
     margin-top: 10px;
     margin-bottom: 10px;
-  }
-  .i_food {
-    display: flex;
-    flex-direction: row-reverse;
   }
 }
 </style>
