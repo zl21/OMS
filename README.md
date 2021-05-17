@@ -418,6 +418,7 @@ R3.launchApplication({
 | v1.2.96 | bug:38615 |
 | v1.2.97 | bug:38624|38631 |
 | v1.2.98 | bug:38626解决 |
+| v1.2.99 | 改仓库name |
 
 
 #### Extends-Api 版本说明
