@@ -16,19 +16,6 @@ export default {
     loading,
   },
   data() {
-    /* -------------------- input校验器 start -------------------- */
-    const ECODEValidator = (rule, value, callback) => {
-      let eCode = this.formConfig.formValue.ECODE;
-      if (!eCode) {
-        return callback(new Error('!'));
-      }
-      if (/^[A-Za-z0-9]+$/.test(eCode)) {
-        return callback();
-      } else {
-        return callback(new Error('!'));
-      }
-    };
-    /* -------------------- input校验器 end -------------------- */
     return {
       vmI18n: $i18n,
       subTableConfig: {
@@ -440,7 +427,6 @@ export default {
     } else if (self.ID == '2201' && self.$route.query.spuid) {
       // 是SPU新增/详情 跳转过来的新增
       self.labelList.splice(1, 2);
-      self.spuID = self.$route.query.spuid;
       self.initObjItem('-1');
       self.renderProperties({
         valuedata: self.$route.query.spucode
@@ -452,7 +438,7 @@ export default {
     }
   },
   created() {
-    // this.formConfig.formData.find(it => it.colname == 'PS_C_SPECGROUP_ID1').itemdata.defaultSelected = this.formConfig.formValue.PS_C_SPECGROUP_ID1;
+    this.$route.query.spuid && (this.spuID = this.$route.query.spuid)
   },
   methods: {
     /* -------------------- 详情初始化 start -------------------- */
@@ -703,7 +689,6 @@ export default {
       /* =========== 保存校验 end =========== */
       let EXTRA = [];
       let PsSku = self.modify.master;
-      PsSku.PS_C_PRO_ID = self.spuID; // 特别地，后端要的是ID不是ECODE (即'coffee对应的id')
       PsSku.IMAGE = JSON.stringify(self.modify.master.IMAGE);
       for (const key in PsSku) {
         // 字段是空字符串时不传
@@ -720,9 +705,11 @@ export default {
       if (self.$route.query.spuid && self.ID == '2201') {
         // spu跳过来的新增，默认入参
         this.ID = '-1';
-        PsSku.SALES_STATUS = PsSku.SALES_STATUS ? PsSku.SALES_STATUS : self.formConfig.formValue.SALES_STATUS;
         PsSku.ISACTIVE = 'Y';
+        self.spuID = self.$route.query.spuid;
       }
+      PsSku.SALES_STATUS = PsSku.SALES_STATUS ? PsSku.SALES_STATUS : self.formConfig.formValue.SALES_STATUS;
+      PsSku.PS_C_PRO_ID = self.spuID; // 特别地，后端要的是ID不是ECODE (即'coffee对应的id')
       const param = {
         objid: this.ID,
         table: 'PS_C_SKU',

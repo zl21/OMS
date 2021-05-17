@@ -2,7 +2,7 @@
   <!-- 订单管理 - 批量拆弹 - 指定商品拆单 -->
   <div class="specifyGoods">
     <div class="i_head">
-      <div style="float: left; margintop: 8px">
+      <div style="float: left; margin-top: 7px">
         <RadioGroup v-model="radioValue" @on-change="radioChange">
           <Radio label="2">
             <!-- 按页面已勾选订单 -->
@@ -15,9 +15,8 @@
         </RadioGroup>
       </div>
       <!-- 商品SKU -->
-      <div style="float: right">
+      <div style="float: right" class="searchForm">
         <!-- {{ vmI18n.t("table_label.commoditySKU") }}: -->
-        SKU编码：
         <!-- <Input
           v-model="searchValue"
           icon="ios-search"
@@ -26,7 +25,7 @@
           @on-click="search"
         /> -->
         <myInput
-          colname="OLD_BARCODE"
+          colname="PS_C_SKU"
           style="popInput"
           version="1.4"
           isActive="true"
@@ -81,7 +80,17 @@ export default {
       radioValue: "2",
       searchValue: "",
       qty: "1",
-      itemdata: {},
+      itemdata: {
+        colid: "171332",
+        colname: "PS_C_SKU",
+        name: "SKU编码",
+        valuedata: "",
+        pid: "",
+        fkdisplay: "drp",
+        isfk: true,
+        isnotnull: false,
+        readonly: false,
+      },
       columns: [
         {
           title: "序号",
@@ -234,5 +243,23 @@ export default {
 };
 </script>
 <style lang="less">
-@import "~@/css/modal/orderCenter/specifyGoodsAssign.less";
+// @import "~@/css/modal/orderCenter/specifyGoodsAssign.less";
+.specifyGoods {
+  .i_head {
+    height: 30px;
+    .searchForm {
+      .item-input {
+        align-items: center;
+      }
+    }
+  }
+  .i_body {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .i_food {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}
 </style>
