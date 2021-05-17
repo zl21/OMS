@@ -233,7 +233,7 @@ export default {
         });
         this.$OMS2.omsUtils.tipShow(
           "confirm",
-          self,
+          _this,
           data,
           message,
           function (h) {
