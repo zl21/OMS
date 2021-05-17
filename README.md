@@ -423,6 +423,7 @@ R3.launchApplication({
 | v1.3.1 | LOGISTICSIMPORT config |
 | v1.3.2 | bug:38634 |
 | v1.3.3 | bug:38613 |
+| v1.3.4 | 修复零售发货单bug |
 #### Extends-Api 版本说明
 
 | Version | Description                                   |

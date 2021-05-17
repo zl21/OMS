@@ -490,7 +490,10 @@ export default {
         }
         orderList.push(obj)
       })
-
+     if (!this.onRowData || !this.onRowData2) {
+      this.$Message.warning($i18n.t('modalTips.d8'))
+       return
+     }
       skuEcodes.push(this.onRowData.skuEcode)
       skuEcodes.push(this.onRowData2.skuEcode)
       let data = {
@@ -501,8 +504,32 @@ export default {
       this.service.orderCenter.replaceOrderByPro(data).then((res) => {
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
-         
         } else {
+          if (!res.data.data) {
+            this.$Modal.error({
+            title: "提示",
+            width: 500,
+            mask: true,
+            className: 'ark-dialog',
+            render: (h) => {
+              if (res.data.data) {
+                return h('Table', {
+                  props: {
+                    columns: [
+                      {
+                        title: $i18n.t('modalTitle.a6'), // '提示信息',
+                        key: 'message',
+                      },
+                    ],
+                    data: res.data.message,
+                  },
+                })
+              }
+              return false
+            },
+            })
+            return
+          }
           this.$Modal.confirm({
             title: res.data.message,
             width: 500,
