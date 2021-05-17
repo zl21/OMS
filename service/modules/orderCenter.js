@@ -69,6 +69,7 @@ export default {
   deleteGit: (params) => $network.post('/api/cs/oc/oms/v1/deleteGit', params),
   checkGit: (params) => $network.post('/api/cs/oc/oms/v1/checkGit', params),
   markrefund: (params) => $network.post('/api/cs/oc/oms/v1/markrefund', params),
+
   markRefundCancel: (params) =>
     $network.post('/api/cs/oc/oms/v1/markRefundCancel', params),
   modifygoodscheck: (params) =>
@@ -89,18 +90,14 @@ export default {
   billCopy: (params) => $network.post('/api/cs/oc/oms/v1/billCopy', params), // 丢单赋值或复制订单赋值
   queryObject: (params) => $network.post('/p/cs/oc/oms/v1/queryObject', params), // 获取订单详情
   delOrderItem: (params) => $network.post('/p/cs/delOrderItem', params), // 删除明细
-  queryResionByName: (params) =>
-    $network.post('/api/cs/oc/oms/v1/queryResionByName', params), // 获取省份id
-  cancelInterception: (params) =>
-    $network.post('/api/cs/oc/oms/v1/cancelInterception', params), // 取消拦截
-  batchDeleteGoods: (params) =>
-    $network.post('/api/cs/oc/oms/v1/batchDeleteGoods', params), // 取消拦截
-  selectLimitGroups: (params) =>
-    $network.post('/p/cs/selectLimitGroups', params), // 取消拦截
+  queryResionByName: (params) => $network.post('/api/cs/oc/oms/v1/queryResionByName', params), // 获取省份id
+  cancelInterception: (params) => $network.post('/api/cs/oc/oms/v1/cancelInterception', params), // 取消拦截
+  batchDeleteGoods: (params) => $network.post('/api/cs/oc/oms/v1/batchDeleteGoods', params), // 取消拦截
+  selectLimitGroups: (params) => $network.post('/p/cs/selectLimitGroups', params), // 取消拦截
   initObject: (params) => $network.post('/p/cs/oc/oms/v1/initObject', params), // 订单详情明细表头
-  updateOrderAddr: (params) =>
-    $network.post('/p/cs/oc/oms/v1/updateOrderAddr', params), // 订单详情 - 修改地址
-
+  updateOrderAddr: (params) => $network.post('/p/cs/oc/oms/v1/updateOrderAddr', params), // 订单详情 - 修改地址
+  markCancel: (params) => $network.post('/p/cs/oc/oms/v1/markCancel', params), // 订单详情 - 修改地址
+ 
   /**
    * 扫描入库
    */

@@ -59,7 +59,7 @@ export default {
               disabled: true,
               isShow: true,
               btnclick: () => {
-                this.flagCalcelRefund();
+                this.flagCalcel();
               }
             }
           ]
@@ -179,6 +179,18 @@ export default {
           this.$parent.$parent.$parent.$parent.getDetailsData()
         }
       })
+    },
+    // 标记取消
+    async flagCalcel(){
+      console.log(this.checkSelection);
+      console.log(this.checkSelection.map(row => row.ID));
+      const { data: { data, code, message } } = await this.service.orderCenter.markCancel({ 
+        id: Number(this.$route.params.customizedModuleId), 
+        itemIds: this.checkSelection.map(row => row.ID), 
+      });
+      if (code === 0) {
+        self.$Message.success(message || '成功！');
+      }
     },
     // 标记退款
     async returnAccount() {
