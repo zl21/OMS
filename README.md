@@ -430,6 +430,7 @@ R3.launchApplication({
 | v1.3.8 | orderAdd |
 | v1.3.9 | bgu:38709-错误提示处理 |
 | v1.3.10 | 修改提示 |
+| v1.3.11 | bug:38706 |
 
 #### Extends-Api 版本说明
 
