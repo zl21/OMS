@@ -421,6 +421,7 @@ R3.launchApplication({
 | v1.2.99 | 改仓库name |
 | v1.3.0 | 物流公司档案-导入 |
 | v1.3.1 | LOGISTICSIMPORT config |
+| v1.3.2 | bug:38613 |
 
 #### Extends-Api 版本说明
 

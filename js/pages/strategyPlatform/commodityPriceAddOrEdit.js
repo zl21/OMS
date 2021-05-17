@@ -422,7 +422,7 @@ export default {
           buttons: [
             {
               text: '删除明细',
-              size: '', // 按钮大小
+              isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.deleteDetail();
@@ -430,7 +430,7 @@ export default {
             },
             {
               text: '导入',
-              size: '', // 按钮大小
+              isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.handleImport();
@@ -438,7 +438,6 @@ export default {
             },
             {
               text: '导出',
-              size: '', // 按钮大小
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.handleExport();
@@ -488,7 +487,7 @@ export default {
     this.isWatchChange = true
     if (this.ID == -1 && !this.isCopy) return
     this.isWatchChange = false
-    this.reloadForm(false)
+    // this.reloadForm(false)
     this.setEnable(false)
     await this.queryPrice(copyId)
     await this.queryPriceItem(copyId)
@@ -725,18 +724,23 @@ export default {
       this.goodsTableConfig.businessFormConfig.formData
         .forEach((i, index) => {
           let style = index == 2 ? 'input' : 'popInput'
-          i.style = this.isCopy ? '' : style
+          i.style = this.isCopy || isEnable ? '' : style
         })
     },
     /**操作按钮是否可编辑 */
     setBtnEnable(isEnable) {
       let isEdit = this.ID != -1
       let btnText = isEnable ? '启用' : '停用'
+      let masterBtns = ['启用','停用','复制']
+      let subTableBtns = ['删除明细', '导入']
       this.btnConfig.buttons.forEach(item => {
-        ['启用','停用','复制'].includes(item.text)
+        masterBtns.includes(item.text)
         && (item.isShow = isEdit && item.text != btnText)
       })
-      this.goodsTableConfig.businessButtonConfig.buttons.forEach(item => item.isShow = !this.isCopy)
+      this.goodsTableConfig.businessButtonConfig.buttons
+        .forEach(item => {
+          item.isShow = subTableBtns.includes(item.text) && isEnable ? false : !this.isCopy
+        })
     },
     isValid(obj, validFields) {
       let valid = true;
@@ -875,13 +879,13 @@ export default {
             this.setFormValue(this.goodsTableConfig.businessFormConfig, 'PS_C_SKU')
             this.setFormValue(this.goodsTableConfig.businessFormConfig, 'PS_C_SPU')
           }
-          this.reloadForm(true)
+          this.reloadForm(params.ISACTIVE == 'Y')
           this.modify = { master: {} }
           data && (this.ID = data.objId)
           !this.isCopy && this.queryPrice(data.objId)
           !this.isCopy && this.queryPriceItem(data.objId)
           this.$message.success(message)
-          this.onOk(false, true)
+          this.isCopy && this.onOk(false, true)
           return
         }
         this.$message.error(message)
