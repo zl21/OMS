@@ -132,11 +132,17 @@ export default {
     },
     // 替换
     async confirm() {
-      console.log();
+      console.log('self.tableConfig.data:',this.tableConfig.data);
       const self = this;
       if (self.tableConfig.data.length == 0) {
         // sku不能为空!
         self.$Message.warning($i18n.t('modalTips.cg'));
+        return;
+      }
+      console.log(this.currentSkuEcode);
+      if(!this.currentSkuEcode){
+        // 请选中一条单据!
+        self.$Message.warning($i18n.t('modalTips.d8'));
         return;
       }
       let params = {
