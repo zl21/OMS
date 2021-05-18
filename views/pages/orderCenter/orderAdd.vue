@@ -1630,7 +1630,7 @@ export default {
       const date = new Date(time);
       return dateUtil.getFormatDate(date, "yyyy-MM-dd HH:mm:ss");
     },
-    keyDown() {},
+    keyDown() { },
     // 生成'合计'行
     totalNum() {
       const self = this;
@@ -1988,8 +1988,8 @@ export default {
       const {
         data: { code, data, message },
       } = isFilter
-        ? await axios.post("/ad-app/p/cs/fuzzyquerybyak", formdata)
-        : await axios.post("/ad-app/p/cs/QueryList", query);
+          ? await axios.post("/ad-app/p/cs/fuzzyquerybyak", formdata)
+          : await axios.post("/ad-app/p/cs/QueryList", query);
       if (code == 0) {
         if (isFilter) {
           const autoData = data.map((item) => ({
