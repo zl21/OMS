@@ -262,10 +262,6 @@ export default {
     },
     // 详情按钮替换商品弹框
     replaceGoodsDetail(itemData) {
-      if(!itemData.length){
-        this.$Message.warning($i18n.t('modalTips.d8'));
-        return;
-      }
       this.dialogs.changeSku.data = {
         orderList: [{
           orderId:this.componentData.order.ID,

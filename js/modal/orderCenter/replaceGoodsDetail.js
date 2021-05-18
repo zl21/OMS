@@ -139,7 +139,6 @@ export default {
         self.$Message.warning($i18n.t('modalTips.cg'));
         return;
       }
-      console.log(this.currentSkuEcode);
       if(!this.currentSkuEcode){
         // 请选中一条单据!
         self.$Message.warning($i18n.t('modalTips.d8'));
