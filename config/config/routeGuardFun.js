@@ -1,7 +1,7 @@
 /*
  * @Author: 萧萧
  * @Date: 2021-05-17 17:36:59
- * @LastEditTime: 2021-05-17 20:54:01
+ * @LastEditTime: 2021-05-18 15:14:19
  * @LastEditors: Please set LastEditors
  * @Description: 路由守卫 -- 用于切换路由时一些操作
  * @FilePath: /project-logic/config/config/routeGuardConfig.js
@@ -24,7 +24,7 @@ let beforeEach = (to, from, next) =>{
     // 获取当前页面的路由的 
     let currentKey = to.params.customizedModuleName;
     // 循环页面配置查找当前路由的配置 并给singleType赋值
-    Object.keys(cusAllPageConfig).includes(currentKey) && (CustomizedConfig.BtnConfig.singleType=Number(!cusAllPageConfig[currentKey].isList));
+    currentKey in cusAllPageConfig && (CustomizedConfig.BtnConfig.singleType=Number(!cusAllPageConfig[currentKey].isList));
   }
   // 其他判断
   
