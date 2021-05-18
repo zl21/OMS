@@ -159,32 +159,33 @@ export default {
         self.$Message.success(message);
         self.$parent.$parent.closeConfirm();
         self.$parent.$parent.$parent.$parent.$parent.getDetailsData();
-      }else if(data && code ===  -1){
-          self.$Modal.confirm({
-            title: message,
-            width: 500,
-            className:'ark-dialog',
-            render: h => h('Table', {
-                props: {
-                  columns: [
-                    {
-                      title: 'ID',
-                      key: 'orderId'
-                    },
-                    {
-                      title: '单据编号',
-                      key: 'billNo'
-                    }, 
-                    {
-                      title: '提示信息',
-                      key: 'message'
-                    }
-                  ],
-                  data
-                }
-              })
-          });
       }
+      // else if(data && code ===  -1){
+      //     self.$Modal.confirm({
+      //       title: message,
+      //       width: 500,
+      //       className:'ark-dialog',
+      //       render: h => h('Table', {
+      //           props: {
+      //             columns: [
+      //               {
+      //                 title: 'ID',
+      //                 key: 'orderId'
+      //               },
+      //               {
+      //                 title: '单据编号',
+      //                 key: 'billNo'
+      //               }, 
+      //               {
+      //                 title: '提示信息',
+      //                 key: 'message'
+      //               }
+      //             ],
+      //             data
+      //           }
+      //         })
+      //     });
+      // }
     }
   }
 };

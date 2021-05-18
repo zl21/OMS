@@ -178,6 +178,16 @@ export default {
           this.$Message.success(res.data.message);
           this.$parent.$parent.$parent.$parent.getDetailsData()
         }
+        else if(res.data.code ===  -1){
+          self.$Modal.confirm({
+            title: "message",
+            width: 500,
+            className:'ark-dialog',
+            mask:true,
+            render: h => h('div', {
+              },res.data.message)
+          });
+      }
       })
     },
     // 标记取消
