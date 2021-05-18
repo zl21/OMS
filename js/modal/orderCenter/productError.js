@@ -1,12 +1,13 @@
 import businessActionTable from 'professionalComponents/businessActionTable';
   import businessButton from 'professionalComponents/businessButton';
   import loading from 'professionalComponents/loading.vue';
-
+  import drpInput from 'professionalComponents/fkinput.vue';
   export default {
     components: {
       businessActionTable,
       businessButton,
-      loading
+      loading,
+      drpInput
     },
     computed: {
       type() {
@@ -80,7 +81,6 @@ import businessActionTable from 'professionalComponents/businessActionTable';
               }, [
                 h('drpInput', {
                   props: {
-                    colname: 'OLD_BARCODE',
                     style: 'popInput',
                     version: '1.4',
                     isActive: true,

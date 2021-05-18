@@ -1,16 +1,14 @@
   import businessActionTable from 'professionalComponents/businessActionTable';
   import businessButton from 'professionalComponents/businessButton';
   import loading from 'professionalComponents/loading.vue';
-  import myInput from 'professionalComponents/fkinput.vue';
-  import Vue from 'vue';
-
-  Vue.component('drpInput', myInput);
+  import drpInput from 'professionalComponents/fkinput.vue';
 
   export default {
     components: {
       businessActionTable,
       businessButton,
       loading,
+      drpInput
     },
     computed: {
       type() {
