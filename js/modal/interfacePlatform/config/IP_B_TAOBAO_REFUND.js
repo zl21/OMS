@@ -39,7 +39,10 @@ export default {
           statsize: -1,
           type: 'STRING',
           valuedata: '' // 这个是选择的值
-        }
+        },
+        oneObj: (val) => {
+          console.log(val);
+         }
       },
       {
         style: 'radio', // 输入框类型
