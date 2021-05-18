@@ -81,7 +81,7 @@ export default {
             label: '组合商品编码',
             value: 'ecode',
             width: '8',
-            disabled: this.id !== 'New',
+            disabled: false,
             inputChange: () => {
               this.masterModifyData('ecode', 'master');
             }
@@ -485,6 +485,7 @@ export default {
     self.dataitem.url = self.$OMS2.omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
     await this.getSelectOption();
     await this.query();
+    self.formConfig.formdata[0].disabled = self.id !== -1;
   },
   methods: {
     query() {
