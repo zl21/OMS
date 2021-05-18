@@ -81,7 +81,7 @@ export default {
             label: '组合商品编码',
             value: 'ecode',
             width: '8',
-            disabled: false,
+            disabled: this.id !== 'New',
             inputChange: () => {
               this.masterModifyData('ecode', 'master');
             }
