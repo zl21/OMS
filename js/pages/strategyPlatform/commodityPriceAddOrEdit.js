@@ -59,6 +59,7 @@ export default {
             webname: 'lookup_return', // 返回
             text: '启用',
             isShow: false,
+            disabled: false,
             btnclick: () => {
               this.toggleEnable(1)
             },
@@ -67,6 +68,7 @@ export default {
             webname: 'lookup_return', // 返回
             text: '停用',
             isShow: false,
+            disabled: false,
             btnclick: () => {
               this.toggleEnable(0)
             },
@@ -731,11 +733,13 @@ export default {
     setBtnEnable(isEnable) {
       let isEdit = this.ID != -1
       let btnText = isEnable ? '启用' : '停用'
-      let masterBtns = ['启用','停用','复制']
+      let masterBtns = ['启用','停用', '复制']
       let subTableBtns = ['删除明细', '导入']
       this.btnConfig.buttons.forEach(item => {
-        masterBtns.includes(item.text)
-        && (item.isShow = isEdit && item.text != btnText)
+        if (masterBtns.includes(item.text)) {
+          item.isShow = isEdit
+          item.disabled = isEdit && item.text == btnText
+        }
       })
       this.goodsTableConfig.businessButtonConfig.buttons
         .forEach(item => {

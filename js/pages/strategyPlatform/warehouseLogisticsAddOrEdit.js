@@ -52,6 +52,7 @@ export default {
           {
             text: '启用',
             isShow: false,
+            disabled: false,
             btnclick: () => {
               this.toggleEnable('Y');
             }
@@ -59,6 +60,7 @@ export default {
           {
             text: '停用',
             isShow: false,
+            disabled: false,
             btnclick: () => {
               this.toggleEnable('N');
             }
@@ -499,7 +501,11 @@ export default {
      * @param {*} btnText 按钮文本
      */
     setBtnEnable(btnText) {
-      this.btnConfig.buttons.forEach(i => ['启用','停用'].includes(i.text) && (i.isShow = i.text != btnText))
+      let btns = ['启用','停用']
+      this.btnConfig.buttons.forEach(i => {
+        i.isShow = true
+        btns.includes(i.text) && (i.disabled = i.text == btnText)
+      })
     },
     // 查询
     async queryLogistics() {
@@ -526,20 +532,13 @@ export default {
           this.setEnable(isEnable);
 
           this.$OMS2.omsUtils.intersectFormValue(this.formConfig.formValue, ST_C_EXPRESS_ALLOCATION);
-          this.setFormValue(this.formConfig, 'CP_C_PHY_WAREHOUSE', {
-            pid: ST_C_EXPRESS_ALLOCATION.CP_C_PHY_WAREHOUSE_ID,
-            valuedata: ST_C_EXPRESS_ALLOCATION.CP_C_PHY_WAREHOUSE_ENAME
-          });
-          this.setFormValue(this.formConfig, 'CP_C_LOGISTICS', {
-            pid: ST_C_EXPRESS_ALLOCATION.CP_C_LOGISTICS_ID,
-            valuedata: ST_C_EXPRESS_ALLOCATION.CP_C_LOGISTICS_ENAME
-          });
-          // ['CP_C_PHY_WAREHOUSE', 'CP_C_LOGISTICS'].forEach(i => {
-          //   this.setFormValue(this.formConfig, i, {
-          //     pid: ST_C_EXPRESS_ALLOCATION[`${i}_ID`],
-          //     valuedata: ST_C_EXPRESS_ALLOCATION[`${i}_ENAME`]
-          //   })
-          // })
+          let fieldNames = ['CP_C_PHY_WAREHOUSE', 'CP_C_LOGISTICS']
+          fieldNames.forEach(i => {
+            this.setFormValue(this.formConfig, i, {
+              pid: ST_C_EXPRESS_ALLOCATION[`${i}_ID`],
+              valuedata: ST_C_EXPRESS_ALLOCATION[`${i}_ENAME`]
+            })
+          })
           this.isMasterRequired = true;
           this.queryForm(this.formConfig, 'ISACTIVE').style = 'input';
           const btnText = isEnable ? '启用' : '停用';

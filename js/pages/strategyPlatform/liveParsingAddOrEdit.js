@@ -50,6 +50,7 @@ export default {
             webname: 'lookup_return',
             text: '启用',
             isShow: false,
+            disabled: false,
             btnclick: () => {
               this.toggleEnable(true)
             },
@@ -58,6 +59,7 @@ export default {
             webname: 'lookup_return',
             text: '停用',
             isShow: false,
+            disabled: false,
             btnclick: () => {
               this.toggleEnable(false)
             },
@@ -463,7 +465,10 @@ export default {
      */
     setBtnEnable(btnText) {
       this.btnConfig.buttons.forEach(i => {
-        ['启用','停用'].includes(i.text) && (i.isShow = i.text != btnText)
+        i.isShow = true
+        if (['启用','停用'].includes(i.text)) {
+          i.disabled = i.text == btnText
+        }
       })
     },
     // 表单赋值
