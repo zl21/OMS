@@ -453,6 +453,7 @@ R3.launchApplication({
 | v1.3.31 | bug:38870 |
 | v1.3.32 | bug:38865 |
 | v1.3.33 | bug:38865->once |
+| v1.3.34 | bug:38865->once |
 
 
 #### Extends-Api 版本说明

@@ -485,7 +485,7 @@ export default {
     self.dataitem.url = self.$OMS2.omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
     await this.getSelectOption();
     await this.query();
-    self.formConfig.formdata[0].disabled = self.id !== -1;
+    self.formConfig.formData[0].disabled = self.id !== -1;
   },
   methods: {
     query() {
