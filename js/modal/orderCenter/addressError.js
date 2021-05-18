@@ -100,16 +100,27 @@
                             params.row.CP_C_REGION_PROVINCE_ENAME = val.ENAME.val;
                             params.row.CP_C_REGION_PROVINCE_ID = val.ID.val;
                             this.getResult(val , params.row)
-                          }else {
-                            params.row.CP_C_REGION_PROVINCE_ENAME = '';
-                            params.row.CP_C_REGION_PROVINCE_ID = '';
+                          }else if(val.id) {  //失去焦点时间
+                            params.row.CP_C_REGION_CITY_ENAME = val.value
+                            params.row.CP_C_REGION_CITY_ID = val.id
+                            this.tableConfig.data[params.index] = params.row;
                             let arr = [];
-                        this.resultArr.forEach(item=>{
-                          if(item.ID !== params.row.ID){
-                            arr.push(item)
-                          }
-                        });
-                        this.resultArr = arr;
+                            this.resultArr.forEach(item=>{
+                              if(item.ID !== params.row.ID){
+                                arr.push(item)
+                              }
+                            });
+                            this.resultArr = arr;
+                          }else {
+                            params.row.CP_C_REGION_PROVINCE_ENAME = val.valuedata;
+                            params.row.CP_C_REGION_PROVINCE_ID = val.pid;
+                            let arr = [];
+                            this.resultArr.forEach(item=>{
+                              if(item.ID !== params.row.ID){
+                                arr.push(item)
+                              }
+                            });
+                            this.resultArr = arr;
                           }
                         },
                       },
@@ -143,11 +154,6 @@
                           isnotnull: true, // 是否必填
                           name: '',
                           readonly: false, // 是否可编辑，对应input   readonly属性
-                          // refcolval: {
-                          //   fixcolumn: 'C_UP_ID',
-                          //   expre: 'equal',
-                          //   srccol: 'CP_C_REGION_PROVINCE_ID',
-                          // },
                           pid: params.row.CP_C_REGION_CITY_ID,
                           valuedata: params.row.CP_C_REGION_CITY_ENAME,
                         },
@@ -161,6 +167,17 @@
                             params.row.CP_C_REGION_CITY_ENAME = val.ENAME.val;
                             params.row.CP_C_REGION_CITY_ID = val.ID.val;
                             this.getResult(val , params.row)
+                          }else if(val.id) {  //失去焦点时间
+                            params.row.CP_C_REGION_CITY_ENAME = val.value
+                            params.row.CP_C_REGION_CITY_ID = val.id
+                            this.tableConfig.data[params.index] = params.row;
+                            let arr = [];
+                            this.resultArr.forEach(item=>{
+                              if(item.ID !== params.row.ID){
+                                arr.push(item)
+                              }
+                            });
+                            this.resultArr = arr;
                           }else {
                             params.row.CP_C_REGION_CITY_ENAME = '';
                             params.row.CP_C_REGION_CITY_ID = '';

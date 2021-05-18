@@ -101,15 +101,28 @@ import businessActionTable from 'professionalComponents/businessActionTable';
                   },
                   on: {
                     getFkChooseItem: (val) => {
-                      if(val.ID){
-                        params.row.PS_C_SKU_ECODE = val.ENAME.val
+                      if(val.ID){ //下拉选中时间
+                        params.row.PS_C_SKU_ECODE = val.ECODE.val
                         params.row.PS_C_SKU_ID = val.ID.val
+                        this.tableConfig.data[params.index] = params.row;
                         this.getResult(val , params.row)
                         console.log('val:', val);
                         console.log('params:', params);
-                      }else {
-                        params.row.PS_C_SKU_ECODE = '';
-                        params.row.PS_C_SKU_ID = '';
+                      }else if(val.id) {  //失去焦点时间
+                        params.row.PS_C_SKU_ECODE = val.value
+                        params.row.PS_C_SKU_ID = val.id
+                        this.tableConfig.data[params.index] = params.row;
+                        let arr = [];
+                        this.resultArr.forEach(item=>{
+                          if(item.ID !== params.row.ID){
+                            arr.push(item)
+                          }
+                        });
+                        this.resultArr = arr;
+                      }else { //模糊搜索事件
+                        params.row.PS_C_SKU_ECODE = val.valuedata
+                        params.row.PS_C_SKU_ID = val.pid
+                        this.tableConfig.data[params.index] = params.row;
                         let arr = [];
                         this.resultArr.forEach(item=>{
                           if(item.ID !== params.row.ID){
