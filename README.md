@@ -447,6 +447,7 @@ R3.launchApplication({
 | v1.3.25 | 自定义外键关联组件,根据不同触发事件返回不同格式参数  |
 | v1.3.26 | 启用、停用按钮禁用  |
 | v1.3.27 | 详情修改商品报错信息修改 |
+| v1.3.28 | orderManage/returnGoods |
 
 
 #### Extends-Api 版本说明
