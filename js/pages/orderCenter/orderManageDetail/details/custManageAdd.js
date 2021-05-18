@@ -149,6 +149,8 @@ export default {
     request(newVal){
       this.tableConfig.loading = true;
       if(newVal.subItem){
+        let buttonArr = this.tableConfig.businessButtonConfig.buttons;
+        this.$OMS2.omsUtils.buttonHasDisable(this.textArr,buttonArr,true);
         this.tableConfig.data = newVal.subItem;
         this.tableConfig.loading = false;
       }
@@ -257,6 +259,7 @@ export default {
     },
     // 取消选中某一项时触发
     onSelectCancel(selection) {
+      console.log('selection:',selection);
       this.checkSelection = selection;
       if(selection.length === 0){
         let buttonArr = this.tableConfig.businessButtonConfig.buttons;

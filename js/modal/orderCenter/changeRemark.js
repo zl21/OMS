@@ -120,6 +120,10 @@ export default {
     // 保存备注
     async saveRemark() {
       const self = this;
+      if(self.formItem.textarea.match(/^\s+$/)){
+        this.$Message.warning('备注内容不能全是空格！');
+        return;
+      }
       const fromdata = new FormData();
       const param = {
         IDS: self.componentData.ids,

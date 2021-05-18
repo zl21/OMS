@@ -448,6 +448,9 @@ R3.launchApplication({
 | v1.3.26 | 启用、停用按钮禁用  |
 | v1.3.27 | 详情修改商品报错信息修改 |
 | v1.3.28 | orderManage/returnGoods |
+| v1.3.29 | mergeOrderTree 合单策略API |
+| v1.3.30 | 直播解析识别规则重复校验 |
+| v1.3.31 | bug:38870 |
 
 
 #### Extends-Api 版本说明

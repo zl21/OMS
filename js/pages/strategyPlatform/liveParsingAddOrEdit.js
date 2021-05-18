@@ -558,6 +558,15 @@ export default {
         return false;
       }
 
+      // 校验识别规则是否重复
+      let allRow = this.formConfig2.formValue.RULES
+      .map(({ RULE_CONTEXT, RULE_TYPE }) => Object.values({ RULE_CONTEXT, RULE_TYPE }).join(' '))
+      let uniqRow = Array.from(new Set(allRow))
+      if (allRow.length != uniqRow.length) {
+        self.$message.error('请勿重复添加直播商品识别规则!')
+        return
+      }
+      
       /**
        * 编辑页面，如果直播商品识别未做操作就不传，否则就传所有数据, 其他字段，操作了就传
        * 
