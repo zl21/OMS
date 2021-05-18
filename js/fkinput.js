@@ -170,7 +170,7 @@ export default {
   methods: {
     clear() {
       // 清空值
-      if (itemdata.isBackRowItem) {
+      if (this.itemdata.isBackRowItem) {
         this.$emit('getFkChooseItem', {});
       } else {
         this.itemdata.pid = '';
