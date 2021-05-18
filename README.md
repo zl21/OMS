@@ -442,6 +442,7 @@ R3.launchApplication({
 | v1.3.20 | commonUtils- defaultEndTime  |
 | v1.3.21 | 添加路由守卫配置方法文件  |
 | v1.3.22 | 路由守卫方法修改  |
+| v1.3.23 | 操作日志配置添加 - 策略平台配置  |
 
 #### Extends-Api 版本说明
 

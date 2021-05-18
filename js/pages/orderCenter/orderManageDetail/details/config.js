@@ -129,6 +129,22 @@ export const commodityCenter = {
   },
 }
 
+// 策略平台
+
+export const strategyPlatform = {
+  ST_HOLD_ORDER_STRATEGY_LOG: { // hold策略
+    table: 'ST_HOLD_ORDER_STRATEGY_LOG',
+    objid: 33,
+    refcolid: 179424, //表-主键的字段ID
+    searchdata: {
+      column_include_uicontroller: true,
+      range: 10,
+      fixedcolumns:{},
+      startindex: 0
+    }
+  },
+}
+
 export const BILL_STATUS = {
   UNCONFIRMED: 1, // 未确认
   OUT_OF_STOCK: 2, // 缺货
@@ -151,6 +167,7 @@ export const BILL_STATUS = {
 
 export default {
   orderCenter,
-  BILL_STATUS,
   commodityCenter,
+  strategyPlatform,
+  BILL_STATUS
 };
