@@ -13,7 +13,7 @@ export default {
 
   // 店铺策略 -树展示
   strategyTree: (params) => $network.post('/p/cs/st/v1/strategy/tree', params),
-
+  mergeOrderTree: params => $network.post('/p/cs/st/v1/ST_C_MERGE_ORDER/selectTree', params), // 合单策略tree
   // 直播解析策略 - 修改结束时间
   liveCastStrategyUpdateEndTime: (params) =>
     $network.post('/p/cs/st/liveCastStrategy/v1/updateEndTime', params),
