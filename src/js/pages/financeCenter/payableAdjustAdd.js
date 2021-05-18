@@ -1122,6 +1122,11 @@ export default {
             type: 'input',
             queryName: 'BILL_NO',
             value: obj.tem.BILL_NO
+          },
+          {
+            type: 'input',
+            queryName: 'EXPRESSCODE',
+            value: obj.tem.LOGISTICS_NO
           }
         );
       } else {
