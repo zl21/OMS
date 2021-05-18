@@ -216,10 +216,12 @@ export default {
                       //表头拖拽存储
                       // let self = this
                       const columnApi = params.columnApi
-                      let formdata = new FormData()
-                      formdata.append('tableid', self.$route.params.customizedModuleId)
-                      formdata.append('colposition', '')
-                      R3.network.post('/p/cs/setColPosition' , formdata)
+                      const data = {
+                        ACTION:'RELOAD',
+                        TABLE:'OC_B_ORDER',
+                        TYPE:'L_TAB_HEAD'
+                      }
+                      R3.network.post('/p/cs/oc/oms/v1/customSettings' , data)
                       .then((res) => {
                         if (res.data.code == 0) {
                           self.columnState = res.data.data
