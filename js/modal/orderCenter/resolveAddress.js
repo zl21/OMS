@@ -307,7 +307,6 @@ export default {
         updateInfo: info,
       };
       console.log(param);
-      return false;
       this.loading = true;
       this.service.orderCenter.updateOrderAddr(param).then((res) => {
         if (res.data.code === 0) {
