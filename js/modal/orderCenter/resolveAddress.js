@@ -172,9 +172,9 @@ export default {
         receiver_name: [
             { required: true, message: ' ', trigger: 'blur' }
         ],
-        receiver_mobile: [
-            { required: true, message: ' ', trigger: 'blur' }
-        ]
+        // receiver_mobile: [
+        //     { required: true, message: ' ', trigger: 'blur' }
+        // ]
       },
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
@@ -249,8 +249,8 @@ export default {
         this.data.receiver_name = result.name;
         this.data.receiver_mobile = result.mobile;
         this.data.receiver_address = result.addr;
-        this.data.receiver_phone = result.receiver_phone;
-        this.data.receiver_zip = result.receiver_zip;
+        this.data.receiver_phone = result.phone;
+        this.data.receiver_zip = result.zip_code;
         this.newReceivAddress = result.newReceivAddress;
         this.formConfig.formData[0].itemdata.valuedata = result.province;
         this.formConfig.formData[1].itemdata.valuedata = result.city;
@@ -280,14 +280,18 @@ export default {
       }
     },
     update() {
-      console.log(this.data);
+      
+      if (!this.data.receiver_name) {
+        // 请填写详细地址！
+        return this.$Message.error('姓名不能为空！');
+      }
       if (!this.data.receiver_address) {
         // 请填写详细地址！
         return this.$Message.error($i18n.t('modalTips.ym'));
       }
       let f = this.CheckRegx(this.regx.mobile, this.data.receiver_mobile);
       if (this.componentData.ck != 50) {
-        if (!f) return this.CheckRegxMobile();
+        if (!f && !Boolean(this.data.receiver_phone)) return this.$Message.error('手机号或电话号码不能为空！');;
       }
       if (this.data.receiver_zip) {
         f = this.CheckRegx(this.regx.shipzip, this.data.receiver_zip);
@@ -303,6 +307,7 @@ export default {
         updateInfo: info,
       };
       console.log(param);
+      return false;
       this.loading = true;
       this.service.orderCenter.updateOrderAddr(param).then((res) => {
         if (res.data.code === 0) {

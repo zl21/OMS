@@ -276,6 +276,10 @@ export default {
     },
     // 修改地址
     modifyAddress(){
+      if(!['待审核','缺货'].includes(this.componentData.order.ORDER_STATUS)) {
+        this.$Message.error('订单状态不满足，不允许修改地址！');
+        return false;
+      }
       this.dialogs.address.data = this.componentData.order;
       this.dialogsConfig = this.dialogs.address;
       setTimeout(() => {

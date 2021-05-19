@@ -13,6 +13,7 @@ import importTableConfig from './config/importTable.config.js'
 import downLoadAllConfig from '@/js/modal/interfacePlatform/config/downLoadAll.Config.js'
 import oldConfig from './config/globalComponent.config.js'
 import subTableConfig from '../js/pages/orderCenter/orderManageDetail/details/config.js'
+import custommizeMain from './config/customized.panel.config.js'
 
 import commonUtils from './config/commonUtils.js'
 import funBtn from './config/funBtn.config.js'
@@ -20,6 +21,7 @@ import dropDownBtn from './config/dropDown.config.js'
 import Vue from 'vue';
 
 class CustomizedConfig {
+	static #custommizeMain = custommizeMain;
 	static #subTableConfig = subTableConfig;
 	static #customizedModal = customizedModal;
 	static #customizedPage = customizedPage;
@@ -56,7 +58,9 @@ class CustomizedConfig {
 		// this.initConfig = new InitAppConfig();
 		// console.log('hello CustomizedConfig');
 	}
-
+	static get custommizeMain() {
+		return this.#custommizeMain;
+	}
 	// subTable组件的配置项(有用到，不准删！！！)
 	static get subTableConfig() {
 		return this.#subTableConfig;
