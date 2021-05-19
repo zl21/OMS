@@ -242,7 +242,7 @@
                           <Input
                             v-model="item.WAREHOUSE_RANK[index].rank"
                             placeholder
-                            :regx="/^[1-9]\d*$/"
+                            @on-blur="inputBlur(listArr, item, j)"
                           />
                         </td>
                       </tr>

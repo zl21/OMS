@@ -590,18 +590,25 @@ export default {
       });
     },
     inputBlur(item, rank, index) {
+      const reg = /^[1-9]\d*$/
       for (let i = 0; i < item.length; i++) {
-        if (!rank.rank) return;
-        const reg = /^[1-9]\d*$/
-        if (!reg.test(item[i].rank)) {
-          item[i].rank = '';
-        }
-        if (item[i].warehouseEcode !== rank.warehouseEcode && item[i].rank === rank.rank) {
-          setTimeout(() => {
-            item[index].rank = '';
-            this.$Message.info(window.vmI18n.t('modalTips.y9')); // '优先级设置重复'
-          }, 200);
-          return;
+        if (rank.rank) {
+          if (!reg.test(item[i].rank)) {
+            item[i].rank = '';
+          }
+          if (item[i].warehouseEcode !== rank.warehouseEcode && item[i].rank === rank.rank) {
+            setTimeout(() => {
+              item[index].rank = '';
+              this.$Message.info(window.vmI18n.t('modalTips.y9')); // '优先级设置重复'
+            }, 200);
+            return;
+          }
+        } else if (rank.WAREHOUSE_RANK[index].rank) {
+          if (!reg.test(item[i].WAREHOUSE_RANK[index].rank)) {
+            item[i].WAREHOUSE_RANK[index].rank = '';
+          }
+        } else {
+          return
         }
       }
     },
