@@ -322,6 +322,7 @@ export default {
       );
     },
     handleSelect(item) {
+      console.log('handleSelect');
       const self = this;
       if (item.id) {
         self.itemdata.pid = item.id;
@@ -371,13 +372,14 @@ export default {
       self.autocompleteBlur(itemdata);
     },
     autocompleteBlur(itemdata) {
+      console.log('autocompleteBlur');
       const self = this;
       if (!this.isHandleSelect && !this.autocomplete) {
         if (this.queryList.length > 0) {
           // 模糊匹配成功（匹配到了值）
           itemdata.pid = this.queryList[0].id;
           itemdata.valuedata = this.queryList[0].value;
-          this.$emit('getFkChooseItem', itemdata);
+          this.$emit('inputBlur', itemdata);
           $(`.item-filter .fkAutocomplete${itemdata.colname}`).css(
             'display',
             'none'
@@ -388,7 +390,7 @@ export default {
           // 模糊匹配失败
           // itemdata.valuedata = '';
           itemdata.pid = null;
-          this.$emit('getFkChooseItem', itemdata);
+          this.$emit('inputBlur', itemdata);
         }
       }
     },
