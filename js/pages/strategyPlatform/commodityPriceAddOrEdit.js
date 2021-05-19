@@ -243,6 +243,7 @@ export default {
                 return h("div", [
                   h("myInput", {
                     style: {
+                      width: '100%',
                       marginRight: '5px',
                     },
                     props: {
