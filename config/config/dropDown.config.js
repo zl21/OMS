@@ -239,7 +239,7 @@ class DropDownConfig {
     let self = DropDownConfig.target
     self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
     if (self.selection.length != 1) {
-      self.$OMS2.omsUtils.msgTips(self, 'warning', 'a8')
+      self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要复制的单据', 2)
       return
     }
     const IDS = self.$OMS2.omsUtils.sonList(self.selection, 'ID')
