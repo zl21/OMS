@@ -19,7 +19,7 @@ class DropDownConfig {
           type: 'C',
           label: '退货单新增',
           customizedModuleName: 'RETURNORDERADD',
-          customizedModuleId: 'NEW',
+          customizedModuleId: 'New',
         })
         break
       }
