@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-12 14:32:32
+ * @LastEditTime: 2021-05-19 10:11:44
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/views/modal/orderCenter/resolveAddress.vue
+-->
 <!--订单中心->智能地址解析页面-->
 <template>
   <div class="order_address customized-modal">
@@ -69,7 +77,7 @@
       </FormItem>
       <!-- 系统备注 -->
       <FormItem :label="vmI18n.t('other.systemNotes')">
-        <span>{{ componentData.SYSREMARK }}</span>
+        <span>{{ componentData.SYS_REMARK }}</span>
       </FormItem>
     </Form>
     <businessButton class="modal-footer" :btn-config="btnConfig" />
