@@ -94,6 +94,7 @@ class commonUtils {
       content: renderFun ?? res.data.message,
       cancelType: true,
       titleAlign: 'left',
+      closable: true,
       mask: true,
       draggable: true,
       className: 'ark-dialog',

@@ -463,6 +463,7 @@ R3.launchApplication({
 | v1.3.41 | 退货单- 通知WMS新建、撤回  |
 | v1.3.42 | 修改bug |
 | v1.3.43 | 省市区必选择 |
+| v1.3.44 | modal closeable |
 
 #### Extends-Api 版本说明
 
