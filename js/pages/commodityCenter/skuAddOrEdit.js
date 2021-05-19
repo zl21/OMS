@@ -5,6 +5,7 @@ import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import orderItem from 'professionalComponents/subTable';
 import loading from 'professionalComponents/loading';
+import ImageUpload from 'arkui_BCL/ImageUpload';
 
 export default {
   components: {
@@ -14,6 +15,7 @@ export default {
     businessLabel,
     businessStatusFlag,
     loading,
+    ImageUpload
   },
   data() {
     return {
@@ -25,7 +27,6 @@ export default {
       },
       forceFresh: 0,
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
-      isModal: false,
       showSubtablePart: false,
       watchChange: false, // 监听修改变化
       modify: {
@@ -92,13 +93,13 @@ export default {
         },
         ],
       },
+      imageValue: '',
+      http: $network,
       dataitem: {
         url: '/p/cs/upload2',
         sendData: {
           path: 'AC_F_PAYABLE_ADJUSTMENT/-1/',
         },
-        width: 250,
-        height: 170,
         colname: 'IMAGE',
         name: $i18n.t('other.uploadVoucher'), // 上传凭证
         readonly: false,
@@ -649,23 +650,14 @@ export default {
 
     /* -------------------- 图片处理 start -------------------- */
     // 删除图片
-    deleteImg(imgInfo, imgIndex) {
-      this.imgIndex = imgIndex;
-      this.isModal = true;
-    },
-    // 弹框-确认删除图片
-    deleteImgBySure() {
-      this.dataitem.valuedata.splice(this.imgIndex - 1, 1);
+    deleteImg() {
       this.formConfig.formValue.IMAGE = this.dataitem.valuedata;
       this.modify.master.IMAGE = this.dataitem.valuedata;
     },
     // 图片上传成功的处理
     uploadFileChangeSuccess(res) {
       const self = this;
-      self.dataitem.valuedata.push({
-        name: res.data.Name,
-        URL: res.data.Url,
-      });
+      self.dataitem.valuedata = res.map(i => ({ name: i.NAME, URL: i.URL }))
       self.formConfig.formValue.IMAGE = self.dataitem.valuedata;
       self.modify.master.IMAGE = self.dataitem.valuedata;
     },

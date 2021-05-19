@@ -7,6 +7,7 @@ import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import comUtils from '@/assets/js/__utils__/common.js';
 import orderItem from 'professionalComponents/subTable';
 import logTable from 'professionalComponents/LogTable';
+import ImageUpload from 'arkui_BCL/ImageUpload';
 
 export default {
   components: {
@@ -15,26 +16,26 @@ export default {
     businessForm,
     businessLabel,
     businessStatusFlag,
-    logTable
+    logTable,
+    ImageUpload
   },
   data() {
     return {
       vmI18n:$i18n,
       collapse: ['panel_baseInfo', 'attr'],
       labelValue: 'skuInfo',
+      imageValue: '',
+      http: $network,
       dataitem: {
         url: '/p/cs/upload2',
         sendData: {
           path: 'AC_F_PAYABLE_ADJUSTMENT/-1/',
         },
-        width: 250,
-        height: 170,
         colname: 'IMAGE',
         name: $i18n.t('other.uploadVoucher'), // 上传凭证
         readonly: false,
         valuedata: [],
       },
-      isModal: false,
       WatchChange: false, // 停止监听表单change事件
       imgIndex: 0,
       tableFormConfig: {
@@ -565,24 +566,14 @@ export default {
       self.tableFormConfig.formData[0].itemdata.valuedata = '';
     },
     // 删除图片
-    // 删除图片
-    deleteImg(imgInfo, imgIndex) {
-      this.imgIndex = imgIndex;
-      this.isModal = true;
-    },
-    // 弹框-确认删除图片
-    deleteImgBySure() {
-      this.dataitem.valuedata.splice(this.imgIndex - 1, 1);
+    deleteImg() {
       this.formConfig.formValue.IMAGE = this.dataitem.valuedata;
       this.modify.master.IMAGE = this.dataitem.valuedata;
     },
     // 图片上传成功的处理
     uploadFileChangeSuccess(res) {
       const self = this;
-      self.dataitem.valuedata.push({
-        name: res.data.Name,
-        URL: res.data.Url,
-      });
+      self.dataitem.valuedata = res.map(i => ({ name: i.NAME, URL: i.URL }))
       self.formConfig.formValue.IMAGE = self.dataitem.valuedata;
       self.modify.master.IMAGE = self.dataitem.valuedata;
     },

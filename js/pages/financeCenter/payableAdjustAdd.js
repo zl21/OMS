@@ -9,6 +9,7 @@ import dateUtil from '@/assets/js/__utils__/date.js';
 import tableInput from 'professionalComponents/businessTableInput.vue';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import loading from 'professionalComponents/loading';
+import ImageUpload from 'arkui_BCL/ImageUpload';
 
 export default {
   name: 'payableAdjustAdd',
@@ -18,7 +19,8 @@ export default {
     businessActionTable,
     businessLabel,
     businessStatusFlag,
-    loading
+    loading,
+    ImageUpload
   },
   mixins: [customPagingMixins, buttonPermissionsMixin],
   data() {
@@ -47,7 +49,6 @@ export default {
       ],
       isActive: true, // 商品编码搜索框是否显示 true为显示,false隐藏
       spreadPanel: ['panel_baseInfo', 'panel_log'],
-      isModal: false,
       addSelection: [],
       selectArr: [],
       addDetailSelectArr: [],
@@ -118,13 +119,13 @@ export default {
           }
         ]
       },
+      imageValue: '',
+      http: $network,
       dataitem: {
         url: '/p/cs/upload2',
         sendData: {
           path: 'AC_F_PAYABLE_ADJUSTMENT/-1/'
         },
-        width: 250,
-        height: 170,
         colname: 'IMAGE',
         name: $i18n.t('other.uploadVoucher'), // 上传凭证
         readonly: false,
@@ -1053,20 +1054,14 @@ export default {
       this.payableAdjustLog.pageSize = val;
       this.mixinPageSizeChange(this.allLogTableArr, val, this.payableAdjustLog, 'payableAdjustLog');
     },
-    deleteImg(imgInfo, imgIndex) {
-      this.imgIndex = imgIndex;
-      this.isModal = true;
-    },
-    deleteImgBySure() {
-      this.dataitem.valuedata.splice(this.imgIndex - 1, 1);
+    // 删除图片
+    deleteImg() {
       this.formConfig.formValue.IMAGE = this.dataitem.valuedata;
     },
+    // 图片上传成功的处理
     uploadFileChangeSuccess(res) {
       const self = this;
-      self.dataitem.valuedata.push({
-        name: res.data.Name,
-        URL: res.data.Url
-      });
+      self.dataitem.valuedata = res.map(i => ({ name: i.NAME, URL: i.URL }))
       self.formConfig.formValue.IMAGE = self.dataitem.valuedata;
     },
     // 生成赔付单form及table请求数据
