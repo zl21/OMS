@@ -111,31 +111,33 @@ import businessActionTable from 'professionalComponents/businessActionTable';
                           params.row.PS_C_SKU_ECODE = val.ECODE.val
                           params.row.PS_C_SKU_ID = val.ID.val
                           this.tableConfig.data[params.index] = params.row;
-                          this.getResult(val , params.row)
+                          this.getResult(val , params.row , val.ID.val , val.ECODE.val);
                           console.log('val:', val);
                           console.log('params:', params);
                         }else if(val.id) {  //失去焦点时间
                           params.row.PS_C_SKU_ECODE = val.value
                           params.row.PS_C_SKU_ID = val.id
                           this.tableConfig.data[params.index] = params.row;
-                          let arr = [];
-                          this.resultArr.forEach(item=>{
-                            if(item.ID !== params.row.ID){
-                              arr.push(item)
-                            }
-                          });
-                          this.resultArr = arr;
+                          this.getResult(val , params.row , val.id , val.value);
+                          // let arr = [];
+                          // this.resultArr.forEach(item=>{
+                          //   if(item.ID !== params.row.ID){
+                          //     arr.push(item)
+                          //   }
+                          // });
+                          // this.resultArr = arr;
                         }else { //模糊搜索事件
                           params.row.PS_C_SKU_ECODE = val.valuedata
                           params.row.PS_C_SKU_ID = val.pid
                           this.tableConfig.data[params.index] = params.row;
-                          let arr = [];
-                          this.resultArr.forEach(item=>{
-                            if(item.ID !== params.row.ID){
-                              arr.push(item)
-                            }
-                          });
-                          this.resultArr = arr;
+                          this.getResult(val , params.row , val.pid, val.valuedata);
+                          // let arr = [];
+                          // this.resultArr.forEach(item=>{
+                          //   if(item.ID !== params.row.ID){
+                          //     arr.push(item)
+                          //   }
+                          // });
+                          // this.resultArr = arr;
                         }
                       },
                     },
@@ -243,7 +245,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
         this.tableConfig.pageSize = val;
         this.query();
       },
-      getResult(val , data){
+      getResult(val , data , id , code){
         const self = this;
         //如果结果数据为空,则直接push数组
         if(self.resultArr.length){
@@ -251,16 +253,16 @@ import businessActionTable from 'professionalComponents/businessActionTable';
           if(self.resultArr.some(item=>item.ID == data.ID)){
             self.resultArr.forEach(item=>{
               if(item.ID == data.ID){
-                item.PS_C_SKU_ID = val.ID.val;
-                item.PS_C_SKU_ECODE = val.ECODE.val;
+                item.PS_C_SKU_ID = id;
+                item.PS_C_SKU_ECODE = code;
               }
             })
           }else {
             let obj = {
               EXCEPTION_TYPE:data.EXCEPTION_TYPE,// 处理异常类型
               ID:data.ID,
-              PS_C_SKU_ID:val.ID.val,// 省市区选择的id
-              PS_C_SKU_ECODE:val.ECODE.val// 省市区选择的name
+              PS_C_SKU_ID:id,// 省市区选择的id
+              PS_C_SKU_ECODE:code// 省市区选择的name
             }
             self.resultArr.push(obj);
           }
@@ -268,8 +270,8 @@ import businessActionTable from 'professionalComponents/businessActionTable';
           let obj = {
             EXCEPTION_TYPE:data.EXCEPTION_TYPE,// 处理异常类型
             ID:data.ID,
-            PS_C_SKU_ID:val.ID.val,// 省市区选择的id
-            PS_C_SKU_ECODE:val.ECODE.val// 省市区选择的name
+            PS_C_SKU_ID:id,// 省市区选择的id
+            PS_C_SKU_ECODE:code// 省市区选择的name
           };
           self.resultArr.push(obj);
         }

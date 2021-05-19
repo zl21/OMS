@@ -100,28 +100,30 @@
                           if(val.ID){
                             params.row.CP_C_REGION_PROVINCE_ENAME = val.ENAME.val;
                             params.row.CP_C_REGION_PROVINCE_ID = val.ID.val;
-                            this.getResult(val , params.row)
+                            this.getResult(val , params.row , val.ID.val , val.ENAME.val)
                           }else if(val.id) {  //失去焦点时间
                             params.row.CP_C_REGION_CITY_ENAME = val.value
                             params.row.CP_C_REGION_CITY_ID = val.id
                             this.tableConfig.data[params.index] = params.row;
-                            let arr = [];
-                            this.resultArr.forEach(item=>{
-                              if(item.ID !== params.row.ID){
-                                arr.push(item)
-                              }
-                            });
-                            this.resultArr = arr;
+                            this.getResult(val , params.row , val.id , val.value)
+                            // let arr = [];
+                            // this.resultArr.forEach(item=>{
+                            //   if(item.ID !== params.row.ID){
+                            //     arr.push(item)
+                            //   }
+                            // });
+                            // this.resultArr = arr;
                           }else {
                             params.row.CP_C_REGION_PROVINCE_ENAME = val.valuedata;
                             params.row.CP_C_REGION_PROVINCE_ID = val.pid;
-                            let arr = [];
-                            this.resultArr.forEach(item=>{
-                              if(item.ID !== params.row.ID){
-                                arr.push(item)
-                              }
-                            });
-                            this.resultArr = arr;
+                            this.getResult(val , params.row , val.pid , val.valuedata)
+                            // let arr = [];
+                            // this.resultArr.forEach(item=>{
+                            //   if(item.ID !== params.row.ID){
+                            //     arr.push(item)
+                            //   }
+                            // });
+                            // this.resultArr = arr;
                           }
                         },
                       },
@@ -147,7 +149,7 @@
                         style: 'popInput',
                         version: '1.4',
                         isActive: true,
-                        itemdata: this.itemdata_city[params.indexgi]
+                        itemdata: this.itemdata_city[params.index]
                         // {
                         //   colid: 167077,
                         //   colname: 'CP_C_REGION_CITY_ID',
@@ -168,28 +170,30 @@
                           if(val.ID){
                             params.row.CP_C_REGION_CITY_ENAME = val.ENAME.val;
                             params.row.CP_C_REGION_CITY_ID = val.ID.val;
-                            this.getResult(val , params.row)
-                          }else if(val.id) {  //失去焦点时间
+                            this.getResult(val , params.row , val.ID.val , val.ENAME.val)
+                          }else if(val.id) {  //失去焦点事件
                             params.row.CP_C_REGION_CITY_ENAME = val.value
                             params.row.CP_C_REGION_CITY_ID = val.id
                             this.tableConfig.data[params.index] = params.row;
-                            let arr = [];
-                            this.resultArr.forEach(item=>{
-                              if(item.ID !== params.row.ID){
-                                arr.push(item)
-                              }
-                            });
-                            this.resultArr = arr;
+                            this.getResult(val , params.row , val.id , val.value)
+                            // let arr = [];
+                            // this.resultArr.forEach(item=>{
+                            //   if(item.ID !== params.row.ID){
+                            //     arr.push(item)
+                            //   }
+                            // });
+                            // this.resultArr = arr;
                           }else {
-                            params.row.CP_C_REGION_CITY_ENAME = '';
-                            params.row.CP_C_REGION_CITY_ID = '';
-                            let arr = [];
-                        this.resultArr.forEach(item=>{
-                          if(item.ID !== params.row.ID){
-                            arr.push(item)
-                          }
-                        });
-                        this.resultArr = arr;
+                            params.row.CP_C_REGION_CITY_ENAME = val.valuedata;
+                            params.row.CP_C_REGION_CITY_ID = val.pid;
+                            this.getResult(val , params.row , val.pid , val.valuedata)
+                        //     let arr = [];
+                        // this.resultArr.forEach(item=>{
+                        //   if(item.ID !== params.row.ID){
+                        //     arr.push(item)
+                        //   }
+                        // });
+                        // this.resultArr = arr;
                           }
                         },
                       },
@@ -344,7 +348,7 @@
       onSelect(sel) {
         this.selectionData = sel;
       },
-      getResult(val , data){
+      getResult(val , data , id , code){
         const self = this;
         //如果结果数据为空,则直接push数组
         if(self.resultArr.length){
@@ -352,16 +356,16 @@
           if(self.resultArr.some(item=>item.ID == data.ID)){
             self.resultArr.forEach(item=>{
               if(item.ID == data.ID){
-                item.CP_C_REGION_ID = val.ID.val;
-                item.CP_C_REGION_ENAME = val.ENAME.val;
+                item.CP_C_REGION_ID = id;
+                item.CP_C_REGION_ENAME = code;
               }
             })
           }else {
             let obj = {
               EXCEPTION_TYPE:data.EXCEPTION_TYPE,// 处理异常类型
               ID:data.ID,
-              CP_C_REGION_ID:val.ID.val,// 省市区选择的id
-              CP_C_REGION_ENAME:val.ENAME.val// 省市区选择的name
+              CP_C_REGION_ID:id,// 省市区选择的id
+              CP_C_REGION_ENAME:code// 省市区选择的name
             }
             self.resultArr.push(obj);
           }
@@ -369,8 +373,8 @@
           let obj = {
             EXCEPTION_TYPE:data.EXCEPTION_TYPE,// 处理异常类型
             ID:data.ID,
-            CP_C_REGION_ID:val.ID.val,// 省市区选择的id
-            CP_C_REGION_ENAME:val.ENAME.val// 省市区选择的name
+            CP_C_REGION_ID:id,// 省市区选择的id
+            CP_C_REGION_ENAME:code// 省市区选择的name
           };
           self.resultArr.push(obj);
         }
