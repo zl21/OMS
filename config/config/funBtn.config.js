@@ -14,6 +14,14 @@ class BtnConfig {
     loading: false, // 按钮加载
     buttons: [
       {
+        webname: 'informWMSToCreateNew', // 退货单-通知WMS新建
+        btnclick: () => this.btnMainHandler('wmsCreate'),
+      },
+      {
+        webname: 'notifyWMSToWithdraw', // 退货单-通知WMS撤回
+        btnclick: () => this.btnMainHandler('wmsWithdraw'),
+      },
+      {
         webname: 'manualReturnCreation', // 退货单-手工创建
       },
       {
@@ -527,6 +535,17 @@ class BtnConfig {
         tips = 'm1'
         paramsType = 1
         break
+      case 'wmsCreate':
+        funName = `${type}Handler`
+        tips = 'ga'
+        paramsType = 7
+        break
+      case 'wmsWithdraw':
+        funName = `${type}Handler`
+        tips = 'gb'
+        paramsType = 7
+        break
+            
     }
     const self = BtnConfig.target
     BtnConfig.btnKey = type
@@ -1714,6 +1733,73 @@ class BtnConfig {
     const self = BtnConfig.target
     self.modal = true //最新筛选排序组件
   }
+
+  // 手工通知WMS新建
+  wmsCreateHandler(self, data) {
+    this.wmsHandler(self, data, 'wmsCreateHandler')
+  }
+  
+  // 手工通知WMS撤回
+  wmsWithdrawHandler(self, data) {
+    this.wmsHandler(self, data, 'wmsWithdrawHandler')
+  }
+
+  wmsHandler(self, data, btnType) {
+    let ids = Array.isArray(data) ? data.map(i => i.ID) : data
+    let result = ids.length > 1 ? { IDS: ids } : { ID: ids[0] }
+    let serviceUrl = btnType == 'wmsCreateHandler' 
+      ? 'orderCenter.createReturnOrderToWms'
+      : 'orderCenter.cancelReturnOrderFromWms'
+    commonUtils.serviceHandler(
+      self,
+      serviceUrl,
+      result,
+      'all',
+      function (res) {
+        if (res.data.code === 0) {
+          commonUtils.msgTips(self, 'success', res.data.message, 2)
+          self.selection = []
+          self.query()
+        } else if (res.data.data) {
+          let tabData = res.data.data.map((row, index) => {
+            row.INDEX = ++index
+            row.BILL_NO = row.billNo
+            row.RESULT_MSG = row.message
+            return row
+          })
+          commonUtils.tipShow(
+            'confirm',
+            self,
+            res,
+            res.data.message,
+            function (h) {
+              return h('Table', {
+                props: {
+                  columns: [
+                    {
+                      title: '序号',
+                      key: 'INDEX',
+                    },
+                    {
+                      title: '单据编号',
+                      key: 'BILL_NO',
+                    },
+                    {
+                      title: '失败原因',
+                      key: 'RESULT_MSG',
+                    },
+                  ],
+                  data: tabData,
+                },
+              })
+            }
+          )
+        }
+      }
+    )
+  }
+  
+  
 }
 
 export default BtnConfig

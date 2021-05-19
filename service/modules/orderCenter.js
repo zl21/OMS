@@ -359,4 +359,9 @@ export default {
     $network.post('/p/cs/oc/oms/v1/initObject', params), // 零售发货单列表(包裹详情,商品详情表头查询)
   queryObjectList: (params) =>
     $network.post('/p/cs/oc/oms/v1/queryObject', params), // 零售发货单列表(包裹详情,商品详情明细查询)
+
+  createReturnOrderToWms: (params) =>
+    $network.post('/p/cs/oc/oms/v1/returnOrder/createReturnOrderToWms', params), // 退货单-手工通知WMS新建
+  cancelReturnOrderFromWms: (params) =>
+    $network.post('/p/cs/oc/oms/v1/returnOrder/cancelReturnOrderFromWms', params), // 退货单-手工通知WMS撤回
 }

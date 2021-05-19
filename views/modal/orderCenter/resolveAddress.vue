@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-12 14:32:32
- * @LastEditTime: 2021-05-19 10:11:44
+ * @LastEditTime: 2021-05-19 18:11:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/modal/orderCenter/resolveAddress.vue
@@ -25,7 +25,7 @@
           @on-blur="parseAddress"
           @on-enter="parseAddress"
         />
-         <Tooltip class="showTooltip" max-width ="400" theme = "dark" content="格式:张三,17788888888,上海上海市闵行区黎安路999号" placement="top-start">
+         <Tooltip class="showTooltip" theme = "light" content="格式:张三,17788888888,上海上海市闵行区黎安路999号" placement="top-start">
            <Icon type="ios-alert-outline" />
          </Tooltip>
       </FormItem>
@@ -92,4 +92,17 @@ export default resolveAddress;
 
 <style lang="less">
 @import '~@/css/modal/orderCenter/resolveAddress.less';
+.popInput{
+.el-input__inner{
+    padding: 0;
+  }
+}
+.fkAutocompleteCP_C_REGION_PROVINCE_ID{
+  min-width: 200px !important;
+}
+.showTooltip{
+  .ark-tooltip-inner{
+    max-width: 360px;
+  }
+}
 </style>

@@ -43,7 +43,7 @@ export default {
             display: "text", // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
             fkdisplay: "drp", // 外键关联类型
             isfk: true, // 是否有fk键
-            isnotnull: false, // 是否必填
+            isnotnull: true, // 是否必填
             isuppercase: false, // 是否转大写
             length: 65535, // 最大长度是多少
             name: "省", // 赔付类型
@@ -57,12 +57,15 @@ export default {
             pid: ""
           },
           oneObj: (val) => {
+            console.log('val:',val);
             // 选中触发事件
-            this.data.cp_c_region_province_id = val.pid;
             this.formConfig.formData[1].itemdata.pid = '';
             this.formConfig.formData[1].itemdata.valuedata = '';
             this.formConfig.formData[2].itemdata.pid = '';
             this.formConfig.formData[2].itemdata.valuedata = '';
+            this.data.cp_c_region_province_id = val.pid;
+            this.data.cp_c_region_city_id = ''
+            this.data.cp_c_region_area_id = ''
           },
         },
         {
@@ -79,7 +82,7 @@ export default {
             display: "text", // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
             fkdisplay: "drp", // 外键关联类型
             isfk: true, // 是否有fk键
-            isnotnull: false, // 是否必填
+            isnotnull: true, // 是否必填
             isuppercase: false, // 是否转大写
             length: 65535, // 最大长度是多少
             name: "市", // 赔付类型
@@ -100,9 +103,10 @@ export default {
           oneObj: (val) => {
             // 选中触发事件
             console.log("val::", val);
-            this.data.cp_c_region_city_id = val.pid;
             this.formConfig.formData[2].itemdata.pid = '';
             this.formConfig.formData[2].itemdata.valuedata = '';
+            this.data.cp_c_region_city_id = val.pid;
+            this.data.cp_c_region_area_id = ''
           },
         },
         {
@@ -119,7 +123,7 @@ export default {
             display: "text", // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
             fkdisplay: "drp", // 外键关联类型
             isfk: true, // 是否有fk键
-            isnotnull: false, // 是否必填
+            isnotnull: true, // 是否必填
             isuppercase: false, // 是否转大写
             length: 65535, // 最大长度是多少
             name: "区县", // 赔付类型
@@ -172,9 +176,9 @@ export default {
         receiver_name: [
             { required: true, message: ' ', trigger: 'blur' }
         ],
-        receiver_mobile: [
-            { required: true, message: ' ', trigger: 'blur' }
-        ]
+        // receiver_mobile: [
+        //     { required: true, message: ' ', trigger: 'blur' }
+        // ]
       },
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
@@ -249,8 +253,8 @@ export default {
         this.data.receiver_name = result.name;
         this.data.receiver_mobile = result.mobile;
         this.data.receiver_address = result.addr;
-        this.data.receiver_phone = result.receiver_phone;
-        this.data.receiver_zip = result.receiver_zip;
+        this.data.receiver_phone = result.phone;
+        this.data.receiver_zip = result.zip_code;
         this.newReceivAddress = result.newReceivAddress;
         this.formConfig.formData[0].itemdata.valuedata = result.province;
         this.formConfig.formData[1].itemdata.valuedata = result.city;
@@ -280,29 +284,31 @@ export default {
       }
     },
     update() {
-      console.log(this.data);
+      console.log(this.data.cp_c_region_province_id,this.data.cp_c_region_city_id,this.data.cp_c_region_area_id);
+      if(!this.data.cp_c_region_province_id || !this.data.cp_c_region_city_id || !this.data.cp_c_region_area_id){
+        return this.$Message.error('省、市、区都不能为空！');
+      }
+      if (!this.data.receiver_name) {
+        // 请填写详细地址！
+        return this.$Message.error('姓名不能为空！');
+      }
       if (!this.data.receiver_address) {
         // 请填写详细地址！
         return this.$Message.error($i18n.t('modalTips.ym'));
       }
       let f = this.CheckRegx(this.regx.mobile, this.data.receiver_mobile);
       if (this.componentData.ck != 50) {
-        if (!f) return this.CheckRegxMobile();
+        if (!f && !Boolean(this.data.receiver_phone)) return this.$Message.error('手机号或电话号码不能为空！');;
       }
       if (this.data.receiver_zip) {
         f = this.CheckRegx(this.regx.shipzip, this.data.receiver_zip);
         if (!f) return this.CheckRegxZip();
       }
-      const info = this.data;
-      if (!info.cp_c_region_area_id) {
-        delete info.cp_c_region_area_id;
-      }
       const self = this;
       const param = {
         id: self.objId,
-        updateInfo: info,
+        updateInfo: this.data,
       };
-      console.log(param);
       this.loading = true;
       this.service.orderCenter.updateOrderAddr(param).then((res) => {
         if (res.data.code === 0) {
