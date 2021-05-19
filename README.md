@@ -458,6 +458,7 @@ R3.launchApplication({
 | v1.3.36 | bug:38957  |
 | v1.3.37 | manualReturnCreation  |
 | v1.3.38 | 策略中心-新增/详情 移除启用停用按钮  |
+| v1.3.39 | 异常处理功能,模糊搜索处理  |
 
 #### Extends-Api 版本说明
 
