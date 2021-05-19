@@ -39,6 +39,7 @@ export default {
       spuID: '', // SPU编码对应的ID
       skuID: '',
       imgIndex: 0,
+      specList: ['spec01','spec02','spec03'],
       spec01Data: {
         totalRowCount: 0, // 数据总条数
         autoData: [], // 模糊搜索的数据
@@ -291,7 +292,7 @@ export default {
           colname: 'PS_C_SPECOBJ2_ID',
           defVal: 'PS_C_SPECGROUP_ID2',
           style: 'dynamic',
-          slotName: 'spec01',
+          slotName: 'spec02',
           width: '8',
           pageSize: 10, // 每页条数
           columns: ['name', 'value'],
@@ -317,7 +318,7 @@ export default {
           colname: 'PS_C_SPECOBJ3_ID',
           defVal: 'PS_C_SPECGROUP_ID3',
           style: 'dynamic',
-          slotName: 'spec01',
+          slotName: 'spec03',
           width: '8',
           pageSize: 10, // 每页条数
           columns: ['name', 'value'],// 展现的组
@@ -382,6 +383,7 @@ export default {
           PRICE_RETAIL: [{ required: true, message: " " }],
         },
       },
+      specGroupArrP: ['PS_C_SPECGROUP_ID1', 'PS_C_SPECGROUP_ID2', 'PS_C_SPECGROUP_ID3'],
       // 固定属性Part-formConfig
       fixAttrFormConfig: {
         formData: [],
@@ -453,23 +455,7 @@ export default {
       if (self.ID > 0 && self.$route.query.spuid) {
         self.formConfig.formData[0].itemdata.valuedata = self.$route.query.spucode;
       }
-      // 初始化规格维度的spec01Data
-      const specGroupArr = ['spec01Data', 'spec02Data', 'spec03Data'];
-      const specGroupArrP = ['PS_C_SPECGROUP_ID1', 'PS_C_SPECGROUP_ID2', 'PS_C_SPECGROUP_ID3'];
-      // 1、this上
-      /* specGroupArr.forEach(it => {
-        this[it].data = JSON.parse(JSON.stringify(this.popTableBaseData));
-      }) */
-      // 2、formData上
-      /* self.formConfig.formData.forEach(it => {
-        if (specGroupArrP.includes(it.colname)) {
-          it.data = JSON.parse(JSON.stringify(this.popTableBaseData));
-        }
-      }) */
-      // 3、formValue上
-      specGroupArrP.forEach(it => {
-        this.formConfig.formValue[it].data = JSON.parse(JSON.stringify(this.popTableBaseData));
-      })
+      // 详情页-规格名称默认值赋值：
       const defValArr = ['PS_C_SPECOBJ1_ID', 'PS_C_SPECOBJ2_ID', 'PS_C_SPECOBJ3_ID'];
       this.formConfig.formData.forEach(item => {
         if (defValArr.includes(item.colname)) {
@@ -481,7 +467,6 @@ export default {
           this.formConfig.formValue[item.defVal].defaultSelected = itemDefV;
         }
       })
-
       // 渲染图片
       if (data.addcolums[0].childs[0].valuedata) {
         const imgData = JSON.parse(data.addcolums[0].childs[0].valuedata)
@@ -555,6 +540,7 @@ export default {
      */
     async renderSpecificationDimension(pageIndex = 1, pageSize = 10, DIMENSION = 1, NAME = '') {
       const self = this;
+      const key = `PS_C_SPECGROUP_ID${DIMENSION}`;
       const param = {
         PS_C_PRO_ID: self.spuID,
         pageNumber: pageIndex,
@@ -570,22 +556,13 @@ export default {
         },
       } = await this.service.commodityCenter.skuSelSpecobj(param).catch(() => { });
       if (code == 0 && (Object.keys(data)).length) {
-        // 1、挂在this上：
-        // const key = `spec0${DIMENSION}Data`;
-        // this[key].data.row = data.DATA.map(it => ({ ECODE: { val: it.ECODE }, ENAME: { val: it.ENAME }, ID: { val: it.ID } }))
-        // this[key].totalRowCount = data.COUNT;
-        // this[key].autoData = data.DATA;
-        // 2、挂在formValue上：
-        const key = `PS_C_SPECGROUP_ID${DIMENSION}`;
-        this.formConfig.formValue[key].data.row = data.DATA.map(it => ({ ECODE: { val: it.ECODE }, ENAME: { val: it.ENAME }, ID: { val: it.ID } }))
-        this.formConfig.formValue[key].totalRowCount = data.COUNT;
-        if (NAME) this.formConfig.formValue[key].autoData = data.DATA;
-        // this.formConfig.formValue[key].defaultSelected = [];
-        // 3、挂在formData上：
-        // this.formConfig.formData.find(it => it.colname == key).data.row = this[`popData${DIMENSION}`];
+        let row = data.DATA.map(it => ({ ECODE: { val: it.ECODE }, ENAME: { val: it.ENAME }, ID: { val: it.ID } }))
+        let totalRowCount = data.COUNT;
+        let autoData = [];
+        NAME && (autoData = data.DATA);
+        let drpData = { ...this.popTableBaseData, row }
+        this.formConfig.formValue[key] = { ...this.formConfig.formValue[key], data: drpData, autoData, totalRowCount }
       }
-
-
     },
     /**
      * @method 按查询条件渲染

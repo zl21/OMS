@@ -455,6 +455,7 @@ R3.launchApplication({
 | v1.3.33 | bug:38865->once |
 | v1.3.34 | bug:38865->once |
 | v1.3.35 | 替换 ImageUpload 业务组件  |
+| v1.3.36 | bug:38957  |
 
 
 #### Extends-Api 版本说明

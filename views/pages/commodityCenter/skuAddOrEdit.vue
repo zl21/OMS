@@ -18,9 +18,59 @@
             />
           </div>
           <div slot="content" class="customized_Info_form">
-            <businessForm :form-config="formConfig" @keyDown="keyDown" :key="forceFresh" >
+            <businessForm
+              :form-config="formConfig"
+              @keyDown="keyDown"
+              :key="forceFresh"
+            >
               <template #spec01="{ rowData }">
                 <DropDownSelectFilter
+                  isBackRowItem
+                  :single="true"
+                  :data="rowData.value[rowData.item.defVal].data"
+                  :total-row-count="
+                    rowData.value[rowData.item.defVal].totalRowCount
+                  "
+                  :auto-data="rowData.value[rowData.item.defVal].autoData"
+                  :defaultSelected="
+                    rowData.value[rowData.item.defVal].defaultSelected
+                  "
+                  :page-size="rowData.item.pageSize"
+                  :columns-key="rowData.item.columnsKey || []"
+                  :hidecolumns="rowData.item.hidecolumns || []"
+                  @on-popper-show="rowData.item.popShow"
+                  @on-page-change="rowData.item.changePage"
+                  @on-fkrp-selected="rowData.item.fkrpSelected"
+                  @on-input-value-change="rowData.item.inputValueChange"
+                  @on-clear="rowData.item.clearInput"
+                />
+              </template>
+              <template #spec02="{ rowData }">
+                <DropDownSelectFilter
+                  v-loading="loading2"
+                  isBackRowItem
+                  :single="true"
+                  :data="rowData.value[rowData.item.defVal].data"
+                  :total-row-count="
+                    rowData.value[rowData.item.defVal].totalRowCount
+                  "
+                  :auto-data="rowData.value[rowData.item.defVal].autoData"
+                  :defaultSelected="
+                    rowData.value[rowData.item.defVal].defaultSelected
+                  "
+                  :page-size="rowData.item.pageSize"
+                  :columns-key="rowData.item.columnsKey || []"
+                  :hidecolumns="rowData.item.hidecolumns || []"
+                  @on-popper-show="rowData.item.popShow"
+                  @on-page-change="rowData.item.changePage"
+                  @on-fkrp-selected="rowData.item.fkrpSelected"
+                  @on-input-value-change="rowData.item.inputValueChange"
+                  @on-clear="rowData.item.clearInput"
+                />
+              </template>
+              <template #spec03="{ rowData }">
+                <DropDownSelectFilter
+                  v-loading="loading2"
                   isBackRowItem
                   :single="true"
                   :data="rowData.value[rowData.item.defVal].data"
