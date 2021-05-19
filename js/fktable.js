@@ -264,6 +264,7 @@ export default {
     },
     // 模糊搜索
     fkDimSearch(val) {
+      console.log('val:',val);
       this.visible = 1
       let _self = this;
       let params = new FormData();
@@ -272,6 +273,7 @@ export default {
       params.append('fixedcolumns',JSON.stringify({}))
       $network.post('/p/cs/fuzzyquerybyak',params,{ serviceId: _self.itemdata.serviceId || 'r3-cp' })
       .then((res) => {
+        console.log('res:',res);
         this.fkDimData = res.data.data;
       })
     },

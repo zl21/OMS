@@ -232,6 +232,7 @@ export default {
       searchParam.append('fixedcolumns', query.fixedcolumns);
 
       this.service.common.fuzzyquerybyak(searchParam, { serviceId: itemdata.serviceId || 'r3-cp' }).then((res) => {
+        console.log('fuzzyquerybyak:',res);
         for (let i = 0; i < res.data.data.length; i++) {
           const element = res.data.data[i];
           if (
@@ -353,12 +354,15 @@ export default {
       searchParam.append('colid', id);
       searchParam.append('fixedcolumns', query.fixedcolumns);
       this.service.common.fuzzyquerybyak(searchParam, { serviceId: self.itemdata.serviceId || 'r3-cp' }).then((res) => {
+        console.log('fuzzyquerybyak',res);
         self.queryList = res.data.data;
-
+        console.log('self.itemdata:',self.itemdata);
         if (res.data.data.length > 0) {
           cb(res.data.data);
         } else {
           cb([]);
+          self.itemdata.valuedata = '';
+          this.$emit('getFkChooseItem', self.itemdata)
         }
       });
     },
@@ -482,6 +486,7 @@ export default {
         searchdata.fixedcolumns = self.selectConfigChanged;
       }
       this.service.common.QueryList(searchdata, { serviceId: self.itemdata.serviceId || 'r3-cp' }).then((res) => {
+        console.log('res:',res);
         self.SelectionData.tableAllDatas = res.data.datas;
         self.SelectionData.row = res.data.datas.row;
         self.SelectionData.thead = res.data.datas.tabth;
