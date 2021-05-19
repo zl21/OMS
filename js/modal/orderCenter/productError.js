@@ -27,13 +27,14 @@ import businessActionTable from 'professionalComponents/businessActionTable';
       }
     },
     created() {
+      this.query();
     },
     mounted() {
-      this.query();
     },
     data() {
       return {
         vmI18n:$i18n,
+        itemdata_list:[],
         loading: false,
         resultArr:[],
         tableConfig: {
@@ -74,67 +75,73 @@ import businessActionTable from 'professionalComponents/businessActionTable';
             {
               key: 'PS_C_SKU_ECODE',
               title: '系统SKU编码',
-              render: (h, params) => h('div', {
-                style: {
-                  width: '150px'
-                }
-              }, [
-                h('drpInput', {
-                  props: {
-                    style: 'popInput',
-                    version: '1.4',
-                    isActive: true,
-                    itemdata: {
-                      colid: 171591,
-                      colname: 'CP_C_REGION_PROVINCE_ID',
-                      fkdisplay: 'drp',
-                      isfk: true, // 是否有fk键
-                      isnotnull: true, // 是否必填
-                      name: '',
-                      readonly: false, // 是否可编辑，对应input   readonly属性
-                      pid: params.row.PS_C_SKU_ID,
-                      valuedata: params.row.PS_C_SKU_ECODE,
-                    },
-                  },
+              render: (h, params) => {
+                const self = this;
+                return h('div', {
                   style: {
-                    marginRight: '5px',
-                  },
-                  on: {
-                    getFkChooseItem: (val) => {
-                      if(val.ID){ //下拉选中时间
-                        params.row.PS_C_SKU_ECODE = val.ECODE.val
-                        params.row.PS_C_SKU_ID = val.ID.val
-                        this.tableConfig.data[params.index] = params.row;
-                        this.getResult(val , params.row)
-                        console.log('val:', val);
-                        console.log('params:', params);
-                      }else if(val.id) {  //失去焦点时间
-                        params.row.PS_C_SKU_ECODE = val.value
-                        params.row.PS_C_SKU_ID = val.id
-                        this.tableConfig.data[params.index] = params.row;
-                        let arr = [];
-                        this.resultArr.forEach(item=>{
-                          if(item.ID !== params.row.ID){
-                            arr.push(item)
-                          }
-                        });
-                        this.resultArr = arr;
-                      }else { //模糊搜索事件
-                        params.row.PS_C_SKU_ECODE = val.valuedata
-                        params.row.PS_C_SKU_ID = val.pid
-                        this.tableConfig.data[params.index] = params.row;
-                        let arr = [];
-                        this.resultArr.forEach(item=>{
-                          if(item.ID !== params.row.ID){
-                            arr.push(item)
-                          }
-                        });
-                        this.resultArr = arr;
-                      }
+                    width: '150px'
+                  }
+                }, [
+                  h('drpInput', {
+                    props: {
+                      style: 'popInput',
+                      version: '1.4',
+                      isActive: true,
+                      itemdata: 
+                      self.itemdata_list[params.index]
+                      // {
+                      //   colid: 171591,
+                      //   colname: 'CP_C_REGION_PROVINCE_ID',
+                      //   fkdisplay: 'drp',
+                      //   isfk: true, // 是否有fk键
+                      //   isnotnull: true, // 是否必填
+                      //   name: '',
+                      //   readonly: false, // 是否可编辑，对应input   readonly属性
+                      //   pid: params.row.PS_C_SKU_ID,
+                      //   valuedata: params.row.PS_C_SKU_ECODE,
+                      // },
                     },
-                  },
-                })
-              ])
+                    style: {
+                      marginRight: '5px',
+                    },
+                    on: {
+                      getFkChooseItem: (val) => {
+                        console.log(val);
+                        if(val.ID){ //下拉选中时间
+                          params.row.PS_C_SKU_ECODE = val.ECODE.val
+                          params.row.PS_C_SKU_ID = val.ID.val
+                          this.tableConfig.data[params.index] = params.row;
+                          this.getResult(val , params.row)
+                          console.log('val:', val);
+                          console.log('params:', params);
+                        }else if(val.id) {  //失去焦点时间
+                          params.row.PS_C_SKU_ECODE = val.value
+                          params.row.PS_C_SKU_ID = val.id
+                          this.tableConfig.data[params.index] = params.row;
+                          let arr = [];
+                          this.resultArr.forEach(item=>{
+                            if(item.ID !== params.row.ID){
+                              arr.push(item)
+                            }
+                          });
+                          this.resultArr = arr;
+                        }else { //模糊搜索事件
+                          params.row.PS_C_SKU_ECODE = val.valuedata
+                          params.row.PS_C_SKU_ID = val.pid
+                          this.tableConfig.data[params.index] = params.row;
+                          let arr = [];
+                          this.resultArr.forEach(item=>{
+                            if(item.ID !== params.row.ID){
+                              arr.push(item)
+                            }
+                          });
+                          this.resultArr = arr;
+                        }
+                      },
+                    },
+                  })
+                ])
+              }
             },
             {
               key: 'OUTER_IID',
@@ -190,6 +197,19 @@ import businessActionTable from 'professionalComponents/businessActionTable';
         }).then(res=>{
           console.log(res);
           if (res.data.code == 0) {
+            res.data.data.OC_B_ORDER_EXCEPTION.forEach(item=>{
+              self.itemdata_list.push({
+                colid: 171591,
+                colname: 'CP_C_REGION_PROVINCE_ID',
+                fkdisplay: 'drp',
+                isfk: true, // 是否有fk键
+                isnotnull: true, // 是否必填
+                name: '',
+                readonly: false, // 是否可编辑，对应input   readonly属性
+                pid: item.PS_C_SKU_ID,
+                valuedata: item.PS_C_SKU_ECODE,
+              })
+            })
             self.tableConfig.data = res.data.data.OC_B_ORDER_EXCEPTION;
             self.tableConfig.total = res.data.data.totalRowCount;
           }

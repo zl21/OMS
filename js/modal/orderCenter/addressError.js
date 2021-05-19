@@ -37,6 +37,8 @@
       return {
         vmI18n:$i18n,
         loading: false,
+        itemdata_pro:[],
+        itemdata_city:[],
         resultArr:[],
         tableConfig: {
           indexColumn: true, // 是否显示序号
@@ -77,17 +79,18 @@
                         style: 'popInput',
                         version: '1.4',
                         isActive: true,
-                        itemdata: {
-                          colid: 166974,
-                          colname: 'CP_C_REGION_PROVINCE_ID',
-                          fkdisplay: 'drp',
-                          isfk: true, // 是否有fk键
-                          isnotnull: true, // 是否必填
-                          name: '',
-                          readonly: false, // 是否可编辑，对应input   readonly属性
-                          pid: params.row.CP_C_REGION_PROVINCE_ID,
-                          valuedata: params.row.CP_C_REGION_PROVINCE_ENAME,
-                        },
+                        itemdata: this.itemdata_pro[params.index]
+                        // {
+                        //   colid: 166974,
+                        //   colname: 'CP_C_REGION_PROVINCE_ID',
+                        //   fkdisplay: 'drp',
+                        //   isfk: true, // 是否有fk键
+                        //   isnotnull: true, // 是否必填
+                        //   name: '',
+                        //   readonly: false, // 是否可编辑，对应input   readonly属性
+                        //   pid: params.row.CP_C_REGION_PROVINCE_ID,
+                        //   valuedata: params.row.CP_C_REGION_PROVINCE_ENAME,
+                        // },
                       },
                       style: {
                         marginRight: '5px',
@@ -144,17 +147,18 @@
                         style: 'popInput',
                         version: '1.4',
                         isActive: true,
-                        itemdata: {
-                          colid: 167077,
-                          colname: 'CP_C_REGION_CITY_ID',
-                          fkdisplay: 'drp',
-                          isfk: true, // 是否有fk键
-                          isnotnull: true, // 是否必填
-                          name: '',
-                          readonly: false, // 是否可编辑，对应input   readonly属性
-                          pid: params.row.CP_C_REGION_CITY_ID,
-                          valuedata: params.row.CP_C_REGION_CITY_ENAME,
-                        },
+                        itemdata: this.itemdata_city[params.indexgi]
+                        // {
+                        //   colid: 167077,
+                        //   colname: 'CP_C_REGION_CITY_ID',
+                        //   fkdisplay: 'drp',
+                        //   isfk: true, // 是否有fk键
+                        //   isnotnull: true, // 是否必填
+                        //   name: '',
+                        //   readonly: false, // 是否可编辑，对应input   readonly属性
+                        //   pid: params.row.CP_C_REGION_CITY_ID,
+                        //   valuedata: params.row.CP_C_REGION_CITY_ENAME,
+                        // },
                       },
                       style: {
                         marginRight: '5px',
@@ -307,6 +311,30 @@
         }).then(res=>{
           console.log(res);
           if (res.data.code == 0) {
+            res.data.data.OC_B_ORDER_EXCEPTION.forEach(item=>{
+              self.itemdata_pro.push({
+                colid: 166974,
+                colname: 'CP_C_REGION_PROVINCE_ID',
+                fkdisplay: 'drp',
+                isfk: true, // 是否有fk键
+                isnotnull: true, // 是否必填
+                name: '',
+                readonly: false, // 是否可编辑，对应input   readonly属性
+                pid: item.CP_C_REGION_PROVINCE_ID,
+                valuedata: item.CP_C_REGION_PROVINCE_ENAME,
+              });
+              self.itemdata_city.push({
+                colid: 167077,
+                colname: 'CP_C_REGION_CITY_ID',
+                fkdisplay: 'drp',
+                isfk: true, // 是否有fk键
+                isnotnull: true, // 是否必填
+                name: '',
+                readonly: false, // 是否可编辑，对应input   readonly属性
+                pid: item.CP_C_REGION_CITY_ID,
+                valuedata: item.CP_C_REGION_CITY_ENAME,
+              })
+            })
             self.tableConfig.data = res.data.data.OC_B_ORDER_EXCEPTION;
             self.tableConfig.total = res.data.data.totalRowCount;
           }
