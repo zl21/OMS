@@ -106,3 +106,4 @@
 | v1.0.41 |  同步zh_CN  |
 | v1.0.42 |  默认中文  |
 | v1.0.43 |  add btn.modify_sellerNotes/btn.sortForm/btn.order_detailed/   |
+| v1.0.44 |  add modalTips.ga/gb   |
