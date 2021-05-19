@@ -145,7 +145,6 @@ export default {
             // 选中触发事件
             console.log("val::", val);
             this.data.cp_c_region_area_id = val.pid
-            this.data.cp_c_region_area_id = ''
           },
         }]
       },
@@ -285,6 +284,7 @@ export default {
       }
     },
     update() {
+      console.log(this.data.cp_c_region_province_id,this.data.cp_c_region_city_id,this.data.cp_c_region_area_id);
       if(!this.data.cp_c_region_province_id || !this.data.cp_c_region_city_id || !this.data.cp_c_region_area_id){
         return this.$Message.error('省、市、区都不能为空！');
       }
