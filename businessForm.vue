@@ -132,6 +132,20 @@
             </my-input>
           </FormItem>
 
+          <!-- 输入框弹框单多选-arkUi -->
+          <FormItem v-if="item.style === 'popInputPlus'"
+                    :class="item.class ? `${item.class}`+' '+'popInput' : 'popInput'">
+            <fkinputPlus :isActive='true'
+                      :isDisabled='false'
+                      :inputList="item.inputList?item.inputList:[]"
+                      :objList="item.objList?item.objList:[]"
+                      :itemdata="item.itemdata"
+                      @inputBlur="runMethods(item.InputEnter)"
+                      @getFkChooseItem="(row)=>runMethods(item.oneObj(item.itemdata.isBackRowItem ? row : item.itemdata))"
+                      @itemInputEnter="runMethods(item.InputEnter)">
+            </fkinputPlus>
+          </FormItem>
+
           <!-- 为多选+导入弹框专属引入 -->
           <!-- 输入框弹框单多选 -->
           <FormItem v-if="item.style === 'popInput_ld'"

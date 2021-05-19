@@ -171,3 +171,4 @@
 | v1.1.24 | 重置所有列信息,换接口  |
 | v1.1.25 | fkinput bug |
 | v1.1.26 | drp模糊搜获的失焦和选中二次$emit导致的bug(临时方案) |
+| v1.1.27 | fkinputPlus(fkinput重构v1.0) |
