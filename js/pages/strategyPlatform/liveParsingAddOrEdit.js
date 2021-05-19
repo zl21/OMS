@@ -45,25 +45,7 @@ export default {
             btnclick: () => {
               this.back()
             },
-          },
-          {
-            webname: 'lookup_return',
-            text: '启用',
-            isShow: false,
-            disabled: false,
-            btnclick: () => {
-              this.toggleEnable(true)
-            },
-          },
-          {
-            webname: 'lookup_return',
-            text: '停用',
-            isShow: false,
-            disabled: false,
-            btnclick: () => {
-              this.toggleEnable(false)
-            },
-          },
+          }
         ]
       },
       formConfig1: {
@@ -459,18 +441,6 @@ export default {
       })
       this.formConfig2.formData[0].itemdata.readonly = this.isEnable
     },
-    /**
-     * 按钮显示隐藏
-     * @param {*} btnText 按钮文本
-     */
-    setBtnEnable(btnText) {
-      this.btnConfig.buttons.forEach(i => {
-        i.isShow = true
-        if (['启用','停用'].includes(i.text)) {
-          i.disabled = i.text == btnText
-        }
-      })
-    },
     // 表单赋值
     initForm(data) {
       ['formConfig1', 'formConfig2', 'formConfig3'].forEach(formName => {
@@ -497,10 +467,8 @@ export default {
       this.loading = false
       if (code == 0) {
         if (data) {
-          let tipText = data.ISACTIVE == 'Y' ? '启用' : '停用'
           this.initForm(data)
           this.setEnable()
-          this.setBtnEnable(tipText)
         }
         return
       }
@@ -603,26 +571,6 @@ export default {
         this.isModify = false
         this.$message.success(message)
         this.onOk()
-        return
-      }
-    },
-    /**
-     * 启用停用
-     * @param {*} isEnable true 启用 false 停用
-     * @returns 
-     */
-    async toggleEnable(isEnable) {
-      const tipText = isEnable ? '启用' : '停用'
-      if (this.formConfig1.formValue.ISACTIVE == tipText) return this.$message.warning(`当前记录已${tipText}，不允许重复${tipText}！`)
-      const formdata = new FormData()
-      formdata.append('id', this.ID)
-      formdata.append('isActive', isEnable ? 'Y' : 'N')
-      formdata.append('tableName', 'ST_C_EXPRESS_ALLOCATION')
-      const { data: { code, message }} = await this.service.strategyPlatform.liveParsingSetIsActive(formdata)
-      if (code == 0) {
-        this.isEnable = isEnable
-        this.queryLiveParsing()
-        this.$message.success(message)
         return
       }
     }

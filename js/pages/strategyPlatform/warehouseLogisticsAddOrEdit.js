@@ -48,22 +48,6 @@ export default {
             btnclick: () => {
               this.back();
             },
-          },
-          {
-            text: '启用',
-            isShow: false,
-            disabled: false,
-            btnclick: () => {
-              this.toggleEnable('Y');
-            }
-          },
-          {
-            text: '停用',
-            isShow: false,
-            disabled: false,
-            btnclick: () => {
-              this.toggleEnable('N');
-            }
           }
         ]
       },
@@ -496,17 +480,6 @@ export default {
       this.logisticsTableFormConfig.formData[0].disabled = isEnable
       this.logisticsTableFormConfig.formData[0].style = isEnable ? 'input' : 'formCompile'
     },
-    /**
-     * 按钮显示隐藏
-     * @param {*} btnText 按钮文本
-     */
-    setBtnEnable(btnText) {
-      let btns = ['启用','停用']
-      this.btnConfig.buttons.forEach(i => {
-        i.isShow = true
-        btns.includes(i.text) && (i.disabled = i.text == btnText)
-      })
-    },
     // 查询
     async queryLogistics() {
       this.loading = true;
@@ -541,9 +514,7 @@ export default {
           })
           this.isMasterRequired = true;
           this.queryForm(this.formConfig, 'ISACTIVE').style = 'input';
-          const btnText = isEnable ? '启用' : '停用';
-          this.formConfig.formValue.ISACTIVE = btnText;
-          this.setBtnEnable(btnText)
+          this.formConfig.formValue.ISACTIVE = isEnable ? '启用' : '停用';
         }
         const { records = [], total } = ST_C_EXPRESS_ALLOCATION_ITEM || {}
         this.logisticsTableConfig.data = records
@@ -608,25 +579,6 @@ export default {
         this.logisticsTableConfig.data = this.$OMS2.omsUtils.getDifferentArr(allArrs, partArrs, 'CP_C_LOGISTICS_ID');
         code == 0 ? this.$message.success(message) : this.$message.error(message);
       }
-    },
-    // 启用停用
-    async toggleEnable(isEnable) {
-      const tipText = isEnable == 'Y' ? '启用' : '停用';
-      if (this.formConfig.formValue.ISACTIVE == tipText) return this.$message.warning(`当前记录已${tipText}，不允许重复${tipText}！`);
-      const formdata = new FormData();
-      formdata.append('objId', this.ID);
-      formdata.append('isActive', isEnable);
-      formdata.append('tableName', 'ST_C_WAREHOUSE_LOGISTICS_SET');
-      const {
-        data: { code, message }
-      } = await this.service.strategyPlatform.switchLogisticsCorp(formdata);
-      if (code == 0) {
-        this.queryLogistics();
-        this.setBtnEnable(tipText)
-        this.$message.success(message);
-        return;
-      }
-      this.$message.error(message);
     },
     /**
      * 获取下拉项
