@@ -14,6 +14,9 @@ class BtnConfig {
     loading: false, // 按钮加载
     buttons: [
       {
+        webname: 'manualReturnCreation', // 退货单-手工创建
+      },
+      {
         webname: 'ORDER_DELETE_GOODS', // 删除赠品
       },
       {

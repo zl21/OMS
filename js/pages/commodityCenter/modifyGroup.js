@@ -7,6 +7,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import comUtils from '@/assets/js/__utils__/common.js';
 import logTable from 'professionalComponents/LogTable';
+import ImageUpload from 'arkui_BCL/ImageUpload';
 
 export default {
   components: {
@@ -15,7 +16,8 @@ export default {
     businessLabel,
     businessStatusFlag,
     logTable,
-    businessActionTable
+    businessActionTable,
+    ImageUpload
   },
   computed: {
     id() {
@@ -453,20 +455,19 @@ export default {
         ],
         data: [],
       },
+      imageValue: '',
+      http: $network,
       dataitem: {
         url: '/p/cs/upload2',
         sendData: {
           path: 'AC_F_PAYABLE_ADJUSTMENT/-1/',
         },
-        width: 250,
-        height: 170,
         colname: 'IMAGE',
         name: $i18n.t('other.uploadVoucher'), // 上传凭证
         readonly: false,
         valuedata: [],
       },
       imgIndex: '',
-      isModal: false,
       isClearItem: false, // 是否清空明细
       isModify: false,
       WatchChange: false, // 监听修改变化
@@ -585,26 +586,16 @@ export default {
       self.formConfig.formData = await publicMethodsUtil.getTypeList('PS_C_PRO_GROUP', ['TYPE'], '基础信息', self.formConfig);
     },
     // 删除图片
-    // 删除图片
-    deleteImg(imgInfo, imgIndex) {
-      this.imgIndex = imgIndex;
-      this.isModal = true;
+    deleteImg() {
+      this.formConfig.formValue.IMAGE = this.dataitem.valuedata;
+      this.modify.master.IMAGE = this.dataitem.valuedata;
     },
     // 图片上传成功的处理
     uploadFileChangeSuccess(res) {
       const self = this;
-      self.dataitem.valuedata.push({
-        name: res.data.Name,
-        URL: res.data.Url,
-      });
+      self.dataitem.valuedata = res.map(i => ({ name: i.NAME, URL: i.URL }))
       self.formConfig.formValue.IMAGE = self.dataitem.valuedata;
       self.modify.master.IMAGE = self.dataitem.valuedata;
-    },
-    // 弹框-确认删除图片
-    deleteImgBySure() {
-      this.dataitem.valuedata.splice(this.imgIndex - 1, 1);
-      this.formConfig.formValue.IMAGE = this.dataitem.valuedata;
-      this.modify.master.IMAGE = this.dataitem.valuedata;
     },
     labelClick(e) { // tab明细切换
       console.log(e);

@@ -13,6 +13,16 @@ class DropDownConfig {
     let self = DropDownConfig.target
     this.singleType = singleType
     switch (val) {
+      case 'manualReturnCreation': {
+        // commonUtils.navigateMain(-1, 'TabOpen', 'RETURNORDERADD', 'panel_label.addReturnOrder')
+        R3.store.commit('global/tabOpen', {
+          type: 'C',
+          label: '退货单新增',
+          customizedModuleName: 'RETURNORDERADD',
+          customizedModuleId: 'New',
+        })
+        break
+      }
       case 'ORDER_COPY_CANCELED_ORDER': {
         this.canceledOrderCopyHander()
         break

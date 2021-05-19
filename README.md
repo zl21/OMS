@@ -454,7 +454,10 @@ R3.launchApplication({
 | v1.3.32 | bug:38865 |
 | v1.3.33 | bug:38865->once |
 | v1.3.34 | bug:38865->once |
-
+| v1.3.35 | 替换 ImageUpload 业务组件  |
+| v1.3.36 | bug:38957  |
+| v1.3.37 | manualReturnCreation  |
+| v1.3.38 | 策略中心-新增/详情 移除启用停用按钮  |
 
 #### Extends-Api 版本说明
 

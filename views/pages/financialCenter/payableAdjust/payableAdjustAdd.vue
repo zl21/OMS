@@ -18,9 +18,11 @@
             style="float: left; width: 250px; margin-top: 15px"
           >
             <ImageUpload
-              :dataitem="dataitem"
-              @deleteImg="deleteImg"
-              @uploadFileChangeSuccess="uploadFileChangeSuccess"
+              v-model="imageValue"
+              :http="http"
+              :PropsData="dataitem"
+              @on-delete="deleteImg"
+              @on-Change="uploadFileChangeSuccess"
             />
           </p>
           <p slot="content">
@@ -37,15 +39,6 @@
             <businessForm :form-config="formConfigLog" />
           </p>
         </Panel>
-
-        <Modal
-          v-model="isModal"
-          :title="vmI18n.t('modalTitle.tips')"
-          @on-ok="deleteImgBySure"
-        >
-          <!-- <p>点击后将删除凭证,是否继续?</p> -->
-          <p>{{ vmI18n.t("modalTips.z5") }}</p>
-        </Modal>
         <Modal
           v-model="detailAddTable.modal"
           class="detailAdd customizedModal"

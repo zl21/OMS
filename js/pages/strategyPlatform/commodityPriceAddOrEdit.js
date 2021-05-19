@@ -57,24 +57,6 @@ export default {
           },
           {
             webname: 'lookup_return', // 返回
-            text: '启用',
-            isShow: false,
-            disabled: false,
-            btnclick: () => {
-              this.toggleEnable(1)
-            },
-          },
-          {
-            webname: 'lookup_return', // 返回
-            text: '停用',
-            isShow: false,
-            disabled: false,
-            btnclick: () => {
-              this.toggleEnable(0)
-            },
-          },
-          {
-            webname: 'lookup_return', // 返回
             text: '复制',
             isShow: false,
             btnclick: () => {
@@ -515,22 +497,6 @@ export default {
     pageSizeChange(e) {
       this.goodsTableConfig.pageSize = e;
     },
-    // 启用停用
-    async toggleEnable(isEnable) {
-      const tipText = isEnable ? '启用' : '停用'
-      if (this.formConfig.formValue.ISACTIVE == tipText) return this.$message.warning(`当前记录已${tipText}，不允许重复${tipText}！`)
-      const formdata = new FormData()
-      formdata.append('id', this.ID)
-      formdata.append('isActive', isEnable ? 'Y' : 'N')
-      const { data: { code, message }} = await this.service.strategyPlatform.priceSetIsActive(formdata)
-      if (code == 0) {
-        this.setEnable(isEnable)
-        this.queryPrice()
-        this.queryPriceItem()
-        return
-      }
-      this.$message.error(message);
-    },
     // 删除明细
     deleteDetail() {
       const selectArr = this.goodsTableConfig.selectionData
@@ -686,7 +652,10 @@ export default {
      * @returns
      */
     queryForm(formConfig, field) {
-      return formConfig.formData.find((item) => item.colname == field); 
+      return formConfig.formData.find(item => item.colname == field); 
+    },
+    queryBtn(btnConfig, btnText) {
+      return btnConfig.buttons.find(item => item.text == btnText);
     },
     /**
      * 主表表单渲染
@@ -732,19 +701,11 @@ export default {
     /**操作按钮是否可编辑 */
     setBtnEnable(isEnable) {
       let isEdit = this.ID != -1
-      let btnText = isEnable ? '启用' : '停用'
-      let masterBtns = ['启用','停用', '复制']
-      let subTableBtns = ['删除明细', '导入']
-      this.btnConfig.buttons.forEach(item => {
-        if (masterBtns.includes(item.text)) {
-          item.isShow = isEdit
-          item.disabled = isEdit && item.text == btnText
-        }
-      })
-      this.goodsTableConfig.businessButtonConfig.buttons
-        .forEach(item => {
-          item.isShow = subTableBtns.includes(item.text) && isEnable ? false : !this.isCopy
-        })
+      let tableBtnConfig = this.goodsTableConfig.businessButtonConfig
+      let isShowTableBtn = isEnable ? false : !this.isCopy
+      this.queryBtn(this.btnConfig, '复制').isShow = isEdit
+      this.queryBtn(tableBtnConfig, '删除明细').isShow = isShowTableBtn
+      this.queryBtn(tableBtnConfig, '导入').isShow = isShowTableBtn
     },
     isValid(obj, validFields) {
       let valid = true;

@@ -12,9 +12,11 @@
             class="customized_Info_img"
           >
             <ImageUpload
-              :dataitem="dataitem"
-              @deleteImg="deleteImg"
-              @uploadFileChangeSuccess="uploadFileChangeSuccess"
+              v-model="imageValue"
+              :http="http"
+              :PropsData="dataitem"
+              @on-delete="deleteImg"
+              @on-Change="uploadFileChangeSuccess"
             />
           </div>
           <div slot="content"  class="customized_Info_form">
@@ -33,14 +35,6 @@
             <businessForm :form-config="customAttr.customFormConfig" />
           </p>
         </Panel>
-        <Modal
-          v-model="isModal"
-          :title="vmI18n.t('modalTitle.tips')"
-          @on-ok="deleteImgBySure"
-        >
-          <!-- <p>点击后将删除凭证,是否继续?</p> -->
-          <p>{{ vmI18n.t('modalTips.z5') }}</p>
-        </Modal>
       </Collapse>
       <!-- tab切换 -->
       <div class="customized-detail-table">
