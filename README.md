@@ -468,6 +468,7 @@ R3.launchApplication({
 | v1.3.46 | 修改地址省市必填  |39098
 | v1.3.47 | bug:39098  |
 | v1.3.48 | specifyGoodsAssign  |
+| v1.3.49 | 迁移策略中心模块  |
 
 #### Extends-Api 版本说明
 

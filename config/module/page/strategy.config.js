@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-08 10:41:48
+ * @LastEditTime: 2021-05-20 13:46:47
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/config/module/page/strategy.config.js
+ */
 export default {
   // 策略平台-物流区域设置
   LOGISTICSAREA: {
@@ -44,5 +52,25 @@ export default {
   ST_C_LIVE_CAST_STRATEGY: {
     component: () => import('allpages/strategyPlatform/liveParsingAddOrEdit'),
     labelName: '直播解析编辑'
-  }
+  },
+  ST_C_ORDER_WAREHOUSE: {
+    component: () => import('allpages/strategyPlatform/storehouseRule'),
+    labelName: '分仓规则',
+    isList: true
+  },
+  ST_C_ASSIGN_LOGISTICS: {
+    component: () => import('allpages/strategyPlatform/storehouseRule'),
+    labelName: '物流规则',
+    isList: true
+  },
+  ST_C_SPECIAL_ASSIGN_LOGISTICS: {
+    component: () => import('allpages/strategyPlatform/specialLogistics'),
+    labelName: '特殊物流方案',
+    isList: true
+  },
+  ST_C_DELIVERY_AREA: {
+    component: () => import('allpages/strategyPlatform/logisticsDistribute'),
+    labelName: '物流派送范围',
+    isList: true
+  },
 };
