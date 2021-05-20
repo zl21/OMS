@@ -1658,7 +1658,7 @@ export default {
           // 只读
           // console.log("单据状态:未退款,打款状态:打款失败,才可以修改")
           // } //第三次修改 可编辑
-          if (!(AfSend.RETURN_STATUS == 0 || AfSend.PAYMENT_STATUS == 3)) {
+          if (!(AfSend.RETURN_STATUS == 0 || AfSend.PAYMENT_STATUS == 3) && this.$route.params.customizedModuleName === 'EXTRAREFUND') {
             this.reForm.config.forEach((val, index) => {
               if (val.item.label === '实际退款金额' || val.item.label === '收款人姓名' || val.item.label === '支付账号') {
                 val.item.props.disabled = true
