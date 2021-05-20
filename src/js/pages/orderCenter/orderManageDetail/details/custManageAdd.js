@@ -338,6 +338,22 @@ export default {
             }
           });
           self.showTable(lists);
+
+          // 现货预售的明细显示橙色
+          setTimeout(() => {
+            lists.forEach((item, index) => {
+              if (item.RESERVE_BIGINT02 == 1) {
+                const dom = document.getElementsByClassName('jordan-table-box')[0].getElementsByClassName('ark-table-row')[index].getElementsByTagName('td')
+                const dom1 = document.getElementsByClassName('ark-table-fixed')[0].getElementsByClassName('ark-table-row')[index].getElementsByTagName('td')
+                for (let i = 0; i < dom.length; i++) {
+                  dom[i].setAttribute('style', "background-color:#FF8800 !important;")
+                }
+                for (let i = 0; i < dom1.length; i++) {
+                  dom1[i].setAttribute('style', "background-color:#FF8800 !important;")
+                }
+              }
+            })
+          })
         } else {
           self.tableConfig.loading = false;
           this.$Message.error('数据加载失败');
