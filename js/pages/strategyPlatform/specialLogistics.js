@@ -2,7 +2,7 @@ import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 // import loading from 'professionalComponents/loading';
 import businessLabel from 'professionalComponents/businessLabel';
-import switchList from 'professionalComponents/strategyPlatform/switchList';
+import switchList from 'professionalComponents/switchList';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import axios from 'axios';

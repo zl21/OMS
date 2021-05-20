@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-08 10:41:48
- * @LastEditTime: 2021-05-20 13:46:47
+ * @LastEditTime: 2021-05-20 14:42:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/page/strategy.config.js

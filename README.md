@@ -470,6 +470,7 @@ R3.launchApplication({
 | v1.3.48 | specifyGoodsAssign  |
 | v1.3.49 | 迁移策略中心模块  |
 | v1.3.50 | subTable(操作日志) config add  |
+| v1.3.51 | 修改引入switchList组件路径  |
 
 #### Extends-Api 版本说明
 
