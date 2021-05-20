@@ -123,7 +123,7 @@ export default {
             display: "text", // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
             fkdisplay: "drp", // 外键关联类型
             isfk: true, // 是否有fk键
-            isnotnull: true, // 是否必填
+            isnotnull: false, // 是否必填
             isuppercase: false, // 是否转大写
             length: 65535, // 最大长度是多少
             name: "区县", // 赔付类型
@@ -284,9 +284,8 @@ export default {
       }
     },
     update() {
-      console.log(this.data.cp_c_region_province_id,this.data.cp_c_region_city_id,this.data.cp_c_region_area_id);
-      if(!this.data.cp_c_region_province_id || !this.data.cp_c_region_city_id || !this.data.cp_c_region_area_id){
-        return this.$Message.error('省、市、区都不能为空！');
+      if(!this.data.cp_c_region_province_id || !this.data.cp_c_region_city_id){
+        return this.$Message.error('省、市不能为空！');
       }
       if (!this.data.receiver_name) {
         // 请填写详细地址！
@@ -305,6 +304,9 @@ export default {
         if (!f) return this.CheckRegxZip();
       }
       const self = this;
+      if(!this.data.cp_c_region_area_id){
+        delete this.data.cp_c_region_area_id;
+      }
       const param = {
         id: self.objId,
         updateInfo: this.data,
