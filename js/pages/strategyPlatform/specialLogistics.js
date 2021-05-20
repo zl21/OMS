@@ -681,7 +681,6 @@ export default {
   },
   mounted() {
     this.relationShip();
-
     let { customizedModuleId, customizedModuleName } = this.$route.params;
     this.customizedModuleName = customizedModuleName;
     if (customizedModuleId == 'New') {
@@ -694,11 +693,11 @@ export default {
       this.queryAddressPages();
       this.queryProPages();
       this.queryLogisticsWarehousePages();
-      this.btnConfig.buttons.forEach(em => {
-        if (em.text == '启用' || em.text == '停用') {
-          em.isShow = true;
-        }
-      });
+      // this.btnConfig.buttons.forEach(em => {
+      //   if (em.text == '启用' || em.text == '停用') {
+      //     em.isShow = true;
+      //   }
+      // });
     }
   },
   methods: {
