@@ -1,6 +1,6 @@
 <template>
   <!-- 订单管理 - 批量拆弹 - 指定商品拆单 -->
-  <div class="specifyGoods customized-modal">
+  <div class="specifyGoods customized-modal" v-loading="loading">
     <div class="i_head">
       <div style="float: left; margin-top: 7px">
         <RadioGroup v-model="radioValue" @on-change="radioChange">
@@ -24,13 +24,11 @@
           @on-enter="search"
           @on-click="search"
         /> -->
-        <myInput
-          colname="PS_C_SKU"
-          style="popInput"
-          version="1.4"
+        <inputP
           :itemdata="itemdata"
           @getFkChooseItem="oneObj"
-        ></myInput>
+          @inputBlur="inputBlur"
+        ></inputP>
         <!-- 数量:
         <Input v-model="qty" style="width: 80px" />-->
       </div>
@@ -46,11 +44,11 @@
 // import specifyGoodsAssign from '@/js/modal/orderCenter/specifyGoodsAssign';
 // export default specifyGoodsAssign;
 import businessButton from "professionalComponents/businessButton";
-import myInput from "professionalComponents/fkinput.vue";
+import inputP from "professionalComponents/fkinputPlus.vue";
 
 export default {
   components: {
-    myInput,
+    inputP,
     businessButton,
   },
   data() {
@@ -90,6 +88,8 @@ export default {
         isnotnull: false,
         readonly: false,
       },
+      loading: false,
+      data: [{ ECODE: '12' }, { ECODE: '11' }],
       columns: [
         {
           title: "序号",
@@ -118,42 +118,20 @@ export default {
                 on: {
                   click: () => {
                     console.log(params.row);
-                    this.querySgStorage(params.row);
-                    this.$Modal.confirm({
-                      title: "查库存",
-                      titleAlign: "center",
-                      mask: true,
-                      className: "ark-dialog",
-                      render: (h) =>
-                        h("Table", {
-                          props: {
-                            columns: [
-                              {
-                                title: "序号",
-                                key: "Index",
-                                type: "index",
-                              },
-                              {
-                                title: "逻辑仓",
-                                key: "CP_C_STORE_NAME",
-                              },
-                              {
-                                title: "可用数",
-                                key: "QTY_AVAILABLE",
-                              },
-                            ],
-                            data: this.storageData,
-                          },
-                        }),
-                    });
+                    // this.querySgStorage(params.row);
+                    const rowA = [params.row];
+                    this.data = this.$OMS2.omsUtils.getDifferentArr(
+                      this.data,
+                      rowA,
+                      "ECODE"
+                    );
                   },
                 },
               },
-              "查库存"
+              "删除"
             ),
         },
       ],
-      data: [],
     };
   },
   props: {
@@ -162,13 +140,18 @@ export default {
     },
   },
   mounted() {
-    console.log(this.componentData);
+    console.log('this.componentData::', this.componentData);
   },
   methods: {
     oneObj(val) {
       console.log("val:", val);
-      console.log("params:", params);
-      this.getFkChooseItem(val, params);
+      // console.log("params:", params);
+      // this.getFkChooseItem(val, params);
+    },
+    inputBlur(val) {
+      console.log("val:", val);
+      // console.log("params:", params);
+      // this.getFkChooseItem(val, params);
     },
     radioChange(value) {
       console.log(value);
@@ -199,43 +182,40 @@ export default {
       const self = this;
       if (self.data.length == 0) {
         self.$Message.warning($i18n.t("modalTips.cg")); // sku不能为空!
-        return;
+        // return;
       }
       let result = {};
+      result.test = '====测试入参====：';
       // if (self.qty == '') {
       //   self.$Message.warning('请输入数量!');
       //   return;
       // }
+      result.appiontSplitSkuCode = this.$OMS2.omsUtils.sonList(self.data, 'ECODE')
       if (self.radioValue == "1") {
-        self.componentData.a_1.appiontSplitSkuCode = self.searchValue;
-        // self.componentData.a_1['qty'] = self.qty;
-        result = self.componentData.a_1;
+        result.QueryList = self.componentData.data;
+        // self.componentData.data['qty'] = self.qty;
       } else if (self.radioValue == "2") {
         if (self.componentData.a_2.length == 0) {
           self.$Message.warning($i18n.t("modalTips.zu")); // 请勾选订单数据!
-          return;
+          // return;
         }
-        result.ids = self.componentData.a_2;
-        result.appiontSplitSkuCode = self.searchValue;
+        result.IDS = self.componentData.a_2;
         // result['qty'] = self.qty;
       }
-      console.log(this.componentData.a_1, result);
-      this.$comUtils.setLoading(true);
+      this.loading = true;
       this.service.orderCenter
         .saveAppointSplitOrderInfo(result)
         .then((res) => {
-          console.log(res);
           if (res.data.code == 0) {
             self.$Message.success(res.data.message);
-            self.$parent.$parent.$parent.getData();
+            self.$parent.$parent.$parent.query();
             this.$parent.$parent.closeConfirm();
           } else {
-            self.$Message.error(res.data.message);
             this.$parent.$parent.closeConfirm();
           }
-        })
+        }).catch(() => this.loading = false)
         .finally(() => {
-          this.$comUtils.setLoading();
+          this.loading = false;
         });
     },
   },
@@ -253,8 +233,7 @@ export default {
     }
   }
   .i_body {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 30px 0;
   }
 }
 </style>

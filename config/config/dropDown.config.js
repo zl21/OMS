@@ -432,11 +432,6 @@ class DropDownConfig {
               params.CP_C_SHOP_ID = res.data.data
               break
           }
-          /**
-           * objName：burgeon-business-components/common/js/publicDialog.js下对应的key
-           * propertyName：用于判断要填充给什么子组件（弹窗里的哪个组件）的componentData
-           * tableType：组件名
-           */
           this.successHandler(params, objName, propertyName, tableType)
         } else {
           commonUtils.tipShow('error', self, res)
@@ -482,6 +477,7 @@ class DropDownConfig {
         }
         break
       case 'product':
+        const data = typeof self.queryData == 'function' ? self.queryData() : {}; // 零售发货单-指定商品拆
         let param = {
           page: {
             pageSize: self.agTableConfig.pagenation.pageSize,
@@ -492,11 +488,10 @@ class DropDownConfig {
           status: self.statusData,
           highSearch: self.highSearchData,
         }
-
-        // 列表勾选数据
         componentDataObj = {
           a_1: param,
           a_2: ids,
+          data,
         }
         break
       // case 'productAdd':

@@ -467,6 +467,7 @@ R3.launchApplication({
 | v1.3.45 | 淘宝退货单下载  |
 | v1.3.46 | 修改地址省市必填  |39098
 | v1.3.47 | bug:39098  |
+| v1.3.48 | specifyGoodsAssign  |
 
 #### Extends-Api 版本说明
 
