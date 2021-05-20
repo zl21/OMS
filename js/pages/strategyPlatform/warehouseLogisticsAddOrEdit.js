@@ -81,18 +81,19 @@ export default {
               valuedata: '', // 这个是选择的值
               pid: '' // 啥 ？？？
             },
-            oneObj: async(e) => {
-              console.log(e);
-              const { data: { code, message }} = await this.service.strategyPlatform.checkPhyWarehouse({ ID: e.pid })
-              // 判断这个实体仓是否已经存在，如果已经存在就提示用户，并清掉仓库名称的值，让用户重新选择
-              if (code == -1) {
-                // this.$message.warning(message)
-                this.setFormValue(this.formConfig, 'CP_C_PHY_WAREHOUSE');
-                return
-              }
-              this.setFormValue(this.formConfig, 'CP_C_PHY_WAREHOUSE', e);
-              this.masterModifyData('CP_C_PHY_WAREHOUSE_ID', 'master');
-              this.masterModifyData('CP_C_PHY_WAREHOUSE_ENAME', 'master');
+            oneObj: (e) => {
+              this.service.strategyPlatform.checkPhyWarehouse({ ID: e.pid })
+              .then(({ data: { code }}) => {
+                // 判断这个实体仓是否已经存在，如果已经存在就提示用户，并清掉仓库名称的值，让用户重新选择
+                if (code == -1) {
+                  // this.$message.warning(message)
+                  this.setFormValue(this.formConfig, 'CP_C_PHY_WAREHOUSE');
+                  return
+                }
+                this.setFormValue(this.formConfig, 'CP_C_PHY_WAREHOUSE', e);
+                this.masterModifyData('CP_C_PHY_WAREHOUSE_ID', 'master');
+                this.masterModifyData('CP_C_PHY_WAREHOUSE_ENAME', 'master');
+              })
             }
           },
           {
@@ -134,7 +135,11 @@ export default {
             colname: 'ISACTIVE',
             value: 'ISACTIVE',
             width: '6',
-            disabled: true
+            disabled: true,
+            switchChange: () => {
+              this.masterModifyData('ISACTIVE', 'master');
+              this.setEnable(this.formConfig.formValue.ISACTIVE);
+            }
           },
           {
             version: '1.4',
@@ -179,7 +184,7 @@ export default {
           CP_C_PHY_WAREHOUSE_ID: '', // 仓库
           CP_C_LOGISTICS_ID: '', // 物流公司
           CP_C_LOGISTICS_ENAME: '',
-          ISACTIVE: '停用' // 启用状态
+          ISACTIVE: '' // 启用状态
         },
         ruleValidate: {
           IS_AUTO_LOGISTICS_DISTRIBUTION: [{ required: true, message: ' ' }],
@@ -399,18 +404,27 @@ export default {
         this.onOk();
       }
     },
-    onOk() {
+    onOk(id) {
       this.$comUtils.tabCloseAppoint(this);
       this.$destroy(true);
-      this.$store.commit('global/tabOpen', {
-        tableId: 10661,
-        type: 'S',
-        tableName: 'ST_C_WAREHOUSE_LOGISTICS_SET',
-        back: true,
-        query: {
-          isTreeTable: true
-        }
-      });
+      if (id) {
+        this.$store.commit('global/tabOpen', {
+          type: 'C',
+          label: '仓库物流编辑',
+          customizedModuleId: id,
+          customizedModuleName: 'ST_C_WAREHOUSE_LOGISTICS_SET'
+        });
+      } else {
+        this.$store.commit('global/tabOpen', {
+          tableId: 10661,
+          type: 'S',
+          tableName: 'ST_C_WAREHOUSE_LOGISTICS_SET',
+          back: true,
+          query: {
+            isTreeTable: true
+          }
+        });
+      }
     },
     initPanel() {
       if (this.ID == -1 && this.isAuto) return;
@@ -471,9 +485,7 @@ export default {
     },
     setEnable(isEnable) {
       this.formConfig.formData.forEach(i => {
-        if (i.colname == 'CP_C_PHY_WAREHOUSE_ID') {
-          i.itemdata.readonly = true
-        }
+        i.colname == 'CP_C_PHY_WAREHOUSE_ID' && (i.itemdata.readonly = true)
         i.disabled = isEnable ? true : i.colname == 'ISACTIVE' ? true : false
       })
       this.logisticsTableButtonConfig.buttons.forEach(item => item.disabled = isEnable)
@@ -513,8 +525,8 @@ export default {
             })
           })
           this.isMasterRequired = true;
-          this.queryForm(this.formConfig, 'ISACTIVE').style = 'input';
-          this.formConfig.formValue.ISACTIVE = isEnable ? '启用' : '停用';
+          this.queryForm(this.formConfig, 'ISACTIVE').style = 'switch';
+          this.formConfig.formValue.ISACTIVE = isEnable;
         }
         const { records = [], total } = ST_C_EXPRESS_ALLOCATION_ITEM || {}
         this.logisticsTableConfig.data = records
@@ -544,11 +556,14 @@ export default {
 
       const isEdit = this.isMasterRequired;
       const ST_C_EXPRESS_ALLOCATION = isEdit ? this.modify.master : this.formConfig.formValue;
-      delete ST_C_EXPRESS_ALLOCATION.ISACTIVE;
       const ITEMS = this.logisticsTableConfig.addData;
 
       let params = {
-        ST_C_EXPRESS_ALLOCATION: { ID: this.ID || -1, ...ST_C_EXPRESS_ALLOCATION },
+        ST_C_EXPRESS_ALLOCATION: { 
+          ID: this.ID || -1,
+          ...ST_C_EXPRESS_ALLOCATION,
+          ISACTIVE: ST_C_EXPRESS_ALLOCATION.ISACTIVE ? 'Y' : 'N'
+        },
         ITEMS
       };
       const {
@@ -557,10 +572,13 @@ export default {
       if (code == 0) {
         this.ID = data.objId || -1
         this.clearTableData()
-        this.queryLogistics()
-        this.setFormValue(self.logisticsTableFormConfig, 'CP_C_LOGISTICS')
         !isSaveAll && this.$message.success(message)
-        isSaveAll && this.onOk()
+        if (isSaveAll) {
+          this.onOk(this.$route.params.customizedModuleId == 'New' && this.ID)
+        } else {
+          this.queryLogistics()
+          this.setFormValue(self.logisticsTableFormConfig, 'CP_C_LOGISTICS')
+        }
         return
       }
       this.$message.error(message);

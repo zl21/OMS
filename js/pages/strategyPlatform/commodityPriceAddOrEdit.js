@@ -25,12 +25,12 @@ export default {
       vmI18n:$i18n,
       collapse: ['panel_baseInfo', 'panel_pickInfo', 'panel_warehouseInfo'],
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
-      forceReload: 0, // 组件重载
       loading: false,
       isWatchChange: false, // 监听
       isMasterRequired: false, // 主表是否已保存
       isModify: false,
-      isCopy: false,
+      isCopy: false, // 是否复制
+      isEnable: false, // 是否启用
       subTableConfig: {
         preTablename: '', // 预留属性，便于之后重新封装orderItem.js，用于匹配其相同路径下的config文件的一级key
         tablename: '',
@@ -183,7 +183,12 @@ export default {
             label: '启用状态',
             colname: 'ISACTIVE',
             width: '6',
-            disabled: true
+            disabled: true,
+            switchChange: () => {
+              this.masterModifyData('ISACTIVE', 'master');
+              this.isEnable = this.formConfig.formValue.ISACTIVE;
+              this.reloadForm()
+            }
           }
         ],
         formValue: {
@@ -239,7 +244,8 @@ export default {
             align: "center",
             required: false,
             render: (h, params) => {
-              if (this.formConfig.formValue.ISACTIVE == '停用' && !this.isCopy) {
+              // this.isEnable
+              if (!this.formConfig.formValue.ISACTIVE && !this.isCopy) {
                 return h("div", [
                   h("myInput", {
                     style: {
@@ -282,7 +288,8 @@ export default {
             key: 'PEAK_VALUE',
             align: "center",
             render: (h, params) => {
-              if (this.formConfig.formValue.ISACTIVE == '停用' && !this.isCopy) {
+              // this.isActive
+              if (!this.formConfig.formValue.ISACTIVE && !this.isCopy) {
                 return h('Input', {
                   style: {
                     width: '150',
@@ -472,7 +479,6 @@ export default {
     this.isWatchChange = true
     if (this.ID == -1 && !this.isCopy) return
     this.isWatchChange = false
-    // this.reloadForm(false)
     this.setEnable(false)
     await this.queryPrice(copyId)
     await this.queryPriceItem(copyId)
@@ -502,7 +508,6 @@ export default {
     deleteDetail() {
       const selectArr = this.goodsTableConfig.selectionData
       if (!selectArr.length) return this.$message.warning('请先选择需要删除的记录！')
-      if (this.formConfig.formValue.ISACTIVE == '启用') return this.$message.warning('当前记录启用，不允许删除！')
       const ITEM_IDS = selectArr.map(i => i.ID)
       this.service.strategyPlatform.deletePrice({ ID: this.ID, ITEM_IDS }).then(({ data: { code, message }}) => {
         if (code == 0) {
@@ -632,7 +637,8 @@ export default {
       if (!this.isWatchChange) return;
       self.isModify = true;
       let value = self.formConfig.formValue[ecode]
-      self.modify[obj][ecode] = Object.prototype.toString.call(value) == '[object Date]' ? this.formatDate(value) : value;
+      let isDate = Object.prototype.toString.call(value) == '[object Date]' 
+      self.modify[obj][ecode] = isDate ? this.formatDate(value) : value;
     },
     getFkChooseItem(row) {
       let itemIndex;
@@ -658,26 +664,27 @@ export default {
     queryBtn(btnConfig, btnText) {
       return btnConfig.buttons.find(item => item.text == btnText);
     },
-    /**
-     * 主表表单渲染
-     * @param {Boolean} isEnable true 启用 false 停用
-     */
-    reloadForm(isEnable) {
+    // 主表表单渲染
+    reloadForm() {
       this.isMasterRequired = this.ID != -1
-      this.setBtnEnable(isEnable)
-      this.setMainTableFormConfig(isEnable)
-      this.forceReload += 1 // 组件重载
+      this.setBtnEnable()
+      this.setMainTableFormConfig()
     },
-    /**
-     * 设置主表表单字段
-     * @param {Boolean} isEnable 是否启用 true: 启用 false: 停用
-     */
-    setMainTableFormConfig(isEnable) {
+    // 操作按钮是否可编辑
+    setBtnEnable() {
+      let isEdit = this.ID != -1
+      let tableBtnConfig = this.goodsTableConfig.businessButtonConfig
+      let isShowTableBtn = this.isEnable ? false : !this.isCopy
+      this.queryBtn(this.btnConfig, '复制').isShow = isEdit
+      this.queryBtn(tableBtnConfig, '删除明细').isShow = isShowTableBtn
+      this.queryBtn(tableBtnConfig, '导入').isShow = isShowTableBtn
+    },
+    // 设置主表表单字段
+    setMainTableFormConfig() {
       /**填充字段 */
-      const fieldStyle = this.isMasterRequired ? 'input' : ''
-      this.queryForm(this.formConfig, 'PLAN_ID').style = fieldStyle 
-      this.queryForm(this.formConfig, 'ISACTIVE').style = fieldStyle
-      fieldStyle && this.setEnable(isEnable)
+      this.queryForm(this.formConfig, 'PLAN_ID').style = this.isMasterRequired ? 'input' : '' 
+      this.queryForm(this.formConfig, 'ISACTIVE').style = this.isMasterRequired ? 'switch' : ''
+      this.isMasterRequired && this.setEnable()
       /**校验字段 */
       this.formConfig.ruleValidate = {
         ...this.formConfig.ruleValidate,
@@ -685,28 +692,21 @@ export default {
       }
     },
     /**主子表字段是否可编辑 */
-    setEnable(isEnable) {
+    setEnable() {
       const FIELDS = ['PLAN_ID', 'ISACTIVE', 'CP_C_SHOP_ID', 'BEGIN_TIME', 'END_TIME']
       this.formConfig.formData.forEach(i => {
         if (i.colname == 'CP_C_SHOP_ID') {
-          i.itemdata.readonly = this.isCopy ? false : isEnable
+          i.itemdata.readonly = this.isCopy ? false : this.isEnable
         }
-        i.disabled = this.isCopy ? false : isEnable ? FIELDS.includes(i.colname) : FIELDS.slice(0,2).includes(i.colname)
+        i.disabled = this.isCopy 
+          ? false
+          : this.isEnable ? FIELDS.includes(i.colname) : FIELDS.slice(0,2).includes(i.colname)
       })
       this.goodsTableConfig.businessFormConfig.formData
         .forEach((i, index) => {
           let style = index == 2 ? 'input' : 'popInput'
-          i.style = this.isCopy || isEnable ? '' : style
+          i.style = this.isCopy || this.isEnable ? '' : style
         })
-    },
-    /**操作按钮是否可编辑 */
-    setBtnEnable(isEnable) {
-      let isEdit = this.ID != -1
-      let tableBtnConfig = this.goodsTableConfig.businessButtonConfig
-      let isShowTableBtn = isEnable ? false : !this.isCopy
-      this.queryBtn(this.btnConfig, '复制').isShow = isEdit
-      this.queryBtn(tableBtnConfig, '删除明细').isShow = isShowTableBtn
-      this.queryBtn(tableBtnConfig, '导入').isShow = isShowTableBtn
     },
     isValid(obj, validFields) {
       let valid = true;
@@ -744,14 +744,15 @@ export default {
         this.isWatchChange = true
         if (code == 0) {
           if (data) {
+            this.isEnable = data.ISACTIVE == 'Y'
             this.isMasterRequired = true
-            this.reloadForm(data.ISACTIVE == 'Y')
+            this.reloadForm(this.isEnable)
             this.$OMS2.omsUtils.intersectFormValue(this.formConfig.formValue, data)
             this.setFormValue(this.formConfig, 'CP_C_SHOP', { 
               pid: data.CP_C_SHOP_ID,
               valuedata: data.CP_C_SHOP_ENAME
             })
-            this.formConfig.formValue.ISACTIVE = data.ISACTIVE == 'Y' ? '启用' : '停用'
+            this.formConfig.formValue.ISACTIVE = this.isEnable
           }
         } else {
           this.$message.error(message)
@@ -803,7 +804,9 @@ export default {
 
 
       /**子表编辑校验 */
-      const hasNoValid = this.goodsTableConfig.updateData.some(i => !this.isValid(i, ['PS_C_SKU_ECODE', 'MIN_REAL_AMT']))
+      let validFields = ['PS_C_SKU_ECODE', 'MIN_REAL_AMT']
+      const hasNoValid = this.goodsTableConfig.updateData
+        .some(i => !this.isValid(i, validFields))
       if (hasNoValid) return
     
       let params = {
@@ -824,12 +827,11 @@ export default {
         params.COPY_FLAG = 1
       }
  
-      for (let key of ['BEGIN_TIME', 'END_TIME']) {
-        if (params.ST_C_PRICE.hasOwnProperty(key)) {
-          let val = params.ST_C_PRICE[key]
-          params.ST_C_PRICE[key] = this.formatDate(val)
-        }
-      }
+      params.ST_C_PRICE.BEGIN_TIME &&= this.formatDate(params.ST_C_PRICE.BEGIN_TIME)
+      params.ST_C_PRICE.END_TIME &&= this.formatDate(params.ST_C_PRICE.END_TIME)
+      params.ST_C_PRICE.hasOwnProperty('ISACTIVE')
+        && (params.ST_C_PRICE.ISACTIVE = params.ST_C_PRICE.ISACTIVE ? 'Y' : 'N')
+
       !mes2 && (params.ST_C_PRICE_ITEM_LIST.push({ ID: -1, ...formConfig.formValue }))
       isSaveAll && (params.ST_C_PRICE_ITEM_LIST = [
         ...params.ST_C_PRICE_ITEM_LIST,

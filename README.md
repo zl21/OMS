@@ -472,6 +472,7 @@ R3.launchApplication({
 | v1.3.50 | subTable(操作日志) config add  |
 | v1.3.51 | 修改引入switchList组件路径  |
 | v1.3.52 | 已发货退款单和发货前退款单接口联调  |
+| v1.3.53 | bug:39098|39109  策略详情启用开关 |
 
 #### Extends-Api 版本说明
 

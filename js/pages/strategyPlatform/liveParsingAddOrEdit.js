@@ -18,7 +18,7 @@ export default {
       vmI18n:$i18n,
       collapse: ['panel_baseInfo', 'panel_conds', 'panel_action'],
       loading: false,
-      isEnable: false,
+      isEnable: false, // 是否启用
       isModify: false,
       isWatchChange: false, // 监听
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
@@ -108,7 +108,12 @@ export default {
             label: '启用状态',
             colname: 'ISACTIVE',
             width: '6',
-            disabled: true
+            disabled: true,
+            switchChange: () => {
+              this.masterModifyData('ISACTIVE', 'master', 'formConfig1');
+              this.isEnable = this.formConfig1.formValue.ISACTIVE;
+              this.setEnable();
+            }
           },
         ],
         formValue: {
@@ -361,15 +366,24 @@ export default {
         this.onOk();
       }
     },
-    onOk() {
+    onOk(id) {
       this.$comUtils.tabCloseAppoint(this);
       this.$destroy(true);
-      this.$store.commit('global/tabOpen', {
-        tableId: 10676,
-        type: 'S',
-        tableName: 'ST_C_LIVE_CAST_STRATEGY',
-        back: true
-      });
+      if (id) {
+        this.$store.commit('global/tabOpen', {
+          type: 'C',
+          label: '直播解析编辑',
+          customizedModuleId: id,
+          customizedModuleName: 'ST_C_LIVE_CAST_STRATEGY'
+        });
+      } else {
+        this.$store.commit('global/tabOpen', {
+          tableId: 10676,
+          type: 'S',
+          tableName: 'ST_C_LIVE_CAST_STRATEGY',
+          back: true
+        });
+      }
     },
     queryForm(formConfig, field) {
       return formConfig.formData.find((item) => item.colname == field);
@@ -447,7 +461,7 @@ export default {
         this.$OMS2.omsUtils.intersectFormValue(this[formName].formValue, data)
       })
       this.queryForm(this.formConfig1, 'PLAN_ID').style = 'input'
-      this.queryForm(this.formConfig1, 'ISACTIVE').style = 'input'
+      this.queryForm(this.formConfig1, 'ISACTIVE').style = 'switch'
   
       const { CP_C_SHOP_ID, CP_C_SHOP_ENAME, ISACTIVE, BEGIN_TIME, END_TIME } = data
       const obj = this.queryForm(this.formConfig2, 'CP_C_SHOP_ID')
@@ -455,7 +469,7 @@ export default {
       obj.itemdata.valuedata = CP_C_SHOP_ENAME
 
       this.isEnable = ISACTIVE == 'Y'
-      this.formConfig1.formValue.ISACTIVE = ISACTIVE == 'Y' ? '启用' : '停用'
+      this.formConfig1.formValue.ISACTIVE = this.isEnable
       this.formConfig2.formValue.TIME_RANGE = [BEGIN_TIME, END_TIME]
       this.formConfig1.ruleValidate.PLAN_ID[0].required = true
     },
@@ -551,12 +565,12 @@ export default {
         EFFECTIVE_END_TIME: this.formatDate(masterForm.EFFECTIVE_END_TIME),
         BEGIN_TIME: this.formatDate(masterForm.TIME_RANGE[0]),
         END_TIME: this.formatDate(masterForm.TIME_RANGE[1]),
-        RULES: this.formConfig2.formValue.RULES
+        RULES: this.formConfig2.formValue.RULES,
+        ISACTIVE: masterForm.ISACTIVE ? 'Y' : 'N'
       }
       delete params.rules
-      delete params.ISACTIVE
       this.loading = true
-      const { data: { code, message }} = await this.service.strategyPlatform.liveParsingSave(params)
+      const { data: { code, data, message }} = await this.service.strategyPlatform.liveParsingSave(params)
       this.loading = false
       if (code == 0) {
         this.modify = {
@@ -570,7 +584,7 @@ export default {
         }
         this.isModify = false
         this.$message.success(message)
-        this.onOk()
+        this.onOk(this.ID == -1 && data.objId)
         return
       }
     }
