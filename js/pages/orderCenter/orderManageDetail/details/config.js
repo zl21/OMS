@@ -1,3 +1,11 @@
+
+const searchdata = {
+  column_include_uicontroller: true,
+  range: 10,
+  fixedcolumns: {},
+  startindex: 0
+}
+
 export const orderCenter = {
   OC_B_ORDER_PROMOTION: { // 优惠信息
     table: 'OC_B_ORDER_PROMOTION',
@@ -114,18 +122,28 @@ export const orderCenter = {
   },
 };
 
+
 // 云雀2.0
 export const commodityCenter = {
   PS_C_ALTERNATE_SKU: { // 备用条码
     table: 'PS_C_ALTERNATE_SKU',
-    objid: 29,
     refcolid: 165654,
-    searchdata: {
-      column_include_uicontroller: true,
-      range: 10,
-      fixedcolumns: {},
-      startindex: 0
-    }
+    searchdata,
+  },
+  PS_C_CLASSIFY_LOG: { // 商品分类日志
+    table: 'PS_C_CLASSIFY_LOG',
+    refcolid: 179676,
+    searchdata,
+  },
+  BS_EXTRA_ATTRIBUTE_DEF_LOG: { // 商品自定义属性日志
+    table: 'BS_EXTRA_ATTRIBUTE_DEF_LOG',
+    refcolid: 179704,
+    searchdata,
+  },
+  PS_C_SKU_LOG: { // 商品sku日志
+    table: 'PS_C_SKU_LOG',
+    refcolid: 179760,
+    searchdata,
   },
 }
 
@@ -134,14 +152,8 @@ export const commodityCenter = {
 export const strategyPlatform = {
   ST_HOLD_ORDER_STRATEGY_LOG: { // hold策略
     table: 'ST_HOLD_ORDER_STRATEGY_LOG',
-    objid: 33,
     refcolid: 179448, //表-主键的字段ID
-    searchdata: {
-      column_include_uicontroller: true,
-      range: 10,
-      fixedcolumns:{},
-      startindex: 0
-    }
+    searchdata,
   },
 }
 

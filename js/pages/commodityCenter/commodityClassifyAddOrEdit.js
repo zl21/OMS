@@ -424,7 +424,7 @@ export default {
       },
       {
         label: '操作日志',
-        value: 'PS_C_ALTERNATE_SKU_1',
+        value: 'PS_C_CLASSIFY_LOG',
       },
       ],
       labelDefaultValue: 'PROPERTY', // 设置tab默认值，默认展示'自定义属性'

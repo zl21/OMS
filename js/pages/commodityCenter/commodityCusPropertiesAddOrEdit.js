@@ -395,7 +395,7 @@ export default {
         },
         {
           label: '操作日志',
-          value: 'PS_C_ALTERNATE_SKU1',
+          value: 'BS_EXTRA_ATTRIBUTE_DEF_LOG',
         },
       ],
       labelDefaultValue: 'PROPERTYVALUES', // 设置tab默认值
@@ -438,7 +438,7 @@ export default {
         self.labelList.forEach((it, index) => {
           if (it.value == 'PROPERTYVALUES') {
             self.labelList.splice(index, 1);
-            self.labelDefaultValue = 'PS_C_ALTERNATE_SKU1';
+            self.labelDefaultValue = 'BS_EXTRA_ATTRIBUTE_DEF_LOG';
           }
         });
       } else {

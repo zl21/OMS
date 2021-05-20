@@ -408,7 +408,7 @@ export default {
         },
         {
           label: '操作日志',
-          value: 'PS_C_ALTERNATE_SKU_1',
+          value: 'PS_C_SKU_LOG',
         },
       ],
       labelDefaultValue: 'PS_C_ALTERNATE_SKU', // 设置tab默认值，默认展示'备用条码'
