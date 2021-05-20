@@ -98,8 +98,8 @@ export default {
     const params = {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid,
       bill_no: self.downLoadFormConfig.formValue.bill_no,
-      start_time: BurgeonDate.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[0]),
-      end_time: BurgeonDate.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[1]),
+      start_time:self.downLoadFormConfig.formValue.timerange[0] ? BurgeonDate.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[0]) : undefined,
+      end_time:self.downLoadFormConfig.formValue.timerange[1] ? BurgeonDate.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[1]) : undefined,
       status: self.downLoadFormConfig.formValue.status,
       table: 'IP_B_TAOBAO_REFUND'
     };
