@@ -1144,11 +1144,12 @@ export default {
                 name: this.customizedModuleName
               });
             } else {
-              this.changeCount = 4; //重置编辑状态
-              this.queryById();
-              this.queryAddressPages();
-              this.queryProPages();
-              this.queryLogisticsWarehousePages();
+              // this.changeCount = 4; //重置编辑状态
+              // this.queryById();
+              // this.queryAddressPages();
+              // this.queryProPages();
+              // this.queryLogisticsWarehousePages();
+              this.pageback();
             }
           }
         }
