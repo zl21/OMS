@@ -93,7 +93,6 @@ class DropDownConfig {
         break
       }
       case 'appointSplit': {
-        // this.dropDownMainHandler('appointSplit')
         this.appointSplitHandler()
         break
       }
@@ -354,12 +353,6 @@ class DropDownConfig {
         tips = 'd3'
         paramsType = 1
         break
-      /* case 'appointSplit':
-        funName = 'appointSplitHandler'
-        tips = 'd4'
-        paramsType = 1
-        break */
-
       case 'holdOrder':
         funName = 'holdOrderHandler'
         tips = 'e2'
