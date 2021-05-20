@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-05-19 15:56:14
- * @LastEditTime: 2021-05-19 19:26:52
+ * @LastEditTime: 2021-05-20 10:37:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/fkinputPlus.vue
@@ -10,7 +10,7 @@
   <div class="item-input item-col">
     <label v-if="itemdata.name" class="title">
       <i v-if="itemdata.isnotnull">*</i>
-      {{ itemdata.name }}:
+      {{ itemdata.name }}：
     </label>
     <DropDownSelectFilter
       v-if="itemdata.fkdisplay === 'drp'"
