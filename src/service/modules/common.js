@@ -244,7 +244,12 @@ export default {
         tableName: 'ST_C_PRODUCT_STRATEGY',
         url: '/p/cs/productStrategy/import/multiShopItem',
         downloadUrl: '/p/cs/productStrategy/import/downloadMultiShopTemp'
-      } // 店铺商品特殊设置 - 多店铺比例-明细导入
+      }, // 店铺商品特殊设置 - 多店铺比例-明细导入
+      { 
+        tableName: 'AC_F_RECONCILIATION_SETTLE_STRATEGY',
+        url: '/p/cs/ac/v1/settleStrategyImport',
+        downloadUrl: '/p/cs/ac/v1/settleStrategyImportTemp'
+      } // O2O对账结算策略 - 导入
     ];
     return arr;
   },

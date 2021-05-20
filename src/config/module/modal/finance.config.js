@@ -15,5 +15,9 @@ export default {
   // 支付宝下载账单
   DOWNLOADALIPAYBILL: {
     component: () => import('@/views/modal/financeCenter/downLoadAlipayBill.vue'),
+  },
+  // O2O对账结算策略
+  CUSTOMSETTLESTRATEGYIMPORT: {
+    component: () => import('@/views/modal/financeCenter/customsettlestrategyimport.vue'),
   }
 };
