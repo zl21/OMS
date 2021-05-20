@@ -175,3 +175,4 @@
 | v1.1.28 | fkinput模糊搜索数据为空，清空输入框（省市区bug） |
 | v1.1.29 | fkinputPlus(fkinput重构v1.1) |
 | v1.1.30 | fkinputPlus(fkinput重构v1.2) |
+| v1.1.31 | 增加 switchList组件|
