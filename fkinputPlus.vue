@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-05-19 15:56:14
- * @LastEditTime: 2021-05-20 10:37:00
+ * @LastEditTime: 2021-05-20 13:10:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/fkinputPlus.vue
@@ -79,7 +79,8 @@ export default {
   },
   data() {
     return {
-      valuedata: '',
+      isFuzzy: false,
+      fuzzyQueryList: [],
       SingleSelect: {
         show: false
       },
@@ -98,7 +99,6 @@ export default {
         pageSize: 10,
         pageSizeList: [10, 20, 50, 100, 200]
       },
-      queryList: [],
       isHandleSelect: false,
       // 单选弹出框数据操作
       selectCurrentPage: 2,
@@ -239,11 +239,7 @@ export default {
     }
   },
   methods: {
-    changePage() { },
-    InputValueChange() { },
-    /**
-     * 入参处理：
-     */
+    /* ------------------------ 入参处理 start  ------------------------ */
     handelFixedcolumns() { },
     handelParam() {
       const query = new FormData();
@@ -265,6 +261,7 @@ export default {
       formdata.append("fixedcolumns", JSON.stringify({ whereKeys: {} }));
       return formdata
     },
+    /* ------------------------ 入参处理 end  ------------------------ */
     /**
      * 填充气泡表格数据
      * @val {Number} val 当前页数 / 输入的关键字
@@ -302,18 +299,60 @@ export default {
     /* ------------------- DropMultiSelectFilter组件事件 start  ------------------- */
     fkrpselected(val) {
       if (this.itemdata.fkdisplay == 'drp') {
-        this.itemdata.valuedata = val[0].Label;
         this.itemdata.pid = val[0].ID;
-        this.$emit('getFkChooseItem', val[0]);
+        this.itemdata.valuedata = val[0].Label;
+        if (this.isBackRowItem) {
+          this.$emit('getFkChooseItem', val[0]);
+        } else {
+          this.$emit('getFkChooseItem', this.itemdata);
+        }
       } else {
 
       }
     },
     InputValueChange(val) {
+      this.isFuzzy = true;
       this.getFuzzySelectData(val);
     },
-    blur() { },
-    clear() { },
+    changePage(val) {
+      this.pageIndex = val;
+      this.getSelectData();
+    },
+    blur() {
+      // 失焦：模糊搜索的选中、clear都会先走失焦
+      if (this.isFuzzy) {
+        if (this.AutoData.length) {
+          const val = this.AutoData;
+          this.itemdata.pid = val[0].ID;
+          this.itemdata.valuedata = val[0].value;
+          this.defaultSelected = [{ ID: val[0].ID, Label: val[0].value }];
+          if (this.isBackRowItem) {
+            this.$emit('inputBlur', val[0]);
+          } else {
+            this.$emit('inputBlur', this.itemdata);
+          }
+        } else {
+          this.itemdata.pid = null;
+          this.itemdata.valuedata = null;
+          if (this.isBackRowItem) {
+            this.$emit('inputBlur', {});
+          } else {
+            this.$emit('inputBlur', this.itemdata);
+          }
+        }
+      } else {
+        console.log('not fuzzy blur');
+      }
+    },
+    clear() {
+      this.itemdata.pid = null;
+      this.itemdata.valuedata = null;
+      if (this.isBackRowItem) {
+        this.$emit('getFkChooseItem', {});
+      } else {
+        this.$emit('getFkChooseItem', this.itemdata);
+      }
+    },
     popperShow() {
       this.getSelectData()
       // this.$emit('getFkChooseItem', val);

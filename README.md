@@ -173,3 +173,5 @@
 | v1.1.26 | drp模糊搜获的失焦和选中二次$emit导致的bug(临时方案) |
 | v1.1.27 | fkinputPlus(fkinput重构v1.0) |
 | v1.1.28 | fkinput模糊搜索数据为空，清空输入框（省市区bug） |
+| v1.1.29 | fkinputPlus(fkinput重构v1.1) |
+| v1.1.30 | fkinputPlus(fkinput重构v1.2) |
