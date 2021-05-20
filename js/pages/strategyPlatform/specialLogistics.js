@@ -674,8 +674,8 @@ export default {
       total2: 10,
       isactive: '',
       cityArrData: [],
-      inputvalue:"",
-      inputvalue2:"",
+      inputvalue: "",
+      inputvalue2: "",
       table4Data: [] //仓库物流选中的数据
     };
   },
@@ -1248,15 +1248,17 @@ export default {
       this.fntable();
     },
     fncancel() {
+      this.tableConfig.ECODE = "" // 编码查询条件
+      this.tableConfig.ENAME = "" // 名称查询条件
       this.modal3 = false;
     },
-    fnkeyup(v,dom) {
+    fnkeyup(v, dom) {
 
       this.tableConfig.ECODE = dom.currentValue;
       this.fntable();
     },
-    fnkeyup1(v,dom) {
-      this.tableConfig.ENAME =dom.currentValue;
+    fnkeyup1(v, dom) {
+      this.tableConfig.ENAME = dom.currentValue;
       this.fntable();
     },
     fntable() {
