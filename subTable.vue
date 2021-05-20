@@ -68,7 +68,7 @@ export default {
       const centerName = req.centerName ? req.centerName : "orderCenter";
       if (!self.config[centerName][req.tablename]) {
         console.log("no Config in this.$OMS2.subTableConfig ！！！");
-        console.log('this.$OMS2.subTableConfig::',self.config);
+        console.log('this.$OMS2.subTableConfig::', self.config);
         return;
       }
       const data = JSON.parse(
@@ -76,7 +76,6 @@ export default {
       ); // 匹配config文件中每个小item的key
       self.objid = req.objid || -1;
       if (self.objid === -1) return;
-      // data.objid = self.objid ;
       const searchdata = {};
       searchdata.startindex =
         (this.tableConfig.current - 1) * this.tableConfig.pageSize;
@@ -90,12 +89,14 @@ export default {
       formdata.append("table", data.table);
       formdata.append("searchdata", data.searchdata);
       formdata.append("refcolid", data.refcolid);
-      const res = await this.service.common.objectTableItem(formdata);
+      const res = await this.service.common.objectTableItem(formdata).catch(() => {
+        self.$Message.warning('p/cs/objectTableItem try catch !')
+      });
       if (res.data.code === 0) {
         self.showTable(res.data.datas ? res.data.datas : res.data.data);
       } else {
         // 数据加载失败
-        console.log(self.vmI18n.t("modalTips.z3"));
+        // console.log(self.vmI18n.t("modalTips.z3"));
       }
     },
     showTable(obj) {
