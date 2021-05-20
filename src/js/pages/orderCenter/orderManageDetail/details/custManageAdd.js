@@ -784,6 +784,11 @@ export default {
             );
           }
         },
+        {
+          key: 'ESTIMATE_CON_TIME',
+          title: '最晚发货时间',
+          dataAcessKey: 'ESTIMATE_CON_TIME',
+        },
         // {
         //   key: "SKU_SPEC",
         //   title: "规格",
