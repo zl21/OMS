@@ -93,7 +93,8 @@ class DropDownConfig {
         break
       }
       case 'appointSplit': {
-        this.dropDownMainHandler('appointSplit')
+        // this.dropDownMainHandler('appointSplit')
+        this.appointSplitHandler()
         break
       }
       case 'shortageSplit': {
@@ -353,11 +354,11 @@ class DropDownConfig {
         tips = 'd3'
         paramsType = 1
         break
-      case 'appointSplit':
+      /* case 'appointSplit':
         funName = 'appointSplitHandler'
         tips = 'd4'
         paramsType = 1
-        break
+        break */
 
       case 'holdOrder':
         funName = 'holdOrderHandler'
@@ -453,7 +454,13 @@ class DropDownConfig {
       })
   }
 
-  // this.successHandler(rows, 'holdOrderConfig', 'holdOrder', 'holdOrderDialog');
+  /**
+   * 打开弹窗处理（主要是处理一下要传给弹窗的数据）
+   * @param {Array } ids 
+   * @param {String} objName burgeon-business-components/common/js/publicDialog.js下对应的key
+   * @param {String} componentDataType 用于判断要填充给什么子组件（弹窗里的哪个组件）的componentData
+   * @param {String} tableType 组件名
+   */
   static successHandler(ids, objName, componentDataType, tableType) {
     let self = DropDownConfig.target
     self.publicBouncedConfig = JSON.parse(
@@ -592,7 +599,15 @@ class DropDownConfig {
     commonUtils.serviceHandler(self, 'splitOrder', { ids })
   }
   // 指定商品拆单
-  static appointSplitHandler(ids) {
+  static appointSplitHandler() {
+    let self = DropDownConfig.target
+    let ids;
+    if (self.selection.length > 0) {
+      // self.btnConfig.loading = true
+      ids = commonUtils.sonList(self.selection, 'ID');
+    } else {
+      ids = [];
+    }
     this.successHandler(
       ids,
       'specifyGoodsAssignConfig',
