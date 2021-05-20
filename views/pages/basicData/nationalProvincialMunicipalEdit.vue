@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-27 13:44:58
+ * @LastEditTime: 2021-05-20 11:34:16
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/views/pages/basicData/nationalProvincialMunicipalEdit.vue
+-->
 <template>
   <!-- 基础信息-国家省市区-编辑 -->
   <div
@@ -40,16 +48,4 @@ export default nationalProvincialMunicipalEdit;
 
 <style lang="less" scoped>
 @import '~professionalComponents/common/css/theme.less';
-.nationalProvincialMunicipalEdit {
-  /deep/ .businessForm_a {
-    .ark-row .ark-col {
-      &:last-child {
-        input.ark-input {
-          border: none;
-          width: 45px;
-        }
-      }
-    }
-  }
-}
 </style>
