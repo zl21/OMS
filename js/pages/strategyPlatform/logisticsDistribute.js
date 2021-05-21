@@ -132,13 +132,31 @@ export default {
             colname: 'remark',
             width: '12',
             disabled: false
+          },
+          {
+            style: '',
+            label: '启用状态',
+            colname: 'isActive',
+            width: '6',
+            disabled: true,
+            switchChange: () => {
+              let isActive = this.FormConfig.formValue.isActive;
+              this.FormConfig.formData[1].disabled = isActive;
+              this.AliasFormConfig.formData[0].options.forEach(em => {
+                em.disabled = isActive;
+              });
+              this.btnConfig2.buttons.forEach(em => {
+                em.disabled = isActive;
+              });
+            }
           }
         ],
         formValue: {
           remark: '', //备注
           // cpCLogisticsEcode: '', //物流公司编码
           cpCLogisticsEname: '', //物流公司名称
-          cpCLogisticsId: '' // 物流公司id
+          cpCLogisticsId: '', // 物流公司id
+          isActive: ''
         },
         ruleValidate: {}
       },
@@ -464,6 +482,7 @@ export default {
         this.FormConfig.formValue.cpCLogisticsId = stCDeliveryArea.cpCLogisticsId; //物流公司id
         this.FormConfig.formValue.remark = stCDeliveryArea.remark; //备注
         this.totalpage = stCDeliveryAreaRegionItemList.total;
+        this.FormConfig.formData[2].style = 'switch'
         //isactive 根据主表这个字段来控制是否可以编辑 Y不能编辑 N可以编辑
 
         if (stCDeliveryArea.isactive == 'Y') {
@@ -726,7 +745,7 @@ export default {
         },
         stCDeliveryAreaRegionItemList: this.stCDeliveryAreaRegionItemList
       };
-
+      this.ID != -1 && (data.stCDeliveryArea.isActive = this.FormConfig.formValue.isActive)
       service.strategyPlatform.deliveryAreaSave(data).then(res => {
         this.fnempty();
         this.$Message.success(res.data.message);
