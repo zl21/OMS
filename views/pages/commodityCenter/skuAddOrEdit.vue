@@ -47,7 +47,6 @@
               </template>
               <template #spec02="{ rowData }">
                 <DropDownSelectFilter
-                  v-loading="loading2"
                   isBackRowItem
                   :single="true"
                   :data="rowData.value[rowData.item.defVal].data"
@@ -70,7 +69,6 @@
               </template>
               <template #spec03="{ rowData }">
                 <DropDownSelectFilter
-                  v-loading="loading2"
                   isBackRowItem
                   :single="true"
                   :data="rowData.value[rowData.item.defVal].data"
