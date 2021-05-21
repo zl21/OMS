@@ -284,7 +284,17 @@ export default {
             colname: 'isactive',
             width: '8',
             disabled: true,
-            inputChange: () => { }
+            switchChange: () => {
+              let isActive = this.formConfig.formValue.isactive;
+              let data = { id: this.$route.params.customizedModuleId, isActive: isActive ? 'Y' : 'N' }
+              service.strategyPlatform.orderWarehouseSetIsActive(data).then(res => {
+                if (res.data.code == 0) {
+                  this.qurefrom('beginTime')[0].disabled = isActive;
+                  this.qurefrom('endTime')[0].disabled = isActive;
+                  this.btnConfig2.buttons[0].disabled = isActive;
+                }
+              });
+            }
           },
           {
             style: 'input',
@@ -521,6 +531,7 @@ export default {
       this.fntableData(this.id);
     },
     importData() {
+      this.changeCount = 0;
       if (this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS') {
         //下载模版的地址
         this.importTable.componentData.tempApi = '/p/cs/st/v1/assignLogistics/exportDetail?ID=' + this.id;
@@ -673,7 +684,7 @@ export default {
     initbtn() {
       //初始化按钮
       this.qurefrom('ecode')[0].style = 'input';
-      this.qurefrom('isactive')[0].style = 'input';
+      this.qurefrom('isactive')[0].style = 'switch';
       this.qurefrom('type')[0].disabled = true;
       this.qurefrom('areaLevel')[0].options.forEach(em => {
         em.disabled = true;
@@ -696,7 +707,7 @@ export default {
           let warehouseData = res.data.data;
           for (const key in this.formConfig.formValue) {
             if (key == 'isactive') {
-              this.formConfig.formValue[key] = warehouseData[key] == 'N' ? '停用' : '启用';
+              this.formConfig.formValue[key] = warehouseData[key] == 'Y';
               //isactive  Y只有方案名称，优先级，备注 可以编辑
               if (warehouseData[key] == 'Y') {
                 this.qurefrom('beginTime')[0].disabled = true;
@@ -734,7 +745,7 @@ export default {
         let warehouseData = res.data.data;
         for (const key in this.formConfig.formValue) {
           if (key == 'isactive') {
-            this.formConfig.formValue[key] = warehouseData[key] == 'N' ? '停用' : '启用';
+            this.formConfig.formValue[key] = warehouseData[key] == 'Y';
             //isactive  Y只有方案名称，优先级，备注 可以编辑
             if (warehouseData[key] == 'Y') {
               this.qurefrom('beginTime')[0].disabled = true;
@@ -747,6 +758,7 @@ export default {
               this.btnConfig2.buttons && (this.btnConfig2.buttons[0].disabled = false);
               // this.qurebtn(this.btnConfig.buttons, "停用")[0].disabled = true
             }
+
           } else if (key == 'cpCShopIds') {
             this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.valuedata = warehouseData.cpCShopEnames;
             this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.pid = warehouseData.cpCShopIds;

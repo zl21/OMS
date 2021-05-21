@@ -100,6 +100,7 @@
     right: 0;
     top: -38px;
     color: @base-color;
+    cursor: pointer;
   }
 }
 </style>

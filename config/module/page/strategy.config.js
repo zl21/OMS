@@ -73,4 +73,9 @@ export default {
     labelName: '物流派送范围',
     isList: true
   },
+  ST_C_HOLD_ORDER_STRATEGY: {
+    component: () => import('allpages/strategyPlatform/holdStrategyAddOrEdit'),
+    labelName: 'HOLD单策略新增',
+    isList: true
+  },
 };

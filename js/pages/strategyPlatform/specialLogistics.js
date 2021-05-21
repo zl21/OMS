@@ -193,7 +193,7 @@ export default {
             label: '日期类型',
             value: 'dateType',
             colname: 'dateType',
-            width: '24',
+            width: '6',
             disabled: false,
             options: [
               {
@@ -208,7 +208,7 @@ export default {
             label: '时间范围',
             colname: 'Time',
             value: '',
-            width: '12',
+            width: '18',
             disabled: false,
             onChange: () => {
               this.formConfig.formValue.Time[0] && (this.formConfig.formValue.beginTime = dateUtil.getFormatDate(this.formConfig.formValue.Time[0], 'yyyy-MM-dd HH:mm:ss'))
@@ -674,14 +674,13 @@ export default {
       total2: 10,
       isactive: '',
       cityArrData: [],
-      inputvalue:"",
-      inputvalue2:"",
+      inputvalue: "",
+      inputvalue2: "",
       table4Data: [] //仓库物流选中的数据
     };
   },
   mounted() {
     this.relationShip();
-
     let { customizedModuleId, customizedModuleName } = this.$route.params;
     this.customizedModuleName = customizedModuleName;
     if (customizedModuleId == 'New') {
@@ -694,11 +693,11 @@ export default {
       this.queryAddressPages();
       this.queryProPages();
       this.queryLogisticsWarehousePages();
-      this.btnConfig.buttons.forEach(em => {
-        if (em.text == '启用' || em.text == '停用') {
-          em.isShow = true;
-        }
-      });
+      // this.btnConfig.buttons.forEach(em => {
+      //   if (em.text == '启用' || em.text == '停用') {
+      //     em.isShow = true;
+      //   }
+      // });
     }
   },
   methods: {
@@ -1145,11 +1144,12 @@ export default {
                 name: this.customizedModuleName
               });
             } else {
-              this.changeCount = 4; //重置编辑状态
-              this.queryById();
-              this.queryAddressPages();
-              this.queryProPages();
-              this.queryLogisticsWarehousePages();
+              // this.changeCount = 4; //重置编辑状态
+              // this.queryById();
+              // this.queryAddressPages();
+              // this.queryProPages();
+              // this.queryLogisticsWarehousePages();
+              this.pageback();
             }
           }
         }
@@ -1248,15 +1248,17 @@ export default {
       this.fntable();
     },
     fncancel() {
+      this.tableConfig.ECODE = "" // 编码查询条件
+      this.tableConfig.ENAME = "" // 名称查询条件
       this.modal3 = false;
     },
-    fnkeyup(v,dom) {
+    fnkeyup(v, dom) {
 
       this.tableConfig.ECODE = dom.currentValue;
       this.fntable();
     },
-    fnkeyup1(v,dom) {
-      this.tableConfig.ENAME =dom.currentValue;
+    fnkeyup1(v, dom) {
+      this.tableConfig.ENAME = dom.currentValue;
       this.fntable();
     },
     fntable() {

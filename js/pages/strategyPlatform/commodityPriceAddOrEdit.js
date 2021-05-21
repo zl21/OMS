@@ -533,6 +533,7 @@ export default {
         // freshPage: Fn,
         importNotes: false,
         dontShowDownloadA: false,
+        returnData: this.queryPriceItem,
       }
       this.importTable.componentData = componentData;
       this.$children.find((item) => item.name === 'importTable').openConfirm();
