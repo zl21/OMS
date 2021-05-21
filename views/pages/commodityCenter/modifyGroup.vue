@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-19 17:55:24
+ * @LastEditTime: 2021-05-21 14:46:57
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/views/pages/commodityCenter/modifyGroup.vue
+-->
 <template>
   <!-- 组合商品编辑 -->
   <div class="modifyGroup customized-detail">
@@ -64,6 +72,13 @@
             @on-select-all="onSelect"
             @on-select-all-cancel="onSelect"
           />
+        </div>
+        <div
+        v-show="label.labelValue === 'logTable'"
+          >
+          <subTable
+          :component-data="subTableConfig"
+          ></subTable>
         </div>
       </div>
     </div>

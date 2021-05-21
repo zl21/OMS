@@ -6,7 +6,7 @@ import dateUtil from '@/assets/js/__utils__/date.js';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import comUtils from '@/assets/js/__utils__/common.js';
 import orderItem from 'professionalComponents/subTable';
-import logTable from 'professionalComponents/LogTable';
+import subTable from 'professionalComponents/subTable';
 import ImageUpload from 'arkui_BCL/ImageUpload';
 
 export default {
@@ -16,7 +16,7 @@ export default {
     businessForm,
     businessLabel,
     businessStatusFlag,
-    logTable,
+    subTable,
     ImageUpload
   },
   data() {
@@ -493,6 +493,11 @@ export default {
           value: 'logTable',
         },
       ],
+      subTableConfig: {
+        centerName: '',
+        tablename: '',
+        objid: '',
+      },
       labelDefaultValue: 'skuInfo', // 设置tab默认值，默认展示《自定义属性》
       isModify: false,
       // 修改的信息
@@ -798,7 +803,11 @@ export default {
       } else if (e.value == 'customAttr') {
         this.getCustomAttr();
       } else if (e.value == 'logTable') {
-
+        this.subTableConfig = {
+          centerName: 'commodityCenter',
+          tablename: 'PS_C_PRO_LOG',
+          objid: this.$route.params.customizedModuleId,
+        }
       }
     },
     onSelectionChange(selection) { // 供应商表格勾选数据
