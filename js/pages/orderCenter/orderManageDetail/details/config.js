@@ -145,6 +145,16 @@ export const commodityCenter = {
     refcolid: 179760,
     searchdata,
   },
+  PS_PRO_GROUP_LOG:{  //组合商品日志
+    table: 'PS_PRO_GROUP_LOG',
+    refcolid: 179732,
+    searchdata
+  },
+  PS_C_PRO_LOG:{  //商品spu日志
+    table: 'PS_C_PRO_LOG',
+    refcolid: 179788,
+    searchdata
+  }
 }
 
 // 策略平台
