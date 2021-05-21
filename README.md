@@ -482,6 +482,7 @@ R3.launchApplication({
 | v1.3.60 | 组合商品/商品spu操作日志 |
 | v1.3.61 | 商品sku-动态事件监听 仓库物流bug |
 | v1.3.62 | sku bug 修复 |
+| v1.3.63 | spu商品自定义属性支持时间空间保存 |
 
 #### Extends-Api 版本说明
 
