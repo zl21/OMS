@@ -1051,6 +1051,7 @@ export default {
         data.specialAssignLogisticsAddressItemList = this.specialAssignLogisticsAddressItemList;
       } else if (type == 2) {
         data.specialAssignLogistics = { id: this.id };
+        this.specialAssignLogisticsProItemList = []
         //商品传参
         this.tableConfig.selectionData.forEach(em => {
           let { psCProId, psCProEcode, psCProEname, psCSkuId, psCSkuEcode, psCSkuEname } = em;
