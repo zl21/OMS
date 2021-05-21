@@ -193,7 +193,7 @@ export default {
             label: '日期类型',
             value: 'dateType',
             colname: 'dateType',
-            width: '24',
+            width: '6',
             disabled: false,
             options: [
               {
@@ -208,7 +208,7 @@ export default {
             label: '时间范围',
             colname: 'Time',
             value: '',
-            width: '12',
+            width: '18',
             disabled: false,
             onChange: () => {
               this.formConfig.formValue.Time[0] && (this.formConfig.formValue.beginTime = dateUtil.getFormatDate(this.formConfig.formValue.Time[0], 'yyyy-MM-dd HH:mm:ss'))
