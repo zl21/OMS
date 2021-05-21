@@ -3,7 +3,7 @@ import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessActionTable from 'professionalComponents/businessActionTable';
-import orderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem';
+import orderItem from 'professionalComponents/subTable';
 
 export default {
   components: {
@@ -26,7 +26,7 @@ export default {
       forceReload: 0, // 组件重载
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       subTableConfig: {
-        preTablename: '', // 预留属性，便于之后重新封装orderItem.js，用于匹配其相同路径下的config文件的一级key
+        centerName: '', // 预留属性，便于之后重新封装orderItem.js，用于匹配其相同路径下的config文件的一级key
         tablename: '',
         objid: ''
       },
@@ -205,9 +205,8 @@ export default {
             defVal: 'CP_C_LOGISTICS_ID1',
             style: 'formCompile',
             slotName: 'logistics',
-            reqStar: true, // 插槽必填标识
+            reqStar: false, // 插槽必填标识
             width: '6',
-            isnotonly: true,
             disabled: false,
             pageSize: 10, // 每页条数
             itemdata: {
@@ -328,7 +327,7 @@ export default {
         },
         {
           label: '操作日志',
-          value: 'logTable',
+          value: 'ST_C_WAREHOUSE_LOGISTICS_SET_LOG',
           isShow: false
         }
       ],
@@ -478,10 +477,14 @@ export default {
     labelClick(e) {
       // tab明细切换
       this.labelDefaultValue = e.value;
-      // this.subTableConfig = {
-      //   tablename: this.labelDefaultValue,
-      //   objid: this.ID
-      // };
+      if (this.labelDefaultValue == 'logTable') {
+        this.subTableConfig = {
+          centerName: 'strategyPlatform',
+          tablename: this.labelDefaultValue,
+          objid: this.ID,
+          pageShow: true,
+        }
+      }
     },
     setEnable(isEnable) {
       this.formConfig.formData.forEach(i => {
@@ -594,6 +597,7 @@ export default {
       } = await this.service.strategyPlatform.deleteLogisticsCorp({ ID: ids });
       if (code == 0) {
         // 筛选出差集作为展示
+        this.logisticsTableConfig.selectionData = []
         this.logisticsTableConfig.data = this.$OMS2.omsUtils.getDifferentArr(allArrs, partArrs, 'CP_C_LOGISTICS_ID');
         code == 0 ? this.$message.success(message) : this.$message.error(message);
       }
