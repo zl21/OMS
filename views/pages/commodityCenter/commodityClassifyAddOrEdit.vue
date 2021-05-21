@@ -42,7 +42,7 @@
             @on-page-size-change="pageSizeChange"
           />
           <orderItem
-            v-show="labelDefaultValue == 'PS_C_ALTERNATE_SKU_1'"
+            v-show="labelDefaultValue == 'PS_C_CLASSIFY_LOG'"
             :component-data="subTableConfig"
           />
         </div>

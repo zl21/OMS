@@ -18,11 +18,7 @@ export default {
   data() {
     return {
       vmI18n:$i18n,
-      subTableConfig: {
-        centerName: '',
-        tablename: '',
-        objid: '',
-      },
+      subTableConfig: {},
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       loading: false,
       showSubtablePart: false,
@@ -488,8 +484,9 @@ export default {
       }
       self.subTableConfig = {
         centerName: 'commodityCenter',
-        tablename: this.labelDefaultValue,
+        tablename: 'PS_C_CLASSIFY_LOG',
         objid: this.ID,
+        pageShow: true,
       };
     },
     /* -------------------- 详情初始化 end -------------------- */
@@ -685,6 +682,7 @@ export default {
         centerName: 'commodityCenter',
         tablename: this.labelDefaultValue,
         objid: this.ID,
+        pageShow: true,
       };
     },
     /**
