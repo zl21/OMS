@@ -165,6 +165,26 @@ export const strategyPlatform = {
     refcolid: 179448, //表-主键的字段ID
     searchdata,
   },
+  // ST_C_LIVE_CAST_STRATEGY_LOG: { // 直播解析策略
+  //   table: 'ST_C_LIVE_CAST_STRATEGY_LOG',
+  //   refcolid: 179448, //表-主键的字段ID
+  //   searchdata,
+  // },
+  // ST_C_WAREHOUSE_LOGISTICS_SET_LOG: { // 仓库物流设置
+  //   table: 'ST_C_WAREHOUSE_LOGISTICS_SET_LOG',
+  //   refcolid: 179448, //表-主键的字段ID
+  //   searchdata,
+  // },
+  // ST_C_PRICE_LOG: { // 商品价格策略
+  //   table: 'ST_C_PRICE_LOG',
+  //   refcolid: 179448, //表-主键的字段ID
+  //   searchdata,
+  // },
+  // ST_C_VIPCOM_PROJECT_LOG: { // 档期日程规划
+  //   table: 'ST_C_VIPCOM_PROJECT_LOG',
+  //   refcolid: 179448, //表-主键的字段ID
+  //   searchdata,
+  // },
 }
 
 export const BILL_STATUS = {

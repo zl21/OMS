@@ -91,6 +91,13 @@ export default {
             style: null,
             switchChange: () => {
               this.masterModifyData('ISACTIVE', 'formConfig1')
+              let isActive = this.formConfig1.formValue.ISACTIVE
+              this.formConfig2.formData[1].disabledSwitch = isActive ? true : false;
+              this.formConfig2.formData[0].itemdata.readonly = isActive ? true : false;
+              this.formConfig2.formData[2].disabledSwitch = isActive ? true : false;
+              this.formConfig2.formData[1].disabled = isActive ? true : false;
+              this.formConfig2.formData[2].disabled = isActive || !this.formConfig2.formValue.ORDER_TAB_TYPE ? true : false;
+              this.formConfig2.formData[2].timeDisabled = isActive ? true : false;
             }
           },
           {
@@ -125,26 +132,15 @@ export default {
               }
             },
             onChange: () => {
-
-
-              if (this.formConfig1.formValue.VALID_END_TIME) {
-                this.masterModifyData('VALID_END_TIME', 'formConfig1')
-                this.paramsTime.VALID_END_TIME = dateUtil.getFormatDate(
-                  new Date(this.formConfig1.formValue.VALID_END_TIME),
-                  'yyyy-MM-dd'
-                ) + " 23:59:59"
-              }
-
-
-
-
+              this.masterModifyData('VALID_END_TIME', 'formConfig1')
+              this.paramsTime.VALID_END_TIME = this.formatDate(this.formConfig1.formValue.VALID_END_TIME);
             }
           },
         ],
         formValue: {
           ECODE: '',
           ENAME: '',
-          ISACTIVE: 'Y',
+          ISACTIVE: '',
           VALID_BEGIN_TIME: '',
           VALID_END_TIME: '',
         },
@@ -412,7 +408,7 @@ export default {
       subTableConfig: {
         centerName: '',
         tablename: '',
-        objid: '',
+        objid: ''
       },
       labelDefaultValue: 'ST_HOLD_ORDER_STRATEGY_LOG', // 设置tab默认值
       panelDefaultValue: ['panel_baseInfo', 'panel_condition', 'panel_action'] // 设置默认打开'基础信息'

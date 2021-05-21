@@ -84,12 +84,11 @@
           v-show="ID != -1"
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
-          @labelClick="labelClick"
         />
         <!-- 子表Part -->
         <div class="subtablePart">
-          <orderItem
-            v-if="ID != -1 && labelDefaultValue == 'logTable'"
+          <subTable
+            v-if="ID != -1 && labelDefaultValue == 'ST_C_LIVE_CAST_STRATEGY_LOG'"
             :component-data="subTableConfig"
           />
         </div>

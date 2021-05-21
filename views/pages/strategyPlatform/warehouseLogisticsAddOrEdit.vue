@@ -59,8 +59,8 @@
             @on-page-change="pageChange"
             @on-page-size-change="pageSizeChange"
           />
-          <orderItem
-            v-show="isAuto && labelDefaultValue == 'logTable'"
+          <subTable
+            v-show="isAuto && labelDefaultValue == 'ST_C_WAREHOUSE_LOGISTICS_SET_LOG'"
             :component-data="subTableConfig"
           />
         </div>

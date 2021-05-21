@@ -3,13 +3,13 @@ import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessActionTable from 'professionalComponents/businessActionTable';
-import orderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem';
+import subTable from 'professionalComponents/subTable';
 import scheduleFormDialog from '@/views/modal/strategyPlatform/scheduleFormDialog';
 import dateUtil from '@/assets/js/__utils__/date.js';
 
 export default {
   components: {
-    orderItem,
+    subTable,
     businessButton,
     businessForm,
     businessLabel,
@@ -30,9 +30,10 @@ export default {
       isMasterRequired: false, // 主表是否已保存
       isModify: false,
       subTableConfig: {
-        preTablename: '', // 预留属性，便于之后重新封装orderItem.js，用于匹配其相同路径下的config文件的一级key
+        centerName: '',
         tablename: '',
         objid: '',
+        pageShow: true
       },
       dialog: {
         isConfirm: false, // 提示是否确认切换拣货单创建方式
@@ -1074,10 +1075,10 @@ export default {
       labelList: [
         {
           label: '操作日志',
-          value: 'logTable',
+          value: 'ST_C_VIPCOM_PROJECT_LOG',
         }
       ],
-      labelDefaultValue: 'logTable', // 设置tab默认值，默认展示《自定义属性》
+      labelDefaultValue: 'ST_C_VIPCOM_PROJECT_LOG', // 设置tab默认值，默认展示《自定义属性》
       modify: {
         master: {}, // 主表信息
         picking: {}, // 拣货单
@@ -1091,6 +1092,12 @@ export default {
   async mounted() {
     await this.carrierDropList(); // 承运商下拉项
     this.querySchedule();
+    this.subTableConfig = {
+      centerName: 'strategyPlatform',
+      tablename: this.labelDefaultValue,
+      objid: this.ID,
+      pageShow: true
+    }
   },
   computed: {
     dialogInfo() {
@@ -1116,14 +1123,6 @@ export default {
       const { PICK_CREATE_TYPE } = this.pickingTableConfig.businessFormConfig.formValue;
       this.pickingTableConfig.businessFormConfig.formValue.PICK_CREATE_TYPE = PICK_CREATE_TYPE == 1 ? 2 : 1;
       this.dialog.isConfirm = false;
-    },
-    labelClick(e) { // tab明细切换
-      this.labelDefaultValue = e.value;
-      // if (this.labelDefaultValue != 'logTable') return;
-      // this.subTableConfig = {
-      //   tablename: this.labelDefaultValue,
-      //   objid: this.ID,
-      // };
     },
     // 返回
     back() {

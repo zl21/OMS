@@ -3,7 +3,7 @@ import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessActionTable from 'professionalComponents/businessActionTable';
-import orderItem from 'professionalComponents/subTable';
+import subTable from 'professionalComponents/subTable';
 
 export default {
   components: {
@@ -12,7 +12,7 @@ export default {
     businessLabel,
     businessStatusFlag,
     businessActionTable,
-    orderItem
+    subTable
   },
   data() {
     return {
@@ -26,9 +26,10 @@ export default {
       forceReload: 0, // 组件重载
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       subTableConfig: {
-        centerName: '', // 预留属性，便于之后重新封装orderItem.js，用于匹配其相同路径下的config文件的一级key
+        centerName: '',
         tablename: '',
-        objid: ''
+        objid: '',
+        pageShow: true
       },
       btnConfig: {
         typeAll: 'default',
@@ -160,6 +161,7 @@ export default {
             colname: 'REMARK',
             value: 'REMARK',
             width: '6',
+            maxlength: 225,
             disabled: false,
             inputChange: () => {
               this.masterModifyData('REMARK', 'master');
@@ -477,12 +479,12 @@ export default {
     labelClick(e) {
       // tab明细切换
       this.labelDefaultValue = e.value;
-      if (this.labelDefaultValue == 'logTable') {
+      if (this.labelDefaultValue == 'ST_C_WAREHOUSE_LOGISTICS_SET_LOG') {
         this.subTableConfig = {
           centerName: 'strategyPlatform',
           tablename: this.labelDefaultValue,
           objid: this.ID,
-          pageShow: true,
+          pageShow: true
         }
       }
     },

@@ -34,8 +34,8 @@
             @on-page-change="pageChange"
             @on-page-size-change="pageSizeChange"
           />
-          <orderItem
-            v-if="(isCopy || ID != -1) && labelDefaultValue == 'logTable'"
+          <subTable
+            v-if="(isCopy || ID != -1) && labelDefaultValue == 'ST_C_PRICE_LOG'"
             :component-data="subTableConfig"
           />
 

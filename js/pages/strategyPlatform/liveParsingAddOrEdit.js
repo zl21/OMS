@@ -2,7 +2,7 @@ import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
-import orderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem';
+import subTable from 'professionalComponents/subTable';
 import dateUtil from '@/assets/js/__utils__/date.js';
 
 export default {
@@ -11,7 +11,7 @@ export default {
     businessForm,
     businessLabel,
     businessStatusFlag,
-    orderItem
+    subTable
   },
   data() {
     return {
@@ -23,9 +23,10 @@ export default {
       isWatchChange: false, // 监听
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       subTableConfig: {
-        preTablename: '', // 预留属性，便于之后重新封装orderItem.js，用于匹配其相同路径下的config文件的一级key
+        centerName: '',
         tablename: '',
         objid: '',
+        pageShow: true
       },
       btnConfig: {
         typeAll: 'default',
@@ -327,10 +328,10 @@ export default {
       labelList: [
         {
           label: '操作日志',
-          value: 'logTable'
+          value: 'ST_C_LIVE_CAST_STRATEGY_LOG'
         }
       ],
-      labelDefaultValue: 'logTable', // 设置tab默认值，默认展示《自定义属性》
+      labelDefaultValue: 'ST_C_LIVE_CAST_STRATEGY_LOG', // 设置tab默认值，默认展示《自定义属性》
       // 修改的信息
       modify: {
         master: {
@@ -345,6 +346,12 @@ export default {
   },
   mounted() {
     this.ID != -1 && this.queryLiveParsing()
+    this.subTableConfig = {
+      centerName: 'strategyPlatform',
+      tablename: this.labelDefaultValue,
+      objid: this.ID,
+      pageShow: true
+    }
   },
   created() {},
   methods: {
@@ -436,13 +443,6 @@ export default {
           self.modify[obj][ecode] = self[formName].formValue[ecode];
         }
       }
-    },
-    labelClick(e) { // tab明细切换
-      this.labelDefaultValue = e.value;
-      this.subTableConfig = {
-        tablename: this.labelDefaultValue,
-        objid: this.ID,
-      };
     },
     // 主表字段是否可编辑
     setEnable() {

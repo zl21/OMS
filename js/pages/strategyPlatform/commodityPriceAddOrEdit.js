@@ -5,13 +5,13 @@ import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessDialog from 'professionalComponents/businessDialog';
 import myInput from 'professionalComponents/fkinput.vue';
-import orderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem';
+import subTable from 'professionalComponents/subTable';
 import dateUtil from '@/assets/js/__utils__/date.js';
 Vue.component('myInput', myInput)
 
 export default {
   components: {
-    orderItem,
+    subTable,
     businessButton,
     businessForm,
     businessLabel,
@@ -32,9 +32,10 @@ export default {
       isCopy: false, // 是否复制
       isEnable: false, // 是否启用
       subTableConfig: {
-        preTablename: '', // 预留属性，便于之后重新封装orderItem.js，用于匹配其相同路径下的config文件的一级key
+        centerName: '',
         tablename: '',
         objid: '',
+        pageShow: true
       },
       btnConfig: {
         typeAll: 'default',
@@ -464,7 +465,7 @@ export default {
         },
         {
           label: '操作日志',
-          value: 'logTable',
+          value: 'ST_C_PRICE_LOG',
         }
       ],
       labelDefaultValue: 'goods', // 设置tab默认值，默认展示《自定义属性》
@@ -572,11 +573,13 @@ export default {
     },
     labelClick(e) { // tab明细切换
       this.labelDefaultValue = e.value;
-      // if (this.labelDefaultValue != 'logTable') return;
-      // this.subTableConfig = {
-      //   tablename: this.labelDefaultValue,
-      //   objid: this.ID,
-      // };
+      if (this.labelDefaultValue != 'ST_C_PRICE_LOG') return;
+      this.subTableConfig = {
+        centerName: 'strategyPlatform',
+        tablename: this.labelDefaultValue,
+        objid: this.ID,
+        pageShow: true
+      }
     },
     back() {
       if (this.isModify) {

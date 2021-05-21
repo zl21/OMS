@@ -42,11 +42,10 @@
           v-show="ID != -1 || isMasterRequired"
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
-          @labelClick="labelClick"
         />
         <!-- 子表Part -->
         <div class="subtablePart">
-          <orderItem
+          <subTable
             v-show="ID != -1 || isMasterRequired"
             :component-data="subTableConfig"
           />
