@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-20 13:33:28
- * @LastEditTime: 2021-05-20 13:35:33
+ * @LastEditTime: 2021-05-21 11:43:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/storehouseRule.vue
 -->
 <template>
-  <div class="storehouseRule otherClass customized-detail"  v-loading="loading">
+  <div class="storehouseRule otherClass customized-detail" v-loading="loading">
     <!-- <loading :loading="loading" /> -->
     <div class="buttons customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
@@ -30,33 +30,34 @@
             :label-default-value="labelDefaultValue"
             @labelClick="labelClick"
           />
-
-          <Input
-            v-model="seachVal"
-            placeholder="省市搜索"
-            style="width: 250px; margin-top: 20px"
-            @input="fninput"
-          />
-          <div class="buttons customized-detail-btn">
-            <businessButton :btn-config="btnConfig2" />
-          </div>
-
-          <Table
-            ref="currentRowTable"
-            border
-            stripe
-            highlight-row
-            :columns="columns3"
-            :data="data1"
-          />
-          <div class="foot-page">
-            <Page
-              :total="totalpage"
-              show-elevator
-              show-sizer
-              @on-change="fnchange"
-              @on-page-size-change="fnSize"
+          <div class="subtablePart-labelList">
+            <Input
+              v-model="seachVal"
+              placeholder="省市搜索"
+              style="width: 250px; margin-top: 20px"
+              @input="fninput"
             />
+            <div class="buttons customized-detail-btn">
+              <businessButton :btn-config="btnConfig2" />
+            </div>
+
+            <Table
+              ref="currentRowTable"
+              border
+              stripe
+              highlight-row
+              :columns="columns3"
+              :data="data1"
+            />
+            <div class="foot-page">
+              <Page
+                :total="totalpage"
+                show-elevator
+                show-sizer
+                @on-change="fnchange"
+                @on-page-size-change="fnSize"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -90,5 +91,5 @@ export default logisticsNoun;
 </script>
 
 <style lang="less" scoped>
-@import '~@/css/pages/strategyPlatform/storehouseRule.less';
+@import "~@/css/pages/strategyPlatform/storehouseRule.less";
 </style>

@@ -5,6 +5,7 @@ import businessLabel from 'professionalComponents/businessLabel';
 import service from '@/service/index';
 import businessDialog from 'professionalComponents/businessDialog';
 import dateUtil from '@/assets/js/__utils__/date.js';
+import subTable from 'professionalComponents/subTable';
 
 export default {
   name: 'commodityCusPropertiesAddOrEdit',
@@ -13,7 +14,7 @@ export default {
     businessForm,
     businessLabel,
     businessDialog,
-    // loading
+    subTable
   },
   data() {
     return {
@@ -366,7 +367,12 @@ export default {
       columns3: [],
       totalpage: 10,
       customizedModuleName: '',
-      data1: []
+      data1: [],
+      subTableConfig: {
+        centerName: '',
+        tablename: '',
+        objid: '',
+      },
     };
   },
   watch: {
@@ -973,6 +979,7 @@ export default {
     },
     // 切换Label & 实时渲染subTable
     labelClick(item) {
+      console.log(item);
       this.labelDefaultValue = item.value;
       if (this.labelDefaultValue == 'PS_C_ALTERNATE_SKU') return;
       this.subTableConfig = {

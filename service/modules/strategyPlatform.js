@@ -2,6 +2,10 @@
 import qs from 'qs'
 
 export default {
+
+  batchSave: (params) =>
+  $network.post('/p/cs/st/v1/shopStrategy/batchSave', params), // 店铺策略 批量修改
+
   checkLogistics: (params) =>
     $network.post('/p/cs/st/v1/deliveryArea/checkLogistics', params), // 派送范围查询公司是否可用
   deleteLogistics: (params) =>
