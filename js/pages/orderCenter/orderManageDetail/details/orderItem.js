@@ -1,6 +1,6 @@
 import businessActionTable from 'professionalComponents/businessActionTable.vue';
 // import { OC_B_ORDER } from './config';
-import config from './config';
+// import config from './config';
 export default {
   data() {
     return {

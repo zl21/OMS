@@ -12,7 +12,7 @@ import orderLogo from './config/orderLogo.js'
 import importTableConfig from './config/importTable.config.js'
 import downLoadAllConfig from '@/js/modal/interfacePlatform/config/downLoadAll.Config.js'
 import oldConfig from './config/globalComponent.config.js'
-import subTableConfig from '../js/pages/orderCenter/orderManageDetail/details/config.js'
+import subTableConfig from './config/subTable.config.js'
 import custommizeMain from './config/customized.panel.config.js'
 
 import commonUtils from './config/commonUtils.js'

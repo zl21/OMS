@@ -135,11 +135,7 @@ export default {
     async getColumn(){
       try {
         const { data: {data} } = await this.service.orderCenter.initObject({"TABLE":"OC_B_ORDER_ITEM"});
-        let arr = [];
-        data.DATA.forEach(element => {
-          arr.push({title:`${element.headerName}`,key:`${element.field}`,dataAcessKey:`${element.field}`});
-        });
-        this.tableConfig.columns = arr;
+        this.tableConfig.columns = data.DATA.map(element => ({title:`${element.headerName}`,key:`${element.field}`,dataAcessKey:`${element.field}`}));
       } catch (error) {
         
       }
