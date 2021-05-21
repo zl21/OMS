@@ -119,29 +119,6 @@ export default {
             ]
           },
           {
-            style: 'input',
-            label: '备注',
-            colname: 'REMARK',
-            value: 'REMARK',
-            width: '6',
-            disabled: false,
-            inputChange: () => {
-              this.masterModifyData('REMARK', 'master');
-            }
-          },
-          {
-            style: '',
-            label: '启用状态',
-            colname: 'ISACTIVE',
-            value: 'ISACTIVE',
-            width: '6',
-            disabled: true,
-            switchChange: () => {
-              this.masterModifyData('ISACTIVE', 'master');
-              this.setEnable(this.formConfig.formValue.ISACTIVE);
-            }
-          },
-          {
             version: '1.4',
             colname: 'CP_C_LOGISTICS_ID',
             style: '', // 输入框弹框单多选
@@ -175,6 +152,29 @@ export default {
               this.formConfig.formValue.CP_C_LOGISTICS_ENAME = e.valuedata;
               this.masterModifyData('CP_C_LOGISTICS_ID', 'master');
               this.masterModifyData('CP_C_LOGISTICS_ENAME', 'master');
+            }
+          },
+          {
+            style: 'input',
+            label: '备注',
+            colname: 'REMARK',
+            value: 'REMARK',
+            width: '6',
+            disabled: false,
+            inputChange: () => {
+              this.masterModifyData('REMARK', 'master');
+            }
+          },
+          {
+            style: '',
+            label: '启用状态',
+            colname: 'ISACTIVE',
+            value: 'ISACTIVE',
+            width: '6',
+            disabled: true,
+            switchChange: () => {
+              this.masterModifyData('ISACTIVE', 'master');
+              this.setEnable(this.formConfig.formValue.ISACTIVE);
             }
           }
         ],
@@ -220,7 +220,7 @@ export default {
               fkdesc: '商品SPU',
               inputname: 'CP_C_LOGISTICS_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
-              isnotnull: true, // 是否必填
+              isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
               name: '物流公司', // 赔付类型
