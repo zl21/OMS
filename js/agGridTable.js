@@ -218,7 +218,7 @@ export default {
                       const columnApi = params.columnApi
                       const data = {
                         ACTION:'RELOAD',
-                        TABLE:'OC_B_ORDER',
+                        TABLE:this.$route.params.customizedModuleName == 'ORDERMANAGER' ? 'OC_B_ORDER' : this.$route.params.customizedModuleName,
                         TYPE:'L_TAB_HEAD'
                       }
                       R3.network.post('/p/cs/oc/oms/v1/customSettings' , data)

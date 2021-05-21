@@ -177,3 +177,4 @@
 | v1.1.30 | fkinputPlus(fkinput重构v1.2) |
 | v1.1.31 | 增加 switchList组件|
 | v1.1.32 | subTable 删除objid-1过滤 |
+| v1.1.33 | ag重置所有列接口参数调整 |
