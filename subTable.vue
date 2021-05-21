@@ -75,7 +75,7 @@ export default {
         JSON.stringify(self.config[centerName][req.tablename])
       ); // 匹配config文件中每个小item的key
       self.objid = req.objid || -1;
-      if (self.objid === -1) return;
+      // if (self.objid === -1) return;
       const searchdata = {};
       searchdata.startindex =
         (this.tableConfig.current - 1) * this.tableConfig.pageSize;
