@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-19 17:55:24
+ * @LastEditTime: 2021-05-21 14:27:40
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/views/pages/commodityCenter/spuRecord.vue
+-->
 <template>
   <div class="spuRecord cusArkCollapse customized-detail">
     <div class="buttons customized-detail-btn">
@@ -82,7 +90,7 @@
           v-show="labelValue == 'logTable'"
           class="lgoTable"
         >
-          <!-- <logTable /> -->
+          <subTable :component-data="subTableConfig" ></subTable>
         </div>
       </div>
     </div>

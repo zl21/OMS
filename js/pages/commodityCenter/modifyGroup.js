@@ -6,7 +6,7 @@ import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import comUtils from '@/assets/js/__utils__/common.js';
-import logTable from 'professionalComponents/LogTable';
+import subTable from 'professionalComponents/subTable';
 import ImageUpload from 'arkui_BCL/ImageUpload';
 
 export default {
@@ -15,7 +15,7 @@ export default {
     businessForm,
     businessLabel,
     businessStatusFlag,
-    logTable,
+    subTable,
     businessActionTable,
     ImageUpload
   },
@@ -249,10 +249,19 @@ export default {
         labelList: [{
           label: '普通组合明细',
           value: 'generalGroupItem',
-        }],
+        },
+        {
+          label: '操作日志',
+          value:'logTable'
+        }
+      ],
         labelTagList: [{
           label: '福袋组合明细',
           value: 'luckbagGroupItem',
+        },
+        {
+          label: '操作日志',
+          value:'logTable'
         }],
         labelDefaultValue: '',
         labelValue: 'generalGroupItem'
@@ -467,6 +476,11 @@ export default {
         readonly: false,
         valuedata: [],
       },
+      subTableConfig: {
+        centerName: '',
+        tablename: '',
+        objid: '',
+      },
       imgIndex: '',
       isClearItem: false, // 是否清空明细
       isModify: false,
@@ -575,6 +589,8 @@ export default {
             name: 'PS_C_PRO_GROUP',
             label: '组合商品编辑', // 额外退款编辑
           });
+          self.modify.generalGroupItem = [];
+          self.modify.luckGroupItem = [];
         } else {
           self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
         }
@@ -599,6 +615,13 @@ export default {
     },
     labelClick(e) { // tab明细切换
       console.log(e);
+      if(e.value == 'logTable'){
+        this.subTableConfig = {
+          centerName: 'commodityCenter',
+          tablename: 'PS_PRO_GROUP_LOG',
+          objid: this.$route.params.customizedModuleId,
+        }
+      }
       this.label.labelValue = e.value;
     },
     // 记录主表修改信息方法

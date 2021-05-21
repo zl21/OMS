@@ -47,7 +47,6 @@
               </template>
               <template #spec02="{ rowData }">
                 <DropDownSelectFilter
-                  v-loading="loading2"
                   isBackRowItem
                   :single="true"
                   :data="rowData.value[rowData.item.defVal].data"
@@ -70,7 +69,6 @@
               </template>
               <template #spec03="{ rowData }">
                 <DropDownSelectFilter
-                  v-loading="loading2"
                   isBackRowItem
                   :single="true"
                   :data="rowData.value[rowData.item.defVal].data"
@@ -117,14 +115,7 @@
         <!-- 子表Part -->
         <div class="subtablePart">
           <!-- <businessForm v-show="labelDefaultValue === 'PROPERTY'" :form-config="propertiesFormConfig"></businessForm> -->
-          <orderItem
-            v-show="labelDefaultValue == 'PS_C_ALTERNATE_SKU'"
-            :component-data="subTableConfig"
-          ></orderItem>
-          <orderItem
-            v-show="labelDefaultValue == 'PS_C_SKU_LOG'"
-            :component-data="subTableConfig"
-          ></orderItem>
+          <orderItem :component-data="subTableConfig"></orderItem>
         </div>
       </div>
     </div>
