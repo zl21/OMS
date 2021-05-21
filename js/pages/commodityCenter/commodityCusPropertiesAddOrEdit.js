@@ -32,12 +32,8 @@ export default {
     };
     /* -------------------- input校验器 end -------------------- */
     return {
-      vmI18n:$i18n,
-      subTableConfig: {
-        centerName: '',
-        tablename: '',
-        objid: '',
-      },
+      vmI18n: $i18n,
+      subTableConfig: {},
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       showSubtablePart: false,
       loading: false,
@@ -456,6 +452,12 @@ export default {
         self.formConfig.formData.find(it => it.colname == 'TYPE').disabled = true;
         self.formConfig.formData.find(it => it.colname == 'LOCATION').disabled = true;
       }
+      this.subTableConfig = {
+        centerName: 'commodityCenter',
+        tablename: 'BS_EXTRA_ATTRIBUTE_DEF_LOG',
+        objid: this.ID,
+        pageShow: true,
+      };
       this.loading = false;
       self.watchChange = true;
     },
@@ -639,8 +641,10 @@ export default {
       this.labelDefaultValue = item.value;
       if (this.labelDefaultValue == 'PROPERTYVALUES') return;
       this.subTableConfig = {
+        centerName: 'commodityCenter',
         tablename: this.labelDefaultValue,
         objid: this.ID,
+        pageShow: true,
       };
     },
     // 填充下拉选项框
