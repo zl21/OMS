@@ -736,6 +736,37 @@ export default {
               }
             }
             };
+          }else if(item.style == 'date') {
+            item.onChange = () => {
+              const self = this;
+            self.isModify = true;
+            if (modifyObj.formValue[key] == '') {
+              self.modify.customAttr.forEach((item, index) => {
+                if (item.attributeId == key) {
+                  self.modify.customAttr.splice(index, 1);
+                }
+              });
+            } else if (!self.modify.customAttr.length) {
+              const obj = {};
+              obj.attributeId = key;
+              obj.attributeItem = self.formatDate(modifyObj.formValue[key]);
+              obj.custom_type = name;
+              self.modify.customAttr.push(obj);
+            } else {
+              const boo = self.modify.customAttr.filter(item => item.attributeId == key);
+              if (boo.length) {
+                boo[0].attributeItem = self.formatDate(modifyObj.formValue[key]);
+                // boo[0].attributeId = modifyObj.formValue[key];
+              } else {
+                const obj = {};
+                obj.attributeId = key;
+                obj.attributeItem = self.formatDate(modifyObj.formValue[key]);
+                obj.custom_type = name;
+                self.modify.customAttr.push(obj);
+              }
+            }
+            console.log(self.modify.customAttr);
+            }
           } else {
             item.inputChange = () => { // 动态记录自定义属性修改值
             const self = this;
