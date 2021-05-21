@@ -510,8 +510,16 @@ export default {
       self[targetFormConfig].formData.forEach((item) => {
         // 为formData的每一项添加value、selectChange等属性
         item.value = item.colname.toString();
-        if (item.style == 'input') {
-          item.inputChange = () => {
+        let fieldStyles = {
+          input: 'inputChange',
+          select: 'selectChange',
+          date: 'onChange',
+          switch: 'switchChange',
+          radio: 'radioChange'
+        }
+        let eventName = fieldStyles[item.style]
+        if (eventName) {
+          item[eventName] = () => {
             if (item.attrType = 'fix') {
               // 固定属性和主表Part的form一起放在'PsSku'里面传
               console.log(self[targetFormConfig].formValue[item.colname]);
@@ -520,16 +528,27 @@ export default {
               this.masterModifyData(item.colname, 'exAttr', 'EX');
             }
           };
-        } else {
-          item.selectChange = () => {
-            if (item.attrType = 'fix') {
-              // 固定属性和主表Part的form一起放在'PsSku'里面传
-              this.masterModifyData(item.colname, 'master', 'FIX');
-            } else {
-              this.masterModifyData(item.colname, 'exAttr', 'EX');
-            }
-          };
         }
+        // if (item.style == 'input') {
+        //   item.inputChange = () => {
+        //     if (item.attrType = 'fix') {
+        //       // 固定属性和主表Part的form一起放在'PsSku'里面传
+        //       console.log(self[targetFormConfig].formValue[item.colname]);
+        //       this.masterModifyData(item.colname, 'master', 'FIX');
+        //     } else {
+        //       this.masterModifyData(item.colname, 'exAttr', 'EX');
+        //     }
+        //   };
+        // } else {
+        //   item.selectChange = () => {
+        //     if (item.attrType = 'fix') {
+        //       // 固定属性和主表Part的form一起放在'PsSku'里面传
+        //       this.masterModifyData(item.colname, 'master', 'FIX');
+        //     } else {
+        //       this.masterModifyData(item.colname, 'exAttr', 'EX');
+        //     }
+        //   };
+        // }
       });
       self[targetFormConfig].formData.forEach((item) => {
         self[targetFormConfig].formValue[item.colname.toString()] = item.valuedata;
