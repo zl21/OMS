@@ -589,6 +589,8 @@ export default {
             name: 'PS_C_PRO_GROUP',
             label: '组合商品编辑', // 额外退款编辑
           });
+          self.modify.generalGroupItem = [];
+          self.modify.luckGroupItem = [];
         } else {
           self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
         }
