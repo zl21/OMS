@@ -484,6 +484,7 @@ R3.launchApplication({
 | v1.3.62 | sku bug 修复 |
 | v1.3.63 | spu商品自定义属性支持时间空间保存 |
 | v1.3.64 | 组合商品重复保存报错问题 |
+| v1.3.65 | sku 操作日志 |
 
 #### Extends-Api 版本说明
 

@@ -115,14 +115,7 @@
         <!-- 子表Part -->
         <div class="subtablePart">
           <!-- <businessForm v-show="labelDefaultValue === 'PROPERTY'" :form-config="propertiesFormConfig"></businessForm> -->
-          <orderItem
-            v-show="labelDefaultValue == 'PS_C_ALTERNATE_SKU'"
-            :component-data="subTableConfig"
-          ></orderItem>
-          <orderItem
-            v-show="labelDefaultValue == 'PS_C_SKU_LOG'"
-            :component-data="subTableConfig"
-          ></orderItem>
+          <orderItem :component-data="subTableConfig"></orderItem>
         </div>
       </div>
     </div>

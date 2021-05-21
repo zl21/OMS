@@ -20,11 +20,6 @@ export default {
   data() {
     return {
       vmI18n: $i18n,
-      subTableConfig: {
-        centerName: '',
-        tablename: '',
-        objid: '',
-      },
       forceFresh: 0,
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       showSubtablePart: false,
@@ -398,10 +393,6 @@ export default {
       },
       // tab切换配置
       labelList: [
-        /* {
-                  label: '自定义属性',
-                  value: 'PROPERTY',
-                }, */
         {
           label: '备用条码',
           value: 'PS_C_ALTERNATE_SKU',
@@ -413,6 +404,7 @@ export default {
       ],
       labelDefaultValue: 'PS_C_ALTERNATE_SKU', // 设置tab默认值，默认展示'备用条码'
       panelDefaultValue: ['panel_baseInfo', 'panel_cusAttr'], // 设置默认打开'基础信息'
+      subTableConfig: {},
     };
   },
   watch: {},
@@ -492,6 +484,7 @@ export default {
         centerName: 'commodityCenter',
         tablename: this.labelDefaultValue,
         objid: this.ID,
+        pageShow: true,
       }
       this.forceFresh += 1;
       this.loading = false;
@@ -778,11 +771,12 @@ export default {
     // 切换Label & 实时渲染subTable
     labelClick(item) {
       this.labelDefaultValue = item.value;
-      if (this.labelDefaultValue == 'PS_C_ALTERNATE_SKU') return;
+      // if (this.labelDefaultValue == 'PS_C_ALTERNATE_SKU') return;
       this.subTableConfig = {
         centerName: 'commodityCenter',
         tablename: this.labelDefaultValue,
         objid: this.ID,
+        pageShow: true,
       };
     },
     /**
