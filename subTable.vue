@@ -66,6 +66,10 @@ export default {
     async request(req) {
       const self = this;
       const centerName = req.centerName ? req.centerName : "orderCenter";
+      /**
+       * config配置信息
+       * http://knowledge.ark.burgeononline.com/repository#/entryComponents/2/907865/2/2061
+       */
       if (!self.config[centerName][req.tablename]) {
         console.log("no Config in this.$OMS2.subTableConfig ！！！");
         console.log('this.$OMS2.subTableConfig::', self.config);
