@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-05-21 18:13:39
+ * @LastEditTime: 2021-05-21 19:10:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -12,43 +12,63 @@
       <li>
         <div class="calculation-item">
           <span>商品应退金额</span>
-          <label>1495.00</label>
+          <label>{{ data.PRO_ACTUAL_AMT }}</label>
         </div>
         <div class="calculation-item bg">
           <span>商品实退金额</span>
-          <label>1495.00</label>
+          <label>{{ data.PRO_ACTUAL_AMT }}</label>
         </div>
       </li>
       <li class="symbol">+</li>
       <li>
         <div class="calculation-item">
           <span>应退运费</span>
-          <label>1495.00</label>
+          <label>{{ data.SHIP_AMT }}</label>
         </div>
       </li>
       <li class="symbol">+</li>
       <li>
         <div class="calculation-item">
           <span>调整金额</span>
-          <label>1495.00</label>
+          <label>{{ data.ADJUST_AMT }}</label>
+        </div>
+      </li>
+      <li class="symbol">-</li>
+      <li>
+        <div class="calculation-item">
+          <span>换货金额</span>
+          <label>{{ data.PRO_ACTUAL_AMT }}</label>
         </div>
       </li>
       <li class="symbol">=</li>
       <li>
         <div class="calculation-item">
           <span class="black">最终应退总金额</span>
-          <label>1495.00</label>
+          <label>{{ data.FINAL_ACTUAL_AMT }}</label>
         </div>
         <div class="calculation-item bg">
           <span class="black">最终实退总金额</span>
-          <label>1495.00</label>
+          <label>{{ data.FINAL_REAL_AMT }}</label>
         </div>
       </li>
     </ul>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      data: {
+        PRO_ACTUAL_AMT: "100",
+        SHIP_AMT: "100",
+        ADJUST_AMT: "100",
+        PRO_ACTUAL_AMT: "100",
+        FINAL_ACTUAL_AMT: "100",
+        FINAL_REAL_AMT: "100",
+      },
+    };
+  },
+};
 </script>
 <style lang="less">
 .calculation-main {

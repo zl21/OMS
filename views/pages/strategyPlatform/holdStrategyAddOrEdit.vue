@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-20 19:02:17
+ * @LastEditTime: 2021-05-22 09:39:11
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/views/pages/strategyPlatform/holdStrategyAddOrEdit.vue
+-->
 <template>
   <div class="holdStrategyAddOrEdit customized-detail" v-loading="loading">
     <div class="buttons customized-detail-btn">

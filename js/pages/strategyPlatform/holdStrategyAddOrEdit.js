@@ -186,7 +186,7 @@ export default {
             format: 'yyyy-MM-dd HH:mm:ss',
             slotName: 'spec01',
             width: '24',
-            disabled: false,
+            disabled: true,
             timeDisabled: false,
             disabledSwitch: false,
             options: [
@@ -227,7 +227,7 @@ export default {
             label: '单据标签',
             slotName: 'spec02',
             width: '24',
-            disabled: false,
+            disabled: true,
             disabledSwitch: false,
             switchChange: val => {
               console.log(val, '单据状态');
@@ -424,11 +424,11 @@ export default {
     const self = this;
     if (self.ID > 0 && !self.$route.query.spuid) {
       // 详情
-      const { customizedModuleName, customizedModuleId } = self.$route.params;//获取定制界面ID，Name 
-      const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-      const data = { label: 'hold策略编辑', keepAliveModuleName:keepAliveModuleName}; //当前界面模块名称 
-      console.log('$store:',R3)
-      R3.store.commit('global/changeCurrentTabName',data);
+      // const { customizedModuleName, customizedModuleId } = self.$route.params;//获取定制界面ID，Name 
+      // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+      // const data = { label: 'hold策略编辑', keepAliveModuleName:keepAliveModuleName}; //当前界面模块名称 
+      // console.log('$store:',R3)
+      // R3.store.commit('global/changeCurrentTabName',data);
       this.initData();
       // 日志
       self.subTableConfig = {
@@ -553,18 +553,23 @@ export default {
         params.ISACTIVE = params.ISACTIVE ? 'Y' : 'N'
         params.IS_AUTO_RELEASE = params.IS_AUTO_RELEASE ? 1 : 0
       }
-      let { data: { code, message } } = await this.service.strategyPlatform.holdOrderHoldStrategySave({ "ST_C_HOLD_ORDER_STRATEGY": params });
+      let { data: { code,data,message } } = await this.service.strategyPlatform.holdOrderHoldStrategySave({ "ST_C_HOLD_ORDER_STRATEGY": params });
       if (code === 0) {
         // 情况已经存储的字段
         self.modify = [];
         self.$Message.success(message || 'no message！');
-        self.onOk();
-        // this.$store.commit('global/tabOpen', {
-        //   type: 'tableDetailAction',
-        //   label: 'HOLD单策略编辑',
-        //   customizedModuleName: 'ST_C_HOLD_ORDER_STRATEGY',
-        //   customizedModuleId: data.objId
-        // });
+        if(self.ID > 0 && !self.$route.query.spuid){
+          console.log('编辑');
+          self.onOk();
+        }else{
+          console.log('新增');
+          this.$store.commit('global/tabOpen', {
+            type: 'tableDetailAction',
+            label: 'HOLD单策略编辑',
+            customizedModuleName: 'ST_C_HOLD_ORDER_STRATEGY',
+            customizedModuleId: data.objId
+          });
+        }
       }
     },
     /**
