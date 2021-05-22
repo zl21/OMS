@@ -1,12 +1,12 @@
 import R3 from '@syman/burgeon-r3';
-import jordanstore from './jordanStore';
+import jordanStore from './jordanStore'
+
 
 const { store, router, getKeepAliveModuleName } = R3;
 export const globalStore = {
   // 1.3框架全局状态管理
   namespaced: true,
   state: {
-    theme: '',
     mainContentLoading: false,
     pwTips: false,
     activeTabAddr: [],
@@ -19,7 +19,6 @@ export const globalStore = {
       hiddenButton: true
     },
     excludedComponents: [], // 针对性缓存相应的组件
-
     // 促销策略数据
     dataTwoNew: {
       scheme_arr: []
@@ -109,6 +108,18 @@ export const globalStore = {
     forginkeys: {
       columnIds: {},
       groups: {}
+    },
+    /* --------- oms --------- */
+    //订单中心
+    returnAmount:{
+      isR:false,
+      PRO_ACTUAL_AMT :'0.00',
+      SHIP_AMT :'0.00',
+      ADJUST_AMT :'0.00',
+      FINAL_ACTUAL_AMT :'0.00',
+      FINAL_REAL_AMT :'0.00',
+      FINAL_ACTUAL_AMT :'0.00',
+      FINAL_REAL_AMT :'0.00',
     }
   },
   mutations: {
@@ -117,12 +128,8 @@ export const globalStore = {
       state.prom_type.prom_type_name = n.prom_type_name;
       state.prom_type.prom_type_brief = n.prom_type_brief;
     },
-    forginkeys(state, data) {
+    forginitems(state, data) {
       state.forginkeys[data.key] = data.value;
-    },
-    // 主题
-    theme(state, val) {
-      state.theme = val;
     },
     stateChange(state, data) {
       state = Object.assign(state, data);
@@ -310,10 +317,16 @@ export const globalStore = {
         customizedModuleId: nextTab.id
       };
       this.commit('global/tabOpen', nextTabParame);
-    }
+    },
+     /* --------- oms --------- */
+    //订单中心
+    returnAmount(state, n){
+      let ks = Object.keys(n);
+      ks.forEach((k) => n[k] && (state.returnAmount[k] = n[k]));
+    },
   },
   modules: {
-    jordanStore: jordanstore
+    jordanStore
   }
 };
 export default globalStore;

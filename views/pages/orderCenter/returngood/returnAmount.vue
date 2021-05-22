@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-05-21 19:10:20
+ * @LastEditTime: 2021-05-22 12:00:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -33,11 +33,11 @@
           <label>{{ data.ADJUST_AMT }}</label>
         </div>
       </li>
-      <li class="symbol">-</li>
-      <li>
+      <li v-if="data.isReturn" class="symbol">-</li>
+      <li v-if="data.isReturn" >
         <div class="calculation-item">
           <span>换货金额</span>
-          <label>{{ data.PRO_ACTUAL_AMT }}</label>
+          <label>{{ data.EXCHANGE_AMOUNT }}</label>
         </div>
       </li>
       <li class="symbol">=</li>
@@ -58,15 +58,21 @@
 export default {
   data() {
     return {
-      data: {
-        PRO_ACTUAL_AMT: "100",
-        SHIP_AMT: "100",
-        ADJUST_AMT: "100",
-        PRO_ACTUAL_AMT: "100",
-        FINAL_ACTUAL_AMT: "100",
-        FINAL_REAL_AMT: "100",
-      },
+      data: R3.store.state.customize.returnAmount,
     };
+  },
+  created(){
+  },
+  mounted(){
+    let returnAmount = {
+      FINAL_ACTUAL_AMT:'111',
+      FINAL_REAL_AMT:'2.00'
+    }
+     R3.store.commit(`customize/returnAmount`, returnAmount)
+     console.log(this.data);
+  },
+  methods:{
+
   },
 };
 </script>
