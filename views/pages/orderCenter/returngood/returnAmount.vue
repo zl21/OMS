@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-05-22 12:00:16
+ * @LastEditTime: 2021-05-22 15:45:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -16,7 +16,7 @@
         </div>
         <div class="calculation-item bg">
           <span>商品实退金额</span>
-          <label>{{ data.PRO_ACTUAL_AMT }}</label>
+          <label>{{ data.PRO_REAL_AMT }}</label>
         </div>
       </li>
       <li class="symbol">+</li>
@@ -33,8 +33,8 @@
           <label>{{ data.ADJUST_AMT }}</label>
         </div>
       </li>
-      <li v-if="data.isReturn" class="symbol">-</li>
-      <li v-if="data.isReturn" >
+      <li v-if="!tableName === 'OC_B_RETURN_ORDER_VIRTUAL_TABLE'" class="symbol">-</li>
+      <li v-if="!tableName === 'OC_B_RETURN_ORDER_VIRTUAL_TABLE'" >
         <div class="calculation-item">
           <span>换货金额</span>
           <label>{{ data.EXCHANGE_AMOUNT }}</label>
@@ -56,17 +56,18 @@
 </template>
 <script>
 export default {
-  data() {
+  data() {OC_B_RETURN_ORDER_VIRTUAL_TABLE
     return {
       data: R3.store.state.customize.returnAmount,
+      tableName:this.$route.params.tableName
     };
   },
   created(){
+    console.log(this.$route.params.tableName);
   },
   mounted(){
     let returnAmount = {
-      FINAL_ACTUAL_AMT:'111',
-      FINAL_REAL_AMT:'2.00'
+      FINAL_ACTUAL_AMT:'10'
     }
      R3.store.commit(`customize/returnAmount`, returnAmount)
      console.log(this.data);

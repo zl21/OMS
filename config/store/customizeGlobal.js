@@ -110,17 +110,18 @@ export const globalStore = {
       groups: {}
     },
     /* --------- oms --------- */
-    //订单中心
+    //订单中心 - 退货金额
     returnAmount:{
-      isR:false,
-      PRO_ACTUAL_AMT :'0.00',
-      SHIP_AMT :'0.00',
-      ADJUST_AMT :'0.00',
-      FINAL_ACTUAL_AMT :'0.00',
-      FINAL_REAL_AMT :'0.00',
-      FINAL_ACTUAL_AMT :'0.00',
-      FINAL_REAL_AMT :'0.00',
-    }
+      PRO_ACTUAL_AMT:'0.00',
+      PRO_REAL_AMT:'0.00',
+      SHIP_AMT:'0.00',
+      ADJUST_AMT:'0.00',
+      EXCHANGE_AMOUNT:'0.00',
+      FINAL_ACTUAL_AMT:'0.00',
+      FINAL_REAL_AMT:'0.00',
+    },
+    //订单中心 - 退货数量
+    returnQuantity:1
   },
   mutations: {
     // 存储促销二类名称和描述
@@ -156,7 +157,6 @@ export const globalStore = {
     mainContentLoading(state, option) {
       state.mainContentLoading = option;
     },
-
     clostErrorDialog(state, data) {
       // 关闭报错提示框
       state.errorDialog.show = data;
