@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-14 11:34:41
+ * @LastEditTime: 2021-05-22 12:41:34
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/views/pages/basicData/channelStore.vue
+-->
 <template>
   <div class="channelStore public-main customized-detail">
     <div class="buttons customized-detail-btn">
@@ -21,7 +29,7 @@
         />
         <!-- 子表Part -->
         <div
-          v-show="labelValue == 'supplyStore'"
+          v-show="labelDefaultValue == 'supplyStore'"
           class="supplyStore"
         >
           <businessActionTable
@@ -34,12 +42,9 @@
             @on-page-size-change="pageSizeChange"
           />
         </div>
-        <div
-          v-show="labelValue == 'logTable'"
-          class="lgoTable"
-        >
-          <!-- <logTable /> -->
-        </div>
+         <div class="subtablePart" v-show="labelDefaultValue != 'supplyStore'">
+          <subTable :component-data="subTableConfig"></subTable>
+          </div>
       </div>
     </div>
   </div>

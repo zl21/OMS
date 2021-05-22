@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-21 19:46:25
+ * @LastEditTime: 2021-05-22 12:18:01
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/warehouseLogisticsAddOrEdit.vue
+-->
 <template>
   <!-- 仓库物流设置 -->
   <div class="warehouseLogisticsAddOrEdit public-main customized-detail" v-loading="loading">
@@ -60,10 +68,11 @@
             @on-page-size-change="pageSizeChange"
           />
           <subTable
-            v-show="isAuto && labelDefaultValue == 'ST_C_WAREHOUSE_LOGISTICS_SET_LOG'"
+            v-show="isAuto && labelDefaultValue != 'logistics'"
             :component-data="subTableConfig"
           />
         </div>
+        
       </div>
     </div>
   </div>

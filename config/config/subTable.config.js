@@ -145,12 +145,12 @@ export const commodityCenter = {
     refcolid: 179760,
     searchdata,
   },
-  PS_PRO_GROUP_LOG:{  //组合商品日志
+  PS_PRO_GROUP_LOG: {  //组合商品日志
     table: 'PS_PRO_GROUP_LOG',
     refcolid: 179732,
     searchdata
   },
-  PS_C_PRO_LOG:{  //商品spu日志
+  PS_C_PRO_LOG: {  //商品spu日志
     table: 'PS_C_PRO_LOG',
     refcolid: 179788,
     searchdata
@@ -165,26 +165,58 @@ export const strategyPlatform = {
     refcolid: 179448, //表-主键的字段ID
     searchdata,
   },
-  // ST_C_LIVE_CAST_STRATEGY_LOG: { // 直播解析策略
-  //   table: 'ST_C_LIVE_CAST_STRATEGY_LOG',
-  //   refcolid: 179448, //表-主键的字段ID
-  //   searchdata,
-  // },
-  // ST_C_WAREHOUSE_LOGISTICS_SET_LOG: { // 仓库物流设置
-  //   table: 'ST_C_WAREHOUSE_LOGISTICS_SET_LOG',
-  //   refcolid: 179448, //表-主键的字段ID
-  //   searchdata,
-  // },
-  // ST_C_PRICE_LOG: { // 商品价格策略
-  //   table: 'ST_C_PRICE_LOG',
-  //   refcolid: 179448, //表-主键的字段ID
-  //   searchdata,
-  // },
-  // ST_C_VIPCOM_PROJECT_LOG: { // 档期日程规划
-  //   table: 'ST_C_VIPCOM_PROJECT_LOG',
-  //   refcolid: 179448, //表-主键的字段ID
-  //   searchdata,
-  // },
+  ST_ASSIGN_LOGISTICS_LOG: { // 分物流规则
+    table: 'ST_ASSIGN_LOGISTICS_LOG',
+    refcolid: 179874, //表-主键的字段ID
+    searchdata,
+  },
+
+  ST_WAREHOUSE_LOGISTICS_LOG: { // 仓库物流设置
+    table: 'ST_WAREHOUSE_LOGISTICS_LOG',
+    refcolid: 179958, //表-主键的字段ID
+    searchdata,
+  },
+  ST_DELIVERY_AREA_LOG: { // 物流派送范围
+    table: 'ST_DELIVERY_AREA_LOG',
+    refcolid: 179902, //表-主键的字段ID
+    searchdata,
+  },
+  ST_SPECIAL_ASSIGN_LOGISTICS_LOG: { // 特殊物流方案
+    table: 'ST_SPECIAL_ASSIGN_LOGISTICS_LOG',
+    refcolid: 179930, //表-主键的字段ID
+    searchdata,
+  },
+
+
+ 
+
+
+
+}
+
+//基础数据
+export const basicData = {
+  CP_LOGISTICS_LOG: { // 物流公司档案
+    table: 'CP_LOGISTICS_LOG',
+    refcolid: 179986, //表-主键的字段ID
+    searchdata,
+  },
+  CP_ORG_CHANNEL_LOG: { // 渠道仓档案
+    table: 'CP_ORG_CHANNEL_LOG',
+    refcolid: 180070, //表-主键的字段ID
+    searchdata,
+  },
+  CP_REGION_ALIAS_LOG: { // 省市区别名
+    table: 'CP_REGION_ALIAS_LOG',
+    refcolid: 180126, //表-主键的字段ID
+    searchdata,
+  },
+  CP_SHOP_LOG: { // 平台店铺档案
+    table: 'CP_SHOP_LOG',
+    refcolid: 180154, //表-主键的字段ID
+    searchdata,
+  },
+
 }
 
 export const BILL_STATUS = {
@@ -211,5 +243,6 @@ export default {
   orderCenter,
   commodityCenter,
   strategyPlatform,
+  basicData,
   BILL_STATUS
 };

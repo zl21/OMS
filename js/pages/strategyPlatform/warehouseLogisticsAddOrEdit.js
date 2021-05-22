@@ -329,7 +329,7 @@ export default {
         },
         {
           label: '操作日志',
-          value: 'ST_C_WAREHOUSE_LOGISTICS_SET_LOG',
+          value: 'ST_WAREHOUSE_LOGISTICS_LOG',
           isShow: false
         }
       ],
@@ -479,7 +479,7 @@ export default {
     labelClick(e) {
       // tab明细切换
       this.labelDefaultValue = e.value;
-      if (this.labelDefaultValue == 'ST_C_WAREHOUSE_LOGISTICS_SET_LOG') {
+      if (this.labelDefaultValue == 'ST_WAREHOUSE_LOGISTICS_LOG') {
         this.subTableConfig = {
           centerName: 'strategyPlatform',
           tablename: this.labelDefaultValue,

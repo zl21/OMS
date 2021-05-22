@@ -8,6 +8,7 @@ import comUtils from '@/assets/js/__utils__/common.js';
 import orderItem from 'professionalComponents/subTable';
 import logTable from 'professionalComponents/LogTable';
 import businessActionTable from 'professionalComponents/businessActionTable';
+import subTable from 'professionalComponents/subTable';
 
 export default {
   name: 'CP_C_ORG_CHANNEL',
@@ -18,6 +19,7 @@ export default {
     businessLabel,
     businessStatusFlag,
     logTable,
+    subTable,
     businessActionTable
   },
   data() {
@@ -25,6 +27,11 @@ export default {
       vmI18n:$i18n,
       collapse: 'panel_baseInfo',
       labelValue: 'supplyStore',
+      subTableConfig: {
+        centerName: '',
+        tablename: '',
+        objid: '',
+      },
       btnConfig: {
         typeAll: 'default',
         buttons: [
@@ -339,7 +346,7 @@ export default {
         },
         {
           label: '操作日志',
-          value: 'logTable'
+          value: 'CP_ORG_CHANNEL_LOG'
         }
       ],
       isModify: false,
@@ -528,10 +535,15 @@ export default {
       self.jordanTableConfig.currentPage = data.PAGE_INDEX;
       self.jordanTableConfig.pageSize = data.PAGE_SIZE;
     },
-    labelClick(e) {
-      // tab明细切换
-      console.log(e);
-      this.labelValue = e.value;
+    labelClick(item) {
+      console.log(item);
+      this.labelDefaultValue = item.value;
+      if (this.labelDefaultValue == 'supplyStore') return;
+      this.subTableConfig = {
+        centerName: 'basicData',
+        tablename: this.labelDefaultValue,
+        objid: this.id
+      };
     },
     save() {
       // 保存接口

@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-28 13:22:03
+ * @LastEditTime: 2021-05-22 12:27:33
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/views/pages/basicData/logisticsCompanyFilesAddOrEdit.vue
+-->
 <template>
   <div class="logisticsCompanyFilesAddOrEdit cusArkCollapse customized-detail" :id="this.customizedModuleName">
     <loading :loading="loading" />
@@ -33,6 +41,10 @@
           />
           <orderItem v-show="showSubtablePart && labelDefaultValue !== 'PROPERTYVALUES'" :component-data="subTableConfig"></orderItem>
         </div>
+        <div class="subtablePart" v-show="labelDefaultValue != 'PROPERTYVALUES'">
+          <subTable :component-data="subTableConfig2"></subTable>
+          </div>
+
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-20 13:33:28
- * @LastEditTime: 2021-05-21 11:43:07
+ * @LastEditTime: 2021-05-22 11:28:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/storehouseRule.vue
@@ -24,12 +24,13 @@
       </Collapse>
 
       <div v-if="pageShow" class="customized-detail-table">
-        <div class="subtablePart">
-          <businessLabel
+           <businessLabel
             :label-list="labelList"
             :label-default-value="labelDefaultValue"
             @labelClick="labelClick"
           />
+          
+        <div class="subtablePart" v-show="labelDefaultValue == 'PROPERTY'">
           <div class="subtablePart-labelList">
             <Input
               v-model="seachVal"
@@ -60,6 +61,10 @@
             </div>
           </div>
         </div>
+
+         <div class="subtablePart" v-show="labelDefaultValue != 'PROPERTY'">
+          <subTable :component-data="subTableConfig"></subTable>
+          </div>
       </div>
     </div>
 

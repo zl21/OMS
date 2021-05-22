@@ -7,6 +7,7 @@ import orderItem from 'professionalComponents/subTable';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import addPlatformLogisticsCompany from '@/views/modal/commodityCenter/addPlatformLogisticsCompany';
 import loading from 'professionalComponents/loading';
+import subTable from 'professionalComponents/subTable';
 
 export default {
   components: {
@@ -18,6 +19,7 @@ export default {
     businessActionTable,
     addPlatformLogisticsCompany,
     loading,
+    subTable
   },
   data() {
     /* -------------------- input校验器 start -------------------- */
@@ -163,6 +165,11 @@ export default {
           ],
         },
       },
+      subTableConfig2: {
+        centerName: '',
+        tablename: '',
+        objid: '',
+      },
       // tab切换配置
       labelList: [{
           label: '平台物流对应',
@@ -170,7 +177,7 @@ export default {
         },
         {
           label: '操作日志',
-          value: 'PS_C_ALTERNATE_SKU1',
+          value: 'CP_LOGISTICS_LOG',
         },
       ],
       labelDefaultValue: 'PROPERTYVALUES', // 设置tab默认值
@@ -417,7 +424,8 @@ export default {
     labelClick(item) {
       this.labelDefaultValue = item.value;
       if (this.labelDefaultValue == 'PROPERTYVALUES') return;
-      this.subTableConfig = {
+      this.subTableConfig2 = { //basicData
+        centerName: 'basicData',
         tablename: this.labelDefaultValue,
         objid: this.ID,
       };

@@ -33,7 +33,7 @@ export default {
         },
         {
           label: '操作日志',
-          value: 'PS_C_ALTERNATE_SKU_1'
+          value: 'ST_ASSIGN_LOGISTICS_LOG'
         }
       ],
       labelDefaultValue: 'PROPERTY', // 设置tab默认值，默认展示'自定义属性'
@@ -392,8 +392,11 @@ export default {
     let query = this.$route.query;
     this.customizedModuleName = customizedModuleName;
     this.id = customizedModuleId;
+
+  
     //ST_C_ORDER_WAREHOUSE
     if (customizedModuleName == 'ST_C_ORDER_WAREHOUSE') {
+      this.labelList[1].value = 
       this.qurefrom('cpCPhyWarehouseEname')[0].style = null;
       // 表示分仓策略》分仓规则
       if (customizedModuleId == 'New' || customizedModuleId == '-1') {
@@ -979,13 +982,12 @@ export default {
     },
     // 切换Label & 实时渲染subTable
     labelClick(item) {
-      console.log(item);
       this.labelDefaultValue = item.value;
-      if (this.labelDefaultValue == 'PS_C_ALTERNATE_SKU') return;
+      if (this.labelDefaultValue == 'PROPERTY') return;
       this.subTableConfig = {
-        preTablename: 'PS_C_SKU',
+        centerName: 'strategyPlatform',
         tablename: this.labelDefaultValue,
-        objid: this.ID
+        objid: this.id
       };
     }
   }

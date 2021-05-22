@@ -24,7 +24,7 @@ export default {
         label: '操作日志',
         value: 'LOG',
       }, ],
-      labelDefaultValue: 'LOG', // 设置tab默认值
+      labelDefaultValue: 'CP_REGION_ALIAS_LOG', // 设置tab默认值
       subTableConfig: {
         centerName: '',
         tablename: '',
@@ -305,6 +305,7 @@ export default {
     self.initObjItem(self.ID);
     // 子表初始化
     this.subTableConfig = {
+      centerName:"basicData",
       tablename: this.labelDefaultValue,
       objid: this.ID,
     };
