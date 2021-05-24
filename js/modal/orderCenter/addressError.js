@@ -102,8 +102,8 @@
                             params.row.CP_C_REGION_PROVINCE_ID = val.ID.val;
                             this.getResult(val , params.row , val.ID.val , val.ENAME.val)
                           }else if(val.id) {  //失去焦点时间
-                            params.row.CP_C_REGION_CITY_ENAME = val.value
-                            params.row.CP_C_REGION_CITY_ID = val.id
+                            params.row.CP_C_REGION_PROVINCE_ENAME = val.value
+                            params.row.CP_C_REGION_PROVINCE_ID = val.id
                             this.tableConfig.data[params.index] = params.row;
                             this.getResult(val , params.row , val.id , val.value)
                             // let arr = [];
