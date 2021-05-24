@@ -92,7 +92,7 @@ export default {
             style: 'input',
             label: '组合商品名称',
             value: 'ename',
-            width: '24',
+            width: '16',
             disabled: false,
             inputChange: () => {
               this.masterModifyData('ename', 'master');
@@ -188,10 +188,17 @@ export default {
             },
           },
           {
+            style: 'checkbox',
+            label: '启用状态',
+            value: 'ISACTIVE',
+            width: '8',
+            disabled: true
+          },
+          {
             style: 'input',
             label: '零售价',
             value: 'price_retail',
-            width: '24',
+            width: '8',
             inputChange: () => {
               this.masterModifyData('price_retail', 'master');
             }
@@ -225,7 +232,8 @@ export default {
           ecode: '',
           ename: '',
           type: '',
-          price_retail: ''
+          price_retail: '',
+          ISACTIVE:''
         },
         ruleValidate: {
           ecode: [{
@@ -529,6 +537,7 @@ export default {
       self.formConfig.formValue.price_retail = data.PsCProGroup.PRICE_RETAIL;
       self.formConfig.formValue.group_type = data.PsCProGroup.GROUP_TYPE;
       self.modify.master.group_type = data.PsCProGroup.GROUP_TYPE;
+      self.modify.master.ISACTIVE = data.PsCProGroup.ISACTIVE;
 
       // 赋值品牌 商品分类
       self.formConfig.formData.forEach(ele => {
