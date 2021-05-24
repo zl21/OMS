@@ -495,6 +495,7 @@ R3.launchApplication({
 | v1.3.73 | store储存退款金额|
 | v1.3.74 | 增加基础数据和策略中心的操作日志展示 |
 | v1.3.75 | store调整字段 |
+| v1.3.76 | 物流派送 css |
 
 #### Extends-Api 版本说明
 
