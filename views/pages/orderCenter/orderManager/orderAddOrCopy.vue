@@ -912,8 +912,9 @@ export default {
           },
           formData: [
             {
-              version: "1.4",
+              version: '1.4',
               style: "popInput",
+              // style: "popInputPlus",
               width: "6",
               colname: "PS_C_SKU",
               itemdata: {
@@ -930,9 +931,15 @@ export default {
               oneObj: (val) => {
                 console.log("SKU编码-oneObj::", val);
                 if (!val.pid && !val.valuedata) return;
-                const _this = this;
-                _this.searchOrderDetail(val.valuedata);
+                this.searchOrderDetail(val.valuedata);
               },
+              // inputBlur: (val) => {
+              //   if (!val.pid && !val.valuedata) return;
+              // },
+              inputEnter: (val) => {
+                if (!val.pid && !val.valuedata) return;
+                this.searchOrderDetail(val.valuedata);
+              }
             },
           ],
         },

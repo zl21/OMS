@@ -179,6 +179,10 @@ export default {
           label: '操作日志',
           value: 'CP_LOGISTICS_LOG',
         },
+        {
+          label: '操作日志',
+          value: 'CP_LOGISTICS_LOG',
+        },
       ],
       labelDefaultValue: 'PROPERTYVALUES', // 设置tab默认值
       panelDefaultValue: 'panel_baseInfo', // 设置默认打开'基本信息'

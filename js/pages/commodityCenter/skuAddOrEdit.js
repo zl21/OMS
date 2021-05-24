@@ -35,7 +35,7 @@ export default {
       spuID: '', // SPU编码对应的ID
       skuID: '',
       imgIndex: 0,
-      specList: ['spec01','spec02','spec03'],
+      specList: ['spec01', 'spec02', 'spec03'],
       spec01Data: {
         totalRowCount: 0, // 数据总条数
         autoData: [], // 模糊搜索的数据
@@ -450,6 +450,9 @@ export default {
       // self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基础信息', ['SALES_STATUS', 'PURCHASE_STATUS']);
       if (self.ID > 0 && self.$route.query.spuid) {
         self.formConfig.formData[0].itemdata.valuedata = self.$route.query.spucode;
+        self.spuID = self.$route.query.spucode;
+      } else {
+        self.spuID = self.formConfig.formValue.PS_C_PRO_ID.pid || '';
       }
       // 详情页-规格名称默认值赋值：
       const defValArr = ['PS_C_SPECOBJ1_ID', 'PS_C_SPECOBJ2_ID', 'PS_C_SPECOBJ3_ID'];
@@ -507,20 +510,19 @@ export default {
       self[targetFormConfig].formData.forEach((item) => {
         // 为formData的每一项添加value、selectChange等属性
         item.value = item.colname.toString();
-        if (item.style == 'input') {
-          item.inputChange = () => {
-            if (item.attrType = 'fix') {
+        let fieldStyles = {
+          input: 'inputChange',
+          select: 'selectChange',
+          date: 'onChange',
+          switch: 'switchChange',
+          radio: 'radioChange'
+        }
+        let eventName = fieldStyles[item.style]
+        if (eventName) {
+          item[eventName] = () => {
+            if (item.attrType == 'fix') {
               // 固定属性和主表Part的form一起放在'PsSku'里面传
               console.log(self[targetFormConfig].formValue[item.colname]);
-              this.masterModifyData(item.colname, 'master', 'FIX');
-            } else {
-              this.masterModifyData(item.colname, 'exAttr', 'EX');
-            }
-          };
-        } else {
-          item.selectChange = () => {
-            if (item.attrType = 'fix') {
-              // 固定属性和主表Part的form一起放在'PsSku'里面传
               this.masterModifyData(item.colname, 'master', 'FIX');
             } else {
               this.masterModifyData(item.colname, 'exAttr', 'EX');
@@ -663,6 +665,7 @@ export default {
         }
       }
       for (const key in self.modify.exAttr) {
+        const afterExPro = JSON.parse(JSON.stringify(self.modify.exAttr));
         EXTRA.push({
           attributeId: key,
           attributeItem: afterExPro[key] ? afterExPro[key] : ''
