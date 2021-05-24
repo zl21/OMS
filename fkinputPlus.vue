@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-05-19 15:56:14
- * @LastEditTime: 2021-05-24 17:04:56
+ * @LastEditTime: 2021-05-24 19:23:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/fkinputPlus.vue
@@ -25,6 +25,7 @@
       @on-blur="blur"
       @on-clear="clear"
       @on-popper-show="popperShow"
+      @on-keyup="keyup($event)"
       :dataEmptyMessage="dataEmptyMessage"
       :columns="columns"
       :AutoData="AutoData"
@@ -350,6 +351,29 @@ export default {
       if (this.isBackRowItem) {
         this.$emit('getFkChooseItem', {});
       } else {
+        this.$emit('getFkChooseItem', this.itemdata);
+      }
+    },
+    keyup(e) {
+      // 判断是否enter键，如果是，不清空模糊查询列表
+      /* if (event.keyCode !== 13) {
+        this.queryList = [];
+        if (this.itemdata.valuedata !== ''
+          && ((event.keyCode <= 57 && event.keyCode >= 48)
+            || (event.keyCode <= 90 && event.keyCode >= 65))
+        ) {
+          // 如果完成模糊查询，回车跳下一个输入框
+          $(`.item-filter .fkAutocomplete${str.colname}`).css(
+            'display',
+            'block'
+          );
+        }
+        if (str.valuedata == '') {
+          str.pid = '';
+          this.$emit('getFkChooseItem', str);
+        }
+      } */
+      if (e.keyCode == 13 && (this.itemdata.pid || this.itemdata.valuedata)) {
         this.$emit('getFkChooseItem', this.itemdata);
       }
     },

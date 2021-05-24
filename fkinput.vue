@@ -48,12 +48,9 @@
         <!-- 模糊搜索弹出的搜索框结果 -->
         <template slot-scope="{ item }">
           <div v-for="(value, key, index) of item" :key="index">
-            <span
-              v-if="key != 'id' && key != 'value'"
-              :class="key"
-              :title="value"
-              >{{ value }}</span
-            >
+            <span v-if="key == 'value'" :class="key" :title="value">{{
+              value
+            }}</span>
           </div>
         </template>
       </el-autocomplete>

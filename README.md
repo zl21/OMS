@@ -182,3 +182,4 @@
 | v1.1.35 | fkinputPlus模糊搜索入参 |
 | v1.1.36 | fkinputPlus样式调整 |
 | v1.1.37 | fkinput失去焦点不清空pid ｜ 联动参数修改 |
+| v1.1.38 | fkinput模糊搜索待选处理/fkinputPlus inputEnter |
