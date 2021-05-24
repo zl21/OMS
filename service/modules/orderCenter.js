@@ -97,6 +97,9 @@ export default {
   initObject: (params) => $network.post('/p/cs/oc/oms/v1/initObject', params), // 订单详情明细表头
   updateOrderAddr: (params) => $network.post('/p/cs/oc/oms/v1/updateOrderAddr', params), // 订单详情 - 修改地址
   markCancel: (params) => $network.post('/p/cs/oc/oms/v1/markCancel', params), // 订单详情 - 修改地址
+  selectRegion: (params) => $network.post('/p/cs/oc/oms/v1/selectRegion', params), // 订单详情 - 修改地址
+  
+
  
   /**
    * 扫描入库
