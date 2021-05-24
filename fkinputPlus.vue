@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-05-19 15:56:14
- * @LastEditTime: 2021-05-20 13:10:54
+ * @LastEditTime: 2021-05-24 15:42:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/fkinputPlus.vue
@@ -257,7 +257,7 @@ export default {
     handelFuzzyParam(val) {
       const formdata = new FormData();
       formdata.append("ak", val.trim());
-      formdata.append("colid", 171650);
+      formdata.append("colid", this.itemdata.colid);
       formdata.append("fixedcolumns", JSON.stringify({ whereKeys: {} }));
       return formdata
     },
