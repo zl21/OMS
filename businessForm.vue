@@ -140,9 +140,9 @@
                       :inputList="item.inputList?item.inputList:[]"
                       :objList="item.objList?item.objList:[]"
                       :itemdata="item.itemdata"
-                      @inputBlur="runMethods(item.InputEnter)"
+                      @inputBlur="runMethods(item.inputBlur)"
                       @getFkChooseItem="(row)=>runMethods(item.oneObj(item.itemdata.isBackRowItem ? row : item.itemdata))"
-                      @itemInputEnter="runMethods(item.InputEnter)">
+                      @inputEnter="runMethods(item.inputEnter)">
             </fkinputPlus>
           </FormItem>
 
