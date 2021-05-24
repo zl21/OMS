@@ -20,16 +20,7 @@ export default {
   data() {
     return {
       vmI18n: $i18n,
-      subTableConfig: {
-        centerName: '',
-        tablename: '',
-        objid: '',
-      },
-      subTableConfig1: {
-        centerName: '',
-        tablename: '',
-        objid: '',
-      },
+      subTableConfig: {},
       forceFresh: 0,
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       showSubtablePart: false,
@@ -494,6 +485,7 @@ export default {
         centerName: 'commodityCenter',
         tablename: this.labelDefaultValue,
         objid: this.ID,
+        pageShow: true,
       }
       this.forceFresh += 1;
       this.loading = false;
@@ -780,11 +772,12 @@ export default {
     // 切换Label & 实时渲染subTable
     labelClick(item) {
       this.labelDefaultValue = item.value;
-      if (this.labelDefaultValue == 'PS_C_ALTERNATE_SKU') return;
-      this.subTableConfig1 = {
+      // if (this.labelDefaultValue == 'PS_C_ALTERNATE_SKU') return;
+      this.subTableConfig = {
         centerName: 'commodityCenter',
         tablename: this.labelDefaultValue,
         objid: this.ID,
+        pageShow: true,
       };
     },
     /**
