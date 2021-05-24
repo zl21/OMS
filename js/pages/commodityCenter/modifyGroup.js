@@ -25,6 +25,9 @@ export default {
     },
     groupType() {
       return this.formConfig.formValue.group_type;
+    },
+    save_button(){
+      return this.btnConfig.buttons.filter(item=>item.webname == 'lookup_save')[0];
     }
   },
   data() {
@@ -39,6 +42,7 @@ export default {
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
+              this.save_button.disabled = true;
               this.save();
             },
           },
@@ -92,7 +96,7 @@ export default {
             style: 'input',
             label: '组合商品名称',
             value: 'ename',
-            width: '24',
+            width: '16',
             disabled: false,
             inputChange: () => {
               this.masterModifyData('ename', 'master');
@@ -188,10 +192,17 @@ export default {
             },
           },
           {
+            style: 'checkbox',
+            label: '启用状态',
+            value: 'ISACTIVE',
+            width: '8',
+            disabled: true
+          },
+          {
             style: 'input',
             label: '零售价',
             value: 'price_retail',
-            width: '24',
+            width: '8',
             inputChange: () => {
               this.masterModifyData('price_retail', 'master');
             }
@@ -225,7 +236,8 @@ export default {
           ecode: '',
           ename: '',
           type: '',
-          price_retail: ''
+          price_retail: '',
+          ISACTIVE:''
         },
         ruleValidate: {
           ecode: [{
@@ -274,6 +286,7 @@ export default {
           buttons: [{
               webname: 'order_fund', // 返回
               text: '添加',
+              disabled: false,
               btnclick: () => {
                 this.addgeneralItem();
               },
@@ -281,6 +294,7 @@ export default {
             {
               webname: 'order_fund', // 返回
               text: '删除',
+              disabled: false,
               btnclick: () => {
                 this.delLuck();
               },
@@ -306,6 +320,7 @@ export default {
               value: 'gbCode',
               columns: ['ECODE'],
               AuotData: [], // 匹配的选项
+              disabled: false,
               dimChange: (val) => {
                 if (!val) {
                   this.jordanTableConfigLuck.businessFormConfig.formData[1].AuotData = [];
@@ -379,6 +394,7 @@ export default {
           buttons: [{
               webname: 'order_fund', // 返回
               text: '添加',
+              disabled:false,
               btnclick: () => {
                 this.addgeneralItem();
               },
@@ -386,6 +402,7 @@ export default {
             {
               webname: 'order_fund', // 返回
               text: '删除',
+              disabled:false,
               btnclick: () => {
                 this.delGeneral();
               },
@@ -528,7 +545,11 @@ export default {
       self.formConfig.formValue.type = data.PsCProGroup.TYPE;
       self.formConfig.formValue.price_retail = data.PsCProGroup.PRICE_RETAIL;
       self.formConfig.formValue.group_type = data.PsCProGroup.GROUP_TYPE;
+      self.formConfig.formValue.ISACTIVE = data.PsCProGroup.ISACTIVE;
       self.modify.master.group_type = data.PsCProGroup.GROUP_TYPE;
+      self.save_button.disabled = data.PsCProGroup.ISACTIVE;
+      self.jordanTableConfigLuck.businessButtonConfig.buttons.forEach(item=>item.disabled = data.PsCProGroup.ISACTIVE);
+      self.jordanTableConfigGenera.businessButtonConfig.buttons.forEach(item=>item.disabled = data.PsCProGroup.ISACTIVE);
 
       // 赋值品牌 商品分类
       self.formConfig.formData.forEach(ele => {
@@ -591,8 +612,11 @@ export default {
           });
           self.modify.generalGroupItem = [];
           self.modify.luckGroupItem = [];
+          self.save_button.disabled = false;
+          self.query();
         } else {
           self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+          this.save_button.disabled = false;
         }
       });
     },
@@ -726,6 +750,7 @@ export default {
       } else {
         const arr = self.selectDatas.map(item => item.ID);
         self.jordanTableConfigGenera.data = self.jordanTableConfigGenera.data.filter(item => !arr.includes(item.ID));
+        self.modify.generalGroupItem = self.modify.generalGroupItem.filter(item => !arr.includes(item.ID));
       }
       self.isModify = true;
     },
@@ -773,6 +798,7 @@ export default {
         } else {
           const arr = self.selectDatas.map(item => item.ID);
         self.jordanTableConfigLuck.data = self.jordanTableConfigLuck.data.filter(item => !arr.includes(item.ID));
+        self.modify.luckGroupItem = self.modify.luckGroupItem.filter(item => !arr.includes(item.ID));
         }
         self.isModify = true;
     },

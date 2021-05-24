@@ -148,7 +148,7 @@ export default {
           },
         }]
       },
-      dataAysis: true, // 智能解析地址是否正确
+      dataAysis: false, // 智能解析地址是否正确
       regx: {
         mobile: /^\d{11}$/,
         phone: /^\d{11,12}$/,
@@ -246,28 +246,16 @@ export default {
     async parseAddress() {
       if (!this.newReceivAddress) return;
       const result = parse(this.newReceivAddress);
-      if (result.province == '' && (result.area == '' || result.city == '')) {
-        // "请填入完整信息,如:张三,17788888888,上海上海市闵行区黎安路999号"
-        this.$Message.warning($i18n.t('modalTips.f9'));
-      }else{
-        this.data.receiver_name = result.name;
-        this.data.receiver_mobile = result.mobile;
-        this.data.receiver_address = result.addr;
-        this.data.receiver_phone = result.phone;
-        this.data.receiver_zip = result.zip_code;
-        this.newReceivAddress = result.newReceivAddress;
-        this.formConfig.formData[0].itemdata.valuedata = result.province;
-        this.formConfig.formData[1].itemdata.valuedata = result.city;
-        this.formConfig.formData[2].itemdata.valuedata = result.area;
-        // 地址解析默认是正确状态
-        this.dataAysis = true;
-        // 获取省市区的id
-        await this.getSelection(166974,result.province);
-        await this.getSelection(167077,result.city,this.province_id);
-        await this.getSelection(167091,result.area,this.province_id);
-        // 判断是收货人基础信息是否正确
-        await this.intelligentReciver();
-      }
+      console.log(result);
+      this.data.receiver_name = result.name;
+      this.data.receiver_mobile = result.mobile;
+      this.data.receiver_address = result.addr;
+      this.data.receiver_phone = result.phone;
+      this.data.receiver_zip = result.zip_code;
+      this.newReceivAddress = result.newReceivAddress;
+      this.selectRegion(result.province,result.city,result.area)
+      // 判断是收货人基础信息是否正确
+      await this.intelligentReciver();
     },
     async intelligentReciver() {
       if (!this.dataAysis) return;
@@ -362,34 +350,25 @@ export default {
         this.update();
       }
     },
-    // 获取省市区的id
-    async getSelection(refcolid,name,code){
-      let params = {
-        isdroplistsearch:true,
-        refcolid:refcolid,
-        fixedcolumns:{
-          C_UP_ID: code ?? '',
-          ENAME:`=${name}`
-        },
-        startindex:0,
-        range:10
-      };
-      const formdata = new FormData();
-      formdata.append('searchdata', JSON.stringify(params));
-      let { data:{data:{row}} } =  await this.service.common.QueryList(formdata);
-      let pid = row[0].ECODE.val;
-      this.province_id = pid;
-      if(refcolid && refcolid === 166974){
-        this.formConfig.formData[0].itemdata.pid = pid;
-        this.data.cp_c_region_province_id = pid;
-      } else if(refcolid && refcolid === 167077){
-        this.formConfig.formData[1].itemdata.pid = pid;
-        this.data.cp_c_region_city_id = pid;
-      } else if(refcolid && refcolid === 167091){
-        this.formConfig.formData[2].itemdata.pid = pid;
-        this.data.cp_c_region_area_id = pid;
+    // 查询省市区并赋值
+    async selectRegion(provinceName,cityName,areaName){
+      let params = {provinceName,cityName,areaName};
+      let { data:{data:{provinceInfo,cityInfo,areaInfo}}} =  await this.service.orderCenter.selectRegion(params);
+      console.log(provinceInfo,cityInfo,areaInfo);
+      this.formConfig.formData[0].itemdata.valuedata = provinceInfo ?.name;
+      this.formConfig.formData[0].itemdata.pid = provinceInfo ?.id;
+      this.data.cp_c_region_province_id = provinceInfo ?.id;
+      this.formConfig.formData[1].itemdata.valuedata = cityInfo ?.name;
+      this.formConfig.formData[1].itemdata.pid = cityInfo ?.id;
+      this.data.cp_c_region_city_id = cityInfo ?.id;
+      this.formConfig.formData[2].itemdata.valuedata = areaInfo ?.name;
+      this.formConfig.formData[2].itemdata.pid = areaInfo ?.id;
+      this.data.cp_c_region_area_id = areaInfo ?.id;
+      if(provinceName.id || cityName.id){
+        console.log('111',provinceName,cityName); 
+        // 地址解析状态
+        this.dataAysis = true;
       }
-
     }
   },
   async created() {

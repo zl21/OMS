@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-05-22 15:45:29
+ * @LastEditTime: 2021-05-24 10:29:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -56,21 +56,21 @@
 </template>
 <script>
 export default {
-  data() {OC_B_RETURN_ORDER_VIRTUAL_TABLE
+  data() {
     return {
       data: R3.store.state.customize.returnAmount,
       tableName:this.$route.params.tableName
     };
   },
   created(){
-    console.log(this.$route.params.tableName);
+    
   },
   mounted(){
     let returnAmount = {
       FINAL_ACTUAL_AMT:'10'
     }
      R3.store.commit(`customize/returnAmount`, returnAmount)
-     console.log(this.data);
+     console.log('this.data:',this.data);
   },
   methods:{
 

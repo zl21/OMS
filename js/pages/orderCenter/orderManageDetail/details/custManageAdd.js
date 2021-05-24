@@ -183,7 +183,7 @@ export default {
             className:'ark-dialog',
             mask:true,
             render: h => h('div', {
-              },res.data.message)
+              },res.data.data[0].message)
           });
       }
       })

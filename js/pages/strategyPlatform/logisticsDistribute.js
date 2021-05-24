@@ -97,7 +97,7 @@ export default {
             version: '1.4',
             colname: 'CP_C_REGION_PROVINCE_ID',
             style: 'popInput', // 输入框弹框单多选
-            width: '12',
+            width: '8',
             itemdata: {
               col: 1,
               colid: 171215, // 当前字段的ID
@@ -130,14 +130,14 @@ export default {
             label: '备注',
             value: 'remark',
             colname: 'remark',
-            width: '12',
+            width: '8',
             disabled: false
           },
           {
             style: '',
             label: '启用状态',
             colname: 'isActive',
-            width: '6',
+            width: '8',
             disabled: true,
             switchChange: () => {
               let isActive = this.FormConfig.formValue.isActive;
