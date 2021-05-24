@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-13 18:38:40
+ * @LastEditTime: 2021-05-24 15:14:29
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/js/modal/interfacePlatform/config/IP_B_STANDPLAT_ORDER.js
+ */
 // 通用订单下载
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 import i18n from '@burgeon/internationalization/i18n/i18n';
@@ -15,13 +23,9 @@ export default {
         width: '24',
         isActive: true,
         isdisabled: false,
-        inputList: [
-          {
-            childs: [{ colname: 'CP_C_SHOP_ID', refobjid: 3, valuedata: 3 }]
-          }
-        ],
+        version:'1.4',
         itemdata: {
-          colid: 167023,
+          colid: 168348,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           display: 'OBJ_FK', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
@@ -29,8 +33,14 @@ export default {
           isnotnull: true, // 是否必填
           name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
+          // item:{
+          //   "platform":"not in(2,4,50,19)"
+          //  },
           valuedata: '' // 这个是选择的值
-        }
+        },
+        oneObj: (val) => {
+          console.log(val);
+         }
       },
       {
         style: 'date',
@@ -72,16 +82,16 @@ export default {
     const param = {
       shop_id: downData.formData[0].itemdata.pid,
       bill_no: downData.formValue.sp_ids ? downData.formValue.sp_ids : downData.formValue.orderNum, // 订单编号
-      start_time: BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
-      end_time: BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
+      start_time: downData.formValue.startEndTimes[0] ? BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]) : null, // 开始时间
+      end_time: downData.formValue.startEndTimes[1] ? BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]) : null, // 结束时间
       status: downData.formValue.orderStatus, // 状态 必传 给默认值
-      table: _this.tablename // 当前表名 必传
+      table: self.$route.params.tableName // 当前表名 必传
     };
-    const fromdata = new FormData();
-    fromdata.append('param', JSON.stringify(param));
+    // const fromdata = new FormData();
+    // fromdata.append('param', JSON.stringify(param));
     const {
       data: { code, message }
-    } = await _this.service.common.publicUrlParams('/p/cs/stdp/order/get', fromdata);
+    } = await _this.service.interfacePlatform.orderDownload( param);
     if (code === 0) {
       _this.$Message.success(message);
       _this.$emit('closeActionDialog', true);

@@ -82,6 +82,7 @@ export default {
           {
             text: '搜索',
             btnclick: () => {
+              this.tableConfig.current = 1
               this.searchGift()
             }, // 按钮点击事件
           },
@@ -195,6 +196,9 @@ export default {
         setTimeout(() => {
           this.btnConfig.buttons[1].disabled = false;
         }, 5000);
+        setTimeout(()=>{
+          this.$parent.$parent.closeConfirm();
+        },1000)
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
           this.$parent.$parent.$parent.$parent.$parent.getDetailsData()
@@ -227,7 +231,7 @@ export default {
             },
           })
         }
-        this.$parent.$parent.closeConfirm();
+     
       })
     },
     deleteOrderGoods() {

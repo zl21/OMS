@@ -12,11 +12,11 @@
           <div class="search_child">
             <!-- <span class="lable">商品名称:</span> -->
             <span class="lable">{{ vmI18n.t("table_label.productName") }}:</span>
-            <Input v-model="proName" @on-enter="search('one')" />
+            <Input v-model="proName" @on-enter="fnsearch('one')" />
           </div>
           <div class="search_child">
             <!-- 搜索 -->
-            <Button type="primary" @click="search('one')">
+            <Button type="primary" @click="fnsearch('one')">
               {{
               vmI18n.t("btn.search")
               }}
@@ -54,11 +54,11 @@
           <div class="search_child">
             <!-- <span class="lable">商品名称:</span> -->
             <span class="lable">{{ vmI18n.t("table_label.productName") }}:</span>
-            <Input v-model="replace_proName" @on-enter="search('two')" />
+            <Input v-model="replace_proName" @on-enter="fnsearch('two')" />
           </div>
           <div class="search_child">
             <!-- 搜索 -->
-            <Button type="primary" @click="search('two')">
+            <Button type="primary" @click="fnsearch('two')">
               {{
               vmI18n.t("btn.search")
               }}
