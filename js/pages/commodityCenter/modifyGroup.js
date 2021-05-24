@@ -25,6 +25,9 @@ export default {
     },
     groupType() {
       return this.formConfig.formValue.group_type;
+    },
+    save_button(){
+      return this.btnConfig.buttons.filter(item=>item.webname == 'lookup_save')[0];
     }
   },
   data() {
@@ -39,6 +42,7 @@ export default {
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
+              this.save_button.disabled = true;
               this.save();
             },
           },
@@ -600,8 +604,11 @@ export default {
           });
           self.modify.generalGroupItem = [];
           self.modify.luckGroupItem = [];
+          self.save_button.disabled = false;
+          self.query();
         } else {
           self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+          this.save_button.disabled = false;
         }
       });
     },
@@ -735,6 +742,7 @@ export default {
       } else {
         const arr = self.selectDatas.map(item => item.ID);
         self.jordanTableConfigGenera.data = self.jordanTableConfigGenera.data.filter(item => !arr.includes(item.ID));
+        self.modify.generalGroupItem = self.modify.generalGroupItem.filter(item => !arr.includes(item.ID));
       }
       self.isModify = true;
     },
@@ -782,6 +790,7 @@ export default {
         } else {
           const arr = self.selectDatas.map(item => item.ID);
         self.jordanTableConfigLuck.data = self.jordanTableConfigLuck.data.filter(item => !arr.includes(item.ID));
+        self.modify.luckGroupItem = self.modify.luckGroupItem.filter(item => !arr.includes(item.ID));
         }
         self.isModify = true;
     },
