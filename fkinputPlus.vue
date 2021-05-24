@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-05-19 15:56:14
- * @LastEditTime: 2021-05-24 15:42:07
+ * @LastEditTime: 2021-05-24 17:04:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/fkinputPlus.vue
@@ -364,4 +364,11 @@ export default {
 
 <style scoped lang="less">
 @import "css/fkinput.less";
+.item-col {
+  /deep/ #dropDownSelectFilter.ark-fkrp-select {
+    & > div:first-child {
+      width: 100%;
+    }
+  }
+}
 </style>
