@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-18 17:02:53
- * @LastEditTime: 2021-05-20 13:38:18
+ * @LastEditTime: 2021-05-24 20:47:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/strategyPlatform/specialLogistics.vue
@@ -39,10 +39,9 @@
             <div class="content-li-item">
               <label style="width: 70px">指定商品:</label>
               <div class="content-li-item-left">
-                <Button type="info" @click="fntable">添加商品</Button>
+                <Button type="info" @click="fnseek">添加商品</Button>
                 <div class="content-li-item-left-a">
                   <Table width="550" border :columns="columns2" :data="data3"></Table>
-                  <Page :total="total1" show-sizer class-name="tablestyle" @on-change="tablepage" @on-page-size-change="tablesize" />
                 </div>
               </div>
             </div>

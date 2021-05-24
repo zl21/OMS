@@ -799,6 +799,14 @@ export default {
     },
     //商品属性删除
     deleteSku(id) {
+      if (this.id == "-1") {
+        for (var i = 0; i < this.data3.length; i++) {
+          if (this.data3[i].id == id) {
+            this.data3.splice(i, 1);
+          }
+        }
+        return
+      }
       let data = {
         ID: this.id,
         SUB_IDS: id
@@ -1217,11 +1225,16 @@ export default {
         if (this.id != '-1') {
           this.fnSave(2);
         } else {
-          console.log(this.tableConfig.selectionData);
-          this.data3 = this.tableConfig.selectionData.map((em, index) => {
-            em.index = index + 1;
-            return em;
-          });
+          let arr = this.data3.concat(this.tableConfig.selectionData)
+          var obj = {}
+          var newArr = arr.reduce((cur, next) => {
+            obj[next.id] ? "" : obj[next.id] = true && cur.push(next);
+            return cur;
+          }, [])
+          this.data3 = newArr.map((em, index) => {
+            em.index = index + 1
+            return em
+          })
         }
       }
 
@@ -1260,6 +1273,11 @@ export default {
     },
     fnkeyup1(v, dom) {
       this.tableConfig.ENAME = dom.currentValue;
+      this.fntable();
+    },
+    fnseek() {
+      this.tableConfig.ECODE = '' // 编码查询条件
+      this.tableConfig.ENAME = ''// 名称查询条件
       this.fntable();
     },
     fntable() {
