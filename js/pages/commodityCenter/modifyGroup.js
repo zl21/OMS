@@ -545,8 +545,8 @@ export default {
       self.formConfig.formValue.type = data.PsCProGroup.TYPE;
       self.formConfig.formValue.price_retail = data.PsCProGroup.PRICE_RETAIL;
       self.formConfig.formValue.group_type = data.PsCProGroup.GROUP_TYPE;
+      self.formConfig.formValue.ISACTIVE = data.PsCProGroup.ISACTIVE;
       self.modify.master.group_type = data.PsCProGroup.GROUP_TYPE;
-      self.modify.master.ISACTIVE = data.PsCProGroup.ISACTIVE;
       self.save_button.disabled = data.PsCProGroup.ISACTIVE;
       self.jordanTableConfigLuck.businessButtonConfig.buttons.forEach(item=>item.disabled = data.PsCProGroup.ISACTIVE);
       self.jordanTableConfigGenera.businessButtonConfig.buttons.forEach(item=>item.disabled = data.PsCProGroup.ISACTIVE);
