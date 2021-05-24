@@ -497,6 +497,7 @@ R3.launchApplication({
 | v1.3.75 | store调整字段 |
 | v1.3.76 | 物流派送 css |
 | v1.3.77 | sku 操作日志 代码找回 |
+| v1.3.78 | bug:39000 |
 
 #### Extends-Api 版本说明
 
