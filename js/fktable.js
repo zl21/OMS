@@ -377,6 +377,9 @@ export default {
     } else if (_self.refcolprem) {
       _self.formObj.precolnameslist = [_self.refcolprem];
     }
+    if (_self.item) {
+      _self.formObj.fixedcolumns = _self.item
+    }
 
     if (_self.itemdata.item) {
       _self.formObj.fixedcolumns = _self.itemdata.item

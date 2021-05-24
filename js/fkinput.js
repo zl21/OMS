@@ -376,7 +376,7 @@ export default {
       self.autocompleteBlur(itemdata);
     },
     autocompleteBlur(itemdata) {
-      console.log('autocompleteBlur');
+      console.log('autocompleteBlur--');
       const self = this;
       if (!this.isHandleSelect && !this.autocomplete) {
         if (this.queryList.length > 0) {
@@ -390,12 +390,14 @@ export default {
           );
           self.autocomplete = true;
           self.isHandleSelect = false;
-        } else {
-          // 模糊匹配失败
-          // itemdata.valuedata = '';
-          itemdata.pid = null;
-          this.$emit('inputBlur', itemdata);
-        }
+        } 
+        // else {
+        //   console.log('失败：', itemdata.pid);
+        //   // 模糊匹配失败
+        //   // itemdata.valuedata = '';
+        //   itemdata.pid = null;
+        //   this.$emit('inputBlur', itemdata);
+        // }
       }
     },
 

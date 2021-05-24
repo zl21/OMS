@@ -181,3 +181,4 @@
 | v1.1.34 | businessForm增加自定义过滤入参 |
 | v1.1.35 | fkinputPlus模糊搜索入参 |
 | v1.1.36 | fkinputPlus样式调整 |
+| v1.1.37 | fkinput失去焦点不清空pid ｜ 联动参数修改 |
