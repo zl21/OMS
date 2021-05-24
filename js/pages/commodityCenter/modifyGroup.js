@@ -286,6 +286,7 @@ export default {
           buttons: [{
               webname: 'order_fund', // 返回
               text: '添加',
+              disabled: false,
               btnclick: () => {
                 this.addgeneralItem();
               },
@@ -293,6 +294,7 @@ export default {
             {
               webname: 'order_fund', // 返回
               text: '删除',
+              disabled: false,
               btnclick: () => {
                 this.delLuck();
               },
@@ -318,6 +320,7 @@ export default {
               value: 'gbCode',
               columns: ['ECODE'],
               AuotData: [], // 匹配的选项
+              disabled: false,
               dimChange: (val) => {
                 if (!val) {
                   this.jordanTableConfigLuck.businessFormConfig.formData[1].AuotData = [];
@@ -391,6 +394,7 @@ export default {
           buttons: [{
               webname: 'order_fund', // 返回
               text: '添加',
+              disabled:false,
               btnclick: () => {
                 this.addgeneralItem();
               },
@@ -398,6 +402,7 @@ export default {
             {
               webname: 'order_fund', // 返回
               text: '删除',
+              disabled:false,
               btnclick: () => {
                 this.delGeneral();
               },
@@ -542,6 +547,9 @@ export default {
       self.formConfig.formValue.group_type = data.PsCProGroup.GROUP_TYPE;
       self.modify.master.group_type = data.PsCProGroup.GROUP_TYPE;
       self.modify.master.ISACTIVE = data.PsCProGroup.ISACTIVE;
+      self.save_button.disabled = data.PsCProGroup.ISACTIVE;
+      self.jordanTableConfigLuck.businessButtonConfig.buttons.forEach(item=>item.disabled = data.PsCProGroup.ISACTIVE);
+      self.jordanTableConfigGenera.businessButtonConfig.buttons.forEach(item=>item.disabled = data.PsCProGroup.ISACTIVE);
 
       // 赋值品牌 商品分类
       self.formConfig.formData.forEach(ele => {
