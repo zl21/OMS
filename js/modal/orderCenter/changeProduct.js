@@ -11,7 +11,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       pro: '',
       replace_pro: '',
       radioValue: '2',
@@ -123,6 +123,7 @@ export default {
               // }
             },
             dimEnter: () => {
+              this.tableConfig.current = 1
               this.search('one')
             },
             dimSelect: (val) => {
@@ -186,6 +187,7 @@ export default {
               // }
             },
             dimEnter: () => {
+              this.tableConfig.current2 = 1
               this.search('two')
             },
             dimSelect: (val) => {
@@ -277,9 +279,11 @@ export default {
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        current:1,
         pageSize: 10, // 每页条数
       },
       tableConfig2: {
+        current:1,
         indexColumn: true,
         isShowSelection: false,
         columns: [
@@ -347,19 +351,20 @@ export default {
       console.log('----111')
     },
     // 取消选中某一项时触发
-    onSelectCancel1() {},
+    onSelectCancel1() { },
     // 点击全选时触发
-    onSelectAll1() {},
+    onSelectAll1() { },
     // 点击取消全选时触发
-    onSelectAllCancel1() {},
+    onSelectAllCancel1() { },
     // 单击某一行时触发
     onRowClick1(row) {
       console.log(row)
+      this.onRowClickText = row.skuEcode
       this.skuEcodes = row.skuEcode
       this.onRowData = row
     },
     // 单击某二行时触发
-    onRowDblclick1() {},
+    onRowDblclick1() { },
     // 分页change 事件
     pageChange1(val) {
       this.tableConfig.current = val
@@ -372,26 +377,27 @@ export default {
       this.search('one')
       // this.request(this.componentData);
     },
-    tableDeleteDetail1() {},
+    tableDeleteDetail1() { },
     onSelect2(v) {
       //  this.skuEcodes = v[0].skuEcode
       console.log(v)
       console.log('----111')
     },
     // 取消选中某一项时触发
-    onSelectCancel2() {},
+    onSelectCancel2() { },
     // 点击全选时触发
-    onSelectAll2() {},
+    onSelectAll2() { },
     // 点击取消全选时触发
-    onSelectAllCancel2() {},
+    onSelectAllCancel2() { },
     // 单击某一行时触发
     onRowClick2(row) {
       console.log(row)
+      this.onRowClickReplaceText = row.skuEcode
       this.skuEcodes2 = row.skuEcode
       this.onRowData2 = row
     },
     // 单击某二行时触发
-    onRowDblclick2() {},
+    onRowDblclick2() { },
     // 分页change 事件
     pageChange2(val) {
       this.tableConfig2.current = val
@@ -402,9 +408,17 @@ export default {
       this.tableConfig2.pageSize = val
       this.search('two')
     },
-    tableDeleteDetail2() {},
+    tableDeleteDetail2() { },
     radioChange(value) {
       console.log(value)
+    },
+    fnsearch(val) {
+      if (val == 'one') {
+        this.tableConfig.current = 1
+      } else {
+        this.tableConfig2.current = 1
+      }
+      this.search(val)
     },
     async search(value) {
       const self = this
@@ -414,13 +428,13 @@ export default {
         data.spuEcode = self.formConfig.formValue.psCProEcode.trim()
         data.spuEname = self.proName.trim()
         data.size = this.tableConfig.pageSize
-        data.current =  this.tableConfig.current
+        data.current = this.tableConfig.current
       } else {
         data.skuEcode = self.replaceFormConfig.formValue.searchValue.trim()
         data.spuEcode = self.replaceFormConfig.formValue.psCProEcode.trim()
         data.spuEname = self.replace_proName.trim()
         data.size = this.tableConfig2.pageSize
-        data.current =  this.tableConfig2.current
+        data.current = this.tableConfig2.current
       }
 
       axios({
@@ -428,10 +442,12 @@ export default {
         url: '/r3-ps/p/cs/ps/pro//v1/selectSkuProBySkuEcodeList',
         data,
       }).then((res) => {
-        if (value == 'one') {
+        if (value == 'one') { //current
+          this.tableConfig.current = res.data.data.current
           this.tableConfig.total = res.data.data.total
           this.tableConfig.data = res.data.data.records
         } else {
+          this.tableConfig2.current = res.data.data.current
           this.tableConfig2.total = res.data.data.total
           this.tableConfig2.data = res.data.data.records
         }
@@ -491,10 +507,10 @@ export default {
         }
         orderList.push(obj)
       })
-     if (!this.onRowData || !this.onRowData2) {
-      this.$Message.warning($i18n.t('modalTips.d8'))
-       return
-     }
+      if (!this.onRowData || !this.onRowData2) {
+        this.$Message.warning($i18n.t('modalTips.d8'))
+        return
+      }
       skuEcodes.push(this.onRowData.skuEcode)
       skuEcodes.push(this.onRowData2.skuEcode)
       let data = {
@@ -507,7 +523,7 @@ export default {
           this.$Message.success(res.data.message)
         } else {
           if (!res.data.data) {
-            commonUtils.tipShow('error', self, res.data.message) 
+            commonUtils.tipShow('error', self, res.data.message)
             return
           }
           this.$Modal.confirm({

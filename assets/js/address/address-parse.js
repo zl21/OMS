@@ -271,53 +271,52 @@ function parse(address) {
 
   address = address.replace(/ {2,}/, ' ');
 
-  // console.log(address)
+  // 调用反相查询
   let detail = detailParseForward(address.trim());
+  // if (!detail.city) {
+  //   detail = detailParse(address.trim());
+  //   if (detail.area && !detail.city) {
+  //     detail = detailParse(address.trim(), {
+  //       ignoreArea: true
+  //     });
+  //     console.log('smart_parse->ignoreArea');
+  //   } else {
+  //     console.log('smart_parse');
+  //   }
+  //   // 这个待完善
+  //   const list = address
+  //     .replace(detail.province, '')
+  //     .replace(detail.city, '')
+  //     .replace(detail.area, '')
+  //     .split(' ')
+  //     .filter(str => str);
+  //   if (list.length > 1) {
+  //     try {
+  //       list.forEach(str => {
+  //         if (!parse.name || (str && str.length < parse.name.length)) {
+  //           parse.name = str.trim();
+  //           throw new Error('终端执行');
+  //         }
+  //       });
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
 
-  if (!detail.city) {
-    detail = detailParse(address.trim());
-    if (detail.area && !detail.city) {
-      detail = detailParse(address.trim(), {
-        ignoreArea: true
-      });
-      console.log('smart_parse->ignoreArea');
-    } else {
-      console.log('smart_parse');
-    }
-    // 这个待完善
-    const list = address
-      .replace(detail.province, '')
-      .replace(detail.city, '')
-      .replace(detail.area, '')
-      .split(' ')
-      .filter(str => str);
-    if (list.length > 1) {
-      try {
-        list.forEach(str => {
-          if (!parse.name || (str && str.length < parse.name.length)) {
-            parse.name = str.trim();
-            throw new Error('终端执行');
-          }
-        });
-      } catch (e) {
-        console.log(e);
-      }
-
-      if (parse.name) {
-        detail.addr = detail.addr.replace(parse.name, '').trim();
-      }
-    }
-  } else if (detail.name) {
-    parse.name = detail.name;
-  } else {
-    const list = detail.addr.split(' ').filter(str => str);
-    if (list.length > 1) {
-      parse.name = list[list.length - 1];
-    }
-    if (parse.name) {
-      detail.addr = detail.addr.replace(parse.name, '').trim();
-    }
-  }
+  //     if (parse.name) {
+  //       detail.addr = detail.addr.replace(parse.name, '').trim();
+  //     }
+  //   }
+  // } else if (detail.name) {
+  //   parse.name = detail.name;
+  // } else {
+  //   const list = detail.addr.split(' ').filter(str => str);
+  //   if (list.length > 1) {
+  //     parse.name = list[list.length - 1];
+  //   }
+  //   if (parse.name) {
+  //     detail.addr = detail.addr.replace(parse.name, '').trim();
+  //   }
+  // }
 
   parse.province = detail.province;
   parse.city = detail.city;
