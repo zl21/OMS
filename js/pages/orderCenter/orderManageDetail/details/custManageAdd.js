@@ -265,10 +265,14 @@ export default {
     // 点击全选时触发
     onSelectAll(selection) {
       this.checkSelection = selection;
+      let buttonArr = this.tableConfig.businessButtonConfig.buttons;
+      this.$OMS2.omsUtils.buttonHasDisable(this.textArr,buttonArr,false);
     },
     // 点击取消全选时触发
     onSelectAllCancel(selection) {
       this.checkSelection = selection;
+      let buttonArr = this.tableConfig.businessButtonConfig.buttons;
+      this.$OMS2.omsUtils.buttonHasDisable(this.textArr,buttonArr,true);
     },
     // 单击某一行时触发
     onRowClick(row) {
