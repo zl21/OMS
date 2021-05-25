@@ -1257,7 +1257,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: '单据编号', // 配送费用
+            label: '出库通知单单号', // 配送费用
             placeholder: '例如：111,222,333,444', // 占位文本，默认为请输入
             value: 'noticeNos',
             dataAcessKey: 'noticeNos',
