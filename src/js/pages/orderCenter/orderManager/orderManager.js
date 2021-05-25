@@ -2824,7 +2824,7 @@ export default {
     doBatchAntiAudit() {
       // 
       const _this = this;
-      if (!_this.batchAntiAuditFormConfig.formValue.noticeNos) return _this.$Message.error('请输入单据编号!');
+      if (!_this.batchAntiAuditFormConfig.formValue.noticeNos) return _this.$Message.error('请输入出库通知单单号!');
       if (_this.batchAntiAuditFormConfig.formValue.noticeNos.indexOf('，') !== -1) {
         return _this.$Message.error('非法字符，请检查后重新输入!');
       }
