@@ -912,9 +912,9 @@ export default {
           },
           formData: [
             {
-              version: '1.4',
-              style: "popInput",
-              // style: "popInputPlus",
+              // version: '1.4',
+              // style: "popInput",
+              style: "popInputPlus",
               width: "6",
               colname: "PS_C_SKU",
               itemdata: {
@@ -927,6 +927,8 @@ export default {
                 isfk: true,
                 isnotnull: true,
                 readonly: false,
+                columnsKey: ['ECODE'],
+                hidecolumns: ['id','value','ENAME'],
               },
               oneObj: (val) => {
                 console.log("SKU编码-oneObj::", val);

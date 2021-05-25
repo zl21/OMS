@@ -504,6 +504,7 @@ R3.launchApplication({
 | v1.3.82 | 修改地址解析调用定制接口|
 | v1.3.83 | 异常地址处理,省市取消关联|
 | v1.3.84 | fkinput模糊搜索样式调整/bug:38999|
+| v1.3.85 | oederAdd-SKU编码-popInputPlus |
 
 #### Extends-Api 版本说明
 
