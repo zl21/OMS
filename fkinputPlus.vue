@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-05-19 15:56:14
- * @LastEditTime: 2021-05-24 19:23:16
+ * @LastEditTime: 2021-05-25 10:24:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/fkinputPlus.vue
@@ -115,7 +115,7 @@ export default {
       columns: this.itemdata.columns || [], // 展现的组 ? ? ?
       AutoData: this.itemdata.AutoData,
       showColnameKey: this.itemdata.showColnameKey || 'show',
-      columnsKey: this.itemdata.columnsKey || [],// 模糊搜索时要展示的待选数据的Key/表头
+      columnsKey: this.itemdata.columnsKey || [],// 模糊搜索时-选中/失焦-要展示在input框的待选数据的Key，默认AutoData中的value
       hidecolumns: this.itemdata.hidecolumns || [],// 模糊搜索时要隐藏的待选数据的Key/表头
       placeholder: this.itemdata.placeholder || '',
       defaultSelected: this.itemdata.defaultSelected || [],
@@ -289,11 +289,10 @@ export default {
         data: { code, data, message },
       } = await axios.post("/r3-cp/p/cs/fuzzyquerybyak", query);
       if (code == 0) {
-        const autoData = data.map((item) => ({
-          ID: item.ID || item.id,
-          value: item.ENAME || item.value,
-        }));
-        this.AutoData = autoData;
+        data.forEach((item) => {
+          item.value = item[this.itemdata.columnsKey[0]] || item.value; // 模糊搜索失焦/选中后展示在input中的字符
+        });
+        this.AutoData = data;
       }
     },
 
