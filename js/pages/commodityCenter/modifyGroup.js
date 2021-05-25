@@ -253,6 +253,11 @@ export default {
             required: true,
             message: ' ',
             trigger: 'blur'
+          }],
+          price_retail: [{
+            required: true,
+            message: ' ',
+            trigger: 'blur'
           }]
         }
       },
@@ -518,6 +523,9 @@ export default {
     const self = this;
     self.dataitem.url = self.$OMS2.omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
     self.formConfig.formData[0].disabled = self.id !== -1;
+    if(self.id == -1){
+      self.formConfig.formData.filter(item=>item.value && item.value == 'ISACTIVE')[0].style = '';
+    }
     this.query();
   },
   methods: {
@@ -584,6 +592,8 @@ export default {
         str += '组合商品名称 ';
       }else if (!self.formConfig.formValue.group_type) {
         str += '组合类型 ';
+      }else if (!self.formConfig.formValue.price_retail) {
+        str += '零售价 ';
       } else if (!self.formConfig.formData.filter(item=>item.colname == 'PS_C_BRAND_ID')[0].itemdata.pid) {
         str += '品牌 ';
       } else if (!self.formConfig.formData.filter(item=>item.colname == 'PS_C_PRO_CLASSIFY_ID')[0].itemdata.pid) {

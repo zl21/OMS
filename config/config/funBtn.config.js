@@ -116,11 +116,11 @@ class BtnConfig {
         btnclick: () => this.btnMainHandler('afterAuditOrder'),
       },
       {
-        webname: 'quxiao_tuihuanhuo', // 退货换单 - 取消
+        webname: 'returnCancel', // 退货换单 - 取消
         btnclick: () => this.btnMainHandler('returnGoodsCancel'),
       },
       {
-        webname: 'xuniruku_tuihuanhuo', // 退货换单 - 虚拟入库
+        webname: 'updateOrderVirtual', // 退货换单 - 虚拟入库
         btnclick: () => this.btnMainHandler('virtualStorage'),
       },
       {
@@ -649,7 +649,7 @@ class BtnConfig {
       // （PS:单选，有状态判断）
       self.selection.length != 1
         ? commonUtils.msgTips(self, 'warning', 'k3')
-        : commonUtils.msgTips(self, 'warning', 'q6')
+        : commonUtils.msgTips(self, 'warning', params.statusTips)
     } else {
       ids = commonUtils.sonList(self.selection, 'ID')
     }
@@ -942,13 +942,21 @@ class BtnConfig {
           }
         });
     } else {
-      let ids = this.orderStatusRule(self, {
+      let id = this.orderStatusRule(self, {
         type: 'radio',
-        statusCode: '20',
+        statusCode: '待退货入库',
         statusTips: 'l6',
       })
-      if (ids) {
-        commonUtils.modalShow(self, 'l7', 'common.updateVirtualLibrary', { ids, })
+      id = this.orderStatusRule(self , {
+        statusName:'BILL_TYPE',
+        type: 'radio',
+        statusCode: '2',
+        statusTips: 'l6',
+      })
+      if (id) {
+        let formdata = new FormData();
+        formdata.append('id' , id[0]);
+        commonUtils.modalShow(self, 'l7', 'common.updateVirtualLibrary', formdata)
       }
     }
   }
