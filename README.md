@@ -511,6 +511,7 @@ R3.launchApplication({
 | v1.3.90 | 组合商品零售价必填 |
 | v1.3.91 | 39436：bug|
 | v1.3.92 | 退货单虚拟入库完成 |
+| v1.3.93 | 退货单修改单据备注和退货入库半定制 |
 #### Extends-Api 版本说明
 
 | Version | Description                                   |
