@@ -506,6 +506,7 @@ R3.launchApplication({
 | v1.3.84 | fkinput模糊搜索样式调整/bug:38999|
 | v1.3.85 | oederAdd-SKU编码-popInputPlus |
 | v1.3.86 | 查询流程控制 |
+| v1.3.87 | 查询流程控制1 |
 
 #### Extends-Api 版本说明
 

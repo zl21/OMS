@@ -511,11 +511,14 @@ export default {
       selectDatas: [], // 普通/福袋勾选的数据
     };
   },
-  async mounted() {
+  created(){
+    this.getSelectOption();
+  },
+  mounted() {
     const self = this;
     self.dataitem.url = self.$OMS2.omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
-    await this.getSelectOption();
     self.formConfig.formData[0].disabled = self.id !== -1;
+    this.query();
   },
   methods: {
     query() {
@@ -621,7 +624,6 @@ export default {
     async getSelectOption() {
       const self = this;
       self.formConfig.formData = await publicMethodsUtil.getTypeList('PS_C_PRO_GROUP', ['TYPE'], '基础信息', self.formConfig);
-      await this.query();
     },
     // 删除图片
     deleteImg() {
