@@ -42,7 +42,6 @@ export default {
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              this.save_button.disabled = true;
               this.save();
             },
           },
@@ -516,7 +515,6 @@ export default {
     const self = this;
     self.dataitem.url = self.$OMS2.omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
     await this.getSelectOption();
-    await this.query();
     self.formConfig.formData[0].disabled = self.id !== -1;
   },
   methods: {
@@ -598,12 +596,12 @@ export default {
         PsCProGroup: self.modify.master,
         SkuGroupRequestList: self.groupType == 2 ? self.modify.generalGroupItem : self.modify.luckGroupItem
       };
+      this.save_button.disabled = true;
       self.service.commodityCenter.skuGroupSave(data).then(res => {
         console.log(res);
         if (res.data.code == 0) {
           self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
           self.isModify = false
-          // self.query(res.data.data);
           $store.commit('customize/TabOpen', {
             id: res.data.data,
             type: 'action',
@@ -613,7 +611,6 @@ export default {
           self.modify.generalGroupItem = [];
           self.modify.luckGroupItem = [];
           self.save_button.disabled = false;
-          self.query();
         } else {
           self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
           this.save_button.disabled = false;
@@ -624,6 +621,7 @@ export default {
     async getSelectOption() {
       const self = this;
       self.formConfig.formData = await publicMethodsUtil.getTypeList('PS_C_PRO_GROUP', ['TYPE'], '基础信息', self.formConfig);
+      await this.query();
     },
     // 删除图片
     deleteImg() {
