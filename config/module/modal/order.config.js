@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-04-28 13:22:03
+ * @LastEditTime: 2021-05-25 19:53:21
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/config/module/modal/order.config.js
+ */
 // 订单中心
 export default {
   // JIT配货单修改仓库测试弹框
@@ -46,5 +54,11 @@ export default {
   // JIT配货单-换吊牌
   EXCHANGETAG: {
     component: () => import('@/views/modal/orderCenter/exchangeTag.vue')
+  },
+  MANUAL: {
+    component: () => import('@/views/modal/orderCenter/manual.vue')
+  },
+  FOURCE: {
+    component: () => import('@/views/modal/orderCenter/force.vue')
   }
 };

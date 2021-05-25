@@ -25,6 +25,10 @@ class BtnConfig {
         webname: 'manualReturnCreation', // 退货单-手工创建
       },
       {
+        webname: 'returnModifyDocumentRemarks', // 退货单-修改单据备注
+        btnclick: () => this.btnMainHandler('returnModifyDocumentRemarks'),
+      },
+      {
         webname: 'ORDER_DELETE_GOODS', // 删除赠品
       },
       {
@@ -397,6 +401,11 @@ class BtnConfig {
     let funName, tips, paramsType
     let isSingle = false
     switch (type) {
+      case 'returnModifyDocumentRemarks':
+        funName = 'fnreturnModifyDocumentRemarks'
+        tips = 'l0'
+        paramsType = 7
+      break
       case 'auditOrder':
       case 'auditingForce':
         funName = 'auditOrderHandler'
@@ -760,6 +769,21 @@ class BtnConfig {
         )
       }
     }
+  }
+  fnreturnModifyDocumentRemarks(self,ids){ //修改单据备注
+    const publicBouncedConfig = JSON.parse(
+      JSON.stringify(DialogConfig.config().ModifyRemarks)
+    )
+    publicBouncedConfig.componentData = {
+      ids,
+    }
+    self.publicBouncedConfig = publicBouncedConfig
+    self.$nextTick(() => {
+      self.$children
+        .find((item) => item.name === 'rturngoodModifyRemarks')
+        .openConfirm()
+    })
+    self.btnConfig.loading = false
   }
   // 批量原退
   batchOriginalReturnHandler(self) {

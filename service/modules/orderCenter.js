@@ -5,6 +5,8 @@ export default {
   /**
    * 零售发货单
    */
+   updateReturnOrderRemark: (params) =>
+   $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/updateReturnOrderRemark', params), // 退换货单-修改备注
 
   saveOrderByPro: (params) =>
     $network.post('/p/cs/oc/b/oms/v1/ocborder/saveOrderByPro', params), // 添加订单商品信息-确定添加
