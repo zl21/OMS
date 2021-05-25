@@ -507,6 +507,7 @@ R3.launchApplication({
 | v1.3.85 | oederAdd-SKU编码-popInputPlus |
 | v1.3.86 | 查询流程控制 |
 | v1.3.87 | 查询流程控制1 |
+| v1.3.89 | 组合商品启用状态根据新增是否显示隐藏 |
 
 #### Extends-Api 版本说明
 

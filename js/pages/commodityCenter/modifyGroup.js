@@ -518,6 +518,9 @@ export default {
     const self = this;
     self.dataitem.url = self.$OMS2.omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
     self.formConfig.formData[0].disabled = self.id !== -1;
+    if(self.id == -1){
+      self.formConfig.formData.filter(item=>item.value && item.value == 'ISACTIVE')[0].style = '';
+    }
     this.query();
   },
   methods: {
