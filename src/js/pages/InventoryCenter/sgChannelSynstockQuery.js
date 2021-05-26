@@ -34,6 +34,13 @@ export default {
             } // 按钮点击事件
           },
           {
+            webname: 'lookup_stock_export', // 
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.export();
+            } // 按钮点击事件
+          },
+          {
             icon: 'iconfont iconbj_col', // 按钮图标
             size: 'small', // 按钮大小
             name: window.vmI18n.t('btn.collection'), // 收藏
@@ -463,6 +470,49 @@ export default {
     find() {
       this.jordanTableConfig.current = 1;
       this.getList();
+    },
+    // 导出
+    export() {
+      const _this = this;
+      const mainData = _this.formConfig.formValue;
+      if (!mainData.NUMIID && !mainData.BATCHNO && !mainData.SKU_ID && !mainData.PS_C_SKU_ECODE) {
+        // _this.$Message.error(window.vmI18n.t('modalTips.dn')); // '平台商品ID不能为空!'
+        _this.$Message.error('批次编号,平台商品ID,平台条码ID,条码编码中需最少一项不为空!');
+        return;
+      }
+      let creationdateStart = '';
+      let creationdateEnd = '';
+      if (mainData.CREATIONDATE && mainData.CREATIONDATE.length > 0) {
+        creationdateStart = mainData.CREATIONDATE[0];
+        creationdateEnd = mainData.CREATIONDATE[1];
+      }
+      if (!creationdateStart || !creationdateEnd) {
+        _this.$Message.error(window.vmI18n.t('modalTips.dk')); // '创建日期不能为空!'
+        return;
+      }
+      const dealForm = {
+        CREATIONDATE_START: creationdateStart,
+        CREATIONDATE_END: creationdateEnd,
+        CP_C_PLATFORM_ID: mainData.CP_C_PLATFORM_ID && mainData.CP_C_PLATFORM_ID.includes('bSelect-all') ? '' : mainData.CP_C_PLATFORM_ID,
+        IS_ERROR: mainData.IS_ERROR && mainData.IS_ERROR.includes('bSelect-all') ? '' : mainData.IS_ERROR,
+        SYN_STATUS: mainData.SYN_STATUS && mainData.SYN_STATUS.includes('bSelect-all') ? '' : mainData.SYN_STATUS
+      };
+      const whereInfoForm = Object.assign(mainData, dealForm);
+      // delete whereInfoForm["CREATIONDATE"];
+      const param = {
+        whereInfo: whereInfoForm,
+        pageNum: _this.jordanTableConfig.current,
+        pageSize: _this.jordanTableConfig.pageSize
+      };
+      const fromdata = new FormData();
+      fromdata.append('param', JSON.stringify(param));
+      this.service.inventoryCenter.getChannelSynstockExport(fromdata).then(res => {
+        if (res.data.code === 0) {
+          _this.$Message.success(res.data.message);
+        } else {
+          _this.$Message.error(res.data.message);
+        }
+      })
     },
     generateAuditFromdata() {
       const ids = [];
