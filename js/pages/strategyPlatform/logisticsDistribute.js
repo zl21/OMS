@@ -751,7 +751,9 @@ export default {
         this.$Message.success(res.data.message);
         if (this.id != '-1' && this.id != 'New') {
           this.init(res.data.data.objId);
+          this.pageback();
         } else {
+
           this.$store.commit('customize/TabOpen', {
             id: res.data.data.objId,
             type: 'action',
