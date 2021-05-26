@@ -11,7 +11,14 @@ class DialogConfig {
     maskClosable: false,
   }
 
-  static customConfig = {
+  static customConfig = { //rturngoodModifyRemarks
+    ModifyRemarks: {
+      title: '修改单据备注', // 修改单据备注
+      width: 650,
+      url: 'pages/orderCenter/returngood/rturngoodModifyRemarks',
+      name: 'rturngoodModifyRemarks',
+      excludeString: 'rturngoodModifyRemarks',
+    },
     // 零售发货单详情
     address: {
       title: $i18n.t('modalTitle.modify_shipping_address'), // 修改收货地址

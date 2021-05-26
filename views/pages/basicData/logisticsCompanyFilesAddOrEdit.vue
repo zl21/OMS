@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-28 13:22:03
- * @LastEditTime: 2021-05-22 12:27:33
+ * @LastEditTime: 2021-05-26 11:29:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/basicData/logisticsCompanyFilesAddOrEdit.vue
@@ -39,12 +39,18 @@
             @on-page-change="pageChange"
             @on-page-size-change="pageSizeChange"
           />
-          <orderItem v-show="showSubtablePart && labelDefaultValue !== 'PROPERTYVALUES'" :component-data="subTableConfig"></orderItem>
+          <businessActionTable
+            v-show="labelDefaultValue == 'CP_C_LOGISTICS_FIX'"
+            :jordan-table-config="subTableConfig"
+            @on-select="onSelect"
+            @on-select-cancel="onSelectCancel"
+            @on-select-all="onSelectAll"
+            @on-select-all-cancel="onSelectAllCancel"
+            @on-page-change="pageChange"
+            @on-page-size-change="pageSizeChange"
+          />
+          <subTable :component-data="subTableConfig2" v-show="labelDefaultValue == 'CP_LOGISTICS_LOG'"></subTable>
         </div>
-        <div class="subtablePart" v-show="labelDefaultValue != 'PROPERTYVALUES'">
-          <subTable :component-data="subTableConfig2"></subTable>
-          </div>
-
       </div>
     </div>
   </div>
