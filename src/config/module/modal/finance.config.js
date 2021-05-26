@@ -4,6 +4,10 @@ export default {
   DOWNLOADVIPBILL: {
     component: () => import('@/views/modal/financeCenter/downLoadVipBill.vue'),
   },
+  // O2O对账结算汇总 对账单导出
+  CUSTOMSTANDSETTLEACCOUNTEXPORT: {
+    component: () => import('@/views/modal/financeCenter/customstandsettleaccountexport.vue'),
+  },
   // 唯品会进度账单聚合表列表 唯品会月结账单聚合表列表 (生成销售单)
   GENERATESALESORDER: {
     component: () => import('@/views/modal/financeCenter/generateSalesOrder.vue'),
@@ -11,5 +15,9 @@ export default {
   // 支付宝下载账单
   DOWNLOADALIPAYBILL: {
     component: () => import('@/views/modal/financeCenter/downLoadAlipayBill.vue'),
+  },
+  // O2O对账结算策略
+  CUSTOMSETTLESTRATEGYIMPORT: {
+    component: () => import('@/views/modal/financeCenter/customsettlestrategyimport.vue'),
   }
 };

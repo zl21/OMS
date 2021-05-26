@@ -393,6 +393,9 @@ export default {
       } else if (table === 'AC_F_LIVE_ORDER') {
         // 关闭导入弹框
         _this.$parent.$parent.$parent.showModal = false
+      } else if (table === 'AC_F_RECONCILIATION_SETTLE_STRATEGY') {
+        // 关闭导入弹框
+        _this.$parent.$parent.$parent.showModal = false
       }
     },
     // 上传文件前判断文件大小
