@@ -23,6 +23,7 @@ export default {
       allTableArr: [],
       selectArr: [],
       warningModal: false, // 警告弹框
+      exportModal: false,
       btnConfig: {
         typeAll: 'error', // 按钮统一风格样式
         buttons: [
@@ -37,7 +38,7 @@ export default {
             webname: 'lookup_stock_export', // 
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              this.export();
+              this.exportModal = true;
             } // 按钮点击事件
           },
           {
@@ -472,7 +473,7 @@ export default {
       this.getList();
     },
     // 导出
-    export() {
+    exportBtn() {
       const _this = this;
       const mainData = _this.formConfig.formValue;
       if (!mainData.NUMIID && !mainData.BATCHNO && !mainData.SKU_ID && !mainData.PS_C_SKU_ECODE) {
@@ -506,6 +507,7 @@ export default {
       };
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
+      _this.exportModal = false;
       this.service.inventoryCenter.getChannelSynstockExport(fromdata).then(res => {
         if (res.data.code === 0) {
           _this.$Message.success(res.data.message);
