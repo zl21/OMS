@@ -37,6 +37,7 @@ export default {
       vmI18n: window.vmI18n,
       pageLoad: false,
       isActive: false,
+      batchAntiAuditFlag: false,
       agTableConfig: {
         tableHeight: '480px',
         agLoading: false,
@@ -2824,6 +2825,8 @@ export default {
     doBatchAntiAudit() {
       // 
       const _this = this;
+      if (_this.batchAntiAuditFlag) return _this.$Message.error('有一项任务正在进行中!');
+      _this.batchAntiAuditFlag = true;
       if (!_this.batchAntiAuditFormConfig.formValue.noticeNos) return _this.$Message.error('请输入出库通知单单号!');
       if (_this.batchAntiAuditFormConfig.formValue.noticeNos.indexOf('，') !== -1) {
         return _this.$Message.error('非法字符，请检查后重新输入!');
@@ -2841,8 +2844,11 @@ export default {
           _this.$Message.error(res.data.message);
           publicMethodsUtil.downloadUrlFile(res.data.data);
         }
-        this.batchAntiAuditModal = false;
-      })
+        _this.batchAntiAuditFlag = false;
+        _this.batchAntiAuditModal = false;
+      }).catch(() => {
+        _this.batchAntiAuditFlag = false;
+      });
     },
     onBatchReturnOrderCancel() {
       this.batchReturnFormConfig.formValue.IS_BACK = false;
