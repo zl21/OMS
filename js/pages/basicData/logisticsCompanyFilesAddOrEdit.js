@@ -3,7 +3,6 @@ import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
-import orderItem from 'professionalComponents/subTable';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import addPlatformLogisticsCompany from '@/views/modal/commodityCenter/addPlatformLogisticsCompany';
 import loading from 'professionalComponents/loading';
@@ -11,7 +10,6 @@ import subTable from 'professionalComponents/subTable';
 
 export default {
   components: {
-    orderItem,
     businessButton,
     businessForm,
     businessLabel,
@@ -165,19 +163,15 @@ export default {
           ],
         },
       },
-      subTableConfig2: {
-        centerName: '',
-        tablename: '',
-        objid: '',
-      },
+      subTableConfig2: {},
       // tab切换配置
       labelList: [{
           label: '平台物流对应',
           value: 'PROPERTYVALUES',
         },
         {
-          label: '操作日志',
-          value: 'CP_LOGISTICS_LOG',
+          label: '物流单号解析配置',
+          value: 'CP_C_LOGISTICS_FIX',
         },
         {
           label: '操作日志',
@@ -193,20 +187,12 @@ export default {
     customizedModuleName() {
       return this.$router.currentRoute.params.customizedModuleName;
     },
-    /* ID() {
-      const id = this.$route.params.customizedModuleId;
-      if (id == 'New') {
-        return '-1'
-      } else {
-        return id
-      }
-    }, */
   },
   mounted() {
     const self = this;
     if (self.ID == '-1') {
       // 新增
-      self.labelList.splice(1, 1);
+      self.labelList.splice(2, 1);
     } else {
       // 详情
       self.initObjItem(self.ID);
@@ -432,6 +418,7 @@ export default {
         centerName: 'basicData',
         tablename: this.labelDefaultValue,
         objid: this.ID,
+        pageShow: true,
       };
     },
     /**
