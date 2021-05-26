@@ -203,6 +203,8 @@ export default {
     $network.post('/api/cs/oc/oms/v1/modifyReturnOrderWarehouse', params), // 退换货单修改退回仓库
   checkCancelParams: (params) =>
     $network.post('/api/cs/oc/oms/v1/checkCancelParams', params), // 检查接口
+  cancelParams: (params) =>
+    $network.post('/p/cs/oc/oms/v1/returnOrderCancel', params), // 取消接口
   checkBeforeCreateVipDelivery: (params) =>
     $network.post(
       '/api/cs/vip/distribution/v1/checkBeforeCreateVipDelivery',

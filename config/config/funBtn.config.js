@@ -956,15 +956,45 @@ class BtnConfig {
           }
         })
     } else {
-      let ids = this.orderStatusRule(self, {
-        type: 'check',
-        statusCode: '20',
-        statusTips: 'l2',
-      })
-      if (ids) {
-        commonUtils.serviceHandler(self, 'orderCenter.checkCancelParams', {
-          ids,
-        })
+      // let ids = this.orderStatusRule(self, {
+      //   type: 'check',
+      //   statusCode: '待退货入库',
+      //   statusTips: 'l2',
+      // })
+      const id = self.selection.map(item => {return {id:item.ID , bill_no:item.BILL_NO}});
+      const callbackType = 'all';
+      const callbackFun = (res)=>{
+        console.log(res);
+        if(res.data.code == 0){
+          self.msgTips('success', self, '取消成功', 0)
+        }else {
+          commonUtils.tipShow(
+            'confirm',
+            self,
+            res,
+            res.data.message,
+            function (h) {
+              //因为后端复用列列表详情界面的取消接口,需要区分
+              return h('Table', {
+                props: {
+                  columns: [
+                    {
+                      title: '失败原因',
+                      key: 'message',
+                    },
+                  ],
+                  data: res.data.data,
+                },
+              })
+            }
+          )
+        }
+      }
+      if (id) {
+        commonUtils.modalShow(self, 'l3', 'orderCenter.cancelParams', id , callbackType, callbackFun);
+        // commonUtils.serviceHandler(self, 'orderCenter.checkCancelParams', {
+        //   ids,
+        // })
       }
     }
   }
