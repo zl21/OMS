@@ -42,6 +42,15 @@
     >
       <p>当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？</p>
     </Modal>
+    <Modal
+      v-model="exportModal"
+      title="警告"
+      width="420"
+      :mask="true"
+      @on-ok="exportBtn"
+    >
+      <p>当前的操作,导出时间可能会比较慢！是否继续导出？</p>
+    </Modal>
   </div>
 </template>
 
