@@ -681,7 +681,7 @@
               tableName: 'OC_B_RETURN_ORDER_VIRTUAL_TABLE',
               label: '退货单详情',
               tableId: 10728,
-              id:`${val.ID}?RETURN_SOURCE=${val.RETURN_SOURCE}`
+              id:`${val.ID}?RETURN_SOURCE=${val.RETURN_SOURCE}&&SOURCE_CODE=${val.SOURCE_CODE}`
             });
             }else if(val.BILL_TYPE == 1) {
               console.log('换货单');
@@ -690,7 +690,7 @@
               tableName: 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE',
               label: '换货单详情',
               tableId: 10754,
-              id:`${val.ID}?RETURN_SOURCE=${val.RETURN_SOURCE}`
+              id:`${val.ID}?RETURN_SOURCE=${val.RETURN_SOURCE}SOURCE_CODE=${val.SOURCE_CODE}`
             });
             }
             break;
