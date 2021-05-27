@@ -787,7 +787,7 @@ export default {
       const valueArr = ['PLAN_NAME', 'BEGIN_TIME', 'END_TIME', 'PRIORITY'];
       const drpArr = ['CP_C_SHOP_ID'];
       const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
-      if (mes !== 1) return self.$message.error(mes);
+      if (mes) return self.$message.error(mes);
       
       const formConfig = this.goodsTableConfig.businessFormConfig
       /**子表新增校验 */

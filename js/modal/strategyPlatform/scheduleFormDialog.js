@@ -93,7 +93,7 @@ export default {
       const valueArr = requiredArr.filter(i => !drpArr.includes(i));
       const msg = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
     
-      if (msg !== 1) {
+      if (msg) {
         self.$message.error(msg);
         flag = false;
       }

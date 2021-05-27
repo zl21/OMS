@@ -1424,7 +1424,7 @@ export default {
       const valueArr = ['NAME', 'BEGIN_TIME', 'END_TIME', 'RANK'];
       const drpArr = ['CP_C_SHOP_ID'];
       const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
-      if (mes !== 1) {
+      if (mes) {
         self.$message.error(mes);
         return false;
       }

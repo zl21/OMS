@@ -841,6 +841,7 @@ export default {
                 id: res.data.data.objId
               }
             });
+            return
           }
 
           if (saveType == 2) {
@@ -854,6 +855,7 @@ export default {
             });
           }
           this.changeCount = 0
+          this.pageback();
         });
         return;
       }
@@ -886,8 +888,6 @@ export default {
         if (res.data.code == 0) {
           this.$Message.success(res.data.message);
 
-
-
           if ((this.id == "New" || this.id == "-1") && saveType == 1) {
             this.$store.commit('customize/TabOpen', {
               id: '-1',
@@ -897,6 +897,7 @@ export default {
                 id: res.data.data.objId
               }
             });
+            return
           }
 
           if (saveType == 2) {
@@ -910,18 +911,7 @@ export default {
             });
           }
           this.changeCount = 0
-          // if (this.id != '-1' && this.id != 'New') {
-          //   this.changeCount = 2;
-          //   this.fninit(res.data.data.objId);
-          //   this.fntableData(res.data.data.objId);
-          // } else {
-          //   //表示是复制跳转
-          //   this.$store.commit('customize/TabOpen', {
-          //     id: res.data.data.objId,
-          //     type: 'action',
-          //     name: this.customizedModuleName
-          //   });
-          // }
+          this.pageback();
         }
       });
     },

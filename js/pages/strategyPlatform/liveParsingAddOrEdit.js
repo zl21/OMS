@@ -520,22 +520,20 @@ export default {
   
       const [startTime] = formConfig.formValue.TIME_RANGE
       let msg
-      if (mes != 1) {
+      if (mes) {
         let msgArr = mes.replace(/ 不能为空!/, '').split('，')
         msg = !startTime && !msgArr.includes('时间类型') ? [...msgArr, '时间类型'] : msgArr
       }
-      msg = mes == 1
-        ? startTime ? 1 : ['时间类型']
-        : msg
+      msg = !mes ? startTime ? '' : ['时间类型'] : msg
       
       // 直播商品识别校验
       const hasNoValid = this.formConfig2.formValue.RULES
         .some(i => !this.isValid(i, ['RULE_TYPE', 'RULE_CONTEXT']))
 
-      if (msg !== 1 || hasNoValid) {
-        let tip = msg != 1 && hasNoValid 
+      if (msg || hasNoValid) {
+        let tip = msg && hasNoValid 
           ? `${msg.join('，')}，直播商品识别 不能为空!` 
-          : msg != 1 && !hasNoValid ? `${msg.join('，')} 不能为空!` : `直播商品识别 不能为空!`
+          : msg && !hasNoValid ? `${msg.join('，')} 不能为空!` : `直播商品识别 不能为空!`
         self.$message.error(tip);
         return false;
       }

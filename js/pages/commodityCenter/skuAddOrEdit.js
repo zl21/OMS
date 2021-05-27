@@ -650,7 +650,7 @@ export default {
       const valueArr = ['ECODE', 'ENAME', 'PRICE_RETAIL'];
       const drpArr = ['PS_C_PRO_ID'];
       const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
-      if (mes !== 1) {
+      if (mes) {
         this.$message.error(mes);
         return false;
       }

@@ -298,7 +298,7 @@ export default {
       if (!masterArr.length && !self.addTableData.length) return false;
       const valueArr = ['ECODE', 'ENAME'];
       const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr);
-      if (mes !== 1) {
+      if (mes) {
         this.$message.error(mes);
         return false;
       }

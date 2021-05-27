@@ -382,7 +382,7 @@ export default {
       if (!masterArr.length) return false;
       const valueArr = ['CP_C_REGION_ALIAS'];
       const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr);
-      if (mes !== 1) {
+      if (mes) {
         this.$message.error(mes);
         return false;
       }

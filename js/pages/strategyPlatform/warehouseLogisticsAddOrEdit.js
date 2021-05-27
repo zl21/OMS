@@ -551,7 +551,7 @@ export default {
       const valueArr = ['IS_AUTO_LOGISTICS_DISTRIBUTION'];
       const drpArr = this.isAuto ? ['CP_C_PHY_WAREHOUSE_ID'] : ['CP_C_PHY_WAREHOUSE_ID', 'CP_C_LOGISTICS_ID'];
       const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
-      if (mes !== 1) {
+      if (mes) {
         self.$message.error(mes);
         return false;
       }

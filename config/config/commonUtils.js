@@ -635,7 +635,7 @@ class commonUtils {
    * @drpArr 要校验的--下拉等复杂类型的valuedata值
    * @return 该填的都填了就返回1，反之返回提示信息
    */
-  static validatorNotEmpty(formConfig, valueArr, drpArr) {
+  static validatorNotEmpty(formConfig, valueArr, drpArr, callback) {
     // 最好是初始化、赋值、修改……的时候，把所有的值都赋一个给对应的formValue，编辑formValue
     // 好像还是要分别写，便于提示……不能为空，遍历formData !不行，formData Item的value并没有改变，还是要遍历formValue
     // 只能双遍历了
@@ -670,8 +670,9 @@ class commonUtils {
     }
     messages = messages.replace(/，$/, ' ')
     const msg = `${messages}不能为空!`
+    if (typeof callback == 'function') callback(!messages ? '' : msg);
     if (!messages) {
-      return 1
+      return ''
     } else {
       return msg
     }

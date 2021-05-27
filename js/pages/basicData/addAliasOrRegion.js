@@ -674,7 +674,7 @@ export default {
         valueArr,
         drpArr
       );
-      if (mes !== 1) {
+      if (mes) {
         this.$message.error(mes);
         return false;
       }
@@ -763,7 +763,7 @@ export default {
         valueArr,
         drpArr
       );
-      if (mes !== 1) {
+      if (mes) {
         this.$message.error(mes);
         return false;
       }
