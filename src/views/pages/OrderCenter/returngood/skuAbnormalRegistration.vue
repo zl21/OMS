@@ -35,6 +35,12 @@
                   <reForm :form-config="returnTypeFormConfig" />
                 </div>
                 <div
+                  slot="abnormalCategories"
+                  class="abnormalCategories"
+                >
+                  <reForm :form-config="abnormalCategoriesFormConfig" />
+                </div>
+                <div
                   slot="returnTypeItem"
                   class="returnType"
                 >

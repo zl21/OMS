@@ -67,43 +67,39 @@ export default {
           columns: [
             {
               key: 'SOURCE_CODE',
-              title: window.vmI18n.t('table_label.platformInfo') // 平台信息
+              title: '零售发货单编号'
             },
             {
               key: 'ID',
-              title: window.vmI18n.t('table_label.orderNo') // 订单编号
+              title: '下单店铺'
             },
             {
               key: 'USER_NICK',
-              title: window.vmI18n.t('table_label.buyerNickname') // 买家昵称
+              title: '发货物流'
             },
             {
               key: 'ORDER_AMT',
-              title: window.vmI18n.t('table_label.totalOrderAmount') // 订单总额
+              title: '发货仓库'
             },
             {
               key: 'RECEIVER_NAME',
-              title: window.vmI18n.t('form_label.consignee') // 收货人
+              title: '买家昵称'
             },
             {
               key: 'RECEIVER_MOBILE',
-              title: window.vmI18n.t('form_label.consignee_phone') // 收货人手机号
+              title: '商品款号'
             },
             {
               key: 'CP_C_PHY_WAREHOUSE_ENAME',
-              title: window.vmI18n.t('form_label.delivery_warehouse') // 发货仓库
+              title: 'SKU'
             },
-            // {
-            //   key: "PLATFORM",
-            //   title: "平台状态"
-            // },
+            {
+              key: "PLATFORM",
+              title: "发货数量"
+            },
             {
               key: 'EXPRESSCODE',
-              title: window.vmI18n.t('form_label.logisticsOrder_No') // 物流单号
-            },
-            {
-              key: 'CP_C_SHOP_TITLE',
-              title: window.vmI18n.t('form_label.orderShop') // 下单店铺
+              title: '发货金额'
             }
           ], // 表头
           data: [], // 数据配置
@@ -163,7 +159,8 @@ export default {
               required: true,
               props: {
                 icon: 'ios-search',
-                value: ''
+                value: '',
+                disabled: true
               },
               event: {
                 'on-click': () => {
@@ -340,9 +337,16 @@ export default {
               }
             }
           },
-          // {
-          //   // 异常大类
-          // },
+          {
+            show: true, // 是否显示隐藏
+            col: 1, // 列宽
+            item: {
+              label: '异常大类',
+              soltName: 'abnormalCategories', // 组件类型
+              props: {},
+              event: {}
+            }
+          },
           {
             item: {
               type: 'Select',
@@ -394,6 +398,39 @@ export default {
             oneObj: data => {
               this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ID = data.pid;
               this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ENAME = data.valuedata;
+              if (data.pid) {
+                this.returnTypeChange();
+                this.sellerRemarkValueChange('returnType', data.valuedata);
+              }
+            },
+            InputEnter: () => {}
+          }
+        ]
+      },
+      abnormalCategoriesFormConfig: {
+        formValue: {},
+        formData: [
+          {
+            style: 'popInput',
+            width: '24',
+            itemdata: {
+              colid: 1700823545,
+              colname: 'OC_B_LARGE_CLASS_EXCEPTION_ID',
+              display: 'OBJ_FK',
+              fkdisplay: 'drp',
+              isfk: true,
+              length: 100,
+              name: "异常大类",
+              isnotnull: true,
+              reftable: 'OC_B_LARGE_CLASS_EXCEPTION', // 对应的表
+              reftableid: 249230829, // 对应的表ID
+              inputname: "OC_B_LARGE_CLASS_EXCEPTION_ID:ENAME",
+              pid: '', // 这个是选择的id
+              valuedata: ''
+            },
+            oneObj: data => {
+              this.abnormalCategoriesFormConfig.formValue.OC_B_RETURN_TYPE_ID = data.pid;
+              this.abnormalCategoriesFormConfig.formValue.OC_B_RETURN_TYPE_ENAME = data.valuedata;
               if (data.pid) {
                 this.returnTypeChange();
                 this.sellerRemarkValueChange('returnType', data.valuedata);
@@ -539,6 +576,11 @@ export default {
     //   this.logTableInfo();
     // }
     // this.getDownUp();
+
+    setTimeout(()=> {
+      const dom = document.getElementsByClassName('ark-input ark-input-default')
+      dom[2].style.backgroundColor = '#fff'
+    }, 500)
   },
   methods: {
     // 确定原始订单编号
