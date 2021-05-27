@@ -287,14 +287,9 @@ export default {
             disabled: true,
             switchChange: () => {
               let isActive = this.formConfig.formValue.isactive;
-              let data = { id: this.$route.params.customizedModuleId, isActive: isActive ? 'Y' : 'N' }
-              service.strategyPlatform.orderWarehouseSetIsActive(data).then(res => {
-                if (res.data.code == 0) {
-                  this.qurefrom('beginTime')[0].disabled = isActive;
-                  this.qurefrom('endTime')[0].disabled = isActive;
-                  this.btnConfig2.buttons[0].disabled = isActive;
-                }
-              });
+              this.qurefrom('beginTime')[0].disabled = isActive;
+              this.qurefrom('endTime')[0].disabled = isActive;
+              this.btnConfig2.buttons[0].disabled = isActive;
             }
           },
           {
