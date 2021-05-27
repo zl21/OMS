@@ -576,7 +576,7 @@ export default {
           break;
       } */
       const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
-      if (mes !== 1) {
+      if (mes) {
         this.$message.error(mes);
         return false;
       }

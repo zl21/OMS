@@ -537,7 +537,7 @@ export default {
       }
       const valueArr = ['ECODE', 'ENAME', 'ALIAS_NAME', 'TYPE', 'LOCATION', 'TABLE_NAME'];
       const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr);
-      if (mes !== 1) {
+      if (mes) {
         this.$message.error(mes);
         return false;
       }
