@@ -271,6 +271,7 @@ class commonUtils {
    */
   static getPermissions(self, array, params, isIndependent) {
     let independent = []
+    const show_iconbj_setup = ['ORDERMANAGER']; //储存允许设置按钮展示的页面集;
     const query = {
       TABLE: params.table,
       TYPE: params.type,
@@ -283,8 +284,13 @@ class commonUtils {
       const a = []
       self[array].buttons.forEach((item) => {
         // 设置、收藏等图标按钮的配置
-        if (!item.text && item.icon) {
-          a.push(item)
+        if (!item.text && item.icon ) {
+          if(show_iconbj_setup.includes(self.$route.params.customizedModuleName)){
+            a.push(item)
+          }else if(item.icon !== 'iconfont iconbj_setup'){
+            a.push(item);
+          }
+          
         }
       })
 

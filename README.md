@@ -521,6 +521,7 @@ R3.launchApplication({
 | v1.4.0 | 校验表单空validatorNotEmpty方法优化 |
 | v1.4.1 | 迁移订单列表 |
 | v1.4.2 | 订单列表样式调整 |
+| v1.4.3 | 设置按钮控制显示隐藏 |
 
 
 #### Extends-Api 版本说明
