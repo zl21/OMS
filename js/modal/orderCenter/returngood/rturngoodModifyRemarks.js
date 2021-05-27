@@ -54,6 +54,11 @@ export default {
     },
     async okClick() {
       const self = this;
+      if (this.bouncedData.value.length > 200) {
+        self.$Message.error("最大只能输入200个字符！");
+        return
+      }
+
       let ids = self.componentData.ids.map(em => {
         return em.ID
       })

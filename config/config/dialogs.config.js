@@ -15,7 +15,7 @@ class DialogConfig {
     ModifyRemarks: {
       title: '修改单据备注', // 修改单据备注
       width: 650,
-      url: 'pages/orderCenter/returngood/rturngoodModifyRemarks',
+      url: 'modal/orderCenter/returngood/rturngoodModifyRemarks',
       name: 'rturngoodModifyRemarks',
       excludeString: 'rturngoodModifyRemarks',
     },

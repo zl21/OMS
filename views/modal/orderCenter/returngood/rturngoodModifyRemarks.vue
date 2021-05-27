@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import rturngoodModifyRemarks from '@/js/pages/orderCenter/returngood/rturngoodModifyRemarks';
+  import rturngoodModifyRemarks from '@/js/modal/orderCenter/returngood/rturngoodModifyRemarks';
 
   export default rturngoodModifyRemarks;
 </script>

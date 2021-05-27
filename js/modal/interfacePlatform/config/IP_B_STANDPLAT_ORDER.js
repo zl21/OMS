@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-13 18:38:40
- * @LastEditTime: 2021-05-24 15:14:29
+ * @LastEditTime: 2021-05-27 15:32:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/modal/interfacePlatform/config/IP_B_STANDPLAT_ORDER.js
@@ -25,7 +25,7 @@ export default {
         isdisabled: false,
         version:'1.4',
         itemdata: {
-          colid: 168348,
+          colid: 169657,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           display: 'OBJ_FK', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
