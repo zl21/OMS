@@ -78,13 +78,13 @@ export default {
     refresh(val) {
       console.log('refresh');
     },
-    save(val) {
-      if (val) {
-        this.saveCurrent()
-          .then(() => this.$emit('changeSave', false))
-          .catch(() => this.$emit('changeSave', false));
-      }
-    },
+    // save(val) {
+    //   if (val) {
+    //     this.saveCurrent()
+    //       .then(() => this.$emit('changeSave', false))
+    //       .catch(() => this.$emit('changeSave', false));
+    //   }
+    // },
     editsave(val) {
       console.log('editsave');
     },
@@ -158,7 +158,7 @@ export default {
         url: '/p/cs/st/v1/querySmsContent',
         data: formdata,
       }).then((res) => {
-        if (res.data.code === 0) {
+        if (res.data.code === 0 && res.data.data) {
           const row = res.data.data;
           self.saveObj.MAIL_CONTENT = row.MAIL_CONTENT;
           self.itemdata.valuedata = row;
@@ -172,8 +172,15 @@ export default {
       });
     },
     //保存当前单据
-    saveCurrent() {
+    saveCurrent(e) {
       const self = this;
+      if (!e.detail.res && self.objid == -1) {
+        return
+      } else {
+        if (e.detail.res) {
+          self.objid = e.detail.res.data.data.objid
+        }
+      }
       const obj = {
         objid: self.objid,
         // fixcolumn: {
@@ -225,9 +232,12 @@ export default {
     this.setDetail('');
     //默认子明细需要保存
     this.errorHasContent();
+    this.saveObj.MAIL_CONTENT = ''
     if (this.$route.params.itemId !== 'New') {
       this.getData();
     }
   },
-  created() {},
+  created() {
+    window.addEventListener('customizeClick', this.saveCurrent);
+  },
 };
