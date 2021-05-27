@@ -511,6 +511,7 @@ export default {
       this.service.inventoryCenter.getChannelSynstockExport(fromdata).then(res => {
         if (res.data.code === 0) {
           _this.$Message.success(res.data.message);
+          publicMethodsUtil.downloadUrlFile(res.data.data);
         } else {
           _this.$Message.error(res.data.message);
         }
