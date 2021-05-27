@@ -1,0 +1,235 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-27 11:04:51
+ * @LastEditTime: 2021-05-27 11:05:01
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/views/pages/orderCenter/orderManager/dynamicSearch.vue
+-->
+<template>
+  <!-- 动态搜索组件,零售发货单专用 -->
+  <div class="dynamicSearch">
+    <div class="obj-label">
+      组合条件:
+    </div>
+    <div class="search">
+      <div
+        v-for="(ele , IDX) in dynamicStructure"
+        :key="IDX"
+        class="obj"
+      >
+        <div class="combinatorials">
+          <Select
+            v-model="dynamicStructure[IDX].NAME"
+            transfer
+          >
+            <Option
+              v-for="(item,index) in dynamicData.COMBINE_CONDITION.COMBOBOX"
+              :key="index"
+              :value="item.value"
+            >
+              {{ item.label }}
+            </Option>
+          </Select>
+        </div>
+        <div class="relation">
+          <Select
+            v-model="dynamicStructure[IDX].CALC"
+            transfer
+          >
+            <Option
+              v-for="(item,index) in dynamicData.CALC_SYMBOL.COMBOBOX"
+              :key="index"
+              :value="item.value"
+            >
+              {{ item.label }}
+            </Option>
+          </Select>
+        </div>
+        <div class="value">
+          <Input v-model="dynamicStructure[IDX].VAL" />
+        </div>
+        <div
+          v-show="dynamicStructure.length !== IDX+1"
+          class="group"
+        >
+          <Select
+            v-model="dynamicStructure[IDX].RLT"
+            transfer
+          >
+            <Option
+              v-for="(item,index) in dynamicData.LOGIC_SYMBOL.COMBOBOX"
+              :key="index"
+              :value="item.value"
+            >
+              {{ item.label }}
+            </Option>
+          </Select>
+        </div>
+        <div
+          v-show="dynamicStructure.length == IDX+1"
+          class="addOrSub"
+        >
+          <Icon
+            type="md-add"
+            @click="mdAdd"
+          />
+          <Icon
+            v-show="dynamicStructure.length !== 2"
+            type="md-remove"
+            @click="mdRemove"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'DynamicSearch',
+    props: {
+      'dynamic-data': {
+        type: Object
+      },
+    },
+    created() {
+      this.dynamicStructure[0].RLT = this.default_rlt;
+      this.dynamicStructure[1].RLT = this.default_rlt;
+      this.dynamicStructure[0].CALC = this.default_cacl;
+      this.dynamicStructure[1].CALC = this.default_cacl;
+    },
+    computed: {
+      default_cacl() { // 默认包含/不包含参数
+        return this.dynamicData.CALC_SYMBOL.COMBOBOX[0].value;
+      },
+      default_rlt() { // 默认参数且/或
+        return this.dynamicData.LOGIC_SYMBOL.COMBOBOX[0].value;
+      }
+    },
+    data() {
+      return {
+        combinValue: '', // 组合商品值
+        dynamicStructure: [ // 动态结构数据
+          { // 模板
+            DISPLAY: '', // 组合条件类型
+            NAME: '', // 组合条件选的值
+            VAL: '', // 条件值
+            RLT: '', // 关系运算符:且/或
+            CALC: '', // 计算运算符:包含/不包含
+            TYPE: '', // 值类型
+          },
+          { // 模板
+            DISPLAY: '', // 组合条件类型
+            NAME: '', // 组合条件选的值
+            VAL: '', // 条件值
+            RLT: '', // 关系运算符:且/或
+            CALC: '', // 金酸运算符:包含/不包含
+            TYPE: '', // 值类型
+          }
+        ]
+
+      };
+    },
+    methods: {
+      reset() {
+        this.dynamicStructure = [ // 动态结构数据
+          { // 模板
+            DISPLAY: '', // 组合条件类型
+            NAME: '', // 组合条件选的值
+            VAL: '', // 条件值
+            RLT: this.default_rlt, // 关系运算符:且/或
+            CALC: this.default_cacl, // 计算运算符:包含/不包含
+            TYPE: '', // 值类型
+          },
+          { // 模板
+            DISPLAY: '', // 组合条件类型
+            NAME: '', // 组合条件选的值
+            VAL: '', // 条件值
+            RLT: this.default_rlt, // 关系运算符:且/或
+            CALC: this.default_cacl, // 金酸运算符:包含/不包含
+            TYPE: '', // 值类型
+          }
+        ];
+      },
+      mdAdd() {
+        const self = this;
+        const obj = JSON.stringify({ // 模板
+          DISPLAY: '', // 组合条件类型
+          NAME: '', // 组合条件选的值
+          VAL: '', // 条件值
+          RLT: this.default_rlt, // 关系运算符:且/或
+          CALC: this.default_cacl, // 金酸运算符:包含/不包含
+          TYPE: '', // 值类型
+        });
+        self.dynamicStructure.push(JSON.parse(obj));
+        self.dynamicStructure.push(JSON.parse(obj));
+      },
+      mdRemove() {
+        this.dynamicStructure.splice(-2, 2);
+      },
+    }
+  };
+</script>
+
+<style lang="less">
+@import '~omsTheme/public.less';
+.dynamicSearch{
+    width: 100%;
+    display: flex;
+    margin-top: @base-mr;
+    .obj-label {
+      width: 120px;
+      height: @base-height + 10px;
+      line-height: @base-height + 10px;
+      text-align: right;
+      padding-right: 10px;
+    }
+    .search {
+      display: flex;
+      flex-wrap: wrap;
+      flex: 1;
+      padding-right: 20px;
+     .obj {
+        display: flex;
+        width: 50%;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 5px 0;
+        .ark-select-selection,.ark-input{
+          height: @base-height;
+          line-height: @base-height;
+          border-radius: @base-radius;
+          border: 1px solid @input-border;
+        }
+        .ark-select-placeholder{
+           height: @base-height - 2px;
+          line-height: @base-height - 2px;
+        }
+        .ark-select-arrow{
+          top: 16px;
+        }
+        >div {
+          margin-right: 8px;
+        }
+        .combinatorials {
+          flex: 0.2;
+        }
+        .relation {
+          flex: 0.2
+        }
+        .value {
+          flex: 0.4
+        }
+        .group {
+          flex: 0.2
+        }
+        .addOrSub {
+          display: flex;
+          justify-content: flex-end;
+          flex: 0.2;
+          color: red;
+        }
+    }
+    }
+}
+</style>

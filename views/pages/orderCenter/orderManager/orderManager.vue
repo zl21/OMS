@@ -1,66 +1,75 @@
 <template>
-  <div class="orderManager-box custom-main">
-    <loading :loading="agTableConfig.agLoading" />
-    <div class="totalHeight custom-btn">
+  <div
+    v-loading="loading"
+    class="customized-list"
+  >
+    <div
+      class="customized-list-form"
+      :class="[Number.isInteger(formConfig.formData.length / 4) ? '' : 'position']"
+    >
+      <!-- form组件 -->
+      <businessForm
+        v-if="buttonInit"
+        :form-config="formConfig"
+      />
+      <div :class="[!isFolding ? 'dynamicSearch-content' : 'form-search']">
+        <dynamicSearch
+          v-if="!isFolding"
+          ref="dynamicSearch"
+          :dynamic-data="dynamicData"
+        />
+        <businessButton :btn-config="searchBtn" />
+      </div>
+    </div>
+    <div class="custom-btn customized-list-btn">
       <businessButton
         :btn-config="btnConfig"
-        @dropDownClick="eventGather.dropDownClickChange"
+        @dropDownClick="(val) => eventGather.dropDownClickChange(val, extendBtn)"
       />
     </div>
-    <div class="from totalHeight custom-form">
-      <loading :loading="isShowFromLoading" />
-      <IntegrateSearchFilter
-        v-show="isShowSeniorOrOrdinary"
-        id="IntegrateSearchFilter"
-        ref="integrateSearchFilter"
-        v-model="selectValue"
-        :drop-down-list="dropList"
-        :search-method="searchMethod"
-        :tag-list="tagList"
-        class="IntegrateSearchFilter"
-        @on-clear-all="eventGather.clearAll('searchMethod')"
-        @on-clear-item="eventGather.clearItem('searchMethod')"
-        @on-search="eventGather.search"
-        @on-drop-change="eventGather.onDropChange"
-      />
-      <!-- trigger="click" -->
-      <businessForm
-        v-show="!isShowSeniorOrOrdinary"
-        :form-config="formConfig"
-        style="margin-top: 10px"
-      />
-      <businessButton 
-        class="orderSearchBtn"
-        v-show="!isShowSeniorOrOrdinary"
-        :btn-config="btnsSearch"
-      />
-      <div
-        class="from-folding"
-        @click="eventGather.shutDownOrbounceOff"
+    <div class="customized-list-table">
+      <Tabs
+        :draggable="true"
+        type="card"
+        :value="labelValue"
+        @on-drag-drop="handleDragDrop"
+        @on-click="labelClick"
       >
-        <i :class="iconDownIcon" />
-      </div>
-    </div>
-    <div class="table custom-table">
-      <businessLabel
-        :label-default-value="labelDefaultValue"
-        :label-list="labelList"
-        class="businessLabel totalHeight"
-        @labelClick="(val) => eventGather.labelClick(val,'getData')"
-      />
-      <div class="aTable">
-        <aTable
-          ref="agGridChild"
-          :ag-table-config="agTableConfig"
-          @on-page-change="(val) => eventGather.pageChange(val,'getData')"
-          @on-page-size-change="(val) => eventGather.pageSizeChange(val,'getData')"
-          @on-row-dblclick="eventGather.onRowDblclick"
-          @on-sort-changed="eventGather.onSortChanged('getData')"
+        <TabPane
+          v-for="(item, index) in tabList"
+          :key="index"
+          :animated="false"
+          :label="item.label"
+          :name="item.value"
         />
-      </div>
+      </Tabs>
+      <agTable
+        ref="agGridChild"
+        :ag-table-config="agTableConfig"
+        @on-row-dblclick="onRowDblclick"
+        @on-page-change="pageChange"
+        @on-page-size-change="pageSizeChange"
+        @on-sort-changed="onSortChanged"
+      />
+      <!-- <loading :loading="loading" /> -->
     </div>
-    <dir />
-    <!-- 公共弹框 -->
+    <Modal
+      v-model="modal"
+      class="ark-dialog"
+      title="自定义设置"
+      footer-hide
+      draggable
+      :closable="true"
+      :mask="true"
+    >
+      <p>
+        <formSetting
+          ref="formSetting"
+          :modal.sync="modal"
+          @success="initList(isFolding)"
+        />
+      </p>
+    </Modal>
     <businessDialog
       :batch-closed="publicBouncedConfig.batchClosed"
       :closable="publicBouncedConfig.closable"
@@ -73,7 +82,7 @@
       :name="publicBouncedConfig.name"
       :quit="publicBouncedConfig.quit"
       :scrollable="publicBouncedConfig.scrollable"
-      :title="publicBouncedConfig.confirmTitle"
+      :title="publicBouncedConfig.confirmTitle || publicBouncedConfig.title"
       :title-align="publicBouncedConfig.titleAlign"
       :transfer="publicBouncedConfig.transfer"
       :url="publicBouncedConfig.url"
@@ -95,8 +104,28 @@
       :transfer="importTable.transfer"
       :url="importTable.url"
       :width="importTable.width"
-      :basePathName="importTable.basePathName"
+      :base-path-name="importTable.basePathName"
     />
+    <Modal
+      v-model="proDetailConfig.modal_proDetail"
+      class-name="ark-dialog"
+      :title="proDetailConfig.title"
+      :width="800"
+      mask
+    >
+      <proDetail
+        :title="proDetailConfig.title"
+        :itemid="proDetailConfig.ID"
+      />
+    </Modal>
+    <!-- <commonTableByAgGrid
+      ref="agGrid"
+      height="300px"
+      :options="options"
+      :data="row"
+      :columns="tabth"
+      @grid-ready="gridReady"
+    /> -->
   </div>
 </template>
 
