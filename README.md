@@ -520,6 +520,7 @@ R3.launchApplication({
 | v1.3.99 |菜单样式修改 |
 | v1.4.0 | 校验表单空validatorNotEmpty方法优化 |
 | v1.4.1 | 迁移订单列表 |
+| v1.4.2 | 订单列表样式调整 |
 
 
 #### Extends-Api 版本说明
