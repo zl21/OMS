@@ -44,6 +44,7 @@ export default {
   // 订单中心-sku异常登记
   SKUABNORMALREGISTRATION: {
     component: skuAbnormalRegistration,
+    labelName: 'sku异常登记编辑',
   },
   // // 订单中心-退货入库-列表
   RETURNSTOREAGELIST: {

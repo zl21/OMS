@@ -1,0 +1,65 @@
+@import '~@burgeon/oms-theme/skin/public.less';
+@borderStyle: 1px solid #dcdee2;
+.refundAfterShipment {
+  .basic-message {
+    display: flex;
+    width: 100%;
+    .cbx {
+      display: flex;
+      padding-left: 34px;
+      margin-bottom: 8px;
+    }
+    .basic-message-form {
+      flex: 1;
+      /deep/ .formlayout-Item {
+        .ark-date-picker {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+.returnType {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  height: 32px;
+  overflow: hidden;
+
+  .orderManageEdit {
+    width: 100%;
+    padding-right: 0;
+  }
+}
+.tab-content {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border: @borderStyle;
+    box-sizing: border-box;
+    flex-direction: column;
+
+    .tab-content-navTab {
+      position: relative;
+      display: flex;
+      width: 100%;
+      padding: 0 15px;
+      border-bottom: @borderStyle;
+      box-sizing: border-box;
+
+      > p {
+        padding: 8px 15px;
+        &.action {
+          // color: #0068b7;
+          color: @base-color;
+          // border-bottom:2px solid #0068b7;
+          border-bottom:2px solid @button-border;
+        }
+      }
+    }
+
+    > div {
+      width: 100%;
+    }
+  }
