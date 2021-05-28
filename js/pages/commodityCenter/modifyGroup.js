@@ -519,7 +519,7 @@ export default {
   created(){
     this.getSelectOption();
   },
-  mounted() {
+  async mounted() {
     const self = this;
     self.dataitem.url = self.$OMS2.omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
     self.formConfig.formData[0].disabled = self.id !== -1;

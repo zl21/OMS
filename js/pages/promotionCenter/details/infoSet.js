@@ -61,7 +61,7 @@ export default {
       data: [], // 表格数据
       itemdata_xitong: {
         col: 1,
-        colid: this.$store.state.customize.forginkeys.columnIds.sku || '1700806532',
+        colid: $store.state.customize.forginkeys.columnIds.sku || '1700806532',
         colname: 'PS_C_PRO_ID',
         datelimit: 'all',
         display: 'text',
@@ -85,7 +85,7 @@ export default {
       },
       itemdata_channel: {
         col: 1,
-        colid: this.$store.state.customize.forginkeys.columnIds.plateform_sku || '1700806533',
+        colid: $store.state.customize.forginkeys.columnIds.plateform_sku || '1700806533',
         colname: 'SG_B_CHANNEL_PRODUCT_ID',
         datelimit: 'all',
         display: 'text',
@@ -116,7 +116,7 @@ export default {
       itemdata_xitong_pro: {
         // 系统商品款号
         col: 1,
-        colid: this.$store.state.customize.forginkeys.columnIds.pro || '1700806532',
+        colid: $store.state.customize.forginkeys.columnIds.pro || '1700806532',
         colname: 'PS_C_PRO_ID',
         datelimit: 'all',
         display: 'text',
@@ -141,7 +141,7 @@ export default {
       itemdata_channel_pro: {
         // 平台商品ID
         col: 1,
-        colid: this.$store.state.customize.forginkeys.columnIds.plateform_pro || '1700806533',
+        colid: $store.state.customize.forginkeys.columnIds.plateform_pro || '1700806533',
         colname: 'IP_C_TAOBAO_PRODUCT_ID',
         datelimit: 'all',
         display: 'text',
@@ -247,7 +247,7 @@ export default {
       }
     },
     groups() {
-      return this.$store.state.customize.forginkeys.groups;
+      return $store.state.customize.forginkeys.groups;
     },
     tableCols() {
       return tableCols;

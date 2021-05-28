@@ -23,7 +23,7 @@ export default {
         stores: {
           itemdata: {
             col: 1,
-            // colid: this.$store.state.forginkeys.columnIds.shop || '1700805184',
+            // colid: $store.state.forginkeys.columnIds.shop || '1700805184',
             colid: '1700805184',
             colname: 'CP_C_SHOP_ID', // 当前字段的名称
             datelimit: 'all',
@@ -403,7 +403,7 @@ export default {
           this.objid = String(data.objid) || -1;
           this.$nextTick(() => {
             this.getData(data.objid);
-            // this.$store.commit(action, {
+            // $store.commit(action, {
             //   type: 'C', // 类型action
             //   customizedModuleId: this.objid, // id
             //   customizedModuleName: 'addOrEditActi', // 文件名
@@ -498,7 +498,7 @@ export default {
      */
     close() {
       this.$comUtils.tabCloseAppoint(this);
-      this.$store.commit('global/tabOpen', {
+      $store.commit('global/tabOpen', {
         type: 'C', // 类型action
         customizedModuleId: 2895, // id
         customizedModuleName: 'PROMACTIQUERYLIST', // 文件名
@@ -512,7 +512,7 @@ export default {
      */
     initData() {
       try {
-        const groups = this.$store.state.customize.forginkeys.groups;
+        const groups = $store.state.customize.forginkeys.groups;
         // 基础信息设置
         this.basic_info.order_type = groups.orderTypes.map(item => item.value);
         // this.basic_info.platform_mark = groups.platformTabs.map((item)=>{

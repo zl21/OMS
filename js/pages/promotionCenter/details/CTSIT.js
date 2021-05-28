@@ -54,7 +54,7 @@ export default {
       return cName == 'QTTY' ? '件' : '元';
     },
     groups() {
-      return this.$store.state.customize.forginkeys.groups;
+      return $store.state.customize.forginkeys.groups;
     },
     filterPdtWayShow() {
       return this.rule.filterPdtWayShow && !this.onlyShowRules && this.rule.check;
@@ -76,7 +76,7 @@ export default {
     SingleBox
   },
   mounted() {
-    console.log(this.$store.state.customize.forginkeys.groups);
+    console.log($store.state.customize.forginkeys.groups);
     this.CompareNames = [{ value: 'QTTY', label: '数量' },
       { value: 'AMT_LIST', label: '吊牌金额' }];
   }

@@ -75,7 +75,7 @@ export default {
   },
   computed: {
     groups() {
-      return this.$store.state.customize.forginkeys.groups;
+      return $store.state.customize.forginkeys.groups;
     },
     timeTypes() {
       const self = this;

@@ -142,7 +142,7 @@ export default {
   },
   computed: {
     groups() {
-      return this.$store.state.customize.forginkeys.groups;
+      return $store.state.customize.forginkeys.groups;
     },
     itemdataFk() {
       try {
@@ -295,7 +295,7 @@ export default {
     // 取消
     cancel_simulation() {
       this.$destroy(true);
-      this.$store.commit('customize/TabClose', {
+      $store.commit('customize/TabClose', {
         id: 2895, // id
         type: 'CUSTOMIZED', // 类型action
         name: 'PROMACTIQUERYLIST', // 文件名
