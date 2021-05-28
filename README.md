@@ -529,6 +529,7 @@ R3.launchApplication({
 | v1.4.8 | 分仓-启用状态 |
 | v1.4.9 | hold策略修改label |
 | v1.5.0 | 仓库物流tab |
+| v1.5.1 | hold-策略修改label |
 
 
 #### Extends-Api 版本说明

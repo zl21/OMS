@@ -426,9 +426,7 @@ export default {
       // 详情
       const { customizedModuleName, customizedModuleId } = self.$route.params;//获取定制界面ID，Name 
       const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-      const data = { label: 'hold策略编辑', keepAliveModuleName:keepAliveModuleName}; //当前界面模块名称 
-      // R3.store.commit('global/changeCurrentTabName',data);
-      // const {customizedModuleName , customizedModuleId} = self.$route.params;
+      const data = { label: 'hold策略编辑', name:keepAliveModuleName}; //当前界面模块名称 
       self.$store.commit('global/modifycurrentLabel' , data)
       this.initData();
       // 日志
