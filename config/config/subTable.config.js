@@ -206,7 +206,7 @@ export const basicData = {
   },
   CP_C_LOGISTICS_FIX: { // 物流公司档案-物流单号解析配置
     table: 'CP_C_LOGISTICS_FIX',
-    refcolid: 180461,
+    refcolid: 180405,
     searchdata,
   },
   CP_ORG_CHANNEL_LOG: { // 渠道仓档案

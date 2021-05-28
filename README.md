@@ -530,6 +530,7 @@ R3.launchApplication({
 | v1.4.9 | hold策略修改label |
 | v1.5.0 | 仓库物流tab |
 | v1.5.1 | hold-策略修改label |
+| v1.5.2 | 物流公司档案-物流单号解析配置联调 |
 
 
 #### Extends-Api 版本说明
