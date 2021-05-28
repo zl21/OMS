@@ -802,7 +802,7 @@ export default {
           return;
         }
 
-        let { areaLevel, cpCPhyWarehouseEname, cpCPhyWarehouseEcode, cpCPhyWarehouseId, ename, priority, remark } = this.formConfig.formValue;
+        let { areaLevel, cpCPhyWarehouseEname, cpCPhyWarehouseEcode, cpCPhyWarehouseId, ename, priority, remark, isactive } = this.formConfig.formValue;
         let data = {
           ST_C_ASSIGN_LOGISTICS: {
             id: vm.$route.query.id ? vm.$route.query.id : this.id == 'New' ? '-1' : this.id,
@@ -812,7 +812,8 @@ export default {
             cpCPhyWarehouseEname,
             cpCPhyWarehouseEcode,
             priority,
-            remark
+            remark,
+            isactive: isactive ? 'Y' : 'N'
           },
           copyFlag
         };
@@ -859,7 +860,7 @@ export default {
         return;
       }
 
-      let { areaLevel, cpCShopIds, ename, priority, remark, type, cpCShopEnames } = this.formConfig.formValue;
+      let { areaLevel, cpCShopIds, ename, priority, remark, type, cpCShopEnames, isactive } = this.formConfig.formValue;
       let data = {
         id: vm.$route.query.id ? vm.$route.query.id : this.id == 'New' ? '-1' : this.id,
         areaLevel,
@@ -869,7 +870,8 @@ export default {
         priority,
         remark,
         type,
-        copyFlag
+        copyFlag,
+        isactive: isactive ? 'Y' : 'N'
       };
       if (saveType) {
         data.saveType = saveType;
