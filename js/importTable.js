@@ -1,5 +1,4 @@
 import businessButton from 'professionalComponents/businessButton';
-// import importConfig from './importTable.config.js';(此文件迁移至project-logic了)
 import loading from 'professionalComponents/loading';
 
 export default {

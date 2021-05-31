@@ -1,5 +1,5 @@
+<!-- 开发文档：http://knowledge.ark.burgeononline.com/repository#/entryComponents/2/907865/2/2061 -->
 <template>
-  <!-- 根据接口（/p/cs/objectTableItem）渲染子表（单纯的展示类子表.eg:日志--没有表内操作） -->
   <div>
     <business-action-table
       :jordan-table-config="tableConfig"
