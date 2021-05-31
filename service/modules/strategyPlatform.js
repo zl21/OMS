@@ -234,4 +234,15 @@ export default {
     $network.get(`/p/cs/st/v1/liveCast/geLiveCastInfo?${qs.stringify(params)}`), // 直播解析-查询
   liveParsingSetIsActive: (params) =>
     $network.post('/p/cs/st/v1/liveCast/setIsActive', params), // 直播解析-启用停用
+
+  tamallExchangeReasons: (params) => 
+    $network.post('/p/cs/st/v1/tmallExchangeOrder/exchangeReason/query', params,{ serviceId: 'r3-st' }), // 自动拒绝原因
+  tamallExchangeAddrs: (params) => 
+    $network.post('/p/cs/st/v1/tmallExchangeOrder/exchangeAddr/query', params,{ serviceId: 'r3-st' }), // 换货地址
+  tamallExchangeOrderSave: (params) => 
+    $network.post('/p/cs/st/v1/tmallExchangeOrder/save', params,{ serviceId: 'r3-st' }), // 保存
+  tamallExchangeOrder: (params) => 
+    $network.post('/p/cs/st/v1/tmallExchangeOrder/queryById', params,{ serviceId: 'r3-st' }), // 查询
+  tamallTree: (params) => 
+    $network.post('/p/cs/st/v1/ST_C_TMALL_EXCHANGE_ORDER/selectTree', params,{ serviceId: 'r3-st' }), // tree
 }

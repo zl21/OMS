@@ -1,10 +1,10 @@
 /*
  * @Author: your name
  * @Date: 2021-05-08 10:41:48
- * @LastEditTime: 2021-05-31 10:55:27
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-05-31 14:08:32
+ * @LastEditors: liu.sl
  * @Description: In User Settings Edit
- * @FilePath: /burgeon-project-logic/config/module/page/strategy.config.js
+ * @FilePath: \burgeon-project-logic\config\module\page\strategy.config.js
  */
 export default {
   // 策略平台-物流区域设置
@@ -78,4 +78,8 @@ export default {
     labelName: 'HOLD单策略新增',
     isList: true
   },
+  ST_C_TMALL_EXCHANGE_ORDER: {
+    component: () => import('allpages/strategyPlatform/tmExchangeAddOrEdit'),
+    labelName: '天猫换货策略编辑',
+  }
 };
