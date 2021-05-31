@@ -7,6 +7,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import addPlatformLogisticsCompany from '@/views/modal/commodityCenter/addPlatformLogisticsCompany';
 import loading from 'professionalComponents/loading';
 import subTable from 'professionalComponents/subTable';
+import orderNumberNnalysis from '@/views/pages/basicData/orderNumberNnalysis.vue';
 
 export default {
   components: {
@@ -17,7 +18,8 @@ export default {
     businessActionTable,
     addPlatformLogisticsCompany,
     loading,
-    subTable
+    subTable,
+    orderNumberNnalysis
   },
   data() {
     /* -------------------- input校验器 start -------------------- */
@@ -163,6 +165,79 @@ export default {
           ],
         },
       },
+      subTableConfig1:{
+        businessButtonConfig: {
+          typeAll: 'default',
+          buttons: [{
+              text: '添加',
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {
+                this.nalysisAdd();
+                this.subTableConfig1.businessFormConfig.formValue.PREFIX = '';
+                this.subTableConfig1.businessFormConfig.formValue.SUFFIX = '';
+              },
+            },
+            {
+              text: '删除',
+              btnclick: () => {
+                this.nalysisDetale();
+              },
+            },
+          ],
+        },
+        businessFormConfig: {
+          formValue: {
+            PREFIX:'',
+            SUFFIX:'',
+          },
+          formData: [
+            {
+              label: '前缀',
+              style: 'input',
+              width: '6',
+              value: 'PREFIX',
+              AuotData: [], //匹配的选项
+              dimChange: (search) => {
+                //模糊查询的方法
+                // this.fuzzyquerybyak(search)
+              },
+              dimEnter: (val) => {
+                this.nalysisAdd();
+              },
+              dimSelect: (obj) => {},
+              dimblur: () => {},
+            },
+            {
+              label: '后缀',
+              style: 'input',
+              width: '6',
+              value: 'SUFFIX',
+              AuotData: [], //匹配的选项
+              dimChange: (search) => {},
+              dimEnter: (val) => {
+                this.nalysisAdd();
+              },
+              dimSelect: (obj) => {},
+              dimblur: () => {},
+            }
+          ],
+        }, // 表单配置
+        columns: [
+          {
+            title: '前缀',
+            key: 'PREFIX',
+          },
+          {
+            title: '后缀',
+            key: 'SUFFIX',
+          }
+        ],
+        data:[],
+        selectionData:[],
+        border: true, // 是否显示纵向边框
+        isShowSelection: true, // 是否展示select框
+        indexColumn: true // 是否展示序号列
+      },
       subTableConfig2: {},
       // tab切换配置
       labelList: [{
@@ -285,17 +360,41 @@ export default {
         // 走框架报错提示
       }
     },
+    // 物流单号解析 添加/删除按钮事件
+    nalysisAdd(){
+      let data = this.subTableConfig1.data;
+      let {PREFIX,SUFFIX} = this.subTableConfig1.businessFormConfig.formValue;
+      let COMBINATION  = `${PREFIX}${SUFFIX}`;
+      if(data.length){
+        if(data.some((item)=> { return item.COMBINATION === COMBINATION})) {
+          this.$Message.warning('重复数据，不能添加！')
+          return;
+        }
+        this.subTableConfig1.data.push({ID:-1,PREFIX,SUFFIX,COMBINATION});
+      }else{
+        this.subTableConfig1.data.push({ID:-1,PREFIX,SUFFIX,COMBINATION})
+      }
+    },
+    // 删除
+    nalysisDetale(){
+      let tableConfig = this.subTableConfig1
+      tableConfig.selectionData.forEach((i) => {
+        tableConfig.data.forEach((e,index) => {
+            if(i.COMBINATION === e.COMBINATION)tableConfig.data.splice(index,1);
+        })
+      })
+    },
     /* -------------------- 子表Part end -------------------- */
 
     // 保存
     async save() {
-      console.clear();
+      console.log('save');
       const self = this;
       const afterForm = self.modify.master;
       /* ========= 保存校验 start ========= */
       const masterArr = Object.keys(self.modify.master);
       // 未修改，不提示，不操作
-      if (!masterArr.length && !self.addTableData.length) return false;
+      if (!masterArr.length && !self.addTableData.length && this.subTableConfig1.length) return false;
       const valueArr = ['ECODE', 'ENAME'];
       const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr);
       if (mes) {
@@ -307,9 +406,11 @@ export default {
         ID: self.ID,
       });
       const CP_C_LOGISTICS_ITEM = self.addTableData;
+      const CP_C_LOGISTICS_FIX = self.subTableConfig1.data;
       const param = {
         CP_C_LOGISTICS, // 主表修改信息
         CP_C_LOGISTICS_ITEM, // 子表修改信息
+        CP_C_LOGISTICS_FIX
       };
       this.loading = true;
       const {
@@ -341,6 +442,7 @@ export default {
             name: 'LOGISTICSCOMPANYFILESADDOREDIT',
             label: '物流公司档案编辑',
           });
+          this.labelDefaultValue = 'PROPERTYVALUES'
         }, 20);
       } else {
         // 走框架的报错
@@ -408,12 +510,30 @@ export default {
     pageSizeChange(e) {
       this.subTableConfig.pageSize = e;
     },
+    // 物流单号解析表格事件
+    onSelect1(e){
+      this.subTableConfig1.selectionData = e;
+    },
+    onSelectCancel1(e){
+      this.subTableConfig1.selectionData = e;
+    },
+    onSelectAll1(e){
+      this.subTableConfig1.selectionData = e;
+    },
+    onSelectAllCancel1(e){
+      this.subTableConfig1.selectionData = e;
+    },
 
     /* --------------------- 工具函数： --------------------- */
     // 切换Label & 实时渲染subTable
-    labelClick(item) {
+    async labelClick(item) {
       this.labelDefaultValue = item.value;
-      if (this.labelDefaultValue == 'PROPERTYVALUES') return;
+      if(this.labelDefaultValue == 'CP_C_LOGISTICS_FIX'){
+        const subData = await this.$OMS2.omsUtils.initSubtable('CP_C_LOGISTICS_FIX', this.ID, '180405');
+        console.log(subData);
+        this.subTableConfig1.data = subData.rowData
+      }
+      if (this.labelDefaultValue == 'PROPERTYVALUES' || this.labelDefaultValue == 'CP_C_LOGISTICS_FIX') return;
       this.subTableConfig2 = { //basicData
         centerName: 'basicData',
         tablename: this.labelDefaultValue,
