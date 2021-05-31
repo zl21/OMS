@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-08 10:41:48
- * @LastEditTime: 2021-05-25 11:54:03
+ * @LastEditTime: 2021-05-31 10:55:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/page/strategy.config.js
@@ -75,7 +75,7 @@ export default {
   },
   ST_C_HOLD_ORDER_STRATEGY: {
     component: () => import('allpages/strategyPlatform/holdStrategyAddOrEdit'),
-    labelName: 'HOLD单策略',
+    labelName: 'HOLD单策略新增',
     isList: true
   },
 };
