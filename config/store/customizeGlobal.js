@@ -120,8 +120,9 @@ export const globalStore = {
       FINAL_ACTUAL_AMT:'0.00',
       FINAL_REAL_AMT:'0.00',
     },
-    //订单中心 - 退货数量
-    returnQuantity:1
+    // 订单中心 - 退换货明细
+    returnOrderChangeItem:[]
+
   },
   mutations: {
     // 存储促销二类名称和描述
@@ -129,7 +130,7 @@ export const globalStore = {
       state.prom_type.prom_type_name = n.prom_type_name;
       state.prom_type.prom_type_brief = n.prom_type_brief;
     },
-    forginitems(state, data) {
+    forginkeys(state, data) {
       state.forginkeys[data.key] = data.value;
     },
     stateChange(state, data) {
@@ -324,6 +325,11 @@ export const globalStore = {
       let ks = Object.keys(n);
       ks.forEach((k) => n[k] && (state.returnAmount[k] = n[k]));
     },
+    // 编辑 退换货
+    returnOrderChangeItem(state,n){
+      state.returnOrderChangeItem = n;
+      console.log(state.returnOrderChangeItem);
+    }
   },
   modules: {
     jordanStore

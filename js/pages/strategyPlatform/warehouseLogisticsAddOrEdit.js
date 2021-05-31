@@ -374,6 +374,7 @@ export default {
       this.isAuto = this.formConfig.formValue.IS_AUTO_LOGISTICS_DISTRIBUTION == '1';
       this.queryForm(this.formConfig, 'CP_C_LOGISTICS_ID').style = this.isAuto ? '' : 'popInput';
       this.formConfig.ruleValidate.CP_C_LOGISTICS_ID.required = !this.isAuto;
+      this.initPanel()
       this.clearTableData();
       this.forceReload += 1; // 组件重载
       this.logisticsTableConfig.data = this.backup;
@@ -428,9 +429,21 @@ export default {
       }
     },
     initPanel() {
-      if (this.ID == -1 && this.isAuto) return;
-      this.labelList = this.labelList.map(i => {
-        i.isShow = !i.isShow;
+      let showIndex
+      switch (this.ID == -1) {
+        case true:
+          showIndex = this.isAuto ? [0] : []
+          this.labelDefaultValue = this.isAuto ? 'logistics' : ''
+          break;
+        case false:
+          showIndex = this.isAuto ? [1,2] : [2]
+          this.labelDefaultValue = this.isAuto ? 'logistics' : 'ST_WAREHOUSE_LOGISTICS_LOG'
+          break;
+        default:
+          break;
+      }
+      this.labelList = this.labelList.map((i, index) => {
+        i.isShow = showIndex.includes(index);
         return i;
       });
     },

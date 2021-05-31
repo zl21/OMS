@@ -228,7 +228,7 @@ colGroups.prototype.getSelect = async function () {
   if (data.code === 0) {
     this.groups = Object.assign(groups, data.data || []);
     // console.log('groups:', groups);
-    store.commit('customize/forginkeys', {
+    $store.commit('customize/forginkeys', {
       key: 'groups',
       value: this.groups
     });
@@ -241,7 +241,7 @@ colGroups.prototype.getPromField = async function () {
   if (res.data.code === 0) {
     // console.log('getPromField------', res.data.data);
     this.columnIds = res.data.data || {};
-    store.commit('customize/forginkeys', {
+    $store.commit('customize/forginkeys', {
       key: 'columnIds',
       value: this.columnIds
     });

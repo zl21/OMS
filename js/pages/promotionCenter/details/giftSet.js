@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     groups() {
-      return this.$store.state.customize.forginkeys.groups;
+      return $store.state.customize.forginkeys.groups;
     },
     showPdtsArr() {
       const flag = this.basicData.gradient_gift === '1';
@@ -85,7 +85,7 @@ export default {
       data: [], // 表格数据
       itemdata: {
         col: 1,
-        colid: this.$store.state.customize.forginkeys.columnIds.sku || '1700806532',
+        colid: $store.state.customize.forginkeys.columnIds.sku || '1700806532',
         colname: `PS_C_PRO_ID${Math.floor(Math.random() * 100)}`,
         datelimit: 'all',
         display: 'text',

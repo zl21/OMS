@@ -20,7 +20,7 @@ export default {
         stores: {
           itemdata: {
             col: 1,
-            // colid: this.$store.state.forginkeys.columnIds.shop || '1700805184',
+            // colid: $store.state.forginkeys.columnIds.shop || '1700805184',
             colid: '1700805184',
             colname: 'CP_C_SHOP_ID', // 当前字段的名称
             datelimit: 'all',
@@ -123,7 +123,7 @@ export default {
       return this.$router.currentRoute.params.customizedModuleName;
     },
     groups() {
-      return this.$store.state.customize.forginkeys.groups;
+      return $store.state.customize.forginkeys.groups;
     },
     showSaveButton() {
       if (this.objid > 0 && (this.basic_info.status === '2' || this.basic_info.status === '3')) {
@@ -403,7 +403,7 @@ export default {
           }
           this.objid = String(data.objid) || -1;
           this.$nextTick(() => {
-            this.$store.commit(action, {
+            $store.commit(action, {
               id: this.objid, // id
               type: 'action', // 类型action
               name: 'batchActivity', // 文件名

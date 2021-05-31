@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-21 19:46:25
- * @LastEditTime: 2021-05-22 12:18:01
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-05-28 16:08:22
+ * @LastEditors: liu.sl
  * @Description: In User Settings Edit
- * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/warehouseLogisticsAddOrEdit.vue
+ * @FilePath: \burgeon-project-logic\views\pages\strategyPlatform\warehouseLogisticsAddOrEdit.vue
 -->
 <template>
   <!-- 仓库物流设置 -->
@@ -28,7 +28,7 @@
       <div class="customized-detail-table">
         <!-- tab切换 -->
         <businessLabel
-          v-show="isAuto"
+          v-show="this.ID || isAuto"
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
           @labelClick="labelClick"
@@ -36,7 +36,7 @@
         <!-- 子表Part -->
         <div class="subtablePart">
           <businessForm 
-            v-if="isAuto && labelDefaultValue == 'logistics'"
+            v-if="labelDefaultValue == 'logistics'"
             :form-config="logisticsTableFormConfig">
             <template #logistics="{ rowData }">
                <DropMultiSelectFilter
@@ -53,12 +53,12 @@
             </template>
           </businessForm>
           <businessButton
-            v-if="isAuto && labelDefaultValue == 'logistics'"
+            v-if="labelDefaultValue == 'logistics'"
             :btn-config="logisticsTableButtonConfig"
           />
 
           <businessActionTable
-            v-show="isAuto && labelDefaultValue == 'logistics'"
+            v-show="labelDefaultValue == 'logistics'"
             :jordan-table-config="logisticsTableConfig"
             @on-select="onSelect"
             @on-select-cancel="onSelectAllCancel"
@@ -68,7 +68,7 @@
             @on-page-size-change="pageSizeChange"
           />
           <subTable
-            v-show="isAuto && labelDefaultValue != 'logistics'"
+            v-show="labelDefaultValue == 'ST_WAREHOUSE_LOGISTICS_LOG'"
             :component-data="subTableConfig"
           />
         </div>

@@ -287,14 +287,9 @@ export default {
             disabled: true,
             switchChange: () => {
               let isActive = this.formConfig.formValue.isactive;
-              let data = { id: this.$route.params.customizedModuleId, isActive: isActive ? 'Y' : 'N' }
-              service.strategyPlatform.orderWarehouseSetIsActive(data).then(res => {
-                if (res.data.code == 0) {
-                  this.qurefrom('beginTime')[0].disabled = isActive;
-                  this.qurefrom('endTime')[0].disabled = isActive;
-                  this.btnConfig2.buttons[0].disabled = isActive;
-                }
-              });
+              this.qurefrom('beginTime')[0].disabled = isActive;
+              this.qurefrom('endTime')[0].disabled = isActive;
+              this.btnConfig2.buttons[0].disabled = isActive;
             }
           },
           {
@@ -807,7 +802,7 @@ export default {
           return;
         }
 
-        let { areaLevel, cpCPhyWarehouseEname, cpCPhyWarehouseEcode, cpCPhyWarehouseId, ename, priority, remark } = this.formConfig.formValue;
+        let { areaLevel, cpCPhyWarehouseEname, cpCPhyWarehouseEcode, cpCPhyWarehouseId, ename, priority, remark, isactive } = this.formConfig.formValue;
         let data = {
           ST_C_ASSIGN_LOGISTICS: {
             id: vm.$route.query.id ? vm.$route.query.id : this.id == 'New' ? '-1' : this.id,
@@ -817,7 +812,8 @@ export default {
             cpCPhyWarehouseEname,
             cpCPhyWarehouseEcode,
             priority,
-            remark
+            remark,
+            isactive: isactive ? 'Y' : 'N'
           },
           copyFlag
         };
@@ -864,7 +860,7 @@ export default {
         return;
       }
 
-      let { areaLevel, cpCShopIds, ename, priority, remark, type, cpCShopEnames } = this.formConfig.formValue;
+      let { areaLevel, cpCShopIds, ename, priority, remark, type, cpCShopEnames, isactive } = this.formConfig.formValue;
       let data = {
         id: vm.$route.query.id ? vm.$route.query.id : this.id == 'New' ? '-1' : this.id,
         areaLevel,
@@ -874,7 +870,8 @@ export default {
         priority,
         remark,
         type,
-        copyFlag
+        copyFlag,
+        isactive: isactive ? 'Y' : 'N'
       };
       if (saveType) {
         data.saveType = saveType;

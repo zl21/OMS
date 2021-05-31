@@ -511,9 +511,9 @@ export default {
     }
   },
   async mounted() {
-    this.$nextTick(() => {
-      this.getPermissions('btnConfig', 'promactiquerylist');
-    });
+    // this.$nextTick(() => {   //暂时隐藏,因为后端接口未迁移
+    //   this.getPermissions('btnConfig', 'promactiquerylist');
+    // });
 
     // 计算高度 通过设置节点 'totalHeight'
     await this.$comUtils.setTableHeight(this, 165);
@@ -696,7 +696,7 @@ export default {
         const ACTI_ID = selectedData[0].ACTI_ID;
         const IS_BATCH = selectedData[0].IS_BATCH;
         if (IS_BATCH) {
-          this.$store.commit('customize/TabOpen', {
+          $store.commit('customize/TabOpen', {
             id: -1, // id
             type: 'action', // 类型action
             name: 'batchActivity', // 文件名
@@ -708,7 +708,7 @@ export default {
             }) // 带的参数
           });
         } else {
-          this.$store.commit('customize/TabOpen', {
+          $store.commit('customize/TabOpen', {
             id: -1, // id
             type: 'action', // 类型action
             name: 'addOrEditActi', // 文件名
@@ -725,7 +725,7 @@ export default {
       }
     },
     promotionClick() {
-      this.$store.commit('customize/TabOpen', {
+      $store.commit('customize/TabOpen', {
         id: -1, // id
         type: 'action', // 类型action
         name: 'addOrEditActi', // 文件名
@@ -738,7 +738,7 @@ export default {
     },
     promotionBlukClick() {
       // 【批量新增】
-      this.$store.commit('customize/TabOpen', {
+      $store.commit('customize/TabOpen', {
         id: -1, // id
         type: 'action', // 类型action
         name: 'batchActivity', // 文件名
@@ -831,7 +831,7 @@ export default {
     },
     simulation() {
       // 模拟仿真
-      this.$store.commit('customize/TabOpen', {
+      $store.commit('customize/TabOpen', {
         id: -1, // id
         type: 'CUSTOMIZED', // 类型action
         name: 'SIMULATION', // 文件名
@@ -894,7 +894,7 @@ export default {
         // let scheme_dataInit = JSON.stringify(res.data.data.scheme_arr);
         // 存储种类id保存草稿时需要
         if (IS_BATCH) {
-          this.$store.commit('customize/TabOpen', {
+          $store.commit('customize/TabOpen', {
             id: ACTI_ID, // id
             type: 'action', // 类型action
             name: 'batchActivity', // 文件名
@@ -905,7 +905,7 @@ export default {
             }) // 带的参数
           });
         } else {
-          this.$store.commit('customize/TabOpen', {
+          $store.commit('customize/TabOpen', {
             id: ACTI_ID, // id
             type: 'action', // 类型action
             name: 'addOrEditActi', // 文件名
