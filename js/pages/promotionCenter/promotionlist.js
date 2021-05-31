@@ -9,6 +9,8 @@ import dialogVisible from '@/views/modal/promotionCenter/setGroup';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import loading from 'professionalComponents/loading';
 import groups from '@/assets/js/promotion/groups';
+import businessForm from 'professionalComponents/businessForm';
+import dateUtil from '@/assets/js/__utils__/date.js';
 
 const baseColumnDefs = [
   {
@@ -107,8 +109,8 @@ export default {
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
   data() {
     return {
-      vmI18n:$i18n,
-      loading:false,
+      vmI18n: $i18n,
+      loading: false,
       modal: false, // 查看日志弹框
       loadings: false, // 下拉框默认loadings值
       release_name: '', // 操作人
@@ -121,6 +123,139 @@ export default {
       checkList: [], // 表格复选框选中的id
       setGroupTableData: [], // 设置分组列表
       STATUS: [1, 2, 3], // 状态 1.草稿，2.已发布，3.下线
+      formConfig: {
+        formValue: {
+          acti_no: '',
+          acti_date: [`${this.setData(0, true)}`, `${this.setData(7)}`],
+          acti_name: '',
+          my_input_sh: '',
+          product: '',
+          acti_group: '',
+          release_name: '',
+          STATUS: [1, 2, 3],
+        },
+        ruleValidate: {},
+        formData: [
+          {
+            style: 'input',
+            label: '促销编号',
+            colname: 'acti_no',
+            width: '6',
+            inputenter: () => {
+              this.formUserKeyUp();
+            }
+          },
+          {
+            style: "date",
+            type: "datetimerange",
+            label: "活动日期",
+            colname: "acti_date",
+            format: "yyyy/MM/dd",
+            width: "6",
+            icon: "md-alarm",
+            placeholder: "",
+            transfer: true,
+            ghost: false, // 是否关闭幽灵按钮，默认开启
+            onChange: () => {
+              this.handleChange();
+            },
+            clearable: true,
+          },
+          {
+            style: 'input',
+            label: '活动名称',
+            colname: 'acti_name',
+            width: '6',
+            inputenter: () => {
+              this.formUserKeyUp();
+            }
+          },
+          {
+            version: '1.4',
+            style: 'popInput',
+            width: '6',
+            colname: 'my_input_sh',
+            itemdata: {
+              serviceId: "r3-pm",
+              colid: 171929,
+              colname: 'CP_C_SHOP_ID',
+              fkdisplay: 'mrp',
+              isfk: true,
+              isnotnull: false,
+              name: '店铺名称', // 店铺名称
+              readonly: false,
+              reftable: 'CP_C_SHOP',
+              reftableid: 10348,
+              valuedata: '',
+            },
+            oneObj: (val) => {
+              console.log(val);
+            },
+          },
+          {
+            version: '1.4',
+            style: 'popInput',
+            width: '6',
+            colname: 'product',
+            itemdata: {
+              serviceId: "r3-pm",
+              colid: '1700806532',
+              colname: 'PS_C_PRO_ID',
+              fkdisplay: 'drp',
+              isfk: true,
+              isnotnull: false,
+              name: '参与商品',
+              readonly: false,
+              valuedata: '',
+            },
+            oneObj: (val) => {
+              console.log(val);
+            },
+          },
+          {
+            style: 'input',
+            label: '分组',
+            colname: 'acti_group',
+            width: '6',
+            inputenter: () => {
+              this.formUserKeyUp();
+            },
+            inputChange: () => { },
+          },
+          {
+            style: 'input',
+            label: '操作人',
+            colname: 'release_name',
+            width: '6',
+            inputenter: () => {
+              this.formUserKeyUp();
+            },
+          },
+          {
+            style: 'select',
+            label: '促销状态',
+            colname: 'STATUS',
+            width: '6',
+            rules: true,
+            multiple: true,
+            selectChange: (val) => {
+              console.log(this.formConfig.formValue.STATUS);
+            },
+            options: [
+              {
+                value: 1,
+                label: '草稿'
+              }, {
+                value: 2,
+                label: '已发布'
+              }, {
+                value: 3,
+                label: '下线过期'
+              }
+            ],
+          },
+        ],
+      },
       logData: {
         columns: [
           {
@@ -493,6 +628,7 @@ export default {
     }
   },
   components: {
+    businessForm,
     businessButton,
     businessLabel,
     aTable,
@@ -504,7 +640,7 @@ export default {
   },
   created() {
     groups.load();
-   },
+  },
   computed: {
     commodity() {
       return this.inputList[0].valuedata;
@@ -523,8 +659,28 @@ export default {
     await this.getData();
     // 检测屏幕变化 设置高度 重新渲染agTabe
     this.$comUtils.onresizes(this, 650);
+    // this.$nextTick(() => {
+    //   this.formConfig.formValue.acti_date = [`${this.setData(7,true)}`,`${this.setData(0)}`];
+    // });
   },
   methods: {
+    // 获取7天后时间
+    setData(day, startTime) {
+      let date = startTime ? this.formatDate(new Date().setHours(0, 0, 0, 0) + 86400 * day * 1000) : this.formatDate(new Date().setHours(23, 59, 59, 0) + 86400 * day * 1000)
+      return date;
+    },
+    // 日期格式转换
+    formatDate(time) {
+      if (time instanceof Array && time[0]) {
+        const start = dateUtil.getFormatDate(time[0], 'yyyy-MM-dd HH:mm:ss');
+        const end = dateUtil.getFormatDate(time[1], 'yyyy-MM-dd HH:mm:ss');
+        return start + '~' + end
+      } else {
+        const date = new Date(time);
+        const resTime = dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
+        return resTime
+      }
+    },
     // 处理时间
     handleChange(dateArr) {
       const filterDate = [];
@@ -564,7 +720,7 @@ export default {
     async getData() {
       const currentPage = this.tabConfig[this.activeName].agTableConfig.pagenation.current;
       const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
-      const {customizedModuleName}=this.$router.currentRoute.params;
+      const { customizedModuleName } = this.$router.currentRoute.params;
       this.loading = true;
       // this.$R3loading.show(customizedModuleName);
       const params = {
