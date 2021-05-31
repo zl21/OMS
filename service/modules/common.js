@@ -26,7 +26,6 @@ export default {
     $network.post("/p/cs/getWarehouseLogisticsTree", params),
   getLogisticsRankResultTable: (params) =>
     $network.post("/p/cs/getLogisticsRankResultTable", params),
-  getPromField: (params) => $network.get("/p/cs/getPromField", params),
   getWarehouseLogisticsInfo: (params) =>
     $network.post("/p/cs/getWarehouseLogisticsInfo", params),
   delWarehouseLogistics: (params) =>

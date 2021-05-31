@@ -237,7 +237,7 @@ colGroups.prototype.getSelect = async function () {
 
 colGroups.prototype.getPromField = async function () {
   if (!$.isEmptyObject(this.columnIds)) return this.columnIds;
-  const res = await service.common.getPromField();
+  const res = await service.promotionCenter.getPromField();
   if (res.data.code === 0) {
     // console.log('getPromField------', res.data.data);
     this.columnIds = res.data.data || {};

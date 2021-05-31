@@ -1,6 +1,7 @@
 // 营销中心(促销中心)
 import qs from 'qs';
-
+import R3 from '@syman/burgeon-r3';
+window.$network = R3.network;
 
 export default {
   /**
@@ -45,5 +46,6 @@ export default {
   // 仿真试算：
   testPm: params => $network.post('/p/cs/pm/v1/testPm', params),
 
-  selectInit: params => $network.get(`/p/cs/pm/v1/selectInit?${qs.stringify(params)}`),
+  selectInit: params => $network.get(`/p/cs/pm/v1/selectInit?${qs.stringify(params)}`,{ serviceId: "r3-pm" }),
+  getPromField: (params) => $network.get("/p/cs/getPromField", params, { serviceId: "r3-pm" }),
 };

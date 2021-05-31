@@ -16,7 +16,7 @@
       </div>
       <div class="footer">
         <button @click="close">
-          {{ vmI18n.t('common.cancel') }}
+          {{ vmI18n.t('btn.back') }}
         </button>
         <button v-if="showSaveButton" @click="saveDraft">
           {{ vmI18n.t('btn.saveDraft') }}
