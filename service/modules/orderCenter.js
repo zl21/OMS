@@ -3,8 +3,11 @@ import qs from 'qs'
 import port from '@/config/config/orderDetailConnector.js'
 export default {
   /**
-   * 零售发货单
+   * 零售发货单 
    */
+   getMathReturnOrderByPage: (params) =>
+   $network.post('/p/cs/oc/oms/v1/refundInOrder/getMathReturnOrderByPage', params), // 退换货单-修改备注
+
    updateReturnOrderRemark: (params) =>
    $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/updateReturnOrderRemark', params), // 退换货单-修改备注
 

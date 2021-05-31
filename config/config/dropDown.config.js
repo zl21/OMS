@@ -167,7 +167,7 @@ class DropDownConfig {
     )
     self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
     if (self.selection.length < 1) {
-      self.$OMS2.omsUtils.msgTips(self, 'warning', 'modalTips.d8')
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'd8')
       return
     }
     self.publicBouncedConfig.name = 'addGiftDialog'
@@ -192,7 +192,7 @@ class DropDownConfig {
     )
     self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
     if (self.selection.length < 1) {
-      self.$OMS2.omsUtils.msgTips(self, 'warning', 'modalTips.d8')
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'd8')
       return
     }
     self.publicBouncedConfig.name = 'addGiftDialog'
@@ -218,7 +218,7 @@ class DropDownConfig {
 
     self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
     if (self.selection.length < 1) {
-      self.$OMS2.omsUtils.msgTips(self, 'warning', 'modalTips.d8')
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'd8')
       return
     }
     self.publicBouncedConfig.name = 'addGiftDialog'
