@@ -3,6 +3,7 @@ import InfoSet from 'allpages/promotionCenter/details/infoSet';
 import GiftSet from 'allpages/promotionCenter/details/giftSet';
 import stepsBars from 'professionalComponents/steps';
 import loading from 'professionalComponents/loading';
+import groups from '@/assets/js/promotion/groups';
 
 export default {
   components: {
@@ -812,7 +813,8 @@ export default {
   beforeDestroy() {
     this.$refs.basicSteps.removeEventListener('scroll', this.handleScrollByUser, false);
   },
-  created() {
+  async created() {
+    await groups.load();
     if (this.$route.query.id > 0) {
       this.objid = this.$route.query.id;
       this.getData();

@@ -248,9 +248,9 @@ colGroups.prototype.getPromField = async function () {
   }
 };
 
-colGroups.prototype.load = function () {
-  this.getSelect();
-  this.getPromField();
+colGroups.prototype.load = async function () {
+  await this.getSelect();
+  await this.getPromField();
 };
 
 export default new colGroups();

@@ -2,6 +2,7 @@ import BasicInfo from 'allpages/promotionCenter/details/basicInfo';
 import BatchInfoSet from 'allpages/promotionCenter/details/batchInfoSet';
 import stepsBars from 'professionalComponents/steps';
 import loading from 'professionalComponents/loading';
+import groups from '@/assets/js/promotion/groups';
 
 export default {
   components: {
@@ -406,7 +407,7 @@ export default {
             $store.commit(action, {
               id: this.objid, // id
               type: 'action', // 类型action
-              name: 'batchActivity', // 文件名
+              name: 'PM_C_PROM_ACTI_BATCH_ADD', // 文件名
               // label: "批量新增促销活动", // tab中文名
               label: $i18n.t('panel_label.batchAddPromotion'),
               query: Object.assign({
@@ -550,7 +551,8 @@ export default {
     // 修改草稿
     this.addListener();
   },
-  created() {
+  async created() {
+    await groups.load();
     const routeId = this.$route.query.id;
     if (routeId > 0) {
       this.objid = String(routeId);
