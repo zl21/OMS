@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-05-19 15:56:14
- * @LastEditTime: 2021-05-25 10:24:56
+ * @LastEditTime: 2021-06-01 17:37:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/fkinputPlus.vue
@@ -108,6 +108,8 @@ export default {
       enter: {
         time: 0
       },
+      valuedata: this.itemdata.valuedata || '',
+      pid: this.itemdata.pid || '',
       data: this.itemdata.data || {},
       totalRowCount: this.itemdata.totalRowCount || 0,
       pageSize: this.itemdata.pageSize,
@@ -175,69 +177,22 @@ export default {
   watch: {
     itemdata: {
       handler(val, oldVal) {
-        const self = this;
-        let reg = '';
-
-        // 数字判断
-        if (val.length) {
-          if (val.scale === 0) {
-            reg = new RegExp(
-              `^[\\-\\+]?\\d{0,${val.length - val.scale}}(\\.\\d{1,2})?$`
-            );
-          } else {
-            reg = new RegExp(
-              `^[\\-\\+]?\\d{0,${val.length - val.scale}}(\\.\\d{0,${val.scale
-              }})?$`
-            ); // 匹配小数点位数 /^[+\-\d]{0,1}+(\.\d{0,2})?$/
-          }
-        } else if (val.scale === 0) {
-          reg = new RegExp('^[\\+\\-]?\\d+(\\.\\d{1,2})?$');
-        } else {
-          reg = new RegExp(`^[\\+\\-]?\\d+(\\.\\d{0,${val.scale}})?$`); // 匹配小数点位数 /^[+\-\d]{0,1}+(\.\d{0,2})?$/
+        if (val.pid || val.valuedata) {
+          this.defaultSelected = [{ ID: val.pid, Label: val.valuedata }];
         }
-        const numberCount = val.length - val.scale;
-        if (!reg.test(val.valuedata) && val.type === 'NUMBER') {
-          if (isNaN(val.valuedata)) {
-            val.valuedata = val.valuedata.length === 1
-              ? ''
-              : oldVal.valuedata.substr(0, oldVal.valuedata.length - 1);
-          } else if (val.scale === 0) {
-            val.valuedata = val.valuedata.substring(
-              0,
-              val.valuedata.length - 1
-            );
-          } else {
-            val.valuedata = val.valuedata.indexOf('.') === -1
-              ? val.valuedata.substring(0, val.valuedata.length - 1)
-              : val.length
-                ? val.valuedata.substring(
-                  0,
-                  val.valuedata.includes('-') || val.valuedata.includes('+')
-                    ? val.valuedata.indexOf('.') > numberCount + 1
-                      ? numberCount + 1
-                      : val.valuedata.indexOf('.')
-                    : val.valuedata.indexOf('.') > numberCount
-                      ? numberCount
-                      : val.valuedata.indexOf('.')
-                )
-                + val.valuedata.substring(
-                  val.valuedata.indexOf('.'),
-                  val.valuedata.indexOf('.') + val.scale + 1
-                )
-                : val.valuedata.substring(
-                  0,
-                  val.valuedata.indexOf('.') + val.scale
-                );
-          }
-        }
-
-        // 大小写转换
         if (val.isuppercase && val.valuedata) {
           val.valuedata = val.valuedata.toString().toUpperCase();
         }
       },
       deep: true
-    }
+    },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      if (this.itemdata.pid || this.itemdata.valuedata) {
+        this.defaultSelected = [{ ID: this.itemdata.pid, Label: this.itemdata.valuedata }];
+      }
+    })
   },
   methods: {
     /* ------------------------ 入参处理 start  ------------------------ */
@@ -381,7 +336,7 @@ export default {
       // this.$emit('getFkChooseItem', val);
     },
     /* ------------------- DropMultiSelectFilter组件事件 end  ------------------- */
-  }
+  },
 }
 </script>
 
