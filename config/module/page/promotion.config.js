@@ -9,7 +9,7 @@ export default {
     component: () => import('allpages/promotionCenter/promotionlist.vue'),
     labelName: '促销活动',
   },
-  ADDOREDITACTI: {
+  PM_C_PROM_ACTI: {
     component: () => import('allpages/promotionCenter/addOrEditActi.vue')
   },
   BATCHACTIVITY: {

@@ -723,7 +723,7 @@ export default {
           $store.commit('customize/TabOpen', {
             id: -1, // id
             type: 'action', // 类型action
-            name: 'addOrEditActi', // 文件名
+            name: 'PM_C_PROM_ACTI', // 文件名
             label: $i18n.t('panel_label.addPromotion'), // 新增促销活动
             query: Object.assign({
               id: -1, // id
@@ -740,7 +740,7 @@ export default {
       $store.commit('customize/TabOpen', {
         id: -1, // id
         type: 'action', // 类型action
-        name: 'addOrEditActi', // 文件名
+        name: 'PM_C_PROM_ACTI', // 文件名
         label: $i18n.t('panel_label.addPromotion'), // 新增促销活动
         query: Object.assign({
           id: -1, // id
@@ -920,7 +920,7 @@ export default {
           $store.commit('customize/TabOpen', {
             id: ACTI_ID, // id
             type: 'action', // 类型action
-            name: 'addOrEditActi', // 文件名
+            name: 'PM_C_PROM_ACTI', // 文件名
             label: $i18n.t('panel_label.editPromotion'), // 编辑促销活动
             query: Object.assign({
               id: ACTI_ID, // id
