@@ -42,11 +42,9 @@
         </div>
       </div>
       <div class="row">
-        <myInputLd
-          :is-active="true"
-          :is-disabled="false"
-          :itemdata="basicData.stores.itemdata"
-          :is-object="basicData.stores.itemdata.isObject"
+        <fkinput
+          :itemdata="storesItemdata"
+          :is-object="storesItemdata.isObject"
         />
       </div>
       <div class="row">
@@ -163,10 +161,8 @@
         </div>
       </div>
       <div class="row">
-        <myInputLd
-          :is-active="true"
-          :is-disabled="false"
-          :itemdata="basicData.except_provinces.itemdata"
+        <fkinput
+          :itemdata="except_provincesItemdata"
         />
       </div>
       <div class="row">

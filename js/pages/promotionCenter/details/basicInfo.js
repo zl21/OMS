@@ -1,18 +1,49 @@
 // import dateUtil from "@/assets/js/__utils__/date";
-import myInputLd from 'framework/components/element/input.vue';
+// import myInputLd from 'framework/components/element/input.vue';
 import MultipleBox from 'professionalComponents/multipleBox';
 import SingleBox from 'professionalComponents/singleBox';
 import BurgeonDate from '@/assets/js/__utils__/date';
+import fkinput from 'professionalComponents/fkinputPlus.vue';
+import groups from '@/assets/js/promotion/groups'; // 促销的一些初始化配置文件
+groups.load();
+
 export default {
   name: 'BasicInfo',
   components: {
-    myInputLd,
+    fkinput,
+    // myInputLd,
     MultipleBox,
     SingleBox
   },
   data() {
     return {
       vmI18n:$i18n,
+      storesItemdata: {
+        // colid: $store.state.forginkeys.columnIds.shop || '1700805184',
+        colid: '1700805184',
+        colname: 'CP_C_SHOP_ID', // 当前字段的名称
+        fkdisplay: 'drp', // 外键关联类型
+        isfk: true, // 是否有fk键
+        isnotnull: true, // 是否必填
+        name: $i18n.t('table_label.shopName'),
+        readonly: false, // 是否可编辑，对应input   readonly属性
+        isOneData: true,
+        valuedata: '', // 这个是选择的值
+        isObject: true
+      }, // 多选店仓信息
+      except_provincesItemdata: {
+        colid: '168686',
+        colname: 'CP_C_PROVINCE_IDS',
+        fkdisplay: 'mrp',
+        isfk: true,
+        isnotnull: false,
+        isuppercase: false,
+        name: $i18n.t('common.exclude_province'),
+        readonly: false,
+        reftable: 'CP_C_PROVINCE',
+        reftableid: 23862,
+        valuedata: ''
+      },
       my_input_sh: {
         itemdata: {
           col: 1,

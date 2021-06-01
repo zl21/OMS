@@ -18,7 +18,7 @@
         <Panel name="panel_commodityDimension">
           商品维度
           <p slot="content">
-            <businessForm :form-config="formConfig2" @keyDown="keyDown" />
+            <businessForm :form-config="formConfig2" @keyDown="keyDown" :key="fresh2"/>
           </p>
         </Panel>
       </Collapse>

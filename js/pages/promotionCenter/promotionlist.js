@@ -711,7 +711,7 @@ export default {
           $store.commit('customize/TabOpen', {
             id: -1, // id
             type: 'action', // 类型action
-            name: 'batchActivity', // 文件名
+            name: 'PM_C_PROM_ACTI_BATCH_ADD', // 文件名
             label: $i18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
             query: Object.assign({
               id: -1, // id
@@ -723,7 +723,7 @@ export default {
           $store.commit('customize/TabOpen', {
             id: -1, // id
             type: 'action', // 类型action
-            name: 'addOrEditActi', // 文件名
+            name: 'PM_C_PROM_ACTI', // 文件名
             label: $i18n.t('panel_label.addPromotion'), // 新增促销活动
             query: Object.assign({
               id: -1, // id
@@ -740,7 +740,7 @@ export default {
       $store.commit('customize/TabOpen', {
         id: -1, // id
         type: 'action', // 类型action
-        name: 'addOrEditActi', // 文件名
+        name: 'PM_C_PROM_ACTI', // 文件名
         label: $i18n.t('panel_label.addPromotion'), // 新增促销活动
         query: Object.assign({
           id: -1, // id
@@ -753,7 +753,7 @@ export default {
       $store.commit('customize/TabOpen', {
         id: -1, // id
         type: 'action', // 类型action
-        name: 'batchActivity', // 文件名
+        name: 'PM_C_PROM_ACTI_BATCH_ADD', // 文件名
         label: $i18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
         query: Object.assign({
           id: -1, // id
@@ -846,7 +846,7 @@ export default {
       $store.commit('customize/TabOpen', {
         id: -1, // id
         type: 'CUSTOMIZED', // 类型action
-        name: 'SIMULATION', // 文件名
+        name: 'PM_C_PROM_PRE_TEST', // 文件名
         label: $i18n.t('btn.simulation'), // 模拟仿真
         query: Object.assign({
           id: -1, // id
@@ -909,7 +909,7 @@ export default {
           $store.commit('customize/TabOpen', {
             id: ACTI_ID, // id
             type: 'action', // 类型action
-            name: 'batchActivity', // 文件名
+            name: 'PM_C_PROM_ACTI_BATCH_ADD', // 文件名
             label: $i18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
             query: Object.assign({
               id: ACTI_ID, // id
@@ -920,7 +920,7 @@ export default {
           $store.commit('customize/TabOpen', {
             id: ACTI_ID, // id
             type: 'action', // 类型action
-            name: 'addOrEditActi', // 文件名
+            name: 'PM_C_PROM_ACTI', // 文件名
             label: $i18n.t('panel_label.editPromotion'), // 编辑促销活动
             query: Object.assign({
               id: ACTI_ID, // id

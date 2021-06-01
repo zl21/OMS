@@ -5,6 +5,7 @@ import SingleBox from 'professionalComponents/singleBox.vue';
 import ButtonFkDialog from 'professionalComponents/buttonFkDialog.vue';
 import tabList from '@/assets/js/promotion/columns';
 import businessButton from 'professionalComponents/businessButton';
+import groups from '@/assets/js/promotion/groups';
 
 export default {
   data() {
@@ -420,7 +421,8 @@ export default {
       delete row._rowKey;
     }
   },
-  created() {
+  async created() {
+    await groups.load();
     this.initData();
   },
   mounted() {}

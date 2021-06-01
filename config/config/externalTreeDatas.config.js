@@ -3,78 +3,136 @@
 import service from '@/service/index';
 
 // paramObj is assigned a value but never used  no-unused-vars
-const tableNameList = {
-  // 供应商档案
-  CP_C_SUPPLIER: {
-    table: 'CP_C_SUPPLIER',
-    param: 'cpcsupplier',
-    api: 'cpCHrorgTree',
+const tableNameList = [
+  {
+    table: 'CP_C_HRORG', // 组织档案
+    center: 'userCenter',
+    api: 'hrorgTree',
+    json: {
+      tableName: 'CP_C_HRORG'
+    },
   },
-  // 内部组织
-  CP_C_INORG: {
-    table: 'CP_C_SUPPLIER',
-    param: 'inorg',
-    api: 'cpCHrorgTree',
+  {
+    table: 'ST_C_ORDER_WAREHOUSE', // 分仓规则
+    center: 'strategyPlatform',
+    api: 'strategyTree',
+    json: {
+      tableName: 'ST_C_ORDER_WAREHOUSE'
+    },
+    query: {
+      CP_C_SHOP_IDS: 'ID'
+    }
   },
-  // 伙伴组织
-  CP_C_OUTORG: {
-    table: 'CP_C_SUPPLIER',
-    param: 'outorg',
-    api: 'cpCHrorgTree',
+  {
+    table: 'PS_C_PRO_CLASSIFY', // 商品分类
+    center: 'commodityCenter',
+    api: 'queryClassifyTree'
   },
-  // 员工档案
-  CP_C_EMP: {
-    table: 'CP_C_SUPPLIER',
-    param: 'emp',
-    api: 'cpCHrorgTree',
+  {
+    table: 'ST_C_SYNC_STOCK_STRATEGY', // 同步店铺库存策略
+    center: 'strategyPlatform',
+    api: 'strategyTree',
+    json: {
+      tableName: 'ST_C_SYNC_STOCK_STRATEGY'
+    }
   },
-  // 用户档案
-  CP_C_HRUSERS: {
-    table: 'CP_C_SUPPLIER',
-    param: 'users',
-    api: 'cpCHrorgTree',
+  {
+    table: 'ST_C_SHOP_STRATEGY', // 店铺库存策略/店铺策略
+    center: 'strategyPlatform',
+    api: 'strategyTree',
+    json: {
+      tableName: 'ST_C_SHOP_STRATEGY'
+    }
   },
-  // 角色
-  CP_C_GROUPS: {
-    table: 'CP_C_SUPPLIER',
-    param: 'group',
-    api: 'cpCHrorgTree',
-  },
-  // 商品分类
-  PS_C_PRO_CLASSIFY: {
-    table: 'PS_C_PRO_CLASSIFY',
-    api: 'queryClassifyTree',
-  },
-  // 国家省市区
-  V_CP_C_REGION_ALIAS: {
-    table: 'PS_C_PRO_CLASSIFY',
+  {
+    table: 'V_CP_C_REGION_ALIAS', // 国家省市区
+    center: 'basicData',
     api: 'selectTree',
-    placeholder: '请输入',
-    query: {},
+    query: {
+      CP_C_REGION_ID: 'ID'
+    }
   },
-};
+  {
+    table: 'ST_C_VIPCOM_PROJECT', // 档期日程规划
+    center: 'strategyPlatform',
+    api: 'getScheduleTree',
+    query: {
+      CP_C_SHOP_ID: 'ID'
+    }
+  },
+  {
+    table: 'ST_C_ASSIGN_LOGISTICS', // 物流规则
+    center: 'strategyPlatform',
+    api: 'ST_C_ASSIGN_LOGISTICSselectTree',
+    query: {
+      CP_C_PHY_WAREHOUSE_ID: 'ID'
+    }
+  },
+  {
+    table: 'ST_C_WAREHOUSE_LOGISTICS_SET', // 仓库物流设置
+    center: 'strategyPlatform',
+    api: 'getLogisticsTree',
+    query: {
+      CP_C_PHY_WAREHOUSE_ID: 'ID'
+    }
+  },
+  {
+    table: 'ST_C_AUTO_AUDIT', // 审单策略
+    center: 'strategyPlatform',
+    json: { tableName: 'ST_C_AUTO_AUDIT' },
+    api: 'strategy',
+    query: {
+      CP_C_PHY_WAREHOUSE_ID: 'ID'
+    }
+  },
+  {
+    table: 'ST_C_MERGE_ORDER', // 合单策略
+    center: 'strategyPlatform',
+    json: { tableName: 'ST_C_MERGE_ORDER' },
+    api: 'mergeOrderTree',
+    query: {
+      CP_C_SHOP_IDS: 'ID'
+    }
+  },
+  {
+    table: 'ST_C_TMALL_EXCHANGE_ORDER', // 天猫换货策略
+    center: 'strategyPlatform',
+    api: 'tamallTree',
+    query: {
+      CP_C_SHOP_ID: 'ID'
+    }
+  },
+];
 
-let externalTreeDatasConfig = {};
-externalTreeDatasConfig = (() => {
-  for (const item in tableNameList) {
-    externalTreeDatasConfig = Object.assign(externalTreeDatasConfig, {
+let treeDataConfig = {};
+treeDataConfig = (() => {
+  tableNameList.forEach(item => {
+    if (!item.table) return;
+    treeDataConfig = Object.assign(treeDataConfig, {
       [item.table]: () => async () => {
         let data = [];
-        let formdata = new FormData();
-        formdata = item.param ? formdata.append('param', item.param) : '';
-        const res = await service.common[item.api](formdata);
-        data = res.data ? res.data : res.data.data;
+        let income;
+        if (item.formdata) {
+          let formdata = new FormData();
+          formdata = item.formdata ? formdata.append('param', item.formdata) : '';
+          income = formdata;
+        } else if (item.json) {
+          income = item.json ? item.json : {};
+        }
+        const res = await service[item.center][item.api](income);
+        data = res.data instanceof Array ? res.data : res.data.data;
         const treeData = {
           data,
-          name: 'ID',
+          name: item.name || 'ID',
           placeholder: item.placeholder || '请输入',
+          query: item.query || {},
+          searchData: item.searchData || {}
         };
-        if (item.query) treeData.query = item.query
         return treeData;
       }
     });
-  }
-  return externalTreeDatasConfig;
+  });
+  return treeDataConfig;
 })();
 
-export default externalTreeDatasConfig;
+export default treeDataConfig;
