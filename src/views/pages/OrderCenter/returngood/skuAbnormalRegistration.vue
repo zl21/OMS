@@ -40,12 +40,12 @@
                 >
                   <reForm :form-config="abnormalCategoriesFormConfig" />
                 </div>
-                <div
+                <!-- <div
                   slot="returnTypeItem"
                   class="returnType"
                 >
                   <reForm :form-config="returnTypeItemConfig" />
-                </div>
+                </div> -->
               </FormLayout>
             </p>
           </Panel>

@@ -77,6 +77,11 @@ export default {
   exportPayableAdjustment: params => network.post('/p/cs/exportPayableAdjustment', params),
   // 查询接口。共用于：financeCenter、orderCenter
   queryOrderList: params => network.post('/api/cs/oc/oms/v1/queryOrderList', params),
+  // sku异常登记
+  abnormalRegistration: params => network.post('/api/cs/oc/oms/v1/queryExceptionOrderItem', params),
+  getSmallClass: params => network.post('/api/cs/oc/oms/v1/querySmallClassException', params),
+  abnormalRegistrationAdd: params => network.post('/api/cs/oc/oms/v1/saveSkuExceptionRegister', params),
+  abnormalRegistrationInfo: params => network.post('/api/cs/oc/oms/v1/querySkuExceptionRegisterDetails', params),
 
   // 通用接口下载
   /**

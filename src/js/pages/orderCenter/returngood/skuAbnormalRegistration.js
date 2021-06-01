@@ -36,28 +36,19 @@ export default {
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.queryBounced();
-                this.$nextTick(() => {
-                  this.reForm.config.forEach((val, index) => {
-                    if (val.item.label === '单据来源') {
-                      this.reForm.config[index].item.props.value = '手动';
-                    } else if (val.item.label === '单据日期') {
-                      this.reForm.config[index].item.props.value = commonUtil.dateFormat(new Date(), 'yyyy-MM-dd');
-                    }
-                  });
-                });
               } // 按钮点击事件
             }
           ]
         },
         orderform: {
           formValue: {
-            bill_no: '',
+            BILL_NO: '',
           },
           formData: [
             {
               style: 'input',
               label: '零售发货单编号',
-              value: 'bill_no',
+              value: 'BILL_NO',
               width: '8',
               inputenter: () => this.queryBounced()
             }
@@ -66,39 +57,39 @@ export default {
         table: {
           columns: [
             {
-              key: 'SOURCE_CODE',
+              key: 'BILL_NO',
               title: '零售发货单编号'
             },
             {
-              key: 'ID',
+              key: 'CP_C_SHOP_TITLE',
               title: '下单店铺'
             },
             {
-              key: 'USER_NICK',
+              key: 'CP_C_LOGISTICS_ENAME',
               title: '发货物流'
             },
             {
-              key: 'ORDER_AMT',
+              key: 'CP_C_PHY_WAREHOUSE_ENAME',
               title: '发货仓库'
             },
             {
-              key: 'RECEIVER_NAME',
+              key: 'BUYER_NICK',
               title: '买家昵称'
             },
             {
-              key: 'RECEIVER_MOBILE',
+              key: 'PS_C_PRO_ECODE',
               title: '商品款号'
             },
             {
-              key: 'CP_C_PHY_WAREHOUSE_ENAME',
+              key: 'PS_C_SKU_ECODE',
               title: 'SKU'
             },
             {
-              key: "PLATFORM",
+              key: "SEND_QTY",
               title: "发货数量"
             },
             {
-              key: 'EXPRESSCODE',
+              key: 'SEND_AMT',
               title: '发货金额'
             }
           ], // 表头
@@ -167,6 +158,8 @@ export default {
                   // icon点击事件
                   const self = this;
                   self.order.modal = true;
+                  self.order.orderform.formValue.BILL_NO = '';
+                  self.order.table.data = [];
                 }
               }
             }
@@ -304,6 +297,7 @@ export default {
             item: {
               type: 'Input',
               label: '异常登记数量',
+              required: true,
               props: {
                 value: ''
               }
@@ -313,6 +307,7 @@ export default {
             item: {
               type: 'Input',
               label: '异常登记金额',
+              required: true,
               props: {
                 value: ''
               }
@@ -351,20 +346,21 @@ export default {
             item: {
               type: 'Select',
               label: '异常小类',
+              required: true,
               props: {
-                value: '1',
+                value: '',
                 options: []
               },
               event: {
                 'on-change': value => {
-                  this.sellerRemarkValueChange('payMode', value);
+                  // this.sellerRemarkValueChange('payMode', value);
                 }
               }
             }
           }
         ]
       },
-      reFormDataConfig: refundAfterShipment.reFormDataConfig,
+      // reFormDataConfig: refundAfterShipment.skuAbnormalRegistration,
       sellerRemarkData: {
         USER_NICK: '',
         VIP_PHONE: '',
@@ -389,19 +385,15 @@ export default {
               isfk: true,
               length: 100,
               name: "退货物流公司",
-              isnotnull: true,
+              isnotnull: false,
               reftable: 'V_CP_C_LOGISTICS_WAREHOUSE', // 对应的表
               reftableid: 249230554, // 对应的表ID
               pid: '', // 这个是选择的id
               valuedata: ''
             },
             oneObj: data => {
-              this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ID = data.pid;
-              this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ENAME = data.valuedata;
-              if (data.pid) {
-                this.returnTypeChange();
-                this.sellerRemarkValueChange('returnType', data.valuedata);
-              }
+              this.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ID = data.pid;
+              this.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ENAME = data.valuedata;
             },
             InputEnter: () => {}
           }
@@ -429,76 +421,37 @@ export default {
               valuedata: ''
             },
             oneObj: data => {
-              this.abnormalCategoriesFormConfig.formValue.OC_B_RETURN_TYPE_ID = data.pid;
-              this.abnormalCategoriesFormConfig.formValue.OC_B_RETURN_TYPE_ENAME = data.valuedata;
+              this.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_ID = data.pid;
+              this.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_ENAME = data.valuedata;
               if (data.pid) {
-                this.returnTypeChange();
-                this.sellerRemarkValueChange('returnType', data.valuedata);
+                this.getSmallClass(data.pid);
+                // this.sellerRemarkValueChange('returnType', data.valuedata);
               }
             },
             InputEnter: () => {}
           }
         ]
       },
-      returnTypeItemConfig: {
-        formValue: {},
-        formData: [
-          {
-            style: 'select', // 下拉框类型
-            label: window.vmI18n.t('form_label.refundDescription'), // 退款描述
-            width: '24', // 所占宽度宽度
-            value: 'OC_B_RETURN_TYPE_ITEM_ID', // 输入框的值
-            // clearable: true, //下拉选中是否显示清空按钮,默认为false
-            options: []
-          }
-        ],
-        ruleValidate: {
-          OC_B_RETURN_TYPE_ITEM_ID: [{ required: true, message: ' ', trigger: 'blur' }]
-        }
-      },
       btnConfig: {
         typeAll: 'error',
         buttons: [
           {
             text: window.vmI18n.t('btn.save'), // 保存
-            // class: 'save',
-            // icon: 'md-download',
             btnclick: () => {
               this.save();
             }
           },
           {
             text: window.vmI18n.t('btn.back'), // 返回
-            // class: 'cancel',
-            // icon: 'md-arrow-round-back',
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
-              if (this.$route.params.customizedModuleName === 'EXTRAREFUND') {
-                R3.store.commit('global/tabOpen', {
-                  type: 'S',
-                  tableId: 249230545,
-                  tableName: 'OC_B_RETURN_AF_SEND_MANUAL',
-                  back: true,
-                  label: window.vmI18n.t('btn.additionalRefund') // 额外退款
-                });
-              } else if (this.$route.query.fromOrder === 'true') {
-                // 返回零售发货单详情
-                R3.store.commit('global/tabOpen', {
-                  type: 'C',
-                  customizedModuleName: 'ORDERMANAGEDETAIL',
-                  customizedModuleId: this.$route.query.oid,
-                  label: this.vmI18n.t('panel_label.retailInvoice_details'),
-                  dynamicRoutingForCustomizePage: true
-                });
-              } else {
-                R3.store.commit('global/tabOpen', {
-                  type: 'S',
-                  tableId: 249130393,
-                  tableName: 'OC_B_RETURN_AF_SEND',
-                  back: true,
-                  label: window.vmI18n.t('form_label.refundNoteDelivered') // 已发货退款单
-                });
-              }
+              R3.store.commit('global/tabOpen', {
+                type: 'S',
+                tableId: 249230831,
+                tableName: 'OC_B_SKU_EXCEPTION_REGISTER',
+                label: 'sku异常登记',
+                back: true
+              });
               // 销毁当前实例
               this.$destroy();
             }
@@ -507,75 +460,18 @@ export default {
       },
       auditBtn: {
         text: window.vmI18n.t('btn.audit'), // 审核
-        // class: 'save',
-        // icon: 'md-download',
         disabled: this.$route.params.customizedModuleId === 'New',
         btnclick: () => {
           this.audit();
         }
       },
-      navStatus: 0,
       logFormConfig: refundAfterShipment.logFormConfig,
-      logTableConfig: {
-        tableName: this.$route.params.customizedModuleName,
-        id: this.$route.params.customizedModuleId
-      },
-      createdStatus: !!this.$route.query.new, // 页面数据是否初始化完成
-      sellerRemarkDataCreated: !!this.$route.query.new,
-      selectOptions: {
-        payType: []
-      }
     };
   },
   mounted() {
-    // this.handleAuditBtnDisplay();
-    // const customizeMessage = sessionStorage.getItem('customizeMessage');
-    // if (customizeMessage) {
-    //   this.sessionStorageData = JSON.parse(customizeMessage)[this.$route.params.customizedModuleId == '41460334' ? 'undefined' : this.$route.params.customizedModuleId];
-    // }
-    // // if (this.$route.query.id && !this.$route.query.new) {
-    // // eslint-disable-next-line no-mixed-operators
-    // if ((this.sessionStorageData && this.sessionStorageData.standardTableurlCustomized) || (this.sessionStorageData && this.sessionStorageData.standardCustomizeButton)) {
-    //   // 已发货退款单详情跳转
-    //   this.reForm.config.splice(14, 0, {
-    //     item: {
-    //       type: 'Input',
-    //       label: window.vmI18n.t('form_label.actualRefundAmount'), // 实际退款金额
-    //       props: {
-    //         value: '',
-    //         disabled: this.$route.params.customizedModuleName === 'REFUNDAFTERSHIPMENT'
-    //       },
-    //       event: {}
-    //     }
-    //   });
-    //   this.query();
-    // } else if (this.$route.query.fromOrder) {
-    //   // 该类型从订单详情跳转过来的查询方式
-    //   this.queryBounced(this.$route.query.oid);
-    //   this.$nextTick(() => {
-    //     this.reForm.config.forEach((val, index) => {
-    //       if (val.item.label === '单据来源') {
-    //         this.reForm.config[index].item.props.value = '手动';
-    //       } else if (val.item.label === '单据日期') {
-    //         this.reForm.config[index].item.props.value = commonUtil.dateFormat(new Date(), 'yyyy-MM-dd');
-    //       }
-    //     });
-    //   });
-    // } else {
-    //   this.$nextTick(() => {
-    //     this.reForm.config.forEach((val, index) => {
-    //       if (val.item.label === '单据来源') {
-    //         this.reForm.config[index].item.props.value = '手动';
-    //       } else if (val.item.label === '单据日期') {
-    //         this.reForm.config[index].item.props.value = commonUtil.dateFormat(new Date(), 'yyyy-MM-dd');
-    //       }
-    //     });
-    //   });
-    // }
-    // if (this.$route.params.customizedModuleId !== 'New') {
-    //   this.logTableInfo();
-    // }
-    // this.getDownUp();
+    if (this.$route.params.customizedModuleId !== 'New') {
+      this.query()
+    }
 
     setTimeout(()=> {
       const dom = document.getElementsByClassName('ark-input ark-input-default')
@@ -583,26 +479,286 @@ export default {
     }, 500)
   },
   methods: {
-    // 确定原始订单编号
-    queryorder(listData, isEnter) {
-      const _this = this;
-      if (isEnter) {
-        _this.fromOrder(listData, true);
-      } else {
-        _this.onSelectData = _this.selectData;
-        if (JSON.stringify(_this.onSelectData) == '{}') {
-          _this.$Message.warning(window.vmI18n.t('modalTips.i7')); // 请选择一条数据！
-          return;
+    // 详情 复制查询方法
+    query() {
+      const self = this;
+      const ID = self.$route.params.customizedModuleId;
+      const query = { ID: ID === 'New' ? '-1' : ID };
+      self.service.common.abnormalRegistrationInfo(query).then(res => {
+        if (res.data.code == 0) {
+          const resData = res.data.data;
+          self.getSmallClass(resData.OC_B_LARGE_CLASS_EXCEPTION_ID)
+          // this.RETURN_STATUS = AfSend.RETURN_STATUS;
+
+          // self.onSelectData['ID'] = res.data.data.AfSend.ID
+          self.setDetailForm(resData);
+          self.logFormConfig.formValue = {
+            OWNERENAME: resData.OWNERNAME,
+            CREATIONDATE: resData.CREATIONDATE && commonUtil.dateFormat(new Date(resData.CREATIONDATE), 'yyyy-MM-dd hh:mm:ss'),
+            MODIFIERENAME: resData.MODIFIERENAME || resData.MODIFIERNAME,
+            MODIFIEDDATE: resData.MODIFIEDDATE && commonUtil.dateFormat(new Date(resData.MODIFIEDDATE), 'yyyy-MM-dd hh:mm:ss')
+          };
+          self.onSelectData = resData;
+        } else {
+          self.$Message.error(res.data.message);
         }
-        // const QUERYORDERITEMRESULTLIST = _this.onSelectData.QUERYORDERITEMRESULTLIST;
-        // _this.onSelectData.QUERYORDERITEMRESULTLIST = _this.filter(QUERYORDERITEMRESULTLIST);
-        _this.setForm(_this.onSelectData);
+      });
+    },
+
+    setDetailForm(data) {
+      const self = this;
+      self.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ID = data.RETURN_CP_C_LOGISTICS_ID;
+      self.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_ID = data.OC_B_LARGE_CLASS_EXCEPTION_ID;
+      self.reForm.config.forEach(async item => {
+        switch (item.item.label) {
+          case '买家昵称':
+            item.item.props.value = data.BUYER_NICK;
+            break
+          case '订单编号':
+            item.item.props.value = data.BILL_NO
+            break
+          case '原始平台单号':
+            item.item.props.value = data.SOURCE_CODE
+            break
+          case '子订单编号':
+            item.item.props.value = data.OC_B_ORDER_ITEM_ID
+            break
+          case '下单店铺':
+            item.item.props.value = data.CP_C_SHOP_TITLE
+            break
+          case '发货时间':
+            item.item.props.value = data.SEND_TIME
+            break
+          case '发货物流公司':
+            item.item.props.value = data.CP_C_LOGISTICS_ENAME
+            break
+          case '商品款号':
+            item.item.props.value = data.PS_C_PRO_ECODE
+            break
+          case '发货仓库':
+            item.item.props.value = data.CP_C_PHY_WAREHOUSE_ENAME
+            break
+          case '发货物流单号':
+            item.item.props.value = data.LOGISTIC_NUMBER
+            break
+          case 'SKU':
+            item.item.props.value = data.PS_C_SKU_ECODE
+            break
+          case '发货数量':
+            item.item.props.value = data.SEND_QTY
+            break
+          case '发货金额':
+            item.item.props.value = data.SEND_AMT
+            break
+
+          case '退货物流单号':
+            item.item.props.value = data.RETURN_LOGISTIC_NUMBER;
+            break
+          case '异常登记数量':
+            item.item.props.value = data.EXCEPTION_QTY;
+            break
+          case '异常登记金额':
+            item.item.props.value = data.EXCEPTION_AMT;
+            break
+          case '备注':
+            item.item.props.value = data.REMARK;
+            break
+          case '异常小类':
+            item.item.props.value = data.OC_B_SMALL_CLASS_EXCEPTION_ID;
+            break
+          default:
+            break
+        }
+      });
+      // this.sellerRemarkValueChange('originalOrder', data);
+      self.imageUploadConfig.valuedata = data.IMAGE ? JSON.parse(data.IMAGE) : [];
+      self.IMAGE = self.imageUploadConfig.valuedata;
+    },
+    save() {
+      const self = this;
+      const flag = self.isNull();
+      if (flag !== '') {
+        self.$Message.warning(`${flag},${self.vmI18n.t('modalTips.y1')}`);
+        return;
       }
+      const y = this.reForm.config.find(item => item.item.label == '备注' && item.item.props.value.length > 100);
+      if (y) return self.$Message.warning(`备注不能大于100个字符！`);
+      const y1 = this.reForm.config.find(item => item.item.label == '异常登记数量' && !/^[1-9]\d*$/.test(item.item.props.value));
+      if (y1) return self.$Message.warning(`异常登记数量需要为大于0的正整数！`);
+      const y2 = this.reForm.config.find(item => item.item.label == '异常登记金额' && !/^([1-9]\d*(\.\d{1,2})?|([0](\.([0][1-9]|[1-9]\d{0,1}))))$/.test(item.item.props.value));
+      if (y2) return self.$Message.warning(`异常登记金额需要为大于0切保留两位小数！`);
+      
+      const data = {};
+      data.objId = self.$route.params.customizedModuleId === 'New' || self.$route.query.cid || self.$route.query.oid ? -1 : self.$route.params.customizedModuleId;
+      const AfSend = self.getForm();
+      AfSend.ID = self.$route.query.cid || self.$route.params.customizedModuleId === 'New' ? '-1' : self.$route.params.customizedModuleId;
+      AfSend.RETURN_CP_C_LOGISTICS_ID = this.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ID ? this.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ID : '';
+      AfSend.OC_B_LARGE_CLASS_EXCEPTION_ID = this.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_ID;
+      AfSend.IMAGE = JSON.stringify(this.IMAGE);
+
+      self.reForm.config.map(item => {
+        switch (item.item.label) {
+          case '退货物流单号':
+            AfSend.RETURN_LOGISTIC_NUMBER = item.item.props.value;
+            break
+          case '异常登记数量':
+            AfSend.EXCEPTION_QTY = item.item.props.value;
+            break
+          case '异常登记金额':
+            AfSend.EXCEPTION_AMT = item.item.props.value;
+            break
+          case '备注':
+            AfSend.REMARK = item.item.props.value;
+            break
+          case '异常小类':
+            AfSend.OC_B_SMALL_CLASS_EXCEPTION_ID = item.item.props.value;
+            break
+          default:
+            break
+        }
+      })
+      data.OC_B_SKU_EXCEPTION_REGISTER = AfSend;
+      console.log(data)
+      this.service.common.abnormalRegistrationAdd(data).then(res => {
+        if (res.data.code == 0) {
+          self.$Message.success(res.data.message);
+          comUtils.tabCloseAppoint(this);
+          R3.store.commit('global/tabOpen', {
+            type: 'S',
+            tableId: 249230831,
+            tableName: 'OC_B_SKU_EXCEPTION_REGISTER',
+            label: 'sku异常登记'
+          });
+          // 销毁当前实例
+          this.$destroy();
+        } else {
+          self.$Message.error(res.data.message || '保存出错');
+        }
+      });
+    },
+    getForm() {
+      // 保存获取主表数据
+      const self = this;
+      const AfSend = {};
+      AfSend.BILL_NO = self.onSelectData.BILL_NO;
+      AfSend.BUYER_NICK = self.onSelectData.BUYER_NICK;
+      AfSend.CP_C_LOGISTICS_ENAME = self.onSelectData.CP_C_LOGISTICS_ENAME; // 物流公司名称
+      AfSend.CP_C_LOGISTICS_ECODE = self.onSelectData.CP_C_LOGISTICS_ECODE; // 物流公司编码
+      AfSend.CP_C_LOGISTICS_ID = self.onSelectData.CP_C_LOGISTICS_ID; // 物流公司ID
+      AfSend.CP_C_PHY_WAREHOUSE_ENAME = self.onSelectData.CP_C_PHY_WAREHOUSE_ENAME; //  发货仓名称
+      AfSend.CP_C_PHY_WAREHOUSE_ECODE = self.onSelectData.CP_C_PHY_WAREHOUSE_ECODE; //  发货仓编码
+      AfSend.CP_C_PHY_WAREHOUSE_ID = self.onSelectData.CP_C_PHY_WAREHOUSE_ID; // 发货仓ID
+      AfSend.CP_C_SHOP_TITLE = self.onSelectData.CP_C_SHOP_TITLE; // 店铺name
+      AfSend.CP_C_SHOP_ECODE = self.onSelectData.CP_C_SHOP_ECODE; // 店铺code
+      AfSend.CP_C_SHOP_ID = self.onSelectData.CP_C_SHOP_ID; // 店铺ID
+      AfSend.OC_B_ORDER_ID = self.onSelectData.OC_B_ORDER_ID;
+      AfSend.OC_B_ORDER_ITEM_ID = self.onSelectData.OC_B_ORDER_ITEM_ID;
+      AfSend.PS_C_PRO_ECODE = self.onSelectData.PS_C_PRO_ECODE;
+      AfSend.PS_C_SKU_ECODE = self.onSelectData.PS_C_SKU_ECODE;
+      AfSend.PS_C_SKU_ID = self.onSelectData.PS_C_SKU_ID;
+      AfSend.SEND_AMT = self.onSelectData.SEND_AMT;
+      AfSend.SEND_QTY = self.onSelectData.SEND_QTY;
+      AfSend.SEND_TIME = self.onSelectData.SEND_TIME;
+      AfSend.SOURCE_CODE = self.onSelectData.SOURCE_CODE;
+      return AfSend;
+    },
+    isNull() {
+      let flag = this.reForm.config.find(item => item.item.required && !item.item.props.value);
+      // 退货物流公司必填校验
+      if (!flag) {
+        if (
+          // 异常大类
+          !this.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_ID
+        ) {
+          flag = {
+            item: { label: `异常大类` }
+          };
+        }
+      }
+      return `${flag ? flag.item.label : ''}`;
+    },
+    getSmallClass(id) {
+      const self = this;
+      self.reForm.config.map(item => {
+        if (item.item.label == '异常小类') item.item.props.value = ''
+      })
+      this.service.common
+      .getSmallClass({OC_B_LARGE_CLASS_EXCEPTION_ID: id})
+      .then(res => {
+        if (res.data.code === 0) {
+          self.reForm.config.map(item => {
+            if (item.item.label == '异常小类') {
+              const arr = [];
+              res.data.data.forEach(item => {
+                arr.push({
+                  label: item.ENAME,
+                  value: item.OC_B_LARGE_CLASS_EXCEPTION_ID
+                })
+              })
+              item.item.props.options = arr;
+            }
+          })
+        }
+      })
+    },
+    // 确定原始订单编号
+    queryorder() {
+      const _this = this;
+      _this.onSelectData = _this.selectData;
+      if (JSON.stringify(_this.onSelectData) == '{}') {
+        _this.$Message.warning(window.vmI18n.t('modalTips.i7')); // 请选择一条数据！
+        return;
+      }
+      _this.setForm(_this.onSelectData);
     },
     // 赋值表单数据
     setForm(data) {
       const self = this;
-      self.isOne = false;
+      self.reForm.config.map(item => {
+        switch (item.item.label) {
+          case '买家昵称':
+            item.item.props.value = data.BUYER_NICK;
+            break
+          case '订单编号':
+            item.item.props.value = data.BILL_NO
+            break
+          case '原始平台单号':
+            item.item.props.value = data.SOURCE_CODE
+            break
+          case '子订单编号':
+            item.item.props.value = data.OC_B_ORDER_ITEM_ID
+            break
+          case '下单店铺':
+            item.item.props.value = data.CP_C_SHOP_TITLE
+            break
+          case '发货时间':
+            item.item.props.value = data.SEND_TIME
+            break
+          case '发货物流公司':
+            item.item.props.value = data.CP_C_LOGISTICS_ENAME
+            break
+          case '商品款号':
+            item.item.props.value = data.PS_C_PRO_ECODE
+            break
+          case '发货仓库':
+            item.item.props.value = data.CP_C_PHY_WAREHOUSE_ENAME
+            break
+          case '发货物流单号':
+            item.item.props.value = data.LOGISTIC_NUMBER
+            break
+          case 'SKU':
+            item.item.props.value = data.PS_C_SKU_ECODE
+            break
+          case '发货数量':
+            item.item.props.value = data.SEND_QTY
+            break
+          case '发货金额':
+            item.item.props.value = data.SEND_AMT
+            break
+          default:
+            break
+        }
+      })
     },
     // 取消
     querycancel() {},
@@ -614,96 +770,22 @@ export default {
       //  获取页面数据
       const _this = this;
       const lists = _this.order.orderform.formValue;
-      // if (
-      //   (lists.bill_no == "" || lists.bill_no == undefined) &&
-      //   (lists.source_code == "" || lists.source_code == undefined) &&
-      //   (lists.receiver_name == "" || lists.receiver_name == undefined) &&
-      //   (lists.user_nick == "" || lists.user_nick == undefined) &&
-      //   (lists.receiver_mobile == "" || lists.receiver_mobile == undefined) &&
-      //   (lists.cp_c_store_ename == "" || lists.cp_c_store_ename == undefined) &&
-      //   num == undefined
-      // ) {
-      //   _this.$Message.error("请输入查询条件！");
-      //   return;
-      // }
-      if (!lists.bill_no && !lists.source_code && !lists.receiver_name && !lists.user_nick && !lists.receiver_mobile && !lists.cp_c_store_ename && num === undefined) {
-        _this.$Message.error(_this.vmI18n.t('modalTips.i8')); // 请输入查询条件！
+      if (!lists.BILL_NO) {
+        _this.$Message.error("请输入查询条件！");
         return;
       }
       _this.order.table.loading = true;
-      const fromdata = new FormData();
       const param = {
-        page: {
-          pageSize: '500',
-          pageNum: '1'
-        },
-        highSearch: [
-          {
-            type: 'Select',
-            queryName: 'ID',
-            value: lists.bill_no
-          },
-          {
-            type: 'Input',
-            queryName: 'SOURCE_CODE',
-            value: lists.source_code
-          },
-          {
-            type: 'Input',
-            queryName: 'RECEIVER_NAME',
-            value: lists.receiver_name
-          },
-          {
-            type: 'Input',
-            queryName: 'USER_NICK',
-            value: lists.user_nick
-          },
-          {
-            type: 'Input',
-            queryName: 'RECEIVER_MOBILE',
-            value: lists.receiver_mobile
-          },
-          {
-            type: 'Select',
-            queryName: 'CP_C_SHOP_ID',
-            value: lists.cp_c_store_id
-          },
-          {
-            type: 'Select',
-            queryName: 'ID',
-            value: num
-          },
-          {
-            type: 'Select',
-            queryName: 'ORDER_STATUS',
-            value: '1,2,3,4,5,6,9,10,11,12,13,21,51,52'
-          }
-        ]
+        BILL_NO: lists.BILL_NO
       };
-      fromdata.append('param', JSON.stringify(param));
       this.service.common
-        .queryOrderList(fromdata)
+        .abnormalRegistration(param)
         .then(res => {
-          const query = _this.$route.query;
+          _this.order.table.loading = false;
           if (res.data.data) {
-            res.data.data.queryOrderResultList.forEach(item => {
-              item.USER_NICK = `${item.USER_NICK}(${item.CP_C_SHOP_TITLE})`;
-            });
-            _this.order.table.data = res.data.data.queryOrderResultList;
+            _this.order.table.data = res.data.data;
           } else {
             _this.order.table.data = [];
-          }
-          if (num) {
-            _this.queryorder(_this.order.table.data, true);
-          }
-          _this.order.table.loading = false;
-          // 当订单详情跳转过来时执行
-          if (query.oid && query.fromOrder) {
-            this.$nextTick(() => {
-              setTimeout(() => {
-                this.createdStatus = true;
-              }, 100);
-            });
           }
         })
         .catch(() => {
