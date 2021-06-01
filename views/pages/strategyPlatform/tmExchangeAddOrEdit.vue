@@ -66,6 +66,7 @@
                   v-model="rowData.value.OOS_AUTO_REJECT_REASON_ID"
                   @on-change="(val) => rowData.item.selectChange(val)"
                   :disabled="isEnable"
+                  label-in-value
                   style="width: 150px;">
                   <Option
                     v-for="item in rowData.item.options"
@@ -110,6 +111,7 @@
                   v-model="rowData.value.DEVIATION_AUTO_REJECT_REASON_ID"
                   @on-change="(e) => rowData.item.selectChange(e)"
                   :disabled="isEnable"
+                  label-in-value
                   style="width: 150px;">
                   <Option
                     v-for="item in rowData.item.options"

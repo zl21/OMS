@@ -534,6 +534,7 @@ R3.launchApplication({
 | v1.5.3 | 更新版本号 |
 | v1.5.4 | hold 策略新增修改label |
 | v1.5.5 | 天猫换货策略 |
+| v1.5.8 | 天猫换货策略表单校验 |
 
 
 #### Extends-Api 版本说明
