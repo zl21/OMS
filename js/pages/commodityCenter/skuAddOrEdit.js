@@ -278,6 +278,7 @@ export default {
           },
           clearInput: () => {
             this.formConfig.formValue.PS_C_SPECOBJ1_ID = '';
+            this.masterModifyData('PS_C_SPECOBJ1_ID', 'master');
           },
           popShow: () => {
             const self = this;
@@ -304,6 +305,7 @@ export default {
           },
           clearInput: () => {
             this.formConfig.formValue.PS_C_SPECOBJ2_ID = '';
+            this.masterModifyData('PS_C_SPECOBJ2_ID', 'master');
           },
           popShow: () => {
             const self = this;
@@ -330,6 +332,7 @@ export default {
           },
           clearInput: () => {
             this.formConfig.formValue.PS_C_SPECOBJ3_ID = '';
+            this.masterModifyData('PS_C_SPECOBJ3_ID', 'master');
           },
           popShow: () => {
             const self = this;
@@ -657,11 +660,15 @@ export default {
       /* =========== 保存校验 end =========== */
       let EXTRA = [];
       let PsSku = self.modify.master;
+      const speArr = ['PS_C_SPECOBJ1_ID', 'PS_C_SPECOBJ2_ID', 'PS_C_SPECOBJ3_ID'];
       PsSku.IMAGE = JSON.stringify(self.modify.master.IMAGE);
       for (const key in PsSku) {
         // 字段是空字符串时不传
         if (PsSku[key] == '') {
           delete PsSku[key];
+        }
+        if (speArr.includes(key)) {
+          PsSku[key] = PsSku[key] ?? 0;
         }
       }
       for (const key in self.modify.exAttr) {

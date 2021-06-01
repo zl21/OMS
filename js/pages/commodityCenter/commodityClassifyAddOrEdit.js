@@ -531,6 +531,12 @@ export default {
       }
       /* =========== 保存校验 end =========== */
       const PsCProClassify = self.modify.master;
+      const speArr = ['PS_C_SPEC_GROUP_ID1', 'PS_C_SPEC_GROUP_ID2', 'PS_C_SPEC_GROUP_ID3'];
+      for (const key in PsCProClassify) {
+        if (speArr.includes(key)) {
+          PsCProClassify[key] = PsCProClassify[key] ?? 0;
+        }
+      }
       PsCProClassify.OPEN_DIMENSION = self.formConfig2.formValue.OPEN_DIMENSION_String; // 默认不开启二维
       PsCProClassify.DIMENSION = self.formConfig2.formValue.DIMENSION ? self.formConfig2.formValue.DIMENSION.toString() : '2'; // 默认规格维度二维
       const Items = self.cusAttrConfig.addData;
