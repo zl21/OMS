@@ -12,6 +12,7 @@ import memberCenter from './modules/memberCenter';
 import reportCenter from './modules/reportCenter';
 import systemConfig from './modules/systemConfig';
 import basicData from './modules/basicData';
+import userCenter from './modules/userCenter';
 
 const allServices = {
   common, // 公共
@@ -27,6 +28,7 @@ const allServices = {
   reportCenter, // 报表中心
   systemConfig, // 系统配置
   basicData, // 基础数据
+  userCenter,
 };
 
 export default allServices;
