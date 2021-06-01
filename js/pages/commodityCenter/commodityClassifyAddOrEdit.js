@@ -18,6 +18,7 @@ export default {
   data() {
     return {
       vmI18n:$i18n,
+      fresh2: 0,
       subTableConfig: {},
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       loading: false,
@@ -91,24 +92,13 @@ export default {
           style: 'popInput', // 输入框弹框单多选
           width: '6',
           itemdata: {
-            col: 1,
             colid: 165858, // 当前字段的ID
             colname: 'PARENT_ID', // 当前字段的名称
-            datelimit: 'all',
-            display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
             fkdisplay: 'drp', // 外键关联类型
-            inputname: 'PARENT_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
             isfk: true, // 是否有fk键
             isnotnull: false, // 是否必填
-            isuppercase: false, // 是否转大写
-            length: 65535, // 最大长度是多少
             name: '父类', // 赔付类型
             readonly: false, // 是否可编辑，对应input   readonly属性
-            reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
-            reftableid: 10091, // 对应的表ID
-            row: 1,
-            statsize: -1,
-            type: 'STRING', // 这个是后台用的
             valuedata: '', // 这个是选择的值
             pid: '',
           },
@@ -206,34 +196,23 @@ export default {
           {
             version: '1.4',
             colname: 'PS_C_SPEC_GROUP_ENAME1',
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '6',
             itemdata: {
-              col: 1,
               colid: 168758, // 当前字段的ID
               colname: 'PS_C_SPEC_GROUP_ID1', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              inputname: 'PS_C_SPEC_GROUP_ID1:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
               name: '规格名称一', // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'PS_C_SPECGROUP', // 对应的表
-              reftableid: 10377, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
               valuedata: '', // 这个是选择的值
               pid: '',
             },
             oneObj: (val) => {
               // 选中触发事件
               console.log('val::', val);
-              if (!val.pid) return;
+              // if (!val.pid) return;
               this.formConfig2.formValue.PS_C_SPEC_GROUP_ID1 = val.pid;
               this.masterModifyData('PS_C_SPEC_GROUP_ID1', 'master', 'formConfig2');
             },
@@ -241,34 +220,23 @@ export default {
           {
             version: '1.4',
             colname: 'PS_C_SPEC_GROUP_ENAME2',
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '6',
             itemdata: {
-              col: 1,
               colid: 168757, // 当前字段的ID
               colname: 'PS_C_SPEC_GROUP_ID2', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              inputname: 'PS_C_SPEC_GROUP_ID2:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
               name: '规格名称二', // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'PS_C_SPECGROUP', // 对应的表
-              reftableid: 10377, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
               valuedata: '', // 这个是选择的值
               pid: '',
             },
             oneObj: (val) => {
               // 选中触发事件
               console.log('val::', val);
-              if (!val.pid) return;
+              // if (!val.pid) return;
               this.formConfig2.formValue.PS_C_SPEC_GROUP_ID2 = val.pid;
               this.masterModifyData('PS_C_SPEC_GROUP_ID2', 'master', 'formConfig2');
             },
@@ -280,31 +248,20 @@ export default {
             style: null,
             width: '6',
             itemdata: {
-              col: 1,
               colid: 168859, // 当前字段的ID
               colname: 'PS_C_SPEC_GROUP_ID3', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              inputname: 'PS_C_SPEC_GROUP_ID3:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
               name: '规格名称三', // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'PS_C_SPECGROUP', // 对应的表
-              reftableid: 10377, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
               valuedata: '', // 这个是选择的值
               pid: '',
             },
             oneObj: (val) => {
               // 选中触发事件
               console.log('val::', val);
-              if (!val.pid) return;
+              // if (!val.pid) return;
               this.formConfig2.formValue.PS_C_SPEC_GROUP_ID3 = val.pid;
               this.masterModifyData('PS_C_SPEC_GROUP_ID3', 'master', 'formConfig2');
             },
@@ -468,6 +425,11 @@ export default {
         self.formConfig = this.$OMS2.omsUtils.transformForm(data.PsCProClassify, self.formConfig, inputArr, drpArr);
         self.formConfig2 = this.$OMS2.omsUtils.transformForm(data.PsCProClassify, self.formConfig2, inputArr2, drpArr2);
         self.cusAttrConfig.data = data.PsCProClassifyItems;
+        // 特别地（规格名称赋值）
+        const specialObj = {'PS_C_SPEC_GROUP_ENAME1':'PS_C_SPEC_GROUP_ID1', 'PS_C_SPEC_GROUP_ENAME2':'PS_C_SPEC_GROUP_ID2', 'PS_C_SPEC_GROUP_ENAME3':'PS_C_SPEC_GROUP_ID2'};
+        for (const key in specialObj) {
+          this.formConfig2.formData.find(it => it.colname == key).itemdata.pid = data.PsCProClassify[specialObj[key]] ? data.PsCProClassify[specialObj[key]] : '';
+        }
         // 特别地
         self.formConfig2.formValue.OPEN_DIMENSION_String = self.formConfig2.formValue.OPEN_DIMENSION;
         self.watchChange = false;
@@ -477,6 +439,7 @@ export default {
         }
         self.changeSpec((data.PsCProClassify.DIMENSION = data.PsCProClassify.DIMENSION || 2));
         self.watchChange = true;
+        this.fresh2 += 1;
       }
       if (id > 0) {
         self.formConfig.formData.find((it) => it.colname == 'ECODE').disabled = true;
@@ -561,20 +524,6 @@ export default {
       if (!masterArr.length && !self.saveable) return false;
       const valueArr = ['ECODE', 'ENAME'];
       const drpArr = [];
-      /* const val = this.formConfig.formValue.DIMENSION;
-      switch (val) {
-        case 1:
-          drpArr.push('PS_C_SPEC_GROUP_ENAME1');
-          break;
-        case 2:
-          drpArr.push('PS_C_SPEC_GROUP_ENAME1', 'PS_C_SPEC_GROUP_ENAME2');
-          break;
-        case 3:
-          drpArr.push('PS_C_SPEC_GROUP_ENAME1', 'PS_C_SPEC_GROUP_ENAME2', 'PS_C_SPEC_GROUP_ENAME3');
-          break;
-        default:
-          break;
-      } */
       const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes) {
         this.$message.error(mes);
@@ -583,7 +532,7 @@ export default {
       /* =========== 保存校验 end =========== */
       const PsCProClassify = self.modify.master;
       PsCProClassify.OPEN_DIMENSION = self.formConfig2.formValue.OPEN_DIMENSION_String; // 默认不开启二维
-      PsCProClassify.DIMENSION = self.formConfig2.formValue.DIMENSION.toString(); // 默认规格维度二维
+      PsCProClassify.DIMENSION = self.formConfig2.formValue.DIMENSION ? self.formConfig2.formValue.DIMENSION.toString() : '2'; // 默认规格维度二维
       const Items = self.cusAttrConfig.addData;
       const param = {
         OBJID: this.ID,
@@ -701,7 +650,7 @@ export default {
         if (beforeArr.includes(item.colname)) {
           item.itemdata.readonly = false;
           // item.itemdata.isnotnull = true;
-          item.style = 'popInput';
+          item.style = 'popInputPlus';
         }
         if (afterArr.includes(item.colname)) {
           item.itemdata.readonly = true;
