@@ -2,113 +2,23 @@ import businessLabel from 'professionalComponents/businessLabel';
 import businessButton from 'professionalComponents/businessButton';
 import errorMessage from 'framework/components/tablelist/error.vue';
 import Mydialog from 'framework/components/dialog/mydialog.vue';
-import TableInput from 'framework/components/element/input';
 import aTable from 'professionalComponents/agGridTable.vue';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dialogVisible from '@/views/modal/promotionCenter/setGroup';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import loading from 'professionalComponents/loading';
 import groups from '@/assets/js/promotion/groups';
+import businessForm from 'professionalComponents/businessForm';
+import dateUtil from '@/assets/js/__utils__/date.js';
+import { baseColumnDefs, logDataCol, diStatusArr } from './promotionConfig.js'
 
-const baseColumnDefs = [
-  {
-    headerName: '序号',
-    // headerName: vmI18n.t("table_label.serialNo"),
-    field: 'SERIAL_NO',
-    pinned: 'left',
-    maxWidth: 120,
-    headerCheckboxSelection: true,
-    checkboxSelection: true,
-    sort: 'asc',
-    suppressMovable: true
-  },
-  {
-    headerName: '促销编号',
-    // headerName: vmI18n.t("table_label.serialNo"),
-    field: 'ACTI_NO'
-  },
-  {
-    headerName: '活动名称',
-    // headerName: vmI18n.t("form_label.activityName"),
-    field: 'ACTI_NAME'
-  },
-  {
-    headerName: '参与店铺',
-    // headerName: vmI18n.t("table_label.participating_store"),
-    field: 'STORE_NAMES'
-  },
-  {
-    headerName: '活动时间段',
-    // headerName: vmI18n.t("table_label.activity_period"),
-    field: 'ACTI_DATE'
-  },
-  {
-    headerName: '失效下线时间',
-    // headerName: vmI18n.t("table_label.failure_offline_time"),
-    field: 'DOWN_TIME'
-  },
-  {
-    headerName: '剩余可送',
-    // headerName: vmI18n.t("table_label.rest_sent"),
-    field: 'STOCK'
-  },
-  {
-    headerName: '已送数量',
-    // headerName: vmI18n.t("table_label.delivered_quantity"),
-    field: 'SEND'
-  },
-  {
-    headerName: '状态',
-    // headerName: vmI18n.t("table_label.status"),
-    field: 'status'
-  },
-  {
-    headerName: '分组名称',
-    // headerName: vmI18n.t("table_label.groupName"),
-    field: 'GROUP_NAME'
-  },
-  {
-    headerName: '优先级',
-    // headerName: vmI18n.t("table_label.priority"),
-    field: 'LEVEL'
-  },
-  {
-    headerName: '创建人',
-    // headerName: vmI18n.t("table_label.creator"),
-    field: 'OWNERENAME'
-  },
-  {
-    headerName: '创建时间',
-    // headerName: vmI18n.t("table_label.creationTime"),
-    field: 'CREATIONDATE'
-  },
-  {
-    headerName: '修改人',
-    // headerName: vmI18n.t("table_label.reviser"),
-    field: 'OWNERENAME'
-  },
-  {
-    headerName: '修改时间',
-    // headerName: vmI18n.t("table_label.modificationTime"),
-    field: 'MODIFIEDDATE'
-  },
-  {
-    headerName: '备注',
-    // headerName: vmI18n.t("table_label.remarks"),
-    field: 'REMARK'
-  },
-  {
-    headerName: '操作',
-    // headerName: vmI18n.t("table_label.operation"),
-    field: 'ACTION_LOG'
-  }
-];
+
 export default {
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
   data() {
     return {
-      vmI18n:$i18n,
-      loading:false,
+      vmI18n: $i18n,
+      loading: false,
       modal: false, // 查看日志弹框
       loadings: false, // 下拉框默认loadings值
       release_name: '', // 操作人
@@ -121,31 +31,130 @@ export default {
       checkList: [], // 表格复选框选中的id
       setGroupTableData: [], // 设置分组列表
       STATUS: [1, 2, 3], // 状态 1.草稿，2.已发布，3.下线
-      logData: {
-        columns: [
+      formConfig: {
+        formValue: {
+          acti_no: '',
+          acti_date: [`${this.setData(0, true)}`, `${this.setData(7)}`],
+          acti_name: '',
+          my_input_sh: '',
+          product: '',
+          acti_group: '',
+          release_name: '',
+          STATUS: [1, 2, 3],
+        },
+        ruleValidate: {},
+        formData: [
           {
-            // title: "序号",
-            title: $i18n.t('table_label.serialNo'),
-            type: 'index',
-            width: 60,
-            align: 'center'
+            style: 'input',
+            label: '促销编号',
+            colname: 'acti_no',
+            width: '6',
+            inputenter: () => {
+              this.formUserKeyUp();
+            }
           },
           {
-            // title: "操作时间",
-            title: $i18n.t('table_label.operatorTime'),
-            key: 'creationdate'
+            style: "date",
+            type: "datetimerange",
+            label: "活动日期",
+            colname: "acti_date",
+            format: "yyyy/MM/dd",
+            width: "6",
+            icon: "md-alarm",
+            placeholder: "",
+            transfer: true,
+            ghost: false, // 是否关闭幽灵按钮，默认开启
+            onChange: () => {
+              this.handleChange();
+            },
+            clearable: true,
           },
           {
-            // title: "操作人",
-            title: $i18n.t('form_label.operator'),
-            key: 'operator'
+            style: 'input',
+            label: '活动名称',
+            colname: 'acti_name',
+            width: '6',
+            inputenter: () => {
+              this.formUserKeyUp();
+            }
           },
           {
-            // title: "操作描述",
-            title: $i18n.t('table_label.operation_description'),
-            key: 'describes'
-          }
+            version: '1.4',
+            style: 'popInput',
+            width: '6',
+            colname: 'my_input_sh',
+            itemdata: {
+              serviceId: "r3-pm",
+              colid: 171929,
+              colname: 'CP_C_SHOP_ID',
+              fkdisplay: 'mrp',
+              isfk: true,
+              isnotnull: false,
+              name: '店铺名称', // 店铺名称
+              readonly: false,
+              reftable: 'CP_C_SHOP',
+              reftableid: 10348,
+              valuedata: '',
+            },
+            oneObj: (val) => {
+              console.log(val);
+            },
+          },
+          {
+            version: '1.4',
+            style: 'popInput',
+            width: '6',
+            colname: 'product',
+            itemdata: {
+              serviceId: "r3-pm",
+              colid: '1700806532',
+              colname: 'PS_C_PRO_ID',
+              fkdisplay: 'drp',
+              isfk: true,
+              isnotnull: false,
+              name: '参与商品',
+              readonly: false,
+              valuedata: '',
+            },
+            oneObj: (val) => {
+              console.log(val);
+            },
+          },
+          {
+            style: 'input',
+            label: '分组',
+            colname: 'acti_group',
+            width: '6',
+            inputenter: () => {
+              this.formUserKeyUp();
+            },
+            inputChange: () => { },
+          },
+          {
+            style: 'input',
+            label: '操作人',
+            colname: 'release_name',
+            width: '6',
+            inputenter: () => {
+              this.formUserKeyUp();
+            },
+          },
+          {
+            style: 'select',
+            label: '促销状态',
+            colname: 'STATUS',
+            width: '6',
+            rules: true,
+            multiple: true,
+            selectChange: (val) => {
+              console.log(this.formConfig.formValue.STATUS);
+            },
+            options: diStatusArr,
+          },
         ],
+      },
+      logData: {
+        columns: logDataCol,
         data: []
       },
       my_input_sh: {
@@ -359,20 +368,6 @@ export default {
           }
         }
       ],
-      diStatusArr: [
-        {
-          value: 1,
-          label: $i18n.t('btn.draft') // 草稿
-        },
-        {
-          value: 2,
-          label: $i18n.t('btn.published') // 已发布
-        },
-        {
-          value: 3,
-          label: $i18n.t('btn.offline') // 下线
-        }
-      ],
       product: {
         itemdata_xitong: {
           col: 1,
@@ -493,18 +488,18 @@ export default {
     }
   },
   components: {
+    businessForm,
     businessButton,
     businessLabel,
     aTable,
     Mydialog,
     errorMessage,
     dialogVisible,
-    TableInput,
     loading
   },
   created() {
     groups.load();
-   },
+  },
   computed: {
     commodity() {
       return this.inputList[0].valuedata;
@@ -525,6 +520,23 @@ export default {
     this.$comUtils.onresizes(this, 650);
   },
   methods: {
+    // 获取7天后时间
+    setData(day, startTime) {
+      let date = startTime ? this.formatDate(new Date().setHours(0, 0, 0, 0) + 86400 * day * 1000) : this.formatDate(new Date().setHours(23, 59, 59, 0) + 86400 * day * 1000)
+      return date;
+    },
+    // 日期格式转换
+    formatDate(time) {
+      if (time instanceof Array && time[0]) {
+        const start = dateUtil.getFormatDate(time[0], 'yyyy-MM-dd HH:mm:ss');
+        const end = dateUtil.getFormatDate(time[1], 'yyyy-MM-dd HH:mm:ss');
+        return start + '~' + end
+      } else {
+        const date = new Date(time);
+        const resTime = dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
+        return resTime
+      }
+    },
     // 处理时间
     handleChange(dateArr) {
       const filterDate = [];
@@ -564,7 +576,7 @@ export default {
     async getData() {
       const currentPage = this.tabConfig[this.activeName].agTableConfig.pagenation.current;
       const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
-      const {customizedModuleName}=this.$router.currentRoute.params;
+      const { customizedModuleName } = this.$router.currentRoute.params;
       this.loading = true;
       // this.$R3loading.show(customizedModuleName);
       const params = {
@@ -711,7 +723,7 @@ export default {
           $store.commit('customize/TabOpen', {
             id: -1, // id
             type: 'action', // 类型action
-            name: 'addOrEditActi', // 文件名
+            name: 'PM_C_PROM_ACTI', // 文件名
             label: $i18n.t('panel_label.addPromotion'), // 新增促销活动
             query: Object.assign({
               id: -1, // id
@@ -728,7 +740,7 @@ export default {
       $store.commit('customize/TabOpen', {
         id: -1, // id
         type: 'action', // 类型action
-        name: 'addOrEditActi', // 文件名
+        name: 'PM_C_PROM_ACTI', // 文件名
         label: $i18n.t('panel_label.addPromotion'), // 新增促销活动
         query: Object.assign({
           id: -1, // id
@@ -908,7 +920,7 @@ export default {
           $store.commit('customize/TabOpen', {
             id: ACTI_ID, // id
             type: 'action', // 类型action
-            name: 'addOrEditActi', // 文件名
+            name: 'PM_C_PROM_ACTI', // 文件名
             label: $i18n.t('panel_label.editPromotion'), // 编辑促销活动
             query: Object.assign({
               id: ACTI_ID, // id
