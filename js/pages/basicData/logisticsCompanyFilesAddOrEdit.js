@@ -370,19 +370,30 @@ export default {
           this.$Message.warning('重复数据，不能添加！')
           return;
         }
-        this.subTableConfig1.data.push({ID:-1,PREFIX,SUFFIX,COMBINATION});
+        this.subTableConfig1.data.push({ID:'-1',PREFIX,SUFFIX,COMBINATION});
       }else{
-        this.subTableConfig1.data.push({ID:-1,PREFIX,SUFFIX,COMBINATION})
+        this.subTableConfig1.data.push({ID:'-1',PREFIX,SUFFIX,COMBINATION})
       }
     },
     // 删除
-    nalysisDetale(){
+    async nalysisDetale(){
       let tableConfig = this.subTableConfig1
       tableConfig.selectionData.forEach((i) => {
         tableConfig.data.forEach((e,index) => {
             if(i.COMBINATION === e.COMBINATION)tableConfig.data.splice(index,1);
         })
       })
+      let arr = tableConfig.selectionData.map((item)=> { if(item.ID !== '-1') return item.ID});
+      let ids = arr.filter((item) => { return item != undefined });
+      if(ids.length){
+        const {
+          data: { code, data, message }
+        } = await this.service.basicData.deleteFixes({IDS:ids});
+        if(code === 1){
+          this.$Message.success(message || '删除成功！');
+          this.initObjItem(self.ID)
+        }
+      }
     },
     /* -------------------- 子表Part end -------------------- */
 
@@ -419,11 +430,9 @@ export default {
           data,
           message
         }
-      } = await self.service.basicData.platformSave(param).catch(() => {
-        this.loading = false;
-      });
-      this.loading = false;
+      } = await self.service.basicData.platformSave(param)
       if (code === 0) {
+        this.loading = false;
         this.backable = true;
         if (this.formConfig.formValue.TYPE == 'LIST') {
           this.showSubtablePart = true;
@@ -431,19 +440,16 @@ export default {
         // 数据回显
         self.modify.master = {};
         if (data && data.ID) self.ID = data.ID
-        // await self.initObjItem(self.ID);
+        console.log(data,self.ID);
         self.$Message.success(message || $i18n.t('modalTips.z9'));
-        setTimeout(() => {
-          this.$comUtils.tabCloseAppoint(this);
-          this.$destroy(true);
-          $store.commit('customize/TabOpen', {
-            id: self.ID,
-            type: 'action',
-            name: 'LOGISTICSCOMPANYFILESADDOREDIT',
-            label: '物流公司档案编辑',
-          });
-          this.labelDefaultValue = 'PROPERTYVALUES'
-        }, 20);
+        this.$comUtils.tabCloseAppoint(this);
+          // this.$destroy(true);
+          // this.$store.commit('global/tabOpen', {
+          //   type: 'tableDetailAction',
+          //   label: '物流公司档案编辑',
+          //   customizedModuleName: 'LOGISTICSCOMPANYFILESADDOREDIT',
+          //   customizedModuleId: self.ID
+          // });
       } else {
         // 走框架的报错
       }
@@ -528,9 +534,8 @@ export default {
     // 切换Label & 实时渲染subTable
     async labelClick(item) {
       this.labelDefaultValue = item.value;
-      if(this.labelDefaultValue == 'CP_C_LOGISTICS_FIX'){
+      if(this.$route.params.customizedModuleId != 'New' && this.labelDefaultValue == 'CP_C_LOGISTICS_FIX'){
         const subData = await this.$OMS2.omsUtils.initSubtable('CP_C_LOGISTICS_FIX', this.ID, '180405');
-        console.log(subData);
         this.subTableConfig1.data = subData.rowData
       }
       if (this.labelDefaultValue == 'PROPERTYVALUES' || this.labelDefaultValue == 'CP_C_LOGISTICS_FIX') return;

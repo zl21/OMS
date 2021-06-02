@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-12 17:28:39
+ * @LastEditTime: 2021-06-02 19:03:24
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/service/modules/basicData.js
+ */
 // 基础数据
 export default {
 
@@ -21,4 +29,6 @@ export default {
   selectTree: params => $network.post('/p/cs/cp/v1/region/v1/selectTree', params), // 国家省市区-列表-树结构
   shopqueryById: params => $network.post('/p/cs/cp/v1/shop/queryById', params), // 店铺授权弹窗查询
   shopSave: params => $network.post('/p/cs/cp/v1/shop/save', params), // 店铺授权弹窗确认
+  deleteFixes: params => $network.post('/p/cs/cp/v1/logistics/deleteFixes', params), // 店铺授权弹窗确认
+  
 };
