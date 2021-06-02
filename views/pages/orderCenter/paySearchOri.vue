@@ -1,42 +1,55 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-06-01 11:34:24
+ * @LastEditTime: 2021-06-02 10:59:54
  * @LastEditors: Please set LastEditors
  * @Description: 赔付单-新增-查询原订单编号-formItem
  * @FilePath: /burgeon-project-logic/js/pages/orderCenter/paySearchOri.vue
 -->
 <template>
-  <div class="searchOOID customized-detail" v-loading="loading">
-    <div>
-      <Input
-        :autocomplete="'new-password'"
-        disabled="false"
-        @on-click="iconclick"
-        @on-enter="inputenter"
-        icon="ios-search"
-        v-model.trim="OC_B_ORDER_ID"
-        :placeholder="''"
-        @on-blur="inputblur"
-        @on-change="inputChange"
-      ></Input>
-      <!-- 输入框图标 -->
-    </div>
-    <!-- <div class="customized-detail-main">
-      <businessForm :form-config="formConfig" />
-    </div>
-    <div class="customized-detail-btn">
-      <businessButton :btn-config="btn" />
-    </div>
-    <div class="customized-detail-table">
-      <business-action-table
-        :jordan-table-config="table"
-        @on-row-click="onRowClick"
-        @on-row-dblclick="onRowDblclick"
-        @on-page-change="pageChange"
-        @on-page-size-change="pageSizeChange"
-      />
-    </div> -->
+  <div class="OC_B_ORDER_ID">
+    <label class="itemLabel"> 原定单编号： </label>
+    <Input
+      :autocomplete="'new-password'"
+      @on-click="iconclick"
+      @on-enter="inputenter"
+      icon="ios-search"
+      v-model.trim="OC_B_ORDER_ID"
+      :placeholder="''"
+      @on-blur="inputblur"
+      @on-change="inputChange"
+    ></Input>
+
+    <!-- 查询原定单编号 -->
+    <Modal
+      v-model="orderModal"
+      width="900"
+      titleAlign="left"
+      :closable="true"
+      :mask="true"
+      class-name="ark-dialog"
+      title="关联原单"
+    >
+      <div class="dialog-footer" slot="footer">
+        <businessButton :btn-config="btnConfigMo" />
+      </div>
+      <!-- <searchOOID :orderData="orderData" @getRowData="getRowData"></searchOOID> -->
+      <div class="customized-detail-main">
+        <businessForm :form-config="formConfig" />
+      </div>
+      <div class="customized-detail-btn">
+        <businessButton :btn-config="btn" />
+      </div>
+      <div class="customized-detail-table">
+        <business-action-table
+          :jordan-table-config="table"
+          @on-row-click="onRowClick"
+          @on-row-dblclick="onRowDblclick"
+          @on-page-change="pageChange"
+          @on-page-size-change="pageSizeChange"
+        />
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -67,6 +80,7 @@ export default {
   data() {
     return {
       vmI18n: $i18n,
+      orderModal: false,
       OC_B_ORDER_ID: '',
       loading: false,
       ID: this.$route.params.customizedModuleId && (this.$route.params.customizedModuleId != 'NEW' || this.$route.params.customizedModuleId != 'New') ? this.$route.params.customizedModuleId : '-1',
@@ -75,6 +89,7 @@ export default {
       getCurrenData: {},
       btn: {
         typeAll: 'default', // 按钮统一风格样式
+        btnsite: "right",
         buttons: [
           {
             text: '重置',
@@ -94,6 +109,33 @@ export default {
           },
         ],
       },
+      btnConfigMo: {
+        typeAll: "default",
+        btnsite: "right",
+        buttons: [
+          {
+            text: "取消",
+            btnclick: () => {
+              this.orderModal = false;
+            },
+          },
+          {
+            text: '确定',
+            type: 'primary',
+            btnclick: () => {
+              // queryorder() {
+              if (!Object.keys(this.platformData).length) {
+                this.$Message.warning('请选中一条单据！');
+                return false
+              }
+              // this.renderForm(this.platformData);
+              this.orderModal = false;
+              // },
+              // this.queryorder();
+            },
+          },
+        ],
+      },
       formConfig: {
         formValue: {
           CP_C_SHOP_ID: "",
@@ -109,34 +151,11 @@ export default {
         },
         formData: [
           {
-            version: '1.4',
-            style: 'popInput',
+            style: 'input',
+            label: '原定单编号', // 原定单编号
+            colname: 'SOURCE_CODE',
             width: '8',
-            colname: 'CP_C_SHOP_ID',
-            itemdata: {
-              colid: 171929,
-              colname: 'CP_C_SHOP_ID', // 当前字段的名称
-              /* precolnameslist: [
-                {
-                  premtype: 'CP_C_SHOP_PERMISSION_ID',
-                  refcol: 'ID',
-                  iswrite: 'true',
-                },
-              ], */
-              fkdisplay: 'mrp', // 外键关联类型
-              isfk: true, // 是否有fk键
-              isnotnull: false, // 是否必填
-              name: '店铺', // 店铺名称
-              readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'CP_C_SHOP', // 对应的表
-              reftableid: 10348, // 对应的表ID
-              valuedata: '', // 这个是选择的值
-            },
-            oneObj: (e) => {
-              console.log('店铺：', e);
-              this.formConfig.formValue.CP_C_SHOP_ID = e.pid;
-              // this.threeObjs();
-            },
+            // inputenter: () => this.queryBounced(),
           },
           {
             style: 'input',
@@ -146,23 +165,9 @@ export default {
             // inputenter: () => this.queryBounced(),
           },
           {
-            style: 'select',
-            label: '平台状态',
-            colname: 'PLATFORM_STATUS',
-            width: '8',
-            options: [],
-          },
-          {
-            style: 'select',
-            label: '单据状态',
-            colname: 'ORDER_STATUS',
-            width: '8',
-            options: [],
-          },
-          {
             style: 'input',
-            label: $i18n.t('table_label.buyerNickname'), // 买家昵称
-            colname: 'BUYER_NICK',
+            label: '物流单号', // 物流单号
+            colname: 'SOURCE_CODE',
             width: '8',
             // inputenter: () => this.queryBounced(),
           },
@@ -175,59 +180,17 @@ export default {
           },
           {
             style: 'input',
-            label: $i18n.t('form_label.consignee_phone'), // 收货人手机
-            colname: 'RECEIVER_MOBILE',
+            label: $i18n.t('table_label.buyerNickname'), // 买家昵称
+            colname: 'BUYER_NICK',
             width: '8',
             // inputenter: () => this.queryBounced(),
           },
           {
-            style: "date",
-            type: "datetimerange",
-            label: "下单时间",
-            colname: "ORDER_DATE",
-            format: "yyyy/MM/dd HH:mm:ss",
-            width: "8",
-            icon: "md-alarm",
-            placeholder: "",
-            transfer: true,
-            ghost: false, // 是否关闭幽灵按钮，默认开启
-            onChange: () => {
-              let time = this.formConfig.formValue.ORDER_DATE;
-              if (time[0]) {
-                // this.formConfig.formValue.ORDER_DATE = this.formatDate(time);
-              } else {
-                this.formConfig.formValue.ORDER_DATE = '';
-              }
-            },
-            clearable: true,
-          },
-          {
-            style: "date",
-            type: "datetimerange",
-            label: "支付时间",
-            colname: "PAY_TIME",
-            format: "yyyy/MM/dd HH:mm:ss",
-            width: "8",
-            icon: "md-alarm",
-            placeholder: "",
-            transfer: true,
-            ghost: false, // 是否关闭幽灵按钮，默认开启
-            onChange: () => {
-              let time = this.formConfig.formValue.PAY_TIME;
-              if (time[0]) {
-                // this.formConfig.formValue.PAY_TIME = this.formatDate(time);
-              } else {
-                this.formConfig.formValue.PAY_TIME = '';
-              }
-            },
-            clearable: true,
-          },
-          {
             style: 'input',
-            label: $i18n.t('form_label.billNo'), // 订单编号
-            colname: 'BILL_NO',
+            label: $i18n.t('form_label.consignee_phone'), // 收货人手机
+            colname: 'RECEIVER_MOBILE',
             width: '8',
-            inputenter: () => this.queryBounced(),
+            // inputenter: () => this.queryBounced(),
           },
         ],
       },
@@ -256,17 +219,16 @@ export default {
   },
   mounted() {
     this.$nextTick(async () => {
-      await this.initObjItem(-1);
-      // 初始化form后给时间赋值
-      this.formConfig.formValue.ORDER_DATE = [`${this.getData(7, true)}`, `${this.getData(0)}`];
-      this.formConfig.formValue.PAY_TIME = [`${this.getData(7, true)}`, `${this.getData(0)}`];
+      // await this.initObjItem(-1);
       // 获取
-      this.queryEnter();
+      // this.queryEnter();
     });
   },
   methods: {
 
-    iconclick() { },
+    iconclick() {
+      this.orderModal = true;
+    },
     inputenter() { },
     inputblur() { },
     inputChange() { },
@@ -408,6 +370,22 @@ export default {
 .searchOOID {
   /deep/ .button-combina .button-content {
     justify-content: flex-end;
+  }
+}
+.OC_B_ORDER_ID {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .itemLabel {
+    flex: 0 0 120px;
+  }
+  /deep/.ark-input-icon {
+    // top: 5px;
+    // right: 2px;
+    height: 32px;
+    line-height: 32px;
   }
 }
 </style>
