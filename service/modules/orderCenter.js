@@ -6,6 +6,10 @@ export default {
    * 零售发货单  
    */
 
+
+   checkRefundInStatus: (params) =>
+   $network.get('/p/cs/oc/oms/v1/refundInOrder/checkRefundInStatus?'+params), //退货入库单-判断退货入库单匹配状态
+   
    saveMatch: (params) =>
    $network.post('/p/cs/oc/oms/v1/refundInOrder/saveMatch', params), //退货入库单-匹配保存接口
    

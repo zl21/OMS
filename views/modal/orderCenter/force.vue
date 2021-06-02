@@ -1,15 +1,17 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-25 16:48:54
- * @LastEditTime: 2021-05-25 19:52:03
+ * @LastEditTime: 2021-06-02 20:50:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/modal/orderCenter/manual.vue
 -->
-<template>
-</template>
+<template></template>
 
 <script>
+import service from '@/service/index'
+
+
 export default {
   data() {
     return {
@@ -29,12 +31,22 @@ export default {
   },
   methods: {
     init() {
-      this.$store.commit('global/tabOpen', {
-        tableId: 10542,
-        type: 'V',
-        tableName: 'OC_B_REFUND_IN',
-        id: this.$parent.$parent.idArray[0]+"?type=2",
-      });
+      service.orderCenter.checkRefundInStatus(`id=${this.$parent.$parent.idArray[0]}`).then(res => {
+        if (res.data.code == 0) {
+          this.$store.commit('global/tabOpen', {
+            tableId: 10542,
+            type: 'V',
+            tableName: 'OC_B_REFUND_IN',
+            id: this.$parent.$parent.idArray[0] + "?type=2",
+          });
+        } else {
+          this.$Message.warning(res.data.message);
+        }
+
+      })
+
+
+
     }
   }
 
