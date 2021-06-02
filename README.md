@@ -185,3 +185,4 @@
 | v1.1.38 | fkinput模糊搜索待选处理/fkinputPlus inputEnter |
 | v1.1.39 | fkinputPlus-模糊搜索修复 |
 | v1.1.40 | fkinputPlus-默认初始值 |
+| v1.1.41 | businessButton-修改 |

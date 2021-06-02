@@ -8,6 +8,7 @@
         class="button-group"
         v-for="(item, index) in btnConfig.buttons"
         :key="index"
+        :class="item.isShow ? '' : 'button-group-none'"
       >
         <template
           v-if="item.isShow === false || item.isShow ? item.isShow : true"
