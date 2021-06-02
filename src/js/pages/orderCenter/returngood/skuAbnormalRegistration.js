@@ -1,10 +1,9 @@
-// 额外退款新增/编辑、已发货退款编辑  共用此组件
+// sku异常登记新增/编辑
 import reButton from 'professionalComponents/businessButton';
 import reTable from 'professionalComponents/businessActionTable';
 import reForm from 'professionalComponents/businessForm';
 import commonUtil from '@/assets/js/__utils__/common';
 import comUtils from '@/assets/js/__utils__/common';
-import axios from 'axios';
 import refundAfterShipment from './constants/refundAfterShipment';
 
 export default {
@@ -22,10 +21,11 @@ export default {
       isModal: false,
       delTableData: [], // 要删除的退款单明细
       isOne: true,
-      RETURN_STATUS: null,
+      REGISTER_STATUS: null,
       BILL_TYPE: '1',
       onSelectData: {},
       selectData: {},
+      isCopy: false,
       order: {
         modal: false,
         btn: {
@@ -381,7 +381,7 @@ export default {
               colid: 167630,
               colname: 'CP_C_LOGISTICS_ID',
               display: 'text',
-              fkdisplay: 'mrp',
+              fkdisplay: 'drp',
               isfk: true,
               length: 100,
               name: "退货物流公司",
@@ -437,8 +437,35 @@ export default {
         buttons: [
           {
             text: window.vmI18n.t('btn.save'), // 保存
+            disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.save();
+            }
+          },
+          {
+            text: '审核',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.audit();
+            }
+          },
+          {
+            text: '作废',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.invalid();
+            }
+          },
+          {
+            text: '刷新',
+            btnclick: () => {
+              this.query();
+            }
+          },
+          {
+            text: '复制',
+            btnclick: () => {
+              this.copy();
             }
           },
           {
@@ -471,6 +498,7 @@ export default {
   mounted() {
     if (this.$route.params.customizedModuleId !== 'New') {
       this.query()
+
     }
 
     setTimeout(()=> {
@@ -488,7 +516,13 @@ export default {
         if (res.data.code == 0) {
           const resData = res.data.data;
           self.getSmallClass(resData.OC_B_LARGE_CLASS_EXCEPTION_ID)
-          // this.RETURN_STATUS = AfSend.RETURN_STATUS;
+          self.REGISTER_STATUS = resData.REGISTER_STATUS;
+
+          if (self.REGISTER_STATUS !== null && self.REGISTER_STATUS != 1) {
+            self.btnConfig.buttons.forEach(item => {
+              if (item.text == '审核' || item.text == '作废' || item.text == window.vmI18n.t('btn.save')) item.disabled = true
+            })
+          }
 
           // self.onSelectData['ID'] = res.data.data.AfSend.ID
           self.setDetailForm(resData);
@@ -509,8 +543,16 @@ export default {
       const self = this;
       self.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ID = data.RETURN_CP_C_LOGISTICS_ID;
       self.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_ID = data.OC_B_LARGE_CLASS_EXCEPTION_ID;
+      self.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ENAME = data.RETURN_CP_C_LOGISTICS_ENAME;
+      self.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_NAME = data.OC_B_LARGE_CLASS_EXCEPTION_NAME;
       self.reForm.config.forEach(async item => {
         switch (item.item.label) {
+          case '异常登记编号':
+            item.item.props.value = data.EXCEPTION_NO;
+            break
+          case '单据状态':
+            item.item.props.value = data.REGISTER_STATUS == 1 ? '未审核' : data.REGISTER_STATUS == 2 ? '已审核' : '已作废';
+            break
           case '买家昵称':
             item.item.props.value = data.BUYER_NICK;
             break
@@ -586,14 +628,23 @@ export default {
       const y1 = this.reForm.config.find(item => item.item.label == '异常登记数量' && !/^[1-9]\d*$/.test(item.item.props.value));
       if (y1) return self.$Message.warning(`异常登记数量需要为大于0的正整数！`);
       const y2 = this.reForm.config.find(item => item.item.label == '异常登记金额' && !/^([1-9]\d*(\.\d{1,2})?|([0](\.([0][1-9]|[1-9]\d{0,1}))))$/.test(item.item.props.value));
-      if (y2) return self.$Message.warning(`异常登记金额需要为大于0切保留两位小数！`);
+      if (y2) return self.$Message.warning(`异常登记金额需要为大于0且保留两位小数！`);
+      if (this.IMAGE.length > 10) self.$Message.warning(`最大上传10张图片！`);
       
       const data = {};
-      data.objId = self.$route.params.customizedModuleId === 'New' || self.$route.query.cid || self.$route.query.oid ? -1 : self.$route.params.customizedModuleId;
+      // 是否复制
+      debugger
+      if (this.isCopy) {
+        data.objId = -1
+      } {
+        data.objId = self.$route.params.customizedModuleId === 'New' ? -1 : self.$route.params.customizedModuleId;
+      }
       const AfSend = self.getForm();
-      AfSend.ID = self.$route.query.cid || self.$route.params.customizedModuleId === 'New' ? '-1' : self.$route.params.customizedModuleId;
+      AfSend.ID = self.$route.query.cid || self.$route.params.customizedModuleId === 'New' || this.isCopy ? '-1' : self.$route.params.customizedModuleId;
       AfSend.RETURN_CP_C_LOGISTICS_ID = this.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ID ? this.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ID : '';
+      AfSend.RETURN_CP_C_LOGISTICS_ENAME = this.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ENAME ? this.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ENAME : '';
       AfSend.OC_B_LARGE_CLASS_EXCEPTION_ID = this.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_ID;
+      AfSend.OC_B_LARGE_CLASS_EXCEPTION_NAME = this.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_NAME;
       AfSend.IMAGE = JSON.stringify(this.IMAGE);
 
       self.reForm.config.map(item => {
@@ -792,6 +843,93 @@ export default {
           _this.$Message.info(_this.vmI18n.t('modalTips.i9')); // 查询不到数据!
           _this.order.table.loading = false;
         });
+    },
+    // 审核
+    audit() {
+      this.service.common
+      .abnormalRegistrationAudit({ID: this.$route.params.customizedModuleId})
+      .then(res => {
+        if (res.data.code === 0) {
+          this.$Message.success(res.data.message);
+          this.query()
+        } else {
+          this.$Message.error(res.data.message);
+        }
+      });
+    },
+    // 作废
+    invalid() {
+      this.service.common
+      .abnormalRegistrationInvalid({ID: this.$route.params.customizedModuleId})
+      .then(res => {
+        if (res.data.code === 0) {
+          this.$Message.success(res.data.message);
+          this.query()
+        } else {
+          this.$Message.error(res.data.message);
+        }
+      });
+    },
+    // 复制
+    copy() {
+      const self = this;
+      self.isCopy = true;
+      self.btnConfig.buttons.forEach(item => {
+        if (item.text == '审核' || item.text == '作废') item.disabled = true
+        if (item.text == '保存') item.disabled = false
+      })
+      self.reForm.config.map(item => {
+        switch (item.item.label) {
+          case '异常登记编号':
+            item.item.props.value = '';
+            break
+          case '单据状态':
+            item.item.props.value = '';
+            break
+          case '买家昵称':
+            item.item.props.value = '';
+            break
+          case '订单编号':
+            item.item.props.value = ''
+            break
+          case '原始平台单号':
+            item.item.props.value = ''
+            break
+          case '子订单编号':
+            item.item.props.value = ''
+            break
+          case '下单店铺':
+            item.item.props.value = ''
+            break
+          case '发货时间':
+            item.item.props.value = ''
+            break
+          case '发货物流公司':
+            item.item.props.value = ''
+            break
+          case '商品款号':
+            item.item.props.value = ''
+            break
+          case '发货仓库':
+            item.item.props.value = ''
+            break
+          case '发货物流单号':
+            item.item.props.value = ''
+            break
+          case 'SKU':
+            item.item.props.value = ''
+            break
+          case '发货数量':
+            item.item.props.value = ''
+            break
+          case '发货金额':
+            item.item.props.value = ''
+            break
+          default:
+            break
+        }
+      })
+      self.logFormConfig.formValue = {}
     },
     // 图片上传成功
     uploadFileChangeSuccess(res) {

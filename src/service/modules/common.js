@@ -82,6 +82,8 @@ export default {
   getSmallClass: params => network.post('/api/cs/oc/oms/v1/querySmallClassException', params),
   abnormalRegistrationAdd: params => network.post('/api/cs/oc/oms/v1/saveSkuExceptionRegister', params),
   abnormalRegistrationInfo: params => network.post('/api/cs/oc/oms/v1/querySkuExceptionRegisterDetails', params),
+  abnormalRegistrationAudit: params => network.post('/api/cs/oc/oms/v1/submitSkuExceptionRegister', params),
+  abnormalRegistrationInvalid: params => network.post('/api/cs/oc/oms/v1/voidSkuExceptionRegister', params),
 
   // 通用接口下载
   /**
