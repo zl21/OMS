@@ -20,9 +20,10 @@ export default {
       vmI18n:$i18n,
       storesItemdata: {
         // colid: $store.state.forginkeys.columnIds.shop || '1700805184',
-        colid: '1700805184',
+        colid: '171929',
         colname: 'CP_C_SHOP_ID', // 当前字段的名称
         fkdisplay: 'drp', // 外键关联类型
+        serviceId: "r3-cp",
         isfk: true, // 是否有fk键
         isnotnull: true, // 是否必填
         name: $i18n.t('table_label.shopName'),
@@ -32,9 +33,10 @@ export default {
         isObject: true
       }, // 多选店仓信息
       except_provincesItemdata: {
-        colid: '168686',
+        colid: '180257',
         colname: 'CP_C_PROVINCE_IDS',
         fkdisplay: 'mrp',
+        serviceId: "r3-cp",
         isfk: true,
         isnotnull: false,
         isuppercase: false,
