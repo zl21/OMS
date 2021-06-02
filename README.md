@@ -544,6 +544,7 @@ R3.launchApplication({
 | v1.5.13 | 完善退货入库的手工匹配和强制匹配逻辑 |
 | v1.5.14 | 赔付 |
 | v1.5.15 | hrorgTree网关 |
+| v1.5.16 | 直播解析日志 |
 
 #### Extends-Api 版本说明
 
