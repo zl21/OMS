@@ -1,7 +1,7 @@
+<!-- tab切换，新增tab，支持编辑tab标签的名字 -->
 <template>
   <div class="detailtable">
     <slot name="MatchOperate" />
-    <!--因为element-ui 不可编辑tab标签内容  因此需要重写组件-->
     <tabList
       :current-tab.sync="currentTab"
       :panels="productsArrs"
