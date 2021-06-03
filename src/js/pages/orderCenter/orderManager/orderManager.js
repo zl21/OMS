@@ -2403,6 +2403,7 @@ export default {
         self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
         self.highSearchData = [];
         self.isShowSeniorOrOrdinary = !self.isShowSeniorOrOrdinary;
+        self.tagList[0].selectedList = [];
         setTimeout(() => {
           comUtils.setTableHeight(this, 30);
           this.$refs.agGridChild.agGridTable(this.agTableConfig.columnDefs, this.agTableConfig.rowData);
