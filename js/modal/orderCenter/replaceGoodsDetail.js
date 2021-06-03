@@ -158,6 +158,15 @@ export default {
         self.$Message.success(message);
         self.$parent.$parent.closeConfirm();
         self.$parent.$parent.$parent.$parent.$parent.getDetailsData();
+      } else if(code ===  -1){
+        this.$Modal.confirm({
+          title: "message",
+          width: 500,
+          className:'ark-dialog',
+          mask:true,
+          render: h => h('div', {
+            },data[0].message)
+        });
       }
       // else if(data && code ===  -1){
       //     self.$Modal.confirm({
