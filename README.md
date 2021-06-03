@@ -546,6 +546,7 @@ R3.launchApplication({
 | v1.5.15 | hrorgTree网关 |
 | v1.5.16 | 直播解析日志 |
 | v1.5.17 | 完成退货入库分页 |
+| v1.5.18 | 完成日志策略部分日志展示 |
 
 #### Extends-Api 版本说明
 
