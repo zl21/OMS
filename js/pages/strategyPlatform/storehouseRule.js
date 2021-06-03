@@ -390,8 +390,8 @@ export default {
 
   
     //ST_C_ORDER_WAREHOUSE
-    if (customizedModuleName == 'ST_C_ORDER_WAREHOUSE') {
-      this.labelList[1].value = 
+    if (customizedModuleName == 'ST_C_ORDER_WAREHOUSE') { 
+      this.labelList[1].value = "ST_C_ORDER_WAREHOUSE_LOG"
       this.qurefrom('cpCPhyWarehouseEname')[0].style = null;
       // 表示分仓策略》分仓规则
       if (customizedModuleId == 'New' || customizedModuleId == '-1') {
@@ -446,6 +446,7 @@ export default {
       this.qurefrom('CP_C_SHOP_IDS')[0].style = null;
       this.qurefrom('type')[0].style = null;
       this.labelList[0].label = '按收货地址';
+      this.labelList[1].value = "ST_ASSIGN_LOGISTICS_LOG"
       // 表示分物流策略》分物流规则
       if (customizedModuleId == 'New' || customizedModuleId == '-1') {
         // 表示新增
