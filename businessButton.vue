@@ -8,10 +8,13 @@
         class="button-group"
         v-for="(item, index) in btnConfig.buttons"
         :key="index"
+        true  
+        :class="(item.isShow && item.isShow === false) ? 'button-group-none' : ''"
       >
         <template
           v-if="item.isShow === false || item.isShow ? item.isShow : true"
         >
+        
           <!-- icon 设置按钮的图标类型 custom-icon 设置按钮的自定义图标 -->
           <Button
             v-if="!item.dropDown"
