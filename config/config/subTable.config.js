@@ -173,7 +173,11 @@ export const strategyPlatform = {
     refcolid: 179874,
     searchdata,
   },
-
+  ST_C_ORDER_WAREHOUSE_LOG: { // 分仓规则
+    table: 'ST_C_ORDER_WAREHOUSE_LOG',
+    refcolid: 181567,
+    searchdata,
+  },
   ST_WAREHOUSE_LOGISTICS_LOG: { // 仓库物流设置
     table: 'ST_WAREHOUSE_LOGISTICS_LOG',
     refcolid: 179958,
