@@ -106,7 +106,7 @@ export default {
         formData: [
           {
             style: null,
-            label: '方案ID',
+            label: '策略ID',
             value: 'ecode',
             colname: 'ecode',
             width: '8',
@@ -115,7 +115,7 @@ export default {
           },
           {
             style: 'input',
-            label: '方案名称',
+            label: '策略名称',
             value: 'ename',
             colname: 'ename',
             width: '8',
@@ -125,7 +125,7 @@ export default {
           {
             style: 'date',
             type: "datetime",
-            label: '开始时间',
+            label: '生效开始时间',
             value: 'beginTime',
             colname: 'beginTime',
             format: 'yyyy-MM-dd HH:mm:ss',
@@ -138,7 +138,7 @@ export default {
           },
           {
             style: 'date',
-            label: '结束时间',
+            label: '生效结束时间',
             value: 'endTime',
             colname: 'endTime',
             format: 'yyyy-MM-dd HH:mm:ss',
@@ -388,9 +388,9 @@ export default {
     this.customizedModuleName = customizedModuleName;
     this.id = customizedModuleId;
 
-  
+
     //ST_C_ORDER_WAREHOUSE
-    if (customizedModuleName == 'ST_C_ORDER_WAREHOUSE') { 
+    if (customizedModuleName == 'ST_C_ORDER_WAREHOUSE') {
       this.labelList[1].value = "ST_C_ORDER_WAREHOUSE_LOG"
       this.qurefrom('cpCPhyWarehouseEname')[0].style = null;
       // 表示分仓策略》分仓规则
@@ -722,7 +722,7 @@ export default {
                 // this.qurebtn(this.btnConfig.buttons, "启用")[0].disabled = true
               } else {
                 // this.qurebtn(this.btnConfig.buttons, "停用")[0].disabled = true
-               
+
                 this.qurefrom('beginTime')[0].disabled = false;
                 this.qurefrom('endTime')[0].disabled = false;
                 this.btnConfig2.buttons[0].disabled = false;
@@ -781,6 +781,7 @@ export default {
     },
 
     fnSave(saveType) {
+
       for (const em in this.formConfig.formValue) {
         for (const item in this.formConfig.ruleValidate) {
           if (em == item && this.qurefrom(em)[0].style != null) {
@@ -851,8 +852,11 @@ export default {
               }
             });
           }
-          this.changeCount = 0
-          this.pageback();
+          if (saveType == 1&& this.id != "-1") {
+            this.changeCount = 0
+            this.pageback();
+          }
+
         });
         return;
       }
@@ -908,8 +912,10 @@ export default {
               }
             });
           }
-          this.changeCount = 0
-          this.pageback();
+          if (saveType == 1&& this.id != "-1") {
+            this.changeCount = 0
+            this.pageback();
+          }
         }
       });
     },
