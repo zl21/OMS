@@ -71,10 +71,6 @@
 
         isFolding: true, // 高级搜索是否折叠
         labelValue: '',
-        publicBouncedConfig: {
-          name: '',
-          url: '',
-        },
         selection: [],
         extendBtn: [
           {
@@ -210,6 +206,58 @@
               this.urgentShipment();
             },
           },
+          {
+            webname: 'returnConfirmation', // 退货确认
+            btnclick: () => {
+              this.returnConfirm();
+            },
+          },
+          {
+            webname: 'returnModifyWarehouse', // 改退回仓库
+            btnclick: () => {
+              const self = this;
+              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              //前置条件判断
+              let arr = self.selection.map(item=>{
+                return {
+                  ID:item.ID,
+                  BILL_NO:item.BILL_NO
+                }
+              })
+              self.service.orderCenter.checkOrderBeforeWarehouse({
+                ID_AND_BILL_NO_LIST:arr
+              }).then(res=>{
+                console.log(res);
+                // if(res.data.code == 0){
+                  self.publicBouncedConfig.name = 'modifyWarehouse';
+                  self.publicBouncedConfig.url = 'modal/orderCenter/modifyWarehouse';
+                  self.publicBouncedConfig.confirmTitle = '改退回仓库';
+                  self.publicBouncedConfig.width = 500;
+                  self.publicBouncedConfig.componentData = {
+                    row : self.selection
+                  }
+                  setTimeout(() => {
+                    self.$children.find((item) => item.name === 'modifyWarehouse').openConfirm();
+                  }, 100);
+                // }else {
+                //   self.$OMS2.omsUtils.msgTips(self, 'warning', res.data.message, 0);
+                // }
+              });
+            },
+          },
+          {
+            webname: 'returnModifyLogistics', // 改退回物流
+            btnclick: () => {
+              const self = this;
+              self.publicBouncedConfig.name = 'returnModifyLogistics';
+              self.publicBouncedConfig.url = 'modal/orderCenter/modifyReturnLogistics';
+              self.publicBouncedConfig.confirmTitle = '改退回物流';
+              self.publicBouncedConfig.width = 500;
+              setTimeout(() => {
+                self.$children.find((item) => item.name === 'returnModifyLogistics').openConfirm();
+              }, 100);
+            },
+          },
         ],
         dropDownList: [],
         btnConfig: {
@@ -315,6 +363,9 @@
           },
         },
         dynamicData: {},
+        modifyWarehouse:{
+          componentData:{}
+        }
       };
     },
     watch: {},
@@ -766,5 +817,12 @@
           }
         });
       },
+      returnConfirm(){  //退货确认
+        let self = this;
+        self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+        self.service.orderCenter.returnConfirmCheck({ID:self.selection[0].ID}).then(res=>{
+          console.log(res);
+        })
+      }
     },
   };

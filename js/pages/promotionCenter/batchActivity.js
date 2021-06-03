@@ -1,7 +1,6 @@
 import BasicInfo from 'allpages/promotionCenter/details/basicInfo';
 import BatchInfoSet from 'allpages/promotionCenter/details/batchInfoSet';
 import stepsBars from 'professionalComponents/steps';
-import loading from 'professionalComponents/loading';
 import groups from '@/assets/js/promotion/groups';
 
 export default {
@@ -9,7 +8,6 @@ export default {
     BasicInfo,
     BatchInfoSet,
     stepsBars,
-    loading
   },
   data() {
     return {

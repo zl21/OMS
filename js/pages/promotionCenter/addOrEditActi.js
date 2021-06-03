@@ -2,7 +2,6 @@ import BasicInfo from 'allpages/promotionCenter/details/basicInfo';
 import InfoSet from 'allpages/promotionCenter/details/infoSet';
 import GiftSet from 'allpages/promotionCenter/details/giftSet';
 import stepsBars from 'professionalComponents/steps';
-import loading from 'professionalComponents/loading';
 import groups from '@/assets/js/promotion/groups';
 
 export default {
@@ -11,7 +10,6 @@ export default {
     InfoSet,
     GiftSet,
     stepsBars,
-    loading
   },
   data() {
     return {
@@ -216,6 +214,9 @@ export default {
     }
   },
   methods: {
+    basicDataHandel(data) {
+      this.basic_info.stores.itemdata = data.stores || {};
+    },
     closeDialog() {
       this.dialogVisible = false;
     },
@@ -619,7 +620,7 @@ export default {
           message: $i18n.t('modalTips.s5')
         }; // 活动名称未填写！
       }
-      if (this.basic_info.stores.itemdata.valuedata === '') {
+      if (!this.basic_info.stores.itemdata.valuedata) {
         return {
           code: -1,
           message: $i18n.t('modalTips.s6')

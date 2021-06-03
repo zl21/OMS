@@ -263,7 +263,7 @@ export default {
       return this.$router.currentRoute.params.customizedModuleName;
     },
   },
-  mounted() {
+  async mounted() {
     const self = this;
     if (self.ID == '-1') {
       // 新增
@@ -272,13 +272,15 @@ export default {
       // 详情
       self.initObjItem(self.ID);
     }
+    const subData = await this.$OMS2.omsUtils.initSubtable('CP_C_LOGISTICS_FIX', this.ID, '180461');
+    this.subTableConfig1.data = subData.rowData
   },
   created() {},
   methods: {
     /* -------------------- 详情初始化 start -------------------- */
     async initObjItem(id) {
       const self = this;
-      this.loading = true;
+      // this.loading = true;
       const data = await this.$OMS2.omsUtils.getObject('CP_C_LOGISTICS', id);
       // self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基本信息');
       self.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, self.formConfig);
@@ -292,7 +294,7 @@ export default {
         item.repeatKey = item.CP_C_PLATFORM_ENAME + '+' + item.CP_C_LOGISTICS_ECODE
       })
       self.getTableData(self.totalData, 'edit');
-      this.loading = false;
+      // this.loading = false;
     },
     /* -------------------- 详情初始化 end -------------------- */
 
@@ -378,20 +380,15 @@ export default {
     // 删除
     async nalysisDetale(){
       let tableConfig = this.subTableConfig1
-      tableConfig.selectionData.forEach((i) => {
-        tableConfig.data.forEach((e,index) => {
-            if(i.COMBINATION === e.COMBINATION)tableConfig.data.splice(index,1);
-        })
-      })
+      this.subTableConfig1.data = this.$OMS2.omsUtils.getDifferentArr(tableConfig.data, tableConfig.selectionData, 'ID');
       let arr = tableConfig.selectionData.map((item)=> { if(item.ID !== '-1') return item.ID});
       let ids = arr.filter((item) => { return item != undefined });
       if(ids.length){
         const {
           data: { code, data, message }
         } = await this.service.basicData.deleteFixes({IDS:ids});
-        if(code === 1){
+        if(code === 0){
           this.$Message.success(message || '删除成功！');
-          this.initObjItem(self.ID)
         }
       }
     },
@@ -423,16 +420,16 @@ export default {
         CP_C_LOGISTICS_ITEM, // 子表修改信息
         CP_C_LOGISTICS_FIX
       };
-      this.loading = true;
+      // this.loading = true;
       const {
         data: {
           code,
           data,
           message
         }
-      } = await self.service.basicData.platformSave(param)
+      } = await self.service.basicData.platformSave(param);
+      // this.loading = false;
       if (code === 0) {
-        this.loading = false;
         this.backable = true;
         if (this.formConfig.formValue.TYPE == 'LIST') {
           this.showSubtablePart = true;
@@ -440,16 +437,15 @@ export default {
         // 数据回显
         self.modify.master = {};
         if (data && data.ID) self.ID = data.ID
-        console.log(data,self.ID);
         self.$Message.success(message || $i18n.t('modalTips.z9'));
         this.$comUtils.tabCloseAppoint(this);
-          // this.$destroy(true);
-          // this.$store.commit('global/tabOpen', {
-          //   type: 'tableDetailAction',
-          //   label: '物流公司档案编辑',
-          //   customizedModuleName: 'LOGISTICSCOMPANYFILESADDOREDIT',
-          //   customizedModuleId: self.ID
-          // });
+        this.$destroy(true);
+        this.$store.commit('global/tabOpen', {
+          type: 'tableDetailAction',
+          label: '物流公司档案编辑',
+          customizedModuleName: 'LOGISTICSCOMPANYFILESADDOREDIT',
+          customizedModuleId: self.ID
+        });
       } else {
         // 走框架的报错
       }
@@ -534,10 +530,10 @@ export default {
     // 切换Label & 实时渲染subTable
     async labelClick(item) {
       this.labelDefaultValue = item.value;
-      if(this.$route.params.customizedModuleId != 'New' && this.labelDefaultValue == 'CP_C_LOGISTICS_FIX'){
-        const subData = await this.$OMS2.omsUtils.initSubtable('CP_C_LOGISTICS_FIX', this.ID, '180405');
-        this.subTableConfig1.data = subData.rowData
-      }
+      // if(this.$route.params.customizedModuleId != 'New' && this.labelDefaultValue == 'CP_C_LOGISTICS_FIX'){
+      //   const subData = await this.$OMS2.omsUtils.initSubtable('CP_C_LOGISTICS_FIX', this.ID, '180461');
+      //   this.subTableConfig1.data = subData.rowData
+      // }
       if (this.labelDefaultValue == 'PROPERTYVALUES' || this.labelDefaultValue == 'CP_C_LOGISTICS_FIX') return;
       this.subTableConfig2 = { //basicData
         centerName: 'basicData',

@@ -1,11 +1,10 @@
 <!-- 新增 或者 编辑 或者 复制促销-->
 <template>
-  <div class="addOrEditActi">
-    <loading :loading="loading" />
+  <div class="addOrEditActi" v-loading='loading'>
     <div class="steps_content">
       <div ref="basicSteps" class="basicSteps">
         <div class="basic">
-          <BasicInfo ref="area_0" :basic-data="basic_info" />
+          <BasicInfo ref="area_0" :basic-data="basic_info" @basicData="basicDataHandel"/>
         </div>
         <div class="basic">
           <InfoSet v-if="showInfoDataContainer" ref="area_1" :load-dis="loadDis" :basic-data="basic_info" :info-data="condition_info_setting" />

@@ -1,35 +1,63 @@
+/*
+ * @Author: your name
+ * @Date: 2021-06-02 19:17:14
+ * @LastEditTime: 2021-06-03 11:25:20
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/js/modal/orderCenter/modifyWarehouse.js
+ */
 import businessForm from 'professionalComponents/businessForm';
 import businessButton from 'professionalComponents/businessButton';
-import businessActionTable from 'professionalComponents/businessActionTable.vue';
-import R3 from '@syman/burgeon-r3';
+import { forEach } from 'lodash';
 
-const { getModuleName } = R3;
 export default {
   components: {
     businessForm,
     businessButton,
-    businessActionTable
   },
-  props: {},
-  computed: {
-    idArr: () => R3.store.state[getModuleName()].buttons.selectIdArr,
-    rowData: () => {
-      console.log(this);
-      return R3.store.state[getModuleName()].buttons.selectArr;
+  props: {
+    componentData:{
+      type:Object,
+      default:{}
     }
+  },
+  computed: {
   },
   data() {
     return {
       vmI18n:$i18n,
-      totalRowCount: 0,
-      pageSize: 10,
-      pageNum: 1,
-      dataEmptyMessage: '数据加载中...', // 无数据的提示
-      columns: ['ename'], // 展现的组
-      AutoData: [],
-      foreignKeyLink: {},
-      //
-      pid: '',
+      formConfig: {
+        formValue: {},
+        ruleValidate: {},
+        formData: [{
+          style: 'popInput',
+          width: '24',
+          version:'1.4',
+          itemdata: {
+            col: 1,
+            colid: 179538,
+            colname: 'CP_C_LOGISTICS_ID', // 当前字段的名称
+            datelimit: 'all',
+            display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+            fkdisplay: 'drp', // 外键关联类型
+            fkdesc: '实体仓档案',
+            inputname: 'CP_C_LOGISTICS_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
+            isfk: true, // 是否有fk键
+            isnotnull: true, // 是否必填
+            isuppercase: false, // 是否转大写
+            length: 20, // 最大长度是多少
+            name: '物流公司', // '入库实体仓库'
+            readonly: false, // 是否可编辑，对应input   readonly属性
+            reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
+            reftableid: 24486, // 对应的表ID
+            row: 1,
+            statsize: -1,
+            type: 'STRING', // 这个是后台用的
+            pid: '',
+            valuedata: '' // 这个是选择的值
+          }
+        }]
+      },
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
@@ -41,7 +69,7 @@ export default {
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              this.closeActionDialog();
+              this.$parent.$parent.closeConfirm();
             } // 按钮点击事件
           },
           {
@@ -53,26 +81,7 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const self = this;
-              if (!self.pid) {
-                // self.$Message.warning("请选择仓库");
-                self.$Message.warning($i18n.t('modalTips.zi'));
-                return false;
-              }
-              const param = {
-                ids: self.idArr[0],
-                warehouseId: self.pid
-              };
-              const fromdata = new FormData();
-              fromdata.append('param', JSON.stringify(param));
-              this.service.orderCenter.updateBeforeWarehouse(fromdata).then(res => {
-                if (res.data.code === 0) {
-                  self.$Message.success(res.data.message);
-                  self.$emit('confirmImport');
-                } else {
-                  self.$Message.warning(res.data.message);
-                }
-                self.closeActionDialog();
-              });
+              this.confirm();
             } // 按钮点击事件
           }
         ]
@@ -80,71 +89,64 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$store.state[getModuleName()]);
-    this.getListData();
+    
   },
   methods: {
-    async getListData() {
-      const self = this;
-      const fromdata = new FormData();
-      const rowData = self.rowData;
-      const checkId = self.idArr[0];
-      this.shopId = '';
-      rowData.forEach(item => {
-        const rowId = item.ID.val;
-        if (rowId === checkId) {
-          this.shopId = item.CP_C_SHOP_ID.refobjid;
+    confirm(){
+      let self = this;
+      if(!self.formConfig.formData[0].itemdata.pid){
+        self.$OMS2.omsUtils.msgTips(self, 'warning', '物流公司不能为空!', 0)
+        return;
+      }
+      let ids = self.componentData.row.map(item=>{
+        return {
+          ID:item.ID,
+          BILL_NO:item.BILL_NO
         }
       });
-      fromdata.append('shopId', this.shopId);
-      fromdata.append('pageNum', self.pageNum);
-      fromdata.append('pageSize', self.pageSize);
-      const res = await this.service.common.getWarehourseByShopId(fromdata);
-      res.data.data.forEach((element) => {
-        element.ecode = {
-          val: element.ecode
-        };
-        element.ename = {
-          val: element.ename
-        };
-        element.ID = {
-          val: element.id
-        };
-      });
-      self.foreignKeyLink = {
-        start: 0,
-        tabth: [
-          {
-            colname: 'ID',
-            name: 'ID',
-            show: false
-          },
-          {
-            colname: 'ename',
-            // name: "发货仓库名称",
-            name: $i18n.t('table_label.deliveryWarehouse_name'),
-            show: true
-          },
-          {
-            colname: 'ecode',
-            // name: "发货仓库编码",
-            name: $i18n.t('table_label.deliveryWarehouse_code'),
-            show: false
-          }
-        ],
-        row: res.data.data
-      };
-      self.totalRowCount = res.data.count;
-    },
-    // 分页请求数据
-    changePage(value) {
-      this.pageNum = value;
-    },
-    onFkrpSelected(val) {
-      this.pid = val[0].ID;
-    },
-    closeActionDialog() {
-      this.$emit('closeActionDialog');
+      self.service.orderCenter.updateWarehouse({
+        ID_AND_BILL_NO_LIST:ids,
+        CP_C_PHY_WAREHOUSE_ID: self.formConfig.formData[0].itemdata.pid,
+      }).then(res=>{
+        console.log(res);
+        if(res.data.code == 0){
+          self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+        }else {
+          this.$Modal.confirm({
+            title: res.data.message,
+            width: 500,
+            mask: true,
+            className: 'ark-dialog',
+            render: (h) => {
+              if (res.data.data) {
+                res.data.data.forEach((item , index)=>{
+                  item['index'] = index +1;
+                })
+                return h('Table', {
+                  props: {
+                    columns: [
+                      {
+                        title:'序号',
+                        key:'index'
+                      },
+                      {
+                        title: '单据编号', // '提示信息',
+                        key: 'objno',
+                      },
+                      {
+                        title:'失败原因',
+                        key: 'message'
+                      }
+                    ],
+                    data: res.data.data,
+                  },
+                })
+              }
+            },
+          })
+        }
+        this.$parent.$parent.closeConfirm();
+      })
     }
   }
 };
