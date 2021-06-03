@@ -67,6 +67,7 @@
         publicBouncedConfig: {
           name: '',
           url: '',
+          componentData:{}
         },
 
         isFolding: true, // 高级搜索是否折叠
@@ -279,9 +280,7 @@
                   self.publicBouncedConfig.url = 'modal/orderCenter/modifyReturnLogistics';
                   self.publicBouncedConfig.confirmTitle = '改退回物流';
                   self.publicBouncedConfig.width = 500;
-                  self.publicBouncedConfig.componentData = {
-                    row : JSON.parse(JSON.stringify(self.selection))
-                  }
+                  self.$set(self.publicBouncedConfig.componentData , 'row' , self.selection);
                   setTimeout(() => {
                     self.$children.find((item) => item.name === 'returnModifyLogistics').openConfirm();
                   }, 100);
