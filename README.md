@@ -541,6 +541,11 @@ R3.launchApplication({
 | v1.5.10 | 商品分类组件替换40080 |
 | v1.5.11 | 商品分类/sku-drp clear时入参修改0 |
 | v1.5.12 | 批量新增促销/模拟仿真页面重载配置 |
+| v1.5.13 | 完善退货入库的手工匹配和强制匹配逻辑 |
+| v1.5.14 | 赔付 |
+| v1.5.15 | hrorgTree网关 |
+| v1.5.16 | 直播解析日志 |
+| v1.5.17 | 完成退货入库分页 |
 
 #### Extends-Api 版本说明
 
@@ -560,3 +565,4 @@ R3.launchApplication({
 | v1.0.12 | add btnConfig/commonUtils……                   |
 | v1.0.13 | add importTableConfig                         |
 | v1.0.14 | editCusPageConfig 方法优化                    |
+| v1.0.16 | 物流单号解析配置删除接口联调                    |

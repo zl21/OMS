@@ -1,3 +1,4 @@
+<!-- 编辑tab标签的名字 -->
 <template>
   <div class="tablists">
     <div class="tabs_header">

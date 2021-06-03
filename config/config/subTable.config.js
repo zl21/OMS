@@ -189,12 +189,11 @@ export const strategyPlatform = {
     refcolid: 179930,
     searchdata,
   },
-
-
- 
-
-
-
+  ST_C_LIVE_CAST_STRATEGY_LOG: { // 直播解析
+    table: 'ST_C_LIVE_CAST_STRATEGY_LOG',
+    refcolid: 181435,
+    searchdata,
+  }
 }
 
 //基础数据

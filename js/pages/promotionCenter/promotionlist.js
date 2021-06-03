@@ -6,7 +6,6 @@ import aTable from 'professionalComponents/agGridTable.vue';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dialogVisible from '@/views/modal/promotionCenter/setGroup';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-import loading from 'professionalComponents/loading';
 import groups from '@/assets/js/promotion/groups';
 import businessForm from 'professionalComponents/businessForm';
 import dateUtil from '@/assets/js/__utils__/date.js';
@@ -495,7 +494,6 @@ export default {
     Mydialog,
     errorMessage,
     dialogVisible,
-    loading
   },
   created() {
     groups.load();

@@ -1,7 +1,6 @@
 <!-- 新增 或者 编辑 或者 复制促销-->
 <template>
-  <div class="addOrEditActi">
-    <loading :loading="loading" />
+  <div class="addOrEditActi" v-loading='loading'>
     <div class="steps_content">
       <div ref="basicSteps" class="basicSteps">
         <div class="basic">

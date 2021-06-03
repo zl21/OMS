@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-28 13:22:03
- * @LastEditTime: 2021-05-28 17:34:23
+ * @LastEditTime: 2021-06-02 20:05:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/basicData/logisticsCompanyFilesAddOrEdit.vue
 -->
 <template>
-  <div class="logisticsCompanyFilesAddOrEdit cusArkCollapse customized-detail" :id="this.customizedModuleName">
+  <div class="logisticsCompanyFilesAddOrEdit cusArkCollapse customized-detail" >
     <loading :loading="loading" />
     <div class="buttons customized-detail-btn">
       <businessButton :btn-config="btnConfig" />

@@ -371,6 +371,7 @@ export default {
 
     // 保存
     async save() {
+
       const self = this;
       /* =========== 保存校验 start =========== */
       /* let valueArr = ['CP_C_REGION_AREA_ECODE', 'CP_C_REGION_AREA_ENAME', 'CPCREGIONALIAS', 'REGION_TYPE', 'ISACTIVE'];
@@ -423,7 +424,8 @@ export default {
         this.loading = false;
       });
       if (code === 0) {
-        if (data) self.ID = data;
+        if (data) self.ID = data;//"NATIONALPROVINCIALMUNICIPALEDIT"
+        self.onOk();
         self.initObjItem(self.ID);
         self.backable = true;
         self.$Message.success(message || $i18n.t('modalTips.z9'));

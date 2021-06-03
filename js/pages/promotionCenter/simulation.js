@@ -1,6 +1,6 @@
 import myInput from 'framework/components/element/input';
 import detailtable from 'allpages/promotionCenter/details/table.vue';
-import MultipleBox from 'professionalComponents/multipleBox.vue';
+// import MultipleBox from 'professionalComponents/multipleBox.vue';
 import SingleBox from 'professionalComponents/singleBox.vue';
 import ButtonFkDialog from 'professionalComponents/buttonFkDialog.vue';
 import tabList from '@/assets/js/promotion/columns';
@@ -137,7 +137,7 @@ export default {
     businessButton,
     myInput,
     detailtable,
-    MultipleBox,
+    // MultipleBox,
     SingleBox,
     ButtonFkDialog
   },
