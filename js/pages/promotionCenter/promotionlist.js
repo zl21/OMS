@@ -11,7 +11,6 @@ import businessForm from 'professionalComponents/businessForm';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import { baseColumnDefs, logDataCol, diStatusArr } from './promotionConfig.js'
 
-
 export default {
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
   data() {
@@ -507,7 +506,7 @@ export default {
     // this.$nextTick(() => {   //暂时隐藏,因为后端接口未迁移
     //   this.getPermissions('btnConfig', 'promactiquerylist');
     // });
-
+    this.loading = true;
     // 计算高度 通过设置节点 'totalHeight'
     await this.$comUtils.setTableHeight(this, 165);
 
@@ -576,7 +575,6 @@ export default {
       const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
       const { customizedModuleName } = this.$router.currentRoute.params;
       this.loading = true;
-      // this.$R3loading.show(customizedModuleName);
       const params = {
         ACTISTATUS: this.STATUS.join(',').replace('bSelect-all', 0), // 活动状态
         SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
@@ -597,8 +595,6 @@ export default {
       const {
         data: { code, data }
       } = await this.service.promotionCenter.selectPmList(formData);
-      this.loading = false;
-      // this.$R3loading.hide(customizedModuleName);
       if (code === 0) {
         if (data && data.ACTI_ALL_INFO) {
           // 全部
@@ -617,6 +613,9 @@ export default {
           this.getAgTableData(data.ACTI_OVER_INFO, data.ACTI_OVER_NUM, 3);
         }
       }
+      setTimeout(() => {
+        this.loading = false;
+      }, 10);
     },
     // 获取agTable数据
     getAgTableData(info, num, index) {
