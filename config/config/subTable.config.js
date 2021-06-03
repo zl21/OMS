@@ -203,6 +203,11 @@ export const strategyPlatform = {
     refcolid: 181526,
     searchdata,
   },
+  ST_C_AUTO_AUDIT_LOG:  { // 审单策略
+    table: 'ST_C_AUTO_AUDIT_LOG',
+    refcolid: 181595,
+    searchdata,
+  },
 }
 
 //基础数据

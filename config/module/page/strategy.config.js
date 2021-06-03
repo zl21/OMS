@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-05-08 10:41:48
- * @LastEditTime: 2021-05-31 14:08:32
- * @LastEditors: liu.sl
+ * @LastEditTime: 2021-06-03 19:32:59
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \burgeon-project-logic\config\module\page\strategy.config.js
  */
@@ -81,5 +81,10 @@ export default {
   ST_C_TMALL_EXCHANGE_ORDER: {
     component: () => import('allpages/strategyPlatform/tmExchangeAddOrEdit'),
     labelName: '天猫换货策略编辑',
+  },
+  ST_C_AUTO_AUDIT: {
+    component: () => import('allpages/strategyPlatform/auditOrderStrategy'),
+    labelName: '审单策略',
   }
+  
 };
