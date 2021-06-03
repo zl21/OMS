@@ -193,7 +193,8 @@ export const strategyPlatform = {
     table: 'ST_C_LIVE_CAST_STRATEGY_LOG',
     refcolid: 181435,
     searchdata,
-  }
+  },
+  
 }
 
 //基础数据

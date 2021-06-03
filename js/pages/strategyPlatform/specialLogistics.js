@@ -5,6 +5,8 @@ import businessLabel from 'professionalComponents/businessLabel';
 import switchList from 'professionalComponents/switchList';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import dateUtil from '@/assets/js/__utils__/date.js';
+import subTable from 'professionalComponents/subTable';
+
 import axios from 'axios';
 import service from '@/service/index';
 
@@ -16,7 +18,7 @@ export default {
     businessForm,
     switchList,
     businessActionTable,
-    // loading
+    subTable
   },
   watch: {
     'formConfig.formValue': {
@@ -64,6 +66,24 @@ export default {
 
   data() {
     return {
+      subTableConfig: {
+        centerName: '',
+        tablename: '',
+        objid: '',
+      },
+      // tab切换配置
+      labelList: [
+        {
+          label: '执行动作',
+          value: 'PROPERTY'
+        },
+        {
+          label: '操作日志',
+          value: 'ST_SPECIAL_ASSIGN_LOGISTICS_LOG'
+        }
+      ],
+      labelDefaultValue: 'PROPERTY', // 设置tab默认值，默认展示'自定义属性'
+
       changeCount: 0, //判断数据是否修改过
       force: 0,
       loading: false,
@@ -1311,11 +1331,11 @@ export default {
     // 切换Label & 实时渲染subTable
     labelClick(item) {
       this.labelDefaultValue = item.value;
-      if (this.labelDefaultValue == 'PS_C_ALTERNATE_SKU') return;
+      if (this.labelDefaultValue == 'PROPERTY') return;
       this.subTableConfig = {
-        preTablename: 'PS_C_SKU',
-        tablename: this.labelDefaultValue
-        // objid: this.ID
+        centerName: 'strategyPlatform',
+        tablename: this.labelDefaultValue,
+        objid: this.id
       };
     },
     change(v) {

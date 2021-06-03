@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-20 13:39:45
- * @LastEditTime: 2021-05-20 13:41:09
- * @LastEditors: your name
+ * @LastEditTime: 2021-06-03 10:24:15
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/logisticsDistribute.vue
 -->
@@ -30,12 +30,16 @@
           </div>
         </Panel>
       </Collapse>
-      <!-- tab切换 -->
-      <div class="customized-detail-footbtn">
-        <businessButton :btn-config="btnConfig2" />
-      </div>
 
-      <div class="logistics-foot-table" v-if="tableshow">
+      <div
+        class="logistics-foot-table customized-detail-table"
+        v-if="tableshow"
+      >
+        <!-- tab切换 -->
+        <div class="customized-detail-footbtn">
+          <businessButton :btn-config="btnConfig2" />
+        </div>
+
         <Table
           ref="selection"
           border
@@ -53,7 +57,20 @@
           />
         </div>
       </div>
+
+      <div v-if="id !== '-1'" class="customized-detail-table">
+        <!-- tab切换 -->
+        <businessLabel
+          :label-list="labelList"
+          :label-default-value="labelDefaultValue"
+        />
+        <!-- 子表Part -->
+        <div class="subtablePart">
+          <subTable :component-data="subTableConfig"></subTable>
+        </div>
+      </div>
     </div>
+
     <!-- 各类弹窗 -->
     <Modal
       v-model="modal1"
@@ -64,13 +81,22 @@
       :scrollable="true"
       :class-name="'ark-dialog'"
     >
-    <div class="layout">
-      <FormLayout ref="FormLayout" :default-column="defaultColumn" :defaultconfig="formconfig2" />
-    </div>
-      
+      <div class="layout">
+        <FormLayout
+          ref="FormLayout"
+          :default-column="defaultColumn"
+          :defaultconfig="formconfig2"
+        />
+      </div>
+
       <!-- fnSave -->
       <div class="foot-btns">
-        <Button type="primary" style="margin-right: 10px" @click="getCheckedNodes">保存</Button>
+        <Button
+          type="primary"
+          style="margin-right: 10px"
+          @click="getCheckedNodes"
+          >保存</Button
+        >
         <Button type="primary" @click="fnCancel">取消</Button>
       </div>
     </Modal>
@@ -84,5 +110,5 @@ export default logisticsdistribute;
 </script>
 
 <style lang="less" scoped>
-@import '~@/css/pages/strategyPlatform/logisticsDistribute.less';
+@import "~@/css/pages/strategyPlatform/logisticsDistribute.less";
 </style>
