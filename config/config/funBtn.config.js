@@ -931,7 +931,7 @@ class BtnConfig {
       id = this.orderStatusRule(self , {
         statusName:'BILL_TYPE',
         type: 'radio',
-        statusCode: '2',
+        statusCode: '1',
         statusTips: 'l6',
       })
       if (id) {
