@@ -422,7 +422,7 @@ export default {
             },
             oneObj: data => {
               this.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_ID = data.pid;
-              this.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_ENAME = data.valuedata;
+              this.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_NAME = data.valuedata;
               if (data.pid) {
                 this.getSmallClass(data.pid);
                 // this.sellerRemarkValueChange('returnType', data.valuedata);
@@ -458,6 +458,7 @@ export default {
           },
           {
             text: '刷新',
+            disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.query();
             }
@@ -545,6 +546,10 @@ export default {
       self.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_ID = data.OC_B_LARGE_CLASS_EXCEPTION_ID;
       self.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ENAME = data.RETURN_CP_C_LOGISTICS_ENAME;
       self.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_NAME = data.OC_B_LARGE_CLASS_EXCEPTION_NAME;
+      this.returnTypeFormConfig.formData[0].itemdata.pid = data.RETURN_CP_C_LOGISTICS_ID;
+      this.returnTypeFormConfig.formData[0].itemdata.valuedata = data.RETURN_CP_C_LOGISTICS_ENAME;
+      this.abnormalCategoriesFormConfig.formData[0].itemdata.pid = data.OC_B_LARGE_CLASS_EXCEPTION_ID;
+      this.abnormalCategoriesFormConfig.formData[0].itemdata.valuedata = data.OC_B_LARGE_CLASS_EXCEPTION_NAME;
       self.reForm.config.forEach(async item => {
         switch (item.item.label) {
           case '异常登记编号':
@@ -632,20 +637,13 @@ export default {
       if (this.IMAGE.length > 10) self.$Message.warning(`最大上传10张图片！`);
       
       const data = {};
-      // 是否复制
-      debugger
-      if (this.isCopy) {
-        data.objId = -1
-      } {
-        data.objId = self.$route.params.customizedModuleId === 'New' ? -1 : self.$route.params.customizedModuleId;
-      }
       const AfSend = self.getForm();
       AfSend.ID = self.$route.query.cid || self.$route.params.customizedModuleId === 'New' || this.isCopy ? '-1' : self.$route.params.customizedModuleId;
       AfSend.RETURN_CP_C_LOGISTICS_ID = this.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ID ? this.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ID : '';
       AfSend.RETURN_CP_C_LOGISTICS_ENAME = this.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ENAME ? this.returnTypeFormConfig.formValue.RETURN_CP_C_LOGISTICS_ENAME : '';
       AfSend.OC_B_LARGE_CLASS_EXCEPTION_ID = this.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_ID;
       AfSend.OC_B_LARGE_CLASS_EXCEPTION_NAME = this.abnormalCategoriesFormConfig.formValue.OC_B_LARGE_CLASS_EXCEPTION_NAME;
-      AfSend.IMAGE = JSON.stringify(this.IMAGE);
+      AfSend.IMAGE = this.IMAGE ? JSON.stringify(this.IMAGE) : '';
 
       self.reForm.config.map(item => {
         switch (item.item.label) {
@@ -875,7 +873,7 @@ export default {
       const self = this;
       self.isCopy = true;
       self.btnConfig.buttons.forEach(item => {
-        if (item.text == '审核' || item.text == '作废') item.disabled = true
+        if (item.text == '审核' || item.text == '作废' || item.text == '刷新') item.disabled = true
         if (item.text == '保存') item.disabled = false
       })
       self.reForm.config.map(item => {
