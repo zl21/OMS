@@ -18,7 +18,6 @@ export default {
       vmI18n: $i18n,
       loading: false,
       modal: false, // 查看日志弹框
-      loadings: false, // 下拉框默认loadings值
       release_name: '', // 操作人
       acti_no: '', // 促销编号
       acti_name: '', // 促销名称
