@@ -1208,7 +1208,7 @@ export default {
             TRUE_PRICE: subItem.realAmt,
             PS_C_SKU_ID: subItem.skuId,
             GBCODE: subItem.barCode,
-            PAYABLE_PRICE: 0, // 应付金额初始默认为0
+            PAYABLE_PRICE: subItem.realAmt, // 应付金额初始默认为0 // 20210603 35139 赔付单的明细应付金额默认为实际成交价
             checked: false
           };
         });
