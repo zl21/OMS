@@ -275,7 +275,19 @@ export default {
           this.$emit('getFkChooseItem', this.itemdata);
         }
       } else {
-
+        this.itemdata.pid = '';
+        this.itemdata.valuedata = '';
+        val.forEach((it) => {
+          this.itemdata.pid += `${it.ID},`;
+          this.itemdata.valuedata += `${it.Label},`;
+        })
+        this.itemdata.pid = this.itemdata.pid.replace(/,$/, '');
+        this.itemdata.valuedata = this.itemdata.valuedata.replace(/,$/, '');
+        if (this.isBackRowItem) {
+          this.$emit('getFkChooseItem', val);
+        } else {
+          this.$emit('getFkChooseItem', this.itemdata);
+        }
       }
     },
     InputValueChange(val) {
