@@ -216,13 +216,33 @@
             webname: 'returnModifyWarehouse', // 改退回仓库
             btnclick: () => {
               const self = this;
-              self.publicBouncedConfig.name = 'modifyWarehouse';
-              self.publicBouncedConfig.url = 'modal/orderCenter/modifyWarehouse';
-              self.publicBouncedConfig.confirmTitle = '改退回仓库';
-              self.publicBouncedConfig.width = 500;
-              setTimeout(() => {
-                self.$children.find((item) => item.name === 'modifyWarehouse').openConfirm();
-              }, 100);
+              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              //前置条件判断
+              let arr = self.selection.map(item=>{
+                return {
+                  ID:item.ID,
+                  BILL_NO:item.BILL_NO
+                }
+              })
+              self.service.orderCenter.checkOrderBeforeWarehouse({
+                ID_AND_BILL_NO_LIST:arr
+              }).then(res=>{
+                console.log(res);
+                // if(res.data.code == 0){
+                  self.publicBouncedConfig.name = 'modifyWarehouse';
+                  self.publicBouncedConfig.url = 'modal/orderCenter/modifyWarehouse';
+                  self.publicBouncedConfig.confirmTitle = '改退回仓库';
+                  self.publicBouncedConfig.width = 500;
+                  self.publicBouncedConfig.componentData = {
+                    row : self.selection
+                  }
+                  setTimeout(() => {
+                    self.$children.find((item) => item.name === 'modifyWarehouse').openConfirm();
+                  }, 100);
+                // }else {
+                //   self.$OMS2.omsUtils.msgTips(self, 'warning', res.data.message, 0);
+                // }
+              });
             },
           },
           {

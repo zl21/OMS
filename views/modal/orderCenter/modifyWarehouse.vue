@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-19 17:55:24
+ * @LastEditTime: 2021-06-03 10:23:20
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/views/modal/orderCenter/modifyWarehouse.vue
+-->
 <template>
   <div
     class="semiCustomModal"
@@ -6,19 +14,7 @@
     <div class="Modal-Form">
       <div class="Modal-Form-Item">
         <!-- 修改仓库 -->
-        <label>{{ vmI18n.t("btn.modifyWarehouse") }}:</label>
-        <DropDownSelectFilter
-          :single="true"
-          :data="foreignKeyLink"
-          :total-row-count="totalRowCount"
-          :page-size="pageSize"
-          :show-colname-key="'show'"
-          :data-empty-message="dataEmptyMessage"
-          :columns="columns"
-          :auto-data="AutoData"
-          @on-page-change="changePage"
-          @on-fkrp-selected="onFkrpSelected"
-        />
+        <businessForm :form-config="formConfig"></businessForm>
       </div>
     </div>
     <businessButton :btn-config="btnConfig" />
