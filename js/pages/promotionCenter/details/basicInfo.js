@@ -18,6 +18,7 @@ export default {
   data() {
     return {
       vmI18n:$i18n,
+      toMain: {},
       storesItemdata: {
         // colid: $store.state.forginkeys.columnIds.shop || '1700805184',
         colid: '171929',
@@ -106,6 +107,15 @@ export default {
       }
     };
   },
+  watch: {
+    storesItemdata: {
+      handler(val, oldVal) {
+        this.toMain.stores = val;
+        this.$emit('basicData', this.toMain);
+      },
+      deep: true
+    },
+  },
   computed: {
     groups() {
       return $store.state.customize.forginkeys.groups;
@@ -136,6 +146,10 @@ export default {
     }
   },
   methods: {
+    storeOneObj(val) {
+      // this.toMain.stores = val;
+      // this.$emit('basicData', this.toMain);
+    },
     /**
      * 初始化字段选项组的默认值
      */

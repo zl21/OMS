@@ -214,6 +214,9 @@ export default {
     }
   },
   methods: {
+    basicDataHandel(data) {
+      this.basic_info.stores.itemdata = data.stores || {};
+    },
     closeDialog() {
       this.dialogVisible = false;
     },
@@ -617,7 +620,7 @@ export default {
           message: $i18n.t('modalTips.s5')
         }; // 活动名称未填写！
       }
-      if (this.basic_info.stores.itemdata.valuedata === '') {
+      if (!this.basic_info.stores.itemdata.valuedata) {
         return {
           code: -1,
           message: $i18n.t('modalTips.s6')

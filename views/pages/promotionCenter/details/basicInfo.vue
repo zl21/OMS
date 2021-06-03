@@ -44,6 +44,7 @@
       <div class="row">
         <fkinput
           :itemdata="storesItemdata"
+          @getFkChooseItem="storeOneObj"
           :is-object="storesItemdata.isObject"
         />
       </div>

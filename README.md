@@ -566,3 +566,4 @@ R3.launchApplication({
 | v1.0.13 | add importTableConfig                         |
 | v1.0.14 | editCusPageConfig 方法优化                    |
 | v1.0.16 | 物流单号解析配置删除接口联调                    |
+| v1.0.19 | 物流单号解析配置查询修改参数                    |
