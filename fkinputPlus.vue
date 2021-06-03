@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-05-19 15:56:14
- * @LastEditTime: 2021-06-01 17:37:18
+ * @LastEditTime: 2021-06-03 15:57:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/fkinputPlus.vue
@@ -40,15 +40,29 @@
     </DropDownSelectFilter>
     <DropMultiSelectFilter
       v-else-if="itemdata.fkdisplay === 'mrp'"
+      :single="itemdata.single"
       :data="data"
       :totalRowCount="totalRowCount"
       :pageSize="pageSize"
+      :columnsKey="itemdata.columnsKey"
+      :hidecolumns="itemdata.hidecolumns"
       :showColnameKey="'show'"
+      :placeholder="itemdata.placeholder || ''"
+      :disabled="itemdata.disabled"
+      :isBackRowItem="itemdata.isBackRowItem"
+      :className="itemdata.className"
       @on-page-change="changePage"
       @on-input-value-change="InputValueChange"
+      @on-fkrp-selected="fkrpselected"
+      @on-blur="blur"
+      @on-clear="clear"
+      @on-popper-show="popperShow"
+      @on-keyup="keyup($event)"
       :dataEmptyMessage="dataEmptyMessage"
+      :defaultSelected="itemdata.defaultSelectedMrp || []"
       :columns="columns"
       :AutoData="AutoData"
+      transfer
     >
     </DropMultiSelectFilter>
   </div>
@@ -127,58 +141,14 @@ export default {
       className: this.itemdata.className || '',
     }
   },
-  computed: {
-    /* data() {
-      return this.itemdata.data;
-    },
-    totalRowCount() {
-      return this.itemdata.totalRowCount;
-    }, 
-    pageSize() {
-      return this.itemdata.pageSize;
-    },
-    dataEmptyMessage() {
-      return this.itemdata.dataEmptyMessage || '数据加载中...';
-    },
-    columns() {
-      return this.itemdata.columns || []; // 展现的组 ? ? ?
-    },
-    AutoData() {
-      return this.itemdata.AutoData;
-    },
-    showColnameKey() {
-      return this.itemdata.showColnameKey || 'show';
-    },
-    columnsKey() { // 模糊搜索时要展示的待选数据的Key/表头
-      return this.itemdata.columnsKey || [];
-    },
-    hidecolumns() { // 模糊搜索时要隐藏的待选数据的Key/表头
-      return this.itemdata.hidecolumns || [];
-    },
-    placeholder() {
-      return this.itemdata.placeholder || '';
-    },
-    defaultSelected() {
-      return this.itemdata.defaultSelected || [];
-    },
-    disabled() {
-      return this.itemdata.disabled;
-    },
-    isBackRowItem() {
-      return this.itemdata.isBackRowItem;
-    },
-    pageIndex() {
-      return this.itemdata.pageIndex || 0;
-    },
-    className() {
-      return this.itemdata.className || '';
-    }, */
-  },
+  computed: {},
   watch: {
     itemdata: {
       handler(val, oldVal) {
         if (val.pid || val.valuedata) {
-          this.defaultSelected = [{ ID: val.pid, Label: val.valuedata }];
+          if (this.itemdata.fkdisplay == 'drp') {
+            this.defaultSelected = [{ ID: val.pid, Label: val.valuedata }];
+          }
         }
         if (val.isuppercase && val.valuedata) {
           val.valuedata = val.valuedata.toString().toUpperCase();
@@ -187,10 +157,36 @@ export default {
       deep: true
     },
   },
+  created() {
+    if (this.itemdata.fkdisplay == 'mrp') {
+      const formItem = this.$OMS2.omsUtils.deepClone(this.itemdata);
+      const ids = formItem.pid.split(',');
+      const values = formItem.valuedata.split(',');
+      formItem.defaultSelectedMrp = [];
+      ids.forEach((it, index) => {
+        const item = { ID: it, Label: values[index] }
+        formItem.defaultSelectedMrp.push(item);
+      })
+      this.itemdata.defaultSelectedMrp = formItem.defaultSelectedMrp;
+      this.$set(this.itemdata, 'defaultSelectedMrp', formItem.defaultSelectedMrp)
+    }
+  },
   mounted() {
     this.$nextTick(() => {
       if (this.itemdata.pid || this.itemdata.valuedata) {
-        this.defaultSelected = [{ ID: this.itemdata.pid, Label: this.itemdata.valuedata }];
+        if (this.itemdata.fkdisplay == 'drp') {
+          this.defaultSelected = [{ ID: this.itemdata.pid, Label: this.itemdata.valuedata }];
+        } else if (this.itemdata.fkdisplay == 'mrp') {
+          // const ids = this.itemdata.pid.split(',');
+          // const values = this.itemdata.valuedata.split(',');
+          // console.log(ids);
+          // this.itemdata.defaultSelected = [];
+          // ids.forEach((it, index) => {
+          //   const item = { ID: it, Label: values[index] }
+          //   this.itemdata.defaultSelected.push(item);
+          // })
+          // this.$set(this.itemdata, 'defaultSelected', this.itemdata.defaultSelected)
+        }
       }
     })
   },
@@ -262,7 +258,19 @@ export default {
           this.$emit('getFkChooseItem', this.itemdata);
         }
       } else {
-
+        this.itemdata.pid = '';
+        this.itemdata.valuedata = '';
+        val.forEach((it) => {
+          this.itemdata.pid += `${it.ID},`;
+          this.itemdata.valuedata += `${it.Label},`;
+        })
+        this.itemdata.pid = this.itemdata.pid.replace(/,$/, '');
+        this.itemdata.valuedata = this.itemdata.valuedata.replace(/,$/, '');
+        if (this.isBackRowItem) {
+          this.$emit('getFkChooseItem', val);
+        } else {
+          this.$emit('getFkChooseItem', this.itemdata);
+        }
       }
     },
     InputValueChange(val) {
