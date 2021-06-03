@@ -386,4 +386,5 @@ export default {
     checkOrderBeforeLogistics: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/checkOrderBeforeLogistics' , params),  //改退回物流检查接口 
     checkOrderBeforeWarehouse: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/checkOrderBeforeWarehouse' , params),  //改退回仓库检查接口
     updateWarehouse: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/updateWarehouse' , params),  //改退回仓库接口
+    updateLogistics: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/updateLogistics' , params),  //改退回物流接口
 }
