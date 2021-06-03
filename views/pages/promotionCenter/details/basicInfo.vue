@@ -43,10 +43,11 @@
       </div>
       <div class="row">
         <fkinput
-          :itemdata="storesItemdata"
-          @getFkChooseItem="oneObj"
-          :is-object="storesItemdata.isObject"
+          :itemdata="basicData.stores.itemdata"
+          :is-object="basicData.stores.itemdata.isObject"
+          @getFkChooseItem="oneObj_shop"
         />
+        <!-- @getFkChooseItem="oneObj_shop" -->
       </div>
       <div class="row">
         <div class="form_label">
@@ -135,7 +136,7 @@
           <SingleBox
             :value="basicData.gradient_gift"
             :options="groups.gradientGift"
-            @changeSingle="checkGradientGiftChange"
+            @changeSingle="storesItemdata"
           />
         </div>
       </div>
@@ -163,9 +164,10 @@
       </div>
       <div class="row">
         <fkinput
-          :itemdata="except_provincesItemdata"
-          @getFkChooseItem="oneObj"
+          :itemdata="basicData.except_provinces.itemdata"
+          @getFkChooseItem="oneObj_province"
         />
+        <!-- @getFkChooseItem="oneObj_province" -->
       </div>
       <div class="row">
         <div class="form_label">

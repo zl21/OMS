@@ -17,36 +17,8 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
-      toMain: {},
-      storesItemdata: {
-        // colid: $store.state.forginkeys.columnIds.shop || '1700805184',
-        colid: '171929',
-        colname: 'CP_C_SHOP_ID', // 当前字段的名称
-        fkdisplay: 'drp', // 外键关联类型
-        serviceId: "r3-cp",
-        isfk: true, // 是否有fk键
-        isnotnull: true, // 是否必填
-        name: $i18n.t('table_label.shopName'),
-        readonly: false, // 是否可编辑，对应input   readonly属性
-        isOneData: true,
-        valuedata: '', // 这个是选择的值
-        isObject: true
-      }, // 多选店仓信息
-      except_provincesItemdata: {
-        colid: '180257',
-        colname: 'CP_C_PROVINCE_IDS',
-        fkdisplay: 'mrp',
-        serviceId: "r3-cp",
-        isfk: true,
-        isnotnull: false,
-        isuppercase: false,
-        name: $i18n.t('common.exclude_province'),
-        readonly: false,
-        reftable: 'CP_C_PROVINCE',
-        reftableid: 23862,
-        valuedata: ''
-      },
+      vmI18n: $i18n,
+      toMain: this.basicData,
       my_input_sh: {
         itemdata: {
           col: 1,
@@ -104,24 +76,26 @@ export default {
             trigger: 'blur'
           }
         ]
-      }
+      },
+      storesItemdata: this.basicData.stores,
+      except_provincesItemdata: this.basicData.except_provinces,
     };
   },
   watch: {
-    storesItemdata: {
+    /* storesItemdata: {
       handler(val, oldVal) {
-        this.toMain.stores = val;
+        this.toMain.stores.itemdata = val;
         this.$emit('basicData', this.toMain);
       },
       deep: true
     },
     except_provincesItemdata: {
       handler(val, oldVal) {
-        this.toMain.except_provinces = val;
+        this.toMain.except_provinces.itemdata = val;
         this.$emit('basicData', this.toMain);
       },
       deep: true
-    }
+    } */
   },
   computed: {
     groups() {
@@ -149,14 +123,19 @@ export default {
   props: {
     basicData: {
       type: Object,
-      defaults: () => []
+      default: () => ({})
     }
   },
   methods: {
-    oneObj(val) {
-      console.log(val);
-      // this.toMain.stores = val;
-      // this.$emit('basicData', this.toMain);
+    oneObj_shop(val) {
+      console.log(val.valuedata);
+      this.toMain.stores.itemdata = val;
+      this.$emit('changeBasicData', this.toMain);
+    },
+    oneObj_province(val) {
+      console.log(val.valuedata);
+      this.toMain.except_provinces.itemdata = val;
+      this.$emit('changeBasicData', this.toMain);
     },
     /**
      * 初始化字段选项组的默认值
@@ -240,7 +219,11 @@ export default {
       this.basicData.offline_time = val;
     }
   },
+  created: {
+
+  },
   mounted() {
+    console.log('==:',this.basicData);
     this.initGroupsDefault();
   }
 };

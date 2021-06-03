@@ -14,35 +14,26 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       objid: '-1', // 新增-1 保存的正整数
       dialogVisible: false,
       basic_info: {
-        // 基础信息设置
         activity_name: '', // 活动名称【必填】
         stores: {
           itemdata: {
             col: 1,
             // colid: $store.state.forginkeys.columnIds.shop || '1700805184',
-            colid: '1700805184',
+            colid: '171929',
+            serviceId: "r3-cp",
             colname: 'CP_C_SHOP_ID', // 当前字段的名称
             datelimit: 'all',
             display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
             fkdisplay: 'drp', // 外键关联类型
-            fkdesc: '店铺',
-            inputname: 'CP_C_SHOP:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
             isfk: true, // 是否有fk键
             isnotnull: true, // 是否必填
-            isuppercase: false, // 是否转大写
-            length: 65535, // 最大长度是多少
             // name: "店铺名称", // input前面显示的lable值
             name: $i18n.t('table_label.shopName'),
             readonly: false, // 是否可编辑，对应input   readonly属性
-            reftable: 'CP_C_SHOP', // 对应的表
-            // reftableid: 24475, //对应的表ID
-            row: 1,
-            statsize: -1,
-            type: 'STRING', // 这个是后台用的
             isOneData: true,
             valuedata: '', // 这个是选择的值
             isObject: true
@@ -59,26 +50,15 @@ export default {
         order_note_content: '', // 备注内容
         except_provinces: {
           itemdata: {
-            col: 1,
-            colid: '168686',
+            colid: '180257',
+            serviceId: "r3-cp",
             colname: 'CP_C_PROVINCE_IDS',
-            datelimit: 'all',
-            display: 'text',
-            fkdesc: '排除省',
             fkdisplay: 'mrp',
-            inputname: 'CP_C_PROVINCE_IDS:ENAME',
             isfk: true,
             isnotnull: false,
-            isuppercase: false,
-            length: 65535,
             // name: "排除省",
             name: $i18n.t('common.exclude_province'),
             readonly: false,
-            reftable: 'CP_C_PROVINCE',
-            reftableid: 23862,
-            row: 1,
-            statsize: -1,
-            type: 'STRING',
             valuedata: ''
           }
         }, // 排除省份
@@ -171,7 +151,7 @@ export default {
       current: 0,
       loadDis: false, // 是否加载促销详情
       isScorlling: false, // 是否在滚动中
-      loading:false
+      loading: false
     };
   },
   computed: {
@@ -216,8 +196,8 @@ export default {
   },
   methods: {
     basicDataHandel(data) {
-      this.basic_info.stores.itemdata = data.stores || {};
-      this.basic_info.except_provinces.itemdata = data.except_provinces || {};
+      this.basic_info.stores = data.stores || {};
+      this.basic_info.except_provinces = data.except_provinces || {};
     },
     closeDialog() {
       this.dialogVisible = false;
@@ -543,7 +523,7 @@ export default {
     /**
      * 初始化默认时间  时间范围好下线时间
      */
-    initDefaultTime() {},
+    initDefaultTime() { },
     /**
      * 滚动选中区域
      */
