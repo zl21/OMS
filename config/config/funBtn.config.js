@@ -140,10 +140,6 @@ class BtnConfig {
         btnclick: () => this.btnMainHandler('modifySellerRemark'),
       },
       {
-        webname: 'tuihuicangku_tuihuanhuo', // 退货换单 - 修改退回仓库
-        btnclick: () => this.btnMainHandler('modifyReturnWarehouse'),
-      },
-      {
         webname: 'refund_to_exchange', // 退货换单 - 退货转换货
         btnclick: () => this.btnMainHandler('returnGoodsOrder'),
       },
@@ -539,11 +535,6 @@ class BtnConfig {
         paramsType = 1
         break
 
-      case 'modifyReturnWarehouse':
-        funName = 'modifyReturnWarehouseHandler'
-        tips = 'm1'
-        paramsType = 1
-        break
       case 'wmsCreate':
         funName = `${type}Handler`
         tips = 'ga'
@@ -881,11 +872,6 @@ class BtnConfig {
       }
     }
   }
-  // 修改退货仓库
-  modifyReturnWarehouseHandler(self, ids) {
-    self.modifyWarehouse.componentData = { ids }
-    commonUtils.importTable(self, 'modifyWarehouse', 'modifyWarehouse')
-  }
   // 修改备注
   modifyRemarkHandler(self, id) {
     self.changeRemarkConfig.componentData = {
@@ -942,11 +928,6 @@ class BtnConfig {
           }
         });
     } else {
-      let id = this.orderStatusRule(self, {
-        type: 'radio',
-        statusCode: '待退货入库',
-        statusTips: 'l6',
-      })
       id = this.orderStatusRule(self , {
         statusName:'BILL_TYPE',
         type: 'radio',
