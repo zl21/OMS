@@ -40,15 +40,28 @@
     </DropDownSelectFilter>
     <DropMultiSelectFilter
       v-else-if="itemdata.fkdisplay === 'mrp'"
+      :single="itemdata.single"
       :data="data"
       :totalRowCount="totalRowCount"
       :pageSize="pageSize"
+      :columnsKey="itemdata.columnsKey"
+      :hidecolumns="itemdata.hidecolumns"
       :showColnameKey="'show'"
+      :placeholder="itemdata.placeholder || ''"
+      :disabled="itemdata.disabled"
+      :isBackRowItem="itemdata.isBackRowItem"
+      :className="itemdata.className"
       @on-page-change="changePage"
       @on-input-value-change="InputValueChange"
+      @on-fkrp-selected="fkrpselected"
+      @on-blur="blur"
+      @on-clear="clear"
+      @on-popper-show="popperShow"
+      @on-keyup="keyup($event)"
       :dataEmptyMessage="dataEmptyMessage"
       :columns="columns"
       :AutoData="AutoData"
+      transfer
     >
     </DropMultiSelectFilter>
   </div>
