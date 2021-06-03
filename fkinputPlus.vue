@@ -159,6 +159,7 @@ export default {
   },
   created() {
     if (this.itemdata.fkdisplay == 'mrp') {
+      if (!this.itemdata.pid) return
       const formItem = this.$OMS2.omsUtils.deepClone(this.itemdata);
       const ids = formItem.pid.split(',');
       const values = formItem.valuedata.split(',');
