@@ -2,7 +2,6 @@ import BasicInfo from 'allpages/promotionCenter/details/basicInfo';
 import InfoSet from 'allpages/promotionCenter/details/infoSet';
 import GiftSet from 'allpages/promotionCenter/details/giftSet';
 import stepsBars from 'professionalComponents/steps';
-import loading from 'professionalComponents/loading';
 import groups from '@/assets/js/promotion/groups';
 
 export default {
@@ -11,7 +10,6 @@ export default {
     InfoSet,
     GiftSet,
     stepsBars,
-    loading
   },
   data() {
     return {

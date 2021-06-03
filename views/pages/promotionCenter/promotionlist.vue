@@ -1,7 +1,6 @@
 <template>
   <!-- promactiqueryList -->
-  <div class="promotion-content custom-main customized-list">
-    <loading :loading="loadings" />
+  <div class="promotion-content custom-main customized-list" v-loading='loadings'>
     <div class="operation-content totalHeight custom-form customized-list-form">
       <businessForm :form-config="formConfig" />
     </div>

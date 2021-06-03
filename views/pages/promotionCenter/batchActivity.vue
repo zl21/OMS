@@ -1,7 +1,6 @@
 <!-- 批量新增、编辑、复制促销活动-->
 <template>
-  <div class="batchActivity">
-   <loading :loading="loading" />
+  <div class="batchActivity" v-loading='loading'>
     <div class="steps_content">
       <div ref="basicSteps" class="basicSteps">
         <div class="basic">
