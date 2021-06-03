@@ -546,6 +546,8 @@ R3.launchApplication({
 | v1.5.15 | hrorgTree网关 |
 | v1.5.16 | 直播解析日志 |
 | v1.5.17 | 完成退货入库分页 |
+| v1.5.19 | 物流单号解析配置查询修改参数                    |
+| v1.5.20 | 商品价格策略日志 |
 
 #### Extends-Api 版本说明
 
@@ -566,4 +568,3 @@ R3.launchApplication({
 | v1.0.13 | add importTableConfig                         |
 | v1.0.14 | editCusPageConfig 方法优化                    |
 | v1.0.16 | 物流单号解析配置删除接口联调                    |
-| v1.0.19 | 物流单号解析配置查询修改参数                    |

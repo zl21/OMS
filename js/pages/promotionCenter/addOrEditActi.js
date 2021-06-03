@@ -216,6 +216,7 @@ export default {
   methods: {
     basicDataHandel(data) {
       this.basic_info.stores.itemdata = data.stores || {};
+      this.basic_info.except_provinces.itemdata = data.except_provinces || {};
     },
     closeDialog() {
       this.dialogVisible = false;

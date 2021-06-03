@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-05-24 10:29:06
+ * @LastEditTime: 2021-06-03 11:41:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -66,10 +66,10 @@ export default {
     
   },
   mounted(){
-    let returnAmount = {
-      FINAL_ACTUAL_AMT:'10'
-    }
-     R3.store.commit(`customize/returnAmount`, returnAmount)
+    // let returnAmount = {
+    //   FINAL_ACTUAL_AMT:'10'
+    // }
+    //  R3.store.commit(`customize/returnAmount`, returnAmount)
      console.log('this.data:',this.data);
   },
   methods:{

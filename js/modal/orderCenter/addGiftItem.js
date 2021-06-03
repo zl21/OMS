@@ -202,35 +202,45 @@ export default {
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
           this.$parent.$parent.$parent.$parent.$parent.getDetailsData()
-        } else {
-          if (!res.data.data) {
-            commonUtils.tipShow('error', self, res.data.message) 
-            return
-          }
-
+        } else if(res.data.code ===  -1){
           this.$Modal.confirm({
-            title: res.data.message,
+            title: "message",
             width: 500,
-            mask: true,
-            className: 'ark-dialog',
-            render: (h) => {
-              if (res.data.data) {
-                return h('Table', {
-                  props: {
-                    columns: [
-                      {
-                        title: $i18n.t('modalTitle.a6'), // '提示信息',
-                        key: 'message',
-                      },
-                    ],
-                    data: res.data.data,
-                  },
-                })
-              }
-              return false
-            },
-          })
+            className:'ark-dialog',
+            mask:true,
+            render: h => h('div', {
+              },res.data.data[0].message)
+          });
         }
+        // else {
+        //   if (!res.data.data) {
+        //     commonUtils.tipShow('error', self, res.data.message) 
+        //     return
+        //   }
+        //   console.log('mingxi');
+        //   this.$Modal.confirm({
+        //     title: res.data.message,
+        //     width: 500,
+        //     mask: true,
+        //     className: 'ark-dialog',
+        //     render: (h) => {
+        //       if (res.data.data) {
+        //         return h('Table', {
+        //           props: {
+        //             columns: [
+        //               {
+        //                 title: $i18n.t('modalTitle.a6'), // '提示信息',
+        //                 key: 'message',
+        //               },
+        //             ],
+        //             data: res.data.data,
+        //           },
+        //         })
+        //       }
+        //       return false
+        //     },
+        //   })
+        // }
      
       })
     },

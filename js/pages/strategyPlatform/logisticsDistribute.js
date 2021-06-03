@@ -2,10 +2,15 @@ import businessForm from 'professionalComponents/businessForm';
 import businessButton from 'professionalComponents/businessButton';
 import service from '@/service/index';
 import dateUtil from '@/assets/js/__utils__/date.js';
+import subTable from 'professionalComponents/subTable';
+import businessLabel from 'professionalComponents/businessLabel';
+
 export default {
   components: {
     businessForm,
-    businessButton
+    businessButton,
+    businessLabel,
+    subTable
   },
   data() {
     return {
@@ -379,7 +384,20 @@ export default {
       tableSelectArr: [],
       tableshow: false, //表格是否显示
       stCDeliveryAreaRegionItemList: [],
-      totalpage: 10
+      totalpage: 10,
+      labelDefaultValue: 'ST_DELIVERY_AREA_LOG', // 设置tab默认值
+       // tab切换配置
+       labelList: [
+        {
+          label: '操作日志',
+          value: 'ST_DELIVERY_AREA_LOG'
+        }
+      ],
+      subTableConfig: {
+        centerName: '',
+        tablename: '',
+        objid: '',
+      },
     };
   },
   watch: {
@@ -409,6 +427,11 @@ export default {
       this.id = customizedModuleId;
       this.FormConfig.formData[0].itemdata.readonly = true;
       this.init();
+      this.subTableConfig = {
+        centerName: 'strategyPlatform',
+        tablename: "ST_DELIVERY_AREA_LOG",
+        objid: this.id
+      };
     }
   },
   methods: {
