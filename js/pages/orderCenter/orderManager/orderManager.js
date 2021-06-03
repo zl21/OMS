@@ -67,6 +67,7 @@
         publicBouncedConfig: {
           name: '',
           url: '',
+          componentData:{}
         },
 
         isFolding: true, // 高级搜索是否折叠
@@ -217,6 +218,10 @@
             btnclick: () => {
               const self = this;
               self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.selection.length){
+                self.$OMS2.omsUtils.msgTips(self, 'warning', 'l0');
+                return;
+              }
               //前置条件判断
               let arr = self.selection.map(item=>{
                 return {
@@ -228,7 +233,7 @@
                 ID_AND_BILL_NO_LIST:arr
               }).then(res=>{
                 console.log(res);
-                // if(res.data.code == 0){
+                if(res.data.code == 0){
                   self.publicBouncedConfig.name = 'modifyWarehouse';
                   self.publicBouncedConfig.url = 'modal/orderCenter/modifyWarehouse';
                   self.publicBouncedConfig.confirmTitle = '改退回仓库';
@@ -239,9 +244,9 @@
                   setTimeout(() => {
                     self.$children.find((item) => item.name === 'modifyWarehouse').openConfirm();
                   }, 100);
-                // }else {
-                //   self.$OMS2.omsUtils.msgTips(self, 'warning', res.data.message, 0);
-                // }
+                }else {
+                  self.$OMS2.omsUtils.msgTips(self, 'warning', res.data.message, 0);
+                }
               });
             },
           },
@@ -249,13 +254,40 @@
             webname: 'returnModifyLogistics', // 改退回物流
             btnclick: () => {
               const self = this;
-              self.publicBouncedConfig.name = 'returnModifyLogistics';
-              self.publicBouncedConfig.url = 'modal/orderCenter/modifyReturnLogistics';
-              self.publicBouncedConfig.confirmTitle = '改退回物流';
-              self.publicBouncedConfig.width = 500;
-              setTimeout(() => {
-                self.$children.find((item) => item.name === 'returnModifyLogistics').openConfirm();
-              }, 100);
+              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.selection.length){
+                self.$OMS2.omsUtils.msgTips(self, 'warning', 'l0');
+                return;
+              }
+              if(self.selection.length > 1){
+                self.$OMS2.omsUtils.msgTips(self, 'warning', 'dr');
+                return;
+              }
+              //前置条件判断
+              let arr = self.selection.map(item=>{
+                return {
+                  ID:item.ID,
+                  BILL_NO:item.BILL_NO
+                }
+              })
+              self.service.orderCenter.checkOrderBeforeLogistics({
+                ID_AND_BILL_NO_LIST:arr,
+                MOCK_TYPE:1
+              }).then(res=>{
+                if(res.data.code == 0){
+                  console.log(res);
+                  self.publicBouncedConfig.name = 'returnModifyLogistics';
+                  self.publicBouncedConfig.url = 'modal/orderCenter/modifyReturnLogistics';
+                  self.publicBouncedConfig.confirmTitle = '改退回物流';
+                  self.publicBouncedConfig.width = 500;
+                  self.$set(self.publicBouncedConfig.componentData , 'row' , self.selection);
+                  setTimeout(() => {
+                    self.$children.find((item) => item.name === 'returnModifyLogistics').openConfirm();
+                  }, 100);
+                }else {
+                  self.$OMS2.omsUtils.msgTips(self, 'warning', res.data.message, 0);
+                }
+              });
             },
           },
         ],
@@ -822,6 +854,23 @@
         self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
         self.service.orderCenter.returnConfirmCheck({ID:self.selection[0].ID}).then(res=>{
           console.log(res);
+          let content  = '';
+          content = res.data.message;
+          if(content){
+            this.$Modal.confirm({
+              title:'提示',
+              content:content,
+              showCancel:true,
+              onOk:()=>{
+                console.log('123');
+                self.service.orderCenter.returnConfirm({
+                  ID:self.selection[0].ID
+                }).then(res=>{
+                  console.log(res);
+                })
+              }
+            })
+          }
         })
       }
     },

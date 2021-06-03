@@ -3,6 +3,7 @@ import InfoSet from 'allpages/promotionCenter/details/infoSet';
 import GiftSet from 'allpages/promotionCenter/details/giftSet';
 import stepsBars from 'professionalComponents/steps';
 import groups from '@/assets/js/promotion/groups';
+import BurgeonDate from '@/assets/js/__utils__/date.js';
 
 export default {
   components: {
@@ -216,6 +217,7 @@ export default {
   methods: {
     basicDataHandel(data) {
       this.basic_info.stores.itemdata = data.stores || {};
+      this.basic_info.except_provinces.itemdata = data.except_provinces || {};
     },
     closeDialog() {
       this.dialogVisible = false;
@@ -374,7 +376,7 @@ export default {
         });
         return;
       }
-      const index = this.basic_info.activity_type + new Date().Format('yyyyMMddHHMMSS');
+      const index = this.basic_info.activity_type + BurgeonDate.Format(new Date(), 'yyyy-MM-dd 23:59:59')
       const params = {
         objid: this.objid,
         basic_info: this.basic_info,

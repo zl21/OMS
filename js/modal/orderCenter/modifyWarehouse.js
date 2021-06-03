@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-02 19:17:14
- * @LastEditTime: 2021-06-03 11:25:20
+ * @LastEditTime: 2021-06-03 16:16:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/modal/orderCenter/modifyWarehouse.js
@@ -35,18 +35,18 @@ export default {
           version:'1.4',
           itemdata: {
             col: 1,
-            colid: 179538,
-            colname: 'CP_C_LOGISTICS_ID', // 当前字段的名称
+            colid: 179536,
+            colname: 'CP_C_PHY_WAREHOUSE_IN_ID', // 当前字段的名称
             datelimit: 'all',
             display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
             fkdisplay: 'drp', // 外键关联类型
             fkdesc: '实体仓档案',
-            inputname: 'CP_C_LOGISTICS_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
+            inputname: 'CP_C_PHY_WAREHOUSE_IN_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
             isfk: true, // 是否有fk键
             isnotnull: true, // 是否必填
             isuppercase: false, // 是否转大写
             length: 20, // 最大长度是多少
-            name: '物流公司', // '入库实体仓库'
+            name: '仓库名称', // '入库实体仓库'
             readonly: false, // 是否可编辑，对应input   readonly属性
             reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
             reftableid: 24486, // 对应的表ID
@@ -80,7 +80,6 @@ export default {
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              const self = this;
               this.confirm();
             } // 按钮点击事件
           }
@@ -114,9 +113,8 @@ export default {
         }else {
           this.$Modal.confirm({
             title: res.data.message,
-            width: 500,
+            width: 400,
             mask: true,
-            className: 'ark-dialog',
             render: (h) => {
               if (res.data.data) {
                 res.data.data.forEach((item , index)=>{
@@ -141,10 +139,13 @@ export default {
                     data: res.data.data,
                   },
                 })
+              }else {
+                return h('p' , {} , res.data.message)
               }
             },
           })
         }
+        this.$parent.$parent.$parent.query();
         this.$parent.$parent.closeConfirm();
       })
     }
