@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-02 19:22:02
- * @LastEditTime: 2021-06-03 14:14:46
+ * @LastEditTime: 2021-06-03 16:12:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/modal/orderCenter/returngood/modifyReturnLogistics.js
@@ -116,14 +116,13 @@ export default {
                 ID_AND_BILL_NO_LIST:ids,
                 CP_C_LOGISTICS_ID: self.formConfig.formData[0].itemdata.pid,
                 EXPRESS_CODE:self.formConfig.formValue.logistic_no,
-                MOCK_TYPE:1
               }).then(res=>{
                   console.log(res);
                   if(res.data.code == 0){
-                    self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 1);
+                    self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
                     this.$parent.$parent.$parent.query();
                   }else {
-                    self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 1);
+                    self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
                   }
                   this.$parent.$parent.closeConfirm();
               })

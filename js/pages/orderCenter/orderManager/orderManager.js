@@ -854,6 +854,23 @@
         self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
         self.service.orderCenter.returnConfirmCheck({ID:self.selection[0].ID}).then(res=>{
           console.log(res);
+          let content  = '';
+          content = res.data.message;
+          if(content){
+            this.$Modal.confirm({
+              title:'提示',
+              content:content,
+              showCancel:true,
+              onOk:()=>{
+                console.log('123');
+                self.service.orderCenter.returnConfirm({
+                  ID:self.selection[0].ID
+                }).then(res=>{
+                  console.log(res);
+                })
+              }
+            })
+          }
         })
       }
     },
