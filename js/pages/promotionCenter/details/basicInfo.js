@@ -115,6 +115,13 @@ export default {
       },
       deep: true
     },
+    except_provincesItemdata: {
+      handler(val, oldVal) {
+        this.toMain.except_provinces = val;
+        this.$emit('basicData', this.toMain);
+      },
+      deep: true
+    }
   },
   computed: {
     groups() {
@@ -146,7 +153,8 @@ export default {
     }
   },
   methods: {
-    storeOneObj(val) {
+    oneObj(val) {
+      console.log(val);
       // this.toMain.stores = val;
       // this.$emit('basicData', this.toMain);
     },
