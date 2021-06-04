@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-06-03 11:41:42
+ * @LastEditTime: 2021-06-04 14:02:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -23,21 +23,31 @@
       <li>
         <div class="calculation-item">
           <span>应退运费</span>
-          <label>{{ data.SHIP_AMT }}</label>
+          <label>
+            <Input v-if="type" v-model="editData.SHIP_AMT" :regx="/^\d*\.{0,1}\d{0,2}$/" @on-change="inputChange"></Input>
+            <span v-else>
+              {{ data.SHIP_AMT }}
+            </span>
+          </label>
         </div>
       </li>
       <li class="symbol">+</li>
       <li>
         <div class="calculation-item">
           <span>调整金额</span>
-          <label>{{ data.ADJUST_AMT }}</label>
+          <label>
+            <Input v-if="type" v-model="editData.ADJUST_AMT" :regx=" /(^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d{1,2})?$)/" @on-change="inputChange"></Input>
+            <span v-else>
+              {{ editData.ADJUST_AMT }}
+            </span>
+          </label>
         </div>
       </li>
-      <li v-if="!tableName === 'OC_B_RETURN_ORDER_VIRTUAL_TABLE'" class="symbol">-</li>
-      <li v-if="!tableName === 'OC_B_RETURN_ORDER_VIRTUAL_TABLE'" >
+      <li v-if="tableName" class="symbol">-</li>
+      <li v-if="tableName" >
         <div class="calculation-item">
           <span>换货金额</span>
-          <label>{{ data.EXCHANGE_AMOUNT }}</label>
+          <label>{{ data.AMT_EXCHANGE }}</label>
         </div>
       </li>
       <li class="symbol">=</li>
@@ -59,21 +69,39 @@ export default {
   data() {
     return {
       data: R3.store.state.customize.returnAmount,
-      tableName:this.$route.params.tableName
+      editData:JSON.parse(JSON.stringify(R3.store.state.customize.returnAmount)),
+      tableName:this.$route.params.tableName === 'OC_B_RETURN_ORDER_VIRTUAL_TABLE' ? 0 : 1,
+      type:this.$route.query.RETURN_SOURCE === '手工新增' ? 1 : 0
     };
   },
   created(){
     
   },
   mounted(){
-    // let returnAmount = {
-    //   FINAL_ACTUAL_AMT:'10'
-    // }
-    //  R3.store.commit(`customize/returnAmount`, returnAmount)
-     console.log('this.data:',this.data);
+    // 应退运费，正数，选填项
+    // 调整金额，可正可负，选填项
+    // 换货金额，sum所有换货商品“成交金额“，只读，正数
+    // 最终应退总额=商品应退金额+应退运费+/-调整金额-换货金额，自动算出，
+
   },
   methods:{
-
+    inputChange(e){
+      let FINAL_ACTUAL_AMT
+      console.log(e.target.value);
+      if(this.tableName){
+        FINAL_ACTUAL_AMT =  Number(this.data.PRO_REAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT) - Number(this.data.AMT_EXCHANGE);
+      }else{
+        FINAL_ACTUAL_AMT =  Number(this.data.PRO_REAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT);
+      }
+      this.editData.FINAL_ACTUAL_AMT = FINAL_ACTUAL_AMT;
+      this.editData.FINAL_REAL_AMT = FINAL_ACTUAL_AMT;
+      R3.store.commit(`customize/returnAmount`, JSON.parse(JSON.stringify({
+        SHIP_AMT:Number(this.editData.SHIP_AMT),
+        ADJUST_AMT:Number(this.editData.ADJUST_AMT),
+        FINAL_ACTUAL_AMT:Number(this.editData.FINAL_ACTUAL_AMT),
+        FINAL_REAL_AMT:Number(this.editData.FINAL_REAL_AMT),
+        })));
+    }
   },
 };
 </script>
