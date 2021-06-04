@@ -16,7 +16,7 @@
               v-if="panel.rules && panel.rules.length>0"
               class="detail_rules"
             >
-              <CTSIT
+              <meetConditions
                 v-for="(rule,_index) in panel.rules"
                 :key="_index"
                 :rule="rule"

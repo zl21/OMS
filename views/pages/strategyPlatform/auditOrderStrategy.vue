@@ -1,0 +1,249 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-06-03 19:24:42
+ * @LastEditTime: 2021-06-03 19:27:45
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/auditOrderStrategy.vue
+-->
+<template>
+  <!-- 审单策略 -->
+  <div class="auditOrderStrategy customized-detail">
+    <div class="audit_button customized-detail-btn">
+      <businessButton :btn-config="btnConfig" />
+    </div>
+    <div class="audit_form customized-detail-main">
+      <Collapse v-model="collapseValue">
+        <Panel name="1">
+          基础资料
+          <p slot="content">
+            <span class="baseData">
+              <businessForm :form-config="formConfig" />
+              <p style="marginTop:10px;marginLeft:70px">
+                <span>按系统创建时间等待</span>
+                <Input
+                  v-model="resultData.ST_C_AUTO_AUDIT.WAIT_TIME"
+                  style="width:80px"
+                  @on-change="modify"
+                />
+                <span>分钟后自动审核</span>
+              </p>
+            </span>
+          </p>
+        </Panel>
+        <Panel name="2">
+          限制条件
+          <p slot="content">
+            <span class="conditions">
+              <p>
+                <label class="label">单据创建方式：</label>
+                <Checkbox
+                  :indeterminate="createMethod.indeterminate"
+                  :value="createMethod.checkAll"
+                  @click.prevent.native="createMethod_handleCheckAll"
+                >全选</Checkbox>
+                <CheckboxGroup
+                  v-model="resultData.ST_C_AUTO_AUDIT_ITEM.BILL_FOUND_TYPE.VALUE"
+                  @on-change="createMethod_checkAllGroupChange"
+                >
+                  <Checkbox
+                    label="3"
+                  >手工导入</Checkbox>
+                  <Checkbox
+                    label="1"
+                  >手工新增</Checkbox>
+                </CheckboxGroup>
+              </p>
+              <p>
+                <label class="label">单据类型:</label>
+                <Checkbox
+                  :indeterminate="orderType.indeterminate"
+                  :value="orderType.checkAll"
+                  @click.prevent.native="orderType_handleCheckAll"
+                >全选</Checkbox>
+                <CheckboxGroup
+                  v-model="resultData.ST_C_AUTO_AUDIT_ITEM.BILL_TYPE.VALUE"
+                  @on-change="orderType_checkAllGroupChange"
+                >
+                  <Checkbox label="1">正常</Checkbox>
+                  <Checkbox label="32">预售</Checkbox>
+                  <Checkbox label="4">补发</Checkbox>
+                  <Checkbox label="2">换货</Checkbox>
+                  <Checkbox label="16">货到付款</Checkbox>
+                </CheckboxGroup>
+            
+              </p>
+              <p>
+                <i-switch
+                  v-model="resultData.ST_C_AUTO_AUDIT_ITEM.DELIVERY_WAREHOUSE.IS_OPEN"
+                  class="switch"
+                  size="small"
+                />
+                <label class="label"><i v-show="resultData.ST_C_AUTO_AUDIT_ITEM.DELIVERY_WAREHOUSE.IS_OPEN">*</i>发货仓库:</label>
+                <span class="popInput">
+                  <myInput
+                    class="popInput"
+                    :version="DELIVERY_WAREHOUSE.version"
+                    :is-active="DELIVERY_WAREHOUSE.isActive"
+                    :itemdata="DELIVERY_WAREHOUSE.itemdata"
+                    :is-disabled="DELIVERY_WAREHOUSE.isDisabled"
+                    @getFkChooseItem="DELIVERY_WAREHOUSE_oneObj"
+                  />
+                </span>
+              </p>
+              <p>
+                <i-switch
+                  v-model="resultData.ST_C_AUTO_AUDIT_ITEM.LOGISTICS_COMPANY.IS_OPEN"
+                  class="switch"
+                  size="small"
+                />
+                <label class="label"><i v-show="resultData.ST_C_AUTO_AUDIT_ITEM.LOGISTICS_COMPANY.IS_OPEN">*</i>物流公司:</label>
+                <span class="popInput">
+                  <myInput
+                    class="popInput"
+                    :version="LOGISTICS_COMPANY.version"
+                    :is-active="LOGISTICS_COMPANY.isActive"
+                    :itemdata="LOGISTICS_COMPANY.itemdata"
+                    :is-disabled="LOGISTICS_COMPANY.isDisabled"
+                    @getFkChooseItem="LOGISTICS_COMPANY_oneObj"
+                  />
+                </span>
+              </p>
+              <p>
+                <i-switch
+                  v-model="resultData.ST_C_AUTO_AUDIT_ITEM.PAYMENT_TIME.IS_OPEN"
+                  class="switch"
+                  size="small"
+                />
+                <label class="label"><i v-show="resultData.ST_C_AUTO_AUDIT_ITEM.PAYMENT_TIME.IS_OPEN">*</i>支付时间:</label>
+                <DatePicker
+                  v-model="PAYMENT_TIME"
+                  type="datetimerange"
+                  placement="bottom-end"
+                  placeholder="请输入支付时间"
+                  style="width: 200px"
+                  format="yyyy-MM-dd HH:mm:ss"
+                  transfer
+                />
+              </p>
+              <p>
+                <i-switch
+                  v-model="resultData.ST_C_AUTO_AUDIT_ITEM.TOTAL_AMOUNT.IS_OPEN"
+                  class="switch"
+                  size="small"
+                />
+                <label class="label"><i v-show="resultData.ST_C_AUTO_AUDIT_ITEM.TOTAL_AMOUNT.IS_OPEN">*</i>总金额(元):</label>
+                <span>
+                  <div
+                    v-for="(item,index) in resultData.ST_C_AUTO_AUDIT_ITEM.TOTAL_AMOUNT.TOTAL_AMT_ITEM"
+                    :key="index"
+                    style="marginBottom:5px"
+                  >
+                    <Input
+                      v-model="item.GREATER"
+                      style="width:80px"
+                      @on-change="modify"
+                      placeholder="大于等于"
+                    /> - <Input
+                      v-model="item.LESS"
+                      style="width:80px"
+                      @on-blur="bothChange(index)"
+                      @on-change="modify"
+                      placeholder="小于"
+                    />
+                    <Icon
+                    style="font-size:28px;color:red"
+                      v-if="resultData.ST_C_AUTO_AUDIT_ITEM.TOTAL_AMOUNT.TOTAL_AMT_ITEM.length == index+1"
+                      type="md-add"
+                      @click="mdAdd"
+                    />
+                  </div>
+                </span>
+              </p>
+              <p>
+                <i-switch
+                  v-model="resultData.ST_C_AUTO_AUDIT_ITEM.RECEIVING_ADDRESS.IS_OPEN"
+                  class="switch"
+                  size="small"
+                />
+                <label class="label"><i v-show="resultData.ST_C_AUTO_AUDIT_ITEM.RECEIVING_ADDRESS.IS_OPEN">*</i>收货地址:</label>
+                <Input
+                  v-model="resultData.ST_C_AUTO_AUDIT_ITEM.RECEIVING_ADDRESS.INFO"
+                  style="width:500px"
+                  @on-change="modify"
+                  placeholder="包含关键字进行人工审核；多个关键字可依次填写，使用中文“，”隔开"
+                />
+              </p>
+              <p>
+                <i-switch
+                  v-model="resultData.ST_C_AUTO_AUDIT_ITEM.BUYER_MESSAGE.IS_OPEN"
+                  class="switch"
+                  size="small"
+                />
+                <label class="label">买家留言</label>
+                <Input
+                  v-model="resultData.ST_C_AUTO_AUDIT_ITEM.BUYER_MESSAGE.INFO"
+                  style="width:500px"
+                  @on-change="modify"
+                  placeholder="为空默认为有备注信息进行人工审核；多个关键字可依次填写，使用中文“，”隔开。"
+                />
+              </p>
+              <p>
+                <i-switch
+                  v-model="resultData.ST_C_AUTO_AUDIT_ITEM.SELLER_NOTES.IS_OPEN"
+                  class="switch"
+                  size="small"
+                  @on-change="modify"
+                />
+                <label class="label">卖家备注:</label>
+                <Input
+                  v-model="resultData.ST_C_AUTO_AUDIT_ITEM.SELLER_NOTES.INFO"
+                  style="width:500px"
+                  @on-change="modify"
+                  placeholder="为空默认为有备注信息进行人工审核；多个关键字可依次填写，使用中文“，”隔开。"
+                />
+              </p>
+              <p>
+                <i-switch
+                  v-model="resultData.ST_C_AUTO_AUDIT_ITEM.PRO_INFO.IS_OPEN"
+                  class="switch"
+                  size="small"
+                />
+                <label class="label">商品信息:</label>
+                <RadioGroup v-model="resultData.ST_C_AUTO_AUDIT_ITEM.PRO_INFO.TYPE" style="paddingTop:5px">
+                  <Radio label="9">系统SKU编码</Radio>
+                  <Radio label="10">平台SKUID</Radio>
+                </RadioGroup>
+                <Input
+                  v-model="resultData.ST_C_AUTO_AUDIT_ITEM.PRO_INFO.INFO"
+                  style="width:500px"
+                  @on-change="modify"
+                  placeholder="等于关键字进行人工审核；多个关键字可依次填写，使用中文“，”隔开。"
+                />
+              </p>
+            </span>
+          </p>
+        </Panel>
+      </Collapse>
+
+      <div class="label" v-show="id != '-1'">
+        <businessLabel 
+          :label-list="label.labelList"
+          :label-default-value="label.labelDefaultValue">
+      </businessLabel>
+      <div>
+          <subTable :component-data="subTableConfig" ></subTable>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import auditOrderStrategy from '@/js/pages/strategyPlatform/auditOrderStrategy'
+export default auditOrderStrategy
+</script>
+
+<style scoped lang='less'>
+@import '~@/css/pages/strategyPlatform/auditOrderStrategy.less';
+</style>

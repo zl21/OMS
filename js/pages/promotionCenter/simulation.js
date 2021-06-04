@@ -1,4 +1,5 @@
-import myInput from 'framework/components/element/input';
+// import myInput from 'framework/components/element/input';
+import myInput from 'professionalComponents/fkinputPlus.vue';
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 // import MultipleBox from 'professionalComponents/multipleBox.vue';
 import SingleBox from 'professionalComponents/singleBox.vue';
@@ -40,26 +41,15 @@ export default {
           isActive: true,
           isdisabled: false,
           itemdata: {
-            col: 1,
-            colid: 167814,
+            colid: 180257,
+            serviceId: "r3-cp",
             colname: 'RECEIVER_PROVINCE',
-            datelimit: 'all',
-            display: 'text',
-            fkdesc: '收货省份',
             fkdisplay: 'drp',
-            inputname: 'CP_C_STORE_IDS:ENAME',
             isfk: true,
             isnotnull: true,
-            isuppercase: false,
-            length: 65535,
             // name: "收货省份",
             name: $i18n.t('form_label.receiving_province'),
             readonly: false,
-            reftable: 'CP_C_PROVINCE',
-            reftableid: 10010,
-            row: 1,
-            statsize: -1,
-            type: 'STRING',
             valuedata: ''
           }
         }, // 收货省份
@@ -67,52 +57,31 @@ export default {
           isActive: true,
           isdisabled: false,
           itemdata: {
-            col: 1,
-            colid: 1700805184,
+            colid: 171929,
             colname: 'CP_C_SHOP_ID',
-            datelimit: 'all',
-            display: 'text',
-            fkdesc: '店铺',
             fkdisplay: 'drp',
-            inputname: 'CP_C_SHOP:ENAME',
             isfk: true,
             isnotnull: true,
-            isuppercase: false,
-            length: 20,
             // name: "店铺名称",
             name: $i18n.t('table_label.shopName'),
             readonly: false,
             refobjid: '',
-            reftable: 'CP_C_SHOP',
-            reftableid: 23446,
-            row: 1,
-            statsize: -1,
-            type: 'STRING',
             valuedata: ''
           }
         } // 店铺名称
       },
       itemdata: {
         // 平台商品
-        col: 1,
         colid: 1700806533,
         colname: `SG_B_CHANNEL_PRODUCT_ID${Math.floor(Math.random() * 100)}`,
-        datelimit: 'all',
-        display: 'text',
         fkdesc: '门店档案',
         fkdisplay: 'drp',
-        inputname: 'SG_B_CHANNEL_PRODUCT_ID:ECODE',
         isfk: true,
         isnotnull: false,
-        isuppercase: true,
-        length: 65535,
         name: '',
         readonly: false,
         reftable: 'SG_B_CHANNEL_PRODUCT',
         reftableid: 24801,
-        row: 1,
-        statsize: -1,
-        type: 'STRING',
         valuedata: '',
         isObject: true,
         isSimulation: true,

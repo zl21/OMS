@@ -14,7 +14,7 @@
       />
       <div :class="[!isFolding ? 'dynamicSearch-content' : 'form-search']">
         <dynamicSearch
-          v-if="!isFolding"
+          v-if="!isFolding && tablename == 'OC_B_ORDER'"
           ref="dynamicSearch"
           :dynamic-data="dynamicData"
         />

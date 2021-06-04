@@ -854,23 +854,28 @@
         self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
         self.service.orderCenter.returnConfirmCheck({ID:self.selection[0].ID}).then(res=>{
           console.log(res);
-          let content  = '';
-          content = res.data.message;
-          if(content){
+          if(res.data.code == 0){
             this.$Modal.confirm({
               title:'提示',
-              content:content,
+              content:res.data.message,
               showCancel:true,
               onOk:()=>{
                 console.log('123');
                 self.service.orderCenter.returnConfirm({
                   ID:self.selection[0].ID
                 }).then(res=>{
-                  console.log(res);
+                  if(res.data.code == 0){
+                    self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0)
+                    self.query();
+                  }else {
+                    self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0)
+                  }
                 })
               }
             })
-          }
+          }else {
+            self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0)
+          };
         })
       }
     },

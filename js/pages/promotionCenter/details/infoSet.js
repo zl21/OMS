@@ -3,7 +3,7 @@ import SingleBox from 'professionalComponents/singleBox.vue';
 import ButtonFkDialog from 'professionalComponents/buttonFkDialog.vue';
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import detailtabs from 'allpages/promotionCenter/details/tableTabs.vue';
-import CTSIT from 'allpages/promotionCenter/details/CTSIT';
+import meetConditions from 'allpages/promotionCenter/details/meetConditions';
 import businessDialog from 'professionalComponents/businessDialog';
 
 // const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
@@ -14,7 +14,7 @@ export default {
     detailtabs,
     SingleBox,
     businessDialog,
-    CTSIT,
+    meetConditions,
     ButtonFkDialog
   },
   props: {
