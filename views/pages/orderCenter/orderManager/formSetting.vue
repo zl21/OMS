@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-27 11:05:20
- * @LastEditTime: 2021-05-27 11:05:21
+ * @LastEditTime: 2021-06-04 10:27:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/orderCenter/orderManager/formSetting.vue
@@ -86,6 +86,9 @@
       btnConfig() {
         return this.extendBtn;
       },
+      tablename(){
+        return this.$route.params.customizedModuleName == 'ORDERMANAGER' ? 'OC_B_ORDER' : this.$route.params.customizedModuleName
+      }
     },
     data() {
       return {
@@ -152,7 +155,7 @@
           };
         }
         const data = {
-          TABLE: 'OC_B_ORDER',
+          TABLE: self.tablename,
           TYPE: self.tabValue == 'name1' ? 'L_BUTTON' : 'L_QUERY',
           ACTION: 'SAVE',
           DATA: childArr
@@ -204,7 +207,7 @@
       init(type = 'L_BUTTON') { // 普通筛选 L_BUTTON 高级筛选 L_QUERY
         const self = this;
         const data = {
-          TABLE: 'OC_B_ORDER',
+          TABLE: self.tablename,
           TYPE: type,
           ACTION: 'QUERY'
         };
