@@ -87,6 +87,7 @@ export default {
         isfk: true,
         isnotnull: false,
         readonly: false,
+        columnsKey:['ECODE'],
       },
       loading: false,
       data: [{ ECODE: '12' }, { ECODE: '11' }],
@@ -147,6 +148,7 @@ export default {
       console.log("val:", val);
       // console.log("params:", params);
       // this.getFkChooseItem(val, params);
+      this.search();
     },
     inputBlur(val) {
       console.log("val:", val);
@@ -160,12 +162,13 @@ export default {
     async search() {
       // sku查询
       const self = this;
-      if (!self.searchValue) {
+      if (!self.itemdata.pid) {
         self.$Message.warning($i18n.t("pHolder.z4")); // 请输入商品SKU
         return;
       }
-      const query = { isBlur: "N", psCSku: { ECODE: self.searchValue } };
-      const res = await self.service.common.skuQuery(query);
+      const res = await self.service.common.selSku({ECODE: self.itemdata.valuedata});
+      console.log(res);
+      return;
       if (res.data.code == 0) {
         if (res.data.data.data.length == 0) {
           this.$Message.warning($i18n.t("modalTips.r8")); // 查询数据为空!

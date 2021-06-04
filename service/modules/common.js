@@ -8,6 +8,7 @@ export default {
   QueryList: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/QueryList", params, serviceId),
   getTableQuery: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/getTableQuery", params, serviceId),
   skuQuery: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/skuQuery", params, serviceId),
+  selSku: (params, serviceId = { serviceId: "r3-ps" }) => $network.post('/p/cs/ps/sku/v1/selSku' , params , serviceId), //根据sku编码查询sku商品信息
   // 获取页面title
   getAppTitle: () => $network.get("/p/c/getAppTitle"),
   //登录
