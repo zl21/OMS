@@ -540,7 +540,17 @@ export default {
     }, // 左边列表勾选变化时
     screen_request() {
       this.l_screenLoading = true;
-      axios({
+      const param = {
+        param: JSON.stringify({
+          TABLENAME: this.tablename, // 表名
+          CONDITION: this.l_screen_result_save, // 左边选中的列表
+          GLOBAL: this.isTreeOrSearch ? '' : this.searchWord.trim(), // 全局搜索值
+          PAGENUM: this.l_center_data.l_currentPage, // 当前页
+          PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
+        })
+      };
+      this.service.common.screenresult(param)
+      /* axios({
         url: '/p/cs/screenresult',
         method: 'post',
         data: {
@@ -552,7 +562,7 @@ export default {
             PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
           })
         }
-      }).then((res) => {
+      }) */.then((res) => {
         const response = res.data;
         if (response.code !== 0) {
           /* this.errorDialogClass = 'error';
@@ -572,7 +582,17 @@ export default {
     }, // 左边列表勾选变化获取数据
     screen_request_initialize() {
       this.l_screenLoading = true;
-      return axios({
+      const param = {
+        param: JSON.stringify({
+          TABLENAME: this.tablename, // 表名
+          CONDITION: this.l_screen_result_save, // 左边选中的列表
+          GLOBAL: this.searchWord.trim(), // 全局搜索值
+          PAGENUM: this.l_center_data.l_currentPage, // 当前页
+          PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
+        })
+      }
+      this.service.common.screenresult(param)
+      /* return axios({
         url: '/p/cs/screenresult',
         method: 'post',
         data: {
@@ -584,7 +604,7 @@ export default {
             PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
           })
         }
-      }).then((res) => {
+      }) */.then((res) => {
         const response = res.data;
         if (response.code !== 0) {
           /* this.errorDialogClass = 'error';
@@ -703,7 +723,17 @@ export default {
         return obj;
       });// 清空选中的
       this.l_screenLoading = true;
-      axios({
+      const param = {
+        param: JSON.stringify({
+          TABLENAME: this.tablename, // 表名
+          CONDITION: this.l_screen_result_save, // 左边选中的列表
+          GLOBAL: this.searchWord.trim(), // 全局搜索值
+          PAGENUM: this.l_center_data.l_currentPage, // 当前页
+          PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
+        })
+      }
+      this.service.common.screenresult(param)
+      /* axios({
         url: '/p/cs/screenresult',
         method: 'post',
         data: {
@@ -715,7 +745,7 @@ export default {
             PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
           })
         }
-      }).then((res) => {
+      }) */.then((res) => {
         const response = res.data;
         if (response.code !== 0) {
           /* this.errorDialogClass = 'error';
@@ -969,13 +999,17 @@ export default {
     }, // 右边列表的数据处理
     request_total() {
       this.request_param.GLOBAL = '';
-      axios({
+      const fromdata = {
+        param: JSON.stringify(this.request_param)
+      }
+      this.service.common.screenresultcheck(fromdata)
+      /* axios({
         url: '/p/cs/screenresultcheck',
         method: 'post',
         data: {
           param: JSON.stringify(this.request_param)
         }
-      }).then((res) => {
+      }) */.then((res) => {
         const response = res.data;
         if (response.code !== 0) {
           /* this.errorDialogClass = 'error';
@@ -989,13 +1023,17 @@ export default {
     right_dispose_request() {
       this.confirmLoading = true;
       this.r_screenLoading = true;
-      axios({
+      const fromdata = {
+        param: JSON.stringify(this.optimize_request)
+      }
+      this.service.common.screenresultcheck(fromdata)
+      /* axios({
         url: '/p/cs/screenresultcheck',
         method: 'post',
         data: {
           param: JSON.stringify(this.optimize_request)
         }
-      }).then((res) => {
+      }) */.then((res) => {
         const response = res.data;
         this.confirmLoading = false;
         if (response.code !== 0) {
@@ -1063,13 +1101,17 @@ export default {
       this.r_center_data.r_currentPage = 1;// 初始化当前页
       this.right_dispose();// 只有每次点击second时在处理数据
       this.r_screenLoading = true;
-      axios({
+      const fromdata = {
+        param: JSON.stringify(this.optimize_request)
+      }
+      this.service.common.screenresultcheck(fromdata)
+      /* axios({
         url: '/p/cs/screenresultcheck',
         method: 'post',
         data: {
           param: JSON.stringify(this.optimize_request)
         }
-      }).then((res) => {
+      }) */.then((res) => {
         const response = res.data;
         if (response.code !== 0) {
           /* this.errorDialogClass = 'error';
@@ -1110,7 +1152,7 @@ export default {
     })
   },//模糊搜索
   handleSelect (val) {
-
+  
   },//模糊搜索选中项
   createFilter(queryString) {
     return (restaurant) => {
@@ -1156,10 +1198,10 @@ export default {
         }
       ,
       success:function(res){
-
+  
       },
       error:function(){
-
+  
       }
     }) */
       /* let postParam = new URLSearchParams();
@@ -1172,7 +1214,19 @@ export default {
         /!*condition: this.r_send_result//条件集合*!/
       })
     })); */
-      axios({
+      const fromdata = {
+        tableid: this.tableid,
+        modelname: this.module_name,
+        multiQuery: JSON.stringify({
+          value: this.request_param,
+          text: JSON.stringify({
+            result: this.r_result, // 渲染列表
+            /* condition: this.r_send_result//条件集合 */
+          })
+        })
+      }
+      this.service.promotionCenter.setMultiQuery(fromdata)
+      /* axios({
         method: 'post',
         url: '/p/cs/setMultiQuery',
         data: {
@@ -1182,11 +1236,11 @@ export default {
             value: this.request_param,
             text: JSON.stringify({
               result: this.r_result, // 渲染列表
-              /* condition: this.r_send_result//条件集合 */
+              // condition: this.r_send_result//条件集合 
             })
           })
         }
-      })
+      }) */
       /* axios.post('/p/cs/setMultiQuery', postParam) */
       /* axios.post('/p/cs/setMultiQuery',
         qs.stringify({
@@ -1236,13 +1290,16 @@ export default {
       }
       if (true) {
         this.confirmLoading = true;
-        axios({
+        this.service.common.screenresultcheck({
+          param: JSON.stringify(this.request_param)
+        })
+        /* axios({
           url: '/p/cs/screenresultcheck',
           method: 'post',
           data: {
             param: JSON.stringify(this.request_param)
           }
-        }).then((res) => {
+        }) */.then((res) => {
           const response = res.data;
           this.confirmLoading = false;
           if (response.code !== 0) {
@@ -1314,7 +1371,12 @@ export default {
       /* this.r_result_checked = this.rightList.map((obj) => {
       if(obj.checked)return obj.ID
     });//勾选选中的 */
-      axios({
+      this.service.promotionCenter.screen({
+        param: JSON.stringify({
+          TABLENAME: this.tablename
+        })
+      })
+      /* axios({
         url: '/p/cs/screen',
         method: 'post',
         data: {
@@ -1322,7 +1384,7 @@ export default {
             TABLENAME: this.tablename
           })
         }
-      }).then((res) => {
+      }) */.then((res) => {
         const response = res.data;
         if (response.code !== 0) {
           /* this.errorDialogClass = 'error';
@@ -1363,20 +1425,20 @@ export default {
                       temp2.push(item2)
                   })
                   temp.push(temp2)
-
+  
               }else{
                   temp.push(item)
               }
-
+  
           })
           return temp
       }else{   //obj
           let temp = {}
-
+  
           for(var item in obj){
               temp[item] = obj[item]
           }
-
+  
           return temp
       }
     }, */
@@ -1424,7 +1486,7 @@ export default {
       this.screen_request();//获取筛选结果数据
     }else {//右边选中列表
       if (val) {//排除勾选项
-
+  
       }
     }
   },//监听排除勾选的变化 */
