@@ -6,7 +6,7 @@ import comUtils from '../../assets/js/__utils__/common';
 // import store from 'burgeonConfig/store/store'; // 将老框架公共状态注册为customize模块
 import wangEditor from 'wangeditor';
 import qs from 'qs';
-import i18n from '@burgeon/internationalization/i18n/i18n'; // 国际化
+import i18n from '@burgeon/internationalization/i18n'; // 国际化
 import service from '../../service/index.js';
 import lodash from 'lodash';
 import store from 'burgeonConfig/store/store'; // 将老框架公共状态注册为customize模块

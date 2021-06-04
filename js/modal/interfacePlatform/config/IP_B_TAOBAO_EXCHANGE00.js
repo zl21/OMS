@@ -1,6 +1,6 @@
 // 淘宝换货单接口 - 换货单下载
 import BurgeonDate from '@/assets/js/__utils__/date.js';
-import i18n from '@burgeon/internationalization/i18n/i18n';
+import i18n from '@burgeon/internationalization/i18n';
 window.$i18n = i18n;
 export default {
   formConfig: {
