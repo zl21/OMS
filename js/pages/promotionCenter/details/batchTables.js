@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       AutoRight: true,
       currentTab: 0,
       list_index: '',
@@ -44,7 +44,7 @@ export default {
         // confirmTitle: '批量新增条件信息导入',
         confirmTitle: $i18n.t('modalTitle.a2'), // 批量新增条件信息导入
         titleAlign: 'center', // 设置标题是否居中 center left
-        width: '600',
+        width: '540',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
         draggable: true, // 是否可以拖动
@@ -257,7 +257,19 @@ export default {
      * 导入
      */
     importData() {
-      this.importTable.componentData = { tableName: this.itemdata.reftable || 'PS_C_SKU', mode: this.moduleMode };
+      const componentData = {
+        isAction: false,
+        // tableName: 'PROMOTION',
+        // webname: 'import',
+        tempApi: '/p/cs/pm/v1/getModuleUrl',
+        okApi: '/p/cs/pm/v1/parseExcel',
+        tempParm: { 'mode': this.moduleMode },
+        downErrorInfo: true,
+        showErrorInfo: false,
+        // freshPage: Fn,
+      }
+      this.importTable.componentData = componentData;
+      // this.importTable.componentData = { tableName: this.itemdata.reftable || 'PS_C_SKU', mode: this.moduleMode };
       this.$children.find(item => item.name === 'importTable').openConfirm();
     },
     /**
