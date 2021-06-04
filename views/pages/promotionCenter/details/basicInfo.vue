@@ -136,7 +136,7 @@
           <SingleBox
             :value="basicData.gradient_gift"
             :options="groups.gradientGift"
-            @changeSingle="storesItemdata"
+            @changeSingle="checkGradientGiftChange"
           />
         </div>
       </div>

@@ -555,6 +555,7 @@ R3.launchApplication({
 | v1.5.25 | 退换货放开设置排序功能 |
 | v1.5.26 | 修复wms新建 |
 | v1.5.27 | 嵌套serviceHandler传参多次嵌套问题处理 |
+| v1.5.28 | 添加额外退款单明细 |
 
 #### Extends-Api 版本说明
 
