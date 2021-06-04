@@ -1168,6 +1168,12 @@ export default {
             } // 按钮点击事件
           },
           {
+            webname: 'OcBOrderExportFilterCmd', // 导出（不含手机号）
+            btnclick: () => {
+              this.exportClick(true);
+            } // 按钮点击事件
+          },
+          {
             icon: 'iconfont iconbj_setup', // 按钮图标
             btnclick: () => {
               const self = this;
@@ -2955,14 +2961,14 @@ export default {
     },
 
     // 导出校验
-    exportClick() {
+    exportClick(isNoPhone) {
       const _this = this;
       _this.selection = _this.$refs.agGridChild.AGTABLE.getSelect();
       if (_this.selection.length > 0) {
-        this.exportChange(_this.selection);
+        this.exportChange(_this.selection, isNoPhone);
       } else {
         if (_this.selection.length === 0) {
-          this.exportChange(_this.agTableConfig.rowData);
+          this.exportChange(_this.agTableConfig.rowData, isNoPhone);
           return;
         }
         if (_this.statusData.value == 0) {
@@ -2973,7 +2979,7 @@ export default {
       }
     },
     // 导出
-    exportChange(list = []) {
+    exportChange(list = [], isNoPhone) {
       if (this.isExport) {
         // 有一项导出正在进行中
 
@@ -3009,17 +3015,31 @@ export default {
         }
         fromdata.append('param', JSON.stringify(param));
       }
-      this.service.orderCenter.exportOcBOrder(fromdata).then(res => {
-        this.isExport = false;
-        if (res.data.code == 0 && res.data.data !== null) {
-          const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
-          this.$Message.success(mes);
-          publicMethodsUtil.downloadUrlFile(res.data.data);
-        } else {
-          const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
-          this.$Message.error(err);
-        }
-      });
+      if (isNoPhone) {
+        this.service.orderCenter.exportOcBOrderFilter(fromdata).then(res => {
+          this.isExport = false;
+          if (res.data.code == 0 && res.data.data !== null) {
+            const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
+            this.$Message.success(mes);
+            publicMethodsUtil.downloadUrlFile(res.data.data);
+          } else {
+            const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
+            this.$Message.error(err);
+          }
+        });
+      } else {
+        this.service.orderCenter.exportOcBOrder(fromdata).then(res => {
+          this.isExport = false;
+          if (res.data.code == 0 && res.data.data !== null) {
+            const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
+            this.$Message.success(mes);
+            publicMethodsUtil.downloadUrlFile(res.data.data);
+          } else {
+            const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
+            this.$Message.error(err);
+          }
+        });
+      }
     },
     // 警告框确认
     warningOk() {
