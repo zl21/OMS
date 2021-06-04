@@ -46,7 +46,7 @@
 import businessForm from "professionalComponents/businessForm";
 import businessButton from "professionalComponents/businessButton";
 import businessDialog from "professionalComponents/businessDialog";
-import i18n from "@burgeon/internationalization/i18n/i18n";
+import i18n from "@burgeon/internationalization/i18n";
 
 // import CustomConfig from "@/config/customized.config.js";
 // const modalConfig = CustomConfig.cusDownLoadAllConfig;
