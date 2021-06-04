@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-02 19:22:02
- * @LastEditTime: 2021-06-03 16:12:39
+ * @LastEditTime: 2021-06-04 11:49:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/modal/orderCenter/returngood/modifyReturnLogistics.js
@@ -96,8 +96,8 @@ export default {
     },
     mounted(){
         console.log(this.componentData.row);
-        this.formConfig.formData[0].itemdata.valuedata = this.componentData.row[0].CP_C_LOGISTICS_ENAME;
-        this.formConfig.formData[0].itemdata.pid = this.componentData.row[0].CP_C_LOGISTICS_ID;
+        this.formConfig.formData[0].itemdata.valuedata = this.componentData.data.CP_C_LOGISTICS_ENAME;
+        this.formConfig.formData[0].itemdata.pid = this.componentData.data.CP_C_LOGISTICS_ID;
     },
     methods:{
         confirm(){
