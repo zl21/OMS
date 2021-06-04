@@ -21,13 +21,10 @@ export default {
         activity_name: '', // 活动名称【必填】
         stores: {
           itemdata: {
-            col: 1,
             // colid: $store.state.forginkeys.columnIds.shop || '1700805184',
             colid: '171929',
             serviceId: "r3-cp",
             colname: 'CP_C_SHOP_ID', // 当前字段的名称
-            datelimit: 'all',
-            display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
             fkdisplay: 'drp', // 外键关联类型
             isfk: true, // 是否有fk键
             isnotnull: true, // 是否必填
