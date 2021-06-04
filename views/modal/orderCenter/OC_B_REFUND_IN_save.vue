@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-01 17:27:45
- * @LastEditTime: 2021-06-01 20:19:46
+ * @LastEditTime: 2021-06-04 10:35:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/modal/orderCenter/OC_B_REFUND_IN_save.vue
@@ -68,7 +68,7 @@ export default {
                         key: 'key',
                       },
                       {
-                        title: $i18n.t('modalTitle.a6'), // '提示信息',
+                        title: $i18n.t('错误信息！'), // '错误信息',
                         key: 'message',
                       }
                     ],
