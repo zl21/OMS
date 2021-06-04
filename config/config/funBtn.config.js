@@ -1790,56 +1790,48 @@ class BtnConfig {
   wmsHandler(self, data, btnType) {
     let ids = Array.isArray(data) ? data.map(i => i.ID) : data
     let result = ids.length > 1 ? { IDS: ids } : { ID: ids[0] }
-    let serviceUrl = btnType == 'wmsCreateHandler' 
-      ? 'orderCenter.createReturnOrderToWms'
-      : 'orderCenter.cancelReturnOrderFromWms'
-    commonUtils.serviceHandler(
-      self,
-      serviceUrl,
-      result,
-      'all',
-      function (res) {
-        if (res.data.code === 0) {
-          commonUtils.msgTips(self, 'success', res.data.message, 2)
-          self.selection = []
-          self.query()
-        } else if (res.data.data) {
-          let tabData = res.data.data.map((row, index) => {
-            row.INDEX = ++index
-            row.BILL_NO = row.billNo
-            row.RESULT_MSG = row.message
-            return row
-          })
-          commonUtils.tipShow(
-            'confirm',
-            self,
-            res,
-            res.data.message,
-            function (h) {
-              return h('Table', {
-                props: {
-                  columns: [
-                    {
-                      title: '序号',
-                      key: 'INDEX',
-                    },
-                    {
-                      title: '单据编号',
-                      key: 'BILL_NO',
-                    },
-                    {
-                      title: '失败原因',
-                      key: 'RESULT_MSG',
-                    },
-                  ],
-                  data: tabData,
-                },
-              })
-            }
-          )
-        }
+    let serviceUrl = btnType == 'wmsCreateHandler' ? 'createReturnOrderToWms' : 'cancelReturnOrderFromWms'
+    self.service.orderCenter[serviceUrl](result).then((res) => {
+      if (res.data.code === 0) {
+        commonUtils.msgTips(self, 'success', res.data.message, 2)
+        self.selection = []
+        self.query()
+      } else if (res.data.data) {
+        let tabData = res.data.data.map((row, index) => {
+          row.INDEX = ++index
+          row.BILL_NO = row.billNo
+          row.RESULT_MSG = row.message
+          return row
+        })
+        commonUtils.tipShow(
+          'confirm',
+          self,
+          res,
+          res.data.message,
+          function (h) {
+            return h('Table', {
+              props: {
+                columns: [
+                  {
+                    title: '序号',
+                    key: 'INDEX',
+                  },
+                  {
+                    title: '单据编号',
+                    key: 'BILL_NO',
+                  },
+                  {
+                    title: '失败原因',
+                    key: 'RESULT_MSG',
+                  },
+                ],
+                data: tabData,
+              },
+            })
+          }
+        )
       }
-    )
+    })
   }
   
   

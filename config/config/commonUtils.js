@@ -25,7 +25,7 @@ class commonUtils {
    * @callbackType {String} 用于判断何时走回调函数
    * @callbackFun {Funtion} 回调函数，具体处理接口返回的res的方法
    */
-  static serviceHandler(self, serviceUrl, params, callback) {
+  static serviceHandler(self, serviceUrl, params, ...callback) {
     const ApiUrl = serviceUrl.split('.')
     self.service[ApiUrl[0]]
     [ApiUrl[1]](params)
