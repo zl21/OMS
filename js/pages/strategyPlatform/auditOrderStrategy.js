@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-03 19:24:03
- * @LastEditTime: 2021-06-03 19:26:37
+ * @LastEditTime: 2021-06-04 13:07:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/pages/strategyPlatform/auditOrderStrategy.js
@@ -276,6 +276,7 @@ import businessButton from 'professionalComponents/businessButton';
         centerName: '',
         tablename: '',
         objid: '',
+        
       },
       };
     },
@@ -289,6 +290,7 @@ import businessButton from 'professionalComponents/businessButton';
           centerName: 'strategyPlatform',
           tablename: 'ST_C_AUTO_AUDIT_LOG',
           objid: this.id,
+          pageShow:true,
         }
     },
     mounted() {

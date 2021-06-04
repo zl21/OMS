@@ -542,6 +542,7 @@ export default {
       this.subTableConfig = {
         centerName: 'basicData',
         tablename: this.labelDefaultValue,
+        pageShow:true,
         objid: this.id
       };
     },

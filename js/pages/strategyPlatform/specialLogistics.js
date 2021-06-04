@@ -1335,6 +1335,7 @@ export default {
       this.subTableConfig = {
         centerName: 'strategyPlatform',
         tablename: this.labelDefaultValue,
+        pageShow:true,
         objid: this.id
       };
     },

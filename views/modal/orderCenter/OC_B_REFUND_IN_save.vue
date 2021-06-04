@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-01 17:27:45
- * @LastEditTime: 2021-06-04 10:35:33
+ * @LastEditTime: 2021-06-04 17:26:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/modal/orderCenter/OC_B_REFUND_IN_save.vue
 -->
 <template>
-  <div>hello</div>
+  <div></div>
 </template>
 
 <script>
@@ -64,11 +64,11 @@ export default {
                   props: {
                     columns: [
                         {
-                        title: "错误明细", // '提示信息',
+                        title: "失败明细", // '提示信息',
                         key: 'key',
                       },
                       {
-                        title: $i18n.t('错误信息！'), // '错误信息',
+                        title: '失败信息！', // '错误信息',
                         key: 'message',
                       }
                     ],

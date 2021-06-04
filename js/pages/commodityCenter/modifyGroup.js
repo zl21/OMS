@@ -653,6 +653,7 @@ export default {
         this.subTableConfig = {
           centerName: 'commodityCenter',
           tablename: 'PS_PRO_GROUP_LOG',
+          pageShow:true,
           objid: this.$route.params.customizedModuleId,
         }
       }

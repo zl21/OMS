@@ -272,7 +272,7 @@ export default {
       // 详情
       self.initObjItem(self.ID);
     }
-    const subData = await this.$OMS2.omsUtils.initSubtable('CP_C_LOGISTICS_FIX', this.ID, '180461');
+    const subData = await this.$OMS2.omsUtils.initSubtable('CP_C_LOGISTICS_FIX', this.ID, '180461',);
     this.subTableConfig1.data = subData.rowData
   },
   created() {},

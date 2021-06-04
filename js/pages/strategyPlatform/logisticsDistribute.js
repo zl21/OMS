@@ -430,6 +430,7 @@ export default {
       this.subTableConfig = {
         centerName: 'strategyPlatform',
         tablename: "ST_DELIVERY_AREA_LOG",
+        pageShow:true,
         objid: this.id
       };
     }
