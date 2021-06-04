@@ -81,11 +81,12 @@ export default {
       const tempUrl = self.currentConfig.tempUrl;
       const tempApi = self.currentConfig.tempApi;
       const tempParm = self.currentConfig.tempParm;
+      let param = new FormData();
       if (tempParm) { // 下载模板参数处理
-        const param = new FormData();
-        for (const key in tempParm) {
+        /* for (const key in tempParm) {
           param.append(key, tempParm[key]);
-        }
+        } */
+        param.append('param', JSON.stringify(tempParm));
       }
       if (tempUrl) {
         // 提供了模板Url，通过Url链接直接下载模板
@@ -98,7 +99,7 @@ export default {
     // 通过Api下载模板-Handel
     getDownloadTemp(url, param = null) {
       if (param) {
-        $network.post(url,param).then((res) => {
+        $network.post(url, param).then((res) => {
           if (res.data.code === 0) {
             this.downloadUrlFile(res.data.data);
           }
@@ -137,7 +138,7 @@ export default {
           btn.disabled = true;
         });
       }
-      $network.post(url,param).then((res) => {
+      $network.post(url, param).then((res) => {
         console.log(res);
         if (res.data.code === 0 || res.data.code === 1) {
           if (res.data.message) _this.$Message.success(res.data.message);
