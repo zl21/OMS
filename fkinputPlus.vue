@@ -143,7 +143,7 @@ export default {
   },
   computed: {},
   watch: {
-    itemdata: {
+    /* itemdata: {
       handler(val, oldVal) {
         if (val.pid || val.valuedata) {
           if (this.itemdata.fkdisplay == 'drp') {
@@ -155,7 +155,7 @@ export default {
         }
       },
       deep: true
-    },
+    }, */
   },
   created() {
     if (this.itemdata.fkdisplay == 'mrp') {
@@ -242,7 +242,7 @@ export default {
       } = await axios.post("/r3-cp/p/cs/fuzzyquerybyak", query);
       if (code == 0) {
         data.forEach((item) => {
-          item.value = item[this.itemdata.columnsKey[0]] || item.value; // 模糊搜索失焦/选中后展示在input中的字符
+          item.value = this.itemdata.columnsKey ? item[this.itemdata.columnsKey[0]] : item.value; // 模糊搜索失焦/选中后展示在input中的字符
         });
         this.AutoData = data;
       }
@@ -285,7 +285,8 @@ export default {
     blur() {
       // 失焦：模糊搜索的选中、clear都会先走失焦
       if (this.isFuzzy) {
-        if (this.AutoData.length) {
+        console.log('fuzzy blur，模糊搜索失去焦点了，自行处理！');
+        /* if (this.AutoData.length) {
           const val = this.AutoData;
           this.itemdata.pid = val[0].ID;
           this.itemdata.valuedata = val[0].value;
@@ -303,7 +304,7 @@ export default {
           } else {
             this.$emit('inputBlur', this.itemdata);
           }
-        }
+        } */
       } else {
         console.log('not fuzzy blur');
       }

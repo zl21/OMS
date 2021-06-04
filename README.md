@@ -189,3 +189,4 @@
 | v1.1.42 | businessButton--修改 |
 | v1.1.43 | businessForm fkinput oneObj未定义过滤 |
 | v1.1.44~46 | fkinputPlus mrp初始化赋值 |
+| v1.1.47 | fkinputPlus 模糊搜索失焦处理 |
