@@ -88,14 +88,7 @@ export default {
         this.$emit('basicData', this.toMain);
       },
       deep: true
-    },
-    except_provincesItemdata: {
-      handler(val, oldVal) {
-        this.toMain.except_provinces.itemdata = val;
-        this.$emit('basicData', this.toMain);
-      },
-      deep: true
-    } */
+    },*/
   },
   computed: {
     groups() {

@@ -196,8 +196,8 @@ export default {
   },
   methods: {
     basicDataHandel(data) {
-      this.basic_info.stores = data.stores || {};
-      this.basic_info.except_provinces = data.except_provinces || {};
+      // this.basic_info.stores = data.stores || {};
+      // this.basic_info.except_provinces = data.except_provinces || {};
     },
     closeDialog() {
       this.dialogVisible = false;
