@@ -1,4 +1,3 @@
-import myInput from 'framework/components/element/input';
 import SingleBox from 'professionalComponents/singleBox';
 
 export default {
@@ -72,7 +71,6 @@ export default {
     }
   },
   components: {
-    myInput,
     SingleBox
   },
   mounted() {

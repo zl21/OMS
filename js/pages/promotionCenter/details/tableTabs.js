@@ -1,5 +1,5 @@
 import detailTable from 'allpages/promotionCenter/details/table';
-import CTSIT from 'allpages/promotionCenter/details/CTSIT';
+import meetConditions from 'allpages/promotionCenter/details/meetConditions';
 import tabList from 'allpages/promotionCenter/details/tabList';
 import ButtonFkDialog from 'professionalComponents/buttonFkDialog';
 import businessDialog from 'professionalComponents/businessDialog';
@@ -8,7 +8,7 @@ export default {
   name: 'detailTabs',
   components: {
     detailTable,
-    CTSIT,
+    meetConditions,
     tabList,
     ButtonFkDialog,
     businessDialog

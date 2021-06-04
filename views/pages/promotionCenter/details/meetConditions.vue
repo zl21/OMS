@@ -1,5 +1,6 @@
 <template>
   <!--TMT
+    复现：新增/详情/批量新增--条件信息-搭配商品/满足条件
     descript:CheckBox + Desc + Select + Input + Desc ,用来表示条件（数量、金额）比较大小
     author:wdq
     date:20200312
@@ -49,7 +50,7 @@
   </div>
 </template>
 <script>
-  import CTSIT from '@/js/pages/promotionCenter/details/CTSIT';
+  import meetConditions from '@/js/pages/promotionCenter/details/meetConditions';
 
-  export default CTSIT;
+  export default meetConditions;
 </script>
