@@ -281,6 +281,7 @@
                   self.publicBouncedConfig.confirmTitle = '改退回物流';
                   self.publicBouncedConfig.width = 500;
                   self.$set(self.publicBouncedConfig.componentData , 'row' , self.selection);
+                  self.$set(self.publicBouncedConfig.componentData , 'data' , res.data.data);
                   setTimeout(() => {
                     self.$children.find((item) => item.name === 'returnModifyLogistics').openConfirm();
                   }, 100);

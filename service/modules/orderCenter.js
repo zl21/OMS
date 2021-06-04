@@ -92,7 +92,7 @@ export default {
   updateIsLackstock: (params) =>
     $network.post('/api/cs/oc/oms/v1/updateIsLackstock', params),
   saveAppointSplitOrderInfo: (params) =>
-    $network.post('/api/cs/oc/oms/v1/saveAppointSplitOrderInfo', params),
+    $network.post('/p/cs/oc/oms/v1/specifySplitOrderInfo', params),
   saveSplitOrderInfo: (params) =>
     $network.post('/p/cs/oc/oms/v1/saveSplitOrderInfo', params),
   getSingleObjectPermission: (params) =>
@@ -388,4 +388,5 @@ export default {
     updateWarehouse: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/updateWarehouse' , params),  //改退回仓库接口
     updateLogistics: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/updateLogistics' , params),  //改退回物流接口
     returnConfirm:(params) => $network.post('/p/cs/oc/oms/v1/returnOrder/returnConfirm' , params),  //退货确认功能
+    splitCheckOrder:(params) => $network.post('/p/cs/oc/oms/v1/splitCheckOrder', params), //指定商品拆单校验
 }

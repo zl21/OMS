@@ -141,7 +141,8 @@ class commonUtils {
       okText: $i18n.t('common.determine'), // 确定
       cancelText: $i18n.t('common.cancel'), // 取消
       onOk: () => {
-        this.serviceHandler(self, okKey, data, callback)
+        let [callbackType, callbackFun] = callback
+        this.serviceHandler(self, okKey, data, callbackType , callbackFun)
       },
       onCancel: () => {
         self.$emit('closeActionDialog', false)

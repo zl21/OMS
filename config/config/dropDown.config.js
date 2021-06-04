@@ -597,12 +597,20 @@ class DropDownConfig {
     } else {
       ids = [];
     }
-    this.successHandler(
-      ids,
-      'specifyGoodsAssignConfig',
-      'product',
-      'specifyGoodsAssign'
-    )
+    self.service.orderCenter.splitCheckOrder({ orderIds: ids }).then(res => {
+      console.log(res);
+      if (res.data.code == 0) {
+        this.successHandler(
+          ids,
+          'specifyGoodsAssignConfig',
+          'product',
+          'specifyGoodsAssign'
+        )
+      } else {
+        // commonUtils.msgTips(self, 'error', res.data.message, 0);
+      }
+    })
+
   }
   //hold单处理
   static holdOrderHandler(rows) {

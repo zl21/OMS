@@ -112,14 +112,16 @@ export const globalStore = {
     /* --------- oms --------- */
     //订单中心 - 退货金额
     returnAmount:{
-      PRO_ACTUAL_AMT:'0.00',
-      PRO_REAL_AMT:'0.00',
-      SHIP_AMT:'0.00',
-      ADJUST_AMT:'0.00',
-      EXCHANGE_AMOUNT:'0.00',
-      FINAL_ACTUAL_AMT:'0.00',
-      FINAL_REAL_AMT:'0.00',
+      PRO_ACTUAL_AMT:0,
+      PRO_REAL_AMT:0,
+      SHIP_AMT:0,
+      ADJUST_AMT:0,
+      AMT_EXCHANGE:0,
+      FINAL_ACTUAL_AMT:0,
+      FINAL_REAL_AMT:0,
     },
+    // 换货
+    AMT_EXCHANGE:new Number(),
     // 订单中心 - 退换货明细
     returnOrderChangeItem:[]
 
@@ -324,6 +326,11 @@ export const globalStore = {
     returnAmount(state, n){
       let ks = Object.keys(n);
       ks.forEach((k) => n[k] && (state.returnAmount[k] = n[k]));
+      console.log(state.returnAmount);
+    },
+    AMT_EXCHANGE(state,n){
+      state.AMT_EXCHANGE = n.AMT_EXCHANGE,
+      console.log(state.AMT_EXCHANGE,n.AMT_EXCHANGE)
     },
     // 编辑 退换货
     returnOrderChangeItem(state,n){

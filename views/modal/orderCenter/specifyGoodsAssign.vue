@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="i_body">
-      <Table :columns="columns" :data="data" />
+      <Table :columns="columns" :data="data" @on-row-click="onRowClick"/>
     </div>
     <businessButton class="modal-footer" :btn-config="btnConfig" />
   </div>
@@ -54,6 +54,7 @@ export default {
   data() {
     return {
       vmI18n: $i18n,
+      clickRow:{},  //选中的sku数据
       btnConfig: {
         typeAll: "default", // 按钮统一风格样式
         btnsite: "right", // 按钮位置 (right , center , left)
@@ -87,9 +88,10 @@ export default {
         isfk: true,
         isnotnull: false,
         readonly: false,
+        columnsKey:['ECODE'],
       },
       loading: false,
-      data: [{ ECODE: '12' }, { ECODE: '11' }],
+      data: [],
       columns: [
         {
           title: "序号",
@@ -143,10 +145,15 @@ export default {
     console.log('this.componentData::', this.componentData);
   },
   methods: {
+    onRowClick(row){
+      console.log(row);
+      this.clickRow = row;
+    },
     oneObj(val) {
       console.log("val:", val);
       // console.log("params:", params);
       // this.getFkChooseItem(val, params);
+      this.search();
     },
     inputBlur(val) {
       console.log("val:", val);
@@ -160,20 +167,21 @@ export default {
     async search() {
       // sku查询
       const self = this;
-      if (!self.searchValue) {
+      if (!self.itemdata.pid) {
         self.$Message.warning($i18n.t("pHolder.z4")); // 请输入商品SKU
         return;
       }
-      const query = { isBlur: "N", psCSku: { ECODE: self.searchValue } };
-      const res = await self.service.common.skuQuery(query);
+      const res = await self.service.common.selSku({ECODE: self.itemdata.valuedata});
+      console.log(res);
+      
       if (res.data.code == 0) {
-        if (res.data.data.data.length == 0) {
+        if (res.data.data.length == 0) {
           this.$Message.warning($i18n.t("modalTips.r8")); // 查询数据为空!
           return;
         }
-        res.data.data.data[0].IS_GIFT =
-          res.data.data.data[0].IS_GIFT == "0" ? "否" : "是";
-        self.data = res.data.data.data;
+        // res.data.data[0].IS_GIFT =
+        //   res.data.data[0].IS_GIFT == "0" ? "否" : "是";
+        self.data.push(res.data.data[0]);
       } else {
         this.$Message.warning($i18n.t("modalTips.zt")); // sku查询失败!
       }
@@ -182,37 +190,73 @@ export default {
       const self = this;
       if (self.data.length == 0) {
         self.$Message.warning($i18n.t("modalTips.cg")); // sku不能为空!
-        // return;
+        return;
       }
       let result = {};
-      result.test = '====测试入参====：';
-      // if (self.qty == '') {
-      //   self.$Message.warning('请输入数量!');
-      //   return;
+      result.orderIds = self.componentData.a_2;
+      result.skuList = self.data.map(item => item.ECODE);
+      // if (self.radioValue == "1") {
+      //   result.QueryList = self.componentData.data;
+      //   // self.componentData.data['qty'] = self.qty;
+      // } else if (self.radioValue == "2") {
+      //   if (self.componentData.a_2.length == 0) {
+      //     self.$Message.warning($i18n.t("modalTips.zu")); // 请勾选订单数据!
+      //     // return;
+      //   }
+      //   result.IDS = self.componentData.a_2;
+      //   // result['qty'] = self.qty;
       // }
-      result.appiontSplitSkuCode = this.$OMS2.omsUtils.sonList(self.data, 'ECODE')
-      if (self.radioValue == "1") {
-        result.QueryList = self.componentData.data;
-        // self.componentData.data['qty'] = self.qty;
-      } else if (self.radioValue == "2") {
-        if (self.componentData.a_2.length == 0) {
-          self.$Message.warning($i18n.t("modalTips.zu")); // 请勾选订单数据!
-          // return;
-        }
-        result.IDS = self.componentData.a_2;
-        // result['qty'] = self.qty;
-      }
       this.loading = true;
       this.service.orderCenter
         .saveAppointSplitOrderInfo(result)
         .then((res) => {
-          if (res.data.code == 0) {
-            self.$Message.success(res.data.message);
-            self.$parent.$parent.$parent.query();
-            this.$parent.$parent.closeConfirm();
-          } else {
-            this.$parent.$parent.closeConfirm();
+          console.log(res);
+          if(res.data.code == 0){
+            self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+              self.$parent.$parent.$parent.query();
+            self.$parent.$parent.closeConfirm();
+          }else {
+            this.$Modal.confirm({
+            title: res.data.message,
+            width: 400,
+            mask: true,
+            render: (h) => {
+              if (res.data.data) {
+                res.data.data.forEach((item , index)=>{
+                  item['index'] = index +1;
+                })
+                return h('Table', {
+                  props: {
+                    columns: [
+                      {
+                        title:'序号',
+                        key:'index'
+                      },
+                      {
+                        title: '单据编号', // '提示信息',
+                        key: 'bollNo',
+                      },
+                      {
+                        title:'失败原因',
+                        key: 'message'
+                      }
+                    ],
+                    data: res.data.data,
+                  },
+                })
+              }else {
+                return h('p' , {} , res.data.message)
+              }
+            },
+          })
           }
+          // if (res.data.code == 0) {
+          //   self.$Message.success(res.data.message);
+          //   self.$parent.$parent.$parent.query();
+          //   this.$parent.$parent.closeConfirm();
+          // } else {
+          //   this.$parent.$parent.closeConfirm();
+          // }
         }).catch(() => this.loading = false)
         .finally(() => {
           this.loading = false;

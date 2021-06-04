@@ -48,4 +48,6 @@ export default {
 
   selectInit: params => $network.get(`/p/cs/pm/v1/selectInit?${qs.stringify(params)}`,{ serviceId: "r3-pm" }),
   getPromField: (params) => $network.get("/p/cs/getPromField", params, { serviceId: "r3-pm" }),
+  setMultiQuery: (params) => $network.get("/p/cs/setMultiQuery", params),
+  screen: (params) => $network.get("/p/cs/screen", params),
 };
