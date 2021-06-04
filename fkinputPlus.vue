@@ -286,32 +286,39 @@ export default {
       // 失焦：模糊搜索的选中、clear都会先走失焦
       if (this.isFuzzy) {
         console.log('fuzzy blur，模糊搜索失去焦点了，自行处理！');
-        /* if (this.AutoData.length) {
-          const val = this.AutoData;
-          this.itemdata.pid = val[0].ID;
-          this.itemdata.valuedata = val[0].value;
-          this.defaultSelected = [{ ID: val[0].ID, Label: val[0].value }];
-          if (this.isBackRowItem) {
-            this.$emit('inputBlur', val[0]);
+        setTimeout(() => {
+          if (this.itemdata.pid && this.itemdata.valuedata) { // 假装已经走了选中事件
+            return
           } else {
-            this.$emit('inputBlur', this.itemdata);
+            if (this.AutoData.length) {
+              const val = this.AutoData;
+              this.itemdata.pid = val[0].ID;
+              this.itemdata.valuedata = val[0].value;
+              this.defaultSelected = [{ ID: val[0].ID, Label: val[0].value }];
+              if (this.isBackRowItem) {
+                this.$emit('inputBlur', val[0]);
+              } else {
+                this.$emit('inputBlur', this.itemdata);
+              }
+            } else {
+              console.log('模糊搜索未查询到值！');
+              this.itemdata.pid = '';
+              this.itemdata.valuedata = '';
+              if (this.isBackRowItem) {
+                this.$emit('inputBlur', {});
+              } else {
+                this.$emit('inputBlur', this.itemdata);
+              }
+            }
           }
-        } else {
-          this.itemdata.pid = null;
-          this.itemdata.valuedata = null;
-          if (this.isBackRowItem) {
-            this.$emit('inputBlur', {});
-          } else {
-            this.$emit('inputBlur', this.itemdata);
-          }
-        } */
+        }, 3000);
       } else {
         console.log('not fuzzy blur');
       }
     },
     clear() {
-      this.itemdata.pid = null;
-      this.itemdata.valuedata = null;
+      this.itemdata.pid = '';
+      this.itemdata.valuedata = '';
       if (this.isBackRowItem) {
         this.$emit('getFkChooseItem', {});
       } else {
