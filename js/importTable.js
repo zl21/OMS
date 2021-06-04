@@ -81,12 +81,18 @@ export default {
       const tempUrl = self.currentConfig.tempUrl;
       const tempApi = self.currentConfig.tempApi;
       const tempParm = self.currentConfig.tempParm;
+      if (tempParm) { // 下载模板参数处理
+        const param = new FormData();
+        for (const key in tempParm) {
+          param.append(key, tempParm[key]);
+        }
+      }
       if (tempUrl) {
         // 提供了模板Url，通过Url链接直接下载模板
         this.downloadUrlFile(self.currentConfig.tempUrl);
       } else {
         // 通过请求Api接口下载模板
-        this.getDownloadTemp(tempApi, tempParm);
+        this.getDownloadTemp(tempApi, param);
       }
     },
     // 通过Api下载模板-Handel
