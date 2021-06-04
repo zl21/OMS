@@ -1,15 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2021-05-13 18:38:40
- * @LastEditTime: 2021-05-27 15:32:54
+ * @LastEditTime: 2021-06-04 19:34:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/modal/interfacePlatform/config/IP_B_STANDPLAT_ORDER.js
  */
 // 通用订单下载
 import BurgeonDate from '@/assets/js/__utils__/date.js';
-import i18n from '@burgeon/internationalization/i18n';
-window.$i18n = i18n;
 export default {
   formConfig: {
     formValue: {

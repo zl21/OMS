@@ -1,5 +1,3 @@
-import i18n from '@burgeon/internationalization/i18n';
-window.$i18n = i18n;
 export default {
   // 云雀2.0-商品管理-渠道商品-下载商品
   modalTitle: '下载商品',

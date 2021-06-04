@@ -1,7 +1,5 @@
 // import httpServer from 'framework/__utils__/request';
 import BurgeonDate from '@/assets/js/__utils__/date.js';
-import i18n from '@burgeon/internationalization/i18n';
-window.$i18n = i18n;
 export default {
   // 唯品会 - 淘宝商品（下载商品）
   formConfig: {

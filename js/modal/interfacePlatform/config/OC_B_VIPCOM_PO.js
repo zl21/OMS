@@ -1,5 +1,3 @@
-import i18n from '@burgeon/internationalization/i18n';
-window.$i18n = i18n;
 export default {
   // 云雀2.0-订单中心-订单管理-唯品会-下载PO单
   modalTitle: '下载PO单',
