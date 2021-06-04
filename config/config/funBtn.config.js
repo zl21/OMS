@@ -971,7 +971,7 @@ class BtnConfig {
       const callbackFun = (res)=>{
         console.log(res);
         if(res.data.code == 0){
-          self.msgTips('success', self, '取消成功', 0)
+          commonUtils.msgTips('success', self, '取消成功', 0)
         }else {
           commonUtils.tipShow(
             'confirm',

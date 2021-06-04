@@ -25,7 +25,7 @@ class commonUtils {
    * @callbackType {String} 用于判断何时走回调函数
    * @callbackFun {Funtion} 回调函数，具体处理接口返回的res的方法
    */
-  static serviceHandler(self, serviceUrl, params, callback) {
+  static serviceHandler(self, serviceUrl, params, ...callback) {
     const ApiUrl = serviceUrl.split('.')
     self.service[ApiUrl[0]]
     [ApiUrl[1]](params)
@@ -141,7 +141,8 @@ class commonUtils {
       okText: $i18n.t('common.determine'), // 确定
       cancelText: $i18n.t('common.cancel'), // 取消
       onOk: () => {
-        this.serviceHandler(self, okKey, data, callback)
+        let [callbackType, callbackFun] = callback
+        this.serviceHandler(self, okKey, data, callbackType , callbackFun)
       },
       onCancel: () => {
         self.$emit('closeActionDialog', false)
