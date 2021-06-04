@@ -151,7 +151,7 @@
           <i class="red">*</i> {{ vmI18n.t("form_label.meet_conditions") }}：
         </div>
         <div class="form_content">
-          <CTSIT
+          <meetConditions
             v-for="(rule, _index) in infoData.rules"
             v-show="showRules(_index, rule)"
             :key="_index"
