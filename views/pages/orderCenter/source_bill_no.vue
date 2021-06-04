@@ -1,14 +1,13 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-06-02 10:59:54
+ * @LastEditTime: 2021-06-04 17:22:34
  * @LastEditors: Please set LastEditors
  * @Description: 赔付单-新增-查询原订单编号-formItem
  * @FilePath: /burgeon-project-logic/js/pages/orderCenter/paySearchOri.vue
 -->
 <template>
   <div class="OC_B_ORDER_ID">
-    <label class="itemLabel"> 原定单编号： </label>
     <Input
       :autocomplete="'new-password'"
       @on-click="iconclick"
