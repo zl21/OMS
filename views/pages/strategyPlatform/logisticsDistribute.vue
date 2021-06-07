@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-20 13:39:45
- * @LastEditTime: 2021-06-03 10:24:15
+ * @LastEditTime: 2021-06-07 15:58:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/logisticsDistribute.vue
@@ -30,7 +30,6 @@
           </div>
         </Panel>
       </Collapse>
-
       <div
         class="logistics-foot-table customized-detail-table"
         v-if="tableshow"
@@ -58,7 +57,7 @@
         </div>
       </div>
 
-      <div v-if="id !== '-1'" class="customized-detail-table">
+      <div v-if="id !== '-1'" class="customized-detail-table foot-tab">
         <!-- tab切换 -->
         <businessLabel
           :label-list="labelList"
