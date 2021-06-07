@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-05-19 15:56:14
- * @LastEditTime: 2021-06-03 15:57:00
+ * @LastEditTime: 2021-06-07 15:32:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/fkinputPlus.vue
@@ -143,7 +143,7 @@ export default {
   },
   computed: {},
   watch: {
-    /* itemdata: {
+    itemdata: {
       handler(val, oldVal) {
         if (val.pid || val.valuedata) {
           if (this.itemdata.fkdisplay == 'drp') {
@@ -155,7 +155,7 @@ export default {
         }
       },
       deep: true
-    }, */
+    },
   },
   created() {
     if (this.itemdata.fkdisplay == 'mrp') {
