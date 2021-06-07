@@ -1,13 +1,21 @@
-import '../../assets/css/css_1_3/custom.less'; // 框架 主题文件（变量）
-import '../../assets/css/css_1_3/oms_index.less'; // 定制公共界面样式
+/*
+ * @Author: flybird
+ * @Date: 2021-06-04 13:20:21
+ * @LastEditTime: 2021-06-07 14:41:06
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/config/config/init.config.js
+ */
+import '@/assets/css/css_1_3/custom.less'; // 框架 主题文件（变量）
+import '@/assets/css/css_1_3/oms_index.less'; // 定制公共界面样式
 import R3 from '@syman/burgeon-r3';
 import Vue from 'vue';
-import comUtils from '../../assets/js/__utils__/common';
+import comUtils from '@/assets/js/__utils__/common';
 // import store from 'burgeonConfig/store/store'; // 将老框架公共状态注册为customize模块
 import wangEditor from 'wangeditor';
 import qs from 'qs';
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
-import service from '../../service/index.js';
+import service from '@/service/index.js';
 import lodash from 'lodash';
 import store from 'burgeonConfig/store/store'; // 将老框架公共状态注册为customize模块
 class InitAppConfig {
