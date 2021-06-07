@@ -545,6 +545,7 @@ export default {
           this.isMasterRequired = true;
           this.queryForm(this.formConfig, 'ISACTIVE').style = 'switch';
           this.formConfig.formValue.ISACTIVE = isEnable;
+          this.formConfig.formValue.REMARK = ST_C_EXPRESS_ALLOCATION.remark;
         }
         const { records = [], total } = ST_C_EXPRESS_ALLOCATION_ITEM || {}
         this.logisticsTableConfig.data = records
