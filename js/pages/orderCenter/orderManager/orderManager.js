@@ -757,7 +757,7 @@
             customizedModuleId: val.ID,
           });
           break;
-          case 'OC_B_RETURN_ORDER_VIRTUAL_TABLE':
+          case 'OC_B_RETURN_ORDER':
             if(val.BILL_TYPE == 0){
               console.log('退货单');
               this.$store.commit('global/tabOpen', {
