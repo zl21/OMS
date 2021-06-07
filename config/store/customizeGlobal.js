@@ -120,8 +120,6 @@ export const globalStore = {
       FINAL_ACTUAL_AMT:0,
       FINAL_REAL_AMT:0,
     },
-    // 换货
-    AMT_EXCHANGE:new Number(),
     // 订单中心 - 退换货明细
     returnOrderChangeItem:[]
 
@@ -324,13 +322,8 @@ export const globalStore = {
      /* --------- oms --------- */
     //订单中心
     returnAmount(state, n){
-      let ks = Object.keys(n);
+      let ks = Object.keys(state.returnAmount);
       ks.forEach((k) => n[k] && (state.returnAmount[k] = n[k]));
-      console.log(state.returnAmount);
-    },
-    AMT_EXCHANGE(state,n){
-      state.AMT_EXCHANGE = n.AMT_EXCHANGE,
-      console.log(state.AMT_EXCHANGE,n.AMT_EXCHANGE)
     },
     // 编辑 退换货
     returnOrderChangeItem(state,n){

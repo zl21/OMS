@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-06-04 14:02:47
+ * @LastEditTime: 2021-06-07 10:18:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -100,7 +100,7 @@ export default {
         ADJUST_AMT:Number(this.editData.ADJUST_AMT),
         FINAL_ACTUAL_AMT:Number(this.editData.FINAL_ACTUAL_AMT),
         FINAL_REAL_AMT:Number(this.editData.FINAL_REAL_AMT),
-        })));
+      })));
     }
   },
 };
@@ -139,6 +139,10 @@ export default {
         color: #8d91a1;
         width: 100%;
         text-align: center;
+        input{
+          width: 50%;
+          padding: 0 10px;
+        }
       }
       label {
         height: 30px;

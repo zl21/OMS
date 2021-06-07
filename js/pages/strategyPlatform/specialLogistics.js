@@ -934,6 +934,7 @@ export default {
                 item.val = em.isEnable == 1 ? true : false;
                 item.value = em.beginVal;
                 item.value2 = em.endVal;
+                item.id = em.id
               }
             });
           });
@@ -1138,7 +1139,7 @@ export default {
         //包裹属性
         this.switchListdata.list.forEach(item => {
           let obj = {
-            id: this.id,
+            id: item.id,
             pkgAttributeType: item.pkgAttributeType,
             isEnable: item.val ? 1 : 0,
             beginVal: item.value,
