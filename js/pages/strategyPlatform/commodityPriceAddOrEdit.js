@@ -815,7 +815,6 @@ export default {
     
       let params = {
         ID: this.ID || -1,
-        COPY_FLAG: 0,
         ST_C_PRICE: {},
         ST_C_PRICE_ITEM_LIST: []
       }
@@ -828,7 +827,7 @@ export default {
       params.ST_C_PRICE = this.isMasterRequired ? this.modify.master : this.formConfig.formValue;
       if (this.isCopy) {
         params.ST_C_PRICE = this.formConfig.formValue
-        params.COPY_FLAG = 1
+        params.COPY_FLAG = this.$route.query.copy
       }
  
       params.ST_C_PRICE.BEGIN_TIME &&= this.formatDate(params.ST_C_PRICE.BEGIN_TIME)
