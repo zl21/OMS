@@ -777,12 +777,12 @@ export default {
           this.init(res.data.data.objId);
           this.pageback();
         } else {
-
-          this.$store.commit('customize/TabOpen', {
+          this.$store.commit('global/tabOpen', {
+            type: 'C',
             id: res.data.data.objId,
-            type: 'action',
-            name: 'ST_C_DELIVERY_AREA'
-          });
+            customizedModuleName: 'ST_C_DELIVERY_AREA',
+            customizedModuleId: 'New',
+          })
         }
       });
     },
