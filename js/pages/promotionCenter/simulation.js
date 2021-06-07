@@ -73,14 +73,14 @@ export default {
       itemdata: {
         // 平台商品
         colid: 1700806533,
-        colname: `SG_B_CHANNEL_PRODUCT_ID${Math.floor(Math.random() * 100)}`,
+        colname: `PS_C_SKU${Math.floor(Math.random() * 100)}`,
         fkdesc: '门店档案',
         fkdisplay: 'drp',
         isfk: true,
         isnotnull: false,
         name: '',
         readonly: false,
-        reftable: 'SG_B_CHANNEL_PRODUCT',
+        reftable: 'PS_C_SKU',
         reftableid: 24801,
         valuedata: '',
         isObject: true,

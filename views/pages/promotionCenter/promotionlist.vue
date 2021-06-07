@@ -10,7 +10,7 @@
     </div>
     <!-- 列表部分 -->
     <div class="tabale-content custom-table customized-list-table">
-      <Tabs v-model="activeName">
+      <Tabs v-model="activeName" :animated="false">
         <TabPane
           v-for="(user, index) in tabConfig"
           :key="index"
