@@ -606,20 +606,22 @@ export default {
         this.isCopy = true
         this.setEnable(false)
         this.$nextTick(() => {
-          this.$store.commit('customize/TabOpen', {
-            id: 'New?copy=' + this.ID,
-            type: 'action',
-            name: 'ST_C_PRICE'
-          });
+          this.$store.commit('global/tabOpen', {
+            type: 'C',
+            url: `/CUSTOMIZED/ST_C_PRICE/New?copy=${this.ID}`,
+            customizedModuleName: 'ST_C_PRICE',
+            customizedModuleId: 'New',
+          })
         });
         return;
       } else if (isSave){
         this.$nextTick(() => {
-          this.$store.commit('customize/TabOpen', {
+          this.$store.commit('global/tabOpen', {
+            type: 'C',
             id: this.ID,
-            type: 'action',
-            name: 'ST_C_PRICE'
-          });
+            customizedModuleName: 'ST_C_PRICE',
+            customizedModuleId: 'New',
+          })
         });
         return;
       }
