@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-06-08 15:12:14
+ * @LastEditTime: 2021-06-08 19:53:58
  * @LastEditors: Please set LastEditors
  * @Description: 赔付单-新增-查询原订单编号-formItem
  * @FilePath: /burgeon-project-logic/js/pages/orderCenter/paySearchOri.vue
@@ -14,7 +14,7 @@
       @on-click="iconclick"
       @on-enter="inputenter"
       icon="ios-search"
-      v-model.trim="OC_B_ORDER_ID"
+      v-model="ORIG_ORDER_ID"
       :placeholder="''"
       @on-blur="inputblur"
       @on-change="inputChange"
@@ -63,8 +63,8 @@ import businessLabel from 'professionalComponents/businessLabel';
 import { setTimeout } from 'timers';
 import businessDialog from 'professionalComponents/businessDialog';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
-import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-import dataAccessMixin from '@/assets/js/mixins/dataAccess';
+// import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
+// import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import dateUtil from '@/assets/js/__utils__/date.js';
 
 export default {
@@ -77,9 +77,20 @@ export default {
     businessLabel,
     businessStatusFlag
   },
-  mixins: [buttonPermissionsMixin, dataAccessMixin],
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
+  props: {
+    value: {
+      type: String,
+      default: () => '', // 框架传过来的value
+    },
+  },
+  // mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {
+      ORIG_ORDER_ID:'',
       vmI18n: $i18n,
       orderModal: false,
       OC_B_ORDER_ID: '',
@@ -124,11 +135,14 @@ export default {
             text: '确定',
             type: 'primary',
             btnclick: () => {
-              console.log(this.table.selectionArr);
               if (!this.table.selectionArr.length) {
                 this.$Message.warning('请选中一条单据！');
                 return false
               }
+              this.$emit('change',this.table.selectionArr);
+              console.log(this.table.selectionArr[0].ORIG_ORDER_ID);
+              this.ORIG_ORDER_ID = this.table.selectionArr[0].ORIG_ORDER_ID;
+              localStorage.setItem('ORIG_ORDER_ID', this.ORIG_ORDER_ID);
               this.orderModal = false;
               this.table.selectionArr = [];
             },
@@ -137,7 +151,7 @@ export default {
       },
       formConfig: {
         formValue: {
-          BILL_NO: "",
+          ORIG_ORDER_ID: "",
           SOURCE_CODE: '',
           EXPRESS_CODE: '',
           RECEIVER_NAME:'',
@@ -148,7 +162,7 @@ export default {
           {
             style: 'input',
             label: '原定单编号', // 原定单编号
-            colname: 'BILL_NO',
+            colname: 'ORIG_ORDER_ID',
             width: '8',
             // inputenter: () => this.queryBounced(),
           },
@@ -257,38 +271,6 @@ export default {
     inputblur() { },
     inputChange() { },
     /* --------------------- 工具函数： --------------------- */
-    // 清空表单
-    // formEmpty(_this, form, notvalueArr = [], notdrpArr = []) {
-    //   _this[form].formData.forEach((it) => {
-    //     if (it.itemdata && !notdrpArr.includes(it.colname)) {
-    //       it.itemdata.pid = '';
-    //       it.itemdata.valuedata = '';
-    //     }
-    //   })
-    //   for (const key in _this[form].formValue) {
-    //     if (!notvalueArr.includes(key)) {
-    //       _this[form].formValue[key] = ''
-    //     }
-    //   }
-    //   return _this[form]
-    // },
-    // 获取几天前日期 0获取当前日期
-    getData(day, startTime) {
-      let date = startTime ? this.formatDate(new Date().setHours(0, 0, 0, 0) - 86400 * day * 1000) : this.formatDate(new Date().setHours(23, 59, 59, 0) - 86400 * day * 1000)
-      return date;
-    },
-    // 时间戳格式化
-    formatDate(time) {
-      if (time instanceof Array && time[0]) {
-        const start = dateUtil.getFormatDate(time[0], 'yyyy-MM-dd HH:mm:ss');
-        const end = dateUtil.getFormatDate(time[1], 'yyyy-MM-dd HH:mm:ss');
-        return start + '~' + end
-      } else {
-        const date = new Date(time);
-        const resTime = dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
-        return resTime
-      }
-    },
     keyDown() { },
     /* ------------------- 事件 part start ------------------- */
     async initObjItem(id) {
@@ -320,7 +302,7 @@ export default {
       let params = {
         pageNum:pageNum,
         pageSize:pageSize,
-        BILL_NO: formValue.BILL_NO ? formValue.BILL_NO : paramsNull,
+        ORIG_ORDER_ID: formValue.ORIG_ORDER_ID ? formValue.ORIG_ORDER_ID : paramsNull,
         SOURCE_CODE: formValue.SOURCE_CODE ? formValue.SOURCE_CODE : paramsNull,
         EXPRESS_CODE: formValue.EXPRESS_CODE ? formValue.EXPRESS_CODE : paramsNull,
         RECEIVER_NAME:formValue.RECEIVER_NAME ? formValue.RECEIVER_NAME : paramsNull,
