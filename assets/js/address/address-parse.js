@@ -317,7 +317,7 @@ function parse(address) {
   //     detail.addr = detail.addr.replace(parse.name, '').trim();
   //   }
   // }
-
+  parse.name = detail.name;
   parse.province = detail.province;
   parse.city = detail.city;
   parse.area = detail.area;
