@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-06-07 10:18:06
+ * @LastEditTime: 2021-06-08 10:51:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -47,7 +47,7 @@
       <li v-if="tableName" >
         <div class="calculation-item">
           <span>换货金额</span>
-          <label>{{ data.AMT_EXCHANGE }}</label>
+          <label>{{ data.EXCHANGE_AMT }}</label>
         </div>
       </li>
       <li class="symbol">=</li>
@@ -89,7 +89,7 @@ export default {
       let FINAL_ACTUAL_AMT
       console.log(e.target.value);
       if(this.tableName){
-        FINAL_ACTUAL_AMT =  Number(this.data.PRO_REAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT) - Number(this.data.AMT_EXCHANGE);
+        FINAL_ACTUAL_AMT =  Number(this.data.PRO_REAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT) - Number(this.data.EXCHANGE_AMT);
       }else{
         FINAL_ACTUAL_AMT =  Number(this.data.PRO_REAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT);
       }

@@ -779,9 +779,9 @@ export default {
         } else {
           this.$store.commit('global/tabOpen', {
             type: 'C',
-            id: res.data.data.objId,
+            label: '物流派送范围编辑',
             customizedModuleName: 'ST_C_DELIVERY_AREA',
-            customizedModuleId: 'New',
+            customizedModuleId: res.data.data.objId,
           })
         }
       });

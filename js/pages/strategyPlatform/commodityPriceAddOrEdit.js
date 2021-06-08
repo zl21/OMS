@@ -24,7 +24,7 @@ export default {
     return {
       vmI18n:$i18n,
       collapse: ['panel_baseInfo', 'panel_pickInfo', 'panel_warehouseInfo'],
-      ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
+      ID: this.$route.params.customizedModuleId && (!['New', 'NEW'].includes(this.$route.params.customizedModuleId)) ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       loading: false,
       isWatchChange: false, // 监听
       isMasterRequired: false, // 主表是否已保存
@@ -61,7 +61,7 @@ export default {
             text: '复制',
             isShow: false,
             btnclick: () => {
-              this.onOk(true)
+              this.onOk(this.ID, true)
             },
           },
         ]
@@ -599,7 +599,7 @@ export default {
       }
     },
     // 复制、返回
-    onOk(isCopy, isSave) {
+    onOk(id, isCopy) {
       this.$comUtils.tabCloseAppoint(this);
       this.$forceUpdate()
       if (isCopy) {
@@ -608,19 +608,20 @@ export default {
         this.$nextTick(() => {
           this.$store.commit('global/tabOpen', {
             type: 'C',
-            url: `/CUSTOMIZED/ST_C_PRICE/New?copy=${this.ID}`,
+            url: `/CUSTOMIZED/ST_C_PRICE/New?copy=${id}`,
+            label: '商品价格策略新增',
             customizedModuleName: 'ST_C_PRICE',
             customizedModuleId: 'New',
           })
         });
         return;
-      } else if (isSave){
+      } else if (id){
         this.$nextTick(() => {
           this.$store.commit('global/tabOpen', {
             type: 'C',
-            id: this.ID,
+            label: '商品价格策略编辑',
             customizedModuleName: 'ST_C_PRICE',
-            customizedModuleId: 'New',
+            customizedModuleId: id,
           })
         });
         return;
@@ -853,15 +854,15 @@ export default {
             this.setFormValue(this.goodsTableConfig.businessFormConfig, 'PS_C_SPU')
           }
           this.reloadForm(params.ISACTIVE == 'Y')
+          data && (this.ID = data.objId)
           if (isSaveAll) {
             this.modify = { master: {} }
             this.isModify = false
+            this.onOk(['New', 'NEW'].includes(this.$route.params.customizedModuleId) && this.ID)
           }
-          data && (this.ID = data.objId)
           !this.isCopy && this.queryPrice(data.objId)
           !this.isCopy && this.queryPriceItem(data.objId)
           this.$message.success(message)
-          this.isCopy && this.onOk(false, true)
           return
         }
         this.$message.error(message)
