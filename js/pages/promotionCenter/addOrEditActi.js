@@ -23,16 +23,19 @@ export default {
           {
             text: $i18n.t('btn.back'), // 返回
             btnclick: () => {
+              this.close();
             }
           },
           {
             text: $i18n.t('btn.saveDraft'), // 保存草稿
             btnclick: () => {
+              this.saveDraft();
             }
           },
           {
             text: $i18n.t('btn.publish'), // 发布
             btnclick: () => {
+              this.publish();
             }
           },
         ]
