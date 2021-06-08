@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-03 19:34:07
- * @LastEditTime: 2021-06-07 16:49:15
- * @LastEditors: your name
+ * @LastEditTime: 2021-06-08 11:05:49
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/promotionCenter/addOrEditActi.vue
 -->
@@ -11,15 +11,7 @@
   <div class="addOrEditActi" v-loading='loading'>
     <div class="steps_content">
       <div class="footer">
-        <button @click="close">
-          {{ vmI18n.t('btn.back') }}
-        </button>
-        <button v-if="showSaveButton" @click="saveDraft">
-          {{ vmI18n.t('btn.saveDraft') }}
-        </button>
-        <button v-if="showPublishButton" @click="publish">
-          {{ vmI18n.t('btn.publish') }}
-        </button>
+        <businessButton :btn-config="btnConfig" />
       </div>
       <div ref="basicSteps" class="basicSteps">
         <div class="basic">

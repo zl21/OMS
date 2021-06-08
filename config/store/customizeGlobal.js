@@ -116,7 +116,7 @@ export const globalStore = {
       PRO_REAL_AMT:0,
       SHIP_AMT:0,
       ADJUST_AMT:0,
-      AMT_EXCHANGE:0,
+      EXCHANGE_AMT:0,
       FINAL_ACTUAL_AMT:0,
       FINAL_REAL_AMT:0,
     },

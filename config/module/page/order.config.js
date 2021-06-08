@@ -11,7 +11,13 @@
 // import refundAfterShipment from 'allpages/orderCenter/returngood/refundAfterShipment.vue'; // 订单中心-已发货退款单-编辑 额外退款
 // import distributionOrderList from 'allpages/orderCenter/vipJit/distributionOrderList.vue';
 
+// import orderManage from '@/views/pages/orderCenter/orderManager/orderManager.vue';
+// import orderAdd from '@/views/pages/orderCenter/orderManager/orderAddOrCopy.vue';
+// import returnOrder from '@/views/pages/orderCenter/returnOrder/returnOrderAdd.vue';
+// import returnChangeOrderdetails from '@/views/pages/orderCenter/returnOrder/returnChangeOrderdetails.vue';
+
 export default {
+
   // 订单中心-扫描入库
   SCANIN: {
     component: () => import('allpages/orderCenter/scanIn/scanIn.vue'),

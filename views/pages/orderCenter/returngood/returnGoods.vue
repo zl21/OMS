@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-19 10:53:30
- * @LastEditTime: 2021-05-20 14:58:15
+ * @LastEditTime: 2021-06-08 09:56:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returngood/returnGoods.vue
@@ -92,13 +92,13 @@
 
 <style lang="less">
 @import "~@burgeon/oms-theme/skin/public.less";
-.ItemComponentRoot.VERSION {
+.ItemComponentRoot {
   position: relative;
   overflow: inherit;
-  .switch {
+  .returnGoods .switch {
     position: absolute;
     right: 0;
-    top: -38px;
+    top: -54px;
     color: @base-color;
     cursor: pointer;
   }
