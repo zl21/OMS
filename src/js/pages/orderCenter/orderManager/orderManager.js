@@ -14,6 +14,7 @@ import formatData from '@/assets/js/__utils__/date';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import labelListConfig from './publicConfig/labelList';
 import orderLogo from './publicConfig/orderLogo';
+import jordanBtn from 'professionalComponents/businessButton';
 
 export default {
   components: {
@@ -22,7 +23,8 @@ export default {
     businessLabel,
     businessDialog,
     aTable,
-    loading
+    loading,
+    jordanBtn
   },
   mixins: [isFavoriteMixin, buttonPermissionsMixin, dataAccessMixin],
   watch: {
@@ -35,6 +37,7 @@ export default {
       vmI18n: window.vmI18n,
       pageLoad: false,
       isActive: false,
+      batchAntiAuditFlag: false,
       agTableConfig: {
         tableHeight: '480px',
         agLoading: false,
@@ -106,6 +109,7 @@ export default {
       distributeLogisticsModal: false, // 警告弹框
       distributeWarehouseModal: false, // 警告弹框
       batchReturnOrderModal: false, // 警告弹框
+      batchAntiAuditModal: false, // 批量撤回弹框
       // 清除高级搜索中的数据
       clearFromListValue: false,
       // 状态json
@@ -494,6 +498,15 @@ export default {
               } else {
                 self.$Message.warning(self.vmI18n.t('modalTips.a8')); // 请选择一条订单
               }
+            } // 按钮点击事件
+          },
+          {
+            text: '批量撤回', // 批量撤回
+            webname: 'batch antiAudit',
+            btnclick: () => {
+              const _this = this;
+              _this.batchAntiAuditFormConfig.formValue.noticeNos = '';
+              _this.batchAntiAuditModal = true;
             } // 按钮点击事件
           },
           {
@@ -1209,6 +1222,48 @@ export default {
             value: 'IS_BACK', // 输入框的值
             width: '6', // 所占的宽度
             checked: false // 是否勾选控制
+          }
+        ]
+      },
+      antiAuditBtnConfig: {
+        typeAll: 'error', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
+        buttons: [
+          {
+            type: '', // 按钮类型
+            text: '取消', // 按钮文本
+            icon: '', // 按钮图标
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.onBatchAntiAuditCancel();
+            } // 按钮点击事件
+          },
+          {
+            type: '', // 按钮类型
+            text: '确认', // 按钮文本
+            icon: '', // 按钮图标
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: async () => {
+              this.doBatchAntiAudit();
+            } // 按钮点击事件
+          }
+        ]
+      },
+      batchAntiAuditFormConfig: {
+        formValue: {
+          noticeNos: ''
+        },
+        formData: [
+          {
+            style: 'input',
+            label: '出库通知单单号', // 配送费用
+            placeholder: '例如：111,222,333,444', // 占位文本，默认为请输入
+            value: 'noticeNos',
+            dataAcessKey: 'noticeNos',
+            disabled: false,
+            width: '24',
           }
         ]
       },
@@ -2763,6 +2818,37 @@ export default {
           throw new Error('只允许仓库发货、平台发货状态订单批量退单');
         }
       }
+    },
+    onBatchAntiAuditCancel() {
+      this.batchAntiAuditModal = false;
+    },
+    doBatchAntiAudit() {
+      // 
+      const _this = this;
+      if (_this.batchAntiAuditFlag) return _this.$Message.error('有一项任务正在进行中!');
+      _this.batchAntiAuditFlag = true;
+      if (!_this.batchAntiAuditFormConfig.formValue.noticeNos) return _this.$Message.error('请输入出库通知单单号!');
+      if (_this.batchAntiAuditFormConfig.formValue.noticeNos.indexOf('，') !== -1) {
+        return _this.$Message.error('非法字符，请检查后重新输入!');
+      }
+      const lists = _this.batchAntiAuditFormConfig.formValue.noticeNos.split(',').map(item => item.trim())
+      if (lists.length > 15000) return _this.$Message.error('文本过长，请分批处理!');
+
+      const param = {
+        noticeNos: lists
+      }
+      _this.service.orderCenter.antiAuditReturnOrder(param).then(res => {
+        if (res.data.code === 0) {
+          _this.$Message.success(res.data.message);
+        } else {
+          _this.$Message.error(res.data.message);
+          publicMethodsUtil.downloadUrlFile(res.data.data);
+        }
+        _this.batchAntiAuditFlag = false;
+        _this.batchAntiAuditModal = false;
+      }).catch(() => {
+        _this.batchAntiAuditFlag = false;
+      });
     },
     onBatchReturnOrderCancel() {
       this.batchReturnFormConfig.formValue.IS_BACK = false;

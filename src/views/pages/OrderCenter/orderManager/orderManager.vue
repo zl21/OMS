@@ -153,6 +153,20 @@
         <businessForm :form-config="batchReturnFormConfig" />
       </div>
     </Modal>
+    <!-- 批量撤回 -->
+    <Modal
+      v-model="batchAntiAuditModal"
+      :mask="true"
+      :title="'批量撤回'"
+      width="420"
+      :footer-hide="true"
+    >
+      <div class="orderContent">
+        <businessForm :form-config="batchAntiAuditFormConfig" />
+      </div>
+
+      <jordanBtn :btnConfig="antiAuditBtnConfig"></jordanBtn>
+    </Modal>
   </div>
 </template>
 

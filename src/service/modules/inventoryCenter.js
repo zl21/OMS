@@ -7,6 +7,8 @@ export default {
     sgPhyOutNoticesSendWMSAgainCondition: params => network.post('/p/cs/sgPhyOutNoticesSendWMSAgainCondition', params),
     // 库存同步队列表
     getChannelSynstockQuery: params => network.post('/p/cs/getChannelSynstockQuery', params),
+    // 库存同步队-导出
+    getChannelSynstockExport: params => network.post('/p/cs/getChannelSynstockQuery/export', params), // 导出
     // 库存计算缓存池
     getChannelStorageBufferQuery: params => network.post('/p/cs/getChannelStorageBufferQuery', params),
     // 平台店铺库存变动流水
