@@ -4,6 +4,7 @@ import GiftSet from 'allpages/promotionCenter/details/giftSet';
 import stepsBars from 'professionalComponents/steps';
 import groups from '@/assets/js/promotion/groups';
 import BurgeonDate from '@/assets/js/__utils__/date.js';
+import businessButton from 'professionalComponents/businessButton';
 
 export default {
   components: {
@@ -11,10 +12,31 @@ export default {
     InfoSet,
     GiftSet,
     stepsBars,
+    businessButton
   },
   data() {
     return {
       vmI18n: $i18n,
+      btnConfig: {
+        typeAll: 'default',
+        buttons: [
+          {
+            text: $i18n.t('btn.back'), // 返回
+            btnclick: () => {
+            }
+          },
+          {
+            text: $i18n.t('btn.saveDraft'), // 保存草稿
+            btnclick: () => {
+            }
+          },
+          {
+            text: $i18n.t('btn.publish'), // 发布
+            btnclick: () => {
+            }
+          },
+        ]
+      },
       objid: '-1', // 新增-1 保存的正整数
       dialogVisible: false,
       basic_info: {
@@ -287,6 +309,7 @@ export default {
       };
       if (_objid) obj.objid = _objid;
       formData.append('param', JSON.stringify(obj));
+      self.loading = true;
       try {
         const {
           data: { code, message, data }
@@ -319,8 +342,11 @@ export default {
             this.validateModule();
           });
         }
+        self.initBtn();
+        self.loading = false;
       } catch (error) {
         // self.$message({ type: "error", message: "获取促销详情异常" });
+        self.loading = false;
         self.$message({
           type: 'error',
           message: $i18n.t('modalTips.r4')
@@ -780,6 +806,19 @@ export default {
         code: 0,
         message: $i18n.t('modalTips.s4')
       };
+    },
+    initBtn(){
+      let self = this;
+      if(self.objid > 0 && (self.basic_info.status === '2' || self.basic_info.status === '3')){
+        let arr = [];
+        arr = self.btnConfig.buttons.filter(item=>item.text != '保存草稿');
+        self.btnConfig.buttons = arr;
+      };
+      if(self.objid < 0 || self.basic_info.status !== '1'){
+        let arr = [];
+        arr = self.btnConfig.buttons.filter(item=>item.text != '发布');
+        self.btnConfig.buttons = arr;
+      }
     }
   },
   mounted() {
@@ -803,6 +842,7 @@ export default {
       this.initData();
       const copy = this.$route.query.copy;
       if (copy && copy > 1) this.getData(copy);
+      this.initBtn();
     }
   }
 };
