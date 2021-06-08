@@ -24,6 +24,7 @@ export default {
       isOne: true,
       RETURN_STATUS: null,
       BILL_TYPE: '1',
+      isDisabled: false,
       addItem: {
         // 新增明细弹框数据
         modal: false,
@@ -691,6 +692,7 @@ export default {
                       value: params.row.QTY_IN,
                       autosize: true,
                       placeholder: '',
+                      disabled: self.isDisabled,
                       // regx:/^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$/,
                       regx: /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
                     },
@@ -733,6 +735,7 @@ export default {
                     props: {
                       value: params.row.returnPrice,
                       autosize: true,
+                      disabled: self.isDisabled,
                       // regx:/^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$/,
                       // regx: /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
                     },
@@ -823,6 +826,7 @@ export default {
                     props: {
                       value: params.row.FREIGHT,
                       autosize: true,
+                      disabled: self.isDisabled,
                       // regx:/^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$/,
                       regx: /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
                     },
@@ -1663,7 +1667,10 @@ export default {
               if (val.item.label === '实际退款金额' || val.item.label === '收款人姓名' || val.item.label === '支付账号') {
                 val.item.props.disabled = true
               }
+              this.isDisabled = true; // 明细行 退款数量 退款金额 运费 审核后 不允许修改 40480
             });
+          } else {
+            this.isDisabled = false;
           }
 
           // self.onSelectData['ID'] = res.data.data.AfSend.ID
