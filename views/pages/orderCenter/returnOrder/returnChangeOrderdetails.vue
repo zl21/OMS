@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-06-08 16:11:48
+ * @LastEditTime: 2021-06-09 10:39:57
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -213,8 +213,7 @@ export default {
               AuotData: [], //匹配的选项
               dimChange: (search) => {
                 //模糊查询的方法
-                console.log(search);
-                // this.fuzzyquerybyak(search)
+                this.fuzzyquerybyak(search,171332)
               },
               dimEnter: (val) => {
                 this.getPlaceData(0, this.replaceProductTable.pageSize);
@@ -243,7 +242,9 @@ export default {
               columns: ["ENAME"],
               width: "8",
               AuotData: [], //匹配的选项
-              dimChange: (search) => {},
+              dimChange: (search) => {
+                this.fuzzyquerybyak(search,165990)
+              },
               dimEnter: (val) => {
                 this.getPlaceData(0, this.replaceProductTable.pageSize);
               },
@@ -492,24 +493,16 @@ export default {
       }
     },
     // 模糊查询 数据
-    async fuzzyquerybyak(search, page = 0, pageSize = 1000) {
-      let { PS_C_PRO_ECODE, ECODE, ENAME } =
-        this.replaceProductTable.businessFormConfig.formValue;
-      let fixedcolumns = { PS_C_PRO_ECODE, ECODE, ENAME };
-      let searchdata = {
-        table: "PS_C_SKU",
-        startindex: page,
-        range: pageSize,
-        fixedcolumns: fixedcolumns,
-        column_include_uicontroller: true,
-        isolr: false,
-      };
-      let formData = new FormData();
-      formData.append("searchdata", JSON.stringify(searchdata));
-      const {
-        data: { data },
-      } = await this.service.common.QueryList(formData, { serviceId: "r3-ps" });
-      console.log(data);
+    async fuzzyquerybyak(search,colid) {
+        let fixedcolumns = {}
+        const formData = new FormData()
+        formData.append('ak', search)
+        formData.append('colid', colid)
+        formData.append('fixedcolumns', JSON.stringify(fixedcolumns))
+        const {
+          data: { data },
+        } = await this.service.common.fuzzyquerybyak(formData);
+        colid === 171332 ? this.replaceProductTable.businessFormConfig.formData[0].AuotData = data :  this.replaceProductTable.businessFormConfig.formData[2].AuotData = data
     },
     // 获取新增明细数据
     async getDetailModal() {
