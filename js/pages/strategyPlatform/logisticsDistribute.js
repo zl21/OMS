@@ -510,6 +510,7 @@ export default {
         //isactive 根据主表这个字段来控制是否可以编辑 Y不能编辑 N可以编辑
 
         if (stCDeliveryArea.isactive == 'Y') {
+          this.FormConfig.formValue.isActive = true
           this.FormConfig.formData[1].disabled = true;
           this.AliasFormConfig.formData[0].options.forEach(em => {
             em.disabled = true;
@@ -517,6 +518,8 @@ export default {
           this.btnConfig2.buttons.forEach(em => {
             em.disabled = true;
           });
+        }else{
+          this.FormConfig.formValue.isActive = false
         }
         //渲染明细表
         stCDeliveryAreaRegionItemList.records.forEach((item, index) => {
@@ -769,7 +772,7 @@ export default {
         },
         stCDeliveryAreaRegionItemList: this.stCDeliveryAreaRegionItemList
       };
-      this.ID != -1 && (data.stCDeliveryArea.isActive = this.FormConfig.formValue.isActive)
+      this.ID != -1 && (data.stCDeliveryArea.isActive =( this.FormConfig.formValue.isActive?"Y":"N") )
       service.strategyPlatform.deliveryAreaSave(data).then(res => {
         this.fnempty();
         this.$Message.success(res.data.message);

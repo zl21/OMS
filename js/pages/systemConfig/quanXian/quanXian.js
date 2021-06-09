@@ -174,7 +174,11 @@ export default {
 
     // 获取角色id
     async getRoleData() {
-      const res = await this.service.common.groupTreeload({});
+      //const res = await this.service.common.groupTreeload({});
+      const res = await  network.post(
+        '/mock/734/p/cs/groupTreeload',
+      )
+
       if (res.data.code === 0) {
         this.groupId = res.data.data[0].ID;
         this.newGroupId = res.data.data[0].ID;
@@ -187,7 +191,8 @@ export default {
     async getSearchForm() {
       network
         .post(
-          '/p/cs/permission/v1/selectPermissionColumn',
+          '/mock/734/p/cs/permission/v1/selectPermissionColumn',
+          //'/p/cs/permission/v1/selectPermissionColumn',
           urlSearchParams({ permissionType: this.permissionType })
         )
         .then(res => {
@@ -216,10 +221,11 @@ export default {
           QUERY: ''
         };
       } else {
-        url = '/p/cs/permission/v1/selectDataPermission';
+        url ='/mock/734/p/cs/permission/v1/selectDataPermission',
+       // url = '/p/cs/permission/v1/selectDataPermission';
         params = {
-          permissionType: this.permissionType,
-          groupId: this.groupId,
+          permissionType: this.permissionType || 'sensitivecol',
+          groupId: this.groupId || 32,
           searchCondition
         };
       }
@@ -268,6 +274,7 @@ export default {
               }
             }
           });
+          
           this.tableArr.columns = dt.columns;
           this.tableArr.rows = dt.rows;
           this.tableArr.isChild = dt.isChild;

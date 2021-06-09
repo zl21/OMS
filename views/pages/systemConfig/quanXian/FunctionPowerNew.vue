@@ -1865,7 +1865,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" >
 .ark-spin-fix {
   z-index: 999;
   .demo-spin-icon-load {
@@ -1915,9 +1915,9 @@ export default {
       font-weight: 400;
       box-sizing: border-box;
       margin-right: 10px;
-      height: 32px;
-      line-height: 30px;
-      border-radius: 5px;
+      height: 32px !important;
+      line-height: 30px !important;
+      border-radius: 5px !important;
       span {
         vertical-align: initial;
       }

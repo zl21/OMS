@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-07 20:40:40
- * @LastEditTime: 2021-06-09 16:29:04
+ * @LastEditTime: 2021-06-09 20:15:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/page/system.config.js
@@ -31,16 +31,17 @@ export default {
   CP_C_HRUSERS: {
     component:  () => import('allpages/systemConfig/quanXian/quanXian'),
   },  
-  // 实体仓权限
-  // JURISDICTIONDATA: {
-  //   component:  () => import('allpages/systemConfig/quanXian/quanXian'),
-  // },
+ 
   // 品牌权限
   BRANDPERMISSIONS: {
     component:  () => import('allpages/systemConfig/quanXian/quanXian'),
   },
-
+  //功能权限
   JURISDICTIONDATA:{
     component:() => import('allpages/systemConfig/quanXian/FunctionPowerNew'),
+  },
+  //数据权限
+  DATAJURISDICTION:{
+    component:  () => import('allpages/systemConfig/quanXian/quanXian'),
   }
 };
