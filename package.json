@@ -1,6 +1,6 @@
 {
   "name": "@burgeon/business-components",
-  "version": "1.1.48",
+  "version": "1.1.49",
   "description": "burgeon company's business-components lib for private npm",
   "main": "index.js",
   "scripts": {
@@ -14,13 +14,13 @@
   "license": "ISC",
   "devDependencies": {
     "@burgeon/oms-theme": "^1.4.7",
-    "@burgeon/project-logic": "^1.1.56",
+    "@burgeon/project-logic": "^1.5.57",
     "@syman/burgeon-r3": "^1.4.58",
     "ag-grid": "^18.1.2",
     "ag-grid-enterprise": "^17.1.1"
   },
   "dependencies": {
-    "@burgeon/internationalization": "^1.0.43",
+    "@burgeon/internationalization": "^1.0.45",
     "lodash": "^4.17.21"
   }
 }

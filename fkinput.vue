@@ -4,12 +4,14 @@
       <i v-if="itemdata.isnotnull">*</i>
       {{ itemdata.name }}:
     </label>
+
     <Icon
       v-if="!itemdata.readonly && (itemdata.fkdisplay === 'mrp' || itemdata.fkdisplay === 'drp')"
       class="clear"
       type="ios-close-circle"
       @click="clear"
     />
+
     <div v-if="itemdata.readonly || !isActive || isdisabled">
       <input
         v-model="itemdata.valuedata"
@@ -18,6 +20,7 @@
         disabled
       />
     </div>
+    
     <div v-else style="position: relative">
       <!-- 遮挡输入建议组件的盒子，点击唤出下拉多选弹出框 -->
       <span

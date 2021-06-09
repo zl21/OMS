@@ -295,7 +295,7 @@ export default {
       self.autocomplete = false;
       self.isHandleSelect = false;
       let flag = true;
-      const obj = self.getQueryClick(self.itemdata, () => { });
+      const obj = self.getQueryClick(self.itemdata, () => { }); //用来处理联动
       for (const i in obj) {
         if (!obj[i].valuedata) {
           flag = false;
@@ -399,6 +399,7 @@ export default {
         //   this.$emit('inputBlur', itemdata);
         // }
       }
+      this.$refs['autocomplete' + itemdata.colname].suggestions = [];
     },
 
     inputKeyUp(str, event) {
