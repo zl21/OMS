@@ -1854,6 +1854,7 @@ export default {
         selDa,
         "pryKey"
       );
+      this.totalNum();
       // const selectKey = this.$OMS2.omsUtils.sonList(selDa, 'pryKey');
       self.jordanTableConfig.selectData = [];
     },

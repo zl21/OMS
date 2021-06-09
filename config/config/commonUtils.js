@@ -142,7 +142,7 @@ class commonUtils {
       cancelText: $i18n.t('common.cancel'), // 取消
       onOk: () => {
         let [callbackType, callbackFun] = callback
-        this.serviceHandler(self, okKey, data, callbackType , callbackFun)
+        this.serviceHandler(self, okKey, data, callbackType, callbackFun)
       },
       onCancel: () => {
         self.$emit('closeActionDialog', false)
@@ -285,14 +285,14 @@ class commonUtils {
       const a = []
       self[array].buttons.forEach((item) => {
         // 设置、收藏等图标按钮的配置
-        if (!item.text && item.icon ) {
+        if (!item.text && item.icon) {
           a.push(item);
           // if(show_iconbj_setup.includes(self.$route.params.customizedModuleName)){ //暂时不过滤任何图标按钮
           //   a.push(item)
           // }else if(item.icon !== 'iconfont iconbj_setup'){
           //   a.push(item);
           // }
-          
+
         }
       })
 
@@ -617,7 +617,8 @@ class commonUtils {
     formdata.append('refcolid', refcolid)
     const res = await service.common.objectTableItem(formdata)
     if (res.data.code === 0) {
-      let rowData = []
+      let rowData = [];
+      let columns = [];
       res.data.data.row.map((row) => {
         const obj = {}
         for (const i in row) {
@@ -625,9 +626,19 @@ class commonUtils {
         }
         rowData.push(obj)
       })
+      res.data.data.tabth.map((it) => {
+        let column = {}
+        for (const i in it) {
+          column[i] = it[i];
+          column.key = it.colname;
+          column.title = it.name;
+        }
+        columns.push(column)
+      })
       const data = {
         otherData: res.data.data,
         rowData,
+        columns,
       }
       return data
     } else {
