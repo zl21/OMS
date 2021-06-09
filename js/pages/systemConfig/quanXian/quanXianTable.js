@@ -15,6 +15,7 @@ export default {
   },
   data() {
     return {
+      vmI18n: $i18n,
       scrollThead: {
         marginRight: '10px',
       },

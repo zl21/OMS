@@ -145,14 +145,14 @@ export default {
             width: '8',
             disabled: true,
             switchChange: () => {
-              let isActive = this.FormConfig.formValue.isActive;
-              this.FormConfig.formData[1].disabled = isActive;
-              this.AliasFormConfig.formData[0].options.forEach(em => {
-                em.disabled = isActive;
-              });
-              this.btnConfig2.buttons.forEach(em => {
-                em.disabled = isActive;
-              });
+              // let isActive = this.FormConfig.formValue.isActive;
+              // this.FormConfig.formData[1].disabled = isActive;
+              // this.AliasFormConfig.formData[0].options.forEach(em => {
+              //   em.disabled = isActive;
+              // });
+              // this.btnConfig2.buttons.forEach(em => {
+              //   em.disabled = isActive;
+              // });
             }
           }
         ],

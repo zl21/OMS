@@ -22,7 +22,7 @@ export default {
   mixins: [qxBtnData],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       loading: false,
       saveModal: false,
 
@@ -87,7 +87,8 @@ export default {
 
   created() {
     // const { customizedModuleName, customizedModuleId } = this.$route.params;
-    this.permissionType = this.$route.query.type;
+    this.permissionType = "warehouse"
+    //this.$route.query.type;
 
     // 获取角色
     this.getRoleData();
