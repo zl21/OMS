@@ -583,70 +583,68 @@ export default {
                 result,
                 ...addressObj
               } = self.address;
-              if (
-                Object.keys(addressObj).filter((k) => !addressObj[k]).length <=
-                0
-              )
+              console.log(addressObj);
+              if (Object.keys(addressObj).filter((k) => !addressObj[k]).length <= 0) {
                 flag = true; // 全部有值
-              if (!flag) {
-                // "请填入完整信息,如:张三,17788888888,上海上海市闵行区黎安路999号"
-                self.$Message.warning($i18n.t("modalTips.f9"));
-              } else {
-                const modifyArr = [
-                  "RECEIVER_NAME",
-                  "RECEIVER_MOBILE",
-                  "RECEIVER_ADDRESS",
-                ];
-                const ssqModifyArr = [
-                  "CP_C_REGION_PROVINCE_ID",
-                  "CP_C_REGION_CITY_ID",
-                  "CP_C_REGION_AREA_ID",
-                ];
+              }
+              const modifyArr = [
+                "RECEIVER_NAME",
+                "RECEIVER_MOBILE",
+                "RECEIVER_ADDRESS",
+              ];
+              const ssqModifyArr = [
+                "CP_C_REGION_PROVINCE_ID",
+                "CP_C_REGION_CITY_ID",
+                "CP_C_REGION_AREA_ID",
+              ];
+              // if (!flag) {
+              // "请填入完整信息,如:张三,17788888888,上海上海市闵行区黎安路999号"
+              // self.$Message.warning($i18n.t("modalTips.f9"));
+              self.selectRegion(addressObj.province, addressObj.city, addressObj.area).then(res => {
+                let { data: { data: { provinceInfo, cityInfo, areaInfo } } } = res;
+                const queryData = self.formConfigRe.formData;
+                queryData[5].itemdata.pid = provinceInfo ? provinceInfo.id : '';
+                queryData[5].itemdata.valuedata = provinceInfo ? provinceInfo.name : ''; // 省赋值
+                queryData[6].itemdata.pid = cityInfo ? cityInfo.id : '';
+                queryData[6].itemdata.valuedata = cityInfo ? cityInfo.name : ''; // 市赋值
+                queryData[7].itemdata.pid = areaInfo ? areaInfo.id : '';
+                queryData[7].itemdata.valuedata = areaInfo ? areaInfo.name : ''; // 区赋值
                 self.formConfigRe.formValue.RECEIVER_NAME = self.address.name; // 收货人赋值
                 self.formConfigRe.formValue.RECEIVER_PHONE = self.address.phone; // 收货人电话赋值
-                self.formConfigRe.formValue.RECEIVER_MOBILE =
-                  self.address.mobile; // 收货人手机赋值
-                self.formConfigRe.formValue.RECEIVER_ADDRESS =
-                  self.address.addr; // 收货人地址赋值
-                const queryData = self.formConfigRe.formData;
-                self
-                  .getAddressId(
-                    self.address.province,
-                    self.address.city,
-                    self.address.area
-                  )
-                  .then((res) => {
-                    if (res.data.code === 0) {
-                      queryData[5].itemdata.pid =
-                        res.data.data.CP_C_REGION_PROVINCE_ID;
-                      queryData[5].itemdata.valuedata =
-                        res.data.data.CP_C_REGION_PROVINCE_ENAME; // 省赋值
-                      queryData[6].itemdata.pid =
-                        res.data.data.CP_C_REGION_CITY_ID;
-                      queryData[6].itemdata.valuedata =
-                        res.data.data.CP_C_REGION_CITY_ENAME; // 市赋值
-                      queryData[7].itemdata.pid =
-                        res.data.data.CP_C_REGION_AREA_ID;
-                      queryData[7].itemdata.valuedata =
-                        res.data.data.CP_C_REGION_AREA_ENAME; // 区赋值
-                      ssqModifyArr.forEach((it) => {
-                        self.formConfigRe.formValue[it] = self.querItem(
-                          it,
-                          "formConfigRe"
-                        ).itemdata.pid;
-                        self.formConfigRe.formValue[
-                          it.replace("_ID", "_NAME")
-                        ] = self.querItem(
-                          it,
-                          "formConfigRe"
-                        ).itemdata.valuedata;
-                      });
-                      modifyArr.concat(ssqModifyArr).forEach((it) => {
-                        self.modifyData(it, "master", "r");
-                      });
-                    }
+                self.formConfigRe.formValue.RECEIVER_MOBILE = self.address.mobile; // 收货人手机赋值
+                self.formConfigRe.formValue.RECEIVER_ADDRESS = self.address.addr; // 收货人地址赋值
+                ssqModifyArr.forEach((it) => {
+                  self.formConfigRe.formValue[it] = self.querItem(it, "formConfigRe").itemdata.pid;
+                  self.formConfigRe.formValue[it.replace("_ID", "_NAME")] = self.querItem(it, "formConfigRe").itemdata.valuedata;
+                });
+                modifyArr.concat(ssqModifyArr).forEach((it) => { self.modifyData(it, "master", "r") });
+              })
+              // } else {
+              // self.formConfigRe.formValue.RECEIVER_NAME = self.address.name; // 收货人赋值
+              // self.formConfigRe.formValue.RECEIVER_PHONE = self.address.phone; // 收货人电话赋值
+              // self.formConfigRe.formValue.RECEIVER_MOBILE = self.address.mobile; // 收货人手机赋值
+              // self.formConfigRe.formValue.RECEIVER_ADDRESS = self.address.addr; // 收货人地址赋值
+              /* const queryData = self.formConfigRe.formData;
+              self.getAddressId(
+                self.address.province,
+                self.address.city,
+                self.address.area
+              ).then(res => {
+                if (res.data.code === 0) {
+                  queryData[5].itemdata.pid = res.data.data.CP_C_REGION_PROVINCE_ID;
+                  queryData[5].itemdata.valuedata = res.data.data.CP_C_REGION_PROVINCE_ENAME; // 省赋值
+                  queryData[6].itemdata.pid = res.data.data.CP_C_REGION_CITY_ID;
+                  queryData[6].itemdata.valuedata = res.data.data.CP_C_REGION_CITY_ENAME; // 市赋值
+                  queryData[7].itemdata.pid = res.data.data.CP_C_REGION_AREA_ID;
+                  queryData[7].itemdata.valuedata = res.data.data.CP_C_REGION_AREA_ENAME; // 区赋值
+                  ssqModifyArr.forEach((it) => {
+                    self.formConfigRe.formValue[it] = self.querItem(it, "formConfigRe").itemdata.pid;
+                    self.formConfigRe.formValue[it.replace("_ID", "_NAME")] = self.querItem(it, "formConfigRe").itemdata.valuedata;
                   });
-              }
+                  modifyArr.concat(ssqModifyArr).forEach((it) => { self.modifyData(it, "master", "r") });
+                }
+              }); */
+              // }
             },
           },
           {
@@ -928,7 +926,7 @@ export default {
                 isnotnull: true,
                 readonly: false,
                 columnsKey: ['ECODE'],
-                hidecolumns: ['id','value','ENAME'],
+                hidecolumns: ['id', 'value', 'ENAME'],
               },
               oneObj: (val) => {
                 console.log("SKU编码-oneObj::", val);
@@ -1666,6 +1664,26 @@ export default {
         CP_C_REGION_CITY_ENAME: cityName,
         CP_C_REGION_AREA_ENAME: areaName,
       });
+    },
+    selectRegion(provinceName, cityName, areaName) {
+      let params = { provinceName, cityName, areaName };
+      return this.service.orderCenter.selectRegion(params);
+      /* let { data: { data: { provinceInfo, cityInfo, areaInfo } } } = await this.service.orderCenter.selectRegion(params);
+      console.log(provinceInfo, cityInfo, areaInfo);
+      this.formConfig.formData[0].itemdata.valuedata = provinceInfo?.name;
+      this.formConfig.formData[0].itemdata.pid = provinceInfo?.id;
+      this.data.cp_c_region_province_id = provinceInfo?.id;
+      this.formConfig.formData[1].itemdata.valuedata = cityInfo?.name;
+      this.formConfig.formData[1].itemdata.pid = cityInfo?.id;
+      this.data.cp_c_region_city_id = cityInfo?.id;
+      this.formConfig.formData[2].itemdata.valuedata = areaInfo?.name;
+      this.formConfig.formData[2].itemdata.pid = areaInfo?.id;
+      this.data.cp_c_region_area_id = areaInfo?.id;
+      if (provinceName.id || cityName.id) {
+        console.log('111', provinceName, cityName);
+        // 地址解析状态
+        this.dataAysis = true;
+      } */
     },
     // 根据'店铺'ID动态填充'发货仓库'的options
     async getWarehouse(id) {

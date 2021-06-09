@@ -308,9 +308,8 @@ export default {
     }
   },
   async mounted() {
-    if (this.ID > 0) {
-      this.queryOrder();
-    }
+    this.isWatchChange = true;
+    this.ID > 0 && this.queryOrder();
   },
   created() { },
   methods: {

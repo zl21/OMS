@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-06-07 20:40:40
+ * @LastEditTime: 2021-06-08 10:29:43
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/config/module/page/system.config.js
+ */
 export default {
   //   查看用户权限
   USERPERMISSION: {
@@ -35,4 +43,7 @@ export default {
   SALESCHANNELAUTHORITY: {
     component:  () => import('allpages/systemConfig/quanXian/quanXian'),
   },
+  JURISDICTIONDATA:{
+    component:() => import('allpages/systemConfig/quanXian/FunctionPowerNew'),
+  }
 };
