@@ -229,7 +229,7 @@
                   BILL_NO:item.BILL_NO
                 }
               })
-              self.service.orderCenter.checkOrderBeforeWarehouse({
+              self.service.orderCenter.checkReturnOrderBeforeWarehouse({
                 ID_AND_BILL_NO_LIST:arr
               }).then(res=>{
                 console.log(res);
@@ -291,6 +291,34 @@
               });
             },
           },
+          {
+            webname: 'OC_ORDER_ADD_LABEL',  //添加标记
+            btnclick:()=>{
+              const self = this;
+              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.selection.length){
+                self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要标记的单据' , 0);
+                return;
+              }
+              const ids = self.selection.map(item=>item.ID);
+              self.publicBouncedConfig.name = 'OC_ORDER_ADD_LABEL';
+              self.publicBouncedConfig.url = 'modal/orderCenter/addFlag';
+              self.publicBouncedConfig.confirmTitle = '添加标记';
+              self.publicBouncedConfig.width = 500;
+              self.publicBouncedConfig.componentData = {
+                ids
+              }
+              setTimeout(() => {
+                self.$children.find((item) => item.name === 'OC_ORDER_ADD_LABEL').openConfirm();
+              }, 100);
+            },
+          },
+          {
+            webname: 'OC_ORDER_CANCEL_LABEL',  //取消标记
+            btnclick:()=>{
+
+            },
+          }
         ],
         dropDownList: [],
         btnConfig: {
