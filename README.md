@@ -508,3 +508,4 @@
 | v1.5.51 | sku/spu添加模糊搜索 |
 | v1.5.52 | bug:40591 |
 | v1.5.54 | initSubtable方法拓展 |
+| v1.5.55 | orderAdd计算修复 |
