@@ -971,7 +971,7 @@ class BtnConfig {
       const callbackFun = (res)=>{
         console.log(res);
         if(res.data.code == 0){
-          commonUtils.msgTips('success', self, '取消成功', 0)
+          commonUtils.msgTips(self ,'success', '取消成功', 0)
         }else {
           commonUtils.tipShow(
             'confirm',
@@ -1777,11 +1777,21 @@ class BtnConfig {
     self.modal = true //最新筛选排序组件
   }
 
-  // 手工 重传WMS
+  // 手工通知WMS新建
   wmsCreateHandler(self, data) {
+    this.wmsHandler(self, data, 'wmsCreateHandler')
+  }
+  
+  // 手工通知WMS撤回
+  wmsWithdrawHandler(self, data) {
+    this.wmsHandler(self, data, 'wmsWithdrawHandler')
+  }
+
+  wmsHandler(self, data, btnType) {
     let ids = Array.isArray(data) ? data.map(i => i.ID) : data
     let result = ids.length > 1 ? { IDS: ids } : { ID: ids[0] }
-    self.service.orderCenter.createReturnOrderToWms(result).then((res) => {
+    let serviceUrl = btnType == 'wmsCreateHandler' ? 'createReturnOrderToWms' : 'cancelReturnOrderFromWms'
+    self.service.orderCenter[serviceUrl](result).then((res) => {
       if (res.data.code === 0) {
         commonUtils.msgTips(self, 'success', res.data.message, 2)
         self.selection = []
@@ -1824,26 +1834,7 @@ class BtnConfig {
     })
   }
   
-  // 手工 WMS撤回重做
-  wmsWithdrawHandler(self, data) {
-    if (!data.length) {
-      commonUtils.msgTips(self, 'warning', '请至少选中一项', 2)
-      return
-    } else if (data.length > 1) {
-      commonUtils.msgTips(self, 'warning', '只支持单个退货单做WMS撤回重做操作！', 2)
-      return
-    }
-    self.service.orderCenter.cancelReturnOrderFromWms({ ID: data[0].ID }).then((res) => {
-      if (res.data.code === 0) {
-        self.$store.commit('global/tabOpen', {
-          type: 'V',
-          tableName: 'OC_B_RETURN_ORDER_VIRTUAL_TABLE',
-          tableId: 10728,
-          id: data[0].ID,
-        })
-      }
-    })
-  }
+  
 }
 
 export default BtnConfig

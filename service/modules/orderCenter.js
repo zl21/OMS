@@ -389,4 +389,8 @@ export default {
     updateLogistics: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/updateLogistics' , params),  //改退回物流接口
     returnConfirm:(params) => $network.post('/p/cs/oc/oms/v1/returnOrder/returnConfirm' , params),  //退货确认功能
     splitCheckOrder:(params) => $network.post('/p/cs/oc/oms/v1/splitCheckOrder', params), //指定商品拆单校验
+    queryFlagList:(params) => $network.post('/p/cs/QueryList',  params),  //标记列表
+    saveLable:(params) => $network.post('/p/cs/oc/oms/v1/saveLable', params), //标签管理
+    addOrderLable:(params) => $network.post('/p/cs/oc/oms/v1/addOrderLable', params), //添加标记
+    cancelOrderLable:(params) => $network.post('/p/cs/oc/oms/v1/cancelOrderLable' , params),  //取消标记
 }
