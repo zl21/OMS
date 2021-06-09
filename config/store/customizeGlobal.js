@@ -121,8 +121,13 @@ export const globalStore = {
       FINAL_REAL_AMT:0,
     },
     // 订单中心 - 退换货明细
-    returnOrderChangeItem:[]
-
+    returnOrderChangeItem:[],
+    // 订单中心 - 赔付单
+    COMPENSATE: {
+      detail: [],
+      deleteIds: [],
+      other: {},
+    },
   },
   mutations: {
     // 存储促销二类名称和描述
@@ -329,7 +334,11 @@ export const globalStore = {
     returnOrderChangeItem(state,n){
       state.returnOrderChangeItem = n;
       console.log(state.returnOrderChangeItem);
-    }
+    },
+    COMPENSATE(state, n) {
+      let ks = Object.keys(state.COMPENSATE);
+      ks.forEach((k) => n[k] && (state.COMPENSATE[k] = n[k]));
+    },
   },
   modules: {
     jordanStore
