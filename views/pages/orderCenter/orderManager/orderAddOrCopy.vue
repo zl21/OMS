@@ -115,7 +115,6 @@ import businessButton from "professionalComponents/businessButton";
 import businessForm from "professionalComponents/businessForm";
 import businessActionTable from "professionalComponents/businessActionTable";
 import businessLabel from "professionalComponents/businessLabel";
-import publicMethodsUtil from "@/assets/js/public/publicMethods";
 import businessDialog from "professionalComponents/businessDialog";
 // import loading from 'professionalComponents/loading';
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
@@ -124,6 +123,7 @@ import BurgeonValidate from "burgeonConfig/config/validate.config";
 // import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import dateUtil from "@/assets/js/__utils__/date.js";
 import axios from "axios";
+import Util from "@/assets/js/public/publicMethods";
 
 const _ = require("lodash");
 const areaList = require("@/assets/js/address/area-list");
@@ -1040,18 +1040,8 @@ export default {
                           // 公式：【PRICE/PRICE_ACTUAL * QTY - 0 - 0 + ADJUST_AMT = REAL_AMT】
                           // 成交金额 = 零售价 * 数量 - 商品优惠 - 订单优惠 + 调整金额
                           // 调整金额 = (成交金额 + 订单优惠 + 商品优惠) - (零售价 * 数量)
-                          params.row.REAL_AMT = (
-                            inputPA * params.row.QTY -
-                            0 -
-                            0 +
-                            params.row.ADJUST_AMT
-                          ).toFixed(2);
-                          params.row.ADJUST_AMT = (
-                            params.row.REAL_AMT +
-                            0 +
-                            0 -
-                            inputPA * params.row.QTY
-                          ).toFixed(2);
+                          params.row.REAL_AMT = this.$OMS2.omsUtils.floatNumber(inputPA * params.row.QTY - 0 - 0 + params.row.ADJUST_AMT, 2);
+                          params.row.ADJUST_AMT = this.$OMS2.omsUtils.floatNumber(params.row.REAL_AMT + 0 + 0 - inputPA * params.row.QTY, 2);
                         } else {
                           params.row.REAL_AMT = 0;
                           params.row.ADJUST_AMT = 0;
@@ -1102,18 +1092,8 @@ export default {
                         let inputQTY = Number(e.target.value);
                         params.row.QTY = inputQTY;
                         if (params.row.PRICE_ACTUAL && inputQTY) {
-                          params.row.REAL_AMT = (
-                            params.row.PRICE_ACTUAL * inputQTY -
-                            0 -
-                            0 +
-                            params.row.ADJUST_AMT
-                          ).toFixed(2);
-                          params.row.ADJUST_AMT = (
-                            params.row.REAL_AMT +
-                            0 +
-                            0 -
-                            params.row.PRICE_ACTUAL * inputQTY
-                          ).toFixed(2);
+                          params.row.REAL_AMT = this.$OMS2.omsUtils.floatNumber(params.row.PRICE_ACTUAL * inputQTY - 0 - 0 + params.row.ADJUST_AMT, 2);
+                          params.row.ADJUST_AMT = this.$OMS2.omsUtils.floatNumber(params.row.REAL_AMT + 0 + 0 - params.row.PRICE_ACTUAL * inputQTY, 2);
                         } else {
                           params.row.REAL_AMT = 0;
                           params.row.ADJUST_AMT = 0;
@@ -1165,17 +1145,9 @@ export default {
                         params.row.REAL_AMT = inputRA;
                         if (params.row.QTY && inputRA) {
                           // 单价 = (成交金额 - 调整金额 + 订单优惠 + 商品优惠) / 数量
-                          params.row.PRICE_ACTUAL = (
-                            (inputRA - params.row.ADJUST_AMT + 0 + 0) /
-                            params.row.QTY
-                          ).toFixed(2);
+                          params.row.PRICE_ACTUAL = this.$OMS2.omsUtils.floatNumber((inputRA - params.row.ADJUST_AMT + 0 + 0) / params.row.QTY, 2);
                           params.row.PRICE = params.row.PRICE_ACTUAL;
-                          params.row.ADJUST_AMT = (
-                            inputRA +
-                            0 +
-                            0 -
-                            params.row.PRICE_ACTUAL * params.row.QTY
-                          ).toFixed(2);
+                          params.row.ADJUST_AMT = this.$OMS2.omsUtils.floatNumber(inputRA + 0 + 0 - params.row.PRICE_ACTUAL * params.row.QTY, 2);
                         } else {
                           params.row.REAL_AMT = 0;
                           params.row.ADJUST_AMT = 0;
@@ -1194,7 +1166,7 @@ export default {
             key: "ADJUST_AMT",
             dataAcessKey: "ADJUST_AMT",
             render: (h, params) =>
-              h("span", {}, Number(params.row.ADJUST_AMT || 0).toFixed(2)),
+              h("span", {}, this.$OMS2.omsUtils.floatNumber(params.row.ADJUST_AMT || 0, 2),
           },
         ],
       },
@@ -1646,12 +1618,12 @@ export default {
       self.jordanTableConfig.totalData = [];
       self.jordanTableConfig.data.forEach((item) => {
         qty += parseInt(item.QTY || 0);
-        amt = _.add(parseFloat(item.REAL_AMT || 0).toFixed(2), amt);
+        amt = Util.accAdd(parseFloat(item.REAL_AMT || 0).toFixed(2), amt);
       });
       setTimeout(() => {
         self.jordanTableConfig.totalData.push({
           selection: `${$i18n.t("other.total")}:`, // 合计
-          REAL_AMT: _.ceil(amt, 2), // 精确到两位小数
+          REAL_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2), // 精确到两位小数
           QTY: qty,
         });
       }, 10);
@@ -1832,7 +1804,7 @@ export default {
           if (!it.OOID && item.pryKey == it.pryKey) {
             // 1.非复制的且已存在该条明细(已经存在的明细都是刚刚新增的，不是复制带出来的，且，即将新增的是已经存在的，累加)
             item.QTY += it.QTY;
-            item.REAL_AMT = _.ceil(_.add(item.REAL_AMT, it.REAL_AMT), 2);
+            item.REAL_AMT = this.$OMS2.omsUtils.floatNumber(Util.accAdd(item.REAL_AMT, it.REAL_AMT), 2);
           } else if (!it.OOID && !pryKeyArr.includes(it.pryKey)) {
             // 2.非复制的且不存在该条明细
             self.jordanTableConfig.data.push(it);
