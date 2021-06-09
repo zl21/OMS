@@ -42,19 +42,10 @@
         <!--</ul>-->
       </div>
       <div class="contentRight">
-        <div class="left-tree" v-if="quanXianType == 'function'">
+        <div class="left-tree">
           <Tree ref="tree" :data="treeData" @on-select-change="treeChange" />
         </div>
-        <div class="left-tree" v-if="quanXianType == 'data'">
-          <div>
-            <div class="left-tree-head">数据权限项</div>
-            <div class="left-tree-li">品牌权限</div>
-            <div class="left-tree-li">店铺权限</div>
-            <div class="left-tree-li">实体仓权限</div>
-            <div class="left-tree-li">实体仓权限</div>
-            <div class="left-tree-li">渠道仓权限</div>
-          </div>
-        </div>
+
         <div class="right-list">
           <div class="upper-part">
             <div ref="upperTable" class="upper-table">
@@ -495,6 +486,70 @@ export default {
       upperTableTbodyHighlightIndex: 0, // 上边表格高亮的下标
       bottomTableTbodyHighlightIndex: null, // 下边表格高亮的下标
       quanXianType: this.$route.query.type,//判断权限类型
+      treeDataCenter: [
+        {
+          "description": "全部",
+          "id": -1,
+          "name": "全部",
+          "nodeType": "ROOT",
+          "expand": true,
+          "selected": true,
+          "title": "数据权限项",
+          children: [
+            {
+              "description": "品牌权限",
+              "id": 186,
+              "mask": "10000000",
+              "name": "品牌权限",
+              "nodeType": "TABLE_CATEGORY",
+              "orderno": -1,
+              "type": "UNKNOWN",
+              "title": "品牌权限"
+            },
+            {
+              "description": "品牌权限",
+              "id": 186,
+              "mask": "10000000",
+              "name": "品牌权限",
+              "nodeType": "TABLE_CATEGORY",
+              "orderno": -1,
+              "type": "UNKNOWN",
+              "title": "店铺权限"
+            },
+            {
+              "description": "品牌权限",
+              "id": 186,
+              "mask": "10000000",
+              "name": "品牌权限",
+              "nodeType": "TABLE_CATEGORY",
+              "orderno": -1,
+              "type": "UNKNOWN",
+              "title": "实体仓权限"
+            },
+            {
+              "description": "品牌权限",
+              "id": 186,
+              "mask": "10000000",
+              "name": "品牌权限",
+              "nodeType": "TABLE_CATEGORY",
+              "orderno": -1,
+              "type": "UNKNOWN",
+              "title": "实体仓权限"
+            },
+            {
+              "description": "品牌权限",
+              "id": 186,
+              "mask": "10000000",
+              "name": "品牌权限",
+              "nodeType": "TABLE_CATEGORY",
+              "orderno": -1,
+              "type": "UNKNOWN",
+              "title": "渠道仓权限"
+            }
+
+          ]
+        }
+      ]
     };
   },
   watch: {
@@ -619,11 +674,11 @@ export default {
         success: (res) => {
           if (res.data.code === 0) {
             const buttonsData = res.data.data;
-          
-                // buttonsData.push({
-                //   webdesc: '刷新'
-                // });
-       
+
+            // buttonsData.push({
+            //   webdesc: '刷新'
+            // });
+
             const saveObj = buttonsData.find(item => item.webdesc === '保存');
             const copyObj = buttonsData.find(item => item.webdesc === '复制权限');
             const refreshObj = buttonsData.find(item => item.webdesc === '刷新');
@@ -666,6 +721,7 @@ export default {
       this.menuTreeQuery = e.target.value;
     }, // 检索输入框值改变
     menuTreeChange(val, item) {
+     
       this.oldMenuTreeObj = JSON.parse(JSON.stringify(this.newMenuTreeObj));
       this.newMenuTreeObj = JSON.parse(JSON.stringify(item));
       if (val.length === 0) {
@@ -693,7 +749,14 @@ export default {
             resolve();
             const resData = res.data.data;
             this.restructureTreeDada(resData);
-            this.treeData = [...resData];
+            if (this.quanXianType == 'function') {
+              this.treeData = [...resData];
+            } else if (this.quanXianType == 'data') {
+              this.treeData = this.treeDataCenter
+            }
+
+
+
           } else {
             reject();
           }
@@ -927,6 +990,12 @@ export default {
       return true;
     }, // 获取表格里的扩展是否选中
     treeChange(val, obj) {
+   
+      if (obj.id == "-1") {
+        obj.expand = !obj.expand
+        return
+      }
+
       this.oldTreeObj = this.newTreeObj;
       this.newTreeObj = obj;
       if (val.length === 0) {
