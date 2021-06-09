@@ -1166,7 +1166,7 @@ export default {
             key: "ADJUST_AMT",
             dataAcessKey: "ADJUST_AMT",
             render: (h, params) =>
-              h("span", {}, this.$OMS2.omsUtils.floatNumber(params.row.ADJUST_AMT || 0, 2),
+              h("span", {}, this.$OMS2.omsUtils.floatNumber(params.row.ADJUST_AMT || 0, 2)),
           },
         ],
       },
