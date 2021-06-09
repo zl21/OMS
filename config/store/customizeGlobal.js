@@ -128,8 +128,12 @@ export const globalStore = {
       deleteIds: [],
       other: {},
     },
+    REDUNDANT_ORDER_ID: '',
   },
   mutations: {
+    REDUNDANT_ORDER_ID(state, n) {
+      state.REDUNDANT_ORDER_ID = n;
+    },
     // 存储促销二类名称和描述
     save_prom_type(state, n) {
       state.prom_type.prom_type_name = n.prom_type_name;
