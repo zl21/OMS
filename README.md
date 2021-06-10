@@ -194,3 +194,4 @@
 | v1.1.49 | 外键关联,其他途径修改参数,会弹出前一次模糊搜索结果 |
 | v1.1.50 | businessActionTable拓展 |
 | v1.1.51 | importTable拓展cusDiscretion |
+| v1.1.52 | 解决fkinput失焦选中第一个和选中事件冲突 |
