@@ -376,7 +376,7 @@ export default {
       self.autocompleteBlur(itemdata);
     },
     autocompleteBlur(itemdata) {
-      console.log('autocompleteBlur--');
+     setTimeout(()=>{
       const self = this;
       if (!this.isHandleSelect && !this.autocomplete) {
         if (this.queryList.length > 0) {
@@ -391,15 +391,10 @@ export default {
           self.autocomplete = true;
           self.isHandleSelect = false;
         } 
-        // else {
-        //   console.log('失败：', itemdata.pid);
-        //   // 模糊匹配失败
-        //   // itemdata.valuedata = '';
-        //   itemdata.pid = null;
-        //   this.$emit('inputBlur', itemdata);
-        // }
       }
       this.$refs['autocomplete' + itemdata.colname].suggestions = [];
+     },300)
+     
     },
 
     inputKeyUp(str, event) {

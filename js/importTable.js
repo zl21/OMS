@@ -140,7 +140,7 @@ export default {
       }
       $network.post(url, param).then((res) => {
         console.log(res);
-        if (res.data.code === 0 || res.data.code === 1) {
+        if (res.data.code === 0 || res.data.code === 1 || !_this.currentConfig.cusDiscretion) {
           if (res.data.message) _this.$Message.success(res.data.message);
           _this.$emit('returnData', res.data.data);
           _this.closeModal();
@@ -156,6 +156,9 @@ export default {
         } else {
           console.log("Please see : 'http://knowledge.ark.burgeononline.com/repository#/entryComponents/2/749656/1/2061'");
         }
+        if (_this.currentConfig.cusDiscretion) {
+          _this.$emit('returnData', res);
+        } 
         if (_this.currentConfig.buttonPermission) {
           _this.btnConfig.buttons.map((btn) => {
             btn.disabled = false;
