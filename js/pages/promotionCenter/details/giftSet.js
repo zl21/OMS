@@ -1,7 +1,7 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import detailtabs from 'allpages/promotionCenter/details/tableTabs.vue';
 import SingleBox from 'professionalComponents/singleBox';
-import tableCols from '@/assets/js/promotion/columns';
+import { tableCols } from '../promotionConfig';
 import ButtonFkDialog from 'professionalComponents/buttonFkDialog';
 import SetCommodity from 'allpages/promotionCenter/details/setCommodity';
 import businessDialog from 'professionalComponents/businessDialog';
@@ -79,7 +79,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       currentTab: 0,
       tableCols,
       data: [], // 表格数据

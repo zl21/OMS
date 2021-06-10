@@ -1,5 +1,5 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
-import tableCols from '@/assets/js/promotion/columns.js';
+import { tableCols } from '../promotionConfig';
 import MyDialog from 'framework/components/dialog/mydialog';
 
  export default {

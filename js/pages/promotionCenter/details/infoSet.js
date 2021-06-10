@@ -1,4 +1,4 @@
-import tableCols from '@/assets/js/promotion/columns';
+import { tableCols } from '../promotionConfig';
 import SingleBox from 'professionalComponents/singleBox.vue';
 import ButtonFkDialog from 'professionalComponents/buttonFkDialog.vue';
 import detailtable from 'allpages/promotionCenter/details/table.vue';
@@ -55,7 +55,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       temp_time_type: '',
       columns: tableCols.infoColumns,
       data: [], // 表格数据
@@ -695,5 +695,5 @@ export default {
     }
   },
 
-  mounted() {}
+  mounted() { }
 };

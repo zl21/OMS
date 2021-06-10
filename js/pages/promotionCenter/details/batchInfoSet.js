@@ -1,7 +1,7 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import batchTables from 'allpages/promotionCenter/details/batchTables';
 import SingleBox from 'professionalComponents/singleBox';
-import tableCols from '@/assets/js/promotion/columns.js';
+import { tableCols } from '../promotionConfig';
 
 export default {
   name: 'InfoSet',
@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       products_columns: tableCols.productsColumns,
       itemdata_xitong: {
         col: 1,

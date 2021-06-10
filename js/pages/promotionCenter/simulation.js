@@ -4,14 +4,14 @@ import detailtable from 'allpages/promotionCenter/details/table.vue';
 // import MultipleBox from 'professionalComponents/multipleBox.vue';
 import SingleBox from 'professionalComponents/singleBox.vue';
 import ButtonFkDialog from 'professionalComponents/buttonFkDialog.vue';
-import tabList from '@/assets/js/promotion/columns';
+import { tabList } from './promotionConfig';
 import businessButton from 'professionalComponents/businessButton';
 import groups from '@/assets/js/promotion/groups';
 
 export default {
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       btnConfig: {
         typeAll: 'default',
         buttons: [
@@ -145,7 +145,7 @@ export default {
     handleTimeLimitChange(val) {
       this.basicData.time_limit = val;
     },
-    mergeCells() {},
+    mergeCells() { },
     checkTimeTypeChange(val) {
       this.basicData.time_type = val;
     },
@@ -394,4 +394,5 @@ export default {
     await groups.load();
     this.initData();
   },
+  mounted() { }
 };
