@@ -6,9 +6,10 @@ import service from '@/service/index';
 import businessDialog from 'professionalComponents/businessDialog';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import subTable from 'professionalComponents/subTable';
+import { set } from 'lodash';
+
 
 export default {
-  name: 'commodityCusPropertiesAddOrEdit',
   components: {
     businessButton,
     businessForm,
@@ -383,123 +384,122 @@ export default {
   },
   computed: {},
   mounted() {
+    this.init()
 
-   this.init()
-    
-    
   },
   created() { },
+
   methods: {
-   init(){
-    let { customizedModuleId, customizedModuleName } = this.$route.params;
-    let query = this.$route.query;
-    this.customizedModuleName = customizedModuleName;
-    this.id = customizedModuleId;
+    init() {
+      let { customizedModuleId, customizedModuleName } = this.$route.params;
+      let query = this.$route.query;
+      this.customizedModuleName = customizedModuleName;
+      this.id = customizedModuleId;
 
 
-    //ST_C_ORDER_WAREHOUSE  分仓规则
-    if (customizedModuleName == 'ST_C_ORDER_WAREHOUSE') {
-      this.labelList[1].value = "ST_C_ORDER_WAREHOUSE_LOG"
-      this.qurefrom('cpCPhyWarehouseEname')[0].style = null;
-      // 表示分仓策略》分仓规则
-      if (customizedModuleId == 'New' || customizedModuleId == '-1' || customizedModuleId == 'NEW') {
+      //ST_C_ORDER_WAREHOUSE  分仓规则
+      if (customizedModuleName == 'ST_C_ORDER_WAREHOUSE') {
+        this.labelList[1].value = "ST_C_ORDER_WAREHOUSE_LOG"
+        this.qurefrom('cpCPhyWarehouseEname')[0].style = null;
+        // 表示分仓策略》分仓规则
+        if (customizedModuleId == 'New' || customizedModuleId == '-1' || customizedModuleId == 'NEW') {
 
-        this.btnConfig.buttons.forEach(em => {
-          if (em.text == '下一步') {
-            em.isShow = true;
+          this.btnConfig.buttons.forEach(em => {
+            if (em.text == '下一步') {
+              em.isShow = true;
+            }
+          });
+
+          // 表示新增
+          if (vm.$route.query.copy) {
+            this.pageShow = true;
+            this.fninit(vm.$route.query.copy);
+            this.fntableData(vm.$route.query.copy);
+            this.btnConfig2.buttons = []
+          } else if (query.id) {
+            this.fninit(query.id);
+          } else {
+            this.pageShow = false;
+            this.id = '-1';
           }
-        });
-
-        // 表示新增
-        if (vm.$route.query.copy) {
+        } else if (query.saveType && query.saveType == 2) {
+          this.fninit(this.id);
+          this.fntableData(this.id);
           this.pageShow = true;
-          this.fninit(vm.$route.query.copy);
-          this.fntableData(vm.$route.query.copy);
-          this.btnConfig2.buttons = []
-        } else if (query.id) {
-          this.fninit(query.id);
+          this.btnConfig.buttons.forEach(em => {
+            if (em.text == '启用' || em.text == '停用' || em.text == '上一步') {
+              em.isShow = true;
+            }
+            if (em.text == '下一步') {
+              em.isShow = false;
+            }
+          });
         } else {
-          this.pageShow = false;
-          this.id = '-1';
+          this.fninit(this.id);
+          this.fntableData(this.id);
+          this.pageShow = true; //显示明细表
+          this.btnConfig.buttons.forEach(em => {
+            if (em.text == '复制' || em.text == '启用' || em.text == '停用') {
+              em.isShow = true;
+            }
+          });
         }
-      } else if (query.saveType && query.saveType == 2) {
-        this.fninit(this.id);
-        this.fntableData(this.id);
-        this.pageShow = true;
-        this.btnConfig.buttons.forEach(em => {
-          if (em.text == '启用' || em.text == '停用' || em.text == '上一步') {
-            em.isShow = true;
-          }
-          if (em.text == '下一步') {
-            em.isShow = false;
-          }
-        });
-      } else {
-        this.fninit(this.id);
-        this.fntableData(this.id);
-        this.pageShow = true; //显示明细表
-        this.btnConfig.buttons.forEach(em => {
-          if (em.text == '复制' || em.text == '启用' || em.text == '停用') {
-            em.isShow = true;
-          }
-        });
+
+
+
       }
+      //  分物流规则
+      if (customizedModuleName == 'ST_C_ASSIGN_LOGISTICS') {
+        //CP_C_SHOP_IDS  type
+        this.qurefrom('CP_C_SHOP_IDS')[0].style = null;
+        this.qurefrom('type')[0].style = null;
+        this.labelList[0].label = '按收货地址';
+        this.labelList[1].value = "ST_ASSIGN_LOGISTICS_LOG"
+        // 表示分物流策略》分物流规则
+        if (customizedModuleId == 'New' || customizedModuleId == '-1' || customizedModuleId == 'NEW') {
+          // 表示新增
+          this.btnConfig.buttons.forEach(em => {
+            if (em.text == '下一步') {
+              em.isShow = true;
+            }
+          });
 
-
-
-    }
-    //  分物流规则
-    if (customizedModuleName == 'ST_C_ASSIGN_LOGISTICS') {
-      //CP_C_SHOP_IDS  type
-      this.qurefrom('CP_C_SHOP_IDS')[0].style = null;
-      this.qurefrom('type')[0].style = null;
-      this.labelList[0].label = '按收货地址';
-      this.labelList[1].value = "ST_ASSIGN_LOGISTICS_LOG"
-      // 表示分物流策略》分物流规则
-      if (customizedModuleId == 'New' || customizedModuleId == '-1' || customizedModuleId == 'NEW') {
-        // 表示新增
-        this.btnConfig.buttons.forEach(em => {
-          if (em.text == '下一步') {
-            em.isShow = true;
+          if (vm.$route.query.copy) {
+            this.pageShow = true;
+            this.fninit(vm.$route.query.copy);
+            this.fntableData(vm.$route.query.copy);
+            this.btnConfig2.buttons = []
+          } else if (query.id) {
+            this.fninit(query.id);
+          } else {
+            this.pageShow = false;
+            this.id = '-1';
           }
-        });
-
-        if (vm.$route.query.copy) {
+        } else if (query.saveType && query.saveType == 2) {
+          this.fninit(this.id);
+          this.fntableData(this.id);
           this.pageShow = true;
-          this.fninit(vm.$route.query.copy);
-          this.fntableData(vm.$route.query.copy);
-          this.btnConfig2.buttons = []
-        } else if (query.id) {
-          this.fninit(query.id);
+          this.btnConfig.buttons.forEach(em => {
+            if (em.text == '启用' || em.text == '停用' || em.text == '上一步') {
+              em.isShow = true;
+            }
+            if (em.text == '下一步') {
+              em.isShow = false;
+            }
+          });
         } else {
-          this.pageShow = false;
-          this.id = '-1';
+          this.fninit(this.id);
+          this.fntableData(this.id);
+          this.pageShow = true;
+          this.btnConfig.buttons.forEach(em => {
+            if (em.text == '复制' || em.text == '启用' || em.text == '停用') {
+              em.isShow = true;
+            }
+          });
         }
-      } else if (query.saveType && query.saveType == 2) {
-        this.fninit(this.id);
-        this.fntableData(this.id);
-        this.pageShow = true;
-        this.btnConfig.buttons.forEach(em => {
-          if (em.text == '启用' || em.text == '停用' || em.text == '上一步') {
-            em.isShow = true;
-          }
-          if (em.text == '下一步') {
-            em.isShow = false;
-          }
-        });
-      } else {
-        this.fninit(this.id);
-        this.fntableData(this.id);
-        this.pageShow = true;
-        this.btnConfig.buttons.forEach(em => {
-          if (em.text == '复制' || em.text == '启用' || em.text == '停用') {
-            em.isShow = true;
-          }
-        });
-      }
 
-    }
-   },
+      }
+    },
     lastStep() {
       this.$store.commit('customize/TabOpen', {
         id: '-1',
@@ -576,15 +576,18 @@ export default {
     },
 
     fnCopy() {
+
       this.$store.commit('global/tabOpen', {
         type: 'C',
         url: `/CUSTOMIZED/${this.customizedModuleName}/New?copy=${this.id}`,
         label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
         customizedModuleName: this.customizedModuleName,
         customizedModuleId: 'New',
+        dynamicRoutingForCustomizePage:true
       })
-      this.init()
-    
+
+
+
     },
     qurefrom(key) {
       let objitem = this.formConfig.formData.filter(item => item.colname == key);
@@ -691,15 +694,15 @@ export default {
               if (warehouseData[key] == 'Y') {
                 this.qurefrom('beginTime')[0].disabled = true;
                 this.qurefrom('endTime')[0].disabled = true;
-                this.btnConfig2.buttons[0].disabled = true;
 
-                // this.qurebtn(this.btnConfig.buttons, "启用")[0].disabled = true
+                this.btnConfig2.length > 0 && (this.btnConfig2.buttons[0].disabled = true);
+
               } else {
-                // this.qurebtn(this.btnConfig.buttons, "停用")[0].disabled = true
 
                 this.qurefrom('beginTime')[0].disabled = false;
                 this.qurefrom('endTime')[0].disabled = false;
-                this.btnConfig2.buttons[0].disabled = false;
+
+                this.btnConfig2.length > 0 && (this.btnConfig2.buttons[0].disabled = false);
               }
             } else if (key == 'cpCPhyWarehouseEname') {
               this.formConfig.formValue[key] = warehouseData[key];
@@ -729,12 +732,12 @@ export default {
             if (warehouseData[key] == 'Y') {
               this.qurefrom('beginTime')[0].disabled = true;
               this.qurefrom('endTime')[0].disabled = true;
-              this.btnConfig2.buttons && (this.btnConfig2.buttons[0].disabled = true)
+              this.btnConfig2.length > 0 && (this.btnConfig2.buttons[0].disabled = true)
               // this.qurebtn(this.btnConfig.buttons, "启用")[0].disabled = true
             } else {
               this.qurefrom('beginTime')[0].disabled = false;
               this.qurefrom('endTime')[0].disabled = false;
-              this.btnConfig2.length>0 && (this.btnConfig2.buttons[0].disabled = false);
+              this.btnConfig2.length > 0 && (this.btnConfig2.buttons[0].disabled = false);
               // this.qurebtn(this.btnConfig.buttons, "停用")[0].disabled = true
             }
 
@@ -938,8 +941,8 @@ export default {
         tableName = 'ST_C_ASSIGN_LOGISTICS';
         tableId = 10657;
       }
-      this.$comUtils.tabCloseAppoint(this);
-      this.$destroy(true);
+      // this.$comUtils.tabCloseAppoint(this);
+      // this.$destroy(true);
       this.$store.commit('global/tabOpen', {
         tableId,
         type: 'S',

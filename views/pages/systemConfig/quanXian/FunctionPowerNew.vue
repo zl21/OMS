@@ -29,17 +29,7 @@
             @on-select-change="menuTreeChange"
           />
         </div>
-        <!--<ul class="menuContainer">-->
-        <!--<li-->
-        <!--v-for="(item, index) in menuList"-->
-        <!--:key="index"-->
-        <!--class="menuList"-->
-        <!--:class="index === menuHighlightIndex? 'menuHighlight':''"-->
-        <!--@click="menuClick(index, item)"-->
-        <!--&gt;-->
-        <!--{{ item.NAME }}-->
-        <!--</li>-->
-        <!--</ul>-->
+     
       </div>
       <div class="contentRight">
         <div class="left-tree">

@@ -2,7 +2,7 @@
 
 export default {
   // 淘宝商品下载
-   tbGoodsDownload: params => $network.post('/p/cs/ip/v1/order/download/productDownLoad', params),
+  tbGoodsDownload: params => $network.post('/p/cs/ip/v1/order/download/productDownLoad', params),
   // 淘宝订单
   tbOrderDownLoad: params => $network.post('/p/cs/ip/v1/order/download/tbOrderDownLoad', params),
   // 淘宝订单/京东订单/JITX订单 下载

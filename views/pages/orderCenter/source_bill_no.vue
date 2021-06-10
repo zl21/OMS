@@ -3,8 +3,6 @@
  * @Date: 2021-06-01 11:26:07
  * @LastEditTime: 2021-06-08 19:53:58
  * @LastEditors: Please set LastEditors
- * @Description: 赔付单-新增-查询原订单编号-formItem
- * @FilePath: /burgeon-project-logic/js/pages/orderCenter/paySearchOri.vue
 -->
 <template>
   <div class="OC_B_ORDER_ID">
