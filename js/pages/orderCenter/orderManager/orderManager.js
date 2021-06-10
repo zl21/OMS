@@ -620,6 +620,7 @@
             formdata.push({
               style: 'date',
               type: 'daterange',
+              colname: ele.NAME,
               // type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
               value: ele.NAME,
               label: ele.DESC, // 平台修改时间
@@ -635,6 +636,7 @@
           case 'RANGE':
             formdata.push({
               style: 'bothInput', // 双input框控件
+              colname: ele.NAME,
               label: ele.DESC,
               value: ele.NAME,
               regx: /^\d/,
@@ -644,6 +646,7 @@
           case 'RADIOGROUP':
             formdata.push({
               style: 'radio',
+              colname: ele.NAME,
               value: ele.NAME,
               label: ele.DESC,
               width: '6',
@@ -679,7 +682,7 @@
               } else {
                 const obj = {
                   NAME: key,
-                  VAL: typeof formValue[key][0] == 'object' ? `${dateUtil.getFormatDate(new Date(formValue[key][0]), 'yyyy-MM-dd HH:mm:ss')}~${dateUtil.getFormatDate(new Date(formValue[key][1]), 'yyyy-MM-dd HH:mm:ss')}` : `${formValue[key].join(',')}`,
+                  VAL: self.getFormStyle(key) == 'date' ? `${dateUtil.getFormatDate(new Date(formValue[key][0]), 'yyyy-MM-dd HH:mm:ss')}~${dateUtil.getFormatDate(new Date(formValue[key][1]), 'yyyy-MM-dd HH:mm:ss')}` : self.getFormStyle(key) == 'bothInput' ? `${formValue[key][0]}~${formValue[key][1]}` : `${formValue[key].join(',')}`,
                 };
                 ADVANCE.push(obj);
               }
@@ -924,6 +927,16 @@
             self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0)
           };
         })
+      },
+      /**
+       * 
+       * 该方法用于根据formValue里的字段,在formData里查询对应的控件类型
+       * @param {String} colname formValue里的字段
+       */
+      getFormStyle(colname){
+        const self = this;
+        const formData = self.formConfig.formData;
+        return formData.filter(item=>item.colname == colname)[0].style;
       }
     },
   };

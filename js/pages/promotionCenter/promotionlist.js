@@ -80,43 +80,31 @@ export default {
             style: 'popInput',
             width: '6',
             colname: 'my_input_sh',
-            itemdata: {
-              serviceId: "r3-pm",
-              colid: 171929,
-              colname: 'CP_C_SHOP_ID',
-              fkdisplay: 'mrp',
-              isfk: true,
-              isnotnull: false,
-              name: '店铺名称', // 店铺名称
-              readonly: false,
-              reftable: 'CP_C_SHOP',
-              reftableid: 10348,
-              valuedata: '',
-            },
+            itemdata: {},
             oneObj: (val) => {
               console.log(val);
             },
           },
-          {
-            version: '1.4',
-            style: 'popInput',
-            width: '6',
-            colname: 'product',
-            itemdata: {
-              serviceId: "r3-pm",
-              colid: '1700806532',
-              colname: 'PS_C_PRO_ID',
-              fkdisplay: 'drp',
-              isfk: true,
-              isnotnull: false,
-              name: '参与商品',
-              readonly: false,
-              valuedata: '',
-            },
-            oneObj: (val) => {
-              console.log(val);
-            },
-          },
+          // {
+          //   version: '1.4',
+          //   style: 'popInput',
+          //   width: '6',
+          //   colname: 'product',
+          //   itemdata: {
+          //     serviceId: "r3-ps",
+          //     colid: '1700806532',
+          //     colname: 'PS_C_PRO_ID',
+          //     fkdisplay: 'drp',
+          //     isfk: true,
+          //     isnotnull: false,
+          //     name: '参与商品',
+          //     readonly: false,
+          //     valuedata: '',
+          //   },
+          //   oneObj: (val) => {
+          //     console.log(val);
+          //   },
+          // },
           {
             style: 'input',
             label: '分组',
@@ -156,27 +144,17 @@ export default {
       },
       my_input_sh: {
         itemdata: {
-          col: 1,
-          // colid: this.$store.state.forginkeys.columnIds.shop || '1700805184',
-          colid: '1700805184',
-          colname: 'CP_C_SHOP_ID', // 当前字段的名称
-          datelimit: 'all',
-          display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-          fkdisplay: 'mrp', // 外键关联类型
-          fkdesc: '店铺',
-          inputname: 'CP_C_SHOP:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
-          isfk: true, // 是否有fk键
-          isnotnull: false, // 是否必填
-          isuppercase: false, // 是否转大写
-          length: 65535, // 最大长度是多少
-          name: $i18n.t('table_label.shopName'), // 店铺名称 input前面显示的lable值
-          readonly: false, // 是否可编辑，对应input   readonly属性
-          reftable: 'CP_C_SHOP', // 对应的表
-          // reftableid: 24475, //对应的表ID
-          row: 1,
-          statsize: -1,
-          type: 'STRING', // 这个是后台用的
-          valuedata: '' // 这个是选择的值
+          serviceId: "r3-cp",
+          colid: 171929,
+          colname: 'CP_C_SHOP_ID',
+          fkdisplay: 'mrp',
+          isfk: true,
+          isnotnull: false,
+          name: '店铺名称', // 店铺名称
+          readonly: false,
+          reftable: 'CP_C_SHOP',
+          reftableid: 10348,
+          valuedata: '',
         }
       },
       my_input_st: {
@@ -495,6 +473,7 @@ export default {
   },
   created() {
     groups.load();
+    this.formConfig.formData.filter(item=>item.colname == 'my_input_sh')[0].itemdata = this.my_input_sh.itemdata;
   },
   computed: {
     commodity() {

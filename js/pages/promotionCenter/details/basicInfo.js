@@ -212,9 +212,6 @@ export default {
       this.basicData.offline_time = val;
     }
   },
-  created: {
-
-  },
   mounted() {
     console.log('==:',this.basicData);
     this.initGroupsDefault();
