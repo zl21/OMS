@@ -20,7 +20,7 @@
       @on-change="inputChange"
     ></Input>
     <Icon
-      v-if="REDUNDANT_ORDER_ID"
+      v-if="REDUNDANT_ORDER_ID && ID == '-1'"
       class="oriCodeclear"
       type="ios-close-circle"
       @click="clear"
