@@ -14,6 +14,7 @@ export default {
   },
   data() {
     return {
+      collapse: 'panel_baseInfo',
       changeCount: 0, //判断数据是否修改过
       value: [1, 2],
       id: '',
@@ -385,9 +386,13 @@ export default {
       tableshow: false, //表格是否显示
       stCDeliveryAreaRegionItemList: [],
       totalpage: 10,
-      labelDefaultValue: 'ST_DELIVERY_AREA_LOG', // 设置tab默认值
+      labelDefaultValue: 'jiben', // 设置tab默认值
        // tab切换配置
        labelList: [
+        {
+          label: '基本信息',
+          value: 'jiben'
+        },
         {
           label: '操作日志',
           value: 'ST_DELIVERY_AREA_LOG'
@@ -422,20 +427,31 @@ export default {
     if (customizedModuleId == 'New') {
       this.id = '-1';
       this.tableshow = false;
+      this.labelList = [ {
+        label: '基本信息',
+        value: 'jiben'
+      },]
     } else {
       this.tableshow = true;
       this.id = customizedModuleId;
       this.FormConfig.formData[0].itemdata.readonly = true;
       this.init();
-      this.subTableConfig = {
-        centerName: 'strategyPlatform',
-        tablename: "ST_DELIVERY_AREA_LOG",
-        pageShow:true,
-        objid: this.id
-      };
+     
     }
   },
   methods: {
+    labelClick(e) {
+      // tab明细切换
+      this.labelDefaultValue = e.value;
+      if (this.labelDefaultValue == 'ST_DELIVERY_AREA_LOG') {
+        this.subTableConfig = {
+          centerName: 'strategyPlatform',
+          tablename: "ST_DELIVERY_AREA_LOG",
+          pageShow:true,
+          objid: this.id
+        };
+      }
+    },
     async InputValueChange(v,item) { //模糊查询
   
       const formData = new FormData()
