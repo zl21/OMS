@@ -12,59 +12,67 @@
       <i v-if="itemdata.isnotnull">*</i>
       {{ itemdata.name }}：
     </label>
-    <DropDownSelectFilter
-      v-if="itemdata.fkdisplay === 'drp'"
-      :single="true"
-      :data="data"
-      :totalRowCount="totalRowCount"
-      :showColnameKey="'show'"
-      :pageSize="pageSize"
-      @on-page-change="changePage"
-      @on-input-value-change="InputValueChange"
-      @on-fkrp-selected="fkrpselected"
-      @on-blur="blur"
-      @on-clear="clear"
-      @on-popper-show="popperShow"
-      @on-keyup="keyup($event)"
-      :dataEmptyMessage="dataEmptyMessage"
-      :columns="columns"
-      :AutoData="AutoData"
-      :columnsKey="columnsKey"
-      :hidecolumns="hidecolumns"
-      :placeholder="placeholder"
-      :defaultSelected="defaultSelected"
-      :isBackRowItem="isBackRowItem"
-      :className="className"
-      transfer
-    >
-    </DropDownSelectFilter>
-    <DropMultiSelectFilter
-      v-else-if="itemdata.fkdisplay === 'mrp'"
-      :single="itemdata.single"
-      :data="data"
-      :totalRowCount="totalRowCount"
-      :pageSize="pageSize"
-      :columnsKey="itemdata.columnsKey"
-      :hidecolumns="itemdata.hidecolumns"
-      :showColnameKey="'show'"
-      :placeholder="itemdata.placeholder || ''"
-      :disabled="itemdata.disabled"
-      :isBackRowItem="itemdata.isBackRowItem"
-      :className="itemdata.className"
-      @on-page-change="changePage"
-      @on-input-value-change="InputValueChange"
-      @on-fkrp-selected="fkrpselected"
-      @on-blur="blur"
-      @on-clear="clear"
-      @on-popper-show="popperShow"
-      @on-keyup="keyup($event)"
-      :dataEmptyMessage="dataEmptyMessage"
-      :defaultSelected="itemdata.defaultSelectedMrp || []"
-      :columns="columns"
-      :AutoData="AutoData"
-      transfer
-    >
-    </DropMultiSelectFilter>
+    <Tooltip
+      :placement="itemdata.placement || 'top'"
+      :max-width="itemdata.maxwidth || 200"
+      :content="itemdata.valuedata"
+      :disabled="!itemdata.valuedata"
+      theme="light"
+      class="fk-tooltip">
+      <DropDownSelectFilter
+        v-if="itemdata.fkdisplay === 'drp'"
+        :single="true"
+        :data="data"
+        :totalRowCount="totalRowCount"
+        :showColnameKey="'show'"
+        :pageSize="pageSize"
+        @on-page-change="changePage"
+        @on-input-value-change="InputValueChange"
+        @on-fkrp-selected="fkrpselected"
+        @on-blur="blur"
+        @on-clear="clear"
+        @on-popper-show="popperShow"
+        @on-keyup="keyup($event)"
+        :dataEmptyMessage="dataEmptyMessage"
+        :columns="columns"
+        :AutoData="AutoData"
+        :columnsKey="columnsKey"
+        :hidecolumns="hidecolumns"
+        :placeholder="placeholder"
+        :defaultSelected="defaultSelected"
+        :isBackRowItem="isBackRowItem"
+        :className="className"
+        transfer
+      >
+      </DropDownSelectFilter>
+      <DropMultiSelectFilter
+        v-else-if="itemdata.fkdisplay === 'mrp'"
+        :single="itemdata.single"
+        :data="data"
+        :totalRowCount="totalRowCount"
+        :pageSize="pageSize"
+        :columnsKey="itemdata.columnsKey"
+        :hidecolumns="itemdata.hidecolumns"
+        :showColnameKey="'show'"
+        :placeholder="itemdata.placeholder || ''"
+        :disabled="itemdata.disabled"
+        :isBackRowItem="itemdata.isBackRowItem"
+        :className="itemdata.className"
+        @on-page-change="changePage"
+        @on-input-value-change="InputValueChange"
+        @on-fkrp-selected="fkrpselected"
+        @on-blur="blur"
+        @on-clear="clear"
+        @on-popper-show="popperShow"
+        @on-keyup="keyup($event)"
+        :dataEmptyMessage="dataEmptyMessage"
+        :defaultSelected="itemdata.defaultSelectedMrp || []"
+        :columns="columns"
+        :AutoData="AutoData"
+        transfer
+      >
+      </DropMultiSelectFilter>
+    </Tooltip>
   </div>
 </template>
 
