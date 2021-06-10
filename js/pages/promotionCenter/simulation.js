@@ -394,5 +394,4 @@ export default {
     await groups.load();
     this.initData();
   },
-  mounted() {}
 };
