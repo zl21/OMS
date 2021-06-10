@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-06-08 19:53:58
+ * @LastEditTime: 2021-06-10 16:59:52
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -12,7 +12,7 @@
       @on-click="iconclick"
       @on-enter="inputenter"
       icon="ios-search"
-      v-model="ORIG_ORDER_ID"
+      v-model="BILL_NO"
       :placeholder="''"
       @on-blur="inputblur"
       @on-change="inputChange"
@@ -88,7 +88,7 @@ export default {
   // mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {
-      ORIG_ORDER_ID:'',
+      BILL_NO:'',
       vmI18n: $i18n,
       orderModal: false,
       OC_B_ORDER_ID: '',
@@ -137,10 +137,10 @@ export default {
                 this.$Message.warning('请选中一条单据！');
                 return false
               }
-              this.$emit('change',this.table.selectionArr);
-              console.log(this.table.selectionArr[0].ORIG_ORDER_ID);
-              this.ORIG_ORDER_ID = this.table.selectionArr[0].ORIG_ORDER_ID;
-              localStorage.setItem('ORIG_ORDER_ID', this.ORIG_ORDER_ID);
+              R3.store.commit('customize/originalOrder',this.table.selectionArr[0].BILL_NO);
+              this.BILL_NO = this.table.selectionArr[0].BILL_NO;
+              this.table.selectionArr[0].ID = this.BILL_NO;
+              this.$emit('change',this.table.selectionArr,this)
               this.orderModal = false;
               this.table.selectionArr = [];
             },
@@ -149,7 +149,7 @@ export default {
       },
       formConfig: {
         formValue: {
-          ORIG_ORDER_ID: "",
+          BILL_NO: "",
           SOURCE_CODE: '',
           EXPRESS_CODE: '',
           RECEIVER_NAME:'',
@@ -160,7 +160,7 @@ export default {
           {
             style: 'input',
             label: '原定单编号', // 原定单编号
-            colname: 'ORIG_ORDER_ID',
+            colname: 'BILL_NO',
             width: '8',
             // inputenter: () => this.queryBounced(),
           },
@@ -204,7 +204,7 @@ export default {
       table: {
         columns: [
           {
-            key: 'ORIG_ORDER_ID',
+            key: 'BILL_NO',
             title: '原订单编号'
           },{
             key: 'SOURCE_CODE',
@@ -300,7 +300,7 @@ export default {
       let params = {
         pageNum:pageNum,
         pageSize:pageSize,
-        ORIG_ORDER_ID: formValue.ORIG_ORDER_ID ? formValue.ORIG_ORDER_ID : paramsNull,
+        BILL_NO: formValue.BILL_NO ? formValue.BILL_NO : paramsNull,
         SOURCE_CODE: formValue.SOURCE_CODE ? formValue.SOURCE_CODE : paramsNull,
         EXPRESS_CODE: formValue.EXPRESS_CODE ? formValue.EXPRESS_CODE : paramsNull,
         RECEIVER_NAME:formValue.RECEIVER_NAME ? formValue.RECEIVER_NAME : paramsNull,
@@ -316,16 +316,12 @@ export default {
     },
     onRowClick(row, index) {
       const self = this;
-      console.log(row, index);
       self.table.selectionArr[0] = row;
-      console.log(self.table.selectionArr);
     },
     onRowDblclick(row) {
       const self = this;
-      console.log(row);
     },
     pageChange(page) {
-      console.log('page:', page);
       this.table.pageIndex = page;
       this.queryEnter(page, this.table.pageSize, showData)
     },

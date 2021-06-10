@@ -129,6 +129,8 @@ export const globalStore = {
       other: {},
     },
     REDUNDANT_ORDER_ID: '',
+    originalOrder:'',
+    extraoOrderDetails:[],
   },
   mutations: {
     REDUNDANT_ORDER_ID(state, n) {
@@ -343,6 +345,13 @@ export const globalStore = {
       let ks = Object.keys(state.COMPENSATE);
       ks.forEach((k) => n[k] && (state.COMPENSATE[k] = n[k]));
     },
+    originalOrder(state,n){
+      console.log(state,n);
+      state.originalOrder = n
+    },
+    extraoOrderDetails(state,n){
+      state.extraoOrderDetails = n;
+    }
   },
   modules: {
     jordanStore

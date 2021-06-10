@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-06-09 10:39:57
+ * @LastEditTime: 2021-06-09 10:43:42
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -51,7 +51,6 @@
     </Modal>
   </div>
 </template>
-
 <script>
 import businessActionTable from "professionalComponents/businessActionTable";
 import {
@@ -450,9 +449,7 @@ export default {
       let { PS_C_PRO_ECODE, ECODE, ENAME } =
         this.replaceProductTable.businessFormConfig.formValue;
       // sku和spu同时存在 优先查询sku
-      if (PS_C_PRO_ECODE && ECODE) {
-        PS_C_PRO_ECODE = "";
-      }
+      if (PS_C_PRO_ECODE && ECODE) PS_C_PRO_ECODE = '';
       let fixedcolumns = { PS_C_PRO_ECODE, ECODE, ENAME };
       let searchdata = {
         table: "PS_C_SKU",
