@@ -549,6 +549,7 @@ export default {
           PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
         })
       };
+      console.log('522::');
       this.service.common.screenresult(param)
       /* axios({
         url: '/p/cs/screenresult',
@@ -591,6 +592,7 @@ export default {
           PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
         })
       }
+      console.log('595::');
       this.service.common.screenresult(param)
       /* return axios({
         url: '/p/cs/screenresult',
@@ -732,6 +734,7 @@ export default {
           PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
         })
       }
+      console.log('737::');
       this.service.common.screenresult(param)
       /* axios({
         url: '/p/cs/screenresult',
@@ -1002,6 +1005,7 @@ export default {
       const fromdata = {
         param: JSON.stringify(this.request_param)
       }
+      console.log('1008::');
       this.service.common.screenresultcheck(fromdata)
       /* axios({
         url: '/p/cs/screenresultcheck',
@@ -1026,6 +1030,7 @@ export default {
       const fromdata = {
         param: JSON.stringify(this.optimize_request)
       }
+      console.log('1033::');
       this.service.common.screenresultcheck(fromdata)
       /* axios({
         url: '/p/cs/screenresultcheck',
@@ -1104,6 +1109,7 @@ export default {
       const fromdata = {
         param: JSON.stringify(this.optimize_request)
       }
+      console.log('1112::');
       this.service.common.screenresultcheck(fromdata)
       /* axios({
         url: '/p/cs/screenresultcheck',
@@ -1225,6 +1231,7 @@ export default {
           })
         })
       }
+      console.log('1234::');
       this.service.promotionCenter.setMultiQuery(fromdata)
       /* axios({
         method: 'post',
@@ -1290,6 +1297,7 @@ export default {
       }
       if (true) {
         this.confirmLoading = true;
+        console.log('1300::');
         this.service.common.screenresultcheck({
           param: JSON.stringify(this.request_param)
         })
@@ -1371,11 +1379,10 @@ export default {
       /* this.r_result_checked = this.rightList.map((obj) => {
       if(obj.checked)return obj.ID
     });//勾选选中的 */
-      this.service.promotionCenter.screen({
-        param: JSON.stringify({
-          TABLENAME: this.tablename
-        })
-      })
+      const param = new FormData();
+      param.append('param', JSON.stringify({ 'TABLENAME': this.tablename }));
+      console.log('1384::');
+      this.service.promotionCenter.screen(param)
       /* axios({
         url: '/p/cs/screen',
         method: 'post',
