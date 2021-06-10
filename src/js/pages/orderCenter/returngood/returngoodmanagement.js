@@ -1305,6 +1305,9 @@ export default {
               _this.replacement.formData[5].itemdata.valuedata = res.data.data.receivingGoods.CP_C_REGION_PROVINCE_ENAME; // 省
               _this.replacement.formData[6].itemdata.valuedata = res.data.data.receivingGoods.CP_C_REGION_CITY_ENAME; // 市
               _this.replacement.formData[7].itemdata.valuedata = res.data.data.receivingGoods.CP_C_REGION_AREA_ENAME; // 区
+              _this.replacement.formData[5].itemdata.pid = res.data.data.receivingGoods.CP_C_REGION_PROVINCE_ID;
+              _this.replacement.formData[6].itemdata.pid = res.data.data.receivingGoods.CP_C_REGION_CITY_ID;
+              _this.replacement.formData[7].itemdata.pid = res.data.data.receivingGoods.CP_C_REGION_AREA_ID;
             } else {
               _this.$message.warning(res.data.message);
             }
