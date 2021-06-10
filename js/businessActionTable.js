@@ -66,6 +66,9 @@ export default {
     }
   },
   computed: {
+    noDataText() {
+      return this.jordanTableConfig.noDataText ?? '暂无数据';
+    },
     // 是否高亮
     highlightRow() {
       let highlightRow = Boolean

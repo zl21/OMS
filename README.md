@@ -192,3 +192,4 @@
 | v1.1.47 | fkinputPlus 模糊搜索失焦处理 |
 | v1.1.48 | fkinputPlus 监听修改数据,赋值操作 |
 | v1.1.49 | 外键关联,其他途径修改参数,会弹出前一次模糊搜索结果 |
+| v1.1.50 | businessActionTable拓展 |

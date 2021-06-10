@@ -33,7 +33,7 @@
       :loading="loading"
       :highlight-row="highlightRow"
       :row-class-name="rowClassName"
-      no-data-text="暂无数据"
+      :no-data-text="noDataText"
       @on-current-change="onCurrentChange"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
