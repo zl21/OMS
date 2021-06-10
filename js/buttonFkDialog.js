@@ -1,5 +1,5 @@
-import fkdialog from 'framework/components/tablelist/fkdialog.vue';
-
+// import fkdialog from 'framework/components/tablelist/fkdialog.vue';
+import fkdialog from '../fkdialog.vue';
 
 export default {
   name: 'ButtonFk',
