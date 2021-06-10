@@ -9,12 +9,10 @@
 import returnGoods from '@/views/pages/orderCenter/returngood/returnGoods.vue';
 import returnAmount from '@/views/pages/orderCenter/returngood/returnAmount.vue';
 import remark from '@/views/pages/strategyPlatform/preformAction.vue'
-import paySearchOri from '@/views/pages/orderCenter/paySearchOri.vue';
 import source_bill_no from '@/views/pages/orderCenter/source_bill_no.vue';
 
 
 let custommizeMain = {
-  REDUNDANT_ORDER_ID: paySearchOri,
   VERSION: returnGoods,
   PRO_ACTUAL_AMT:returnAmount,
   REMARK: remark,
