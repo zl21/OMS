@@ -8,10 +8,33 @@
 <template>
   <div class="OC_B_ORDER_ID">
     <!-- <label class="itemLabel"> 原定单编号： </label> -->
-    <Input :autocomplete="'new-password'" disabled @on-click="iconclick" :icon="searchIcon" v-model="REDUNDANT_ORDER_ID" :placeholder="''" @on-blur="inputblur" @on-change="inputChange"></Input>
-
+    <Input
+      class="oriCode"
+      :autocomplete="'new-password'"
+      disabled
+      @on-click="iconclick"
+      :icon="searchIcon"
+      v-model="REDUNDANT_ORDER_ID"
+      :placeholder="''"
+      @on-blur="inputblur"
+      @on-change="inputChange"
+    ></Input>
+    <Icon
+      v-if="REDUNDANT_ORDER_ID && ID == '-1'"
+      class="oriCodeclear"
+      type="ios-close-circle"
+      @click="clear"
+    />
     <!-- 查询原定单编号 -->
-    <Modal v-model="orderModal" width="800" titleAlign="left" :closable="true" :mask="true" class-name="ark-dialog" title="关联原单">
+    <Modal
+      v-model="orderModal"
+      width="800"
+      titleAlign="left"
+      :closable="true"
+      :mask="true"
+      class-name="ark-dialog"
+      title="关联原单"
+    >
       <div class="dialog-footer" slot="footer">
         <businessButton :btn-config="btnConfigMo" />
       </div>
@@ -22,7 +45,13 @@
         <businessButton :btn-config="btn" />
       </div>
       <div class="customized-detail-table">
-        <business-action-table :jordan-table-config="table" @on-row-click="onRowClick" @on-row-dblclick="onRowDblclick" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" />
+        <business-action-table
+          :jordan-table-config="table"
+          @on-row-click="onRowClick"
+          @on-row-dblclick="onRowDblclick"
+          @on-page-change="pageChange"
+          @on-page-size-change="pageSizeChange"
+        />
       </div>
     </Modal>
   </div>
@@ -231,18 +260,16 @@ export default {
       this.table.data = [];
     },
     iconclick() {
+      // console.log(e, this);
       this.orderModal = true;
+    },
+    clear() {
+      this.REDUNDANT_ORDER_ID = '';
+      this.$emit('change', [{ ID: '' }], this);
     },
     inputenter() { },
     inputblur() { },
-    inputChange(e, el) {
-      // this.$emit('on-Change', this.value)
-      // console.log('inputChange::', e.data);
-      // this.$emit('change', [{ ID: '1', Label: '839745' }], this)
-    },
-    change() {
-      this.$emit('change', this.value, this)
-    },
+    inputChange() { },
     /* --------------------- 工具函数： --------------------- */
     // 清空表单
     formEmpty(_this, form, notvalueArr = [], notdrpArr = []) {
@@ -314,6 +341,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   .itemLabel {
     flex: 0 0 120px;
   }
@@ -322,6 +350,17 @@ export default {
     // right: 2px;
     height: 32px;
     line-height: 32px;
+  }
+  .oriCodeclear {
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    z-index: 9;
+    opacity: 0.7;
   }
 }
 </style>

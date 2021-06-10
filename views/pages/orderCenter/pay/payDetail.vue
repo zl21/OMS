@@ -8,8 +8,22 @@
 -->
 <template>
   <div class="payDetail" v-loading="loading">
-    <businessActionTable :jordan-table-config="tableConfig" @on-select="onSelect" @on-select-cancel="onSelectCancel" @on-select-all="onSelectAll" @on-select-all-cancel="onSelectAllCancel" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" />
-    <Modal v-model="tableConfig.modal" width="830" titleAlign="left" title="新增明细" :mask="true">
+    <businessActionTable
+      :jordan-table-config="tableConfig"
+      @on-select="onSelect"
+      @on-select-cancel="onSelectCancel"
+      @on-select-all="onSelectAll"
+      @on-select-all-cancel="onSelectAllCancel"
+      @on-page-change="pageChange"
+      @on-page-size-change="pageSizeChange"
+    />
+    <Modal
+      v-model="tableConfig.modal"
+      width="830"
+      titleAlign="left"
+      title="新增明细"
+      :mask="true"
+    >
       <div class="dialog-footer" slot="footer">
         <businessButton :btn-config="btnConfigMo" />
       </div>
@@ -179,8 +193,8 @@ export default {
       });
       step1.then(async () => {
         if (_this.ID != '-1') {
-          // 详情-单据状态=0时才展示新增/删除明细
-          // 详情-单据状态=0时商品明细不可编辑
+          // 详情-单据状态=0时，才展示新增/删除明细
+          // 详情-单据状态=0时，商品明细才可编辑
           const fromdata = new FormData();
           fromdata.append('table', 'OC_B_COMPENSATE_ORDER');
           fromdata.append('objid', _this.ID);
@@ -190,14 +204,13 @@ export default {
             _this.tableConfig.loading = false;
             if (code != '-1') return _this.$Message.error('查询详情接口（/p/cs/getObject）报错！')
           })
-          // const status = R3.store.state.customize.COMPENSATE.other.ORDER_STATUS || '';
           const status = data.addcolums[1].childs[3].valuedata;
           const buttonList = _this.tableConfig.businessButtonConfig.buttons;
           if (status == '0') {
-            _this.tableConfig.businessButtonConfig.buttons = [];
-          } else {
             _this.renderHandle(['COMPENSATE_QTY', 'COMPENSATE_AMT']);
             _this.tableConfig.businessButtonConfig.buttons = buttonList;
+          } else {
+            _this.tableConfig.businessButtonConfig.buttons = [];
           }
         }
         _this.tableConfig.loading = false;
