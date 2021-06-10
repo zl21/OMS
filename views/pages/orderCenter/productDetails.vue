@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-06-10 18:28:45
+ * @LastEditTime: 2021-06-10 18:56:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -113,8 +113,10 @@ export default {
                 },
                 on: {
                   'on-change': e => {
-                     console.log(e,params);
+                      console.log(e,params);
                       params.row.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.REAL_AMT), 2);
+                      this.tableConfig.data[params.index] = params.row;
+                      R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
                   }
                 }
               });
@@ -226,7 +228,8 @@ export default {
     'tableConfig.data':{
       handler(newV, oldV) {
        R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...newV])));
-      }
+      },
+      deep:true
     }
   },
   created(){
