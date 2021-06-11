@@ -7,7 +7,15 @@
 -->
 <template>
   <div class="payDetailAdd" v-loading="loading" style="width: 800px">
-    <businessActionTable :jordan-table-config="tableConfig" @on-select="onSelect" @on-select-cancel="onSelectCancel" @on-select-all="onSelectAll" @on-select-all-cancel="onSelectAllCancel" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" />
+    <businessActionTable
+      :jordan-table-config="tableConfig"
+      @on-select="onSelect"
+      @on-select-cancel="onSelectCancel"
+      @on-select-all="onSelectAll"
+      @on-select-all-cancel="onSelectAllCancel"
+      @on-page-change="pageChange"
+      @on-page-size-change="pageSizeChange"
+    />
     <!-- <div class="buttons customized-modal-btn">
       <businessButton :btn-config="btnConfigMo" />
     </div> -->
@@ -39,11 +47,15 @@ export default {
       }
     }
   },
+  computed: {
+    ID() {
+      return this.$route.params.itemId && this.$route.params.itemId != 'New' ? this.$route.params.itemId : '-1';
+    },
+  },
   data() {
     return {
       vmI18n: $i18n,
       loading: false,
-      ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1',
       tableConfig: {
         height: 300,
         indexColumn: true, // 是否显示序号
@@ -195,12 +207,18 @@ export default {
       let param = { ...fixedcolumns, ...pageInfo }
       param.expressCode = R3.store.state.customize.COMPENSATE.other.expressCode || '-1';
       console.log('R3.store.state.customize.COMPENSATE.other.expressCode::', param.expressCode);
+      // 详情时：expressCode、mainId必传
+      if (this.ID != '-1') {
+        let storeOther = JSON.parse(JSON.stringify(R3.store.state.customize.COMPENSATE.other))
+        param.expressCode = storeOther.exCode || 'no expressCode !'
+      }
       if (isInit) {
         param.expressCode = '-1';
         param.isInit = true;
-        // if (param.expressCode) delete param.expressCode;
+      } else {
+        param.isInit = false;
       }
-      if (param.expressCode) param.mainId = this.ID;
+      param.mainId = this.ID;
       const { data: { code, data } } = await this.service.orderCenter.payQueryProList(param);
       this.tableConfig.columns = data.columns;
       this.tableConfig.data = isInit ? data.data : [];
