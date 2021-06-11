@@ -3,10 +3,12 @@ import qs from 'qs'
 import port from '@/config/config/orderDetailConnector.js'
 export default {
   /**
-   * 零售发货单  
+   * 零售发货单   
    */
 
-
+   remitFail: (params) =>
+   $network.post('/p/cs/oc/oms/v1/refundExtra/remitFail', params), //退货入库单-匹配保存接口
+   
    checkRefundInStatus: (params) =>
    $network.get('/p/cs/oc/oms/v1/refundInOrder/checkRefundInStatus?'+params), //退货入库单-判断退货入库单匹配状态
    

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-28 13:22:03
- * @LastEditTime: 2021-06-01 17:44:21
+ * @LastEditTime: 2021-06-11 15:55:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/modal/order.config.js
@@ -59,9 +59,12 @@ export default {
     component: () => import('@/views/modal/orderCenter/manual.vue')
   },
   FOURCE: {
-    component: () => import('@/views/modal/orderCenter/force.vue') //OC_B_REFUND_IN_save
+    component: () => import('@/views/modal/orderCenter/force.vue')
   },
-  OC_B_REFUND_IN_SAVE: {
-    component: () => import('@/views/modal/orderCenter/OC_B_REFUND_IN_save.vue') //OC_B_REFUND_IN_save
+  OC_B_REFUND_IN_SAVE: { //
+    component: () => import('@/views/modal/orderCenter/OC_B_REFUND_IN_save.vue') 
+  },
+  REMITFAIL:{
+    component: () => import('@/views/modal/orderCenter/remitFail.vue') //
   }
 };

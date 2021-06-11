@@ -62,7 +62,7 @@ export default {
           //   isShow: false,
           //   disabled:false,
           //   btnclick: () => {
-          //     this.fnSetIsActive('Y');
+          //     this.fnSetISACTIVE('Y');
           //   }
           // },
           // {
@@ -70,7 +70,7 @@ export default {
           //   isShow: false,
           //   disabled: false,
           //   btnclick: () => {
-          //     this.fnSetIsActive('N');
+          //     this.fnSetISACTIVE('N');
           //   }
           // },
           {
@@ -99,6 +99,7 @@ export default {
           },
           {
             text: '导出',
+            disabled: false, // 按钮禁用控制
             btnclick: this.fnoWexportData
           }
         ]
@@ -282,15 +283,15 @@ export default {
           {
             style: null,
             label: '启用状态',
-            value: 'isactive',
-            colname: 'isactive',
+            value: 'ISACTIVE',
+            colname: 'ISACTIVE',
             width: '8',
             disabled: true,
             switchChange: () => {
-              // let isActive = this.formConfig.formValue.isactive;
-              // this.qurefrom('beginTime')[0].disabled = isActive;
-              // this.qurefrom('endTime')[0].disabled = isActive;
-              //this.btnConfig2.buttons[0].disabled = isActive;
+              // let ISACTIVE = this.formConfig.formValue.ISACTIVE;
+              // this.qurefrom('beginTime')[0].disabled = ISACTIVE;
+              // this.qurefrom('endTime')[0].disabled = ISACTIVE;
+              //this.btnConfig2.buttons[0].disabled = ISACTIVE;
             }
           },
           {
@@ -313,7 +314,7 @@ export default {
           priority: '', // 优先级 正整数
           remark: '', // 备注
           type: 171868, // 类型 1:收货地址就近 2:唯品会
-          isactive: '', // 启用状态
+          ISACTIVE: '', // 启用状态
           cpCPhyWarehouseEname: '', //仓库名称
           cpCPhyWarehouseId: '', //仓库编码
           cpCPhyWarehouseEcode: '',
@@ -394,7 +395,11 @@ export default {
       let { customizedModuleId, customizedModuleName } = this.$route.params;
       let query = this.$route.query;
       this.customizedModuleName = customizedModuleName;
-      this.id = customizedModuleId;
+      if (customizedModuleId == "New" ||customizedModuleId == 'NEW') {
+        this.id = "-1"
+      }else{
+        this.id = customizedModuleId
+      }
 
 
       //ST_C_ORDER_WAREHOUSE  分仓规则
@@ -654,7 +659,7 @@ export default {
       //设置按钮属性
       console.log(this.qurefrom('ecode'));
       this.qurefrom('ecode')[0].style = null;
-      this.qurefrom('isactive')[0].style = null;
+      this.qurefrom('ISACTIVE')[0].style = null;
       this.qurefrom('type')[0].disabled = false;
       this.qurefrom('areaLevel')[0].options.forEach(em => {
         em.disabled = false;
@@ -666,7 +671,7 @@ export default {
     initbtn() {
       //初始化按钮
       this.qurefrom('ecode')[0].style = 'input';
-      this.qurefrom('isactive')[0].style = 'switch';
+      this.qurefrom('ISACTIVE')[0].style = 'switch';
       this.qurefrom('type')[0].disabled = true;
       this.qurefrom('areaLevel')[0].options.forEach(em => {
         em.disabled = true;
@@ -688,21 +693,18 @@ export default {
         service.strategyPlatform.assignLogisticsqueryById({ ID: id }).then(res => {
           let warehouseData = res.data.data;
           for (const key in this.formConfig.formValue) {
-            if (key == 'isactive') {
+            if (key == 'ISACTIVE') {
               this.formConfig.formValue[key] = warehouseData[key] == 'Y';
-              //isactive  Y只有方案名称，优先级，备注 可以编辑
+              //ISACTIVE  Y只有方案名称，优先级，备注 可以编辑
               if (warehouseData[key] == 'Y') {
                 this.qurefrom('beginTime')[0].disabled = true;
                 this.qurefrom('endTime')[0].disabled = true;
-
-                this.btnConfig2.length > 0 && (this.btnConfig2.buttons[0].disabled = true);
+                this.btnConfig2.buttons.length > 0 && (this.btnConfig2.buttons[0].disabled = true);
 
               } else {
-
                 this.qurefrom('beginTime')[0].disabled = false;
                 this.qurefrom('endTime')[0].disabled = false;
-
-                this.btnConfig2.length > 0 && (this.btnConfig2.buttons[0].disabled = false);
+                this.btnConfig2.buttons.length > 0 && (this.btnConfig2.buttons[0].disabled = false);
               }
             } else if (key == 'cpCPhyWarehouseEname') {
               this.formConfig.formValue[key] = warehouseData[key];
@@ -726,18 +728,18 @@ export default {
       service.strategyPlatform.getWarehouseInfo({ params: { id } }).then(res => {
         let warehouseData = res.data.data;
         for (const key in this.formConfig.formValue) {
-          if (key == 'isactive') {
+          if (key == 'ISACTIVE') {
             this.formConfig.formValue[key] = warehouseData[key] == 'Y';
-            //isactive  Y只有方案名称，优先级，备注 可以编辑
+            //ISACTIVE  Y只有方案名称，优先级，备注 可以编辑
             if (warehouseData[key] == 'Y') {
               this.qurefrom('beginTime')[0].disabled = true;
               this.qurefrom('endTime')[0].disabled = true;
-              this.btnConfig2.length > 0 && (this.btnConfig2.buttons[0].disabled = true)
+              this.btnConfig2.buttons.length > 0 && (this.btnConfig2.buttons[0].disabled = true)
               // this.qurebtn(this.btnConfig.buttons, "启用")[0].disabled = true
             } else {
               this.qurefrom('beginTime')[0].disabled = false;
               this.qurefrom('endTime')[0].disabled = false;
-              this.btnConfig2.length > 0 && (this.btnConfig2.buttons[0].disabled = false);
+              this.btnConfig2.buttons.length > 0 && (this.btnConfig2.buttons[0].disabled = false);
               // this.qurebtn(this.btnConfig.buttons, "停用")[0].disabled = true
             }
 
@@ -781,7 +783,7 @@ export default {
           return;
         }
 
-        let { areaLevel, cpCPhyWarehouseEname, cpCPhyWarehouseEcode, cpCPhyWarehouseId, ename, priority, remark, isactive } = this.formConfig.formValue;
+        let { areaLevel, cpCPhyWarehouseEname, cpCPhyWarehouseEcode, cpCPhyWarehouseId, ename, priority, remark, ISACTIVE } = this.formConfig.formValue;
         let data = {
           ST_C_ASSIGN_LOGISTICS: {
             id: vm.$route.query.id ? vm.$route.query.id : this.id == 'New' ? '-1' : this.id,
@@ -792,7 +794,7 @@ export default {
             cpCPhyWarehouseEcode,
             priority,
             remark,
-            isactive: isactive ? 'Y' : 'N'
+            ISACTIVE: ISACTIVE ? 'Y' : 'N'
           },
           copyFlag
         };
@@ -844,7 +846,7 @@ export default {
         return;
       }
 
-      let { areaLevel, cpCShopIds, ename, priority, remark, type, cpCShopEnames, isactive } = this.formConfig.formValue;
+      let { areaLevel, cpCShopIds, ename, priority, remark, type, cpCShopEnames, ISACTIVE } = this.formConfig.formValue;
       let data = {
         id: vm.$route.query.id ? vm.$route.query.id : this.id == 'New' ? '-1' : this.id,
         areaLevel,
@@ -855,7 +857,7 @@ export default {
         remark,
         type,
         copyFlag,
-        isactive: isactive ? 'Y' : 'N'
+        ISACTIVE: ISACTIVE ? 'Y' : 'N'
       };
       if (saveType) {
         data.saveType = saveType;
