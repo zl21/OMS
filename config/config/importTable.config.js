@@ -22,15 +22,6 @@ const importConfig = {
     okApi: '/p/cs/oc/oms/v1/refundExtra/import',
     downErrorInfo: true,
   },
-  PS_C_SKU__skuImport: {
-    // 商品sku-导入
-    isAction: true,
-    tableName: 'PS_C_SKU',
-    webname: 'skuImport',
-    tempApi: '/p/cs/ps/import/v1/template',
-    okApi: '/p/cs/ps/import/v1/pro',
-    downErrorInfo: true,
-  },
   CP_C_PHY_WAREHOUSE__warehouseImport: {
     isAction: true,
     tableName: 'CP_C_PHY_WAREHOUSE',

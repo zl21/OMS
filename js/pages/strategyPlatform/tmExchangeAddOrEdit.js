@@ -52,13 +52,13 @@ export default {
             style: null,
             colname: 'ECODE',
             label: '策略ID',
-            width: '6'
+            width: '12'
           },
           {
             style: 'input',
             colname: 'ENAME',
             label: '策略名称',
-            width: '6',
+            width: '12',
             inputChange: () => {
               this.masterModifyData('ENAME', 'master', 'formConfig1');
             }
@@ -67,7 +67,7 @@ export default {
             version: '1.4',
             colname: 'CP_C_SHOP_ID',
             style: 'popInput', // 输入框弹框单多选
-            width: '6',
+            width: '12',
             itemdata: {
               col: 1,
               colid: 179601, // 当前字段的ID
@@ -308,6 +308,7 @@ export default {
   },
   async mounted() {
     this.isWatchChange = true;
+    this.tamallExchangeReasons();
     this.ID > 0 && this.queryOrder();
   },
   created() { },
@@ -334,7 +335,6 @@ export default {
         this.setRequired('OOS_AUTO_REJECT')
         this.setRequired('DEVIATION_AUTO_REJECT')
         await this.tamallExchangeAddrs(data)
-        await this.tamallExchangeReasons(data)
         this.isWatchChange = true;
       }
     },
