@@ -15,7 +15,7 @@
       :placement="itemdata.placement || 'bottom'"
       :max-width="itemdata.maxwidth || 200"
       :content="itemdata.valuedata"
-      :disabled="!itemdata.valuedata"
+      :disabled="itemdata.istooltip ? !itemdata.valuedata : true"
       theme="light"
       class="fk-tooltip">
       <div v-if="itemdata.readonly || !isActive || isdisabled">
