@@ -93,17 +93,16 @@ export default {
             },
             oneObj: (e) => { 
               this.formConfig1.formValue.CP_C_SHOP_ID = e.pid;
-              this.formConfig1.formValue.CP_C_SHOP_ENAME = e.valuedata;
+              this.formConfig1.formValue.CP_C_SHOP_TITLE = e.valuedata;
               this.masterModifyData('CP_C_SHOP_ID', 'master', 'formConfig1');
-              this.masterModifyData('CP_C_SHOP_ENAME', 'master', 'formConfig1');
-              this.tamallExchangeReasons()
+              this.masterModifyData('CP_C_SHOP_TITLE', 'master', 'formConfig1');
               this.tamallExchangeAddrs()
             },
           },
           {
             style: 'select',
             label: '换货地址',
-            width: '6',
+            width: '12',
             colname: 'EXCHANGE_ADDR_ID',
             options: [],
             onOpenChange: (flag) => {
@@ -121,17 +120,17 @@ export default {
               this.masterModifyData('EXCHANGE_ADDR_ID', 'master', 'formConfig1')
             },
           },
-          {
-            style: null,
-            colname: 'ISACTIVE',
-            label: '启用状态',
-            width: '6',
-            switchChange: () => {
-              this.masterModifyData('ISACTIVE', 'master', 'formConfig1')
-              this.isEnable = this.formConfig1.formValue.ISACTIVE;
-              this.setEnable()
-            }
-          },
+          // {
+          //   style: null,
+          //   colname: 'ISACTIVE',
+          //   label: '启用状态',
+          //   width: '6',
+          //   switchChange: () => {
+          //     this.masterModifyData('ISACTIVE', 'master', 'formConfig1')
+          //     this.isEnable = this.formConfig1.formValue.ISACTIVE;
+          //     this.setEnable()
+          //   }
+          // },
         ],
         formValue: {
           ECODE: '', // 策略ID

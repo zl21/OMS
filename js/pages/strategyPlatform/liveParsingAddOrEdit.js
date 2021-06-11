@@ -149,6 +149,7 @@ export default {
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
+              istooltip: true,
               length: 65535, // 最大长度是多少
               name: '店铺名称', // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
