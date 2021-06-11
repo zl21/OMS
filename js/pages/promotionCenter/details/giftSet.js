@@ -155,7 +155,7 @@ export default {
         refFuns: 'confirmFun',
         confirmTitle: '赠品信息导入',
         titleAlign: 'center', // 设置标题是否居中 center left
-        width: '400',
+        width: '540',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
         draggable: true, // 是否可以拖动
@@ -545,7 +545,15 @@ export default {
      * 导入
      */
     importData() {
-      this.importTable.componentData = { tableName: this.itemdata.reftable || 'PS_C_SKU', mode: this.moduleMode };
+      const componentData = {
+        isAction: false,
+        tempApi: '/p/cs/pm/v1/getModuleUrl',
+        okApi: '/p/cs/pm/v1/parseExcel',
+        tempParm: { 'mode': this.moduleMode },
+        downErrorInfo: true,
+        showErrorInfo: false,
+      }
+      this.importTable.componentData = componentData;
       this.$children.find(item => item.name === 'importTable').openConfirm();
     },
     /**
