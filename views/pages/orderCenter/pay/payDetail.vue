@@ -285,7 +285,6 @@ export default {
               'on-change': e => {
                 setTimeout(() => {
                   const ca = Number(e.target.value);
-                  params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
                   const relCa = this.$OMS2.omsUtils.floatNumber(Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL), 2);
                   if (ca > relCa) {
                     params.row.COMPENSATE_AMT = relCa;
