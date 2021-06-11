@@ -185,12 +185,14 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
+            disabled:false,
             text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
           {
+            disabled:false,
             text: $i18n.t('common.determine'), // 确定
             btnclick: () => {
               this.update();
@@ -300,6 +302,7 @@ export default {
         updateInfo: this.data,
       };
       this.loading = true;
+      this.btnConfig.buttons[1].disabled = true;
       this.service.orderCenter.updateOrderAddr(param).then((res) => {
         if (res.data.code === 0) {
           if (res.data.message) this.$Message.success(res.data.message);
@@ -319,6 +322,9 @@ export default {
         }
         this.loading = false;
       });
+      setTimeout(() => {
+        this.btnConfig.buttons[1].disabled = false;
+      }, 5000);
     },
     /** 校验规则
      * s 字符串
