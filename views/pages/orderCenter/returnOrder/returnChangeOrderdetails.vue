@@ -280,9 +280,9 @@ export default {
           this.businessActionTable.businessButtonConfig.buttons[2].isShow = true;
           this.businessActionTable.data = this.toMainData.tui;
         } else if (newData === "1") {
-          console.log("退换货单");
+          console.log("换货单");
           // tableName = 'OC_B_RETURN_ORDER_EXCHANGE';
-          renderKeys = ["REFUND_ID", "QTY_REFUND", "PRICE_ACTUAL"];
+          renderKeys = ["QTY_EXCHANGE", "PRICE_ACTUAL"];
           this.businessActionTable.businessButtonConfig.buttons[0].isShow = false;
           this.businessActionTable.businessButtonConfig.buttons[1].isShow = true;
           this.businessActionTable.businessButtonConfig.buttons[1].text =
@@ -597,9 +597,10 @@ export default {
         QTY_EXCHANGE: (h, params) => {
           return h("InputNumber", {
             props: {
-              value: params.row.QTY_EXCHANGE,
+              value: Number(params.row.QTY_EXCHANGE || 1),
               regx: /^[1-9]\d*$/,
               min: 1,
+              max: Number(params.row.RETURNABLE_QTY || 1),
             },
             on: {
               "on-change": (e) => {
