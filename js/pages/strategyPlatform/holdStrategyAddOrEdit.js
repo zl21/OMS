@@ -166,6 +166,7 @@ export default {
               fkdisplay: 'mrp',
               isfk: true,
               isnotnull: true,
+              istooltip: true,
               readonly: false
             },
             oneObj: val => {
