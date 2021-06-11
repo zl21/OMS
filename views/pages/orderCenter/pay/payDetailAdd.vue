@@ -221,8 +221,8 @@ export default {
       param.mainId = this.ID;
       const { data: { code, data } } = await this.service.orderCenter.payQueryProList(param);
       this.tableConfig.columns = data.columns;
-      this.tableConfig.data = isInit ? data.data : [];
-      this.tableConfig.total = isInit ? data.pageInfo.total : 0;
+      this.tableConfig.data = isInit ? [] : data.data;
+      this.tableConfig.total = isInit ? 0 : data.pageInfo.total;
       this.loading = false;
     },
     // 模糊查询 数据
