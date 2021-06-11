@@ -86,7 +86,7 @@ export default {
         buttons: [
           {
             text: '设置商品池', // 添加搭配
-            isShow: this.giftData.give_num_share == 1,
+            isShow: false,
             disabled: false,
             btnclick: () => this.setCommodity()
           },
@@ -192,7 +192,7 @@ export default {
     },
     checkGiftGrossChange(val) {
       this.giftData.give_num_share = val;
-
+      this.btnConfig.buttons[0].isShow = val == '1' ? true : false;
       this.clearPdts();
     },
     deleteOneTableRowData(tabindex, row, currentPage, pageSize) {
@@ -494,6 +494,7 @@ export default {
       } else {
         cols = JSON.parse(JSON.stringify(this.tableCols.giftAllColumns));
       }
+      this.btnConfig.buttons[0].isShow = this.giftData.give_num_share == '1' ? true : false;
 
       cols.forEach(column => {
         if (column.key === 'SUM_QTY') {
@@ -559,6 +560,7 @@ export default {
     returnOneTableData(data, tabindex) {
       if (data && data.length > 0) {
         if (this.giftData.give_num_share == '1') {
+          this.btnConfig.buttons[0].isShow = this.giftData.give_num_share == '1' ? true : false;
           data.forEach(item => {
             item.SUM = 0;
           });
