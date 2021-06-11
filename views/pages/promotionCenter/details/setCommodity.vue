@@ -24,19 +24,7 @@
         />
       </div>
       <div class="modal_footer">
-        <button
-          class="white"
-          @click="closeDialogs"
-        >
-          取 消
-        </button>
-        <button
-          v-show="!(objid > 0 && (basicData.status === '2' || basicData.status ==='3'))"
-          class="active"
-          @click="confirm"
-        >
-          保存
-        </button>
+        <businessButton :btn-config="btnConfig" />
       </div>
     </my-dialog>
   </div>

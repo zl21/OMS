@@ -86,17 +86,20 @@ export default {
         buttons: [
           {
             text: '设置商品池', // 添加搭配
+						class:"white",
             isShow: false,
             disabled: false,
             btnclick: () => this.setCommodity()
           },
           {
             text: $i18n.t("btn.add_ladder"), // 添加阶梯
+						class:"white",
             disabled: false,
             btnclick: () => this.addSteps()
           },
           {
             text: $i18n.t("btn.delete_ladder"), // 删除阶梯
+						class:"white",
             disabled: false,
             btnclick: () => this.removeSteps()
           },

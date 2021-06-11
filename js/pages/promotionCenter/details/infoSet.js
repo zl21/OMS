@@ -61,11 +61,13 @@ export default {
         typeAll: 'default',
         buttons: [{
           text: $i18n.t("btn.add_collocation"), // 添加搭配
+          class:"white",
           disabled: false,
           btnclick: () => this.addGroup()
         },
         {
           text: $i18n.t("btn.delete_collocation"), // 删除搭配
+          class:"white",
           disabled: false,
           btnclick: () => this.removeGroup()
         },]
