@@ -5,10 +5,12 @@ import { tableCols } from '../promotionConfig';
 import ButtonFkDialog from 'professionalComponents/buttonFkDialog';
 import SetCommodity from 'allpages/promotionCenter/details/setCommodity';
 import businessDialog from 'professionalComponents/businessDialog';
+import businessButton from 'professionalComponents/businessButton';
 
 export default {
   name: 'giftSet',
   components: {
+    businessButton,
     detailtable,
     detailtabs,
     SingleBox,
@@ -79,6 +81,27 @@ export default {
   },
   data() {
     return {
+      btnConfig: {
+        typeAll: 'default',
+        buttons: [
+          {
+            text: '设置商品池', // 添加搭配
+            isShow: this.giftData.give_num_share == 1,
+            disabled: false,
+            btnclick: () => this.setCommodity()
+          },
+          {
+            text: $i18n.t("btn.add_ladder"), // 添加阶梯
+            disabled: false,
+            btnclick: () => this.addSteps()
+          },
+          {
+            text: $i18n.t("btn.delete_ladder"), // 删除阶梯
+            disabled: false,
+            btnclick: () => this.removeSteps()
+          },
+        ]
+      },
       vmI18n: $i18n,
       currentTab: 0,
       tableCols,

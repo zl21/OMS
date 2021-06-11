@@ -5,11 +5,13 @@ import detailtable from 'allpages/promotionCenter/details/table.vue';
 import detailtabs from 'allpages/promotionCenter/details/tableTabs.vue';
 import meetConditions from 'allpages/promotionCenter/details/meetConditions';
 import businessDialog from 'professionalComponents/businessDialog';
+import businessButton from 'professionalComponents/businessButton';
 
 // const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
 export default {
   name: 'InfoSet',
   components: {
+    businessButton,
     detailtable,
     detailtabs,
     SingleBox,
@@ -55,6 +57,19 @@ export default {
   },
   data() {
     return {
+      btnConfig: {
+        typeAll: 'default',
+        buttons: [{
+          text: $i18n.t("btn.add_collocation"), // 添加搭配
+          disabled: false,
+          btnclick: () => this.addGroup()
+        },
+        {
+          text: $i18n.t("btn.delete_collocation"), // 删除搭配
+          disabled: false,
+          btnclick: () => this.removeGroup()
+        },]
+      },
       vmI18n: $i18n,
       temp_time_type: '',
       columns: tableCols.infoColumns,

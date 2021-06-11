@@ -75,20 +75,7 @@
                 slot="MatchOperate"
                 class="form_button"
               >
-                <!-- 添加搭配 -->
-                <button
-                  class="white"
-                  @click="addGroup"
-                >
-                  {{ vmI18n.t("btn.add_collocation") }}
-                </button>
-                <!-- 删除搭配 -->
-                <button
-                  class="white"
-                  @click="removeGroup"
-                >
-                  {{ vmI18n.t("btn.delete_collocation") }}
-                </button>
+                <businessButton :btn-config="btnConfig" />
               </div>
             </detailtabs>
           </div>
