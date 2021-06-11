@@ -49,5 +49,9 @@ export default {
   selectInit: params => $network.get(`/p/cs/pm/v1/selectInit?${qs.stringify(params)}`,{ serviceId: "r3-pm" }),
   getPromField: (params) => $network.get("/p/cs/getPromField", params, { serviceId: "r3-pm" }),
   setMultiQuery: (params) => $network.get("/p/cs/setMultiQuery", params),
-  screen: (params) => $network.post("/p/cs/screen", params),
+
+  // 促销-框架接口：
+  screen: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/screen", params, serviceId),
+  screenresult: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/screenresult", params, serviceId),
+  screenresultcheck: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/screenresultcheck", params, serviceId),
 };
