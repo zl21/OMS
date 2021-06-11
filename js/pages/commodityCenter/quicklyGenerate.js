@@ -32,8 +32,8 @@ export default {
           {
             text: '返回',
             btnclick: () => {
-              comUtils.tabCloseAppoint(this);
-                this.$destroy(true);
+              // comUtils.tabCloseAppoint(this);
+              //   this.$destroy(true);
               $store.commit('customize/TabOpen', {
                 id: this.spuid,
                 type: 'action',

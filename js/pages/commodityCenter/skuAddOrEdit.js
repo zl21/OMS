@@ -712,8 +712,8 @@ export default {
         if (data) self.ID = data;
         setTimeout(() => {
           if (this.$route.query.spuid) {
-            this.$comUtils.tabCloseAppoint(this);
-            this.$destroy(true);
+            // this.$comUtils.tabCloseAppoint(this);
+            // this.$destroy(true);
             $store.commit('customize/TabOpen', {
               id: self.ID,
               type: 'action',
@@ -758,9 +758,17 @@ export default {
       }
     },
     onOk() {
-      this.$comUtils.tabCloseAppoint(this);
-      this.$destroy(true);
       if (this.$route.query.spuid) {
+      // this.$comUtils.tabCloseAppoint(this);
+      // this.$destroy(true);
+        this.$store.commit('global/tabOpen', {
+          // 回到SPU的详情，同时SKU要回到列表
+          tableId: 10105,
+          type: 'S',
+          tableName: 'PS_C_SKU',
+          label: '商品SKU',
+          back: true,
+        });
         this.$store.commit('customize/TabOpen', {
           id: this.$route.query.spuid,
           type: 'action',

@@ -19,7 +19,7 @@ export default {
   PS_C_PRO: {
     component: () => import('allpages/commodityCenter/spuRecord.vue'),
     // component: spuRecord,
-    labelName: 'SPU新增'
+    labelName: 'SPU编辑'
   },
   PS_C_SKU: {
     component: () => import('allpages/commodityCenter/skuAddOrEdit.vue'),

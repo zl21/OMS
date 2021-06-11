@@ -56,8 +56,8 @@ export default {
                   mask: true,
                   showCancel: true,
                   onOk: () => {
-                    comUtils.tabCloseAppoint(this);
-              this.$destroy(true);
+                    // comUtils.tabCloseAppoint(this);
+              // this.$destroy(true);
               this.$store.commit('global/tabOpen', {
                 tableId: 10108,
                 type: 'S',
@@ -67,8 +67,8 @@ export default {
                   }
                 });
               } else {
-                comUtils.tabCloseAppoint(this);
-              this.$destroy(true);
+                // comUtils.tabCloseAppoint(this);
+              // this.$destroy(true);
               this.$store.commit('global/tabOpen', {
                 tableId: 10108,
                 type: 'S',
