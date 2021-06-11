@@ -61,13 +61,13 @@ export default {
         typeAll: 'default',
         buttons: [{
           text: $i18n.t("btn.add_collocation"), // 添加搭配
-          class:"white",
+          class: "white",
           disabled: false,
           btnclick: () => this.addGroup()
         },
         {
           text: $i18n.t("btn.delete_collocation"), // 删除搭配
-          class:"white",
+          class: "white",
           disabled: false,
           btnclick: () => this.removeGroup()
         },]
@@ -687,6 +687,7 @@ export default {
         isAction: false,
         tempApi: '/p/cs/pm/v1/getModuleUrl',
         okApi: '/p/cs/pm/v1/parseExcel',
+        okParm: { table: 'PS_C_SKU', mode: 'info' },
         tempParm: { 'mode': this.moduleMode },
         downErrorInfo: true,
         showErrorInfo: false,
