@@ -140,7 +140,7 @@ export default {
       }
       $network.post(url, param).then((res) => {
         console.log(res);
-        if (res.data.code === 0 || res.data.code === 1 || !_this.currentConfig.cusDiscretion) {
+        if ([0,1].includes(res.data.code) && !_this.currentConfig.cusDiscretion) {
           if (res.data.message) _this.$Message.success(res.data.message);
           _this.$emit('returnData', res.data.data);
           _this.closeModal();
