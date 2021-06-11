@@ -197,3 +197,4 @@
 | v1.1.52 | 解决fkinput失焦选中第一个和选中事件冲突 |
 | v1.1.53 | fkinput/fkinputPlus拓展 |
 | v1.1.55 | fkinput/fkinputPlus拓展 istooltip |
+| v1.1.56 | 促销-fkdialog 网关/报错处理 |

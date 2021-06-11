@@ -13,7 +13,7 @@
     <div v-loading.lock="confirmLoading" class="fkdialog">
       <div class="dialog_left">
         <div class="left_top">
-          <span>{{ $i18n.t("SCREENCONDITION") }}</span>
+          <span>{{ vmI18n.t("SCREENCONDITION") }}</span>
           <span>
             <i v-if="!open_close_icon" class="iconfont" @click="nodeOpen"
               >&#xe61a;</i
@@ -32,9 +32,6 @@
             @tree_change="tree_change"
           />
         </div>
-        <!--<div class="left_bottom">
-                <el-button @click="addCondition">{{ChineseDictionary.ADDTHECONDITION}}</el-button>
-            </div>-->
       </div>
       <div
         class="dialog_center"
@@ -42,7 +39,7 @@
       >
         <el-tabs v-model="activeName">
           <el-tab-pane
-            :label="$i18n.t('SELECTEDRESULTS')"
+            :label="vmI18n.t('SELECTEDRESULTS')"
             name="first"
             class="el-tab-auto"
           >
@@ -71,7 +68,7 @@
             />
           </el-tab-pane>
           <el-tab-pane
-            :label="$i18n.t('VIEWTHESELECTEDRESULTS')"
+            :label="vmI18n.t('VIEWTHESELECTEDRESULTS')"
             name="second"
             class="el-tab-auto"
           >
@@ -111,7 +108,7 @@
               @click="onIconClick"
             />
             <template slot="prepend">
-              {{ $i18n.t("GLOBALSEARCH") }}
+              {{ vmI18n.t("GLOBALSEARCH") }}
             </template>
           </el-input>
           <div class="center-exclude">
@@ -124,32 +121,11 @@
                 value=""
               />
               <span class="checked-box" />
-              <span> {{ $i18n.t("EXCLUDE") }}</span>
+              <span> {{ vmI18n.t("EXCLUDE") }}</span>
             </label>
           </div>
         </div>
         <div v-if="activeName !== 'first'" class="center_bottom center-b-t">
-          <!--<i class="el-input__icon el-icon-search is-clickable center-icon" @click="onSearchResult"></i>
-          <el-autocomplete
-            v-model="searchResult"
-            :fetch-suggestions="querySearchAsync"
-            @select="handleSelect"
-            @keyup.enter.native="keyupSearch"
-            :trigger-on-focus="trigger_focus"
-            ref="trigger_searchResult"
-          >
-            <div slot="prepend">查询结果</div>
-            &lt;!&ndash;<i
-              class="el-icon-search el-input__icon"
-              @click="onSearchResult"
-              slot="append"
-            >
-            </i>&ndash;&gt;
-            &lt;!&ndash;<template slot-scope="props">
-              <div class="name">{{ props.item.value }}</div>
-              <span class="addr">{{ props.item.address }}</span>
-            </template>&ndash;&gt;
-          </el-autocomplete>-->
           <el-input
             ref="searchResult"
             v-model="searchResult"
@@ -179,13 +155,9 @@
           &#xe613;
         </div>
       </div>
-      <!--<div class="dialog-operation" v-if="activeName !== 'first' ">
-        <div class="operation-more operation-icon iconfont icon-bc">&#xe606;</div>
-        <div class="operation-single iconfont operation-icon icon-bc">&#xe613;</div>
-      </div>-->
       <div class="dialog_right">
         <div class="right_top">
-          <span>{{ $i18n.t("HASBEENSELECTED") }}</span
+          <span>{{ vmI18n.t("HASBEENSELECTED") }}</span
           ><span>(</span><span>{{ r_center_data.rightTotal }}条</span
           ><span>)</span>
 
@@ -197,11 +169,6 @@
         <div class="right_center">
           <ul>
             <li v-for="(item, index) in r_result" :key="index">
-              <!--<label :for="item.ID">
-                <input type="checkbox" v-model="r_result_checked" :value="item.ID" :id="item.ID" @change="r_result_change(item)" />
-                <span class="checked-box"></span>
-                <p>{{ item.exclude? '排除：' : '' }}{{ item.screen_string }}</p>
-              </label>-->
               <p>{{ item.exclude ? "排除：" : "" }}{{ item.screen_string }}</p>
               <i class="iconfont icon-fork" @click="deleteList(index)" />
             </li>
@@ -209,39 +176,36 @@
         </div>
         <div class="right_bottom">
           <el-button @click="dialogClose">
-            {{ $i18n.t("CANCEL") }}
+            {{ vmI18n.t("CANCEL") }}
           </el-button>
           <el-button @click="dialogConfirm">
-            {{ $i18n.t("CONFIRM") }}
+            {{ vmI18n.t("CONFIRM") }}
           </el-button>
         </div>
       </div>
       <div v-if="showOrHidden" class="modalDiv">
         <div class="modalCenter">
           <div class="modalTitle">
-            <span class="modalText">{{ $i18n.t("POTX") }}</span>
+            <span class="modalText">{{ vmI18n.t("POTX") }}</span>
             <i
               class="iconfont icon-cha1"
               @click="showOrHidden = !showOrHidden"
             />
           </div>
           <div class="modalContent">
-            <!--<svg class="query-icon muBan" aria-hidden="true">
-              <use xlink:href="#icon-moban"></use>
-            </svg>-->
             <i class="iconfont muBan">&#xe637;</i>
             <div class="textCenter">
-              {{ $i18n.t("PAGENAME") }}：<input
+              {{ vmI18n.t("PAGENAME") }}：<input
                 v-model="module_name"
                 type="text"
               />
             </div>
             <div class="modalBtn">
               <button class="btn" @click="result_save">
-                <span>{{ $i18n.t("ENSURE") }}</span>
+                <span>{{ vmI18n.t("ENSURE") }}</span>
               </button>
               <button class="btn" @click="showOrHidden = !showOrHidden">
-                <span>{{ $i18n.t("CANCEL") }}</span>
+                <span>{{ vmI18n.t("CANCEL") }}</span>
               </button>
             </div>
           </div>
@@ -273,38 +237,17 @@
         </div>
       </div>
     </div>
-    <!--<drag-dialog
-      v-if="errorDialog"
-      :title="errorDialogTitle"
-      size="mini"
-      :append-to-body="true"
-      :modal-append-to-body="true"
-      :visible.sync="errorDialog"
-      :close-on-click-modal="false"
-      :showClose="true"
-      :DialogClass="errorDialogClass"
-      :class="warnDialogClass"
-    >
-      <errorMessage :errorMessage="errorData" :DialogBack="errorDialogBack" :DialogClass="warnDialogClass"
-                    v-on:refreshbizlines="errorDialogClose"></errorMessage>
-    </drag-dialog>-->
   </my-dialog>
 </template>
 
 <script> /* type="ecmascript-6" */
-// import ChineseDictionary from '../../assets/js/ChineseDictionary';
 import i18n from "@burgeon/internationalization/i18n";
 import MyDialog from 'framework/components/dialog/mydialog.vue';
 import DragDialog from 'framework/components/dialog/mydialog.vue';
-// import MyDialog from '../dialog/mydialog.vue';
-// import DragDialog from '../dialog/mydialog.vue';
 import tree from 'framework/components/tablelist/tree.vue';
-// import tree from './tree.vue';
-// import axios from '../../__utils__/request';
-// import ShowTableData from '../views/custompage/ShowTableData.vue';
 import ShowTableData from 'framework/components/views/custompage/ShowTableData.vue';
-// ../../views/custompage/ShowTableData.vue
-// import errorMessage from './error.vue';
+window.$i18n = i18n
+
 export default {
   props: {
     tablename: {
@@ -344,6 +287,7 @@ export default {
   data() {
     return {
       $i18n: i18n,
+      vmI18n: i18n,
       confirmLoading: false, // 页面loading
       t_dialog_show: true, // 弹框显示
       ChineseDictionary: {}, // 名字集合
@@ -513,26 +457,7 @@ export default {
         if (obj.checked.length === 0) return;// 没有选中项
         screen[obj.AKNAME] = obj.checked;
       });
-      /* }else {//排除选中项
-      val.map((obj) => {
-        let checked_obj = obj;
-        if(checked_obj.checked.length === 0) return; //没有选中项
-        screen[obj['AKNAME']] = [];
-        checked_obj['VALUE'].map((n_obj) => {
-          let judge=checked_obj.checked.findIndex((n) => n_obj.ID === n );//查找列表中选中对象的下标
-          if( judge === -1) {//选出没勾选的
-            screen[checked_obj['AKNAME']].push(n_obj.ID);
-          }
-        })
-      })
-    } */
       this.l_screen_result_save = screen;// 保存筛选结果
-      /* if(Object.keys(screen).length !== 0){
-      this.r_send_result.push({
-        CONDITION: screen,//筛选条件
-        ID: []//排除ID集合
-      })//每次条件变化添加一个条件
-    } */
       this.$refs.screen_ck.val_arr = [];// 清空子组件选中的
       this.$refs.screen_ck.l_sub = [];// 清空高亮
       this.single_data = [];// 清空父组件选中的
@@ -540,17 +465,17 @@ export default {
     }, // 左边列表勾选变化时
     screen_request() {
       this.l_screenLoading = true;
-      const param = {
-        param: JSON.stringify({
-          TABLENAME: this.tablename, // 表名
-          CONDITION: this.l_screen_result_save, // 左边选中的列表
-          GLOBAL: this.isTreeOrSearch ? '' : this.searchWord.trim(), // 全局搜索值
-          PAGENUM: this.l_center_data.l_currentPage, // 当前页
-          PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
-        })
-      };
+      const paramObj = {
+        TABLENAME: this.tablename, // 表名
+        CONDITION: this.l_screen_result_save, // 左边选中的列表
+        GLOBAL: this.isTreeOrSearch ? '' : this.searchWord.trim(), // 全局搜索值
+        PAGENUM: this.l_center_data.l_currentPage, // 当前页
+        PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
+      }
+      const param = new FormData();
+      param.append('param', JSON.stringify(paramObj));
       console.log('522::');
-      this.service.common.screenresult(param)
+      this.service.promotionCenter.screenresult(param)
       /* axios({
         url: '/p/cs/screenresult',
         method: 'post',
@@ -564,8 +489,8 @@ export default {
           })
         }
       }) */.then((res) => {
-        const response = res.data;
-        if (response.code !== 0) {
+        const response = res.data.data;
+        if (res.data.code !== 0) {
           /* this.errorDialogClass = 'error';
         this.errorData = [{message: response.message}];
         this.errorDialog = true; */
@@ -583,17 +508,17 @@ export default {
     }, // 左边列表勾选变化获取数据
     screen_request_initialize() {
       this.l_screenLoading = true;
-      const param = {
-        param: JSON.stringify({
-          TABLENAME: this.tablename, // 表名
-          CONDITION: this.l_screen_result_save, // 左边选中的列表
-          GLOBAL: this.searchWord.trim(), // 全局搜索值
-          PAGENUM: this.l_center_data.l_currentPage, // 当前页
-          PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
-        })
+      const paramObj = {
+        TABLENAME: this.tablename, // 表名
+        CONDITION: this.l_screen_result_save, // 左边选中的列表
+        GLOBAL: this.searchWord.trim(), // 全局搜索值
+        PAGENUM: this.l_center_data.l_currentPage, // 当前页
+        PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
       }
+      const param = new FormData();
+      param.append('param', JSON.stringify(paramObj));
       console.log('595::');
-      this.service.common.screenresult(param)
+      return this.service.promotionCenter.screenresult(param)
       /* return axios({
         url: '/p/cs/screenresult',
         method: 'post',
@@ -607,8 +532,8 @@ export default {
           })
         }
       }) */.then((res) => {
-        const response = res.data;
-        if (response.code !== 0) {
+        const response = res.data.data;
+        if (res.data.code !== 0) {
           /* this.errorDialogClass = 'error';
         this.errorData = [{message: response.message}];
         this.errorDialog = true; */
@@ -626,21 +551,6 @@ export default {
       });
     }, // 初始化
     addCondition() {
-      /* let _self = this
-    _self.resultObj.idArr = []
-    _self.resultObj.descArr = []
-    let list = $('.dislogtree input[type=checkbox]:checked')
-    list.each((index, item) => {
-      let id = $(item).attr('data-id')
-      let desc = $(item).next().text()
-      _self.resultObj.idArr.push(id),
-      _self.resultObj.descArr.push(desc)
-    })
-
-    let obj = _self.reaptData(_self.resultObj)
-    _self.AllResult.push(obj)
-    $('.dislogtree input[type=checkbox]').prop('checked',false) */
-      // if(this.isTreeOrSearch){//表示不是搜索
       // 添加节点的
       const screen = {};
       const id_list = [];
@@ -653,26 +563,13 @@ export default {
         screen[obj.AKNAME] = [];
         checked_obj.VALUE.map((n_obj) => { // 循环子列表
           const judge = checked_obj.checked.findIndex(n => n_obj.ID === n);// 查找列表中选中对象的下标
-          /* if(judge === -1 && this.exclude || judge !== -1 && !this.exclude) {//没找到选中的并且是排除选项是true;找到了选中的并且排除选项是false
-          screen[checked_obj['AKNAME']].push(n_obj.ID);
-          not_checked_s.push(n_obj.NAME);
-          unmber = true;
-        } */
           if (judge !== -1) { // 右边只显示(排除或不排除)勾选的项
             screen[checked_obj.AKNAME].push(n_obj.ID);// 放入相应表数组中
             not_checked_s.push(n_obj.NAME);// 加入名字集合
             id_list.push(n_obj.ID);// 所有id集合
             unmber = true;
           }
-          /* if( judge === -1 && this.exclude) {//选出没勾选的和排除勾选项
-            screen[checked_obj['AKNAME']].push(n_obj.ID);
-            not_checked_s.push(n_obj.NAME);
-          }else if ( judge !== -1 && !this.exclude) {//不排除勾选项
-            screen[checked_obj['AKNAME']].push(n_obj.ID);
-            not_checked_s.push(n_obj.NAME);
-          } */
         });
-        /* console.log(screen_string += not_checked_s.join()); */
         screen_string.push(not_checked_s.join());// 拼接字段
       });
       if (!unmber) return; // 没选return
@@ -725,17 +622,17 @@ export default {
         return obj;
       });// 清空选中的
       this.l_screenLoading = true;
-      const param = {
-        param: JSON.stringify({
-          TABLENAME: this.tablename, // 表名
-          CONDITION: this.l_screen_result_save, // 左边选中的列表
-          GLOBAL: this.searchWord.trim(), // 全局搜索值
-          PAGENUM: this.l_center_data.l_currentPage, // 当前页
-          PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
-        })
+      const paramObj = {
+        TABLENAME: this.tablename, // 表名
+        CONDITION: this.l_screen_result_save, // 左边选中的列表
+        GLOBAL: this.searchWord.trim(), // 全局搜索值
+        PAGENUM: this.l_center_data.l_currentPage, // 当前页
+        PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
       }
+      const param = new FormData();
+      param.append('param', JSON.stringify(paramObj));
       console.log('737::');
-      this.service.common.screenresult(param)
+      this.service.promotionCenter.screenresult(param)
       /* axios({
         url: '/p/cs/screenresult',
         method: 'post',
@@ -749,8 +646,8 @@ export default {
           })
         }
       }) */.then((res) => {
-        const response = res.data;
-        if (response.code !== 0) {
+        const response = res.data.data;
+        if (res.data.code !== 0) {
           /* this.errorDialogClass = 'error';
         this.errorData = [{message: response.message}];
         this.errorDialog = true; */
@@ -830,18 +727,7 @@ export default {
               screen: obj.ID, // 商品ID
               exclude: _this.exclude, // 判断是否排除勾选项
               id_list: [obj.ID], // ID集合
-              /* CONDITION: Object.keys(_this.l_screen_result_save).length === 0? 0 : _this.r_send_result.length - 1//表示是有筛选条件的下标 */
-              /* ID: _this.r_result.length + '_choose',//ID
-              checked: _this,//是否勾选 */
             });// 把筛选的值放入数组
-            /* _this.r_result_checked.push(_this.r_result.length - 1 + '_choose');//使添加的直接勾选 */
-            /* if(_this.exclude) {//筛选结果的排除项
-              if(Object.keys(_this.l_screen_result_save).length === 0){
-                _this.r_send_result[_this.r_send_result.length-1].ID.push(obj.ID);//没有筛选条件时的保存
-              }else {
-                _this.r_send_result[0].ID.push(obj.ID);//放入同一条件下的数组中
-              }
-            } */
           });
         } else {
           const index = _this.r_result.findIndex((n) => {
@@ -853,9 +739,6 @@ export default {
               screen: val.ID, // 商品ID
               exclude: this.exclude, // 判断是否排除勾选项
               id_list: [val.ID], // ID集合
-              /* CONDITION: Object.keys(_this.l_screen_result_save).length === 0? 0 : _this.r_send_result.length - 1 //表示是有筛选条件的下标 */
-              /* ID: this.r_result.length + '_choose',//ID
-              checked: true,//是否勾选 */
             });// 把筛选的值放入数组
           } else { // 找到弹出提示已存在
             this.$message({
@@ -864,14 +747,6 @@ export default {
               type: 'warning'
             });
           }
-          /* if(_this.exclude) {//筛选结果的排除项
-            if(Object.keys(_this.l_screen_result_save).length === 0){
-              _this.r_send_result[_this.r_send_result.length-1].ID.push(val.ID);//没有筛选条件时的保存
-            }else {
-              _this.r_send_result[0].ID.push(val.ID);//放入同一条件下的数组中
-            }
-          } */
-          /* this.r_result_checked.push(this.r_result.length - 1 + '_choose');//使添加的直接勾选 */
         }
         this.$refs.screen_ck.val_arr = [];// 清空选中的
         this.$refs.screen_ck.l_sub = [];// 清空高亮
@@ -888,8 +763,6 @@ export default {
             screen: val.ID, // 商品ID
             exclude: true, // 一定是排除项
             id_list: [val.ID], // ID集合
-            /* ID: this.r_result.length + '_choose',//ID
-            checked: true,//是否勾选 */
           });// 把筛选的值放入数组
         } else { // 找到提示已存在
           this.$message({
@@ -909,14 +782,6 @@ export default {
       const _this = this;
       const CONDITION = []; const EXCLUDE = []; const IN = []; const
         NOTIN = [];
-      /* let CONDITION = [], EXCLUDE = [], IN = [], NOTIN = [], send_param = []; */
-      /* this.r_send_result = this.r_send_result.map((obj) => {
-      return {
-        CONDITION: obj.CONDITION,
-        ID: []
-      }
-    })//初始化有筛选条件的排除项
-    console.log(this.r_result) */
       this.r_result.map((obj) => {
         if (obj.screen instanceof Object) { // 是对象说明是左边的节点树
           if (obj.exclude) { // 排除项
@@ -924,61 +789,12 @@ export default {
           } else { // 非排除项
             CONDITION.push(obj.screen);
           }
-          /* Object.keys(obj.screen).map((tree_obj) => {//循环勾选的节点树
-            let tree_val = tree_obj;
-            if(obj.exclude) {//排除项
-              if(!Object.keys(EXCLUDE).includes(tree_val))EXCLUDE[tree_val] = [];//查找是否有这个左边树的父节点
-              EXCLUDE[tree_val].push(...obj.screen[tree_val]);
-              EXCLUDE[tree_val] = [...new Set(EXCLUDE[tree_val].slice())]//去重
-            }else {//非排除项
-              if(!Object.keys(CONDITION).includes(tree_val))CONDITION[tree_val] = [];//查找是否有这个左边树的父节点
-              /!*CONDITION[tree_val].push(...[...new Set(val.screen[tree_val])]);//去重*!/
-              CONDITION[tree_val].push(...obj.screen[tree_val]);
-              CONDITION[tree_val] = [...new Set(CONDITION[tree_val].slice())]//去重
-            }
-          }) */
         } else if (obj.exclude) { // 排除项
           NOTIN.push(obj.screen);
-          /* if(Object.prototype.toString.call(obj.CONDITION) === '[object Undefined]'){//不是筛选条件的排除项
-            NOTIN.push(obj.screen);
-          }else {//有筛选条件的排除项
-            if(this.r_send_result[obj.CONDITION].ID.includes(obj.screen))return//存在就不用添加了
-            this.r_send_result[obj.CONDITION].ID.push(obj.screen);//放入对应的筛选条件下面
-          } */
         } else { // 非排除项
           IN.push(obj.screen);
         }
       });
-      /* this.r_result_checked.map((obj) => {
-      let id = obj;//勾选项数组下标
-      let val = _this.r_result.find((val,index,arr) => id === val.ID );//选出对应的勾选项
-      if(!val) return ;
-      if(val.screen instanceof Object) {//是对象说明是左边的节点树
-        Object.keys(val.screen).map((tree_obj) => {//循环勾选的节点树
-          let tree_val = tree_obj;
-          if(val.exclude) {//排除项
-            if(!Object.keys(EXCLUDE).includes(tree_val))EXCLUDE[tree_val] = [];//查找是否有这个左边树的父节点
-            EXCLUDE[tree_val].push(...val.screen[tree_val]);
-            EXCLUDE[tree_val] = [...new Set(EXCLUDE[tree_val].slice())]//去重
-          }else {//非排除项
-            if(!Object.keys(CONDITION).includes(tree_val))CONDITION[tree_val] = [];//查找是否有这个左边树的父节点
-            /!*CONDITION[tree_val].push(...[...new Set(val.screen[tree_val])]);//去重*!/
-            CONDITION[tree_val].push(...val.screen[tree_val]);
-            CONDITION[tree_val] = [...new Set(CONDITION[tree_val].slice())]//去重
-          }
-        })
-      }else {
-        if(val.exclude) {//排除项
-          NOTIN.push(val.screen)
-        }else {//非排除项
-          IN.push(val.screen)
-        }
-      }
-    }); */
-      /* this.r_send_result.map((obj) => {
-      if(obj.ID.length === 0)return
-      send_param.push(obj);
-    }) */
       const param = {
         TABLENAME: this.tablename, // 表名
         CONDITION, // 各个父节点下面的勾选的子节点
@@ -1002,11 +818,11 @@ export default {
     }, // 右边列表的数据处理
     request_total() {
       this.request_param.GLOBAL = '';
-      const fromdata = {
-        param: JSON.stringify(this.request_param)
-      }
+      const paramObj = this.request_param;
+      const param = new FormData();
+      param.append('param', JSON.stringify(paramObj));
       console.log('1008::');
-      this.service.common.screenresultcheck(fromdata)
+      this.service.promotionCenter.screenresultcheck(param)
       /* axios({
         url: '/p/cs/screenresultcheck',
         method: 'post',
@@ -1027,11 +843,10 @@ export default {
     right_dispose_request() {
       this.confirmLoading = true;
       this.r_screenLoading = true;
-      const fromdata = {
-        param: JSON.stringify(this.optimize_request)
-      }
+      const param = new FormData();
+      param.append('param', JSON.stringify(this.optimize_request));
       console.log('1033::');
-      this.service.common.screenresultcheck(fromdata)
+      this.service.promotionCenter.screenresultcheck(param)
       /* axios({
         url: '/p/cs/screenresultcheck',
         method: 'post',
@@ -1106,11 +921,10 @@ export default {
       this.r_center_data.r_currentPage = 1;// 初始化当前页
       this.right_dispose();// 只有每次点击second时在处理数据
       this.r_screenLoading = true;
-      const fromdata = {
-        param: JSON.stringify(this.optimize_request)
-      }
+      const param = new FormData();
+      param.append('param', JSON.stringify(this.optimize_request));
       console.log('1112::');
-      this.service.common.screenresultcheck(fromdata)
+      this.service.promotionCenter.screenresultcheck(param)
       /* axios({
         url: '/p/cs/screenresultcheck',
         method: 'post',
@@ -1135,36 +949,6 @@ export default {
     keyupSearch() {
       this.onSearchResult();
     }, // enter快捷
-    /* querySearchAsync (queryString, cb) {
-    this.right_dispose();//只有每次点击second时在处理数据
-    axios({
-      url: '/p/cs/screenresultcheck',
-      method: 'post',
-      params: {
-        param: this.optimize_request
-      }
-    }).then((res) => {
-      let response = res.data;
-      if(response.code !== 0)return this.$message({
-        message: response.message,
-        center: true,
-        type: 'error',
-      });
-      let restaurants = this.restaurants = response.data.list;
-      let results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
-      // 调用 callback 返回建议列表的数据
-      cb(results);
-    }).catch((res) => {
-    })
-  },//模糊搜索
-  handleSelect (val) {
-  
-  },//模糊搜索选中项
-  createFilter(queryString) {
-    return (restaurant) => {
-      return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-    };
-  }, */
     /* 以上选中结果的相关事件 */
 
     right_request_center() {
@@ -1186,53 +970,20 @@ export default {
       }
       this.right_dispose();// 重新计算一遍
       this.request_param.GLOBAL = '';// 只传条件
-      /* $.ajax({
-      url:'/p/cs/setMultiQuery',
-      type:'POST',
-      dataType:'json',
-      data:
-        {
-          tableid: this.tableid,
-          modelname: this.module_name,
-          multiQuery: {
-            value: this.request_param,
-            text: JSON.stringify({
-              result: this.r_result,//渲染列表
-              /!*condition: this.r_send_result//条件集合*!/
-            })
-          }
-        }
-      ,
-      success:function(res){
-  
-      },
-      error:function(){
-  
-      }
-    }) */
-      /* let postParam = new URLSearchParams();
-    postParam.append('tableid', this.tableid);
-    postParam.append('modelname', this.module_name);
-    postParam.append('multiQuery', JSON.stringify({
-      value: this.request_param,
-      text: JSON.stringify({
-        result: this.r_result,//渲染列表
-        /!*condition: this.r_send_result//条件集合*!/
+      const text = JSON.stringify({
+        result: this.r_result, // 渲染列表
+        /* condition: this.r_send_result//条件集合 */
       })
-    })); */
-      const fromdata = {
-        tableid: this.tableid,
-        modelname: this.module_name,
-        multiQuery: JSON.stringify({
-          value: this.request_param,
-          text: JSON.stringify({
-            result: this.r_result, // 渲染列表
-            /* condition: this.r_send_result//条件集合 */
-          })
-        })
+      const multiQuery = {
+        value: this.request_param,
+        text,
       }
+      const param = new FormData();
+      param.append('tableid', this.tableid);
+      param.append('modelname', this.module_name);
+      param.append('multiQuery', JSON.stringify(multiQuery));
       console.log('1234::');
-      this.service.promotionCenter.setMultiQuery(fromdata)
+      this.service.promotionCenter.setMultiQuery(param)
       /* axios({
         method: 'post',
         url: '/p/cs/setMultiQuery',
@@ -1297,10 +1048,10 @@ export default {
       }
       if (true) {
         this.confirmLoading = true;
+        const param = new FormData();
+        param.append('param', JSON.stringify(this.request_param));
         console.log('1300::');
-        this.service.common.screenresultcheck({
-          param: JSON.stringify(this.request_param)
-        })
+        this.service.promotionCenter.screenresultcheck(param)
         /* axios({
           url: '/p/cs/screenresultcheck',
           method: 'post',
@@ -1386,11 +1137,7 @@ export default {
       /* axios({
         url: '/p/cs/screen',
         method: 'post',
-        data: {
-          param: JSON.stringify({
-            TABLENAME: this.tablename
-          })
-        }
+        param,
       }) */.then((res) => {
         const response = res.data;
         if (response.code !== 0) {
