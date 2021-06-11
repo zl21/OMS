@@ -284,20 +284,21 @@ export default {
             on: {
               'on-change': e => {
                 setTimeout(() => {
-                  // const ca = Number(e.target.value);
-                  // params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
-                  /* const relCa = this.$OMS2.omsUtils.floatNumber(Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL), 2);
+                  const ca = Number(e.target.value);
+                  params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
+                  const relCa = this.$OMS2.omsUtils.floatNumber(Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL), 2);
                   if (ca > relCa) {
                     params.row.COMPENSATE_AMT = relCa;
                   } else {
                     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
-                  } */
+                  }
                   this.tableConfig.data[params.index] = params.row;
                   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
                 }, 300);
               },
               'on-blur': e => {
                 console.log(e);
+                // 这个失焦到底走不走！！！
                 const ca = Number(params.row.COMPENSATE_AMT);
                 const relCa = this.$OMS2.omsUtils.floatNumber(Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL), 2);
                 if (ca > relCa) {
