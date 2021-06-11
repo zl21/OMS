@@ -46,7 +46,7 @@
       <div class="customized-detail-table">
         <businessLabel
           :label-list="formConfig.formValue.group_type == '2' ? label.labelList : label.labelTagList"
-          :label-default-value="label.labelDefaultValue"
+          :label-default-value="label.labelValue"
           @labelClick="labelClick"
         />
         <div

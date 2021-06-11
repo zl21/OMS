@@ -279,7 +279,6 @@ export default {
           label: '操作日志',
           value:'logTable'
         }],
-        labelDefaultValue: '',
         labelValue: 'generalGroupItem'
       },
       jordanTableConfigLuck: { // 福袋明细配置
@@ -525,6 +524,14 @@ export default {
     self.formConfig.formData[0].disabled = self.id !== -1;
     if(self.id == -1){
       self.formConfig.formData.filter(item=>item.value && item.value == 'ISACTIVE')[0].style = '';
+      this.label.labelList = [{
+        label: '普通组合明细',
+        value: 'generalGroupItem',
+      }];
+      this.label.labelTagList = [{
+        label: '福袋组合明细',
+        value: 'luckbagGroupItem',
+      }];
     }
     this.query();
   },
