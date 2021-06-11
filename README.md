@@ -200,3 +200,4 @@
 | v1.1.56 | 促销-fkdialog 网关/报错处理 |
 | v1.1.57 | 促销-fkdialog screenresultcheck接口返回data层级报错处理 |
 | v1.1.58 | fkinputPlus样式修改 |
+| v1.1.59 | fkinputPlus模糊搜索失焦处理 |

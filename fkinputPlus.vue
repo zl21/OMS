@@ -123,10 +123,10 @@ export default {
         pageSizeList: [10, 20, 50, 100, 200]
       },
       isHandleSelect: false,
+      autocomplete: false,
       // 单选弹出框数据操作
       selectCurrentPage: 2,
       popoverShow: {},
-      autocomplete: false,
       enter: {
         time: 0
       },
@@ -258,6 +258,7 @@ export default {
 
     /* ------------------- DropMultiSelectFilter组件事件 start  ------------------- */
     fkrpselected(val) {
+      this.isHandleSelect = true;
       if (this.itemdata.fkdisplay == 'drp') {
         this.itemdata.pid = val[0].ID;
         this.itemdata.valuedata = val[0].Label;
@@ -284,6 +285,7 @@ export default {
     },
     InputValueChange(val) {
       this.isFuzzy = true;
+      if (!val) return
       this.getFuzzySelectData(val);
     },
     changePage(val) {
@@ -292,7 +294,7 @@ export default {
     },
     blur() {
       // 失焦：模糊搜索的选中、clear都会先走失焦
-      if (this.isFuzzy) {
+      if (this.isFuzzy && !this.isHandleSelect) {
         console.log('fuzzy blur，模糊搜索失去焦点了，自行处理！');
         setTimeout(() => {
           if (this.itemdata.pid && this.itemdata.valuedata) { // 假装已经走了选中事件
@@ -319,6 +321,7 @@ export default {
               }
             }
           }
+          this.isHandleSelect = false;
         }, 3000);
       } else {
         console.log('not fuzzy blur');
