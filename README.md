@@ -198,3 +198,4 @@
 | v1.1.53 | fkinput/fkinputPlus拓展 |
 | v1.1.55 | fkinput/fkinputPlus拓展 istooltip |
 | v1.1.56 | 促销-fkdialog 网关/报错处理 |
+| v1.1.57 | 促销-fkdialog screenresultcheck接口返回data层级报错处理 |

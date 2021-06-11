@@ -830,8 +830,8 @@ export default {
           param: JSON.stringify(this.request_param)
         }
       }) */.then((res) => {
-        const response = res.data;
-        if (response.code !== 0) {
+        const response = res.data.data;
+        if (res.data.code !== 0) {
           /* this.errorDialogClass = 'error';
         this.errorData = [{message: response.message}];
         this.errorDialog = true; */
@@ -854,9 +854,9 @@ export default {
           param: JSON.stringify(this.optimize_request)
         }
       }) */.then((res) => {
-        const response = res.data;
+        const response = res.data.data;
         this.confirmLoading = false;
-        if (response.code !== 0) {
+        if (res.data.code !== 0) {
           /* this.errorDialogClass = 'error';
         this.errorData = [{message: response.message}];
         this.errorDialog = true; */
@@ -932,8 +932,8 @@ export default {
           param: JSON.stringify(this.optimize_request)
         }
       }) */.then((res) => {
-        const response = res.data;
-        if (response.code !== 0) {
+        const response = res.data.data;
+        if (res.data.code !== 0) {
           /* this.errorDialogClass = 'error';
         this.errorData = [{message: response.message}];
         this.errorDialog = true; */
@@ -1059,9 +1059,9 @@ export default {
             param: JSON.stringify(this.request_param)
           }
         }) */.then((res) => {
-          const response = res.data;
+          const response = res.data.data;
           this.confirmLoading = false;
-          if (response.code !== 0) {
+          if (res.data.code !== 0) {
             /* this.errorDialogClass = 'error';
           this.errorData = [{message: response.message}];
           this.errorDialog = true; */
