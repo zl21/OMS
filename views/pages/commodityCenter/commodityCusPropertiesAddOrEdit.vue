@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-27 11:20:18
+ * @LastEditTime: 2021-06-11 11:31:42
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/views/pages/commodityCenter/commodityCusPropertiesAddOrEdit.vue
+-->
 <template>
   <div class="commodityCusPropertiesAddOrEdit customized-detail" :id="this.customizedModuleName">
     <loading :loading="loading" />
@@ -44,19 +52,6 @@ export default commodityCusPropertiesAddOrEdit;
 @import '~professionalComponents/common/css/theme.less';
 .commodityCusPropertiesAddOrEdit {
   position: relative;
-
-  /* 标注图标样式 */
-  /* /deep/ .ark-tooltip {
-    position: absolute;
-    right: -20px;
-    top: 8px;
-    z-index: 99;
-
-    .ark-icon {
-      font-size: 18px;
-      color: #ed4014;
-    }
-  } */
 }
 // @import '~@/css/pages/commodityCenter/commodityCusPropertiesAddOrEdit.less';
 </style>

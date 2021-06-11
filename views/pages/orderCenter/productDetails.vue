@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-06-11 09:54:46
+ * @LastEditTime: 2021-06-11 16:33:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -51,10 +51,8 @@ export default {
                   return;
                 }
                 this.addDetailsConfig.modal = true;
-                let route = this.$route.params;
-                // console.log(this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[1]);
                 let billNo = R3.store.state.customize.originalOrder;
-                this.getTable(true,billNo ? billNo : 'OM21051700000478');
+                this.getTable(true,billNo);
               } // 按钮点击事件
             },
             {
@@ -223,7 +221,7 @@ export default {
   watch: {
     async isEdit(newVal) {
       await this.getTable(false,newVal);
-      await sessionStorage.setItem('copyDetails',JSON.stringify(this.tableConfig.data))
+      // await sessionStorage.setItem('copyDetails',JSON.stringify(this.tableConfig.data))
     },
     'tableConfig.data':{
       handler(newV, oldV) {
@@ -232,14 +230,13 @@ export default {
       deep:true
     }
   },
-  created(){
+  async created(){
     if(!(this.$route.params.itemId == 'New')){
-      setTimeout(async() => {
-        let route = this.$route.params;
-        let billNo = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata;
-        await this.getTable(false,billNo ? billNo : 'OM21052500000001');
-        await sessionStorage.setItem('copyDetails',JSON.stringify(this.tableConfig.data))
-      }, 100);
+       let route = this.$route.params;
+       const subData = await this.$OMS2.omsUtils.initSubtable('OC_B_REFUND_ORDER_ITEM', route.itemId, '181618');
+       console.log(subData.rowData);
+       this.tableConfig.data = subData.rowData;
+       await sessionStorage.setItem('copyDetails',JSON.stringify(subData.rowData));
     }
   },
   mounted(){
@@ -275,6 +272,7 @@ export default {
       this.tableConfig.selectData = row;
     },
     onSelectCancel(row){
+      console.log(row);
       this.tableConfig.selectData = row;
     },
     onSelectAll(row){
@@ -298,9 +296,11 @@ export default {
     },
     /******************  添加商品明细 -- 弹框 *************************/
     addOnSelect(row){
+      console.log(row);
       this.addDetailsConfig.selectData = row
     },
     addOnSelectCancel(row){
+      console.log(row);
       this.addDetailsConfig.selectData = row
     },
     addOnSelectAll(row){
@@ -318,8 +318,20 @@ export default {
        this.getTable(true,pageNum,this.addDetailsConfig.pageSize)
     },
     addDetailsOk(){
-      this.tableConfig.data = this.tableConfig.data.concat(this.addDetailsConfig.selectData)
+      // 新增明细
+      let arr = JSON.parse(sessionStorage.getItem('copyDetails')) //详情
+      // 如果是编辑的话 
+      this.addDetailsConfig.selectData.forEach(x =>{
+        if(arr.every(y => y.ID !== x.ID)){
+          // 不存在
+          x.OC_B_ORDER_ITEM_ID = '-1'
+        }
+      })
+      this.tableConfig.data = this.tableConfig.data.concat(this.addDetailsConfig.selectData);
     },
+  },
+  destroyed(){
+    sessionStorage.clear('copyDetails');
   }
 };
 </script>
