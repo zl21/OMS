@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-11 15:28:09
- * @LastEditTime: 2021-06-11 17:33:29
+ * @LastEditTime: 2021-06-11 18:10:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/modal/orderCenter/remitFail.vue
@@ -107,7 +107,7 @@ export default {
   },
   methods: {
     determine() {
-
+      let IDS = this.$parent.$parent.idArray
       let forval = this.$refs.FormLayout.formData
       let data = {
         IDS,
