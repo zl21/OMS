@@ -324,7 +324,7 @@ export default {
       this.addDetailsConfig.selectData.forEach(x =>{
         if(arr.every(y => y.ID !== x.ID)){
           // 不存在
-          x.OC_B_ORDER_ITEM_ID = '-1'
+          x.OC_B_ORDER_ITEM_ID = x.ID
         }
       })
       this.tableConfig.data = this.tableConfig.data.concat(this.addDetailsConfig.selectData);
