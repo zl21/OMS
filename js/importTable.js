@@ -144,8 +144,8 @@ export default {
           if (res.data.message) _this.$Message.success(res.data.message);
           _this.$emit('returnData', res.data.data);
           _this.closeModal();
-          // 刷新列表
-          _this.customizeInvoke();
+          _this.customizeInvoke(); // 刷新列表
+          res.data.data && _this.handelError(res.data.data, true); // 部分成功部分失败-Err1Succ1
         } else if (res.data.code === -1 && res.data.data) {
           // _this.isError = true;
           _this.handelError(res.data.data);
@@ -196,10 +196,19 @@ export default {
       }
     },
     // 导入失败后的操作 - 下载错误信息/展示错误信息
-    handelError(data) {
+    handelError(data, Err1Succ1) {
       const _this = this;
       if (_this.currentConfig.downErrorInfo) {
-        _this.downloadUrlFile(data);
+        if (Err1Succ1) {
+          let reUrl = /(http|https):\/\/([\w.]+\/?)\S*/;
+          if (reUrl.test(data) === false) {
+            return _this.$Message.error('code为0或1，部分成功部分失败，请返回以 http 或者 https 开头的错误信息下载链接！')
+          } else {
+            _this.downloadUrlFile(data);
+          }
+        } else {
+          _this.downloadUrlFile(data);
+        }
         // _this.closeModal();
       } else if (_this.currentConfig.showErrorInfo) {
         // _this.closeModal();

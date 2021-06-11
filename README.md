@@ -202,3 +202,4 @@
 | v1.1.58 | fkinputPlus样式修改 |
 | v1.1.59 | fkinputPlus模糊搜索失焦处理 |
 | v1.1.60 | importTable成功处理 |
+| v1.1.61 | importTable部分成功部分失败处理 |
