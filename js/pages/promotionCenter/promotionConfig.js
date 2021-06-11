@@ -138,7 +138,7 @@ const diStatusArr = [
 		label: $i18n.t('btn.offline') // 下线
 	}
 ];
-const tablecols = {
+const tableCols = {
 	infoColumns: [
 		{
 			slot: 'ECODE',
@@ -516,7 +516,7 @@ const tablecols = {
 };
 
 export {
-	tablecols,
+	tableCols,
 	diStatusArr,
 	logDataCol,
 	baseColumnDefs,

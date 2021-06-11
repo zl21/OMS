@@ -4,7 +4,7 @@ import detailtable from 'allpages/promotionCenter/details/table.vue';
 // import MultipleBox from 'professionalComponents/multipleBox.vue';
 import SingleBox from 'professionalComponents/singleBox.vue';
 import ButtonFkDialog from 'professionalComponents/buttonFkDialog.vue';
-import { tabList } from './promotionConfig';
+import { tableCols as tabList } from './promotionConfig';
 import businessButton from 'professionalComponents/businessButton';
 import groups from '@/assets/js/promotion/groups';
 
