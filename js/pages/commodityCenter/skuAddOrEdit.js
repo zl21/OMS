@@ -758,7 +758,8 @@ export default {
       }
     },
     onOk() {
-      if (this.$route.query.spuid) {
+      const spuID = this.$route.query.spuid;
+      if (spuID) {
       // this.$comUtils.tabCloseAppoint(this);
       // this.$destroy(true);
         this.$store.commit('global/tabOpen', {
@@ -770,7 +771,7 @@ export default {
           back: true,
         });
         this.$store.commit('customize/TabOpen', {
-          id: this.$route.query.spuid,
+          id: spuID,
           type: 'action',
           name: 'PS_C_PRO',
           label: 'SPU编辑',

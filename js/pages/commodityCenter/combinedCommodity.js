@@ -1111,7 +1111,7 @@ export default {
             text: $i18n.t('btn.back'), // 返回
             btnclick: () => {
               // this.$comUtils.tabCloseAppoint(this);
-              // this.$store.commit('global/tabOpen', {
+              this.$store.commit('global/tabOpen', {
                 tableId: 24525,
                 type: 'S',
                 tableName: 'PS_C_PRO_GROUP',
