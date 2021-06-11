@@ -91,14 +91,22 @@ export default {
               columns: ['ENAME'],
               AuotData: [], //匹配的选项
               dimChange: (search) => {
+                console.log('dimChange::');
                 this.fuzzyquerybyak(search, 171332)
+                this.tableConfig.businessFormConfig.formValue.skuFlag = '';
               },
               dimEnter: (val) => { },
               dimSelect: (obj) => {
+                console.log('dimSelect::');
                 this.tableConfig.businessFormConfig.formValue.skuEname = obj.label || ''
+                this.tableConfig.businessFormConfig.formValue.skuFlag = obj.value || 1
               },
               dimblur: () => {
-                this.tableConfig.businessFormConfig.formValue.skuEname = ''
+                console.log('dimblur::');
+                // 走了dimSelect就会走dimChange，所以暂时控制不了失焦
+                const selFlag = this.tableConfig.businessFormConfig.formValue.skuFlag;
+                if (selFlag) return
+                // this.tableConfig.businessFormConfig.formValue.skuEname = ''
               },
             },
             {

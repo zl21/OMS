@@ -248,9 +248,9 @@ export default {
           // 赔付数量
           return h('InputNumber', {
             props: {
-              value: params.row.COMPENSATE_QTY || 0,
+              value: Number(params.row.COMPENSATE_QTY || 0),
               regx: /^[1-9]\d*$/,
-              max: params.row.QTY,
+              max: Number(params.row.QTY || 0),
               min: 0,
               editable: true,
             },
