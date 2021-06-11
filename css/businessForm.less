@@ -6,9 +6,7 @@
 
 .orderManageEdit {
   display: flex;
-  // border: 1px solid #d8d8d8;
   .businessForm_a {
-    // padding-bottom: 10px;
     box-sizing: border-box;
 
     &.burgeon-col-span-6,
@@ -31,16 +29,6 @@
           white-space: normal;
         }
       }
-
-      // .ark-input-wrapper {
-      //   line-height: 30px;
-
-      //   .ark-input {
-      //     box-sizing: border-box;
-      //     line-height: 26px;
-      //     height: 26px;
-      //   }
-      // }
 
     }
 
@@ -81,19 +69,6 @@
       width: 100%;
     }
 
-    // 类型为popSelect的 input
-    /* select下拉框样式调整 */
-    // .popSelect .ark-select-single .ark-select-selection {
-    //   height: 26px;
-    //   line-height: 26px;
-    // }
-
-    // .popSelect .ark-select-single .ark-select-selection .ark-select-placeholder,
-    // .ark-select-single .ark-select-selection .ark-select-selected-value {
-    //   height: 26px;
-    //   line-height: 26px;
-    // }
-
     /* 双数字输入框样式 */
     .bothNumInput {
       display: flex;
@@ -105,20 +80,23 @@
       box-sizing: border-box;
     }
 
-    /* 标注图标样式 */
-    .ark-tooltip {
+    // clear
+    .ark-fkrp-select .ark-icon-ios-close-circle{
+      width: 12px;
+      height: 12px;
+      line-height: 12px;
+      vertical-align: middle;
       position: absolute;
-      right: -20px;
-      top: 8px;
-
-      .ark-icon {
-        font-size: 18px;
-        color: #ed4014;
-      }
+      top: 10px !important;
+      right: -2px;
+      opacity: .9;
+      font-size: 14px;
+    }
+    .ark-fkrp-select-icon{
+      top: 1px;
     }
 
   }
-
   /* 折叠按钮 */
   .flodBtn {
     width: 28px;
@@ -151,11 +129,11 @@
 }
 
 /* 日期组件样式 */
-html *,
-:after,
-:before {
-  box-sizing: border-box;
-}
+// html *,
+// :after,
+// :before {
+//   box-sizing: border-box;
+// }
 
 /* 插槽字段的必填标识 */
 .req-star .ark-form-item-label::before {
