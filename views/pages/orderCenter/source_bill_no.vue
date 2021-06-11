@@ -1,16 +1,16 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-06-10 16:59:52
+ * @LastEditTime: 2021-06-11 11:02:58
  * @LastEditors: Please set LastEditors
 -->
 <template>
   <div class="OC_B_ORDER_ID">
-    <label class="itemLabel"> 原定单编号： </label>
     <Input
       :autocomplete="'new-password'"
       @on-click="iconclick"
       @on-enter="inputenter"
+      clearable
       icon="ios-search"
       v-model="BILL_NO"
       :placeholder="''"
@@ -245,6 +245,14 @@ export default {
       },
     };
   },
+  watch:{
+    BILL_NO(newVal){
+      if(!newVal){
+        console.log(newVal);
+        R3.store.commit('customize/originalOrder','');
+      }
+    }
+  },
   created() {
     console.log();
   },
@@ -252,10 +260,7 @@ export default {
 
   },
   mounted() {
-    this.$nextTick(async () => {
-      // await this.initObjItem(-1);
-      
-    });
+    
   },
   methods: {
 
@@ -267,31 +272,10 @@ export default {
     },
     inputenter() { },
     inputblur() { },
-    inputChange() { },
+    inputChange() {},
     /* --------------------- 工具函数： --------------------- */
     keyDown() { },
     /* ------------------- 事件 part start ------------------- */
-    async initObjItem(id) {
-      const self = this;
-      this.loading = true;
-      let formData = new FormData();
-      formData.append("table", 'OC_B_ORIG_ORDER');
-      formData.append("getcmd", 'y');
-      const res = await this.service.common.getTableQuery(formData);
-      // let base = res?.data?.data?.datas?.dataarry || [];
-      let base = res.data.data.datas.dataarry || [];
-      base.map(it => {
-        it.name = it.coldesc;
-        it.display = it.display == 'OBJ_SELECT' ? 'select' : it.display;
-      })
-      self.formConfig = this.$OMS2.omsUtils.initFormConfig(
-        base,
-        self.formConfig
-      );
-      setTimeout(() => {
-        this.loading = false;
-      }, 100);
-    },
     async queryEnter(pageNum = 1, pageSize = 10) {
       const self = this;
       this.table.loading = true;

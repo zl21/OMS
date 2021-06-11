@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-06-10 18:56:01
+ * @LastEditTime: 2021-06-11 09:54:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -325,4 +325,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  #actionMODIFY{
+    display: none;
+  }
 </style>
