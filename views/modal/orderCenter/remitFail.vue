@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-11 15:28:09
- * @LastEditTime: 2021-06-11 18:10:27
+ * @LastEditTime: 2021-06-11 18:30:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/modal/orderCenter/remitFail.vue
@@ -112,7 +112,7 @@ export default {
       let data = {
         IDS,
         PAY_TYPE: forval.PAY_TYPE,//支付方式 1-支付宝、2-微信、3-现金、4-银行卡
-        PAY_NO: forval.PAY_TYPE
+        PAY_NO: forval.PAY_NO
       }
 
       service.orderCenter.remitFail(data).then(res => {
