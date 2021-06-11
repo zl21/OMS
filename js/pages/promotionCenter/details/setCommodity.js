@@ -73,7 +73,7 @@ export default {
 		}
 	},
 	mounted() {
-		this.btnConfig.buttons[0].isShow = !(objid > 0 && (basicData.status === '2' || basicData.status ==='3'));
+		this.btnConfig.buttons[0].isShow = !(this.objid > 0 && ['2','3'].includes(this.basicData.status));
 	},
 	created() {
 	},
