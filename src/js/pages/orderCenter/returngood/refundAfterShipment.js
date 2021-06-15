@@ -754,6 +754,9 @@ export default {
                             self.reForm.config.find(
                               item => item.item.label == self.vmI18n.t('form_label.refundAmount') // 申请退款金额
                             ).item.props.value = total;
+                            self.reForm.config.find(
+                              item => item.item.label == self.vmI18n.t('form_label.actualRefundAmount') // 实际退款金额
+                            ).item.props.value = total;
                           })
                         }
                         params.row.returnPrice = Number(e.target.value);
@@ -772,7 +775,10 @@ export default {
                         });
                         // self.reForm.config[12].item.props.value = total;
                         self.reForm.config.find(
-                          item => item.item.label == self.vmI18n.t('form_label.refundAmount') // 申请退款金额
+                          item => item.item.label == self.vmI18n.t('form_label.refundAmount') // 退款金额
+                        ).item.props.value = total;
+                        self.reForm.config.find(
+                          item => item.item.label == self.vmI18n.t('form_label.actualRefundAmount') // 实际退款金额
                         ).item.props.value = total;
                       },
                       'on-blur': e => {
@@ -1213,6 +1219,10 @@ export default {
       const data = {};
       data.objId = self.$route.params.customizedModuleId === 'New' || self.$route.query.cid || self.$route.query.oid ? -1 : self.$route.params.customizedModuleId;
       const AfSend = self.getForm();
+      // 新增实际退款金额默认取退款金额 储慧 40788
+      if (data.objId == -1) {
+        AfSend.AMT_RETURN_ACTUAL = AfSend.AMT_RETURN_APPLY
+      }
       if (AfSend.VIP_PHONE && !/^1[3456789]\d{9}$/.test(AfSend.VIP_PHONE)) {
         self.$Message.warning(self.vmI18n.t('modalTips.j0')); // 请输入正确的买家手机号
         return;
@@ -1331,13 +1341,13 @@ export default {
           AfSend[dataConfig[itemLabel]] = item.item.props.value == '手动' ? 1 : 2;
         }
         // 实际退款金额如果没值的话,取明细中的退款金额
-        if (itemLabel == '实际退款金额') {
-          let total = 0;
-          self.tableConfig.data.forEach(item => {
-            total += item.AMT_RETURN || 0;
-          });
-          AfSend[dataConfig[itemLabel]] = item.item.props.value ? item.item.props.value : total;
-        }
+        // if (itemLabel == '实际退款金额') {
+        //   let total = 0;
+        //   self.tableConfig.data.forEach(item => {
+        //     total += item.AMT_RETURN || 0;
+        //   });
+        //   AfSend[dataConfig[itemLabel]] = item.item.props.value ? item.item.props.value : total;
+        // }
       });
       // self.reForm.config.map(item => {
       //   AfSend['BILL_TYPE'] = self.BILL_TYPE; //单据类型
