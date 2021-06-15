@@ -310,9 +310,8 @@ export default {
                 // }, 300);
               },
               'on-blur': e => {
-                console.log(e);
                 this.$nextTick(() => {
-                  console.log(e.target._value, vm);
+                  console.log(e.target._value);
                   const ca = Number(e.target._value);
                   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL);
                   if (ca > relCa) {

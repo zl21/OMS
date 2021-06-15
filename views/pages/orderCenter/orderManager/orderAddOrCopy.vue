@@ -1026,7 +1026,7 @@ export default {
                     props: {
                       value: params.row.PRICE_ACTUAL,
                       autosize: true,
-                      regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
+                      regx: /^\d*\.{0,1}\d{0,2}$/,
                       disabled: params.row.disabled,
                     },
                     on: {
@@ -1053,12 +1053,25 @@ export default {
                           ra = params.row.REAL_AMT;
                           params.row.ADJUST_AMT = this.$OMS2.omsUtils.floatNumber(ra + ad + osa - price * q, 2);
                         } else {
-                          params.row.REAL_AMT = 0;
-                          params.row.ADJUST_AMT = 0;
+                          // params.row.REAL_AMT = 0;
+                          // params.row.ADJUST_AMT = 0;
                         }
                         // params.row.PRICE = params.row.PRICE_ACTUAL; // 零售价 = 成交单价
                         self.jordanTableConfig.data[params.index] = params.row;
                         self.totalNum();
+                      },
+                      'on-blur': e => {
+                        this.$nextTick(() => {
+                          console.log(e.target._value);
+                          const inputVal = Number(e.target._value);
+                          const ra = params.row.PRICE_ACTUAL;
+                          if (!ra && !inputVal) {
+                            params.row.REAL_AMT = 0.00;
+                            params.row.ADJUST_AMT = 0.00;
+                            self.jordanTableConfig.data[params.index] = params.row;
+                            self.totalNum();
+                          }
+                        });
                       },
                     },
                   }),
@@ -1097,8 +1110,8 @@ export default {
                       ra = params.row.REAL_AMT;
                       params.row.ADJUST_AMT = this.$OMS2.omsUtils.floatNumber(ra + ad + osa - price * inputQTY, 2);
                     } else {
-                      params.row.REAL_AMT = 0;
-                      params.row.ADJUST_AMT = 0;
+                      params.row.REAL_AMT = 0.00;
+                      params.row.ADJUST_AMT = 0.00;
                     }
                     self.jordanTableConfig.data[params.index] = params.row;
                     self.totalNum();
@@ -1134,7 +1147,7 @@ export default {
                     props: {
                       value: params.row.REAL_AMT,
                       autosize: true,
-                      regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
+                      regx: /^\d*\.{0,1}\d{0,2}$/,
                       disabled: params.row.disabled,
                     },
 
@@ -1155,11 +1168,24 @@ export default {
                           // 调整金额 = (成交金额 + 订单优惠 + 商品优惠) - (零售价'PRICE_LIST' * 数量)
                           params.row.ADJUST_AMT = this.$OMS2.omsUtils.floatNumber(inputRA + ad + osa - price * q, 2);
                         } else {
-                          params.row.REAL_AMT = 0;
-                          params.row.ADJUST_AMT = 0;
+                          // params.row.REAL_AMT = 0;
+                          // params.row.ADJUST_AMT = 0;
                         }
                         self.jordanTableConfig.data[params.index] = params.row;
                         self.totalNum();
+                      },
+                      'on-blur': e => {
+                        this.$nextTick(() => {
+                          console.log(e.target._value);
+                          const inputVal = Number(e.target._value);
+                          const ra = params.row.REAL_AMT;
+                          if (!ra && !inputVal) {
+                            params.row.REAL_AMT = 0.00;
+                            params.row.ADJUST_AMT = 0.00;
+                            self.jordanTableConfig.data[params.index] = params.row;
+                            self.totalNum();
+                          }
+                        });
                       },
                     },
                   }),
