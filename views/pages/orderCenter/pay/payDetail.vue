@@ -156,14 +156,18 @@ export default {
       return this.$route.params.itemId && this.$route.params.itemId != 'New' ? this.$route.params.itemId : '-1';
     },
     isEdit() {
-      return R3.store.state.customize.REDUNDANT_ORDER_ID;
+      return R3.store.state.customize.REDUNDANT_ORDER_ID; // store.REDUNDANT_ORDER_ID 存的是物流单号
     }
   },
   watch: {
     isEdit(newVal) {
       setTimeout(() => {
         if (newVal == 'zhoulan') return
-        this.initTable(1, 10, newVal ?? true, newVal);
+        if (newVal == 'clear') {
+          this.initTable(1, 10, true, '-1'); // 清空明细
+        } else {
+          this.initTable(1, 10, newVal ? false : true, newVal ? newVal : '-1');
+        }
       }, 10);
     }
   },
@@ -232,8 +236,9 @@ export default {
       // store上取不到刚刚通过defined自定义表单组件设置的值，好像没有触发框架去保存在store上
       const pageInfo = { pageNum: page, pageSize }
       let param = { ...pageInfo }
-      param.expressCode = oriId ? oriId : R3.store.state.customize.COMPENSATE.other.expressCode || '-1';
-      if (param.expressCode) param.mainId = this.ID;
+      param.expressCode = oriId ? oriId : R3.store.state.customize.COMPENSATE.other.expressCode || '';
+      if (!param.expressCode) delete param.expressCode;
+      param.mainId = this.ID;
       const { data: { code, data } } = await this.service.orderCenter.payQueryProList(param).catch(() => {
         this.loading = false;
       });

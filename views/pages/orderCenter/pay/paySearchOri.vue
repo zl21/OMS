@@ -20,7 +20,7 @@
       @on-change="inputChange"
     ></Input>
     <Icon
-      v-if="REDUNDANT_ORDER_ID && ID == '-1'"
+      v-if="REDUNDANT_ORDER_ID && REDUNDANT_ORDER_ID != '-1' && ID == '-1'"
       class="oriCodeclear"
       type="ios-close-circle"
       @click="clear"
@@ -265,7 +265,13 @@ export default {
     },
     clear() {
       this.REDUNDANT_ORDER_ID = '';
-      this.$emit('change', [{ ID: '' }], this);
+      this.$emit('change', [{ ID: '-1', Label: '-1' }], this);
+      // R3.store.commit('customize/REDUNDANT_ORDER_ID', 'zhoulan');
+      // 联动清空子表
+      this.getCurrenData[0] = {};
+      setTimeout(() => {
+        R3.store.commit('customize/REDUNDANT_ORDER_ID', 'clear');
+      }, 10);
     },
     inputenter() { },
     inputblur() { },
