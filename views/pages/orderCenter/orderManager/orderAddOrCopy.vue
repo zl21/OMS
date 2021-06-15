@@ -1046,8 +1046,8 @@ export default {
                           // 输入单价：修改零售价、成交金额、调整金额即可（计算成交金额时先将调整金额置为0
                           // 公式：【零售价 * 数量 - 商品优惠 - 订单优惠 + 调整金额 = 成交金额】
                           // 公式：【PRICE/PRICE_ACTUAL * QTY - 0 - 0 + ADJUST_AMT = REAL_AMT】
-                          // 成交金额 = 零售价 * 数量 - 商品优惠 - 订单优惠 + 调整金额
-                          // 调整金额 = (成交金额 + 订单优惠 + 商品优惠) - (零售价 * 数量)
+                          // 成交金额 = 成交单价 * 数量 - 商品优惠 - 订单优惠 + 调整金额
+                          // 调整金额 = (成交金额 + 订单优惠 + 商品优惠) - (零售价'PRICE_LIST' * 数量)
                           params.row.REAL_AMT = this.$OMS2.omsUtils.floatNumber(inputPA * q - ad - osa + aa, 2);
                           ra = params.row.REAL_AMT;
                           params.row.ADJUST_AMT = this.$OMS2.omsUtils.floatNumber(ra + ad + osa - price * q, 2);
@@ -1144,14 +1144,12 @@ export default {
                         const price = Number(params.row.PRICE_LIST);
                         const q = Number(params.row.QTY || 0);
                         const aa = Number(params.row.ADJUST_AMT || 0);
-                        // let pa = Number(params.row.PRICE_ACTUAL || 0);
                         const ad = Number(params.row.AMT_DISCOUNT || 0);
                         const osa = Number(params.row.ORDER_SPLIT_AMT || 0);
                         if (params.row.QTY && inputRA) {
                           // 单价 = (成交金额 - 调整金额 + 订单优惠 + 商品优惠) / 数量
                           params.row.PRICE_ACTUAL = this.$OMS2.omsUtils.floatNumber((inputRA - aa + ad + osa) / q, 2);
-                          // params.row.PRICE = params.row.PRICE_ACTUAL;
-                          pa = params.row.PRICE_ACTUAL;
+                          // 调整金额 = (成交金额 + 订单优惠 + 商品优惠) - (零售价'PRICE_LIST' * 数量)
                           params.row.ADJUST_AMT = this.$OMS2.omsUtils.floatNumber(inputRA + ad + osa - price * q, 2);
                         } else {
                           params.row.REAL_AMT = 0;
