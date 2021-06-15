@@ -315,6 +315,7 @@
                    :content="item.tips.content" 
                    :theme="item.tips.theme || 'light'"
                    transfer
+                   class="help-circle"
                    :max-width="item.tips.maxWidth || '200'"
                    :placement="item.tips.placement || 'bottom'"><Icon type="ios-help-circle-outline" />
           </Tooltip>
