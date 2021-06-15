@@ -203,3 +203,4 @@
 | v1.1.59 | fkinputPlus模糊搜索失焦处理 |
 | v1.1.60 | importTable成功处理 |
 | v1.1.61 | importTable部分成功部分失败处理 |
+| v1.1.62 | ag表格初始表头排列取消 |
