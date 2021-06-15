@@ -108,3 +108,4 @@
 | v1.0.43 |  add btn.modify_sellerNotes/btn.sortForm/btn.order_detailed/   |
 | v1.0.44 |  add modalTips.ga/gb   |
 | v1.0.45 |  index.js   |
+| v1.0.46 |  update modalTips.ga/gb |
