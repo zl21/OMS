@@ -115,7 +115,7 @@ export const OC_B_ORDER = {
   ST_C_EXPRESS_AREA: { // 物流区域设置日志
     table: 'ST_C_EXPRESS_AREA',
     objid: 24639, // 表id
-    refcolid: 1700810384,
+    refcolid: 169311,
     searchdata: {
       column_include_uicontroller: true,
       orderby: [{ column: 'ST_C_EXPRESS_AREA.ID', asc: false }],
@@ -127,7 +127,7 @@ export const OC_B_ORDER = {
   ST_C_WAREHOUSE_LOGISTICS: { // 仓库物流优先级方案
     table: 'ST_C_WAREHOUSE_LOGISTICS',
     objid: 1111113, // 表id
-    refcolid: 1700810384,
+    refcolid: 180887,
     searchdata: {
       column_include_uicontroller: true,
       orderby: [{ column: 'ST_C_WAREHOUSE_LOGISTICS.ID', asc: false }],
@@ -139,7 +139,7 @@ export const OC_B_ORDER = {
   ST_C_SEND_RULE: { // 发货单派单规则
     table: 'ST_C_SEND_RULE',
     objid: 24606, // 表id
-    refcolid: 1700810384,
+    refcolid: 168581,
     searchdata: {
       column_include_uicontroller: true,
       orderby: [{ column: 'ST_C_SEND_RULE.ID', asc: false }],
