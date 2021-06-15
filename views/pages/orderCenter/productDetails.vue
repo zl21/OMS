@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-06-11 16:33:48
+ * @LastEditTime: 2021-06-15 10:36:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -111,8 +111,9 @@ export default {
                 },
                 on: {
                   'on-change': e => {
-                      console.log(e,params);
-                      params.row.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.REAL_AMT), 2);
+                      console.log(e,params,params.row.PRICE_ACTUAL);
+                      let num =  this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.PRICE_ACTUAL), 2)
+                      params.row.AMT_REFUND = isNaN(num) ? '0.00' : num;
                       this.tableConfig.data[params.index] = params.row;
                       R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
                   }
