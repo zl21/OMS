@@ -138,7 +138,7 @@ export default {
           CP_C_SHOP_ID: '', // 店铺
           EXCHANGE_ADDR: '', // 换货地址
           EXCHANGE_ADDR_ID: '',
-          ISACTIVE: false // 启用状态
+          // ISACTIVE: false // 启用状态
         },
         ruleValidate: {
           ECODE: [{ required: true, message: ' ' }],
@@ -324,8 +324,8 @@ export default {
         this.queryForm(this.formConfig1, 'CP_C_SHOP_ID').itemdata.pid = data.CP_C_SHOP_ID
         this.queryForm(this.formConfig1, 'CP_C_SHOP_ID').itemdata.valuedata = data.CP_C_SHOP_TITLE
         this.queryForm(this.formConfig1, 'ECODE').style = 'input'
-        this.queryForm(this.formConfig1, 'ISACTIVE').style = 'switch'
-        this.formConfig1.formValue.ISACTIVE = this.isEnable
+        // this.queryForm(this.formConfig1, 'ISACTIVE').style = 'switch'
+        // this.formConfig1.formValue.ISACTIVE = this.isEnable
         this.formConfig2.formValue.IS_AUTO_APPROVE = !!data.IS_AUTO_APPROVE
         this.formConfig2.formValue.OOS_AUTO_REJECT = !!data.OOS_AUTO_REJECT
         this.formConfig2.formValue.DEVIATION_AUTO_REJECT = !!data.DEVIATION_AUTO_REJECT
@@ -370,9 +370,9 @@ export default {
       }
       Object.keys(params).forEach(i => {
         switch (i) {
-          case 'ISACTIVE':
-            params[i] = params[i] ? 'Y' : 'N'
-            break;
+          // case 'ISACTIVE':
+          //   params[i] = params[i] ? 'Y' : 'N'
+          //   break;
           case 'IS_AUTO_APPROVE':
           case 'DEVIATION_AUTO_REJECT':
           case 'OOS_AUTO_REJECT':
@@ -420,12 +420,11 @@ export default {
     // 换货地址
     async tamallExchangeAddrs({ EXCHANGE_ADDR_ID, EXCHANGE_ADDR } = {}) {
       const { CP_C_SHOP_ID } = this.formConfig1.formValue
-      const { data: { code, data, message } } = await this.service.strategyPlatform.tamallExchangeAddrs({ CP_C_SHOP_ID })
-      let result = data.length ? data.map(i => ({ label: i.ENAME, value: i.ID })) : []
+      const { data: { code, data } } = await this.service.strategyPlatform.tamallExchangeAddrs({ CP_C_SHOP_ID })
+      let result = data && data.length ? data.map(i => ({ label: i.ENAME, value: i.ID })) : []
       this.queryForm(this.formConfig1, 'EXCHANGE_ADDR_ID').options = result
       this.formConfig1.formValue.EXCHANGE_ADDR_ID = EXCHANGE_ADDR_ID || ''
       this.formConfig1.formValue.EXCHANGE_ADDR = EXCHANGE_ADDR || ''
-      code != 0 && this.$Message.error(message)
     },
     // 字段是否必填
     setRequired(fieldName) {
