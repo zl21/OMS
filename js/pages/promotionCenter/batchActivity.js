@@ -2,17 +2,42 @@ import BasicInfo from 'allpages/promotionCenter/details/basicInfo';
 import BatchInfoSet from 'allpages/promotionCenter/details/batchInfoSet';
 import stepsBars from 'professionalComponents/steps';
 import groups from '@/assets/js/promotion/groups';
+import businessButton from 'professionalComponents/businessButton';
 
 export default {
   components: {
     BasicInfo,
     BatchInfoSet,
     stepsBars,
+    businessButton
   },
   data() {
     return {
       vmI18n:$i18n,
       objid: '-1', // 新增-1 保存的正整数
+      btnConfig: {
+        typeAll: 'default',
+        buttons: [
+          {
+            text: $i18n.t('btn.back'), // 返回
+            btnclick: () => {
+              this.close();
+            }
+          },
+          {
+            text: $i18n.t('btn.saveDraft'), // 保存草稿
+            btnclick: () => {
+              this.saveDraft();
+            }
+          },
+          {
+            text: $i18n.t('btn.publish'), // 发布
+            btnclick: () => {
+              this.publish();
+            }
+          },
+        ]
+      },
       basic_info: {
         // 基础信息设置
         activity_name: '', // 活动名称【必填】
@@ -124,6 +149,19 @@ export default {
     }
   },
   methods: {
+    initBtn(){
+      let self = this;
+      if(self.objid > 0 && (self.basic_info.status === '2' || self.basic_info.status === '3')){
+        let arr = [];
+        arr = self.btnConfig.buttons.filter(item=>item.text != '保存草稿');
+        self.btnConfig.buttons = arr;
+      };
+      if(self.objid < 0 || self.basic_info.status !== '1'){
+        let arr = [];
+        arr = self.btnConfig.buttons.filter(item=>item.text != '发布');
+        self.btnConfig.buttons = arr;
+      }
+    },
     /**
      * 查询促销的详情
      */
@@ -141,6 +179,7 @@ export default {
         this.basic_info = data.basic_info || {};
         this.batch_infos_setting = data.batch_infos_setting || {};
       }
+      this.initBtn();
     },
     /**
      * 新增 初始化数据
@@ -539,6 +578,7 @@ export default {
       // this.initData();
       const copy = this.$route.query.copy;
       if (copy && copy > 1) this.getInitData(copy);
+      this.initBtn();
     }
   }
 };
