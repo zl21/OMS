@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-19 17:55:24
- * @LastEditTime: 2021-05-21 14:27:40
+ * @LastEditTime: 2021-06-15 13:15:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/commodityCenter/spuRecord.vue
@@ -27,10 +27,10 @@
               @on-Change="uploadFileChangeSuccess"
             />
           </div>
-          <div slot="content"  class="customized_Info_form">
+          <div slot="content" class="customized_Info_form">
             <businessForm :form-config="formConfig" />
           </div>
-          <div class="clear"></div>
+          <div slot="content" class="clear"></div>
         </Panel>
         <Panel name="attr">
           自定义属性

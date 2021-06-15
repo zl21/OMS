@@ -91,7 +91,7 @@
               </template>
             </businessForm>
           </div>
-          <div class="clear"></div>
+          <div slot="content" class="clear"></div>
         </Panel>
         <Panel name="panel_cusAttr">
           自定义属性

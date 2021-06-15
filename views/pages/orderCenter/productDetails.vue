@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-06-15 10:36:19
+ * @LastEditTime: 2021-06-15 15:57:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -78,10 +78,10 @@ export default {
             key: 'PS_C_PRO_ENAME',
             title: 'SKU名称'
           },{
-            key: 'ORIG_ORDER_ID',
+            key: 'PS_C_PRO_ECODE',
             title: 'SPU编码'
           },{
-            key: 'ORIG_ORDER_ID',
+            key: 'PS_C_PRO_ENAME',
             title: 'SPU名称'
           },{
             key: 'PS_C_SPEC1_ENAME',
@@ -104,16 +104,16 @@ export default {
             render:(h,params)=>{
              return h('InputNumber', {
                 props: {
-                  value: 1,
+                  value: params.row.QTY_REFUND,
                   autosize: true,
                   min:1,
                   regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
                 },
                 on: {
                   'on-change': e => {
-                      console.log(e,params,params.row.PRICE_ACTUAL);
                       let num =  this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.PRICE_ACTUAL), 2)
                       params.row.AMT_REFUND = isNaN(num) ? '0.00' : num;
+                      params.row.QTY_REFUND = e;
                       this.tableConfig.data[params.index] = params.row;
                       R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
                   }
@@ -132,14 +132,16 @@ export default {
             render:(h,params)=>{
              return h('InputNumber', {
                 props: {
-                  value: 1,
+                  value: params.row.AMT_ACTUAL_REFUND,
                   autosize: true,
                   min:1,
                   regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
                 },
                 on: {
                   'on-change': e => {
-                    console.log(e,params);
+                     params.row.AMT_ACTUAL_REFUND = e;
+                     this.tableConfig.data[params.index] = params.row;
+                    R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
                   }
                 }
               });psave
@@ -326,6 +328,7 @@ export default {
         if(arr.every(y => y.ID !== x.ID)){
           // 不存在
           x.OC_B_ORDER_ITEM_ID = x.ID
+          x.ID = '-1'
         }
       })
       this.tableConfig.data = this.tableConfig.data.concat(this.addDetailsConfig.selectData);
