@@ -43,7 +43,7 @@ export default {
   },
   ST_C_WAREHOUSE_LOGISTICS_SET: {
     component: () => import('allpages/strategyPlatform/warehouseLogisticsAddOrEdit'),
-    labelName: '仓库物流规则编辑'
+    labelName: '仓库物流设置编辑'
   },
   ST_C_PRICE: {
     component: () => import('allpages/strategyPlatform/commodityPriceAddOrEdit'),

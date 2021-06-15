@@ -44,26 +44,27 @@
             },
             {
               type: '', // 按钮类型
-              text: '立即下载', // 按钮文本
+              text: '确定', // 按钮文本
               icon: '', // 按钮图标
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制
               btnclick: async () => {
                 const self = this;
+                const formValue = self.downLoadVipTimeOrderFormConfig.formValue;
                 if (!self.downLoadVipTimeOrderFormConfig.formData[0].itemdata.pid) {
-                  self.$Message.warning('请选择需要下载的店铺');
+                  self.$Message.warning('请选择需要下载的支付宝账户名称');
                   return;
                 }
-                if (!self.downLoadVipTimeOrderFormConfig.formValue.query_date) {
-                  self.$Message.warning('请选择需要下载的查询时间');
+                if (!formValue.query_date) {
+                  self.$Message.warning('请选择需要下载的账单时间');
                   return;
                 }
-                let startTime = self.downLoadVipTimeOrderFormConfig.formValue.query_date;
+                let startTime = formValue.query_date;
                 startTime = dateUtil.getFormatDate(startTime, 'yyyy-MM-dd');
                 const param = {
                   accountId: self.downLoadVipTimeOrderFormConfig.formData[0].itemdata.pid, // 店铺id 必传
                   start_time: startTime,
-                  isDate: self.downLoadVipTimeOrderFormConfig.formValue.isDate,
+                  isDate: formValue.isDate,
                 };
                 const formdata = new FormData();
                 formdata.append('param', JSON.stringify(param));
@@ -104,7 +105,7 @@
                 isnotnull: true, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: '账户名称', // input前面显示的lable值
+                name: '支付宝账户名称', // input前面显示的lable值
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'AC_F_ALIPAY_ACCOUNT_MANAGEMENT', // 对应的表
                 reftableid: 249230505, // 对应的表ID
