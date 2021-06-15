@@ -156,14 +156,18 @@ export default {
       return this.$route.params.itemId && this.$route.params.itemId != 'New' ? this.$route.params.itemId : '-1';
     },
     isEdit() {
-      return R3.store.state.customize.REDUNDANT_ORDER_ID;
+      return R3.store.state.customize.REDUNDANT_ORDER_ID; // store.REDUNDANT_ORDER_ID 存的是物流单号
     }
   },
   watch: {
     isEdit(newVal) {
       setTimeout(() => {
         if (newVal == 'zhoulan') return
-        this.initTable(1, 10, newVal ?? true, newVal);
+        if (newVal == 'clear') {
+          this.initTable(1, 10, true, '-1'); // 清空明细
+        } else {
+          this.initTable(1, 10, newVal ? false : true, newVal ? newVal : '-1');
+        }
       }, 10);
     }
   },
