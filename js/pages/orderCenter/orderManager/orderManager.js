@@ -336,7 +336,53 @@
                 self.$children.find((item) => item.name === 'OC_ORDER_ADD_LABEL').openConfirm();
               }, 100);
             },
-          }
+          },
+          {
+            webname: 'orderExport', //导出
+            btnclick:()=>{
+              const self = this;
+              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              const ids = self.selection.map(item=>item.ID);
+              if(self.selection.length){
+                console.log('导出');
+                self.exportDate(self.tablename , ids)
+              }else {
+                this.$Modal.warning({
+                  title:'警告',
+                  content:'该操作为全量导出,导出数据较大,建议在服务器空闲时候导出,如需继续,请点击确定按钮!',
+                  showCancel:true,
+                  mask:true,
+                  onOk:()=>{
+                    console.log('全量导出')
+                    self.exportDate(self.tablename , ids)
+                  }
+                })
+              }
+            }
+          },
+          {
+            webname: 'returnOrderExport', //导出
+            btnclick:()=>{
+              const self = this;
+              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              const ids = self.selection.map(item=>item.ID);
+              if(self.selection.length){
+                console.log('导出');
+                self.exportDate(self.tablename , ids)
+              }else {
+                this.$Modal.warning({
+                  title:'警告',
+                  content:'该操作为全量导出,导出数据较大,建议在服务器空闲时候导出,如需继续,请点击确定按钮!',
+                  showCancel:true,
+                  mask:true,
+                  onOk:()=>{
+                    console.log('全量导出')
+                    self.exportDate(self.tablename , ids)
+                  }
+                })
+              }
+            }
+          },
         ],
         dropDownList: [],
         btnConfig: {
@@ -937,6 +983,38 @@
         const self = this;
         const formData = self.formConfig.formData;
         return formData.filter(item=>item.colname == colname)[0].style;
+      },
+      /**
+       * 该方法用于数据导出
+       * @param {String} tablename 导出表名
+       * @param {Array} ids 列表选中数据
+       */
+      exportDate(tablename , ids){
+        let self = this;
+        let obj = {};
+        if(ids.length){
+          obj = {
+            IDS:ids
+          }
+        }else {
+          obj = self.queryData();
+        }
+        obj.TABLE = tablename;
+        console.log(obj);
+        self.service.orderCenter.orderExport(obj).then(res=>{
+          console.log(res);
+          if(res.data.code == 0){
+            self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0)
+            let a = document.createElement("a");
+            a.download = tablename + ".xls";
+            a.href = res.data.data;
+            $("body").append(a); // 修复firefox中无法触发click
+            a.click();
+            $(a).remove();
+          }else {
+            self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0)
+          }
+        })
       }
     },
   };

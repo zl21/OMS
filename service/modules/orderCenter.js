@@ -395,4 +395,5 @@ export default {
     saveLable:(params) => $network.post('/p/cs/oc/oms/v1/saveLable', params), //标签管理
     addOrderLable:(params) => $network.post('/p/cs/oc/oms/v1/addOrderLable', params), //添加标记
     cancelOrderLable:(params) => $network.post('/p/cs/oc/oms/v1/cancelOrderLable' , params),  //取消标记
+    orderExport:(params) => $network.post('/p/cs/oc/oms/v1/export' , params), //订单列表里的导入功能
 }
