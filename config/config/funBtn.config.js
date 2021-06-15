@@ -530,6 +530,7 @@ class BtnConfig {
       case 'returnGoodsModify':
       case 'returnGoodsCopy':
       case 'virtualWarehouseLibraryWarn':
+      case 'wmsWithdraw':
         funName = `${type}Handler`
         tips = 'l0'
         paramsType = 1
@@ -540,12 +541,6 @@ class BtnConfig {
         tips = 'ga'
         paramsType = 7
         break
-      case 'wmsWithdraw':
-        funName = `${type}Handler`
-        tips = 'gb'
-        paramsType = 7
-        break
-            
     }
     const self = BtnConfig.target
     BtnConfig.btnKey = type
@@ -1777,64 +1772,78 @@ class BtnConfig {
     self.modal = true //最新筛选排序组件
   }
 
-  // 手工通知WMS新建
+  // 手工 重传WMS
   wmsCreateHandler(self, data) {
-    this.wmsHandler(self, data, 'wmsCreateHandler')
-  }
-  
-  // 手工通知WMS撤回
-  wmsWithdrawHandler(self, data) {
-    this.wmsHandler(self, data, 'wmsWithdrawHandler')
-  }
-
-  wmsHandler(self, data, btnType) {
     let ids = Array.isArray(data) ? data.map(i => i.ID) : data
     let result = ids.length > 1 ? { IDS: ids } : { ID: ids[0] }
-    let serviceUrl = btnType == 'wmsCreateHandler' ? 'createReturnOrderToWms' : 'cancelReturnOrderFromWms'
-    self.service.orderCenter[serviceUrl](result).then((res) => {
-      if (res.data.code === 0) {
-        commonUtils.msgTips(self, 'success', res.data.message, 2)
-        self.selection = []
-        self.query()
-      } else if (res.data.data) {
-        let tabData = res.data.data.map((row, index) => {
-          row.INDEX = ++index
-          row.BILL_NO = row.billNo
-          row.RESULT_MSG = row.message
-          return row
-        })
-        commonUtils.tipShow(
-          'confirm',
-          self,
-          res,
-          res.data.message,
-          function (h) {
-            return h('Table', {
-              props: {
-                columns: [
-                  {
-                    title: '序号',
-                    key: 'INDEX',
-                  },
-                  {
-                    title: '单据编号',
-                    key: 'BILL_NO',
-                  },
-                  {
-                    title: '失败原因',
-                    key: 'RESULT_MSG',
-                  },
-                ],
-                data: tabData,
-              },
+    commonUtils.modalShow(
+      self,
+      'gb',
+      'orderCenter.createReturnOrderToWms',
+      result,
+      'all',
+      function (res) {
+        if (res.data.code === 0) {
+          self.$Message.success(res.data.message)
+          self.selection = []
+          self.query()
+        } else {
+          if (res.data.data) {
+            let tabData = res.data.data.map((row, index) => {
+              row.INDEX = ++index
+              row.BILL_NO = row.billNo
+              row.RESULT_MSG = row.message
+              return row
             })
+            commonUtils.tipShow(
+              'confirm',
+              self,
+              res,
+              res.data.message,
+              function (h) {
+                return h('Table', {
+                  props: {
+                    columns: [
+                      {
+                        title: '序号',
+                        key: 'INDEX',
+                      },
+                      {
+                        title: '单据编号',
+                        key: 'BILL_NO',
+                      },
+                      {
+                        title: '失败原因',
+                        key: 'RESULT_MSG',
+                      },
+                    ],
+                    data: tabData,
+                  },
+                })
+              }
+            )
           }
-        )
+        }
+      });
+  }
+  
+  // 手工 WMS撤回重做
+  wmsWithdrawHandler(self, id) {
+    if (id.length > 1) {
+      commonUtils.msgTips(self, 'warning', '只支持单个退货单做WMS撤回重做操作！', 2)
+      return
+    }
+    self.service.orderCenter.cancelReturnOrderFromWms({ ID: id[0] }).then((res) => {
+      if (res.data.code === 0) {
+        self.$store.commit('global/tabOpen', {
+          type: 'V',
+          tableName: 'OC_B_RETURN_ORDER_VIRTUAL_TABLE',
+          tableId: 10728,
+          id: id[0],
+        })
       }
     })
   }
-  
-  
 }
 
 export default BtnConfig

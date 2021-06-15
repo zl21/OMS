@@ -733,6 +733,7 @@ export default {
       }
     }, // 左侧树点击
     getTreeData(resolve, reject) {
+   
       functionPowerActions().getMenuTree({
         success: (res) => {
           if (res.data.code === 0) {

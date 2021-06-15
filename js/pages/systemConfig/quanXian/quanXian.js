@@ -89,9 +89,9 @@ export default {
     // const { customizedModuleName, customizedModuleId } = this.$route.params;
     this.permissionType = "warehouse"
     //this.$route.query.type;
-
+    alert("ok")
     // 获取角色
-    this.getRoleData();
+   //this.getRoleData();
       this.getSearchForm();
     this.buttonConfig.buttons = this.permissionType === 'brand' || this.permissionType === 'sensitivecol'
     ? this.normal.buttons.filter(item => item.text != $i18n.t('btn.copyPermissions'))
@@ -120,6 +120,7 @@ export default {
         key: 'IS_WRITE'
       }
     ];
+   
     const btnSearchObj = {
       text: $i18n.t('btn.search'),
       icon: '',
@@ -174,6 +175,7 @@ export default {
 
     // 获取角色id
     async getRoleData() {
+      console.log("-------------");
       //const res = await this.service.common.groupTreeload({});
       const res = await  network.post(
         '/mock/734/p/cs/groupTreeload',
