@@ -36,6 +36,7 @@
 import businessButton from 'professionalComponents/businessButton';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import payDetailAdd from './payDetailAdd.vue';
+const _ = require("lodash");
 
 export default {
   name: 'payDetail',
@@ -284,34 +285,53 @@ export default {
             props: {
               value: params.row.COMPENSATE_AMT,
               autosize: true,
-              regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
+              regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
+              // max: Number(this.$OMS2.omsUtils.floatNumber(params.row.COMPENSATE_QTY * params.row.PRICE_ACTUAL || 0, 2)),
+              // min: 0,
+              // step: 0.01,
+              // formatter: value => `¥ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ','),
+              // parser: value => value.replace(/$s?|(,*)/g, ''),
             },
             on: {
               'on-change': e => {
-                setTimeout(() => {
-                  const ca = Number(e.target.value);
-                  const relCa = this.$OMS2.omsUtils.floatNumber(Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL), 2);
+                // setTimeout(() => {
+                  // this.$nextTick(()=>{
+                  //   const ca = Number(e.target.value);
+                  //   // const ca = Number(e);
+                  //   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL || 0);
+                  //   if (ca > relCa) {
+                  //     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(relCa, 2);
+                  //   } else {
+                  //     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
+                  //   }
+                  //   this.tableConfig.data[params.index] = JSON.parse(JSON.stringify(params.row));
+                  //   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
+                  // })
+                // }, 300);
+              },
+              'on-blur': e => {
+                console.log(e);
+                this.$nextTick(() => {
+                  console.log(e.target._value, vm);
+                  const ca = Number(e.target._value);
+                  const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL);
                   if (ca > relCa) {
-                    params.row.COMPENSATE_AMT = relCa;
+                    params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(relCa, 2);
                   } else {
                     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
                   }
                   this.tableConfig.data[params.index] = params.row;
                   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
-                }, 300);
-              },
-              'on-blur': e => {
-                console.log(e);
-                // 这个失焦到底走不走！！！
-                const ca = Number(params.row.COMPENSATE_AMT);
-                const relCa = this.$OMS2.omsUtils.floatNumber(Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL), 2);
-                if (ca > relCa) {
-                  params.row.COMPENSATE_AMT = relCa;
-                } else {
-                  params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
-                }
-                this.tableConfig.data[params.index] = params.row;
-                R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
+                });
+                // const ca = Number(params.row.COMPENSATE_AMT);
+                // const relCa = this.$OMS2.omsUtils.floatNumber(Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL), 2);
+                // if (ca > relCa) {
+                //   params.row.COMPENSATE_AMT = relCa;
+                // } else {
+                //   params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
+                // }
+                // this.tableConfig.data[params.index] = params.row;
+                // R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
               },
             }
           });
