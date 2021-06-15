@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-06-11 11:02:58
+ * @LastEditTime: 2021-06-15 18:45:55
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -260,7 +260,13 @@ export default {
 
   },
   mounted() {
-    
+    if(!(this.$route.params.itemId == 'New')){
+        const ID = this.$route.params.itemId;
+        const key = `V.OC_B_REFUND_ORDER_EXTRA.10825.${ID}`;
+      setTimeout(() => {
+        this.BILL_NO = this.$store.state[key].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata
+      }, 100);
+    }
   },
   methods: {
 
