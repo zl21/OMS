@@ -414,7 +414,7 @@ export default {
   created() {
 
     this.refresh();
-    this.getButtonData();
+   // this.getButtonData();
 
 
   },
@@ -779,6 +779,8 @@ export default {
           }
         }
       });
+
+      
 
     }, // 获取菜单数据
     restructureMenuTreeData(data, first) {
