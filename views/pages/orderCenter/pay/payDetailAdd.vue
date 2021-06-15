@@ -205,9 +205,9 @@ export default {
       }
       const pageInfo = { pageNum: page, pageSize }
       let param = { ...fixedcolumns, ...pageInfo }
-      param.expressCode = R3.store.state.customize.COMPENSATE.other.expressCode || '-1';
+      param.expressCode = R3.store.state.customize.COMPENSATE.other.expressCode || '';
       console.log('R3.store.state.customize.COMPENSATE.other.expressCode::', param.expressCode);
-      // 详情时：expressCode、mainId必传
+      // 详情时：expressCode、mainId必传（没有原单时除外
       if (this.ID != '-1') {
         let storeOther = JSON.parse(JSON.stringify(R3.store.state.customize.COMPENSATE.other))
         param.expressCode = storeOther.exCode || 'no expressCode !'
@@ -218,8 +218,14 @@ export default {
       } else {
         param.isInit = false;
       }
+      // 没有原单时,expressCode不传
+      if (!isInit && !param.expressCode) {
+        delete param.expressCode
+      }
       param.mainId = this.ID;
-      const { data: { code, data } } = await this.service.orderCenter.payQueryProList(param);
+      const { data: { code, data } } = await this.service.orderCenter.payQueryProList(param).catch(e => {
+        this.loading = false;
+      });
       this.tableConfig.columns = data.columns;
       this.tableConfig.data = isInit ? [] : data.data;
       this.tableConfig.total = isInit ? 0 : data.pageInfo.total;

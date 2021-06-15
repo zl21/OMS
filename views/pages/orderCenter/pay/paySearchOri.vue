@@ -265,7 +265,8 @@ export default {
     },
     clear() {
       this.REDUNDANT_ORDER_ID = '';
-      this.$emit('change', [{ ID: '' }], this);
+      this.$emit('change', [{ ID: '-1', Label: '-1' }], this);
+      R3.store.commit('customize/REDUNDANT_ORDER_ID', 'zhoulan');
     },
     inputenter() { },
     inputblur() { },

@@ -232,8 +232,9 @@ export default {
       // store上取不到刚刚通过defined自定义表单组件设置的值，好像没有触发框架去保存在store上
       const pageInfo = { pageNum: page, pageSize }
       let param = { ...pageInfo }
-      param.expressCode = oriId ? oriId : R3.store.state.customize.COMPENSATE.other.expressCode || '-1';
-      if (param.expressCode) param.mainId = this.ID;
+      param.expressCode = oriId ? oriId : R3.store.state.customize.COMPENSATE.other.expressCode || '';
+      if (!param.expressCode) delete param.expressCode;
+      param.mainId = this.ID;
       const { data: { code, data } } = await this.service.orderCenter.payQueryProList(param).catch(() => {
         this.loading = false;
       });
