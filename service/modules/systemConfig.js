@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-06-07 20:40:40
+ * @LastEditTime: 2021-06-15 15:57:01
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/service/modules/systemConfig.js
+ */
 // 系统配置
 import R3 from '@syman/burgeon-r3';
 
@@ -13,6 +21,9 @@ export default {
    * /p/cs/chrgroupscompany/query  公司权限
    * /p/cs/cusergroupquery  角色权限
    * */
+   groupTreeload: params => $network.post('/p/cs/groupTreeload', params),
+  // /p/cs/usertreequery
+
   chrstoregroupquery: (url, params) => network.post(url, params),
   // 请求tab列表页
   userstreeload: params => network.post('/p/cs/userstreeload', params),

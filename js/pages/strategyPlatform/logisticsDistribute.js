@@ -425,6 +425,11 @@ export default {
   mounted() {
     let { customizedModuleId, customizedModuleName } = this.$route.params;
     if (customizedModuleId == 'New') {
+      const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+      const data = { label: '物流派送范围新增', name:keepAliveModuleName}; //当前界面模块名称 
+      this.$store.commit('global/modifycurrentLabel' , data)
+
+
       this.id = '-1';
       this.tableshow = false;
       this.labelList = [ {
@@ -432,6 +437,11 @@ export default {
         value: 'jiben'
       },]
     } else {
+
+      const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+      const data = { label: '物流派送范围编辑', name:keepAliveModuleName}; //当前界面模块名称 
+      this.$store.commit('global/modifycurrentLabel' , data)
+
       this.tableshow = true;
       this.id = customizedModuleId;
       this.FormConfig.formData[0].itemdata.readonly = true;

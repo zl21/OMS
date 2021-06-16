@@ -295,6 +295,7 @@
 
 const functionPowerActions = () => require(`burgeonConfig/config/functionPower.actions.js`);
 const store = vm.$store
+import service from '@/service/index';
 
 export default {
   data() {
@@ -791,6 +792,9 @@ export default {
           }
         }
       });
+
+
+    
 
     }, // 获取菜单数据
     restructureMenuTreeData(data, first) {
