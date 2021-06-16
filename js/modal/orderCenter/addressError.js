@@ -15,13 +15,13 @@
         let type;
         switch (this.$parent.title) {
         case '售价异常审批':
-          type = 7; 
+          type = 5; 
           break;
         case '异常商品修改':
-          type = 9;
+          type = 3;
           break;
         case '异常地址匹配':
-          type = 1;
+          type = 12;
           break;
         }
         return type;
@@ -67,7 +67,7 @@
               key: 'CP_C_REGION_PROVINCE_ENAME',
               title: '省',
               render: (h, params) => {
-                if (params.row.EXCEPTION_TYPE == 1) {
+                if (params.row.EXCEPTION_TYPE == 12) {
                   return h('div', {
                     style: {
                       width: '150px'
@@ -137,7 +137,7 @@
               key: 'CP_C_REGION_CITY_ENAME',
               title: '市',
               render: (h, params) => {
-                if (params.row.EXCEPTION_TYPE == 3) {
+                if (params.row.EXCEPTION_TYPE == 22) {
                   return h('div', {
                     style: {
                       width: '150px'
@@ -208,7 +208,7 @@
             //   key: 'CP_C_REGION_AREA_ENAME',
             //   title: '区',
             //   render: (h, params) => {
-            //     if (params.row.EXCEPTION_TYPE == 5) {
+            //     if (params.row.EXCEPTION_TYPE == 32) {
             //       return h('div', {
             //         style: {
             //           width: '150px'

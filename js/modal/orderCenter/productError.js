@@ -14,13 +14,13 @@ import businessActionTable from 'professionalComponents/businessActionTable';
         let type;
         switch (this.$parent.title) {
         case '售价异常审批':
-          type = 7; 
+          type = 5; 
           break;
         case '异常商品修改':
-          type = 9;
+          type = 3;
           break;
         case '异常地址匹配':
-          type = 1;
+          type = 12;
           break;
         }
         return type;
