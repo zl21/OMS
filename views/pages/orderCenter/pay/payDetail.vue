@@ -254,12 +254,13 @@ export default {
     renderHandle(arr) {
       let obj = {
         COMPENSATE_QTY: (h, params) => {
+          const self = this;
           // 赔付数量
           return h('InputNumber', {
             props: {
               value: Number(params.row.COMPENSATE_QTY || 0),
               regx: /^[1-9]\d*$/,
-              max: Number(params.row.QTY || 0),
+              max: (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? Number(params.row.QTY || 0) : Infinity,
               min: 0,
               editable: true,
             },
@@ -315,13 +316,8 @@ export default {
                   console.log(e.target._value);
                   const ca = Number(e.target._value);
                   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL);
-                  if (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) {
-                    // 关联了原单
-                    if (ca > relCa) {
-                      params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(relCa, 2);
-                    } else {
-                      params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
-                    }
+                  if (ca > relCa) {
+                    params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(relCa, 2);
                   } else {
                     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
                   }
