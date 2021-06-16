@@ -479,7 +479,7 @@ export default {
         formValue2.TIME = [data.BEGIN_TIME, data.END_TIME]
         formValue2.DAY_TYPE = data.DAY_TYPE;
         formValue2.ORDER_FLAG = data.ORDER_FLAG ? true : false;
-        formValue3.HOLD_ORDER_REASON = data.HOLD_ORDER_REASON ? 1 : 2;
+        formValue3.HOLD_ORDER_REASON = data.HOLD_ORDER_REASON == 1 ? 1 : 2;
         formValue3.IS_AUTO_RELEASE = data.IS_AUTO_RELEASE ? true : false;
         if (data.IS_AUTO_RELEASE) {
           this.formConfig3.formData[2].style = 'select';
@@ -522,6 +522,7 @@ export default {
           requriredArr.push('RELEASE_TIME');
           labelArr.push('释放指定时间')
         } else if (this.formConfig3.formValue.RELEASE_TIME_TYPE === 2) {
+          console.log(requriredArr,requriredArr.includes('RELEASE_TIME'));
           if (!this.formConfig3.formValue.RELEASE_DAY_TYPE || !this.formConfig3.formValue.FIXED_DURATION || !this.formConfig3.formValue.TIME_UNIT) {
             self.$Message.warning('固定时长类型,固定时长及单位不能为空,请填写！');
             return;
