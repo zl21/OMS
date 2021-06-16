@@ -1,16 +1,17 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-08 14:29:58
- * @LastEditTime: 2021-06-09 17:25:12
+ * @LastEditTime: 2021-06-16 14:18:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/modal/orderCenter/addFlag.vue
 -->
 <template>
-  <div class="OC_ORDER_ADD_LABEL">
+  <div class="OC_ORDER_ADD_LABEL customized-modal">
     <div class="tbody">
       <CheckboxGroup v-model="social">
         <Checkbox
+          style="margin:8px"
           v-for="(item, index) in flagList"
           :key="index"
           :label="item.ID.val"
@@ -21,13 +22,13 @@
       <Icon type="ios-settings" v-if="componentData.title == '添加标记'" @click="setting" style="fontsize: 20px" />
     </div>
     <div class="footer">
-      <businessButton :btn-config="btnConfig"></businessButton>
+      <businessButton :btn-config="btnConfig" class="modalBth modal-footer"></businessButton>
     </div>
     <Modal v-model="modal" title="标记管理" footer-hide :mask="true" @on-ok="asyncOK">
-      <div class="modalModule" style="max-height:350px;overflow:scroll">
-        <Button @click="addList" style="marginBottom:5px">添加</Button>
-        <Table :columns="table.columns" :data="table.data"></Table>
-        <businessButton :btn-config="modalBtnConfig"></businessButton>
+      <div class="modalModule customized-modal">
+        <businessButton :btn-config="modalBtnConfigAdd"></businessButton>
+        <Table :columns="table.columns" :data="table.data" style="max-height:300px;overflow:scroll"></Table>
+        <businessButton :btn-config="modalBtnConfig" class="modalBth modal-footer"></businessButton>
       </div>
     </Modal>
   </div>
@@ -83,6 +84,18 @@ export default {
             text: $i18n.t('common.determine'), // 确定
             btnclick: () => {
               this.asyncOK()
+            }
+          },
+        ]
+      },
+      modalBtnConfigAdd:{
+        typeAll: 'default',
+        btnsite: 'left',
+        buttons: [
+          {
+            text: '添加', // 添加
+            btnclick: () => {
+              this.addList();
             }
           },
         ]
@@ -342,8 +355,12 @@ export default {
   .tbody {
     display: flex;
     justify-content: space-between;
-    height: 200px;
     padding: 5px;
+  }
+  .modalModule {
+    .customBtn {
+      font-size: 12px;height: 32px;line-height: 30px;padding: 0 12px;border-radius: 5px;color: #292f43;border-color: #dbdde8;background-color: #fff;
+    }
   }
 }
 </style>
