@@ -33,7 +33,7 @@
               />
               <div class="form_item">
                 <!-- 时间范围 -->
-                <i class="red">*</i>{{ vmI18n.t("form_label.timeRange") }}：
+                <i class="red">*</i> {{ vmI18n.t("form_label.timeRange") }}：
                 <DatePicker
                   v-model="basicData.time_limit"
                   format="yyyy/MM/dd HH:mm:ss"
@@ -48,7 +48,7 @@
           <div class="row">
             <div class="form_label">
               <!-- 订单类型 -->
-              <i class="red">*</i>{{ vmI18n.t("form_label.orderType") }}：
+              <i class="red">*</i> {{ vmI18n.t("form_label.orderType") }}：
             </div>
             <div class="form_content">
               <SingleBox

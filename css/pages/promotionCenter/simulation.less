@@ -6,38 +6,42 @@
 .simulation {
   height: 100%;
   position: relative;
-  padding-top: 50px;
+  padding: 0 @base-pd @base-pd;
   // 操作栏
-  .operation_btn {
-    position: absolute;
-    top: 0;
-    background: #fff;
-    padding: 0 10px;
-    width: 100%;
-    border: 1px solid @base-border;
-  }
+  // .operation_btn {
+  //   position: absolute;
+  //   top: 0;
+  //   background: #fff;
+  //   padding: 0 10px;
+  //   width: 100%;
+  //   border: 1px solid @base-border;
+  // }
   // 主要内容
   .content {
     height: 100%;
     overflow: scroll;
+    .ark-table-wrapper{
+      border: 1px solid #f2f2f2;
+    }
     // 框架及其标题（相同样式提取）
     .orderSet,.execute_result,.products_list  {
-      border: 1px solid #dcdfe6;
+      border: 1px solid #f2f2f2;
       padding: 20px;
       margin: 20px 0 20px;
       position: relative;
       background-color: #fff;
-      border: 1px solid #dcdfe6;
+      border: 1px solid #f2f2f2;
       .header_title {
         display: inline-block;
         position: absolute;
         top: -9px;
         left: 12px;
         .header_name {
-          font-size: 18px;
-          padding: 0 5px;
+          font-size: 14px;
+          padding: 5px;
           background: #fff;
-          border: 1px solid #dcdfe6;
+          border-radius: 5px;
+          border: 1px solid #f2f2f2;
         }
       }
     }

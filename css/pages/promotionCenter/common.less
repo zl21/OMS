@@ -1,26 +1,4 @@
 @import '~@burgeon/oms-theme/skin/public.less';
-// 公共样式定义
-.nowrap{
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.fontHeight{
-  min-height: 24px;
-  line-height: 24px;
-}
-.PromotionInput{
-  width: 100%;
-  height: 24px;
-  font-size: 12px;
-  padding: 0 5px;
-  border-radius: 2px;
-  background: #fff;
-  color: #606266;
-  border-radius: 2px;
-  border: 1px solid #dcdfe6;
-  box-sizing: border-box;
-}
 //详情页布局
 .addOrEditActi,.batchActivity{
   display: flex;
@@ -46,31 +24,11 @@
     }
     .basicSteps {
       overflow: scroll;
+      &::-webkit-scrollbar-track {
+        border-radius: 0;
+        background-color: #f3f3f3;
+        border: none;
     }
-    .footer {
-      // #bundle > .absolute(@bottom:0,@right:0);
-      // height: 50px;
-      // background: @base-bg;
-      // border: 1px solid @base-border;
-      // width: 100%;
-      // z-index: 99;
-      // text-align: right;
-      // padding-left:10px;
-      > button {
-        // #bundle > .absolute(@bottom:0,@right:0);
-        // position: absolute;
-        // bottom: 0;
-        // right: 0;
-        height: 24px;
-        line-height: 24px;
-        padding: 0 8px;
-        border: 1px solid @button-border;
-        font-size: 12px;
-        color: @button-border;
-        border-radius: 2px;
-        margin-right: 10px;
-        background: transparent;
-      }
     }
   }
   .steps_bar{
@@ -84,6 +42,7 @@
   & > .title {
     height: 50px;
     line-height: 50px;
+    border-bottom: 1px solid #f2f2f2;
     i {
       font-size: 24px;
       color: @base-color;
@@ -104,17 +63,17 @@
     padding: 5px 0 5px;
     text-align: right;
     > button {
+      #bundle > .defalutBtn;
       height: 24px;
-      line-height: 24px;
-      padding: 0 8px;
-      border: 1px solid @base-color;
-      font-size: 12px;
-      background: #fff;
-      color: @base-color;
-      border-radius: 2px;
+      line-height: 22px;
     }
     .buttonFk {
       display: inline-block;
+      button{
+        #bundle > .defalutBtn;
+        height: 24px;
+        line-height: 24px;
+      }
     }
   }
   .el-autocomplete {
@@ -176,6 +135,13 @@
   .row {
     font-size: 0;
     padding: 10px 0;
+    .ark-input-icon{
+      height: 32px;
+      line-height: 32px;
+    }
+    .ark-input,.input,input{
+      #bundle > .defalutInput;
+    }
     .item-input {
       height: 24px !important;
       line-height: 22px !important;
@@ -184,10 +150,11 @@
       border-radius: 0;
 
       label {
-        line-height: 24px !important;
-        width: 150px;
-        text-align: center;
-
+        height: @base-height;
+        line-height: @base-height;
+        width: 145px;
+        text-align: right;
+        // #bundle > .nowrap;
         i {
           font-size: 12px;
           position: initial;
@@ -195,7 +162,6 @@
           right: 0;
         }
       }
-
       .input-wrap {
         .popover-icon i{
           font-size: 12px;
@@ -206,7 +172,6 @@
             font-size: 12px;
         }
         .el-input input {
-          // .PromotionInput
           #bundle > .defalutInput;
         }
       }
@@ -214,17 +179,18 @@
     .form_label {
       display: inline-block;
       font-size: 12px;
-      width: 150px;
-      text-align: center;
+      width: 145px;
+      text-align: right;
       vertical-align: top;
-      .fontHeight;
+      height: @base-height;
+      line-height: @base-height;
     }
     .form_content {
       display: inline-block;
       font-size: 12px;
       width: calc(100% - 150px);
-      // vertical-align: middle;
-      .fontHeight;
+      height: @base-height;
+      line-height: @base-height;
       // 输入框
       .form_el_input.doubleNum {
         display: inline-block;
@@ -240,9 +206,6 @@
       }
       .form_el_input {
         width: 410px;
-        input {
-          .PromotionInput;
-        }
       }
       // select
       .el-select{
