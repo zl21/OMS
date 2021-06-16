@@ -349,6 +349,7 @@
               }else {
                 this.$Modal.warning({
                   title:'警告',
+                    className: 'ark-dialog',
                   content:'该操作为全量导出,导出数据较大,建议在服务器空闲时候导出,如需继续,请点击确定按钮!',
                   showCancel:true,
                   mask:true,
@@ -372,6 +373,7 @@
               }else {
                 this.$Modal.warning({
                   title:'警告',
+                  className: 'ark-dialog',
                   content:'该操作为全量导出,导出数据较大,建议在服务器空闲时候导出,如需继续,请点击确定按钮!',
                   showCancel:true,
                   mask:true,

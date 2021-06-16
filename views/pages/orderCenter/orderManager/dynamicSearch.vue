@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-27 11:04:51
- * @LastEditTime: 2021-05-27 11:05:01
+ * @LastEditTime: 2021-06-16 15:40:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/orderCenter/orderManager/dynamicSearch.vue
@@ -201,7 +201,7 @@
           border-radius: @base-radius;
           border: 1px solid @input-border;
         }
-        .ark-select-placeholder{
+        .ark-select-placeholder,.ark-select-selected-value{
            height: @base-height - 2px;
           line-height: @base-height - 2px;
         }
