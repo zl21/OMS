@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-06-15 15:57:02
+ * @LastEditTime: 2021-06-15 18:47:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -237,13 +237,12 @@ export default {
     if(!(this.$route.params.itemId == 'New')){
        let route = this.$route.params;
        const subData = await this.$OMS2.omsUtils.initSubtable('OC_B_REFUND_ORDER_ITEM', route.itemId, '181618');
-       console.log(subData.rowData);
        this.tableConfig.data = subData.rowData;
        await sessionStorage.setItem('copyDetails',JSON.stringify(subData.rowData));
     }
   },
   mounted(){
-    
+     
   },
   methods:{
     /****************** 工具方法 *************************/

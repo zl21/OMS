@@ -839,6 +839,8 @@ export default {
           self.formConfig.formValue.RETURNEE_MOBILE = data.RECEIVER_MOBILE.val || '';
         }
       }
+      // 单号改变，清空明细
+      this.clearDetail += 1;
     },
     // 保存
     async save() {

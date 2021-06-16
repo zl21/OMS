@@ -1,15 +1,15 @@
 <template>
   <!-- promactiqueryList -->
-  <div class="promotion-content custom-main customized-list" v-loading='loading'>
-    <div class="operation-content totalHeight custom-form customized-list-form">
+  <div class="customized-list" v-loading='loading'>
+    <div class="customized-list-form">
       <businessForm :form-config="formConfig" />
     </div>
     <!-- 按钮 head_botton-->
-    <div class="operation-botton custom-btn customized-list-btn">
+    <div class="customized-list-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
     <!-- 列表部分 -->
-    <div class="tabale-content custom-table customized-list-table">
+    <div class="customized-list-table">
       <Tabs v-model="activeName" :animated="false" type="card">
         <TabPane
           v-for="(user, index) in tabConfig"
