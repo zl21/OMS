@@ -553,4 +553,7 @@
 | v1.6.0 | orderManage 明细修复 |
 | v1.6.1 | 额外退款  - 详情修改 |
 | v1.6.2 | 退换修复,orderManage正则调整 |
+| v1.6.3 | orderManage计算0情况 |
+| v1.6.4 | 促销样式修改
+| v1.6.6 | orderManage计算防抖 |
 

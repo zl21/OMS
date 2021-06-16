@@ -280,6 +280,7 @@ export default {
 
         },
         COMPENSATE_AMT: (h, params) => {
+          const self = this;
           // 赔付金额
           return h('Input', {
             props: {
@@ -295,18 +296,18 @@ export default {
             on: {
               'on-change': e => {
                 // setTimeout(() => {
-                  // this.$nextTick(()=>{
-                  //   const ca = Number(e.target.value);
-                  //   // const ca = Number(e);
-                  //   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL || 0);
-                  //   if (ca > relCa) {
-                  //     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(relCa, 2);
-                  //   } else {
-                  //     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
-                  //   }
-                  //   this.tableConfig.data[params.index] = JSON.parse(JSON.stringify(params.row));
-                  //   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
-                  // })
+                // this.$nextTick(()=>{
+                //   const ca = Number(e.target.value);
+                //   // const ca = Number(e);
+                //   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL || 0);
+                //   if (ca > relCa) {
+                //     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(relCa, 2);
+                //   } else {
+                //     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
+                //   }
+                //   this.tableConfig.data[params.index] = JSON.parse(JSON.stringify(params.row));
+                //   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
+                // })
                 // }, 300);
               },
               'on-blur': e => {
@@ -314,8 +315,13 @@ export default {
                   console.log(e.target._value);
                   const ca = Number(e.target._value);
                   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL);
-                  if (ca > relCa) {
-                    params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(relCa, 2);
+                  if (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) {
+                    // 关联了原单
+                    if (ca > relCa) {
+                      params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(relCa, 2);
+                    } else {
+                      params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
+                    }
                   } else {
                     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
                   }
@@ -344,6 +350,7 @@ export default {
     },
     /* --------------------- 工具函数： --------------------- */
     detailAddDataHandel(data) {
+      data.map(it => it.ID = '-1')
       this.addData = data;
     },
     /* ------------------- 表格事件 part start ------------------- */

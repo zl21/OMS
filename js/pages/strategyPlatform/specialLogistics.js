@@ -704,8 +704,18 @@ export default {
     let { customizedModuleId, customizedModuleName } = this.$route.params;
     this.customizedModuleName = customizedModuleName;
     if (customizedModuleId == 'New') {
+      const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+      const data = { label: '特殊物流方案新增', name:keepAliveModuleName}; //当前界面模块名称 
+      this.$store.commit('global/modifycurrentLabel' , data)
+
+
       this.id = '-1';
     } else {
+
+      const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+      const data = { label: '特殊物流方案编辑', name:keepAliveModuleName}; //当前界面模块名称 
+      this.$store.commit('global/modifycurrentLabel' , data)
+
       this.id = customizedModuleId;
 
       this.querfrom(this.formConfighead.formData, 'ecode').style = 'input';

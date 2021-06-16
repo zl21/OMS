@@ -997,8 +997,8 @@ export default {
           },
           {
             title: "零售价", // 零售价
-            key: "PRICE_LIST",
-            dataAcessKey: "PRICE_LIST",
+            key: "PRICE",
+            dataAcessKey: "PRICE",
           },
           {
             title: $i18n.t("table_label.unitPrice"), // 成交单价
@@ -1030,48 +1030,50 @@ export default {
                       disabled: params.row.disabled,
                     },
                     on: {
-                      "on-change": (e) => {
-                        let inputPA = Number(e.target.value);
-                        params.row.PRICE_ACTUAL = inputPA; // 成交单价赋值
-                        params.row.ADJUST_AMT = 0;
-                        const price = Number(params.row.PRICE_LIST);
-                        const q = Number(params.row.QTY || 0);
-                        const aa = Number(params.row.ADJUST_AMT || 0);
-                        let ra = Number(params.row.REAL_AMT || 0);
-                        const ad = Number(params.row.AMT_DISCOUNT || 0);
-                        const osa = Number(params.row.ORDER_SPLIT_AMT || 0);
-                        if (params.row.QTY && inputPA) {
-                          // AMT_DISCOUNT 商品优惠金额
-                          // ORDER_SPLIT_AMT 订单优惠金额
-                          // 输入单价：修改零售价、成交金额、调整金额即可（计算成交金额时先将调整金额置为0
-                          // 公式：【零售价 * 数量 - 商品优惠 - 订单优惠 + 调整金额 = 成交金额】
-                          // 公式：【PRICE/PRICE_ACTUAL * QTY - 0 - 0 + ADJUST_AMT = REAL_AMT】
-                          // 成交金额 = 成交单价 * 数量 - 商品优惠 - 订单优惠 + 调整金额
-                          // 成交金额 = 成交单价 * 数量 （取这个
-                          // 调整金额 = (成交金额 + 订单优惠 + 商品优惠) - (零售价'PRICE_LIST' * 数量)
-                          params.row.REAL_AMT = this.$OMS2.omsUtils.floatNumber(inputPA * q, 2);
-                          ra = params.row.REAL_AMT;
-                          params.row.ADJUST_AMT = this.$OMS2.omsUtils.floatNumber(ra + ad + osa - price * q, 2);
-                        } else {
-                          // params.row.REAL_AMT = 0;
-                          // params.row.ADJUST_AMT = 0;
-                        }
-                        // params.row.PRICE = params.row.PRICE_ACTUAL; // 零售价 = 成交单价
-                        self.jordanTableConfig.data[params.index] = params.row;
-                        self.totalNum();
-                      },
                       'on-blur': e => {
-                        this.$nextTick(() => {
-                          console.log(e.target._value);
-                          const inputVal = Number(e.target._value);
-                          const ra = params.row.PRICE_ACTUAL;
-                          if (!ra && !inputVal) {
-                            params.row.REAL_AMT = 0.00;
-                            params.row.ADJUST_AMT = 0.00;
+                        let inputRA = Number(e.target._value);
+                        if (!params.row.QTY && !inputRA) {
+                          params.row.REAL_AMT = '0.00';
+                          params.row.ADJUST_AMT = '0.00';
+                          params.row.PRICE_ACTUAL = '0.00';
+                          self.jordanTableConfig.data[params.index] = params.row;
+                          self.totalNum();
+                        }
+                      },
+                      'on-change': e => {
+                        self.debounce(function () {
+                          self.$nextTick(() => {
+                            let inputPA = Number(e.target._value);
+                            params.row.PRICE_ACTUAL = self.$OMS2.omsUtils.floatNumber(inputPA, 2); // 成交单价赋值
+                            params.row.ADJUST_AMT = 0;
+                            const price = Number(params.row.PRICE);
+                            const q = Number(params.row.QTY || 0);
+                            const aa = Number(params.row.ADJUST_AMT || 0);
+                            let ra = Number(params.row.REAL_AMT || 0);
+                            const ad = Number(params.row.AMT_DISCOUNT || 0);
+                            const osa = Number(params.row.ORDER_SPLIT_AMT || 0);
+                            if (params.row.QTY && inputPA) {
+                              // AMT_DISCOUNT 商品优惠金额
+                              // ORDER_SPLIT_AMT 订单优惠金额
+                              // 输入单价：修改零售价、成交金额、调整金额即可（计算成交金额时先将调整金额置为0
+                              // 公式：【零售价 * 数量 - 商品优惠 - 订单优惠 + 调整金额 = 成交金额】
+                              // 公式：【PRICE/PRICE_ACTUAL * QTY - 0 - 0 + ADJUST_AMT = REAL_AMT】
+                              // 成交金额 = 成交单价 * 数量 - 商品优惠 - 订单优惠 + 调整金额
+                              // 成交金额 = 成交单价 * 数量 （取这个
+                              // 调整金额 = (成交金额 + 订单优惠 + 商品优惠) - (零售价'PRICE' * 数量)
+                              params.row.REAL_AMT = self.$OMS2.omsUtils.floatNumber(inputPA * q, 2);
+                              ra = params.row.REAL_AMT;
+                              params.row.ADJUST_AMT = self.$OMS2.omsUtils.floatNumber(ra + ad + osa - price * q, 2);
+                            } else {
+                              params.row.REAL_AMT = 0;
+                              params.row.ADJUST_AMT = 0;
+                              params.row.PRICE_ACTUAL = 0;
+                            }
+                            // params.row.PRICE = params.row.PRICE_ACTUAL; // 零售价 = 成交单价
                             self.jordanTableConfig.data[params.index] = params.row;
                             self.totalNum();
-                          }
-                        });
+                          });
+                        }, 1000)()
                       },
                     },
                   }),
@@ -1098,7 +1100,7 @@ export default {
                     let inputQTY = Number(e);
                     params.row.QTY = inputQTY;
                     params.row.ADJUST_AMT = 0;
-                    const price = Number(params.row.PRICE_LIST);
+                    const price = Number(params.row.PRICE);
                     const pa = Number(params.row.PRICE_ACTUAL || 0);
                     const aa = Number(params.row.ADJUST_AMT || 0);
                     let ra = Number(params.row.REAL_AMT || 0);
@@ -1110,8 +1112,9 @@ export default {
                       ra = params.row.REAL_AMT;
                       params.row.ADJUST_AMT = this.$OMS2.omsUtils.floatNumber(ra + ad + osa - price * inputQTY, 2);
                     } else {
-                      params.row.REAL_AMT = 0.00;
-                      params.row.ADJUST_AMT = 0.00;
+                      params.row.REAL_AMT = '0.00';
+                      params.row.ADJUST_AMT = '0.00';
+                      params.row.PRICE_ACTUAL = '0.00';
                     }
                     self.jordanTableConfig.data[params.index] = params.row;
                     self.totalNum();
@@ -1153,39 +1156,41 @@ export default {
 
                     on: {
                       "on-change": (e) => {
-                        // 输入成交金额：修改单价、调整金额即可
-                        let inputRA = Number(e.target.value);
-                        params.row.REAL_AMT = inputRA;
-                        const price = Number(params.row.PRICE_LIST);
-                        const q = Number(params.row.QTY || 0);
-                        const aa = Number(params.row.ADJUST_AMT || 0);
-                        const ad = Number(params.row.AMT_DISCOUNT || 0);
-                        const osa = Number(params.row.ORDER_SPLIT_AMT || 0);
-                        if (params.row.QTY && inputRA) {
-                          // 单价 = (成交金额 - 调整金额 + 订单优惠 + 商品优惠) / 数量
-                          // 单价 = 成交金额 / 数量 （取这个
-                          params.row.PRICE_ACTUAL = this.$OMS2.omsUtils.floatNumber(inputRA / q, 2);
-                          // 调整金额 = (成交金额 + 订单优惠 + 商品优惠) - (零售价'PRICE_LIST' * 数量)
-                          params.row.ADJUST_AMT = this.$OMS2.omsUtils.floatNumber(inputRA + ad + osa - price * q, 2);
-                        } else {
-                          // params.row.REAL_AMT = 0;
-                          // params.row.ADJUST_AMT = 0;
-                        }
-                        self.jordanTableConfig.data[params.index] = params.row;
-                        self.totalNum();
-                      },
-                      'on-blur': e => {
-                        this.$nextTick(() => {
-                          console.log(e.target._value);
-                          const inputVal = Number(e.target._value);
-                          const ra = params.row.REAL_AMT;
-                          if (!ra && !inputVal) {
-                            params.row.REAL_AMT = 0.00;
-                            params.row.ADJUST_AMT = 0.00;
+                        self.debounce(function () {
+                          self.$nextTick(() => {
+                            // 输入成交金额：修改单价、调整金额即可
+                            let inputRA = Number(e.target.value);
+                            params.row.REAL_AMT = self.$OMS2.omsUtils.floatNumber(inputRA, 2);
+                            const price = Number(params.row.PRICE);
+                            const q = Number(params.row.QTY || 0);
+                            const aa = Number(params.row.ADJUST_AMT || 0);
+                            const ad = Number(params.row.AMT_DISCOUNT || 0);
+                            const osa = Number(params.row.ORDER_SPLIT_AMT || 0);
+                            if (params.row.QTY && inputRA) {
+                              // 单价 = (成交金额 - 调整金额 + 订单优惠 + 商品优惠) / 数量
+                              // 单价 = 成交金额 / 数量 （取这个
+                              params.row.PRICE_ACTUAL = self.$OMS2.omsUtils.floatNumber(inputRA / q, 2);
+                              // 调整金额 = (成交金额 + 订单优惠 + 商品优惠) - (零售价'PRICE' * 数量)
+                              params.row.ADJUST_AMT = self.$OMS2.omsUtils.floatNumber(inputRA + ad + osa - price * q, 2);
+                            } else {
+                              params.row.REAL_AMT = 0;
+                              params.row.ADJUST_AMT = 0;
+                              params.row.PRICE_ACTUAL = 0;
+                            }
                             self.jordanTableConfig.data[params.index] = params.row;
                             self.totalNum();
-                          }
-                        });
+                          });
+                        }, 1000)()
+                      },
+                      'on-blur': e => {
+                        let inputRA = Number(e.target._value);
+                        if (!params.row.QTY && !inputRA) {
+                          params.row.REAL_AMT = '0.00';
+                          params.row.ADJUST_AMT = '0.00';
+                          params.row.PRICE_ACTUAL = '0.00';
+                          self.jordanTableConfig.data[params.index] = params.row;
+                          self.totalNum();
+                        }
                       },
                     },
                   }),
@@ -1278,6 +1283,20 @@ export default {
     this.initObjItem(self.ID);
   },
   methods: {
+    /* debo(fun) {
+      _.debounce(fun, 20)
+    }, */
+    debounce(fn, time) {
+      let timer = null;
+      return function debounced() {
+        const _self = this;//input
+        const args = arguments;//inputEvent
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          fn.apply(_self, args);
+        }, time);
+      };
+    },
     async init(id) {
       if (this.sourceId) {
         return;

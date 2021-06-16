@@ -408,6 +408,9 @@ export default {
         this.qurefrom('cpCPhyWarehouseEname')[0].style = null;
         // 表示分仓策略》分仓规则
         if (customizedModuleId == 'New' || customizedModuleId == '-1' || customizedModuleId == 'NEW') {
+          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          const data = { label: '分仓规则新增', name:keepAliveModuleName}; //当前界面模块名称 
+          this.$store.commit('global/modifycurrentLabel' , data)
 
           this.btnConfig.buttons.forEach(em => {
             if (em.text == '下一步') {
@@ -428,6 +431,9 @@ export default {
             this.id = '-1';
           }
         } else if (query.saveType && query.saveType == 2) {
+          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          const data = { label: '分仓规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
+
           this.fninit(this.id);
           this.fntableData(this.id);
           this.pageShow = true;
@@ -440,6 +446,9 @@ export default {
             }
           });
         } else {
+          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          const data = { label: '分仓规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
+          this.$store.commit('global/modifycurrentLabel' , data)
           this.fninit(this.id);
           this.fntableData(this.id);
           this.pageShow = true; //显示明细表
@@ -462,6 +471,9 @@ export default {
         this.labelList[1].value = "ST_ASSIGN_LOGISTICS_LOG"
         // 表示分物流策略》分物流规则
         if (customizedModuleId == 'New' || customizedModuleId == '-1' || customizedModuleId == 'NEW') {
+          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          const data = { label: '分物流规则新增', name:keepAliveModuleName}; //当前界面模块名称 
+          this.$store.commit('global/modifycurrentLabel' , data)
           // 表示新增
           this.btnConfig.buttons.forEach(em => {
             if (em.text == '下一步') {
@@ -481,6 +493,10 @@ export default {
             this.id = '-1';
           }
         } else if (query.saveType && query.saveType == 2) {
+          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          const data = { label: '分物流规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
+          this.$store.commit('global/modifycurrentLabel' , data)
+
           this.fninit(this.id);
           this.fntableData(this.id);
           this.pageShow = true;
@@ -493,6 +509,9 @@ export default {
             }
           });
         } else {
+          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          const data = { label: '分物流规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
+          this.$store.commit('global/modifycurrentLabel' , data)
           this.fninit(this.id);
           this.fntableData(this.id);
           this.pageShow = true;
