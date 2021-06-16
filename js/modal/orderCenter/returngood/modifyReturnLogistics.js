@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-02 19:22:02
- * @LastEditTime: 2021-06-04 11:49:44
+ * @LastEditTime: 2021-06-16 10:02:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/modal/orderCenter/returngood/modifyReturnLogistics.js
@@ -43,7 +43,7 @@ export default {
                     fkdesc: '实体仓档案',
                     inputname: 'CP_C_LOGISTICS_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
                     isfk: true, // 是否有fk键
-                    isnotnull: false, // 是否必填
+                    isnotnull: true, // 是否必填
                     isuppercase: false, // 是否转大写
                     length: 20, // 最大长度是多少
                     name: '物流公司', // '入库实体仓库'
@@ -102,6 +102,10 @@ export default {
     methods:{
         confirm(){
             let self = this;
+            if(!self.formConfig.formData[0].itemdata.pid){
+              self.$OMS2.omsUtils.msgTips(self, 'warning', '物流公司不能为空!', 0)
+                return;
+            }
             if(!self.formConfig.formValue.logistic_no){
                 self.$OMS2.omsUtils.msgTips(self, 'warning', '物流单号不能为空!', 0)
                 return;
