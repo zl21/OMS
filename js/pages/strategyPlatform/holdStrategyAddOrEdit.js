@@ -522,7 +522,6 @@ export default {
           requriredArr.push('RELEASE_TIME');
           labelArr.push('释放指定时间')
         } else if (this.formConfig3.formValue.RELEASE_TIME_TYPE === 2) {
-          console.log(requriredArr,requriredArr.includes('RELEASE_TIME'));
           if (!this.formConfig3.formValue.RELEASE_DAY_TYPE || !this.formConfig3.formValue.FIXED_DURATION || !this.formConfig3.formValue.TIME_UNIT) {
             self.$Message.warning('固定时长类型,固定时长及单位不能为空,请填写！');
             return;
@@ -539,6 +538,7 @@ export default {
       let formValues = {};
       formValues = Object.assign(formValues, this.formConfig1.formValue, formConfig2, this.formConfig3.formValue);
       let { PS_C_PRO_ID, TIME, ...params } = formValues;
+      console.log(this.formConfig3.formValue,PS_C_PRO_ID, TIME);
       // 特殊
       params = Object.assign(params, this.paramsTime)
       params.ORDER_TAB_TYPE = params.ORDER_TAB_TYPE ? 1 : 0;
@@ -553,6 +553,9 @@ export default {
       if (self.ID > 0 && !self.$route.query.spuid) {
         params.ISACTIVE = params.ISACTIVE ? 'Y' : 'N'
         params.IS_AUTO_RELEASE = params.IS_AUTO_RELEASE ? 1 : 0
+      }
+      if (this.formConfig3.formValue.RELEASE_TIME_TYPE === 2) {
+        params.RELEASE_TIME = null;
       }
       let { data: { code,data,message } } = await this.service.strategyPlatform.holdOrderHoldStrategySave({ "ST_C_HOLD_ORDER_STRATEGY": params });
       if (code === 0) {
