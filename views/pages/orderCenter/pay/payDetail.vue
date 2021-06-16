@@ -36,7 +36,6 @@
 import businessButton from 'professionalComponents/businessButton';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import payDetailAdd from './payDetailAdd.vue';
-const _ = require("lodash");
 
 export default {
   name: 'payDetail',
@@ -313,21 +312,13 @@ export default {
                   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL);
                   if (ca > relCa) {
                     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(relCa, 2);
+                    ++params.row._rowKey;
                   } else {
                     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
                   }
                   this.tableConfig.data[params.index] = params.row;
                   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
                 });
-                // const ca = Number(params.row.COMPENSATE_AMT);
-                // const relCa = this.$OMS2.omsUtils.floatNumber(Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL), 2);
-                // if (ca > relCa) {
-                //   params.row.COMPENSATE_AMT = relCa;
-                // } else {
-                //   params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
-                // }
-                // this.tableConfig.data[params.index] = params.row;
-                // R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
               },
             }
           });
@@ -343,9 +334,6 @@ export default {
     detailAddDataHandel(data) {
       data.map(it => it.ID = '-1')
       this.addData = data;
-    },
-    debo(fun) {
-      _.debounce(fun, 1000);
     },
     /* ------------------- 表格事件 part start ------------------- */
     pageChange(e) {
