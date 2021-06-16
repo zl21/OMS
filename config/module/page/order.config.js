@@ -1,20 +1,11 @@
-// import scanIn from 'allpages/orderCenter/scanIn/scanIn.vue';
-// import orderManager from 'allpages/orderCenter/orderManager/orderManager.vue'; // 零售发货单
-// 零售发货单-新增
-// import orderManageAdd from 'allpages/orderCenter/orderManageAdd/orderManageAdd.vue';
-// import orderManageDetail from 'allpages/orderCenter/orderManageDetail/orderManageDetail.vue'; // 零售发货单-详情
-// import splitOrder from 'allpages/orderCenter/orderManager/splitOrder.vue';
-// import returnGoodManagementList from 'allpages/orderCenter/returngood/returngoodmanagementList.vue'; // 订单中心-退换货单
-// import returnGood from 'allpages/orderCenter/returngood/returngoodmanagement.vue'; // 订单中心-退换货单详情
-// import returnStorageList from 'allpages/orderCenter/returngood/returnStoreage/returnStoreageList.vue'; // 退货入库-列表
-// import returnTreasuryAdd from 'allpages/orderCenter/returngood/returnStoreage/returnTreasuryAdd.vue'; // 退货入库-新增 退货入库-新增
-// import refundAfterShipment from 'allpages/orderCenter/returngood/refundAfterShipment.vue'; // 订单中心-已发货退款单-编辑 额外退款
-// import distributionOrderList from 'allpages/orderCenter/vipJit/distributionOrderList.vue';
-
-// import orderManage from '@/views/pages/orderCenter/orderManager/orderManager.vue';
-// import orderAdd from '@/views/pages/orderCenter/orderManager/orderAddOrCopy.vue';
-// import returnOrder from '@/views/pages/orderCenter/returnOrder/returnOrderAdd.vue';
-// import returnChangeOrderdetails from '@/views/pages/orderCenter/returnOrder/returnChangeOrderdetails.vue';
+/*
+ * @Author: your name
+ * @Date: 2021-06-08 20:32:29
+ * @LastEditTime: 2021-06-16 14:28:50
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/config/module/page/order.config.js
+ */
 
 export default {
 
@@ -89,5 +80,9 @@ export default {
     // JIT配货单-换吊牌
     component: () => import('allpages/orderCenter/distribution/splitDistributionOrder.vue'),
     labelName: 'JIT配货单-换吊牌',
+  },
+  //退货入库半定制
+  MATCHINGDETAILS: { //_/views/pages/orderCenter/matchingDetails.vue
+    component: () => import('allpages/orderCenter/matchingDetails.vue'),
   },
 };

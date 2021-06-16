@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-06-07 20:40:40
+ * @LastEditTime: 2021-06-16 14:34:32
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/config/module/modal/strategy.config.js
+ */
 // 策略平台
 export default {
   DELAYSET: {
@@ -18,5 +26,8 @@ export default {
   PRODUCTSTRATEGYSHOPSCALEIMPORT: {
     // 店铺商品特殊设置-编辑-多店铺比例-明细导入
     component: () => import('@/views/modal/strategyPlatform/productStrategyShopScaleImport.vue'),
-  }
+  },
+  BATCHMODIFY: { //店铺策略》批量修改
+    component: () => import('@/views/modal/strategyPlatform/batchModify.vue'), // 店铺同步库存策略-（导入-同步策略明细
+  },
 };

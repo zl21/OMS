@@ -1,0 +1,378 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-22 13:30:26
+ * @LastEditTime: 2021-06-04 19:09:36
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
+-->
+<template>
+  <div class="matchingDetails">
+    <businessButton :btn-config="btnConfig" />
+    <businessActionTable
+      :jordan-table-config="tableConfig"
+      @on-select="onSelect"
+      @on-select-cancel="onSelectCancel"
+      @on-select-all="onSelectAll"
+      @on-select-all-cancel="onSelectAllCancel"
+      @on-row-click="onRowClick"
+      @on-row-dblclick="onRowDblclick"
+      @table-delete-detail="tableDeleteDetail"
+      @on-page-change="pageChange"
+      @on-page-size-change="pageSizeChange"
+    />
+
+    <Modal v-model="modal6" title="退单编号查询" :mask="true" :footer-hide="true" width="1000">
+      <addGiftItem :componentData="componentData" />
+    </Modal>
+  </div>
+</template>
+
+<script>
+import businessButton from 'professionalComponents/businessButton';
+import businessActionTable from 'professionalComponents/businessActionTable'
+import addGiftItem from './addGiftItem'
+import service from '@/service/index'
+
+export default {
+  components: {
+    businessButton,
+    addGiftItem,
+    businessActionTable
+  },
+  data() {
+    return {
+      modal6: false,
+      loading: true,
+      type: "",
+      tebdata: [], //明细表选中的数据
+      btnConfig: {
+        typeAll: 'default',
+        buttons: [{
+          text: '手工匹配',
+          isShow: false,
+          disabled: false, // 按钮禁用控制
+          btnclick: () => {
+            service.orderCenter.checkRefundInStatus(`id=${this.$route.params.itemId}`).then(res => {
+              if (res.data.code == 0) {
+                this.switchAlert(1)
+              } else {
+                this.$Message.warning(res.data.message);
+              }
+            })
+
+          },
+        },
+        {
+          text: '强制匹配',
+          isShow: false,
+          btnclick: () => {
+            service.orderCenter.checkRefundInStatus(`id=${this.$route.params.itemId}`).then(res => {
+              if (res.data.code == 0) {
+                this.switchAlert(2)
+              } else {
+                this.$Message.warning(res.data.message);
+              }
+            })
+
+          },
+        },
+        {
+          text: '查询退单',
+          isShow: false,
+          btnclick: () => {
+
+            this.switchAlert(vm.$route.query.type)
+          },
+        },
+        {
+          text: '清除退单',
+          isShow: false,
+          btnclick: () => {
+            this.emptyTabledata()
+          },
+        },
+        ],
+      },
+      tableConfig: {
+        indexColumn: true,
+        isShowSelection: true,
+        columns: [],
+        data: [],
+        pageShow: true, // 控制分页是否显示
+        btnsShow: true, // 控制操作按钮是否显示
+        searchInputShow: false, // 控制搜索框是否显示
+        width: '', // 表格宽度
+        height: '', // 表格高度
+        border: true, // 是否显示纵向边框
+        total: 0, // 设置总条数
+        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSize: 10, // 每页条数
+      },
+      closeTable: {
+        columns: [],
+        data: [],
+      },
+      componentData: {}
+    }
+  },
+  mounted() {
+
+    if (vm.$route.query.type) {
+      this.querbtn(this.btnConfig.buttons, "查询退单").isShow = true
+      this.querbtn(this.btnConfig.buttons, "清除退单").isShow = true
+
+    } else {
+      this.querbtn(this.btnConfig.buttons, "强制匹配").isShow = true
+      this.querbtn(this.btnConfig.buttons, "手工匹配").isShow = true
+      this.querbtn(this.btnConfig.buttons, "清除退单").isShow = true
+    }
+    this.init()
+
+  },
+  methods: {
+    emptyTabledata() {//清楚退单逻辑
+
+      if (this.tebdata.length == 0) {
+        this.$Message.warning('请选中一条数据！');
+        return
+      }
+
+      let errArr = []
+      for (const v of this.tebdata) {
+        if (v.OC_B_RETURN_ORDER_ID && !v._checked) {
+          errArr.push({
+            id: v.ID,
+            message: "已匹配退货单号，不允许清除！"
+          })
+          continue
+        } else {
+          this.tableConfig.columns = JSON.parse(JSON.stringify(this.closeTable.columns))
+          this.tableConfig.data = JSON.parse(JSON.stringify(this.closeTable.data))
+        }
+      }
+
+      if (errArr.length > 0) { //执行错误提示
+        this.fnerrtab(errArr, 2)
+      }
+    },
+    closetab(status) {//清空所有选中的目标
+      this.$children[1].$refs.selections.selectAll(status)
+      this.tebdata = []
+    },
+    switchAlert(type) {
+      for (const v of this.tebdata) { //校验是否有退货单号
+        if (v.OC_B_RETURN_ORDER_ID && !v._checked) {
+          this.closetab(false)
+          this.$Message.warning('存在明细已经匹配退货单，请重新进行选择！');
+          return
+        }
+      }
+
+      if (this.tebdata.length == 0) {
+        this.$Message.warning('请选中一条数据！');
+        return
+      }
+      this.componentData.type = type
+      this.modal6 = true
+    },
+    querbtn(btnConfig, k) {
+      return btnConfig.filter(em => em.text == k)[0]
+    },
+    init() {
+
+      let fromdata = new FormData()
+      fromdata.append("table", 'OC_B_REFUND_IN_PRODUCT_ITEM')
+      fromdata.append("objid", this.$route.params.itemId)
+      fromdata.append("refcolid", 180210)
+      fromdata.append("searchdata", JSON.stringify({ "column_include_uicontroller": true, "startindex": 0, "range": 10, "fixedcolumns": {} }))
+      service.orderCenter.returnTypeItemquery(fromdata).then(res => {
+        //渲染明细表
+        if (res.data.code == 0) {
+          let data = res.data.data
+          this.tableConfig.columns = data.tabth.map(item => { //处理表头
+            item.key = item.colname
+            item.title = item.name
+            return item
+          })
+          this.tableConfig.data = data.row.map((item, index) => {  //处理表值
+            for (const k in item) {
+              item[k] = item[k].val
+            }
+            return item
+          })
+          this.closeTable.columns = JSON.parse(JSON.stringify(this.tableConfig.columns))
+          this.closeTable.data = JSON.parse(JSON.stringify(this.tableConfig.data))
+
+        }
+
+      })
+    },
+    fnisSku(sku, sukArr) {
+      return sukArr.split(",").some(item => item == sku)
+    },
+    closeConfirm(data, type) {
+      this.type = type
+      let errArr = []
+      if (data) {
+        this.tebdata.forEach(item => {
+          this.tableConfig.data.forEach((em, index) => {
+            if (item.ID == em.ID) {
+
+              if (type == 2) {
+                //判断明细suk是否相等 ---强制匹配
+                if (!this.fnisSku(item.PS_C_SKU_ECODE, data.RETURN_ORDER_ITEM_LIST.PS_C_SKU_ECODE)) {
+                  em.OC_B_RETURN_ORDER_ID = data.BILL_NO
+                  item.OC_B_RETURN_ORDER_ID = data.BILL_NO
+
+                  em.OC_B_RETURN_ORDER_BILL_NO_ID = data.ID
+                  item.OC_B_RETURN_ORDER_BILL_NO_ID = data.ID
+
+                  em.OC_B_RETURN_ORDER_ITEM_ID = data.RETURN_ORDER_ITEM_LIST.ID
+                  item.OC_B_RETURN_ORDER_ITEM_ID = data.RETURN_ORDER_ITEM_LIST.ID
+
+                  em.PS_C_SKU_ECODE_ACTUAL = data.RETURN_ORDER_ITEM_LIST.PS_C_SKU_ECODE
+                  item.PS_C_SKU_ECODE_ACTUAL = data.RETURN_ORDER_ITEM_LIST.PS_C_SKU_ECODE
+
+                  em._checked = true
+                  item._checked = true //判断是否新增的
+                } else {
+                  errArr.push({
+                    id: item.ID,
+                    code: item.PS_C_SKU_ECODE,
+                    message: "条码一致，请走手工匹配！"
+                  })
+                }
+              } else {
+                //判断明细suk是否相等 ---手工匹配
+                if (this.fnisSku(item.PS_C_SKU_ECODE, data.PS_C_SKU_ECODE)) {
+                  em.OC_B_RETURN_ORDER_ID = data.BILL_NO
+                  item.OC_B_RETURN_ORDER_ID = data.BILL_NO
+
+                  em.OC_B_RETURN_ORDER_BILL_NO_ID = data.ID
+                  item.OC_B_RETURN_ORDER_BILL_NO_ID = data.ID
+
+                  em._checked = true
+                  item._checked = true //判断是否新增的
+                } else { //
+                  errArr.push({
+                    id: item.ID,
+                    code: item.PS_C_SKU_ECODE,
+                    message: "没有匹配到退货单明细"
+                  })
+                }
+              }
+
+            }
+          })
+
+        })
+        localStorage.setItem('OC_B_REFUND_IN_data', JSON.stringify(this.tableConfig.data))
+      }
+      this.modal6 = false;
+
+      if (errArr.length > 0) { //执行错误提示
+        this.fnerrtab(errArr, 1)
+      }
+
+    },
+    fnerrtab(data, type) {
+      let columns = []
+      let title = "提示框"
+      if (type == 1) { //1表示手工和强制的错误信息 2表示清楚的错误信息
+        columns = [
+          {
+            title: "失败ID", // '提示信息',
+            key: 'id',
+          },
+          {
+            title: "失败SKU", // '错误信息',
+            key: 'code',
+          },
+          {
+            title: "失败原因！", // '错误信息',
+            key: 'message',
+          }
+        ]
+        title = "匹配失败提示框"
+      } else {
+        columns = [
+          {
+            title: "失败ID", // '提示信息',
+            key: 'id',
+          },
+          {
+            title: "失败原因！", // '错误信息',
+            key: 'message',
+          }
+        ]
+        title = "清除失败提示框"
+      }
+
+      this.$Modal.confirm({
+        title,
+        width: 500,
+        titleAlign: "center",
+        mask: true,
+        className: 'ark-dialog',
+        render: (h) => {
+          if (data) {
+            return h('Table', {
+              props: {
+                columns,
+                data: data,
+              },
+            })
+          }
+          return false
+        },
+      })
+
+    },
+    // 选中某一项时触发
+    onSelect(v) {
+      this.tebdata = v
+
+    },
+    // 取消选中某一项时触发
+    onSelectCancel(v) {
+      this.tebdata = v
+    },
+    // 点击全选时触发
+    onSelectAll() { },
+    // 点击取消全选时触发
+    onSelectAllCancel(v) {
+
+    },
+    // 单击某一行时触发
+    onRowClick(row) {
+      console.log(row)
+      this.skuEcodes = row.skuEcode
+      this.onRowData = row
+    },
+    // 单击某二行时触发
+    onRowDblclick() { },
+    // 分页change 事件
+    pageChange(val) {
+      console.log(val);
+      this.tableConfig.current = val
+      this.searchGift()
+    },
+    // 切换分页条数
+    pageSizeChange(val) {
+      console.log(val);
+      this.tableConfig.pageSize = val
+      this.searchGift()
+    },
+    tableDeleteDetail() { },
+  }
+}
+</script>
+
+<style lang="less" >
+#OC_B_REFUND_IN {
+  #actionMODIFY {
+    display: none;
+  }
+}
+</style>
