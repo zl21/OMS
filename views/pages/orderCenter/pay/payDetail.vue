@@ -350,6 +350,7 @@ export default {
     },
     /* --------------------- 工具函数： --------------------- */
     detailAddDataHandel(data) {
+      data.map(it => it.ID = '-1')
       this.addData = data;
     },
     /* ------------------- 表格事件 part start ------------------- */
