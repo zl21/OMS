@@ -287,12 +287,7 @@ export default {
             props: {
               value: params.row.COMPENSATE_AMT,
               autosize: true,
-              regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
-              // max: Number(this.$OMS2.omsUtils.floatNumber(params.row.COMPENSATE_QTY * params.row.PRICE_ACTUAL || 0, 2)),
-              // min: 0,
-              // step: 0.01,
-              // formatter: value => `¥ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ','),
-              // parser: value => value.replace(/$s?|(,*)/g, ''),
+              regx: /^\d*\.{0,1}\d{0,2}$/,
             },
             on: {
               'on-change': e => {
@@ -348,6 +343,9 @@ export default {
     detailAddDataHandel(data) {
       data.map(it => it.ID = '-1')
       this.addData = data;
+    },
+    debo(fun) {
+      _.debounce(fun, 1000);
     },
     /* ------------------- 表格事件 part start ------------------- */
     pageChange(e) {
