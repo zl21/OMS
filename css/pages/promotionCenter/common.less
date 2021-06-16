@@ -25,17 +25,21 @@
 .addOrEditActi,.batchActivity{
   display: flex;
   height: 100%;
+  justify-content: space-between;
   .steps_content {
     position: relative;
     height: 100%;
-    width: 92%;
+    width: 85%;
     display: flex;
     flex-direction: column;
+    margin:0 @base-mr @base-mr;
     .basic{
-      border:1px solid #d8d8d8;
+      // border:1px solid #dbdde8;
+      box-shadow: @base-shadow;
       margin-top: 10px;
       padding: 0 10px 10px;
       background-color: #fff;
+      border-radius: 5px;
       &:first-child{
         margin-top: 0;
       }
@@ -44,13 +48,19 @@
       overflow: scroll;
     }
     .footer {
-      height: 50px;
-      background: @base-bg;
-      border: 1px solid @base-border;
-      width: 100%;
-      text-align: left;
-      padding-left:10px;
+      // #bundle > .absolute(@bottom:0,@right:0);
+      // height: 50px;
+      // background: @base-bg;
+      // border: 1px solid @base-border;
+      // width: 100%;
+      // z-index: 99;
+      // text-align: right;
+      // padding-left:10px;
       > button {
+        // #bundle > .absolute(@bottom:0,@right:0);
+        // position: absolute;
+        // bottom: 0;
+        // right: 0;
         height: 24px;
         line-height: 24px;
         padding: 0 8px;
@@ -76,7 +86,7 @@
     line-height: 50px;
     i {
       font-size: 24px;
-      color: rgb(236, 110, 78);
+      color: @base-color;
       vertical-align: middle;
     }
     > span {
@@ -196,7 +206,8 @@
             font-size: 12px;
         }
         .el-input input {
-          .PromotionInput
+          // .PromotionInput
+          #bundle > .defalutInput;
         }
       }
     }
@@ -219,6 +230,7 @@
         display: inline-block;
         width: 60px;
         height: 24px;
+       
       }
       .limitinput {
         width: 60px !important;
@@ -356,17 +368,17 @@
           line-height: 26px;
           font-size: 12px;
           color: #fff;
-          border: 1px solid #fd6442;
-          background: #fd6442;
+          border: 1px solid @base-color;
+          background: @base-color;
           border-radius: 3px;
           margin-left: 8px;
           &.white{
               background: transparent;
-              color: #fd6442;
+              color: @base-color;
               &:hover{
                   color: #fff;
-                  border: 1px solid #fd6442;
-                  background: #fd6442;
+                  border: 1px solid @base-color;
+                  background: @base-color;
               }
           }  
       }
@@ -399,8 +411,8 @@
       }
       .tab_active{
           z-index: 2;
-          border-bottom:2px solid #ec6e4e;
-          color: #ec6e4e;
+          border-bottom:2px solid @base-color;
+          color: @base-color;
       }
     }
     .nav_wrap_scroll::after {
