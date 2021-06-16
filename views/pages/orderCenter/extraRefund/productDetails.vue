@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-06-16 18:00:16
+ * @LastEditTime: 2021-06-16 18:32:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -130,14 +130,15 @@ export default {
             key: 'AMT_ACTUAL_REFUND',
             title: '退款金额', // 退款金额：默认取“申请退款金额”，可编辑，仅支持录入正数，保留两位小数
             render:(h,params)=>{
-             return h('InputNumber', {
-                props: {
-                  value: params.row.AMT_ACTUAL_REFUND,
+             return h('Input', {
+               props: {
+                  value: params.row.COMPENSATE_AMT,
                   autosize: true,
+                  regx: /^\d*\.{0,1}\d{0,2}$/,
                 },
                 on: {
                   'on-change': e => {
-                     params.row.AMT_ACTUAL_REFUND = e;
+                     params.row.AMT_ACTUAL_REFUND = e.target.value;
                      this.tableConfig.data[params.index] = params.row;
                      R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
                   }
