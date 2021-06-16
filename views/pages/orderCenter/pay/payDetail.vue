@@ -98,6 +98,7 @@ export default {
                   "PS_C_SKU_ECODE"
                 );
                 // this.totalNum();
+                this.tableConfig.total = this.tableConfig.data.length;
                 let deleteIds = this.$OMS2.omsUtils.sonList(selDa, 'ID')
                 deleteIds = deleteIds.filter(id => id != '-1');
                 R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ deleteIds })));
@@ -135,15 +136,20 @@ export default {
             text: '确定',
             type: 'primary',
             btnclick: () => {
+              const self = this;
               if (!this.addData.length) {
                 this.$Message.warning('请选中一条单据！');
                 return false
               } else {
                 this.tableConfig.data = this.tableConfig.data.concat(this.addData);
+                this.tableConfig.total += this.addData.length;
                 const detail = this.tableConfig.data;
                 R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail })));
               }
-              this.tableConfig.modal = false;
+              setTimeout(() => {
+                self.addData = [];
+                self.tableConfig.modal = false;
+              }, 100);
             },
           },
         ],
