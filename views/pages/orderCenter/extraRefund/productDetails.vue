@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-06-16 16:56:30
+ * @LastEditTime: 2021-06-16 17:36:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -134,7 +134,7 @@ export default {
                 props: {
                   value: params.row.AMT_ACTUAL_REFUND,
                   autosize: true,
-                  regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
+                  regx: /^\d*\.{0,1}\d{0,2}$/
                 },
                 on: {
                   'on-change': e => {
