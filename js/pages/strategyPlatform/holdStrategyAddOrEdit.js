@@ -554,7 +554,7 @@ export default {
         params.ISACTIVE = params.ISACTIVE ? 'Y' : 'N'
         params.IS_AUTO_RELEASE = params.IS_AUTO_RELEASE ? 1 : 0
       }
-      if (this.formConfig3.formValue.RELEASE_TIME_TYPE === 2) {
+      if (this.formConfig3.formValue.RELEASE_TIME_TYPE !== 1) {
         params.RELEASE_TIME = null;
       }
       let { data: { code,data,message } } = await this.service.strategyPlatform.holdOrderHoldStrategySave({ "ST_C_HOLD_ORDER_STRATEGY": params });
