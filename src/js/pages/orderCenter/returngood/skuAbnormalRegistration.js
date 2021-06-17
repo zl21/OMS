@@ -574,7 +574,7 @@ export default {
             item.item.props.value = data.CP_C_SHOP_TITLE
             break
           case '发货时间':
-            item.item.props.value = data.SEND_TIME
+            item.item.props.value = data.SEND_TIME && commonUtil.dateFormat(new Date(data.SEND_TIME), 'yyyy-MM-dd hh:mm:ss')
             break
           case '发货物流公司':
             item.item.props.value = data.CP_C_LOGISTICS_ENAME
