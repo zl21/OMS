@@ -170,7 +170,7 @@
               <Radio v-for="(option , index) in item.options"
                      :key="index"
                      :label="option.value"
-                     :disabled="option.disabled">{{option.label}}</Radio>
+                     :disabled="option.disabled">{{option.label || option.title}}</Radio>
             </RadioGroup>
           </FormItem>
 
@@ -191,12 +191,18 @@
               </CheckboxGroup>
             </template>
             <template v-else-if="item.options && !item.onlyBox">
+              <Checkbox v-if="item.hasCheckAll"
+                        class="checkAllItem"
+                        style="float: left;"
+                        :indeterminate="item.indeterminate"
+                        :value="item.checkAll"
+                        @click.prevent.native="runMethods(item.handleCheckAll ? item.handleCheckAll : '')">全选</Checkbox>
               <CheckboxGroup v-model="formConfig.formValue[`${item.value || item.colname}`]" 
                              @on-change="(val) => runMethods(item.checkboxChange ? item.checkboxChange(val) : '')">
                 <Checkbox v-for="(option, index) in item.options"
                           :label="option.value"
                           :key="index"
-                          :disabled="option.disabled">{{ option.label }}</Checkbox>
+                          :disabled="option.disabled">{{ option.label || option.title }}</Checkbox>
               </CheckboxGroup>
             </template>
           </FormItem>
