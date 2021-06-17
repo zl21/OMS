@@ -172,7 +172,6 @@ export default {
             oneObj: val => {
               // 选中触发事件
               console.log('val::', val);
-              //if (!val.pid) return;
               this.formConfig2.formValue.CP_C_SHOP_IDS = val.pid;
               this.formConfig2.formValue.CP_C_SHOP_NAME = val.valuedata;
               this.masterModifyData('CP_C_SHOP_IDS', 'formConfig2')
