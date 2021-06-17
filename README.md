@@ -572,5 +572,6 @@
 | v1.7.10 | bug:41166、tab名称mixins |
 | v1.7.11 | 额外-修改字段|
 | v1.7.12 | 促销-basic->businessForm |
+| v1.7.13 | 修复分仓分物流bug|
 
 
