@@ -1259,7 +1259,7 @@ export default {
             TRUE_PRICE: subItem.TRUE_PRICE,
             PS_C_SKU_ID: subItem.PS_C_SKU_ID,
             GBCODE: subItem.GBCODE,
-            PAYABLE_PRICE: subItem.TRUE_PRICE,
+            PAYABLE_PRICE: subItem.PAYABLE_PRICE,
             checked: false
           }));
           self.jordanTableConfig.data = filterItemData;
