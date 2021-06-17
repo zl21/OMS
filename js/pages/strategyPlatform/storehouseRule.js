@@ -7,6 +7,7 @@ import businessDialog from 'professionalComponents/businessDialog';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import subTable from 'professionalComponents/subTable';
 import { set } from 'lodash';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 
 export default {
@@ -17,6 +18,7 @@ export default {
     businessDialog,
     subTable
   },
+  mixins: [modifycurrentLabel],
   data() {
     return {
       loading: false,

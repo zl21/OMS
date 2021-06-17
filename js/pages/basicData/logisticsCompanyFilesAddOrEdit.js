@@ -8,6 +8,7 @@ import addPlatformLogisticsCompany from '@/views/modal/commodityCenter/addPlatfo
 import loading from 'professionalComponents/loading';
 import subTable from 'professionalComponents/subTable';
 import orderNumberNnalysis from '@/views/pages/basicData/orderNumberNnalysis.vue';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   components: {
@@ -21,6 +22,7 @@ export default {
     subTable,
     orderNumberNnalysis
   },
+  mixins: [modifycurrentLabel],
   data() {
     /* -------------------- input校验器 start -------------------- */
     const ECODEValidator = (rule, value, callback) => {

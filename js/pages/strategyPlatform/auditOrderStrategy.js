@@ -7,11 +7,12 @@
  * @FilePath: /burgeon-project-logic/js/pages/strategyPlatform/auditOrderStrategy.js
  */
 import businessButton from 'professionalComponents/businessButton';
-  import businessForm from 'professionalComponents/businessForm';
-  import myInput from 'professionalComponents/fkinput.vue';
-  import comUtils from '@/assets/js/__utils__/common.js';
-  import subTable from 'professionalComponents/subTable';
-  import businessLabel from 'professionalComponents/businessLabel';
+import businessForm from 'professionalComponents/businessForm';
+import myInput from 'professionalComponents/fkinput.vue';
+import comUtils from '@/assets/js/__utils__/common.js';
+import subTable from 'professionalComponents/subTable';
+import businessLabel from 'professionalComponents/businessLabel';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
   export default {
     components: {
@@ -21,6 +22,7 @@ import businessButton from 'professionalComponents/businessButton';
       subTable,
       businessLabel
     },
+    mixins: [modifycurrentLabel],
     data() {
       return {
         isModify: false, // 是否修改过页面

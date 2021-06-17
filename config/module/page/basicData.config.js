@@ -18,7 +18,7 @@ export default {
     // component: logisticsCompanyFilesAddOrEdit,
     component: () =>
       import('allpages/basicData/logisticsCompanyFilesAddOrEdit.vue'),
-    labelName: '物流公司档案编辑',
+    labelName: '物流公司档案',
   },
   ADDLOGICSTORE: {
     // component: addLogicStore,
@@ -38,7 +38,7 @@ export default {
   CP_C_ORG_CHANNEL: {
     // component: channelStore,
     component: () => import('allpages/basicData/channelStore.vue'),
-    labelName: '渠道仓新增', // 元数据若配置的是'网页链接'则需前端配置labelName，若是动作定义则不用配置
+    labelName: '渠道仓档案', // 元数据若配置的是'网页链接'则需前端配置labelName，若是动作定义则不用配置
   },
   NATIONALPROVINCIALMUNICIPALEDIT: {
     // component: nationalProvincialMunicipalEdit,
