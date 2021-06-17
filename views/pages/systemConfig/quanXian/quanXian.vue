@@ -414,7 +414,7 @@ export default {
   created() {
 
     this.refresh();
-   // this.getButtonData();
+    this.getButtonData();
 
 
   },
@@ -426,7 +426,7 @@ export default {
         this.fixTableColumnWidth());
     }
      this.getSearchForm()
-     this.getTableData2()
+     this.getTableData()
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.fixTableColumnWidth);
@@ -438,11 +438,10 @@ export default {
   methods: {
      // 获取搜索框
     async getSearchForm() {
-      network
+      $network
         .post(
-          '/mock/734/p/cs/permission/v1/selectPermissionColumn',
-          //'/p/cs/permission/v1/selectPermissionColumn',
-          urlSearchParams({ permissionType: this.permissionType })
+          '/p/cs/permission/v1/selectPermissionColumn',
+          urlSearchParams({ permissionType: this.permissionType||"brand" })
         )
         .then(res => {
           if (res.data.code === 0) {
@@ -457,7 +456,7 @@ export default {
         });
     },
      // 获取表格
-    async getTableData2(searchCondition = {}, refresh = false) {
+    async getTableData(searchCondition = {}, refresh = false) {
       const {customizedModuleName}=this.$router.currentRoute.params;
       this.groupId = this.newGroupId;
       let url;
@@ -469,11 +468,10 @@ export default {
           QUERY: ''
         };
       } else {
-        url ='/mock/734/p/cs/permission/v1/selectDataPermission',
-       // url = '/p/cs/permission/v1/selectDataPermission';
+        url = '/p/cs/permission/v1/selectDataPermission';
         params = {
-          permissionType: this.permissionType || 'sensitivecol',
-          groupId: this.groupId || 32,
+          permissionType: this.permissionType || 'brand',
+          groupId: this.groupId || 46,
           searchCondition
         };
       }
@@ -1603,6 +1601,7 @@ export default {
     }, // 下边表格功能列checkbox改变时触发
     savePermission(type) {
       this.getSaveData();
+        
       if (this.tableSaveData.length === 0) {
         this.$Message.info({
           content: '没有更改'
@@ -1667,6 +1666,7 @@ export default {
       }
     }, // 保存数据
     getSaveData() {
+
       this.tableSaveData = this.tableData.reduce((acc, cur, idx) => {
         if (cur.ad_menu_id === this.backupsTableData[idx].ad_menu_id && this.getSavePermission(idx) !== this.toBin(this.backupsTableData[idx].permission)) {
           acc.push({

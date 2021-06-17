@@ -1,19 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2021-06-08 14:17:52
- * @LastEditTime: 2021-06-15 15:25:12
+ * @LastEditTime: 2021-06-16 17:48:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/config/functionPower.actions.js
  */
 /* eslint-disable import/prefer-default-export */
-// import R3 from '@syman/burgeon-r3';
 
-// const {  $network } = R3;
-var str = ''
-if (vm.$route.query.type == "data") {
-  str = "/mock/734"
-}
 
 
 export const fetchActionsInCustomizePage = function fetchActionsInCustomizePage(params) {
@@ -28,7 +22,7 @@ export const fetchActionsInCustomizePage = function fetchActionsInCustomizePage(
 
 export const queryMenuPermission = function queryMenuPermission(params) {
    $network
-    .post(str+'/p/cs/queryMenuPermission', params.params)
+    .post('/p/cs/queryMenuPermission', params.params)
     .then((res) => {
       if (typeof params.success === 'function') {
         params.success(res);
@@ -68,7 +62,7 @@ export const cgroupsquery = function cgroupsquery(params) {
 
 export const getMenuTree = function getMenuTree(params) {
    $network
-    .post(str+'/p/cs/getMenuTree')
+    .post('/p/cs/getMenuTree')
     .then((res) => {
       if (typeof params.success === 'function') {
         params.success(res);
@@ -80,7 +74,7 @@ export const groupTreeload = function groupTreeload(params) {
 
  
    $network
-    .post(str+'/p/cs/groupTreeload')
+    .post('/p/cs/groupTreeload')
     .then((res) => {
       if (typeof params.success === 'function') {
         params.success(res);
