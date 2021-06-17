@@ -7,10 +7,11 @@
   // import loading from 'professionalComponents/loading.vue';
   import dateUtil from '@/assets/js/__utils__/date.js';
   import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
-  import commonTableByAgGrid from 'arkui_BCL/CommonTableByAgGrid';
+  // import commonTableByAgGrid from 'arkui_BCL/CommonTableByAgGrid';
   import dynamicSearch from '@/views/pages/orderCenter/orderManager/dynamicSearch.vue';
   import formSetting from '@/views/pages/orderCenter/orderManager/formSetting.vue';
   import proDetail from '@/views/pages/orderCenter/orderManager/proDetail';
+  import commonTableByAgGrid from 'libs/@syman/ark-ui-bcl/src/components/common-table-by-ag-grid/CommonTableByAgGrid';
 
   export default {
     name: 'OrderManage',
@@ -512,30 +513,36 @@
       self.initList();
     },
     methods: {
+      renderParams(cellData){
+        console.log(cellData);
+        // if(cellData.field == 'ORDER_TAG'){
+        //   const resultElement = document.createElement('div');
+        //   params.data.ORDER_TAG.forEach((item) => {
+        //     const tag = document.createElement('span');
+        //     tag.innerText = item.text;
+        //     tag.style.color = item.clr;
+        //     tag.style.border = `1px solid${item.clr}`;
+        //     tag.style.margin = '0 2px';
+        //     tag.style.borderRadius = '6px';
+        //     tag.style.padding = '2px';
+        //     resultElement.appendChild(tag);
+        //   });
+        //   return resultElement;
+        // }
+      },
       gridReady() {
         console.log('grid');
-        // this.options.datas.tabth = [
-        //       {
-        //         field:'name',
-        //         displayName:'名称'
-        //       }
-        //     ],
-        //     this.options.datas.row = [
-        //       {
-        //         name:'测试'
-        //       }
-        //     ]
-        // this.tabth = [
-        //   {
-        //     field: 'name',
-        //     displayName: '名称'
-        //   }
-        // ];
-        // this.row = [
-        //   {
-        //     name: '测试'
-        //   }
-        // ];
+        this.tabth = [
+          {
+            field: 'name',
+            displayName: '名称'
+          }
+        ];
+        this.row = [
+          {
+            name: '测试'
+          }
+        ];
       },
       shutDownOrbounceOff() {
         const self = this;
@@ -575,6 +582,9 @@
               self.agTableConfig.pagenation.pageSize = data.PAGE_INFO.DEFAULT_SIZE;
               self.agTableConfig.columnDefs = columns;
               self.agTableConfig.rowData = rowData;
+              columns.forEach(item=>item['displayName'] = item.headerName);
+              self.tabth = columns;
+              self.row = rowData;
               self.$refs.agGridChild.agGridTable(columns, rowData);
               self.tabList = data.TAB_LABEL; // tabs赋值
               self.labelValue = data.TAB_LABEL[0].value;
@@ -809,6 +819,7 @@
             // 分页赋值
             self.agTableConfig.pagenation.total = data.COUNT;
             self.agTableConfig.rowData = data.ITEMS;
+            self.row = data.ITEMS;
             self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
           }
           self.loading = false;

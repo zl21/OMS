@@ -119,14 +119,15 @@
         :itemid="proDetailConfig.ID"
       />
     </Modal>
-    <!-- <commonTableByAgGrid
+    <commonTableByAgGrid
       ref="agGrid"
       height="300px"
       :options="options"
       :data="row"
       :columns="tabth"
       @grid-ready="gridReady"
-    /> -->
+      :renderParams="renderParams"
+    />
   </div>
 </template>
 
