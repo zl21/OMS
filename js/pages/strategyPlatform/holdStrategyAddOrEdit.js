@@ -197,11 +197,11 @@ export default {
               },
               {
                 label: '系统创建时间',
-                value: 2
+                value: 3
               },
               {
                 label: '支付时间',
-                value: 3
+                value: 2
               }
             ],
             switchChange: val => {
