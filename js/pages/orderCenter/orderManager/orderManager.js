@@ -126,7 +126,15 @@
                             props: {
                               columns: [
                                 {
-                                  title: $i18n.t('modalTitle.a6'), // '提示信息',
+                                  title:'序号',
+                                  key: 'index'
+                                },
+                                {
+                                  title:'单据编号',
+                                  key:'billNo'
+                                },
+                                {
+                                  title: '失败原因', // '提示信息',
                                   key: 'message',
                                 },
                               ],
@@ -170,7 +178,15 @@
                             props: {
                               columns: [
                                 {
-                                  title: $i18n.t('modalTitle.a6'), // '提示信息',
+                                  title:'序号',
+                                  key: 'index'
+                                },
+                                {
+                                  title:'单据编号',
+                                  key:'billNo'
+                                },
+                                {
+                                  title: '失败原因', // '提示信息',
                                   key: 'message',
                                 },
                               ],

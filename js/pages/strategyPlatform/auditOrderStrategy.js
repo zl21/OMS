@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-03 19:24:03
- * @LastEditTime: 2021-06-04 13:07:27
+ * @LastEditTime: 2021-06-17 16:08:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/pages/strategyPlatform/auditOrderStrategy.js
@@ -228,12 +228,12 @@ import businessButton from 'professionalComponents/businessButton';
               VALUE: ''
             },
             LOGISTICS_COMPANY: { // 物流公司
-              IS_OPEN: true,
+              IS_OPEN: false,
               ID: '',
               VALUE: ''
             },
             PAYMENT_TIME: { // 支付时间
-              IS_OPEN: true,
+              IS_OPEN: false,
               BEGIN_TIME: '',
               END_TIME: ''
             },
@@ -247,15 +247,15 @@ import businessButton from 'professionalComponents/businessButton';
               ]
             },
             RECEIVING_ADDRESS: { // 收货地址
-              IS_OPEN: true,
+              IS_OPEN: false,
               INFO: ''
             },
             BUYER_MESSAGE: { // 买家留言
-              IS_OPEN: true,
+              IS_OPEN: false,
               INFO: ''
             },
             SELLER_NOTES: { // 卖家备注
-              IS_OPEN: true,
+              IS_OPEN: false,
               INFO: ''
             },
             PRO_INFO: { // 商品信息
