@@ -80,7 +80,7 @@ const logFormConfig = {
     width: '6',
     disabled: true
   }, {
-    style: 'date',
+    style: 'input',
     label: '创建时间',
     value: 'CREATIONDATE',
     width: '6',
@@ -92,7 +92,7 @@ const logFormConfig = {
     width: '6',
     disabled: true
   }, {
-    style: 'date',
+    style: 'input',
     label: '修改时间',
     value: 'MODIFIEDDATE',
     width: '6',
