@@ -5,6 +5,7 @@ import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import subTable from 'professionalComponents/subTable';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   name: 'holdStrategyAddOrEdit',
@@ -16,6 +17,7 @@ export default {
     businessLabel,
     businessStatusFlag
   },
+  mixins: [modifycurrentLabel],
   data() {
     return {
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
@@ -424,10 +426,10 @@ export default {
     const self = this;
     if (self.ID > 0 && !self.$route.query.spuid) {
       // 详情
-      const { customizedModuleName, customizedModuleId } = self.$route.params;//获取定制界面ID，Name 
-      const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-      const data = { label: 'hold策略编辑', name:keepAliveModuleName}; //当前界面模块名称 
-      self.$store.commit('global/modifycurrentLabel' , data)
+      // const { customizedModuleName, customizedModuleId } = self.$route.params;//获取定制界面ID，Name 
+      // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+      // const data = { label: 'hold策略编辑', name:keepAliveModuleName}; //当前界面模块名称 
+      // self.$store.commit('global/modifycurrentLabel' , data)
       this.initData();
       // 日志
       self.subTableConfig = {

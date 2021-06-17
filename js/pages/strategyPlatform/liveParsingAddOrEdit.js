@@ -4,6 +4,7 @@ import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import subTable from 'professionalComponents/subTable';
 import dateUtil from '@/assets/js/__utils__/date.js';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   components: {
@@ -13,6 +14,7 @@ export default {
     businessStatusFlag,
     subTable
   },
+  mixins: [modifycurrentLabel],
   data() {
     return {
       vmI18n:$i18n,
