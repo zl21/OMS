@@ -6,6 +6,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import subTable from 'professionalComponents/subTable';
 import scheduleFormDialog from '@/views/modal/strategyPlatform/scheduleFormDialog';
 import dateUtil from '@/assets/js/__utils__/date.js';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   components: {
@@ -17,6 +18,7 @@ export default {
     businessActionTable,
     scheduleFormDialog
   },
+  mixins: [modifycurrentLabel],
   data() {
     return {
       vmI18n:$i18n,

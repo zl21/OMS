@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-16 11:01:13
- * @LastEditTime: 2021-06-16 14:00:59
+ * @LastEditTime: 2021-06-17 15:25:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/modal/organizationCenter/users_reset_pwd.vue
@@ -21,7 +21,7 @@
 
 <script>
 import businessButton from 'professionalComponents/businessButton';
-
+import service from '@/service/index';
 
 export default {
   components: {
@@ -40,6 +40,7 @@ export default {
             props: {
               type: "password",
               value: '',
+              regx: /^[A-Za-z0-9`~!@#$%^&*-=_+,.\/\\;':"]+$/
             }
           }
         },
@@ -52,9 +53,24 @@ export default {
             disabled: false,
             text: "确定",
             btnclick: () => {
-              console.log("ok");
-              
-              console.log(this.$refs.FormLayout.formData);
+         
+              if (this.$refs.FormLayout.formData.pwd.length < 8) {
+                this.$Message.warning('密码长度必须大于8位！');
+                return
+              }
+              let data = {
+                USERS: {
+                  "ID": this.$parent.$parent.idArray[0],
+                  "PASSWORD": this.$refs.FormLayout.formData.pwd
+                }
+              }
+              service.organizationCenter.usersSave(data).then(res => {
+                if (res.data.code == 0) {
+                   this.$emit('closeActionDialog', false)
+                  this.$Message.success(res.data.message);
+                }
+              })
+
             }, // 按钮点击事件
           }
         ],
@@ -65,5 +81,4 @@ export default {
 </script>
 
 <style>
-
 </style>

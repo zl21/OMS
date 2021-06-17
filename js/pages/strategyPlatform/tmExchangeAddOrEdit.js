@@ -3,8 +3,8 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
-import dateUtil from '@/assets/js/__utils__/date';
 import subTable from 'professionalComponents/subTable';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   name: 'holdStrategyAddOrEdit',
@@ -16,6 +16,7 @@ export default {
     businessLabel,
     businessStatusFlag
   },
+  mixins: [modifycurrentLabel],
   data() {
     return {
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID

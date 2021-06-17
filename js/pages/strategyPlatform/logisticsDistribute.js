@@ -4,6 +4,7 @@ import service from '@/service/index';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import subTable from 'professionalComponents/subTable';
 import businessLabel from 'professionalComponents/businessLabel';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   components: {
@@ -12,6 +13,7 @@ export default {
     businessLabel,
     subTable
   },
+  mixins: [modifycurrentLabel],
   data() {
     return {
       collapse: 'panel_baseInfo',

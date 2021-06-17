@@ -8,6 +8,7 @@ import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import comUtils from '@/assets/js/__utils__/common.js';
 import subTable from 'professionalComponents/subTable';
 import ImageUpload from 'arkui_BCL/ImageUpload';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   components: {
@@ -19,6 +20,7 @@ export default {
     businessActionTable,
     ImageUpload
   },
+  mixins: [modifycurrentLabel],
   computed: {
     id() {
       return this.$route.params.customizedModuleId == 'New' ? -1 : this.$route.params.customizedModuleId;

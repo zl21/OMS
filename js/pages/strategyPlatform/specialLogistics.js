@@ -9,6 +9,7 @@ import subTable from 'professionalComponents/subTable';
 
 import axios from 'axios';
 import service from '@/service/index';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   name: 'specialLogistics',
@@ -20,6 +21,7 @@ export default {
     businessActionTable,
     subTable
   },
+  mixins: [modifycurrentLabel],
   watch: {
     'formConfig.formValue': {
       //监听主表

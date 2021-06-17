@@ -7,6 +7,7 @@ import businessDialog from 'professionalComponents/businessDialog';
 import myInput from 'professionalComponents/fkinput.vue';
 import subTable from 'professionalComponents/subTable';
 import dateUtil from '@/assets/js/__utils__/date.js';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 Vue.component('myInput', myInput)
 
 export default {
@@ -20,6 +21,7 @@ export default {
     businessDialog,
     myInput
   },
+  mixins: [modifycurrentLabel],
   data() {
     return {
       vmI18n:$i18n,

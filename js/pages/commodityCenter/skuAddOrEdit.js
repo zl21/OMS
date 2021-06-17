@@ -6,6 +6,7 @@ import dateUtil from '@/assets/js/__utils__/date.js';
 import orderItem from 'professionalComponents/subTable';
 import loading from 'professionalComponents/loading';
 import ImageUpload from 'arkui_BCL/ImageUpload';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   components: {
@@ -17,6 +18,7 @@ export default {
     loading,
     ImageUpload
   },
+  mixins: [modifycurrentLabel],
   data() {
     return {
       vmI18n: $i18n,

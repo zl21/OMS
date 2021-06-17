@@ -8,6 +8,7 @@ import comUtils from '@/assets/js/__utils__/common.js';
 import orderItem from 'professionalComponents/subTable';
 import subTable from 'professionalComponents/subTable';
 import ImageUpload from 'arkui_BCL/ImageUpload';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   components: {
@@ -19,6 +20,7 @@ export default {
     subTable,
     ImageUpload
   },
+  mixins: [modifycurrentLabel],
   data() {
     return {
       vmI18n:$i18n,

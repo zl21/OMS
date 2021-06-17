@@ -4,6 +4,7 @@ import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import subTable from 'professionalComponents/subTable';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   components: {
@@ -14,6 +15,7 @@ export default {
     businessActionTable,
     subTable
   },
+  mixins: [modifycurrentLabel],
   data() {
     return {
       vmI18n:$i18n,
@@ -546,6 +548,7 @@ export default {
           this.queryForm(this.formConfig, 'ISACTIVE').style = 'switch';
           this.formConfig.formValue.ISACTIVE = isEnable;
           this.formConfig.formValue.REMARK = ST_C_EXPRESS_ALLOCATION.remark;
+          this.initPanel();
         }
         const { records = [], total } = ST_C_EXPRESS_ALLOCATION_ITEM || {}
         this.logisticsTableConfig.data = records

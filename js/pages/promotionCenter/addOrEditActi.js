@@ -16,6 +16,7 @@ export default {
   },
   data() {
     return {
+      freshKey: 0,
       vmI18n: $i18n,
       btnConfig: {
         typeAll: 'default',
@@ -655,7 +656,7 @@ export default {
           message: $i18n.t('modalTips.s8')
         }; // 下线时间未填写！
       }
-      if (this.basic_info.buyer_limit_frequency === '1' && this.basic_info.buyer_max_frequency === '') {
+      if (this.basic_info.buyer_limit_frequency === '1' && !this.basic_info.buyer_max_frequency) {
         return {
           code: -1,
           message: $i18n.t('modalTips.s9')
@@ -843,6 +844,7 @@ export default {
     } else {
       this.objid = '-1';
       this.initData();
+      this.freshKey += 1;
       const copy = this.$route.query.copy;
       if (copy && copy > 1) this.getData(copy);
       this.initBtn();

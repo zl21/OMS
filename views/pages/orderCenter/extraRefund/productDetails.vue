@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-06-16 18:32:29
+ * @LastEditTime: 2021-06-17 15:50:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -111,7 +111,7 @@ export default {
                 },
                 on: {
                   'on-change': e => {
-                      let num =  this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.PRICE_ACTUAL), 2)
+                      let num =  this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.AMT_REFUND), 2)
                       params.row.AMT_REFUND = isNaN(num) ? '0.00' : num;
                       params.row.QTY_REFUND = e;
                       this.tableConfig.data[params.index] = params.row;
@@ -132,7 +132,7 @@ export default {
             render:(h,params)=>{
              return h('Input', {
                props: {
-                  value: params.row.COMPENSATE_AMT,
+                  value: params.row.AMT_ACTUAL_REFUND,
                   autosize: true,
                   regx: /^\d*\.{0,1}\d{0,2}$/,
                 },
@@ -143,7 +143,7 @@ export default {
                      R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
                   }
                 }
-              });psave
+              });
             }
           }
         ], // 表头
