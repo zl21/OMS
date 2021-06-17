@@ -76,7 +76,7 @@
                     :transfer='item.transfer?item.transfer:true'
                     :placeholder="item.placeholder ? item.placeholder : ''"
                     :clearable="item.clearable"
-                    @on-clear="runMethods(item.clearSelect(item.value || item.colname) , true)">
+                    @on-clear="runMethods(item.clearSelect ? item.clearSelect(item.value || item.colname) : false , true)">
               <Option v-for="(option , index) in item.options"
                       :key="index"
                       :value="option.value"
