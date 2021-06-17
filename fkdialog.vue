@@ -1288,7 +1288,7 @@ export default {
 };
 </script>
 <style lang="less" type="text/less">
-@import '~omsTheme/public.less';
+// @import '~@burgeon/oms-theme/skin/public.less';
 .fk-error-dialog {
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 100;
@@ -1355,13 +1355,13 @@ export default {
           margin-left: 0px;
           padding: 0 8px;
           background: #fff;
-          color: @base-color;
-          border: 1px solid  @base-color;
+          color: #4855AF;
+          border: 1px solid#4855AF;
           border-radius: 2px;
           font-size: 12px;
           &:hover {
-            border-color: fade(@base-color,6%);
-            color:fade(@base-color,6%);
+            border-color: fade(#4855AF,6%);
+            color:fade(#4855AF,6%);
           }
         }
       }
@@ -1395,7 +1395,7 @@ export default {
       line-height: 20px;
       text-align: center;
       font-size: 20px;
-      color:  @base-color;
+      color:  #4855AF;
       box-sizing: border-box;
       border: 1px solid;
       border-radius: 2px;
@@ -1475,8 +1475,8 @@ export default {
         padding: 0;
         width: 100%;
         font-size: 12px;
-        color:  @base-color;
-        border: 1px solid  @base-color;
+        color: #4855AF;
+        border: 1px solid #4855AF;
         border-radius: 2px;
         &:hover {
           opacity: 0.6;
@@ -1509,7 +1509,7 @@ export default {
             font-size: 12px;
           }
           .el-tabs__active-bar {
-            background-color:  @base-color;
+            background-color: #4855AF;
           }
         }
       }
@@ -1627,7 +1627,7 @@ export default {
           }
           .icon-fork:hover::before {
             content: "\e6b4";
-            color:  @base-color;
+            color:  #4855AF;
           }
           p {
             flex: 1;
@@ -1649,14 +1649,14 @@ export default {
       box-sizing: border-box;
       height: 44px;
       > button:last-child {
-        background-color: @base-color;
-        border: 1px solid @base-color;
+        background-color: #4855AF;
+        border: 1px solid #4855AF;
         color: white;
         margin-right: 6px;
         &:hover {
-          background-color: @base-color;
+          background-color: #4855AF;
           color: #f3cec5;
-          border: 1px solid @base-color;
+          border: 1px solid #4855AF;
         }
       }
       > button:first-child {
@@ -1671,8 +1671,8 @@ export default {
         padding: 0 8px;
         height: 24px;
         font-size: 12px;
-        color:  @base-color;
-        border: 1px solid  @base-color;
+        color:  #4855AF;
+        border: 1px solid #4855AF;
         border-radius: 5px;
       }
     }
@@ -1892,12 +1892,12 @@ export default {
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid;
-    color:  @base-color;
+    color:  #4855AF;
     font-size: 12px;
     border-radius: 2px;
 
     span {
-      color:  @base-color;
+      color:  #4855AF;
     }
   }
   .modalBtn .btn:hover {
