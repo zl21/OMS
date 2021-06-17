@@ -39,7 +39,7 @@ class commonUtils {
             if (callbackFun) {
               callbackFun(res)
             } else {
-              self.msgTips('success', self, '取消成功', 0)
+              commonUtils.msgTips(self , 'success', '取消成功', 0)
               self.selection = []
               self.query()
             }
