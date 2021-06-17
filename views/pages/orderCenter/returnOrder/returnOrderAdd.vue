@@ -224,6 +224,7 @@ export default {
           CP_C_LOGISTICS_ID: '',
           EXPRESS_CODE: '',
           SYS_REMARK: '',
+          IS_RESERVED: '1',
         },
         ruleValidate: {
           BILL_TYPE: [{ required: true, message: ' ', trigger: 'blur' }],
@@ -707,6 +708,7 @@ export default {
                 this.exFormKey += 1;
                 this.labelList.find(it => it.value == '1').isShow = true;
                 this.formEmpty(this, 'formConfig', ['BILL_TYPE']);
+                this.formConfig.formValue.IS_RESERVED = '1'; // 默认值
               });
             } else {
               this.showEx = false;
@@ -849,13 +851,15 @@ export default {
       const bT = mainTable.BILL_TYPE;
       if (bT == '1') Object.assign(mainTable, this.formConfigEx.formValue);
       const masterArr = Object.keys(mainTable);
-      const delArr = ['RECEIVER_ADDRESS', 'EXCHANGE_SHIP_AMT', 'CP_C_REGION_AREA_ID', 'CP_C_REGION_CITY_ID', 'CP_C_REGION_PROVINCE_ID', 'RECEIVER_ZIP', 'RECEIVER_PHONE', 'RECEIVER_MOBILE', 'RECEIVER_NAME'];
+      const delArr = ['RECEIVER_ADDRESS', 'EXCHANGE_SHIP_AMT', 'CP_C_REGION_AREA_ID', 'CP_C_REGION_CITY_ID', 'CP_C_REGION_PROVINCE_ID', 'RECEIVER_ZIP', 'RECEIVER_PHONE', 'RECEIVER_MOBILE', 'RECEIVER_NAME', 'IS_RESERVED'];
       if (bT == '0') {
         for (const key in mainTable) {
           if (delArr.includes(key)) {
             delete mainTable[key]
           }
         }
+      } else {
+        mainTable.IS_RESERVED = mainTable.IS_RESERVED === false ? '0' : '1';
       }
       const tui = self.modify.tui || [];
       const huan = self.modify.huan || [];
