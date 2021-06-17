@@ -1356,7 +1356,7 @@ export default {
           padding: 0 8px;
           background: #fff;
           color: @base-color;
-          border: 1px solid  @base-color;;
+          border: 1px solid  @base-color;
           border-radius: 2px;
           font-size: 12px;
           &:hover {
@@ -1395,7 +1395,7 @@ export default {
       line-height: 20px;
       text-align: center;
       font-size: 20px;
-      color:  @base-color;;
+      color:  @base-color;
       box-sizing: border-box;
       border: 1px solid;
       border-radius: 2px;
@@ -1475,8 +1475,8 @@ export default {
         padding: 0;
         width: 100%;
         font-size: 12px;
-        color:  @base-color;;
-        border: 1px solid  @base-color;;
+        color:  @base-color;
+        border: 1px solid  @base-color;
         border-radius: 2px;
         &:hover {
           opacity: 0.6;
@@ -1509,7 +1509,7 @@ export default {
             font-size: 12px;
           }
           .el-tabs__active-bar {
-            background-color:  @base-color;;
+            background-color:  @base-color;
           }
         }
       }
@@ -1627,7 +1627,7 @@ export default {
           }
           .icon-fork:hover::before {
             content: "\e6b4";
-            color:  @base-color;;
+            color:  @base-color;
           }
           p {
             flex: 1;
@@ -1671,8 +1671,8 @@ export default {
         padding: 0 8px;
         height: 24px;
         font-size: 12px;
-        color:  @base-color;;
-        border: 1px solid  @base-color;;
+        color:  @base-color;
+        border: 1px solid  @base-color;
         border-radius: 5px;
       }
     }
@@ -1892,12 +1892,12 @@ export default {
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid;
-    color:  @base-color;;
+    color:  @base-color;
     font-size: 12px;
     border-radius: 2px;
 
     span {
-      color:  @base-color;;
+      color:  @base-color;
     }
   }
   .modalBtn .btn:hover {
