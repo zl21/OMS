@@ -41,7 +41,6 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        // confirmTitle: '批量新增条件信息导入',
         confirmTitle: $i18n.t('modalTitle.a2'), // 批量新增条件信息导入
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '540',
