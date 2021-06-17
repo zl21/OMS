@@ -263,6 +263,7 @@ export default {
         tempApi: '/p/cs/pm/v1/getModuleUrl',
         okApi: '/p/cs/pm/v1/parseExcel',
         tempParm: { 'mode': this.moduleMode },
+        okParm: { table: 'PS_C_SKU', mode: 'batch' },
         downErrorInfo: true,
         showErrorInfo: false,
         // freshPage: Fn,
