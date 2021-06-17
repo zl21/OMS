@@ -287,7 +287,7 @@ export default {
       }
       let f = this.CheckRegx(this.regx.mobile, this.data.receiver_mobile);
       if (this.componentData.ck != 50) {
-        if (!f && !Boolean(this.data.receiver_phone)) return this.$Message.error('手机号或电话号码不能为空！');;
+        if (!f && !Boolean(this.data.receiver_phone)) return this.$Message.error('手机号或电话号码不能为空！');
       }
       if (this.data.receiver_zip) {
         f = this.CheckRegx(this.regx.shipzip, this.data.receiver_zip);
