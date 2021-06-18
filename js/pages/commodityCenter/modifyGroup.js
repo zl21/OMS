@@ -552,7 +552,8 @@ export default {
           // self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
           self.setForm(res.data.data);
         } else {
-          self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+          // 走框架报错即可
+          // self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
         }
       });
     },
