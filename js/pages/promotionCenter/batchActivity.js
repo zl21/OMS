@@ -414,13 +414,13 @@ export default {
             type: 'success',
             message: $i18n.t('modalTips.z9') // 保存成功
           });
-          let action = 'customize/switchActiveTab';
-          if (this.objid == -1) {
-            action = 'customize/TabClose';
-          }
+          // let action = 'customize/switchActiveTab';
+          // if (this.objid == -1) {
+          //   action = 'customize/TabClose';
+          // }
           this.objid = String(data.objid) || -1;
           this.$nextTick(() => {
-            $store.commit(action, {
+            $store.commit('customize/TabHref', {
               id: this.objid, // id
               type: 'action', // 类型action
               name: 'PM_C_PROM_ACTI_BATCH_ADD', // 文件名
