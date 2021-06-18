@@ -1,5 +1,13 @@
-@import '~professionalComponents/common/css/theme.less';
-
+// @import '~professionalComponents/common/css/theme.less';
+@import '~@burgeon/oms-theme/skin/public.less';
+.customProperties{
+  display: grid;
+  grid-template-columns: 80px auto;
+  align-items: center;
+  .panel-title{
+    margin-top: @base-mr;
+  }
+}
 .spuRecord {
   .public-content {
     /deep/ .ark-collapse {
