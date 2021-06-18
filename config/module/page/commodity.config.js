@@ -31,7 +31,7 @@ export default {
     // component: quicklyGenerate,
     labelName: 'SKU快速生成'
   },
-  BS_C_EXTRA_ATTRIBUTE_DEF: {
+  BS_C_EXTRA_ATTRIBUTE_DEF_PRO: {
     component: () => import('allpages/commodityCenter/commodityCusPropertiesAddOrEdit.vue'),
     // component: commodityCusPropertiesAddOrEdit,
     labelName: '商品自定义属性'
