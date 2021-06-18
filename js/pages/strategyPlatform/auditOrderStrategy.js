@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-03 19:24:03
- * @LastEditTime: 2021-06-18 10:38:29
+ * @LastEditTime: 2021-06-18 11:47:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/pages/strategyPlatform/auditOrderStrategy.js
@@ -163,11 +163,14 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
               width: '6',
               switchChange: ()=>{
                 this.modify();
+                if(this.id != '-1'){
+                  this.checkDisabled();
+                }
               }
             },
             {
               version: '1.4',
-              colname: 'key', // 控件key
+              colname: 'CP_C_SHOP_ID', // 控件key
               style: 'popInput', // 输入框弹框单多选
               width: '6',
               itemdata: {
@@ -278,8 +281,8 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
         centerName: '',
         tablename: '',
         objid: '',
-        
-      },
+        },
+        disabledAll:false
       };
     },
     computed: {
@@ -344,6 +347,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
         self.PAYMENT_TIME = [data.ST_C_AUTO_AUDIT_ITEM.PAYMENT_TIME.BEGIN_TIME, data.ST_C_AUTO_AUDIT_ITEM.PAYMENT_TIME.END_TIME];
         resultData.ST_C_AUTO_AUDIT_ITEM.PRO_INFO.TYPE = String(data.ST_C_AUTO_AUDIT_ITEM.PRO_INFO.TYPE);
         self.resultData = resultData;
+        self.checkDisabled();
       },
       mdAdd() {
         const self = this;
@@ -510,6 +514,30 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
       },
       modify() {
         this.isModify = true;
+      },
+      checkDisabled(){
+        let self = this;
+        if(self.formConfig.formValue.IS_OPEN){  //启用自动审核
+          for (const item of self.formConfig.formData) {
+            if(item.colname && item.colname == 'CP_C_SHOP_ID'){
+              item.itemdata.readonly = true;
+              break;
+            }
+          };
+          self.disabledAll = true;
+          self.DELIVERY_WAREHOUSE.itemdata.readonly = true;
+          self.LOGISTICS_COMPANY.itemdata.readonly = true;
+        }else { //关闭自动审核
+          for (const item of self.formConfig.formData) {
+            if(item.colname && item.colname == 'CP_C_SHOP_ID'){
+              item.itemdata.readonly = false;
+              break;
+            }
+          };
+          self.disabledAll = false;
+          self.DELIVERY_WAREHOUSE.itemdata.readonly = false;
+          self.LOGISTICS_COMPANY.itemdata.readonly = false;
+        }
       }
     }
   };
