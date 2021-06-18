@@ -34,6 +34,7 @@
       :highlight-row="highlightRow"
       :row-class-name="rowClassName"
       :no-data-text="noDataText"
+      :show-header="showHeader"
       @on-current-change="onCurrentChange"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"

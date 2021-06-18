@@ -212,3 +212,4 @@
 | v1.1.68 | 促销修改 - fkdialog样式修改 |
 | v1.1.69 | 多选控件清空方法判空操作 |
 | v1.1.70 | businessForm ckeckbox拓展'全选' |
+| v1.1.71 | subTable分页统一 |

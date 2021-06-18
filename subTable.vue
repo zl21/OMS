@@ -16,6 +16,7 @@ export default {
   data() {
     return {
       tableConfig: {
+        showHeader: false,
         columns: [],
         data: [],
         pageShow: true, // 控制分页是否显示
@@ -26,7 +27,7 @@ export default {
         height: "", // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         current: "", // 当前页
       },
@@ -124,6 +125,7 @@ export default {
         return obj;
       });
       this.tableConfig = {
+        showHeader: true,
         columns: thead,
         data: tbody,
         pageShow: this.componentData.pageShow || false, // 控制分页是否显示
@@ -145,7 +147,9 @@ export default {
   },
   mounted() {
     if (this.componentData && this.componentData.tablename) {
-      this.request(this.componentData);
+      this.$nextTick(() => {
+        this.request(this.componentData);
+      })
     }
   },
 };

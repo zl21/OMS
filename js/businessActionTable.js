@@ -66,6 +66,10 @@ export default {
     }
   },
   computed: {
+    // 展示表头否
+    showHeader() {
+      return this.jordanTableConfig.showHeader ?? true;
+    },
     noDataText() {
       return this.jordanTableConfig.noDataText ?? '暂无数据';
     },
