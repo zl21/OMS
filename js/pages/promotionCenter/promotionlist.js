@@ -662,20 +662,20 @@ export default {
         const ACTI_ID = selectedData[0].ACTI_ID;
         const IS_BATCH = selectedData[0].IS_BATCH;
         if (IS_BATCH) {
-          this.navigateMain(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, { copy: ACTI_ID }, 0)
+          $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, { copy: ACTI_ID }, 0)
         } else {
-          this.navigateMain(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, { copy: ACTI_ID }, 0)
+          $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, { copy: ACTI_ID }, 0)
         }
       } else {
         this.$Message.warning($i18n.t('modalTips.r9')); // 请至少选择一条
       }
     },
     promotionClick() {
-      this.navigateMain(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, {}, 0)
+      $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, {}, 0)
     },
     promotionBlukClick() {
       // 【批量新增】
-      this.navigateMain(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
+      $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
     },
     async publish() {
       let flag = false;
@@ -752,7 +752,7 @@ export default {
     },
     simulation() {
       // 模拟仿真
-      this.navigateMain(0, -1, 'CUSTOMIZED', 'PM_C_PROM_PRE_TEST', { i8n: 1, tip: 'btn.simulation' }, {}, 0)
+      $omsUtils.tabJump(0, -1, 'CUSTOMIZED', 'PM_C_PROM_PRE_TEST', { i8n: 1, tip: 'btn.simulation' }, {}, 0)
     },
     async times() {
       // 默认时间
@@ -806,10 +806,9 @@ export default {
         // let scheme_dataInit = JSON.stringify(res.data.data.scheme_arr);
         // 存储种类id保存草稿时需要
         if (IS_BATCH) {
-          // $omsUtils.navigateMain(ACTI_ID, 'TabOpen', 'PM_C_PROM_ACTI_BATCH_ADD', {}, false)
-          this.navigateMain(0, ACTI_ID, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
+          $omsUtils.tabJump(0, ACTI_ID, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
         } else {
-          this.navigateMain(0, ACTI_ID, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.editPromotion' }, {}, 0)
+          $omsUtils.tabJump(0, ACTI_ID, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.editPromotion' }, {}, 0)
         }
       }
     },
@@ -836,31 +835,6 @@ export default {
       if (event.keyCode === 13) {
         this.getData();
       }
-    },
-    navigateMain(
-      mutation,
-      id,
-      type,
-      tableName,
-      labelName = { i8n: 1, tip: '' },
-      exendObj = {},
-      isback = 0,
-    ) {
-      const label = labelName.i8n ? $i18n.t(`${labelName.tip}`) : labelName.tip; // 语言包存在就走，不存在则直接取
-      const mutationArr = ['customize/TabOpen',]
-      const muta = mutationArr[mutation];
-      $store.commit(muta, {
-        id: id,
-        type: 1 ? 'action' : type, // 传1则'action'
-        name: tableName,
-        label,
-        back: Boolean(isback),
-        query: Object.assign({
-          id: id,
-          tabTitle: label,
-          ...exendObj,
-        }),
-      })
     },
   }
 };
