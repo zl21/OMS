@@ -103,7 +103,7 @@ export default {
           BILL_NO:item.BILL_NO
         }
       });
-      self.service.orderCenter.updateWarehouse({
+      self.service.orderCenter.updateReturnWarehouse({
         ID_AND_BILL_NO_LIST:ids,
         CP_C_PHY_WAREHOUSE_ID: self.formConfig.formData[0].itemdata.pid,
       }).then(res=>{

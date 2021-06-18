@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-02 19:22:02
- * @LastEditTime: 2021-06-16 10:02:05
+ * @LastEditTime: 2021-06-18 16:55:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/modal/orderCenter/returngood/modifyReturnLogistics.js
@@ -116,7 +116,7 @@ export default {
                   BILL_NO:item.BILL_NO
                 }
               });
-              self.service.orderCenter.updateLogistics({
+              self.service.orderCenter.updateReturnLogistics({
                 ID_AND_BILL_NO_LIST:ids,
                 CP_C_LOGISTICS_ID: self.formConfig.formData[0].itemdata.pid,
                 EXPRESS_CODE:self.formConfig.formValue.logistic_no,

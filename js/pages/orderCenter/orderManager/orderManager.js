@@ -286,7 +286,7 @@
                   BILL_NO:item.BILL_NO
                 }
               })
-              self.service.orderCenter.checkOrderBeforeLogistics({
+              self.service.orderCenter.checkReturnOrderBeforeLogistics({
                 ID_AND_BILL_NO_LIST:arr,
                 MOCK_TYPE:1
               }).then(res=>{

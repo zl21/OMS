@@ -840,7 +840,7 @@ export default {
           centerName: 'commodityCenter',
           tablename: 'PS_C_PRO_LOG',
           pageShow:true,
-          objid: this.$route.params.customizedModuleId,
+          objid: this.spuid,
         }
       }
     },

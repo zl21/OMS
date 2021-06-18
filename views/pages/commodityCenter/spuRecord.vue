@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-19 17:55:24
- * @LastEditTime: 2021-06-15 13:15:02
+ * @LastEditTime: 2021-06-18 13:43:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/commodityCenter/spuRecord.vue
@@ -34,14 +34,14 @@
         </Panel>
         <Panel name="attr">
           自定义属性
-          <p slot="content" class="panel-title">固定属性：</p>
-          <p slot="content">
+          <div slot="content" class="customProperties">
+            <div class="panel-title">固定属性：</div>     
             <businessForm :form-config="customAttr.fixFormConfig" />
-          </p>
-          <p slot="content" class="panel-title">自定义属性：</p>
-          <p slot="content">
+          </div>
+          <div slot="content" class="customProperties">
+            <div class="panel-title">自定义属性：</div>     
             <businessForm :form-config="customAttr.customFormConfig" />
-          </p>
+          </div>
         </Panel>
       </Collapse>
       <!-- tab切换 -->

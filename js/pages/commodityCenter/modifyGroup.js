@@ -236,7 +236,7 @@ export default {
           group_type: 2,
           ecode: '',
           ename: '',
-          type: '',
+          type: [],
           price_retail: '',
           ISACTIVE:''
         },
@@ -561,7 +561,7 @@ export default {
       const self = this;
       self.formConfig.formValue.ecode = data.PsCProGroup.ECODE;
       self.formConfig.formValue.ename = data.PsCProGroup.ENAME;
-      self.formConfig.formValue.type = data.PsCProGroup.TYPE;
+      self.formConfig.formValue.type = data.PsCProGroup.TYPE ? data.PsCProGroup.TYPE : '';
       self.formConfig.formValue.price_retail = data.PsCProGroup.PRICE_RETAIL;
       self.formConfig.formValue.group_type = data.PsCProGroup.GROUP_TYPE;
       self.formConfig.formValue.ISACTIVE = data.PsCProGroup.ISACTIVE;
