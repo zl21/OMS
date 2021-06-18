@@ -385,10 +385,10 @@ export default {
   cancelReturnOrderFromWms: (params) =>
     $network.post('/p/cs/oc/oms/v1/returnOrder/cancelReturnOrderFromWms', params), // 退货单-手工通知WMS撤回
     returnConfirmCheck: (params) => $network.post('/p/cs/oc/oms/v1/returnOrder/returnConfirmCheck' , params), //退货确认检查接口
-    checkOrderBeforeLogistics: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/checkOrderBeforeLogistics' , params),  //改退回物流检查接口 
+    checkReturnOrderBeforeLogistics: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/checkOrderBeforeLogistics' , params),  //改退回物流检查接口 
     checkReturnOrderBeforeWarehouse: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/checkOrderBeforeWarehouse' , params),  //改退回仓库检查接口
-    updateWarehouse: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/updateWarehouse' , params),  //改退回仓库接口
-    updateLogistics: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/updateLogistics' , params),  //改退回物流接口
+    updateReturnWarehouse: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/updateWarehouse' , params),  //改退回仓库接口
+    updateReturnLogistics: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/updateLogistics' , params),  //改退回物流接口
     returnConfirm:(params) => $network.post('/p/cs/oc/oms/v1/returnOrder/returnConfirm' , params),  //退货确认功能
     splitCheckOrder:(params) => $network.post('/p/cs/oc/oms/v1/splitCheckOrder', params), //指定商品拆单校验
     queryFlagList:(params) => $network.post('/p/cs/QueryList',  params),  //标记列表
