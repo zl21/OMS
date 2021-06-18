@@ -405,10 +405,10 @@ export default {
         console.log(code, message, data);
         if (code === 0) {
           this.$Message.success(message);
-          let action = this.objid == -1 ? 0 : 1;
+          // let action = this.objid == -1 ? 0 : 1;
           this.objid = String(data.objid) || -1;
           this.$nextTick(() => {
-            $omsUtils.tabJump(action, this.objid, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
+            $omsUtils.tabJump(3, this.objid, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
             /* $store.commit(action, {
               id: this.objid, // id
               type: 'action', // 类型action

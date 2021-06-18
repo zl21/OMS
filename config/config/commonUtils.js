@@ -238,7 +238,7 @@ class commonUtils {
     isback = 0,
   ) {
     const label = labelName.i8n ? $i18n.t(`${labelName.tip}`) : labelName.tip; // 语言包有就走语言包，不存在则直接取
-    const mutationArr = ['customize/TabOpen', 'customize/switchActiveTab', 'customize/TabClose'];
+    const mutationArr = ['customize/TabOpen', 'customize/switchActiveTab', 'customize/TabClose', 'customize/TabHref'];
     const muta = mutationArr[mutationType];
     R3.store.commit(muta, {
       id: id,
