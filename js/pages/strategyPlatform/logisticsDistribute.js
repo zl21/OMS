@@ -31,7 +31,7 @@ export default {
             text: '保存',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              this.getCheckedNodes();
+              this.getCheckedNodes("1");
             }
           },
           {
@@ -77,12 +77,14 @@ export default {
             ],
             radioChange: () => {
               const val = this.formConfig.formValue.REGION_TYPE;
-
+              let item = this.queryForm('排除省份');
               if (val == 2) {
                 this.modalTitle = '添加支持省份';
                 this.formconfig2[0].show = true;
                 this.tableColumns[2].title = '配送省份';
+                item.item.required = false
               } else {
+                item.item.required = true
                 this.modalTitle = '添加排除区域';
                 this.tableColumns[2].title = '排除省份';
                 this.formconfig2[0].show = false;
@@ -181,7 +183,7 @@ export default {
             props: {
               placeholder: '支持省份',
               isBackRowItem: true,
-              AutoData:[],
+              AutoData: [],
               regularMessage: '支持省份', // 报错提示
               data: {
                 tabth: [
@@ -227,14 +229,14 @@ export default {
               'on-input-value-change': val => {
                 let item = this.queryForm('支持省份');
                 item.item.props.AutoData = []
-                this.InputValueChange(val,item)
+                this.InputValueChange(val, item)
               },
               'on-page-change': data => {
                 this.startindex = data * 10 - 10;
                 this.querList();
               },
               'on-fkrp-selected': v => {
-                console.log(v);
+
                 this.querList(v);
               }
             }
@@ -246,7 +248,7 @@ export default {
           col: 2, // 列宽
           item: {
             type: 'DropDownSelectFilter', // 组件类型
-            required: true, // 是否必填
+            required: false, // 是否必填
             field: 'key1',
             label: '排除省份',
             props: {
@@ -261,19 +263,24 @@ export default {
               }
             },
             event: {
+              "on-popper-show": () => {
+
+                this.startindex = 0
+                this.querList("", this.fixedcolumns);
+              },
               'on-input-value-change': val => {
                 let areaRange = this.AliasFormConfig.formValue.REGION_TYPE;
                 let item = this.queryForm('排除省份');
                 item.item.props.AutoData = []
                 if (areaRange == '1') {
-                  this.InputValueChange(val,item)
+                  this.InputValueChange(val, item)
                 }
-                
+
               },
               'on-page-change': data => {
                 this.startindex = data * 10 - 10;
+                this.querList("", this.fixedcolumns);
 
-                this.querList();
               },
               'on-fkrp-selected': v => {
                 console.log(v);
@@ -389,8 +396,8 @@ export default {
       stCDeliveryAreaRegionItemList: [],
       totalpage: 10,
       labelDefaultValue: 'jiben', // 设置tab默认值
-       // tab切换配置
-       labelList: [
+      // tab切换配置
+      labelList: [
         {
           label: '基本信息',
           value: 'jiben'
@@ -428,27 +435,33 @@ export default {
     let { customizedModuleId, customizedModuleName } = this.$route.params;
     if (customizedModuleId == 'New') {
       const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-      const data = { label: '物流派送范围新增', name:keepAliveModuleName}; //当前界面模块名称 
-      this.$store.commit('global/modifycurrentLabel' , data)
+      const data = { label: '物流派送范围新增', name: keepAliveModuleName }; //当前界面模块名称 
+      this.$store.commit('global/modifycurrentLabel', data)
 
 
       this.id = '-1';
       this.tableshow = false;
-      this.labelList = [ {
+      this.labelList = [{
         label: '基本信息',
         value: 'jiben'
       },]
     } else {
 
       const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-      const data = { label: '物流派送范围编辑', name:keepAliveModuleName}; //当前界面模块名称 
-      this.$store.commit('global/modifycurrentLabel' , data)
-
+      const data = { label: '物流派送范围编辑', name: keepAliveModuleName }; //当前界面模块名称 
+      this.$store.commit('global/modifycurrentLabel', data)
+      let areaRange = this.AliasFormConfig.formValue.REGION_TYPE;
+      let item = this.queryForm('排除省份');
+      if (areaRange == 1) {
+        item.item.required = true
+      } else {
+        item.item.required = false
+      }
       this.tableshow = true;
       this.id = customizedModuleId;
       this.FormConfig.formData[0].itemdata.readonly = true;
       this.init();
-     
+
     }
   },
   methods: {
@@ -459,13 +472,13 @@ export default {
         this.subTableConfig = {
           centerName: 'strategyPlatform',
           tablename: "ST_DELIVERY_AREA_LOG",
-          pageShow:true,
+          pageShow: true,
           objid: this.id
         };
       }
     },
-    async InputValueChange(v,item) { //模糊查询
-  
+    async InputValueChange(v, item) { //模糊查询
+
       const formData = new FormData()
       formData.append('ak', v)
       formData.append('colid', 166974)
@@ -517,7 +530,7 @@ export default {
         SIZE: this.SIZE,
         CURRENT: this.CURRENT
       };
-      if (this.AliasFormConfig.formValue.REGION_TYPE) {
+      if (this.AliasFormConfig.formValue.REGION_TYPE && type) {
         data.AREARANGE = this.AliasFormConfig.formValue.REGION_TYPE;
       }
 
@@ -546,7 +559,7 @@ export default {
           this.btnConfig2.buttons.forEach(em => {
             em.disabled = true;
           });
-        }else{
+        } else {
           this.FormConfig.formValue.isActive = false
         }
         //渲染明细表
@@ -576,21 +589,21 @@ export default {
           this.pageback();
         }
       } else if (this.changeCount > 1) {
-          this.$Modal.info({
-            title: $i18n.t('modalTitle.tips'), // 提示
-            content: '当前修改未保存，确定返回？',
-            mask: true,
-            showCancel: true,
-            okText: $i18n.t('common.determine'), // 确定
-            cancelText: $i18n.t('common.cancel'), // 取消
-            onOk: () => {
-              this.pageback();
-            }
-          });
-        } else {
-          this.pageback();
-        }
-      
+        this.$Modal.info({
+          title: $i18n.t('modalTitle.tips'), // 提示
+          content: '当前修改未保存，确定返回？',
+          mask: true,
+          showCancel: true,
+          okText: $i18n.t('common.determine'), // 确定
+          cancelText: $i18n.t('common.cancel'), // 取消
+          onOk: () => {
+            this.pageback();
+          }
+        });
+      } else {
+        this.pageback();
+      }
+
     },
     pageback() {
       this.$comUtils.tabCloseAppoint(this);
@@ -602,7 +615,7 @@ export default {
         back: true
       });
     },
-    getCheckedNodes() {
+    getCheckedNodes(type) {
       if (!this.FormConfig.formData[0].itemdata.valuedata) {
         this.$Message.error('请选择物流公司！');
         return;
@@ -667,7 +680,7 @@ export default {
         this.stCDeliveryAreaRegionItemList = this.stCDeliveryAreaRegionItemList.concat(this.provinceArr);
       }
 
-      this.fnSave();
+      this.fnSave(type);
     },
     querArea(item) {
       let id = item.id;
@@ -694,7 +707,10 @@ export default {
         });
       });
     },
-    querList(data) {
+    fnselectAll(v) {
+      this.tableSelectArr = v
+    },
+    querList(data, fixedcolumnsData) {
       let fixedcolumns = {};
       if (data) {
         let arr = [];
@@ -703,7 +719,7 @@ export default {
           arr.push(v.ID);
           let obj = {
             id: '-1',
-            cpCRegionProvinceEcode: v.rowItem&&v.rowItem.ECODE.val,
+            cpCRegionProvinceEcode: v.rowItem && v.rowItem.ECODE.val,
             cpCRegionProvinceId: v.ID, //省份id
             cpCRegionProvinceEname: v.Label //省份名称
           };
@@ -713,6 +729,10 @@ export default {
         fixedcolumns = {
           ID: str
         };
+        this.fixedcolumns = fixedcolumns
+      }
+      if (fixedcolumnsData) {
+        fixedcolumns = fixedcolumnsData
       }
 
       var formdata = new FormData();
@@ -759,7 +779,7 @@ export default {
       let citId = v[0].ID;
       let cityitem = this.queryForm('排除地区');
       var formdata = new FormData();
-      formdata.append('searchdata', JSON.stringify({ isdroplistsearch: true, refcolid: 167077, fixedcolumns: { C_UP_ID: `=${citId}` }, startindex: this.startindex, range: 100 }));
+      formdata.append('searchdata', JSON.stringify({ isdroplistsearch: true, refcolid: 167077, fixedcolumns: { C_UP_ID: `=${citId}` }, startindex: 0, range: 100 }));
       service.common.QueryList(formdata).then(res => {
         let citarr = res.data.data.row;
         cityitem.item.props.data = [];
@@ -785,10 +805,23 @@ export default {
     keyDown(e) {
       console.log(e);
     },
-    fnSave() {
-      this.modal1 = false;
+    fnSave(type) {
       let areaRange = this.AliasFormConfig.formValue.REGION_TYPE;
       let { cpCLogisticsEname, cpCLogisticsId, remark } = this.FormConfig.formValue;
+      if (areaRange == 1) {
+        if (this.stCDeliveryAreaRegionItemList[0].cpCRegionProvinceId == "") {
+          this.$Message.warning('请选择排除省份！');
+          return
+        }
+      } else {
+        if (!this.fixedcolumns) {
+          this.$Message.warning('请选择支持省份！');
+          return
+        }
+      }
+
+      this.modal1 = false;
+
       let data = {
         stCDeliveryArea: {
           areaRange, //支持范围
@@ -800,13 +833,16 @@ export default {
         },
         stCDeliveryAreaRegionItemList: this.stCDeliveryAreaRegionItemList
       };
-      this.ID != -1 && (data.stCDeliveryArea.isActive =( this.FormConfig.formValue.isActive?"Y":"N") )
+      this.ID != -1 && (data.stCDeliveryArea.isActive = (this.FormConfig.formValue.isActive ? "Y" : "N"))
       service.strategyPlatform.deliveryAreaSave(data).then(res => {
         this.fnempty();
         this.$Message.success(res.data.message);
         if (this.id != '-1' && this.id != 'New') {
           this.init(res.data.data.objId);
-          this.pageback();
+          if (type == "1") {
+            this.pageback();
+          }
+     
         } else {
           this.$store.commit('global/tabOpen', {
             type: 'C',

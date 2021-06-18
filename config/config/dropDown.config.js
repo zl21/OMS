@@ -170,18 +170,25 @@ class DropDownConfig {
       self.$OMS2.omsUtils.msgTips(self, 'warning', 'd8')
       return
     }
-    self.publicBouncedConfig.name = 'addGiftDialog'
-    self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
-    self.publicBouncedConfig.confirmTitle = '批量替换下挂商品'
-    self.publicBouncedConfig.componentData = {
-      data: self.selection,
-      type: 'replace',
-    }
-    self.publicBouncedConfig.width = 800
 
-    setTimeout(() => {
-      self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
-    }, 100)
+    if (self.selection.ORDER_STATUS == 2 || self.selection.ORDER_STATUS == 1) { 
+      self.publicBouncedConfig.name = 'addGiftDialog'
+      self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
+      self.publicBouncedConfig.confirmTitle = '批量替换下挂商品'
+      self.publicBouncedConfig.componentData = {
+        data: self.selection,
+        type: 'replace',
+      }
+      self.publicBouncedConfig.width = 800
+  
+      setTimeout(() => {
+        self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
+      }, 100)
+    }else{
+      self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
+      return
+    }
+  
   }
 
   static ORDER_DELETE_GOODS() {
@@ -195,18 +202,25 @@ class DropDownConfig {
       self.$OMS2.omsUtils.msgTips(self, 'warning', 'd8')
       return
     }
-    self.publicBouncedConfig.name = 'addGiftDialog'
-    self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
-    self.publicBouncedConfig.confirmTitle = '删除赠品'
-    self.publicBouncedConfig.componentData = {
-      data: self.selection,
-      type: 'del',
-    }
-    self.publicBouncedConfig.width = 800
 
-    setTimeout(() => {
-      self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
-    }, 100)
+    if (self.selection.ORDER_STATUS == 2 || self.selection.ORDER_STATUS == 1) { 
+      self.publicBouncedConfig.name = 'addGiftDialog'
+      self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
+      self.publicBouncedConfig.confirmTitle = '删除赠品'
+      self.publicBouncedConfig.componentData = {
+        data: self.selection,
+        type: 'del',
+      }
+      self.publicBouncedConfig.width = 800
+  
+      setTimeout(() => {
+        self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
+      }, 100)
+    }else{
+      self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
+      return
+    }
+   
   }
 
   static ORDER_ADD_GOODS() {
@@ -217,11 +231,12 @@ class DropDownConfig {
     )
 
     self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
-    if (self.selection.length < 1) {
+    if (self.selection.length < 1) { //
       self.$OMS2.omsUtils.msgTips(self, 'warning', 'd8')
       return
     }
-    self.publicBouncedConfig.name = 'addGiftDialog'
+    if (self.selection.ORDER_STATUS == 2 || self.selection.ORDER_STATUS == 1) { //
+      self.publicBouncedConfig.name = 'addGiftDialog'
     self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
     self.publicBouncedConfig.confirmTitle = '添加赠品'
 
@@ -234,6 +249,10 @@ class DropDownConfig {
     setTimeout(() => {
       self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
     }, 100)
+    }else{
+      self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
+      return
+    }
   }
 
   static async afterSaleCopyHander() {
@@ -495,18 +514,7 @@ class DropDownConfig {
           data,
         }
         break
-      // case 'productAdd':
-      //   componentDataObj = {
-      //     data: ids,
-      //     type: 'add',
-      //   }
-      //   break
-      // case 'productdel':
-      //   componentDataObj = {
-      //     data: ids,
-      //     type: 'del',
-      //   }
-      //   break
+    
       default:
         componentDataObj = {
           ids,
@@ -567,17 +575,17 @@ class DropDownConfig {
   }
   //替换商品
   static replaceProductHandler(ids) {
-    this.successHandler(ids, 'replaceConfig', 'product', 'replaceTheGoods')
+    let self = DropDownConfig.target
+    if (ids[0].ORDER_STATUS == 1||ids[0].ORDER_STATUS == 2) {
+      this.successHandler(ids, 'replaceConfig', 'product', 'replaceTheGoods')
+    }else{
+      self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
+      self.btnConfig.loading = false
+      return
+    }
+    
   }
-  // //批量删除赠品
-  // static ORDER_DELETE_GOODSHandler(ids) {
-  //   this.successHandler(ids, 'pushProduceConfig', 'productdel', 'addGiftDialog')
-  // }
-
-  // //新增赠品
-  // static addGiftsHandler(ids) {
-  //   this.successHandler(ids, 'pushProduceConfig', 'productAdd', 'addGiftDialog')
-  // }
+ 
   //删除商品
   static deleteProductHandler(ids) {
     this.successHandler(ids, 'itemDeleteConfig', 'product', 'itemDelete')

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-20 13:39:45
- * @LastEditTime: 2021-06-18 10:27:31
+ * @LastEditTime: 2021-06-18 17:23:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/logisticsDistribute.vue
@@ -59,6 +59,7 @@
                     :columns="tableColumns"
                     :data="tableData"
                     @on-select="fnselect"
+                    @on-select-all="fnselectAll"
                   />
                   <div class="foot-page">
                     <Page
