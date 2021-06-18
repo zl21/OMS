@@ -39,7 +39,7 @@ class commonUtils {
             if (callbackFun) {
               callbackFun(res)
             } else {
-              commonUtils.msgTips(self , 'success', '取消成功', 0)
+              commonUtils.msgTips(self, 'success', '取消成功', 0)
               self.selection = []
               self.query()
             }
@@ -224,7 +224,11 @@ class commonUtils {
     })
   }
 
-  /* static navigateMain(
+  /**
+   * eg:
+        $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
+   */
+  static tabJump(
     mutationType,
     id,
     type,
@@ -233,8 +237,8 @@ class commonUtils {
     exendObj = {},
     isback = 0,
   ) {
-    const label = labelName.i8n ? $i18n.t(`${labelName.tip}`) : labelName.tip; // 语言包存在就走，不存在则直接取
-    const mutationArr = ['customize/TabOpen',]
+    const label = labelName.i8n ? $i18n.t(`${labelName.tip}`) : labelName.tip; // 语言包有就走语言包，不存在则直接取
+    const mutationArr = ['customize/TabOpen', 'customize/switchActiveTab', 'customize/TabClose'];
     const muta = mutationArr[mutationType];
     R3.store.commit(muta, {
       id: id,
@@ -248,7 +252,7 @@ class commonUtils {
         ...exendObj,
       }),
     })
-  } */
+  }
 
   /**
    * 导航跳转处理-跳标准
@@ -847,7 +851,7 @@ class commonUtils {
       ? BurgeonDate.getFormatDate(newEndTime, 'yyyy-MM-dd HH:mm:ss') : newEndTime).split(' ')
     let [oldDate, oldTime] = (oldEndTime && isOldDate
       ? BurgeonDate.getFormatDate(oldEndTime, 'yyyy-MM-dd HH:mm:ss') : oldEndTime || '').split(' ')
-    
+
     let time = `${newDate} ${newTime}`
     if (time != `${oldDate} ${oldTime}`
       && newDate != oldDate
