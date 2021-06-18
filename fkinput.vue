@@ -6,7 +6,7 @@
     </label>
 
     <Icon
-      v-if="!itemdata.readonly && (itemdata.fkdisplay === 'mrp' || itemdata.fkdisplay === 'drp')"
+      v-if="!itemdata.readonly && (itemdata.fkdisplay === 'mrp' || itemdata.fkdisplay === 'drp') && itemdata.valuedata"
       class="clear"
       type="ios-close-circle"
       @click="clear"

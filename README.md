@@ -215,3 +215,4 @@
 | v1.1.71 | subTable分页统一 |
 | v1.1.72 | 调整switch组件size |
 | v1.1.73 | 优化importTable组件再次导入同名文件报错|
+| v1.1.74 | 与标准外键关联组件clear icon统一 |
