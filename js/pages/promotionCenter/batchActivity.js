@@ -483,7 +483,7 @@ export default {
       const _self = this;
       this.$destroy(true);
       // 返回列表的
-      $omsUtils.tabJump('CUSTOMIZED', 31460113, 1, 'PROMACTIQUERYLIST', { i8n: 1, tip: 'panel_label.promotionList' }, {}, 0)
+      $omsUtils.tabJump(2, 31460113, 'CUSTOMIZED', 'PROMACTIQUERYLIST', { i8n: 1, tip: 'panel_label.promotionList' }, {}, 0)
       /* const params = {
         id: 31460113, // id
         type: 'CUSTOMIZED',

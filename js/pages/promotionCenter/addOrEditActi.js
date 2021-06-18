@@ -393,7 +393,6 @@ export default {
       };
       // 请求保存接口
       this.loading = true;
-      // this.$R3loading.show(this.customizedModuleName);
       // console.log('发布', params);
       const formData = new FormData();
       formData.append('param', JSON.stringify(params));
@@ -430,10 +429,8 @@ export default {
           });
         }
         this.loading = false;
-        // this.$R3loading.hide(this.customizedModuleName);
       } catch (error) {
         this.loading = false;
-        // this.$R3loading.hide(this.customizedModuleName);
         this.$message({
           type: 'error',
           error
@@ -476,7 +473,6 @@ export default {
         }
       };
       this.loading = true;
-      // this.$R3loading.show(this.customizedModuleName);
       // 发布
       const formData = new FormData();
       formData.append('param', JSON.stringify(params));
@@ -498,10 +494,8 @@ export default {
           });
         }
         this.loading = false;
-        // this.$R3loading.hide(this.customizedModuleName);
       } catch (error) {
         this.loading = false;
-        // this.$R3loading.hide(this.customizedModuleName);
       }
     },
     /**
@@ -509,13 +503,14 @@ export default {
      */
     close() {
       this.$comUtils.tabCloseAppoint(this);
-      $store.commit('global/tabOpen', {
+      $omsUtils.tabJump(0, 0, 'C', 'PROMACTIQUERYLIST', { i8n: 1, tip: 'panel_label.promotionList' }, {}, 1, 1, 2895)
+      /* $store.commit('global/tabOpen', {
         type: 'C', // 类型action
         customizedModuleId: 2895, // id
         customizedModuleName: 'PROMACTIQUERYLIST', // 文件名
         label: $i18n.t('panel_label.promotionList'), // 促销活动
         dynamicRoutingForCustomizePage: true
-      });
+      }); */
       // this.$destroy();
     },
     /**
