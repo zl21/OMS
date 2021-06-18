@@ -542,7 +542,7 @@ export default {
       const scroll = this.$refs.basicSteps.scrollTop;
       const area0 = this.$refs.area_0.$el.offsetHeight;
       const area1 = this.$refs.area_1.$el.offsetHeight;
-      const area2 = this.$refs.area_2.$el.offsetHeight;
+      // const area2 = this.$refs.area_2.$el.offsetHeight;
       // console.log("scroll-----",scroll)
       // console.log("area0-----",area0)
       // console.log("area1-----",area1)

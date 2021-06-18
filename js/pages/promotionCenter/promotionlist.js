@@ -1,7 +1,7 @@
 import businessLabel from 'professionalComponents/businessLabel';
 import businessButton from 'professionalComponents/businessButton';
-import errorMessage from 'framework/components/tablelist/error.vue';
-import Mydialog from 'framework/components/dialog/mydialog.vue';
+// import errorMessage from 'framework/components/tablelist/error.vue';
+// import Mydialog from 'framework/components/dialog/mydialog.vue';
 import aTable from 'professionalComponents/agGridTable.vue';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dialogVisible from '@/views/modal/promotionCenter/setGroup';
@@ -85,26 +85,6 @@ export default {
               console.log(val);
             },
           },
-          // {
-          //   version: '1.4',
-          //   style: 'popInput',
-          //   width: '6',
-          //   colname: 'product',
-          //   itemdata: {
-          //     serviceId: "r3-ps",
-          //     colid: '1700806532',
-          //     colname: 'PS_C_PRO_ID',
-          //     fkdisplay: 'drp',
-          //     isfk: true,
-          //     isnotnull: false,
-          //     name: '参与商品',
-          //     readonly: false,
-          //     valuedata: '',
-          //   },
-          //   oneObj: (val) => {
-          //     console.log(val);
-          //   },
-          // },
           {
             style: 'input',
             label: '分组',
@@ -460,8 +440,8 @@ export default {
     businessButton,
     businessLabel,
     aTable,
-    Mydialog,
-    errorMessage,
+    // Mydialog,
+    // errorMessage,
     dialogVisible,
   },
   created() {
@@ -683,30 +663,8 @@ export default {
         const IS_BATCH = selectedData[0].IS_BATCH;
         if (IS_BATCH) {
           this.navigateMain(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, { copy: ACTI_ID }, 0)
-          /* $store.commit('customize/TabOpen', {
-            id: -1, // id
-            type: 'action', // 类型action
-            name: 'PM_C_PROM_ACTI_BATCH_ADD', // 文件名
-            label: $i18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
-            query: Object.assign({
-              id: -1, // id
-              copy: ACTI_ID,
-              tabTitle: $i18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
-            }) // 带的参数
-          }); */
         } else {
           this.navigateMain(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, { copy: ACTI_ID }, 0)
-          /* $store.commit('customize/TabOpen', {
-            id: -1, // id
-            type: 'action', // 类型action
-            name: 'PM_C_PROM_ACTI', // 文件名
-            label: $i18n.t('panel_label.addPromotion'), // 新增促销活动
-            query: Object.assign({
-              id: -1, // id
-              copy: ACTI_ID,
-              tabTitle: $i18n.t('panel_label.addPromotion') // 新增促销活动
-            }) // 带的参数
-          }); */
         }
       } else {
         this.$Message.warning($i18n.t('modalTips.r9')); // 请至少选择一条
@@ -714,30 +672,10 @@ export default {
     },
     promotionClick() {
       this.navigateMain(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, {}, 0)
-      /* $store.commit('customize/TabOpen', {
-        id: -1, // id
-        type: 'action', // 类型action
-        name: 'PM_C_PROM_ACTI', // 文件名
-        label: $i18n.t('panel_label.addPromotion'), // 新增促销活动
-        query: Object.assign({
-          id: -1, // id
-          tabTitle: $i18n.t('panel_label.addPromotion') // 新增促销活动
-        }) // 带的参数
-      }); */
     },
     promotionBlukClick() {
       // 【批量新增】
       this.navigateMain(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
-      /* $store.commit('customize/TabOpen', {
-        id: -1, // id
-        type: 'action', // 类型action
-        name: 'PM_C_PROM_ACTI_BATCH_ADD', // 文件名
-        label: $i18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
-        query: Object.assign({
-          id: -1, // id
-          tabTitle: $i18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
-        }) // 带的参数
-      }); */
     },
     async publish() {
       let flag = false;
@@ -815,16 +753,6 @@ export default {
     simulation() {
       // 模拟仿真
       this.navigateMain(0, -1, 'CUSTOMIZED', 'PM_C_PROM_PRE_TEST', { i8n: 1, tip: 'btn.simulation' }, {}, 0)
-      /* $store.commit('customize/TabOpen', {
-        id: -1, // id
-        type: 'CUSTOMIZED', // 类型action
-        name: 'PM_C_PROM_PRE_TEST', // 文件名
-        label: $i18n.t('btn.simulation'), // 模拟仿真
-        query: Object.assign({
-          id: -1, // id
-          tabTitle: $i18n.t('btn.simulation') // 模拟仿真
-        }) // 带的参数
-      }); */
     },
     async times() {
       // 默认时间
@@ -880,28 +808,8 @@ export default {
         if (IS_BATCH) {
           // $omsUtils.navigateMain(ACTI_ID, 'TabOpen', 'PM_C_PROM_ACTI_BATCH_ADD', {}, false)
           this.navigateMain(0, ACTI_ID, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
-          /* $store.commit('customize/TabOpen', {
-            id: ACTI_ID, // id
-            type: 'action', // 类型action
-            name: 'PM_C_PROM_ACTI_BATCH_ADD', // 文件名
-            label: $i18n.t('panel_label.batchAddPromotion'), // 批量新增促销活动
-            query: Object.assign({
-              id: ACTI_ID, // id
-              tabTitle: $i18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
-            }) // 带的参数
-          }); */
         } else {
           this.navigateMain(0, ACTI_ID, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.editPromotion' }, {}, 0)
-          /* $store.commit('customize/TabOpen', {
-            id: ACTI_ID, // id
-            type: 'action', // 类型action
-            name: 'PM_C_PROM_ACTI', // 文件名
-            label: $i18n.t('panel_label.editPromotion'), // 编辑促销活动
-            query: Object.assign({
-              id: ACTI_ID, // id
-              // tabTitle: $i18n.t('panel_label.editPromotion') // 编辑促销活动
-            }) // 带的参数
-          }); */
         }
       }
     },

@@ -1,6 +1,6 @@
 {
   "name": "@burgeon/project-logic",
-  "version": "1.7.22",
+  "version": "1.7.23",
   "description": "burgeon company's project-logic for private npm",
   "main": "index.js",
   "scripts": {
