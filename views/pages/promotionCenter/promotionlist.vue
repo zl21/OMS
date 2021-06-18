@@ -62,23 +62,6 @@
         </div>
       </div>
     </div>
-    <!-- <Mydialog
-      v-if="dataError.show"
-      :class="dataError.type"
-      :close-on-click-modal="false"
-      :show-close="false"
-      :title="dataError.title"
-      :visible.sync="dataError.show"
-      class="messageDialog"
-    >
-      <errorMessage
-        :dialog-back="dataError.backBtn"
-        :dialog-class="dataError.type"
-        :error-message="dataError.errorList"
-        @refreshbizlines="errorDialogClose"
-      />
-      refreshbizlines返回两个参数:（false，键码是否等于13
-    </Mydialog> -->
     <dialogVisible
       :check-list="checkList"
       :dialog-visible="dialog_visible"
