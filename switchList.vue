@@ -4,7 +4,7 @@
     <div class="content-li-item-left">
       <div class="content-li-item-left-a" v-for="em,index in switchList.list" :key="index">
         <span class="left-a">
-          <i-switch v-model="em.val" :disabled="em.disabled" />
+          <i-switch v-model="em.val" :disabled="em.disabled" :size="em.size ? em.size : switchList.size ? switchList.size : 'small'" switchList/>
           {{em.name}}
         </span>
 

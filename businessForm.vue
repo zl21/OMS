@@ -299,7 +299,9 @@
                     :class="item.class || ''"
                     v-if="item.style==='switch'"
                     :prop="item.value || item.colname">
-            <i-switch v-model="formConfig.formValue[`${item.value || item.colname}`]" @on-change="runMethods(item.switchChange)" />
+            <i-switch v-model="formConfig.formValue[`${item.value || item.colname}`]" 
+                      :size="item.size || 'small'" 
+                      @on-change="runMethods(item.switchChange)" />
           </FormItem>
 
           <!-- 插槽 -->
