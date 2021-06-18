@@ -3,7 +3,7 @@
     :title="title"
     :visible.sync="t_dialog_show"
     :show-close="true"
-    :has-width="false"
+    :has-width="true"
     :close-on-click-modal="false"
     :append-to-body="appendToBody"
     :modal-append-to-body="modalAppendToBody"
@@ -1287,23 +1287,52 @@ export default {
   }
 };
 </script>
-<style lang="less" type="text/less" scoped>
+<style lang="less" type="text/less">
   @import '~omsTheme/public.less';
   // 框架有样式 -- 覆盖修改
+ .detailtable .form_button .buttonFk button{
+    background-color:transparent;
+    border: none;
+  }
   .ark-dialog{
     .fkdialog{
-      width: 100%;
       .dialog_left{
         flex: 1;
         width: auto;
         box-shadow: none;
+        .dislogtree{
+          .title{
+            i,label,input,span{
+              display: inline-block;
+              vertical-align: middle;
+            }
+          }
+        }
+        .left_top{
+          span i{
+            color: @base-color;
+          }
+        }
       }
       .dialog_center{
         flex: 3;
         width: auto;
-        .exclude{
-          span{
-            vertical-align: middle;
+        box-shadow: none;
+        .el-tabs .el-tabs__header .el-tabs__nav .el-tabs__active-bar{
+          background-color: @base-color;
+        }
+        .center_bottom{
+          .el-input{
+            input{
+              border-radius: 0;
+              height: @base-color;
+              line-height: @base-color;
+            }
+          }
+          .center-exclude label{
+            input,span:last-child{
+              vertical-align: middle;
+            }
           }
         }
       }
@@ -1311,20 +1340,38 @@ export default {
         flex: 0.3;
         width: auto;
         border-color: #f3f3f3;
+        .operation-icon{
+          color: @base-color;
+          font-size: 14px;
+          line-height: 19px;
+          border-radius: 3px;
+        }
       }
       .dialog_right{
         flex: 1;
         width: auto;
+        .right_top{
+          color:  @base-color;
+          span{
+            &:nth-child(3),:last-child,&:last-child{
+              i{
+                color:  @base-color;
+              }
+             color:  @base-color;
+          }
+          }
+        }
         .right_bottom{
           padding: 0;
           height: auto;
           & > button{
+            #bundle >.basicBtn;
             color: @base-color;
-            border: 1px solid @base-color;
             &:last-child{
               color: #fff;
               background: @base-color;
               border: 1px solid @base-color;
+              margin-right: 0;
             }
           }
         }
