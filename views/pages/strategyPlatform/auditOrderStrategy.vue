@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-03 19:24:42
- * @LastEditTime: 2021-06-03 19:27:45
+ * @LastEditTime: 2021-06-18 10:59:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/auditOrderStrategy.vue
@@ -25,6 +25,7 @@
                   v-model="resultData.ST_C_AUTO_AUDIT.WAIT_TIME"
                   style="width:80px"
                   @on-change="modify"
+                  :regx='/^[0-9]{0,9}$/'
                 />
                 <span>分钟后自动审核</span>
               </p>
