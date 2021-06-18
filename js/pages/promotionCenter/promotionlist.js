@@ -473,7 +473,7 @@ export default {
   },
   created() {
     groups.load();
-    this.formConfig.formData.filter(item=>item.colname == 'my_input_sh')[0].itemdata = this.my_input_sh.itemdata;
+    this.formConfig.formData.filter(item => item.colname == 'my_input_sh')[0].itemdata = this.my_input_sh.itemdata;
   },
   computed: {
     commodity() {
@@ -683,7 +683,8 @@ export default {
         const ACTI_ID = selectedData[0].ACTI_ID;
         const IS_BATCH = selectedData[0].IS_BATCH;
         if (IS_BATCH) {
-          $store.commit('customize/TabOpen', {
+          this.navigateMain(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, { copy: ACTI_ID }, 0)
+          /* $store.commit('customize/TabOpen', {
             id: -1, // id
             type: 'action', // 类型action
             name: 'PM_C_PROM_ACTI_BATCH_ADD', // 文件名
@@ -693,9 +694,10 @@ export default {
               copy: ACTI_ID,
               tabTitle: $i18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
             }) // 带的参数
-          });
+          }); */
         } else {
-          $store.commit('customize/TabOpen', {
+          this.navigateMain(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, { copy: ACTI_ID }, 0)
+          /* $store.commit('customize/TabOpen', {
             id: -1, // id
             type: 'action', // 类型action
             name: 'PM_C_PROM_ACTI', // 文件名
@@ -705,14 +707,15 @@ export default {
               copy: ACTI_ID,
               tabTitle: $i18n.t('panel_label.addPromotion') // 新增促销活动
             }) // 带的参数
-          });
+          }); */
         }
       } else {
         this.$Message.warning($i18n.t('modalTips.r9')); // 请至少选择一条
       }
     },
     promotionClick() {
-      $store.commit('customize/TabOpen', {
+      this.navigateMain(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, {}, 0)
+      /* $store.commit('customize/TabOpen', {
         id: -1, // id
         type: 'action', // 类型action
         name: 'PM_C_PROM_ACTI', // 文件名
@@ -721,11 +724,12 @@ export default {
           id: -1, // id
           tabTitle: $i18n.t('panel_label.addPromotion') // 新增促销活动
         }) // 带的参数
-      });
+      }); */
     },
     promotionBlukClick() {
       // 【批量新增】
-      $store.commit('customize/TabOpen', {
+      this.navigateMain(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
+      /* $store.commit('customize/TabOpen', {
         id: -1, // id
         type: 'action', // 类型action
         name: 'PM_C_PROM_ACTI_BATCH_ADD', // 文件名
@@ -734,7 +738,7 @@ export default {
           id: -1, // id
           tabTitle: $i18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
         }) // 带的参数
-      });
+      }); */
     },
     async publish() {
       let flag = false;
@@ -763,10 +767,7 @@ export default {
       } = await this.service.promotionCenter.updatePmStatus(formData);
       if (code === 0) {
         this.getData();
-        this.$message({
-          message,
-          type: 'success'
-        });
+        this.$Message.success(message);
       }
     }, // 发布
     async deleteActi() {
@@ -785,10 +786,7 @@ export default {
       } = await this.service.promotionCenter.deletePm(formData);
       if (code === 0) {
         this.getData();
-        this.$message({
-          message,
-          type: 'success'
-        });
+        this.$Message.success(message);
       }
     }, // 删除
     async setGroup() {
@@ -818,7 +816,8 @@ export default {
     },
     simulation() {
       // 模拟仿真
-      $store.commit('customize/TabOpen', {
+      this.navigateMain(0, -1, 'CUSTOMIZED', 'PM_C_PROM_PRE_TEST', { i8n: 1, tip: 'btn.simulation' }, {}, 0)
+      /* $store.commit('customize/TabOpen', {
         id: -1, // id
         type: 'CUSTOMIZED', // 类型action
         name: 'PM_C_PROM_PRE_TEST', // 文件名
@@ -827,7 +826,7 @@ export default {
           id: -1, // id
           tabTitle: $i18n.t('btn.simulation') // 模拟仿真
         }) // 带的参数
-      });
+      }); */
     },
     async times() {
       // 默认时间
@@ -881,7 +880,9 @@ export default {
         // let scheme_dataInit = JSON.stringify(res.data.data.scheme_arr);
         // 存储种类id保存草稿时需要
         if (IS_BATCH) {
-          $store.commit('customize/TabOpen', {
+          // $omsUtils.navigateMain(ACTI_ID, 'TabOpen', 'PM_C_PROM_ACTI_BATCH_ADD', {}, false)
+          this.navigateMain(0, ACTI_ID, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
+          /* $store.commit('customize/TabOpen', {
             id: ACTI_ID, // id
             type: 'action', // 类型action
             name: 'PM_C_PROM_ACTI_BATCH_ADD', // 文件名
@@ -890,9 +891,10 @@ export default {
               id: ACTI_ID, // id
               tabTitle: $i18n.t('panel_label.batchAddPromotion') // 批量新增促销活动
             }) // 带的参数
-          });
+          }); */
         } else {
-          $store.commit('customize/TabOpen', {
+          this.navigateMain(0, ACTI_ID, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.editPromotion' }, {}, 0)
+          /* $store.commit('customize/TabOpen', {
             id: ACTI_ID, // id
             type: 'action', // 类型action
             name: 'PM_C_PROM_ACTI', // 文件名
@@ -901,7 +903,7 @@ export default {
               id: ACTI_ID, // id
               // tabTitle: $i18n.t('panel_label.editPromotion') // 编辑促销活动
             }) // 带的参数
-          });
+          }); */
         }
       }
     },
@@ -938,6 +940,31 @@ export default {
       if (event.keyCode === 13) {
         this.getData();
       }
-    }
+    },
+    navigateMain(
+      mutation,
+      id,
+      type,
+      tableName,
+      labelName = { i8n: 1, tip: '' },
+      exendObj = {},
+      isback = 0,
+    ) {
+      const label = labelName.i8n ? $i18n.t(`${labelName.tip}`) : labelName.tip; // 语言包存在就走，不存在则直接取
+      const mutationArr = ['customize/TabOpen',]
+      const muta = mutationArr[mutation];
+      $store.commit(muta, {
+        id: id,
+        type: 1 ? 'action' : type, // 传1则'action'
+        name: tableName,
+        label,
+        back: Boolean(isback),
+        query: Object.assign({
+          id: id,
+          tabTitle: label,
+          ...exendObj,
+        }),
+      })
+    },
   }
 };

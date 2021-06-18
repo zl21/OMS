@@ -224,6 +224,32 @@ class commonUtils {
     })
   }
 
+  /* static navigateMain(
+    mutationType,
+    id,
+    type,
+    tableName,
+    labelName = { i8n: 1, tip: '' },
+    exendObj = {},
+    isback = 0,
+  ) {
+    const label = labelName.i8n ? $i18n.t(`${labelName.tip}`) : labelName.tip; // 语言包存在就走，不存在则直接取
+    const mutationArr = ['customize/TabOpen',]
+    const muta = mutationArr[mutationType];
+    R3.store.commit(muta, {
+      id: id,
+      type: 1 ? 'action' : type, // 传1则'action'
+      name: tableName,
+      label,
+      back: Boolean(isback),
+      query: Object.assign({
+        id: id,
+        tabTitle: label,
+        ...exendObj,
+      }),
+    })
+  } */
+
   /**
    * 导航跳转处理-跳标准
    * @param {Number|String} id，明细ID
