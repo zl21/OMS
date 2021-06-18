@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-    <Mydialog
+    <!-- <Mydialog
       v-if="dataError.show"
       :class="dataError.type"
       :close-on-click-modal="false"
@@ -77,7 +77,8 @@
         :error-message="dataError.errorList"
         @refreshbizlines="errorDialogClose"
       />
-    </Mydialog>
+      refreshbizlines返回两个参数:（false，键码是否等于13
+    </Mydialog> -->
     <dialogVisible
       :check-list="checkList"
       :dialog-visible="dialog_visible"

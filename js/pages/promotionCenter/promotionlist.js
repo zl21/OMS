@@ -181,13 +181,6 @@ export default {
           valuedata: '' // 这个是选择的值
         }
       },
-      dataError: {
-        show: false, // 控制警告弹框显示
-        title: $i18n.t('modalTitle.error'), // 错误 弹框标题
-        type: 'warning', // 类型警告
-        backBtn: true, // 是否显示返回按钮
-        errorList: [{ message: '确定执行下线操作？' }] // 提示内容
-      },
       dialog: {
         visible: true, // 控制查看日志弹窗
         param: {},
@@ -652,14 +645,6 @@ export default {
         return true;
       }
     },
-    errorDialogClose(value, option) {
-      console.log(value, option);
-      if (option) {
-        this.downLine();
-      } else {
-        this.dataError.show = false;
-      }
-    },
     actOffline() {
       const noSelect = this.chargeSelectRow();
       if (noSelect) return;
@@ -669,7 +654,21 @@ export default {
         this.$Message.warning($i18n.t('modalTips.q0')); // 选择的促销活动已经下线/过期
         return;
       }
-      this.dataError.show = true;
+      this.$Modal.info({
+        title: $i18n.t('modalTitle.tips'), // 提示
+        content: '确定执行下线操作？',
+        mask: true,
+        showCancel: true,
+        okText: $i18n.t('common.determine'), // 确定
+        cancelText: $i18n.t('common.cancel'), // 取消
+        onOk: () => {
+          this.$emit('closeActionDialog', false);
+          this.downLine();
+        },
+        onCancel: () => {
+          this.$emit('closeActionDialog', false);
+        },
+      })
     },
     copy() {
       const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
@@ -746,11 +745,10 @@ export default {
       if (noSelect) return;
       flag = this.newList.every(item => item.STATUS === 1);
       if (!flag) {
-        this.$Message.warning($i18n.t('modalTips.q3')); // 选择的促销活动已经发布
+        // this.$Message.warning($i18n.t('modalTips.q3')); // 选择的促销活动已经发布
+        this.$Message.warning('存在【下线过期/已发布】的促销，请重新选择')
         return;
       }
-      this.dataError.show = false; // 关闭弹框
-
       // 请求发布接口
       const params = {
         objid: -1, // 默认参数 保持格式统一 传死-1
@@ -908,16 +906,6 @@ export default {
       }
     },
     async downLine() {
-      const noSelect = this.chargeSelectRow();
-      if (noSelect) return;
-      // STATUS === 1 草稿 ，STATUS === 2 已发布，STATUS === 3 下线过期
-      const flag = this.newList.some(item => item.STATUS === 3);
-      if (flag) {
-        this.$Message.warning($i18n.t('modalTips.q0')); // //选择的促销活动已经下线/过期
-        return;
-      }
-      this.dataError.show = false; // 关闭弹框
-
       const params = {
         objid: -1, // 默认参数 保持格式统一 传死-1
         isBatch: true, // 是否批量 传true
