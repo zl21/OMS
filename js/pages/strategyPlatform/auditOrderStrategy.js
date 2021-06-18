@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-03 19:24:03
- * @LastEditTime: 2021-06-17 16:08:14
+ * @LastEditTime: 2021-06-18 10:38:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/pages/strategyPlatform/auditOrderStrategy.js
@@ -326,8 +326,17 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
             item.itemdata.valuedata = data.ST_C_AUTO_AUDIT.CP_C_SHOP_NAMES;
           }
         });
-        resultData.ST_C_AUTO_AUDIT_ITEM.BILL_FOUND_TYPE.VALUE = data.ST_C_AUTO_AUDIT_ITEM.BILL_FOUND_TYPE.VALUE.split(','); // 单据创建方式
-        resultData.ST_C_AUTO_AUDIT_ITEM.BILL_TYPE.VALUE = data.ST_C_AUTO_AUDIT_ITEM.BILL_TYPE.VALUE.split(','); // 单据类型
+        resultData.ST_C_AUTO_AUDIT_ITEM.BILL_FOUND_TYPE.VALUE = data.ST_C_AUTO_AUDIT_ITEM.BILL_FOUND_TYPE.VALUE ? data.ST_C_AUTO_AUDIT_ITEM.BILL_FOUND_TYPE.VALUE.split(',') : []; // 单据创建方式
+        resultData.ST_C_AUTO_AUDIT_ITEM.BILL_TYPE.VALUE = data.ST_C_AUTO_AUDIT_ITEM.BILL_TYPE.VALUE ? data.ST_C_AUTO_AUDIT_ITEM.BILL_TYPE.VALUE.split(',') : []; // 单据类型
+        //如果多选框控件数据满足全选状态,则勾选全选
+        if(resultData.ST_C_AUTO_AUDIT_ITEM.BILL_FOUND_TYPE.VALUE.length == 2){
+          self.createMethod.indeterminate = false;
+          self.createMethod.checkAll = true;
+        };
+        if(resultData.ST_C_AUTO_AUDIT_ITEM.BILL_TYPE.VALUE.length == 5){
+          self.orderType.indeterminate = false;
+          self.orderType.checkAll = true;
+        }
         self.DELIVERY_WAREHOUSE.itemdata.pid = data.ST_C_AUTO_AUDIT_ITEM.DELIVERY_WAREHOUSE.ID;
         self.DELIVERY_WAREHOUSE.itemdata.valuedata = data.ST_C_AUTO_AUDIT_ITEM.DELIVERY_WAREHOUSE.VALUE; // 发货仓库
         self.LOGISTICS_COMPANY.itemdata.pid = data.ST_C_AUTO_AUDIT_ITEM.LOGISTICS_COMPANY.ID;
