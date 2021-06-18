@@ -131,7 +131,6 @@ export default skuAddOrEdit;
 .customProperties{
     display: grid;
     grid-template-columns: 80px auto;
-    align-items: center;
     .panel-title{
       margin-top: @base-mr;
     }

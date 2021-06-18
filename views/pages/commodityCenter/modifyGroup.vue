@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-19 17:55:24
- * @LastEditTime: 2021-05-21 14:46:57
+ * @LastEditTime: 2021-06-18 13:43:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/commodityCenter/modifyGroup.vue
@@ -31,6 +31,7 @@
           <p slot="content">
             <businessForm :form-config="formConfig" />
           </p>
+          <div slot="content" class="clear"></div>
         </Panel>
       </Collapse>
       <Modal

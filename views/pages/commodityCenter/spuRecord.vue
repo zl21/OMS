@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-19 17:55:24
- * @LastEditTime: 2021-06-18 13:31:39
+ * @LastEditTime: 2021-06-18 13:43:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/commodityCenter/spuRecord.vue
