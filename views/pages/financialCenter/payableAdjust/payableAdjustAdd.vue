@@ -31,6 +31,7 @@
               @keyDown="keyDown"
             />
           </p>
+          <div slot="content" class="clear"></div>
         </Panel>
         <Panel name="panel_log">
           <!-- 日志 -->
