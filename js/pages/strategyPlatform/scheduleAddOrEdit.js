@@ -6,6 +6,8 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import subTable from 'professionalComponents/subTable';
 import scheduleFormDialog from '@/views/modal/strategyPlatform/scheduleFormDialog';
 import dateUtil from '@/assets/js/__utils__/date.js';
+import DialogConfig from 'burgeonConfig/config/dialogs.config';
+import businessDialog from 'professionalComponents/businessDialog';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
@@ -16,7 +18,8 @@ export default {
     businessLabel,
     businessStatusFlag,
     businessActionTable,
-    scheduleFormDialog
+    scheduleFormDialog,
+    businessDialog
   },
   mixins: [modifycurrentLabel],
   data() {
@@ -37,12 +40,30 @@ export default {
         objid: '',
         pageShow: true
       },
-      dialog: {
-        isConfirm: false, // 提示是否确认切换拣货单创建方式
-        pickingForDate: false, // 拣货单-按时间点创建
-        pickingForStatus: false, // 拣货单-按未拣货数创建
-        warehouseWarrant: false // 入库单
+      dialogs: DialogConfig.config(),
+      // 公共弹框
+      // 弹框配置
+      scheduleFormConfig: {
+        title: '入库单', // 修改备注
+        titleAlign: 'center', // 设置标题是否居中 center left
+        width: '800',
+        scrollable: false, // 是否可以滚动
+        closable: true, // 是否可以按esc关闭
+        draggable: true, // 是否可以拖动
+        mask: true, // 是否显示遮罩层
+        maskClosable: true, // 是否可以点击叉号关闭
+        transfer: true, // 是否将弹层放在body内
+        name: 'scheduleFormDialog', // 组件名称
+        url: 'modal/strategyPlatform/scheduleFormDialog',
+        keepAlive: true,
+        excludeString: 'scheduleFormDialog', // 将name传进去，确认不缓存
+        componentData: {},
       },
+      // dialog: {
+      //   pickingForDate: false, // 拣货单-按时间点创建
+      //   pickingForStatus: false, // 拣货单-按未拣货数创建
+      //   warehouseWarrant: false // 入库单
+      // },
       curDialog: '', // 当前弹窗
       btnConfig: {
         typeAll: 'default',
@@ -827,7 +848,23 @@ export default {
               disabled: false,
               setRequired: '', // 必选标识,值不为required时无标识
               radioChange: ()=>{
-                this.pickingTableConfig.data.length && (this.dialog.isConfirm = true);
+                if (!this.pickingTableConfig.data.length) return;
+                this.$Modal.info({
+                  title: $i18n.t('modalTitle.tips'), // 提示
+                  content: '当前切换操作会清空已录入的按时间点创建/按未拣货数创建内容，确定继续吗？',
+                  mask: true,
+                  showCancel: true,
+                  okText: $i18n.t('common.determine'), // 确定
+                  cancelText: $i18n.t('common.cancel'), // 取消
+                  onOk: () => {
+                    this.initPickTable();
+                    this.subTableDelete(-1, 'pickingTableConfig');
+                  },
+                  onCancel: () => {
+                    const { PICK_CREATE_TYPE } = this.pickingTableConfig.businessFormConfig.formValue;
+                    this.pickingTableConfig.businessFormConfig.formValue.PICK_CREATE_TYPE = PICK_CREATE_TYPE == 1 ? 2 : 1;
+                  }
+                });
               }, // 切换时的方法
               options: [ // radio选项
                 {
@@ -1117,18 +1154,6 @@ export default {
       const date = new Date(time);
       return dateUtil.getFormatDate(date, format || 'yyyy-MM-dd HH:mm:ss');
     },
-    // 拣货单切换创建方式-确认
-    handleOk() {
-      this.initPickTable();
-      this.subTableDelete(-1, 'pickingTableConfig');
-      this.dialog.isConfirm = false;
-    },
-    // 拣货单切换创建方式-取消
-    handleCancel() {
-      const { PICK_CREATE_TYPE } = this.pickingTableConfig.businessFormConfig.formValue;
-      this.pickingTableConfig.businessFormConfig.formValue.PICK_CREATE_TYPE = PICK_CREATE_TYPE == 1 ? 2 : 1;
-      this.dialog.isConfirm = false;
-    },
     // 返回
     back() {
       if (this.isModify) {
@@ -1159,11 +1184,22 @@ export default {
     },
     // 弹窗显示隐藏
     handleDialog(key, detail, isEdit) {
-      this.dialog[key] = !this.dialog[key];
+      // this.dialog[key] = !this.dialog[key];
       this.dialogConfig = key == 'warehouseWarrant' ? this[key] : [{ formConfig: this[key] }];
       this.curDialog = key;
       this.initDetail = detail || {};
       this.initForm(detail, isEdit);
+      
+      this.scheduleFormConfig.componentData = {
+        objid: '-1',
+        tableName: 'ST_C_VIPCOM_PROJECT',
+        data: this.dialogConfig,
+        detail: detail || {}
+      };
+      this.scheduleFormConfig.title = this.dialogInfo.title;
+      setTimeout(() => {
+        this.$children.find(item => item.name === 'scheduleFormDialog').openConfirm();
+      }, 800);
     },
     /**
      * 记录主/子表修改信息方法
@@ -1457,6 +1493,7 @@ export default {
         this.$message.error(message);
       });
     },
+    
     /**
      * 拣货单/入库单保存
      * @param {*} params 表单数据

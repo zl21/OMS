@@ -8,19 +8,25 @@ export default {
     businessForm
   },
   props: {
-    dialogConfig: {
-      type: Array,
-      default: []
-    }, // 表单数据
-    detail: {
+    componentData: {
       type: Object,
       default: {}
-    }, // 明细详情
-    loading: {
-      type: Boolean,
-      default: false
     }
   },
+  // props: {
+  //   dialogConfig: {
+  //     type: Array,
+  //     default: []
+  //   }, // 表单数据
+  //   detail: {
+  //     type: Object,
+  //     default: {}
+  //   }, // 明细详情
+  //   loading: {
+  //     type: Boolean,
+  //     default: false
+  //   }
+  // },
   data() {
     return {
       vmI18n:$i18n,
@@ -51,9 +57,9 @@ export default {
     };
   },
   watch: {
-    dialogConfig: {
+    'componentData.data': {
       handler(val) {
-        const panelCounts = this.dialogConfig.length;
+        const panelCounts = this.componentData.data.length;
         this.subTableCollapse = panelCounts > 1 ? [...new Array(panelCounts).keys()] : [];
       },
       immediate: true
@@ -64,10 +70,10 @@ export default {
   },
   methods: {
     confirmHandel() {
-      console.log(this.detail.ID);
+      console.log(this.componentData.detail.ID);
 
       if (!this.validate()) return;
-      let ID = this.detail.ID || -1;
+      let ID = this.componentData.detail.ID || -1;
       this.$emit('getData', { ID, ...this.formConfig.formValue });
     },
     // 表单校验
@@ -78,7 +84,7 @@ export default {
       let formData = [];
       let formValue = {};
       let ruleValidate = {};
-      this.dialogConfig.forEach(item => {
+      this.componentData.data.forEach(item => {
         formData = formData.concat(item.formConfig.formData);
         Object.assign(formValue, item.formConfig.formValue);
         Object.assign(ruleValidate, item.formConfig.ruleValidate);
