@@ -147,30 +147,20 @@ export default {
             style: "popInput", // 输入框弹框单多选
             width: "6",
             itemdata: {
-              col: 1,
               colid: 168556, // 当前字段的ID
               colname: "CP_C_REGION_COUNTRY_ID", // 当前字段的名称
-              datelimit: "all",
-              display: "text", // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
               name: "关联国家", // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: "CP_C_COUNTRY", // 对应的表
-              reftableid: 10283, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: "STRING", // 这个是后台用的
               valuedata: "", // 这个是选择的值
               pid: "",
             },
             oneObj: (val) => {
               // 选中触发事件
               console.log("val::", val);
-              if (!val.pid) return;
+              // if (!val.pid) return;
               const drpArr = [
                 "CP_C_REGION_PROVINCE_ID",
                 "CP_C_REGION_CITY_ID",
@@ -178,17 +168,22 @@ export default {
               ];
               this.formConfig.formValue.CP_C_REGION_COUNTRY_ID = val;
               this.formConfig.formValue.CP_C_REGION_COUNTRY_id = val.pid;
-              this.formConfig = this.emptyData(
-                this.formConfig,
-                "CP_C_REGION_COUNTRY_ID",
-                this.modify,
-                "CP_C_REGION_COUNTRY_id",
-                val,
-                drpArr
-              );
+              this.formConfig = this.emptyData(this.formConfig,"CP_C_REGION_COUNTRY_ID",this.modify,"CP_C_REGION_COUNTRY_id",val,drpArr);
               this.masterModifyData("CP_C_REGION_COUNTRY_ID", "master");
               this.masterModifyData("CP_C_REGION_COUNTRY_id", "master");
             },
+            InputEnter: (val)=> {
+              const drpArr = [
+                "CP_C_REGION_PROVINCE_ID",
+                "CP_C_REGION_CITY_ID",
+                "CP_C_REGION_AREA_ID",
+              ];
+              this.formConfig.formValue.CP_C_REGION_COUNTRY_ID = val;
+              this.formConfig.formValue.CP_C_REGION_COUNTRY_id = val.pid;
+              this.formConfig = this.emptyData(this.formConfig,"CP_C_REGION_COUNTRY_ID",this.modify,"CP_C_REGION_COUNTRY_id",val,drpArr);
+              this.masterModifyData("CP_C_REGION_COUNTRY_ID", "master");
+              this.masterModifyData("CP_C_REGION_COUNTRY_id", "master");
+            }
           },
           {
             version: "1.4",
@@ -197,23 +192,13 @@ export default {
             width: "6",
             inputList: [],
             itemdata: {
-              col: 1,
               colid: 166974, // 当前字段的ID
-              colname: "CP_C_REGION_PROVINCE_ID", // 当前字段的名称
-              datelimit: "all",
-              display: "text", // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+              colname: "CP_C_REGION_PROVINCE_ID",
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
               name: "关联省", // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: "CP_C_PROVINCE", // 对应的表
-              reftableid: 10286, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: "STRING", // 这个是后台用的
               valuedata: "", // 这个是选择的值
               pid: "",
               refcolval: {
@@ -225,21 +210,22 @@ export default {
             oneObj: (val) => {
               // 选中触发事件
               console.log("val::", val);
-              if (!val.pid) return;
+              // if (!val.pid) return;
               const drpArr = ["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"];
               this.formConfig.formValue.CP_C_REGION_PROVINCE_ID = val;
               this.formConfig.formValue.CP_C_REGION_PROVINCE_id = val.pid;
-              this.formConfig = this.emptyData(
-                this.formConfig,
-                "CP_C_REGION_PROVINCE_ID",
-                this.modify,
-                "CP_C_REGION_PROVINCE_id",
-                val,
-                drpArr
-              );
+              this.formConfig = this.emptyData(this.formConfig,"CP_C_REGION_PROVINCE_ID",this.modify,"CP_C_REGION_PROVINCE_id",val,drpArr);
               this.masterModifyData("CP_C_REGION_PROVINCE_ID", "master");
               this.masterModifyData("CP_C_REGION_PROVINCE_id", "master");
             },
+            InputEnter: (val)=> {
+              const drpArr = ["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"];
+              this.formConfig.formValue.CP_C_REGION_PROVINCE_ID = val;
+              this.formConfig.formValue.CP_C_REGION_PROVINCE_id = val.pid;
+              this.formConfig = this.emptyData(this.formConfig,"CP_C_REGION_PROVINCE_ID",this.modify,"CP_C_REGION_PROVINCE_id",val,drpArr);
+              this.masterModifyData("CP_C_REGION_PROVINCE_ID", "master");
+              this.masterModifyData("CP_C_REGION_PROVINCE_id", "master");
+            }
           },
           {
             version: "1.4",
@@ -248,23 +234,13 @@ export default {
             width: "6",
             inputList: [],
             itemdata: {
-              col: 1,
               colid: 167077, // 当前字段的ID
-              colname: "CP_C_REGION_CITY_ID", // 当前字段的名称
-              datelimit: "all",
-              display: "text", // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+              colname: "CP_C_REGION_CITY_ID",
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
               name: "关联市", // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: "CP_C_CITY", // 对应的表
-              reftableid: 10285, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: "STRING", // 这个是后台用的
               valuedata: "", // 这个是选择的值
               pid: "",
               refcolval: {
@@ -276,7 +252,7 @@ export default {
             oneObj: (val) => {
               // 选中触发事件
               console.log("val::", val);
-              if (!val.pid) return;
+              // if (!val.pid) return;
               const drpArr = ["CP_C_REGION_AREA_ID"];
               this.formConfig.formValue.CP_C_REGION_CITY_ID = val;
               this.formConfig.formValue.CP_C_REGION_CITY_id = val.pid;
@@ -291,6 +267,21 @@ export default {
               this.masterModifyData("CP_C_REGION_CITY_ID", "master");
               this.masterModifyData("CP_C_REGION_CITY_id", "master");
             },
+            InputEnter: (val)=> {
+              const drpArr = ["CP_C_REGION_AREA_ID"];
+              this.formConfig.formValue.CP_C_REGION_CITY_ID = val;
+              this.formConfig.formValue.CP_C_REGION_CITY_id = val.pid;
+              this.formConfig = this.emptyData(
+                this.formConfig,
+                "CP_C_REGION_CITY_ID",
+                this.modify,
+                "CP_C_REGION_CITY_id",
+                val,
+                drpArr
+              );
+              this.masterModifyData("CP_C_REGION_CITY_ID", "master");
+              this.masterModifyData("CP_C_REGION_CITY_id", "master");
+            }
           },
           {
             version: "1.4",
@@ -299,23 +290,13 @@ export default {
             width: "6",
             inputList: [],
             itemdata: {
-              col: 1,
               colid: 167091, // 当前字段的ID
               colname: "CP_C_REGION_AREA_ID", // 当前字段的名称
-              datelimit: "all",
-              display: "text", // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
               name: "关联区县", // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: "CP_C_DISTAREA", // 对应的表
-              reftableid: 10287, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: "STRING", // 这个是后台用的
               valuedata: "", // 这个是选择的值
               pid: "",
               refcolval: {
@@ -327,11 +308,16 @@ export default {
             oneObj: (val) => {
               // 选中触发事件
               console.log("val::", val);
-              if (!val.pid) return;
+              // if (!val.pid) return;
               this.formConfig.formValue.CP_C_REGION_AREA_ID = val;
               this.masterModifyData("CP_C_REGION_AREA_ID", "master");
               this.masterModifyData("CP_C_REGION_AREA_id", "master");
             },
+            InputEnter: (val)=> {
+              this.formConfig.formValue.CP_C_REGION_AREA_ID = val;
+              this.masterModifyData("CP_C_REGION_AREA_ID", "master");
+              this.masterModifyData("CP_C_REGION_AREA_id", "master");
+            }
           },
         ],
         formValue: {
@@ -454,30 +440,20 @@ export default {
             style: "popInput", // 输入框弹框单多选
             width: "8",
             itemdata: {
-              col: 1,
               colid: 168556, // 当前字段的ID
               colname: "CP_C_REGION_COUNTRY_ID", // 当前字段的名称
-              datelimit: "all",
-              display: "text", // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
               name: "国家", // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: "CP_C_COUNTRY", // 对应的表
-              reftableid: 10283, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: "STRING", // 这个是后台用的
               valuedata: "", // 这个是选择的值
               pid: "",
             },
             oneObj: (val) => {
               // 选中触发事件
               console.log("val::", val);
-              if (!val.pid) return;
+              // if (!val.pid) return;
               const drpArr = ["CP_C_REGION_PROVINCE_ID", "CP_C_REGION_CITY_ID"];
               this.formConfig.formValue.CP_C_REGION_COUNTRY_ID = val;
               this.formConfig.formValue.CP_C_REGION_COUNTRY_id = val.pid;
@@ -492,6 +468,21 @@ export default {
               this.masterModifyData("CP_C_REGION_COUNTRY_ID", "master");
               this.masterModifyData("CP_C_REGION_COUNTRY_id", "master");
             },
+            InputEnter: (val)=> {
+              const drpArr = ["CP_C_REGION_PROVINCE_ID", "CP_C_REGION_CITY_ID"];
+              this.formConfig.formValue.CP_C_REGION_COUNTRY_ID = val;
+              this.formConfig.formValue.CP_C_REGION_COUNTRY_id = val.pid;
+              this.formConfig = this.emptyData(
+                this.formConfig,
+                "CP_C_REGION_COUNTRY_ID",
+                this.modify,
+                "CP_C_REGION_COUNTRY_id",
+                val,
+                drpArr
+              );
+              this.masterModifyData("CP_C_REGION_COUNTRY_ID", "master");
+              this.masterModifyData("CP_C_REGION_COUNTRY_id", "master");
+            }
           },
           {
             version: "1.4",
@@ -500,23 +491,13 @@ export default {
             width: "8",
             inputList: [],
             itemdata: {
-              col: 1,
               colid: 166974, // 当前字段的ID
               colname: "CP_C_REGION_PROVINCE_ID", // 当前字段的名称
-              datelimit: "all",
-              display: "text", // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
               name: "关联省", // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: "CP_C_PROVINCE", // 对应的表
-              reftableid: 10286, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: "STRING", // 这个是后台用的
               valuedata: "", // 这个是选择的值
               pid: "",
               refcolval: {
@@ -528,7 +509,7 @@ export default {
             oneObj: (val) => {
               // 选中触发事件
               console.log("val::", val);
-              if (!val.pid) return;
+              // if (!val.pid) return;
               const drpArr = ["CP_C_REGION_CITY_ID"];
               this.formConfig.formValue.CP_C_REGION_PROVINCE_ID = val;
               this.formConfig.formValue.CP_C_REGION_PROVINCE_id = val.pid;
@@ -543,6 +524,21 @@ export default {
               this.masterModifyData("CP_C_REGION_PROVINCE_ID", "master");
               this.masterModifyData("CP_C_REGION_PROVINCE_id", "master");
             },
+            InputEnter: (val)=> {
+              const drpArr = ["CP_C_REGION_CITY_ID"];
+              this.formConfig.formValue.CP_C_REGION_PROVINCE_ID = val;
+              this.formConfig.formValue.CP_C_REGION_PROVINCE_id = val.pid;
+              this.formConfig = this.emptyData(
+                this.formConfig,
+                "CP_C_REGION_PROVINCE_ID",
+                this.modify,
+                "CP_C_REGION_PROVINCE_id",
+                val,
+                drpArr
+              );
+              this.masterModifyData("CP_C_REGION_PROVINCE_ID", "master");
+              this.masterModifyData("CP_C_REGION_PROVINCE_id", "master");
+            }
           },
           {
             version: "1.4",
@@ -551,23 +547,13 @@ export default {
             width: "8",
             inputList: [],
             itemdata: {
-              col: 1,
               colid: 167077, // 当前字段的ID
               colname: "CP_C_REGION_CITY_ID", // 当前字段的名称
-              datelimit: "all",
-              display: "text", // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
               name: "关联市", // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: "CP_C_CITY", // 对应的表
-              reftableid: 10285, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: "STRING", // 这个是后台用的
               valuedata: "", // 这个是选择的值
               pid: "",
               refcolval: {
@@ -579,11 +565,16 @@ export default {
             oneObj: (val) => {
               // 选中触发事件
               console.log("val::", val);
-              if (!val.pid) return;
+              // if (!val.pid) return;
               this.formConfig.formValue.CP_C_REGION_CITY_ID = val;
               this.masterModifyData("CP_C_REGION_CITY_ID", "master");
               this.masterModifyData("CP_C_REGION_CITY_id", "master");
             },
+            InputEnter: (val)=> {
+              this.formConfig.formValue.CP_C_REGION_CITY_ID = val;
+              this.masterModifyData("CP_C_REGION_CITY_ID", "master");
+              this.masterModifyData("CP_C_REGION_CITY_id", "master");
+            }
           },
         ],
         formValue: {
