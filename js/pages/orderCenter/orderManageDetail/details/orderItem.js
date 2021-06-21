@@ -65,6 +65,7 @@ export default {
     },
     // 获取数据
     async getData(req,obj) {
+      console.log(req,obj);
       this.loading = true;
       this.tableConfig.data = [];
       this.tableConfig.pageShow = false;
@@ -124,7 +125,7 @@ export default {
     }
   },
   mounted() {
-    if (this.componentData && this.componentData.tablename) {
+    if (this.componentData && this.componentData.tabValue) {
       this.getData(this.componentData);
     }
   }
