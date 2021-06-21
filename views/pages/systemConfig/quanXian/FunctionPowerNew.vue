@@ -658,8 +658,8 @@ export default {
       }
       return false;
     }, // 校验是否有未保存的数据
-    getButtonData() {
-      const params = { AD_ACTION_NAME: 'functionPermission' };
+    getButtonData() {//'functionPermission'
+      const params = { AD_ACTION_NAME: 'JURISDICTIONDATA' };
       functionPowerActions().fetchActionsInCustomizePage({
         params,
         success: (res) => {

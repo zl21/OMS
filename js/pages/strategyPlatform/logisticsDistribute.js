@@ -808,17 +808,20 @@ export default {
     fnSave(type) {
       let areaRange = this.AliasFormConfig.formValue.REGION_TYPE;
       let { cpCLogisticsEname, cpCLogisticsId, remark } = this.FormConfig.formValue;
-      if (areaRange == 1) {
-        if (this.stCDeliveryAreaRegionItemList[0].cpCRegionProvinceId == "") {
-          this.$Message.warning('请选择排除省份！');
-          return
-        }
-      } else {
-        if (!this.fixedcolumns) {
-          this.$Message.warning('请选择支持省份！');
-          return
+      if (this.id != "-1") {
+        if (areaRange == 1) {
+          if (this.stCDeliveryAreaRegionItemList[0].cpCRegionProvinceId == "") {
+            this.$Message.warning('请选择排除省份！');
+            return
+          }
+        } else {
+          if (!this.fixedcolumns) {
+            this.$Message.warning('请选择支持省份！');
+            return
+          }
         }
       }
+     
 
       this.modal1 = false;
 
