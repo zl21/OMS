@@ -234,25 +234,16 @@ export default {
       rs = this.checkTable(this.gift_info_setting.gift_commoditylist);
       if (rs.code === -1) {
         rs.message = `${tablename},${rs.message}`;
-        return this.$message({
-          type: 'error',
-          message: rs.message
-        });
+        // return this.$Message.error(rs.message);
       }
       rs.message = `${tablename},保存成功`;
-      this.$message({
-        type: 'success',
-        message: rs.message
-      });
+      this.$Message.success(rs.message);
       this.closeDialog();
     },
     async setCommodity() {
       const modulesValid3 = this.validate3();
       if (modulesValid3.code === -1) {
-        return this.$message({
-          type: 'error',
-          message: modulesValid3.message
-        });
+        return this.$Message.error(modulesValid3.message);
       }
       const arr = [];
       this.gift_info_setting.gift_productsArrs.forEach(item => {
@@ -351,17 +342,14 @@ export default {
       } catch (error) {
         // self.$message({ type: "error", message: "获取促销详情异常" });
         self.loading = false;
-        self.$message({
-          type: 'error',
-          message: $i18n.t('modalTips.r4')
-        });
+        // self.$Message.error($i18n.t('modalTips.r4'));
       }
     },
     /**
      * 保存草稿
      */
     async saveDraft() {
-      const [modulesValid1, modulesValid2, modulesValid3] = this.validateModule();
+      /* const [modulesValid1, modulesValid2, modulesValid3] = this.validateModule();
       if (modulesValid1.code === -1) {
         this.$message({
           type: 'error',
@@ -382,6 +370,10 @@ export default {
           message: modulesValid3.message
         });
         return;
+      } */
+      const validateRes = this.validateModule();
+      for (const it of validateRes) {
+        if (it.code === -1) return this.$Message.error(it.message);
       }
       const index = this.basic_info.activity_type + BurgeonDate.Format(new Date(), 'yyyy-MM-dd 23:59:59')
       const params = {
@@ -401,10 +393,11 @@ export default {
           data: { code, data }
         } = await this.service.promotionCenter.savePm(formData);
         if (code === 0) {
-          this.$message({
+          this.$Message.message($i18n.t('modalTips.z9'));
+          /* this.$message({
             type: 'success',
             message: $i18n.t('modalTips.z9') // 保存成功
-          });
+          }); */
           // action never used
           // let action = 'customize/switchActiveTab';
           // if (this.objid == -1) {
@@ -431,15 +424,16 @@ export default {
         this.loading = false;
       } catch (error) {
         this.loading = false;
-        this.$message({
+        // this.$Message.error(error);
+        /* this.$message({
           type: 'error',
           error
-        });
+        }); */
       }
     },
     // 发布
     async publish() {
-      const [modulesValid1, modulesValid2, modulesValid3] = this.validateModule();
+      /* const [modulesValid1, modulesValid2, modulesValid3] = this.validateModule();
       if (modulesValid1.code === -1) {
         this.$message({
           type: 'error',
@@ -460,6 +454,10 @@ export default {
           message: modulesValid3.message
         });
         return;
+      } */
+      const validateRes = this.validateModule();
+      for (const it of validateRes) {
+        if (it.code === -1) return this.$Message.error(it.message);
       }
       // const index = this.basic_info.activity_type + new Date().Format('yyyyMMddHHMMSS');
       const ids = [];
@@ -598,23 +596,26 @@ export default {
      */
     validateModule() {
       const f1 = this.validate1();
-      if (f1.code === 0) {
+      this.stepsBar[0].finish = [0].includes(f1.code);
+      /* if (f1.code === 0) {
         this.stepsBar[0].finish = true;
       } else {
         this.stepsBar[0].finish = false;
-      }
+      } */
       const f2 = this.validate2();
-      if (f2.code === 0) {
+      this.stepsBar[1].finish = [0].includes(f2.code);
+      /* if (f2.code === 0) {
         this.stepsBar[1].finish = true;
       } else {
         this.stepsBar[1].finish = false;
-      }
+      } */
       const f3 = this.validate3();
-      if (f3.code === 0) {
+      this.stepsBar[2].finish = [0].includes(f3.code);
+      /* if (f3.code === 0) {
         this.stepsBar[2].finish = true;
       } else {
         this.stepsBar[2].finish = false;
-      }
+      } */
       return [f1, f2, f3];
     },
     validate1() {
