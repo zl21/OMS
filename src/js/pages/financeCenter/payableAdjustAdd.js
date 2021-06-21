@@ -1150,7 +1150,8 @@ export default {
           self.formConfig.formValue.PAY_TYPE = payType;
         }
         self.formConfig.formValue.TID = item.SOURCE_CODE;
-        self.formConfig.formValue.ORDER_NO = item.BILL_NO;
+        // 接口把数据处理了，BillNo 的值 放到OrigOrderNo了， 页面从ORIG_ORDER_NO 字段取值 2021-0621 刘bai
+        self.formConfig.formValue.ORDER_NO = item.ORIG_ORDER_NO;
         self.formConfig.formValue.SOURCE_TID = item.ID;
         if (item.PAY_TIME) {
           // 时间戳转换为时间
