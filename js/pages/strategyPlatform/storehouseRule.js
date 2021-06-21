@@ -122,24 +122,23 @@ export default {
             width: '8',
             disabled: false,
             transfer: true,
-            onChange: (v) => {
+            onChange: () => {
 
             }
           },
           {
             style: 'date',
             label: '生效结束时间',
+            type: "datetime",
             value: 'endTime',
             colname: 'endTime',
             format: 'yyyy-MM-dd HH:mm:ss',
             width: '8',
-            vModelFormat: true,
             disabled: false,
+            transfer: true,
             onChange: () => {
               if (!this.formConfig.formValue.endTime) return
               this.formConfig.formValue.endTime = dateUtil.getFormatDate(new Date(this.formConfig.formValue.endTime), 'yyyy-MM-dd') + " 23:59:59"
-          
-              console.log(this.formConfig.formValue.endTime);
             }
           },
           {
@@ -517,14 +516,16 @@ export default {
       }
     },
     lastStep() {
-      this.$store.commit('customize/TabOpen', {
-        id: '-1',
-        type: 'action',
-        name: this.customizedModuleName,
-        query: {
-          id: this.id
-        }
-      });
+    
+
+      this.$store.commit('global/tabOpen', {
+        type: 'C',
+        url: `/CUSTOMIZED/${this.customizedModuleName}/-1?id=${this.id}`,
+        label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
+        customizedModuleName: this.customizedModuleName,
+        customizedModuleId: '-1',
+        dynamicRoutingForCustomizePage:true
+      })
     },
     isfnSave() {
       //判断是什么情况下的保存
@@ -592,7 +593,6 @@ export default {
     },
 
     fnCopy() {
-
       this.$store.commit('global/tabOpen', {
         type: 'C',
         url: `/CUSTOMIZED/${this.customizedModuleName}/New?copy=${this.id}`,
@@ -601,8 +601,6 @@ export default {
         customizedModuleId: 'New',
         dynamicRoutingForCustomizePage:true
       })
-
-
 
     },
     qurefrom(key) {
@@ -821,28 +819,27 @@ export default {
           this.$Message.success(res.data.message);
 
           if ((this.id == "New" || this.id == "-1") && saveType == 1) {
-            this.$store.commit('customize/TabOpen', {
-              id: '-1',
-              type: 'action',
-              name: this.customizedModuleName,
-              query: {
-                id: res.data.data.objId
-              }
-            });
-
-
+            this.$store.commit('global/tabOpen', {
+              type: 'C',
+              url: `/CUSTOMIZED/${this.customizedModuleName}/-1?id=${res.data.data.objId}`,
+              label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
+              customizedModuleName: this.customizedModuleName,
+              customizedModuleId: '-1',
+              dynamicRoutingForCustomizePage:true
+            })
             return
           }
 
           if (saveType == 2) {
-            this.$store.commit('customize/TabOpen', {
-              id: res.data.data.objId,
-              type: 'action',
-              name: this.customizedModuleName,
-              query: {
-                saveType
-              }
-            });
+           
+            this.$store.commit('global/tabOpen', {
+              type: 'C',
+              url: `/CUSTOMIZED/${this.customizedModuleName}/${res.data.data.objId}?saveType=${saveType}`,
+              label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
+              customizedModuleName: this.customizedModuleName,
+              customizedModuleId: res.data.data.objId,
+              dynamicRoutingForCustomizePage:true
+            })
           }
           if (saveType == 1 && this.id != "-1") {
             this.changeCount = 0
@@ -883,26 +880,27 @@ export default {
           this.$Message.success(res.data.message);
 
           if ((this.id == "New" || this.id == "-1") && saveType == 1) {
-            this.$store.commit('customize/TabOpen', {
-              id: '-1',
-              type: 'action',
-              name: this.customizedModuleName,
-              query: {
-                id: res.data.data.objId
-              }
-            });
+
+            this.$store.commit('global/tabOpen', {
+              type: 'C',
+              url: `/CUSTOMIZED/${this.customizedModuleName}/-1?id=${res.data.data.objId}`,
+              label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
+              customizedModuleName: this.customizedModuleName,
+              customizedModuleId: '-1',
+              dynamicRoutingForCustomizePage:true
+            })
             return
           }
 
           if (saveType == 2) {
-            this.$store.commit('customize/TabOpen', {
-              id: res.data.data.objId,
-              type: 'action',
-              name: this.customizedModuleName,
-              query: {
-                saveType
-              }
-            });
+            this.$store.commit('global/tabOpen', {
+              type: 'C',
+              url: `/CUSTOMIZED/${this.customizedModuleName}/${res.data.data.objId}?saveType=${saveType}`,
+              label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
+              customizedModuleName: this.customizedModuleName,
+              customizedModuleId: res.data.data.objId,
+              dynamicRoutingForCustomizePage:true
+            })
           }
           if (saveType == 1 && this.id != "-1") {
             this.changeCount = 0
