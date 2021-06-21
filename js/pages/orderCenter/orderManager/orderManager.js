@@ -7,12 +7,10 @@
   // import loading from 'professionalComponents/loading.vue';
   import dateUtil from '@/assets/js/__utils__/date.js';
   import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
-  // import commonTableByAgGrid from 'arkui_BCL/CommonTableByAgGrid';
   import dynamicSearch from '@/views/pages/orderCenter/orderManager/dynamicSearch.vue';
   import formSetting from '@/views/pages/orderCenter/orderManager/formSetting.vue';
   import proDetail from '@/views/pages/orderCenter/orderManager/proDetail';
-  import commonTableByAgGrid from 'libs/@syman/ark-ui-bcl/src/components/common-table-by-ag-grid/CommonTableByAgGrid';
-
+  import businessAgTable from 'professionalComponents/vueAgTable';
   export default {
     name: 'OrderManage',
     components: {
@@ -24,7 +22,7 @@
       businessDialog,
       // loading,
       proDetail,
-      commonTableByAgGrid
+      businessAgTable
     },
     mixins: [isFavoriteMixin],
     data() {
@@ -446,14 +444,6 @@
           ruleValidate: {},
         },
         tabList: [],
-        options: {
-          datas: {
-          // tabth:[],
-          // row:[]
-          }
-        },
-        tabth: [],
-        row: [],
         agTableConfig: {
           tableHeight: '480px',
           columnDefs: [],
@@ -509,7 +499,46 @@
         dynamicData: {},
         modifyWarehouse:{
           componentData:{}
-        }
+        },
+        tabth: [],
+        row: [],
+        pagenation: {
+          // 设置总条数
+          total: 0,
+          // 条数
+          pageSize: 10,
+          // 页数
+          current: 1,
+          pageSizeOpts: [],
+        },
+        renderParams:(cellData)=> {
+          if (cellData.field == 'ORDER_TAG') {
+              return {
+                  renderContainer: 'CellRenderByFunction',
+                  renderComponent: (h, params) => {
+                      console.log(params);
+                      return h('div', {
+                          domProps: {
+
+                          }
+                      },
+                          params.row.ORDER_TAG.map(item => h('span', {
+                              domProps: {
+                                  innerText: item.text
+                              },
+                              style: {
+                                  border: `1px solid${item.clr}`,
+                                  color: item.clr,
+                                  margin: '0 2px',
+                                  borderRadius: '6px',
+                                  padding: '2px'
+                              }
+                          }))
+                      )
+                  }
+              }
+          }
+      },
       };
     },
     watch: {},
@@ -529,23 +558,6 @@
       self.initList();
     },
     methods: {
-      renderParams(cellData){
-        console.log(cellData);
-        // if(cellData.field == 'ORDER_TAG'){
-        //   const resultElement = document.createElement('div');
-        //   params.data.ORDER_TAG.forEach((item) => {
-        //     const tag = document.createElement('span');
-        //     tag.innerText = item.text;
-        //     tag.style.color = item.clr;
-        //     tag.style.border = `1px solid${item.clr}`;
-        //     tag.style.margin = '0 2px';
-        //     tag.style.borderRadius = '6px';
-        //     tag.style.padding = '2px';
-        //     resultElement.appendChild(tag);
-        //   });
-        //   return resultElement;
-        // }
-      },
       gridReady() {
         console.log('grid');
         this.tabth = [
@@ -596,12 +608,11 @@
               // 存储表格数据
               self.agTableConfig.pagenation.pageSizeOpts = data.PAGE_INFO.SIZE_GROUP;
               self.agTableConfig.pagenation.pageSize = data.PAGE_INFO.DEFAULT_SIZE;
+              columns.forEach(item=>{item['displayName'] = item.headerName;});
+              columns.unshift({"headerName":"序号","field":"index","sort":10,"displayName":"序号",checkboxSelection:true})
               self.agTableConfig.columnDefs = columns;
               self.agTableConfig.rowData = rowData;
-              columns.forEach(item=>item['displayName'] = item.headerName);
-              self.tabth = columns;
-              self.row = rowData;
-              self.$refs.agGridChild.agGridTable(columns, rowData);
+              // self.$refs.agGridChild.agGridTable(columns, rowData);
               self.tabList = data.TAB_LABEL; // tabs赋值
               self.labelValue = data.TAB_LABEL[0].value;
               self.query();
@@ -834,9 +845,9 @@
             }
             // 分页赋值
             self.agTableConfig.pagenation.total = data.COUNT;
+            data.ITEMS.forEach((item , index)=>item['index'] = index+1)
             self.agTableConfig.rowData = data.ITEMS;
-            self.row = data.ITEMS;
-            self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
+            // self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
           }
           self.loading = false;
         });

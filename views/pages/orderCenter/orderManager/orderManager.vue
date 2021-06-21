@@ -44,14 +44,22 @@
           :name="item.value"
         />
       </Tabs>
-      <agTable
+      <!-- <agTable
         ref="agGridChild"
         :ag-table-config="agTableConfig"
         @on-row-dblclick="onRowDblclick"
         @on-page-change="pageChange"
         @on-page-size-change="pageSizeChange"
         @on-sort-changed="onSortChanged"
-      />
+      /> -->
+       <businessAgTable
+      :renderParams="renderParams"
+      :ag-table-config="agTableConfig"
+      @on-row-dblclick="onRowDblclick"
+      @on-page-change="pageChange"
+      @on-page-size-change="pageSizeChange"
+      @on-sort-changed="onSortChanged"
+    />
       <!-- <loading :loading="loading" /> -->
     </div>
     <Modal
@@ -119,15 +127,6 @@
         :itemid="proDetailConfig.ID"
       />
     </Modal>
-    <commonTableByAgGrid
-      ref="agGrid"
-      height="300px"
-      :options="options"
-      :data="row"
-      :columns="tabth"
-      @grid-ready="gridReady"
-      :renderParams="renderParams"
-    />
   </div>
 </template>
 
