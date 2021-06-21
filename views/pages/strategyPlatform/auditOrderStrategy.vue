@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-03 19:24:42
- * @LastEditTime: 2021-06-18 11:49:31
+ * @LastEditTime: 2021-06-21 14:41:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/auditOrderStrategy.vue
@@ -19,11 +19,10 @@
           <p slot="content">
             <span class="baseData">
               <businessForm :form-config="formConfig" />
-              <p style="marginTop:10px;marginLeft:70px">
+              <p class="createdTime">
                 <span>按系统创建时间等待</span>
                 <Input
                   v-model="resultData.ST_C_AUTO_AUDIT.WAIT_TIME"
-                  style="width:80px"
                   @on-change="modify"
                   :regx='/^[0-9]{0,9}$/'
                 />

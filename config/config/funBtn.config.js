@@ -1328,8 +1328,8 @@ class BtnConfig {
     commonUtils.modalShow(self, 'fz', 'orderCenter.mergeOrderOne', param, 'all', function (res) {
       let { data } = res;
       if (data.code === 0) {
-        console.log('成功！');
-        self.$Message.success(data.message || '成功！')
+        self.$Message.success(data.message || '成功！');
+        self.query();
       }
     })
   }
@@ -1359,8 +1359,8 @@ class BtnConfig {
       let { data } = res;
       console.log(data);
       if(data.code === 0){
-        console.log('成功！');
-        self.$Message.success(data.message || '成功！')
+        self.$Message.success(data.message || '成功！');
+        self.query();
       }else{
         commonUtils.tipShow('confirm' , self , res ,data.message, function(h){
           return h('Table' , {
