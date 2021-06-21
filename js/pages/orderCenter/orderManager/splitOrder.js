@@ -14,7 +14,7 @@ export default {
           {
             text: $i18n.t('btn.refresh'), // text: '刷新',
             btnclick: () => {
-              if (this.canFresh) {
+              if (this.canFresh && this.data.length > 1) {
                 this.$Modal.confirm({
                   title: $i18n.t('modalTitle.tips'), // title:'提示',
                   content: $i18n.t('modalTips.ch'), // content:'当前操作未确认拆单，是否确认刷新？'
@@ -142,7 +142,18 @@ export default {
         {
           title: $i18n.t('table_label.quantity_availableSale'), // 可售数量
           key: 'total_qty_available',
-          draggable:true
+          draggable:true,
+          render:(h , params) => {
+            if(params.row.total_qty_available < params.row.waiting_split_num){
+              return h('div' , {
+                style:{
+                  color:'red'
+                }
+              },params.row.total_qty_available)
+            }else {
+              return h('div' , {},params.row.total_qty_available)
+            }
+          }
         },
         {
           title: $i18n.t('table_label.quantity_demolished'), // 待拆数量
@@ -274,6 +285,10 @@ export default {
       }
       if ((self.data[0].length == 1 && self.data[0][0].split_num >= self.data[0][0].waiting_split_num) || self.data[0][0].total <= 1) {
         self.$Message.warning($i18n.t('modalTips.cm')); // 没有可拆分的订单
+        return;
+      }
+      if(self.onSelectData.length == self.data.reduce((pre , curr)=> pre+curr.length , 0)){
+        self.$Message.warning('不能一次将所有的数据添加至待拆单区!'); // 没有可拆分的订单
         return;
       }
       self.onSelectData.forEach(item => {
