@@ -479,10 +479,11 @@ export default {
           data: { code, message }
         } = await this.service.promotionCenter.updatePmStatus(formData);
         if (code === 0) {
-          this.$message({
+          this.$Message.success(message);
+          /* this.$message({
             message,
             type: 'success'
-          });
+          }); */
           // let action = 'switchActiveTab';
           // if (this.objid == -1) {
           //   action = 'TabClose';

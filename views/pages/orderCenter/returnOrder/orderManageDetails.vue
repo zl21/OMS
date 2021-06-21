@@ -53,41 +53,6 @@
     >
       <p>error_tip</p>
     </Modal>
-    <!-- v-for="(list, index) in dialogs"
-    :key="index" -->
-    <!-- <businessDialog
-      :ref="list.name"
-      :component-data="list.data"
-      :confirm="list.confirm"
-      :exclude-string="list.excludeString"
-      :footer-hide="list.footerHide"
-      :keep-alive="list.keepAlive || true"
-      :name="list.name"
-      :quit="list.quit"
-      :maskClosable="list.maskClosable"
-      :title="list.title"
-      :url="list.url"
-      :width="list.width || ''"
-    ></businessDialog> -->
-    <!-- 公共弹框 -->
-    <!-- <businessDialog
-      :batch-closed="publicBouncedConfig.batchClosed"
-      :closable="publicBouncedConfig.closable"
-      :component-data="publicBouncedConfig.componentData"
-      :draggable="publicBouncedConfig.draggable"
-      :exclude-string="publicBouncedConfig.excludeString"
-      :keep-alive="publicBouncedConfig.keepAlive"
-      :mask="publicBouncedConfig.mask"
-      :mask-closable="publicBouncedConfig.maskClosable"
-      :name="publicBouncedConfig.name"
-      :quit="publicBouncedConfig.quit"
-      :scrollable="publicBouncedConfig.scrollable"
-      :title="publicBouncedConfig.confirmTitle"
-      :title-align="publicBouncedConfig.titleAlign"
-      :transfer="publicBouncedConfig.transfer"
-      :url="publicBouncedConfig.url"
-      :width="publicBouncedConfig.width"
-    /> -->
   </div>
 </template>
 <script>
@@ -101,7 +66,6 @@
   import DropDownConfig from 'burgeonConfig/config/dropDown.config';
   import BtnConfig from 'burgeonConfig/config/funBtn.config';
   import BurgeonEvent from 'burgeonConfig/config/event.config';
-  // import DialogConfig from 'burgeonConfig/config/dialogs.config';
 
   export default {
     name: 'OrderManageDetail',
@@ -216,7 +180,12 @@
             {
               text: '刷新',
               btnclick: async() => {
-               await this.getDetailsData();
+                // 区分子表
+                if(this.labelDefaultValue === 'OC_B_ORDER_ITEM'){
+                  await this.getDetailsData();
+                }else{
+                  this.otherInfoTab = { objid: this.objId, tabValue: this.labelDefaultValue };
+                }
               }
             }
           ]
@@ -252,7 +221,8 @@
       labelClick(item) {
         this.labelDefaultValue = item.value;
         if (item.value === 'OC_B_ORDER_ITEM') return;
-        this.otherInfoTab = { tablename: this.labelDefaultValue, objid: this.objId, tabValue: item.value };
+        this.otherInfoTab = { objid: this.objId, tabValue: item.value };
+        // this.otherInfoTab = { tablename: this.labelDefaultValue, objid: this.objId, tabValue: item.value };
       },
       freshLoad(val) {
         this.getDetailsData(val);

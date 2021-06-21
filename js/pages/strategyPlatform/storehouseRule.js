@@ -59,22 +59,7 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: this.fnCopy
           },
-          // {
-          //   text: '启用',
-          //   isShow: false,
-          //   disabled:false,
-          //   btnclick: () => {
-          //     this.fnSetisactive('Y');
-          //   }
-          // },
-          // {
-          //   text: '停用',
-          //   isShow: false,
-          //   disabled: false,
-          //   btnclick: () => {
-          //     this.fnSetisactive('N');
-          //   }
-          // },
+         
           {
             text: '下一步',
             isShow: false,
@@ -123,6 +108,7 @@ export default {
             value: 'ename',
             colname: 'ename',
             width: '8',
+            maxlength:15,
             disabled: false,
             inputChange: () => { }
           },
@@ -303,6 +289,7 @@ export default {
             value: 'remark',
             colname: 'remark',
             width: '16',
+            maxlength:200,
             disabled: false,
             inputChange: () => { }
           }
@@ -407,6 +394,7 @@ export default {
 
       //ST_C_ORDER_WAREHOUSE  分仓规则
       if (customizedModuleName == 'ST_C_ORDER_WAREHOUSE') {
+        this.labelList[0].label = '按收货地址';
         this.labelList[1].value = "ST_C_ORDER_WAREHOUSE_LOG"
         this.qurefrom('cpCPhyWarehouseEname')[0].style = null;
         // 表示分仓策略》分仓规则
