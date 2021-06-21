@@ -62,22 +62,6 @@
         </div>
       </div>
     </div>
-    <Mydialog
-      v-if="dataError.show"
-      :class="dataError.type"
-      :close-on-click-modal="false"
-      :show-close="false"
-      :title="dataError.title"
-      :visible.sync="dataError.show"
-      class="messageDialog"
-    >
-      <errorMessage
-        :dialog-back="dataError.backBtn"
-        :dialog-class="dataError.type"
-        :error-message="dataError.errorList"
-        @refreshbizlines="errorDialogClose"
-      />
-    </Mydialog>
     <dialogVisible
       :check-list="checkList"
       :dialog-visible="dialog_visible"

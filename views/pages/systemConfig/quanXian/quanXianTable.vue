@@ -48,7 +48,7 @@
       <div
         ref="scrollTable"
         class="scrollTable"
-        :style="scrollTableHeight"
+      
       >
         <table>
           <tbody>

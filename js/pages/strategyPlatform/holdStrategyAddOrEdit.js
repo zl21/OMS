@@ -5,6 +5,7 @@ import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import subTable from 'professionalComponents/subTable';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   name: 'holdStrategyAddOrEdit',
@@ -16,6 +17,7 @@ export default {
     businessLabel,
     businessStatusFlag
   },
+  mixins: [modifycurrentLabel],
   data() {
     return {
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
@@ -172,7 +174,6 @@ export default {
             oneObj: val => {
               // 选中触发事件
               console.log('val::', val);
-              //if (!val.pid) return;
               this.formConfig2.formValue.CP_C_SHOP_IDS = val.pid;
               this.formConfig2.formValue.CP_C_SHOP_NAME = val.valuedata;
               this.masterModifyData('CP_C_SHOP_IDS', 'formConfig2')
@@ -197,11 +198,11 @@ export default {
               },
               {
                 label: '系统创建时间',
-                value: 2
+                value: 3
               },
               {
                 label: '支付时间',
-                value: 3
+                value: 2
               }
             ],
             switchChange: val => {
@@ -425,10 +426,10 @@ export default {
     const self = this;
     if (self.ID > 0 && !self.$route.query.spuid) {
       // 详情
-      const { customizedModuleName, customizedModuleId } = self.$route.params;//获取定制界面ID，Name 
-      const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-      const data = { label: 'hold策略编辑', name:keepAliveModuleName}; //当前界面模块名称 
-      self.$store.commit('global/modifycurrentLabel' , data)
+      // const { customizedModuleName, customizedModuleId } = self.$route.params;//获取定制界面ID，Name 
+      // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+      // const data = { label: 'hold策略编辑', name:keepAliveModuleName}; //当前界面模块名称 
+      // self.$store.commit('global/modifycurrentLabel' , data)
       this.initData();
       // 日志
       self.subTableConfig = {
@@ -479,7 +480,7 @@ export default {
         formValue2.TIME = [data.BEGIN_TIME, data.END_TIME]
         formValue2.DAY_TYPE = data.DAY_TYPE;
         formValue2.ORDER_FLAG = data.ORDER_FLAG ? true : false;
-        formValue3.HOLD_ORDER_REASON = data.HOLD_ORDER_REASON ? 1 : 2;
+        formValue3.HOLD_ORDER_REASON = data.HOLD_ORDER_REASON == 1 ? 1 : 2;
         formValue3.IS_AUTO_RELEASE = data.IS_AUTO_RELEASE ? true : false;
         if (data.IS_AUTO_RELEASE) {
           this.formConfig3.formData[2].style = 'select';
@@ -538,6 +539,7 @@ export default {
       let formValues = {};
       formValues = Object.assign(formValues, this.formConfig1.formValue, formConfig2, this.formConfig3.formValue);
       let { PS_C_PRO_ID, TIME, ...params } = formValues;
+      console.log(this.formConfig3.formValue,PS_C_PRO_ID, TIME);
       // 特殊
       params = Object.assign(params, this.paramsTime)
       params.ORDER_TAB_TYPE = params.ORDER_TAB_TYPE ? 1 : 0;
@@ -552,6 +554,9 @@ export default {
       if (self.ID > 0 && !self.$route.query.spuid) {
         params.ISACTIVE = params.ISACTIVE ? 'Y' : 'N'
         params.IS_AUTO_RELEASE = params.IS_AUTO_RELEASE ? 1 : 0
+      }
+      if (this.formConfig3.formValue.RELEASE_TIME_TYPE !== 1) {
+        params.RELEASE_TIME = null;
       }
       let { data: { code,data,message } } = await this.service.strategyPlatform.holdOrderHoldStrategySave({ "ST_C_HOLD_ORDER_STRATEGY": params });
       if (code === 0) {

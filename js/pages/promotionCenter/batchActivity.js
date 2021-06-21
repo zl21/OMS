@@ -379,17 +379,11 @@ export default {
     async saveDraft() {
       const [modulesValid1, modulesValid2] = this.validateModule();
       if (modulesValid1.code === -1) {
-        this.$message({
-          type: 'error',
-          message: modulesValid1.message
-        });
+        this.$Message.error(modulesValid1.message);
         return;
       }
       if (modulesValid2.code === -1) {
-        this.$message({
-          type: 'error',
-          message: modulesValid2.message
-        });
+        this.$Message.error(modulesValid2.message);
         return;
       }
       // const index = this.basic_info.activity_type + new Date().Format('yyyyMMddHHMMSS');
@@ -410,17 +404,12 @@ export default {
         } = await this.service.promotionCenter.saveBatchPm(formData);
         console.log(code, message, data);
         if (code === 0) {
-          this.$message({
-            type: 'success',
-            message: $i18n.t('modalTips.z9') // 保存成功
-          });
-          let action = 'customize/switchActiveTab';
-          if (this.objid == -1) {
-            action = 'customize/TabClose';
-          }
+          this.$Message.success(message);
+          // let action = this.objid == -1 ? 0 : 1;
           this.objid = String(data.objid) || -1;
           this.$nextTick(() => {
-            $store.commit(action, {
+            $omsUtils.tabJump(3, this.objid, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
+            /* $store.commit(action, {
               id: this.objid, // id
               type: 'action', // 类型action
               name: 'PM_C_PROM_ACTI_BATCH_ADD', // 文件名
@@ -430,7 +419,7 @@ export default {
                 id: this.objid, // id
                 tabTitle: $i18n.t('panel_label.batchAddPromotion')
               }) // 带的参数
-            });
+            }); */
           });
         }
         this.loading = false;
@@ -443,17 +432,11 @@ export default {
     async publish() {
       const [modulesValid1, modulesValid2] = this.validateModule();
       if (modulesValid1.code === -1) {
-        this.$message({
-          type: 'error',
-          message: modulesValid1.message
-        });
+        this.$Message.error(modulesValid1.message);
         return;
       }
       if (modulesValid2.code === -1) {
-        this.$message({
-          type: 'error',
-          message: modulesValid2.message
-        });
+        this.$Message.error(modulesValid2.message);
         return;
       }
       // const index = this.basic_info.activity_type + new Date().Format('yyyyMMddHHMMSS');
@@ -477,10 +460,7 @@ export default {
           data: { code, message }
         } = await this.service.promotionCenter.updatePmStatus(formData);
         if (code === 0) {
-          this.$message({
-            message,
-            type: 'success'
-          });
+          this.$Message.success(message);
           // let action = 'switchActiveTab';
           // if (this.objid == -1) {
           //   action = 'TabClose';
@@ -503,7 +483,8 @@ export default {
       const _self = this;
       this.$destroy(true);
       // 返回列表的
-      const params = {
+      $omsUtils.tabJump(2, 31460113, 'CUSTOMIZED', 'PROMACTIQUERYLIST', { i8n: 1, tip: 'panel_label.promotionList' }, {}, 0)
+      /* const params = {
         id: 31460113, // id
         type: 'CUSTOMIZED',
         name: 'PROMACTIQUERYLIST',
@@ -513,7 +494,7 @@ export default {
           id: 31460113
         }) // 带的参数
       };
-      _self.$store.commit('customize/TabClose', params);
+      _self.$store.commit('customize/TabClose', params); */
     },
     /**
      * 滚动选中区域
@@ -542,7 +523,7 @@ export default {
       const scroll = this.$refs.basicSteps.scrollTop;
       const area0 = this.$refs.area_0.$el.offsetHeight;
       const area1 = this.$refs.area_1.$el.offsetHeight;
-      const area2 = this.$refs.area_2.$el.offsetHeight;
+      // const area2 = this.$refs.area_2.$el.offsetHeight;
       // console.log("scroll-----",scroll)
       // console.log("area0-----",area0)
       // console.log("area1-----",area1)

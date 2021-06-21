@@ -81,18 +81,18 @@ export default {
     },
     rowCheckboxChange(val, rowIndex, column) {
       this.$emit('isChangeFun', true);
-      if (column.key === 'IS_WRITE') {
-        this.rows[rowIndex].IS_WRITE = val;
-        if (val) {
-          if (this.rows[rowIndex].IS_READ !== val) {
-            this.rows[rowIndex].IS_READ = val;
-            this.tableArr.isReadValueTotal++;
-          }
-          this.tableArr.isWriteValueTotal++;
-        } else {
-          this.tableArr.isWriteValueTotal--;
-        }
-      }
+      // if (column.key === 'IS_WRITE') {
+      //   this.rows[rowIndex].IS_WRITE = val;
+      //   if (val) {
+      //     if (this.rows[rowIndex].IS_READ !== val) {
+      //       this.rows[rowIndex].IS_READ = val;
+      //       this.tableArr.isReadValueTotal++;
+      //     }
+      //     this.tableArr.isWriteValueTotal++;
+      //   } else {
+      //     this.tableArr.isWriteValueTotal--;
+      //   }
+      // }
       if (column.key === 'IS_READ') {
         this.rows[rowIndex].IS_READ = val;
         if (!val) {

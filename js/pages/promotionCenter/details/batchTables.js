@@ -41,7 +41,6 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        // confirmTitle: '批量新增条件信息导入',
         confirmTitle: $i18n.t('modalTitle.a2'), // 批量新增条件信息导入
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '540',
@@ -264,6 +263,7 @@ export default {
         tempApi: '/p/cs/pm/v1/getModuleUrl',
         okApi: '/p/cs/pm/v1/parseExcel',
         tempParm: { 'mode': this.moduleMode },
+        okParm: { table: 'PS_C_SKU', mode: 'batch' },
         downErrorInfo: true,
         showErrorInfo: false,
         // freshPage: Fn,

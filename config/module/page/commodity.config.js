@@ -19,31 +19,31 @@ export default {
   PS_C_PRO: {
     component: () => import('allpages/commodityCenter/spuRecord.vue'),
     // component: spuRecord,
-    labelName: 'SPU编辑'
+    labelName: '商品SPU'
   },
   PS_C_SKU: {
     component: () => import('allpages/commodityCenter/skuAddOrEdit.vue'),
     // component: skuAddOrEdit,
-    labelName: '商品SKU编辑',
+    labelName: '商品SKU',
   },
   PS_C_SKU_QUICKLY_ADD: {
     component: () => import('allpages/commodityCenter/quicklyGenerate.vue'),
     // component: quicklyGenerate,
     labelName: 'SKU快速生成'
   },
-  BS_C_EXTRA_ATTRIBUTE_DEF: {
+  BS_C_EXTRA_ATTRIBUTE_DEF_PRO: {
     component: () => import('allpages/commodityCenter/commodityCusPropertiesAddOrEdit.vue'),
     // component: commodityCusPropertiesAddOrEdit,
-    labelName: '商品自定义属性编辑'
+    labelName: '商品自定义属性'
   },
   PS_C_PRO_GROUP: {
     component: () => import('allpages/commodityCenter/modifyGroup.vue'),
     // component: modifyGroup,
-    labelName: '组合商品编辑'
+    labelName: '组合商品'
   },
   PS_C_PRO_CLASSIFY: {
     component: () => import('allpages/commodityCenter/commodityClassifyAddOrEdit.vue'),
     // component: commodityClassifyAddOrEdit,
-    labelName: '商品分类编辑'
+    labelName: '商品分类'
   },
 }; 

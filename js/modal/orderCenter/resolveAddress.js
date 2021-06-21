@@ -67,6 +67,17 @@ export default {
             this.data.cp_c_region_city_id = ''
             this.data.cp_c_region_area_id = ''
           },
+          InputEnter: (val)=> {
+            console.log('InputEnter:',val);
+            // 选中触发事件
+            this.formConfig.formData[1].itemdata.pid = '';
+            this.formConfig.formData[1].itemdata.valuedata = '';
+            this.formConfig.formData[2].itemdata.pid = '';
+            this.formConfig.formData[2].itemdata.valuedata = '';
+            this.data.cp_c_region_province_id = val.pid;
+            this.data.cp_c_region_city_id = ''
+            this.data.cp_c_region_area_id = ''
+          }
         },
         {
           version: "1.4",
@@ -102,12 +113,17 @@ export default {
           },
           oneObj: (val) => {
             // 选中触发事件
-            console.log("val::", val);
             this.formConfig.formData[2].itemdata.pid = '';
             this.formConfig.formData[2].itemdata.valuedata = '';
             this.data.cp_c_region_city_id = val.pid;
             this.data.cp_c_region_area_id = ''
           },
+          InputEnter: (val)=> {
+            this.formConfig.formData[2].itemdata.pid = '';
+            this.formConfig.formData[2].itemdata.valuedata = '';
+            this.data.cp_c_region_city_id = val.pid;
+            this.data.cp_c_region_area_id = ''
+          }
         },
         {
           version: "1.4",
@@ -146,6 +162,9 @@ export default {
             console.log("val::", val);
             this.data.cp_c_region_area_id = val.pid
           },
+          InputEnter: (val)=> {
+            this.data.cp_c_region_area_id = val.pid
+          }
         }]
       },
       dataAysis: false, // 智能解析地址是否正确
@@ -287,7 +306,7 @@ export default {
       }
       let f = this.CheckRegx(this.regx.mobile, this.data.receiver_mobile);
       if (this.componentData.ck != 50) {
-        if (!f && !Boolean(this.data.receiver_phone)) return this.$Message.error('手机号或电话号码不能为空！');;
+        if (!f && !Boolean(this.data.receiver_phone)) return this.$Message.error('手机号或电话号码不能为空！');
       }
       if (this.data.receiver_zip) {
         f = this.CheckRegx(this.regx.shipzip, this.data.receiver_zip);

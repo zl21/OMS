@@ -7,7 +7,7 @@
 -->
 <template>
   <div class="OC_B_ORDER_ID">
-    <!-- <label class="itemLabel"> 原定单编号： </label> -->
+    <label class="itemLabel"> 原定单编号： </label>
     <Input
       class="oriCode"
       :autocomplete="'new-password'"
@@ -265,7 +265,8 @@ export default {
     },
     clear() {
       this.REDUNDANT_ORDER_ID = '';
-      this.$emit('change', [{ ID: '-1', Label: '-1' }], this);
+      // this.$emit('change', [{ ID: '-1', Label: '-1' }], this);
+      this.$emit('change', '', this);
       // R3.store.commit('customize/REDUNDANT_ORDER_ID', 'zhoulan');
       // 联动清空子表
       this.getCurrenData[0] = {};
@@ -351,9 +352,10 @@ export default {
   .itemLabel {
     flex: 0 0 120px;
   }
+  .oriCode /deep/.ark-input-innerWrap {
+    right: 3px;
+  }
   /deep/.ark-input-icon {
-    // top: 5px;
-    // right: 2px;
     height: 32px;
     line-height: 32px;
   }

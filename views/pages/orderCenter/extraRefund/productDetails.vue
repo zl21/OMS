@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-06-15 18:47:42
+ * @LastEditTime: 2021-06-17 15:50:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -111,7 +111,7 @@ export default {
                 },
                 on: {
                   'on-change': e => {
-                      let num =  this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.PRICE_ACTUAL), 2)
+                      let num =  this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.AMT_REFUND), 2)
                       params.row.AMT_REFUND = isNaN(num) ? '0.00' : num;
                       params.row.QTY_REFUND = e;
                       this.tableConfig.data[params.index] = params.row;
@@ -130,21 +130,20 @@ export default {
             key: 'AMT_ACTUAL_REFUND',
             title: '退款金额', // 退款金额：默认取“申请退款金额”，可编辑，仅支持录入正数，保留两位小数
             render:(h,params)=>{
-             return h('InputNumber', {
-                props: {
+             return h('Input', {
+               props: {
                   value: params.row.AMT_ACTUAL_REFUND,
                   autosize: true,
-                  min:1,
-                  regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
+                  regx: /^\d*\.{0,1}\d{0,2}$/,
                 },
                 on: {
                   'on-change': e => {
-                     params.row.AMT_ACTUAL_REFUND = e;
+                     params.row.AMT_ACTUAL_REFUND = e.target.value;
                      this.tableConfig.data[params.index] = params.row;
-                    R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
+                     R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
                   }
                 }
-              });psave
+              });
             }
           }
         ], // 表头
@@ -158,8 +157,8 @@ export default {
         border: true, // 是否显示纵向边框
         selectData: [],
         total: 0, // 设置总条数
-        pageSizeOpts: [15, 30, 45, 60], // 每页条数切换的配置
-        pageSize: 15, // 每页条数
+        pageSizeOpts: [10, 30, 50, 100], // 每页条数切换的配置
+        pageSize: 10, // 每页条数
         pageIndex: 1
       }, // 弹框 - 明细
       addDetailsConfig:{
@@ -207,7 +206,7 @@ export default {
         indexColumn: true, // 是否显示序号
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSizeOpts: [10, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         pageIndex: 1
       }
@@ -284,12 +283,14 @@ export default {
       this.tableConfig.selectData = row;
     },
     pageChange(pageNum){
+      let billNo = R3.store.state.customize.originalOrder;
       this.tableConfig.pageIndex = pageNum;
-      this.getTable(pageNum,this.tableConfig.pageSize)
+      this.getTable(false,billNo,pageNum,this.tableConfig.pageSize)
     },
     pageSizeChange(pageSize){
+      let billNo = R3.store.state.customize.originalOrder;
       this.tableConfig.pageSize = pageSize;
-      this.getTable(this.tableConfig.pageIndex,pageSize)
+      this.getTable(false,billNo,this.tableConfig.pageIndex,pageSize)
     },
     deleteData(row){
       // 删除
@@ -312,12 +313,14 @@ export default {
       this.addDetailsConfig.selectData = row
     },
     pageChange1(pageNum){
+      let billNo = R3.store.state.customize.originalOrder;
       this.addDetailsConfig.pageIndex = pageNum;
-      this.getTable(true,pageNum,this.addDetailsConfig.pageSize)
+      this.getTable(true,billNo,pageNum,this.addDetailsConfig.pageSize)
     },
     pageSizeChange1(pageSize){
+       let billNo = R3.store.state.customize.originalOrder;
        this.addDetailsConfig.pageSize = pageSize;
-       this.getTable(true,pageNum,this.addDetailsConfig.pageSize)
+       this.getTable(true,billNo,pageNum,this.addDetailsConfig.pageSize)
     },
     addDetailsOk(){
       // 新增明细

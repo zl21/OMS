@@ -95,14 +95,14 @@
         </Panel>
         <Panel name="panel_cusAttr">
           自定义属性
-          <p slot="content" class="panel-title">固定属性：</p>
-          <p slot="content">
+          <div slot="content" class="customProperties">
+            <div class="panel-title">固定属性：</div>     
             <businessForm :form-config="fixAttrFormConfig" @keyDown="keyDown" />
-          </p>
-          <p slot="content" class="panel-title">自定义属性：</p>
-          <p slot="content">
+          </div>
+          <div slot="content" class="customProperties">
+            <div class="panel-title">自定义属性：</div>
             <businessForm :form-config="cusAttrFormConfig" @keyDown="keyDown" />
-          </p>
+          </div>
         </Panel>
       </Collapse>
       <div class="customized-detail-table">
@@ -126,8 +126,13 @@
 import skuAddOrEdit from "@/js/pages/commodityCenter/skuAddOrEdit.js";
 export default skuAddOrEdit;
 </script>
-
 <style lang="less" scoped>
-// @import '~@/css/pages/commodityCenter/skuAddOrEdit.less';
-@import "~professionalComponents/common/css/theme.less";
+@import '~@burgeon/oms-theme/skin/public.less';
+.customProperties{
+    display: grid;
+    grid-template-columns: 80px auto;
+    .panel-title{
+      margin-top: @base-mr;
+    }
+}
 </style>

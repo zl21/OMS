@@ -39,7 +39,7 @@ class commonUtils {
             if (callbackFun) {
               callbackFun(res)
             } else {
-              self.msgTips('success', self, '取消成功', 0)
+              commonUtils.msgTips(self, 'success', '取消成功', 0)
               self.selection = []
               self.query()
             }
@@ -222,6 +222,61 @@ class commonUtils {
         ...exendObj,
       }),
     })
+  }
+
+  /**
+   * 9个参数
+   * eg:
+        $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
+   */
+  static tabJump(
+    mutationType,
+    id,
+    type,
+    tableName,
+    labelName = { i8n: 1, tip: '' },
+    exendObj = {},
+    isback = 0,
+    global,
+    tableId
+  ) {
+    const label = labelName.i8n ? $i18n.t(`${labelName.tip}`) : labelName.tip; // 语言包有就走语言包，不存在则直接取
+    let mutationArr = ['customize/TabOpen', 'customize/switchActiveTab', 'customize/TabClose', 'customize/TabHref'];
+    if (global) mutationArr = ['global/tabOpen'];
+    const muta = mutationArr[mutationType];
+    let param = {};
+    if (!global) {
+      param = {
+        id: id,
+        type: 1 ? 'action' : type, // 传1则'action'
+        name: tableName,
+        label,
+        back: Boolean(isback),
+        query: Object.assign({
+          id: id,
+          tabTitle: label,
+          ...exendObj,
+        }),
+      };
+    } else {
+      param = {
+        id: id, // 该条数据ID
+        type: 1 ? 'S' : type, // 传1则'S'
+        tableName,
+        tableId,
+        back: Boolean(isback),
+      };
+      if (type == 'C') {
+        param = {
+          type,
+          customizedModuleId: tableId,
+          customizedModuleName: tableName,
+          label,
+          dynamicRoutingForCustomizePage: Boolean(isback),
+        };
+      }
+    }
+    R3.store.commit(muta, param)
   }
 
   /**
@@ -821,7 +876,7 @@ class commonUtils {
       ? BurgeonDate.getFormatDate(newEndTime, 'yyyy-MM-dd HH:mm:ss') : newEndTime).split(' ')
     let [oldDate, oldTime] = (oldEndTime && isOldDate
       ? BurgeonDate.getFormatDate(oldEndTime, 'yyyy-MM-dd HH:mm:ss') : oldEndTime || '').split(' ')
-    
+
     let time = `${newDate} ${newTime}`
     if (time != `${oldDate} ${oldTime}`
       && newDate != oldDate

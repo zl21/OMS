@@ -9,6 +9,7 @@ import orderItem from 'professionalComponents/subTable';
 import logTable from 'professionalComponents/LogTable';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import subTable from 'professionalComponents/subTable';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   name: 'CP_C_ORG_CHANNEL',
@@ -22,6 +23,7 @@ export default {
     subTable,
     businessActionTable
   },
+  mixins: [modifycurrentLabel],
   data() {
     return {
       vmI18n:$i18n,

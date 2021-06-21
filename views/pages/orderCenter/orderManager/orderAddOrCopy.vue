@@ -702,17 +702,16 @@ export default {
             },
             oneObj: (val) => {
               this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ID = val.pid;
-              this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ENAME =
-                val.valuedata;
-              this.formConfigRe = this.emptyData(
-                this.formConfigRe,
-                "CP_C_REGION_PROVINCE_ID",
-                this.modify,
-                val,
-                ["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"]
-              );
+              this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ENAME = val.valuedata;
+              this.formConfigRe = this.emptyData(this.formConfigRe,"CP_C_REGION_PROVINCE_ID",this.modify,val,["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"]);
               this.modifyData("CP_C_REGION_PROVINCE_ID", "master", "r");
             },
+            InputEnter: (val)=> {
+              this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ID = val.pid;
+              this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ENAME = val.valuedata;
+              this.formConfigRe = this.emptyData(this.formConfigRe,"CP_C_REGION_PROVINCE_ID",this.modify,val,["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"]);
+              this.modifyData("CP_C_REGION_PROVINCE_ID", "master", "r");
+            }
           },
           {
             version: "1.4",
@@ -739,17 +738,17 @@ export default {
             },
             oneObj: (val) => {
               this.formConfigRe.formValue.CP_C_REGION_CITY_ID = val.pid;
-              this.formConfigRe.formValue.CP_C_REGION_CITY_ENAME =
-                val.valuedata;
-              this.formConfigRe = this.emptyData(
-                this.formConfigRe,
-                "CP_C_REGION_CITY_ID",
-                this.modify,
-                val,
-                ["CP_C_REGION_AREA_ID"]
-              );
+              this.formConfigRe.formValue.CP_C_REGION_CITY_ENAME = val.valuedata;
+              this.formConfigRe = this.emptyData(this.formConfigRe,"CP_C_REGION_CITY_ID",this.modify,val,["CP_C_REGION_AREA_ID"]);
               this.modifyData("CP_C_REGION_CITY_ID", "master", "r");
             },
+            InputEnter: (val)=> {
+              console.log('InputEnter::',val);
+              this.formConfigRe.formValue.CP_C_REGION_CITY_ID = val.pid;
+              this.formConfigRe.formValue.CP_C_REGION_CITY_ENAME = val.valuedata;
+              this.formConfigRe = this.emptyData(this.formConfigRe,"CP_C_REGION_CITY_ID",this.modify,val,["CP_C_REGION_AREA_ID"]);
+              this.modifyData("CP_C_REGION_CITY_ID", "master", "r");
+            }
           },
           {
             version: "1.4",
@@ -775,10 +774,14 @@ export default {
             },
             oneObj: (val) => {
               this.formConfigRe.formValue.CP_C_REGION_AREA_ID = val.pid;
-              this.formConfigRe.formValue.CP_C_REGION_AREA_ENAME =
-                val.valuedata;
+              this.formConfigRe.formValue.CP_C_REGION_AREA_ENAME = val.valuedata;
               this.modifyData("CP_C_REGION_AREA_ID", "master", "r");
             },
+            InputEnter: (val)=> {
+              this.formConfigRe.formValue.CP_C_REGION_AREA_ID = val.pid;
+              this.formConfigRe.formValue.CP_C_REGION_AREA_ENAME = val.valuedata;
+              this.modifyData("CP_C_REGION_AREA_ID", "master", "r");
+            }
           },
           {
             style: "input",

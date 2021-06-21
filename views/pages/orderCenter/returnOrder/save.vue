@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-06-07 15:26:05
+ * @LastEditTime: 2021-06-17 15:06:43
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -14,7 +14,7 @@
 
 <script>
 
-  export default {
+  export default { 
     data() {
       return {
        returnAmount: R3.store.state.customize.returnAmount
@@ -34,14 +34,19 @@
       if (route.tableName === 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE' && !returnOrderChangeItem.tui.length && !returnOrderChangeItem.huan.length) {
         this.$Message.warning('退换货单都不能为空！');
         return;
-      } if (!returnOrderChangeItem.tui.length) {
+      } 
+      console.log(this.returnAmount,this.returnAmount);
+       if (route.tableName === 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE' && !(this.returnAmount.PRO_ACTUAL_AMT === this.returnAmount.EXCHANGE_AMT)) {
+        this.$Message.warning('换货金额必须要和退货金额一致！');
+        return;
+      } 
+      if (!returnOrderChangeItem.tui.length) {
         this.$Message.warning('退货单不能为空！');
         return;
       }
-    
       const param = {
         ID: route.itemId,
-        BILL_TYPE: 1,
+        BILL_TYPE: route.tableName === 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE' ? 0 : 1,
         OC_B_RETURN_ORDER: { 
           ...OC_B_RETURN_ORDER[route.tableName], 
           ID: route.itemId,

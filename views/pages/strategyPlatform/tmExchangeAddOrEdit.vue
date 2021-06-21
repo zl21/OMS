@@ -74,7 +74,7 @@
                     :key="item.value"
                   >{{ item.label }}</Option>
                 </Select>
-                <label>{{ rowData.item.subLabel2 }}：</label>
+                <label style="margin-left: 10px">{{ rowData.item.subLabel2 }}：</label>
                 <Input
                   v-model="rowData.value.OOS_AUTO_REJECT_DESC"
                   :disabled="isEnable"
@@ -104,7 +104,7 @@
                 />
                   <!-- :regx="rowData.item.regx" -->
 
-                <label :class="['required', { hidden: !rowData.value.DEVIATION_AUTO_REJECT }]">
+                <label :class="['required', { hidden: !rowData.value.DEVIATION_AUTO_REJECT }]" style="margin-left: 28px">
                   <i>*</i>{{ rowData.item.subLabel2 }}：
                 </label>
                 <Select
@@ -119,7 +119,7 @@
                     :key="item.value"
                   >{{ item.label }}</Option>
                 </Select>
-                <label>{{ rowData.item.subLabel3 }}：</label>
+                <label style="margin-left: 20px">{{ rowData.item.subLabel3 }}：</label>
                 <Input
                   v-model="rowData.value.DEVIATION_AUTO_REJECT_DESC"
                   :disabled="isEnable"

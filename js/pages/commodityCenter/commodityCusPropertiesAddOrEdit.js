@@ -6,6 +6,7 @@ import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import orderItem from 'professionalComponents/subTable';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import loading from 'professionalComponents/loading';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   components: {
@@ -17,6 +18,7 @@ export default {
     businessActionTable,
     loading,
   },
+  mixins: [modifycurrentLabel],
   data() {
     /* -------------------- input校验器 start -------------------- */
     const ECODEValidator = (rule, value, callback) => {

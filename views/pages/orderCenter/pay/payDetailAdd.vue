@@ -210,7 +210,7 @@ export default {
       // 详情时：expressCode、mainId必传（没有原单时除外
       if (this.ID != '-1') {
         let storeOther = JSON.parse(JSON.stringify(R3.store.state.customize.COMPENSATE.other))
-        param.expressCode = storeOther.exCode || 'no expressCode !'
+        param.expressCode = storeOther.exCode || ''
       }
       if (isInit) {
         param.expressCode = '-1';

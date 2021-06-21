@@ -16,20 +16,27 @@
         </div>
       </div>
       <div class="authorize-imgs">
-        <div v-for="(em, index) in shops" :key="index" class="authorize-img" @click="fnopen(em)">
+        <div
+          v-for="(em, index) in shops"
+          :key="index"
+          class="authorize-img"
+          @click="fnopen(em)"
+        >
           <img :src="em.plantLogo[0].URL" />
+          <P class="authorize-text"> {{ em.name }}</P>
         </div>
       </div>
     </div>
 
-    <Modal 
-      v-model="shopShow" 
-      width="600" 
+    <Modal
+      v-model="shopShow"
+      width="600"
       class="shopModal"
-      footer-hide 
+      footer-hide
       :draggable="true"
       :mask="true"
-      title="店铺新增">
+      title="店铺新增"
+    >
       <div class="customized-modal">
         <!-- 步骤条 -->
         <Steps :current="2" size="small">
@@ -42,7 +49,11 @@
         </Steps>
         <!-- 店铺授权 -->
         <div v-if="shopform" class="shop-one-show">
-          <FormLayout ref="FormLayout" :default-column="defaultColumn" :defaultconfig="formConfig" />
+          <FormLayout
+            ref="FormLayout"
+            :default-column="defaultColumn"
+            :defaultconfig="formConfig"
+          />
         </div>
         <div v-else class="shop-one-show">
           <businessForm :form-config="formconfig" @keyDown="keyDown">
@@ -82,8 +93,15 @@ export default authorize
 </script>
 
 <style lang="less" scoped>
-@import '~@/css/pages/basicData/authorize.less';
-@import '~omsTheme/public.less';
+@import "~@/css/pages/basicData/authorize.less";
+@import "~omsTheme/public.less";
+.authorize-text {
+  text-align: center;
+  margin-top: 35px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .authorize-list {
   padding: 12px;
 }
@@ -141,13 +159,14 @@ export default authorize
   margin-top: 24px;
   .authorize-img {
     background: #fff;
-    padding: @base-mr;
+    // padding: @base-mr;
+    padding: 12px 12px 7px 12px;
     position: relative;
     border: 1px solid #f2f2f2;
     box-sizing: @base-shadow;
     border-radius: @base-radius;
     &::before {
-      content: '';
+      content: "";
       display: block;
       padding-bottom: 100%;
     }

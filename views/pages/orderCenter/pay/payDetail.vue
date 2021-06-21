@@ -36,7 +36,6 @@
 import businessButton from 'professionalComponents/businessButton';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import payDetailAdd from './payDetailAdd.vue';
-const _ = require("lodash");
 
 export default {
   name: 'payDetail',
@@ -99,6 +98,7 @@ export default {
                   "PS_C_SKU_ECODE"
                 );
                 // this.totalNum();
+                this.tableConfig.total = this.tableConfig.data.length;
                 let deleteIds = this.$OMS2.omsUtils.sonList(selDa, 'ID')
                 deleteIds = deleteIds.filter(id => id != '-1');
                 R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ deleteIds })));
@@ -136,15 +136,20 @@ export default {
             text: '确定',
             type: 'primary',
             btnclick: () => {
+              const self = this;
               if (!this.addData.length) {
                 this.$Message.warning('请选中一条单据！');
                 return false
               } else {
                 this.tableConfig.data = this.tableConfig.data.concat(this.addData);
+                this.tableConfig.total += this.addData.length;
                 const detail = this.tableConfig.data;
                 R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail })));
               }
-              this.tableConfig.modal = false;
+              setTimeout(() => {
+                self.addData = [];
+                self.tableConfig.modal = false;
+              }, 100);
             },
           },
         ],
@@ -313,21 +318,13 @@ export default {
                   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL);
                   if (ca > relCa) {
                     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(relCa, 2);
+                    ++params.row._rowKey;
                   } else {
                     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
                   }
                   this.tableConfig.data[params.index] = params.row;
                   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
                 });
-                // const ca = Number(params.row.COMPENSATE_AMT);
-                // const relCa = this.$OMS2.omsUtils.floatNumber(Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL), 2);
-                // if (ca > relCa) {
-                //   params.row.COMPENSATE_AMT = relCa;
-                // } else {
-                //   params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
-                // }
-                // this.tableConfig.data[params.index] = params.row;
-                // R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
               },
             }
           });
@@ -343,9 +340,6 @@ export default {
     detailAddDataHandel(data) {
       data.map(it => it.ID = '-1')
       this.addData = data;
-    },
-    debo(fun) {
-      _.debounce(fun, 1000);
     },
     /* ------------------- 表格事件 part start ------------------- */
     pageChange(e) {

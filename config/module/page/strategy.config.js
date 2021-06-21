@@ -39,19 +39,19 @@ export default {
   },
   ST_C_VIPCOM_PROJECT: {
     component: () => import('allpages/strategyPlatform/scheduleAddOrEdit'),
-    labelName: '档期日程规划编辑'
+    labelName: '档期日程规划'
   },
   ST_C_WAREHOUSE_LOGISTICS_SET: {
     component: () => import('allpages/strategyPlatform/warehouseLogisticsAddOrEdit'),
-    labelName: '仓库物流设置编辑'
+    labelName: '仓库物流设置'
   },
   ST_C_PRICE: {
     component: () => import('allpages/strategyPlatform/commodityPriceAddOrEdit'),
-    labelName: '商品价格编辑'
+    labelName: '商品价格策略'
   },
   ST_C_LIVE_CAST_STRATEGY: {
     component: () => import('allpages/strategyPlatform/liveParsingAddOrEdit'),
-    labelName: '直播解析编辑'
+    labelName: '直播解析策略'
   },
   ST_C_ORDER_WAREHOUSE: {
     component: () => import('allpages/strategyPlatform/storehouseRule'),
@@ -75,12 +75,12 @@ export default {
   },
   ST_C_HOLD_ORDER_STRATEGY: {
     component: () => import('allpages/strategyPlatform/holdStrategyAddOrEdit'),
-    labelName: 'HOLD单策略新增',
+    labelName: 'HOLD单策略',
     isList: true
   },
   ST_C_TMALL_EXCHANGE_ORDER: {
     component: () => import('allpages/strategyPlatform/tmExchangeAddOrEdit'),
-    labelName: '天猫换货策略编辑',
+    labelName: '天猫换货策略',
   },
   ST_C_AUTO_AUDIT: {
     component: () => import('allpages/strategyPlatform/auditOrderStrategy'),

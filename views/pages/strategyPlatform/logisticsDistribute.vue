@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-20 13:39:45
- * @LastEditTime: 2021-06-10 17:57:28
+ * @LastEditTime: 2021-06-18 17:23:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/logisticsDistribute.vue
@@ -15,7 +15,21 @@
 
     <!-- 内容 -->
     <div class="customized-detail-main">
-      <!-- ark 组件 -->
+     
+
+        <Collapse v-model="collapse">
+            <Panel name="panel_baseInfo">
+基本信息
+   <div slot="content" class="logistics-top-form">
+            <businessForm :form-config="FormConfig" @keyDown="keyDown" />
+          </div>
+             
+
+            </Panel>
+          </Collapse>
+
+
+           <!-- ark 组件 -->
       <div class="customized-detail-table">
         <!-- tab切换 -->
         <businessLabel
@@ -24,20 +38,7 @@
           @labelClick="labelClick"
         />
         <div class="subtablePart" v-if="labelDefaultValue == 'jiben'">
-          <div slot="content" class="logistics-top-form">
-            <businessForm :form-config="FormConfig" @keyDown="keyDown" />
-          </div>
-
-        
-        </div>
-        <div class="subtablePart" v-else>
-          <subTable :component-data="subTableConfig"></subTable>
-        </div>
-      </div>
-
-        <Collapse v-model="collapse">
-            <Panel name="panel_baseInfo">
-              配送区域
+    
               <div slot="content">
                 <div slot="content" class="logistics-top-form">
                   <businessForm :form-config="formConfig" @keyDown="keyDown" />
@@ -58,6 +59,7 @@
                     :columns="tableColumns"
                     :data="tableData"
                     @on-select="fnselect"
+                    @on-select-all="fnselectAll"
                   />
                   <div class="foot-page">
                     <Page
@@ -70,8 +72,13 @@
                   </div>
                 </div>
               </div>
-            </Panel>
-          </Collapse>
+
+        
+        </div>
+        <div class="subtablePart" v-else>
+          <subTable :component-data="subTableConfig"></subTable>
+        </div>
+      </div>
     </div>
 
     <!-- 各类弹窗 -->

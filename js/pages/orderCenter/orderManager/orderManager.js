@@ -127,7 +127,15 @@
                             props: {
                               columns: [
                                 {
-                                  title: $i18n.t('modalTitle.a6'), // '提示信息',
+                                  title:'序号',
+                                  key: 'index'
+                                },
+                                {
+                                  title:'单据编号',
+                                  key:'billNo'
+                                },
+                                {
+                                  title: '失败原因', // '提示信息',
                                   key: 'message',
                                 },
                               ],
@@ -171,7 +179,15 @@
                             props: {
                               columns: [
                                 {
-                                  title: $i18n.t('modalTitle.a6'), // '提示信息',
+                                  title:'序号',
+                                  key: 'index'
+                                },
+                                {
+                                  title:'单据编号',
+                                  key:'billNo'
+                                },
+                                {
+                                  title: '失败原因', // '提示信息',
                                   key: 'message',
                                 },
                               ],
@@ -271,7 +287,7 @@
                   BILL_NO:item.BILL_NO
                 }
               })
-              self.service.orderCenter.checkOrderBeforeLogistics({
+              self.service.orderCenter.checkReturnOrderBeforeLogistics({
                 ID_AND_BILL_NO_LIST:arr,
                 MOCK_TYPE:1
               }).then(res=>{
