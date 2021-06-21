@@ -700,6 +700,7 @@ export default {
       AfSend.CP_C_SHOP_TITLE = self.onSelectData.CP_C_SHOP_TITLE; // 店铺name
       AfSend.CP_C_SHOP_ECODE = self.onSelectData.CP_C_SHOP_ECODE; // 店铺code
       AfSend.CP_C_SHOP_ID = self.onSelectData.CP_C_SHOP_ID; // 店铺ID
+      AfSend.LOGISTIC_NUMBER = self.onSelectData.LOGISTIC_NUMBER; // 发货物流单号
       AfSend.OC_B_ORDER_ID = self.onSelectData.OC_B_ORDER_ID;
       AfSend.OC_B_ORDER_ITEM_ID = self.onSelectData.OC_B_ORDER_ITEM_ID;
       AfSend.PS_C_PRO_ECODE = self.onSelectData.PS_C_PRO_ECODE;
@@ -781,7 +782,7 @@ export default {
             item.item.props.value = data.CP_C_SHOP_TITLE
             break
           case '发货时间':
-            item.item.props.value = data.SEND_TIME
+            item.item.props.value = data.SEND_TIME && commonUtil.dateFormat(new Date(data.SEND_TIME), 'yyyy-MM-dd hh:mm:ss')
             break
           case '发货物流公司':
             item.item.props.value = data.CP_C_LOGISTICS_ENAME
