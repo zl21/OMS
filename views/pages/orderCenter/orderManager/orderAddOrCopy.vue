@@ -1079,7 +1079,7 @@ export default {
                             self.jordanTableConfig.data[params.index] = params.row;
                             self.totalNum();
                           });
-                        }, 1500)()
+                        }, 1000)()
                       },
                     },
                   }),
@@ -1186,7 +1186,7 @@ export default {
                             self.jordanTableConfig.data[params.index] = params.row;
                             self.totalNum();
                           });
-                        }, 1500)()
+                        }, 1000)()
                       },
                       'on-blur': e => {
                         let inputRA = Number(e.target._value);
