@@ -46,7 +46,7 @@ export default {
         width: '', // 表格宽度
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
-        total: 10, // 设置总条数
+        total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       },
