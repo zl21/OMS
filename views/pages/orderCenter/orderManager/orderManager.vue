@@ -18,7 +18,8 @@
           ref="dynamicSearch"
           :dynamic-data="dynamicData"
         />
-        <div></div>
+
+        <div v-if="tablename !== 'OC_B_ORDER'"></div>
         <businessButton :btn-config="searchBtn" />
       </div>
     </div>

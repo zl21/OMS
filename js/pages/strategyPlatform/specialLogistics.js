@@ -1180,17 +1180,15 @@ export default {
             this.queryLogisticsWarehousePages();
           } else {
             if (this.id == '-1') {
-              this.$store.commit('customize/TabOpen', {
-                id: res.data.data.objId,
-                type: 'action',
-                name: this.customizedModuleName
-              });
+              this.$store.commit('global/tabOpen', {
+                type: 'C',
+                url: `/CUSTOMIZED/${this.customizedModuleName}/${res.data.data.objId}`,
+                label: "特殊物流方案新增",
+                customizedModuleName: this.customizedModuleName,
+                customizedModuleId: res.data.data.objId
+              })
+
             } else {
-              // this.changeCount = 4; //重置编辑状态
-              // this.queryById();
-              // this.queryAddressPages();
-              // this.queryProPages();
-              // this.queryLogisticsWarehousePages();
               this.pageback();
             }
           }
