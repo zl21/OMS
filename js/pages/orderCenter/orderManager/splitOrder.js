@@ -291,6 +291,10 @@ export default {
         self.$Message.warning('不能一次将所有的数据添加至待拆单区!'); // 没有可拆分的订单
         return;
       }
+      if(!(self.onSelectData.every(item=>item.cp_c_phy_warehouse_id == self.onSelectData[0].cp_c_phy_warehouse_id))){
+        self.$Message.warning('建议仓库不是同一个，不允许拆成一单!'); // 没有可拆分的订单
+        return;
+      }
       self.onSelectData.forEach(item => {
         if (item.split_num == 0) {
           flag = false;
