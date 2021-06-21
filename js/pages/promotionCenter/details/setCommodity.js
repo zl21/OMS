@@ -1,6 +1,6 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import { tableCols } from '../promotionConfig';
-import MyDialog from 'framework/components/dialog/mydialog';
+// import MyDialog from 'framework/components/dialog/mydialog';
 import businessButton from 'professionalComponents/businessButton';
 
 export default {
@@ -9,6 +9,7 @@ export default {
 		return {
 			btnConfig: {
 				typeAll: 'default',
+				btnsite: "right",
 				buttons: [
 					{
 						text: '取消', // 取消
@@ -57,7 +58,6 @@ export default {
 	components: {
 		businessButton,
 		detailtable,
-		MyDialog
 	},
 	computed: {
 		columns() {

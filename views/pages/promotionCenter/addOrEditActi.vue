@@ -21,7 +21,7 @@
           <InfoSet v-if="showInfoDataContainer" ref="area_1" :load-dis="loadDis" :basic-data="basic_info" :info-data="condition_info_setting" />
         </div>
         <div class="basic">
-          <GiftSet ref="area_2" :objid="objid" :load-dis="loadDis" :basic-data="basic_info" :gift-data="gift_info_setting" @setcommodity="setCommodity" @closeDialog="closeDialog" @confirm="confirm" />
+          <GiftSet ref="area_2" :objid="objid" :load-dis="loadDis" :basic-data="basic_info" :gift-data="gift_info_setting" :dialogVisible="dialogVisible" @setcommodity="setCommodity" @closeDialog="closeDialog" @confirm="confirm" />
         </div>
       </div>
     </div>
