@@ -1113,11 +1113,11 @@ export default {
       };
       if (obj) {
         param.highSearch.push(
-          {
-            type: 'input',
-            queryName: 'SOURCE_CODE',
-            value: obj.tem.SOURCE_CODE
-          },
+          // {
+          //   type: 'input',
+          //   queryName: 'SOURCE_CODE',
+          //   value: obj.tem.SOURCE_CODE
+          // },
           {
             type: 'input',
             queryName: 'BILL_NO',
