@@ -434,9 +434,9 @@ export default {
   mounted() {
     let { customizedModuleId, customizedModuleName } = this.$route.params;
     if (customizedModuleId == 'New') {
-      const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-      const data = { label: '物流派送范围新增', name: keepAliveModuleName }; //当前界面模块名称 
-      this.$store.commit('global/modifycurrentLabel', data)
+      // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+      // const data = { label: '物流派送范围新增', name: keepAliveModuleName }; //当前界面模块名称 
+      // this.$store.commit('global/modifycurrentLabel', data)
 
 
       this.id = '-1';
@@ -447,9 +447,9 @@ export default {
       },]
     } else {
 
-      const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-      const data = { label: '物流派送范围编辑', name: keepAliveModuleName }; //当前界面模块名称 
-      this.$store.commit('global/modifycurrentLabel', data)
+      // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+      // const data = { label: '物流派送范围编辑', name: keepAliveModuleName }; //当前界面模块名称 
+      // this.$store.commit('global/modifycurrentLabel', data)
       let areaRange = this.AliasFormConfig.formValue.REGION_TYPE;
       let item = this.queryForm('排除省份');
       if (areaRange == 1) {

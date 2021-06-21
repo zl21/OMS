@@ -31,7 +31,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '区域明细',
+          label: '按收货地址',
           value: 'PROPERTY'
         },
         {
@@ -150,8 +150,9 @@ export default {
             vModelFormat: true,
             disabled: false,
             onChange: () => {
+              if (!this.formConfig.formValue.endTime) return
               this.formConfig.formValue.endTime = dateUtil.getFormatDate(new Date(this.formConfig.formValue.endTime), 'yyyy-MM-dd') + " 23:59:59"
-
+          
               console.log(this.formConfig.formValue.endTime);
             }
           },
@@ -267,7 +268,7 @@ export default {
           },
           {
             style: 'radio',
-            label: '区域类型', // 输入框前文字
+            label: '区域级别', // 输入框前文字
             value: 'areaLevel', // 输入框的值
             colname: 'areaLevel', // 输入框的值
             width: '8', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -290,10 +291,10 @@ export default {
             width: '8',
             disabled: true,
             switchChange: () => {
-              // let isactive = this.formConfig.formValue.isactive;
-              // this.qurefrom('beginTime')[0].disabled = isactive;
-              // this.qurefrom('endTime')[0].disabled = isactive;
-              //this.btnConfig2.buttons[0].disabled = isactive;
+              let isactive = this.formConfig.formValue.isactive;
+              this.qurefrom('beginTime')[0].disabled = isactive;
+              this.qurefrom('endTime')[0].disabled = isactive;
+              this.btnConfig2.buttons[0].disabled = isactive;
             }
           },
           {
@@ -410,9 +411,9 @@ export default {
         this.qurefrom('cpCPhyWarehouseEname')[0].style = null;
         // 表示分仓策略》分仓规则
         if (customizedModuleId == 'New' || customizedModuleId == '-1' || customizedModuleId == 'NEW') {
-          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-          const data = { label: '分仓规则新增', name:keepAliveModuleName}; //当前界面模块名称 
-          this.$store.commit('global/modifycurrentLabel' , data)
+          // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          // const data = { label: '分仓规则新增', name:keepAliveModuleName}; //当前界面模块名称 
+          // this.$store.commit('global/modifycurrentLabel' , data)
 
           this.btnConfig.buttons.forEach(em => {
             if (em.text == '下一步') {
@@ -448,9 +449,9 @@ export default {
             }
           });
         } else {
-          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-          const data = { label: '分仓规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
-          this.$store.commit('global/modifycurrentLabel' , data)
+          // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          // const data = { label: '分仓规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
+          // this.$store.commit('global/modifycurrentLabel' , data)
           this.fninit(this.id);
           this.fntableData(this.id);
           this.pageShow = true; //显示明细表
@@ -469,14 +470,15 @@ export default {
         //CP_C_SHOP_IDS  type
         this.qurefrom('CP_C_SHOP_IDS')[0].style = null;
         this.qurefrom('type')[0].style = null;
-        this.labelList[0].label = '按收货地址';
+        this.labelList[0].label = '区域明细';
         this.labelList[1].value = "ST_ASSIGN_LOGISTICS_LOG"
         // 表示分物流策略》分物流规则
         if (customizedModuleId == 'New' || customizedModuleId == '-1' || customizedModuleId == 'NEW') {
-          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-          const data = { label: '分物流规则新增', name:keepAliveModuleName}; //当前界面模块名称 
-          this.$store.commit('global/modifycurrentLabel' , data)
+          // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          // const data = { label: '分物流规则新增', name:keepAliveModuleName}; //当前界面模块名称 
+          // this.$store.commit('global/modifycurrentLabel' , data)
           // 表示新增
+          this.formConfig.formValue.priority = '9'
           this.btnConfig.buttons.forEach(em => {
             if (em.text == '下一步') {
               em.isShow = true;
@@ -495,9 +497,9 @@ export default {
             this.id = '-1';
           }
         } else if (query.saveType && query.saveType == 2) {
-          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-          const data = { label: '分物流规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
-          this.$store.commit('global/modifycurrentLabel' , data)
+          // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          // const data = { label: '分物流规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
+          // this.$store.commit('global/modifycurrentLabel' , data)
 
           this.fninit(this.id);
           this.fntableData(this.id);
@@ -511,9 +513,9 @@ export default {
             }
           });
         } else {
-          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-          const data = { label: '分物流规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
-          this.$store.commit('global/modifycurrentLabel' , data)
+          // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          // const data = { label: '分物流规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
+          // this.$store.commit('global/modifycurrentLabel' , data)
           this.fninit(this.id);
           this.fntableData(this.id);
           this.pageShow = true;
