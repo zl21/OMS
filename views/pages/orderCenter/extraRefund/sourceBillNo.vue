@@ -1,11 +1,12 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-06-15 18:45:55
+ * @LastEditTime: 2021-06-21 10:15:25
  * @LastEditors: Please set LastEditors
 -->
 <template>
   <div class="OC_B_ORDER_ID">
+    <label class="itemLabel"> 原定单编号： </label>
     <Input
       :autocomplete="'new-password'"
       @on-click="iconclick"

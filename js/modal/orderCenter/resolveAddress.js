@@ -332,7 +332,8 @@ export default {
             self.componentData.CALLBACK();
           } else {
             try {
-              self.$parent.$parent.$parent.autoRefresh();
+              console.log('2');
+              self.$parent.$parent.$parent.$parent.$parent.getDetailsData();
             } catch (e) {
               console.log(e);
             }
