@@ -476,71 +476,8 @@ export default {
       unCommitThMinWidth: '74px', // 反提交的宽度
       upperTableTbodyHighlightIndex: 0, // 上边表格高亮的下标
       bottomTableTbodyHighlightIndex: null, // 下边表格高亮的下标
-      quanXianType: this.$route.query.type,//判断权限类型
-      treeDataCenter: [
-        {
-          "description": "全部",
-          "id": -1,
-          "name": "全部",
-          "nodeType": "ROOT",
-          "expand": true,
-          "selected": true,
-          "title": "数据权限项",
-          children: [
-            {
-              "description": "品牌权限",
-              "id": 186,
-              "mask": "10000000",
-              "name": "品牌权限",
-              "nodeType": "TABLE_CATEGORY",
-              "orderno": -1,
-              "type": "UNKNOWN",
-              "title": "品牌权限"
-            },
-            {
-              "description": "品牌权限",
-              "id": 186,
-              "mask": "10000000",
-              "name": "品牌权限",
-              "nodeType": "TABLE_CATEGORY",
-              "orderno": -1,
-              "type": "UNKNOWN",
-              "title": "店铺权限"
-            },
-            {
-              "description": "品牌权限",
-              "id": 186,
-              "mask": "10000000",
-              "name": "品牌权限",
-              "nodeType": "TABLE_CATEGORY",
-              "orderno": -1,
-              "type": "UNKNOWN",
-              "title": "实体仓权限"
-            },
-            {
-              "description": "品牌权限",
-              "id": 186,
-              "mask": "10000000",
-              "name": "品牌权限",
-              "nodeType": "TABLE_CATEGORY",
-              "orderno": -1,
-              "type": "UNKNOWN",
-              "title": "实体仓权限"
-            },
-            {
-              "description": "品牌权限",
-              "id": 186,
-              "mask": "10000000",
-              "name": "品牌权限",
-              "nodeType": "TABLE_CATEGORY",
-              "orderno": -1,
-              "type": "UNKNOWN",
-              "title": "渠道仓权限"
-            }
-
-          ]
-        }
-      ]
+     // quanXianType: this.$route.query.type,//判断权限类型
+      treeDataCenter: []
     };
   },
   watch: {
@@ -741,11 +678,12 @@ export default {
             resolve();
             const resData = res.data.data;
             this.restructureTreeDada(resData);
-            if (this.quanXianType == 'function') {
-              this.treeData = [...resData];
-            } else if (this.quanXianType == 'data') {
-              this.treeData = this.treeDataCenter
-            }
+             this.treeData = [...resData];
+            // if (this.quanXianType == 'function') {
+             
+            // } else if (this.quanXianType == 'data') {
+            //   this.treeData = this.treeDataCenter
+            // }
 
 
 
