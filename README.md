@@ -218,3 +218,4 @@
 | v1.1.74 | 与标准外键关联组件clear icon统一 |
 | v1.1.75 | fkdialog样式调整 |
 | v1.1.76 | businessForm-fkinput失焦 |
+| v1.1.77 | tableSku查询接口-1处理 |

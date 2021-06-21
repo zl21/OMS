@@ -40,10 +40,10 @@ export default {
           self.queryList = data;
           cb(self.queryList);
         } else {
-          this.$message({
+          /* this.$message({
             type: 'error',
             message: message || '错误！'
-          });
+          }); */
           self.queryList = [];
         }
       } catch (error) {
