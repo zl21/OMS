@@ -67,6 +67,17 @@ export default {
             this.data.cp_c_region_city_id = ''
             this.data.cp_c_region_area_id = ''
           },
+          InputEnter: (val)=> {
+            console.log('InputEnter:',val);
+            // 选中触发事件
+            this.formConfig.formData[1].itemdata.pid = '';
+            this.formConfig.formData[1].itemdata.valuedata = '';
+            this.formConfig.formData[2].itemdata.pid = '';
+            this.formConfig.formData[2].itemdata.valuedata = '';
+            this.data.cp_c_region_province_id = val.pid;
+            this.data.cp_c_region_city_id = ''
+            this.data.cp_c_region_area_id = ''
+          }
         },
         {
           version: "1.4",
@@ -102,12 +113,17 @@ export default {
           },
           oneObj: (val) => {
             // 选中触发事件
-            console.log("val::", val);
             this.formConfig.formData[2].itemdata.pid = '';
             this.formConfig.formData[2].itemdata.valuedata = '';
             this.data.cp_c_region_city_id = val.pid;
             this.data.cp_c_region_area_id = ''
           },
+          InputEnter: (val)=> {
+            this.formConfig.formData[2].itemdata.pid = '';
+            this.formConfig.formData[2].itemdata.valuedata = '';
+            this.data.cp_c_region_city_id = val.pid;
+            this.data.cp_c_region_area_id = ''
+          }
         },
         {
           version: "1.4",
@@ -146,6 +162,9 @@ export default {
             console.log("val::", val);
             this.data.cp_c_region_area_id = val.pid
           },
+          InputEnter: (val)=> {
+            this.data.cp_c_region_area_id = val.pid
+          }
         }]
       },
       dataAysis: false, // 智能解析地址是否正确

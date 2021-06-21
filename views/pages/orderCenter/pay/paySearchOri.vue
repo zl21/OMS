@@ -352,9 +352,10 @@ export default {
   .itemLabel {
     flex: 0 0 120px;
   }
+  .oriCode /deep/.ark-input-innerWrap {
+    right: 3px;
+  }
   /deep/.ark-input-icon {
-    // top: 5px;
-    // right: 2px;
     height: 32px;
     line-height: 32px;
   }
