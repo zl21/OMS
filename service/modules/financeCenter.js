@@ -32,6 +32,6 @@ export default {
   getVendorCodeAndBillNumber: params => network.get('/p/cs/ac/v1/getVendorCodeAndBillNumber', params),
   generateVipSalesOrder: params => network.get('/p/cs/ac/v1/generateVipSalesOrder', params),
   // 支付宝账单原始数据
-  triggerAlipayBill: params => network.post(' /p/cs/ac/v1/triggerAlipayBill', params),
+  triggerAlipayBill: params => network.post('/p/cs/ip/v1/order/download/alipayBillDownload', params),
 
 };
