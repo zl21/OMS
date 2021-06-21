@@ -531,8 +531,14 @@ export default {
     await this.querySpu();
     await this.getSkuInfoData();
   },
-  created() {
+  async activated() {
     // 设置默认值
+    const self = this;
+    self.dataitem.url = self.$OMS2.omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
+    this.init();
+    await this.getSelectOption();
+    await this.querySpu();
+    await this.getSkuInfoData();
   },
   methods: {
     init() {
