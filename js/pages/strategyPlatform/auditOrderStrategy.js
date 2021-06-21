@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-03 19:24:03
- * @LastEditTime: 2021-06-18 11:47:12
+ * @LastEditTime: 2021-06-21 17:48:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/pages/strategyPlatform/auditOrderStrategy.js
@@ -488,6 +488,10 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
         }
         if (str) {
           self.$OMS2.omsUtils.msgTips(self, 'warning', `${str}不能为空`, 0);
+          return true;
+        }
+        if(!self.resultData.ST_C_AUTO_AUDIT.WAIT_TIME || self.resultData.ST_C_AUTO_AUDIT.WAIT_TIME==0){
+          self.$OMS2.omsUtils.msgTips(self, 'warning', '等待时间无效!', 0);
           return true;
         }
         return false;
