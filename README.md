@@ -228,3 +228,4 @@
 | v1.1.84 | 表格优化 |
 | v1.1.85 | businessActionTable form+button优化 |
 | v1.1.86 | businessActionTable form+button优化1 |
+| v1.1.87 | businessActionTable form+button优化2 |

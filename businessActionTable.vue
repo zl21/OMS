@@ -5,7 +5,6 @@
       <businessForm :formConfig="businessFormConfig"></businessForm>
     </div>
     <!-- businessButtons -->
-    {{layout && Number.isInteger(formDataNumber / 4)}}
     <div v-if="businessButtonConfig !== undefined" :class="['businessButtons-box',layout && Number.isInteger(formDataNumber / 4)? 'no' : 'prosition']">
       <businessButton :btnConfig="businessButtonConfig"></businessButton>
     </div>
