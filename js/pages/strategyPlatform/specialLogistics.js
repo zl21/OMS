@@ -554,26 +554,6 @@ export default {
         }
       ],
       data3: [],
-      columns4: [
-        {
-          type: 'selection',
-          width: 60,
-          align: 'center'
-        },
-        {
-          title: '序号',
-          key: 'index'
-        },
-        {
-          title: '仓库公司',
-          key: 'cpCPhyWarehouseEname'
-        },
-        {
-          title: '物流名称',
-          key: 'cpCLogisticsEname'
-        }
-      ],
-      data1: [],
       switchListdata: {
         label: '包裹属性',
         list: [
@@ -642,6 +622,40 @@ export default {
         updateData: [],
         columns: [],
         data: []
+      },
+      tableConfig2: {
+        indexColumn: false,
+        isShowSelection: false,
+        columns: [
+          {
+            type: 'selection',
+            width: 60,
+            align: 'center'
+          },
+          {
+            title: '序号',
+            key: 'index'
+          },
+          {
+            title: '仓库公司',
+            key: 'cpCPhyWarehouseEname'
+          },
+          {
+            title: '物流名称',
+            key: 'cpCLogisticsEname'
+          }
+        ],
+        data: [],
+        pageShow: true, // 控制分页是否显示
+        btnsShow: false, // 控制操作按钮是否显示
+        searchInputShow: false, // 控制搜索框是否显示
+        width: '', // 表格宽度
+        height: '', // 表格高度
+        border: true, // 是否显示纵向边框
+        total: 0, // 设置总条数
+        current:1,
+        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSize: 10, // 每页条数
       },
       columnsCity: [
         {
@@ -863,19 +877,19 @@ export default {
       this.table4Data = v;
     },
     tablepage2(v) {
-      this.tableCURRENT = v;
+      this.tableConfig2.pageSize = v;
       this.queryProPages();
     },
     tablesize2(v) {
-      this.tableSIZE = v;
+      this.tableConfig2.current = v;
       this.queryProPages();
     },
     tablepage(v) {
-      this.tableCURRENT = v;
+      this.tableConfig2.pageSize = v;
       this.queryProPages();
     },
     tablesize(v) {
-      this.tableSIZE = v;
+      this.tableConfig2.current = v;
       this.queryProPages();
     },
     queryById() {
@@ -956,8 +970,8 @@ export default {
     queryProPages() {
       let data = {
         ID: this.id,
-        CURRENT: this.tableCURRENT,
-        SIZE: this.tableSIZE
+        CURRENT: this.tableConfig2.pageSize,
+        SIZE:  this.tableConfig2.current
       };
       //物流策略-特殊物流方案-商品属性明细分页查询
       service.strategyPlatform.queryProPages(data).then(res => {
@@ -980,11 +994,11 @@ export default {
 
       service.strategyPlatform.queryLogisticsWarehousePages(data).then(res => {
         if (res.data.code == 0) {
-          this.data1 = res.data.data.records.map((em, index) => {
+          this.tableConfig2.data = res.data.data.records.map((em, index) => {
             em.index = index + 1;
             return em;
           });
-          this.total2 = res.data.data.total;
+          this.tableConfig2.total = res.data.data.total;
         }
       });
     },
@@ -1209,7 +1223,7 @@ export default {
         this.fnSave(3);
       } else {
         let ckArr = [];
-        this.data1 = [];
+        this.tableConfig2.data = [];
         if (this.cpCPhyWarehousedata.length > 0) {
           this.cpCPhyWarehousedata.forEach((em, index) => {
             let wareidarr = this.WarehouseItemListobj.cpCPhyWarehouseEname.split(',');
@@ -1227,7 +1241,7 @@ export default {
             });
           });
         }
-        this.data1 = ckArr;
+        this.tableConfig2.data = ckArr;
       }
 
       this.formConfig1.formData[0].itemdata.pid = '';

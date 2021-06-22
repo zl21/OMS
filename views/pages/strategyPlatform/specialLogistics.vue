@@ -91,7 +91,8 @@
         <div slot="content" v-show="labelDefaultValue == 'PROPERTY'">
           <businessForm :form-config="formConfig1" @keyDown="keyDown" />
           <businessButton :btn-config="btnConfig1" />
-          <Table
+
+          <!-- <Table
             border
             ref="selection"
             :columns="columns4"
@@ -104,6 +105,13 @@
             class-name="tablestyle"
             @on-change="tablepage2"
             @on-page-size-change="tablesize2"
+          /> -->
+
+          <businessActionTable
+            :jordan-table-config="tableConfig2"
+            @on-page-change="tablepage2"
+            @on-page-size-change="tablesize2"
+            @on-select="data1select"
           />
         </div>
         <div class="subtablePart" v-show="labelDefaultValue != 'PROPERTY'">

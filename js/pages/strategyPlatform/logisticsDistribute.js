@@ -5,12 +5,14 @@ import dateUtil from '@/assets/js/__utils__/date.js';
 import subTable from 'professionalComponents/subTable';
 import businessLabel from 'professionalComponents/businessLabel';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
+import businessActionTable from 'professionalComponents/businessActionTable'
 
 export default {
   components: {
     businessForm,
     businessButton,
     businessLabel,
+    businessActionTable,
     subTable
   },
   mixins: [modifycurrentLabel],
@@ -81,12 +83,12 @@ export default {
               if (val == 2) {
                 this.modalTitle = '添加支持省份';
                 this.formconfig2[0].show = true;
-                this.tableColumns[2].title = '配送省份';
+                this.tableConfig.columns[2].title = '配送省份';
                 item.item.required = false
               } else {
                 item.item.required = true
                 this.modalTitle = '添加排除区域';
-                this.tableColumns[2].title = '排除省份';
+                this.tableConfig.columns[2].title = '排除省份';
                 this.formconfig2[0].show = false;
               }
               if (this.id != '-1') {
@@ -334,8 +336,10 @@ export default {
           }
         }
       ],
-      tableColumns: [
-        {
+      tableConfig: {
+        indexColumn: false,
+        isShowSelection: false,
+        columns: [ {
           type: 'selection',
           width: 60,
           align: 'center'
@@ -363,8 +367,20 @@ export default {
         {
           title: '修改时间',
           key: 'modifieddate'
-        }
-      ],
+        }],
+        data: [],
+        pageShow: true, // 控制分页是否显示
+        btnsShow: false, // 控制操作按钮是否显示
+        searchInputShow: false, // 控制搜索框是否显示
+        width: '', // 表格宽度
+        height: '', // 表格高度
+        border: true, // 是否显示纵向边框
+        total: 0, // 设置总条数
+        current:1,
+        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSize: 10, // 每页条数
+      },
+     // tableColumns: [],
       tableData: [],
       SIZE: 10,
       CURRENT: 1,
@@ -394,7 +410,6 @@ export default {
       tableSelectArr: [],
       tableshow: false, //表格是否显示
       stCDeliveryAreaRegionItemList: [],
-      totalpage: 10,
       labelDefaultValue: 'jiben', // 设置tab默认值
       // tab切换配置
       labelList: [
@@ -494,11 +509,11 @@ export default {
       });
     },
     fnSize(v) {
-      this.SIZE = v;
+      this.tableConfig.pageSize = v;
       this.init(this.id);
     },
     fnchange(v) {
-      this.CURRENT = v;
+      this.tableConfig.current = v;
       this.init(this.id);
     },
     fnempty() {
@@ -527,8 +542,8 @@ export default {
       //初始化查询接口deliveryQueryById
       let data = {
         ID: objid ? objid : this.id,
-        SIZE: this.SIZE,
-        CURRENT: this.CURRENT
+        SIZE: this.tableConfig.pageSize,
+        CURRENT: this.tableConfig.current
       };
       if (this.AliasFormConfig.formValue.REGION_TYPE && type) {
         data.AREARANGE = this.AliasFormConfig.formValue.REGION_TYPE;
@@ -546,7 +561,7 @@ export default {
         this.FormConfig.formValue.cpCLogisticsEname = stCDeliveryArea.cpCLogisticsEname; //物流公司名称
         this.FormConfig.formValue.cpCLogisticsId = stCDeliveryArea.cpCLogisticsId; //物流公司id
         this.FormConfig.formValue.remark = stCDeliveryArea.remark; //备注
-        this.totalpage = stCDeliveryAreaRegionItemList.total;
+        this.tableConfig.total = stCDeliveryAreaRegionItemList.total;
         this.FormConfig.formData[2].style = 'switch'
         //isactive 根据主表这个字段来控制是否可以编辑 Y不能编辑 N可以编辑
 
@@ -567,7 +582,7 @@ export default {
           item.index = index + 1;
           item.modifieddate = dateUtil.getFormatDate(new Date(item.modifieddate), 'yyyy-MM-dd');
         });
-        this.tableData = stCDeliveryAreaRegionItemList.records;
+        this.tableConfig.data = stCDeliveryAreaRegionItemList.records;
       });
     },
     // 返回
@@ -764,10 +779,10 @@ export default {
       if (type == 2) {
         this.modalTitle = '添加支持省份';
         this.formconfig2[0].show = true;
-        this.tableColumns[2].title = '配送省份';
+        this.tableConfig.columns[2].title = '配送省份';
       } else {
         this.modalTitle = '添加排除区域';
-        this.tableColumns[2].title = '排除省份';
+       this.tableConfig.columns[2].title = '排除省份';
         this.formconfig2[0].show = false;
       }
     },

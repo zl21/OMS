@@ -645,7 +645,7 @@ export default {
       return false;
     }, // 校验是否有未保存的数据
     getButtonData() {
-      const params = { AD_ACTION_NAME: 'functionPermission' };
+      const params = { AD_ACTION_NAME: 'DATAJURISDICTION' };
       functionPowerActions().fetchActionsInCustomizePage({
         params,
         success: (res) => {

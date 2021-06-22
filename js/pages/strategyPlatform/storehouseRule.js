@@ -6,7 +6,7 @@ import service from '@/service/index';
 import businessDialog from 'professionalComponents/businessDialog';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import subTable from 'professionalComponents/subTable';
-import { set } from 'lodash';
+import businessActionTable from 'professionalComponents/businessActionTable'
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 
@@ -16,6 +16,7 @@ export default {
     businessForm,
     businessLabel,
     businessDialog,
+    businessActionTable,
     subTable
   },
   mixins: [modifycurrentLabel],
@@ -350,14 +351,27 @@ export default {
         }
       },
       changeCount: 0, //判断数据是否修改过
-      columns3: [],
-      totalpage: 10,
       customizedModuleName: '',
-      data1: [],
       subTableConfig: {
         centerName: '',
         tablename: '',
         objid: '',
+      },
+      tableConfig: {
+        indexColumn: false,
+        isShowSelection: false,
+        columns: [],
+        data: [],
+        pageShow: true, // 控制分页是否显示
+        btnsShow: false, // 控制操作按钮是否显示
+        searchInputShow: false, // 控制搜索框是否显示
+        width: '', // 表格宽度
+        height: '', // 表格高度
+        border: true, // 是否显示纵向边框
+        total: 0, // 设置总条数
+        current:1,
+        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSize: 10, // 每页条数
       },
     };
   },
@@ -537,21 +551,21 @@ export default {
       }
     },
     returnData() {
-      this.pageNum = 1;
+      this.tableConfig.current = 1;
       this.fninit(this.id);
       this.fntableData(this.id);
     },
     fninput(v) {
       this.seachVal = v;
-      this.pageNum = 1;
+      this.tableConfig.current = 1;
       this.fntableData(this.id);
     },
     fnSize(v) {
-      this.pageSize = v;
+      this.tableConfig.pageSize = v;
       this.fntableData(this.id);
     },
     fnchange(v) {
-      this.pageNum = v;
+      this.tableConfig.current = v;
       this.fntableData(this.id);
     },
     importData() {
@@ -612,8 +626,8 @@ export default {
         service.strategyPlatform
           .assignLogisticsqueryDetailById({
             ID: id,
-            SIZE: this.pageSize,
-            CURRENT: this.pageNum,
+            SIZE:  this.tableConfig.pageSize,
+            CURRENT: this.tableConfig.current,
             regionName: this.seachVal
           })
           .then(res => {
@@ -621,17 +635,17 @@ export default {
             data.forEach((em, index) => {
               em.index = index + 1;
             });
-            this.totalpage = pageInfo.total;
+            this.tableConfig.total = pageInfo.total;
             if (columns.length > 0) {
-              this.columns3 = [
+              this.tableConfig.columns = [
                 {
                   title: '序号',
                   key: 'index'
                 }
               ];
-              this.columns3 = this.columns3.concat(columns);
+              this.tableConfig.columns = this.tableConfig.columns.concat(columns);
             }
-            this.data1 = data;
+            this.tableConfig.data = data;
           });
 
         return;
@@ -641,8 +655,8 @@ export default {
         .getWarehouseRegionInfo({
           params: {
             id,
-            pageSize: this.pageSize,
-            pageNum: this.pageNum,
+            pageSize:  this.tableConfig.pageSize,
+            pageNum: this.tableConfig.current,
             regionName: this.seachVal
           }
         })
@@ -651,17 +665,17 @@ export default {
           data.forEach((em, index) => {
             em.index = index + 1;
           });
-          this.totalpage = pageInfo.total;
+          this.tableConfig.total = pageInfo.total;
           if (columns.length > 0) {
-            this.columns3 = [
+            this.tableConfig.columns = [
               {
                 title: '序号',
                 key: 'index'
               }
             ];
-            this.columns3 = this.columns3.concat(columns);
+            this.tableConfig.columns = this.tableConfig.columns.concat(columns);
           }
-          this.data1 = data;
+          this.tableConfig.data = data;
         });
     },
     setbtn() {
