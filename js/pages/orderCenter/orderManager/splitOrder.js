@@ -287,7 +287,7 @@ export default {
         self.$Message.warning($i18n.t('modalTips.cm')); // 没有可拆分的订单
         return;
       }
-      if(self.onSelectData.length == self.data.reduce((pre , curr)=> pre+curr.length , 0)){
+      if(self.onSelectData.length == self.data[0].length){
         self.$Message.warning('不能一次将所有的数据添加至待拆单区!'); // 没有可拆分的订单
         return;
       }
