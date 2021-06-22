@@ -169,7 +169,8 @@ export default {
             width: '6',
             dataAcessKey: 'IS_OUTWAREHOUSE_ALONE',
             disabled: false,
-            checkboxChange: (e) => {
+            checkboxChange: (val) => {
+              this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = val
               this.masterModifyData('IS_OUTWAREHOUSE_ALONE', 'master');
             }
           }
@@ -1180,22 +1181,6 @@ export default {
         : self.formConfig.formValue[ecode];
       let type = Object.prototype.toString.call(value);
 
-      let checkboxVal;
-      if (ecode == 'IS_OUTWAREHOUSE_ALONE') {
-        switch (typeof value) {
-          case 'string':
-            checkboxVal = value == 'true' ? 0 : 1;
-            break;
-          case 'number':
-            checkboxVal = value ? 0 : 1;
-            break;
-          case 'boolean':
-            checkboxVal = Number(!value);
-            break;
-          default:
-            break;
-        }
-      }
       if (type == '[object Date]') {
         let newTime = this.formatDate(value)
         let oldTime = self.modify[obj][ecode]
@@ -1205,7 +1190,7 @@ export default {
         }
         self.modify[obj][ecode] = newTime
       } else {
-        self.modify[obj][ecode] = ecode == 'IS_OUTWAREHOUSE_ALONE' ? checkboxVal : value;
+        self.modify[obj][ecode] = ecode == 'IS_OUTWAREHOUSE_ALONE' ? Number(value) : value;
       }
     },
     // 是否专配
@@ -1411,7 +1396,7 @@ export default {
             this.pickingTableConfig.data = VIPCOM_PROJECT_PICK_LIST || [];
             this.warehouseWarrantConfig.data = VIPCOM_PROJECT_STORE_IN_LIST || [];
             this.pickingTableConfig.businessFormConfig.formValue.PICK_CREATE_TYPE = PICK_CREATE_TYPE;
-            this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = VIPCOM_PROJECT_LIST.IS_OUTWAREHOUSE_ALONE;
+            this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = VIPCOM_PROJECT_LIST.IS_OUTWAREHOUSE_ALONE != '0';
             this.initPickTable();
           } else {
             this.$message.error(message);
@@ -1446,6 +1431,10 @@ export default {
       this.service.strategyPlatform.wphScheduleSave({ ID: this.ID, ...params })
       .then(({ data: { code, data, message } }) => {
         if (code == 0) {
+          if (this.ID > 0) {
+            this.onOk()
+            return
+          }
           this.isMasterRequired = true;
           this.initModify();
           this.isModify = false

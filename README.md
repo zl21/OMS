@@ -605,6 +605,7 @@
 | v1.7.43 | 修复零售发货单添加赠品系列限制 |
 | v1.7.44 | 退换新增-onlyBox取值修复/back修复 |
 | v1.7.45 | agTable/vueAgTable切换配置开关 |
+| v1.7.46 | 档期日程-checkbox |
 
 
 

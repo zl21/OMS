@@ -116,7 +116,6 @@ import businessForm from "professionalComponents/businessForm";
 import businessActionTable from "professionalComponents/businessActionTable";
 import businessLabel from "professionalComponents/businessLabel";
 import businessDialog from "professionalComponents/businessDialog";
-// import loading from 'professionalComponents/loading';
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 // import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BurgeonValidate from "burgeonConfig/config/validate.config";
@@ -138,7 +137,6 @@ export default {
     businessActionTable,
     businessLabel,
     businessDialog,
-    // loading,
   },
   // mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {

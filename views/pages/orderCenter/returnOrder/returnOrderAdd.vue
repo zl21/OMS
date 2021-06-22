@@ -91,8 +91,6 @@
               @subTableData="subTableData"></returnChangeOrderdetails>
         </div>
       </div>
-      <!--单据状态图片展示 -->
-      <businessStatusFlag :status-name="statusName" />
     </div>
     <!-- 查询原始订单编号 -->
     <Modal v-model="orderModal" width="900" titleAlign="left" :closable="true" :mask="true" class-name="ark-dialog" title="查询原平台单号">
@@ -111,14 +109,8 @@ import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessLabel from 'professionalComponents/businessLabel';
 import { setTimeout } from 'timers';
-import businessDialog from 'professionalComponents/businessDialog';
-import publicMethodsUtil from '@/assets/js/public/publicMethods';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
-import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BurgeonValidate from "burgeonConfig/config/validate.config";
 // import BtnConfig from 'burgeonConfig/config/funBtn.config';
-import commonUtils from 'burgeonConfig/config/commonUtils'
 import searchOOID from './searchOOID.vue'
 import returnChangeOrderdetails from './returnChangeOrderdetails.vue'
 import { valiObj, waterMarkMap } from './returnConfig.js'
@@ -131,11 +123,8 @@ export default {
     businessButton,
     businessForm,
     businessActionTable,
-    businessDialog,
     businessLabel,
-    businessStatusFlag
   },
-  mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     const validatePhoneNumber = BurgeonValidate.validatePhoneNumber;
     return {

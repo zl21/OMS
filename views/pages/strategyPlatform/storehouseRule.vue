@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-20 13:33:28
- * @LastEditTime: 2021-05-22 11:28:44
+ * @LastEditTime: 2021-06-22 13:57:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/storehouseRule.vue
@@ -24,12 +24,12 @@
       </Collapse>
 
       <div v-if="pageShow" class="customized-detail-table">
-           <businessLabel
-            :label-list="labelList"
-            :label-default-value="labelDefaultValue"
-            @labelClick="labelClick"
-          />
-          
+        <businessLabel
+          :label-list="labelList"
+          :label-default-value="labelDefaultValue"
+          @labelClick="labelClick"
+        />
+
         <div class="subtablePart" v-show="labelDefaultValue == 'PROPERTY'">
           <div class="subtablePart-labelList">
             <Input
@@ -42,29 +42,17 @@
               <businessButton :btn-config="btnConfig2" />
             </div>
 
-            <Table
-              ref="currentRowTable"
-              border
-              stripe
-              highlight-row
-              :columns="columns3"
-              :data="data1"
+            <businessActionTable
+              :jordan-table-config="tableConfig"
+              @on-page-change="fnchange"
+              @on-page-size-change="fnSize"
             />
-            <div class="foot-page">
-              <Page
-                :total="totalpage"
-                show-elevator
-                show-sizer
-                @on-change="fnchange"
-                @on-page-size-change="fnSize"
-              />
-            </div>
           </div>
         </div>
 
-         <div class="subtablePart" v-show="labelDefaultValue != 'PROPERTY'">
+        <div class="subtablePart" v-show="labelDefaultValue != 'PROPERTY'">
           <subTable :component-data="subTableConfig"></subTable>
-          </div>
+        </div>
       </div>
     </div>
 
