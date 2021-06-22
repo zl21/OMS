@@ -616,5 +616,6 @@
 | v1.7.54 | getPermissions方法处理 |
 | v1.7.55 | 下载账单serviceId、档期日程样式 |
 | v1.7.56 | bug: 41590 |
+| v1.7.57 | 下载账单serviceId |
 
 
