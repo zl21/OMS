@@ -333,14 +333,14 @@ class commonUtils {
       TYPE: params.type,
     }
     // console.log('this[arrry].buttons===', this[arrry].buttons)
-    if (self[array] == undefined) return
+    const { TYPE } = params
+    if (TYPE != 'OBJ' && self[array] == undefined) return
     self.service.common.fetchActionsInCustomizePage(query).then((res) => {
       let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
       independent = result
       if (isIndependent) {
         return independent
       }
-      const { TYPE } = params
       if (TYPE == 'OBJ') {
         return result
       } else {
@@ -378,6 +378,8 @@ class commonUtils {
         self[array].buttons = [...c, ...a]
         self[array].loading = false
       }
+    }).catch(e => {
+      if (self[array] != undefined) self[array].loading = false;
     })
   }
   static buttonChild(ele, btns, arr) {
