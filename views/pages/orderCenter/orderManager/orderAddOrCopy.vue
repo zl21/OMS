@@ -917,6 +917,7 @@ export default {
               width: "6",
               colname: "PS_C_SKU",
               itemdata: {
+                version: '1.4',
                 colid: "171332",
                 colname: "PS_C_SKU",
                 name: "SKU编码",

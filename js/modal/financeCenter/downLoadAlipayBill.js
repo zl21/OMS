@@ -88,7 +88,7 @@
           },
           formData: [
             {
-              style: 'popInput', // 输入框弹框单多选
+              style: 'popInputPlus', // 输入框弹框单多选
               width: '24',
               isActive: true,
               isdisabled: false,
@@ -100,6 +100,7 @@
                 display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能
                 fkdisplay: 'drp', // 外键关联类型，mrp表示下拉多选
                 fkdesc: '账户名称',
+                version: '1.4',
                 inputname: 'AC_F_ALIPAY_ACCOUNTMANAGE_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
                 isnotnull: true, // 是否必填
@@ -113,6 +114,7 @@
                 row: 1,
                 statsize: -1,
                 type: 'STRING',
+                columnsKey: ['ALIPAY_ACCOUNT_NAME'],
                 valuedata: '' // 这个是选择的值
               }
             },
