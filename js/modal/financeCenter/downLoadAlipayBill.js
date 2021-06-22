@@ -94,7 +94,7 @@
               isdisabled: false,
               itemdata: {
                 col: 1,
-                colid: 182258,
+                colid: 182262,
                 colname: 'AC_F_ALIPAY_ACCOUNTMANAGE_ID', // 当前字段的名称
                 datelimit: 'all',
                 display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能
