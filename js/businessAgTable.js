@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-21 10:17:52
- * @LastEditTime: 2021-06-22 13:45:26
+ * @LastEditTime: 2021-06-22 16:13:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/js/vueAgTable.js
@@ -46,39 +46,8 @@ export default {
       onPageSizeChange(val) {
         this.$emit('on-page-size-change', val)
       },
-      tableSortChange(e){
-        this.$emit('on-sort-changed', e.api.getSortModel())
-      },
       tableSelectedChange(data){
           this.$emit('on-selection-change' , data);
       }
-        // renderParams(cellData) {
-        //     if (cellData.field == 'ORDER_TAG') {
-        //         return {
-        //             renderContainer: 'CellRenderByFunction',
-        //             renderComponent: (h, params) => {
-        //                 console.log(params);
-        //                 return h('div', {
-        //                     domProps: {
-
-        //                     }
-        //                 },
-        //                     params.row.ORDER_TAG.map(item => h('span', {
-        //                         domProps: {
-        //                             innerText: item.text
-        //                         },
-        //                         style: {
-        //                             border: `1px solid${item.clr}`,
-        //                             color: item.clr,
-        //                             margin: '0 2px',
-        //                             borderRadius: '6px',
-        //                             padding: '2px'
-        //                         }
-        //                     }))
-        //                 )
-        //             }
-        //         }
-        //     }
-        // },
     }
 }
