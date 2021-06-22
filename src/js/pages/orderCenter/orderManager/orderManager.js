@@ -2720,6 +2720,14 @@ export default {
       // 当出现loading，禁止页面滚动
       document.getElementById('content').style.overflow = 'hidden';
       document.getElementById('content').style.position = '';
+
+      // 处理不含标签查询数据不一致问题
+      const copyHighSearchData = self.highSearchData;
+      copyHighSearchData.map(item => {
+        if (item.queryName === "HAS_NO_TAG") {
+          item.value = 'all'
+        }
+      })
       const param = {
         page: {
           pageSize: self.agTableConfig.pagenation.pageSize,
@@ -2739,7 +2747,6 @@ export default {
         param.lackstockOrAudit = self.statusData.value;
         param.status = { label: '缺货', value: '2', isShow: true };
       }
-
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
       self.service.orderCenter
