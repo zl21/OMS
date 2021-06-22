@@ -384,7 +384,9 @@ export default {
     },
     exportClick() {
       const self = this;
-      self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+      if(!self.vueAgTable){
+        self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+      }
       console.log(self.selection);
       if (self.selection.length) {
         // if (this.isExport) return this.$Message.error("有一项导出正在进行中");

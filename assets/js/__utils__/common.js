@@ -119,8 +119,10 @@ const tabCloseAppoint = _self => {
  */
 const tabHref = (_self, params, extendObj = {}) => {
   // 返回--要传固定id
-  console.log(_self.$refs.agGridChild.AGTABLE.getSelect());
-  const selection = _self.$refs.agGridChild.AGTABLE.getSelect(); // 获取勾行数据;
+  const selection = [];
+  if(!_self.vueAgTable){
+    selection = _self.$refs.agGridChild.AGTABLE.getSelect();
+  } // 获取勾行数据;
   let id = params.id;
   if (params.id === 'id') {
     id = selection[0].ID;

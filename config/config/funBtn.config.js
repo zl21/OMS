@@ -556,7 +556,9 @@ class BtnConfig {
       this[funName](self, ids)
     } else {
       // 非单对象界面
-      self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
+      if(!self.vueAgTable){
+        self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+      }
       if (self.selection.length > 0) {
         if (isSingle && self.selection.length > 1) {
           commonUtils.msgTips(self, 'warning', '不支持批量操作！', 2)

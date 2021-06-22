@@ -10,7 +10,7 @@
   import dynamicSearch from '@/views/pages/orderCenter/orderManager/dynamicSearch.vue';
   import formSetting from '@/views/pages/orderCenter/orderManager/formSetting.vue';
   import proDetail from '@/views/pages/orderCenter/orderManager/proDetail';
-  import businessAgTable from 'professionalComponents/vueAgTable';
+  import businessAgTable from 'professionalComponents/businessAgTable';
   export default {
     name: 'OrderManage',
     components: {
@@ -28,6 +28,7 @@
     data() {
       return {
         vmI18n: $i18n,
+        vueAgTable:true, //是否切换为vue-ag-table
         modal: false,
         buttonInit: true,
         loading: false,
@@ -103,7 +104,9 @@
             webname: 'ORDER_DE_AUDIT_ORDER', // 反审核
             btnclick: () => {
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               console.log(self.selection);
               if (self.selection.length) {
                 let arr = self.selection.map((item) => ({ id: item.ID, bill_no: item.BILL_NO }));
@@ -155,7 +158,9 @@
             webname: 'ORDER_AUDIT', // 审核
             btnclick: () => {
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               console.log(self.selection);
               if (self.selection.length) {
                 let arr = self.selection.map((item) => ({ id: item.ID, bill_no: item.BILL_NO }));
@@ -232,7 +237,9 @@
             webname: 'returnModifyWarehouse', // 改退回仓库
             btnclick: () => {
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               if(!self.selection.length){
                 self.$OMS2.omsUtils.msgTips(self, 'warning', 'l0');
                 return;
@@ -269,7 +276,9 @@
             webname: 'returnModifyLogistics', // 改退回物流
             btnclick: () => {
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               if(!self.selection.length){
                 self.$OMS2.omsUtils.msgTips(self, 'warning', 'l0');
                 return;
@@ -310,7 +319,9 @@
             webname: 'OC_ORDER_ADD_LABEL',  //添加标记
             btnclick:()=>{
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               if(!self.selection.length){
                 self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要标记的单据' , 0);
                 return;
@@ -333,7 +344,9 @@
             webname: 'OC_ORDER_CANCEL_LABEL',  //取消标记
             btnclick:()=>{
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               if(!self.selection.length){
                 self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要标记的单据' , 0);
                 return;
@@ -356,7 +369,9 @@
             webname: 'orderExport', //导出
             btnclick:()=>{
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               const ids = self.selection.map(item=>item.ID);
               if(self.selection.length){
                 console.log('导出');
@@ -380,7 +395,9 @@
             webname: 'returnOrderExport', //导出
             btnclick:()=>{
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               const ids = self.selection.map(item=>item.ID);
               if(self.selection.length){
                 console.log('导出');
@@ -495,50 +512,39 @@
             current: 1,
             pageSizeOpts: [],
           },
+          renderParams:(cellData)=> {
+            if (cellData.field == 'ORDER_TAG') {
+                return {
+                    renderContainer: 'CellRenderByFunction',
+                    renderComponent: (h, params) => {
+                        console.log(params);
+                        return h('div', {
+                            domProps: {
+  
+                            }
+                        },
+                            params.row.ORDER_TAG.map(item => h('span', {
+                                domProps: {
+                                    innerText: item.text
+                                },
+                                style: {
+                                    border: `1px solid${item.clr}`,
+                                    color: item.clr,
+                                    margin: '0 2px',
+                                    borderRadius: '6px',
+                                    padding: '2px'
+                                }
+                            }))
+                        )
+                    }
+                }
+            }
+        },
         },
         dynamicData: {},
         modifyWarehouse:{
           componentData:{}
         },
-        tabth: [],
-        row: [],
-        pagenation: {
-          // 设置总条数
-          total: 0,
-          // 条数
-          pageSize: 10,
-          // 页数
-          current: 1,
-          pageSizeOpts: [],
-        },
-        renderParams:(cellData)=> {
-          if (cellData.field == 'ORDER_TAG') {
-              return {
-                  renderContainer: 'CellRenderByFunction',
-                  renderComponent: (h, params) => {
-                      console.log(params);
-                      return h('div', {
-                          domProps: {
-
-                          }
-                      },
-                          params.row.ORDER_TAG.map(item => h('span', {
-                              domProps: {
-                                  innerText: item.text
-                              },
-                              style: {
-                                  border: `1px solid${item.clr}`,
-                                  color: item.clr,
-                                  margin: '0 2px',
-                                  borderRadius: '6px',
-                                  padding: '2px'
-                              }
-                          }))
-                      )
-                  }
-              }
-          }
-      },
       };
     },
     watch: {},
@@ -608,11 +614,16 @@
               // 存储表格数据
               self.agTableConfig.pagenation.pageSizeOpts = data.PAGE_INFO.SIZE_GROUP;
               self.agTableConfig.pagenation.pageSize = data.PAGE_INFO.DEFAULT_SIZE;
-              columns.forEach(item=>{item['displayName'] = item.headerName;});
-              columns.unshift({"headerName":"序号","field":"index","sort":10,"displayName":"序号",checkboxSelection:true})
+              if(self.vueAgTable){
+                columns.forEach(item=>{item['displayName'] = item.headerName;});
+                columns.unshift({"headerName":"序号","field":"index","sort":10,"displayName":"序号",checkboxSelection:true , pinned: 'left'})
+              }
               self.agTableConfig.columnDefs = columns;
               self.agTableConfig.rowData = rowData;
-              // self.$refs.agGridChild.agGridTable(columns, rowData);
+              if(!self.vueAgTable){
+                self.$refs.agGridChild.agGridTable(columns, rowData);
+              }
+              
               self.tabList = data.TAB_LABEL; // tabs赋值
               self.labelValue = data.TAB_LABEL[0].value;
               self.query();
@@ -847,7 +858,9 @@
             self.agTableConfig.pagenation.total = data.COUNT;
             data.ITEMS.forEach((item , index)=>item['index'] = index+1)
             self.agTableConfig.rowData = data.ITEMS;
-            // self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
+            if(!self.vueAgTable){
+              self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
+            }
           }
           self.loading = false;
         });
@@ -951,7 +964,9 @@
       },
       urgentShipment() {
         const self = this;
-        self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+        if(!self.vueAgTable){
+          self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+        }
         const IDS = self.selection.map((item) => item.ID);
         if (!IDS.length) {
           self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要打标的单据!', 0);
@@ -987,7 +1002,9 @@
       },
       returnConfirm(){  //退货确认
         let self = this;
-        self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+        if(!self.vueAgTable){
+          self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+        }
         self.service.orderCenter.returnConfirmCheck({ID:self.selection[0].ID}).then(res=>{
           console.log(res);
           if(res.data.code == 0){
@@ -1055,6 +1072,10 @@
             self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0)
           }
         })
+      },
+      onSelectionChange(data){
+        console.log(data);
+        this.selection = data;
       }
     },
   };
