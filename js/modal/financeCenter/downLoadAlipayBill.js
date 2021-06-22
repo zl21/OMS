@@ -104,6 +104,7 @@
                 isfk: true, // 是否有fk键
                 isnotnull: true, // 是否必填
                 isuppercase: false, // 是否转大写
+                serviceId: '/r3-ac',
                 length: 65535, // 最大长度是多少
                 name: '支付宝账户名称', // input前面显示的lable值
                 readonly: false, // 是否可编辑，对应input   readonly属性

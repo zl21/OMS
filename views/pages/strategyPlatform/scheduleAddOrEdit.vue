@@ -1,10 +1,10 @@
 <template>
   <!-- 档期日程规划 -->
-  <div class="wphAddOrEdit public-main customized-detail" v-loading="loading">
+  <div class="wphAddOrEdit customized-detail" v-loading="loading">
     <div class="buttons customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content customized-detail-main">
+    <div class="customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           基本信息
@@ -68,6 +68,7 @@
         footer-hide
         :width="dialogInfo.width"
         mask
+        class-name="ark-dialog"
       >
         <scheduleFormDialog 
           ref="dialogForm"
