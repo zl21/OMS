@@ -333,16 +333,13 @@ class commonUtils {
       TYPE: params.type,
     }
     // console.log('this[arrry].buttons===', this[arrry].buttons)
-    const { TYPE } = params
-    if (TYPE != 'OBJ' && self[array] == undefined) return
+    if (self[array] == undefined) return
     self.service.common.fetchActionsInCustomizePage(query).then((res) => {
       let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
       independent = result
       if (isIndependent) {
+        self[array] = JSON.parse(JSON.stringify(result));
         return independent
-      }
-      if (TYPE == 'OBJ') {
-        return result
       } else {
         const a = []
         self[array].buttons.forEach((item) => {
@@ -376,8 +373,8 @@ class commonUtils {
           })
         })
         self[array].buttons = [...c, ...a]
-        self[array].loading = false
       }
+      self[array].loading = false
     }).catch(e => {
       if (self[array] != undefined) self[array].loading = false;
     })
