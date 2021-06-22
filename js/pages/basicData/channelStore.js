@@ -141,6 +141,7 @@ export default {
           btnsite: 'right', // 按钮位置 (right , center , left)
           buttons: [
             {
+              type:'primary',
               webname: 'order_fund', // 返回
               text: '添加',
               btnclick: () => {
@@ -149,6 +150,7 @@ export default {
               }
             },
             {
+              type:'warning',
               webname: 'order_fund', // 返回
               text: '删除',
               btnclick: () => {
@@ -217,14 +219,14 @@ export default {
                 this.logicQuery();
               }
             },
-            {
-              style: 'checkbox',
-              label: '自动分配',
-              value: 'IS_AUTO_ASSIGN',
-              disabled: false,
-              dataAcessKey: 'IS_AUTO_ASSIGN',
-              width: '6'
-            }
+            // {
+            //   style: 'checkbox',
+            //   label: '自动分配',
+            //   value: 'IS_AUTO_ASSIGN',
+            //   disabled: false,
+            //   dataAcessKey: 'IS_AUTO_ASSIGN',
+            //   width: '6'
+            // }
           ],
           formValue: {
             CP_C_STORE_ID: '', // 逻辑仓id
