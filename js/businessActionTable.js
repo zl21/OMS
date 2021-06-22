@@ -273,6 +273,10 @@ export default {
     componentData() {
       return this.jordanTableConfig.componentData
     },
+    // 
+    formDataNumber(){
+      return this.jordanTableConfig.businessFormConfig.formData.length
+    }
   },
   mounted() {
     const _self = this

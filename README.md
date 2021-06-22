@@ -223,5 +223,5 @@
 | v1.1.79 | 新增vue-ag-table |
 | v1.1.80 | businessForm-ckeckbox-onlyBox取值修复 |
 | v1.1.81 | 配置优化 |
-| v1.1.82 | 调整switchList组件样式 |
-| v1.1.83 | vueAb样式调整 |
+| v1.1.82 | 调整switchList组件样式｜vueAb样式调整|
+| v1.1.83 | businessActionTable form+button样式修改 |
