@@ -275,7 +275,10 @@ export default {
     },
     // 
     formDataNumber(){
-      return this.jordanTableConfig.businessFormConfig ? this.jordanTableConfig.businessFormConfig.formData.length : 1
+      return this.jordanTableConfig.businessFormConfig ? this.jordanTableConfig.businessFormConfig.formData.length : 0
+    },
+    layout(){
+      return this.jordanTableConfig.businessButtonConfig.layout ? !this.jordanTableConfig.businessButtonConfig.layout : true
     }
   },
   mounted() {
