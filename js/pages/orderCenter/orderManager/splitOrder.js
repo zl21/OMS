@@ -287,7 +287,7 @@ export default {
         self.$Message.warning($i18n.t('modalTips.cm')); // 没有可拆分的订单
         return;
       }
-      if(self.onSelectData.length == self.data[0].length){
+      if(self.onSelectData.length == self.data[0].length && self.data[0].every(item => item.waiting_split_num == item.split_num)){
         self.$Message.warning('不能一次将所有的数据添加至待拆单区!'); // 没有可拆分的订单
         return;
       }
@@ -347,6 +347,10 @@ export default {
       const self = this;
       if (self.data.length <= 1) {
         self.$Message.warning($i18n.t('modalTips.co')); // 请先选择拆单明细添加到待拆单，再进行拆单
+        return;
+      }
+      if(self.data[0].some(item=>item.waiting_split_num!=item.split_num)){
+        self.$Message.warning('请将需要拆分的单据添加到待拆单里!'); // 请先选择拆单明细添加到待拆单，再进行拆单
         return;
       }
       const { data: { code, message } } = await this.service.orderCenter.saveSplitOrderInfo({ data: self.data });
