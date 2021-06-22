@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-18 17:02:53
- * @LastEditTime: 2021-06-22 14:28:52
+ * @LastEditTime: 2021-06-22 17:14:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/strategyPlatform/specialLogistics.vue
@@ -59,12 +59,13 @@
               <div class="content-li-item-left">
                 <Button type="info" @click="fnseek">添加商品</Button>
                 <div class="content-li-item-left-a">
-                  <Table
-                    width="550"
-                    border
-                    :columns="columns2"
-                    :data="data3"
-                  ></Table>
+           
+
+                  <businessActionTable
+                    :jordan-table-config="tableConfig3"
+                    @on-page-change="tablepageA"
+                    @on-page-size-change="tablesizeA"
+                  />
                 </div>
               </div>
             </div>
@@ -72,16 +73,7 @@
         </Panel>
       </Collapse>
 
-      <!-- <Collapse v-model="panelDefaultValue2">
-        
-        <Panel name="panel_baseInfo2" >
-          
-        </Panel>
 
-          <div class="subtablePart" v-show="labelDefaultValue != 'PROPERTY'">
-          <subTable :component-data="subTableConfig"></subTable>
-          </div>
-      </Collapse> -->
       <div class="customized-detail-table">
         <businessLabel
           :label-list="labelList"
@@ -93,8 +85,8 @@
           <businessButton :btn-config="btnConfig1" />
           <businessActionTable
             :jordan-table-config="tableConfig2"
-            @on-page-change="tablepage2"
-            @on-page-size-change="tablesize2"
+            @on-page-change="tablepageB"
+            @on-page-size-change="tablesizeB"
             @on-select="data1select"
           />
         </div>
