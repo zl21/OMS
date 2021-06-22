@@ -220,3 +220,4 @@
 | v1.1.76 | businessForm-fkinput失焦 |
 | v1.1.77 | tableSku查询接口-1处理 |
 | v1.1.78 | 问号小图标 |
+| v1.1.79 | 新增vue-ag-table |
