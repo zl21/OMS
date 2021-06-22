@@ -44,15 +44,15 @@ export default {
       //监听包裹属性
       handler(val) {
         val && this.changeCount++;
-        console.log(this.changeCount);
+       // console.log(this.changeCount);
       },
       deep: true
     },
-    data3: {
+   "tableConfig3.data": {
       //监听指定商品
       handler(val) {
         val && this.changeCount++;
-        console.log(this.changeCount);
+        // console.log(this.changeCount);
       },
       deep: true
     },
@@ -60,7 +60,7 @@ export default {
       //监听仓库物流
       handler(val) {
         val && this.changeCount++;
-        console.log(this.changeCount);
+       // console.log(this.changeCount);
       },
       deep: true
     }
@@ -660,6 +660,67 @@ export default {
         pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       },
+      tableConfig3: {
+        indexColumn: false,
+        isShowSelection: false,
+        columns: [
+          {
+            title: '序号',
+            key: 'index'
+          },
+          {
+            title: 'SPU编码',
+            key: 'psCProEcode'
+          },
+          {
+            title: 'SKU编码',
+            key: 'psCSkuEcode'
+          },
+          {
+            title: 'SPU名称',
+            key: 'psCProEname'
+          },
+          {
+            title: 'SKU名称',
+            key: 'psCSkuEname'
+          },
+          {
+            title: '操作',
+            key: 'action',
+            fixed: 'right',
+            render: (h, params) => {
+              return h('div', [
+                h(
+                  'Button',
+                  {
+                    props: {
+                      type: 'text',
+                      size: 'small'
+                    },
+                    on: {
+                      click: () => {
+                        this.deleteSku(params.row.id);
+                      }
+                    }
+                  },
+                  '删除'
+                )
+              ]);
+            }
+          }
+        ],
+        data: [],
+        pageShow: true, // 控制分页是否显示
+        btnsShow: false, // 控制操作按钮是否显示
+        searchInputShow: false, // 控制搜索框是否显示
+        width: '', // 表格宽度
+        height: '', // 表格高度
+        border: true, // 是否显示纵向边框
+        total: 0, // 设置总条数
+        current: 1,
+        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSize: 10, // 每页条数
+      },
       columnsCity: [
         {
           title: '省',
@@ -707,8 +768,8 @@ export default {
       customizedModuleName: '',
       tableCURRENT: 1,
       tableSIZE: 10,
-      tableCURRENT2: 1,
-      tableSIZE2: 10,
+      // tableCURRENT2: 1,
+      // tableSIZE2: 10,
       total1: 10,
       total2: 10,
       isactive: '',
@@ -849,9 +910,9 @@ export default {
     //商品属性删除
     deleteSku(id) {
       if (this.id == "-1") {
-        for (var i = 0; i < this.data3.length; i++) {
-          if (this.data3[i].id == id) {
-            this.data3.splice(i, 1);
+        for (var i = 0; i < this.tableConfig3.data.length; i++) {
+          if (this.tableConfig3.data[i].id == id) {
+            this.tableConfig3.data.splice(i, 1);
           }
         }
         return
@@ -879,22 +940,27 @@ export default {
     data1select(v) {
       this.table4Data = v;
     },
-    tablepage2(v) {
-      this.tableConfig2.pageSize = v;
+    tablepageA(v) {
+      console.log(v);
+      this.tableConfig3.current = v;
       this.queryProPages();
     },
-    tablesize2(v) {
+    tablesizeA(v) {
+      console.log(v);
+      this.tableConfig3.pageSize = v;
+      this.queryProPages();
+    },
+    tablepageB(v) {
+      console.log(v);
       this.tableConfig2.current = v;
-      this.queryProPages();
+      this.queryLogisticsWarehousePages();
     },
-    tablepage(v) {
+    tablesizeB(v) {
+      console.log(v);
       this.tableConfig2.pageSize = v;
-      this.queryProPages();
+      this.queryLogisticsWarehousePages();
     },
-    tablesize(v) {
-      this.tableConfig2.current = v;
-      this.queryProPages();
-    },
+  
     queryById() {
       //物流策略-特殊物流方案-主表信息查询
       let data = {
@@ -973,17 +1039,17 @@ export default {
     queryProPages() {
       let data = {
         ID: this.id,
-        CURRENT: this.tableConfig2.pageSize,
-        SIZE: this.tableConfig2.current
+        CURRENT:this.tableConfig3.current,
+        SIZE:  this.tableConfig3.pageSize
       };
       //物流策略-特殊物流方案-商品属性明细分页查询
       service.strategyPlatform.queryProPages(data).then(res => {
         if (res.data.code == 0) {
-          this.data3 = res.data.data.records.map((em, index) => {
-            em.index = index + 1;
+          this.tableConfig3.data = res.data.data.records.map((em, index) => {
+            em.index = index + 1 +(this.tableConfig3.current -1) *this.tableConfig3.pageSize;
             return em;
           });
-          this.total1 = res.data.data.total;
+          this.tableConfig3.total = res.data.data.total;
         }
       });
     },
@@ -991,8 +1057,8 @@ export default {
       //物流策略-特殊物流方案-仓库物流明细分页查询
       let data = {
         ID: this.id,
-        CURRENT: this.tableCURRENT2,
-        SIZE: this.tableSIZE2
+        CURRENT: this.tableConfig2.current,
+        SIZE:  this.tableConfig2.pageSize
       };
 
       service.strategyPlatform.queryLogisticsWarehousePages(data).then(res => {
@@ -1275,13 +1341,13 @@ export default {
         if (this.id != '-1') {
           this.fnSave(2);
         } else {
-          let arr = this.data3.concat(this.tableConfig.selectionData)
+          let arr = this.tableConfig3.data.concat(this.tableConfig.selectionData)
           var obj = {}
           var newArr = arr.reduce((cur, next) => {
             obj[next.id] ? "" : obj[next.id] = true && cur.push(next);
             return cur;
           }, [])
-          this.data3 = newArr.map((em, index) => {
+          this.tableConfig3.data = newArr.map((em, index) => {
             em.index = index + 1
             return em
           })
