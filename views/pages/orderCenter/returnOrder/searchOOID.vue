@@ -24,12 +24,7 @@
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
-import businessLabel from 'professionalComponents/businessLabel';
 import { setTimeout } from 'timers';
-import businessDialog from 'professionalComponents/businessDialog';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
-import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import dateUtil from '@/assets/js/__utils__/date.js';
 
 export default {
@@ -38,11 +33,7 @@ export default {
     businessButton,
     businessForm,
     businessActionTable,
-    businessDialog,
-    businessLabel,
-    businessStatusFlag
   },
-  mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {
       vmI18n: $i18n,
