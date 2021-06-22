@@ -226,3 +226,4 @@
 | v1.1.82 | 调整switchList组件样式｜vueAb样式调整|
 | v1.1.83 | businessActionTable form+button样式修改 |
 | v1.1.84 | 表格优化 |
+| v1.1.85 | businessActionTable form+button优化 |

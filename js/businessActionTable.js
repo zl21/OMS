@@ -275,7 +275,7 @@ export default {
     },
     // 
     formDataNumber(){
-      return this.jordanTableConfig.businessFormConfig.formData.length
+      return this.jordanTableConfig.businessFormConfig ? this.jordanTableConfig.businessFormConfig.formData.length : 1
     }
   },
   mounted() {
