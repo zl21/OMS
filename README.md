@@ -229,3 +229,4 @@
 | v1.1.85 | businessActionTable form+button优化 |
 | v1.1.86 | businessActionTable form+button优化1 |
 | v1.1.87 | businessActionTable form+button优化2 |
+| v1.1.88 | fkinputPlus动态接口网关(兼容SKX) |

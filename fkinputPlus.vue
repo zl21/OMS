@@ -18,7 +18,8 @@
       :content="itemdata.valuedata"
       :disabled="itemdata.istooltip ? !itemdata.valuedata : true"
       theme="light"
-      class="fk-tooltip">
+      class="fk-tooltip"
+    >
       <DropDownSelectFilter
         v-if="itemdata.fkdisplay === 'drp'"
         :single="true"
@@ -229,11 +230,10 @@ export default {
      */
     async getSelectData() {
       const query = this.handelParam();
-      const {
-        data: { code, data, message },
-      } = await axios.post("/r3-cp/p/cs/QueryList", query);
-      if (code == 0) {
-        const { row, tabth, totalRowCount } = data;
+      const { version, serviceId } = this.itemdata
+      const result = await this.service.common.QueryList(query, { serviceId: serviceId || 'r3-cp' });
+      if (result.data.code == 0) {
+        const { row, tabth, totalRowCount } = version == '1.4' ? result.data.data : result.data.datas
         tabth.map(it => it.isak && (it.show = true));
         this.data = {
           "start": 0,
@@ -245,10 +245,10 @@ export default {
     },
     async getFuzzySelectData(val) {
       const query = this.handelFuzzyParam(val);
-      const {
-        data: { code, data, message },
-      } = await axios.post("/r3-cp/p/cs/fuzzyquerybyak", query);
-      if (code == 0) {
+      const { version, serviceId } = this.itemdata
+      const result = await this.service.common.fuzzyquerybyak(query, { serviceId: serviceId || 'r3-cp' });
+      if (result.data.code == 0) {
+        const { row, tabth, totalRowCount } = version == '1.4' ? result.data.data : result.data.datas
         data.forEach((item) => {
           item.value = this.itemdata.columnsKey ? item[this.itemdata.columnsKey[0]] : item.value; // 模糊搜索失焦/选中后展示在input中的字符
         });
