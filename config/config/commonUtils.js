@@ -337,43 +337,47 @@ class commonUtils {
     self.service.common.fetchActionsInCustomizePage(query).then((res) => {
       let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
       independent = result
-      const a = []
-      self[array].buttons.forEach((item) => {
-        // 设置、收藏等图标按钮的配置
-        if (!item.text && item.icon) {
-          a.push(item);
-          // if(show_iconbj_setup.includes(self.$route.params.customizedModuleName)){ //暂时不过滤任何图标按钮
-          //   a.push(item)
-          // }else if(item.icon !== 'iconfont iconbj_setup'){
-          //   a.push(item);
-          // }
-
-        }
-      })
-
-      const c = []
-      result.forEach((element) => {
-        // 有下拉项的处理
-        if (element.child) {
-          this.buttonChild(element, self[array].buttons, c)
-        }
-        // 普通btn（无child）的处理
-        self[array].buttons.forEach((btn) => {
-          if (
-            btn.webname == element.webname ||
-            btn.webname.includes(element.webname)
-          ) {
-            btn.webid = element.webid
-            btn.text = element.webdesc
-            c.push(btn)
-          }
-        })
-      })
-      self[array].loading = false
       if (isIndependent) {
         return independent
       }
-      self[array].buttons = [...c, ...a]
+      const { TYPE } = params
+      if (TYPE == 'OBJ') {
+        return result
+      } else {
+        const a = []
+        self[array].buttons.forEach((item) => {
+          // 设置、收藏等图标按钮的配置
+          if (!item.text && item.icon) {
+            a.push(item);
+            // if(show_iconbj_setup.includes(self.$route.params.customizedModuleName)){ //暂时不过滤任何图标按钮
+            //   a.push(item)
+            // }else if(item.icon !== 'iconfont iconbj_setup'){
+            //   a.push(item);
+            // }
+
+          }
+        })
+        const c = []
+        result.forEach((element) => {
+          // 有下拉项的处理
+          if (element.child) {
+            this.buttonChild(element, self[array].buttons, c)
+          }
+          // 普通btn（无child）的处理
+          self[array].buttons.forEach((btn) => {
+            if (
+              btn.webname == element.webname ||
+              btn.webname.includes(element.webname)
+            ) {
+              btn.webid = element.webid
+              btn.text = element.webdesc
+              c.push(btn)
+            }
+          })
+        })
+        self[array].buttons = [...c, ...a]
+        self[array].loading = false
+      }
     })
   }
   static buttonChild(ele, btns, arr) {
@@ -1012,9 +1016,9 @@ class commonUtils {
   static tabHref = (_self, params, extendObj = {}) => {
     // 返回--要传固定id
     const selection = [];
-  if(!_self.vueAgTable){
-    selection = _self.$refs.agGridChild.AGTABLE.getSelect();
-  } // 获取勾行数据;
+    if (!_self.vueAgTable) {
+      selection = _self.$refs.agGridChild.AGTABLE.getSelect();
+    } // 获取勾行数据;
     let id = params.id;
     if (params.id === 'id') {
       id = selection[0].ID;
