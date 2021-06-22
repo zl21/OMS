@@ -107,7 +107,7 @@ export default {
           oneObj: (val) => {
             // 选中触发事件
             console.log('val::', val);
-            if (!val.pid) return;
+            // if (!val.pid) return;
             this.formConfig.formValue.PARENT_ID = val.pid;
             this.masterModifyData('PARENT_ID', 'master');
           },
@@ -322,31 +322,20 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             itemdata: {
-              col: 1,
               colid: 165798, // 当前字段的ID
               colname: 'BS_C_EXTRA_ATTRIBUTE_DEF_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
-              inputname: 'BS_C_EXTRA_ATTRIBUTE_DEF_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
               name: '自定义属性', // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
-              reftableid: 10091, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
               valuedata: '', // 这个是选择的值
               pid: '',
             },
             oneObj: (val) => {
               // 选中触发事件
               console.log('val1::', val);
-              if (!val.pid) return;
+              // if (!val.pid) return;
               this.IDS = val.pid.split(',');
             },
           },],
