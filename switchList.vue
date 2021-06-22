@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-06-18 11:28:58
+ * @LastEditTime: 2021-06-22 14:34:14
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-business-components/switchList.vue
+-->
 <template>
   <div class="content-li-item switchList">
     <label style="width: 130px;">{{switchList.label}}:</label>
@@ -63,6 +71,7 @@ export default {
     justify-content: flex-start;
     .content-li-item-left-a {
       width: 100%;
+      padding: 5px;
     }
   }
 }
