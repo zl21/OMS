@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-21 10:17:52
- * @LastEditTime: 2021-06-22 10:37:04
+ * @LastEditTime: 2021-06-22 13:45:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/js/vueAgTable.js
@@ -19,7 +19,7 @@ export default {
         agTableConfig:{
             type:Object,
             default: {}
-        }
+        },
     },
     data() {
         return {

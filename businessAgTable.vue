@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-21 10:17:42
- * @LastEditTime: 2021-06-22 10:34:26
+ * @LastEditTime: 2021-06-22 13:50:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/vueAgTable.vue
@@ -10,12 +10,12 @@
     <div class="vueAgTable">
         <commonTableByAgGrid
         ref="agGrid"
-        height="500px"
+        :height="agTableConfig.tableHeight"
         :options="options"
         :data="agTableConfig.rowData"
         :columns="agTableConfig.columnDefs"
         @grid-ready="gridReady"
-        :renderParams="renderParams"
+        :renderParams="agTableConfig.renderParams"
         @on-row-dblclick="tableRowDbclick"
         @on-sort-change="tableSortChange"
         @on-selection-change="tableSelectedChange"
