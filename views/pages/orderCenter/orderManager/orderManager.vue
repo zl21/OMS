@@ -58,7 +58,6 @@
       @on-row-dblclick="onRowDblclick"
       @on-page-change="pageChange"
       @on-page-size-change="pageSizeChange"
-      @on-sort-changed="onSortChanged"
       @on-selection-change="onSelectionChange"
     />
       <!-- <loading :loading="loading" /> -->

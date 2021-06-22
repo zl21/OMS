@@ -968,9 +968,6 @@
         self.agTableConfig.pagenation.current = val;
         self.query();
       },
-      onSortChanged(val) {
-        console.log(val);
-      },
       reset() {
         const self = this;
         self.agTableConfig.pagenation.current = 1;
