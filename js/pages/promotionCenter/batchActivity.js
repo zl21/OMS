@@ -50,7 +50,6 @@ export default {
             fkdisplay: 'drp', // 外键关联类型
             isfk: true, // 是否有fk键
             isnotnull: true, // 是否必填
-            // name: "店铺名称", // input前面显示的lable值
             name: $i18n.t('table_label.shopName'),
             readonly: false, // 是否可编辑，对应input   readonly属性
             valuedata: '', // 这个是选择的值
@@ -72,7 +71,6 @@ export default {
             fkdisplay: 'mrp',
             isfk: true,
             isnotnull: false,
-            // name: "排除省",
             name: $i18n.t('common.exclude_province'),
             readonly: false,
             valuedata: ''
@@ -225,22 +223,10 @@ export default {
      */
     validateModule() {
       const f1 = this.validate1();
-      if (f1.code === 0) {
-        this.stepsBar[0].finish = true;
-      } else {
-        this.stepsBar[0].finish = false;
-      }
+      this.stepsBar[0].finish = [0].includes(f1.code);
       const f2 = this.validate2();
-      if (f2.code === 0) {
-        this.stepsBar[1].finish = true;
-      } else {
-        this.stepsBar[1].finish = false;
-      }
-      if (this.stepsBar[0].finish && this.stepsBar[1].finish) {
-        this.stepsBar[2].finish = true;
-      } else {
-        this.stepsBar[2].finish = false;
-      }
+      this.stepsBar[1].finish = [0].includes(f2.code);
+      this.stepsBar[2].finish = this.stepsBar[0].finish && this.stepsBar[1].finish;
       return [f1, f2];
     },
     validate1() {
@@ -377,14 +363,9 @@ export default {
      * 保存草稿
      */
     async saveDraft() {
-      const [modulesValid1, modulesValid2] = this.validateModule();
-      if (modulesValid1.code === -1) {
-        this.$Message.error(modulesValid1.message);
-        return;
-      }
-      if (modulesValid2.code === -1) {
-        this.$Message.error(modulesValid2.message);
-        return;
+      const validateRes = this.validateModule();
+      for (const it of validateRes) {
+        if (it.code === -1) return this.$Message.error(it.message);
       }
       // const index = this.basic_info.activity_type + new Date().Format('yyyyMMddHHMMSS');
       const index = this.basic_info.activity_type + this.$comUtils.dateFormat(new Date() , 'yyyyMMddHHMMSS')
@@ -395,7 +376,6 @@ export default {
         index
       };
       this.loading = true;
-      // this.$R3loading.show(this.customizedModuleName);
       const formData = new URLSearchParams();
       formData.append('param', JSON.stringify(params));
       try {
@@ -409,35 +389,17 @@ export default {
           this.objid = String(data.objid) || -1;
           this.$nextTick(() => {
             $omsUtils.tabJump(3, this.objid, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
-            /* $store.commit(action, {
-              id: this.objid, // id
-              type: 'action', // 类型action
-              name: 'PM_C_PROM_ACTI_BATCH_ADD', // 文件名
-              // label: "批量新增促销活动", // tab中文名
-              label: $i18n.t('panel_label.batchAddPromotion'),
-              query: Object.assign({
-                id: this.objid, // id
-                tabTitle: $i18n.t('panel_label.batchAddPromotion')
-              }) // 带的参数
-            }); */
           });
         }
         this.loading = false;
-        // this.$R3loading.hide(this.customizedModuleName);
       } catch (error) {
         this.loading = false;
-        // this.$R3loading.hide(this.customizedModuleName);
       }
     },
     async publish() {
-      const [modulesValid1, modulesValid2] = this.validateModule();
-      if (modulesValid1.code === -1) {
-        this.$Message.error(modulesValid1.message);
-        return;
-      }
-      if (modulesValid2.code === -1) {
-        this.$Message.error(modulesValid2.message);
-        return;
+      const validateRes = this.validateModule();
+      for (const it of validateRes) {
+        if (it.code === -1) return this.$Message.error(it.message);
       }
       // const index = this.basic_info.activity_type + new Date().Format('yyyyMMddHHMMSS');
       const ids = [];
@@ -451,7 +413,6 @@ export default {
         }
       };
       this.loading = true;
-      // this.$R3loading.show(this.customizedModuleName);
       const formData = new URLSearchParams();
       formData.append('param', JSON.stringify(params));
 
@@ -461,19 +422,13 @@ export default {
         } = await this.service.promotionCenter.updatePmStatus(formData);
         if (code === 0) {
           this.$Message.success(message);
-          // let action = 'switchActiveTab';
-          // if (this.objid == -1) {
-          //   action = 'TabClose';
-          // }
           this.$nextTick(() => {
             this.getInitData(this.objid);
           });
         }
         this.loading = false;
-        // this.$R3loading.hide(this.customizedModuleName);
       } catch (error) {
         this.loading = false;
-        // this.$R3loading.hide(this.customizedModuleName);
       }
     },
     /**
@@ -484,17 +439,6 @@ export default {
       this.$destroy(true);
       // 返回列表的
       $omsUtils.tabJump(2, 31460113, 'CUSTOMIZED', 'PROMACTIQUERYLIST', { i8n: 1, tip: 'panel_label.promotionList' }, {}, 0)
-      /* const params = {
-        id: 31460113, // id
-        type: 'CUSTOMIZED',
-        name: 'PROMACTIQUERYLIST',
-        // label: "促销活动",
-        label: $i18n.t('panel_label.promotionList'),
-        query: Object.assign({
-          id: 31460113
-        }) // 带的参数
-      };
-      _self.$store.commit('customize/TabClose', params); */
     },
     /**
      * 滚动选中区域

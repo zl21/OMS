@@ -224,7 +224,7 @@ export default {
           CP_C_LOGISTICS_ID: '',
           EXPRESS_CODE: '',
           SYS_REMARK: '',
-          IS_RESERVED: '1',
+          IS_RESERVED: true,
         },
         ruleValidate: {
           BILL_TYPE: [{ required: true, message: ' ', trigger: 'blur' }],
@@ -268,7 +268,7 @@ export default {
             width: '6', // 所占宽度宽度
             rules: true,
             selectChange: (val) => {
-              this.modifyData("ORDER_TYPE", "master");
+              this.modifyData("BILL_TYPE", "master");
             },
           },
           {
@@ -328,7 +328,7 @@ export default {
             colname: 'IS_RESERVED', // '0'/'1'
             onlyBox: true,
             width: '6',
-            inputChange: () => {
+            checkboxChange: () => {
               this.modifyData("IS_RESERVED", "master");
             },
           },
@@ -708,7 +708,8 @@ export default {
                 this.exFormKey += 1;
                 this.labelList.find(it => it.value == '1').isShow = true;
                 this.formEmpty(this, 'formConfig', ['BILL_TYPE']);
-                this.formConfig.formValue.IS_RESERVED = '1'; // 默认值
+                this.formConfig.formValue.IS_RESERVED = true; // 默认值
+                this.modify.master.IS_RESERVED = true;
               });
             } else {
               this.showEx = false;
@@ -719,6 +720,9 @@ export default {
               this.DefaultValue = '0';
               this.formEmpty(this, 'formConfig', ['BILL_TYPE']);
               this.formEmpty(this, 'formConfigEx');
+              if (Object.keys(this.modify.master).includes('IS_RESERVED')) {
+                delete this.modify.master.IS_RESERVED
+              }
             }
             this.clearDetail += 1; // 清空明细
           },
@@ -1082,7 +1086,8 @@ export default {
         return;
       }
       const masterArr = Object.keys(self.modify.master);
-      if (masterArr.length) {
+      console.log('self.modify.master::', self.modify.master);
+      if (masterArr.length > 1) {
         this.$Modal.info({
           title: $i18n.t("modalTitle.tips"), // 提示
           content: "当前修改未保存，确定返回？",

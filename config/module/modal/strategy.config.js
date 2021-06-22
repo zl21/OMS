@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-06-07 20:40:40
- * @LastEditTime: 2021-06-16 14:34:32
- * @LastEditors: your name
+ * @LastEditTime: 2021-06-21 15:03:45
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/modal/strategy.config.js
  */
@@ -29,5 +29,8 @@ export default {
   },
   BATCHMODIFY: { //店铺策略》批量修改
     component: () => import('@/views/modal/strategyPlatform/batchModify.vue'), // 店铺同步库存策略-（导入-同步策略明细
+  },
+  TABLELIST_COPY: { //复制
+    component: () => import('@/views/modal/strategyPlatform/tablelist_copy.vue'), // 复制
   },
 };

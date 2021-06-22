@@ -62,8 +62,8 @@
                 let startTime = formValue.query_date;
                 startTime = dateUtil.getFormatDate(startTime, 'yyyy-MM-dd');
                 const param = {
-                  accountId: self.downLoadVipTimeOrderFormConfig.formData[0].itemdata.pid, // 店铺id 必传
-                  start_time: startTime,
+                  accountCode: self.downLoadVipTimeOrderFormConfig.formData[0].itemdata.pid, // 账户名称 必传
+                  startTime,
                   isDate: formValue.isDate,
                 };
                 const formdata = new FormData();
@@ -94,13 +94,13 @@
               isdisabled: false,
               itemdata: {
                 col: 1,
-                colid: 1700818734,
-                colname: 'ALIPAY_ACCOUNT_ID', // 当前字段的名称
+                colid: 182258,
+                colname: 'AC_F_ALIPAY_ACCOUNTMANAGE_ID', // 当前字段的名称
                 datelimit: 'all',
                 display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能
                 fkdisplay: 'drp', // 外键关联类型，mrp表示下拉多选
                 fkdesc: '账户名称',
-                inputname: 'ALIPAY_ACCOUNT_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
+                inputname: 'AC_F_ALIPAY_ACCOUNTMANAGE_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
                 isnotnull: true, // 是否必填
                 isuppercase: false, // 是否转大写

@@ -265,7 +265,8 @@ export default {
     // 取消
     cancel_simulation() {
       this.$destroy(true);
-      $store.commit('customize/TabClose', {
+      $omsUtils.tabJump(2, 2895, 'CUSTOMIZED', 'PROMACTIQUERYLIST', { i8n: 1, tip: 'panel_label.promotionList' }, {}, 1, 0)
+      /* $store.commit('customize/TabClose', {
         id: 2895, // id
         type: 'CUSTOMIZED', // 类型action
         name: 'PROMACTIQUERYLIST', // 文件名
@@ -274,16 +275,13 @@ export default {
         query: Object.assign({
           id: 2895
         }) // 带的参数
-      });
+      }); */
     },
     async execute_simulation() {
       const self = this;
       const checkSimulation = this.checkSimulation();
       if (checkSimulation.code == '-1') {
-        self.$message({
-          message: checkSimulation.message,
-          type: 'warning'
-        });
+        self.$Message.warning(checkSimulation.message);
         return;
       }
       //  仿真试算
@@ -301,11 +299,7 @@ export default {
         console.log('data', data);
         self.result_data = data.result;
         self.result_columns = data.cloumns;
-        self.$message({
-          type: 'success',
-          // message: "试算成功！",
-          message: $i18n.t('modalTips.t5')
-        });
+        self.$Message.success($i18n.t('modalTips.t5'));
       } else {
         self.result_data = [];
       }

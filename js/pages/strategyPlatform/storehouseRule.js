@@ -31,7 +31,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '区域明细',
+          label: '按收货地址',
           value: 'PROPERTY'
         },
         {
@@ -59,22 +59,7 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: this.fnCopy
           },
-          // {
-          //   text: '启用',
-          //   isShow: false,
-          //   disabled:false,
-          //   btnclick: () => {
-          //     this.fnSetisactive('Y');
-          //   }
-          // },
-          // {
-          //   text: '停用',
-          //   isShow: false,
-          //   disabled: false,
-          //   btnclick: () => {
-          //     this.fnSetisactive('N');
-          //   }
-          // },
+         
           {
             text: '下一步',
             isShow: false,
@@ -123,6 +108,7 @@ export default {
             value: 'ename',
             colname: 'ename',
             width: '8',
+            maxlength:15,
             disabled: false,
             inputChange: () => { }
           },
@@ -136,23 +122,23 @@ export default {
             width: '8',
             disabled: false,
             transfer: true,
-            onChange: (v) => {
+            onChange: () => {
 
             }
           },
           {
             style: 'date',
             label: '生效结束时间',
+            type: "datetime",
             value: 'endTime',
             colname: 'endTime',
             format: 'yyyy-MM-dd HH:mm:ss',
             width: '8',
-            vModelFormat: true,
             disabled: false,
+            transfer: true,
             onChange: () => {
+              if (!this.formConfig.formValue.endTime) return
               this.formConfig.formValue.endTime = dateUtil.getFormatDate(new Date(this.formConfig.formValue.endTime), 'yyyy-MM-dd') + " 23:59:59"
-
-              console.log(this.formConfig.formValue.endTime);
             }
           },
           {
@@ -267,7 +253,7 @@ export default {
           },
           {
             style: 'radio',
-            label: '区域类型', // 输入框前文字
+            label: '区域级别', // 输入框前文字
             value: 'areaLevel', // 输入框的值
             colname: 'areaLevel', // 输入框的值
             width: '8', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -290,10 +276,10 @@ export default {
             width: '8',
             disabled: true,
             switchChange: () => {
-              // let isactive = this.formConfig.formValue.isactive;
-              // this.qurefrom('beginTime')[0].disabled = isactive;
-              // this.qurefrom('endTime')[0].disabled = isactive;
-              //this.btnConfig2.buttons[0].disabled = isactive;
+              let isactive = this.formConfig.formValue.isactive;
+              this.qurefrom('beginTime')[0].disabled = isactive;
+              this.qurefrom('endTime')[0].disabled = isactive;
+              this.btnConfig2.buttons[0].disabled = isactive;
             }
           },
           {
@@ -302,6 +288,7 @@ export default {
             value: 'remark',
             colname: 'remark',
             width: '16',
+            maxlength:200,
             disabled: false,
             inputChange: () => { }
           }
@@ -406,13 +393,14 @@ export default {
 
       //ST_C_ORDER_WAREHOUSE  分仓规则
       if (customizedModuleName == 'ST_C_ORDER_WAREHOUSE') {
+        this.labelList[0].label = '按收货地址';
         this.labelList[1].value = "ST_C_ORDER_WAREHOUSE_LOG"
         this.qurefrom('cpCPhyWarehouseEname')[0].style = null;
         // 表示分仓策略》分仓规则
         if (customizedModuleId == 'New' || customizedModuleId == '-1' || customizedModuleId == 'NEW') {
-          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-          const data = { label: '分仓规则新增', name:keepAliveModuleName}; //当前界面模块名称 
-          this.$store.commit('global/modifycurrentLabel' , data)
+          // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          // const data = { label: '分仓规则新增', name:keepAliveModuleName}; //当前界面模块名称 
+          // this.$store.commit('global/modifycurrentLabel' , data)
 
           this.btnConfig.buttons.forEach(em => {
             if (em.text == '下一步') {
@@ -448,9 +436,9 @@ export default {
             }
           });
         } else {
-          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-          const data = { label: '分仓规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
-          this.$store.commit('global/modifycurrentLabel' , data)
+          // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          // const data = { label: '分仓规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
+          // this.$store.commit('global/modifycurrentLabel' , data)
           this.fninit(this.id);
           this.fntableData(this.id);
           this.pageShow = true; //显示明细表
@@ -469,14 +457,15 @@ export default {
         //CP_C_SHOP_IDS  type
         this.qurefrom('CP_C_SHOP_IDS')[0].style = null;
         this.qurefrom('type')[0].style = null;
-        this.labelList[0].label = '按收货地址';
+        this.labelList[0].label = '区域明细';
         this.labelList[1].value = "ST_ASSIGN_LOGISTICS_LOG"
         // 表示分物流策略》分物流规则
         if (customizedModuleId == 'New' || customizedModuleId == '-1' || customizedModuleId == 'NEW') {
-          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-          const data = { label: '分物流规则新增', name:keepAliveModuleName}; //当前界面模块名称 
-          this.$store.commit('global/modifycurrentLabel' , data)
+          // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          // const data = { label: '分物流规则新增', name:keepAliveModuleName}; //当前界面模块名称 
+          // this.$store.commit('global/modifycurrentLabel' , data)
           // 表示新增
+          this.formConfig.formValue.priority = '9'
           this.btnConfig.buttons.forEach(em => {
             if (em.text == '下一步') {
               em.isShow = true;
@@ -495,9 +484,9 @@ export default {
             this.id = '-1';
           }
         } else if (query.saveType && query.saveType == 2) {
-          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-          const data = { label: '分物流规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
-          this.$store.commit('global/modifycurrentLabel' , data)
+          // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          // const data = { label: '分物流规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
+          // this.$store.commit('global/modifycurrentLabel' , data)
 
           this.fninit(this.id);
           this.fntableData(this.id);
@@ -511,9 +500,9 @@ export default {
             }
           });
         } else {
-          const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-          const data = { label: '分物流规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
-          this.$store.commit('global/modifycurrentLabel' , data)
+          // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
+          // const data = { label: '分物流规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
+          // this.$store.commit('global/modifycurrentLabel' , data)
           this.fninit(this.id);
           this.fntableData(this.id);
           this.pageShow = true;
@@ -527,14 +516,16 @@ export default {
       }
     },
     lastStep() {
-      this.$store.commit('customize/TabOpen', {
-        id: '-1',
-        type: 'action',
-        name: this.customizedModuleName,
-        query: {
-          id: this.id
-        }
-      });
+    
+
+      this.$store.commit('global/tabOpen', {
+        type: 'C',
+        url: `/CUSTOMIZED/${this.customizedModuleName}/-1?id=${this.id}`,
+        label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
+        customizedModuleName: this.customizedModuleName,
+        customizedModuleId: '-1',
+        dynamicRoutingForCustomizePage:true
+      })
     },
     isfnSave() {
       //判断是什么情况下的保存
@@ -602,7 +593,6 @@ export default {
     },
 
     fnCopy() {
-
       this.$store.commit('global/tabOpen', {
         type: 'C',
         url: `/CUSTOMIZED/${this.customizedModuleName}/New?copy=${this.id}`,
@@ -611,8 +601,6 @@ export default {
         customizedModuleId: 'New',
         dynamicRoutingForCustomizePage:true
       })
-
-
 
     },
     qurefrom(key) {
@@ -831,28 +819,27 @@ export default {
           this.$Message.success(res.data.message);
 
           if ((this.id == "New" || this.id == "-1") && saveType == 1) {
-            this.$store.commit('customize/TabOpen', {
-              id: '-1',
-              type: 'action',
-              name: this.customizedModuleName,
-              query: {
-                id: res.data.data.objId
-              }
-            });
-
-
+            this.$store.commit('global/tabOpen', {
+              type: 'C',
+              url: `/CUSTOMIZED/${this.customizedModuleName}/-1?id=${res.data.data.objId}`,
+              label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
+              customizedModuleName: this.customizedModuleName,
+              customizedModuleId: '-1',
+              dynamicRoutingForCustomizePage:true
+            })
             return
           }
 
           if (saveType == 2) {
-            this.$store.commit('customize/TabOpen', {
-              id: res.data.data.objId,
-              type: 'action',
-              name: this.customizedModuleName,
-              query: {
-                saveType
-              }
-            });
+           
+            this.$store.commit('global/tabOpen', {
+              type: 'C',
+              url: `/CUSTOMIZED/${this.customizedModuleName}/${res.data.data.objId}?saveType=${saveType}`,
+              label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
+              customizedModuleName: this.customizedModuleName,
+              customizedModuleId: res.data.data.objId,
+              dynamicRoutingForCustomizePage:true
+            })
           }
           if (saveType == 1 && this.id != "-1") {
             this.changeCount = 0
@@ -893,26 +880,27 @@ export default {
           this.$Message.success(res.data.message);
 
           if ((this.id == "New" || this.id == "-1") && saveType == 1) {
-            this.$store.commit('customize/TabOpen', {
-              id: '-1',
-              type: 'action',
-              name: this.customizedModuleName,
-              query: {
-                id: res.data.data.objId
-              }
-            });
+
+            this.$store.commit('global/tabOpen', {
+              type: 'C',
+              url: `/CUSTOMIZED/${this.customizedModuleName}/-1?id=${res.data.data.objId}`,
+              label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
+              customizedModuleName: this.customizedModuleName,
+              customizedModuleId: '-1',
+              dynamicRoutingForCustomizePage:true
+            })
             return
           }
 
           if (saveType == 2) {
-            this.$store.commit('customize/TabOpen', {
-              id: res.data.data.objId,
-              type: 'action',
-              name: this.customizedModuleName,
-              query: {
-                saveType
-              }
-            });
+            this.$store.commit('global/tabOpen', {
+              type: 'C',
+              url: `/CUSTOMIZED/${this.customizedModuleName}/${res.data.data.objId}?saveType=${saveType}`,
+              label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
+              customizedModuleName: this.customizedModuleName,
+              customizedModuleId: res.data.data.objId,
+              dynamicRoutingForCustomizePage:true
+            })
           }
           if (saveType == 1 && this.id != "-1") {
             this.changeCount = 0

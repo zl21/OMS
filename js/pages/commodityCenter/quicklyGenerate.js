@@ -38,7 +38,7 @@ export default {
                 id: this.spuid,
                 type: 'action',
                 name: 'PS_C_PRO',
-                label: '快速生成', // 额外退款编辑
+                label: '商品SPU编辑', // 额外退款编辑
               });
             }
           }

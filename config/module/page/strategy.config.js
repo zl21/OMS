@@ -60,7 +60,7 @@ export default {
   },
   ST_C_ASSIGN_LOGISTICS: {
     component: () => import('allpages/strategyPlatform/storehouseRule'),
-    labelName: '物流规则',
+    labelName: '分物流规则',
     isList: true
   },
   ST_C_SPECIAL_ASSIGN_LOGISTICS: {

@@ -39,14 +39,17 @@
     >
       <div class="customized-modal">
         <!-- 步骤条 -->
-        <Steps :current="2" size="small">
-          <Step
-            v-for="(item, index) in steps"
-            :key="index"
-            :title="item.name"
-            :status="item.status"
-          />
-        </Steps>
+        <div class="steps-style">
+          <Steps :current="2" size="small">
+            <Step
+              v-for="(item, index) in steps"
+              :key="index"
+              :title="item.name"
+              :status="item.status"
+            />
+          </Steps>
+        </div>
+
         <!-- 店铺授权 -->
         <div v-if="shopform" class="shop-one-show">
           <FormLayout
@@ -77,9 +80,7 @@
       :class-name="'ark-dialog'"
     >
       <div class="customized-modal">
-        <p class="tips">
-          <span class="iconfont icon-tishi1"></span>是否授权成功？
-        </p>
+        <p class="tips"><span class="iconfont"></span>是否授权成功？</p>
         <businessButton class="modal-footer" :btn-config="authoriBtnConfig" />
       </div>
     </Modal>
@@ -95,6 +96,13 @@ export default authorize
 <style lang="less" scoped>
 @import "~@/css/pages/basicData/authorize.less";
 @import "~omsTheme/public.less";
+.customized-modal {
+  .tips {
+    padding-top: 10%;
+    text-align: center;
+  }
+}
+
 .authorize-text {
   text-align: center;
   margin-top: 35px;
@@ -104,6 +112,10 @@ export default authorize
 }
 .authorize-list {
   padding: 12px;
+}
+.steps-style {
+  position: relative;
+  left: 5.5%;
 }
 // 头部
 .authorize-list-heard {

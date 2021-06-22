@@ -175,7 +175,7 @@ class DropDownConfig {
       return
     }
 
-    if (self.selection.ORDER_STATUS == 2 || self.selection.ORDER_STATUS == 1) { 
+    if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) { 
       self.publicBouncedConfig.name = 'addGiftDialog'
       self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
       self.publicBouncedConfig.confirmTitle = '批量替换下挂商品'
@@ -189,7 +189,7 @@ class DropDownConfig {
         self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
       }, 100)
     }else{
-      self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
+     self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
       return
     }
   
@@ -209,7 +209,7 @@ class DropDownConfig {
       return
     }
 
-    if (self.selection.ORDER_STATUS == 2 || self.selection.ORDER_STATUS == 1) { 
+    if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) { 
       self.publicBouncedConfig.name = 'addGiftDialog'
       self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
       self.publicBouncedConfig.confirmTitle = '删除赠品'
@@ -243,7 +243,7 @@ class DropDownConfig {
       self.$OMS2.omsUtils.msgTips(self, 'warning', 'd8')
       return
     }
-    if (self.selection.ORDER_STATUS == 2 || self.selection.ORDER_STATUS == 1) { //
+    if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) { //
       self.publicBouncedConfig.name = 'addGiftDialog'
     self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
     self.publicBouncedConfig.confirmTitle = '添加赠品'
@@ -589,7 +589,7 @@ class DropDownConfig {
     if (ids[0].ORDER_STATUS == 1||ids[0].ORDER_STATUS == 2) {
       this.successHandler(ids, 'replaceConfig', 'product', 'replaceTheGoods')
     }else{
-      self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
+     self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
       self.btnConfig.loading = false
       return
     }
