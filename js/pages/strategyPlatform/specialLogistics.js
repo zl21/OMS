@@ -261,6 +261,7 @@ export default {
             label: '优先级',
             colname: 'priority',
             width: '12',
+            regx: /^[0-9]*$/,
             disabled: false,
             inputChange: () => { }
           },
@@ -572,8 +573,8 @@ export default {
             name: '商品数量',
             symbol: '至',
             pkgAttributeType: 1,
-            regx: /^[+]{0,1}(\d+)$/g,
-            regx2: /^[+]{0,1}(\d+)$/g,
+            regx: /^\d+(\.\d{0,2})?$/,
+            regx2: /^\d+(\.\d{0,2})?$/,
             type: '件'
           },
           {
@@ -589,8 +590,8 @@ export default {
             name: '单据金额',
             pkgAttributeType: 2,
             symbol: '至',
-            regx: /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*)|0)$/g,
-            regx2: /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*)|0)$/g,
+            regx: /^\d+(\.\d{0,2})?$/,
+            regx2: /^\d+(\.\d{0,2})?$/,
             type: '元'
           },
           {
@@ -606,8 +607,8 @@ export default {
             pkgAttributeType: 3,
             name: '包裹重量',
             symbol: '至',
-            regx: /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*)|0)$/g,
-            regx2: /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*)|0)$/g,
+            regx: /^\d+(\.\d{0,2})?$/,
+            regx2: /^\d+(\.\d{0,2})?$/,
             type: 'kg'
           }
         ]
@@ -655,7 +656,7 @@ export default {
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        current:1,
+        current: 1,
         pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       },
@@ -973,7 +974,7 @@ export default {
       let data = {
         ID: this.id,
         CURRENT: this.tableConfig2.pageSize,
-        SIZE:  this.tableConfig2.current
+        SIZE: this.tableConfig2.current
       };
       //物流策略-特殊物流方案-商品属性明细分页查询
       service.strategyPlatform.queryProPages(data).then(res => {
@@ -1124,6 +1125,8 @@ export default {
           this.specialAssignLogisticsProItemList.push(obj);
         });
         data.specialAssignLogisticsProItemList = this.specialAssignLogisticsProItemList;
+        this.tableConfig.selectionData = []
+
       } else if (type == 3) {
         data.specialAssignLogistics = { id: this.id };
         data.specialAssignLogisticsWarehouseItemList = this.specialAssignLogisticsWarehouseItemList;
@@ -1283,9 +1286,13 @@ export default {
             return em
           })
         }
+        this.modal3 = false;
+      } else {
+        this.$Message.warning('请选择需要添加的数据');
       }
 
-      this.modal3 = false;
+
+
     },
     onSelect(e) {
       // e为选中的数组对象RowArr
@@ -1325,6 +1332,8 @@ export default {
     fnseek() {
       this.tableConfig.ECODE = '' // 编码查询条件
       this.tableConfig.ENAME = ''// 名称查询条件
+      this.tableConfig.pageIndex = 1
+      this.tableConfig.pageSize = 10
       this.fntable();
     },
     fntable() {
@@ -1362,7 +1371,7 @@ export default {
       this.subTableConfig = {
         centerName: 'strategyPlatform',
         tablename: this.labelDefaultValue,
-        pageShow:true,
+        pageShow: true,
         objid: this.id
       };
     },
