@@ -2,7 +2,13 @@
 
 .ark-form-item-content {
   position: relative;
+  .ark-checkbox-group {
+    input{
+      vertical-align: middle;
+    }
+  }
 }
+
 
 .orderManageEdit {
   display: flex;
@@ -139,13 +145,6 @@
   font-size: 18px !important;
   line-height: 10px !important;
 }
-
-/* 日期组件样式 */
-// html *,
-// :after,
-// :before {
-//   box-sizing: border-box;
-// }
 
 /* 插槽字段的必填标识 */
 .req-star .ark-form-item-label::before {
