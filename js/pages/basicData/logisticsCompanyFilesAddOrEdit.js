@@ -152,6 +152,7 @@ export default {
         businessButtonConfig: {
           typeAll: 'default',
           buttons: [{
+              type:'primary',
               text: '添加',
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -159,6 +160,7 @@ export default {
               },
             },
             {
+              type:'warning',
               text: '删除',
               btnclick: () => {
                 this.deleteHandel();

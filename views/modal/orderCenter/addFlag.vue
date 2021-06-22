@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-08 14:29:58
- * @LastEditTime: 2021-06-16 14:18:00
+ * @LastEditTime: 2021-06-22 14:34:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/modal/orderCenter/addFlag.vue
@@ -93,6 +93,7 @@ export default {
         btnsite: 'left',
         buttons: [
           {
+            type:'primary',
             text: '添加', // 添加
             btnclick: () => {
               this.addList();

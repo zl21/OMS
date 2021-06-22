@@ -289,6 +289,7 @@ export default {
           typeAll: 'default',
           btnsite: 'right', // 按钮位置 (right , center , left)
           buttons: [{
+              type:'primary',
               webname: 'order_fund', // 返回
               text: '添加',
               disabled: false,
@@ -297,6 +298,7 @@ export default {
               },
             },
             {
+              type:'warning',
               webname: 'order_fund', // 返回
               text: '删除',
               disabled: false,
@@ -397,6 +399,7 @@ export default {
           typeAll: 'default',
           btnsite: 'right', // 按钮位置 (right , center , left)
           buttons: [{
+              type:'primary',
               webname: 'order_fund', // 返回
               text: '添加',
               disabled:false,
@@ -405,6 +408,7 @@ export default {
               },
             },
             {
+              type:'warning',
               webname: 'order_fund', // 返回
               text: '删除',
               disabled:false,

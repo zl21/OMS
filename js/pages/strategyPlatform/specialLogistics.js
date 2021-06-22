@@ -133,10 +133,12 @@ export default {
         typeAll: 'default',
         buttons: [
           {
+            type:'primary',
             text: '添加',
             btnclick: this.foottable
           },
           {
+            type:'warning',
             text: '删除',
             btnclick: this.deleteLogistics
           }

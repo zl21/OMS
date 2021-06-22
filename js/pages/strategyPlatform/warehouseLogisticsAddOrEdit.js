@@ -273,6 +273,7 @@ export default {
         typeAll: 'default',
         buttons: [
           {
+            type:'primary',
             text: '添加',
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -281,6 +282,7 @@ export default {
             }
           },
           {
+            type:'warning',
             text: '删除',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
