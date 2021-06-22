@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-18 17:02:53
- * @LastEditTime: 2021-06-21 14:59:44
+ * @LastEditTime: 2021-06-22 14:28:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/strategyPlatform/specialLogistics.vue
@@ -91,22 +91,6 @@
         <div slot="content" v-show="labelDefaultValue == 'PROPERTY'">
           <businessForm :form-config="formConfig1" @keyDown="keyDown" />
           <businessButton :btn-config="btnConfig1" />
-
-          <!-- <Table
-            border
-            ref="selection"
-            :columns="columns4"
-            :data="data1"
-            @on-select="data1select"
-          ></Table>
-          <Page
-            :total="total2"
-            show-sizer
-            class-name="tablestyle"
-            @on-change="tablepage2"
-            @on-page-size-change="tablesize2"
-          /> -->
-
           <businessActionTable
             :jordan-table-config="tableConfig2"
             @on-page-change="tablepage2"
