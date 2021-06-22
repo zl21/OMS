@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-21 10:17:42
- * @LastEditTime: 2021-06-22 13:50:01
+ * @LastEditTime: 2021-06-22 14:35:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/vueAgTable.vue
 -->
 <template>
-    <div class="vueAgTable">
+    <div class="agTable">
         <commonTableByAgGrid
         ref="agGrid"
         :height="agTableConfig.tableHeight"
@@ -43,3 +43,8 @@
 import businessAgTable from './js/businessAgTable'
 export default businessAgTable
 </script>
+
+<style lang="less" scoped>
+@import "common/css/table.less";
+@import "css/agGridTable.less";
+</style>

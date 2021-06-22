@@ -223,3 +223,4 @@
 | v1.1.79 | 新增vue-ag-table |
 | v1.1.80 | businessForm-ckeckbox-onlyBox取值修复 |
 | v1.1.81 | 配置优化 |
+| v1.1.82 | 样式调整 |
