@@ -538,6 +538,36 @@
                         )
                     }
                 }
+            }else if(cellData.field == 'PRODUCT_DETAILS'){
+              return {
+                renderContainer: 'CellRenderByFunction',
+                renderComponent: (h , params) => {
+                  return h('a' , {
+                    on:{
+                      click:()=>{
+                        this.proDetailConfig.modal_proDetail = true;
+                        this.proDetailConfig.title = params.row.PRODUCT_DETAILS;
+                        this.proDetailConfig.ID = params.row.ID;
+                      }
+                    }
+                  }, params.row.PRODUCT_DETAILS)
+                }
+              }
+            }else if(cellData.field == 'PACKAGE_DETAILS'){
+              return {
+                renderContainer: 'CellRenderByFunction',
+                renderComponent: (h , params) => {
+                  return h('a' , {
+                    on:{
+                      click:()=>{
+                        this.proDetailConfig.modal_proDetail = true;
+                        this.proDetailConfig.title = params.row.PACKAGE_DETAILS;
+                        this.proDetailConfig.ID = params.row.ID;
+                      }
+                    }
+                  }, params.row.PACKAGE_DETAILS)
+                }
+              }
             }
         },
         },
