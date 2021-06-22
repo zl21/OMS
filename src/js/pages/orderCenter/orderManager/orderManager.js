@@ -1292,7 +1292,8 @@ export default {
         platformDelivery: 6 // 平台发货
       },
       formValObj: {},
-      isExport: false
+      isExport: false,
+      isTagAll: '' // 用于判断不含标签字段是否选择全部
     };
   },
   activated() {
@@ -2108,7 +2109,9 @@ export default {
                 placeholder: '', // 占位文本，默认为请输入
                 value: item.tabth.colname, // 输入框的值
                 multiple: true, // 布尔值,下拉框是否开启多选,默认为不开启
-                selectChange: () => {}, // 选中事件，默认返回选中的值
+                selectChange: () => {
+                  _this.allSelect(item.tabth.colname);
+                }, // 选中事件，默认返回选中的值
                 options: _this.converSelect(item.tabth.combobox)
               };
               _this.formConfig.formValue[item.tabth.colname] = [];
@@ -2659,6 +2662,15 @@ export default {
         // this.$Message.success("后台重新分配快递中...");
       });
     },
+    allSelect(e) {
+      if (e === 'HAS_NO_TAG') {
+        if (this.formConfig.formValue.HAS_NO_TAG[0] === 'bSelect-all') {
+          this.isTagAll = 'all'
+        } else {
+          this.isTagAll = ''
+        }
+      }
+    },
     loadData() {
       const arr = [];
       this.formConfig.formData.forEach((item, index) => {
@@ -2719,6 +2731,14 @@ export default {
       // 当出现loading，禁止页面滚动
       document.getElementById('content').style.overflow = 'hidden';
       document.getElementById('content').style.position = '';
+
+      // 处理不含标签查询数据不一致问题
+      const copyHighSearchData = self.highSearchData;
+      copyHighSearchData.map(item => {
+        if (item.queryName === "HAS_NO_TAG" && self.isTagAll === 'all') {
+          item.value = 'all'
+        }
+      })
       const param = {
         page: {
           pageSize: self.agTableConfig.pagenation.pageSize,
@@ -2738,7 +2758,6 @@ export default {
         param.lackstockOrAudit = self.statusData.value;
         param.status = { label: '缺货', value: '2', isShow: true };
       }
-
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
       self.service.orderCenter
