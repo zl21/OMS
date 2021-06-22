@@ -890,6 +890,7 @@ export default {
     // },
     //仓库物流明细删除
     deleteLogistics() {
+      
       if (this.table4Data.length > 0) {
         let arrid = [];
         this.table4Data.forEach(em => {
@@ -1360,6 +1361,13 @@ export default {
 
 
     },
+    onSelectAllA(e) {
+      console.log(e);
+      this.table4Data = e;
+    },
+    onSelectAllCancelA() {
+      this.table4Data = [];
+    },
     onSelect(e) {
       // e为选中的数组对象RowArr
       this.tableConfig.selectionData = e;
@@ -1368,6 +1376,7 @@ export default {
       this.tableConfig.selectionData = e;
     },
     onSelectAll(e) {
+      console.log(e);
       this.tableConfig.selectionData = e;
     },
     onSelectAllCancel() {

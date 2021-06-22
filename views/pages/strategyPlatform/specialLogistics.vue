@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-18 17:02:53
- * @LastEditTime: 2021-06-22 17:14:48
+ * @LastEditTime: 2021-06-22 20:03:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/strategyPlatform/specialLogistics.vue
@@ -88,6 +88,8 @@
             @on-page-change="tablepageB"
             @on-page-size-change="tablesizeB"
             @on-select="data1select"
+            @on-select-all="onSelectAllA"
+            @on-select-all-cancel="onSelectAllCancelA"
           />
         </div>
         <div class="subtablePart" v-show="labelDefaultValue != 'PROPERTY'">
