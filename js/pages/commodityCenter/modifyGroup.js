@@ -113,17 +113,7 @@ export default {
             selectChange: () => {
               this.masterModifyData('type', 'master');
             },
-            options: [
-              // 下拉框选项值
-              {
-                label: 1,
-                value: 1
-              },
-              {
-                label: 2,
-                value: 2
-              }
-            ]
+            options: []
           },
           {
             version: '1.4',
@@ -236,7 +226,7 @@ export default {
           group_type: 2,
           ecode: '',
           ename: '',
-          type: [],
+          type: '',
           price_retail: '',
           ISACTIVE:''
         },
