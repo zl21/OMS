@@ -239,6 +239,16 @@ export default {
               this.formConfig.formValue.Time[1] && (this.formConfig.formValue.endTime = dateUtil.getFormatDate(this.formConfig.formValue.Time[1], 'yyyy-MM-dd') + " 23:59:59")
             }
           },
+          {
+            style: 'input',
+            label: '优先级',
+            colname: 'priority',
+            width: '12',
+            regx: /^[0-9]*$/,
+            disabled: false,
+            maxlength:11,
+            inputChange: () => { }
+          },
 
           {
             style: 'radio',
@@ -256,15 +266,7 @@ export default {
               }
             ],
             inputChange: () => { }
-          }, {
-            style: 'input',
-            label: '优先级',
-            colname: 'priority',
-            width: '12',
-            regx: /^[0-9]*$/,
-            disabled: false,
-            inputChange: () => { }
-          },
+          }, 
 
         ],
         formValue: {
@@ -301,6 +303,7 @@ export default {
             value: 'ename',
             colname: 'ename',
             width: '6',
+            maxlength:20,
             disabled: false,
             inputChange: () => { }
           },
@@ -359,7 +362,7 @@ export default {
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
               isfk: true, // 是否有fk键
-              isnotnull: true, // 是否必填
+              isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
               name: '仓库名称', // 赔付类型
@@ -393,7 +396,7 @@ export default {
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
               isfk: true, // 是否有fk键
-              isnotnull: true, // 是否必填
+              isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
               name: '物流公司', // 赔付类型
@@ -453,6 +456,8 @@ export default {
             oneObj: val => {
               this.formConfig2.formValue.cpCRegionProvinceEname = val.valuedata;
               this.formConfig2.formValue.cpCRegionProvinceId = val.pid;
+
+           
             }
           },
           {
@@ -575,6 +580,7 @@ export default {
             pkgAttributeType: 1,
             regx: /^\d+(\.\d{0,2})?$/,
             regx2: /^\d+(\.\d{0,2})?$/,
+            maxlength:18,
             type: '件'
           },
           {
@@ -592,6 +598,7 @@ export default {
             symbol: '至',
             regx: /^\d+(\.\d{0,2})?$/,
             regx2: /^\d+(\.\d{0,2})?$/,
+            maxlength:18,
             type: '元'
           },
           {
@@ -609,6 +616,7 @@ export default {
             symbol: '至',
             regx: /^\d+(\.\d{0,2})?$/,
             regx2: /^\d+(\.\d{0,2})?$/,
+            maxlength:18,
             type: 'kg'
           }
         ]
@@ -640,11 +648,11 @@ export default {
             key: 'index'
           },
           {
-            title: '仓库公司',
+            title: '仓库名称',
             key: 'cpCPhyWarehouseEname'
           },
           {
-            title: '物流名称',
+            title: '物流公司',
             key: 'cpCLogisticsEname'
           }
         ],
@@ -780,37 +788,26 @@ export default {
     };
   },
   mounted() {
-    this.relationShip();
-    let { customizedModuleId, customizedModuleName } = this.$route.params;
-    this.customizedModuleName = customizedModuleName;
-    if (customizedModuleId == 'New') {
-      // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-      // const data = { label: '特殊物流方案新增', name:keepAliveModuleName}; //当前界面模块名称 
-      // this.$store.commit('global/modifycurrentLabel' , data)
-
-
-      this.id = '-1';
-    } else {
-
-      // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-      // const data = { label: '特殊物流方案编辑', name:keepAliveModuleName}; //当前界面模块名称 
-      // this.$store.commit('global/modifycurrentLabel' , data)
-
-      this.id = customizedModuleId;
-
-      this.querfrom(this.formConfighead.formData, 'ecode').style = 'input';
-      this.queryById();
-      this.queryAddressPages();
-      this.queryProPages();
-      this.queryLogisticsWarehousePages();
-      // this.btnConfig.buttons.forEach(em => {
-      //   if (em.text == '启用' || em.text == '停用') {
-      //     em.isShow = true;
-      //   }
-      // });
-    }
+   this.init()
   },
   methods: {
+    init(){
+      this.relationShip();
+      let { customizedModuleId, customizedModuleName } = this.$route.params;
+      this.customizedModuleName = customizedModuleName;
+      if (customizedModuleId == 'New') {
+        this.id = '-1';
+      } else {
+        this.id = customizedModuleId;
+  
+        this.querfrom(this.formConfighead.formData, 'ecode').style = 'input';
+        this.queryById();
+        this.queryAddressPages();
+        this.queryProPages();
+        this.queryLogisticsWarehousePages();
+    
+      }
+    },
     fnreadonly(type) {
       if (type == 'Y') {
         // this.querbtn(this.btnConfig.buttons, '启用').disabled = true
@@ -1108,6 +1105,14 @@ export default {
           }
         });
       });
+      if (CityID == "") {
+        this.specialAssignLogisticsAddressItemList.push({
+          id:"-1",
+          cpCRegionProvinceEname:this.formConfig2.formValue.cpCRegionProvinceEname,
+          cpCRegionProvinceId:this.formConfig2.formValue.cpCRegionProvinceId
+        });
+      }
+     
       if (this.id != '-1') {
         this.fnSave(1);
       } else {
@@ -1263,9 +1268,14 @@ export default {
           } else if (type == 2) {
             this.queryProPages();
           } else if (type == 3) {
+            this.WarehouseItemListobj={
+              cpCLogisticsEname: '',
+              cpCPhyWarehouseEname: ''
+            }
             this.queryLogisticsWarehousePages();
           } else {
             if (this.id == '-1') {
+              this.init()
               this.$store.commit('global/tabOpen', {
                 type: 'C',
                 url: `/CUSTOMIZED/${this.customizedModuleName}/${res.data.data.objId}`,
@@ -1273,11 +1283,12 @@ export default {
                 customizedModuleName: this.customizedModuleName,
                 customizedModuleId: res.data.data.objId
               })
-
+              
             } else {
               this.pageback();
             }
           }
+         
         }
       });
     },
@@ -1291,6 +1302,8 @@ export default {
       }
       this.WarehouseItemListobj.id = '-1';
       this.specialAssignLogisticsWarehouseItemList.push(this.WarehouseItemListobj);
+  
+
       if (this.id != '-1') {
         this.fnSave(3);
       } else {
@@ -1437,6 +1450,7 @@ export default {
         this.$Message.warning('启用状态，不可编辑！');
         return;
       }
+      this.specialAssignLogisticsAddressItemList = []
       this.modal2 = true;
     },
     // 切换Label & 实时渲染subTable

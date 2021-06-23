@@ -163,20 +163,24 @@ export default {
         typeAll: "default",
         buttons: [
           {
-            text: "保存",
-            disabled: false, // 按钮禁用控制
+            // text: "保存",
+            webname: 'RETURNSAVE1',
+            isShow: true,
             btnclick: () => {
               this.save();
             },
           },
           {
-            text: $i18n.t("btn.back"),
+            webname: 'ORDER_RETURN1',
+            isShow: true,
+            // text: $i18n.t("btn.back"),
             btnclick: () => {
               this.back();
             },
-          },
+          }
         ],
       },
+      extendBtn: [],
       btnConfigMo: {
         typeAll: "default",
         btnsite: "right",
@@ -657,6 +661,9 @@ export default {
     console.log();
     this.relationShip();
   },
+  activated() {
+    this.getBtn();
+  },
   destroyed() {
 
   },
@@ -665,6 +672,7 @@ export default {
     // BtnConfig.singleType = 1;
     this.$nextTick(() => {
       // this.getPermissions('btnConfig', 'orderManager');
+      // $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true);
       this.initObjItem(-1);
       setTimeout(() => {
         this.loading = false;
@@ -672,6 +680,25 @@ export default {
     });
   },
   methods: {
+    // 获取按钮权限
+    getBtn() {
+      $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true).then(res => {
+        console.log(res);
+        const { ACTIONS, SUB_ACTIONS } = res
+        console.log('buttons::', this.btnConfig.buttons);
+        /* this.btnConfig.buttons.forEach(item => {
+          ACTIONS.forEach(it => {
+            if (item.webname == it.webname) {
+              item.isShow = true;
+              item.text = it.webdesc;
+            } else {
+              item.isShow = false;
+            }
+          })
+        }) */
+      });
+    },
+
     // 单据类型变更
     changeBillType(nV, oV) {
       if (this.isCancel) return;
@@ -770,14 +797,24 @@ export default {
     async initObjItem(id) {
       const self = this;
       this.loading = true;
-      const data = await this.$OMS2.omsUtils.getObject("OC_B_RETURN_ORDER_VIRTUAL_TABLE", id);
-      let base = data.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_VIRTUAL_TABLE.ID+10)").childs;
-      setTimeout(async () => {
-        const dataEx = await this.$OMS2.omsUtils.getObject('OC_B_RETURN_ORDER_ECXCHANGE_TABLE', id)
-        this.baseEx = dataEx.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_ECXCHANGE_TABLE.ID+101)").childs;
-        this.reInfo = dataEx.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_ECXCHANGE_TABLE.ID+100)").childs;
-      }, 1);
-      self.formConfig = this.$OMS2.omsUtils.initFormConfig(base, self.formConfig);
+      const step1 = new Promise(async (resolve) => {
+        const data = await self.$OMS2.omsUtils.getObject("OC_B_RETURN_ORDER_VIRTUAL_TABLE", id);
+        let base = data.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_VIRTUAL_TABLE.ID+10)").childs;
+        resolve(base);
+      });
+      step1.then(async (base) => {
+        const dataEx = await self.$OMS2.omsUtils.getObject('OC_B_RETURN_ORDER_ECXCHANGE_TABLE', id)
+        self.baseEx = dataEx.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_ECXCHANGE_TABLE.ID+101)").childs;
+        self.reInfo = dataEx.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_ECXCHANGE_TABLE.ID+100)").childs;
+        self.formConfig = self.$OMS2.omsUtils.initFormConfig(base, self.formConfig);
+      }).then(() => {
+        $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true);
+        console.log('buttons::', this.btnConfig.buttons);
+      })
+      // const data = await this.$OMS2.omsUtils.getObject("OC_B_RETURN_ORDER_VIRTUAL_TABLE", id);
+      // setTimeout(async () => {
+      // }, 1);
+      // self.formConfig = this.$OMS2.omsUtils.initFormConfig(base, self.formConfig);
       setTimeout(() => {
         this.loading = false;
         this.watchChange = true;
