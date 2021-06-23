@@ -621,5 +621,6 @@
 | v1.7.59 | popInputPlus version |
 | v1.7.60 | getPermissions方法返回值处理 |
 | v1.7.61 | 修复下载账单入参 |
+| v1.7.62 | 退换货新增-明细-按钮权限 |
 
 

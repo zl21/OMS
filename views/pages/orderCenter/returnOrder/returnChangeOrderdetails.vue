@@ -97,8 +97,9 @@ export default {
           btnsite: "left", // 按钮位置 (right , center , left)
           buttons: [
             {
+              webname: 'returnOrderAddProductItem',
               type: "primary",
-              text: "新增明细", // 按钮文本
+              // text: "新增明细", // 按钮文本
               isShow: true,
               btnclick: (e) => {
                 if (
@@ -115,8 +116,9 @@ export default {
               }, // 按钮点击事件
             },
             {
+              webname: 'returnOrderReplaceProduct',
               type: "primary", // 按钮类型
-              text: "替换明细", // 按钮文本
+              // text: "替换明细", // 按钮文本
               isShow: true,
               btnclick: (e) => {
                 console.log(e);
@@ -132,8 +134,9 @@ export default {
               }, // 按钮点击事件
             },
             {
+              webname: 'returnOrderDeleteProductItem',
               type: "warning", // 按钮类型
-              text: "删除明细", // 按钮文本
+              // text: "删除明细", // 按钮文本
               isShow: true,
               btnclick: (e) => {
                 console.log(e, this.detailsArrData.length);
@@ -212,13 +215,13 @@ export default {
               AuotData: [], //匹配的选项
               dimChange: (search) => {
                 //模糊查询的方法
-                this.fuzzyquerybyak(search,171332)
+                this.fuzzyquerybyak(search, 171332)
               },
               dimEnter: (val) => {
                 this.getPlaceData(0, this.replaceProductTable.pageSize);
               },
-              dimSelect: (obj) => {},
-              dimblur: () => {},
+              dimSelect: (obj) => { },
+              dimblur: () => { },
             },
             {
               label: "SKU名称",
@@ -227,12 +230,12 @@ export default {
               value: "ENAME",
               columns: ["ECODE"],
               AuotData: [], //匹配的选项
-              dimChange: (search) => {},
+              dimChange: (search) => { },
               dimEnter: (val) => {
                 this.getPlaceData(0, this.replaceProductTable.pageSize);
               },
-              dimSelect: (obj) => {},
-              dimblur: () => {},
+              dimSelect: (obj) => { },
+              dimblur: () => { },
             },
             {
               style: "dimSearch", //输入框类型
@@ -242,13 +245,13 @@ export default {
               width: "8",
               AuotData: [], //匹配的选项
               dimChange: (search) => {
-                this.fuzzyquerybyak(search,165990)
+                this.fuzzyquerybyak(search, 165990)
               },
               dimEnter: (val) => {
                 this.getPlaceData(0, this.replaceProductTable.pageSize);
               },
-              dimSelect: (obj) => {},
-              dimblur: () => {},
+              dimSelect: (obj) => { },
+              dimblur: () => { },
             },
           ],
         }, // 表单配置
@@ -263,6 +266,7 @@ export default {
         pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       }, // 弹框 - 添加/替换商品
+      btnPermission: {},
     };
   },
   watch: {
@@ -275,19 +279,20 @@ export default {
           console.log("退货单");
           // tableName = 'OC_B_RETURN_ORDER_REFUND_ITEM';
           renderKeys = ["REFUND_ID", "QTY_REFUND"];
-          this.businessActionTable.businessButtonConfig.buttons[0].isShow = true;
-          this.businessActionTable.businessButtonConfig.buttons[1].isShow = false;
-          this.businessActionTable.businessButtonConfig.buttons[2].isShow = true;
+          this.getBtn();
+          // this.businessActionTable.businessButtonConfig.buttons[1].isShow = false;
+          // this.businessActionTable.businessButtonConfig.buttons[0].isShow = true;
+          // this.businessActionTable.businessButtonConfig.buttons[2].isShow = true;
           this.businessActionTable.data = this.toMainData.tui;
         } else if (newData === "1") {
           console.log("换货单");
           // tableName = 'OC_B_RETURN_ORDER_EXCHANGE';
           renderKeys = ["QTY_EXCHANGE", "PRICE_ACTUAL"];
-          this.businessActionTable.businessButtonConfig.buttons[0].isShow = false;
-          this.businessActionTable.businessButtonConfig.buttons[1].isShow = true;
-          this.businessActionTable.businessButtonConfig.buttons[1].text =
-            "新增明细";
-          this.businessActionTable.businessButtonConfig.buttons[2].isShow = true;
+          this.getBtn();
+          // this.businessActionTable.businessButtonConfig.buttons[0].isShow = false;
+          // this.businessActionTable.businessButtonConfig.buttons[1].isShow = true;
+          // this.businessActionTable.businessButtonConfig.buttons[1].text = "新增明细";
+          // this.businessActionTable.businessButtonConfig.buttons[2].isShow = true;
           this.businessActionTable.data = this.toMainData.huan;
         }
         if (this.$route.params.customizedModuleId === "New") {
@@ -334,6 +339,8 @@ export default {
         //  console.log('2',this.toMainData.huan);
         //  console.log('2',R3.store.state.customize.returnOrderChangeItem);
       }
+    } else {
+      this.getBtn();
     }
   },
   async mounted() {
@@ -347,6 +354,31 @@ export default {
     });
   },
   methods: {
+    // 获取按钮权限
+    getBtn() {
+      $OMS2.omsUtils.getPermissions(this, '', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true).then(res => {
+        console.log(res);
+        const { ACTIONS, SUB_ACTIONS } = res
+        this.businessActionTable.businessButtonConfig.buttons.forEach(item => {
+          SUB_ACTIONS.forEach(it => {
+            if (item.webname == it.webname) {
+              item.isShow = !it.ishide;
+              item.text = it.webdesc;
+            }
+          })
+          if (this.returnProduct == '0') {
+            if (item.webname == 'returnOrderReplaceProduct') {
+              item.isShow = false
+            }
+          } else {
+            if (item.webname == 'returnOrderAddProductItem') {
+              item.isShow = false
+              item.text = '新增明细';
+            }
+          }
+        })
+      });
+    },
     // 获取表头（新增）
     async getColumns() {
       this.tableConfig.columns = tuiColumns;
@@ -413,9 +445,9 @@ export default {
           this.$parent.$parent.panelRef === "退货明细"
             ? ["REFUND_ID", "QTY_REFUND"]
             : ["QTY_EXCHANGE", "PRICE_ACTUAL"]; // render
-            if (this.$route.query.RETURN_SOURCE !== "手工新增") {
-              renderArr = [];
-            }
+        if (this.$route.query.RETURN_SOURCE !== "手工新增") {
+          renderArr = [];
+        }
         // 判断如果单据状态为带退货完成/完成/取消 不可编辑
         if (["1", "2", "3"].includes(OC_B_RETURN_ORDER.RETURN_STATUS)) {
           BtnConfig[0].isShow = false;
@@ -490,16 +522,16 @@ export default {
       }
     },
     // 模糊查询 数据
-    async fuzzyquerybyak(search,colid) {
-        let fixedcolumns = {}
-        const formData = new FormData()
-        formData.append('ak', search)
-        formData.append('colid', colid)
-        formData.append('fixedcolumns', JSON.stringify(fixedcolumns))
-        const {
-          data: { data },
-        } = await this.service.common.fuzzyquerybyak(formData);
-        colid === 171332 ? this.replaceProductTable.businessFormConfig.formData[0].AuotData = data :  this.replaceProductTable.businessFormConfig.formData[2].AuotData = data
+    async fuzzyquerybyak(search, colid) {
+      let fixedcolumns = {}
+      const formData = new FormData()
+      formData.append('ak', search)
+      formData.append('colid', colid)
+      formData.append('fixedcolumns', JSON.stringify(fixedcolumns))
+      const {
+        data: { data },
+      } = await this.service.common.fuzzyquerybyak(formData);
+      colid === 171332 ? this.replaceProductTable.businessFormConfig.formData[0].AuotData = data : this.replaceProductTable.businessFormConfig.formData[2].AuotData = data
     },
     // 获取新增明细数据
     async getDetailModal() {
@@ -689,17 +721,17 @@ export default {
       let qty = 0;
       const key1 =
         this.returnProduct == "0" ||
-        this.$parent.$parent.panelRef === "退货明细"
+          this.$parent.$parent.panelRef === "退货明细"
           ? "QTY_REFUND"
           : "QTY_EXCHANGE"; // 申请退货数量 : 换货数量
       const key2 =
         this.returnProduct == "0" ||
-        this.$parent.$parent.panelRef === "退货明细"
+          this.$parent.$parent.panelRef === "退货明细"
           ? "REFUND_FEE"
           : "AMT_EXCHANGE"; // 退货金额 : 成交金额
       const key3 =
         this.returnProduct == "0" ||
-        this.$parent.$parent.panelRef === "退货明细"
+          this.$parent.$parent.panelRef === "退货明细"
           ? "PRO_ACTUAL_AMT"
           : "EX_ACTUAL_AMT"; // 商品应退金额 : 换货金额
       self.businessActionTable.totalData = [];
