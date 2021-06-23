@@ -330,7 +330,7 @@ class commonUtils {
       TABLE: params.table || params.TABLE,
       TYPE: params.type || params.TYPE,
     }
-    const serviceId = params.serviceId || params.SERVICEID || 'r3-cp';
+    const serviceId = params.serviceId || params.SERVICEID || '';
     let data, btnArr = [];
     if (!isIndependent && self[array] == undefined) return
     if (self[array] != undefined) btnArr = self[array].buttons || [];
