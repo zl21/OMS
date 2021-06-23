@@ -7,7 +7,7 @@
         <div class="order-tab-title">
           <span>收货信息</span>
           <div class="title-right">
-            <p>
+            <p v-if="butArr[0]['isShow']">
               <span>
                 <Icon
                   style="fontSize:16px; margin-top:-3px"
@@ -19,7 +19,7 @@
                 {{ eyeText }}
               </label>
             </p>
-            <p>
+            <p v-if="butArr[1]['isShow']">
               <span>
                 <span>
                   <Icon
@@ -54,7 +54,7 @@
               </p>
               <p v-if="list.column === 'SELLER_MEMO'">
                 {{ componentData.order[list.column] }}
-                <span @click="modifyRemark" class="edit iconfont icon-bianji"></span>
+                <span  v-if="butArr[2]['isShow']" @click="modifyRemark" class="edit iconfont icon-bianji"></span>
               </p>
               <p>{{ componentData.order[list.column] }}</p>
             </Col>

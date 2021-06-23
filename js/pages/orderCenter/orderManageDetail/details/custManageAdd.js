@@ -14,6 +14,7 @@ export default {
           btnsite: 'left', // 按钮位置 (right , center , left)
           buttons: [
             {
+              webname:'orderItemAddGift',
               type: 'primary', // 按钮类型
               text: '添加赠品', // 按钮文本
               isShow: true,
@@ -28,6 +29,7 @@ export default {
               } // 按钮点击事件
             },
             {
+              webname:'Delete_Merchandise',
               type: 'warning', // 按钮类型
               text: '删除赠品', // 按钮文本
               disabled: true,
@@ -37,24 +39,26 @@ export default {
               } // 按钮点击事件
             },
             {
+              webname:'aa',
               text: '标记退款完成', // 按钮文本
               disabled: true,
-              isShow: false,
+              isShow: true,
               btnclick: () => {
                 this.returnAccount();
               } // 按钮点击事件
             },
             {
+              webname:'orderItemReplaceProduct',
               text: '替换商品', // 按钮文本
               disabled: true,
               isShow: true,
               btnclick: () => {
                 // 是否可以更换商品
-                // this.modifyGoodsCheck();
                 this.replaceGoodsDetail();
               } // 按钮点击事件
             },
             {
+              webname:'orderMarkupCancel',
               text: '标记取消',
               disabled: true,
               isShow: true,
@@ -81,6 +85,7 @@ export default {
         totalData: [] // 总计
       },
       textArr:['删除赠品','替换商品','标记取消'], // 需要控制的按钮text
+      butArray:[],
       selection: [],
       checkSelection: [],
       objid: '',
@@ -113,9 +118,6 @@ export default {
     componentData: {
       handler(newVal) {
         this.request(newVal);
-        // if(newVal.order.IS_COMBINATION){
-        //   this.tableConfig.businessButtonConfig = {}
-        // }
       },
       deep: true
     },
@@ -124,11 +126,6 @@ export default {
         item.isShow = this.isQh;
       });
     }
-  },
-  async created() {
-    // this.$nextTick(()=>{
-    //   this.getPermissions('tableConfig.businessButtonConfig', 'orderManager');
-    // });
   },
   methods: {
     // 获取表头
@@ -201,22 +198,22 @@ export default {
       }
     },
     // 标记退款
-    async returnAccount() {
-      const self = this;
-      const ids = this.checkSelection.map(row => row.ID);
-      if (ids.length === 0) {
-        // 至少选择一条订单明细
-        self.$Message.error($i18n.t('modalTips.zk'));
-        return;
-      }
-      const { data: { code, message } } = await this.service.orderCenter.markrefund({ id: this.$route.params.customizedModuleId, itemIds: ids, ISJITX: 50 });
-      if (code === 0) {
-        self.$parent.$parent.load();
-        self.$Message.success(message);
-      } else {
-        self.$Message.error($i18n.t('modalTips.z3'));
-      }
-    },
+    // async returnAccount() {
+    //   const self = this;
+    //   const ids = this.checkSelection.map(row => row.ID);
+    //   if (ids.length === 0) {
+    //     // 至少选择一条订单明细
+    //     self.$Message.error($i18n.t('modalTips.zk'));
+    //     return;
+    //   }
+    //   const { data: { code, message } } = await this.service.orderCenter.markrefund({ id: this.$route.params.customizedModuleId, itemIds: ids, ISJITX: 50 });
+    //   if (code === 0) {
+    //     self.$parent.$parent.load();
+    //     self.$Message.success(message);
+    //   } else {
+    //     self.$Message.error($i18n.t('modalTips.z3'));
+    //   }
+    // },
     // 标记取消退款
     async flagCalcelRefund() {
       const self = this;
@@ -332,7 +329,26 @@ export default {
       });
     }
   },
-  created(){
+  async created(){
+    console.log('1233');
+    // 按钮权限配置
+    let { SUB_ACTIONS,ACTIONS } = await this.$OMS2.omsUtils.getPermissions(this, 'butArray', {table: this.$route.params.customizedModuleName, type: 'OBJ'},true);
+    let buttonArr = this.tableConfig.businessButtonConfig.buttons
+    sessionStorage.setItem("ACTIONS", JSON.stringify(ACTIONS));
+    buttonArr.forEach((x)=>{
+      // 判断是否存在不存在设置为false，存在看是否显示ishide
+      if(!SUB_ACTIONS.some(y => y.webname === x.webname)){
+        x.isShow = false
+        console.log(x.webname);
+      }else{
+        SUB_ACTIONS.forEach((e) => {
+          if(x.webname === e.webname){
+            x.isShow = !e.ishide
+            // x.text = e.webdesc
+          }
+        })
+      }
+    })
     // 获取表头
     this.getColumn();
   }
