@@ -344,88 +344,90 @@ export default {
       },
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
-        buttons: [
-          {
-            text: $i18n.t('btn.find'), // 查找,
-            webname: 'lookup_cuxiaohuodomg',
-            btnclick: () => {
-              this.getData();
-            }
-          },
-          {
-            text: $i18n.t('btn.reset'), // 重置,
-            webname: 'chongzhicux_cuxiaohuodomg',
-            btnclick: () => {
-              this.Reset();
-            }
-          },
-          {
-            text: $i18n.t('btn.add'), // 新增,
-            webname: 'xinzengcux_cuxiaohuodomg',
-            btnclick: () => {
-              this.promotionClick();
-            }
-          },
-          {
-            text: $i18n.t('btn.batch_add'), // 批量新增,
-            webname: 'piliangxinzengcux_cuxiaohuodomg',
-            btnclick: () => {
-              this.promotionBlukClick();
-            }
-          },
-          {
-            text: $i18n.t('btn.publish'), // 发布,
-            webname: 'fabucux_cuxiaohuodomg',
-            btnclick: () => {
-              this.publish();
-            }
-          },
-          {
-            text: $i18n.t('btn.offline'), // 下线,
-            webname: 'xiaxiancux_cuxiaohuodomg',
-            btnclick: () => {
-              this.actOffline();
-            }
-          },
-          {
-            text: $i18n.t('common.copy'), // 复制,
-            webname: 'copy_cuxiaohuodomg',
-            btnclick: () => {
-              this.copy();
-            }
-          },
-          {
-            text: $i18n.t('btn.delete'), // 删除,
-            webname: 'deletecux_cuxiaohuodomg',
-            btnclick: () => {
-              this.deleteActi();
-            }
-          },
-          {
-            text: $i18n.t('btn.set_groups'), // 设置分组,
-            webname: 'shezhifenzucux_cuxiaohuodomg',
-            btnclick: () => {
-              this.setGroup();
-            }
-          },
-          {
-            text: $i18n.t('btn.simulation'), // 模拟仿真,
-            webname: 'fangzhencux_cuxiaohuodomg',
-            btnclick: () => {
-              this.simulation();
-            }
-          },
-          {
-            icon: 'iconfont iconbj_col', // 按钮图标
-            webname: 'isFavorite', // 必须写，用于匹配框架的收藏功能（作为key替换掉之前的中文判断）
-            name: $i18n.t('btn.collection'), // 收藏
-            btnclick: () => {
-              const self = this;
-              self.setFavorite();
-            } // 按钮点击事件
-          }
-        ]
+        loading: false, // 按钮加载
+        buttons: [],
       },
+      extendBtn:[
+        {
+          // text: $i18n.t('btn.find'), // 查找,
+          webname: 'lookup_cuxiaohuodomg',
+          btnclick: () => {
+            this.getData();
+          }
+        },
+        {
+          // text: $i18n.t('btn.reset'), // 重置,
+          webname: 'chongzhicux_cuxiaohuodomg',
+          btnclick: () => {
+            this.Reset();
+          }
+        },
+        {
+          // text: $i18n.t('btn.add'), // 新增,
+          webname: 'xinzengcux_cuxiaohuodomg',
+          btnclick: () => {
+            this.promotionClick();
+          }
+        },
+        {
+          // text: $i18n.t('btn.batch_add'), // 批量新增,
+          webname: 'piliangxinzengcux_cuxiaohuodomg',
+          btnclick: () => {
+            this.promotionBlukClick();
+          }
+        },
+        {
+          // text: $i18n.t('btn.publish'), // 发布,
+          webname: 'fabucux_cuxiaohuodomg',
+          btnclick: () => {
+            this.publish();
+          }
+        },
+        {
+          // text: $i18n.t('btn.offline'), // 下线,
+          webname: 'xiaxiancux_cuxiaohuodomg',
+          btnclick: () => {
+            this.actOffline();
+          }
+        },
+        {
+          // text: $i18n.t('common.copy'), // 复制,
+          webname: 'copy_cuxiaohuodomg',
+          btnclick: () => {
+            this.copy();
+          }
+        },
+        {
+          // text: $i18n.t('btn.delete'), // 删除,
+          webname: 'deletecux_cuxiaohuodomg',
+          btnclick: () => {
+            this.deleteActi();
+          }
+        },
+        {
+          // text: $i18n.t('btn.set_groups'), // 设置分组,
+          webname: 'shezhifenzucux_cuxiaohuodomg',
+          btnclick: () => {
+            this.setGroup();
+          }
+        },
+        {
+          // text: $i18n.t('btn.simulation'), // 模拟仿真,
+          webname: 'fangzhencux_cuxiaohuodomg',
+          btnclick: () => {
+            this.simulation();
+          }
+        },
+        // {
+        //   icon: 'iconfont iconbj_col', // 按钮图标
+        //   webname: 'isFavorite', // 必须写，用于匹配框架的收藏功能（作为key替换掉之前的中文判断）
+        //   name: $i18n.t('btn.collection'), // 收藏
+        //   btnclick: () => {
+        //     const self = this;
+        //     self.setFavorite();
+        //   } // 按钮点击事件
+        // }
+      ],
       newList: [], // 选中行
       newIds: [], // 选中行的ID集
     };
@@ -470,8 +472,9 @@ export default {
     await this.getData();
     // 检测屏幕变化 设置高度 重新渲染agTabe
     this.$comUtils.onresizes(this, 650);
-    this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PROMACTIQUERYLIST', type: 'LIST' });
-    console.log('---------------------------------------1111')
+    const buttons = self.$OMS2.BtnConfig.config();
+    this.btnConfig.buttons = [ ...this.extendBtn];
+    this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'LIST' , serviceId:'r3-oc-oms'});
   },
   methods: {
     // 获取7天后时间

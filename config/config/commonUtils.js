@@ -334,6 +334,7 @@ class commonUtils {
     let data, btnArr = [];
     if (!isIndependent && self[array] == undefined) return
     if (self[array] != undefined) btnArr = self[array].buttons || [];
+    const show_iconbj_setup = ['ORDERMANAGER' , 'OC_B_RETURN_ORDER']; //储存允许设置按钮展示的页面集;
     return new Promise(async (resolve) => {
       const res = await self.service.common.fetchActionsInCustomizePage(query, { serviceId });
       let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
@@ -346,8 +347,13 @@ class commonUtils {
         }
         self[array].buttons.forEach((item) => {
           // 设置、收藏等图标按钮的配置
-          if (!item.text && item.icon) {
-            a.push(item);
+          if (!item.text && item.icon ) {
+            if(show_iconbj_setup.includes(self.$route.params.customizedModuleName)){
+              a.push(item)
+            }else if(item.icon !== 'iconfont iconbj_setup'){
+              a.push(item);
+            }
+            
           }
         })
         if (isIndependent) {
@@ -365,8 +371,7 @@ class commonUtils {
               return
             }
             if (
-              btn.webname == element.webname ||
-              btn.webname.includes(element.webname)
+              btn.webname == element.webname
             ) {
               btn.webid = element.webid
               btn.text = element.webdesc
