@@ -449,11 +449,7 @@ export default {
   mounted() {
     let { customizedModuleId, customizedModuleName } = this.$route.params;
     if (customizedModuleId == 'New') {
-      // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-      // const data = { label: '物流派送范围新增', name: keepAliveModuleName }; //当前界面模块名称 
-      // this.$store.commit('global/modifycurrentLabel', data)
-
-
+   
       this.id = '-1';
       this.tableshow = false;
       this.labelList = [{
@@ -462,9 +458,7 @@ export default {
       },]
     } else {
 
-      // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-      // const data = { label: '物流派送范围编辑', name: keepAliveModuleName }; //当前界面模块名称 
-      // this.$store.commit('global/modifycurrentLabel', data)
+     
       let areaRange = this.AliasFormConfig.formValue.REGION_TYPE;
       let item = this.queryForm('排除省份');
       if (areaRange == 1) {
@@ -556,6 +550,16 @@ export default {
         if (!type) {
           this.AliasFormConfig.formValue.REGION_TYPE = stCDeliveryArea.areaRange + '';
         }
+        if ( this.AliasFormConfig.formValue.REGION_TYPE == 2) {
+          this.modalTitle = '添加支持省份';
+          this.formconfig2[0].show = true;
+          this.tableConfig.columns[2].title = '配送省份';
+        } else {
+          this.modalTitle = '添加排除区域';
+         this.tableConfig.columns[2].title = '排除省份';
+          this.formconfig2[0].show = false;
+        }
+
         this.FormConfig.formData[0].itemdata.valuedata = stCDeliveryArea.cpCLogisticsEname;
         this.FormConfig.formData[0].itemdata.pid = stCDeliveryArea.cpCLogisticsId;
         this.FormConfig.formValue.cpCLogisticsEname = stCDeliveryArea.cpCLogisticsEname; //物流公司名称
@@ -773,18 +777,8 @@ export default {
     addRegion() {
       this.modal1 = true;
       //添加区域
-
-      let type = this.AliasFormConfig.formValue.REGION_TYPE;
       this.querList();
-      if (type == 2) {
-        this.modalTitle = '添加支持省份';
-        this.formconfig2[0].show = true;
-        this.tableConfig.columns[2].title = '配送省份';
-      } else {
-        this.modalTitle = '添加排除区域';
-       this.tableConfig.columns[2].title = '排除省份';
-        this.formconfig2[0].show = false;
-      }
+   
     },
     fnprovince(v, type) {
       //根据排除省份获取排市
