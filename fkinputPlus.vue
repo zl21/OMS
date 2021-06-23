@@ -245,6 +245,7 @@ export default {
     },
     async getFuzzySelectData(val) {
       const query = this.handelFuzzyParam(val);
+      const { version, serviceId } = this.itemdata
       const {
         data: { code, data, message },
       } = await this.service.common.fuzzyquerybyak(query, { serviceId: serviceId || 'r3-cp' });
