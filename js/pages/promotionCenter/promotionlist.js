@@ -444,6 +444,10 @@ export default {
     // errorMessage,
     dialogVisible,
   },
+  activated(){
+    const self = this;
+    self.$OMS2.BtnConfig.target = self;
+  },
   created() {
     groups.load();
     this.formConfig.formData.filter(item => item.colname == 'my_input_sh')[0].itemdata = this.my_input_sh.itemdata;
@@ -466,6 +470,8 @@ export default {
     await this.getData();
     // 检测屏幕变化 设置高度 重新渲染agTabe
     this.$comUtils.onresizes(this, 650);
+    this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PROMACTIQUERYLIST', type: 'LIST' });
+    console.log('---------------------------------------1111')
   },
   methods: {
     // 获取7天后时间
