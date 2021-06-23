@@ -277,6 +277,7 @@ export default {
         })
         this.itemdata.pid = this.itemdata.pid.replace(/,$/, '');
         this.itemdata.valuedata = this.itemdata.valuedata.replace(/,$/, '');
+        this.itemdata.defaultSelectedMrp = val;
         if (this.isBackRowItem) {
           this.$emit('getFkChooseItem', val);
         } else {

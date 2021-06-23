@@ -235,3 +235,4 @@
 | v1.1.91 | businessButton 样式修改 |
 | v1.1.93 | fkinputPlus模糊搜索修复 |
 | v1.1.94 | fkinput模糊搜索-特殊字符控制 |
+| v1.1.96 | fkinputPlus-mrp-选中值展示问题修复 |
