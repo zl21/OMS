@@ -1268,6 +1268,7 @@ export default {
             this.queryLogisticsWarehousePages();
           } else {
             if (this.id == '-1') {
+              this.init()
               this.$store.commit('global/tabOpen', {
                 type: 'C',
                 url: `/CUSTOMIZED/${this.customizedModuleName}/${res.data.data.objId}`,
@@ -1275,12 +1276,12 @@ export default {
                 customizedModuleName: this.customizedModuleName,
                 customizedModuleId: res.data.data.objId
               })
-
+              
             } else {
               this.pageback();
             }
           }
-          this.init()
+         
         }
       });
     },
