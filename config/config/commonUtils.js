@@ -336,6 +336,7 @@ class commonUtils {
       let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
       if (res.data.code === 0) {
         if (isIndependent) {
+          if (self[array] != undefined) self[array] = Object.assign({}, result);
           resolve(result);
         } else {
           const a = []
