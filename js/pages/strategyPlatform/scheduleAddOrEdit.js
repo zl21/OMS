@@ -1297,8 +1297,9 @@ export default {
           this.fillSelectOptions(this.dialogConfig[0].formConfig, item, 'AUTO_PICK_TIME_INTERVAL');
         }
       });
+      let childs = data.addcolums[0].childs.filter(i => i.colname == 'IS_AIR_EMBARGO')
       this.dialogConfig.forEach((item, index) => {
-        item.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, item.formConfig);
+        item.formConfig = this.$OMS2.omsUtils.initFormConfig(childs, item.formConfig);
         /** 由于方法返回的外键字段值是对象，形如：{ pid: '', valuedata: ''} */
         if (index == 1) { 
           const obj = item.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID;
