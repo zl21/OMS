@@ -186,6 +186,7 @@ export default {
           .toString()
           .toLocaleUpperCase();
       }
+      // getChangeItem ? ? ?
       this.$emit('getChangeItem', item);
     },
     // 弹出框数据操作
@@ -291,7 +292,14 @@ export default {
     },
     // 外键下拉模糊查询
     querySearchAsync(queryString, cb) {
+      var regx = /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/; 
+      if (regx.test(queryString)) {// 如果包含特殊字符
+        queryString = queryString.replace(regx,'')
+      }
       const self = this;
+      self.itemdata.valuedata = queryString;
+      cb([]);
+      if (!queryString) return
       self.autocomplete = false;
       self.isHandleSelect = false;
       let flag = true;
