@@ -580,6 +580,7 @@ export default {
             pkgAttributeType: 1,
             regx: /^\d+(\.\d{0,2})?$/,
             regx2: /^\d+(\.\d{0,2})?$/,
+            maxlength:18,
             type: '件'
           },
           {
@@ -597,6 +598,7 @@ export default {
             symbol: '至',
             regx: /^\d+(\.\d{0,2})?$/,
             regx2: /^\d+(\.\d{0,2})?$/,
+            maxlength:18,
             type: '元'
           },
           {
@@ -614,6 +616,7 @@ export default {
             symbol: '至',
             regx: /^\d+(\.\d{0,2})?$/,
             regx2: /^\d+(\.\d{0,2})?$/,
+            maxlength:18,
             type: 'kg'
           }
         ]
@@ -1265,6 +1268,10 @@ export default {
           } else if (type == 2) {
             this.queryProPages();
           } else if (type == 3) {
+            this.WarehouseItemListobj={
+              cpCLogisticsEname: '',
+              cpCPhyWarehouseEname: ''
+            }
             this.queryLogisticsWarehousePages();
           } else {
             if (this.id == '-1') {
@@ -1295,6 +1302,8 @@ export default {
       }
       this.WarehouseItemListobj.id = '-1';
       this.specialAssignLogisticsWarehouseItemList.push(this.WarehouseItemListobj);
+  
+
       if (this.id != '-1') {
         this.fnSave(3);
       } else {
