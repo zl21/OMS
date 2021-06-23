@@ -174,6 +174,7 @@ export default {
           typeAll: 'default',
           buttons: [{
               text: '添加',
+              type:'primary',
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.nalysisAdd();
@@ -183,6 +184,7 @@ export default {
             },
             {
               text: '删除',
+              type:'warning',
               btnclick: () => {
                 this.nalysisDetale();
               },
@@ -201,6 +203,7 @@ export default {
               width: '6',
               value: 'PREFIX',
               AuotData: [], //匹配的选项
+              regx:/^[^\s]*$/,
               dimChange: (search) => {
                 //模糊查询的方法
                 // this.fuzzyquerybyak(search)
@@ -217,6 +220,7 @@ export default {
               width: '6',
               value: 'SUFFIX',
               AuotData: [], //匹配的选项
+              regx:/^[^\s]*$/,
               dimChange: (search) => {},
               dimEnter: (val) => {
                 this.nalysisAdd();
@@ -277,7 +281,10 @@ export default {
       self.initObjItem(self.ID);
     }
     const subData = await this.$OMS2.omsUtils.initSubtable('CP_C_LOGISTICS_FIX', this.ID, '180461',);
-    this.subTableConfig1.data = subData.rowData
+    this.subTableConfig1.data = subData.rowData.map((item) => {
+      item.COMBINATION = `${item.PREFIX}${item.SUFFIX}`;
+      return item;
+    })
   },
   created() {},
   methods: {
@@ -372,6 +379,10 @@ export default {
       let {PREFIX,SUFFIX} = this.subTableConfig1.businessFormConfig.formValue;
       let COMBINATION  = `${PREFIX}${SUFFIX}`;
       if(data.length){
+        if(COMBINATION === ''){
+          this.$Message.warning('内容不能为空！')
+          return;
+        }
         if(data.some((item)=> { return item.COMBINATION === COMBINATION})) {
           this.$Message.warning('重复数据，不能添加！')
           return;
@@ -384,7 +395,7 @@ export default {
     // 删除
     async nalysisDetale(){
       let tableConfig = this.subTableConfig1
-      this.subTableConfig1.data = this.$OMS2.omsUtils.getDifferentArr(tableConfig.data, tableConfig.selectionData, 'ID');
+      this.subTableConfig1.data = this.$OMS2.omsUtils.getDifferentArr(tableConfig.data, tableConfig.selectionData, 'COMBINATION');
       let arr = tableConfig.selectionData.map((item)=> { if(item.ID !== '-1') return item.ID});
       let ids = arr.filter((item) => { return item != undefined });
       if(ids.length){
@@ -434,22 +445,28 @@ export default {
       } = await self.service.basicData.platformSave(param);
       // this.loading = false;
       if (code === 0) {
-        this.backable = true;
-        if (this.formConfig.formValue.TYPE == 'LIST') {
-          this.showSubtablePart = true;
+        if(self.ID !== '-1'){
+          console.log('编辑');
+          this.backable = true;
+          this.back();
+        }else{
+          console.log('新增');
+          if (this.formConfig.formValue.TYPE == 'LIST') {
+            this.showSubtablePart = true;
+          }
+          // 数据回显
+          self.modify.master = {};
+          if (data && data.ID) self.ID = data.ID
+          self.$Message.success(message || $i18n.t('modalTips.z9'));
+          this.$comUtils.tabCloseAppoint(this);
+          this.$destroy(true);
+          this.$store.commit('global/tabOpen', {
+            type: 'tableDetailAction',
+            label: '物流公司档案编辑',
+            customizedModuleName: 'LOGISTICSCOMPANYFILESADDOREDIT',
+            customizedModuleId: self.ID
+          });
         }
-        // 数据回显
-        self.modify.master = {};
-        if (data && data.ID) self.ID = data.ID
-        self.$Message.success(message || $i18n.t('modalTips.z9'));
-        this.$comUtils.tabCloseAppoint(this);
-        this.$destroy(true);
-        this.$store.commit('global/tabOpen', {
-          type: 'tableDetailAction',
-          label: '物流公司档案编辑',
-          customizedModuleName: 'LOGISTICSCOMPANYFILESADDOREDIT',
-          customizedModuleId: self.ID
-        });
       } else {
         // 走框架的报错
       }
@@ -533,11 +550,13 @@ export default {
     /* --------------------- 工具函数： --------------------- */
     // 切换Label & 实时渲染subTable
     async labelClick(item) {
+      console.log('item',item);
       this.labelDefaultValue = item.value;
       // if(this.$route.params.customizedModuleId != 'New' && this.labelDefaultValue == 'CP_C_LOGISTICS_FIX'){
       //   const subData = await this.$OMS2.omsUtils.initSubtable('CP_C_LOGISTICS_FIX', this.ID, '180461');
       //   this.subTableConfig1.data = subData.rowData
       // }
+      console.log(this.labelDefaultValue);
       if (this.labelDefaultValue == 'PROPERTYVALUES' || this.labelDefaultValue == 'CP_C_LOGISTICS_FIX') return;
       this.subTableConfig2 = { //basicData
         centerName: 'basicData',
