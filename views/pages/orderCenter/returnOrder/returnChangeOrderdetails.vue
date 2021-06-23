@@ -362,8 +362,10 @@ export default {
         this.businessActionTable.businessButtonConfig.buttons.forEach(item => {
           SUB_ACTIONS.forEach(it => {
             if (item.webname == it.webname) {
-              item.isShow = !it.ishide;
+              item.isShow = true;
               item.text = it.webdesc;
+            } else {
+              item.isShow = false;
             }
           })
           if (this.returnProduct == '0') {
