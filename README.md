@@ -619,5 +619,6 @@
 | v1.7.57 | 下载账单serviceId |
 | v1.7.58 | 修复特殊物流方案仓库物流全选删除无效 |
 | v1.7.59 | popInputPlus version |
+| v1.7.60 | getPermissions方法返回值处理 |
 
 

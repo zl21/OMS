@@ -326,58 +326,95 @@ class commonUtils {
    * @returns
    */
   static getPermissions(self, array, params, isIndependent) {
-    let independent = []
-    // const show_iconbj_setup = ['ORDERMANAGER']; //储存允许设置按钮展示的页面集;
     const query = {
-      TABLE: params.table,
-      TYPE: params.type,
+      TABLE: params.table || params.TABLE,
+      TYPE: params.type || params.TYPE,
     }
-    // console.log('this[arrry].buttons===', this[arrry].buttons)
-    if (self[array] == undefined) return
-    self.service.common.fetchActionsInCustomizePage(query).then((res) => {
+    if (!isIndependent && self[array] == undefined) return
+    return new Promise(async (resolve) => {
+      const res = await self.service.common.fetchActionsInCustomizePage(query);
       let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
-      independent = result
-      if (isIndependent) {
-        self[array] = JSON.parse(JSON.stringify(result));
-        return independent
-      } else {
-        const a = []
-        self[array].buttons.forEach((item) => {
-          // 设置、收藏等图标按钮的配置
-          if (!item.text && item.icon) {
-            a.push(item);
-            // if(show_iconbj_setup.includes(self.$route.params.customizedModuleName)){ //暂时不过滤任何图标按钮
-            //   a.push(item)
-            // }else if(item.icon !== 'iconfont iconbj_setup'){
-            //   a.push(item);
-            // }
-
-          }
-        })
-        const c = []
-        result.forEach((element) => {
-          // 有下拉项的处理
-          if (element.child) {
-            this.buttonChild(element, self[array].buttons, c)
-          }
-          // 普通btn（无child）的处理
-          self[array].buttons.forEach((btn) => {
-            if (
-              btn.webname == element.webname ||
-              btn.webname.includes(element.webname)
-            ) {
-              btn.webid = element.webid
-              btn.text = element.webdesc
-              c.push(btn)
+      if (res.data.code === 0) {
+        if (isIndependent) {
+          resolve(result);
+        } else {
+          const a = []
+          self[array].buttons.forEach((item) => {
+            // 设置、收藏等图标按钮的配置
+            if (!item.text && item.icon) {
+              a.push(item);
             }
           })
-        })
-        self[array].buttons = [...c, ...a]
+          const c = []
+          result.forEach((element) => {
+            // 有下拉项的处理
+            if (element.child) {
+              this.buttonChild(element, self[array].buttons, c)
+            }
+            // 普通btn（无child）的处理
+            self[array].buttons.forEach((btn) => {
+              if (
+                btn.webname == element.webname ||
+                btn.webname.includes(element.webname)
+              ) {
+                btn.webid = element.webid
+                btn.text = element.webdesc
+                c.push(btn)
+              }
+            })
+          })
+          self[array].buttons = [...c, ...a]
+          if (self[array] != undefined) self[array].loading = false;
+        }
       }
-      self[array].loading = false
-    }).catch(e => {
-      if (self[array] != undefined) self[array].loading = false;
-    })
+    }).finally(e => {
+      console.log('function getPermissions::');
+    });
+    /*  self.service.common.fetchActionsInCustomizePage(query).then((res) => {
+       let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
+       independent = result
+       if (isIndependent) {
+ 
+         self[array] = JSON.parse(JSON.stringify(result));
+         return independent
+       } else {
+         const a = []
+         self[array].buttons.forEach((item) => {
+           // 设置、收藏等图标按钮的配置
+           if (!item.text && item.icon) {
+             a.push(item);
+             // if(show_iconbj_setup.includes(self.$route.params.customizedModuleName)){ //暂时不过滤任何图标按钮
+             //   a.push(item)
+             // }else if(item.icon !== 'iconfont iconbj_setup'){
+             //   a.push(item);
+             // }
+ 
+           }
+         })
+         const c = []
+         result.forEach((element) => {
+           // 有下拉项的处理
+           if (element.child) {
+             this.buttonChild(element, self[array].buttons, c)
+           }
+           // 普通btn（无child）的处理
+           self[array].buttons.forEach((btn) => {
+             if (
+               btn.webname == element.webname ||
+               btn.webname.includes(element.webname)
+             ) {
+               btn.webid = element.webid
+               btn.text = element.webdesc
+               c.push(btn)
+             }
+           })
+         })
+         self[array].buttons = [...c, ...a]
+       }
+       self[array].loading = false
+     }).catch(e => {
+       if (self[array] != undefined) self[array].loading = false;
+     }) */
   }
   static buttonChild(ele, btns, arr) {
     const obj = {}
