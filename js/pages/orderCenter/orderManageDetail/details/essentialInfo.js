@@ -18,6 +18,7 @@ export default {
   },
   data() {
     return {
+      butArray1:[],
       vmI18n:$i18n,
       isQh: true, 
       isQhChild: true,
@@ -204,7 +205,18 @@ export default {
       retailPriceTotal:'',
       orderPriceTotal:'',
       eyeStatus: false, // '订单收获地址'的眼睛icon的开/闭状态
-      eyeText:'显示'
+      eyeText:'显示',
+      butArr:[{
+          webname:'orderBillInfoSecurity',
+          isShow:true,
+        },{
+          webname:'orderModifyReceiverAddress',
+          isShow:true,
+        },{
+          webname:'orderModifyBillRemark',
+          isShow:true,
+        }
+      ],
     };
   },
   watch: {
@@ -297,6 +309,25 @@ export default {
         this.$children[0].$children.find(item => item.name === 'modifyRemarkDialog').openConfirm();
       }, 100);
     }
+  },
+  async created(){
+    // 按钮权限配置
+    // console.log(JSON.parse(sessionStorage.getItem("ACTIONS")));
+    let ACTIONS = JSON.parse(sessionStorage.getItem("ACTIONS"));
+    console.log(ACTIONS);
+    this.butArr.forEach((x)=>{
+      // 判断是否存在不存在设置为false，存在看是否显示ishide
+      if(!ACTIONS.some(y => y.webname === x.webname)){
+        x.isShow = false
+        console.log(x.webname);
+      }else{
+        ACTIONS.forEach((e) => {
+          if(x.webname === e.webname){
+            x.isShow = !e.ishide
+          }
+        })
+      }
+    })
   },
   mounted() {
     let dataProps = this.componentData;
