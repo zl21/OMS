@@ -31,7 +31,7 @@ export default {
     $network.post("/p/cs/getWarehouseLogisticsInfo", params),
   delWarehouseLogistics: (params) =>
     $network.post("/p/cs/delWarehouseLogistics", params),
-  fetchActionsInCustomizePage: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/oc/oms/v1/queryActions", params, serviceId),
+  fetchActionsInCustomizePage: (params, serviceId) => $network.post("/p/cs/oc/oms/v1/queryActions", params, serviceId || {}),
   manualJdMatchingCheck: (params) =>
     $network.post("/p/cs/manualJdMatchingCheck", params),
   jdReturnStorageSave: (params) =>
