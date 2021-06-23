@@ -219,6 +219,7 @@ export default {
             },
           },
           {
+            webname: 'fix_back',
             text: $i18n.t("btn.back"),
             btnclick: () => {
               this.back();
@@ -701,13 +702,13 @@ export default {
             oneObj: (val) => {
               this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ID = val.pid;
               this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ENAME = val.valuedata;
-              this.formConfigRe = this.emptyData(this.formConfigRe,"CP_C_REGION_PROVINCE_ID",this.modify,val,["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"]);
+              this.formConfigRe = this.emptyData(this.formConfigRe, "CP_C_REGION_PROVINCE_ID", this.modify, val, ["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"]);
               this.modifyData("CP_C_REGION_PROVINCE_ID", "master", "r");
             },
-            InputEnter: (val)=> {
+            InputEnter: (val) => {
               this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ID = val.pid;
               this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ENAME = val.valuedata;
-              this.formConfigRe = this.emptyData(this.formConfigRe,"CP_C_REGION_PROVINCE_ID",this.modify,val,["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"]);
+              this.formConfigRe = this.emptyData(this.formConfigRe, "CP_C_REGION_PROVINCE_ID", this.modify, val, ["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"]);
               this.modifyData("CP_C_REGION_PROVINCE_ID", "master", "r");
             }
           },
@@ -737,14 +738,14 @@ export default {
             oneObj: (val) => {
               this.formConfigRe.formValue.CP_C_REGION_CITY_ID = val.pid;
               this.formConfigRe.formValue.CP_C_REGION_CITY_ENAME = val.valuedata;
-              this.formConfigRe = this.emptyData(this.formConfigRe,"CP_C_REGION_CITY_ID",this.modify,val,["CP_C_REGION_AREA_ID"]);
+              this.formConfigRe = this.emptyData(this.formConfigRe, "CP_C_REGION_CITY_ID", this.modify, val, ["CP_C_REGION_AREA_ID"]);
               this.modifyData("CP_C_REGION_CITY_ID", "master", "r");
             },
-            InputEnter: (val)=> {
-              console.log('InputEnter::',val);
+            InputEnter: (val) => {
+              console.log('InputEnter::', val);
               this.formConfigRe.formValue.CP_C_REGION_CITY_ID = val.pid;
               this.formConfigRe.formValue.CP_C_REGION_CITY_ENAME = val.valuedata;
-              this.formConfigRe = this.emptyData(this.formConfigRe,"CP_C_REGION_CITY_ID",this.modify,val,["CP_C_REGION_AREA_ID"]);
+              this.formConfigRe = this.emptyData(this.formConfigRe, "CP_C_REGION_CITY_ID", this.modify, val, ["CP_C_REGION_AREA_ID"]);
               this.modifyData("CP_C_REGION_CITY_ID", "master", "r");
             }
           },
@@ -775,7 +776,7 @@ export default {
               this.formConfigRe.formValue.CP_C_REGION_AREA_ENAME = val.valuedata;
               this.modifyData("CP_C_REGION_AREA_ID", "master", "r");
             },
-            InputEnter: (val)=> {
+            InputEnter: (val) => {
               this.formConfigRe.formValue.CP_C_REGION_AREA_ID = val.pid;
               this.formConfigRe.formValue.CP_C_REGION_AREA_ENAME = val.valuedata;
               this.modifyData("CP_C_REGION_AREA_ID", "master", "r");
@@ -1192,7 +1193,7 @@ export default {
                         if (!params.row.QTY && !inputRA) {
                           params.row.REAL_AMT = '0.00';
                           params.row.ADJUST_AMT = '0.00';
-                          params.row.PRICE_ACTUAL = '0.00';    
+                          params.row.PRICE_ACTUAL = '0.00';
                         } else {
                           params.row.REAL_AMT = self.$OMS2.omsUtils.floatNumber(inputRA, 2);
                         }
@@ -1273,6 +1274,9 @@ export default {
   created() {
     this.relationShip();
   },
+  activated() {
+    // this.getBtn();
+  },
   async mounted() {
     this.querItem("PAY_TYPE").options = [
       {
@@ -1288,12 +1292,20 @@ export default {
       // this.getPermissions('btnConfig', 'orderManager');
       this.init(-1);
     });
+    // this.getBtn();
     this.initObjItem(self.ID);
   },
   methods: {
-    /* debo(fun) {
-      _.debounce(fun, 20)
-    }, */
+    // 获取按钮权限
+    getBtn() {
+      $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'OC_B_ORDER', type: 'OBJ' }, true).then(res => {
+        const { ACTIONS, SUB_ACTIONS } = res;
+        console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+        const webArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+        this.jordanTableConfig.isShowDeleteDetailBtn = webArr.includes('删除');
+        this.jordanTableConfig.isShowImportBtn = webArr.includes('导入');
+      });
+    },
     debounce(fn, time) {
       let timer = null;
       return function debounced() {

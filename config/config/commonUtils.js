@@ -367,15 +367,19 @@ class commonUtils {
           // 普通btn（无child）的处理
           self[array].buttons.forEach((btn) => {
             if (!btn.webname) {
-              console.log('btnConfig no webname !');
+              console.log('btnConfig no webname !', btn);
               return
             }
-            if (
-              btn.webname == element.webname
-            ) {
+            if (btn.webname == element.webname) {
               btn.webid = element.webid
               btn.text = element.webdesc
               c.push(btn)
+            }
+            if (btn.webname == 'fix_back') {
+              btn.text = $i18n.t("btn.back");
+              if (!c.some(it => it.webname == 'fix_back')) {
+                c.push(btn)
+              }
             }
           })
         })

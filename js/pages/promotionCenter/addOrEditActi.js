@@ -73,6 +73,8 @@ export default {
         order_note_content: '', // 备注内容
         except_provinces: {
           itemdata: {
+            isBackRowItem: true,
+            version: '1.4',
             colid: '180257',
             serviceId: "r3-cp",
             colname: 'CP_C_PROVINCE_IDS',
