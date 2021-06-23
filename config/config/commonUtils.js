@@ -332,7 +332,7 @@ class commonUtils {
     }
     let data, btnArr = [];
     if (!isIndependent && self[array] == undefined) return
-    if (self[array] != undefined) btnArr = self[array].buttons;
+    if (self[array] != undefined) btnArr = self[array].buttons || [];
     return new Promise(async (resolve) => {
       const res = await self.service.common.fetchActionsInCustomizePage(query);
       let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
@@ -359,6 +359,9 @@ class commonUtils {
           }
           // 普通btn（无child）的处理
           self[array].buttons.forEach((btn) => {
+            if (!btn.webname) {
+              return self.$Message.warning('btnConfig no webname !')
+            }
             if (
               btn.webname == element.webname ||
               btn.webname.includes(element.webname)
