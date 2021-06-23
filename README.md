@@ -231,3 +231,4 @@
 | v1.1.87 | businessActionTable form+button优化2 |
 | v1.1.88 | fkinputPlus动态接口网关(兼容SKX) |
 | v1.1.89 | businessActionTable 回滚 |
+| v1.1.90 | 默认显示表头 |

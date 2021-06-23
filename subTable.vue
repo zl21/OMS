@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       tableConfig: {
-        showHeader: false,
+        showHeader: true,
         columns: [],
         data: [],
         pageShow: true, // 控制分页是否显示
