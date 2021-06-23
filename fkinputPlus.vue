@@ -245,10 +245,10 @@ export default {
     },
     async getFuzzySelectData(val) {
       const query = this.handelFuzzyParam(val);
-      const { version, serviceId } = this.itemdata
-      const result = await this.service.common.fuzzyquerybyak(query, { serviceId: serviceId || 'r3-cp' });
-      if (result.data.code == 0) {
-        const { row, tabth, totalRowCount } = version == '1.4' ? result.data.data : result.data.datas
+      const {
+        data: { code, data, message },
+      } = await this.service.common.fuzzyquerybyak(query, { serviceId: serviceId || 'r3-cp' });
+      if (code == 0) {
         data.forEach((item) => {
           item.value = this.itemdata.columnsKey ? item[this.itemdata.columnsKey[0]] : item.value; // 模糊搜索失焦/选中后展示在input中的字符
         });
