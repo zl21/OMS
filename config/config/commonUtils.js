@@ -330,11 +330,12 @@ class commonUtils {
       TABLE: params.table || params.TABLE,
       TYPE: params.type || params.TYPE,
     }
+    const serviceId = params.serviceId || params.SERVICEID || 'r3-cp';
     let data, btnArr = [];
     if (!isIndependent && self[array] == undefined) return
     if (self[array] != undefined) btnArr = self[array].buttons || [];
     return new Promise(async (resolve) => {
-      const res = await self.service.common.fetchActionsInCustomizePage(query);
+      const res = await self.service.common.fetchActionsInCustomizePage(query, { serviceId });
       let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
       data = JSON.parse(JSON.stringify(result))
       if (res.data.code === 0) {
@@ -360,7 +361,8 @@ class commonUtils {
           // 普通btn（无child）的处理
           self[array].buttons.forEach((btn) => {
             if (!btn.webname) {
-              return self.$Message.warning('btnConfig no webname !')
+              console.log('btnConfig no webname !');
+              return
             }
             if (
               btn.webname == element.webname ||
