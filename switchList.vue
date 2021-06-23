@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-18 11:28:58
- * @LastEditTime: 2021-06-22 14:34:14
+ * @LastEditTime: 2021-06-23 11:29:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/switchList.vue
@@ -25,6 +25,7 @@
           :style="em.style"
           :regx="em.regx"
           :disabled="em.disabled"
+          :maxlength="em.maxlength"
         />
         {{em.symbol}}
         <Input
@@ -33,6 +34,7 @@
           :placeholder="em.placeholder1"
           :style="em.style"
           :regx="em.regx2"
+          :maxlength="em.maxlength"
         />
         {{em.type}}
       </div>
