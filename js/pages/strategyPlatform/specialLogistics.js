@@ -578,8 +578,8 @@ export default {
             name: '商品数量',
             symbol: '至',
             pkgAttributeType: 1,
-            regx: /^\d+(\.\d{0,2})?$/,
-            regx2: /^\d+(\.\d{0,2})?$/,
+            regx: /^[1-9]\d*$/,
+            regx2: /^[1-9]\d*$/,
             maxlength:18,
             type: '件'
           },
@@ -1301,7 +1301,7 @@ export default {
         }
       }
       this.WarehouseItemListobj.id = '-1';
-      this.specialAssignLogisticsWarehouseItemList.push(this.WarehouseItemListobj);
+      this.specialAssignLogisticsWarehouseItemList = this.WarehouseItemListobj
   
 
       if (this.id != '-1') {
