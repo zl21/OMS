@@ -10,6 +10,7 @@ import returnStorageList from 'allpages/OrderCenter/returngood/returnStoreage/re
 import returnTreasuryAdd from 'allpages/OrderCenter/returngood/returnStoreage/returnTreasuryAdd.vue'; // 退货入库-新增 退货入库-新增
 import refundAfterShipment from 'allpages/OrderCenter/returngood/refundAfterShipment.vue'; // 订单中心-已发货退款单-编辑 额外退款
 import distributionOrderList from 'allpages/OrderCenter/vipJit/distributionOrderList.vue';
+import skuAbnormalRegistration from 'allpages/OrderCenter/returngood/skuAbnormalRegistration.vue'; // 订单中心-sku异常等级
 
 export default {
   // 订单中心-扫描入库
@@ -39,6 +40,11 @@ export default {
   // 订单中心-退换货单
   RETURNGOODLIST: {
     component: returnGoodManagementList,
+  },
+  // 订单中心-sku异常登记
+  SKUABNORMALREGISTRATION: {
+    component: skuAbnormalRegistration,
+    labelName: 'sku异常登记编辑',
   },
   // // 订单中心-退货入库-列表
   RETURNSTOREAGELIST: {

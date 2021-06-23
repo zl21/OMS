@@ -1113,11 +1113,11 @@ export default {
       };
       if (obj) {
         param.highSearch.push(
-          {
-            type: 'input',
-            queryName: 'SOURCE_CODE',
-            value: obj.tem.SOURCE_CODE
-          },
+          // {
+          //   type: 'input',
+          //   queryName: 'SOURCE_CODE',
+          //   value: obj.tem.SOURCE_CODE
+          // },
           {
             type: 'input',
             queryName: 'BILL_NO',
@@ -1150,7 +1150,8 @@ export default {
           self.formConfig.formValue.PAY_TYPE = payType;
         }
         self.formConfig.formValue.TID = item.SOURCE_CODE;
-        self.formConfig.formValue.ORDER_NO = item.BILL_NO;
+        // 接口把数据处理了，BillNo 的值 放到OrigOrderNo了， 页面从ORIG_ORDER_NO 字段取值 2021-0621 刘bai
+        self.formConfig.formValue.ORDER_NO = item.ORIG_ORDER_NO;
         self.formConfig.formValue.SOURCE_TID = item.ID;
         if (item.PAY_TIME) {
           // 时间戳转换为时间
@@ -1208,7 +1209,7 @@ export default {
             TRUE_PRICE: subItem.realAmt,
             PS_C_SKU_ID: subItem.skuId,
             GBCODE: subItem.barCode,
-            PAYABLE_PRICE: 0, // 应付金额初始默认为0
+            PAYABLE_PRICE: subItem.realAmt, // 应付金额初始默认为0 // 20210603 35139 赔付单的明细应付金额默认为实际成交价
             checked: false
           };
         });

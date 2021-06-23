@@ -1181,6 +1181,12 @@ export default {
             } // 按钮点击事件
           },
           {
+            webname: 'OcBOrderExportFilterCmd', // 导出（不含手机号）
+            btnclick: () => {
+              this.exportClick(true);
+            } // 按钮点击事件
+          },
+          {
             icon: 'iconfont iconbj_setup', // 按钮图标
             btnclick: () => {
               const self = this;
@@ -1286,7 +1292,8 @@ export default {
         platformDelivery: 6 // 平台发货
       },
       formValObj: {},
-      isExport: false
+      isExport: false,
+      isTagAll: '' // 用于判断不含标签字段是否选择全部
     };
   },
   activated() {
@@ -2102,7 +2109,9 @@ export default {
                 placeholder: '', // 占位文本，默认为请输入
                 value: item.tabth.colname, // 输入框的值
                 multiple: true, // 布尔值,下拉框是否开启多选,默认为不开启
-                selectChange: () => {}, // 选中事件，默认返回选中的值
+                selectChange: () => {
+                  _this.allSelect(item.tabth.colname);
+                }, // 选中事件，默认返回选中的值
                 options: _this.converSelect(item.tabth.combobox)
               };
               _this.formConfig.formValue[item.tabth.colname] = [];
@@ -2653,6 +2662,15 @@ export default {
         // this.$Message.success("后台重新分配快递中...");
       });
     },
+    allSelect(e) {
+      if (e === 'HAS_NO_TAG') {
+        if (this.formConfig.formValue.HAS_NO_TAG[0] === 'bSelect-all') {
+          this.isTagAll = 'all'
+        } else {
+          this.isTagAll = ''
+        }
+      }
+    },
     loadData() {
       const arr = [];
       this.formConfig.formData.forEach((item, index) => {
@@ -2713,6 +2731,14 @@ export default {
       // 当出现loading，禁止页面滚动
       document.getElementById('content').style.overflow = 'hidden';
       document.getElementById('content').style.position = '';
+
+      // 处理不含标签查询数据不一致问题
+      const copyHighSearchData = self.highSearchData;
+      copyHighSearchData.map(item => {
+        if (item.queryName === "HAS_NO_TAG" && self.isTagAll === 'all') {
+          item.value = 'all'
+        }
+      })
       const param = {
         page: {
           pageSize: self.agTableConfig.pagenation.pageSize,
@@ -2732,7 +2758,6 @@ export default {
         param.lackstockOrAudit = self.statusData.value;
         param.status = { label: '缺货', value: '2', isShow: true };
       }
-
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
       self.service.orderCenter
@@ -3041,14 +3066,14 @@ export default {
     },
 
     // 导出校验
-    exportClick() {
+    exportClick(isNoPhone) {
       const _this = this;
       _this.selection = _this.$refs.agGridChild.AGTABLE.getSelect();
       if (_this.selection.length > 0) {
-        this.exportChange(_this.selection);
+        this.exportChange(_this.selection, isNoPhone);
       } else {
         if (_this.selection.length === 0) {
-          this.exportChange(_this.agTableConfig.rowData);
+          this.exportChange(_this.agTableConfig.rowData, isNoPhone);
           return;
         }
         if (_this.statusData.value == 0) {
@@ -3059,7 +3084,7 @@ export default {
       }
     },
     // 导出
-    exportChange(list = []) {
+    exportChange(list = [], isNoPhone) {
       if (this.isExport) {
         // 有一项导出正在进行中
 
@@ -3095,17 +3120,31 @@ export default {
         }
         fromdata.append('param', JSON.stringify(param));
       }
-      this.service.orderCenter.exportOcBOrder(fromdata).then(res => {
-        this.isExport = false;
-        if (res.data.code == 0 && res.data.data !== null) {
-          const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
-          this.$Message.success(mes);
-          publicMethodsUtil.downloadUrlFile(res.data.data);
-        } else {
-          const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
-          this.$Message.error(err);
-        }
-      });
+      if (isNoPhone) {
+        this.service.orderCenter.exportOcBOrderFilter(fromdata).then(res => {
+          this.isExport = false;
+          if (res.data.code == 0 && res.data.data !== null) {
+            const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
+            this.$Message.success(mes);
+            publicMethodsUtil.downloadUrlFile(res.data.data);
+          } else {
+            const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
+            this.$Message.error(err);
+          }
+        });
+      } else {
+        this.service.orderCenter.exportOcBOrder(fromdata).then(res => {
+          this.isExport = false;
+          if (res.data.code == 0 && res.data.data !== null) {
+            const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
+            this.$Message.success(mes);
+            publicMethodsUtil.downloadUrlFile(res.data.data);
+          } else {
+            const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
+            this.$Message.error(err);
+          }
+        });
+      }
     },
     // 警告框确认
     warningOk() {

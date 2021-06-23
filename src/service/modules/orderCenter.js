@@ -19,6 +19,7 @@ export default {
   doBatchReturnOrder: params => network.post('/api/cs/oc/oms/v1/doBatchReturnOrder', params), // 批量退单
   antiAuditReturnOrder: params => network.post('/api/cs/oc/oms/v1/batch/antiAudit', params), // 批量撤回
   exportOcBOrder: params => network.post('/api/cs/oc/oms/v1/exportOcBOrder', params), // 导出
+  exportOcBOrderFilter: params => network.post('/api/cs/oc/oms/v1/exportOcBOrderFilter', params), // 导出（不含手机）
   auditOrderReserve: params => network.post('/api/cs/oc/oms/v1/auditOrderReserve', params), // 反审核
   checkAddOrderInvoicing: params => network.post('/api/cs/oc/oms/v1/checkAddOrderInvoicing', params),
   checkRecordInvoicing: params => network.post('/api/cs/oc/oms/v1/checkRecordInvoicing', params), // 开票通知
