@@ -280,20 +280,20 @@ export default {
           console.log("退货单");
           // tableName = 'OC_B_RETURN_ORDER_REFUND_ITEM';
           renderKeys = ["REFUND_ID", "QTY_REFUND"];
-          this.getBtn();
-          // this.businessActionTable.businessButtonConfig.buttons[1].isShow = false;
-          // this.businessActionTable.businessButtonConfig.buttons[0].isShow = true;
-          // this.businessActionTable.businessButtonConfig.buttons[2].isShow = true;
+          // this.getBtn();
+          this.businessActionTable.businessButtonConfig.buttons[1].isShow = false;
+          this.businessActionTable.businessButtonConfig.buttons[0].isShow = true;
+          this.businessActionTable.businessButtonConfig.buttons[2].isShow = true;
           this.businessActionTable.data = this.toMainData.tui;
         } else if (newData === "1") {
           console.log("换货单");
           // tableName = 'OC_B_RETURN_ORDER_EXCHANGE';
           renderKeys = ["QTY_EXCHANGE", "PRICE_ACTUAL"];
-          this.getBtn();
-          // this.businessActionTable.businessButtonConfig.buttons[0].isShow = false;
-          // this.businessActionTable.businessButtonConfig.buttons[1].isShow = true;
-          // this.businessActionTable.businessButtonConfig.buttons[1].text = "新增明细";
-          // this.businessActionTable.businessButtonConfig.buttons[2].isShow = true;
+          // this.getBtn();
+          this.businessActionTable.businessButtonConfig.buttons[0].isShow = false;
+          this.businessActionTable.businessButtonConfig.buttons[1].isShow = true;
+          this.businessActionTable.businessButtonConfig.buttons[1].text = "新增明细";
+          this.businessActionTable.businessButtonConfig.buttons[2].isShow = true;
           this.businessActionTable.data = this.toMainData.huan;
         }
         if (this.$route.params.customizedModuleId === "New") {
@@ -346,7 +346,7 @@ export default {
         }
       })
     } else {
-      this.getBtn();
+      // this.getBtn();
     }
   },
   async mounted() {

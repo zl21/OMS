@@ -662,7 +662,7 @@ export default {
     this.relationShip();
   },
   activated() {
-    this.getBtn();
+    // this.getBtn();
   },
   destroyed() {
 
@@ -808,7 +808,7 @@ export default {
         self.reInfo = dataEx.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_ECXCHANGE_TABLE.ID+100)").childs;
         self.formConfig = self.$OMS2.omsUtils.initFormConfig(base, self.formConfig);
       }).then(() => {
-        $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true);
+        // $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true);
         console.log('buttons::', this.btnConfig.buttons);
       })
       // const data = await this.$OMS2.omsUtils.getObject("OC_B_RETURN_ORDER_VIRTUAL_TABLE", id);
