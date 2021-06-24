@@ -431,10 +431,6 @@ export default {
         this.qurefrom('cpCPhyWarehouseEname')[0].style = null;
         // 表示分仓策略》分仓规则
         if (customizedModuleId == 'New' || customizedModuleId == '-1' || customizedModuleId == 'NEW') {
-          // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-          // const data = { label: '分仓规则新增', name:keepAliveModuleName}; //当前界面模块名称 
-          // this.$store.commit('global/modifycurrentLabel' , data)
-
           this.btnConfig.buttons.forEach(em => {
             if (em.text == '下一步') {
               em.isShow = true;
@@ -641,10 +637,11 @@ export default {
       return objitem;
     },
     fntableData(id) {
+   
       if (this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS') {
         service.strategyPlatform
           .assignLogisticsqueryDetailById({
-            ID: id,
+            ID: this.$route.query.copy||id,
             SIZE: this.tableConfig.pageSize,
             CURRENT: this.tableConfig.current,
             regionName: this.seachVal
@@ -673,7 +670,7 @@ export default {
       service.strategyPlatform
         .getWarehouseRegionInfo({
           params: {
-            id,
+            id:this.$route.query.copy||id,
             pageSize: this.tableConfig.pageSize,
             pageNum: this.tableConfig.current,
             regionName: this.seachVal
@@ -738,7 +735,7 @@ export default {
             if (key == 'isactive') {
               this.formConfig.formValue[key] = warehouseData[key] == 'Y';
               //isactive  Y只有方案名称，优先级，备注 可以编辑
-              if (warehouseData[key] == 'Y') {
+              if (warehouseData[key] == 'Y' && !vm.$route.query.copy) {
                 this.qurefrom('beginTime')[0].disabled = true;
                 this.qurefrom('endTime')[0].disabled = true;
                 this.btnConfig2.buttons.length > 0 && (this.btnConfig2.buttons[0].disabled = true);
@@ -773,7 +770,7 @@ export default {
           if (key == 'isactive') {
             this.formConfig.formValue[key] = warehouseData[key] == 'Y';
             //isactive  Y只有方案名称，优先级，备注 可以编辑
-            if (warehouseData[key] == 'Y') {
+            if (warehouseData[key] == 'Y' && !vm.$route.query.copy) {
               this.qurefrom('beginTime')[0].disabled = true;
               this.qurefrom('endTime')[0].disabled = true;
               this.btnConfig2.buttons.length > 0 && (this.btnConfig2.buttons[0].disabled = true)

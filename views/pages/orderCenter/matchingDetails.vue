@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-06-24 17:41:39
+ * @LastEditTime: 2021-06-24 19:47:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
@@ -95,7 +95,8 @@ export default {
         },
         {
           text: '清除退单',
-          isShow: true,
+           webname: "OC_B_REFUND_IN_eliminate",
+          isShow: false,
           btnclick: () => {
             this.emptyTabledata()
           },
