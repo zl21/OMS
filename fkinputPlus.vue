@@ -230,7 +230,8 @@ export default {
      */
     async getSelectData() {
       const query = this.handelParam();
-      const { version, serviceId } = this.itemdata
+      const { serviceId } = this.itemdata
+      const version = this.version || this.itemdata.version || '1.3'; // 默认1.3,兼容斯凯奇
       const result = await this.service.common.QueryList(query, { serviceId: serviceId || 'r3-cp' });
       if (result.data.code == 0) {
         const { row, tabth, totalRowCount } = version == '1.4' ? result.data.data : result.data.datas
