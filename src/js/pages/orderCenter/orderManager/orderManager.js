@@ -1293,7 +1293,8 @@ export default {
       },
       formValObj: {},
       isExport: false,
-      isTagAll: '' // 用于判断不含标签字段是否选择全部
+      isTagAll: '', // 用于判断不含标签字段是否选择全部
+      isTagAll1: '' // 用于判断标签字段是否选择全部
     };
   },
   activated() {
@@ -2670,6 +2671,13 @@ export default {
           this.isTagAll = ''
         }
       }
+      if (e === 'HAS_TAG') {
+        if (this.formConfig.formValue.HAS_TAG[0] === 'bSelect-all') {
+          this.isTagAll1 = 'all'
+        } else {
+          this.isTagAll1 = ''
+        }
+      }
     },
     loadData() {
       const arr = [];
@@ -2736,6 +2744,9 @@ export default {
       const copyHighSearchData = self.highSearchData;
       copyHighSearchData.map(item => {
         if (item.queryName === "HAS_NO_TAG" && self.isTagAll === 'all') {
+          item.value = 'all'
+        }
+        if (item.queryName === "HAS_TAG" && self.isTagAll1 === 'all') {
           item.value = 'all'
         }
       })
