@@ -50,7 +50,8 @@ export default {
             // name: "收货省份",
             name: $i18n.t('form_label.receiving_province'),
             readonly: false,
-            valuedata: ''
+            valuedata: '',
+            version:'1.4'
           }
         }, // 收货省份
         stores: {
@@ -66,7 +67,8 @@ export default {
             name: $i18n.t('table_label.shopName'),
             readonly: false,
             refobjid: '',
-            valuedata: ''
+            valuedata: '',
+            version:'1.4'
           }
         } // 店铺名称
       },

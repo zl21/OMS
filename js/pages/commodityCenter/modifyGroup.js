@@ -42,7 +42,7 @@ export default {
       },
       extendBtn:[
         {
-          webname: 'lookup_save', // 保存
+          webname: 'ps_c_pro_group_save', // 保存
           text: '保存',
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
@@ -51,7 +51,7 @@ export default {
           },
         },
         {
-          webname: 'lookup_return', // 返回
+          webname: 'ps_c_pro_group_return', // 返回
           text: $i18n.t('btn.back'),
           btnclick: () => {
             if (this.isModify) {
@@ -532,8 +532,9 @@ export default {
       }];
     }
     this.query();
+    const buttons = self.$OMS2.BtnConfig.config();
     this.btnConfig.buttons = [...this.extendBtn];
-    // this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_PRO_GROUP', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
+    this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_PRO_GROUP', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
   },
   methods: {
     query() {

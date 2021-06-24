@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-03 19:24:03
- * @LastEditTime: 2021-06-21 17:48:07
+ * @LastEditTime: 2021-06-24 18:00:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/pages/strategyPlatform/auditOrderStrategy.js
@@ -95,49 +95,50 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
         },
         btnConfig: {
           typeAll: 'default',
-          buttons: [
-            {
-              text: '保存',
-              btnclick: ()=>{
-                this.save();
-              }
-            },
-            {
-              text: '返回',
-              btnclick: ()=>{
-                if (this.isModify) {
-                  this.$Modal.fcWarning({
-                    title: '提示', // 打印
-                    content: '该页面已经修改,是否继续返回?', // 正在打印中，请稍后。。。
-                    mask: true,
-                    showCancel: true,
-                    onOk: () => {
-                      comUtils.tabCloseAppoint(this);
-                      this.$destroy(true);
-                      this.$store.commit('global/tabOpen', {
-                        tableId: 10662,
-                        type: 'S',
-                        tableName: 'ST_C_AUTO_AUDIT',
-                        label: '审单策略',
-                        back: true,
-                      });
-                    }
-                  });
-                } else {
-                  comUtils.tabCloseAppoint(this);
-                  this.$destroy(true);
-                  this.$store.commit('global/tabOpen', {
-                    tableId: 10662,
-                    type: 'S',
-                    tableName: 'ST_C_AUTO_AUDIT',
-                    label: '审单策略',
-                    back: true,
-                  });
-                }
+          buttons: []
+        },
+        extendBtn:[
+          {
+            text: '保存',
+            btnclick: ()=>{
+              this.save();
+            }
+          },
+          {
+            text: '返回',
+            btnclick: ()=>{
+              if (this.isModify) {
+                this.$Modal.fcWarning({
+                  title: '提示', // 打印
+                  content: '该页面已经修改,是否继续返回?', // 正在打印中，请稍后。。。
+                  mask: true,
+                  showCancel: true,
+                  onOk: () => {
+                    comUtils.tabCloseAppoint(this);
+                    this.$destroy(true);
+                    this.$store.commit('global/tabOpen', {
+                      tableId: 10662,
+                      type: 'S',
+                      tableName: 'ST_C_AUTO_AUDIT',
+                      label: '审单策略',
+                      back: true,
+                    });
+                  }
+                });
+              } else {
+                comUtils.tabCloseAppoint(this);
+                this.$destroy(true);
+                this.$store.commit('global/tabOpen', {
+                  tableId: 10662,
+                  type: 'S',
+                  tableName: 'ST_C_AUTO_AUDIT',
+                  label: '审单策略',
+                  back: true,
+                });
               }
             }
-          ]
-        },
+          }
+        ],
         formConfig: {
           formData: [
             {
@@ -300,9 +301,12 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
     },
     mounted() {
       const self = this;
+      const buttons = self.$OMS2.BtnConfig.config();
+      this.btnConfig.buttons = [...this.extendBtn];
       if (self.id !== '-1') {
         self.formConfig.formData[0].style = 'input';
         this.query();
+        // this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'ST_C_AUTO_AUDIT', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
       }
     },
     methods: {

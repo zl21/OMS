@@ -561,7 +561,7 @@ export default {
       this.btnConfig.buttons = [...this.extendBtn];
       this.skuInfoBtnConfig.buttons = [ ...this.extendSkuInfoBtn];
       this.supplierBtnConfig.buttons = [ ...this.extendSupplierBtn];
-      // this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_PRO', type: 'OBJ' , serviceId:'r3-oc-oms'});
+      // this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_PRO', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
     },
     addSupplier() {
       const self = this;

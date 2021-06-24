@@ -55,10 +55,10 @@
           selectionData: [], // 勾选数据
           data: [],
           columns: [
-            {
-              key: 'ID',
-              title: '序号'
-            },
+            // {
+            //   key: 'ID',
+            //   title: '序号'
+            // },
             {
               key: 'EXCEPTION_TYPE_NAME',
               title: '异常类型'

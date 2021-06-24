@@ -52,10 +52,10 @@ import businessActionTable from 'professionalComponents/businessActionTable';
           selectionData: [], // 勾选数据
           data: [],
           columns: [
-            {
-              key: 'ID',
-              title: '序号'
-            },
+            // {
+            //   key: 'ID',
+            //   title: '序号'
+            // },
             {
               key: 'CP_C_SHOP_TITLE',
               title: '店铺名称'

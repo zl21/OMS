@@ -15,6 +15,7 @@
         <div class="formList">
           <div class="row storeName">
             <my-input
+            version='1.4'
               :is-active="basicData.stores.isActive"
               :is-disabled="basicData.stores.isdisabled"
               :itemdata="basicData.stores.itemdata"
@@ -121,6 +122,7 @@
           </div>
           <div class="row storeName">
             <my-input
+            version="1.4"
               :is-active="basicData.receiving_porvince.isActive"
               :is-disabled="basicData.receiving_porvince.isdisabled"
               :itemdata="basicData.receiving_porvince.itemdata"

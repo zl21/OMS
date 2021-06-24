@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="i_body">
-      <Table :columns="columns" :data="data" @on-row-click="onRowClick"/>
+      <Table :columns="columns" :data="data" @on-row-click="onRowClick" height="266"/>
     </div>
     <businessButton class="modal-footer" :btn-config="btnConfig" />
   </div>
@@ -270,6 +270,7 @@ export default {
 <style lang="less">
 // @import "~@/css/modal/orderCenter/specifyGoodsAssign.less";
 .specifyGoods {
+  height: 375px;
   .i_head {
     height: 30px;
     .searchForm {
