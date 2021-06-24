@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       panelDefaultValue: 'panel_baseInfo', // 设置默认打开'基本信息'
       backable: false,
@@ -23,7 +23,7 @@ export default {
       labelList: [{
         label: '操作日志',
         value: 'LOG',
-      }, ],
+      },],
       labelDefaultValue: 'CP_REGION_ALIAS_LOG', // 设置tab默认值
       subTableConfig: {
         centerName: '',
@@ -38,23 +38,26 @@ export default {
       btnConfig: {
         typeAll: 'default',
         buttons: [{
-            text: '保存',
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.save();
-            },
+          webname: 'nationalProvinceCitySave',
+          // text: '保存',
+          disabled: false, // 按钮禁用控制
+          btnclick: () => {
+            this.save();
           },
-          {
-            text: $i18n.t('btn.back'),
-            btnclick: () => {
-              this.back();
-            },
+        },
+        {
+          webname: 'fix_back',
+          text: $i18n.t('btn.back'),
+          btnclick: () => {
+            this.back();
           },
+        },
         ],
       },
       // 新增区域
       formConfig: {
-        formData: [{
+        formData: [
+          {
             style: 'input',
             label: '区域编码',
             value: 'CP_C_REGION_AREA_ECODE',
@@ -94,7 +97,8 @@ export default {
             value: 'REGION_TYPE', // 输入框的值
             colname: 'REGION_TYPE', // 输入框的值
             width: '18', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-            options: [{
+            options: [
+              {
                 label: '国家',
                 value: '0',
                 disabled: true,
@@ -302,16 +306,24 @@ export default {
   },
   async mounted() {
     const self = this;
+    $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'NATIONALPROVINCIALMUNICIPALEDIT', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+      console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+    });
     self.initObjItem(self.ID);
     // 子表初始化
     this.subTableConfig = {
-      centerName:"basicData",
+      centerName: "basicData",
       tablename: this.labelDefaultValue,
-      pageShow:true,
+      pageShow: true,
       objid: this.ID,
     };
   },
-  created() {},
+  created() { },
+  activated() {
+    $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'NATIONALPROVINCIALMUNICIPALEDIT', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+      console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+    });
+  },
   methods: {
     /* -------------------- 详情初始化 start -------------------- */
     async initObjItem(id) {
