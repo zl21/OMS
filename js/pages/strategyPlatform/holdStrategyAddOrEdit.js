@@ -29,6 +29,7 @@ export default {
         typeAll: 'default',
         buttons: [
           {
+            webname:'ST_C_HOLD_STRATEGY_SAVE',
             text: '保存',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -36,6 +37,7 @@ export default {
             }
           },
           {
+            webname:'fix_back',
             text: $i18n.t('btn.back'),
             btnclick: () => {
               this.back();
@@ -439,7 +441,9 @@ export default {
       }
     }
   },
-  created() { },
+  async created() { 
+    this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', {serviceId:'r3-oc-oms',table: this.$route.params.customizedModuleName, type: 'OBJ'},true);
+  },
   methods: {
     // 初始化数据
     async initData(page, size) {

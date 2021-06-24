@@ -38,7 +38,7 @@ export default {
     };
     /* -------------------- input校验器 end -------------------- */
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       subTableLogConfig: {
         centerName: '',
         tablename: '',
@@ -59,7 +59,9 @@ export default {
       },
       btnConfig: {
         typeAll: 'default',
-        buttons: [{
+        buttons: [
+          {
+            webname: 'LOGISTICS_SaveBtn',
             text: '保存',
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -68,6 +70,7 @@ export default {
             },
           },
           {
+            webname: 'fix_back',
             text: $i18n.t('btn.back'),
             btnclick: () => {
               this.back();
@@ -77,7 +80,8 @@ export default {
       },
       // 主表Part
       formConfig: {
-        formData: [{
+        formData: [
+          {
             style: 'input',
             label: '物流公司编码',
             value: 'ECODE',
@@ -118,6 +122,7 @@ export default {
       },
       // 子表Part
       subTableConfig: {
+        key: 'subTableConfig',
         isSearchText: true, // 是否修改搜索框为select
         isShowDeleteDetailBtn: false, // 控制是否显示删除明细
         isShowAddDetailBtn: false, // 控制是否显示新增明细
@@ -136,7 +141,8 @@ export default {
         data: [],
         isShowSelection: true, // 是否展示select框
         indexColumn: true, // 是否展示序号列
-        columns: [{
+        columns: [
+          {
             title: '平台',
             key: 'CP_C_PLATFORM_ENAME',
           },
@@ -151,17 +157,20 @@ export default {
         ],
         businessButtonConfig: {
           typeAll: 'default',
-          buttons: [{
-              type:'primary',
-              text: '添加',
+          buttons: [
+            {
+              webname: 'LOGISTICS_AddDetailBtn',
+              type: 'primary',
+              // text: '添加',
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.addHandel();
               },
             },
             {
-              type:'warning',
-              text: '删除',
+              webname: 'LOGISTICS_DeleteDetailBtn',
+              type: 'warning',
+              // text: '删除',
               btnclick: () => {
                 this.deleteHandel();
               },
@@ -169,12 +178,15 @@ export default {
           ],
         },
       },
-      subTableConfig1:{
+      subTableConfig1: {
+        key: 'subTableConfig1',
         businessButtonConfig: {
           typeAll: 'default',
-          buttons: [{
-              text: '添加',
-              type:'primary',
+          buttons: [
+            {
+              webname: 'LOGISTICS2_AddDetailBtn',
+              // text: '添加',
+              type: 'primary',
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.nalysisAdd();
@@ -183,8 +195,9 @@ export default {
               },
             },
             {
-              text: '删除',
-              type:'warning',
+              webname: 'LOGISTICS2_DeleteDetailBtn',
+              // text: '删除',
+              type: 'warning',
               btnclick: () => {
                 this.nalysisDetale();
               },
@@ -193,8 +206,8 @@ export default {
         },
         businessFormConfig: {
           formValue: {
-            PREFIX:'',
-            SUFFIX:'',
+            PREFIX: '',
+            SUFFIX: '',
           },
           formData: [
             {
@@ -203,7 +216,7 @@ export default {
               width: '6',
               value: 'PREFIX',
               AuotData: [], //匹配的选项
-              regx:/^[^\s]*$/,
+              regx: /^[^\s]*$/,
               dimChange: (search) => {
                 //模糊查询的方法
                 // this.fuzzyquerybyak(search)
@@ -211,8 +224,8 @@ export default {
               dimEnter: (val) => {
                 this.nalysisAdd();
               },
-              dimSelect: (obj) => {},
-              dimblur: () => {},
+              dimSelect: (obj) => { },
+              dimblur: () => { },
             },
             {
               label: '后缀',
@@ -220,13 +233,13 @@ export default {
               width: '6',
               value: 'SUFFIX',
               AuotData: [], //匹配的选项
-              regx:/^[^\s]*$/,
-              dimChange: (search) => {},
+              regx: /^[^\s]*$/,
+              dimChange: (search) => { },
               dimEnter: (val) => {
                 this.nalysisAdd();
               },
-              dimSelect: (obj) => {},
-              dimblur: () => {},
+              dimSelect: (obj) => { },
+              dimblur: () => { },
             }
           ],
         }, // 表单配置
@@ -240,8 +253,8 @@ export default {
             key: 'SUFFIX',
           }
         ],
-        data:[],
-        selectionData:[],
+        data: [],
+        selectionData: [],
         border: true, // 是否显示纵向边框
         isShowSelection: true, // 是否展示select框
         indexColumn: true // 是否展示序号列
@@ -286,11 +299,17 @@ export default {
       return item;
     })
   },
-  created() {},
+  created() { },
+  activated() {
+    this.getBtn();
+  },
   methods: {
     /* -------------------- 详情初始化 start -------------------- */
     async initObjItem(id) {
       const self = this;
+      this.$nextTick(()=> {
+        this.getBtn();
+      })
       // this.loading = true;
       const data = await this.$OMS2.omsUtils.getObject('CP_C_LOGISTICS', id);
       // self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基本信息');
@@ -306,6 +325,33 @@ export default {
       })
       self.getTableData(self.totalData, 'edit');
       // this.loading = false;
+    },
+    // 按钮权限
+    getBtn() {
+      $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'CP_C_LOGISTICS', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+        console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+        const { ACTIONS, SUB_ACTIONS } = res;
+        this.subTableConfig.businessButtonConfig.buttons.forEach(item => {
+          SUB_ACTIONS.forEach(it => {
+            if (item.webname == it.webname) {
+              item.isShow = true;
+              item.text = it.webdesc;
+            }
+          });
+        });
+        this.subTableConfig.key += $OMS2.omsUtils.generateKey();
+        console.log('this.subTableConfig.businessButtonConfig.buttons::',this.subTableConfig.businessButtonConfig.buttons);
+        this.subTableConfig1.businessButtonConfig.buttons.forEach(item => {
+          SUB_ACTIONS.forEach(it => {
+            if (item.webname == it.webname) {
+              item.isShow = true;
+              item.text = it.webdesc;
+            }
+          });
+        });
+        this.subTableConfig1.key += $OMS2.omsUtils.generateKey();
+        console.log('this.subTableConfig1.businessButtonConfig.buttons::',this.subTableConfig1.businessButtonConfig.buttons);
+      });
     },
     /* -------------------- 详情初始化 end -------------------- */
 

@@ -1006,7 +1006,7 @@ export default {
           {
             title: $i18n.t("table_label.unitPrice"), // 成交单价
             key: "PRICE_ACTUAL",
-            render: (h, params) => {
+            /* render: (h, params) => {
               const self = this;
               return h(
                 "div",
@@ -1085,7 +1085,7 @@ export default {
                   }),
                 ]
               );
-            },
+            }, */
           },
           {
             title: $i18n.t("table_label.quantities"), // 数量
@@ -1097,25 +1097,29 @@ export default {
                 props: {
                   value: params.row.QTY,
                   regx: /^[0-9]\d*$/,
-                  min: 0,
+                  min: 1,
                   editable: true,
                 },
                 on: {
                   "on-change": (e) => {
                     // 输入数量：修改成交金额、调整金额即可（计算成交金额时先将调整金额置为0
+                    // 6.24变更：输入数量，计算成交单价、调整金额，数量不能小于1
                     let inputQTY = Number(e);
                     params.row.QTY = inputQTY;
                     params.row.ADJUST_AMT = 0;
                     const price = Number(params.row.PRICE);
-                    const pa = Number(params.row.PRICE_ACTUAL || 0);
+                    let pa = Number(params.row.PRICE_ACTUAL || 0);
                     const aa = Number(params.row.ADJUST_AMT || 0);
                     let ra = Number(params.row.REAL_AMT || 0);
                     const ad = Number(params.row.AMT_DISCOUNT || 0);
                     const osa = Number(params.row.ORDER_SPLIT_AMT || 0);
                     if (pa && inputQTY) {
                       // 成交金额 = 成交单价 * 数量 （取这个
-                      params.row.REAL_AMT = this.$OMS2.omsUtils.floatNumber(pa * inputQTY, 2);
-                      ra = Number(params.row.REAL_AMT);
+                      // 6.24变更：成交单价 = 成交金额 / 数量
+                      // params.row.REAL_AMT = this.$OMS2.omsUtils.floatNumber(pa * inputQTY, 2);
+                      params.row.PRICE_ACTUAL = this.$OMS2.omsUtils.floatNumber(ra / inputQTY, 2);
+                      // ra = Number(params.row.REAL_AMT);
+                      // pa = Number(params.row.PRICE_ACTUAL);
                       console.log(ra, ad, osa, price, inputQTY);
                       const aaa = ra + ad + osa - price * inputQTY;
                       console.log('四舍五入前：', aaa);

@@ -187,8 +187,7 @@ export default {
     },
     // 标记取消
     async flagCalcel(){
-      console.log(this.checkSelection);
-      console.log(this.checkSelection.map(row => row.ID));
+      const self = this;
       const { data: { data, code, message } } = await this.service.orderCenter.markCancel({ 
         id: Number(this.$route.params.customizedModuleId), 
         itemIds: this.checkSelection.map(row => row.ID), 
@@ -330,25 +329,12 @@ export default {
     }
   },
   async created(){
-    console.log('1233');
     // 按钮权限配置
     let { SUB_ACTIONS,ACTIONS } = await this.$OMS2.omsUtils.getPermissions(this, 'butArray', {table: this.$route.params.customizedModuleName, type: 'OBJ'},true);
     let buttonArr = this.tableConfig.businessButtonConfig.buttons
     sessionStorage.setItem("ACTIONS", JSON.stringify(ACTIONS));
-    buttonArr.forEach((x)=>{
-      // 判断是否存在不存在设置为false，存在看是否显示ishide
-      if(!SUB_ACTIONS.some(y => y.webname === x.webname)){
-        x.isShow = false
-        console.log(x.webname);
-      }else{
-        SUB_ACTIONS.forEach((e) => {
-          if(x.webname === e.webname){
-            x.isShow = !e.ishide
-            // x.text = e.webdesc
-          }
-        })
-      }
-    })
+    let buttonArr1 = buttonArr.map((x)=>{ if(SUB_ACTIONS.some(y => y.webname === x.webname)) return x}).filter(item => item)
+    this.tableConfig.businessButtonConfig.buttons = buttonArr1
     // 获取表头
     this.getColumn();
   }

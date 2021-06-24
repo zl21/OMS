@@ -24,6 +24,7 @@ export default {
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       btnConfig: {
         typeAll: 'default',
+        btnsite: 'right',
         buttons: [
           {
             text: '取消',

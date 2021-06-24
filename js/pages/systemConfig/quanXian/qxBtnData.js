@@ -1,7 +1,7 @@
 export default {
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       normal: {
         // 正常
         buttons: [
@@ -46,6 +46,7 @@ export default {
       this.isChange = false;
     },
     async saveQuanXian() {
+
       this.getSaveData();
       if (this.saveTableArr.length === 0) {
         this.$Message.info('没有更改');
@@ -54,33 +55,21 @@ export default {
 
       let url;
       let params;
-      if (this.permissionType === 'sensitive') {
-        this.saveTableArr.map(item => {
-          item.CP_C_GROUPS_ID = this.groupId;
-          return true;
-        });
-        // console.log(this.saveTableArr);
-        url = '/p/cs/objectSave';
-        params = {
-          table: 'CP_C_GROUPCOLUMN',
-          objid: 2997,
-          data: {
-            CP_C_GROUPS_ID: this.groupId,
-            CP_C_GROUPCOLUMN: this.saveTableArr
-          }
-        };
-      } else {
-        url = '/p/cs/permission/v1/saveDataPermission';
-        params = {
-          permissionType: this.permissionType,
-          objid: this.groupId,
-          data: {}
-        };
-        params.data[`${this.permissionTable}`] = this.saveTableArr;
-      }
+
+      url = '/p/cs/permission/v1/saveDataPermission';
+
+      let permissionTable = this.permissionTable
+      let Arrdata = this.saveTableArr
+      let formdata = new FormData()
+      formdata.append("permissionType", this.permissionType)
+      formdata.append("groupId", this.groupId)
+      formdata.append("data", JSON.stringify({
+        [permissionTable]: Arrdata
+      }))
+
       this.spinShow = true;
       // 接口
-      const res = await this.service.systemConfig.objectSave(url, this.$urlSearchParams(params));
+      const res = await this.service.systemConfig.objectSave(url, formdata);
       if (res) {
         this.spinShow = false;
         this.$Modal.fcSuccess({
@@ -130,7 +119,7 @@ export default {
         });
       }
     }, // 获得保存的数据
-    copyQuanXian() {},
-    refreshQuanXian() {}
+    copyQuanXian() { },
+    refreshQuanXian() { }
   }
 };

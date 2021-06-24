@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-06-17 15:50:00
+ * @LastEditTime: 2021-06-24 17:13:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -42,6 +42,7 @@ export default {
           btnsite: 'left', // 按钮位置 (right , center , left)
           buttons: [
             {
+              webname:'E_PRODUCT_PUSHDETAILS',
               type: 'primary',
               text: '新增明细', // 按钮文本
               isShow: true,
@@ -56,6 +57,7 @@ export default {
               } // 按钮点击事件
             },
             {
+              webname:'E_PRODUCT_DETELEDETAILS',
               type: 'warning', // 按钮类型
               text: '删除明细', // 按钮文本
               isShow: true,
@@ -223,7 +225,7 @@ export default {
   watch: {
     async isEdit(newVal) {
       await this.getTable(false,newVal);
-      // await sessionStorage.setItem('copyDetails',JSON.stringify(this.tableConfig.data))
+      await sessionStorage.setItem('copyDetails',JSON.stringify(this.tableConfig.data))
     },
     'tableConfig.data':{
       handler(newV, oldV) {
@@ -233,6 +235,25 @@ export default {
     }
   },
   async created(){
+    // 按钮权限
+    let { SUB_ACTIONS,ACTIONS } = await this.$OMS2.omsUtils.getPermissions(this, 'butArray', {table: this.$route.params.tableName, type: 'OBJ'},true);
+    let buttonArr = this.tableConfig.businessButtonConfig.buttons
+    let buttonArr1 = buttonArr.map((x)=>{ if(SUB_ACTIONS.some(y => y.webname === x.webname)) return x}).filter(item => item);
+    this.tableConfig.businessButtonConfig.buttons = buttonArr1
+    // console.log(buttonArr1);
+    // buttonArr.forEach((x)=>{
+    //   // 判断是否存在不存在设置为false，存在看是否显示ishide
+    //   if(!SUB_ACTIONS.some(y => y.webname === x.webname)){
+    //     x.isShow = false
+    //     console.log(x.webname);
+    //   }else{
+    //     SUB_ACTIONS.forEach((e) => {
+    //       if(x.webname === e.webname){
+    //         x.isShow = e.ishide
+    //       }
+    //     })
+    //   }
+    // })
     if(!(this.$route.params.itemId == 'New')){
        let route = this.$route.params;
        const subData = await this.$OMS2.omsUtils.initSubtable('OC_B_REFUND_ORDER_ITEM', route.itemId, '181618');
@@ -325,6 +346,7 @@ export default {
     addDetailsOk(){
       // 新增明细
       let arr = JSON.parse(sessionStorage.getItem('copyDetails')) //详情
+      console.log(arr);
       // 如果是编辑的话 
       this.addDetailsConfig.selectData.forEach(x =>{
         if(arr.every(y => y.ID !== x.ID)){

@@ -42,7 +42,7 @@ export default {
       btnConfig: {
         typeAll: 'default',
         buttons: [{
-          webname: 'lookup_save', // 保存
+          webname: 'ST_C_PRICE_MAIN_SAVE', // 保存
             text: '保存',
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -52,14 +52,14 @@ export default {
             },
           },
           {
-            webname: 'lookup_return', // 返回
+            webname: 'fix_back', // 返回
             text: $i18n.t('btn.back'),
             btnclick: () => {
               this.back();
             },
           },
           {
-            webname: 'lookup_return', // 返回
+            webname: 'ST_C_PRICE_MAIN_COPY', // 返回
             text: '复制',
             isShow: false,
             btnclick: () => {
@@ -417,6 +417,7 @@ export default {
           typeAll: 'default',
           buttons: [
             {
+              webname: 'ST_C_PRICE_SUB_DELETE',
               text: '删除明细',
               isShow: true,
               disabled: false, // 按钮禁用控制
@@ -425,6 +426,7 @@ export default {
               }
             },
             {
+              webname: 'ST_C_PRICE_SUB_IMPORT',
               text: '导入',
               isShow: true,
               disabled: false, // 按钮禁用控制
@@ -433,7 +435,9 @@ export default {
               }
             },
             {
+              webname: 'ST_C_PRICE_SUB_EXPORT',
               text: '导出',
+              isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.handleExport();
@@ -482,12 +486,26 @@ export default {
     this.isCopy = copyId != undefined
     this.isWatchChange = true
     if (this.ID == -1 && !this.isCopy) return
+    await this.getBtn()
     this.isWatchChange = false
     this.setEnable(false)
     await this.queryPrice(copyId)
     await this.queryPriceItem(copyId)
   },
   methods: {
+    // 获取按钮权限
+    async getBtn() {
+      let params = { table: 'ST_C_PRICE', type: 'OBJ', serviceId: 'r3-oc-oms' }
+      const { ACTIONS, SUB_ACTIONS } = await this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', params, true)
+      const mainWebArr = $OMS2.omsUtils.sonList(ACTIONS, 'webname');
+      const subWebArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+      this.goodsTableConfig.businessButtonConfig.buttons.forEach(item => {
+        item.isShow = subWebArr.includes(item.webname)
+      })
+      this.btnConfig.buttons.forEach(item => {
+        item.webname != 'fix_back' && (item.isShow = mainWebArr.includes(item.webname))
+      })
+    },
     onSelect(e) {
       // e为选中的数组对象RowArr
       this.goodsTableConfig.selectionData = e;

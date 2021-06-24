@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-06-23 16:02:40
+ * @LastEditTime: 2021-06-24 18:37:26
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -316,14 +316,18 @@ export default {
         let BtnConfig = this.businessActionTable.businessButtonConfig.buttons;
         if (this.$parent.$parent.panelRef === "换货明细") {
           BtnConfig[0].isShow = false;
-          BtnConfig[1].isShow = BtnConfig[1].ishide ? BtnConfig[1].ishide : true;
+          BtnConfig[1].isShow = true;
           BtnConfig[2].isShow = false;
           if (this.$route.query.RETURN_SOURCE == "平台") {
             BtnConfig[1].isShow = false;
           }
           this.businessActionTable.columns = this.tableHead.huan;
           this.renderColumn = this.tableHead.huan;
-          this.renderHandle([["REFUND_ID", "QTY_EXCHANGE"]]); //render方法
+          if(this.$route.query.RETURN_SOURCE !== "手工新增"){
+             this.renderHandle([[ "QTY_EXCHANGE"]]); //render方法
+          }else{
+             this.renderHandle([["REFUND_ID", "QTY_EXCHANGE"]]); //render方法
+          }
           this.businessActionTable.data = this.toMainData.huan;
         } else if (this.$parent.$parent.panelRef === "退货明细") {
           if (this.$route.query.RETURN_SOURCE == "平台") {
@@ -334,7 +338,11 @@ export default {
           BtnConfig[1].isShow = false;
           this.businessActionTable.columns = this.tableHead.tui;
           this.renderColumn = this.tableHead.tui;
-          this.renderHandle(["REFUND_ID", "QTY_REFUND"]); //render方法
+          if(this.$route.query.RETURN_SOURCE !== "手工新增"){
+             this.renderHandle([[ "QTY_EXCHANGE"]]); //render方法
+          }else{
+             this.renderHandle([["REFUND_ID", "QTY_EXCHANGE"]]); //render方法
+          }
           this.businessActionTable.data = this.toMainData.tui;
         }
         // 判断如果单据状态为带退货完成/完成/取消 不可编辑
@@ -370,8 +378,7 @@ export default {
           } else {
             SUB_ACTIONS.forEach((e) => {
               if(item.webname === e.webname){
-                item.isShow = !e.ishide
-                item.ishide = e.ishide
+                item.isShow = true
               }
             })
           }

@@ -37,16 +37,17 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            webname: 'lookup_save', // 保存
+            webname: 'ST_C_WAREHOUSE_LOGISTICS_MAIN_SAVE', // 保存
             text: '保存',
             disabled: false, // 按钮禁用控制
+            isShow: false,
             btnclick: () => {
               const self = this;
               self.save(true);
             },
           },
           {
-            webname: 'lookup_return', // 返回
+            webname: 'fix_back', // 返回
             text: $i18n.t('btn.back'),
             btnclick: () => {
               this.back();
@@ -273,18 +274,22 @@ export default {
         typeAll: 'default',
         buttons: [
           {
+            webname: 'ST_C_WAREHOUSE_LOGISTICS_SUB_ADD',
             type:'primary',
             text: '添加',
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
+            isShow: false,
             btnclick: () => {
               this.save();
             }
           },
           {
+            webname: 'ST_C_WAREHOUSE_LOGISTICS_SUB_DELETE',
             type:'warning',
             text: '删除',
             disabled: false, // 按钮禁用控制
+            isShow: false,
             btnclick: () => {
               this.handleDelete();
             }
@@ -346,6 +351,7 @@ export default {
     };
   },
   async mounted() {
+    await this.getBtn()
     this.initPanel();
     this.isWatchChange = true
     this.ID != -1 && (await this.queryLogistics());
@@ -353,6 +359,19 @@ export default {
   },
   created() {},
   methods: {
+    // 获取按钮权限
+    async getBtn() {
+      let params = { table: 'ST_C_WAREHOUSE_LOGISTICS_SET', type: 'OBJ', serviceId: 'r3-oc-oms' }
+      const { ACTIONS, SUB_ACTIONS } = await this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', params, true)
+      const mainWebArr = $OMS2.omsUtils.sonList(ACTIONS, 'webname');
+      const subWebArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+      this.logisticsTableButtonConfig.buttons.forEach(item => {
+        item.isShow = subWebArr.includes(item.webname)
+      })
+      this.btnConfig.buttons.forEach(item => {
+        item.webname != 'fix_back' && (item.isShow = mainWebArr.includes(item.webname))
+      })
+    },
     onSelect(e) {
       // e为选中的数组对象RowArr
       this.logisticsTableConfig.selectionData = e;
@@ -510,7 +529,7 @@ export default {
         i.colname == 'CP_C_PHY_WAREHOUSE_ID' && (i.itemdata.readonly = true)
         i.disabled = isEnable ? true : i.colname == 'ISACTIVE' ? true : false
       })
-      this.logisticsTableButtonConfig.buttons.forEach(item => item.disabled = isEnable)
+      this.logisticsTableButtonConfig.buttons.forEach(item => item.disabled = item.isShow && isEnable)
       this.logisticsTableFormConfig.formData[0].disabled = isEnable
       this.logisticsTableFormConfig.formData[0].style = isEnable ? 'input' : 'formCompile'
     },

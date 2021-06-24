@@ -30,6 +30,7 @@
         <!-- 子表Part -->
         <div class="subtablePart">
           <businessActionTable
+            :key="subTableConfig.key"
             v-show="labelDefaultValue === 'PROPERTYVALUES'"
             :jordan-table-config="subTableConfig"
             @on-select="onSelect"
@@ -40,6 +41,7 @@
             @on-page-size-change="pageSizeChange"
           />
           <businessActionTable
+            :key="subTableConfig1.key"
             v-show="labelDefaultValue == 'CP_C_LOGISTICS_FIX'"
             :jordan-table-config="subTableConfig1"
             @on-select="onSelect1"

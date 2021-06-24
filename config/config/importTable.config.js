@@ -4,6 +4,15 @@
  */
 
 const importConfig = {
+  AC_F_ALIPAY_ACCOUNTMANAGE__zfbAccountImport: {
+    // 额外退款单-导入打款结果
+    isAction: true,
+    tableName: 'AC_F_ALIPAY_ACCOUNTMANAGE',
+    webname: 'zfbAccountImport',
+    tempApi: '/p/cs/ac/v1/alipayAccountManage/exportTemplate',
+    okApi: '/p/cs/ac/v1/alipayAccountManage/importData',
+    downErrorInfo: true,
+  },
   OC_B_REFUND_ORDER_EXTRA__IMPORT_PAY_RESULT: {
     // 额外退款单-导入打款结果
     isAction: true,
@@ -269,6 +278,7 @@ const importConfig = {
     tableName: 'ST_C_PRODUCT_STRATEGY',
     url: '/p/cs/productStrategy/import/multiShopItem',
     downloadUrl: '/p/cs/productStrategy/import/downloadMultiShopTemp'
-  } // 店铺商品特殊设置 - 多店铺比例-明细导入
+  }, // 店铺商品特殊设置 - 多店铺比例-明细导入
+
 };
 export default importConfig;
