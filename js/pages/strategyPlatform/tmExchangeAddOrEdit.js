@@ -32,13 +32,16 @@ export default {
         typeAll: 'default',
         buttons: [
           {
+            webname: 'ST_C_TMALL_EXCHANGE_MAIN_SAVE',
             text: '保存',
             disabled: false, // 按钮禁用控制
+            isShow: false,
             btnclick: () => {
               this.save();
             }
           },
           {
+            webname: 'fix_back',
             text: $i18n.t('btn.back'),
             btnclick: () => {
               this.back();
@@ -308,12 +311,22 @@ export default {
     }
   },
   async mounted() {
+    await this.getBtn()
     this.isWatchChange = true;
     this.tamallExchangeReasons();
     this.ID > 0 && this.queryOrder();
   },
   created() { },
   methods: {
+    // 获取按钮权限
+    async getBtn() {
+      let params = { table: 'ST_C_TMALL_EXCHANGE_ORDER', type: 'OBJ', serviceId: 'r3-oc-oms' }
+      const { ACTIONS, SUB_ACTIONS } = await this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', params, true)
+      const mainWebArr = $OMS2.omsUtils.sonList(ACTIONS, 'webname');
+      this.btnConfig.buttons.forEach(item => {
+        item.webname != 'fix_back' && (item.isShow = mainWebArr.includes(item.webname))
+      })
+    },
     // 查询
     async queryOrder() {
       const { data: { code, data } } = await this.service.strategyPlatform.tamallExchangeOrder({ ID: this.ID });

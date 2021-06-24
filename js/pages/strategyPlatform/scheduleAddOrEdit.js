@@ -1036,54 +1036,6 @@ export default {
           ]
         }
       },
-      logConfig: {
-        // 是否修改搜索框为select
-        isSearchText: true,
-        isShowDeleteDetailBtn: false, // 控制是否显示删除明细
-        isShowAddDetailBtn: false, // 控制是否显示新增明细
-        // isSearchText为false的情况下使用 搜索框list
-        searchSelectList: [],
-        pageShow: true, // 控制分页是否显示
-        btnsShow: true, // 控制操作按钮是否显示*
-        searchInputShow: false, // 控制搜索框是否显示
-        width: '', // 表格宽度
-        border: true, // 是否显示纵向边框
-        total: 0, // 设置总条数
-        pageSizeOpts: [5, 15, 30, 45, 60], // 每页条数切换的配置
-        pageSize: 5, // 每页条数
-        isShowSelection: true, // 是否展示select框
-        indexColumn: true, // 是否展示序号列
-        columns: [
-          {
-            title: '用户名',
-            key: 'CP_C_PLATFORM_ID',
-          },
-          {
-            title: '日志类型',
-            key: 'CP_C_LOGISTICS_ECODE',
-          },
-          {
-            title: '修改前',
-            key: 'CP_C_LOGISTICS_ENAME',
-          },
-          {
-            title: '修改后',
-            key: 'CP_C_LOGISTICS_ENAME',
-          },
-          {
-            title: '修改人名称',
-            key: 'CP_C_LOGISTICS_ENAME',
-          }
-        ],
-        data: []
-      },
-      // tab切换配置
-      labelList: [
-        {
-          label: '操作日志',
-          value: 'ST_C_VIPCOM_PROJECT_LOG',
-        }
-      ],
       labelDefaultValue: 'ST_C_VIPCOM_PROJECT_LOG', // 设置tab默认值，默认展示《自定义属性》
       modify: {
         master: {}, // 主表信息
@@ -1096,6 +1048,7 @@ export default {
     };
   },
   async mounted() {
+    // this.getBtn()
     await this.carrierDropList(); // 承运商下拉项
     this.querySchedule();
     this.subTableConfig = {
@@ -1113,6 +1066,16 @@ export default {
     }
   },
   methods: {
+    // 获取按钮权限
+    getBtn() {
+      this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'ST_C_VIPCOM_PROJECT', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+        const { ACTIONS, SUB_ACTIONS } = res;
+        console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+        const webArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+        this.jordanTableConfig.isShowDeleteDetailBtn = webArr.includes('删除');
+        this.jordanTableConfig.isShowImportBtn = webArr.includes('导入');
+      });
+    },
     // 时间戳格式化
     formatDate(time, format) {
       const date = new Date(time);
