@@ -899,7 +899,8 @@ class commonUtils {
    *  @param {Number\String}
    */
   static floatNumber(num) {
-    num = typeof num === 'number' ? num.toString() : num
+    console.log(num);
+    num = typeof num === 'number' ? num.toString() : num;
     if (num.includes('.')) {
       let b = num.split('.')
       if (b[1].length == 1) {
@@ -907,8 +908,11 @@ class commonUtils {
         b += '0'
         num = b
       } else if (b[1].length > 2) {
-        b = Number(b.join('.')).toFixed(2)
-        num = b
+        let num_length = b[0].length + 2;
+        if(b[0].includes('-')) num_length = num_length - 1;
+        b = Number(b.join('.')).toPrecision(num_length)
+        num = b;
+        console.log(num);
       }
     } else {
       num += '.00'
