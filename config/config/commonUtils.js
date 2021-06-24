@@ -912,7 +912,6 @@ class commonUtils {
         if(b[0].includes('-')) num_length = num_length - 1;
         b = Number(b.join('.')).toPrecision(num_length)
         num = b;
-        console.log(num);
       }
     } else {
       num += '.00'
