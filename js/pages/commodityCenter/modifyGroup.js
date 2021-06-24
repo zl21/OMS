@@ -38,50 +38,52 @@ export default {
       collapse: 'panel_baseInfo',
       btnConfig: {
         typeAll: 'default',
-        buttons: [{
-            webname: 'lookup_save', // 保存
-            text: '保存',
-            size: '', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.save();
-            },
-          },
-          {
-            webname: 'lookup_return', // 返回
-            text: $i18n.t('btn.back'),
-            btnclick: () => {
-              if (this.isModify) {
-                this.$Modal.fcWarning({
-                  title: '提示', // 打印
-                  content: '该页面已经修改,是否继续返回?', // 正在打印中，请稍后。。。
-                  mask: true,
-                  showCancel: true,
-                  onOk: () => {
-                    // comUtils.tabCloseAppoint(this);
-              // this.$destroy(true);
-              this.$store.commit('global/tabOpen', {
-                tableId: 10108,
-                type: 'S',
-                tableName: 'PS_C_PRO_GROUP',
-                back: true,
-              });
-                  }
-                });
-              } else {
-                // comUtils.tabCloseAppoint(this);
-              // this.$destroy(true);
-              this.$store.commit('global/tabOpen', {
-                tableId: 10108,
-                type: 'S',
-                tableName: 'PS_C_PRO_GROUP',
-                back: true,
-              });
-              }
-            },
-          },
-        ],
+        buttons: [],
       },
+      extendBtn:[
+        {
+          webname: 'lookup_save', // 保存
+          text: '保存',
+          size: '', // 按钮大小
+          disabled: false, // 按钮禁用控制
+          btnclick: () => {
+            this.save();
+          },
+        },
+        {
+          webname: 'lookup_return', // 返回
+          text: $i18n.t('btn.back'),
+          btnclick: () => {
+            if (this.isModify) {
+              this.$Modal.fcWarning({
+                title: '提示', // 打印
+                content: '该页面已经修改,是否继续返回?', // 正在打印中，请稍后。。。
+                mask: true,
+                showCancel: true,
+                onOk: () => {
+                  // comUtils.tabCloseAppoint(this);
+            // this.$destroy(true);
+            this.$store.commit('global/tabOpen', {
+              tableId: 10108,
+              type: 'S',
+              tableName: 'PS_C_PRO_GROUP',
+              back: true,
+            });
+                }
+              });
+            } else {
+              // comUtils.tabCloseAppoint(this);
+            // this.$destroy(true);
+            this.$store.commit('global/tabOpen', {
+              tableId: 10108,
+              type: 'S',
+              tableName: 'PS_C_PRO_GROUP',
+              back: true,
+            });
+            }
+          },
+        },
+      ],
       formConfig: {
         formData: [{
             style: 'input',
@@ -530,6 +532,8 @@ export default {
       }];
     }
     this.query();
+    this.btnConfig.buttons = [...this.extendBtn];
+    // this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_PRO_GROUP', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
   },
   methods: {
     query() {

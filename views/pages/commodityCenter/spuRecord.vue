@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-19 17:55:24
- * @LastEditTime: 2021-06-18 13:43:25
+ * @LastEditTime: 2021-06-24 11:20:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/commodityCenter/spuRecord.vue
@@ -57,7 +57,7 @@
           class="skuInfo"
         >
           <div class="productSpecification_button">
-            <businessButton :btn-config="skuInfo.btnConfig" />
+            <businessButton :btn-config="skuInfoBtnConfig" />
           </div>
           <div class="productSpecification_table">
             <Table
@@ -76,7 +76,7 @@
         >
           <div class="supplier_header">
             <businessForm :form-config="tableFormConfig" />
-            <businessButton :btn-config="supplier.btnConfig" />
+            <businessButton :btn-config="supplierBtnConfig" />
           </div>
           <div class="supplier_body">
             <Table

@@ -40,7 +40,7 @@ export default {
           row: 1,
           statsize: -1,
           type: 'STRING', // 这个是后台用的
-          valuedata: '' // 这个是选择的值
+          valuedata: '', // 这个是选择的值
         }
       },
       prov_data: {

@@ -82,110 +82,9 @@ export default {
       },
       btnConfig: {
         typeAll: 'default',
-        buttons: [{
-            webname: 'lookup_save', // 保存
-            text: '保存',
-            size: '', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              const self = this;
-              self.save();
-            },
-          },
-          {
-            webname: 'lookup_return', // 返回
-            text: $i18n.t('btn.back'),
-            btnclick: () => {
-              if (this.isModify) {
-                this.$Modal.fcWarning({
-                  title: '提示', // 打印
-                  content: '该页面已经修改,是否继续返回?', // 正在打印中，请稍后。。。
-                  mask: true,
-                  showCancel: true,
-                  onOk: () => {
-                    // comUtils.tabCloseAppoint(this);
-                    // this.$destroy(true);
-                    this.$store.commit('global/tabOpen', {
-                      tableId: 10106,
-                      type: 'S',
-                      tableName: 'PS_C_PRO',
-                      label: '商品SPU',
-                      back: true,
-                    });
-                  }
-                });
-              } else {
-                // comUtils.tabCloseAppoint(this);
-                //     this.$destroy(true);
-                    this.$store.commit('global/tabOpen', {
-                      tableId: 10106,
-                      type: 'S',
-                      tableName: 'PS_C_PRO',
-                      label: '商品SPU',
-                      back: true,
-                    });
-              }
-            },
-          },
-        ],
+        buttons: [],
       },
       skuInfo: {
-        btnConfig: {
-          typeAll: 'default', // 按钮统一风格样式
-          loading: false, // 按钮加载
-          buttons: [{
-              text: '新增SKU',
-              btnclick: () => {
-                if (this.spuid == '-1') {
-                  this.$OMS2.omsUtils.msgTips(this, 'warning', 'cu');
-                  return;
-                }
-                this.isModify = true;
-                $store.commit('customize/TabOpen', {
-                  id: 2201,
-                  type: 'action',
-                  name: 'PS_C_SKU',
-                  label: '商品SKU编辑', // 额外退款编辑
-                  query: Object.assign({
-                    spuid: this.spuid,
-                    spucode: this.formConfig.formValue.ECODE
-                  })
-                });
-              }
-            },
-            {
-              text: '快速新增',
-              btnclick: () => {
-                if (this.spuid == '-1') {
-                  this.$OMS2.omsUtils.msgTips(this, 'warning', 'cu');
-                  return;
-                }
-                if (!this.formConfig.formValue.PS_C_PRO_CLASSIFY_ID) {
-                  this.$OMS2.omsUtils.msgTips(this, 'warning', 'fj');
-                  return;
-                }
-                this.isModify = true;
-                $store.commit('customize/TabOpen', {
-                  id: 2200,
-                  type: 'action',
-                  name: 'PS_C_SKU_QUICKLY_ADD',
-                  label: '快速生成', // 额外退款编辑
-                  query: Object.assign({
-                    id: this.spuid, // spuid
-                    classid: this.formConfig.formValue.PS_C_PRO_CLASSIFY_ID
-                  })
-                });
-              }
-            },
-            {
-              text: '应用到所有列',
-              btnclick: () => {
-                this.useAllColumns();
-              }
-            }
-
-          ]
-        },
         resData: [],
         columns: [{
             type: 'index',
@@ -241,26 +140,65 @@ export default {
         clickColumns: '',
         rowClickData: {}, // sku信息单据选中的数据
       },
+      skuInfoBtnConfig: {
+        typeAll: 'default', // 按钮统一风格样式
+        loading: false, // 按钮加载
+        buttons: []
+      },
+      extendSkuInfoBtn:[{
+            text: '新增SKU',
+            btnclick: () => {
+              if (this.spuid == '-1') {
+                this.$OMS2.omsUtils.msgTips(this, 'warning', 'cu');
+                return;
+              }
+              this.isModify = true;
+              $store.commit('customize/TabOpen', {
+                id: 2201,
+                type: 'action',
+                name: 'PS_C_SKU',
+                label: '商品SKU编辑', // 额外退款编辑
+                query: Object.assign({
+                  spuid: this.spuid,
+                  spucode: this.formConfig.formValue.ECODE
+                })
+              });
+            }
+          },
+          {
+            text: '快速新增',
+            btnclick: () => {
+              if (this.spuid == '-1') {
+                this.$OMS2.omsUtils.msgTips(this, 'warning', 'cu');
+                return;
+              }
+              if (!this.formConfig.formValue.PS_C_PRO_CLASSIFY_ID) {
+                this.$OMS2.omsUtils.msgTips(this, 'warning', 'fj');
+                return;
+              }
+              this.isModify = true;
+              $store.commit('customize/TabOpen', {
+                id: 2200,
+                type: 'action',
+                name: 'PS_C_SKU_QUICKLY_ADD',
+                label: '快速生成', // 额外退款编辑
+                query: Object.assign({
+                  id: this.spuid, // spuid
+                  classid: this.formConfig.formValue.PS_C_PRO_CLASSIFY_ID
+                })
+              });
+            }
+          },
+          {
+            text: '应用到所有列',
+            btnclick: () => {
+              this.useAllColumns();
+            }
+          }
+
+        ],
       supplier: {
         resData: [],
-        btnConfig: {
-          typeAll: 'default', // 按钮统一风格样式
-          loading: false, // 按钮加载
-          btnsite: 'right', // 按钮位置 (right , center , left)
-          buttons: [{
-              text: '新增',
-              btnclick: () => {
-                this.addSupplier();
-              }
-            },
-            {
-              text: '删除',
-              btnclick: () => {
-                this.supplierDel();
-              }
-            }
-          ]
-        },
         columns: [{
             type: 'selection',
             width: 30,
@@ -301,6 +239,72 @@ export default {
         ],
         selectionData: []
       },
+      supplierBtnConfig: {
+        typeAll: 'default', // 按钮统一风格样式
+        loading: false, // 按钮加载
+        btnsite: 'right', // 按钮位置 (right , center , left)
+        buttons: []
+      },
+      extendSupplierBtn:[{
+            text: '新增',
+            btnclick: () => {
+              this.addSupplier();
+            }
+          },
+          {
+            text: '删除',
+            btnclick: () => {
+              this.supplierDel();
+            }
+          }
+        ],
+      extendBtn:[
+        {
+          webname: 'lookup_save', // 保存
+          text: '保存',
+          size: '', // 按钮大小
+          disabled: false, // 按钮禁用控制
+          btnclick: () => {
+            const self = this;
+            self.save();
+          },
+        },
+        {
+          webname: 'lookup_return', // 返回
+          text: $i18n.t('btn.back'),
+          btnclick: () => {
+            if (this.isModify) {
+              this.$Modal.fcWarning({
+                title: '提示', // 打印
+                content: '该页面已经修改,是否继续返回?', // 正在打印中，请稍后。。。
+                mask: true,
+                showCancel: true,
+                onOk: () => {
+                  // comUtils.tabCloseAppoint(this);
+                  // this.$destroy(true);
+                  this.$store.commit('global/tabOpen', {
+                    tableId: 10106,
+                    type: 'S',
+                    tableName: 'PS_C_PRO',
+                    label: '商品SPU',
+                    back: true,
+                  });
+                }
+              });
+            } else {
+              // comUtils.tabCloseAppoint(this);
+              //     this.$destroy(true);
+                  this.$store.commit('global/tabOpen', {
+                    tableId: 10106,
+                    type: 'S',
+                    tableName: 'PS_C_PRO',
+                    label: '商品SPU',
+                    back: true,
+                  });
+            }
+          },
+        },
+      ],
       customAttr: {
         formConfig: {
           formData: [],
@@ -551,7 +555,13 @@ export default {
         });
       } else {
         self.WatchChange = true;
-      }
+      };
+      //按钮权限
+      const buttons = self.$OMS2.BtnConfig.config();
+      this.btnConfig.buttons = [...this.extendBtn];
+      this.skuInfoBtnConfig.buttons = [ ...this.extendSkuInfoBtn];
+      this.supplierBtnConfig.buttons = [ ...this.extendSupplierBtn];
+      // this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_PRO', type: 'OBJ' , serviceId:'r3-oc-oms'});
     },
     addSupplier() {
       const self = this;

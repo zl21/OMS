@@ -43,6 +43,7 @@
       </div>
       <div class="row">
         <fkinput
+          :version="'1.4'"
           :itemdata="basicData.stores.itemdata"
           :is-object="basicData.stores.itemdata.isObject"
           @getFkChooseItem="oneObj_shop"

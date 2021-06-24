@@ -53,6 +53,7 @@ export default {
             name: $i18n.t('table_label.shopName'),
             readonly: false, // 是否可编辑，对应input   readonly属性
             valuedata: '', // 这个是选择的值
+            version:'1.4'
           }
         }, // 多选店仓信息
         order_type: [], // 订单类型,选项1，2，3
@@ -73,7 +74,8 @@ export default {
             isnotnull: false,
             name: $i18n.t('common.exclude_province'),
             readonly: false,
-            valuedata: ''
+            valuedata: '',
+            version:'1.4'
           }
         }, // 排除省份
         buyer_limit_frequency: '0', // 单个买家参与活动次数  0-不限制 1-限制

@@ -25,6 +25,7 @@
           @on-click="search"
         /> -->
         <inputP
+        version='1.4'
           :itemdata="itemdata"
           @getFkChooseItem="oneObj"
           @inputBlur="inputBlur"
