@@ -122,6 +122,7 @@ export default {
       },
       // 子表Part
       subTableConfig: {
+        key: 'subTableConfig',
         isSearchText: true, // 是否修改搜索框为select
         isShowDeleteDetailBtn: false, // 控制是否显示删除明细
         isShowAddDetailBtn: false, // 控制是否显示新增明细
@@ -178,6 +179,7 @@ export default {
         },
       },
       subTableConfig1: {
+        key: 'subTableConfig1',
         businessButtonConfig: {
           typeAll: 'default',
           buttons: [
@@ -305,6 +307,9 @@ export default {
     /* -------------------- 详情初始化 start -------------------- */
     async initObjItem(id) {
       const self = this;
+      this.$nextTick(()=> {
+        this.getBtn();
+      })
       // this.loading = true;
       const data = await this.$OMS2.omsUtils.getObject('CP_C_LOGISTICS', id);
       // self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基本信息');
@@ -320,9 +325,6 @@ export default {
       })
       self.getTableData(self.totalData, 'edit');
       // this.loading = false;
-      this.$nextTick(()=> {
-        this.getBtn();
-      })
     },
     // 按钮权限
     getBtn() {
@@ -330,8 +332,6 @@ export default {
         console.log('buttons::', this.btnConfig.buttons, 'res::', res);
         const { ACTIONS, SUB_ACTIONS } = res;
         this.subTableConfig.businessButtonConfig.buttons.forEach(item => {
-          // item.isShow = webArr.includes(item.webname);
-          // SUB_ACTIONS.forEach(it => item.text = it.webdesc);
           SUB_ACTIONS.forEach(it => {
             if (item.webname == it.webname) {
               item.isShow = true;
@@ -339,6 +339,7 @@ export default {
             }
           });
         });
+        this.subTableConfig.key += $OMS2.omsUtils.generateKey();
         console.log('this.subTableConfig.businessButtonConfig.buttons::',this.subTableConfig.businessButtonConfig.buttons);
         this.subTableConfig1.businessButtonConfig.buttons.forEach(item => {
           SUB_ACTIONS.forEach(it => {
@@ -348,6 +349,7 @@ export default {
             }
           });
         });
+        this.subTableConfig1.key += $OMS2.omsUtils.generateKey();
         console.log('this.subTableConfig1.businessButtonConfig.buttons::',this.subTableConfig1.businessButtonConfig.buttons);
       });
     },

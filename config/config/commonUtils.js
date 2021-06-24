@@ -353,7 +353,6 @@ class commonUtils {
             }else if(item.icon !== 'iconfont iconbj_setup'){
               a.push(item);
             }
-            
           }
         })
         if (isIndependent) {
