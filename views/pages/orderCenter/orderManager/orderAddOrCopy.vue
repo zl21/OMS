@@ -1116,7 +1116,11 @@ export default {
                       // 成交金额 = 成交单价 * 数量 （取这个
                       params.row.REAL_AMT = this.$OMS2.omsUtils.floatNumber(pa * inputQTY, 2);
                       ra = Number(params.row.REAL_AMT);
+                      console.log(ra, ad, osa, price, inputQTY);
+                      const aaa = ra + ad + osa - price * inputQTY;
+                      console.log('四舍五入前：', aaa);
                       params.row.ADJUST_AMT = this.$OMS2.omsUtils.floatNumber(ra + ad + osa - price * inputQTY, 2);
+                      console.log('params.row.ADJUST_AMT', params.row.ADJUST_AMT);
                     } else {
                       params.row.REAL_AMT = '0.00';
                       params.row.ADJUST_AMT = '0.00';
