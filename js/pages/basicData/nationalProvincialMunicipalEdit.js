@@ -38,7 +38,7 @@ export default {
       btnConfig: {
         typeAll: 'default',
         buttons: [{
-          webname: 'nationalProvinceCitySave',
+          webname: 'CpCRegionSaveBtn',
           // text: '保存',
           disabled: false, // 按钮禁用控制
           btnclick: () => {
@@ -306,7 +306,7 @@ export default {
   },
   async mounted() {
     const self = this;
-    $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'NATIONALPROVINCIALMUNICIPALEDIT', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+    $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'V_CP_C_REGION_ALIAS', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
       console.log('buttons::', this.btnConfig.buttons, 'res::', res);
     });
     self.initObjItem(self.ID);
@@ -320,7 +320,7 @@ export default {
   },
   created() { },
   activated() {
-    $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'NATIONALPROVINCIALMUNICIPALEDIT', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+    $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'V_CP_C_REGION_ALIAS', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
       console.log('buttons::', this.btnConfig.buttons, 'res::', res);
     });
   },

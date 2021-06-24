@@ -322,7 +322,7 @@ class commonUtils {
    * @self {object} 指向当前实例
    * @arrry {string} 当前按钮配置的name，eg: 'btnConfig'
    * @param {string} 用于请求接口的传参，目前是String类型。待扩展成对象类型，便于支持同名不同按钮配置的页面，如新增和详情同一页面时
-   * @param {*} isIndependent
+   * @param {Boolean} isIndependent 单对象页面必传true
    * @returns
    */
   static getPermissions(self, array, params, isIndependent) {
