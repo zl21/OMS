@@ -312,22 +312,23 @@ export default {
   },
   async created(){
     // 按钮权限配置
-    // console.log(JSON.parse(sessionStorage.getItem("ACTIONS")));
     let ACTIONS = JSON.parse(sessionStorage.getItem("ACTIONS"));
-    console.log(ACTIONS);
-    this.butArr.forEach((x)=>{
+    let buttonArr1 = this.butArr.map((x)=>{ if(ACTIONS.some(y => y.webname === x.webname)) return x}).filter(item => item);
+    this.butArr = buttonArr1;
+    console.log(this.butArr);
+    // this.butArr.forEach((x)=>{
       // 判断是否存在不存在设置为false，存在看是否显示ishide
-      if(!ACTIONS.some(y => y.webname === x.webname)){
-        x.isShow = false
-        console.log(x.webname);
-      }else{
-        ACTIONS.forEach((e) => {
-          if(x.webname === e.webname){
-            x.isShow = !e.ishide
-          }
-        })
-      }
-    })
+      // if(!ACTIONS.some(y => y.webname === x.webname)){
+      //   x.isShow = false
+      //   console.log(x.webname);
+      // }else{
+      //   ACTIONS.forEach((e) => {
+      //     if(x.webname === e.webname){
+      //       x.isShow = !e.ishide
+      //     }
+      //   })
+      // }
+    // })
   },
   mounted() {
     let dataProps = this.componentData;

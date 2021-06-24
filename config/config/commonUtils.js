@@ -899,7 +899,6 @@ class commonUtils {
    *  @param {Number\String}
    */
   static floatNumber(num) {
-    console.log(num);
     num = typeof num === 'number' ? num.toString() : num;
     if (num.includes('.')) {
       let b = num.split('.')

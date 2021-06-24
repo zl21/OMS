@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-06-23 16:02:40
+ * @LastEditTime: 2021-06-24 15:34:31
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -316,7 +316,7 @@ export default {
         let BtnConfig = this.businessActionTable.businessButtonConfig.buttons;
         if (this.$parent.$parent.panelRef === "换货明细") {
           BtnConfig[0].isShow = false;
-          BtnConfig[1].isShow = BtnConfig[1].ishide ? BtnConfig[1].ishide : true;
+          BtnConfig[1].isShow = true;
           BtnConfig[2].isShow = false;
           if (this.$route.query.RETURN_SOURCE == "平台") {
             BtnConfig[1].isShow = false;
@@ -370,8 +370,7 @@ export default {
           } else {
             SUB_ACTIONS.forEach((e) => {
               if(item.webname === e.webname){
-                item.isShow = !e.ishide
-                item.ishide = e.ishide
+                item.isShow = true
               }
             })
           }
