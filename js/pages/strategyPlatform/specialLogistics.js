@@ -104,29 +104,17 @@ export default {
           {
             text: '保存',
             size: '', // 按钮大小
+            isShow: false,
+            webname: this.$route.params.customizedModuleName+"_save",
             disabled: false, // 按钮禁用控制
             btnclick: this.fnSave
           },
           {
+            isShow: false,
+            webname: this.$route.params.customizedModuleName+"_back",
             text: $i18n.t('btn.back'),
             btnclick: this.back
-          },
-          // {
-          //   text: '启用',
-          //   isShow: false,
-          //   disabled: false,
-          //   btnclick: () => {
-          //     this.fnSetIsActive('Y');
-          //   }
-          // },
-          // {
-          //   text: '停用',
-          //   isShow: false,
-          //   disabled: false,
-          //   btnclick: () => {
-          //     this.fnSetIsActive('N');
-          //   }
-          // }
+          }
         ]
       },
       btnConfig1: {
@@ -303,7 +291,7 @@ export default {
             value: 'ename',
             colname: 'ename',
             width: '6',
-            maxlength:20,
+            maxlength:200,
             disabled: false,
             inputChange: () => { }
           },
@@ -789,8 +777,18 @@ export default {
   },
   mounted() {
    this.init()
+   this.getBtns()
   },
   methods: {
+    getBtns() {
+      $OMS2.omsUtils.getPermissions(this, '', { table: this.$route.params.customizedModuleName, type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+        const { ACTIONS, SUB_ACTIONS } = res
+        this.btnConfig.buttons.forEach(x => {
+          ACTIONS.some(y => y.webname == x.webname) && (x.isShow = true)
+        })
+
+      })
+    },
     init(){
       this.relationShip();
       let { customizedModuleId, customizedModuleName } = this.$route.params;
@@ -1019,7 +1017,6 @@ export default {
             }
           }
 
-
           //遍历包裹属性的数据
           specialAssignLogisticsPkgItemList.forEach(em => {
             this.switchListdata.list.forEach(item => {
@@ -1242,7 +1239,7 @@ export default {
         //包裹属性
         this.switchListdata.list.forEach(item => {
           let obj = {
-            id: item.id,
+            id: item.id ||"-1",
             pkgAttributeType: item.pkgAttributeType,
             isEnable: item.val ? 1 : 0,
             beginVal: item.value,

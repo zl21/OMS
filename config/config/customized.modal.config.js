@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-05-17 14:48:57
- * @LastEditTime: 2021-05-20 14:23:51
- * @LastEditors: your name
+ * @LastEditTime: 2021-06-24 10:42:21
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/config/customized.modal.config.js
  */
@@ -24,6 +24,9 @@ const common = {
     component: importCom,
   },
   WAREHOUSEIMPORT: {
+    component: importCom,
+  },
+  ZFBACCOUNTIMPORT: {
     component: importCom,
   },
 }

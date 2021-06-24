@@ -80,6 +80,7 @@ export default {
       }, 0);
     },
     rowCheckboxChange(val, rowIndex, column) {
+      console.log(val);
       this.$emit('isChangeFun', true);
       // if (column.key === 'IS_WRITE') {
       //   this.rows[rowIndex].IS_WRITE = val;

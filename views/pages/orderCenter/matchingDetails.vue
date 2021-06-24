@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-06-04 19:09:36
+ * @LastEditTime: 2021-06-24 17:41:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
@@ -22,7 +22,13 @@
       @on-page-size-change="pageSizeChange"
     />
 
-    <Modal v-model="modal6" title="退单编号查询" :mask="true" :footer-hide="true" width="1000">
+    <Modal
+      v-model="modal6"
+      title="退单编号查询"
+      :mask="true"
+      :footer-hide="true"
+      width="1000"
+    >
       <addGiftItem :componentData="componentData" />
     </Modal>
   </div>
@@ -51,6 +57,7 @@ export default {
         buttons: [{
           text: '手工匹配',
           isShow: false,
+          webname: "OC_B_REFUND_IN_manual",
           disabled: false, // 按钮禁用控制
           btnclick: () => {
             service.orderCenter.checkRefundInStatus(`id=${this.$route.params.itemId}`).then(res => {
@@ -66,6 +73,7 @@ export default {
         {
           text: '强制匹配',
           isShow: false,
+          webname: "OC_B_REFUND_IN_force",
           btnclick: () => {
             service.orderCenter.checkRefundInStatus(`id=${this.$route.params.itemId}`).then(res => {
               if (res.data.code == 0) {
@@ -87,7 +95,7 @@ export default {
         },
         {
           text: '清除退单',
-          isShow: false,
+          isShow: true,
           btnclick: () => {
             this.emptyTabledata()
           },
@@ -117,20 +125,30 @@ export default {
     }
   },
   mounted() {
-
-    if (vm.$route.query.type) {
-      this.querbtn(this.btnConfig.buttons, "查询退单").isShow = true
-      this.querbtn(this.btnConfig.buttons, "清除退单").isShow = true
-
-    } else {
-      this.querbtn(this.btnConfig.buttons, "强制匹配").isShow = true
-      this.querbtn(this.btnConfig.buttons, "手工匹配").isShow = true
-      this.querbtn(this.btnConfig.buttons, "清除退单").isShow = true
-    }
     this.init()
+    this.getBtns()
 
   },
   methods: {
+    getBtns() {
+      $OMS2.omsUtils.getPermissions(this, '', { table: "OC_B_REFUND_IN", type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+        const { ACTIONS, SUB_ACTIONS } = res
+        if (!vm.$route.query.type) {
+          this.btnConfig.buttons.forEach(x => {
+            SUB_ACTIONS.some(y => y.webname == x.webname) && (x.isShow = true)
+          })
+        } else if (vm.$route.query.type == 1) {
+          if (SUB_ACTIONS.some(y => y.webname == "OC_B_REFUND_IN_manual")) {
+            this.querbtn(this.btnConfig.buttons, "查询退单").isShow = true
+          }
+        } else if (vm.$route.query.type == 2) {
+          if (SUB_ACTIONS.some(y => y.webname == "OC_B_REFUND_IN_force")) {
+            this.querbtn(this.btnConfig.buttons, "查询退单").isShow = true
+          }
+        }
+
+      })
+    },
     emptyTabledata() {//清楚退单逻辑
 
       if (this.tebdata.length == 0) {

@@ -31,12 +31,16 @@ export default {
         buttons: [
           {
             text: '保存',
+            isShow: false,
+            webname:"ST_C_DELIVERY_AREA_save",
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.getCheckedNodes("1");
             }
           },
           {
+            isShow: false,
+            webname:"ST_C_DELIVERY_AREA_back",
             text: $i18n.t('btn.back'),
             btnclick: this.back
           }
@@ -47,11 +51,15 @@ export default {
         buttons: [
           {
             text: '添加区域',
+            isShow: false,
+            webname:"ST_C_DELIVERY_AREA_addArea",
             disabled: false, // 按钮禁用控制
             btnclick: this.addRegion
           },
           {
             text: '删除区域',
+            isShow: false,
+            webname:"ST_C_DELIVERY_AREA_deleteArea",
             disabled: false, // 按钮禁用控制
             btnclick: this.fndel
           }
@@ -339,7 +347,7 @@ export default {
       tableConfig: {
         indexColumn: false,
         isShowSelection: false,
-        columns: [ {
+        columns: [{
           type: 'selection',
           width: 60,
           align: 'center'
@@ -376,11 +384,11 @@ export default {
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        current:1,
+        current: 1,
         pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       },
-     // tableColumns: [],
+      // tableColumns: [],
       tableData: [],
       SIZE: 10,
       CURRENT: 1,
@@ -447,9 +455,10 @@ export default {
     });
   },
   mounted() {
+
     let { customizedModuleId, customizedModuleName } = this.$route.params;
     if (customizedModuleId == 'New') {
-   
+
       this.id = '-1';
       this.tableshow = false;
       this.labelList = [{
@@ -458,7 +467,7 @@ export default {
       },]
     } else {
 
-     
+
       let areaRange = this.AliasFormConfig.formValue.REGION_TYPE;
       let item = this.queryForm('排除省份');
       if (areaRange == 1) {
@@ -472,8 +481,25 @@ export default {
       this.init();
 
     }
+
+
+      this.getBtns()
+    
   },
   methods: {
+    getBtns() {
+      $OMS2.omsUtils.getPermissions(this, '', { table: 'ST_C_DELIVERY_AREA', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+        const { ACTIONS, SUB_ACTIONS } = res
+        this.btnConfig.buttons.forEach(x => {
+          ACTIONS.some(y => y.webname == x.webname) && (x.isShow = true)
+        })
+
+        this.btnConfig2.buttons.forEach(x => {
+          SUB_ACTIONS.some(y => y.webname == x.webname) && (x.isShow = true)
+        })
+
+      })
+    },
     labelClick(e) {
       // tab明细切换
       this.labelDefaultValue = e.value;
@@ -550,13 +576,13 @@ export default {
         if (!type) {
           this.AliasFormConfig.formValue.REGION_TYPE = stCDeliveryArea.areaRange + '';
         }
-        if ( this.AliasFormConfig.formValue.REGION_TYPE == 2) {
+        if (this.AliasFormConfig.formValue.REGION_TYPE == 2) {
           this.modalTitle = '添加支持省份';
           this.formconfig2[0].show = true;
           this.tableConfig.columns[2].title = '配送省份';
         } else {
           this.modalTitle = '添加排除区域';
-         this.tableConfig.columns[2].title = '排除省份';
+          this.tableConfig.columns[2].title = '排除省份';
           this.formconfig2[0].show = false;
         }
 
@@ -778,7 +804,7 @@ export default {
       this.modal1 = true;
       //添加区域
       this.querList();
-   
+
     },
     fnprovince(v, type) {
       //根据排除省份获取排市
@@ -830,7 +856,7 @@ export default {
           }
         }
       }
-     
+
 
       this.modal1 = false;
 
@@ -854,7 +880,7 @@ export default {
           if (type == "1") {
             this.pageback();
           }
-     
+
         } else {
           this.$store.commit('global/tabOpen', {
             type: 'C',

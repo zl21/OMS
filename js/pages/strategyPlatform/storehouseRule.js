@@ -47,10 +47,14 @@ export default {
           {
             text: '保存',
             size: '', // 按钮大小
+            isShow: false,
+            webname: this.$route.params.customizedModuleName+"_save",
             disabled: false, // 按钮禁用控制
             btnclick: this.isfnSave
           },
           {
+            isShow: false,
+            webname: this.$route.params.customizedModuleName+"_back",
             text: $i18n.t('btn.back'),
             btnclick: this.back
           },
@@ -60,7 +64,7 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: this.fnCopy
           },
-         
+
           {
             text: '下一步',
             isShow: false,
@@ -82,6 +86,8 @@ export default {
         buttons: [
           {
             text: '导入',
+            isShow: false,
+            webname: this.$route.params.customizedModuleName+"_Import",
             disabled: false, // 按钮禁用控制
             btnclick: this.importData
           },
@@ -109,7 +115,7 @@ export default {
             value: 'ename',
             colname: 'ename',
             width: '8',
-            maxlength:15,
+            maxlength: 200,
             disabled: false,
             inputChange: () => { }
           },
@@ -289,7 +295,7 @@ export default {
             value: 'remark',
             colname: 'remark',
             width: '16',
-            maxlength:200,
+            maxlength: 1000,
             disabled: false,
             inputChange: () => { }
           }
@@ -369,7 +375,7 @@ export default {
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        current:1,
+        current: 1,
         pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       },
@@ -389,18 +395,31 @@ export default {
   computed: {},
   mounted() {
     this.init()
-
+    this.getBtns()
   },
   created() { },
 
   methods: {
+    getBtns() {
+      $OMS2.omsUtils.getPermissions(this, '', { table: this.$route.params.customizedModuleName, type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+        const { ACTIONS, SUB_ACTIONS } = res
+        this.btnConfig.buttons.forEach(x => {
+          ACTIONS.some(y => y.webname == x.webname) && (x.isShow = true)
+        })
+
+        this.btnConfig2.buttons.forEach(x => {
+          SUB_ACTIONS.some(y => y.webname == x.webname) && (x.isShow = true)
+        })
+
+      })
+    },
     init() {
       let { customizedModuleId, customizedModuleName } = this.$route.params;
       let query = this.$route.query;
       this.customizedModuleName = customizedModuleName;
-      if (customizedModuleId == "New" ||customizedModuleId == 'NEW') {
+      if (customizedModuleId == "New" || customizedModuleId == 'NEW') {
         this.id = "-1"
-      }else{
+      } else {
         this.id = customizedModuleId
       }
 
@@ -436,7 +455,7 @@ export default {
           }
         } else if (query.saveType && query.saveType == 2) {
           const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-          const data = { label: '分仓规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
+          const data = { label: '分仓规则编辑', name: keepAliveModuleName }; //当前界面模块名称 
 
           this.fninit(this.id);
           this.fntableData(this.id);
@@ -530,7 +549,7 @@ export default {
       }
     },
     lastStep() {
-    
+
 
       this.$store.commit('global/tabOpen', {
         type: 'C',
@@ -538,7 +557,7 @@ export default {
         label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
         customizedModuleName: this.customizedModuleName,
         customizedModuleId: '-1',
-        dynamicRoutingForCustomizePage:true
+        dynamicRoutingForCustomizePage: true
       })
     },
     isfnSave() {
@@ -613,7 +632,7 @@ export default {
         label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
         customizedModuleName: this.customizedModuleName,
         customizedModuleId: 'New',
-        dynamicRoutingForCustomizePage:true
+        dynamicRoutingForCustomizePage: true
       })
 
     },
@@ -626,7 +645,7 @@ export default {
         service.strategyPlatform
           .assignLogisticsqueryDetailById({
             ID: id,
-            SIZE:  this.tableConfig.pageSize,
+            SIZE: this.tableConfig.pageSize,
             CURRENT: this.tableConfig.current,
             regionName: this.seachVal
           })
@@ -655,7 +674,7 @@ export default {
         .getWarehouseRegionInfo({
           params: {
             id,
-            pageSize:  this.tableConfig.pageSize,
+            pageSize: this.tableConfig.pageSize,
             pageNum: this.tableConfig.current,
             regionName: this.seachVal
           }
@@ -747,7 +766,7 @@ export default {
         });
         return;
       }
-    //分仓规则---------
+      //分仓规则---------
       service.strategyPlatform.getWarehouseInfo({ params: { id } }).then(res => {
         let warehouseData = res.data.data;
         for (const key in this.formConfig.formValue) {
@@ -839,20 +858,20 @@ export default {
               label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
               customizedModuleName: this.customizedModuleName,
               customizedModuleId: '-1',
-              dynamicRoutingForCustomizePage:true
+              dynamicRoutingForCustomizePage: true
             })
             return
           }
 
           if (saveType == 2) {
-           
+
             this.$store.commit('global/tabOpen', {
               type: 'C',
               url: `/CUSTOMIZED/${this.customizedModuleName}/${res.data.data.objId}?saveType=${saveType}`,
               label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
               customizedModuleName: this.customizedModuleName,
               customizedModuleId: res.data.data.objId,
-              dynamicRoutingForCustomizePage:true
+              dynamicRoutingForCustomizePage: true
             })
           }
           if (saveType == 1 && this.id != "-1") {
@@ -901,7 +920,7 @@ export default {
               label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
               customizedModuleName: this.customizedModuleName,
               customizedModuleId: '-1',
-              dynamicRoutingForCustomizePage:true
+              dynamicRoutingForCustomizePage: true
             })
             return
           }
@@ -913,7 +932,7 @@ export default {
               label: this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS' ? '分物流规则' : '分仓规则',
               customizedModuleName: this.customizedModuleName,
               customizedModuleId: res.data.data.objId,
-              dynamicRoutingForCustomizePage:true
+              dynamicRoutingForCustomizePage: true
             })
           }
           if (saveType == 1 && this.id != "-1") {

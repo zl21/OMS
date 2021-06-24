@@ -167,5 +167,10 @@ export default [{
     tableName: 'ST_C_PRODUCT_STRATEGY',
     url: '/p/cs/productStrategy/import/multiShopItem',
     downloadUrl: '/p/cs/productStrategy/import/downloadMultiShopTemp'
-  } // 店铺商品特殊设置 - 多店铺比例-明细导入
+  }, // 店铺商品特殊设置 - 多店铺比例-明细导入
+  {
+    tableName: 'AC_F_ALIPAY_ACCOUNTMANAGE',
+    url: '/p/cs/ac/v1/alipayAccountManage/importData',
+    downloadUrl: '/p/cs/ac/v1/alipayAccountManage/exportTemplate'
+  } // 支付宝账户》导入
 ]

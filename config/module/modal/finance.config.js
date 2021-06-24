@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-06-07 20:40:40
- * @LastEditTime: 2021-06-15 14:23:40
- * @LastEditors: your name
+ * @LastEditTime: 2021-06-23 20:52:23
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/modal/finance.config.js
  */
@@ -22,5 +22,6 @@ export default {
   },
   AUTHORIZE:{
     component: () => import('@/views/modal/financeCenter/authorize.vue'),
-  }
+  },
+
 };
