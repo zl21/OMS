@@ -169,6 +169,7 @@ export default {
   created() {
     if (this.itemdata.fkdisplay == 'mrp') {
       if (!this.itemdata.pid) return
+      if (this.itemdata.defaultSelectedMrp.length) return
       const formItem = this.deepClone(this.itemdata);
       const ids = formItem.pid.split(',');
       const values = formItem.valuedata.split(',');

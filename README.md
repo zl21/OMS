@@ -238,3 +238,4 @@
 | v1.1.96 | fkinputPlus-mrp-选中值展示问题修复 |
 | v1.1.97 | fkinputPlus-version取值问题修复 |
 | v1.1.98 | fkinputPlus deepClone |
+| v1.1.99 | 修复fkinputPlus默认值 |
