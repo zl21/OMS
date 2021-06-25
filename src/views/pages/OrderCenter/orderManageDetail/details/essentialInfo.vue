@@ -19,7 +19,7 @@
             <!-- <p v-if="list.label==='平台编号:'" class="text-ellipsis">
                 {{ componentData.order[list.column] }}
             </p> -->
-            <Tooltip v-if="list.label==='平台编号:'" max-width="250">
+            <Tooltip v-if="list.label==='平台编号:'" max-width="250" theme="light">
                <p class="text-ellipsis">{{componentData.order[list.column]}}</p>
                 <p slot="content" class="wordBr">{{componentData.order[list.column]}}</p>
             </Tooltip>
