@@ -295,7 +295,7 @@
 
 const functionPowerActions = () => require(`burgeonConfig/config/functionPower.actions.js`);
 const store = vm.$store
-import service from '@/service/index';
+
 
 export default {
   data() {

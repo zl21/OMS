@@ -253,12 +253,20 @@ export default {
         )
         .then(res => {
           if (res.data.code === 0) {
-            const dataArray = form.refactoringData(res.data.datas.dataarry);
+            res.data.data.map(item=>{
+              item.coldesc = item.colname
+              item.colname = item.key
+              item.inputname = `${item.key}:${item.fk_dk_show_filed}`
+              return item
+            })
+
+            const dataArray = form.refactoringData(res.data.data);
             dataArray.forEach(item => {
               if (item.item.value) {
                 item.item.props.value = item.item.value;
               }
             });
+          
             this.searchFormConfig.defaultconfig = dataArray;
           }
         });

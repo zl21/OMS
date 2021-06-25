@@ -254,6 +254,10 @@ export default {
                   props: {
                     columns: [
                       {
+                        title: "单据编号", // '提示信息',
+                        key: 'billNo',
+                      },
+                      {
                         title: $i18n.t('modalTitle.a6'), // '提示信息',
                         key: 'message',
                       },
@@ -306,6 +310,10 @@ export default {
                 return h('Table', {
                   props: {
                     columns: [
+                      {
+                        title: "单据编号", // '提示信息',
+                        key: 'billNo',
+                      },
                       {
                         title: $i18n.t('modalTitle.a6'), // '提示信息',
                         key: 'message',
@@ -423,6 +431,10 @@ export default {
                 return h('Table', {
                   props: {
                     columns: [
+                      {
+                        title: "单据编号", // '提示信息',
+                        key: 'billNo',
+                      },
                       {
                         title: $i18n.t('modalTitle.a6'), // '提示信息',
                         key: 'message',
