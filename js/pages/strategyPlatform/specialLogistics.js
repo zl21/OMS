@@ -909,6 +909,10 @@ export default {
     },
     //商品属性删除
     deleteSku(id) {
+      if (this.isactive == 'Y') {
+        this.$Message.warning('启用状态，不可删除！');
+        return;
+      }
       if (this.id == "-1") {
         for (var i = 0; i < this.tableConfig3.data.length; i++) {
           if (this.tableConfig3.data[i].id == id) {
@@ -928,6 +932,10 @@ export default {
     },
     //删除省市
     deleteAddress(id) {
+      if (this.isactive == 'Y') {
+        this.$Message.warning('启用状态，不可删除！');
+        return;
+      }
       let data = {
         ID: this.id,
         PROVINCE_IDS: id
