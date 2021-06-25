@@ -169,7 +169,7 @@ export default {
   created() {
     if (this.itemdata.fkdisplay == 'mrp') {
       if (!this.itemdata.pid) return
-      const formItem = this.$OMS2.omsUtils.deepClone(this.itemdata);
+      const formItem = this.deepClone(this.itemdata);
       const ids = formItem.pid.split(',');
       const values = formItem.valuedata.split(',');
       formItem.defaultSelectedMrp = [];
@@ -367,6 +367,23 @@ export default {
       // this.$emit('getFkChooseItem', val);
     },
     /* ------------------- DropMultiSelectFilter组件事件 end  ------------------- */
+    /**
+     * 获取两个数组对象的并集
+     * @param obj  拷贝的数据源
+     */
+    deepClone(obj) {
+      let objClone = Array.isArray(obj) ? [] : {}
+      if (obj && typeof obj === 'object') {
+        for (let key in obj) {
+          if (obj[key] && typeof obj[key] === 'object') {
+            objClone[key] = this.deepClone(obj[key])
+          } else {
+            objClone[key] = obj[key]
+          }
+        }
+      }
+      return objClone
+    }
   },
 }
 </script>
