@@ -350,7 +350,7 @@ export default {
           buttons: [{
             webname: 'CLASSIFY_AddDetailBtn',
             type:'primary',
-            // text: '添加',
+            text: '添加',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.addAttrValue();
@@ -359,7 +359,7 @@ export default {
           {
             webname: 'CLASSIFY_DeleteDetailBtn',
             type:'warning',
-            // text: '删除',
+            text: '删除',
             btnclick: () => {
               this.deleteAttrValue();
             },

@@ -161,7 +161,7 @@ export default {
             {
               webname: 'LOGISTICS_AddDetailBtn',
               type: 'primary',
-              // text: '添加',
+              text: '添加',
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.addHandel();
@@ -170,7 +170,7 @@ export default {
             {
               webname: 'LOGISTICS_DeleteDetailBtn',
               type: 'warning',
-              // text: '删除',
+              text: '删除',
               btnclick: () => {
                 this.deleteHandel();
               },
@@ -185,7 +185,7 @@ export default {
           buttons: [
             {
               webname: 'LOGISTICS2_AddDetailBtn',
-              // text: '添加',
+              text: '添加',
               type: 'primary',
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -196,7 +196,7 @@ export default {
             },
             {
               webname: 'LOGISTICS2_DeleteDetailBtn',
-              // text: '删除',
+              text: '删除',
               type: 'warning',
               btnclick: () => {
                 this.nalysisDetale();

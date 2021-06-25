@@ -78,7 +78,7 @@ export default {
         typeAll: 'default',
         buttons: [{
           webname: 'SKU_SaveBtn',
-          // text: '保存',
+          text: '保存',
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
           btnclick: () => {
@@ -137,7 +137,8 @@ export default {
           colname: 'ECODE',
           width: '8',
           style: 'input',
-          regx: /^(\s*|[A-Za-z0-9]+)$/,
+          // regx: /^(\s*|[A-Za-z0-9]+)$/,
+          regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
           // placeholder: 'Only numbers and letters',
           inputChange: () => {
             this.masterModifyData('ECODE', 'master');

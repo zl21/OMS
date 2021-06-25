@@ -39,7 +39,7 @@ export default {
         typeAll: 'default',
         buttons: [{
           webname: 'CpCRegionSaveBtn',
-          // text: '保存',
+          text: '保存',
           disabled: false, // 按钮禁用控制
           btnclick: () => {
             this.save();
