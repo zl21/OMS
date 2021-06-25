@@ -282,7 +282,7 @@ export default {
           btnsite: 'right', // 按钮位置 (right , center , left)
           buttons: [{
               type:'primary',
-              webname: 'order_fund', // 返回
+              webname: 'ps_c_pro_group_add', // 返回
               text: '添加',
               disabled: false,
               btnclick: () => {
@@ -291,7 +291,7 @@ export default {
             },
             {
               type:'warning',
-              webname: 'order_fund', // 返回
+              webname: 'ps_c_pro_group_del', // 返回
               text: '删除',
               disabled: false,
               btnclick: () => {
@@ -392,7 +392,7 @@ export default {
           btnsite: 'right', // 按钮位置 (right , center , left)
           buttons: [{
               type:'primary',
-              webname: 'order_fund', // 返回
+              webname: 'ps_c_pro_group_add', // 返回
               text: '添加',
               disabled:false,
               btnclick: () => {
@@ -401,7 +401,7 @@ export default {
             },
             {
               type:'warning',
-              webname: 'order_fund', // 返回
+              webname: 'ps_c_pro_group_del', // 返回
               text: '删除',
               disabled:false,
               btnclick: () => {
@@ -533,7 +533,7 @@ export default {
         value: 'luckbagGroupItem',
       }];
     }else {
-    this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_PRO_GROUP', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
+    this.$OMS2.omsUtils.getBtnPermission(this, ['btnConfig' , 'jordanTableConfigLuck.businessButtonConfig' , 'jordanTableConfigGenera.businessButtonConfig'], { table: 'PS_C_PRO_GROUP', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
 
     }
     this.query();
