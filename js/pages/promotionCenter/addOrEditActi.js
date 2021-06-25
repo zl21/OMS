@@ -41,6 +41,29 @@ export default {
           },
         ]
       },
+      extendBtn:[
+        {
+          webname:'PM_C_PROM_ACTI_RETURN_B',
+          text: $i18n.t('btn.back'), // 返回
+          btnclick: () => {
+            this.close();
+          }
+        },
+        {
+          webname:'PM_C_PROM_ACTI_SAVE',
+          text: $i18n.t('btn.saveDraft'), // 保存草稿
+          btnclick: () => {
+            this.saveDraft();
+          }
+        },
+        {
+          webname:'PM_C_PROM_ACTI_PUBLISH',
+          text: $i18n.t('btn.publish'), // 发布
+          btnclick: () => {
+            this.publish();
+          }
+        },
+      ],
       objid: '-1', // 新增-1 保存的正整数
       dialogVisible: false,
       basic_info: {
@@ -838,8 +861,11 @@ export default {
     this.$refs.basicSteps.removeEventListener('scroll', this.handleScrollByUser, false);
   },
   async created() {
+    const buttons = self.$OMS2.BtnConfig.config();
+    this.btnConfig.buttons = [...this.extendBtn];
     await groups.load();
     if (this.$route.query.id > 0) {
+      this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
       this.objid = this.$route.query.id;
       this.getData();
     } else {

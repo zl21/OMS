@@ -17,27 +17,31 @@ export default {
       objid: '-1', // 新增-1 保存的正整数
       btnConfig: {
         typeAll: 'default',
-        buttons: [
-          {
-            text: $i18n.t('btn.back'), // 返回
-            btnclick: () => {
-              this.close();
-            }
-          },
-          {
-            text: $i18n.t('btn.saveDraft'), // 保存草稿
-            btnclick: () => {
-              this.saveDraft();
-            }
-          },
-          {
-            text: $i18n.t('btn.publish'), // 发布
-            btnclick: () => {
-              this.publish();
-            }
-          },
-        ]
+        buttons: []
       },
+      extendBtn:[
+        {
+          webname:'PM_C_PROM_ACTI_RETURN_B',
+          text: $i18n.t('btn.back'), // 返回
+          btnclick: () => {
+            this.close();
+          }
+        },
+        {
+          webname:'PM_C_PROM_ACTI_SAVE',
+          text: $i18n.t('btn.saveDraft'), // 保存草稿
+          btnclick: () => {
+            this.saveDraft();
+          }
+        },
+        {
+          webname:'PM_C_PROM_ACTI_PUBLISH',
+          text: $i18n.t('btn.publish'), // 发布
+          btnclick: () => {
+            this.publish();
+          }
+        },
+      ],
       basic_info: {
         // 基础信息设置
         activity_name: '', // 活动名称【必填】
@@ -495,9 +499,12 @@ export default {
     this.addListener();
   },
   async created() {
+    const buttons = self.$OMS2.BtnConfig.config();
+    this.btnConfig.buttons = [...this.extendBtn];
     await groups.load();
     const routeId = this.$route.query.id;
     if (routeId > 0) {
+      this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
       this.objid = String(routeId);
       this.getInitData();
     } else {
