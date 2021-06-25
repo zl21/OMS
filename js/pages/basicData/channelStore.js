@@ -132,7 +132,7 @@ export default {
       jordanExtendBtn:[
         {
           type:'primary',
-          webname: 'order_fund', // 返回
+          webname: 'CP_C_ORG_CHANNEL_ADD', // 返回
           text: '添加',
           btnclick: () => {
             // 查询逻辑仓,实体仓
@@ -141,7 +141,7 @@ export default {
         },
         {
           type:'warning',
-          webname: 'order_fund', // 返回
+          webname: 'CP_C_ORG_CHANNEL_DEL', // 删除
           text: '删除',
           btnclick: () => {
             this.delete();
@@ -159,7 +159,9 @@ export default {
         businessButtonConfig: {
           typeAll: 'default',
           btnsite: 'right', // 按钮位置 (right , center , left)
-          buttons: []
+          buttons: [
+            
+          ]
         },
         businessFormConfig: {
           formData: [
@@ -390,6 +392,7 @@ export default {
         //   console.log(res);
         // });
         // await this.$OMS2.omsUtils.getPermissions(this.jordanTableConfig, 'businessButtonConfig', { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
+        this.$OMS2.omsUtils.getBtnPermission(this , ['btnConfig' , 'jordanTableConfig.businessButtonConfig'] , { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
       }
     },
     pageSizeChange(val) {

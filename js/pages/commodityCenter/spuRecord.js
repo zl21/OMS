@@ -147,6 +147,7 @@ export default {
       },
       extendSkuInfoBtn:[{
             text: '新增SKU',
+            webname:'PS_C_PRO_NEW_SKU',
             btnclick: () => {
               if (this.spuid == '-1') {
                 this.$OMS2.omsUtils.msgTips(this, 'warning', 'cu');
@@ -167,6 +168,7 @@ export default {
           },
           {
             text: '快速新增',
+            webname:'PS_C_PRO_QUICK_SKU',
             btnclick: () => {
               if (this.spuid == '-1') {
                 this.$OMS2.omsUtils.msgTips(this, 'warning', 'cu');
@@ -191,6 +193,7 @@ export default {
           },
           {
             text: '应用到所有列',
+            webname:'PS_C_PRO_MIND_COLUMNS',
             btnclick: () => {
               this.useAllColumns();
             }
@@ -553,7 +556,7 @@ export default {
       this.skuInfoBtnConfig.buttons = [ ...this.extendSkuInfoBtn];
       this.supplierBtnConfig.buttons = [ ...this.extendSupplierBtn];
       if (self.spuid > 0) {
-        this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_PRO', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
+        this.$OMS2.omsUtils.getBtnPermission(this , ['btnConfig' , 'skuInfoBtnConfig' , 'supplierBtnConfig'] , { table: 'PS_C_PRO', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
         self.formConfig.formData.forEach(item=>{
           if (item.value == 'ECODE') {
             item.disabled = true;

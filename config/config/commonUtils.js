@@ -443,60 +443,66 @@ class commonUtils {
    * @self {object} 指向当前实例
    * @cBtn {Array} 当前按钮配置的name，buttons数组的上一级。eg: 'btnConfig'
    * @param {string} 用于请求接口的传参，目前是String类型。待扩展成对象类型，便于支持同名不同按钮配置的页面，如新增和详情同一页面时
-   * @param {Boolean} isIndependent 
+   * @param {Boolean} isIndependent 默认为单对象
    * @returns
    */
-  static getBtnPermission(self, cBtn, params, isIndependent) {
+  static getBtnPermission(self, cBtn, params, isIndependent=true) {
     const query = {
       TABLE: params.table || params.TABLE,
       TYPE: params.type || params.TYPE,
     }
-    let data, btnArr = [], btnArrs = [], cur = JSON.parse(JSON.stringify(self));
-    /* if (cBtn instanceof Array) {
-      cBtn.forEach(x => {
-        const keys = x.split('.');
-        for (let i = 0; i < keys.length - 1; i++) {
-          cur = cur[i];
-        }
-        btnArrs.push(cur);
-      })
-    } else {
-      btnArrs.push(self[cBtn]);
-    } */
     const serviceId = params.serviceId || params.SERVICEID || '';
-    if (!isIndependent && self[cBtn] == undefined) return
+    let data, btnArr = [];
+    if (!isIndependent && self[array] == undefined) return
     return new Promise(async (resolve) => {
       const res = await self.service.common.fetchActionsInCustomizePage(query, { serviceId });
       let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
+      if (isIndependent) {
+        result = result.ACTIONS;
+      }
       data = JSON.parse(JSON.stringify(result))
-      const { ACTIONS, SUB_ACTIONS } = result;
       if (res.data.code === 0) {
-        const a = [], c = [];
-        ACTIONS.forEach((element) => {
-          if (cBtn instanceof Array) {
-            cBtn.forEach(x => {
-              const keys = x.split('.');
-              for (let i = 0; i < keys.length - 1; i++) {
-                cur = cur[i];
-              }
-              btnArr = cur.buttons;
-              btnArr.forEach(item => {
-                item.buttons.forEach((btn) => {
-                  if (btn.webname == element.webname) {
-                    btn.webid = element.webid
-                    btn.text = element.webdesc
-                    c.push(btn)
-                  }
-                })
-                item.buttons = c
-              })
-            })
+        cBtn.forEach(item=>{
+          let key = item.split('.');
+          let btnArr = self
+          for (const i of key) {
+            btnArr = btnArr[i]
+          };
+          const a = [], c = [];
+        result.forEach((element) => {
+          // 有下拉项的处理
+          if (element.child) {
+            this.buttonChild(element, btnArr.buttons, c)
           }
+          // 普通btn（无child）的处理
+          btnArr.buttons.forEach((btn) => {
+            if (!btn.webname) {
+              console.log('btnConfig no webname !', btn);
+              return
+            }
+            if (btn.webname == element.webname) {
+              btn.webid = element.webid
+              btn.text = element.webdesc
+              c.push(btn)
+            }
+            // if (btn.webname == 'fix_back') {
+            //   btn.text = $i18n.t("btn.back");
+            //   if (!c.some(it => it.webname == 'fix_back')) {
+            //     c.push(btn)
+            //   }
+            // }
+          })
+        })
+        if (btnArr.buttons.length) {
+          btnArr.buttons = [...c, ...a]
+          btnArr.loading = false;
+        }
+
         })
         resolve(data);
       }
     }).finally(e => {
-      console.log('butConfig::', btnArrs);
+      // console.log('butConfig::', self[array]);
     });
   }
 
