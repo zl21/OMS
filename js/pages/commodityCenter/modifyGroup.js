@@ -565,7 +565,8 @@ export default {
       self.formConfig.formValue.group_type = data.PsCProGroup.GROUP_TYPE;
       self.formConfig.formValue.ISACTIVE = data.PsCProGroup.ISACTIVE;
       self.modify.master.group_type = data.PsCProGroup.GROUP_TYPE;
-      self.save_button.disabled = data.PsCProGroup.ISACTIVE;
+      // self.save_button.disabled = data.PsCProGroup.ISACTIVE;
+      self.btnConfig.buttons[0].disabled = data.PsCProGroup.ISACTIVE;
       self.jordanTableConfigLuck.businessButtonConfig.buttons.forEach(item=>item.disabled = data.PsCProGroup.ISACTIVE);
       self.jordanTableConfigGenera.businessButtonConfig.buttons.forEach(item=>item.disabled = data.PsCProGroup.ISACTIVE);
 
@@ -618,7 +619,7 @@ export default {
         PsCProGroup: self.modify.master,
         SkuGroupRequestList: self.groupType == 2 ? self.modify.generalGroupItem : self.modify.luckGroupItem
       };
-      this.save_button.disabled = true;
+      this.btnConfig.buttons[0].disabled = true;
       self.service.commodityCenter.skuGroupSave(data).then(res => {
         console.log(res);
         if (res.data.code == 0) {
@@ -632,10 +633,10 @@ export default {
           });
           self.modify.generalGroupItem = [];
           self.modify.luckGroupItem = [];
-          self.save_button.disabled = false;
+          self.btnConfig.buttons[0].disabled = false;
         } else {
           self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
-          this.save_button.disabled = false;
+          this.btnConfig.buttons[0].disabled = false;
         }
       });
     },

@@ -36,54 +36,55 @@ export default {
       },
       btnConfig: {
         typeAll: 'default',
-        buttons: [
-          {
-            webname: 'lookup_save', // 保存
-            text: '保存',
-            size: '', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              const self = this;
-              self.save();
-            }
-          },
-          {
-            webname: 'lookup_return', // 返回
-            text: $i18n.t('btn.back'),
-            btnclick: () => {
-              if (this.isModify) {
-                this.$Modal.fcWarning({
-                  title: '提示', // 打印
-                  content: '该页面已经修改,是否继续返回?', // 正在打印中，请稍后。。。
-                  mask: true,
-                  showCancel: true,
-                  onOk: () => {
-                    comUtils.tabCloseAppoint(this);
-                    this.$destroy(true);
-                    this.$store.commit('global/tabOpen', {
-                      tableId: 10327,
-                      type: 'S',
-                      tableName: 'CP_C_ORG_CHANNEL',
-                      label: '渠道仓档案',
-                      back: true,
-                    });
-                  }
-                });
-              } else {
-                comUtils.tabCloseAppoint(this);
-                this.$destroy(true);
-                this.$store.commit('global/tabOpen', {
-                  tableId: 10327,
-                  type: 'S',
-                  tableName: 'CP_C_ORG_CHANNEL',
-                  label: '渠道仓档案',
-                  back: true,
-                });
-              }
+        buttons: []
+      },
+      extendBtn:[
+        {
+          webname: 'CP_C_ORG_CHANNEL_SAVE', // 保存
+          text: '保存',
+          size: '', // 按钮大小
+          disabled: false, // 按钮禁用控制
+          btnclick: () => {
+            const self = this;
+            self.save();
+          }
+        },
+        {
+          webname: 'CP_C_ORG_CHANNEL_RETURN', // 返回
+          text: $i18n.t('btn.back'),
+          btnclick: () => {
+            if (this.isModify) {
+              this.$Modal.fcWarning({
+                title: '提示', // 打印
+                content: '该页面已经修改,是否继续返回?', // 正在打印中，请稍后。。。
+                mask: true,
+                showCancel: true,
+                onOk: () => {
+                  comUtils.tabCloseAppoint(this);
+                  this.$destroy(true);
+                  this.$store.commit('global/tabOpen', {
+                    tableId: 10327,
+                    type: 'S',
+                    tableName: 'CP_C_ORG_CHANNEL',
+                    label: '渠道仓档案',
+                    back: true,
+                  });
+                }
+              });
+            } else {
+              comUtils.tabCloseAppoint(this);
+              this.$destroy(true);
+              this.$store.commit('global/tabOpen', {
+                tableId: 10327,
+                type: 'S',
+                tableName: 'CP_C_ORG_CHANNEL',
+                label: '渠道仓档案',
+                back: true,
+              });
             }
           }
-        ]
-      },
+        }
+      ],
       formConfig: {
         formData: [
           {
@@ -128,6 +129,25 @@ export default {
           ]
         }
       },
+      jordanExtendBtn:[
+        {
+          type:'primary',
+          webname: 'order_fund', // 返回
+          text: '添加',
+          btnclick: () => {
+            // 查询逻辑仓,实体仓
+            this.logicQuery();
+          }
+        },
+        {
+          type:'warning',
+          webname: 'order_fund', // 返回
+          text: '删除',
+          btnclick: () => {
+            this.delete();
+          }
+        }
+      ],
       jordanTableConfig: {
         indexColumn: true,
         isShowSelection:true,
@@ -139,25 +159,7 @@ export default {
         businessButtonConfig: {
           typeAll: 'default',
           btnsite: 'right', // 按钮位置 (right , center , left)
-          buttons: [
-            {
-              type:'primary',
-              webname: 'order_fund', // 返回
-              text: '添加',
-              btnclick: () => {
-                // 查询逻辑仓,实体仓
-                this.logicQuery();
-              }
-            },
-            {
-              type:'warning',
-              webname: 'order_fund', // 返回
-              text: '删除',
-              btnclick: () => {
-                this.delete();
-              }
-            }
-          ]
+          buttons: []
         },
         businessFormConfig: {
           formData: [
@@ -371,8 +373,11 @@ export default {
     // 设置默认值
   },
   methods: {
-    init() {
+    async init() {
       const self = this;
+      const buttons = self.$OMS2.BtnConfig.config();
+      this.btnConfig.buttons = [...this.extendBtn];
+      this.jordanTableConfig.businessButtonConfig.buttons = [...this.jordanExtendBtn];
       if (self.id == '-1') {
         self.labelList = [
           {
@@ -380,6 +385,11 @@ export default {
             value: 'supplyStore'
           }
         ];
+      }else {
+        // await this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true).then(res=>{
+        //   console.log(res);
+        // });
+        // await this.$OMS2.omsUtils.getPermissions(this.jordanTableConfig, 'businessButtonConfig', { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
       }
     },
     pageSizeChange(val) {

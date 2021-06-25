@@ -260,7 +260,7 @@ export default {
         ],
       extendBtn:[
         {
-          webname: 'lookup_save', // 保存
+          webname: 'PS_C_PRO_SAVE', // 保存
           text: '保存',
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
@@ -270,7 +270,7 @@ export default {
           },
         },
         {
-          webname: 'lookup_return', // 返回
+          webname: 'PS_C_PRO_RETURN', // 返回
           text: $i18n.t('btn.back'),
           btnclick: () => {
             if (this.isModify) {
@@ -547,7 +547,13 @@ export default {
   methods: {
     init() {
       const self = this;
+      //按钮权限
+      const buttons = self.$OMS2.BtnConfig.config();
+      this.btnConfig.buttons = [...this.extendBtn];
+      this.skuInfoBtnConfig.buttons = [ ...this.extendSkuInfoBtn];
+      this.supplierBtnConfig.buttons = [ ...this.extendSupplierBtn];
       if (self.spuid > 0) {
+        this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_PRO', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
         self.formConfig.formData.forEach(item=>{
           if (item.value == 'ECODE') {
             item.disabled = true;
@@ -556,12 +562,6 @@ export default {
       } else {
         self.WatchChange = true;
       };
-      //按钮权限
-      const buttons = self.$OMS2.BtnConfig.config();
-      this.btnConfig.buttons = [...this.extendBtn];
-      this.skuInfoBtnConfig.buttons = [ ...this.extendSkuInfoBtn];
-      this.supplierBtnConfig.buttons = [ ...this.extendSupplierBtn];
-      // this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_PRO', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
     },
     addSupplier() {
       const self = this;

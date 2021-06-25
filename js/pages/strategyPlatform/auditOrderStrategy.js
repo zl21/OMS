@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-03 19:24:03
- * @LastEditTime: 2021-06-24 18:00:11
+ * @LastEditTime: 2021-06-25 10:49:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/pages/strategyPlatform/auditOrderStrategy.js
@@ -100,12 +100,14 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
         extendBtn:[
           {
             text: '保存',
+            webname:'ST_C_AUTO_AUDIT_SAVE',
             btnclick: ()=>{
               this.save();
             }
           },
           {
             text: '返回',
+            webname:'ST_C_AUTO_AUDIT_RETURN',
             btnclick: ()=>{
               if (this.isModify) {
                 this.$Modal.fcWarning({
@@ -306,7 +308,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
       if (self.id !== '-1') {
         self.formConfig.formData[0].style = 'input';
         this.query();
-        // this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'ST_C_AUTO_AUDIT', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
+        this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'ST_C_AUTO_AUDIT', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
       }
     },
     methods: {
