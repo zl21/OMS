@@ -172,14 +172,18 @@ const form = {
           }
         };
       // } else if (ele.display == 'OBJ_SELECT') {
-        obj.item.event = {
-          'on-change': value => {
-            obj.item.value = value.target.value;
-          },
-          'on-clear': () => {
-            obj.item.value = undefined;
+        if (ele.type != "object") {
+          obj.item.event = {
+            'on-change': value => {
+              obj.item.value = value.target.value;
+            },
+            'on-clear': () => {
+              obj.item.value = undefined;
+            }
           }
-        };
+        }
+      
+
       // }
       list.push(obj);
     });
