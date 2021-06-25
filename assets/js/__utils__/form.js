@@ -33,49 +33,68 @@ const form = {
       }
 
       // 外键的单选多选判断
-      if (ele.display === 'OBJ_FK') {
-        switch (ele.fkobj.searchmodel) {
-          case 'drp':
-            obj.item.props.single = true;
-            obj.item.props.fk_type = 'drp';
-            obj.item.props.fkobj = ele.fkobj;
-            obj.item.props.defaultSelected = this.defaultValue(ele) || [];
-            obj.item.props.data = {
-              start: 0,
-              tabth: [],
-              row: []
-            };
-            obj.item.props.totalRowCount = 0;
-            obj.item.props.pageSize = 10;
-            obj.item.props.dataEmptyMessage = '数据加载中...'; // 无数据的提示
-            obj.item.props.columns = ['name', 'value']; // 展现的组
-            obj.item.props.AutoData = [];
-            break;
-          case 'mrp':
-            obj.item.props.single = false;
-            obj.item.props.data = {};
-            obj.item.props.fk_type = 'mrp';
-            obj.item.props.fkobj = ele.fkobj;
-            obj.item.props.defaultSelected = this.defaultValue(ele) || [];
-            break;
-          case 'pop':
-            obj.item.props.fkobj = ele.fkobj;
-            obj.item.props.blurType = false;
-            obj.item.props.fkobj.colid = ele.colid;
-            obj.item.props.Selected = [];
-            break;
-          case 'mop':
-            obj.item.props.fkobj = ele.fkobj;
-            obj.item.props.fkobj.colid = ele.colid;
-            obj.item.props.blurType = false;
-            obj.item.props.fkobj.url = `/${obj.item.props.fkobj.serviceId}/p/cs/menuimport`;
-            obj.item.props.datalist = [];
-            obj.item.props.Selected = [];
-            obj.item.props.filterDate = {};
-            break;
-          default:
-            break;
-        }
+      // if (ele.display === 'OBJ_FK') {
+      
+      if (ele.type == "object") {
+        obj.item.props.single = true;
+        obj.item.props.fk_type = 'drp';
+        obj.item.props.fkobj = ele.fkobj;
+        obj.item.props.defaultSelected = this.defaultValue(ele) || [];
+        obj.item.props.data = {
+          start: 0,
+          tabth: [],
+          row: []
+        };
+        obj.item.props.totalRowCount = 0;
+        obj.item.props.pageSize = 10;
+        obj.item.props.dataEmptyMessage = '数据加载中...'; // 无数据的提示
+        obj.item.props.columns = ['name', 'value']; // 展现的组
+        obj.item.props.AutoData = [];
+      }
+
+
+        // switch (ele.fkobj.searchmodel) {
+        //   case 'drp':
+        //     obj.item.props.single = true;
+        //     obj.item.props.fk_type = 'drp';
+        //     obj.item.props.fkobj = ele.fkobj;
+        //     obj.item.props.defaultSelected = this.defaultValue(ele) || [];
+        //     obj.item.props.data = {
+        //       start: 0,
+        //       tabth: [],
+        //       row: []
+        //     };
+        //     obj.item.props.totalRowCount = 0;
+        //     obj.item.props.pageSize = 10;
+        //     obj.item.props.dataEmptyMessage = '数据加载中...'; // 无数据的提示
+        //     obj.item.props.columns = ['name', 'value']; // 展现的组
+        //     obj.item.props.AutoData = [];
+        //     break;
+        //   case 'mrp':
+        //     obj.item.props.single = false;
+        //     obj.item.props.data = {};
+        //     obj.item.props.fk_type = 'mrp';
+        //     obj.item.props.fkobj = ele.fkobj;
+        //     obj.item.props.defaultSelected = this.defaultValue(ele) || [];
+        //     break;
+        //   case 'pop':
+        //     obj.item.props.fkobj = ele.fkobj;
+        //     obj.item.props.blurType = false;
+        //     obj.item.props.fkobj.colid = ele.colid;
+        //     obj.item.props.Selected = [];
+        //     break;
+        //   case 'mop':
+        //     obj.item.props.fkobj = ele.fkobj;
+        //     obj.item.props.fkobj.colid = ele.colid;
+        //     obj.item.props.blurType = false;
+        //     obj.item.props.fkobj.url = `/${obj.item.props.fkobj.serviceId}/p/cs/menuimport`;
+        //     obj.item.props.datalist = [];
+        //     obj.item.props.Selected = [];
+        //     obj.item.props.filterDate = {};
+        //     break;
+        //   default:
+        //     break;
+        // }
         obj.item.event = {
           'on-popper-hide': () => {
             // 初始化清空数据
@@ -90,11 +109,12 @@ const form = {
                 startindex: 0,
                 range: $this.pageSize
               },
-              serviceId: ele.fkobj.serviceId,
+    //          serviceId: ele.fkobj.serviceId,
               success: res => {
-                obj.item.props.data = Object.assign({}, res.data.datas);
-                obj.item.props.totalRowCount = res.data.datas.totalRowCount;
-                obj.item.props.pageSize = res.data.datas.defaultrange;
+                obj.item.props.data = Object.assign({}, res.data.data);
+                console.log(obj.item.props.data);
+                obj.item.props.totalRowCount = res.data.data.totalRowCount;
+                obj.item.props.pageSize = res.data.data.defaultrange;
               }
             });
           },
@@ -106,11 +126,11 @@ const form = {
                 startindex: $this.data.defaultrange * ($this.currentPage - 1),
                 range: $this.pageSize
               },
-              serviceId: ele.fkobj.serviceId,
+           //   serviceId: ele.fkobj.serviceId,
               success: res => {
-                obj.item.props.data = Object.assign({}, res.data.datas);
-                obj.item.props.totalRowCount = res.data.datas.totalRowCount;
-                obj.item.props.pageSize = res.data.datas.defaultrange;
+                obj.item.props.data = Object.assign({}, res.data.data);
+                obj.item.props.totalRowCount = res.data.data.totalRowCount;
+                obj.item.props.pageSize = res.data.data.defaultrange;
               }
             });
           },
@@ -125,13 +145,13 @@ const form = {
                 startindex: 0,
                 range: 100
               },
-              serviceId: ele.fkobj.serviceId,
+            //  serviceId: ele.fkobj.serviceId,
               success: res => {
-                res.data.datas.row.forEach(item => {
+                res.data.data.row.forEach(item => {
                   if (item.ENAME.val.indexOf(value) != '-1') {
                     this.nobj = {};
                     obj.item.props.AutoData = [];
-                    res.data.datas.tabth.forEach(em => {
+                    res.data.data.tabth.forEach(em => {
                       this.nobj[em.name] = item[em.colname].val;
                       this.nobj.value = item[em.colname].val;
                     });
@@ -150,43 +170,50 @@ const form = {
             obj.item.value = undefined;
           }
         };
-      } else if (ele.display == 'OBJ_SELECT') {
-        obj.item.event = {
-          'on-change': value => {
-            obj.item.value = value;
-          },
-          'on-clear': () => {
-            obj.item.value = undefined;
-          }
-        };
-      }
+      // } else if (ele.display == 'OBJ_SELECT') {
+      //   obj.item.event = {
+      //     'on-change': value => {
+      //       obj.item.value = value;
+      //     },
+      //     'on-clear': () => {
+      //       obj.item.value = undefined;
+      //     }
+      //   };
+      // }
       list.push(obj);
     });
     return list;
   },
 
   checkDisplay(item) {
-    if (!item.display || item.display === 'text') {
+
+    if (item.type == "object") {
+      return 'DropDownSelectFilter';
+    }else{
       return 'Input';
     }
-    if (item.display === 'OBJ_SELECT') {
-      return 'Select';
-    }
-    if (item.display === 'OBJ_FK') {
-      switch (item.fkobj.searchmodel) {
-        case 'drp':
-          return 'DropDownSelectFilter';
-        case 'mrp':
-          return 'DropMultiSelectFilter';
-        case 'pop':
-          return 'AttachFilter';
-        case 'mop':
-          return 'AttachFilter';
-        default:
-          break;
-      }
-    }
-    return '';
+
+    // if (!item.display || item.display === 'text') {
+    //   return 'Input';
+    // }
+    // if (item.display === 'OBJ_SELECT') {
+    //   return 'Select';
+    // }
+    // if (item.display === 'OBJ_FK') {
+    //   switch (item.fkobj.searchmodel) {
+    //     case 'drp':
+    //       return 'DropDownSelectFilter';
+    //     case 'mrp':
+    //       return 'DropMultiSelectFilter';
+    //     case 'pop':
+    //       return 'AttachFilter';
+    //     case 'mop':
+    //       return 'AttachFilter';
+    //     default:
+    //       break;
+    //   }
+    // }
+   // return '';
   },
   defaultValue(item) {
     // 设置表单的默认值
