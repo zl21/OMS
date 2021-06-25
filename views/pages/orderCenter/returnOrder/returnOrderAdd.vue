@@ -163,7 +163,7 @@ export default {
         typeAll: "default",
         buttons: [
           {
-            // text: "保存",
+            text: "保存",
             webname: 'RETURNSAVE1',
             isShow: true,
             btnclick: () => {
@@ -171,9 +171,9 @@ export default {
             },
           },
           {
-            webname: 'ORDER_RETURN1',
+            webname: 'fix_back',
             isShow: true,
-            // text: $i18n.t("btn.back"),
+            text: $i18n.t("btn.back"),
             btnclick: () => {
               this.back();
             },

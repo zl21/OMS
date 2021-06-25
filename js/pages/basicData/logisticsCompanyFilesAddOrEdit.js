@@ -336,6 +336,8 @@ export default {
             if (item.webname == it.webname) {
               item.isShow = true;
               item.text = it.webdesc;
+            } else {
+              item.isShow = false;
             }
           });
         });
@@ -346,6 +348,8 @@ export default {
             if (item.webname == it.webname) {
               item.isShow = true;
               item.text = it.webdesc;
+            } else {
+              item.isShow = false;
             }
           });
         });

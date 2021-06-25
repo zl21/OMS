@@ -437,6 +437,69 @@ class commonUtils {
        if (self[array] != undefined) self[array].loading = false;
      }) */
   }
+
+  /**
+   * 版本2:按钮权限请求方法getBtnPermission：
+   * @self {object} 指向当前实例
+   * @cBtn {Array} 当前按钮配置的name，buttons数组的上一级。eg: 'btnConfig'
+   * @param {string} 用于请求接口的传参，目前是String类型。待扩展成对象类型，便于支持同名不同按钮配置的页面，如新增和详情同一页面时
+   * @param {Boolean} isIndependent 
+   * @returns
+   */
+  static getBtnPermission(self, cBtn, params, isIndependent) {
+    const query = {
+      TABLE: params.table || params.TABLE,
+      TYPE: params.type || params.TYPE,
+    }
+    let data, btnArr = [], btnArrs = [], cur = JSON.parse(JSON.stringify(self));
+    /* if (cBtn instanceof Array) {
+      cBtn.forEach(x => {
+        const keys = x.split('.');
+        for (let i = 0; i < keys.length - 1; i++) {
+          cur = cur[i];
+        }
+        btnArrs.push(cur);
+      })
+    } else {
+      btnArrs.push(self[cBtn]);
+    } */
+    const serviceId = params.serviceId || params.SERVICEID || '';
+    if (!isIndependent && self[cBtn] == undefined) return
+    return new Promise(async (resolve) => {
+      const res = await self.service.common.fetchActionsInCustomizePage(query, { serviceId });
+      let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
+      data = JSON.parse(JSON.stringify(result))
+      const { ACTIONS, SUB_ACTIONS } = result;
+      if (res.data.code === 0) {
+        const a = [], c = [];
+        ACTIONS.forEach((element) => {
+          if (cBtn instanceof Array) {
+            cBtn.forEach(x => {
+              const keys = x.split('.');
+              for (let i = 0; i < keys.length - 1; i++) {
+                cur = cur[i];
+              }
+              btnArr = cur.buttons;
+              btnArr.forEach(item => {
+                item.buttons.forEach((btn) => {
+                  if (btn.webname == element.webname) {
+                    btn.webid = element.webid
+                    btn.text = element.webdesc
+                    c.push(btn)
+                  }
+                })
+                item.buttons = c
+              })
+            })
+          }
+        })
+        resolve(data);
+      }
+    }).finally(e => {
+      console.log('butConfig::', btnArrs);
+    });
+  }
+
   static buttonChild(ele, btns, arr) {
     const obj = {}
     const ar = []
