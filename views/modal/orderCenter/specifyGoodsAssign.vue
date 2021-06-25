@@ -102,15 +102,15 @@ export default {
         },
         {
           title: "SKU编码", // SKU编码
-          key: "ECODE",
+          key: "ecode",
         },
         {
           title: "SKU名称", // 商品SKU
-          key: "ENAME",
+          key: "ename",
         },
         {
           title: $i18n.t("table_label.productName"), // 商品名称
-          key: "PS_C_PRO_ENAME",
+          key: "psCProEname",
         },
         {
           title: "操作",
@@ -127,7 +127,7 @@ export default {
                     this.data = this.$OMS2.omsUtils.getDifferentArr(
                       this.data,
                       rowA,
-                      "ECODE"
+                      "ecode"
                     );
                   },
                 },
@@ -196,7 +196,7 @@ export default {
       }
       let result = {};
       result.orderIds = self.componentData.a_2;
-      result.skuList = self.data.map(item => item.ECODE);
+      result.skuList = self.data.map(item => item.ecode);
       // if (self.radioValue == "1") {
       //   result.QueryList = self.componentData.data;
       //   // self.componentData.data['qty'] = self.qty;
