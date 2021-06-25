@@ -374,13 +374,15 @@ class commonUtils {
               btn.text = element.webdesc
               c.push(btn)
             }
-            if (btn.webname == 'fix_back') {
-              btn.text = $i18n.t("btn.back");
-              if (!c.some(it => it.webname == 'fix_back')) {
-                c.push(btn)
-              }
-            }
           })
+        })
+        self[array].buttons.forEach((btn) => {
+          if (btn.webname == 'fix_back') {
+            btn.text = $i18n.t("btn.back");
+            if (!c.some(it => it.webname == 'fix_back')) {
+              c.push(btn)
+            }
+          }
         })
         if (btnArr.length) {
           self[array].buttons = [...c, ...a]
