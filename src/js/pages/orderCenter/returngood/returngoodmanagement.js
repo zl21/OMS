@@ -1425,6 +1425,11 @@ export default {
                   document.getElementsByClassName('burgeon-select-selected-value')[1].className = 'burgeon-select-selected-value inputBgcolor';
                 }, 10);
               }
+              
+              _this.replacement.formData[5].itemdata.pid = res.data.data.returnOrders.RECEIVER_PROVINCE_ID;
+              _this.replacement.formData[6].itemdata.pid = res.data.data.returnOrders.RECEIVER_CITY_ID;
+              _this.replacement.formData[7].itemdata.pid = res.data.data.returnOrders.RECEIVER_AREA_ID;
+
               _this.status = res.data.data.returnOrders.RETURN_STATUS;
               // 设置水印
               _this.statusName = _this.waterMarkMap[_this.status] ? _this.waterMarkMap[_this.status] : 'Watermark to be added';
@@ -1666,6 +1671,11 @@ export default {
               document.getElementsByClassName('burgeon-select-selected-value')[1].className = 'burgeon-select-selected-value inputBgcolor';
             }, 10);
           }
+
+          _this.replacement.formData[5].itemdata.pid = res.data.data.returnOrders.RECEIVER_PROVINCE_ID;
+          _this.replacement.formData[6].itemdata.pid = res.data.data.returnOrders.RECEIVER_CITY_ID;
+          _this.replacement.formData[7].itemdata.pid = res.data.data.returnOrders.RECEIVER_AREA_ID;
+
           _this.status = res.data.data.returnOrders.RETURN_STATUS;
           // // 设置水印
           _this.statusName = _this.waterMarkMap[_this.status] ? _this.waterMarkMap[_this.status] : 'Watermark to be added';
@@ -1679,6 +1689,7 @@ export default {
             _this.reconstructionGetDetail(tempRefundDtoList[i], tempRefundDtoList[i]);
           }
 
+          
           res.data.data.refundDtoList = tempRefundDtoList;
           for (let i = 0; i < res.data.data.exchangeDtoList.length; i++) {
             const item = res.data.data.exchangeDtoList[i];
