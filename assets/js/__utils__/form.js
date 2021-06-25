@@ -119,6 +119,7 @@ const form = {
             });
           },
           'on-page-change': (value, $this) => {
+           
             fkQueryList({
               searchObject: {
                 isdroplistsearch: true,
@@ -171,14 +172,14 @@ const form = {
           }
         };
       // } else if (ele.display == 'OBJ_SELECT') {
-      //   obj.item.event = {
-      //     'on-change': value => {
-      //       obj.item.value = value;
-      //     },
-      //     'on-clear': () => {
-      //       obj.item.value = undefined;
-      //     }
-      //   };
+        obj.item.event = {
+          'on-change': value => {
+            obj.item.value = value.target.value;
+          },
+          'on-clear': () => {
+            obj.item.value = undefined;
+          }
+        };
       // }
       list.push(obj);
     });
@@ -216,6 +217,7 @@ const form = {
    // return '';
   },
   defaultValue(item) {
+
     // 设置表单的默认值
     if (item.display === 'OBJ_SELECT' && item.default) {
       // 处理select的默认值

@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-07 20:40:41
- * @LastEditTime: 2021-06-23 17:12:52
+ * @LastEditTime: 2021-06-25 19:41:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/systemConfig/quanXian/quanXian.vue
 -->
 <template>
-  <div class="jurisdiction custom-main functionPower">
+  <div class="jurisdiction custom-main functionPower" v-loading="spinShow">
     <loading :loading="loading" />
     <div class="custom-btn">
       <businessButton :btn-config="buttonConfig" />
