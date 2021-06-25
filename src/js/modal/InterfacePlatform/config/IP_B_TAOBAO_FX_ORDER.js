@@ -16,7 +16,7 @@ export default {
         value: 'dta',
         inputList: [
           {
-            childs: [{ colname: 'CP_C_SHOP_ID', refobjid: 2, valuedata: 2 }]
+            childs: [{ colname: 'CP_C_SHOP_ID', refobjid: 3, valuedata: 2 }]
           }
         ],
         isActive: true,
