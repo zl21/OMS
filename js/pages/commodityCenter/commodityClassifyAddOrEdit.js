@@ -36,6 +36,7 @@ export default {
       btnConfig: {
         typeAll: 'default',
         buttons: [{
+          webname: 'CLASSIFY_SaveBtn',
           text: '保存',
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
@@ -44,6 +45,7 @@ export default {
           },
         },
         {
+          webname: 'fix_back',
           text: $i18n.t('btn.back'),
           btnclick: () => {
             this.back();
@@ -283,6 +285,7 @@ export default {
       },
       // 子表Part
       cusAttrConfig: {
+        key: 0,
         isSearchText: true, // 是否修改搜索框为select
         isShowDeleteDetailBtn: false, // 控制是否显示删除明细
         isShowAddDetailBtn: false, // 控制是否显示新增明细
@@ -345,16 +348,18 @@ export default {
         businessButtonConfig: {
           typeAll: 'default',
           buttons: [{
+            webname: 'CLASSIFY_AddDetailBtn',
             type:'primary',
-            text: '添加',
+            // text: '添加',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.addAttrValue();
             },
           },
           {
+            webname: 'CLASSIFY_DeleteDetailBtn',
             type:'warning',
-            text: '删除',
+            // text: '删除',
             btnclick: () => {
               this.deleteAttrValue();
             },
@@ -383,10 +388,16 @@ export default {
       return this.$router.currentRoute.params.customizedModuleName;
     },
   },
+  activated() {
+    if (this.ID > 0) {
+      this.getBtn();
+    }
+  },
   async mounted() {
     const self = this;
     if (self.ID > 0) {
       // 详情
+      this.getBtn();
       await self.initObjItem(self.ID);
     } else {
       // 新增
@@ -396,6 +407,22 @@ export default {
   },
   created() { },
   methods: {
+    getBtn() {
+      $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_PRO_CLASSIFY', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+        console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+        const { ACTIONS, SUB_ACTIONS } = res;
+        this.cusAttrConfig.businessButtonConfig.buttons.forEach(item => {
+          SUB_ACTIONS.forEach(it => {
+            if (item.webname == it.webname) {
+              item.isShow = true;
+              item.text = it.webdesc;
+            }
+          });
+        });
+        this.cusAttrConfig.key += 1;
+        console.log('this.cusAttrConfig.businessButtonConfig.buttons::',this.cusAttrConfig.businessButtonConfig.buttons);
+      });
+    },
     /* -------------------- 详情初始化 start -------------------- */
     async initObjItem(id) {
       const self = this;
