@@ -520,6 +520,8 @@ export default {
     const self = this;
     self.dataitem.url = self.$OMS2.omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
     self.formConfig.formData[0].disabled = self.id !== -1;
+    const buttons = self.$OMS2.BtnConfig.config();
+    this.btnConfig.buttons = [...this.extendBtn];
     if(self.id == -1){
       self.formConfig.formData.filter(item=>item.value && item.value == 'ISACTIVE')[0].style = '';
       this.label.labelList = [{
@@ -530,11 +532,11 @@ export default {
         label: '福袋组合明细',
         value: 'luckbagGroupItem',
       }];
+    }else {
+    this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_PRO_GROUP', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
+
     }
     this.query();
-    const buttons = self.$OMS2.BtnConfig.config();
-    this.btnConfig.buttons = [...this.extendBtn];
-    this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_PRO_GROUP', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
   },
   methods: {
     query() {
