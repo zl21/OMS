@@ -300,9 +300,10 @@ export default {
       }
     },
     // 获取树
-    async getTree(save, objid) {
+    async getTree(save, id) {
       const _this = this;
       _this.isSaveLoading = true;
+      let objid = save === 'import' ? _this._objid : id
       const {
         data: { code, data }
       } = await this.service.strategyPlatform.getExpressAreaTree({
