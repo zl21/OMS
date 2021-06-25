@@ -16,14 +16,14 @@ export default {
         value: 'dta',
         inputList: [
           {
-            childs: [{ colname: 'CP_C_SHOP_ID', refobjid: 2, valuedata: 2 }]
+            childs: [{ colname: 'CP_C_SHOP_ID', refobjid: 3, valuedata: 2 }]
           }
         ],
         isActive: true,
         isdisabled: false,
         itemdata: {
           col: 1,
-          colid: 167606,
+          colid: 166470,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           datelimit: 'all',
           refcolval: {
