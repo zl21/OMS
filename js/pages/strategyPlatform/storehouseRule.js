@@ -145,7 +145,8 @@ export default {
             transfer: true,
             onChange: () => {
               if (!this.formConfig.formValue.endTime) return
-              this.formConfig.formValue.endTime = dateUtil.getFormatDate(new Date(this.formConfig.formValue.endTime), 'yyyy-MM-dd') + " 23:59:59"
+             this.formConfig.formValue.endTime  = this.$OMS2.omsUtils.defaultEndTime(this.formConfig.formValue.endTime, this.formConfig.formValue.endTime)
+  
             }
           },
           {

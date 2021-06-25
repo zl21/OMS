@@ -44,11 +44,11 @@ export default {
       //监听包裹属性
       handler(val) {
         val && this.changeCount++;
-       // console.log(this.changeCount);
+        // console.log(this.changeCount);
       },
       deep: true
     },
-   "tableConfig3.data": {
+    "tableConfig3.data": {
       //监听指定商品
       handler(val) {
         val && this.changeCount++;
@@ -60,7 +60,7 @@ export default {
       //监听仓库物流
       handler(val) {
         val && this.changeCount++;
-       // console.log(this.changeCount);
+        // console.log(this.changeCount);
       },
       deep: true
     }
@@ -105,13 +105,13 @@ export default {
             text: '保存',
             size: '', // 按钮大小
             isShow: false,
-            webname: this.$route.params.customizedModuleName+"_save",
+            webname: this.$route.params.customizedModuleName + "_save",
             disabled: false, // 按钮禁用控制
             btnclick: this.fnSave
           },
           {
             isShow: false,
-            webname: this.$route.params.customizedModuleName+"_back",
+            webname: this.$route.params.customizedModuleName + "_back",
             text: $i18n.t('btn.back'),
             btnclick: this.back
           }
@@ -121,13 +121,15 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            type:'primary',
+            type: 'primary',
             text: '添加',
+            disabled: false,
             btnclick: this.foottable
           },
           {
-            type:'warning',
+            type: 'warning',
             text: '删除',
+            disabled: false,
             btnclick: this.deleteLogistics
           }
         ]
@@ -234,7 +236,7 @@ export default {
             width: '12',
             regx: /^[0-9]*$/,
             disabled: false,
-            maxlength:11,
+            maxlength: 11,
             inputChange: () => { }
           },
 
@@ -254,7 +256,7 @@ export default {
               }
             ],
             inputChange: () => { }
-          }, 
+          },
 
         ],
         formValue: {
@@ -291,7 +293,7 @@ export default {
             value: 'ename',
             colname: 'ename',
             width: '6',
-            maxlength:200,
+            maxlength: 200,
             disabled: false,
             inputChange: () => { }
           },
@@ -316,8 +318,9 @@ export default {
             width: '6',
             disabled: false,
             onChange: () => {
-              this.formConfighead.formValue.invalidTime = dateUtil.getFormatDate(this.formConfighead.formValue.invalidTime, 'yyyy-MM-dd') + " 23:59:59"
-              console.log(this.formConfighead.formValue.invalidTime);
+
+              this.formConfighead.formValue.invalidTime = this.$OMS2.omsUtils.defaultEndTime(this.formConfighead.formValue.invalidTime, this.formConfighead.formValue.invalidTime)
+
             }
           },
         ],
@@ -445,7 +448,7 @@ export default {
               this.formConfig2.formValue.cpCRegionProvinceEname = val.valuedata;
               this.formConfig2.formValue.cpCRegionProvinceId = val.pid;
 
-           
+
             }
           },
           {
@@ -568,7 +571,7 @@ export default {
             pkgAttributeType: 1,
             regx: /^[1-9]\d*$/,
             regx2: /^[1-9]\d*$/,
-            maxlength:18,
+            maxlength: 18,
             type: '件'
           },
           {
@@ -586,7 +589,7 @@ export default {
             symbol: '至',
             regx: /^\d+(\.\d{0,2})?$/,
             regx2: /^\d+(\.\d{0,2})?$/,
-            maxlength:18,
+            maxlength: 18,
             type: '元'
           },
           {
@@ -604,7 +607,7 @@ export default {
             symbol: '至',
             regx: /^\d+(\.\d{0,2})?$/,
             regx2: /^\d+(\.\d{0,2})?$/,
-            maxlength:18,
+            maxlength: 18,
             type: 'kg'
           }
         ]
@@ -776,8 +779,8 @@ export default {
     };
   },
   mounted() {
-   this.init()
-   this.getBtns()
+    this.init()
+    this.getBtns()
   },
   methods: {
     getBtns() {
@@ -789,7 +792,7 @@ export default {
 
       })
     },
-    init(){
+    init() {
       this.relationShip();
       let { customizedModuleId, customizedModuleName } = this.$route.params;
       this.customizedModuleName = customizedModuleName;
@@ -797,19 +800,17 @@ export default {
         this.id = '-1';
       } else {
         this.id = customizedModuleId;
-  
+
         this.querfrom(this.formConfighead.formData, 'ecode').style = 'input';
         this.queryById();
         this.queryAddressPages();
         this.queryProPages();
         this.queryLogisticsWarehousePages();
-    
+
       }
     },
     fnreadonly(type) {
       if (type == 'Y') {
-        // this.querbtn(this.btnConfig.buttons, '启用').disabled = true
-
         //禁用主表数据
         this.formConfig.formData.forEach(item => {
           if (item.itemdata) {
@@ -823,15 +824,32 @@ export default {
           }
         });
 
+        this.formConfighead.formData.forEach(item => {
+          if (item.itemdata) {
+            item.itemdata.readonly = true;
+          } else if (item.options) {
+            item.options.forEach(em => {
+              em.disabled = true;
+            });
+          } else {
+            item.disabled = true;
+          }
+        });
+
+
         //禁用包裹属性
         this.switchListdata.list.forEach(em => {
           em.disabled = true;
         });
-        //禁用仓库物流
+        //禁用仓库物流 
         this.formConfig1.formData.forEach(item => {
           if (item.itemdata) {
             item.itemdata.readonly = true;
           }
+        });
+
+        this.btnConfig1.buttons.forEach(item => {
+          item.disabled = true
         });
       } else {
         // this.querbtn(this.btnConfig.buttons, '停用').disabled = true
@@ -863,29 +881,15 @@ export default {
             item.itemdata.readonly = false;
           }
         });
+        this.btnConfig1.buttons.forEach(item => {
+          item.disabled = false
+        });
       }
     },
-    // fnSetIsActive(type) {
-    //   this.querbtn(this.btnConfig.buttons, '启用').disabled = false
-    //   this.querbtn(this.btnConfig.buttons, '停用').disabled = false
-    //   var formdata = new FormData();
-    //   formdata.append('isActive', type);
-    //   formdata.append('tableName', vm.$route.params.customizedModuleName);
-    //   formdata.append('objId', this.id);
 
-    //   service.strategyPlatform.tableDetailswitchById(formdata).then(res => {
-    //     if (res.data.code == 0) {
-    //       this.queryById();
-    //       this.queryAddressPages();
-    //       this.queryProPages();
-    //       this.queryLogisticsWarehousePages();
-    //       this.$Message.success(res.data.message);
-    //     }
-    //   });
-    // },
     //仓库物流明细删除
     deleteLogistics() {
-      
+
       if (this.table4Data.length > 0) {
         let arrid = [];
         this.table4Data.forEach(em => {
@@ -956,7 +960,7 @@ export default {
       this.tableConfig2.pageSize = v;
       this.queryLogisticsWarehousePages();
     },
-  
+
     queryById() {
       //物流策略-特殊物流方案-主表信息查询
       let data = {
@@ -1034,14 +1038,14 @@ export default {
     queryProPages() {
       let data = {
         ID: this.id,
-        CURRENT:this.tableConfig3.current,
-        SIZE:  this.tableConfig3.pageSize
+        CURRENT: this.tableConfig3.current,
+        SIZE: this.tableConfig3.pageSize
       };
       //物流策略-特殊物流方案-商品属性明细分页查询
       service.strategyPlatform.queryProPages(data).then(res => {
         if (res.data.code == 0) {
           this.tableConfig3.data = res.data.data.records.map((em, index) => {
-            em.index = index + 1 +(this.tableConfig3.current -1) *this.tableConfig3.pageSize;
+            em.index = index + 1 + (this.tableConfig3.current - 1) * this.tableConfig3.pageSize;
             return em;
           });
           this.tableConfig3.total = res.data.data.total;
@@ -1053,7 +1057,7 @@ export default {
       let data = {
         ID: this.id,
         CURRENT: this.tableConfig2.current,
-        SIZE:  this.tableConfig2.pageSize
+        SIZE: this.tableConfig2.pageSize
       };
 
       service.strategyPlatform.queryLogisticsWarehousePages(data).then(res => {
@@ -1104,12 +1108,12 @@ export default {
       });
       if (CityID == "") {
         this.specialAssignLogisticsAddressItemList.push({
-          id:"-1",
-          cpCRegionProvinceEname:this.formConfig2.formValue.cpCRegionProvinceEname,
-          cpCRegionProvinceId:this.formConfig2.formValue.cpCRegionProvinceId
+          id: "-1",
+          cpCRegionProvinceEname: this.formConfig2.formValue.cpCRegionProvinceEname,
+          cpCRegionProvinceId: this.formConfig2.formValue.cpCRegionProvinceId
         });
       }
-     
+
       if (this.id != '-1') {
         this.fnSave(1);
       } else {
@@ -1239,7 +1243,7 @@ export default {
         //包裹属性
         this.switchListdata.list.forEach(item => {
           let obj = {
-            id: item.id ||"-1",
+            id: item.id || "-1",
             pkgAttributeType: item.pkgAttributeType,
             isEnable: item.val ? 1 : 0,
             beginVal: item.value,
@@ -1265,7 +1269,7 @@ export default {
           } else if (type == 2) {
             this.queryProPages();
           } else if (type == 3) {
-            this.WarehouseItemListobj={
+            this.WarehouseItemListobj = {
               cpCLogisticsEname: '',
               cpCPhyWarehouseEname: ''
             }
@@ -1280,12 +1284,12 @@ export default {
                 customizedModuleName: this.customizedModuleName,
                 customizedModuleId: res.data.data.objId
               })
-              
+
             } else {
               this.pageback();
             }
           }
-         
+
         }
       });
     },
@@ -1299,7 +1303,7 @@ export default {
       }
       this.WarehouseItemListobj.id = '-1';
       this.specialAssignLogisticsWarehouseItemList = this.WarehouseItemListobj
-  
+
 
       if (this.id != '-1') {
         this.fnSave(3);
