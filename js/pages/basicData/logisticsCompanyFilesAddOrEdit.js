@@ -331,25 +331,22 @@ export default {
       $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'CP_C_LOGISTICS', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
         console.log('buttons::', this.btnConfig.buttons, 'res::', res);
         const { ACTIONS, SUB_ACTIONS } = res;
+        const webArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
         this.subTableConfig.businessButtonConfig.buttons.forEach(item => {
+          item.isShow = webArr.includes(item.webname);
           SUB_ACTIONS.forEach(it => {
             if (item.webname == it.webname) {
-              item.isShow = true;
               item.text = it.webdesc;
-            } else {
-              item.isShow = false;
             }
           });
         });
         this.subTableConfig.key += $OMS2.omsUtils.generateKey();
         console.log('this.subTableConfig.businessButtonConfig.buttons::',this.subTableConfig.businessButtonConfig.buttons);
         this.subTableConfig1.businessButtonConfig.buttons.forEach(item => {
+          item.isShow = webArr.includes(item.webname);
           SUB_ACTIONS.forEach(it => {
             if (item.webname == it.webname) {
-              item.isShow = true;
               item.text = it.webdesc;
-            } else {
-              item.isShow = false;
             }
           });
         });
