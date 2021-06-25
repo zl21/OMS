@@ -49,7 +49,8 @@ export default {
       btnConfig: {
         typeAll: 'default',
         buttons: [{
-            text: '保存',
+            webname: 'ATTRIBUTE_SaveBtn',
+            // text: '保存',
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -57,6 +58,7 @@ export default {
             },
           },
           {
+            webname: 'fix_back',
             text: $i18n.t('btn.back'),
             btnclick: () => {
               this.back();
@@ -408,10 +410,16 @@ export default {
       return this.$router.currentRoute.params.customizedModuleName;
     },
   },
+  activated() {
+    if (this.ID > 0) {
+      this.getBtn();
+    }
+  },
   mounted() {
     const self = this;
     if (self.ID > 0) {
       // 详情
+      this.getBtn();
       setTimeout(() => {
         self.initObjItem(self.ID);
       }, 10);
@@ -424,6 +432,11 @@ export default {
   },
   created() {},
   methods: {
+    getBtn(){
+      $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'BS_C_EXTRA_ATTRIBUTE_DEF_PRO', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+        console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+      })
+    },
     /* -------------------- 详情初始化 start -------------------- */
     async initObjItem(id) {
       const self = this;
@@ -508,6 +521,9 @@ export default {
       const self = this;
       let allArrs = self.propertyValuesConfig.data;
       let partArrs = self.propertyValuesConfig.selectionData;
+      if (!partArrs.length) {
+        return this.$Message.warning('请选择要删除的属性值！')
+      }
       partArrs.forEach((item) => {
         if (item.ID == '-1') {
           // 刚新增的被删除了则不push，且要从addData中移除

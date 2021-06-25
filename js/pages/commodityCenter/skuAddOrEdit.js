@@ -77,7 +77,8 @@ export default {
       btnConfig: {
         typeAll: 'default',
         buttons: [{
-          text: '保存',
+          webname: 'SKU_SaveBtn',
+          // text: '保存',
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
           btnclick: () => {
@@ -85,6 +86,7 @@ export default {
           },
         },
         {
+          webname: 'fix_back',
           text: $i18n.t('btn.back'),
           btnclick: () => {
             this.back()
@@ -422,11 +424,17 @@ export default {
       return this.$router.currentRoute.params.customizedModuleName;
     },
   },
+  activated() {
+    if (this.ID > 0 && !this.$route.query.spuid) {
+      this.getBtn();
+    }
+  },
   mounted() {
     const self = this;
     self.dataitem.url = self.$OMS2.omsUtils.splicingGateWay('commodityCenter', '/p/cs/upload2')
     if (self.ID > 0 && !self.$route.query.spuid) {
       // 详情
+      this.getBtn();
       self.initObjItem(self.ID);
     } else if (self.ID == '2201' && self.$route.query.spuid) {
       // 是SPU新增/详情 跳转过来的新增
@@ -445,6 +453,11 @@ export default {
     this.$route.query.spuid && (this.spuID = this.$route.query.spuid)
   },
   methods: {
+    getBtn(){
+      $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_SKU', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+        console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+      })
+    },
     /* -------------------- 详情初始化 start -------------------- */
     async initObjItem(id) {
       const self = this;
