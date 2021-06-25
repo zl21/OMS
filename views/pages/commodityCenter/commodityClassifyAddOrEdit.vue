@@ -31,8 +31,8 @@
         />
         <!-- 子表Part -->
         <div class="subtablePart">
-          <!-- :key="cusAttrConfig.key" -->
           <businessActionTable
+            :key="cusAttrConfig.key"
             v-show="labelDefaultValue === 'PROPERTY'"
             :jordan-table-config="cusAttrConfig"
             @on-select="onSelect"
