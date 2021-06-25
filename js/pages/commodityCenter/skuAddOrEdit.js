@@ -559,8 +559,9 @@ export default {
     async renderSpecificationDimension(pageIndex = 1, pageSize = 10, DIMENSION = 1, NAME = '') {
       const self = this;
       const key = `PS_C_SPECGROUP_ID${DIMENSION}`;
+      let spu = this.$route.query.spuid ? this.$route.query.spuid : self.spuID;
       const param = {
-        PS_C_PRO_ID: self.spuID,
+        PS_C_PRO_ID: spu,
         pageNumber: pageIndex,
         pageSize: pageSize,
         DIMENSION: DIMENSION, // 规格值文本框（规格维度一传1，规格维度二传2，规格维度三传3）
