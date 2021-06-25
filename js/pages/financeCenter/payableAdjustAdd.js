@@ -59,6 +59,7 @@ export default {
         buttons: [
           {
             webname: 'lookup_save', // 保存
+            text: '保存',
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
