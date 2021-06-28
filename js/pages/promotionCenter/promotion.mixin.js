@@ -31,7 +31,11 @@ export default () => ({
     if (routeId > 0) {
       this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'OBJ', serviceId: 'r3-oc-oms' }, true);
       this.objid = String(routeId);
-      this.getData();
+      if (this.vueMark == 'addOrEditActi') {
+        this.getData();
+      } else {
+        this.getInitData();
+      }
     } else {
       this.objid = '-1';
       const copy = this.$route.query.copy;
