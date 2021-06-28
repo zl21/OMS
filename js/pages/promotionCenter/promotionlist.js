@@ -536,14 +536,14 @@ export default {
       const { customizedModuleName } = this.$router.currentRoute.params;
       this.loading = true;
       const params = {
-        ACTISTATUS: this.STATUS.join(',').replace('bSelect-all', 0), // 活动状态
+        ACTISTATUS: this.formConfig.formValue.STATUS.join(',').replace('bSelect-all', 0), // 活动状态
         SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
         ACTI_PRO: this.product.itemdata_xitong, // 款号0
-        ACTI_DATE: this.acti_date ? this.acti_date.join('-') : '', // 活动日期0
-        ACTI_NAME: this.acti_name, // 活动名称
-        GROUP_NAME: this.acti_group, // 活动分组
-        RELEASE_NAME: this.release_name, // 发布人
-        ACTI_NO: this.acti_no,
+        ACTI_DATE: this.formConfig.formValue.acti_date ? this.acti_date.join('-') : '', // 活动日期0
+        ACTI_NAME: this.formConfig.formValue.acti_name, // 活动名称
+        GROUP_NAME: this.formConfig.formValue.acti_group, // 活动分组
+        RELEASE_NAME: this.formConfig.formValue.release_name, // 发布人
+        ACTI_NO: this.formConfig.formValue.acti_no,
         PAGE: {
           CURRENT_PAGE: currentPage, // 当前页码
           PAGE_SIZE: pageSize // 分页单位
