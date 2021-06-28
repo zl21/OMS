@@ -1,4 +1,4 @@
-import { tableCols } from '../promotionConfig';
+import { tableCols } from '../promotion.config';
 import SingleBox from 'professionalComponents/singleBox.vue';
 import ButtonFkDialog from 'professionalComponents/buttonFkDialog.vue';
 import detailtable from 'allpages/promotionCenter/details/table.vue';

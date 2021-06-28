@@ -4,7 +4,7 @@
  * @LastEditTime: 2021-05-31 17:41:30
  * @LastEditors: Please set LastEditors
  * @Description: 促销中心的配置文件
- * @FilePath: /burgeon-project-logic/js/pages/promotionCenter/promotionConfig.js
+ * @FilePath: /burgeon-project-logic/js/pages/promotionCenter/promotionConfig.config.js
  */
 
 const baseColumnDefs = [

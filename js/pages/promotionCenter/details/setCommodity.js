@@ -1,5 +1,5 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
-import { tableCols } from '../promotionConfig';
+import { tableCols } from '../promotionConfig.config';
 // import MyDialog from 'framework/components/dialog/mydialog';
 import businessButton from 'professionalComponents/businessButton';
 
