@@ -18,6 +18,7 @@
       :fkshow.sync="fkDialog.dialog"
       :is-one-data="itemdata.isOneData"
       @easyData="getFkdialog"
+      :version="itemdata.version || '1.3'"
     />
   </div>
 </template>

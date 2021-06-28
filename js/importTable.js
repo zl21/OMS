@@ -149,10 +149,18 @@ export default {
         } else if (res.data.code === -1 && res.data.data) {
           // _this.isError = true;
           _this.handelError(res.data.data);
+          _this.file = {};
+          _this.text = '';
+          _this.errorMessage = '导入失败,详情见文件内容';
+          _this.isError = true;
         } else if (res.data.code === -1) {
           // _this.isError = true;
           // 走框架的错误提示
           // _this.$Message.error(res.data.message || 'no message!');
+          _this.file = {};
+          _this.text = '';
+          _this.errorMessage = '导入失败,详情见文件内容';
+          _this.isError = true;
         } else {
           console.log("Please see : 'http://knowledge.ark.burgeononline.com/repository#/entryComponents/2/749656/1/2061'");
         }
