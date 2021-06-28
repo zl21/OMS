@@ -157,7 +157,10 @@ export default {
         return;
       }
       const PS_C_SKU_CODES = this.checkSelection.map(row => row.PS_C_SKU_ECODE);
+     let spuIds =  this.checkSelection.map(row => row.ID);
+
       let data = {
+        spuIds,
         skuEcodes: PS_C_SKU_CODES,
         orderList:[{ 
           orderId: this.componentData.order.ID, //订单id
