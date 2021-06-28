@@ -5,6 +5,7 @@ import stepsBars from 'professionalComponents/steps';
 import groups from '@/assets/js/promotion/groups';
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 import businessButton from 'professionalComponents/businessButton';
+import promotionMixin from './promotion.mixin';
 
 export default {
   components: {
@@ -14,10 +15,12 @@ export default {
     stepsBars,
     businessButton
   },
+	mixins: [promotionMixin()],
   data() {
     return {
       freshKey: 0,
       vmI18n: $i18n,
+      vueMark: 'addOrEditActi',
       btnConfig: {
         typeAll: 'default',
         buttons: [
@@ -203,26 +206,11 @@ export default {
     };
   },
   computed: {
-    customizedModuleName() {
-      return this.$router.currentRoute.params.customizedModuleName;
-    },
     showInfoDataContainer() {
       // 全场买赠不展示模块
       if (this.basic_info.activity_type === 'PA' && this.basic_info.gradient_gift === '1') return false;
       return true;
     },
-    showSaveButton() {
-      if (this.objid > 0 && (this.basic_info.status === '2' || this.basic_info.status === '3')) {
-        return false;
-      }
-      return true;
-    },
-    showPublishButton() {
-      if (this.objid < 0 || this.basic_info.status !== '1') {
-        return false;
-      }
-      return true;
-    }
   },
   watch: {
     current() {
@@ -466,13 +454,6 @@ export default {
       }
     },
     /**
-     * 取消(关闭) 返回列表界面
-     */
-    close() {
-      this.$comUtils.tabCloseAppoint(this);
-      $omsUtils.tabJump(0, 0, 'C', 'PROMACTIQUERYLIST', { i8n: 1, tip: 'panel_label.promotionList' }, {}, 1, 1, 2895)
-    },
-    /**
      * 新增 初始化数据
      */
     initData() {
@@ -563,52 +544,6 @@ export default {
       const f3 = this.validate3();
       this.stepsBar[2].finish = [0].includes(f3.code);
       return [f1, f2, f3];
-    },
-    validate1() {
-      if (this.basic_info.activity_name === '') {
-        return {
-          code: -1,
-          message: $i18n.t('modalTips.s5')
-        }; // 活动名称未填写！
-      }
-      if (!this.basic_info.stores.itemdata.valuedata) {
-        return {
-          code: -1,
-          message: $i18n.t('modalTips.s6')
-        }; // 店铺名称未填写！
-      }
-      if (this.basic_info.order_type.length === 0) {
-        return {
-          code: -1,
-          message: $i18n.t('modalTips.s7')
-        }; // 订单类型必选！
-      }
-      // if(this.basic_info.platform_mark.length === 0){
-      //    return {code:-1,message:'平台标记未填写！'};
-      // }
-      if (this.basic_info.time_limit === '' || this.basic_info.time_limit[0] === '' || this.basic_info.time_limit[1] === '') {
-        return {
-          code: -1,
-          message: $i18n.t('modalTips.t8')
-        }; // 时间范围未填写！
-      }
-      if (this.basic_info.offline_time === '') {
-        return {
-          code: -1,
-          message: $i18n.t('modalTips.s8')
-        }; // 下线时间未填写！
-      }
-      if (this.basic_info.buyer_limit_frequency === '1' && !this.basic_info.buyer_max_frequency) {
-        return {
-          code: -1,
-          message: $i18n.t('modalTips.s9')
-        }; // 最大限制次数未填写！
-      }
-
-      return {
-        code: 0,
-        message: $i18n.t('modalTips.s4')
-      }; // 校验完成
     },
     validate2() {
       // const tablename = "商品列表";
@@ -766,19 +701,6 @@ export default {
         message: $i18n.t('modalTips.s4')
       };
     },
-    initBtn(){
-      let self = this;
-      if(self.objid > 0 && (self.basic_info.status === '2' || self.basic_info.status === '3')){
-        let arr = [];
-        arr = self.btnConfig.buttons.filter(item=>item.text != '保存草稿');
-        self.btnConfig.buttons = arr;
-      };
-      if(self.objid < 0 || self.basic_info.status !== '1'){
-        let arr = [];
-        arr = self.btnConfig.buttons.filter(item=>item.text != '发布');
-        self.btnConfig.buttons = arr;
-      }
-    }
   },
   mounted() {
     // 新增
@@ -791,21 +713,5 @@ export default {
   beforeDestroy() {
     this.$refs.basicSteps.removeEventListener('scroll', this.handleScrollByUser, false);
   },
-  async created() {
-    const buttons = self.$OMS2.BtnConfig.config();
-    this.btnConfig.buttons = [...this.extendBtn];
-    await groups.load();
-    if (this.$route.query.id > 0) {
-      this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
-      this.objid = this.$route.query.id;
-      this.getData();
-    } else {
-      this.objid = '-1';
-      this.initData();
-      this.freshKey += 1;
-      const copy = this.$route.query.copy;
-      if (copy && copy > 1) this.getData(copy);
-      this.initBtn();
-    }
-  }
+  async created() { }
 };

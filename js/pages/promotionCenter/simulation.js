@@ -7,8 +7,10 @@ import ButtonFkDialog from 'professionalComponents/buttonFkDialog.vue';
 import { tableCols as tabList } from './promotion.config';
 import businessButton from 'professionalComponents/businessButton';
 import groups from '@/assets/js/promotion/groups';
+import promotionMixin from './promotion.mixin';
 
 export default {
+	mixins: [promotionMixin()],
   data() {
     return {
       vmI18n: $i18n,
@@ -18,7 +20,7 @@ export default {
           {
             text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
-              this.cancel_simulation();
+              this.close();
             }
           },
           {
@@ -113,9 +115,6 @@ export default {
     ButtonFkDialog
   },
   computed: {
-    groups() {
-      return $store.state.customize.forginkeys.groups;
-    },
     itemdataFk() {
       try {
         const rs = this.itemdata;
@@ -264,21 +263,6 @@ export default {
           resolve(data);
         }
       });
-    },
-    // 取消
-    cancel_simulation() {
-      this.$destroy(true);
-      $omsUtils.tabJump(2, 2895, 'CUSTOMIZED', 'PROMACTIQUERYLIST', { i8n: 1, tip: 'panel_label.promotionList' }, {}, 1, 0)
-      /* $store.commit('customize/TabClose', {
-        id: 2895, // id
-        type: 'CUSTOMIZED', // 类型action
-        name: 'PROMACTIQUERYLIST', // 文件名
-        // label: "促销活动", // tab中文名
-        label: $i18n.t('panel_label.promotionList'),
-        query: Object.assign({
-          id: 2895
-        }) // 带的参数
-      }); */
     },
     async execute_simulation() {
       const self = this;
