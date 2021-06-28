@@ -447,7 +447,8 @@ export default {
             oneObj: val => {
               this.formConfig2.formValue.cpCRegionProvinceEname = val.valuedata;
               this.formConfig2.formValue.cpCRegionProvinceId = val.pid;
-
+              this.formConfig2.formValue.cpCRegionCityEname = ""
+              this.formConfig2.formValue.cpCRegionCityId = ""
 
             }
           },

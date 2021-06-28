@@ -35,7 +35,8 @@ export default {
       const contentHeight = document.getElementsByClassName(
         'SearchForm_Table'
       )[0].clientHeight;
-      const scrollTableHeight = contentHeight - 200;
+      const scrollTableHeight = contentHeight - 128;
+      console.log(scrollTableHeight);
       this.scrollTableHeight.height = `${scrollTableHeight}px`;
     },
     theadCheckboxChange(val, column) {

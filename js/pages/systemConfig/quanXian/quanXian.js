@@ -193,6 +193,7 @@ export default {
         return
       }else{
         this.permissionType = obj.type
+        this.spinShow = true
         this.getRoleData();
         this.getSearchForm();
       }
@@ -236,7 +237,7 @@ export default {
     async getRoleData() {
      
       const res = await this.service.common.groupTreeload({});
-
+      this.spinShow = false
       if (res.data.code === 0) {
         this.groupId = res.data.data[0].ID;
         this.newGroupId = res.data.data[0].ID;
