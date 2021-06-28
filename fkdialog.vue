@@ -478,25 +478,9 @@ export default {
       const param = new FormData();
       param.append('param', JSON.stringify(paramObj));
       console.log('522::');
-      this.service.promotionCenter.screenresult(param)
-      /* axios({
-        url: '/p/cs/screenresult',
-        method: 'post',
-        data: {
-          param: JSON.stringify({
-            TABLENAME: this.tablename, // 表名
-            CONDITION: this.l_screen_result_save, // 左边选中的列表
-            GLOBAL: this.isTreeOrSearch ? '' : this.searchWord.trim(), // 全局搜索值
-            PAGENUM: this.l_center_data.l_currentPage, // 当前页
-            PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
-          })
-        }
-      }) */.then((res) => {
+      this.service.promotionCenter.screenresult(param).then((res) => {
         const response = this.version == '1.4' ? res.data.data : res.data;
         if (res.data.code !== 0) {
-          /* this.errorDialogClass = 'error';
-        this.errorData = [{message: response.message}];
-        this.errorDialog = true; */
           return;
         }
         this.l_screenLoading = false;
@@ -506,7 +490,6 @@ export default {
           this.l_table_data.header = JSON.parse(response.header);// 头部信息
           this.l_table_data.body[this.l_center_data.l_currentPage - 1] = response.data.list; // body信息
         });
-        /* this.l_table_data.checked[this.l_center_data.l_currentPage-1] = [];//选中的选项 */
       });
     }, // 左边列表勾选变化获取数据
     screen_request_initialize() {
@@ -521,25 +504,9 @@ export default {
       const param = new FormData();
       param.append('param', JSON.stringify(paramObj));
       console.log('595::');
-      return this.service.promotionCenter.screenresult(param)
-      /* return axios({
-        url: '/p/cs/screenresult',
-        method: 'post',
-        data: {
-          param: JSON.stringify({
-            TABLENAME: this.tablename, // 表名
-            CONDITION: this.l_screen_result_save, // 左边选中的列表
-            GLOBAL: this.searchWord.trim(), // 全局搜索值
-            PAGENUM: this.l_center_data.l_currentPage, // 当前页
-            PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
-          })
-        }
-      }) */.then((res) => {
+      return this.service.promotionCenter.screenresult(param).then((res) => {
         const response = this.version == '1.4' ? res.data.data : res.data;
         if (res.data.code !== 0) {
-          /* this.errorDialogClass = 'error';
-        this.errorData = [{message: response.message}];
-        this.errorDialog = true; */
           return;
         }
         this.l_screenLoading = false;
@@ -548,9 +515,7 @@ export default {
           this.l_center_data.total = response.data.total; // 筛选结果总数
           this.l_table_data.header = JSON.parse(response.header);// 头部信息
           this.l_table_data.body[this.l_center_data.l_currentPage - 1] = response.data.list; // body信息
-          /* console.log(new Date().getTime()) */
         });
-        /* this.l_table_data.checked[this.l_center_data.l_currentPage-1] = [];//选中的选项 */
       });
     }, // 初始化
     addCondition() {
@@ -635,25 +600,9 @@ export default {
       const param = new FormData();
       param.append('param', JSON.stringify(paramObj));
       console.log('737::');
-      this.service.promotionCenter.screenresult(param)
-      /* axios({
-        url: '/p/cs/screenresult',
-        method: 'post',
-        data: {
-          param: JSON.stringify({
-            TABLENAME: this.tablename, // 表名
-            CONDITION: this.l_screen_result_save, // 左边选中的列表
-            GLOBAL: this.searchWord.trim(), // 全局搜索值
-            PAGENUM: this.l_center_data.l_currentPage, // 当前页
-            PAGESIZE: this.l_center_data.l_page_size, // 每页显示个数
-          })
-        }
-      }) */.then((res) => {
+      this.service.promotionCenter.screenresult(param).then((res) => {
         const response = this.version == '1.4' ? res.data.data : res.data;
         if (res.data.code !== 0) {
-          /* this.errorDialogClass = 'error';
-        this.errorData = [{message: response.message}];
-        this.errorDialog = true; */
           return;
         }
         this.l_screenLoading = false;
@@ -825,19 +774,9 @@ export default {
       const param = new FormData();
       param.append('param', JSON.stringify(paramObj));
       console.log('1008::');
-      this.service.promotionCenter.screenresultcheck(param)
-      /* axios({
-        url: '/p/cs/screenresultcheck',
-        method: 'post',
-        data: {
-          param: JSON.stringify(this.request_param)
-        }
-      }) */.then((res) => {
+      this.service.promotionCenter.screenresultcheck(param).then((res) => {
         const response = this.version == '1.4' ? res.data.data : res.data;
         if (res.data.code !== 0) {
-          /* this.errorDialogClass = 'error';
-        this.errorData = [{message: response.message}];
-        this.errorDialog = true; */
           return;
         }
         this.r_center_data.rightTotal = response.data.total; // 选中结果总数
@@ -849,20 +788,10 @@ export default {
       const param = new FormData();
       param.append('param', JSON.stringify(this.optimize_request));
       console.log('1033::');
-      this.service.promotionCenter.screenresultcheck(param)
-      /* axios({
-        url: '/p/cs/screenresultcheck',
-        method: 'post',
-        data: {
-          param: JSON.stringify(this.optimize_request)
-        }
-      }) */.then((res) => {
+      this.service.promotionCenter.screenresultcheck(param).then((res) => {
         const response = this.version == '1.4' ? res.data.data : res.data;
         this.confirmLoading = false;
         if (res.data.code !== 0) {
-          /* this.errorDialogClass = 'error';
-        this.errorData = [{message: response.message}];
-        this.errorDialog = true; */
           return;
         }
         this.r_center_data.total = response.data.total; // 选中结果总数
@@ -927,19 +856,9 @@ export default {
       const param = new FormData();
       param.append('param', JSON.stringify(this.optimize_request));
       console.log('1112::');
-      this.service.promotionCenter.screenresultcheck(param)
-      /* axios({
-        url: '/p/cs/screenresultcheck',
-        method: 'post',
-        data: {
-          param: JSON.stringify(this.optimize_request)
-        }
-      }) */.then((res) => {
+      this.service.promotionCenter.screenresultcheck(param).then((res) => {
         const response = this.version == '1.4' ? res.data.data : res.data;
         if (res.data.code !== 0) {
-          /* this.errorDialogClass = 'error';
-        this.errorData = [{message: response.message}];
-        this.errorDialog = true; */
           return;
         }
         this.r_center_data.total = response.data.total; // 筛选结果总数
@@ -986,41 +905,9 @@ export default {
       param.append('modelname', this.module_name);
       param.append('multiQuery', JSON.stringify(multiQuery));
       console.log('1234::');
-      this.service.promotionCenter.setMultiQuery(param)
-      /* axios({
-        method: 'post',
-        url: '/p/cs/setMultiQuery',
-        data: {
-          tableid: this.tableid,
-          modelname: this.module_name,
-          multiQuery: JSON.stringify({
-            value: this.request_param,
-            text: JSON.stringify({
-              result: this.r_result, // 渲染列表
-              // condition: this.r_send_result//条件集合 
-            })
-          })
-        }
-      }) */
-      /* axios.post('/p/cs/setMultiQuery', postParam) */
-      /* axios.post('/p/cs/setMultiQuery',
-        qs.stringify({
-          tableid: this.tableid,
-          modelname: this.module_name,
-          multiQuery: {
-            value: this.request_param,
-            text: JSON.stringify({
-              result: this.r_result,//渲染列表
-              /!*condition: this.r_send_result//条件集合*!/
-            })
-          }
-        })
-      ) */.then((res) => {
+      this.service.promotionCenter.setMultiQuery(param).then((res) => {
         const res_data = res.data;
         if (res_data.code !== 0) {
-          /* this.errorDialogClass = 'error';
-          this.errorData = [{message: res_data.message}];
-          this.errorDialog = true; */
           return;
         }
         this.$message({
@@ -1054,20 +941,10 @@ export default {
         const param = new FormData();
         param.append('param', JSON.stringify(this.request_param));
         console.log('1300::');
-        this.service.promotionCenter.screenresultcheck(param)
-        /* axios({
-          url: '/p/cs/screenresultcheck',
-          method: 'post',
-          data: {
-            param: JSON.stringify(this.request_param)
-          }
-        }) */.then((res) => {
+        this.service.promotionCenter.screenresultcheck(param).then((res) => {
           const response = this.version == '1.4' ? res.data.data : res.data;
           this.confirmLoading = false;
           if (res.data.code !== 0) {
-            /* this.errorDialogClass = 'error';
-          this.errorData = [{message: response.message}];
-          this.errorDialog = true; */
             return;
           }
           if (response.ids.length > 8000) {
@@ -1136,17 +1013,9 @@ export default {
       const param = new FormData();
       param.append('param', JSON.stringify({ 'TABLENAME': this.tablename }));
       console.log('1384::');
-      this.service.promotionCenter.screen(param)
-      /* axios({
-        url: '/p/cs/screen',
-        method: 'post',
-        param,
-      }) */.then((res) => {
+      this.service.promotionCenter.screen(param).then((res) => {
         const response = res.data;
         if (response.code !== 0) {
-          /* this.errorDialogClass = 'error';
-        this.errorData = [{message: response.message}];
-        this.errorDialog = true; */
           return;
         }
         this.tree_lists = response.data.map((obj) => {
@@ -1158,9 +1027,6 @@ export default {
           return obj;
         });
         this.tree_loading = false;
-        /* this.$nextTick(()=> {
-          this.nodeCLose();//默认收拢
-        }) */
       });
       this.screen_request_initialize().then(() => {
         if (this.r_result.length !== 0) { // 先拿到配置的名字
@@ -1172,86 +1038,8 @@ export default {
     errorDialogClose(value, option) {
       this.errorDialog = false;
     }, // 关闭弹框
-    /* reaptData(obj) {   //深拷贝
-      if(obj instanceof Array){   //array
-          let temp = []
-          obj.forEach((item,index) => {
-              let temp2 = []
-              if(item instanceof Array){
-                  item.forEach((item2, index) => {
-                      temp2.push(item2)
-                  })
-                  temp.push(temp2)
-  
-              }else{
-                  temp.push(item)
-              }
-  
-          })
-          return temp
-      }else{   //obj
-          let temp = {}
-  
-          for(var item in obj){
-              temp[item] = obj[item]
-          }
-  
-          return temp
-      }
-    }, */
-    /* checked_change (val) {
-      console.log(val)
-      if(this.activeName === 'first' ){
-        this.l_table_data.checked[this.l_center_data.l_currentPage-1] = val;
-      }else {
-        this.r_table_data.checked[this.r_center_data.r_currentPage-1] = val;
-      }
-    },//中间复选框改变时 */
-    /* r_result_change (val) {
-      val.checked = !val.checked;
-      this.right_request_center();
-      /!*this.r_table_data.body = [];//清空数据
-      this.r_table_data.checked = [];//清空勾选数据
-      this.r_center_data.r_currentPage = 1;//初始化当前页
-      this.right_dispose();//处理数据
-      this.right_dispose_request();//获取数据*!/
-    },//右边勾选框变化时处理数据并请求数据 */
   },
   watch: {
-    /* exclude (val) {
-    if( this.activeName === 'first') {//左边筛选条件列表树
-      let screen={};
-      this.l_table_data.body = [];//清空数据
-      this.l_center_data.l_currentPage = 1;//页码重置
-      if (val) {//排除勾选项
-        this.tree_lists.map((obj) => {
-          let checked_obj = obj;
-          screen[obj['AKNAME']] = [];
-          checked_obj['VALUE'].map((n_obj) => {
-            let judge=checked_obj.checked.findIndex((n) => n_obj.ID === n );//查找列表中选中对象的下标
-            if( judge === -1) {//选出没勾选的
-              screen[checked_obj['AKNAME']].push(n_obj.ID);
-            }
-          })
-        })
-      }else { //不排除勾选项
-        this.tree_lists.map((obj) => {
-          screen[obj['AKNAME']] = obj.checked;
-        })
-      }
-      this.l_screen_result_save = screen;//保存筛选结果
-      this.screen_request();//获取筛选结果数据
-    }else {//右边选中列表
-      if (val) {//排除勾选项
-  
-      }
-    }
-  },//监听排除勾选的变化 */
-    /* activeName (val) {
-    if(val === 'second' && ){
-      console.log(333333)
-    }
-  } */
     activeName(val) {
       if (val === 'second') {
         if (this.r_result_length !== this.r_result.length && this.r_result.length !== 0) { // 右边列表数据变化时在获取数据
@@ -1267,14 +1055,6 @@ export default {
     showOrHidden(a) {
       if (a) this.module_name = '';// 清空模板名
     }
-    /* searchResult (val) {
-      console.log(this.$refs['trigger_searchResult'].$refs.suggestions.showPopper)
-      if(val.trim().length === 0) {
-        this.$refs['trigger_searchResult'].$refs.suggestions.showPopper = false;
-      }else {
-        this.$refs['trigger_searchResult'].$refs.suggestions.showPopper = true;
-      }
-    } */
   },
   mounted() {
     this.entry_page();
