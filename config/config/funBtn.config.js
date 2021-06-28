@@ -1346,9 +1346,12 @@ class BtnConfig {
         return
       }
       // ['缺货', '待审核', '已审核']
-      if (!['缺货', '待审核', '已审核'].includes(item.ORDER_STATUS)) {
+      // 待审核：1；PRD上：仅限制非'待审核'的单据
+      // if (!['缺货', '待审核', '已审核'].includes(item.ORDER_STATUS)) {
+      if (![1].includes(item.ORDER_STATUS)) {
         // 当前状态异常，不允许操作！
-        commonUtils.msgTips(self, 'warning', 'd9')
+        // commonUtils.msgTips(self, 'warning', 'd9')
+        self.$Message.warning('只允许待审核的订单进行取消合并！')
         self.btnConfig.loading = false
         return
       }
