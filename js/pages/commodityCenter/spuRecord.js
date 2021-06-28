@@ -102,11 +102,14 @@ export default {
           },
           {
             title: '销售状态',
-            key: 'SALES_STATUS'
+            key: 'SALES_STATUS',
+            render:(h,params)=>{
+              return h('span' , {} , params.row.SALES_STATUS ? params.row.SALES_STATUS == 'Y' ? '正常销售' : '暂停销售' : '')
+            }
           },
           {
             title: '零售价',
-            key: 'PRICE_RETAIL'
+            key: 'PRICE_RETAIL',
           },
           {
             title: '采购价',
