@@ -469,6 +469,7 @@ export default {
       // self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基础信息', ['SALES_STATUS', 'PURCHASE_STATUS']);
       if (self.ID > 0 && self.$route.query.spuid) {
         self.formConfig.formData[0].itemdata.valuedata = self.$route.query.spucode;
+        self.formConfig.formData[0].itemdata.readonly = true;
         self.spuID = self.$route.query.spucode;
       } else {
         self.spuID = self.formConfig.formValue.PS_C_PRO_ID.pid || '';
