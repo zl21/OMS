@@ -1,16 +1,18 @@
 <template>
-  <div class="dialogForm customized-modal" v-loading="loading">
+  <div 
+    :class="['dialogForm', 'customized-modal', { 'fix-height': componentData.type == 'warehouseWarrant' }]"
+    v-loading="loading">
     <div class="subtablePart">
       <businessForm
-        v-if="dialogConfig.length == 1"
-        :form-config="dialogConfig[0].formConfig"
+        v-if="componentData.dialogConfig.length == 1"
+        :form-config="componentData.dialogConfig[0].formConfig"
       />
       <Collapse
-        v-if="dialogConfig.length > 1"
+        v-if="componentData.dialogConfig.length > 1"
         v-model="subTableCollapse"
       >
         <Panel
-          v-for="(item, index) in dialogConfig"
+          v-for="(item, index) in componentData.dialogConfig"
           :key="item.title"
           :name="String(index)"
         >

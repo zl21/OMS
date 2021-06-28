@@ -52,17 +52,7 @@
         </div>
       </div>
 
-      <Modal
-        v-model="dialog.isConfirm"
-        title="提示"
-        mask
-        @on-ok="handleOk"
-        @on-cancel="handleCancel"
-      >
-        <div>当前切换操作会清空已录入的按时间点创建/按未拣货数创建内容，确定继续吗？</div>
-      </Modal>
-
-      <Modal
+      <!-- <Modal
         v-model="dialog[curDialog]"
         :title="dialogInfo.title"
         footer-hide
@@ -78,7 +68,25 @@
           @getData="getDetail"
           @clearModify="initModify"
         />
-      </Modal>
+      </Modal> -->
+      <businessDialog
+        :batch-closed="scheduleFormConfig.batchClosed"
+        :closable="scheduleFormConfig.closable"
+        :component-data="scheduleFormConfig.componentData"
+        :draggable="scheduleFormConfig.draggable"
+        :exclude-string="scheduleFormConfig.excludeString"
+        :keep-alive="scheduleFormConfig.keepAlive"
+        :mask="scheduleFormConfig.mask"
+        :mask-closable="scheduleFormConfig.maskClosable"
+        :name="scheduleFormConfig.name"
+        :quit="scheduleFormConfig.quit"
+        :scrollable="scheduleFormConfig.scrollable"
+        :title="scheduleFormConfig.title"
+        :title-align="scheduleFormConfig.titleAlign"
+        :transfer="scheduleFormConfig.transfer"
+        :url="scheduleFormConfig.url"
+        :width="scheduleFormConfig.width"
+      />
     </div>
   </div>
 </template>
