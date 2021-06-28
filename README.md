@@ -240,3 +240,4 @@
 | v1.1.98 | fkinputPlus deepClone |
 | v1.1.99 | 修复fkinputPlus默认值 |
 | v1.2.1 | 导入失败后清空失败文件 |
+| v1.2.2 | fkdialog-兼容斯凯奇接口返回格式 |

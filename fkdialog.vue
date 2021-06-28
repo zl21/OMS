@@ -250,6 +250,9 @@ window.$i18n = i18n
 
 export default {
   props: {
+    version: {
+      type: String
+    }, // 兼容老接口返回的数据结构（eg.斯凯奇
     tablename: {
       type: String
     }, // 表名
@@ -489,7 +492,7 @@ export default {
           })
         }
       }) */.then((res) => {
-        const response = res.data.data;
+        const response = this.version == '1.4' ? res.data.data : res.data;
         if (res.data.code !== 0) {
           /* this.errorDialogClass = 'error';
         this.errorData = [{message: response.message}];
@@ -532,7 +535,7 @@ export default {
           })
         }
       }) */.then((res) => {
-        const response = res.data.data;
+        const response = this.version == '1.4' ? res.data.data : res.data;
         if (res.data.code !== 0) {
           /* this.errorDialogClass = 'error';
         this.errorData = [{message: response.message}];
@@ -646,7 +649,7 @@ export default {
           })
         }
       }) */.then((res) => {
-        const response = res.data.data;
+        const response = this.version == '1.4' ? res.data.data : res.data;
         if (res.data.code !== 0) {
           /* this.errorDialogClass = 'error';
         this.errorData = [{message: response.message}];
@@ -830,7 +833,7 @@ export default {
           param: JSON.stringify(this.request_param)
         }
       }) */.then((res) => {
-        const response = res.data.data;
+        const response = this.version == '1.4' ? res.data.data : res.data;
         if (res.data.code !== 0) {
           /* this.errorDialogClass = 'error';
         this.errorData = [{message: response.message}];
@@ -854,7 +857,7 @@ export default {
           param: JSON.stringify(this.optimize_request)
         }
       }) */.then((res) => {
-        const response = res.data.data;
+        const response = this.version == '1.4' ? res.data.data : res.data;
         this.confirmLoading = false;
         if (res.data.code !== 0) {
           /* this.errorDialogClass = 'error';
@@ -932,7 +935,7 @@ export default {
           param: JSON.stringify(this.optimize_request)
         }
       }) */.then((res) => {
-        const response = res.data.data;
+        const response = this.version == '1.4' ? res.data.data : res.data;
         if (res.data.code !== 0) {
           /* this.errorDialogClass = 'error';
         this.errorData = [{message: response.message}];
@@ -1059,7 +1062,7 @@ export default {
             param: JSON.stringify(this.request_param)
           }
         }) */.then((res) => {
-          const response = res.data.data;
+          const response = this.version == '1.4' ? res.data.data : res.data;
           this.confirmLoading = false;
           if (res.data.code !== 0) {
             /* this.errorDialogClass = 'error';
