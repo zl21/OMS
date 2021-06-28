@@ -26,6 +26,8 @@ import IP_C_STANDPLAT_PRO from './IP_C_STANDPLAT_PRO.js'
 import OC_B_VIPCOM_PO from './OC_B_VIPCOM_PO.js'
 import PS_C_SKU from './PS_C_SKU.js'
 
+import AC_F_PLATFORM_BILL from '../../financeCenter/AC_F_PLATFORM_BILL.js'
+
 export default {
 	t1,
 	t2,
@@ -49,4 +51,5 @@ export default {
 	/* 2.0: */
 	OC_B_VIPCOM_PO,
 	PS_C_SKU,
+	AC_F_PLATFORM_BILL
 }

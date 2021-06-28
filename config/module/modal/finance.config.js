@@ -6,8 +6,14 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/modal/finance.config.js
  */
+import downLoad from 'professionalComponents/downLoad.vue'
+
 // 财务中心
 export default {
+  DOWNLOADORDER: {
+    // component: () => import('professionalComponents/downLoad.vue')
+    component: downLoad
+  },
   // 唯品会进度账单 唯品会月结账单列表 (下载账单)
   DOWNLOADVIPBILL: {
     component: () => import('@/views/modal/financeCenter/downLoadVipBill.vue'),
@@ -17,9 +23,9 @@ export default {
     component: () => import('@/views/modal/financeCenter/generateSalesOrder.vue'),
   },
   // 支付宝下载账单
-  DOWNLOADALIPAYBILL: {
-    component: () => import('@/views/modal/financeCenter/downLoadAlipayBill.vue'),
-  },
+  // DOWNLOADALIPAYBILL: {
+  //   component: () => import('@/views/modal/financeCenter/downLoadAlipayBill.vue'),
+  // },
   AUTHORIZE:{
     component: () => import('@/views/modal/financeCenter/authorize.vue'),
   },
