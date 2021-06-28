@@ -376,28 +376,6 @@ export default {
      * 保存草稿
      */
     async saveDraft() {
-      /* const [modulesValid1, modulesValid2, modulesValid3] = this.validateModule();
-      if (modulesValid1.code === -1) {
-        this.$message({
-          type: 'error',
-          message: modulesValid1.message
-        });
-        return;
-      }
-      if (modulesValid2.code === -1) {
-        this.$message({
-          type: 'error',
-          message: modulesValid2.message
-        });
-        return;
-      }
-      if (modulesValid3.code === -1) {
-        this.$message({
-          type: 'error',
-          message: modulesValid3.message
-        });
-        return;
-      } */
       const validateRes = this.validateModule();
       for (const it of validateRes) {
         if (it.code === -1) return this.$Message.error(it.message);
@@ -451,37 +429,10 @@ export default {
         this.loading = false;
       } catch (error) {
         this.loading = false;
-        // this.$Message.error(error);
-        /* this.$message({
-          type: 'error',
-          error
-        }); */
       }
     },
     // 发布
     async publish() {
-      /* const [modulesValid1, modulesValid2, modulesValid3] = this.validateModule();
-      if (modulesValid1.code === -1) {
-        this.$message({
-          type: 'error',
-          message: modulesValid1.message
-        });
-        return;
-      }
-      if (modulesValid2.code === -1) {
-        this.$message({
-          type: 'error',
-          message: modulesValid2.message
-        });
-        return;
-      }
-      if (modulesValid3.code === -1) {
-        this.$message({
-          type: 'error',
-          message: modulesValid3.message
-        });
-        return;
-      } */
       const validateRes = this.validateModule();
       for (const it of validateRes) {
         if (it.code === -1) return this.$Message.error(it.message);
@@ -507,14 +458,6 @@ export default {
         } = await this.service.promotionCenter.updatePmStatus(formData);
         if (code === 0) {
           this.$Message.success(message);
-          /* this.$message({
-            message,
-            type: 'success'
-          }); */
-          // let action = 'switchActiveTab';
-          // if (this.objid == -1) {
-          //   action = 'TabClose';
-          // }
           this.$nextTick(() => {
             this.getData(this.objid);
           });
@@ -530,14 +473,6 @@ export default {
     close() {
       this.$comUtils.tabCloseAppoint(this);
       $omsUtils.tabJump(0, 0, 'C', 'PROMACTIQUERYLIST', { i8n: 1, tip: 'panel_label.promotionList' }, {}, 1, 1, 2895)
-      /* $store.commit('global/tabOpen', {
-        type: 'C', // 类型action
-        customizedModuleId: 2895, // id
-        customizedModuleName: 'PROMACTIQUERYLIST', // 文件名
-        label: $i18n.t('panel_label.promotionList'), // 促销活动
-        dynamicRoutingForCustomizePage: true
-      }); */
-      // this.$destroy();
     },
     /**
      * 新增 初始化数据
@@ -625,25 +560,10 @@ export default {
     validateModule() {
       const f1 = this.validate1();
       this.stepsBar[0].finish = [0].includes(f1.code);
-      /* if (f1.code === 0) {
-        this.stepsBar[0].finish = true;
-      } else {
-        this.stepsBar[0].finish = false;
-      } */
       const f2 = this.validate2();
       this.stepsBar[1].finish = [0].includes(f2.code);
-      /* if (f2.code === 0) {
-        this.stepsBar[1].finish = true;
-      } else {
-        this.stepsBar[1].finish = false;
-      } */
       const f3 = this.validate3();
       this.stepsBar[2].finish = [0].includes(f3.code);
-      /* if (f3.code === 0) {
-        this.stepsBar[2].finish = true;
-      } else {
-        this.stepsBar[2].finish = false;
-      } */
       return [f1, f2, f3];
     },
     validate1() {
