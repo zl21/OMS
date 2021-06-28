@@ -6,6 +6,8 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import subTable from 'professionalComponents/subTable';
 import scheduleFormDialog from '@/views/modal/strategyPlatform/scheduleFormDialog';
 import dateUtil from '@/assets/js/__utils__/date.js';
+import DialogConfig from 'burgeonConfig/config/dialogs.config';
+import businessDialog from 'professionalComponents/businessDialog';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
@@ -16,7 +18,8 @@ export default {
     businessLabel,
     businessStatusFlag,
     businessActionTable,
-    scheduleFormDialog
+    scheduleFormDialog,
+    businessDialog
   },
   mixins: [modifycurrentLabel],
   data() {
@@ -37,12 +40,30 @@ export default {
         objid: '',
         pageShow: true
       },
-      dialog: {
-        isConfirm: false, // 提示是否确认切换拣货单创建方式
-        pickingForDate: false, // 拣货单-按时间点创建
-        pickingForStatus: false, // 拣货单-按未拣货数创建
-        warehouseWarrant: false // 入库单
+      dialogs: DialogConfig.config(),
+      // 公共弹框
+      // 弹框配置
+      scheduleFormConfig: {
+        // title: '入库单', // 修改备注
+        titleAlign: 'center', // 设置标题是否居中 center left
+        // width: '800',
+        scrollable: false, // 是否可以滚动
+        closable: true, // 是否可以按esc关闭
+        draggable: true, // 是否可以拖动
+        mask: true, // 是否显示遮罩层
+        maskClosable: true, // 是否可以点击叉号关闭
+        transfer: true, // 是否将弹层放在body内
+        name: 'scheduleFormDialog', // 组件名称
+        url: 'modal/strategyPlatform/scheduleFormDialog',
+        keepAlive: true,
+        excludeString: 'scheduleFormDialog', // 将name传进去，确认不缓存
+        componentData: {},
       },
+      // dialog: {
+      //   pickingForDate: false, // 拣货单-按时间点创建
+      //   pickingForStatus: false, // 拣货单-按未拣货数创建
+      //   warehouseWarrant: false // 入库单
+      // },
       curDialog: '', // 当前弹窗
       btnConfig: {
         typeAll: 'default',
@@ -828,7 +849,23 @@ export default {
               disabled: false,
               setRequired: '', // 必选标识,值不为required时无标识
               radioChange: ()=>{
-                this.pickingTableConfig.data.length && (this.dialog.isConfirm = true);
+                if (!this.pickingTableConfig.data.length) return;
+                this.$Modal.info({
+                  title: $i18n.t('modalTitle.tips'), // 提示
+                  content: '当前切换操作会清空已录入的按时间点创建/按未拣货数创建内容，确定继续吗？',
+                  mask: true,
+                  showCancel: true,
+                  okText: $i18n.t('common.determine'), // 确定
+                  cancelText: $i18n.t('common.cancel'), // 取消
+                  onOk: () => {
+                    this.initPickTable();
+                    this.subTableDelete(-1, 'pickingTableConfig');
+                  },
+                  onCancel: () => {
+                    const { PICK_CREATE_TYPE } = this.pickingTableConfig.businessFormConfig.formValue;
+                    this.pickingTableConfig.businessFormConfig.formValue.PICK_CREATE_TYPE = PICK_CREATE_TYPE == 1 ? 2 : 1;
+                  }
+                });
               }, // 切换时的方法
               options: [ // radio选项
                 {
@@ -1036,6 +1073,13 @@ export default {
           ]
         }
       },
+      // tab切换配置
+      labelList: [
+        {
+          label: '操作日志',
+          value: 'ST_C_VIPCOM_PROJECT_LOG',
+        }
+      ],
       labelDefaultValue: 'ST_C_VIPCOM_PROJECT_LOG', // 设置tab默认值，默认展示《自定义属性》
       modify: {
         master: {}, // 主表信息
@@ -1081,18 +1125,6 @@ export default {
       const date = new Date(time);
       return dateUtil.getFormatDate(date, format || 'yyyy-MM-dd HH:mm:ss');
     },
-    // 拣货单切换创建方式-确认
-    handleOk() {
-      this.initPickTable();
-      this.subTableDelete(-1, 'pickingTableConfig');
-      this.dialog.isConfirm = false;
-    },
-    // 拣货单切换创建方式-取消
-    handleCancel() {
-      const { PICK_CREATE_TYPE } = this.pickingTableConfig.businessFormConfig.formValue;
-      this.pickingTableConfig.businessFormConfig.formValue.PICK_CREATE_TYPE = PICK_CREATE_TYPE == 1 ? 2 : 1;
-      this.dialog.isConfirm = false;
-    },
     // 返回
     back() {
       if (this.isModify) {
@@ -1123,11 +1155,28 @@ export default {
     },
     // 弹窗显示隐藏
     handleDialog(key, detail, isEdit) {
-      this.dialog[key] = !this.dialog[key];
+      // this.dialog[key] = !this.dialog[key];
       this.dialogConfig = key == 'warehouseWarrant' ? this[key] : [{ formConfig: this[key] }];
       this.curDialog = key;
       this.initDetail = detail || {};
       this.initForm(detail, isEdit);
+      
+      console.log(this.dialogConfig);
+      this.scheduleFormConfig.componentData = {
+        tableName: 'ST_C_VIPCOM_PROJECT',
+        dialogConfig: this.dialogConfig,
+        detail: detail || {},
+        type: key
+      };
+      this.scheduleFormConfig = {
+        ...this.scheduleFormConfig,
+        title: this.dialogInfo.title,
+        width: this.dialogInfo.width
+      };
+      setTimeout(() => {
+        this.$children.find(item => item.name === 'scheduleFormDialog').openConfirm();
+      }, 800);
+     
     },
     /**
      * 记录主/子表修改信息方法
@@ -1260,9 +1309,10 @@ export default {
           this.fillSelectOptions(this.dialogConfig[0].formConfig, item, 'AUTO_PICK_TIME_INTERVAL');
         }
       });
-      let childs = data.addcolums[0].childs.filter(i => i.colname == 'IS_AIR_EMBARGO')
+      let childs = data.addcolums[0].childs.filter(i => i.colname != 'IS_AIR_EMBARGO')
       this.dialogConfig.forEach((item, index) => {
         item.formConfig = this.$OMS2.omsUtils.initFormConfig(childs, item.formConfig);
+        console.log(item.formConfig)
         /** 由于方法返回的外键字段值是对象，形如：{ pid: '', valuedata: ''} */
         if (index == 1) { 
           const obj = item.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID;
@@ -1303,30 +1353,7 @@ export default {
       this.dialogLoading = false;
       this.isWatchChange = true;
     },
-    // 确认弹窗数据
-    getDetail(data) {
-      const { ID } = data;
-      let params;
-      let PICK_CREATE_TYPE;
-      switch (this.curDialog) {
-        case 'pickingForDate':
-        case 'pickingForStatus':
-          PICK_CREATE_TYPE = this.curDialog == 'pickingForDate' ? 1 : 2;
-          params = ID != -1 ? { ID, ...this.modify.picking } : { ...data, PICK_CREATE_TYPE };
-          this.subTableSave(params, 'picking');
-          break;
-        case 'warehouseWarrant':
-          params = ID != -1 ? { ID, ...this.modify.warehouseWarrant } : data;
-          if (params.hasOwnProperty('IS_AIR_EMBARGO')) {
-            const { IS_AIR_EMBARGO } = data;
-            params.IS_AIR_EMBARGO = IS_AIR_EMBARGO ? Number(IS_AIR_EMBARGO) : 0;
-          }
-          this.subTableSave(params, 'warehouseWarrant');
-          break;
-        default:
-          break;
-      }
-    },
+    
     // 承运商下拉项
     carrierDropList() {
       this.service.strategyPlatform.carrierDropList().then(({ data: { code, data } }) => {
@@ -1409,26 +1436,6 @@ export default {
         }
         this.$message.error(message);
       });
-    },
-    /**
-     * 拣货单/入库单保存
-     * @param {*} params 表单数据
-     * @param {*} type 拣货单/入库单
-     */
-     subTableSave(params, type) {
-      let payload = { ...params, ST_C_VIPCOM_PROJECT_ID: this.ID };
-      this.dialogLoading = true;
-      const api = type == 'picking' ? 'pickSave' : 'warehouseInSave';
-      this.service.strategyPlatform[api](payload)
-      .then(({ data: { code, message } }) => {
-        this.dialogLoading = false;
-        if (code == 0) {
-          this.$message.success(message);
-          this.$refs.dialogForm.$parent.close();
-          this.querySchedule();
-          this.initModify();
-        }
-      }).catch(() => this.dialogLoading = false);
     },
     /**
      * 拣货单/入库单删除

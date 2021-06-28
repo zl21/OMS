@@ -1,13 +1,19 @@
 .jurisdiction {
   height: 100%;
+  padding: 12px;
   .content {
     height: calc(100% - 50px);
     display: flex;
     align-items: center;
     order: 3;
+    .contentLeft{
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
     .tree-center{
       width: 130px;
-      padding-top: 25px;
+      padding: 12px;
     }
     .FilterTree_box {
       height: 100%;
@@ -33,6 +39,12 @@
       width: 100%;
       border: 1px solid #d8d8d8;
       border-radius: 6px;
+      .downComponent{
+        border: none;
+      }
+      .fromHeight{
+        display: flex;
+      }
       .SelectTree_box {
         height: 100%;
         display: flex;

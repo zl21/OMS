@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-07 20:40:41
- * @LastEditTime: 2021-06-25 19:41:23
+ * @LastEditTime: 2021-06-28 11:16:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/systemConfig/quanXian/quanXian.vue
@@ -13,7 +13,7 @@
       <businessButton :btn-config="buttonConfig" />
     </div>
     <div class="content">
-      <div class="FilterTree_box left_col">
+      <div class="contentLeft">
         <FilterTree
           class="FilterTree"
           :tree-attribute="filterTreeConfig.treeAttribute"
@@ -23,7 +23,7 @@
         />
       </div>
 
-      <div class="FilterTree_box left_col">
+      <div class="contentLeft">
         <div class="tree-center">
           <Tree ref="tree" :data="treeData" @on-select-change="treeChange" />
         </div>
@@ -31,7 +31,7 @@
 
       <div class="right_col">
         <div class="SearchForm_Table">
-          <div v-if="permissionType !== 'sensitive'" class="fromHeight">
+          <div  class="fromHeight">
             <SearchForm
               class="SearchForm"
               :set-height="searchFormConfig.setHeight"

@@ -60,18 +60,7 @@ export default {
             dimSelect: (obj) => {},
             dimblur: () => {},
           },
-          {
-            style: 'input', //输入框类型
-            label: '数量', //输入框前文字
-            value: 'number', //输入框的值
-            columns: ['number'],
-            width: '7',
-            AuotData: [], //匹配的选项
-            dimChange: (search) => {},
-            dimEnter: (val) => {},
-            dimSelect: (obj) => {},
-            dimblur: () => {},
-          },
+         
         ],
       },
       // searchBtn
@@ -537,6 +526,23 @@ export default {
     const self = this
     console.log(this.componentData)
     this.type = this.componentData.type
+    if (this.type == "add") {
+      let obj = {
+        style: 'input', //输入框类型
+        label: '数量', //输入框前文字
+        value: 'number', //输入框的值
+        columns: ['number'],
+        width: '7',
+        AuotData: [], //匹配的选项
+        dimChange: (search) => {},
+        dimEnter: (val) => {},
+        dimSelect: (obj) => {},
+        dimblur: () => {},
+      }
+      self.formConfig.formData.push(obj)
+    }
+
+
     if (this.componentData && this.componentData.ID) {
       self.objid = this.componentData.ID
     }
