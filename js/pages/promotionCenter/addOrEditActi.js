@@ -758,8 +758,21 @@ export default {
         }
         rs = this.checkTable(arrs);
       } else {
-        const arrs = this.gift_info_setting.gift_productslist || [];
+        const arrs = this.gift_info_setting.gift_productsArrs;
+        let flag = false;
         if (arrs.length === 0) {
+          return {
+            code: -1,
+            message: tablename + $i18n.t('modalTips.r6')
+          };
+        };
+        for (const iterator of arrs) {
+          if(iterator.productslist.some(item=>item.ECODE =='')){
+              flag = true;
+              break;
+          }
+        };
+        if(flag){
           return {
             code: -1,
             message: tablename + $i18n.t('modalTips.r6')
