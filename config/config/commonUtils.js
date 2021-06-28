@@ -348,10 +348,10 @@ class commonUtils {
         self[array].buttons.forEach((item) => {
           // 设置、收藏等图标按钮的配置
           if (!item.text && item.icon ) {
-            if(show_iconbj_setup.includes(self.$route.params.customizedModuleName)){
-              a.push(item)
-            }else if(item.icon !== 'iconfont iconbj_setup'){
+            if(item.icon !== 'iconfont iconbj_setup'){
               a.push(item);
+            }else if(show_iconbj_setup.includes(self.$route.params.customizedModuleName)){
+              a.push(item)
             }
           }
         })
