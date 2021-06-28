@@ -518,7 +518,7 @@ class BtnConfig {
         break
       case 'splitOrder':
         funName = 'splitOrderHandler'
-        tips = 'b4'
+        tips = 'i7'
         paramsType = 5
         break
       case 'exportClick':
