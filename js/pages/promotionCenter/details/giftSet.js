@@ -1,7 +1,7 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import detailtabs from 'allpages/promotionCenter/details/tableTabs.vue';
 import SingleBox from 'professionalComponents/singleBox';
-import { tableCols } from '../promotionConfig';
+import { tableCols } from '../promotion.config';
 import ButtonFkDialog from 'professionalComponents/buttonFkDialog';
 import SetCommodity from 'allpages/promotionCenter/details/setCommodity';
 import businessDialog from 'professionalComponents/businessDialog';

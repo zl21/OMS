@@ -9,7 +9,7 @@ import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import groups from '@/assets/js/promotion/groups';
 import businessForm from 'professionalComponents/businessForm';
 import dateUtil from '@/assets/js/__utils__/date.js';
-import { baseColumnDefs, logDataCol, diStatusArr } from './promotionConfig.js'
+import { baseColumnDefs, logDataCol, diStatusArr } from './promotion.config'
 
 export default {
   mixins: [isFavoriteMixin, buttonPermissionsMixin],

@@ -1,7 +1,7 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import batchTables from 'allpages/promotionCenter/details/batchTables';
 import SingleBox from 'professionalComponents/singleBox';
-import { tableCols } from '../promotionConfig';
+import { tableCols } from '../promotion.config';
 
 export default {
   name: 'InfoSet',
