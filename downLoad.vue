@@ -140,6 +140,7 @@ export default {
   },
   mounted() {
     const self = this;
+    window.custSelf = self
     this.downLoadFormConfig = this.modalConfig[this.tableName].formConfig;
     if (this.$route.params.tableName == "IP_B_JITX_DELIVERY") {
       self.downLoadFormConfig.formValue.order_status = "NEW";
