@@ -19,7 +19,6 @@ export default {
   data() {
     return {
       freshKey: 0,
-      vmI18n: $i18n,
       vueMark: 'addOrEditActi',
       btnConfig: {
         typeAll: 'default',
@@ -44,79 +43,7 @@ export default {
           },
         ]
       },
-      extendBtn:[
-        {
-          webname:'PM_C_PROM_ACTI_RETURN_B',
-          text: $i18n.t('btn.back'), // 返回
-          btnclick: () => {
-            this.close();
-          }
-        },
-        {
-          webname:'PM_C_PROM_ACTI_SAVE',
-          text: $i18n.t('btn.saveDraft'), // 保存草稿
-          btnclick: () => {
-            this.saveDraft();
-          }
-        },
-        {
-          webname:'PM_C_PROM_ACTI_PUBLISH',
-          text: $i18n.t('btn.publish'), // 发布
-          btnclick: () => {
-            this.publish();
-          }
-        },
-      ],
-      objid: '-1', // 新增-1 保存的正整数
       dialogVisible: false,
-      basic_info: {
-        activity_name: '', // 活动名称【必填】
-        stores: {
-          itemdata: {
-            // colid: $store.state.forginkeys.columnIds.shop || '1700805184',
-            colid: '171929',
-            serviceId: "r3-cp",
-            colname: 'CP_C_SHOP_ID', // 当前字段的名称
-            fkdisplay: 'drp', // 外键关联类型
-            isfk: true, // 是否有fk键
-            isnotnull: true, // 是否必填
-            // name: "店铺名称", // input前面显示的lable值
-            name: $i18n.t('table_label.shopName'),
-            readonly: false, // 是否可编辑，对应input   readonly属性
-            isOneData: true,
-            valuedata: '', // 这个是选择的值
-            isObject: true,
-            version:'1.4'
-          }
-        }, // 多选店仓信息
-        order_type: [], // 订单类型,选项1，2，3
-        platform_mark: [], // 平台标记
-        time_type: '', // 时间类型【必填】
-        time_limit: '', // 时间范围
-        offline_time: '', // 下线时间
-        activity_type: '', // 活动类型
-        gradient_gift: '', // 梯度赠送,"1"是是 “0”是否
-        order_notes_type: '', // 订单备注 1买家留言 2卖家留言
-        order_note_content: '', // 备注内容
-        except_provinces: {
-          itemdata: {
-            colid: '180257',
-            serviceId: "r3-cp",
-            colname: 'CP_C_PROVINCE_IDS',
-            fkdisplay: 'mrp',
-            isfk: true,
-            isnotnull: false,
-            // name: "排除省",
-            name: $i18n.t('common.exclude_province'),
-            readonly: false,
-            valuedata: '',
-            version:'1.4'
-          }
-        }, // 排除省份
-        buyer_limit_frequency: '', // 单个买家参与活动次数  0-不限制 1-限制
-        buyer_max_frequency: '1', // 最大次数
-        status: '1' // 促销状态
-      },
       condition_info_setting: {
         // 条件信息设置
         products_join: '1', // 商品参与方式  1-非搭配 2-搭配
@@ -160,49 +87,7 @@ export default {
         gift_productsArrs: [],
         gift_commoditylist: []
       },
-      batch_infos_setting: {
-        // 【批量】条件信息设置
-        products_origin: '1', // 商品来源  1-系统商品  2-平台商品
-        gift_doubles: '1', // 赠品翻倍 1--翻倍 0-不翻倍
-        max_doubles_limits: '999', // 最大翻倍次数
-        gift_methods: '1', // 赠送方式  1-全部送  2-顺序送  3-随机送
-        list: [
-          {
-            gift_products: {},
-            products: {} // 商品列表
-          }
-        ]
-      },
-      stepsBar: [
-        {
-          class: 'icon-jibenxinxi',
-          // content: "基础信息",
-          content: $i18n.t('other.basic_info'),
-          finish: false
-        },
-        {
-          class: 'icon-liuchengtiaojian',
-          // content: "条件信息",
-          content: $i18n.t('other.condition_info'),
-          finish: false
-        },
-        {
-          class: 'icon-zengpin',
-          // content: "赠品信息",
-          content: $i18n.t('other.gift_info'),
-          finish: false
-        },
-        {
-          class: 'icon-huodong',
-          // content: "活动概览",
-          content: $i18n.t('other.activity_overview'),
-          finish: false
-        }
-      ],
-      current: 0,
       loadDis: false, // 是否加载促销详情
-      isScorlling: false, // 是否在滚动中
-      loading: false
     };
   },
   computed: {
@@ -213,12 +98,6 @@ export default {
     },
   },
   watch: {
-    current() {
-      if (!this.isScorlling) {
-        // 非手动滚动时候触发
-        this.scorllArea();
-      }
-    },
     stepsBar: {
       handler(bars) {
         if (bars[0].finish === true && bars[1].finish === true && bars[2].finish === true) {
@@ -417,42 +296,6 @@ export default {
         this.loading = false;
       }
     },
-    // 发布
-    async publish() {
-      const validateRes = this.validateModule();
-      for (const it of validateRes) {
-        if (it.code === -1) return this.$Message.error(it.message);
-      }
-      // const index = this.basic_info.activity_type + new Date().Format('yyyyMMddHHMMSS');
-      const ids = [];
-      ids[0] = this.basic_info.objid;
-      const params = {
-        objid: -1, // 默认参数 保持格式统一 传死-1
-        isBatch: true, // 是否批量 传true
-        fixcolumn: {
-          ids,
-          status: 2
-        }
-      };
-      this.loading = true;
-      // 发布
-      const formData = new FormData();
-      formData.append('param', JSON.stringify(params));
-      try {
-        const {
-          data: { code, message }
-        } = await this.service.promotionCenter.updatePmStatus(formData);
-        if (code === 0) {
-          this.$Message.success(message);
-          this.$nextTick(() => {
-            this.getData(this.objid);
-          });
-        }
-        this.loading = false;
-      } catch (error) {
-        this.loading = false;
-      }
-    },
     /**
      * 新增 初始化数据
      */
@@ -499,12 +342,6 @@ export default {
         this.$refs.basicSteps.scrollTop = this.area_0 + this.area_1;
       }
       this.validateModule();
-    },
-    /**
-     *
-     */
-    addListener() {
-      this.$refs.basicSteps.addEventListener('scroll', this.handleScrollByUser);
     },
     /**
      * 用户手动滚动,监听页面滚动

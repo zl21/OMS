@@ -13,7 +13,6 @@ export default {
 	mixins: [promotionMixin()],
   data() {
     return {
-      vmI18n: $i18n,
       btnConfig: {
         typeAll: 'default',
         buttons: [
