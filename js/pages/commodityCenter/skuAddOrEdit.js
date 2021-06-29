@@ -187,6 +187,7 @@ export default {
           style: 'textarea',
           colname: 'SPEC_REMARK',
           width: '24',
+          maxlength:255,
           inputChange: () => {
             this.masterModifyData('SPEC_REMARK', 'master');
           },
