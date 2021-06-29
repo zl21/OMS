@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-06-07 20:40:40
+ * @LastEditTime: 2021-06-29 10:49:05
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/js/pages/orderCenter/vipJit/distributionOrderList.js
+ */
 import businessActionTable from 'professionalComponents/businessActionTable.vue';
 import R3 from '@syman/burgeon-r3';
 
@@ -14,7 +22,7 @@ export default {
         current: 1,
         pageShow: true,
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         indexColumn: true,
         columns: [

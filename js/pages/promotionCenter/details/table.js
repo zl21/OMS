@@ -74,7 +74,7 @@ export default {
       return cols;
     },
     pageSizeOpts() {
-      return [10, 20, 30];
+      return [10, 20, 30,50,100];
     },
     height() {
       if (this.pageSize === 10) {
