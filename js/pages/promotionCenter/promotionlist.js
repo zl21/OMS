@@ -62,7 +62,6 @@ export default {
             transfer: true,
             ghost: false, // 是否关闭幽灵按钮，默认开启
             onChange: () => {
-              this.handleChange();
             },
             clearable: true,
           },
@@ -192,7 +191,7 @@ export default {
           label: $i18n.t('common.all'), // 全部
           agTableConfig: {
             isIndex: true,
-            tableHeight: '100px',
+            tableHeight: '480px',
             columnDefs: baseColumnDefs,
             rowData: [],
             renderArr: {
@@ -217,7 +216,7 @@ export default {
           label: $i18n.t('btn.published'), // 已发布
           agTableConfig: {
             isIndex: true,
-            tableHeight: '',
+            tableHeight: '480px',
             columnDefs: baseColumnDefs,
             rowData: [],
             renderArr: {
@@ -251,7 +250,7 @@ export default {
           label: $i18n.t('btn.draft'), // 草稿
           agTableConfig: {
             isIndex: true,
-            tableHeight: '',
+            tableHeight: '480px',
             columnDefs: baseColumnDefs,
             rowData: [],
             renderArr: {
@@ -285,7 +284,7 @@ export default {
           label: $i18n.t('other.offline_expired'), // 下线/过期
           agTableConfig: {
             isIndex: true,
-            tableHeight: '',
+            tableHeight: '480px',
             columnDefs: baseColumnDefs,
             rowData: [],
             renderArr: {
@@ -465,7 +464,7 @@ export default {
     // });
     this.loading = true;
     // 计算高度 通过设置节点 'totalHeight'
-    await this.$comUtils.setTableHeight(this, 165);
+    await this.$comUtils.setTableHeight(this, 230);
 
     await this.times(); // 默认时间
 
@@ -485,9 +484,9 @@ export default {
     // 日期格式转换
     formatDate(time) {
       if (time instanceof Array && time[0]) {
-        const start = dateUtil.getFormatDate(time[0], 'yyyy-MM-dd HH:mm:ss');
-        const end = dateUtil.getFormatDate(time[1], 'yyyy-MM-dd HH:mm:ss');
-        return start + '~' + end
+        const start = dateUtil.getFormatDate(time[0], 'yyyyMMdd');
+        const end = dateUtil.getFormatDate(time[1], 'yyyyMMddHH');
+        return start + '-' + end
       } else {
         const date = new Date(time);
         const resTime = dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
@@ -539,7 +538,7 @@ export default {
         ACTISTATUS: this.formConfig.formValue.STATUS.join(',').replace('bSelect-all', 0), // 活动状态
         SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
         ACTI_PRO: this.product.itemdata_xitong, // 款号0
-        ACTI_DATE: this.formConfig.formValue.acti_date ? this.acti_date.join('-') : '', // 活动日期0
+        ACTI_DATE: this.formConfig.formValue.acti_date ? this.formatDate(this.formConfig.formValue.acti_date) : '', // 活动日期0
         ACTI_NAME: this.formConfig.formValue.acti_name, // 活动名称
         GROUP_NAME: this.formConfig.formValue.acti_group, // 活动分组
         RELEASE_NAME: this.formConfig.formValue.release_name, // 发布人
