@@ -187,6 +187,7 @@ export default {
           style: 'textarea',
           colname: 'SPEC_REMARK',
           width: '24',
+          maxlength:255,
           inputChange: () => {
             this.masterModifyData('SPEC_REMARK', 'master');
           },
@@ -459,7 +460,7 @@ export default {
         console.log('buttons::', this.btnConfig.buttons, 'res::', res);
       })
     },
-    /* -------------------- 详情初始化 start -------------------- */
+    /* -------------------- 详情/SPU新增SKU 初始化 start -------------------- */
     async initObjItem(id) {
       const self = this;
       this.loading = true;
@@ -467,7 +468,7 @@ export default {
       // this.watchChange = false;
       self.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, self.formConfig);
       // self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基础信息', ['SALES_STATUS', 'PURCHASE_STATUS']);
-      if (self.ID > 0 && self.$route.query.spuid) {
+      if (self.ID > 0 && self.$route.query.spuid && !self.$route.query.isSpuSave) {
         self.formConfig.formData[0].itemdata.valuedata = self.$route.query.spucode;
         self.formConfig.formData[0].itemdata.readonly = true;
         self.spuID = self.$route.query.spucode;
@@ -739,7 +740,8 @@ export default {
               label: 'SKU编辑',
               query: Object.assign({
                 spuid: this.spuID,
-                spucode: this.formConfig.formValue.ECODE || ''
+                spucode: this.formConfig.formValue.ECODE || '',
+                isSpuSave: true,
               })
             });
           } else {
