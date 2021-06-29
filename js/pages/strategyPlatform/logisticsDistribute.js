@@ -32,7 +32,7 @@ export default {
           {
             text: '保存',
             isShow: false,
-            webname:"ST_C_DELIVERY_AREA_save",
+            webname: "ST_C_DELIVERY_AREA_save",
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.getCheckedNodes("1");
@@ -40,7 +40,7 @@ export default {
           },
           {
             isShow: false,
-            webname:"ST_C_DELIVERY_AREA_back",
+            webname: "ST_C_DELIVERY_AREA_back",
             text: $i18n.t('btn.back'),
             btnclick: this.back
           }
@@ -52,14 +52,14 @@ export default {
           {
             text: '添加区域',
             isShow: false,
-            webname:"ST_C_DELIVERY_AREA_addArea",
+            webname: "ST_C_DELIVERY_AREA_addArea",
             disabled: false, // 按钮禁用控制
             btnclick: this.addRegion
           },
           {
             text: '删除区域',
             isShow: false,
-            webname:"ST_C_DELIVERY_AREA_deleteArea",
+            webname: "ST_C_DELIVERY_AREA_deleteArea",
             disabled: false, // 按钮禁用控制
             btnclick: this.fndel
           }
@@ -273,8 +273,12 @@ export default {
               }
             },
             event: {
+              "on-clear":(v)=>{
+                this.queryForm('排除地区').item.props.data = []
+                this.cpCRegionProvinceId = '';
+                this.cpCRegionProvinceEname = '';
+              },
               "on-popper-show": () => {
-
                 this.startindex = 0
                 this.querList("", this.fixedcolumns);
               },
@@ -385,7 +389,7 @@ export default {
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
         current: 1,
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       },
       // tableColumns: [],
@@ -416,7 +420,7 @@ export default {
       cpCRegionProvinceEname: '', //省份名称
       cpCRegionProvinceEcode: '',
       tableSelectArr: [],
-      tableshow: false, //表格是否显示
+      tableshow: true, //表格是否显示
       stCDeliveryAreaRegionItemList: [],
       labelDefaultValue: 'jiben', // 设置tab默认值
       // tab切换配置
@@ -460,14 +464,12 @@ export default {
     if (customizedModuleId == 'New') {
 
       this.id = '-1';
-      this.tableshow = false;
+      this.tableshow = true;
       this.labelList = [{
         label: '基本信息',
         value: 'jiben'
       },]
     } else {
-
-
       let areaRange = this.AliasFormConfig.formValue.REGION_TYPE;
       let item = this.queryForm('排除省份');
       if (areaRange == 1) {
@@ -483,8 +485,8 @@ export default {
     }
 
 
-      this.getBtns()
-    
+    this.getBtns()
+
   },
   methods: {
     getBtns() {
@@ -843,19 +845,22 @@ export default {
     fnSave(type) {
       let areaRange = this.AliasFormConfig.formValue.REGION_TYPE;
       let { cpCLogisticsEname, cpCLogisticsId, remark } = this.FormConfig.formValue;
-      if (this.id != "-1") {
-        if (areaRange == 1) {
-          if (this.stCDeliveryAreaRegionItemList[0].cpCRegionProvinceId == "") {
-            this.$Message.warning('请选择排除省份！');
-            return
-          }
-        } else {
-          if (!this.fixedcolumns) {
-            this.$Message.warning('请选择支持省份！');
-            return
+      if (type != 1) {
+        if (this.id != "-1") {
+          if (areaRange == 1) {
+            if (this.stCDeliveryAreaRegionItemList[0].cpCRegionProvinceId == "") {
+              this.$Message.warning('请选择排除省份！');
+              return
+            }
+          } else {
+            if (!this.fixedcolumns) {
+              this.$Message.warning('请选择支持省份！');
+              return
+            }
           }
         }
       }
+    
 
 
       this.modal1 = false;
