@@ -55,6 +55,7 @@
       /> -->
        <businessAgTable
       :ag-table-config="agTableConfig"
+      :options="options"
       @on-row-dblclick="onRowDblclick"
       @on-page-change="pageChange"
       @on-page-size-change="pageSizeChange"

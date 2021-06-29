@@ -571,6 +571,10 @@
             }
         },
         },
+        options:{
+          datas:{},
+          floatingFilter:false
+        },
         dynamicData: {},
         modifyWarehouse:{
           componentData:{}
