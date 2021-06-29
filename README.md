@@ -245,3 +245,4 @@
 | v1.2.4 | switch组件showText |
 | v1.2.5 | download优化 |  
 | v1.2.6 | businessForm组件textarea优化 |  
+| v1.2.7 | businessAgTable组件添加ag表格原生配置 |  
