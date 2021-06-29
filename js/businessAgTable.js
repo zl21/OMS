@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-21 10:17:52
- * @LastEditTime: 2021-06-22 16:13:04
+ * @LastEditTime: 2021-06-29 16:08:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/js/vueAgTable.js
@@ -20,20 +20,21 @@ export default {
             type:Object,
             default: {}
         },
+        options:{
+            type:Object,
+            default:{
+                datas: {}
+            }
+        }
     },
     data() {
         return {
-            options: {
-                datas: {
-                },
-            },
         }
     },
     methods: {
         gridReady() {
             // this.tabth = [];
             // this.row = [];
-            console.log(this.tabth);
         },
         tableRowDbclick(data){
             this.$emit('on-row-dblclick' , data.data);
