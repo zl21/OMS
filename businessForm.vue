@@ -305,7 +305,11 @@
                     :prop="item.value || item.colname">
             <i-switch v-model="formConfig.formValue[`${item.value || item.colname}`]" 
                       :size="item.size || 'small'" 
-                      @on-change="runMethods(item.switchChange)" />
+                      :disabled="item.disabled"
+                      @on-change="runMethods(item.switchChange)" >
+                    <span v-if="item.showText" slot="open">{{item.showText.open || '开启'}}</span>
+                    <span v-if="item.showText" slot="close">{{item.showText.open || '关闭'}}</span>
+            </i-switch>
           </FormItem>
 
           <!-- 插槽 -->
