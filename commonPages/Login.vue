@@ -116,7 +116,7 @@ export default {
   }
   /*整块内容*/
   .container {
-    width: 50%;
+    width: 1024px;
     height: 480px;
     position: absolute;
     top: 50%;
