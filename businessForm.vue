@@ -55,6 +55,7 @@
             <Input v-model="formConfig.formValue[`${item.value || item.colname}`]"
                    :disabled='item.disabled'
                    :type="item.style"
+                   :maxlength="item.maxlength"
                    :autosize="item.autosize ? item.autosize : {minRows: 2,maxRows: 5}"
                    :placeholder="item.placeholder ? item.placeholder : ''" 
                    @on-enter="runMethods(item.inputenter)"
