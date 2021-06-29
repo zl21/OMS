@@ -85,4 +85,9 @@ export default {
   MATCHINGDETAILS: { //_/views/pages/orderCenter/matchingDetails.vue
     component: () => import('allpages/orderCenter/matchingDetails.vue'),
   },
+  // 退换货单新增
+  OC_B_RETURN_ORDER_VIRTUAL_TABLE: {
+    component: () => import('allpages/orderCenter/returnOrder/returnOrderAdd.vue'),
+    labelName: '退换货新增',
+  },
 };

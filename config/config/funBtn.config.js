@@ -1311,7 +1311,7 @@ class BtnConfig {
         tips = 'fu';
         break;
       }
-      if (item.RESERVE_VARCHAR03_NAME !== '预售订单' && item.PAY_STATUS !== '全部付款') {  // '非预售' && '预售尾款已付'
+      if (item.ORDER_TYPE !== '预售订单' && item.PAY_STATUS !== '全部付款') {  // '非预售' && '预售尾款已付'
         tips = 'fw';
         break;
       }

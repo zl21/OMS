@@ -14,11 +14,11 @@ class DropDownConfig {
     this.singleType = singleType
     switch (val) {
       case 'manualReturnCreation': {
-        // commonUtils.navigateMain(-1, 'TabOpen', 'RETURNORDERADD', 'panel_label.addReturnOrder')
+        // commonUtils.navigateMain(-1, 'TabOpen', 'OC_B_RETURN_ORDER_VIRTUAL_TABLE', 'panel_label.addReturnOrder')
         R3.store.commit('global/tabOpen', {
           type: 'C',
           label: '退货单新增',
-          customizedModuleName: 'RETURNORDERADD',
+          customizedModuleName: 'OC_B_RETURN_ORDER_VIRTUAL_TABLE',
           customizedModuleId: 'New',
         })
         break
