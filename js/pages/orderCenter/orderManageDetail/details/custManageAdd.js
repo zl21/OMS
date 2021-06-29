@@ -80,7 +80,7 @@ export default {
         height: '300', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 1000, // 每页条数
         totalData: [] // 总计
       },

@@ -212,7 +212,7 @@ export default {
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         pageIndex: 1, // 页码
       },
