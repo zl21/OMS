@@ -777,19 +777,20 @@ export default {
       }
     },
     Reset() {
-      this.acti_no = ''; // 活动编号
-      this.times(); // 活动日期:
-      this.acti_name = ''; // 活动名称
-      this.actiTypes = ['bSelect-all']; // 活动类型:
-      this.orderTypes = ['bSelect-all']; // 订单类型:
+      this.formConfig.formValue.acti_no = ''; // 活动编号
+      // this.times(); // 活动日期:
+      this.formConfig.formValue.acti_date = [`${this.setData(0, true)}`, `${this.setData(7)}`];
+      this.formConfig.formValue.acti_name = ''; // 活动名称
+      // this.actiTypes = ['bSelect-all']; // 活动类型:
+      // this.orderTypes = ['bSelect-all']; // 订单类型:
       this.my_input_sh.itemdata.valuedata = ''; // 线上店铺
       this.my_input_sh.itemdata.pid = ''; // 线上店铺
-      this.product.itemdata_xitong.valuedata = ''; // 参与商品
-      this.product.itemdata_xitong.pid = ''; // 参与商品
-      this.product.itemdata_xitong.channelList = ''; // 参与商品
-      this.acti_group = ''; // 分组
-      this.release_name = ''; // 操作人
-      this.STATUS = [1, 2]; // 状态
+      // this.product.itemdata_xitong.valuedata = ''; // 参与商品
+      // this.product.itemdata_xitong.pid = ''; // 参与商品
+      // this.product.itemdata_xitong.channelList = ''; // 参与商品
+      this.formConfig.formValue.acti_group = ''; // 分组
+      this.formConfig.formValue.release_name = ''; // 操作人
+      this.formConfig.formValue.STATUS = [1, 2]; // 状态
     }, // 重置
     async handDblClick(row) {
       // 双击事件
