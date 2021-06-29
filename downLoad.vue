@@ -199,6 +199,9 @@ export default {
       this.$refs.dialog.openConfirm();
     },
   },
+  destroyed() {
+    window.custSelf = null
+  }
 };
 </script>
 

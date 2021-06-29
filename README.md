@@ -243,3 +243,4 @@
 | v1.2.2 | fkdialog-兼容斯凯奇接口返回格式 |
 | v1.2.3 | download优化 |
 | v1.2.4 | switch组件showText |
+| v1.2.5 | download优化 |
