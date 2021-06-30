@@ -1,7 +1,7 @@
 
   import dateUtil from '@/assets/js/__utils__/date.js';
-
   export default {
+    // 支付宝原始账单-下载账单
     formConfig: {
       formValue: {
         isDate: 'true',
@@ -42,7 +42,7 @@
           oneObj: (e) => {
             console.log(e);
             const { rowItem } = e
-            window.custSelf.downLoadFormConfig.formValue.accountCode = rowItem ? rowItem.ALIPAY_ACCOUNT.val : ''
+            window.custSelf.downLoadFormConfig.formValue.accountCode = rowItem ? rowItem.ALIPAY_ACCOUNT_NAME.val : ''
           }
         },
         {
