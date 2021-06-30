@@ -297,6 +297,9 @@ export default {
     getList() {
       const self = this;
       let obj = { "table": "OC_B_LABEL", "startindex": 0, "range": 10, "fixedcolumns": {"ISACTIVE":["Y"]}, "column_include_uicontroller": true, "isolr": false };
+      if(self.componentData.title == '取消标记'){
+        obj.fixedcolumns.IS_SYSTEM = 0;
+      }
       let formdata = new FormData();
       formdata.append('searchdata', JSON.stringify(obj));
       self.service.orderCenter.queryFlagList(formdata).then(res => {

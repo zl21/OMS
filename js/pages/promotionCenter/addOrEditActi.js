@@ -260,10 +260,11 @@ export default {
       formData.append('param', JSON.stringify(params));
       try {
         const {
-          data: { code, data }
+          data: { code, data , message}
         } = await this.service.promotionCenter.savePm(formData);
         if (code === 0) {
-          this.$Message.message($i18n.t('modalTips.z9'));
+          // this.$Message.message($i18n.t('modalTips.z9'));
+          this.$OMS2.omsUtils.msgTips(this, 'success', message, 0);
           /* this.$message({
             type: 'success',
             message: $i18n.t('modalTips.z9') // 保存成功
@@ -275,7 +276,8 @@ export default {
           // }
           this.objid = String(data.objid) || -1;
           this.$nextTick(() => {
-            this.getData(data.objid);
+            // this.getData(data.objid);
+            $omsUtils.tabJump(0, data.objid, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.editPromotion' }, {}, 0)
             // $store.commit(action, {
             //   type: 'C', // 类型action
             //   customizedModuleId: this.objid, // id
