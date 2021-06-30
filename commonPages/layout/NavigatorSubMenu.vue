@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-29 10:56:54
- * @LastEditTime: 2021-06-30 14:58:28
+ * @LastEditTime: 2021-06-30 19:04:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layput/NavigatorSubMenu.vue
@@ -32,6 +32,9 @@
 }
 </script>
 <style lang="less">
+.NavigatorVertical .left img.banner{
+   display: none;
+}
 .NavigatorVertical{
   // 提示图标
   .ark-tooltip, .ark-tooltip-rel{
@@ -45,6 +48,10 @@
   &.transferLeft{
     width: 55px;
     overflow: inherit;
+    .left{
+      background: url(../../assets/img/mini-logo.png) right no-repeat #4855AF;
+      background-size:100% auto ;
+    }
     .middle{
       overflow: inherit;
     }
@@ -72,6 +79,11 @@
   // 展开
   &.transferRight{
     width: 180px;
+    .left{
+      display: block;
+      background: url(../../assets/img/menuLogo.png) right no-repeat #4855AF;
+      background-size:100% auto;
+    }
     .ark-tooltip, .ark-tooltip-rel{
       pointer-events: none;
     }
@@ -79,8 +91,8 @@
   // 展开部分
   div .navigator-sub-menu{
     width: auto !important;
-    top: 0 !important;
-    height: 100%;
+    top: 60px !important;
+    height: calc(100% - 60px);
     max-height: initial;
     box-shadow: 16px 0 10px 0 rgba(0,0,0,.05)!important;
   }
