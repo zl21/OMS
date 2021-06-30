@@ -531,7 +531,7 @@ export default {
         style: 'input', //输入框类型
         label: '数量', //输入框前文字
         value: 'number', //输入框的值
-        regx: /^\d+$|^\d+[.]?\d+$/,
+        regx: /^[1-9]\d*(\.\d+)?$/,
         maxlength:7,
         columns: ['number'],
         width: '7',

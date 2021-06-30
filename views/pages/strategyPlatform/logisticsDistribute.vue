@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-20 13:39:45
- * @LastEditTime: 2021-06-29 16:11:14
+ * @LastEditTime: 2021-06-30 15:00:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/logisticsDistribute.vue
@@ -89,7 +89,9 @@
           @click="getCheckedNodes"
           >保存</Button
         >
-        <Button type="primary" @click="fnCancel" class="btn-quxiao">取消</Button>
+        <Button type="primary" @click="fnCancel" class="btn-quxiao"
+          >取消</Button
+        >
       </div>
     </Modal>
   </div>

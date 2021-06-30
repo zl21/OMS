@@ -29,7 +29,6 @@
             @on-select-change="menuTreeChange"
           />
         </div>
-     
       </div>
       <div class="contentRight">
         <div class="left-tree">
@@ -476,7 +475,7 @@ export default {
       unCommitThMinWidth: '74px', // 反提交的宽度
       upperTableTbodyHighlightIndex: 0, // 上边表格高亮的下标
       bottomTableTbodyHighlightIndex: null, // 下边表格高亮的下标
-     // quanXianType: this.$route.query.type,//判断权限类型
+      // quanXianType: this.$route.query.type,//判断权限类型
       treeDataCenter: []
     };
   },
@@ -649,7 +648,7 @@ export default {
       this.menuTreeQuery = e.target.value;
     }, // 检索输入框值改变
     menuTreeChange(val, item) {
-     
+
       this.oldMenuTreeObj = JSON.parse(JSON.stringify(this.newMenuTreeObj));
       this.newMenuTreeObj = JSON.parse(JSON.stringify(item));
       if (val.length === 0) {
@@ -671,16 +670,16 @@ export default {
       }
     }, // 左侧树点击
     getTreeData(resolve, reject) {
-   
+
       functionPowerActions().getMenuTree({
         success: (res) => {
           if (res.data.code === 0) {
             resolve();
             const resData = res.data.data;
             this.restructureTreeDada(resData);
-             this.treeData = [...resData];
+            this.treeData = [...resData];
             // if (this.quanXianType == 'function') {
-             
+
             // } else if (this.quanXianType == 'data') {
             //   this.treeData = this.treeDataCenter
             // }
@@ -732,7 +731,7 @@ export default {
       });
 
 
-    
+
 
     }, // 获取菜单数据
     restructureMenuTreeData(data, first) {
@@ -923,7 +922,7 @@ export default {
       return true;
     }, // 获取表格里的扩展是否选中
     treeChange(val, obj) {
-   
+
       if (obj.id == "-1") {
         obj.expand = !obj.expand
         return
@@ -2080,14 +2079,15 @@ export default {
     display: flex;
     justify-content: flex-end;
     .Button {
-      margin-left: 10px;
-      min-width: 0;
-      padding: 0 8px;
-      border-radius: 2px;
-      font-size: 12px;
-      font-weight: 400;
-      box-sizing: border-box;
-      height: 22px;
+    box-sizing: border-box;
+    font-size: 12px;
+    height: 32px;
+    line-height: 30px;
+    padding: 0 12px;
+    border-radius: 5px;
+    color: #fff;
+    border: 1px solid #4855af;
+    background-color: #4855af;
       span {
         vertical-align: initial;
       }

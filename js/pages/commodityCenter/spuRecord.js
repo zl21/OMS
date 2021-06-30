@@ -450,6 +450,7 @@ export default {
             label: '产品介绍',
             value: 'REMARK',
             width: '24',
+            maxlength:255,
             inputChange: () => {
               this.masterModifyData('REMARK', 'master', '');
             }

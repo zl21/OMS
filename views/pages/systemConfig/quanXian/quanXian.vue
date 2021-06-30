@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-07 20:40:41
- * @LastEditTime: 2021-06-29 17:46:54
+ * @LastEditTime: 2021-06-30 19:55:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/systemConfig/quanXian/quanXian.vue
@@ -24,7 +24,7 @@
       </div>
 
       <div class="contentLeft contentRight">
-        <div class="tree-center left-tree">
+        <div class="tree-center ">
           <Tree ref="tree" :data="treeData" @on-select-change="treeChange" />
         </div>
       </div>

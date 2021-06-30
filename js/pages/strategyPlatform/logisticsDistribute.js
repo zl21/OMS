@@ -57,6 +57,29 @@ export default {
             btnclick: this.addRegion
           },
           {
+            text: '支持省份',
+            isShow: false,
+            webname: "ST_C_DELIVERY_AREA_support",
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.formconfig2[0].show = true;
+              this.formconfig2[1].show = false;
+              this.formconfig2[2].show = false;
+              this.modal1 = true;
+            }
+          },
+          {
+            text: '排除省份',
+            isShow: false,
+            webname: "ST_C_DELIVERY_AREA_exclude",
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.formconfig2[0].show = false;
+              this.formconfig2[1].show = true;
+              this.formconfig2[2].show = true;
+              this.modal1 = true;
+            }
+          },{
             text: '删除区域',
             isShow: false,
             webname: "ST_C_DELIVERY_AREA_deleteArea",
@@ -88,20 +111,35 @@ export default {
             radioChange: () => {
               const val = this.formConfig.formValue.REGION_TYPE;
               let item = this.queryForm('排除省份');
+
               if (val == 2) {
                 this.modalTitle = '添加支持省份';
                 this.formconfig2[0].show = true;
                 this.tableConfig.columns[2].title = '配送省份';
                 item.item.required = false
+
+                this.btnConfig2.buttons[0].isShow = false
+                this.btnConfig2.buttons[1].isShow = true
+                this.btnConfig2.buttons[2].isShow = true
+                this.btnConfig2.buttons[3].isShow = true
+
               } else {
                 item.item.required = true
                 this.modalTitle = '添加排除区域';
                 this.tableConfig.columns[2].title = '排除省份';
                 this.formconfig2[0].show = false;
+
+                this.btnConfig2.buttons[0].isShow = true
+                this.btnConfig2.buttons[1].isShow = false
+                this.btnConfig2.buttons[2].isShow = false
+                this.btnConfig2.buttons[3].isShow = true
+
               }
               if (this.id != '-1') {
                 this.init(this.id, 'select');
               }
+
+
             }
           }
         ],
@@ -273,7 +311,7 @@ export default {
               }
             },
             event: {
-              "on-clear":(v)=>{
+              "on-clear": (v) => {
                 this.queryForm('排除地区').item.props.data = []
                 this.cpCRegionProvinceId = '';
                 this.cpCRegionProvinceEname = '';
@@ -499,6 +537,14 @@ export default {
         this.btnConfig2.buttons.forEach(x => {
           SUB_ACTIONS.some(y => y.webname == x.webname) && (x.isShow = true)
         })
+        //初始化判断支持范围是啥，确认按钮展现形式
+        let areaRange = this.AliasFormConfig.formValue.REGION_TYPE;
+        if (areaRange == 1) {
+          this.btnConfig2.buttons[1].isShow = false
+          this.btnConfig2.buttons[2].isShow = false
+        } else {
+          this.btnConfig2.buttons[0].isShow = false
+        }
 
       })
     },
@@ -582,11 +628,24 @@ export default {
           this.modalTitle = '添加支持省份';
           this.formconfig2[0].show = true;
           this.tableConfig.columns[2].title = '配送省份';
+
+          this.btnConfig2.buttons[0].isShow = false
+          this.btnConfig2.buttons[1].isShow = true
+          this.btnConfig2.buttons[2].isShow = true
+          this.btnConfig2.buttons[3].isShow = true
+                
         } else {
           this.modalTitle = '添加排除区域';
           this.tableConfig.columns[2].title = '排除省份';
           this.formconfig2[0].show = false;
+
+          this.btnConfig2.buttons[0].isShow = true
+          this.btnConfig2.buttons[1].isShow = false
+          this.btnConfig2.buttons[2].isShow = false
+          this.btnConfig2.buttons[3].isShow = true
         }
+
+
 
         this.FormConfig.formData[0].itemdata.valuedata = stCDeliveryArea.cpCLogisticsEname;
         this.FormConfig.formData[0].itemdata.pid = stCDeliveryArea.cpCLogisticsId;
@@ -803,6 +862,10 @@ export default {
       });
     },
     addRegion() {
+      this.formconfig2[0].show = false;
+      this.formconfig2[1].show = true;
+      this.formconfig2[2].show = true;
+      
       this.modal1 = true;
       //添加区域
       this.querList();
@@ -860,7 +923,7 @@ export default {
           }
         }
       }
-    
+
 
 
       this.modal1 = false;
