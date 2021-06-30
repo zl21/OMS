@@ -1337,23 +1337,26 @@ class BtnConfig {
   }
   // 取消合并订单 (不要动！！！)
   cancelMergeOrderHandler(self, selection) {
-    for (const item of self.selection) {
-      //判断合单状态
-      if (!item.IS_MERGE) {
-        // 未合并的订单不允许进行取消合并!
-        commonUtils.msgTips(self, 'warning', 'fx');
-        self.btnConfig.loading = false
-        return
-      }
-      // ['缺货', '待审核', '已审核']
-      // 待审核：1；PRD上：仅限制非'待审核'的单据
-      // if (!['缺货', '待审核', '已审核'].includes(item.ORDER_STATUS)) {
-      if (![1].includes(item.ORDER_STATUS)) {
-        // 当前状态异常，不允许操作！
-        // commonUtils.msgTips(self, 'warning', 'd9')
-        self.$Message.warning('只允许待审核的订单进行取消合并！')
-        self.btnConfig.loading = false
-        return
+    console.log('selection.length:',selection.length);
+    if(selection.length === 1){
+      for (const item of self.selection) {
+        //判断合单状态
+        if (!item.IS_MERGE) {
+          // 未合并的订单不允许进行取消合并!
+          commonUtils.msgTips(self, 'warning', 'fx');
+          self.btnConfig.loading = false
+          return
+        }
+        // ['缺货', '待审核', '已审核']
+        // 待审核：1；PRD上：仅限制非'待审核'的单据
+        // if (!['缺货', '待审核', '已审核'].includes(item.ORDER_STATUS)) {
+        if (![1].includes(item.ORDER_STATUS)) {
+          // 当前状态异常，不允许操作！
+          // commonUtils.msgTips(self, 'warning', 'd9')
+          self.$Message.warning('只允许待审核的订单进行取消合并！')
+          self.btnConfig.loading = false
+          return
+        }
       }
     }
     const param = {

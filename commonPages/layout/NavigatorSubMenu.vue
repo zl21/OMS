@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-29 10:56:54
- * @LastEditTime: 2021-06-30 10:50:24
+ * @LastEditTime: 2021-06-30 14:58:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layput/NavigatorSubMenu.vue
@@ -9,11 +9,10 @@
 <template>
     <div>
         <Tooltip :content="data.label"  placement="right" theme="light" max-width="200">
-              <i class="iconfont icon" :class="`icon-menu-`+data.id"></i>
+          <i class="iconfont icon" :class="`icon-menu-`+data.id"></i>
         </Tooltip>
         <div class="navigator-primary-menu-div">
           <span class="displayNone">{{ data.label }}</span>
-          <!-- <span class="tips">{{ data.label }}</span> -->
         </div>
          <Icon class="displayNone" type="ios-arrow-forward" />
     </div>
@@ -29,22 +28,12 @@
         }
     },
     mounted(){
-      console.log(this.data,this.index);
-      // let iconfArr = new Map();
-      // iconfArr['接口平台'] = 'icon-xialadanxuan';
-      // let datas = JSON.parse(JSON.stringify(this.data))
-      // for(var key in iconfArr) {
-      //   if(key === this.data.label){
-      //     this.$set(this.data, 'iconf', iconfArr[key]);
-      //   }
-      // }
-      // this.$set(this.data, 'iconf', 'icon-xialadanxuan');
-      // console.log(this.$store);
     }
 }
 </script>
 <style lang="less">
 .NavigatorVertical{
+  // 提示图标
   .ark-tooltip, .ark-tooltip-rel{
     width: 20px !important;
     margin-right: 10px;
@@ -52,6 +41,7 @@
   .ark-tooltip-light.ark-tooltip-popper[x-placement=right] .ark-tooltip-arrow{
     width: 0;
   }
+  // 收起
   &.transferLeft{
     width: 55px;
     overflow: inherit;
@@ -79,25 +69,21 @@
       }
     }
   }
+  // 展开
   &.transferRight{
+    width: 180px;
     .ark-tooltip, .ark-tooltip-rel{
       pointer-events: none;
     }
   }
+  // 展开部分
+  div .navigator-sub-menu{
+    width: auto !important;
+    top: 0 !important;
+    height: 100%;
+    max-height: initial;
+    box-shadow: 16px 0 10px 0 rgba(0,0,0,.05)!important;
+  }
 }
-.navigator-primary-menu-div{
-  position: relative;
-}
-.tips{
-  display: none;
-  position: absolute;
-  right: -60px;
-  top: 0;
-  z-index: 99;
-  color: #3b49aa;
-  background-color: #F1F2FA;
-  padding: 2px 5px;
-  border-radius: 3px;
-}
-// iconfont
+
 </style>
