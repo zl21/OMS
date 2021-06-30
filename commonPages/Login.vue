@@ -41,9 +41,9 @@
           登录
           <img src="../assets/img/arrow-right.png" />
         </div>
-        <p class="fargetPws">
+        <!-- <p class="fargetPws">
           <a>忘记密码了？</a>
-        </p>
+        </p> -->
         <!-- bg -->
         <span class="login-bg-img">
           <img src="../assets/img/login-bg-img.png" />
