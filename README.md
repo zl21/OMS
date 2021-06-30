@@ -246,3 +246,4 @@
 | v1.2.5 | download优化 |  
 | v1.2.6 | businessForm组件textarea优化 |  
 | v1.2.7 | businessAgTable组件添加ag表格原生配置 |  
+| v1.2.8 | businessForm组件修改默认高度 |  

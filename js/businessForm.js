@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-27 10:38:48
- * @LastEditTime: 2021-05-19 18:15:33
+ * @LastEditTime: 2021-06-30 17:22:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/js/businessForm.js
@@ -38,14 +38,14 @@ export default {
       if (this.flodData === 'el-icon-arrow-up') {
         this.$refs[this.currentFlod].style.maxHeight = "";
       } else {
-        this.$refs[this.currentFlod].style.maxHeight = "90px";
+        this.$refs[this.currentFlod].style.maxHeight = "96px";
         this.$refs[this.currentFlod].style.overflow = "hidden";
       }
     }
   },
   mounted() {
     if (this.formConfig.flodClick) {
-      this.$refs[this.formConfig.flodClick].style.maxHeight = "90px";
+      this.$refs[this.formConfig.flodClick].style.maxHeight = "96px";
       this.$refs[this.formConfig.flodClick].style.overflow = "hidden";
     }
   },
