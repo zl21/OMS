@@ -16,7 +16,7 @@ const baseColumnDefs = [
 		maxWidth: 120,
 		headerCheckboxSelection: true,
 		checkboxSelection: true,
-		sort: 'asc',
+		sort: '10',
 		suppressMovable: true
 	},
 	{

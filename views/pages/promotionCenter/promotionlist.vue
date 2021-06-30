@@ -14,19 +14,27 @@
         <TabPane
           v-for="(user, index) in tabConfig"
           :key="index"
-          :label="`${user.label} ${user.agTableConfig.pagenation.total}`"
+          :label="`${user.label} ${user.total}`"
           :name="`${index}`"
         >
           <!-- hasNation 是否自动计算序号 -->
-          <aTable
+          <!-- <aTable
             :ref="`agGridChild${index + 1}`"
             :ag-table-config="user.agTableConfig"
             @on-page-change="pageChange"
             @on-page-size-change="pageSizeChange"
             @on-row-dblclick="handDblClick"
-          />
+          /> -->
         </TabPane>
       </Tabs>
+      <businessAgTable
+        :ag-table-config="agTableConfig"
+        :options="options"
+        @on-row-dblclick="handDblClick"
+        @on-page-change="pageChange"
+        @on-page-size-change="pageSizeChange"
+        @on-selection-change="onSelectionChange"
+      />
       <div class="promactiIcon">
         <div class="legend">
           <!-- 图例 -->

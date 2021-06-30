@@ -10,12 +10,14 @@ import groups from '@/assets/js/promotion/groups';
 import businessForm from 'professionalComponents/businessForm';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import { baseColumnDefs, logDataCol, diStatusArr } from './promotion.config'
+import businessAgTable from 'professionalComponents/businessAgTable';
 
 export default {
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
   data() {
     return {
       vmI18n: $i18n,
+      vueAgTable: true,
       loading: false,
       modal: false, // 查看日志弹框
       release_name: '', // 操作人
@@ -186,10 +188,60 @@ export default {
           valuedata: ''
         }
       ],
+      options: {
+        datas: {},
+        floatingFilter: false
+      },
+      selection: [],
+      agTableConfig: {
+        isIndex: true,
+        tableHeight: '480px',
+        columnDefs: baseColumnDefs,
+        rowData: [],
+        renderArr: {
+          ACTION_LOG: params => {
+            if (!params.data.ACTION_LOG) return;
+            const resultElement = document.createElement('div');
+            const iTag = document.createElement('div');
+            iTag.style.color = '#0f8ee9';
+            iTag.style.textDecoration = 'underline';
+            iTag.innerText = params.data.ACTION_LOG;
+            iTag.style.cursor = 'pointer';
+            iTag.onclick = () => {
+              this.viewLog(params.data);
+            };
+            resultElement.appendChild(iTag);
+          }
+        },
+        pagenation: this.$comUtils.pageConfig,
+        renderParams:(cellData)=> {
+          if (cellData.field == 'ACTION_LOG') {
+            return {
+              renderContainer: 'CellRenderByFunction',
+              renderComponent: (h, params) => {
+                return h('div', {
+                    on:{
+                      click:()=> {
+                        this.viewLog(params.row);
+                      }
+                    },
+                    domProps: { },
+                    style: {
+                      color: '#0f8ee9 ',
+                      textDecoration: 'underline ',
+                      cursor: 'pointer ',
+                    }
+                }, params.row.ACTION_LOG)
+              }
+            }
+          }
+        },
+      },
       tabConfig: [
         {
           label: $i18n.t('common.all'), // 全部
-          agTableConfig: {
+          total: 0,
+          /* agTableConfig: {
             isIndex: true,
             tableHeight: '480px',
             columnDefs: baseColumnDefs,
@@ -210,11 +262,12 @@ export default {
               }
             },
             pagenation: this.$comUtils.pageConfig,
-          }
+          } */
         },
         {
           label: $i18n.t('btn.published'), // 已发布
-          agTableConfig: {
+          total: 0,
+          /* agTableConfig: {
             isIndex: true,
             tableHeight: '480px',
             columnDefs: baseColumnDefs,
@@ -244,11 +297,12 @@ export default {
               current: 1,
               pageSizeOpts: [20, 50, 150, 1000]
             }
-          }
+          } */
         },
         {
           label: $i18n.t('btn.draft'), // 草稿
-          agTableConfig: {
+          total: 0,
+          /* agTableConfig: {
             isIndex: true,
             tableHeight: '480px',
             columnDefs: baseColumnDefs,
@@ -278,11 +332,12 @@ export default {
               current: 1,
               pageSizeOpts: [20, 50, 150, 1000]
             }
-          }
+          } */
         },
         {
           label: $i18n.t('other.offline_expired'), // 下线/过期
-          agTableConfig: {
+          total: 0,
+          /* agTableConfig: {
             isIndex: true,
             tableHeight: '480px',
             columnDefs: baseColumnDefs,
@@ -312,7 +367,7 @@ export default {
               current: 1,
               pageSizeOpts: [20, 50, 150, 1000]
             }
-          }
+          } */
         }
       ],
       product: {
@@ -432,11 +487,14 @@ export default {
     };
   },
   watch: {
-    activeName() {
-      this.getData();
+    activeName(x) {
+      this.agTableConfig.pagenation.current = 1;
+      this.agTableConfig.pagenation.pageSize = 10;
+      this.getData(x);
     }
   },
   components: {
+    businessAgTable,
     businessForm,
     businessButton,
     businessLabel,
@@ -503,12 +561,17 @@ export default {
     },
     // 分页change 事件
     pageChange(val) {
-      this.tabConfig[this.activeName].agTableConfig.pagenation.current = val;
+      // this.tabConfig[this.activeName].agTableConfig.pagenation.current = val;
+      this.agTableConfig.pagenation.current = val;
       this.getData();
+    },
+    onSelectionChange(data) {
+      this.selection = data;
     },
     // 切换分页条数
     pageSizeChange(val) {
-      this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize = val;
+      // this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize = val;
+      this.agTableConfig.pagenation.pageSize = val;
       this.getData();
     },
     getExtendObj() {
@@ -529,9 +592,15 @@ export default {
       };
     },
     // 查找
-    async getData() {
-      const currentPage = this.tabConfig[this.activeName].agTableConfig.pagenation.current;
-      const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
+    async getData(x = 0) {
+      let currentPage,pageSize;
+      if (this.vueAgTable) {
+        currentPage = this.agTableConfig.pagenation.current;
+        pageSize = this.agTableConfig.pagenation.pageSize;
+      } else {
+        currentPage = this.tabConfig[this.activeName].agTableConfig.pagenation.current;
+        pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
+      }
       const { customizedModuleName } = this.$router.currentRoute.params;
       this.loading = true;
       const params = {
@@ -554,12 +623,37 @@ export default {
       const {
         data: { code, data }
       } = await this.service.promotionCenter.selectPmList(formData);
-      if (code === 0) {
-        if (data && data.ACTI_ALL_INFO) {
-          // 全部
-          this.getAgTableData(data.ACTI_ALL_INFO, data.ACTI_ALL_NUM, 0);
+      if (code === 0 && data) {
+        let info,num;
+        this.tabConfig[0].total = data.ACTI_ALL_NUM;
+        this.tabConfig[1].total = data.ACTI_RELEASE_NUM;
+        this.tabConfig[2].total = data.ACTI_DRAFT_NUM;
+        this.tabConfig[3].total = data.ACTI_OVER_NUM;
+        switch (Number(x)) {
+          case 1:
+            info = data.ACTI_RELEASE_INFO;
+            num = data.ACTI_RELEASE_NUM;
+            break;
+          case 2:
+            info = data.ACTI_DRAFT_INFO;
+            num = data.ACTI_DRAFT_NUM;
+            break;
+          case 3:
+            info = data.ACTI_OVER_INFO;
+            num = data.ACTI_OVER_NUM;
+            break;
+          default:
+            info = data.ACTI_ALL_INFO;
+            num = data.ACTI_ALL_NUM;
+            break;
         }
-        if (data && data.ACTI_RELEASE_INFO) {
+        this.getAgTableData(info, num, x);
+        
+        /* if (data && data.ACTI_ALL_INFO) {
+          // 全部
+          this.getAgTableData(data.ACTI_ALL_INFO, data.ACTI_ALL_NUM, x || 0);
+        } */
+        /* if (data && data.ACTI_RELEASE_INFO) {
           // 1 已发布
           this.getAgTableData(data.ACTI_RELEASE_INFO, data.ACTI_RELEASE_NUM, 1);
         }
@@ -570,7 +664,7 @@ export default {
         if (data && data.ACTI_OVER_INFO) {
           // 3 下线过期
           this.getAgTableData(data.ACTI_OVER_INFO, data.ACTI_OVER_NUM, 3);
-        }
+        } */
       }
       setTimeout(() => {
         this.loading = false;
@@ -578,16 +672,34 @@ export default {
     },
     // 获取agTable数据
     getAgTableData(info, num, index) {
-      const currentPage = this.tabConfig[this.activeName].agTableConfig.pagenation.current;
-      const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
-      info.forEach((item, index) => {
-        item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-        item.ACTION_LOG = $i18n.t('other.view_log'); // 查看日志
-      });
-      const agGridChild = `agGridChild${index + 1}`;
-      this.tabConfig[index].agTableConfig.rowData = info || [];
-      this.tabConfig[index].agTableConfig.pagenation.total = num;
-      this.$refs[`${agGridChild}`][0].agGridTable(this.tabConfig[index].agTableConfig.columnDefs, this.tabConfig[index].agTableConfig.rowData, this.getExtendObj());
+      const self = this;
+      if(self.vueAgTable) {
+        const currentPage = this.agTableConfig.pagenation.current;
+        const pageSize = this.agTableConfig.pagenation.pageSize;
+        // const columns = self.agTableConfig.columnDefs;
+        const columns = JSON.parse(JSON.stringify(baseColumnDefs));
+        columns.forEach(item => {
+          item['displayName'] = item.headerName;
+        });
+        self.agTableConfig.columnDefs = columns;
+        info.forEach((item, index) => {
+          item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
+          item.ACTION_LOG = $i18n.t('other.view_log'); // 查看日志
+        });
+        self.agTableConfig.rowData = info;
+        self.agTableConfig.pagenation.total = num;
+      } else {
+        const currentPage = this.tabConfig[this.activeName].agTableConfig.pagenation.current;
+        const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
+        info.forEach((item, index) => {
+          item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
+          item.ACTION_LOG = $i18n.t('other.view_log'); // 查看日志
+        });
+        const agGridChild = `agGridChild${index + 1}`;
+        this.tabConfig[index].agTableConfig.rowData = info || [];
+        this.tabConfig[index].agTableConfig.pagenation.total = num;
+        this.$refs[`${agGridChild}`][0].agGridTable(this.tabConfig[index].agTableConfig.columnDefs, this.tabConfig[index].agTableConfig.rowData, this.getExtendObj());
+      }
     },
     // 关闭弹框
     closeModal() {
@@ -620,13 +732,18 @@ export default {
     chargeSelectRow() {
       this.newList = [];
       this.newIds = [];
-      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
-      const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
-      if (agGridTable.getSelect().length) {
-        agGridTable.getSelect().forEach(item => {
-          this.newList.push(item);
-          this.newIds.push(item.ACTI_ID);
-        });
+      if (this.vueAgTable) {
+        this.newList = JSON.parse(JSON.stringify(this.selection));
+        this.newIds = $OMS2.omsUtils.sonList(this.newList, 'ACTI_ID');
+      } else {
+        const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
+        const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
+        if (agGridTable.getSelect().length) {
+          agGridTable.getSelect().forEach(item => {
+            this.newList.push(item);
+            this.newIds.push(item.ACTI_ID);
+          });
+        }
       }
       if (this.newList.length < 1) {
         this.$Message.warning($i18n.t('modalTips.r9'));
@@ -659,23 +776,42 @@ export default {
       })
     },
     copy() {
-      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
-      const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
-      if (agGridTable.getSelect().length) {
-        const selectedData = agGridTable.getSelect();
-        if (selectedData.length > 1) {
-          this.$Message.warning($i18n.t('modalTips.q2')); // 只能选取一条数据
-          return;
-        }
-        const ACTI_ID = selectedData[0].ACTI_ID;
-        const IS_BATCH = selectedData[0].IS_BATCH;
-        if (IS_BATCH) {
-          $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, { copy: ACTI_ID }, 0)
+      if (this.vueAgTable) {
+        const selAr = JSON.parse(JSON.stringify(this.selection));
+        if (selAr.length) {
+          if (selAr.length > 1) {
+            this.$Message.warning($i18n.t('modalTips.q2')); // 只能选取一条数据
+            return;
+          }
+          const ACTI_ID = selAr[0].ACTI_ID;
+          const IS_BATCH = selAr[0].IS_BATCH;
+          if (IS_BATCH) {
+            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, { copy: ACTI_ID }, 0)
+          } else {
+            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, { copy: ACTI_ID }, 0)
+          }
         } else {
-          $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, { copy: ACTI_ID }, 0)
+          this.$Message.warning($i18n.t('modalTips.r9')); // 请至少选择一条
         }
       } else {
-        this.$Message.warning($i18n.t('modalTips.r9')); // 请至少选择一条
+        const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
+        const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
+        if (agGridTable.getSelect().length) {
+          const selectedData = agGridTable.getSelect();
+          if (selectedData.length > 1) {
+            this.$Message.warning($i18n.t('modalTips.q2')); // 只能选取一条数据
+            return;
+          }
+          const ACTI_ID = selectedData[0].ACTI_ID;
+          const IS_BATCH = selectedData[0].IS_BATCH;
+          if (IS_BATCH) {
+            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, { copy: ACTI_ID }, 0)
+          } else {
+            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, { copy: ACTI_ID }, 0)
+          }
+        } else {
+          this.$Message.warning($i18n.t('modalTips.r9')); // 请至少选择一条
+        }
       }
     },
     promotionClick() {
