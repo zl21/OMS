@@ -1,17 +1,19 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-29 10:56:54
- * @LastEditTime: 2021-06-29 19:24:59
+ * @LastEditTime: 2021-06-30 10:50:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layput/NavigatorSubMenu.vue
 -->
 <template>
     <div>
-        <i class="iconfont icon" :class="`icon-menu-`+data.id"></i>
+        <Tooltip :content="data.label"  placement="right" theme="light" max-width="200">
+              <i class="iconfont icon" :class="`icon-menu-`+data.id"></i>
+        </Tooltip>
         <div class="navigator-primary-menu-div">
           <span class="displayNone">{{ data.label }}</span>
-          <span class="tips">{{ data.label }}</span>
+          <!-- <span class="tips">{{ data.label }}</span> -->
         </div>
          <Icon class="displayNone" type="ios-arrow-forward" />
     </div>
@@ -42,29 +44,46 @@
 }
 </script>
 <style lang="less">
-.icon{
-  margin-right: 10px;
-}
-.NavigatorVertical.transferLeft{
-  width: 55px;
-  overflow: inherit;
-  .middle{
+.NavigatorVertical{
+  .ark-tooltip, .ark-tooltip-rel{
+    width: 20px !important;
+    margin-right: 10px;
+  }
+  .ark-tooltip-light.ark-tooltip-popper[x-placement=right] .ark-tooltip-arrow{
+    width: 0;
+  }
+  &.transferLeft{
+    width: 55px;
     overflow: inherit;
-  }
-  .displayNone{
-    display: none;
-  }
-  .navigator-primary-menu{
-    &:hover{
-      .navigator-primary-menu-div .tips{
-         display: block;
-      }
-    }
-    .navigator-primary-menu-div{
+    .middle{
       overflow: inherit;
     }
+    .displayNone{
+      display: none;
+    }
+    .navigator-primary-menu{
+      &:hover{
+        .navigator-primary-menu-div .tips{
+          display: block;
+        }
+      }
+      .navigator-primary-menu-div{
+        overflow: inherit;
+      }
+    }
+    .ark-tooltip-light {
+      z-index: 99999;
+      .ark-tooltip-inner{
+        width: 80px;
+        line-height: 20px;
+      }
+    }
   }
-  
+  &.transferRight{
+    .ark-tooltip, .ark-tooltip-rel{
+      pointer-events: none;
+    }
+  }
 }
 .navigator-primary-menu-div{
   position: relative;
