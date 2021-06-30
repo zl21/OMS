@@ -1337,7 +1337,6 @@ class BtnConfig {
   }
   // 取消合并订单 (不要动！！！)
   cancelMergeOrderHandler(self, selection) {
-    console.log('selection.length:',selection.length);
     if(selection.length === 1){
       for (const item of self.selection) {
         //判断合单状态
