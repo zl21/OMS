@@ -1,6 +1,6 @@
 <template>
   <!-- promactiqueryList -->
-  <div class="customized-list" v-loading='loading'>
+  <div class="customized-list" v-loading="loading">
     <div class="customized-list-form">
       <businessForm :form-config="formConfig" />
     </div>
@@ -77,11 +77,18 @@
       @closeDialog="closeDialog"
     />
     <!-- 查看日志弹框 -->
-    <Modal v-model="modal">
-      <Table :columns="logData.columns" :data="logData.data" :height="300" />
+    <Modal
+      v-model="modal"
+      class="ark-dialog"
+      mask
+      draggable
+      title="查看日志"
+      :mask-closable="false"
+      closable
+    >
+      <Table :columns="logData.columns" :data="logData.data" :height="250" />
       <div slot="footer">
-        <!-- 关闭 -->
-        <Button type="error" @click="closeModal">
+        <Button ghost @click="closeModal">
           {{ vmI18n.t("common.close") }}
         </Button>
       </div>

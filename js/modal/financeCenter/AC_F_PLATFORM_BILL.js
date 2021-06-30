@@ -42,7 +42,7 @@
           oneObj: (e) => {
             console.log(e);
             const { rowItem } = e
-            window.custSelf.downLoadFormConfig.formValue.accountCode = rowItem ? rowItem.ALIPAY_ACCOUNT_NAME.val : ''
+            window.custSelf.downLoadFormConfig.formValue.accountCode = rowItem ? rowItem.ALIPAY_ACCOUNT_NAME : ''
           }
         },
         {
@@ -79,7 +79,15 @@
           label: '账单时间',
           width: '24',
           format: 'yyyy-MM-dd', // 格式参照burgeonui
-          placeholder: ''
+          placeholder: '',
+          options: {
+            disabledDate (date) {
+              let isDate = window.custSelf.downLoadFormConfig.formValue.isDate === 'true'
+              return isDate 
+              ? date && date.valueOf() > Date.now() - 86400000
+              : date && date.valueOf() > Date.now() - 8.64e7 * (new Date().getDate());
+            }
+          },
         },
       ],
       // 表单非空提示
