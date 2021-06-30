@@ -219,18 +219,19 @@ export default {
             return {
               renderContainer: 'CellRenderByFunction',
               renderComponent: (h, params) => {
+                if (!params.row.ACTION_LOG) return;
                 return h('div', {
-                    on:{
-                      click:()=> {
-                        this.viewLog(params.row);
-                      }
-                    },
-                    domProps: { },
-                    style: {
-                      color: '#0f8ee9 ',
-                      textDecoration: 'underline ',
-                      cursor: 'pointer ',
+                  on:{
+                    click:()=> {
+                      this.viewLog(params.row);
                     }
+                  },
+                  domProps: { },
+                  style: {
+                    color: '#0f8ee9 ',
+                    textDecoration: 'underline ',
+                    cursor: 'pointer ',
+                  }
                 }, params.row.ACTION_LOG)
               }
             }
