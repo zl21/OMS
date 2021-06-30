@@ -686,6 +686,7 @@ export default {
         info.forEach((item, index) => {
           item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
           item.ACTION_LOG = $i18n.t('other.view_log'); // 查看日志
+          item.ID = item.ACTI_NO; // 解决框架ag组件取不到数据ID的bug（暂时
         });
         self.agTableConfig.rowData = info;
         self.agTableConfig.pagenation.total = num;
