@@ -437,7 +437,7 @@ export default {
           let newTime = this.formatDate(value)
           let oldTime = self.modify[obj][ecode]
           if (ecode == 'EFFECTIVE_END_TIME') {
-            newTime = this.$OMS2.omsUtils.defaultEndTime(newTime, oldTime)
+            newTime = $omsUtils.defaultEndTime(newTime, oldTime)
             self[formName].formValue[ecode] = newTime
           }
           // self[formName].formValue[ecode] = newTime  // TODO END_TIME 复制失败
@@ -461,7 +461,7 @@ export default {
     // 表单赋值
     initForm(data) {
       ['formConfig1', 'formConfig2', 'formConfig3'].forEach(formName => {
-        this.$OMS2.omsUtils.intersectFormValue(this[formName].formValue, data)
+        $omsUtils.intersectFormValue(this[formName].formValue, data)
       })
       this.queryForm(this.formConfig1, 'PLAN_ID').style = 'input'
       this.queryForm(this.formConfig1, 'ISACTIVE').style = 'switch'
@@ -519,7 +519,7 @@ export default {
           ...this.formConfig3.formValue
         },
       }
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(formConfig, valueArr, drpArr);
+      const mes = $omsUtils.validatorNotEmpty(formConfig, valueArr, drpArr);
   
       const [startTime] = formConfig.formValue.TIME_RANGE
       let msg

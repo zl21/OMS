@@ -153,7 +153,7 @@ export default {
             webname:'PS_C_PRO_NEW_SKU',
             btnclick: () => {
               if (this.spuid == '-1') {
-                this.$OMS2.omsUtils.msgTips(this, 'warning', 'cu');
+                $omsUtils.msgTips(this, 'warning', 'cu');
                 return;
               }
               this.isModify = true;
@@ -174,11 +174,11 @@ export default {
             webname:'PS_C_PRO_QUICK_SKU',
             btnclick: () => {
               if (this.spuid == '-1') {
-                this.$OMS2.omsUtils.msgTips(this, 'warning', 'cu');
+                $omsUtils.msgTips(this, 'warning', 'cu');
                 return;
               }
               if (!this.formConfig.formValue.PS_C_PRO_CLASSIFY_ID) {
-                this.$OMS2.omsUtils.msgTips(this, 'warning', 'fj');
+                $omsUtils.msgTips(this, 'warning', 'fj');
                 return;
               }
               this.isModify = true;
@@ -536,7 +536,7 @@ export default {
     //     this.getPermissions('btnConfig', 'PS_C_PRO');
     //   });
     const self = this;
-    self.dataitem.url = self.$OMS2.omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
+    self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
     this.init();
     await this.getSelectOption();
     await this.querySpu();
@@ -545,7 +545,7 @@ export default {
   async activated() {
     // 设置默认值
     const self = this;
-    self.dataitem.url = self.$OMS2.omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
+    self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
     this.init();
     await this.getSelectOption();
     await this.querySpu();
@@ -560,7 +560,7 @@ export default {
       this.skuInfoBtnConfig.buttons = [ ...this.extendSkuInfoBtn];
       this.supplierBtnConfig.buttons = [ ...this.extendSupplierBtn];
       if (self.spuid > 0) {
-        this.$OMS2.omsUtils.getBtnPermission(this , ['btnConfig' , 'skuInfoBtnConfig' , 'supplierBtnConfig'] , { table: 'PS_C_PRO', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
+        $omsUtils.getBtnPermission(this , ['btnConfig' , 'skuInfoBtnConfig' , 'supplierBtnConfig'] , { table: 'PS_C_PRO', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
         self.formConfig.formData.forEach(item=>{
           if (item.value == 'ECODE') {
             item.disabled = true;
@@ -575,12 +575,12 @@ export default {
       const cpCSupplierName = self.tableFormConfig.formValue.cpCSupplierName;
       const supplierId = self.tableFormConfig.formValue.cpCSupplierId;
       if (!supplierId) {
-        self.$OMS2.omsUtils.msgTips(self, 'warning', 'fk');
+        $omsUtils.msgTips(self, 'warning', 'fk');
         return;
       }
       // 判断表格中是否已经存在该供应商,如已存在,则不再添加
       if (self.supplier.resData.some(item => item.cpCSupplierId == supplierId)) {
-        self.$OMS2.omsUtils.msgTips(self, 'warning', 'fl');
+        $omsUtils.msgTips(self, 'warning', 'fl');
         return;
       }
       const obj = {};
@@ -691,7 +691,7 @@ export default {
         if (res.data.code == 0) {
           this.skuInfo.resData = res.data.data;
         } else {
-          this.$OMS2.omsUtils.msgTips(this, 'error', res.data.message, 0);
+          $omsUtils.msgTips(this, 'error', res.data.message, 0);
         }
       });
     },
@@ -715,7 +715,7 @@ export default {
           self.dynamicAttr(res.data.data, 'FIXED', self.customAttr.fixFormConfig);
           self.WatchChange = true;
         } else {
-          self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+          $omsUtils.msgTips(self, 'error', res.data.message, 0);
         }
       });
     },
@@ -834,7 +834,7 @@ export default {
       const self = this;
       self.isModify = true;
       if (JSON.stringify(self.skuInfo.rowClickData) == '{}') {
-        self.$OMS2.omsUtils.msgTips(self, 'warning', 'fm');
+        $omsUtils.msgTips(self, 'warning', 'fm');
         return;
       }
       const modifyData = self.skuInfo.rowClickData[self.skuInfo.clickColumns]; // 要应用到所有列的值
@@ -874,7 +874,7 @@ export default {
     supplierDel() {
       const self = this;
       if (!self.supplier.selectionData.length) {
-        self.$OMS2.omsUtils.msgTips(self, 'warning', 'df');
+        $omsUtils.msgTips(self, 'warning', 'df');
         return;
     }
       const delarr = self.supplier.selectionData.map(item => item.cpCSupplierId);
@@ -901,7 +901,7 @@ export default {
           this.supplier.resData = res.data.data;
           this.old.supplier = JSON.stringify(this.supplier.resData); // 存储初始化供应商数据
         } else {
-          this.$OMS2.omsUtils.msgTips(this, 'error', res.data.message, 0);
+          $omsUtils.msgTips(this, 'error', res.data.message, 0);
         }
       });
     },
@@ -925,7 +925,7 @@ export default {
         }
       });
       if (str) {
-        self.$OMS2.omsUtils.msgTips(self, 'warning', `${str}不能为空!`, 0);
+        $omsUtils.msgTips(self, 'warning', `${str}不能为空!`, 0);
         return;
       }
       // 获取主表信息
@@ -954,7 +954,7 @@ export default {
         console.log(res);
         if (res.data.code == 0) {
           self.isModify = false;
-          self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+          $omsUtils.msgTips(self, 'success', res.data.message, 0);
           self.$store.commit('customize/TabOpen', {
             id: res.data.data,
             type: 'action',
@@ -969,7 +969,7 @@ export default {
           // this.querySpu();
           // this.getSkuInfoData();
         } else {
-          self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+          $omsUtils.msgTips(self, 'error', res.data.message, 0);
         }
       });
     },

@@ -362,7 +362,7 @@ export default {
     // 获取按钮权限
     async getBtn() {
       let params = { table: 'ST_C_WAREHOUSE_LOGISTICS_SET', type: 'OBJ', serviceId: 'r3-oc-oms' }
-      const { ACTIONS, SUB_ACTIONS } = await this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', params, true)
+      const { ACTIONS, SUB_ACTIONS } = await $omsUtils.getPermissions(this, 'btnConfig', params, true)
       const mainWebArr = $OMS2.omsUtils.sonList(ACTIONS, 'webname');
       const subWebArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
       this.logisticsTableButtonConfig.buttons.forEach(item => {
@@ -492,7 +492,7 @@ export default {
           // 刚新增的被删除了则不push，且要从addData中移除
           let deArritem = [];
           deArritem.push(item);
-          self.logisticsTableConfig.addData = this.$OMS2.omsUtils.getDifferentArr(self.logisticsTableConfig.addData, deArritem, 'ID');
+          self.logisticsTableConfig.addData = $omsUtils.getDifferentArr(self.logisticsTableConfig.addData, deArritem, 'ID');
           return;
         }
         item.actionName = 'DELETE';
@@ -536,9 +536,9 @@ export default {
     // 查询
     async queryLogistics() {
       this.loading = true;
-      // const obj = await this.$OMS2.omsUtils.getObject('ST_C_EXPRESS_ALLOCATION', this.ID);
+      // const obj = await $omsUtils.getObject('ST_C_EXPRESS_ALLOCATION', this.ID);
       this.isWatchChange = false;
-      // this.formConfig = this.$OMS2.omsUtils.initFormConfig(obj.addcolums[0].childs, this.formConfig);
+      // this.formConfig = $omsUtils.initFormConfig(obj.addcolums[0].childs, this.formConfig);
 
       const params = {
         ID: this.ID,
@@ -557,7 +557,7 @@ export default {
           this.queryForm(this.formConfig, 'CP_C_LOGISTICS_ID').style = this.isAuto ? '' : 'popInput';
           this.setEnable(isEnable);
 
-          this.$OMS2.omsUtils.intersectFormValue(this.formConfig.formValue, ST_C_EXPRESS_ALLOCATION);
+          $omsUtils.intersectFormValue(this.formConfig.formValue, ST_C_EXPRESS_ALLOCATION);
           let fieldNames = ['CP_C_PHY_WAREHOUSE', 'CP_C_LOGISTICS']
           fieldNames.forEach(i => {
             this.setFormValue(this.formConfig, i, {
@@ -588,7 +588,7 @@ export default {
       /* =========== 保存校验 start =========== */
       const valueArr = ['IS_AUTO_LOGISTICS_DISTRIBUTION'];
       const drpArr = this.isAuto ? ['CP_C_PHY_WAREHOUSE_ID'] : ['CP_C_PHY_WAREHOUSE_ID', 'CP_C_LOGISTICS_ID'];
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
+      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes) {
         self.$message.error(mes);
         return false;
@@ -638,7 +638,7 @@ export default {
       if (code == 0) {
         // 筛选出差集作为展示
         this.logisticsTableConfig.selectionData = []
-        this.logisticsTableConfig.data = this.$OMS2.omsUtils.getDifferentArr(allArrs, partArrs, 'CP_C_LOGISTICS_ID');
+        this.logisticsTableConfig.data = $omsUtils.getDifferentArr(allArrs, partArrs, 'CP_C_LOGISTICS_ID');
         code == 0 ? this.$message.success(message) : this.$message.error(message);
       }
     },

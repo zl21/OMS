@@ -442,7 +442,7 @@ export default {
     }
   },
   async created() { 
-    this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', {serviceId:'r3-oc-oms',table: this.$route.params.customizedModuleName, type: 'OBJ'},true);
+    $omsUtils.getPermissions(this, 'btnConfig', {serviceId:'r3-oc-oms',table: this.$route.params.customizedModuleName, type: 'OBJ'},true);
   },
   methods: {
     // 初始化数据
@@ -592,7 +592,7 @@ export default {
       let value = self[formConfig].formValue[ecode]
       if (ecode == 'VALID_END_TIME') {
         let oldTime = self.modify[ecode]
-        value = this.$OMS2.omsUtils.defaultEndTime(value, oldTime)
+        value = $omsUtils.defaultEndTime(value, oldTime)
         self[formConfig].formValue[ecode] = new Date(value)
       }
       self.modify[ecode] = value;

@@ -264,7 +264,7 @@ export default {
         } = await this.service.promotionCenter.savePm(formData);
         if (code === 0) {
           // this.$Message.message($i18n.t('modalTips.z9'));
-          this.$OMS2.omsUtils.msgTips(this, 'success', message, 0);
+          $omsUtils.msgTips(this, 'success', message, 0);
           /* this.$message({
             type: 'success',
             message: $i18n.t('modalTips.z9') // 保存成功

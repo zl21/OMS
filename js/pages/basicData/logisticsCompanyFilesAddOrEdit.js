@@ -293,7 +293,7 @@ export default {
       // 详情
       self.initObjItem(self.ID);
     }
-    const subData = await this.$OMS2.omsUtils.initSubtable('CP_C_LOGISTICS_FIX', this.ID, '180461',);
+    const subData = await $omsUtils.initSubtable('CP_C_LOGISTICS_FIX', this.ID, '180461',);
     this.subTableConfig1.data = subData.rowData.map((item) => {
       item.COMBINATION = `${item.PREFIX}${item.SUFFIX}`;
       return item;
@@ -311,12 +311,12 @@ export default {
         this.getBtn();
       })
       // this.loading = true;
-      const data = await this.$OMS2.omsUtils.getObject('CP_C_LOGISTICS', id);
-      // self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基本信息');
-      self.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, self.formConfig);
+      const data = await $omsUtils.getObject('CP_C_LOGISTICS', id);
+      // self.formConfig = $omsUtils.analysisForm(data, self.formConfig, '基本信息');
+      self.formConfig = $omsUtils.initFormConfig(data.addcolums[0].childs, self.formConfig);
 
       /* 子表初始化： */
-      const subData = await this.$OMS2.omsUtils.initSubtable('CP_C_LOGISTICS_ITEM', self.ID, '168321', {
+      const subData = await $omsUtils.initSubtable('CP_C_LOGISTICS_ITEM', self.ID, '168321', {
         range: 5000
       });
       self.totalData = subData.rowData;
@@ -361,12 +361,12 @@ export default {
       const self = this;
       if (type == 'add') {
         self.addTableData = self.addTableData.concat(data); // 添加
-        self.addTableData = this.$OMS2.omsUtils.unrepeated(self.addTableData, 'repeatKey'); // 去重，便于保存
+        self.addTableData = $omsUtils.unrepeated(self.addTableData, 'repeatKey'); // 去重，便于保存
       }
       const allArr = self.totalData.concat(data)
-      // self.subTableConfig.data = this.$OMS2.omsUtils.unrepeated(allArr, 'repeatKey'); // 取差值-展示
+      // self.subTableConfig.data = $omsUtils.unrepeated(allArr, 'repeatKey'); // 取差值-展示
       // self.subTableConfig.total += self.subTableConfig.data.length - 1;
-      self.totalData = this.$OMS2.omsUtils.unrepeated(allArr, 'repeatKey'); // 取差值-展示
+      self.totalData = $omsUtils.unrepeated(allArr, 'repeatKey'); // 取差值-展示
       self.subTableConfig.total = self.totalData.length;
       // 初始化展示10条
       self.pageChange(1);
@@ -393,9 +393,9 @@ export default {
           partNewArrs.push(it);
         }
       });
-      self.totalData = this.$OMS2.omsUtils.getDifferentArr(allArrs, partNewArrs, 'repeatKey');
+      self.totalData = $omsUtils.getDifferentArr(allArrs, partNewArrs, 'repeatKey');
       if (!IDS.length && partNewArrs.length) {
-        self.addTableData = this.$OMS2.omsUtils.getDifferentArr(self.addTableData, partNewArrs, 'repeatKey');
+        self.addTableData = $omsUtils.getDifferentArr(self.addTableData, partNewArrs, 'repeatKey');
         partNewArrs = [];
         self.$Message.success('删除成功！');
         self.getTableData(self.totalData);
@@ -442,7 +442,7 @@ export default {
     // 删除
     async nalysisDetale(){
       let tableConfig = this.subTableConfig1
-      this.subTableConfig1.data = this.$OMS2.omsUtils.getDifferentArr(tableConfig.data, tableConfig.selectionData, 'COMBINATION');
+      this.subTableConfig1.data = $omsUtils.getDifferentArr(tableConfig.data, tableConfig.selectionData, 'COMBINATION');
       let arr = tableConfig.selectionData.map((item)=> { if(item.ID !== '-1') return item.ID});
       let ids = arr.filter((item) => { return item != undefined });
       if(ids.length){
@@ -466,7 +466,7 @@ export default {
       // 未修改，不提示，不操作
       if (!masterArr.length && !self.addTableData.length && this.subTableConfig1.length) return false;
       const valueArr = ['ECODE', 'ENAME'];
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr);
+      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr);
       if (mes) {
         this.$message.error(mes);
         return false;
@@ -600,7 +600,7 @@ export default {
       console.log('item',item);
       this.labelDefaultValue = item.value;
       // if(this.$route.params.customizedModuleId != 'New' && this.labelDefaultValue == 'CP_C_LOGISTICS_FIX'){
-      //   const subData = await this.$OMS2.omsUtils.initSubtable('CP_C_LOGISTICS_FIX', this.ID, '180461');
+      //   const subData = await $omsUtils.initSubtable('CP_C_LOGISTICS_FIX', this.ID, '180461');
       //   this.subTableConfig1.data = subData.rowData
       // }
       console.log(this.labelDefaultValue);

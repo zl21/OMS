@@ -227,10 +227,10 @@ import businessActionTable from 'professionalComponents/businessActionTable';
         self.service.orderCenter.batchSaveOcBOrderException(self.resultArr).then(res=>{
           console.log(res);
           if (res.data.code == 0) {
-            self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+            $omsUtils.msgTips(self, 'success', res.data.message, 0);
             this.$parent.$parent.closeConfirm();
           } else {
-            self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+            $omsUtils.msgTips(self, 'error', res.data.message, 0);
           }
           self.loading = false;
         });

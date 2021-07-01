@@ -106,7 +106,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
       datermine() {
         const self = this;
         if (!self.selectionData.length) {
-          self.$OMS2.omsUtils.msgTips(self, 'warning', '请勾选需要处理的异常商品', 0);
+          $omsUtils.msgTips(self, 'warning', '请勾选需要处理的异常商品', 0);
         } else {
           const arr = self.selectionData.map(item=>{
             const obj = {};
@@ -118,10 +118,10 @@ import businessActionTable from 'professionalComponents/businessActionTable';
           self.service.orderCenter.batchSaveOcBOrderException(arr).then(res=>{
             console.log(res);
             if (res.data.code == 0) {
-              self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+              $omsUtils.msgTips(self, 'success', res.data.message, 0);
               this.$parent.$parent.closeConfirm();
             } else {
-              self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+              $omsUtils.msgTips(self, 'error', res.data.message, 0);
             }
             self.loading = false;
           });

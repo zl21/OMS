@@ -443,8 +443,8 @@ export default {
       } = await self.service.commodityCenter.queryClassifyInit(formdata);
       this.loading = false;
       if (code == 0) {
-        self.formConfig = this.$OMS2.omsUtils.transformForm(data.PsCProClassify, self.formConfig, inputArr, drpArr);
-        self.formConfig2 = this.$OMS2.omsUtils.transformForm(data.PsCProClassify, self.formConfig2, inputArr2, drpArr2);
+        self.formConfig = $omsUtils.transformForm(data.PsCProClassify, self.formConfig, inputArr, drpArr);
+        self.formConfig2 = $omsUtils.transformForm(data.PsCProClassify, self.formConfig2, inputArr2, drpArr2);
         self.cusAttrConfig.data = data.PsCProClassifyItems;
         // 特别地（规格名称赋值）
         const specialObj = {'PS_C_SPEC_GROUP_ENAME1':'PS_C_SPEC_GROUP_ID1', 'PS_C_SPEC_GROUP_ENAME2':'PS_C_SPEC_GROUP_ID2', 'PS_C_SPEC_GROUP_ENAME3':'PS_C_SPEC_GROUP_ID2'};
@@ -545,7 +545,7 @@ export default {
       if (!masterArr.length && !self.saveable) return false;
       const valueArr = ['ECODE', 'ENAME'];
       const drpArr = [];
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
+      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes) {
         this.$message.error(mes);
         return false;

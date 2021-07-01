@@ -209,7 +209,7 @@ export default {
           row.RESULT_MSG = row.message;
           return row
         });
-        this.$OMS2.omsUtils.tipShow('confirm', this, res, res.data.message, function (h) {
+        $omsUtils.tipShow('confirm', this, res, res.data.message, function (h) {
           return h('Table', {
             props: {
               columns: [

@@ -532,7 +532,7 @@ export default {
     this.$comUtils.onresizes(this, 650);
     const buttons = self.$OMS2.BtnConfig.config();
     this.btnConfig.buttons = [...buttons.buttons , ...this.extendBtn];
-    this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'LIST' , serviceId:'r3-oc-oms'});
+    $omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'LIST' , serviceId:'r3-oc-oms'});
   },
   methods: {
     // 获取7天后时间

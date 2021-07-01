@@ -441,10 +441,10 @@ export default {
     async initObjItem(id) {
       const self = this;
       this.loading = true;
-      const data = await this.$OMS2.omsUtils.getObject('BS_C_EXTRA_ATTRIBUTE_DEF_PRO', id);
+      const data = await $omsUtils.getObject('BS_C_EXTRA_ATTRIBUTE_DEF_PRO', id);
       self.watchChange = false;
-      // self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基础信息', ['TYPE', 'LOCATION', 'TABLE_NAME']);
-      self.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, self.formConfig);
+      // self.formConfig = $omsUtils.analysisForm(data, self.formConfig, '基础信息', ['TYPE', 'LOCATION', 'TABLE_NAME']);
+      self.formConfig = $omsUtils.initFormConfig(data.addcolums[0].childs, self.formConfig);
       self.showSubtablePart = true;
       if (self.formConfig.formValue.TYPE != 'LIST') {
         // 非下拉型，只展示'操作日志'
@@ -458,7 +458,7 @@ export default {
         self.labelDefaultValue = 'PROPERTYVALUES';
       }
       /* 子表初始化： */
-      const subData = await this.$OMS2.omsUtils.initSubtable('BS_C_EXTRA_ATTRIBUTE_DEF_ITEM', self.ID, '165821');
+      const subData = await $omsUtils.initSubtable('BS_C_EXTRA_ATTRIBUTE_DEF_ITEM', self.ID, '165821');
       self.propertyValuesConfig.data = subData.rowData;
       self.propertyValuesConfig.total = subData.otherData.totalRowCount;
 
@@ -508,7 +508,7 @@ export default {
         rowData[key] = bFormV[key];
         rowData.actionName = 'SAVE';
         rowData.ID = '-1';
-        rowData.key = this.$OMS2.omsUtils.generateKey();
+        rowData.key = $omsUtils.generateKey();
       }
       self.propertyValuesConfig.addData.push(rowData);
       self.propertyValuesConfig.data.push(rowData);
@@ -529,7 +529,7 @@ export default {
           // 刚新增的被删除了则不push，且要从addData中移除
           let deArritem = [];
           deArritem.push(item);
-          self.propertyValuesConfig.addData = this.$OMS2.omsUtils.getDifferentArr(self.propertyValuesConfig.addData, deArritem, 'ID');
+          self.propertyValuesConfig.addData = $omsUtils.getDifferentArr(self.propertyValuesConfig.addData, deArritem, 'ID');
           return;
         } else {
           item.actionName = 'DELETE';
@@ -537,7 +537,7 @@ export default {
         }
       });
       // 筛选出差集作为展示
-      self.propertyValuesConfig.data = this.$OMS2.omsUtils.getDifferentArr(allArrs, partArrs, 'ECODE');
+      self.propertyValuesConfig.data = $omsUtils.getDifferentArr(allArrs, partArrs, 'ECODE');
     },
     /* -------------------- 子表Part end -------------------- */
 
@@ -556,7 +556,7 @@ export default {
         return false;
       }
       const valueArr = ['ECODE', 'ENAME', 'ALIAS_NAME', 'TYPE', 'LOCATION', 'TABLE_NAME'];
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr);
+      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr);
       if (mes) {
         this.$message.error(mes);
         return false;

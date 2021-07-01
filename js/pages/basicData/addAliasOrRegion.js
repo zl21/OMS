@@ -660,7 +660,7 @@ export default {
         default:
           break;
       }
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(
+      const mes = $omsUtils.validatorNotEmpty(
         self.formConfig,
         valueArr,
         drpArr
@@ -749,7 +749,7 @@ export default {
           "CP_C_REGION_CITY_ID"
         );
       }
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(
+      const mes = $omsUtils.validatorNotEmpty(
         self.formConfig,
         valueArr,
         drpArr

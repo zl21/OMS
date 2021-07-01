@@ -496,7 +496,7 @@ export default {
     // 获取按钮权限
     async getBtn() {
       let params = { table: 'ST_C_PRICE', type: 'OBJ', serviceId: 'r3-oc-oms' }
-      const { ACTIONS, SUB_ACTIONS } = await this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', params, true)
+      const { ACTIONS, SUB_ACTIONS } = await $omsUtils.getPermissions(this, 'btnConfig', params, true)
       const mainWebArr = $OMS2.omsUtils.sonList(ACTIONS, 'webname');
       const subWebArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
       this.goodsTableConfig.businessButtonConfig.buttons.forEach(item => {
@@ -761,9 +761,9 @@ export default {
     // 主表查询
     async queryPrice(ID) {
       this.loading = true
-      // const data = await this.$OMS2.omsUtils.getObject('ST_C_VIPCOM_PROJECT', this.ID);
+      // const data = await $omsUtils.getObject('ST_C_VIPCOM_PROJECT', this.ID);
       this.isWatchChange = false
-      // this.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, this.formConfig);
+      // this.formConfig = $omsUtils.initFormConfig(data.addcolums[0].childs, this.formConfig);
       // this.formConfig.formValue.CP_C_SHOP_ID = data.addcolums[0].childs[0].refobjid
       // this.formConfig.formValue.ISACTIVE = this.formConfig.formValue.ISACTIVE == 'true'
       this.service.strategyPlatform.queryPrice({ id: ID || this.ID })
@@ -775,7 +775,7 @@ export default {
             this.isEnable = data.ISACTIVE == 'Y'
             this.isMasterRequired = true
             this.reloadForm(this.isEnable)
-            this.$OMS2.omsUtils.intersectFormValue(this.formConfig.formValue, data)
+            $omsUtils.intersectFormValue(this.formConfig.formValue, data)
             this.setFormValue(this.formConfig, 'CP_C_SHOP', { 
               pid: data.CP_C_SHOP_ID,
               valuedata: data.CP_C_SHOP_ENAME
@@ -810,13 +810,13 @@ export default {
       const self = this;
       const valueArr = ['PLAN_NAME', 'BEGIN_TIME', 'END_TIME', 'PRIORITY'];
       const drpArr = ['CP_C_SHOP_ID'];
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
+      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes) return self.$message.error(mes);
       
       const formConfig = this.goodsTableConfig.businessFormConfig
       /**子表新增校验 */
       // const valueArr2 = ['MIN_REAL_AMT'];
-      // let mes2 = this.$OMS2.omsUtils.validatorNotEmpty(formConfig, valueArr2);
+      // let mes2 = $omsUtils.validatorNotEmpty(formConfig, valueArr2);
       const { PS_C_SPU_ID, PS_C_SKU_ID, MIN_REAL_AMT } = formConfig.formValue
       let mes2 = ''
       if (!MIN_REAL_AMT) {

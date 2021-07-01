@@ -388,11 +388,11 @@ export default {
           }
         ];
       }else {
-        // await this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true).then(res=>{
+        // await $omsUtils.getPermissions(this, 'btnConfig', { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true).then(res=>{
         //   console.log(res);
         // });
-        // await this.$OMS2.omsUtils.getPermissions(this.jordanTableConfig, 'businessButtonConfig', { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
-        this.$OMS2.omsUtils.getBtnPermission(this , ['btnConfig' , 'jordanTableConfig.businessButtonConfig'] , { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
+        // await $omsUtils.getPermissions(this.jordanTableConfig, 'businessButtonConfig', { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
+        $omsUtils.getBtnPermission(this , ['btnConfig' , 'jordanTableConfig.businessButtonConfig'] , { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
       }
     },
     pageSizeChange(val) {

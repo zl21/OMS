@@ -518,7 +518,7 @@ export default {
   },
   async mounted() {
     const self = this;
-    self.dataitem.url = self.$OMS2.omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
+    self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
     self.formConfig.formData[0].disabled = self.id !== -1;
     const buttons = self.$OMS2.BtnConfig.config();
     this.btnConfig.buttons = [...this.extendBtn];
@@ -533,7 +533,7 @@ export default {
         value: 'luckbagGroupItem',
       }];
     }else {
-    this.$OMS2.omsUtils.getBtnPermission(this, ['btnConfig' , 'jordanTableConfigLuck.businessButtonConfig' , 'jordanTableConfigGenera.businessButtonConfig'], { table: 'PS_C_PRO_GROUP', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
+    $omsUtils.getBtnPermission(this, ['btnConfig' , 'jordanTableConfigLuck.businessButtonConfig' , 'jordanTableConfigGenera.businessButtonConfig'], { table: 'PS_C_PRO_GROUP', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
 
     }
     this.query();
@@ -550,11 +550,11 @@ export default {
       self.service.commodityCenter.selectGroupById(formdata).then(res => {
         console.log(res);
         if (res.data.code == 0) {
-          // self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+          // $omsUtils.msgTips(self, 'success', res.data.message, 0);
           self.setForm(res.data.data);
         } else {
           // 走框架报错即可
-          // self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+          // $omsUtils.msgTips(self, 'error', res.data.message, 0);
         }
       });
     },
@@ -612,7 +612,7 @@ export default {
         str += '商品分类';
       }
       if (str) {
-        self.$OMS2.omsUtils.msgTips(self, 'warning', `${str}不能为空!`, 0);
+        $omsUtils.msgTips(self, 'warning', `${str}不能为空!`, 0);
         return;
       }
       self.modify.master.IMAGE = JSON.stringify(self.modify.master.IMAGE);
@@ -625,7 +625,7 @@ export default {
       self.service.commodityCenter.skuGroupSave(data).then(res => {
         console.log(res);
         if (res.data.code == 0) {
-          self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+          $omsUtils.msgTips(self, 'success', res.data.message, 0);
           self.isModify = false
           $store.commit('customize/TabOpen', {
             id: res.data.data,
@@ -637,7 +637,7 @@ export default {
           self.modify.luckGroupItem = [];
           self.btnConfig.buttons[0].disabled = false;
         } else {
-          self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+          $omsUtils.msgTips(self, 'error', res.data.message, 0);
           this.btnConfig.buttons[0].disabled = false;
         }
       });
@@ -689,7 +689,7 @@ export default {
       self.isModify = true;
       const ename = self.groupType == 2 ? this.jordanTableConfigGenera.businessFormConfig.formValue.gbCode : this.jordanTableConfigLuck.businessFormConfig.formValue.gbCode;
       if (!ename) {
-        self.$OMS2.omsUtils.msgTips(self, 'warning', 'fh');
+        $omsUtils.msgTips(self, 'warning', 'fh');
         return;
       }
       let arr = {};
@@ -702,7 +702,7 @@ export default {
             const QTY = self.jordanTableConfigGenera.businessFormConfig.formValue.QTY;
             arr = res.data.data.filter(item => ename == item.ECODE)[0];
             if (self.jordanTableConfigGenera.data.some(item => item.ECODE == arr.ECODE)) {
-              self.$OMS2.omsUtils.msgTips(self, 'warning', '请勿重复添加该明细!', 0);
+              $omsUtils.msgTips(self, 'warning', '请勿重复添加该明细!', 0);
               return;
             }
             arr.PS_C_SKU_ID = '-1';
@@ -713,7 +713,7 @@ export default {
           } else if (self.groupType == 1) {
             arr = res.data.data.filter(item => ename == item.ECODE)[0];
             if (self.jordanTableConfigLuck.data.some(item => item.ECODE == arr.ECODE)) {
-              self.$OMS2.omsUtils.msgTips(self, 'warning', '请勿重复添加该明细!', 0);
+              $omsUtils.msgTips(self, 'warning', '请勿重复添加该明细!', 0);
               return;
             }
             arr.PS_C_SKU_ID = '-1';
@@ -725,14 +725,14 @@ export default {
             self.jordanTableConfigLuck.businessFormConfig.formValue.gbCode = '';
           }
         } else {
-          self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+          $omsUtils.msgTips(self, 'error', res.data.message, 0);
         }
       });
     },
     delGeneral() {
       const self = this;
       if (!self.selectDatas.length) {
-        self.$OMS2.omsUtils.msgTips(self, 'warning', 'df');
+        $omsUtils.msgTips(self, 'warning', 'df');
         return;
       }
       const data = [];
@@ -749,7 +749,7 @@ export default {
         }).then(res => {
           console.log(res);
           if (res.data.code == 0) {
-            self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+            $omsUtils.msgTips(self, 'success', res.data.message, 0);
             // 本地删除勾选数据 表格数据和modify里的数据
             const delArr = self.selectDatas.map(item => item.PS_C_SKU_ID);
             const resultArr = [];
@@ -767,7 +767,7 @@ export default {
             self.jordanTableConfigGenera.data = resultArr;
             self.modify.generalGroupItem = resultModify;
           } else {
-            self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+            $omsUtils.msgTips(self, 'error', res.data.message, 0);
           }
         });
       } else {
@@ -781,7 +781,7 @@ export default {
       const self = this;
       const data = [];
       if (!self.selectDatas.length) {
-        self.$OMS2.omsUtils.msgTips(self, 'warning', 'df', 0);
+        $omsUtils.msgTips(self, 'warning', 'df', 0);
         return;
       }
         self.selectDatas.forEach(item => {
@@ -797,7 +797,7 @@ export default {
           }).then(res => {
             console.log(res);
             if (res.data.code == 0) {
-              self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+              $omsUtils.msgTips(self, 'success', res.data.message, 0);
               // 本地删除勾选数据 表格数据和modify里的数据
               const delArr = self.selectDatas.map(item => item.PS_C_SKU_ID);
               const resultArr = [];
@@ -815,7 +815,7 @@ export default {
               self.jordanTableConfigLuck.data = resultArr;
               self.modify.luckGroupItem = resultModify;
             } else {
-              self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+              $omsUtils.msgTips(self, 'error', res.data.message, 0);
             }
           });
         } else {

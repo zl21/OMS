@@ -319,7 +319,7 @@ export default {
             disabled: false,
             onChange: () => {
 
-              this.formConfighead.formValue.invalidTime = this.$OMS2.omsUtils.defaultEndTime(this.formConfighead.formValue.invalidTime, this.formConfighead.formValue.invalidTime)
+              this.formConfighead.formValue.invalidTime = $omsUtils.defaultEndTime(this.formConfighead.formValue.invalidTime, this.formConfighead.formValue.invalidTime)
 
             }
           },

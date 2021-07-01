@@ -113,10 +113,10 @@
                 self.service.orderCenter.backAudit(arr).then((res) => {
                   console.log(res);
                   if (res.data.code == 0) {
-                    self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+                    $omsUtils.msgTips(self, 'success', res.data.message, 0);
                     self.query();
                   } else {
-                    // self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+                    // $omsUtils.msgTips(self, 'error', res.data.message, 0);
                     self.$Modal.confirm({
                       title: res.data.message,
                       width: 500,
@@ -150,7 +150,7 @@
                   }
                 });
               } else {
-                self.$OMS2.omsUtils.msgTips(self, 'success', 'a8');
+                $omsUtils.msgTips(self, 'success', 'a8');
               }
             },
           },
@@ -167,10 +167,10 @@
                 self.service.orderCenter.audit(arr).then((res) => {
                   console.log(res);
                   if (res.data.code == 0) {
-                    self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+                    $omsUtils.msgTips(self, 'success', res.data.message, 0);
                     self.query();
                   } else {
-                    // self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+                    // $omsUtils.msgTips(self, 'error', res.data.message, 0);
                     self.$Modal.confirm({
                       title: res.data.message,
                       width: 500,
@@ -204,7 +204,7 @@
                   }
                 });
               } else {
-                self.$OMS2.omsUtils.msgTips(self, 'success', 'a8');
+                $omsUtils.msgTips(self, 'success', 'a8');
               }
             },
           },
@@ -241,7 +241,7 @@
                 self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               }
               if(!self.selection.length){
-                self.$OMS2.omsUtils.msgTips(self, 'warning', 'l0');
+                $omsUtils.msgTips(self, 'warning', 'l0');
                 return;
               }
               //前置条件判断
@@ -267,7 +267,7 @@
                     self.$children.find((item) => item.name === 'modifyWarehouse').openConfirm();
                   }, 100);
                 }else {
-                  self.$OMS2.omsUtils.msgTips(self, 'warning', res.data.message, 0);
+                  $omsUtils.msgTips(self, 'warning', res.data.message, 0);
                 }
               });
             },
@@ -280,11 +280,11 @@
                 self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               }
               if(!self.selection.length){
-                self.$OMS2.omsUtils.msgTips(self, 'warning', 'l0');
+                $omsUtils.msgTips(self, 'warning', 'l0');
                 return;
               }
               if(self.selection.length > 1){
-                self.$OMS2.omsUtils.msgTips(self, 'warning', 'dr');
+                $omsUtils.msgTips(self, 'warning', 'dr');
                 return;
               }
               //前置条件判断
@@ -310,7 +310,7 @@
                     self.$children.find((item) => item.name === 'returnModifyLogistics').openConfirm();
                   }, 100);
                 }else {
-                  self.$OMS2.omsUtils.msgTips(self, 'warning', res.data.message, 0);
+                  $omsUtils.msgTips(self, 'warning', res.data.message, 0);
                 }
               });
             },
@@ -323,7 +323,7 @@
                 self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               }
               if(!self.selection.length){
-                self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要标记的单据' , 0);
+                $omsUtils.msgTips(self, 'warning', '请选择需要标记的单据' , 0);
                 return;
               }
               const ids = self.selection.map(item=>item.ID);
@@ -348,7 +348,7 @@
                 self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               }
               if(!self.selection.length){
-                self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要标记的单据' , 0);
+                $omsUtils.msgTips(self, 'warning', '请选择需要标记的单据' , 0);
                 return;
               }
               const ids = self.selection.map(item=>item.ID);
@@ -668,7 +668,7 @@
         self.btnConfig.buttons = []; // 清空按钮缓存,防止重复叠加按钮
         const buttons = self.$OMS2.BtnConfig.config();
         self.btnConfig.buttons = [...buttons.buttons, ...self.extendBtn];
-        self.$OMS2.omsUtils.getPermissions(self, 'btnConfig', { table: self.tablename, type: 'LIST' });
+        $omsUtils.getPermissions(self, 'btnConfig', { table: self.tablename, type: 'LIST' });
       },
       initForm(data) {
         const self = this;
@@ -1000,7 +1000,7 @@
         }
         const IDS = self.selection.map((item) => item.ID);
         if (!IDS.length) {
-          self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要打标的单据!', 0);
+          $omsUtils.msgTips(self, 'warning', '请选择需要打标的单据!', 0);
           return;
         }
         self.$Modal.fcWarning({
@@ -1026,7 +1026,7 @@
         const self = this;
         self.service.orderCenter.orderDeliveryUrgent({ IDS }).then((res) => {
           if (res.data.code == 0) {
-            self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+            $omsUtils.msgTips(self, 'success', res.data.message, 0);
             self.query();
           }
         });
@@ -1037,7 +1037,7 @@
           self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
         }
         if(!self.selection.length){
-          self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要退货确认的单据', 2);
+          $omsUtils.msgTips(self, 'warning', '请选择需要退货确认的单据', 2);
           return;
         }
         self.service.orderCenter.returnConfirmCheck({ID:self.selection[0].ID}).then(res=>{
@@ -1053,16 +1053,16 @@
                   ID:self.selection[0].ID
                 }).then(res=>{
                   if(res.data.code == 0){
-                    self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0)
+                    $omsUtils.msgTips(self, 'success', res.data.message, 0)
                     self.query();
                   }else {
-                    self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0)
+                    $omsUtils.msgTips(self, 'error', res.data.message, 0)
                   }
                 })
               }
             })
           } else {
-            // self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0)
+            // $omsUtils.msgTips(self, 'error', res.data.message, 0)
           };
         })
       },
@@ -1096,7 +1096,7 @@
         self.service.orderCenter.orderExport(obj).then(res=>{
           console.log(res);
           if(res.data.code == 0){
-            self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0)
+            $omsUtils.msgTips(self, 'success', res.data.message, 0)
             let a = document.createElement("a");
             a.download = tablename + ".xls";
             a.href = res.data.data;
@@ -1104,7 +1104,7 @@
             a.click();
             $(a).remove();
           }else {
-            self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0)
+            $omsUtils.msgTips(self, 'error', res.data.message, 0)
           }
         })
       },

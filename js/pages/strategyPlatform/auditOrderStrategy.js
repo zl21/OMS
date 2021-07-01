@@ -308,7 +308,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
       if (self.id !== '-1') {
         self.formConfig.formData[0].style = 'input';
         this.query();
-        this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'ST_C_AUTO_AUDIT', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
+        $omsUtils.getPermissions(this, 'btnConfig', { table: 'ST_C_AUTO_AUDIT', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
       }
     },
     methods: {
@@ -319,7 +319,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
           if (res.data.code == 0) {
             this.initData(res.data.data);
           } else {
-            self.$OMS2.omsUtils.msgTips(self, 'warning', res.data.message, 0);
+            $omsUtils.msgTips(self, 'warning', res.data.message, 0);
           }
         });
       },
@@ -358,7 +358,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
       mdAdd() {
         const self = this;
         if (self.resultData.ST_C_AUTO_AUDIT_ITEM.TOTAL_AMOUNT.TOTAL_AMT_ITEM.length >= 5) {
-          self.$OMS2.omsUtils.msgTips(self, 'warning', '最多只能添加5条!', 0);
+          $omsUtils.msgTips(self, 'warning', '最多只能添加5条!', 0);
           return;
         }
         self.resultData.ST_C_AUTO_AUDIT_ITEM.TOTAL_AMOUNT.TOTAL_AMT_ITEM.push({
@@ -444,7 +444,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
         self.service.strategyPlatform.saveOrUpdate(resultData).then(res=>{
           console.log(res);
           if (res.data.code == 0) {
-            self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+            $omsUtils.msgTips(self, 'success', res.data.message, 0);
             comUtils.tabCloseAppoint(this);
             this.$destroy(true);
             this.$store.commit('global/tabOpen', {
@@ -455,7 +455,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
               back: true,
             });
           } else {
-            self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+            $omsUtils.msgTips(self, 'error', res.data.message, 0);
           }
         });
       },
@@ -466,7 +466,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
         let isClash = false;
         for (const iterator of totalAmt) {
           if (totalAmt.some(item=> +iterator.GREATER > +item.GREATER && +iterator.LESS < +item.LESS)) {
-            self.$OMS2.omsUtils.msgTips(self, 'warning', '存在相互冲突的价格区间,请调整!', 0);
+            $omsUtils.msgTips(self, 'warning', '存在相互冲突的价格区间,请调整!', 0);
             isClash = true;
             break;
           }
@@ -493,11 +493,11 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
           str += '总金额,';
         }
         if (str) {
-          self.$OMS2.omsUtils.msgTips(self, 'warning', `${str}不能为空`, 0);
+          $omsUtils.msgTips(self, 'warning', `${str}不能为空`, 0);
           return true;
         }
         if(!self.resultData.ST_C_AUTO_AUDIT.WAIT_TIME || self.resultData.ST_C_AUTO_AUDIT.WAIT_TIME==0){
-          self.$OMS2.omsUtils.msgTips(self, 'warning', '等待时间无效!', 0);
+          $omsUtils.msgTips(self, 'warning', '等待时间无效!', 0);
           return true;
         }
         return false;
@@ -506,7 +506,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
         const self = this;
         const data = self.resultData.ST_C_AUTO_AUDIT_ITEM.TOTAL_AMOUNT.TOTAL_AMT_ITEM;
         if (Number(data[i].GREATER) >= Number(data[i].LESS)) {
-          self.$OMS2.omsUtils.msgTips(self, 'warning', `金额区间不能小于${data[i].GREATER}`, 0);
+          $omsUtils.msgTips(self, 'warning', `金额区间不能小于${data[i].GREATER}`, 0);
           self.$nextTick(()=> { data[i].LESS = ''; });
         }
       },

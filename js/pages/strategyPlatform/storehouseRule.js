@@ -145,7 +145,7 @@ export default {
             transfer: true,
             onChange: () => {
               if (!this.formConfig.formValue.endTime) return
-             this.formConfig.formValue.endTime  = this.$OMS2.omsUtils.defaultEndTime(this.formConfig.formValue.endTime, this.formConfig.formValue.endTime)
+             this.formConfig.formValue.endTime  = $omsUtils.defaultEndTime(this.formConfig.formValue.endTime, this.formConfig.formValue.endTime)
   
             }
           },

@@ -94,7 +94,7 @@ export default {
     confirm(){
       let self = this;
       if(!self.formConfig.formData[0].itemdata.pid){
-        self.$OMS2.omsUtils.msgTips(self, 'warning', '物流公司不能为空!', 0)
+        $omsUtils.msgTips(self, 'warning', '物流公司不能为空!', 0)
         return;
       }
       let ids = self.componentData.row.map(item=>{
@@ -109,7 +109,7 @@ export default {
       }).then(res=>{
         console.log(res);
         if(res.data.code == 0){
-          self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+          $omsUtils.msgTips(self, 'success', res.data.message, 0);
         }else {
           this.$Modal.confirm({
             title: res.data.message,

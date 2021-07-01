@@ -143,7 +143,7 @@ export default {
       this.tableConfig.loading = true;
       if(newVal.subItem){
         let buttonArr = this.tableConfig.businessButtonConfig.buttons;
-        this.$OMS2.omsUtils.buttonHasDisable(this.textArr,buttonArr,true);
+        $omsUtils.buttonHasDisable(this.textArr,buttonArr,true);
         this.tableConfig.data = newVal.subItem;
         this.tableConfig.loading = false;
       }
@@ -250,7 +250,7 @@ export default {
     onSelect(selection) {
       this.checkSelection = selection;
       let buttonArr = this.tableConfig.businessButtonConfig.buttons;
-      this.$OMS2.omsUtils.buttonHasDisable(this.textArr,buttonArr,false);
+      $omsUtils.buttonHasDisable(this.textArr,buttonArr,false);
     },
     // 取消选中某一项时触发
     onSelectCancel(selection) {
@@ -258,20 +258,20 @@ export default {
       this.checkSelection = selection;
       if(selection.length === 0){
         let buttonArr = this.tableConfig.businessButtonConfig.buttons;
-        this.$OMS2.omsUtils.buttonHasDisable(this.textArr,buttonArr,true);
+        $omsUtils.buttonHasDisable(this.textArr,buttonArr,true);
       }
     },
     // 点击全选时触发
     onSelectAll(selection) {
       this.checkSelection = selection;
       let buttonArr = this.tableConfig.businessButtonConfig.buttons;
-      this.$OMS2.omsUtils.buttonHasDisable(this.textArr,buttonArr,false);
+      $omsUtils.buttonHasDisable(this.textArr,buttonArr,false);
     },
     // 点击取消全选时触发
     onSelectAllCancel(selection) {
       this.checkSelection = selection;
       let buttonArr = this.tableConfig.businessButtonConfig.buttons;
-      this.$OMS2.omsUtils.buttonHasDisable(this.textArr,buttonArr,true);
+      $omsUtils.buttonHasDisable(this.textArr,buttonArr,true);
     },
     // 单击某一行时触发
     onRowClick(row) {
@@ -333,7 +333,7 @@ export default {
   },
   async created(){
     // 按钮权限配置
-    let { SUB_ACTIONS,ACTIONS } = await this.$OMS2.omsUtils.getPermissions(this, 'butArray', {table: this.$route.params.customizedModuleName, type: 'OBJ'},true);
+    let { SUB_ACTIONS,ACTIONS } = await $omsUtils.getPermissions(this, 'butArray', {table: this.$route.params.customizedModuleName, type: 'OBJ'},true);
     let buttonArr = this.tableConfig.businessButtonConfig.buttons
     sessionStorage.setItem("ACTIONS", JSON.stringify(ACTIONS));
     let buttonArr1 = buttonArr.map((x)=>{ if(SUB_ACTIONS.some(y => y.webname === x.webname)) return x}).filter(item => item)

@@ -154,7 +154,7 @@ export default () => ({
     await groups.load();
     const routeId = this.$route.query.id;
     if (routeId > 0) {
-      this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'OBJ', serviceId: 'r3-oc-oms' }, true);
+      $omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'OBJ', serviceId: 'r3-oc-oms' }, true);
       this.objid = String(routeId);
       if (this.vueMark == 'addOrEditActi') {
         this.getData();

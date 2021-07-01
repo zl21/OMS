@@ -321,7 +321,7 @@ export default {
     // 获取按钮权限
     async getBtn() {
       let params = { table: 'ST_C_TMALL_EXCHANGE_ORDER', type: 'OBJ', serviceId: 'r3-oc-oms' }
-      const { ACTIONS, SUB_ACTIONS } = await this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', params, true)
+      const { ACTIONS, SUB_ACTIONS } = await $omsUtils.getPermissions(this, 'btnConfig', params, true)
       const mainWebArr = $OMS2.omsUtils.sonList(ACTIONS, 'webname');
       this.btnConfig.buttons.forEach(item => {
         item.webname != 'fix_back' && (item.isShow = mainWebArr.includes(item.webname))
@@ -333,8 +333,8 @@ export default {
       if (code == 0) {
         this.isWatchChange = false;
         this.isEnable = data.isactive == 'Y'
-        this.$OMS2.omsUtils.intersectFormValue(this.formConfig1.formValue, data)
-        this.$OMS2.omsUtils.intersectFormValue(this.formConfig2.formValue, data)
+        $omsUtils.intersectFormValue(this.formConfig1.formValue, data)
+        $omsUtils.intersectFormValue(this.formConfig2.formValue, data)
         this.queryForm(this.formConfig1, 'CP_C_SHOP_ID').itemdata.pid = data.CP_C_SHOP_ID
         this.queryForm(this.formConfig1, 'CP_C_SHOP_ID').itemdata.valuedata = data.CP_C_SHOP_TITLE
         this.queryForm(this.formConfig1, 'ECODE').style = 'input'
@@ -367,7 +367,7 @@ export default {
       }
       let valueArr = ['ENAME', 'EXCHANGE_ADDR_ID'];
       let drpArr = ['CP_C_SHOP_ID']
-      let msg = this.$OMS2.omsUtils.validatorNotEmpty(formConfig, valueArr, drpArr);
+      let msg = $omsUtils.validatorNotEmpty(formConfig, valueArr, drpArr);
       let novalid = this.isValid()
       msg = msg
         ? msg.replace(/ 不能为空!/, '').split('，').concat(novalid).join('，')

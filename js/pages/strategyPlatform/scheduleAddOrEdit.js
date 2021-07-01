@@ -1112,7 +1112,7 @@ export default {
   methods: {
     // 获取按钮权限
     getBtn() {
-      this.$OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'ST_C_VIPCOM_PROJECT', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+      $omsUtils.getPermissions(this, 'btnConfig', { table: 'ST_C_VIPCOM_PROJECT', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
         const { ACTIONS, SUB_ACTIONS } = res;
         console.log('buttons::', this.btnConfig.buttons, 'res::', res);
         const webArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
@@ -1197,7 +1197,7 @@ export default {
         let newTime = this.formatDate(value)
         let oldTime = self.modify[obj][ecode]
         if (ecode == 'END_TIME') {
-          newTime = this.$OMS2.omsUtils.defaultEndTime(newTime, oldTime)
+          newTime = $omsUtils.defaultEndTime(newTime, oldTime)
           self.formConfig.formValue[ecode] = newTime
         }
         self.modify[obj][ecode] = newTime
@@ -1296,7 +1296,7 @@ export default {
       const isStockIn = this.curDialog == 'warehouseWarrant';
       this.dialogLoading = true;
       const subTable = isStockIn ? 'ST_C_VIPCOM_PROJECT_STOCK_IN_ITEM' : 'ST_C_VIPCOM_PROJECT_PICK_ITEM';
-      const data = await this.$OMS2.omsUtils.getObject(subTable, isEdit ? this.ID : -1);
+      const data = await $omsUtils.getObject(subTable, isEdit ? this.ID : -1);
 
       /** 获取入库单到货时间下拉选项 */
       data.addcolums[0].childs.forEach(item => {
@@ -1311,7 +1311,7 @@ export default {
       });
       let childs = data.addcolums[0].childs.filter(i => i.colname != 'IS_AIR_EMBARGO')
       this.dialogConfig.forEach((item, index) => {
-        item.formConfig = this.$OMS2.omsUtils.initFormConfig(childs, item.formConfig);
+        item.formConfig = $omsUtils.initFormConfig(childs, item.formConfig);
         console.log(item.formConfig)
         /** 由于方法返回的外键字段值是对象，形如：{ pid: '', valuedata: ''} */
         if (index == 1) { 
@@ -1365,9 +1365,9 @@ export default {
     },
     // 查询
     async querySchedule() {
-      const data = await this.$OMS2.omsUtils.getObject('ST_C_VIPCOM_PROJECT', this.ID);
+      const data = await $omsUtils.getObject('ST_C_VIPCOM_PROJECT', this.ID);
       this.isWatchChange = false;
-      this.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, this.formConfig);
+      this.formConfig = $omsUtils.initFormConfig(data.addcolums[0].childs, this.formConfig);
       this.formConfig.formValue.CP_C_SHOP_ID = data.addcolums[0].childs[0].refobjid;
       this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = false;
 
@@ -1404,7 +1404,7 @@ export default {
       /* =========== 保存校验 start =========== */
       const valueArr = ['NAME', 'BEGIN_TIME', 'END_TIME', 'RANK'];
       const drpArr = ['CP_C_SHOP_ID'];
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
+      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes) {
         self.$message.error(mes);
         return false;

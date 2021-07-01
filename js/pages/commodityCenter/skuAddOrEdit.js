@@ -433,7 +433,7 @@ export default {
   },
   mounted() {
     const self = this;
-    self.dataitem.url = self.$OMS2.omsUtils.splicingGateWay('commodityCenter', '/p/cs/upload2')
+    self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter', '/p/cs/upload2')
     if (self.ID > 0 && !self.$route.query.spuid) {
       // 详情
       this.getBtn();
@@ -464,10 +464,10 @@ export default {
     async initObjItem(id) {
       const self = this;
       this.loading = true;
-      const data = await this.$OMS2.omsUtils.getObject('PS_C_SKU', id);
+      const data = await $omsUtils.getObject('PS_C_SKU', id);
       // this.watchChange = false;
-      self.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, self.formConfig);
-      // self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基础信息', ['SALES_STATUS', 'PURCHASE_STATUS']);
+      self.formConfig = $omsUtils.initFormConfig(data.addcolums[0].childs, self.formConfig);
+      // self.formConfig = $omsUtils.analysisForm(data, self.formConfig, '基础信息', ['SALES_STATUS', 'PURCHASE_STATUS']);
       if (self.ID > 0 && self.$route.query.spuid && !self.$route.query.isSpuSave) {
         self.formConfig.formData[0].itemdata.valuedata = self.$route.query.spucode;
         self.formConfig.formData[0].itemdata.readonly = true;
@@ -671,7 +671,7 @@ export default {
       if (!masterArr.length && !exAttr.length) return false;
       const valueArr = ['ECODE', 'ENAME', 'PRICE_RETAIL'];
       const drpArr = ['PS_C_PRO_ID'];
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
+      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes) {
         this.$message.error(mes);
         return false;
