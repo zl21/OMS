@@ -112,6 +112,42 @@ export const OC_B_ORDER = {
       startindex: 0
     }
   },
+  ST_C_EXPRESS_AREA: { // 物流区域设置日志
+    table: 'ST_C_EXPRESS_AREA_LOG',
+    objid: 24639, // 表id
+    refcolid: 1700823641,
+    searchdata: {
+      column_include_uicontroller: true,
+      orderby: [{ column: 'ST_C_EXPRESS_AREA_LOG.ID', asc: false }],
+      range: 10,
+      fixedcolumns: {},
+      startindex: 0
+    }
+  },
+  ST_C_WAREHOUSE_LOGISTICS: { // 仓库物流优先级方案
+    table: 'ST_C_WAREHOUSE_LOGISTICS_LOG',
+    objid: 1111113, // 表id
+    refcolid: 1700823920,
+    searchdata: {
+      column_include_uicontroller: true,
+      orderby: [{ column: 'ST_C_WAREHOUSE_LOGISTICS_LOG.ID', asc: false }],
+      range: 10,
+      fixedcolumns: {},
+      startindex: 0
+    }
+  },
+  ST_C_SEND_RULE: { // 发货单派单规则
+    table: 'ST_C_SEND_RULE_LOG',
+    objid: 24606, // 表id
+    refcolid: 1700823950,
+    searchdata: {
+      column_include_uicontroller: true,
+      orderby: [{ column: 'ST_C_SEND_RULE_LOG.ID', asc: false }],
+      range: 10,
+      fixedcolumns: {},
+      startindex: 0
+    }
+  },
 };
 
 export const BILL_STATUS = {

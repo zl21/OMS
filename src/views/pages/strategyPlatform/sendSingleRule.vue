@@ -18,254 +18,264 @@
         class="tableContent"
       >
         <!-- tab切换 -->
-        <business-label
+        <businessLabel
           class="jordanLabel"
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
+          @labelClick="labelClick"
         />
-        <business-action-table
-          v-if="showFlag"
-          :jordan-table-config="jordanTableConfig"
-          @on-select="OnSelect"
-          @on-select-cancel="Cancel"
-          @on-select-all="SelectAll"
-          @on-select-all-cancel="SelectAllCancel"
-          @table-delete-detail="DeleteDetail"
-          @table-import="tableImport"
-          @table-export="tableExport"
-        />
-        <div
-          v-if="!showFlag"
-          class="tableBox"
-        >
-          <div class="tableLeft">
-            <div class="retrieveBox">
-              <span class="retrieveTitle">检索</span>
-              <Input
-                v-model="name"
-                class="retrieve"
-                :expand="false"
-                @on-enter="enter(name)"
+        <div v-show="labelDefaultValue == 1">
+          <business-action-table
+            v-if="showFlag"
+            :jordan-table-config="jordanTableConfig"
+            @on-select="OnSelect"
+            @on-select-cancel="Cancel"
+            @on-select-all="SelectAll"
+            @on-select-all-cancel="SelectAllCancel"
+            @table-delete-detail="DeleteDetail"
+            @table-import="tableImport"
+            @table-export="tableExport"
+          />
+          <div
+            v-if="!showFlag"
+            class="tableBox"
+          >
+            <div class="tableLeft">
+              <div class="retrieveBox">
+                <span class="retrieveTitle">检索</span>
+                <Input
+                  v-model="name"
+                  class="retrieve"
+                  :expand="false"
+                  @on-enter="enter(name)"
+                >
+                <Icon
+                  slot="suffix"
+                  type="ios-search"
+                  @click="enter(name)"
+                />
+                </Input>
+              </div>
+              <Checkbox
+                v-model="single"
+                style="margin: 0 0 7px 32px;"
+                @on-change="checkAll(single)"
               >
-              <Icon
-                slot="suffix"
-                type="ios-search"
-                @click="enter(name)"
-              />
-              </Input>
+                全选
+              </Checkbox>
+              <div class="treeBox">
+                <Tree
+                  id="tree"
+                  :data="treeData"
+                  :disabled="true"
+                  :query="query"
+                  show-checkbox
+                />
+                <div
+                  v-show="treeLoading"
+                  class="fromLoading"
+                >
+                  <Spin />
+                </div>
+              </div>
             </div>
-            <Checkbox
-              v-model="single"
-              style="margin: 0 0 7px 32px;"
-              @on-change="checkAll(single)"
-            >
-              全选
-            </Checkbox>
-            <div class="treeBox">
-              <Tree
-                id="tree"
-                :data="treeData"
-                :disabled="true"
-                :query="query"
-                show-checkbox
-              />
+            <div class="tableSynchronous">
+              <div class="iconButton">
+                <Button
+                  size="small"
+                  @click="synchronous"
+                >
+                  >>
+                </Button>
+              </div>
+            </div>
+            <!-- table -->
+            <div class="tableRight">
+              <div class="all-table">
+                <div
+                  v-if="information.formValue.ETYPE === '1'"
+                  id="conTop"
+                  class="conTop"
+                >
+                  <div id="contenter">
+                    <table id="fixedDiv">
+                      <thead>
+                        <tr>
+                          <th style="min-width: 40px !important;">
+                            序号
+                          </th>
+                          <th
+                            style="min-width: 140px !important;"
+                          >
+                            {{ information.formValue.ETYPE === '1' ? '省' : '唯品会仓库' }}
+                          </th>
+                          <th
+                            v-for="(item, index) in theadArr"
+                            :key="index"
+                            style="min-width: 140px !important;"
+                          >
+                            {{ item.name }}
+                          </th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                  <div
+                    id="mainDiv"
+                    class="list-table"
+                    @scroll="paperScroll($event)"
+                  >
+                    <table>
+                      <thead style="display:none;">
+                        <tr>
+                          <th style="min-width: 40px !important;">
+                            序号
+                          </th>
+                          <th
+                            style="min-width: 140px !important;"
+                          >
+                            {{ information.formValue.ETYPE === '1' ? '省' : '唯品会仓库' }}
+                          </th>
+                          <th
+                            v-for="(item, index) in theadArr"
+                            :key="index"
+                            style="min-width: 140px !important;"
+                          >
+                            {{ item.name }}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="table-content">
+                        <tr
+                          v-for="(data, index) of listArr"
+                          :key="index"
+                        >
+                          <td style="min-width: 40px !important;">
+                            {{ index+1 }}
+                          </td>
+                          <td
+                            style="min-width: 140px !important;"
+                          >
+                            {{ information.formValue.ETYPE === '1' ? data.CP_C_REGION_PROVINCE_ENAME : data.CP_C_VIPCOM_WAHOUSE_WAREHOUSE_NAME }}
+                          </td>
+                          <td
+                            v-for="(item, j) of data.WAREHOUSE_RANK"
+                            :key="j"
+                            style="min-width: 140px !important;"
+                            class="tdColor"
+                          >
+                            <Input
+                              v-model="item.rank"
+                              placeholder
+                              :regx="/^[1-9]\d*$/"
+                              @on-blur="inputBlur(data.WAREHOUSE_RANK, item, j)"
+                            />
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div
+                  v-else
+                  id="conTop"
+                  class="conTop"
+                >
+                  <div id="contenter">
+                    <table id="fixedDiv">
+                      <thead>
+                        <tr>
+                          <th style="min-width: 40px !important;">
+                            序号
+                          </th>
+                          <th style="min-width: 140px !important;">
+                            唯品会仓库
+                          </th>
+                          <th
+                            v-for="(item, index) in listArr"
+                            :key="index"
+                            style="min-width: 140px !important;"
+                          >
+                            {{ item.CP_C_VIPCOM_WAHOUSE_WAREHOUSE_NAME }}
+                          </th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                  <div
+                    id="mainDiv"
+                    class="list-table"
+                    @scroll="paperScroll($event)"
+                  >
+                    <table>
+                      <thead style="display:none;">
+                        <tr>
+                          <th style="min-width: 40px !important;">
+                            序号
+                          </th>
+                          <th style="min-width: 140px !important;">
+                            唯品会仓库
+                          </th>
+                          <th
+                            v-for="(item, index) in listArr"
+                            :key="index"
+                            style="min-width: 140px !important;"
+                          >
+                            {{ item.CP_C_VIPCOM_WAHOUSE_WAREHOUSE_NAME }}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="table-content">
+                        <tr
+                          v-for="(data , index) of theadArr"
+                          :key="index"
+                        >
+                          <td style="min-width: 40px !important;">
+                            {{ index+1 }}
+                          </td>
+                          <td style="min-width: 140px !important;">
+                            {{ data.name }}
+                          </td>
+                          <td
+                            v-for="(item, j) of listArr"
+                            :key="j"
+                            style="min-width: 140px !important;"
+                            class="tdColor"
+                          >
+                            <Input
+                              v-model="item.WAREHOUSE_RANK[index].rank"
+                              placeholder
+                              :regx="/^[1-9]\d*$/"
+                            />
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
               <div
-                v-show="treeLoading"
+                v-show="tableLoading"
                 class="fromLoading"
               >
-                <Spin />
+                <Spin fix>
+                  <div class="loader">
+                    <svg class="circular" viewBox="25 25 50 50">
+                      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="10"></circle>
+                    </svg>
+                  </div>
+                </Spin>
               </div>
-            </div>
-          </div>
-          <div class="tableSynchronous">
-            <div class="iconButton">
-              <Button
-                size="small"
-                @click="synchronous"
-              >
-                >>
-              </Button>
-            </div>
-          </div>
-          <!-- table -->
-          <div class="tableRight">
-            <div class="all-table">
-              <div
-                v-if="information.formValue.ETYPE === '1'"
-                id="conTop"
-                class="conTop"
-              >
-                <div id="contenter">
-                  <table id="fixedDiv">
-                    <thead>
-                      <tr>
-                        <th style="min-width: 40px !important;">
-                          序号
-                        </th>
-                        <th
-                          style="min-width: 140px !important;"
-                        >
-                          {{ information.formValue.ETYPE === '1' ? '省' : '唯品会仓库' }}
-                        </th>
-                        <th
-                          v-for="(item, index) in theadArr"
-                          :key="index"
-                          style="min-width: 140px !important;"
-                        >
-                          {{ item.name }}
-                        </th>
-                      </tr>
-                    </thead>
-                  </table>
-                </div>
-                <div
-                  id="mainDiv"
-                  class="list-table"
-                  @scroll="paperScroll($event)"
-                >
-                  <table>
-                    <thead style="display:none;">
-                      <tr>
-                        <th style="min-width: 40px !important;">
-                          序号
-                        </th>
-                        <th
-                          style="min-width: 140px !important;"
-                        >
-                          {{ information.formValue.ETYPE === '1' ? '省' : '唯品会仓库' }}
-                        </th>
-                        <th
-                          v-for="(item, index) in theadArr"
-                          :key="index"
-                          style="min-width: 140px !important;"
-                        >
-                          {{ item.name }}
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-content">
-                      <tr
-                        v-for="(data, index) of listArr"
-                        :key="index"
-                      >
-                        <td style="min-width: 40px !important;">
-                          {{ index+1 }}
-                        </td>
-                        <td
-                          style="min-width: 140px !important;"
-                        >
-                          {{ information.formValue.ETYPE === '1' ? data.CP_C_REGION_PROVINCE_ENAME : data.CP_C_VIPCOM_WAHOUSE_WAREHOUSE_NAME }}
-                        </td>
-                        <td
-                          v-for="(item, j) of data.WAREHOUSE_RANK"
-                          :key="j"
-                          style="min-width: 140px !important;"
-                          class="tdColor"
-                        >
-                          <Input
-                            v-model="item.rank"
-                            placeholder
-                            :regx="/^[1-9]\d*$/"
-                            @on-blur="inputBlur(data.WAREHOUSE_RANK, item, j)"
-                          />
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div
-                v-else
-                id="conTop"
-                class="conTop"
-              >
-                <div id="contenter">
-                  <table id="fixedDiv">
-                    <thead>
-                      <tr>
-                        <th style="min-width: 40px !important;">
-                          序号
-                        </th>
-                        <th style="min-width: 140px !important;">
-                          唯品会仓库
-                        </th>
-                        <th
-                          v-for="(item, index) in listArr"
-                          :key="index"
-                          style="min-width: 140px !important;"
-                        >
-                          {{ item.CP_C_VIPCOM_WAHOUSE_WAREHOUSE_NAME }}
-                        </th>
-                      </tr>
-                    </thead>
-                  </table>
-                </div>
-                <div
-                  id="mainDiv"
-                  class="list-table"
-                  @scroll="paperScroll($event)"
-                >
-                  <table>
-                    <thead style="display:none;">
-                      <tr>
-                        <th style="min-width: 40px !important;">
-                          序号
-                        </th>
-                        <th style="min-width: 140px !important;">
-                          唯品会仓库
-                        </th>
-                        <th
-                          v-for="(item, index) in listArr"
-                          :key="index"
-                          style="min-width: 140px !important;"
-                        >
-                          {{ item.CP_C_VIPCOM_WAHOUSE_WAREHOUSE_NAME }}
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-content">
-                      <tr
-                        v-for="(data , index) of theadArr"
-                        :key="index"
-                      >
-                        <td style="min-width: 40px !important;">
-                          {{ index+1 }}
-                        </td>
-                        <td style="min-width: 140px !important;">
-                          {{ data.name }}
-                        </td>
-                        <td
-                          v-for="(item, j) of listArr"
-                          :key="j"
-                          style="min-width: 140px !important;"
-                          class="tdColor"
-                        >
-                          <Input
-                            v-model="item.WAREHOUSE_RANK[index].rank"
-                            placeholder
-                            :regx="/^[1-9]\d*$/"
-                          />
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div
-              v-show="tableLoading"
-              class="fromLoading"
-            >
-              <Spin fix>
-                <div class="loader">
-                  <svg class="circular" viewBox="25 25 50 50">
-                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="10"></circle>
-                  </svg>
-                </div>
-              </Spin>
             </div>
           </div>
         </div>
+
+
+        <!-- 操作日志 -->
+        <OrderItem
+          v-show="labelDefaultValue == 2"
+          :component-data="tab2"
+        />
       </div>
       <!--单据状态图片展示 -->
       <businessStatusFlag :status-name="statusName" />
