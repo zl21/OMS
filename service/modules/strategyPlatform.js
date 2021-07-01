@@ -1,7 +1,13 @@
 // 策略平台
 import qs from 'qs'
 
-export default {
+export default {  //
+
+  deliveryAreaqueryLogisticsLevel: (params) =>
+  $network.post('/p/cs/st/v1/deliveryArea/queryLogisticsLevel', params), // 物流策略-物流派送范围等级回显
+
+  queryAllCheckedProvince: (params) =>
+  $network.post('/p/cs/st/v1/deliveryArea/queryAllCheckedProvince', params), // 物流策略-物流派送范围等级回显
 
   batchSave: (params) =>
   $network.post('/p/cs/st/v1/shopStrategy/batchSave', params), // 店铺策略 批量修改

@@ -1819,7 +1819,7 @@ export default {
 .functionPower {
   position: relative;
   height: 100%;
-  padding: 10px 0;
+  padding: 10px 10px 0 0;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -1841,7 +1841,7 @@ export default {
 
     .Button {
       min-width: 0;
-      padding: 0 8px;
+      padding: 0 12px;
       border-radius: 2px;
       font-size: 12px;
       font-weight: 400;

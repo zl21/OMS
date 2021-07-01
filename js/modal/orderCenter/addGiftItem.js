@@ -72,6 +72,8 @@ export default {
             text: '搜索',
             btnclick: () => {
               this.tableConfig.current = 1
+              this.skuEcodes = ""
+              this.onRowData = ""
               this.searchGift()
             }, // 按钮点击事件
           },

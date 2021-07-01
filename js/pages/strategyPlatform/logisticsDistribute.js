@@ -18,6 +18,7 @@ export default {
   mixins: [modifycurrentLabel],
   data() {
     return {
+      modalType: 1,//弹窗类型
       collapse: 'panel_baseInfo',
       changeCount: 0, //判断数据是否修改过
       value: [1, 2],
@@ -65,6 +66,8 @@ export default {
               this.formconfig2[0].show = true;
               this.formconfig2[1].show = false;
               this.formconfig2[2].show = false;
+              this.formconfig2[3].show = false;
+              this.modalType = 2
               this.modal1 = true;
             }
           },
@@ -74,12 +77,31 @@ export default {
             webname: "ST_C_DELIVERY_AREA_exclude",
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              this.formconfig2[0].show = false;
-              this.formconfig2[1].show = true;
-              this.formconfig2[2].show = true;
-              this.modal1 = true;
+              if (this.tableSelectArr.length > 1) {
+                this.$Message.warning('只能选择一条数据！');
+                return
+              } else if (this.tableSelectArr.length == 1) {
+                this.formconfig2[0].show = false;
+                this.formconfig2[1].show = false;
+                this.formconfig2[2].show = true;
+                this.formconfig2[3].show = true;
+                this.modalType = 3
+                this.modal1 = true;
+                //回显数据
+                this.deliveryAreaqueryLogisticsLevel()
+              } else {
+                this.formconfig2[0].show = false;
+                this.formconfig2[1].show = true;
+                this.formconfig2[2].show = false;
+                this.formconfig2[3].show = true;
+                this.modalType = 3
+                this.modal1 = true;
+                //物流派送范围获取所有选择省份
+                this.queryAllCheckedProvince()
+              }
+
             }
-          },{
+          }, {
             text: '删除区域',
             isShow: false,
             webname: "ST_C_DELIVERY_AREA_deleteArea",
@@ -283,8 +305,21 @@ export default {
                 this.startindex = data * 10 - 10;
                 this.querList();
               },
+              "on-popper-show": () => {
+                this.startindex = 0
+                this.querList();
+              },
               'on-fkrp-selected': v => {
-
+                this.provinceArr = []
+                v.map(item => {
+                  let obj = {
+                    id: '-1',
+                    cpCRegionProvinceEcode: item.rowItem && item.rowItem.ECODE.val,
+                    cpCRegionProvinceId: item.ID, //省份id
+                    cpCRegionProvinceEname: item.Label //省份名称
+                  };
+                  this.provinceArr.push(obj);
+                })
                 this.querList(v);
               }
             }
@@ -318,7 +353,7 @@ export default {
               },
               "on-popper-show": () => {
                 this.startindex = 0
-                this.querList("", this.fixedcolumns);
+                this.querList();
               },
               'on-input-value-change': val => {
                 let areaRange = this.AliasFormConfig.formValue.REGION_TYPE;
@@ -331,13 +366,25 @@ export default {
               },
               'on-page-change': data => {
                 this.startindex = data * 10 - 10;
-                this.querList("", this.fixedcolumns);
+                this.querList();
 
               },
               'on-fkrp-selected': v => {
-                console.log(v);
                 this.fnprovince(v, 1);
               }
+            }
+          }
+        },
+        {
+          show: false, // 是否显示隐藏
+          item: {
+            type: 'Input', // 组件类型
+            required: true, // 是否必填
+            field: 'key1',
+            label: ' 排除省份',
+            props: {
+              value: '',
+              disabled: true
             }
           }
         },
@@ -435,8 +482,9 @@ export default {
       SIZE: 10,
       CURRENT: 1,
       // 排除地区公用render
-      inputRender: (h, { root, node, data }) =>
-        h('span', [
+      inputRender: (h, { root, node, data }) => {
+
+        return h('span', [
           h('span', {}, data.title),
           h('Input', {
             style: {
@@ -453,7 +501,8 @@ export default {
               }
             }
           })
-        ]),
+        ])
+      },
       cpCRegionProvinceId: '', //省份id
       cpCRegionProvinceEname: '', //省份名称
       cpCRegionProvinceEcode: '',
@@ -527,6 +576,60 @@ export default {
 
   },
   methods: {
+    queryAllCheckedProvince() {
+      let data = {
+        ID:this.$route.params.customizedModuleId,
+        AREA_RANGE_TYPE: this.AliasFormConfig.formValue.REGION_TYPE
+      }
+      service.strategyPlatform.queryAllCheckedProvince(data).then(res=>{
+        if (res.data.code == 0) {
+          this.fixedcolumns = res.data.data.join(",")
+        }
+       
+      })
+    },
+    deliveryAreaqueryLogisticsLevel() {
+
+      let data = {
+        ID: this.tableSelectArr[0].id,
+        PROVINCE_ID: this.tableSelectArr[0].cpCRegionProvinceId,
+        AREA_RANGE_TYPE: this.AliasFormConfig.formValue.REGION_TYPE
+      }
+      service.strategyPlatform.deliveryAreaqueryLogisticsLevel(data).then(res => {
+        if (res.data.code == 0) {
+          let data = res.data.data
+          let item = this.queryForm(' 排除省份');
+          item.item.props.value = data.NAME
+
+          let cityitem = this.queryForm('排除地区');
+          var formdata = new FormData();
+          formdata.append('searchdata', JSON.stringify({ isdroplistsearch: true, refcolid: 167077, fixedcolumns: { C_UP_ID: `=${data.ID}` }, startindex: 0, range: 100 }));
+          service.common.QueryList(formdata).then(res => {
+            let citarr = res.data.data.row;
+            cityitem.item.props.data = [];
+            citarr.forEach((item, index) => {
+              var obj = {
+                title: item.ENAME.val,
+                id: item.ID.val,
+                ECODE: item.ECODE.val,
+                index,
+                C_UP_ID: item.C_UP_ID.val,
+                expand: false,
+                children: []
+              };
+
+              cityitem.item.props.data.push(obj);
+            });
+          });
+
+
+
+
+        }
+
+      })
+
+    },
     getBtns() {
       $OMS2.omsUtils.getPermissions(this, '', { table: 'ST_C_DELIVERY_AREA', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
         const { ACTIONS, SUB_ACTIONS } = res
@@ -605,6 +708,9 @@ export default {
     fnselect(v) {
       this.tableSelectArr = v;
     },
+    fncancel(v) {
+      this.tableSelectArr = v;
+    },
     init(objid, type) {
       //type表示是切换支持范围来的查询
       //初始化查询接口deliveryQueryById
@@ -633,7 +739,7 @@ export default {
           this.btnConfig2.buttons[1].isShow = true
           this.btnConfig2.buttons[2].isShow = true
           this.btnConfig2.buttons[3].isShow = true
-                
+
         } else {
           this.modalTitle = '添加排除区域';
           this.tableConfig.columns[2].title = '排除省份';
@@ -727,7 +833,7 @@ export default {
         return;
       }
       this.stCDeliveryAreaRegionItemList = []
-      let city = this.formconfig2[2].item.props.data;
+      let city = this.formconfig2[3].item.props.data;
 
       for (const v of city) {
         let cpCRegionCityId = v.id; //城市id
@@ -771,28 +877,33 @@ export default {
 
       }
 
-      if (this.stCDeliveryAreaRegionItemList.length == 0) {
+      if (this.modalType == 1) {
+        if (this.stCDeliveryAreaRegionItemList.length == 0) {
+          let obj = {
+            cpCRegionProvinceId: this.cpCRegionProvinceId,
+            cpCRegionProvinceEname: this.cpCRegionProvinceEname,
+            cpCRegionProvinceEcode: this.cpCRegionProvinceEcode,
+            id: '-1'
+          };
+          this.stCDeliveryAreaRegionItemList.push(obj);
+        }
 
-        let obj = {
-          cpCRegionProvinceId: this.cpCRegionProvinceId,
-          cpCRegionProvinceEname: this.cpCRegionProvinceEname,
-          cpCRegionProvinceEcode: this.cpCRegionProvinceEcode,
-          id: '-1'
-        };
-        this.stCDeliveryAreaRegionItemList.push(obj);
       }
 
-      if (this.provinceArr) {
-        this.stCDeliveryAreaRegionItemList = this.stCDeliveryAreaRegionItemList.concat(this.provinceArr);
+      if (this.modalType == 2) {
+        if (this.provinceArr) {
+          this.stCDeliveryAreaRegionItemList = this.stCDeliveryAreaRegionItemList.concat(this.provinceArr);
+        }
       }
+
 
       this.fnSave(type);
     },
-    querArea(item) {
-      let id = item.id;
+    querArea(itemda) {
+
+      let id = itemda.id;
       var formdata = new FormData();
       formdata.append('searchdata', JSON.stringify({ isdroplistsearch: true, refcolid: 167091, fixedcolumns: { C_UP_ID: `=${id}` }, startindex: this.startindex, range: 10 }));
-
       service.common.QueryList(formdata).then(res => {
         let item = this.queryForm('排除地区');
         item.item.props.data.forEach(item => {
@@ -818,27 +929,13 @@ export default {
     },
     querList(data, fixedcolumnsData) {
       let fixedcolumns = {};
-      if (data) {
-        let arr = [];
-        this.provinceArr = []; //支持省份的数据
-        for (const v of data) {
-          arr.push(v.ID);
-          let obj = {
-            id: '-1',
-            cpCRegionProvinceEcode: v.rowItem && v.rowItem.ECODE.val,
-            cpCRegionProvinceId: v.ID, //省份id
-            cpCRegionProvinceEname: v.Label //省份名称
-          };
-          this.provinceArr.push(obj);
+
+      if (this.modalType == 3) {
+        if (this.fixedcolumns) {
+          fixedcolumns = {
+            ID: `in (${this.fixedcolumns})`
+          }
         }
-        let str = `in (${arr.join(',')})`;
-        fixedcolumns = {
-          ID: str
-        };
-        this.fixedcolumns = fixedcolumns
-      }
-      if (fixedcolumnsData) {
-        fixedcolumns = fixedcolumnsData
       }
 
       var formdata = new FormData();
@@ -864,9 +961,11 @@ export default {
     addRegion() {
       this.formconfig2[0].show = false;
       this.formconfig2[1].show = true;
-      this.formconfig2[2].show = true;
-      
+      this.formconfig2[2].show = false;
+      this.formconfig2[3].show = true;
+
       this.modal1 = true;
+      this.modalType = 1
       //添加区域
       this.querList();
 
@@ -877,6 +976,7 @@ export default {
       this.cpCRegionProvinceEname = v[0].Label;
       v[0].rowItem.ECODE && (this.cpCRegionProvinceEcode = v[0].rowItem.ECODE.val);
       let citId = v[0].ID;
+
       let cityitem = this.queryForm('排除地区');
       var formdata = new FormData();
       formdata.append('searchdata', JSON.stringify({ isdroplistsearch: true, refcolid: 167077, fixedcolumns: { C_UP_ID: `=${citId}` }, startindex: 0, range: 100 }));
@@ -910,17 +1010,20 @@ export default {
       let { cpCLogisticsEname, cpCLogisticsId, remark } = this.FormConfig.formValue;
       if (type != 1) {
         if (this.id != "-1") {
-          if (areaRange == 1) {
+
+
+          if (this.modalType == 1) {
             if (this.stCDeliveryAreaRegionItemList[0].cpCRegionProvinceId == "") {
               this.$Message.warning('请选择排除省份！');
               return
             }
-          } else {
+          } else if (this.modalType == 2) {
             if (!this.fixedcolumns) {
               this.$Message.warning('请选择支持省份！');
               return
             }
           }
+
         }
       }
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-20 13:39:45
- * @LastEditTime: 2021-06-30 15:00:36
+ * @LastEditTime: 2021-07-01 14:49:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/logisticsDistribute.vue
@@ -50,6 +50,7 @@
               <businessActionTable
                 :jordan-table-config="tableConfig"
                 @on-select="fnselect"
+                @on-select-cancel="fncancel"
                 @on-select-all="fnselectAll"
                 @on-page-change="fnchange"
                 @on-page-size-change="fnSize"

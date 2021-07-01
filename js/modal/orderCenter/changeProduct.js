@@ -278,12 +278,12 @@ export default {
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
-        current:1,
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
+        current: 1,
         pageSize: 10, // 每页条数
       },
       tableConfig2: {
-        current:1,
+        current: 1,
         indexColumn: true,
         isShowSelection: false,
         columns: [
@@ -324,7 +324,7 @@ export default {
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       },
       replaceTableLoad: false,
@@ -415,8 +415,14 @@ export default {
     fnsearch(val) {
       if (val == 'one') {
         this.tableConfig.current = 1
+        this.onRowClickText = ''
+        this.skuEcodes = ''
+        this.onRowData = ''
       } else {
         this.tableConfig2.current = 1
+        this.onRowClickReplaceText = ''
+        this.skuEcodes2 = ''
+        this.onRowData2 = ''
       }
       this.search(val)
     },
