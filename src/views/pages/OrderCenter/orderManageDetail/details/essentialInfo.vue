@@ -181,6 +181,7 @@
           <li>系统备注: {{ componentData.order.SYSREMARK }}</li>
           <li>内部备注: {{ componentData.order.INSIDE_REMARK }}</li>
           <li>WMS备注: {{ componentData.order.WMS_REMARK }}</li>
+          <li>价格备注: {{ componentData.order.RESERVE_VARCHAR05 }}</li>
         </ul>
       </div>
     </div>
