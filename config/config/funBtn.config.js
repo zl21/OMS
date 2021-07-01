@@ -1285,16 +1285,16 @@ class BtnConfig {
   // 合并订单  (不要动！！！)
   mergeOrderHandler(self, selection) {
     // 判断勾选订单信息是否一致
-    const selectionOne = selection[0];
-    const agreement = selection.every(item => item.CP_C_PHY_WAREHOUSE_ENAME === selectionOne.CP_C_PHY_WAREHOUSE_ENAME
-      && item.ORDER_TYPE === selectionOne.ORDER_TYPE // 订单类型
-      && item.CP_C_SHOP_TITLE === selectionOne.CP_C_SHOP_TITLE //店铺
-      && item.PAY_TYPE === selectionOne.PAY_TYPE //支付方式
-      && item.RECEIVER_ADDRESS_UNION === selectionOne.RECEIVER_ADDRESS_UNION) //收货人信息
-    if (!agreement) {
-      commonUtils.msgTips(self, 'warning', 'fs'); // 订单信息不一致,不允许合并!
-      return;
-    }
+    // const selectionOne = selection[0];
+    // const agreement = selection.every(item => item.CP_C_PHY_WAREHOUSE_ENAME === selectionOne.CP_C_PHY_WAREHOUSE_ENAME
+    //   && item.ORDER_TYPE === selectionOne.ORDER_TYPE // 订单类型
+    //   && item.CP_C_SHOP_TITLE === selectionOne.CP_C_SHOP_TITLE //店铺
+    //   && item.PAY_TYPE === selectionOne.PAY_TYPE //支付方式
+    //   && item.RECEIVER_ADDRESS_UNION === selectionOne.RECEIVER_ADDRESS_UNION) //收货人信息
+    // if (!agreement) {
+    //   commonUtils.msgTips(self, 'warning', 'fs'); // 订单信息不一致,不允许合并!
+    //   return;
+    // }
     // 状态判断提示
     let tips;
     for (let index = 0; index < selection.length; index++) {
