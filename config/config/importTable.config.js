@@ -21,6 +21,7 @@ const importConfig = {
     tempApi: '/p/cs/oc/oms/v1/refundExtra/remitResultDownLoad',
     okApi: '/p/cs/oc/oms/v1/refundExtra/remitResultImport',
     downErrorInfo: true,
+    isErr1Succ1: true
   },
   OC_B_REFUND_ORDER_EXTRA__EXTRA_IMPORT: {
     // 额外退款单-导入
