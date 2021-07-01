@@ -247,3 +247,4 @@
 | v1.2.6 | businessForm组件textarea优化 |  
 | v1.2.7 | businessAgTable组件添加ag表格原生配置 |  
 | v1.2.8 | businessForm组件修改默认高度 |  
+| v1.2.9 | 导入组件-部分成功部分失败处理isErr1Succ1 |  

@@ -145,7 +145,10 @@ export default {
           _this.$emit('returnData', res.data.data);
           _this.closeModal();
           _this.customizeInvoke(); // 刷新列表
-          res.data.data && _this.handelError(res.data.data, true); // 部分成功部分失败-Err1Succ1
+          // isErr1Succ1: false, // 走部分成功部分失败且code为0/1的处理吗，默认false(不走的意思)
+          if (_this.currentConfig.isErr1Succ1) {
+            res.data.data && _this.handelError(res.data.data, true); // 部分成功部分失败：下载错误信息
+          }
         } else if (res.data.code === -1 && res.data.data) {
           // _this.isError = true;
           _this.handelError(res.data.data);
