@@ -262,9 +262,20 @@ export default {
     };
   },
   props: {
+    tablename: {
+      type: String
+    },
+    idArray: {
+      type: Array,
+      defalut: () => []
+    },
     componentData: {
       type: Object,
     },
+  },
+  mounted() {
+    // console.log(this.$attrs['obj-tab-action-dialog-config'], this.idArray)
+    // debugger
   },
   methods: {
     radioChange(value) {
