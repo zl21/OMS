@@ -103,6 +103,7 @@ export default {
   },
   data() {
     return {
+      inputVal: '',
       isFuzzy: false,
       fuzzyQueryList: [],
       SingleSelect: {
@@ -290,6 +291,8 @@ export default {
     InputValueChange(val) {
       this.isFuzzy = true;
       if (!val) return
+      this.inputVal = val;
+      this.$emit('inputChange', val);
       this.getFuzzySelectData(val);
     },
     changePage(val) {
@@ -334,6 +337,9 @@ export default {
     clear() {
       this.itemdata.pid = '';
       this.itemdata.valuedata = '';
+      this.inputVal = '';
+      this.AutoData = []; // clear之后，仅聚焦无任何操作又了赋值的bug
+      this.$emit('inputClear', this.itemdata);
       if (this.isBackRowItem) {
         this.$emit('getFkChooseItem', {});
       } else {
@@ -359,8 +365,11 @@ export default {
           this.$emit('getFkChooseItem', str);
         }
       } */
-      if (e.keyCode == 13 && (this.itemdata.pid || this.itemdata.valuedata)) {
-        this.$emit('getFkChooseItem', this.itemdata);
+      if (e.keyCode == 13) {
+        if (this.itemdata.pid || this.itemdata.valuedata) {
+          this.$emit('getFkChooseItem', this.itemdata);
+        }
+        this.$emit('inputEnter', inputVal);
       }
     },
     popperShow() {
