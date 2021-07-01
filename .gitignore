@@ -1,0 +1,12 @@
+# folders
+node_modules
+.idea
+.history
+.vscode
+# files
+__test_script__/
+dist/
+*.tgz
+__ignore__/
+project.config.js
+
