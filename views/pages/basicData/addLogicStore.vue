@@ -1,9 +1,17 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-27 11:20:18
+ * @LastEditTime: 2021-07-01 13:53:35
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/views/pages/basicData/addLogicStore.vue
+-->
 <template>
-  <div class="addLogicStore cusArkCollapse">
-    <div class="buttons">
+  <div class="customized-detail">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content">
+    <div class="customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           基础资料
