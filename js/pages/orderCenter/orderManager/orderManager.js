@@ -1036,6 +1036,10 @@
         if(!self.vueAgTable){
           self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
         }
+        if(!self.selection.length){
+          self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要退货确认的单据', 2);
+          return;
+        }
         self.service.orderCenter.returnConfirmCheck({ID:self.selection[0].ID}).then(res=>{
           console.log(res);
           if(res.data.code == 0){
@@ -1057,8 +1061,8 @@
                 })
               }
             })
-          }else {
-            self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0)
+          } else {
+            // self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0)
           };
         })
       },
