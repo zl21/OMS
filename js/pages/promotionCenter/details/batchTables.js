@@ -267,6 +267,7 @@ export default {
         okParm: { table: 'PS_C_SKU', mode: 'batch' },
         downErrorInfo: true,
         showErrorInfo: false,
+        returnData: this.returnData,
         // freshPage: Fn,
       }
       this.importTable.componentData = componentData;

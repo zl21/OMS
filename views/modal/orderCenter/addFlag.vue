@@ -45,6 +45,9 @@ export default {
       type: Object
     }
   },
+  activated() {
+    this.getList();
+  },
   mounted() {
     this.getList();
     console.log(this.$parent);
@@ -59,6 +62,7 @@ export default {
           {
             text: $i18n.t('common.cancel'), // 返回
             btnclick: () => {
+              this.$destroy(false);
               this.$parent.$parent.closeConfirm();
             }
           },

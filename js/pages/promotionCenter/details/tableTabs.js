@@ -133,9 +133,11 @@ export default {
         isAction: false,
         tempApi: '/p/cs/pm/v1/getModuleUrl',
         okApi: '/p/cs/pm/v1/parseExcel',
+        okParm: { table: 'PS_C_SKU', mode: 'info' },
         tempParm: { 'mode': this.moduleMode },
         downErrorInfo: true,
         showErrorInfo: false,
+        returnData: this.returnData,
       }
       this.importTable.componentData = componentData;
       this.$children.find(item => item.name === 'importTable').openConfirm();

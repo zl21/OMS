@@ -692,6 +692,7 @@ export default {
         tempParm: { 'mode': this.moduleMode },
         downErrorInfo: true,
         showErrorInfo: false,
+        returnData: this.returnData,
       }
       this.importTable.componentData = componentData;
       this.$children.find(item => item.name === 'importTable').openConfirm();
