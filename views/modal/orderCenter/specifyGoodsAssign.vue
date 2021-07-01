@@ -25,10 +25,13 @@
           @on-click="search"
         /> -->
         <inputP
-        version='1.4'
+          version='1.4'
           :itemdata="itemdata"
           @getFkChooseItem="oneObj"
           @inputBlur="inputBlur"
+          @inputChange="inputChange"
+          @inputEnter="inputEnter"
+          @inputClear="inputClear"
         ></inputP>
         <!-- 数量:
         <Input v-model="qty" style="width: 80px" />-->
@@ -123,12 +126,13 @@ export default {
                   click: () => {
                     console.log(params.row);
                     // this.querySgStorage(params.row);
-                    const rowA = [params.row];
+                    this.data.splice(params.row._index,1)
+                    /* const rowA = [params.row];
                     this.data = this.$OMS2.omsUtils.getDifferentArr(
                       this.data,
                       rowA,
-                      "ecode"
-                    );
+                      "id"
+                    ); */
                   },
                 },
               },
@@ -152,16 +156,26 @@ export default {
       this.clickRow = row;
     },
     oneObj(val) {
-      console.log("val:", val);
-      // console.log("params:", params);
-      // this.getFkChooseItem(val, params);
+      if (!val.valuedata) return // clear的情况
       this.search();
     },
     inputBlur(val) {
-      console.log("val:", val);
-      // console.log("params:", params);
-      // this.getFkChooseItem(val, params);
+      console.log("inputBlur:", val);
     },
+    inputChange(val) {
+      this.searchValue = val;
+      this.itemdata.valuedata = val;
+    },
+    inputEnter(val) {
+      if (!val.pid && !val.valuedata) {
+        this.search(this.searchValue);
+      }
+    },
+    inputClear() {
+      this.searchValue = '';
+      this.itemdata.valuedata = '';
+    },
+
     radioChange(value) {
       console.log(value);
     },
@@ -169,7 +183,7 @@ export default {
     async search() {
       // sku查询
       const self = this;
-      if (!self.itemdata.pid) {
+      if (!self.itemdata.valuedata && !this.searchValue) {
         self.$Message.warning($i18n.t("pHolder.z4")); // 请输入商品SKU
         return;
       }
@@ -177,7 +191,7 @@ export default {
       console.log(res);
       
       if (res.data.code == 0) {
-        if (res.data.data.length == 0) {
+        if (res.data.data.length == 0 || res.data.data[0] == null) {
           this.$Message.warning($i18n.t("modalTips.r8")); // 查询数据为空!
           return;
         }
@@ -185,7 +199,7 @@ export default {
         //   res.data.data[0].IS_GIFT == "0" ? "否" : "是";
         self.data.push(res.data.data[0]);
       } else {
-        this.$Message.warning($i18n.t("modalTips.zt")); // sku查询失败!
+        // this.$Message.warning($i18n.t("modalTips.zt")); // sku查询失败!
       }
     },
     confirm() {
