@@ -65,26 +65,10 @@ body {
         }
       }
     }
-    // 标准详情页
-    // .verticalTableDetail{
-    //   .verticalTabs{
-    //     padding: 0 12px;
-    //     background-color: #fff;
-    //     .ark-tabs-panels-content{
-    //       border: none;
-    //     }
-    //   }
-    //   .TableDetailCollection{
-    //     margin: 10px 0;
-
-    //   }
-    // }
   }
   .StandardTableListRootDiv{
     
     .standardTable{
-      // order: 2;
-      // margin: 0 12px 10px;
       background-color: #fff;
       padding-top: 0;
       box-shadow: 0px 0px 20px 0px rgba(148, 5, 98, 0.08); 
@@ -105,13 +89,6 @@ body {
   }
   // 左右结构(商品中心 - 商品款号)
   .horizontalTableDetail{
-    // .ark-tabs-panels-nav-scroll{
-    //   background-color: #fff;
-    // }
-    // .singleObjectButton .buttonGroup {
-    //   padding: 10px 12px 6px;
-    //   background: #fff;
-    // }
     .standard_container{
       padding-top: 0;
       border: none;
@@ -124,10 +101,6 @@ body {
           height: auto;
           overflow: hidden;
           background-color: #fff;
-          // button{
-          //   color: @base-color;
-          //   border: 1px solid @base-color;
-          // }
         }
         .ark-tabs-panels-content{
           border: none;
@@ -581,19 +554,6 @@ body {
       }
     }
   }
-
-  // .popover-icon {
-  //   width: 12px;
-  //   height: 12px;
-  //   line-height: 12px;
-  //   cursor: pointer;
-  //   z-index: 0;
-  //   position: absolute;
-  //   top: 6px;
-  //   right: 4px;
-  //   color: #0f8ee9;
-  // }
-
   .fkMorePopover {
     min-width: auto;
     padding: 6px;
@@ -1637,7 +1597,7 @@ a:hover,
     }
   }
 }
-.navigator-sub-menu.open{
+.NavigatorSubMenu.open{
   width: 100% !important;
 }
 .agTable{
@@ -1645,6 +1605,18 @@ a:hover,
     .ag-grid-table-wrap{
       margin-top: 0;
       border: none;
+    }
+  }
+}
+.r3-vertical-content{
+  &>div:last-child{
+    div[style="margin: 10px 10px 0px; background-color: rgb(255, 255, 255); overflow: hidden;"]{
+      margin:0 !important;
+    }
+    div[style="margin: 10px; background-color: rgb(255, 255, 255); overflow: hidden; flex: 1 1 1px;"]{
+      margin:0 !important;;
+      background-color: @body-bg !important;
+      border-top: 1px solid #f2f2f2;
     }
   }
 }

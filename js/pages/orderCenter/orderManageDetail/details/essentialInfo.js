@@ -37,18 +37,18 @@ export default {
           column: 'BILL_NO',
           label: '单据编号:'
         },
-        {
-          flag: false, // 需要加*
-          width: '6',
-          column: 'SG_B_OUT_BILL_NO',
-          label: '出库单号:'
-        },
-        {
-          flag: false, // 需要加*
-          width: '6',
-          column: 'WMS_BILL_NO',
-          label: 'WMS单号:'
-        },
+        // {
+        //   flag: false, // 需要加*
+        //   width: '6',
+        //   column: 'SG_B_OUT_BILL_NO',
+        //   label: '出库单号:'
+        // },
+        // {
+        //   flag: false, // 需要加*
+        //   width: '6',
+        //   column: 'WMS_BILL_NO',
+        //   label: 'WMS单号:'
+        // },
         {
           flag: false, // 需要加*
           width: '6',
@@ -61,52 +61,47 @@ export default {
           column: 'ORDER_TYPE',
           label: '单据类型:'
         },
-        {
-          flag: false,
-          width: '6',
-          column: 'ORDER_STATUS',
-          label: '单据状态:'
-        },
+        // {
+        //   flag: false,
+        //   width: '6',
+        //   column: 'ORDER_STATUS',
+        //   label: '单据状态:'
+        // },
         {
           flag: false,
           width: '6',
           column: 'PLATFORM_STATUS',
           label: '平台状态'
         },
-        {
-          flag: false, // 需要加*
-          width: '6',
-          column: 'PAY_TYPE',
-          label: '付款方式:'
-        },{
-          flag: false, // 需要加*
-          width: '6',
-          column: 'PAY_STATUS',
-          label: '付款状态:'
-        },
-        {
-          flag: false, // 需要加*
-          width: '6',
-          column: 'ORDER_DATE',
-          label: '下单时间:'
-        },
-        {
-          flag: false, // 需要加*
-          width: '6',
-          column: 'PAY_TIME',
-          label: '付款时间:'
-        },
         // {
         //   flag: false, // 需要加*
         //   width: '6',
-        //   column: 'CP_C_PLATFORM_ENAME',
-        //   label: '平台:'
+        //   column: 'PAY_TYPE',
+        //   label: '付款方式:'
+        // },
+        // {
+        //   flag: false, // 需要加*
+        //   width: '6',
+        //   column: 'PAY_STATUS',
+        //   label: '付款状态:'
+        // },
+        // {
+        //   flag: false, // 需要加*
+        //   width: '6',
+        //   column: 'ORDER_DATE',
+        //   label: '下单时间:'
+        // },
+        // {
+        //   flag: false, // 需要加*
+        //   width: '6',
+        //   column: 'PAY_TIME',
+        //   label: '付款时间:'
         // },
         {
           flag: false, // 需要加*
           width: '6',
-          column: 'BUYER_NICK',
-          label: '买家昵称:'
+          column: 'CP_C_PHY_WAREHOUSE_ENAME',
+          label: '发货仓库:'
         },
         {
           flag: false, // 需要加*
@@ -120,11 +115,23 @@ export default {
           column: 'EXPRESS_CODE',
           label: '物流单号:'
         },
+        // {
+        //   flag: false, // 需要加*
+        //   width: '6',
+        //   column: 'BUYER_NICK',
+        //   label: '买家昵称:'
+        // },
         {
-          flag: false, // 需要加*
-          width: '6',
-          column: 'CP_C_PHY_WAREHOUSE_ENAME',
-          label: '发货仓库:'
+          flag: false,
+          width: '12',
+          column: 'BUYER_MESSAGE',
+          label: '买家备注:'
+        },
+        {
+          flag: false,
+          width: '12',
+          column: 'SELLER_MEMO',
+          label: '卖家备注:'
         },
         
       ],
@@ -164,18 +171,6 @@ export default {
           width: '24',
           column: 'RECEIVER_ADDRESS',
           label: '详细地址:'
-        },
-        {
-          flag: false,
-          width: '24',
-          column: 'BUYER_MESSAGE',
-          label: '买家备注:'
-        },
-        {
-          flag: false,
-          width: '24',
-          column: 'SELLER_MEMO',
-          label: '卖家备注:'
         },
         {
           flag: false,
