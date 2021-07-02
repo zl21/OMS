@@ -11,7 +11,7 @@
     <div class="tbody">
       <CheckboxGroup v-model="social">
         <Checkbox
-          style="margin:8px"
+          style="margin: 8px"
           v-for="(item, index) in flagList"
           :key="index"
           :label="item.ID.val"
@@ -19,16 +19,43 @@
           <span>{{ item.DESCRIPTION.val }}</span>
         </Checkbox>
       </CheckboxGroup>
-      <Icon type="ios-settings" v-if="componentData.title == '添加标记'" @click="setting" style="fontsize: 20px" />
+      <Icon
+        type="ios-settings"
+        v-if="componentData.title == '添加标记'"
+        @click="setting"
+        style="fontsize: 20px"
+      />
     </div>
     <div class="footer">
-      <businessButton :btn-config="btnConfig" class="modalBth modal-footer"></businessButton>
+      <businessButton
+        :btn-config="btnConfig"
+        class="modalBth modal-footer"
+      ></businessButton>
     </div>
-    <Modal v-model="modal" title="标记管理" footer-hide :mask="true" @on-ok="asyncOK">
-      <div class="modalModule customized-modal">
+    <Modal
+      v-model="modal"
+      title="标记管理"
+      footer-hide
+      :mask="true"
+      @on-ok="asyncOK"
+      class-name="ark-dialog"
+    >
+      <div class="customized-modal">
         <businessButton :btn-config="modalBtnConfigAdd"></businessButton>
-        <Table :columns="table.columns" :data="table.data" style="max-height:300px;overflow:scroll"></Table>
-        <businessButton :btn-config="modalBtnConfig" class="modalBth modal-footer"></businessButton>
+        <!-- <Table
+          :columns="table.columns"
+          :data="table.data"
+          style="max-height: 300px; overflow: scroll"
+        ></Table> -->
+        <businessActionTable
+          :jordan-table-config="table"
+          @on-page-change="pageChange"
+          @on-page-size-change="pageSizeChange"
+        />
+        <businessButton
+          :btn-config="modalBtnConfig"
+          class="modal-footer"
+        ></businessButton>
       </div>
     </Modal>
   </div>
@@ -36,8 +63,13 @@
 
 <script>
 import businessButton from 'professionalComponents/businessButton';
+import businessActionTable from "professionalComponents/businessActionTable";
+// var _ = require('lodash');
+import { ceil } from 'lodash'
+
 export default {
   components: {
+    businessActionTable,
     businessButton
   },
   props: {
@@ -52,9 +84,28 @@ export default {
     this.getList();
     console.log(this.$parent);
   },
+  computed: {
+    totalNum() {
+      return this.table.total || 0;
+    }
+  },
   data() {
     return {
       modal: false,
+      /* table: {
+        businessFormConfig: {}, // 表单配置
+        columns: addDetailModalTableColumns, // 表头
+        data: [], // 数据配置
+        pageShow: false, // 控制分页是否显示
+        loading: false,
+        indexColumn: true, // 是否显示序号
+        isShowSelection: true, // 是否显示checkedbox
+        width: "", // 表格宽度
+        border: true, // 是否显示纵向边框
+        total: 0, // 设置总条数
+        pageSizeOpts: [15, 30, 45, 60], // 每页条数切换的配置
+        pageSize: 15, // 每页条数
+      }, */
       btnConfig: {
         typeAll: 'default',
         btnsite: 'right',
@@ -74,7 +125,7 @@ export default {
           },
         ]
       },
-      modalBtnConfig:{
+      modalBtnConfig: {
         typeAll: 'default',
         btnsite: 'right',
         buttons: [
@@ -92,13 +143,13 @@ export default {
           },
         ]
       },
-      modalBtnConfigAdd:{
+      modalBtnConfigAdd: {
         typeAll: 'default',
         btnsite: 'left',
         buttons: [
           {
-            type:'primary',
-            text: '添加', // 添加
+            type: 'primary',
+            text: '新增', // 添加
             btnclick: () => {
               this.addList();
             }
@@ -108,12 +159,20 @@ export default {
       social: [],
       flagList: [],
       table: {
+        pageShow: true, // 控制分页是否显示
+        loading: false,
+        height: 400, // 表格高度
+        border: true, // 是否显示纵向边框
+        total: this.totalNum, // 设置总条数
+        pageSizeOpts: [10, 20, 30, 50, 100],
+        pageSize: 10, // 每页条数
+        current: 1,
         columns: [
           {
             title: '序号',
             key: 'index',
             render: (h, params) => {
-              return h('span', {}, params.index + 1)
+              return h('span', {}, (this.table.current - 1) * this.table.pageSize + params.index + 1)
             }
           },
           {
@@ -124,11 +183,12 @@ export default {
                 return h('a', {
                   on: {
                     click: () => {
-                      let del = this.table.data.splice(params.index, 1);
-                      if(del[0].ID >0){
-                          del[0].isDelete = 1;
-                          this.delData.push(del[0]);
+                      let del = this.totalData.splice(params.index, 1);
+                      if (del[0].ID > 0) {
+                        del[0].isDelete = 1;
+                        this.delData.push(del[0]);
                       }
+                      this.pageChange(this.table.current);
                     }
                   }
                 }, '删除')
@@ -144,42 +204,58 @@ export default {
                 return h('Input', {
                   props: {
                     value: params.row.DESCRIPTION,
-                    maxlength:6
+                    maxlength: 6
                   },
                   on: {
                     'on-change': (val) => {
-                      console.log(val);
-                      params.row.DESCRIPTION = val.target.value;
+                      // 标记说明 不能重复
+                      // let value = val.target.value;
+                    },
+                    'on-blur': val => {
+                      let value = val.target._value;
+                      value = value.replace(/^\s+|\s+$/g, "");
+                      const tabDa = JSON.parse(JSON.stringify(this.table.data));
+                      const keyList = $omsUtils.sonList(tabDa, 'DESCRIPTION');
+                      if (value && keyList.includes(value)) {
+                        this.$Message.warning(`标记说明【${value}】已存在，请重新输入！`);
+                        params.row.DESCRIPTION = '';
+                        ++params.row._rowKey;
+                        return
+                      } else {
+                        params.row.DESCRIPTION = val.target.value;
+                      }
+                      ++params.row._rowKey;
                       this.table.data[params.index] = params.row;
-                    }
+                      // this.jordanTableConfig.data[params.index] = params.row;
+                    },
                   }
                 })
               } else {
                 return h('span', {}, params.row.DESCRIPTION);
               }
             },
-            renderHeader:(h , params) => {
-                return h('div' , [
-                    h('span' , {}, '标记说明'),
-                    [h('Poptip' , {
-                        props:{
-                            trigger:'hover',
-                            content:'不可超过6个汉字',
-                            transfer:true
-                        },
-                        style:{
-                            width:'30px',
-                            height:'15px'
-                        }
-                    } , [h('Icon' , {
-                    props:{
-                        type:'ios-information-circle'
-                    },
-                    style:{
-                        'margin-left':'10px'
-                    }
-                } , '')])],
-                ])
+            renderHeader: (h, params) => {
+              return h('div', [
+                h('span', {}, '标记说明'),
+                [h('Poptip', {
+                  props: {
+                    trigger: 'hover',
+                    content: '不可超过6个汉字',
+                    transfer: true
+                  },
+                  style: {
+                    width: '30px',
+                    height: '15px'
+                  }
+                }, [h('Icon', {
+                  props: {
+                    type: 'ios-information-circle'
+                  },
+                  style: {
+                    'margin-left': '10px'
+                  }
+                }, '')])],
+              ])
             }
           },
           {
@@ -207,11 +283,23 @@ export default {
         ],
         data: []
       },
-      oldTableData:[],
-      delData:[],   //记录删除的数据
+      totalData: [],
+      oldTableData: [],
+      delData: [],   //记录删除的数据
     }
   },
   methods: {
+    pageChange(e) {
+      this.table.current = e;
+      // eg:第二页，展示第11-20条
+      const startIndex = this.table.pageSize * (e - 1) + 1; // 11
+      const endIndex = e * this.table.pageSize; // 20
+      this.table.total = this.totalData.length;
+      this.table.data = this.totalData.slice(startIndex - 1, endIndex);
+    },
+    pageSizeChange(e) {
+      this.table.pageSize = e;
+    },
     determine() {
       const self = this;
       if (!self.social.length) {
@@ -219,51 +307,51 @@ export default {
         return;
       }
       let obj = {
-          orderIds:self.componentData.ids,
-          ids:self.social
+        orderIds: self.componentData.ids,
+        ids: self.social
       }
-      self.service.orderCenter[ self.componentData.title == '添加标记' ? 'addOrderLable' : 'cancelOrderLable'](obj).then(res=>{
-          console.log(res);
-          if(res.data.code == 0){
-              self.$OMS2.omsUtils.msgTips(self, 'success' , res.data.message, 0);
-              self.$parent.$parent.$parent.query();
-              this.$parent.$parent.closeConfirm();
-          }else {
-              res.data.data.errors.forEach((element,index) => {
-                  element.index = index+1;
-              });
-              this.$Modal.confirm({
-                title: res.data.message,
-                width: 500,
-                mask: true,
-                className: 'ark-dialog',
-                render: (h) => {
-                if (res.data.data) {
-                    return h('Table', {
-                    props: {
-                        columns: [
-                        {
-                            title:'序号',
-                            key:'index'
-                        },
-                        {
-                            title:'单据编号',
-                            key:'billNo'
-                        },
-                        {
-                            title: $i18n.t('modalTitle.a6'), // '提示信息',
-                            key: 'message',
-                        },
-                        ],
-                        data: res.data.data.errors,
-                    },
-                    })
-                }
-                return false
-                },
-            })
-            self.$parent.$parent.$parent.query();
-          }
+      self.service.orderCenter[self.componentData.title == '添加标记' ? 'addOrderLable' : 'cancelOrderLable'](obj).then(res => {
+        console.log(res);
+        if (res.data.code == 0) {
+          self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+          self.$parent.$parent.$parent.query();
+          this.$parent.$parent.closeConfirm();
+        } else {
+          res.data.data.errors.forEach((element, index) => {
+            element.index = index + 1;
+          });
+          this.$Modal.confirm({
+            title: res.data.message,
+            width: 500,
+            mask: true,
+            className: 'ark-dialog',
+            render: (h) => {
+              if (res.data.data) {
+                return h('Table', {
+                  props: {
+                    columns: [
+                      {
+                        title: '序号',
+                        key: 'index'
+                      },
+                      {
+                        title: '单据编号',
+                        key: 'billNo'
+                      },
+                      {
+                        title: $i18n.t('modalTitle.a6'), // '提示信息',
+                        key: 'message',
+                      },
+                    ],
+                    data: res.data.data.errors,
+                  },
+                })
+              }
+              return false
+            },
+          })
+          self.$parent.$parent.$parent.query();
+        }
       })
     },
     asyncOK() {
@@ -271,37 +359,39 @@ export default {
       let modifyData = self.diffArr();
       modifyData = modifyData.concat(self.delData);
       for (const iterator of modifyData) {
-          if(!iterator.DESCRIPTION){
-              self.$OMS2.omsUtils.msgTips(self, 'warning', '标记说明不能为空!', 0);
-              return;
-          }
+        if (!iterator.DESCRIPTION) {
+          self.$OMS2.omsUtils.msgTips(self, 'warning', '标记说明不能为空!', 0);
+          return;
+        }
       }
-      self.service.orderCenter.saveLable(modifyData).then(res=>{
-          console.log(res);
-          if(res.data.code == 0){
-              self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
-              this.modal = false;
-              self.getList()
-          }else {
-              self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
-              this.modal = false;
-              self.getList()
-          }
+      self.service.orderCenter.saveLable(modifyData).then(res => {
+        console.log(res);
+        if (res.data.code == 0) {
+          self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+          this.modal = false;
+          self.getList()
+        } else {
+          self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+          this.modal = false;
+          self.getList()
+        }
       })
     },
     addList() {
-      const self = this;
-      self.table.data.push({
-        ID:'-1',
+      this.totalData.push({
+        ID: '-1',
         DESCRIPTION: '',
         REMARK: '',
-        IS_SYSTEM:0,
+        IS_SYSTEM: 0,
       })
+      // 最后一页 = length / pageSize
+      const endIndex = ceil(this.totalData.length / this.table.pageSize);
+      this.pageChange(endIndex);
     },
     getList() {
       const self = this;
-      let obj = { "table": "OC_B_LABEL", "startindex": 0, "range": 10, "fixedcolumns": {"ISACTIVE":["Y"]}, "column_include_uicontroller": true, "isolr": false };
-      if(self.componentData.title == '取消标记'){
+      let obj = { "table": "OC_B_LABEL", "startindex": 0, "range": 10, "fixedcolumns": { "ISACTIVE": ["Y"] }, "column_include_uicontroller": true, "isolr": false };
+      if (self.componentData.title == '取消标记') {
         obj.fixedcolumns.IS_SYSTEM = 0;
       }
       let formdata = new FormData();
@@ -318,12 +408,13 @@ export default {
     setting() {
       const self = this;
       self.modal = true;
-      let obj = { "table": "OC_B_LABEL", "startindex": 0, "range": 10, "fixedcolumns": {"ISACTIVE":["Y"]}, "column_include_uicontroller": true, "isolr": false };
+      let obj = { "table": "OC_B_LABEL", "startindex": 0, "range": 1000, "fixedcolumns": { "ISACTIVE": ["Y"] }, "column_include_uicontroller": true, "isolr": false };
       let formdata = new FormData();
       formdata.append('searchdata', JSON.stringify(obj));
       self.service.orderCenter.queryFlagList(formdata).then(res => {
         if (res.data.code == 0) {
-          let arr = res.data.data.row.map(item => {
+          const { totalRowCount, row } = res.data.data
+          let arr = row.map(item => {
             return {
               REMARK: item.REMARK.val,
               DESCRIPTION: item.DESCRIPTION.val,
@@ -331,28 +422,31 @@ export default {
               ID: item.ID.val
             };
           });
-          self.table.data = arr;
           this.oldTableData = JSON.stringify(arr);
+          // self.table.data = arr.concat(arr);
+          // self.table.total = totalRowCount * 2;
+          this.totalData = arr;
+          this.pageChange(1);
         } else {
-          self.$OMS2.omsUtils.msgTips(self, 'warning', res.data.message, 0);
+          // self.$OMS2.omsUtils.msgTips(self, 'warning', res.data.message, 0);
         }
       })
     },
-    diffArr(){
-        const self = this;
-        const oldTableData = JSON.parse(self.oldTableData);
-        const newTableData = self.table.data;
-        let arr = [];
-        for (const newData of newTableData) {
-            
-            if(!(oldTableData.some(item => {
-                return item.ID == newData.ID && item.DESCRIPTION == newData.DESCRIPTION && item.REMARK == newData.REMARK;
-            }))){
-                arr.push(newData);
-            }
+    diffArr() {
+      const self = this;
+      const oldTableData = JSON.parse(self.oldTableData);
+      const newTableData = self.table.data;
+      let arr = [];
+      for (const newData of newTableData) {
 
-        };
-        return arr;
+        if (!(oldTableData.some(item => {
+          return item.ID == newData.ID && item.DESCRIPTION == newData.DESCRIPTION && item.REMARK == newData.REMARK;
+        }))) {
+          arr.push(newData);
+        }
+
+      };
+      return arr;
     }
   }
 }
@@ -367,7 +461,14 @@ export default {
   }
   .modalModule {
     .customBtn {
-      font-size: 12px;height: 32px;line-height: 30px;padding: 0 12px;border-radius: 5px;color: #292f43;border-color: #dbdde8;background-color: #fff;
+      font-size: 12px;
+      height: 32px;
+      line-height: 30px;
+      padding: 0 12px;
+      border-radius: 5px;
+      color: #292f43;
+      border-color: #dbdde8;
+      background-color: #fff;
     }
   }
 }
