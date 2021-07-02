@@ -38,9 +38,9 @@
       footer-hide
       :mask="true"
       @on-ok="asyncOK"
-      class-name="ark-dialog"
+      class-name="ark-dialog secModal"
     >
-      <div class="customized-modal">
+      <div>
         <businessButton :btn-config="modalBtnConfigAdd"></businessButton>
         <!-- <Table
           :columns="table.columns"
@@ -161,7 +161,7 @@ export default {
       table: {
         pageShow: true, // 控制分页是否显示
         loading: false,
-        height: 400, // 表格高度
+        height: 365, // 表格高度
         border: true, // 是否显示纵向边框
         total: this.totalNum, // 设置总条数
         pageSizeOpts: [10, 20, 30, 50, 100],
@@ -216,7 +216,7 @@ export default {
                       value = value.replace(/^\s+|\s+$/g, "");
                       const tabDa = JSON.parse(JSON.stringify(this.table.data));
                       const keyList = $omsUtils.sonList(tabDa, 'DESCRIPTION');
-                      if (value && keyList.includes(value)) {
+                      if (value && keyList.includes(value) && params.row.ID == '-1') {
                         this.$Message.warning(`标记说明【${value}】已存在，请重新输入！`);
                         params.row.DESCRIPTION = '';
                         ++params.row._rowKey;
@@ -470,6 +470,15 @@ export default {
       border-color: #dbdde8;
       background-color: #fff;
     }
+  }
+}
+</style>
+<style lang='less'>
+.secModal {
+  .jordan-table-box .ark-table-border td,
+  .jordan-table-box .ark-table-border th {
+    height: 32px;
+    line-height: 32px;
   }
 }
 </style>
