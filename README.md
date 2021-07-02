@@ -110,3 +110,4 @@
 | v1.0.45 |  index.js   |
 | v1.0.46 |  update modalTips.ga/gb |
 | v1.0.47 |  新增操作语言包的API |
+| v1.0.48 |  add |
