@@ -5,6 +5,7 @@
     |-- README.md
     |-- README_API.md
     |-- babel.config.js
+    |-- directoryList.md
     |-- package-lock.json
     |-- package.json
     |-- assets
@@ -126,8 +127,6 @@
     |       |-- store.js
     |-- css
     |   |-- modal
-    |   |   |-- basicData
-    |   |   |   |-- 1.txt
     |   |   |-- commodityCenter
     |   |   |   |-- downLoadJingdongGoods.less
     |   |   |-- financeCenter
@@ -164,8 +163,6 @@
     |   |   |   |-- specifyGoodsAssign.less
     |   |   |   |-- publicDialog
     |   |   |       |-- JDialog.less
-    |   |   |-- organizationCenter
-    |   |   |   |-- 1.txt
     |   |   |-- promotionCenter
     |   |   |   |-- setGroup.less
     |   |   |-- reportCenter
@@ -701,8 +698,6 @@
             |   |       |-- fm04.mp3
             |   |-- vipJit
             |       |-- distributionOrderList.vue
-            |-- organizationCenter
-            |   |-- 1.txt
             |-- promotionCenter
             |   |-- addOrEditActi.vue
             |   |-- batchActivity.vue
