@@ -71,11 +71,11 @@
             <span v-for="(item,index) in componentData.order.ORDER_TAG" :key="index" :style="{ color: item.clr,borderColor: item.clr}">
               {{item.text}}
             </span>
-            <!-- <span class="one">合</span>
-            <span class="two">挂</span>
-            <span class="three">标</span>
-            <span class="four">手</span> -->
+            <label>
+              {{componentData.order.OC_B_LABEL_DESCRIPTION}}
+            </label>
           </div>
+
         </div>
         <div class="order-tab-detail">
           <Row class="detail-ul">
