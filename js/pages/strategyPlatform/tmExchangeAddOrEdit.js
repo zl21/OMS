@@ -7,7 +7,6 @@ import subTable from 'professionalComponents/subTable';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
-  name: 'holdStrategyAddOrEdit',
   components: {
     subTable,
     businessActionTable,
@@ -56,13 +55,13 @@ export default {
             style: null,
             colname: 'ECODE',
             label: '策略ID',
-            width: '12'
+            width: '6'
           },
           {
             style: 'input',
             colname: 'ENAME',
             label: '策略名称',
-            width: '12',
+            width: '6',
             inputChange: () => {
               this.masterModifyData('ENAME', 'master', 'formConfig1');
             }
@@ -71,7 +70,7 @@ export default {
             version: '1.4',
             colname: 'CP_C_SHOP_ID',
             style: 'popInput', // 输入框弹框单多选
-            width: '12',
+            width: '6',
             itemdata: {
               col: 1,
               colid: 179601, // 当前字段的ID
@@ -242,7 +241,7 @@ export default {
             slotName: 'bias',
             reqStr: true,
             colname: 'DEVIATION_AUTO_REJECT',
-            regx: '/^(-|\+)?\d{0,15}(\.[0-9]{0,2})?$/',
+            regx: /^-?\d{0,15}(\.[0-9]{0,2})?$/,
             class: 'soltDom',
             width: '24',
             disabled: false,

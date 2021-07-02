@@ -99,11 +99,10 @@
                   v-model="rowData.value.AUTO_REJECT_DEVIATION_PRICE"
                   :disabled="isEnable"
                   :autosize="{minRows: 2,maxRows: 5}"
+                  :regx="rowData.item.regx"
                   @on-change="rowData.item.inputChange"
                   style="width: 150px;"
                 />
-                  <!-- :regx="rowData.item.regx" -->
-
                 <label :class="['required', { hidden: !rowData.value.DEVIATION_AUTO_REJECT }]" style="margin-left: 28px">
                   <i>*</i>{{ rowData.item.subLabel2 }}：
                 </label>
@@ -138,7 +137,6 @@
         <!-- 子表Part -->
         <div class="subtablePart">
           <subTable :component-data="subTableConfig"></subTable>
-          <!-- <business-action-table :jordan-table-config="tableConfig" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" /> -->
         </div>
       </div>
     </div>
