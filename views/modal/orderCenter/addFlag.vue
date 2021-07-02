@@ -214,19 +214,20 @@ export default {
                     'on-blur': val => {
                       let value = val.target._value;
                       value = value.replace(/^\s+|\s+$/g, "");
-                      const tabDa = JSON.parse(JSON.stringify(this.table.data));
+                      const rIndex = (this.table.current - 1) * this.table.pageSize + params.index + 1;
+                      const tabDa = JSON.parse(JSON.stringify(this.totalData));
+                      tabDa.splice(rIndex - 1, 1);
                       const keyList = $omsUtils.sonList(tabDa, 'DESCRIPTION');
                       if (value && keyList.includes(value) && params.row.ID == '-1') {
                         this.$Message.warning(`标记说明【${value}】已存在，请重新输入！`);
                         params.row.DESCRIPTION = '';
-                        ++params.row._rowKey;
-                        return
                       } else {
                         params.row.DESCRIPTION = val.target.value;
                       }
-                      ++params.row._rowKey;
+                      params.row._rowKey = this.$omsUtils.generateKey();
                       this.table.data[params.index] = params.row;
-                      // this.jordanTableConfig.data[params.index] = params.row;
+                      this.totalData[rIndex - 1] = params.row;
+                      // this.totalData = JSON.parse(JSON.stringify(this.table.data));
                     },
                   }
                 })
@@ -390,7 +391,7 @@ export default {
     },
     getList() {
       const self = this;
-      let obj = { "table": "OC_B_LABEL", "startindex": 0, "range": 10, "fixedcolumns": { "ISACTIVE": ["Y"] }, "column_include_uicontroller": true, "isolr": false };
+      let obj = { "table": "OC_B_LABEL", "startindex": 0, "range": 1000, "fixedcolumns": { "ISACTIVE": ["Y"] }, "column_include_uicontroller": true, "isolr": false };
       if (self.componentData.title == '取消标记') {
         obj.fixedcolumns.IS_SYSTEM = 0;
       }
