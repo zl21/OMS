@@ -112,7 +112,7 @@ export default {
               if (this.componentData.type == 2) {
                 reqdata.RETURN_ORDER_ITEM_LIST = this.rowlist
               }
-
+              console.log(reqdata);
               this.$parent.$parent.closeConfirm(reqdata, this.componentData.type)
             }, // 按钮点击事件
           },

@@ -4,22 +4,23 @@
     <div class="i_head">
       <div class="i_body">
         <!-- <p>被替换商品SKU</p> -->
-        <p>{{ vmI18n.t("modalTitle.a1") }}</p>
+        <p>{{ vmI18n.t("modalTitle.th1") }}</p>
         <div class="search">
           <div class="skuBox">
             <re-form :form-config="formConfig" />
           </div>
           <div class="search_child">
             <!-- <span class="lable">商品名称:</span> -->
-            <span class="lable">{{ vmI18n.t("table_label.productName") }}:</span>
-            <Input v-model="proName" @on-enter="fnsearch('one')" />
+            <!-- <span class="lable">{{ vmI18n.t("table_label.itemNo02") }}:</span>
+            <Input v-model="proName" @on-enter="fnsearch('one')"  class="inp"/>
+           -->
           </div>
+
+
           <div class="search_child">
             <!-- 搜索 -->
             <Button type="primary" @click="fnsearch('one')">
-              {{
-              vmI18n.t("btn.search")
-              }}
+              {{ vmI18n.t("btn.search") }}
             </Button>
           </div>
         </div>
@@ -46,22 +47,21 @@
       </div>
       <div class="i_body1">
         <!-- <p>替换后商品SKU</p> -->
-        <p>{{ vmI18n.t("modalTitle.a4") }}</p>
+        <p>{{ vmI18n.t("modalTitle.th2") }}</p>
         <div class="search">
           <div class="skuBox">
             <re-form :form-config="replaceFormConfig" />
           </div>
           <div class="search_child">
             <!-- <span class="lable">商品名称:</span> -->
-            <span class="lable">{{ vmI18n.t("table_label.productName") }}:</span>
-            <Input v-model="replace_proName" @on-enter="fnsearch('two')" />
+            <!-- <span class="lable">{{ vmI18n.t("table_label.itemNo02") }}:</span>
+            <Input v-model="replace_proName" @on-enter="fnsearch('two')" class="inp" />
+           -->
           </div>
           <div class="search_child">
             <!-- 搜索 -->
             <Button type="primary" @click="fnsearch('two')">
-              {{
-              vmI18n.t("btn.search")
-              }}
+              {{ vmI18n.t("btn.search") }}
             </Button>
           </div>
         </div>
@@ -100,6 +100,7 @@ import changeProduct from '@/js/modal/orderCenter/changeProduct'
 export default changeProduct
 </script>
 <style lang="less" scoped>
-@import '~@burgeon/oms-theme/skin/public.less';
-@import '~@/css/modal/orderCenter/changeProduct.less';
+@import "~@burgeon/oms-theme/skin/public.less";
+@import "~@/css/modal/orderCenter/changeProduct.less";
+
 </style>

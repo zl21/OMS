@@ -37,52 +37,18 @@ export default {
         formValue: {
           searchValue: '',
           psCProEcode: '',
+          proName:"",
         },
         formData: [
           {
-            label: $i18n.t('table_label.commoditySKU'), // '商品SKU',
+            label: $i18n.t('table_label.code_SKU'), // '商品SKU',
             style: 'dimSearch',
             width: '12',
             value: 'searchValue',
             columns: ['ECODE'],
             AuotData: [], // 匹配的选项
             dimChange: async (val) => {
-              // 模糊查询的方法
-              // const _this = this;
-              // _this.formConfig.formValue.searchValue = val.trim();
-              // const query = {
-              //   isBlur: 'Y', // N为精确匹配
-              //   psCSku: {
-              //     ECODE: val.trim(),
-              //   },
-              // };
-              // const res = await _this.service.common.skuQuery(query);
-              // if (res.status === 200) {
-              //   const data = res.data.data.data;
-              //   const dimList = _this.formConfig.formData;
-              //   // let arr;
-              //   data.forEach((item) => {
-              //     // 删除不需要展示的模糊搜索项
-              //     delete item.GBCODE;
-              //     delete item.IS_GIFT;
-              //     delete item.IS_GROUP;
-              //     delete item.PRICELIST;
-              //     // delete item.PS_C_PRO_ECODE;
-              //     delete item.PS_C_PRO_ID;
-              //     delete item.colorId;
-              //     delete item.colorName;
-              //     delete item.sizeId;
-              //     delete item.sizeName;
-              //     delete item.skuId;
-              //   });
-              //   dimList.forEach((item) => {
-              //     // '商品SKU'
-              //     if (item.label === $i18n.t('table_label.commoditySKU')) {
-              //       item.AuotData = data;
-              //       // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
-              //     }
-              //   });
-              // }
+            
             },
             dimEnter: () => {
               this.search('one')
@@ -92,35 +58,14 @@ export default {
             },
           },
           {
-            label: $i18n.t('table_label.itemNo'), // '商品款号',
+            label: $i18n.t('table_label.itemNo01'), // '商品款号',
             style: 'dimSearch',
             width: '12',
             value: 'psCProEcode',
             columns: ['ECODE'],
             AuotData: [], // 匹配的选项
             dimChange: async (val) => {
-              // 模糊查询的方法
-              // const _this = this;
-              // _this.formConfig.psCProEcode = val.trim();
-              // const fromdata = new FormData();
-              // const params = {
-              //   GLOBAL: val.trim(),
-              //   PAGENUM: 1,
-              //   PAGESIZE: 10,
-              //   CONDITION: {},
-              //   TABLENAME: 'PS_C_PRO',
-              // };
-              // fromdata.append('param', JSON.stringify(params));
-              // const res = await this.service.common.screenresult(fromdata);
-              // if (res.data.code === 0) {
-              //   const dimList = _this.formConfig.formData;
-              //   dimList.forEach((item) => {
-              //     // '商品款号'
-              //     if (item.label === $i18n.t('table_label.itemNo')) {
-              //       item.AuotData = res.data.data.list;
-              //     }
-              //   });
-              // }
+             
             },
             dimEnter: () => {
               this.tableConfig.current = 1
@@ -131,60 +76,43 @@ export default {
               // this.psCProEcode = val.label;
             },
           },
+          {
+            label: $i18n.t("table_label.itemNo02"), 
+            style: 'dimSearch',
+            width: '12',
+            value: 'proName',
+            columns: ['ECODE'],
+            AuotData: [], // 匹配的选项
+            dimChange: async (val) => {
+             
+            },
+            dimEnter: () => {
+              this.tableConfig.current = 1
+              this.search('one')
+            },
+            dimSelect: (val) => {
+              this.formConfig.formValue.proName = val.label
+              // this.psCProEcode = val.label;
+            },
+          },
         ],
       },
       replaceFormConfig: {
         formValue: {
           searchValue: '',
           psCProEcode: '',
+          proName:""
         },
         formData: [
           {
-            label: $i18n.t('table_label.commoditySKU'), // '商品SKU',
+            label: $i18n.t('table_label.code_SKU'), // '商品SKU',
             style: 'dimSearch',
             width: '12',
             value: 'searchValue',
             columns: ['ECODE'],
             AuotData: [], // 匹配的选项
             dimChange: async (val) => {
-              // 模糊查询的方法
-              // const _this = this
-              // _this.replaceFormConfig.formValue.searchValue = val.trim()
-              // const query = {
-              //   isBlur: 'Y', // N为精确匹配
-              //   psCSku: {
-              //     ECODE: val.trim(),
-              //   },
-              // }
-              // const res = await this.service.common.skuQuery(query)
-              // if (res.status === 200) {
-              //   const data = res.data.data.data
-              //   const dimList = _this.replaceFormConfig.formData
-              //   // let arr;
-              //   data.forEach((item) => {
-              //     // 删除不需要展示的模糊搜索项
-              //     delete item.GBCODE
-              //     delete item.IS_GIFT
-              //     delete item.IS_GROUP
-              //     delete item.PRICELIST
-              //     // delete item.PS_C_PRO_ECODE;
-              //     delete item.PS_C_PRO_ID
-              //     delete item.colorId
-              //     delete item.colorName
-              //     delete item.sizeId
-              //     delete item.sizeName
-              //     delete item.skuId
-              //   })
-              //   dimList.forEach((item) => {
-              //     // '商品SKU'
-              //     if (
-              //       item.label === $i18n.t('table_label.commoditySKU')
-              //     ) {
-              //       item.AuotData = data
-              //       // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
-              //     }
-              //   })
-              // }
+              
             },
             dimEnter: () => {
               this.tableConfig.current2 = 1
@@ -195,41 +123,39 @@ export default {
             },
           },
           {
-            label: $i18n.t('table_label.itemNo'), // '商品款号',
+            label: $i18n.t('table_label.itemNo01'), // '商品款号',
             style: 'dimSearch',
             width: '12',
             value: 'psCProEcode',
             columns: ['ECODE'],
             AuotData: [], // 匹配的选项
             dimChange: async (val) => {
-              // 模糊查询的方法
-              // const _this = this
-              // _this.replaceFormConfig.psCProEcode = val.trim()
-              // const fromdata = new FormData()
-              // const params = {
-              //   GLOBAL: val.trim(),
-              //   PAGENUM: 1,
-              //   PAGESIZE: 10,
-              //   CONDITION: {},
-              //   TABLENAME: 'PS_C_PRO',
-              // }
-              // fromdata.append('param', JSON.stringify(params))
-              // const res = await this.service.common.screenresult(fromdata)
-              // if (res.data.code === 0) {
-              //   const dimList = _this.replaceFormConfig.formData
-              //   dimList.forEach((item) => {
-              //     // '商品款号'
-              //     if (item.label === $i18n.t('table_label.itemNo')) {
-              //       item.AuotData = res.data.data.list
-              //     }
-              //   })
-              // }
+              
             },
             dimEnter: () => {
               this.search('two')
             },
             dimSelect: (val) => {
               this.replaceFormConfig.formValue.psCProEcode = val.label
+              // this.psCProEcode = val.label;
+            },
+          },
+          {
+            label: $i18n.t("table_label.itemNo02"), 
+            style: 'dimSearch',
+            width: '12',
+            value: 'proName',
+            columns: ['ECODE'],
+            AuotData: [], // 匹配的选项
+            dimChange: async (val) => {
+             
+            },
+            dimEnter: () => {
+              this.tableConfig.current = 1
+              this.search('one')
+            },
+            dimSelect: (val) => {
+              this.formConfig.formValue.proName = val.label
               // this.psCProEcode = val.label;
             },
           },
@@ -432,13 +358,13 @@ export default {
       if (value == 'one') {
         data.skuEcode = self.formConfig.formValue.searchValue.trim()
         data.spuEcode = self.formConfig.formValue.psCProEcode.trim()
-        data.spuEname = self.proName.trim()
+        data.spuEname = self.formConfig.formValue.proName.trim()
         data.size = this.tableConfig.pageSize
         data.current = this.tableConfig.current
       } else {
         data.skuEcode = self.replaceFormConfig.formValue.searchValue.trim()
         data.spuEcode = self.replaceFormConfig.formValue.psCProEcode.trim()
-        data.spuEname = self.replace_proName.trim()
+        data.spuEname = self.replaceFormConfig.formValue.proName.trim()
         data.size = this.tableConfig2.pageSize
         data.current = this.tableConfig2.current
       }

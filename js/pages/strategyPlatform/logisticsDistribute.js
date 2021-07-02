@@ -133,6 +133,7 @@ export default {
             radioChange: () => {
               const val = this.formConfig.formValue.REGION_TYPE;
               let item = this.queryForm('排除省份');
+              this.tableSelectArr = []
 
               if (val == 2) {
                 this.modalTitle = '添加支持省份';
@@ -146,6 +147,7 @@ export default {
                 this.btnConfig2.buttons[3].isShow = true
 
               } else {
+                
                 item.item.required = true
                 this.modalTitle = '添加排除区域';
                 this.tableConfig.columns[2].title = '排除省份';
@@ -220,14 +222,7 @@ export default {
             width: '8',
             disabled: true,
             switchChange: () => {
-              // let isActive = this.FormConfig.formValue.isActive;
-              // this.FormConfig.formData[1].disabled = isActive;
-              // this.AliasFormConfig.formData[0].options.forEach(em => {
-              //   em.disabled = isActive;
-              // });
-              // this.btnConfig2.buttons.forEach(em => {
-              //   em.disabled = isActive;
-              // });
+             
             }
           }
         ],
@@ -752,18 +747,17 @@ export default {
         }
 
 
-
         this.FormConfig.formData[0].itemdata.valuedata = stCDeliveryArea.cpCLogisticsEname;
         this.FormConfig.formData[0].itemdata.pid = stCDeliveryArea.cpCLogisticsId;
         this.FormConfig.formValue.cpCLogisticsEname = stCDeliveryArea.cpCLogisticsEname; //物流公司名称
         this.FormConfig.formValue.cpCLogisticsId = stCDeliveryArea.cpCLogisticsId; //物流公司id
         this.FormConfig.formValue.remark = stCDeliveryArea.remark; //备注
         this.tableConfig.total = stCDeliveryAreaRegionItemList.total;
-        this.FormConfig.formData[2].style = 'switch'
+        this.FormConfig.formData[2].style = 'input'
         //isactive 根据主表这个字段来控制是否可以编辑 Y不能编辑 N可以编辑
 
         if (stCDeliveryArea.isactive == 'Y') {
-          this.FormConfig.formValue.isActive = true
+          this.FormConfig.formValue.isActive = "启用"
           this.FormConfig.formData[1].disabled = true;
           this.AliasFormConfig.formData[0].options.forEach(em => {
             em.disabled = true;
@@ -772,7 +766,7 @@ export default {
             em.disabled = true;
           });
         } else {
-          this.FormConfig.formValue.isActive = false
+          this.FormConfig.formValue.isActive = '停用'
         }
         //渲染明细表
         stCDeliveryAreaRegionItemList.records.forEach((item, index) => {
@@ -873,9 +867,6 @@ export default {
             }
           }
         }
-
-
-
 
       }
 
@@ -1058,7 +1049,7 @@ export default {
         },
         stCDeliveryAreaRegionItemList: this.stCDeliveryAreaRegionItemList
       };
-      this.ID != -1 && (data.stCDeliveryArea.isActive = (this.FormConfig.formValue.isActive ? "Y" : "N"))
+      //this.ID != -1 && (data.stCDeliveryArea.isActive = (this.FormConfig.formValue.isActive ? "Y" : "N"))
       service.strategyPlatform.deliveryAreaSave(data).then(res => {
         this.fnempty();
         this.$Message.success(res.data.message);

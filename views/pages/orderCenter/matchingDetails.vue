@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-06-24 19:47:36
+ * @LastEditTime: 2021-07-02 16:49:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
@@ -241,8 +241,10 @@ export default {
               if (type == 2) {
                 //判断明细suk是否相等 ---强制匹配
                 if (!this.fnisSku(item.PS_C_SKU_ECODE, data.RETURN_ORDER_ITEM_LIST.PS_C_SKU_ECODE)) {
-                  em.OC_B_RETURN_ORDER_ID = data.BILL_NO
-                  item.OC_B_RETURN_ORDER_ID = data.BILL_NO
+                  // em.OC_B_RETURN_ORDER_ID = data.BILL_NO
+                  // item.OC_B_RETURN_ORDER_ID = data.BILL_NO
+                     em.OC_B_RETURN_ORDER_BILL_NO = data.BILL_NO
+                  item.OC_B_RETURN_ORDER_BILL_NO = data.BILL_NO
 
                   em.OC_B_RETURN_ORDER_BILL_NO_ID = data.ID
                   item.OC_B_RETURN_ORDER_BILL_NO_ID = data.ID
@@ -264,9 +266,12 @@ export default {
                 }
               } else {
                 //判断明细suk是否相等 ---手工匹配
-                if (this.fnisSku(item.PS_C_SKU_ECODE, data.PS_C_SKU_ECODE)) {
-                  em.OC_B_RETURN_ORDER_ID = data.BILL_NO
-                  item.OC_B_RETURN_ORDER_ID = data.BILL_NO
+                if (this.fnisSku(item.PS_C_SKU_ECODE, data.PS_C_SKU_ECODE)) { //
+                  // em.OC_B_RETURN_ORDER_ID = data.BILL_NO
+                  // item.OC_B_RETURN_ORDER_ID = data.BILL_NO
+
+                    em.OC_B_RETURN_ORDER_BILL_NO = data.BILL_NO
+                  item.OC_B_RETURN_ORDER_BILL_NO = data.BILL_NO
 
                   em.OC_B_RETURN_ORDER_BILL_NO_ID = data.ID
                   item.OC_B_RETURN_ORDER_BILL_NO_ID = data.ID
