@@ -25,6 +25,7 @@
   "dependencies": {
     "@syman/ark-ui": "^1.1.33",
     "lodash": "^4.17.21",
+    "mddir": "^1.1.1",
     "qs": "^6.9.4"
   }
 }
