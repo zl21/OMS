@@ -51,7 +51,7 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: '添加区域',
+            text: '排除区域',
             isShow: false,
             webname: "ST_C_DELIVERY_AREA_addArea",
             disabled: false, // 按钮禁用控制
@@ -406,6 +406,10 @@ export default {
                 console.log(v);
               },
               'on-check-change': v => {
+                if (this.modalType = 4) {
+                  this.chuliList(v)
+                }
+
                 if (v.length > 0) {
                   v.forEach(item => {
                     if (item.C_UP_ID && item.children.length == 0) {
@@ -576,19 +580,25 @@ export default {
 
   },
   methods: {
+    chuliList(data) {
+      console.log(data);
+    },
     queryAllCheckedProvince() {
       let data = {
-        ID:this.$route.params.customizedModuleId,
+        ID: this.$route.params.customizedModuleId,
         AREA_RANGE_TYPE: this.AliasFormConfig.formValue.REGION_TYPE
       }
-      service.strategyPlatform.queryAllCheckedProvince(data).then(res=>{
+      service.strategyPlatform.queryAllCheckedProvince(data).then(res => {
         if (res.data.code == 0) {
           this.fixedcolumns = res.data.data.join(",")
         }
-       
+
       })
     },
     deliveryAreaqueryLogisticsLevel() {
+      this.cpCRegionProvinceId = this.tableSelectArr[0].cpCRegionProvinceId
+      this.cpCRegionProvinceEname = this.tableSelectArr[0].cpCRegionProvinceEname
+      this.cpCRegionProvinceEcode = this.tableSelectArr[0].cpCRegionProvinceEcode
 
       let data = {
         ID: this.tableSelectArr[0].id,
@@ -597,33 +607,23 @@ export default {
       }
       service.strategyPlatform.deliveryAreaqueryLogisticsLevel(data).then(res => {
         if (res.data.code == 0) {
+          this.modalType = 4 //表示在排除回显的情况
+
           let data = res.data.data
           let item = this.queryForm(' 排除省份');
-          item.item.props.value = data.NAME
+          item.item.props.value = data.title
 
           let cityitem = this.queryForm('排除地区');
-          var formdata = new FormData();
-          formdata.append('searchdata', JSON.stringify({ isdroplistsearch: true, refcolid: 167077, fixedcolumns: { C_UP_ID: `=${data.ID}` }, startindex: 0, range: 100 }));
-          service.common.QueryList(formdata).then(res => {
-            let citarr = res.data.data.row;
-            cityitem.item.props.data = [];
-            citarr.forEach((item, index) => {
-              var obj = {
-                title: item.ENAME.val,
-                id: item.ID.val,
-                ECODE: item.ECODE.val,
-                index,
-                C_UP_ID: item.C_UP_ID.val,
-                expand: false,
-                children: []
-              };
-
-              cityitem.item.props.data.push(obj);
-            });
-          });
-
-
-
+          cityitem.item.props.data = data.children
+          data.children.forEach(item => {
+            if (item.children.length > 0) {
+              item.children.forEach(em => {
+                em.val = em.address
+                em.isProhibit = em.address ? false : true
+                em.render = this.inputRender
+              })
+            }
+          })
 
         }
 
@@ -840,6 +840,19 @@ export default {
         let cpCRegionCityEname = v.title; // 城市名称
         let cpCRegionCityEcode = v.ECODE; //城市编码
 
+        if (v.checked) {
+          let obj = {
+            cpCRegionProvinceId: this.cpCRegionProvinceId,
+            cpCRegionProvinceEname: this.cpCRegionProvinceEname,
+            cpCRegionProvinceEcode: this.cpCRegionProvinceEcode,
+            cpCRegionCityId, //城市id
+            cpCRegionCityEname, // 城市名称
+            cpCRegionCityEcode, //城市编码
+            id: '-1'
+          };
+          this.stCDeliveryAreaRegionItemList.push(obj);
+        }
+
         if (v.children.length > 0) {
           for (const k of v.children) {
             if (k.checked) {
@@ -856,24 +869,13 @@ export default {
                 addressArea: k.val, //具体区域
                 id: '-1'
               };
-
               this.stCDeliveryAreaRegionItemList.push(obj);
             }
           }
+        }
 
-        }
-        if (v.checked) {
-          let obj = {
-            cpCRegionProvinceId: this.cpCRegionProvinceId,
-            cpCRegionProvinceEname: this.cpCRegionProvinceEname,
-            cpCRegionProvinceEcode: this.cpCRegionProvinceEcode,
-            cpCRegionCityId, //城市id
-            cpCRegionCityEname, // 城市名称
-            cpCRegionCityEcode, //城市编码
-            id: '-1'
-          };
-          this.stCDeliveryAreaRegionItemList.push(obj);
-        }
+
+
 
       }
 
@@ -959,15 +961,29 @@ export default {
       });
     },
     addRegion() {
-      this.formconfig2[0].show = false;
-      this.formconfig2[1].show = true;
-      this.formconfig2[2].show = false;
-      this.formconfig2[3].show = true;
+      if (this.tableSelectArr.length > 1) {
+        this.$Message.warning('只能选择一条数据！');
+        return
+      } else if (this.tableSelectArr.length == 1) {
+        this.formconfig2[0].show = false;
+        this.formconfig2[1].show = false;
+        this.formconfig2[2].show = true;
+        this.formconfig2[3].show = true;
+        this.modalType = 3
+        this.modal1 = true;
+        //回显数据
+        this.deliveryAreaqueryLogisticsLevel()
+      } else {
+        this.formconfig2[0].show = false;
+        this.formconfig2[1].show = true;
+        this.formconfig2[2].show = false;
+        this.formconfig2[3].show = true;
 
-      this.modal1 = true;
-      this.modalType = 1
-      //添加区域
-      this.querList();
+        this.modal1 = true;
+        this.modalType = 1
+        //添加区域
+        this.querList();
+      }
 
     },
     fnprovince(v, type) {
@@ -1018,10 +1034,10 @@ export default {
               return
             }
           } else if (this.modalType == 2) {
-            if (!this.fixedcolumns) {
-              this.$Message.warning('请选择支持省份！');
-              return
-            }
+            // if (!this.fixedcolumns) {
+            //   this.$Message.warning('请选择支持省份！');
+            //   return
+            // }
           }
 
         }
