@@ -25,16 +25,17 @@
             @on-page-size-change="pageSizeChange"
             @on-row-dblclick="handDblClick"
           /> -->
+          <businessAgTable
+            :ref="`agGridChild${index + 1}`"
+            :ag-table-config="agTableConfig"
+            :options="options"
+            @on-row-dblclick="handDblClick"
+            @on-page-change="pageChange"
+            @on-page-size-change="pageSizeChange"
+            @on-selection-change="onSelectionChange"
+          />
         </TabPane>
       </Tabs>
-      <businessAgTable
-        :ag-table-config="agTableConfig"
-        :options="options"
-        @on-row-dblclick="handDblClick"
-        @on-page-change="pageChange"
-        @on-page-size-change="pageSizeChange"
-        @on-selection-change="onSelectionChange"
-      />
       <div class="promactiIcon">
         <div class="legend">
           <!-- 图例 -->

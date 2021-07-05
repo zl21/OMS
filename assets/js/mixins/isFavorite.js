@@ -36,6 +36,7 @@ const isFavoriteMixin = {
       fromdata.append('type', 'action');
       const res = await this.service.common.getUserConfig(fromdata);
       const styleStr = res.data.data.isFavorite ? 'iconfont icon-liebiao-yishoucang' : 'iconfont iconbj_col';
+      if (self.btnConfig.buttons.every(i => i.webname != 'isFavorite')) return
       self.btnConfig.buttons.find(item => item.webname === 'isFavorite').icon = styleStr;
     }
   }

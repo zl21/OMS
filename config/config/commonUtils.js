@@ -1181,6 +1181,7 @@ class commonUtils {
     const contentHeight = document.getElementById('content').clientHeight;
     // 获取需要除了agTable之外的节点
     const arr = document.getElementsByClassName('totalHeight');
+    if (!arr.length) return // 解决促销换ag后报错
     let sumHeight = 34 + defaultHeight;
     Object.getOwnPropertyNames(arr).forEach(item => {
       sumHeight += parseInt(arr[item].clientHeight);

@@ -39,7 +39,7 @@ export default {
           product: '',
           acti_group: '',
           release_name: '',
-          STATUS: [1, 2, 3],
+          STATUS: [1, 2],
         },
         ruleValidate: {},
         formData: [
@@ -523,7 +523,7 @@ export default {
     // });
     this.loading = true;
     // 计算高度 通过设置节点 'totalHeight'
-    await this.$comUtils.setTableHeight(this, 230);
+    await $omsUtils.setTableHeight(this, 230);
 
     await this.times(); // 默认时间
 
