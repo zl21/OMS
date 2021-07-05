@@ -867,8 +867,8 @@ export default {
           self.formConfig.formValue[key] = data[key].val
           if (!drpEx.includes(key)) self.formConfigEx.formValue[key] = data[key].val
           // 特别地
-          self.formConfig.formValue.RETURNEE_NAME = data.RECEIVER_NAME.val || '';
-          self.formConfig.formValue.RETURNEE_MOBILE = data.RECEIVER_MOBILE.val || '';
+          self.formConfig.formValue.RETURNEE_NAME = data.RECEIVER_NAME ? data.RECEIVER_NAME.val : '';
+          self.formConfig.formValue.RETURNEE_MOBILE = data.RECEIVER_MOBILE ? data.RECEIVER_MOBILE.val : '';
         }
       }
       // 单号改变，清空明细
