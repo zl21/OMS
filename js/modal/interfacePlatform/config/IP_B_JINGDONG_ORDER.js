@@ -82,18 +82,20 @@ export default {
   },
   // 确定按钮
   determine: async (self) => {
+    const formValue = self.downLoadFormConfig.formValue;
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
       self.$Message.warning($i18n.t('modalTips.be'));// 请选择需要下载的店铺
       return false;
     }
-    if (
-      self.downLoadFormConfig.formValue.startEndTimes
-        .length === 0
-      && self.downLoadFormConfig.formValue.orderNum === ''
-    ) {
+    const [start] = formValue.startEndTimes
+    if (!(formValue.orderNum || start)) {
       self.$Message.warning($i18n.t('modalTips.bs'));// 请选择输入的日期或输入订单编号
+      return false;
+    }
+    if (!start) {
+      self.$Message.warning('请输入退单修改时间');// 请选择输入的日期或输入订单编号
       return false;
     }
     const param = {
