@@ -53,14 +53,18 @@
         @on-page-size-change="pageSizeChange"
         @on-sort-changed="onSortChanged"
       /> -->
-       <businessAgTable
-      :ag-table-config="agTableConfig"
-      :options="options"
-      @on-row-dblclick="onRowDblclick"
-      @on-page-change="pageChange"
-      @on-page-size-change="pageSizeChange"
-      @on-selection-change="onSelectionChange"
-    />
+      <businessAgTable
+        v-loading="agLoaing"
+        :ag-table-config="agTableConfig"
+        :options="options"
+        @on-row-dblclick="onRowDblclick"
+        @on-page-change="pageChange"
+        @on-page-size-change="pageSizeChange"
+        @on-selection-change="onSelectionChange"
+        @on-column-pinned="colPinned"
+        @on-column-moved="colMoved"
+        @on-sort-change="colSortChange"
+      />
       <!-- <loading :loading="loading" /> -->
     </div>
     <Modal

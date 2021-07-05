@@ -32,6 +32,7 @@
         modal: false,
         buttonInit: true,
         loading: false,
+        agLoaing: false,
         selectKey: [],
         proDetailConfig: {
           // 列表商品明细弹窗配置
@@ -572,6 +573,7 @@
         },
         },
         options:{
+          getMainMenuItems: this.getMainMenuItems,
           datas:{},
           floatingFilter:false
         },
@@ -628,7 +630,7 @@
         this.labelValue = val;
         this.query();
       },
-      initList(fold = true) {
+      initList(fold = true, aG = false) {
         const self = this;
         const data = {
           TABLE: self.tablename,
@@ -640,8 +642,10 @@
             if (res.data.data.ZIP) {
             } else {
               const data = res.data.data.DATA;
-              self.initForm(data.ADVANCE); // 高级搜索赋值
-              self.dynamicData = data.DYNAMIC; // 动态搜索赋值
+              if (!aG) {
+                self.initForm(data.ADVANCE); // 高级搜索赋值
+                self.dynamicData = data.DYNAMIC; // 动态搜索赋值
+              }
               // 列表初始化
               const columns = data.TAB_HEADER; // 表头赋值
               const rowData = [];
@@ -657,13 +661,13 @@
               if(!self.vueAgTable){
                 self.$refs.agGridChild.agGridTable(columns, rowData);
               }
-              
               self.tabList = data.TAB_LABEL; // tabs赋值
               self.labelValue = data.TAB_LABEL[0].value;
-              self.query();
+              self.query(aG);
             }
           }
         });
+        if (aG) return
         console.log('singleType===', self.$OMS2.BtnConfig.singleType);
         self.btnConfig.buttons = []; // 清空按钮缓存,防止重复叠加按钮
         const buttons = self.$OMS2.BtnConfig.config();
@@ -876,10 +880,11 @@
         obj.SORT = SORT;
         return obj;
       },
-      query() {
+      query(aG = false) {
         const self = this;
         const data = self.queryData();
-        self.loading = true;
+        // self.loading = true;
+        self[aG ? 'loading' : 'agLoaing'] = true;
         self.service.orderCenter.queryList(data).then((res) => {
           console.log(res);
           if (res.data.code == 0) {
@@ -896,7 +901,8 @@
               self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
             }
           }
-          self.loading = false;
+          self[aG ? 'loading' : 'agLoaing'] = false;
+          // self.loading = false;
         });
         self.service.orderCenter.queryStatistics(data).then((res) => {
           console.log(res);
@@ -911,7 +917,8 @@
               });
             }
           }
-          self.loading = false;
+          self[aG ? 'loading' : 'agLoaing'] = false;
+          // self.loading = false;
         });
       // self.service.orderCenter.queryStatistics(data).then((res) => {
       //   console.log(res);
@@ -1108,6 +1115,69 @@
           }
         })
       },
+      colPinned(data) { },
+      colMoved(columns) {
+        // console.log(columns);
+        let newCol = [], obj = {};
+        columns.forEach((x,y) => {
+          if (x.colId == 'index') {
+            return
+          } else {
+            obj = {
+              NO: (y + 1) * 10,
+              NAME: x.colId,
+              // ID: parentNode[i].getAttribute('ID'),
+              DISPLAY: x.visible,
+              DESC: x.colDef.displayName,
+            };
+            newCol.push(obj);
+          }
+        });
+        const data = {
+          TABLE: this.tablename,
+          TYPE: 'L_TAB_HEAD',
+          ACTION: 'SAVE',
+          DATA: newCol
+        };
+        this.service.orderCenter.customSettings(data).then(res => {
+        }).catch(e => {
+          console.log(e);
+        });
+      },
+      getMainMenuItems() {
+        return [
+          'pinSubMenu',
+          'separator',
+          'autoSizeThis',
+          'autoSizeAll',
+          'separator',
+          {
+            name: '重置所有列位置信息',
+            action: () => {
+             this.handelColnumn('L_TAB_HEAD', 'RELOAD', {});
+            },
+          },
+        ];
+      },
+      handelColnumn (type, action, obj) {
+        const self = this;
+        const data = {
+          TABLE: self.tablename,
+          TYPE: type,
+          ACTION: action,
+          DATA: obj
+        };
+        self.service.orderCenter.customSettings(data).then(res => {
+          console.log(res);
+          if (res.data.code == 0) {
+            self.$Message.success(res.data.message);
+            self.initList(0,1);
+          } else {
+            // self.$Message.error(res.data.message);
+          }
+        });
+      },
+      colSortChange(data) { },
       onSelectionChange(data){
         console.log(data);
         this.selection = data;
