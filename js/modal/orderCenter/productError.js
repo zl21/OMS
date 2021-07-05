@@ -43,6 +43,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
           pageShow: true, // 控制分页是否显示
           searchInputShow: false, // 控制搜索框是否显示
           width: '', // 表格宽度
+          height: '452',
           border: true, // 是否显示纵向边框
           total: 0, // 设置总条数
           pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
