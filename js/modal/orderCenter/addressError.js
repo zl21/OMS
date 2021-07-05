@@ -75,7 +75,6 @@
                   }, [
                     h('drpInput', {
                       props: {
-                        serviceId: 'r3-cp',
                         colname: 'OLD_BARCODE',
                         style: 'popInput',
                         version: '1.4',
@@ -146,7 +145,6 @@
                   }, [
                     h('drpInput', {
                       props: {
-                        serviceId: 'r3-cp',
                         colname: 'OLD_BARCODE',
                         style: 'popInput',
                         version: '1.4',
@@ -319,6 +317,7 @@
           if (res.data.code == 0) {
             res.data.data.OC_B_ORDER_EXCEPTION.forEach(item=>{
               self.itemdata_pro.push({
+                serviceId: 'r3-cp',
                 colid: 166974,
                 colname: 'CP_C_REGION_PROVINCE_ID',
                 fkdisplay: 'drp',
@@ -330,6 +329,7 @@
                 valuedata: item.CP_C_REGION_PROVINCE_ENAME,
               });
               self.itemdata_city.push({
+                serviceId: 'r3-cp',
                 colid: 167077,
                 colname: 'CP_C_REGION_CITY_ID',
                 fkdisplay: 'drp',
