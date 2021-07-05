@@ -75,6 +75,7 @@
                   }, [
                     h('drpInput', {
                       props: {
+                        serviceId: 'r3-cp',
                         colname: 'OLD_BARCODE',
                         style: 'popInput',
                         version: '1.4',
@@ -145,6 +146,7 @@
                   }, [
                     h('drpInput', {
                       props: {
+                        serviceId: 'r3-cp',
                         colname: 'OLD_BARCODE',
                         style: 'popInput',
                         version: '1.4',

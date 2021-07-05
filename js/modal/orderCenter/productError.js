@@ -201,6 +201,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
           if (res.data.code == 0) {
             res.data.data.OC_B_ORDER_EXCEPTION.forEach(item=>{
               self.itemdata_list.push({
+                serviceId: 'r3-cp',
                 colid: 171591,
                 colname: 'CP_C_REGION_PROVINCE_ID',
                 fkdisplay: 'drp',
