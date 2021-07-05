@@ -19,6 +19,7 @@ export default {
         isActive: true,
         isdisabled: false,
         itemdata: {
+          serviceId: 'r3-cp',
           refcolval: {
             fixcolumn: 'CP_C_PLATFORM_ID',
             expre: 'equal',
