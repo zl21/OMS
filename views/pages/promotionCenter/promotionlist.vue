@@ -103,4 +103,13 @@ export default promotionlist;
 </script>
 <style lang="less">
 @import "~@/css/pages/promotionCenter/promotionlist.less";
+.colorBlack {
+  color: #323233;
+}
+.colorBlue {
+  color: blue;
+}
+.colorGray {
+  color: gray;
+}
 </style>

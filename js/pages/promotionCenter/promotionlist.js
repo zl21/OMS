@@ -189,6 +189,7 @@ export default {
         }
       ],
       options: {
+        getRowClass: this.getRowClass,
         datas: {},
         floatingFilter: false
       },
@@ -535,6 +536,20 @@ export default {
     $omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'LIST' , serviceId:'r3-oc-oms'});
   },
   methods: {
+    getRowClass(params) {
+      const { rowIndex, data: { STATUS } } = params; // 获取行索引
+      switch (STATUS) {
+        case 1:
+          return 'colorBlack';
+          break;
+        case 2:
+          return 'colorBlue';
+          break;
+        default:
+          return 'colorGray';
+          break;
+      }
+    },
     // 获取7天后时间
     setData(day, startTime) {
       let date = startTime ? this.formatDate(new Date().setHours(0, 0, 0, 0) + 86400 * day * 1000) : this.formatDate(new Date().setHours(23, 59, 59, 0) + 86400 * day * 1000)
