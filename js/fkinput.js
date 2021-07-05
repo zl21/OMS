@@ -232,7 +232,7 @@ export default {
       searchParam.append('colid', id);
       searchParam.append('fixedcolumns', query.fixedcolumns);
 
-      this.service.common.fuzzyquerybyak(searchParam, { serviceId: itemdata.serviceId || 'r3-cp' }).then((res) => {
+      this.service.common.fuzzyquerybyak(searchParam, itemdata.serviceId ? { serviceId: itemdata.serviceId } : {}).then((res) => {
         console.log('fuzzyquerybyak:',res);
         for (let i = 0; i < res.data.data.length; i++) {
           const element = res.data.data[i];
@@ -361,7 +361,7 @@ export default {
       searchParam.append('ak', queryString);
       searchParam.append('colid', id);
       searchParam.append('fixedcolumns', query.fixedcolumns);
-      this.service.common.fuzzyquerybyak(searchParam, { serviceId: self.itemdata.serviceId || 'r3-cp' }).then((res) => {
+      this.service.common.fuzzyquerybyak(searchParam, self.itemdata.serviceId ? { serviceId: self.itemdata.serviceId } : {}).then((res) => {
         console.log('fuzzyquerybyak',res);
         self.queryList = res.data.data;
         console.log('self.itemdata:',self.itemdata);
@@ -466,7 +466,7 @@ export default {
         getcmd: 'n',
         table: item.reftable
       }
-      this.service.common.getTableQuery(params, { serviceId: self.itemdata.serviceId || 'r3-cp' }).then((res) => {
+      this.service.common.getTableQuery(params, self.itemdata.serviceId ? { serviceId: self.itemdata.serviceId } : {}).then((res) => {
         for (let i = 0; i < res.data.datas.dataarry.length; i++) {
           const element = res.data.datas.dataarry[i];
           element.value = '';
@@ -491,7 +491,7 @@ export default {
       if (self.hasQuery) {
         searchdata.fixedcolumns = self.selectConfigChanged;
       }
-      this.service.common.QueryList(searchdata, { serviceId: self.itemdata.serviceId || 'r3-cp' }).then((res) => {
+      this.service.common.QueryList(searchdata, self.itemdata.serviceId ? { serviceId: self.itemdata.serviceId } : {}).then((res) => {
         console.log('res:',res);
         self.SelectionData.tableAllDatas = res.data.datas;
         self.SelectionData.row = res.data.datas.row;
