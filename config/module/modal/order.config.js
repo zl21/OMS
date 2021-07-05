@@ -55,6 +55,11 @@ export default {
   EXCHANGETAG: {
     component: () => import('@/views/modal/orderCenter/exchangeTag.vue')
   },
+  CHANGETAG: {
+    component: () => import('@/views/modal/orderCenter/changeTag.vue'),
+    labelName: '换吊牌',
+    isList: false
+  },
   MANUAL: {
     component: () => import('@/views/modal/orderCenter/manual.vue')
   },
