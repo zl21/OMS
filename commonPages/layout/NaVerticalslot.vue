@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-02 18:38:12
+ * @LastEditTime: 2021-07-05 16:27:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -48,7 +48,7 @@ export default {
   }
 }
 // 历史
-.history{
+.history,.favorite{
   .ark-select-dropdown{
     ul{
       li{
@@ -69,7 +69,7 @@ export default {
 .message-panel{
   .panel-main{
     width: 420px;
-    border-left: 70px solid rgba(0,0,0,.5);
+    // border-left: 70px solid rgba(0,0,0,.5);
     .panel-title{
       padding: 0 @base-mr;
       height: 48px;
