@@ -18,6 +18,9 @@
         :renderParams="agTableConfig.renderParams"
         @on-row-dblclick="tableRowDbclick"
         @on-selection-change="tableSelectedChange"
+        @on-column-moved="colMoved"
+        @on-column-pinned="colPinned"
+        @on-sort-change="colSortChange"
       ></commonTableByAgGrid>
 
       <div class="page"

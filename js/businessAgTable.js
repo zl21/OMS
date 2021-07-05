@@ -7,6 +7,8 @@
  * @FilePath: /burgeon-business-components/js/vueAgTable.js
  */
 import commonTableByAgGrid from 'libs/@syman/ark-ui-bcl/src/components/common-table-by-ag-grid/CommonTableByAgGrid';
+import { debounce } from 'lodash'
+
 export default {
     name: 'businessAgTable',
     components: {
@@ -40,15 +42,27 @@ export default {
             this.$emit('on-row-dblclick' , data.data);
         },
         // 分页change 事件
-    pageChange(val) {
-        this.$emit('on-page-change', val)
-      },
-      // 切换分页条数
-      onPageSizeChange(val) {
-        this.$emit('on-page-size-change', val)
-      },
-      tableSelectedChange(data){
-          this.$emit('on-selection-change' , data);
-      }
+        pageChange(val) {
+            this.$emit('on-page-change', val)
+        },
+        // 切换分页条数
+        onPageSizeChange(val) {
+            this.$emit('on-page-size-change', val)
+        },
+        tableSelectedChange(data){
+            this.$emit('on-selection-change' , data);
+        },
+        colPinned(data){
+            this.$emit('on-column-pinned' , data);
+        },
+        colSortChange(data){
+            this.$emit('on-sort-change' , data);
+        },
+        colMoved: debounce(async function () {
+            const self = this;
+            const {api, columnApi} = self.$refs.agGrid;
+            const colData = columnApi.getAllGridColumns()
+            this.$emit('on-column-moved' , colData);
+        }, 1000),
     }
 }
