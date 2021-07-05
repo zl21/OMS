@@ -19,6 +19,7 @@ export default {
           fkdisplay: 'drp', // 外键关联类型
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
+          serviceId: 'r3-cp',
           name: '店铺', // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           pid: '',
