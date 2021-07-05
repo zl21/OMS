@@ -608,7 +608,7 @@ export default {
         ACTISTATUS: this.formConfig.formValue.STATUS.join(',').replace('bSelect-all', 0), // 活动状态
         SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
         ACTI_PRO: this.product.itemdata_xitong, // 款号0
-        ACTI_DATE: this.formConfig.formValue.acti_date ? this.formatDate(this.formConfig.formValue.acti_date) : '', // 活动日期0
+        ACTI_DATE: this.formConfig.formValue.acti_date[0] ? this.formatDate(this.formConfig.formValue.acti_date) : '', // 活动日期0
         ACTI_NAME: this.formConfig.formValue.acti_name, // 活动名称
         GROUP_NAME: this.formConfig.formValue.acti_group, // 活动分组
         RELEASE_NAME: this.formConfig.formValue.release_name, // 发布人
