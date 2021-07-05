@@ -1,13 +1,13 @@
 #  @burgeon/internationalization
 
-#### 介绍
+### 介绍
 @burgeon/internationalization  
 
-是上海伯俊中台事业部产品中心项目架构私有依赖包仓库中针对于后期的海外用户有国际化需求开发的语言包功能模块;
+是上海伯俊中台事业部产品中心项目架构私有依赖包仓库中针对于后期的海外用户有国际化需求开发的语言包功能模块；
 
-秉承前端项目工程化的思想,  独立模块依赖包便于后期迭代维护;
+秉承前端项目工程化的思想,  独立模块依赖包便于后期迭代维护。
 
-#### 安装教程
+### 安装教程
 
 一. 简易化安装依赖: 
 
@@ -36,27 +36,55 @@
         优点: 引入nrm管理依赖包来源; 多源情景下切源方便;   
 
         缺点: 初期命令行相应较多; 
+        
+### Properties & API
 
-#### 使用说明
+| Name |  Type  |   Description  |
+| :--- | --- | :--- |
+| locale             |  String     | 当前使用的语言  |
+| editI18n             |  Function     | 用于新增/修改  |
+
+* editI18n( )
+```
+import i18n from '@burgeon/internationalization/i18n';
+const obj = {
+    common: {
+        all: '所有',
+    }
+}
+i18n.editI18n(obj);
+window.$i18n = i18n;
+console.log($i18n.t(common.all));
+```
+
+### Usage Example
 
 >1. 全局(index.js)引入并挂载
 ```
-  import i18n from '@burgeon/internationalization/i18n/i18n.js';
-  window.vmI18n = i18n;
+  import i18n from '@burgeon/internationalization/i18n';
+  window.$i18n = i18n;
 ```
 
 >2. 在X.vue中使用
 ```
    1）注意要在该vue文件中的data中return一下：
      data() {
-       return { vmI18n: window.vmI18n,}
+       return { vmI18n: $i18n,}
      }
    2）具体使用方法：
-     a. data中：vmI18n.t('btn.manualCreation')
-     b. method中：this.vmI18n.t('btn.manualCreation')
+     a. data中：$i18n.t('btn.manualCreation')
+     b. method中：$i18n.t('btn.manualCreation')
      c. 标签中：<td> {{vmI18n.t("common.all")}} </td>
-     d. 暂不支持在独立的js文件中使用
+     d. 独立的js文件中：$i18n.t()或引用后直接使用
 ```
+
+### Q & A
+
+> Q：如何快速查询并使用？
+> A：[网站查询](http://101.132.182.36:20000/)
+
+> Q：……
+> A：……
 
 #### 版本说明
 
