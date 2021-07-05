@@ -252,4 +252,5 @@
 | v1.2.11 | aG列表列移动监听 |  
 | v1.2.12 | drp外键接口网关问题(兼容斯凯奇) |  
 | v1.2.13 | fktable接口网关问题(兼容斯凯奇) |  
-| v1.2.14 | fkinput-inputEnter |  
+| v1.2.14 | fkinput-inputEnter(skx |  
+| v1.2.15 | select-Enter事件(skx |  

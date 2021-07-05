@@ -19,6 +19,7 @@ export default {
   },
   data() {
     return {
+      selectInputChangeVal: '', 
       flodData: 'el-icon-arrow-down', //折叠箭头动态样式
       currentFlod: '' //存储当前选中的箭头状态
     }
@@ -50,6 +51,14 @@ export default {
     }
   },
   methods: {
+    selectInputChange(x) {
+      this.selectInputChangeVal = x;
+    },
+    selectEnter(val, e) {
+      if (e.keyCode == 13) {
+        this.$emit('selectEnter', this.selectInputChangeVal);
+      }
+    },
     runMethods(val , flag){
       if(val){
         flag? val(e):val();
