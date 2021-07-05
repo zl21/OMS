@@ -131,9 +131,9 @@ export default {
             style: 'date', // 输入框类型
             label: '生效开始时间', // 输入框前文字
             colname: 'BEGIN_TIME',
-            type: 'date',
+            type: 'datetime',
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-            format: 'yyyy-MM-dd',
+            format: 'yyyy-MM-dd HH:mm:ss',
             disabled: false,
             options: {
               disabledDate (date) {
@@ -148,9 +148,9 @@ export default {
             style: 'date', // 输入框类型
             label: '生效结束时间', // 输入框前文字
             colname: 'END_TIME',
-            type: 'date',
+            type: 'datetime',
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-            format: 'yyyy-MM-dd',
+            format: 'yyyy-MM-dd HH:mm:ss',
             disabled: false,
             options: {
               disabledDate (date) {
@@ -590,7 +590,7 @@ export default {
     // 时间戳格式化
     formatDate(time) {
       const date = new Date(time);
-      return dateUtil.getFormatDate(date, 'yyyy-MM-dd');
+      return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
     },
     labelClick(e) { // tab明细切换
       this.labelDefaultValue = e.value;
@@ -666,7 +666,17 @@ export default {
       self.isModify = true;
       let value = self.formConfig.formValue[ecode]
       let isDate = Object.prototype.toString.call(value) == '[object Date]' 
-      self.modify[obj][ecode] = isDate ? this.formatDate(value) : value;
+      if (isDate) {
+        let newTime = this.formatDate(value)
+        let oldTime = self.modify[obj][ecode]
+        if (ecode == 'END_TIME') {
+          newTime = $omsUtils.defaultEndTime(newTime, oldTime)
+          self.formConfig.formValue[ecode] = newTime
+        }
+        self.modify[obj][ecode] = newTime
+      } else {
+        self.modify[obj][ecode] = value;
+      }
     },
     getFkChooseItem(row) {
       let itemIndex;
