@@ -128,9 +128,9 @@
                       :inputList="item.inputList?item.inputList:[]"
                       :objList="item.objList?item.objList:[]"
                       :itemdata="item.itemdata"
-                      @inputBlur="(row)=>runMethods(typeof item.InputEnter == 'function' && item.InputEnter(item.itemdata.isBackRowItem ? row : item.itemdata))"
+                      @inputBlur="(row)=>runMethods(typeof item.InputBlur == 'function' && item.InputBlur(item.itemdata.isBackRowItem ? row : item.itemdata))"
                       @getFkChooseItem="(row)=>runMethods(typeof item.oneObj == 'function' && item.oneObj(item.itemdata.isBackRowItem ? row : item.itemdata))"
-                      @itemInputEnter="runMethods(item.InputEnter)">
+                      @itemInputEnter="(row)=>runMethods(typeof item.InputEnter == 'function' && item.InputEnter(item.itemdata.isBackRowItem ? row : item.itemdata))">
             </my-input>
           </FormItem>
 

@@ -30,6 +30,7 @@ export default {
   },
   data() {
     return {
+      inputVal: '',
       SingleSelect: {
         show: false
       },
@@ -181,6 +182,7 @@ export default {
     // 组件值传递
     inputChange(item) {
       const self = this;
+      // this.inputVal = 
       if (self.itemdata.isuppercase && self.itemdata.valuedata) {
         self.itemdata.valuedata = self.itemdata.valuedata
           .toString()
@@ -391,7 +393,7 @@ export default {
           // 模糊匹配成功（匹配到了值）
           itemdata.pid = this.queryList[0].id;
           itemdata.valuedata = this.queryList[0].value;
-          this.$emit('inputBlur', itemdata);
+          this.$emit('inputBlur', this.queryList[0]);
           $(`.item-filter .fkAutocomplete${itemdata.colname}`).css(
             'display',
             'none'
@@ -402,7 +404,6 @@ export default {
       }
       this.$refs['autocomplete' + itemdata.colname].suggestions = [];
      },300)
-     
     },
 
     inputKeyUp(str, event) {
@@ -426,6 +427,8 @@ export default {
           str.pid = '';
           this.$emit('getFkChooseItem', str);
         }
+      } else {
+        this.$emit('itemInputEnter', str.valuedata);
       }
     },
     filterInputName(item) {
