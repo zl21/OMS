@@ -27,7 +27,11 @@ export default {
           {
             text: window.vmI18n.t('common.determine'), // 确定 按钮文本
             btnclick: () => {
-              this.confirm();
+              if (this.isTBsku) {
+                this.save();
+              } else {
+                this.confirm();
+              }
             }
           }
         ]
@@ -259,12 +263,27 @@ export default {
       onRowClickData: {},
       onRowClickText: '',
       onRowClickReplaceText: '',
+      isTBsku: false
     };
   },
   props: {
+    tablename: {
+      type: String
+    },
+    idArray: {
+      type: Array,
+      defalut: () => []
+    },
     componentData: {
       type: Object,
     },
+  },
+  mounted() {
+    console.log(this.$attrs['obj-tab-action-dialog-config'], this.idArray)
+    // 淘宝订单接口-sku异常登记sku替换
+    if(this.$attrs['obj-tab-action-dialog-config'].webname === "SKUAbnormalRegistration") {
+      this.isTBsku = true
+    }
   },
   methods: {
     radioChange(value) {
@@ -356,6 +375,51 @@ export default {
       this.loading = true;
       axios({
         url: '/api/cs/oc/oms/v1/bathChangeGoods',
+        method: 'post',
+        data: result,
+      }).then((res) => {
+        this.loading = false;
+        console.log(res);
+        if (res.data.code == 0) {
+          self.$Message.success(res.data.message);
+          this.$parent.$parent.closeConfirm();
+        } else {
+          self.$Modal.confirm({
+            title: res.data.message,
+            width: 500,
+            render: h => h('Table', {
+              props: {
+                columns: [
+                  {
+                    // title: "提示信息",
+                    title: window.vmI18n.t('modalTitle.tips'),
+                    key: 'message',
+                  },
+                ],
+                data: res.data.data,
+              },
+            }),
+          });
+        }
+      });
+    },
+    save() {
+      const self = this;
+      if (JSON.stringify(self.onRowClickData) == '{}') {
+        return self.$Message.warning(window.vmI18n.t('modalTips.yf'));
+      }
+      if (JSON.stringify(self.onRowClickReplaceData) == '{}') {
+        return self.$Message.warning(window.vmI18n.t('modalTips.yg'));
+      }
+
+      const result = {};
+      result.ids = self.idArray;
+      result.changeGoodsSku = self.onRowClickData.ECODE;
+      result.sku_code = self.onRowClickReplaceData.ECODE;
+      // result.type = 1;
+      this.loading = true;
+      axios({
+        url: '/api/cs/oc/oms/v1/bathChangeTaobaoExceptionSkus',
         method: 'post',
         data: result,
       }).then((res) => {
