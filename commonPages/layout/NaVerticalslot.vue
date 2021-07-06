@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-06 15:46:29
+ * @LastEditTime: 2021-07-06 16:53:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -117,16 +117,33 @@ export default {
         color: @base-color;
       }
     }
+    .no-message{
+      padding-top: 180px;
+      background:url(../../assets/img/message.png) top no-repeat #ffffff;
+      background-size:160px 160px;
+    }
+  }
+}
+// 管理员
+.set-panel{
+  .panel-main{
     .panel-item {
       border-bottom: none;
       .explanatory{
         margin-right: 5px;
+        color: #8d91a1;
       }
-    }
-    .no-message{
-      padding-top: 180px;
-      background:url(../../assets/img/message.png) top no-repeat #ffffff;
-      background-size:160px 160px ;
+      p{
+        color: #292f43;
+      }
+      &:first-child{
+        p{
+          color: #8d91a1;
+          i::before{
+            content: '';
+          }
+        }
+      }
     }
   }
 }
