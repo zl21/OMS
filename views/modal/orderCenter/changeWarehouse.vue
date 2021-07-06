@@ -138,6 +138,7 @@ export default {
               },
             ],
             itemdata: {
+              serviceId:'r3-cp',
               colid: 171251,
               colname: "CP_C_PHY_WAREHOUSE_ID",
               name: "仓库名称",

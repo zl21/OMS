@@ -80,6 +80,7 @@ export default {
               },
             ],
             itemdata: {
+              serviceId:'r3-cp',
               refcolval: {
                 fixcolumn: "CP_C_PHY_WAREHOUSE_ID",
                 expre: "equal",
