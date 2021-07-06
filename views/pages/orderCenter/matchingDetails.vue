@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-07-02 16:49:17
+ * @LastEditTime: 2021-07-06 13:41:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
@@ -95,7 +95,7 @@ export default {
         },
         {
           text: '清除退单',
-           webname: "OC_B_REFUND_IN_eliminate",
+          webname: "OC_B_REFUND_IN_eliminate",
           isShow: false,
           btnclick: () => {
             this.emptyTabledata()
@@ -115,7 +115,7 @@ export default {
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       },
       closeTable: {
@@ -210,14 +210,18 @@ export default {
         if (res.data.code == 0) {
           let data = res.data.data
           this.tableConfig.columns = data.tabth.map(item => { //处理表头
-            item.key = item.colname
-            item.title = item.name
-            return item
+              item.key = item.colname
+              item.title = item.name
+             return item
           })
+          this.tableConfig.columns = this.tableConfig.columns.filter(item=>item.colname != "ID")
+
+      
           this.tableConfig.data = data.row.map((item, index) => {  //处理表值
             for (const k in item) {
               item[k] = item[k].val
             }
+            item.index = index + 1
             return item
           })
           this.closeTable.columns = JSON.parse(JSON.stringify(this.tableConfig.columns))
@@ -241,9 +245,8 @@ export default {
               if (type == 2) {
                 //判断明细suk是否相等 ---强制匹配
                 if (!this.fnisSku(item.PS_C_SKU_ECODE, data.RETURN_ORDER_ITEM_LIST.PS_C_SKU_ECODE)) {
-                  // em.OC_B_RETURN_ORDER_ID = data.BILL_NO
-                  // item.OC_B_RETURN_ORDER_ID = data.BILL_NO
-                     em.OC_B_RETURN_ORDER_BILL_NO = data.BILL_NO
+
+                  em.OC_B_RETURN_ORDER_BILL_NO = data.BILL_NO
                   item.OC_B_RETURN_ORDER_BILL_NO = data.BILL_NO
 
                   em.OC_B_RETURN_ORDER_BILL_NO_ID = data.ID
@@ -259,7 +262,7 @@ export default {
                   item._checked = true //判断是否新增的
                 } else {
                   errArr.push({
-                    id: item.ID,
+                    index: item.index,
                     code: item.PS_C_SKU_ECODE,
                     message: "条码一致，请走手工匹配！"
                   })
@@ -267,10 +270,8 @@ export default {
               } else {
                 //判断明细suk是否相等 ---手工匹配
                 if (this.fnisSku(item.PS_C_SKU_ECODE, data.PS_C_SKU_ECODE)) { //
-                  // em.OC_B_RETURN_ORDER_ID = data.BILL_NO
-                  // item.OC_B_RETURN_ORDER_ID = data.BILL_NO
 
-                    em.OC_B_RETURN_ORDER_BILL_NO = data.BILL_NO
+                  em.OC_B_RETURN_ORDER_BILL_NO = data.BILL_NO
                   item.OC_B_RETURN_ORDER_BILL_NO = data.BILL_NO
 
                   em.OC_B_RETURN_ORDER_BILL_NO_ID = data.ID
@@ -278,9 +279,9 @@ export default {
 
                   em._checked = true
                   item._checked = true //判断是否新增的
-                } else { //
+                } else { 
                   errArr.push({
-                    id: item.ID,
+                    index: item.index,
                     code: item.PS_C_SKU_ECODE,
                     message: "没有匹配到退货单明细"
                   })
@@ -291,7 +292,7 @@ export default {
           })
 
         })
-        localStorage.setItem('OC_B_REFUND_IN_data', JSON.stringify(this.tableConfig.data))
+        sessionStorage.setItem('OC_B_REFUND_IN_data', JSON.stringify(this.tableConfig.data))
       }
       this.modal6 = false;
 
@@ -306,8 +307,8 @@ export default {
       if (type == 1) { //1表示手工和强制的错误信息 2表示清楚的错误信息
         columns = [
           {
-            title: "失败ID", // '提示信息',
-            key: 'id',
+            title: "失败序号", // '提示信息',
+            key: 'index',
           },
           {
             title: "失败SKU", // '错误信息',
@@ -322,8 +323,8 @@ export default {
       } else {
         columns = [
           {
-            title: "失败ID", // '提示信息',
-            key: 'id',
+            title: "失败序号", // '提示信息',
+            key: 'index',
           },
           {
             title: "失败原因！", // '错误信息',

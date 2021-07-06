@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-01 17:27:45
- * @LastEditTime: 2021-06-04 17:26:05
+ * @LastEditTime: 2021-07-06 13:43:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/modal/orderCenter/OC_B_REFUND_IN_save.vue
@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     save() {
-      let person = JSON.parse(localStorage.getItem("OC_B_REFUND_IN_data"));
+      let person = JSON.parse(sessionStorage.getItem("OC_B_REFUND_IN_data"));
       console.log(person);
       let REFUND_IN_ITEM_LIST = []
       person.forEach(em => {
@@ -80,6 +80,8 @@ export default {
             },
           })
         }
+
+       // sessionStorage.clear();     
       })
     }
   }

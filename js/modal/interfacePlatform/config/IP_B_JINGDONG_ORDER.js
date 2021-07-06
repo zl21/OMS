@@ -25,7 +25,7 @@ export default {
           fkdesc: $i18n.t('other.shop'), // 店铺
           inputname: 'CP_C_SHOP_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
-          isnotnull: false, // 是否必填
+          isnotnull: true, // 是否必填
           length: 65535, // 最大长度是多少
           name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
@@ -52,7 +52,7 @@ export default {
             value: ''
           },
           {
-            label: $i18n.t('other.toBeDelivered'), // 待发货
+            label: "等待出库", // 待发货
             value: 'WAIT_SELLER_STOCK_OUT'
           }
         ]
