@@ -21,7 +21,11 @@ export default {
           {
             text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             btnclick: () => {
-              this.$parent.$parent.closeConfirm();
+              if (this.isTBsku) {
+                this.$emit('closeActionDialog');
+              } else {
+                this.$parent.$parent.closeConfirm();
+              }
             } // 按钮点击事件
           },
           {
@@ -427,7 +431,7 @@ export default {
         console.log(res);
         if (res.data.code == 0) {
           self.$Message.success(res.data.message);
-          this.$parent.$parent.closeConfirm();
+          this.$emit('closeActionDialog');
         } else {
           self.$Modal.confirm({
             title: res.data.message,
