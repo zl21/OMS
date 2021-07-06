@@ -6,6 +6,7 @@ import businessModal from 'professionalComponents/businessDialog';
 import comUtils from '@/assets/js/__utils__/common';
 import loading from '@/component/loading.vue';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
+import OrderItem from 'allpages/OrderCenter/returngood/orderItem.vue';
 
 export default {
   components: {
@@ -14,6 +15,7 @@ export default {
     businessLabel,
     businessModal,
     businessStatusFlag,
+    OrderItem,
     loading
   },
   data() {
@@ -160,8 +162,17 @@ export default {
           label: window.vmI18n.t('form_label.region_details'),
           value: '1',
           isShow: true
+        },
+        {
+          label: '操作日志',
+          value: '2',
+          isShow: true
         }
       ],
+      tab2: {
+        tablename: '',
+        objid: ''
+      },
       labelDefaultValue: '1',
       treeData1: [],
       treeData2: [],
@@ -190,6 +201,19 @@ export default {
     }
   },
   methods: {
+    // 切换tab
+    labelClick(item, index) {
+      const _this = this;
+      if (index == 1) {
+        _this.labelDefaultValue = '2';
+        _this.tab2 = {
+          tablename: 'ST_C_EXPRESS_AREA',
+          objid: this.$route.params.customizedModuleId
+        };
+      } else {
+        _this.labelDefaultValue = '1';
+      }
+    },
     // 保存
     async save() {
       const _this = this;
@@ -276,9 +300,10 @@ export default {
       }
     },
     // 获取树
-    async getTree(save, objid) {
+    async getTree(save, id) {
       const _this = this;
       _this.isSaveLoading = true;
+      let objid = save === 'import' ? _this._objid : id
       const {
         data: { code, data }
       } = await this.service.strategyPlatform.getExpressAreaTree({

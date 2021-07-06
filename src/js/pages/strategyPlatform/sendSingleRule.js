@@ -8,6 +8,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import comUtils from '@/assets/js/__utils__/common';
+import OrderItem from 'allpages/OrderCenter/returngood/orderItem.vue';
 
 export default {
   components: {
@@ -15,6 +16,7 @@ export default {
     businessForm,
     businessLabel,
     businessDialog,
+    OrderItem,
     businessActionTable,
     businessStatusFlag
   },
@@ -296,13 +298,22 @@ export default {
           label: window.vmI18n.t('form_label.a5'), // '按收货地址',
           value: '1',
           isShow: true
+        },
+        {
+          label: '操作日志',
+          value: '2',
+          isShow: true
         }
       ],
       labelDefaultValue: '1',
       selectAllList: [],
       statusName: '',
       warningModal: false,
-      btnTxetArr: []
+      btnTxetArr: [],
+      tab2: {
+        tablename: '',
+        objid: ''
+      }
     };
   },
   mounted() {
@@ -326,6 +337,19 @@ export default {
     }
   },
   methods: {
+    // 切换tab
+    labelClick(item, index) {
+      const _this = this;
+      if (index == 1) {
+        _this.labelDefaultValue = '2';
+        _this.tab2 = {
+          tablename: 'ST_C_SEND_RULE',
+          objid: this.$route.params.customizedModuleId
+        };
+      } else {
+        _this.labelDefaultValue = '1';
+      }
+    },
     // 保存
     save() {
       const _this = this;

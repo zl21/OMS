@@ -7,6 +7,7 @@ import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import { setTimeout } from 'timers';
 import comUtils from '@/assets/js/__utils__/common';
 import loading from '@/component/loading';
+import OrderItem from 'allpages/OrderCenter/returngood/orderItem.vue';
 
 export default {
   components: {
@@ -15,6 +16,7 @@ export default {
     businessLabel,
     businessModal,
     businessStatusFlag,
+    OrderItem,
     loading
   },
   data() {
@@ -87,7 +89,11 @@ export default {
       theadArr: [],
       listArr: [],
       single: false,
-      statusName: ''
+      statusName: '',
+      tab2: {
+        tablename: '',
+        objid: ''
+      },
     };
   },
   mounted() {
@@ -96,6 +102,11 @@ export default {
         // label: "区域明细",
         label: this.vmI18n.t('form_label.region_details'),
         value: '1',
+        isShow: true
+      },
+      {
+        label: '操作日志',
+        value: '2',
         isShow: true
       }
     ];
@@ -276,6 +287,19 @@ export default {
     this.modifyLogistics.confirmTitle = window.vmI18n.t('modalTitle.select_logisticsCompany');
   },
   methods: {
+    // 切换tab
+    labelClick(item, index) {
+      const _this = this;
+      if (index == 1) {
+        _this.labelDefaultValue = '2';
+        _this.tab2 = {
+          tablename: 'ST_C_WAREHOUSE_LOGISTICS',
+          objid: this.$route.params.customizedModuleId
+        };
+      } else {
+        _this.labelDefaultValue = '1';
+      }
+    },
     // 保存
     async save() {
       const _this = this;

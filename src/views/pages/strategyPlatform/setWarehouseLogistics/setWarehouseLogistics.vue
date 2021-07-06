@@ -22,8 +22,9 @@
           class="jordanLabel"
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
+          @labelClick="labelClick"
         />
-        <div class="tableBox">
+        <div class="tableBox" v-show="labelDefaultValue == 1">
           <div class="tableLeft">
             <div class="retrieveBox">
               <!-- <span class="retrieveTitle">检索</span> -->
@@ -184,6 +185,13 @@
             <loading :loading="tableLoading"></loading>
           </div>
         </div>
+
+        <!-- 操作日志 -->
+        <OrderItem
+          v-show="labelDefaultValue == 2"
+          :component-data="tab2"
+        />
+
       </div>
       <!--单据状态图片展示 -->
       <businessStatusFlag :status-name="statusName" />
