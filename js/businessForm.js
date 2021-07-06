@@ -54,9 +54,10 @@ export default {
     selectInputChange(x) {
       this.selectInputChangeVal = x;
     },
-    selectEnter(val, e) {
+    selectEnter(item, val, e) {
       if (e.keyCode == 13) {
-        this.$emit('selectEnter', this.selectInputChangeVal);
+        this.runMethods(item.selectEnter(this.selectInputChangeVal || val), true);
+        // this.$emit('selectEnter', this.selectInputChangeVal);
       }
     },
     runMethods(val , flag){

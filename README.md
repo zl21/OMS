@@ -256,3 +256,4 @@
 | v1.2.15 | select-Enter事件(skx | 
 | v1.2.16 | bug：42845 | 
 | v1.2.17 | ag-支持设置rowHeight |  
+| v1.2.18 | fkinput-inputEnter调整(skx |  
