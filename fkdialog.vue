@@ -1099,7 +1099,7 @@ export default {
       }
       .dialog_center{
         flex: 3;
-        width: auto;
+        // width: auto;
         box-shadow: none;
         .el-tabs .el-tabs__header .el-tabs__nav .el-tabs__active-bar{
           background-color: @base-color;
@@ -1121,7 +1121,7 @@ export default {
       }
       .dialog-operation{
         flex: 0.3;
-        width: auto;
+        // width: auto;
         border-color: #f3f3f3;
         .operation-icon{
           color: @base-color;
@@ -1132,7 +1132,7 @@ export default {
       }
       .dialog_right{
         flex: 1;
-        width: auto;
+        // width: auto;
         .right_top{
           color:  @base-color;
           span{
