@@ -140,11 +140,15 @@ class CustomizedConfig {
 	static get cusExternalTreeDatas() {
 		return this.#customizedExternalTreeDatas;
 	}
-	static editCusExternalTreeDatas(configItem = {}) {
-		for (const key in configItem) {
+	static editCusExternalTreeDatas(config = []) {
+		/* for (const key in configItem) {
 			this.#customizedExternalTreeDatas[key] = configItem[key];
+		} */
+		let res = JSON.parse(JSON.stringify(this.#customizedExternalTreeDatas));
+		if (config.length) {
+			res = res.concat(config);
 		}
-		return this.#customizedExternalTreeDatas
+		return res
 	}
 
 	// 接口配置项
