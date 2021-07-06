@@ -2,6 +2,7 @@
   import businessButton from 'professionalComponents/businessButton';
   import loading from 'professionalComponents/loading.vue';
   import drpInput from 'professionalComponents/fkinput.vue';
+  Vue.component('drpInput', drpInput)
 
   export default {
     components: {
