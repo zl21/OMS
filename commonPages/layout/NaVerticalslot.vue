@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-06 10:41:30
+ * @LastEditTime: 2021-07-06 14:27:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -68,14 +68,26 @@ export default {
       }
     }
   }
+  .ark-select-dropdown{
+    margin-top: 10px;
+  }
   .ark-select-dropdown::before{
-      // content: '';
-      // display: inline-block;
-      // width:0;
-      // height:0;
-      // border:5px solid transparent;  //所有border都是透明的，
-      // border-top-color:black; //只有尖相对的方向border有颜色
-    }
+    content: '';
+    display: inline-block;
+    width:20px;
+    height:20px;
+    background: url(../../assets/img/arrowTop.png) top no-repeat;
+  }
+}
+.favorite{
+  .ark-select-dropdown::before{
+     #bundle > .absolute(@top:-15px,@left:40px);
+  }
+}
+.history{
+  .ark-select-dropdown::before{
+     #bundle > .absolute(@top:-15px,@left:45px);
+  }
 }
 // 消息
 .message-panel{
