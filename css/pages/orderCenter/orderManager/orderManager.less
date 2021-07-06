@@ -1,12 +1,14 @@
 @import '~omsTheme/public.less';
+
 .customized-list-form {
   &.position {
     padding-bottom: @base-mr;
     position: relative;
     .form-search {
-      position: absolute;
-      bottom: 0;
-      right: -8px;
+      #bundle > .absolute(@right:-8px,@bottom:0);
+    }
+    .dynamicSearch-content {
+      #bundle > .absolute(@right:28px,@bottom:7px);
     }
   }
   .form-search {

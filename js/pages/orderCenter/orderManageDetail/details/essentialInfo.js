@@ -274,7 +274,8 @@ export default {
           orderId:this.componentData.order.ID,
           billNo:this.componentData.order.BILL_NO
         }],
-        oldSuk:itemData[0].PS_C_SKU_ECODE
+        oldSuk:itemData[0].PS_C_SKU_ECODE,
+        spuIds:itemData.map(row => row.ID)
       };
       this.dialogsConfig = this.dialogs.changeSku;
       setTimeout(() => {

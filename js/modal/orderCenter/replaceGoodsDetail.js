@@ -144,9 +144,11 @@ export default {
         self.$Message.warning($i18n.t('modalTips.d8'));
         return;
       }
+      console.log(this.componentData);
       let params = {
         orderList:this.componentData.orderList,
-        skuEcodes:[this.componentData.oldSuk,this.currentSkuEcode]
+        skuEcodes:[this.componentData.oldSuk,this.currentSkuEcode],
+        spuIds:this.componentData.spuIds
       }
       this.btnConfig.buttons[1].disabled = true;
       const { data: { code, message, data } } = await this.service.orderCenter.replaceOrderByPro(params);

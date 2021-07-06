@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-05 16:27:45
+ * @LastEditTime: 2021-07-06 10:41:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -33,6 +33,18 @@
 <script>
 export default {
   name: "NaVerticalslot",
+  data(){
+    return{
+      
+    }
+  },
+  created(){
+   
+  },
+  mounted(){
+    // 模拟点击，展示搜索框
+    document.getElementsByClassName("buttonIcon")[0].click();
+  }
 };
 </script>
 <style lang="less">
