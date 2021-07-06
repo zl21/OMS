@@ -235,6 +235,7 @@ export default {
             width: "6",
             colname: "CP_C_SHOP_ID",
             itemdata: {
+              serviceId: "r3-cp",
               colid: 168864,
               colname: "CP_C_SHOP_ID",
               name: "店铺",
@@ -332,6 +333,7 @@ export default {
               },
             ],
             itemdata: {
+              serviceId: "r3-cp",
               colid: 171251,
               colname: "CP_C_PHY_WAREHOUSE_ID",
               fkdisplay: "drp",
@@ -391,6 +393,7 @@ export default {
               },
             ],
             itemdata: {
+              serviceId: "r3-cp",
               colid: 171280,
               colname: "CP_C_LOGISTICS_ID",
               fkdisplay: "drp",
@@ -689,6 +692,7 @@ export default {
             width: "6",
             colname: "CP_C_REGION_PROVINCE_ID",
             itemdata: {
+              serviceId: 'r3-cp',
               colid: 166974,
               colname: "CP_C_REGION_PROVINCE_ID",
               fkdisplay: "drp",
@@ -720,6 +724,7 @@ export default {
             inputList: [],
             objList: [],
             itemdata: {
+              serviceId: 'r3-cp',
               colid: 167077,
               colname: "CP_C_REGION_CITY_ID",
               fkdisplay: "drp",
@@ -756,6 +761,7 @@ export default {
             colname: "CP_C_REGION_AREA_ID",
             inputList: [],
             itemdata: {
+              serviceId: 'r3-cp',
               colid: 167091,
               colname: "CP_C_REGION_AREA_ID",
               fkdisplay: "drp",
@@ -862,6 +868,7 @@ export default {
             disabled: false,
             pageSize: 10, // 每页条数
             itemdata: {
+              serviceId: 'r3-cp',
               colid: "171332",
               colname: "PS_C_SKU",
               name: "SKU编码",
@@ -918,6 +925,7 @@ export default {
               width: "6",
               colname: "PS_C_SKU",
               itemdata: {
+                serviceId: 'r3-cp',
                 version: '1.4',
                 colid: "171332",
                 colname: "PS_C_SKU",
