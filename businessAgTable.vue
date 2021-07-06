@@ -10,6 +10,7 @@
     <div class="agTable">
         <commonTableByAgGrid
         ref="agGrid"
+        :rowHeight="agTableConfig.rowHeight"
         :height="agTableConfig.tableHeight"
         :options="options"
         :data="agTableConfig.rowData"
