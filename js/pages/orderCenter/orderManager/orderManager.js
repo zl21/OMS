@@ -920,6 +920,7 @@
           self[aG ? 'loading' : 'agLoaing'] = false;
           // self.loading = false;
         });
+        this.selection = []; // 解决弹窗关闭后刷新页面没有刷掉选中项目的问题
       // self.service.orderCenter.queryStatistics(data).then((res) => {
       //   console.log(res);
       //   if (res.data.code == 0) {

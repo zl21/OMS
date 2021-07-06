@@ -183,11 +183,22 @@ export default {
                 return h('a', {
                   on: {
                     click: () => {
-                      let del = this.totalData.splice(params.index, 1);
-                      if (del[0].ID > 0) {
+                      // let del = this.totalData.slice(params.index, 1);
+                      // let del = this.totalData.splice(params.index, 1);
+                      // this.totalData.splice(params.index, 1);
+                      this.totalData.forEach((it, i) => {
+                        if (it.DESCRIPTION == params.row.DESCRIPTION) {
+                          if (params.row.ID != '-1') {
+                            params.row.isDelete = 1;
+                            this.delData.push(params.row);
+                          }
+                          this.totalData.splice(i, 1);
+                        }
+                      });
+                      /* if (del[0].ID > 0) {
                         del[0].isDelete = 1;
                         this.delData.push(del[0]);
-                      }
+                      } */
                       this.pageChange(this.table.current);
                     }
                   }
@@ -222,7 +233,11 @@ export default {
                         this.$Message.warning(`标记说明【${value}】已存在，请重新输入！`);
                         params.row.DESCRIPTION = '';
                       } else {
-                        params.row.DESCRIPTION = val.target.value;
+                        const oldIt = JSON.parse(this.oldTableData).find(it => it.ID != '-1' && it.ID == params.row.ID);
+                        if (params.row.ID != '-1' && oldIt.DESCRIPTION != value) {
+                          params.row.isModify = 1;
+                        }
+                        params.row.DESCRIPTION = value;
                       }
                       params.row._rowKey = this.$omsUtils.generateKey();
                       this.table.data[params.index] = params.row;
@@ -296,7 +311,17 @@ export default {
       const startIndex = this.table.pageSize * (e - 1) + 1; // 11
       const endIndex = e * this.table.pageSize; // 20
       this.table.total = this.totalData.length;
+      // 解决第二页删完了还停留在第二页的问题
+      if (this.totalData.length <= (e - 1) * this.table.pageSize) {
+        this.table.loading = true;
+        --this.table.current;
+        this.pageChange(this.table.current);
+        return
+      }
       this.table.data = this.totalData.slice(startIndex - 1, endIndex);
+      setTimeout(() => {
+        this.table.loading = false;
+      }, 10);
     },
     pageSizeChange(e) {
       this.table.pageSize = e;
@@ -357,7 +382,8 @@ export default {
     },
     asyncOK() {
       const self = this;
-      let modifyData = self.diffArr();
+      // let modifyData = self.diffArr();
+      let modifyData = self.totalData.filter(it => it.isModify == 1);
       modifyData = modifyData.concat(self.delData);
       for (const iterator of modifyData) {
         if (!iterator.DESCRIPTION) {
@@ -379,12 +405,13 @@ export default {
       })
     },
     addList() {
-      this.totalData.push({
+      const it = {
         ID: '-1',
         DESCRIPTION: '',
         REMARK: '',
         IS_SYSTEM: 0,
-      })
+      }
+      this.totalData.push(it);
       // 最后一页 = length / pageSize
       const endIndex = ceil(this.totalData.length / this.table.pageSize);
       this.pageChange(endIndex);
