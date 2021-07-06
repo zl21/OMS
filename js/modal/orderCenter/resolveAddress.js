@@ -37,6 +37,7 @@ export default {
           width: "8",
           itemdata: {
             col: 1,
+            serviceId: 'r3-cp',
             colid: 166974, // 当前字段的ID
             colname: "CP_C_REGION_PROVINCE_ID", // 当前字段的名称
             datelimit: "all",
@@ -87,6 +88,7 @@ export default {
           inputList: [],
           itemdata: {
             col: 1,
+            serviceId: 'r3-cp',
             colid: 167077, // 当前字段的ID
             colname: "CP_C_REGION_CITY_ID", // 当前字段的名称
             datelimit: "all",
@@ -133,6 +135,7 @@ export default {
           inputList: [],
           itemdata: {
             col: 1,
+            serviceId: 'r3-cp',
             colid: 167091, // 当前字段的ID
             colname: "CP_C_REGION_AREA_ID", // 当前字段的名称
             datelimit: "all",
@@ -391,7 +394,6 @@ export default {
       this.formConfig.formData[2].itemdata.pid = areaInfo ?.id;
       this.data.cp_c_region_area_id = areaInfo ?.id;
       if(provinceName.id || cityName.id){
-        console.log('111',provinceName,cityName); 
         // 地址解析状态
         this.dataAysis = true;
       }
