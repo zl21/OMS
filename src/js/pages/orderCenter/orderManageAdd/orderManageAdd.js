@@ -1600,7 +1600,7 @@ export default {
     saveAdd(data) {
       const self = this;
       // data.isNew = 1;
-      data.type = 3;
+      // data.type = 3; // 手工新增不传type
       const warnFlag = self.saveWarnCheck(data);
       if (warnFlag) {
         self.$Modal.info({
