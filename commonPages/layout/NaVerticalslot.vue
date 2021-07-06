@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-06 14:27:08
+ * @LastEditTime: 2021-07-06 15:46:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -115,6 +115,12 @@ export default {
         height: 48px;
         line-height: 48px;
         color: @base-color;
+      }
+    }
+    .panel-item {
+      border-bottom: none;
+      .explanatory{
+        margin-right: 5px;
       }
     }
     .no-message{

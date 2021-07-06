@@ -1,32 +1,33 @@
 <template>
-  <div
-    v-loading="loading"
-    class="customized-list"
-  >
-    <div
-      class="customized-list-form"
-      :class="[Number.isInteger(formConfig.formData.length / 4) ? '' : 'position']"
-    >
+  <div v-loading="loading" class="customized-list">
+    <div class="customized-list-form">
       <!-- form组件 -->
-      <businessForm
-        v-if="buttonInit"
-        :form-config="formConfig"
-      />
-      <div :class="[!isFolding ? 'dynamicSearch-content' : 'form-search']">
+     <div :class="[Number.isInteger(formConfig.formData.length / 4) ? '' : 'position']">
+        <businessForm v-if="buttonInit" :form-config="formConfig" />
+        <businessButton class="form-search" :btn-config="searchBtn" />
+     </div>
+      <div class="dynamicSearch-content">
         <dynamicSearch
           v-if="!isFolding && tablename == 'OC_B_ORDER'"
           ref="dynamicSearch"
           :dynamic-data="dynamicData"
         />
+      </div>
 
+      <!-- <div :class="[!isFolding ? 'dynamicSearch-content' : 'form-search']">
+        <dynamicSearch
+          v-if="!isFolding && tablename == 'OC_B_ORDER'"
+          ref="dynamicSearch"
+          :dynamic-data="dynamicData"
+        />
         <div v-if="tablename !== 'OC_B_ORDER'"></div>
         <businessButton :btn-config="searchBtn" />
-      </div>
+      </div> -->
     </div>
     <div class="custom-btn customized-list-btn">
       <businessButton
         :btn-config="btnConfig"
-        @dropDownClick="(val) => eventGather.dropDownClickChange(val, extendBtn)"
+        @dropDownClick="val => eventGather.dropDownClickChange(val, extendBtn)"
       />
     </div>
     <div class="customized-list-table">
@@ -127,17 +128,14 @@
       :width="800"
       mask
     >
-      <proDetail
-        :title="proDetailConfig.title"
-        :itemid="proDetailConfig.ID"
-      />
+      <proDetail :title="proDetailConfig.title" :itemid="proDetailConfig.ID" />
     </Modal>
   </div>
 </template>
 
 <script>
-  import orderManager from '@/js/pages/orderCenter/orderManager/orderManager';
-  export default orderManager;
+import orderManager from "@/js/pages/orderCenter/orderManager/orderManager";
+export default orderManager;
 </script>
 
 <style lang="less">
