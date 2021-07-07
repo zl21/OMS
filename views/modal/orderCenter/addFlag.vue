@@ -383,7 +383,7 @@ export default {
     asyncOK() {
       const self = this;
       // let modifyData = self.diffArr();
-      let modifyData = self.totalData.filter(it => it.isModify == 1);
+      let modifyData = self.totalData.filter(it => it.isModify == 1 || it.ID == '-1');
       modifyData = modifyData.concat(self.delData);
       for (const iterator of modifyData) {
         if (!iterator.DESCRIPTION) {
