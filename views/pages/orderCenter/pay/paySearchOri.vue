@@ -7,7 +7,7 @@
 -->
 <template>
   <div class="OC_B_ORDER_ID">
-    <label class="itemLabel"> 原定单编号: </label>
+    <!-- <label class="itemLabel"> 零售发货单单号: </label> -->
     <Input
       class="oriCode"
       :autocomplete="'new-password'"
