@@ -4,7 +4,7 @@
     <div class="i_head">
       <div class="i_body">
         <!-- <p>被替换商品SKU</p> -->
-        <p>{{ vmI18n.t("modalTitle.a1") }}</p>
+        <p>{{ isTBsku ? 'SKU编码' : vmI18n.t("modalTitle.a1") }}</p>
         <div class="search">
           <div class="skuBox">
             <re-form :form-config="formConfig" />
@@ -42,7 +42,7 @@
       </div>
       <div class="i_body1">
         <!-- <p>替换后商品SKU</p> -->
-        <p>{{ vmI18n.t("modalTitle.a4") }}</p>
+        <p>{{ isTBsku ? '自定义SKU' : vmI18n.t("modalTitle.a4") }}</p>
         <div class="search">
           <div class="skuBox">
             <re-form :form-config="replaceFormConfig" />
@@ -84,7 +84,7 @@
       >
     </div>
     <div class="i_food">
-      <span class="title">
+      <span class="title" v-if="!isTBsku">
         <!-- <span>将</span> -->
         <span>{{ vmI18n.t("modalTips.zf") }}</span>
         <span style="color: #003200">{{ onRowClickText }}</span>
