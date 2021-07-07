@@ -229,7 +229,7 @@ export default {
                       const tabDa = JSON.parse(JSON.stringify(this.totalData));
                       tabDa.splice(rIndex - 1, 1);
                       const keyList = $omsUtils.sonList(tabDa, 'DESCRIPTION');
-                      if (value && keyList.includes(value) && params.row.ID == '-1') {
+                      if (value && keyList.includes(value)) {
                         this.$Message.warning(`标记说明【${value}】已存在，请重新输入！`);
                         params.row.DESCRIPTION = '';
                       } else {
