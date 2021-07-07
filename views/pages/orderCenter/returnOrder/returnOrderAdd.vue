@@ -369,6 +369,7 @@ export default {
             colname: 'CP_C_PHY_WAREHOUSE_IN_ID',
             width: '6',
             itemdata: {
+              serviceId: "r3-cp",
               colid: 179536,
               colname: 'CP_C_PHY_WAREHOUSE_IN_ID',
               fkdisplay: 'drp',
@@ -390,6 +391,7 @@ export default {
             colname: 'CP_C_PHY_WAREHOUSE_ID',
             width: '6',
             itemdata: {
+              serviceId: "r3-cp",
               colid: 179536,
               colname: 'CP_C_PHY_WAREHOUSE_ID',
               fkdisplay: 'drp',
@@ -410,6 +412,7 @@ export default {
             width: '6',
             colname: 'CP_C_LOGISTICS_ID',
             itemdata: {
+              serviceId: "r3-cp",
               colid: 179538,
               colname: 'CP_C_LOGISTICS_ID',
               fkdisplay: 'drp',
