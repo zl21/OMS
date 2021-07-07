@@ -185,7 +185,8 @@ export default {
       const step1 = new Promise(async function (resolve, reject) {
         _this.tableConfig.loading = true;
         const subData = await _this.$OMS2.omsUtils.initSubtable('OC_B_COMPENSATE_ORDER_ITEM', _this.ID, '181120').catch(() => {
-          _this.tableConfig.loading = false; _this.$Message.error('查询子表接口（/p/cs/objectTableItem）报错！')
+          _this.tableConfig.loading = false; 
+          console.error('查询子表接口（/p/cs/objectTableItem）报错！');
           reject()
         });
         const columns = subData.columns.filter(it => it.key != 'ID');

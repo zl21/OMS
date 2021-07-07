@@ -22,6 +22,7 @@
           <Select
             v-model="dynamicStructure[IDX].NAME"
             transfer
+            @on-change="conditionChange"
           >
             <Option
               v-for="(item,index) in dynamicData.COMBINE_CONDITION.COMBOBOX"
@@ -47,7 +48,34 @@
           </Select>
         </div>
         <div class="value">
-          <Input v-model="dynamicStructure[IDX].VAL" />
+          <DatePicker 
+            v-if="dynamicStructure[IDX].DISPLAY == 'OBJ_DATE'"
+            type="datetimerange"
+            split-panels
+            transfer
+            clearable
+            format="yyyy-MM-dd HH:mm:ss"
+            v-model="dynamicStructure[IDX].VAL"
+            @on-change="dateChange">
+          </DatePicker>
+          <!-- :format="item.format"
+            :options="item.options"
+            @on-change="runMethods(item.onChange)"> -->
+          <Select
+            v-else-if="dynamicStructure[IDX].DISPLAY == 'SELECT'"
+            v-model="dynamicStructure[IDX].VAL"
+            transfer
+          >
+            <Option
+              v-for="(item,index) in dynamicData.COMBINE_CONDITION.COMBOBOX[dynamicStructure[IDX].index].COMBOBOX"
+              :key="index"
+              :value="item.value"
+            >
+              {{ item.label }}
+            </Option>
+          </Select>
+          <!-- ="ele.DISPLAY == 'TEXT'" -->
+          <Input v-else v-model="dynamicStructure[IDX].VAL" />
         </div>
         <div
           v-show="dynamicStructure.length !== IDX+1"
@@ -85,6 +113,8 @@
   </div>
 </template>
 <script>
+  import dateUtil from '@/assets/js/__utils__/date.js';
+
   export default {
     name: 'DynamicSearch',
     props: {
@@ -99,6 +129,9 @@
       this.dynamicStructure[1].CALC = this.default_cacl;
     },
     computed: {
+      type() { // 组合条件对应的组件类型
+        return this.dynamicData.CALC_SYMBOL.COMBOBOX[0].value;
+      },
       default_cacl() { // 默认包含/不包含参数
         return this.dynamicData.CALC_SYMBOL.COMBOBOX[0].value;
       },
@@ -131,6 +164,28 @@
       };
     },
     methods: {
+      dateChange() {
+        const dy = this.dynamicStructure;
+        dy.forEach(it => {
+          if (it.VAL instanceof Array && it.VAL.length == 2) {
+            it.VAL = typeof it.VAL[0] == 'object' ? `${dateUtil.getFormatDate(new Date(it.VAL[0]), 'yyyy-MM-dd HH:mm:ss')}~${dateUtil.getFormatDate(new Date(it.VAL[1]), 'yyyy-MM-dd HH:mm:ss')}` : `${it.VAL[0]}~${it.VAL[1]}`
+          }
+        })
+      },
+      conditionChange(val) {
+        console.log(val);
+        const all = this.dynamicData.COMBINE_CONDITION.COMBOBOX;
+        // const options = 
+        all.forEach((it,j) => {
+          if (it.value == val) {
+            // options
+            const curIt = this.dynamicStructure.find(i => i.NAME == val) //.DISPLAY = 'SELECT'// it.DISPLAY;
+            curIt.DISPLAY = it.DISPLAY; //'DATE';
+            curIt.index = j;
+          }
+        });
+        const aaa = this.dynamicStructure;
+      },
       reset() {
         this.dynamicStructure = [ // 动态结构数据
           { // 模板
