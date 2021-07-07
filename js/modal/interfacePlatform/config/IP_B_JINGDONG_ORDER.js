@@ -94,10 +94,6 @@ export default {
       self.$Message.warning($i18n.t('modalTips.bs'));// 请选择输入的日期或输入订单编号
       return false;
     }
-    if (!start) {
-      self.$Message.warning('请输入退单修改时间');// 请选择输入的日期或输入订单编号
-      return false;
-    }
     const param = {
       shop_id:
         parseInt(self.downLoadFormConfig.formData[0].itemdata.pid),
