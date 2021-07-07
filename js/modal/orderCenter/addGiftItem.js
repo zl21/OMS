@@ -70,6 +70,7 @@ export default {
         buttons: [
           {
             text: '搜索',
+            type:"primary",
             btnclick: () => {
               this.tableConfig.current = 1
               this.skuEcodes = ""

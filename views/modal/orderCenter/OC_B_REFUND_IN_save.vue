@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-01 17:27:45
- * @LastEditTime: 2021-07-06 13:43:52
+ * @LastEditTime: 2021-07-07 21:16:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/modal/orderCenter/OC_B_REFUND_IN_save.vue
@@ -24,8 +24,12 @@ export default {
   },
   methods: {
     save() {
+
       let person = JSON.parse(sessionStorage.getItem("OC_B_REFUND_IN_data"));
-      console.log(person);
+      if (!person) {
+        this.$Message.warning("请选中操作的数据")
+        return
+      }
       let REFUND_IN_ITEM_LIST = []
       person.forEach(em => {
         if (em._checked) {
@@ -33,9 +37,9 @@ export default {
             OC_B_RETURN_ORDER_ID: em.OC_B_RETURN_ORDER_BILL_NO_ID,
             REFUND_IN_ITEM_ID: em.ID,
             PS_C_SKU_ECODE_ACTUAL: em.PS_C_SKU_ECODE_ACTUAL,
-            OC_B_RETURN_ORDER_BILL_NO:em.OC_B_RETURN_ORDER_ID,
+            OC_B_RETURN_ORDER_BILL_NO: em.OC_B_RETURN_ORDER_ID,
             PS_C_SKU_ECODE: em.PS_C_SKU_ECODE,
-            OC_B_RETURN_ORDER_ITEM_ID:em.OC_B_RETURN_ORDER_ITEM_ID
+            OC_B_RETURN_ORDER_ITEM_ID: em.OC_B_RETURN_ORDER_ITEM_ID
           }
           REFUND_IN_ITEM_LIST.push(obj)
         }
@@ -63,7 +67,7 @@ export default {
                 return h('Table', {
                   props: {
                     columns: [
-                        {
+                      {
                         title: "失败明细", // '提示信息',
                         key: 'key',
                       },
@@ -79,9 +83,11 @@ export default {
               return false
             },
           })
-        }
+          this.$parent.$parent.$parent.$parent.$children[1].$children[3].$children[0].closetab(false)
 
-       // sessionStorage.clear();     
+        }
+        sessionStorage.clear();
+
       })
     }
   }

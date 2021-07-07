@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-07-06 13:41:10
+ * @LastEditTime: 2021-07-07 21:14:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
 -->
 <template>
-  <div class="matchingDetails">
+  <div class="matchingDetails" >
     <businessButton :btn-config="btnConfig" />
     <businessActionTable
       :jordan-table-config="tableConfig"
@@ -27,7 +27,7 @@
       title="退单编号查询"
       :mask="true"
       :footer-hide="true"
-      width="1000"
+      :width="width"
     >
       <addGiftItem :componentData="componentData" />
     </Modal>
@@ -50,6 +50,7 @@ export default {
     return {
       modal6: false,
       loading: true,
+      width:"1000",
       type: "",
       tebdata: [], //明细表选中的数据
       btnConfig: {
@@ -60,6 +61,7 @@ export default {
           webname: "OC_B_REFUND_IN_manual",
           disabled: false, // 按钮禁用控制
           btnclick: () => {
+            this.width = 800
             service.orderCenter.checkRefundInStatus(`id=${this.$route.params.itemId}`).then(res => {
               if (res.data.code == 0) {
                 this.switchAlert(1)
@@ -75,6 +77,8 @@ export default {
           isShow: false,
           webname: "OC_B_REFUND_IN_force",
           btnclick: () => {
+             this.width = 800
+
             service.orderCenter.checkRefundInStatus(`id=${this.$route.params.itemId}`).then(res => {
               if (res.data.code == 0) {
                 this.switchAlert(2)
@@ -235,6 +239,7 @@ export default {
       return sukArr.split(",").some(item => item == sku)
     },
     closeConfirm(data, type) {
+    
       this.type = type
       let errArr = []
       if (data) {

@@ -20,16 +20,7 @@ export default {
         },
         formData: [
           {
-            label: '物流单号',
-            style: 'input',
-            width: '7',
-            value: 'EXPRESS_CODE',
-            columns: ['EXPRESS_CODE'],
-            AuotData: [], //匹配的选项
-            regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
-          },
-          {
-            label: '退货单号',
+            label: '退换货单号',
             style: 'input',
             width: '7',
             value: 'OC_B_RETURN_BILL_NO',
@@ -47,14 +38,26 @@ export default {
             regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
           },
           {
-            style: 'input', //输入框类型
-            label: '收货人', //输入框前文字
-            value: 'RECEIVER_NAME', //输入框的值
-            columns: ['RECEIVER_NAME'],
+            label: '物流单号',
+            style: 'input',
             width: '7',
+            value: 'EXPRESS_CODE',
+            columns: ['EXPRESS_CODE'],
             AuotData: [], //匹配的选项
             regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
           },
+     
+          
+          
+          // {
+          //   style: 'input', //输入框类型
+          //   label: '收货人', //输入框前文字
+          //   value: 'RECEIVER_NAME', //输入框的值
+          //   columns: ['RECEIVER_NAME'],
+          //   width: '7',
+          //   AuotData: [], //匹配的选项
+          //   regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
+          // },
           {
             style: 'input', //输入框类型
             label: '买家昵称', //输入框前文字
@@ -64,25 +67,26 @@ export default {
             AuotData: [], //匹配的选项
             regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
           },
-          {
-            style: 'input', //输入框类型
-            label: '收货人手机', //输入框前文字
-            value: 'RECEIVER_MOBILE', //输入框的值
-            columns: ['RECEIVER_MOBILE'],
-            width: '7',
-            maxlength: 11,
-            AuotData: [], //匹配的选项
-            regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
-          },
+          // {
+          //   style: 'input', //输入框类型
+          //   label: '收货人手机', //输入框前文字
+          //   value: 'RECEIVER_MOBILE', //输入框的值
+          //   columns: ['RECEIVER_MOBILE'],
+          //   width: '7',
+          //   maxlength: 11,
+          //   AuotData: [], //匹配的选项
+          //   regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
+          // },
         ],
       },
       // searchBtn
       searchBtn: {
         typeAll: 'default', // 按钮统一风格样式
-        btnsite: 'right', // 按钮位置 (right , center , left)
+       // btnsite: 'left', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: '查找',
+            text: '搜索',
+            type:"primary",
             btnclick: () => {
               this.init(1)
 
