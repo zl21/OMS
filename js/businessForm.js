@@ -56,7 +56,11 @@ export default {
     },
     selectEnter(item, val, e) {
       if (e.keyCode == 13) {
-        this.runMethods(item.selectEnter(this.selectInputChangeVal || val), true);
+        if(typeof item.selectEnter == 'function') {
+          this.runMethods(item.selectEnter(this.selectInputChangeVal || val), true);
+        } else {
+          console.error('未定义selectEnter方法!')
+        }
         // this.$emit('selectEnter', this.selectInputChangeVal);
       }
     },

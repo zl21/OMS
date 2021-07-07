@@ -78,7 +78,7 @@
                     :placeholder="item.placeholder ? item.placeholder : ''"
                     :clearable="item.clearable"
                     @on-query-change="selectInputChange"
-                    @keyup.native="runMethods(item.filterable ? typeof item.selectEnter == 'function' ? selectEnter(item, formConfig.formValue[`${item.value || item.colname}`], $event) : '' : '')"
+                    @keyup.native="runMethods(item.filterable ? selectEnter(item, formConfig.formValue[`${item.value || item.colname}`], $event) : '')"
                     @on-clear="runMethods(item.clearSelect ? item.clearSelect(item.value || item.colname) : false , true)">
               <Option v-for="(option , index) in item.options"
                       :key="index"
