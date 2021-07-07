@@ -1,12 +1,12 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-06-29 10:50:35
+ * @LastEditTime: 2021-07-07 15:14:39
  * @LastEditors: Please set LastEditors
 -->
 <template>
   <div class="OC_B_ORDER_ID">
-    <label class="itemLabel"> 原定单编号： </label>
+    <label class="itemLabel"> 零售发货单单号: </label>
     <Input
       :autocomplete="'new-password'"
       @on-click="iconclick"
@@ -67,7 +67,7 @@ import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import dateUtil from '@/assets/js/__utils__/date.js';
 
 export default {
-  name: 'searchOOID',
+  name: 'sourceBillNo',
   components: {
     businessButton,
     businessForm,

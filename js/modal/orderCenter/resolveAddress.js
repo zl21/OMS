@@ -113,12 +113,19 @@ export default {
               srccol: "CP_C_REGION_PROVINCE_ID",
             },
           },
+          InputBlur:(val) => {
+            this.formConfig.formData[2].itemdata.pid = '';
+            this.formConfig.formData[2].itemdata.valuedata = '';
+            this.data.cp_c_region_city_id = val.pid;
+            this.data.cp_c_region_area_id = ''
+          },
           oneObj: (val) => {
             // 选中触发事件
             this.formConfig.formData[2].itemdata.pid = '';
             this.formConfig.formData[2].itemdata.valuedata = '';
             this.data.cp_c_region_city_id = val.pid;
             this.data.cp_c_region_area_id = ''
+            console.log('valval:',val);
           },
           InputEnter: (val)=> {
             this.formConfig.formData[2].itemdata.pid = '';
@@ -159,6 +166,9 @@ export default {
               expre: "equal",
               srccol: "CP_C_REGION_CITY_ID",
             },
+          },
+          InputBlur:(val) => {
+            this.data.cp_c_region_area_id = val.pid
           },
           oneObj: (val) => {
             // 选中触发事件

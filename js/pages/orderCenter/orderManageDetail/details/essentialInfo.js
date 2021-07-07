@@ -116,11 +116,6 @@ export default {
           label: '物流单号:'
         },
         // {
-        //   flag: false, // 需要加*
-        //   width: '6',
-        //   column: 'BUYER_NICK',
-        //   label: '买家昵称:'
-        // },
         {
           flag: false,
           width: '12',
@@ -138,9 +133,15 @@ export default {
       detail: [
         {
           flag: false,
-          width: '24',
+          width: '12',
           column: 'RECEIVER_NAME',
           label: '收货人:'
+        },
+        {
+          flag: false, // 需要加*
+          width: '12',
+          column: 'BUYER_NICK',
+          label: '买家昵称:'
         },
         {
           flag: false,

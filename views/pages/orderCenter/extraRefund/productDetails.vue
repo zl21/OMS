@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-06-24 17:13:00
+ * @LastEditTime: 2021-07-07 16:07:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -86,15 +86,20 @@ export default {
             key: 'PS_C_PRO_ENAME',
             title: 'SPU名称'
           },{
-            key: 'PS_C_SPEC1_ENAME',
-            title: '规格1'
-          },{
-            key: 'PS_C_SPEC2_ENAME',
-            title: '规格2'
-          },{
-            key: 'PS_C_SPEC3_ENAME',
-            title: '规格3'
-          },{
+            key: 'PS_C_PRO_ENAME',
+            title: '赠品'
+          },
+          // {
+          //   key: 'PS_C_SPEC1_ENAME',
+          //   title: '规格1'
+          // },{
+          //   key: 'PS_C_SPEC2_ENAME',
+          //   title: '规格2'
+          // },{
+          //   key: 'PS_C_SPEC3_ENAME',
+          //   title: '规格3'
+          // },
+          {
             key: 'qty',
             title: '购买数量'
           },{
@@ -102,7 +107,7 @@ export default {
             title: '成交金额'
           },{
             key: 'QTY_REFUND',
-            title: '申请数量', // 申请退货数量：默认取原零售发货单可退数量，可编辑，仅支持录入大于0的正整数，且需小于等于原零售发货单可退数量；
+            title: '申请退货数量', // 申请退货数量：默认取原零售发货单可退数量，可编辑，仅支持录入大于0的正整数，且需小于等于原零售发货单可退数量；
             render:(h,params)=>{
              return h('InputNumber', {
                 props: {
@@ -124,7 +129,7 @@ export default {
             }
           },{
             key: 'AMT_REFUND',
-            title: '申请退款金额' // 申请退款金额：为 申请退货数量*成交单价（成交单价为原零售发货单中记录的），保留两位小数； 
+            title: '退货金额' // 申请退款金额：为 申请退货数量*成交单价（成交单价为原零售发货单中记录的），保留两位小数； 
           },{
             key: 'QTY_ACTUAL',
             title: '实际退货数量' // 实际退货数量：默认为0；
@@ -259,6 +264,9 @@ export default {
        const subData = await this.$OMS2.omsUtils.initSubtable('OC_B_REFUND_ORDER_ITEM', route.itemId, '181618');
        this.tableConfig.data = subData.rowData;
        await sessionStorage.setItem('copyDetails',JSON.stringify(subData.rowData));
+      //  编辑没有实际退款数量
+       let columns = this.tableConfig.columns.filter(item => item.title !== '实际退货数量');
+       this.tableConfig.columns = columns
     }
   },
   mounted(){
@@ -279,7 +287,7 @@ export default {
       };
       // 是否是新增
       if (isAdd) {
-        params = Object.assign(params,{EXCLUDE_IDS:ids ? ids.join() : ''})
+        params = Object.assign(params,{EXCLUDE_IDS:ids ? ids.join() : ''});
       }
 
       // 调用查询接口
