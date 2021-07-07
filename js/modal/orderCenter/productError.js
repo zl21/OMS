@@ -2,6 +2,8 @@ import businessActionTable from 'professionalComponents/businessActionTable';
   import businessButton from 'professionalComponents/businessButton';
   import loading from 'professionalComponents/loading.vue';
   import drpInput from 'professionalComponents/fkinput.vue';
+  Vue.component('drpInputPro', drpInput)
+
   export default {
     components: {
       businessActionTable,
@@ -83,7 +85,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
                     width: '150px'
                   }
                 }, [
-                  h('drpInput', {
+                  h('drpInputPro', {
                     props: {
                       style: 'popInput',
                       version: '1.4',
