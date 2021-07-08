@@ -89,12 +89,13 @@ R3.launchApplication({
   setComponentsProps: (type, props) => {  
   // 下拉多选 添加模糊查询多选功能
     if (type === 'OBJ_FK') {
-      if(props.PropsData.fkobj.searchmodel ==='mrp'){
+      if(props.PropsData !== undefined && props.PropsData.fkobj.searchmodel ==='mrp'){
         props.filterMode = true;
       }
     }
     return props;
   },
+  enableOpenNewTab: false,
   connector,
   externalModules: customizedPageConfig, // 自定义界面
   externalModals: customizedModalConfig, // 自定义弹框
@@ -111,6 +112,6 @@ R3.launchApplication({
   // quietRoutes: ['/register', '/password', '/forgotPassword'], // 外置路由
   externalTreeDatas: externalTreeDatasConfig,
   filterUrlForNetwork: filterUrlConfig, // 过滤不需要用框架报错提示信息的接口请求
-  enableActivateSameCustomizePage: false, // 控制列表页面是否能打开多个详情页
+  // enableActivateSameCustomizePage: false, // 控制列表页面是否能打开多个详情页
   filterUrlForNetworkScript: myfilterUrlForNetworkScript // 导入的filterUrlForNetworkScript脚本文件
 });
