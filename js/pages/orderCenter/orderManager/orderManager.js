@@ -12,7 +12,6 @@
   import proDetail from '@/views/pages/orderCenter/orderManager/proDetail';
   import businessAgTable from 'professionalComponents/businessAgTable';
   export default {
-    name: 'OrderManage',
     components: {
       businessButton,
       businessForm,
@@ -108,11 +107,9 @@
               if(!self.vueAgTable){
                 self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               }
-              console.log(self.selection);
               if (self.selection.length) {
                 let arr = self.selection.map((item) => ({ id: item.ID, bill_no: item.BILL_NO }));
                 self.service.orderCenter.backAudit(arr).then((res) => {
-                  console.log(res);
                   if (res.data.code == 0) {
                     $omsUtils.msgTips(self, 'success', res.data.message, 0);
                     self.query();
@@ -162,11 +159,9 @@
               if(!self.vueAgTable){
                 self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               }
-              console.log(self.selection);
               if (self.selection.length) {
                 let arr = self.selection.map((item) => ({ id: item.ID, bill_no: item.BILL_NO }));
                 self.service.orderCenter.audit(arr).then((res) => {
-                  console.log(res);
                   if (res.data.code == 0) {
                     $omsUtils.msgTips(self, 'success', res.data.message, 0);
                     self.query();
@@ -255,7 +250,6 @@
               self.service.orderCenter.checkReturnOrderBeforeWarehouse({
                 ID_AND_BILL_NO_LIST:arr
               }).then(res=>{
-                console.log(res);
                 if(res.data.code == 0){
                   self.publicBouncedConfig.name = 'modifyWarehouse';
                   self.publicBouncedConfig.url = 'modal/orderCenter/modifyWarehouse';
@@ -300,7 +294,6 @@
                 MOCK_TYPE:1
               }).then(res=>{
                 if(res.data.code == 0){
-                  console.log(res);
                   self.publicBouncedConfig.name = 'returnModifyLogistics';
                   self.publicBouncedConfig.url = 'modal/orderCenter/modifyReturnLogistics';
                   self.publicBouncedConfig.confirmTitle = '改退回物流';
@@ -375,7 +368,6 @@
               }
               const ids = self.selection.map(item=>item.ID);
               if(self.selection.length){
-                console.log('导出');
                 self.exportDate(self.tablename , ids)
               }else {
                 this.$Modal.warning({
@@ -385,7 +377,6 @@
                   showCancel:true,
                   mask:true,
                   onOk:()=>{
-                    console.log('全量导出')
                     self.exportDate(self.tablename , ids)
                   }
                 })
@@ -401,7 +392,6 @@
               }
               const ids = self.selection.map(item=>item.ID);
               if(self.selection.length){
-                console.log('导出');
                 self.exportDate(self.tablename , ids)
               }else {
                 this.$Modal.warning({
@@ -411,7 +401,6 @@
                   showCancel:true,
                   mask:true,
                   onOk:()=>{
-                    console.log('全量导出')
                     self.exportDate(self.tablename , ids)
                   }
                 })
@@ -518,7 +507,6 @@
                 return {
                     renderContainer: 'CellRenderByFunction',
                     renderComponent: (h, params) => {
-                        console.log(params);
                         return h('div', {
                             domProps: {
   
@@ -598,10 +586,10 @@
     mounted() {
       const self = this;
       self.initList();
+      console.log('this');
     },
     methods: {
       gridReady() {
-        console.log('grid');
         this.tabth = [
           {
             field: 'name',
@@ -626,7 +614,6 @@
       },
       labelClick(val) {
         this.agTableConfig.pagenation.current = 1;
-        console.log(val);
         this.labelValue = val;
         this.query();
       },
@@ -637,7 +624,6 @@
           FOLD: fold,
         };
         self.service.orderCenter.initList(data).then((res) => {
-          console.log(res);
           if (res.data.code === 0) {
             if (res.data.data.ZIP) {
             } else {
@@ -668,7 +654,6 @@
           }
         });
         if (aG) return
-        console.log('singleType===', self.$OMS2.BtnConfig.singleType);
         self.btnConfig.buttons = []; // 清空按钮缓存,防止重复叠加按钮
         const buttons = self.$OMS2.BtnConfig.config();
         self.btnConfig.buttons = [...buttons.buttons, ...self.extendBtn];
@@ -676,7 +661,6 @@
       },
       initForm(data) {
         const self = this;
-        console.log(data);
         const formdata = [];
         self.selectKey = [];
         data.forEach((ele, i) => {
@@ -692,7 +676,6 @@
               maxlength: ele.LENGTH, // 输入长度
               regx: /^[^']*$/,
               inputChange: () => {
-                console.log(ele.DESC);
               },
             });
             self.$set(self.formConfig.formValue, ele.NAME, '');
@@ -744,7 +727,6 @@
                 serviceId: ele.CENTER
               },
               oneObj: (e) => {
-                console.log(e);
                 self.$set(self.formConfig.formValue, ele.NAME, e.pid);
               },
             });
@@ -762,7 +744,6 @@
               format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
               placeholder: '',
               onChange: (val) => {
-                console.log(val);
               },
             });
             self.$set(self.formConfig.formValue, ele.NAME, ['', '']);
@@ -790,7 +771,6 @@
             break;
           }
         });
-        console.log(formdata);
         self.formConfig.formData = formdata;
       // 配置必填**************************************************
       // self.formConfig.ruleValidate = {
@@ -836,7 +816,6 @@
               ADVANCE.push(obj);
             }
           } else if (formValue[key]) {
-            console.log(formValue[key]);
             if (!formValue[key]) return;
             const obj = {
               NAME: key,
@@ -886,7 +865,6 @@
         // self.loading = true;
         self[aG ? 'loading' : 'agLoaing'] = true;
         self.service.orderCenter.queryList(data).then((res) => {
-          console.log(res);
           if (res.data.code == 0) {
             let data;
             if (!res.data.data.ZIP) {
@@ -905,7 +883,6 @@
           // self.loading = false;
         });
         self.service.orderCenter.queryStatistics(data).then((res) => {
-          console.log(res);
           if (res.data.code == 0) {
             if (!res.data.data.ZIP) {
               const data = res.data.data.DATA;
@@ -922,7 +899,6 @@
         });
         this.selection = []; // 解决弹窗关闭后刷新页面没有刷掉选中项目的问题
       // self.service.orderCenter.queryStatistics(data).then((res) => {
-      //   console.log(res);
       //   if (res.data.code == 0) {
       //     if (!res.data.data.ZIP) {
       //       const data = res.data.data.DATA;
@@ -949,7 +925,6 @@
           break;
           case 'OC_B_RETURN_ORDER':
             if(val.BILL_TYPE == 0){
-              console.log('退货单');
               this.$store.commit('global/tabOpen', {
               type: 'V',
               tableName: 'OC_B_RETURN_ORDER_VIRTUAL_TABLE',
@@ -958,7 +933,6 @@
               id:`${val.ID}?RETURN_SOURCE=${val.RETURN_SOURCE}&SOURCE_CODE=${val.SOURCE_CODE}`
             });
             }else if(val.BILL_TYPE == 1) {
-              console.log('换货单');
               this.$store.commit('global/tabOpen', {
               type: 'V',
               tableName: 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE',
@@ -971,7 +945,6 @@
         }
       },
       pageSizeChange(val) {
-        console.log(val);
         const self = this;
         self.agTableConfig.pagenation.pageSize = val;
       },
@@ -1019,7 +992,6 @@
             if (IDS.length == 1) {
               // 单条数据效验状态是否符合
               self.service.orderCenter.checkOrderDeliveryUrgent({ IDS }).then((res) => {
-                console.log(res);
                 if (res.data.code == 0) {
                   this.urgentShipmentRqu(IDS);
                 }
@@ -1049,14 +1021,12 @@
           return;
         }
         self.service.orderCenter.returnConfirmCheck({ID:self.selection[0].ID}).then(res=>{
-          console.log(res);
           if(res.data.code == 0){
             this.$Modal.confirm({
               title:'提示',
               content:res.data.message,
               showCancel:true,
               onOk:()=>{
-                console.log('123');
                 self.service.orderCenter.returnConfirm({
                   ID:self.selection[0].ID
                 }).then(res=>{
@@ -1100,9 +1070,7 @@
           obj = self.queryData();
         }
         obj.TABLE = tablename;
-        console.log(obj);
         self.service.orderCenter.orderExport(obj).then(res=>{
-          console.log(res);
           if(res.data.code == 0){
             $omsUtils.msgTips(self, 'success', res.data.message, 0)
             let a = document.createElement("a");
@@ -1118,7 +1086,6 @@
       },
       colPinned(data) { },
       colMoved(columns) {
-        // console.log(columns);
         let newCol = [], obj = {};
         columns.forEach((x,y) => {
           if (x.colId == 'index') {
@@ -1142,7 +1109,6 @@
         };
         this.service.orderCenter.customSettings(data).then(res => {
         }).catch(e => {
-          console.log(e);
         });
       },
       getMainMenuItems() {
@@ -1169,7 +1135,6 @@
           DATA: obj
         };
         self.service.orderCenter.customSettings(data).then(res => {
-          console.log(res);
           if (res.data.code == 0) {
             self.$Message.success(res.data.message);
             self.initList(0,1);
@@ -1180,7 +1145,6 @@
       },
       colSortChange(data) { },
       onSelectionChange(data){
-        console.log(data);
         this.selection = data;
       }
     },
