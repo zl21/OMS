@@ -19,9 +19,11 @@ export default {
     },
     formData: [
       {
+        version: '1.4',
         style: 'popInput', // 输入框弹框单多选
         width: '24',
         itemdata: {
+          serviceId: 'r3-cp',
           colid: 167023,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           display: 'OBJ_FK', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选

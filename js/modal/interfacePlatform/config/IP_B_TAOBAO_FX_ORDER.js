@@ -9,6 +9,7 @@ export default {
     },
     formData: [
       {
+        version: '1.4',
         style: 'popInput', // 输入框弹框单多选
         width: '24',
         isActive: true,
@@ -19,6 +20,7 @@ export default {
           }
         ],
         itemdata: {
+          serviceId: 'r3-cp',
           colid: 167606,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           refcolval: {
