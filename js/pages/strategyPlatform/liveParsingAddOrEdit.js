@@ -112,11 +112,11 @@ export default {
             colname: 'ISACTIVE',
             width: '6',
             disabled: true,
-            switchChange: () => {
-              this.masterModifyData('ISACTIVE', 'master', 'formConfig1');
-              this.isEnable = this.formConfig1.formValue.ISACTIVE;
-              this.setEnable();
-            }
+            // inputChange: () => {
+            //   this.masterModifyData('ISACTIVE', 'master', 'formConfig1');
+            //   this.isEnable = this.formConfig1.formValue.ISACTIVE;
+            //   this.setEnable();
+            // }
           },
         ],
         formValue: {
@@ -464,7 +464,7 @@ export default {
         $omsUtils.intersectFormValue(this[formName].formValue, data)
       })
       this.queryForm(this.formConfig1, 'PLAN_ID').style = 'input'
-      this.queryForm(this.formConfig1, 'ISACTIVE').style = 'switch'
+      this.queryForm(this.formConfig1, 'ISACTIVE').style = 'input'
   
       const { CP_C_SHOP_ID, CP_C_SHOP_ENAME, ISACTIVE, BEGIN_TIME, END_TIME } = data
       const obj = this.queryForm(this.formConfig2, 'CP_C_SHOP_ID')
@@ -472,7 +472,7 @@ export default {
       obj.itemdata.valuedata = CP_C_SHOP_ENAME
 
       this.isEnable = ISACTIVE == 'Y'
-      this.formConfig1.formValue.ISACTIVE = this.isEnable
+      this.formConfig1.formValue.ISACTIVE = this.isEnable ? '启用' : '停用'
       this.formConfig2.formValue.TIME_RANGE = [BEGIN_TIME, END_TIME]
       this.formConfig1.ruleValidate.PLAN_ID[0].required = true
     },

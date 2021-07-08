@@ -188,11 +188,11 @@ export default {
             colname: 'ISACTIVE',
             width: '6',
             disabled: true,
-            switchChange: () => {
-              this.masterModifyData('ISACTIVE', 'master');
-              this.isEnable = this.formConfig.formValue.ISACTIVE;
-              this.reloadForm()
-            }
+            // inputChange: () => {
+            //   this.masterModifyData('ISACTIVE', 'master');
+            //   this.isEnable = this.formConfig.formValue.ISACTIVE;
+            //   this.reloadForm()
+            // }
           }
         ],
         formValue: {
@@ -249,7 +249,7 @@ export default {
             required: false,
             render: (h, params) => {
               // this.isEnable
-              if (!this.formConfig.formValue.ISACTIVE && !this.isCopy) {
+              if (this.formConfig.formValue.ISACTIVE != '启用' && !this.isCopy) {
                 return h("div", [
                   h("myInput", {
                     style: {
@@ -293,7 +293,7 @@ export default {
             align: "center",
             render: (h, params) => {
               // this.isActive
-              if (!this.formConfig.formValue.ISACTIVE && !this.isCopy) {
+              if (this.formConfig.formValue.ISACTIVE != '启用' && !this.isCopy) {
                 return h('Input', {
                   style: {
                     width: '150',
@@ -721,7 +721,7 @@ export default {
     setMainTableFormConfig() {
       /**填充字段 */
       this.queryForm(this.formConfig, 'PLAN_ID').style = this.isMasterRequired ? 'input' : '' 
-      this.queryForm(this.formConfig, 'ISACTIVE').style = this.isMasterRequired ? 'switch' : ''
+      this.queryForm(this.formConfig, 'ISACTIVE').style = this.isMasterRequired ? 'input' : ''
       this.isMasterRequired && this.setEnable()
       /**校验字段 */
       this.formConfig.ruleValidate = {
@@ -784,13 +784,13 @@ export default {
           if (data) {
             this.isEnable = data.ISACTIVE == 'Y'
             this.isMasterRequired = true
-            this.reloadForm(this.isEnable)
+            this.reloadForm()
             $omsUtils.intersectFormValue(this.formConfig.formValue, data)
             this.setFormValue(this.formConfig, 'CP_C_SHOP', { 
               pid: data.CP_C_SHOP_ID,
               valuedata: data.CP_C_SHOP_ENAME
             })
-            this.formConfig.formValue.ISACTIVE = this.isEnable
+            this.formConfig.formValue.ISACTIVE = this.isEnable ? '启用' : '停用'
           }
         } else {
           this.$message.error(message)
@@ -884,7 +884,7 @@ export default {
             this.setFormValue(this.goodsTableConfig.businessFormConfig, 'PS_C_SKU')
             this.setFormValue(this.goodsTableConfig.businessFormConfig, 'PS_C_SPU')
           }
-          this.reloadForm(params.ISACTIVE == 'Y')
+          this.reloadForm()
           data && (this.ID = data.objId)
           if (isSaveAll) {
             this.modify = { master: {} }

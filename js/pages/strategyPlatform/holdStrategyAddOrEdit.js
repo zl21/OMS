@@ -93,16 +93,16 @@ export default {
             width: '6',
             label: '启用状态',
             style: null,
-            switchChange: () => {
-              this.masterModifyData('ISACTIVE', 'formConfig1')
-              let isActive = this.formConfig1.formValue.ISACTIVE
-              this.formConfig2.formData[1].disabledSwitch = isActive ? true : false;
-              this.formConfig2.formData[0].itemdata.readonly = isActive ? true : false;
-              this.formConfig2.formData[2].disabledSwitch = isActive ? true : false;
-              this.formConfig2.formData[1].disabled = isActive ? true : false;
-              this.formConfig2.formData[2].disabled = isActive || !this.formConfig2.formValue.ORDER_TAB_TYPE ? true : false;
-              this.formConfig2.formData[2].timeDisabled = isActive ? true : false;
-            }
+            // inputChange: () => {
+            //   this.masterModifyData('ISACTIVE', 'formConfig1')
+            //   let isActive = this.formConfig1.formValue.ISACTIVE
+            //   this.formConfig2.formData[1].disabledSwitch = isActive ? true : false;
+            //   this.formConfig2.formData[0].itemdata.readonly = isActive ? true : false;
+            //   this.formConfig2.formData[2].disabledSwitch = isActive ? true : false;
+            //   this.formConfig2.formData[1].disabled = isActive ? true : false;
+            //   this.formConfig2.formData[2].disabled = isActive || !this.formConfig2.formValue.ORDER_TAB_TYPE ? true : false;
+            //   this.formConfig2.formData[2].timeDisabled = isActive ? true : false;
+            // }
           },
           {
             style: 'date',
@@ -459,11 +459,11 @@ export default {
         let formValue3 = this.formConfig3.formValue;
         this.formConfig1.formData[0].style = 'input'
         this.formConfig1.formData[0].disabled = true
-        this.formConfig1.formData[2].style = 'switch'
+        this.formConfig1.formData[2].style = 'input'
         this.formConfig1.formData[2].disabled = true
         formValue1.ECODE = data.ECODE;
         formValue1.ENAME = data.ENAME;
-        formValue1.ISACTIVE = data.ISACTIVE === 'Y';
+        formValue1.ISACTIVE = data.ISACTIVE === 'Y' ? '启用' : '停用';
         formValue1.VALID_BEGIN_TIME = data.VALID_BEGIN_TIME;
         formValue1.VALID_END_TIME = data.VALID_END_TIME;
         // 状态为启用状态一下内容不能编辑 启用停用按钮限制

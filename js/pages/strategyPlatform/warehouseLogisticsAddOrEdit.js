@@ -177,10 +177,10 @@ export default {
             value: 'ISACTIVE',
             width: '6',
             disabled: true,
-            switchChange: () => {
-              this.masterModifyData('ISACTIVE', 'master');
-              this.setEnable(this.formConfig.formValue.ISACTIVE);
-            }
+            // inputChange: () => {
+            //   this.masterModifyData('ISACTIVE', 'master');
+            //   this.setEnable(this.formConfig.formValue.ISACTIVE);
+            // }
           }
         ],
         formValue: {
@@ -566,8 +566,8 @@ export default {
             })
           })
           this.isMasterRequired = true;
-          this.queryForm(this.formConfig, 'ISACTIVE').style = 'switch';
-          this.formConfig.formValue.ISACTIVE = isEnable;
+          this.queryForm(this.formConfig, 'ISACTIVE').style = 'input';
+          this.formConfig.formValue.ISACTIVE = isEnable ? '启用' : '停用';
           this.formConfig.formValue.REMARK = ST_C_EXPRESS_ALLOCATION.remark;
           this.initPanel();
         }
