@@ -137,6 +137,8 @@ export default {
     R3.network.post('/p/cs/transfer/audit', param).then((res) => {
       if (res.data.code === 0) {
         this.$emit('closeActionDialog');
+        // 标准菜单刷新
+        document.querySelector('.singleObjectButton').__vue__.clickButtonsRefresh()
         this.$Message.success(res.data.message);
       } else {
         this.abnormalList = res.data.data;
@@ -203,6 +205,8 @@ export default {
         if (res.data.code === 0) {
           self.$emit('closeActionDialog');
           self.$Message.success(res.data.message);
+          // 标准菜单刷新
+          document.querySelector('.singleObjectButton').__vue__.clickButtonsRefresh()
         } else {
           this.abnormalList = res.data.data;
           this.jordanTableConfig.data = res.data.data;
