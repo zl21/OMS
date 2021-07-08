@@ -97,7 +97,7 @@ export default {
                     on: {
                       'on-change': e => {
                         params.row.qty = e.target.value;
-                        _this.abnormalList.data[params.index] = params.row;
+                        _this.abnormalList[params.index] = params.row;
                         _this.abnormalSelectData.forEach(item => {
                           if (item.PS_C_SKU_ECODE === params.row.PS_C_SKU_ECODE) {
                             item.qty = params.row.qty;
