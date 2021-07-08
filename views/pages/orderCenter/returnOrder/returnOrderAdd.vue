@@ -385,6 +385,12 @@ export default {
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_IN_ID = e.pid;
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_IN_ENAME = e.valuedata;
             },
+            inputBlur: (e) => {
+              // this.oneObjs(e);
+              this.modifyData("CP_C_PHY_WAREHOUSE_IN_ID", "master");
+              this.formConfig.formValue.CP_C_PHY_WAREHOUSE_IN_ID = e.pid;
+              this.formConfig.formValue.CP_C_PHY_WAREHOUSE_IN_ENAME = e.valuedata;
+            },
           },
           {
             style: 'popInput',
@@ -406,6 +412,11 @@ export default {
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = e.pid;
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = e.valuedata;
             },
+            inputBlur: (e) => {
+              this.modifyData("CP_C_PHY_WAREHOUSE_ID", "master");
+              this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = e.pid;
+              this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = e.valuedata;
+            },
           },
           {
             style: 'popInput',
@@ -422,6 +433,11 @@ export default {
             },
             oneObj: (e) => {
               // this.oneObjs(e);
+              this.modifyData("CP_C_LOGISTICS_ID", "master");
+              this.formConfig.formValue.CP_C_LOGISTICS_ID = e.pid;
+              this.formConfig.formValue.CP_C_LOGISTICS_ENAME = e.valuedata;
+            },
+            inputBlur: (e) => {
               this.modifyData("CP_C_LOGISTICS_ID", "master");
               this.formConfig.formValue.CP_C_LOGISTICS_ID = e.pid;
               this.formConfig.formValue.CP_C_LOGISTICS_ENAME = e.valuedata;
@@ -533,6 +549,18 @@ export default {
               );
               this.modifyData("CP_C_REGION_PROVINCE_ID", "master", 1);
             },
+            inputBlur: (val) => {
+              this.formConfigEx.formValue.CP_C_REGION_PROVINCE_ID = val.pid;
+              this.formConfigEx.formValue.CP_C_REGION_PROVINCE_ENAME = val.valuedata;
+              this.formConfigEx = this.emptyData(
+                this.formConfigEx,
+                "CP_C_REGION_PROVINCE_ID",
+                this.modify,
+                val,
+                ["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"]
+              );
+              this.modifyData("CP_C_REGION_PROVINCE_ID", "master", 1);
+            },
           },
           {
             version: '1.4',
@@ -566,6 +594,18 @@ export default {
               );
               this.modifyData("CP_C_REGION_CITY_ID", "master", 1);
             },
+            inputBlur: (val) => {
+              this.formConfigEx.formValue.CP_C_REGION_CITY_ID = val.pid;
+              this.formConfigEx.formValue.CP_C_REGION_CITY_ENAME = val.valuedata;
+              this.formConfigEx = this.emptyData(
+                this.formConfigEx,
+                "CP_C_REGION_CITY_ID",
+                this.modify,
+                val,
+                ["CP_C_REGION_AREA_ID"]
+              );
+              this.modifyData("CP_C_REGION_CITY_ID", "master", 1);
+            },
           },
           {
             version: '1.4',
@@ -588,6 +628,11 @@ export default {
               },
             },
             oneObj: (val) => {
+              this.formConfigEx.formValue.CP_C_REGION_AREA_ID = val.pid;
+              this.formConfigEx.formValue.CP_C_REGION_AREA_ENAME = val.valuedata;
+              this.modifyData("CP_C_REGION_AREA_ID", "master", 1);
+            },
+            inputBlur: (val) => {
               this.formConfigEx.formValue.CP_C_REGION_AREA_ID = val.pid;
               this.formConfigEx.formValue.CP_C_REGION_AREA_ENAME = val.valuedata;
               this.modifyData("CP_C_REGION_AREA_ID", "master", 1);
