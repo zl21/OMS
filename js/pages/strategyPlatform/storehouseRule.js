@@ -283,12 +283,12 @@ export default {
             colname: 'isactive',
             width: '8',
             disabled: true,
-            switchChange: () => {
-              let isactive = this.formConfig.formValue.isactive;
-              this.qurefrom('beginTime')[0].disabled = isactive;
-              this.qurefrom('endTime')[0].disabled = isactive;
-              this.btnConfig2.buttons[0].disabled = isactive;
-            }
+            // inputChange: () => {
+            //   let isactive = this.formConfig.formValue.isactive;
+            //   this.qurefrom('beginTime')[0].disabled = isactive;
+            //   this.qurefrom('endTime')[0].disabled = isactive;
+            //   this.btnConfig2.buttons[0].disabled = isactive;
+            // }
           },
           {
             style: 'input',
@@ -711,7 +711,7 @@ export default {
     initbtn() {
       //初始化按钮
       this.qurefrom('ecode')[0].style = 'input';
-      this.qurefrom('isactive')[0].style = 'switch';
+      this.qurefrom('isactive')[0].style = 'input';
       this.qurefrom('type')[0].disabled = true;
       this.qurefrom('areaLevel')[0].options.forEach(em => {
         em.disabled = true;
@@ -734,7 +734,7 @@ export default {
           let warehouseData = res.data.data;
           for (const key in this.formConfig.formValue) {
             if (key == 'isactive') {
-              this.formConfig.formValue[key] = warehouseData[key] == 'Y';
+              this.formConfig.formValue[key] = warehouseData[key] == 'Y' ? '启用' : '停用';
               //isactive  Y只有方案名称，优先级，备注 可以编辑
               if (warehouseData[key] == 'Y' && !vm.$route.query.copy) {
                 this.qurefrom('beginTime')[0].disabled = true;
@@ -769,7 +769,7 @@ export default {
         let warehouseData = res.data.data;
         for (const key in this.formConfig.formValue) {
           if (key == 'isactive') {
-            this.formConfig.formValue[key] = warehouseData[key] == 'Y';
+            this.formConfig.formValue[key] = warehouseData[key] == 'Y' ? '启用' : '停用';
             //isactive  Y只有方案名称，优先级，备注 可以编辑
             if (warehouseData[key] == 'Y' && !vm.$route.query.copy) {
               this.qurefrom('beginTime')[0].disabled = true;
@@ -834,7 +834,7 @@ export default {
             cpCPhyWarehouseEcode,
             priority,
             remark,
-            isactive: isactive ? 'Y' : 'N'
+            isactive: isactive == '启用' ? 'Y' : 'N'
           },
           copyFlag
         };
@@ -896,7 +896,7 @@ export default {
         remark,
         type,
         copyFlag,
-        isactive: isactive ? 'Y' : 'N'
+        isactive: isactive == '启用' ? 'Y' : 'N'
       };
       if (saveType) {
         data.saveType = saveType;
