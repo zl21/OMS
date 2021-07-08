@@ -141,6 +141,7 @@ export default {
         document.querySelector('.singleObjectButton').__vue__.clickButtonsRefresh()
         this.$Message.success(res.data.message);
       } else {
+        if (res.data.data === undefined) this.$emit('closeActionDialog')
         this.abnormalList = res.data.data;
         this.jordanTableConfig.data = res.data.data;
         // self.$Message.error(res.data.message);
@@ -208,6 +209,7 @@ export default {
           // 标准菜单刷新
           document.querySelector('.singleObjectButton').__vue__.clickButtonsRefresh()
         } else {
+          if (res.data.data === undefined) self.$emit('closeActionDialog')
           this.abnormalList = res.data.data;
           this.jordanTableConfig.data = res.data.data;
           // self.$Message.error(res.data.message);
