@@ -10,11 +10,11 @@ export default {
     },
     formData: [
       {
+        version: '1.4',
         style: 'popInput', // 输入框弹框单多选
         width: '24',
         isActive: true,
         isdisabled: false,
-        version:'1.4',
         itemdata: {
           serviceId:'r3-cp',
           col: 1,

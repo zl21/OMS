@@ -7,13 +7,14 @@ export default {
     },
     formData: [
       {
+        version: '1.4',
         style: 'popInput', // 输入框弹框单多选
         width: '24',
-        version: '1.4',
         inputList: [],
         isActive: true,
         isdisabled: false,
         itemdata: {
+          serviceId: 'r3-cp',
           colid: 170287,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           fkdisplay: 'drp', // 外键关联类型
