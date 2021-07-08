@@ -202,7 +202,7 @@ export default {
         objid: this.$route.params.itemId,
         data: this.haveDelList.concat(this.abnormalList)
       }
-      R3.network.post('/p/cs/transfer/audit', param).then((res) => {
+      R3.network.post('/p/cs/transfer/updateAndAudit', param).then((res) => {
         if (res.data.code === 0) {
           self.$emit('closeActionDialog');
           self.$Message.success(res.data.message);
