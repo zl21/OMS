@@ -9,6 +9,138 @@ class commonUtils {
   constructor() { }
 
   //--------------工具方法区--------------------------
+  static initForm(self, param, myForm) {
+    // const self = this;
+    // console.log(data);
+    /* const param = {
+      TABLE: self.tablename,
+      FOLD: fold,
+    }; */
+    let da, fD = [], fV = [];
+    return self.service.orderCenter.initList(param).then(res => {
+      const { data: { code, data } } = res;
+      if (code === 0) {
+        if (data.ZIP) {
+          console.error("当前数据格式为'ZIP',不支持!")
+          return Promise.reject(data)
+        } else {
+          da = data.DATA;
+          return da
+        }
+      }
+    }).then(form => {
+      form.forEach((ele, i) => {
+        switch (ele.DISPLAY) {
+          case 'TEXT':
+            fD.push({
+              colname: ele.NAME,
+              style: 'input', // 控件类型
+              label: ele.DESC, // 控件label名称
+              value: ele.NAME, // 控件key
+              width: '6', // 控件宽度
+              disabled: false, // 是否禁用
+              maxlength: ele.LENGTH, // 输入长度
+              regx: /^[^']*$/,
+              inputChange: () => {
+                console.log(ele.DESC);
+              },
+            });
+            fV[ele.NAME] = '';
+            break;
+          case 'SELECT':
+            fD.push({
+              colname: ele.NAME,
+              style: 'select', // 下拉框类型
+              label: ele.DESC,
+              width: '6', // 所占宽度宽度
+              value: ele.NAME, // 输入框的值
+              clearable: true,
+              selectChange: () => { },
+              disabled: false,
+              options: ele.COMBOBOX,
+              multiple: true,
+            });
+            fV[ele.NAME] = '';
+            break;
+          case 'FK_TABLE':
+            fD.push({
+              version: '1.4',
+              colname: ele.NAME, // 控件key
+              style: 'popInput', // 输入框弹框单多选
+              width: '6',
+              itemdata: {
+                colid: ele.ID, // 当前字段的ID
+                colname: ele.NAME, // 当前字段的名称
+                fkdisplay: 'drp', // 外键关联类型
+                isfk: true, // 是否有fk键
+                isnotnull: false, // 是否必填
+                name: ele.DESC, // 展示的label
+                readonly: false, // 是否可编辑，对应input   readonly属性
+                reftable: ele.REF_TB_NAME, // 对应的表
+                reftableid: ele.REF_TB_ID, // 对应的表ID
+                valuedata: '', // 这个是选择的值
+                pid: '',
+                serviceId: ele.CENTER
+              },
+              oneObj: (e) => {
+                console.log(e);
+                fV[ele.NAME] = e.pid;
+              },
+            });
+            fV[ele.NAME] = '';
+            break;
+          case 'OBJ_DATE':
+            fD.push({
+              style: 'date',
+              type: 'daterange',
+              colname: ele.NAME,
+              // type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
+              value: ele.NAME,
+              label: ele.DESC, // 平台修改时间
+              width: '6',
+              format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
+              placeholder: '',
+              onChange: (val) => {
+                console.log(val);
+              },
+            });
+            fV[ele.NAME] = '';
+            break;
+          case 'RANGE':
+            fD.push({
+              style: 'bothInput', // 双input框控件
+              colname: ele.NAME,
+              label: ele.DESC,
+              value: ele.NAME,
+              regx: /^\d/,
+            });
+            fV[ele.NAME] = '';
+            break;
+          case 'RADIOGROUP':
+            fD.push({
+              style: 'radio',
+              colname: ele.NAME,
+              value: ele.NAME,
+              label: ele.DESC,
+              width: '6',
+              options: ele.COMBOBOX,
+            });
+            fV[ele.NAME] = '';
+            break;
+        }
+      });
+      const formCon = {
+        fD,
+        fV,
+      }
+      return Promise.resolve(formCon)
+    })
+    // return formCon
+    // 配置必填**************************************************
+    // self.formConfig.ruleValidate = {
+    //   ORDER_TAG: [{ required: true, message: ' ', trigger: 'blur' }],
+    // };
+  }
 
   //请求主体处理
   /* 
