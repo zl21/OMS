@@ -27,6 +27,7 @@ export default {
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
+          serviceId: 'r3-cp',
           length: 65535, // 最大长度是多少
           name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
