@@ -136,8 +136,8 @@ export default {
     }
     R3.network.post('/p/cs/transfer/audit', param).then((res) => {
       if (res.data.code === 0) {
-        self.$emit('closeActionDialog');
-        self.$Message.success(res.data.message);
+        this.$emit('closeActionDialog');
+        this.$Message.success(res.data.message);
       } else {
         this.abnormalList = res.data.data;
         this.jordanTableConfig.data = res.data.data;
