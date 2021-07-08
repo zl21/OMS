@@ -363,6 +363,11 @@ export default {
     getColumns() {
       const columns = [
         {
+          key: 'TID',
+          title: '原始平台单号',
+          dataAcessKey: 'TID'
+        },
+        {
           key: 'PS_C_PRO_ECODE',
           title: '商品款号',
           dataAcessKey: 'PS_C_PRO_ECODE'
@@ -723,11 +728,6 @@ export default {
               }))
             );
           }
-        },
-        {
-          key: 'TID',
-          title: '原始平台单号',
-          dataAcessKey: 'TID'
         },
         {
           key: 'OOID',
