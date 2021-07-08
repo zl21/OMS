@@ -15,5 +15,9 @@ export default {
   //  唯品会退供单-修改收货仓库
   CUSTOMIZEDRECEIPT: {
     component: () => import('@/views/modal/InterfacePlatform/customizedReceipt.vue')
+  },
+  // 淘宝订单接口-SKU异常登记
+  SKUABNORMALREGISTRATION: {
+    component: () => import('@/views/modal/orderCenter/changeProduct.vue')
   }
 };
