@@ -13,6 +13,22 @@ const tableNameList = [
     },
   },
   {
+    table: 'GROUPS_VIRTUAL_TABLE', //角色档案 
+    center: 'userCenter',
+    api: 'groupsTree',
+  },
+  {
+    table: 'USERS', //用户档案 
+    center: 'userCenter',
+    api: 'hrorgTree',
+    json: {
+      tableName: 'USERS',
+    },
+    query: {
+      CP_C_HRORG_ID: 'ID'
+    },
+  },
+  {
     table: 'ST_C_ORDER_WAREHOUSE', // 分仓规则
     center: 'strategyPlatform',
     api: 'strategyTree',
