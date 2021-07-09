@@ -1,5 +1,5 @@
 
-import R3 from '../../../static/r3.publish/r3.min.js';
+import R3 from '@syman/burgeon-r3';
 import globalstore from './customizeGlobal';
 
 R3.store.registerModule('customize', globalstore);

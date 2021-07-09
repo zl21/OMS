@@ -1,4 +1,4 @@
-import R3 from '../../../static/r3.publish/r3.min.js';
+import R3 from '@syman/burgeon-r3';
 import service from '@/service/index';
 
 export const fkQueryList = function fkQueryList(params) {
