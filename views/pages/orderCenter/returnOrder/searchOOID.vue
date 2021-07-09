@@ -297,6 +297,7 @@ export default {
       }, 100);
     },
     async queryEnter(page = 0, pageSize = 10, showData) {
+      this.$emit('getRowData', {});
       console.log(page, pageSize);
       const self = this;
       if (page >= 1) page = `${page - 1}0`
