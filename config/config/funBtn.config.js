@@ -435,7 +435,6 @@ class BtnConfig {
       case 'regenerateTheOrder':
       case 'manualMatch':
       case 'forceMatch':
-      case 'returnGoodsCancel':
       case 'modifyRemark':
       case 'modifySellerRemark':
       case 'againWMS':
@@ -443,6 +442,11 @@ class BtnConfig {
       case 'batchOriginalReturn':
         funName = `${type}Handler`
         tips = 'l0'
+        paramsType = 7
+        break
+      case 'returnGoodsCancel':
+        funName = `${type}Handler`
+        tips = 'd8'
         paramsType = 7
         break
       case 'holdOrder':
