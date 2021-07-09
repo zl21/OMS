@@ -33,7 +33,7 @@
             </Option>
           </Select>
         </div>
-        <div class="relation" v-if="dynamicStructure[IDX].CALC == 'zl'">
+        <div class="relation" v-if="dynamicStructure[IDX].CALC !== null">
           <Select
             v-model="dynamicStructure[IDX].CALC"
             transfer
@@ -65,7 +65,7 @@
             </Radio>
           </RadioGroup>
           <DatePicker 
-            v-if="dynamicStructure[IDX].DISPLAY == 'OBJ_DATE'"
+            v-else-if="dynamicStructure[IDX].DISPLAY == 'OBJ_DATE'"
             type="datetimerange"
             split-panels
             transfer
@@ -91,7 +91,8 @@
             </Option>
           </Select>
           <!-- ="ele.DISPLAY == 'TEXT'" -->
-          <Input v-else v-model="dynamicStructure[IDX].VAL" />
+          <Input v-else-if="dynamicStructure[IDX].DISPLAY == 'TEXT'" v-model="dynamicStructure[IDX].VAL" />
+          <!-- <label v-else>特殊类型,待兼容</label> -->
         </div>
         <div
           v-show="dynamicStructure.length !== IDX+1"
@@ -160,7 +161,7 @@
         combinValue: '', // 组合商品值
         dynamicStructure: [ // 动态结构数据
           { // 模板
-            DISPLAY: '', // 组合条件类型
+            DISPLAY: 'TEXT', // 组合条件类型
             NAME: '', // 组合条件选的值
             VAL: '', // 条件值
             RLT: '', // 关系运算符:且/或
@@ -168,7 +169,7 @@
             TYPE: '', // 值类型
           },
           { // 模板
-            DISPLAY: '', // 组合条件类型
+            DISPLAY: 'TEXT', // 组合条件类型
             NAME: '', // 组合条件选的值
             VAL: '', // 条件值
             RLT: '', // 关系运算符:且/或
@@ -202,19 +203,19 @@
             const curIt = this.dynamicStructure.find(i => i.NAME == val) //.DISPLAY = 'SELECT'// it.DISPLAY;
             curIt.DISPLAY = it.DISPLAY; //'DATE';
             curIt.index = j;
-            if (curIt.CALC_SYMBOL && curIt.CALC_SYMBOL.length) {
-              curIt.calc = [];
-              for (let x = 0; x < curIt.CALC_SYMBOL.length; x++) {
+            if (it.CALC_SYMBOL && it.CALC_SYMBOL.length) {
+              it.calc = [];
+              for (let x = 0; x < it.CALC_SYMBOL.length; x++) {
                 allCalc.forEach(y => {
-                  if (curIt.CALC_SYMBOL[x].value = y.value) {
-                    curIt.calc.push(y);
+                  if (it.CALC_SYMBOL[x] == y.value) {
+                    it.calc.push(y);
                   }
                 })
               }
-              curIt.CALC = curIt.calc[0].value || ''; // 默认取第一个关系运算符
+              curIt.CALC = it.calc[0] ? it.calc[0].value ? it.calc[0].value : '' : ''; // 默认取第一个关系运算符
             } else {
               // 可能存在不需要【关系运算符】的情况，那就不展示该控件
-              curIt.CALC = 'zl';
+              curIt.CALC = null;
             }
           }
         });
@@ -223,7 +224,7 @@
       reset() {
         this.dynamicStructure = [ // 动态结构数据
           { // 模板
-            DISPLAY: '', // 组合条件类型
+            DISPLAY: 'TEXT', // 组合条件类型
             NAME: '', // 组合条件选的值
             VAL: '', // 条件值
             RLT: this.default_rlt, // 关系运算符:且/或
@@ -232,7 +233,7 @@
             TYPE: '', // 值类型
           },
           { // 模板
-            DISPLAY: '', // 组合条件类型
+            DISPLAY: 'TEXT', // 组合条件类型
             NAME: '', // 组合条件选的值
             VAL: '', // 条件值
             RLT: this.default_rlt, // 关系运算符:且/或
@@ -245,7 +246,7 @@
       mdAdd() {
         const self = this;
         const obj = JSON.stringify({ // 模板
-          DISPLAY: '', // 组合条件类型
+          DISPLAY: 'TEXT', // 组合条件类型
           NAME: '', // 组合条件选的值
           VAL: '', // 条件值
           RLT: this.default_rlt, // 关系运算符:且/或
