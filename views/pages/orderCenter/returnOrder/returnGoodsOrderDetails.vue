@@ -1,13 +1,17 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-09 18:09:23
+ * @LastEditTime: 2021-07-09 18:34:35
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
 -->
 <template>
   <div v-loading="loading">
+    <!-- 如果是组合商品不显示  v-if="IS_GROUP"  -->
+    <div class="switch">
+      <span @click="onSitch()"> {{ switchText }} </span>
+    </div>
     <!-- 退货明细 -->
     <business-action-table
       :jordan-table-config="businessActionTable"
@@ -71,6 +75,7 @@ export default {
   },
   data() {
     return {
+      switchText:'切换为sku商品展示',
       returnArr: [],
       changeArr: [],
       loading: false,
@@ -361,6 +366,12 @@ export default {
     });
   },
   methods: {
+    // 切换商品展示类型
+    onSitch(){
+      this.isSku ? this.switchText = '切换为sku商品展示' : this.switchText = '切换为平台商品展示';
+      this.isSku = !this.isSku;
+      // this.getData(this.isSku);
+    },
     // 获取按钮权限
     async getBtn() {
       return $OMS2.omsUtils.getPermissions(this, '', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true).then(res => {
@@ -1142,4 +1153,11 @@ export default {
     display: none;
   }
 }
+.switch {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    color: #5461B8;
+    cursor: pointer;
+  }
 </style>
