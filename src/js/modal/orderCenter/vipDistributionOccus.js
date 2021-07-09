@@ -1,6 +1,6 @@
 import axios from 'axios';
 import businessButton from 'professionalComponents/businessButton';
-import R3 from '@syman/burgeon-r3';
+import R3 from '../../../../static/r3.publish/r3.min.js';
 
 const { getModuleName } = R3;
 export default {

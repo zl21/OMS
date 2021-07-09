@@ -1,7 +1,7 @@
 
 // 数据约定 和 外键关联
 import axios from 'axios';
-import R3 from '@syman/burgeon-r3';
+import R3 from '../../../../static/r3.publish/r3.min.js';
 import service from '@/service/index';
 
 const { store } = R3;
