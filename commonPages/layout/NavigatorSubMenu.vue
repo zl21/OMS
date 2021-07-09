@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-29 10:56:54
- * @LastEditTime: 2021-07-05 10:54:49
+ * @LastEditTime: 2021-07-09 18:18:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layput/NavigatorSubMenu.vue
@@ -93,7 +93,7 @@
   // 展开部分
   div .NavigatorSubMenu{
     width: auto !important;
-    top: 41px !important;
+    top: 51px !important;
     height: calc(100% - 41px);
     max-height: initial;
     box-shadow: 16px 0 10px 0 rgba(0,0,0,.05)!important;
