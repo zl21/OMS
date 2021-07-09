@@ -69,7 +69,7 @@ export default {
           CP_C_SHOP_ID: "",
           SOURCE_CODE: '',
           PLATFORM_STATUS: '',
-          ORDER_STATUS: '',
+          ORDER_STATUS: ['1', '2'],
           BUYER_NICK: '',
           RECEIVER_NAME: '',
           RECEIVER_MOBILE: '',
@@ -123,11 +123,15 @@ export default {
             options: [],
           }, */
           {
-            style: 'select',
+            style: '',
             label: '单据状态',
             colname: 'ORDER_STATUS',
             width: '8',
+            multiple: true,
             options: [],
+            selectChange: (val) => {
+              this.formConfig.formValue.ORDER_STATUS = val.value;
+            },
           },
           {
             style: 'input',

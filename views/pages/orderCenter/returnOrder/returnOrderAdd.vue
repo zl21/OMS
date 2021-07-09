@@ -726,7 +726,7 @@ export default {
       this.initObjItem(-1);
       setTimeout(() => {
         this.loading = false;
-      }, 1500);
+      }, 1100);
     });
   },
   methods: {
