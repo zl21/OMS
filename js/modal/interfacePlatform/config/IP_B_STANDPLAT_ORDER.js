@@ -47,7 +47,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: '平台退款单号', // 输入框前文字
+        label: '平台单号', // 输入框前文字
         value: 'bill_no', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -77,7 +77,7 @@ export default {
     const [start, end] = formValue.startEndTimes
     if (!(formValue.bill_no || start)) {
       // _this.$Message.warning($i18n.t('modalTips.bp')); 
-      self.$Message.warning('请输入平台修改时间或平台退款单号'); // 请输入平台修改时间或平台退款单号
+      self.$Message.warning('请输入平台修改时间或平台单号'); // 请输入平台修改时间或平台单号
       return false;
     }
     const param = {
