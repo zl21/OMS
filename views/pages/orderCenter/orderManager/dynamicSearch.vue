@@ -110,9 +110,11 @@
           v-show="dynamicStructure.length !== IDX+1"
           class="group"
         >
+        <!-- {{dynamicStructure[IDX]}} -->
           <Select
-            v-model="dynamicStructure[IDX].RLT"
+            v-model="dynamicStructure[IDX + 1 >= dynamicStructure.length ? 0 : IDX + 1].RLT"
             transfer
+            @on-change="rltChange"
           >
             <Option
               v-for="(item,index) in dynamicData.LOGIC_SYMBOL.COMBOBOX"
@@ -193,6 +195,9 @@
       };
     },
     methods: {
+      rltChange(val) {
+        const aaa = this.dynamicStructure;
+      },
       bInputChange() {
 
       },
@@ -209,6 +214,7 @@
       },
       conditionChange(val) {
         console.log(val);
+        const aaa = this.dynamicStructure;
         const all = this.dynamicData.COMBINE_CONDITION.COMBOBOX;
         const allCalc = this.dynamicData.CALC_SYMBOL.COMBOBOX;
         // const options = 
@@ -237,7 +243,6 @@
             }
           }
         });
-        const aaa = this.dynamicStructure;
       },
       reset() {
         this.dynamicStructure = [ // 动态结构数据
