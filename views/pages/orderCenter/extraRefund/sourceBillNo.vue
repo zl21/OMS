@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-07-07 15:14:39
+ * @LastEditTime: 2021-07-08 17:04:23
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -76,10 +76,10 @@ export default {
     businessLabel,
     businessStatusFlag
   },
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
+  // model: {
+  //   prop: 'value',
+  //   event: 'change'
+  // },
   props: {
     value: {
       type: String,

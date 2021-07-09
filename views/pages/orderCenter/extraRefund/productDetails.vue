@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-07 16:07:55
+ * @LastEditTime: 2021-07-07 16:26:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -86,7 +86,7 @@ export default {
             key: 'PS_C_PRO_ENAME',
             title: 'SPU名称'
           },{
-            key: 'PS_C_PRO_ENAME',
+            key: 'GIFT_TYPE',
             title: '赠品'
           },
           // {

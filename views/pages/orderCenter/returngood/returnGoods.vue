@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-19 10:53:30
- * @LastEditTime: 2021-06-08 09:56:34
+ * @LastEditTime: 2021-07-09 10:38:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returngood/returnGoods.vue
@@ -33,6 +33,7 @@
           modal: false,
           pageShow: true, // 控制分页是否显示
           table: {
+            border:true,
             columns: [], // 表头
             data: [], // 数据配置
             indexColumn: true, // 是否显示序号
