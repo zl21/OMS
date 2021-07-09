@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-07 18:45:07
- * @LastEditTime: 2021-07-09 11:04:18
+ * @LastEditTime: 2021-07-09 13:16:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/OWNERNAME.vue
@@ -29,6 +29,12 @@ export default {
   created(){
     
   },
+  mounted(){
+    // 模拟点击，加密
+    setTimeout(() => {
+      document.getElementsByClassName("eye")[0].click();
+    }, 100);
+  },
   methods:{
     onClickEye(val){
      this.isShow = !val
@@ -45,8 +51,7 @@ export default {
        this.$emit('change','')
         this.$refs.iconfont.classList.replace('iconios-eye','iconios-eye-off')
       }
-    },
-    
+    }
   }
 }
 </script>
