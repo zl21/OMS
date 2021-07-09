@@ -185,12 +185,12 @@
         console.log(val);
       },
       dateChange() {
-        const dy = JSON.parse(JSON.stringify(this.dynamicStructure));
-        dy.forEach(it => {
+        // const dy = JSON.parse(JSON.stringify(this.dynamicStructure));
+        /* dy.forEach(it => {
           if (it.VAL instanceof Array && it.VAL.length == 2) {
             it.VAL = typeof it.VAL[0] == 'object' ? `${dateUtil.getFormatDate(new Date(it.VAL[0]), 'yyyy-MM-dd HH:mm:ss')}~${dateUtil.getFormatDate(new Date(it.VAL[1]), 'yyyy-MM-dd HH:mm:ss')}` : `${it.VAL[0]}~${it.VAL[1]}`
           }
-        })
+        }) */
       },
       conditionChange(val) {
         console.log(val);
