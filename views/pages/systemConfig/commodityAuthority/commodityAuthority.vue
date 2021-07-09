@@ -115,7 +115,8 @@
                             :disabled="!actionFlag.deleteFlag"
                             @change="handleChangeAll"
                           >
-                          {{ ChineseDictionary.NUMBER }}
+                          <!-- {{ ChineseDictionary.NUMBER }} -->
+                          序号
                         </label>
                       </th>
                       <th width="40%">
