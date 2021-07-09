@@ -33,7 +33,7 @@
             </Option>
           </Select>
         </div>
-        <div class="relation" v-if="dynamicStructure[IDX].CALC != 'zl'">
+        <div class="relation" v-if="dynamicStructure[IDX].CALC == 'zl'">
           <Select
             v-model="dynamicStructure[IDX].CALC"
             transfer
