@@ -1,5 +1,5 @@
 import businessActionTable from 'professionalComponents/businessActionTable.vue';
-import R3 from '@syman/burgeon-r3';
+import R3 from '../../../../../static/r3.publish/r3.min.js';
 
 const { network } = R3;
 export default {

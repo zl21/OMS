@@ -1,4 +1,4 @@
-import R3 from '@syman/burgeon-r3';
+import R3 from '../../../../../static/r3.publish/r3.min.js';
 import matrix from '@/views/pages/common/orderDetail/matrixPop.vue';
 import DragDialog from 'framework/components/dialog/dragDialog.vue';
 import axios from 'framework/__utils__/request';

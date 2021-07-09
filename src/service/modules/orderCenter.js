@@ -1,5 +1,5 @@
 // 订单中心
-import R3 from '@syman/burgeon-r3';
+import R3 from '../../../static/r3.publish/r3.min.js';
 import port from '@/js/pages/common/orderDetail/connector';
 import qs from 'qs';
 

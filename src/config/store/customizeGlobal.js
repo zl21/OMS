@@ -1,6 +1,6 @@
 
 
-import R3 from '@syman/burgeon-r3';
+import R3 from '../../../static/r3.publish/r3.min.js';
 import jordanstore from './jordanStore';
 
 const { store, router, getKeepAliveModuleName } = R3;
