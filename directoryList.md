@@ -122,9 +122,9 @@
     |   |       |-- strategy.config.js
     |   |       |-- system.config.js
     |   |-- store
-    |       |-- customizeGlobal.js
-    |       |-- jordanStore.js
-    |       |-- store.js
+    |       |-- customizeGlobal.js //vux 数据集
+    |       |-- jordanStore.js  //嵌套数据集
+    |       |-- store.js   //vux入口文件
     |-- css
     |   |-- modal
     |   |   |-- commodityCenter

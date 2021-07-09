@@ -255,6 +255,7 @@
             :default-selected="multipleDefaultSelected"
             :auto-data="multipleAutoData"
             :data="multipleDropDownSelectFilterData"
+            :disabled="filterDisabled"
             @on-fkrp-selected="multipleDropSelected"
             @on-page-change="multipleDropPageChange"
             @on-popper-hide="multiplePopperHide"
@@ -292,8 +293,9 @@
 <script>
 
 
-const functionPowerActions = () => require(`burgeonConfig/config/functionPower.actions.js`);
+// const functionPowerActions = () => require(`burgeonConfig/config/functionPower.actions.js`);
 const store = vm.$store
+import service from '@/service/index';
 
 
 export default {
@@ -301,7 +303,7 @@ export default {
     return {
       isSaveError: false, // 是否保存失败
       spinShow: false, // loading是否显示
-
+      filterDisabled:true,//控制目标角色是否禁用
       copyPermission: false, // 复制权限弹框
       copyType: '', // 复制权限弹框  复制方式
       singlePermissionId: null, // 复制权限外键单选id
@@ -596,9 +598,10 @@ export default {
     }, // 校验是否有未保存的数据
     getButtonData() {//'functionPermission'
       const params = { AD_ACTION_NAME: 'JURISDICTIONDATA' };
-      functionPowerActions().fetchActionsInCustomizePage({
+      service.systemConfig.fetchActionsInCustomizePage({
         params,
         success: (res) => {
+          this.spinShow = false
           if (res.data.code === 0) {
             const buttonsData = res.data.data;
 
@@ -671,7 +674,7 @@ export default {
     }, // 左侧树点击
     getTreeData(resolve, reject) {
 
-      functionPowerActions().getMenuTree({
+      service.systemConfig.getMenuTree({
         success: (res) => {
           if (res.data.code === 0) {
             resolve();
@@ -714,7 +717,7 @@ export default {
       });
     }, //  整合树数据
     getMenuData(resolve, reject) {
-      functionPowerActions().groupTreeload({
+     service.systemConfig.groupTreeload({
         success: (res) => {
 
           if (res.data.code === 0) {
@@ -764,7 +767,7 @@ export default {
         };
       }
       this.spinShow = true;
-      functionPowerActions().queryMenuPermission({
+      service.systemConfig.queryMenuPermission({
         params: obj,
         success: (res) => {
           this.spinShow = false;
@@ -1081,7 +1084,7 @@ export default {
         type: this.copyType
       };
       this.spinShow = true;
-      functionPowerActions().copyPermission({
+      service.systemConfig.copyPermission({
         params: obj,
         success: (res) => {
           this.spinShow = false;
@@ -1563,7 +1566,7 @@ export default {
           GROUPID: this.groupId,
           CP_C_GROUPPERM: this.tableSaveData
         };
-        functionPowerActions().savePermission({
+        service.systemConfig.savePermission({
           params: obj,
           success: (res) => {
             console.log(res);
@@ -1652,7 +1655,7 @@ export default {
       }, []);
     }, // 获得保存的数据
     getCopyPermissionData() {
-      functionPowerActions().cgroupsquery({
+      service.systemConfig.cgroupsquery({
         params: { NAME: '' },
         success: (res) => {
           if (res.data.code === 0) {
@@ -1744,6 +1747,7 @@ export default {
     }, // 整合复制权限外键多选数据
     singleDropSelected(val) {
       this.singlePermissionId = val[0].ID;
+      this.filterDisabled = false
     }, // 外键单选，选中触发
     singleDropPageChange(val) {
       this.getSingleDropSelectData(val, this.backupsDropData);

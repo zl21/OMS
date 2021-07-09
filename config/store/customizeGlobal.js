@@ -19,10 +19,6 @@ export const globalStore = {
       hiddenButton: true
     },
     excludedComponents: [], // 针对性缓存相应的组件
-    // 促销策略数据
-    dataTwoNew: {
-      scheme_arr: []
-    },
     scheme_dataNew: {
       // 大类方案 商品活动(GA)，全场活动 (PA)
       program_code: 'GA',
@@ -60,9 +56,7 @@ export const globalStore = {
         }
       ]
     },
-    dataTwo: {
-      scheme_arr: []
-    },
+
     scheme_data: {
       // 大类方案 商品活动(GA)，全场活动 (PA)
       program_code: 'GA',
@@ -147,15 +141,11 @@ export const globalStore = {
     stateChange(state, data) {
       state = Object.assign(state, data);
     },
-    // 清空赋值dataTWO
-    clearType(state, n) {
-      state.dataTwoNew.scheme_arr = n;
-    },
     // 接收切换促销策略的值
     switchDetail(state, switchTo) {
       // 促销模块
       if (switchTo.id > 0) {
-        // state.dataTwo = switchTo.scheme_struct
+   
         state.scheme_data = switchTo.scheme_struct;
       } else {
         state.scheme_dataNew = switchTo.scheme_struct;

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-07 20:40:40
- * @LastEditTime: 2021-06-24 13:42:41
+ * @LastEditTime: 2021-07-09 14:11:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/service/modules/systemConfig.js
@@ -18,8 +18,54 @@ export default {
    * /p/cs/chrgroupscompany/query  公司权限
    * /p/cs/cusergroupquery  角色权限
    * */
-  groupTreeload: params => $network.post('/p/cs/groupTreeload', params),
-  // /p/cs/usertreequery
+
+   groupTreeload: params => $network.post('/p/cs/groupTreeload', params.params).then(res => {
+    if (typeof params.success === 'function') {
+      params.success(res);
+    }
+  }),
+
+   getMenuTree: params => $network.post('/p/cs/getMenuTree', params.params).then(res => {
+    if (typeof params.success === 'function') {
+      params.success(res);
+    }
+  }),
+
+   cgroupsquery: params => $network.post('/p/cs/cgroupsquery', params.params).then(res => {
+    if (typeof params.success === 'function') {
+      params.success(res);
+    }
+  }),
+
+   savePermission: params => $network.post('/p/cs/savePermission', params.params).then(res => {
+    if (typeof params.success === 'function') {
+      params.success(res);
+    }
+  }),
+
+   copyPermission: params => $network.post('/p/cs/copyPermission', params.params).then(res => {
+    if (typeof params.success === 'function') {
+      params.success(res);
+    }
+  }),
+
+   queryMenuPermission: params => $network.post('/p/cs/queryMenuPermission', params.params).then(res => {
+    if (typeof params.success === 'function') {
+      params.success(res);
+    }
+  }),
+
+  fetchActionsInCustomizePage: params => $network.post('/p/cs/fetchActionsInCustomizePage', params.params).then(res => {
+    if (typeof params.success === 'function') {
+      params.success(res);
+    }
+  }),
+  
+  groupTreeload: params => $network.post('/p/cs/groupTreeload', params).then(res=>{
+    if (typeof params.success === 'function') {
+      params.success(res);
+    }
+  }),
 
   chrstoregroupquery: (url, params) => $network.post(url, params),
   // 请求tab列表页

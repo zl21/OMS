@@ -55,7 +55,7 @@ export default {
 
       let url;
       let params;
-
+  
       url = '/p/cs/permission/v1/saveDataPermission';
 
       let permissionTable = this.permissionTable
@@ -93,7 +93,7 @@ export default {
       //   });
     },
     getSaveData() {
-      this.spinShow =true
+  
       this.saveTableArr = [];
 
       // if (this.permissionType === 'sensitive') {
