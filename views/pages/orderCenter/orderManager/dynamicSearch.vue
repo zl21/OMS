@@ -90,8 +90,20 @@
               {{ item.label }}
             </Option>
           </Select>
-          <!-- ="ele.DISPLAY == 'TEXT'" -->
           <Input v-else-if="dynamicStructure[IDX].DISPLAY == 'TEXT'" v-model="dynamicStructure[IDX].VAL" />
+          <div class="bothInput" v-else-if="dynamicStructure[IDX].DISPLAY == 'RANGE'">
+              <div class="bothLeft">
+                <Input @on-change="bInputChange"
+                       v-model.trim="dynamicStructure[IDX].VAL[0]"
+                       :regx="dynamicStructure[IDX].REGX"></Input>
+              </div>
+              <label class="bothLine">一</label>
+              <div class="bothRight">
+                <Input @on-change="bInputChange"
+                       v-model.trim="dynamicStructure[IDX].VAL[1]"
+                       :regx="dynamicStructure[IDX].REGX"></Input>
+              </div>
+            </div>
           <!-- <label v-else>特殊类型,待兼容</label> -->
         </div>
         <div
@@ -181,6 +193,9 @@
       };
     },
     methods: {
+      bInputChange() {
+
+      },
       radioChange(val) {
         console.log(val);
       },
@@ -200,8 +215,8 @@
         all.forEach((it,j) => {
           if (it.value == val) {
             // options
-            const curIt = this.dynamicStructure.find(i => i.NAME == val) //.DISPLAY = 'SELECT'// it.DISPLAY;
-            curIt.DISPLAY = it.DISPLAY; //'DATE';
+            const curIt = this.dynamicStructure.find(i => i.NAME == val);
+            curIt.DISPLAY = it.DISPLAY;
             curIt.index = j;
             if (it.CALC_SYMBOL && it.CALC_SYMBOL.length) {
               it.calc = [];
@@ -216,6 +231,9 @@
             } else {
               // 可能存在不需要【关系运算符】的情况，那就不展示该控件
               curIt.CALC = null;
+            }
+            if (curIt.DISPLAY == 'RANGE') {
+              curIt.VAL = ['', ''];
             }
           }
         });
@@ -270,6 +288,14 @@
     width: 100%;
     display: flex;
     margin-top: @base-mr;
+    .bothInput {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      .bothLine {
+        align-self: center;
+      }
+    }
     .obj-label {
       width: 120px;
       height: @base-height + 10px;

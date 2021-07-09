@@ -965,6 +965,9 @@
             if (it.DISPLAY == 'OBJ_DATE') {
               it.VAL = typeof it.VAL[0] == 'string' ? `${dateUtil.getFormatDate(new Date(it.VAL[0]), 'yyyy-MM-dd HH:mm:ss')}~${dateUtil.getFormatDate(new Date(it.VAL[1]), 'yyyy-MM-dd HH:mm:ss')}` : `${it.VAL[0]}~${it.VAL[1]}`
             }
+            if (it.DISPLAY == 'RANGE') {
+              it.VAL = `${it.VAL[0]}~${it.VAL[1]}`
+            }
             // 删除后端不要的字段
             delete it.DISPLAY;
             delete it.TYPE;
