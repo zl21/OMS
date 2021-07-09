@@ -453,7 +453,7 @@ export default {
               this.modifyData("EXPRESS_CODE", "master");
             },
           },
-          /* {
+          {
             style: 'input',
             // label: '单据备注', // 单据备注,
             colname: 'SYS_REMARK',
@@ -461,7 +461,7 @@ export default {
             inputChange: () => {
               this.modifyData("SYS_REMARK", "master");
             },
-          }, */
+          },
         ],
       },
       formConfigEx: {
