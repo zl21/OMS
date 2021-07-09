@@ -110,21 +110,21 @@ export default {
                   on: {
                     'on-change': value => {
                       const opt = params.row.sgBPhyInStorageItemExt.filter(item => item.advise_phy_warehouse_id == value)[0];
-                      params.row.cp_c_phy_warehouse_id = value;
-                      params.row.cp_c_phy_warehouse_ecode = opt.advise_phy_warehouse_ecode;
-                      params.row.cp_c_phy_warehouse_ename = opt.advise_phy_warehouse_ename;
+                      // params.row.cp_c_phy_warehouse_id = value;
+                      // params.row.cp_c_phy_warehouse_ecode = opt.advise_phy_warehouse_ecode;
+                      // params.row.cp_c_phy_warehouse_ename = opt.advise_phy_warehouse_ename;
                       params.row.total_qty_available = opt.total_qty_available;
                       // params.row.total_qty_available = params.row.sgBPhyInStorageItemExt.filter(item => { return item.advise_phy_warehouse_id == value })[0].total_qty_available;
                       // 如果勾选了,同时更新勾选数据
-                      if (this.onSelectData.length !== 0) {
-                        this.onSelectData.forEach(item => {
-                          if (params.row.orig_order_item_id == item.orig_order_item_id) {
-                            item.cp_c_phy_warehouse_id = value;
-                            item.cp_c_phy_warehouse_ecode = opt.advise_phy_warehouse_ecode;
-                            item.cp_c_phy_warehouse_ename = opt.advise_phy_warehouse_ename;
-                          }
-                        });
-                      }
+                      // if (this.onSelectData.length !== 0) {
+                      //   this.onSelectData.forEach(item => {
+                      //     if (params.row.orig_order_item_id == item.orig_order_item_id) {
+                      //       item.cp_c_phy_warehouse_id = value;
+                      //       item.cp_c_phy_warehouse_ecode = opt.advise_phy_warehouse_ecode;
+                      //       item.cp_c_phy_warehouse_ename = opt.advise_phy_warehouse_ename;
+                      //     }
+                      //   });
+                      // }
                       this.data[0][params.index] = params.row;
                     }
                   }
