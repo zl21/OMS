@@ -1,6 +1,6 @@
 {
   "name": "@burgeon/project-logic",
-  "version": "1.9.10",
+  "version": "1.9.11",
   "description": "burgeon company's project-logic for private npm",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,7 @@
     "wangeditor": "^4.6.16"
   },
   "dependencies": {
-    "@syman/ark-ui": "^1.1.33",
+    "@syman/ark-ui": "^1.1.39",
     "lodash": "^4.17.21",
     "mddir": "^1.1.1",
     "qs": "^6.9.4"
