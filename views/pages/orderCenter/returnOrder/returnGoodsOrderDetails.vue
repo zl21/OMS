@@ -1,17 +1,13 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-09 10:43:23
+ * @LastEditTime: 2021-07-09 14:31:45
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
 -->
 <template>
   <div v-loading="loading">
-    <!-- 切换sku  v-if="IS_GROUP"-->
-    <div class="switch">
-      <span @click="onSitch()"> {{ switchText }} </span>
-    </div>
     <!-- 退货明细 -->
     <business-action-table
       :jordan-table-config="businessActionTable"
@@ -75,8 +71,6 @@ export default {
   },
   data() {
     return {
-      isSku:false,
-      switchText:'切换为sku商品展示',
       returnArr: [],
       changeArr: [],
       loading: false,
@@ -128,6 +122,7 @@ export default {
               text: "替换明细", // 按钮文本
               isShow: true,
               btnclick: (e) => {
+                console.log(e);
                 if (
                   this.$route.params.customizedModuleId === "New" &&
                   !this.mainData.SOURCE_CODE
@@ -135,7 +130,7 @@ export default {
                   this.$Message.warning("原平台单号不能为空！");
                   return;
                 }
-                this.getPlaceData(0,0);
+                this.getPlaceData();
                 this.replaceProductTable.modal = true;
               }, // 按钮点击事件
             },
@@ -278,23 +273,16 @@ export default {
   watch: {
     returnProduct: {
       async handler(newData) {
-        // let tableName; // 接口表名
         let renderKeys = []; // render key
-        // 判断新增页面是退货还是换货
         if (newData === "0") {
           console.log("退货单");
-          // tableName = 'OC_B_RETURN_ORDER_REFUND_ITEM';
           renderKeys = ["REFUND_ID", "QTY_REFUND"];
-          // this.getBtn();
           this.businessActionTable.businessButtonConfig.buttons[1].isShow = false;
           this.businessActionTable.businessButtonConfig.buttons[0].isShow = true;
           this.businessActionTable.businessButtonConfig.buttons[2].isShow = true;
           this.businessActionTable.data = this.toMainData.tui;
         } else if (newData === "1") {
-          console.log("换货单");
-          // tableName = 'OC_B_RETURN_ORDER_EXCHANGE';
           renderKeys = ["QTY_EXCHANGE", "PRICE_ACTUAL"];
-          // this.getBtn();
           this.businessActionTable.businessButtonConfig.buttons[0].isShow = false;
           this.businessActionTable.businessButtonConfig.buttons[1].isShow = true;
           this.businessActionTable.businessButtonConfig.buttons[1].text = "新增明细";
@@ -310,7 +298,9 @@ export default {
     },
   },
   async created() {
-    this.getReplaceData(this.$route.params.itemId);
+    if (this.$route.params.customizedModuleId !== "New") {
+      this.getReplaceData(this.$route.params.itemId);
+    }
   },
   async activated() {
     //编辑页面 换货/退货逻辑
@@ -371,12 +361,6 @@ export default {
     });
   },
   methods: {
-    // 切换商品展示类型
-    onSitch(){
-      this.isSku ? this.switchText = '切换为sku商品展示' : this.switchText = '切换为平台商品展示';
-      this.isSku = !this.isSku;
-      this.getReplaceData(this.$route.params.itemId);
-    },
     // 获取按钮权限
     async getBtn() {
       return $OMS2.omsUtils.getPermissions(this, '', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true).then(res => {
@@ -535,7 +519,7 @@ export default {
         // 处理数据
         let tableKey = data.row.length ? Object.keys(data.row[0]) : []; // 获取行数据的key
         this.getCurrenData = data.row.length ? data.row : [];
-        this.replaceProductTable.total = pageSize ? data.totalRowCount : 0;
+        this.replaceProductTable.total = data.totalRowCount;
         this.replaceProductTable.data = [];
         data.row.forEach((item) => {
           //处理数据
@@ -745,36 +729,24 @@ export default {
       const self = this;
       let amt = 0;
       let qty = 0;
-      const key1 =
-        this.returnProduct == "0" ||
-          this.$parent.$parent.panelRef === "退货明细"
-          ? "QTY_REFUND"
-          : "QTY_EXCHANGE"; // 申请退货数量 : 换货数量
-      const key2 =
-        this.returnProduct == "0" ||
-          this.$parent.$parent.panelRef === "退货明细"
-          ? "REFUND_FEE"
-          : "AMT_EXCHANGE"; // 退货金额 : 成交金额
-      const key3 =
-        this.returnProduct == "0" ||
-          this.$parent.$parent.panelRef === "退货明细"
-          ? "PRO_ACTUAL_AMT"
-          : "EX_ACTUAL_AMT"; // 商品应退金额 : 换货金额
+      let PRICE_ACTUAL = 0;
+      const key1 = this.$parent.$parent.panelRef === "退货明细" ? "QTY_REFUND" : "QTY_EXCHANGE"; // 申请退货数量 : 换货数量
+      const key2 = this.$parent.$parent.panelRef === "退货明细" ? "REFUND_FEE" : "AMT_EXCHANGE"; // 退货金额 : 成交金额
+      const key3 = this.$parent.$parent.panelRef === "退货明细" ? "PRO_ACTUAL_AMT" : "EX_ACTUAL_AMT"; // 商品应退金额 : 换货金额
       self.businessActionTable.totalData = [];
       if (!self.businessActionTable.data) return;
       self.businessActionTable.data.forEach((item) => {
         qty += Number(item[key1] || 0);
         amt = Util.accAdd(Number(item[key2]), Number(amt));
+        PRICE_ACTUAL = Util.accAdd(Number(item['PRICE_ACTUAL']), Number(PRICE_ACTUAL));
       });
       setTimeout(() => {
-        if (
-          this.returnProduct == "0" ||
-          this.$parent.$parent.panelRef === "退货明细"
-        ) {
+        if (this.$parent.$parent.panelRef === "退货明细" ) {
           self.businessActionTable.totalData.push({
             selection: `${$i18n.t("other.total")}:`, // 合计
             REFUND_FEE: this.$OMS2.omsUtils.floatNumber(amt, 2),
             QTY_REFUND: qty,
+            PRICE_ACTUAL: PRICE_ACTUAL // 成交单价
           });
         } else {
           self.businessActionTable.totalData.push({
@@ -1168,11 +1140,5 @@ export default {
   #back {
     display: none;
   }
-}
-.switch{
-  position:absolute;
-  right: 0;
-  top: 8px;
-  color: #4855AF;
 }
 </style>
