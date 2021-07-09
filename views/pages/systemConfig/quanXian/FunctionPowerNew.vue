@@ -952,6 +952,7 @@ export default {
       if (item.webdesc === '刷新') {
         this.refreshButtonClick();
       } else if (item.webdesc === '复制权限') {
+        this.filterDisabled = true
         this.copyPerm();
       } else if (item.webdesc === '保存') {
         this.savePermission();
@@ -1757,6 +1758,7 @@ export default {
     }, // 外键单选popper隐藏时触发
     singleDropClear() {
       this.singlePermissionId = null;
+       this.filterDisabled = true
     }, // 单选清空时触发
     singleInputChange(val) {
       if (val) {
