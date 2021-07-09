@@ -892,6 +892,24 @@ export default {
         this.$OMS2.omsUtils.msgTips(self, "warning", "a8");
         return;
       }
+      if (selDa.length == allDa.length) { // 全选删
+        self.detailsArrData = [];
+        this.businessActionTable.data = [];
+        if (this.$route.params.customizedModuleId === "New") {
+          this.toMainData[this.returnProduct == "0" ? "tui" : "huan"] =
+            this.businessActionTable.data;
+        } else {
+          this.toMainData[
+            this.$parent.$parent.panelRef === "退货明细" ? "tui" : "huan"
+          ] = this.businessActionTable.data;
+        }
+        this.$emit("subTableData", this.toMainData);
+        R3.store.commit(
+          "customize/returnOrderChangeItem",
+          JSON.parse(JSON.stringify(this.toMainData))
+        );
+        return
+      }
       this.haveGift = "";
       this.haveGroup = "";
       selDa.forEach((it) => {
@@ -1015,12 +1033,14 @@ export default {
     },
     onSelectAllCancel(x) {
       const self = this;
+      this.tableConfig.data.forEach(i => i._checked = false);
       self.tableConfig.selectData = x;
       self.selectLen = x.length;
       self.indexL = [];
     },
     onSelectAll(x) {
       const self = this;
+      this.tableConfig.data.forEach(i => i._checked = true);
       self.tableConfig.selectData = x;
       self.selectLen = x.length;
     },
@@ -1103,8 +1123,8 @@ export default {
       gR && this.screen({ GIFT_RELATION: gR });
       // 筛选出gM值相等的一并选中，下挂组合
       gM && this.screen({ GROUP_GOODS_MARK: gM });
-      // 普通品的非下卦赠品一并选中，其它赠品
-      this.screen();
+      // 普通品的非卦靠赠品一并选中，其它(系统/平台)赠品
+      this.screen(row);
       // }
       if (this.isMainDelete) return;
       this.selectLen = 0;
@@ -1123,6 +1143,7 @@ export default {
       const obj = o;
       const objL = Object.entries(obj).flat(2);
       allDa.forEach((it, index) => {
+        const aa = it[objL[0]]; // ACTUAL_REFUND_FEE 字段
         if (objL.length && it[objL[0]] == obj[objL[0]]) {
           switch (objL[0]) {
             case "GIFT_RELATION":
