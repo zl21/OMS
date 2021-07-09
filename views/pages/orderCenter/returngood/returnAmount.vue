@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-06-08 10:51:36
+ * @LastEditTime: 2021-07-09 17:48:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -74,9 +74,6 @@ export default {
       type:this.$route.query.RETURN_SOURCE === '手工新增' ? 1 : 0
     };
   },
-  created(){
-    
-  },
   mounted(){
     // 应退运费，正数，选填项
     // 调整金额，可正可负，选填项
@@ -87,7 +84,6 @@ export default {
   methods:{
     inputChange(e){
       let FINAL_ACTUAL_AMT
-      console.log(e.target.value);
       if(this.tableName){
         FINAL_ACTUAL_AMT =  Number(this.data.PRO_REAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT) - Number(this.data.EXCHANGE_AMT);
       }else{

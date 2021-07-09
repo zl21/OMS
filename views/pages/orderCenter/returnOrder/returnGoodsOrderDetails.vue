@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-09 14:31:45
+ * @LastEditTime: 2021-07-09 18:09:23
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -431,25 +431,25 @@ export default {
       let returnAmount = {
         PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(
           Number(OC_B_RETURN_ORDER.PRO_ACTUAL_AMT)
-        ),
+        ), //商品应退金额
         PRO_REAL_AMT: this.$OMS2.omsUtils.floatNumber(
           Number(OC_B_RETURN_ORDER.PRO_REAL_AMT)
-        ),
+        ), //商品实退金额
         SHIP_AMT: this.$OMS2.omsUtils.floatNumber(
           Number(OC_B_RETURN_ORDER.SHIP_AMT)
-        ),
+        ), //应退运费
         ADJUST_AMT: this.$OMS2.omsUtils.floatNumber(
           Number(OC_B_RETURN_ORDER.ADJUST_AMT)
-        ),
+        ), //调整金额
         EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(
           Number(OC_B_RETURN_ORDER.EXCHANGE_AMT)
-        ),
+        ), //换货金额
         FINAL_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(
           Number(OC_B_RETURN_ORDER.FINAL_ACTUAL_AMT)
-        ),
+        ), //最终应退总金额
         FINAL_REAL_AMT: this.$OMS2.omsUtils.floatNumber(
           Number(OC_B_RETURN_ORDER.FINAL_REAL_AMT)
-        ),
+        ), //最终实退总金额
       };
       R3.store.commit(
         `customize/returnAmount`,
@@ -647,7 +647,7 @@ export default {
             on: {
               "on-change": (e) => {
                 params.row.QTY_EXCHANGE = e;
-                params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(
+                params.row.EXCHANGE_AMT = this.$OMS2.omsUtils.floatNumber(
                   Number(e) * Number(params.row.PRICE_ACTUAL),
                   2
                 );
@@ -677,23 +677,18 @@ export default {
             on: {
               "on-change": (e) => {
                 params.row.PRICE_ACTUAL = e;
-                params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(
+                params.row.EXCHANGE_AMT = this.$OMS2.omsUtils.floatNumber(
                   Number(e) * Number(params.row.QTY_EXCHANGE),
                   2
                 );
                 this.businessActionTable.data[params.index] = params.row;
-                if (this.$route.params.customizedModuleId !== "New") {
-                  this.toMainData[
-                    this.$parent.$parent.panelRef === "退货明细"
-                      ? "tui"
-                      : "huan"
-                  ][params.index] = params.row;
-                  R3.store.commit(
-                    "customize/returnOrderChangeItem",
-                    JSON.parse(JSON.stringify(this.toMainData))
-                  );
-                }
+                this.toMainData[ this.$parent.$parent.panelRef === "退货明细" ? "tui"  : "huan" ][params.index] = params.row;
+                R3.store.commit(
+                  "customize/returnOrderChangeItem",
+                  JSON.parse(JSON.stringify(this.toMainData))
+                );
                 this.totalNum();
+                
               },
             },
           });
@@ -731,7 +726,7 @@ export default {
       let qty = 0;
       let PRICE_ACTUAL = 0;
       const key1 = this.$parent.$parent.panelRef === "退货明细" ? "QTY_REFUND" : "QTY_EXCHANGE"; // 申请退货数量 : 换货数量
-      const key2 = this.$parent.$parent.panelRef === "退货明细" ? "REFUND_FEE" : "AMT_EXCHANGE"; // 退货金额 : 成交金额
+      const key2 = this.$parent.$parent.panelRef === "退货明细" ? "REFUND_FEE" : "EXCHANGE_AMT"; // 退货金额 : 成交金额
       const key3 = this.$parent.$parent.panelRef === "退货明细" ? "PRO_ACTUAL_AMT" : "EX_ACTUAL_AMT"; // 商品应退金额 : 换货金额
       self.businessActionTable.totalData = [];
       if (!self.businessActionTable.data) return;
@@ -751,7 +746,7 @@ export default {
         } else {
           self.businessActionTable.totalData.push({
             selection: `${$i18n.t("other.total")}:`,
-            AMT_EXCHANGE: this.$OMS2.omsUtils.floatNumber(amt, 2),
+            EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2),
             QTY_EXCHANGE: qty,
           });
         }
@@ -760,33 +755,39 @@ export default {
         this.$emit("subTableData", this.toMainData);
         let returnAmount = R3.store.state.customize.returnAmount;
         let FINAL_ACTUAL_AMT;
-        if (this.$parent.$parent.panelRef === "换货明细") {
+        if (this.$route.params.tableName === "OC_B_RETURN_ORDER_ECXCHANGE_TABLE") {
           FINAL_ACTUAL_AMT =
             Number(returnAmount.PRO_REAL_AMT) +
             Number(returnAmount.SHIP_AMT) +
             Number(returnAmount.ADJUST_AMT) -
-            Number(returnAmount.AMT_EXCHANGE);
-          R3.store.commit(
-            `customize/returnAmount`,
-            JSON.parse(
-              JSON.stringify({
-                EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2),
-                FINAL_ACTUAL_AMT: FINAL_ACTUAL_AMT,
-                FINAL_REAL_AMT: FINAL_ACTUAL_AMT,
-              })
-            )
+            Number(returnAmount.EXCHANGE_AMT);
+           console.log('OC_B_RETURN_ORDER_ECXCHANGE_TABLE:',Number(returnAmount.PRO_REAL_AMT),
+            Number(returnAmount.SHIP_AMT),
+            Number(returnAmount.ADJUST_AMT),
+            Number(returnAmount.EXCHANGE_AMT));
+            R3.store.commit(
+              `customize/returnAmount`,
+              JSON.parse(
+                JSON.stringify({
+                  EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2),
+                  FINAL_ACTUAL_AMT: FINAL_ACTUAL_AMT ? String(FINAL_ACTUAL_AMT) : FINAL_ACTUAL_AMT,
+                  FINAL_REAL_AMT: FINAL_ACTUAL_AMT ? String(FINAL_ACTUAL_AMT) : FINAL_ACTUAL_AMT,
+                })
+              )
           );
         } else {
+          R3.store.commit(`customize/returnAmount`, {
+            PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2),
+            PRO_REAL_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2),
+            EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2)
+          });
           FINAL_ACTUAL_AMT =
             Number(returnAmount.PRO_REAL_AMT) +
             Number(returnAmount.SHIP_AMT) +
             Number(returnAmount.ADJUST_AMT);
           R3.store.commit(`customize/returnAmount`, {
-            PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2),
-            PRO_REAL_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2),
-            AMT_EXCHANGE: this.$OMS2.omsUtils.floatNumber(amt, 2),
-            FINAL_ACTUAL_AMT,
-            FINAL_REAL_AMT: FINAL_ACTUAL_AMT,
+            FINAL_ACTUAL_AMT: FINAL_ACTUAL_AMT ? String(FINAL_ACTUAL_AMT) :FINAL_ACTUAL_AMT,
+            FINAL_REAL_AMT: FINAL_ACTUAL_AMT ? String(FINAL_ACTUAL_AMT) :FINAL_ACTUAL_AMT,
           });
         }
       }, 10);

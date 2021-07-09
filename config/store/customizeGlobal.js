@@ -106,13 +106,13 @@ export const globalStore = {
     /* --------- oms --------- */
     //订单中心 - 退货金额
     returnAmount:{
-      PRO_ACTUAL_AMT:0,
-      PRO_REAL_AMT:0,
-      SHIP_AMT:0,
-      ADJUST_AMT:0,
-      EXCHANGE_AMT:0,
-      FINAL_ACTUAL_AMT:0,
-      FINAL_REAL_AMT:0,
+      PRO_ACTUAL_AMT:0, // 商品应退金额
+      PRO_REAL_AMT:0, // 商品实退金额
+      SHIP_AMT:0, //应退运费
+      ADJUST_AMT:0, //调整金额
+      EXCHANGE_AMT:0, //换货金额
+      FINAL_ACTUAL_AMT:0, //最终应退总金额
+      FINAL_REAL_AMT:0, //最终实退总金额
     },
     // 订单中心 - 退换货明细
     returnOrderChangeItem:[],
