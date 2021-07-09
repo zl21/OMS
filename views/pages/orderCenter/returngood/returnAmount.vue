@@ -128,7 +128,7 @@ export default {
         border-radius: 4px;
         height: 28px;
         text-align: center;
-        z-index: 9;
+        z-index: 5;
       }
       span,
       label {

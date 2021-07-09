@@ -3,7 +3,7 @@
  * @Date: 2021-05-22 15:24:50
  * @LastEditTime: 2021-07-09 14:31:45
  * @LastEditors: Please set LastEditors
- * @Description: 退换货订单-退货单明细
+ * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
 -->
 <template>
