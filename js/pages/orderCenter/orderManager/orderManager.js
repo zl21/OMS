@@ -960,6 +960,12 @@
         if (self.$refs.dynamicSearch && self.$route.params.customizedModuleName == 'ORDERMANAGER') {
           const pa = JSON.parse(JSON.stringify(self.$refs.dynamicSearch.dynamicStructure));
           obj.DYNAMIC = pa.filter(i => typeof i.VAL != 'undefined' && i.VAL); // 动态搜索
+          obj.DYNAMIC.forEach(it => {
+            // 删除后端不要的字段
+            delete it.DISPLAY;
+            delete it.TYPE;
+            delete it.index;
+          })
           if(obj.DYNAMIC.length) obj.DYNAMIC[0].RLT = "AND";
         }
 
