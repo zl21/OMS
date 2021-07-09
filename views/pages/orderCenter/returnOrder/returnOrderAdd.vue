@@ -12,7 +12,7 @@
             <!-- 基本信息 -->
             {{ vmI18n.t('common.baseInformation') }}
             <p slot="content">
-              <businessForm :form-config="formConfig" />
+              <businessForm :form-config="formConfig" :key="formConfig.key"/>
             </p>
           </Panel>
           <Panel v-show="showEx" name="2">
@@ -202,6 +202,7 @@ export default {
       },
       // 基本信息
       formConfig: {
+        key: 'form1',
         formValue: {
           BILL_TYPE: '',
           SOURCE_CODE: '',
@@ -346,7 +347,7 @@ export default {
               this.modifyData("REFUND_REASON", "master");
             },
           },
-          {
+          /* {
             style: 'input',
             // label: '退货人姓名', // 退货人姓名
             colname: 'RETURNEE_NAME',
@@ -354,8 +355,8 @@ export default {
             inputChange: () => {
               this.modifyData("RETURNEE_NAME", "master");
             },
-          },
-          {
+          }, */
+          /* {
             style: 'input',
             // label: '退货人手机', // 退货人手机
             colname: 'RETURNEE_MOBILE',
@@ -363,7 +364,7 @@ export default {
             inputChange: () => {
               this.modifyData("RETURNEE_MOBILE", "master");
             },
-          },
+          }, */
           {
             style: 'popInput',
             colname: 'CP_C_PHY_WAREHOUSE_IN_ID',
@@ -452,7 +453,7 @@ export default {
               this.modifyData("EXPRESS_CODE", "master");
             },
           },
-          {
+          /* {
             style: 'input',
             // label: '单据备注', // 单据备注,
             colname: 'SYS_REMARK',
@@ -460,7 +461,7 @@ export default {
             inputChange: () => {
               this.modifyData("SYS_REMARK", "master");
             },
-          },
+          }, */
         ],
       },
       formConfigEx: {
@@ -721,10 +722,11 @@ export default {
     this.$nextTick(() => {
       // this.getPermissions('btnConfig', 'orderManager');
       // $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true);
+      this.loading = true;
       this.initObjItem(-1);
       setTimeout(() => {
         this.loading = false;
-      }, 110);
+      }, 1500);
     });
   },
   methods: {
@@ -857,17 +859,18 @@ export default {
         self.formConfig = self.$OMS2.omsUtils.initFormConfig(base, self.formConfig);
       }).then(() => {
         // $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true);
+        this.formConfig.key += 1;
         console.log('buttons::', this.btnConfig.buttons);
+        setTimeout(() => {
+          this.loading = false;
+          this.watchChange = true;
+          this.modify.master.BILL_TYPE = '0'
+        }, 100);
       })
       // const data = await this.$OMS2.omsUtils.getObject("OC_B_RETURN_ORDER_VIRTUAL_TABLE", id);
       // setTimeout(async () => {
       // }, 1);
       // self.formConfig = this.$OMS2.omsUtils.initFormConfig(base, self.formConfig);
-      setTimeout(() => {
-        this.loading = false;
-        this.watchChange = true;
-        this.modify.master.BILL_TYPE = '0'
-      }, 100);
       this.mainData.fV = this.formConfig.formValue;
     },
     // input回车查原单信息

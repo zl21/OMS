@@ -826,6 +826,7 @@ class commonUtils {
           } else if (item.fkdisplay && fDitem.itemdata) {
             // 复杂类型--方法绑定、formDataItem的itemdata子对象赋值
             // fDitem.itemdata = item;
+            fDitem.serviceId = fDitem.serviceId || 'r3-cp' // 不配置则框架根据路由上的表名默认拼接该中心的网关
             fDitem.version = fDitem.version || '1.4' // // 必须
             fDitem.itemdata.display = item.colid || 'No-colid' // 必须，用于查询表数据
             fDitem.itemdata.display = item.colname || 'No-colname' // 必须
