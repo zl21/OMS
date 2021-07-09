@@ -11,10 +11,10 @@
     |-- assets
     |   |-- css
     |   |   |-- css_1_3
-    |   |       |-- base.less
-    |   |       |-- custom.less
-    |   |       |-- index.less
-    |   |       |-- oms_index.less
+    |   |       |-- base.less // 项目基本样式文件
+    |   |       |-- custom.less // 框架样式覆盖文件
+    |   |       |-- index.less // 项目样式覆盖文件
+    |   |       |-- oms_index.less // 主题样式二开文件
     |   |-- img
     |   |   |-- arrow-right.png
     |   |   |-- banner.png
@@ -38,66 +38,66 @@
     |   |       |-- 4.png
     |   |       |-- 5.png
     |   |-- js
-    |       |-- ChineseDictionary.js
-    |       |-- constant.js
-    |       |-- dataToSmall.js
-    |       |-- fkRequest.js
-    |       |-- pako.min.js
+    |       |-- ChineseDictionary.js // 已删
+    |       |-- constant.js // 仅用于aG
+    |       |-- dataToSmall.js // 处理压缩数据
+    |       |-- fkRequest.js // 仅用于处理form结构
+    |       |-- pako.min.js // 第三方处理压缩数据的工具
     |       |-- __utils__
-    |       |   |-- common.js
-    |       |   |-- custom-ag-grid-table.js
-    |       |   |-- date.js
-    |       |   |-- form.js
-    |       |   |-- usual.js
-    |       |   |-- util.js
-    |       |-- address
+    |       |   |-- common.js // 公用方法（已经整合到commonUtils,待该引用后删除）
+    |       |   |-- custom-ag-grid-table.js // js版ag的二次封装
+    |       |   |-- date.js // 日期处理
+    |       |   |-- form.js // 仅用于处理form结构
+    |       |   |-- usual.js // 已删
+    |       |   |-- util.js // 字符串的相关处理方法
+    |       |-- address // 地址解析工具
     |       |   |-- address-parse.js
     |       |   |-- area-list.js
     |       |-- mixins
-    |       |   |-- buttonPermissions.js
-    |       |   |-- customPaging.js
-    |       |   |-- dataAccess.js
-    |       |   |-- isFavorite.js
-    |       |   |-- listeningToKeydown.js
-    |       |   |-- modifycurrentLabel.js
+    |       |   |-- buttonPermissions.js // 按钮权限方法（仅老组件使用）
+    |       |   |-- customPaging.js // 分页方法（仅老组件使用）
+    |       |   |-- dataAccess.js // 数据权限控制的方法
+    |       |   |-- isFavorite.js // 收藏功能
+    |       |   |-- listeningToKeydown.js // 键盘事件监听
+    |       |   |-- modifycurrentLabel.js // labelName修改
     |       |-- promotion
-    |       |   |-- groups.js
+    |       |   |-- groups.js // 促销的store数据初始化
     |       |-- public
-    |           |-- publicMethods.js
+    |           |-- publicMethods.js // 公用方法（已经整合到commonUtils,待该引用后删除）
     |-- commonPages
-    |   |-- Login.vue
-    |   |-- WelcomePage.vue
+    |   |-- Login.vue // 登录
+    |   |-- WelcomePage.vue // 欢迎
     |   |-- layout
-    |       |-- NavigatorSubMenu.vue
+    |       |-- NavigatorSubMenu.vue // 导航条
     |-- config
-    |   |-- appLayout.js
-    |   |-- customized.config.js
+    |   |-- appLayout.js // ？？
+    |   |-- customized.config.js // 本仓库暴露的Properties & API
     |   |-- config
-    |   |   |-- commonUtils.js
-    |   |   |-- customized.modal.config.js
-    |   |   |-- customized.page.config.js
-    |   |   |-- customized.panel.config.js
-    |   |   |-- customized.watermark.config.js
-    |   |   |-- dialogs.config.js
-    |   |   |-- dropDown.config.js
-    |   |   |-- event.config.js
-    |   |   |-- externalTreeDatas.config.js
-    |   |   |-- filterUrl.config.js
-    |   |   |-- filterUrlForNetwork.js
-    |   |   |-- funBtn.config.js
-    |   |   |-- functionPower.actions.js
-    |   |   |-- globalComponent.config.js
-    |   |   |-- importApiArr.js
-    |   |   |-- importTable.config.js
-    |   |   |-- init.config.js
-    |   |   |-- labelList.js
-    |   |   |-- orderDetailConnector.js
-    |   |   |-- orderLogo.js
-    |   |   |-- pageNote.js
-    |   |   |-- routeGuardFun.js
-    |   |   |-- subTable.config.js
-    |   |   |-- validate.config.js
-    |   |   |-- warning.modal.config.js
+    |   |   |-- commonUtils.js // 本仓库的工具方法集
+    |   |   |-- customized.modal.config.js // 定制弹窗配置项
+    |   |   |-- customized.page.config.js // 定制页面配置项
+    |   |   |-- customized.panel.config.js // 定制表单配置项
+    |   |   |-- customized.watermark.config.js // 水印配置集合
+    |   |   |-- dialogs.config.js // 定制弹窗配置项
+    |   |   |-- dropDown.config.js // 下拉型按钮集
+    |   |   |-- event.config.js // 按钮事件集
+    |   |   |-- externalTreeDatas.config.js // 树结构配置项
+    |   |   |-- filterUrl.config.js // 接口报错过滤配置
+    |   |   |-- filterUrlForNetwork.js // 接口报错过滤配置的依赖文件
+    |   |   |-- funBtn.config.js // 定制页面动作定义按钮集
+    |   |   |-- functionPower.actions.js // 功能权限的一些方法（待整合-wk）
+    |   |   |-- globalComponent.config.js // 项目登录、欢迎页、Logo、Banner配置
+    |   |   |-- importApiArr.js // 待删
+    |   |   |-- importTable.config.js //【组件库】导入组件的配置项
+    |   |   |-- init.config.js // 项目初始化基本配置
+    |   |   |-- labelList.js // labelList集合
+    |   |   |-- orderDetailConnector.js // 矩阵组件专用配置
+    |   |   |-- orderLogo.js // 订单标签集合
+    |   |   |-- pageNote.js // 可删
+    |   |   |-- routeGuardFun.js // 路由守卫
+    |   |   |-- subTable.config.js //【组件库】子表组件的配置项
+    |   |   |-- validate.config.js // 表单校验
+    |   |   |-- warning.modal.config.js // 提示弹窗配置
     |   |-- module
     |   |   |-- modal
     |   |   |   |-- basicData.config.js
