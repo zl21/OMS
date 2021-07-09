@@ -1,4 +1,4 @@
-import R3 from './static/r3.publish/r3.min.js';
+import R3 from '@syman/burgeon-r3';
 
 // 企业Logo、Banner配置信息
 import apiPath from '@/assets/js/api/path/index';
@@ -86,15 +86,15 @@ R3.launchApplication({
     Login,
     WelcomePage
   },
-  setComponentsProps: (type, props) => {  
-  // 下拉多选 添加模糊查询多选功能
-    if (type === 'OBJ_FK') {
-      if(props.PropsData !== undefined && props.PropsData.fkobj.searchmodel ==='mrp'){
-        props.filterMode = true;
-      }
-    }
-    return props;
-  },
+  // setComponentsProps: (type, props) => {  
+  // // 下拉多选 添加模糊查询多选功能
+  //   if (type === 'OBJ_FK') {
+  //     if(props.PropsData !== undefined && props.PropsData.fkobj.searchmodel ==='mrp'){
+  //       props.filterMode = true;
+  //     }
+  //   }
+  //   return props;
+  // },
   // enableOpenNewTab: false,
   connector,
   externalModules: customizedPageConfig, // 自定义界面

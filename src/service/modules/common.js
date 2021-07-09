@@ -1,5 +1,5 @@
 // 公共的接口
-import R3 from '../../../static/r3.publish/r3.min.js';
+import R3 from '@syman/burgeon-r3';
 import qs from 'qs';
 
 const { network } = R3;

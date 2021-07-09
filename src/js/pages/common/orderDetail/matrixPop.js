@@ -1,5 +1,5 @@
 import new_axios from 'axios';
-import R3 from '../../../../../static/r3.publish/r3.min.js';
+import R3 from '@syman/burgeon-r3';
 import axios from 'framework/__utils__/request';
 // import port from '../../../assets/js/connector';
 // import store from '@/__config__/store.config.js';

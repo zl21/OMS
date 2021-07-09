@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import R3 from '../../../../static/r3.publish/r3.min.js';
+  import R3 from '@syman/burgeon-r3';
   import businessButton from 'professionalComponents/businessButton';
   import axios from 'axios';
 

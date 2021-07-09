@@ -6,7 +6,7 @@ import matrixInput from '@/views/pages/common/orderDetail/matrixInput2.vue';
 import pageNation from 'framework/components/page/pagenation.vue';
 // import axios from "framework/__utils__/request.js";
 // import store from "@/store";
-import R3 from '../../../../../static/r3.publish/r3.min.js';
+import R3 from '@syman/burgeon-r3';
 import port from './connector.js';
 
 export default {

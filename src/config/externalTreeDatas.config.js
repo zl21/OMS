@@ -1,6 +1,6 @@
 /* 树结构界面配置 */
 
-import R3 from '../../static/r3.publish/r3.min.js';
+import R3 from '@syman/burgeon-r3';
 import service from '@/service/index';
 
 const {
