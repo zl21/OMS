@@ -33,21 +33,37 @@
             </Option>
           </Select>
         </div>
-        <div class="relation">
+        <div class="relation" v-if="dynamicStructure[IDX].CALC != 'zl'">
           <Select
             v-model="dynamicStructure[IDX].CALC"
             transfer
           >
-            <Option
-              v-for="(item,index) in dynamicData.CALC_SYMBOL.COMBOBOX"
-              :key="index"
-              :value="item.value"
-            >
-              {{ item.label }}
-            </Option>
+            <!-- <template v-if="dynamicStructure[IDX].CALC"> -->
+              <Option
+                v-for="(item,index) in dynamicData.COMBINE_CONDITION.COMBOBOX[dynamicStructure[IDX].index || 0].calc"
+                :key="index"
+                :value="item.value"
+              >
+                {{ item.label }}
+              </Option>
+            <!-- </template> -->
           </Select>
         </div>
         <div class="value">
+          <RadioGroup 
+            v-if="dynamicStructure[IDX].DISPLAY == 'RADIOGROUP'"
+            v-model="dynamicStructure[IDX].VAL"
+            @on-change="radioChange"
+          >
+            <Radio 
+              v-for="(option , index) in dynamicData.COMBINE_CONDITION.COMBOBOX[dynamicStructure[IDX].index].COMBOBOX"
+              :key="index"
+              :label="option.value"
+              :disabled="option.disabled"
+            >
+              {{option.label || option.title}}
+            </Radio>
+          </RadioGroup>
           <DatePicker 
             v-if="dynamicStructure[IDX].DISPLAY == 'OBJ_DATE'"
             type="datetimerange"
@@ -125,15 +141,15 @@
     created() {
       this.dynamicStructure[0].RLT = this.default_rlt;
       this.dynamicStructure[1].RLT = this.default_rlt;
-      this.dynamicStructure[0].CALC = this.default_cacl;
-      this.dynamicStructure[1].CALC = this.default_cacl;
+      // this.dynamicStructure[0].CALC = this.default_cacl;
+      // this.dynamicStructure[1].CALC = this.default_cacl;
     },
     computed: {
       type() { // 组合条件对应的组件类型
         return this.dynamicData.CALC_SYMBOL.COMBOBOX[0].value;
       },
       default_cacl() { // 默认包含/不包含参数
-        return this.dynamicData.CALC_SYMBOL.COMBOBOX[0].value;
+        // return this.dynamicData.CALC_SYMBOL.COMBOBOX[0].value;
       },
       default_rlt() { // 默认参数且/或
         return this.dynamicData.LOGIC_SYMBOL.COMBOBOX[0].value;
@@ -164,6 +180,9 @@
       };
     },
     methods: {
+      radioChange(val) {
+        console.log(val);
+      },
       dateChange() {
         const dy = this.dynamicStructure;
         dy.forEach(it => {
@@ -175,6 +194,7 @@
       conditionChange(val) {
         console.log(val);
         const all = this.dynamicData.COMBINE_CONDITION.COMBOBOX;
+        const allCalc = this.dynamicData.CALC_SYMBOL.COMBOBOX;
         // const options = 
         all.forEach((it,j) => {
           if (it.value == val) {
@@ -182,6 +202,20 @@
             const curIt = this.dynamicStructure.find(i => i.NAME == val) //.DISPLAY = 'SELECT'// it.DISPLAY;
             curIt.DISPLAY = it.DISPLAY; //'DATE';
             curIt.index = j;
+            if (curIt.CALC_SYMBOL && curIt.CALC_SYMBOL.length) {
+              curIt.calc = [];
+              for (let x = 0; x < curIt.CALC_SYMBOL.length; x++) {
+                allCalc.forEach(y => {
+                  if (curIt.CALC_SYMBOL[x].value = y.value) {
+                    curIt.calc.push(y);
+                  }
+                })
+              }
+              curIt.CALC = curIt.calc[0].value || ''; // 默认取第一个关系运算符
+            } else {
+              // 可能存在不需要【关系运算符】的情况，那就不展示该控件
+              curIt.CALC = 'zl';
+            }
           }
         });
         const aaa = this.dynamicStructure;
@@ -193,7 +227,8 @@
             NAME: '', // 组合条件选的值
             VAL: '', // 条件值
             RLT: this.default_rlt, // 关系运算符:且/或
-            CALC: this.default_cacl, // 计算运算符:包含/不包含
+            // CALC: this.default_cacl, // 计算运算符:包含/不包含
+            CALC: '',
             TYPE: '', // 值类型
           },
           { // 模板
@@ -201,7 +236,8 @@
             NAME: '', // 组合条件选的值
             VAL: '', // 条件值
             RLT: this.default_rlt, // 关系运算符:且/或
-            CALC: this.default_cacl, // 金酸运算符:包含/不包含
+            // CALC: this.default_cacl, // 金酸运算符:包含/不包含
+            CALC: '',
             TYPE: '', // 值类型
           }
         ];
@@ -213,7 +249,8 @@
           NAME: '', // 组合条件选的值
           VAL: '', // 条件值
           RLT: this.default_rlt, // 关系运算符:且/或
-          CALC: this.default_cacl, // 金酸运算符:包含/不包含
+          // CALC: this.default_cacl, // 金酸运算符:包含/不包含
+          CALC: '',
           TYPE: '', // 值类型
         });
         self.dynamicStructure.push(JSON.parse(obj));
