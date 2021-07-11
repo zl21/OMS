@@ -847,20 +847,24 @@ export default {
     async initObjItem(id) {
       const self = this;
       this.loading = true;
-      const step1 = new Promise(async (resolve) => {
+      /* const step1 = new Promise(async (resolve) => {
         const data = await self.$OMS2.omsUtils.getObject("OC_B_RETURN_ORDER_VIRTUAL_TABLE", id);
         let base = data.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_VIRTUAL_TABLE.ID+10)").childs;
         resolve(base);
-      });
-      step1.then(async (base) => {
+      }); */
+      await self.$OMS2.omsUtils.getObject("OC_B_RETURN_ORDER_VIRTUAL_TABLE", id).then(data => {
+        let base = data.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_VIRTUAL_TABLE.ID+10)").childs;
+        self.formConfig = self.$OMS2.omsUtils.initFormConfig(base, self.formConfig);
+      }).then(async () => {
+        // self.formConfig = self.$OMS2.omsUtils.initFormConfig(base, self.formConfig);
         const dataEx = await self.$OMS2.omsUtils.getObject('OC_B_RETURN_ORDER_ECXCHANGE_TABLE', id)
         self.baseEx = dataEx.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_ECXCHANGE_TABLE.ID+101)").childs;
         self.reInfo = dataEx.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_ECXCHANGE_TABLE.ID+100)").childs;
-        self.formConfig = self.$OMS2.omsUtils.initFormConfig(base, self.formConfig);
       }).then(() => {
         // $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true);
         this.formConfig.key += 1;
         console.log('buttons::', this.btnConfig.buttons);
+        this.mainData.fV = this.formConfig.formValue;
         setTimeout(() => {
           this.loading = false;
           this.watchChange = true;
@@ -871,7 +875,6 @@ export default {
       // setTimeout(async () => {
       // }, 1);
       // self.formConfig = this.$OMS2.omsUtils.initFormConfig(base, self.formConfig);
-      this.mainData.fV = this.formConfig.formValue;
     },
     // input回车查原单信息
     async queryEnter() {

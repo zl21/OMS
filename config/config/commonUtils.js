@@ -773,10 +773,13 @@ class commonUtils {
       data: { code, data, message },
     } = await service.common.getObject(fromdata)
     if (code != 0) {
-      console.log('p/cs/getObject no data!')
+      console.error('p/cs/getObject no data!')
       return false
     } else {
-      return data
+      // return data
+      return new Promise(resolve => {
+        resolve(data)
+      })
     }
   }
 
