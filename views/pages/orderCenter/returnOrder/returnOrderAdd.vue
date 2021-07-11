@@ -347,7 +347,7 @@ export default {
               this.modifyData("REFUND_REASON", "master");
             },
           },
-          /* {
+          {
             style: 'input',
             // label: '退货人姓名', // 退货人姓名
             colname: 'RETURNEE_NAME',
@@ -355,8 +355,8 @@ export default {
             inputChange: () => {
               this.modifyData("RETURNEE_NAME", "master");
             },
-          }, */
-          /* {
+          },
+          {
             style: 'input',
             // label: '退货人手机', // 退货人手机
             colname: 'RETURNEE_MOBILE',
@@ -364,7 +364,7 @@ export default {
             inputChange: () => {
               this.modifyData("RETURNEE_MOBILE", "master");
             },
-          }, */
+          },
           {
             style: 'popInput',
             colname: 'CP_C_PHY_WAREHOUSE_IN_ID',
