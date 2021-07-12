@@ -110,7 +110,6 @@ export default {
                   this.$Message.warning("原平台单号不能为空！");
                   return;
                 }
-                this.tableConfig.modal = true;
                 setTimeout(() => {
                   this.getDetailModal();
                 }, 10);
@@ -567,6 +566,7 @@ export default {
         this.tableConfig.columns = data.TABTH;
       }
       if (code == 0) {
+        this.tableConfig.modal = true;
         this.tableConfig.data = data.OC_B_RETURN_ORDER_REFUND_ITEMS;
       }
       this.loading = false;
