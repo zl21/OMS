@@ -10,6 +10,8 @@ import tipsMessage from './tipsMessage'
 export default {
   tip_info: "暂无英文语言包，敬请期待！(已默认使用中文)",
   tip_type: "success",
+  welcome: 'WELCOME',
+  login: 'LOGIN',
   message: {
     'hello': 'hello world'
   },
@@ -248,7 +250,7 @@ export default {
     modify_returnWarehouse: '修改退回仓库', //修改退回仓库
     modify: '修改', //修改
     modifyRemarks: '修改备注', //修改备注
-    modifyWarehouse: '修改仓库', //
+    modifyWarehouse: '修改仓库', //修改仓库
     modify_sellerNotes: '修改卖家备注', //修改卖家备注
     monthlyBillDownload: '月结账单下载',
     new_chargeback: '新增退单', //新增退单
@@ -294,6 +296,8 @@ export default {
   pHolder: {
     a0: '（为空不做控制，关键字依次填写，用中文“；”隔开）',
     a1: '选择日期范围',
+    a2: 'pleace enter userName',
+    a3: 'pleace enter passWord',
     chargebackNumber: '请输入退单编号',
     consignee: '请输入收货人',
     enter: '请输入', //请输入 ,Please enter

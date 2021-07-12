@@ -5,12 +5,13 @@
  * 3.上述中的key按首字母升序排列。
  */
 
- import tipsMessage from './tipsMessage'
+import tipsMessage from './tipsMessage'
 
 export default {
   tip_info: "切换为中文！",
   tip_type: "success",
-
+  welcome: '欢迎登录',
+  login: '登录',
   message: {
     'hello': '你好,世界'
   },
@@ -295,6 +296,8 @@ export default {
   pHolder: {
     a0: '（为空不做控制，关键字依次填写，用中文“；”隔开）',
     a1: '选择日期范围',
+    a2: '请输入用户名',
+    a3: '请输入密码',
     chargebackNumber: '请输入退单编号',
     consignee: '请输入收货人',
     enter: '请输入', //请输入 ,Please enter
@@ -807,8 +810,8 @@ export default {
   },
 
   modalTitle: { // 弹窗title
-    th1:"替换前商品",
-    th2:"替换后商品",
+    th1: "替换前商品",
+    th2: "替换后商品",
     a0: '店铺商品特殊设置明细', // 店铺商品特殊设置明细
     a1: '被替换商品SKU', // 被替换商品SKU
     a2: '批量新增条件信息导入', // 批量新增条件信息导入

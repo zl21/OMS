@@ -139,3 +139,4 @@ console.log($i18n.t(common.all));
 | v1.0.46 |  update modalTips.ga/gb |
 | v1.0.47 |  新增操作语言包的API |
 | v1.0.48 |  add |
+| v1.0.49 |  登录页语言 |
