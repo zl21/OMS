@@ -255,6 +255,7 @@
                   self.publicBouncedConfig.url = 'modal/orderCenter/modifyWarehouse';
                   self.publicBouncedConfig.confirmTitle = '改退回仓库';
                   self.publicBouncedConfig.width = 500;
+                  self.publicBouncedConfig.maskClosable = false;
                   self.publicBouncedConfig.componentData = {
                     row : self.selection
                   }
@@ -298,6 +299,7 @@
                   self.publicBouncedConfig.url = 'modal/orderCenter/modifyReturnLogistics';
                   self.publicBouncedConfig.confirmTitle = '改退回物流';
                   self.publicBouncedConfig.width = 500;
+                  self.publicBouncedConfig.maskClosable = false;
                   self.$set(self.publicBouncedConfig.componentData , 'row' , self.selection);
                   self.$set(self.publicBouncedConfig.componentData , 'data' , res.data.data);
                   setTimeout(() => {
