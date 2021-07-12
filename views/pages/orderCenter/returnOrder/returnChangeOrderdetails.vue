@@ -23,6 +23,7 @@
       titleAlign="left"
       :title="`添加商品-已选（${selectLen}）`"
       :mask="true"
+      footer-hide
       @on-ok="resetReturnMainTable"
       @on-cancel="detailAddCancel"
     >
@@ -33,6 +34,7 @@
         @on-select-all="onSelectAll"
         @on-select-all-cancel="onSelectAllCancel"
       />
+      <businessButton :btn-config="btnConfigTui" />
     </Modal>
     <!-- 替换/添加明细 -->
     <Modal
@@ -41,6 +43,7 @@
       title="替换明细"
       :mask="true"
       @on-ok="replaceOk"
+      footer-hide
     >
       <businessActionTable
         :jordan-table-config="replaceProductTable"
@@ -48,11 +51,14 @@
         @on-page-change="pageChange"
         @on-page-size-change="pageSizeChange"
       />
+      <businessButton :btn-config="btnConfigHuan" />
     </Modal>
   </div>
 </template>
 <script>
 import businessActionTable from "professionalComponents/businessActionTable";
+import businessButton from 'professionalComponents/businessButton';
+
 import {
   addDetailModalTableColumns,
   tuiColumns,
@@ -61,8 +67,9 @@ import {
 import Util from "@/assets/js/public/publicMethods";
 
 export default {
-  name: "retunGoods",
+  name: "retunAddDetail",
   components: {
+    businessButton,
     businessActionTable,
   },
   props: {
@@ -71,6 +78,45 @@ export default {
   },
   data() {
     return {
+      btnConfigTui: {
+        typeAll: "default",
+        btnsite: "right",
+        buttons: [
+          {
+            text: "取消",
+            btnclick: () => {
+              this.detailAddCancel();
+            },
+          },
+          {
+            text: '确定',
+            type: 'primary',
+            btnclick: () => {
+              this.resetReturnMainTable();
+            },
+          },
+        ],
+      },
+      btnConfigHuan: {
+        typeAll: "default",
+        btnsite: "right",
+        buttons: [
+          {
+            text: "取消",
+            btnclick: () => {
+              // this.$emit("closeActionDialog", false);
+              this.replaceProductTable.modal = false;
+            },
+          },
+          {
+            text: '确定',
+            type: 'primary',
+            btnclick: () => {
+              this.replaceOk();
+            },
+          },
+        ],
+      },
       returnArr: [],
       changeArr: [],
       loading: false,
@@ -130,7 +176,6 @@ export default {
                   return;
                 }
                 this.getPlaceData();
-                this.replaceProductTable.modal = true;
               }, // 按钮点击事件
             },
             {
@@ -528,6 +573,7 @@ export default {
           );
           this.replaceProductTable.data.push(curentData);
         });
+        this.replaceProductTable.modal = true;
       }
     },
     // 模糊查询 数据
@@ -983,6 +1029,12 @@ export default {
       console.log("添加明细 - 确定");
       const tui = this.tableConfig.data;
       const addToList = tui.filter((i) => i._checked);
+      if (!addToList.length) {
+        this.$Message.warning('请选择一条明细！')
+        return false
+      } else {
+        this.tableConfig.modal = false;
+      }
       this.toMainData.tui = addToList;
       this.insertOrderDetail(addToList);
       this.$emit("subTableData", this.toMainData);
@@ -996,7 +1048,8 @@ export default {
       );
     },
     detailAddCancel() {
-      this.$emit("closeActionDialog", false);
+      // this.$emit("closeActionDialog", false);
+      this.tableConfig.modal = false;
       this.tableConfig.data.forEach((it) => {
         it._checked = false;
       });
@@ -1057,9 +1110,9 @@ export default {
       let self = this;
       let tableData = self.businessActionTable.data;
       let selectData = self.replaceProductTable.selectData; //新的对象换货明细
-      if (!selectData.length) {
-        self.$Message.warning('请选择一条明细！')
-        return
+      if (!Object.keys(selectData).length) {
+        self.$Message.warning('请选中一条明细！')
+        return false
       }
       let params = {
         ID: self.$route.params.itemId ? self.$route.params.itemId : -1, //明细id
@@ -1074,6 +1127,9 @@ export default {
       } = await self.service.orderCenter.getReturnExchangeItemBySkuECode(
         params
       );
+      if (code == 0) {
+        self.replaceProductTable.modal = false;
+      }
       // 获取商品明细
       if (data.OC_B_RETURN_ORDER_EXCHANGE_ITEMS === null) {
         return;
