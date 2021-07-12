@@ -259,3 +259,4 @@
 | v1.2.18 | fkinput-inputEnter调整(skx |  
 | v1.2.19 | fkinput-失焦 |  
 | v1.2.20 | 外键关联-网关处理 |  
+| v1.2.23 | download重置表单 |  
