@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-12 10:55:30
+ * @LastEditTime: 2021-07-12 16:01:51
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -9,7 +9,7 @@
 <template>
   <div v-loading="loading">
     <!-- 如果是组合商品不显示  v-if="IS_GROUP"  -->
-    <div class="switch">
+    <div class="switch" v-if="PRO_TYPE === '4'">
       <span @click="onSitch()"> {{ switchText }} </span>
     </div>
     <!-- 退货明细 -->
@@ -75,6 +75,7 @@ export default {
   },
   data() {
     return {
+      PRO_TYPE:'4',//4 代表组合商品
       switchText:'切换为sku商品展示',
       returnArr: [],
       changeArr: [],
@@ -263,7 +264,7 @@ export default {
         }, // 表单配置
         columns: [], // 表头
         data: [], // 数据配置
-        selectData: [],
+        selectData: {},
         pageShow: true, // 控制分页是否显示
         loading: false,
         indexColumn: true, // 是否显示序号
@@ -294,18 +295,12 @@ export default {
           this.businessActionTable.businessButtonConfig.buttons[2].isShow = true;
           this.businessActionTable.data = this.toMainData.huan;
         }
-        if (this.$route.params.customizedModuleId === "New") {
-          await this.getColumns();
-          await this.renderHandle(renderKeys);
-        }
       },
       immediate: true,
     },
   },
   async created() {
-    if (this.$route.params.customizedModuleId !== "New") {
-      this.getReplaceData(this.$route.params.itemId);
-    }
+    this.getReplaceData(this.$route.params.itemId);
   },
   async activated() {
     //编辑页面 换货/退货逻辑
@@ -370,7 +365,7 @@ export default {
     onSitch(){
       this.isSku ? this.switchText = '切换为sku商品展示' : this.switchText = '切换为平台商品展示';
       this.isSku = !this.isSku;
-      // this.getData(this.isSku);
+      this.getDetailsData(!this.isSku);
     },
     // 获取按钮权限
     async getBtn() {
@@ -402,16 +397,9 @@ export default {
         return this.businessActionTable.businessButtonConfig.buttons
       });
     },
-    // 编辑获取按钮权限
-    // 获取表头（新增）
-    async getColumns() {
-      this.tableConfig.columns = tuiColumns;
-      this.replaceProductTable.columns = huanColumns;
-      this.renderColumn = this.returnProduct == "0" ? tuiColumns : huanColumns;
-    },
     // 获取详情数据
     async getReplaceData(objid) {
-      console.log('objId');
+      this.loading = true;
       const {
         data: {
           code,
@@ -430,14 +418,8 @@ export default {
       });
       // 获取状态
       this.orderStatus = OC_B_RETURN_ORDER.RETURN_STATUS;
-      this.businessActionTable.columns =
-        this.$parent.$parent.panelRef === "退货明细"
-          ? REFUND_ITEM_TABTH
-          : EXCHANGE_ITEM_TABTH; //表头
-      this.renderColumn =
-        this.$parent.$parent.panelRef === "退货明细"
-          ? REFUND_ITEM_TABTH
-          : EXCHANGE_ITEM_TABTH; // render
+      this.businessActionTable.columns = this.$parent.$parent.panelRef === "退货明细" ? REFUND_ITEM_TABTH : EXCHANGE_ITEM_TABTH; //表头
+      this.renderColumn = this.$parent.$parent.panelRef === "退货明细" ? REFUND_ITEM_TABTH : EXCHANGE_ITEM_TABTH; // render
       // 退款金额
       let returnAmount = {
         PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(
@@ -462,36 +444,47 @@ export default {
           Number(OC_B_RETURN_ORDER.FINAL_REAL_AMT)
         ), //最终实退总金额
       };
+      this.PRO_TYPE = OC_B_RETURN_ORDER.PRO_TYPE
+      console.log('this.PRO_TYPE:',this.PRO_TYPE,OC_B_RETURN_ORDER);
       R3.store.commit(
         `customize/returnAmount`,
         JSON.parse(JSON.stringify(returnAmount))
       );
       if (code === 0) {
         // 初始赋值
-        let renderArr =
-          this.$parent.$parent.panelRef === "退货明细"
-            ? ["REFUND_ID", "QTY_REFUND"]
-            : ["QTY_EXCHANGE", "PRICE_ACTUAL"]; // render
+        let renderArr = this.$parent.$parent.panelRef === "退货明细" ? ["REFUND_ID", "QTY_REFUND"] : ["QTY_EXCHANGE", "PRICE_ACTUAL"]; // render
         if (this.$route.query.RETURN_SOURCE !== "手工新增") {
           renderArr = [];
         }
         this.renderHandle(renderArr);
-        this.businessActionTable.data =
-          this.$parent.$parent.panelRef === "退货明细"
-            ? OC_B_RETURN_ORDER_REFUND_ITEMS
-            : OC_B_RETURN_ORDER_EXCHANGE_ITEMS; // 数据
-
-        // 存起来
+        // 表头存起来
         this.tableHead.tui = REFUND_ITEM_TABTH;
         this.tableHead.huan = EXCHANGE_ITEM_TABTH;
-        this.toMainData.tui = OC_B_RETURN_ORDER_REFUND_ITEMS;
-        this.toMainData.huan = OC_B_RETURN_ORDER_EXCHANGE_ITEMS;
-        R3.store.commit(
-          "customize/returnOrderChangeItem",
-          JSON.parse(JSON.stringify(this.toMainData))
-        );
-        this.totalNum();
+        // 处理数据 -- 退换货明细
+        // PT_SKU true平台 false商品
+        this.getDetailsData(true);
       }
+      this.loading = false;
+    },
+    // 获取明细详情数据
+    async getDetailsData(PT_SKU){
+      let params = {
+        ID:this.$route.params.itemId,
+        TABLE:'OC_B_RETURN_ORDER',
+        PT_SKU: PT_SKU, //true平台 false商品
+      }
+      let tui = await $omsUtils.getTableData(this,{...params,SUB_TABLE:'OC_B_RETURN_ORDER_REFUND_ITEM'})
+      // 换货明细
+      let huan = await $omsUtils.getTableData(this,{...params,SUB_TABLE:'OC_B_RETURN_ORDER_EXCHANGE_ITEM'})
+      this.businessActionTable.data = this.$parent.$parent.panelRef === "退货明细" ? tui.SUB_ITEM : huan.SUB_ITEM; // 数据
+      
+      this.toMainData.tui = tui.SUB_ITEM;
+      this.toMainData.huan = huan.SUB_ITEM;
+      R3.store.commit(
+        "customize/returnOrderChangeItem",
+        JSON.parse(JSON.stringify(this.toMainData))
+      );
+      this.totalNum();
     },
     // 获取SKU数据
     async getPlaceData(page = 0, pageSize = 10) {
@@ -782,7 +775,6 @@ export default {
                 })
               )
           );
-          console.log(String(FINAL_ACTUAL_AMT));
         } else {
           R3.store.commit(`customize/returnAmount`, {
             PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2),
@@ -1034,6 +1026,11 @@ export default {
       let self = this;
       let tableData = self.businessActionTable.data;
       let selectData = self.replaceProductTable.selectData; //新的对象换货明细
+      console.log('selectData',selectData,JSON.stringify(selectData) == "{}");
+      if (JSON.stringify(selectData) == "{}") {
+        self.$Message.warning('请选中一条明细！');
+        return;
+      }
       let params = {
         ID: self.$route.params.itemId ? self.$route.params.itemId : -1, //明细id
         SOURCE_CODE: self.$route.query.SOURCE_CODE
@@ -1047,6 +1044,8 @@ export default {
       } = await self.service.orderCenter.getReturnExchangeItemBySkuECode(
         params
       );
+      self.replaceProductTable.selectData = {}
+      console.log(self.replaceProductTable.selectData);
       // 获取商品明细
       if (data.OC_B_RETURN_ORDER_EXCHANGE_ITEMS === null) {
         return;

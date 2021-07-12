@@ -1703,6 +1703,48 @@ class commonUtils {
     return Y + M + D + h + m + s;
   }
 
+  /**
+   * 公共接口获取表头
+   * @param {*} length 
+   */
+  static getCommonColumn(self,tableName){
+    return new Promise(async (resolve)=>{
+      let data = await self.service.orderCenter.initObject({"TABLE":tableName});
+      let obj = {}
+      if (data.data.code !== -1) {
+        let handleTh = data.data.data.DATA.map(element => ({title:`${element.headerName}`,key:`${element.field}`,dataAcessKey:`${element.field}`}));
+        obj = {
+          'sourceData':data.data,
+          'handleTh':handleTh
+        }
+      }
+      resolve(obj)
+    })
+  }
+  /**
+   * 公共接口获取数据
+   * @param {*
+   *  ID // 明细id
+   *  TABLE // 主表名
+   *  SUB_TABLE // 明细表名
+   *  PT_SKU // true平台 false商品
+   *  REFRESH //是否加密
+   *  index  //当前页
+   * } 
+   */
+   static getTableData(self,params){
+    return new Promise(async (resolve)=>{
+      const data = await self.service.orderCenter.queryObject(params);
+      let obj = {}
+      if (data.data.code !== -1) {
+        obj = {
+          'sourceData':data.data,
+          'SUB_ITEM':data.data.data.DATA.SUB_ITEM
+        }
+      }
+      resolve(obj)
+    })
+  }
 }
 
 
