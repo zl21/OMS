@@ -394,6 +394,7 @@ export default {
           itemdata.pid = this.queryList[0].id;
           itemdata.valuedata = this.queryList[0].value;
           this.$emit('inputBlur', this.queryList[0]);
+          this.$emit('getFkChooseItem', self.itemdata) // 失焦不走obj还是不行，走了也会有问题，先酱紫吧
           $(`.item-filter .fkAutocomplete${itemdata.colname}`).css(
             'display',
             'none'

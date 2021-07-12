@@ -257,3 +257,4 @@
 | v1.2.16 | bug：42845 | 
 | v1.2.17 | ag-支持设置rowHeight |  
 | v1.2.18 | fkinput-inputEnter调整(skx |  
+| v1.2.19 | fkinput-失焦 |  
