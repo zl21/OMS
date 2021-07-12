@@ -13,7 +13,6 @@
   "author": "flybird <duan.ry@burgeon.cn>",
   "license": "ISC",
   "devDependencies": {
-    "@burgeon/internationalization": "^1.0.45",
     "@burgeon/oms-theme": "1.6.6",
     "@syman/burgeon-r3": "1.4.75",
     "babel-cli": "6.26.0",
@@ -23,6 +22,7 @@
     "wangeditor": "^4.6.16"
   },
   "dependencies": {
+    "@burgeon/internationalization": "^1.0.50",
     "@syman/ark-ui": "^1.1.39",
     "lodash": "^4.17.21",
     "mddir": "^1.1.1",

@@ -1,12 +1,31 @@
 <template>
   <div class="loginBG">
+    <!--  -->
+    <div class="i18nDom">
+      <Dropdown>
+        <a href="javascript:void(0)">
+          中/En
+          <Icon type="ios-arrow-down"></Icon>
+        </a>
+        <DropdownMenu slot="list">
+          <DropdownItem
+            v-for="item in langConfig"
+            :key="item.type"
+            @click.native="toggleLang(item.type)"
+            :disabled="vmI18n.locale == item.type"
+            >{{ item.text }}</DropdownItem
+          >
+        </DropdownMenu>
+      </Dropdown>
+    </div> 
     <div ref="container" class="container">
       <div class="login-content">
         <!-- logo -->
         <div class="logo-img">
           <img src="../assets/img/form-logo.png" />
         </div>
-        <div class="title">欢迎登录</div>
+        <!-- 欢迎登录 -->
+        <div class="title">{{vmI18n.t("welcome")}}</div>
         <!-- form -->
         <div class="form-input">
           <label>
@@ -18,7 +37,7 @@
               type="text"
               value=""
               class="username"
-              placeholder="请输入用户名"
+              :placeholder="vmI18n.t('pHolder.a2')"
             />
           </div>
         </div>
@@ -32,13 +51,14 @@
               type="password"
               value=""
               class="pwd"
-              placeholder="请输入密码"
+              :placeholder="vmI18n.t('pHolder.a3')"
             />
           </div>
         </div>
         <!-- button -->
         <div id="btn" class="btn" @click="login">
-          登录
+          <!-- 登录 -->
+          {{vmI18n.t("login")}}
           <img src="../assets/img/arrow-right.png" />
         </div>
         <!-- <p class="fargetPws">
@@ -56,9 +76,40 @@
 <script>
 import R3 from "@syman/burgeon-r3";
 import service from '@/service/index';
+import i18n from '@burgeon/internationalization/i18n'; // 国际化
+const langConfig = [
+  {
+    type: 'zh',
+    text: '中文',
+  },
+  {
+    type: 'en',
+    text: 'English',
+  },
+  /* {
+    type: 'ja',
+    text: '日语',
+  }, */
+];
 export default {
   name: "Login",
+  data() {
+    return {
+      vmI18n: i18n,
+      langConfig,
+    };
+  },
+
   methods: {
+    toggleLang(lang) {
+      const _this = this;
+      localStorage.setItem('locale', lang);
+      _this.vmI18n.locale = localStorage.getItem('locale');
+      this.$message({
+        message: _this.vmI18n.messages[lang].tip_info,
+        type: _this.vmI18n.messages[lang].tip_type,
+      });
+    },
     login() {
       let message = {};
       if (this.$refs.username.value === "") {
@@ -99,6 +150,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import '~@burgeon/oms-theme/skin/public.less';
 .loginBG {
   background: url(../assets/img/login-bg.jpg) no-repeat;
   background-size: cover;
@@ -107,6 +159,33 @@ export default {
   position: relative;
   display: flex;
   justify-content: center;
+  .i18nDom {
+    z-index: 999;
+    position: absolute;
+    top: 11px;
+    right: 12px;
+    border: 1px solid #fff;
+    padding: 2px 16px;
+    border-radius: 5px;
+    button {
+      height: 24px;
+      width: 60px;
+      border-radius: 2px;
+      border: 1px solid @button-border;
+      color: @button-border;
+      background-color: @button-bg-font;
+      margin-right: 20px;
+    }
+    span {
+      font-size: 16px;
+      text-align: left;
+    }
+    /deep/ .ark-dropdown-rel a {
+      color: #fff;
+      display: inline-block;
+      line-height: 20px;
+    }
+  }
   .login {
     position: absolute;
     top: 33%;
