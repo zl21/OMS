@@ -477,7 +477,7 @@ export default {
               regx: /^[0-9]*$/,
               disabled: false,
               tips: {
-                content: '当“店铺+唯品会仓库+发货实体仓”相同的配货单中商品数量大于等于设置的峰值时，自动创建入库单'
+                content: '当“店铺+唯品会仓库+发货仓库”相同的配货单中商品数量大于等于设置的峰值时，自动创建入库单'
               },
               inputChange: () => {
                 this.masterModifyData('PEAK_VALUE', 'warehouseWarrant', 0);
@@ -517,7 +517,7 @@ export default {
                   isuppercase: false, // 是否转大写
                   istooltip: true,
                   length: 65535, // 最大长度是多少
-                  name: '发货实体仓', // 赔付类型
+                  name: '发货仓库', // 赔付类型
                   readonly: false, // 是否可编辑，对应input   readonly属性
                   reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
                   reftableid: 169375, // 对应的表ID
@@ -1011,7 +1011,7 @@ export default {
             key: 'PEAK_VALUE',
           },
           {
-            title: '发货实体仓',
+            title: '发货仓库',
             key: 'CP_C_PHY_WAREHOUSE_ENAME',
           },
           {
