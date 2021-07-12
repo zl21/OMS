@@ -272,7 +272,8 @@ export default {
       params.append('colid',this.fkid)
       params.append('fixedcolumns',JSON.stringify({}))
       const serviceId = _self.itemdata.serviceId;
-      $network.post('/p/cs/fuzzyquerybyak',params,serviceId ? { serviceId } : {})
+      _self.service.common.fuzzyquerybyak(params, serviceId ? { serviceId } : 0)
+        // $network.post('/p/cs/fuzzyquerybyak',params,serviceId ? { serviceId } : 0)
       .then((res) => {
         console.log('res:',res);
         this.fkDimData = res.data.data;
@@ -300,7 +301,8 @@ export default {
       this.formObj.refcolid = this.fkid;
       params.append('searchdata', JSON.stringify(this.formObj));
       const serviceId = _self.itemdata.serviceId;
-      $network.post(url,params,serviceId ? { serviceId } : {})
+      // $network.post(url,params,serviceId ? { serviceId } : 0)
+      _self.service.common.QueryList(params, serviceId ? { serviceId } : 0)
       .then((res) => {
         if (res.data.code == 0) {
           let dataArr = _self.version === '1.4' ? res.data.data : res.data.datas

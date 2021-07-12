@@ -234,7 +234,7 @@ export default {
       const query = this.handelParam();
       const { serviceId } = this.itemdata
       const version = this.version || this.itemdata.version || '1.3'; // 默认1.3,兼容斯凯奇
-      const result = await this.service.common.QueryList(query, { serviceId: serviceId || 'r3-cp' });
+      const result = await this.service.common.QueryList(query, serviceId ? { serviceId } : 0);
       if (result.data.code == 0) {
         const { row, tabth, totalRowCount } = version == '1.4' ? result.data.data : result.data.datas
         tabth.map(it => it.isak && (it.show = true));
@@ -251,7 +251,7 @@ export default {
       const { version, serviceId } = this.itemdata
       const {
         data: { code, data, message },
-      } = await this.service.common.fuzzyquerybyak(query, { serviceId: serviceId || 'r3-cp' });
+      } = await this.service.common.fuzzyquerybyak(query, serviceId ? { serviceId } : 0);
       if (code == 0) {
         data.forEach((item) => {
           item.value = this.itemdata.columnsKey ? item[this.itemdata.columnsKey[0]] : item.value; // 模糊搜索失焦/选中后展示在input中的字符
