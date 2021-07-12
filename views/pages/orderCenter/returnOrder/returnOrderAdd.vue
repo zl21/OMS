@@ -116,7 +116,7 @@ import returnChangeOrderdetails from './returnChangeOrderdetails.vue'
 import { valiObj, waterMarkMap } from './returnConfig.js'
 
 export default {
-  name: 'returngoodmanagement',
+  // name: 'returnOrderAdd',
   components: {
     returnChangeOrderdetails,
     searchOOID,
