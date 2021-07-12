@@ -1117,9 +1117,9 @@ export default {
       const gT = row.GIFT_TYPE; // string
       // if (pT == 0) { // 普通
       // 筛选出gR值相等的一并选中，挂靠赠品
-      gR && this.screen('gR', { GIFT_RELATION: gR });
+      gR && this.screen('gR', { GIFT_RELATION: gR, PS_C_SKU_ECODE: row.PS_C_SKU_ECODE });
       // 筛选出gM值相等的一并选中，下挂组合
-      gM && this.screen('gM', { GROUP_GOODS_MARK: gM });
+      gM && this.screen('gM', { GROUP_GOODS_MARK: gM, PS_C_SKU_ECODE: row.PS_C_SKU_ECODE });
       // 普通品的非卦靠赠品一并选中，其它(系统/平台)赠品
       this.screen('other', row);
       // }
@@ -1145,7 +1145,9 @@ export default {
           case 'gM':
             const key = flag == 'gR' ? 'GIFT_RELATION' : 'GROUP_GOODS_MARK';
             if (it[key] == obj[key]) {
-              this[flag == 'gR' ? 'haveGift' : 'haveGroup'] += `${it.PS_C_SKU_ECODE},`;
+              if (it.PS_C_SKU_ECODE !== obj.PS_C_SKU_ECODE) {
+                this[flag == 'gR' ? 'haveGift' : 'haveGroup'] += `${it.PS_C_SKU_ECODE},`;
+              }
               if (this.isMainDelete) return;
               this.indexL.push(index);
             }
