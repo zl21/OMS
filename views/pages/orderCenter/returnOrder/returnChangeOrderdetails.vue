@@ -484,10 +484,6 @@ export default {
     async getPlaceData(page = 0, pageSize = 10) {
       let self = this;
       self.replaceProductTable.selectData = [];
-      if (!self.replaceProductTable.selectData.length) {
-        self.$Message.warning('请选择一条明细！')
-        return
-      }
       if (page >= 1) page = `${page - 1}0`;
       this.replaceProductTable.loading = true;
       // 组合查询条件
@@ -1061,6 +1057,10 @@ export default {
       let self = this;
       let tableData = self.businessActionTable.data;
       let selectData = self.replaceProductTable.selectData; //新的对象换货明细
+      if (!selectData.length) {
+        self.$Message.warning('请选择一条明细！')
+        return
+      }
       let params = {
         ID: self.$route.params.itemId ? self.$route.params.itemId : -1, //明细id
         SOURCE_CODE: self.$route.query.SOURCE_CODE

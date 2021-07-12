@@ -84,6 +84,7 @@ export default {
             width: '8',
             colname: 'CP_C_SHOP_ID',
             itemdata: {
+              serviceId: 'r3-cp',
               colid: 171929,
               colname: 'CP_C_SHOP_ID', // 当前字段的名称
               /* precolnameslist: [
