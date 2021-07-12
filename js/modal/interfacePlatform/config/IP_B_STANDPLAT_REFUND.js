@@ -88,8 +88,10 @@ export default {
     if (code === 0) {
       _this.$Message.success(message);
       _this.$emit('closeActionDialog', true);
+      _this.$OMS2.omsUtils.formEmpty(_this, 'downLoadFormConfig')
     } else {
       // _this.$Message.error(message);
     }
+    
   }
 };

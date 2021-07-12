@@ -136,6 +136,7 @@ export default {
       if (orderNum) {
         self.$Message.success(message);
         self.$emit('closeActionDialog', true);
+        self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
       } else {
         self.taskId = message.match(/\d+/)[0];
         self.downLoadModal = true;

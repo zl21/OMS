@@ -93,23 +93,17 @@ export default {
       self.$Message.warning($i18n.t('modalTips.be'));// 请选择需要下载的店铺
       return false;
     }
-    const [start] = formValue.startEndTimes
+    const [start, end] = formValue.startEndTimes
     if (!(formValue.orderNum || start)) {
       self.$Message.warning($i18n.t('modalTips.bs'));// 请选择输入的日期或输入订单编号
       return false;
     }
     const param = {
-      shop_id:
-        parseInt(self.downLoadFormConfig.formData[0].itemdata.pid),
-      bill_no: self.downLoadFormConfig.formValue.orderNum, // 订单编号
-      start_time: BurgeonDate.standardTimeConversiondateToStr(
-        self.downLoadFormConfig.formValue.startEndTimes[0]
-      ), // 开始时间
-      end_time: BurgeonDate.standardTimeConversiondateToStr(
-        self.downLoadFormConfig.formValue.startEndTimes[1]
-      ), // 结束时间
-      status:
-        self.downLoadFormConfig.formValue.orderStatus, // 状态 必传 给默认值
+      shop_id: parseInt(self.downLoadFormConfig.formData[0].itemdata.pid),
+      bill_no: formValue.orderNum, // 订单编号
+      start_time: start ? BurgeonDate.standardTimeConversiondateToStr(start) : '', // 开始时间
+      end_time: end ? BurgeonDate.standardTimeConversiondateToStr(end) : '', // 结束时间
+      status: formValue.orderStatus, // 状态 必传 给默认值
       table: self.$route.params.tableName // 当前表名 必传
     };
   
@@ -120,6 +114,7 @@ export default {
     if (code === 0) {
       self.taskId = message.match(/\d+/)[0];
       self.downLoadModal = true;
+      self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
     }
   }
 };

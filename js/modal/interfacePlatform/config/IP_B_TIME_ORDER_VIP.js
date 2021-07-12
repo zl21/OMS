@@ -8,7 +8,7 @@
  */
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
-  // 京东订单接口列表界面(下载订单)
+  // 唯品会失效订单(下载订单)
   formConfig: {
     formValue: {
       numNumber: ''
@@ -70,6 +70,10 @@ export default {
       query_date: [{ required: true }]
     }
   },
+  cancel: (self) => {
+    const _this = self;
+    _this.$OMS2.omsUtils.formEmpty(_this, 'downLoadFormConfig')
+  },
   // 确定按钮
   determine: async self => {
     if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
@@ -104,6 +108,7 @@ export default {
       self.$Message.success(message);
       self.$emit('confirmImport');
       self.$emit('closeActionDialog', true);
+      self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
     }
   }
 };

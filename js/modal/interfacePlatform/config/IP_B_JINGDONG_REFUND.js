@@ -102,5 +102,6 @@ export default {
     } catch (error) {
       self.dialogLoad = false;
     }
+    self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   }
 };

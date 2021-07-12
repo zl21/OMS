@@ -77,6 +77,7 @@ export default {
       self.$Message.success(res.data.message);
       // self.$emit('confirmImport');
       self.$emit('closeActionDialog');
+      _this.$OMS2.omsUtils.formEmpty(_this, 'downLoadFormConfig')
     } else {
       self.$Message.error(res.data.message);
     }

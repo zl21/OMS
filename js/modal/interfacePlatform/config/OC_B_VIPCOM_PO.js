@@ -83,15 +83,8 @@ export default {
     } = await self.service.orderCenter.downloadPO(fromdata);
     if (code === 0) {
       self.$Message.success(message);
-      // self.downLoadModal = true;
-      // const orderNum = self.downLoadFormConfig.formValue.orderNum;
-      /* if (orderNum) {
-        self.$Message.success(message);
-        self.$emit('closeActionDialog', true);
-      } else {
-        self.taskId = message.match(/\d+/)[0];
-        self.downLoadModal = true;
-      } */
+      self.$emit('closeActionDialog', true);
+      self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
     }
   }
 };

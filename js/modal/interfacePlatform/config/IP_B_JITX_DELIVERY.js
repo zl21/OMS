@@ -121,6 +121,7 @@ export default {
       self.$Message.success(message);
       self.$emit('confirmImport');
       self.$emit('closeActionDialog', true);
+      self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
     }
   }
 };
