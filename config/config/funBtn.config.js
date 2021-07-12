@@ -981,17 +981,39 @@ class BtnConfig {
             res.data.message,
             function (h) {
               //因为后端复用列列表详情界面的取消接口,需要区分
-              return h('Table', {
-                props: {
-                  columns: [
-                    {
-                      title: '失败原因',
-                      key: 'message',
-                    },
-                  ],
-                  data: res.data.data,
-                },
-              })
+              if (self.$route.params.customizedModuleName == "OC_B_RETURN_ORDER") {
+                return h('Table', {
+                  props: {
+                    columns: [
+                      {
+                        title: '序号',
+                        key: 'index',
+                      },
+                      {
+                        title: '单据编号',
+                        key: 'billNo',
+                      },
+                      {
+                        title: '失败原因',
+                        key: 'message',
+                      },
+                    ],
+                    data: res.data.data,
+                  },
+                })
+              } else {
+                return h('Table', {
+                  props: {
+                    columns: [
+                      {
+                        title: '失败原因',
+                        key: 'message',
+                      },
+                    ],
+                    data: res.data.data,
+                  },
+                })
+              }
             }
           )
         }
