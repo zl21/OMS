@@ -65,6 +65,10 @@ export default {
       }]
     }
   },
+  cancel: (self) => {
+    const _this = self;
+    _this.$OMS2.omsUtils.formEmpty(_this, 'downLoadFormConfig')
+  },
   // 确定按钮
   determine: async (self) => {
     const _this = self;
@@ -93,6 +97,7 @@ export default {
     if (code === 0) {
       _this.$Message.success(message);
       _this.$emit('closeActionDialog', true);
+      this.$OMS2.omsUtils.formEmpty(_this, _this.downLoadFormConfig)
     } else {
       // _this.$Message.error(message);
     }

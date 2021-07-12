@@ -1,6 +1,6 @@
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
-  // 淘宝换货单接口列表界面
+  // 唯品会取消时效订单（取消时效订单下载）
   formConfig: {
     formValue: {
       numNumber: ''
@@ -61,6 +61,10 @@ export default {
       numNumber: [{ required: true, message: ' ', trigger: 'blur' }],
       query_date: [{ required: true }]
     }
+  },
+  cancel: (self) => {
+    const _this = self;
+    _this.$OMS2.omsUtils.formEmpty(_this, 'downLoadFormConfig')
   },
   // 确定按钮
   determine: async (self) => {

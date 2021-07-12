@@ -783,6 +783,22 @@ class commonUtils {
     }
   }
 
+  // 清空表单
+  static formEmpty(_this, form, notvalueArr = [], notdrpArr = []) {
+    _this[form].formData.forEach((it) => {
+      if (it.itemdata && !notdrpArr.includes(it.colname)) {
+        it.itemdata.pid = '';
+        it.itemdata.valuedata = '';
+      }
+    })
+    for (const key in _this[form].formValue) {
+      if (!notvalueArr.includes(key)) {
+        _this[form].formValue[key] = ''
+      }
+    }
+    return _this[form]
+  }
+
   /**
    * @method 根据据方法(getObject)的返回,初始化formConfig配置,包括formData
    * @data 待解析的数据

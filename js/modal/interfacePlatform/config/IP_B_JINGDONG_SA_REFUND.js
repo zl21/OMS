@@ -1,6 +1,6 @@
 import BurgeonDate from '@/assets/js/__utils__/date';
 export default {
-  // 下载取消订单
+  // 京东取消订单(下载订单)
   formConfig: {
     formValue: {
       startEndTimes: []
@@ -44,6 +44,10 @@ export default {
         message: ' '
       }]
     }
+  },
+  cancel: (self) => {
+    const _this = self;
+    _this.$OMS2.omsUtils.formEmpty(_this, 'downLoadFormConfig')
   },
   // 确定按钮
   determine: async (self) => {

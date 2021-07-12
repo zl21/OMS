@@ -76,6 +76,10 @@ export default {
       // }
     ]
   },
+  cancel: (self) => {
+    const _this = self;
+    _this.$OMS2.omsUtils.formEmpty(_this, 'downLoadFormConfig')
+  },
   // 确定按钮
   determine: async (self) => {
     const _this = self;
