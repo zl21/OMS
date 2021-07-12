@@ -492,6 +492,7 @@ export default {
     // 获取SKU数据
     async getPlaceData(page = 0, pageSize = 10) {
       let self = this;
+      self.replaceProductTable.selectData = [];
       if (page >= 1) page = `${page - 1}0`;
       this.replaceProductTable.loading = true;
       // 组合查询条件
