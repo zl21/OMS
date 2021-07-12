@@ -842,7 +842,8 @@
                 colname: ele.NAME, // 当前字段的名称
                 datelimit: 'all',
                 display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-                fkdisplay: 'drp', // 外键关联类型
+                // fkdisplay: 'drp', // 外键关联类型
+                fkdisplay: ele.REF_DISPLAY, // 外键关联类型
                 fkdesc: '商品SPU',
                 inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键

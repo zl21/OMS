@@ -8,9 +8,9 @@
 -->
 <template>
 <!-- 改退回物流 -->
-    <div class="modifyReturnLogistics">
+    <div class="customized-modal">
         <business-form :form-config="formConfig" />
-        <businessButton :btn-config="btnConfig" />
+        <businessButton :btn-config="btnConfig" class="modal-footer" />
     </div>
 </template>
 

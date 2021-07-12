@@ -93,8 +93,8 @@ export default {
   methods: {
     confirm(){
       let self = this;
-      if(!self.formConfig.formData[0].itemdata.pid){
-        $omsUtils.msgTips(self, 'warning', '物流公司不能为空!', 0)
+        if(!self.formConfig.formData[0].itemdata.pid){
+        $omsUtils.msgTips(self, 'warning', '请选择仓库!', 0)
         return;
       }
       let ids = self.componentData.row.map(item=>{
