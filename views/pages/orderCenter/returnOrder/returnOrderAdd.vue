@@ -386,7 +386,7 @@ export default {
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_IN_ID = e.pid;
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_IN_ENAME = e.valuedata;
             },
-            inputBlur: (e) => {
+            InputBlur: (e) => {
               // this.oneObjs(e);
               this.modifyData("CP_C_PHY_WAREHOUSE_IN_ID", "master");
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_IN_ID = e.pid;
@@ -413,7 +413,7 @@ export default {
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = e.pid;
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = e.valuedata;
             },
-            inputBlur: (e) => {
+            InputBlur: (e) => {
               this.modifyData("CP_C_PHY_WAREHOUSE_ID", "master");
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = e.pid;
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = e.valuedata;
@@ -438,7 +438,7 @@ export default {
               this.formConfig.formValue.CP_C_LOGISTICS_ID = e.pid;
               this.formConfig.formValue.CP_C_LOGISTICS_ENAME = e.valuedata;
             },
-            inputBlur: (e) => {
+            InputBlur: (e) => {
               this.modifyData("CP_C_LOGISTICS_ID", "master");
               this.formConfig.formValue.CP_C_LOGISTICS_ID = e.pid;
               this.formConfig.formValue.CP_C_LOGISTICS_ENAME = e.valuedata;
@@ -550,7 +550,7 @@ export default {
               );
               this.modifyData("CP_C_REGION_PROVINCE_ID", "master", 1);
             },
-            inputBlur: (val) => {
+            InputBlur: (val) => {
               this.formConfigEx.formValue.CP_C_REGION_PROVINCE_ID = val.pid;
               this.formConfigEx.formValue.CP_C_REGION_PROVINCE_ENAME = val.valuedata;
               this.formConfigEx = this.emptyData(
@@ -595,7 +595,7 @@ export default {
               );
               this.modifyData("CP_C_REGION_CITY_ID", "master", 1);
             },
-            inputBlur: (val) => {
+            InputBlur: (val) => {
               this.formConfigEx.formValue.CP_C_REGION_CITY_ID = val.pid;
               this.formConfigEx.formValue.CP_C_REGION_CITY_ENAME = val.valuedata;
               this.formConfigEx = this.emptyData(
@@ -633,7 +633,7 @@ export default {
               this.formConfigEx.formValue.CP_C_REGION_AREA_ENAME = val.valuedata;
               this.modifyData("CP_C_REGION_AREA_ID", "master", 1);
             },
-            inputBlur: (val) => {
+            InputBlur: (val) => {
               this.formConfigEx.formValue.CP_C_REGION_AREA_ID = val.pid;
               this.formConfigEx.formValue.CP_C_REGION_AREA_ENAME = val.valuedata;
               this.modifyData("CP_C_REGION_AREA_ID", "master", 1);
