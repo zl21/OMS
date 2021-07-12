@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-09 15:31:28
+ * @LastEditTime: 2021-07-12 10:31:23
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -39,7 +39,7 @@
         this.$Message.warning('换货金额必须要和退货金额一致！');
         return;
       } 
-      if (!returnOrderChangeItem.tui.length) {
+      if (returnOrderChangeItem.tui && !returnOrderChangeItem.tui.length) {
         this.$Message.warning('退货单不能为空！');
         return;
       }
