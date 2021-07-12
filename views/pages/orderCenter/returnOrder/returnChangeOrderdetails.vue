@@ -82,7 +82,7 @@ export default {
       selectLen: 0,
       isMainDelete: false,
       OC_B_RETURN_ORDER: {}, //主表
-      orderStatus:'',
+      orderStatus: '',
       tableHead: {
         tui: [],
         huan: [],
@@ -264,7 +264,7 @@ export default {
         indexColumn: true, // 是否显示序号
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       }, // 弹框 - 添加/替换商品
       btnPermission: {},
@@ -323,10 +323,10 @@ export default {
           }
           this.businessActionTable.columns = this.tableHead.huan;
           this.renderColumn = this.tableHead.huan;
-          if(this.$route.query.RETURN_SOURCE !== "手工新增"){
-             this.renderHandle([[ "QTY_EXCHANGE"]]); //render方法
-          }else{
-             this.renderHandle([["REFUND_ID", "QTY_EXCHANGE"]]); //render方法
+          if (this.$route.query.RETURN_SOURCE !== "手工新增") {
+            this.renderHandle([["QTY_EXCHANGE"]]); //render方法
+          } else {
+            this.renderHandle([["REFUND_ID", "QTY_EXCHANGE"]]); //render方法
           }
           this.businessActionTable.data = this.toMainData.huan;
         } else if (this.$parent.$parent.panelRef === "退货明细") {
@@ -338,10 +338,10 @@ export default {
           BtnConfig[1].isShow = false;
           this.businessActionTable.columns = this.tableHead.tui;
           this.renderColumn = this.tableHead.tui;
-          if(this.$route.query.RETURN_SOURCE !== "手工新增"){
-             this.renderHandle([[ "QTY_EXCHANGE"]]); //render方法
-          }else{
-             this.renderHandle([["REFUND_ID", "QTY_EXCHANGE"]]); //render方法
+          if (this.$route.query.RETURN_SOURCE !== "手工新增") {
+            this.renderHandle([["QTY_EXCHANGE"]]); //render方法
+          } else {
+            this.renderHandle([["REFUND_ID", "QTY_EXCHANGE"]]); //render方法
           }
           this.businessActionTable.data = this.toMainData.tui;
         }
@@ -373,16 +373,16 @@ export default {
       return $OMS2.omsUtils.getPermissions(this, '', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true).then(res => {
         const { ACTIONS, SUB_ACTIONS } = res
         this.businessActionTable.businessButtonConfig.buttons.forEach(item => {
-          if(!SUB_ACTIONS.some(y => y.webname === item.webname)){
-              item.isShow = false
+          if (!SUB_ACTIONS.some(y => y.webname === item.webname)) {
+            item.isShow = false
           } else {
             SUB_ACTIONS.forEach((e) => {
-              if(item.webname === e.webname){
+              if (item.webname === e.webname) {
                 item.isShow = true
               }
             })
           }
-          if(this.$route.params.customizedModuleId === "New"){
+          if (this.$route.params.customizedModuleId === "New") {
             if (this.returnProduct == '0') {
               if (item.webname == 'returnOrderReplaceProduct') {
                 item.isShow = false
@@ -1107,7 +1107,7 @@ export default {
      *    非赠品商品选中后，如果挂靠赠品还有可退数量一并选中
      *    如果整单的非挂靠赠品（系统/平台）还有可退数量也一并选中
      *    如果当前选中的商品为组合/福袋中的下挂明细，则对应的其他下卦明细也一并选中
-     * 2.系统/平台赠品：gift-type、group-mark俩都为空 且giftType != 0
+     * 2.系统/平台赠品：gift-type、group-mark俩都为空
      * 3.PRO_TYPE：0普通，other组合/福袋
      * 4.GIFT_RELATION：挂靠关系
      * 5.GROUP_GOODS_MARK：组合关系
@@ -1120,11 +1120,11 @@ export default {
       const gT = row.GIFT_TYPE; // string
       // if (pT == 0) { // 普通
       // 筛选出gR值相等的一并选中，挂靠赠品
-      gR && this.screen({ GIFT_RELATION: gR });
+      gR && this.screen('gR', { GIFT_RELATION: gR });
       // 筛选出gM值相等的一并选中，下挂组合
-      gM && this.screen({ GROUP_GOODS_MARK: gM });
+      gM && this.screen('gM', { GROUP_GOODS_MARK: gM });
       // 普通品的非卦靠赠品一并选中，其它(系统/平台)赠品
-      this.screen(row);
+      this.screen('other', row);
       // }
       if (this.isMainDelete) return;
       this.selectLen = 0;
@@ -1138,12 +1138,43 @@ export default {
       this.selectLen = [...new Set(this.indexL)].length;
       this.tableConfig.data = allDa; // 渲染checked的样式
     },
-    screen(o = {}) {
+    screen(flag, obj = {}) {
       const allDa = JSON.parse(JSON.stringify(this.tableConfig.data));
-      const obj = o;
-      const objL = Object.entries(obj).flat(2);
+      // const obj = o;
+      // const objL = Object.entries(obj).flat(2);
       allDa.forEach((it, index) => {
-        const aa = it[objL[0]]; // ACTUAL_REFUND_FEE 字段
+        switch (flag) {
+          case 'gR':
+          case 'gM':
+            const key = flag == 'gR' ? 'GIFT_RELATION' : 'GROUP_GOODS_MARK';
+            if (it[key] == obj[key]) {
+              this[flag == 'gR' ? 'haveGift' : 'haveGroup'] += `${it.PS_C_SKU_ECODE},`;
+              if (this.isMainDelete) return;
+              this.indexL.push(index);
+            }
+            break;
+          /* case 'gM':
+            if (it.GROUP_GOODS_MARK == obj.GROUP_GOODS_MARK) {
+              this.haveGroup += `${it.PS_C_SKU_ECODE},`;
+              if (this.isMainDelete) return;
+              this.indexL.push(index);
+            }
+            break; */
+          case 'other':
+            const gR = it.GIFT_RELATION;
+            const gM = it.GROUP_GOODS_MARK;
+            const gT = it.GIFT_TYPE;
+            if (gT != "0" && !gM && !gR) {
+              // 系统/平台赠品（是赠品&不存在挂靠关系&不存在组合关系）
+              if (this.isMainDelete) return;
+              this.indexL.push(index);
+            }
+            break;
+          default:
+            console.error('未考虑到的情况！');
+            break;
+        }
+        /* const aa = it[objL[0]]; // ACTUAL_REFUND_FEE 字段
         if (objL.length && it[objL[0]] == obj[objL[0]]) {
           switch (objL[0]) {
             case "GIFT_RELATION":
@@ -1164,7 +1195,7 @@ export default {
             if (this.isMainDelete) return;
             this.indexL.push(index);
           }
-        }
+        } */
       });
     },
   },

@@ -394,7 +394,7 @@ export default {
             },
           },
           {
-            style: 'popInput',
+            style: '',
             colname: 'CP_C_PHY_WAREHOUSE_ID',
             width: '6',
             itemdata: {
