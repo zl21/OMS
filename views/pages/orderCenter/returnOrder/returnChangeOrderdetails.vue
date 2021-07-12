@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-09 13:41:54
+ * @LastEditTime: 2021-07-12 10:36:08
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-新增-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -148,15 +148,7 @@ export default {
         }, // 按钮配置
         columns: [],
         totalData: [],
-        data: [
-          /* {
-            PS_C_SKU_ECODE:'1010',
-            PS_C_PRO_ECODE: '1111',
-            QTY_REFUND:1,
-            AMT_REFUND_SINGLE:10,
-            REFUND_FEE:10,
-          }, */
-        ], // 数据配置
+        data: [], // 数据配置
         pageShow: false, // 控制分页是否显示
         loading: false,
         height: 280, // 表格高度
