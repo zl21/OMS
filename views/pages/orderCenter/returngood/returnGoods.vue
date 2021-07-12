@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-19 10:53:30
- * @LastEditTime: 2021-07-09 10:38:26
+ * @LastEditTime: 2021-07-12 18:00:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returngood/returnGoods.vue
@@ -39,6 +39,7 @@
             indexColumn: true, // 是否显示序号
             loading: false,
             isShowSelection: true, // 是否显示checkedbox
+            totalData:[{name:'合计'}]
           }
       },
       }
@@ -87,6 +88,10 @@
           console.log(error);
         }
       },
+      // 合计
+      totalNum(){
+
+      }
     }
   }
 </script>

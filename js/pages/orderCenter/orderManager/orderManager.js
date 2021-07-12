@@ -586,7 +586,7 @@
       BurgeonEvent.target = self;
     },
     mounted() {
-      console.clear();
+      console.log('999999999999');
       const self = this;
       self.initList();
       console.log('this');

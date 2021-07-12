@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-08 20:32:29
- * @LastEditTime: 2021-06-16 14:28:50
+ * @LastEditTime: 2021-07-12 20:32:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/page/order.config.js
@@ -18,6 +18,9 @@ export default {
   ORDERMANAGER: {
     component: () => import('allpages/orderCenter/orderManager/orderManager.vue'),
     // component: orderManager,
+  },
+  OC_B_RETURN_ORDER: {
+    component: () => import('allpages/orderCenter/orderManager/orderManager.vue'),
   },
   // 订单中心-列表-拆分订单
   MANUAL_SPLIT: {
