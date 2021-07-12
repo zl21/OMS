@@ -184,6 +184,24 @@ export default {
         loading: false, // 按钮加载
         buttons: [
           {
+            text: '查找', // 查找
+            webname: 'order_query',
+            btnclick: () => {
+              this.loadData();
+            } // 按钮点击事件
+          },
+          {
+            text: '重置', // 重置
+            webname: 'order_reset',
+            btnclick: () => {
+              const _this = this;
+              _this.clearFromListValue = true;
+              _this.queryInfoData = [];
+              _this.labelData = [];
+              _this.getHeaderList();
+            } // 按钮点击事件
+          },
+          {
             text: window.vmI18n.t('btn.manualCreation') // 手工创建
           },
           {
@@ -1190,11 +1208,11 @@ export default {
             icon: 'iconfont iconbj_setup', // 按钮图标
             btnclick: () => {
               const self = this;
-              if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
-                self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
-              } else {
-                self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
-              }
+              // if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
+              //   self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
+              // } else {
+              //   self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
+              // }
               self.isShowSeniorOrOrdinary = true;
               self.publicBouncedConfig = {
                 ...publicDialogConfig.dropSortConfig
@@ -1202,9 +1220,9 @@ export default {
               self.publicBouncedConfig.componentData = {
                 typeName: 'OC_B_ORDER'
               };
-              setTimeout(() => {
-                self.$children.find(item => item.name === 'setFormDrag').openConfirm();
-              }, 100);
+              // setTimeout(() => {
+              //   self.$children.find(item => item.name === 'setFormDrag').openConfirm();
+              // }, 100);
             } // 按钮点击事件
           },
           {
@@ -2399,29 +2417,37 @@ export default {
     shutDownOrbounceOff() {
       const self = this;
       // self.isShowFromLoading = true;
-      if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
+      // if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
         // 打开高级搜索
-        self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
+        // self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
         // self.labelData = [];
         // self.queryInfoData = [];
+        const dom = document.getElementsByClassName('fromHeight')[0];
+        if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
+          self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
+          dom.style.height = '580px';
+        } else {
+          self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
+          dom.style.height = '48px';
+        }
         self.selectValue = []; // 清空高级搜索项
         self.clearFromListValue = true;
         self.isShowSeniorOrOrdinary = !self.isShowSeniorOrOrdinary;
-      } else {
-        // 关闭高级搜索
-        self.clearFromListValue = false;
-        self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
-        self.highSearchData = [];
-        self.isShowSeniorOrOrdinary = !self.isShowSeniorOrOrdinary;
-        setTimeout(() => {
-          comUtils.setTableHeight(this, 30);
-          this.$refs.agGridChild.agGridTable(this.agTableConfig.columnDefs, this.agTableConfig.rowData);
-        }, 500);
-        // 设置普通搜索默认选项
-        self.setSearchOption();
-      }
+      // } else {
+      //   // 关闭高级搜索
+      //   self.clearFromListValue = false;
+      //   self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
+      //   self.highSearchData = [];
+      //   self.isShowSeniorOrOrdinary = !self.isShowSeniorOrOrdinary;
+      //   setTimeout(() => {
+      //     comUtils.setTableHeight(this, 30);
+      //     this.$refs.agGridChild.agGridTable(this.agTableConfig.columnDefs, this.agTableConfig.rowData);
+      //   }, 500);
+      //   // 设置普通搜索默认选项
+      //   self.setSearchOption();
+      // }
       // self.isShowFromLoading = false;
-      self.getHeaderList();
+      // self.getHeaderList();
       // self.getData();
     },
     // 设置普通搜索默认选项
@@ -2563,46 +2589,46 @@ export default {
       // 取的标签值
       let label = [];
       const queryInfo = [];
-      if (this.isShowSeniorOrOrdinary) {
+      // if (this.isShowSeniorOrOrdinary) {
         // 只有高级搜索时queryInfo条件才有效
-        this.selectValue.forEach((item, index) => {
-          if (item.column === 'tag') {
-            label = item.selectedList;
-          } else if (item.type === 'DatePicker') {
-            queryInfo[index] = {
-              type: 'date',
-              displayName: item.label,
-              queryName: item.column,
-              list: item.list,
-              value: item.value
-            };
-          } else if (item.type === 'Select') {
-            queryInfo[index] = {
-              type: item.type,
-              displayName: item.label,
-              queryName: item.column,
-              value: item.value,
-              list: item.selectedList
-            };
-          } else if (item.type === 'DropDownSelectFilter') {
-            queryInfo[index] = {
-              type: item.type,
-              displayName: item.label,
-              queryName: item.column,
-              value: item.value,
-              list: item.selectedList
-            };
-          } else {
-            queryInfo[index] = {
-              type: item.type,
-              displayName: item.label,
-              queryName: item.column,
-              value: item.value.replace(/(^\s*)|(\s*$)/g, ''),
-              list: item.list
-            };
-          }
-        });
-      }
+        // this.selectValue.forEach((item, index) => {
+        //   if (item.column === 'tag') {
+        //     label = item.selectedList;
+        //   } else if (item.type === 'DatePicker') {
+        //     queryInfo[index] = {
+        //       type: 'date',
+        //       displayName: item.label,
+        //       queryName: item.column,
+        //       list: item.list,
+        //       value: item.value
+        //     };
+        //   } else if (item.type === 'Select') {
+        //     queryInfo[index] = {
+        //       type: item.type,
+        //       displayName: item.label,
+        //       queryName: item.column,
+        //       value: item.value,
+        //       list: item.selectedList
+        //     };
+        //   } else if (item.type === 'DropDownSelectFilter') {
+        //     queryInfo[index] = {
+        //       type: item.type,
+        //       displayName: item.label,
+        //       queryName: item.column,
+        //       value: item.value,
+        //       list: item.selectedList
+        //     };
+        //   } else {
+        //     queryInfo[index] = {
+        //       type: item.type,
+        //       displayName: item.label,
+        //       queryName: item.column,
+        //       value: item.value.replace(/(^\s*)|(\s*$)/g, ''),
+        //       list: item.list
+        //     };
+        //   }
+        // });
+      // }
       const labelData = [];
       label.forEach((item, index) => {
         labelData[index] = {

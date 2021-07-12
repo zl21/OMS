@@ -9,14 +9,15 @@
         @dropDownClick="dropDownClickChange"
       />
     </div>
-    <div class="from totalHeight">
+    <div class="from totalHeight fromHeight">
       <div
         v-show="isShowFromLoading"
         class="from_loading"
       >
         <!-- <loading :loading="agTableConfig.agLoading" /> -->
       </div>
-      <IntegrateSearchFilter
+      <!-- 去掉高级查询 20210712 森马-小靓 -->
+      <!-- <IntegrateSearchFilter
         v-show="isShowSeniorOrOrdinary"
         id="IntegrateSearchFilter"
         ref="integrateSearchFilter"
@@ -29,15 +30,13 @@
         @on-clear-item="clearItem"
         @on-search="search"
         @on-drop-change="onDropChange"
-      />
+      /> -->
       <!-- trigger="click" -->
       <businessForm
-        v-show="!isShowSeniorOrOrdinary"
         :form-config="formConfig"
         style="margin-top: 10px"
       />
       <businessButton
-        v-show="!isShowSeniorOrOrdinary"
         :btn-config="btnsSearch"
       />
       <div
