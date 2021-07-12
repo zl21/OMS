@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-12 16:01:51
+ * @LastEditTime: 2021-07-12 16:41:57
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -136,7 +136,7 @@ export default {
                   this.$Message.warning("原平台单号不能为空！");
                   return;
                 }
-                this.getPlaceData();
+                this.getPlaceData(0,0);
                 this.replaceProductTable.modal = true;
               }, // 按钮点击事件
             },
@@ -1033,9 +1033,7 @@ export default {
       }
       let params = {
         ID: self.$route.params.itemId ? self.$route.params.itemId : -1, //明细id
-        SOURCE_CODE: self.$route.query.SOURCE_CODE
-          ? self.$route.query.SOURCE_CODE
-          : self.mainData.SOURCE_CODE, //原平台单号
+        SOURCE_CODE: self.$route.query.SOURCE_CODE ? self.$route.query.SOURCE_CODE : self.mainData.SOURCE_CODE, //原平台单号
         PS_C_SKU_ECODE: selectData.ECODE, // sku
         OC_B_RETURN_ORDER_REFUND_ITEMS: self.toMainData.huan, // 换货单明细
       };
@@ -1045,7 +1043,6 @@ export default {
         params
       );
       self.replaceProductTable.selectData = {}
-      console.log(self.replaceProductTable.selectData);
       // 获取商品明细
       if (data.OC_B_RETURN_ORDER_EXCHANGE_ITEMS === null) {
         return;
