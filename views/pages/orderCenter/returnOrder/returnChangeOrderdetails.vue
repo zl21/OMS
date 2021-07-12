@@ -485,6 +485,10 @@ export default {
     async getPlaceData(page = 0, pageSize = 10) {
       let self = this;
       self.replaceProductTable.selectData = [];
+      if (!self.replaceProductTable.selectData.length) {
+        self.$Message.warning('请选择一条明细！')
+        return
+      }
       if (page >= 1) page = `${page - 1}0`;
       this.replaceProductTable.loading = true;
       // 组合查询条件
