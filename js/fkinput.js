@@ -4,6 +4,7 @@
 // 兼容fktable1.4数据格式（云雀1.0）
 import SelectDialog from 'framework/components/dialog/selectDialog.vue';
 import FkTable from '../fktable.vue';
+import { debounce } from 'lodash'
 // import $ from '@/assets/js/jquery3.5.1.min.js';
 /* import Vue from 'vue' */
 
@@ -385,27 +386,28 @@ export default {
       }
       self.autocompleteBlur(itemdata);
     },
-    autocompleteBlur(itemdata) {
-     setTimeout(()=>{
-      const self = this;
-      if (!this.isHandleSelect && !this.autocomplete) {
-        if (this.queryList.length > 0) {
-          // 模糊匹配成功（匹配到了值）
-          itemdata.pid = this.queryList[0].id;
-          itemdata.valuedata = this.queryList[0].value;
-          this.$emit('inputBlur', this.queryList[0]);
-          this.$emit('getFkChooseItem', self.itemdata) // 失焦不走obj还是不行，走了也会有问题，先酱紫吧
-          $(`.item-filter .fkAutocomplete${itemdata.colname}`).css(
-            'display',
-            'none'
-          );
-          self.autocomplete = true;
-          self.isHandleSelect = false;
-        } 
-      }
-      this.$refs['autocomplete' + itemdata.colname].suggestions = [];
-     },300)
-    },
+
+    autocompleteBlur: debounce(function(itemdata) {
+      setTimeout(()=>{
+       const self = this;
+       if (!self.isHandleSelect && !self.autocomplete) {
+         if (self.queryList.length > 0) {
+           // 模糊匹配成功（匹配到了值）
+           itemdata.pid = self.queryList[0].id;
+           itemdata.valuedata = self.queryList[0].value;
+           self.$emit('inputBlur', self.queryList[0]);
+           self.$emit('getFkChooseItem', self.itemdata) // 失焦不走obj还是不行，走了也会有问题，先酱紫吧
+           $(`.item-filter .fkAutocomplete${itemdata.colname}`).css(
+             'display',
+             'none'
+           );
+           self.autocomplete = true;
+           self.isHandleSelect = false;
+         } 
+       }
+       self.$refs['autocomplete' + itemdata.colname].suggestions = [];
+      },300)
+    }, 2000),
 
     inputKeyUp(str, event) {
       // 判断是否enter键，如果是，不清空模糊查询列表
