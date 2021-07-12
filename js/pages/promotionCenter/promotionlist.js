@@ -199,6 +199,12 @@ export default {
         tableHeight: '480px',
         columnDefs: baseColumnDefs,
         rowData: [],
+        pagenation: {
+          total: 0,
+          current: 1,
+          pageSize: 20,
+          pageSizeOpts: [20,50,100,200,500,2000],
+        },
         renderArr: {
           ACTION_LOG: params => {
             if (!params.data.ACTION_LOG) return;
@@ -214,7 +220,6 @@ export default {
             resultElement.appendChild(iTag);
           }
         },
-        pagenation: this.$comUtils.pageConfig,
         renderParams:(cellData)=> {
           if (cellData.field == 'ACTION_LOG') {
             return {
@@ -491,7 +496,7 @@ export default {
   watch: {
     activeName(x) {
       this.agTableConfig.pagenation.current = 1;
-      this.agTableConfig.pagenation.pageSize = 10;
+      this.agTableConfig.pagenation.pageSize = 20;
       this.getData(x);
     }
   },
