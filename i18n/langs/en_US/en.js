@@ -567,7 +567,7 @@ export default {
     purchase_ranking: '购买排名',
     purchaseQuantity: '购买数量', //购买数量
     qualityGoods: '正品', //正品
-    queryTime: '查询时间',
+    queryTime: '下单时间',
     reasonRefund: '退款原因', //退款原因
     receiptAddress: '收票地址',
     receivedBarcode: '实收条码', //实收条码
