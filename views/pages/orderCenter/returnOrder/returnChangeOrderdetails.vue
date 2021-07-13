@@ -61,8 +61,8 @@ import businessButton from 'professionalComponents/businessButton';
 
 import {
   addDetailModalTableColumns,
-  tuiColumns,
-  huanColumns,
+  // tuiColumns,
+  // huanColumns,
 } from "./returnConfig.js";
 import Util from "@/assets/js/public/publicMethods";
 
@@ -196,8 +196,8 @@ export default {
         pageShow: false, // 控制分页是否显示
         loading: false,
         height: 280, // 表格高度
-        // indexColumn: true, // 是否显示序号
-        // isShowSelection: true, // 是否显示checkedbox
+        indexColumn: true, // 是否显示序号
+        isShowSelection: true, // 是否显示checkedbox
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
         pageSizeOpts: [15, 30, 45, 60], // 每页条数切换的配置
@@ -438,9 +438,27 @@ export default {
     // 编辑获取按钮权限
     // 获取表头（新增）
     async getColumns() {
-      this.tableConfig.columns = tuiColumns;
-      this.replaceProductTable.columns = huanColumns;
-      this.renderColumn = this.returnProduct == "0" ? tuiColumns : huanColumns;
+      const {
+        data: {
+          code,
+          data,
+          data: {
+            REFUND_ITEM_TABTH, // 退-明细表头
+            EXCHANGE_ITEM_TABTH, // 换-明细表头
+            OC_B_RETURN_ORDER, // 主表
+          },
+          message,
+        },
+      } = await this.service.orderCenter.getALlOrderReturnAndItemInfo({
+        ID: '-1',
+      });
+      if (code == 0) {
+        const tuiColumns = REFUND_ITEM_TABTH;
+        const huanColumns = EXCHANGE_ITEM_TABTH;
+        this.tableConfig.columns = tuiColumns;
+        this.replaceProductTable.columns = huanColumns;
+        this.renderColumn = this.returnProduct == "0" ? tuiColumns : huanColumns;
+      }
     },
     // 获取详情数据
     async getReplaceData(objid) {
@@ -752,7 +770,7 @@ export default {
       });
       // 赋值
       this.actionTableCon.columns = this.renderColumn;
-      setTimeout(() => {
+      /* setTimeout(() => {
         if (this.actionTableCon.columns[0].key !== "selection") {
           this.actionTableCon.columns.unshift(
             {
@@ -769,7 +787,7 @@ export default {
             }
           );
         }
-      }, 500);
+      }, 500); */
     },
     // 生成'合计'行
     totalNum() {

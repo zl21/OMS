@@ -408,8 +408,6 @@ export default {
             REFUND_ITEM_TABTH, //退单表头
             EXCHANGE_ITEM_TABTH, // 换表头
             OC_B_RETURN_ORDER, //主表
-            OC_B_RETURN_ORDER_REFUND_ITEMS, // 数据-退
-            OC_B_RETURN_ORDER_EXCHANGE_ITEMS, // 数据-换
           },
           message,
         },
