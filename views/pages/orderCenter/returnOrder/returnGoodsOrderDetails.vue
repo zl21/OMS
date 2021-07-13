@@ -914,7 +914,7 @@ export default {
       this.$Modal.info({
         title,
         content: msg,
-        width: 450,
+        width: 460,
         mask: true,
         showCancel: true,
         okText: $i18n.t("common.determine"), // 确定

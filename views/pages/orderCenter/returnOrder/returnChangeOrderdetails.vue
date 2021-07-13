@@ -10,7 +10,7 @@
   <div v-loading="loading">
     <!-- 退货明细 -->
     <business-action-table
-      :jordan-table-config="businessActionTable"
+      :jordan-table-config="actionTableCon"
       @on-select="returnOnSelect"
       @on-select-cancel="returnCancel"
       @on-select-all="returnSelectAll"
@@ -137,7 +137,7 @@ export default {
         tui: [],
         huan: [],
       }, // 传给主表的数据(用于保存)(监听时机:删除明细/新增确认)
-      businessActionTable: {
+      actionTableCon: {
         businessFormConfig: {}, // 表单配置
         businessButtonConfig: {
           typeAll: "default", // 按钮统一风格样式
@@ -175,7 +175,7 @@ export default {
                   this.$Message.warning("原平台单号不能为空！");
                   return;
                 }
-                this.getPlaceData();
+                this.getPlaceData(0,0);
               }, // 按钮点击事件
             },
             {
@@ -231,7 +231,7 @@ export default {
               isShow: true,
               btnclick: (e) => {
                 console.log("搜索");
-                this.getPlaceData(0, this.replaceProductTable.pageSize);
+                this.getPlaceData(1, this.replaceProductTable.pageSize);
               }, // 按钮点击事件
             },
           ],
@@ -255,7 +255,7 @@ export default {
                 this.fuzzyquerybyak(search, 171332)
               },
               dimEnter: (val) => {
-                this.getPlaceData(0, this.replaceProductTable.pageSize);
+                this.getPlaceData(1, this.replaceProductTable.pageSize);
               },
               dimSelect: (obj) => { },
               dimblur: () => { },
@@ -269,7 +269,7 @@ export default {
               AuotData: [], //匹配的选项
               dimChange: (search) => { },
               dimEnter: (val) => {
-                this.getPlaceData(0, this.replaceProductTable.pageSize);
+                this.getPlaceData(1, this.replaceProductTable.pageSize);
               },
               dimSelect: (obj) => { },
               dimblur: () => { },
@@ -285,13 +285,14 @@ export default {
                 this.fuzzyquerybyak(search, 165990)
               },
               dimEnter: (val) => {
-                this.getPlaceData(0, this.replaceProductTable.pageSize);
+                this.getPlaceData(1, this.replaceProductTable.pageSize);
               },
               dimSelect: (obj) => { },
               dimblur: () => { },
             },
           ],
         }, // 表单配置
+        height: 450, // 表格高度
         columns: [], // 表头
         data: [], // 数据配置
         selectData: [],
@@ -317,20 +318,20 @@ export default {
           // tableName = 'OC_B_RETURN_ORDER_REFUND_ITEM';
           renderKeys = ["REFUND_ID", "QTY_REFUND"];
           // this.getBtn();
-          this.businessActionTable.businessButtonConfig.buttons[1].isShow = false;
-          this.businessActionTable.businessButtonConfig.buttons[0].isShow = true;
-          this.businessActionTable.businessButtonConfig.buttons[2].isShow = true;
-          this.businessActionTable.data = this.toMainData.tui;
+          this.actionTableCon.businessButtonConfig.buttons[1].isShow = false;
+          this.actionTableCon.businessButtonConfig.buttons[0].isShow = true;
+          this.actionTableCon.businessButtonConfig.buttons[2].isShow = true;
+          this.actionTableCon.data = this.toMainData.tui;
         } else if (newData === "1") {
           console.log("换货单");
           // tableName = 'OC_B_RETURN_ORDER_EXCHANGE';
           renderKeys = ["QTY_EXCHANGE", "PRICE_ACTUAL"];
           // this.getBtn();
-          this.businessActionTable.businessButtonConfig.buttons[0].isShow = false;
-          this.businessActionTable.businessButtonConfig.buttons[1].isShow = true;
-          this.businessActionTable.businessButtonConfig.buttons[1].text = "新增明细";
-          this.businessActionTable.businessButtonConfig.buttons[2].isShow = true;
-          this.businessActionTable.data = this.toMainData.huan;
+          this.actionTableCon.businessButtonConfig.buttons[0].isShow = false;
+          this.actionTableCon.businessButtonConfig.buttons[1].isShow = true;
+          this.actionTableCon.businessButtonConfig.buttons[1].text = "新增明细";
+          this.actionTableCon.businessButtonConfig.buttons[2].isShow = true;
+          this.actionTableCon.data = this.toMainData.huan;
         }
         if (this.$route.params.customizedModuleId === "New") {
           await this.getColumns();
@@ -349,7 +350,7 @@ export default {
     //编辑页面 换货/退货逻辑
     if (this.$route.params.customizedModuleId !== "New") {
       this.getBtn().then((res) => {
-        let BtnConfig = this.businessActionTable.businessButtonConfig.buttons;
+        let BtnConfig = this.actionTableCon.businessButtonConfig.buttons;
         if (this.$parent.$parent.panelRef === "换货明细") {
           BtnConfig[0].isShow = false;
           BtnConfig[1].isShow = true;
@@ -357,14 +358,14 @@ export default {
           if (this.$route.query.RETURN_SOURCE == "平台") {
             BtnConfig[1].isShow = false;
           }
-          this.businessActionTable.columns = this.tableHead.huan;
+          this.actionTableCon.columns = this.tableHead.huan;
           this.renderColumn = this.tableHead.huan;
           if (this.$route.query.RETURN_SOURCE !== "手工新增") {
             this.renderHandle([["QTY_EXCHANGE"]]); //render方法
           } else {
             this.renderHandle([["REFUND_ID", "QTY_EXCHANGE"]]); //render方法
           }
-          this.businessActionTable.data = this.toMainData.huan;
+          this.actionTableCon.data = this.toMainData.huan;
         } else if (this.$parent.$parent.panelRef === "退货明细") {
           if (this.$route.query.RETURN_SOURCE == "平台") {
             BtnConfig[0].isShow = false;
@@ -372,14 +373,14 @@ export default {
             BtnConfig[2].isShow = false;
           }
           BtnConfig[1].isShow = false;
-          this.businessActionTable.columns = this.tableHead.tui;
+          this.actionTableCon.columns = this.tableHead.tui;
           this.renderColumn = this.tableHead.tui;
           if (this.$route.query.RETURN_SOURCE !== "手工新增") {
             this.renderHandle([["QTY_EXCHANGE"]]); //render方法
           } else {
             this.renderHandle([["REFUND_ID", "QTY_EXCHANGE"]]); //render方法
           }
-          this.businessActionTable.data = this.toMainData.tui;
+          this.actionTableCon.data = this.toMainData.tui;
         }
         // 判断如果单据状态为带退货完成/完成/取消 不可编辑
         if (['1', "2", "3"].includes(String(this.orderStatus))) {
@@ -408,7 +409,7 @@ export default {
     async getBtn() {
       return $OMS2.omsUtils.getPermissions(this, '', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true).then(res => {
         const { ACTIONS, SUB_ACTIONS } = res
-        this.businessActionTable.businessButtonConfig.buttons.forEach(item => {
+        this.actionTableCon.businessButtonConfig.buttons.forEach(item => {
           if (!SUB_ACTIONS.some(y => y.webname === item.webname)) {
             item.isShow = false
           } else {
@@ -431,7 +432,7 @@ export default {
             }
           }
         })
-        return this.businessActionTable.businessButtonConfig.buttons
+        return this.actionTableCon.businessButtonConfig.buttons
       });
     },
     // 编辑获取按钮权限
@@ -462,7 +463,7 @@ export default {
       });
       // 获取状态
       this.orderStatus = OC_B_RETURN_ORDER.RETURN_STATUS;
-      this.businessActionTable.columns =
+      this.actionTableCon.columns =
         this.$parent.$parent.panelRef === "退货明细"
           ? REFUND_ITEM_TABTH
           : EXCHANGE_ITEM_TABTH; //表头
@@ -508,7 +509,7 @@ export default {
           renderArr = [];
         }
         this.renderHandle(renderArr);
-        this.businessActionTable.data =
+        this.actionTableCon.data =
           this.$parent.$parent.panelRef === "退货明细"
             ? OC_B_RETURN_ORDER_REFUND_ITEMS
             : OC_B_RETURN_ORDER_EXCHANGE_ITEMS; // 数据
@@ -529,7 +530,7 @@ export default {
     async getPlaceData(page = 0, pageSize = 10) {
       let self = this;
       self.replaceProductTable.selectData = [];
-      if (page >= 1) page = `${page - 1}0`;
+      if (page >= 1) page = `${(page - 1) * pageSize}`;
       this.replaceProductTable.loading = true;
       // 组合查询条件
       let { PS_C_PRO_ECODE, ECODE, ENAME } =
@@ -563,7 +564,7 @@ export default {
         // 处理数据
         let tableKey = data.row.length ? Object.keys(data.row[0]) : []; // 获取行数据的key
         this.getCurrenData = data.row.length ? data.row : [];
-        this.replaceProductTable.total = data.totalRowCount;
+        this.replaceProductTable.total = page === 0 ? 0 : data.totalRowCount;
         this.replaceProductTable.data = [];
         data.row.forEach((item) => {
           //处理数据
@@ -643,7 +644,7 @@ export default {
                       JSON.parse(JSON.stringify(this.toMainData))
                     );
                   }
-                  this.businessActionTable.data[params.index] = params.row;
+                  this.actionTableCon.data[params.index] = params.row;
                 }, 300);
               },
             },
@@ -676,7 +677,7 @@ export default {
                   Number(e) * Number(params.row.AMT_REFUND_SINGLE),
                   2
                 );
-                this.businessActionTable.data[params.index] = params.row;
+                this.actionTableCon.data[params.index] = params.row;
                 this.totalNum();
               },
             },
@@ -727,7 +728,7 @@ export default {
                   Number(e) * Number(params.row.QTY_EXCHANGE),
                   2
                 );
-                this.businessActionTable.data[params.index] = params.row;
+                this.actionTableCon.data[params.index] = params.row;
                 if (this.$route.params.customizedModuleId !== "New") {
                   this.toMainData[
                     this.$parent.$parent.panelRef === "退货明细"
@@ -750,10 +751,10 @@ export default {
         arr.includes(k.key) && (this.renderColumn[i].render = obj[k.key]);
       });
       // 赋值
-      this.businessActionTable.columns = this.renderColumn;
+      this.actionTableCon.columns = this.renderColumn;
       setTimeout(() => {
-        if (this.businessActionTable.columns[0].key !== "selection") {
-          this.businessActionTable.columns.unshift(
+        if (this.actionTableCon.columns[0].key !== "selection") {
+          this.actionTableCon.columns.unshift(
             {
               key: "selection",
               type: "selection",
@@ -790,9 +791,9 @@ export default {
           this.$parent.$parent.panelRef === "退货明细"
           ? "PRO_ACTUAL_AMT"
           : "EX_ACTUAL_AMT"; // 商品应退金额 : 换货金额
-      self.businessActionTable.totalData = [];
-      if (!self.businessActionTable.data) return;
-      self.businessActionTable.data.forEach((item) => {
+      self.actionTableCon.totalData = [];
+      if (!self.actionTableCon.data) return;
+      self.actionTableCon.data.forEach((item) => {
         qty += Number(item[key1] || 0);
         amt = Util.accAdd(Number(item[key2]), Number(amt));
       });
@@ -801,20 +802,20 @@ export default {
           this.returnProduct == "0" ||
           this.$parent.$parent.panelRef === "退货明细"
         ) {
-          self.businessActionTable.totalData.push({
+          self.actionTableCon.totalData.push({
             selection: `${$i18n.t("other.total")}:`, // 合计
             REFUND_FEE: this.$OMS2.omsUtils.floatNumber(amt, 2),
             QTY_REFUND: qty,
           });
         } else {
-          self.businessActionTable.totalData.push({
+          self.actionTableCon.totalData.push({
             selection: `${$i18n.t("other.total")}:`,
             AMT_EXCHANGE: this.$OMS2.omsUtils.floatNumber(amt, 2),
             QTY_EXCHANGE: qty,
           });
         }
         // 计算'商品应退金额'
-        this.toMainData[key3] = self.businessActionTable.totalData[0][key2];
+        this.toMainData[key3] = self.actionTableCon.totalData[0][key2];
         this.$emit("subTableData", this.toMainData);
         let returnAmount = R3.store.state.customize.returnAmount;
         let FINAL_ACTUAL_AMT;
@@ -853,7 +854,7 @@ export default {
     insertOrderDetail(dataArr = []) {
       const self = this;
       const data = dataArr;
-      const allDa = self.businessActionTable.data;
+      const allDa = self.actionTableCon.data;
       const pryKey =
         this.returnProduct == "0" ? "REFUND_ITEM_UNIQUE_KEY" : "PS_C_SKU_ECODE";
       let pryKeyArr = [];
@@ -865,7 +866,7 @@ export default {
             2
           );
         });
-        self.businessActionTable.data = data;
+        self.actionTableCon.data = data;
         self.totalNum();
         return;
       }
@@ -894,14 +895,14 @@ export default {
             }
           } else if (it[pryKey] && !pryKeyArr.includes(it[pryKey])) {
             // 2.不存在该条明细（则直接push）
-            self.businessActionTable.data.push(it);
+            self.actionTableCon.data.push(it);
           } else {
             console.log("other!");
           }
         });
       });
       self.totalNum();
-      self.toMainData.tui = self.businessActionTable.data;
+      self.toMainData.tui = self.actionTableCon.data;
     },
     /* -------------------- 退/换货明细 - 列表表格事件 -------------------- */
     // 退货明细 - 列表勾选
@@ -925,7 +926,7 @@ export default {
       /* 可能要判断是哪个明细的 */
       const self = this;
       self.isMainDelete = true;
-      const allDa = self.businessActionTable.data;
+      const allDa = self.actionTableCon.data;
       const selDa = self.detailsArrData;
       if (!selDa.length) {
         this.$OMS2.omsUtils.msgTips(self, "warning", "a8");
@@ -933,14 +934,14 @@ export default {
       }
       if (selDa.length == allDa.length) { // 全选删
         self.detailsArrData = [];
-        this.businessActionTable.data = [];
+        this.actionTableCon.data = [];
         if (this.$route.params.customizedModuleId === "New") {
           this.toMainData[this.returnProduct == "0" ? "tui" : "huan"] =
-            this.businessActionTable.data;
+            this.actionTableCon.data;
         } else {
           this.toMainData[
             this.$parent.$parent.panelRef === "退货明细" ? "tui" : "huan"
-          ] = this.businessActionTable.data;
+          ] = this.actionTableCon.data;
         }
         this.$emit("subTableData", this.toMainData);
         R3.store.commit(
@@ -997,7 +998,7 @@ export default {
         onOk: () => {
           this.$nextTick(() => {
             // 取差集展示：
-            self.businessActionTable.data = this.$OMS2.omsUtils.getDifferentArr(
+            self.actionTableCon.data = this.$OMS2.omsUtils.getDifferentArr(
               allDa,
               selDa,
               key
@@ -1006,11 +1007,11 @@ export default {
             self.detailsArrData = [];
             if (this.$route.params.customizedModuleId === "New") {
               this.toMainData[this.returnProduct == "0" ? "tui" : "huan"] =
-                this.businessActionTable.data;
+                this.actionTableCon.data;
             } else {
               this.toMainData[
                 this.$parent.$parent.panelRef === "退货明细" ? "tui" : "huan"
-              ] = this.businessActionTable.data;
+              ] = this.actionTableCon.data;
             }
             this.$emit("subTableData", this.toMainData);
             R3.store.commit(
@@ -1103,12 +1104,12 @@ export default {
     },
     pageSizeChange(size) {
       this.replaceProductTable.pageSize = size;
-      this.getPlaceData(0, size);
+      this.getPlaceData(1, size);
     },
     // 加/替换明细 - 确定
     async replaceOk() {
       let self = this;
-      let tableData = self.businessActionTable.data;
+      let tableData = self.actionTableCon.data;
       let selectData = self.replaceProductTable.selectData; //新的对象换货明细
       if (!Object.keys(selectData).length) {
         self.$Message.warning('请选中一条明细！')
