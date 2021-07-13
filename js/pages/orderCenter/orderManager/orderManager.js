@@ -586,10 +586,8 @@
       BurgeonEvent.target = self;
     },
     mounted() {
-      console.log('999999999999');
       const self = this;
       self.initList();
-      console.log('this');
     },
     methods: {
       gridReady() {

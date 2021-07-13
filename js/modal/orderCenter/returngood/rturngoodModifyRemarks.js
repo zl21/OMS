@@ -43,8 +43,8 @@ export default {
       },
       ruleValidate: {
         value: [
-          { required: true, message: '备注内容不能为空！', trigger: 'blur' },
-          { type: 'string', min: 1, message: '备注内容不能为空！', trigger: 'blur' }
+          { required: true, message: ' ', trigger: 'blur' },
+          { type: 'string', min: 1, message: '', trigger: 'blur' }
         ],
       }
     };
@@ -63,6 +63,10 @@ export default {
       const self = this;
       if (this.bouncedData.value.length > 200) {
         self.$Message.error("最大只能输入200个字符！");
+        return
+      }
+      if(!this.bouncedData.value.length){
+        self.$Message.error("备注内容不能为空！");
         return
       }
 
