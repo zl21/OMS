@@ -231,7 +231,7 @@ export default { // 弹窗提示、警告
 	ga: 'Please select a record to notify WMS! ',
 	gb: 'Verify that the WMS? is repassed ',
 	gc: 'Only out of stock or pending orders are allowed to be replaced!',
-	gd: '',
+	gd: 'Only when the status is to be approved and out of stock can you add gifts!',
 	ge: '',
 	gf: '',
 	gg: '',
