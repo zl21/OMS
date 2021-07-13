@@ -164,7 +164,7 @@ export default {
           {
             text: window.vmI18n.t('btn.search'), // 按钮文本
             btnclick: () => {
-              this.loadData();
+              this.getData();
             } // 按钮点击事件
           },
           {
@@ -187,7 +187,7 @@ export default {
             text: '查找', // 查找
             webname: 'order_query',
             btnclick: () => {
-              this.loadData();
+              this.getData();
             } // 按钮点击事件
           },
           {
@@ -198,7 +198,32 @@ export default {
               _this.clearFromListValue = true;
               _this.queryInfoData = [];
               _this.labelData = [];
-              _this.getHeaderList();
+              _this.formConfig.formValue = {
+                ID: '',
+                SOURCE_CODE: '',
+                EXPRESSCODE: '',
+                RECEIVER_NAME: '',
+                RECEIVER_MOBILE: '',
+                BUYER_MESSAGE: '',
+                PS_C_SKU_ECODE: '',
+                SELLER_MEMO: '',
+                QTY_ALL: {
+                  value1: '',
+                  value2: ''
+                },
+                BILL_NO: '',
+                USER_NICK: '',
+                ORDER_AMT: {
+                  value1: '',
+                  value2: ''
+                },
+                PS_C_PRO_ECODE: '', // 商品款号
+                IS_EXCHANGE_NO_IN: ['0'],
+                PAY_TIME: [_this.getCurrentTime1()[0],_this.getCurrentTime1()[1]],
+                RECEIVER_ADDRESS: '', // 收货地址
+                SYSREMARK: '', // 系统备注
+              };
+              this.getData();
             } // 按钮点击事件
           },
           {
@@ -2013,6 +2038,7 @@ export default {
         },
         PS_C_PRO_ECODE: '', // 商品款号
         IS_EXCHANGE_NO_IN: ['0'],
+        PAY_TIME: [_this.getCurrentTime1()[0],_this.getCurrentTime1()[1]],
         RECEIVER_ADDRESS: '', // 收货地址
         SYSREMARK: '', // 系统备注
       };
@@ -2043,12 +2069,13 @@ export default {
                 placeholder: '', // 占位文本，默认为请输入
                 ghost: false, // 是否关闭幽灵按钮，默认开启
                 inputenter: () => {
-                  _this.loadData();
+                  _this.getData();
                 }, // 表单回车事件
                 iconclick: () => {}, // 点击icon图标事件
                 clearable: true
               };
               _this.formConfig.formValue[item.tabth.colname] = [];
+              if (item.tabth.colname === 'PAY_TIME') _this.formConfig.formValue[item.tabth.colname] = [_this.getCurrentTime1()[0],_this.getCurrentTime1()[1]];
             }
             if (item.type === 'propInput') {
               formData[index] = {
@@ -2092,7 +2119,7 @@ export default {
                 placeholder: '', // 占位文本，默认为请输入
                 ghost: false, // 是否关闭幽灵按钮，默认开启
                 inputenter: () => {
-                  _this.loadData();
+                  _this.getData();
                 }, // 表单回车事件
                 iconclick: () => {} // 点击icon图标事件
               };
@@ -2111,7 +2138,7 @@ export default {
                 placeholder: '', // 占位文本，默认为请输入
                 ghost: false, // 是否关闭幽灵按钮，默认开启
                 inputenter: () => {
-                  _this.loadData();
+                  _this.getData();
                 }, // 表单回车事件
                 iconclick: () => {} // 点击icon图标事件
               };
@@ -2425,7 +2452,7 @@ export default {
         const dom = document.getElementsByClassName('fromHeight')[0];
         if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
           self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
-          dom.style.height = '580px';
+          dom.style.height = '100%';
         } else {
           self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
           dom.style.height = '48px';
@@ -2485,6 +2512,14 @@ export default {
       const SevenDaysTimestamp = Date.parse(new Date()) - 7 * 24 * 3600 * 1000;
       const defaultTimeArr = [];
       defaultTimeArr[0] = `${self.dateLong2String(SevenDaysTimestamp)} 00:00:00`;
+      defaultTimeArr[1] = `${self.dateLong2String(timestamp)} 23:59:59`;
+      return defaultTimeArr;
+    },
+    getCurrentTime1() {
+      const self = this;
+      const timestamp = Date.parse(new Date());
+      const defaultTimeArr = [];
+      defaultTimeArr[0] = `${self.dateLong2String(timestamp)} 00:00:00`;
       defaultTimeArr[1] = `${self.dateLong2String(timestamp)} 23:59:59`;
       return defaultTimeArr;
     },
@@ -2705,7 +2740,9 @@ export default {
         }
       }
     },
-    loadData() {
+    //  获取页面数据
+    getData() {
+      const self = this;
       const arr = [];
       this.formConfig.formData.forEach((item, index) => {
         if (item.style === 'popInput') {
@@ -2753,12 +2790,6 @@ export default {
       const highSearchData = [...this.notempty(arr), ...keyArr];
       this.highSearchData = this.notempty(highSearchData);
       this.agTableConfig.pagenation.current = 1;
-      this.getData();
-    },
-
-    //  获取页面数据
-    async getData() {
-      const self = this;
       self.selection = [];
       self.agTableConfig.agLoading = true;
       self.isActive = true;
@@ -2781,8 +2812,8 @@ export default {
           pageSize: self.agTableConfig.pagenation.pageSize,
           pageNum: self.agTableConfig.pagenation.current
         },
-        label: self.labelData, // 标签
-        queryInfo: self.queryInfoData, // 普通搜索
+        // label: self.labelData, // 标签
+        // queryInfo: self.queryInfoData, // 普通搜索
         status: self.statusData,
         highSearch: self.highSearchData,
         sort: self.sort
@@ -2797,6 +2828,7 @@ export default {
       }
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
+
       self.service.orderCenter
         .getOrderList(fromdata)
         .then(res => {
