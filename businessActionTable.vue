@@ -10,11 +10,16 @@
     </div>
     <!-- button -->
     <div class="detailButtons" v-show="isShowRefreshBtn || isShowAddDetailBtn || isShowDeleteDetailBtn || isShowImportBtn || isShowExportBtn">
-      <Button class="deleteDetail" v-show="isShowRefreshBtn" @click="tableRefreshDetail">刷新</Button>
-      <Button class="deleteDetail" v-show="isShowAddDetailBtn" @click="tableAddDetail">新增明细</Button>
-      <Button class="deleteDetail" v-show="isShowDeleteDetailBtn" @click="tableDeleteDetail">删除明细</Button>
-      <Button class="import" v-show="isShowImportBtn" @click="tableImport">导入</Button>
-      <Button class="export" v-show="isShowExportBtn" @click="tableExport">导出</Button>
+      <!-- 刷新 -->
+      <Button class="deleteDetail" v-show="isShowRefreshBtn" @click="tableRefreshDetail">{{vmI18n.t('btn.refresh')}}</Button>
+      <!-- 新增明细 -->
+      <Button class="deleteDetail" v-show="isShowAddDetailBtn" @click="tableAddDetail">{{vmI18n.t('btn.addDetail')}}</Button>
+      <!-- 删除明细 -->
+      <Button class="deleteDetail" v-show="isShowDeleteDetailBtn" @click="tableDeleteDetail">{{vmI18n.t('btn.deleteDetail')}}</Button>
+      <!-- 导入 -->
+      <Button class="import" v-show="isShowImportBtn" @click="tableImport">{{vmI18n.t('btn.import')}}</Button>
+      <!-- 导出 -->
+      <Button class="export" v-show="isShowExportBtn" @click="tableExport">{{vmI18n.t('btn.export')}}</Button>
       <!-- <businessButton :btnConfig="detailButtonsConfig"></businessButton> -->
     </div>
     <keep-alive>
@@ -51,7 +56,7 @@
     <div class="page-box">
       <div class="page-box-left">
         <div class="page_content" v-show="pageShow">
-          <p class="page-allSizes">共 {{ total }} 条</p>
+          <p class="page-allSizes">{{vmI18n.t('common.total')}} {{ total }} {{vmI18n.t('common.piece')}}</p>
           <Page 
             size='small' 
             class="page-pages" 

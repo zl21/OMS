@@ -1,6 +1,6 @@
 {
   "name": "@burgeon/business-components",
-  "version": "1.2.23",
+  "version": "1.2.24",
   "description": "burgeon company's business-components lib for private npm",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "ag-grid-enterprise": "^17.1.1"
   },
   "dependencies": {
-    "@burgeon/internationalization": "^1.0.45",
+    "@burgeon/internationalization": "^1.0.51",
     "lodash": "^4.17.21"
   }
 }

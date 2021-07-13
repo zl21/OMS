@@ -2,6 +2,8 @@
 //   require(`commonPage/${process.env.BRANCH_ENV}/page/${file}.vue`).default
 import businessButton from '../businessButton'
 import businessForm from '../businessForm'
+import i18n from "@burgeon/internationalization/i18n";
+
 export default {
   components: {
     businessButton,
@@ -15,6 +17,7 @@ export default {
   },
   data() {
     return {
+      vmI18n: i18n,
       // 输入框文字
       searchInputValue: '',
       // 输入框前搜索select

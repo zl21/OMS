@@ -1,8 +1,10 @@
 import agTable from '../common/js/custom-ag-grid-table'
 import R3 from '@syman/burgeon-r3';
+import i18n from "@burgeon/internationalization/i18n";
 export default {
   data() {
     return {
+      vmI18n: i18n,
       name: 'agGridTable',
       AGTABLE: '', //ag实例
       columnState: '', //存储表头排列顺序
