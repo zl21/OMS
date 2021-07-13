@@ -3,7 +3,7 @@
     |-- .npmrc
     |-- LogTable.vue // 日志表格组件
     |-- README.md
-    |-- agGridTable.vue // 大量数据渲染表格agGrid组件
+    |-- agGridTable.vue // 大量数据渲染表格agGrid组件, 基于js ag-grid
     |-- businessActionTable.vue // 表格 + 表单 + 按钮组合组件
     |-- businessAgTable.vue // 大量数据渲染表格组件，基于框架业务组件库CommonTableByAgGrid
     |-- businessButton.vue // 按钮集组件

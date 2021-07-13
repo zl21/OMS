@@ -146,9 +146,9 @@ export default {
     if (this.$route.params.tableName == "IP_B_JITX_DELIVERY") {
       self.downLoadFormConfig.formValue.order_status = "NEW";
     }
-    // 初始化默认值
-    if (this.modalConfig[this.tableName].defaultVal) {
-      this.modalConfig[this.tableName].defaultVal(self)
+    // 初始化
+    if (this.modalConfig[this.tableName].init) {
+      this.modalConfig[this.tableName].init(self)
     }
   },
   methods: {
