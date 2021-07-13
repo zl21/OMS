@@ -90,7 +90,10 @@ export default {
           key: 'advise_phy_warehouse_id',
           draggable:true,
           render: (h, params) => {
-            const options = params.row.sgBPhyInStorageItemExt.map(item => h('Option', {
+            let temp_max_total_qty_available = 0
+            const options = params.row.sgBPhyInStorageItemExt.map(item => {
+              temp_max_total_qty_available = item.total_qty_available > temp_max_total_qty_available ? item.total_qty_available : temp_max_total_qty_available
+              return h('Option', {
                 style: {
                   'font-style': item.total_qty_available === 0 ? 'italic' : 'normal'
                 },
@@ -98,13 +101,28 @@ export default {
                   value: item.advise_phy_warehouse_id,
                   label: item.advise_phy_warehouse_ename
                 }
-              }));
+              })
+            });
+            /**
+             * 场景：
+             * 1. 建议发货仓库options没有原发货仓库，取可售数量最大的
+             * 2. 建议发货仓库options有原发货仓库，取原发货仓库
+             * 3. 建议发货仓库是空，取原发货仓库
+             */
+            let advise_phy_warehouse_id
+            let isExit = params.row.sgBPhyInStorageItemExt.find(item => params.row.cp_c_phy_warehouse_id == item.advise_phy_warehouse_id)
+            if (isExit) {
+              advise_phy_warehouse_id = params.row.cp_c_phy_warehouse_id
+            } else {
+              let maxQtyWarehouse = params.row.sgBPhyInStorageItemExt.find(item => item.total_qty_available == temp_max_total_qty_available)
+              advise_phy_warehouse_id = maxQtyWarehouse.advise_phy_warehouse_id
+            }
             return h('div', [
               h(
                 'Select',
                 {
                   props: {
-                    value: params.row.cp_c_phy_warehouse_id,
+                    value: advise_phy_warehouse_id,
                     disabled: this.dataIndex !== 0
                   },
                   on: {
@@ -254,6 +272,18 @@ export default {
           total += item.waiting_split_num;
           item.total_qty_available = item.sgBPhyInStorageItemExt[0].total_qty_available; // 获取默认仓库可售数量
           item.is_gift_name = item.gift_type == 0 ? '否' : '是';
+          
+          // 建议发货仓库为空，默认原发货仓库
+          if (item.sgBPhyInStorageItemExt[0].advise_phy_warehouse_id == null) {
+            item.sgBPhyInStorageItemExt[0] = {
+              ...item.sgBPhyInStorageItemExt[0],
+              advise_phy_warehouse_ecode: item.cp_c_phy_warehouse_ecode,
+              advise_phy_warehouse_ename: item.cp_c_phy_warehouse_ename,
+              advise_phy_warehouse_id: item.cp_c_phy_warehouse_id,
+              // ps_c_sku_id: ps_c_sku_id,
+              // total_qty_available: qty
+            }
+          }
         });
         res.data.data[0].total = total;
         self.data.push(res.data.data);

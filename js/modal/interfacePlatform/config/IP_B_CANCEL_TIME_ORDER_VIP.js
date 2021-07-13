@@ -85,14 +85,13 @@ export default {
       endTime = BurgeonDate.standardTimeConversiondateToStr(endTime);
     }
     const param = {
+      table: self.$route.params.tableName,
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
       start_time: startTime,
       end_time: endTime
     };
-    const fromdata = new FormData();
-    fromdata.append('param', JSON.stringify(param));
     // 取消实效订单下载
-    const { data: { code, message } } = await self.service.interfacePlatform.downLoadVipCancelTimeOrder(fromdata);
+    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(param);
     if (code === 0) {
       self.$Message.success(message);
       self.$emit('confirmImport');

@@ -83,7 +83,8 @@ export default {
     ],
     // 表单非空提示
     ruleValidate: {
-      numNumber: [{ required: true, message: ' ', trigger: 'blur' }]
+      numNumber: [{ required: true, message: ' ', trigger: 'blur' }],
+      query_date: [{ required: true, message: ' ', trigger: 'blur' }]
     }
   },
   cancel: (self) => {
@@ -92,31 +93,27 @@ export default {
   },
   // 确定按钮
   determine: async (self) => {
+    let formValue = self.downLoadFormConfig.formValue
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
       self.$Message.warning($i18n.t('modalTips.be'));// 请选择需要下载的店铺
       return false;
     }
-    let startTime = self.downLoadFormConfig.formValue.query_date[0];
-    let endTime = self.downLoadFormConfig.formValue.query_date[1];
-    if (startTime) {
-      startTime = BurgeonDate.standardTimeConversiondateToStr(startTime);
-    }
-    if (endTime) {
-      endTime = BurgeonDate.standardTimeConversiondateToStr(endTime);
+    const [start, end] = formValue.query_date
+    if (!start) {
+      self.$Message.warning('请选择下单时间');
+      return false;
     }
     const param = {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
       order_status: self.downLoadFormConfig.formValue.order_status,
-      start_time: startTime,
-      end_time: endTime,
+      start_time: start ? BurgeonDate.standardTimeConversiondateToStr(start) : '',
+      end_time: end ? BurgeonDate.standardTimeConversiondateToStr(end) : '',
       table: self.$route.params.tableName // 当前表名 必传
     };
-    const fromdata = new FormData();
-    fromdata.append('param', JSON.stringify(param));
     // 寻仓订单下载
-    const { data: { code, message } } = await self.service.interfacePlatform.downLoadVipDelivery(fromdata);
+    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(param);
     if (code === 0) {
       self.$Message.success(message);
       self.$emit('confirmImport');
