@@ -1,6 +1,6 @@
 {
   "name": "@burgeon/business-components",
-  "version": "1.2.25",
+  "version": "1.2.26",
   "description": "burgeon company's business-components lib for private npm",
   "main": "index.js",
   "scripts": {
