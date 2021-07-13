@@ -7,6 +7,7 @@ export const globalStore = {
   // 1.3框架全局状态管理
   namespaced: true,
   state: {
+    language: 'zh', // 国际化
     mainContentLoading: false,
     pwTips: false,
     activeTabAddr: [],
@@ -127,6 +128,9 @@ export const globalStore = {
     extraoOrderDetails:[],
   },
   mutations: {
+    language(state) {
+      state.language = state;
+    },
     REDUNDANT_ORDER_ID(state, n) {
       state.REDUNDANT_ORDER_ID = n;
     },
