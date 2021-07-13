@@ -26,7 +26,7 @@
 
       <div class="page"
          v-show="(agTableConfig.rowData || []).length !== 0">
-      <span style="paddingright: 8px">{{vmI18n.t('common.total')}}{{ agTableConfig.pagenation.total }}{{vmI18n.t('common.piece')}}</span>
+      <span style="paddingright: 8px">{{vmI18n.t('common.total')}} {{ agTableConfig.pagenation.total }} {{vmI18n.t('common.piece')}}</span>
       <Page class="page-pages"
             size="small"
             :total="agTableConfig.pagenation.total"
