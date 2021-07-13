@@ -16,20 +16,22 @@
             </p>
           </Panel>
           <Panel v-show="showEx" name="2">
-            换货人信息
+            <!-- 换货人信息 -->
+            {{ vmI18n.t('panel_label.exchangeInfo') }}
             <p slot="content">
               <businessForm :form-config="formConfigEx" :key="exFormKey"/>
             </p>
           </Panel>
           <Panel name="3">
             <!-- 退款金额 -->
-            退款金额
+            {{ vmI18n.t('form_label.refundAmount') }}
             <p slot="content">
               <ul class="calculation-main">
                 <li>
                   <div class="calculation-item">
                     <!-- 根据所有退货商品明细的应退金额合计自动算出，只读展示，正数 -->
-                    <span>商品应退金额</span>
+                    <!-- <span>商品应退金额</span> -->
+                    <span>{{ vmI18n.t('other.refundAmountGoods') }}</span>
                     <label>{{PRO_ACTUAL_AMT}}</label>
                   </div>
                 </li>
@@ -37,7 +39,8 @@
                 <li>
                   <div class="calculation-item">
                     <!-- 正数，选填项 -->
-                    <span>应退运费</span>
+                    <!-- <span>应退运费</span> -->
+                    <span>{{ vmI18n.t('form_label.ad') }}</span>
                     <Input
                       v-model="SHIP_AMT"
                       type="text"
@@ -50,7 +53,8 @@
                 <li>
                   <div class="calculation-item">
                     <!-- 可正可负，选填项 -->
-                    <span>调整金额</span>
+                    <!-- <span>调整金额</span> -->
+                    <span>{{ vmI18n.t('table_label.adjustment_amount') }}</span>
                     <Input
                       v-model="ADJUST_AMT"
                       type="text"
@@ -63,7 +67,8 @@
                 <li v-show="showEx">
                   <div class="calculation-item">
                     <!-- sum所有换货商品“成交金额“，只读，正数 -->
-                    <span>换货金额</span>
+                    <!-- <span>换货金额</span> -->
+                    <span>{{ vmI18n.t('other.exchangeAmounts') }}</span>
                     <label>{{EX_ACTUAL_AMT}}</label>
                   </div>
                 </li>
@@ -71,7 +76,8 @@
                 <li>
                   <div class="calculation-item">
                     <!-- 最终应退总额=商品应退金额+应退运费+/-调整金额-换货金额，自动算出，只读展示 -->
-                    <span class="black">最终应退总金额</span>
+                    <!-- <span class="black">最终应退总金额</span> -->
+                    <span class="black">{{ vmI18n.t('form_label.ae') }}</span>
                     <label>{{FINAL_ACTUAL_AMT}}</label>
                   </div>
                 </li>
@@ -163,7 +169,7 @@ export default {
         typeAll: "default",
         buttons: [
           {
-            text: "保存",
+            text: $i18n.t("btn.save"),
             webname: 'RETURNSAVE1',
             isShow: true,
             btnclick: () => {
@@ -186,13 +192,15 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: "取消",
+            // text: "取消",
+            text: $i18n.t("common.cancel"),
             btnclick: () => {
               this.orderModal = false;
             },
           },
           {
-            text: '确定',
+            // text: '确定',
+            text: $i18n.t("common.determine"),
             type: 'primary',
             btnclick: () => {
               this.queryorder();
@@ -271,7 +279,8 @@ export default {
             // label: $i18n.t('form_label.originalOrderNo'), // 原始订单编号输入框前文字
             width: '6',
             icon: 'ios-search',
-            placeholder: '输入后请按Enter',
+            // placeholder: '输入后请按Enter',
+            placeholder: $i18n.t("pHolder.a4"),
             rules: true,
             ghost: false, // 是否关闭幽灵按钮，默认开启
             inputenter: () => {
@@ -297,7 +306,8 @@ export default {
               fkdisplay: 'mrp',
               isfk: true,
               isnotnull: false,
-              name: '店铺名称', // 店铺名称
+              // name: '店铺名称', // 店铺名称
+              name: $i18n.t('table_label.shopName'), 
               readonly: false,
               reftable: 'CP_C_SHOP',
               reftableid: 10348,
@@ -375,8 +385,8 @@ export default {
               colname: 'CP_C_PHY_WAREHOUSE_IN_ID',
               fkdisplay: 'drp',
               isfk: true,
-              // name: $i18n.t('form_label.warehousingEntity'), // 入库实体仓
-              name: '入库实体仓',
+              name: $i18n.t('form_label.warehousingEntity'), // 入库实体仓
+              // name: '入库实体仓',
               pid: '',
               valuedata: '',
             },
@@ -403,7 +413,8 @@ export default {
               colname: 'CP_C_PHY_WAREHOUSE_ID',
               fkdisplay: 'drp',
               isfk: true,
-              name: '发货实体仓', // 发货实体仓
+              // name: '发货实体仓', // 发货实体仓
+              name: $i18n.t('form_label.af'),
               pid: '',
               valuedata: '',
             },
@@ -535,7 +546,8 @@ export default {
               colname: 'CP_C_REGION_PROVINCE_ID',
               fkdisplay: 'drp',
               isfk: true,
-              name: '收货人省份',
+              // name: '收货人省份',
+              name: $i18n.t('form_label.consignee_province'),
               valuedata: '',
             },
             oneObj: (val) => {
@@ -575,7 +587,8 @@ export default {
               colname: 'CP_C_REGION_CITY_ID',
               fkdisplay: 'drp',
               isfk: true,
-              name: '收货人市',
+              // name: '收货人市',
+              name: $i18n.t('form_label.consignee_city'),
               valuedata: '',
               refcolval: {
                 fixcolumn: "C_UP_ID",
@@ -620,7 +633,8 @@ export default {
               colname: 'CP_C_REGION_AREA_ID',
               fkdisplay: 'drp',
               isfk: true,
-              name: '收货人区',
+              // name: '收货人区',
+              name: $i18n.t('form_label.aconsignee_area'),
               valuedata: '',
               refcolval: {
                 fixcolumn: "C_UP_ID",
@@ -667,7 +681,8 @@ export default {
           isShow: true,
         },
         {
-          label: '换货明细', // 换货明细
+          // label: '换货明细',
+          label: $i18n.t('form_label.exchangeDetails'), // 换货明细
           value: '1',
           isShow: false,
         },
@@ -755,7 +770,8 @@ export default {
       const type = nV;
       const beType = oV;
       if (oV && type != beType) {
-        const msg = `当前单据为${beType == '0' ? '退货单' : '退换货单'}，是否进行换单！`
+        const panel = beType == '0' ? $i18n.t('panel_label.a0') : $i18n.t('panel_label.a1');
+        const msg = `${$i18n.t('modalTips.ge')}${panel}，${$i18n.t('modalTips.gf')}`
         this.$Modal.info({
           title: $i18n.t('modalTitle.tips'), // 提示
           content: msg,
@@ -889,7 +905,7 @@ export default {
         self.$Message.warning('p/cs/QueryList catch !');
       });
       if (!res.data.data.row.length) {
-        self.$Message.error('没有查询到当前平台单号！');
+        self.$Message.error($i18n.t('modalTips.gh')); // 没有查询到当前平台单号！
         self.loading = false;
         return
       }
@@ -969,20 +985,20 @@ export default {
       const over = self.overLength(self.formConfig.formValue);
       if (over) return
       if (this.bT == '1') {
-        if (!tui.length) return this.$message.error("退货明细不能为空！");
-        if (!huan.length) return this.$message.error("换货明细不能为空！");
+        if (!tui.length) return this.$message.error($i18n.t('modalTips.gg')); // "退货明细不能为空！"
+        if (!huan.length) return this.$message.error($i18n.t('modalTips.gi')); // "换货明细不能为空！"
       } else if (this.bT == '0' && !tui.length) {
-        this.$message.error("退货明细不能为空！");
+        this.$message.error($i18n.t('modalTips.gg'));
         return false;
       }
       // 校验最终应退总金额不能小于0
       if (this.FINAL_ACTUAL_AMT < 0) {
-        this.$message.error("最终应退总金额不能小于0！");
+        this.$message.error($i18n.t('modalTips.gj')); // 最终应退总金额不能小于0！
         return
       }
       // 校验换货金额是否等于退货金额；一致则保存成功，不一致则提示“换货金额与退货金额不一致请重新确认”
       if (this.bT == '1' && this.EX_ACTUAL_AMT != this.PRO_ACTUAL_AMT) {
-        this.$message.error("换货金额与退货金额不一致请重新确认！");
+        this.$message.error('modalTips.gk'); // 换货金额与退货金额不一致请重新确认！
         return
       }
       /* =========== 保存校验 end =========== */
@@ -992,7 +1008,8 @@ export default {
         FINAL_ACTUAL_AMT: this.FINAL_ACTUAL_AMT,
         PRO_ACTUAL_AMT: this.PRO_ACTUAL_AMT,
         EX_ACTUAL_AMT: this.EX_ACTUAL_AMT,
-        info: bT == '0' ? '退货金额' : '换货金额',
+        // info: bT == '0' ? '退货金额' : '换货金额',
+        info: bT == '0' ? $i18n.t('panel_label.returnAmount') : $i18n.t('other.exchangeAmounts'),
       }
       if (bT == '0') delete EXCHANGE_PRICE.EX_ACTUAL_AMT;
       mainTable.ID = '-1';
@@ -1026,7 +1043,8 @@ export default {
           this.$store.commit('global/tabOpen', {
             type: 'V',
             tableName: bT == 0 ? 'OC_B_RETURN_ORDER_VIRTUAL_TABLE' : 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE',
-            label: '退换货单详情',
+            // label: '退换货单详情',
+            label: $i18n.t('panel_label.a2'),
             tableId: bT == 0 ? 10728 : 10754,
             id: `${self.ID}?RETURN_SOURCE='手工新增'&SOURCE_CODE=${mainTable.SOURCE_CODE}`,
           });
@@ -1149,7 +1167,7 @@ export default {
     // 原始订单编号 - 确定
     queryorder() {
       if (!Object.keys(this.platformData).length) {
-        this.$Message.warning('请选中一条单据！');
+        this.$Message.warning($i18n.t('modalTips.gl')); // 请选中一条单据！
         return false
       }
       this.renderForm(this.platformData);
@@ -1170,7 +1188,8 @@ export default {
       if (masterArr.length > 1) {
         this.$Modal.info({
           title: $i18n.t("modalTitle.tips"), // 提示
-          content: "当前修改未保存，确定返回？",
+          // content: "当前修改未保存，确定返回？",
+          content: $i18n.t('modalTips.gm'),
           mask: true,
           showCancel: true,
           okText: $i18n.t("common.determine"), // 确定
@@ -1190,7 +1209,8 @@ export default {
         id: "2624",
         type: "action",
         name: "OC_B_RETURN_ORDER",
-        label: "退换货单",
+        // label: "退换货单",
+        label: $i18n.t('panel_label.a1'),
         back: true,
       });
     },

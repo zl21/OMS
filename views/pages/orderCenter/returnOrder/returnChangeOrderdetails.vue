@@ -651,17 +651,6 @@ export default {
                   const rI = e.target.value;
                   params.row.REFUND_ID = rI;
                   console.log(rI, params);
-                  if (this.$route.params.customizedModuleId !== "New") {
-                    this.toMainData[
-                      this.$parent.$parent.panelRef === "退货明细"
-                        ? "tui"
-                        : "huan"
-                    ][params.index] = params.row;
-                    R3.store.commit(
-                      "customize/returnOrderChangeItem",
-                      JSON.parse(JSON.stringify(this.toMainData))
-                    );
-                  }
                   this.actionTableCon.data[params.index] = params.row;
                 }, 300);
               },
@@ -716,17 +705,7 @@ export default {
                   Number(e) * Number(params.row.PRICE_ACTUAL),
                   2
                 );
-                if (this.$route.params.customizedModuleId !== "New") {
-                  this.toMainData[
-                    this.$parent.$parent.panelRef === "退货明细"
-                      ? "tui"
-                      : "huan"
-                  ][params.index] = params.row;
-                  R3.store.commit(
-                    "customize/returnOrderChangeItem",
-                    JSON.parse(JSON.stringify(this.toMainData))
-                  );
-                }
+                this.actionTableCon.data[params.index] = params.row;
                 this.totalNum();
               },
             },
@@ -747,17 +726,6 @@ export default {
                   2
                 );
                 this.actionTableCon.data[params.index] = params.row;
-                if (this.$route.params.customizedModuleId !== "New") {
-                  this.toMainData[
-                    this.$parent.$parent.panelRef === "退货明细"
-                      ? "tui"
-                      : "huan"
-                  ][params.index] = params.row;
-                  R3.store.commit(
-                    "customize/returnOrderChangeItem",
-                    JSON.parse(JSON.stringify(this.toMainData))
-                  );
-                }
                 this.totalNum();
               },
             },
@@ -821,37 +789,6 @@ export default {
         // 计算'商品应退金额'
         this.toMainData[key3] = self.actionTableCon.totalData[0][key2];
         this.$emit("subTableData", this.toMainData);
-        let returnAmount = R3.store.state.customize.returnAmount;
-        let FINAL_ACTUAL_AMT;
-        if (this.$parent.$parent.panelRef === "换货明细") {
-          FINAL_ACTUAL_AMT =
-            Number(returnAmount.PRO_REAL_AMT) +
-            Number(returnAmount.SHIP_AMT) +
-            Number(returnAmount.ADJUST_AMT) -
-            Number(returnAmount.AMT_EXCHANGE);
-          R3.store.commit(
-            `customize/returnAmount`,
-            JSON.parse(
-              JSON.stringify({
-                EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2),
-                FINAL_ACTUAL_AMT: FINAL_ACTUAL_AMT,
-                FINAL_REAL_AMT: FINAL_ACTUAL_AMT,
-              })
-            )
-          );
-        } else {
-          FINAL_ACTUAL_AMT =
-            Number(returnAmount.PRO_REAL_AMT) +
-            Number(returnAmount.SHIP_AMT) +
-            Number(returnAmount.ADJUST_AMT);
-          R3.store.commit(`customize/returnAmount`, {
-            PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2),
-            PRO_REAL_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2),
-            AMT_EXCHANGE: this.$OMS2.omsUtils.floatNumber(amt, 2),
-            FINAL_ACTUAL_AMT,
-            FINAL_REAL_AMT: FINAL_ACTUAL_AMT,
-          });
-        }
       }, 10);
     },
     // 退-新增明细弹窗-插入列表格的过滤处理-累加/直接push
@@ -942,10 +879,6 @@ export default {
         if (this.$route.params.customizedModuleId === "New") {
           this.toMainData[this.returnProduct == "0" ? "tui" : "huan"] =
             this.actionTableCon.data;
-        } else {
-          this.toMainData[
-            this.$parent.$parent.panelRef === "退货明细" ? "tui" : "huan"
-          ] = this.actionTableCon.data;
         }
         this.$emit("subTableData", this.toMainData);
         R3.store.commit(
@@ -1010,12 +943,7 @@ export default {
             this.totalNum();
             self.detailsArrData = [];
             if (this.$route.params.customizedModuleId === "New") {
-              this.toMainData[this.returnProduct == "0" ? "tui" : "huan"] =
-                this.actionTableCon.data;
-            } else {
-              this.toMainData[
-                this.$parent.$parent.panelRef === "退货明细" ? "tui" : "huan"
-              ] = this.actionTableCon.data;
+              this.toMainData[this.returnProduct == "0" ? "tui" : "huan"] = this.actionTableCon.data;
             }
             this.$emit("subTableData", this.toMainData);
             R3.store.commit(
@@ -1035,7 +963,7 @@ export default {
       const tui = this.tableConfig.data;
       const addToList = tui.filter((i) => i._checked);
       if (!addToList.length) {
-        this.$Message.warning('请选择一条明细！')
+        this.$Message.warning($i18n.t('modalTips.gn')); // 请选择一条明细！
         return false
       } else {
         this.tableConfig.modal = false;
@@ -1116,7 +1044,7 @@ export default {
       let tableData = self.actionTableCon.data;
       let selectData = self.replaceProductTable.selectData; //新的对象换货明细
       if (!Object.keys(selectData).length) {
-        self.$Message.warning('请选中一条明细！')
+        self.$Message.warning($i18n.t('modalTips.gl')); // 请选中一条明细！
         return false
       }
       let params = {
