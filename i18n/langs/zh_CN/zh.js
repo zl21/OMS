@@ -17,6 +17,8 @@ export default {
   },
 
   common: {
+    total: '共',
+    piece: '条',
     all: '全部', //全部
     baseInformation: '基本信息', //Base Information
     cancel: '取消', //取消
@@ -170,6 +172,7 @@ export default {
   },
 
   btn: {
+    markCancel: '标记取消',
     preSaleBalancePaid: '预售尾款已付',
     nonPreSale: '非预售',
     cashOnDelivery: '货到付款',

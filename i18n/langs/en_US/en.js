@@ -17,6 +17,8 @@ export default {
   },
 
   common: {
+    total: '共',
+    piece: '条',
     all: '全部', //全部
     baseInformation: '基本信息', //Base Information
     cancel: '取消', //取消
@@ -170,6 +172,7 @@ export default {
   },
 
   btn: {
+    markCancel: '标记取消',
     preSaleBalancePaid: '预售尾款已付',
     nonPreSale: '非预售',
     cashOnDelivery: '货到付款',
@@ -810,8 +813,8 @@ export default {
   },
 
   modalTitle: { // 弹窗title
-    th1:"替换前商品",
-    th2:"替换后商品",
+    th1: "替换前商品",
+    th2: "替换后商品",
     a0: '店铺商品特殊设置明细', // 店铺商品特殊设置明细
     a1: '被替换商品SKU', // 被替换商品SKU
     a2: '批量新增条件信息导入', // 批量新增条件信息导入
