@@ -1,6 +1,6 @@
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
-  // 京东订单接口列表界面(下载订单)
+  // 唯品会退工单（退供单下载）
   formConfig: {
     formValue: {
       numNumber: ''
@@ -58,7 +58,7 @@ export default {
       {
         style: 'input', // 输入框类型
         label: $i18n.t('form_label.returnNo'), // 退供单号 输入框前文字
-        value: 'refund_nos', // 输入框的值
+        value: 'bill_no', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持
         placeholder: $i18n.t('pHolder.z3'), // 多个退供单号，用逗号隔开 占位文本，默认为请输入
@@ -82,27 +82,24 @@ export default {
       self.$message.error($i18n.t('modalTips.do'));// 店铺不能为空
       return;
     }
-    if (!formValue.query_date[0] && !formValue.refund_nos) {
+    if (!formValue.query_date[0] && !formValue.bill_no) {
       self.$message.error($i18n.t('modalTips.bw'));// 请输入平台时间或退供单号
       return;
     }
     self.dialogLoad = true;
 
     const params = {
+      table: self.$route.params.tableName,
       shop_id: shopId,
-      refund_nos: formValue.refund_nos
+      bill_no: formValue.bill_no
     };
     if (formValue.query_date[0]) {
       params.start_time = BurgeonDate.standardTimeConversiondateToStr(formValue.query_date[0]);
       params.end_time = BurgeonDate.standardTimeConversiondateToStr(formValue.query_date[1]);
     }
-
-    const fromdata = new FormData();
-    fromdata.append('param', JSON.stringify(params));
-
     try {
       // 唯品会退单下载
-      const { data: { code, message } } = await self.service.interfacePlatform.downLoadVipOrderRefund(fromdata);
+      const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(params);
       self.dialogLoad = false;
       if (code === 0) {
         self.$message.success(message);

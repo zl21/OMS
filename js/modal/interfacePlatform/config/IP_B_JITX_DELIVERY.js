@@ -87,7 +87,7 @@ export default {
       query_date: [{ required: true, message: ' ', trigger: 'blur' }]
     }
   },
-  defaultVal: (self) => {
+  init: (self) => {
     let date = new Date()
     let start = BurgeonDate.getFormatDate(date, 'yyyy-MM-dd HH:mm:00')
     let end = BurgeonDate.getFormatDate(new Date(date.setMinutes(date.getMinutes() + 30)), 'yyyy-MM-dd HH:mm:00')
@@ -117,7 +117,7 @@ export default {
     }
     const param = {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
-      order_status: self.downLoadFormConfig.formValue.order_status,
+      status: self.downLoadFormConfig.formValue.order_status,
       start_time: start ? BurgeonDate.standardTimeConversiondateToStr(start) : '',
       end_time: end ? BurgeonDate.standardTimeConversiondateToStr(end) : '',
       table: self.$route.params.tableName // 当前表名 必传
