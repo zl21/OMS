@@ -966,7 +966,12 @@
           obj.DYNAMIC.forEach(it => {
             // 日期类型入参处理
             if (it.DISPLAY == 'OBJ_DATE') {
-              it.VAL = typeof it.VAL[0] == 'string' ? `${dateUtil.getFormatDate(new Date(it.VAL[0]), 'yyyy-MM-dd HH:mm:ss')}~${dateUtil.getFormatDate(new Date(it.VAL[1]), 'yyyy-MM-dd HH:mm:ss')}` : `${it.VAL[0]}~${it.VAL[1]}`
+              if (it.VAL instanceof Array) {
+                // 日期范围类型
+                it.VAL = typeof it.VAL[0] == 'string' ? `${dateUtil.getFormatDate(new Date(it.VAL[0]), 'yyyy-MM-dd HH:mm:ss')}~${dateUtil.getFormatDate(new Date(it.VAL[1]), 'yyyy-MM-dd HH:mm:ss')}` : `${it.VAL[0]}~${it.VAL[1]}`
+              } else {
+                it.VAL = dateUtil.getFormatDate(new Date(it.VAL[0]), 'yyyy-MM-dd HH:mm:ss');
+              }
             }
             if (it.DISPLAY == 'RANGE') {
               it.VAL = `${it.VAL[0]}~${it.VAL[1]}`
@@ -975,6 +980,7 @@
             delete it.DISPLAY;
             delete it.TYPE;
             delete it.index;
+            delete it.COMBOBOX;
           })
           if(obj.DYNAMIC.length) obj.DYNAMIC[0].RLT = "AND";
         }

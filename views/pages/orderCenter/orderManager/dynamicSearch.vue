@@ -22,8 +22,9 @@
           <Select
             v-model="dynamicStructure[IDX].NAME"
             transfer
-            @on-change="conditionChange"
+            @on-change="(val)=>conditionChange(IDX, val)"
           >
+            <!-- label-in-value -->
             <Option
               v-for="(item,index) in dynamicData.COMBINE_CONDITION.COMBOBOX"
               :key="index"
@@ -66,7 +67,7 @@
           </RadioGroup>
           <DatePicker 
             v-else-if="dynamicStructure[IDX].DISPLAY == 'OBJ_DATE'"
-            type="datetimerange"
+            type="datetime"
             split-panels
             transfer
             clearable
@@ -83,7 +84,7 @@
             transfer
           >
             <Option
-              v-for="(item,index) in dynamicData.COMBINE_CONDITION.COMBOBOX[dynamicStructure[IDX].index].COMBOBOX"
+              v-for="(item, index) in dynamicStructure[IDX].COMBOBOX"
               :key="index"
               :value="item.value"
             >
@@ -110,7 +111,6 @@
           v-show="dynamicStructure.length !== IDX+1"
           class="group"
         >
-        <!-- {{dynamicStructure[IDX]}} -->
           <Select
             v-model="dynamicStructure[IDX + 1 >= dynamicStructure.length ? 0 : IDX + 1].RLT"
             transfer
@@ -212,19 +212,25 @@
           }
         }) */
       },
-      conditionChange(val) {
-        console.log(val);
+      conditionChange(index,val) {
+        console.log(index, val);
         const aaa = this.dynamicStructure;
         const all = this.dynamicData.COMBINE_CONDITION.COMBOBOX;
         const allCalc = this.dynamicData.CALC_SYMBOL.COMBOBOX;
-        // const options = 
-        all.forEach((it,j) => {
+        all.forEach((it, j) => {
           if (it.value == val) {
-            // options
-            const curIt = this.dynamicStructure.find(i => i.NAME == val);
+            // const curIt = this.dynamicStructure.find(i => i.NAME == val);
+            const curItList = [];
+            this.dynamicStructure.forEach((m, n) => { // 应该还是要优化，万一不是最后的而是中间的
+              if (m.NAME == val) {
+                curItList.push(n);
+              }
+            })
+            // const curIt = this.dynamicStructure[curItList[curItList.length - 1]];
+            const curIt = this.dynamicStructure[index];
             curIt.DISPLAY = it.DISPLAY;
             curIt.index = j;
-            if (it.CALC_SYMBOL && it.CALC_SYMBOL.length) {
+            if (it.CALC_SYMBOL && it.CALC_SYMBOL.length) { // 处理每个条件对应的关系运算符
               it.calc = [];
               for (let x = 0; x < it.CALC_SYMBOL.length; x++) {
                 allCalc.forEach(y => {
@@ -238,8 +244,11 @@
               // 可能存在不需要【关系运算符】的情况，那就不展示该控件
               curIt.CALC = null;
             }
-            if (curIt.DISPLAY == 'RANGE') {
+            if (curIt.DISPLAY == 'RANGE') { // 处理range类型的组件
               curIt.VAL = ['', ''];
+            }
+            if (curIt.DISPLAY == 'SELECT') { // 处理select类型的组件的options
+              curIt.COMBOBOX = it.COMBOBOX;
             }
           }
         });
