@@ -87,9 +87,14 @@ export default {
       query_date: [{ required: true, message: ' ', trigger: 'blur' }]
     }
   },
+  defaultVal: (self) => {
+    let date = new Date()
+    let start = BurgeonDate.getFormatDate(date, 'yyyy-MM-dd HH:mm:00')
+    let end = BurgeonDate.getFormatDate(new Date(date.setMinutes(date.getMinutes() + 30)), 'yyyy-MM-dd HH:mm:00')
+    self.downLoadFormConfig.formValue.query_date = [start, end]
+  },
   cancel: (self) => {
-    const _this = self;
-    _this.$OMS2.omsUtils.formEmpty(_this, 'downLoadFormConfig')
+    self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   },
   // 确定按钮
   determine: async (self) => {
@@ -103,6 +108,11 @@ export default {
     const [start, end] = formValue.query_date
     if (!start) {
       self.$Message.warning('请选择下单时间');
+      return false;
+    }
+    const timeDiff = (end - start) > 1800000;
+    if (timeDiff) {
+      self.$Message.warning('下单时间范围不能超过半小时，请重新设置！');
       return false;
     }
     const param = {

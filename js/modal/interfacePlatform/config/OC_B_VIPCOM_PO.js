@@ -55,8 +55,7 @@ export default {
     ruleValidate: {}
   },
   cancel: (self) => {
-    const _this = self;
-    _this.$OMS2.omsUtils.formEmpty(_this, 'downLoadFormConfig')
+    self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   },
   // 确定按钮
   determine: async (self) => {
