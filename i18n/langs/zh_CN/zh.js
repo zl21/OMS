@@ -172,6 +172,8 @@ export default {
   },
 
   btn: {
+    addDetail: '新增明细',
+    deleteDetail: '删除明细',
     markCancel: '标记取消',
     preSaleBalancePaid: '预售尾款已付',
     nonPreSale: '非预售',
