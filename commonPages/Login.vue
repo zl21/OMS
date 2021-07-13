@@ -117,7 +117,8 @@ export default {
       R3.store.commit(`customize/language`, lang || 'zh');
       this.$message({
         message: _this.vmI18n.messages[lang].tip_info,
-        type: _this.vmI18n.messages[lang].tip_type,
+        // type: _this.vmI18n.messages[lang].tip_type,
+        type: 'success',
       });
     },
     login() {
