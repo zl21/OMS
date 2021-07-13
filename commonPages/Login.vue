@@ -103,7 +103,7 @@ export default {
   },
   created() {
     const _this = this;
-    const browseLan = localStorage.getItem('locale');
+    const browseLan = localStorage.getItem('locale') || 'zh';
     _this.vmI18n.locale = browseLan;
     this.curLang = langConfig.find(it => it.type == browseLan).text;
   },
