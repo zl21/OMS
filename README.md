@@ -142,3 +142,4 @@ console.log($i18n.t(common.all));
 | v1.0.49 |  登录页语言 |
 | v1.0.50 |  解决ja.js文件被删除导致的报错 |
 | v1.0.51 |  add page、btn |
+| v1.0.52 |  add 共n条 |

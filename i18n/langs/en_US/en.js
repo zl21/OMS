@@ -8,7 +8,7 @@
 import tipsMessage from './tipsMessage'
 
 export default {
-  tip_info: "暂无英文语言包，敬请期待！(已默认使用中文)",
+  tip_info: "Switch successful !",
   tip_type: "success",
   welcome: 'WELCOME',
   login: 'LOGIN',
@@ -17,8 +17,8 @@ export default {
   },
 
   common: {
-    total: '共',
-    piece: '条',
+    total: 'Total',
+    piece: 'items',
     all: '全部', //全部
     baseInformation: '基本信息', //Base Information
     cancel: '取消', //取消
