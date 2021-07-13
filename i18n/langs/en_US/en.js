@@ -296,6 +296,8 @@ export default {
     void: 'Void',
     wrong_sending_forced_matching: 'Wrong sending forced matching',
     wrongCopy: "Wrong Cpoy", //错发复制 
+    show: 'Show',
+    hide: 'Hide',
   },
 
   pHolder: {
@@ -389,6 +391,9 @@ export default {
     a7: 'Divwarehouse ratio',
     a8: 'Hangzhou Store Warehouse',
     a9: 'Calculate inflated inventory',
+    aa: 'Province & city',
+    ab: 'Detailed address',
+    ac: 'Non gift',
     type: 'Type',
     ruleName: 'Rule Name',
     aconsignee_address: 'Ship nee Address',

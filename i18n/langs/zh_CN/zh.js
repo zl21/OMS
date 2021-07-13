@@ -296,6 +296,8 @@ export default {
     void: '作废',
     wrong_sending_forced_matching: '错发强制匹配',
     wrongCopy: "错发复制", //错发复制    
+    show: '显示',
+    hide: '隐藏',
   },
 
   pHolder: {
@@ -389,6 +391,9 @@ export default {
     a7: '分仓比例',
     a8: '杭州店仓',
     a9: '计算虚高库存前库存',
+    aa: '省市区',
+    ab: '详细地址',
+    ac: '非赠品',
     type: '类型',
     ruleName: '规则名称',
     aconsignee_address: '收货人地址',
