@@ -873,11 +873,7 @@ export default {
                 // this.qurebtn(this.btnConfig.buttons, "停用")[0].disabled = true
               }
 
-            } else if (key == 'cpCShopIds') {
-              this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.valuedata = warehouseData.cpCShopEnames;
-              this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.pid = warehouseData.cpCShopIds;
-        
-            } else if (key == 'beginTime') {
+            }  else if (key == 'beginTime') {
               //开始时间
               this.formConfig.formValue[key] = dateUtil.getFormatDate(new Date(warehouseData[key]), 'yyyy-MM-dd HH:mm:ss');
             } else if (key == 'endTime') {
@@ -885,7 +881,13 @@ export default {
             } else {
               this.formConfig.formValue[key] = warehouseData[key];
             }
+
           }
+          setTimeout(()=>{
+            this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.valuedata = warehouseData.cpCShopEnames;
+            this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.pid = warehouseData.cpCShopIds;
+          },500)
+
         });
       
       }
