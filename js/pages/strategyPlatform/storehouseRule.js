@@ -22,6 +22,7 @@ export default {
   mixins: [modifycurrentLabel],
   data() {
     return {
+      placeholder: '省市搜索',//省市搜索
       loading: false,
       pageShow: false,
       seachVal: '',
@@ -48,13 +49,13 @@ export default {
             text: '保存',
             size: '', // 按钮大小
             isShow: false,
-            webname: this.$route.params.customizedModuleName+"_save",
+            webname: this.$route.params.customizedModuleName + "_save",
             disabled: false, // 按钮禁用控制
             btnclick: this.isfnSave
           },
           {
             isShow: false,
-            webname: this.$route.params.customizedModuleName+"_back",
+            webname: this.$route.params.customizedModuleName + "_back",
             text: $i18n.t('btn.back'),
             btnclick: this.back
           },
@@ -87,7 +88,7 @@ export default {
           {
             text: '导入',
             isShow: false,
-            webname: this.$route.params.customizedModuleName+"_Import",
+            webname: this.$route.params.customizedModuleName + "_Import",
             disabled: false, // 按钮禁用控制
             btnclick: this.importData
           },
@@ -145,8 +146,8 @@ export default {
             transfer: true,
             onChange: () => {
               if (!this.formConfig.formValue.endTime) return
-             this.formConfig.formValue.endTime  = $omsUtils.defaultEndTime(this.formConfig.formValue.endTime, this.formConfig.formValue.endTime)
-  
+              this.formConfig.formValue.endTime = $omsUtils.defaultEndTime(this.formConfig.formValue.endTime, this.formConfig.formValue.endTime)
+
             }
           },
           {
@@ -157,10 +158,17 @@ export default {
             width: '8',
             disabled: false,
             selectChange: v => {
-              console.log(v);
+            
+              if (v.value == 171897) { //表示选择了唯品会
+                this.qurefrom("areaLevel")[0].style = null
+              } else {
+                this.qurefrom("areaLevel")[0].style = "radio"
+              }
+              this.formConfig.formValue.type = v.value
               this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.pid = '';
               this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.valuedata = '';
               this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.colid = v.value;
+            
             }, // 选中事件，默认返回选中的值,默认返回当前值value
             options: [
               // 下拉框选项值
@@ -302,6 +310,7 @@ export default {
           }
         ],
         formValue: {
+          type: 171868, // 类型 1:收货地址就近 2:唯品会
           areaLevel: '', // 区域级别 1:省级 2:市级
           beginTime: '', // 开始日期
           cpCShopIds: '', //  店铺ID，多个以逗号分隔
@@ -310,7 +319,6 @@ export default {
           endTime: '', //   结束日期
           priority: '', // 优先级 正整数
           remark: '', // 备注
-          type: 171868, // 类型 1:收货地址就近 2:唯品会
           isactive: '', // 启用状态
           cpCPhyWarehouseEname: '', //仓库名称
           cpCPhyWarehouseId: '', //仓库编码
@@ -377,7 +385,7 @@ export default {
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
         current: 1,
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       },
     };
@@ -397,6 +405,7 @@ export default {
   mounted() {
     this.init()
     this.getBtns()
+ 
   },
   created() { },
 
@@ -442,7 +451,10 @@ export default {
           if (vm.$route.query.copy) {
             this.pageShow = true;
             this.fninit(vm.$route.query.copy);
-            this.fntableData(vm.$route.query.copy);
+            setTimeout(()=>{
+              this.fntableData(vm.$route.query.copy);
+            },500)
+          
             this.btnConfig2.buttons = []
           } else if (query.id) {
             this.fninit(query.id);
@@ -455,7 +467,11 @@ export default {
           const data = { label: '分仓规则编辑', name: keepAliveModuleName }; //当前界面模块名称 
 
           this.fninit(this.id);
-          this.fntableData(this.id);
+
+          setTimeout(()=>{
+            this.fntableData(this.id);
+          },500)
+         
           this.pageShow = true;
           this.btnConfig.buttons.forEach(em => {
             if (em.text == '启用' || em.text == '停用' || em.text == '上一步') {
@@ -470,7 +486,11 @@ export default {
           // const data = { label: '分仓规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
           // this.$store.commit('global/modifycurrentLabel' , data)
           this.fninit(this.id);
-          this.fntableData(this.id);
+
+          setTimeout(()=>{
+            this.fntableData(this.id);
+          },500)
+         
           this.pageShow = true; //显示明细表
           this.btnConfig.buttons.forEach(em => {
             if (em.text == '复制' || em.text == '启用' || em.text == '停用') {
@@ -505,7 +525,11 @@ export default {
           if (vm.$route.query.copy) {
             this.pageShow = true;
             this.fninit(vm.$route.query.copy);
-            this.fntableData(vm.$route.query.copy);
+
+            setTimeout(()=>{
+              this.fntableData(vm.$route.query.copy);
+            },500)
+        
             this.btnConfig2.buttons = []
           } else if (query.id) {
             this.fninit(query.id);
@@ -519,7 +543,11 @@ export default {
           // this.$store.commit('global/modifycurrentLabel' , data)
 
           this.fninit(this.id);
-          this.fntableData(this.id);
+
+          setTimeout(()=>{
+            this.fntableData(this.id);
+          },500)
+         
           this.pageShow = true;
           this.btnConfig.buttons.forEach(em => {
             if (em.text == '启用' || em.text == '停用' || em.text == '上一步') {
@@ -534,7 +562,12 @@ export default {
           // const data = { label: '分物流规则编辑', name:keepAliveModuleName}; //当前界面模块名称 
           // this.$store.commit('global/modifycurrentLabel' , data)
           this.fninit(this.id);
-          this.fntableData(this.id);
+
+          setTimeout(()=>{
+            this.fntableData(this.id);
+          },500)
+        
+
           this.pageShow = true;
           this.btnConfig.buttons.forEach(em => {
             if (em.text == '复制' || em.text == '启用' || em.text == '停用') {
@@ -572,9 +605,14 @@ export default {
       this.fntableData(this.id);
     },
     fninput(v) {
-      this.seachVal = v;
-      this.tableConfig.current = 1;
-      this.fntableData(this.id);
+     
+      console.log( );
+      if (v.keyCode == 13) {
+        this.seachVal = v.target.value;
+        this.tableConfig.current = 1;
+        this.fntableData(this.id);
+      }
+
     },
     fnSize(v) {
       this.tableConfig.pageSize = v;
@@ -585,6 +623,7 @@ export default {
       this.fntableData(this.id);
     },
     importData() {
+      console.log(  this.formConfig.formValue.type);
       this.changeCount = 0;
       if (this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS') {
         //下载模版的地址
@@ -595,11 +634,20 @@ export default {
         this.$children.find(item => item.name === 'importTable').openConfirm();
         return;
       }
-      //下载模版的地址
-      this.importTable.componentData.tempApi = `/p/cs/st/v1/orderWarehouse/exportData?id=${this.id}`;
-      //上传文件的参数
-      this.importTable.componentData.okParm = { id: this.id };
-      this.$children.find(item => item.name === 'importTable').openConfirm();
+
+      if (this.customizedModuleName == 'ST_C_ORDER_WAREHOUSE'){
+        //下载模版的地址
+        this.importTable.componentData.tempApi = `/p/cs/st/v1/orderWarehouse/exportData?id=${this.id}`;
+        if (this.formConfig.formValue.type == 171897) { //表示唯品会
+          this.importTable.componentData.tempApi = `/p/cs/st/v1/orderWarehouse/exportVipData?id=${this.id}`;
+            //导入文件的地址
+           this.importTable.componentData.okApi = `/p/cs/st/v1/orderWarehouse/importVipData`;
+        }
+        //上传文件的参数
+        this.importTable.componentData.okParm = { id: this.id };
+        this.$children.find(item => item.name === 'importTable').openConfirm();
+      }
+     
     },
     fnoWexportData() {
       //导出
@@ -638,11 +686,12 @@ export default {
       return objitem;
     },
     fntableData(id) {
-   
+
       if (this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS') {
+        this.placeholder = "省市搜索"
         service.strategyPlatform
           .assignLogisticsqueryDetailById({
-            ID: this.$route.query.copy||id,
+            ID: this.$route.query.copy || id,
             SIZE: this.tableConfig.pageSize,
             CURRENT: this.tableConfig.current,
             regionName: this.seachVal
@@ -668,32 +717,72 @@ export default {
         return;
       }
 
-      service.strategyPlatform
-        .getWarehouseRegionInfo({
-          params: {
-            id:this.$route.query.copy||id,
-            pageSize: this.tableConfig.pageSize,
-            pageNum: this.tableConfig.current,
-            regionName: this.seachVal
-          }
-        })
-        .then(res => {
-          let { columns, data, pageInfo } = res.data.data;
-          data.forEach((em, index) => {
-            em.index = index + 1;
-          });
-          this.tableConfig.total = pageInfo.total;
-          if (columns.length > 0) {
-            this.tableConfig.columns = [
-              {
-                title: '序号',
-                key: 'index'
+      if (this.formConfig.formValue.type == 171897) {  //调用唯品会查询接口
+        this.placeholder = "请输入唯品会仓库名称"
+        service.strategyPlatform
+          .getWarehouseVipInfo({
+            params: {
+              id: this.$route.query.copy || id,
+              pageSize: this.tableConfig.pageSize,
+              pageNum: this.tableConfig.current,
+              vipWarehouseName: this.seachVal
+            }
+          })
+          .then(res => {
+         
+            if (res.data.code == 0) {
+              let { columns, data, pageInfo } = res.data.data;
+              data.forEach((em, index) => {
+                em.index = index + 1;
+              });
+              this.tableConfig.total = pageInfo.total;
+              if (columns.length > 0) {
+                this.tableConfig.columns = [
+                  {
+                    title: '序号',
+                    key: 'index'
+                  }
+                ];
+                this.tableConfig.columns = this.tableConfig.columns.concat(columns);
               }
-            ];
-            this.tableConfig.columns = this.tableConfig.columns.concat(columns);
-          }
-          this.tableConfig.data = data;
-        });
+              this.tableConfig.data = data;
+            }
+
+          });
+
+      } else {
+        service.strategyPlatform
+          .getWarehouseRegionInfo({
+            params: {
+              id: this.$route.query.copy || id,
+              pageSize: this.tableConfig.pageSize,
+              pageNum: this.tableConfig.current,
+              regionName: this.seachVal
+            }
+          })
+          .then(res => {
+            if (res.data.code == 0) {
+              let { columns, data, pageInfo } = res.data.data;
+              data.forEach((em, index) => {
+                em.index = index + 1;
+              });
+              this.tableConfig.total = pageInfo.total;
+              if (columns.length > 0) {
+                this.tableConfig.columns = [
+                  {
+                    title: '序号',
+                    key: 'index'
+                  }
+                ];
+                this.tableConfig.columns = this.tableConfig.columns.concat(columns);
+              }
+              this.tableConfig.data = data;
+            }
+
+          });
+      }
+
+
     },
     setbtn() {
       //设置按钮属性
@@ -762,41 +851,45 @@ export default {
             }
           }
         });
-        return;
+
       }
       //分仓规则---------
-      service.strategyPlatform.getWarehouseInfo({ params: { id } }).then(res => {
-        let warehouseData = res.data.data;
-        for (const key in this.formConfig.formValue) {
-          if (key == 'isactive') {
-            this.formConfig.formValue[key] = warehouseData[key] == 'Y' ? '启用' : '停用';
-            //isactive  Y只有方案名称，优先级，备注 可以编辑
-            if (warehouseData[key] == 'Y' && !vm.$route.query.copy) {
-              this.qurefrom('beginTime')[0].disabled = true;
-              this.qurefrom('endTime')[0].disabled = true;
-              this.btnConfig2.buttons.length > 0 && (this.btnConfig2.buttons[0].disabled = true)
-              // this.qurebtn(this.btnConfig.buttons, "启用")[0].disabled = true
-            } else {
-              this.qurefrom('beginTime')[0].disabled = false;
-              this.qurefrom('endTime')[0].disabled = false;
-              this.btnConfig2.buttons.length > 0 && (this.btnConfig2.buttons[0].disabled = false);
-              // this.qurebtn(this.btnConfig.buttons, "停用")[0].disabled = true
-            }
+      if (this.customizedModuleName == 'ST_C_ORDER_WAREHOUSE') {
+        service.strategyPlatform.getWarehouseInfo({ params: { id } }).then(res => {
+          let warehouseData = res.data.data;
+          for (const key in this.formConfig.formValue) {
+            if (key == 'isactive') {
+              this.formConfig.formValue[key] = warehouseData[key] == 'Y' ? '启用' : '停用';
+              //isactive  Y只有方案名称，优先级，备注 可以编辑
+              if (warehouseData[key] == 'Y' && !vm.$route.query.copy) {
+                this.qurefrom('beginTime')[0].disabled = true;
+                this.qurefrom('endTime')[0].disabled = true;
+                this.btnConfig2.buttons.length > 0 && (this.btnConfig2.buttons[0].disabled = true)
+                // this.qurebtn(this.btnConfig.buttons, "启用")[0].disabled = true
+              } else {
+                this.qurefrom('beginTime')[0].disabled = false;
+                this.qurefrom('endTime')[0].disabled = false;
+                this.btnConfig2.buttons.length > 0 && (this.btnConfig2.buttons[0].disabled = false);
+                // this.qurebtn(this.btnConfig.buttons, "停用")[0].disabled = true
+              }
 
-          } else if (key == 'cpCShopIds') {
-            this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.valuedata = warehouseData.cpCShopEnames;
-            this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.pid = warehouseData.cpCShopIds;
-            this.formConfig.formValue[key] = warehouseData[key];
-          } else if (key == 'beginTime') {
-            //开始时间
-            this.formConfig.formValue[key] = dateUtil.getFormatDate(new Date(warehouseData[key]), 'yyyy-MM-dd HH:mm:ss');
-          } else if (key == 'endTime') {
-            this.formConfig.formValue[key] = dateUtil.getFormatDate(new Date(warehouseData[key]), 'yyyy-MM-dd HH:mm:ss');
-          } else {
-            this.formConfig.formValue[key] = warehouseData[key];
+            } else if (key == 'cpCShopIds') {
+              this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.valuedata = warehouseData.cpCShopEnames;
+              this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.pid = warehouseData.cpCShopIds;
+        
+            } else if (key == 'beginTime') {
+              //开始时间
+              this.formConfig.formValue[key] = dateUtil.getFormatDate(new Date(warehouseData[key]), 'yyyy-MM-dd HH:mm:ss');
+            } else if (key == 'endTime') {
+              this.formConfig.formValue[key] = dateUtil.getFormatDate(new Date(warehouseData[key]), 'yyyy-MM-dd HH:mm:ss');
+            } else {
+              this.formConfig.formValue[key] = warehouseData[key];
+            }
           }
-        }
-      });
+        });
+      
+      }
+
     },
 
     fnSave(saveType) {

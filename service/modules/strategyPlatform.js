@@ -169,6 +169,10 @@ export default {  //
 
   getWarehouseRegionInfo: (params) =>
     $network.get('/p/cs/st/v1/orderWarehouse/getWarehouseRegionInfo', params), // 分仓策略-区域矩阵查询
+
+    getWarehouseVipInfo: (params) =>
+    $network.get('/p/cs/st/v1/orderWarehouse/getWarehouseVipInfo', params), // 分仓策略-唯品会专用
+
   orderwarehouse: (params) =>
     $network.post('/p/cs/st/v1/orderWarehouse/saveOrUpdate', params), // 档期日程规划-查询
   oWexportData: (params) =>

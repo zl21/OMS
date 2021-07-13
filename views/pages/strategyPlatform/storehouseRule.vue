@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-20 13:33:28
- * @LastEditTime: 2021-06-22 13:57:43
+ * @LastEditTime: 2021-07-13 12:22:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/storehouseRule.vue
@@ -34,9 +34,9 @@
           <div class="subtablePart-labelList">
             <Input
               v-model="seachVal"
-              placeholder="省市搜索"
+              :placeholder="placeholder"
               style="width: 250px; margin-top: 20px"
-              @input="fninput"
+              @on-keydown="fninput"
             />
             <div class="buttons customized-detail-btn">
               <businessButton :btn-config="btnConfig2" />

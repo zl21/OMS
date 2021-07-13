@@ -199,6 +199,25 @@ export default {
             disabled: false,
           },
           {
+            style: 'input',
+            label: '卖家姓名',
+            value: 'SELLER_NAME',
+            colname: 'SELLER_NAME',
+            width: '12',
+            disabled: false,
+            inputChange: () => {},
+          },
+          {
+            style: 'input',
+            label: '手机号',
+            value: 'SELLER_PHONE',
+            colname: 'SELLER_PHONE',
+            class: 'beizu',
+            width: '12',
+            disabled: false,
+            inputChange: () => {},
+          },
+          {
             version: '1.4',
             colname: 'CP_C_REGION_PROVINCE_ID',
             style: 'popInput', // 输入框弹框单多选
@@ -336,15 +355,7 @@ export default {
               this.masterModifyData('CP_C_REGION_AREA_id', 'master')
             },
           },
-          {
-            style: 'input',
-            label: '卖家姓名',
-            value: 'SELLER_NAME',
-            colname: 'SELLER_NAME',
-            width: '12',
-            disabled: false,
-            inputChange: () => {},
-          },
+          
           {
             style: 'input',
             label: '卖家地址',
@@ -355,16 +366,7 @@ export default {
             disabled: false,
             inputChange: () => {},
           },
-          {
-            style: 'input',
-            label: '手机号',
-            value: 'SELLER_PHONE',
-            colname: 'SELLER_PHONE',
-            class: 'beizu',
-            width: '12',
-            disabled: false,
-            inputChange: () => {},
-          },
+          
         ],
         // 存储表单得所有值
         formValue: {
@@ -448,6 +450,25 @@ export default {
             colname: 'CP_C_SHOP_TITLE',
             width: '12',
             disabled: false,
+          },
+          {
+            style: 'input',
+            label: '卖家姓名',
+            value: 'SELLER_NAME',
+            colname: 'SELLER_NAME',
+            width: '12',
+            disabled: false,
+            inputChange: () => {},
+          },
+          {
+            style: 'input',
+            label: '手机号',
+            value: 'SELLER_PHONE',
+            colname: 'SELLER_PHONE',
+            class: 'beizu',
+            width: '12',
+            disabled: false,
+            inputChange: () => {},
           },
           {
             version: '1.4',
@@ -588,15 +609,7 @@ export default {
             },
           },
 
-          {
-            style: 'input',
-            label: '卖家姓名',
-            value: 'SELLER_NAME',
-            colname: 'SELLER_NAME',
-            width: '12',
-            disabled: false,
-            inputChange: () => {},
-          },
+         
           {
             style: 'input',
             label: '卖家地址',
@@ -607,16 +620,7 @@ export default {
             disabled: false,
             inputChange: () => {},
           },
-          {
-            style: 'input',
-            label: '手机号',
-            value: 'SELLER_PHONE',
-            colname: 'SELLER_PHONE',
-            class: 'beizu',
-            width: '12',
-            disabled: false,
-            inputChange: () => {},
-          },
+         
         ],
         // 存储表单得所有值
         formValue: {
