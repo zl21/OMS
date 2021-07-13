@@ -175,7 +175,7 @@ export default {
                   this.$Message.warning("原平台单号不能为空！");
                   return;
                 }
-                this.getPlaceData(0,0);
+                this.getPlaceData(0, 0);
               }, // 按钮点击事件
             },
             {
@@ -792,42 +792,28 @@ export default {
     // 生成'合计'行
     totalNum() {
       const self = this;
-      let amt = 0;
-      let qty = 0;
-      const key1 =
-        this.returnProduct == "0" ||
-          this.$parent.$parent.panelRef === "退货明细"
-          ? "QTY_REFUND"
-          : "QTY_EXCHANGE"; // 申请退货数量 : 换货数量
-      const key2 =
-        this.returnProduct == "0" ||
-          this.$parent.$parent.panelRef === "退货明细"
-          ? "REFUND_FEE"
-          : "AMT_EXCHANGE"; // 退货金额 : 成交金额
-      const key3 =
-        this.returnProduct == "0" ||
-          this.$parent.$parent.panelRef === "退货明细"
-          ? "PRO_ACTUAL_AMT"
-          : "EX_ACTUAL_AMT"; // 商品应退金额 : 换货金额
+      let amt = 0, qty = 0, realAmt = 0;
+      const key1 = this.returnProduct == "0" ? "QTY_REFUND" : "QTY_EXCHANGE"; // 申请退货数量 : 换货数量
+      const key2 = this.returnProduct == "0" ? "REFUND_FEE" : "AMT_EXCHANGE"; // 退货金额 : 成交金额
+      const key3 = this.returnProduct == "0" ? "PRO_ACTUAL_AMT" : "EX_ACTUAL_AMT"; // 商品应退金额 : 换货金额
       self.actionTableCon.totalData = [];
       if (!self.actionTableCon.data) return;
       self.actionTableCon.data.forEach((item) => {
         qty += Number(item[key1] || 0);
         amt = Util.accAdd(Number(item[key2]), Number(amt));
+        realAmt = Util.accAdd(item.REAL_AMT || 0, realAmt)
       });
       setTimeout(() => {
-        if (
-          this.returnProduct == "0" ||
-          this.$parent.$parent.panelRef === "退货明细"
-        ) {
+        if (this.returnProduct == "0") {
           self.actionTableCon.totalData.push({
-            selection: `${$i18n.t("other.total")}:`, // 合计
+            index: `${$i18n.t("other.total")}:`, // 合计
             REFUND_FEE: this.$OMS2.omsUtils.floatNumber(amt, 2),
             QTY_REFUND: qty,
+            REAL_AMT: realAmt,
           });
         } else {
           self.actionTableCon.totalData.push({
-            selection: `${$i18n.t("other.total")}:`,
+            index: `${$i18n.t("other.total")}:`,
             AMT_EXCHANGE: this.$OMS2.omsUtils.floatNumber(amt, 2),
             QTY_EXCHANGE: qty,
           });
