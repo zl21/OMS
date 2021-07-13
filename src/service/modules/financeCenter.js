@@ -20,6 +20,8 @@ export default {
   // upload2:(params) => network.post('/p/cs/upload2',params),
   // 请求赔付原因
   getCompensationReason: params => network.post('/p/cs/getCompensationReason', params),
+  // 请求赔付类型
+  getCompensationType: params => network.post('/p/cs/getCompensationType', params),
   // 计算应付金额
   getCompensate: params => network.post('/p/cs/getCompensate', params),
   // 保存 
