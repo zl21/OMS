@@ -4,7 +4,8 @@
     <div class="i18nDom">
       <Dropdown>
         <a href="javascript:void(0)">
-          中/En
+          <!-- 中/En -->
+          {{curLang}}
           <Icon type="ios-arrow-down"></Icon>
         </a>
         <DropdownMenu slot="list">
@@ -97,14 +98,23 @@ export default {
     return {
       vmI18n: i18n,
       langConfig,
+      curLang: '', // 当前语言
     };
   },
-
+  created() {
+    const _this = this;
+    const browseLan = localStorage.getItem('locale');
+    _this.vmI18n.locale = browseLan;
+    this.curLang = langConfig.find(it => it.type == browseLan).text;
+  },
   methods: {
     toggleLang(lang) {
       const _this = this;
       localStorage.setItem('locale', lang);
-      _this.vmI18n.locale = localStorage.getItem('locale');
+      // _this.vmI18n.locale = localStorage.getItem('locale');
+      _this.vmI18n.locale = lang;
+      this.curLang = langConfig.find(it => it.type == lang).text;
+      R3.store.commit(`customize/language`, lang || 'zh');
       this.$message({
         message: _this.vmI18n.messages[lang].tip_info,
         type: _this.vmI18n.messages[lang].tip_type,
@@ -162,11 +172,13 @@ export default {
   .i18nDom {
     z-index: 999;
     position: absolute;
-    top: 11px;
-    right: 12px;
+    top: 16px;
+    right: 16px;
     border: 1px solid #fff;
-    padding: 2px 16px;
+    padding: 1px 18px;
     border-radius: 5px;
+    width: 100px;
+    text-align: center;
     button {
       height: 24px;
       width: 60px;
