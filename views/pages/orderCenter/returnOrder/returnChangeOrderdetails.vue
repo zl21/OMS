@@ -1169,7 +1169,7 @@ export default {
      * 3.PRO_TYPE：0普通，other组合/福袋
      * 4.GIFT_RELATION：挂靠关系
      * 5.GROUP_GOODS_MARK：组合关系
-     * 6.GIFT_TYPE：0非赠品，other赠品
+     * 6.GIFT_TYPE：'0'非赠品，other赠品
      */
     selectTogether(row) {
       const pT = row.PRO_TYPE; // number
@@ -1213,19 +1213,13 @@ export default {
               this.indexL.push(index);
             }
             break;
-          /* case 'gM':
-            if (it.GROUP_GOODS_MARK == obj.GROUP_GOODS_MARK) {
-              this.haveGroup += `${it.PS_C_SKU_ECODE},`;
-              if (this.isMainDelete) return;
-              this.indexL.push(index);
-            }
-            break; */
           case 'other':
             const gR = it.GIFT_RELATION;
             const gM = it.GROUP_GOODS_MARK;
             const gT = it.GIFT_TYPE;
-            if (gT != "0" && !gM && !gR) {
-              // 系统/平台赠品（是赠品&不存在挂靠关系&不存在组合关系）
+            if (gT != "0") {
+              //  && !gM && !gR 系统/平台赠品，可能是组合、可能是挂靠（即可能存在挂靠、可能存在组合关系
+              // 系统/平台赠品（是赠品&不存在挂靠关系&不存在组合关系）---- 不实用了
               if (this.isMainDelete) return;
               this.indexL.push(index);
             }
