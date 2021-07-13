@@ -568,6 +568,7 @@ export default {
     purchaseQuantity: 'Purchase Quantity',   // 购买数量
     qualityGoods: 'Genuine Products',    //正品
     queryTime: 'Query time',
+    orderTime: 'Order time',
     reasonRefund: 'Refund reasons',    //退款原因
     receiptAddress: 'Ticket Collection Address',
     receivedBarcode: 'Paid-in Barcode',    //实收条码
