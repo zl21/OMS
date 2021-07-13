@@ -145,3 +145,4 @@ console.log($i18n.t(common.all));
 | v1.0.52 |  add 共n条 |
 | v1.0.53 |  add btn |
 | v1.0.54 |  update form_label.queryTime |
+| v1.0.55 | 英文包 |

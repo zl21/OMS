@@ -8,7 +8,7 @@
 import tipsMessage from './tipsMessage'
 
 export default {
-  tip_info: "切换为中文！",
+  tip_info: "切换成功！",
   tip_type: "success",
   welcome: '欢迎登录',
   login: '登录',
