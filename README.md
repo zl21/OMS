@@ -150,3 +150,4 @@ console.log($i18n.t(common.all));
 | v1.0.57 | add for 零售-详情 |
 | v1.0.58 | 构建报错修复 |
 | v1.0.59 | add modalTips.gd |
+| v1.0.60 | add 退换-新增 |
