@@ -31,7 +31,7 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: '保存',
+            text: $i18n.t('btn.save'),
             isShow: false,
             webname: "ST_C_DELIVERY_AREA_save",
             disabled: false, // 按钮禁用控制
@@ -51,7 +51,7 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: '排除区域',
+            text: $i18n.t('common.exclude_region'),
             isShow: false,
             webname: "ST_C_DELIVERY_AREA_addArea",
             disabled: false, // 按钮禁用控制
@@ -918,6 +918,7 @@ export default {
       });
     },
     fnselectAll(v) {
+      console.log(v);
       this.tableSelectArr = v
     },
     querList(data, fixedcolumnsData) {

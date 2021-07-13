@@ -40,7 +40,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'),
             disabled: false, // 按钮禁用控制
             btnclick: this.fnclose,
           },
@@ -57,7 +57,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'),
             disabled: false, // 按钮禁用控制
             btnclick: this.fnclose,
           },
@@ -90,11 +90,11 @@ export default {
             },
           },
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'),
             btnclick: this.fnclose,
           },
           {
-            text: '保存',
+            text: $i18n.t('btn.save'),
             btnclick: this.fnSave,
           },
         ],
@@ -104,11 +104,11 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'),
             btnclick: this.fnclose,
           },
           {
-            text: '保存',
+            text: $i18n.t('btn.save'),
             btnclick: this.fnSave,
           },
         ],
@@ -135,7 +135,7 @@ export default {
             type: 'Input', // 组件类型
             required: true, // 是否必填
             field: 'CP_C_PLATFORM_NAME',
-            label: '平台类型',
+            label: $i18n.t('form_label.platformType'),
             props: {
               placeholder: '',
               value: '',
@@ -445,7 +445,7 @@ export default {
           },
           {
             style: 'input',
-            label: '店铺名称',
+            label: $i18n.t('table_label.shopName'),
             value: 'CP_C_SHOP_TITLE',
             colname: 'CP_C_SHOP_TITLE',
             width: '12',
@@ -462,7 +462,7 @@ export default {
           },
           {
             style: 'input',
-            label: '手机号',
+            label: $i18n.t('form_label.cellPhone_number'),
             value: 'SELLER_PHONE',
             colname: 'SELLER_PHONE',
             class: 'beizu',
@@ -748,7 +748,7 @@ export default {
       this.REQUEST_ID = ''
     },
     fnMessage(msg) {
-      this.$Message.error(`请输入${msg}!`)
+      this.$Message.error($i18n.t('pHolder.enter')+`${msg}!`)
     },
     fnSave() {
       let str = ''

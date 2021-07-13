@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-07-07 21:14:43
+ * @LastEditTime: 2021-07-13 19:56:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
@@ -369,10 +369,13 @@ export default {
       this.tebdata = v
     },
     // 点击全选时触发
-    onSelectAll() { },
+    onSelectAll(v) { 
+console.log(v);
+this.tebdata = v
+    },
     // 点击取消全选时触发
     onSelectAllCancel(v) {
-
+this.tebdata = v
     },
     // 单击某一行时触发
     onRowClick(row) {

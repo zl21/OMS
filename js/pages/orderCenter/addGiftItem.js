@@ -20,63 +20,50 @@ export default {
         },
         formData: [
           {
-            label: '退换货单号',
+            label: $i18n.t('form_label.returnOrder_no'),
+            //'退换货单号',
             style: 'input',
             width: '7',
             value: 'OC_B_RETURN_BILL_NO',
             columns: ['OC_B_RETURN_BILL_NO'],
             AuotData: [], //匹配的选项
-            regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
+            // regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
           },
           {
             style: 'input', //输入框类型
-            label: '平台单号', //输入框前文字
+            label: $i18n.t('form_label.platform_billNo'),
+            //'平台单号', //输入框前文字
             value: 'SOURCE_CODE', //输入框的值
             columns: ['SOURCE_CODE'],
             width: '7',
             AuotData: [], //匹配的选项
-            regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
+            //regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
           },
           {
-            label: '物流单号',
+            label: $i18n.t('form_label.logisticsOrder_No'),
+            //'物流单号',
             style: 'input',
             width: '7',
             value: 'EXPRESS_CODE',
             columns: ['EXPRESS_CODE'],
             AuotData: [], //匹配的选项
-            regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
+            //regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
           },
      
           
           
-          // {
-          //   style: 'input', //输入框类型
-          //   label: '收货人', //输入框前文字
-          //   value: 'RECEIVER_NAME', //输入框的值
-          //   columns: ['RECEIVER_NAME'],
-          //   width: '7',
-          //   AuotData: [], //匹配的选项
-          //   regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
-          // },
+     
           {
             style: 'input', //输入框类型
-            label: '买家昵称', //输入框前文字
+            label:$i18n.t('table_label.buyerNickname'),
+            // '买家昵称', //输入框前文字
             value: 'BUYER_NICK', //输入框的值
             columns: ['BUYER_NICK'],
             width: '7',
             AuotData: [], //匹配的选项
-            regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
+           // regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
           },
-          // {
-          //   style: 'input', //输入框类型
-          //   label: '收货人手机', //输入框前文字
-          //   value: 'RECEIVER_MOBILE', //输入框的值
-          //   columns: ['RECEIVER_MOBILE'],
-          //   width: '7',
-          //   maxlength: 11,
-          //   AuotData: [], //匹配的选项
-          //   regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
-          // },
+   
         ],
       },
       // searchBtn
@@ -85,7 +72,7 @@ export default {
        // btnsite: 'left', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: '搜索',
+            text: $i18n.t('btn.search'),
             type:"primary",
             btnclick: () => {
               this.init(1)
@@ -104,19 +91,23 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: ' 取消',
+            text: $i18n.t('common.cancel'),
             btnclick: () => {
               this.$parent.$parent.closeConfirm()
             }, // 按钮点击事件
           },
           {
-            text: '确认',
+            text: $i18n.t('CONFIRM'),
             btnclick: () => {
               let reqdata = JSON.parse(JSON.stringify(this.tabdata))
               if (this.componentData.type == 2) {
                 reqdata.RETURN_ORDER_ITEM_LIST = this.rowlist
               }
               console.log(reqdata);
+              if (reqdata.length == 0) {
+                this.$Message.error('请选中一条数据！');
+                return
+              }
               this.$parent.$parent.closeConfirm(reqdata, this.componentData.type)
             }, // 按钮点击事件
           },
@@ -192,6 +183,12 @@ export default {
             })
           }
         },
+        {
+         
+          title: '序号',
+          width: 50,
+          key:"index"
+        }
       ]
 
 
@@ -200,7 +197,10 @@ export default {
           return item
         }
       })
-      this.data9 = data.RETURN_ORDER_LIST
+      this.data9 = data.RETURN_ORDER_LIST.map((item,index)=>{
+        item.index = index+1
+        return item
+      })
 
     },
     init(index) {
