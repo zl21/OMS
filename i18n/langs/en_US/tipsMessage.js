@@ -132,7 +132,7 @@ export default { // 弹窗提示、警告
 	dj: 'Please select the details and then click Delete',
 	dk: 'Creation date cannot be empty',
 	dl: 'Time range cannot exceed 24 hours',
-	dm:: 'Platform barcode id, barcode, batch code] cannot be at the same time empty! ',
+	dm: 'Platform barcode id, barcode, batch code] cannot be at the same time empty! ',
 	dn: 'Platform commodity ID cannot be empty! ',
 	do: 'Store store cannot be empty! ',
 	dp: 'Barcode cannot be empty! ',
