@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-06 16:53:22
+ * @LastEditTime: 2021-07-13 11:37:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -56,7 +56,7 @@ export default {
 // 搜索
 .NaVertical{
   .nav-search input{
-    #bundle > .defalutInput;
+    #bundle > .defalutInput !important;
   }
 }
 // 历史

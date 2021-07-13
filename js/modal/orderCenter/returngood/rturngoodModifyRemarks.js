@@ -9,8 +9,9 @@ export default {
     return {
       vmI18n: $i18n,
       bouncedData: {
-        animal: '覆盖原备注',
-        value: ''
+        animal: '追加到原备注',
+        value: '',
+        password:''
       },
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
@@ -39,6 +40,12 @@ export default {
             } // 按钮点击事件
           }
         ]
+      },
+      ruleValidate: {
+        value: [
+          { required: true, message: '备注内容不能为空！', trigger: 'blur' },
+          { type: 'string', min: 1, message: '备注内容不能为空！', trigger: 'blur' }
+        ],
       }
     };
   },
