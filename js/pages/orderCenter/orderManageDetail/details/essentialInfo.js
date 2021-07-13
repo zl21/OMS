@@ -53,13 +53,13 @@ export default {
           flag: false, // 需要加*
           width: '6',
           column: 'CP_C_SHOP_TITLE',
-          label: '店铺名称:'
+          label: $i18n.t('table_label.shopName') + ':', // 店铺名称
         },
         {
           flag: false,
           width: '6',
           column: 'ORDER_TYPE',
-          label: '单据类型:'
+          label: $i18n.t('form_label.billType'), // 单据类型
         },
         // {
         //   flag: false,
@@ -100,33 +100,33 @@ export default {
         {
           flag: false, // 需要加*
           width: '6',
-          column: 'CP_C_PHY_WAREHOUSE_ENAME',
-          label: '发货仓库:'
+          column: 'CP_C_PHY_WAREHOUSE_ENAME', // 
+          label: $i18n.t('form_label.delivery_warehouse') + ':'
         },
         {
           flag: false, // 需要加*
           width: '6',
-          column: 'CP_C_LOGISTICS_ENAME',
-          label: '物流公司:'
+          column: 'CP_C_LOGISTICS_ENAME', // 
+          label: $i18n.t('form_label.logisticsCompany') + ':'
         },
         {
           flag: false, // 需要加*
           width: '6',
           column: 'EXPRESS_CODE',
-          label: '物流单号:'
+          label: $i18n.t('form_label.logisticsOrder_No') + ':' // 物流单号
         },
         // {
         {
           flag: false,
           width: '12',
           column: 'BUYER_MESSAGE',
-          label: '买家备注:'
+          label: $i18n.t('form_label.buyerNotes') + ':', // 买家备注
         },
         {
           flag: false,
           width: '12',
           column: 'SELLER_MEMO',
-          label: '卖家备注:'
+          label: $i18n.t('form_label.sellerNotes') + ':', // 卖家备注
         },
         
       ],
@@ -135,49 +135,49 @@ export default {
           flag: false,
           width: '12',
           column: 'RECEIVER_NAME',
-          label: '收货人:'
+          label: $i18n.t('form_label.consignee') + ':'//收货人
         },
         {
           flag: false, // 需要加*
           width: '12',
           column: 'BUYER_NICK',
-          label: '买家昵称:'
+          label: $i18n.t('table_label.buyerNickname') + '+', // 买家昵称
         },
         {
           flag: false,
           width: '12',
           column: 'RECEIVER_MOBILE',
-          label: '收货人手机:'
+          label: $i18n.t('form_label.consignee_phone') + ':', // 收货人手机号
         },
         {
           flag: false,
           width: '12',
           column: 'RECEIVER_PHONE',
-          label: '电话:'
+          label: $i18n.t('form_label.consignee_tel') + ':', // 收货人电话
         },
         {
           flag: false,
           width: '12',
           column: 'CP_C_REGION_PROVINCE_ENAME',
-          label: '省市区:'
+          label: $i18n.t('form_label.aa') + ':'  //省市区
         },
         {
           flag: false,
           width: '12',
           column: 'RECEIVER_ZIP',
-          label: '邮编:'
+          label: $i18n.t('form_label.consignee_postcode') + ':', // 收货人邮编
         },
         {
           flag: false,
           width: '24',
           column: 'RECEIVER_ADDRESS',
-          label: '详细地址:'
+          label: $i18n.t('form_label.ab') + ':' // 详细地址
         },
         {
           flag: false,
           width: '24',
           column: 'SYS_REMARK',
-          label: '系统备注:'
+          label: $i18n.t('other.systemNotes') + ':',// 系统备注
         },
         // {
         //   flag: false,
@@ -234,7 +234,7 @@ export default {
   methods: {
     eyeClick() {
       this.eyeStatus = !this.eyeStatus;
-      this.eyeText = this.eyeStatus ? '隐藏' : '显示';
+      this.eyeText = this.eyeStatus ? $i18n.t('btn.show') : $i18n.t('btn.hide'); //隐藏 显示
       this.$emit('freshLoad', {DECRYPT : this.eyeStatus});
     },
     isQhMethod(data) {
@@ -255,7 +255,6 @@ export default {
     },
     // 添加赠品
     addGiftHandler() {
-      console.log('添加赠品');
       this.dialogs.addGift.data = {
         data: [{
           ID:this.componentData.order.ID,
@@ -286,7 +285,7 @@ export default {
     // 修改地址
     modifyAddress(){
       if(!['待审核','缺货'].includes(this.componentData.order.ORDER_STATUS)) {
-        this.$Message.error('订单状态不满足，不允许修改地址！');
+        this.$Message.error($i18n.t('modalTips.fq')); //订单状态不满足，不允许修改地址！
         return false;
       }
       this.dialogs.address.data = this.componentData.order;
@@ -297,7 +296,6 @@ export default {
     },
     // 修改备注
     modifyRemark(){
-      console.log('修改备注');
       this.dialogs.modifyRemark.data = {
         ids: [this.$route.params.customizedModuleId]
       };
@@ -312,7 +310,6 @@ export default {
     let ACTIONS = JSON.parse(sessionStorage.getItem("ACTIONS"));
     let buttonArr1 = this.butArr.map((x)=>{ if(ACTIONS.some(y => y.webname === x.webname)) return x}).filter(item => item);
     this.butArr = buttonArr1;
-    console.log(this.butArr);
     // this.butArr.forEach((x)=>{
       // 判断是否存在不存在设置为false，存在看是否显示ishide
       // if(!ACTIONS.some(y => y.webname === x.webname)){

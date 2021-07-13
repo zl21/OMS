@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-12 16:41:57
+ * @LastEditTime: 2021-07-13 17:13:28
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -193,7 +193,7 @@ export default {
         modal: false,
         businessButtonConfig: {
           typeAll: "default", // 按钮统一风格样式
-          btnsite: "left", // 按钮位置 (right , center , left)
+          btnsite: "right", // 按钮位置 (right , center , left)
           buttons: [
             {
               type: "primary", // 按钮类型
@@ -265,6 +265,7 @@ export default {
         columns: [], // 表头
         data: [], // 数据配置
         selectData: {},
+        height: 460, // 表格高度
         pageShow: true, // 控制分页是否显示
         loading: false,
         indexColumn: true, // 是否显示序号
@@ -487,17 +488,16 @@ export default {
     // 获取SKU数据
     async getPlaceData(page = 0, pageSize = 10) {
       let self = this;
-      if (page >= 1) page = `${page - 1}0`;
       this.replaceProductTable.loading = true;
       // 组合查询条件
-      let { PS_C_PRO_ECODE, ECODE, ENAME } =
-        this.replaceProductTable.businessFormConfig.formValue;
+      let { PS_C_PRO_ECODE, ECODE, ENAME } = this.replaceProductTable.businessFormConfig.formValue;
       // sku和spu同时存在 优先查询sku
+      console.log((Number(page) - 1)<0 ? 0 : (Number(page) - 1));
       if (PS_C_PRO_ECODE && ECODE) PS_C_PRO_ECODE = '';
       let fixedcolumns = { PS_C_PRO_ECODE, ECODE, ENAME };
       let searchdata = {
         table: "PS_C_SKU",
-        startindex: page,
+        startindex: (Number(page) - 1)<0 ? 0 : (Number(page) - 1)  * pageSize,
         range: pageSize,
         fixedcolumns: fixedcolumns,
         column_include_uicontroller: true,
@@ -521,7 +521,7 @@ export default {
         // 处理数据
         let tableKey = data.row.length ? Object.keys(data.row[0]) : []; // 获取行数据的key
         this.getCurrenData = data.row.length ? data.row : [];
-        this.replaceProductTable.total = data.totalRowCount;
+        this.replaceProductTable.total = pageSize ? data.totalRowCount : 0;
         this.replaceProductTable.data = [];
         data.row.forEach((item) => {
           //处理数据
@@ -740,14 +740,14 @@ export default {
       setTimeout(() => {
         if (this.$parent.$parent.panelRef === "退货明细" ) {
           self.businessActionTable.totalData.push({
-            selection: `${$i18n.t("other.total")}:`, // 合计
+            index: `${$i18n.t("other.total")}:`, // 合计
             REFUND_FEE: this.$OMS2.omsUtils.floatNumber(amt, 2),
             QTY_REFUND: qty,
             PRICE_ACTUAL: PRICE_ACTUAL // 成交单价
           });
         } else {
           self.businessActionTable.totalData.push({
-            selection: `${$i18n.t("other.total")}:`,
+            index: `${$i18n.t("other.total")}:`,
             AMT_EXCHANGE: this.$OMS2.omsUtils.floatNumber(amt, 2),
             QTY_EXCHANGE: qty,
           });

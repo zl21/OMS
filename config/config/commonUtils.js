@@ -1745,6 +1745,21 @@ class commonUtils {
       resolve(obj)
     })
   }
+  /**
+   * ark table 添加合计行
+   */
+  static totalColumn(totalKey,resData){
+      // 生成map对象
+      let mapObj = new Map();
+      totalKey.forEach(e => { mapObj.set(e,0) });
+      // 编辑查询
+      resData.forEach(e => {
+        totalKey.forEach(v => {
+          if(e[v] !== undefined) mapObj.set(v,this.floatNumber(Number(mapObj.get(v)) + Number(e[v]).toFixed(2)))
+        });
+      });
+      return Object.fromEntries([...mapObj])
+  }
 }
 
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-19 10:53:30
- * @LastEditTime: 2021-07-12 18:00:49
+ * @LastEditTime: 2021-07-13 17:10:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returngood/returnGoods.vue
@@ -39,7 +39,9 @@
             indexColumn: true, // 是否显示序号
             loading: false,
             isShowSelection: true, // 是否显示checkedbox
-            totalData:[{name:'合计'}]
+            totalData:[{
+              index:'合计'
+            }]
           }
       },
       }
@@ -80,17 +82,16 @@
             REFRESH: false, //是否加密
             index: 1 //当前页
           };
-          const { data } = await this.service.orderCenter.queryObject(params);
-          if(data.code === 0){
-            this.returnDetailAddTable.table.data = data.data.DATA.SUB_ITEM
+          const { data :{data,code} } = await this.service.orderCenter.queryObject(params);
+          if(code === 0){
+            this.returnDetailAddTable.table.data = data.DATA.SUB_ITEM
+            let totalNumArr =  ['QTY0','QTY','TOTAL_FEE','QTY_REFUND','AMT_REFUND','QTY_ACTUAL','AMT_ACTUAL_REFUND'];
+            let totalData = this.returnDetailAddTable.table.totalData[0];
+            totalData = Object.assign(totalData,$omsUtils.totalColumn(totalNumArr,data.DATA.SUB_ITEM));
           }
         } catch (error) {
           console.log(error);
         }
-      },
-      // 合计
-      totalNum(){
-
       }
     }
   }

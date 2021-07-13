@@ -1,7 +1,7 @@
 <template>
   <div class="modifyRemark customized-modal">
     <Form :label-width="80" :model="bouncedData" :rules="ruleValidate">
-      <FormItem label="修改备注"  prop="value">
+      <FormItem label="单据备注"  prop="value">
         <Input
           v-model="bouncedData.value"
           type="textarea"

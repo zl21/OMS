@@ -5,7 +5,8 @@
     <Col span="9" >
       <div class="order-tab-content">
         <div class="order-tab-title">
-          <span>收货信息</span>
+          <!-- 收货信息 -->
+          <span>{{ vmI18n.t('table_label.receivingInfo') }}</span>
           <div class="title-right">
             <p v-if="butArr[0]['isShow']">
               <span>
@@ -29,7 +30,8 @@
                   />
                 </span>
                 <label>
-                  修改收货地址
+                  <!-- 修改收货地址 -->
+                  {{vmI18n.t('modalTitle.modify_shipping_address')}} 
                 </label>
               </span>
             </p>
@@ -66,7 +68,8 @@
     <Col span="15" >
       <div class="order-tab-content">
         <div class="order-tab-title">
-          <span>基础资料</span>
+          <!-- 基础资料 -->
+          <span> {{ vmI18n.t('panel_label.basicData')}} </span>
           <div class="title-sign">
             <span v-for="(item,index) in componentData.order.ORDER_TAG" :key="index" :style="{ color: item.clr,borderColor: item.clr}">
               {{item.text}}
@@ -112,7 +115,8 @@
           </Row>
           <!-- 订单金额 -->
           <div class="order-money">
-            <span class="order-money-title">订单金额</span>
+            <!-- 订单金额 -->
+            <span class="order-money-title">{{ vmI18n.t('panel_label.basicData')}}</span>
             <ul class="totalAmount">
               <li>
                 <label>
@@ -128,17 +132,20 @@
               </li>
               <li class="symbol">+</li>
               <li>
-                <label>运费</label>
+                <!-- 运费 -->
+                <label>{{vmI18n.t('form_label.freight')}}</label>
                 <p>{{componentData.order.SHIP_AMT || '0.00'}}</p>
               </li>
               <li class="symbol">+</li>
               <li>
-                <label>服务费</label>
+                <!-- 服务费 -->
+                <label>{{vmI18n.t('form_label.service_charge')}}</label>
                 <p>{{ componentData.order.SERVICE_AMT || '0.00' }}</p>
               </li>
               <li class="symbol">=</li>
               <li class="resulf-text">
-                <label>订单总金额</label>
+                <!-- 订单总金额 -->
+                <label>{{vmI18n.t('form_label.service_charge') }}</label>
                 <p>{{orderPriceTotal}}</p>
               </li>
             </ul>
