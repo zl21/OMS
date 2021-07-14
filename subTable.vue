@@ -72,8 +72,8 @@ export default {
        * http://knowledge.ark.burgeononline.com/repository#/entryComponents/2/907865/2/2061
        */
       if (!self.config[centerName][req.tablename]) {
-        console.log("no Config in this.$OMS2.subTableConfig ！！！");
-        console.log('this.$OMS2.subTableConfig::', self.config);
+        console.warn("no Config in this.$OMS2.subTableConfig ！！！");
+        console.warn('this.$OMS2.subTableConfig::', self.config);
         return;
       }
       const data = JSON.parse(
@@ -95,7 +95,7 @@ export default {
       formdata.append("searchdata", data.searchdata);
       formdata.append("refcolid", data.refcolid);
       const res = await this.service.common.objectTableItem(formdata).catch(() => {
-        self.$Message.warning('p/cs/objectTableItem try catch !')
+        console.error('p/cs/objectTableItem try catch !')
       });
       if (res.data.code === 0) {
         self.showTable(res.data.datas ? res.data.datas : res.data.data);

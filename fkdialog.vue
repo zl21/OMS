@@ -137,7 +137,8 @@
               class="el-icon-search el-input__icon"
               @click="onSearchResult"
             />
-            <template slot="prepend"> 查询结果 </template>
+            <!-- 查询结果 -->
+            <template slot="prepend"> {{ vmI18n.t("other.queryResults") }} </template> 
           </el-input>
         </div>
       </div>
@@ -158,7 +159,7 @@
       <div class="dialog_right">
         <div class="right_top">
           <span>{{ vmI18n.t("HASBEENSELECTED") }}</span
-          ><span>(</span><span>{{ r_center_data.rightTotal }}条</span
+          ><span>(</span><span>{{ r_center_data.rightTotal }} {{vmI18n.t('common.piece')}}</span
           ><span>)</span>
 
           <span>
@@ -215,7 +216,8 @@
     <div v-if="errorDialog" class="fk-error-dialog">
       <div class="fk-error-dialog-box">
         <div class="fk-error-dialog-title">
-          警告
+          <!-- 警告 -->
+          {{ vmI18n.t("modalTitle.warning") }}
           <span class="fk-error-icon">
             <i class="iconfont icon-cha1" @click="errorDialog = false" />
           </span>
@@ -232,7 +234,8 @@
             </div>
           </div>
           <div class="fk-body-bottom">
-            <el-button @click="errorDialogClose"> 确定 </el-button>
+            <!-- 确定 -->
+            <el-button @click="errorDialogClose"> {{ vmI18n.t("common.determine") }} </el-button>
           </div>
         </div>
       </div>
@@ -276,7 +279,8 @@ export default {
     }, // 判断是否是单对象
     title: {
       type: String,
-      default: '弹框多选'
+      // default: '弹框多选'
+      default: $i18n.t('modalTitle.a7')
     }, // 标题
     canChinese: {
       type: Boolean,
@@ -304,7 +308,8 @@ export default {
       errorDialog: false, // errorDialog
       errorDialogClass: 'error', // 弹框类型
       warnDialogClass: 'warning',
-      errorDialogTitle: '错误', // 弹框标题
+      // errorDialogTitle: '错误', // 弹框标题
+      errorDialogTitle: $i18n.t('modalTitle.error'), // 弹框标题
       errorData: [{ message: '' }], // 弹框内容
       errorDialogBack: false, // 是否有返回按钮
       /* 弹框部分 */
@@ -694,7 +699,8 @@ export default {
             });// 把筛选的值放入数组
           } else { // 找到弹出提示已存在
             this.$message({
-              message: '该记录已在已选中列表中',
+              // message: '该记录已在已选中列表中',
+              message: $i18n.t('modalTips.go'),
               center: true,
               type: 'warning'
             });
@@ -718,7 +724,8 @@ export default {
           });// 把筛选的值放入数组
         } else { // 找到提示已存在
           this.$message({
-            message: '该记录已在已选中列表中',
+            // message: '该记录已在已选中列表中',
+            message: $i18n.t('modalTips.go'),
             center: true,
             type: 'warning'
           });
@@ -886,7 +893,10 @@ export default {
     result_save() {
       if (!this.module_name.trim()) {
         this.errorDialogClass = 'warning';
-        this.errorData = [{ message: '模板名称不能为空' }];
+        this.errorData = [{ 
+          // message: '模板名称不能为空' 
+          message: $i18n.t('modalTips.gp'),
+        }];
         this.errorDialog = true;
         return;
       }
@@ -911,7 +921,8 @@ export default {
           return;
         }
         this.$message({
-          message: '保存成功',
+          // message: '保存成功',
+          message: $i18n.t('modalTips.z9'),
           center: true,
           type: 'success'
         });
@@ -933,7 +944,8 @@ export default {
       this.request_param.GLOBAL = '';// 只传条件
       // 判断是否只能选中一条数据
       if (this.isOneData && this.r_result.length > 1) {
-        this.$message.warning('只能选取一条数据!');
+        // this.$message.warning('只能选取一条数据!');
+        this.$message.warning($i18n.t('modalTips.q2'));
         return;
       }
       if (true) {
@@ -949,7 +961,8 @@ export default {
           }
           if (response.ids.length > 8000) {
             return this.$message({
-              message: '查询数量已超过上限，请修改查询条件!',
+              // message: '查询数量已超过上限，请修改查询条件!',
+              message: $i18n.t('modalTips.gq'),
               center: true,
               type: 'warning'
             });

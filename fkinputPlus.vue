@@ -302,7 +302,7 @@ export default {
     blur() {
       // 失焦：模糊搜索的选中、clear都会先走失焦
       if (this.isFuzzy && !this.isHandleSelect) {
-        console.log('fuzzy blur，模糊搜索失去焦点了，自行处理！');
+        console.warn('fuzzy blur，模糊搜索失去焦点了，自行处理！');
         setTimeout(() => {
           if (this.itemdata.pid && this.itemdata.valuedata) { // 假装已经走了选中事件
             return
@@ -318,7 +318,7 @@ export default {
                 this.$emit('inputBlur', this.itemdata);
               }
             } else {
-              console.log('模糊搜索未查询到值！');
+              console.warn('模糊搜索未查询到数据！');
               this.itemdata.pid = '';
               this.itemdata.valuedata = '';
               if (this.isBackRowItem) {
@@ -331,7 +331,7 @@ export default {
           this.isHandleSelect = false;
         }, 3000);
       } else {
-        console.log('not fuzzy blur');
+        console.warn('not fuzzy blur');
       }
     },
     clear() {

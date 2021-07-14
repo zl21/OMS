@@ -80,7 +80,7 @@
         @on-change="searchOnChange" 
         style="width: 220px"
       >
-        <span slot="prepend" v-if="isSearchText">搜索</span>
+        <span slot="prepend" v-if="isSearchText">{{vmI18n.t('btn.search')}}</span>
         <Select 
           :label-in-value="true" 
           @on-change="searchSelectOnChange" 

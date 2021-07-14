@@ -4,7 +4,7 @@
       v-model="all"
       @click.prevent.native="handleCheckAll"
     >
-      全部
+      {{ vmI18n.t('common.all') }}
     </Checkbox>
 
     <CheckboxGroup
