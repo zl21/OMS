@@ -111,7 +111,7 @@
             value: 'OC_B_ORDER_DELIVERY'
           },
           {
-            label: '操作日志', // 操作日志
+            label: $i18n.t('panel_label.operationLog'), // 操作日志
             value: 'OC_B_ORDER_LOG'
           }
         ],

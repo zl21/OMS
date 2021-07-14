@@ -157,7 +157,7 @@ export default {
             },
             {
               key: 'CP_C_SHOP_TITLE',
-              title: '店铺名称'
+              title: $i18n.t('table_label.shopName'), // 店铺名称
             },
             {
               key: 'RECEIVE_NAME',

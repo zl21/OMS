@@ -21,7 +21,7 @@ export default {
       backable: false,
       loading: false,
       labelList: [{
-        label: '操作日志',
+        label: $i18n.t('panel_label.operationLog'), // 操作日志
         value: 'LOG',
       },],
       labelDefaultValue: 'CP_REGION_ALIAS_LOG', // 设置tab默认值

@@ -192,7 +192,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: '店铺名称',
+            label: $i18n.t('table_label.shopName'), // 店铺名称
             value: 'CP_C_SHOP_TITLE',
             colname: 'CP_C_SHOP_TITLE',
             width: '12',

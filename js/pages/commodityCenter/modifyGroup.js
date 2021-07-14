@@ -266,7 +266,7 @@ export default {
           value: 'generalGroupItem',
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value:'logTable'
         }
       ],
@@ -275,7 +275,7 @@ export default {
           value: 'luckbagGroupItem',
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value:'logTable'
         }],
         labelValue: 'generalGroupItem'
@@ -297,7 +297,7 @@ export default {
             {
               type:'warning',
               webname: 'ps_c_pro_group_del', // 返回
-              text: '删除',
+              text: $i18n.t('btn.delete'), // 删除
               disabled: false,
               btnclick: () => {
                 this.delLuck();
@@ -407,7 +407,7 @@ export default {
             {
               type:'warning',
               webname: 'ps_c_pro_group_del', // 返回
-              text: '删除',
+              text: $i18n.t('btn.delete'), // 删除
               disabled:false,
               btnclick: () => {
                 this.delGeneral();

@@ -124,7 +124,7 @@ export default {
             type: 'asc'
           },
           {
-            title: '店铺名称',
+            title: $i18n.t('table_label.shopName'), // 店铺名称
             key: 'CP_C_SHOP_TITLE',
             width: '',
             type: 'asc'

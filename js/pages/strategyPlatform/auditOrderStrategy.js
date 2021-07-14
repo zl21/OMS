@@ -275,7 +275,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
         },
         label:{
           labelList: [{
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'log',
         }],
         labelDefaultValue:'log'

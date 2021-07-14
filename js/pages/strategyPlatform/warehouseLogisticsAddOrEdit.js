@@ -160,7 +160,7 @@ export default {
           },
           {
             style: 'input',
-            label: '备注',
+            label: $i18n.t('table_label.remarks'), // 备注
             colname: 'REMARK',
             value: 'REMARK',
             width: '6',
@@ -287,7 +287,7 @@ export default {
           {
             webname: 'ST_C_WAREHOUSE_LOGISTICS_SUB_DELETE',
             type:'warning',
-            text: '删除',
+            text: $i18n.t('btn.delete'), // 删除
             disabled: false, // 按钮禁用控制
             isShow: false,
             btnclick: () => {
@@ -337,7 +337,7 @@ export default {
           isShow: false
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_WAREHOUSE_LOGISTICS_LOG',
           isShow: false
         }

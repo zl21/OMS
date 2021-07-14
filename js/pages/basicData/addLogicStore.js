@@ -119,7 +119,7 @@ import businessButton from 'professionalComponents/businessButton';
             },
             {
               style: 'textarea',
-              label: '备注',
+              label: $i18n.t('table_label.remarks'), // 备注
               value: 'REMARK',
               width: '24',
               disabled: false,

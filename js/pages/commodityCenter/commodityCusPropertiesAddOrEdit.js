@@ -382,7 +382,7 @@ export default {
             },
             {
               type:'warning',
-              text: '删除',
+              text: $i18n.t('btn.delete'), // 删除
               btnclick: () => {
                 this.deleteAttrValue();
               },
@@ -396,7 +396,7 @@ export default {
           value: 'PROPERTYVALUES',
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'BS_EXTRA_ATTRIBUTE_DEF_LOG',
         },
       ],

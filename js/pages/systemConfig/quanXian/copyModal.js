@@ -82,7 +82,7 @@ export default {
                       },
                       {
                         colname: 'INDEX',
-                        name: '序号',
+                        name: $i18n.t('table_label.serialNo'), // 序号
                         show: false
                       },
                       {

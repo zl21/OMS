@@ -189,7 +189,7 @@ export default {
         },
         {
          
-          title: '序号',
+          title: $i18n.t('table_label.serialNo'), // 序号
           width: 50,
           key:"index"
         }
@@ -229,7 +229,7 @@ export default {
           } else {
             let typeArr = [{
               type: 'index',
-              title: '序号',
+              title: $i18n.t('table_label.serialNo'), // 序号
               width: 60,
               align: 'center'
             }]

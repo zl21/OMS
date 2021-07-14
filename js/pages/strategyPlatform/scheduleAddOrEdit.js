@@ -160,7 +160,7 @@ export default {
           },
           {
             style: 'input',
-            label: '优先级',
+            label: $i18n.t('table_label.priority'), // 优先级
             colname: 'RANK',
             value: 'RANK',
             width: '6',
@@ -205,7 +205,7 @@ export default {
       pickingForDate: {
         formData: [{
             style: 'time', // 输入框类型
-            label: '创建时间', // 输入框前文字
+            label: $i18n.t('table_label.creationTime'), // 创建时间 // 输入框前文字
             colname: 'PICK_CREATE_DATE',
             type: 'time',
             placement: 'bottom',
@@ -770,10 +770,10 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: '序号'
+            title: $i18n.t('table_label.serialNo'), // 序号
           },
           {
-            title: '操作',
+            title: $i18n.t('table_label.operation'), // 操作
             key: 'demo5',
             render: (h, params) => h('div', [
               h(
@@ -794,7 +794,7 @@ export default {
                     }
                   }
                 },
-                '编辑'
+                $i18n.t('table_label.edit') // 编辑
               ),
               h(
                 'Button',
@@ -895,7 +895,7 @@ export default {
       },
       pickTableHeaders: [
         [{
-          title: '创建时间',
+          title: $i18n.t('table_label.creationTime'), // 创建时间
           key: 'PICK_CREATE_DATE',
         },
         {
@@ -952,10 +952,10 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: '序号'
+            title: $i18n.t('table_label.serialNo'), // 序号
           },
           {
-            title: '操作',
+            title: $i18n.t('table_label.operation'), // 操作
             key: 'demo5',
             render: (h, params) => h('div', [
               h(
@@ -974,7 +974,7 @@ export default {
                     }
                   }
                 },
-                '编辑'
+                $i18n.t('table_label.edit') // 编辑
               ),
               h(
                 'Button',
@@ -1002,7 +1002,7 @@ export default {
                     }
                   }
                 },
-                '删除'
+                $i18n.t('btn.delete') // 删除
               )
             ])
           },
@@ -1065,7 +1065,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_C_VIPCOM_PROJECT_LOG',
         }
       ],

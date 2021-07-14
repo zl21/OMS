@@ -412,7 +412,7 @@ export default {
           value: 'PS_C_ALTERNATE_SKU',
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'PS_C_SKU_LOG',
         },
       ],

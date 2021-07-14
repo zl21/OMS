@@ -124,7 +124,7 @@ export default {
                   props: {
                     columns: [
                       {
-                        title:'序号',
+                        title:$i18n.t('table_label.serialNo'), // 序号
                         key:'index'
                       },
                       {

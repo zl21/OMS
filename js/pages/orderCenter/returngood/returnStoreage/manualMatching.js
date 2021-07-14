@@ -137,7 +137,7 @@ export default {
             },
             {
               key: 'CP_C_SHOP_TITLE',
-              title: '店铺名称'
+              title: $i18n.t('table_label.shopName') // 店铺名称
             }
           ], // 表头
           data: [], // 数据配置
@@ -337,7 +337,7 @@ export default {
           },
           {
             style: 'input',
-            label: '备注',
+            label: $i18n.t('table_label.remarks'), // 备注
             value: 'REMARK',
             width: '12'
           },

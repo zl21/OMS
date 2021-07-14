@@ -359,7 +359,7 @@ export default {
           {
             webname: 'CLASSIFY_DeleteDetailBtn',
             type:'warning',
-            text: '删除',
+            text: $i18n.t('btn.delete'), // 删除
             btnclick: () => {
               this.deleteAttrValue();
             },
@@ -374,7 +374,7 @@ export default {
         value: 'PROPERTY',
       },
       {
-        label: '操作日志',
+        label: $i18n.t('panel_label.operationLog'), // 操作日志
         value: 'PS_C_CLASSIFY_LOG',
       },
       ],

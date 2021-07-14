@@ -19,7 +19,7 @@ export default {
             }
           },
           {
-            text: '删除',
+            text: $i18n.t('btn.delete'), // 删除
             btnclick: () => {
               this.del();
             }
@@ -35,7 +35,7 @@ export default {
           type: 'index',
           width: 60,
           align: 'left',
-          title: '序号'
+          title: $i18n.t('table_label.serialNo'), // 序号
         },
         {
           title: '供应商名称',

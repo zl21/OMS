@@ -61,7 +61,7 @@ export default {
           },
           {
             webname: 'ST_C_PRICE_MAIN_COPY', // 返回
-            text: '复制',
+            text: $i18n.t('common.copy'), // 复制
             isShow: false,
             btnclick: () => {
               this.onOk(this.ID, true)
@@ -103,7 +103,7 @@ export default {
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               istooltip: true,
-              name: '店铺名称', // 赔付类型
+              name: $i18n.t('table_label.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 171534, // 对应的表ID
@@ -153,7 +153,7 @@ export default {
           },
           {
             style: 'input',
-            label: '优先级',
+            label: $i18n.t('table_label.priority'), // 优先级
             colname: 'PRIORITY',
             width: '6',
             disabled: false,
@@ -164,7 +164,7 @@ export default {
           },
           {
             style: 'input',
-            label: '备注',
+            label: $i18n.t('table_label.remarks'), // 备注
             colname: 'REMARK',
             width: '6',
             disabled: false,
@@ -230,7 +230,7 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: '序号'
+            title: $i18n.t('table_label.serialNo'), // 序号
           },
           {
             title: "SKU编码",
@@ -356,13 +356,12 @@ export default {
                 datelimit: 'all',
                 display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
                 fkdisplay: 'drp', // 外键关联类型
-                fkdesc: '店铺',
                 inputname: 'PS_C_SKU_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
                 isnotnull: false, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: 'SKU编码', // 赔付类型
+                name: $i18n.t('table_label.code_SKU'), // SKU编码
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'CP_C_SHOP', // 对应的表
                 reftableid: 171666, // 对应的表ID
@@ -408,7 +407,7 @@ export default {
           buttons: [
             {
               webname: 'ST_C_PRICE_SUB_DELETE',
-              text: '删除明细',
+              text: $i18n.t('modalTitle.deleteDetails'), // 删除明细
               isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -417,7 +416,7 @@ export default {
             },
             {
               webname: 'ST_C_PRICE_SUB_IMPORT',
-              text: '导入',
+              text: $i18n.t('modalTitle.import'), // 导入
               isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -426,7 +425,7 @@ export default {
             },
             {
               webname: 'ST_C_PRICE_SUB_EXPORT',
-              text: '导出',
+              text: $i18n.t('btn.export'), // 导出
               isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -438,7 +437,7 @@ export default {
       },
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: '导入',
+        confirmTitle: $i18n.t('modalTitle.import'), // 导入
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -461,7 +460,7 @@ export default {
           value: 'goods',
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_C_PRICE_LOG',
         }
       ],
@@ -740,7 +739,8 @@ export default {
       let valid = true;
       for (let key of validFields) {
         if (!obj[key]) {
-          this.$Message.error(`明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : 'SPU编码'}不能为空`)
+          // `明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : 'SPU编码'}不能为空`
+          this.$Message.error(`明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : $i18n.t('table_label.itemNo01')}不能为空`)
           valid = false;
           break;
         }
@@ -823,7 +823,7 @@ export default {
         mes2 += '最低成交单价'
       }
       if (!(PS_C_SPU_ID || PS_C_SKU_ID)) {
-        mes2 += ' SPU/SKU编码'
+        mes2 += ` SPU/${$i18n.t('table_label.code_SKU')}` // i18n SPU/SKU编码
       }
       mes2 = !mes2 ? '' : `${mes2} 不能为空`
       if ((!(PS_C_SPU_ID || PS_C_SKU_ID)) && this.isMasterRequired && !isSaveAll) {

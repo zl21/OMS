@@ -164,7 +164,7 @@ export default {
             itemdata: {
               colid: '172070',
               colname: 'CP_C_SHOP_IDS',
-              name: '店铺名称',
+              name: $i18n.t('table_label.shopName'), // 店铺名称
               valuedata: '',
               pid: '',
               fkdisplay: 'mrp',
@@ -186,7 +186,7 @@ export default {
             colname: 'TIME',
             style: 'formCompile',
             class: 'soltDom',
-            label: '时间类型',
+            label: $i18n.t('form_label.timeType'), // 时间类型
             format: 'yyyy-MM-dd HH:mm:ss',
             slotName: 'spec01',
             width: '24',
@@ -331,7 +331,7 @@ export default {
             style: '',
             colname: 'TIME_TYPE',
             class: 'soltDom',
-            label: '时间类型',
+            label: $i18n.t('form_label.timeType'), // 时间类型
             slotName: 'spec03',
             width: '18',
             disabled: false,
@@ -405,7 +405,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_HOLD_ORDER_STRATEGY_LOG'
         }
       ],

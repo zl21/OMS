@@ -37,7 +37,7 @@ export default {
           value: 'PROPERTY'
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_ASSIGN_LOGISTICS_LOG'
         }
       ],
@@ -240,7 +240,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '店铺名称', // 赔付类型
+              name: $i18n.t('table_label.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
               reftableid: 10285, // 对应的表ID
@@ -300,7 +300,7 @@ export default {
           },
           {
             style: 'input',
-            label: '备注',
+            label: $i18n.t('table_label.remarks'), // 备注
             value: 'remark',
             colname: 'remark',
             width: '16',
@@ -705,7 +705,7 @@ export default {
             if (columns.length > 0) {
               this.tableConfig.columns = [
                 {
-                  title: '序号',
+                  title: $i18n.t('table_label.serialNo'), // 序号
                   key: 'index'
                 }
               ];
@@ -739,7 +739,7 @@ export default {
               if (columns.length > 0) {
                 this.tableConfig.columns = [
                   {
-                    title: '序号',
+                    title: $i18n.t('table_label.serialNo'), // 序号
                     key: 'index'
                   }
                 ];
@@ -770,7 +770,7 @@ export default {
               if (columns.length > 0) {
                 this.tableConfig.columns = [
                   {
-                    title: '序号',
+                    title: $i18n.t('table_label.serialNo'), // 序号
                     key: 'index'
                   }
                 ];

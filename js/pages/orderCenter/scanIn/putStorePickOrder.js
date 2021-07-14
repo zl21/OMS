@@ -501,7 +501,7 @@ export default {
             },
             {
               style: 'input',
-              label: '备注',
+              label: $i18n.t('table_label.remarks'), // 备注
               value: 'REMARK',
               dataAcessKey: 'SHIP_AMT',
               disabled: false,
