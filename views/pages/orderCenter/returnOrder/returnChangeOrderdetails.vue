@@ -21,7 +21,6 @@
       v-model="tableConfig.modal"
       width="900"
       titleAlign="left"
-      
       :title="`${vmI18n.t('modalTitle.ac')}（${selectLen}）`"
       :mask="true"
       footer-hide

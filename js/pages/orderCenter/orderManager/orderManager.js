@@ -421,7 +421,7 @@
           btnsite: 'right',
           buttonsRight: [
             {
-              text: '搜索', // 按钮文本
+              text: $i18n.t('btn.search'), // 搜索
               size: 'large',
               shape: 'circle',
               icon: 'ios-search',
