@@ -981,33 +981,33 @@ export default {
             align: 'center',
           },
           {
-            title: "序号",
+            title: $i18n.t("table_label.serialNo"), // "序号",
             key: "index",
             type: "index",
             align: 'center',
           },
           {
-            title: "SKU编码", // SKU编码
+            title: $i18n.t("table_label.code_SKU"), // SKU编码
             key: "PS_C_SKU_ECODE",
             dataAcessKey: "PS_C_SKU_ECODE",
           },
           {
-            title: "SKU名称", // SKU名称
+            title: $i18n.t("form_label.skuName"), // SKU名称
             key: "PS_C_SKU_ENAME",
             dataAcessKey: "PS_C_SKU_ENAME",
           },
           {
-            title: "SPU编码", // SPU编码
+            title: $i18n.t("table_label.itemNo01"), // SPU编码
             key: "PS_C_PRO_ECODE",
             dataAcessKey: "PS_C_PRO_ECODE",
           },
           {
-            title: "SPU名称", // SPU名称
+            title: $i18n.t("table_label.itemNo02"), // SPU名称
             key: "PS_C_PRO_ENAME",
             dataAcessKey: "PS_C_PRO_ENAME",
           },
           {
-            title: "零售价", // 零售价
+            title: $i18n.t("form_label.cu"), // 零售价
             key: "PRICE",
             dataAcessKey: "PRICE",
           },
@@ -1496,11 +1496,11 @@ export default {
         // 子表初始化（加两列
         if (self.copyType == '2') {
           const exCol = [{
-            title: "商品优惠", // 商品优惠
+            title: $i18n.t("form_label.b3"), // 商品优惠
             key: "AMT_DISCOUNT",
           },
           {
-            title: "订单优惠", // 订单优惠
+            title: $i18n.t("form_label.ct"), // 订单优惠
             key: "ORDER_SPLIT_AMT",
           },]
           self.jordanTableConfig.columns = self.jordanTableConfig.columns.concat(exCol);
