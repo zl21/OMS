@@ -144,7 +144,7 @@ export default {
               },
             },
             {
-              text: '重置',
+              text: $i18n.t('btn.reset'), //重置
               icon: 'ios-refresh',
               btnclick: () => {
                 this.resetHandel();

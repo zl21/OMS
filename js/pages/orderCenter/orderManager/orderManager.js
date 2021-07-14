@@ -432,7 +432,7 @@
               }, // 按钮点击事件
             },
             {
-              text: '重置', // 按钮文本
+              text: $i18n.t('btn.reset'), // 按钮文本 重置
               size: 'large',
               shape: 'circle',
               icon: 'ios-refresh',

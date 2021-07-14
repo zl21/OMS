@@ -103,7 +103,7 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: '重置',
+            text: $i18n.t('btn.reset'), //重置
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               // this.formEmpty(this, 'formConfig', ['ORDER_DATE', 'PAY_TIME']);
