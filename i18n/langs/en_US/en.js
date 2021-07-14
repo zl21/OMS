@@ -10,7 +10,7 @@ import tipsMessage from './tipsMessage'
 export default {
   tip_info: "Switch to English !",
   tip_type: "success",
-  welcome: "Welcome login",
+  welcome: "WELCOME",
   login: "Login",
   message: {
     hello: 'Hello World',
