@@ -21,17 +21,17 @@ export default {
     total: 'Total',
     piece: 'items',
     all: 'All', //全部
-    baseInformation: 'Base Information', //Base Information
+    baseInformation: 'Base Info', //Base Info
     cancel: 'Cancel', //取消
     cancelled: 'Cancelled', //已取消
     submitted: 'Submitted', //已提交
     city: 'City',
     close: 'Close', //关闭
-    consigneeInformation: 'Consignee Information', //收货人信息
+    consigneeInformation: 'Consignee Info', //收货人信息
     copy: 'Copy', //复制
     custAudited: 'Customer Audited',
     delivered_or_not: 'Check all',
-    detailed_info: 'Detail Information',
+    detailed_info: 'Detail Info',
     details: 'Details', //详情
     determine: 'Determine', //确定
     downloadNow: 'Download Now',
@@ -45,7 +45,7 @@ export default {
     province: 'Province',
     refresh_succee: 'Refresh Succee', //刷新成功 ,Refresh Succee
     region: 'Region',
-    remarksInfo: 'Remarks Information', //备注信息
+    remarksInfo: 'Remarks Info', //备注信息
     return: 'Return', //返回
     reviewed: 'Reviewed', //已审核
     searching: 'Searching',
@@ -84,13 +84,13 @@ export default {
     activity_overview: 'Activity overview',
     addTo_original_remarks: 'Add to original remarks',
     basicActivity: 'Basic Activity',
-    basic_info: 'Basic Information',
+    basic_info: 'Basic Info',
     billCode: 'Bill Code',
     billTime: 'Bill Time',
     blessingBag: 'Blessing Bag',
     color: 'Color', //颜色
     common: 'Common',
-    condition_info: 'Conditon Information',
+    condition_info: 'Conditon Info',
     confirmPrinting: 'Confirm Printing',
     day: 'Day',
     Designated_free_purchase: 'Designated free purchase',
@@ -100,13 +100,13 @@ export default {
     exchangeAmounts: 'Exchange Amounts',
     exchangeQuantity: 'Exchange Quantity', //换货数量
     fixed_settlement: 'Fixed Settlement',
-    gift_info: 'Gift Information',
+    gift_info: 'Gift Info',
     gift_list: 'Gift List',
     gift_set: 'Gift Set',
     goods_quantity: 'Goods Quantity',
     goods: 'Goods', //商品
     hour: 'Hour',
-    info_set: 'Information Set',
+    info_set: 'Info Set',
     legend: 'Legend',
     minute: 'Minute',
     myMission: 'My mission', //我的任务
@@ -370,7 +370,7 @@ export default {
     returnTreasuryDetails: 'Return and warehousing details',
     role_authority: 'Role Rights',    //角色权限,Role authority
     scanDetails: 'Scan Details',    //扫描明细
-    scanInfo: 'Scan for the Information',    //扫描信息
+    scanInfo: 'Scan for the Info',    //扫描信息
     scannAndWarehous: 'Scan for warehousing',    //扫描入库
     setWarehouseLogistics: 'Warehouse logistics priority settings',
     supplier_authority: 'Supplier Permissions',    //供应商权限,Supplier authority
@@ -545,7 +545,7 @@ export default {
     payableAdjustReason: 'Cause for compensation',
     payableAdjustStandard: 'Compensation Standards',
     payableAdjustType: 'Type',
-    payment_info: 'Payment Information',    //支付信息
+    payment_info: 'Payment Info',    //支付信息
     paymentMethod: 'Method of Payment',    //付款方式
     personal: 'Individuals',
     phone_number: 'Cell Phone Number',    //手机号码
@@ -563,7 +563,7 @@ export default {
     platformRefundNo: 'Platform refund back Number',
     platformTime: 'Platform time',
     platformType: 'Platform Type',
-    preferential_info: 'Preferential Information',    //优惠信息
+    preferential_info: 'Preferential Info',    //优惠信息
     price: 'Price',
     processor_remarks: 'Handessor Notes',
     promotion_status: 'Promotional Status',
@@ -605,9 +605,9 @@ export default {
     returnOrderLog: 'Return Oder Log', //退货单日志
     returnQuantity: 'Return Ouantity', //退货数量
     returnRefund: 'Refunds',//退货退款
-    returnInformation: 'Return Information',//返回信息
+    returnInformation: 'Return Info',//返回信息
     reviewer: 'Reviewer',//审核人
-    routing_info: 'Routing Information', //路由信息
+    routing_info: 'Routing Info', //路由信息
     salesReturn_to_warehouse: 'Sell Back Into Warehouse', //销退入库仓
     scansNumber: 'Scan The Number', //扫描数量
     scheduleOwnership: 'Schedule attribution',//档期日程归属
@@ -618,7 +618,7 @@ export default {
     service_charge: 'Service Charge', //服务费
     settlement_price: 'Settlement Price',//结算价
     shipPhysicalWarehouse: 'Physical Warehouse For Delivery',//发货实体仓库
-    shipping_info: 'Delivery Information', //发货信息
+    shipping_info: 'Delivery Info', //发货信息
     skuName: 'SKU Name', //SKU名称
     source_billNo: 'Source Document Number',//来源单据编号
     sourceDocuments: 'Source Documents', //单据来源
@@ -635,7 +635,7 @@ export default {
     synchronizationStatus: 'Synchronization Status',//同步状态
     synchronizedInventory: 'Synchronous inventory',//同步库存数
     telephoneNumber: 'Telephone Number',//电话号码
-    ticket_info: 'Ticket Information',//收票信息
+    ticket_info: 'Ticket Info',//收票信息
     timeRange: 'Time Range',//时间范围
     timeType: 'Time Type',//时间类型
     transactionAmount: 'Transaction Amount', //成交金额
@@ -664,7 +664,7 @@ export default {
     a3: 'Schedule Ownership Name', //日程归属名称
     internationalCode: 'International Code', //国际码
     abbreviation: 'Abbreviation', //简称
-    abnormalInfo: 'Abnormal Information', //异常信息
+    abnormalInfo: 'Abnormal Info', //异常信息
     activity_period: 'Active Time Period', //活动时间段
     actual_barcode: 'Actual Barcode', //实际发出条码
     actual_transactionPrice: 'Actual Transaction Price', //实际成交价
@@ -723,7 +723,7 @@ export default {
     giftItemCode: 'Giveaway Product Code',//赠品商品编码
     giftItemName: 'Gift Product Name',//赠送商品名称
     given_total_quantity: 'Total Gift Quantity',//赠送总计数量
-    goodsInfo: 'Commodity Information', //商品信息
+    goodsInfo: 'Commodity Info', //商品信息
     grouping: 'Grouping',//分组
     groupName: 'Group Name',//分组名称
     in_warehouse_goods_details: 'Details Of Warehousing Order',//入库单商品明细
@@ -736,7 +736,7 @@ export default {
     modificationTime: 'Revision Time',//修改时间
     new_address: 'New Address',//新地址
     new_detailed_address: 'New Detailed Address',//新详细地址
-    new_receivingInfo: 'New Receiving Information',//新收货信息
+    new_receivingInfo: 'New Receiving Info',//新收货信息
     no_original_barcode: 'Is There No Original Single Barcode',//是否无原单条码
     number_of_rows_per_group: 'Number Of Drawn Rows Per Group',//每组抽取行数
     operation_description: 'Operation Description',//操作描述
@@ -760,7 +760,7 @@ export default {
     platform_barcode_ID: 'Platform Bar Code ID'//平台条码ID
     , platform_model_ID: 'Platform Model ID',//平台款号ID
     platform_orderNo: 'Platform Single Number', //平台单号
-    platformInfo: 'Platform Information', //平台信息
+    platformInfo: 'Platform Info', //平台信息
     platform_store_title: 'Platform Store Title',//平台店铺标题
     preferential_amount: 'Discount Amount', //优惠金额
     priority: 'Priority',//优先级
@@ -773,7 +773,7 @@ export default {
     quantity_availableSale: 'Quantity Available',//可售数量
     quantity_demolished: 'Quantity To Be Dismantled',//待拆数量
     quantity_split: 'Split Quantity',//拆分数量
-    receivingInfo: 'Receiving Information', //收货信息
+    receivingInfo: 'Receiving Info', //收货信息
     refund_status: 'Refund Status',//退款状态
     remarks: 'Remarks',//备注
     replicationReason: 'Copy Reason', //复制原因
@@ -826,7 +826,7 @@ export default {
     th2: "Replacement Ptem",//替换后商品
     a0: 'Special Setting Details Of The Store Goods', // 店铺商品特殊设置明细
     a1: 'Replaced Goods SKU', // 被替换商品SKU
-    a2: 'Batch New Condition Information Import', // 批量新增条件信息导入
+    a2: 'Batch New Condition Info Import', // 批量新增条件信息导入
     a3: 'Please Select A Warehouse',//请选择仓库
     a4: 'Replacement Item SKU',//替换后商品SKU
     a5: 'Error Reporting Message',//报错信息
