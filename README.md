@@ -161,3 +161,4 @@ console.log($i18n.t(common.all));
 | v1.0.68 | 翻译 |
 | v1.0.69 | add and 翻译 |
 | v1.0.70 | add menu |
+| v1.0.71 | add plHolder. |

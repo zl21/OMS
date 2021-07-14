@@ -319,7 +319,7 @@ export default {
     a2: 'Username',
     a3: 'Password',
     a4: 'Please Enter',
-    a5: '',
+    a5: 'Please enter the function name to search',
     a6: '',
     a7: '',
     a8: '',
@@ -981,7 +981,7 @@ export default {
     scanDeliveryTime: 'Scan For The Outbound Time', //扫描出库时间
     seller_nickname: "Seller's Nickname",//卖家昵称
     sensitiveColumn: 'Sensitive Column', //敏感列
-    serialNo: 'Order Number', //序号
+    serialNo: 'NO', //序号
     settlementAmount: 'Settlement Amount',//结算金额
     shippingAddress: 'Shipping Address', //收货地址
     shopName: 'Shop Name',//店铺名称
