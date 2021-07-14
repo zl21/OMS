@@ -152,3 +152,4 @@ console.log($i18n.t(common.all));
 | v1.0.59 | add modalTips.gd |
 | v1.0.60 | add 退换-新增 |
 | v1.0.61 | add for 组件库 |
+| v1.0.62 | add for 策略 |
