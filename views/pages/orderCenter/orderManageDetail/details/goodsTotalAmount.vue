@@ -2,30 +2,36 @@
 <template>
   <!-- 订单金额 -->
   <div class="goodsTotalAmount">
-    <span class="title">商品总金额</span>
+    <!-- 商品总金额 -->
+    <span class="title">{{ vmI18n.t('form_label.ai')}}</span>
     <ul class="goodsTotalAmount-ul">
       <li>
-        <label>零售价合计</label>
+        <!-- 零售价合计 -->
+        <label>{{$i18n.t('form_label.b2')}}</label>
         <p>{{ orderOrder.PRODUCT_AMT }}</p>
       </li>
       <li class="symbol">-</li>
       <li>
-        <label>商品优惠</label>
+        <!-- 商品优惠 -->
+        <label>{{$i18n.t('form_label.b3')}}</label>
         <p>{{ orderOrder.PRODUCT_DISCOUNT_AMT }}</p>
       </li>
       <li class="symbol">-</li>
       <li>
-        <label>订单优惠金额</label>
+        <!-- 订单优惠金额 -->
+        <label>{{$i18n.t('form_label.b4')}}</label>
         <p>{{  orderOrder.ORDER_DISCOUNT_AMT }}</p>
       </li>
       <li class="symbol">+</li>
       <li>
-        <label>调整金额</label>
+        <!-- 调整金额 -->
+        <label>{{$i18n.t('table_label.adjustment_amount')}}</label>
         <p>{{ orderOrder.ADJUST_AMT }}</p>
       </li>
       <li class="symbol">=</li>
       <li>
-        <label>商品总金额</label>
+        <!-- 商品总金额 -->
+        <label>{{ vmI18n.t('form_label.ai')}}</label>
         <p>{{retailPriceTotal}}</p>
       </li>
     </ul>

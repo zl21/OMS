@@ -105,7 +105,8 @@
                 <span
                   v-if="componentData.order.RESERVE_BIGINT05 == 1"
                   style="color: red;"
-                >(多包裹)</span>
+                > {{ vmI18n.t('form_label.an')}}</span>
+                <!-- (多包裹) -->
               </p>
               <!-- 其他 -->
               <p v-else>
@@ -116,11 +117,12 @@
           <!-- 订单金额 -->
           <div class="order-money">
             <!-- 订单金额 -->
-            <span class="order-money-title">{{ vmI18n.t('panel_label.basicData')}}</span>
+            <span class="order-money-title"> {{ vmI18n.t('form_label.ah')}}</span>
             <ul class="totalAmount">
               <li>
                 <label>
-                  商品总金额 
+                  <!-- 商品总金额  -->
+                  {{ vmI18n.t('form_label.ai')}}
                    <Tooltip placement="top-start" max-width="800" theme="light">
                       <Icon type="ios-alert-outline" />
                       <div slot="content">
@@ -145,21 +147,24 @@
               <li class="symbol">=</li>
               <li class="resulf-text">
                 <!-- 订单总金额 -->
-                <label>{{vmI18n.t('form_label.service_charge') }}</label>
+                <label>{{vmI18n.t('form_label.aj') }}</label>
                 <p>{{orderPriceTotal}}</p>
               </li>
             </ul>
             <ul class="amountActually">
               <li>
-                <label>实付金额</label>
+                <!-- 实付金额 -->
+                <label>{{vmI18n.t('form_label.ak') }}</label>
                 <p>{{ componentData.order.RECEIVED_AMT  || '0.00'}}</p>
               </li>
               <li>
-                <label>红包</label>
-                <p>{{ componentData.order.RED_ENVELOPER || '0.00'}}</p>
+                <!-- 红包 -->
+                <label>{{vmI18n.t('form_label.aj') }}</label>
+                <p>{{ componentData.order.al || '0.00'}}</p>
               </li>
               <li>
-                <label>代收COD金额</label>
+                <!-- 代收COD金额 -->
+                <label>{{vmI18n.t('form_label.am') }}</label>
                 <p>{{ componentData.order.COLLECT_AMT || '0.00'}}</p>
               </li>
             </ul>
@@ -171,20 +176,25 @@
     <Col span="24" >
       <div class="order-tab-content">
         <div class="order-tab-title">
-          <span>订单明细</span>
+          <!-- 订单明细 -->
+          <span> {{$i18n.t('panel_label.order_detailed')}}</span>
           <!-- 如果是组合商品不显示 -->
           <div v-if="is_combination" class="checkCombination">
             <span
               v-if="isQh && isQhChild"
               @click="checkCombination"
             >
-              <Icon type="ios-repeat" />切换为sku商品显示
+              <Icon type="ios-repeat" />
+              <!-- 切换为sku商品显示 -->
+              {{$i18n.t('form_label.b0')}}
             </span>
             <span
               v-if="!isQh && isQhChild"
               @click="checkCombination"
             >
-              <Icon type="ios-repeat" />切换为平台商品明细
+              <Icon type="ios-repeat" />
+              <!-- 切换为平台商品明细 -->
+               {{$i18n.t('form_label.b1')}}
             </span>
           </div>
         </div>
