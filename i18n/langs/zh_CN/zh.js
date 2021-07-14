@@ -174,6 +174,8 @@ export default {
   },
 
   btn: {
+    addManually: '手工新增',
+    replaceDetail: '替换明细',
     addGoods: '添加商品',
     designGoods: '指定商品',
     forceMatching: '强制匹配',
@@ -538,8 +540,8 @@ export default {
     co: '偏差N元拒绝换货>',
     cp: '偏差N元自动拒绝换货原因',
     cq: '偏差N元自动拒绝文案',
-    cr: '',
-    cs: '',
+    cr: '商品实退金额',
+    cs: '最终实退总金额',
     ct: '',
     cu: '',
     cv: '',
@@ -976,6 +978,7 @@ export default {
   modalTitle: { // 弹窗title
     aa: '清除失败提示框',
     ab: '分仓策略-导入',
+    ac: '添加商品-已选',
     th1: "替换前商品",
     th2: "替换后商品",
     a0: '店铺商品特殊设置明细', // 店铺商品特殊设置明细
