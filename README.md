@@ -154,3 +154,4 @@ console.log($i18n.t(common.all));
 | v1.0.61 | add for 组件库 |
 | v1.0.62 | add for 策略 |
 | v1.0.63 | modalTips：! -> ！ |
+| v1.0.64 | add for 组件库 |
