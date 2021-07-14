@@ -46,7 +46,7 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             size: '', // 按钮大小
             isShow: false,
             webname: this.$route.params.customizedModuleName + "_save",

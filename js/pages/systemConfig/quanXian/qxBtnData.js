@@ -6,7 +6,7 @@ export default {
         // 正常
         buttons: [
           {
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             icon: '',
             btnClick: () => {
               this.saveQuanXian();

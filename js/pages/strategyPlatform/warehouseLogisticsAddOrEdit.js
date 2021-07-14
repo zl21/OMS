@@ -38,7 +38,7 @@ export default {
         buttons: [
           {
             webname: 'ST_C_WAREHOUSE_LOGISTICS_MAIN_SAVE', // 保存
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             disabled: false, // 按钮禁用控制
             isShow: false,
             btnclick: () => {

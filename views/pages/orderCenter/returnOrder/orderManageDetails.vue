@@ -173,7 +173,7 @@
           typeAll: 'default',
           buttons: [
             {
-              text: '返回',
+              text: $i18n.t('common.return'), // 返回
               btnclick: () => {
                 this.$comUtils.tabCloseAppoint(this);
                 this.$store.commit('customize/TabOpen', {

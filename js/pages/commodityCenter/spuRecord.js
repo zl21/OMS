@@ -267,7 +267,7 @@ export default {
       extendBtn:[
         {
           webname: 'PS_C_PRO_SAVE', // 保存
-          text: '保存',
+          text: $i18n.t('btn.save'), // 保存
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
           btnclick: () => {

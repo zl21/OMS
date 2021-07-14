@@ -37,7 +37,7 @@ export default {
             }
           },
           {
-            text: '返回', // 查找 按钮文本
+            text: $i18n.t('common.return'), // 返回 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               R3.store.commit('global/tabOpen', {

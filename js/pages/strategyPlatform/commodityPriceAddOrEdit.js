@@ -41,9 +41,10 @@ export default {
       },
       btnConfig: {
         typeAll: 'default',
-        buttons: [{
-          webname: 'ST_C_PRICE_MAIN_SAVE', // 保存
-            text: '保存',
+        buttons: [
+          {
+            webname: 'ST_C_PRICE_MAIN_SAVE', // 保存
+            text: $i18n.t('btn.save'), // 保存
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {

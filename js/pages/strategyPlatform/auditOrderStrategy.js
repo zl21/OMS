@@ -99,14 +99,14 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
         },
         extendBtn:[
           {
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             webname:'ST_C_AUTO_AUDIT_SAVE',
             btnclick: ()=>{
               this.save();
             }
           },
           {
-            text: '返回',
+            text: $i18n.t('common.return'), // 返回
             webname:'ST_C_AUTO_AUDIT_RETURN',
             btnclick: ()=>{
               if (this.isModify) {
