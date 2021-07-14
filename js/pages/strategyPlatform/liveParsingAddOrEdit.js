@@ -175,7 +175,7 @@ export default {
               },
               {
                 value: 2,
-                label: '支付时间'
+                label: $i18n.t('form_label.bj'), // 支付时间
               }
             ],
             radioChange: () => {
@@ -186,8 +186,8 @@ export default {
             }
           },
           {
-            label: '直播商品识别',
-            subLabel: '识别规则',
+            label: $i18n.t('form_label.cd'), // 直播商品识别
+            subLabel: $i18n.t('form_label.bi'), // 识别规则
             style: 'formCompile',
             slotName: 'rule',
             reqStar: true, // 插槽必填标识
@@ -265,11 +265,11 @@ export default {
         formData: [
           {
             style: 'input',
-            label: '主播ID',
+            label: $i18n.t('form_label.bk'), // 主播ID
             colname: 'LIVE_ANCHOR_ID',
             width: '24',
             class: 'custom-width',
-            placeholder: '请录入主播ID',
+            placeholder: $i18n.t('modalTips.hq'), // 请录入主播ID
             disabled: false,
             inputChange: () => {
               this.masterModifyData('LIVE_ANCHOR_ID', 'master', 'formConfig3');
@@ -277,11 +277,11 @@ export default {
           },
           {
             style: 'input',
-            label: '主播昵称',
+            label: $i18n.t('form_label.bl'), // 主播昵称
             colname: 'LIVE_ANCHOR_NAME',
             width: '24',
             class: 'custom-width',
-            placeholder: '请录入主播昵称',
+            placeholder: $i18n.t('modalTips.hr'), // 请录入主播昵称
             disabled: false,
             inputChange: () => {
               this.masterModifyData('LIVE_ANCHOR_NAME', 'master', 'formConfig3');
@@ -289,14 +289,14 @@ export default {
           },
           {
             style: 'radio',
-            label: '订单标签',
+            label: $i18n.t('form_label.bm'), // 订单标签
             colname: 'ORDER_TAG',
             width: '24',
             disabled: false,
             options: [
               {
                 value: 1,
-                label: '“播”标'
+                label: $i18n.t('form_label.bn'), // “播”标
               }
             ],
             radioChange: () => {
@@ -514,9 +514,9 @@ export default {
       let msg
       if (mes) {
         let msgArr = mes.replace(/ 不能为空!/, '').split('，')
-        msg = !startTime && !msgArr.includes('时间类型') ? [...msgArr, '时间类型'] : msgArr
+        msg = !startTime && !msgArr.includes($i18n.t('form_label.timeType')) ? [...msgArr, $i18n.t('form_label.timeType')] : msgArr
       }
-      msg = !mes ? startTime ? '' : ['时间类型'] : msg
+      msg = !mes ? startTime ? '' : [$i18n.t('form_label.timeType')] : msg
       
       // 直播商品识别校验
       const hasNoValid = this.formConfig2.formValue.RULES
@@ -535,7 +535,7 @@ export default {
       .map(({ RULE_CONTEXT, RULE_TYPE }) => Object.values({ RULE_CONTEXT, RULE_TYPE }).join(' '))
       let uniqRow = Array.from(new Set(allRow))
       if (allRow.length != uniqRow.length) {
-        self.$message.error('请勿重复添加直播商品识别规则!')
+        self.$message.error($i18n.t('modalTips.hp')) // 请勿重复添加直播商品识别规则!
         return
       }
       

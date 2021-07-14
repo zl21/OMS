@@ -92,17 +92,16 @@ export default {
       endTime = BurgeonDate.standardTimeConversiondateToStr(endTime);
     }
     const param = {
+      table: self.$route.params.tableName, // 当前表名 必传
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
       start_time: startTime,
       end_time: endTime
     };
-    const fromdata = new FormData();
-    fromdata.append('param', JSON.stringify(param));
 
     // 实效订单下载
     const {
       data: { code, message }
-    } = await self.service.interfacePlatform.downLoadVipTimeOrder(fromdata);
+    } = await self.service.interfacePlatform.orderDownload(param);
     if (code === 0) {
       self.$Message.success(message);
       self.$emit('confirmImport');

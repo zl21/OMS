@@ -113,7 +113,7 @@ export default {
           },
           {
             style: 'input',
-            label: '日程规划名称',
+            label: $i18n.t('form_label.bo'), // 日程规划名称
             colname: 'NAME',
             value: 'NAME',
             width: '6',
@@ -124,7 +124,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: '规划开始时间', // 输入框前文字
+            label: $i18n.t('form_label.bp'), // 规划开始时间 输入框前文字
             colname: 'BEGIN_TIME',
             type: 'datetime',
             value: 'BEGIN_TIME', // 输入框的值
@@ -142,7 +142,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: '规划结束时间', // 输入框前文字
+            label: $i18n.t('form_label.bq'), // 规划结束时间 输入框前文字
             colname: 'END_TIME',
             type: 'datetime',
             value: 'END_TIME', // 输入框的值
@@ -173,7 +173,7 @@ export default {
           {
             style: 'checkbox',
             onlyBox: true,
-            label: '补货独立入库',
+            label: $i18n.t('form_label.br'), // 补货独立入库
             colname: 'IS_OUTWAREHOUSE_ALONE',
             value: 'IS_OUTWAREHOUSE_ALONE',
             width: '6',
@@ -235,7 +235,7 @@ export default {
               isuppercase: false, // 是否转大写
               istooltip: true,
               length: 65535, // 最大长度是多少
-              name: '唯品会仓库', // 赔付类型
+              name: $i18n.t('form_label.bs'), // 唯品会仓库 // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_ORIG', // 对应的表
               reftableid: 169347, // 对应的表ID
@@ -252,7 +252,7 @@ export default {
           },
           {
             style: 'select',
-            label: '拣货单类型',
+            label: $i18n.t('form_label.bt'), // 拣货单类型
             value: 'PICK_FLAG',
             width: '24',
             disabled: false,
@@ -267,11 +267,11 @@ export default {
               },
               {
                 value: '2',
-                label: '补货单', 
+                label: $i18n.t('form_label.bx'), // 补货单 
               },
               {
                 value: '3',
-                label: '预调拨',
+                label: $i18n.t('form_label.by'), // 预调拨
               }
             ]
           }
@@ -300,7 +300,7 @@ export default {
         formData: [
           {
             style: 'select',
-            label: '未拣货数维度',
+            label: $i18n.t('form_label.bu'), // 未拣货数维度
             value: 'NOT_PICK_NUM_LATITUDE',
             width: '24',
             disabled: false,
@@ -311,17 +311,17 @@ export default {
             options: [ // radio选项
               {
                 value: '1',
-                label: 'PO维度',
+                label: $i18n.t('form_label.c9'), // PO维度
               },
               {
                 value: '2',
-                label: '单PO下唯品会仓库维度',
+                label: $i18n.t('form_label.c8'), // 单PO下唯品会仓库维度
               }
             ]
           },
           {
             style: 'input',
-            label: '创建峰值',
+            label: $i18n.t('form_label.bv'), // 创建峰值
             colname: 'PEAK_VALUE',
             value: 'PEAK_VALUE',
             width: '24',
@@ -333,7 +333,7 @@ export default {
           },
           {
             style: 'select',
-            label: '自动拣货间隔时间',
+            label: $i18n.t('form_label.bw'), // 自动拣货间隔时间
             value: 'AUTO_PICK_TIME_INTERVAL',
             width: '24',
             disabled: false,
@@ -390,7 +390,7 @@ export default {
               isuppercase: false, // 是否转大写
               istooltip: true,
               length: 65535, // 最大长度是多少
-              name: '唯品会仓库', // 赔付类型
+              name: $i18n.t('form_label.bs'), // 唯品会仓库 // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_ORIG', // 对应的表
               reftableid: 169347, // 对应的表ID
@@ -408,7 +408,7 @@ export default {
           },
           {
             style: 'select',
-            label: '拣货单类型',
+            label: $i18n.t('form_label.bt'), // 拣货单类型
             value: 'PICK_FLAG',
             width: '24',
             disabled: false,
@@ -423,11 +423,11 @@ export default {
               },
               {
                 value: '2',
-                label: '补货单',
+                label: $i18n.t('form_label.bx'), // 补货单
               },
               {
                 value: '3',
-                label: '预调拨',
+                label: $i18n.t('form_label.by'), // 预调拨
               }
             ]
           }
@@ -464,11 +464,11 @@ export default {
       }, // 拣货单表单-按未拣货数创建
       warehouseWarrant: [
         { 
-          title: '创建条件',
+          title: $i18n.t('panel_label.aa'), // 创建条件
           formConfig: {
             formData: [{
               style: 'input',
-              label: '创建峰值',
+              label: $i18n.t('form_label.bv'), // 创建峰值
               colname: 'PEAK_VALUE',
               value: 'PEAK_VALUE',
               width: '12',
@@ -493,7 +493,7 @@ export default {
           },
         },
         {
-          title: '创建内容',
+          title: $i18n.t('panel_label.a8'), // 创建内容
           formConfig: {
             formData: [
               {
@@ -532,7 +532,7 @@ export default {
               },
               {
                 style: 'select',
-                label: '承运商',
+                label: $i18n.t('form_label.bz'), // 承运商
                 value: 'CARRIER_CODE',
                 width: '12',
                 disabled: false,
@@ -554,7 +554,7 @@ export default {
               },
               {
                 style: 'checkbox', // 输入框类型
-                label: '航空禁运', // 输入框前文字
+                label: $i18n.t('form_label.c0'), // 航空禁运 // 输入框前文字
                 colname: 'IS_AIR_EMBARGO',
                 value: 'IS_AIR_EMBARGO', // 输入框的值
                 width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -565,7 +565,7 @@ export default {
               },
               {
                 style: 'select',
-                label: '发货间隔',
+                label: $i18n.t('form_label.c1'), // 发货间隔
                 value: 'EXP_SEND_INTERVAL',
                 width: '12',
                 disabled: false,
@@ -586,7 +586,7 @@ export default {
               },
               {
                 style: 'time', // 输入框类型
-                label: '发货时间', // 输入框前文字
+                label: $i18n.t('form_label.c4'), // 发货时间 // 输入框前文字
                 colname: 'EXP_SENDTIME',
                 type: 'time',
                 value: 'EXP_SENDTIME', // 输入框的值
@@ -599,7 +599,7 @@ export default {
               },
               {
                 style: 'select',
-                label: '到货间隔',
+                label: $i18n.t('form_label.c5'), // 到货间隔
                 value: 'ARRIVAL_INTERVAL',
                 width: '12',
                 disabled: false,
@@ -620,7 +620,7 @@ export default {
               },
               {
                 style: 'select', // 输入框类型
-                label: '到货时间', // 输入框前文字
+                label: $i18n.t('form_label.c6'), // 到货时间 输入框前文字
                 colname: 'EXP_ARRIVETIME',
                 value: 'EXP_ARRIVETIME', // 输入框的值
                 width: '12', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -673,7 +673,7 @@ export default {
           },
         },
         {
-          title: '入库单结单',
+          title: $i18n.t('panel_label.a9'), // 入库单结单
           formConfig: {
             formData: [{
               style: 'time', // 输入框类型
@@ -706,7 +706,7 @@ export default {
       formConfigData: [
         {
           style: 'checkbox', // 输入框类型
-          label: '航空禁运', // 输入框前文字
+          label: $i18n.t('form_label.c0'), // 航空禁运 输入框前文字
           colname: 'IS_AIR_EMBARGO',
           value: 'IS_AIR_EMBARGO', // 输入框的值
           width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -729,11 +729,11 @@ export default {
           options: [ // radio选项
             {
               value: '2',
-              label: '空运',
+              label: $i18n.t('form_label.ca'), // 空运
             },
             {
               value: '1',
-              label: '汽运',
+              label: $i18n.t('form_label.cb'), // 汽运
             }
           ]
         }
@@ -828,7 +828,7 @@ export default {
           formData: [
             {
               style: 'radio',
-              label: '拣货单创建方式',
+              label: $i18n.t('form_label.cc'), // 拣货单创建方式
               value: 'PICK_CREATE_TYPE',
               colname: 'PICK_CREATE_TYPE',
               width: '24',
@@ -860,7 +860,7 @@ export default {
                 },
                 {
                   value: 2,
-                  label: '按未拣货数创建',
+                  label: $i18n.t('panel_label.ab'), // 按未拣货数创建
                 }
               ]
             }
@@ -896,31 +896,31 @@ export default {
           key: 'PICK_CREATE_DATE',
         },
         {
-          title: '唯品会仓库',
+          title: $i18n.t('form_label.bs'), // 唯品会仓库
           key: 'CP_C_ORIG_ENAME',
         },
         {
-          title: '拣货单类型',
+          title: $i18n.t('form_label.bt'), // 拣货单类型
           key: 'PICK_FLAG_STR'
         }],
         [{
-          title: '未拣货数维度',
+          title: $i18n.t('form_label.bu'), // 未拣货数维度
           key: 'NOT_PICK_NUM_LATITUDE_STR'
         },
         {
-          title: '创建峰值',
+          title: $i18n.t('form_label.bv'), // 创建峰值
           key: 'PEAK_VALUE',
         },
         {
-          title: '自动拣货间隔时间',
+          title: $i18n.t('form_label.bw'), // 自动拣货间隔时间
           key: 'AUTO_PICK_TIME_INTERVAL_STR',
         },
         {
-          title: '唯品会仓库',
+          title: $i18n.t('form_label.bs'), // 唯品会仓库
           key: 'CP_C_ORIG_ENAME',
         },
         {
-          title: '拣货单类型',
+          title: $i18n.t('form_label.bt'), // 拣货单类型
           key: 'PICK_FLAG_STR',
         }]
       ],
@@ -1004,7 +1004,7 @@ export default {
             ])
           },
           {
-            title: '创建峰值',
+            title: $i18n.t('form_label.bv'), // 创建峰值
             key: 'PEAK_VALUE',
           },
           {
@@ -1012,23 +1012,23 @@ export default {
             key: 'CP_C_PHY_WAREHOUSE_ENAME',
           },
           {
-            title: '承运商',
+            title: $i18n.t('form_label.bz'), // 承运商
             key: 'CARRIER_CODE_STR',
           },
           {
-            title: '发货间隔',
+            title: $i18n.t('form_label.c1'), // 发货间隔
             key: 'EXP_SEND_INTERVAL_STR',
           },
           {
-            title: '发货时间',
+            title: $i18n.t('form_label.c4'), // 发货时间
             key: 'EXP_SENDTIME',
           },
           {
-            title: '到货间隔',
+            title: $i18n.t('form_label.c5'), // 到货间隔
             key: 'ARRIVAL_INTERVAL_STR',
           },
           {
-            title: '到货时间',
+            title: $i18n.t('form_label.c6'), // 到货时间
             key: 'EXP_ARRIVETIME',
           },
           {
@@ -1040,7 +1040,7 @@ export default {
             key: 'DELIVERY_METHOD_STR',
           },
           {
-            title: '航空禁运',
+            title: $i18n.t('form_label.c0'), // 航空禁运
             key: 'IS_AIR_EMBARGO',
             render: (h, params) => h('span', params.row.IS_AIR_EMBARGO == '0' ? '否' : '是')
           }
@@ -1091,8 +1091,8 @@ export default {
   computed: {
     dialogInfo() {
       return this.curDialog == 'warehouseWarrant'
-        ? { title: '入库单', width: '800px' }
-        : { title: '拣货单', width: '400px' };
+        ? { title: $i18n.t('panel_label.ac'), width: '800px' }
+        : { title: $i18n.t('panel_label.ad'), width: '400px' };
     }
   },
   methods: {

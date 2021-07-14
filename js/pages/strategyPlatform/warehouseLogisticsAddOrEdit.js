@@ -117,7 +117,7 @@ export default {
               },
               {
                 value: 2,
-                label: '默认物流'
+                label: $i18n.t('panel_label.aj'), // 默认物流
               }
             ]
           },
@@ -329,7 +329,7 @@ export default {
           isShow: true
         },
         {
-          label: '物流信息',
+          label: $i18n.t('panel_label.al'), // 物流信息,
           value: 'logistics',
           isShow: false
         },
