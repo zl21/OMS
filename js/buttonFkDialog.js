@@ -1,5 +1,7 @@
 // import fkdialog from 'framework/components/tablelist/fkdialog.vue';
 import fkdialog from '../fkdialog.vue';
+import i18n from "@burgeon/internationalization/i18n";
+window.$i18n = i18n
 
 export default {
   name: 'ButtonFk',
@@ -36,7 +38,8 @@ export default {
       if (ITEM.lists.result.length > 0) {
         self.itemdata.pid = item;
         self.mopDefaultValue = item;
-        self.itemdata.valuedata = `已选中${ITEM.total}条数据`;
+        // 已选中 n 条数据
+        self.itemdata.valuedata = `${$i18n.t('HASBEENSELECTED')} ${ITEM.total} ${$i18n.t('common.piece')}`;
         self.fkDialog.lists = item;
       } else {
         self.fkDialog.lists = {};

@@ -30,7 +30,7 @@ export default {
           this.columns = res.data.data.data.title;
           this.data = res.data.data.data.data;
         } else {
-          this.$Message.error(res.data.data.message || '日志服务请求失败!');
+          console.error(res.data.data.message || '日志服务请求失败!');
         }
       })
     }

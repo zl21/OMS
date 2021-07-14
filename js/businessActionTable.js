@@ -3,6 +3,7 @@
 import businessButton from '../businessButton'
 import businessForm from '../businessForm'
 import i18n from "@burgeon/internationalization/i18n";
+window.$i18n = i18n
 
 export default {
   components: {
@@ -30,35 +31,35 @@ export default {
         btnsite: 'left', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: '刷新', // 按钮文本
+            text: $i18n.t('btn.refresh'),
             btnclick: () => {
               this.tableRefreshDetail();
             }, // 按钮点击事件
             class: 'deleteDetail',
           },
           {
-            text: '新增明细',
+            text: $i18n.t('btn.addDetail'),
             btnclick: () => {
               this.tableAddDetail();
             },
             class: 'deleteDetail',
           },
           {
-            text: '删除明细',
+            text: $i18n.t('btn.deleteDetail'),
             btnclick: () => {
               this.tableDeleteDetail();
             },
             class: 'deleteDetail',
           },
           {
-            text: '导入',
+            text: $i18n.t('btn.import'),
             btnclick: () => {
               this.isShowImportBtn();
             },
             class: 'import',
           },
           {
-            text: '导出',
+            text: $i18n.t('btn.export'),
             btnclick: () => {
               this.isShowExportBtn();
             },
@@ -74,7 +75,7 @@ export default {
       return this.jordanTableConfig.showHeader ?? true;
     },
     noDataText() {
-      return this.jordanTableConfig.noDataText ?? '暂无数据';
+      return this.jordanTableConfig.noDataText ?? $i18n.t('other.noDataAvailable'); // 暂无数据
     },
     // 是否高亮
     highlightRow() {
@@ -98,7 +99,8 @@ export default {
       if (this.jordanTableConfig.indexColumn) {
         // 是否存在序号列
         columnsData.unshift({
-          title: '序号',
+          // title: '序号',
+          title: $i18n.t('table_label.serialNo'),
           key: 'index',
           align: 'left',
           fixed: 'left',

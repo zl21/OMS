@@ -1,6 +1,7 @@
 import businessButton from 'professionalComponents/businessButton';
 import loading from 'professionalComponents/loading';
 import i18n from "@burgeon/internationalization/i18n";
+window.$i18n = i18n
 
 export default {
   name: 'importTable',
@@ -33,7 +34,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: '取消', // 按钮文本
+            text: $i18n.t('common.cancel'), // 按钮文本
             disabled: false,
             btnclick: () => {
               const _this = this;
@@ -41,7 +42,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: '导入', // 按钮文本
+            text: $i18n.t('btn.import'), // 按钮文本
             disabled: false,
             btnclick: () => {
               this.importDialog();
@@ -126,7 +127,8 @@ export default {
     getImportDialog(url, paramsObj) {
       const _this = this;
       if (!_this.text) {
-        return _this.$Message.error('请选择需要导入的文件！');
+        // 请选择需要导入的文件！
+        return _this.$Message.error($i18n.t('modalTips.hj'));
       }
       _this.loading = true;
       const param = new FormData();
@@ -156,7 +158,8 @@ export default {
           _this.handelError(res.data.data);
           _this.file = {};
           _this.text = '';
-          _this.errorMessage = '导入失败,详情见文件内容';
+          // _this.errorMessage = '导入失败,详情见文件内容';
+          _this.errorMessage = $i18n.t('modalTips.hk');
           _this.isError = true;
         } else if (res.data.code === -1) {
           // _this.isError = true;
@@ -164,10 +167,10 @@ export default {
           // _this.$Message.error(res.data.message || 'no message!');
           _this.file = {};
           _this.text = '';
-          _this.errorMessage = '导入失败,详情见文件内容';
+          _this.errorMessage = $i18n.t('modalTips.hk');
           _this.isError = true;
         } else {
-          console.log("Please see : 'http://knowledge.ark.burgeononline.com/repository#/entryComponents/2/749656/1/2061'");
+          console.warn("Please see : 'http://knowledge.ark.burgeononline.com/repository#/entryComponents/2/749656/1/2061'");
         }
         if (_this.currentConfig.cusDiscretion) {
           _this.$emit('returnData', res);
@@ -205,7 +208,7 @@ export default {
             return
           }
         }
-        console.log('请配置/传入该定制页面的刷新页面的方法！');
+        console.warn('请配置/传入该定制页面的刷新页面的方法！');
       }
     },
     // 导入失败后的操作 - 下载错误信息/展示错误信息
@@ -215,7 +218,8 @@ export default {
         if (Err1Succ1) {
           let reUrl = /(http|https):\/\/([\w.]+\/?)\S*/;
           if (reUrl.test(data) === false) {
-            return _this.$Message.error('code为0或1，部分成功部分失败，请返回以 http 或者 https 开头的错误信息下载链接！')
+            console.error('code为0或1，部分成功部分失败，请返回以 http 或者 https 开头的错误信息下载链接！')
+            return
           } else {
             _this.downloadUrlFile(data);
           }
@@ -228,7 +232,7 @@ export default {
         _this.isError = true;
         _this.errorMessage = data;
       } else {
-        console.log('data null !');
+        console.warn('data null !');
       }
     },
     // 选择文件
@@ -244,7 +248,8 @@ export default {
       const size = file.size / 1024 / 1024;
       if (size > 64) {
         this.isError = true;
-        this.errorMessage = '文件最大64M!';
+        // this.errorMessage = '文件最大64M!';
+        this.errorMessage = $i18n.t('modalTips.zb');
         return true;
       }
     },

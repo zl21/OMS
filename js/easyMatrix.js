@@ -1,10 +1,14 @@
 import jordanForm from "../businessForm";
+import i18n from "@burgeon/internationalization/i18n";
+window.$i18n = i18n
+
 export default {
   components: {
     jordanForm
   },
   data() {
     return {
+      vmI18n: i18n,
       pageLoad: false,
       formConfig: {
         formValue: {
@@ -13,7 +17,8 @@ export default {
           qty: "1"
         },
         formData: [{
-            label: "商品SKU",
+            // label: "商品SKU",
+            label: $i18n.t('table_label.commoditySKU'),
             style: "dimSearch",
             width: "12",
             value: "search",
@@ -34,7 +39,8 @@ export default {
             dimblur: () => {}
           },
           {
-            label: "商品款号",
+            // label: "商品款号",
+            label: $i18n.t('table_label.itemNo'),
             style: "dimSearch",
             width: "12",
             value: "search1",
@@ -56,7 +62,8 @@ export default {
           },
           {
             style: "input", //输入框类型
-            label: "数量", //输入框前文字
+            // label: "数量", //输入框前文字
+            label: $i18n.t('table_label.quantities'),
             value: "qty", //输入框的值
             clearable: true,
             regx: /^[1-9]\d*$/,
@@ -85,7 +92,7 @@ export default {
         self.formConfig.formValue.search = "";
         self.formConfig.formValue.search1 = "";
       } else {
-        self.$message.error("请输入商品!");
+        self.$message.error($i18n.t('modalTips.hl')); // 请输入商品
       }
       //调取查询明细方法,传给商品SKU和数量,调用状态为0的保存接口
     },
@@ -175,7 +182,7 @@ export default {
           // this.formConfig.formValue.search = '';
           // this.formConfig.formValue.qty = 1;
           if (lists.length === 0) {
-            this.$message.error("不存在该商品!");
+            this.$message.error($i18n.t('modalTips.hm')); // 不存在该商品
             return;
           }
           let obj = lists.length > 0 ? lists[0] : {};

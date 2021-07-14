@@ -1,4 +1,7 @@
 const _import = (file , basePathName) => basePathName === 'views' ? require(`@/${basePathName}/${file}.vue`).default : require(`@burgeon/${basePathName}/${file}.vue`).default;
+import i18n from "@burgeon/internationalization/i18n";
+window.$i18n = i18n
+
 export default {
   name: "businessDialog",
   props: {
@@ -9,7 +12,8 @@ export default {
     },
     title: {
       type: String,
-      default: () => "标题"
+      // default: () => "标题"
+      default: () => $i18n.t('modalTitle.title')
     }, // 设置标题title
     titleAlign: {
       type: String,
@@ -61,11 +65,13 @@ export default {
     }, //是否显示底部
     okText: {
       type: String,
-      default: () => "确定"
+      // default: () => "确定"
+      default: () => $i18n.t('common.determine')
     },
     cancelText: {
       type: String,
-      default: () => "取消"
+      // default: () => "取消"
+      default: () => $i18n.t('common.cancel')
     },
     confirm: {
       type: Function
@@ -84,6 +90,7 @@ export default {
   },
   data() {
     return {
+      vmI18n: i18n,
       modal: this.$props.visible,
       currentView: "",
       commonObj: {},
