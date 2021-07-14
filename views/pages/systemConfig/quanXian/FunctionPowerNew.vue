@@ -422,13 +422,13 @@ export default {
           tbodyWidth: '62px'
         },
         {
-          title: '编辑',
+          title: $i18n.t('table_label.edit'), // 编辑
           key: 'edit',
           editValue: false,
           tbodyWidth: '62px'
         },
         {
-          title: '删除',
+          title: $i18n.t('btn.delete'), // 删除
           key: 'delete',
           deleteValue: false,
           tbodyWidth: '62px'

@@ -13,13 +13,13 @@ export default {
         typeAll: 'default', // 按钮统一风格样式
         loading: false, // 按钮加载
         buttons: [{
-            text: '新增',
+            text: $i18n.t('btn.add'), // 新增
             btnclick: () => {
 
             }
           },
           {
-            text: '删除',
+            text: $i18n.t('btn.delete'), // 删除
             btnclick: () => {
               this.del();
             }
@@ -35,7 +35,7 @@ export default {
           type: 'index',
           width: 60,
           align: 'left',
-          title: '序号'
+          title: $i18n.t('table_label.serialNo'), // 序号
         },
         {
           title: '供应商名称',

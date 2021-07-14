@@ -12,14 +12,14 @@ export default {
 				btnsite: "right",
 				buttons: [
 					{
-						text: '取消', // 取消
+						text: $i18n.t('common.cancel'), // 取消
 						class:"white",
 						isShow: false,
 						disabled: false,
 						btnclick: () => this.closeDialogs()
 					},
 					{
-						text: '保存', // 保存
+						text: $i18n.t('btn.save'), // 保存
 						class:"active",
 						disabled: false,
 						btnclick: () => this.confirm()

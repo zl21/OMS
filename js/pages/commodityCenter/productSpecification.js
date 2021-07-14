@@ -38,7 +38,7 @@ export default {
           type: 'index',
           width: 60,
           align: 'center',
-          title: '序号'
+          title: $i18n.t('table_label.serialNo'), // 序号
         },
         {
           title: 'SKU编码',

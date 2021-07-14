@@ -34,7 +34,7 @@ export default {
         typeAll: 'default',
         buttons: [{
             webname: 'lookup_save', // 保存
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -146,7 +146,7 @@ export default {
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               istooltip: true,
-              name: '店铺名称', // 赔付类型
+              name: $i18n.t('table_label.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 171534, // 对应的表ID
@@ -162,7 +162,7 @@ export default {
           },
           {
             style: 'formCompile',
-            label: '时间类型',
+            label: $i18n.t('form_label.timeType'), // 时间类型
             colname: 'BILL_TIME_TYPE',
             width: '24',
             disabled: false,
@@ -171,7 +171,7 @@ export default {
             options: [
               {
                 value: 1,
-                label: '下单时间'
+                label: $i18n.t('form_label.orderTime'), // 下单时间
               },
               {
                 value: 2,
@@ -198,15 +198,15 @@ export default {
             options: [
               {
                 value: 1,
-                label: '商品标题'
+                label: $i18n.t('table_label.product_title'), // 商品标题
               },
               {
                 value: 2,
-                label: '平台商品ID'
+                label: $i18n.t('form_label.platformCommodityID'), // 平台商品ID
               },
               {
                 value: 3,
-                label: '买家留言'
+                label: $i18n.t('form_label.buyer_message'), // 买家留言
               }
             ],
             radioChange: (item) => {
@@ -319,7 +319,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_C_LIVE_CAST_STRATEGY_LOG'
         }
       ],

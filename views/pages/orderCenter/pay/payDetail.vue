@@ -127,13 +127,13 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: "取消",
+            text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
               this.tableConfig.modal = false;
             },
           },
           {
-            text: '确定',
+            text: $i18n.t('common.determine'), // 确定
             type: 'primary',
             btnclick: () => {
               const self = this;

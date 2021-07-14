@@ -56,14 +56,14 @@ export default {
         typeAll: 'default', // 按钮统一风格样式
         buttons: [
           {
-            text: '取消', // 查找 按钮文本
+            text: $i18n.t('common.cancel'), // 取消 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             } // 按钮点击事件
           },
           {
-            text: '确定', // 查找 按钮文本
+            text: $i18n.t('common.determine'), // 确定 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.confirm();

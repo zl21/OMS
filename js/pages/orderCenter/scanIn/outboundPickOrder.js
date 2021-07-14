@@ -143,7 +143,7 @@ export default {
               }
             },
             {
-              text: '保存',
+              text: $i18n.t('btn.save'), // 保存
               btnclick: () => {
                 const self = this;
                 self.save();
@@ -185,7 +185,7 @@ export default {
             //     }
             // },
             {
-              text: '返回',
+              text: $i18n.t('common.return'), // 返回
               btnclick: () => {
                 this.go_home = true;
               }
@@ -300,7 +300,7 @@ export default {
           typeAll: 'default',
           buttons: [
             {
-              text: '保存',
+              text: $i18n.t('btn.save'), // 保存
               btnclick: () => {
                 console.log('保存');
               }
@@ -312,7 +312,7 @@ export default {
               }
             },
             {
-              text: '返回',
+              text: $i18n.t('common.return'), // 返回
               btnclick: () => {
                 this.go_home = true;
               }
@@ -530,7 +530,7 @@ export default {
             },
             {
               style: 'input',
-              label: '备注',
+              label: $i18n.t('table_label.remarks'), // 备注
               value: 'REMARK',
               dataAcessKey: 'SHIP_AMT',
               disabled: false,

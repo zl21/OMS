@@ -30,7 +30,7 @@ export default {
             }
           },
           {
-            text: '返回',
+            text: $i18n.t('common.return'), // 返回
             btnclick: () => {
               // comUtils.tabCloseAppoint(this);
               //   this.$destroy(true);

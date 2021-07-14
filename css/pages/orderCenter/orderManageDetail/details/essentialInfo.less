@@ -43,6 +43,9 @@
         font-size: 12px;
         color: @base-color;
         grid-column-gap: 20px;
+        p{
+          #bundle > .points;
+        }
       }
       .title-sign{
         position: absolute;
@@ -104,6 +107,9 @@
           label{
             text-align: right;
             color: #aeadb0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
           p{
             margin-left: 10px;
@@ -137,6 +143,7 @@
         height: 80px;
         color: rgba(84,97,184,0.60);
         font-weight: bold;
+        #bundle > .points
       }
       .totalAmount{
         grid-template-columns: repeat(4,auto 20px);

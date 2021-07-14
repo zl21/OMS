@@ -99,14 +99,14 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
         },
         extendBtn:[
           {
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             webname:'ST_C_AUTO_AUDIT_SAVE',
             btnclick: ()=>{
               this.save();
             }
           },
           {
-            text: '返回',
+            text: $i18n.t('common.return'), // 返回
             webname:'ST_C_AUTO_AUDIT_RETURN',
             btnclick: ()=>{
               if (this.isModify) {
@@ -275,7 +275,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
         },
         label:{
           labelList: [{
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'log',
         }],
         labelDefaultValue:'log'

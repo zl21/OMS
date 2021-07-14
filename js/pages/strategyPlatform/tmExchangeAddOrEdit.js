@@ -32,7 +32,7 @@ export default {
         buttons: [
           {
             webname: 'ST_C_TMALL_EXCHANGE_MAIN_SAVE',
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             disabled: false, // 按钮禁用控制
             isShow: false,
             btnclick: () => {
@@ -77,7 +77,7 @@ export default {
               fkdisplay: 'drp', // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              name: '店铺名称', // 赔付类型
+              name: $i18n.t('table_label.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 171534, // 对应的表ID
@@ -154,7 +154,7 @@ export default {
             disabled: false,
             options: [
               {
-                label: '全部',
+                label: $i18n.t('common.all'), // 全部
                 value: '2'
               },
               {
@@ -279,7 +279,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_HOLD_ORDER_STRATEGY_LOG'
         }
       ],

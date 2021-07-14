@@ -30,7 +30,7 @@ export default {
         buttons: [
           {
             webname:'ST_C_HOLD_STRATEGY_SAVE',
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.save();
@@ -164,7 +164,7 @@ export default {
             itemdata: {
               colid: '172070',
               colname: 'CP_C_SHOP_IDS',
-              name: '店铺名称',
+              name: $i18n.t('table_label.shopName'), // 店铺名称
               valuedata: '',
               pid: '',
               fkdisplay: 'mrp',
@@ -186,7 +186,7 @@ export default {
             colname: 'TIME',
             style: 'formCompile',
             class: 'soltDom',
-            label: '时间类型',
+            label: $i18n.t('form_label.timeType'), // 时间类型
             format: 'yyyy-MM-dd HH:mm:ss',
             slotName: 'spec01',
             width: '24',
@@ -284,7 +284,7 @@ export default {
             width: '24',
             checkboxChange: (val) => {
               this.masterModifyData('IS_AUTO_RELEASE', 'formConfig3')
-              if (!val) {
+              if (val) {
                 this.formConfig3.formData[2].style = 'select';
               } else {
                 this.formConfig3.formData[2].style = '';
@@ -331,7 +331,7 @@ export default {
             style: '',
             colname: 'TIME_TYPE',
             class: 'soltDom',
-            label: '时间类型',
+            label: $i18n.t('form_label.timeType'), // 时间类型
             slotName: 'spec03',
             width: '18',
             disabled: false,
@@ -405,7 +405,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_HOLD_ORDER_STRATEGY_LOG'
         }
       ],

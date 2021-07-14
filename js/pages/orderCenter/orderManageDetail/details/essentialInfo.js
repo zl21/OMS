@@ -29,13 +29,13 @@ export default {
         {
           width: '6',
           column: 'SOURCE_CODE',
-          label: '平台单号:'
+          label: $i18n.t('table_label.platform_orderNo') + ':', // 平台单号 输入框前文字
         },
         {
           flag: false, // 需要加*
           width: '6',
           column: 'BILL_NO',
-          label: '单据编号:'
+          label: $i18n.t('form_label.billNo') + ':', //'单据编号:'
         },
         // {
         //   flag: false, // 需要加*
@@ -59,7 +59,7 @@ export default {
           flag: false,
           width: '6',
           column: 'ORDER_TYPE',
-          label: $i18n.t('form_label.billType'), // 单据类型
+          label: $i18n.t('form_label.billType') + ':', // 单据类型
         },
         // {
         //   flag: false,
@@ -71,7 +71,7 @@ export default {
           flag: false,
           width: '6',
           column: 'PLATFORM_STATUS',
-          label: '平台状态'
+          label: $i18n.t('form_label.ag') + ':' //平台状态
         },
         // {
         //   flag: false, // 需要加*
@@ -101,13 +101,13 @@ export default {
           flag: false, // 需要加*
           width: '6',
           column: 'CP_C_PHY_WAREHOUSE_ENAME', // 
-          label: $i18n.t('form_label.delivery_warehouse') + ':'
+          label: $i18n.t('form_label.delivery_warehouse') + ':' //发货仓库
         },
         {
           flag: false, // 需要加*
           width: '6',
           column: 'CP_C_LOGISTICS_ENAME', // 
-          label: $i18n.t('form_label.logisticsCompany') + ':'
+          label: $i18n.t('form_label.logisticsCompany') + ':' //物流公司
         },
         {
           flag: false, // 需要加*
@@ -141,7 +141,7 @@ export default {
           flag: false, // 需要加*
           width: '12',
           column: 'BUYER_NICK',
-          label: $i18n.t('table_label.buyerNickname') + '+', // 买家昵称
+          label: $i18n.t('table_label.buyerNickname') + ':', // 买家昵称
         },
         {
           flag: false,
@@ -201,7 +201,7 @@ export default {
       retailPriceTotal:'',
       orderPriceTotal:'',
       eyeStatus: false, // '订单收获地址'的眼睛icon的开/闭状态
-      eyeText:'显示',
+      eyeText: $i18n.t('btn.show'), //显示
       butArr:[{
           webname:'orderBillInfoSecurity',
           isShow:true,
@@ -284,7 +284,8 @@ export default {
     },
     // 修改地址
     modifyAddress(){
-      if(!['待审核','缺货'].includes(this.componentData.order.ORDER_STATUS)) {
+      // '待审核','缺货'
+      if(![$i18n.t('common.toBeReviewed'),$i18n.t('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)) {
         this.$Message.error($i18n.t('modalTips.fq')); //订单状态不满足，不允许修改地址！
         return false;
       }

@@ -99,11 +99,11 @@
             value: 'OC_B_ORDER_PROMOTION'
           },
           {
-            label: '发货信息', // 发货信息
+            label: $i18n.t('form_label.shipping_info'), // 发货信息
             value: 'OC_B_ORDER_DELIVERY'
           },
           {
-            label: '操作日志', // 操作日志
+            label: $i18n.t('panel_label.operationLog'), // 操作日志
             value: 'OC_B_ORDER_LOG'
           }
         ],
@@ -165,7 +165,7 @@
           typeAll: 'default',
           buttons: [
             {
-              text: '返回',
+              text: $i18n.t('common.return'), // 返回
               btnclick: () => {
                 this.$comUtils.tabCloseAppoint(this);
                 this.$store.commit('customize/TabOpen', {
@@ -178,7 +178,7 @@
               }
             },
             {
-              text: '刷新',
+              text: $i18n.t('common.refresh'), //刷新
               btnclick: async() => {
                 // 区分子表
                 if(this.labelDefaultValue === 'OC_B_ORDER_ITEM'){

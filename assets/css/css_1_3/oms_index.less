@@ -1620,3 +1620,41 @@ a:hover,
     }
   }
 }
+
+// 修改密码
+.ChangePassword{
+  .clonePopUp{
+    height: auto;
+    .pop-title{
+      height: auto;
+      .pop-input {
+        span{
+          width: 80px
+        }
+        ul li{
+          input{
+            #bundle > .defalutInput;
+            width: calc(100% - 80px);
+          }
+        }
+      }
+      .pop-btn{
+        #bundle > .flex(@justify:flex-end);
+        margin-top: 10px;
+        span{
+          display: inline-block;
+          text-align: center;
+          &.sav-btn{
+            #bundle > .primaryBtn;
+            #bundle > .order(2);
+          }
+          &.cancel-btn{
+            #bundle > .defalutBtn;
+            #bundle > .order(1);
+            margin-right: @base-mr;
+          }
+        }
+      }
+    }
+  }
+}

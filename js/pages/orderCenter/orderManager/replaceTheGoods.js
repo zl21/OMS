@@ -40,7 +40,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: '确定', // 按钮文本
+            text: $i18n.t('common.determine'), // 确定 按钮文本
             btnclick: () => {
               this.submit();
             }
@@ -54,7 +54,7 @@ export default {
           //   }
           // },
           {
-            text: '取消', // 按钮文本
+            text: $i18n.t('common.cancel'), // 取消 按钮文本
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             } // 按钮点击事件

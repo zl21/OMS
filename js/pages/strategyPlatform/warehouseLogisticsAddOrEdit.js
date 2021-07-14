@@ -38,7 +38,7 @@ export default {
         buttons: [
           {
             webname: 'ST_C_WAREHOUSE_LOGISTICS_MAIN_SAVE', // 保存
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             disabled: false, // 按钮禁用控制
             isShow: false,
             btnclick: () => {
@@ -69,13 +69,12 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '商品SPU',
               inputname: 'CP_C_PHY_WAREHOUSE_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '仓库名称', // 赔付类型
+              name: $i18n.t('table_label.warehouseName'), // 仓库名称 // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
               reftableid: 169092, // 对应的表ID
@@ -134,13 +133,12 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '商品SPU',
               inputname: 'CP_C_LOGISTICS_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '物流公司', // 赔付类型
+              name: $i18n.t('form_label.logisticsCompany'), // 物流公司
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               reftableid: 171650, // 对应的表ID
@@ -160,7 +158,7 @@ export default {
           },
           {
             style: 'input',
-            label: '备注',
+            label: $i18n.t('table_label.remarks'), // 备注
             colname: 'REMARK',
             value: 'REMARK',
             width: '6',
@@ -205,7 +203,7 @@ export default {
       logisticsTableFormConfig: {
         formData: [
           {
-            label: '物流公司',
+            label: $i18n.t('form_label.logisticsCompany'), // 物流公司
             colname: 'CP_C_LOGISTICS_ID',
             defVal: 'CP_C_LOGISTICS_ID1',
             style: 'formCompile',
@@ -221,13 +219,12 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
-              fkdesc: '商品SPU',
               inputname: 'CP_C_LOGISTICS_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '物流公司', // 赔付类型
+              name: $i18n.t('form_label.logisticsCompany'), // 物流公司
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               reftableid: 171650, // 对应的表ID
@@ -276,7 +273,7 @@ export default {
           {
             webname: 'ST_C_WAREHOUSE_LOGISTICS_SUB_ADD',
             type:'primary',
-            text: '添加',
+            text: $i18n.t('btn.increase'), // 添加
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             isShow: false,
@@ -287,7 +284,7 @@ export default {
           {
             webname: 'ST_C_WAREHOUSE_LOGISTICS_SUB_DELETE',
             type:'warning',
-            text: '删除',
+            text: $i18n.t('btn.delete'), // 删除
             disabled: false, // 按钮禁用控制
             isShow: false,
             btnclick: () => {
@@ -319,7 +316,7 @@ export default {
         indexColumn: true, // 是否展示序号列
         columns: [
           {
-            title: '物流公司',
+            title: $i18n.t('form_label.logisticsCompany'), // 物流公司
             key: 'CP_C_LOGISTICS_ENAME'
           }
         ]
@@ -337,7 +334,7 @@ export default {
           isShow: false
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_WAREHOUSE_LOGISTICS_LOG',
           isShow: false
         }

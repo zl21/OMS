@@ -149,7 +149,7 @@ export default {
         buttons: [
           {
             type: 'primary',
-            text: '新增', // 添加
+            text: $i18n.t('btn.add'), // 新增
             btnclick: () => {
               this.addList();
             }
@@ -169,14 +169,14 @@ export default {
         current: 1,
         columns: [
           {
-            title: '序号',
+            title: $i18n.t('table_label.serialNo'), // 序号
             key: 'index',
             render: (h, params) => {
               return h('span', {}, (this.table.current - 1) * this.table.pageSize + params.index + 1)
             }
           },
           {
-            title: '操作',
+            title: $i18n.t('table_label.operation'), // 操作
             key: 'action',
             render: (h, params) => {
               if (params.row.IS_SYSTEM == 0) {
@@ -275,7 +275,7 @@ export default {
             }
           },
           {
-            title: '备注',
+            title: $i18n.t('table_label.remarks'), // 备注
             key: 'REMARK',
             render: (h, params) => {
               if (params.row.IS_SYSTEM == 0) {
@@ -357,7 +357,7 @@ export default {
                   props: {
                     columns: [
                       {
-                        title: '序号',
+                        title: $i18n.t('table_label.serialNo'), // 序号
                         key: 'index'
                       },
                       {

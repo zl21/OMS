@@ -78,7 +78,7 @@ export default {
         typeAll: 'default',
         buttons: [{
           webname: 'SKU_SaveBtn',
-          text: '保存',
+          text: $i18n.t('btn.save'), // 保存
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
           btnclick: () => {
@@ -412,7 +412,7 @@ export default {
           value: 'PS_C_ALTERNATE_SKU',
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'PS_C_SKU_LOG',
         },
       ],

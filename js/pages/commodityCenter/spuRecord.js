@@ -90,7 +90,7 @@ export default {
             type: 'index',
             width: 60,
             align: 'center',
-            title: '序号'
+            title: $i18n.t('table_label.serialNo'), // 序号
           },
           {
             title: 'SKU编码',
@@ -136,7 +136,7 @@ export default {
             key: 'UNIT'
           },
           {
-            title: '备注',
+            title: $i18n.t('table_label.remarks'), // 备注
             key: 'SPEC_REMARK'
           }
         ],
@@ -214,7 +214,7 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: '序号'
+            title: $i18n.t('table_label.serialNo'), // 序号
           },
           {
             title: '供应商名称',
@@ -252,13 +252,13 @@ export default {
         buttons: []
       },
       extendSupplierBtn:[{
-            text: '新增',
+            text: $i18n.t('btn.add'), // 新增
             btnclick: () => {
               this.addSupplier();
             }
           },
           {
-            text: '删除',
+            text: $i18n.t('btn.delete'), // 删除
             btnclick: () => {
               this.supplierDel();
             }
@@ -267,7 +267,7 @@ export default {
       extendBtn:[
         {
           webname: 'PS_C_PRO_SAVE', // 保存
-          text: '保存',
+          text: $i18n.t('btn.save'), // 保存
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
           btnclick: () => {
@@ -502,7 +502,7 @@ export default {
         //   value: 'customAttr',
         // },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'logTable',
         },
       ],

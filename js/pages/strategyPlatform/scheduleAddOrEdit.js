@@ -69,7 +69,7 @@ export default {
         typeAll: 'default',
         buttons: [{
           webname: 'lookup_save', // 保存
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -99,7 +99,7 @@ export default {
               fkdisplay: 'drp', // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              name: '店铺', // 赔付类型
+              name: $i18n.t('other.shop'), // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 169130, // 对应的表ID
@@ -160,7 +160,7 @@ export default {
           },
           {
             style: 'input',
-            label: '优先级',
+            label: $i18n.t('table_label.priority'), // 优先级
             colname: 'RANK',
             value: 'RANK',
             width: '6',
@@ -205,7 +205,7 @@ export default {
       pickingForDate: {
         formData: [{
             style: 'time', // 输入框类型
-            label: '创建时间', // 输入框前文字
+            label: $i18n.t('table_label.creationTime'), // 创建时间 // 输入框前文字
             colname: 'PICK_CREATE_DATE',
             type: 'time',
             placement: 'bottom',
@@ -229,7 +229,6 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
-              fkdesc: '商品SPU',
               inputname: 'CP_C_ORIG_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
@@ -264,7 +263,7 @@ export default {
             options: [ // radio选项
               {
                 value: '1',
-                label: '普通',
+                label: $i18n.t('other.common'), // 普通
               },
               {
                 value: '2',
@@ -385,7 +384,6 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
-              fkdesc: '商品SPU',
               inputname: 'CP_C_ORIG_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
@@ -421,7 +419,7 @@ export default {
             options: [ // radio选项
               {
                 value: '1',
-                label: '普通',
+                label: $i18n.t('other.common'), // 普通
               },
               {
                 value: '2',
@@ -510,14 +508,13 @@ export default {
                   datelimit: 'all',
                   display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
                   fkdisplay: 'mrp', // 外键关联类型
-                  fkdesc: '商品SPU',
                   inputname: 'CP_C_PHY_WAREHOUSE_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
                   isfk: true, // 是否有fk键
                   isnotnull: true, // 是否必填
                   isuppercase: false, // 是否转大写
                   istooltip: true,
                   length: 65535, // 最大长度是多少
-                  name: '发货仓库', // 赔付类型
+                  name: $i18n.t('form_label.delivery_warehouse'), // 发货仓库 // 赔付类型
                   readonly: false, // 是否可编辑，对应input   readonly属性
                   reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
                   reftableid: 169375, // 对应的表ID
@@ -720,7 +717,7 @@ export default {
         },
         {
           style: 'select',
-          label: '配送方式',
+          label: $i18n.t('form_label.distributionMode'), // 配送方式
           value: 'DELIVERY_METHOD',
           width: '24',
           disabled: false,
@@ -770,10 +767,10 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: '序号'
+            title: $i18n.t('table_label.serialNo'), // 序号
           },
           {
-            title: '操作',
+            title: $i18n.t('table_label.operation'), // 操作
             key: 'demo5',
             render: (h, params) => h('div', [
               h(
@@ -794,7 +791,7 @@ export default {
                     }
                   }
                 },
-                '编辑'
+                $i18n.t('table_label.edit') // 编辑
               ),
               h(
                 'Button',
@@ -822,7 +819,7 @@ export default {
                     }
                   }
                 },
-                '删除'
+                $i18n.t('btn.delete') // 删除
               )
             ])
           }
@@ -882,7 +879,7 @@ export default {
           typeAll: 'default',
           buttons: [
             {
-              text: '新增',
+              text: $i18n.t('btn.add'), // 新增
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -895,7 +892,7 @@ export default {
       },
       pickTableHeaders: [
         [{
-          title: '创建时间',
+          title: $i18n.t('table_label.creationTime'), // 创建时间
           key: 'PICK_CREATE_DATE',
         },
         {
@@ -952,10 +949,10 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: '序号'
+            title: $i18n.t('table_label.serialNo'), // 序号
           },
           {
-            title: '操作',
+            title: $i18n.t('table_label.operation'), // 操作
             key: 'demo5',
             render: (h, params) => h('div', [
               h(
@@ -974,7 +971,7 @@ export default {
                     }
                   }
                 },
-                '编辑'
+                $i18n.t('table_label.edit') // 编辑
               ),
               h(
                 'Button',
@@ -1002,7 +999,7 @@ export default {
                     }
                   }
                 },
-                '删除'
+                $i18n.t('btn.delete') // 删除
               )
             ])
           },
@@ -1011,7 +1008,7 @@ export default {
             key: 'PEAK_VALUE',
           },
           {
-            title: '发货仓库',
+            title: $i18n.t('form_label.delivery_warehouse'), // 发货仓库
             key: 'CP_C_PHY_WAREHOUSE_ENAME',
           },
           {
@@ -1039,7 +1036,7 @@ export default {
             key: 'STATEMENT_TIME',
           },
           {
-            title: '配送方式',
+            title: $i18n.t('form_label.distributionMode'), // 配送方式
             key: 'DELIVERY_METHOD_STR',
           },
           {
@@ -1052,7 +1049,7 @@ export default {
           typeAll: 'default',
           buttons: [
             {
-              text: '新增',
+              text: $i18n.t('btn.add'), // 新增
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -1065,7 +1062,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_C_VIPCOM_PROJECT_LOG',
         }
       ],
@@ -1152,6 +1149,7 @@ export default {
       
       console.log(this.dialogConfig);
       this.scheduleFormConfig.componentData = {
+        ID: this.ID,
         tableName: 'ST_C_VIPCOM_PROJECT',
         dialogConfig: this.dialogConfig,
         detail: detail || {},

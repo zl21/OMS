@@ -59,7 +59,7 @@ export default {
         buttons: [
           {
             webname: 'lookup_save', // 保存
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -329,7 +329,6 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '店铺',
               inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填

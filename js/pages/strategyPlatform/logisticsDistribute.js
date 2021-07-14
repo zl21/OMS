@@ -212,7 +212,7 @@ export default {
           },
           {
             style: 'input',
-            label: '备注',
+            label: $i18n.t('table_label.remarks'), // 备注
             value: 'remark',
             colname: 'remark',
             width: '8',
@@ -444,7 +444,7 @@ export default {
           align: 'center'
         },
         {
-          title: '序号',
+          title: $i18n.t('table_label.serialNo'), // 序号
           key: 'index'
         },
         {
@@ -519,7 +519,7 @@ export default {
           value: 'jiben'
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_DELIVERY_AREA_LOG'
         }
       ],

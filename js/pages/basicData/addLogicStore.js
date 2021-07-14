@@ -18,7 +18,7 @@ import businessButton from 'professionalComponents/businessButton';
           buttons: [
             {
               webname: 'lookup_save', // 保存
-              text: '保存',
+              text: $i18n.t('btn.save'), // 保存
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -119,7 +119,7 @@ import businessButton from 'professionalComponents/businessButton';
             },
             {
               style: 'textarea',
-              label: '备注',
+              label: $i18n.t('table_label.remarks'), // 备注
               value: 'REMARK',
               width: '24',
               disabled: false,

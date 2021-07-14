@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       vmI18n:$i18n,
-      ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
+      // ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       subTableCollapse: [],
       formConfig: {},
       loading: false,
@@ -39,7 +39,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
               // this.$parent.close();
               // this.$emit('clearModify');
@@ -47,7 +47,7 @@ export default {
             },
           },
           {
-            text: '确定',
+            text: $i18n.t('common.determine'), // 确定
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -137,7 +137,7 @@ export default {
      * @param {*} type 拣货单/入库单
      */
     subTableSave(params, type) {
-      let payload = { ...params, ST_C_VIPCOM_PROJECT_ID: this.ID };
+      let payload = { ...params, ST_C_VIPCOM_PROJECT_ID: this.componentData.ID };
       this.loading = true;
       const api = type == 'picking' ? 'pickSave' : 'warehouseInSave';
       this.service.strategyPlatform[api](payload)

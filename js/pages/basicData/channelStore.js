@@ -41,7 +41,7 @@ export default {
       extendBtn:[
         {
           webname: 'CP_C_ORG_CHANNEL_SAVE', // 保存
-          text: '保存',
+          text: $i18n.t('btn.save'), // 保存
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
           btnclick: () => {
@@ -142,7 +142,7 @@ export default {
         {
           type:'warning',
           webname: 'CP_C_ORG_CHANNEL_DEL', // 删除
-          text: '删除',
+          text: $i18n.t('btn.delete'), // 删除
           btnclick: () => {
             this.delete();
           }
@@ -353,7 +353,7 @@ export default {
           value: 'supplyStore'
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'CP_ORG_CHANNEL_LOG'
         }
       ],

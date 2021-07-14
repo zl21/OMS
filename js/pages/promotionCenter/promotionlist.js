@@ -131,7 +131,7 @@ export default {
           fkdisplay: 'mrp',
           isfk: true,
           isnotnull: false,
-          name: '店铺名称', // 店铺名称
+          name: $i18n.t('table_label.shopName'), // 店铺名称
           readonly: false,
           reftable: 'CP_C_SHOP',
           reftableid: 10348,

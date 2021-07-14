@@ -95,7 +95,7 @@ const baseColumnDefs = [
 		field: 'REMARK'
 	},
 	{
-		headerName: '操作',
+		headerName: $i18n.t('table_label.operation'), // 操作
 		// headerName: vmI18n.t("table_label.operation"),
 		field: 'ACTION_LOG'
 	}
@@ -151,7 +151,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: '操作',
+			title: $i18n.t('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -167,7 +167,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: '操作',
+			title: $i18n.t('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -183,7 +183,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: '操作',
+			title: $i18n.t('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -215,7 +215,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: '操作',
+			title: $i18n.t('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -247,7 +247,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: '操作',
+			title: $i18n.t('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -283,7 +283,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: '操作',
+			title: $i18n.t('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -319,7 +319,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: '操作',
+			title: $i18n.t('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -341,7 +341,7 @@ const tableCols = {
 		{
 			slot: 'OPERATE',
 			key: 'OPERATE',
-			title: '操作',
+			title: $i18n.t('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -363,7 +363,7 @@ const tableCols = {
 		{
 			slot: 'OPERATE',
 			key: 'OPERATE',
-			title: '操作',
+			title: $i18n.t('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -385,7 +385,7 @@ const tableCols = {
 		{
 			slot: 'OPERATE',
 			key: 'OPERATE',
-			title: '操作',
+			title: $i18n.t('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -420,7 +420,7 @@ const tableCols = {
 		{
 			slot: 'OPERATE',
 			key: 'OPERATE',
-			title: '操作',
+			title: $i18n.t('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -469,7 +469,7 @@ const tableCols = {
 		{
 			align: 'center',
 			key: 'OPERATE',
-			title: '操作',
+			title: $i18n.t('table_label.operation'), // 操作
 			fun: ''
 		}
 	],

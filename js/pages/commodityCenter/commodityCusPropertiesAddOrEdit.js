@@ -50,7 +50,7 @@ export default {
         typeAll: 'default',
         buttons: [{
             webname: 'ATTRIBUTE_SaveBtn',
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -382,7 +382,7 @@ export default {
             },
             {
               type:'warning',
-              text: '删除',
+              text: $i18n.t('btn.delete'), // 删除
               btnclick: () => {
                 this.deleteAttrValue();
               },
@@ -396,7 +396,7 @@ export default {
           value: 'PROPERTYVALUES',
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'BS_EXTRA_ATTRIBUTE_DEF_LOG',
         },
       ],

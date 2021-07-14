@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-13 18:32:52
+ * @LastEditTime: 2021-07-14 10:55:02
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -155,13 +155,13 @@ export default {
         columns: [],
         totalData: [],
         data: [
-          /* {
-            PS_C_SKU_ECODE:'1010',
-            PS_C_PRO_ECODE: '1111',
-            QTY_REFUND:1,
-            AMT_REFUND_SINGLE:10,
-            REFUND_FEE:10,
-          }, */
+          {
+            PS_C_SKU_ECODE: 0,
+            PS_C_PRO_ECODE: 0,
+            QTY_REFUND:0,
+            AMT_REFUND_SINGLE:0,
+            REFUND_FEE:0,
+          }
         ], // 数据配置
         pageShow: false, // 控制分页是否显示
         loading: false,
@@ -444,7 +444,6 @@ export default {
         ), //最终实退总金额
       };
       this.PRO_TYPE = OC_B_RETURN_ORDER.PRO_TYPE
-      console.log('this.PRO_TYPE:',this.PRO_TYPE,OC_B_RETURN_ORDER);
       R3.store.commit(
         `customize/returnAmount`,
         JSON.parse(JSON.stringify(returnAmount))
@@ -484,6 +483,7 @@ export default {
         JSON.parse(JSON.stringify(this.toMainData))
       );
       this.totalNum();
+      console.log(this.toMainData);
     },
     // 获取SKU数据
     async getPlaceData(page = 0, pageSize = 10) {

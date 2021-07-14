@@ -42,13 +42,13 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             btnclick: () => {
               this.save();
             },
           },
           {
-            text: '返回',
+            text: $i18n.t('common.return'), // 返回
             btnclick: () => {
               this.back();
             },
@@ -119,7 +119,7 @@ export default {
               btnclick: () => {},
             },
             {
-              text: '取消',
+              text: $i18n.t('common.cancel'), // 取消,
               btnclick: () => {},
             },
           ],

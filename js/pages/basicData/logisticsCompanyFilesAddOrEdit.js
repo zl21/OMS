@@ -62,7 +62,7 @@ export default {
         buttons: [
           {
             webname: 'LOGISTICS_SaveBtn',
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -170,7 +170,7 @@ export default {
             {
               webname: 'LOGISTICS_DeleteDetailBtn',
               type: 'warning',
-              text: '删除',
+              text: $i18n.t('btn.delete'), // 删除
               btnclick: () => {
                 this.deleteHandel();
               },
@@ -196,7 +196,7 @@ export default {
             },
             {
               webname: 'LOGISTICS2_DeleteDetailBtn',
-              text: '删除',
+              text: $i18n.t('btn.delete'), // 删除
               type: 'warning',
               btnclick: () => {
                 this.nalysisDetale();
@@ -270,7 +270,7 @@ export default {
           value: 'CP_C_LOGISTICS_FIX',
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'CP_LOGISTICS_LOG',
         },
       ],

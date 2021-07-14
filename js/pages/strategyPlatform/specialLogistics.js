@@ -84,7 +84,7 @@ export default {
           value: 'PROPERTY'
         },
         {
-          label: $i18n.t('panel_label.operationLog'),//'操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_SPECIAL_ASSIGN_LOGISTICS_LOG'
         }
       ],
@@ -106,7 +106,7 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: $i18n.t('btn.save'),//'保存',
+            text: $i18n.t('btn.save'), // 保存
             size: '', // 按钮大小
             isShow: false,
             webname: this.$route.params.customizedModuleName + "_save",
@@ -132,7 +132,7 @@ export default {
           },
           {
             type: 'warning',
-            text: $i18n.t('btn.delete'),//'删除',
+            text: $i18n.t('btn.delete'), // 删除
             disabled: false,
             btnclick: this.deleteLogistics
           }
@@ -145,7 +145,7 @@ export default {
             version: '1.4',
             colname: 'cpCShopTitle',
             style: 'popInput', // 输入框弹框单多选
-            label: '店铺名称',
+            label: $i18n.t('table_label.shopName'), // 店铺名称
             width: '12',
             itemdata: {
               col: 1,
@@ -158,7 +158,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '店铺名称', // 赔付类型
+              name: $i18n.t('table_label.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
               reftableid: 10285, // 对应的表ID
@@ -513,7 +513,7 @@ export default {
       },
       columns2: [
         {
-          title: '序号',
+          title: $i18n.t('table_label.serialNo'), // 序号
           key: 'index'
         },
         {
@@ -533,7 +533,7 @@ export default {
           key: 'psCSkuEname'
         },
         {
-          title: '操作',
+          title: $i18n.t('table_label.operation'), // 操作
           key: 'action',
           fixed: 'right',
           render: (h, params) => {
@@ -640,7 +640,7 @@ export default {
             align: 'center'
           },
           {
-            title: '序号',
+            title: $i18n.t('table_label.serialNo'), // 序号
             key: 'index'
           },
           {
@@ -669,7 +669,7 @@ export default {
         isShowSelection: false,
         columns: [
           {
-            title: '序号',
+            title: $i18n.t('table_label.serialNo'), // 序号
             key: 'index'
           },
           {
@@ -689,7 +689,7 @@ export default {
             key: 'psCSkuEname'
           },
           {
-            title: '操作',
+            title: $i18n.t('table_label.operation'), // 操作
             key: 'action',
             fixed: 'right',
             render: (h, params) => {
@@ -735,7 +735,7 @@ export default {
           key: 'cpCRegionCityEname'
         },
         {
-          title: $i18n.t('table_label.operation'),//'操作',
+          title: $i18n.t('table_label.operation'), // 操作
           key: 'action',
           fixed: 'right',
           render: (h, params) => {
