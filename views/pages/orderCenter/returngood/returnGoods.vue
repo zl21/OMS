@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-19 10:53:30
- * @LastEditTime: 2021-07-13 17:10:14
+ * @LastEditTime: 2021-07-14 17:14:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returngood/returnGoods.vue
@@ -27,7 +27,7 @@
     data(){
       return{
         isSku:false,
-        switchText:'切换为sku商品展示',
+        switchText: $i18n.t('form_label.b0') , //切换为sku商品展示
         IS_GROUP:true,
         returnDetailAddTable: {
           modal: false,
@@ -40,7 +40,7 @@
             loading: false,
             isShowSelection: true, // 是否显示checkedbox
             totalData:[{
-              index:'合计'
+              index:$i18n.t("other.total")
             }]
           }
       },
@@ -56,7 +56,8 @@
     methods:{
       // 切换商品展示类型
       onSitch(){
-        this.isSku ? this.switchText = '切换为sku商品展示' : this.switchText = '切换为平台商品展示';
+        // 切换为sku商品展示 切换为平台商品展示
+        this.isSku ? this.switchText = $i18n.t('form_label.b0') : this.switchText = $i18n.t('form_label.b1');
         this.isSku = !this.isSku;
         this.getData(this.isSku);
       },

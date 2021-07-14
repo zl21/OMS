@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-07-09 17:48:41
+ * @LastEditTime: 2021-07-14 18:23:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -11,18 +11,21 @@
     <ul class="calculation-main">
       <li>
         <div class="calculation-item">
-          <span>商品应退金额</span>
+          <!-- 商品应退金额 -->
+          <span :title="vmI18n.t('other.refundAmountGoods')">{{ vmI18n.t('other.refundAmountGoods') }}</span>
           <label>{{ data.PRO_ACTUAL_AMT }}</label>
         </div>
         <div class="calculation-item bg">
-          <span>商品实退金额</span>
+          <!-- 商品实退金额 -->
+          <span :title="vmI18n.t('other.cr')">{{ vmI18n.t('other.cr') }}</span>
           <label>{{ data.PRO_REAL_AMT }}</label>
         </div>
       </li>
       <li class="symbol">+</li>
       <li>
         <div class="calculation-item">
-          <span>应退运费</span>
+          <!-- 应退运费 -->
+          <span :title="vmI18n.t('form_label.cr')">{{ vmI18n.t('form_label.cr') }}</span>
           <label>
             <Input v-if="type" v-model="editData.SHIP_AMT" :regx="/^\d*\.{0,1}\d{0,2}$/" @on-change="inputChange"></Input>
             <span v-else>
@@ -34,7 +37,8 @@
       <li class="symbol">+</li>
       <li>
         <div class="calculation-item">
-          <span>调整金额</span>
+          <!-- 调整金额 -->
+          <span :title="vmI18n.t('table_label.adjustment_amount')">{{vmI18n.t('table_label.adjustment_amount')}}</span>
           <label>
             <Input v-if="type" v-model="editData.ADJUST_AMT" :regx=" /(^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d{1,2})?$)/" @on-change="inputChange"></Input>
             <span v-else>
@@ -46,18 +50,21 @@
       <li v-if="tableName" class="symbol">-</li>
       <li v-if="tableName" >
         <div class="calculation-item">
-          <span>换货金额</span>
+          <!-- 换货金额 -->
+          <span :title="vmI18n.t('other.exchangeAmounts')">{{ vmI18n.t('other.exchangeAmounts') }}</span>
           <label>{{ data.EXCHANGE_AMT }}</label>
         </div>
       </li>
       <li class="symbol">=</li>
       <li>
         <div class="calculation-item">
-          <span class="black">最终应退总金额</span>
+          <!-- 最终应退总金额 -->
+          <span class="black" :title="vmI18n.t('form_label.ae')">{{ vmI18n.t('form_label.ae') }}</span>
           <label>{{ data.FINAL_ACTUAL_AMT }}</label>
         </div>
         <div class="calculation-item bg">
-          <span class="black">最终实退总金额</span>
+          <!-- 最终实退总金额 -->
+          <span class="black" :title="vmI18n.t('form_label.cs')">{{ vmI18n.t('form_label.cs') }}</span>
           <label>{{ data.FINAL_REAL_AMT }}</label>
         </div>
       </li>
@@ -68,10 +75,12 @@
 export default {
   data() {
     return {
+      vmI18n:$i18n,
       data: R3.store.state.customize.returnAmount,
       editData:JSON.parse(JSON.stringify(R3.store.state.customize.returnAmount)),
       tableName:this.$route.params.tableName === 'OC_B_RETURN_ORDER_VIRTUAL_TABLE' ? 0 : 1,
-      type:this.$route.query.RETURN_SOURCE === '手工新增' ? 1 : 0
+      // 手工新增
+      type:this.$route.query.RETURN_SOURCE === $i18n.t('btn.addManually') ? 1 : 0
     };
   },
   mounted(){
@@ -102,6 +111,7 @@ export default {
 };
 </script>
 <style lang="less">
+@import '~@burgeon/oms-theme/skin/public.less';
 .calculation-main {
   display: flex;
   padding: 8px;
@@ -135,6 +145,8 @@ export default {
         color: #8d91a1;
         width: 100%;
         text-align: center;
+        max-width: 150px;
+        #bundle > .points;
         input{
           width: 50%;
           padding: 0 10px;
