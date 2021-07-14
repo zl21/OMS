@@ -285,7 +285,7 @@ export default {
         formData: [
           {
             style: null,
-            label: '策略ID',
+            label: $i18n.t('form_label.bc'), // 策略ID
             colname: 'ecode',
             width: '6',
             disabled: true,
@@ -293,7 +293,7 @@ export default {
           },
           {
             style: 'input',
-            label: '策略名称',
+            label: $i18n.t('form_label.bd'), // 策略名称
             value: 'ename',
             colname: 'ename',
             width: '6',
@@ -304,7 +304,7 @@ export default {
           {
             style: 'date',
             type: 'datetime',
-            label: '生效开始时间',
+            label: $i18n.t('form_label.be'), // 生效开始时间
             colname: 'validTime',
             width: '6',
             disabled: false,
@@ -316,7 +316,7 @@ export default {
           {
             style: 'date',
             type: 'datetime',
-            label: '生效结束时间',
+            label: $i18n.t('form_label.bf'), // 生效结束时间
             colname: 'invalidTime',
             value: '',
             width: '6',
@@ -1489,7 +1489,7 @@ export default {
         if (this.changeCount > 1) {
           this.$Modal.info({
             title: $i18n.t('modalTitle.tips'), // 提示
-            content: '当前修改未保存，确定返回？',
+            content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
             okText: $i18n.t('common.determine'), // 确定
@@ -1505,7 +1505,7 @@ export default {
         if (this.changeCount > 8) {
           this.$Modal.info({
             title: $i18n.t('modalTitle.tips'), // 提示
-            content: '当前修改未保存，确定返回？',
+            content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
             okText: $i18n.t('common.determine'), // 确定

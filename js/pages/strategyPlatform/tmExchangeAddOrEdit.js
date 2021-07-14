@@ -54,13 +54,13 @@ export default {
           {
             style: null,
             colname: 'ECODE',
-            label: '策略ID',
+            label: $i18n.t('form_label.bc'), // 策略ID
             width: '6'
           },
           {
             style: 'input',
             colname: 'ENAME',
-            label: '策略名称',
+            label: $i18n.t('form_label.bd'), // 策略名称
             width: '6',
             inputChange: () => {
               this.masterModifyData('ENAME', 'master', 'formConfig1');
@@ -501,7 +501,7 @@ export default {
       if (this.isModify) {
         this.$Modal.info({
           title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定

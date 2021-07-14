@@ -89,7 +89,7 @@ export default {
       }
     ]
   },
-  cancel: (self) => {
+  init: (self) => {
     self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   },
   // 确定按钮
@@ -124,7 +124,6 @@ export default {
       formValue.startEndTimes = '';
       formValue.orderStatus = 'WAIT_SELLER_SEND_GOODS';
       self.downLoadFormConfig.formData[0].itemdata.valuedata = '';
-      self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
       // self.taskId = message.match(/\d+/)[0];
       // self.downLoadModal = true;
     }

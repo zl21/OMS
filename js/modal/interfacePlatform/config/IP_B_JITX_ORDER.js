@@ -97,7 +97,7 @@ export default {
       orderNum: [{ required: true, message: ' ', trigger: 'blur' }]
     }
   },
-  cancel: (self) => {
+  init: (self) => {
     self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   },
   // 确定按钮
@@ -135,7 +135,6 @@ export default {
       if (orderNum) {
         self.$Message.success(message);
         self.$emit('closeActionDialog', true);
-        self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
       } else {
         self.taskId = message.match(/\d+/)[0];
         self.downLoadModal = true;

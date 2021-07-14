@@ -52,7 +52,7 @@ export default {
             value: ''
           },
           {
-            label: "等待出库", // 待发货
+            label: $i18n.t('panel_label.a4'), // 等待出库
             value: 'WAIT_SELLER_STOCK_OUT'
           }
         ]
@@ -80,7 +80,7 @@ export default {
       }
     ]
   },
-  cancel: (self) => {
+  init: (self) => {
     self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   },
   // 确定按钮
@@ -109,11 +109,9 @@ export default {
 
     // 请求下载订单接口
     const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(param);
-    console.log(code, message);
     if (code === 0) {
       self.taskId = message.match(/\d+/)[0];
       self.downLoadModal = true;
-      self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
     }
   }
 };

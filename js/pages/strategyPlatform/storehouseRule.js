@@ -105,7 +105,7 @@ export default {
         formData: [
           {
             style: null,
-            label: '策略ID',
+            label: $i18n.t('form_label.bc'), // 策略ID
             value: 'ecode',
             colname: 'ecode',
             width: '8',
@@ -114,7 +114,7 @@ export default {
           },
           {
             style: 'input',
-            label: '策略名称',
+            label: $i18n.t('form_label.bd'), // 策略名称
             value: 'ename',
             colname: 'ename',
             width: '8',
@@ -125,7 +125,7 @@ export default {
           {
             style: 'date',
             type: "datetime",
-            label: '生效开始时间',
+            label: $i18n.t('form_label.be'), // 生效开始时间
             value: 'beginTime',
             colname: 'beginTime',
             format: 'yyyy-MM-dd HH:mm:ss',
@@ -138,7 +138,7 @@ export default {
           },
           {
             style: 'date',
-            label: '生效结束时间',
+            label: $i18n.t('form_label.bf'), // 生效结束时间
             type: "datetime",
             value: 'endTime',
             colname: 'endTime',
@@ -288,7 +288,7 @@ export default {
           },
           {
             style: null,
-            label: '启用状态',
+            label: $i18n.t('form_label.bg'), // 启用状态
             value: 'isactive',
             colname: 'isactive',
             width: '8',
@@ -1044,7 +1044,7 @@ export default {
         if (this.changeCount > 0) {
           this.$Modal.info({
             title: $i18n.t('modalTitle.tips'), // 提示
-            content: '当前修改未保存，确定返回？',
+            content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
             okText: $i18n.t('common.determine'), // 确定
@@ -1059,7 +1059,7 @@ export default {
       } else if (this.changeCount > 3) {
         this.$Modal.info({
           title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定

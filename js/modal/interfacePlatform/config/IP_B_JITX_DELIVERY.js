@@ -92,8 +92,6 @@ export default {
     let start = BurgeonDate.getFormatDate(date, 'yyyy-MM-dd HH:mm:00')
     let end = BurgeonDate.getFormatDate(new Date(date.setMinutes(date.getMinutes() + 30)), 'yyyy-MM-dd HH:mm:00')
     self.downLoadFormConfig.formValue.query_date = [start, end]
-  },
-  cancel: (self) => {
     self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   },
   // 确定按钮
@@ -128,7 +126,6 @@ export default {
       self.$Message.success(message);
       self.$emit('confirmImport');
       self.$emit('closeActionDialog', true);
-      self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
     }
   }
 };

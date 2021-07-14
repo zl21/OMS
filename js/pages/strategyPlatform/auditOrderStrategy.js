@@ -145,14 +145,14 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
           formData: [
             {
               style: '',
-              label: '策略ID',
+              label: $i18n.t('form_label.bc'), // 策略ID
               value: 'PLAN_ID',
               width: '6',
               disabled: true
             },
             {
               style: 'input',
-              label: '策略名称',
+              label: $i18n.t('form_label.bd'), // 策略名称
               value: 'PLAN_NAME',
               width: '6',
               inputChange: ()=>{

@@ -116,7 +116,7 @@ export default {
         },
         {
           style: null,
-          label: '启用状态',
+          label: $i18n.t('form_label.bg'), //  启用状态
           value: 'STATUS',
           colname: 'STATUS',
           width: '8',
@@ -601,7 +601,7 @@ export default {
       if (masterArr.length) {
         this.$Modal.info({
           title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定

@@ -54,7 +54,7 @@ export default {
       formConfig1: {
         formData: [{
             style: '',
-            label: '策略ID',
+            label: $i18n.t('form_label.bc'), // 策略ID
             colname: 'PLAN_ID',
             width: '6',
             disabled: false,
@@ -64,7 +64,7 @@ export default {
           },
           {
             style: 'input',
-            label: '策略名称',
+            label: $i18n.t('form_label.bd'), // 策略名称
             colname: 'PLAN_NAME',
             width: '6',
             disabled: false,
@@ -74,7 +74,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: '生效开始时间', // 输入框前文字
+            label: $i18n.t('form_label.be'), // 生效开始时间 输入框前文字
             colname: 'EFFECTIVE_BEGIN_TIME',
             type: 'datetime',
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -91,7 +91,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: '生效结束时间', // 输入框前文字
+            label: $i18n.t('form_label.bf'), // 生效结束时间 输入框前文字
             colname: 'EFFECTIVE_END_TIME',
             type: 'datetime',
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -108,7 +108,7 @@ export default {
           },
           {
             style: '',
-            label: '启用状态',
+            label: $i18n.t('form_label.bg'), // 启用状态
             colname: 'ISACTIVE',
             width: '6',
             disabled: true,
@@ -352,7 +352,7 @@ export default {
       if (this.isModify) {
         this.$Modal.info({
           title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定

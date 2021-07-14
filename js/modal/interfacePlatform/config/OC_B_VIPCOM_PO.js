@@ -54,7 +54,7 @@ export default {
     },
     ruleValidate: {}
   },
-  cancel: (self) => {
+  init: (self) => {
     self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   },
   // 确定按钮
@@ -83,7 +83,6 @@ export default {
     if (code === 0) {
       self.$Message.success(message);
       self.$emit('closeActionDialog', true);
-      self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
     }
   }
 };

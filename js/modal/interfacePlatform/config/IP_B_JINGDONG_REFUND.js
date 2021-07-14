@@ -63,7 +63,7 @@ export default {
       }]
     }
   },
-  cancel: (self) => {
+  init: (self) => {
     self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   },
   // 确定按钮
@@ -76,8 +76,8 @@ export default {
       return false;
     }
     const [start, end] = formValue.startEndTimes
-    if (!(formValue.bill_no || start)) {
-      self.$Message.warning('请输入退单修改时间或平台单号');
+    if (!start && !(formValue.bill_no && formValue.service_no)) {
+      self.$Message.warning('退单修改时间不存在时, 平台单号、服务单号必须同时有！');
       return false;
     }
     const param = {
@@ -101,6 +101,5 @@ export default {
     } catch (error) {
       self.dialogLoad = false;
     }
-    self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   }
 };

@@ -49,7 +49,7 @@ export default {
       }
     ]
   },
-  cancel: (self) => {
+  init: (self) => {
     self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   },
   // 确定按钮
@@ -76,7 +76,6 @@ export default {
       self.$Message.success(res.data.message);
       // self.$emit('confirmImport');
       self.$emit('closeActionDialog');
-      _this.$OMS2.omsUtils.formEmpty(_this, 'downLoadFormConfig')
     } else {
       self.$Message.error(res.data.message);
     }

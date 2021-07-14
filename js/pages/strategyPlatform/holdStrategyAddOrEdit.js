@@ -91,7 +91,7 @@ export default {
           {
             colname: 'ISACTIVE',
             width: '6',
-            label: '启用状态',
+            label: $i18n.t('form_label.bg'), // 启用状态
             style: null,
             // inputChange: () => {
             //   this.masterModifyData('ISACTIVE', 'formConfig1')
@@ -125,7 +125,7 @@ export default {
           {
             style: 'date',
             type: 'datetime',
-            label: '生效结束时间',
+            label: $i18n.t('form_label.bf'), // 生效结束时间
             colname: 'VALID_END_TIME',
             value: '',
             width: '6',
@@ -608,7 +608,7 @@ export default {
       if (Object.keys(this.modify).length) {
         this.$Modal.info({
           title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定

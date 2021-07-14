@@ -186,7 +186,7 @@ export default {
           },
           {
             style: 'input',
-            label: '启用状态',
+            label: $i18n.t('form_label.bg'), //  启用状态
             value: 'ISACTIVE',
             width: '8',
             disabled: true

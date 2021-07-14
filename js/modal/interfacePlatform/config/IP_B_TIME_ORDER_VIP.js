@@ -70,7 +70,7 @@ export default {
       query_date: [{ required: true }]
     }
   },
-  cancel: (self) => {
+  init: (self) => {
     self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   },
   // 确定按钮
@@ -107,7 +107,6 @@ export default {
       self.$Message.success(message);
       self.$emit('confirmImport');
       self.$emit('closeActionDialog', true);
-      self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
     }
   }
 };

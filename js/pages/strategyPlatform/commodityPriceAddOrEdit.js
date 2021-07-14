@@ -73,7 +73,7 @@ export default {
         formData: [
           {
             style: '',
-            label: '策略ID',
+            label: $i18n.t('form_label.bc'), // 策略ID
             colname: 'PLAN_ID',
             width: '6',
             disabled: false,
@@ -83,7 +83,7 @@ export default {
           },
           {
             style: 'input',
-            label: '策略名称',
+            label: $i18n.t('form_label.bd'), // 策略名称
             colname: 'PLAN_NAME',
             width: '6',
             disabled: false,
@@ -119,7 +119,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: '生效开始时间', // 输入框前文字
+            label: $i18n.t('form_label.be'), // 生效开始时间 // 输入框前文字
             colname: 'BEGIN_TIME',
             type: 'datetime',
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -136,7 +136,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: '生效结束时间', // 输入框前文字
+            label: $i18n.t('form_label.bf'), // 生效结束时间 输入框前文字
             colname: 'END_TIME',
             type: 'datetime',
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -174,7 +174,7 @@ export default {
           },
           {
             style: '',
-            label: '启用状态',
+            label: $i18n.t('form_label.bg'), //  启用状态
             colname: 'ISACTIVE',
             width: '6',
             disabled: true,
@@ -233,7 +233,7 @@ export default {
             title: $i18n.t('table_label.serialNo'), // 序号
           },
           {
-            title: "SKU编码",
+            title: $i18n.t('table_label.code_SKU'), // SKU编码
             key: "PS_C_SKU_ID",
             align: "center",
             required: false,
@@ -322,13 +322,12 @@ export default {
                 datelimit: 'all',
                 display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
                 fkdisplay: 'drp', // 外键关联类型
-                fkdesc: '店铺',
                 inputname: 'PS_C_SPU_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
                 isnotnull: false, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: 'SPU编码', // 赔付类型
+                name: $i18n.t('table_label.itemNo01'), // SPU编码
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'CP_C_SHOP', // 对应的表
                 reftableid: 171667, // 对应的表ID
@@ -378,7 +377,7 @@ export default {
             },
             {
               style: 'input',
-              label: '最低成交单价',
+              label: $i18n.t('form_label.bh'), // 最低成交单价
               colname: 'MIN_REAL_AMT',
               width: '6',
               disabled: false,
@@ -456,7 +455,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '商品明细',
+          label: $i18n.t('panel_label.a7'), // 商品明细
           value: 'goods',
         },
         {
@@ -518,7 +517,7 @@ export default {
     // 删除明细
     deleteDetail() {
       const selectArr = this.goodsTableConfig.selectionData
-      if (!selectArr.length) return this.$message.warning('请先选择需要删除的记录！')
+      if (!selectArr.length) return this.$message.warning($i18n.t('modalTips.hy'))
       const ITEM_IDS = selectArr.map(i => i.ID)
       this.service.strategyPlatform.deletePrice({ ID: this.ID, ITEM_IDS }).then(({ data: { code, message }}) => {
         if (code == 0) {
@@ -595,7 +594,7 @@ export default {
       if (this.isModify) {
         this.$Modal.info({
           title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定
