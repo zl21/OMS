@@ -79,6 +79,7 @@ export default {
   },
 
   other: {
+    queryResults: '查询结果',
     fullPayment: '全部付款',
     activity_overview: '活动概览',
     addTo_original_remarks: '追加到原备注',
@@ -868,6 +869,7 @@ export default {
     a4: '替换后商品SKU',
     a5: '报错信息',
     a6: '提示信息',
+    a7: '弹框多选',
     add_adjustmentListDetails: '新增应付调整单明细', // 新增应付调整单明细
     batchImport: '批量导入', //批量导入
     blacklist: '加入黑名单', //加入黑名单
