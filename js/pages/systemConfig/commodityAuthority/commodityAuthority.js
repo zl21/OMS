@@ -29,7 +29,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: '刷新', // 按钮文本
+            text: $i18n.t('btn.refresh'), // 按钮文本
             webname: '',
             btnclick: () => {
               this.refresh();
