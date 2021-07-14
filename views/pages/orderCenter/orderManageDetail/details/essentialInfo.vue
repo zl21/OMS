@@ -120,7 +120,7 @@
             <span class="order-money-title" :title="vmI18n.t('form_label.ah')"> {{ vmI18n.t('form_label.ah')}}</span>
             <ul class="totalAmount">
               <li>
-                <label>
+                <label :title="vmI18n.t('form_label.ai')">
                   <!-- 商品总金额  -->
                   {{ vmI18n.t('form_label.ai')}}
                    <Tooltip placement="top-start" max-width="800" theme="light">
@@ -135,36 +135,36 @@
               <li class="symbol">+</li>
               <li>
                 <!-- 运费 -->
-                <label>{{vmI18n.t('form_label.freight')}}</label>
+                <label :title="vmI18n.t('form_label.freight')">{{vmI18n.t('form_label.freight')}}</label>
                 <p>{{componentData.order.SHIP_AMT || '0.00'}}</p>
               </li>
               <li class="symbol">+</li>
               <li>
                 <!-- 服务费 -->
-                <label>{{vmI18n.t('form_label.service_charge')}}</label>
+                <label :title="vmI18n.t('form_label.service_charge')">{{vmI18n.t('form_label.service_charge')}}</label>
                 <p>{{ componentData.order.SERVICE_AMT || '0.00' }}</p>
               </li>
               <li class="symbol">=</li>
               <li class="resulf-text">
                 <!-- 订单总金额 -->
-                <label>{{vmI18n.t('form_label.aj') }}</label>
+                <label :title="vmI18n.t('form_label.aj')">{{vmI18n.t('form_label.aj') }}</label>
                 <p>{{orderPriceTotal}}</p>
               </li>
             </ul>
             <ul class="amountActually">
               <li>
                 <!-- 实付金额 -->
-                <label>{{vmI18n.t('form_label.ak') }}</label>
+                <label :title="vmI18n.t('form_label.ak')">{{vmI18n.t('form_label.ak') }}</label>
                 <p>{{ componentData.order.RECEIVED_AMT  || '0.00'}}</p>
               </li>
               <li>
                 <!-- 红包 -->
-                <label>{{vmI18n.t('form_label.aj') }}</label>
+                <label :title="vmI18n.t('form_label.aj')">{{vmI18n.t('form_label.aj') }}</label>
                 <p>{{ componentData.order.al || '0.00'}}</p>
               </li>
               <li>
                 <!-- 代收COD金额 -->
-                <label>{{vmI18n.t('form_label.am') }}</label>
+                <label :title="vmI18n.t('form_label.am')">{{vmI18n.t('form_label.am') }}</label>
                 <p>{{ componentData.order.COLLECT_AMT || '0.00'}}</p>
               </li>
             </ul>

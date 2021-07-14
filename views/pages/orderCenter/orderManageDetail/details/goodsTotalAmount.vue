@@ -3,34 +3,40 @@
   <!-- 订单金额 -->
   <div class="goodsTotalAmount">
     <!-- 商品总金额 -->
-    <span class="title">{{ vmI18n.t('form_label.ai')}}</span>
+    <!-- <span class="title">商品总金额</span> -->
+    <span class="title">{{ vmI18n.t('table_label.ai')}}</span>
     <ul class="goodsTotalAmount-ul">
       <li>
         <!-- 零售价合计 -->
+        <!-- <label>零售价合计</label> -->
         <label>{{vmI18n.t('form_label.b2')}}</label>
         <p>{{ orderOrder.PRODUCT_AMT }}</p>
       </li>
       <li class="symbol">-</li>
       <li>
         <!-- 商品优惠 -->
+        <!-- <label>商品优惠</label> -->
         <label>{{vmI18n.t('form_label.b3')}}</label>
         <p>{{ orderOrder.PRODUCT_DISCOUNT_AMT }}</p>
       </li>
       <li class="symbol">-</li>
       <li>
         <!-- 订单优惠金额 -->
+        <!-- <label>订单优惠金额</label> -->
         <label>{{vmI18n.t('form_label.b4')}}</label>
         <p>{{  orderOrder.ORDER_DISCOUNT_AMT }}</p>
       </li>
       <li class="symbol">+</li>
       <li>
         <!-- 调整金额 -->
+        <!-- <label>调整金额</label> -->
         <label>{{vmI18n.t('table_label.adjustment_amount')}}</label>
         <p>{{ orderOrder.ADJUST_AMT }}</p>
       </li>
       <li class="symbol">=</li>
       <li>
         <!-- 商品总金额 -->
+        <!-- <label>商品总金额</label> -->
         <label>{{ vmI18n.t('form_label.ai')}}</label>
         <p>{{retailPriceTotal}}</p>
       </li>
@@ -48,6 +54,7 @@
     },
     data() {
       return {
+        vmI18n:$i18n,
         retailPriceTotal: '',
         orderOrder:[]
       };
@@ -111,6 +118,8 @@
             height: 25px;
             line-height: 25px;
             color: #8d91a1;
+            min-width: 95px;
+            #bundle > .points;
           }
           p{
             font-size: 16px;

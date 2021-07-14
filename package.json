@@ -13,7 +13,7 @@
   "author": "flybird <duan.ry@burgeon.cn>",
   "license": "ISC",
   "devDependencies": {
-    "@burgeon/oms-theme": "1.6.6",
+    "@burgeon/oms-theme": "^1.8.10",
     "@syman/burgeon-r3": "1.4.75",
     "babel-cli": "6.26.0",
     "babel-preset-es2015": "^6.24.1",
