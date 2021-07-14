@@ -99,7 +99,7 @@ export default {
               fkdisplay: 'drp', // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              name: '店铺', // 赔付类型
+              name: $i18n.t('other.shop'), // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 169130, // 对应的表ID
@@ -1152,6 +1152,7 @@ export default {
       
       console.log(this.dialogConfig);
       this.scheduleFormConfig.componentData = {
+        ID: this.ID,
         tableName: 'ST_C_VIPCOM_PROJECT',
         dialogConfig: this.dialogConfig,
         detail: detail || {},

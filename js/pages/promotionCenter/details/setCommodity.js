@@ -12,7 +12,7 @@ export default {
 				btnsite: "right",
 				buttons: [
 					{
-						text: '取消', // 取消
+						text: $i18n.t('common.cancel'), // 取消
 						class:"white",
 						isShow: false,
 						disabled: false,

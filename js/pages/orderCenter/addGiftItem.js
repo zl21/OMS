@@ -31,8 +31,7 @@ export default {
           },
           {
             style: 'input', //输入框类型
-            label: $i18n.t('form_label.platform_billNo'),
-            //'平台单号', //输入框前文字
+            label: $i18n.t('form_label.platform_billNo'), // 平台单号 输入框前文字
             value: 'SOURCE_CODE', //输入框的值
             columns: ['SOURCE_CODE'],
             width: '7',

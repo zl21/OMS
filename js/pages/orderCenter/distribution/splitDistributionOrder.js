@@ -182,7 +182,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'), // 取消
             ghost: true,
             btnclick: () => {
               this.dialogConfig.visible = false;
@@ -190,7 +190,7 @@ export default {
           },
           {
             type: 'error',
-            text: '确定',
+            text: $i18n.t('common.determine'), // 确定
             ghost: true,
             btnclick: () => {
               // 校验

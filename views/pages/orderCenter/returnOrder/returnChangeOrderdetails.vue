@@ -83,13 +83,13 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: "取消",
+            text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
               this.detailAddCancel();
             },
           },
           {
-            text: '确定',
+            text: $i18n.t('common.determine'), // 确定
             type: 'primary',
             btnclick: () => {
               this.resetReturnMainTable();
@@ -102,14 +102,14 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: "取消",
+            text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
               // this.$emit("closeActionDialog", false);
               this.replaceProductTable.modal = false;
             },
           },
           {
-            text: '确定',
+            text: $i18n.t('common.determine'), // 确定
             type: 'primary',
             btnclick: () => {
               this.replaceOk();

@@ -119,7 +119,7 @@ export default {
               btnclick: () => {},
             },
             {
-              text: '取消',
+              text: $i18n.t('common.cancel'), // 取消,
               btnclick: () => {},
             },
           ],

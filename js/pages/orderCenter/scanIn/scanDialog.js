@@ -52,7 +52,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'), // 取消
             size: '',
             btnclick: () => { 
               const self = this;
@@ -61,7 +61,7 @@ export default {
             }
           },
           {
-            text: '确定',
+            text: $i18n.t('common.determine'), // 确定
             size: '',
             btnclick: () => {
               const self = this;

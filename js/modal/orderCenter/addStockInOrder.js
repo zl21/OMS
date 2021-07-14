@@ -21,13 +21,13 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
               this.$parent.close();
             },
           },
           {
-            text: '确定',
+            text: $i18n.t('common.determine'), // 确定
             size: '', // 按钮大小
             btnclick: () => {
               this.save();

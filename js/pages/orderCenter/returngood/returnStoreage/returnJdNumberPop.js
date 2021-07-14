@@ -221,7 +221,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: '确定', // 按钮文本
+            text: $i18n.t('common.determine'), // 确定 按钮文本
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -232,7 +232,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: '取消', // 按钮文本
+            text: $i18n.t('common.cancel'), // 取消 按钮文本
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
