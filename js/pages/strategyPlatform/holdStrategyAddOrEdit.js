@@ -284,7 +284,7 @@ export default {
             width: '24',
             checkboxChange: (val) => {
               this.masterModifyData('IS_AUTO_RELEASE', 'formConfig3')
-              if (!val) {
+              if (val) {
                 this.formConfig3.formData[2].style = 'select';
               } else {
                 this.formConfig3.formData[2].style = '';

@@ -99,7 +99,7 @@
             value: 'OC_B_ORDER_PROMOTION'
           },
           {
-            label: '发货信息', // 发货信息
+            label: $i18n.t('form_label.shipping_info'), // 发货信息
             value: 'OC_B_ORDER_DELIVERY'
           },
           {

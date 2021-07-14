@@ -7,25 +7,25 @@
     <ul class="goodsTotalAmount-ul">
       <li>
         <!-- 零售价合计 -->
-        <label>{{$i18n.t('form_label.b2')}}</label>
+        <label>{{vmI18n.t('form_label.b2')}}</label>
         <p>{{ orderOrder.PRODUCT_AMT }}</p>
       </li>
       <li class="symbol">-</li>
       <li>
         <!-- 商品优惠 -->
-        <label>{{$i18n.t('form_label.b3')}}</label>
+        <label>{{vmI18n.t('form_label.b3')}}</label>
         <p>{{ orderOrder.PRODUCT_DISCOUNT_AMT }}</p>
       </li>
       <li class="symbol">-</li>
       <li>
         <!-- 订单优惠金额 -->
-        <label>{{$i18n.t('form_label.b4')}}</label>
+        <label>{{vmI18n.t('form_label.b4')}}</label>
         <p>{{  orderOrder.ORDER_DISCOUNT_AMT }}</p>
       </li>
       <li class="symbol">+</li>
       <li>
         <!-- 调整金额 -->
-        <label>{{$i18n.t('table_label.adjustment_amount')}}</label>
+        <label>{{vmI18n.t('table_label.adjustment_amount')}}</label>
         <p>{{ orderOrder.ADJUST_AMT }}</p>
       </li>
       <li class="symbol">=</li>

@@ -59,7 +59,7 @@ export default {
           flag: false,
           width: '6',
           column: 'ORDER_TYPE',
-          label: $i18n.t('form_label.billType'), // 单据类型
+          label: $i18n.t('form_label.billType') + ':', // 单据类型
         },
         // {
         //   flag: false,
@@ -71,7 +71,7 @@ export default {
           flag: false,
           width: '6',
           column: 'PLATFORM_STATUS',
-          llabel: $i18n.t('form_label.ag') + ':' //平台状态
+          label: $i18n.t('form_label.ag') + ':' //平台状态
         },
         // {
         //   flag: false, // 需要加*
@@ -101,13 +101,13 @@ export default {
           flag: false, // 需要加*
           width: '6',
           column: 'CP_C_PHY_WAREHOUSE_ENAME', // 
-          label: $i18n.t('form_label.delivery_warehouse') + ':'
+          label: $i18n.t('form_label.delivery_warehouse') + ':' //发货仓库
         },
         {
           flag: false, // 需要加*
           width: '6',
           column: 'CP_C_LOGISTICS_ENAME', // 
-          label: $i18n.t('form_label.logisticsCompany') + ':'
+          label: $i18n.t('form_label.logisticsCompany') + ':' //物流公司
         },
         {
           flag: false, // 需要加*
@@ -141,7 +141,7 @@ export default {
           flag: false, // 需要加*
           width: '12',
           column: 'BUYER_NICK',
-          label: $i18n.t('table_label.buyerNickname') + '+', // 买家昵称
+          label: $i18n.t('table_label.buyerNickname') + ':', // 买家昵称
         },
         {
           flag: false,

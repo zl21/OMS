@@ -16,7 +16,7 @@
                   @click="eyeClick"
                 />
               </span>
-              <label>
+              <label :title="eyeText">
                 {{ eyeText }}
               </label>
             </p>
@@ -29,7 +29,7 @@
                     @click="modifyAddress"
                   />
                 </span>
-                <label>
+                <label :title = "vmI18n.t('modalTitle.modify_shipping_address')">
                   <!-- 修改收货地址 -->
                   {{vmI18n.t('modalTitle.modify_shipping_address')}} 
                 </label>
@@ -45,7 +45,7 @@
               :span="list.width"
               class="detail-li"
             >
-              <label>
+              <label :title="list.label">
                 <i v-if="list.flag">*</i>
                 {{ list.label }}
               </label>
@@ -54,11 +54,7 @@
                 {{ componentData.order['CP_C_REGION_CITY_ENAME'] }}
                 {{ componentData.order['CP_C_REGION_AREA_ENAME'] }}
               </p>
-              <p v-if="list.column === 'SELLER_MEMO'">
-                {{ componentData.order[list.column] }}
-                <span  v-if="butArr[2]['isShow']" @click="modifyRemark" class="edit iconfont icon-bianji"></span>
-              </p>
-              <p>{{ componentData.order[list.column] }}</p>
+              <p v-else>{{ componentData.order[list.column] }}</p>
             </Col>
           </Row>
         </div>
@@ -88,7 +84,7 @@
               :span="list.width"
               class="detail-li"
             >
-              <label>
+              <label :title="list.label">
                 <i v-if="list.flag">*</i>
                 {{ list.label }}
               </label>
@@ -107,6 +103,10 @@
                   style="color: red;"
                 > {{ vmI18n.t('form_label.an')}}</span>
                 <!-- (多包裹) -->
+              </p>
+              <p v-if="list.column === 'SELLER_MEMO'">
+                {{ componentData.order[list.column] }}
+                <span  v-if="butArr[2]['isShow']" @click="modifyRemark" class="edit iconfont icon-bianji"></span>
               </p>
               <!-- 其他 -->
               <p v-else>
@@ -177,7 +177,7 @@
       <div class="order-tab-content">
         <div class="order-tab-title">
           <!-- 订单明细 -->
-          <span> {{$i18n.t('panel_label.order_detailed')}}</span>
+          <span> {{vmI18n.t('panel_label.order_detailed')}}</span>
           <!-- 如果是组合商品不显示 -->
           <div v-if="is_combination" class="checkCombination">
             <span
@@ -186,7 +186,7 @@
             >
               <Icon type="ios-repeat" />
               <!-- 切换为sku商品显示 -->
-              {{$i18n.t('form_label.b0')}}
+              {{vmI18n.t('form_label.b0')}}
             </span>
             <span
               v-if="!isQh && isQhChild"
@@ -194,7 +194,7 @@
             >
               <Icon type="ios-repeat" />
               <!-- 切换为平台商品明细 -->
-               {{$i18n.t('form_label.b1')}}
+               {{vmI18n.t('form_label.b1')}}
             </span>
           </div>
         </div>

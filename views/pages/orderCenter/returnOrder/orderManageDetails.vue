@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-07 16:19:54
- * @LastEditTime: 2021-07-07 16:19:54
+ * @LastEditTime: 2021-07-14 14:07:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/orderManageDetails.vue
@@ -107,7 +107,7 @@
             value: 'OC_B_ORDER_PROMOTION'
           },
           {
-            label: '发货信息', // 发货信息
+            label: $i18n.t('form_label.shipping_info'), // 发货信息
             value: 'OC_B_ORDER_DELIVERY'
           },
           {
