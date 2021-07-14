@@ -1,12 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2021-06-08 20:32:29
- * @LastEditTime: 2021-07-12 20:32:02
+ * @LastEditTime: 2021-07-14 19:38:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/page/order.config.js
  */
-
+import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
 
   // 订单中心-扫描入库
@@ -60,12 +60,14 @@ export default {
   REFUNDAFTERSHIPMENT: {
     component: () => import('allpages/orderCenter/returngood/refundAfterShipment.vue'),
     // component: refundAfterShipment,
-    labelName: '已发货退款单编辑',
+    // labelName: '已发货退款单编辑',
+    labelName: i18n.t('form_label.aw'),
   },
   EXTRAREFUND: {
     component: () => import('allpages/orderCenter/returngood/refundAfterShipment.vue'),
     // component: refundAfterShipment,
-    labelName: '额外退款编辑',
+    // labelName: '额外退款编辑',
+    labelName: i18n.t('form_label.ax'),
   },
   MANUALMATCHING: {
     // 退货入库-手工匹配
@@ -82,7 +84,8 @@ export default {
   SPLITDISTRIBUTIONORDER: {
     // JIT配货单-换吊牌
     component: () => import('allpages/orderCenter/distribution/splitDistributionOrder.vue'),
-    labelName: 'JIT配货单-换吊牌',
+    // labelName: 'JIT配货单-换吊牌',
+    labelName: i18n.t('form_label.ay'),
   },
   //退货入库半定制
   MATCHINGDETAILS: { //_/views/pages/orderCenter/matchingDetails.vue
@@ -91,6 +94,7 @@ export default {
   // 退换货单新增
   OC_B_RETURN_ORDER_VIRTUAL_TABLE: {
     component: () => import('allpages/orderCenter/returnOrder/returnOrderAdd.vue'),
-    labelName: '退换货新增',
+    // labelName: '退换货新增',
+    labelName: i18n.t('form_label.az'),
   },
 };

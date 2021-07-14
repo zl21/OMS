@@ -1,11 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2021-06-07 20:40:40
- * @LastEditTime: 2021-06-15 17:46:36
+ * @LastEditTime: 2021-07-14 19:39:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/page/system.config.js
  */
+import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   //   查看用户权限
   USERPERMISSION: {

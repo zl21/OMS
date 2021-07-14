@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-07-14 18:23:59
+ * @LastEditTime: 2021-07-14 19:43:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -17,7 +17,7 @@
         </div>
         <div class="calculation-item bg">
           <!-- 商品实退金额 -->
-          <span :title="vmI18n.t('other.cr')">{{ vmI18n.t('other.cr') }}</span>
+          <span :title="vmI18n.t('form_label.cr')">{{ vmI18n.t('form_label.cr') }}</span>
           <label>{{ data.PRO_REAL_AMT }}</label>
         </div>
       </li>
@@ -92,6 +92,7 @@ export default {
   },
   methods:{
     inputChange(e){
+      console.log(this.editData);
       let FINAL_ACTUAL_AMT
       if(this.tableName){
         FINAL_ACTUAL_AMT =  Number(this.data.PRO_REAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT) - Number(this.data.EXCHANGE_AMT);

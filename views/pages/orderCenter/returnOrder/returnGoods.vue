@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-05-25 14:57:44
+ * @LastEditTime: 2021-07-14 18:56:50
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -284,7 +284,8 @@ export default {
     // 退货明细 - 添加明细按钮
     returnAddDetail() {
       if (!this.mainData.SOURCE_CODE) {
-        this.$Message.warning('原平台单号不能为空！');
+        // this.$Message.warning('原平台单号不能为空！');
+        this.$Message.warning($i18n.t('modalTips.ho'));
         return
       }
       this.returnDetailAddTable.modal = true;

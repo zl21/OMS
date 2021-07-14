@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-14 18:06:53
+ * @LastEditTime: 2021-07-14 18:57:01
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -114,7 +114,8 @@ export default {
                   this.$route.params.customizedModuleId === "New" &&
                   !this.mainData.SOURCE_CODE
                 ) {
-                  this.$Message.warning("原平台单号不能为空！");
+                  // this.$Message.warning("原平台单号不能为空！");
+                  this.$Message.warning($i18n.t('modalTips.ho'));
                   return;
                 }
                 this.tableConfig.modal = true;
@@ -134,7 +135,8 @@ export default {
                   this.$route.params.customizedModuleId === "New" &&
                   !this.mainData.SOURCE_CODE
                 ) {
-                  this.$Message.warning("原平台单号不能为空！");
+                  // this.$Message.warning("原平台单号不能为空！");
+                  this.$Message.warning($i18n.t('modalTips.ho'));
                   return;
                 }
                 this.getPlaceData(0,0);
