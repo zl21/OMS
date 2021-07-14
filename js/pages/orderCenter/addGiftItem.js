@@ -101,13 +101,18 @@ export default {
             btnclick: () => {
               let reqdata = JSON.parse(JSON.stringify(this.tabdata))
               if (this.componentData.type == 2) {
+                if (!this.rowlist) {
+                  this.$Message.error('请展开列表，请选中一条数据！');
+                  return
+                }
                 reqdata.RETURN_ORDER_ITEM_LIST = this.rowlist
               }
-              console.log(reqdata);
+              
               if (reqdata.length == 0) {
                 this.$Message.error('请选中一条数据！');
                 return
               }
+
               this.$parent.$parent.closeConfirm(reqdata, this.componentData.type)
             }, // 按钮点击事件
           },
@@ -116,7 +121,7 @@ export default {
       columns10: [],
       data9: [],
       tabdata: [],
-      rowlist: {},
+      rowlist: null,
       page: 1,
       total: 10,
       size: 10,

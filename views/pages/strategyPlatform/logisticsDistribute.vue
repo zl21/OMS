@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-20 13:39:45
- * @LastEditTime: 2021-07-01 14:49:47
+ * @LastEditTime: 2021-07-13 20:48:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/logisticsDistribute.vue
@@ -17,7 +17,8 @@
     <div class="customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
-          基本信息
+        
+          {{baseInformation }}
           <div slot="content" class="logistics-top-form">
             <businessForm :form-config="FormConfig" @keyDown="keyDown" />
           </div>
@@ -88,10 +89,10 @@
           type="primary"
           style="margin-right: 10px"
           @click="getCheckedNodes"
-          >保存</Button
+          >   {{btnSave}}</Button
         >
         <Button type="primary" @click="fnCancel" class="btn-quxiao"
-          >取消</Button
+          >  {{btnBack}} </Button
         >
       </div>
     </Modal>

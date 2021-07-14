@@ -22,11 +22,14 @@ export default {
       collapse: 'panel_baseInfo',
       changeCount: 0, //判断数据是否修改过
       value: [1, 2],
+      baseInformation:$i18n.t('common.baseInformation'),
       id: '',
       defaultColumn: 2,
       startindex: 0, //分页
       modalTitle: '添加排除区域', // 弹出窗标题！
       modal1: false, // 弹窗开关
+      btnSave:$i18n.t('btn.save'),
+      btnBack: $i18n.t('btn.back'),
       btnConfig: {
         typeAll: 'default',
         buttons: [
@@ -918,7 +921,7 @@ export default {
       });
     },
     fnselectAll(v) {
-      console.log(v);
+  
       this.tableSelectArr = v
     },
     querList(data, fixedcolumnsData) {

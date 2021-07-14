@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-07-13 19:56:26
+ * @LastEditTime: 2021-07-13 20:35:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
@@ -56,7 +56,7 @@ export default {
       btnConfig: {
         typeAll: 'default',
         buttons: [{
-          text: '手工匹配',
+          text: $i18n.t('btn.manual_matching'),
           isShow: false,
           webname: "OC_B_REFUND_IN_manual",
           disabled: false, // 按钮禁用控制
@@ -243,11 +243,13 @@ export default {
       this.type = type
       let errArr = []
       if (data) {
+         
         this.tebdata.forEach(item => {
           this.tableConfig.data.forEach((em, index) => {
             if (item.ID == em.ID) {
 
               if (type == 2) {
+              
                 //判断明细suk是否相等 ---强制匹配
                 if (!this.fnisSku(item.PS_C_SKU_ECODE, data.RETURN_ORDER_ITEM_LIST.PS_C_SKU_ECODE)) {
 
