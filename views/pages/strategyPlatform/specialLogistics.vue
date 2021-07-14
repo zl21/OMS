@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-18 17:02:53
- * @LastEditTime: 2021-06-22 20:03:41
+ * @LastEditTime: 2021-07-14 11:50:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/strategyPlatform/specialLogistics.vue
@@ -18,7 +18,8 @@
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
-          基本信息
+        
+          {{baseInformation}}
           <div slot="content">
             <businessForm
               :form-config="formConfighead"
@@ -31,7 +32,8 @@
 
       <Collapse v-model="panelDefaultValue1">
         <Panel name="panel_baseInfo1">
-          满足条件
+          <!-- 满足条件 -->
+          {{meet_conditions}}
           <div slot="content">
             <businessForm
               :form-config="formConfig"
@@ -129,8 +131,8 @@
           </Input>
         </div>
         <div class="specialLogistics-model-head-right">
-          <Button type="error" ghost @click="fntableAdd">添加</Button>
-          <Button type="error" ghost @click="fncancel">取消</Button>
+          <Button type="error" ghost @click="fntableAdd"> {{increase}} </Button>
+          <Button type="error" ghost @click="fncancel">{{cancel}}</Button>
         </div>
       </div>
       <businessActionTable

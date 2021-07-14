@@ -22,6 +22,7 @@ export default {
   mixins: [modifycurrentLabel],
   data() {
     return {
+      baseInformation:$i18n.t('other.basic_info'),
       placeholder: '省市搜索',//省市搜索
       loading: false,
       pageShow: false,
@@ -33,11 +34,11 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '按收货地址',
+          label: $i18n.t('form_label.a5'),
           value: 'PROPERTY'
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'),//'操作日志',
           value: 'ST_ASSIGN_LOGISTICS_LOG'
         }
       ],
@@ -46,7 +47,7 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: '保存',
+            text: $i18n.t('btn.save'),//'保存',
             size: '', // 按钮大小
             isShow: false,
             webname: this.$route.params.customizedModuleName + "_save",
@@ -60,8 +61,9 @@ export default {
             btnclick: this.back
           },
           {
-            text: '复制',
+            text: $i18n.t('common.copy'),//'复制',
             isShow: false,
+            webname:"copy",
             disabled: false, // 按钮禁用控制
             btnclick: this.fnCopy
           },
@@ -86,14 +88,14 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: '导入',
+            text: $i18n.t('btn.import'),//'导入',
             isShow: false,
             webname: this.$route.params.customizedModuleName + "_Import",
             disabled: false, // 按钮禁用控制
             btnclick: this.importData
           },
           {
-            text: '导出',
+            text: $i18n.t('btn.export'),//'导出',
             disabled: false, // 按钮禁用控制
             btnclick: this.fnoWexportData
           }
@@ -436,7 +438,7 @@ export default {
 
       //ST_C_ORDER_WAREHOUSE  分仓规则
       if (customizedModuleName == 'ST_C_ORDER_WAREHOUSE') {
-        this.labelList[0].label = '按收货地址';
+        this.labelList[0].label = $i18n.t('form_label.a5')//'按收货地址';
         this.labelList[1].value = "ST_C_ORDER_WAREHOUSE_LOG"
         this.qurefrom('cpCPhyWarehouseEname')[0].style = null;
         // 表示分仓策略》分仓规则
@@ -493,7 +495,7 @@ export default {
          
           this.pageShow = true; //显示明细表
           this.btnConfig.buttons.forEach(em => {
-            if (em.text == '复制' || em.text == '启用' || em.text == '停用') {
+            if (em.webname == 'copy') {
               em.isShow = true;
             }
           });
@@ -507,7 +509,7 @@ export default {
         //CP_C_SHOP_IDS  type
         this.qurefrom('CP_C_SHOP_IDS')[0].style = null;
         this.qurefrom('type')[0].style = null;
-        this.labelList[0].label = '区域明细';
+        this.labelList[0].label = $i18n.t('form_label.region_details')//'区域明细';
         this.labelList[1].value = "ST_ASSIGN_LOGISTICS_LOG"
         // 表示分物流策略》分物流规则
         if (customizedModuleId == 'New' || customizedModuleId == '-1' || customizedModuleId == 'NEW') {
@@ -550,7 +552,7 @@ export default {
          
           this.pageShow = true;
           this.btnConfig.buttons.forEach(em => {
-            if (em.text == '启用' || em.text == '停用' || em.text == '上一步') {
+            if (em.text == '上一步') {
               em.isShow = true;
             }
             if (em.text == '下一步') {
@@ -570,7 +572,7 @@ export default {
 
           this.pageShow = true;
           this.btnConfig.buttons.forEach(em => {
-            if (em.text == '复制' || em.text == '启用' || em.text == '停用') {
+            if (em.webname == 'copy' ) {
               em.isShow = true;
             }
           });

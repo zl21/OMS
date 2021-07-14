@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-07-13 20:35:42
+ * @LastEditTime: 2021-07-14 16:25:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
 -->
 <template>
-  <div class="matchingDetails" >
+  <div class="matchingDetails">
     <businessButton :btn-config="btnConfig" />
     <businessActionTable
       :jordan-table-config="tableConfig"
@@ -24,7 +24,7 @@
 
     <Modal
       v-model="modal6"
-      title="退单编号查询"
+      :title="tuiDanChaXun"
       :mask="true"
       :footer-hide="true"
       :width="width"
@@ -48,9 +48,10 @@ export default {
   },
   data() {
     return {
+      tuiDanChaXun: $i18n.t('panel_label.a3'),
       modal6: false,
       loading: true,
-      width:"1000",
+      width: "1000",
       type: "",
       tebdata: [], //明细表选中的数据
       btnConfig: {
@@ -73,11 +74,11 @@ export default {
           },
         },
         {
-          text: '强制匹配',
+          text: $i18n.t('btn.forceMatching'),//'强制匹配',
           isShow: false,
           webname: "OC_B_REFUND_IN_force",
           btnclick: () => {
-             this.width = 800
+            this.width = 800
 
             service.orderCenter.checkRefundInStatus(`id=${this.$route.params.itemId}`).then(res => {
               if (res.data.code == 0) {
@@ -90,15 +91,15 @@ export default {
           },
         },
         {
-          text: '查询退单',
+          text: $i18n.t('btn.searchReturnOrder'),//'查询退单',
           isShow: false,
+          webname: "chaXunTuiDan",
           btnclick: () => {
-
             this.switchAlert(vm.$route.query.type)
           },
         },
         {
-          text: '清除退单',
+          text: $i18n.t('btn.clearReturnOrder'),//'清除退单',
           webname: "OC_B_REFUND_IN_eliminate",
           isShow: false,
           btnclick: () => {
@@ -130,11 +131,80 @@ export default {
     }
   },
   mounted() {
+    window.addEventListener('customizeClick', this.Save)
     this.init()
     this.getBtns()
 
   },
   methods: {
+    Save(data) {
+      if (data.detail.type == "save") {
+        let person = this.tebdata
+
+        if (person.length == 0) {
+          this.$Message.warning("未做任何修改！")
+          return
+        }
+        let REFUND_IN_ITEM_LIST = []
+        person.forEach(em => {
+          if (em._checked) {
+            let obj = {
+              OC_B_RETURN_ORDER_ID: em.OC_B_RETURN_ORDER_BILL_NO_ID,
+              REFUND_IN_ITEM_ID: em.ID,
+              PS_C_SKU_ECODE_ACTUAL: em.PS_C_SKU_ECODE_ACTUAL,
+              OC_B_RETURN_ORDER_BILL_NO: em.OC_B_RETURN_ORDER_BILL_NO,
+              PS_C_SKU_ECODE: em.PS_C_SKU_ECODE,
+              OC_B_RETURN_ORDER_ITEM_ID: em.OC_B_RETURN_ORDER_ITEM_ID
+            }
+            REFUND_IN_ITEM_LIST.push(obj)
+          }
+
+        })
+
+        let data = {
+          MATCH_TYPE: this.type == 1 ? 0 : 1, //匹配类型     -- 0手工  1强制
+          REFUND_IN_ID: this.$route.params.itemId,  //退货入库单id
+          REFUND_IN_ITEM_LIST,//明细
+        }
+        service.orderCenter.saveMatch(data).then(res => {
+          if (res.data.code == 0) {
+            this.$Message.success(res.data.message)
+          } else {
+            this.$Modal.confirm({
+              title: res.data.message,
+              width: 500,
+              mask: true,
+              className: 'ark-dialog',
+              render: (h) => {
+                if (res.data.data) {
+                  return h('Table', {
+                    props: {
+                      columns: [
+                        {
+                          title: "失败明细", // '提示信息',
+                          key: 'key',
+                        },
+                        {
+                          title: '失败信息！', // '错误信息',
+                          key: 'message',
+                        }
+                      ],
+                      data: res.data.data,
+                    },
+                  })
+                }
+                return false
+              },
+            })
+
+
+          }
+
+
+        })
+      }
+
+    },
     getBtns() {
       $OMS2.omsUtils.getPermissions(this, '', { table: "OC_B_REFUND_IN", type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
         const { ACTIONS, SUB_ACTIONS } = res
@@ -143,30 +213,32 @@ export default {
             SUB_ACTIONS.some(y => y.webname == x.webname) && (x.isShow = true)
           })
         } else if (vm.$route.query.type == 1) {
+          this.btnConfig.buttons.filter(item => item.webname == "OC_B_REFUND_IN_eliminate")[0].isShow = true
           if (SUB_ACTIONS.some(y => y.webname == "OC_B_REFUND_IN_manual")) {
-            this.querbtn(this.btnConfig.buttons, "查询退单").isShow = true
+            this.querbtn(this.btnConfig.buttons, "chaXunTuiDan").isShow = true
           }
         } else if (vm.$route.query.type == 2) {
+          this.btnConfig.buttons.filter(item => item.webname == "OC_B_REFUND_IN_eliminate")[0].isShow = true
           if (SUB_ACTIONS.some(y => y.webname == "OC_B_REFUND_IN_force")) {
-            this.querbtn(this.btnConfig.buttons, "查询退单").isShow = true
+            this.querbtn(this.btnConfig.buttons, "chaXunTuiDan").isShow = true
           }
         }
-
       })
+    
     },
     emptyTabledata() {//清楚退单逻辑
 
       if (this.tebdata.length == 0) {
-        this.$Message.warning('请选中一条数据！');
+        this.$Message.warning($i18n.t('modalTips.gr'));
         return
       }
 
       let errArr = []
       for (const v of this.tebdata) {
-        if (v.OC_B_RETURN_ORDER_ID && !v._checked) {
+        if (v.OC_B_RETURN_ORDER_BILL_NO && !v._checked) {
           errArr.push({
             id: v.ID,
-            message: "已匹配退货单号，不允许清除！"
+            message: $i18n.t('gs')//"已匹配退货单号，不允许清除！"
           })
           continue
         } else {
@@ -184,23 +256,28 @@ export default {
       this.tebdata = []
     },
     switchAlert(type) {
+      console.log(this.tebdata);
       for (const v of this.tebdata) { //校验是否有退货单号
-        if (v.OC_B_RETURN_ORDER_ID && !v._checked) {
+        if (v.OC_B_RETURN_ORDER_BILL_NO && !v._checked) {
           this.closetab(false)
-          this.$Message.warning('存在明细已经匹配退货单，请重新进行选择！');
+          this.$Message.warning($i18n.t('modalTips.gt'))
+          //'存在明细已经匹配退货单，请重新进行选择！');
           return
         }
       }
+      //存在已匹配的明细，请重新选择！
+      //
 
       if (this.tebdata.length == 0) {
-        this.$Message.warning('请选中一条数据！');
+        this.$Message.warning($i18n.t('modalTips.a1'))
+        //'请选中一条数据！');
         return
       }
       this.componentData.type = type
       this.modal6 = true
     },
     querbtn(btnConfig, k) {
-      return btnConfig.filter(em => em.text == k)[0]
+      return btnConfig.filter(em => em.webname == k)[0]
     },
     init() {
 
@@ -214,13 +291,13 @@ export default {
         if (res.data.code == 0) {
           let data = res.data.data
           this.tableConfig.columns = data.tabth.map(item => { //处理表头
-              item.key = item.colname
-              item.title = item.name
-             return item
+            item.key = item.colname
+            item.title = item.name
+            return item
           })
-          this.tableConfig.columns = this.tableConfig.columns.filter(item=>item.colname != "ID")
+          this.tableConfig.columns = this.tableConfig.columns.filter(item => item.colname != "ID")
 
-      
+
           this.tableConfig.data = data.row.map((item, index) => {  //处理表值
             for (const k in item) {
               item[k] = item[k].val
@@ -232,6 +309,15 @@ export default {
           this.closeTable.data = JSON.parse(JSON.stringify(this.tableConfig.data))
 
         }
+        //获取主表单据状态 决定是否隐藏明细表那三个按钮  
+      let moduleName = this.$route.meta.moduleName
+      let dnaJuStatus = this.$store.state[moduleName].copyDataForReadOnly.addcolums[0].childs.filter(em=>em.colname =="MATCH_STATUS")[0].valuedata
+      if (dnaJuStatus == "2") {
+        this.btnConfig.buttons.forEach(em=>{
+          em.isShow = false
+        })
+      }
+
 
       })
     },
@@ -239,17 +325,17 @@ export default {
       return sukArr.split(",").some(item => item == sku)
     },
     closeConfirm(data, type) {
-    
+
       this.type = type
       let errArr = []
       if (data) {
-         
+
         this.tebdata.forEach(item => {
           this.tableConfig.data.forEach((em, index) => {
             if (item.ID == em.ID) {
 
               if (type == 2) {
-              
+
                 //判断明细suk是否相等 ---强制匹配
                 if (!this.fnisSku(item.PS_C_SKU_ECODE, data.RETURN_ORDER_ITEM_LIST.PS_C_SKU_ECODE)) {
 
@@ -286,11 +372,12 @@ export default {
 
                   em._checked = true
                   item._checked = true //判断是否新增的
-                } else { 
+                } else {
                   errArr.push({
                     index: item.index,
                     code: item.PS_C_SKU_ECODE,
-                    message: "没有匹配到退货单明细"
+                    message: $i18n.t('gu')
+                    //"没有匹配到退货单明细"
                   })
                 }
               }
@@ -299,7 +386,7 @@ export default {
           })
 
         })
-        sessionStorage.setItem('OC_B_REFUND_IN_data', JSON.stringify(this.tableConfig.data))
+
       }
       this.modal6 = false;
 
@@ -310,35 +397,35 @@ export default {
     },
     fnerrtab(data, type) {
       let columns = []
-      let title = "提示框"
+      let title = $i18n.t('a7')//"提示框"
       if (type == 1) { //1表示手工和强制的错误信息 2表示清楚的错误信息
         columns = [
           {
-            title: "失败序号", // '提示信息',
+            title: $i18n.t('gx'),//"失败序号", // '提示信息',
             key: 'index',
           },
           {
-            title: "失败SKU", // '错误信息',
+            title: $i18n.t('gy'),//"失败SKU", // '错误信息',
             key: 'code',
           },
           {
-            title: "失败原因！", // '错误信息',
+            title: $i18n.t('gw'),// "失败原因！", // '错误信息',
             key: 'message',
           }
         ]
-        title = "匹配失败提示框"
+        title = $i18n.t('a9')//"匹配失败提示框"
       } else {
         columns = [
           {
-            title: "失败序号", // '提示信息',
+            title: $i18n.t('gx'),//"失败序号", // '提示信息',
             key: 'index',
           },
           {
-            title: "失败原因！", // '错误信息',
+            title: $i18n.t('gw'),//"失败原因！", // '错误信息',
             key: 'message',
           }
         ]
-        title = "清除失败提示框"
+        title = $i18n.t('aa')//"清除失败提示框"
       }
 
       this.$Modal.confirm({
@@ -371,13 +458,13 @@ export default {
       this.tebdata = v
     },
     // 点击全选时触发
-    onSelectAll(v) { 
-console.log(v);
-this.tebdata = v
+    onSelectAll(v) {
+      console.log(v);
+      this.tebdata = v
     },
     // 点击取消全选时触发
     onSelectAllCancel(v) {
-this.tebdata = v
+      this.tebdata = v
     },
     // 单击某一行时触发
     onRowClick(row) {
@@ -400,14 +487,12 @@ this.tebdata = v
       this.searchGift()
     },
     tableDeleteDetail() { },
+  },
+  beforeDestroy() {
+    window.removeEventListener('customizeClick', this.Save)
   }
 }
 </script>
 
 <style lang="less" >
-#OC_B_REFUND_IN {
-  #actionMODIFY {
-    display: none;
-  }
-}
 </style>

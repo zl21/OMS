@@ -73,6 +73,10 @@ export default {
         tablename: '',
         objid: '',
       },
+      baseInformation:$i18n.t('common.baseInformation'),
+      meet_conditions:$i18n.t('form_label.meet_conditions'),
+      increase:$i18n.t('btn.increase'),
+      cancel:$i18n.t('common.cancel'),
       // tab切换配置
       labelList: [
         {
@@ -80,7 +84,7 @@ export default {
           value: 'PROPERTY'
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'),//'操作日志',
           value: 'ST_SPECIAL_ASSIGN_LOGISTICS_LOG'
         }
       ],
@@ -102,7 +106,7 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: '保存',
+            text: $i18n.t('btn.save'),//'保存',
             size: '', // 按钮大小
             isShow: false,
             webname: this.$route.params.customizedModuleName + "_save",
@@ -122,13 +126,13 @@ export default {
         buttons: [
           {
             type: 'primary',
-            text: '添加',
+            text: $i18n.t('btn.increase'),//'添加',
             disabled: false,
             btnclick: this.foottable
           },
           {
             type: 'warning',
-            text: '删除',
+            text: $i18n.t('btn.delete'),//'删除',
             disabled: false,
             btnclick: this.deleteLogistics
           }
@@ -731,7 +735,7 @@ export default {
           key: 'cpCRegionCityEname'
         },
         {
-          title: '操作',
+          title: $i18n.t('table_label.operation'),//'操作',
           key: 'action',
           fixed: 'right',
           render: (h, params) => {
@@ -749,7 +753,7 @@ export default {
                     }
                   }
                 },
-                '删除'
+                $i18n.t('btn.delete')//'删除'
               )
             ]);
           }
@@ -1165,10 +1169,12 @@ export default {
         this.$Message.warning('请选择单据类型!');
         return;
       }
+
       if (!this.formConfig.formValue.Time[0]) {
         this.$Message.warning('请填写时间范围!');
         return;
       }
+      
       //校验包裹属性
       let listdata = this.switchListdata.list;
       for (let v of listdata) {
