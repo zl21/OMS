@@ -178,7 +178,7 @@
               }
             },
             {
-              text: '刷新',
+              text: $i18n.t('common.refresh'), //刷新
               btnclick: async() => {
                 // 区分子表
                 if(this.labelDefaultValue === 'OC_B_ORDER_ITEM'){

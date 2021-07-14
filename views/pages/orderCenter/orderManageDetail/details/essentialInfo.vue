@@ -117,7 +117,7 @@
           <!-- 订单金额 -->
           <div class="order-money">
             <!-- 订单金额 -->
-            <span class="order-money-title"> {{ vmI18n.t('form_label.ah')}}</span>
+            <span class="order-money-title" :title="vmI18n.t('form_label.ah')"> {{ vmI18n.t('form_label.ah')}}</span>
             <ul class="totalAmount">
               <li>
                 <label>
