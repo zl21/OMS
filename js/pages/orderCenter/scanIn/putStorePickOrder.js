@@ -277,7 +277,7 @@ export default {
               }
             },
             {
-              text: '刷新',
+              text: $i18n.t('btn.refresh'), // '刷新',
               btnclick: () => {
                 this.reload();
               }

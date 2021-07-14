@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-07 16:19:54
- * @LastEditTime: 2021-07-14 14:07:33
+ * @LastEditTime: 2021-07-14 16:47:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/orderManageDetails.vue
@@ -186,7 +186,7 @@
               }
             },
             {
-              text: '刷新',
+              text: $i18n.t('btn.refresh'),
               btnclick: async() => {
                 // 区分子表
                 if(this.labelDefaultValue === 'OC_B_ORDER_ITEM'){
