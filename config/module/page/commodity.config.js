@@ -21,37 +21,37 @@ export default {
   COMBINEDCOMMODITY: {
     component: () => import('allpages/commodityCenter/combinedCommodity'),
     // labelName: '组合福袋商品编辑',
-    labelName: i18n.t('form_label.a6')
+    labelName: i18n.t('menu.a6')
   },
   /* 2.0: */
   PS_C_PRO: {
     component: () => import('allpages/commodityCenter/spuRecord.vue'),
     // labelName: '商品SPU',
-    labelName: i18n.t('form_label.a7')
+    labelName: i18n.t('menu.a7')
   },
   PS_C_SKU: {
     component: () => import('allpages/commodityCenter/skuAddOrEdit.vue'),
     // labelName: '商品SKU',,
-    labelName: i18n.t('form_label.a8')
+    labelName: i18n.t('menu.a8')
   },
   PS_C_SKU_QUICKLY_ADD: {
     component: () => import('allpages/commodityCenter/quicklyGenerate.vue'),
     // labelName: 'SKU快速生成',
-    labelName: i18n.t('form_label.a9')
+    labelName: i18n.t('menu.a9')
   },
   BS_C_EXTRA_ATTRIBUTE_DEF_PRO: {
     component: () => import('allpages/commodityCenter/commodityCusPropertiesAddOrEdit.vue'),
     // labelName: '商品自定义属性',
-    labelName: i18n.t('form_label.aa')
+    labelName: i18n.t('menu.aa')
   },
   PS_C_PRO_GROUP: {
     component: () => import('allpages/commodityCenter/modifyGroup.vue'),
     // labelName: '组合商品',
-    labelName: i18n.t('form_label.ab')
+    labelName: i18n.t('menu.ab')
   },
   PS_C_PRO_CLASSIFY: {
     component: () => import('allpages/commodityCenter/commodityClassifyAddOrEdit.vue'),
     // labelName: '商品分类',
-    labelName: i18n.t('form_label.ac')
+    labelName: i18n.t('menu.ac')
   },
 }; 

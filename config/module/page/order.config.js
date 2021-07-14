@@ -61,13 +61,13 @@ export default {
     component: () => import('allpages/orderCenter/returngood/refundAfterShipment.vue'),
     // component: refundAfterShipment,
     // labelName: '已发货退款单编辑',
-    labelName: i18n.t('form_label.aw'),
+    labelName: i18n.t('menu.aw'),
   },
   EXTRAREFUND: {
     component: () => import('allpages/orderCenter/returngood/refundAfterShipment.vue'),
     // component: refundAfterShipment,
     // labelName: '额外退款编辑',
-    labelName: i18n.t('form_label.ax'),
+    labelName: i18n.t('menu.ax'),
   },
   MANUALMATCHING: {
     // 退货入库-手工匹配
@@ -85,7 +85,7 @@ export default {
     // JIT配货单-换吊牌
     component: () => import('allpages/orderCenter/distribution/splitDistributionOrder.vue'),
     // labelName: 'JIT配货单-换吊牌',
-    labelName: i18n.t('form_label.ay'),
+    labelName: i18n.t('menu.ay'),
   },
   //退货入库半定制
   MATCHINGDETAILS: { //_/views/pages/orderCenter/matchingDetails.vue
@@ -95,6 +95,6 @@ export default {
   OC_B_RETURN_ORDER_VIRTUAL_TABLE: {
     component: () => import('allpages/orderCenter/returnOrder/returnOrderAdd.vue'),
     // labelName: '退换货新增',
-    labelName: i18n.t('form_label.az'),
+    labelName: i18n.t('menu.az'),
   },
 };

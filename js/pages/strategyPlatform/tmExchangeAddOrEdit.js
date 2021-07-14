@@ -331,7 +331,7 @@ export default {
         this.formConfig2.formValue.IS_AUTO_APPROVE = !!data.IS_AUTO_APPROVE
         this.formConfig2.formValue.OOS_AUTO_REJECT = !!data.OOS_AUTO_REJECT
         this.formConfig2.formValue.DEVIATION_AUTO_REJECT = !!data.DEVIATION_AUTO_REJECT
-        this.formConfig2.formValue.EXCHANGE_DESC = data.EXCHANGE_DESC.split(',')
+        this.formConfig2.formValue.EXCHANGE_DESC = data.EXCHANGE_DESC ? data.EXCHANGE_DESC.split(',') : []
         this.setEnable()
         this.setRequired('IS_AUTO_APPROVE')
         this.setRequired('OOS_AUTO_REJECT')

@@ -16,7 +16,7 @@ export default {
   PROMACTIQUERYLIST: {
     component: () => import('allpages/promotionCenter/promotionlist.vue'),
     // labelName: '促销活动',
-    labelName: i18n.t('form_label.ad'),
+    labelName: i18n.t('menu.ad'),
   },
   PM_C_PROM_ACTI: {
     component: () => import('allpages/promotionCenter/addOrEditActi.vue')

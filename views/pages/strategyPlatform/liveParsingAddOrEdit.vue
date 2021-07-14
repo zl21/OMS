@@ -25,6 +25,7 @@
                     :key="index"
                     :label="option.value"
                     :disabled="isEnable"
+                    class="timeRadio"
                   >{{option.label}}</Radio>
                 </RadioGroup>
                 <DatePicker

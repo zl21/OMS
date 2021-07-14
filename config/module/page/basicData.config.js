@@ -9,7 +9,7 @@ export default {
   /* 2.0: */
   SHOPAUTHORIZE: {
     component: () => import('@/views/pages/basicData/authorize.vue'),
-    labelName: i18n.t('form_label.ap'),//店铺授权
+    labelName: i18n.t('menu.ap'),//店铺授权
   },
   SHOPAUTHORIZEDETAILS: {
     component: () => import('@/views/pages/basicData/authorizeDetails.vue'),
@@ -18,33 +18,33 @@ export default {
     // component: logisticsCompanyFilesAddOrEdit,
     component: () =>
       import('allpages/basicData/logisticsCompanyFilesAddOrEdit.vue'),
-      labelName: i18n.t('form_label.a0'), //物流公司档案
+      labelName: i18n.t('menu.a0'), //物流公司档案
   },
   ADDLOGICSTORE: {
     // component: addLogicStore,
     component: () => import('allpages/basicData/addLogicStore.vue'),
     labelName: '新增逻辑仓',
-    labelName: i18n.t('form_label.a1'), //新增逻辑仓
+    labelName: i18n.t('menu.a1'), //新增逻辑仓
   },
   ADDALIAS: {
     // component: addAliasOrRegion,
     component: () => import('allpages/basicData/addAliasOrRegion.vue'),
     // labelName: '新增别名'
-    labelName: i18n.t('form_label.a2'), //新增别名
+    labelName: i18n.t('menu.a2'), //新增别名
 
   },
   ADDREGION: {
     // component: addAliasOrRegion,
     component: () => import('allpages/basicData/addAliasOrRegion.vue'),
     // labelName: '新增区域'
-    labelName: i18n.t('form_label.a3'), //新增区域
+    labelName: i18n.t('menu.a3'), //新增区域
 
   },
   CP_C_ORG_CHANNEL: {
     // component: channelStore,
     component: () => import('allpages/basicData/channelStore.vue'),
     // labelName: '渠道仓档案', // 元数据若配置的是'网页链接'则需前端配置labelName，若是动作定义则不用配置
-    labelName: i18n.t('form_label.a4'), //渠道仓档案
+    labelName: i18n.t('menu.a4'), //渠道仓档案
 
   },
   NATIONALPROVINCIALMUNICIPALEDIT: {
@@ -52,7 +52,7 @@ export default {
     component: () =>
       import('allpages/basicData/nationalProvincialMunicipalEdit.vue'),
     // labelName: '国家省市区编辑'
-    labelName: i18n.t('form_label.a5'), //国家省市区编辑
+    labelName: i18n.t('menu.a5'), //国家省市区编辑
 
   },
 }
