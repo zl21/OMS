@@ -87,10 +87,10 @@ const langConfig = [
     type: 'en',
     text: 'English',
   },
-  /* {
+  {
     type: 'ja',
-    text: '日语',
-  }, */
+    text: '日本語',
+  },
 ];
 export default {
   name: "Login",
@@ -110,13 +110,26 @@ export default {
   methods: {
     toggleLang(lang) {
       const _this = this;
+      let message = ['zh','en'].includes(lang) ? _this.vmI18n.messages[lang].tip_info : lang;
+      switch (message) {
+        case 'ja':
+          message = "暂无日语语言包，敬请期待！(已默认使用中文)"
+          break;
+        default:
+          break;
+      }
+      if (!['zh','en'].includes(lang)) {
+        lang = 'zh'
+      }
       localStorage.setItem('locale', lang);
       // _this.vmI18n.locale = localStorage.getItem('locale');
       _this.vmI18n.locale = lang;
       this.curLang = langConfig.find(it => it.type == lang).text;
       R3.store.commit(`customize/language`, lang || 'zh');
+      
       this.$message({
-        message: _this.vmI18n.messages[lang].tip_info,
+        // message: _this.vmI18n.messages[lang].tip_info,
+        message,
         // type: _this.vmI18n.messages[lang].tip_type,
         type: 'success',
       });
