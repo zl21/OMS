@@ -154,7 +154,7 @@ export default {
             disabled: false,
             options: [
               {
-                label: '全部',
+                label: $i18n.t('common.all'), // 全部
                 value: '2'
               },
               {

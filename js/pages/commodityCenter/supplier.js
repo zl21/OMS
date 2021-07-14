@@ -13,7 +13,7 @@ export default {
         typeAll: 'default', // 按钮统一风格样式
         loading: false, // 按钮加载
         buttons: [{
-            text: '新增',
+            text: $i18n.t('btn.add'), // 新增
             btnclick: () => {
 
             }

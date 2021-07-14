@@ -149,7 +149,7 @@ export default {
         buttons: [
           {
             type: 'primary',
-            text: '新增', // 添加
+            text: $i18n.t('btn.add'), // 新增
             btnclick: () => {
               this.addList();
             }

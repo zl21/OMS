@@ -252,7 +252,7 @@ export default {
         buttons: []
       },
       extendSupplierBtn:[{
-            text: '新增',
+            text: $i18n.t('btn.add'), // 新增
             btnclick: () => {
               this.addSupplier();
             }
