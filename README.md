@@ -156,3 +156,4 @@ console.log($i18n.t(common.all));
 | v1.0.63 | modalTips：! -> ！ |
 | v1.0.64 | add for 组件库 |
 | v1.0.65 | add ja-JP |
+| v1.0.66 | add ja-JP |

@@ -10,8 +10,9 @@ import tipsMessage from './tipsMessage'
 export default {
   tip_info: "Switch to English !",
   tip_type: "success",
-  welcome: "WELCOME",
-  login: "Login",
+  welcome: "Welcome To R3-OMS",
+  login: "Sign in",
+  logout: "Sign out",
   message: {
     hello: 'Hello World',
   },
