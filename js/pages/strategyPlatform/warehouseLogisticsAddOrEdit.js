@@ -101,7 +101,7 @@ export default {
           },
           {
             style: 'radio',
-            label: '物流分配',
+            label: $i18n.t('panel_label.ar'), // 物流分配
             value: 'IS_AUTO_LOGISTICS_DISTRIBUTION',
             colname: 'IS_AUTO_LOGISTICS_DISTRIBUTION',
             width: '6',
@@ -113,7 +113,7 @@ export default {
             options: [ // radio选项
               {
                 value: 1,
-                label: '自动分配'
+                label: $i18n.t('panel_label.ao'), // 自动分配
               },
               {
                 value: 2,
@@ -324,12 +324,12 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '启用物流',
+          label: $i18n.t('panel_label.aq'), // 启用物流
           value: 'logistics',
           isShow: true
         },
         {
-          label: $i18n.t('panel_label.al'), // 物流信息,
+          label: $i18n.t('panel_label.al'), // 物流信息
           value: 'logistics',
           isShow: false
         },

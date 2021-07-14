@@ -29,7 +29,7 @@ export default {
       },
       {
         style: 'date', // 输入框类型
-        label: '申请时间', // 输入框前文字
+        label: $i18n.t('form_label.b9'), // 申请时间 输入框前文字
         colname: 'startEndTimes',
         type: 'daterange',
         value: 'startEndTimes', // 输入框的值
@@ -59,7 +59,7 @@ export default {
     }
     const [start, end] = formValue.startEndTimes
     if (!start) {
-      self.$Message.warning('请输入申请时间'); // 请输入申请时间
+      self.$Message.warning($i18n.t('modalTips.hc')); // 请输入申请时间
       return false;
     }
     const param = {

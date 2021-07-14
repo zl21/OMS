@@ -524,12 +524,12 @@ export default {
 
       if (msg || hasNoValid) {
         let tip = msg && hasNoValid 
-          ? `${msg.join('，')}，直播商品识别 不能为空!` 
-          : msg && !hasNoValid ? `${msg.join('，')} 不能为空!` : `直播商品识别 不能为空!`
+          ? `${msg.join('，')}，${$i18n.t('form_label.cd')} 不能为空!` 
+          : msg && !hasNoValid ? `${msg.join('，')} 不能为空!` : `${$i18n.t('form_label.cd')} 不能为空!`
         self.$message.error(tip);
         return false;
       }
-
+      
       // 校验识别规则是否重复
       let allRow = this.formConfig2.formValue.RULES
       .map(({ RULE_CONTEXT, RULE_TYPE }) => Object.values({ RULE_CONTEXT, RULE_TYPE }).join(' '))

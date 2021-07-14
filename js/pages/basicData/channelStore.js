@@ -225,7 +225,7 @@ export default {
             },
             // {
             //   style: 'checkbox',
-            //   label: '自动分配',
+            //   label: $i18n.t('panel_label.ao'), // 自动分配
             //   value: 'IS_AUTO_ASSIGN',
             //   disabled: false,
             //   dataAcessKey: 'IS_AUTO_ASSIGN',
@@ -295,7 +295,7 @@ export default {
               )
           },
           {
-            title: '自动分配',
+            title: $i18n.t('panel_label.ao'), // 自动分配
             key: 'IS_AUTO_ASSIGN',
             render: (h, params) => h('Checkbox', {
                 props: {

@@ -105,12 +105,12 @@ export default {
     }
     const [start, end] = formValue.query_date
     if (!start) {
-      self.$Message.warning('请选择下单时间');
+      self.$Message.warning($i18n.t('modalTips.hd')); // 请选择下单时间
       return false;
     }
     const timeDiff = (end - start) > 1800000;
     if (timeDiff) {
-      self.$Message.warning('下单时间范围不能超过半小时，请重新设置！');
+      self.$Message.warning($i18n.t('modalTips.he')); // 下单时间范围不能超过半小时，请重新设置！
       return false;
     }
     const param = {

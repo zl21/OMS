@@ -93,14 +93,14 @@ export default {
           },
           {
             style: 'select',
-            label: '换货地址',
+            label: $i18n.t('form_label.ce'), // 换货地址
             width: '12',
             colname: 'EXCHANGE_ADDR_ID',
             options: [],
             onOpenChange: (flag) => {
               const _this = this;
               if (flag && !_this.formConfig1.formValue.CP_C_SHOP_ID) {
-                _this.$Message.warning('请先选择店铺！');
+                _this.$Message.warning($i18n.t('modalTips.hz')); // 请先选择店铺
                 return;
               }
             },
@@ -142,8 +142,8 @@ export default {
       formConfig2: {
         formData: [
           {
-            label: '换货说明',
-            subLabel: '偏差N元同意换货<=',
+            label: $i18n.t('form_label.cf'), // 换货说明,
+            subLabel: $i18n.t('form_label.ch'), // 偏差N元同意换货<=,
             style: 'formCompile',
             colname: 'IS_AUTO_APPROVE',
             class: 'soltDom',
@@ -158,11 +158,11 @@ export default {
                 value: '2'
               },
               {
-                label: '有',
+                label: $i18n.t('form_label.ci'), // 有,
                 value: '1'
               },
               {
-                label: '没有',
+                label: $i18n.t('form_label.cj'), // 没有,
                 value: '0'
               }
             ],
@@ -195,9 +195,9 @@ export default {
             }
           },
           {
-            label: '缺货自动拒绝',
-            subLabel1: '缺货自动拒绝换货原因',
-            subLabel2: '缺货自动拒绝文案',
+            label: $i18n.t('form_label.ch'), // 缺货自动拒绝,
+            subLabel1: $i18n.t('form_label.cl'), // 缺货自动拒绝换货原因
+            subLabel2: $i18n.t('form_label.cm'), // 缺货自动拒绝文案
             style: 'formCompile',
             slotName: 'stockout',
             reqStr: true,
@@ -222,10 +222,10 @@ export default {
             }
           },
           {
-            label: '偏差N元自动拒绝',
-            subLabel1: '偏差N元拒绝换货>',
-            subLabel2: '偏差N元自动拒绝换货原因',
-            subLabel3: '偏差N元自动拒绝文案',
+            label: $i18n.t('form_label.cn'), // 偏差N元自动拒绝
+            subLabel1: $i18n.t('form_label.co'), // 偏差N元拒绝换货>
+            subLabel2: $i18n.t('form_label.cp'), // 偏差N元自动拒绝换货原因
+            subLabel3: $i18n.t('form_label.cq'), // 偏差N元自动拒绝文案
             style: 'formCompile',
             slotName: 'bias',
             reqStr: true,
@@ -462,11 +462,11 @@ export default {
     isValid() {
       let msg = []
       let tip = {
-        EXCHANGE_DESC: '换货说明',
-        AOTU_APPROVE_DEVIATION_PRICE: '偏差N元同意换货',
-        OOS_AUTO_REJECT_REASON_ID: '缺货自动拒绝换货原因',
-        AUTO_REJECT_DEVIATION_PRICE: '偏差N元拒绝换货',
-        DEVIATION_AUTO_REJECT_REASON_ID: '偏差N元自动拒绝换货原因'
+        EXCHANGE_DESC: $i18n.t('form_label.cf'), // 换货说明,
+        AOTU_APPROVE_DEVIATION_PRICE: $i18n.t('form_label.ch'), // 偏差N元同意换货
+        OOS_AUTO_REJECT_REASON_ID: $i18n.t('form_label.cl'), // 缺货自动拒绝换货原因
+        AUTO_REJECT_DEVIATION_PRICE: $i18n.t('form_label.co'), // 偏差N元拒绝换货
+        DEVIATION_AUTO_REJECT_REASON_ID: $i18n.t('form_label.cp'), // 偏差N元自动拒绝换货原因
       }
       for (let key in this.formConfig2.ruleValidate) {
         let val = this.formConfig2.formValue[key]

@@ -278,7 +278,7 @@ export default {
             },
           },
           {
-            title: '最低成交价格',
+            title: $i18n.t('form_label.cw'), // 最低成交价格
             key: 'PEAK_VALUE',
             align: "center",
             render: (h, params) => {
@@ -701,9 +701,9 @@ export default {
       let isEdit = this.ID != -1
       let tableBtnConfig = this.goodsTableConfig.businessButtonConfig
       let isShowTableBtn = this.isEnable ? false : !this.isCopy
-      this.queryBtn(this.btnConfig, '复制').isShow = isEdit
-      this.queryBtn(tableBtnConfig, '删除明细').isShow = isShowTableBtn
-      this.queryBtn(tableBtnConfig, '导入').isShow = isShowTableBtn
+      this.queryBtn(this.btnConfig, $i18n.t('common.copy')).isShow = isEdit // 复制
+      this.queryBtn(tableBtnConfig, $i18n.t('btn.deleteDetail')).isShow = isShowTableBtn // 删除明细
+      this.queryBtn(tableBtnConfig, $i18n.t('modalTitle.import')).isShow = isShowTableBtn // 导入
     },
     // 设置主表表单字段
     setMainTableFormConfig() {
@@ -738,7 +738,7 @@ export default {
       let valid = true;
       for (let key of validFields) {
         if (!obj[key]) {
-          // `明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : 'SPU编码'}不能为空`
+          // TODO! `明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : 'SPU编码'}不能为空`
           this.$Message.error(`明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : $i18n.t('table_label.itemNo01')}不能为空`)
           valid = false;
           break;
@@ -819,12 +819,12 @@ export default {
       const { PS_C_SPU_ID, PS_C_SKU_ID, MIN_REAL_AMT } = formConfig.formValue
       let mes2 = ''
       if (!MIN_REAL_AMT) {
-        mes2 += '最低成交单价'
+        mes2 += $i18n.t('form_label.bh') // 最低成交单价
       }
       if (!(PS_C_SPU_ID || PS_C_SKU_ID)) {
         mes2 += ` SPU/${$i18n.t('table_label.code_SKU')}` // i18n SPU/SKU编码
       }
-      mes2 = !mes2 ? '' : `${mes2} 不能为空`
+      mes2 = !mes2 ? '' : `${mes2} 不能为空` // TODO!
       if ((!(PS_C_SPU_ID || PS_C_SKU_ID)) && this.isMasterRequired && !isSaveAll) {
         return this.$message.error(mes2);
       } // 非回车保存就不提示子表表单校验提示

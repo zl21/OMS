@@ -43,7 +43,7 @@ export default {
           },
           {
             // label: $i18n.t('other.toBeDelivered'), // 待发货
-            label: '换货待发货', // 换货待发货
+            label: $i18n.t('panel_label.a5'), // 换货待发货
             value: 'WAIT_SELLER_STOCK_OUT'
           }
         ]

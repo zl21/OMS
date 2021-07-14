@@ -49,7 +49,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: '服务单号',
+        label: $i18n.t('form_label.ao'), // 服务单号
         value: 'service_no', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         ghost: false, // 是否关闭幽灵按钮，默认开启
@@ -77,7 +77,7 @@ export default {
     }
     const [start, end] = formValue.startEndTimes
     if (!start && !(formValue.bill_no && formValue.service_no)) {
-      self.$Message.warning('退单修改时间不存在时, 平台单号、服务单号必须同时有！');
+      self.$Message.warning($i18n.t('modalTips.js')); // 退单修改时间不存在时, 平台单号、服务单号必须同时有！
       return false;
     }
     const param = {

@@ -42,7 +42,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: 'PO编号',
+        label: $i18n.t('form_label.cx'), // PO编号
         value: 'PO_NO', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         ghost: false, // 是否关闭幽灵按钮，默认开启

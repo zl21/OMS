@@ -8,6 +8,7 @@
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
           基础资料
+          <!-- {{ $i18n.t('panel_label.basicData') }}  -->
           <div slot="content" class="customized_Info_form">
             <businessForm :form-config="formConfig1" />
           </div>

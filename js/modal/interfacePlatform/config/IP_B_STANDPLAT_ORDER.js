@@ -80,7 +80,7 @@ export default {
     const [start, end] = formValue.startEndTimes
     if (!(formValue.bill_no || start)) {
       // _this.$Message.warning($i18n.t('modalTips.bp')); 
-      self.$Message.warning('请输入平台修改时间或平台单号'); // 请输入平台修改时间或平台单号
+      self.$Message.warning($i18n.t('modalTips.hf')); // 请输入平台修改时间或平台单号
       return false;
     }
     const param = {

@@ -475,7 +475,7 @@ export default {
               regx: /^[0-9]*$/,
               disabled: false,
               tips: {
-                content: '当“店铺+唯品会仓库+发货仓库”相同的配货单中商品数量大于等于设置的峰值时，自动创建入库单'
+                content:  $i18n.t('modalTips.hw') // 当“店铺+唯品会仓库+发货仓库”相同的配货单中商品数量大于等于设置的峰值时，自动创建入库单
               },
               inputChange: () => {
                 this.masterModifyData('PEAK_VALUE', 'warehouseWarrant', 0);
@@ -576,11 +576,11 @@ export default {
                 options: [ // radio选项
                   {
                     value: '0',
-                    label: '当日',
+                    label: $i18n.t('form_label.c2'), // 当日
                   },
                   {
                     value: '1',
-                    label: '次日',
+                    label: $i18n.t('form_label.c3'), // 次日
                   }
                 ]
               },
@@ -610,11 +610,11 @@ export default {
                 options: [ // radio选项
                   {
                     value: '0',
-                    label: '当日',
+                    label: $i18n.t('form_label.c2'), // 当日
                   },
                   {
                     value: '1',
-                    label: '次日',
+                    label: $i18n.t('form_label.c3'), // 次日
                   }
                 ]
               },
@@ -677,7 +677,7 @@ export default {
           formConfig: {
             formData: [{
               style: 'time', // 输入框类型
-              label: '入库单结单时间', // 输入框前文字
+              label: $i18n.t('form_label.c7'), // 入库单结单时间 输入框前文字
               colname: 'STATEMENT_TIME',
               type: 'time',
               value: 'STATEMENT_TIME', // 输入框的值
@@ -685,7 +685,7 @@ export default {
               format: 'HH:mm:ss',
               disabled: false,
               tips: {
-                content: '每天在该时间点自动对创建的入库单结单'
+                content: $i18n.t('modalTips.hv') // 每天在该时间点自动对创建的入库单结单
               },
               onChange: () => {
                 this.masterModifyData('STATEMENT_TIME', 'warehouseWarrant', 2);
@@ -807,7 +807,7 @@ export default {
                     click: () => {
                       this.$Modal.info({
                         title: $i18n.t('modalTitle.tips'), // 提示
-                        content: '确定删除？',
+                        content: $i18n.t('modalTitle.ht'), // 确定删除？
                         mask: true,
                         showCancel: true,
                         okText: $i18n.t('common.determine'), // 确定
@@ -838,7 +838,7 @@ export default {
                 if (!this.pickingTableConfig.data.length) return;
                 this.$Modal.info({
                   title: $i18n.t('modalTitle.tips'), // 提示
-                  content: '当前切换操作会清空已录入的按时间点创建/按未拣货数创建内容，确定继续吗？',
+                  content: $i18n.t('modalTitle.hx'), // 当前切换操作会清空已录入的按时间点创建/按未拣货数创建内容，确定继续吗？
                   mask: true,
                   showCancel: true,
                   okText: $i18n.t('common.determine'), // 确定
@@ -856,7 +856,7 @@ export default {
               options: [ // radio选项
                 {
                   value: 1,
-                  label: '按时间点创建',
+                  label: $i18n.t('panel_label.ap'), // 按时间点创建
                 },
                 {
                   value: 2,
@@ -987,7 +987,7 @@ export default {
                     click: () => {
                       this.$Modal.info({
                         title: $i18n.t('modalTitle.tips'), // 提示
-                        content: '确定删除？',
+                        content: $i18n.t('modalTitle.ht'), // 确定删除？
                         mask: true,
                         showCancel: true,
                         okText: $i18n.t('common.determine'), // 确定
@@ -1032,7 +1032,7 @@ export default {
             key: 'EXP_ARRIVETIME',
           },
           {
-            title: '入库单结单时间',
+            title: $i18n.t('form_label.c7'), // 入库单结单时间
             key: 'STATEMENT_TIME',
           },
           {
@@ -1102,8 +1102,8 @@ export default {
         const { ACTIONS, SUB_ACTIONS } = res;
         console.log('buttons::', this.btnConfig.buttons, 'res::', res);
         const webArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
-        this.jordanTableConfig.isShowDeleteDetailBtn = webArr.includes('删除');
-        this.jordanTableConfig.isShowImportBtn = webArr.includes('导入');
+        this.jordanTableConfig.isShowDeleteDetailBtn = webArr.includes($i18n.t('btn.delete')); // 删除
+        this.jordanTableConfig.isShowImportBtn = webArr.includes($i18n.t('btn.import')); // 导入
       });
     },
     // 时间戳格式化
