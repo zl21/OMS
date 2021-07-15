@@ -1488,6 +1488,7 @@ export default {
       if (this.id == '-1') {
         if (this.changeCount > 1) {
           this.$Modal.info({
+            className: 'ark-dialog',
             title: $i18n.t('modalTitle.tips'), // 提示
             content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
             mask: true,
@@ -1504,6 +1505,7 @@ export default {
       } else {
         if (this.changeCount > 8) {
           this.$Modal.info({
+            className: 'ark-dialog',
             title: $i18n.t('modalTitle.tips'), // 提示
             content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
             mask: true,

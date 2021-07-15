@@ -392,6 +392,7 @@ export default {
           content: message,
           cancelType: true,
           titleAlign: 'left',
+          className: 'ark-dialog',
           mask: true,
           draggable: true,
           keyDown: event => {

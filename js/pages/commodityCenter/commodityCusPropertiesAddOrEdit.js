@@ -609,6 +609,7 @@ export default {
       const masterArr = Object.keys(self.modify.master);
       if (masterArr.length) {
         this.$Modal.info({
+          className: 'ark-dialog',
           title: $i18n.t('modalTitle.tips'), // 提示
           content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,

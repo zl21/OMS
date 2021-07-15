@@ -111,6 +111,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
             btnclick: ()=>{
               if (this.isModify) {
                 this.$Modal.fcWarning({
+                  className: 'ark-dialog',
                   title: '提示', // 打印
                   content: '该页面已经修改,是否继续返回?', // 正在打印中，请稍后。。。
                   mask: true,

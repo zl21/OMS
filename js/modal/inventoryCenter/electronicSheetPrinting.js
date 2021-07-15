@@ -577,6 +577,7 @@ export default {
       const self = this;
       this.btnConfig.buttons[1].disabled = true;
       this.$Modal.info({
+        className: 'ark-dialog',
         title: $i18n.t('other.printing'), // 打印
         content: $i18n.t('modalTips.ca'), // 正在打印中，请稍后。。。
         mask: true,

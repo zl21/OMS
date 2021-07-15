@@ -258,6 +258,7 @@ export default {
             this.$Modal.confirm({
               title: res.data.message,
               width: 400,
+              className: 'ark-dialog',
               mask: true,
               render: (h) => {
                 if (res.data.data) {

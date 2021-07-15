@@ -782,6 +782,7 @@ export default {
         return;
       }
       this.$Modal.info({
+        className: 'ark-dialog',
         title: $i18n.t('modalTitle.tips'), // 提示
         content: '确定执行下线操作？',
         mask: true,

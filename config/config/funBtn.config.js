@@ -1545,7 +1545,9 @@ class BtnConfig {
             },
           }
           this.$Modal.confirm({
+            className: 'ark-dialog',
             title: err,
+            mask: true,
             render: (h) => h('Table', renderInfo),
           })
         }

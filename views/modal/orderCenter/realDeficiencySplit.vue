@@ -234,6 +234,7 @@ export default {
         this.$Modal.info({
           title: $i18n.t('modalTitle.tips'), // 提示
           content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
+          className: 'ark-dialog',
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定

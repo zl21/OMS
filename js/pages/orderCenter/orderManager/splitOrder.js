@@ -16,6 +16,7 @@ export default {
             btnclick: () => {
               if (this.canFresh && this.data.length > 1) {
                 this.$Modal.confirm({
+                  className: 'ark-dialog',
                   title: $i18n.t('modalTitle.tips'), // title:'提示',
                   content: $i18n.t('modalTips.ch'), // content:'当前操作未确认拆单，是否确认刷新？'
                   titleAlign: 'center',

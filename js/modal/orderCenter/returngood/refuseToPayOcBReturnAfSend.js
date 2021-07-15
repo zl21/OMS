@@ -55,6 +55,8 @@ export default {
           this.$emit('closeActionDialog');
         } else {
           this.$Modal.confirm({
+            mask: true,
+            className: 'ark-dialog',
             title: res.data.data.message,
             render: (h) => h('Table', {
               props: {

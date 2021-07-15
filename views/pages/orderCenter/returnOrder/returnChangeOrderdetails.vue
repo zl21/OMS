@@ -943,6 +943,7 @@ export default {
         content: msg,
         width: 450,
         mask: true,
+        className: 'ark-dialog',
         showCancel: true,
         okText: $i18n.t("common.determine"), // 确定
         cancelText: $i18n.t("common.cancel"), // 取消

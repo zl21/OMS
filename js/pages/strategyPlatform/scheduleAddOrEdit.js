@@ -806,6 +806,7 @@ export default {
                   on: {
                     click: () => {
                       this.$Modal.info({
+                        className: 'ark-dialog',
                         title: $i18n.t('modalTitle.tips'), // 提示
                         content: $i18n.t('modalTitle.ht'), // 确定删除？
                         mask: true,
@@ -837,6 +838,7 @@ export default {
               radioChange: ()=>{
                 if (!this.pickingTableConfig.data.length) return;
                 this.$Modal.info({
+                  className: 'ark-dialog',
                   title: $i18n.t('modalTitle.tips'), // 提示
                   content: $i18n.t('modalTitle.hx'), // 当前切换操作会清空已录入的按时间点创建/按未拣货数创建内容，确定继续吗？
                   mask: true,
@@ -986,6 +988,7 @@ export default {
                   on: {
                     click: () => {
                       this.$Modal.info({
+                        className: 'ark-dialog',
                         title: $i18n.t('modalTitle.tips'), // 提示
                         content: $i18n.t('modalTitle.ht'), // 确定删除？
                         mask: true,
@@ -1115,6 +1118,7 @@ export default {
     back() {
       if (this.isModify) {
         this.$Modal.info({
+          className: 'ark-dialog',
           title: $i18n.t('modalTitle.tips'), // 提示
           content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,

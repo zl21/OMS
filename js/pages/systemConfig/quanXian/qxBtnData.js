@@ -75,6 +75,7 @@ export default {
       if (res) {
         this.spinShow = false;
         this.$Modal.fcSuccess({
+          className: 'ark-dialog',
           title: '成功',
           content: res.data.message
         });

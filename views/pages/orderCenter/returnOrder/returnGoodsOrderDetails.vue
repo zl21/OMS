@@ -947,6 +947,7 @@ export default {
         title,
         content: msg,
         width: 450,
+        className: 'ark-dialog',
         mask: true,
         showCancel: true,
         okText: $i18n.t("common.determine"), // 确定

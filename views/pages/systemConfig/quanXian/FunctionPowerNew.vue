@@ -575,6 +575,7 @@ export default {
       if (this.tableSaveData.length > 0) {
         this.$Modal.fcWarning({
           title: '提示',
+          className: 'ark-dialog',
           mask: true,
           showCancel: true,
           content: '是否保存修改的数据！',
@@ -835,6 +836,7 @@ export default {
             } else {
               this.$Modal.fcWarning({
                 title: '提示',
+                className: 'ark-dialog',
                 mask: true,
                 content: res.data.message,
               });

@@ -374,7 +374,7 @@
               }else {
                 this.$Modal.warning({
                   title:'警告',
-                    className: 'ark-dialog',
+                  className: 'ark-dialog',
                   content:'该操作为全量导出,导出数据较大,建议在服务器空闲时候导出,如需继续,请点击确定按钮!',
                   showCancel:true,
                   mask:true,
@@ -1171,15 +1171,17 @@
           self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
         }
         if(!self.selection.length){
-          $omsUtils.msgTips(self, 'warning', '请选择需要退货确认的单据', 2);
+          $omsUtils.msgTips(self, 'warning', 'ju');
           return;
         }
         self.service.orderCenter.returnConfirmCheck({ID:self.selection[0].ID}).then(res=>{
           if(res.data.code == 0){
             this.$Modal.confirm({
-              title:'提示',
+              className: 'ark-dialog',
+              title: $i18n.t('modalTitle.tips'),
               content:res.data.message,
               showCancel:true,
+              mask: true,
               onOk:()=>{
                 self.service.orderCenter.returnConfirm({
                   ID:self.selection[0].ID
@@ -1188,7 +1190,7 @@
                     $omsUtils.msgTips(self, 'success', res.data.message, 0)
                     self.query();
                   }else {
-                    $omsUtils.msgTips(self, 'error', res.data.message, 0)
+                    // $omsUtils.msgTips(self, 'error', res.data.message, 0)
                   }
                 })
               }

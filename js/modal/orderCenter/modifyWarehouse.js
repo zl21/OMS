@@ -112,6 +112,7 @@ export default {
           $omsUtils.msgTips(self, 'success', res.data.message, 0);
         }else {
           this.$Modal.confirm({
+            className: 'ark-dialog',
             title: res.data.message,
             width: 400,
             mask: true,

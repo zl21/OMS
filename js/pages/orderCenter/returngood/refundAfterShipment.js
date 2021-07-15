@@ -1361,6 +1361,8 @@ export default {
             this.$Message.success(res.data.data.message);
           } else {
             this.$Modal.confirm({
+              className: 'ark-dialog',
+              mask: true,
               title: res.data.data.message,
               render: (h) =>
                 h('Table', {
@@ -1737,6 +1739,7 @@ export default {
       } else {
         // 编辑状态,删除明细
         this.$Modal.fcError({
+          className: 'ark-dialog',
           title: $i18n.t('modalTitle.deleteDetails'), // 删除明细
           content: $i18n.t('modalTips.j5'), // 确定删除所选明细?
           onOk: () => {
