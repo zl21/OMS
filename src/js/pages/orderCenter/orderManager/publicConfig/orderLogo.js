@@ -26,6 +26,11 @@ const orderLogo =  {
   IS_REAL_LACKSTOCK: '实缺',  //实缺
   IS_EXTRA: '额', //额
   RESERVE_BIGINT01: '禁', //禁
+  IS_SAME_CITY_PURCHASE: '同',// 同
+  IS_SHOP_PRE_SELL: '店铺预售', // 店预
+  IS_CASH_PRE_SELL: '现上预售', // 现预
+  IS_WHOLESALE: '大额', // 大额
+  RESERVE_BIGINT03: '赔付单',// 赔
 
 };
 
