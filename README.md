@@ -163,3 +163,4 @@ console.log($i18n.t(common.all));
 | v1.0.70 | add menu |
 | v1.0.71 | add plHolder. |
 | v1.0.72 | add tips.ju |
+| v1.0.73 | add tips.jn、jv; tips翻译 |
