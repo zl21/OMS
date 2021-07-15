@@ -381,6 +381,8 @@ export default {
     ax: 'Extra refund edit',
     ay: 'JIT distribution list - change hangtag',
     az: 'Return new',
+    // b------------------------------------------------------------------------
+    b0: 'Add return order',
   },
 
   panel_label: { // 面板title

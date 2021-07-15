@@ -361,10 +361,8 @@ export default { // 弹窗提示、警告
 	jt: 'No modification has been made!',
 	ju: 'Please select the document for return confirmation!',
 	jv: 'Failure details!',
-	jw: '',
-	jx: '',
-	jy: '',
-	jz: '',
+	jw: 'Please select the document to copy!',
+	jx: 'Only orders in shortage or pending approval status can be added!',
 	// k------------------------------------------------------------------------
 	k0: 'Additional refund for $ $, we will call you within 3 working days',
 	k1: "In, please check! Thank you for your care, welcome you next time, I wish you a happy life! ",
