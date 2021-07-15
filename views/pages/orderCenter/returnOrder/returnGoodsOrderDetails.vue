@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-15 14:36:02
+ * @LastEditTime: 2021-07-15 15:45:28
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -9,7 +9,7 @@
 <template>
   <div v-loading="loading">
     <!-- 如果是组合商品不显示  v-if="IS_GROUP"  -->
-    <div class="switch" v-if="PRO_TYPE === '4'">
+    <div class="switch" v-if="IS_COMBINATION">
       <span @click="onSitch()"> {{ switchText }} </span>
     </div>
     <!-- 退货明细 -->
@@ -76,7 +76,7 @@ export default {
   data() {
     return {
       vmI18n:$i18n,
-      PRO_TYPE:'4',//4 代表组合商品
+      IS_COMBINATION:0,//4 代表组合商品
       switchText: $i18n.t('form_label.b0'), //切换为sku商品展示
       returnArr: [],
       changeArr: [],
@@ -430,6 +430,7 @@ export default {
       });
       // 获取状态
       this.orderStatus = OC_B_RETURN_ORDER.RETURN_STATUS;
+      this.IS_COMBINATION = OC_B_RETURN_ORDER.IS_COMBINATION;
       // 退货明细
       this.businessActionTable.columns = this.panelReturn ? REFUND_ITEM_TABTH : EXCHANGE_ITEM_TABTH; //表头
       // 退货明细
@@ -458,7 +459,6 @@ export default {
           Number(OC_B_RETURN_ORDER.FINAL_REAL_AMT)
         ), //最终实退总金额
       };
-      this.PRO_TYPE = OC_B_RETURN_ORDER.PRO_TYPE
       R3.store.commit(
         `customize/returnAmount`,
         JSON.parse(JSON.stringify(returnAmount))
@@ -492,6 +492,7 @@ export default {
           code,
           data,
           data: {
+            OC_B_RETURN_ORDER,
             OC_B_RETURN_ORDER_EXCHANGE_ITEMS,
             OC_B_RETURN_ORDER_REFUND_ITEMS
           },
