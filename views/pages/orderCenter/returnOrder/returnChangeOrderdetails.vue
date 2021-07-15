@@ -921,7 +921,7 @@ export default {
         } else if (haveGift && haveGroup) {
           // 请确认是否删除当前选中的退货商品，还存在关联的挂靠赠品
           // 并且还存在组合/福袋下挂的其他关联商品
-          msg = `${$i18n.t('modalTips.jn')}：${haveGift.replace(
+          msg = `${$i18n.t('modalTips.jl')}：${haveGift.replace(
             /(，|,)$/,
             " "
           )}，${$i18n.t('modalTips.jo')}：${haveGroup.replace(
