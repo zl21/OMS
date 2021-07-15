@@ -1,4 +1,5 @@
 <template>
+<!-- 商品分类 - 新增/编辑 -->
   <div
     :id="this.customizedModuleName"
     class="commodityClassifyAddOrEdit customized-detail"

@@ -114,7 +114,7 @@ export default {
           key: "ecode",
         },
         {
-          title: "SKU名称", // 商品SKU
+          title: $i18n.t('form_label.skuName'), // SKU名称
           key: "ename",
         },
         {

@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-07-15 10:36:35
+ * @LastEditTime: 2021-07-15 15:46:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -25,9 +25,9 @@
       <li>
         <div class="calculation-item">
           <!-- 应退运费 -->
-          <span :title="vmI18n.t('form_label.cr')">{{ vmI18n.t('form_label.cr') }}</span>
+          <span :title="vmI18n.t('form_label.cr')">{{ vmI18n.t('form_label.ad') }}</span>
           <label>
-            <Input v-if="type" v-model="editData.SHIP_AMT" :regx="/^\d*\.{0,1}\d{0,2}$/" @on-change="inputChange"></Input>
+            <Input v-if="type" v-model="editData.SHIP_AMT" :regx="/^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/" @on-change="inputChange"></Input>
             <span v-else>
               {{ data.SHIP_AMT }}
             </span>
@@ -40,7 +40,7 @@
           <!-- 调整金额 -->
           <span :title="vmI18n.t('table_label.adjustment_amount')">{{vmI18n.t('table_label.adjustment_amount')}}</span>
           <label>
-            <Input v-if="type" v-model="editData.ADJUST_AMT" :regx=" /(^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d{1,2})?$)/" @on-change="inputChange"></Input>
+            <Input v-if="type" v-model="editData.ADJUST_AMT" :regx="/^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/" @on-change="inputChange"></Input>
             <span v-else>
               {{ editData.ADJUST_AMT }}
             </span>
@@ -80,7 +80,7 @@ export default {
       editData:JSON.parse(JSON.stringify(R3.store.state.customize.returnAmount)),
       tableName:this.$route.params.tableName === 'OC_B_RETURN_ORDER_VIRTUAL_TABLE' ? 0 : 1,
       // 手工新增
-      type:this.$route.query.RETURN_SOURCE === $i18n.t('btn.addManually') ? 1 : 0
+      type:this.$route.query.RETURN_SOURCE === '手工新增' ? 1 : 0
     };
   },
   mounted(){

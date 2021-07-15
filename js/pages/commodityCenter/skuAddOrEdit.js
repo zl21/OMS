@@ -115,7 +115,7 @@ export default {
           itemdata: {
             colid: '165990',
             colname: 'PS_C_PRO_ID',
-            name: "SPU编码",
+            name: $i18n.t('table_label.itemNo01'), // SPU编码
             valuedata: '',
             pid: '',
             fkdisplay: 'drp',
@@ -187,7 +187,7 @@ export default {
           style: 'textarea',
           colname: 'SPEC_REMARK',
           width: '24',
-          maxlength:255,
+          maxlength: 255,
           inputChange: () => {
             this.masterModifyData('SPEC_REMARK', 'master');
           },
@@ -408,7 +408,7 @@ export default {
                   value: 'PROPERTY',
                 }, */
         {
-          label: '备用条码',
+          label: $i18n.t('panel_label.as'), // 备用条码
           value: 'PS_C_ALTERNATE_SKU',
         },
         {
@@ -455,7 +455,7 @@ export default {
     this.$route.query.spuid && (this.spuID = this.$route.query.spuid)
   },
   methods: {
-    getBtn(){
+    getBtn() {
       $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_SKU', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
         console.log('buttons::', this.btnConfig.buttons, 'res::', res);
       })
@@ -737,7 +737,7 @@ export default {
               id: self.ID,
               type: 'action',
               name: 'PS_C_SKU',
-              label: 'SKU编辑',
+              label: $i18n.t('menu.b1'), // SKU编辑
               query: Object.assign({
                 spuid: this.spuID,
                 spucode: this.formConfig.formValue.ECODE || '',
@@ -781,28 +781,28 @@ export default {
     onOk() {
       const spuID = this.$route.query.spuid;
       if (spuID) {
-      // this.$comUtils.tabCloseAppoint(this);
-      // this.$destroy(true);
+        // this.$comUtils.tabCloseAppoint(this);
+        // this.$destroy(true);
         this.$store.commit('global/tabOpen', {
           // 回到SPU的详情，同时SKU要回到列表
           tableId: 10105,
           type: 'S',
           tableName: 'PS_C_SKU',
-          label: '商品SKU',
+          label: $i18n.t('menu.a8'), // 商品SKU
           back: true,
         });
         this.$store.commit('customize/TabOpen', {
           id: spuID,
           type: 'action',
           name: 'PS_C_PRO',
-          label: 'SPU编辑',
+          label: $i18n.t('menu.b2'), // SPU编辑
         });
       } else {
         this.$store.commit('global/tabOpen', {
           tableId: 10105,
           type: 'S',
           tableName: 'PS_C_SKU',
-          label: '商品SKU',
+          label: $i18n.t('menu.a8'), // 商品SKU
           back: true,
         });
       }

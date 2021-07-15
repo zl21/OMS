@@ -7,7 +7,8 @@
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
-          SKU基本信息
+          <!-- SKU基本信息 -->
+          {{vmI18n.t('panel_label.at')}}
           <div slot="content" class="customized_Info_img">
             <ImageUpload
               v-model="imageValue"

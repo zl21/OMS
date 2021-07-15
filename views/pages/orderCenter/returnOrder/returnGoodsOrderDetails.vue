@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-15 13:21:03
+ * @LastEditTime: 2021-07-15 18:56:05
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -9,7 +9,7 @@
 <template>
   <div v-loading="loading">
     <!-- 如果是组合商品不显示  v-if="IS_GROUP"  -->
-    <div class="switch" v-if="PRO_TYPE === '4'">
+    <div class="switch" v-if="IS_COMBINATION">
       <span @click="onSitch()"> {{ switchText }} </span>
     </div>
     <!-- 退货明细 -->
@@ -42,7 +42,8 @@
     <Modal
       v-model="replaceProductTable.modal"
       width="900"
-      :title="vmI18n.t('modalTitle.ac')"
+      titleAlign="left"
+      :title="vmI18n.t('btn.replaceDetail')"
       :mask="true"
       @on-ok="replaceOk"
     >
@@ -76,7 +77,7 @@ export default {
   data() {
     return {
       vmI18n:$i18n,
-      PRO_TYPE:'4',//4 代表组合商品
+      IS_COMBINATION:0,//4 代表组合商品
       switchText: $i18n.t('form_label.b0'), //切换为sku商品展示
       returnArr: [],
       changeArr: [],
@@ -430,6 +431,7 @@ export default {
       });
       // 获取状态
       this.orderStatus = OC_B_RETURN_ORDER.RETURN_STATUS;
+      this.IS_COMBINATION = OC_B_RETURN_ORDER.IS_COMBINATION;
       // 退货明细
       this.businessActionTable.columns = this.panelReturn ? REFUND_ITEM_TABTH : EXCHANGE_ITEM_TABTH; //表头
       // 退货明细
@@ -458,7 +460,6 @@ export default {
           Number(OC_B_RETURN_ORDER.FINAL_REAL_AMT)
         ), //最终实退总金额
       };
-      this.PRO_TYPE = OC_B_RETURN_ORDER.PRO_TYPE
       R3.store.commit(
         `customize/returnAmount`,
         JSON.parse(JSON.stringify(returnAmount))
@@ -476,30 +477,35 @@ export default {
         // 表头存起来
         this.tableHead.tui = REFUND_ITEM_TABTH;
         this.tableHead.huan = EXCHANGE_ITEM_TABTH;
-        this.toMainData.tui = OC_B_RETURN_ORDER_REFUND_ITEMS
-        this.toMainData.huan = OC_B_RETURN_ORDER_EXCHANGE_ITEMS
-        this.totalNum();
+        // this.toMainData.tui = OC_B_RETURN_ORDER_REFUND_ITEMS
+        // this.toMainData.huan = OC_B_RETURN_ORDER_EXCHANGE_ITEMS
+        // this.totalNum();
         // 处理数据 -- 退换货明细
         // PT_SKU true平台 false商品
-        // this.getDetailsData(true);
+        this.getDetailsData(true);
       }
       this.loading = false;
     },
     // 获取明细详情数据
     async getDetailsData(PT_SKU){
-      let params = {
-        ID:this.$route.params.itemId,
-        TABLE:'OC_B_RETURN_ORDER',
-        PT_SKU: PT_SKU, //true平台 false商品
-      }
-      let tui = await $omsUtils.getTableData(this,{...params,SUB_TABLE:'OC_B_RETURN_ORDER_REFUND_ITEM'})
-      // 换货明细
-      let huan = await $omsUtils.getTableData(this,{...params,SUB_TABLE:'OC_B_RETURN_ORDER_EXCHANGE_ITEM'})
-      // 退货明细
-      this.businessActionTable.data =this.panelReturn ? tui.SUB_ITEM : huan.SUB_ITEM; // 数据
-      
-      this.toMainData.tui = tui.SUB_ITEM;
-      this.toMainData.huan = huan.SUB_ITEM;
+      const {
+        data: {
+          code,
+          data,
+          data: {
+            OC_B_RETURN_ORDER,
+            OC_B_RETURN_ORDER_EXCHANGE_ITEMS,
+            OC_B_RETURN_ORDER_REFUND_ITEMS
+          },
+          message,
+        },
+      } = await this.service.orderCenter.getALlOrderReturnAndItemInfo({
+        ID: this.$route.params.itemId,
+        PT_SKU
+      });
+      this.businessActionTable.data = this.panelReturn ? OC_B_RETURN_ORDER_REFUND_ITEMS : OC_B_RETURN_ORDER_EXCHANGE_ITEMS; // 数据
+      this.toMainData.tui = OC_B_RETURN_ORDER_REFUND_ITEMS;
+      this.toMainData.huan = OC_B_RETURN_ORDER_EXCHANGE_ITEMS;
       R3.store.commit(
         "customize/returnOrderChangeItem",
         JSON.parse(JSON.stringify(this.toMainData))
@@ -522,6 +528,7 @@ export default {
         range: pageSize,
         fixedcolumns: fixedcolumns,
         column_include_uicontroller: true,
+        ISACTIVE:"Y",
         isolr: false,
       };
       let formData = new FormData();
@@ -1180,12 +1187,12 @@ export default {
   #back {
     display: none;
   }
-}
-.switch {
+  .switch {
     position: absolute;
     right: 0;
     top: 10px;
     color: #5461B8;
     cursor: pointer;
   }
+}
 </style>

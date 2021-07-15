@@ -58,7 +58,7 @@
                     <Input
                       v-model="ADJUST_AMT"
                       type="text"
-                      :regx="/^-?\d*\.{0,1}\d{0,4}$/"
+                      :regx="/^-?\d*\.{0,1}\d{0,2}$/"
                       placeholder="0.00"
                     />
                   </div>

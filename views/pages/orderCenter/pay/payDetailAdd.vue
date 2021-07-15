@@ -96,7 +96,7 @@ export default {
               dimblur: () => { },
             },
             {
-              label: 'SKU名称',
+              label: $i18n.t('form_label.skuName'), // SKU名称
               style: 'dimSearch',
               width: '8',
               value: 'skuEname',
@@ -123,7 +123,7 @@ export default {
             },
             {
               style: 'dimSearch', //输入框类型
-              label: 'SPU编码', //输入框前文字
+              label: $i18n.t('table_label.itemNo01'), // SPU编码 输入框前文字
               value: 'spuEcode', //输入框的值
               columns: ['ENAME'],
               width: '8',

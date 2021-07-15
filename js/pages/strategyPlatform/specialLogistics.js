@@ -517,7 +517,7 @@ export default {
           key: 'index'
         },
         {
-          title: 'SPU编码',
+          title: $i18n.t('table_label.itemNo01'), // SPU编码
           key: 'psCProEcode'
         },
         {
@@ -525,11 +525,11 @@ export default {
           key: 'psCSkuEcode'
         },
         {
-          title: 'SPU名称',
+          title: $i18n.t("table_label.itemNo02"), // SPU名称
           key: 'psCProEname'
         },
         {
-          title: 'SKU名称',
+          title: $i18n.t('form_label.skuName'), // SKU名称
           key: 'psCSkuEname'
         },
         {
@@ -673,7 +673,7 @@ export default {
             key: 'index'
           },
           {
-            title: 'SPU编码',
+            title: $i18n.t('table_label.itemNo01'), // SPU编码
             key: 'psCProEcode'
           },
           {
@@ -681,11 +681,11 @@ export default {
             key: 'psCSkuEcode'
           },
           {
-            title: 'SPU名称',
+            title: $i18n.t("table_label.itemNo02"), // SPU名称
             key: 'psCProEname'
           },
           {
-            title: 'SKU名称',
+            title: $i18n.t('form_label.skuName'), // SKU名称
             key: 'psCSkuEname'
           },
           {

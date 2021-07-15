@@ -3,7 +3,7 @@
  * @Date: 2021-04-27 11:20:18
  * @LastEditTime: 2021-06-11 11:31:42
  * @LastEditors: your name
- * @Description: In User Settings Edit
+ * @Description: 商品自定义属性
  * @FilePath: /project-logic/views/pages/commodityCenter/commodityCusPropertiesAddOrEdit.vue
 -->
 <template>

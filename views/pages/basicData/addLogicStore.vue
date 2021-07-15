@@ -21,7 +21,8 @@
           </p>
         </Panel>
         <Panel name="panel_businessInfo">
-          业务信息
+          <!-- 业务信息 -->
+          {{ vmI18n.t('panel_label.ax') }}
           <p slot="content">
             <businessForm :form-config="businessFormConfig" />
           </p>

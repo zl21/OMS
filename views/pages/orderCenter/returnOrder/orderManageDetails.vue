@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-07 16:19:54
- * @LastEditTime: 2021-07-14 16:47:03
+ * @LastEditTime: 2021-07-15 18:41:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/orderManageDetails.vue
@@ -253,6 +253,9 @@
           this.baseInfoTab.order = data.DATA.ITEM;
           this.baseInfoTab.sub_item = data.DATA.SUB_ITEM;
           this.loading = false;
+          console.log('1111',data.DATA.ITEM);
+          // const statusList = ['未确认', '已审核', '配货中', '仓库发货', '平台发货', '已确认收货', '已取消', '系统作废', '交易完成', '预售待发货', '预售缺货', '缺货', '待审核'];
+          this.statusName = ['未确认', '已审核', '配货中', '仓库发货', '平台发货', '已确认收货', '已取消', '系统作废', '交易完成', '预售待发货', '预售缺货', '缺货', '待审核'].includes(data.DATA.ITEM.ORDER_STATUS) ? data.DATA.ITEM.ORDER_STATUS : '';
         } catch (error) {
           console.log(error);
         }
@@ -275,6 +278,7 @@
       BtnConfig.target = this;
       BtnConfig.singleType = 1;
       await this.getDetailsData();
+      console.log(980808);
     },
 
   };
@@ -283,5 +287,8 @@
   @import '~omsTheme/public.less';
   .returnBtn{
     margin: 0 @base-mr;
+  }
+  .statusFlag{
+    
   }
 </style>

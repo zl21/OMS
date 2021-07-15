@@ -245,6 +245,7 @@
           this.baseInfoTab.order = data.DATA.ITEM;
           this.baseInfoTab.sub_item = data.DATA.SUB_ITEM;
           this.loading = false;
+          console.log('data:',data);
         } catch (error) {
           console.log(error);
         }
@@ -262,6 +263,7 @@
       }
     },
     async created() {
+      console.log();
       const id = this.$route.params.customizedModuleId ?? -1;
       this.objId = id;
       BtnConfig.target = this;

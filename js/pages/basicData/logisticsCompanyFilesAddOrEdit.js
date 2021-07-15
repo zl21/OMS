@@ -83,7 +83,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: '物流公司编码',
+            label: $i18n.t('form_label.ds'), // 物流公司编码
             value: 'ECODE',
             colname: 'ECODE',
             width: '6',
@@ -94,7 +94,7 @@ export default {
           },
           {
             style: 'input',
-            label: '物流公司名称',
+            label: $i18n.t('form_label.dt'), // 物流公司名称
             value: 'ENAME',
             colname: 'ENAME',
             width: '6',
@@ -134,7 +134,7 @@ export default {
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
         current: 1, // 当前页码
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         totalData: [],
         selectionData: [],
@@ -143,15 +143,15 @@ export default {
         indexColumn: true, // 是否展示序号列
         columns: [
           {
-            title: '平台',
+            title: $i18n.t('other.platForm'), // 平台
             key: 'CP_C_PLATFORM_ENAME',
           },
           {
-            title: '平台物流编号',
+            title: $i18n.t('form_label.dq'), // 平台物流编号
             key: 'CP_C_LOGISTICS_ECODE',
           },
           {
-            title: '平台物流名称',
+            title: $i18n.t('form_label.dr'), // 平台物流名称
             key: 'CP_C_LOGISTICS_ENAME',
           },
         ],
@@ -161,7 +161,7 @@ export default {
             {
               webname: 'LOGISTICS_AddDetailBtn',
               type: 'primary',
-              text: '添加',
+              text: $i18n.t('btn.increase'), // 添加
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.addHandel();
@@ -185,7 +185,7 @@ export default {
           buttons: [
             {
               webname: 'LOGISTICS2_AddDetailBtn',
-              text: '添加',
+              text: $i18n.t('btn.increase'), // 添加
               type: 'primary',
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -211,7 +211,7 @@ export default {
           },
           formData: [
             {
-              label: '前缀',
+              label: $i18n.t('form_label.do'), // 前缀
               style: 'input',
               width: '6',
               value: 'PREFIX',
@@ -228,7 +228,7 @@ export default {
               dimblur: () => { },
             },
             {
-              label: '后缀',
+              label: $i18n.t('form_label.dp'), // 后缀
               style: 'input',
               width: '6',
               value: 'SUFFIX',
@@ -245,11 +245,11 @@ export default {
         }, // 表单配置
         columns: [
           {
-            title: '前缀',
+            title: $i18n.t('form_label.do'), // 前缀
             key: 'PREFIX',
           },
           {
-            title: '后缀',
+            title: $i18n.t('form_label.dp'), // 后缀
             key: 'SUFFIX',
           }
         ],
@@ -261,12 +261,13 @@ export default {
       },
       subTableConfig2: {},
       // tab切换配置
-      labelList: [{
-          label: '平台物流对应',
+      labelList: [
+        {
+          label: $i18n.t('panel_label.b1'), // 平台物流对应
           value: 'PROPERTYVALUES',
         },
         {
-          label: '物流单号解析配置',
+          label: $i18n.t('panel_label.b2'), // 物流单号解析配置
           value: 'CP_C_LOGISTICS_FIX',
         },
         {
@@ -307,7 +308,7 @@ export default {
     /* -------------------- 详情初始化 start -------------------- */
     async initObjItem(id) {
       const self = this;
-      this.$nextTick(()=> {
+      this.$nextTick(() => {
         this.getBtn();
       })
       // this.loading = true;
@@ -341,7 +342,7 @@ export default {
           });
         });
         this.subTableConfig.key += $OMS2.omsUtils.generateKey();
-        console.log('this.subTableConfig.businessButtonConfig.buttons::',this.subTableConfig.businessButtonConfig.buttons);
+        console.log('this.subTableConfig.businessButtonConfig.buttons::', this.subTableConfig.businessButtonConfig.buttons);
         this.subTableConfig1.businessButtonConfig.buttons.forEach(item => {
           item.isShow = webArr.includes(item.webname);
           SUB_ACTIONS.forEach(it => {
@@ -351,7 +352,7 @@ export default {
           });
         });
         this.subTableConfig1.key += $OMS2.omsUtils.generateKey();
-        console.log('this.subTableConfig1.businessButtonConfig.buttons::',this.subTableConfig1.businessButtonConfig.buttons);
+        console.log('this.subTableConfig1.businessButtonConfig.buttons::', this.subTableConfig1.businessButtonConfig.buttons);
       });
     },
     /* -------------------- 详情初始化 end -------------------- */
@@ -397,7 +398,7 @@ export default {
       if (!IDS.length && partNewArrs.length) {
         self.addTableData = $omsUtils.getDifferentArr(self.addTableData, partNewArrs, 'repeatKey');
         partNewArrs = [];
-        self.$Message.success('删除成功！');
+        $omsUtils.msgTips(this, 'success', 'ay'); // 删除成功！
         self.getTableData(self.totalData);
         return false;
       }
@@ -421,36 +422,36 @@ export default {
       }
     },
     // 物流单号解析 添加/删除按钮事件
-    nalysisAdd(){
+    nalysisAdd() {
       let data = this.subTableConfig1.data;
-      let {PREFIX,SUFFIX} = this.subTableConfig1.businessFormConfig.formValue;
-      let COMBINATION  = `${PREFIX}${SUFFIX}`;
-      if(data.length){
-        if(COMBINATION === ''){
-          this.$Message.warning('内容不能为空！')
+      let { PREFIX, SUFFIX } = this.subTableConfig1.businessFormConfig.formValue;
+      let COMBINATION = `${PREFIX}${SUFFIX}`;
+      if (data.length) {
+        if (COMBINATION === '') {
+          $omsUtils.msgTips(this, 'warning', 'kd'); // 内容不能为空！
           return;
         }
-        if(data.some((item)=> { return item.COMBINATION === COMBINATION})) {
-          this.$Message.warning('重复数据，不能添加！')
+        if (data.some((item) => { return item.COMBINATION === COMBINATION })) {
+          $omsUtils.msgTips(this, 'warning', 'ke'); // 重复数据，不能添加！
           return;
         }
-        this.subTableConfig1.data.push({ID:'-1',PREFIX,SUFFIX,COMBINATION});
-      }else{
-        this.subTableConfig1.data.push({ID:'-1',PREFIX,SUFFIX,COMBINATION})
+        this.subTableConfig1.data.push({ ID: '-1', PREFIX, SUFFIX, COMBINATION });
+      } else {
+        this.subTableConfig1.data.push({ ID: '-1', PREFIX, SUFFIX, COMBINATION })
       }
     },
     // 删除
-    async nalysisDetale(){
+    async nalysisDetale() {
       let tableConfig = this.subTableConfig1
       this.subTableConfig1.data = $omsUtils.getDifferentArr(tableConfig.data, tableConfig.selectionData, 'COMBINATION');
-      let arr = tableConfig.selectionData.map((item)=> { if(item.ID !== '-1') return item.ID});
+      let arr = tableConfig.selectionData.map((item) => { if (item.ID !== '-1') return item.ID });
       let ids = arr.filter((item) => { return item != undefined });
-      if(ids.length){
+      if (ids.length) {
         const {
           data: { code, data, message }
-        } = await this.service.basicData.deleteFixes({IDS:ids});
-        if(code === 0){
-          this.$Message.success(message || '删除成功！');
+        } = await this.service.basicData.deleteFixes({ IDS: ids });
+        if (code === 0) {
+          this.$Message.success(message);
         }
       }
     },
@@ -492,12 +493,10 @@ export default {
       } = await self.service.basicData.platformSave(param);
       // this.loading = false;
       if (code === 0) {
-        if(self.ID !== '-1'){
-          console.log('编辑');
+        if (self.ID !== '-1') {
           this.backable = true;
           this.back();
-        }else{
-          console.log('新增');
+        } else {
           if (this.formConfig.formValue.TYPE == 'LIST') {
             this.showSubtablePart = true;
           }
@@ -509,7 +508,7 @@ export default {
           this.$destroy(true);
           this.$store.commit('global/tabOpen', {
             type: 'tableDetailAction',
-            label: '物流公司档案编辑',
+            label: $i18n.t('menu.b5'), // 物流公司档案编辑
             customizedModuleName: 'LOGISTICSCOMPANYFILESADDOREDIT',
             customizedModuleId: self.ID
           });
@@ -556,8 +555,8 @@ export default {
     },
 
     /* --------------- 表格事件 --------------- */
-    delTableDetail() {},
-    addTableDetail() {},
+    delTableDetail() { },
+    addTableDetail() { },
     onSelect(e) {
       // e为选中的数组对象RowArr
       this.subTableConfig.selectionData = e;
@@ -582,23 +581,23 @@ export default {
       this.subTableConfig.pageSize = e;
     },
     // 物流单号解析表格事件
-    onSelect1(e){
+    onSelect1(e) {
       this.subTableConfig1.selectionData = e;
     },
-    onSelectCancel1(e){
+    onSelectCancel1(e) {
       this.subTableConfig1.selectionData = e;
     },
-    onSelectAll1(e){
+    onSelectAll1(e) {
       this.subTableConfig1.selectionData = e;
     },
-    onSelectAllCancel1(e){
+    onSelectAllCancel1(e) {
       this.subTableConfig1.selectionData = e;
     },
 
     /* --------------------- 工具函数： --------------------- */
     // 切换Label & 实时渲染subTable
     async labelClick(item) {
-      console.log('item',item);
+      console.log('item', item);
       this.labelDefaultValue = item.value;
       // if(this.$route.params.customizedModuleId != 'New' && this.labelDefaultValue == 'CP_C_LOGISTICS_FIX'){
       //   const subData = await $omsUtils.initSubtable('CP_C_LOGISTICS_FIX', this.ID, '180461');

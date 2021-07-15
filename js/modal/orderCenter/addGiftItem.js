@@ -22,7 +22,7 @@ export default {
         },
         formData: [
           {
-            label: 'SKU编码',
+            label: $i18n.t('table_label.code_SKU'), // SKU编码
             style: 'dimSearch',
             width: '7',
             value: 'SKU_CODE',
@@ -37,7 +37,7 @@ export default {
             dimblur: () => {},
           },
           {
-            label: 'SPU编码',
+            label: $i18n.t('table_label.itemNo01'), // SPU编码
             style: 'dimSearch',
             width: '7',
             value: 'SPU_CODE',
@@ -50,7 +50,7 @@ export default {
           },
           {
             style: 'dimSearch', //输入框类型
-            label: 'SPU名称', //输入框前文字
+            label: $i18n.t("table_label.itemNo02"), // SPU名称 输入框前文字
             value: 'SPU_NAE', //输入框的值
             columns: ['ENAME'],
             width: '7',
@@ -86,19 +86,19 @@ export default {
         columns: [
           {
             key: 'skuEcode',
-            title: 'SKU编码',
+            title: $i18n.t('table_label.code_SKU'), // SKU编码
           },
           {
             key: 'spuEcode',
-            title: 'SPU编码',
+            title: $i18n.t('table_label.itemNo01'), // SPU编码
           },
           {
             key: 'spuEname',
-            title: 'SPU名称',
+            title: $i18n.t("table_label.itemNo02"), // SPU名称
           },
           {
             key: 'skuEname',
-            title: 'SKU名称',
+            title: $i18n.t('form_label.skuName'), // SKU名称
           },
           {
             key: 'brandEname',
@@ -494,19 +494,19 @@ export default {
           // },
           {
             key: 'skuEcode',
-            title: 'SKU编码',
+            title: $i18n.t('table_label.code_SKU'), // SKU编码
           },
           {
             key: 'spuEcode',
-            title: 'SPU编码',
+            title: $i18n.t('table_label.itemNo01'), // SPU编码
           },
           {
             key: 'spuEname',
-            title: 'SPU名称',
+            title: $i18n.t("table_label.itemNo02"), // SPU名称
           },
           {
             key: 'skuEname',
-            title: 'SKU名称',
+            title: $i18n.t('form_label.skuName'), // SKU名称
           },
           {
             key: 'brandEname',
