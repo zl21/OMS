@@ -80,7 +80,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '执行动作',
+          label: $i18n.t("panel_label.ae"), // 执行动作
           value: 'PROPERTY'
         },
         {

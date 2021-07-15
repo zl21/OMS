@@ -15,7 +15,8 @@
     <div class="public-content customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
-          基本信息
+          <!-- 基本信息 -->
+          {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
             <businessForm
               :key="forceReload"

@@ -6,7 +6,8 @@
     <div class="public-content customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
-          基本信息
+          <!-- 基本信息 -->
+          {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
             <businessForm :form-config="formConfig1" />
           </p>
@@ -72,7 +73,8 @@
           </p>
         </Panel>
         <Panel name="panel_action">
-          执行动作
+          <!-- 执行动作 -->
+          {{ vmI18n.t("panel_label.ae") }}
           <p slot="content">
             <businessForm :form-config="formConfig3" />
           </p>

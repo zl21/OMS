@@ -14,7 +14,8 @@
     <div class="customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
-          基础资料
+          <!-- 基础资料 -->
+          {{ vmI18n.t('panel_label.basicData') }}
           <p slot="content">
             <businessForm :form-config="formConfig" />
           </p>

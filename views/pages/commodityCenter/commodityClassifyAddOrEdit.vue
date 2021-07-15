@@ -10,7 +10,8 @@
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
-          基本信息
+          <!-- 基本信息 -->
+          {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
             <businessForm :form-config="formConfig" @keyDown="keyDown" />
           </p>

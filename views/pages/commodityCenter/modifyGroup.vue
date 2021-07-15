@@ -15,7 +15,8 @@
     <div class="public-content customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
-          基础资料
+          <!-- 基础资料 -->
+          {{ vmI18n.t('panel_label.basicData') }}
           <p
             slot="content"
             style="float: left; width: 250px; margin-top: 15px"

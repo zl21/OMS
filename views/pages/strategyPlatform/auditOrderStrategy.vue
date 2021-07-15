@@ -15,7 +15,8 @@
     <div class="audit_form customized-detail-main">
       <Collapse v-model="collapseValue">
         <Panel name="1">
-          基础资料
+          <!-- 基础资料 -->
+          {{ vmI18n.t('panel_label.basicData') }}
           <p slot="content">
             <span class="baseData">
               <businessForm :form-config="formConfig" />

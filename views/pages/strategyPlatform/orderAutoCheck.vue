@@ -17,7 +17,8 @@
           >
             <Collapse v-model="collapseShow">
               <Panel name="1">
-                基础资料
+                <!-- 基础资料 -->
+                {{ vmI18n.t('panel_label.basicData') }}
                 <div
                   slot="content"
                   class="content"

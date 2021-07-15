@@ -7,14 +7,15 @@
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
-          基础资料
-          <!-- {{ $i18n.t('panel_label.basicData') }}  -->
+          <!-- 基础资料 -->
+          {{ vmI18n.t('panel_label.basicData') }}
           <div slot="content" class="customized_Info_form">
             <businessForm :form-config="formConfig1" />
           </div>
         </Panel>
         <Panel name="panel_condition">
-          满足条件
+          <!-- 满足条件 -->
+          {{ vmI18n.t('form_label.meet_conditions') }}
           <p slot="content">
             <businessForm :form-config="formConfig2">
               <template #exchangeDesc="{ rowData }">

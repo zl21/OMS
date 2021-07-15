@@ -75,14 +75,14 @@ export default {
           {
             colname: 'ECODE',
             width: '6',
-            label: '方案ID',
+            label: $i18n.t('form_label.bc'), // 策略ID
             style: null,
             regx: /^(\s*|[A-Za-z0-9]+)$/,
           },
           {
             colname: 'ENAME',
             width: '6',
-            label: '方案名称', // Y
+            label: $i18n.t('form_label.bd'), // 策略名称
             style: 'input',
             inputChange: () => {
               this.masterModifyData('ENAME', 'formConfig1')
@@ -107,7 +107,7 @@ export default {
           {
             style: 'date',
             type: 'datetime',
-            label: '生效开始时间',
+            label: $i18n.t('form_label.be'), // 生效开始时间
             colname: 'VALID_BEGIN_TIME',
             value: '',
             width: '6',
@@ -503,7 +503,7 @@ export default {
       const self = this;
       // 校验必选
       let requriredArr = ['ENAME', 'VALID_BEGIN_TIME', 'VALID_END_TIME', 'PS_C_PRO_ID', 'ORDER_FROM_TAB'];//必须选项
-      let labelArr = ['方案名称', '生效开始时间', '生效结束时间', '店铺名称', '订单标签']
+      let labelArr = ['策略名称', '生效开始时间', '生效结束时间', '店铺名称', '订单标签']
       let formConfig2 = this.formConfig2.formValue;
       if (formConfig2.IS_DATE_TYPE) {
         requriredArr.push('DAY_TYPE');

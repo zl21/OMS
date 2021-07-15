@@ -37,6 +37,8 @@ class InitAppConfig {
     Vue.prototype.$omsUtils = commonUtils;
     Vue.prototype.$lodash = lodash;
     Vue.prototype.service = service;
+    Vue.prototype.vmI18n = i18n;
+
 
     // 路由守卫 去掉部分定制界面onresize方法
     R3.router.afterEach(to => {

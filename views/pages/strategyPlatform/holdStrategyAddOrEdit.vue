@@ -14,7 +14,8 @@
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
-          基础资料
+          <!-- 基础资料 -->
+          {{ vmI18n.t('panel_label.basicData') }}
           <div slot="content" class="customized_Info_form">
             <businessForm :form-config="formConfig1" @keyDown="keyDown"> </businessForm>
           </div>
@@ -57,7 +58,8 @@
           </p>
         </Panel>
         <Panel name="panel_action">
-          执行动作
+          <!-- 执行动作 -->
+          {{ vmI18n.t("panel_label.ae") }}
           <p slot="content">
             <businessForm :form-config="formConfig3" @keyDown="keyDown">
               <template #spec03="{ rowData }">
