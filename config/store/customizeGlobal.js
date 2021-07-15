@@ -327,6 +327,7 @@ export const globalStore = {
      /* --------- oms --------- */
     //订单中心
     returnAmount(state, n){
+      console.log(state.returnAmount,n);
       let ks = Object.keys(state.returnAmount);
       ks.forEach((k) => n[k] && (state.returnAmount[k] = n[k]));
     },

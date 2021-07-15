@@ -1121,7 +1121,6 @@ class commonUtils {
    *  @param {Number\String}
    */
   static floatNumber(num) {
-    console.log('11:',num);
     num = typeof num === 'number' ? num.toString() : num;
     if (num.includes('.')) {
       let b = num.split('.')
@@ -1138,7 +1137,6 @@ class commonUtils {
     } else {
       num += '.00'
     }
-    console.log('22:',num);
     return num
   }
   /**

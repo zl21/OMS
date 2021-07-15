@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-14 18:57:01
+ * @LastEditTime: 2021-07-15 10:41:29
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -304,18 +304,22 @@ export default {
     this.getReplaceData(this.$route.params.itemId);
   },
   async activated() {
+    this.panelReturn = ["tapComponent.returnGoodsDetails",'tapComponent.returnDetails'].includes(this.$parent.$parent.panelInstance);
+    console.log('this.panel',this.panelReturn);
+    // this.panel = this.$parent.$parent.panelInstance;
     //编辑页面 换货/退货逻辑
     if (this.$route.params.customizedModuleId !== "New") {
+      console.log();
       this.getBtn().then((res) => {
         let BtnConfig = this.businessActionTable.businessButtonConfig.buttons;
         // 换货明细
-        console.log(this.$parent.$parent);
-        if (this.$parent.$parent.panelRef === $i18n.t('form_label.exchangeDetails')) {
+        console.log(this.$parent.$parent.panelInstance);
+        if (this.$parent.$parent.panelInstance === "tapComponent.changeGoodsDetails") {
           BtnConfig[0].isShow = false;
           BtnConfig[1].isShow = true;
           BtnConfig[2].isShow = false;
-          // 平台
-          if (this.$route.query.RETURN_SOURCE == $i18n.t('other.platForm')) {
+          // 平台 $i18n.t('other.platForm')
+          if (this.$route.query.RETURN_SOURCE == '平台') {
             BtnConfig[1].isShow = false;
           }
           this.businessActionTable.columns = this.tableHead.huan;
@@ -328,9 +332,10 @@ export default {
           }
           this.businessActionTable.data = this.toMainData.huan;
           // 退货明细
-        } else if (this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails')) {
-          // 平台
-          if (this.$route.query.RETURN_SOURCE == $i18n.t('other.platForm')) {
+        } else if (this.panelReturn) {
+           console.log('退货明细');
+          // 平台 $i18n.t('other.platForm')
+          if (this.$route.query.RETURN_SOURCE == '平台') {
             BtnConfig[0].isShow = false;
             BtnConfig[1].isShow = false;
             BtnConfig[2].isShow = false;
@@ -338,8 +343,8 @@ export default {
           BtnConfig[1].isShow = false;
           this.businessActionTable.columns = this.tableHead.tui;
           this.renderColumn = this.tableHead.tui;
-           //手工新增
-          if(this.$route.query.RETURN_SOURCE !== $i18n.t('btn.addManually')){
+           //手工新增 $i18n.t('btn.addManually')
+          if(this.$route.query.RETURN_SOURCE !== '手工新增'){
              this.renderHandle([[ "QTY_EXCHANGE"]]); //render方法
           }else{
              this.renderHandle([["REFUND_ID", "QTY_EXCHANGE"]]); //render方法
@@ -426,9 +431,9 @@ export default {
       // 获取状态
       this.orderStatus = OC_B_RETURN_ORDER.RETURN_STATUS;
       // 退货明细
-      this.businessActionTable.columns = this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails') ? REFUND_ITEM_TABTH : EXCHANGE_ITEM_TABTH; //表头
+      this.businessActionTable.columns = this.panelReturn ? REFUND_ITEM_TABTH : EXCHANGE_ITEM_TABTH; //表头
       // 退货明细
-      this.renderColumn = this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails') ? REFUND_ITEM_TABTH : EXCHANGE_ITEM_TABTH; // render
+      this.renderColumn = this.panelReturn ? REFUND_ITEM_TABTH : EXCHANGE_ITEM_TABTH; // render
       // 退款金额
       let returnAmount = {
         PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(
@@ -446,9 +451,7 @@ export default {
         EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(
           Number(OC_B_RETURN_ORDER.EXCHANGE_AMT)
         ), //换货金额
-        FINAL_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(
-          Number(OC_B_RETURN_ORDER.FINAL_ACTUAL_AMT)
-        ), //最终应退总金额
+        FINAL_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(OC_B_RETURN_ORDER.FINAL_ACTUAL_AMT), //最终应退总金额
         FINAL_REAL_AMT: this.$OMS2.omsUtils.floatNumber(
           Number(OC_B_RETURN_ORDER.FINAL_REAL_AMT)
         ), //最终实退总金额
@@ -461,9 +464,9 @@ export default {
       if (code === 0) {
         // 初始赋值
         // 退货明细
-        let renderArr = this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails') ? ["REFUND_ID", "QTY_REFUND"] : ["QTY_EXCHANGE", "PRICE_ACTUAL"]; // render
-        // 手工新增
-        if (this.$route.query.RETURN_SOURCE !== $i18n.t('btn.addManually')) {
+        let renderArr = this.panelReturn ? ["REFUND_ID", "QTY_REFUND"] : ["QTY_EXCHANGE", "PRICE_ACTUAL"]; // render
+        // 手工新增 $i18n.t('btn.addManually')
+        if (this.$route.query.RETURN_SOURCE !== '手工新增') {
           renderArr = [];
         }
         this.renderHandle(renderArr);
@@ -487,7 +490,7 @@ export default {
       // 换货明细
       let huan = await $omsUtils.getTableData(this,{...params,SUB_TABLE:'OC_B_RETURN_ORDER_EXCHANGE_ITEM'})
       // 退货明细
-      this.businessActionTable.data = this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails') ? tui.SUB_ITEM : huan.SUB_ITEM; // 数据
+      this.businessActionTable.data =this.panelReturn ? tui.SUB_ITEM : huan.SUB_ITEM; // 数据
       
       this.toMainData.tui = tui.SUB_ITEM;
       this.toMainData.huan = huan.SUB_ITEM;
@@ -744,9 +747,9 @@ export default {
       let qty = 0;
       let PRICE_ACTUAL = 0;
       // 退货明细
-      const key1 = this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails') ? "QTY_REFUND" : "QTY_EXCHANGE"; // 申请退货数量 : 换货数量
-      const key2 = this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails') ? "REFUND_FEE" : "AMT_EXCHANGE"; // 退货金额 : 成交金额
-      const key3 = this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails') ? "PRO_ACTUAL_AMT" : "AMT_EXCHANGE"; // 商品应退金额 : 换货金额
+      const key1 = this.panelReturn ? "QTY_REFUND" : "QTY_EXCHANGE"; // 申请退货数量 : 换货数量
+      const key2 = this.panelReturn ? "REFUND_FEE" : "AMT_EXCHANGE"; // 退货金额 : 成交金额
+      const key3 = this.panelReturn ? "PRO_ACTUAL_AMT" : "AMT_EXCHANGE"; // 商品应退金额 : 换货金额
       self.businessActionTable.totalData = [];
       if (!self.businessActionTable.data) return;
       self.businessActionTable.data.forEach((item) => {
@@ -756,9 +759,9 @@ export default {
       });
       setTimeout(() => {
         // 退货明细
-        if (this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails') ) {
+        if (this.panelReturn ) {
           self.businessActionTable.totalData.push({
-            index: `${$i18n.t("other.total")}:`, // 合计
+            index: `${$i18n.t("other.total")}`, // 合计
             REFUND_FEE: this.$OMS2.omsUtils.floatNumber(amt, 2),
             QTY_REFUND: qty,
             PRICE_ACTUAL: PRICE_ACTUAL // 成交单价
@@ -785,25 +788,25 @@ export default {
               `customize/returnAmount`,
               JSON.parse(
                 JSON.stringify({
-                  EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2),
-                  FINAL_ACTUAL_AMT: String(FINAL_ACTUAL_AMT),
-                  FINAL_REAL_AMT: String(FINAL_ACTUAL_AMT),
+                  EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt),
+                  FINAL_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(FINAL_ACTUAL_AMT),
+                  FINAL_REAL_AMT: this.$OMS2.omsUtils.floatNumber(FINAL_ACTUAL_AMT),
                 })
               )
           );
         } else {
           R3.store.commit(`customize/returnAmount`, {
-            PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2),
-            PRO_REAL_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2),
-            EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2)
+            PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(amt),
+            PRO_REAL_AMT: this.$OMS2.omsUtils.floatNumber(amt),
+            EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt)
           });
           FINAL_ACTUAL_AMT =
             Number(returnAmount.PRO_REAL_AMT) +
             Number(returnAmount.SHIP_AMT) +
             Number(returnAmount.ADJUST_AMT);
           R3.store.commit(`customize/returnAmount`, {
-            FINAL_ACTUAL_AMT: String(FINAL_ACTUAL_AMT),
-            FINAL_REAL_AMT: String(FINAL_ACTUAL_AMT),
+            FINAL_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(FINAL_ACTUAL_AMT),
+            FINAL_REAL_AMT: this.$OMS2.omsUtils.floatNumber(FINAL_ACTUAL_AMT),
           });
         }
       }, 10);
