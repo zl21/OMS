@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-07-14 16:25:29
+ * @LastEditTime: 2021-07-15 10:18:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
@@ -142,7 +142,8 @@ export default {
         let person = this.tebdata
 
         if (person.length == 0) {
-          this.$Message.warning("未做任何修改！")
+          this.$Message.warning($i18n.t('modalTips.jt'))
+            //"未做任何修改！")
           return
         }
         let REFUND_IN_ITEM_LIST = []
@@ -181,11 +182,11 @@ export default {
                     props: {
                       columns: [
                         {
-                          title: "失败明细", // '提示信息',
+                          title: $i18n.t('modalTips.jn'),  //"失败明细", // '提示信息',
                           key: 'key',
                         },
                         {
-                          title: '失败信息！', // '错误信息',
+                          title: $i18n.t('modalTips.jv'),  //'失败信息！', // '错误信息',
                           key: 'message',
                         }
                       ],
@@ -238,7 +239,7 @@ export default {
         if (v.OC_B_RETURN_ORDER_BILL_NO && !v._checked) {
           errArr.push({
             id: v.ID,
-            message: $i18n.t('gs')//"已匹配退货单号，不允许清除！"
+            message: $i18n.t('modalTips.gs')//"已匹配退货单号，不允许清除！"
           })
           continue
         } else {
@@ -269,7 +270,7 @@ export default {
       //
 
       if (this.tebdata.length == 0) {
-        this.$Message.warning($i18n.t('modalTips.a1'))
+        this.$Message.warning($i18n.t('modalTips.gr'))
         //'请选中一条数据！');
         return
       }
@@ -357,7 +358,8 @@ export default {
                   errArr.push({
                     index: item.index,
                     code: item.PS_C_SKU_ECODE,
-                    message: "条码一致，请走手工匹配！"
+                    message: $i18n.t('modalTips.hs')
+                    //"条码一致，请走手工匹配！"
                   })
                 }
               } else {
@@ -376,7 +378,7 @@ export default {
                   errArr.push({
                     index: item.index,
                     code: item.PS_C_SKU_ECODE,
-                    message: $i18n.t('gu')
+                    message: $i18n.t('modalTips.gu')
                     //"没有匹配到退货单明细"
                   })
                 }
@@ -397,35 +399,35 @@ export default {
     },
     fnerrtab(data, type) {
       let columns = []
-      let title = $i18n.t('a7')//"提示框"
+      let title = $i18n.t('modalTitle.a7')//"提示框"
       if (type == 1) { //1表示手工和强制的错误信息 2表示清楚的错误信息
         columns = [
           {
-            title: $i18n.t('gx'),//"失败序号", // '提示信息',
+            title: $i18n.t('modalTips.gx'),//"失败序号", // '提示信息',
             key: 'index',
           },
           {
-            title: $i18n.t('gy'),//"失败SKU", // '错误信息',
+            title: $i18n.t('modalTips.gy'),//"失败SKU", // '错误信息',
             key: 'code',
           },
           {
-            title: $i18n.t('gw'),// "失败原因！", // '错误信息',
+            title: $i18n.t('modalTips.gw'),// "失败原因！", // '错误信息',
             key: 'message',
           }
         ]
-        title = $i18n.t('a9')//"匹配失败提示框"
+        title = $i18n.t('modalTitle.a9')//"匹配失败提示框"
       } else {
         columns = [
           {
-            title: $i18n.t('gx'),//"失败序号", // '提示信息',
+            title: $i18n.t('modalTips.gx'),//"失败序号", // '提示信息',
             key: 'index',
           },
           {
-            title: $i18n.t('gw'),//"失败原因！", // '错误信息',
+            title: $i18n.t('modalTips.gw'),//"失败原因！", // '错误信息',
             key: 'message',
           }
         ]
-        title = $i18n.t('aa')//"清除失败提示框"
+        title = $i18n.t('modalTitle.aa')//"清除失败提示框"
       }
 
       this.$Modal.confirm({
