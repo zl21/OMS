@@ -909,13 +909,13 @@ export default {
           this.queryLogisticsWarehousePages();
         });
       } else {
-        this.$Message.warning('请选择要删除的仓库物流公司！');
+        this.$Message.warning( $i18n.t('modalTips.ja'));
       }
     },
     //商品属性删除
     deleteSku(id) {
       if (this.isactive == 'Y') {
-        this.$Message.warning('启用状态，不可删除！');
+        this.$Message.warning($i18n.t('modalTips.jb'));
         return;
       }
       if (this.id == "-1") {
@@ -938,7 +938,7 @@ export default {
     //删除省市
     deleteAddress(id) {
       if (this.isactive == 'Y') {
-        this.$Message.warning('启用状态，不可删除！');
+        this.$Message.warning($i18n.t('modalTips.jb'));
         return;
       }
       let data = {
@@ -1146,7 +1146,7 @@ export default {
         for (let y in this.formConfig.formValue) {
           if (key == y) {
             if (!this.formConfig.formValue[key] && this.querfrom(this.formConfig.formData, key).style != null) {
-              this.$Message.warning('请填写' + this.querfrom(this.formConfig.formData, key).label + '!');
+              this.$Message.warning($i18n.t('modalTips.hg') + this.querfrom(this.formConfig.formData, key).label + '!');
               return;
             }
           }
@@ -1158,7 +1158,7 @@ export default {
         for (let y in this.formConfighead.formValue) {
           if (key == y) {
             if (!this.formConfighead.formValue[key] && this.querfrom(this.formConfighead.formData, key).style != null) {
-              this.$Message.warning('请填写' + this.querfrom(this.formConfighead.formData, key).label + '!');
+              this.$Message.warning( $i18n.t('modalTips.hg') + this.querfrom(this.formConfighead.formData, key).label + '!');
               return;
             }
           }
@@ -1166,12 +1166,12 @@ export default {
       }
 
       if (this.formConfig.formValue.billType.length == 0) {
-        this.$Message.warning('请选择单据类型!');
+        this.$Message.warning( $i18n.t('modalTips.jc'));
         return;
       }
 
       if (!this.formConfig.formValue.Time[0]) {
-        this.$Message.warning('请填写时间范围!');
+        this.$Message.warning($i18n.t('modalTips.jd'));
         return;
       }
       
@@ -1180,11 +1180,11 @@ export default {
       for (let v of listdata) {
         if (v.val) {
           if (!v.value || !v.value2) {
-            this.$Message.warning('请填写您选中的开始值和结束值!');
+            this.$Message.warning($i18n.t('modalTips.je'));
             return;
           }
           if (v.value2 < v.value) {
-            this.$Message.warning('结束值需大于等于开始值!');
+            this.$Message.warning( $i18n.t('modalTips.jf'));
             return;
           }
         }
@@ -1295,7 +1295,7 @@ export default {
               this.$store.commit('global/tabOpen', {
                 type: 'C',
                 url: `/CUSTOMIZED/${this.customizedModuleName}/${res.data.data.objId}`,
-                label: "特殊物流方案新增",
+                label:$i18n.t('panel_label.an'), //"特殊物流方案新增",
                 customizedModuleName: this.customizedModuleName,
                 customizedModuleId: res.data.data.objId
               })
@@ -1312,7 +1312,7 @@ export default {
       //添加仓库物流
       for (const key in this.WarehouseItemListobj) {
         if (this.WarehouseItemListobj[key] == '') {
-          this.$Message.warning('请选择要添加仓库物流！');
+          this.$Message.warning($i18n.t('modalTips.jg'));
           return;
         }
       }
@@ -1384,7 +1384,7 @@ export default {
         }
         this.modal3 = false;
       } else {
-        this.$Message.warning('请选择需要添加的数据');
+        this.$Message.warning($i18n.t('modalTips.jh') );
       }
 
 
@@ -1442,7 +1442,7 @@ export default {
     },
     fntable() {
       if (this.isactive == 'Y') {
-        this.$Message.warning('启用状态，不可编辑！');
+        this.$Message.warning($i18n.t('modalTips.ji'));
         return;
       }
       this.modal3 = true;
@@ -1463,7 +1463,8 @@ export default {
     },
     fnselect() {
       if (this.isactive == 'Y') {
-        this.$Message.warning('启用状态，不可编辑！');
+        this.$Message.warning( $i18n.t('modalTips.ji'))
+          //'启用状态，不可编辑！');
         return;
       }
       this.specialAssignLogisticsAddressItemList = []

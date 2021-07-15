@@ -26,7 +26,7 @@ export default {
       id: '',
       defaultColumn: 2,
       startindex: 0, //分页
-      modalTitle: '添加排除区域', // 弹出窗标题！
+      modalTitle: $i18n.t('form_label.za'), //'添加排除区域', // 弹出窗标题！
       modal1: false, // 弹窗开关
       btnSave:$i18n.t('btn.save'),
       btnBack: $i18n.t('btn.back'),
@@ -515,7 +515,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '基本信息',
+          label:  $i18n.t('common.baseInformation'),//'基本信息',
           value: 'jiben'
         },
         {
@@ -555,7 +555,7 @@ export default {
       this.id = '-1';
       this.tableshow = true;
       this.labelList = [{
-        label: '基本信息',
+        label: $i18n.t('common.baseInformation'),//'基本信息',
         value: 'jiben'
       },]
     } else {

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-15 14:21:18
+ * @LastEditTime: 2021-07-15 14:37:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -9,6 +9,7 @@
 <template>
   <div class="NaVertical">
     <div class="NaVertical-icons">
+ 
       <!-- 收拉左侧菜单 -->
       <slot name="icon-tag"></slot>
     </div>

@@ -17,6 +17,9 @@ export default {
   // 矩阵
   queryCommonStorageByPro: (params) =>
     $network.post("/p/cs/sg/storage/queryCommonStorageByPro", params),
+  //调用御城河日志接口
+  loginLog: (params, serviceId = { serviceId: "r3-ipcs" }) => $network.post("/ip/v1/yuchenghe/loginLog", params, serviceId),
+
 
   // 详情页数据查询接口。共用于：inventoryCenter、orderCenter
   getObject: (params) => $network.post("/p/cs/getObject", params),

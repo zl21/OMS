@@ -5,7 +5,7 @@
       <Dropdown>
         <a href="javascript:void(0)">
           <!-- 中/En -->
-          {{curLang}}
+          {{ curLang }}
           <Icon type="ios-arrow-down"></Icon>
         </a>
         <DropdownMenu slot="list">
@@ -18,7 +18,7 @@
           >
         </DropdownMenu>
       </Dropdown>
-    </div> 
+    </div>
     <div ref="container" class="container">
       <div class="login-content">
         <!-- logo -->
@@ -26,7 +26,7 @@
           <img src="../assets/img/form-logo.png" />
         </div>
         <!-- 欢迎登录 -->
-        <div class="title">{{vmI18n.t("welcome")}}</div>
+        <div class="title">{{ vmI18n.t("welcome") }}</div>
         <!-- form -->
         <div class="form-input">
           <label>
@@ -59,7 +59,7 @@
         <!-- button -->
         <div id="btn" class="btn" @click="login">
           <!-- 登录 -->
-          {{vmI18n.t("login")}}
+          {{ vmI18n.t("login") }}
           <img src="../assets/img/arrow-right.png" />
         </div>
         <!-- <p class="fargetPws">
@@ -112,7 +112,7 @@ export default {
   methods: {
     toggleLang(lang) {
       const _this = this;
-      let message = ['zh','en'].includes(lang) ? _this.vmI18n.messages[lang].tip_info : lang;
+      let message = ['zh', 'en'].includes(lang) ? _this.vmI18n.messages[lang].tip_info : lang;
       switch (message) {
         case 'ja':
           message = "暂无日语语言包，敬请期待！(已默认使用中文)"
@@ -120,7 +120,7 @@ export default {
         default:
           break;
       }
-      if (!['zh','en'].includes(lang)) {
+      if (!['zh', 'en'].includes(lang)) {
         lang = 'zh'
       }
       localStorage.setItem('locale', lang);
@@ -128,7 +128,7 @@ export default {
       _this.vmI18n.locale = lang;
       this.curLang = langConfig.find(it => it.type == lang).text;
       R3.store.commit(`customize/language`, lang || 'zh');
-      
+
       this.$message({
         // message: _this.vmI18n.messages[lang].tip_info,
         message,
@@ -155,6 +155,9 @@ export default {
         this.$refs.password.value !== ""
       ) {
 
+
+
+
         service.common.getCaptcha().then((res) => {
           let params = {
             username: this.$refs.username.value,
@@ -165,7 +168,25 @@ export default {
           }
           service.common.globalLogin(R3.urlSearchParams(params)).then((r) => {
             if (r.status === 200 && r.data.code === 0) {
+              let obj = {
+                TID: this.$refs.username.value,
+                LOGIN_RESULT: "success",
+                LOGIN_MESSAGE: "success"
+              }
+              service.common.loginLog(obj).then(res=>{
+                console.log(res);
+              })
+
               window.location.href = window.location.origin;
+            }else{
+               let obj = {
+                TID: this.$refs.username.value,
+                LOGIN_RESULT: "fail",
+                LOGIN_MESSAGE: r.data.message
+              }
+              service.common.loginLog(obj).then(res=>{
+                console.log(res);
+              })
             }
           })
         });
@@ -176,7 +197,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@burgeon/oms-theme/skin/public.less';
+@import "~@burgeon/oms-theme/skin/public.less";
 .loginBG {
   background: url(../assets/img/login-bg.jpg) no-repeat;
   background-size: cover;

@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       baseInformation:$i18n.t('other.basic_info'),
-      placeholder: '省市搜索',//省市搜索
+      placeholder: $i18n.t('form_label.bb'),// '省市搜索',//省市搜索
       loading: false,
       pageShow: false,
       seachVal: '',
@@ -69,14 +69,16 @@ export default {
           },
 
           {
-            text: '下一步',
+            text: $i18n.t('btn.next'),//'下一步',
+            webname:"next",
             isShow: false,
             btnclick: () => {
               this.fnSave(2);
             }
           },
           {
-            text: '上一步',
+            text: $i18n.t('btn.previous'),//'上一步',
+            webname:"previous",
             isShow: false,
             btnclick: () => {
               this.lastStep();
@@ -338,7 +340,7 @@ export default {
       },
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: '分仓策略-导入',
+        confirmTitle: $i18n.t('modalTitle.ab'),//'分仓策略-导入',
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -444,7 +446,7 @@ export default {
         // 表示分仓策略》分仓规则
         if (customizedModuleId == 'New' || customizedModuleId == '-1' || customizedModuleId == 'NEW') {
           this.btnConfig.buttons.forEach(em => {
-            if (em.text == '下一步') {
+            if (em.webname == 'next') {
               em.isShow = true;
             }
           });
@@ -466,7 +468,7 @@ export default {
           }
         } else if (query.saveType && query.saveType == 2) {
           const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-          const data = { label: '分仓规则编辑', name: keepAliveModuleName }; //当前界面模块名称 
+          const data = { label: $i18n.t('panel_label.a6'), name: keepAliveModuleName }; //当前界面模块名称 
 
           this.fninit(this.id);
 
@@ -476,10 +478,10 @@ export default {
          
           this.pageShow = true;
           this.btnConfig.buttons.forEach(em => {
-            if (em.text == '启用' || em.text == '停用' || em.text == '上一步') {
+            if (em.webname == 'previous') {
               em.isShow = true;
             }
-            if (em.text == '下一步') {
+            if (em.webname == 'next') {
               em.isShow = false;
             }
           });
@@ -519,7 +521,7 @@ export default {
           // 表示新增
           this.formConfig.formValue.priority = '9'
           this.btnConfig.buttons.forEach(em => {
-            if (em.text == '下一步') {
+            if (em.webname == 'next') {
               em.isShow = true;
             }
           });
@@ -552,10 +554,10 @@ export default {
          
           this.pageShow = true;
           this.btnConfig.buttons.forEach(em => {
-            if (em.text == '上一步') {
+            if (em.webname == 'previous') {
               em.isShow = true;
             }
-            if (em.text == '下一步') {
+            if (em.webname == 'next') {
               em.isShow = false;
             }
           });
@@ -690,7 +692,7 @@ export default {
     fntableData(id) {
 
       if (this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS') {
-        this.placeholder = "省市搜索"
+        this.placeholder = $i18n.t('form_label.bb') //"省市搜索"
         service.strategyPlatform
           .assignLogisticsqueryDetailById({
             ID: this.$route.query.copy || id,
@@ -720,7 +722,7 @@ export default {
       }
 
       if (this.formConfig.formValue.type == 171897) {  //调用唯品会查询接口
-        this.placeholder = "请输入唯品会仓库名称"
+        this.placeholder =  $i18n.t('modalTips.hi') //"请输入唯品会仓库名称"
         service.strategyPlatform
           .getWarehouseVipInfo({
             params: {
@@ -902,7 +904,7 @@ export default {
         for (const item in this.formConfig.ruleValidate) {
           if (em == item && this.qurefrom(em)[0].style != null) {
             if (this.formConfig.formValue[em] == '') {
-              this.$Message.error('请填写' + this.qurefrom(em)[0].label + '!');
+              this.$Message.error( $i18n.t('modalTips.hg') + this.qurefrom(em)[0].label + '!');
               return;
             }
           }
@@ -916,7 +918,7 @@ export default {
 
       if (this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS') {
         if (this.qurefrom('cpCPhyWarehouseEname')[0].itemdata.valuedata == '') {
-          this.$Message.error('请填写' + this.qurefrom('cpCPhyWarehouseEname')[0].itemdata.name + '!');
+          this.$Message.error( $i18n.t('modalTips.hg') + this.qurefrom('cpCPhyWarehouseEname')[0].itemdata.name + '!');
           return;
         }
 
@@ -978,7 +980,7 @@ export default {
         return;
       }
       if (this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.valuedata == '') {
-        this.$Message.error('请填写' + this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.name + '!');
+        this.$Message.error( $i18n.t('modalTips.hg') + this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.name + '!');
         return;
       }
 
