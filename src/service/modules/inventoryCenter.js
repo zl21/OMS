@@ -13,4 +13,7 @@ export default {
     getChannelStorageBufferQuery: params => network.post('/p/cs/getChannelStorageBufferQuery', params),
     // 平台店铺库存变动流水
     getChannelStorageFtpQuery: params => network.post('/p/cs/getChannelStorageFtpQuery', params), // 获取列表数据
+    // 仓间调拨-审核
+    transferAudit: params => network.post('/p/cs/transfer/audit', params),
+
 };
