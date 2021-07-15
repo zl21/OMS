@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-15 13:52:11
+ * @LastEditTime: 2021-07-15 14:21:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -44,19 +44,27 @@ export default {
   mounted() {
     // 模拟点击，展示搜索框
     document.getElementsByClassName("buttonIcon")[0].click();
- this.$nextTick(() => {
+ 
+    this.$nextTick(() => {
       if (localStorage.getItem("locale") != "zh") {
       let dom = document.getElementsByClassName("ark-input-default")
       dom[0].placeholder = "please enter the system function to search"
 
       let dom1 = document.getElementsByClassName("set-panel")[0].getElementsByClassName("panel-item")
-      dom1[0].getElementsByTagName("p")[0].innerText = " Welcome：Admin"    //欢迎: 系统管理员
-      dom1[1].getElementsByTagName("p")[0].innerText = " change password"  //修改密码    
-      dom1[2].getElementsByTagName("p")[0].innerText = " Collapse search conditions"   //折叠查询条件
+
+      dom1[0].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-contact explanatory"></i> Welcome：Admin` 
+        //欢迎: 系统管理员
+      dom1[1].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-key explanatory"></i> change password`  //修改密码    
+      dom1[2].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-apps explanatory"></i> Collapse search conditions <span tabindex="0" class="switch ark-switch ark-switch-checked ark-switch-default"><input type="hidden" value="true"> <span class="ark-switch-inner"> <!----></span></span>`
+        //折叠查询条件
       setTimeout(() => {
-        dom1[3].getElementsByTagName("p")[0].innerText = " earch conditions default displayed rows"  //查询条件默认显示行数
+        dom1[3].getElementsByTagName("p")[0].innerHTML =`<i class="iconfont iconmd-list explanatory"></i>
+        earch conditions default displayed rows
+        <div class="set-panel-number ark-input-number ark-input-number-default"><div class="ark-input-number-handler-wrap"><a class="ark-input-number-handler ark-input-number-handler-up"><span class="ark-input-number-handler-up-inner ark-icon iconios-arrow-up"></span></a> <a class="ark-input-number-handler ark-input-number-handler-down"><span class="ark-input-number-handler-down-inner ark-icon iconios-arrow-down"></span></a></div> <div class="ark-input-number-input-wrap"><input autocomplete="off" spellcheck="false" placeholder="" class="ark-input-number-input"></div></div>`
+         //查询条件默认显示行数
       }, 500)
-      dom1[3].getElementsByTagName("p")[0].innerText = " Exit"           //退出 
+      dom1[3].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-exit explanatory"></i>
+      Exit`          //退出 
       }
 
 
@@ -105,7 +113,7 @@ export default {
 }
 .history {
   .ark-select-dropdown::before {
-    #bundle > .absolute(@top:-15px,@left:53px);
+    #bundle > .absolute(@top:-15px,@left:45px);
   }
 }
 // 消息
@@ -114,10 +122,10 @@ export default {
     width: 420px;
     // border-left: 70px solid rgba(0,0,0,.5);
     .panel-title {
-      padding: 0 @base-mr !important;
-      height: 48px !important;
+      padding: 0 @base-mr;
+      height: 48px;
       line-height: 47px;
-      border-bottom: 1px solid #f2f2f2 !important;
+      border-bottom: 1px solid #f2f2f2;
       &::before {
         display: inline-block;
         content: "";
@@ -162,10 +170,6 @@ export default {
             content: "";
           }
         }
-      }
-      .ark-switch-checked{
-        border: 1px solid @base-color !important;
-        background-color: @base-color !important;
       }
     }
   }
