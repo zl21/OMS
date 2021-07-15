@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-15 13:31:02
+ * @LastEditTime: 2021-07-15 13:52:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -105,7 +105,7 @@ export default {
 }
 .history {
   .ark-select-dropdown::before {
-    #bundle > .absolute(@top:-15px,@left:45px);
+    #bundle > .absolute(@top:-15px,@left:53px);
   }
 }
 // 消息
@@ -114,10 +114,10 @@ export default {
     width: 420px;
     // border-left: 70px solid rgba(0,0,0,.5);
     .panel-title {
-      padding: 0 @base-mr;
-      height: 48px;
+      padding: 0 @base-mr !important;
+      height: 48px !important;
       line-height: 47px;
-      border-bottom: 1px solid #f2f2f2;
+      border-bottom: 1px solid #f2f2f2 !important;
       &::before {
         display: inline-block;
         content: "";
@@ -162,6 +162,10 @@ export default {
             content: "";
           }
         }
+      }
+      .ark-switch-checked{
+        border: 1px solid @base-color !important;
+        background-color: @base-color !important;
       }
     }
   }
