@@ -32,6 +32,8 @@
   </div>
 </template>
 <script>
+import service from '@/service/index';
+
 export default {
   name: "NaVerticalslot",
   data() {
@@ -40,7 +42,12 @@ export default {
     }
   },
   created() {
-
+    let param = { language: localStorage.getItem("locale") || 'zh'};
+    /* service.common.langSwitcher(param).then((r) => {
+      if (r.status === 200 && r.data.code === 0) {
+        console.log('langSwitcher success!');
+      }
+    }) */
   },
   mounted() {
     // 模拟点击，展示搜索框
@@ -67,11 +74,9 @@ export default {
       dom1[3].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-exit explanatory"></i>
       Exit`          //退出 
       }
-
-
     })
-
-  }
+  },
+  methods() { },
 };
 </script>
 <style lang="less">
