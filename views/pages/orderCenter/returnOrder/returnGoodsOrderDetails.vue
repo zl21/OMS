@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-15 13:21:03
+ * @LastEditTime: 2021-07-15 14:36:02
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -476,30 +476,34 @@ export default {
         // 表头存起来
         this.tableHead.tui = REFUND_ITEM_TABTH;
         this.tableHead.huan = EXCHANGE_ITEM_TABTH;
-        this.toMainData.tui = OC_B_RETURN_ORDER_REFUND_ITEMS
-        this.toMainData.huan = OC_B_RETURN_ORDER_EXCHANGE_ITEMS
-        this.totalNum();
+        // this.toMainData.tui = OC_B_RETURN_ORDER_REFUND_ITEMS
+        // this.toMainData.huan = OC_B_RETURN_ORDER_EXCHANGE_ITEMS
+        // this.totalNum();
         // 处理数据 -- 退换货明细
         // PT_SKU true平台 false商品
-        // this.getDetailsData(true);
+        this.getDetailsData(true);
       }
       this.loading = false;
     },
     // 获取明细详情数据
     async getDetailsData(PT_SKU){
-      let params = {
-        ID:this.$route.params.itemId,
-        TABLE:'OC_B_RETURN_ORDER',
-        PT_SKU: PT_SKU, //true平台 false商品
-      }
-      let tui = await $omsUtils.getTableData(this,{...params,SUB_TABLE:'OC_B_RETURN_ORDER_REFUND_ITEM'})
-      // 换货明细
-      let huan = await $omsUtils.getTableData(this,{...params,SUB_TABLE:'OC_B_RETURN_ORDER_EXCHANGE_ITEM'})
-      // 退货明细
-      this.businessActionTable.data =this.panelReturn ? tui.SUB_ITEM : huan.SUB_ITEM; // 数据
-      
-      this.toMainData.tui = tui.SUB_ITEM;
-      this.toMainData.huan = huan.SUB_ITEM;
+      const {
+        data: {
+          code,
+          data,
+          data: {
+            OC_B_RETURN_ORDER_EXCHANGE_ITEMS,
+            OC_B_RETURN_ORDER_REFUND_ITEMS
+          },
+          message,
+        },
+      } = await this.service.orderCenter.getALlOrderReturnAndItemInfo({
+        ID: this.$route.params.itemId,
+        PT_SKU
+      });
+      this.businessActionTable.data = this.panelReturn ? OC_B_RETURN_ORDER_REFUND_ITEMS : OC_B_RETURN_ORDER_EXCHANGE_ITEMS; // 数据
+      this.toMainData.tui = OC_B_RETURN_ORDER_REFUND_ITEMS;
+      this.toMainData.huan = OC_B_RETURN_ORDER_EXCHANGE_ITEMS;
       R3.store.commit(
         "customize/returnOrderChangeItem",
         JSON.parse(JSON.stringify(this.toMainData))
@@ -522,6 +526,7 @@ export default {
         range: pageSize,
         fixedcolumns: fixedcolumns,
         column_include_uicontroller: true,
+        ISACTIVE:"Y",
         isolr: false,
       };
       let formData = new FormData();
