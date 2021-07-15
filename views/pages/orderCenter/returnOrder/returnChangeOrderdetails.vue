@@ -824,6 +824,7 @@ export default {
         return;
       }
       data.forEach((it) => {
+        // 申请退货数量(QTY_REFUND * 退货单价(AMT_REFUND_SINGLE
         it.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(
           it.QTY_REFUND * it.AMT_REFUND_SINGLE,
           2
@@ -835,9 +836,8 @@ export default {
             const sumQ = item.QTY_REFUND + it.QTY_REFUND;
             if (item.RETURNABLE_QTY > sumQ) {
               item.QTY_REFUND += it.QTY_REFUND;
-              item.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(
-                (Util.accAdd(item.REFUND_FEE, it.REFUND_FEE), 2)
-              );
+              const sum = Util.accAdd(item.REFUND_FEE, it.REFUND_FEE)
+              item.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(sum);
             } else {
               item.QTY_REFUND = it.RETURNABLE_QTY;
             }
