@@ -11,6 +11,8 @@ export default {
   tip_info: "切换成功！",
   tip_type: "success",
   welcome: '欢迎登录',
+  username: "请输入用户名！",
+  password: "请输入密码！",
   login: '登录',
   logout: "退出",
   message: {

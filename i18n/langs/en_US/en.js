@@ -11,6 +11,8 @@ export default {
   tip_info: "Switch to English !",
   tip_type: "success",
   welcome: "Welcome To R3-OMS",
+  username: "Please input Username!",
+  password: "Please input Password!",
   login: "Sign in",
   logout: "Sign out",
   message: {
