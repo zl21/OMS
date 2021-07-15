@@ -2741,7 +2741,7 @@ export default {
       }
     },
     //  获取页面数据
-    getData() {
+    getData(flag) {
       const self = this;
       const arr = [];
       this.formConfig.formData.forEach((item, index) => {
@@ -2789,7 +2789,7 @@ export default {
       }
       const highSearchData = [...this.notempty(arr), ...keyArr];
       this.highSearchData = this.notempty(highSearchData);
-      this.agTableConfig.pagenation.current = 1;
+      if (!flag) this.agTableConfig.pagenation.current = 1;
       self.selection = [];
       self.agTableConfig.agLoading = true;
       self.isActive = true;
@@ -3080,12 +3080,12 @@ export default {
     // 分页change 事件
     pageChange(val) {
       this.agTableConfig.pagenation.current = val;
-      this.getData();
+      this.getData(true);
     },
     // 切换分页条数
     pageSizeChange(val) {
       this.agTableConfig.pagenation.pageSize = val;
-      this.getData();
+      this.getData(true);
     },
     // 切换标签 执行搜索
     labelClick(item) {
