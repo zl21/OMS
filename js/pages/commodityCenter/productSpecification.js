@@ -13,19 +13,19 @@ export default {
         typeAll: 'default', // 按钮统一风格样式
         loading: false, // 按钮加载
         buttons: [{
-            text: '新增SKU',
+            text: $i18n.t('btn.newSKU'), // 新增SKU
             btnclick: () => {
 
             }
           },
           {
-            text: '快速新增',
+            text: $i18n.t('btn.fastNew'), // 快速新增
             btnclick: () => {
 
             }
           },
           {
-            text: '应用到所有列',
+            text: $i18n.t('btn.applyToAllColumn'), // 应用到所有列
             btnclick: () => {
               this.useAllColumns();
             }
@@ -41,11 +41,11 @@ export default {
           title: $i18n.t('table_label.serialNo'), // 序号
         },
         {
-          title: 'SKU编码',
+          title: $i18n.t('table_label.code_SKU'), // SKU编码
           key: 'ECODE'
         },
         {
-          title: 'SKU名称',
+          title: $i18n.t('form_label.skuName'), // SKU名称
           key: 'ENAME'
         },
         {
@@ -81,7 +81,7 @@ export default {
     },
     useAllColumns() {
       this.resData.forEach(ele => {
-        ele[this.clickColumns] = '应用到所有列';
+        ele[this.clickColumns] = $i18n.t('btn.applyToAllColumn');
       });
     },
     onSelectionChange(selection) {

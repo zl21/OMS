@@ -17,19 +17,19 @@ export default {
         isShowSelection: false,
         columns: [{
           key: 'skuEcode',
-          title: 'SKU编码',
+          title: $i18n.t('table_label.code_SKU'), // SKU编码
         },
         {
           key: 'spuEcode',
-          title: 'SPU编码',
+          title: $i18n.t('table_label.itemNo01'), // SPU编码
         },
         {
           key: 'spuEname',
-          title: 'SPU名称',
+          title: $i18n.t("table_label.itemNo02"), // SPU名称
         },
         {
           key: 'skuEname',
-          title: 'SKU名称',
+          title: $i18n.t('form_label.skuName'), // SKU名称
         },
         {
           key: 'brandEname',

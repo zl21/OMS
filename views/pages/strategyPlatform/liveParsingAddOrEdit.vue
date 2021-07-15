@@ -13,7 +13,8 @@
           </p>
         </Panel>
         <Panel name="panel_conds">
-          满足条件（满足以下条件的单据打“播”标）
+          <!-- 满足条件（满足以下条件的单据打“播”标） -->
+          {{ vmI18n.t('form_label.meet_conditions') }}（{{ vmI18n.t('modalTitle.ae') }}）
           <p slot="content">
             <businessForm :form-config="formConfig2">
               <template #timeType="{ rowData }">
@@ -54,11 +55,11 @@
                   <Input v-model="ruleItem.RULE_CONTEXT"
                     :disabled="ruleItem.RULE_TYPE == '' || isEnable"
                     :autosize="{minRows: 2,maxRows: 5}"
-                    placeholder="请输入识别内容"
+                    :placeholder="vmI18n.t('modalTips.jy')"
                     @on-change="rowData.item.inputChange(ruleItem)"
                     style="width: 250px;"
                   />
-                  <span class="condition">或</span>
+                  <span class="condition">{{ vmI18n.t('form_label.cg') }}</span>
                   <Icon
                     v-if="!isEnable"
                     :type="index == 0 ? 'md-add' : 'md-close'"

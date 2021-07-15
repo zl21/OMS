@@ -21,7 +21,8 @@
           </div>
         </Panel>
         <Panel name="panel_condition">
-          满足条件（满足以下条件的单据会进行hold单）
+          <!-- 满足条件（满足以下条件的单据会进行hold单） -->
+          {{ vmI18n.t('form_label.meet_conditions') }}（{{ vmI18n.t('modalTitle.ad') }}）
           <p slot="content">
             <businessForm :form-config="formConfig2" @keyDown="keyDown">
               <template #spec01="{ rowData }">

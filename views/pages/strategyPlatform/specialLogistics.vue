@@ -33,7 +33,7 @@
       <Collapse v-model="panelDefaultValue1">
         <Panel name="panel_baseInfo1">
           <!-- 满足条件 -->
-          {{meet_conditions}}
+          {{ vmI18n.t('form_label.meet_conditions') }}
           <div slot="content">
             <businessForm
               :form-config="formConfig"
@@ -57,7 +57,8 @@
             <switchList :switchList="switchListdata"></switchList>
 
             <div class="content-li-item">
-              <label style="width: 70px">指定商品:</label>
+              <!-- 指定商品 -->
+              <label style="width: 70px">{{ vmI18n.t('btn.designGoods')}}:</label> 
               <div class="content-li-item-left">
                 <Button type="info" @click="fnseek">添加商品</Button>
                 <div class="content-li-item-left-a">

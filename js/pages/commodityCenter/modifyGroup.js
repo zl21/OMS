@@ -58,18 +58,18 @@ export default {
               this.$Modal.fcWarning({
                 className: 'ark-dialog',
                 title: $i18n.t('modalTitle.tips'), // 提示
-                content: '该页面已经修改,是否继续返回?', // 正在打印中，请稍后。。。
+                content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
                 mask: true,
                 showCancel: true,
                 onOk: () => {
                   // comUtils.tabCloseAppoint(this);
-            // this.$destroy(true);
-            this.$store.commit('global/tabOpen', {
-              tableId: 10108,
-              type: 'S',
-              tableName: 'PS_C_PRO_GROUP',
-              back: true,
-            });
+                  // this.$destroy(true);
+                  this.$store.commit('global/tabOpen', {
+                    tableId: 10108,
+                    type: 'S',
+                    tableName: 'PS_C_PRO_GROUP',
+                    back: true,
+                  });
                 }
               });
             } else {
@@ -88,7 +88,7 @@ export default {
       formConfig: {
         formData: [{
             style: 'input',
-            label: '组合商品编码',
+            label: $i18n.t('form_label.cy'), // 组合商品编码
             value: 'ecode',
             width: '8',
             disabled: false,
@@ -98,7 +98,7 @@ export default {
           },
           {
             style: 'input',
-            label: '组合商品名称',
+            label: $i18n.t('form_label.cz'), // 组合商品名称
             value: 'ename',
             width: '16',
             disabled: false,
@@ -109,7 +109,7 @@ export default {
           {
             colname: 'TYPE',
             style: 'select', // 下拉框类型
-            label: '类型',
+            label: $i18n.t('form_label.type'), // 类型
             width: '8', // 所占宽度宽度
             value: 'type', // 输入框的值
             clearable: true,
@@ -130,13 +130,12 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '商品SPU',
               inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '品牌', // 赔付类型
+              name: $i18n.t('table_label.brand'), // 品牌
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_BRAND', // 对应的表
               reftableid: 166035, // 对应的表ID
@@ -164,13 +163,12 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '商品SPU',
               inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '商品分类', // 赔付类型
+              name: $i18n.t('menu.ac'), // 商品分类
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
               reftableid: 10091, // 对应的表ID
@@ -194,7 +192,7 @@ export default {
           },
           {
             style: 'input',
-            label: '零售价',
+            label: $i18n.t('form_label.cu'), // 零售价
             value: 'price_retail',
             width: '8',
             inputChange: () => {
@@ -204,7 +202,7 @@ export default {
           {
             colname: 'group_type',
             style: 'select', // 下拉框类型
-            label: '组合类型',
+            label: $i18n.t('form_label.d0'), // 组合类型
             width: '8', // 所占宽度宽度
             value: 'group_type', // 输入框的值
             clearable: true,
@@ -215,11 +213,11 @@ export default {
             options: [
               // 下拉框选项值
               {
-                label: '普通',
+                label: $i18n.t('other.common'), // 普通
                 value: 2
               },
               {
-                label: '福袋',
+                label: $i18n.t('other.blessingBag'), // 福袋
                 value: 1
               }
             ]
@@ -263,7 +261,7 @@ export default {
       },
       label: {
         labelList: [{
-          label: '普通组合明细',
+          label: $i18n.t('form_label.d1'), // 普通组合明细
           value: 'generalGroupItem',
         },
         {
@@ -272,7 +270,7 @@ export default {
         }
       ],
         labelTagList: [{
-          label: '福袋组合明细',
+          label: $i18n.t('form_label.d2'), // 福袋组合明细
           value: 'luckbagGroupItem',
         },
         {
@@ -289,7 +287,7 @@ export default {
           buttons: [{
               type:'primary',
               webname: 'ps_c_pro_group_add', // 返回
-              text: '添加',
+              text: $i18n.t('btn.increase'), // 添加
               disabled: false,
               btnclick: () => {
                 this.addgeneralItem();
@@ -309,7 +307,7 @@ export default {
         businessFormConfig: {
           formData: [{
               style: 'input',
-              label: '每组抽取数', // 卖家备注
+              label: $i18n.t('form_label.d3'), // 每组抽取数
               value: 'NUM',
               disabled: false,
               dataAcessKey: 'NUM',
@@ -319,7 +317,7 @@ export default {
               }
             },
             {
-              label: 'SKU编码', // 商品编码
+              label: $i18n.t('table_label.code_SKU'), // SKU编码
               style: 'dimSearch',
               width: '6',
               value: 'gbCode',
@@ -346,7 +344,7 @@ export default {
             },
             {
               style: 'input',
-              label: '分组', // 卖家备注
+              label: $i18n.t('table_label.grouping'), // 分组
               value: 'GROUPNUM',
               disabled: false,
               dataAcessKey: 'GROUPNUM',
@@ -370,23 +368,23 @@ export default {
             align: 'center',
           },
           {
-            title: 'SKU编码',
+            title: $i18n.t('table_label.code_SKU'), // SKU编码
             key: 'ECODE'
           },
           {
-            title: 'SKU名称',
+            title: $i18n.t('form_label.skuName'), // SKU名称
             key: 'ENAME'
           },
           {
-            title: '零售价',
+            title: $i18n.t('form_label.cu'), // 零售价
             key: 'PRICE_RETAIL'
           },
           {
-            title: '分组',
+            title: $i18n.t('table_label.grouping'), // 分组
             key: 'GROUPNUM'
           },
           {
-            title: '商品数量',
+            title: $i18n.t('other.goods_quantity'), // 商品数量
             key: 'QTY'
           },
         ],
@@ -399,7 +397,7 @@ export default {
           buttons: [{
               type:'primary',
               webname: 'ps_c_pro_group_add', // 返回
-              text: '添加',
+              text: $i18n.t('btn.increase'), // 添加
               disabled:false,
               btnclick: () => {
                 this.addgeneralItem();
@@ -418,7 +416,7 @@ export default {
         },
         businessFormConfig: {
           formData: [{
-              label: 'SKU编码', // 商品编码
+              label: $i18n.t('table_label.code_SKU'), // SKU编码
               style: 'dimSearch',
               width: '6',
               value: 'gbCode',
@@ -470,19 +468,19 @@ export default {
             align: 'center',
           },
           {
-            title: 'SKU编码',
+            title: $i18n.t('table_label.code_SKU'), // SKU编码
             key: 'ECODE'
           },
           {
-            title: 'SKU名称',
+            title: $i18n.t('form_label.skuName'), // SKU名称
             key: 'ENAME'
           },
           {
-            title: '零售价',
+            title: $i18n.t('form_label.cu'), // 零售价
             key: 'PRICE_RETAIL'
           },
           {
-            title: '商品数量',
+            title: $i18n.t('other.goods_quantity'), // 商品数量
             key: 'QTY'
           },
         ],
@@ -531,11 +529,11 @@ export default {
     if(self.id == -1){
       self.formConfig.formData.filter(item=>item.value && item.value == 'ISACTIVE')[0].style = '';
       this.label.labelList = [{
-        label: '普通组合明细',
+        label: $i18n.t('form_label.d1'), // 普通组合明细
         value: 'generalGroupItem',
       }];
       this.label.labelTagList = [{
-        label: '福袋组合明细',
+        label: $i18n.t('form_label.d2'), // 福袋组合明细
         value: 'luckbagGroupItem',
       }];
     }else {
@@ -605,17 +603,17 @@ export default {
       const self = this;
       let str = '';
       if (!self.formConfig.formValue.ecode) {
-        str += '组合商品编码 ';
+        str += `${$i18n.t('form_label.cy')} `; // 组合商品编码
       } else if (!self.formConfig.formValue.ename) {
-        str += '组合商品名称 ';
+        str += `${$i18n.t('form_label.cz')} `; // 组合商品名称
       }else if (!self.formConfig.formValue.group_type) {
-        str += '组合类型 ';
+        str += `${$i18n.t('form_label.d0')} `; // 组合类型
       }else if (!self.formConfig.formValue.price_retail) {
-        str += '零售价 ';
+        str += `${$i18n.t('form_label.cu')} `; // 零售价
       } else if (!self.formConfig.formData.filter(item=>item.colname == 'PS_C_BRAND_ID')[0].itemdata.pid) {
-        str += '品牌 ';
+        str += `${$i18n.t('table_label.brand')} `; // 品牌
       } else if (!self.formConfig.formData.filter(item=>item.colname == 'PS_C_PRO_CLASSIFY_ID')[0].itemdata.pid) {
-        str += '商品分类';
+        str += $i18n.t('menu.ac') // 商品分类
       }
       if (str) {
         $omsUtils.msgTips(self, 'warning', `${str}不能为空!`, 0);
@@ -708,7 +706,7 @@ export default {
             const QTY = self.jordanTableConfigGenera.businessFormConfig.formValue.QTY;
             arr = res.data.data.filter(item => ename == item.ECODE)[0];
             if (self.jordanTableConfigGenera.data.some(item => item.ECODE == arr.ECODE)) {
-              $omsUtils.msgTips(self, 'warning', '请勿重复添加该明细!', 0);
+              $omsUtils.msgTips(self, 'warning', $i18n.t('modalTips.jz'), 0); // 请勿重复添加该明细!
               return;
             }
             arr.PS_C_SKU_ID = '-1';
@@ -719,7 +717,7 @@ export default {
           } else if (self.groupType == 1) {
             arr = res.data.data.filter(item => ename == item.ECODE)[0];
             if (self.jordanTableConfigLuck.data.some(item => item.ECODE == arr.ECODE)) {
-              $omsUtils.msgTips(self, 'warning', '请勿重复添加该明细!', 0);
+              $omsUtils.msgTips(self, 'warning', $i18n.t('modalTips.jz'), 0); // 请勿重复添加该明细!
               return;
             }
             arr.PS_C_SKU_ID = '-1';

@@ -78,13 +78,13 @@ export default {
             title: 'SKU编码'
           },{
             key: 'PS_C_PRO_ENAME',
-            title: 'SKU名称'
+            title: $i18n.t('form_label.skuName'), // SKU名称
           },{
             key: 'PS_C_PRO_ECODE',
             title: 'SPU编码'
           },{
             key: 'PS_C_PRO_ENAME',
-            title: 'SPU名称'
+            title: $i18n.t("table_label.itemNo02"), // SPU名称
           },{
             key: 'GIFT_TYPE',
             title: '赠品'
@@ -179,7 +179,7 @@ export default {
             title: 'SKU编码'
           },{
             key: 'PS_C_SKU_ENAME',
-            title: 'SKU名称'
+            title: $i18n.t('form_label.skuName'), // SKU名称
           },{
             key: 'ORIG_ORDER_ID',
             title: 'SPU编码'

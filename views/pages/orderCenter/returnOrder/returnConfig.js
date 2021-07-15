@@ -66,7 +66,7 @@ const addDetailModalTableColumns = [
 	},
 	{
 		key: 'PS_C_SKU_ENAME',
-		title: 'SKU名称',
+		title: $i18n.t('form_label.skuName'), // SKU名称
 	},
 	{
 		key: 'GIFT_TYPE_STR',

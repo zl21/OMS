@@ -53,13 +53,12 @@ export default {
             datelimit: 'all',
             display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
             fkdisplay: 'drp', // 外键关联类型
-            fkdesc: '商品SPU',
             inputname: 'QUERY_SUPPLIER_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
             isfk: true, // 是否有fk键
             isnotnull: true, // 是否必填
             isuppercase: false, // 是否转大写
             length: 65535, // 最大长度是多少
-            name: '供应商名称', // 赔付类型
+            name: $i18n.t('table_label.supplierName'), // 供应商名称
             readonly: false, // 是否可编辑，对应input   readonly属性
             reftable: 'CP_C_SUPPLIER', // 对应的表
             reftableid: 10222, // 对应的表ID
@@ -93,46 +92,46 @@ export default {
             title: $i18n.t('table_label.serialNo'), // 序号
           },
           {
-            title: 'SKU编码',
+            title: $i18n.t('table_label.code_SKU'), // SKU编码
             key: 'ECODE'
           },
           {
-            title: 'SKU名称',
+            title: $i18n.t('form_label.skuName'), // SKU名称
             key: 'ENAME'
           },
           {
-            title: '销售状态',
+            title: $i18n.t('form_label.d4'), // 销售状态
             key: 'SALES_STATUS',
             render:(h,params)=>{
               return h('span' , {} , params.row.SALES_STATUS ? params.row.SALES_STATUS == 'Y' ? '正常销售' : '暂停销售' : '')
             }
           },
           {
-            title: '零售价',
+            title: $i18n.t('form_label.cu'), // 零售价
             key: 'PRICE_RETAIL',
           },
           {
-            title: '采购价',
+            title: $i18n.t('form_label.d5'), // 采购价
             key: 'PRICE_PURCHASE'
           },
           {
-            title: '成本价',
+            title: $i18n.t('form_label.d6'), // 成本价
             key: 'PRICE_COST'
           },
           {
-            title: '体积(cm3)',
+            title: $i18n.t('unit.volume'), // 体积(cm3)
             key: 'VOLUME'
           },
           {
-            title: '毛重',
+            title: $i18n.t('unit.grossWeight'), // 毛重
             key: 'GROSS_WEIGHT'
           },
           {
-            title: '净重',
+            title: $i18n.t('unit.netWeight'), // 净重
             key: 'NET_WEIGHT'
           },
           {
-            title: '单位',
+            title: $i18n.t('unit.unit'), // 单位
             key: 'UNIT'
           },
           {
@@ -149,7 +148,7 @@ export default {
         buttons: []
       },
       extendSkuInfoBtn:[{
-            text: '新增SKU',
+            text: $i18n.t('btn.newSKU'), // 新增SKU
             webname:'PS_C_PRO_NEW_SKU',
             btnclick: () => {
               if (this.spuid == '-1') {
@@ -186,7 +185,7 @@ export default {
                 id: 2200,
                 type: 'action',
                 name: 'PS_C_SKU_QUICKLY_ADD',
-                label: '快速生成', // 额外退款编辑
+                label: $i18n.t('menu.b3'), // 快速生成
                 query: Object.assign({
                   id: this.spuid, // spuid
                   classid: this.formConfig.formValue.PS_C_PRO_CLASSIFY_ID
@@ -195,7 +194,7 @@ export default {
             }
           },
           {
-            text: '应用到所有列',
+            text: $i18n.t('btn.applyToAllColumn'), // 应用到所有列
             webname:'PS_C_PRO_MIND_COLUMNS',
             btnclick: () => {
               this.useAllColumns();
@@ -217,11 +216,11 @@ export default {
             title: $i18n.t('table_label.serialNo'), // 序号
           },
           {
-            title: '供应商名称',
+            title: $i18n.t('table_label.supplierName'), // 供应商名称
             key: 'cpCSupplierName'
           },
           {
-            title: '默认供应商',
+            title: $i18n.t('form_label.d7'), // 默认供应商
             key: 'IS_DEFAULT',
             render: (h, params) => h('Checkbox', {
               props: {
@@ -282,8 +281,8 @@ export default {
             if (this.isModify) {
               this.$Modal.fcWarning({
                 className: 'ark-dialog',
-                title: '提示', // 打印
-                content: '该页面已经修改,是否继续返回?', // 正在打印中，请稍后。。。
+                title: $i18n.t('modalTitle.tips'), // 提示
+                content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
                 mask: true,
                 showCancel: true,
                 onOk: () => {
@@ -329,7 +328,7 @@ export default {
       formConfig: {
         formData: [{
             style: 'input',
-            label: 'SPU编码',
+            label: $i18n.t('table_label.itemNo01'), // SPU编码
             value: 'ECODE',
             width: '8',
             disabled: false,
@@ -346,7 +345,7 @@ export default {
           // },
           {
             style: 'input',
-            label: 'SPU名称',
+            label: $i18n.t("table_label.itemNo02"), // SPU名称
             value: 'ENAME',
             width: '24',
             disabled: false,
@@ -357,7 +356,7 @@ export default {
           {
             colname: 'TYPE',
             style: 'select', // 下拉框类型
-            label: '类型',
+            label: $i18n.t("form_label.type"), // 类型
             width: '8', // 所占宽度宽度
             value: 'TYPE', // 输入框的值
             clearable: true,
@@ -388,13 +387,12 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '商品SPU',
               inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '品牌', // 赔付类型
+              name: $i18n.t('table_label.brand'), // 品牌
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_BRAND', // 对应的表
               reftableid: 166035, // 对应的表ID
@@ -423,13 +421,12 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '商品SPU',
               inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '商品分类', // 赔付类型
+              name: $i18n.t('menu.ac'), // 商品分类
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
               reftableid: 10091, // 对应的表ID
@@ -448,7 +445,7 @@ export default {
           },
           {
             style: 'textarea',
-            label: '产品介绍',
+            label: $i18n.t('form_label.d8'), // 产品介绍
             value: 'REMARK',
             width: '24',
             maxlength:255,
@@ -491,11 +488,11 @@ export default {
       },
       // tab切换配置
       labelList: [{
-          label: 'SKU信息',
+          label: $i18n.t('panel_label.ay'), // SKU信息
           value: 'skuInfo',
         },
         {
-          label: '供应商',
+          label: $i18n.t('panel_label.az'), // 供应商
           value: 'supplier',
         },
         // {
@@ -912,17 +909,17 @@ export default {
       const data = self.formConfig.formValue;
       let str = '';
       if (!data.ECODE) {
-        str += 'SPU编码 ';
+        str += `${$i18n.t('table_label.itemNo01')} `; // SPU编码
       } else if (!data.ENAME) {
-        str += 'SPU名称 ';
+        str += `${$i18n.t('table_label.itemNo02')} `; // SPU名称
       } else if (!data.TYPE) {
-        str += '类型 ';
+        str += `${$i18n.t('form_label.type')} `; // 类型
       }
       self.formConfig.formData.forEach(item=>{
         if (item.colname == 'PS_C_BRAND_ID' && !item.itemdata.pid) {
-          str += '品牌 ';
+          str += `${$i18n.t('table_label.brand')} `; // 品牌
         } else if (item.colname == 'PS_C_PRO_CLASSIFY_ID' && !item.itemdata.pid) {
-          str += '商品分类 ';
+          str += `${$i18n.t('menu.ac')} `; // 商品分类
         }
       });
       if (str) {

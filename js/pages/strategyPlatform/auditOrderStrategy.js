@@ -113,7 +113,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
                 this.$Modal.fcWarning({
                   className: 'ark-dialog',
                   title: $i18n.t('modalTitle.tips'), // 提示
-                  content: '该页面已经修改,是否继续返回?', // 正在打印中，请稍后。。。
+                  content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
                   mask: true,
                   showCancel: true,
                   onOk: () => {
