@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-14 20:50:52
+ * @LastEditTime: 2021-07-15 11:48:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -46,20 +46,18 @@ export default {
     document.getElementsByClassName("buttonIcon")[0].click();
  
     this.$nextTick(() => {
-
-      if (this.$store.state.customize.language != "zh") {
+      if (localStorage.getItem("locale") != "zh") {
       let dom = document.getElementsByClassName("ark-input-default")
       dom[0].placeholder = "please enter the system function to search"
 
       let dom1 = document.getElementsByClassName("set-panel")[0].getElementsByClassName("panel-item")
-      console.log(dom1);
-      dom1[0].innerText = "\xa0\xa0 Welcome：Admin"    //欢迎: 系统管理员
-      dom1[1].innerText = "\xa0\xa0 change password"  //修改密码
-      dom1[2].innerText = "\xa0\xa0 Collapse search conditions"   //折叠查询条件
+      dom1[0].getElementsByTagName("p")[0].innerText = " Welcome：Admin"    //欢迎: 系统管理员
+      dom1[1].getElementsByTagName("p")[0].innerText = " change password"  //修改密码    
+      dom1[2].getElementsByTagName("p")[0].innerText = " Collapse search conditions"   //折叠查询条件
       setTimeout(() => {
-        dom1[3].innerText = "\xa0\xa0 earch conditions default displayed rows"  //查询条件默认显示行数
+        dom1[3].getElementsByTagName("p")[0].innerText = " earch conditions default displayed rows"  //查询条件默认显示行数
       }, 500)
-      dom1[3].innerText = "\xa0\xa0 Exit"           //退出 
+      dom1[3].getElementsByTagName("p")[0].innerText = " Exit"           //退出 
       }
 
 
