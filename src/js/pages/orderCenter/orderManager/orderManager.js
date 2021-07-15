@@ -164,7 +164,7 @@ export default {
           {
             text: window.vmI18n.t('btn.search'), // 按钮文本
             btnclick: () => {
-              this.loadData();
+              this.getData();
             } // 按钮点击事件
           },
           {
@@ -183,6 +183,49 @@ export default {
         typeAll: 'error', // 按钮统一风格样式
         loading: false, // 按钮加载
         buttons: [
+          {
+            text: '查找', // 查找
+            webname: 'order_query',
+            btnclick: () => {
+              this.getData();
+            } // 按钮点击事件
+          },
+          {
+            text: '重置', // 重置
+            webname: 'order_reset',
+            btnclick: () => {
+              const _this = this;
+              _this.clearFromListValue = true;
+              _this.queryInfoData = [];
+              _this.labelData = [];
+              _this.formConfig.formValue = {
+                ID: '',
+                SOURCE_CODE: '',
+                EXPRESSCODE: '',
+                RECEIVER_NAME: '',
+                RECEIVER_MOBILE: '',
+                BUYER_MESSAGE: '',
+                PS_C_SKU_ECODE: '',
+                SELLER_MEMO: '',
+                QTY_ALL: {
+                  value1: '',
+                  value2: ''
+                },
+                BILL_NO: '',
+                USER_NICK: '',
+                ORDER_AMT: {
+                  value1: '',
+                  value2: ''
+                },
+                PS_C_PRO_ECODE: '', // 商品款号
+                IS_EXCHANGE_NO_IN: ['0'],
+                PAY_TIME: [_this.getCurrentTime1()[0],_this.getCurrentTime1()[1]],
+                RECEIVER_ADDRESS: '', // 收货地址
+                SYSREMARK: '', // 系统备注
+              };
+              this.getData();
+            } // 按钮点击事件
+          },
           {
             text: window.vmI18n.t('btn.manualCreation') // 手工创建
           },
@@ -1190,11 +1233,11 @@ export default {
             icon: 'iconfont iconbj_setup', // 按钮图标
             btnclick: () => {
               const self = this;
-              if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
-                self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
-              } else {
-                self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
-              }
+              // if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
+              //   self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
+              // } else {
+              //   self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
+              // }
               self.isShowSeniorOrOrdinary = true;
               self.publicBouncedConfig = {
                 ...publicDialogConfig.dropSortConfig
@@ -1995,6 +2038,7 @@ export default {
         },
         PS_C_PRO_ECODE: '', // 商品款号
         IS_EXCHANGE_NO_IN: ['0'],
+        PAY_TIME: [_this.getCurrentTime1()[0],_this.getCurrentTime1()[1]],
         RECEIVER_ADDRESS: '', // 收货地址
         SYSREMARK: '', // 系统备注
       };
@@ -2025,12 +2069,13 @@ export default {
                 placeholder: '', // 占位文本，默认为请输入
                 ghost: false, // 是否关闭幽灵按钮，默认开启
                 inputenter: () => {
-                  _this.loadData();
+                  _this.getData();
                 }, // 表单回车事件
                 iconclick: () => {}, // 点击icon图标事件
                 clearable: true
               };
               _this.formConfig.formValue[item.tabth.colname] = [];
+              if (item.tabth.colname === 'PAY_TIME') _this.formConfig.formValue[item.tabth.colname] = [_this.getCurrentTime1()[0],_this.getCurrentTime1()[1]];
             }
             if (item.type === 'propInput') {
               formData[index] = {
@@ -2074,7 +2119,7 @@ export default {
                 placeholder: '', // 占位文本，默认为请输入
                 ghost: false, // 是否关闭幽灵按钮，默认开启
                 inputenter: () => {
-                  _this.loadData();
+                  _this.getData();
                 }, // 表单回车事件
                 iconclick: () => {} // 点击icon图标事件
               };
@@ -2093,7 +2138,7 @@ export default {
                 placeholder: '', // 占位文本，默认为请输入
                 ghost: false, // 是否关闭幽灵按钮，默认开启
                 inputenter: () => {
-                  _this.loadData();
+                  _this.getData();
                 }, // 表单回车事件
                 iconclick: () => {} // 点击icon图标事件
               };
@@ -2399,29 +2444,37 @@ export default {
     shutDownOrbounceOff() {
       const self = this;
       // self.isShowFromLoading = true;
-      if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
+      // if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
         // 打开高级搜索
-        self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
+        // self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
         // self.labelData = [];
         // self.queryInfoData = [];
+        const dom = document.getElementsByClassName('fromHeight')[0];
+        if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
+          self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
+          dom.style.height = '100%';
+        } else {
+          self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
+          dom.style.height = '48px';
+        }
         self.selectValue = []; // 清空高级搜索项
         self.clearFromListValue = true;
         self.isShowSeniorOrOrdinary = !self.isShowSeniorOrOrdinary;
-      } else {
-        // 关闭高级搜索
-        self.clearFromListValue = false;
-        self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
-        self.highSearchData = [];
-        self.isShowSeniorOrOrdinary = !self.isShowSeniorOrOrdinary;
-        setTimeout(() => {
-          comUtils.setTableHeight(this, 30);
-          this.$refs.agGridChild.agGridTable(this.agTableConfig.columnDefs, this.agTableConfig.rowData);
-        }, 500);
-        // 设置普通搜索默认选项
-        self.setSearchOption();
-      }
+      // } else {
+      //   // 关闭高级搜索
+      //   self.clearFromListValue = false;
+      //   self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
+      //   self.highSearchData = [];
+      //   self.isShowSeniorOrOrdinary = !self.isShowSeniorOrOrdinary;
+      //   setTimeout(() => {
+      //     comUtils.setTableHeight(this, 30);
+      //     this.$refs.agGridChild.agGridTable(this.agTableConfig.columnDefs, this.agTableConfig.rowData);
+      //   }, 500);
+      //   // 设置普通搜索默认选项
+      //   self.setSearchOption();
+      // }
       // self.isShowFromLoading = false;
-      self.getHeaderList();
+      // self.getHeaderList();
       // self.getData();
     },
     // 设置普通搜索默认选项
@@ -2459,6 +2512,14 @@ export default {
       const SevenDaysTimestamp = Date.parse(new Date()) - 7 * 24 * 3600 * 1000;
       const defaultTimeArr = [];
       defaultTimeArr[0] = `${self.dateLong2String(SevenDaysTimestamp)} 00:00:00`;
+      defaultTimeArr[1] = `${self.dateLong2String(timestamp)} 23:59:59`;
+      return defaultTimeArr;
+    },
+    getCurrentTime1() {
+      const self = this;
+      const timestamp = Date.parse(new Date());
+      const defaultTimeArr = [];
+      defaultTimeArr[0] = `${self.dateLong2String(timestamp)} 00:00:00`;
       defaultTimeArr[1] = `${self.dateLong2String(timestamp)} 23:59:59`;
       return defaultTimeArr;
     },
@@ -2563,46 +2624,46 @@ export default {
       // 取的标签值
       let label = [];
       const queryInfo = [];
-      if (this.isShowSeniorOrOrdinary) {
+      // if (this.isShowSeniorOrOrdinary) {
         // 只有高级搜索时queryInfo条件才有效
-        this.selectValue.forEach((item, index) => {
-          if (item.column === 'tag') {
-            label = item.selectedList;
-          } else if (item.type === 'DatePicker') {
-            queryInfo[index] = {
-              type: 'date',
-              displayName: item.label,
-              queryName: item.column,
-              list: item.list,
-              value: item.value
-            };
-          } else if (item.type === 'Select') {
-            queryInfo[index] = {
-              type: item.type,
-              displayName: item.label,
-              queryName: item.column,
-              value: item.value,
-              list: item.selectedList
-            };
-          } else if (item.type === 'DropDownSelectFilter') {
-            queryInfo[index] = {
-              type: item.type,
-              displayName: item.label,
-              queryName: item.column,
-              value: item.value,
-              list: item.selectedList
-            };
-          } else {
-            queryInfo[index] = {
-              type: item.type,
-              displayName: item.label,
-              queryName: item.column,
-              value: item.value.replace(/(^\s*)|(\s*$)/g, ''),
-              list: item.list
-            };
-          }
-        });
-      }
+        // this.selectValue.forEach((item, index) => {
+        //   if (item.column === 'tag') {
+        //     label = item.selectedList;
+        //   } else if (item.type === 'DatePicker') {
+        //     queryInfo[index] = {
+        //       type: 'date',
+        //       displayName: item.label,
+        //       queryName: item.column,
+        //       list: item.list,
+        //       value: item.value
+        //     };
+        //   } else if (item.type === 'Select') {
+        //     queryInfo[index] = {
+        //       type: item.type,
+        //       displayName: item.label,
+        //       queryName: item.column,
+        //       value: item.value,
+        //       list: item.selectedList
+        //     };
+        //   } else if (item.type === 'DropDownSelectFilter') {
+        //     queryInfo[index] = {
+        //       type: item.type,
+        //       displayName: item.label,
+        //       queryName: item.column,
+        //       value: item.value,
+        //       list: item.selectedList
+        //     };
+        //   } else {
+        //     queryInfo[index] = {
+        //       type: item.type,
+        //       displayName: item.label,
+        //       queryName: item.column,
+        //       value: item.value.replace(/(^\s*)|(\s*$)/g, ''),
+        //       list: item.list
+        //     };
+        //   }
+        // });
+      // }
       const labelData = [];
       label.forEach((item, index) => {
         labelData[index] = {
@@ -2679,7 +2740,9 @@ export default {
         }
       }
     },
-    loadData() {
+    //  获取页面数据
+    getData(flag) {
+      const self = this;
       const arr = [];
       this.formConfig.formData.forEach((item, index) => {
         if (item.style === 'popInput') {
@@ -2726,13 +2789,7 @@ export default {
       }
       const highSearchData = [...this.notempty(arr), ...keyArr];
       this.highSearchData = this.notempty(highSearchData);
-      this.agTableConfig.pagenation.current = 1;
-      this.getData();
-    },
-
-    //  获取页面数据
-    async getData() {
-      const self = this;
+      if (!flag) this.agTableConfig.pagenation.current = 1;
       self.selection = [];
       self.agTableConfig.agLoading = true;
       self.isActive = true;
@@ -2755,8 +2812,8 @@ export default {
           pageSize: self.agTableConfig.pagenation.pageSize,
           pageNum: self.agTableConfig.pagenation.current
         },
-        label: self.labelData, // 标签
-        queryInfo: self.queryInfoData, // 普通搜索
+        // label: self.labelData, // 标签
+        // queryInfo: self.queryInfoData, // 普通搜索
         status: self.statusData,
         highSearch: self.highSearchData,
         sort: self.sort
@@ -2771,6 +2828,7 @@ export default {
       }
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
+
       self.service.orderCenter
         .getOrderList(fromdata)
         .then(res => {
@@ -3022,12 +3080,12 @@ export default {
     // 分页change 事件
     pageChange(val) {
       this.agTableConfig.pagenation.current = val;
-      this.getData();
+      this.getData(true);
     },
     // 切换分页条数
     pageSizeChange(val) {
       this.agTableConfig.pagenation.pageSize = val;
-      this.getData();
+      this.getData(true);
     },
     // 切换标签 执行搜索
     labelClick(item) {
