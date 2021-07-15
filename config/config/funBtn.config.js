@@ -990,7 +990,7 @@ class BtnConfig {
                         key: 'index',
                       },
                       {
-                        title: '单据编号',
+                        title: $i18n.t('form_label.billNo'), // 单据编号
                         key: 'billNo',
                       },
                       {
@@ -1403,7 +1403,7 @@ class BtnConfig {
                   title: 'ID',
                   key: 'objid',
                 },{
-                  title: '单据编号',
+                  title: $i18n.t('form_label.billNo'), // 单据编号
                   key: 'objno',
                 },{
                   title: '详细信息',
@@ -1844,7 +1844,7 @@ class BtnConfig {
                         key: 'INDEX',
                       },
                       {
-                        title: '单据编号',
+                        title: $i18n.t('form_label.billNo'), // 单据编号
                         key: 'BILL_NO',
                       },
                       {

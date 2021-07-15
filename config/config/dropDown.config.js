@@ -211,7 +211,7 @@ class DropDownConfig {
     if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) { 
       self.publicBouncedConfig.name = 'addGiftDialog'
       self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
-      self.publicBouncedConfig.confirmTitle = '删除赠品'
+      self.publicBouncedConfig.confirmTitle = $i18n.t('btn.deleteGift') // 删除赠品
       self.publicBouncedConfig.componentData = {
         data: self.selection,
         type: 'del',
@@ -245,7 +245,7 @@ class DropDownConfig {
     if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) { //
       self.publicBouncedConfig.name = 'addGiftDialog'
     self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
-    self.publicBouncedConfig.confirmTitle = '添加赠品'
+    self.publicBouncedConfig.confirmTitle = $i18n.t('btn.addGift') // 添加赠品
 
     self.publicBouncedConfig.componentData = {
       data: self.selection,
@@ -268,7 +268,7 @@ class DropDownConfig {
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
     if (self.selection.length != 1) {
-      self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要复制的单据', 2)
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'jw', 2)
       return
     }
     const IDS = self.$OMS2.omsUtils.sonList(self.selection, 'ID')
@@ -670,7 +670,7 @@ class DropDownConfig {
                       key: 'INDEX',
                     },
                     {
-                      title: '单据编号',
+                      title: $i18n.t('form_label.billNo'), // 单据编号
                       key: 'BILL_NO',
                     },
                     {

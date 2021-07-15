@@ -273,7 +273,7 @@ export default {
                           key: 'index'
                         },
                         {
-                          title: '单据编号', // '提示信息',
+                          title: $i18n.t('form_label.billNo'), // 单据编号
                           key: 'bollNo',
                         },
                         {

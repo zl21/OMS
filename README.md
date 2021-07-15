@@ -837,6 +837,8 @@
 | v1.9.84 | bug:43641 |
 | v1.9.85 | bug:43656 |
 | v1.9.87 | 完成御城河日志接入 |
+| v1.9.88 | i18n-实体仓档案、dropDown.config、dropDown.config |
+
 
 
 

@@ -126,11 +126,11 @@
                             props: {
                               columns: [
                                 {
-                                  title:$i18n.t('table_label.serialNo'), // 序号
+                                  title: $i18n.t('table_label.serialNo'), // 序号
                                   key: 'index'
                                 },
                                 {
-                                  title:'单据编号',
+                                  title: $i18n.t('form_label.billNo'), // 单据编号
                                   key:'billNo'
                                 },
                                 {
@@ -178,11 +178,11 @@
                             props: {
                               columns: [
                                 {
-                                  title:$i18n.t('table_label.serialNo'), // 序号
+                                  title: $i18n.t('table_label.serialNo'), // 序号
                                   key: 'index'
                                 },
                                 {
-                                  title:'单据编号',
+                                  title: $i18n.t('form_label.billNo'), // 单据编号
                                   key:'billNo'
                                 },
                                 {

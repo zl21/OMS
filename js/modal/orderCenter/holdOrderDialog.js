@@ -218,7 +218,7 @@ export default {
                   key: 'INDEX'
                 },
                 {
-                  title: '单据编号',
+                  title: $i18n.t('form_label.billNo'), // 单据编号
                   key: 'BILL_NO'
                 },
                 {
