@@ -98,7 +98,6 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$emit("closeActionDialog", false);
-              this.modalConfig[this.tableName].cancel(this);
             }, // 按钮点击事件
           },
           {
