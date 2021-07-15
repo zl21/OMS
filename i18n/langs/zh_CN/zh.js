@@ -1147,6 +1147,7 @@ export default {
   },
 
   modalTitle: { // 弹窗title
+    ai: '其他平台',
     ah: '批量替换下挂商品',
     ag: '售后复制',
     af: '店铺新增',
