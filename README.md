@@ -167,3 +167,4 @@ console.log($i18n.t(common.all));
 | v1.0.74 | add 登录提示 |
 | v1.0.75 | add menu.b0 |
 | v1.0.76 | add sheet v4 |
+| v1.0.77 | add for 国家省市区详情 |
