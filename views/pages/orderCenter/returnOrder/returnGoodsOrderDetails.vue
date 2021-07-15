@@ -42,7 +42,8 @@
     <Modal
       v-model="replaceProductTable.modal"
       width="900"
-      :title="vmI18n.t('modalTitle.ac')"
+      titleAlign="left"
+      :title="vmI18n.t('btn.replaceDetail')"
       :mask="true"
       @on-ok="replaceOk"
     >
