@@ -23,6 +23,8 @@ const orderLogo =  {
   HAS_LIGHT_SUPPLY_PROD: '轻',  //轻
   IS_DELIVERY_URGENT: '急', //急
   IS_O2O_ORDER: 'O2O',  //O2O
+  RESERVE_BIGINT02: '被拆', // 被拆
+  RESERVE_BIGINT04: '被合', // 被合
   IS_REAL_LACKSTOCK: '实缺',  //实缺
   IS_EXTRA: '额', //额
   RESERVE_BIGINT01: '禁', //禁
