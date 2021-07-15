@@ -26,6 +26,7 @@
              v-if="item.style">
         <template v-if="item.style !== ''">
           <FormItem :label="`${item.label}`+ ':'"
+                    :title="item.label"
                     v-if="item.style === 'input'"
                     :prop="item.value || item.colname"
                     :class="item.class || ''">
@@ -49,6 +50,7 @@
           </FormItem>
           <!-- 文本框 -->
           <FormItem :label="`${item.label}`+ ':'"
+                    :title="item.label"
                     v-if="item.style === 'textarea'"
                     :class="item.class || ''"
                     :prop="item.value || item.colname">
@@ -64,6 +66,7 @@
           </FormItem>
           <!-- select 下拉框 -->
           <FormItem :label="`${item.label}`+ ':'"
+                    :title="item.label"
                     v-if="item.style === 'select'"
                     :class="item.class ? `${item.class}`+' '+'popSelect' : 'popSelect'"
                     :prop="item.value || item.colname">
@@ -89,6 +92,7 @@
 
           <!-- 日期组件-年月日 -->
           <FormItem :label="`${item.label}`+ ':'"
+                    :title="item.label"
                     v-if="item.style === 'date'"
                     :prop="item.value || item.colname"
                     :class="item.class || ''">
@@ -106,6 +110,7 @@
 
           <!-- 时间组件-时分秒 -->
           <FormItem :label="`${item.label}`+ ':'"
+                    :title="item.label"
                     v-if="item.style === 'time'"
                     :prop="item.value || item.colname"
                     :class="item.class || ''">
@@ -165,6 +170,7 @@
 
           <!-- radio 单选 -->
           <FormItem :label="`${item.label}`+ ':'"
+                    :title="item.label"
                     v-if="item.style==='radio'"
                     :prop="item.value || item.colname"
                     :class="item.class || ''">
@@ -179,6 +185,7 @@
 
           <!-- checkbox 单/多选 - 勾选框 -->
           <FormItem :label="`${item.label}` + ':'" 
+                    :title="item.label"
                     v-if="item.style === 'checkbox'" 
                     :prop="item.value || item.colname" 
                     :class="item.class || ''">
@@ -216,6 +223,7 @@
 
           <!-- 模糊查询组件 -->
           <FormItem :label="`${item.label}`+':'"
+                    :title="item.label"
                     v-if="item.style==='dimSearch'"
                     :class="item.class || ''"
                     :prop="item.value || item.colname">
@@ -232,6 +240,7 @@
           </FormItem>
           <!-- 数字框 -->
           <FormItem :label="`${item.label}`+':'"
+                    :title="item.label"
                     v-if="item.style==='inputNumber'"
                     :class="item.class || ''"
                     :prop="item.value || item.colname">
@@ -245,6 +254,7 @@
 
           <!-- 双数字框 -->
           <FormItem :label="`${item.label}`+':'"
+                    :title="item.label"
                     :class="item.class || ''"
                     v-if="item.style==='bothNumber'">
             <!-- <both-num-input :bothNumInput="item.bothNumInput" :allValue="formConfig.formValue[`${item.value || item.colname}`]"></both-num-input> -->
@@ -272,6 +282,7 @@
           </FormItem>
           <!-- 双input框 -->
           <FormItem :label="`${item.label}`+':'"
+                    :title="item.label"
                     :class="item.class || ''"
                     v-if="item.style==='bothInput'">
             <div class="bothNumInput">
@@ -303,6 +314,7 @@
 
           <!-- switch开关 -->
           <FormItem :label="`${item.label}`+ ':'"
+                    :title="item.label"
                     :class="item.class || ''"
                     v-if="item.style==='switch'"
                     :prop="item.value || item.colname">
@@ -317,6 +329,7 @@
 
           <!-- 插槽 -->
           <FormItem :label="`${item.label}`+':'"
+                    :title="item.label"
                     :class="[item.class, { 'req-star': item.reqStar }]"
                     v-else-if="item.style === 'formCompile'">
             <slot :rowData="{ item, value: formConfig.formValue }"
