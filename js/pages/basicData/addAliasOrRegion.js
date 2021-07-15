@@ -11,7 +11,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       ID:
         this.$route.params.customizedModuleId &&
           this.$route.params.customizedModuleId != "New"
@@ -33,7 +33,7 @@ export default {
         typeAll: "default",
         buttons: [
           {
-            text: "保存",
+            text: $i18n.t("btn.save"),
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               if (this.customizedModuleName == "ADDALIAS") {
@@ -57,7 +57,7 @@ export default {
         formData: [
           {
             style: "input",
-            label: "别名名称",
+            label: $i18n.t('form_label.de'), // 别名名称
             value: "CPCREGIONALIAS",
             colname: "CPCREGIONALIAS",
             width: "6",
@@ -68,25 +68,25 @@ export default {
           },
           {
             style: "radio",
-            label: "区域类型", // 输入框前文字
+            label: $i18n.t('form_label.df'), // 区域类型
             value: "REGION_TYPE", // 输入框的值
             colname: "REGION_TYPE", // 输入框的值
             width: "18", // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             options: [
               {
-                label: "国家",
+                label: $i18n.t('form_label.dg'), // 国家
                 value: "0",
               },
               {
-                label: "省份",
+                label: $i18n.t('form_label.dh'), // 省份
                 value: "1",
               },
               {
-                label: "市级",
+                label: $i18n.t('form_label.di'), // 市级
                 value: "2",
               },
               {
-                label: "区级",
+                label: $i18n.t('form_label.dj'), // 区级
                 value: "3",
               },
             ],
@@ -152,7 +152,7 @@ export default {
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: "关联国家", // 赔付类型
+              name: $i18n.t('form_label.dm'), // 关联国家
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: "", // 这个是选择的值
               pid: "",
@@ -168,11 +168,11 @@ export default {
               ];
               this.formConfig.formValue.CP_C_REGION_COUNTRY_ID = val;
               this.formConfig.formValue.CP_C_REGION_COUNTRY_id = val.pid;
-              this.formConfig = this.emptyData(this.formConfig,"CP_C_REGION_COUNTRY_ID",this.modify,"CP_C_REGION_COUNTRY_id",val,drpArr);
+              this.formConfig = this.emptyData(this.formConfig, "CP_C_REGION_COUNTRY_ID", this.modify, "CP_C_REGION_COUNTRY_id", val, drpArr);
               this.masterModifyData("CP_C_REGION_COUNTRY_ID", "master");
               this.masterModifyData("CP_C_REGION_COUNTRY_id", "master");
             },
-            InputEnter: (val)=> {
+            InputEnter: (val) => {
               const drpArr = [
                 "CP_C_REGION_PROVINCE_ID",
                 "CP_C_REGION_CITY_ID",
@@ -180,7 +180,7 @@ export default {
               ];
               this.formConfig.formValue.CP_C_REGION_COUNTRY_ID = val;
               this.formConfig.formValue.CP_C_REGION_COUNTRY_id = val.pid;
-              this.formConfig = this.emptyData(this.formConfig,"CP_C_REGION_COUNTRY_ID",this.modify,"CP_C_REGION_COUNTRY_id",val,drpArr);
+              this.formConfig = this.emptyData(this.formConfig, "CP_C_REGION_COUNTRY_ID", this.modify, "CP_C_REGION_COUNTRY_id", val, drpArr);
               this.masterModifyData("CP_C_REGION_COUNTRY_ID", "master");
               this.masterModifyData("CP_C_REGION_COUNTRY_id", "master");
             }
@@ -197,7 +197,7 @@ export default {
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: "关联省", // 赔付类型
+              name: $i18n.t('form_label.dk'), // 关联省
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: "", // 这个是选择的值
               pid: "",
@@ -214,15 +214,15 @@ export default {
               const drpArr = ["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"];
               this.formConfig.formValue.CP_C_REGION_PROVINCE_ID = val;
               this.formConfig.formValue.CP_C_REGION_PROVINCE_id = val.pid;
-              this.formConfig = this.emptyData(this.formConfig,"CP_C_REGION_PROVINCE_ID",this.modify,"CP_C_REGION_PROVINCE_id",val,drpArr);
+              this.formConfig = this.emptyData(this.formConfig, "CP_C_REGION_PROVINCE_ID", this.modify, "CP_C_REGION_PROVINCE_id", val, drpArr);
               this.masterModifyData("CP_C_REGION_PROVINCE_ID", "master");
               this.masterModifyData("CP_C_REGION_PROVINCE_id", "master");
             },
-            InputEnter: (val)=> {
+            InputEnter: (val) => {
               const drpArr = ["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"];
               this.formConfig.formValue.CP_C_REGION_PROVINCE_ID = val;
               this.formConfig.formValue.CP_C_REGION_PROVINCE_id = val.pid;
-              this.formConfig = this.emptyData(this.formConfig,"CP_C_REGION_PROVINCE_ID",this.modify,"CP_C_REGION_PROVINCE_id",val,drpArr);
+              this.formConfig = this.emptyData(this.formConfig, "CP_C_REGION_PROVINCE_ID", this.modify, "CP_C_REGION_PROVINCE_id", val, drpArr);
               this.masterModifyData("CP_C_REGION_PROVINCE_ID", "master");
               this.masterModifyData("CP_C_REGION_PROVINCE_id", "master");
             }
@@ -239,7 +239,7 @@ export default {
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: "关联市", // 赔付类型
+              name: $i18n.t('form_label.dl'), // 关联市
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: "", // 这个是选择的值
               pid: "",
@@ -267,7 +267,7 @@ export default {
               this.masterModifyData("CP_C_REGION_CITY_ID", "master");
               this.masterModifyData("CP_C_REGION_CITY_id", "master");
             },
-            InputEnter: (val)=> {
+            InputEnter: (val) => {
               const drpArr = ["CP_C_REGION_AREA_ID"];
               this.formConfig.formValue.CP_C_REGION_CITY_ID = val;
               this.formConfig.formValue.CP_C_REGION_CITY_id = val.pid;
@@ -295,7 +295,7 @@ export default {
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: "关联区县", // 赔付类型
+              name: $i18n.t('form_label.dn'), // 关联区县
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: "", // 这个是选择的值
               pid: "",
@@ -313,7 +313,7 @@ export default {
               this.masterModifyData("CP_C_REGION_AREA_ID", "master");
               this.masterModifyData("CP_C_REGION_AREA_id", "master");
             },
-            InputEnter: (val)=> {
+            InputEnter: (val) => {
               this.formConfig.formValue.CP_C_REGION_AREA_ID = val;
               this.masterModifyData("CP_C_REGION_AREA_ID", "master");
               this.masterModifyData("CP_C_REGION_AREA_id", "master");
@@ -344,7 +344,7 @@ export default {
         formData: [
           {
             style: "input",
-            label: "区域编码",
+            label: $i18n.t('form_label.dc'), // 区域编码
             value: "CP_C_REGION_ADD_ECODE",
             colname: "CP_C_REGION_ADD_ECODE",
             width: "8",
@@ -357,7 +357,7 @@ export default {
           },
           {
             style: "input",
-            label: "区域名称",
+            label: $i18n.t('form_label.dd'), // 区域名称
             value: "CP_C_REGION_ADD_ENAME",
             colname: "CP_C_REGION_ADD_ENAME",
             width: "8",
@@ -368,25 +368,25 @@ export default {
           },
           {
             style: "radio",
-            label: "区域类型", // 输入框前文字
+            label: $i18n.t('form_label.df'), // 区域类型
             value: "REGION_TYPE", // 输入框的值
             colname: "REGION_TYPE", // 输入框的值
             width: "18", // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             options: [
               {
-                label: "国家",
+                label: $i18n.t('form_label.dg'), // 国家
                 value: "0",
               },
               {
-                label: "省份",
+                label: $i18n.t('form_label.dh'), // 省份
                 value: "1",
               },
               {
-                label: "市级",
+                label: $i18n.t('form_label.di'), // 市级
                 value: "2",
               },
               {
-                label: "区级",
+                label: $i18n.t('form_label.dj'), // 区级
                 value: "3",
               },
             ],
@@ -445,7 +445,7 @@ export default {
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              name: "国家", // 赔付类型
+              name: $i18n.t('form_label.dg'), // 国家
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: "", // 这个是选择的值
               pid: "",
@@ -468,7 +468,7 @@ export default {
               this.masterModifyData("CP_C_REGION_COUNTRY_ID", "master");
               this.masterModifyData("CP_C_REGION_COUNTRY_id", "master");
             },
-            InputEnter: (val)=> {
+            InputEnter: (val) => {
               const drpArr = ["CP_C_REGION_PROVINCE_ID", "CP_C_REGION_CITY_ID"];
               this.formConfig.formValue.CP_C_REGION_COUNTRY_ID = val;
               this.formConfig.formValue.CP_C_REGION_COUNTRY_id = val.pid;
@@ -496,7 +496,7 @@ export default {
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: "关联省", // 赔付类型
+              name: $i18n.t('form_label.dk'), // 关联省
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: "", // 这个是选择的值
               pid: "",
@@ -524,7 +524,7 @@ export default {
               this.masterModifyData("CP_C_REGION_PROVINCE_ID", "master");
               this.masterModifyData("CP_C_REGION_PROVINCE_id", "master");
             },
-            InputEnter: (val)=> {
+            InputEnter: (val) => {
               const drpArr = ["CP_C_REGION_CITY_ID"];
               this.formConfig.formValue.CP_C_REGION_PROVINCE_ID = val;
               this.formConfig.formValue.CP_C_REGION_PROVINCE_id = val.pid;
@@ -552,7 +552,7 @@ export default {
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: "关联市", // 赔付类型
+              name: $i18n.t('form_label.dl'), // 关联市
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: "", // 这个是选择的值
               pid: "",
@@ -570,7 +570,7 @@ export default {
               this.masterModifyData("CP_C_REGION_CITY_ID", "master");
               this.masterModifyData("CP_C_REGION_CITY_id", "master");
             },
-            InputEnter: (val)=> {
+            InputEnter: (val) => {
               this.formConfig.formValue.CP_C_REGION_CITY_ID = val;
               this.masterModifyData("CP_C_REGION_CITY_ID", "master");
               this.masterModifyData("CP_C_REGION_CITY_id", "master");
@@ -722,7 +722,7 @@ export default {
           id: data,
           type: "action",
           name: "NATIONALPROVINCIALMUNICIPALEDIT",
-          label: "国家省市区编辑",
+          label: $i18n.t('menu.a5'), // 国家省市区编辑
         });
       }
     },
@@ -828,7 +828,7 @@ export default {
           id: data,
           type: "action",
           name: "NATIONALPROVINCIALMUNICIPALEDIT",
-          label: "国家省市区编辑",
+          label: $i18n.t('menu.a5'), // 国家省市区编辑
         });
       }
     },
@@ -866,7 +866,7 @@ export default {
         tableId: 10288,
         type: "S",
         tableName: "V_CP_C_REGION_ALIAS",
-        label: "国家省市区",
+        label: $i18n.t('menu.b4'), // 国家省市区
         back: true,
       });
     },
