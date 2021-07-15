@@ -128,8 +128,9 @@ export const globalStore = {
     extraoOrderDetails:[],
   },
   mutations: {
-    language(state) {
-      state.language = state;
+    language(state, x) {
+      state.language = x;
+      console.log('state.language::', x);
     },
     REDUNDANT_ORDER_ID(state, n) {
       state.REDUNDANT_ORDER_ID = n;

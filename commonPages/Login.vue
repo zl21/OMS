@@ -78,6 +78,8 @@
 import R3 from "@syman/burgeon-r3";
 import service from '@/service/index';
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
+window.$i18n = i18n;
+
 const langConfig = [
   {
     type: 'zh',
@@ -138,14 +140,14 @@ export default {
       let message = {};
       if (this.$refs.username.value === "") {
         message = {
-          title: "错误",
-          content: "请输入用户名",
+          title: $i18n.t('modalTitle.error'), // 错误
+          content: $i18n.t('username'), // 请输入用户名
         };
         this.$Modal.fcError(message);
       } else if (this.$refs.password.value === "") {
         message = {
-          title: "错误",
-          content: "请输入密码",
+          title: $i18n.t('modalTitle.error'), // 错误
+          content: $i18n.t('password'), // 请输入密码
         };
         this.$Modal.fcError(message);
       } else if (
