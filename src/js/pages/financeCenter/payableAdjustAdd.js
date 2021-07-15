@@ -275,45 +275,59 @@ export default {
             value: 'BILL_TYPE', // 输入框的值
             selectChange: () => {
               this.getTableAfterCalPayablePrice();
+              this.getCompensationType();
             },
             options: [
               // 下拉框选项值
             ]
           },
           {
-            style: 'popInput', // 输入框弹框单多选
-            width: '8',
-            itemdata: {
-              col: 1,
-              colid: 1700816190,
-              colname: 'AC_F_COMPENSATION_TYPE_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-              fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '赔付类型',
-              inputname: 'AC_F_COMPENSATION_TYPE_ID:ID', // 这个是做中文类型的模糊查询字段，例如ENAME
-              isfk: true, // 是否有fk键
-              isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
-              name: window.vmI18n.t('form_label.payableAdjustType'), // 赔付类型
-              readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'AC_F_COMPENSATION_TYPE', // 对应的表
-              reftableid: 249130445, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
-              valuedata: '', // 这个是选择的值
-              pid: ''
-            },
-            oneObj: val => {
-              if (!val.pid) return;
-              this.formConfig.formValue.AC_F_COMPENSATION_TYPE_ID = val.pid;
+            style: 'select', // 下拉框类型
+            label: window.vmI18n.t('form_label.payableAdjustType'), // 赔付类型
+            width: '8', // 所占宽度宽度
+            value: 'AC_F_COMPENSATION_TYPE_ID', // 输入框的值
+            selectChange: () => {
               this.getTableAfterCalPayablePrice();
-              console.log(val);
-              this.queryBIllCause(val.pid);
-            }
+              this.queryBIllCause(this.formConfig.formValue.AC_F_COMPENSATION_TYPE_ID);
+            },
+            options: [
+              // 下拉框选项值
+            ]
           },
+          // {
+          //   style: 'popInput', // 输入框弹框单多选
+          //   width: '8',
+          //   itemdata: {
+          //     col: 1,
+          //     colid: 1700816190,
+          //     colname: 'AC_F_COMPENSATION_TYPE_ID', // 当前字段的名称
+          //     datelimit: 'all',
+          //     display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+          //     fkdisplay: 'drp', // 外键关联类型
+          //     fkdesc: '赔付类型',
+          //     inputname: 'AC_F_COMPENSATION_TYPE_ID:ID', // 这个是做中文类型的模糊查询字段，例如ENAME
+          //     isfk: true, // 是否有fk键
+          //     isnotnull: false, // 是否必填
+          //     isuppercase: false, // 是否转大写
+          //     length: 65535, // 最大长度是多少
+          //     name: window.vmI18n.t('form_label.payableAdjustType'), // 赔付类型
+          //     readonly: false, // 是否可编辑，对应input   readonly属性
+          //     reftable: 'AC_F_COMPENSATION_TYPE', // 对应的表
+          //     reftableid: 249130445, // 对应的表ID
+          //     row: 1,
+          //     statsize: -1,
+          //     type: 'STRING', // 这个是后台用的
+          //     valuedata: '', // 这个是选择的值
+          //     pid: ''
+          //   },
+          //   oneObj: val => {
+          //     if (!val.pid) return;
+          //     this.formConfig.formValue.AC_F_COMPENSATION_TYPE_ID = val.pid;
+          //     this.getTableAfterCalPayablePrice();
+          //     console.log(val);
+          //     this.queryBIllCause(val.pid);
+          //   }
+          // },
           {
             style: 'select', // 下拉框类型
             label: window.vmI18n.t('form_label.payableAdjustReason'), // 赔付原因
@@ -985,6 +999,7 @@ export default {
   },
   methods: {
     async queryBIllCause(val) {
+      if (!val) return
       const formdata = new FormData();
       formdata.append('id', val);
       const {
@@ -1282,32 +1297,67 @@ export default {
         self.calTableTable(self.jordanTableConfig.data);
       }
     },
+    // 获取赔付类型
+    async getCompensationType() {
+      this.formConfig.formData.forEach(item => {
+        if (item.label == window.vmI18n.t('form_label.payableAdjustReason') || item.label == 'payableAdjustReason' || item.label == window.vmI18n.t('form_label.payableAdjustType')) {
+          item.options = [];
+        }
+      });
+      this.formConfig.formValue.AC_F_COMPENSATION_TYPE_ID = '';
+      this.formConfig.formValue.AC_F_COMPENSATION_REASON_ID = '';
+      if (!this.formConfig.formValue.BILL_TYPE) return
+      const formdata = new FormData();
+      formdata.append('code', this.formConfig.formValue.BILL_TYPE);
+      const {
+        data: { code, data, message }
+      } = await this.service.financeCenter.getCompensationType(formdata);
+      console.log(code, data, message);
+      if (code == 0) {
+        const arr = [];
+        data.forEach(item => {
+          const obj = {};
+          obj.value = item.ID;
+          obj.label = item.ENAME;
+          arr.push(obj);
+        });
+        this.formConfig.formData.forEach(item => {
+          if (item.label == window.vmI18n.t('form_label.payableAdjustType')) {
+            item.options = arr;
+          }
+        });
+      } else {
+        this.$Message.warning(message);
+      }
+    },
     // 填充表单数据
     setPayableAdjustData(mainData, itemData, logData) {
+      const self = this;
       console.log('mainData, itemData, logData', mainData, itemData, logData);
+      let billType = mainData.BILL_TYPE;
+      if (billType) {
+        billType = billType.toString();
+        self.formConfig.formValue.BILL_TYPE = billType;
+        self.getCompensationType();
+        self.formConfig.formValue.AC_F_COMPENSATION_TYPE_ID = mainData.AC_F_COMPENSATION_TYPE_ID
+      }
       // 将null转为''
       for (const x in mainData) {
         if (!mainData[x]) {
           mainData[x] = '';
         }
       }
-      const self = this;
       let payType = mainData.PAY_TYPE;
       const billStatus = mainData.BILL_STATUS;
       if (billStatus !== 1) {
         self.setupByAuditOrVoid(billStatus);
       }
-      let billType = mainData.BILL_TYPE;
       let adjustType = mainData.ADJUST_TYPE;
       self.formConfig.formValue.BILL_NO = mainData.BILL_NO;
       self.formConfig.formValue.TID = mainData.TID;
       if (payType) {
         payType = payType.toString();
         self.formConfig.formValue.PAY_TYPE = payType;
-      }
-      if (billType) {
-        billType = billType.toString();
-        self.formConfig.formValue.BILL_TYPE = billType;
       }
       self.formConfig.formValue.ORDER_NO = mainData.ORDER_NO;
       if (adjustType) {
@@ -1344,9 +1394,9 @@ export default {
         } else if (item.itemdata && item.itemdata.name === window.vmI18n.t('form_label.physicalWarehouseName')) {
           item.itemdata.valuedata = mainData.CP_C_PHY_WAREHOUSE_ENAME;
           item.itemdata.pid = mainData.CP_C_PHY_WAREHOUSE_ID;
-        } else if (item.itemdata && item.itemdata.name === window.vmI18n.t('form_label.payableAdjustType')) {
-          item.itemdata.valuedata = mainData.COMPENSATION_TYPE_ENAME;
-          item.itemdata.pid = mainData.AC_F_COMPENSATION_TYPE_ID;
+        // } else if (item.itemdata && item.itemdata.name === window.vmI18n.t('form_label.payableAdjustType')) {
+        //   item.itemdata.valuedata = mainData.COMPENSATION_TYPE_ENAME;
+        //   item.itemdata.pid = mainData.AC_F_COMPENSATION_TYPE_ID;
         } else if (item.label === window.vmI18n.t('form_label.payableAdjustReason')) {
           item.options = [
             {
