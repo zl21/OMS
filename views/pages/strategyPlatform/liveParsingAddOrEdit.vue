@@ -20,13 +20,12 @@
                 <RadioGroup
                   v-model="rowData.value.BILL_TIME_TYPE"
                   @on-change="rowData.item.radioChange"
-                  style="width: 180px;">
+                  >
                   <Radio
                     v-for="(option , index) in rowData.item.options"
                     :key="index"
                     :label="option.value"
                     :disabled="isEnable"
-                    class="timeRadio"
                   >{{option.label}}</Radio>
                 </RadioGroup>
                 <DatePicker
@@ -44,7 +43,7 @@
                   <RadioGroup
                     v-model="ruleItem.RULE_TYPE"
                     @on-change="rowData.item.radioChange(ruleItem)"
-                    style="width: 250px;">
+                    >
                     <Radio
                       v-for="(option, index) in rowData.item.options"
                       :key="index"

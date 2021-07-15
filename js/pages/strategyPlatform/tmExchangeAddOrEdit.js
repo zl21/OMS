@@ -519,9 +519,10 @@ export default {
       this.$comUtils.tabCloseAppoint(this);
       this.$destroy(true);
       if (id) {
+        console.log(this.curLabel);
         this.$store.commit('global/tabOpen', {
           type: 'C',
-          label: '天猫换货策略编辑',
+          label: this.getCustomLabel(false), // 天猫换货策略编辑
           customizedModuleId: id,
           customizedModuleName: this.customizedModuleName
         });

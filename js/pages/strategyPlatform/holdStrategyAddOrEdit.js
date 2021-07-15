@@ -574,7 +574,7 @@ export default {
           console.log('新增');
           this.$store.commit('global/tabOpen', {
             type: 'tableDetailAction',
-            label: 'HOLD单策略编辑',
+            label: this.getCustomLabel(true), // HOLD单策略编辑
             customizedModuleName: 'ST_C_HOLD_ORDER_STRATEGY',
             customizedModuleId: data.objId
           });

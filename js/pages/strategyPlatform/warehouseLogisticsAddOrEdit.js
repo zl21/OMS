@@ -433,7 +433,7 @@ export default {
       if (id) {
         this.$store.commit('global/tabOpen', {
           type: 'C',
-          label: '仓库物流编辑',
+          label: this.getCustomLabel(false), // 仓库物流编辑
           customizedModuleId: id,
           customizedModuleName: 'ST_C_WAREHOUSE_LOGISTICS_SET'
         });

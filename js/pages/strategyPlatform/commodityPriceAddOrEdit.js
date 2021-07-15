@@ -619,7 +619,7 @@ export default {
           this.$store.commit('global/tabOpen', {
             type: 'C',
             url: `/CUSTOMIZED/ST_C_PRICE/New?copy=${id}`,
-            label: '商品价格策略新增',
+            label: this.getCustomLabel(true), // 商品价格策略新增
             customizedModuleName: 'ST_C_PRICE',
             customizedModuleId: 'New',
           })
@@ -629,7 +629,7 @@ export default {
         this.$nextTick(() => {
           this.$store.commit('global/tabOpen', {
             type: 'C',
-            label: '商品价格策略编辑',
+            label: this.getCustomLabel(false), // 商品价格策略编辑
             customizedModuleName: 'ST_C_PRICE',
             customizedModuleId: id,
           })
@@ -702,9 +702,12 @@ export default {
       let isEdit = this.ID != -1
       let tableBtnConfig = this.goodsTableConfig.businessButtonConfig
       let isShowTableBtn = this.isEnable ? false : !this.isCopy
-      this.queryBtn(this.btnConfig, $i18n.t('common.copy')).isShow = isEdit // 复制
-      this.queryBtn(tableBtnConfig, $i18n.t('btn.deleteDetail')).isShow = isShowTableBtn // 删除明细
-      this.queryBtn(tableBtnConfig, $i18n.t('modalTitle.import')).isShow = isShowTableBtn // 导入
+      let addBtn = this.queryBtn(this.btnConfig, $i18n.t('common.copy'))
+      let delBtn = this.queryBtn(tableBtnConfig, $i18n.t('btn.deleteDetail'))
+      let importBtn = this.queryBtn(tableBtnConfig, $i18n.t('modalTitle.import'))
+      addBtn && (addBtn.isShow = isEdit) // 复制
+      delBtn && (delBtn.isShow = isShowTableBtn) // 删除明细
+      importBtn && (importBtn.isShow = isShowTableBtn) // 导入
     },
     // 设置主表表单字段
     setMainTableFormConfig() {

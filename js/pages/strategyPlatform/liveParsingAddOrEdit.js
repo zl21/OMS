@@ -372,7 +372,7 @@ export default {
       if (id) {
         this.$store.commit('global/tabOpen', {
           type: 'C',
-          label: '直播解析编辑',
+          label: this.getCustomLabel(false), // 直播解析编辑
           customizedModuleId: id,
           customizedModuleName: 'ST_C_LIVE_CAST_STRATEGY'
         });
