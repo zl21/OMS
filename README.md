@@ -166,3 +166,4 @@ console.log($i18n.t(common.all));
 | v1.0.73 | add tips.jn、jv; tips翻译 |
 | v1.0.74 | add 登录提示 |
 | v1.0.75 | add menu.b0 |
+| v1.0.76 | add sheet v4 |
