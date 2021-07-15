@@ -574,7 +574,7 @@ export default {
       this.getSaveData();
       if (this.tableSaveData.length > 0) {
         this.$Modal.fcWarning({
-          title: '提示',
+          title: $i18n.t("modalTitle.tips"), // 提示
           className: 'ark-dialog',
           mask: true,
           showCancel: true,
@@ -835,7 +835,7 @@ export default {
               });
             } else {
               this.$Modal.fcWarning({
-                title: '提示',
+                title: $i18n.t("modalTitle.tips"), // 提示
                 className: 'ark-dialog',
                 mask: true,
                 content: res.data.message,
