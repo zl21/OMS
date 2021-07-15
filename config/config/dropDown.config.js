@@ -17,7 +17,7 @@ class DropDownConfig {
         // commonUtils.navigateMain(-1, 'TabOpen', 'OC_B_RETURN_ORDER_VIRTUAL_TABLE', 'panel_label.addReturnOrder')
         R3.store.commit('global/tabOpen', {
           type: 'C',
-          label: '退货单新增',
+          label: $i18n.t('menu.b0'), // 退货单新增
           customizedModuleName: 'OC_B_RETURN_ORDER_VIRTUAL_TABLE',
           customizedModuleId: 'New',
         })
@@ -135,8 +135,7 @@ class DropDownConfig {
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
     if (self.selection.length != 1) {
-      // self.$OMS2.omsUtils.msgTips(self, 'warning', 'a8')
-      self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要复制的单据', 2)
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'jw'); // 请选择需要复制的单据
       return
     }
     const IDS = self.$OMS2.omsUtils.sonList(self.selection, 'ID')
@@ -150,7 +149,7 @@ class DropDownConfig {
         id: 2307,
         type: 'action',
         name: 'OC_B_ORDER_VIRTUAL_TABLE',
-        label: '零售发货单新增',
+        label: $i18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
         query: Object.assign({
           copyType: 1,
           sourceId: self.selection[0].ID,
@@ -223,7 +222,7 @@ class DropDownConfig {
         self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
       }, 100)
     }else{
-      self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'jx'); // 只允许缺货或待审核状态的订单进行添加！
       return
     }
    
@@ -300,7 +299,7 @@ class DropDownConfig {
     self.$store.commit('global/tabOpen', {
       type: 'C',
       customizedModuleName: 'OC_B_ORDER_VIRTUAL_TABLE',
-      label: '零售发货单新增',
+      label: $i18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
       customizedModuleId: 'New',
     })
   }
