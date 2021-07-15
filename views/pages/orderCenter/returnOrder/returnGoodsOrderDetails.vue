@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-15 10:41:29
+ * @LastEditTime: 2021-07-15 13:21:03
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -305,7 +305,6 @@ export default {
   },
   async activated() {
     this.panelReturn = ["tapComponent.returnGoodsDetails",'tapComponent.returnDetails'].includes(this.$parent.$parent.panelInstance);
-    console.log('this.panel',this.panelReturn);
     // this.panel = this.$parent.$parent.panelInstance;
     //编辑页面 换货/退货逻辑
     if (this.$route.params.customizedModuleId !== "New") {
@@ -334,7 +333,6 @@ export default {
           // 退货明细
         } else if (this.panelReturn) {
            console.log('退货明细');
-          // 平台 $i18n.t('other.platForm')
           if (this.$route.query.RETURN_SOURCE == '平台') {
             BtnConfig[0].isShow = false;
             BtnConfig[1].isShow = false;
@@ -422,6 +420,8 @@ export default {
             REFUND_ITEM_TABTH, //退单表头
             EXCHANGE_ITEM_TABTH, // 换表头
             OC_B_RETURN_ORDER, //主表
+            OC_B_RETURN_ORDER_EXCHANGE_ITEMS,
+            OC_B_RETURN_ORDER_REFUND_ITEMS
           },
           message,
         },
@@ -451,7 +451,9 @@ export default {
         EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(
           Number(OC_B_RETURN_ORDER.EXCHANGE_AMT)
         ), //换货金额
-        FINAL_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(OC_B_RETURN_ORDER.FINAL_ACTUAL_AMT), //最终应退总金额
+        FINAL_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(
+          Number(OC_B_RETURN_ORDER.FINAL_ACTUAL_AMT)
+        ), //最终应退总金额
         FINAL_REAL_AMT: this.$OMS2.omsUtils.floatNumber(
           Number(OC_B_RETURN_ORDER.FINAL_REAL_AMT)
         ), //最终实退总金额
@@ -470,12 +472,16 @@ export default {
           renderArr = [];
         }
         this.renderHandle(renderArr);
+        this.businessActionTable.data =this.panelReturn ? OC_B_RETURN_ORDER_REFUND_ITEMS: OC_B_RETURN_ORDER_EXCHANGE_ITEMS; // 数据
         // 表头存起来
         this.tableHead.tui = REFUND_ITEM_TABTH;
         this.tableHead.huan = EXCHANGE_ITEM_TABTH;
+        this.toMainData.tui = OC_B_RETURN_ORDER_REFUND_ITEMS
+        this.toMainData.huan = OC_B_RETURN_ORDER_EXCHANGE_ITEMS
+        this.totalNum();
         // 处理数据 -- 退换货明细
         // PT_SKU true平台 false商品
-        this.getDetailsData(true);
+        // this.getDetailsData(true);
       }
       this.loading = false;
     },
@@ -499,7 +505,6 @@ export default {
         JSON.parse(JSON.stringify(this.toMainData))
       );
       this.totalNum();
-      console.log(this.toMainData);
     },
     // 获取SKU数据
     async getPlaceData(page = 0, pageSize = 10) {
@@ -759,17 +764,17 @@ export default {
       });
       setTimeout(() => {
         // 退货明细
-        if (this.panelReturn ) {
+        if (this.panelReturn) {
           self.businessActionTable.totalData.push({
             index: `${$i18n.t("other.total")}`, // 合计
-            REFUND_FEE: this.$OMS2.omsUtils.floatNumber(amt, 2),
+            REFUND_FEE: this.$OMS2.omsUtils.floatNumber(amt),
             QTY_REFUND: qty,
             PRICE_ACTUAL: PRICE_ACTUAL // 成交单价
           });
         } else {
           self.businessActionTable.totalData.push({
             index: `${$i18n.t("other.total")}:`,
-            AMT_EXCHANGE: this.$OMS2.omsUtils.floatNumber(amt, 2),
+            AMT_EXCHANGE: this.$OMS2.omsUtils.floatNumber(amt),
             QTY_EXCHANGE: qty,
           });
         }

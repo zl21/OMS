@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-15 11:48:30
+ * @LastEditTime: 2021-07-15 13:31:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -44,8 +44,7 @@ export default {
   mounted() {
     // 模拟点击，展示搜索框
     document.getElementsByClassName("buttonIcon")[0].click();
- 
-    this.$nextTick(() => {
+ this.$nextTick(() => {
       if (localStorage.getItem("locale") != "zh") {
       let dom = document.getElementsByClassName("ark-input-default")
       dom[0].placeholder = "please enter the system function to search"
