@@ -565,7 +565,7 @@ class BtnConfig {
       }
       if (self.selection.length > 0) {
         if (isSingle && self.selection.length > 1) {
-          commonUtils.msgTips(self, 'warning', '不支持批量操作！', 2)
+          commonUtils.msgTips(self, 'warning', 'kg', 2) // 不支持批量操作！
           return
         }
         self.btnConfig.loading = true
@@ -994,7 +994,7 @@ class BtnConfig {
                         key: 'billNo',
                       },
                       {
-                        title: '失败原因',
+                        title: $i18n.t('form_label.e0'), // 失败原因
                         key: 'message',
                       },
                     ],
@@ -1006,7 +1006,7 @@ class BtnConfig {
                   props: {
                     columns: [
                       {
-                        title: '失败原因',
+                        title: $i18n.t('form_label.e0'), // 失败原因
                         key: 'message',
                       },
                     ],
@@ -1378,7 +1378,7 @@ class BtnConfig {
         if (![1].includes(item.ORDER_STATUS)) {
           // 当前状态异常，不允许操作！
           // commonUtils.msgTips(self, 'warning', 'd9')
-          self.$Message.warning('只允许待审核的订单进行取消合并！')
+          self.$Message.warning($i18n.t('modalTips.kh')) // 只允许待审核的订单进行取消合并！
           self.btnConfig.loading = false
           return
         }
@@ -1406,7 +1406,7 @@ class BtnConfig {
                   title: $i18n.t('form_label.billNo'), // 单据编号
                   key: 'objno',
                 },{
-                  title: '详细信息',
+                  title: '详细信息', // TODO!
                   key: 'message',
                 }
               ],
@@ -1537,7 +1537,7 @@ class BtnConfig {
                   key: 'objid',
                 },
                 {
-                  title: '报错信息',
+                  title: $i18n.t('modalTitle.du'), // 报错信息
                   key: 'message',
                 },
               ],
@@ -1848,7 +1848,7 @@ class BtnConfig {
                         key: 'BILL_NO',
                       },
                       {
-                        title: '失败原因',
+                        title: $i18n.t('form_label.e0'), // 失败原因
                         key: 'RESULT_MSG',
                       },
                     ],
@@ -1865,7 +1865,7 @@ class BtnConfig {
   // 手工 WMS撤回重做
   wmsWithdrawHandler(self, id) {
     if (id.length > 1) {
-      commonUtils.msgTips(self, 'warning', '只支持单个退货单做WMS撤回重做操作！', 2)
+      commonUtils.msgTips(self, 'warning', 'ki', 2) // 只支持单个退货单做WMS撤回重做操作！
       return
     }
     self.service.orderCenter.cancelReturnOrderFromWms({ ID: id[0] }).then((res) => {

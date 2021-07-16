@@ -196,7 +196,7 @@ class commonUtils {
                         key: 'BILL_NO',
                       },
                       {
-                        title: '失败原因',
+                        title: $i18n.t('form_label.e0'), // 失败原因
                         key: 'RESULT_MSG',
                       },
                     ],

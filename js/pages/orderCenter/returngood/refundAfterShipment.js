@@ -1373,7 +1373,7 @@ export default {
                         key: 'objid',
                       },
                       {
-                        title: '报错信息',
+                        title: $i18n.t('modalTitle.du'), // 报错信息
                         key: 'message',
                       },
                     ],

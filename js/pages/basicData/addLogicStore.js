@@ -46,7 +46,7 @@ import businessButton from 'professionalComponents/businessButton';
           formData: [
             {
               style: 'input',
-              label: '逻辑仓编码',
+              label: $i18n.t('form_label.du'), // 逻辑仓编码
               value: 'ECODE',
               width: '6',
               disabled: false,
@@ -55,7 +55,7 @@ import businessButton from 'professionalComponents/businessButton';
             },
             {
               style: 'input',
-              label: '逻辑仓名称',
+              label: $i18n.t('form_label.dv'), // 逻辑仓名称
               value: 'ENAME',
               width: '6',
               disabled: false,
@@ -74,7 +74,7 @@ import businessButton from 'professionalComponents/businessButton';
                 isfk: true, // 是否有fk键
                 isnotnull: true, // 是否必填
                 isuppercase: false, // 是否转大写
-                name: '所属实体仓', // 赔付类型
+                name: $i18n.t('form_label.dw'), // 所属实体仓 // 赔付类型
                 readonly: true, // 是否可编辑，对应input   readonly属性
                 reftable: 'PS_C_BRAND', // 对应的表
                 reftableid: 166035, // 对应的表ID
@@ -89,7 +89,7 @@ import businessButton from 'professionalComponents/businessButton';
             {
               colname: 'group_type',
               style: 'select', // 下拉框类型
-              label: '仓库类型',
+              label: $i18n.t('form_label.dx'), // 仓库类型
               width: '6', // 所占宽度宽度
               value: 'STORETYPE', // 输入框的值
               clearable: true,
@@ -150,14 +150,14 @@ import businessButton from 'professionalComponents/businessButton';
           formData: [
             {
               style: 'checkbox',
-              label: '主仓',
+              label: $i18n.t('form_label.dy'), // 主仓
               value: 'IS_MAIN_WAREHOUSE',
               width: '6',
               disabled: false,
             },
             {
               style: 'checkbox',
-              label: '负库存控制',
+              label: $i18n.t('form_label.dz'), // 负库存控制
               value: 'ISNEGATIVE',
               width: '6',
               disabled: false,
@@ -206,13 +206,13 @@ import businessButton from 'professionalComponents/businessButton';
         data = Object.assign(self.formConfig.formValue, self.businessFormConfig.formValue);
         let str = '';
         if (!data.ECODE) {
-          str += '逻辑仓编码 ';
+          str += `${$i18n.t('form_label.du')} `; // 逻辑仓编码
         } else if (!data.ENAME) {
-          str += '逻辑仓名称 ';
+          str += `${$i18n.t('form_label.dv')} `; // 逻辑仓名称
         } else if (!data.CP_C_PHY_WAREHOUSE_ID) {
-          str += '所属实体仓 ';
+          str += `${$i18n.t('form_label.dw')} `; // 所属实体仓
         } else if(!data.STORETYPE){
-          str += '仓库类型'
+          str += `${$i18n.t('form_label.dx')} `; // 仓库类型
         }
         if (str) {
           self.$Message.warning(`${str}不能为空!`);

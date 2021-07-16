@@ -177,7 +177,7 @@ class DropDownConfig {
     if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) { 
       self.publicBouncedConfig.name = 'addGiftDialog'
       self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
-      self.publicBouncedConfig.confirmTitle = '批量替换下挂商品'
+      self.publicBouncedConfig.confirmTitle = $i18n.t('modalTitle.ah') // 批量替换下挂商品
       self.publicBouncedConfig.componentData = {
         data: self.selection,
         type: 'replace',
@@ -188,7 +188,7 @@ class DropDownConfig {
         self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
       }, 100)
     }else{
-     self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
+     self.$OMS2.omsUtils.msgTips(self, 'warning', 'kf',2)
       return
     }
   
@@ -257,7 +257,7 @@ class DropDownConfig {
       self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
     }, 100)
     }else{
-      self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'kf',2)
       return
     }
   }
@@ -281,7 +281,7 @@ class DropDownConfig {
     if (code == 0) {
       self.publicBouncedConfig.name = 'ORDER_COPY_AF_SALE'
       self.publicBouncedConfig.url = 'modal/orderCenter/afterSaleCopy'
-      self.publicBouncedConfig.confirmTitle = '售后复制'
+      self.publicBouncedConfig.confirmTitle = $i18n.t('modalTitle.ag') // 售后复制
       self.publicBouncedConfig.componentData = { id: self.selection[0].ID }
       self.publicBouncedConfig.width = 400
       setTimeout(() => {
@@ -588,7 +588,7 @@ class DropDownConfig {
     if (ids[0].ORDER_STATUS == 1||ids[0].ORDER_STATUS == 2) {
       this.successHandler(ids, 'replaceConfig', 'product', 'replaceTheGoods')
     }else{
-     self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
+     self.$OMS2.omsUtils.msgTips(self, 'warning', 'kf',2)
       self.btnConfig.loading = false
       return
     }
@@ -674,7 +674,7 @@ class DropDownConfig {
                       key: 'BILL_NO',
                     },
                     {
-                      title: '失败原因',
+                      title: $i18n.t('form_label.e0'), // 失败原因
                       key: 'RESULT_MSG',
                     },
                   ],
