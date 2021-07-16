@@ -307,7 +307,7 @@ export default {
               isfk: true,
               isnotnull: false,
               // name: '店铺名称', // 店铺名称
-              name: $i18n.t('table_label.shopName'), 
+              name: $i18n.t('table_label.shopName'),
               readonly: false,
               reftable: 'CP_C_SHOP',
               reftableid: 10348,
@@ -807,6 +807,12 @@ export default {
                 delete this.modify.master.IS_RESERVED
               }
             }
+            // 特别地：清空'退款金额'Panel
+            this.SHIP_AMT = '0.00';
+            this.ADJUST_AMT = '0.00';
+            this.FINAL_ACTUAL_AMT = '0.00';
+            this.PRO_ACTUAL_AMT = '0.00';
+            this.EX_ACTUAL_AMT = '0.00';
             this.clearDetail += 1; // 清空明细
           },
           onCancel: () => {
