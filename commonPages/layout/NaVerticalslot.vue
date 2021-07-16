@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-16 17:20:36
+ * @LastEditTime: 2021-07-16 23:42:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -45,13 +45,13 @@ export default {
     }
   },
   created() {
-    /* const pa = new FormData();
+    const pa = new FormData();
     pa.append('language', localStorage.getItem("locale") || 'zh');
     service.common.langSwitcher(pa).then((r) => {
       if (r.status === 200 && r.data.code === 0) {
         console.log('langSwitcher success!');
       }
-    }) */
+    })
   },
   mounted() {
     // 模拟点击，展示搜索框
@@ -76,6 +76,19 @@ export default {
           //查询条件默认显示行数
           dom1[4].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-exit explanatory"></i>
       Exit`          //退出 
+
+       let xiaoXiDome = document.getElementsByClassName("panel-title")[0].getElementsByClassName("left")
+        xiaoXiDome[0].innerText = "Messages"
+
+        let Ignore = document.getElementsByClassName("panel-title")[0].getElementsByClassName("right")
+        Ignore[0].innerText = "Ignore"
+
+       let xiaoXiDome2 = document.getElementsByClassName("no-message")[0].getElementsByTagName("span")
+        xiaoXiDome2[0].innerText = "No unread messages"
+
+       let tasks = document.getElementsByClassName("panel-bottom")[0].getElementsByClassName("right")
+        tasks[0].innerText = "All tasks"
+
         }, 700)
 
       }
