@@ -3266,18 +3266,18 @@ export default {
       } else {
         isRefund2Exchange = 0;
       }
-      const copyFOrmValue = JSON.parse(JSON.stringify(_this.information.formValue));
+      const copyFormValue = JSON.parse(JSON.stringify(_this.information.formValue));
       // 是否无名件匹配
-      if (copyFOrmValue.IS_ANONYMOUS) {
-        if (copyFOrmValue.IS_ANONYMOUS == '是') {
-          copyFOrmValue.IS_ANONYMOUS = 1
-        } else if (copyFOrmValue.IS_ANONYMOUS == '否') {
-          copyFOrmValue.IS_ANONYMOUS = 0
+      if (copyFormValue.IS_ANONYMOUS) {
+        if (copyFormValue.IS_ANONYMOUS == '是') {
+          copyFormValue.IS_ANONYMOUS = 1
+        } else if (copyFormValue.IS_ANONYMOUS == '否') {
+          copyFormValue.IS_ANONYMOUS = 0
         }
       }
       const params = {
         objid: _this.$route.query.id,
-        OcBreturnOrder: Object.assign(copyFOrmValue, _this.replacement.formValue, money), // 主表信息
+        OcBreturnOrder: Object.assign(copyFormValue, _this.replacement.formValue, money), // 主表信息
         OcBreturnOrderExchange: Elist, // 换货明细
         OcBreturnOrderRefund: Rlist, // 退货明细
         isRefund2Exchange 
@@ -4011,7 +4011,7 @@ export default {
       this.information.formValue.CP_C_LOGISTICS_ID = this.onSelectData[0].CP_C_LOGISTICS_ID;
       this.information.formValue.CP_C_LOGISTICS_ENAME = this.onSelectData[0].CP_C_LOGISTICS_ENAME;
       this.information.formValue.SELLER_MEMO = this.onSelectData[0].SELLER_MEMO;
-      const replace = JSON(_this.replacement.formValue);
+      const replace = _this.replacement.formValue;
       this.tId = this.onSelectData[0].TID;
       this.warehouseId = this.onSelectData[0].CP_C_PHY_WAREHOUSE_ID ? this.onSelectData[0].CP_C_PHY_WAREHOUSE_ID : ''; // 发货仓库id
       _this.information.formData[14].itemdata.pid = this.warehouseId;
