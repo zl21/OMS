@@ -61,7 +61,7 @@ import businessActionTable from "professionalComponents/businessActionTable";
 import businessButton from 'professionalComponents/businessButton';
 
 import {
-  addDetailModalTableColumns,
+  // addDetailModalTableColumns,
   // tuiColumns,
   // huanColumns,
 } from "./returnConfig.js";
@@ -210,7 +210,7 @@ export default {
       tableConfig: {
         modal: false,
         businessFormConfig: {}, // 表单配置
-        columns: addDetailModalTableColumns, // 表头
+        columns: [], // 表头
         data: [], // 数据配置
         pageShow: false, // 控制分页是否显示
         loading: false,
@@ -1112,7 +1112,7 @@ export default {
      * 3.PRO_TYPE：0普通，other组合/福袋
      * 4.GIFT_RELATION：挂靠关系
      * 5.GROUP_GOODS_MARK：组合关系
-     * 6.GIFT_TYPE：'0'非赠品，other赠品
+     * 6.GIFT_TYPE：'0':非赠品，'1':系统赠品，'2'平台赠品
      */
     selectTogether(row) {
       const pT = row.PRO_TYPE; // number
@@ -1125,7 +1125,7 @@ export default {
       // 筛选出gM值相等的一并选中，下挂组合
       gM && this.screen('gM', { GROUP_GOODS_MARK: gM, PS_C_SKU_ECODE: row.PS_C_SKU_ECODE });
       // 普通品的非卦靠赠品一并选中，其它(系统/平台)赠品
-      this.screen('other', row);
+      // this.screen('other', row);
       // }
       if (this.isMainDelete) return;
       this.selectLen = 0;
