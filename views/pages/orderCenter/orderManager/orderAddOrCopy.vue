@@ -2011,7 +2011,7 @@ export default {
           id: "2307",
           type: "action",
           name: "ORDERMANAGER",
-          label: "零售发货单",
+          label:  $i18n.t('panel_label.retail_shipping_order'),//"零售发货单",
           back: true,
         });
       } else {
@@ -2019,7 +2019,7 @@ export default {
           id: "2307",
           type: "action",
           name: "ORDERMANAGER",
-          label: "零售发货单",
+          label: $i18n.t('panel_label.retail_shipping_order'),// "零售发货单",
           back: true,
         });
       }

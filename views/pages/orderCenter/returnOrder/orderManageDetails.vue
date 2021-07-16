@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-07 16:19:54
- * @LastEditTime: 2021-07-15 18:41:30
+ * @LastEditTime: 2021-07-16 22:48:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/orderManageDetails.vue
@@ -180,7 +180,7 @@
                   id: '2307',
                   type: 'action',
                   name: 'ORDERMANAGER',
-                  label: '零售发货单',
+                  label:  $i18n.t('panel_label.retail_shipping_order'),//'零售发货单',
                   back: true,
                 });
               }
