@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-16 10:58:30
+ * @LastEditTime: 2021-07-16 12:15:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -14,7 +14,7 @@
     </div>
     <div class="NaVertical-box">
       <!-- 自定义 问候-->
-      <span class="timeTips">{{userName}}, {{timeTips}}</span>
+      <span class="timeTips">{{timeTips}}, {{welcome}}</span>
       <!-- 模糊查询 -->
       <slot name="nav-input"></slot>
       <!-- 控制台 -->
@@ -40,6 +40,7 @@ export default {
   data() {
     return {
       timeTips:'',
+      welcome:'欢迎来到OMS！',
       userName:localStorage.getItem('name'),
     }
   },
@@ -79,14 +80,13 @@ export default {
     });
     let now = new Date();
     let hour = now.getHours();
-    if(hour >= 6 && hour < 8) this.timeTips = '早上好！';
-    else if(hour >= 8 && hour < 11) this.timeTips = '上午好！';
-    else if(hour >= 11 && hour < 13) this.timeTips = '中午好！';
-    else if(hour >= 13 && hour < 17) this.timeTips = '下午好！';
-    else if(hour >= 17 && hour < 19) this.timeTips = '傍晚好！';
-    else if(hour >= 19 && hour < 24) this.timeTips = '晚上好！';
-    else if(hour >= 0 && hour < 6) this.timeTips = '凌晨好！';
-    console.log(localStorage.getItem('name'));
+    let ZH = localStorage.getItem("locale") == "zh"
+    this.welcome = ZH ? this.welcome : 'Welcome to OMS!'
+    if(hour >= 0 && hour < 8) this.timeTips = '早上好！';
+    else if(hour >= 8 && hour < 11) ZH ? this.timeTips = '上午好' : this.timeTips = 'Good morning';
+    else if(hour >= 11 && hour < 13) ZH ? this.timeTips = '中午好' : this.timeTips = 'Good noon';
+    else if(hour >= 13 && hour < 17) ZH ? this.timeTips = '下午好' : this.timeTips = 'good afternoon';
+    else if(hour >= 17 && hour < 24) ZH ? this.timeTips = '晚上好' : this.timeTips = 'Good evening';
   }
 };
 </script>
@@ -103,9 +103,8 @@ export default {
     .timeTips{
       flex: 1;
       line-height: 40px;
-      font-size: 14px;
-      font-weight: bold;
-      color: @base-color;
+      font-size: 12px;
+      color: #292f43;
       padding-left: @base-mr;
     }
   }
