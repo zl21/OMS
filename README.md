@@ -267,3 +267,4 @@
 | v1.2.28 | 国际化补充 |
 | v1.2.29 | download移除cancel回调 |
 | v1.2.30 | businessform - 添加title |
+| v1.2.31 | businessform - 添加title |
