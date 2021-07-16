@@ -10,7 +10,7 @@
   <!-- 动态搜索组件,零售发货单专用 -->
   <div class="dynamicSearch">
     <div class="obj-label">
-      组合条件:
+      {{groupConditLabel}}:
     </div>
     <div class="search">
       <div
@@ -160,6 +160,9 @@
       // this.dynamicStructure[1].CALC = this.default_cacl;
     },
     computed: {
+      groupConditLabel() {
+        return this.dynamicData.COMBINE_CONDITION.DESC;
+      },
       type() { // 组合条件对应的组件类型
         return this.dynamicData.CALC_SYMBOL.COMBOBOX[0].value;
       },
