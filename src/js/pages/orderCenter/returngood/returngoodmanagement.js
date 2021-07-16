@@ -1554,6 +1554,22 @@ export default {
           dataAcessKey: 'RESERVE_BIGINT07_type',
           value: 'RESERVE_BIGINT07_type',
           width: '6'
+        },
+        {
+          style: 'input',
+          label: '退货入库单编号', // 退货入库单编号
+          disabled: true,
+          dataAcessKey: 'OC_B_REFUND_IN_ID',
+          value: 'OC_B_REFUND_IN_ID',
+          width: '6'
+        },
+        {
+          style: 'input',
+          label: '是否无名件匹配', // 是否无名件匹配
+          disabled: true,
+          dataAcessKey: 'IS_ANONYMOUS',
+          value: 'IS_ANONYMOUS',
+          width: '6'
         }
       ];
       this.information.formData[0].style = 'input';
@@ -1662,6 +1678,15 @@ export default {
         if (res.data.code === 0) {
           _this.jordanTableConfig.loading = false;
           _this.information.formValue.BILL_TYPE = _this.$route.query.flag == 'RefundToExchange' ? '2' : String(res.data.data.returnOrders.BILL_TYPE); // 如果退货单通过列表按钮(退货转换过过来的,则单据类型默认为退换货)
+          // 是否无名件匹配
+          if (res.data.data.returnOrders.IS_ANONYMOUS != null) {
+            if (res.data.data.returnOrders.IS_ANONYMOUS == 1) {
+              _this.information.formValue.IS_ANONYMOUS = '是'
+            } else if (res.data.data.returnOrders.IS_ANONYMOUS == 0) {
+              _this.information.formValue.IS_ANONYMOUS = '否'
+            }
+          }
+          _this.information.formValue.OC_B_REFUND_IN_ID = res.data.data.returnOrders.OC_B_REFUND_IN_ID; // 退货入库单编号
           res.data.data.returnOrders.BILL_TYPE = Number(_this.information.formValue.BILL_TYPE);
           _this.selectSelectt();
           if (_this.information.formValue.BILL_TYPE == '2' && !res.data.data.returnOrders.IS_RESERVED) {
