@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-07-15 10:18:10
+ * @LastEditTime: 2021-07-16 18:34:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
@@ -170,6 +170,8 @@ export default {
         service.orderCenter.saveMatch(data).then(res => {
           if (res.data.code == 0) {
             this.$Message.success(res.data.message)
+             this.init()
+            
           } else {
             this.$Modal.confirm({
               title: res.data.message,

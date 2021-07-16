@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-16 12:15:26
+ * @LastEditTime: 2021-07-16 17:20:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -14,7 +14,7 @@
     </div>
     <div class="NaVertical-box">
       <!-- 自定义 问候-->
-      <span class="timeTips">{{timeTips}}, {{welcome}}</span>
+      <span class="timeTips">{{ timeTips }}, {{ welcome }}</span>
       <!-- 模糊查询 -->
       <slot name="nav-input"></slot>
       <!-- 控制台 -->
@@ -39,9 +39,9 @@ export default {
   name: "NaVerticalslot",
   data() {
     return {
-      timeTips:'',
-      welcome:'欢迎来到OMS！',
-      userName:localStorage.getItem('name'),
+      timeTips: '',
+      welcome: '欢迎来到OMS！',
+      userName: localStorage.getItem('name'),
     }
   },
   created() {
@@ -58,35 +58,37 @@ export default {
     document.getElementsByClassName("buttonIcon")[0].click();
     this.$nextTick(() => {
       if (localStorage.getItem("locale") != "zh") {
-      let dom = document.getElementsByClassName("ark-input-default")
-      dom[0].placeholder = "please enter the system function to search"
+        let dom = document.getElementsByClassName("ark-input-default")
+        dom[0].placeholder = "please enter the system function to search"
 
-      let dom1 = document.getElementsByClassName("set-panel")[0].getElementsByClassName("panel-item")
-
-      dom1[0].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-contact explanatory"></i> Welcome：Admin` 
-        //欢迎: 系统管理员
-      dom1[1].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-key explanatory"></i> change password`  //修改密码    
-      dom1[2].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-apps explanatory"></i> Collapse search conditions <span tabindex="0" class="switch ark-switch ark-switch-checked ark-switch-default"><input type="hidden" value="true"> <span class="ark-switch-inner"> <!----></span></span>`
         //折叠查询条件
-      setTimeout(() => {
-        dom1[3].getElementsByTagName("p")[0].innerHTML =`<i class="iconfont iconmd-list explanatory"></i>
+        setTimeout(() => {
+          let dom1 = document.getElementsByClassName("set-panel")[0].getElementsByClassName("panel-item")
+
+          dom1[0].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-contact explanatory"></i> Welcome：Admin`
+          //欢迎: 系统管理员
+          dom1[1].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-key explanatory"></i> change password`  //修改密码    
+          dom1[2].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-apps explanatory"></i> Collapse search conditions <span tabindex="0" class="switch ark-switch ark-switch-checked ark-switch-default"><input type="hidden" value="true"> <span class="ark-switch-inner"> <!----></span></span>`
+
+          dom1[3].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-list explanatory"></i>
         earch conditions default displayed rows
         <div class="set-panel-number ark-input-number ark-input-number-default"><div class="ark-input-number-handler-wrap"><a class="ark-input-number-handler ark-input-number-handler-up"><span class="ark-input-number-handler-up-inner ark-icon iconios-arrow-up"></span></a> <a class="ark-input-number-handler ark-input-number-handler-down"><span class="ark-input-number-handler-down-inner ark-icon iconios-arrow-down"></span></a></div> <div class="ark-input-number-input-wrap"><input autocomplete="off" spellcheck="false" placeholder="" class="ark-input-number-input"></div></div>`
-         //查询条件默认显示行数
-      }, 500)
-      dom1[3].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-exit explanatory"></i>
+          //查询条件默认显示行数
+          dom1[4].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-exit explanatory"></i>
       Exit`          //退出 
+        }, 700)
+
       }
     });
     let now = new Date();
     let hour = now.getHours();
     let ZH = localStorage.getItem("locale") == "zh"
     this.welcome = ZH ? this.welcome : 'Welcome to OMS!'
-    if(hour >= 0 && hour < 8) this.timeTips = '早上好！';
-    else if(hour >= 8 && hour < 11) ZH ? this.timeTips = '上午好' : this.timeTips = 'Good morning';
-    else if(hour >= 11 && hour < 13) ZH ? this.timeTips = '中午好' : this.timeTips = 'Good noon';
-    else if(hour >= 13 && hour < 17) ZH ? this.timeTips = '下午好' : this.timeTips = 'good afternoon';
-    else if(hour >= 17 && hour < 24) ZH ? this.timeTips = '晚上好' : this.timeTips = 'Good evening';
+    if (hour >= 0 && hour < 8) this.timeTips = '早上好！';
+    else if (hour >= 8 && hour < 11) ZH ? this.timeTips = '上午好' : this.timeTips = 'Good morning';
+    else if (hour >= 11 && hour < 13) ZH ? this.timeTips = '中午好' : this.timeTips = 'Good noon';
+    else if (hour >= 13 && hour < 17) ZH ? this.timeTips = '下午好' : this.timeTips = 'good afternoon';
+    else if (hour >= 17 && hour < 24) ZH ? this.timeTips = '晚上好' : this.timeTips = 'Good evening';
   }
 };
 </script>
@@ -98,9 +100,9 @@ export default {
 // 头部导航有关系的所有样式
 // 搜索
 .NaVertical {
-  .NaVertical-box{
+  .NaVertical-box {
     width: 100%;
-    .timeTips{
+    .timeTips {
       flex: 1;
       line-height: 40px;
       font-size: 12px;
