@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-15 18:56:05
+ * @LastEditTime: 2021-07-16 13:38:15
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -894,7 +894,7 @@ export default {
       /* 可能要判断是哪个明细的 */
       const self = this;
       self.isMainDelete = true;
-      const allDa = self.actionTableCon.data;
+      const allDa = self.businessActionTable.data;
       const selDa = self.detailsArrData;
       if (!selDa.length) {
         this.$OMS2.omsUtils.msgTips(self, "warning", "a8");
@@ -902,10 +902,10 @@ export default {
       }
       if (selDa.length == allDa.length) { // 全选删
         self.detailsArrData = [];
-        this.actionTableCon.data = [];
+        this.businessActionTable.data = [];
         if (this.$route.params.customizedModuleId === "New") {
           this.toMainData[this.returnProduct == "0" ? "tui" : "huan"] =
-            this.actionTableCon.data;
+            this.businessActionTable.data;
         }
         this.$emit("subTableData", this.toMainData);
         R3.store.commit(
@@ -970,7 +970,7 @@ export default {
         onOk: () => {
           this.$nextTick(() => {
             // 取差集展示：
-            self.actionTableCon.data = this.$OMS2.omsUtils.getDifferentArr(
+            self.businessActionTable.data = this.$OMS2.omsUtils.getDifferentArr(
               allDa,
               selDa,
               key
@@ -978,7 +978,7 @@ export default {
             this.totalNum();
             self.detailsArrData = [];
             if (this.$route.params.customizedModuleId === "New") {
-              this.toMainData[this.returnProduct == "0" ? "tui" : "huan"] = this.actionTableCon.data;
+              this.toMainData[this.returnProduct == "0" ? "tui" : "huan"] = this.businessActionTable.data;
             }
             this.$emit("subTableData", this.toMainData);
             R3.store.commit(
@@ -1115,11 +1115,11 @@ export default {
      *    非赠品商品选中后，如果挂靠赠品还有可退数量一并选中
      *    如果整单的非挂靠赠品（系统/平台）还有可退数量也一并选中
      *    如果当前选中的商品为组合/福袋中的下挂明细，则对应的其他下卦明细也一并选中
-     * 2.系统/平台赠品：gift-type、group-mark俩都为空 且giftType != 0
+     * 2.系统/平台赠品：gift-type、group-mark俩都为空
      * 3.PRO_TYPE：0普通，other组合/福袋
      * 4.GIFT_RELATION：挂靠关系
      * 5.GROUP_GOODS_MARK：组合关系
-     * 6.GIFT_TYPE：0非赠品，other赠品
+     * 6.GIFT_TYPE：'0'非赠品，other赠品
      */
     selectTogether(row) {
       const pT = row.PRO_TYPE; // number
@@ -1128,11 +1128,11 @@ export default {
       const gT = row.GIFT_TYPE; // string
       // if (pT == 0) { // 普通
       // 筛选出gR值相等的一并选中，挂靠赠品
-      gR && this.screen({ GIFT_RELATION: gR });
+      gR && this.screen('gR', { GIFT_RELATION: gR, PS_C_SKU_ECODE: row.PS_C_SKU_ECODE });
       // 筛选出gM值相等的一并选中，下挂组合
-      gM && this.screen({ GROUP_GOODS_MARK: gM });
-      // 普通品的非下卦赠品一并选中，其它赠品
-      this.screen();
+      gM && this.screen('gM', { GROUP_GOODS_MARK: gM, PS_C_SKU_ECODE: row.PS_C_SKU_ECODE });
+      // 普通品的非卦靠赠品一并选中，其它(系统/平台)赠品
+      this.screen('other', row);
       // }
       if (this.isMainDelete) return;
       this.selectLen = 0;

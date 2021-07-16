@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-27 11:05:42
- * @LastEditTime: 2021-07-14 10:37:07
+ * @LastEditTime: 2021-07-16 14:08:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/orderCenter/orderManager/proDetail.vue
@@ -17,7 +17,7 @@
       >
         <Icon type="ios-repeat" />
         <!-- 切换为sku商品显示 -->
-         {{$i18n.t('form_label.b0')}}
+         {{Vmi18n.t('form_label.b0')}}
       </div>
       <div
         v-show="!isQh"
@@ -26,7 +26,7 @@
       >
         <Icon type="ios-repeat" />
         <!-- 切换平台商品明细 -->
-         {{$i18n.t('form_label.b1')}}
+         {{Vmi18n.t('form_label.b1')}}
       </div>
     </div>
     <businessActionTable
@@ -55,6 +55,7 @@
       return {
         loading: false,
         isQh: true,
+        Vmi18n:$i18n,
         tableConfig: {
           columns: [
             {
