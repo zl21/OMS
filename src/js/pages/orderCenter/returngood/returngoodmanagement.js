@@ -3266,7 +3266,7 @@ export default {
       } else {
         isRefund2Exchange = 0;
       }
-      const copyFOrmValue = _this.information.formValue;
+      const copyFOrmValue = JSON.parse(JSON.stringify(_this.information.formValue));
       // 是否无名件匹配
       if (copyFOrmValue.IS_ANONYMOUS) {
         if (copyFOrmValue.IS_ANONYMOUS == '是') {
@@ -4011,7 +4011,7 @@ export default {
       this.information.formValue.CP_C_LOGISTICS_ID = this.onSelectData[0].CP_C_LOGISTICS_ID;
       this.information.formValue.CP_C_LOGISTICS_ENAME = this.onSelectData[0].CP_C_LOGISTICS_ENAME;
       this.information.formValue.SELLER_MEMO = this.onSelectData[0].SELLER_MEMO;
-      const replace = _this.replacement.formValue;
+      const replace = JSON(_this.replacement.formValue);
       this.tId = this.onSelectData[0].TID;
       this.warehouseId = this.onSelectData[0].CP_C_PHY_WAREHOUSE_ID ? this.onSelectData[0].CP_C_PHY_WAREHOUSE_ID : ''; // 发货仓库id
       _this.information.formData[14].itemdata.pid = this.warehouseId;
