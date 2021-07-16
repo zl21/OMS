@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-15 14:37:11
+ * @LastEditTime: 2021-07-16 10:58:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -9,11 +9,12 @@
 <template>
   <div class="NaVertical">
     <div class="NaVertical-icons">
- 
       <!-- 收拉左侧菜单 -->
       <slot name="icon-tag"></slot>
     </div>
     <div class="NaVertical-box">
+      <!-- 自定义 问候-->
+      <span class="timeTips">{{userName}}, {{timeTips}}</span>
       <!-- 模糊查询 -->
       <slot name="nav-input"></slot>
       <!-- 控制台 -->
@@ -38,7 +39,8 @@ export default {
   name: "NaVerticalslot",
   data() {
     return {
-
+      timeTips:'',
+      userName:localStorage.getItem('name'),
     }
   },
   created() {
@@ -52,7 +54,6 @@ export default {
   mounted() {
     // 模拟点击，展示搜索框
     document.getElementsByClassName("buttonIcon")[0].click();
- 
     this.$nextTick(() => {
       if (localStorage.getItem("locale") != "zh") {
       let dom = document.getElementsByClassName("ark-input-default")
@@ -74,9 +75,18 @@ export default {
       dom1[3].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-exit explanatory"></i>
       Exit`          //退出 
       }
-    })
-  },
-  methods() { },
+    });
+    let now = new Date();
+    let hour = now.getHours();
+    if(hour >= 6 && hour < 8) this.timeTips = '早上好！';
+    else if(hour >= 8 && hour < 11) this.timeTips = '上午好！';
+    else if(hour >= 11 && hour < 13) this.timeTips = '中午好！';
+    else if(hour >= 13 && hour < 17) this.timeTips = '下午好！';
+    else if(hour >= 17 && hour < 19) this.timeTips = '傍晚好！';
+    else if(hour >= 19 && hour < 24) this.timeTips = '晚上好！';
+    else if(hour >= 0 && hour < 6) this.timeTips = '凌晨好！';
+    console.log(localStorage.getItem('name'));
+  }
 };
 </script>
 <style lang="less">
@@ -87,6 +97,17 @@ export default {
 // 头部导航有关系的所有样式
 // 搜索
 .NaVertical {
+  .NaVertical-box{
+    width: 100%;
+    .timeTips{
+      flex: 1;
+      line-height: 40px;
+      font-size: 14px;
+      font-weight: bold;
+      color: @base-color;
+      padding-left: @base-mr;
+    }
+  }
   .nav-search input {
     #bundle > .defalutInput !important;
   }
