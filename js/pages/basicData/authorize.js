@@ -12,23 +12,24 @@ export default {
     return {
       vmI18n:$i18n,
       modal1: false,
+      shopTitle:$i18n.t('modalTitle.af'),
       shopModal: true,
       panelDefaultValue: 'panel_baseInfo', // 设置默认打开'基本信息'
       plantName: '', // 用户输入的
       active: 0, // 步骤进度
       steps: [
         {
-          name: '店铺授权',
+          name:  $i18n.t('form_label.ap'), //'店铺授权',
           icon: 'iconfont icon-qian',
           status: 'finish', // wait、process、finish、error
         },
         {
-          name: '店铺昵称',
+          name:  $i18n.t('form_label.aq'), //'店铺昵称',
           icon: 'iconfont icon-dingdan',
           status: 'wait',
         },
         {
-          name: '完善信息',
+          name:  $i18n.t('form_label.ar'),//'完善信息',
           icon: 'iconfont icon-weibiaoti-4',
           status: 'wait',
         },
@@ -45,7 +46,7 @@ export default {
             btnclick: this.fnclose,
           },
           {
-            text: '下一步',
+            text: $i18n.t('btn.next'), //'下一步',
             btnclick: () => {
               this.fnauth()
             },
@@ -62,13 +63,13 @@ export default {
             btnclick: this.fnclose,
           },
           {
-            text: '上一步',
+            text: $i18n.t('btn.previous'),//'上一步',
             btnclick: () => {
               this.fnSteps(1)
             },
           },
           {
-            text: '下一步',
+            text: $i18n.t('btn.next'),
             btnclick: () => {
               this.fnSteps(3)
               this.relationShip()
@@ -83,7 +84,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: '上一步',
+            text: $i18n.t('btn.previous'),//'上一步',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.fnSteps(2)
@@ -118,12 +119,12 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: '授权成功',
+            text: $i18n.t('btn.authorityYes'), //'授权成功',
             type: 'default',
             btnclick: this.fnSucceed,
           },
           {
-            text: '授权失败',
+            text: $i18n.t('btn.authorityNo'),//'授权失败',
             btnclick: this.fnFail,
           },
         ],
@@ -826,7 +827,7 @@ export default {
       console.log('retrurnNick:>>>', this.shopdata.retrurnNick)
       if (this.shopdata.retrurnNick != 'Y') {
         if (!item.item.props.value) {
-          this.$Message.error('请填写店铺昵称！')
+          this.$Message.error($i18n.t('modalTips.gz') )
           return
         }
       }
@@ -858,7 +859,7 @@ export default {
       } else if (res.type == 'otherPlatform') {
         this.fnSteps(4)
         this.formconfig.formValue.CP_C_PLATFORM_ECODE = 'otherPlatform'
-        this.formconfig.formValue.CP_C_PLATFORM_NAME = '其他平台'
+        this.formconfig.formValue.CP_C_PLATFORM_NAME = $i18n.t('modalTitle.ai') //'其他平台'
       } else {
         let data = {
           params: {
@@ -875,7 +876,7 @@ export default {
             if (this.shopdata.authTips) {
               let obj = {
                 style: 'formCompile',
-                label: '授权指引',
+                label:  $i18n.t('form_label.ay') ,//'授权指引',
                 colname: 'authTips',
                 slotName: 'formCompile',
                 class: 'beizu',

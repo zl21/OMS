@@ -2,9 +2,9 @@
   <div class="customized-detail">
     <div class="authorize-list">
       <div class="authorize-list-heard">
-        <div class="heard-tips">请选择需要添加的店铺类型</div>
+        <div class="heard-tips">{{vmI18n.t("modalTips.ha") }}</div>
         <div class="search-input">
-          <label>搜索：</label>
+          <label>{{vmI18n.t('btn.search') }} ：</label>
           <Input
             v-model="plantName"
             search
@@ -35,7 +35,7 @@
       footer-hide
       :draggable="true"
       :mask="true"
-      title="店铺新增"
+      :title="shopTitle"
     >
       <div class="customized-modal">
         <!-- 步骤条 -->
@@ -80,7 +80,7 @@
       :class-name="'ark-dialog'"
     >
       <div class="customized-modal">
-        <p class="tips"><span class="iconfont"></span>是否授权成功？</p>
+        <p class="tips"><span class="iconfont"></span>{{vmI18n.t('modalTips.hb') }}</p>
         <businessButton class="modal-footer" :btn-config="authoriBtnConfig" />
       </div>
     </Modal>

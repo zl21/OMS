@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-07-15 19:01:59
+ * @LastEditTime: 2021-07-16 13:17:04
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/views/pages/commodityCenter/commodityClassifyAddOrEdit.vue
+-->
 <template>
 <!-- 商品分类 - 新增/编辑 -->
   <div
@@ -18,7 +26,8 @@
           </p>
         </Panel>
         <Panel name="panel_commodityDimension">
-          商品维度
+          <!-- 商品维度 -->
+        {{vmI18n.t('panel_label.b6')}}
           <p slot="content">
             <businessForm :form-config="formConfig2" @keyDown="keyDown" :key="fresh2"/>
           </p>

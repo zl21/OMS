@@ -350,7 +350,7 @@ export default {
           buttons: [{
             webname: 'CLASSIFY_AddDetailBtn',
             type:'primary',
-            text: '添加',
+            text: $i18n.t('btn.increase'), //'添加',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.addAttrValue();
@@ -480,7 +480,7 @@ export default {
     async addAttrValue() {
       const self = this;
       if (!self.cusAttrConfig.businessFormConfig.formData[0].itemdata.valuedata.length) {
-        self.$Message.warning('请选择需要添加的内容！');
+        self.$Message.warning( $i18n.t('modalTips.kk') );
         return false;
       }
       this.loading = true;
@@ -508,7 +508,7 @@ export default {
     async deleteAttrValue() {
       const self = this;
       if (!self.cusAttrConfig.selectionData.length) {
-        self.$Message.warning('请选择需要删除的内容！');
+        self.$Message.warning( $i18n.t('modalTips.ka')  );
         return false;
       }
       const delIDS = [];
@@ -622,7 +622,7 @@ export default {
         tableId: 10091,
         type: 'S',
         tableName: 'PS_C_PRO_CLASSIFY',
-        label: '商品分类',
+        label:   $i18n.t('menu.ac'), //'商品分类',
         back: true,
       });
     },
