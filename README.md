@@ -172,3 +172,4 @@ console.log($i18n.t(common.all));
 | v1.0.79 | add sheet v5 |
 | v1.0.80 | add sheet v6 |
 | v1.0.81 | add for sku |
+| v1.0.82 | add sheet v6 |
