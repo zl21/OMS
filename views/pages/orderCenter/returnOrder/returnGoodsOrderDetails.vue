@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-16 13:38:15
+ * @LastEditTime: 2021-07-16 17:19:59
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -303,10 +303,12 @@ export default {
   },
   async created() {
     this.getReplaceData(this.$route.params.itemId);
+    let ZH = localStorage.getItem("locale") == "zh"
+    console.log(ZH);
+    if(!ZH) document.getElementById('refresh').innerHTML = "Refresh";
   },
   async activated() {
     this.panelReturn = ["tapComponent.returnGoodsDetails",'tapComponent.returnDetails'].includes(this.$parent.$parent.panelInstance);
-    // this.panel = this.$parent.$parent.panelInstance;
     //编辑页面 换货/退货逻辑
     if (this.$route.params.customizedModuleId !== "New") {
       console.log();
@@ -367,7 +369,6 @@ export default {
     window.addEventListener("customizeClick", function (e) {
       let text = e.detail.type || "";
       if (text === "save" && e.detail.res.data.oK) {
-        console.log("save:");
         self.save();
       }
     });
@@ -1132,7 +1133,7 @@ export default {
       // 筛选出gM值相等的一并选中，下挂组合
       gM && this.screen('gM', { GROUP_GOODS_MARK: gM, PS_C_SKU_ECODE: row.PS_C_SKU_ECODE });
       // 普通品的非卦靠赠品一并选中，其它(系统/平台)赠品
-      this.screen('other', row);
+      // this.screen('other', row);
       // }
       if (this.isMainDelete) return;
       this.selectLen = 0;

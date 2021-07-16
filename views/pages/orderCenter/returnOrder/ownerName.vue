@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-07 18:45:07
- * @LastEditTime: 2021-07-09 13:16:39
+ * @LastEditTime: 2021-07-16 17:42:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/OWNERNAME.vue
@@ -33,24 +33,24 @@ export default {
     // 模拟点击，加密
     setTimeout(() => {
       document.getElementsByClassName("eye")[0].click();
-    }, 100);
+    }, 500);
   },
   methods:{
     onClickEye(val){
-     this.isShow = !val
      let obj = {
        Label:'Label',
        name:'name',
        OWNERNAME:this.$route.params.itemId
      }
-      if(!val){
+     if(val){
         obj.ID = this.$route.params.itemId
         this.$emit('change',[obj])
         this.$refs.iconfont.classList.replace('iconios-eye-off','iconios-eye');
-      }else{
-       this.$emit('change','')
+     }else{
+        this.$emit('change','')
         this.$refs.iconfont.classList.replace('iconios-eye','iconios-eye-off')
-      }
+     }
+     this.isShow = !val
     }
   }
 }
