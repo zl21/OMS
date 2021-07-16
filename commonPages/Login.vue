@@ -154,10 +154,6 @@ export default {
         this.$refs.username.value !== "" &&
         this.$refs.password.value !== ""
       ) {
-
-
-
-
         service.common.getCaptcha().then((res) => {
           let params = {
             username: this.$refs.username.value,
@@ -167,6 +163,7 @@ export default {
             lang: 'zh_CN',
           }
           service.common.globalLogin(R3.urlSearchParams(params)).then((r) => {
+            localStorage.setItem("name", this.$refs.username.value)
             if (r.status === 200 && r.data.code === 0) {
               let obj = {
                 TID: this.$refs.username.value,
@@ -176,7 +173,6 @@ export default {
               service.common.loginLog(obj).then(res=>{
                 console.log(res);
               })
-
               window.location.href = window.location.origin;
             }else{
                let obj = {

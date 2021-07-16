@@ -126,11 +126,11 @@
                             props: {
                               columns: [
                                 {
-                                  title:$i18n.t('table_label.serialNo'), // 序号
+                                  title: $i18n.t('table_label.serialNo'), // 序号
                                   key: 'index'
                                 },
                                 {
-                                  title:'单据编号',
+                                  title: $i18n.t('form_label.billNo'), // 单据编号
                                   key:'billNo'
                                 },
                                 {
@@ -178,11 +178,11 @@
                             props: {
                               columns: [
                                 {
-                                  title:$i18n.t('table_label.serialNo'), // 序号
+                                  title: $i18n.t('table_label.serialNo'), // 序号
                                   key: 'index'
                                 },
                                 {
-                                  title:'单据编号',
+                                  title: $i18n.t('form_label.billNo'), // 单据编号
                                   key:'billNo'
                                 },
                                 {
@@ -1073,7 +1073,7 @@
             this.$store.commit('global/tabOpen', {
             type: 'C',
             customizedModuleName: this.tablename,
-            label: '零售发货单详情',
+            label: $i18n.t('panel_label.retailInvoice_details'), //零售发货单详情
             customizedModuleId: val.ID,
           });
           break;
@@ -1082,7 +1082,7 @@
               this.$store.commit('global/tabOpen', {
               type: 'V',
               tableName: 'OC_B_RETURN_ORDER_VIRTUAL_TABLE',
-              label: '退货单详情',
+              label: $i18n.t('menu.b7'), //退货单详情
               tableId: 10728,
               id:`${val.ID}?RETURN_SOURCE=${val.RETURN_SOURCE}&SOURCE_CODE=${val.SOURCE_CODE}`
             });
@@ -1090,7 +1090,7 @@
               this.$store.commit('global/tabOpen', {
               type: 'V',
               tableName: 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE',
-              label: '换货单详情',
+              label: $i18n.t('menu.b8'), //换货单详情
               tableId: 10754,
               id:`${val.ID}?RETURN_SOURCE=${val.RETURN_SOURCE}&SOURCE_CODE=${val.SOURCE_CODE}`
             });

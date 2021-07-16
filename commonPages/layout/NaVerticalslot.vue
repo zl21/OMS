@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-15 14:37:11
+ * @LastEditTime: 2021-07-16 12:15:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -9,11 +9,12 @@
 <template>
   <div class="NaVertical">
     <div class="NaVertical-icons">
- 
       <!-- 收拉左侧菜单 -->
       <slot name="icon-tag"></slot>
     </div>
     <div class="NaVertical-box">
+      <!-- 自定义 问候-->
+      <span class="timeTips">{{timeTips}}, {{welcome}}</span>
       <!-- 模糊查询 -->
       <slot name="nav-input"></slot>
       <!-- 控制台 -->
@@ -32,20 +33,29 @@
   </div>
 </template>
 <script>
+import service from '@/service/index';
+
 export default {
   name: "NaVerticalslot",
   data() {
     return {
-
+      timeTips:'',
+      welcome:'欢迎来到OMS！',
+      userName:localStorage.getItem('name'),
     }
   },
   created() {
-
+    const pa = new FormData();
+    pa.append('language', localStorage.getItem("locale") || 'zh');
+    service.common.langSwitcher(pa).then((r) => {
+      if (r.status === 200 && r.data.code === 0) {
+        console.log('langSwitcher success!');
+      }
+    })
   },
   mounted() {
     // 模拟点击，展示搜索框
     document.getElementsByClassName("buttonIcon")[0].click();
- 
     this.$nextTick(() => {
       if (localStorage.getItem("locale") != "zh") {
       let dom = document.getElementsByClassName("ark-input-default")
@@ -67,10 +77,16 @@ export default {
       dom1[3].getElementsByTagName("p")[0].innerHTML = `<i class="iconfont iconmd-exit explanatory"></i>
       Exit`          //退出 
       }
-
-
-    })
-
+    });
+    let now = new Date();
+    let hour = now.getHours();
+    let ZH = localStorage.getItem("locale") == "zh"
+    this.welcome = ZH ? this.welcome : 'Welcome to OMS!'
+    if(hour >= 0 && hour < 8) this.timeTips = '早上好！';
+    else if(hour >= 8 && hour < 11) ZH ? this.timeTips = '上午好' : this.timeTips = 'Good morning';
+    else if(hour >= 11 && hour < 13) ZH ? this.timeTips = '中午好' : this.timeTips = 'Good noon';
+    else if(hour >= 13 && hour < 17) ZH ? this.timeTips = '下午好' : this.timeTips = 'good afternoon';
+    else if(hour >= 17 && hour < 24) ZH ? this.timeTips = '晚上好' : this.timeTips = 'Good evening';
   }
 };
 </script>
@@ -82,6 +98,16 @@ export default {
 // 头部导航有关系的所有样式
 // 搜索
 .NaVertical {
+  .NaVertical-box{
+    width: 100%;
+    .timeTips{
+      flex: 1;
+      line-height: 40px;
+      font-size: 12px;
+      color: #292f43;
+      padding-left: @base-mr;
+    }
+  }
   .nav-search input {
     #bundle > .defalutInput !important;
   }

@@ -192,11 +192,11 @@ class commonUtils {
                         key: 'INDEX',
                       },
                       {
-                        title: '单据编号',
+                        title: $i18n.t('form_label.billNo'), // 单据编号
                         key: 'BILL_NO',
                       },
                       {
-                        title: '失败原因',
+                        title: $i18n.t('form_label.e0'), // 失败原因
                         key: 'RESULT_MSG',
                       },
                     ],

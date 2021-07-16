@@ -273,11 +273,11 @@ export default {
                           key: 'index'
                         },
                         {
-                          title: '单据编号', // '提示信息',
+                          title: $i18n.t('form_label.billNo'), // 单据编号
                           key: 'bollNo',
                         },
                         {
-                          title: '失败原因',
+                          title: $i18n.t('form_label.e0'), // 失败原因
                           key: 'message'
                         }
                       ],
