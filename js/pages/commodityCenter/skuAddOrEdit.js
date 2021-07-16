@@ -18,7 +18,7 @@ export default {
     loading,
     ImageUpload
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   data() {
     return {
       vmI18n: $i18n,

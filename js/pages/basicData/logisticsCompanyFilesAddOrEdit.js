@@ -22,7 +22,7 @@ export default {
     subTable,
     orderNumberNnalysis
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   data() {
     /* -------------------- input校验器 start -------------------- */
     const ECODEValidator = (rule, value, callback) => {

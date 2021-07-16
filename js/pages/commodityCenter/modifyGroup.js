@@ -20,7 +20,7 @@ export default {
     businessActionTable,
     ImageUpload
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   computed: {
     id() {
       return this.$route.params.customizedModuleId == 'New' ? -1 : this.$route.params.customizedModuleId;

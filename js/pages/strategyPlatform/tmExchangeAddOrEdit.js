@@ -15,7 +15,7 @@ export default {
     businessLabel,
     businessStatusFlag
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   data() {
     return {
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID

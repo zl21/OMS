@@ -18,9 +18,11 @@ export default {
   ORDERMANAGER: {
     component: () => import('allpages/orderCenter/orderManager/orderManager.vue'),
     // component: orderManager,
+    labelName: i18n.t('panel_label.retail_shipping_order')
   },
   OC_B_RETURN_ORDER: {
     component: () => import('allpages/orderCenter/orderManager/orderManager.vue'),
+    labelName: i18n.t('panel_label.a1')
   },
   // 订单中心-列表-拆分订单
   MANUAL_SPLIT: {
@@ -36,11 +38,13 @@ export default {
   ORDERMANAGEDETAIL: {
     component: () => import('allpages/orderCenter/orderManageDetail/orderManageDetail.vue'),
     // component: orderManageDetail
+    labelName: i18n.t('panel_label.retailInvoice_details'), //零售发货单详情
   },
   // 订单中心-退换货单详情
   RETURNGOOD: {
     component: () => import('allpages/orderCenter/returngood/returngoodmanagement.vue'),
     // component: returnGood,
+    labelName: i18n.t('menu.b7'), //退货单详情
   },
   // 订单中心-退换货单
   RETURNGOODLIST: {

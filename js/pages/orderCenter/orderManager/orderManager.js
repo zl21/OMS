@@ -11,6 +11,8 @@
   import formSetting from '@/views/pages/orderCenter/orderManager/formSetting.vue';
   import proDetail from '@/views/pages/orderCenter/orderManager/proDetail';
   import businessAgTable from 'professionalComponents/businessAgTable';
+  import modifycurrentLabel from '../../../../assets/js/mixins/modifycurrentLabel';
+
   export default {
     components: {
       businessButton,
@@ -23,7 +25,7 @@
       proDetail,
       businessAgTable
     },
-    mixins: [isFavoriteMixin],
+    mixins: [isFavoriteMixin, new modifycurrentLabel(true)],
     data() {
       return {
         vmI18n: $i18n,

@@ -14,7 +14,7 @@ export default {
     businessStatusFlag,
     subTable
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   data() {
     return {
       vmI18n:$i18n,

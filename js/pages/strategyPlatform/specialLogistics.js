@@ -21,7 +21,7 @@ export default {
     businessActionTable,
     subTable
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   watch: {
     'formConfig.formValue': {
       //监听主表

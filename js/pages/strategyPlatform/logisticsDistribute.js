@@ -15,7 +15,7 @@ export default {
     businessActionTable,
     subTable
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   data() {
     return {
       modalType: 1,//弹窗类型

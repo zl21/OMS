@@ -22,7 +22,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
       subTable,
       businessLabel
     },
-    mixins: [modifycurrentLabel],
+    mixins: [new modifycurrentLabel()],
     data() {
       return {
         isModify: false, // 是否修改过页面
