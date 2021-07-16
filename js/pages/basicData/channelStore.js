@@ -67,7 +67,7 @@ export default {
                     tableId: 10327,
                     type: 'S',
                     tableName: 'CP_C_ORG_CHANNEL',
-                    label: '渠道仓档案',
+                    label:  $i18n.t('menu.a4'), //'渠道仓档案',
                     back: true,
                   });
                 }
@@ -79,7 +79,7 @@ export default {
                 tableId: 10327,
                 type: 'S',
                 tableName: 'CP_C_ORG_CHANNEL',
-                label: '渠道仓档案',
+                label:  $i18n.t('menu.a4'), //'渠道仓档案',
                 back: true,
               });
             }
