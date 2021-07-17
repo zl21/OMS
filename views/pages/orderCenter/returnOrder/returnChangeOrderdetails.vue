@@ -79,7 +79,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       btnConfigTui: {
         typeAll: "default",
         btnsite: "right",
@@ -119,6 +119,8 @@ export default {
           },
         ],
       },
+      keyGift: '',
+      keyGroup: '',
       returnArr: [],
       changeArr: [],
       loading: false,
@@ -231,7 +233,7 @@ export default {
           buttons: [
             {
               type: "primary", // 按钮类型
-               text: $i18n.t('btn.search'), // 按钮文本 搜索
+              text: $i18n.t('btn.search'), // 按钮文本 搜索
               isShow: true,
               btnclick: (e) => {
                 this.getPlaceData(1, this.replaceProductTable.pageSize);
@@ -490,12 +492,12 @@ export default {
       // 获取状态
       this.orderStatus = OC_B_RETURN_ORDER.RETURN_STATUS;
       this.actionTableCon.columns =
-      // 退货明细
+        // 退货明细
         this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails')
           ? REFUND_ITEM_TABTH
           : EXCHANGE_ITEM_TABTH; //表头
       this.renderColumn =
-      // 退货明细
+        // 退货明细
         this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails')
           ? REFUND_ITEM_TABTH
           : EXCHANGE_ITEM_TABTH; // render
@@ -530,17 +532,17 @@ export default {
       if (code === 0) {
         // 初始赋值
         let renderArr =
-        // 退货明细
+          // 退货明细
           this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails')
             ? ["REFUND_ID", "QTY_REFUND"]
             : ["QTY_EXCHANGE", "PRICE_ACTUAL"]; // render
-            // 手工新增
+        // 手工新增
         if (this.$route.query.RETURN_SOURCE !== $i18n.t('btn.addManually')) {
           renderArr = [];
         }
         this.renderHandle(renderArr);
         this.actionTableCon.data =
-        // 退货明细
+          // 退货明细
           this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails')
             ? OC_B_RETURN_ORDER_REFUND_ITEMS
             : OC_B_RETURN_ORDER_EXCHANGE_ITEMS; // 数据
@@ -897,44 +899,39 @@ export default {
       }
       this.haveGift = "";
       this.haveGroup = "";
+      this.keyGift = "";
+      this.keyGroup = "";
       selDa.forEach((it) => {
         this.selectTogether(it);
       });
-      const haveGift = this.haveGift;
-      const haveGroup = this.haveGroup;
-      let msg, title, key;
+      const haveGift = this.haveGift.replace(/(，|,)$/, "");
+      const haveGroup = this.haveGroup.replace(/(，|,)$/, "");
+      let msg, title, key, giftArr = [], groupArr = [], bothArr = [];
       if (this.returnProduct == "0") {
         // 删除退货商品
         title = $i18n.t('modalTips.jk');
         key = "REFUND_ITEM_UNIQUE_KEY";
         if (haveGift) {
           // 请确认是否删除当前选中的退货商品，还存在关联的挂靠赠品
-          msg = `${$i18n.t('modalTips.jl')}：${haveGift.replace(
-            /(，|,)$/,
-            " "
-          )} ？`;
+          msg = `${$i18n.t('modalTips.jl')}：${haveGift} ？`;
+          const a1 = this.keyGift.replace(/(，|,)$/, "").split(',') || [];
+          giftArr = allDa.filter(it => a1.includes(it[key]));
         } else if (haveGroup) {
           // 请确认是否删除当前选中的退货商品，还存在组合/福袋下挂的其他关联商品
-          msg = `${$i18n.t('modalTips.jm')}：${haveGroup.replace(
-            /(，|,)$/,
-            " "
-          )} ？`;
+          msg = `${$i18n.t('modalTips.jm')}：${haveGroup} ？`;
+          const a2 = this.keyGroup.replace(/(，|,)$/, "").split(',') || [];
+          groupArr = allDa.filter(it => a2.includes(it[key]));
         } else if (haveGift && haveGroup) {
           // 请确认是否删除当前选中的退货商品，还存在关联的挂靠赠品
           // 并且还存在组合/福袋下挂的其他关联商品
-          msg = `${$i18n.t('modalTips.jl')}：${haveGift.replace(
-            /(，|,)$/,
-            " "
-          )}，${$i18n.t('modalTips.jo')}：${haveGroup.replace(
-            /，$/,
-            ""
-          )}。`;
+          msg = `${$i18n.t('modalTips.jl')}：${haveGift}，${$i18n.t('modalTips.jo')}：${haveGroup}。`;
+          bothArr = [...giftArr, ...groupArr]
         } else {
           // 请确认是否删除当前选中的退货商品？
           msg = $i18n.t('modalTips.jp');
         }
       } else {
-        title = $i18n.t('modalTips.jq');; // 删除换货商品
+        title = $i18n.t('modalTips.jq'); // 删除换货商品
         key = "PS_C_SKU_ECODE";
         // 请确认是否删除当前选中的换货商品？
         msg = $i18n.t('modalTips.jr');
@@ -951,9 +948,11 @@ export default {
         onOk: () => {
           this.$nextTick(() => {
             // 取差集展示：
-            self.actionTableCon.data = this.$OMS2.omsUtils.getDifferentArr(
+            console.log(haveGift, haveGroup);
+            const partList = [...selDa, ...giftArr, ...groupArr];
+            self.actionTableCon.data = $omsUtils.getDifferentArr(
               allDa,
-              selDa,
+              partList,
               key
             );
             this.totalNum();
@@ -967,8 +966,12 @@ export default {
               JSON.parse(JSON.stringify(this.toMainData))
             );
           });
+          this.keyGift = '';
+          this.keyGroup = '';
         },
         onCancel: () => {
+          this.keyGift = '';
+          this.keyGroup = '';
           this.$emit("closeActionDialog", false);
         },
       });
@@ -1112,7 +1115,7 @@ export default {
      * 3.PRO_TYPE：0普通，other组合/福袋
      * 4.GIFT_RELATION：挂靠关系
      * 5.GROUP_GOODS_MARK：组合关系
-     * 6.GIFT_TYPE：'0':非赠品，'1':系统赠品，'2'平台赠品
+     * 6.GIFT_TYPE：'0':普通，'1':系统赠品，'2'平台赠品
      */
     selectTogether(row) {
       const pT = row.PRO_TYPE; // number
@@ -1121,9 +1124,9 @@ export default {
       const gT = row.GIFT_TYPE; // string
       // if (pT == 0) { // 普通
       // 筛选出gR值相等的一并选中，挂靠赠品
-      gR && this.screen('gR', { GIFT_RELATION: gR, PS_C_SKU_ECODE: row.PS_C_SKU_ECODE });
+      gR && this.screen('gR', row);
       // 筛选出gM值相等的一并选中，下挂组合
-      gM && this.screen('gM', { GROUP_GOODS_MARK: gM, PS_C_SKU_ECODE: row.PS_C_SKU_ECODE });
+      gM && this.screen('gM', row);
       // 普通品的非卦靠赠品一并选中，其它(系统/平台)赠品
       // this.screen('other', row);
       // }
@@ -1131,26 +1134,45 @@ export default {
       this.selectLen = 0;
       this.indexL = [...new Set(this.indexL)];
       const allDa = JSON.parse(JSON.stringify(this.tableConfig.data));
+      const riuk = 'REFUND_ITEM_UNIQUE_KEY';
       allDa.forEach((it, index) => {
-        if (it.REFUND_ITEM_UNIQUE_KEY == row.REFUND_ITEM_UNIQUE_KEY)
+        if (it[riuk] == row[riuk])
           this.indexL.push(index); // 记录当前选中行的index
         it._checked = [...new Set(this.indexL)].includes(index); // 标记当前选中行和一并选中行（设置checked=true）
       });
       this.selectLen = [...new Set(this.indexL)].length;
       this.tableConfig.data = allDa; // 渲染checked的样式
     },
+
     screen(flag, obj = {}) {
       const allDa = JSON.parse(JSON.stringify(this.tableConfig.data));
       // const obj = o;
       // const objL = Object.entries(obj).flat(2);
       allDa.forEach((it, index) => {
+        const riuk = 'REFUND_ITEM_UNIQUE_KEY';
         switch (flag) {
           case 'gR':
-          case 'gM':
-            const key = flag == 'gR' ? 'GIFT_RELATION' : 'GROUP_GOODS_MARK';
-            if (it[key] == obj[key]) {
+            // const key = flag == 'gR' ? 'GIFT_RELATION' : 'GROUP_GOODS_MARK';
+            let key = 'GIFT_RELATION';
+            // 当前选中的是普通品 而非 赠品（GIFT_TYPE == '0' || PRO_TYPE == 0）
+            if (it[key] == obj[key] && (obj.GIFT_TYPE === '0' || obj.PRO_TYPE === 0)) {
+              // sku不相同，则给删除提示
               if (it.PS_C_SKU_ECODE !== obj.PS_C_SKU_ECODE) {
-                this[flag == 'gR' ? 'haveGift' : 'haveGroup'] += `${it.PS_C_SKU_ECODE},`;
+                // this[flag == 'gR' ? 'haveGift' : 'haveGroup'] += `${it.PS_C_SKU_ECODE},`;
+                this.haveGift += `${it.PS_C_SKU_ECODE},`;
+                this.keyGift += `${it[riuk]},`
+              }
+              if (this.isMainDelete) return;
+              this.indexL.push(index);
+            }
+            break;
+          case 'gM':
+            let key1 = 'GROUP_GOODS_MARK';
+            // 当前选中的是组合/福袋品（PRO_TYPE != 0）
+            if (it[key1] == obj[key1] && obj.PRO_TYPE != 0) {
+              if (it.PS_C_SKU_ECODE !== obj.PS_C_SKU_ECODE) {
+                this.haveGroup += `${it.PS_C_SKU_ECODE},`;
+                this.keyGroup += `${it[riuk]},`
               }
               if (this.isMainDelete) return;
               this.indexL.push(index);
