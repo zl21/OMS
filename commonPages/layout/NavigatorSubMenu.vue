@@ -18,6 +18,8 @@
     </div>
 </template>
 <script>
+ const menuObj = {'零售发货单':'Retail delivery order','退换货单':'Return and exchange order','功能权限':'Functional authority','数据权限':'Data authority','促销活动':'Sales promotion activity'};
+ const menuKey = Object.keys(menuObj);
  export default {
     props:{
         data:{
@@ -28,7 +30,27 @@
         }
     },
     mounted(){
-    }
+      if (localStorage.getItem("locale") === 'en') {
+        this.modifyLabelByLan(this.data);
+      }
+    },
+    methods: {
+      // 国际化:修改动作定义类型的功能清单
+      modifyLabelByLan(data) {
+        if (!data.children) {
+          if (menuKey.includes(data.label)) {
+            data.label = menuObj[data.label];
+            console.log(data.label);
+          }
+        } else {
+          if (data.children.length) {
+            data.children.forEach(it => {
+              this.modifyLabelByLan(it);
+            });
+          }
+        }
+      }
+    },
 }
 </script>
 <style lang="less">

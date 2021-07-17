@@ -100,7 +100,7 @@ export default {
     if (hour >= 0 && hour < 8) this.timeTips = '早上好！';
     else if (hour >= 8 && hour < 11) ZH ? this.timeTips = '上午好' : this.timeTips = 'Good morning';
     else if (hour >= 11 && hour < 13) ZH ? this.timeTips = '中午好' : this.timeTips = 'Good noon';
-    else if (hour >= 13 && hour < 17) ZH ? this.timeTips = '下午好' : this.timeTips = 'good afternoon';
+    else if (hour >= 13 && hour < 17) ZH ? this.timeTips = '下午好' : this.timeTips = 'Good afternoon';
     else if (hour >= 17 && hour < 24) ZH ? this.timeTips = '晚上好' : this.timeTips = 'Good evening';
   }
 };
