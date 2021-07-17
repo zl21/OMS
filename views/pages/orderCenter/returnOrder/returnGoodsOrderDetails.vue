@@ -384,6 +384,7 @@ export default {
         for (let y = 0; y < panelDomArr.length; y++) {
           // debugger
           panelDomArr[y].innerText  = panelDomArr[y].innerText == '退货明细' ? 'Return Detail' : panelDomArr[y].innerText;
+          panelDomArr[y].innerText  = panelDomArr[y].innerText == '换货明细' ? 'Explacement Detail' : panelDomArr[y].innerText;
           panelDomArr[y].innerText  = panelDomArr[y].innerText == '操作日志' ? 'Operation Log' : panelDomArr[y].innerText;
         }
       }
