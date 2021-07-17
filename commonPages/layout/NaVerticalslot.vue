@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       timeTips: '',
-      welcome: '欢迎来到OMS！',
+      welcome: '欢迎来到R3-OMS！',
       userName: localStorage.getItem('name'),
     }
   },
@@ -96,7 +96,7 @@ export default {
     let now = new Date();
     let hour = now.getHours();
     let ZH = localStorage.getItem("locale") == "zh"
-    this.welcome = ZH ? this.welcome : 'Welcome to OMS!'
+    this.welcome = ZH ? this.welcome : 'Welcome to R3-OMS!'
     if (hour >= 0 && hour < 8) this.timeTips = '早上好！';
     else if (hour >= 8 && hour < 11) ZH ? this.timeTips = '上午好' : this.timeTips = 'Good morning';
     else if (hour >= 11 && hour < 13) ZH ? this.timeTips = '中午好' : this.timeTips = 'Good noon';
