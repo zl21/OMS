@@ -456,7 +456,7 @@
         },
         tabList: [],
         agTableConfig: {
-          tableHeight: '480px',
+          tableHeight: '412px',
           columnDefs: [],
           rowData: [],
           renderArr: {
@@ -590,6 +590,16 @@
     mounted() {
       const self = this;
       self.initList();
+      setTimeout(() => {
+        let ZH = localStorage.getItem("locale") == "zh"
+        if(!ZH) {
+          const p1 = document.getElementsByClassName('ark-page-options-elevator')[0];
+          p1.children[0].innerHTML = 'Page:'
+          p1.children[2].innerText = ''
+          const p2 = document.getElementsByClassName('ark-page-options-sizer')[0];
+          p2.childNodes[0].innerText = '  10 items / page';
+        }
+      }, 10);
     },
     methods: {
       gridReady() {
