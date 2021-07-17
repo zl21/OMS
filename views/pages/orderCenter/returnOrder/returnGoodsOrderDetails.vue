@@ -388,7 +388,7 @@ export default {
           panelDomArr[y].innerText  = panelDomArr[y].innerText == '操作日志' ? 'Operation Log' : panelDomArr[y].innerText;
         }
       }
-    }, 30);
+    }, 10);
   },
   methods: {
     // 切换商品展示类型
@@ -761,7 +761,7 @@ export default {
               align: "center",
             },
             {
-              title: "序号",
+              title: $i18n.t('table_label.serialNo'), // 序号
               key: "index",
               type: "index",
               align: "center",

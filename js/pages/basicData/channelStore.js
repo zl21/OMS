@@ -183,7 +183,7 @@ export default {
                 isnotnull: true, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: $i18n.t("form_label.logicWarehouse"), // 逻辑仓
+                name: $i18n.t("table_label.logicWarehouse"), // 逻辑仓
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
                 reftableid: 10091, // 对应的表ID
@@ -257,7 +257,7 @@ export default {
         },
         columns: [
           {
-            title: $i18n.t("form_label.logicWarehouse"), // 逻辑仓
+            title: $i18n.t("table_label.logicWarehouse"), // 逻辑仓
             key: 'CP_C_STORE_ENAME'
           },
           {
@@ -489,7 +489,7 @@ export default {
       const id = self.jordanTableConfig.businessFormConfig.formValue.CP_C_STORE_ID;
       let str = '';
       if (!id) {
-        str += `${$i18n.t("form_label.logicWarehouse")} `; // 逻辑仓
+        str += `${$i18n.t("table_label.logicWarehouse")} `; // 逻辑仓
       } else if (!self.jordanTableConfig.businessFormConfig.formValue.RATE) {
         str += `${$i18n.t("form_label.db")} `; // 供货比例
       } else if (!self.jordanTableConfig.businessFormConfig.formValue.SUPPLY_PRIORITY) {
