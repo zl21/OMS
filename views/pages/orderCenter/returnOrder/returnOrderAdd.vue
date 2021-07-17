@@ -855,14 +855,19 @@ export default {
           this.modify[key] = data[key] || [];
         }
       }
-      this.PRO_ACTUAL_AMT = data.PRO_ACTUAL_AMT || 0.00;
-      this.EX_ACTUAL_AMT = data.EX_ACTUAL_AMT || 0.00;
+      this.PRO_ACTUAL_AMT = data.PRO_ACTUAL_AMT || 0.00; // 商品应退金额
+      this.EX_ACTUAL_AMT = data.EX_ACTUAL_AMT || 0.00; // 换货金额
       const pa = Number(this.PRO_ACTUAL_AMT);
       const sa = Number(this.SHIP_AMT);
       const aa = Number(this.ADJUST_AMT);
       const ea = Number(this.EX_ACTUAL_AMT);
-      this.FINAL_ACTUAL_AMT = this.$OMS2.omsUtils.floatNumber(pa + sa + aa - ea, 2);
+      this.FINAL_ACTUAL_AMT = this.$OMS2.omsUtils.floatNumber(pa + sa + aa - ea, 2); // 最终应退总金额
       // this.FINAL_ACTUAL_AMT = data.PRO_ACTUAL_AMT;
+      /* if (data.length) {
+        this.PRO_ACTUAL_AMT = 0.00;
+        this.EX_ACTUAL_AMT = 0.00;
+        this.FINAL_ACTUAL_AMT = 0.00;
+      } */
     },
     labelClick(item) {
       this.labelDefaultValue = item.value;
@@ -950,6 +955,12 @@ export default {
       }
       // 单号改变，清空明细
       this.clearDetail += 1;
+      // 特别地：清空'退款金额'Panel
+      this.SHIP_AMT = '0.00';
+      this.ADJUST_AMT = '0.00';
+      this.FINAL_ACTUAL_AMT = '0.00';
+      this.PRO_ACTUAL_AMT = '0.00';
+      this.EX_ACTUAL_AMT = '0.00';
     },
     // 保存
     async save() {

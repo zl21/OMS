@@ -876,7 +876,6 @@ export default {
     deleteMainTableData() {
       /* 可能要判断是哪个明细的 */
       const self = this;
-      self.isMainDelete = true;
       const allDa = self.actionTableCon.data;
       const selDa = self.detailsArrData;
       if (!selDa.length) {
@@ -890,6 +889,7 @@ export default {
           this.toMainData[this.returnProduct == "0" ? "tui" : "huan"] =
             this.actionTableCon.data;
         }
+        this.totalNum();
         this.$emit("subTableData", this.toMainData);
         R3.store.commit(
           "customize/returnOrderChangeItem",
@@ -901,6 +901,7 @@ export default {
       this.haveGroup = "";
       this.keyGift = "";
       this.keyGroup = "";
+      self.isMainDelete = true;
       selDa.forEach((it) => {
         this.selectTogether(it);
       });
@@ -1154,8 +1155,8 @@ export default {
           case 'gR':
             // const key = flag == 'gR' ? 'GIFT_RELATION' : 'GROUP_GOODS_MARK';
             let key = 'GIFT_RELATION';
-            // 当前选中的是普通品 而非 赠品（GIFT_TYPE == '0' || PRO_TYPE == 0）
-            if (it[key] == obj[key] && (obj.GIFT_TYPE === '0' || obj.PRO_TYPE === 0)) {
+            // 当前选中的是普通品 而非 赠品（GIFT_TYPE == '0' && PRO_TYPE == 0）
+            if (it[key] == obj[key] && (obj.GIFT_TYPE === '0' && obj.PRO_TYPE === 0)) {
               // sku不相同，则给删除提示
               if (it.PS_C_SKU_ECODE !== obj.PS_C_SKU_ECODE) {
                 // this[flag == 'gR' ? 'haveGift' : 'haveGroup'] += `${it.PS_C_SKU_ECODE},`;
