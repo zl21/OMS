@@ -1005,7 +1005,7 @@ export default {
       }
       // 校验换货金额是否等于退货金额；一致则保存成功，不一致则提示“换货金额与退货金额不一致请重新确认”
       if (this.bT == '1' && this.EX_ACTUAL_AMT != this.PRO_ACTUAL_AMT) {
-        this.$message.error('modalTips.gk'); // 换货金额与退货金额不一致请重新确认！
+        this.$message.error($i18n.t('modalTips.gk')); // 换货金额与退货金额不一致请重新确认！
         return
       }
       /* =========== 保存校验 end =========== */
