@@ -22,7 +22,7 @@
       this.$comUtils.tabCloseAppoint(this);
       this.$store.commit('global/tabOpen', {
         type: 'C',
-        label: '退换货单',
+        label: $i18n.t('panel_label.a1'), // 退换货单
         // customizedModuleName: 'OC_B_RETURN_ORDER',
         // customizedModuleId:'2828',
         url: `/CUSTOMIZED/OC_B_RETURN_ORDER/2828`

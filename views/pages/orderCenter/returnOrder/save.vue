@@ -67,7 +67,7 @@
           id: 2624,
           type: 'action',
           name: 'OC_B_RETURN_ORDER',
-          label: '退换货单'
+          label: $i18n.t('panel_label.a1'), // 退换货单
         })
       }
     },

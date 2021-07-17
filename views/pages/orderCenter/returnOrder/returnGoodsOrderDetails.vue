@@ -372,6 +372,22 @@ export default {
         self.save();
       }
     });
+    setTimeout(() => {
+      let ZH = localStorage.getItem("locale") == "zh"
+      if(!ZH) {
+        const btnDomArr = document.getElementsByClassName('ark-btn-fcdefault');
+        for (let i = 0; i < btnDomArr.length; i++) {
+          btnDomArr[i].innerHTML  = btnDomArr[i].innerHTML == '返回' ? 'Back' : btnDomArr[i].innerHTML;
+          btnDomArr[i].innerHTML  = btnDomArr[i].innerHTML == '保存' ? 'Save' : btnDomArr[i].innerHTML;
+        }
+        const panelDomArr = document.getElementsByClassName('ark-tabs-panels-tab');
+        for (let y = 0; y < panelDomArr.length; y++) {
+          // debugger
+          panelDomArr[y].innerText  = panelDomArr[y].innerText == '退货明细' ? 'Return Detail' : panelDomArr[y].innerText;
+          panelDomArr[y].innerText  = panelDomArr[y].innerText == '操作日志' ? 'Operation Log' : panelDomArr[y].innerText;
+        }
+      }
+    }, 30);
   },
   methods: {
     // 切换商品展示类型

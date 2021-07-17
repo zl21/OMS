@@ -635,6 +635,7 @@ export default {
         console.log(res);
         if (res.data.code == 0) {
           const {
+            IMAGE,
             ECODE,
             isactive,
             ENAME,
@@ -654,6 +655,7 @@ export default {
             PS_C_PRO_CLASSIFY_ID, // 商品分类
             REMARK, // 产品介绍
           };
+          self.dataitem.valuedata.push(...(JSON.parse(IMAGE))); // 图片
           self.formConfig.formData.forEach(item => {
             switch (item.colname) {
               case 'PS_C_BRAND_ID':
