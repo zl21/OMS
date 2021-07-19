@@ -41,7 +41,8 @@
       margin-left: 0 !important;
       display: flex;
       .preLable {
-        display: inline-block;
+        display: flex;
+        align-items: center;
         width: 160px;
         text-align: left;
         & > span {
@@ -68,10 +69,10 @@
       text-overflow: ellipsis;
       // line-height: 1;
       vertical-align: middle;
-      &:hover {
-        overflow: inherit;
-        white-space: normal;
-      }
+      // &:hover {
+      //   overflow: inherit;
+      //   white-space: normal;
+      // }
     }
   }
 }

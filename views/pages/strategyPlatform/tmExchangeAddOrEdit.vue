@@ -25,10 +25,8 @@
                     :disabled="isEnable"
                     @on-change="rowData.item.switchChange"
                   />
-                  <label :class="['cust-form-label', 'required', { hidden: !rowData.value.IS_AUTO_APPROVE }]">
-                    <!-- <Tooltip :content="rowData.item.label" theme="light"> -->
-                      <i>*</i>{{ rowData.item.label }}：
-                    <!-- </Tooltip> -->
+                  <label :title="rowData.item.label" :class="['cust-form-label', 'required', { hidden: !rowData.value.IS_AUTO_APPROVE }]">
+                    <i>*</i>{{ rowData.item.label }}：
                   </label>
                 </div>
                 <CheckboxGroup
@@ -42,10 +40,8 @@
                     :disabled="isEnable"
                   >{{option.label}}</Checkbox>
                 </CheckboxGroup>
-                <label :class="['cust-form-label', 'required', { hidden: !rowData.value.IS_AUTO_APPROVE }]">
-                  <!-- <Tooltip :content="rowData.item.subLabel" theme="light"> -->
-                    <i>*</i><span>{{ rowData.item.subLabel }}：</span>
-                  <!-- </Tooltip> -->
+                <label :title="rowData.item.subLabel" :class="['cust-form-label', 'required', { hidden: !rowData.value.IS_AUTO_APPROVE }]">
+                  <i>*</i><span>{{ rowData.item.subLabel }}：</span>
                 </label>
                 <Input
                   v-model="rowData.value.AOTU_APPROVE_DEVIATION_PRICE"
@@ -63,13 +59,11 @@
                     :disabled="isEnable"
                     @on-change="rowData.item.switchChange" 
                   />
-                  <span class="cust-form-label">{{ rowData.item.label }}：</span>
+                  <label :title="rowData.item.label" class="cust-form-label">{{ rowData.item.label }}：</label>
                 </div>
-                <!-- <Tooltip :content="rowData.item.subLabel1" theme="light"> -->
-                  <label :class="['cust-form-label', 'required', { hidden: !rowData.value.OOS_AUTO_REJECT }]">
-                    <i>*</i>{{ rowData.item.subLabel1 }}：
-                  </label>
-                <!-- </Tooltip> -->
+                <label :title="rowData.item.subLabel1" :class="['cust-form-label', 'required', { hidden: !rowData.value.OOS_AUTO_REJECT }]">
+                  <i>*</i>{{ rowData.item.subLabel1 }}：
+                </label>
                 <Select
                   v-model="rowData.value.OOS_AUTO_REJECT_REASON_ID"
                   @on-change="(val) => rowData.item.selectChange(val)"
@@ -82,9 +76,7 @@
                     :key="item.value"
                   >{{ item.label }}</Option>
                 </Select>
-                <!-- <Tooltip :content="rowData.item.subLabel2" theme="light"> -->
-                  <label class="cust-form-label">{{ rowData.item.subLabel2 }}：</label>
-                <!-- </Tooltip> -->
+                <label :title="rowData.item.subLabel2" class="cust-form-label">{{ rowData.item.subLabel2 }}：</label>
                 <Input
                   v-model="rowData.value.OOS_AUTO_REJECT_DESC"
                   :disabled="isEnable"
@@ -100,13 +92,11 @@
                     :disabled="isEnable"
                     @on-change="rowData.item.switchChange"
                   />
-                  <span class="cust-form-label">{{ rowData.item.label }}：</span>
+                  <label :title="rowData.item.label" class="cust-form-label">{{ rowData.item.label }}：</label>
                 </div>
-                <!-- <Tooltip :content="rowData.item.subLabel1" theme="light"> -->
-                  <label :class="['cust-form-label', 'required', { hidden: !rowData.value.DEVIATION_AUTO_REJECT }]">
-                    <i>*</i>{{ rowData.item.subLabel1 }}：
-                  </label>
-                <!-- </Tooltip> -->
+                <label :title="rowData.item.subLabel1" :class="['cust-form-label', 'required', { hidden: !rowData.value.DEVIATION_AUTO_REJECT }]">
+                  <i>*</i>{{ rowData.item.subLabel1 }}：
+                </label>
                 <Input
                   v-model="rowData.value.AUTO_REJECT_DEVIATION_PRICE"
                   :disabled="isEnable"
@@ -115,11 +105,9 @@
                   @on-change="rowData.item.inputChange"
                   style="width: 150px;"
                 />
-                <!-- <Tooltip :content="rowData.item.subLabel2" theme="light"> -->
-                  <label :class="['cust-form-label', 'required', { hidden: !rowData.value.DEVIATION_AUTO_REJECT }]">
-                    <i>*</i>{{ rowData.item.subLabel2 }}：
-                  </label>
-                <!-- </Tooltip> -->
+                <label :title="rowData.item.subLabel2" :class="['cust-form-label', 'required', { hidden: !rowData.value.DEVIATION_AUTO_REJECT }]">
+                  <i>*</i>{{ rowData.item.subLabel2 }}：
+                </label>
                 <Select
                   v-model="rowData.value.DEVIATION_AUTO_REJECT_REASON_ID"
                   @on-change="(e) => rowData.item.selectChange(e)"
@@ -132,9 +120,7 @@
                     :key="item.value"
                   >{{ item.label }}</Option>
                 </Select>
-                <!-- <Tooltip :content="rowData.item.subLabel3" theme="light"> -->
-                  <label class="cust-form-label">{{ rowData.item.subLabel3 }}：</label>
-                <!-- </Tooltip> -->
+                <label :title="rowData.item.subLabel3" class="cust-form-label">{{ rowData.item.subLabel3 }}：</label>
                 <Input
                   v-model="rowData.value.DEVIATION_AUTO_REJECT_DESC"
                   :disabled="isEnable"
