@@ -138,7 +138,7 @@ export default {
           width: '8',
           style: 'input',
           // regx: /^(\s*|[A-Za-z0-9]+)$/,
-          regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
+          // regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
           // placeholder: 'Only numbers and letters',
           inputChange: () => {
             this.masterModifyData('ECODE', 'master');
@@ -148,7 +148,7 @@ export default {
           colname: 'ENAME',
           width: '8',
           style: 'input',
-          regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
+          // regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
           inputChange: () => {
             this.masterModifyData('ENAME', 'master');
           },
@@ -346,7 +346,7 @@ export default {
             colname: 'LENGTH',
             width: '8',
             style: 'input',
-            regx: /^(\s*|\d+(\.\d{0,2})?)$/,
+            // regx: /^(\s*|\d+(\.\d{0,2})?)$/,
             inputChange: () => {
               this.masterModifyData('LENGTH', 'master', 'wuLi');
             },
@@ -355,7 +355,7 @@ export default {
             colname: 'HEIGHT',
             width: '8',
             style: 'input',
-            regx: /^(\s*|\d+(\.\d{0,2})?$)/,
+            // regx: /^(\s*|\d+(\.\d{0,2})?$)/,
             inputChange: () => {
               this.masterModifyData('HEIGHT', 'master', 'wuLi');
             },
@@ -364,7 +364,7 @@ export default {
             colname: 'WIDTH',
             width: '8',
             style: 'input',
-            regx: /^(\s*|\d+(\.\d{0,2})?$)/,
+            // regx: /^(\s*|\d+(\.\d{0,2})?$)/,
             inputChange: () => {
               this.masterModifyData('WIDTH', 'master', 'wuLi');
             },
@@ -373,7 +373,7 @@ export default {
             colname: 'GROSS_WEIGHT', // 毛重
             width: '8',
             style: 'input',
-            regx: /^(\s*|\d+(\.\d{0,2})?$)/,
+            // regx: /^(\s*|\d+(\.\d{0,2})?$)/,
             inputChange: () => {
               this.masterModifyData('GROSS_WEIGHT', 'master', 'wuLi');
             },
@@ -382,7 +382,7 @@ export default {
             colname: 'NET_WEIGHT', // 净重
             width: '8',
             style: 'input',
-            regx: /^(\s*|\d+(\.\d{0,2})?$)/,
+            // regx: /^(\s*|\d+(\.\d{0,2})?$)/,
             inputChange: () => {
               this.masterModifyData('NET_WEIGHT', 'master', 'wuLi');
             },
