@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 15:03:42
- * @LastEditTime: 2021-07-07 20:09:46
+ * @LastEditTime: 2021-07-19 15:05:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit  
  * @FilePath: /云雀/src/views/pages/orderCenter/addGiftItem.vue
@@ -19,7 +19,6 @@
         :data="data9"
         :highlight-row="highlight"
         @on-row-click="fnrow"
-        @on-expand="expand"
       ></Table>
     </div>
     <div class="foot-page">

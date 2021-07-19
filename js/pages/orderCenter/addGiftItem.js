@@ -48,31 +48,31 @@ export default {
             AuotData: [], //匹配的选项
             //regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
           },
-     
-          
-          
-     
+
+
+
+
           {
             style: 'input', //输入框类型
-            label:$i18n.t('table_label.buyerNickname'),
+            label: $i18n.t('table_label.buyerNickname'),
             // '买家昵称', //输入框前文字
             value: 'BUYER_NICK', //输入框的值
             columns: ['BUYER_NICK'],
             width: '7',
             AuotData: [], //匹配的选项
-           // regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
+            // regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
           },
-   
+
         ],
       },
       // searchBtn
       searchBtn: {
         typeAll: 'default', // 按钮统一风格样式
-       // btnsite: 'left', // 按钮位置 (right , center , left)
+        // btnsite: 'left', // 按钮位置 (right , center , left)
         buttons: [
           {
             text: $i18n.t('btn.search'),
-            type:"primary",
+            type: "primary",
             btnclick: () => {
               this.init(1)
 
@@ -101,14 +101,14 @@ export default {
               let reqdata = JSON.parse(JSON.stringify(this.tabdata))
               if (this.componentData.type == 2) {
                 if (!this.rowlist) {
-                  this.$Message.error('请展开列表，请选中一条数据！');
+                  this.$Message.error($i18n.t('modalTips.gr'));
                   return
                 }
                 reqdata.RETURN_ORDER_ITEM_LIST = this.rowlist
               }
-              
+
               if (reqdata.length == 0) {
-                this.$Message.error( $i18n.t('modalTips.gr') );
+                this.$Message.error($i18n.t('modalTips.gr'));
                 return
               }
 
@@ -146,20 +146,19 @@ export default {
       this.page = v
       this.init()
     },
-    expand(e, s) {
-      // console.log(e);
-      // console.log(s);
-    },
-    fnrow(v,index,en) {
+
+    fnrow(v, index, en) {
       if (this.componentData.type == 2) {
-        this.data9.forEach(item=>{
+        this.data9 = this.data9.map(item => {
           if (item.ID == v.ID) {
-            item._expanded = true
+            item._expanded =  !item._expanded
+          } else {
+            item._expanded = false
           }
+          return item
         })
-        console.log( this.data9);
       }
-     
+
       this.tabdata = v
     },
     tntable(data) {
@@ -174,7 +173,6 @@ export default {
           type: 'expand',
           width: 50,
           render: (h, params) => {
-            console.log(params);
             return this.$createElement('Table', {
               ref: `currentRowTable${params.index}`,
               props: {
@@ -190,28 +188,25 @@ export default {
                       this.$refs['currentRowTable' + index] && this.$refs['currentRowTable' + index].clearCurrentRow();
                     }
                   });
-
                 }
               }
             })
           }
         },
         {
-         
           title: $i18n.t('table_label.serialNo'), // 序号
           width: 50,
-          key:"index"
+          key: "index"
         }
       ]
-
 
       this.columns10 = typeArr.concat(data.TABTH).filter((item, index) => {
         if (item.key != "ID") {
           return item
         }
       })
-      this.data9 = data.RETURN_ORDER_LIST.map((item,index)=>{
-        item.index = index+1
+      this.data9 = data.RETURN_ORDER_LIST.map((item, index) => {
+        item.index = index + 1
         return item
       })
 

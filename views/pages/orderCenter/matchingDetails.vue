@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-07-19 11:59:21
+ * @LastEditTime: 2021-07-19 15:30:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
@@ -242,7 +242,7 @@ export default {
           })
           continue
         } else if (v.OC_B_RETURN_ORDER_BILL_NO == "" && v.IS_MATCH == "否") {
-            this.$Message.warning("未匹配退换货单，不允许清除！");
+            this.$Message.warning($i18n.t('modalTips.kp'));
         }else{
           this.tableConfig.data.forEach(item => {
             if (item.ID == v.ID) {
