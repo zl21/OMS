@@ -881,9 +881,8 @@ export default {
     returnSelectAllCancel(row) {
       console.log(row);
     },
-    // 删除明细 - 本地删
+    // 删除明细 - 本地删（可能要判断是哪个明细的
     deleteMainTableData() {
-      /* 可能要判断是哪个明细的 */
       const self = this;
       const allDa = self.actionTableCon.data;
       const selDa = self.detailsArrData;
@@ -891,7 +890,8 @@ export default {
         this.$OMS2.omsUtils.msgTips(self, "warning", "a8");
         return;
       }
-      if (selDa.length == allDa.length) { // 全选删
+      // 全选删
+      if (selDa.length == allDa.length) {
         self.detailsArrData = [];
         this.actionTableCon.data = [];
         if (this.$route.params.customizedModuleId === "New") {
@@ -906,17 +906,31 @@ export default {
         );
         return
       }
+      // 部分删
       this.haveGift = "";
       this.haveGroup = "";
       this.keyGift = "";
       this.keyGroup = "";
       self.isMainDelete = true;
+      const riuk = 'REFUND_ITEM_UNIQUE_KEY';
       selDa.forEach((it) => {
         this.selectTogether(it);
       });
-      const haveGift = this.haveGift.replace(/(，|,)$/, "");
-      const haveGroup = this.haveGroup.replace(/(，|,)$/, "");
+      let haveGift = this.haveGift.replace(/(，|,)$/, "");
+      let haveGroup = this.haveGroup.replace(/(，|,)$/, "");
       let msg, title, key, giftArr = [], groupArr = [], bothArr = [];
+      let a1 = this.keyGift.replace(/(，|,)$/, "").split(',') || [];
+      let a2 = this.keyGroup.replace(/(，|,)$/, "").split(',') || [];
+      selDa.forEach(it => {
+        // 若某挂靠已被选中，则：1.从提示语中去除该项
+        if (a1.includes(it[riuk])) {
+          haveGift = haveGift.replace(it.PS_C_SKU_ECODE, '');
+        }
+        // 若某组合项已被选中，则： 1.从提示语中去除该项
+        if (a2.includes(it[riuk])) {
+          haveGroup = haveGroup.replace(it.PS_C_SKU_ECODE, '');
+        }
+      })
       if (this.returnProduct == "0") {
         // 删除退货商品
         title = $i18n.t('modalTips.jk');
@@ -924,12 +938,10 @@ export default {
         if (haveGift) {
           // 请确认是否删除当前选中的退货商品，还存在关联的挂靠赠品
           msg = `${$i18n.t('modalTips.jl')}：${haveGift} ？`;
-          const a1 = this.keyGift.replace(/(，|,)$/, "").split(',') || [];
           giftArr = allDa.filter(it => a1.includes(it[key]));
         } else if (haveGroup) {
           // 请确认是否删除当前选中的退货商品，还存在组合/福袋下挂的其他关联商品
           msg = `${$i18n.t('modalTips.jm')}：${haveGroup} ？`;
-          const a2 = this.keyGroup.replace(/(，|,)$/, "").split(',') || [];
           groupArr = allDa.filter(it => a2.includes(it[key]));
         } else if (haveGift && haveGroup) {
           // 请确认是否删除当前选中的退货商品，还存在关联的挂靠赠品
@@ -1162,9 +1174,10 @@ export default {
       this.selectLen = [...new Set(this.indexL)].length;
       this.tableConfig.data = allDa; // 渲染checked的样式
     },
-
+    // 查找一并选中的数据下标
     screen(flag, obj = {}) {
-      const allDa = JSON.parse(JSON.stringify(this.tableConfig.data));
+      const allDa = JSON.parse(JSON.stringify(this.isMainDelete ? this.actionTableCon.data : this.tableConfig.data));
+      // const mainDa = JSON.parse(JSON.stringify(this.actionTableCon.data));
       // const obj = o;
       // const objL = Object.entries(obj).flat(2);
       allDa.forEach((it, index) => {
