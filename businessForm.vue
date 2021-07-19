@@ -1,7 +1,6 @@
 <!-- 开发文档：http://knowledge.ark.burgeononline.com/repository#/entryComponents/2/749649/1/2061 -->
 <template>
   <div class="orderManageEdit"
-       :class="flodClickClass"
        :ref="formConfig.flodClick">
 
     <div class="imgRight"

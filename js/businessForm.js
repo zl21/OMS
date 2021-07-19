@@ -30,9 +30,9 @@ export default {
     }
   },
   computed:{
-    flodClickClass(){
-      return this.formConfig.flodClick ? '' : 'unFlodStyle';
-    }
+    // flodClickClass(){
+    //   return this.formConfig.flodClick ? '' : 'unFlodStyle';
+    // }
   },
   watch: {
     flodData() {
