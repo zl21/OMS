@@ -656,6 +656,7 @@ export default {
           {
             style: 'input',
             // label: $i18n.t('form_label.platformType'), // 换货邮费
+            regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
             colname: 'EXCHANGE_SHIP_AMT',
             width: '6',
             inputChange: () => {
