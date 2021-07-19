@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-07-19 15:30:31
+ * @LastEditTime: 2021-07-19 17:26:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
@@ -21,7 +21,6 @@
       @on-page-change="pageChange"
       @on-page-size-change="pageSizeChange"
     />
-
     <Modal
       v-model="modal6"
       :title="tuiDanChaXun"
@@ -236,8 +235,10 @@ export default {
       let errArr = []
       for (const v of this.tebdata) {
         if (v.OC_B_RETURN_ORDER_BILL_NO && v.IS_MATCH == "是") {
+      
           errArr.push({
             id: v.ID,
+            index:v.index,
             message: $i18n.t('modalTips.gs')//"已匹配退货单号，不允许清除！"
           })
           continue
@@ -339,7 +340,6 @@ export default {
             if (item.ID == em.ID) {
 
               if (type == 2) {
-
                 //判断明细suk是否相等 ---强制匹配
                 if (!this.fnisSku(item.PS_C_SKU_ECODE, data.RETURN_ORDER_ITEM_LIST.PS_C_SKU_ECODE)) {
 
