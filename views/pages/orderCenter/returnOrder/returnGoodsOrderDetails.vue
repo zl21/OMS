@@ -229,7 +229,9 @@ export default {
               dimEnter: (val) => {
                 this.getPlaceData(0, this.replaceProductTable.pageSize);
               },
-              dimSelect: (obj) => { },
+              dimSelect: (obj) => {
+                this.replaceProductTable.businessFormConfig.formValue.ECODE = obj.tem.ECODE;
+              },
               dimblur: () => { },
             },
             {
@@ -243,12 +245,14 @@ export default {
               dimEnter: (val) => {
                 this.getPlaceData(0, this.replaceProductTable.pageSize);
               },
-              dimSelect: (obj) => { },
+              dimSelect: (obj) => {
+                this.replaceProductTable.businessFormConfig.formValue.ENAME = obj.tem.ECODE;
+              },
               dimblur: () => { },
             },
             {
               style: "dimSearch", //输入框类型
-              label: $i18n.t('table_label.code_SKU'), //输入框前文字 SPU编码
+              label: $i18n.t('table_label.itemNo01'), //输入框前文字 SPU编码
               value: "PS_C_PRO_ECODE", //输入框的值
               columns: ["ENAME"],
               width: "8",
@@ -259,7 +263,9 @@ export default {
               dimEnter: (val) => {
                 this.getPlaceData(0, this.replaceProductTable.pageSize);
               },
-              dimSelect: (obj) => { },
+              dimSelect: (obj) => {
+                this.replaceProductTable.businessFormConfig.formValue.PS_C_PRO_ECODE = obj.tem.ECODE;
+              },
               dimblur: () => { },
             },
           ],
