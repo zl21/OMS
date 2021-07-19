@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-19 13:59:27
+ * @LastEditTime: 2021-07-19 15:18:28
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -505,9 +505,6 @@ export default {
         // 表头存起来
         this.tableHead.tui = REFUND_ITEM_TABTH;
         this.tableHead.huan = EXCHANGE_ITEM_TABTH;
-        // this.toMainData.tui = OC_B_RETURN_ORDER_REFUND_ITEMS
-        // this.toMainData.huan = OC_B_RETURN_ORDER_EXCHANGE_ITEMS
-        // this.totalNum();
         // 处理数据 -- 退换货明细
         // PT_SKU true平台 false商品
         this.getDetailsData(true);
@@ -820,7 +817,7 @@ export default {
         let FINAL_ACTUAL_AMT;
         if (this.$route.params.tableName === "OC_B_RETURN_ORDER_ECXCHANGE_TABLE") {
           FINAL_ACTUAL_AMT =
-            Number(returnAmount.PRO_REAL_AMT) +
+            Number(returnAmount.PRO_ACTUAL_AMT) +
             Number(returnAmount.SHIP_AMT) +
             Number(returnAmount.ADJUST_AMT) -
             Number(returnAmount.EXCHANGE_AMT);
@@ -841,7 +838,7 @@ export default {
             EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt)
           });
           FINAL_ACTUAL_AMT =
-            Number(returnAmount.PRO_REAL_AMT) +
+            Number(returnAmount.PRO_ACTUAL_AMT) +
             Number(returnAmount.SHIP_AMT) +
             Number(returnAmount.ADJUST_AMT);
           R3.store.commit(`customize/returnAmount`, {

@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-07-15 15:46:43
+ * @LastEditTime: 2021-07-19 14:51:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -10,15 +10,15 @@
   <div>
     <ul class="calculation-main">
       <li>
-        <div class="calculation-item">
-          <!-- 商品应退金额 -->
-          <span :title="vmI18n.t('other.refundAmountGoods')">{{ vmI18n.t('other.refundAmountGoods') }}</span>
-          <label>{{ data.PRO_ACTUAL_AMT }}</label>
-        </div>
         <div class="calculation-item bg">
           <!-- 商品实退金额 -->
           <span :title="vmI18n.t('form_label.cr')">{{ vmI18n.t('form_label.cr') }}</span>
           <label>{{ data.PRO_REAL_AMT }}</label>
+        </div>
+        <div class="calculation-item">
+          <!-- 商品应退金额 -->
+          <span :title="vmI18n.t('other.refundAmountGoods')">{{ vmI18n.t('other.refundAmountGoods') }}</span>
+          <label>{{ data.PRO_ACTUAL_AMT }}</label>
         </div>
       </li>
       <li class="symbol">+</li>
@@ -94,9 +94,9 @@ export default {
     inputChange(e){
       let FINAL_ACTUAL_AMT
       if(this.tableName){
-        FINAL_ACTUAL_AMT =  Number(this.data.PRO_REAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT) - Number(this.data.EXCHANGE_AMT);
+        FINAL_ACTUAL_AMT =  Number(this.data.PRO_ACTUAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT) - Number(this.data.EXCHANGE_AMT);
       }else{
-        FINAL_ACTUAL_AMT =  Number(this.data.PRO_REAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT);
+        FINAL_ACTUAL_AMT =  Number(this.data.PRO_ACTUAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT);
       }
       this.editData.FINAL_ACTUAL_AMT = FINAL_ACTUAL_AMT;
       this.editData.FINAL_REAL_AMT = FINAL_ACTUAL_AMT;

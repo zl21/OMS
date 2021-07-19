@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-19 14:42:19
+ * @LastEditTime: 2021-07-19 15:19:12
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -36,7 +36,7 @@
         return;
       }
       if (route.tableName === 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE' && !returnOrderChangeItem.tui.length && !returnOrderChangeItem.huan.length) {
-        this.$Message.warning($i18n.t('modalTips.kk')); // 退换货单都不能为空！
+        this.$Message.warning($i18n.t('modalTips.ko')); // 退换货单明细都不能为空！
         return;
       } 
       console.log('this.returnAmount:',this.returnAmount);
