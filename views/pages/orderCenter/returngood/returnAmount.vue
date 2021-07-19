@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-07-19 14:51:48
+ * @LastEditTime: 2021-07-19 18:40:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -27,7 +27,7 @@
           <!-- 应退运费 -->
           <span :title="vmI18n.t('form_label.cr')">{{ vmI18n.t('form_label.ad') }}</span>
           <label>
-            <Input v-if="type" v-model="editData.SHIP_AMT" :regx="/^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/" @on-change="inputChange"></Input>
+            <Input v-if="type && status" v-model="editData.SHIP_AMT" :regx="/^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/" @on-change="inputChange"></Input>
             <span v-else>
               {{ data.SHIP_AMT }}
             </span>
@@ -40,7 +40,7 @@
           <!-- 调整金额 -->
           <span :title="vmI18n.t('table_label.adjustment_amount')">{{vmI18n.t('table_label.adjustment_amount')}}</span>
           <label>
-            <Input v-if="type" v-model="editData.ADJUST_AMT" :regx="/^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/" @on-change="inputChange"></Input>
+            <Input v-if="type && status" v-model="editData.ADJUST_AMT" :regx="/^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/" @on-change="inputChange"></Input>
             <span v-else>
               {{ editData.ADJUST_AMT }}
             </span>
@@ -80,15 +80,16 @@ export default {
       editData:JSON.parse(JSON.stringify(R3.store.state.customize.returnAmount)),
       tableName:this.$route.params.tableName === 'OC_B_RETURN_ORDER_VIRTUAL_TABLE' ? 0 : 1,
       // 手工新增
-      type:this.$route.query.RETURN_SOURCE === '手工新增' ? 1 : 0
+      type:this.$route.query.RETURN_SOURCE === '手工新增' ? 1 : 0,
+      status:true
     };
   },
   mounted(){
     // 应退运费，正数，选填项
     // 调整金额，可正可负，选填项
     // 换货金额，sum所有换货商品“成交金额“，只读，正数
-    // 最终应退总额=商品应退金额+应退运费+/-调整金额-换货金额，自动算出，
-
+    // 最终应退总额=商品应退金额+应退运费+/-调整金额-换货金额，自动算出
+    this.status = !['1', "2", "3"].includes(String(sessionStorage.getItem("RETURN_STATUS")));
   },
   methods:{
     inputChange(e){

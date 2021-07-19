@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-19 15:18:28
+ * @LastEditTime: 2021-07-19 18:33:22
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -131,7 +131,6 @@ export default {
               text: $i18n.t('btn.replaceDetail'), // 按钮文本 替换明细
               isShow: true,
               btnclick: (e) => {
-                console.log(this.detailsArrData.length);
                 if(this.detailsArrData.length > 1){
                    this.$Message.warning($i18n.t('modalTips.dz'));
                    return false;
@@ -314,65 +313,54 @@ export default {
   async created() {
     this.getReplaceData(this.$route.params.itemId);
     let ZH = localStorage.getItem("locale") == "zh"
-    console.log(ZH);
     if(!ZH) document.getElementById('refresh').innerHTML = "Refresh";
   },
   async activated() {
     this.panelReturn = ["tapComponent.returnGoodsDetails",'tapComponent.returnDetails'].includes(this.$parent.$parent.panelInstance);
     //编辑页面 换货/退货逻辑
-    if (this.$route.params.customizedModuleId !== "New") {
-      console.log();
-      this.getBtn().then((res) => {
-        let BtnConfig = this.businessActionTable.businessButtonConfig.buttons;
-        // 换货明细
-        console.log(this.$parent.$parent.panelInstance);
-        if (this.$parent.$parent.panelInstance === "tapComponent.changeGoodsDetails") {
+    this.getBtn().then((res) => {
+      let BtnConfig = this.businessActionTable.businessButtonConfig.buttons;
+      // 换货明细
+      if (this.$parent.$parent.panelInstance === "tapComponent.changeGoodsDetails") {
+        BtnConfig[0].isShow = false;
+        BtnConfig[1].isShow = true;
+        BtnConfig[2].isShow = true;
+        this.businessActionTable.columns = this.tableHead.huan;
+        this.renderColumn = this.tableHead.huan;
+        // 手工新增
+        setTimeout(() => {
+            this.renderHandle([ "QTY_EXCHANGE","PRICE_ACTUAL"]) //render方法
+          }, 100);
+        this.businessActionTable.data = this.toMainData.huan;
+        // 退货明细
+      } else if (this.panelReturn) {
+        this.businessActionTable.columns = this.tableHead.tui;
+        this.renderColumn = this.tableHead.tui;
+        if (this.$parent.$parent.panelInstance === 'tapComponent.returnDetails' && this.$route.query.RETURN_SOURCE !== '手工新增') {
           BtnConfig[0].isShow = false;
-          BtnConfig[1].isShow = true;
-          BtnConfig[2].isShow = false;
-          // 平台 $i18n.t('other.platForm')
-          if (this.$route.query.RETURN_SOURCE == '平台') {
-            BtnConfig[1].isShow = false;
-          }
-          this.businessActionTable.columns = this.tableHead.huan;
-          this.renderColumn = this.tableHead.huan;
-          // 手工新增
-          if(this.$route.query.RETURN_SOURCE !== $i18n.t('btn.addManually')){
-             this.renderHandle([[ "QTY_EXCHANGE"]]); //render方法
-          }else{
-             this.renderHandle([["REFUND_ID", "QTY_EXCHANGE"]]); //render方法
-          }
-          this.businessActionTable.data = this.toMainData.huan;
-          // 退货明细
-        } else if (this.panelReturn) {
-           console.log('退货明细');
-          if (this.$route.query.RETURN_SOURCE == '平台') {
-            BtnConfig[0].isShow = false;
-            BtnConfig[1].isShow = false;
-            BtnConfig[2].isShow = false;
-          }
           BtnConfig[1].isShow = false;
-          this.businessActionTable.columns = this.tableHead.tui;
-          this.renderColumn = this.tableHead.tui;
-           //手工新增 $i18n.t('btn.addManually')
-          if(this.$route.query.RETURN_SOURCE !== '手工新增'){
-             this.renderHandle([[ "QTY_EXCHANGE"]]); //render方法
-          }else{
-             this.renderHandle([["REFUND_ID", "QTY_EXCHANGE"]]); //render方法
-          }
-          this.businessActionTable.data = this.toMainData.tui;
+          BtnConfig[2].isShow = false;
+          this.businessActionTable.columns = this.businessActionTable.columns.filter((i) => delete i.render);
+        }else{
+          BtnConfig[0].isShow = true;
+          BtnConfig[1].isShow = false;
+          BtnConfig[2].isShow = true;
+          setTimeout(() => {
+            this.renderHandle(["REFUND_ID", "QTY_REFUND"]); //render方法
+          }, 100);
         }
-        // 判断如果单据状态为带退货完成/完成/取消 不可编辑
+        this.businessActionTable.data = this.toMainData.tui;
+      }
+      // 判断如果单据状态为待退货完成/完成/取消 不可编辑
+      setTimeout(() => {
         if (['1', "2", "3"].includes(String(this.orderStatus))) {
-          console.log('1');
           BtnConfig[0].isShow = false;
           BtnConfig[1].isShow = false;
           BtnConfig[2].isShow = false;
+          this.businessActionTable.columns = this.businessActionTable.columns.filter((i) => delete i.render);
         }
-      })
-    } else {
-      // this.getBtn();
-    }
+      }, 1000);
+    })
   },
   async mounted() {
     let self = this;
@@ -459,6 +447,7 @@ export default {
       });
       // 获取状态
       this.orderStatus = OC_B_RETURN_ORDER.RETURN_STATUS;
+      sessionStorage.setItem("RETURN_STATUS", JSON.stringify(OC_B_RETURN_ORDER.RETURN_STATUS));
       this.IS_COMBINATION = OC_B_RETURN_ORDER.IS_COMBINATION;
       // 退货明细
       this.businessActionTable.columns = this.panelReturn ? REFUND_ITEM_TABTH : EXCHANGE_ITEM_TABTH; //表头
@@ -494,13 +483,6 @@ export default {
       );
       if (code === 0) {
         // 初始赋值
-        // 退货明细
-        let renderArr = this.panelReturn ? ["REFUND_ID", "QTY_REFUND"] : ["QTY_EXCHANGE", "PRICE_ACTUAL"]; // render
-        // 手工新增 $i18n.t('btn.addManually')
-        if (this.$route.query.RETURN_SOURCE !== '手工新增') {
-          renderArr = [];
-        }
-        this.renderHandle(renderArr);
         this.businessActionTable.data =this.panelReturn ? OC_B_RETURN_ORDER_REFUND_ITEMS: OC_B_RETURN_ORDER_EXCHANGE_ITEMS; // 数据
         // 表头存起来
         this.tableHead.tui = REFUND_ITEM_TABTH;
@@ -544,7 +526,6 @@ export default {
       // 组合查询条件
       let { PS_C_PRO_ECODE, ECODE, ENAME } = this.replaceProductTable.businessFormConfig.formValue;
       // sku和spu同时存在 优先查询sku
-      console.log((Number(page) - 1)<0 ? 0 : (Number(page) - 1));
       if (PS_C_PRO_ECODE && ECODE) PS_C_PRO_ECODE = '';
       let fixedcolumns = { PS_C_PRO_ECODE, ECODE, ENAME };
       let searchdata = {
@@ -640,7 +621,6 @@ export default {
                 setTimeout(() => {
                   const rI = e.target.value;
                   params.row.REFUND_ID = rI;
-                  console.log(rI, params);
                   if (this.$route.params.customizedModuleId !== "New") {
                     this.toMainData[
                       // 退货明细
@@ -1095,7 +1075,6 @@ export default {
       let tableData = self.businessActionTable.data; // 添加
       let replaceArr = [] //替换
       let selectData = self.replaceProductTable.selectData; //新的对象换货明细
-      console.log('selectData',selectData,JSON.stringify(selectData) == "{}");
       if (JSON.stringify(selectData) == "{}") {
         self.$Message.warning($i18n.t('modalTips.gl')); // 请选中一条明细！
         return;
