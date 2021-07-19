@@ -108,6 +108,7 @@ export default {
             btnclick: () => {
               // this.$emit("closeActionDialog", false);
               this.replaceProductTable.modal = false;
+              this.empeyForm();
             },
           },
           {
@@ -650,10 +651,9 @@ export default {
     /* --------------------- 工具函数/列表表格方法： --------------------- */
     // key对应的render方法
     renderHandle(arr) {
-      // 退货 =》 可退货数量可编辑
-      // 换货 =》 退货数量、成交单价
       let obj = {
         REFUND_ID: (h, params) => {
+          // 平台退款单号 -- 退
           return h("Input", {
             props: {
               value: params.row.REFUND_ID,
@@ -671,9 +671,9 @@ export default {
               },
             },
           });
-        }, // 平台退款单号
+        },
         QTY_REFUND: (h, params) => {
-          // 申请退货数量
+          // 申请退货数量 -- 退
           return h("InputNumber", {
             props: {
               value: params.row.QTY_REFUND,
@@ -704,8 +704,9 @@ export default {
               },
             },
           });
-        }, //退货数量
+        },
         QTY_EXCHANGE: (h, params) => {
+          // 换货数量 -- 换
           return h("InputNumber", {
             props: {
               value: Number(params.row.QTY_EXCHANGE || 1),
@@ -725,8 +726,9 @@ export default {
               },
             },
           });
-        }, //换货数量
+        },
         PRICE_ACTUAL: (h, params) => {
+          // 成交单价 -- 换
           return h("InputNumber", {
             props: {
               value: params.row.PRICE_ACTUAL,
@@ -745,7 +747,7 @@ export default {
               },
             },
           });
-        }, //成交单价
+        },
       };
       // 查找对应的key添加render
       this.renderColumn.forEach((k, i) => {
@@ -1057,6 +1059,12 @@ export default {
       this.replaceProductTable.pageSize = size;
       this.getPlaceData(1, size);
     },
+    // 清空表单 - 关闭弹框时
+    empeyForm() {
+      this.replaceProductTable.businessFormConfig.formValue.PS_C_PRO_ECODE = '';
+      this.replaceProductTable.businessFormConfig.formValue.ECODE = '';
+      this.replaceProductTable.businessFormConfig.formValue.ENAME = '';
+    },
     // 加/替换明细 - 确定
     async replaceOk() {
       let self = this;
@@ -1081,6 +1089,7 @@ export default {
       );
       if (code == 0) {
         self.replaceProductTable.modal = false;
+        this.empeyForm();
       }
       // 获取商品明细
       if (data.OC_B_RETURN_ORDER_EXCHANGE_ITEMS === null) {
