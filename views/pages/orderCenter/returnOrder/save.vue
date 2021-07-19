@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-19 15:19:12
+ * @LastEditTime: 2021-07-19 17:02:36
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -31,7 +31,7 @@
       // 获取退换单的数组
       let returnOrderChangeItem = R3.store.state.customize.returnOrderChangeItem;
       console.log(OC_B_RETURN_ORDER);
-      if(OC_B_RETURN_ORDER.OC_B_RETURN_ORDER_ECXCHANGE_TABLE.RECEIVER_MOBILE && OC_B_RETURN_ORDER.OC_B_RETURN_ORDER_ECXCHANGE_TABLE.RECEIVER_MOBILE.includes('***')){
+      if(route.tableName === 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE' && OC_B_RETURN_ORDER.OC_B_RETURN_ORDER_ECXCHANGE_TABLE.RECEIVER_MOBILE && OC_B_RETURN_ORDER.OC_B_RETURN_ORDER_ECXCHANGE_TABLE.RECEIVER_MOBILE.includes('***')){
         this.$Message.warning($i18n.t('modalTips.kn')); //换货人信息请切换为明文！
         return;
       }
@@ -48,7 +48,7 @@
         this.$Message.warning($i18n.t('modalTips.km')); // 退货单不能为空！
         return;
       }
-      if(OC_B_RETURN_ORDER.OC_B_RETURN_ORDER_ECXCHANGE_TABLE.AUDIT_ID){
+      if(route.tableName === 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE' && OC_B_RETURN_ORDER.OC_B_RETURN_ORDER_ECXCHANGE_TABLE.AUDIT_ID){
         delete OC_B_RETURN_ORDER.OC_B_RETURN_ORDER_ECXCHANGE_TABLE.AUDIT_ID
       }
       const param = {
