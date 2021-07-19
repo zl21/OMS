@@ -587,6 +587,7 @@
       const self = this;
       this.$OMS2.BtnConfig.target = self;
       BurgeonEvent.target = self;
+      this.$OMS2.BtnConfig.singleType = 0;
     },
     mounted() {
       const self = this;

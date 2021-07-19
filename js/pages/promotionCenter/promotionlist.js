@@ -514,6 +514,7 @@ export default {
   activated(){
     const self = this;
     self.$OMS2.BtnConfig.target = self;
+    this.$OMS2.BtnConfig.singleType = 0;
   },
   created() {
     groups.load();
