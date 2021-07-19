@@ -174,3 +174,4 @@ console.log($i18n.t(common.all));
 | v1.0.81 | add for sku |
 | v1.0.82 | add sheet v6 |
 | v1.0.83 | add 翻译 |
+| v1.0.84 | add for 退换 |
