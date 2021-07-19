@@ -159,7 +159,7 @@
               </li>
               <li>
                 <!-- 红包 -->
-                <label :title="vmI18n.t('form_label.aj')">{{vmI18n.t('form_label.aj') }}</label>
+                <label :title="vmI18n.t('form_label.al')">{{vmI18n.t('form_label.al') }}</label>
                 <p>{{ componentData.order.al || '0.00'}}</p>
               </li>
               <li>
