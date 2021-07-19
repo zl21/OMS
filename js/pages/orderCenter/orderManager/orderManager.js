@@ -565,6 +565,7 @@
         },
         },
         options:{
+          rowHeight: 40,
           getMainMenuItems: this.getMainMenuItems,
           datas:{},
           floatingFilter:false

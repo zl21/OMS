@@ -189,6 +189,7 @@ export default {
         }
       ],
       options: {
+        rowHeight: 40,
         getRowClass: this.getRowClass,
         datas: {},
         floatingFilter: false
