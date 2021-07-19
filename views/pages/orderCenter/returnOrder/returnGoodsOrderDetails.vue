@@ -697,7 +697,7 @@ export default {
               value: Number(params.row.QTY_EXCHANGE || 1),
               regx: /^[1-9]\d*$/,
               min: 1,
-              max: Number(params.row.RETURNABLE_QTY || 1),
+              // max: Number(params.row.RETURNABLE_QTY || 1), // 产品说该字段暂时不设上限
             },
             on: {
               "on-change": (e) => {
