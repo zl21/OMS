@@ -1027,6 +1027,8 @@ export default {
           // 1.把取消选中的项的_checked置为false
           item._checked = false;
           // 2.把保存在indexL中的序号删掉
+          // self.indexL中有重复的序号，得先去重
+          self.indexL = Array.from(new Set(self.indexL));
           const tag = self.indexL.indexOf(index);
           if (tag != -1) self.indexL.splice(tag, 1);
         }
