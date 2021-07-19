@@ -15,10 +15,7 @@
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           SPU基本信息
-          <div
-            slot="content"
-            class="customized_Info_img"
-          >
+          <div slot="content" class="customized_Info_img">
             <ImageUpload
               v-model="imageValue"
               :http="http"
@@ -32,7 +29,8 @@
           </div>
           <div slot="content" class="clear"></div>
         </Panel>
-        <Panel name="attr">
+
+        <!-- <Panel name="attr">
           自定义属性
           <div slot="content" class="customProperties">
             <div class="panel-title">固定属性：</div>     
@@ -42,7 +40,7 @@
             <div class="panel-title">自定义属性：</div>     
             <businessForm :form-config="customAttr.customFormConfig" />
           </div>
-        </Panel>
+        </Panel> -->
       </Collapse>
       <!-- tab切换 -->
       <div class="customized-detail-table">
@@ -52,10 +50,7 @@
           @labelClick="labelClick"
         />
         <!-- 子表Part -->
-        <div
-          v-show="labelValue == 'skuInfo'"
-          class="skuInfo"
-        >
+        <div v-show="labelValue == 'skuInfo'" class="skuInfo">
           <div class="productSpecification_button">
             <businessButton :btn-config="skuInfoBtnConfig" />
           </div>
@@ -70,10 +65,7 @@
             />
           </div>
         </div>
-        <div
-          v-show="labelValue == 'supplier'"
-          class="supplier"
-        >
+        <div v-show="labelValue == 'supplier'" class="supplier">
           <div class="supplier_header">
             <businessForm :form-config="tableFormConfig" />
             <businessButton :btn-config="supplierBtnConfig" />
@@ -86,11 +78,8 @@
             />
           </div>
         </div>
-        <div
-          v-show="labelValue == 'logTable'"
-          class="lgoTable"
-        >
-          <subTable :component-data="subTableConfig" ></subTable>
+        <div v-show="labelValue == 'logTable'" class="lgoTable">
+          <subTable :component-data="subTableConfig"></subTable>
         </div>
       </div>
     </div>
@@ -98,10 +87,10 @@
 </template>
 
 <script>
-  import spuRecord from '@/js/pages/commodityCenter/spuRecord.js';
+import spuRecord from '@/js/pages/commodityCenter/spuRecord.js';
 
-  export default spuRecord;
+export default spuRecord;
 </script>
 <style lang="less" scoped>
-@import '~@/css/pages/commodityCenter/spuRecord.less';
+@import "~@/css/pages/commodityCenter/spuRecord.less";
 </style>

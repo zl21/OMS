@@ -23,7 +23,7 @@ export default {
   mixins: [new modifycurrentLabel()],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       collapse: ['panel_baseInfo', 'attr'],
       labelValue: 'skuInfo',
       imageValue: '',
@@ -86,58 +86,58 @@ export default {
       skuInfo: {
         resData: [],
         columns: [{
-            type: 'index',
-            width: 60,
-            align: 'center',
-            title: $i18n.t('table_label.serialNo'), // 序号
-          },
-          {
-            title: $i18n.t('table_label.code_SKU'), // SKU编码
-            key: 'ECODE'
-          },
-          {
-            title: $i18n.t('form_label.skuName'), // SKU名称
-            key: 'ENAME'
-          },
-          {
-            title: $i18n.t('form_label.d4'), // 销售状态
-            key: 'SALES_STATUS',
-            render:(h,params)=>{
-              return h('span' , {} , params.row.SALES_STATUS ? params.row.SALES_STATUS == 'Y' ? '正常销售' : '暂停销售' : '')
-            }
-          },
-          {
-            title: $i18n.t('form_label.cu'), // 零售价
-            key: 'PRICE_RETAIL',
-          },
-          {
-            title: $i18n.t('form_label.d5'), // 采购价
-            key: 'PRICE_PURCHASE'
-          },
-          {
-            title: $i18n.t('form_label.d6'), // 成本价
-            key: 'PRICE_COST'
-          },
-          {
-            title: $i18n.t('unit.volume'), // 体积(cm3)
-            key: 'VOLUME'
-          },
-          {
-            title: $i18n.t('unit.grossWeight'), // 毛重
-            key: 'GROSS_WEIGHT'
-          },
-          {
-            title: $i18n.t('unit.netWeight'), // 净重
-            key: 'NET_WEIGHT'
-          },
-          {
-            title: $i18n.t('unit.unit'), // 单位
-            key: 'UNIT'
-          },
-          {
-            title: $i18n.t('table_label.remarks'), // 备注
-            key: 'SPEC_REMARK'
+          type: 'index',
+          width: 60,
+          align: 'center',
+          title: $i18n.t('table_label.serialNo'), // 序号
+        },
+        {
+          title: $i18n.t('table_label.code_SKU'), // SKU编码
+          key: 'ECODE'
+        },
+        {
+          title: $i18n.t('form_label.skuName'), // SKU名称
+          key: 'ENAME'
+        },
+        {
+          title: $i18n.t('form_label.d4'), // 销售状态
+          key: 'SALES_STATUS',
+          render: (h, params) => {
+            return h('span', {}, params.row.SALES_STATUS ? params.row.SALES_STATUS == 'Y' ? '正常销售' : '暂停销售' : '')
           }
+        },
+        {
+          title: $i18n.t('form_label.cu'), // 零售价
+          key: 'PRICE_RETAIL',
+        },
+        {
+          title: $i18n.t('form_label.d5'), // 采购价
+          key: 'PRICE_PURCHASE'
+        },
+        {
+          title: $i18n.t('form_label.d6'), // 成本价
+          key: 'PRICE_COST'
+        },
+        {
+          title: $i18n.t('unit.volume'), // 体积(cm3)
+          key: 'VOLUME'
+        },
+        {
+          title: $i18n.t('unit.grossWeight'), // 毛重
+          key: 'GROSS_WEIGHT'
+        },
+        {
+          title: $i18n.t('unit.netWeight'), // 净重
+          key: 'NET_WEIGHT'
+        },
+        {
+          title: $i18n.t('unit.unit'), // 单位
+          key: 'UNIT'
+        },
+        {
+          title: $i18n.t('table_label.remarks'), // 备注
+          key: 'SPEC_REMARK'
+        }
         ],
         clickColumns: '',
         rowClickData: {}, // sku信息单据选中的数据
@@ -147,100 +147,100 @@ export default {
         loading: false, // 按钮加载
         buttons: []
       },
-      extendSkuInfoBtn:[{
-            text: $i18n.t('btn.newSKU'), // 新增SKU
-            webname:'PS_C_PRO_NEW_SKU',
-            btnclick: () => {
-              if (this.spuid == '-1') {
-                $omsUtils.msgTips(this, 'warning', 'cu');
-                return;
-              }
-              this.isModify = true;
-              $store.commit('customize/TabOpen', {
-                id: 2201,
-                type: 'action',
-                name: 'PS_C_SKU',
-                label: '商品SKU编辑', // 额外退款编辑
-                query: Object.assign({
-                  spuid: this.spuid,
-                  spucode: this.formConfig.formValue.ECODE
-                })
-              });
-            }
-          },
-          {
-            text: '快速新增',
-            webname:'PS_C_PRO_QUICK_SKU',
-            btnclick: () => {
-              if (this.spuid == '-1') {
-                $omsUtils.msgTips(this, 'warning', 'cu');
-                return;
-              }
-              if (!this.formConfig.formValue.PS_C_PRO_CLASSIFY_ID) {
-                $omsUtils.msgTips(this, 'warning', 'fj');
-                return;
-              }
-              this.isModify = true;
-              $store.commit('customize/TabOpen', {
-                id: 2200,
-                type: 'action',
-                name: 'PS_C_SKU_QUICKLY_ADD',
-                label: $i18n.t('menu.b3'), // 快速生成
-                query: Object.assign({
-                  id: this.spuid, // spuid
-                  classid: this.formConfig.formValue.PS_C_PRO_CLASSIFY_ID
-                })
-              });
-            }
-          },
-          {
-            text: $i18n.t('btn.applyToAllColumn'), // 应用到所有列
-            webname:'PS_C_PRO_MIND_COLUMNS',
-            btnclick: () => {
-              this.useAllColumns();
-            }
+      extendSkuInfoBtn: [{
+        text: $i18n.t('btn.newSKU'), // 新增SKU
+        webname: 'PS_C_PRO_NEW_SKU',
+        btnclick: () => {
+          if (this.spuid == '-1') {
+            $omsUtils.msgTips(this, 'warning', 'cu');
+            return;
           }
+          this.isModify = true;
+          $store.commit('customize/TabOpen', {
+            id: 2201,
+            type: 'action',
+            name: 'PS_C_SKU',
+            label: '商品SKU编辑', // 额外退款编辑
+            query: Object.assign({
+              spuid: this.spuid,
+              spucode: this.formConfig.formValue.ECODE
+            })
+          });
+        }
+      },
+      {
+        text: '快速新增',
+        webname: 'PS_C_PRO_QUICK_SKU',
+        btnclick: () => {
+          if (this.spuid == '-1') {
+            $omsUtils.msgTips(this, 'warning', 'cu');
+            return;
+          }
+          if (!this.formConfig.formValue.PS_C_PRO_CLASSIFY_ID) {
+            $omsUtils.msgTips(this, 'warning', 'fj');
+            return;
+          }
+          this.isModify = true;
+          $store.commit('customize/TabOpen', {
+            id: 2200,
+            type: 'action',
+            name: 'PS_C_SKU_QUICKLY_ADD',
+            label: $i18n.t('menu.b3'), // 快速生成
+            query: Object.assign({
+              id: this.spuid, // spuid
+              classid: this.formConfig.formValue.PS_C_PRO_CLASSIFY_ID
+            })
+          });
+        }
+      },
+      {
+        text: $i18n.t('btn.applyToAllColumn'), // 应用到所有列
+        webname: 'PS_C_PRO_MIND_COLUMNS',
+        btnclick: () => {
+          this.useAllColumns();
+        }
+      }
 
-        ],
+      ],
       supplier: {
         resData: [],
         columns: [{
-            type: 'selection',
-            width: 30,
-            align: 'right'
-          },
-          {
-            type: 'index',
-            width: 60,
-            align: 'left',
-            title: $i18n.t('table_label.serialNo'), // 序号
-          },
-          {
-            title: $i18n.t('table_label.supplierName'), // 供应商名称
-            key: 'cpCSupplierName'
-          },
-          {
-            title: $i18n.t('form_label.d7'), // 默认供应商
-            key: 'IS_DEFAULT',
-            render: (h, params) => h('Checkbox', {
-              props: {
-                value: params.row.IS_DEFAULT == 'Y'
-              },
-              on: {
-                'on-change': (val) => {
-                  this.supplier.resData.forEach(item => {
-                    if (val && item.cpCSupplierId !== params.row.cpCSupplierId) {
-                      item.IS_DEFAULT = 'N';
-                    } else if (val && item.cpCSupplierId == params.row.cpCSupplierId) {
-                      item.IS_DEFAULT = 'Y';
-                    }
-                  });
-                  console.log(val);
-                  console.log(params);
-                }
+          type: 'selection',
+          width: 30,
+          align: 'right'
+        },
+        {
+          type: 'index',
+          width: 60,
+          align: 'left',
+          title: $i18n.t('table_label.serialNo'), // 序号
+        },
+        {
+          title: $i18n.t('table_label.supplierName'), // 供应商名称
+          key: 'cpCSupplierName'
+        },
+        {
+          title: $i18n.t('form_label.d7'), // 默认供应商
+          key: 'IS_DEFAULT',
+          render: (h, params) => h('Checkbox', {
+            props: {
+              value: params.row.IS_DEFAULT == 'Y'
+            },
+            on: {
+              'on-change': (val) => {
+                this.supplier.resData.forEach(item => {
+                  if (val && item.cpCSupplierId !== params.row.cpCSupplierId) {
+                    item.IS_DEFAULT = 'N';
+                  } else if (val && item.cpCSupplierId == params.row.cpCSupplierId) {
+                    item.IS_DEFAULT = 'Y';
+                  }
+                });
+                console.log(val);
+                console.log(params);
               }
-            })
-          }
+            }
+          })
+        }
         ],
         selectionData: []
       },
@@ -250,20 +250,20 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: []
       },
-      extendSupplierBtn:[{
-            text: $i18n.t('btn.add'), // 新增
-            btnclick: () => {
-              this.addSupplier();
-            }
-          },
-          {
-            text: $i18n.t('btn.delete'), // 删除
-            btnclick: () => {
-              this.supplierDel();
-            }
-          }
-        ],
-      extendBtn:[
+      extendSupplierBtn: [{
+        text: $i18n.t('btn.add'), // 新增
+        btnclick: () => {
+          this.addSupplier();
+        }
+      },
+      {
+        text: $i18n.t('btn.delete'), // 删除
+        btnclick: () => {
+          this.supplierDel();
+        }
+      }
+      ],
+      extendBtn: [
         {
           webname: 'PS_C_PRO_SAVE', // 保存
           text: $i18n.t('btn.save'), // 保存
@@ -300,13 +300,13 @@ export default {
             } else {
               // comUtils.tabCloseAppoint(this);
               //     this.$destroy(true);
-                  this.$store.commit('global/tabOpen', {
-                    tableId: 10106,
-                    type: 'S',
-                    tableName: 'PS_C_PRO',
-                    label: '商品SPU',
-                    back: true,
-                  });
+              this.$store.commit('global/tabOpen', {
+                tableId: 10106,
+                type: 'S',
+                tableName: 'PS_C_PRO',
+                label: '商品SPU',
+                back: true,
+              });
             }
           },
         },
@@ -327,132 +327,132 @@ export default {
       },
       formConfig: {
         formData: [{
-            style: 'input',
-            label: $i18n.t('table_label.itemNo01'), // SPU编码
-            value: 'ECODE',
-            width: '8',
-            disabled: false,
-            inputChange: () => {
-              this.masterModifyData('ECODE', 'master', '');
-            }
-          },
-          // {   不要了
-          //   style: 'input',
-          //   label: '启用状态',
-          //   value: 'isactive',
-          //   width: '8',
-          //   disabled: true,
-          // },
-          {
-            style: 'input',
-            label: $i18n.t("table_label.itemNo02"), // SPU名称
-            value: 'ENAME',
-            width: '24',
-            disabled: false,
-            inputChange: () => {
-              this.masterModifyData('ENAME', 'master', '');
-            }
-          },
-          {
-            colname: 'TYPE',
-            style: 'select', // 下拉框类型
-            label: $i18n.t("form_label.type"), // 类型
-            width: '8', // 所占宽度宽度
-            value: 'TYPE', // 输入框的值
-            clearable: true,
-            selectChange: () => {
-              this.masterModifyData('TYPE', 'master', undefined);
-            },
-            options: [
-              // 下拉框选项值
-              {
-                label: '1',
-                value: 1
-              },
-              {
-                label: '2',
-                value: 2
-              }
-            ]
-          },
-          {
-            version: '1.4',
-            colname: 'PS_C_BRAND_ID',
-            style: 'popInput', // 输入框弹框单多选
-            width: '8',
-            itemdata: {
-              col: 1,
-              colid: 166035, // 当前字段的ID
-              colname: 'PS_C_BRAND_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-              fkdisplay: 'drp', // 外键关联类型
-              inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
-              isfk: true, // 是否有fk键
-              isnotnull: true, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
-              name: $i18n.t('table_label.brand'), // 品牌
-              readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'PS_C_BRAND', // 对应的表
-              reftableid: 166035, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
-              valuedata: '', // 这个是选择的值
-              pid: '', // 啥 ？？？
-            },
-            oneObj: e => {
-              console.log(e);
-              this.formConfig.formValue.PS_C_BRAND_ID = e.pid;
-              if (e.pid == null) return;
-              this.masterModifyData('PS_C_BRAND_ID', 'master', '');
-            },
-          },
-          {
-            version: '1.4',
-            colname: 'PS_C_PRO_CLASSIFY_ID',
-            style: 'popInput', // 输入框弹框单多选
-            width: '8',
-            itemdata: {
-              col: 1,
-              colid: 166036, // 当前字段的ID
-              colname: 'PS_C_PRO_CLASSIFY_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-              fkdisplay: 'drp', // 外键关联类型
-              inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
-              isfk: true, // 是否有fk键
-              isnotnull: true, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
-              name: $i18n.t('menu.ac'), // 商品分类
-              readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
-              reftableid: 10091, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
-              valuedata: '', // 这个是选择的值
-              pid: '', // 啥 ？？？
-            },
-            oneObj: e => {
-              this.formConfig.formValue.PS_C_PRO_CLASSIFY_ID = e.pid;
-              if (e.pid == null) return;
-              this.masterModifyData('PS_C_PRO_CLASSIFY_ID', 'master', '');
-              this.getCustomAttr();
-            },
-          },
-          {
-            style: 'textarea',
-            label: $i18n.t('form_label.d8'), // 产品介绍
-            value: 'REMARK',
-            width: '24',
-            maxlength:255,
-            inputChange: () => {
-              this.masterModifyData('REMARK', 'master', '');
-            }
+          style: 'input',
+          label: $i18n.t('table_label.itemNo01'), // SPU编码
+          value: 'ECODE',
+          width: '8',
+          disabled: false,
+          inputChange: () => {
+            this.masterModifyData('ECODE', 'master', '');
           }
+        },
+        // {   不要了
+        //   style: 'input',
+        //   label: '启用状态',
+        //   value: 'isactive',
+        //   width: '8',
+        //   disabled: true,
+        // },
+        {
+          style: 'input',
+          label: $i18n.t("table_label.itemNo02"), // SPU名称
+          value: 'ENAME',
+          width: '24',
+          disabled: false,
+          inputChange: () => {
+            this.masterModifyData('ENAME', 'master', '');
+          }
+        },
+        {
+          colname: 'TYPE',
+          style: 'select', // 下拉框类型
+          label: $i18n.t("form_label.type"), // 类型
+          width: '8', // 所占宽度宽度
+          value: 'TYPE', // 输入框的值
+          clearable: true,
+          selectChange: () => {
+            this.masterModifyData('TYPE', 'master', undefined);
+          },
+          options: [
+            // 下拉框选项值
+            {
+              label: '1',
+              value: 1
+            },
+            {
+              label: '2',
+              value: 2
+            }
+          ]
+        },
+        {
+          version: '1.4',
+          colname: 'PS_C_BRAND_ID',
+          style: 'popInput', // 输入框弹框单多选
+          width: '8',
+          itemdata: {
+            col: 1,
+            colid: 166035, // 当前字段的ID
+            colname: 'PS_C_BRAND_ID', // 当前字段的名称
+            datelimit: 'all',
+            display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+            fkdisplay: 'drp', // 外键关联类型
+            inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
+            isfk: true, // 是否有fk键
+            isnotnull: true, // 是否必填
+            isuppercase: false, // 是否转大写
+            length: 65535, // 最大长度是多少
+            name: $i18n.t('table_label.brand'), // 品牌
+            readonly: false, // 是否可编辑，对应input   readonly属性
+            reftable: 'PS_C_BRAND', // 对应的表
+            reftableid: 166035, // 对应的表ID
+            row: 1,
+            statsize: -1,
+            type: 'STRING', // 这个是后台用的
+            valuedata: '', // 这个是选择的值
+            pid: '', // 啥 ？？？
+          },
+          oneObj: e => {
+            console.log(e);
+            this.formConfig.formValue.PS_C_BRAND_ID = e.pid;
+            if (e.pid == null) return;
+            this.masterModifyData('PS_C_BRAND_ID', 'master', '');
+          },
+        },
+        {
+          version: '1.4',
+          colname: 'PS_C_PRO_CLASSIFY_ID',
+          style: 'popInput', // 输入框弹框单多选
+          width: '8',
+          itemdata: {
+            col: 1,
+            colid: 166036, // 当前字段的ID
+            colname: 'PS_C_PRO_CLASSIFY_ID', // 当前字段的名称
+            datelimit: 'all',
+            display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+            fkdisplay: 'drp', // 外键关联类型
+            inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
+            isfk: true, // 是否有fk键
+            isnotnull: true, // 是否必填
+            isuppercase: false, // 是否转大写
+            length: 65535, // 最大长度是多少
+            name: $i18n.t('menu.ac'), // 商品分类
+            readonly: false, // 是否可编辑，对应input   readonly属性
+            reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
+            reftableid: 10091, // 对应的表ID
+            row: 1,
+            statsize: -1,
+            type: 'STRING', // 这个是后台用的
+            valuedata: '', // 这个是选择的值
+            pid: '', // 啥 ？？？
+          },
+          oneObj: e => {
+            this.formConfig.formValue.PS_C_PRO_CLASSIFY_ID = e.pid;
+            if (e.pid == null) return;
+            this.masterModifyData('PS_C_PRO_CLASSIFY_ID', 'master', '');
+            this.getCustomAttr();
+          },
+        },
+        {
+          style: 'textarea',
+          label: $i18n.t('form_label.d8'), // 产品介绍
+          value: 'REMARK',
+          width: '24',
+          maxlength: 255,
+          inputChange: () => {
+            this.masterModifyData('REMARK', 'master', '');
+          }
+        }
         ],
         formValue: {
           ECODE: '', // SPU编码
@@ -488,21 +488,21 @@ export default {
       },
       // tab切换配置
       labelList: [{
-          label: $i18n.t('panel_label.ay'), // SKU信息
-          value: 'skuInfo',
-        },
-        {
-          label: $i18n.t('panel_label.az'), // 供应商
-          value: 'supplier',
-        },
-        // {
-        //   label: '自定义属性',
-        //   value: 'customAttr',
-        // },
-        {
-          label: $i18n.t('panel_label.operationLog'), // 操作日志
-          value: 'logTable',
-        },
+        label: $i18n.t('panel_label.ay'), // SKU信息
+        value: 'skuInfo',
+      },
+      {
+        label: $i18n.t('panel_label.az'), // 供应商
+        value: 'supplier',
+      },
+      // {
+      //   label: '自定义属性',
+      //   value: 'customAttr',
+      // },
+      {
+        label: $i18n.t('panel_label.operationLog'), // 操作日志
+        value: 'logTable',
+      },
       ],
       subTableConfig: {
         centerName: '',
@@ -534,7 +534,7 @@ export default {
     //     this.getPermissions('btnConfig', 'PS_C_PRO');
     //   });
     const self = this;
-    self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
+    self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter', '/p/cs/upload2')
     this.init();
     await this.getSelectOption();
     await this.querySpu();
@@ -543,7 +543,7 @@ export default {
   async activated() {
     // 设置默认值
     const self = this;
-    self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
+    self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter', '/p/cs/upload2')
     this.init();
     await this.getSelectOption();
     await this.querySpu();
@@ -555,11 +555,11 @@ export default {
       //按钮权限
       const buttons = self.$OMS2.BtnConfig.config();
       this.btnConfig.buttons = [...this.extendBtn];
-      this.skuInfoBtnConfig.buttons = [ ...this.extendSkuInfoBtn];
-      this.supplierBtnConfig.buttons = [ ...this.extendSupplierBtn];
+      this.skuInfoBtnConfig.buttons = [...this.extendSkuInfoBtn];
+      this.supplierBtnConfig.buttons = [...this.extendSupplierBtn];
       if (self.spuid > 0) {
-        $omsUtils.getBtnPermission(this , ['btnConfig' , 'skuInfoBtnConfig' , 'supplierBtnConfig'] , { table: 'PS_C_PRO', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
-        self.formConfig.formData.forEach(item=>{
+        $omsUtils.getBtnPermission(this, ['btnConfig', 'skuInfoBtnConfig', 'supplierBtnConfig'], { table: 'PS_C_PRO', type: 'OBJ', serviceId: 'r3-oc-oms' }, true);
+        self.formConfig.formData.forEach(item => {
           if (item.value == 'ECODE') {
             item.disabled = true;
           }
@@ -729,7 +729,7 @@ export default {
       const self = this;
       if (res[name].length) {
         const data = res[name];
-        data.forEach(item=>{
+        data.forEach(item => {
           const key = String(item.colname);
           item.value = key;
           modifyObj.formValue[key] = item.valuedata;
@@ -737,92 +737,92 @@ export default {
             item.selectChange = () => {
               self.isModify = true;
               if (modifyObj.formValue[key] == '') {
-              self.modify.customAttr.forEach((item, index) => {
-                if (item.attributeId == key) {
-                  self.modify.customAttr.splice(index, 1);
-                }
-              });
-            } else if (!self.modify.customAttr.length) {
-              const obj = {};
-              obj.attributeId = key;
-              obj.attributeItem = modifyObj.formValue[key];
-              obj.custom_type = name;
-              self.modify.customAttr.push(obj);
-            } else {
-              const boo = self.modify.customAttr.some(item => item.attributeId == key);
-              if (boo) {
-                item.attributeItem = modifyObj.formValue[key];
-              } else {
+                self.modify.customAttr.forEach((item, index) => {
+                  if (item.attributeId == key) {
+                    self.modify.customAttr.splice(index, 1);
+                  }
+                });
+              } else if (!self.modify.customAttr.length) {
                 const obj = {};
                 obj.attributeId = key;
                 obj.attributeItem = modifyObj.formValue[key];
                 obj.custom_type = name;
                 self.modify.customAttr.push(obj);
+              } else {
+                const boo = self.modify.customAttr.some(item => item.attributeId == key);
+                if (boo) {
+                  item.attributeItem = modifyObj.formValue[key];
+                } else {
+                  const obj = {};
+                  obj.attributeId = key;
+                  obj.attributeItem = modifyObj.formValue[key];
+                  obj.custom_type = name;
+                  self.modify.customAttr.push(obj);
+                }
               }
-            }
             };
-          }else if(item.style == 'date') {
+          } else if (item.style == 'date') {
             item.onChange = () => {
               const self = this;
-            self.isModify = true;
-            if (modifyObj.formValue[key] == '') {
-              self.modify.customAttr.forEach((item, index) => {
-                if (item.attributeId == key) {
-                  self.modify.customAttr.splice(index, 1);
-                }
-              });
-            } else if (!self.modify.customAttr.length) {
-              const obj = {};
-              obj.attributeId = key;
-              obj.attributeItem = self.formatDate(modifyObj.formValue[key]);
-              obj.custom_type = name;
-              self.modify.customAttr.push(obj);
-            } else {
-              const boo = self.modify.customAttr.filter(item => item.attributeId == key);
-              if (boo.length) {
-                boo[0].attributeItem = self.formatDate(modifyObj.formValue[key]);
-                // boo[0].attributeId = modifyObj.formValue[key];
-              } else {
+              self.isModify = true;
+              if (modifyObj.formValue[key] == '') {
+                self.modify.customAttr.forEach((item, index) => {
+                  if (item.attributeId == key) {
+                    self.modify.customAttr.splice(index, 1);
+                  }
+                });
+              } else if (!self.modify.customAttr.length) {
                 const obj = {};
                 obj.attributeId = key;
                 obj.attributeItem = self.formatDate(modifyObj.formValue[key]);
                 obj.custom_type = name;
                 self.modify.customAttr.push(obj);
+              } else {
+                const boo = self.modify.customAttr.filter(item => item.attributeId == key);
+                if (boo.length) {
+                  boo[0].attributeItem = self.formatDate(modifyObj.formValue[key]);
+                  // boo[0].attributeId = modifyObj.formValue[key];
+                } else {
+                  const obj = {};
+                  obj.attributeId = key;
+                  obj.attributeItem = self.formatDate(modifyObj.formValue[key]);
+                  obj.custom_type = name;
+                  self.modify.customAttr.push(obj);
+                }
               }
-            }
-            console.log(self.modify.customAttr);
+              console.log(self.modify.customAttr);
             }
           } else {
             item.inputChange = () => { // 动态记录自定义属性修改值
-            const self = this;
-            self.isModify = true;
-            if (modifyObj.formValue[key] == '') {
-              self.modify.customAttr.forEach((item, index) => {
-                if (item.attributeId == key) {
-                  self.modify.customAttr.splice(index, 1);
-                }
-              });
-            } else if (!self.modify.customAttr.length) {
-              const obj = {};
-              obj.attributeId = key;
-              obj.attributeItem = modifyObj.formValue[key];
-              obj.custom_type = name;
-              self.modify.customAttr.push(obj);
-            } else {
-              const boo = self.modify.customAttr.filter(item => item.attributeId == key);
-              if (boo.length) {
-                boo[0].attributeItem = modifyObj.formValue[key];
-                // boo[0].attributeId = modifyObj.formValue[key];
-              } else {
+              const self = this;
+              self.isModify = true;
+              if (modifyObj.formValue[key] == '') {
+                self.modify.customAttr.forEach((item, index) => {
+                  if (item.attributeId == key) {
+                    self.modify.customAttr.splice(index, 1);
+                  }
+                });
+              } else if (!self.modify.customAttr.length) {
                 const obj = {};
                 obj.attributeId = key;
                 obj.attributeItem = modifyObj.formValue[key];
                 obj.custom_type = name;
                 self.modify.customAttr.push(obj);
+              } else {
+                const boo = self.modify.customAttr.filter(item => item.attributeId == key);
+                if (boo.length) {
+                  boo[0].attributeItem = modifyObj.formValue[key];
+                  // boo[0].attributeId = modifyObj.formValue[key];
+                } else {
+                  const obj = {};
+                  obj.attributeId = key;
+                  obj.attributeItem = modifyObj.formValue[key];
+                  obj.custom_type = name;
+                  self.modify.customAttr.push(obj);
+                }
               }
-            }
-            console.log(self.modify.customAttr);
-          };
+              console.log(self.modify.customAttr);
+            };
           }
         });
         modifyObj.formData = data;
@@ -841,11 +841,11 @@ export default {
       self.skuInfo.resData.forEach(ele => {
         if (!ele[self.skuInfo.clickColumns]) {
           ele[self.skuInfo.clickColumns] = modifyData;
-        // 记录修改的表格数据
-        const obj = {};
-        obj[self.skuInfo.clickColumns] = modifyData;
-        obj.ID = ele.ID;
-        self.modify.skuInfo.push(obj);
+          // 记录修改的表格数据
+          const obj = {};
+          obj[self.skuInfo.clickColumns] = modifyData;
+          obj.ID = ele.ID;
+          self.modify.skuInfo.push(obj);
         }
       });
     },
@@ -862,7 +862,7 @@ export default {
         this.subTableConfig = {
           centerName: 'commodityCenter',
           tablename: 'PS_C_PRO_LOG',
-          pageShow:true,
+          pageShow: true,
           objid: this.spuid,
         }
       }
@@ -876,7 +876,7 @@ export default {
       if (!self.supplier.selectionData.length) {
         $omsUtils.msgTips(self, 'warning', 'df');
         return;
-    }
+      }
       const delarr = self.supplier.selectionData.map(item => item.cpCSupplierId);
       const arr = [];
       // 删除表格数据,同时删除modify里的修改数据
@@ -917,7 +917,7 @@ export default {
       } else if (!data.TYPE) {
         str += `${$i18n.t('form_label.type')} `; // 类型
       }
-      self.formConfig.formData.forEach(item=>{
+      self.formConfig.formData.forEach(item => {
         if (item.colname == 'PS_C_BRAND_ID' && !item.itemdata.pid) {
           str += `${$i18n.t('table_label.brand')} `; // 品牌
         } else if (item.colname == 'PS_C_PRO_CLASSIFY_ID' && !item.itemdata.pid) {
