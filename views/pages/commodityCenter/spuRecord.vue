@@ -7,7 +7,7 @@
  * @FilePath: /burgeon-project-logic/views/pages/commodityCenter/spuRecord.vue
 -->
 <template>
-  <div class="spuRecord cusArkCollapse customized-detail">
+  <div class="spuRecord cusArkCollapse customized-detail" v-loading="loading">
     <div class="buttons customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
@@ -29,7 +29,20 @@
           </div>
           <div slot="content" class="clear"></div>
         </Panel>
-
+        <Panel name="panel_fixAttr">
+          <!-- 固定属性 -->
+          {{ vmI18n.t("panel_label.b4") }}
+          <div slot="content">
+            <businessForm :form-config="customAttr.fixFormConfig" />
+          </div>
+        </Panel>
+        <Panel name="panel_cusAttr">
+          <!-- 自定义属性 -->
+          {{ vmI18n.t("panel_label.b5") }}
+          <div slot="content">
+            <businessForm :form-config="customAttr.customFormConfig" />
+          </div>
+        </Panel>
         <!-- <Panel name="attr">
           自定义属性
           <div slot="content" class="customProperties">

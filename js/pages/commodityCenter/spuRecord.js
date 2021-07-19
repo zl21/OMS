@@ -23,8 +23,9 @@ export default {
   mixins: [new modifycurrentLabel()],
   data() {
     return {
+      loading: false,
       vmI18n: $i18n,
-      collapse: ['panel_baseInfo', 'attr'],
+      collapse: ['panel_baseInfo', 'panel_fixAttr', 'panel_cusAttr'],
       labelValue: 'skuInfo',
       imageValue: '',
       http: $network,
@@ -336,18 +337,11 @@ export default {
             this.masterModifyData('ECODE', 'master', '');
           }
         },
-        // {   不要了
-        //   style: 'input',
-        //   label: '启用状态',
-        //   value: 'isactive',
-        //   width: '8',
-        //   disabled: true,
-        // },
         {
           style: 'input',
           label: $i18n.t("table_label.itemNo02"), // SPU名称
           value: 'ENAME',
-          width: '24',
+          width: '16',
           disabled: false,
           inputChange: () => {
             this.masterModifyData('ENAME', 'master', '');
@@ -452,7 +446,14 @@ export default {
           inputChange: () => {
             this.masterModifyData('REMARK', 'master', '');
           }
-        }
+        },
+        {
+          style: '', // input
+          label: '启用状态',
+          colname: 'isactive',
+          width: '8',
+          class: 'statusInput',
+        },
         ],
         formValue: {
           ECODE: '', // SPU编码
@@ -533,23 +534,44 @@ export default {
     //   this.$nextTick(() => {
     //     this.getPermissions('btnConfig', 'PS_C_PRO');
     //   });
-    const self = this;
-    self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter', '/p/cs/upload2')
-    this.init();
-    await this.getSelectOption();
-    await this.querySpu();
-    await this.getSkuInfoData();
+    // const self = this;
+    // self.loading = true;
+    // self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter', '/p/cs/upload2')
+    // this.init();
+    // await this.getSelectOption();
+    // await this.querySpu();
+    // await this.getSkuInfoData();
+    this.doStep();
   },
   async activated() {
     // 设置默认值
-    const self = this;
-    self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter', '/p/cs/upload2')
-    this.init();
-    await this.getSelectOption();
-    await this.querySpu();
-    await this.getSkuInfoData();
+    // const self = this;
+    // self.loading = true;
+    // self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter', '/p/cs/upload2')
+    // this.init();
+    // await this.getSelectOption();
+    // await this.querySpu();
+    // await this.getSkuInfoData();
+    this.doStep();
   },
   methods: {
+    doStep() {
+      const self = this;
+      self.loading = true;
+      self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter', '/p/cs/upload2')
+      self.init().then(async () => {
+        self.formConfig.formData = await publicMethodsUtil.getTypeList('PS_C_PRO', ['TYPE'], '基础信息', self.formConfig);
+        // await self.getSelectOption();
+      }).then(async () => {
+        await self.querySpu();
+      }).then(async () => {
+        await self.getSkuInfoData();
+      }).then(() => {
+        setTimeout(() => {
+          self.loading = false;
+        }, 1);
+      });
+    },
     init() {
       const self = this;
       //按钮权限
@@ -559,6 +581,7 @@ export default {
       this.supplierBtnConfig.buttons = [...this.extendSupplierBtn];
       if (self.spuid > 0) {
         $omsUtils.getBtnPermission(this, ['btnConfig', 'skuInfoBtnConfig', 'supplierBtnConfig'], { table: 'PS_C_PRO', type: 'OBJ', serviceId: 'r3-oc-oms' }, true);
+        this.formConfig.formData.find(i => i.colname == 'isactive').style = 'input';
         self.formConfig.formData.forEach(item => {
           if (item.value == 'ECODE') {
             item.disabled = true;
@@ -567,6 +590,7 @@ export default {
       } else {
         self.WatchChange = true;
       };
+      return new Promise(resolve => resolve(true))
     },
     addSupplier() {
       const self = this;
@@ -626,13 +650,13 @@ export default {
         self.modify[obj][ecode] = self.formConfig.formValue[ecode];
       }
     },
-    querySpu() {
+    async querySpu() {
       const self = this;
+      self.loading = true;
       if (self.spuid == '-1') return;
       const formdata = new FormData();
       formdata.append('id', self.spuid);
-      self.service.commodityCenter.querySpu(formdata).then(res => {
-        console.log(res);
+      await self.service.commodityCenter.querySpu(formdata).then(res => {
         if (res.data.code == 0) {
           const {
             IMAGE,
@@ -655,7 +679,7 @@ export default {
             PS_C_PRO_CLASSIFY_ID, // 商品分类
             REMARK, // 产品介绍
           };
-          self.dataitem.valuedata.push(...(JSON.parse(IMAGE))); // 图片
+          IMAGE && self.dataitem.valuedata.push(...(JSON.parse(IMAGE))); // 图片
           self.formConfig.formData.forEach(item => {
             switch (item.colname) {
               case 'PS_C_BRAND_ID':
@@ -666,9 +690,22 @@ export default {
                 item.itemdata.pid = PS_C_PRO_CLASSIFY_ID;
                 item.itemdata.valuedata = PS_C_PRO_CLASSIFY_NAME;
             }
+            if (self.spuid > 0) {
+              if (['Y', '启用'].includes(self.formConfig.formValue.isactive)) { // 启用状态时都不可编辑
+                if (!item.itemdata) {
+                  item.disabled = true;
+                }
+                if (item.itemdata) {
+                  item.itemdata.readonly = true;
+                }
+              }
+            }
           });
-          self.getCustomAttr();
         }
+      }).then(async x => {
+        await self.getCustomAttr()
+      }).finally(e => {
+        self.loading = false
       });
     },
     onColumnClick(e, column) { // 点击当前列
@@ -687,7 +724,6 @@ export default {
       const formdata = new FormData();
       formdata.append('id', this.spuid);
       this.service.commodityCenter.listSku(formdata).then(res => {
-        console.log(res);
         if (res.data.code == 0) {
           this.skuInfo.resData = res.data.data;
         } else {
@@ -695,10 +731,10 @@ export default {
         }
       });
     },
-    getCustomAttr() {
+    async getCustomAttr() {
       const self = this;
       if (!self.formConfig.formValue.PS_C_PRO_CLASSIFY_ID) return;
-      self.service.commodityCenter.queryAttributeSku({
+      await self.service.commodityCenter.queryAttributeSku({
         proCode: self.formConfig.formValue.ECODE, // spu编码
         tableName: 'ps_c_pro', // 表名
         classId: self.formConfig.formValue.PS_C_PRO_CLASSIFY_ID // 分类id
@@ -718,6 +754,7 @@ export default {
           $omsUtils.msgTips(self, 'error', res.data.message, 0);
         }
       });
+      // })
     },
     /**
      * 
