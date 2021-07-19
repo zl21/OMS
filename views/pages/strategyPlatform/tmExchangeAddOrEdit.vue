@@ -47,6 +47,7 @@
                   v-model="rowData.value.AOTU_APPROVE_DEVIATION_PRICE"
                   :disabled="isEnable"
                   :autosize="{minRows: 2,maxRows: 5}"
+                  :placeholder="vmI18n.t('pHolder.enter')"
                   @on-change="rowData.item.inputChange"
                   :regx="rowData.item.regx"
                   style="width: 150px;"
@@ -81,6 +82,7 @@
                   v-model="rowData.value.OOS_AUTO_REJECT_DESC"
                   :disabled="isEnable"
                   :autosize="{minRows: 2,maxRows: 5}"
+                  :placeholder="vmI18n.t('pHolder.enter')"
                   @on-change="rowData.item.inputChange"
                   style="width: 150px;"
                 />
@@ -102,6 +104,7 @@
                   :disabled="isEnable"
                   :autosize="{minRows: 2,maxRows: 5}"
                   :regx="rowData.item.regx"
+                  :placeholder="vmI18n.t('pHolder.enter')"
                   @on-change="rowData.item.inputChange"
                   style="width: 150px;"
                 />
@@ -125,6 +128,7 @@
                   v-model="rowData.value.DEVIATION_AUTO_REJECT_DESC"
                   :disabled="isEnable"
                   :autosize="{minRows: 2,maxRows: 5}"
+                  :placeholder="vmI18n.t('pHolder.enter')"
                   @on-change="rowData.item.inputChange2"
                   style="width: 150px;"
                 />

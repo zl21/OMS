@@ -14,7 +14,8 @@
     <div class="customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
-          SPU基本信息
+          <!-- SPU基本信息 -->
+          SPU {{ vmI18n.t("common.baseInformation") }}
           <div slot="content" class="customized_Info_img">
             <ImageUpload
               v-model="imageValue"

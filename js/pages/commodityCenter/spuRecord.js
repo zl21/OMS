@@ -170,7 +170,7 @@ export default {
         }
       },
       {
-        text: '快速新增',
+        text: $i18n.t('btn.fastNew'), // 快速新增
         webname: 'PS_C_PRO_QUICK_SKU',
         btnclick: () => {
           if (this.spuid == '-1') {
