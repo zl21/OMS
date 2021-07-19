@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-16 17:19:59
+ * @LastEditTime: 2021-07-19 13:59:27
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -131,7 +131,11 @@ export default {
               text: $i18n.t('btn.replaceDetail'), // 按钮文本 替换明细
               isShow: true,
               btnclick: (e) => {
-                console.log(e);
+                console.log(this.detailsArrData.length);
+                if(this.detailsArrData.length > 1){
+                   this.$Message.warning($i18n.t('modalTips.dz'));
+                   return false;
+                }
                 if (
                   this.$route.params.customizedModuleId === "New" &&
                   !this.mainData.SOURCE_CODE
@@ -899,6 +903,7 @@ export default {
     /* -------------------- 退/换货明细 - 列表表格事件 -------------------- */
     // 退货明细 - 列表勾选
     returnOnSelect(selection, row) {
+      console.log(selection);
       this.detailsArrData = selection;
     },
     // 退货明细 - 取消勾选
@@ -1090,7 +1095,8 @@ export default {
     // 加/替换明细 - 确定
     async replaceOk() {
       let self = this;
-      let tableData = self.businessActionTable.data;
+      let tableData = self.businessActionTable.data; // 添加
+      let replaceArr = [] //替换
       let selectData = self.replaceProductTable.selectData; //新的对象换货明细
       console.log('selectData',selectData,JSON.stringify(selectData) == "{}");
       if (JSON.stringify(selectData) == "{}") {
@@ -1114,16 +1120,23 @@ export default {
         return;
       }
       let newItem = data.OC_B_RETURN_ORDER_EXCHANGE_ITEMS[0];
-      let findObj = tableData.find((item) => {
-        return item.PS_C_SKU_ECODE === newItem.PS_C_SKU_ECODE;
-      });
-      if (findObj) {
-        let index = tableData.findIndex((item) => {
-          return item.PS_C_SKU_ECODE === newItem.PS_C_SKU_ECODE;
-        });
-        findObj.QTY_EXCHANGE = Number(findObj.QTY_EXCHANGE) + 1;
-      } else {
-        tableData.push(newItem);
+      if(!this.detailsArrData.length){
+        let findObj = tableData.find((item) => item.PS_C_SKU_ECODE === newItem.PS_C_SKU_ECODE);
+        if (findObj) {
+          findObj.QTY_EXCHANGE = Number(findObj.QTY_EXCHANGE) + 1;
+        } else {
+          tableData.push(newItem);
+        }
+      }else{
+        // 筛选除勾选明细外的明细
+        replaceArr = tableData.filter((i) => i.PS_C_SKU_ECODE != this.detailsArrData[0].PS_C_SKU_ECODE);
+        let findObj = replaceArr.find((item) => item.PS_C_SKU_ECODE === newItem.PS_C_SKU_ECODE);
+        if (findObj) {
+          findObj.QTY_EXCHANGE = Number(findObj.QTY_EXCHANGE) + 1;
+        } else {
+          replaceArr.push(newItem);
+        }
+        self.businessActionTable.data = replaceArr;
       }
       this.totalNum();
       this.toMainData.huan = tableData;
