@@ -1,5 +1,6 @@
 import service from '@/service/index'
 import BurgeonDate from '@/assets/js/__utils__/date';
+import publicMethodsUtil from '@/assets/js/public/publicMethods'; 
 class commonUtils {
   static gateWayPrefix = {
     basicData: '/r3-cp',
@@ -1755,7 +1756,7 @@ class commonUtils {
       // 编辑查询
       resData.forEach(e => {
         totalKey.forEach(v => {
-          if(e[v] !== undefined) mapObj.set(v,this.floatNumber(Number(mapObj.get(v)) + Number(e[v]).toFixed(2)))
+          if(e[v] !== undefined) mapObj.set(v,this.floatNumber(publicMethodsUtil.accAdd(Number(mapObj.get(v)), Number(e[v]))))
         });
       });
       return Object.fromEntries([...mapObj])

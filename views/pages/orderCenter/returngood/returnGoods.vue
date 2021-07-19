@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-19 10:53:30
- * @LastEditTime: 2021-07-14 17:14:07
+ * @LastEditTime: 2021-07-19 10:22:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returngood/returnGoods.vue
@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script>
+<script> 
   import businessForm from 'professionalComponents/businessForm';
   import businessActionTable from 'professionalComponents/businessActionTable';
   export default {
