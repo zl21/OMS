@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-07-16 18:34:42
+ * @LastEditTime: 2021-07-19 10:33:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
@@ -143,7 +143,7 @@ export default {
 
         if (person.length == 0) {
           this.$Message.warning($i18n.t('modalTips.jt'))
-            //"未做任何修改！")
+          //"未做任何修改！")
           return
         }
         let REFUND_IN_ITEM_LIST = []
@@ -170,8 +170,8 @@ export default {
         service.orderCenter.saveMatch(data).then(res => {
           if (res.data.code == 0) {
             this.$Message.success(res.data.message)
-             this.init()
-            
+            this.init()
+
           } else {
             this.$Modal.confirm({
               title: res.data.message,
@@ -227,7 +227,7 @@ export default {
           }
         }
       })
-    
+
     },
     emptyTabledata() {//清楚退单逻辑
 
@@ -236,17 +236,24 @@ export default {
         return
       }
 
+
       let errArr = []
       for (const v of this.tebdata) {
-        if (v.OC_B_RETURN_ORDER_BILL_NO && !v._checked) {
+        if (v.OC_B_RETURN_ORDER_BILL_NO && v.IS_MATCH == "是") {
           errArr.push({
             id: v.ID,
             message: $i18n.t('modalTips.gs')//"已匹配退货单号，不允许清除！"
           })
           continue
         } else {
-          this.tableConfig.columns = JSON.parse(JSON.stringify(this.closeTable.columns))
-          this.tableConfig.data = JSON.parse(JSON.stringify(this.closeTable.data))
+          // this.tableConfig.columns = JSON.parse(JSON.stringify(this.closeTable.columns))
+          // this.tableConfig.data = JSON.parse(JSON.stringify(this.closeTable.data))
+          this.tableConfig.data.forEach(item => {
+            if (item.ID == v.ID) {
+              item.OC_B_RETURN_ORDER_BILL_NO = ""
+            }
+            item._checked = false
+          })
         }
       }
 
@@ -313,13 +320,13 @@ export default {
 
         }
         //获取主表单据状态 决定是否隐藏明细表那三个按钮  
-      let moduleName = this.$route.meta.moduleName
-      let dnaJuStatus = this.$store.state[moduleName].copyDataForReadOnly.addcolums[0].childs.filter(em=>em.colname =="MATCH_STATUS")[0].valuedata
-      if (dnaJuStatus == "2") {
-        this.btnConfig.buttons.forEach(em=>{
-          em.isShow = false
-        })
-      }
+        let moduleName = this.$route.meta.moduleName
+        let dnaJuStatus = this.$store.state[moduleName].copyDataForReadOnly.addcolums[0].childs.filter(em => em.colname == "MATCH_STATUS")[0].valuedata
+        if (dnaJuStatus == "2") {
+          this.btnConfig.buttons.forEach(em => {
+            em.isShow = false
+          })
+        }
 
 
       })
