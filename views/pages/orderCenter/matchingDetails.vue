@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-07-19 10:33:52
+ * @LastEditTime: 2021-07-19 11:59:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
@@ -173,13 +173,13 @@ export default {
             this.init()
 
           } else {
-            this.$Modal.confirm({
-              title: res.data.message,
-              width: 500,
-              mask: true,
-              className: 'ark-dialog',
-              render: (h) => {
-                if (res.data.data) {
+            if (res.data.data.length == 0) {
+              this.$Modal.confirm({
+                title: res.data.message,
+                width: 500,
+                mask: true,
+                className: 'ark-dialog',
+                render: (h) => {
                   return h('Table', {
                     props: {
                       columns: [
@@ -195,15 +195,13 @@ export default {
                       data: res.data.data,
                     },
                   })
-                }
-                return false
-              },
-            })
+                },
+              })
+            } else {
+              this.$Message.error(res.data.message)
 
-
+            }
           }
-
-
         })
       }
 
@@ -230,12 +228,10 @@ export default {
 
     },
     emptyTabledata() {//清楚退单逻辑
-
       if (this.tebdata.length == 0) {
         this.$Message.warning($i18n.t('modalTips.gr'));
         return
       }
-
 
       let errArr = []
       for (const v of this.tebdata) {
@@ -245,9 +241,9 @@ export default {
             message: $i18n.t('modalTips.gs')//"已匹配退货单号，不允许清除！"
           })
           continue
-        } else {
-          // this.tableConfig.columns = JSON.parse(JSON.stringify(this.closeTable.columns))
-          // this.tableConfig.data = JSON.parse(JSON.stringify(this.closeTable.data))
+        } else if (v.OC_B_RETURN_ORDER_BILL_NO == "" && v.IS_MATCH == "否") {
+            this.$Message.warning("未匹配退换货单，不允许清除！");
+        }else{
           this.tableConfig.data.forEach(item => {
             if (item.ID == v.ID) {
               item.OC_B_RETURN_ORDER_BILL_NO = ""
@@ -266,7 +262,7 @@ export default {
       this.tebdata = []
     },
     switchAlert(type) {
-      console.log(this.tebdata);
+     
       for (const v of this.tebdata) { //校验是否有退货单号
         if (v.OC_B_RETURN_ORDER_BILL_NO && !v._checked) {
           this.closetab(false)
@@ -276,8 +272,6 @@ export default {
         }
       }
       //存在已匹配的明细，请重新选择！
-      //
-
       if (this.tebdata.length == 0) {
         this.$Message.warning($i18n.t('modalTips.gr'))
         //'请选中一条数据！');

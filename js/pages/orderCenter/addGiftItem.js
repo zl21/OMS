@@ -108,7 +108,7 @@ export default {
               }
               
               if (reqdata.length == 0) {
-                this.$Message.error('请选中一条数据！');
+                this.$Message.error( $i18n.t('modalTips.gr') );
                 return
               }
 
@@ -147,9 +147,19 @@ export default {
       this.init()
     },
     expand(e, s) {
-     // console.log(e);
+      // console.log(e);
+      // console.log(s);
     },
-    fnrow(v) {
+    fnrow(v,index,en) {
+      if (this.componentData.type == 2) {
+        this.data9.forEach(item=>{
+          if (item.ID == v.ID) {
+            item._expanded = true
+          }
+        })
+        console.log( this.data9);
+      }
+     
       this.tabdata = v
     },
     tntable(data) {
@@ -164,6 +174,7 @@ export default {
           type: 'expand',
           width: 50,
           render: (h, params) => {
+            console.log(params);
             return this.$createElement('Table', {
               ref: `currentRowTable${params.index}`,
               props: {
@@ -173,9 +184,7 @@ export default {
               },
               on: {
                 "on-row-click": (val) => {
-                  console.log(val);
                   this.rowlist = val
-
                   this.data9.forEach((em, index) => {
                     if (index != params.index) {
                       this.$refs['currentRowTable' + index] && this.$refs['currentRowTable' + index].clearCurrentRow();
