@@ -571,7 +571,7 @@ export default {
       self.formConfig.formValue.type = data.PsCProGroup.TYPE ? data.PsCProGroup.TYPE : '';
       self.formConfig.formValue.price_retail = data.PsCProGroup.PRICE_RETAIL;
       self.formConfig.formValue.group_type = data.PsCProGroup.GROUP_TYPE;
-      self.formConfig.formValue.ISACTIVE = data.PsCProGroup.ISACTIVE ? "停用" : "启用";
+      self.formConfig.formValue.ISACTIVE = data.PsCProGroup.ISACTIVE ? "启用" : "停用";
       self.modify.master.group_type = data.PsCProGroup.GROUP_TYPE;
       // self.save_button.disabled = data.PsCProGroup.ISACTIVE;
       self.btnConfig.buttons[0].disabled = data.PsCProGroup.ISACTIVE;
