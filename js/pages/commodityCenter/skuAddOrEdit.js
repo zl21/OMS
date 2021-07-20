@@ -178,12 +178,6 @@ export default {
           },
         },
         {
-          style: '',
-          colname: 'ISACTIVE',
-          width: '8',
-          class: 'statusInput',
-        },
-        {
           colname: 'PRICE_RETAIL',
           width: '8',
           style: 'input',
@@ -218,6 +212,12 @@ export default {
           inputChange: () => {
             this.masterModifyData('SPEC_REMARK', 'master');
           },
+        },
+        {
+          style: '',
+          colname: 'ISACTIVE',
+          width: '8',
+          class: 'statusInput',
         },
         {
           // colname: 'PS_C_SPECOBJ1_ID',
