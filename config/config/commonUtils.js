@@ -17,8 +17,8 @@ class commonUtils {
       TABLE: self.tablename,
       FOLD: fold,
     }; */
-    let da, fD = [], fV = [];
-    return self.service.orderCenter.initList(param).then(res => {
+    let da, fD = [], fV = {}, fR = {};
+    return service.orderCenter.initList(param).then(res => {
       const { data: { code, data } } = res;
       if (code === 0) {
         if (data.ZIP) {
@@ -30,14 +30,47 @@ class commonUtils {
         }
       }
     }).then(form => {
+      /**
+       * 1. style
+       * 2. width
+       * 3. regx
+       */
+      const ordinary = []; // 普通控件
+      const fkStylt = ['drp', 'mrp', 'FK_TABLE']; // 外键等复杂控件
       form.forEach((ele, i) => {
-        switch (ele.DISPLAY) {
+        let item;
+        const key = ele.NAME;
+        const myEle = myForm.find(it => it.colname == key);
+        if (ordinary.includes(ele.DISPLAY)) {
+          item = {
+            colname: key, // 控件key
+            style: 'input', // 控件类型
+            label: ele.DESC, // 控件label名称
+          }
+          Object.assign(item, myEle);
+          fV[key] = ele.defval || ''; // 生成formValue
+          if (ele.isnotnull) { // 生成必填ruleValidate
+            fR[item.colname] = [
+              {
+                required: true,
+                message: ' ',
+              },
+            ]
+          }
+        } else {
+          Object.assign(ele, myEle);
+          item = {
+            colname: key,
+            itemdata: ele,
+          }
+        }
+        fD.push(item); // 生成formData结构
+        /* switch (ele.DISPLAY) {
           case 'TEXT':
             fD.push({
-              colname: ele.NAME,
+              colname: key, // 控件key
               style: 'input', // 控件类型
               label: ele.DESC, // 控件label名称
-              value: ele.NAME, // 控件key
               width: '6', // 控件宽度
               disabled: false, // 是否禁用
               maxlength: ele.LENGTH, // 输入长度
@@ -128,13 +161,18 @@ class commonUtils {
             });
             fV[ele.NAME] = '';
             break;
-        }
+        } */
       });
       const formCon = {
         fD,
         fV,
+        fR
       }
-      return Promise.resolve(formCon)
+      const res = {
+        res: da,
+        formCon,
+      }
+      return Promise.resolve(res)
     })
     // return formCon
     // 配置必填**************************************************
