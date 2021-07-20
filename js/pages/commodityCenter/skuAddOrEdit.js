@@ -346,6 +346,7 @@ export default {
             colname: 'LENGTH',
             width: '8',
             style: 'input',
+            disabled: false,
             // regx: /^(\s*|\d+(\.\d{0,2})?)$/,
             inputChange: () => {
               this.masterModifyData('LENGTH', 'master', 'wuLi');
@@ -518,7 +519,18 @@ export default {
             if (item.colname == 'ISACTIVE') {
               item.style = 'select'
             }
+            if (self.formConfig.formValue.ISACTIVE == 'Y') { // "启用"状态时，都不可以编辑
+              if (!item.itemdata) {
+                item.disabled = true;
+              }
+              if (item.itemdata) {
+                item.itemdata.readonly = true;
+              }
+            }
           });
+          if (self.formConfig.formValue.ISACTIVE == 'Y') { // '物理属性'不可编辑
+            self.formConfigWuLi.formData.map(item => item.disabled = true)
+          }
         }
         // 动态渲染'自定义属性' / 新增需求:渲染'规格维度一、二、三'
         if (self.formConfig.formValue.PS_C_PRO_ID) {
