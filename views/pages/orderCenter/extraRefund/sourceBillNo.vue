@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-07-08 17:04:23
+ * @LastEditTime: 2021-07-20 15:41:52
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -214,7 +214,7 @@ export default {
             key: 'EXPRESS_CODE',
             title: '物流单号'
           },{
-            key: 'CP_C_LOGISTICS_ID',
+            key: 'CP_C_LOGISTICS_ENAME',
             title: '物流公司'
           },{
             key: 'ECODE',

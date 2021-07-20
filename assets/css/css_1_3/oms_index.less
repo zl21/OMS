@@ -147,44 +147,6 @@ body {
       }
     }
   }
-
-  // 定制页面
-  .public-main {
-    //  按钮固定
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    &.custom-main{
-      .custom-btn{
-        order: inherit;
-        margin-bottom: 10px;
-      }
-    }
-  }
-  // 按钮固定
-  .public-content {
-    flex: 1;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-  // 统一组件修改
-  .ark-page.mini{
-    .ark-page-options-sizer {
-      .ark-select{
-        height: 26px !important;
-      }
-      .ark-select-selection{
-        height: 26px !important;
-      }
-      .ark-select-selected-value{
-        height: 24px !important;
-        line-height: 24px !important;
-      }
-    }
-  }
-
   .iconbj_link {
     margin-right: 5px;
   }
@@ -1190,21 +1152,6 @@ body {
 
 // 水印
 
-.orderManageEdit .ark-form-item.popInput .item-input .popover-icon {
-  color: #8a8a8a;
-  right: 10px;
-}
-
-// 批量导入弹框- 多选
-.dislogtree .node ul li {
-  text-align: left;
-}
-
-// 组织中心 - - tab
-.horizontalTableDetail .ark-tabs-panels-ink-bar {
-  background-color: @base-color;
-}
-
 // form input左右边距
 .returngood,
 .jq-combined-commodity,
@@ -1235,92 +1182,6 @@ body {
     }
   }
 }
-
-// 左下角图例样式
-// .queryDesc,
-// .promactiIcon {
-//   // height: 26px !important;
-//   // line-height: 26px !important;
-//   font-family: PingFangSC-Medium;
-//   // margin: 0 0 13px !important;
-
-//   .legend {
-//     flex: 1;
-
-//     span {
-//       font-size: 12px;
-//       color: #0F3365;
-//       line-height: 12px;
-//       font-weight: normal !important;
-//       padding-right: 3px;
-//     }
-
-//     &>p {
-//       display: inline-block;
-//       margin-right: 3px;
-
-//       span {
-//         font-size: 12px;
-//         color: #333333;
-//         line-height: 12px;
-//         padding: 0;
-//       }
-
-//       button {
-//         height: 18px;
-//         line-height: 12px;
-//         font-size: 12px;
-//         margin-right: 5px !important;
-//         padding: 0px 8px !important;
-//         border-radius: 10px;
-//         border: 1px solid #b4bbbf !important;
-//         font-style: normal;
-//         font-weight: normal;
-//       }
-
-//       .color-italic-grey {
-//         color: #999999 !important;
-//       }
-
-//       .color-deep-red {
-//         color: #A10000 !important;
-//       }
-
-//       .color-bold-green {
-//         color: #177D4C !important;
-//       }
-
-//       .back-yellow {
-//         color: #FF9300 !important;
-//       }
-
-//       .color-red {
-//         color: #DF0F0F !important;
-//       }
-
-//       .color-blue {
-//         color: #0657E8 !important;
-//       }
-
-//       .color-purple {
-//         color: #670FDF !important;
-//       }
-
-//       .color-qing {
-//         color: #13B3B4 !important;
-//       }
-
-//       .color-italic-black {
-//         color: #333333 !important;
-//       }
-
-//       .inactive-row {
-//         // 斜体-否
-//       }
-//     }
-//   }
-// }
-
 .ag-bl-overlay {
   top: 65px;
 }
@@ -1601,11 +1462,7 @@ a:hover,
 }
 .r3-vertical-content{
   &>div:last-child{
-    div[style="margin: 10px 10px 0px; background-color: rgb(255, 255, 255); overflow: hidden;"]{
-      // margin:0 !important;
-    }
     div[style="margin: 10px; background-color: rgb(255, 255, 255); overflow: hidden; flex: 1 1 1px;"]{
-      // margin:0 !important;
       background-color: #fff!important;
       border-top: 1px solid #f2f2f2;
     }
@@ -1653,4 +1510,34 @@ a:hover,
 // 导入组件：【导入凭证】
 .ark-imageupload-fileContent {
   writing-mode: tb;
+}
+
+// tuli
+.queryDesc{
+  .legend > p button{
+    border: 1px solid #dbdde8 !important;
+    margin-right: 8px !important;
+    // 转换成功
+    &.color-blue{
+      color: #90bb57;
+    }
+    // 转换异常
+    &.color-bold-deep-red{
+      color: #ff6951;
+    }
+    &.color-red{
+      color:#8d91a1
+    }
+    // 退款转换中
+    &.back-yellow{
+      color: #ffae34;
+      background: rgba(255,174,52,0.10) !important;
+      border: 1px solid rgba(255,174,52,0.10) !important;
+    }
+    // 转换中
+    &.color-green{
+      color: #ffae34;
+    }
+  }
+  
 }

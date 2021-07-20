@@ -1,8 +1,16 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-27 11:20:18
+ * @LastEditTime: 2021-07-20 15:30:26
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/views/modal/interfacePlatform/taobaoRefuseExchange.vue
+-->
 <template>
   <!-- 淘宝换货单接口-拒绝换货 -->
-  <div class="taobao-page">
+  <div class="customized-modal" style="width: 430px">
     <business-form :form-config="formConfig" />
-    <business-btn :btn-config="btnConfig" />
+    <business-btn  class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
 
