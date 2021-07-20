@@ -1061,6 +1061,10 @@
           $omsUtils.msgTips(self, 'warning', 'ju');
           return;
         }
+        if(self.selection.length > 1){
+          $omsUtils.msgTips(self, 'warning', 'kg');
+          return;
+        }
         self.service.orderCenter.returnConfirmCheck({ID:self.selection[0].ID}).then(res=>{
           if(res.data.code == 0){
             this.$Modal.confirm({
