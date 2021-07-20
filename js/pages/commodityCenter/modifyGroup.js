@@ -566,12 +566,14 @@ export default {
     },
     setForm(data) {
       const self = this;
-      self.formConfig.formValue.ecode = data.PsCProGroup.ECODE;
-      self.formConfig.formValue.ename = data.PsCProGroup.ENAME;
-      self.formConfig.formValue.type = data.PsCProGroup.TYPE ? data.PsCProGroup.TYPE : '';
-      self.formConfig.formValue.price_retail = data.PsCProGroup.PRICE_RETAIL;
-      self.formConfig.formValue.group_type = data.PsCProGroup.GROUP_TYPE;
-      self.formConfig.formValue.ISACTIVE = data.PsCProGroup.ISACTIVE ? "启用" : "停用";
+      const { ECODE, ENAME, TYPE = '', PRICE_RETAIL, GROUP_TYPE, ISACTIVE, IMAGE } = data.PsCProGroup;
+      self.formConfig.formValue.ecode = ECODE;
+      self.formConfig.formValue.ename = ENAME;
+      self.formConfig.formValue.type = TYPE;
+      self.formConfig.formValue.price_retail = PRICE_RETAIL;
+      self.formConfig.formValue.group_type = GROUP_TYPE;
+      self.formConfig.formValue.ISACTIVE = ISACTIVE ? "启用" : "停用";
+      IMAGE && self.dataitem.valuedata.push(...(JSON.parse(IMAGE))); // 图片
       self.modify.master.group_type = data.PsCProGroup.GROUP_TYPE;
       // self.save_button.disabled = data.PsCProGroup.ISACTIVE;
       self.btnConfig.buttons[0].disabled = data.PsCProGroup.ISACTIVE;
@@ -586,6 +588,15 @@ export default {
         } else if (ele.colname == 'PS_C_PRO_CLASSIFY_ID') {
           ele.itemdata.pid = data.PsCProGroup.PS_C_PRO_CLASSIFY_ID;
           ele.itemdata.valuedata = data.PsCProGroup.PS_C_PRO_CLASSIFY_ENAME;
+        }
+        // '启用'状态表单不可编辑
+        if (['Y', '启用'].includes(self.formConfig.formValue.ISACTIVE)) {
+          if (!ele.itemdata) {
+            ele.disabled = true;
+          }
+          if (ele.itemdata) {
+            ele.itemdata.readonly = true;
+          }
         }
       });
 
