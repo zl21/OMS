@@ -54,6 +54,7 @@ export default {
       currentSkuEcode:'',
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
             text: $i18n.t('common.cancel'), // 取消 按钮文本

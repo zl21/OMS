@@ -2,43 +2,13 @@
   <div class="jordanModal customized-modal">
     <loading :loading="loading" />
     <!-- 修改物流 -->
-    <!-- <businessForm style="margin-top:10px;" :formConfig="formConfig"></businessForm> -->
     <div class="Modal-Form">
-      <!-- <label for>物流公司:</label> -->
-      <!-- <label for>{{ vmI18n.t("form_label.logisticsCompany") }}:</label>
-      <DropDownSelectFilter
-        style="width: 285px"
-        :single="true"
-        :data="foreignKeyLink"
-        :z-index="zIndex"
-        :total-row-count="totalRowCount"
-        :page-size="pageSize"
-        :show-colname-key="'show'"
-        :data-empty-message="dataEmptyMessage"
-        :columns="columns"
-        :auto-data="AutoData"
-        :disabled="logisticsFlag"
-        @on-page-change="changePage"
-        @on-fkrp-selected="onFkrpSelected"
-      /> -->
       <businessForm :form-config="formConfig" />
     </div>
-    <!-- <label for>物流单号:</label> -->
-    <!-- <div v-if="type == 'EXPRESSCODE'" class="jordanModal_box">
-      <label for>{{ vmI18n.t("form_label.logisticsOrder_No") }}:</label>
-      <Input
-        v-model="expressCode"
-        style="width: 285px"
-        :disabled="expressCodeFlag"
-      />
-    </div> -->
     <businessButton :btn-config="btnConfig" class="modal-footer" />
   </div>
 </template>
 <script>
-// import modifyLogistics from "@/js/modal/orderCenter/modifyLogistics";
-// export default modifyLogistics;
-// 策略平台-仓库物流优先级方案(新增/详情) - 修改物流
 import businessButton from "professionalComponents/businessButton";
 import businessForm from "professionalComponents/businessForm";
 import businessActionTable from "professionalComponents/businessActionTable";
@@ -65,7 +35,7 @@ export default {
           {
             version: "1.4",
             style: "popInput",
-            width: "18",
+            width: "24",
             colname: "CP_C_LOGISTICS_ID",
             inputList: [
               {

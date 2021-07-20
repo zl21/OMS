@@ -1,47 +1,7 @@
 <template>
-  <div class="semiCustomModal customized-modal">
+  <div class="semiCustomModal customized-modal" v-loading="loading">
     <loading :loading="loading" />
-    <!-- 修改仓库 -->
-    <div v-show="isShowFromLoading" class="order_warehouse_loading">
-      <Spin />
-    </div>
-    <div class="Modal-Form">
-      <businessForm :form-config="formConfig" />
-      <!-- 修改仓库-->
-      <!-- <div class="Modal-Form-Item">
-        <label for>{{ vmI18n.t("btn.modifyWarehouse") }}:</label>
-        <DropDownSelectFilter
-          :single="true"
-          :data="foreignKeyLink"
-          :z-index="zIndex"
-          :total-row-count="totalRowCount"
-          :page-size="pageSize"
-          :show-colname-key="'show'"
-          :data-empty-message="dataEmptyMessage"
-          :columns="columns"
-          :auto-data="AutoData"
-          :hidecolumns="hidecolumns"
-          @on-page-change="changePage"
-          @on-fkrp-selected="onFkrpSelected"
-          @on-input-value-change="inputValueChange"
-        />
-      </div> -->
-      <!-- 修改仓库-->
-      <!-- <div class="Modal-Form-Item">
-        <label for>{{ vmI18n.t('form_label.changeWarehouse_reasons') }}:</label>
-        <Select 
-          v-model="updateRemark" 
-        >
-          <Option
-            v-for="item in updateRemarkOptions"
-            :key="item.value"
-            :value="item.value"
-          >
-            {{ item.label }}
-          </Option>
-        </Select>
-      </div> -->
-    </div>
+    <businessForm :form-config="formConfig" />
     <businessButton :btn-config="btnConfig" class="modal-footer" />
   </div>
 </template>
@@ -127,7 +87,7 @@ export default {
           {
             version: "1.4",
             style: "popInput",
-            width: "18",
+            width: "24",
             colname: "CP_C_PHY_WAREHOUSE_ID",
             inputList: [
               {

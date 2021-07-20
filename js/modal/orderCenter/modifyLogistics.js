@@ -92,6 +92,7 @@ export default {
         this.getListData();
       }
     },
+  
     // 防抖
     debounce(fun, time) {
       if (this.isClice) {
