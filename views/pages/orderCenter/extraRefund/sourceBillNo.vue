@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-07-20 15:41:52
+ * @LastEditTime: 2021-07-20 16:11:57
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -217,7 +217,7 @@ export default {
             key: 'CP_C_LOGISTICS_ENAME',
             title: '物流公司'
           },{
-            key: 'ECODE',
+            key: 'ALL_SKU',
             title: 'SKU编码'
           },{
             key: 'BUYER_NICK',
@@ -226,7 +226,7 @@ export default {
             key: 'RECEIVER_NAME',
             title: '收货人'
           },{
-            key: 'RECEIVER_NAME',
+            key: 'RECEIVER_MOBILE',
             title: '收货人手机'
           }
         ], // 表头
