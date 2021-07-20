@@ -124,11 +124,8 @@ export default {
       status: formValue.orderStatus, // 状态 必传 给默认值
       table: self.$route.params.tableName // 当前表名 必传
     };
-    const fromdata = new FormData();
-    fromdata.append('param', JSON.stringify(param));
 
-    // 请求下载订单接口
-    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(fromdata);
+    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(param);
     if (code === 0) {
       self.downLoadModal = true;
       const orderNum = self.downLoadFormConfig.formValue.orderNum;
