@@ -95,7 +95,6 @@ R3.launchApplication({
     }
     return props;
   },
-  // enableOpenNewTab: false,
   connector,
   externalModules: customizedPageConfig, // 自定义界面
   externalModals: customizedModalConfig, // 自定义弹框
