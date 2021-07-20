@@ -236,7 +236,7 @@ export default {
         },
         ruleValidate: {
           type: [{
-            required: true,
+            required: false,
             message: ' ',
             trigger: 'blur'
           }],
@@ -388,7 +388,25 @@ export default {
         },
         {
           title: $i18n.t('other.goods_quantity'), // 商品数量
-          key: 'QTY'
+          key: 'QTY',
+          render: (h, params) => {
+            return h("InputNumber", {
+              props: {
+                value: params.row.QTY,
+                regx: /^[1-9]\d*$/,
+                min: 1,
+                disabled: ['Y', '启用'].includes(this.formConfig.formValue.ISACTIVE),
+                editable: true,
+              },
+              on: {
+                "on-change": (e) => {
+                  params.row.QTY = e;
+                  this.jordanTableConfigLuck.data[params.index] = params.row;
+                  this.modify.luckGroupItem = this.jordanTableConfigLuck.data;
+                },
+              },
+            });
+          }
         },
         ],
         data: [],
@@ -484,7 +502,25 @@ export default {
         },
         {
           title: $i18n.t('other.goods_quantity'), // 商品数量
-          key: 'QTY'
+          key: 'QTY',
+          render: (h, params) => {
+            return h("InputNumber", {
+              props: {
+                value: params.row.QTY,
+                regx: /^[1-9]\d*$/,
+                min: 1,
+                disabled: ['Y', '启用'].includes(this.formConfig.formValue.ISACTIVE),
+                editable: true,
+              },
+              on: {
+                "on-change": (e) => {
+                  params.row.QTY = e;
+                  this.jordanTableConfigGenera.data[params.index] = params.row;
+                  this.modify.generalGroupItem = this.jordanTableConfigGenera.data;
+                },
+              },
+            });
+          }
         },
         ],
         data: [],
@@ -580,6 +616,7 @@ export default {
       self.jordanTableConfigLuck.businessButtonConfig.buttons.forEach(item => item.disabled = data.PsCProGroup.ISACTIVE);
       self.jordanTableConfigGenera.businessButtonConfig.buttons.forEach(item => item.disabled = data.PsCProGroup.ISACTIVE);
 
+      const active = ['Y', '启用'].includes(self.formConfig.formValue.ISACTIVE)
       // 赋值品牌 商品分类
       self.formConfig.formData.forEach(ele => {
         if (ele.colname == 'PS_C_BRAND_ID') {
@@ -590,7 +627,7 @@ export default {
           ele.itemdata.valuedata = data.PsCProGroup.PS_C_PRO_CLASSIFY_ENAME;
         }
         // '启用'状态表单不可编辑
-        if (['Y', '启用'].includes(self.formConfig.formValue.ISACTIVE)) {
+        if (active) {
           if (!ele.itemdata) {
             ele.disabled = true;
           }
@@ -599,6 +636,11 @@ export default {
           }
         }
       });
+      // 明细表单不可编辑
+      self.jordanTableConfigLuck.businessFormConfig.formData.map(it => it.disabled = active)
+      self.jordanTableConfigGenera.businessFormConfig.formData.map(it => it.disabled = active)
+      // 图片上传不可用
+      self.dataitem.readonly = active;
 
       // 赋值明细
       if (data.PsCProGroup.GROUP_TYPE == 2) { // 普通组合明细
