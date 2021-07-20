@@ -823,6 +823,10 @@
               regx: /^[^']*$/,
               inputChange: () => {
               },
+              inputenter: () => {
+                this.agTableConfig.pagenation.current = 1;
+                this.query();
+              },
             });
             self.$set(self.formConfig.formValue, ele.NAME, '');
             break;
