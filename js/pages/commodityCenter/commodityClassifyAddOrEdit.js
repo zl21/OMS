@@ -1,3 +1,6 @@
+/**
+ * 商品分类
+ */
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';

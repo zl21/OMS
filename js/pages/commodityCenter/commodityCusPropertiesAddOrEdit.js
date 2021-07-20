@@ -1,3 +1,6 @@
+/**
+ * 商品自定义属性
+ */
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';

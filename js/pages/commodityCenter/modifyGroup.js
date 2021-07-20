@@ -1,3 +1,6 @@
+/**
+ * 组合商品
+ */
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
@@ -28,19 +31,19 @@ export default {
     groupType() {
       return this.formConfig.formValue.group_type;
     },
-    save_button(){
-      return this.btnConfig.buttons.filter(item=>item.webname == 'lookup_save')[0];
+    save_button() {
+      return this.btnConfig.buttons.filter(item => item.webname == 'lookup_save')[0];
     }
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       collapse: 'panel_baseInfo',
       btnConfig: {
         typeAll: 'default',
         buttons: [],
       },
-      extendBtn:[
+      extendBtn: [
         {
           webname: 'ps_c_pro_group_save', // 保存
           text: $i18n.t('btn.save'), // 保存
@@ -74,154 +77,154 @@ export default {
               });
             } else {
               // comUtils.tabCloseAppoint(this);
-            // this.$destroy(true);
-            this.$store.commit('global/tabOpen', {
-              tableId: 10108,
-              type: 'S',
-              tableName: 'PS_C_PRO_GROUP',
-              back: true,
-            });
+              // this.$destroy(true);
+              this.$store.commit('global/tabOpen', {
+                tableId: 10108,
+                type: 'S',
+                tableName: 'PS_C_PRO_GROUP',
+                back: true,
+              });
             }
           },
         },
       ],
       formConfig: {
         formData: [{
-            style: 'input',
-            label: $i18n.t('form_label.cy'), // 组合商品编码
-            value: 'ecode',
-            width: '8',
-            disabled: false,
-            inputChange: () => {
-              this.masterModifyData('ecode', 'master');
+          style: 'input',
+          label: $i18n.t('form_label.cy'), // 组合商品编码
+          value: 'ecode',
+          width: '8',
+          disabled: false,
+          inputChange: () => {
+            this.masterModifyData('ecode', 'master');
+          }
+        },
+        {
+          style: 'input',
+          label: $i18n.t('form_label.cz'), // 组合商品名称
+          value: 'ename',
+          width: '16',
+          disabled: false,
+          inputChange: () => {
+            this.masterModifyData('ename', 'master');
+          }
+        },
+        {
+          colname: 'TYPE',
+          style: 'select', // 下拉框类型
+          label: $i18n.t('form_label.type'), // 类型
+          width: '8', // 所占宽度宽度
+          value: 'type', // 输入框的值
+          clearable: true,
+          selectChange: () => {
+            this.masterModifyData('type', 'master');
+          },
+          options: []
+        },
+        {
+          version: '1.4',
+          colname: 'PS_C_BRAND_ID',
+          style: 'popInput', // 输入框弹框单多选
+          width: '8',
+          itemdata: {
+            col: 1,
+            colid: 166035, // 当前字段的ID
+            colname: 'PS_C_BRAND_ID', // 当前字段的名称
+            datelimit: 'all',
+            display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+            fkdisplay: 'drp', // 外键关联类型
+            inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
+            isfk: true, // 是否有fk键
+            isnotnull: true, // 是否必填
+            isuppercase: false, // 是否转大写
+            length: 65535, // 最大长度是多少
+            name: $i18n.t('table_label.brand'), // 品牌
+            readonly: false, // 是否可编辑，对应input   readonly属性
+            reftable: 'PS_C_BRAND', // 对应的表
+            reftableid: 166035, // 对应的表ID
+            row: 1,
+            statsize: -1,
+            type: 'STRING', // 这个是后台用的
+            valuedata: '', // 这个是选择的值
+            pid: '', // 啥 ？？？
+          },
+          oneObj: e => {
+            console.log(e);
+            this.formConfig.formValue.ps_c_brand_id = e.pid;
+            this.modify.master.ps_c_brand_id = e.pid;
+          },
+        },
+        {
+          version: '1.4',
+          colname: 'PS_C_PRO_CLASSIFY_ID',
+          style: 'popInput', // 输入框弹框单多选
+          width: '8',
+          itemdata: {
+            col: 1,
+            colid: 166036, // 当前字段的ID
+            colname: 'PS_C_PRO_CLASSIFY_ID', // 当前字段的名称
+            datelimit: 'all',
+            display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+            fkdisplay: 'drp', // 外键关联类型
+            inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
+            isfk: true, // 是否有fk键
+            isnotnull: true, // 是否必填
+            isuppercase: false, // 是否转大写
+            length: 65535, // 最大长度是多少
+            name: $i18n.t('menu.ac'), // 商品分类
+            readonly: false, // 是否可编辑，对应input   readonly属性
+            reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
+            reftableid: 10091, // 对应的表ID
+            row: 1,
+            statsize: -1,
+            type: 'STRING', // 这个是后台用的
+            valuedata: '', // 这个是选择的值
+            pid: '', // 啥 ？？？
+          },
+          oneObj: e => {
+            this.formConfig.formValue.ps_c_pro_classify_id = e.pid;
+            this.modify.master.ps_c_pro_classify_id = e.pid;
+          },
+        },
+        {
+          style: 'input',
+          label: $i18n.t('form_label.bg'), //  启用状态
+          value: 'ISACTIVE',
+          width: '8',
+          disabled: true
+        },
+        {
+          style: 'input',
+          label: $i18n.t('form_label.cu'), // 零售价
+          value: 'price_retail',
+          width: '8',
+          inputChange: () => {
+            this.masterModifyData('price_retail', 'master');
+          }
+        },
+        {
+          colname: 'group_type',
+          style: 'select', // 下拉框类型
+          label: $i18n.t('form_label.d0'), // 组合类型
+          width: '8', // 所占宽度宽度
+          value: 'group_type', // 输入框的值
+          clearable: true,
+          selectChange: () => {
+            if (!this.WatchChange) return;
+            this.isClearItem = true;
+          },
+          options: [
+            // 下拉框选项值
+            {
+              label: $i18n.t('other.common'), // 普通
+              value: 2
+            },
+            {
+              label: $i18n.t('other.blessingBag'), // 福袋
+              value: 1
             }
-          },
-          {
-            style: 'input',
-            label: $i18n.t('form_label.cz'), // 组合商品名称
-            value: 'ename',
-            width: '16',
-            disabled: false,
-            inputChange: () => {
-              this.masterModifyData('ename', 'master');
-            }
-          },
-          {
-            colname: 'TYPE',
-            style: 'select', // 下拉框类型
-            label: $i18n.t('form_label.type'), // 类型
-            width: '8', // 所占宽度宽度
-            value: 'type', // 输入框的值
-            clearable: true,
-            selectChange: () => {
-              this.masterModifyData('type', 'master');
-            },
-            options: []
-          },
-          {
-            version: '1.4',
-            colname: 'PS_C_BRAND_ID',
-            style: 'popInput', // 输入框弹框单多选
-            width: '8',
-            itemdata: {
-              col: 1,
-              colid: 166035, // 当前字段的ID
-              colname: 'PS_C_BRAND_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-              fkdisplay: 'drp', // 外键关联类型
-              inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
-              isfk: true, // 是否有fk键
-              isnotnull: true, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
-              name: $i18n.t('table_label.brand'), // 品牌
-              readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'PS_C_BRAND', // 对应的表
-              reftableid: 166035, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
-              valuedata: '', // 这个是选择的值
-              pid: '', // 啥 ？？？
-            },
-            oneObj: e => {
-              console.log(e);
-              this.formConfig.formValue.ps_c_brand_id = e.pid;
-              this.modify.master.ps_c_brand_id = e.pid;
-            },
-          },
-          {
-            version: '1.4',
-            colname: 'PS_C_PRO_CLASSIFY_ID',
-            style: 'popInput', // 输入框弹框单多选
-            width: '8',
-            itemdata: {
-              col: 1,
-              colid: 166036, // 当前字段的ID
-              colname: 'PS_C_PRO_CLASSIFY_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-              fkdisplay: 'drp', // 外键关联类型
-              inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
-              isfk: true, // 是否有fk键
-              isnotnull: true, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
-              name: $i18n.t('menu.ac'), // 商品分类
-              readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
-              reftableid: 10091, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
-              valuedata: '', // 这个是选择的值
-              pid: '', // 啥 ？？？
-            },
-            oneObj: e => {
-              this.formConfig.formValue.ps_c_pro_classify_id = e.pid;
-              this.modify.master.ps_c_pro_classify_id = e.pid;
-            },
-          },
-          {
-            style: 'input',
-            label: $i18n.t('form_label.bg'), //  启用状态
-            value: 'ISACTIVE',
-            width: '8',
-            disabled: true
-          },
-          {
-            style: 'input',
-            label: $i18n.t('form_label.cu'), // 零售价
-            value: 'price_retail',
-            width: '8',
-            inputChange: () => {
-              this.masterModifyData('price_retail', 'master');
-            }
-          },
-          {
-            colname: 'group_type',
-            style: 'select', // 下拉框类型
-            label: $i18n.t('form_label.d0'), // 组合类型
-            width: '8', // 所占宽度宽度
-            value: 'group_type', // 输入框的值
-            clearable: true,
-            selectChange: () => {
-              if(!this.WatchChange) return;
-              this.isClearItem = true;
-            },
-            options: [
-              // 下拉框选项值
-              {
-                label: $i18n.t('other.common'), // 普通
-                value: 2
-              },
-              {
-                label: $i18n.t('other.blessingBag'), // 福袋
-                value: 1
-              }
-            ]
-          },
+          ]
+        },
         ],
         formValue: {
           group_type: 2,
@@ -229,10 +232,10 @@ export default {
           ename: '',
           type: '',
           price_retail: '',
-          ISACTIVE:''
+          ISACTIVE: ''
         },
         ruleValidate: {
-          type:[{
+          type: [{
             required: true,
             message: ' ',
             trigger: 'blur'
@@ -266,16 +269,16 @@ export default {
         },
         {
           label: $i18n.t('panel_label.operationLog'), // 操作日志
-          value:'logTable'
+          value: 'logTable'
         }
-      ],
+        ],
         labelTagList: [{
           label: $i18n.t('form_label.d2'), // 福袋组合明细
           value: 'luckbagGroupItem',
         },
         {
           label: $i18n.t('panel_label.operationLog'), // 操作日志
-          value:'logTable'
+          value: 'logTable'
         }],
         labelValue: 'generalGroupItem'
       },
@@ -285,74 +288,74 @@ export default {
           typeAll: 'default',
           btnsite: 'right', // 按钮位置 (right , center , left)
           buttons: [{
-              type:'primary',
-              webname: 'ps_c_pro_group_add', // 返回
-              text: $i18n.t('btn.increase'), // 添加
-              disabled: false,
-              btnclick: () => {
-                this.addgeneralItem();
-              },
+            type: 'primary',
+            webname: 'ps_c_pro_group_add', // 返回
+            text: $i18n.t('btn.increase'), // 添加
+            disabled: false,
+            btnclick: () => {
+              this.addgeneralItem();
             },
-            {
-              type:'warning',
-              webname: 'ps_c_pro_group_del', // 返回
-              text: $i18n.t('btn.delete'), // 删除
-              disabled: false,
-              btnclick: () => {
-                this.delLuck();
-              },
+          },
+          {
+            type: 'warning',
+            webname: 'ps_c_pro_group_del', // 返回
+            text: $i18n.t('btn.delete'), // 删除
+            disabled: false,
+            btnclick: () => {
+              this.delLuck();
             },
+          },
           ]
         },
         businessFormConfig: {
           formData: [{
-              style: 'input',
-              label: $i18n.t('form_label.d3'), // 每组抽取数
-              value: 'NUM',
-              disabled: false,
-              dataAcessKey: 'NUM',
-              width: '6',
-              inputChange: () => {
-                this.masterModifyData('NUM', 'master');
+            style: 'input',
+            label: $i18n.t('form_label.d3'), // 每组抽取数
+            value: 'NUM',
+            disabled: false,
+            dataAcessKey: 'NUM',
+            width: '6',
+            inputChange: () => {
+              this.masterModifyData('NUM', 'master');
+            }
+          },
+          {
+            label: $i18n.t('table_label.code_SKU'), // SKU编码
+            style: 'dimSearch',
+            width: '6',
+            value: 'gbCode',
+            columns: ['ECODE'],
+            AuotData: [], // 匹配的选项
+            disabled: false,
+            dimChange: (val) => {
+              if (!val) {
+                this.jordanTableConfigLuck.businessFormConfig.formData[1].AuotData = [];
+                return;
               }
-            },
-            {
-              label: $i18n.t('table_label.code_SKU'), // SKU编码
-              style: 'dimSearch',
-              width: '6',
-              value: 'gbCode',
-              columns: ['ECODE'],
-              AuotData: [], // 匹配的选项
-              disabled: false,
-              dimChange: (val) => {
-                if (!val) {
-                  this.jordanTableConfigLuck.businessFormConfig.formData[1].AuotData = [];
-                  return;
+              const formdata = new FormData();
+              formdata.append('ecode', val);
+              this.service.commodityCenter.querySku(formdata).then(res => {
+                if (res.data.code == 0) {
+                  this.jordanTableConfigLuck.businessFormConfig.formData[1].AuotData = res.data.data;
                 }
-                const formdata = new FormData();
-                formdata.append('ecode', val);
-                this.service.commodityCenter.querySku(formdata).then(res => {
-                  if (res.data.code == 0) {
-                    this.jordanTableConfigLuck.businessFormConfig.formData[1].AuotData = res.data.data;
-                  }
-                });
-              },
-              dimEnter: (val) => {},
-              dimSelect: (val) => {
-                this.jordanTableConfigLuck.businessFormConfig.formValue.gbCode = val.tem.ECODE;
-              },
+              });
             },
-            {
-              style: 'input',
-              label: $i18n.t('table_label.grouping'), // 分组
-              value: 'GROUPNUM',
-              disabled: false,
-              dataAcessKey: 'GROUPNUM',
-              width: '6',
-              inputenter: ()=>{
-                this.addgeneralItem();
-              }
+            dimEnter: (val) => { },
+            dimSelect: (val) => {
+              this.jordanTableConfigLuck.businessFormConfig.formValue.gbCode = val.tem.ECODE;
             },
+          },
+          {
+            style: 'input',
+            label: $i18n.t('table_label.grouping'), // 分组
+            value: 'GROUPNUM',
+            disabled: false,
+            dataAcessKey: 'GROUPNUM',
+            width: '6',
+            inputenter: () => {
+              this.addgeneralItem();
+            }
+          },
           ],
           formValue: {
             NUM: '1',
@@ -362,31 +365,31 @@ export default {
 
         }, // 表格内表单项配置
         columns: [{
-            key: 'selection',
-            type: 'selection',
-            width: '50',
-            align: 'center',
-          },
-          {
-            title: $i18n.t('table_label.code_SKU'), // SKU编码
-            key: 'ECODE'
-          },
-          {
-            title: $i18n.t('form_label.skuName'), // SKU名称
-            key: 'ENAME'
-          },
-          {
-            title: $i18n.t('form_label.cu'), // 零售价
-            key: 'PRICE_RETAIL'
-          },
-          {
-            title: $i18n.t('table_label.grouping'), // 分组
-            key: 'GROUPNUM'
-          },
-          {
-            title: $i18n.t('other.goods_quantity'), // 商品数量
-            key: 'QTY'
-          },
+          key: 'selection',
+          type: 'selection',
+          width: '50',
+          align: 'center',
+        },
+        {
+          title: $i18n.t('table_label.code_SKU'), // SKU编码
+          key: 'ECODE'
+        },
+        {
+          title: $i18n.t('form_label.skuName'), // SKU名称
+          key: 'ENAME'
+        },
+        {
+          title: $i18n.t('form_label.cu'), // 零售价
+          key: 'PRICE_RETAIL'
+        },
+        {
+          title: $i18n.t('table_label.grouping'), // 分组
+          key: 'GROUPNUM'
+        },
+        {
+          title: $i18n.t('other.goods_quantity'), // 商品数量
+          key: 'QTY'
+        },
         ],
         data: [],
       },
@@ -395,65 +398,65 @@ export default {
           typeAll: 'default',
           btnsite: 'right', // 按钮位置 (right , center , left)
           buttons: [{
-              type:'primary',
-              webname: 'ps_c_pro_group_add', // 返回
-              text: $i18n.t('btn.increase'), // 添加
-              disabled:false,
-              btnclick: () => {
-                this.addgeneralItem();
-              },
+            type: 'primary',
+            webname: 'ps_c_pro_group_add', // 返回
+            text: $i18n.t('btn.increase'), // 添加
+            disabled: false,
+            btnclick: () => {
+              this.addgeneralItem();
             },
-            {
-              type:'warning',
-              webname: 'ps_c_pro_group_del', // 返回
-              text: $i18n.t('btn.delete'), // 删除
-              disabled:false,
-              btnclick: () => {
-                this.delGeneral();
-              },
+          },
+          {
+            type: 'warning',
+            webname: 'ps_c_pro_group_del', // 返回
+            text: $i18n.t('btn.delete'), // 删除
+            disabled: false,
+            btnclick: () => {
+              this.delGeneral();
             },
+          },
           ]
         },
         businessFormConfig: {
           formData: [{
-              label: $i18n.t('table_label.code_SKU'), // SKU编码
-              style: 'dimSearch',
-              width: '6',
-              value: 'gbCode',
-              columns: ['ECODE'],
-              AuotData: [], // 匹配的选项
-              dimChange: (val) => {
-                if (!val) {
-                  this.jordanTableConfigGenera.businessFormConfig.formData[0].AuotData = [];
-                  return;
-                }
-                const formdata = new FormData();
-                formdata.append('ecode', val);
-                this.service.commodityCenter.querySku(formdata).then(res => {
-                  if (res.data.code == 0) {
-                    this.jordanTableConfigGenera.businessFormConfig.formData[0].AuotData = res.data.data;
-                  }
-                });
-              },
-              dimEnter: (val) => {
-                console.log(val);
-                this.addgeneralItem(val);
-              },
-              dimSelect: (val) => {
-                console.log(val);
-                this.jordanTableConfigGenera.businessFormConfig.formValue.gbCode = val.tem.ECODE;
-              },
-            },
-            {
-              style: 'input',
-              label: '数量', // 卖家备注
-              value: 'QTY',
-              disabled: false,
-              width: '6',
-              inputenter: ()=>{
-                this.addgeneralItem();
+            label: $i18n.t('table_label.code_SKU'), // SKU编码
+            style: 'dimSearch',
+            width: '6',
+            value: 'gbCode',
+            columns: ['ECODE'],
+            AuotData: [], // 匹配的选项
+            dimChange: (val) => {
+              if (!val) {
+                this.jordanTableConfigGenera.businessFormConfig.formData[0].AuotData = [];
+                return;
               }
+              const formdata = new FormData();
+              formdata.append('ecode', val);
+              this.service.commodityCenter.querySku(formdata).then(res => {
+                if (res.data.code == 0) {
+                  this.jordanTableConfigGenera.businessFormConfig.formData[0].AuotData = res.data.data;
+                }
+              });
             },
+            dimEnter: (val) => {
+              console.log(val);
+              this.addgeneralItem(val);
+            },
+            dimSelect: (val) => {
+              console.log(val);
+              this.jordanTableConfigGenera.businessFormConfig.formValue.gbCode = val.tem.ECODE;
+            },
+          },
+          {
+            style: 'input',
+            label: '数量', // 卖家备注
+            value: 'QTY',
+            disabled: false,
+            width: '6',
+            inputenter: () => {
+              this.addgeneralItem();
+            }
+          },
           ],
           formValue: {
             QTY: 1,
@@ -462,27 +465,27 @@ export default {
 
         }, // 表格内表单项配置
         columns: [{
-            key: 'selection',
-            type: 'selection',
-            width: '50',
-            align: 'center',
-          },
-          {
-            title: $i18n.t('table_label.code_SKU'), // SKU编码
-            key: 'ECODE'
-          },
-          {
-            title: $i18n.t('form_label.skuName'), // SKU名称
-            key: 'ENAME'
-          },
-          {
-            title: $i18n.t('form_label.cu'), // 零售价
-            key: 'PRICE_RETAIL'
-          },
-          {
-            title: $i18n.t('other.goods_quantity'), // 商品数量
-            key: 'QTY'
-          },
+          key: 'selection',
+          type: 'selection',
+          width: '50',
+          align: 'center',
+        },
+        {
+          title: $i18n.t('table_label.code_SKU'), // SKU编码
+          key: 'ECODE'
+        },
+        {
+          title: $i18n.t('form_label.skuName'), // SKU名称
+          key: 'ENAME'
+        },
+        {
+          title: $i18n.t('form_label.cu'), // 零售价
+          key: 'PRICE_RETAIL'
+        },
+        {
+          title: $i18n.t('other.goods_quantity'), // 商品数量
+          key: 'QTY'
+        },
         ],
         data: [],
       },
@@ -517,17 +520,17 @@ export default {
       selectDatas: [], // 普通/福袋勾选的数据
     };
   },
-  created(){
+  created() {
     this.getSelectOption();
   },
   async mounted() {
     const self = this;
-    self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter','/p/cs/upload2')
+    self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter', '/p/cs/upload2')
     self.formConfig.formData[0].disabled = self.id !== -1;
     const buttons = self.$OMS2.BtnConfig.config();
     this.btnConfig.buttons = [...this.extendBtn];
-    if(self.id == -1){
-      self.formConfig.formData.filter(item=>item.value && item.value == 'ISACTIVE')[0].style = '';
+    if (self.id == -1) {
+      self.formConfig.formData.filter(item => item.value && item.value == 'ISACTIVE')[0].style = '';
       this.label.labelList = [{
         label: $i18n.t('form_label.d1'), // 普通组合明细
         value: 'generalGroupItem',
@@ -536,9 +539,8 @@ export default {
         label: $i18n.t('form_label.d2'), // 福袋组合明细
         value: 'luckbagGroupItem',
       }];
-    }else {
-    $omsUtils.getBtnPermission(this, ['btnConfig' , 'jordanTableConfigLuck.businessButtonConfig' , 'jordanTableConfigGenera.businessButtonConfig'], { table: 'PS_C_PRO_GROUP', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
-
+    } else {
+      $omsUtils.getBtnPermission(this, ['btnConfig', 'jordanTableConfigLuck.businessButtonConfig', 'jordanTableConfigGenera.businessButtonConfig'], { table: 'PS_C_PRO_GROUP', type: 'OBJ', serviceId: 'r3-oc-oms' }, true);
     }
     this.query();
   },
@@ -569,12 +571,12 @@ export default {
       self.formConfig.formValue.type = data.PsCProGroup.TYPE ? data.PsCProGroup.TYPE : '';
       self.formConfig.formValue.price_retail = data.PsCProGroup.PRICE_RETAIL;
       self.formConfig.formValue.group_type = data.PsCProGroup.GROUP_TYPE;
-      self.formConfig.formValue.ISACTIVE =  data.PsCProGroup.ISACTIVE?"停用":"启用";
+      self.formConfig.formValue.ISACTIVE = data.PsCProGroup.ISACTIVE ? "停用" : "启用";
       self.modify.master.group_type = data.PsCProGroup.GROUP_TYPE;
       // self.save_button.disabled = data.PsCProGroup.ISACTIVE;
       self.btnConfig.buttons[0].disabled = data.PsCProGroup.ISACTIVE;
-      self.jordanTableConfigLuck.businessButtonConfig.buttons.forEach(item=>item.disabled = data.PsCProGroup.ISACTIVE);
-      self.jordanTableConfigGenera.businessButtonConfig.buttons.forEach(item=>item.disabled = data.PsCProGroup.ISACTIVE);
+      self.jordanTableConfigLuck.businessButtonConfig.buttons.forEach(item => item.disabled = data.PsCProGroup.ISACTIVE);
+      self.jordanTableConfigGenera.businessButtonConfig.buttons.forEach(item => item.disabled = data.PsCProGroup.ISACTIVE);
 
       // 赋值品牌 商品分类
       self.formConfig.formData.forEach(ele => {
@@ -595,7 +597,7 @@ export default {
         self.label.labelValue = 'luckbagGroupItem';
         self.jordanTableConfigLuck.data = data.PsCProGroupItems;
       }
-      setTimeout(()=>{
+      setTimeout(() => {
         self.WatchChange = true;
       }, 10);
     },
@@ -606,13 +608,13 @@ export default {
         str += `${$i18n.t('form_label.cy')} `; // 组合商品编码
       } else if (!self.formConfig.formValue.ename) {
         str += `${$i18n.t('form_label.cz')} `; // 组合商品名称
-      }else if (!self.formConfig.formValue.group_type) {
+      } else if (!self.formConfig.formValue.group_type) {
         str += `${$i18n.t('form_label.d0')} `; // 组合类型
-      }else if (!self.formConfig.formValue.price_retail) {
+      } else if (!self.formConfig.formValue.price_retail) {
         str += `${$i18n.t('form_label.cu')} `; // 零售价
-      } else if (!self.formConfig.formData.filter(item=>item.colname == 'PS_C_BRAND_ID')[0].itemdata.pid) {
+      } else if (!self.formConfig.formData.filter(item => item.colname == 'PS_C_BRAND_ID')[0].itemdata.pid) {
         str += `${$i18n.t('table_label.brand')} `; // 品牌
-      } else if (!self.formConfig.formData.filter(item=>item.colname == 'PS_C_PRO_CLASSIFY_ID')[0].itemdata.pid) {
+      } else if (!self.formConfig.formData.filter(item => item.colname == 'PS_C_PRO_CLASSIFY_ID')[0].itemdata.pid) {
         str += $i18n.t('menu.ac') // 商品分类
       }
       if (str) {
@@ -665,11 +667,11 @@ export default {
     },
     labelClick(e) { // tab明细切换
       console.log(e);
-      if(e.value == 'logTable'){
+      if (e.value == 'logTable') {
         this.subTableConfig = {
           centerName: 'commodityCenter',
           tablename: 'PS_PRO_GROUP_LOG',
-          pageShow:true,
+          pageShow: true,
           objid: this.$route.params.customizedModuleId,
         }
       }
@@ -740,11 +742,11 @@ export default {
         return;
       }
       const data = [];
-        self.selectDatas.forEach(item => {
-          if (item.PS_C_SKU_ID !== '-1') {
-            data.push(item.ID);
-          }
-        });
+      self.selectDatas.forEach(item => {
+        if (item.PS_C_SKU_ID !== '-1') {
+          data.push(item.ID);
+        }
+      });
       if (data.length) {
         self.service.commodityCenter.skuGroupDelItem({
           ID: self.id,
@@ -788,46 +790,46 @@ export default {
         $omsUtils.msgTips(self, 'warning', 'df', 0);
         return;
       }
-        self.selectDatas.forEach(item => {
-          if (item.PS_C_SKU_ID !== '-1') {
-            data.push(item.ID);
+      self.selectDatas.forEach(item => {
+        if (item.PS_C_SKU_ID !== '-1') {
+          data.push(item.ID);
+        }
+      });
+      if (data.length) {
+        self.service.commodityCenter.skuGroupDelItem({
+          ID: self.id,
+          ITEMIDS: data,
+          FLAG: false
+        }).then(res => {
+          console.log(res);
+          if (res.data.code == 0) {
+            $omsUtils.msgTips(self, 'success', res.data.message, 0);
+            // 本地删除勾选数据 表格数据和modify里的数据
+            const delArr = self.selectDatas.map(item => item.PS_C_SKU_ID);
+            const resultArr = [];
+            const resultModify = [];
+            self.jordanTableConfigLuck.data.forEach(item => { // 删除表格数据
+              if (!delArr.includes(item.PS_C_SKU_ID)) {
+                resultArr.push(item);
+              }
+            });
+            self.modify.luckGroupItem.forEach(item => {
+              if (!delArr.includes(item.PS_C_SKU_ID)) {
+                resultModify.push(item);
+              }
+            });
+            self.jordanTableConfigLuck.data = resultArr;
+            self.modify.luckGroupItem = resultModify;
+          } else {
+            $omsUtils.msgTips(self, 'error', res.data.message, 0);
           }
         });
-        if (data.length) {
-          self.service.commodityCenter.skuGroupDelItem({
-            ID: self.id,
-            ITEMIDS: data,
-            FLAG: false
-          }).then(res => {
-            console.log(res);
-            if (res.data.code == 0) {
-              $omsUtils.msgTips(self, 'success', res.data.message, 0);
-              // 本地删除勾选数据 表格数据和modify里的数据
-              const delArr = self.selectDatas.map(item => item.PS_C_SKU_ID);
-              const resultArr = [];
-              const resultModify = [];
-              self.jordanTableConfigLuck.data.forEach(item => { // 删除表格数据
-                if (!delArr.includes(item.PS_C_SKU_ID)) {
-                  resultArr.push(item);
-                }
-              });
-              self.modify.luckGroupItem.forEach(item => {
-                if (!delArr.includes(item.PS_C_SKU_ID)) {
-                  resultModify.push(item);
-                }
-              });
-              self.jordanTableConfigLuck.data = resultArr;
-              self.modify.luckGroupItem = resultModify;
-            } else {
-              $omsUtils.msgTips(self, 'error', res.data.message, 0);
-            }
-          });
-        } else {
-          const arr = self.selectDatas.map(item => item.ID);
+      } else {
+        const arr = self.selectDatas.map(item => item.ID);
         self.jordanTableConfigLuck.data = self.jordanTableConfigLuck.data.filter(item => !arr.includes(item.ID));
         self.modify.luckGroupItem = self.modify.luckGroupItem.filter(item => !arr.includes(item.ID));
-        }
-        self.isModify = true;
+      }
+      self.isModify = true;
     },
     clearItem() {
       this.masterModifyData('group_type', 'master');
