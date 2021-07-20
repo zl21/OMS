@@ -726,9 +726,7 @@ export default {
       this.service.commodityCenter.listSku(formdata).then(res => {
         if (res.data.code == 0) {
           this.skuInfo.resData = res.data.data;
-        } else {
-          $omsUtils.msgTips(this, 'error', res.data.message, 0);
-        }
+        } else { }
       });
     },
     async getCustomAttr() {
@@ -750,9 +748,7 @@ export default {
           self.dynamicAttr(res.data.data, 'EXTRA', self.customAttr.customFormConfig);
           self.dynamicAttr(res.data.data, 'FIXED', self.customAttr.fixFormConfig);
           self.WatchChange = true;
-        } else {
-          $omsUtils.msgTips(self, 'error', res.data.message, 0);
-        }
+        } else { }
       });
       // })
     },
@@ -937,9 +933,7 @@ export default {
         if (res.data.code == 0) {
           this.supplier.resData = res.data.data;
           this.old.supplier = JSON.stringify(this.supplier.resData); // 存储初始化供应商数据
-        } else {
-          $omsUtils.msgTips(this, 'error', res.data.message, 0);
-        }
+        } else { }
       });
     },
     save() { // 保存接口
@@ -1005,9 +999,7 @@ export default {
           // };
           // this.querySpu();
           // this.getSkuInfoData();
-        } else {
-          $omsUtils.msgTips(self, 'error', res.data.message, 0);
-        }
+        } else { }
       });
     },
     diffSupplier(newData, oldData) {

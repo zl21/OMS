@@ -696,7 +696,6 @@ export default {
           self.modify.luckGroupItem = [];
           self.btnConfig.buttons[0].disabled = false;
         } else {
-          $omsUtils.msgTips(self, 'error', res.data.message, 0);
           this.btnConfig.buttons[0].disabled = false;
         }
       });
@@ -783,9 +782,7 @@ export default {
             self.modify.luckGroupItem.push(arr);
             self.jordanTableConfigLuck.businessFormConfig.formValue.gbCode = '';
           }
-        } else {
-          $omsUtils.msgTips(self, 'error', res.data.message, 0);
-        }
+        } else { }
       });
     },
     delGeneral() {
@@ -825,9 +822,7 @@ export default {
             });
             self.jordanTableConfigGenera.data = resultArr;
             self.modify.generalGroupItem = resultModify;
-          } else {
-            $omsUtils.msgTips(self, 'error', res.data.message, 0);
-          }
+          } else { }
         });
       } else {
         const arr = self.selectDatas.map(item => item.ID);
@@ -873,9 +868,7 @@ export default {
             });
             self.jordanTableConfigLuck.data = resultArr;
             self.modify.luckGroupItem = resultModify;
-          } else {
-            $omsUtils.msgTips(self, 'error', res.data.message, 0);
-          }
+          } else { }
         });
       } else {
         const arr = self.selectDatas.map(item => item.ID);
