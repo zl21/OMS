@@ -592,7 +592,7 @@
     mounted() {
       const self = this;
       self.initList();
-      setTimeout(() => {
+      /* setTimeout(() => {
         let ZH = localStorage.getItem("locale") == "zh"
         if(!ZH) {
           const p1 = document.getElementsByClassName('ark-page-options-elevator')[0];
@@ -601,7 +601,7 @@
           const p2 = document.getElementsByClassName('ark-page-options-sizer')[0];
           p2.childNodes[0].innerText = '  10 items / page';
         }
-      }, 10);
+      }, 10); */
     },
     methods: {
       gridReady() {
