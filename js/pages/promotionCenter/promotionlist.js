@@ -594,6 +594,7 @@ export default {
     // 切换分页条数
     pageSizeChange(val) {
       // this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize = val;
+      this.agTableConfig.pagenation.current = 1;
       this.agTableConfig.pagenation.pageSize = val;
       this.getData();
     },
