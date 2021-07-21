@@ -86,7 +86,7 @@ export default {
               isShow: true,
               btnclick: (e) => {
                 console.log('删除明细');
-                if (!this.tableConfig.selectData) {
+                if (!this.tableConfig.selectData.length) {
                   this.$Message.warning('请选中一条单据！');
                   return false
                 }
