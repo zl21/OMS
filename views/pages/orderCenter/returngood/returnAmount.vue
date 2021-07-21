@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-07-19 18:40:12
+ * @LastEditTime: 2021-07-21 10:12:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -100,12 +100,12 @@ export default {
         FINAL_ACTUAL_AMT =  Number(this.data.PRO_ACTUAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT);
       }
       this.editData.FINAL_ACTUAL_AMT = FINAL_ACTUAL_AMT;
-      this.editData.FINAL_REAL_AMT = FINAL_ACTUAL_AMT;
+      // this.editData.FINAL_REAL_AMT = FINAL_ACTUAL_AMT;
       R3.store.commit(`customize/returnAmount`, JSON.parse(JSON.stringify({
         SHIP_AMT:this.$OMS2.omsUtils.floatNumber(this.editData.SHIP_AMT),
         ADJUST_AMT:this.$OMS2.omsUtils.floatNumber(this.editData.ADJUST_AMT),
         FINAL_ACTUAL_AMT:this.$OMS2.omsUtils.floatNumber(this.editData.FINAL_ACTUAL_AMT),
-        FINAL_REAL_AMT:this.$OMS2.omsUtils.floatNumber(this.editData.FINAL_REAL_AMT),
+        // FINAL_REAL_AMT:this.$OMS2.omsUtils.floatNumber(this.editData.FINAL_REAL_AMT),
       })));
     }
   },
