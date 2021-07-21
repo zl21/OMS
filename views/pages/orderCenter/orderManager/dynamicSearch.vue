@@ -348,21 +348,37 @@
           margin-right: 8px;
         }
         .combinatorials {
-          flex: 0.2;
+          flex: 0.35;
         }
         .relation {
-          flex: 0.2
+          flex: 0.1;
         }
         .value {
-          flex: 0.4
+          flex: 0.4;
         }
         .group {
-          flex: 0.2
+          flex: 0.15;
+          .ark-select-default .ark-select-selection {
+            border: 1px solid #d6d9ec;
+            background-color: #f0f1f7;
+            border-radius: 15px;
+            text-align: center;
+            height: 26px;
+            line-height: 26px;
+            .ark-select-selected-value {
+              height: 26px;
+              line-height: 26px;
+            }
+            .ark-select-arrow {
+              color: #5864b3;
+              top: 12px;
+            }
+          }
         }
         .addOrSub {
           display: flex;
           justify-content: flex-end;
-          flex: 0.2;
+          flex: 0.15;
           color: red;
         }
     }
