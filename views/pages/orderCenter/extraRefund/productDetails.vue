@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-21 17:12:07
+ * @LastEditTime: 2021-07-21 18:14:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -89,11 +89,20 @@ export default {
             key: 'GIFT_TYPE',
             title: '赠品',
             render:(h,params)=>{
-             params.row.GIFT_TYPE ? params.row.GIFT_TYPE = '非赠品' : '赠品'
+              console.log(params.row.GIFT_TYPE);
+              let GIFT_TYPE = ''
+              if(params.row.GIFT_TYPE == 0){
+                  GIFT_TYPE = '非赠品'
+              }else if(params.row.GIFT_TYPE == 1){
+                  GIFT_TYPE = '系统赠品'
+              }else{
+                  GIFT_TYPE = '平台赠品'
+              }
+              return h('span', {}, GIFT_TYPE);
             }
           },
           {
-            key: 'qty',
+            key: 'QTY',
             title: '购买数量'
           },{
             key: 'REAL_AMT',
@@ -104,9 +113,10 @@ export default {
             render:(h,params)=>{
              return h('InputNumber', {
                 props: {
-                  value: params.row.QTY_REFUND,
+                  value:Number(params.row.QTY) - Number(params.row.QTY_RETURN_APPLY),
                   autosize: true,
                   min:1,
+                  max:Number(params.row.QTY) - Number(params.row.QTY_RETURN_APPLY),
                   regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
                 },
                 on: {
@@ -122,10 +132,17 @@ export default {
             }
           },{
             key: 'AMT_REFUND',
-            title: '退货金额' // 申请退款金额：为 申请退货数量*成交单价（成交单价为原零售发货单中记录的），保留两位小数； 
+            title: '退货金额', // 申请退款金额：为 申请退货数量*成交单价（成交单价为原零售发货单中记录的），保留两位小数； 
+            render:(h,params)=>{
+              let sum = (Number(params.row.QTY) - Number(params.row.QTY_RETURN_APPLY)) * params.row.REAL_AMT
+              return h('span', {}, sum);
+            }
           },{
             key: 'QTY_ACTUAL',
-            title: '实际退货数量' // 实际退货数量：默认为0；
+            title: '实际退货数量', // 实际退货数量：默认为0；
+            render:(h,params)=>{
+              return h('span', {}, 0);
+            }
           },{
             key: 'AMT_ACTUAL_REFUND',
             title: '退款金额', // 退款金额：默认取“申请退款金额”，可编辑，仅支持录入正数，保留两位小数
