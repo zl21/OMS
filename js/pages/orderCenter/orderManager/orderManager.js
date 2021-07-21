@@ -655,7 +655,7 @@
               self.agTableConfig.pagenation.pageSize = data.PAGE_INFO.DEFAULT_SIZE;
               if(self.vueAgTable){
                 columns.forEach(item=>{item['displayName'] = item.headerName;});
-                columns.unshift({"headerName":"序号","field":"index","sort":10,"displayName":"序号",checkboxSelection:true , pinned: 'left'})
+                columns.unshift({"headerName":"序号","width":"80","field":"index","sort":10,"displayName":"序号",checkboxSelection:true , pinned: 'left'})
               }
               self.agTableConfig.columnDefs = columns;
               self.agTableConfig.rowData = rowData;
