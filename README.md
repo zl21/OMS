@@ -176,3 +176,4 @@ console.log($i18n.t(common.all));
 | v1.0.83 | add 翻译 |
 | v1.0.84 | add for 退换 |
 | v1.0.85 | add modalTips.kp |
+| v1.0.86 | add other…… |

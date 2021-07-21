@@ -82,6 +82,10 @@ export default {
   },
 
   other: {
+    live: '直播',
+    fixedBudget: '定预',
+    allAdvance: '全预',
+    selfPrediction: '自预',
     queryResults: '查询结果',
     fullPayment: '全部付款',
     activity_overview: '活动概览',
