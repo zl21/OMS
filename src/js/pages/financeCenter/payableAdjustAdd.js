@@ -995,6 +995,7 @@ export default {
     self.formConfig.formValue.PAY_TYPE = '1';
     self.formConfig.formValue.ADJUST_TYPE = '2';
     self.formConfig.formValue.BILL_TYPE = '4';
+    this.getCompensationType``
     // this.inputList = port[this.tablename].inputList;
   },
   methods: {
