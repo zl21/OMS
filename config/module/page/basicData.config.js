@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-07-20 16:16:43
+ * @LastEditTime: 2021-07-21 11:52:42
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/config/module/page/basicData.config.js
+ */
 /* 2.0: */
 // import logisticsCompanyFilesAddOrEdit from 'allpages/basicData/logisticsCompanyFilesAddOrEdit.vue'; // 物流公司档案-新增/详情
 // import addLogicStore from 'allpages/basicData/addLogicStore.vue'; // 逻辑仓新增
@@ -9,7 +17,7 @@ export default {
   /* 2.0: */
   SHOPAUTHORIZE: {
     component: () => import('@/views/pages/basicData/authorize.vue'),
-    labelName: i18n.t('menu.ap'),//店铺授权
+    labelName: i18n.t('form_label.ap'),//店铺授权
   },
   SHOPAUTHORIZEDETAILS: {
     component: () => import('@/views/pages/basicData/authorizeDetails.vue'),

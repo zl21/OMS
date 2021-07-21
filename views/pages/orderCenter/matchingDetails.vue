@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-07-19 17:26:54
+ * @LastEditTime: 2021-07-21 11:46:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
@@ -248,6 +248,7 @@ export default {
           this.tableConfig.data.forEach(item => {
             if (item.ID == v.ID) {
               item.OC_B_RETURN_ORDER_BILL_NO = ""
+             item.PS_C_SKU_ECODE_ACTUAL = this.closeTable.data.filter(y=>y.ID == v.ID)[0].PS_C_SKU_ECODE_ACTUAL
             }
             item._checked = false
           })
