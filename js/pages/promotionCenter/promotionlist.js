@@ -11,6 +11,7 @@ import businessForm from 'professionalComponents/businessForm';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import { baseColumnDefs, logDataCol, diStatusArr } from './promotion.config'
 import businessAgTable from 'professionalComponents/businessAgTable';
+import { debounce } from 'lodash'
 
 export default {
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
@@ -191,6 +192,7 @@ export default {
       options: {
         rowHeight: 40,
         getRowClass: this.getRowClass,
+        onColumnResized: this.onColumnResized,
         datas: {},
         floatingFilter: false
       },
@@ -694,6 +696,20 @@ export default {
         this.loading = false;
       }, 10);
     },
+    // aG列宽改变回调
+    onColumnResized(e) {
+      return
+      if (e.columns.length > 1 && e.finished) {
+        return // 页面初始化
+      }
+      console.log(e);
+      this.saveCol(e.columns)
+    },
+    // 保存列信息
+    saveCol: debounce(function(data) {
+      console.log(data);
+      debugger // 取不到，用了防抖的原因吗？
+    },1000),
     // 获取agTable数据
     getAgTableData(info, num, index) {
       const self = this;
