@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-07 16:26:58
+ * @LastEditTime: 2021-07-21 17:12:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -87,18 +87,11 @@ export default {
             title: $i18n.t("table_label.itemNo02"), // SPU名称
           },{
             key: 'GIFT_TYPE',
-            title: '赠品'
+            title: '赠品',
+            render:(h,params)=>{
+             params.row.GIFT_TYPE ? params.row.GIFT_TYPE = '非赠品' : '赠品'
+            }
           },
-          // {
-          //   key: 'PS_C_SPEC1_ENAME',
-          //   title: '规格1'
-          // },{
-          //   key: 'PS_C_SPEC2_ENAME',
-          //   title: '规格2'
-          // },{
-          //   key: 'PS_C_SPEC3_ENAME',
-          //   title: '规格3'
-          // },
           {
             key: 'qty',
             title: '购买数量'
@@ -229,8 +222,15 @@ export default {
   },
   watch: {
     async isEdit(newVal) {
-      await this.getTable(false,newVal);
-      await sessionStorage.setItem('copyDetails',JSON.stringify(this.tableConfig.data))
+      console.log(newVal,'newVal:::::');
+      if(newVal === ' '){
+        this.tableConfig.data = [],
+        this.tableConfig.total = 0
+      }else{
+        await this.getTable(false,newVal);
+        await sessionStorage.setItem('copyDetails',JSON.stringify(this.tableConfig.data))
+      }
+      
     },
     'tableConfig.data':{
       handler(newV, oldV) {
@@ -352,9 +352,13 @@ export default {
        this.getTable(true,billNo,pageNum,this.addDetailsConfig.pageSize)
     },
     addDetailsOk(){
+      console.log(!this.addDetailsConfig.selectData.length);
+      if(!this.addDetailsConfig.selectData.length){
+        this.$Message.error('请选择至少一条明细！');
+        return;
+      }
       // 新增明细
       let arr = JSON.parse(sessionStorage.getItem('copyDetails')) //详情
-      console.log(arr);
       // 如果是编辑的话 
       this.addDetailsConfig.selectData.forEach(x =>{
         if(arr.every(y => y.ID !== x.ID)){
@@ -364,6 +368,7 @@ export default {
         }
       })
       this.tableConfig.data = this.tableConfig.data.concat(this.addDetailsConfig.selectData);
+      this.addDetailsConfig.selectData = []
     },
   },
   destroyed(){

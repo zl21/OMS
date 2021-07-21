@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-07-20 16:11:57
+ * @LastEditTime: 2021-07-21 17:02:06
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -11,14 +11,18 @@
       :autocomplete="'new-password'"
       @on-click="iconclick"
       @on-enter="inputenter"
-      clearable
       icon="ios-search"
       v-model="BILL_NO"
       :placeholder="''"
       @on-blur="inputblur"
       @on-change="inputChange"
-    ></Input>
-
+    />
+    <Icon
+      v-if="BILL_NO"
+      class="oriCodeclear"
+      type="ios-close-circle"
+      @click="clear"
+    />
     <!-- 查询原定单编号 -->
     <Modal
       v-model="orderModal"
@@ -270,16 +274,21 @@ export default {
     }
   },
   methods: {
-
+    clear(){
+      this.BILL_NO = ' '
+      this.$emit('change', '', this);
+      R3.store.commit('customize/originalOrder', this.BILL_NO);
+    },
     iconclick() {
       this.orderModal = true;
       // 获取
-      console.log('获取');
       this.queryEnter();
     },
     inputenter() { },
     inputblur() { },
-    inputChange() {},
+    inputChange(val) {
+      R3.store.commit('customize/originalOrder',val.target.value);
+    },
     /* --------------------- 工具函数： --------------------- */
     keyDown() { },
     /* ------------------- 事件 part start ------------------- */
@@ -322,6 +331,9 @@ export default {
     }
     /* ------------------- 子表事件 part end ------------------- */
   },
+  destroyed(){
+     R3.store.commit('customize/originalOrder',' ');
+  }
 };
 
 </script>
@@ -346,6 +358,16 @@ export default {
     // right: 2px;
     height: 32px;
     line-height: 32px;
+  }
+  .oriCodeclear {
+    position: absolute;
+    top: 21px;
+    right: 25px;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    z-index: 9;
+    opacity: 0.7;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-16 23:42:20
+ * @LastEditTime: 2021-07-21 11:54:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       timeTips: '',
-      welcome: '欢迎来到R3-OMS！',
+      welcome: '欢迎来到 R3-OMS ！',
       userName: localStorage.getItem('name'),
     }
   },
@@ -96,7 +96,7 @@ export default {
     let now = new Date();
     let hour = now.getHours();
     let ZH = localStorage.getItem("locale") == "zh"
-    this.welcome = ZH ? this.welcome : 'Welcome to R3-OMS!'
+    this.welcome = ZH ? this.welcome : 'Welcome to R3-OMS !'
     if (hour >= 0 && hour < 8) this.timeTips = '早上好！';
     else if (hour >= 8 && hour < 11) ZH ? this.timeTips = '上午好' : this.timeTips = 'Good morning';
     else if (hour >= 11 && hour < 13) ZH ? this.timeTips = '中午好' : this.timeTips = 'Good noon';
@@ -164,10 +164,10 @@ export default {
     width: 420px;
     // border-left: 70px solid rgba(0,0,0,.5);
     .panel-title {
-      padding: 0 @base-mr;
-      height: 48px;
-      line-height: 47px;
-      border-bottom: 1px solid #f2f2f2;
+      padding: 0 @base-mr !important;
+      height: 48px !important;
+      line-height: 47px !important;
+      border-bottom: 1px solid #f2f2f2 !important;
       &::before {
         display: inline-block;
         content: "";
@@ -181,9 +181,9 @@ export default {
         color: #292f43;
       }
       .right {
-        height: 48px;
-        line-height: 48px;
-        color: @base-color;
+        height: 48px !important;
+        line-height: 48px !important;
+        color: @base-color !important;
       }
     }
     .no-message {

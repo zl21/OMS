@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-29 10:56:54
- * @LastEditTime: 2021-07-15 13:28:08
+ * @LastEditTime: 2021-07-21 11:52:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layput/NavigatorSubMenu.vue
@@ -101,7 +101,7 @@
   }
   // 展开
   &.transferRight{
-    width: 180px;
+    width: 180px !important;
     transition: inherit;
     .left{
       display: block;
