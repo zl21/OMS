@@ -34,10 +34,11 @@
             </Option>
           </Select>
         </div>
-        <div class="relation" v-if="dynamicStructure[IDX].CALC !== null">
+        <div class="relation">
           <Select
             v-model="dynamicStructure[IDX].CALC"
             transfer
+            :disabled="dynamicStructure[IDX].CALC == null"
           >
             <!-- <template v-if="dynamicStructure[IDX].CALC"> -->
               <Option
