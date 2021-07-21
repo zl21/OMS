@@ -217,10 +217,13 @@ export default {
     top: 16px;
     right: 16px;
     border: 1px solid #fff;
-    padding: 1px 18px;
+    padding: 2px 0;
     border-radius: 5px;
     width: 100px;
     text-align: center;
+    .ark-dropdown {
+      min-width: 100px;
+    }
     button {
       height: 24px;
       width: 60px;
