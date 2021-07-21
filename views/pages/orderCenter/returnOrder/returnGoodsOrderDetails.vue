@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-21 10:12:41
+ * @LastEditTime: 2021-07-21 10:36:27
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -814,7 +814,7 @@ export default {
         } else {
           R3.store.commit(`customize/returnAmount`, {
             PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(amt),
-            PRO_REAL_AMT: this.$OMS2.omsUtils.floatNumber(amt),
+            // PRO_REAL_AMT: this.$OMS2.omsUtils.floatNumber(amt),
             EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt)
           });
           FINAL_ACTUAL_AMT =
