@@ -269,3 +269,4 @@
 | v1.2.30 | businessform - 添加title |
 | v1.2.31 | businessform - 添加title |
 | v1.2.32 | businessform - 移除flodClickClass |
+| v1.2.33 | easyMatrix-接口修复 |

@@ -137,7 +137,7 @@ export default {
       } else {
         self.formConfig.formValue[str] = search;
       }
-      this.service.common.serskuQuery(params).then(res => {
+      this.service.common.skuQuery(param).then(res => {
         if (res.data.code === 0) {
           if (str == 'search') {
             self.formConfig.formData[0].AuotData = res.data.data.data.map(row => {
@@ -173,7 +173,7 @@ export default {
         }
       };
       this.pageLoad = true
-      this.service.common.serskuQuery(params).then(res => {
+      this.service.common.skuQuery(param).then(res => {
         this.pageLoad = false
         if (res.data.code === 0) {
           //this.formConfig.formValue.search = '';
