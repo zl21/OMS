@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-21 10:36:27
+ * @LastEditTime: 2021-07-21 11:28:46
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -351,9 +351,9 @@ export default {
         }
         this.businessActionTable.data = this.toMainData.tui;
       }
-      // 判断如果单据状态为待退货完成/完成/取消 不可编辑
+      // 判断如果单据状态为确认/完成/取消 不可编辑  下发WMS状态”！=【撤回成功】时，单据编辑界面不可编辑
       setTimeout(() => {
-        if (['1', "2", "3"].includes(String(this.orderStatus))) {
+        if (['1', "2", "3"].includes(String(this.orderStatus)) || this.$route.query.SOURCE_CODE !== '撤回成功') {
           BtnConfig[0].isShow = false;
           BtnConfig[1].isShow = false;
           BtnConfig[2].isShow = false;
@@ -447,7 +447,9 @@ export default {
       });
       // 获取状态
       this.orderStatus = OC_B_RETURN_ORDER.RETURN_STATUS;
+      this.wmsIssueStatus = OC_B_RETURN_ORDER.WMS_ISSUE_STATUS
       sessionStorage.setItem("RETURN_STATUS", JSON.stringify(OC_B_RETURN_ORDER.RETURN_STATUS));
+      sessionStorage.setItem("WMS_ISSUE_STATUS", JSON.stringify(OC_B_RETURN_ORDER.WMS_ISSUE_STATUS));
       this.IS_COMBINATION = OC_B_RETURN_ORDER.IS_COMBINATION;
       // 退货明细
       this.businessActionTable.columns = this.panelReturn ? REFUND_ITEM_TABTH : EXCHANGE_ITEM_TABTH; //表头

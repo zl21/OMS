@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-07-21 10:12:08
+ * @LastEditTime: 2021-07-21 11:45:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -89,7 +89,7 @@ export default {
     // 调整金额，可正可负，选填项
     // 换货金额，sum所有换货商品“成交金额“，只读，正数
     // 最终应退总额=商品应退金额+应退运费+/-调整金额-换货金额，自动算出
-    this.status = !['1', "2", "3"].includes(String(sessionStorage.getItem("RETURN_STATUS")));
+    this.status = !['1', "2", "3"].includes(String(sessionStorage.getItem("RETURN_STATUS")))  && sessionStorage.getItem("WMS_ISSUE_STATUS") === '撤回成功';
   },
   methods:{
     inputChange(e){
