@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-22 15:48:41
+ * @LastEditTime: 2021-07-22 17:14:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -121,13 +121,13 @@ export default {
              let QTY_RETURN_APPLY = Number(params.row.QTY_RETURN_APPLY) || 0;
              let returnNum = Number(params.row.QTY) - QTY_RETURN_APPLY;
              let PRICE_ACTUCL = Number(params.row.PRICE_ACTUCL) || 0
-             console.log(QTY_RETURN_APPLY,returnNum,PRICE_ACTUCL);
              return h('InputNumber', {
                 props: {
                   value: returnNum,
                   autosize: true,
                   min:1,
                   max: returnNum,
+                  disabled: this.orderStatus !== '0' ? true : false,
                   regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
                 },
                 on: {
@@ -164,6 +164,7 @@ export default {
             render:(h,params)=>{
              return h('Input', {
                props: {
+                  disabled: this.orderStatus !== '0' ? true : false,
                   value: params.row.AMT_ACTUAL_REFUND,
                   autosize: true,
                   regx: /^\d*\.{0,1}\d{0,2}$/,
@@ -314,8 +315,8 @@ export default {
     //     })
     //   }
     // })
+    let route = this.$route.params;
     if(!(this.$route.params.itemId == 'New')){
-       let route = this.$route.params;
        const subData = await this.$OMS2.omsUtils.initSubtable('OC_B_REFUND_ORDER_ITEM', route.itemId, '181618');
        this.tableConfig.data = subData.rowData;
        await sessionStorage.setItem('copyDetails',JSON.stringify(subData.rowData));
@@ -324,6 +325,13 @@ export default {
        this.tableConfig.columns = columns
        let billNo = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata;
        R3.store.commit('customize/originalOrder',billNo)
+    }
+    // 单据状态 0:未审核
+    this.orderStatus = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[6].valuedata;
+    if(this.orderStatus !== '0'){
+      this.tableConfig.businessButtonConfig.buttons[0].isShow = false
+      this.tableConfig.businessButtonConfig.buttons[1].isShow = false
+      
     }
   },
   mounted(){
