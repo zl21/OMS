@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-22 12:05:22
+ * @LastEditTime: 2021-07-22 15:48:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -47,12 +47,13 @@ export default {
               text: '新增明细', // 按钮文本
               isShow: true,
               btnclick: (e) => {
-                if(!R3.store.state.customize.originalOrder){
+                let billNo = R3.store.state.customize.originalOrder;
+                console.log(billNo,'billNobillNo');
+                if(!billNo || billNo === ' '){
                   this.$Message.error('原订单编号不能为空！');
                   return;
                 }
                 this.addDetailsConfig.modal = true;
-                let billNo = R3.store.state.customize.originalOrder;
                 this.getTable(true,billNo);
               } // 按钮点击事件
             },
@@ -110,16 +111,16 @@ export default {
             key: 'REAL_AMT',
             title: '成交金额',
             render:(h,params)=>{
-              let num  = params.row.REAL_AMT ? params.row.REAL_AMT : 0
+              let num  = Number(params.row.REAL_AMT) ||  0
               return h('span', {}, num);
             }
           },{
             key: 'QTY_REFUND',
             title: '申请退货数量', // 申请退货数量：默认取原零售发货单可退数量，可编辑，仅支持录入大于0的正整数，且需小于等于原零售发货单可退数量；
             render:(h,params)=>{
-             let QTY_RETURN_APPLY = params.row.QTY_RETURN_APPLY ? Number(params.row.QTY_RETURN_APPLY) : 0;
+             let QTY_RETURN_APPLY = Number(params.row.QTY_RETURN_APPLY) || 0;
              let returnNum = Number(params.row.QTY) - QTY_RETURN_APPLY;
-             let PRICE_ACTUCL = params.row.PRICE_ACTUCL ? Number(params.row.PRICE_ACTUCL) : 0
+             let PRICE_ACTUCL = Number(params.row.PRICE_ACTUCL) || 0
              console.log(QTY_RETURN_APPLY,returnNum,PRICE_ACTUCL);
              return h('InputNumber', {
                 props: {
@@ -145,7 +146,7 @@ export default {
             title: '退货金额', // 申请退款金额：为 申请退货数量*成交单价（成交单价为原零售发货单中记录的），保留两位小数； 
             render:(h,params)=>{
               let num = params.row.QTY_REFUND ? params.row.QTY_REFUND : Number(params.row.QTY) - Number(params.row.QTY_RETURN_APPLY)
-              let PRICE_ACTUCL = params.row.PRICE_ACTUCL ? Number(params.row.PRICE_ACTUCL) : 0
+              let PRICE_ACTUCL = Number(params.row.PRICE_ACTUCL) || 0
               let sum = this.$OMS2.omsUtils.floatNumber(num * PRICE_ACTUCL)
               this.tableConfig.data[params.index] = params.row;
               R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
@@ -205,28 +206,52 @@ export default {
             key: 'PS_C_SKU_ENAME',
             title: $i18n.t('form_label.skuName'), // SKU名称
           },{
-            key: 'ORIG_ORDER_ID',
+            key: 'PS_C_PRO_ECODE',
             title: 'SPU编码'
           },{
-            key: 'ORIG_ORDER_ID',
+            key: 'PS_C_PRO_ENAME',
             title: 'SPU名称'
           },{
             key: 'GIFT_TYPE',
-            title: '赠品'
+            title: '赠品',
+            render:(h,params)=>{
+              let GIFT_TYPE = ''
+              if(params.row.GIFT_TYPE == 0){
+                  GIFT_TYPE = '非赠品'
+              }else if(params.row.GIFT_TYPE == 1){
+                  GIFT_TYPE = '系统赠品'
+              }else{
+                  GIFT_TYPE = '平台赠品'
+              }
+              return h('span', {}, GIFT_TYPE);
+            }
           },{
-            key: 'TOTAL_FEE',
+            key: 'REAL_AMT',
             title: '成交金额'
           },{
             key: 'AMT_REFUND',
-            title: '可退金额'
+            title: '可退金额',
+            render:(h,params)=>{
+              let QTY_RETURN_APPLY = params.row.QTY_RETURN_APPLY || 0;
+              // 数量 已退数量
+              let returnNum = Number(params.row.QTY || 0) - QTY_RETURN_APPLY;
+              // 单价   
+              console.log();
+              return h('span', {}, returnNum * Number(params.row.PRICE_ACTUCL || 0));
+            }
           },{
             key: 'QTY',
             title: '购买数量'
           },{
             key: 'QTY_REFUND',
-            title: '可退数量'
+            title: '可退数量',
+            render:(h,params)=>{
+              let QTY_RETURN_APPLY = params.row.QTY_RETURN_APPLY || 0;
+              let returnNum = Number(params.row.QTY) - QTY_RETURN_APPLY;
+              return h('span', {}, returnNum);
+            }
           },{
-            key: 'GROUP_GOODS_MARK',
+            key: 'GROUP_NAME',
             title: '组合商品'
           }
         ], // 表头
@@ -253,7 +278,6 @@ export default {
   },
   watch: {
     async isEdit(newVal) {
-      console.log(newVal,'newVal:::::');
       if(newVal === ' '){
         this.tableConfig.data = [],
         this.tableConfig.total = 0
@@ -298,6 +322,8 @@ export default {
       //  编辑没有实际退款数量
        let columns = this.tableConfig.columns.filter(item => item.title !== '实际退货数量');
        this.tableConfig.columns = columns
+       let billNo = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata;
+       R3.store.commit('customize/originalOrder',billNo)
     }
   },
   mounted(){
@@ -355,7 +381,7 @@ export default {
     deleteData(row){
       // 删除
       this.tableConfig.data = [...this.tableConfig.data].filter(x => [...row].every(y => y.ID !== x.ID));
-      
+      this.tableConfig.selectData = [];
     },
     /******************  添加商品明细 -- 弹框 *************************/
     addOnSelect(row){

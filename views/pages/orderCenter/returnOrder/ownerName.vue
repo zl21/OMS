@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-07 18:45:07
- * @LastEditTime: 2021-07-16 17:42:08
+ * @LastEditTime: 2021-07-22 14:27:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/OWNERNAME.vue
@@ -32,7 +32,7 @@ export default {
   mounted(){
     // 模拟点击，加密
     setTimeout(() => {
-      document.getElementsByClassName("eye")[0].click();
+      // document.getElementsByClassName("eye")[0].click();
     }, 500);
   },
   methods:{

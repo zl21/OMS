@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-21 11:28:46
+ * @LastEditTime: 2021-07-22 14:38:34
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -351,9 +351,9 @@ export default {
         }
         this.businessActionTable.data = this.toMainData.tui;
       }
-      // 判断如果单据状态为确认/完成/取消 不可编辑  下发WMS状态”！=【撤回成功】时，单据编辑界面不可编辑
+      // 判断如果单据状态为确认/完成/取消 不可编辑  下发WMS状态 0：未下发 1: 下发中 2:下发成功 3:下发失败 4:撤回成功
       setTimeout(() => {
-        if (['1', "2", "3"].includes(String(this.orderStatus)) || this.$route.query.SOURCE_CODE !== '撤回成功') {
+        if (this.orderStatus !== 0 || ![1,3].includes(this.wmsIssueStatus)) {
           BtnConfig[0].isShow = false;
           BtnConfig[1].isShow = false;
           BtnConfig[2].isShow = false;
