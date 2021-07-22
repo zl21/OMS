@@ -1570,7 +1570,7 @@ export default {
       self.modify.master.PAY_TIME = self.formConfigBase.formValue.PAY_TIME; // 保存入参默认值
       const drpArr = [
         "CP_C_SHOP_ID",
-        "CP_C_PHY_WAREHOUSE_ID",
+        // "CP_C_PHY_WAREHOUSE_ID",
         "CP_C_REGION_PROVINCE_ID",
         "CP_C_REGION_CITY_ID",
       ];
