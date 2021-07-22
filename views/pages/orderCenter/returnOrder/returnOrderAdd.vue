@@ -338,7 +338,7 @@ export default {
           },
           {
             style: 'select',
-            // label: '退货类型', // 单据类型 
+            // label: '退货类型', 
             colname: 'RETURN_TYPE',
             width: '6', // 所占宽度宽度
             rules: true,
@@ -348,7 +348,7 @@ export default {
             options: [],
           },
           {
-            style: 'select',
+            style: 'input',
             // label: $i18n.t('form_label.reasonRefund'), // 退货原因
             colname: 'REFUND_REASON',
             width: '6',
