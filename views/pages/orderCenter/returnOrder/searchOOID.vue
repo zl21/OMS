@@ -330,7 +330,7 @@ export default {
       for (const key in fixedcolumns) {
         if (!fixedcolumns[key]) delete fixedcolumns[key];
       }
-      let searchdata = { "table": "OC_B_ORIG_ORDER", "startindex": page, "range": pageSize, "fixedcolumns": fixedcolumns, "column_include_uicontroller": true, "isolr": false };
+      let searchdata = { "table": "OC_B_ORIG_ORDER_TABLE", "startindex": page, "range": pageSize, "fixedcolumns": fixedcolumns, "column_include_uicontroller": true, "isolr": false };
       let formData = new FormData();
       formData.append("searchdata", JSON.stringify(searchdata));
       // 调用查询接口

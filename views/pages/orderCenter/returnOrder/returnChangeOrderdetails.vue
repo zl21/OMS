@@ -580,7 +580,7 @@ export default {
       if (PS_C_PRO_ECODE && ECODE) PS_C_PRO_ECODE = '';
       let fixedcolumns = { PS_C_PRO_ECODE, ECODE, ENAME };
       let searchdata = {
-        table: "PS_C_SKU",
+        table: "PS_C_SKU_TABLE",
         startindex: page,
         range: pageSize,
         fixedcolumns: fixedcolumns,
