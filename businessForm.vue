@@ -192,16 +192,9 @@
               <Checkbox v-model="formConfig.formValue[`${item.value || item.colname}`]"
                         @on-change="runMethods(item.checkboxChange ? item.checkboxChange(formConfig.formValue[`${item.value || item.colname}`]) : '', true)"
                         :disabled="item.disabled"
-                        ></Checkbox>
-              <!-- <CheckboxGroup>
-                <input v-model="formConfig.formValue[`${item.value || item.colname}`]"
-                  :checked="formConfig.formValue[`${item.value || item.colname}`]"
-                  @click="runMethods(item.checkboxChange ? item.checkboxChange(formConfig.formValue[`${item.value || item.colname}`]) : '', true)"
-                  type="checkbox"
-                  :maxlength="item.maxlength"
-                  :disabled="item.disabled"
-                />
-              </CheckboxGroup> -->
+                        :circle="item.circle"
+                        >{{item.checkboxLabel}}</Checkbox>
+            
             </template>
             <template v-else-if="item.options && !item.onlyBox">
               <Checkbox v-if="item.hasCheckAll"
