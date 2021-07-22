@@ -49,8 +49,7 @@
             :class="navStatus === 0 ? 'action' : ''"
             @click="navStatus = 0"
           >
-            <!-- 退款单详情 -->
-            {{ vmI18n.t("panel_label.refundSlipDetails") }}
+            退款单明细
           </p>
           <p :class="navStatus === 1 ? 'action' : ''" v-if="$route.query.customizedModuleId !== 'New'" @click="navStatus = 1">日志</p>
         </div>
