@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-19 10:53:30
- * @LastEditTime: 2021-07-19 10:22:45
+ * @LastEditTime: 2021-07-22 10:40:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returngood/returnGoods.vue
@@ -79,7 +79,7 @@
             ID: this.$route.params.itemId, //id
             TABLE: this.$route.params.tableName, //主表名
             SUB_TABLE: 'OC_B_REFUND_ORDER_ITEM', //明细表名
-            PT_SKU: isSku, //true平台 false商品
+            PT_SKU: !isSku, //true平台 false商品
             REFRESH: false, //是否加密
             index: 1 //当前页
           };

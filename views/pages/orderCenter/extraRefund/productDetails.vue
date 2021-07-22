@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-21 18:14:16
+ * @LastEditTime: 2021-07-22 12:05:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -89,7 +89,6 @@ export default {
             key: 'GIFT_TYPE',
             title: '赠品',
             render:(h,params)=>{
-              console.log(params.row.GIFT_TYPE);
               let GIFT_TYPE = ''
               if(params.row.GIFT_TYPE == 0){
                   GIFT_TYPE = '非赠品'
@@ -103,25 +102,36 @@ export default {
           },
           {
             key: 'QTY',
-            title: '购买数量'
+            title: '购买数量',
+            render:(h,params)=>{
+              return h('span', {}, Number(params.row.QTY));
+            }
           },{
             key: 'REAL_AMT',
-            title: '成交金额'
+            title: '成交金额',
+            render:(h,params)=>{
+              let num  = params.row.REAL_AMT ? params.row.REAL_AMT : 0
+              return h('span', {}, num);
+            }
           },{
             key: 'QTY_REFUND',
             title: '申请退货数量', // 申请退货数量：默认取原零售发货单可退数量，可编辑，仅支持录入大于0的正整数，且需小于等于原零售发货单可退数量；
             render:(h,params)=>{
+             let QTY_RETURN_APPLY = params.row.QTY_RETURN_APPLY ? Number(params.row.QTY_RETURN_APPLY) : 0;
+             let returnNum = Number(params.row.QTY) - QTY_RETURN_APPLY;
+             let PRICE_ACTUCL = params.row.PRICE_ACTUCL ? Number(params.row.PRICE_ACTUCL) : 0
+             console.log(QTY_RETURN_APPLY,returnNum,PRICE_ACTUCL);
              return h('InputNumber', {
                 props: {
-                  value:Number(params.row.QTY) - Number(params.row.QTY_RETURN_APPLY),
+                  value: returnNum,
                   autosize: true,
                   min:1,
-                  max:Number(params.row.QTY) - Number(params.row.QTY_RETURN_APPLY),
+                  max: returnNum,
                   regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
                 },
                 on: {
                   'on-change': e => {
-                      let num =  this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.AMT_REFUND), 2)
+                      let num =  this.$OMS2.omsUtils.floatNumber(Number(e) * Number(PRICE_ACTUCL))
                       params.row.AMT_REFUND = isNaN(num) ? '0.00' : num;
                       params.row.QTY_REFUND = e;
                       this.tableConfig.data[params.index] = params.row;
@@ -134,7 +144,11 @@ export default {
             key: 'AMT_REFUND',
             title: '退货金额', // 申请退款金额：为 申请退货数量*成交单价（成交单价为原零售发货单中记录的），保留两位小数； 
             render:(h,params)=>{
-              let sum = (Number(params.row.QTY) - Number(params.row.QTY_RETURN_APPLY)) * params.row.REAL_AMT
+              let num = params.row.QTY_REFUND ? params.row.QTY_REFUND : Number(params.row.QTY) - Number(params.row.QTY_RETURN_APPLY)
+              let PRICE_ACTUCL = params.row.PRICE_ACTUCL ? Number(params.row.PRICE_ACTUCL) : 0
+              let sum = this.$OMS2.omsUtils.floatNumber(num * PRICE_ACTUCL)
+              this.tableConfig.data[params.index] = params.row;
+              R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
               return h('span', {}, sum);
             }
           },{

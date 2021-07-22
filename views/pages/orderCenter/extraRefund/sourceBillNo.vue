@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-07-21 17:02:06
+ * @LastEditTime: 2021-07-22 12:05:56
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -110,6 +110,12 @@ export default {
             text: $i18n.t('btn.reset'), //重置
             disabled: false, // 按钮禁用控制
             btnclick: () => {
+              this.formConfig.formValue.BILL_NO = '';
+              this.formConfig.formValue.SOURCE_CODE = '';
+              this.formConfig.formValue.EXPRESS_CODE = '';
+              this.formConfig.formValue.RECEIVER_NAME = '';
+              this.formConfig.formValue.BUYER_NICK = '';
+              this.formConfig.formValue.RECEIVER_MOBILE = '';
               // this.formEmpty(this, 'formConfig', ['ORDER_DATE', 'PAY_TIME']);
               this.queryEnter(1, this.table.pageSize, true);
             }, // 按钮点击事件
