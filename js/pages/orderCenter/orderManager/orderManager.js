@@ -456,6 +456,7 @@
         },
         tabList: [],
         agTableConfig: {
+          pageShow: true,
           tableHeight: '412px',
           columnDefs: [],
           rowData: [],

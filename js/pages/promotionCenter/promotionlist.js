@@ -198,6 +198,7 @@ export default {
       },
       selection: [],
       agTableConfig: {
+        pageShow: true,
         isIndex: true,
         tableHeight: '480px',
         columnDefs: baseColumnDefs,
