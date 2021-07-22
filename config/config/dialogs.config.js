@@ -4,7 +4,7 @@ class DialogConfig {
   static target;
   constructor() { }
   static baseObj = {
-    titleAlign: 'center',
+    titleAlign: 'left',
     data: {},
     keepAlive: true,
     footerHide: true,
