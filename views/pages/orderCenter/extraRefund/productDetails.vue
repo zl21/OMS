@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-22 18:10:58
+ * @LastEditTime: 2021-07-22 20:25:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -120,10 +120,11 @@ export default {
             render:(h,params)=>{
              let QTY_RETURN_APPLY = Number(params.row.QTY_RETURN_APPLY) || 0;
              let returnNum = Number(params.row.QTY) - QTY_RETURN_APPLY;
-             let PRICE_ACTUCL = Number(params.row.PRICE_ACTUCL) || 0
+             let PRICE_ACTUCL = Number(params.row.PRICE_ACTUCL) || 0;
+             params.row.QTY_REFUND = returnNum
              return h('InputNumber', {
                 props: {
-                  value: returnNum,
+                  value: params.row.QTY_REFUND,
                   autosize: true,
                   min:1,
                   max: returnNum,
@@ -162,9 +163,10 @@ export default {
             key: 'AMT_ACTUAL_REFUND',
             title: '退款金额', // 退款金额：默认取“申请退款金额”，可编辑，仅支持录入正数，保留两位小数
             render:(h,params)=>{
+            console.log(params.row.AMT_ACTUAL_REFUND);
              return h('Input', {
                props: {
-                  disabled: this.orderStatus && this.$route.params.itemId !== 'New' !== '0' ? true : false,
+                  disabled: this.orderStatus !== '0' && this.$route.params.itemId !== 'New' ? true : false,
                   value: params.row.AMT_ACTUAL_REFUND,
                   autosize: true,
                   regx: /^\d*\.{0,1}\d{0,2}$/,
@@ -252,8 +254,17 @@ export default {
               return h('span', {}, returnNum);
             }
           },{
-            key: 'GROUP_NAME',
-            title: '组合商品'
+            key: 'PRO_TYPE',
+            title: '是否组合下挂',
+            render:(h,params)=>{
+              let PRO_TYPE = ''
+              if([1,2].includes(params.row.PRO_TYPE)){
+                  PRO_TYPE = '是'
+              }else{
+                  PRO_TYPE = '否'
+              }
+              return h('span', {}, PRO_TYPE);
+            }
           }
         ], // 表头
         data: [], // 数据配置
@@ -279,6 +290,7 @@ export default {
   },
   watch: {
     async isEdit(newVal) {
+      console.log('newVal:newVal',newVal);
       if(newVal === ' '){
         this.tableConfig.data = [],
         this.tableConfig.total = 0
@@ -301,20 +313,6 @@ export default {
     let buttonArr = this.tableConfig.businessButtonConfig.buttons
     let buttonArr1 = buttonArr.map((x)=>{ if(SUB_ACTIONS.some(y => y.webname === x.webname)) return x}).filter(item => item);
     this.tableConfig.businessButtonConfig.buttons = buttonArr1
-    // console.log(buttonArr1);
-    // buttonArr.forEach((x)=>{
-    //   // 判断是否存在不存在设置为false，存在看是否显示ishide
-    //   if(!SUB_ACTIONS.some(y => y.webname === x.webname)){
-    //     x.isShow = false
-    //     console.log(x.webname);
-    //   }else{
-    //     SUB_ACTIONS.forEach((e) => {
-    //       if(x.webname === e.webname){
-    //         x.isShow = e.ishide
-    //       }
-    //     })
-    //   }
-    // })
     let route = this.$route.params;
     if(!(this.$route.params.itemId == 'New')){
        const subData = await this.$OMS2.omsUtils.initSubtable('OC_B_REFUND_ORDER_ITEM', route.itemId, '181618');
@@ -334,7 +332,7 @@ export default {
     }
   },
   mounted(){
-     
+    
   },
   methods:{
     /****************** 工具方法 *************************/

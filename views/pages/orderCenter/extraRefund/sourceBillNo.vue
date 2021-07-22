@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-07-22 12:05:56
+ * @LastEditTime: 2021-07-22 20:30:21
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -290,10 +290,13 @@ export default {
       // 获取
       this.queryEnter();
     },
-    inputenter() { },
-    inputblur() { },
+    inputenter(val) { 
+      let str = val.target.value.replace(/\s+/g,"");
+      R3.store.commit('customize/originalOrder',str);
+    },
+    inputblur() {  },
     inputChange(val) {
-      R3.store.commit('customize/originalOrder',val.target.value);
+      // R3.store.commit('customize/originalOrder',val.target.value);
     },
     /* --------------------- 工具函数： --------------------- */
     keyDown() { },
