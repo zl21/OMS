@@ -672,7 +672,7 @@ export default {
           } = res.data.data;
           self.formConfig.formValue = {
             ECODE, // SPU编码
-            isactive: isactive == 'Y' ? '启用' : '不启用', // 启用状态
+            isactive: isactive == 'Y' ? '启用' : '停用', // 启用状态
             ENAME, // 商品名称
             TYPE, // 类型
             PS_C_BRAND_ID, // 品牌
