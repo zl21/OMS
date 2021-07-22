@@ -179,3 +179,4 @@ console.log($i18n.t(common.all));
 | v1.0.86 | add other…… |
 | v1.0.87 | add modalTips |
 | v1.0.88 | add modalTips/form_label |
+| v1.0.89 | add modalTips.kv |
