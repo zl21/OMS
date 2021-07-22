@@ -274,7 +274,7 @@ export default {
             width: '8', // 所占宽度宽度
             value: 'BILL_TYPE', // 输入框的值
             selectChange: () => {
-              this.getTableAfterCalPayablePrice();
+              // this.getTableAfterCalPayablePrice();
               this.getCompensationType();
             },
             options: [
@@ -287,7 +287,7 @@ export default {
             width: '8', // 所占宽度宽度
             value: 'AC_F_COMPENSATION_TYPE_ID', // 输入框的值
             selectChange: () => {
-              this.getTableAfterCalPayablePrice();
+              // this.getTableAfterCalPayablePrice();
               this.queryBIllCause(this.formConfig.formValue.AC_F_COMPENSATION_TYPE_ID);
             },
             options: [
@@ -465,7 +465,7 @@ export default {
             oneObj: val => {
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = val.pid;
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = val.valuedata;
-              this.getTableAfterCalPayablePrice();
+              // this.getTableAfterCalPayablePrice();
             }
           },
           {
@@ -496,7 +496,7 @@ export default {
             oneObj: val => {
               this.formConfig.formValue.CP_C_LOGISTICS_ID = val.pid;
               this.formConfig.formValue.CP_C_LOGISTICS_ENAME = val.valuedata;
-              this.getTableAfterCalPayablePrice();
+              // this.getTableAfterCalPayablePrice();
             }
           },
           {
@@ -773,7 +773,7 @@ export default {
                               //     params.index
                               //     ].PAYABLE_PRICE = (params.row.PAY_AMT * e.target.value).toFixed(2);
                               // }
-                              self.getTableAfterCalPayablePrice();
+                              // self.getTableAfterCalPayablePrice();
                             }
                           }
                         }
@@ -995,6 +995,7 @@ export default {
     self.formConfig.formValue.PAY_TYPE = '1';
     self.formConfig.formValue.ADJUST_TYPE = '2';
     self.formConfig.formValue.BILL_TYPE = '4';
+    this.getCompensationType``
     // this.inputList = port[this.tablename].inputList;
   },
   methods: {
