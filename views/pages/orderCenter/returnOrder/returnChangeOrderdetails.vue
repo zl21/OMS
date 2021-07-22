@@ -817,7 +817,7 @@ export default {
         self.toMainData[key3] = self.actionTableCon.totalData[0][key2];
         self.$emit("subTableData", self.toMainData);
       }, 10);
-    },300),
+    }, 300),
     // 退-新增明细弹窗-插入列表格的过滤处理-累加/直接push
     insertOrderDetail(dataArr = []) {
       const self = this;
@@ -919,30 +919,38 @@ export default {
       selDa.forEach((it) => {
         this.selectTogether(it);
       });
-      let haveGift = this.haveGift.replace(/(，|,)$/, "");
-      let haveGroup = this.haveGroup.replace(/(，|,)$/, "");
+      let haveGift = this.haveGift.replace(/(，|,)$/, "").split(',');
+      let haveGroup = this.haveGroup.replace(/(，|,)$/, "").split(',');
       let msg, title, key, giftArr = [], groupArr = [], bothArr = [];
       let a1 = this.keyGift.replace(/(，|,)$/, "").split(',') || [];
       let a2 = this.keyGroup.replace(/(，|,)$/, "").split(',') || [];
       selDa.forEach(it => {
         // 若某挂靠已被选中，则：1.从提示语中去除该项
         if (a1.includes(it[riuk])) {
-          haveGift = haveGift.replace(it.PS_C_SKU_ECODE, '');
+          const x = haveGift.indexOf(it.PS_C_SKU_ECODE);
+          x != -1 && haveGift.splice(x, 1);
+          // haveGift = haveGift.replace(it.PS_C_SKU_ECODE, '');
         }
         // 若某组合项已被选中，则： 1.从提示语中去除该项
         if (a2.includes(it[riuk])) {
-          haveGroup = haveGroup.replace(it.PS_C_SKU_ECODE, '');
+          const y = haveGroup.indexOf(it.PS_C_SKU_ECODE);
+          y != -1 && haveGroup.splice(y, 1);
+          // haveGroup = haveGroup.replace(it.PS_C_SKU_ECODE, '');
         }
       })
+      haveGift = Array.from(new Set(haveGift));
+      haveGroup = Array.from(new Set(haveGroup));
+      haveGift = haveGift.join(',').replace(/(，|,)$/, "");
+      haveGroup = haveGroup.join(',').replace(/(，|,)$/, "");
       if (this.returnProduct == "0") {
         // 删除退货商品
         title = $i18n.t('modalTips.jk');
         key = "REFUND_ITEM_UNIQUE_KEY";
-        if (haveGift) {
+        if (haveGift && !haveGroup) {
           // 请确认是否删除当前选中的退货商品，还存在关联的挂靠赠品
           msg = `${$i18n.t('modalTips.jl')}：${haveGift} ？`;
           giftArr = allDa.filter(it => a1.includes(it[key]));
-        } else if (haveGroup) {
+        } else if (haveGroup && !haveGift) {
           // 请确认是否删除当前选中的退货商品，还存在组合/福袋下挂的其他关联商品
           msg = `${$i18n.t('modalTips.jm')}：${haveGroup} ？`;
           groupArr = allDa.filter(it => a2.includes(it[key]));
@@ -966,7 +974,7 @@ export default {
         content: msg,
         width: 450,
         mask: true,
-        className: 'ark-dialog',
+        className: 'ark-dialog errTip',
         showCancel: true,
         okText: $i18n.t("common.determine"), // 确定
         cancelText: $i18n.t("common.cancel"), // 取消
@@ -1212,6 +1220,21 @@ export default {
               if (this.isMainDelete) return;
               this.indexL.push(index);
             }
+            let kk = 'GIFT_RELATION';
+            if (obj[kk]) {
+              // 组合品的赠品：
+              allDa.forEach((x, y) => {
+                // 赠品标识相同 && 是赠品 && 排除该组合的其它商品 && 排除该条本身
+                if (x[kk] == obj[kk] && x.GIFT_TYPE != '0' && x[key1] != obj[key1] && x[riuk] != obj[riuk]) {
+                  if (x.PS_C_SKU_ECODE !== obj.PS_C_SKU_ECODE) {
+                    this.haveGift += `${x.PS_C_SKU_ECODE},`;
+                    this.keyGift += `${x[riuk]},`
+                  }
+                  if (this.isMainDelete) return;
+                  this.indexL.push(y);
+                }
+              })
+            }
             break;
           case 'other':
             const gR = it.GIFT_RELATION;
@@ -1265,5 +1288,12 @@ export default {
   #back {
     display: none;
   }
+}
+.errTip {
+ .ark-modal-confirm-body-info {
+   textarea {
+     min-height: 40px;
+   }
+ }
 }
 </style>
