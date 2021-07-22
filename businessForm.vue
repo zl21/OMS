@@ -104,6 +104,7 @@
                         :format="item.format"
                         :clearable="item.clearable"
                         :options="item.options"
+                        :start-date="item.startDate"
                         @on-change="runMethods(item.onChange)"></DatePicker>
           </FormItem>
 

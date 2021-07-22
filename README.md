@@ -271,3 +271,4 @@
 | v1.2.32 | businessform - 移除flodClickClass |
 | v1.2.33 | easyMatrix-接口修复 |
 | v1.2.34 | 扩展businessForm组件 |
+| v1.2.35 | aG分页组件处理、businessForm-date组件支持startDate |
