@@ -26,6 +26,7 @@
       footer-hide
       @on-ok="resetReturnMainTable"
       @on-cancel="detailAddCancel"
+      class-name="ark-dialog"
     >
       <businessActionTable
         :jordan-table-config="tableConfig"
@@ -34,7 +35,7 @@
         @on-select-all="onSelectAll"
         @on-select-all-cancel="onSelectAllCancel"
       />
-      <businessButton :btn-config="btnConfigTui" />
+      <businessButton :btn-config="btnConfigTui" class="modal-footer" />
     </Modal>
     <!-- 替换/添加明细 -->
     <Modal
@@ -45,6 +46,7 @@
       :mask="true"
       @on-ok="replaceOk"
       footer-hide
+      class-name="ark-dialog"
     >
       <businessActionTable
         :jordan-table-config="replaceProductTable"
@@ -52,13 +54,14 @@
         @on-page-change="pageChange"
         @on-page-size-change="pageSizeChange"
       />
-      <businessButton :btn-config="btnConfigHuan" />
+      <businessButton :btn-config="btnConfigHuan" class="modal-footer" />
     </Modal>
   </div>
 </template>
 <script>
 import businessActionTable from "professionalComponents/businessActionTable";
 import businessButton from 'professionalComponents/businessButton';
+import { debounce } from 'lodash'
 
 import {
   // addDetailModalTableColumns,
@@ -736,14 +739,14 @@ export default {
         },
         PRICE_ACTUAL: (h, params) => {
           // 成交单价 -- 换
-          return h("InputNumber", {
+          return h("Input", {
             props: {
               value: params.row.PRICE_ACTUAL,
-              regx: /^(([0-9] .[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*.[0-9] )|([0-9]*[1-9][0-9]*))$/,
-              min: 1,
+              regx: /^\+?\d+\.{0,1}\d{0,2}$/, // 还有 0后面紧跟数字的情况没兼容
             },
             on: {
-              "on-change": (e) => {
+              "on-change": (v) => {
+                const e = v.target.value;
                 params.row.PRICE_ACTUAL = e;
                 params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(
                   Number(e) * Number(params.row.QTY_EXCHANGE),
@@ -782,12 +785,12 @@ export default {
       }, 500); */
     },
     // 生成'合计'行
-    totalNum() {
+    totalNum: debounce(function () {
       const self = this;
       let amt = 0, qty = 0, realAmt = 0;
-      const key1 = this.returnProduct == "0" ? "QTY_REFUND" : "QTY_EXCHANGE"; // 申请退货数量 : 换货数量
-      const key2 = this.returnProduct == "0" ? "REFUND_FEE" : "AMT_EXCHANGE"; // 退货金额 : 成交金额
-      const key3 = this.returnProduct == "0" ? "PRO_ACTUAL_AMT" : "EX_ACTUAL_AMT"; // 商品应退金额 : 换货金额
+      const key1 = self.returnProduct == "0" ? "QTY_REFUND" : "QTY_EXCHANGE"; // 申请退货数量 : 换货数量
+      const key2 = self.returnProduct == "0" ? "REFUND_FEE" : "AMT_EXCHANGE"; // 退货金额 : 成交金额
+      const key3 = self.returnProduct == "0" ? "PRO_ACTUAL_AMT" : "EX_ACTUAL_AMT"; // 商品应退金额 : 换货金额
       self.actionTableCon.totalData = [];
       if (!self.actionTableCon.data) return;
       self.actionTableCon.data.forEach((item) => {
@@ -796,25 +799,25 @@ export default {
         realAmt = Util.accAdd(item.REAL_AMT || 0, realAmt)
       });
       setTimeout(() => {
-        if (this.returnProduct == "0") {
+        if (self.returnProduct == "0") {
           self.actionTableCon.totalData.push({
             index: `${$i18n.t("other.total")}:`, // 合计
-            REFUND_FEE: this.$OMS2.omsUtils.floatNumber(amt, 2),
+            REFUND_FEE: self.$OMS2.omsUtils.floatNumber(amt, 2),
             QTY_REFUND: qty,
             REAL_AMT: realAmt,
           });
         } else {
           self.actionTableCon.totalData.push({
             index: `${$i18n.t("other.total")}:`,
-            AMT_EXCHANGE: this.$OMS2.omsUtils.floatNumber(amt, 2),
+            AMT_EXCHANGE: self.$OMS2.omsUtils.floatNumber(amt, 2),
             QTY_EXCHANGE: qty,
           });
         }
         // 计算'商品应退金额'
-        this.toMainData[key3] = self.actionTableCon.totalData[0][key2];
-        this.$emit("subTableData", this.toMainData);
+        self.toMainData[key3] = self.actionTableCon.totalData[0][key2];
+        self.$emit("subTableData", self.toMainData);
       }, 10);
-    },
+    },300),
     // 退-新增明细弹窗-插入列表格的过滤处理-累加/直接push
     insertOrderDetail(dataArr = []) {
       const self = this;
