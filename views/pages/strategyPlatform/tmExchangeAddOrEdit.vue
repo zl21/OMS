@@ -17,6 +17,8 @@
           <!-- 满足条件 -->
           {{ vmI18n.t('form_label.meet_conditions') }}
           <p slot="content">
+            <!-- 自动同意换货 -->
+            <p style="position: relative; top: 17px;">{{ vmI18n.t('form_label.e3') }}:</p>
             <businessForm :form-config="formConfig2">
               <template #exchangeDesc="{ rowData }">
                 <div class="preLable">
@@ -25,14 +27,14 @@
                     :disabled="isEnable"
                     @on-change="rowData.item.switchChange"
                   />
-                  <label :title="rowData.item.label" :class="['cust-form-label', 'required', { hidden: !rowData.value.IS_AUTO_APPROVE }]">
+                  <label :title="rowData.item.label" :class="['cust-label', 'required', { hidden: !rowData.value.IS_AUTO_APPROVE }]">
                     <i>*</i>{{ rowData.item.label }}：
                   </label>
                 </div>
                 <CheckboxGroup
                   v-model="rowData.value.EXCHANGE_DESC"
                   @on-change="rowData.item.checkChange"
-                  style="padding-left: 10px; width: 180px;">
+                  style="padding-left: 10px; width: 310px;">
                   <Checkbox
                     v-for="(option , index) in rowData.item.options"
                     :key="index"
@@ -53,6 +55,10 @@
                   style="width: 150px;"
                 />
               </template>
+            </businessForm>
+            <!-- 自动拒绝换货 -->
+            <p style="position: relative; top: 25px;">{{ vmI18n.t('form_label.e4') }}:</p>
+            <businessForm :form-config="formConfig2">
               <template #stockout="{ rowData }">
                 <div class="preLable">
                   <i-switch size="small"
@@ -60,7 +66,7 @@
                     :disabled="isEnable"
                     @on-change="rowData.item.switchChange" 
                   />
-                  <label :title="rowData.item.label" class="cust-form-label">{{ rowData.item.label }}：</label>
+                  <label :title="rowData.item.label" class="cust-label">{{ rowData.item.label }}：</label>
                 </div>
                 <label :title="rowData.item.subLabel1" :class="['cust-form-label', 'required', { hidden: !rowData.value.OOS_AUTO_REJECT }]">
                   <i>*</i>{{ rowData.item.subLabel1 }}：
@@ -94,7 +100,7 @@
                     :disabled="isEnable"
                     @on-change="rowData.item.switchChange"
                   />
-                  <label :title="rowData.item.label" class="cust-form-label">{{ rowData.item.label }}：</label>
+                  <label :title="rowData.item.label" class="cust-label">{{ rowData.item.label }}：</label>
                 </div>
                 <label :title="rowData.item.subLabel1" :class="['cust-form-label', 'required', { hidden: !rowData.value.DEVIATION_AUTO_REJECT }]">
                   <i>*</i>{{ rowData.item.subLabel1 }}：
