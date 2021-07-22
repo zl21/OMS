@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-22 17:14:01
+ * @LastEditTime: 2021-07-22 18:10:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -127,7 +127,7 @@ export default {
                   autosize: true,
                   min:1,
                   max: returnNum,
-                  disabled: this.orderStatus !== '0' ? true : false,
+                  disabled: this.orderStatus !== '0' && this.$route.params.itemId !== 'New' ? true : false,
                   regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
                 },
                 on: {
@@ -164,7 +164,7 @@ export default {
             render:(h,params)=>{
              return h('Input', {
                props: {
-                  disabled: this.orderStatus !== '0' ? true : false,
+                  disabled: this.orderStatus && this.$route.params.itemId !== 'New' !== '0' ? true : false,
                   value: params.row.AMT_ACTUAL_REFUND,
                   autosize: true,
                   regx: /^\d*\.{0,1}\d{0,2}$/,
@@ -328,10 +328,9 @@ export default {
     }
     // 单据状态 0:未审核
     this.orderStatus = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[6].valuedata;
-    if(this.orderStatus !== '0'){
+    if(this.orderStatus !== '0' && this.$route.params.itemId !== 'New'){
       this.tableConfig.businessButtonConfig.buttons[0].isShow = false
       this.tableConfig.businessButtonConfig.buttons[1].isShow = false
-      
     }
   },
   mounted(){

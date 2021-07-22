@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-07-14 17:02:50
+ * @LastEditTime: 2021-07-22 18:13:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
@@ -42,7 +42,8 @@
   width: 100%;
   height: 100%;
   background: url("../assets/img/loginBg.png") center / 100% no-repeat;
-  background-size: contain;
+  // background-size: contain;
+  background-size:auto 80%;
   /deep/ .ark-dropdown {
     margin: 10px 10px 20px;
   }
