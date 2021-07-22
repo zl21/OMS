@@ -31,7 +31,7 @@ export default {
         style: 'date', // 输入框类型
         label: $i18n.t('form_label.b9'), // 申请时间 输入框前文字
         colname: 'startEndTimes',
-        type: 'daterange',
+        type: 'datetimerange',
         value: 'startEndTimes', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         format: 'yyyy-MM-dd HH:mm:ss',
