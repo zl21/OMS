@@ -89,24 +89,6 @@ export default {
         (item) => item.colname == key
       );
     },
-    // 获取物流公司数据
-    async getLogistics(name, index = "") {
-      const _this = this;
-      _this.removeLoading = true;
-      const param = {
-        objid: _this.componentData.id,
-        logisticsInfo: name === undefined ? "" : name,
-      };
-      const res = await _this.service.common.getWarehouseLogisticsInfo(param);
-      _this.removeLoading = false;
-      if (res.data.code === 0) {
-        _this.jordanTableConfig.data = res.data.data.cpLogisticsList;
-        if (!index) {
-          _this.selectData = res.data.data.warehouseLogisticsItems;
-          _this.total = _this.selectData.length;
-        }
-      }
-    },
     // 确定
     async determine() {
       const _this = this;

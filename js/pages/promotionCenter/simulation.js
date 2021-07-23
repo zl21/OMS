@@ -76,14 +76,14 @@ export default {
       itemdata: {
         // 平台商品
         colid: 1700806533,
-        colname: `PS_C_SKU${Math.floor(Math.random() * 100)}`,
+        colname: `SG_B_CHANNEL_PRODUCT_ID${Math.floor(Math.random() * 100)}`,
         fkdesc: '门店档案',
         fkdisplay: 'drp',
         isfk: true,
         isnotnull: false,
         name: '',
         readonly: false,
-        reftable: 'PS_C_SKU',
+        reftable: 'SG_B_CHANNEL_PRODUCT',
         reftableid: 24801,
         valuedata: '',
         isObject: true,
@@ -122,6 +122,7 @@ export default {
         itemdata.fkdisplay = 'mop';
         itemdata.isObject = true;
         itemdata.version = '1.4';
+        itemdata.serviceId = 'r3-sg';
         return itemdata;
       } catch (e) {
         throw new Error(e);
