@@ -77,6 +77,19 @@
         selection: [],
         extendBtn: [
           {
+            webname: 'OC_ORDER_SEND_TIME', // 修改预计发货时间
+            btnclick: () => {
+              const self = this;
+              self.publicBouncedConfig.name = 'OC_ORDER_SEND_TIME';
+              self.publicBouncedConfig.url = 'modal/orderCenter/modifyPreDate';
+              self.publicBouncedConfig.confirmTitle = '修改预计发货时间';
+              self.publicBouncedConfig.width = 400;
+              setTimeout(() => {
+                self.$children.find((item) => item.name === 'OC_ORDER_SEND_TIME').openConfirm();
+              }, 100);
+            },
+          },
+          {
             webname: 'approvalOfAbnormalSellingPrice', // 售价异常审批
             btnclick: () => {
               const self = this;
