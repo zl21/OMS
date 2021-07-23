@@ -684,7 +684,7 @@ export default {
                 this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.selection[0].ID }).then(res => {
                   // 提前判断下该单据是否可拆单
                   if (res.data.code == 0) {
-                    if ((self.selection[0].PLATFORM === 4 && self.selection[0].PAY_TYPE === 2) || self.selection[0].PLATFORM === 7 || self.selection[0].PLATFORM === 50) {
+                    if ((self.selection[0].PLATFORM === 4 && self.selection[0].PAY_TYPE === 2) || self.selection[0].PLATFORM === 7 || (self.selection[0].PLATFORM === 50 && (!self.selection[0].RESERVE_VARCHAR02 || self.selection[0].RESERVE_VARCHAR02 == null))) {
                       self.$Message.warning({
                         content: self.vmI18n.t('modalTips.b1'), // 交易平台为当当，唯品会jitx，京东（货到付款）的订单不允许拆单
                         duration: 5,
