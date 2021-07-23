@@ -82,8 +82,8 @@ export default () => ({
         gift_methods: '1', // 赠送方式  1-全部送  2-顺序送  3-随机送
         list: [
           {
-            gift_products: {},
-            products: {} // 商品列表
+            gift_products: [],
+            products: [] // 商品列表
           }
         ]
       },
@@ -169,6 +169,7 @@ export default () => ({
         this.freshKey += 1;
         if (copy && copy > 1) this.getData(copy);
       } else {
+        // this.initData();
         if (copy && copy > 1) this.getInitData(copy);
       }
       this.initBtn();
