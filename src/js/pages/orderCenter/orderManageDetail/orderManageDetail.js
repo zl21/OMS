@@ -8,7 +8,6 @@ import OrderItem from '@/views/pages/OrderCenter/orderManageDetail/details/order
 import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
 import loading from '@/component/loading.vue';
 import comUtils from '@/assets/js/__utils__/common';
-import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 
 export default {
   name: 'OrderManageDetail',
