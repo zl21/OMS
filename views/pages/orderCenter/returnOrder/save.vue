@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-19 17:02:36
+ * @LastEditTime: 2021-07-23 19:24:36
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -70,13 +70,11 @@
       if (code === 0) {
         this.$Message.success(message || $i18n.t('modalTips.z9')); // 保存成功！
         this.$comUtils.tabCloseAppoint(this);
-        this.$destroy(true);
-        this.$store.commit('customize/TabOpen', {
-          id: 2624,
-          type: 'action',
-          name: 'OC_B_RETURN_ORDER',
-          label: $i18n.t('panel_label.a1'), // 退换货单
-        })
+            this.$store.commit('global/tabOpen', {
+              type: 'C',
+              label: $i18n.t('panel_label.a1'), // 退换货单
+              url: `/CUSTOMIZED/OC_B_RETURN_ORDER/2828`
+            });
       }
     },
   };

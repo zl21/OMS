@@ -589,10 +589,12 @@
       this.$OMS2.BtnConfig.target = self;
       BurgeonEvent.target = self;
       this.$OMS2.BtnConfig.singleType = 0;
+    
     },
     mounted() {
       const self = this;
       self.initList();
+
       /* setTimeout(() => {
         let ZH = localStorage.getItem("locale") == "zh"
         if(!ZH) {
