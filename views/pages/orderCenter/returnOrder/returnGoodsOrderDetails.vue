@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-23 17:59:54
+ * @LastEditTime: 2021-07-23 18:18:19
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -353,7 +353,7 @@ export default {
       }
       // 判断如果单据状态为确认/完成/取消 不可编辑  下发WMS状态 0：未下发 1: 下发中 2:下发成功 3:下发失败 4:撤回成功
       setTimeout(() => {
-        if (this.orderStatus !== 0 || ![1,3].includes(this.wmsIssueStatus)) {
+        if (this.orderStatus !== 0 || ![0,3].includes(this.wmsIssueStatus)) {
           BtnConfig[0].isShow = false;
           BtnConfig[1].isShow = false;
           BtnConfig[2].isShow = false;
@@ -450,6 +450,9 @@ export default {
       this.wmsIssueStatus = OC_B_RETURN_ORDER.WMS_ISSUE_STATUS
       sessionStorage.setItem("RETURN_STATUS", JSON.stringify(OC_B_RETURN_ORDER.RETURN_STATUS));
       sessionStorage.setItem("WMS_ISSUE_STATUS", JSON.stringify(OC_B_RETURN_ORDER.WMS_ISSUE_STATUS));
+      let orderStatus = sessionStorage.getItem("RETURN_STATUS");
+      let wmsIssueStatus = sessionStorage.getItem("WMS_ISSUE_STATUS");
+      console.log(orderStatus,wmsIssueStatus);
       this.IS_COMBINATION = OC_B_RETURN_ORDER.IS_COMBINATION;
       // 退货明细
       this.businessActionTable.columns = this.panelReturn ? REFUND_ITEM_TABTH : EXCHANGE_ITEM_TABTH; //表头
