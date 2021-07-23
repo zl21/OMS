@@ -688,9 +688,9 @@ export default {
             props: {
               value: params.row.QTY_REFUND,
               regx: /^[1-9]\d*$/,
-              max: params.row.RETURNABLE_QTY || 1,
+              max: Number(params.row.RETURNABLE_QTY || 1),
               min: 1,
-              disabled: params.row.RETURNABLE_QTY == 1,
+              disabled: Number(params.row.RETURNABLE_QTY) == 1,
               editable: true,
             },
             on: {
@@ -849,12 +849,12 @@ export default {
           if (it[pryKey] == item[pryKey]) {
             // 1.已经存在（数量累加起来，没超则累加，反之保持数量是最大值即可）
             const sumQ = item.QTY_REFUND + it.QTY_REFUND;
-            if (item.RETURNABLE_QTY > sumQ) {
+            if (Number(item.RETURNABLE_QTY) > sumQ) {
               item.QTY_REFUND += it.QTY_REFUND;
               const sum = Util.accAdd(item.REFUND_FEE, it.REFUND_FEE)
               item.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(sum);
             } else {
-              item.QTY_REFUND = it.RETURNABLE_QTY;
+              item.QTY_REFUND = Number(it.RETURNABLE_QTY);
             }
           } else if (it[pryKey] && !pryKeyArr.includes(it[pryKey])) {
             // 2.不存在该条明细（则直接push）
