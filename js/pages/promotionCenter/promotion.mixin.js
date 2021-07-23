@@ -148,9 +148,11 @@ export default () => ({
   },
   updated() { },
   async created() {
-    const buttons = self.$OMS2.BtnConfig.config();
-    console.log(buttons);
-    this.btnConfig.buttons = [...this.extendBtn];
+    if (this.customizedModuleName != 'PM_C_PROM_PRE_TEST') { // 模拟仿真
+      const buttons = self.$OMS2.BtnConfig.config();
+      console.log(buttons);
+      this.btnConfig.buttons = [...this.extendBtn];
+    }
     await groups.load();
     const routeId = this.$route.query.id;
     if (routeId > 0) {
