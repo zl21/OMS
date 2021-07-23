@@ -303,6 +303,12 @@ export default {
     this.isWatchChange = true;
     this.tamallExchangeReasons();
     this.ID > 0 && this.queryOrder();
+    this.subTableConfig = {
+      centerName: 'strategyPlatform',
+      tablename: this.labelDefaultValue,
+      objid: this.ID,
+      pageShow: true
+    }
   },
   created() { },
   methods: {

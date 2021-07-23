@@ -18,7 +18,7 @@
           {{ vmI18n.t('form_label.meet_conditions') }}
           <p slot="content">
             <!-- 自动同意换货 -->
-            <p style="position: relative; top: 17px;">{{ vmI18n.t('form_label.e3') }}:</p>
+            <label>{{ vmI18n.t('form_label.e3') }}:</label>
             <businessForm :form-config="formConfig2">
               <template #exchangeDesc="{ rowData }">
                 <div class="preLable">
@@ -57,7 +57,7 @@
               </template>
             </businessForm>
             <!-- 自动拒绝换货 -->
-            <p style="position: relative; top: 25px;">{{ vmI18n.t('form_label.e4') }}:</p>
+            <label style="position: relative; top: 12px;">{{ vmI18n.t('form_label.e4') }}:</label>
             <businessForm :form-config="formConfig2">
               <template #stockout="{ rowData }">
                 <div class="preLable">
