@@ -227,7 +227,7 @@ export default {
       }
       namelist.forEach(obj => {
         const row = {};
-        if (rs.reftable === 'SG_B_CHANNEL_PRODUCT') {
+        if (['PS_C_SKU', 'SG_B_CHANNEL_PRODUCT'].includes(rs.reftable)) {
           row.ECODE = obj.PS_C_SKU_ECODE || '';
           row.ENAME = obj.PS_C_PRO_ENAME || '';
           row.SUM = Number(obj.PRICE) || '';
