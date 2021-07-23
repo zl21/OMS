@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-07-22 20:30:21
+ * @LastEditTime: 2021-07-23 13:02:40
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -293,6 +293,7 @@ export default {
     inputenter(val) { 
       let str = val.target.value.replace(/\s+/g,"");
       R3.store.commit('customize/originalOrder',str);
+      
     },
     inputblur() {  },
     inputChange(val) {
