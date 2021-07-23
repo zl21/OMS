@@ -735,6 +735,11 @@ export default {
           dataAcessKey: 'OOID'
         },
         {
+          key: 'RESERVE_VARCHAR05',
+          title: '平台规格',
+          dataAcessKey: 'RESERVE_VARCHAR05'
+        },
+        {
           title: '商品重量(KG)',
           key: 'STANDARD_WEIGHT',
         },
