@@ -60,6 +60,13 @@ export default {
       this.$emit('closeActionDialog', false)
       return
     }
+    console.log(this.$parent.$parent.selectRowData);
+    let isValid = this.$parent.$parent.selectRowData.every(i => i.REFUND_STATUS == '5')
+    if (!isValid) {
+      this.$Message.warning('只支持【退款失败】的额外退款单单据进行退款失败处理！');
+      this.$emit('closeActionDialog', false)
+      return
+    }
   },
   mounted() {
     let _this = this.$parent.$parent.$parent.$refs.agTableElement
@@ -72,6 +79,7 @@ export default {
           field: 'PAY_TYPE',
           label: '支付方式',
           props: {
+            value: '1',
             options: selectData[0].combobox.map(em => {
               em.value = em.limitval
               em.label = em.limitdesc
