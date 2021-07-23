@@ -19,6 +19,7 @@
       :is-one-data="itemdata.isOneData"
       @easyData="getFkdialog"
       :version="itemdata.version || '1.3'"
+      :serviceId="itemdata.serviceId || 'r3-cp'"
     />
   </div>
 </template>

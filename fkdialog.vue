@@ -253,6 +253,10 @@ window.$i18n = i18n
 
 export default {
   props: {
+    serviceId: {
+      type: String,
+      default: 'r3-cp'
+    },
     version: {
       type: String
     }, // 兼容老接口返回的数据结构（eg.斯凯奇
@@ -509,7 +513,7 @@ export default {
       const param = new FormData();
       param.append('param', JSON.stringify(paramObj));
       console.log('595::');
-      return this.service.promotionCenter.screenresult(param).then((res) => {
+      return this.service.promotionCenter.screenresult(param, {serviceId: this.serviceId}).then((res) => {
         const response = this.version == '1.4' ? res.data.data : res.data;
         if (res.data.code !== 0) {
           return;
@@ -1026,7 +1030,7 @@ export default {
       const param = new FormData();
       param.append('param', JSON.stringify({ 'TABLENAME': this.tablename }));
       console.log('1384::');
-      this.service.promotionCenter.screen(param).then((res) => {
+      this.service.promotionCenter.screen(param, {serviceId: this.serviceId}).then((res) => {
         const response = res.data;
         if (response.code !== 0) {
           return;
