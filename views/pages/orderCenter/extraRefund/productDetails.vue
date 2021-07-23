@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-22 20:25:11
+ * @LastEditTime: 2021-07-23 14:02:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -48,7 +48,6 @@ export default {
               isShow: true,
               btnclick: (e) => {
                 let billNo = R3.store.state.customize.originalOrder;
-                console.log(billNo,'billNobillNo');
                 if(!billNo || billNo === ' '){
                   this.$Message.error('原订单编号不能为空！');
                   return;
@@ -118,23 +117,22 @@ export default {
             key: 'QTY_REFUND',
             title: '申请退货数量', // 申请退货数量：默认取原零售发货单可退数量，可编辑，仅支持录入大于0的正整数，且需小于等于原零售发货单可退数量；
             render:(h,params)=>{
-             let QTY_RETURN_APPLY = Number(params.row.QTY_RETURN_APPLY) || 0;
-             let returnNum = Number(params.row.QTY) - QTY_RETURN_APPLY;
-             let PRICE_ACTUCL = Number(params.row.PRICE_ACTUCL) || 0;
-             params.row.QTY_REFUND = returnNum
              return h('InputNumber', {
                 props: {
                   value: params.row.QTY_REFUND,
                   autosize: true,
                   min:1,
-                  max: returnNum,
+                  max: Number(params.row.QTY) - Number(params.row.QTY_RETURN_APPLY),
                   disabled: this.orderStatus !== '0' && this.$route.params.itemId !== 'New' ? true : false,
                   regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
                 },
                 on: {
                   'on-change': e => {
-                      let num =  this.$OMS2.omsUtils.floatNumber(Number(e) * Number(PRICE_ACTUCL))
+                      let num =  this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.PRICE_ACTUCL))
+                      console.log(e,params.row.PRICE_ACTUCL);
+                      // 申请退货数量
                       params.row.AMT_REFUND = isNaN(num) ? '0.00' : num;
+                      // 退货金额
                       params.row.QTY_REFUND = e;
                       this.tableConfig.data[params.index] = params.row;
                       R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
@@ -145,14 +143,6 @@ export default {
           },{
             key: 'AMT_REFUND',
             title: '退货金额', // 申请退款金额：为 申请退货数量*成交单价（成交单价为原零售发货单中记录的），保留两位小数； 
-            render:(h,params)=>{
-              let num = params.row.QTY_REFUND ? params.row.QTY_REFUND : Number(params.row.QTY) - Number(params.row.QTY_RETURN_APPLY)
-              let PRICE_ACTUCL = Number(params.row.PRICE_ACTUCL) || 0
-              let sum = this.$OMS2.omsUtils.floatNumber(num * PRICE_ACTUCL)
-              this.tableConfig.data[params.index] = params.row;
-              R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
-              return h('span', {}, sum);
-            }
           },{
             key: 'QTY_ACTUAL',
             title: '实际退货数量', // 实际退货数量：默认为0；
@@ -239,7 +229,6 @@ export default {
               // 数量 已退数量
               let returnNum = Number(params.row.QTY || 0) - QTY_RETURN_APPLY;
               // 单价   
-              console.log();
               return h('span', {}, returnNum * Number(params.row.PRICE_ACTUCL || 0));
             }
           },{
@@ -290,7 +279,6 @@ export default {
   },
   watch: {
     async isEdit(newVal) {
-      console.log('newVal:newVal',newVal);
       if(newVal === ' '){
         this.tableConfig.data = [],
         this.tableConfig.total = 0
@@ -315,14 +303,16 @@ export default {
     this.tableConfig.businessButtonConfig.buttons = buttonArr1
     let route = this.$route.params;
     if(!(this.$route.params.itemId == 'New')){
+      console.log('bushiNew');
        const subData = await this.$OMS2.omsUtils.initSubtable('OC_B_REFUND_ORDER_ITEM', route.itemId, '181618');
        this.tableConfig.data = subData.rowData;
+       console.log('subData.rowData:',subData.rowData);
        await sessionStorage.setItem('copyDetails',JSON.stringify(subData.rowData));
       //  编辑没有实际退款数量
        let columns = this.tableConfig.columns.filter(item => item.title !== '实际退货数量');
        this.tableConfig.columns = columns
-       let billNo = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata;
-       R3.store.commit('customize/originalOrder',billNo)
+      //  let billNo = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata;
+      //  R3.store.commit('customize/originalOrder',billNo)
     }
     // 单据状态 0:未审核
     this.orderStatus = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[6].valuedata;
@@ -355,6 +345,14 @@ export default {
       // 调用查询接口
       const {data:{code,data}} = await self.service.orderCenter.queryExtraReturnOrderItem(params);
       if(code === 0){
+        if(!isAdd){
+          data.ORDER_ITEM.forEach((item)=>{
+            item.QTY_REFUND = item.QTY - item.QTY_RETURN_APPLY || 0;
+            let PRICE_ACTUCL = item.PRICE_ACTUCL || 0
+            console.log(Number(item.QTY_REFUND),PRICE_ACTUCL);
+            item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(Number(item.QTY_REFUND) * Number(PRICE_ACTUCL));
+          })
+        }
         isAdd ? this.addDetailsConfig.data = data.ORDER_ITEM : this.tableConfig.data = data.ORDER_ITEM,
         isAdd ? this.addDetailsConfig.total = data.TOTAL : this.tableConfig.total = data.TOTAL
       }
