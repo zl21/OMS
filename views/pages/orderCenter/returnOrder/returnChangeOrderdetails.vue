@@ -599,6 +599,7 @@ export default {
       this.replaceProductTable.loading = false;
       if (code === 0) {
         // 处理表头和数据
+        if (data.tabth[0].colname == 'ID') data.tabth.splice(0, 1);
         let columns = data.tabth.map((element) => ({
           title: `${element.name}`,
           key: `${element.colname}`,

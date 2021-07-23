@@ -217,7 +217,7 @@ export default {
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         pageIndex: 1, // 页码
       },
@@ -338,6 +338,7 @@ export default {
       this.table.loading = false;
       if (code === 0) {
         // 处理表头和数据
+        if (data.tabth[0].colname == 'ID') data.tabth.splice(0, 1);
         this.table.columns = data.tabth.map(element => ({ title: `${element.name}`, key: `${element.colname}`, dataAcessKey: `${element.colname}` }));
         // 是否显示数据
         if (showData) {
