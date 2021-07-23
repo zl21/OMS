@@ -1293,7 +1293,7 @@ export default {
 .errTip {
   .ark-modal-confirm-body-info {
     textarea {
-      min-height: 40px;
+      min-height: 55px;
     }
   }
 }

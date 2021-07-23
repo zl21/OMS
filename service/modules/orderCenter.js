@@ -396,4 +396,5 @@ export default {
     addOrderLable:(params) => $network.post('/p/cs/oc/oms/v1/addOrderLable', params), //添加标记
     cancelOrderLable:(params) => $network.post('/p/cs/oc/oms/v1/cancelOrderLable' , params),  //取消标记
     orderExport:(params) => $network.post('/p/cs/oc/oms/v1/export' , params), //订单列表里的导入功能
+    updateDeliveryTime:(params) => $network.post('/p/cs/oc/b/oms/v1/ocborder/updateDeliveryTime' , params), // 零售列表-修改预计发货时间
 }
