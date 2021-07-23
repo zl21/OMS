@@ -43,6 +43,9 @@ export default {
   REFUSETOPAYOCBRETURNAFSEND: {
     component: () => import('@/views/modal/orderCenter/returngood/refuseToPayOcBReturnAfSend.vue')
   },
+  FINANCEREFUSEPAYMENTCMD: {
+    component: () => import('@/views/modal/orderCenter/returngood/financeRefusePaymentcmd.vue')
+  },
   CUSTOMSTANDLIVEORDERIMPORT: {
     component: () => import('@/views/modal/orderCenter/customstandliveorderimport.vue')
   },

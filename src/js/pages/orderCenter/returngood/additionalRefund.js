@@ -29,6 +29,18 @@ export default {
             }
           },
           {
+            text: '审核',
+            btnclick: () => {
+              // this.save();
+            }
+          },
+          {
+            text: '打款失败复审',
+            btnclick: () => {
+              // this.save();
+            }
+          },
+          {
             text: window.vmI18n.t('btn.back'), // 返回
             btnclick: () => {
               comUtils.tabCloseAppoint(this);

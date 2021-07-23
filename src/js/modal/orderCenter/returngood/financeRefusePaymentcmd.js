@@ -12,10 +12,10 @@ export default {
   data() {
     return {
       reason: '',
-      reasonType: '拒绝打款',
+      reasonType: '1',
       ruleValidate: {
         reason: [
-          { required: true, message: '拒绝打款原因不能为空!', trigger: 'blur' }
+          { required: true, message: ' ', trigger: 'blur' }
         ],
       },
       btnConfig: {
@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     determine() {
-      if (!this.reason) return this.$Message.warning('拒绝打款原因不能为空!');
+      // if (!this.reason) return this.$Message.warning('拒绝打款原因不能为空!');
       this.service.orderCenter.refuseToPayOcBReturnAfSend({ ids: this.idArray, reason: this.reason }).then(res=>{
         console.log(res);
         if (res.data.data.code == 0) {
@@ -75,6 +75,9 @@ export default {
           this.$emit('closeActionDialog');
         }
       });
+    },
+    reasonTypeChage() {
+      this.reason = ''
     }
   }
 };
