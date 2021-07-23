@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-23 14:02:09
+ * @LastEditTime: 2021-07-23 17:54:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -48,11 +48,15 @@ export default {
               isShow: true,
               btnclick: (e) => {
                 let billNo = R3.store.state.customize.originalOrder;
-                if(!billNo || billNo === ' '){
+                console.log(sessionStorage.getItem('billNo'));
+                if((!billNo || billNo === ' ' ) && sessionStorage.getItem('billNo') === null){
                   this.$Message.error('原订单编号不能为空！');
                   return;
                 }
                 this.addDetailsConfig.modal = true;
+                if(!billNo || billNo === ' '){
+                  billNo = sessionStorage.getItem('billNo')
+                }
                 this.getTable(true,billNo);
               } // 按钮点击事件
             },
@@ -123,7 +127,7 @@ export default {
                   autosize: true,
                   min:1,
                   max: Number(params.row.QTY) - Number(params.row.QTY_RETURN_APPLY),
-                  disabled: this.orderStatus !== '0' && this.$route.params.itemId !== 'New' ? true : false,
+                  disabled: this.orderStatus !== '0' ? true : false,
                   regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
                 },
                 on: {
@@ -156,7 +160,8 @@ export default {
             console.log(params.row.AMT_ACTUAL_REFUND);
              return h('Input', {
                props: {
-                  disabled: this.orderStatus !== '0' && this.$route.params.itemId !== 'New' ? true : false,
+                  // && this.$route.params.itemId !== 'New' 
+                  disabled: this.orderStatus !== '0' ? true : false,
                   value: params.row.AMT_ACTUAL_REFUND,
                   autosize: true,
                   regx: /^\d*\.{0,1}\d{0,2}$/,
@@ -308,12 +313,13 @@ export default {
        this.tableConfig.data = subData.rowData;
        console.log('subData.rowData:',subData.rowData);
        await sessionStorage.setItem('copyDetails',JSON.stringify(subData.rowData));
-      //  编辑没有实际退款数量
-       let columns = this.tableConfig.columns.filter(item => item.title !== '实际退货数量');
-       this.tableConfig.columns = columns
-      //  let billNo = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata;
-      //  R3.store.commit('customize/originalOrder',billNo)
-    }
+       let billNo = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata;
+       sessionStorage.setItem('billNo',billNo)
+      }else{
+        //  编辑没有实际退款数量
+        let columns = this.tableConfig.columns.filter(item => item.title !== '实际退货数量');
+        this.tableConfig.columns = columns
+      }
     // 单据状态 0:未审核
     this.orderStatus = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[6].valuedata;
     if(this.orderStatus !== '0' && this.$route.params.itemId !== 'New'){
@@ -331,7 +337,7 @@ export default {
     async getTable(isAdd,billNo,pageNum = 1,pageSize = 10){
       let self = this;
       // 筛选ids
-      let ids = this.tableConfig.data.map((item) => {return item.ID})
+      let ids
       let params = {
         BILL_NO:billNo,
         pageNum: pageNum,
@@ -339,9 +345,13 @@ export default {
       };
       // 是否是新增
       if (isAdd) {
+        if(!(this.$route.params.itemId == 'New')){
+          ids = this.tableConfig.data.map((item) => {return item.OC_B_ORDER_ITEM_ID})
+        } else {
+          ids = this.tableConfig.data.map((item) => {return item.ID})
+        }
         params = Object.assign(params,{EXCLUDE_IDS:ids ? ids.join() : ''});
       }
-
       // 调用查询接口
       const {data:{code,data}} = await self.service.orderCenter.queryExtraReturnOrderItem(params);
       if(code === 0){
@@ -433,6 +443,7 @@ export default {
   },
   destroyed(){
     sessionStorage.clear('copyDetails');
+    sessionStorage.clear('billNo');
   }
 };
 </script>

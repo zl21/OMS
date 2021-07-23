@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-22 20:50:54
+ * @LastEditTime: 2021-07-23 17:59:54
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -531,7 +531,7 @@ export default {
       if (PS_C_PRO_ECODE && ECODE) PS_C_PRO_ECODE = '';
       let fixedcolumns = { PS_C_PRO_ECODE, ECODE, ENAME };
       let searchdata = {
-        table: "PS_C_SKU",
+        table: "PS_C_SKU_TABLE",
         startindex: (Number(page) - 1)<0 ? 0 : (Number(page) - 1)  * pageSize,
         range: pageSize,
         fixedcolumns: fixedcolumns,
@@ -707,10 +707,10 @@ export default {
           });
         }, //换货数量
         PRICE_ACTUAL: (h, params) => {
-          return h("InputNumber", {
+          return h("Input", {
             props: {
               value: params.row.PRICE_ACTUAL,
-              regx: /^(([0-9] .[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*.[0-9] )|([0-9]*[1-9][0-9]*))$/,
+              regx: /^\+?\d+\.{0,1}\d{0,2}$/, // 还有 0后面紧跟数字的情况没兼容
               min: 1,
             },
             on: {

@@ -1,24 +1,25 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-07-23 13:02:40
+ * @LastEditTime: 2021-07-23 17:07:49
  * @LastEditors: Please set LastEditors
 -->
 <template>
   <div class="OC_B_ORDER_ID">
     <label class="itemLabel"> 零售发货单单号: </label>
     <Input
+      :disabled="disabled"
       :autocomplete="'new-password'"
       @on-click="iconclick"
       @on-enter="inputenter"
-      icon="ios-search"
+      :icon="iosSearch"
       v-model="BILL_NO"
       :placeholder="''"
       @on-blur="inputblur"
       @on-change="inputChange"
     />
     <Icon
-      v-if="BILL_NO"
+      v-if="!disabled"
       class="oriCodeclear"
       type="ios-close-circle"
       @click="clear"
@@ -93,6 +94,8 @@ export default {
   // mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {
+      disabled:false,
+      iosSearch:'ios-search',
       BILL_NO:'',
       vmI18n: $i18n,
       orderModal: false,
@@ -117,7 +120,7 @@ export default {
               this.formConfig.formValue.BUYER_NICK = '';
               this.formConfig.formValue.RECEIVER_MOBILE = '';
               // this.formEmpty(this, 'formConfig', ['ORDER_DATE', 'PAY_TIME']);
-              this.queryEnter(1, this.table.pageSize, true);
+              this.queryEnter(1, this.table.pageSize);
             }, // 按钮点击事件
           },
           {
@@ -125,7 +128,7 @@ export default {
             disabled: false, // 按钮禁用控制
             type: 'primary',
             btnclick: () => {
-              this.queryEnter(1, this.table.pageSize, true);
+              this.queryEnter(1, this.table.pageSize);
             }, // 按钮点击事件
           },
         ],
@@ -259,7 +262,6 @@ export default {
   watch:{
     BILL_NO(newVal){
       if(!newVal){
-        console.log(newVal);
         R3.store.commit('customize/originalOrder','');
       }
     }
@@ -272,17 +274,19 @@ export default {
   },
   mounted() {
     if(!(this.$route.params.itemId == 'New')){
+        this.disabled = true;
+        this.iosSearch = '';
         const ID = this.$route.params.itemId;
         const key = `V.OC_B_REFUND_ORDER_EXTRA.10825.${ID}`;
-      setTimeout(() => {
-        this.BILL_NO = this.$store.state[key].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata
-      }, 100);
+        setTimeout(() => {
+          this.BILL_NO = this.$store.state[key].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata
+        }, 100);
     }
   },
   methods: {
     clear(){
       this.BILL_NO = ' '
-      this.$emit('change', '', this);
+      this.$emit('change', '');
       R3.store.commit('customize/originalOrder', this.BILL_NO);
     },
     iconclick() {
@@ -293,7 +297,7 @@ export default {
     inputenter(val) { 
       let str = val.target.value.replace(/\s+/g,"");
       R3.store.commit('customize/originalOrder',str);
-      
+      this.queryEnter(1, this.table.pageSize,this.BILL_NO);
     },
     inputblur() {  },
     inputChange(val) {
@@ -302,7 +306,8 @@ export default {
     /* --------------------- 工具函数： --------------------- */
     keyDown() { },
     /* ------------------- 事件 part start ------------------- */
-    async queryEnter(pageNum = 1, pageSize = 10) {
+    async queryEnter(pageNum = 1, pageSize = 10,enter) {
+      console.log(this.BILL_NO);
       const self = this;
       this.table.loading = true;
       let formValue = this.formConfig.formValue;
@@ -310,7 +315,7 @@ export default {
       let params = {
         pageNum:pageNum,
         pageSize:pageSize,
-        BILL_NO: formValue.BILL_NO ? formValue.BILL_NO : paramsNull,
+        BILL_NO: formValue.BILL_NO || enter ? formValue.BILL_NO || enter : paramsNull,
         SOURCE_CODE: formValue.SOURCE_CODE ? formValue.SOURCE_CODE : paramsNull,
         EXPRESS_CODE: formValue.EXPRESS_CODE ? formValue.EXPRESS_CODE : paramsNull,
         RECEIVER_NAME:formValue.RECEIVER_NAME ? formValue.RECEIVER_NAME : paramsNull,
@@ -322,6 +327,9 @@ export default {
       if(code === 0){
         this.table.data = data.ORDER;
         this.table.total = data.TOTAL;
+        if(enter){
+          this.$emit('change', [{ID:this.table.data[0].BILL_NO}]);
+        }
       }
     },
     onRowClick(row, index) {
@@ -333,11 +341,11 @@ export default {
     },
     pageChange(page) {
       this.table.pageIndex = page;
-      this.queryEnter(page, this.table.pageSize, showData)
+      this.queryEnter(page, this.table.pageSize)
     },
     pageSizeChange(size) {
       this.table.pageSize = size;
-      this.queryEnter(1, size, showData)
+      this.queryEnter(1, size)
     }
     /* ------------------- 子表事件 part end ------------------- */
   },
