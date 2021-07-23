@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-07-20 16:16:43
+ * @LastEditTime: 2021-07-23 16:59:36
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/service/modules/financeCenter.js
+ */
 // 财务中心
 import R3 from '@syman/burgeon-r3';
 
@@ -8,6 +16,8 @@ export default {
    */
   // 列表 
   getPayableAdjustmentList: params => network.post('/p/cs/getPayableAdjustmentList', params),
+  // 授权 
+  getAuth: params => $network.post('/p/cs/ac/v1/alipayAccountManage/getAuth', params),
   // 反客审 
   cancelAuditPayableAdjustment: params => network.post('/p/cs/cancelAuditPayableAdjustment', params),
   // 客审

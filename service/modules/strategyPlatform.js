@@ -3,6 +3,9 @@ import qs from 'qs'
 
 export default {  //
 
+  selItemByMainId: (params) =>
+  $network.post('/p/cs/st/v1/presellStrategy/selItemByMainId', params), // 物流策略-物流派送范围等级回显
+
   deliveryAreaqueryLogisticsLevel: (params) =>
   $network.post('/p/cs/st/v1/deliveryArea/queryLogisticsLevel', params), // 物流策略-物流派送范围等级回显
 
