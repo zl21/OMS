@@ -911,7 +911,7 @@ export default {
       const ooId = self.formConfig.formValue.SOURCE_CODE;
       if (!ooId) return
       self.loading = true;
-      let searchdata = { "table": "OC_B_ORIG_ORDER", "startindex": 0, "range": 10, "fixedcolumns": { "SOURCE_CODE": ooId }, "column_include_uicontroller": true, "isolr": false }
+      let searchdata = { "table": "OC_B_ORIG_ORDER_TABLE", "startindex": 0, "range": 10, "fixedcolumns": { "SOURCE_CODE": ooId }, "column_include_uicontroller": true, "isolr": false }
       let formData = new FormData();
       formData.append("searchdata", JSON.stringify(searchdata));
       const res = await self.service.common.QueryList(formData, { serviceId: "r3-oc-oms" }).catch(() => {
