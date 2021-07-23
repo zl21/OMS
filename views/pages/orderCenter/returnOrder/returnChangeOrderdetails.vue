@@ -233,7 +233,7 @@ export default {
         modal: false,
         businessButtonConfig: {
           typeAll: "default", // 按钮统一风格样式
-          btnsite: "left", // 按钮位置 (right , center , left)
+          btnsite: "right", // 按钮位置 (right , center , left)
           buttons: [
             {
               type: "primary", // 按钮类型
@@ -581,7 +581,7 @@ export default {
         this.replaceProductTable.businessFormConfig.formValue;
       // sku和spu同时存在 优先查询sku
       if (PS_C_PRO_ECODE && ECODE) PS_C_PRO_ECODE = '';
-      let fixedcolumns = { PS_C_PRO_ECODE, ECODE, ENAME };
+      let fixedcolumns = { PS_C_PRO_ECODE, ECODE, ENAME, "ISACTIVE": ["Y"] };
       let searchdata = {
         table: "PS_C_SKU_TABLE",
         startindex: page,
@@ -1291,10 +1291,10 @@ export default {
   }
 }
 .errTip {
- .ark-modal-confirm-body-info {
-   textarea {
-     min-height: 40px;
-   }
- }
+  .ark-modal-confirm-body-info {
+    textarea {
+      min-height: 40px;
+    }
+  }
 }
 </style>
