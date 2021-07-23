@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-20 19:02:17
- * @LastEditTime: 2021-05-22 09:39:11
+ * @LastEditTime: 2021-07-22 13:18:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/strategyPlatform/holdStrategyAddOrEdit.vue
@@ -53,7 +53,13 @@
                   <span v-if="rowData.value.ORDER_TAB_TYPE" class="preLable-item"> * </span>
                   <span>{{ rowData.item.label }}：</span>
                 </div>
-                <Checkbox v-model="rowData.value.ORDER_FLAG" @on-change="rowData.item.checkChange" :disabled="rowData.item.disabled">直播</Checkbox>
+                <Checkbox v-model="rowData.value.ORDER_FLAG" @on-change="rowData.item.checkChange1" :disabled="rowData.item.disabled">{{Il8n.t('other.live')}} </Checkbox>
+               <Checkbox v-model="rowData.value.preSale" @on-change="rowData.item.checkAllGroupChange" :disabled="rowData.item.disabled"> {{Il8n.t('other.preSale')}} </Checkbox>
+              <span v-show="rowData.value.show">
+                <Checkbox v-model="rowData.value.preSale1" @on-change="rowData.item.checkChange" :disabled="rowData.item.disabled"> {{Il8n.t('other.fixedBudget')}}</Checkbox>
+                <Checkbox v-model="rowData.value.preSale2" @on-change="rowData.item.checkChange" :disabled="rowData.item.disabled"> {{Il8n.t('other.allAdvance')}}</Checkbox>
+                <Checkbox v-model="rowData.value.preSale3" @on-change="rowData.item.checkChange" :disabled="rowData.item.disabled"> {{Il8n.t('other.selfPrediction')}}</Checkbox>
+              </span>
               </template>
             </businessForm>
           </p>
@@ -61,7 +67,10 @@
         <Panel name="panel_action">
           <!-- 执行动作 -->
           {{ vmI18n.t("panel_label.ae") }}
-          <p slot="content">
+
+          
+          
+          <p slot="content" v-show="formConfig2.formValue.ORDER_FLAG && !formConfig2.formData[2].disabled || formConfig1.formValue.ISACTIVE == '启用'">
             <businessForm :form-config="formConfig3" @keyDown="keyDown">
               <template #spec03="{ rowData }">
                 <template v-if="formConfig3.formValue.RELEASE_TIME_TYPE === 1">
@@ -73,7 +82,7 @@
                     <Option v-for="item in rowData.item.orderTimeOption" :value="item.value" :key="item.value">{{ item.label }}</Option>
                   </Select>
                   <!-- 时长 -->
-                  <!-- <Input style="display:inline-block;width: 100px;"  v-model="rowData.value.FIXED_DURATION"/> -->
+                  <Input style="display:inline-block;width: 100px;"  v-model="rowData.value.FIXED_DURATION"/>
                   <InputNumber :min="1" v-model="rowData.value.FIXED_DURATION"></InputNumber>
                   <!-- 类型 -->
                   <Select v-model="rowData.value.TIME_UNIT" class="fixedSelect">
@@ -83,6 +92,58 @@
               </template>
             </businessForm>
           </p>
+           <p slot="content" v-show="formConfig2.formValue.preSale && !formConfig2.formData[2].disabled || formConfig1.formValue.ISACTIVE == '启用' ">
+            <businessForm :form-config="formConfig4" @keyDown="keyDown">
+              <template #spec04="{ rowData }">
+                <template v-if="formConfig4.formValue.RELEASE_TIME_TYPE === 1">
+                  <DatePicker class="fiexdTime" v-model="rowData.value.RELEASE_TIME" :options="rowData.item.optionsTime" format="yyyy-MM-dd HH:mm:ss" type="datetime" confirm @on-change="rowData.item.datePickerChange"></DatePicker>
+                </template>
+                <template v-else>
+          
+                  <Select v-model="rowData.value.RELEASE_DAY_TYPE" class="fixedSelect">
+                    <Option v-for="item in rowData.item.orderTimeOption" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                  </Select>
+             
+                  <Input style="display:inline-block;width: 100px;"  v-model="rowData.value.FIXED_DURATION"/>
+                  <InputNumber :min="1" v-model="rowData.value.FIXED_DURATION"></InputNumber>
+   
+                  <Select v-model="rowData.value.TIME_UNIT" class="fixedSelect">
+                    <Option v-for="item in rowData.item.timeUnitOption" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                  </Select>
+                </template>
+              </template>
+            </businessForm>
+          </p>
+           <p slot="content" v-show="!formConfig2.formValue.ORDER_FLAG && !formConfig2.formValue.preSale || formConfig2.formData[2].disabled || formConfig1.formValue.ISACTIVE == '启用'">
+            <businessForm :form-config="formConfig5" @keyDown="keyDown">
+              <template #spec05="{ rowData }">
+                <template v-if="formConfig5.formValue.RELEASE_TIME_TYPE === 1">
+                  <DatePicker class="fiexdTime" v-model="rowData.value.RELEASE_TIME" :options="rowData.item.optionsTime" format="yyyy-MM-dd HH:mm:ss" type="datetime" confirm @on-change="rowData.item.datePickerChange"></DatePicker>
+                </template>
+                <template v-else>
+                  <!-- 下单类型 -->
+                  <Select v-model="rowData.value.RELEASE_DAY_TYPE" class="fixedSelect">
+                    <Option v-for="item in rowData.item.orderTimeOption" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                  </Select>
+                  <!-- 时长 -->
+                  <Input style="display:inline-block;width: 100px;"  v-model="rowData.value.FIXED_DURATION"/>
+                  <InputNumber :min="1" v-model="rowData.value.FIXED_DURATION"></InputNumber>
+                  <!-- 类型 -->
+                  <Select v-model="rowData.value.TIME_UNIT" class="fixedSelect">
+                    <Option v-for="item in rowData.item.timeUnitOption" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                  </Select>
+                </template>
+              </template>
+            </businessForm>
+          </p>
+          
+        
+            <p slot="content">
+            <businessForm :form-config="formConfig6" @keyDown="keyDown">
+            </businessForm>
+          </p>
+
+
         </Panel>
       </Collapse>
       <div v-if="ID !== '-1'" class="customized-detail-table">
