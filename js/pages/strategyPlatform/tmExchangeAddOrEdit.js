@@ -280,7 +280,7 @@ export default {
       labelList: [
         {
           label: $i18n.t('panel_label.operationLog'), // 操作日志
-          value: 'ST_HOLD_ORDER_STRATEGY_LOG'
+          value: 'ST_TMALL_EXCHANGE_LOG'
         }
       ],
       subTableConfig: {
@@ -288,7 +288,7 @@ export default {
         tablename: '',
         objid: '',
       },
-      labelDefaultValue: 'ST_HOLD_ORDER_STRATEGY_LOG', // 设置tab默认值
+      labelDefaultValue: 'ST_TMALL_EXCHANGE_LOG', // 设置tab默认值
       panelDefaultValue: ['panel_baseInfo', 'panel_condition', 'panel_action'] // 设置默认打开'基础信息'
     };
   },

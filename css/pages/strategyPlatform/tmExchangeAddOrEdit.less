@@ -43,7 +43,7 @@
       .preLable {
         display: flex;
         align-items: center;
-        width: 170px;
+        width: 185px;
         text-align: left;
         & > span {
           vertical-align: middle;
@@ -63,7 +63,7 @@
     }
     .cust-label, .cust-form-label {
       padding: 0 10px;
-      width: 160px;
+      width: 195px;
       white-space: nowrap;
       overflow: hidden;
       text-align: right;
@@ -72,6 +72,21 @@
     }
     .cust-label {
       text-align: left;
+    }
+  }
+  .wrap .ark-form-item-content {
+    flex-wrap: wrap;
+  }
+  .changeForm {
+    display: flex;
+    flex-wrap: wrap;
+    .changeFormInput {
+      width: 390px;
+    }
+    .changeFormInput.last {
+      width: 590px;
+      margin-left: 185px;
+      margin-top: 15px;
     }
   }
 }
