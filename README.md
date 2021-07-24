@@ -273,3 +273,4 @@
 | v1.2.34 | 扩展businessForm组件 |
 | v1.2.33 | easyMatrix-接口修复 |
 | v1.2.36 | fkdialog 支持网关 |
+| v1.2.37 | fkdialog 接口异常关闭loading |

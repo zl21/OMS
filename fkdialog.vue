@@ -1044,6 +1044,9 @@ export default {
           return obj;
         });
         this.tree_loading = false;
+      }).finally(() => {
+        this.tree_loading = false;
+        this.dialogClose();
       });
       this.screen_request_initialize().then(() => {
         if (this.r_result.length !== 0) { // 先拿到配置的名字
