@@ -11,7 +11,14 @@ class DialogConfig {
     maskClosable: false,
   }
 
-  static customConfig = { //rturngoodModifyRemarks
+  static customConfig = {
+    OC_ORDER_SEND_TIME: {
+      title: '修改预计发货时间',
+      width: 400,
+      url: 'modal/orderCenter/modifyPreDate',
+      name: 'modifyPreDate',
+      excludeString: 'modifyPreDate',
+    },
     ModifyRemarks: {
       title: '修改单据备注', // 修改单据备注
       width: 650,

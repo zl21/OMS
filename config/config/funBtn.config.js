@@ -14,6 +14,9 @@ class BtnConfig {
     loading: false, // 按钮加载
     buttons: [
       {
+        webname: 'OC_ORDER_SEND_TIME',
+      },
+      {
         webname: 'informWMSToCreateNew', // 退货单-通知WMS新建
         btnclick: () => this.btnMainHandler('wmsCreate'),
       },

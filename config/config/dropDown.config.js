@@ -13,6 +13,10 @@ class DropDownConfig {
     let self = DropDownConfig.target
     this.singleType = singleType
     switch (val) {
+      case 'OC_ORDER_SEND_TIME': { // 修改预计发货时间
+        this.dropDownMainHandler('OC_ORDER_SEND_TIME')
+        break
+      }
       case 'manualReturnCreation': {
         // commonUtils.navigateMain(-1, 'TabOpen', 'OC_B_RETURN_ORDER_VIRTUAL_TABLE', 'panel_label.addReturnOrder')
         R3.store.commit('global/tabOpen', {
@@ -126,6 +130,19 @@ class DropDownConfig {
           // }
         })
         break
+    }
+  }
+
+  static modifyPreDate(selectData, type) {
+    let self = DropDownConfig.target
+    const status = selectData.map((item) => item.ORDER_STATUS);
+    if (!status.includes(1) && !status.includes(2)) {
+      self.$Message.warning('非缺货、待审核订单不允许修改预计发货时间！');
+      self.btnConfig.loading = false
+      return
+    } else {
+      const IDS = selectData.map((item) => item.ID);
+      this.successHandler(IDS, type, '', 'modifyPreDate')
     }
   }
 
@@ -331,6 +348,11 @@ class DropDownConfig {
      */
     let funName, tips, paramsType
     switch (type) {
+      case 'OC_ORDER_SEND_TIME':
+        funName = 'modifyPreDate'
+        tips = 'd8'
+        paramsType = 4
+        break
       case 'modifyLogistics':
         funName = 'modifyLogisticsHandler'
         tips = 'c6'
@@ -474,7 +496,7 @@ class DropDownConfig {
   /**
    * 打开弹窗处理（主要是处理一下要传给弹窗的数据）
    * @param {Array } ids 
-   * @param {String} objName burgeon-business-components/common/js/publicDialog.js下对应的key
+   * @param {String} objName （burgeon-business-components/common/js/publicDialog.js）dialogs.config.js下对应的key
    * @param {String} componentDataType 用于判断要填充给什么子组件（弹窗里的哪个组件）的componentData
    * @param {String} tableType 组件名
    */
