@@ -1044,7 +1044,7 @@ export default {
           return obj;
         });
         this.tree_loading = false;
-      }).finally(() => {
+      }).catch(() => {
         this.tree_loading = false;
         this.dialogClose();
       });
