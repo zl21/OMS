@@ -10,6 +10,7 @@
 <script>
 import businessButton from "professionalComponents/businessButton";
 import businessForm from "professionalComponents/businessForm";
+import dateUtil from '@/assets/js/__utils__/date.js';
 
 export default {
   components: {
@@ -31,22 +32,20 @@ export default {
           {
             style: 'date',
             label: $i18n.t('form_label.e2'), // 预计发货时间
-            value: 'timerange',
-            type: 'datetimerange',
+            colname: 'dateTime',
+            type: 'datetime',
             width: '24',
             format: 'yyyy-MM-dd HH:mm:ss', // 时间格式
             startDate: new Date(),
             options: {
               disabledDate(date) {
-                return isDate
-                  ? date && date.valueOf() > Date.now() - 86400000
-                  : date && date.valueOf() > Date.now() - 8.64e7 * (new Date().getDate());
+                return date && date.valueOf() < Date.now() - 86400000;
               }
             },
           },
         ],
         formValue: {
-          timerange: "", // 
+          dateTime: "", // 
         },
       },
       loading: false,
@@ -71,84 +70,32 @@ export default {
           },
         ],
       }, // 确定取消按钮
-      selectData: [],
-      selectAllList: [],
-      total: 0,
-      cancelModel: false,
-      name: "",
-      delId: "",
-      removeLoading: false,
     };
   },
-  mounted() {
-    // this.getLogistics();
-  },
+  mounted() { },
   methods: {
-    querItem(key, type) {
-      return this[type ? type : "formConfig"].formData.find(
-        (item) => item.colname == key
-      );
-    },
     // 确定
     async determine() {
       const _this = this;
-      if (!_this.formConfig.formValue.CP_C_LOGISTICS_ID) {
-        _this.$Message.warning("请选择物流公司！");
+      const dateTime = _this.formConfig.formValue.dateTime;
+      if (!dateTime) {
+        _this.$Message.warning("请选择预计发货时间！");
         return false;
       }
       _this.loading = true;
-      let param = JSON.parse(JSON.stringify(_this.componentData));
-      param.CP_C_LOGISTICS_ID = +_this.formConfig.formValue.CP_C_LOGISTICS_ID;
-      // const res = await this.service.orderCenter.updateLogistics(param);
+      const param = {
+        orderIds: _this.componentData.ids,
+        dateTime: dateUtil.getFormatDate(new Date(dateTime), 'yyyy-MM-dd HH:mm:ss')
+      }
       const {
         data: { data, code, message },
-      } = await _this.service.orderCenter.updateLogistics(param);
+      } = await _this.service.orderCenter.updateDeliveryTime(param).catch(() => {
+        _this.loading = false;
+      });
       if (code === 0) {
         _this.$parent.$parent.closeConfirm();
         _this.$Message.success(message);
         _this.$parent.$parent.$parent.query();
-      } else if (code == 1 && data) {
-        _this.$parent.$parent.closeConfirm();
-        let tabData = data.map((row, index) => {
-          row.INDEX = ++index;
-          row.BILL_NO = row.objno;
-          row.RESULT_MSG = row.message;
-          return row;
-        });
-        this.$OMS2.omsUtils.tipShow(
-          "confirm",
-          _this,
-          data,
-          message,
-          function (h) {
-            return h("Table", {
-              props: {
-                columns: [
-                  {
-                    title: "序号",
-                    key: "INDEX",
-                  },
-                  {
-                    title: "ID",
-                    key: "objid",
-                  },
-                  {
-                    title: "单据编号",
-                    key: "BILL_NO",
-                  },
-                  {
-                    title: $i18n.t('form_label.e0'), // 失败原因
-                    key: "RESULT_MSG",
-                  },
-                ],
-                data: tabData,
-              },
-            });
-          }
-        );
-      } else if (code == 1 && !data) {
-        _this.$parent.$parent.closeConfirm();
-        _this.$Message.error(message);
       } else {
         // 走框架报错
       }
