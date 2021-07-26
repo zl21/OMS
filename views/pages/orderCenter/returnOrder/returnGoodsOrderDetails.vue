@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-26 12:05:25
+ * @LastEditTime: 2021-07-26 13:14:53
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -359,7 +359,7 @@ export default {
           BtnConfig[2].isShow = false;
           this.businessActionTable.columns = this.businessActionTable.columns.filter((i) => delete i.render);
         }
-      }, 1000);
+      }, 100);
     })
   },
   async mounted() {

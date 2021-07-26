@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-07-23 18:23:03
+ * @LastEditTime: 2021-07-26 13:22:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -92,7 +92,7 @@ export default {
     //  下发WMS状态 0：未下发 1: 下发中 2:下发成功 3:下发失败 4:撤回成功
     let orderStatus = sessionStorage.getItem("RETURN_STATUS");
     let wmsIssueStatus = sessionStorage.getItem("WMS_ISSUE_STATUS");
-    this.status = orderStatus == 0  && ['0','3'].includes(Striing(wmsIssueStatus));
+    this.status = orderStatus == 0  && ['0','3'].includes(wmsIssueStatus.toString()) ? true : false
   },
   methods:{
     inputChange(e){
