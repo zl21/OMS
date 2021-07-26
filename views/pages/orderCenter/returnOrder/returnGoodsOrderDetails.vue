@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-23 18:18:19
+ * @LastEditTime: 2021-07-26 12:05:25
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -556,7 +556,7 @@ export default {
           key: `${element.colname}`,
           dataAcessKey: `${element.colname}`,
         }));
-        this.replaceProductTable.columns = columns;
+        this.replaceProductTable.columns = columns.filter((item) => item.key !='ID');
         // 处理数据
         let tableKey = data.row.length ? Object.keys(data.row[0]) : []; // 获取行数据的key
         this.getCurrenData = data.row.length ? data.row : [];
@@ -767,7 +767,7 @@ export default {
       const self = this;
       let amt = 0;
       let qty = 0;
-      let PRICE_ACTUAL = 0;
+      let REAL_AMT = 0;
       // 退货明细
       const key1 = this.panelReturn ? "QTY_REFUND" : "QTY_EXCHANGE"; // 申请退货数量 : 换货数量
       const key2 = this.panelReturn ? "REFUND_FEE" : "AMT_EXCHANGE"; // 退货金额 : 成交金额
@@ -777,7 +777,7 @@ export default {
       self.businessActionTable.data.forEach((item) => {
         qty += Number(item[key1] || 0);
         amt = Util.accAdd(Number(item[key2]), Number(amt));
-        PRICE_ACTUAL = Util.accAdd(Number(item['PRICE_ACTUAL']), Number(PRICE_ACTUAL));
+        REAL_AMT = Util.accAdd(Number(item['REAL_AMT']), Number(REAL_AMT));
       });
       setTimeout(() => {
         // 退货明细
@@ -786,7 +786,7 @@ export default {
             index: `${$i18n.t("other.total")}`, // 合计
             REFUND_FEE: this.$OMS2.omsUtils.floatNumber(amt),
             QTY_REFUND: qty,
-            PRICE_ACTUAL: PRICE_ACTUAL // 成交单价
+            REAL_AMT: this.$OMS2.omsUtils.floatNumber(REAL_AMT) // 成交单价
           });
         } else {
           self.businessActionTable.totalData.push({
