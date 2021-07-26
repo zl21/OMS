@@ -336,7 +336,7 @@ export const globalStore = {
     // 编辑 退换货
     returnOrderChangeItem(state,n){
       state.returnOrderChangeItem = n;
-      console.log(state.returnOrderChangeItem);
+      console.log(state.returnOrderChangeItem,n);
     },
     COMPENSATE(state, n) {
       let ks = Object.keys(state.COMPENSATE);

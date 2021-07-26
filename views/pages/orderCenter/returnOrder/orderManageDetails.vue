@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-07 16:19:54
- * @LastEditTime: 2021-07-16 22:48:55
+ * @LastEditTime: 2021-07-26 15:03:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/orderManageDetails.vue
 -->
 <template>
   <div class="customized-detail" v-loading="loading">
-    <div class="returnBtn">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="returnBtn" />
     </div>
     <div class="customized-detail-main">
@@ -170,6 +170,7 @@
         btnConfig: BtnConfig.config(),
         // 
         returnBtn: {
+          btnsite:'right', // 按钮对齐方式
           typeAll: 'default',
           buttons: [
             {

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-26 14:30:50
+ * @LastEditTime: 2021-07-26 18:16:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -132,8 +132,9 @@ export default {
               let QTY_RETURN_APPLY = params.row.QTY_RETURN_APPLY || 0;
               // 数量 已退数量
               let returnNum = Number(params.row.QTY || 0) - QTY_RETURN_APPLY;
-              // 单价   
-              return h('span', {}, returnNum * Number(params.row.PRICE_ACTUAL || 0));
+              // 成交单价
+              // let PRICE_ACTUAL = params.row.PRICE ? params.row.PRICE : params.row.PRICE_ACTUAL;
+              return h('span', {}, returnNum * Number(params.row.PRICE || 0));
             }
           },{
             key: 'QTY',
@@ -213,17 +214,17 @@ export default {
     this.tableConfig.businessButtonConfig.buttons = buttonArr1
     let route = this.$route.params;
     if(!(this.$route.params.itemId == 'New')){
-      console.log('bushiNew');
        const subData = await this.$OMS2.omsUtils.initSubtable('OC_B_REFUND_ORDER_ITEM', route.itemId, '181618');
        this.tableConfig.data = subData.rowData;
-       console.log('subData.rowData:',subData.rowData);
        await sessionStorage.setItem('copyDetails',JSON.stringify(subData.rowData));
        let billNo = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata;
        sessionStorage.setItem('billNo',billNo)
       }else{
-        //  编辑没有实际退款数量
-        let columns = this.tableConfig.columns.filter(item => item.title !== '实际退货数量');
-        this.tableConfig.columns = columns
+        //  新增没有实际退款数量
+        setTimeout(() => {
+          let columns = this.tableConfig.columns.filter(item => item.title != '实际退货数量');
+          this.tableConfig.columns = columns
+        }, 100);
       }
     // 单据状态 0:未审核
     this.orderStatus = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[6].valuedata;
@@ -283,8 +284,8 @@ export default {
                 },
                 on: {
                   'on-change': e => {
-                      let num = this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.PRICE_ACTUAL))
-                      console.log(e,params.row.PRICE_ACTUAL);
+                      // let PRICE_ACTUAL = this.$route.params.itemId != 'New' ? params.row.PRICE || 0 : params.row.PRICE_ACTUAL || 0
+                      let num = this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.PRICE || 0))
                       // 申请退货数量
                       params.row.AMT_REFUND = isNaN(num) ? '0.00' : num;
                       // 退货金额
@@ -300,10 +301,7 @@ export default {
             title: '退货金额', // 申请退款金额：为 申请退货数量*成交单价（成交单价为原零售发货单中记录的），保留两位小数； 
           },{
             key: 'QTY_ACTUAL',
-            title: '实际退货数量', // 实际退货数量：默认为0；
-            render:(h,params)=>{
-              return h('span', {}, 0);
-            }
+            title: '实际退货数量' // 实际退货数量：默认为0；
           },{
             key: 'AMT_ACTUAL_REFUND',
             title: '退款金额', // 退款金额：默认取“申请退款金额”，可编辑，仅支持录入正数，保留两位小数
@@ -362,9 +360,10 @@ export default {
       if(code === 0){
         if(!isAdd){
           data.ORDER_ITEM.forEach((item)=>{
-            item.QTY_REFUND = item.QTY - item.QTY_RETURN_APPLY || 0;
-            let PRICE_ACTUAL = item.PRICE_ACTUAL || 0;
-            item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(Number(item.QTY_REFUND) * Number(PRICE_ACTUAL))
+            console.log(this.$route.params.itemId,item);
+            // let PRICE_ACTUAL = item.PRICE ? item.PRICE : item.PRICE_ACTUAL;
+            // console.log(PRICE_ACTUAL);
+            item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(Number(item.QTY_REFUND) * Number(PRICE || 0))
           })
         }
         isAdd ? this.addDetailsConfig.data = data.ORDER_ITEM : this.tableConfig.data = data.ORDER_ITEM,
