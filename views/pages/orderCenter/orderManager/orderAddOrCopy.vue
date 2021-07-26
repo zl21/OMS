@@ -144,7 +144,7 @@ export default {
     const validateReceiveAddress = BurgeonValidate.validateReceiveAddress;
     return {
       vmI18n: $i18n,
-      showRe: false,
+      showRe: true,
       inputArrBase: [
         "SELLER_MEMO",
         "BUYER_MESSAGE",
@@ -1375,6 +1375,8 @@ export default {
         self.jordanTableConfig.isShowImportBtn = false;
         await self.orderCopy();
         await self.getOrderDatail();
+        // 复制不展示'收货人信息'
+        self.showRe = false;
       }
       this.loading = false;
       setTimeout(() => {
@@ -1541,6 +1543,8 @@ export default {
       const self = this;
       /* =========== 保存校验 start =========== */
       if (self.sourceId) {
+        self.formConfigRe.formatDate = [];
+        self.formConfigRe.formValue = {};
         self.modify.master = Object.assign(
           self.formConfigBase.formValue,
           self.formConfigRe.formValue
@@ -1566,7 +1570,7 @@ export default {
           let no = valueArr.indexOf("COLLECT_AMT");
           valueArr.splice(no, 1);
         }
-        self.modify.master.PAY_TYPE = self.formConfigBase.formValue.PAY_TYPE; // 保存入参默认值
+        // self.modify.master.PAY_TYPE = self.formConfigBase.formValue.PAY_TYPE; // 保存入参默认值
       }
       self.modify.master.PAY_TIME = self.formConfigBase.formValue.PAY_TIME; // 保存入参默认值
       const drpArr = [
