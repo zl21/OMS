@@ -159,6 +159,7 @@ export default {
             label: '原定单编号', // 原定单编号
             colname: 'billNo',
             width: '8',
+            regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
             inputenter: () => this.queryEnter(1, 10)
           },
           {
@@ -166,6 +167,7 @@ export default {
             label: $i18n.t('form_label.platform_billNo'), // 平台单号
             colname: 'sourceCode',
             width: '8',
+            regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
             inputenter: () => this.queryEnter(1, 10)
           },
           {
@@ -173,6 +175,7 @@ export default {
             label: '物流单号', // 物流单号
             colname: 'expressCode',
             width: '8',
+            regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
             inputenter: () => this.queryEnter(1, 10)
           },
           {
@@ -194,6 +197,11 @@ export default {
             label: $i18n.t('form_label.consignee_phone'), // 收货人手机
             colname: 'receiverMobile',
             width: '8',
+            // regx: /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
+            // regx: /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/,
+            // regx: /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/,
+            // regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
+            // regx: /^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(17[0,1,3,5,6,7,8]))\d{8}$/,
             inputenter: () => this.queryEnter(1, 10)
           },
         ],
@@ -298,6 +306,12 @@ export default {
     async queryEnter(page = 1, pageSize = 10, isMounted) {
       console.log(page, pageSize);
       const self = this;
+      const ph = this.formConfig.formValue.receiverMobile;
+      const regx = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/;
+      if (ph && !regx.test(ph)) {
+        self.$Message.warning('收货人手机格式不正确！');
+        return;
+      }
       // 清空数据
       this.table.loading = true;
       this.table.data = [];
