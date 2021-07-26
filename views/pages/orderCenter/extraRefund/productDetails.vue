@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-26 18:16:57
+ * @LastEditTime: 2021-07-26 20:57:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -363,7 +363,7 @@ export default {
             console.log(this.$route.params.itemId,item);
             // let PRICE_ACTUAL = item.PRICE ? item.PRICE : item.PRICE_ACTUAL;
             // console.log(PRICE_ACTUAL);
-            item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(Number(item.QTY_REFUND) * Number(PRICE || 0))
+            item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(Number(item.QTY_REFUND) * Number(item.PRICE || 0))
           })
         }
         isAdd ? this.addDetailsConfig.data = data.ORDER_ITEM : this.tableConfig.data = data.ORDER_ITEM,
