@@ -126,6 +126,7 @@ export const globalStore = {
     REDUNDANT_ORDER_ID: '',
     originalOrder:'',
     extraoOrderDetails:[],
+    clear:false,
   },
   mutations: {
     language(state, x) {
@@ -347,7 +348,10 @@ export const globalStore = {
     },
     extraoOrderDetails(state,n){
       state.extraoOrderDetails = n;
-    }
+    },
+    clear(state,n){
+      state.clear = n;
+    },
   },
   modules: {
     jordanStore

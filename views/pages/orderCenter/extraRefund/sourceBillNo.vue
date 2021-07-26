@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-07-23 17:07:49
+ * @LastEditTime: 2021-07-26 09:40:31
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -285,9 +285,10 @@ export default {
   },
   methods: {
     clear(){
-      this.BILL_NO = ' '
+      this.BILL_NO = ''
       this.$emit('change', '');
-      R3.store.commit('customize/originalOrder', this.BILL_NO);
+      // 设置清除
+      R3.store.commit('customize/clear', true);
     },
     iconclick() {
       this.orderModal = true;
@@ -307,7 +308,6 @@ export default {
     keyDown() { },
     /* ------------------- 事件 part start ------------------- */
     async queryEnter(pageNum = 1, pageSize = 10,enter) {
-      console.log(this.BILL_NO);
       const self = this;
       this.table.loading = true;
       let formValue = this.formConfig.formValue;
@@ -350,7 +350,7 @@ export default {
     /* ------------------- 子表事件 part end ------------------- */
   },
   destroyed(){
-     R3.store.commit('customize/originalOrder',' ');
+     R3.store.commit('customize/originalOrder','');
   }
 };
 

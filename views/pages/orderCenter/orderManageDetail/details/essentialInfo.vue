@@ -2,7 +2,7 @@
 <template>
   <Row :gutter="12" class="order-content-tab">
      <!-- 收货信息 * 地址 And 备注 -->
-    <Col span="9" >
+    <Col span="8" >
       <div class="order-tab-content">
         <div class="order-tab-title">
           <!-- 收货信息 -->
@@ -61,7 +61,7 @@
       </div>
     </Col>
     <!-- 基础资料 -->
-    <Col span="15" >
+    <Col span="16" >
       <div class="order-tab-content">
         <div class="order-tab-title">
           <!-- 基础资料 -->
