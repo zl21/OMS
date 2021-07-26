@@ -135,8 +135,14 @@ class DropDownConfig {
 
   static modifyPreDate(selectData, type) {
     let self = DropDownConfig.target
-    const status = selectData.map((item) => item.ORDER_STATUS);
-    if (!status.includes(1) && !status.includes(2)) {
+    let flag = false;
+    for (const it of selectData) {
+      if (![1,2].includes(it.ORDER_STATUS)) {
+        flag = true;
+        break
+      }
+    }
+    if (flag) {
       self.$Message.warning('非缺货、待审核订单不允许修改预计发货时间！');
       self.btnConfig.loading = false
       return

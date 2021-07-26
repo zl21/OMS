@@ -45,7 +45,7 @@ export default {
           },
         ],
         formValue: {
-          dateTime: "", // 
+          dateTime: new Date(), // 默认当前时间
         },
       },
       loading: false,
