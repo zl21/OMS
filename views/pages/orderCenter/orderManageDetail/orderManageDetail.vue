@@ -1,6 +1,6 @@
 <template>
   <div class="customized-detail" v-loading="loading">
-    <div class="returnBtn">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="returnBtn" />
     </div>
     <div class="customized-detail-main">

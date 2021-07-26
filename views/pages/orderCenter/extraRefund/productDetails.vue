@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-26 11:29:21
+ * @LastEditTime: 2021-07-26 14:17:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -363,8 +363,8 @@ export default {
         if(!isAdd){
           data.ORDER_ITEM.forEach((item)=>{
             item.QTY_REFUND = item.QTY - item.QTY_RETURN_APPLY || 0;
-            let PRICE_ACTUCL = item.PRICE_ACTUCL || 0;
-            item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(Number(item.QTY_REFUND) * Number(PRICE_ACTUCL));
+            let PRICE_ACTUAL = item.PRICE_ACTUAL || 0;
+            item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(Number(item.QTY_REFUND) * Number(PRICE_ACTUAL))
           })
         }
         isAdd ? this.addDetailsConfig.data = data.ORDER_ITEM : this.tableConfig.data = data.ORDER_ITEM,

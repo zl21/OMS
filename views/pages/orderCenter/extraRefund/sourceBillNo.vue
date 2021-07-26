@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-07-26 09:40:31
+ * @LastEditTime: 2021-07-26 14:01:54
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -34,26 +34,26 @@
       class-name="ark-dialog"
       title="关联原单"
     >
-    <div class="customized-modal">
-      <div class="customized-detail-main">
-        <businessForm :form-config="formConfig" />
+      <div class="customized-modal">
+        <div class="customized-detail-main">
+          <businessForm :form-config="formConfig" />
+        </div>
+        <div class="customized-detail-btn">
+          <businessButton :btn-config="btn" />
+        </div>
+        <div class="customized-detail-table">
+          <business-action-table
+            :jordan-table-config="table"
+            @on-row-click="onRowClick"
+            @on-row-dblclick="onRowDblclick"
+            @on-page-change="pageChange"
+            @on-page-size-change="pageSizeChange"
+          />
+        </div>
       </div>
-      <div class="customized-detail-btn">
-        <businessButton :btn-config="btn" />
+      <div class="dialog-footer" slot="footer">
+        <businessButton :btn-config="btnConfigMo" />
       </div>
-      <div class="customized-detail-table">
-        <business-action-table
-          :jordan-table-config="table"
-          @on-row-click="onRowClick"
-          @on-row-dblclick="onRowDblclick"
-          @on-page-change="pageChange"
-          @on-page-size-change="pageSizeChange"
-        />
-      </div>
-    </div>
-    <div class="dialog-footer" slot="footer">
-      <businessButton :btn-config="btnConfigMo" />
-    </div>
     </Modal>
   </div>
 </template>
@@ -119,6 +119,7 @@ export default {
               this.formConfig.formValue.RECEIVER_NAME = '';
               this.formConfig.formValue.BUYER_NICK = '';
               this.formConfig.formValue.RECEIVER_MOBILE = '';
+              console.log('this.formConfig.formValue:',this.formConfig.formValue);
               // this.formEmpty(this, 'formConfig', ['ORDER_DATE', 'PAY_TIME']);
               this.queryEnter(1, this.table.pageSize);
             }, // 按钮点击事件
@@ -291,6 +292,12 @@ export default {
       R3.store.commit('customize/clear', true);
     },
     iconclick() {
+      this.formConfig.formValue.BILL_NO = '';
+      this.formConfig.formValue.SOURCE_CODE = '';
+      this.formConfig.formValue.EXPRESS_CODE = '';
+      this.formConfig.formValue.RECEIVER_NAME = '';
+      this.formConfig.formValue.BUYER_NICK = '';
+      this.formConfig.formValue.RECEIVER_MOBILE = '';
       this.orderModal = true;
       // 获取
       this.queryEnter();
