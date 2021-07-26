@@ -1,21 +1,15 @@
 <template>
   <!-- 退换货订单-查询原始订单编号 -->
-  <div class="searchOOID customized-detail" v-loading="loading">
-    <div class="customized-detail-main">
-      <businessForm :form-config="formConfig" />
-    </div>
-    <div class="customized-detail-btn">
-      <businessButton :btn-config="btn" />
-    </div>
-    <div class="customized-detail-table">
-      <business-action-table
-        :jordan-table-config="table"
-        @on-row-click="onRowClick"
-        @on-row-dblclick="onRowDblclick"
-        @on-page-change="pageChange"
-        @on-page-size-change="pageSizeChange"
-      />
-    </div>
+  <div class="searchOOID customized-modal" v-loading="loading">
+    <businessForm :form-config="formConfig" />
+    <businessButton :btn-config="btn" />
+    <business-action-table
+      :jordan-table-config="table"
+      @on-row-click="onRowClick"
+      @on-row-dblclick="onRowDblclick"
+      @on-page-change="pageChange"
+      @on-page-size-change="pageSizeChange"
+    />
   </div>
 </template>
 
