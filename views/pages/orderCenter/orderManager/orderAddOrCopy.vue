@@ -1104,7 +1104,7 @@ export default {
               const self = this;
               return h("InputNumber", {
                 props: {
-                  value: params.row.QTY,
+                  value: Number(params.row.QTY),
                   regx: /^[0-9]\d*$/,
                   min: 1,
                   editable: true,
