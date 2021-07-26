@@ -61,7 +61,7 @@ export default {
       return
     }
     console.log(this.$parent.$parent.selectRowData);
-    let isValid = this.$parent.$parent.selectRowData.every(i => i.REFUND_STATUS == '5')
+    let isValid = this.$parent.$parent.selectRowData.every(i => i.REFUND_STATUS.val == '退款失败')
     if (!isValid) {
       this.$Message.warning('只支持【退款失败】的额外退款单单据进行退款失败处理！');
       this.$emit('closeActionDialog', false)
