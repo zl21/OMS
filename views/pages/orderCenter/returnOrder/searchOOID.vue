@@ -1,6 +1,6 @@
 <template>
   <!-- 退换货订单-查询原始订单编号 -->
-  <div class="searchOOID customized-modal" v-loading="loading">
+  <div class="searchOOID" v-loading="loading">
     <businessForm :form-config="formConfig" />
     <businessButton :btn-config="btn" />
     <business-action-table

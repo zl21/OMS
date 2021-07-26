@@ -100,7 +100,7 @@
     </div>
     <!-- 查询原始订单编号 -->
     <Modal v-model="orderModal" width="900" titleAlign="left" :closable="true" :mask="true" class-name="ark-dialog" :title="vmI18n.t('form_label.cv')">
-        <div class="dialog-footer" slot="footer">
+        <div class="modal-footer" slot="footer">
             <businessButton :btn-config="btnConfigMo" />
         </div>
         <searchOOID :orderData="orderData" @getRowData="getRowData"></searchOOID>
