@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-26 14:17:26
+ * @LastEditTime: 2021-07-26 14:30:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -133,7 +133,7 @@ export default {
               // 数量 已退数量
               let returnNum = Number(params.row.QTY || 0) - QTY_RETURN_APPLY;
               // 单价   
-              return h('span', {}, returnNum * Number(params.row.PRICE_ACTUCL || 0));
+              return h('span', {}, returnNum * Number(params.row.PRICE_ACTUAL || 0));
             }
           },{
             key: 'QTY',
@@ -283,8 +283,8 @@ export default {
                 },
                 on: {
                   'on-change': e => {
-                      let num =  this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.PRICE_ACTUCL))
-                      console.log(e,params.row.PRICE_ACTUCL);
+                      let num = this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.PRICE_ACTUAL))
+                      console.log(e,params.row.PRICE_ACTUAL);
                       // 申请退货数量
                       params.row.AMT_REFUND = isNaN(num) ? '0.00' : num;
                       // 退货金额
