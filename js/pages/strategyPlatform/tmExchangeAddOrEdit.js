@@ -23,6 +23,7 @@ export default {
       modify: {
         master: {}
       },
+      backup: {}, // 备份数据
       loading: false,
       isWatchChange: false, // 监听
       isModify: false,
@@ -173,7 +174,7 @@ export default {
             checkChange: val => {
               console.log(val);
               let newVal
-              let oldVal = this.modify.master.EXCHANGE_DESC || []
+              let oldVal = this.modify.master.EXCHANGE_DESC || this.backup.EXCHANGE_DESC
               if (
                 oldVal.length == 0 && val.includes(2) 
                 || !oldVal.includes('2') && val.includes('2') 
@@ -195,7 +196,7 @@ export default {
             }
           },
           {
-            label: $i18n.t('form_label.ch'), // 缺货自动拒绝,
+            label: $i18n.t('form_label.ck'), // 缺货自动拒绝,
             subLabel1: $i18n.t('form_label.cl'), // 缺货自动拒绝换货原因
             subLabel2: $i18n.t('form_label.cm'), // 缺货自动拒绝文案
             style: 'formCompile',
@@ -338,6 +339,7 @@ export default {
         this.formConfig2.formValue.OOS_AUTO_REJECT = !!data.OOS_AUTO_REJECT
         this.formConfig2.formValue.DEVIATION_AUTO_REJECT = !!data.DEVIATION_AUTO_REJECT
         this.formConfig2.formValue.EXCHANGE_DESC = data.EXCHANGE_DESC ? data.EXCHANGE_DESC.split(',') : []
+        this.backup.EXCHANGE_DESC = this.formConfig2.formValue.EXCHANGE_DESC
         this.setEnable()
         this.setRequired('IS_AUTO_APPROVE')
         this.setRequired('OOS_AUTO_REJECT')
