@@ -13,7 +13,7 @@
             <businessForm :form-config="formConfigBase" @keyDown="keyDown" />
           </p>
         </Panel>
-        <Panel name="2">
+        <Panel name="2" v-show="showRe">
           <!-- 收货人信息 -->
           {{ vmI18n.t("common.consigneeInformation") }}
           <p slot="content">
@@ -144,6 +144,7 @@ export default {
     const validateReceiveAddress = BurgeonValidate.validateReceiveAddress;
     return {
       vmI18n: $i18n,
+      showRe: false,
       inputArrBase: [
         "SELLER_MEMO",
         "BUYER_MESSAGE",
@@ -1124,14 +1125,14 @@ export default {
                     if (pa && inputQTY) {
                       // 成交金额 = 成交单价 * 数量 （取这个
                       // 6.24变更：成交单价 = 成交金额 / 数量
-                      // params.row.REAL_AMT = this.$OMS2.omsUtils.floatNumber(pa * inputQTY, 2);
-                      params.row.PRICE_ACTUAL = this.$OMS2.omsUtils.floatNumber(ra / inputQTY, 2);
+                      // params.row.REAL_AMT = $omsUtils.floatNumber(pa * inputQTY, 2);
+                      params.row.PRICE_ACTUAL = $omsUtils.floatNumber(ra / inputQTY, 2);
                       // ra = Number(params.row.REAL_AMT);
                       // pa = Number(params.row.PRICE_ACTUAL);
                       console.log(ra, ad, osa, price, inputQTY);
                       const aaa = ra + ad + osa - price * inputQTY;
                       console.log('四舍五入前：', aaa);
-                      params.row.ADJUST_AMT = this.$OMS2.omsUtils.floatNumber(ra + ad + osa - price * inputQTY, 2);
+                      params.row.ADJUST_AMT = $omsUtils.floatNumber(ra + ad + osa - price * inputQTY, 2);
                       console.log('params.row.ADJUST_AMT', params.row.ADJUST_AMT);
                     } else {
                       params.row.REAL_AMT = '0.00';
@@ -1228,7 +1229,7 @@ export default {
             key: "ADJUST_AMT",
             dataAcessKey: "ADJUST_AMT",
             render: (h, params) =>
-              h("span", {}, this.$OMS2.omsUtils.floatNumber(params.row.ADJUST_AMT || 0, 2)),
+              h("span", {}, $omsUtils.floatNumber(params.row.ADJUST_AMT || 0, 2)),
           },
         ],
       },
@@ -1339,7 +1340,7 @@ export default {
       }
       const self = this;
       this.loading = true;
-      const data = await this.$OMS2.omsUtils.getObject(
+      const data = await $omsUtils.getObject(
         "OC_B_ORDER_VIRTUAL_TABLE",
         id
       );
@@ -1351,11 +1352,11 @@ export default {
           base = it.childs;
         }
       }
-      self.formConfigBase = this.$OMS2.omsUtils.initFormConfig(
+      self.formConfigBase = $omsUtils.initFormConfig(
         base,
         self.formConfigBase
       );
-      self.formConfigRe = this.$OMS2.omsUtils.initFormConfig(
+      self.formConfigRe = $omsUtils.initFormConfig(
         re,
         self.formConfigRe
       );
@@ -1366,9 +1367,9 @@ export default {
     async initObjItem(id) {
       const self = this;
       this.loading = true;
-      // const data = await this.$OMS2.omsUtils.getObject('OC_B_ORDER_VIRTUAL_TABLE', id);
-      // self.formConfigBase = this.$OMS2.omsUtils.initFormConfig(data.addcolums[2].childs, self.formConfigBase);
-      // self.formConfigRe = this.$OMS2.omsUtils.initFormConfig(data.addcolums[1].childs, self.formConfigRe);
+      // const data = await $omsUtils.getObject('OC_B_ORDER_VIRTUAL_TABLE', id);
+      // self.formConfigBase = $omsUtils.initFormConfig(data.addcolums[2].childs, self.formConfigBase);
+      // self.formConfigRe = $omsUtils.initFormConfig(data.addcolums[1].childs, self.formConfigRe);
       if (self.sourceId) {
         // 复制不展示明细导入按钮
         self.jordanTableConfig.isShowImportBtn = false;
@@ -1424,7 +1425,7 @@ export default {
         ]; */
         // self.querItem('CP_C_LOGISTICS_ID').itemdata.pid = data.CP_C_LOGISTICS_ID;
         // self.querItem('CP_C_LOGISTICS_ID').itemdata.valuedata = data.CP_C_LOGISTICS_ENAME;
-        self.formConfigBase = this.$OMS2.omsUtils.transformForm(
+        self.formConfigBase = $omsUtils.transformForm(
           data,
           self.formConfigBase,
           self.inputArrBase,
@@ -1476,7 +1477,7 @@ export default {
           "CP_C_REGION_CITY_ID",
           "CP_C_REGION_AREA_ID",
         ];
-        self.formConfigRe = this.$OMS2.omsUtils.transformForm(
+        self.formConfigRe = $omsUtils.transformForm(
           data,
           self.formConfigRe,
           inputArrRe,
@@ -1582,7 +1583,7 @@ export default {
         self.formConfigBase.formValue,
         self.formConfigRe.formValue
       );
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(
+      const mes = $omsUtils.validatorNotEmpty(
         formBoth,
         valueArr,
         drpArr
@@ -1674,7 +1675,7 @@ export default {
         self.modify.master = {};
         self.jordanTableConfig.data = [];
         // 跳转详情
-        // this.$OMS2.omsUtils.navigateMain(data.ID, 'TabOpen', 'ORDERMANAGEDETAILS', 'panel_label.addReturnOrder')
+        // $omsUtils.navigateMain(data.ID, 'TabOpen', 'ORDERMANAGEDETAILS', 'panel_label.addReturnOrder')
         if (data) self.ID = data;
         setTimeout(() => {
           this.$comUtils.tabCloseAppoint(this);
@@ -1722,7 +1723,7 @@ export default {
       setTimeout(() => {
         self.jordanTableConfig.totalData.push({
           selection: `${$i18n.t("other.total")}:`, // 合计
-          REAL_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2), // 精确到两位小数
+          REAL_AMT: $omsUtils.floatNumber(amt, 2), // 精确到两位小数
           QTY: qty,
         });
       }, 10);
@@ -1899,11 +1900,11 @@ export default {
         it.pryKey && (it.pryKey = it.OOID || "" + "_" + it.PS_C_SKU_ECODE);
         allDa.forEach((item) => {
           !item.pryKey && (item.pryKey = item.OOID || "" + "_" + item.PS_C_SKU_ECODE);
-          pryKeyArr = this.$OMS2.omsUtils.sonList(allDa, "pryKey");
+          pryKeyArr = $omsUtils.sonList(allDa, "pryKey");
           if (!it.OOID && item.pryKey == it.pryKey) {
             // 1.非复制的且已存在该条明细(已经存在的明细都是刚刚新增的，不是复制带出来的，且，即将新增的是已经存在的，累加)
             item.QTY += it.QTY;
-            item.REAL_AMT = this.$OMS2.omsUtils.floatNumber(Util.accAdd(item.REAL_AMT, it.REAL_AMT), 2);
+            item.REAL_AMT = $omsUtils.floatNumber(Util.accAdd(item.REAL_AMT, it.REAL_AMT), 2);
           } else if (!it.OOID && !pryKeyArr.includes(it.pryKey)) {
             // 2.非复制的且不存在该条明细
             self.jordanTableConfig.data.push(it);
@@ -1944,17 +1945,17 @@ export default {
       const allDa = self.jordanTableConfig.data;
       const selDa = self.jordanTableConfig.selectData;
       if (!selDa.length) {
-        this.$OMS2.omsUtils.msgTips(self, "warning", "a8");
+        $omsUtils.msgTips(self, "warning", "a8");
         return;
       }
       // 取差集展示：
-      self.jordanTableConfig.data = this.$OMS2.omsUtils.getDifferentArr(
+      self.jordanTableConfig.data = $omsUtils.getDifferentArr(
         allDa,
         selDa,
         "pryKey"
       );
       this.totalNum();
-      // const selectKey = this.$OMS2.omsUtils.sonList(selDa, 'pryKey');
+      // const selectKey = $omsUtils.sonList(selDa, 'pryKey');
       self.jordanTableConfig.selectData = [];
     },
     tableImport() {
