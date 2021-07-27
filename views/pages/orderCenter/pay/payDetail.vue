@@ -95,14 +95,14 @@ export default {
                 }
                 const allDa = this.tableConfig.data;
                 const selDa = this.tableConfig.selectData;
-                this.tableConfig.data = this.$OMS2.omsUtils.getDifferentArr(
+                this.tableConfig.data = $omsUtils.getDifferentArr(
                   allDa,
                   selDa,
                   "PS_C_SKU_ECODE"
                 );
                 // this.totalNum();
                 this.tableConfig.total = this.tableConfig.data.length;
-                let deleteIds = this.$OMS2.omsUtils.sonList(selDa, 'ID')
+                let deleteIds = $omsUtils.sonList(selDa, 'ID')
                 deleteIds = deleteIds.filter(id => id != '-1');
                 R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ deleteIds })));
                 const detail = this.tableConfig.data;
@@ -116,6 +116,7 @@ export default {
         businessFormConfig: {}, // 表单配置
         columns: [], // 表头
         data: [], // 数据配置
+        // data: [{ "COMPENSATE_AMT": '0.00', "COMPENSATE_QTY": 0, "OC_B_ORDER_DELIVERY_ID": null, "OC_B_ORDER_ID": null, "PRICE": 23, "PRICE_ACTUAL": 23, "PS_C_PRO_ECODE": "0011", "PS_C_PRO_ENAME": "轩妈中秋大礼包", "PS_C_SKU_ECODE": "12343214432", "PS_C_SKU_ENAME": "12343214432", "PS_C_SPEC1_ENAME": null, "PS_C_SPEC2_ENAME": null, "PS_C_SPEC3_ENAME": null, "QTY": 0, "REAL_AMT": '0.00', "ID": "-1" }],
         selectData: [],
         pageShow: true, // 控制分页是否显示
         loading: false,
@@ -144,8 +145,14 @@ export default {
                 this.$Message.warning('请选中一条单据！');
                 return false
               } else {
-                this.addData.forEach(it => {
-                })
+                debugger
+                if (!this.exCode || this.exCode == '-1') {
+                  // 未关联原单-展示0.00
+                  this.addData.forEach(it => {
+                    it.COMPENSATE_AMT = it.COMPENSATE_AMT === 0 ? '0.00' : it.COMPENSATE_AMT;
+                    it.REAL_AMT = it.REAL_AMT === 0 ? '0.00' : it.REAL_AMT;
+                  })
+                }
                 this.tableConfig.data = this.tableConfig.data.concat(this.addData);
                 this.tableConfig.total += this.addData.length;
                 const detail = this.tableConfig.data;
@@ -163,6 +170,9 @@ export default {
     };
   },
   computed: {
+    exCode() {
+      return R3.store.state.customize.COMPENSATE.other.expressCode
+    },
     ID() {
       return this.$route.params.itemId && this.$route.params.itemId != 'New' ? this.$route.params.itemId : '-1';
     },
@@ -281,10 +291,12 @@ export default {
           return h('InputNumber', {
             props: {
               value: Number(params.row.COMPENSATE_QTY || 0),
-              regx: /^[1-9]\d*$/,
+              regx: /^[1-9]\d*$/, // 此组件正则不管用
               max: (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? Number(params.row.QTY || 0) : Infinity,
-              min: 0,
+              min: (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? 1 : 0, // 关联了原单最小1，反之最小0
               editable: true,
+              // formatter: value => `${value}`.replace(/\D+|^0+[0-9]+/g, ''),
+              // parser: value => value.replace(/\D+|^0+[0-9]+/g, ''),
             },
             on: {
               'on-change': e => {
@@ -293,10 +305,33 @@ export default {
                     注：若主表未关联原订单，则赔付数量默认为0；
                  * 2.赔付金额：默认为 赔付数量*成交单价（ PRICE_ACTUAL ），可手动修改，但不能超过“赔付数量*成交单价”，保留两位小数；
                  */
-                params.row.COMPENSATE_QTY = e;
-                params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(e * Number(params.row.PRICE_ACTUAL || 0), 2);
+                let cq = e, flag1, flag2;
+                const zz = /^[1-9]*[1-9][0-9]*$/;
+                const zz0 = /^[0-9]*[1-9][0-9]*$/;
+                if (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) {
+                  flag1 = zz.test(Number(cq).toString());
+                } else {
+                  flag2 = zz0.test(Number(cq).toString());
+                }
+                if (!flag1) {
+                  cq = 1
+                }
+                if (!flag2) {
+                  cq = 0
+                }
+                params.row.COMPENSATE_QTY = cq ? cq : (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? 1 : 0;
+                params.row.COMPENSATE_AMT = $omsUtils.floatNumber(cq * Number(params.row.PRICE_ACTUAL || 0), 2);
+                // ++params.row._rowKey;
+                // params.row._rowKey = $omsUtils.generateKey();
                 this.tableConfig.data[params.index] = params.row;
                 R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
+              },
+              'on-blur': e => {
+                const cq = params.row.COMPENSATE_QTY;
+                if (!cq) {
+                  params.row.COMPENSATE_QTY = (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? 1 : 0;
+                  params.row._rowKey = $omsUtils.generateKey();
+                }
               }
             }
           });
@@ -318,9 +353,9 @@ export default {
                 //   // const ca = Number(e);
                 //   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL || 0);
                 //   if (ca > relCa) {
-                //     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(relCa, 2);
+                //     params.row.COMPENSATE_AMT = $omsUtils.floatNumber(relCa, 2);
                 //   } else {
-                //     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
+                //     params.row.COMPENSATE_AMT = $omsUtils.floatNumber(ca, 2);
                 //   }
                 //   this.tableConfig.data[params.index] = JSON.parse(JSON.stringify(params.row));
                 //   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
@@ -333,10 +368,10 @@ export default {
                   const ca = Number(e.target._value);
                   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL);
                   if (ca > relCa) {
-                    params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(relCa, 2);
+                    params.row.COMPENSATE_AMT = $omsUtils.floatNumber(relCa, 2);
                     ++params.row._rowKey;
                   } else {
-                    params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
+                    params.row.COMPENSATE_AMT = $omsUtils.floatNumber(ca, 2);
                   }
                   this.tableConfig.data[params.index] = params.row;
                   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
