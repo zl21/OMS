@@ -29,6 +29,22 @@ export default {
             }
           },
           {
+            text: '复制',
+            btnclick: () => {
+              this.$store.commit('customize/TabHref', {
+                id: this.$route.params.customizedModuleId, // 单据id
+                type: 'action', // 类型action
+                name: 'EXTRAREFUND', // 文件名
+                label: '额外退款复制', // tab中文名
+                query: Object.assign({
+                  id: this.$route.params.customizedModuleId, // 单据id
+                  tabTitle: '额外退款复制', // tab中文名
+                  type: 'copy'
+                }) // 带的参数
+              });
+            }
+          },
+          {
             text: '审核',
             btnclick: () => {
               const _this = this;
@@ -921,6 +937,8 @@ export default {
       if (this.IMAGE == '') return this.$Message.warning('附件必填!');
       if (!this.tableConfig.data.length) return this.$Message.warning('退款明细必填!');
       if (this.returnInfo.formValue.OC_B_RETURN_TYPE_ENAME == '退货' && !this.returnInfo.formValue.RESERVE_BIGINT02) return this.$Message.warning('退款大类=退货时，退货签收状态必填!');
+      // 签收状态为“未签收”时该字段必填，其他选填，否则点击保存时提示”签收状态为“未签收”时，退货物流单号必填！”
+      if (this.returnInfo.formValue.RESERVE_BIGINT02 == '1' && !this.returnInfo.formValue.RESERVE_VARCHAR02) return this.$Message.warning('签收状态为“未签收”时，退货物流单号必填!');
 
 
 
