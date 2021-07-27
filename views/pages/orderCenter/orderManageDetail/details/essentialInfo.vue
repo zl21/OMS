@@ -2,31 +2,29 @@
 <template>
   <Row :gutter="12" class="order-content-tab">
      <!-- 收货信息 * 地址 And 备注 -->
-    <Col span="8" >
+    <Col span="6" >
       <div class="order-tab-content">
         <div class="order-tab-title">
           <!-- 收货信息 -->
           <span>{{ vmI18n.t('table_label.receivingInfo') }}</span>
           <div class="title-right">
-            <p v-if="butArr[0]['isShow']">
+            <p v-if="butArr[0]['isShow']"  @click="eyeClick">
               <span>
                 <Icon
                   style="fontSize:16px; margin-top:-3px"
                   :type="!eyeStatus ? 'ios-eye' : 'ios-eye-off'"
-                  @click="eyeClick"
                 />
               </span>
               <label :title="eyeText">
                 {{ eyeText }}
               </label>
             </p>
-            <p v-if="butArr[1]['isShow']">
+            <p v-if="butArr[1]['isShow']"  @click="modifyAddress">
               <span>
                 <span>
                   <Icon
                     style="fontSize:16px; margin-top:-3px"
                     type="ios-create-outline"
-                    @click="modifyAddress"
                   />
                 </span>
                 <label :title = "vmI18n.t('modalTitle.modify_shipping_address')">
@@ -54,23 +52,23 @@
                 {{ componentData.order['CP_C_REGION_CITY_ENAME'] }}
                 {{ componentData.order['CP_C_REGION_AREA_ENAME'] }}
               </p>
-              <p v-else>{{ componentData.order[list.column] }}</p>
+              <p :title="componentData.order[list.column]" v-else>{{ componentData.order[list.column] }}</p>
             </Col>
           </Row>
         </div>
       </div>
     </Col>
     <!-- 基础资料 -->
-    <Col span="16" >
+    <Col span="18" >
       <div class="order-tab-content">
         <div class="order-tab-title">
           <!-- 基础资料 -->
           <span> {{ vmI18n.t('panel_label.basicData')}} </span>
           <div class="title-sign">
-            <span v-for="(item,index) in componentData.order.ORDER_TAG" :key="index" :style="{ color: item.clr,borderColor: item.clr}">
+            <span :title="item.text" v-for="(item,index) in componentData.order.ORDER_TAG" :key="index" :style="{ color: item.clr,borderColor: item.clr}">
               {{item.text}}
             </span>
-            <label>
+            <label :title="componentData.order.OC_B_LABEL_DESCRIPTION">
               {{componentData.order.OC_B_LABEL_DESCRIPTION}}
             </label>
           </div>
@@ -92,11 +90,12 @@
               <p
                 v-if="list.column==='MERGE_SOURCE_CODE'"
                 class="text-ellipsis"
+                :title="componentData.order[list.column]"
               >
                 {{ componentData.order[list.column] }}
               </p>
               <!-- 物流单号 -->
-              <p v-if="list.column ==='EXPRESSCODE'">
+              <p v-if="list.column ==='EXPRESSCODE'" :title="componentData.order[list.column]">
                 {{ componentData.order[list.column] }}
                 <span
                   v-if="componentData.order.RESERVE_BIGINT05 == 1"
@@ -104,12 +103,12 @@
                 > {{ vmI18n.t('form_label.an')}}</span>
                 <!-- (多包裹) -->
               </p>
-              <p v-if="list.column === 'SELLER_MEMO'">
+              <p v-if="list.column === 'SELLER_MEMO'" :title="componentData.order[list.column]">
                 {{ componentData.order[list.column] }}
                 <span  v-if="butArr[2]['isShow']" @click="modifyRemark" class="edit iconfont icon-bianji"></span>
               </p>
               <!-- 其他 -->
-              <p v-else>
+              <p v-else :title="componentData.order[list.column]">
                 {{ componentData.order[list.column] }}
               </p>
             </Col>
