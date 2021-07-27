@@ -149,14 +149,14 @@ export default {
           billNo: "",
           sourceCode: '',
           expressCode: '',
-          receiverName: '',
+          // receiverName: '',
           buyerNick: '',
-          receiverMobile: '',
+          // receiverMobile: '',
         },
         formData: [
           {
             style: 'input',
-            label: '原定单编号', // 原定单编号
+            label: '零售发货单单号', // 原定单编号
             colname: 'billNo',
             width: '8',
             regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
@@ -178,13 +178,13 @@ export default {
             regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
             inputenter: () => this.queryEnter(1, 10)
           },
-          {
+          /* {
             style: 'input',
             label: $i18n.t('form_label.consignee'), // 收货人
             colname: 'receiverName',
             width: '8',
             inputenter: () => this.queryEnter(1, 10)
-          },
+          }, */
           {
             style: 'input',
             label: $i18n.t('table_label.buyerNickname'), // 买家昵称
@@ -192,7 +192,7 @@ export default {
             width: '8',
             inputenter: () => this.queryEnter(1, 10)
           },
-          {
+          /* {
             style: 'input',
             label: $i18n.t('form_label.consignee_phone'), // 收货人手机
             colname: 'receiverMobile',
@@ -203,7 +203,7 @@ export default {
             // regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
             // regx: /^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(17[0,1,3,5,6,7,8]))\d{8}$/,
             inputenter: () => this.queryEnter(1, 10)
-          },
+          }, */
         ],
       },
       table: {
