@@ -80,6 +80,8 @@ export default {
           TID: '', // 原始平台单号
           SOURCE_BILL_TIME: '', // R3单据创建日期
           CP_C_SHOP_TITLE: '', // 店铺名称
+          CP_C_SHOP_ECODE: '', // 店铺编码
+          CP_C_SHOP_ID: '', // 店铺id
           VIP_NICK: '', // 买家昵称
           VIP_PHONE: '', // 买家手机号
           BPM_FAILURE_TIMES: '', // BPM传输失败次数
@@ -472,15 +474,6 @@ export default {
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.queryBounced();
-                this.$nextTick(() => {
-                  // this.reForm.config.forEach((val, index) => {
-                  //   if (val.item.label === '单据来源') {
-                  //     this.reForm.config[index].item.props.value = '手动';
-                  //   } else if (val.item.label === '单据日期') {
-                  //     this.reForm.config[index].item.props.value = commonUtil.dateFormat(new Date(), 'yyyy-MM-dd');
-                  //   }
-                  // });
-                });
               } // 按钮点击事件
             }
           ]
@@ -599,10 +592,6 @@ export default {
               key: 'CP_C_PHY_WAREHOUSE_ENAME',
               title: window.vmI18n.t('form_label.delivery_warehouse') // 发货仓库
             },
-            // {
-            //   key: "PLATFORM",
-            //   title: "平台状态"
-            // },
             {
               key: 'EXPRESSCODE',
               title: window.vmI18n.t('form_label.logisticsOrder_No') // 物流单号
@@ -639,10 +628,6 @@ export default {
             key: 'BILL_NO'
           },
           {
-            title: window.vmI18n.t('form_label.gift'), // 赠品
-            key: 'IS_GIFT_NAME'
-          },
-          {
             title: window.vmI18n.t('form_label.gift'), // 平台商品编码
             key: 'PS_C_SKU_PT_ECODE'
           },
@@ -661,10 +646,6 @@ export default {
           {
             title: window.vmI18n.t('table_label.productName'), // 商品名称
             key: 'proEname'
-          },
-          {
-            title: window.vmI18n.t('form_label.skuName'), // SKU名称
-            key: 'PS_C_SKU_ENAME'
           },
           {
             title: window.vmI18n.t('form_label.purchaseQuantity'), // 购买数量
@@ -926,6 +907,7 @@ export default {
       if (!this.returnInfo.formValue.REASON) return this.$Message.warning('退款原因备注说明必填!');
       if (this.IMAGE == '') return this.$Message.warning('附件必填!');
       if (!this.tableConfig.data.length) return this.$Message.warning('退款明细必填!');
+      if (this.returnInfo.formValue.OC_B_RETURN_TYPE_ENAME == '退货' && !this.returnInfo.formValue.RESERVE_BIGINT02) return this.$Message.warning('退款大类=退货时，退货签收状态必填!');
 
 
 
@@ -1015,16 +997,6 @@ export default {
           payType,
           dutyOfficer
         };
-        // self.reForm.config.forEach(item => {
-        //   // 支付方式
-        //   if (item.item.label == self.vmI18n.t('table_label.paymentWay')) {
-        //     item.item.props.options = payType;
-        //   }
-        //   // 判责方
-        //   if (item.item.label == self.vmI18n.t('form_label.responsibleParty')) {
-        //     item.item.props.options = dutyOfficer;
-        //   }
-        // });
       } else {
         self.$Message.error(res.data.message);
       }
@@ -1137,7 +1109,6 @@ export default {
     },
     filter(arr) {
       arr.forEach((item, i) => {
-        item.IS_GIFT_NAME = item.GIFT_TYPE == '2' ? '平台赠品' : item.GIFT_TYPE == '1' ? '系统赠品' : '否';
         item.IS_GIFT = item.GIFT_TYPE;
         if (!item.FREIGHT) item.FREIGHT = 0; // 运费
         if (item.RETURNABLE_AMOUNT == 0) {
@@ -1162,7 +1133,6 @@ export default {
     },
     fromOrder(listData, initStatus = false) {
       this.isOne = false;
-      debugger
     },
 
     onAddItem() {
@@ -1173,6 +1143,8 @@ export default {
           const data = self.onSelectData;
           this.information.formValue.SOURCE_BILL_TIME = data.CREATIONDATE && commonUtil.dateFormat(new Date(data.CREATIONDATE), 'yyyy-MM-dd hh:mm:ss')
           this.information.formValue.CP_C_SHOP_TITLE = data.CP_C_SHOP_TITLE
+          this.information.formValue.CP_C_SHOP_ID = data.CP_C_SHOP_ID
+          this.information.formValue.CP_C_SHOP_ECODE = data.CP_C_SHOP_ECODE
           this.information.formValue.VIP_NICK = data.USER_NICK
           this.information.formValue.VIP_PHONE = data.VIP_PHONE
           this.information.formValue.RESERVE_VARCHAR01 = data.ORIG_ORDER_NO
@@ -1182,18 +1154,6 @@ export default {
           self.addItem.addList.forEach(item => {
             item.returnPrice = 0;
             item.ID = item.proId;
-            let tempStr = '';
-            switch (item.GIFT_TYPE) {
-              case 1:
-                tempStr = '系统赠品';
-                break;
-              case 2:
-                tempStr = '平台赠品';
-                break;
-              default:
-                tempStr = '否';
-            }
-            item.IS_GIFT_NAME = tempStr;
             item.IS_GIFT = item.GIFT_TYPE;
             item.BILL_NO = self.selectData.BILL_NO;
             item.QTY_IN = self.BILL_TYPE === '1' ? 1 : Number(item.qty || 1);
@@ -1225,7 +1185,6 @@ export default {
         // 详情/复制页面新增明细逻辑
         const data = {};
         const OcBReturnAfSendItem = [];
-        // data.orderId = this.reForm.config.filter(item => item.item.label == this.vmI18n.t('form_label.originalOrderNo'))[0].item.props.value;
         data.id = self.$route.params.customizedModuleId == 'New' ? -1 : self.$route.params.customizedModuleId;
         self.addItem.addList.forEach(item => {
           const obj = {};
@@ -1294,18 +1253,6 @@ export default {
           self.addItem.table.data = arr;
           self.addItem.table.data.forEach(item => {
             item.returnQTY = item.qty - (item.QTY_RETURN_APPLY ? item.QTY_RETURN_APPLY : 0);
-            let tempStr = '';
-            switch (item.GIFT_TYPE) {
-              case 1:
-                tempStr = '系统赠品';
-                break;
-              case 2:
-                tempStr = '平台赠品';
-                break;
-              default:
-                tempStr = '否';
-            }
-            item.IS_GIFT_NAME = tempStr;
             item.IS_GIFT = item.GIFT_TYPE;
           });
           self.addItem.modal = true;
@@ -1334,9 +1281,6 @@ export default {
           }
         });
         const total = self.tableConfig.data.reduce((sum, item) => sum + Number(item.returnPrice || 0), 0);
-        // self.reForm.config.find(
-        //   item => item.item.label == self.vmI18n.t('form_label.refundAmount') // 申请退款金额
-        // ).item.props.value = total;
         self.delTableData = [];
       } else {
         // 编辑状态,删除明细
@@ -1386,44 +1330,11 @@ export default {
         if (res.data.code == 0) {
           const resData = res.data.data;
           const AfSend = resData.AfSend;
-          // this.RETURN_STATUS = AfSend.RETURN_STATUS;
-
-          // 额外退款审核状态后的订单，实际退款金额、收款人姓名和支付账号字段不允许编辑，需要操作反审核后进行修改
-          // 也就是说 当 RETURN_STATUS  =  1    &&  PAYMENT_STATUS  = 0 的时候，只读显示 34320
-          // (RETURN_STATUS == 1 || RETURN_STATUS==2) && (PAYMENT_STATUS == 1 || PAYMENT_STATUS ==2) 只读
-          // if (  !(RETURN_STATUS == 0 ||  PAYMENT_STATUS =3 ) ){
-          // 只读
-          // console.log("单据状态:未退款,打款状态:打款失败,才可以修改")
-          // } //第三次修改 可编辑
-          // if (!(AfSend.RETURN_STATUS == 0 || AfSend.PAYMENT_STATUS == 3) && this.$route.params.customizedModuleName === 'EXTRAREFUND') {
-          //   this.reForm.config.forEach((val, index) => {
-          //     if (val.item.label === '实际退款金额' || val.item.label === '收款人姓名' || val.item.label === '支付账号') {
-          //       val.item.props.disabled = true
-          //     }
-          //     this.isDisabled = true; // 明细行 退款数量 退款金额 运费 审核后 不允许修改 40480
-          //   });
-          // } else {
-          //   this.isDisabled = false;
-          // }
-
-          // self.onSelectData['ID'] = res.data.data.AfSend.ID
           self.setDetailTable(resData.AfSendItemList);
           self.tableConfig.data = resData.AfSendItemList;
           self.tableConfig.current = resData.AfSendItemList.length;
           self.tableConfig.total = resData.AfSendItemList.length;
           self.setDetailForm(AfSend);
-          // self.onSelectData = AfSend;
-          // self.logFormConfig.formValue = {
-          //   OWNERENAME: AfSend.OWNERNAME,
-          //   CREATIONDATE: AfSend.CREATIONDATE && commonUtil.dateFormat(new Date(AfSend.CREATIONDATE), 'yyyy-MM-dd hh:mm:ss'),
-          //   MODIFIERENAME: AfSend.MODIFIERENAME || AfSend.MODIFIERNAME,
-          //   MODIFIEDDATE: AfSend.MODIFIEDDATE && commonUtil.dateFormat(new Date(AfSend.MODIFIEDDATE), 'yyyy-MM-dd hh:mm:ss')
-          // };
-          // self.$nextTick(() => {
-          //   setTimeout(() => {
-          //     this.createdStatus = true;
-          //   }, 100);
-          // });
         } else {
           self.$Message.error(res.data.message);
         }
@@ -1435,20 +1346,22 @@ export default {
         BILL_NO: Afsend.BILL_NO, // 额外退款单号码
         CREATIONDATE: Afsend.CREATIONDATE && commonUtil.dateFormat(new Date(Afsend.CREATIONDATE), 'yyyy-MM-dd hh:mm:ss'), // 创建时间
         OWNERENAME: Afsend.OWNERENAME, // 创建人
-        REFUND_ORDER_SOURCE_TYPE: Afsend.REFUND_ORDER_SOURCE_TYPE, // 单据来源
+        REFUND_ORDER_SOURCE_TYPE: Afsend.REFUND_ORDER_SOURCE_TYPE + '', // 单据来源
         RESERVE_VARCHAR01: Afsend.RESERVE_VARCHAR01, // R3单据编号
-        RESERVE_BIGINT04: Afsend.RESERVE_BIGINT04, // 紧急程度
+        RESERVE_BIGINT04: Afsend.RESERVE_BIGINT04 + '', // 紧急程度
         TID: Afsend.TID, // 原始平台单号
         SOURCE_BILL_TIME: Afsend.SOURCE_BILL_TIME && commonUtil.dateFormat(new Date(Afsend.SOURCE_BILL_TIME), 'yyyy-MM-dd hh:mm:ss'), // R3单据创建日期
         CP_C_SHOP_TITLE: Afsend.CP_C_SHOP_TITLE, // 店铺名称
+        CP_C_SHOP_ECODE: Afsend.CP_C_SHOP_ECODE, // 店铺编码
+        CP_C_SHOP_ID: Afsend.CP_C_SHOP_ID, // 店铺id
         VIP_NICK: Afsend.VIP_NICK, // 买家昵称
         VIP_PHONE: Afsend.VIP_PHONE, // 买家手机号
         BPM_FAILURE_TIMES: Afsend.BPM_FAILURE_TIMES, // BPM传输失败次数
       }
       // 申请退款信息
       this.returnInfo.formValue = {
-        RESERVE_BIGINT01: Afsend.RESERVE_BIGINT01, // 额外退款申请类型
-        BILL_TYPE: Afsend.BILL_TYPE, // 退款类型
+        RESERVE_BIGINT01: Afsend.RESERVE_BIGINT01 + '', // 额外退款申请类型
+        BILL_TYPE: Afsend.BILL_TYPE + '', // 退款类型
         OC_B_RETURN_TYPE_ID: Afsend.OC_B_RETURN_TYPE_ID, // 退货大类id
         OC_B_RETURN_TYPE_ENAME: Afsend.OC_B_RETURN_TYPE_ENAME, // 退货大类name
         OC_B_RETURN_TYPE_ITEM_ID: Afsend.OC_B_RETURN_TYPE_ITEM_ID, // 退款小类
@@ -1456,12 +1369,22 @@ export default {
         RECEIVER_NAME: Afsend.RECEIVER_NAME, // 收款人姓名
         PAY_ACCOUNT: Afsend.PAY_ACCOUNT, // 收款人账号
         AMT_RETURN_APPLY: Afsend.AMT_RETURN_APPLY, // 额外退款金额
-        RESERVE_BIGINT02: Afsend.RESERVE_BIGINT02, // 退货签收状态 0未签收,1已签收
-        PRO_RETURN_STATUS: Afsend.PRO_RETURN_STATUS, // 退货入库状态 0待入库,1部分入库,2全部入库
+        RESERVE_BIGINT02: Afsend.RESERVE_BIGINT02 + '', // 退货签收状态 0未签收,1已签收
+        PRO_RETURN_STATUS: Afsend.PRO_RETURN_STATUS + '', // 退货入库状态 0待入库,1部分入库,2全部入库
         RESERVE_VARCHAR02: Afsend.RESERVE_VARCHAR02, // 退货物流单号
         RESERVE_BIGINT03: Afsend.RESERVE_BIGINT03, // 支付宝累计打款次数
         REASON: Afsend.REASON, // 退款原因备注说明
         SELLER_REMARK: Afsend.SELLER_REMARK, // 卖家备注
+      }
+      if (Afsend.OC_B_RETURN_TYPE_ENAME == '退货') {
+        this.returnInfo.formData.forEach(item => {
+          if (item.value == 'RESERVE_BIGINT02') item.disabled = false
+        })
+      } else {
+        this.returnInfo.formValue.RESERVE_BIGINT02 = ''
+        this.returnInfo.formData.forEach(item => {
+          if (item.value == 'RESERVE_BIGINT02') item.disabled = true
+        })
       }
       if (Afsend.OC_B_RETURN_TYPE_ENAME && Afsend.OC_B_RETURN_TYPE_ID) {
         this.returnInfo.formData.forEach(item => {
@@ -1480,14 +1403,9 @@ export default {
     setDetailTable(data) {
       const self = this;
       data.forEach(item => {
-        item.IS_GIFT = item.GIFT; // 赠品
-        if (item.GIFT == 1) item.GIFT = '系统赠品';
-        else if (item.GIFT == 2) item.GIFT = '平台赠品';
-        else if (item.GIFT == 0) item.GIFT = '否';
         item.price = item.AMT_ACTUAL; // 成交金额
         item.RETURNABLE_AMOUNT = item.AMT_HAS_RETURN; // 可退金额
         item.returnPrice = item.AMT_RETURN; // 退款金额
-        item.IS_GIFT_NAME = item.GIFT; // 赠品
         item.ecode = item.PS_C_PRO_ECODE; // 商品编码
         item.proEname = item.PS_C_PRO_ENAME; // 商品名称
         item.PS_C_SKU_PT_ECODE = item.PS_C_SKU_PT_ECODE; // 平台商品编码
@@ -1566,127 +1484,10 @@ export default {
               }));
             }
           })
-          // this.$nextTick(() => {
-          //   this.returnTypeItemConfig.formData[0].options = row.map(item => ({
-          //     label: item.ENAME.val,
-          //     value: Number(item.ID.val)
-          //   }));
-          // });
         } else {
           this.$Message.error(self.vmI18n.t('modalTips.j6')); // 退款描述请求失败
         }
       });
     },
-
-
-
-
-    /**
-     * 卖家备注联动生成
-     * @method sellerRemarkValueChange
-     * @param { string } type 联动类型(originalOrder: 原始订单；phone: 手机号；payMode: 支付方式；payNo: 支付账号；returnType: 退款分类)
-     * @param { string | {} } value
-     */
-    sellerRemarkValueChange(type = '', value) {
-      const self = this;
-      const config = this.information.formValue;
-      const index = config.length - 1;
-      const sellerRemarkData = this.sellerRemarkData;
-      // 判断编辑状态时是否数据渲染初始化完成
-      if (!this.createdStatus) return;
-      if (type === 'originalOrder') {
-        // 原始订单
-        for (const key in sellerRemarkData) {
-          if (key !== 'PAY_MODE') sellerRemarkData[key] = value[key] || 'xxxxx';
-          else sellerRemarkData[key] = this.payTypeName(value.payType);
-        }
-      } else if (type === 'phone') {
-        // 买家手机号
-        sellerRemarkData.VIP_PHONE = value || 'xxxxx';
-      } else if (type === 'payMode') {
-        // 支付方式
-        sellerRemarkData.PAY_MODE = this.payTypeName(value);
-      } else if (type === 'payNo') {
-        // 支付账号
-        sellerRemarkData.BUYER_ALIPAY_NO = value || 'xxxxx';
-      } else if (type === 'returnType') {
-        // 退款分类
-        sellerRemarkData.OC_B_RETURN_TYPE_ENAME = value;
-      }
-      // 卖家备注数据补偿
-      this.sellerRemarkCompensation();
-      // this.reForm.config[index].item.props.value = `${sellerRemarkData.USER_NICK}-${sellerRemarkData.VIP_PHONE}${self.vmI18n.t('modalTips.j7')}${sellerRemarkData.SOURCE_CODE}${self.vmI18n.t('modalTips.j8')}${sellerRemarkData.OC_B_RETURN_TYPE_ENAME}${self.vmI18n.t(
-      //   'modalTips.j9'
-      // )}${sellerRemarkData.AMT_RETURN_APPLY || 0}${self.vmI18n.t('modalTips.k0')}${sellerRemarkData.PAY_MODE}${sellerRemarkData.BUYER_ALIPAY_NO}${self.vmI18n.t('modalTips.k1')}`;
-      // 亲，您好！您的订单号
-      // 因为
-      // 原因，给您申请
-      // 中，请您注意查收！感谢您的惠顾，欢迎下次光临，祝您生活愉快！
-    },
-    // 获取支付方式名称
-    payTypeName(value) {
-      const item = this.selectOptions.payType.find(item => item.value === value) || { label: 'xxxxx' };
-      return item.label;
-    },
-    // 卖家备注数据补偿（编辑状态下，第一次编写时触发）
-    sellerRemarkCompensation() {
-      const config = this.information.formValue;
-      const sellerRemarkData = this.sellerRemarkData;
-      // 初始化赋值（用于确定是否以赋值，只作用一次且只在编辑状态的第一次起作用）
-      if (!this.sellerRemarkDataCreated) {
-        config.forEach(configItem => {
-          const item = configItem.item;
-          const itemValue = item.props.value || 'xxxxx';
-          switch (item.label) {
-            case '买家昵称':
-              sellerRemarkData.USER_NICK = itemValue;
-              break;
-            case '买家手机号':
-              sellerRemarkData.VIP_PHONE = itemValue;
-              break;
-            case '原始平台单号':
-              sellerRemarkData.SOURCE_CODE = itemValue;
-              break;
-            case '退款金额':
-              sellerRemarkData.AMT_RETURN_APPLY = itemValue;
-              break;
-            case '支付方式':
-              sellerRemarkData.PAY_MODE = this.payTypeName(itemValue);
-              break;
-            case '支付账号':
-              sellerRemarkData.BUYER_ALIPAY_NO = itemValue;
-              break;
-          }
-        });
-        sellerRemarkData.OC_B_RETURN_TYPE_ENAME = this.returnTypeFormConfig.formValue.OC_B_RETURN_TYPE_ENAME || 'xxxxx';
-        this.sellerRemarkDataCreated = true;
-      }
-    }
-  },
-  computed: {
-    // 同步计算申请退款金额
-    applyAmt() {
-      // return this.reForm.config.filter(item => item.item.label == this.vmI18n.t('form_label.refundAmount'));
-    }
-  },
-  watch: {
-    // 监听申请退款金额进行卖家备注赋值
-    applyAmt(newValue) {
-      const self = this;
-      // const index = this.reForm.config.length - 1;
-      const sellerRemarkData = this.sellerRemarkData;
-      // 当不是新增的同时又是第一次相应数据（用于组织第一次查询的时候申请退款金额的改变，导致卖家备注被赋值）
-      if (!this.$route.query.new && !this.createdStatus) return;
-      sellerRemarkData.AMT_RETURN_APPLY = newValue;
-      // 卖家备注数据补偿
-      this.sellerRemarkCompensation();
-      // this.reForm.config[index].item.props.value = `${sellerRemarkData.USER_NICK}-${sellerRemarkData.VIP_PHONE}${self.vmI18n.t('modalTips.j7')}${sellerRemarkData.SOURCE_CODE}${self.vmI18n.t('modalTips.j8')}${sellerRemarkData.OC_B_RETURN_TYPE_ENAME}${self.vmI18n.t(
-      //   'modalTips.j9'
-      // )}${sellerRemarkData.AMT_RETURN_APPLY || 0}${self.vmI18n.t('modalTips.k0')}${sellerRemarkData.PAY_MODE}${sellerRemarkData.BUYER_ALIPAY_NO}${self.vmI18n.t('modalTips.k1')}`;
-      // 亲，您好！您的订单号
-      // 因为
-      // 原因，给您申请
-      // 中，请您注意查收！感谢您的惠顾，欢迎下次光临，祝您生活愉快！
-    }
   }
 };
