@@ -92,6 +92,7 @@
                     <label :title="rowData.item.subLabel2" class="cust-form-label">{{ rowData.item.subLabel2 }}：</label>
                     <Input
                       v-model="rowData.value.OOS_AUTO_REJECT_DESC"
+                      :maxlength="500"
                       :disabled="isEnable"
                       :autosize="{minRows: 2,maxRows: 5}"
                       :placeholder="vmI18n.t('pHolder.enter')"
@@ -147,6 +148,7 @@
                   <div class="changeFormInput last">
                     <label :title="rowData.item.subLabel3" class="cust-form-label">{{ rowData.item.subLabel3 }}：</label>
                     <Input v-model="rowData.value.DEVIATION_AUTO_REJECT_DESC"
+                      :maxlength="500"
                       :disabled="isEnable"
                       :autosize="{minRows: 2,maxRows: 5}"
                       :placeholder="vmI18n.t('pHolder.enter')"
