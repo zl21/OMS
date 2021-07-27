@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-07-21 11:46:47
+ * @LastEditTime: 2021-07-27 19:32:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
@@ -138,7 +138,8 @@ export default {
   methods: {
     Save(data) {
       if (data.detail.type == "save") {
-        let person = this.tebdata
+
+        let person = this.tableConfig.data.filter(em=>em._checked == true)
 
         if (person.length == 0) {
           this.$Message.warning($i18n.t('modalTips.jt'))
