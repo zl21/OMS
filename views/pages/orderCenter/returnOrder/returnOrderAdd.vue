@@ -44,9 +44,10 @@
                     <Input
                       v-model="SHIP_AMT"
                       type="text"
-                      :regx="/^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/"
+                      :regx="/^[+]?\d*\.{0,1}\d{0,2}$/"
                       placeholder="0.00"
                     />
+                    <!-- :regx="/^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/" -->
                   </div>
                 </li>
                 <li class="symbol">+</li>
