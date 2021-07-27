@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-26 20:57:58
+ * @LastEditTime: 2021-07-27 10:14:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -216,6 +216,7 @@ export default {
     if(!(this.$route.params.itemId == 'New')){
        const subData = await this.$OMS2.omsUtils.initSubtable('OC_B_REFUND_ORDER_ITEM', route.itemId, '181618');
        this.tableConfig.data = subData.rowData;
+       console.log(subData.rowData);
        await sessionStorage.setItem('copyDetails',JSON.stringify(subData.rowData));
        let billNo = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata;
        sessionStorage.setItem('billNo',billNo)
@@ -360,7 +361,7 @@ export default {
       if(code === 0){
         if(!isAdd){
           data.ORDER_ITEM.forEach((item)=>{
-            console.log(this.$route.params.itemId,item);
+            // console.log(this.$route.params.itemId,item);
             // let PRICE_ACTUAL = item.PRICE ? item.PRICE : item.PRICE_ACTUAL;
             // console.log(PRICE_ACTUAL);
             item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(Number(item.QTY_REFUND) * Number(item.PRICE || 0))
