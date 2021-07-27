@@ -145,7 +145,6 @@ export default {
                 this.$Message.warning('请选中一条单据！');
                 return false
               } else {
-                debugger
                 if (!this.exCode || this.exCode == '-1') {
                   // 未关联原单-展示0.00
                   this.addData.forEach(it => {
