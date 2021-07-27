@@ -190,6 +190,7 @@ export default {
             label: $i18n.t('table_label.buyerNickname'), // 买家昵称
             colname: 'buyerNick',
             width: '8',
+            regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_@#$%^&*+=-><~“”‘’。.，,：；/、\\`\|!！……\(\)\（\）《》?？·]+)$/,
             inputenter: () => this.queryEnter(1, 10)
           },
           /* {
