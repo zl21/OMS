@@ -8,7 +8,8 @@ import returnGoodManagementList from 'allpages/OrderCenter/returngood/returngood
 import returnGood from 'allpages/OrderCenter/returngood/returngoodmanagement.vue'; // 订单中心-退换货单详情
 import returnStorageList from 'allpages/OrderCenter/returngood/returnStoreage/returnStoreageList.vue'; // 退货入库-列表
 import returnTreasuryAdd from 'allpages/OrderCenter/returngood/returnStoreage/returnTreasuryAdd.vue'; // 退货入库-新增 退货入库-新增
-import refundAfterShipment from 'allpages/OrderCenter/returngood/refundAfterShipment.vue'; // 订单中心-已发货退款单-编辑 额外退款
+import refundAfterShipment from 'allpages/OrderCenter/returngood/refundAfterShipment.vue'; // 订单中心-已发货退款单-编辑 已发货退款
+import additionalRefund from 'allpages/OrderCenter/returngood/additionalRefund.vue'; // 额外退款
 import distributionOrderList from 'allpages/OrderCenter/vipJit/distributionOrderList.vue';
 import skuAbnormalRegistration from 'allpages/OrderCenter/returngood/skuAbnormalRegistration.vue'; // 订单中心-sku异常等级
 
@@ -61,7 +62,7 @@ export default {
     labelName: '已发货退款单编辑',
   },
   EXTRAREFUND: {
-    component: refundAfterShipment,
+    component: additionalRefund,
     labelName: '额外退款编辑',
   },
   MANUALMATCHING: {
