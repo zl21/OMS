@@ -290,12 +290,12 @@ export default {
           return h('InputNumber', {
             props: {
               value: Number(params.row.COMPENSATE_QTY || 0),
-              regx: /^[1-9]\d*$/, // 此组件正则不管用
+              // regx: /^[1-9]\d*$/, // 此组件正则不管用
               max: (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? Number(params.row.QTY || 0) : Infinity,
               min: (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? 1 : 0, // 关联了原单最小1，反之最小0
               editable: true,
-              // formatter: value => `${value}`.replace(/\D+|^0+[0-9]+/g, ''),
-              // parser: value => value.replace(/\D+|^0+[0-9]+/g, ''),
+              formatter: value => `${value}`.replace(/\./g, ''),
+              parser: value => value.replace(/\./g, ''),
             },
             on: {
               'on-change': e => {
@@ -304,32 +304,23 @@ export default {
                     注：若主表未关联原订单，则赔付数量默认为0；
                  * 2.赔付金额：默认为 赔付数量*成交单价（ PRICE_ACTUAL ），可手动修改，但不能超过“赔付数量*成交单价”，保留两位小数；
                  */
-                let cq = e, flag1, flag2;
-                const zz = /^[1-9]*[1-9][0-9]*$/;
-                const zz0 = /^[0-9]*[1-9][0-9]*$/;
-                if (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) {
-                  flag1 = zz.test(Number(cq).toString());
-                } else {
-                  flag2 = zz0.test(Number(cq).toString());
+                // params.row.COMPENSATE_QTY = null;
+                params.row.COMPENSATE_QTY = e;
+                if (e || e === 0) {
+                  params.row.COMPENSATE_AMT = $omsUtils.floatNumber(e * Number(params.row.PRICE_ACTUAL || 0), 2);
+                  this.tableConfig.data[params.index] = params.row;
+                  R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
                 }
-                if (!flag1) {
-                  cq = 1
-                }
-                if (!flag2) {
-                  cq = 0
-                }
-                params.row.COMPENSATE_QTY = cq ? cq : (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? 1 : 0;
-                params.row.COMPENSATE_AMT = $omsUtils.floatNumber(cq * Number(params.row.PRICE_ACTUAL || 0), 2);
-                // ++params.row._rowKey;
-                // params.row._rowKey = $omsUtils.generateKey();
-                this.tableConfig.data[params.index] = params.row;
-                R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
+                // params.row._rowKey = $omsUtils.generateKey(); // 写上就删不掉输入框里面的0
               },
               'on-blur': e => {
                 const cq = params.row.COMPENSATE_QTY;
-                if (!cq) {
+                if (!cq && cq !== 0) {
                   params.row.COMPENSATE_QTY = (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? 1 : 0;
+                  params.row.COMPENSATE_AMT = $omsUtils.floatNumber(params.row.COMPENSATE_QTY * Number(params.row.PRICE_ACTUAL || 0), 2);
                   params.row._rowKey = $omsUtils.generateKey();
+                  this.tableConfig.data[params.index] = params.row;
+                  R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
                 }
               }
             }
@@ -366,12 +357,13 @@ export default {
                   console.log(e.target._value);
                   const ca = Number(e.target._value);
                   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL);
-                  if (ca > relCa) {
-                    params.row.COMPENSATE_AMT = $omsUtils.floatNumber(relCa, 2);
-                    ++params.row._rowKey;
-                  } else {
-                    params.row.COMPENSATE_AMT = $omsUtils.floatNumber(ca, 2);
+                  params.row.COMPENSATE_AMT = $omsUtils.floatNumber(ca, 2);
+                  if (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) {
+                    if (ca > relCa) {
+                      params.row.COMPENSATE_AMT = $omsUtils.floatNumber(relCa, 2);
+                    }
                   }
+                  params.row._rowKey = $omsUtils.generateKey();
                   this.tableConfig.data[params.index] = params.row;
                   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
                 });
