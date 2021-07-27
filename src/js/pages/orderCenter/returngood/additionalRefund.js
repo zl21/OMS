@@ -31,7 +31,20 @@ export default {
           {
             text: '审核',
             btnclick: () => {
-              // this.save();
+              const _this = this;
+              const fromdata = new FormData();
+              const param = {"tableid":249230545,"ids":[_this.$route.params.customizedModuleId],"menu":"额外退款"}
+              fromdata.append('actionid', 41460332);
+              fromdata.append('webaction', null);
+              fromdata.append('param', JSON.stringify(param));
+              _this.service.common.exeAction(fromdata).then(res => {
+                if (res.data.code === 0) {
+                  _this.query();
+                  _this.$Message.success(res.data.message);
+                } else {
+                  _this.$Message.warning(res.data.message);
+                }
+              })
             }
           },
           {
