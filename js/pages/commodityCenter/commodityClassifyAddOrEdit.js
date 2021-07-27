@@ -37,6 +37,7 @@ export default {
       backable: false, // 可返回否
       saveable: false, // 可保存否
       btnConfig: {
+        btnsite: 'right',
         typeAll: 'default',
         buttons: [{
           webname: 'CLASSIFY_SaveBtn',

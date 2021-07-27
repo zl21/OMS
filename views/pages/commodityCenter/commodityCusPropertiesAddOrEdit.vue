@@ -9,7 +9,7 @@
 <template>
   <div class="commodityCusPropertiesAddOrEdit customized-detail" :id="this.customizedModuleName">
     <loading :loading="loading" />
-    <div class="buttons customized-detail-btn">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">

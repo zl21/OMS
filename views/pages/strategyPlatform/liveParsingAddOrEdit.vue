@@ -1,9 +1,9 @@
 <template>
-  <div class="live-parsing customized-detail" v-loading="loading">
-    <div class="buttons customized-detail-btn">
+  <div class="customized-detail" v-loading="loading">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content customized-detail-main">
+    <div class="customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->

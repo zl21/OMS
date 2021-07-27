@@ -29,6 +29,7 @@ export default {
       isModify: false,
       isEnable: false,
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [
           {

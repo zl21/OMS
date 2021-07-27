@@ -17,6 +17,7 @@ export default {
     return {
       vueMark: 'batchActivity',
       btnConfig: {
+        btnsite: 'right',
         typeAll: 'default',
         buttons: []
       },

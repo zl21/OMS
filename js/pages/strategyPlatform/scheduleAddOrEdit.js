@@ -66,6 +66,7 @@ export default {
       // },
       curDialog: '', // 当前弹窗
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [{
           webname: 'lookup_save', // 保存

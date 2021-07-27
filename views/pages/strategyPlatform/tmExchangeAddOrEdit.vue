@@ -1,7 +1,7 @@
 <template>
   <!--  天猫换货策略  -->
-  <div class="holdStrategyAddOrEdit customized-detail" v-loading="loading">
-    <div class="buttons customized-detail-btn">
+  <div class="customized-detail" v-loading="loading">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">

@@ -8,12 +8,8 @@
 -->
 <template>
   <!-- 基础信息-国家省市区-编辑 -->
-  <div
-    :id="this.customizedModuleName"
-    class="nationalProvincialMunicipalEdit customized-detail"
-  >
-    <loading :loading="loading" />
-    <div class="buttons customized-detail-btn">
+  <div :id="this.customizedModuleName" class="customized-detail" v-loading="loading">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">

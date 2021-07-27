@@ -81,6 +81,7 @@ export default {
         }
       },
       btnConfig: {
+        btnsite: 'right',
         typeAll: 'default',
         buttons: [],
       },

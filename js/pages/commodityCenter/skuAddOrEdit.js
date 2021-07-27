@@ -75,6 +75,7 @@ export default {
         "row": []
       },
       btnConfig: {
+        btnsite: 'right',
         typeAll: 'default',
         buttons: [{
           webname: 'SKU_SaveBtn',

@@ -34,6 +34,7 @@ export default {
         pageShow: true
       },
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [
           {

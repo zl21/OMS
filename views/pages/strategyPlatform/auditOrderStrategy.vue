@@ -9,10 +9,10 @@
 <template>
   <!-- 审单策略 -->
   <div class="auditOrderStrategy customized-detail">
-    <div class="audit_button customized-detail-btn">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
-    <div class="audit_form customized-detail-main">
+    <div class="customized-detail-main">
       <Collapse v-model="collapseValue">
         <Panel name="1">
           <!-- 基础资料 -->

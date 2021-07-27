@@ -103,6 +103,7 @@ export default {
       panelDefaultValue1: 'panel_baseInfo1', // 设置默认打开'基本信息'
       labelDefaultValue: 'PROPERTY', // 设置tab默认值，默认展示'自定义属性'
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [
           {

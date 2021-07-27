@@ -44,6 +44,7 @@ export default {
       ],
       labelDefaultValue: 'PROPERTY', // 设置tab默认值，默认展示'自定义属性'
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [
           {

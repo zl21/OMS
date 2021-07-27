@@ -40,6 +40,7 @@ export default {
       vmI18n: $i18n,
       collapse: 'panel_baseInfo',
       btnConfig: {
+        btnsite: 'right',
         typeAll: 'default',
         buttons: [],
       },

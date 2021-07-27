@@ -1,6 +1,5 @@
-import businessButton from 'professionalComponents/businessButton';
+  import businessButton from 'professionalComponents/businessButton';
   import businessForm from 'professionalComponents/businessForm';
-  import businessActionTable from 'professionalComponents/businessActionTable';
   import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
   import comUtils from '@/assets/js/__utils__/common.js';
 
@@ -14,6 +13,7 @@ import businessButton from 'professionalComponents/businessButton';
         vmI18n:$i18n,
         collapse: ['panel_baseInfo', 'panel_businessInfo'],
         btnConfig: {
+          btnsite: 'right', // 按钮对齐方式
           typeAll: 'default',
           buttons: [
             {

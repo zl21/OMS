@@ -58,6 +58,7 @@ export default {
         subTable: [], // 修改后的子表信息
       },
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [
           {

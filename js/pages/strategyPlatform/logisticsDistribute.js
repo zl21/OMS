@@ -31,6 +31,7 @@ export default {
       btnSave:$i18n.t('btn.save'),
       btnBack: $i18n.t('btn.back'),
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [
           {

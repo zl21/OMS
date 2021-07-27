@@ -7,7 +7,7 @@
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/logisticsDistribute.vue
 -->
 <template>
-  <div class="otherClass customized-detail logistics">
+  <div class="customized-detail logistics">
     <!-- 按钮 -->
     <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />

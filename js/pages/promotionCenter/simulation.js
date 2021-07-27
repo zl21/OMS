@@ -14,6 +14,7 @@ export default {
   data() {
     return {
       btnConfig: {
+        btnsite: 'right',
         typeAll: 'default',
         buttons: [
           {

@@ -3,16 +3,16 @@
  * @Date: 2021-04-28 13:22:03
  * @LastEditTime: 2021-06-02 20:05:38
  * @LastEditors: Please set LastEditors
- * @Description: 物流公司公司档案
+ * @Description: 物流公司档案
  * @FilePath: /burgeon-project-logic/views/pages/basicData/logisticsCompanyFilesAddOrEdit.vue
 -->
 <template>
-  <div class="logisticsCompanyFilesAddOrEdit cusArkCollapse customized-detail" >
+  <div class="customized-detail" >
     <loading :loading="loading" />
-    <div class="buttons customized-detail-btn">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content customized-detail-main">
+    <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->

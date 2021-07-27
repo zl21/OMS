@@ -7,9 +7,9 @@
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/storehouseRule.vue
 -->
 <template>
-  <div class="storehouseRule otherClass customized-detail" v-loading="loading">
+  <div class="customized-detail" v-loading="loading">
     <!-- <loading :loading="loading" /> -->
-    <div class="buttons customized-detail-btn">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
 

@@ -50,6 +50,7 @@ export default {
       },
       watchChange: false, // 监听修改变化
       btnConfig: {
+        btnsite: 'right',
         typeAll: 'default',
         buttons: [{
             webname: 'ATTRIBUTE_SaveBtn',

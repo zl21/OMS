@@ -28,6 +28,7 @@ export default {
       backable: false,
       Il8n: $i18n,
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [
           {

@@ -28,6 +28,7 @@ export default {
       // isReadOnly: false, //判断是否可以编辑
       // 按钮配置
       btnConfig: {
+        btnsite: 'right',
         typeAll: 'default',
         buttons: []
       },

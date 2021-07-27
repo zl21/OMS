@@ -3,7 +3,7 @@
  * @Date: 2021-04-27 11:20:18
  * @LastEditTime: 2021-07-01 13:53:35
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: 新增逻辑仓
  * @FilePath: /project-logic/views/pages/basicData/addLogicStore.vue
 -->
 <template>

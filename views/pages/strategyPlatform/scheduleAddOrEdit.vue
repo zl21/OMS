@@ -1,7 +1,7 @@
 <template>
   <!-- 档期日程规划 -->
-  <div class="wphAddOrEdit customized-detail" v-loading="loading">
-    <div class="buttons customized-detail-btn">
+  <div class="customized-detail" v-loading="loading">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
@@ -54,24 +54,6 @@
           />
         </div>
       </div>
-
-      <!-- <Modal
-        v-model="dialog[curDialog]"
-        :title="dialogInfo.title"
-        footer-hide
-        :width="dialogInfo.width"
-        mask
-        class-name="ark-dialog"
-      >
-        <scheduleFormDialog 
-          ref="dialogForm"
-          :dialog-config="dialogConfig"
-          :detail="initDetail"
-          :loading="dialogLoading"
-          @getData="getDetail"
-          @clearModify="initModify"
-        />
-      </Modal> -->
       <businessDialog
         :batch-closed="scheduleFormConfig.batchClosed"
         :closable="scheduleFormConfig.closable"

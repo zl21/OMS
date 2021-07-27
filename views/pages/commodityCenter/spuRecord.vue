@@ -7,8 +7,8 @@
  * @FilePath: /burgeon-project-logic/views/pages/commodityCenter/spuRecord.vue
 -->
 <template>
-  <div class="spuRecord cusArkCollapse customized-detail" v-loading="loading">
-    <div class="buttons customized-detail-btn">
+  <div class="spuRecord customized-detail" v-loading="loading">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">

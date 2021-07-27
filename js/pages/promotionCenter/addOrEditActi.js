@@ -21,6 +21,7 @@ export default {
       freshKey: 0,
       vueMark: 'addOrEditActi',
       btnConfig: {
+        btnsite: 'right',
         typeAll: 'default',
         buttons: [
           {

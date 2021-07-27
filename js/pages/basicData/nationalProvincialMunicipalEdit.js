@@ -2,7 +2,6 @@ import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import orderItem from 'professionalComponents/subTable';
 import businessLabel from 'professionalComponents/businessLabel';
-import loading from 'professionalComponents/loading';
 
 export default {
   name: 'NationalProvincialMunicipalEdit',
@@ -10,8 +9,7 @@ export default {
     businessButton,
     businessForm,
     orderItem,
-    businessLabel,
-    loading,
+    businessLabel
   },
   data() {
     return {
@@ -36,6 +34,7 @@ export default {
         subTable: [], // 修改后的子表信息
       },
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [{
           webname: 'CpCRegionSaveBtn',
