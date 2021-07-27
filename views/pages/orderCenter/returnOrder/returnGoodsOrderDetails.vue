@@ -996,6 +996,12 @@ export default {
     resetReturnMainTable() {
       const tui = this.tableConfig.data;
       const addToList = tui.filter((i) => i._checked);
+      if (!addToList.length) {
+        this.$Message.warning($i18n.t('modalTips.gn')); // 请选择一条明细！
+        return false
+      } else {
+        this.tableConfig.modal = false;
+      }
       this.toMainData.tui = addToList;
       this.insertOrderDetail(addToList);
       this.$emit("subTableData", this.toMainData);
@@ -1039,12 +1045,14 @@ export default {
     },
     onSelectAllCancel(x) {
       const self = this;
+      this.tableConfig.data.forEach(i => i._checked = false);
       self.tableConfig.selectData = x;
       self.selectLen = x.length;
       self.indexL = [];
     },
     onSelectAll(x) {
       const self = this;
+      this.tableConfig.data.forEach(i => i._checked = true);
       self.tableConfig.selectData = x;
       self.selectLen = x.length;
     },
