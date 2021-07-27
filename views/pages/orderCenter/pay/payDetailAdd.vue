@@ -33,19 +33,10 @@ export default {
     businessActionTable,
   },
   props: {
-    idArray: {// 获取ID用于多选
+    subData: {
       type: [Array, Object],
       default: () => { }
     },
-    itemId: {// 获取当前子表表名
-      type: String,
-      default: () => ''
-    },
-    saveDialog: {   //  子表保存数据方法
-      type: Function,
-      default: () => {
-      }
-    }
   },
   computed: {
     ID() {
@@ -144,7 +135,7 @@ export default {
         indexColumn: true, // 是否显示序号
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10 // 每页条数
       },
       btnConfigMo: {
@@ -187,7 +178,33 @@ export default {
     });
   },
   methods: {
+    /**
+     * 入参说明：
+     * 1. 新增 且 无原单号（expressCode不要传
+          isInit: false
+          mainId: "-1"
+          pageNum: 1
+          pageSize: 10
+          skuEname: "12343214432"
+          excludeEcode: [] // 已选ID集
+     * 2. 新增 且 已有原单
+          expressCode: "9998975701" // 必传
+          isInit: false
+          mainId: "-1"
+          pageNum: 1
+          pageSize: 10
+          skuEname: "12343214432"
+          ocBOrderDeliveryId: [] // 已选ID集
+     * 3. 初始化弹窗表头
+          expressCode: "-1" // 必传
+          isInit: true
+          mainId: "-1"
+          pageNum: 1
+          pageSize: 10
+     * 
+     */
     async initTable(page = 1, pageSize = 10, isInit) {
+      console.log('payDetail::initTable::');
       this.loading = true;
       const paramFv = {
         skuEcode: '',
@@ -218,14 +235,26 @@ export default {
       } else {
         param.isInit = false;
       }
-      // 没有原单时,expressCode不传
       if (!isInit && !param.expressCode) {
-        delete param.expressCode
+        delete param.expressCode // 没有原单时,expressCode不传
+        param.excludeEcode = $omsUtils.sonList(this.subData, 'PS_C_SKU_ECODE') // 查询过滤已选数据
+      } else if (!isInit && param.expressCode && param.expressCode != '-1') {
+        param.ocBOrderDeliveryId = $omsUtils.sonList(this.subData, 'OC_B_ORDER_DELIVERY_ID') // 有原单，查询过滤已选数据
       }
       param.mainId = this.ID;
       const { data: { code, data } } = await this.service.orderCenter.payQueryProList(param).catch(e => {
         this.loading = false;
       });
+      this.loading = false;
+      // 特别地：弹窗里仅展示明细里没有的数据
+      /* let showDa = data.data || []
+      if (this.subData.length) {
+        const x = 'OC_B_ORDER_DELIVERY_ID';
+        const idList = $omsUtils.sonList(this.subData, x);
+        if (data.data.length) {
+          showDa = data.data.filter(it => !idList.includes(it[x]));
+        }
+      } */
       this.tableConfig.columns = data.columns;
       this.tableConfig.data = isInit ? [] : data.data;
       this.tableConfig.total = isInit ? 0 : data.pageInfo.total;

@@ -27,7 +27,10 @@
       <div class="dialog-footer" slot="footer">
         <businessButton :btn-config="btnConfigMo" />
       </div>
-      <payDetailAdd @detailAddData="detailAddDataHandel"></payDetailAdd>
+      <payDetailAdd
+        @detailAddData="detailAddDataHandel"
+        :subData="tableConfig.data"
+      ></payDetailAdd>
     </Modal>
   </div>
 </template>
@@ -119,7 +122,7 @@ export default {
         indexColumn: true, // 是否显示序号
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10 // 每页条数
       },
       btnConfigMo: {
@@ -141,6 +144,8 @@ export default {
                 this.$Message.warning('请选中一条单据！');
                 return false
               } else {
+                this.addData.forEach(it => {
+                })
                 this.tableConfig.data = this.tableConfig.data.concat(this.addData);
                 this.tableConfig.total += this.addData.length;
                 const detail = this.tableConfig.data;
@@ -170,9 +175,9 @@ export default {
       setTimeout(() => {
         if (newVal == 'zhoulan') return
         if (newVal == 'clear') {
-          this.initTable(1, 10, true, '-1'); // 清空明细
+          this.initTable(1, 10, true, ''); // 清空明细
         } else {
-          this.initTable(1, 10, newVal ? false : true, newVal ? newVal : '-1');
+          this.initTable(1, 10, newVal ? false : true, newVal ? newVal : '');
         }
       }, 10);
     }
@@ -185,7 +190,7 @@ export default {
       const step1 = new Promise(async function (resolve, reject) {
         _this.tableConfig.loading = true;
         const subData = await _this.$OMS2.omsUtils.initSubtable('OC_B_COMPENSATE_ORDER_ITEM', _this.ID, '181120').catch(() => {
-          _this.tableConfig.loading = false; 
+          _this.tableConfig.loading = false;
           console.error('查询子表接口（/p/cs/objectTableItem）报错！');
           reject()
         });
@@ -204,7 +209,7 @@ export default {
       });
       step1.then(async () => {
         if (_this.ID != '-1') {
-          // 详情-单据状态=0时，才展示新增/删除明细
+          // 详情-单据状态=0（未客审）时，才展示新增/删除明细
           // 详情-单据状态=0时，商品明细才可编辑
           const fromdata = new FormData();
           fromdata.append('table', 'OC_B_COMPENSATE_ORDER');
@@ -232,8 +237,18 @@ export default {
     });
   },
   methods: {
-    // 新增时带出明细
+    /**
+     * 入参说明：
+     * 1. 新增时根据原单带出明细（页面新增 且 有原单）
+        expressCode: "9998975701"
+        mainId: "-1"
+        pageNum: 1
+        pageSize: 10
+     * 2. 新增页面初始化表头没走这个：在mounted里走的框架标准子表接口
+     *
+     */
     async initTable(page = 1, pageSize = 10, isInit, oriId) {
+      console.log('payDetailAdd::initTable::');
       if (this.ID != '-1') return
       this.loading = true;
       if (isInit) {
@@ -243,7 +258,7 @@ export default {
       // store上取不到刚刚通过defined自定义表单组件设置的值，好像没有触发框架去保存在store上
       const pageInfo = { pageNum: page, pageSize }
       let param = { ...pageInfo }
-      param.expressCode = oriId ? oriId : R3.store.state.customize.COMPENSATE.other.expressCode || '';
+      param.expressCode = oriId ? oriId : R3.store.state.customize.COMPENSATE.other.expressCode || '-1';
       if (!param.expressCode) delete param.expressCode;
       param.mainId = this.ID;
       const { data: { code, data } } = await this.service.orderCenter.payQueryProList(param).catch(() => {
@@ -252,8 +267,9 @@ export default {
       if (this.ID == '-1') {
         data.data.map(it => it.ID = '-1')
       }
-      this.tableConfig.data = param.expressCode != '-1' ? this.tableConfig.data.concat(data.data) : this.tableConfig.data.concat([]);
-      this.tableConfig.total += param.expressCode != '-1' ? data.pageInfo.total : 0;
+      // this.tableConfig.data = param.expressCode != '-1' ? this.tableConfig.data.concat(data.data) : this.tableConfig.data.concat([]);
+      this.tableConfig.data = data.data;
+      this.tableConfig.total += param.expressCode ? data.pageInfo.total : 0;
       R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
       this.loading = false;
     },
@@ -284,7 +300,6 @@ export default {
               }
             }
           });
-
         },
         COMPENSATE_AMT: (h, params) => {
           const self = this;
