@@ -275,3 +275,4 @@
 | v1.2.36 | fkdialog 支持网关 |
 | v1.2.37 | fkdialog 接口异常关闭loading |
 | v1.2.38 | businessActionTable 表格单选 |
+| v1.2.39 | 导入组件-弹窗样式调整 |
