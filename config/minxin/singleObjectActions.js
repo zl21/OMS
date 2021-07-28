@@ -5,6 +5,8 @@ export default () => ({
     const { itemId, tableId, tableName } = this.$router.currentRoute.params;
     if (tableName === 'OC_B_COMPENSATE_ORDER') { // 判断是否为需要操作的表
       setTimeout(() => {
+        const { detail } = R3.store.state.customize.COMPENSATE;
+        console.log(detail);
         R3.store.commit('customize/REDUNDANT_ORDER_ID', 'zhoulan');
         R3.store.commit('customize/COMPENSATE', { detail: [] });
       }, 500);
