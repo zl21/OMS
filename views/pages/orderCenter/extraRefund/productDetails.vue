@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-28 14:19:24
+ * @LastEditTime: 2021-07-28 15:36:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -95,6 +95,7 @@ export default {
         businessButtonConfig: {}, // 按钮配置
         businessFormConfig: {}, // 表单配置
         isShowSelection: true, // 是否显示checkedbox
+        highlightRow:false,
         columns: [
            {
             key: 'PS_C_SKU_ECODE',
@@ -340,9 +341,11 @@ export default {
     async getTable(isAdd,billNo,pageNum = 1,pageSize = 10){
       let self = this;
       // 筛选ids
+      // console.log(R3.store.);
       let ids
       let params = {
         BILL_NO:billNo,
+        // REFUND_TYPE:
         pageNum: pageNum,
         pageSize: pageSize
       };
@@ -360,11 +363,9 @@ export default {
       if(code === 0){
         if(!isAdd){
           data.ORDER_ITEM.forEach((item)=>{
-            // console.log(this.$route.params.itemId,item);
-            // let PRICE_ACTUAL = item.PRICE ? item.PRICE : item.PRICE_ACTUAL;
-            // console.log(PRICE_ACTUAL);
-            let PRICE = Number(item.QTY_REFUND || 0) * Number(item.PRICE || 0);
-            item.QTY_REFUND = Number(item.QTY || 0) - Number(item.QTY_RETURN_APPLY || 0)
+            let QTY_REFUND = Number(item.QTY || 0) - Number(item.QTY_RETURN_APPLY || 0)
+            item.QTY_REFUND = QTY_REFUND;
+            let PRICE = QTY_REFUND * Number(item.PRICE || 0);
             item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
             item.AMT_ACTUAL_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
           })
