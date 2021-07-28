@@ -563,7 +563,7 @@
                 }
               }
             }
-        },
+          },
         },
         options:{
           rowHeight: 40,
