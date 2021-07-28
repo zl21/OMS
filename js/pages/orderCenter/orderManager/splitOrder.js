@@ -159,7 +159,7 @@ export default {
           draggable:true
         },
         {
-          title: $i18n.t('table_label.quantity_availableSale'), // 可售数量
+          title:$i18n.t('table_label.a4'),  // 实体可用数量
           key: 'total_qty_available',
           draggable:true,
           render:(h , params) => {

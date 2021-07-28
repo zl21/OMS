@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 13:30:26
- * @LastEditTime: 2021-07-27 19:32:36
+ * @LastEditTime: 2021-07-28 15:27:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/orderCenter/matching.vue
@@ -110,6 +110,7 @@ export default {
       tableConfig: {
         indexColumn: true,
         isShowSelection: true,
+        highlightRow:false,
         columns: [],
         data: [],
         pageShow: true, // 控制分页是否显示
