@@ -182,7 +182,7 @@ export default {
       importTable: {
         confirmTitle: "订单明细导入",
         titleAlign: "center", // 设置标题是否居中 center left
-        width: "540",
+        width: "572",
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
         draggable: false, // 是否可以拖动
@@ -956,10 +956,31 @@ export default {
             },
           ],
         },
-        
+        businessButtonConfig: {
+          typeAll: 'default', // 按钮统一风格样式
+          btnsite: "left",
+          buttons: [
+            {
+              type: 'primary', // 按钮类型
+              text: '删除明细', // 按钮文本
+              isShow: true,
+              btnclick: (e) => {
+                this.tableDeleteDetail();
+              }
+            },
+            {
+              type: 'default', // 按钮类型
+              text: '导入', // 按钮文本
+              isShow: true,
+              btnclick: (e) => {
+                this.tableImport();
+              }
+            },
+          ],
+        },
         isSearchText: true,
-        isShowDeleteDetailBtn: true, // 控制是否显示删除明细
-        isShowImportBtn: true, // 控制是否显示导入
+        isShowDeleteDetailBtn: false, // 控制是否显示删除明细
+        isShowImportBtn: false, // 控制是否显示导入
         pageShow: false, // 控制分页是否显示
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
@@ -1321,8 +1342,8 @@ export default {
         const { ACTIONS, SUB_ACTIONS } = res;
         console.log('buttons::', this.btnConfig.buttons, 'res::', res);
         const webArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
-        this.jordanTableConfig.isShowDeleteDetailBtn = webArr.includes('删除');
-        this.jordanTableConfig.isShowImportBtn = webArr.includes('导入');
+        this.jordanTableConfig.businessButtonConfig.buttons[0].isShow = webArr.includes('删除');
+        this.jordanTableConfig.businessButtonConfig.buttons[1].isShow = webArr.includes('导入');
       });
     },
     debounce(fn, time) {
@@ -2018,7 +2039,7 @@ export default {
           id: "2307",
           type: "action",
           name: "ORDERMANAGER",
-          label:  $i18n.t('panel_label.retail_shipping_order'),//"零售发货单",
+          label: $i18n.t('panel_label.retail_shipping_order'),//"零售发货单",
           back: true,
         });
       } else {

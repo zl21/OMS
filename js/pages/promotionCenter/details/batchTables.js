@@ -43,7 +43,7 @@ export default {
         refFuns: 'confirmFun',
         confirmTitle: $i18n.t('modalTitle.a2'), // 批量新增条件信息导入
         titleAlign: 'center', // 设置标题是否居中 center left
-        width: '540',
+        width: '572',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
         draggable: true, // 是否可以拖动
