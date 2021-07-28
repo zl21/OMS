@@ -73,6 +73,7 @@ export default () => ({
         const payData = R3.store.state.customize.COMPENSATE;
         main.REDUNDANT_ORDER_ID = payData.other.REDUNDANT_ORDER_ID;
         const OC_B_COMPENSATE_ORDER_ITEM = payData.detail;
+        console.log('payData::', payData.detail);
         const IDS = R3.store.state.customize.COMPENSATE.deleteIds;
         if (ID != '-1' && !Object.keys(modifyData).length && !IDS.length && !OC_B_COMPENSATE_ORDER_ITEM.length) {
           return // 未修改 点保存无反应
@@ -82,6 +83,7 @@ export default () => ({
         });
         if (code == 0) {
           this.$Message.success(message);
+          R3.store.commit('customize/COMPENSATE', { detail: []}); // 清空明细
           setTimeout(() => {
             if (ID == '-1') {
               this.$store.commit("global/tabOpen", {

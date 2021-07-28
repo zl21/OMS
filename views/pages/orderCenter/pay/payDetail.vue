@@ -41,7 +41,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import payDetailAdd from './payDetailAdd.vue';
 
 export default {
-  name: 'payDetail',
+  // name: 'payDetail',
   components: {
     payDetailAdd,
     businessButton,
@@ -191,6 +191,11 @@ export default {
         }
       }, 10);
     }
+  },
+  activated() {
+    const data = R3.store.state.customize.COMPENSATE.detail;
+    this.tableConfig.data = data;
+    R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: data })));
   },
   created() { },
   destroyed() { },
