@@ -229,7 +229,7 @@ export default {
             _this.tableConfig.loading = false;
             if (code != '-1') return _this.$Message.error('查询详情接口（/p/cs/getObject）报错！')
           })
-          const status = data.addcolums[1].childs[3].valuedata;
+          const status = data.addcolums[1].childs.find(i => i.colname == "ORDER_STATUS").valuedata;
           let storeOther = JSON.parse(JSON.stringify(R3.store.state.customize.COMPENSATE.other))
           storeOther.exCode = data.addcolums[1].childs[4].valuedata;
           R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ other: storeOther })));
