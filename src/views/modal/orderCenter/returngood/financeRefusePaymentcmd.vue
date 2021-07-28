@@ -11,8 +11,8 @@
           prop="reasonType"
         >
           <RadioGroup v-model="reasonType" @on-change='reasonTypeChage()'>
-            <Radio label="2">大款成功</Radio>
-            <Radio label="3">大款失败</Radio>
+            <Radio label="2">打款成功</Radio>
+            <Radio label="3">打款失败</Radio>
           </RadioGroup>
         </FormItem>
         <FormItem
