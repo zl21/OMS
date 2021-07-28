@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-27 10:14:15
+ * @LastEditTime: 2021-07-27 18:21:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -276,7 +276,7 @@ export default {
             render:(h,params)=>{
              return h('InputNumber', {
                 props: {
-                  value: params.row.QTY_REFUND,
+                  value: Number(params.row.QTY) - Number(params.row.QTY_RETURN_APPLY),
                   autosize: true,
                   min:1,
                   max: Number(params.row.QTY) - Number(params.row.QTY_RETURN_APPLY),
@@ -305,11 +305,10 @@ export default {
             title: '实际退货数量' // 实际退货数量：默认为0；
           },{
             key: 'AMT_ACTUAL_REFUND',
-            title: '退款金额', // 退款金额：默认取“申请退款金额”，可编辑，仅支持录入正数，保留两位小数
+            title: '申请退款金额', // old：退款金额 (默认取“申请退款金额”，可编辑，仅支持录入正数，保留两位小数)  new 申请退款金额 ：
             render:(h,params)=>{
              return h('Input', {
                props: {
-                  // && this.$route.params.itemId !== 'New' 
                   disabled: this.$route.params.itemId == 'New' || (this.orderStatus == 0 && this.$route.params.itemId != 'New') ? false : true,
                   value: params.row.AMT_ACTUAL_REFUND,
                   autosize: true,
@@ -364,7 +363,9 @@ export default {
             // console.log(this.$route.params.itemId,item);
             // let PRICE_ACTUAL = item.PRICE ? item.PRICE : item.PRICE_ACTUAL;
             // console.log(PRICE_ACTUAL);
-            item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(Number(item.QTY_REFUND) * Number(item.PRICE || 0))
+            let PRICE = Number(item.QTY_REFUND) * Number(item.PRICE || 0);
+            item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
+            item.AMT_ACTUAL_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
           })
         }
         isAdd ? this.addDetailsConfig.data = data.ORDER_ITEM : this.tableConfig.data = data.ORDER_ITEM,
