@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-28 10:23:10
+ * @LastEditTime: 2021-07-28 12:06:00
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -319,7 +319,6 @@ export default {
     this.panelReturn = ["tapComponent.returnGoodsDetails",'tapComponent.returnDetails'].includes(this.$parent.$parent.panelInstance);
     //编辑页面 换货/退货逻辑
     this.getBtn().then((res) => {
-      console.log(R3.store.state.customize.returnOrderChangeItem,this.$route.query.RETURN_SOURCE);
       let BtnConfig = this.businessActionTable.businessButtonConfig.buttons;
       // 换货明细
       if (this.$parent.$parent.panelInstance === "tapComponent.changeGoodsDetails") {
@@ -355,7 +354,6 @@ export default {
       // 判断如果单据状态为确认/完成/取消 不可编辑  下发WMS状态 0：未下发 1: 下发中 2:下发成功 3:下发失败 4:撤回成功
       setTimeout(() => {
         if (this.orderStatus !== 0 || ![0,3].includes(this.wmsIssueStatus)) {
-          console.log('0000980890');
           BtnConfig[0].isShow = false;
           BtnConfig[1].isShow = false;
           BtnConfig[2].isShow = false;
@@ -628,12 +626,8 @@ export default {
                   const rI = e.target.value;
                   params.row.REFUND_ID = rI;
                   if (this.$route.params.customizedModuleId !== "New") {
-                    this.toMainData[
-                      // 退货明细
-                      this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails')
-                        ? "tui"
-                        : "huan"
-                    ][params.index] = params.row;
+                    // 退货明细
+                    this.toMainData[this.panelReturn ? "tui" : "huan"][params.index] = params.row;
                     R3.store.commit(
                       "customize/returnOrderChangeItem",
                       JSON.parse(JSON.stringify(this.toMainData))
@@ -694,12 +688,7 @@ export default {
                   2
                 );
                 if (this.$route.params.customizedModuleId !== "New") {
-                  this.toMainData[
-                    // 退货明细
-                    this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails')
-                      ? "tui"
-                      : "huan"
-                  ][params.index] = params.row;
+                  this.toMainData[this.panelReturn ? "tui" : "huan"][params.index] = params.row;
                   R3.store.commit(
                     "customize/returnOrderChangeItem",
                     JSON.parse(JSON.stringify(this.toMainData))
@@ -767,6 +756,7 @@ export default {
       let qty = 0;
       let REAL_AMT = 0;
       // 退货明细
+      console.log('this.panelReturn:',this.panelReturn);
       const key1 = this.panelReturn ? "QTY_REFUND" : "QTY_EXCHANGE"; // 申请退货数量 : 换货数量
       const key2 = this.panelReturn ? "REFUND_FEE" : "AMT_EXCHANGE"; // 退货金额 : 成交金额
       const key3 = this.panelReturn ? "PRO_ACTUAL_AMT" : "AMT_EXCHANGE"; // 商品应退金额 : 换货金额
@@ -799,25 +789,34 @@ export default {
         let returnAmount = R3.store.state.customize.returnAmount;
         let FINAL_ACTUAL_AMT;
         if (this.$route.params.tableName === "OC_B_RETURN_ORDER_ECXCHANGE_TABLE") {
-          FINAL_ACTUAL_AMT =
-            Number(returnAmount.PRO_ACTUAL_AMT) +
-            Number(returnAmount.SHIP_AMT) +
-            Number(returnAmount.ADJUST_AMT) -
-            Number(returnAmount.EXCHANGE_AMT);
-            R3.store.commit(
-              `customize/returnAmount`,
-              JSON.parse(
-                JSON.stringify({
-                  EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt),
+            if(this.panelReturn){
+              R3.store.commit(`customize/returnAmount`,JSON.parse(JSON.stringify({
+                    PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(amt)
+                  })
+                )
+              );
+            FINAL_ACTUAL_AMT = Number(returnAmount.PRO_ACTUAL_AMT) + Number(returnAmount.SHIP_AMT) + Number(returnAmount.ADJUST_AMT) - Number(returnAmount.EXCHANGE_AMT);
+            R3.store.commit(`customize/returnAmount`,JSON.parse(JSON.stringify({
+                    FINAL_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(FINAL_ACTUAL_AMT),
+                  })
+                )
+              );
+            }else{
+              R3.store.commit( `customize/returnAmount`, JSON.parse( JSON.stringify({
+                    EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt),
+                  })
+                )
+              );
+            FINAL_ACTUAL_AMT = Number(returnAmount.PRO_ACTUAL_AMT) + Number(returnAmount.SHIP_AMT) + Number(returnAmount.ADJUST_AMT) - Number(returnAmount.EXCHANGE_AMT);
+            R3.store.commit( `customize/returnAmount`, JSON.parse( JSON.stringify({
                   FINAL_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(FINAL_ACTUAL_AMT),
-                  // FINAL_REAL_AMT: this.$OMS2.omsUtils.floatNumber(FINAL_ACTUAL_AMT),
                 })
               )
-          );
+            );
+          }
         } else {
           R3.store.commit(`customize/returnAmount`, {
             PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(amt),
-            // PRO_REAL_AMT: this.$OMS2.omsUtils.floatNumber(amt),
             EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt)
           });
           FINAL_ACTUAL_AMT =
@@ -826,7 +825,6 @@ export default {
             Number(returnAmount.ADJUST_AMT);
           R3.store.commit(`customize/returnAmount`, {
             FINAL_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(FINAL_ACTUAL_AMT),
-            // FINAL_REAL_AMT: this.$OMS2.omsUtils.floatNumber(FINAL_ACTUAL_AMT),
           });
         }
       }, 10);
