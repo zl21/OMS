@@ -308,7 +308,8 @@ export default {
 <style lang="less">
 // @import "~@/css/modal/orderCenter/specifyGoodsAssign.less";
 .specifyGoods {
-  height: 375px;
+  // height: 375px;
+  margin-top: 16px;
   .i_head {
     height: 30px;
     .searchForm {
