@@ -23,25 +23,49 @@ export default {
         typeAll: 'error',
         buttons: [
           {
-            text: window.vmI18n.t('btn.save'), // 保存、
+            text: '保存', // 保存、
+            disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.save();
             }
           },
           {
-            text: '审核',
+            text: '复制',
+            disabled: true, // 按钮禁用控制
             btnclick: () => {
-              // this.save();
+              const self = this;
+              this.copy();
+            }
+          },
+          {
+            text: '审核',
+            disabled: true, // 按钮禁用控制
+            btnclick: () => {
+              const _this = this;
+              const fromdata = new FormData();
+              const param = {"tableid":249230545,"ids":[_this.$route.params.customizedModuleId],"menu":"额外退款"}
+              fromdata.append('actionid', 41460332);
+              fromdata.append('webaction', null);
+              fromdata.append('param', JSON.stringify(param));
+              _this.service.common.exeAction(fromdata).then(res => {
+                if (res.data.code === 0) {
+                  _this.query();
+                  _this.$Message.success(res.data.message);
+                } else {
+                  _this.$Message.warning(res.data.message);
+                }
+              })
             }
           },
           {
             text: '打款失败复审',
+            disabled: true, // 按钮禁用控制
             btnclick: () => {
-              // this.save();
+              this.save(true);
             }
           },
           {
-            text: window.vmI18n.t('btn.back'), // 返回
+            text: '返回', // 返回
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
               if (this.$route.params.customizedModuleName === 'EXTRAREFUND') {
@@ -854,6 +878,8 @@ export default {
         height: 250,
         valuedata: []
       },
+      PAYMENT_STATUS: '', // 单据状态
+      copyId: '',
     };
   },
   async mounted() {
@@ -861,32 +887,34 @@ export default {
     this.returnInfo.formData.forEach(item => {
       if (item.value == 'RESERVE_BIGINT01') item.options = RESERVE_BIGINT01
     })
-    if (this.$route.query.fromOrder) {
-      // 该类型从订单详情跳转过来的查询方式
-      this.queryBounced(this.$route.query.oid);
-      this.$nextTick(() => {
-        // this.reForm.config.forEach((val, index) => {
-        //   if (val.item.label === '单据来源') {
-        //     this.reForm.config[index].item.props.value = '手动';
-        //   } else if (val.item.label === '单据日期') {
-        //     this.reForm.config[index].item.props.value = commonUtil.dateFormat(new Date(), 'yyyy-MM-dd');
-        //   }
-        // });
-      });
-    } else {
-      this.$nextTick(() => {
-        // this.reForm.config.forEach((val, index) => {
-        //   if (val.item.label === '单据来源') {
-        //     this.reForm.config[index].item.props.value = '手动';
-        //   } else if (val.item.label === '单据日期') {
-        //     this.reForm.config[index].item.props.value = commonUtil.dateFormat(new Date(), 'yyyy-MM-dd');
-        //   }
-        // });
-      });
-    }
+    // if (this.$route.query.fromOrder) {
+    //   // 该类型从订单详情跳转过来的查询方式
+    //   this.queryBounced(this.$route.query.oid);
+    //   this.$nextTick(() => {
+    //     // this.reForm.config.forEach((val, index) => {
+    //     //   if (val.item.label === '单据来源') {
+    //     //     this.reForm.config[index].item.props.value = '手动';
+    //     //   } else if (val.item.label === '单据日期') {
+    //     //     this.reForm.config[index].item.props.value = commonUtil.dateFormat(new Date(), 'yyyy-MM-dd');
+    //     //   }
+    //     // });
+    //   });
+    // } else {
+    //   this.$nextTick(() => {
+    //     // this.reForm.config.forEach((val, index) => {
+    //     //   if (val.item.label === '单据来源') {
+    //     //     this.reForm.config[index].item.props.value = '手动';
+    //     //   } else if (val.item.label === '单据日期') {
+    //     //     this.reForm.config[index].item.props.value = commonUtil.dateFormat(new Date(), 'yyyy-MM-dd');
+    //     //   }
+    //     // });
+    //   });
+    // }
+    // 复制
+    if (this.$route.query.copyId) this.copyId = this.$route.query.copyId
     if (this.$route.params.customizedModuleId !== 'New') {
       this.query()
-      this.logTableInfo();
+      if (!this.$route.query.copyId) this.logTableInfo();
     } else {
       // this.information.formValue.CREATIONDATE = commonUtil.dateFormat(new Date(), 'yyyy-MM-dd')
     }
@@ -894,7 +922,7 @@ export default {
   },
   methods: {
     // 保存
-    save() {
+    save(flag) {
       const self = this;
       if (!this.information.formValue.RESERVE_VARCHAR01) return this.$Message.warning('R3单据编号必填!');
       if (!this.information.formValue.RESERVE_BIGINT04) return this.$Message.warning('紧急程度必填!');
@@ -908,18 +936,20 @@ export default {
       if (this.IMAGE == '') return this.$Message.warning('附件必填!');
       if (!this.tableConfig.data.length) return this.$Message.warning('退款明细必填!');
       if (this.returnInfo.formValue.OC_B_RETURN_TYPE_ENAME == '退货' && !this.returnInfo.formValue.RESERVE_BIGINT02) return this.$Message.warning('退款大类=退货时，退货签收状态必填!');
+      // 签收状态为“未签收”时该字段必填，其他选填，否则点击保存时提示”签收状态为“未签收”时，退货物流单号必填！”
+      if (this.returnInfo.formValue.RESERVE_BIGINT02 == '1' && !this.returnInfo.formValue.RESERVE_VARCHAR02) return this.$Message.warning('签收状态为“未签收”时，退货物流单号必填!');
 
 
 
 
       const data = {};
-      data.objId = self.$route.params.customizedModuleId === 'New' || self.$route.query.cid || self.$route.query.oid ? -1 : self.$route.params.customizedModuleId;
+      data.objId = self.$route.params.customizedModuleId === 'New' || self.copyId ? -1 : self.$route.params.customizedModuleId;
       const AfSend = Object.assign(self.information.formValue, this.returnInfo.formValue);
       AfSend.IMAGE = this.IMAGE;
       AfSend.SOURCE_BILL_NO = this.onSelectData.ID
-      // AfSend.RESERVE_BIGINT01 = '1'
+      if (flag) AfSend.PAYMENT_STATUS = '3' // 打款失败复审
       const AfSendItem = self.tableConfig.data.map(item => ({
-        id: item.ID,
+        id: self.copyId ? item.RELATION_BILL_ITEM_ID : item.ID,
         AMT_RETURN: item.returnPrice,
         FREIGHT: item.FREIGHT,
         QTY_IN: item.QTY_IN
@@ -930,14 +960,20 @@ export default {
       this.service.orderCenter.saveAfterDeliver(data).then(res => {
         if (res.data.code == 0) {
           self.$Message.success(res.data.message);
-          comUtils.tabCloseAppoint(this);
 
-
-          R3.store.commit('global/tabOpen', {
-            type: 'S',
-            tableName: 'OC_B_RETURN_AF_SEND_MANUAL',
-            tableId: 249230545
-          });
+          comUtils.tabCloseAppoint(self);
+          self.$nextTick(()=>{
+             self.$store.commit('customize/TabOpen', {
+              id: res.data.data,
+              type: 'action',
+              name: 'EXTRAREFUND',
+              label: '额外退款编辑',
+              query: Object.assign({
+                id: res.data.data,
+                tabTitle: '额外退款编辑'
+              }),
+            });
+          })
           // 销毁当前实例
           self.$destroy();
         } else {
@@ -1319,7 +1355,30 @@ export default {
     },
 
 
-
+    // 复制
+    copy() {
+      const copyId = this.$route.params.customizedModuleId;
+      comUtils.tabCloseAppoint(this);
+      R3.store.commit('global/tabOpen', {
+        type: 'S',
+        tableName: 'OC_B_RETURN_AF_SEND_MANUAL',
+        tableId: 249230545
+      });
+      this.$nextTick(()=>{
+        this.$store.commit('customize/TabOpen', {
+          id: copyId,
+          type: 'action',
+          name: 'EXTRAREFUND',
+          label: '额外退款编辑',
+          query: Object.assign({
+            id: copyId,
+            tabTitle: '额外退款编辑',
+            copyId: copyId
+          }),
+        });
+      })
+      this.$destroy();
+    },
     // 获取详情
     query() {
       const self = this;
@@ -1341,11 +1400,22 @@ export default {
       });
     },
     setDetailForm(Afsend) {
+      if(!this.copyId) {
+        this.PAYMENT_STATUS = Afsend.PAYMENT_STATUS; // 打款状态
+        this.btnConfig.buttons.forEach(item => {
+          item.disabled = false
+          // 打款状态:0 未打款 1 打款中 2 打款成功 3 打款失败
+          // 单据状态：未退款", 0 "退款中", 1 "退款完成", 2 "取消", 3 "待审核", 4
+          if ((Afsend.PAYMENT_STATUS == 3) && (item.text === '保存' || item.text === '审核' || item.text === '复制')) item.disabled = true
+          if ((Afsend.PAYMENT_STATUS == 0 && Afsend.RETURN_STATUS == 4) && (item.text === '打款失败复审')) item.disabled = true
+          if ((Afsend.PAYMENT_STATUS == 1 || Afsend.PAYMENT_STATUS == 2 || (Afsend.PAYMENT_STATUS == 0 && Afsend.RETURN_STATUS == 1)) && (item.text !== '返回')) item.disabled = true
+        })
+      }
       // 申请单据信息
       this.information.formValue = {
-        BILL_NO: Afsend.BILL_NO, // 额外退款单号码
-        CREATIONDATE: Afsend.CREATIONDATE && commonUtil.dateFormat(new Date(Afsend.CREATIONDATE), 'yyyy-MM-dd hh:mm:ss'), // 创建时间
-        OWNERENAME: Afsend.OWNERENAME, // 创建人
+        BILL_NO: !this.copyId ? Afsend.BILL_NO : '', // 额外退款单号码
+        CREATIONDATE: !this.copyId ? Afsend.CREATIONDATE && commonUtil.dateFormat(new Date(Afsend.CREATIONDATE), 'yyyy-MM-dd hh:mm:ss') : '', // 创建时间
+        OWNERENAME: !this.copyId ? Afsend.OWNERENAME : '', // 创建人
         REFUND_ORDER_SOURCE_TYPE: Afsend.REFUND_ORDER_SOURCE_TYPE + '', // 单据来源
         RESERVE_VARCHAR01: Afsend.RESERVE_VARCHAR01, // R3单据编号
         RESERVE_BIGINT04: Afsend.RESERVE_BIGINT04 + '', // 紧急程度
@@ -1356,7 +1426,7 @@ export default {
         CP_C_SHOP_ID: Afsend.CP_C_SHOP_ID, // 店铺id
         VIP_NICK: Afsend.VIP_NICK, // 买家昵称
         VIP_PHONE: Afsend.VIP_PHONE, // 买家手机号
-        BPM_FAILURE_TIMES: Afsend.BPM_FAILURE_TIMES, // BPM传输失败次数
+        BPM_FAILURE_TIMES: !this.copyId ? Afsend.BPM_FAILURE_TIMES : '', // BPM传输失败次数
       }
       // 申请退款信息
       this.returnInfo.formValue = {
@@ -1374,7 +1444,7 @@ export default {
         RESERVE_VARCHAR02: Afsend.RESERVE_VARCHAR02, // 退货物流单号
         RESERVE_BIGINT03: Afsend.RESERVE_BIGINT03, // 支付宝累计打款次数
         REASON: Afsend.REASON, // 退款原因备注说明
-        SELLER_REMARK: Afsend.SELLER_REMARK, // 卖家备注
+        SELLER_REMARK: !this.copyId ? Afsend.SELLER_REMARK : '', // 卖家备注
       }
       if (Afsend.OC_B_RETURN_TYPE_ENAME == '退货') {
         this.returnInfo.formData.forEach(item => {

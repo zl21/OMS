@@ -15,7 +15,7 @@ export default {
       reasonType: '拒绝打款',
       ruleValidate: {
         reason: [
-          { required: true, message: '拒绝打款原因不能为空!', trigger: 'blur' }
+          { required: true, message: ' ', trigger: 'blur' }
         ],
       },
       btnConfig: {
@@ -48,7 +48,7 @@ export default {
   methods: {
     determine() {
       if (!this.reason) return this.$Message.warning('拒绝打款原因不能为空!');
-      this.service.orderCenter.refuseToPayOcBReturnAfSend({ ids: this.idArray, reason: this.reason }).then(res=>{
+      this.service.orderCenter.refuseToPayOcBReturnAfSend({ ids: this.idArray, reason: this.reason, paymentStatus: 4 }).then(res=>{
         console.log(res);
         if (res.data.data.code == 0) {
           this.$Message.success(res.data.data.message);
