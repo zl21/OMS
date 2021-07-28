@@ -44,7 +44,7 @@
                     <Input
                       v-model="SHIP_AMT"
                       type="text"
-                      :regx="/^[+]?\d*\.{0,1}\d{0,2}$/"
+                      :regx="/^\d*\.{0,1}\d{0,2}$/"
                       placeholder="0.00"
                     />
                     <!-- :regx="/^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/" -->
@@ -62,6 +62,7 @@
                       :regx="/^-?\d*\.{0,1}\d{0,2}$/"
                       placeholder="0.00"
                     />
+                    <!-- 要做失焦处理，仅输入符号时，计算出的是NaN -->
                   </div>
                 </li>
                 <li v-show="showEx" class="symbol">-</li>
@@ -698,17 +699,18 @@ export default {
     'SHIP_AMT': {
       handler(newV, oldV) {
         const pa = Number(this.PRO_ACTUAL_AMT || 0);
-        const aa = Number(this.ADJUST_AMT);
+        const aa = Number(this.ADJUST_AMT == '-' ? 0 : this.ADJUST_AMT);
         const ea = Number(this.EX_ACTUAL_AMT || 0);
         this.FINAL_ACTUAL_AMT = this.$OMS2.omsUtils.floatNumber(pa + Number(newV) + aa - ea, 2);
       }
     },
     'ADJUST_AMT': {
       handler(newV, oldV) {
+        const aa = newV == '-' ? 0 : newV;
         const pa = Number(this.PRO_ACTUAL_AMT || 0);
         const sa = Number(this.SHIP_AMT);
         const ea = Number(this.EX_ACTUAL_AMT || 0);
-        this.FINAL_ACTUAL_AMT = this.$OMS2.omsUtils.floatNumber(pa + Number(newV) + sa - ea, 2);
+        this.FINAL_ACTUAL_AMT = this.$OMS2.omsUtils.floatNumber(pa + Number(aa) + sa - ea, 2);
       }
     },
     "formConfig.formValue.BILL_TYPE": {
@@ -1066,7 +1068,7 @@ export default {
             // label: '退换货单详情',
             label: $i18n.t('panel_label.a2'),
             tableId: bT == 0 ? 10728 : 10754,
-            id: `${self.ID}?RETURN_SOURCE='手工新增'&SOURCE_CODE=${mainTable.SOURCE_CODE}`,
+            id: `${self.ID}?RETURN_SOURCE=手工新增&SOURCE_CODE=${mainTable.SOURCE_CODE}`,
           });
         }, 10);
       } else {
