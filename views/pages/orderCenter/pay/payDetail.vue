@@ -150,6 +150,7 @@ export default {
                   this.addData.forEach(it => {
                     it.COMPENSATE_AMT = it.COMPENSATE_AMT === 0 ? '0.00' : it.COMPENSATE_AMT;
                     it.REAL_AMT = it.REAL_AMT === 0 ? '0.00' : it.REAL_AMT;
+                    it.COMPENSATE_QTY = it.COMPENSATE_QTY === 0 ? 1 : it.COMPENSATE_QTY;
                   })
                 }
                 this.tableConfig.data = this.tableConfig.data.concat(this.addData);
@@ -289,10 +290,11 @@ export default {
           // 赔付数量
           return h('InputNumber', {
             props: {
-              value: Number(params.row.COMPENSATE_QTY || 0),
+              value: Number(params.row.COMPENSATE_QTY || 1),
               // regx: /^[1-9]\d*$/, // 此组件正则不管用
               max: (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? Number(params.row.QTY || 0) : Infinity,
-              min: (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? 1 : 0, // 关联了原单最小1，反之最小0
+              // min: (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? 1 : 0, // 关联了原单最小1，反之最小0
+              min: 1,
               editable: true,
               formatter: value => `${value}`.replace(/\./g, ''),
               parser: value => value.replace(/\./g, ''),
@@ -306,7 +308,7 @@ export default {
                  */
                 // params.row.COMPENSATE_QTY = null;
                 params.row.COMPENSATE_QTY = e;
-                if (e || e === 0) {
+                if (e) {
                   params.row.COMPENSATE_AMT = $omsUtils.floatNumber(e * Number(params.row.PRICE_ACTUAL || 0), 2);
                   this.tableConfig.data[params.index] = params.row;
                   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
@@ -316,7 +318,8 @@ export default {
               'on-blur': e => {
                 const cq = params.row.COMPENSATE_QTY;
                 if (!cq && cq !== 0) {
-                  params.row.COMPENSATE_QTY = (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? 1 : 0;
+                  // params.row.COMPENSATE_QTY = (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? 1 : 0;
+                  params.row.COMPENSATE_QTY = 1;
                   params.row.COMPENSATE_AMT = $omsUtils.floatNumber(params.row.COMPENSATE_QTY * Number(params.row.PRICE_ACTUAL || 0), 2);
                   params.row._rowKey = $omsUtils.generateKey();
                   this.tableConfig.data[params.index] = params.row;
