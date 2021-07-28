@@ -91,26 +91,32 @@ export default {
       },
     };
   },
+  created() {
+    if (this.idArray.length == 0) {
+      this.$Message.warning('请选择需要拒绝的换货单！');
+      this.$emit('closeActionDialog', false)
+      return
+    }
+    console.log(this.$parent.$parent.selectRowData);
+    let isValid = this.$parent.$parent.selectRowData.every(i => i.EXCHANGE_STATUS.val == '换货待处理')
+    if (!isValid) {
+      this.$Message.warning('换货状态不满足，不能拒绝换货！');
+      this.$emit('closeActionDialog', false)
+      return
+    }
+  },
   async mounted() {
-    const formData = new FormData();
-    formData.append('param', '{}');
-    this.$comUtils.setLoading(true);
-    try {
-      const {
-        data: { code, datas },
-      } = await this.service.interfacePlatform.exchangeRefuseReason(formData);
-      if (code === 1) {
-        const resData = JSON.parse(datas);
-        this.formConfig.formData[0].options = resData.map((val) => ({
-          label: val.outRefuseCopywriting,
-          value: val.refuseReasonId,
-        }));
-      } else {
-        this.$message.error('拒绝换货原因请求失败');
-      }
-    } catch {
-    } finally {
-      this.$comUtils.setLoading();
+    const {
+      data: { code, datas },
+    } = await this.service.interfacePlatform.exchangeRefuseReason();
+    if (code === 0) {
+      const resData = JSON.parse(datas);
+      this.formConfig.formData[0].options = resData.map((val) => ({
+        label: val.outRefuseCopywriting,
+        value: val.refuseReasonId,
+      }));
+    } else {
+      this.$message.error('拒绝换货原因请求失败');
     }
   },
   methods: {
@@ -120,30 +126,20 @@ export default {
         this.$message.warning('拒绝换货原因不能为空');
         return;
       }
-      if (this.idArray.length === 0) {
-        this.$message.error('请先选择需要拒绝换货的单据！');
-        return;
-      }
+     
       const param = {
         ids: this.idArray,
+        tableName: 'IP_B_TAOBAO_EXCHANGE',
         menu: '淘宝换货单接口',
         refuseReasonId: formValue.refuseReasonId,
         outRefuseCopywriting: formValue.outRefuseCopywriting,
       };
-      const formData = new FormData();
-      formData.append('param', JSON.stringify(param));
-      this.$comUtils.setLoading(true);
-      try {
-        const {
-          data: { code, message },
-        } = await this.service.interfacePlatform.exchangeRefuse(formData);
-        if (code === 1) {
-          this.$message.success(message);
-        }
+      const {
+        data: { code, message },
+      } = await this.service.interfacePlatform.exchangeRefuse(param);
+      if (code === 1) {
+        this.$message.success(message);
         this.$emit('closeActionDialog', true);
-      } catch {
-      } finally {
-        this.$comUtils.setLoading();
       }
     },
   },

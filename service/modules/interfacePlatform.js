@@ -12,8 +12,8 @@ export default {
   // 淘宝换货单接口
   exchangeDownload: params => $network.post('/p/cs/exchangeDownload', params),
   // 拒绝换货
-  exchangeRefuseReason: params => $network.post('/p/cs/exchangeRefuseReason', params),
-  exchangeRefuse: params => $network.post('/p/cs/exchangeRefuse', params),
+  exchangeRefuseReason: params => $network.post('/p/cs/ip/v1/exchange/exchangeRefuseReason', params),
+  exchangeRefuse: params => $network.post('/p/cs/ip/v1/exchange/taobaoTransNoChangeAgree', params),
   // 寻仓订单下载
   downLoadVipDelivery: params => $network.post('/p/cs/downLoadVipDelivery', params),
   // 唯品会退供单
