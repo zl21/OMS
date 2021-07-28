@@ -1092,7 +1092,7 @@ export default {
     // 校验提示
     resultTipsHand(requriredArr, labelArr) {
       let formValues = {};
-      Object.assign(formValues, this.formConfig1.formValue, this.formConfig2.formValue, this.formConfig3.formValue);
+      Object.assign(formValues, this.formConfig1.formValue, this.formConfig2.formValue, this.formConfig3.formValue, this.formConfig6.formValue);
       for (let key in formValues) {
         if (requriredArr.includes(key)) {
           if (typeof formValues[key] !== "object" && !formValues[key]) {

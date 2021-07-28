@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-22 15:47:49
- * @LastEditTime: 2021-07-23 18:40:02
+ * @LastEditTime: 2021-07-28 13:52:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/preSale.vue
@@ -124,7 +124,10 @@ export default {
         let reqdata = [];
         this.datalist.forEach((item) => {
           let obj = {
-            ID: '-1',
+            ID:
+              this.$route.params.itemId == 'New'
+                ? '-1'
+                : this.$route.params.itemId,
             PRESELL_DISCERN_TYPE: item.PRESELL_DISCERN_TYPE,
             PRESELL_DISCERN_CENTENT: item.PRESELL_DISCERN_CENTENT,
             PREDICT_TYPE: item.PREDICT_TYPE,
@@ -175,9 +178,13 @@ export default {
               this.dataobj[k] = item[k];
             }
             this.dataobj.show = true;
-            let newdata = new Date(item.PREDICT_DELIVER_GOODS_TIME)
-            this.dataobj.PREDICT_DELIVER_GOODS_TIME = commonUtils.dateFormat(newdata,"yyyy-MM-dd hh:mm:ss")
-            this.dataobj.value = item.PREDICT_TYPE == 2 ? "付款后": "预计发货时间";
+            let newdata = new Date(item.PREDICT_DELIVER_GOODS_TIME);
+            this.dataobj.PREDICT_DELIVER_GOODS_TIME = commonUtils.dateFormat(
+              newdata,
+              'yyyy-MM-dd hh:mm:ss'
+            );
+            this.dataobj.value =
+              item.PREDICT_TYPE == 2 ? '付款后' : '预计发货时间';
             this.datalist.push(JSON.parse(JSON.stringify(this.dataobj)));
           });
         }
