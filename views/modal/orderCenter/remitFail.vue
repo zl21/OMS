@@ -55,7 +55,7 @@ export default {
   },
   created() {
     let IDS = this.$parent.$parent.idArray
-    if (IDS.length == 0) {
+    if (IDS.length != 1 ) {
       this.$Message.warning('请选中一条数据！');
       this.$emit('closeActionDialog', false)
       return
