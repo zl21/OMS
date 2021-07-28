@@ -123,7 +123,7 @@ class BtnConfig {
         btnclick: () => this.btnMainHandler('returnGoodsCancel'),
       },
       {
-        webname: 'updateOrderVirtual', // 退货换单 - 虚拟入库
+        webname: 'updateOrderVirtual', // 退货换单 - 换货先发
         btnclick: () => this.btnMainHandler('virtualStorage'),
       },
       {
@@ -919,10 +919,10 @@ class BtnConfig {
     if (BtnConfig.singleType) {
       if (self.$route.query.id == '-1') return;
       if (self.status !== 20) {
-        commonUtils.msgTips(self, 'warning', 'l6');// 此退换单状态不允许虚拟入库!
+        commonUtils.msgTips(self, 'warning', 'l6');// 此退换单状态不允许换货先发!
         return;
       }
-      commonUtils.modalShow(self, 'l7', 'common.updateVirtualLibrary', { ID: id, }, 'part',
+      commonUtils.modalShow(self, 'kw', 'common.updateVirtualLibrary', { ID: id, }, 'part',
         function (res) {
           if (res.data.code === 0) {
             self.$Message.success(res.data.message)
