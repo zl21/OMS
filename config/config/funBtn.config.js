@@ -1231,7 +1231,7 @@ class BtnConfig {
         function (res) {
           if (res.data.code === 0) {
             commonUtils.msgTips(self, 'sucess', res.data.message)
-            self.load()
+            self.query()
           }
         }
       )
