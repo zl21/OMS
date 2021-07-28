@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-28 15:36:26
+ * @LastEditTime: 2021-07-28 16:20:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -230,6 +230,7 @@ export default {
       }
     // 单据状态 0:未审核
     this.orderStatus = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[6].valuedata;
+    this.refundType = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[0].valuedata;
     this.tableConfig.columns = [
           {
             key: 'PS_C_SKU_ECODE',
@@ -344,8 +345,8 @@ export default {
       // console.log(R3.store.);
       let ids
       let params = {
-        BILL_NO:billNo,
-        // REFUND_TYPE:
+        BILL_NO: billNo,
+        REFUND_TYPE: this.refundType,
         pageNum: pageNum,
         pageSize: pageSize
       };
@@ -399,7 +400,7 @@ export default {
       this.getTable(false,billNo,this.tableConfig.pageIndex,pageSize)
     },
     deleteData(row){
-      // 删除
+      // 数据删除
       this.tableConfig.data = [...this.tableConfig.data].filter(x => [...row].every(y => y.ID !== x.ID));
       this.tableConfig.selectData = [];
     },
