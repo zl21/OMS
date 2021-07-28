@@ -991,6 +991,7 @@ export default {
     a1: '变化数量',
     a2: '期末可售数',
     a3: '日程归属名称',
+    a4: '实体可用数量',
     internationalCode: '国际码',
     abbreviation: '简称',
     abnormalInfo: '异常信息', //异常信息
