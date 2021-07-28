@@ -3266,9 +3266,18 @@ export default {
       } else {
         isRefund2Exchange = 0;
       }
+      const copyFormValue = JSON.parse(JSON.stringify(_this.information.formValue));
+      // 是否无名件匹配
+      if (copyFormValue.IS_ANONYMOUS) {
+        if (copyFormValue.IS_ANONYMOUS == '是') {
+          copyFormValue.IS_ANONYMOUS = 1
+        } else if (copyFormValue.IS_ANONYMOUS == '否') {
+          copyFormValue.IS_ANONYMOUS = 0
+        }
+      }
       const params = {
         objid: _this.$route.query.id,
-        OcBreturnOrder: Object.assign(_this.information.formValue, _this.replacement.formValue, money), // 主表信息
+        OcBreturnOrder: Object.assign(copyFormValue, _this.replacement.formValue, money), // 主表信息
         OcBreturnOrderExchange: Elist, // 换货明细
         OcBreturnOrderRefund: Rlist, // 退货明细
         isRefund2Exchange 

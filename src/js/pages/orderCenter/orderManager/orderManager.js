@@ -2455,7 +2455,7 @@ export default {
           dom.style.height = '100%';
         } else {
           self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
-          dom.style.height = '48px';
+          dom.style.height = '80px';
         }
         self.selectValue = []; // 清空高级搜索项
         self.clearFromListValue = true;
