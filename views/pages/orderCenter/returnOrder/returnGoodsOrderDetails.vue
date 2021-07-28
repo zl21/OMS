@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-28 13:30:23
+ * @LastEditTime: 2021-07-28 13:56:47
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -202,6 +202,13 @@ export default {
           btnsite: "right", // 按钮位置 (right , center , left)
           buttons: [
             {
+              text: $i18n.t('btn.reset'), //重置
+              btnclick: () => {
+                this.resetFun();
+                this.getPlaceData(0, this.replaceProductTable.pageSize);
+              }, // 按钮点击事件
+            },
+            {
               type: "primary", // 按钮类型
               text: $i18n.t('btn.search'), // 按钮文本 搜索
               isShow: true,
@@ -389,6 +396,13 @@ export default {
     }, 10);
   },
   methods: {
+    // 替换商品重置
+    resetFun(){
+      let formVlue = this.replaceProductTable.businessFormConfig.formValue
+      formVlue.PS_C_PRO_ECODE = ''
+      formVlue.ECODE = ''
+      formVlue.ENAME = ''
+    },
     // 切换商品展示类型
     onSitch(){
       // 切换为sku商品展示 切换为平台商品展示

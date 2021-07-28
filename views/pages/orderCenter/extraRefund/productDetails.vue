@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-28 10:20:35
+ * @LastEditTime: 2021-07-28 14:19:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -274,10 +274,9 @@ export default {
             key: 'QTY_REFUND',
             title: '申请退货数量', // 申请退货数量：默认取原零售发货单可退数量，可编辑，仅支持录入大于0的正整数，且需小于等于原零售发货单可退数量；
             render:(h,params)=>{
-            console.log(Number(params.row.QTY || 0) - Number(params.row.QTY_RETURN_APPLY || 0),params.row.QTY,params.row.QTY_RETURN_APPLY);
              return h('InputNumber', {
                 props: {
-                  value: Number(params.row.QTY || 0) - Number(params.row.QTY_RETURN_APPLY || 0),
+                  value: params.row.QTY_REFUND,
                   autosize: true,
                   min:1, 
                   max: Number(params.row.QTY || 0) - Number(params.row.QTY_RETURN_APPLY || 0),
@@ -365,6 +364,7 @@ export default {
             // let PRICE_ACTUAL = item.PRICE ? item.PRICE : item.PRICE_ACTUAL;
             // console.log(PRICE_ACTUAL);
             let PRICE = Number(item.QTY_REFUND || 0) * Number(item.PRICE || 0);
+            item.QTY_REFUND = Number(item.QTY || 0) - Number(item.QTY_RETURN_APPLY || 0)
             item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
             item.AMT_ACTUAL_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
           })
