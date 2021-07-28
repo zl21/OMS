@@ -971,7 +971,7 @@ export default {
             type: 'tapOpen',
             plantLogo: [
               {
-                URL: '/static/img/u1105.png',
+                URL: require('@/assets/img/u1105.png') ,
               },
             ],
           },
@@ -980,7 +980,7 @@ export default {
             type: 'otherPlatform',
             plantLogo: [
               {
-                URL: '/static/img/u48690.png',
+                URL:  require('@/assets/img/u48690.png') ,
               },
             ],
           },
