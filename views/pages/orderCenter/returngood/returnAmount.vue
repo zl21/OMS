@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-07-28 10:06:22
+ * @LastEditTime: 2021-07-28 12:59:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -27,7 +27,7 @@
           <!-- 应退运费 -->
           <span :title="vmI18n.t('form_label.cr')">{{ vmI18n.t('form_label.ad') }}</span>
           <label>
-            <Input v-if="type && status" v-model="editData.SHIP_AMT" :regx="regx" @on-change="inputChange"></Input>
+            <Input v-if="type && status" v-model="editData.SHIP_AMT" :regx="/^\d*\.{0,1}\d{0,2}$/"/>
             <span v-else>
               {{ data.SHIP_AMT }}
             </span>
@@ -40,7 +40,7 @@
           <!-- 调整金额 -->
           <span :title="vmI18n.t('table_label.adjustment_amount')">{{vmI18n.t('table_label.adjustment_amount')}}</span>
           <label>
-            <Input v-if="type && status" v-model="editData.ADJUST_AMT" :regx="regx" @on-change="inputChange"></Input>
+            <Input v-if="type && status" v-model="editData.ADJUST_AMT"  :regx="/^-?\d*\.{0,1}\d{0,2}$/" @change="e => {if(!e.target.value || e.target.value == '-'){this.ADJUST_AMT = 0}}"/>
             <span v-else>
               {{ editData.ADJUST_AMT }}
             </span>
