@@ -46,6 +46,7 @@
                       type="text"
                       :regx="/^\d*\.{0,1}\d{0,2}$/"
                       placeholder="0.00"
+                      @on-blur="e => {if(!e.target.value){this.SHIP_AMT = 0}}"
                     />
                     <!-- :regx="/^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/" -->
                   </div>
@@ -61,6 +62,7 @@
                       type="text"
                       :regx="/^-?\d*\.{0,1}\d{0,2}$/"
                       placeholder="0.00"
+                      @on-blur="e => {if(!e.target.value || e.target.value == '-'){this.ADJUST_AMT = 0}}"
                     />
                     <!-- 要做失焦处理，仅输入符号时，计算出的是NaN -->
                   </div>
