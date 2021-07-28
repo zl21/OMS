@@ -11,12 +11,12 @@
           prop="reasonType"
         >
           <RadioGroup v-model="reasonType" @on-change='reasonTypeChage()'>
-            <Radio label="1">大款成功</Radio>
-            <Radio label="2">大款失败</Radio>
+            <Radio label="2">大款成功</Radio>
+            <Radio label="3">大款失败</Radio>
           </RadioGroup>
         </FormItem>
         <FormItem
-          v-if="reasonType == '1'"
+          v-if="reasonType == '2'"
           label="支付宝流水号"
           prop="reason"
         >
@@ -28,7 +28,7 @@
           />
         </FormItem>
         <FormItem
-          v-if="reasonType == '2'"
+          v-if="reasonType == '3'"
           label="打款失败/拒绝打款原因（财务备注说明）"
           prop="reason"
         >
