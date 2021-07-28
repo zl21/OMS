@@ -211,6 +211,7 @@ export default {
       // btnConfig: BtnConfig.config(),
       btnConfig: {
         typeAll: "default",
+        btnsite: "right",
         buttons: [
           {
             text: "保存",
@@ -955,6 +956,7 @@ export default {
             },
           ],
         },
+        
         isSearchText: true,
         isShowDeleteDetailBtn: true, // 控制是否显示删除明细
         isShowImportBtn: true, // 控制是否显示导入

@@ -171,6 +171,7 @@ export default {
       // btnConfig: BtnConfig.config(),
       btnConfig: {
         typeAll: "default",
+        btnsite: "right",
         buttons: [
           {
             text: $i18n.t("btn.save"),
