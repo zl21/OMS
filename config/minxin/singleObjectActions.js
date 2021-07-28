@@ -108,7 +108,6 @@ export default () => ({
       let mainOrder = this.$store.state[routeUrl].updateData[tableName].changeData;
       let OC_B_REFUND_ORDER_ITEM = JSON.parse(JSON.stringify(R3.store.state.customize.extraoOrderDetails)) //明细
       console.log(OC_B_REFUND_ORDER_ITEM);
-      debugger
       let IDS // 删除ids
       let ID
       if(itemId === 'New'){
@@ -161,10 +160,6 @@ export default () => ({
       if(OC_B_REFUND_ORDER_ITEM.length){
           OC_B_REFUND_ORDER_ITEM_Arr = OC_B_REFUND_ORDER_ITEM.map(i =>{
             i.ISACTIVE === '是' ?  i.ISACTIVE = 'Y' :  i.ISACTIVE = 'N';
-            // i.QTY_ACTUAL = '';
-            // if(!i.PRICE){
-            //   i.PRICE = i.PRICE_ACTUAL
-            // }
             return i;
         })
       }
