@@ -80,7 +80,7 @@ export default {
     // 是否高亮
     highlightRow() {
       let highlightRow = Boolean
-      return highlightRow = this.jordanTableConfig.highlightRow === undefined ? true:this.jordanTableConfig.highlightRow;
+      return highlightRow = this.jordanTableConfig.highlightRow === undefined ? false : this.jordanTableConfig.highlightRow;
     },
     // 搜索框前文字
     isSearchText() {
