@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-28 09:59:41
+ * @LastEditTime: 2021-07-28 10:23:10
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -321,7 +321,6 @@ export default {
     this.getBtn().then((res) => {
       console.log(R3.store.state.customize.returnOrderChangeItem,this.$route.query.RETURN_SOURCE);
       let BtnConfig = this.businessActionTable.businessButtonConfig.buttons;
-      console.log('this.$parent.$parent.panelInstance',this.$parent.$parent.panelInstance);
       // 换货明细
       if (this.$parent.$parent.panelInstance === "tapComponent.changeGoodsDetails") {
         BtnConfig[0].isShow = false;

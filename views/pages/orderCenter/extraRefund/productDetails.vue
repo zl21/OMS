@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-27 18:21:38
+ * @LastEditTime: 2021-07-28 10:20:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -261,7 +261,7 @@ export default {
             key: 'QTY',
             title: '购买数量',
             render:(h,params)=>{
-              return h('span', {}, Number(params.row.QTY));
+              return h('span', {}, Number(params.row.QTY || 0));
             }
           },{
             key: 'REAL_AMT',
@@ -274,12 +274,13 @@ export default {
             key: 'QTY_REFUND',
             title: '申请退货数量', // 申请退货数量：默认取原零售发货单可退数量，可编辑，仅支持录入大于0的正整数，且需小于等于原零售发货单可退数量；
             render:(h,params)=>{
+            console.log(Number(params.row.QTY || 0) - Number(params.row.QTY_RETURN_APPLY || 0),params.row.QTY,params.row.QTY_RETURN_APPLY);
              return h('InputNumber', {
                 props: {
-                  value: Number(params.row.QTY) - Number(params.row.QTY_RETURN_APPLY),
+                  value: Number(params.row.QTY || 0) - Number(params.row.QTY_RETURN_APPLY || 0),
                   autosize: true,
-                  min:1,
-                  max: Number(params.row.QTY) - Number(params.row.QTY_RETURN_APPLY),
+                  min:1, 
+                  max: Number(params.row.QTY || 0) - Number(params.row.QTY_RETURN_APPLY || 0),
                   disabled: this.$route.params.itemId == 'New' || (this.orderStatus == 0 && this.$route.params.itemId != 'New') ? false : true,
                   regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
                 },
@@ -363,7 +364,7 @@ export default {
             // console.log(this.$route.params.itemId,item);
             // let PRICE_ACTUAL = item.PRICE ? item.PRICE : item.PRICE_ACTUAL;
             // console.log(PRICE_ACTUAL);
-            let PRICE = Number(item.QTY_REFUND) * Number(item.PRICE || 0);
+            let PRICE = Number(item.QTY_REFUND || 0) * Number(item.PRICE || 0);
             item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
             item.AMT_ACTUAL_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
           })
