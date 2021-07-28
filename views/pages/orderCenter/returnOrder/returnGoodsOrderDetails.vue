@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-28 12:06:00
+ * @LastEditTime: 2021-07-28 13:30:23
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -709,10 +709,10 @@ export default {
             on: {
               "on-change": (e) => {
                 params.row.PRICE_ACTUAL = e.target.value;
-                params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.QTY_EXCHANGE));
+                params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(Number(e.target.value) * Number(params.row.QTY_EXCHANGE || 0));
                 this.businessActionTable.data[params.index] = params.row;
                 // 退货明细
-                this.toMainData[ this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails') ? "tui"  : "huan" ][params.index] = params.row;
+                this.toMainData[this.panelReturn ? "tui" : "huan"][params.index] = params.row;
                 R3.store.commit(
                   "customize/returnOrderChangeItem",
                   JSON.parse(JSON.stringify(this.toMainData))
