@@ -184,7 +184,7 @@ class DropDownConfig {
   }
 
   static ORDER_REPLACE_BELONGS_GOODS() {
-    //批量删除
+    // 替换下挂赠品
     let self = DropDownConfig.target
     self.publicBouncedConfig = JSON.parse(
       JSON.stringify(DialogConfig.config().pushProduceConfig)
