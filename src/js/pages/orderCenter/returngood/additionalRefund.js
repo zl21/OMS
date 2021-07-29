@@ -1184,6 +1184,7 @@ export default {
 
       const arr = []
       listData.QUERYORDERITEMRESULTLIST.map(item => {
+        item.FREIGHT = 0
         item.returnPrice = 0;
         item.ID = item.proId;
         item.IS_GIFT = item.GIFT_TYPE;
