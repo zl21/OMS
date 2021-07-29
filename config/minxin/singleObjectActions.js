@@ -36,7 +36,7 @@ export default () => ({
       setTimeout(async () => {
         console.log('PAYSAVE::', this);
         let ID = this.$route.params.itemId;
-        let main, obj, modifyData;
+        let main, obj, modifyData, flag;
         if (ID == 'New') {
           ID = '-1';
           console.log(this.$store.state["V.OC_B_COMPENSATE_ORDER.10813.New"].updateData);
@@ -84,6 +84,15 @@ export default () => ({
         if (!OC_B_COMPENSATE_ORDER_ITEM.length) {
           this.$Message.warning('请添加商品明细！');
           return
+        } else {
+          for (const i of OC_B_COMPENSATE_ORDER_ITEM) {
+            if (i.COMPENSATE_AMT == '0.00' || i.COMPENSATE_AMT == 0) {
+              this.$Message.warning('明细赔付金额不能为0，请重新录入！');
+              flag = true;
+              break
+            }
+          }
+          if (flag) return
         }
         const { data: { code, data, message } } = await this.service.orderCenter.paySaveApi({ OC_B_COMPENSATE_ORDER: main, OC_B_COMPENSATE_ORDER_ITEM, IDS }).catch(e => {
           console.error('save error !');
