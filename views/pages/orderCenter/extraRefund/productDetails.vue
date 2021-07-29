@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-29 11:38:34
+ * @LastEditTime: 2021-07-29 13:43:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -429,16 +429,16 @@ export default {
           if(code == 0){
             document.getElementById("refresh").click();
             this.tableConfig.data = [...this.tableConfig.data].filter(x => [...deleteRow].every(y => y.ID !== x.ID));
-            this.$Message.warning(message || '删除成功！');
+            this.$Message.success(message || '删除成功！');
           }
         }else{
           this.tableConfig.data = [...this.tableConfig.data].filter(x => [...deleteRow].every(y => y.ID !== x.ID));
-          this.$Message.warning('删除成功！');
+          this.$Message.success('删除成功！');
         }
       }else{
         // 数据删除   
         this.tableConfig.data = [...this.tableConfig.data].filter(x => [...row].every(y => y.ID !== x.ID));
-        this.$Message.warning('删除成功！')
+        this.$Message.success('删除成功！')
       }
       this.tableConfig.selectData = [];
     },
