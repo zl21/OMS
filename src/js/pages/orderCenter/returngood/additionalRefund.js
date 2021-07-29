@@ -42,6 +42,7 @@ export default {
             disabled: true, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
+              const copyId = _this.$route.params.customizedModuleId;
               const fromdata = new FormData();
               const param = {"tableid":249230545,"ids":[_this.$route.params.customizedModuleId],"menu":"额外退款"}
               fromdata.append('actionid', 41460332);
@@ -49,8 +50,27 @@ export default {
               fromdata.append('param', JSON.stringify(param));
               _this.service.common.exeAction(fromdata).then(res => {
                 if (res.data.code === 0) {
-                  _this.query();
                   _this.$Message.success(res.data.message);
+                  comUtils.tabCloseAppoint(_this);
+                  R3.store.commit('global/tabOpen', {
+                    type: 'S',
+                    tableName: 'OC_B_RETURN_AF_SEND_MANUAL',
+                    tableId: 249230545
+                  });
+                  _this.$nextTick(()=>{
+                    _this.$store.commit('customize/TabOpen', {
+                      id: copyId,
+                      type: 'action',
+                      name: 'EXTRAREFUND',
+                      label: '额外退款编辑',
+                      query: Object.assign({
+                        id: copyId,
+                        tabTitle: '额外退款编辑'
+                      }),
+                    });
+                  })
+                  // 销毁当前实例
+                  _this.$destroy();
                 } else {
                   _this.$Message.warning(res.data.message);
                 }
@@ -938,7 +958,7 @@ export default {
       if (this.returnInfo.formValue.OC_B_RETURN_TYPE_ENAME == '退货' && !this.returnInfo.formValue.RESERVE_BIGINT02) return this.$Message.warning('退款大类=退货时，退货签收状态必填!');
       // 签收状态为“未签收”时该字段必填，其他选填，否则点击保存时提示”签收状态为“未签收”时，退货物流单号必填！”
       if (this.returnInfo.formValue.RESERVE_BIGINT02 == '1' && !this.returnInfo.formValue.RESERVE_VARCHAR02) return this.$Message.warning('签收状态为“未签收”时，退货物流单号必填!');
-      if (this.returnInfo.formValue.AMT_RETURN_APPLY <= 0) return this.$Message.warning('额外退款金额不允许小于等于0!');
+      if (Number(this.returnInfo.formValue.AMT_RETURN_APPLY) >= 0) return this.$Message.warning('额外退款金额不允许小于等于0!');
 
 
 
