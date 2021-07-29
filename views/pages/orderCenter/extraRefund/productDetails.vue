@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-29 14:21:21
+ * @LastEditTime: 2021-07-29 18:00:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -35,6 +35,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 export default {
   data(){
     return {
+      refresh:true,
       tableConfig: {
         modal: false,
         businessButtonConfig: {
@@ -216,8 +217,13 @@ export default {
     let route = this.$route.params;
     if(!(this.$route.params.itemId == 'New')){
        const subData = await this.$OMS2.omsUtils.initSubtable('OC_B_REFUND_ORDER_ITEM', route.itemId, '181618');
+       subData.rowData.forEach(i => {
+         i.QTY_REFUND = Number(i.QTY_REFUND);
+         i.AMT_ACTUAL_REFUND = this.$OMS2.omsUtils.floatNumber(i.AMT_ACTUAL_REFUND);
+         i.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(i.AMT_REFUND);
+         i.QTY_ACTUAL = this.$OMS2.omsUtils.floatNumber(i.QTY_ACTUAL);
+        });
        this.tableConfig.data = subData.rowData;
-       console.log(subData.rowData);
        await sessionStorage.setItem('copyDetails',JSON.stringify(subData.rowData));
        let billNo = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata;
        sessionStorage.setItem('billNo',billNo)
@@ -332,7 +338,14 @@ export default {
     }
   },
   mounted(){
-    
+    window.addEventListener('customizeClick',e=>{
+      console.log(e.detail.type);
+      console.log(e.detail.type == 'refresh' , this.refres);
+      if(e.detail.type == 'refresh' && this.refresh){
+        this.refresh  = true
+        R3.store.commit('customize/clear', true);
+      }
+    })
   },
   methods:{
     /****************** 工具方法 *************************/
@@ -371,7 +384,7 @@ export default {
       if(code === 0){
         if(!isAdd){
           data.ORDER_ITEM.forEach((item)=>{
-            let QTY_REFUND = Number(item.QTY || 0) - Number(item.QTY_RETURN_APPLY || 0)
+            let QTY_REFUND = Number(item.QTY || 0) - Number(item.QTY_RETURN_APPLY || 0);
             item.QTY_REFUND = QTY_REFUND;
             let PRICE = QTY_REFUND * Number(item.PRICE || 0);
             item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
@@ -432,6 +445,7 @@ export default {
           let params = {ID:route.itemId,OC_B_REFUND_ORDER_ITEM:IDS}
           const {data:{code,message}} = await this.service.orderCenter.queryExtraDelItem(params);
           if(code == 0){
+            this.refresh  = false
             document.getElementById("refresh").click();
             this.tableConfig.data = [...this.tableConfig.data].filter(x => [...deleteRow].every(y => y.ID !== x.ID));
             this.$Message.success(message || '删除成功！');

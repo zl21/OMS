@@ -26,10 +26,9 @@ export default () => ({
       if (ActionMODIFY) ActionMODIFY.style.display = 'none';
     }
     // 刷新子表
-    if (tableName === 'OC_B_REFUND_ORDER_EXTRA' && itemId == 'New' ) { // 判断是否为需要操作的表
-      R3.store.commit('customize/clear', true);
-    }
-
+    // if (tableName === 'OC_B_REFUND_ORDER_EXTRA' && itemId == 'New' ) { // 判断是否为需要操作的表
+      // R3.store.commit('customize/clear', true);
+    // }
   },
   methods: {
     PAYSAVE() {
