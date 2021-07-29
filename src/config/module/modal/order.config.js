@@ -59,5 +59,9 @@ export default {
   // 额外退款-定制导出
   CUSTOMRETURNIMPORT: {
     component: () => import('@/views/modal/orderCenter/customReturnImport.vue')
+  },
+  // 额外退款-导出付款信息
+  PAYMENTINFORMATIONEXPORT: {
+    component: () => import('@/views/modal/orderCenter/paymentInformationExport.vue')
   }
 };
