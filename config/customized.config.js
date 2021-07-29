@@ -19,8 +19,14 @@ import commonUtils from './config/commonUtils.js'
 import funBtn from './config/funBtn.config.js'
 import dropDownBtn from './config/dropDown.config.js'
 import Vue from 'vue';
+import standardTableListsCustomize from './minxin/standardTableListsCustomize';
+import verticalTableDetailCustomize from './minxin/verticalTableDetailCustomize';
+import tableDetailCollectionMixin from './minxin/standardTable/mixin.js';
 
 class CustomizedConfig {
+	static #STLC = standardTableListsCustomize;
+	static #VTDC = verticalTableDetailCustomize;
+	static #TDCM = tableDetailCollectionMixin;
 	static #custommizeMain = custommizeMain;
 	static #subTableConfig = subTableConfig;
 	static #customizedModal = customizedModal;
@@ -43,6 +49,15 @@ class CustomizedConfig {
 	static #funBtn = funBtn;
 	static #dropDownBtn = dropDownBtn;
 	/* ------------ 挂载项 start ------------- */
+	static get STLC() {
+		return this.#STLC;
+	}
+	static get VTDC() {
+		return this.#VTDC;
+	}
+	static get TDCM() {
+		return this.#TDCM;
+	}
 	static get omsUtils() {
 		return this.#commonUtils;
 	}
