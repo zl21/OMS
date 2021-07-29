@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-29 09:54:16
+ * @LastEditTime: 2021-07-29 13:32:08
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -472,6 +472,7 @@ export default {
       // 退货明细
       this.renderColumn = this.panelReturn ? REFUND_ITEM_TABTH : EXCHANGE_ITEM_TABTH; // render
       // 退款金额
+      
       let returnAmount = {
         PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(
           Number(OC_B_RETURN_ORDER.PRO_ACTUAL_AMT)
@@ -770,7 +771,6 @@ export default {
       let qty = 0;
       let REAL_AMT = 0;
       // 退货明细
-      console.log('this.panelReturn:',this.panelReturn);
       const key1 = this.panelReturn ? "QTY_REFUND" : "QTY_EXCHANGE"; // 申请退货数量 : 换货数量
       const key2 = this.panelReturn ? "REFUND_FEE" : "AMT_EXCHANGE"; // 退货金额 : 成交金额
       const key3 = this.panelReturn ? "PRO_ACTUAL_AMT" : "AMT_EXCHANGE"; // 商品应退金额 : 换货金额
@@ -907,7 +907,6 @@ export default {
     },
     // 退货明细 - 取消全选
     returnSelectAllCancel(row) {
-      console.log(row);
     },
     // 删除明细 - 本地删
     deleteMainTableData() {
@@ -1071,11 +1070,9 @@ export default {
     /* -------------------- 添加/替换明细 - 弹框 -------------------- */
     // 加/替换明细 - 选中
     replaceOnSelect(row) {
-      console.log(row);
       this.replaceProductTable.selectData = row;
     },
     pageChange(page) {
-      console.log("page:", page);
       this.replaceProductTable.pageIndex = page;
       this.getPlaceData(page, this.replaceProductTable.pageSize);
     },

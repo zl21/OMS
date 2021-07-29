@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-07-28 12:59:58
+ * @LastEditTime: 2021-07-29 15:24:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -27,7 +27,7 @@
           <!-- 应退运费 -->
           <span :title="vmI18n.t('form_label.cr')">{{ vmI18n.t('form_label.ad') }}</span>
           <label>
-            <Input v-if="type && status" v-model="editData.SHIP_AMT" :regx="/^\d*\.{0,1}\d{0,2}$/"/>
+            <Input v-if="type && status" v-model="editData.SHIP_AMT" :regx="/^\d*\.{0,1}\d{0,2}$/" @on-change="inputChange()"/>
             <span v-else>
               {{ data.SHIP_AMT }}
             </span>
@@ -40,7 +40,7 @@
           <!-- 调整金额 -->
           <span :title="vmI18n.t('table_label.adjustment_amount')">{{vmI18n.t('table_label.adjustment_amount')}}</span>
           <label>
-            <Input v-if="type && status" v-model="editData.ADJUST_AMT"  :regx="/^-?\d*\.{0,1}\d{0,2}$/" @change="e => {if(!e.target.value || e.target.value == '-'){this.ADJUST_AMT = 0}}"/>
+            <Input v-if="type && status" v-model="editData.ADJUST_AMT"  :regx="/^-?\d*\.{0,1}\d{0,2}$/"  @on-change="inputChange()" @on-blur="inputBlur"/>
             <span v-else>
               {{ editData.ADJUST_AMT }}
             </span>
@@ -86,6 +86,7 @@ export default {
     };
   },
   mounted(){
+    console.log('link');
     // 应退运费，正数，选填项
     // 调整金额，可正可负，选填项
     // 换货金额，sum所有换货商品“成交金额“，只读，正数
@@ -96,7 +97,7 @@ export default {
     this.status = orderStatus == 0  && ['0','3'].includes(wmsIssueStatus.toString()) ? true : false
   },
   methods:{
-    inputChange(e){
+    inputChange(){
       let FINAL_ACTUAL_AMT
       if(this.tableName){
         FINAL_ACTUAL_AMT =  Number(this.data.PRO_ACTUAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT) - Number(this.data.EXCHANGE_AMT);
@@ -111,6 +112,12 @@ export default {
         FINAL_ACTUAL_AMT:this.$OMS2.omsUtils.floatNumber(this.editData.FINAL_ACTUAL_AMT),
         // FINAL_REAL_AMT:this.$OMS2.omsUtils.floatNumber(this.editData.FINAL_REAL_AMT),
       })));
+    },
+    inputBlur(e){
+      if(!e.target.value || e.target.value == '-'){
+        this.editData.ADJUST_AMT = 0
+        this.inputChange()
+      }
     }
   },
 };
