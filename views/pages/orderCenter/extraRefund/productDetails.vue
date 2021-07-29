@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-28 16:20:58
+ * @LastEditTime: 2021-07-29 11:38:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -230,7 +230,6 @@ export default {
       }
     // 单据状态 0:未审核
     this.orderStatus = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[6].valuedata;
-    this.refundType = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[0].valuedata;
     this.tableConfig.columns = [
           {
             key: 'PS_C_SKU_ECODE',
@@ -344,9 +343,17 @@ export default {
       // 筛选ids
       // console.log(R3.store.);
       let ids
+      let route = this.$route.params;
+      let modifyRefundType = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].updateData.OC_B_REFUND_ORDER_EXTRA.changeData.REFUND_TYPE
+      if(route.itemId ==='New'){
+        console.log(123,modifyRefundType,this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[0].defval);
+        this.refundType = modifyRefundType || this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[0].defval;
+      }else{
+        this.refundType = modifyRefundType || this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[0].valuedata;
+      }
       let params = {
         BILL_NO: billNo,
-        REFUND_TYPE: this.refundType,
+        REFUND_TYPE: Number(this.refundType),
         pageNum: pageNum,
         pageSize: pageSize
       };
@@ -399,9 +406,40 @@ export default {
       this.tableConfig.pageSize = pageSize;
       this.getTable(false,billNo,this.tableConfig.pageIndex,pageSize)
     },
-    deleteData(row){
-      // 数据删除
-      this.tableConfig.data = [...this.tableConfig.data].filter(x => [...row].every(y => y.ID !== x.ID));
+    async deleteData(row){
+      let route = this.$route.params;
+      let IDS = JSON.parse(JSON.stringify(row)).map(i=> { if(i.ID !== '-1') return i.ID}); // 获取详情带进来的ids
+      //  筛选清空
+      IDS = IDS.filter(i => {return i!= undefined})
+      // 如果不是新增
+      if(route.itemId !== 'New'){
+        // 由于添加的时候把ID修改为-1，所以在删除的时候需要把选中的ID重新找回
+        let deleteRow = row.filter(i => {return i.ID = i.OC_B_ORDER_ITEM_ID})
+        deleteRow.forEach((x) => {
+          this.tableConfig.data.forEach((e)=>{
+            if(x.ID === e.OC_B_ORDER_ITEM_ID){
+              e.ID = x.OC_B_ORDER_ITEM_ID
+            }
+          })
+        })
+        // 如果编辑带过来的数据存在
+        if(IDS.length){
+          let params = {ID:route.itemId,OC_B_REFUND_ORDER_ITEM:IDS}
+          const {data:{code,message}} = await this.service.orderCenter.queryExtraDelItem(params);
+          if(code == 0){
+            document.getElementById("refresh").click();
+            this.tableConfig.data = [...this.tableConfig.data].filter(x => [...deleteRow].every(y => y.ID !== x.ID));
+            this.$Message.warning(message || '删除成功！');
+          }
+        }else{
+          this.tableConfig.data = [...this.tableConfig.data].filter(x => [...deleteRow].every(y => y.ID !== x.ID));
+          this.$Message.warning('删除成功！');
+        }
+      }else{
+        // 数据删除   
+        this.tableConfig.data = [...this.tableConfig.data].filter(x => [...row].every(y => y.ID !== x.ID));
+        this.$Message.warning('删除成功！')
+      }
       this.tableConfig.selectData = [];
     },
     /******************  添加商品明细 -- 弹框 *************************/
@@ -437,8 +475,14 @@ export default {
       }
       // 新增明细
       let arr = JSON.parse(sessionStorage.getItem('copyDetails')) //详情
-      // 如果是编辑的话 
       this.addDetailsConfig.selectData.forEach(x =>{
+        // 初始化计算数据
+        let QTY_REFUND = Number(x.QTY || 0) - Number(x.QTY_RETURN_APPLY || 0)
+        x.QTY_REFUND = QTY_REFUND;
+        let PRICE = QTY_REFUND * Number(x.PRICE || 0);
+        x.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
+        x.AMT_ACTUAL_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
+        // 如果是编辑的话 
         if(arr.every(y => y.ID !== x.ID)){
           // 不存在
           x.OC_B_ORDER_ITEM_ID = x.ID

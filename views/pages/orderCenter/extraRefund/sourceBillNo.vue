@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-07-26 14:01:54
+ * @LastEditTime: 2021-07-28 18:32:13
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -49,7 +49,7 @@
             @on-page-change="pageChange"
             @on-page-size-change="pageSizeChange"
           />
-        </div>
+         </div>
       </div>
       <div class="dialog-footer" slot="footer">
         <businessButton :btn-config="btnConfigMo" />
@@ -298,9 +298,9 @@ export default {
       this.formConfig.formValue.RECEIVER_NAME = '';
       this.formConfig.formValue.BUYER_NICK = '';
       this.formConfig.formValue.RECEIVER_MOBILE = '';
-      this.orderModal = true;
       // 获取
       this.queryEnter();
+      this.orderModal = true;
     },
     inputenter(val) { 
       let str = val.target.value.replace(/\s+/g,"");

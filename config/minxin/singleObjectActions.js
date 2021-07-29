@@ -3,6 +3,7 @@ import $i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default () => ({
   updated() {
     const { itemId, tableId, tableName } = this.$router.currentRoute.params;
+    console.log(itemId, tableId, tableName);
     if (tableName === 'OC_B_COMPENSATE_ORDER') { // 判断是否为需要操作的表
       setTimeout(() => {
         const { detail } = R3.store.state.customize.COMPENSATE;
@@ -112,7 +113,7 @@ export default () => ({
       let mainOrder = this.$store.state[routeUrl].updateData[tableName].changeData;
       let OC_B_REFUND_ORDER_ITEM = JSON.parse(JSON.stringify(R3.store.state.customize.extraoOrderDetails)) //明细
       console.log(OC_B_REFUND_ORDER_ITEM);
-      let IDS // 删除ids
+      // let IDS // 删除ids
       let ID
       if(itemId === 'New'){
         OC_B_REFUND_ORDER_ITEM.forEach(i => {
@@ -122,13 +123,14 @@ export default () => ({
       }else{
         // 获取已入库删除ids
         let arr1 = JSON.parse(sessionStorage.getItem('copyDetails')) //详情带过来的明细
-        IDS = [...arr1].filter(x => [...OC_B_REFUND_ORDER_ITEM].every(y => y.ID !== x.ID)).map(it => it.ID); // 已经删除的Ids
+        // IDS = [...arr1].filter(x => [...OC_B_REFUND_ORDER_ITEM].every(y => y.ID !== x.ID)).map(it => it.ID); // 已经删除的Ids
         // 编辑  删除为编辑数据
         OC_B_REFUND_ORDER_ITEM.forEach((item,i)=>{
           if(item.ID !== '-1' && (arr1.every(y => y.QTY_REFUND == item.QTY_REFUND) && arr1.every(y => y.AMT_ACTUAL_REFUND == item.AMT_ACTUAL_REFUND))) {
             OC_B_REFUND_ORDER_ITEM[i] = null
           }
         })
+
       }
       // 处理主表数据
       for( let key in mainOrder){
@@ -168,7 +170,7 @@ export default () => ({
         })
       }
       console.log(OC_B_REFUND_ORDER_ITEM_Arr,OC_B_REFUND_ORDER_ITEM);
-      const { data: { code, data, message} } = await this.service.orderCenter.extraSaveApi({ OC_B_REFUND_ORDER_EXTRA: mainOrder, OC_B_REFUND_ORDER_ITEM:OC_B_REFUND_ORDER_ITEM_Arr, IDS, ID });
+      const { data: { code, data, message} } = await this.service.orderCenter.extraSaveApi({ OC_B_REFUND_ORDER_EXTRA: mainOrder, OC_B_REFUND_ORDER_ITEM:OC_B_REFUND_ORDER_ITEM_Arr, ID });
       console.log(code, data, message);
       if (code == 0) {
         this.$Message.success(message);
