@@ -651,13 +651,7 @@ export default {
         if (arrs.length === 0) return { code: -1, message: tablename + this.vmI18n.t('modalTips.r6') };
         rs = this.checkTable(arrs);
       } else {
-        let arrs = []
-        if (this.gift_info_setting.gift_productsArrs.length) {
-          arrs = this.gift_info_setting.gift_productsArrs[0].productslist || [];
-        } else {
-          arrs = this.gift_info_setting.gift_productslist || [];
-        }
-        // gift_info_setting.gift_productsArrs[0].productslist
+        const arrs = this.gift_info_setting.gift_productslist || [];
         if (arrs.length === 0) return { code: -1, message: tablename + this.vmI18n.t('modalTips.r6') };
         rs = this.checkTableTab(arrs, 'gift');
       }
