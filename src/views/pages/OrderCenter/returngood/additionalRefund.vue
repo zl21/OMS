@@ -83,6 +83,7 @@
           :title="vmI18n.t('panel_label.refundSlipDetails')"
           :width="800"
           class="queryorder"
+          :mask-closable="false"
           @on-cancel="querycancel"
           @on-ok="queryorder"
         >
@@ -101,6 +102,7 @@
         <Modal
           v-model="addItem.modal"
           :mask="true"
+          :mask-closable="false"
           :title="vmI18n.t('modalTitle.originalChargebackDetails')"
           :width="800"
           @on-cancel="addItemCancel"
