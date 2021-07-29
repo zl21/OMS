@@ -938,6 +938,7 @@ export default {
       if (this.returnInfo.formValue.OC_B_RETURN_TYPE_ENAME == '退货' && !this.returnInfo.formValue.RESERVE_BIGINT02) return this.$Message.warning('退款大类=退货时，退货签收状态必填!');
       // 签收状态为“未签收”时该字段必填，其他选填，否则点击保存时提示”签收状态为“未签收”时，退货物流单号必填！”
       if (this.returnInfo.formValue.RESERVE_BIGINT02 == '1' && !this.returnInfo.formValue.RESERVE_VARCHAR02) return this.$Message.warning('签收状态为“未签收”时，退货物流单号必填!');
+      if (this.returnInfo.formValue.AMT_RETURN_APPLY <= 0) return this.$Message.warning('额外退款金额不允许小于等于0!');
 
 
 
@@ -1410,6 +1411,15 @@ export default {
           if ((Afsend.PAYMENT_STATUS == 0 && Afsend.RETURN_STATUS == 4) && (item.text === '打款失败复审')) item.disabled = true
           if ((Afsend.PAYMENT_STATUS == 1 || Afsend.PAYMENT_STATUS == 2 || (Afsend.PAYMENT_STATUS == 0 && Afsend.RETURN_STATUS == 1)) && (item.text !== '返回')) item.disabled = true
         })
+        // 打款失败只允许修改收款人姓名&账号
+        if (Afsend.PAYMENT_STATUS == 3) {
+          this.information.formData.forEach(item => {
+            item.disabled = true
+          })
+          this.returnInfo.formData.forEach(item => {
+            if (item.value !== 'RECEIVER_NAME'&& item.value !== 'PAY_ACCOUNT') item.disabled = true
+          })
+        }
       }
       // 申请单据信息
       this.information.formValue = {
