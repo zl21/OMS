@@ -8,8 +8,8 @@ export default () => ({
       setTimeout(() => {
         const { detail } = R3.store.state.customize.COMPENSATE;
         console.log(detail);
-        R3.store.commit('customize/REDUNDANT_ORDER_ID', 'zhoulan');
-        R3.store.commit('customize/COMPENSATE', { detail: [] });
+        // R3.store.commit('customize/REDUNDANT_ORDER_ID', 'zhoulan');
+        // R3.store.commit('customize/COMPENSATE', { detail: [] });
       }, 500);
     }
     // 隐藏标准保存按钮

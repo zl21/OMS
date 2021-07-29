@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-29 18:00:50
+ * @LastEditTime: 2021-07-29 19:16:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -339,8 +339,6 @@ export default {
   },
   mounted(){
     window.addEventListener('customizeClick',e=>{
-      console.log(e.detail.type);
-      console.log(e.detail.type == 'refresh' , this.refres);
       if(e.detail.type == 'refresh' && this.refresh){
         this.refresh  = true
         R3.store.commit('customize/clear', true);
@@ -515,6 +513,7 @@ export default {
   destroyed(){
     sessionStorage.clear('copyDetails');
     sessionStorage.clear('billNo');
+    
   }
 };
 </script>

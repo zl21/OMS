@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-06-03 20:33:06
+ * @LastEditTime: 2021-07-29 19:14:22
  * @LastEditors: Please set LastEditors
  * @Description: 赔付单-新增/编辑-商品明细
  * @FilePath: /burgeon-project-logic/js/pages/orderCenter/payDetail.vue
@@ -9,6 +9,7 @@
 <template>
   <div class="payDetail" v-loading="loading">
     <businessActionTable
+      :key="key"
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
@@ -64,6 +65,7 @@ export default {
   },
   data() {
     return {
+      key:0,
       vmI18n: $i18n,
       loading: false,
       tableConfig: {
@@ -198,22 +200,40 @@ export default {
     R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: data })));
   },
   created() { },
-  destroyed() { },
+  destroyed() { 
+    this.initTable(1, 10, true, ''); // 清空明细
+  },
   mounted() {
-    this.$nextTick(async () => {
+    this.getData();
+    // 刷新
+    window.addEventListener('customizeClick',e=> {
+      if(e.detail.type == 'refresh'){
+        if (this.ID != '-1') {
+          this.getData();
+        } else {
+          this.initTable(1,10,1,this.exCode)
+        }
+      }
+    })
+  },
+  methods: {
+    getData() {
       const _this = this;
       const step1 = new Promise(async function (resolve, reject) {
-        _this.tableConfig.loading = true;
-        const subData = await _this.$OMS2.omsUtils.initSubtable('OC_B_COMPENSATE_ORDER_ITEM', _this.ID, '181120').catch(() => {
-          _this.tableConfig.loading = false;
-          console.error('查询子表接口（/p/cs/objectTableItem）报错！');
-          reject()
-        });
+        // _this.tableConfig.loading = true;
+        const subData = await _this.$OMS2.omsUtils.initSubtable('OC_B_COMPENSATE_ORDER_ITEM', _this.ID, '181120')
+        console.log(subData);
+        // subData.catch(() => {
+        //   _this.tableConfig.loading = false;
+        //   console.error('查询子表接口（/p/cs/objectTableItem）报错！');
+        //   reject()
+        // });
         const columns = subData.columns.filter(it => it.key != 'ID');
         console.log('columns::', columns);
         _this.tableConfig.columns = columns;
         if (_this.ID != '-1') {
           _this.tableConfig.data = subData.rowData;
+          _this.key += 1;
           const detail = _this.tableConfig.data
           _this.tableConfig.total = subData.otherData.totalRowCount;
           R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail })));
@@ -221,6 +241,7 @@ export default {
           _this.renderHandle(['COMPENSATE_QTY', 'COMPENSATE_AMT']);
         }
         resolve();
+        _this.tableConfig.loading = false;
       });
       step1.then(async () => {
         if (_this.ID != '-1') {
@@ -249,9 +270,7 @@ export default {
         }
         _this.tableConfig.loading = false;
       });
-    });
-  },
-  methods: {
+    },
     /**
      * 入参说明：
      * 1. 新增时根据原单带出明细（页面新增 且 有原单）
