@@ -32,7 +32,7 @@
  }
  .verticalTableDetailContent {
     .tabComponent > div {
-        overflow-y: hidden !important;
+        overflow: hidden !important;
     }
  }
 </style>
