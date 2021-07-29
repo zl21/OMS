@@ -237,7 +237,7 @@ export default {
           })
           const status = data.addcolums[1].childs.find(i => i.colname == "ORDER_STATUS").valuedata;
           let storeOther = JSON.parse(JSON.stringify(R3.store.state.customize.COMPENSATE.other))
-          storeOther.exCode = data.addcolums[1].childs[4].valuedata;
+          storeOther.exCode = data.addcolums[1].childs.find(i => i.colname == "EXPRESS_CODE").valuedata;
           R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ other: storeOther })));
           const buttonList = _this.tableConfig.businessButtonConfig.buttons;
           if (status == '0') {

@@ -81,6 +81,10 @@ export default () => ({
         if (ID != '-1' && !Object.keys(modifyData).length && !IDS.length && !OC_B_COMPENSATE_ORDER_ITEM.length) {
           return // 未修改 点保存无反应
         }
+        if (!OC_B_COMPENSATE_ORDER_ITEM.length) {
+          this.$Message.warning('请添加商品明细！');
+          return
+        }
         const { data: { code, data, message } } = await this.service.orderCenter.paySaveApi({ OC_B_COMPENSATE_ORDER: main, OC_B_COMPENSATE_ORDER_ITEM, IDS }).catch(e => {
           console.error('save error !');
         });
