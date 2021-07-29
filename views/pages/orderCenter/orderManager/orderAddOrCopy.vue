@@ -30,16 +30,13 @@
       </Collapse>
       <!-- tab切换 -->
       <div class="customized-detail-table">
-        <div class="custom-label">
-          <businessLabel
-            :label-default-value="labelDefaultValue"
-            :label-list="labelList"
-          />
-        </div>
-        <div class="table custom-table">
-          <!-- 订单明细 -->
-          <div class="barcodeDetails">
-            <!-- 
+        <businessLabel
+          class="jordanLabel"
+          :label-default-value="labelDefaultValue"
+          :label-list="labelList"
+        />
+        <!-- 订单明细 -->
+        <!-- 
             <businessForm :form-config="formConfigDetail" @keyDown="keyDown">
               <template #spec01="{ rowData }">
                 <DropMultiSelectFilter
@@ -58,17 +55,15 @@
               </template>
             </businessForm>
              -->
-            <businessActionTable
-              :jordan-table-config="jordanTableConfig"
-              @on-select="onSelect"
-              @on-select-all="onSelectAll"
-              @on-select-all-cancel="onSelectAllCancel"
-              @on-select-cancel="onSelectCancel"
-              @table-delete-detail="tableDeleteDetail"
-              @table-import="tableImport"
-            />
-          </div>
-        </div>
+        <businessActionTable
+          :jordan-table-config="jordanTableConfig"
+          @on-select="onSelect"
+          @on-select-all="onSelectAll"
+          @on-select-all-cancel="onSelectAllCancel"
+          @on-select-cancel="onSelectCancel"
+          @table-delete-detail="tableDeleteDetail"
+          @table-import="tableImport"
+        />
       </div>
     </div>
 

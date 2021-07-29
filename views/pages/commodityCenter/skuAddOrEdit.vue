@@ -119,6 +119,7 @@
       <div class="customized-detail-table">
         <!-- tab切换 -->
         <businessLabel
+          class="jordanLabel"
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
           @labelClick="labelClick"
