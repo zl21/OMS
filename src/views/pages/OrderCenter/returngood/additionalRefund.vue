@@ -18,7 +18,6 @@
             </div>
           </Panel>
           <Panel
-            v-if="!$route.query.new"
             name="2"
           >
             <!-- 申请退款信息 -->
@@ -28,7 +27,6 @@
             </div>
           </Panel>
           <Panel
-            v-if="!$route.query.new"
             name="3"
           >
             <!-- 资料附件 -->

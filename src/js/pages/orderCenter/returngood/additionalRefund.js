@@ -907,36 +907,18 @@ export default {
     this.returnInfo.formData.forEach(item => {
       if (item.value == 'RESERVE_BIGINT01') item.options = RESERVE_BIGINT01
     })
-    // if (this.$route.query.fromOrder) {
-    //   // 该类型从订单详情跳转过来的查询方式
-    //   this.queryBounced(this.$route.query.oid);
-    //   this.$nextTick(() => {
-    //     // this.reForm.config.forEach((val, index) => {
-    //     //   if (val.item.label === '单据来源') {
-    //     //     this.reForm.config[index].item.props.value = '手动';
-    //     //   } else if (val.item.label === '单据日期') {
-    //     //     this.reForm.config[index].item.props.value = commonUtil.dateFormat(new Date(), 'yyyy-MM-dd');
-    //     //   }
-    //     // });
-    //   });
-    // } else {
-    //   this.$nextTick(() => {
-    //     // this.reForm.config.forEach((val, index) => {
-    //     //   if (val.item.label === '单据来源') {
-    //     //     this.reForm.config[index].item.props.value = '手动';
-    //     //   } else if (val.item.label === '单据日期') {
-    //     //     this.reForm.config[index].item.props.value = commonUtil.dateFormat(new Date(), 'yyyy-MM-dd');
-    //     //   }
-    //     // });
-    //   });
-    // }
-    // 复制
-    if (this.$route.query.copyId) this.copyId = this.$route.query.copyId
-    if (this.$route.params.customizedModuleId !== 'New') {
-      this.query()
-      if (!this.$route.query.copyId) this.logTableInfo();
+    if (this.$route.query.fromOrder) {
+      // 该类型从订单详情跳转过来的查询方式
+      this.queryBounced(this.$route.query.oid);
     } else {
-      // this.information.formValue.CREATIONDATE = commonUtil.dateFormat(new Date(), 'yyyy-MM-dd')
+      // 复制
+      if (this.$route.query.copyId) this.copyId = this.$route.query.copyId
+      if (this.$route.params.customizedModuleId !== 'New') {
+        this.query()
+        if (!this.$route.query.copyId) this.logTableInfo();
+      } else {
+        // this.information.formValue.CREATIONDATE = commonUtil.dateFormat(new Date(), 'yyyy-MM-dd')
+      }
     }
     this.getDownUp();
   },
@@ -958,7 +940,7 @@ export default {
       if (this.returnInfo.formValue.OC_B_RETURN_TYPE_ENAME == '退货' && !this.returnInfo.formValue.RESERVE_BIGINT02) return this.$Message.warning('退款大类=退货时，退货签收状态必填!');
       // 签收状态为“未签收”时该字段必填，其他选填，否则点击保存时提示”签收状态为“未签收”时，退货物流单号必填！”
       if (this.returnInfo.formValue.RESERVE_BIGINT02 == '1' && !this.returnInfo.formValue.RESERVE_VARCHAR02) return this.$Message.warning('签收状态为“未签收”时，退货物流单号必填!');
-      if (Number(this.returnInfo.formValue.AMT_RETURN_APPLY) >= 0) return this.$Message.warning('额外退款金额不允许小于等于0!');
+      if (Number(this.returnInfo.formValue.AMT_RETURN_APPLY) <= 0) return this.$Message.warning('额外退款金额不允许小于等于0!');
 
 
 
@@ -1152,7 +1134,7 @@ export default {
     queryorder(listData, isEnter) {
       const _this = this;
       if (isEnter) {
-        _this.fromOrder(listData, true);
+        _this.fromOrder(listData[0], true);
       } else {
         _this.onSelectData = _this.selectData;
         if (JSON.stringify(_this.onSelectData) == '{}') {
@@ -1190,6 +1172,26 @@ export default {
     },
     fromOrder(listData, initStatus = false) {
       this.isOne = false;
+
+      this.information.formValue.SOURCE_BILL_TIME = listData.CREATIONDATE && commonUtil.dateFormat(new Date(listData.CREATIONDATE), 'yyyy-MM-dd hh:mm:ss')
+      this.information.formValue.CP_C_SHOP_TITLE = listData.CP_C_SHOP_TITLE
+      this.information.formValue.CP_C_SHOP_ID = listData.CP_C_SHOP_ID
+      this.information.formValue.CP_C_SHOP_ECODE = listData.CP_C_SHOP_ECODE
+      this.information.formValue.VIP_NICK = listData.USER_NICK
+      this.information.formValue.VIP_PHONE = listData.VIP_PHONE
+      this.information.formValue.RESERVE_VARCHAR01 = listData.ORIG_ORDER_NO
+      this.information.formValue.TID = listData.SOURCE_CODE
+
+      const arr = []
+      listData.QUERYORDERITEMRESULTLIST.map(item => {
+        item.returnPrice = 0;
+        item.ID = item.proId;
+        item.IS_GIFT = item.GIFT_TYPE;
+        item.BILL_NO = this.selectData.BILL_NO;
+        item.QTY_IN = this.BILL_TYPE === '1' ? 1 : Number(item.qty || 1);
+        arr.push(item)
+      });
+      this.tableConfig.data = arr;
     },
 
     onAddItem() {
