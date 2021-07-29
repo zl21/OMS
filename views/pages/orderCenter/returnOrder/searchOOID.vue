@@ -206,7 +206,8 @@ export default {
         indexColumn: true, // 是否显示序号
         height: '270',
         loading: false,
-        isShowSelection: false, // 是否显示checkedbox
+        isShowSelection: true, // 是否显示checkedbox
+        highlightRow: true, // 展示单选radio，结合isShowSelection使用
         pageShow: true, // 控制分页是否显示
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
