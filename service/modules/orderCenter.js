@@ -140,6 +140,8 @@ export default {
     $network.post('/api/cs/oc/oms/v1/deleteAfterDeliverItem', params), // 编辑状态,删除明细
   copyAfterDeliver: (params) =>
     $network.post('/api/cs/oc/oms/v1/copyAfterDeliver', params), // 详情 复制查询方法
+  queryExtraDelItem: (params) => $network.post('/p/cs/oc/oms/v1/refundExtra/delItem', params), // 额外退款单-明细删除
+
   /**
    * 额外退款、已发货退款列表
    */
