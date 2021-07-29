@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-28 13:56:47
+ * @LastEditTime: 2021-07-29 09:54:16
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -659,9 +659,9 @@ export default {
             props: {
               value: params.row.QTY_REFUND,
               regx: /^[1-9]\d*$/,
-              max: params.row.RETURNABLE_QTY || 1,
-              min: 1,
-              disabled: params.row.RETURNABLE_QTY == 1,
+              max: params.row.REAL_RETURNABLE_QTY || 0,
+              min: 0,
+              // disabled: params.row.REAL_RETURNABLE_QTY == 1,
               editable: true,
             },
             on: {
