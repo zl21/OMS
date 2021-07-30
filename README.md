@@ -277,3 +277,4 @@
 | v1.2.38 | businessActionTable 表格单选 |
 | v1.2.39 | 导入组件-弹窗样式调整 |
 | v1.2.40 | fkdialog 样式修改 |
+| v1.2.41 | form 栅格修改|

@@ -21,6 +21,10 @@
       <Row>
         <Col v-for="(item , index) in formConfig.formData"
              :key=index
+             :xs="8"
+             :sm="8"
+             :md="8" 
+             :lg="6"
              :span='item.width || formConfig.colSpan || "6"'
              v-if="item.style">
         <template v-if="item.style !== ''">
