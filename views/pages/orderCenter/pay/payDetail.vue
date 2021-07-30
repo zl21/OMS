@@ -97,10 +97,11 @@ export default {
                 }
                 const allDa = this.tableConfig.data;
                 const selDa = this.tableConfig.selectData;
+                const key = this.exCode ? 'OC_B_ORDER_DELIVERY_ID' : 'PS_C_SKU_ECODE';
                 this.tableConfig.data = $omsUtils.getDifferentArr(
                   allDa,
                   selDa,
-                  "PS_C_SKU_ECODE"
+                  key
                 );
                 // this.totalNum();
                 this.tableConfig.total = this.tableConfig.data.length;
