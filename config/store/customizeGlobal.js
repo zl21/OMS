@@ -128,6 +128,7 @@ export const globalStore = {
     originalOrder:'',
     extraoOrderDetails:[],
     clear:false,
+    colRowNum:4 // 针对于定制界面 form表单根据屏幕变化设置个数（用于计算）
   },
   mutations: {
     language(state, x) {
@@ -356,6 +357,10 @@ export const globalStore = {
     clear(state,n){
       state.clear = n;
     },
+    colRowNum(state,n){
+      state.colRowNum = n
+      console.log(state,n);
+    }
   },
   modules: {
     jordanStore

@@ -12,7 +12,6 @@
   import proDetail from '@/views/pages/orderCenter/orderManager/proDetail';
   import businessAgTable from 'professionalComponents/businessAgTable';
   import modifycurrentLabel from '../../../../assets/js/mixins/modifycurrentLabel';
-
   export default {
     components: {
       businessButton,
@@ -426,7 +425,7 @@
               text: $i18n.t('btn.search'), // 搜索
               size: 'large',
               shape: 'circle',
-              icon: 'ios-search',
+              // icon: 'ios-search',
               webname: 'search',
               btnclick: () => {
                 this.agTableConfig.pagenation.current = 1;
@@ -437,7 +436,7 @@
               text: $i18n.t('btn.reset'), // 按钮文本 重置
               size: 'large',
               shape: 'circle',
-              icon: 'ios-refresh',
+              // icon: 'ios-refresh',
               webname: 'reset',
               btnclick: () => {
                 this.reset();
@@ -582,6 +581,9 @@
       tablename() {
         const self = this;
         return self.$route.params.customizedModuleName == 'ORDERMANAGER' ? 'OC_B_ORDER' : self.$route.params.customizedModuleName;
+      },
+      colRowNum(){
+        return $store.state.customize.colRowNum;
       }
     },
     activated(){
@@ -594,7 +596,6 @@
     mounted() {
       const self = this;
       self.initList();
-
       /* setTimeout(() => {
         let ZH = localStorage.getItem("locale") == "zh"
         if(!ZH) {

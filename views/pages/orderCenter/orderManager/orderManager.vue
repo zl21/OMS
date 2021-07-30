@@ -1,28 +1,17 @@
 <template>
   <div v-loading="loading" class="customized-list">
-    <div class="customized-list-form">
+    <div class="customized-list-form"  :class="[Number.isInteger(formConfig.formData.length / this.colRowNum) ? 'formBottomPd' : '',tablename == 'OC_B_ORDER' && !isFolding ? 'returnChangeOrder' :'']">
       <!-- form组件 -->
-     <div :class="[Number.isInteger(formConfig.formData.length / 4) ? '' : 'position']">
-        <businessForm v-if="buttonInit" :form-config="formConfig" />
-        <businessButton class="form-search" :btn-config="searchBtn" />
-     </div>
-      <div class="dynamicSearch-content">
-        <dynamicSearch
-          v-if="!isFolding && tablename == 'OC_B_ORDER'"
-          ref="dynamicSearch"
-          :dynamic-data="dynamicData"
-        />
-      </div>
-
-      <!-- <div :class="[!isFolding ? 'dynamicSearch-content' : 'form-search']">
+      <businessForm v-if="buttonInit" :form-config="formConfig" />
+      <div :class="[!isFolding ? 'dynamicSearch-content' : 'form-search']">
         <dynamicSearch
           v-if="!isFolding && tablename == 'OC_B_ORDER'"
           ref="dynamicSearch"
           :dynamic-data="dynamicData"
         />
         <div v-if="tablename !== 'OC_B_ORDER'"></div>
-        <businessButton :btn-config="searchBtn" />
-      </div> -->
+        <businessButton class="searchBtn" :btn-config="searchBtn" />
+      </div>
     </div>
     <div class="custom-btn customized-list-btn">
       <businessButton
