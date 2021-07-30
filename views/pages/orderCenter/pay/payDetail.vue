@@ -65,7 +65,7 @@ export default {
   },
   data() {
     return {
-      key:0,
+      key: 0,
       vmI18n: $i18n,
       loading: false,
       tableConfig: {
@@ -200,18 +200,18 @@ export default {
     R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: data })));
   },
   created() { },
-  destroyed() { 
+  destroyed() {
     this.initTable(1, 10, true, ''); // 清空明细
   },
   mounted() {
     this.getData();
     // 刷新
-    window.addEventListener('customizeClick',e=> {
-      if(e.detail.type == 'refresh'){
+    window.addEventListener('customizeClick', e => {
+      if (e.detail.type == 'refresh') {
         if (this.ID != '-1') {
           this.getData();
         } else {
-          this.initTable(1,10,1,this.exCode)
+          this.initTable(1, 10, 1, this.exCode)
         }
       }
     })
