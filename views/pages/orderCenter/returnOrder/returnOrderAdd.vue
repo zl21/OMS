@@ -720,6 +720,7 @@ export default {
       handler(newV, oldV) {
         this.bT = newV;
         this.changeBillType(newV, oldV);
+        this.mainData.billType = newV;
       }
     },
     "formConfig.formValue.SOURCE_CODE": {

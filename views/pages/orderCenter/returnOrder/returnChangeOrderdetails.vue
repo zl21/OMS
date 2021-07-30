@@ -78,7 +78,10 @@ export default {
   },
   props: {
     mainData: {},
-    returnProduct: "",
+    returnProduct: {
+      type: String,
+      default: () => '0'
+    },
   },
   data() {
     return {
@@ -470,7 +473,6 @@ export default {
         return this.actionTableCon.businessButtonConfig.buttons
       });
     },
-    // 编辑获取按钮权限
     // 获取表头（新增）
     async getColumns() {
       const {
@@ -486,6 +488,7 @@ export default {
         },
       } = await this.service.orderCenter.getALlOrderReturnAndItemInfo({
         ID: '-1',
+        BILL_TYPE: this.mainData.billType || '0',
       });
       if (code == 0) {
         const tuiColumns = REFUND_ITEM_TABTH;
