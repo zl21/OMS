@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-29 19:16:05
+ * @LastEditTime: 2021-07-30 13:16:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -418,11 +418,10 @@ export default {
       this.getTable(false,billNo,this.tableConfig.pageIndex,pageSize)
     },
     async deleteData(row){
-      console.log(this.tableConfig.data.length == row.length,this.tableConfig.data.length,row.length);
-      if(this.tableConfig.data.length == row.length) {
-        this.$Message.error('至少保留一条明细！');
-        return
-      }
+      // if(this.tableConfig.data.length == row.length) {
+      //   this.$Message.error('至少保留一条明细！');
+      //   return
+      // }
       let route = this.$route.params;
       let IDS = JSON.parse(JSON.stringify(row)).map(i=> { if(i.ID !== '-1') return i.ID}); // 获取详情带进来的ids
       //  筛选清空

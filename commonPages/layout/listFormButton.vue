@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-07-30 11:24:27
+ * @LastEditTime: 2021-07-30 11:35:19
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/commonPages/layout/listFormButton.vue
+-->
 <template>
   <div>
     <Button size="small" @click="buttonClick"> 查找 </Button>
@@ -50,6 +58,13 @@ export default {
 <style lang="less" scoped>
 @import '~@burgeon/oms-theme/skin/public.less';
 .ListsForm-button {
-  
+  bottom: 24px;
+  right: 43px;
+  button{
+    #bundle > .defalutBtn;
+    &:first-child{
+      #bundle > .primaryBtn;
+    }
+  }
 }
 </style>
