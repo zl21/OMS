@@ -2,14 +2,16 @@
 .fktable {
   width: 300px;
   min-width: 150px;
-  max-height: 398px;
+  max-height: 410px;
   box-sizing: border-box;
   font-size: 12px;
   display: flex;
   flex-direction: column;
   border: 1px solid #d1dbe5;
   padding: 5px;
-
+  .ark-select{
+    margin: 3px 0 10px 0;
+  }
   .searchlist {
     margin-bottom: 6px;
     height: 24px;
@@ -76,8 +78,8 @@
 
         tr {
           th {
-            height: 26px;
-            line-height: 26px;
+            height: 30px;
+            line-height: 30px;
             white-space: nowrap;
             padding: 0 5px;
             text-align: left;
@@ -98,9 +100,8 @@
           border-bottom: 1px solid #d8d8d8;
 
           td {
-            height: 23px;
-
-            line-height: 23px;
+            height: 30px;
+            line-height: 30px;
             white-space: nowrap;
             padding: 0 5px;
             text-align: left;
@@ -119,6 +120,11 @@
           background-color: #f8f7f7;
         }
       }
+      
+      input{
+        vertical-align: middle;
+        margin-top: -3px;
+      }
     }
 
     p {
@@ -129,8 +135,12 @@
   }
 
   .page {
-    height: 14px;
-    margin-top: 6px;
+    height: 20px;
+    margin-top: 10px;
+    .el-pagination{
+      text-align: center;
+      margin-left: -5px;
+    }
     button {
       height: 14px;
       width: 14px;
@@ -162,14 +172,4 @@
       }
     }
   }
-
-  /* 覆盖饿了么UI原有样式 */
-    .el-pagination--small li.more::before {
-      line-height: 14px;
-    }
-    .el-pagination--small .el-pager li,
-    .el-pagination--small .el-pager li.btn-quicknext {
-      height: 14px;
-      line-height: 14px;
-    }
 }
