@@ -293,6 +293,7 @@ export default {
           this.loading = false;
         });
         // this.tableConfig.data = param.expressCode != '-1' ? this.tableConfig.data.concat(data.data) : this.tableConfig.data.concat([]);
+        data.data.map(it => it.ID = '-1')
         this.tableConfig.data = data.data;
         this.tableConfig.total = data.pageInfo.total;
         R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
@@ -301,7 +302,6 @@ export default {
       setTimeout(() => {
         if (this.ID == '-1') {
           _this.renderHandle(['COMPENSATE_QTY', 'COMPENSATE_AMT']);
-          data.data.map(it => it.ID = '-1')
         } else {
           const buttonList = _this.tableConfig.businessButtonConfig.buttons;
           if (_this.status == '0') {
