@@ -941,7 +941,7 @@ class BtnConfig {
       if (id) {
         let formdata = new FormData();
         formdata.append('id' , id[0]);
-        commonUtils.modalShow(self, 'l7', 'common.updateVirtualLibrary', formdata)
+        commonUtils.modalShow(self, 'kw', 'common.updateVirtualLibrary', formdata)
       }
     }
   }
