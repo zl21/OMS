@@ -242,6 +242,7 @@ export default {
         param.ocBOrderDeliveryId = $omsUtils.sonList(this.subData, 'OC_B_ORDER_DELIVERY_ID') // 有原单，查询过滤已选数据
       }
       param.mainId = this.ID;
+      param.web = 'payDetailAdd';
       const { data: { code, data } } = await this.service.orderCenter.payQueryProList(param).catch(e => {
         this.loading = false;
       });

@@ -331,6 +331,7 @@ export default {
       }
       const pageInfo = { pageNum: page, pageSize }
       let param = { ...fixedcolumns, ...pageInfo }
+      param.web = 'paySearchOriginCode';
       if (isMounted) param.expressCode = '-1';
       const { data: { code, data } } = await self.service.orderCenter.ocBCompensateOrder(param).catch(e => {
         this.table.loading = false;
