@@ -73,7 +73,7 @@ export default () => ({
         if (!main.CP_C_PHY_WAREHOUSE_ID) return this.$Message.warning($i18n.t('modalTips.ks')) //'实体仓库为必填项，请填写后保存！'
         if (ID != '-1' && !main.ACTUAL_COMPENSATE_FEE) return this.$Message.warning($i18n.t('modalTips.kt')) //'实际赔付金额为必填项，请填写后保存！'
         const payData = R3.store.state.customize.COMPENSATE;
-        main.REDUNDANT_ORDER_ID = payData.other.REDUNDANT_ORDER_ID;
+        main.REDUNDANT_ORDER_ID = payData.other.orderId;
         const OC_B_COMPENSATE_ORDER_ITEM = payData.detail;
         console.log('payData::', payData.detail);
         const IDS = R3.store.state.customize.COMPENSATE.deleteIds;

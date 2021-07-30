@@ -110,7 +110,6 @@ export default {
                 const detail = this.tableConfig.data;
                 R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail })));
                 this.tableConfig.selectData = [];
-                R3.store.commit('customize/REDUNDANT_ORDER_ID', 'zhoulan');
               }
             },
           ],
@@ -122,7 +121,6 @@ export default {
         selectData: [],
         pageShow: true, // 控制分页是否显示
         loading: false,
-        indexColumn: true, // 是否显示序号
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
@@ -173,17 +171,19 @@ export default {
   },
   computed: {
     exCode() {
-      return R3.store.state.customize.COMPENSATE.other.expressCode
+      // clear时监听不到store上的值的变化（因为存的是对象），在store中调整修改对象值的方式
+      return R3.store.state.customize.COMPENSATE.exCode
     },
     ID() {
       return this.$route.params.itemId && this.$route.params.itemId != 'New' ? this.$route.params.itemId : '-1';
     },
     isEdit() {
-      return R3.store.state.customize.REDUNDANT_ORDER_ID; // store.REDUNDANT_ORDER_ID 存的是物流单号
+      // return R3.store.state.customize.REDUNDANT_ORDER_ID; // store.REDUNDANT_ORDER_ID 存的是物流单号
+      return R3.store.state.customize.COMPENSATE.orderId
     }
   },
   watch: {
-    isEdit(newVal) {
+    /* isEdit(newVal) {
       setTimeout(() => {
         if (newVal == 'zhoulan') return
         if (newVal == 'clear') {
@@ -192,12 +192,19 @@ export default {
           this.initTable(1, 10, newVal ? false : true, newVal ? newVal : '');
         }
       }, 10);
+    } */
+    exCode(newVal, oldVal) {
+      setTimeout(() => {
+        /* if (newVal == oldVal) {
+          return
+        } */
+        this.initTable(1, 10, newVal ? false : true, newVal);
+      }, 10);
     }
   },
   activated() {
     const data = R3.store.state.customize.COMPENSATE.detail;
     this.tableConfig.data = data;
-    R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: data })));
   },
   created() { },
   destroyed() {
@@ -272,14 +279,14 @@ export default {
       });
     },
     /**
+     * >> 仅新增页面会走，通过watch监听'物流单号'触发，仅用于新增时初始化原单带出的明细
      * 入参说明：
      * 1. 新增时根据原单带出明细（页面新增 且 有原单）
-        expressCode: "9998975701"
+        expressCode: "9998975701" // 没有就传'-1'(clear的情况)
         mainId: "-1"
         pageNum: 1
         pageSize: 10
      * 2. 新增页面初始化表头没走这个：在mounted里走的框架标准子表接口
-     *
      */
     async initTable(page = 1, pageSize = 10, isInit, oriId) {
       console.log('payDetailAdd::initTable::');
@@ -292,8 +299,7 @@ export default {
       // store上取不到刚刚通过defined自定义表单组件设置的值，好像没有触发框架去保存在store上
       const pageInfo = { pageNum: page, pageSize }
       let param = { ...pageInfo }
-      param.expressCode = oriId ? oriId : R3.store.state.customize.COMPENSATE.other.expressCode || '-1';
-      if (!param.expressCode) delete param.expressCode;
+      param.expressCode = oriId ? oriId : R3.store.state.customize.COMPENSATE.exCode || '-1';
       param.mainId = this.ID;
       const { data: { code, data } } = await this.service.orderCenter.payQueryProList(param).catch(() => {
         this.loading = false;
@@ -303,7 +309,7 @@ export default {
       }
       // this.tableConfig.data = param.expressCode != '-1' ? this.tableConfig.data.concat(data.data) : this.tableConfig.data.concat([]);
       this.tableConfig.data = data.data;
-      this.tableConfig.total += param.expressCode ? data.pageInfo.total : 0;
+      this.tableConfig.total = data.pageInfo.total;
       R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
       this.loading = false;
     },
@@ -316,7 +322,7 @@ export default {
             props: {
               value: Number(params.row.COMPENSATE_QTY || 1),
               // regx: /^[1-9]\d*$/, // 此组件正则不管用
-              max: (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? Number(params.row.QTY || 0) : Infinity,
+              max: self.exCode ? Number(params.row.QTY || 0) : Infinity,
               // min: (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? 1 : 0, // 关联了原单最小1，反之最小0
               min: 1,
               editable: true,
@@ -385,7 +391,7 @@ export default {
                   const ca = Number(e.target._value);
                   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL);
                   params.row.COMPENSATE_AMT = $omsUtils.floatNumber(ca, 2);
-                  if (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) {
+                  if (self.exCode) {
                     if (ca > relCa) {
                       params.row.COMPENSATE_AMT = $omsUtils.floatNumber(relCa, 2);
                     }

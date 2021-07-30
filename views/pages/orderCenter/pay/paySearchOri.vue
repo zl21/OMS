@@ -14,13 +14,13 @@
       disabled
       @on-click="iconclick"
       :icon="searchIcon"
-      v-model="REDUNDANT_ORDER_ID"
+      v-model="orderId"
       :placeholder="''"
       @on-blur="inputblur"
       @on-change="inputChange"
     ></Input>
     <Icon
-      v-if="REDUNDANT_ORDER_ID && REDUNDANT_ORDER_ID != '-1' && ID == '-1'"
+      v-if="orderId && orderId != '-1' && ID == '-1'"
       class="oriCodeclear"
       type="ios-close-circle"
       @click="clear"
@@ -86,7 +86,8 @@ export default {
       orderModal: false,
       loading: false,
       ID: this.$route.params.itemId && this.$route.params.itemId != 'New' ? this.$route.params.itemId : '-1',
-      REDUNDANT_ORDER_ID: '',
+      orderId: '',
+      exCode: '',
       backable: false,
       modal: false,
       getCurrenData: [],
@@ -133,12 +134,16 @@ export default {
               }
               this.$emit('change', this.getCurrenData, this);
               // this.$emit('change', 'SF000000002', this);
-              this.REDUNDANT_ORDER_ID = this.getCurrenData[0].billNo;
-              this.other.REDUNDANT_ORDER_ID = this.REDUNDANT_ORDER_ID;
-              this.other.expressCode = this.getCurrenData[0] ? this.getCurrenData[0].expressCode : '';
+              const orderId = this.getCurrenData[0].billNo;
+              const exCode = this.getCurrenData[0] ? this.getCurrenData[0].expressCode : '';
+              this.orderId = orderId;
+              this.exCode = exCode;
+              // this.other.REDUNDANT_ORDER_ID = this.REDUNDANT_ORDER_ID;
+              // this.other.expressCode = this.getCurrenData[0] ? this.getCurrenData[0].expressCode : '';
               const aa = this.getCurrenData[0].psCSkuEcode;
-              R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ other: this.other })));
-              R3.store.commit('customize/REDUNDANT_ORDER_ID', JSON.parse(JSON.stringify(this.other.expressCode)));
+              R3.store.commit('customize/COMPENSATE', { orderId });
+              R3.store.commit('customize/COMPENSATE', { exCode });
+              // R3.store.commit('customize/REDUNDANT_ORDER_ID', JSON.parse(JSON.stringify(this.other.expressCode)));
               this.destroyVm();
             },
           },
@@ -235,14 +240,15 @@ export default {
     orderModal(val) {
       !val && this.destroyVm();
     },
-    REDUNDANT_ORDER_ID: {
+    /* orderId: { ？？为什么要watch
       handler(newValue, oldVal) {
-        this.other.REDUNDANT_ORDER_ID = newValue
-        this.other.expressCode = this.getCurrenData[0] ? this.getCurrenData[0].expressCode : '';
+        // this.other.REDUNDANT_ORDER_ID = newValue
+        this.orderId = newValue;
+        // this.other.expressCode = this.getCurrenData[0] ? this.getCurrenData[0].expressCode : '';
         R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ other: this.other })));
         R3.store.commit('customize/REDUNDANT_ORDER_ID', this.other.expressCode);
       },
-    },
+    }, */
   },
 
   created() { },
@@ -251,13 +257,15 @@ export default {
     const val = this.$parent.$props.value;
     if (val) {
       if (val instanceof Array && val.length) {
-        this.REDUNDANT_ORDER_ID = val[0].billNo || '';
+        this.orderId = val[0].billNo || '';
       } else {
-        this.REDUNDANT_ORDER_ID = val;
+        this.orderId = val;
       }
-      this.other.REDUNDANT_ORDER_ID = this.REDUNDANT_ORDER_ID
-      R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ other: this.other })));
-      R3.store.commit('customize/REDUNDANT_ORDER_ID', this.other.expressCode);
+      // this.other.REDUNDANT_ORDER_ID = this.REDUNDANT_ORDER_ID
+      R3.store.commit('customize/COMPENSATE', { orderId: this.orderId });
+
+      // R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ other: this.other })));
+      // R3.store.commit('customize/REDUNDANT_ORDER_ID', this.other.expressCode);
     }
     this.$nextTick(async () => {
       this.queryEnter(1, 10, true);
@@ -274,14 +282,14 @@ export default {
       this.orderModal = true;
     },
     clear() {
-      this.REDUNDANT_ORDER_ID = '';
-      // this.$emit('change', [{ ID: '-1', Label: '-1' }], this);
+      this.orderId = '';
       this.$emit('change', '', this);
-      // R3.store.commit('customize/REDUNDANT_ORDER_ID', 'zhoulan');
       // 联动清空子表
       this.getCurrenData[0] = {};
       setTimeout(() => {
-        R3.store.commit('customize/REDUNDANT_ORDER_ID', 'clear');
+        // R3.store.commit('customize/REDUNDANT_ORDER_ID', 'clear');
+        R3.store.commit('customize/COMPENSATE', { orderId: '' });
+        R3.store.commit('customize/COMPENSATE', { exCode: '' });
       }, 10);
     },
     inputenter() { },

@@ -222,13 +222,13 @@ export default {
       }
       const pageInfo = { pageNum: page, pageSize }
       let param = { ...fixedcolumns, ...pageInfo }
-      param.expressCode = R3.store.state.customize.COMPENSATE.other.expressCode || '';
-      console.log('R3.store.state.customize.COMPENSATE.other.expressCode::', param.expressCode);
+      const exCode = R3.store.state.customize.COMPENSATE.exCode || '';
       // 详情时：expressCode、mainId必传（没有原单时除外
-      if (this.ID != '-1') {
+      param.expressCode = exCode;
+      /* if (this.ID != '-1') {
         let storeOther = JSON.parse(JSON.stringify(R3.store.state.customize.COMPENSATE.other))
         param.expressCode = storeOther.exCode || ''
-      }
+      } */
       if (isInit) {
         param.expressCode = '-1';
         param.isInit = true;
@@ -237,7 +237,7 @@ export default {
       }
       if (!isInit && !param.expressCode) {
         delete param.expressCode // 没有原单时,expressCode不传
-        param.excludeEcode = $omsUtils.sonList(this.subData, 'PS_C_SKU_ECODE') // 查询过滤已选数据
+        param.excludeEcode = $omsUtils.sonList(this.subData, 'PS_C_SKU_ECODE') // 无原单，查询过滤已选数据
       } else if (!isInit && param.expressCode && param.expressCode != '-1') {
         param.ocBOrderDeliveryId = $omsUtils.sonList(this.subData, 'OC_B_ORDER_DELIVERY_ID') // 有原单，查询过滤已选数据
       }

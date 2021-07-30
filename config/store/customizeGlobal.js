@@ -122,8 +122,9 @@ export const globalStore = {
       detail: [],
       deleteIds: [],
       other: {},
+      exCode: '',
+      orderId: '',
     },
-    REDUNDANT_ORDER_ID: '',
     originalOrder:'',
     extraoOrderDetails:[],
     clear:false,
@@ -339,8 +340,11 @@ export const globalStore = {
       console.log(state.returnOrderChangeItem,n);
     },
     COMPENSATE(state, n) {
-      let ks = Object.keys(state.COMPENSATE);
-      ks.forEach((k) => n[k] && (state.COMPENSATE[k] = n[k]));
+      console.log('state::',n);
+      let obj = JSON.parse(JSON.stringify(state.COMPENSATE));
+      let ks = Object.keys(n);
+      ks.forEach((k) => obj[k] = n[k]);
+      state.COMPENSATE = obj; // 改变引用
     },
     originalOrder(state,n){
       console.log(state,n);
