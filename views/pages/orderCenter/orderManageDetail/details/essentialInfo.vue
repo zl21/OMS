@@ -47,7 +47,7 @@
                 <i v-if="list.flag">*</i>
                 {{ list.label }}
               </label>
-              <p v-if="list.column === 'CP_C_REGION_PROVINCE_ENAME'">
+              <p v-if="list.column === 'CP_C_REGION_PROVINCE_ENAME'" :title="`${componentData.order['CP_C_REGION_PROVINCE_ENAME']}${componentData.order['CP_C_REGION_CITY_ENAME']}${componentData.order['CP_C_REGION_AREA_ENAME']}`">
                 {{ componentData.order['CP_C_REGION_PROVINCE_ENAME'] }}
                 {{ componentData.order['CP_C_REGION_CITY_ENAME'] }}
                 {{ componentData.order['CP_C_REGION_AREA_ENAME'] }}
