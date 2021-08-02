@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-29 13:32:08
+ * @LastEditTime: 2021-08-02 13:11:24
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -336,7 +336,7 @@ export default {
         this.renderColumn = this.tableHead.huan;
         // 手工新增
         setTimeout(() => {
-            this.renderHandle([ "QTY_EXCHANGE","PRICE_ACTUAL"]) //render方法
+            this.renderHandle([ "DISPUTE_ID","QTY_EXCHANGE","PRICE_ACTUAL"]) //render方法
           }, 100);
         this.businessActionTable.data = this.toMainData.huan;
         // 退货明细
@@ -514,6 +514,7 @@ export default {
     },
     // 获取明细详情数据
     async getDetailsData(PT_SKU){
+      console.log();
       const {
         data: {
           code,
@@ -526,6 +527,7 @@ export default {
           message,
         },
       } = await this.service.orderCenter.getALlOrderReturnAndItemInfo({
+        BILL_TYPE:this.$route.params.tableName === "OC_B_RETURN_ORDER_ECXCHANGE_TABLE" ? 1 : 0,
         ID: this.$route.params.itemId,
         PT_SKU
       });
@@ -628,6 +630,30 @@ export default {
       // 退货 =》 可退货数量可编辑
       // 换货 =》 退货数量、成交单价
       let obj = {
+        DISPUTE_ID: (h, params) => {
+          return h("Input", {
+            props: {
+              value: params.row.DISPUTE_ID,
+              autosize: true,
+              regx: /^[A-Za-z0-9]+$/,
+            },
+            on: {
+              "on-change": (e) => {
+                setTimeout(() => {
+                  const rI = e.target.value;
+                  params.row.DISPUTE_ID = rI;
+                  // 退货明细
+                    this.toMainData["huan"][params.index] = params.row;
+                    R3.store.commit(
+                      "customize/returnOrderChangeItem",
+                      JSON.parse(JSON.stringify(this.toMainData))
+                    );
+                  this.businessActionTable.data[params.index] = params.row;
+                }, 300);
+              },
+            },
+          });
+        }, // 平台退换货单号	
         REFUND_ID: (h, params) => {
           return h("Input", {
             props: {
