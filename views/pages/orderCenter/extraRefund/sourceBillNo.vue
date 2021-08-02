@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-07-28 18:32:13
+ * @LastEditTime: 2021-08-02 11:24:51
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -177,42 +177,42 @@ export default {
             label: '原定单编号', // 原定单编号
             colname: 'BILL_NO',
             width: '8',
-            // inputenter: () => this.queryBounced(),
+            inputenter: () => this.queryEnter(1, this.table.pageSize),
           },
           {
             style: 'input',
             label: $i18n.t('form_label.platform_billNo'), // 平台单号
             colname: 'SOURCE_CODE',
             width: '8',
-            // inputenter: () => this.queryBounced(),
+            inputenter: () => this.queryEnter(1, this.table.pageSize),
           },
           {
             style: 'input',
             label: '物流单号', // 物流单号
             colname: 'EXPRESS_CODE',
             width: '8',
-            // inputenter: () => this.queryBounced(),
+            inputenter: () => this.queryEnter(1, this.table.pageSize),
           },
           {
             style: 'input',
             label: $i18n.t('form_label.consignee'), // 收货人
             colname: 'RECEIVER_NAME',
             width: '8',
-            // inputenter: () => this.queryBounced(),
+            inputenter: () => this.queryEnter(1, this.table.pageSize),
           },
           {
             style: 'input',
             label: $i18n.t('table_label.buyerNickname'), // 买家昵称
             colname: 'BUYER_NICK',
             width: '8',
-            // inputenter: () => this.queryBounced(),
+            inputenter: () => this.queryEnter(1, this.table.pageSize),
           },
           {
             style: 'input',
             label: $i18n.t('form_label.consignee_phone'), // 收货人手机
             colname: 'RECEIVER_MOBILE',
             width: '8',
-            // inputenter: () => this.queryBounced(),
+            inputenter: () => this.queryEnter(1, this.table.pageSize),
           },
         ],
       },
