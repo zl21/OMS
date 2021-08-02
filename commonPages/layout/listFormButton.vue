@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-30 11:24:27
- * @LastEditTime: 2021-07-30 11:35:19
+ * @LastEditTime: 2021-08-02 11:22:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/listFormButton.vue
@@ -43,9 +43,9 @@ export default {
       this.ButttonCallBack(type);
     },
     iconClick(e) { 
-      if (e.target.className.includes('ios-arrow-down')) {
+      if (e.target.className.includes('ios-arrow-down') || (e.target.children.length && e.target.children[0].className.includes('ios-arrow-down'))) {
         this.icon = 'ios-arrow-up'
-      } else if (e.target.className.includes('ios-arrow-up')) {
+      } else if (e.target.className.includes('ios-arrow-up') || (e.target.children.length && e.target.children[0].className.includes('ios-arrow-up'))) {
         this.icon = 'ios-arrow-down'
       }
       this.IconCallBack()
