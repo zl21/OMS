@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-07-21 11:54:28
+ * @LastEditTime: 2021-08-02 13:15:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -111,6 +111,10 @@ export default {
   content: "";
 }
 // 头部导航有关系的所有样式
+// 收拉左侧菜单
+.NaVertical-icons{
+  
+}
 // 搜索
 .NaVertical {
   .NaVertical-box {

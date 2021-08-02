@@ -449,6 +449,7 @@
           flodClick: () => {
             this.shutDownOrbounceOff();
           },
+          gridBar:true,
           formData: [],
           formValue: {},
           ruleValidate: {},
