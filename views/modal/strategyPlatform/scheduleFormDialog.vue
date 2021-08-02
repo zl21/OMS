@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     :class="['dialogForm', 'customized-modal', { 'fix-height': componentData.type == 'warehouseWarrant' }]"
     v-loading="loading">
     <div class="subtablePart">

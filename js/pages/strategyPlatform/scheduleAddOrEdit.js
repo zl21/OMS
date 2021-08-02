@@ -1095,8 +1095,8 @@ export default {
   computed: {
     dialogInfo() {
       return this.curDialog == 'warehouseWarrant'
-        ? { title: $i18n.t('panel_label.ac'), width: '800px' }
-        : { title: $i18n.t('panel_label.ad'), width: '400px' };
+        ? { title: $i18n.t('panel_label.ac'), width: '800' }
+        : { title: $i18n.t('panel_label.ad'), width: '400' };
     }
   },
   methods: {
