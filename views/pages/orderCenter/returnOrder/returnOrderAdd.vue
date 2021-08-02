@@ -378,6 +378,7 @@ export default {
             width: '6',
             inputChange: () => {
               this.modifyData("RETURNEE_MOBILE", "master");
+              this.formConfig.formValue.RECEIVER_MOBILE = this.formConfig.formValue.RETURNEE_MOBILE;
             },
           },
           {
