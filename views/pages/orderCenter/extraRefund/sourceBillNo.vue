@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-08-02 11:24:51
+ * @LastEditTime: 2021-08-02 11:40:07
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -249,7 +249,7 @@ export default {
         indexColumn: true, // 是否显示序号
         height: '300',
         loading: false,
-        isShowSelection: false, // 是否显示checkedbox
+        isShowSelection: true, // 是否显示checkedbox
         pageShow: true, // 控制分页是否显示
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
@@ -257,6 +257,7 @@ export default {
         pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         pageIndex: 1, // 页码
+        highlightRow:true,
       },
     };
   },
