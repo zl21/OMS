@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-08-02 13:15:34
+ * @LastEditTime: 2021-08-02 17:53:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -113,7 +113,27 @@ export default {
 // 头部导航有关系的所有样式
 // 收拉左侧菜单
 .NaVertical-icons{
-  
+  position: absolute;
+  .iconbj-unfold,.iconbj-fold{
+    &::before{
+      content:'';
+    }
+    position: fixed;
+    top: 50%;
+    left: 55px;
+    transform: translateY( - 50%);
+    display: inline-block;
+    width: 12px;
+    height: 40px;
+    background:  url(../../assets/img/icon_unfold.png) right no-repeat;
+    background-size: 100% auto;
+    z-index: 99;
+  }
+  .iconbj-fold{
+    left: 180px;
+    background:  url(../../assets/img/icon_fold.png) right no-repeat;
+    background-size: 100% auto;
+  }
 }
 // 搜索
 .NaVertical {
