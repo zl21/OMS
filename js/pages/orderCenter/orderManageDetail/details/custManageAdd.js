@@ -83,7 +83,9 @@ export default {
         total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 1000, // 每页条数
-        totalData: [] // 总计
+        totalData: [{
+          index:$i18n.t("other.total")
+        }] // 总计
       },
       // textArr:['删除赠品','替换商品','标记取消'], // 需要控制的按钮text
       textArr:[$i18n.t('btn.deleteGift'),$i18n.t('btn.replaceGoods'),$i18n.t('btn.btn.markCancel')], // 需要控制的按钮text
@@ -148,6 +150,9 @@ export default {
         $omsUtils.buttonHasDisable(this.textArr,buttonArr,true);
         this.tableConfig.data = newVal.subItem;
         this.tableConfig.loading = false;
+        // 合计
+        let totalNumArr =  ['QTY','QTY_LACK','REAL_AMT','AMT_DISCOUNT','ORDER_SPLIT_AMT','ADJUST_AMT'];
+        Object.assign(this.tableConfig.totalData[0],$omsUtils.totalColumn(totalNumArr,newVal.subItem))
       }
     },
     // 删除赠品
@@ -297,26 +302,26 @@ export default {
     },
     showTable(obj) {
       const tbody = obj;
-      let totalData = [];
+      // let totalData = [];
       // 明细合计
-      let amt = 0;
-      let qty = 0;
-      obj.forEach((item) => {
-        if (item.REAL_AMT !== null) {
-          amt = publicMethodsUtil.accAdd(
-            parseFloat(item.REAL_AMT).toFixed(2),
-            amt
-          );
-          qty += Number(item.QTY);
-        }
-      });
-      totalData = [
-        {
-          index: '总计',
-          REAL_AMT: amt,
-          QTY: qty
-        }
-      ];
+      // let amt = 0;
+      // let qty = 0;
+      // obj.forEach((item) => {
+      //   if (item.REAL_AMT !== null) {
+      //     amt = publicMethodsUtil.accAdd(
+      //       parseFloat(item.REAL_AMT).toFixed(2),
+      //       amt
+      //     );
+      //     qty += Number(item.QTY);
+      //   }
+      // });
+      // totalData = [
+      //   {
+      //     index: '总计',
+      //     REAL_AMT: amt,
+      //     QTY: qty
+      //   }
+      // ];
       this.tableConfig = Object.assign(this.tableConfig, {
         columns: this.columns,
         isShowSelection: true,

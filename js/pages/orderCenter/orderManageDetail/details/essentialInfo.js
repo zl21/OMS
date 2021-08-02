@@ -233,8 +233,8 @@ export default {
   },
   methods: {
     eyeClick() {
-      this.eyeStatus = !this.eyeStatus;
       this.eyeText = this.eyeStatus ? $i18n.t('btn.show') : $i18n.t('btn.hide'); //隐藏 显示
+      this.eyeStatus = !this.eyeStatus;
       this.$emit('freshLoad', {DECRYPT : this.eyeStatus});
     },
     isQhMethod(data) {
