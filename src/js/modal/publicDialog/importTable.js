@@ -393,7 +393,7 @@ export default {
       } else if (table === 'AC_F_LIVE_ORDER') {
         // 关闭导入弹框
         _this.$parent.$parent.$parent.showModal = false
-      } else if (table === 'AC_F_RECONCILIATION_SETTLE_STRATEGY') {
+      } else if (table === 'AC_F_RECONCILIATION_SETTLE_STRATEGY' || table === 'PS_C_SAMECITY_DETRIMENT_REF') {
         // 关闭导入弹框
         _this.$parent.$parent.$parent.showModal = false
       }
