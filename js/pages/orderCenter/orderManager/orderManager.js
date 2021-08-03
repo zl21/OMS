@@ -663,7 +663,7 @@
                   item['displayName'] = item.headerName;
                   item.thAlign = 'center';
                 });
-                columns.unshift({"headerName":"序号","width":80,"field":"ID","sort":10,"displayName":"序号",checkboxSelection:true , pinned: 'left'})
+                columns.unshift({"headerName":"序号","width":80,"field":"index","sort":10,"displayName":"序号",checkboxSelection:true , pinned: 'left'})
               }
               self.agTableConfig.columnDefs = columns;
               self.agTableConfig.rowData = rowData;
