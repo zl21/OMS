@@ -16,5 +16,13 @@ export default {
   slotTableTemplate:tableDetailCollectionSlot, // 子表渲染的逻辑的文件,
   mounted () {
    
+  },
+  methods: {
+    R3_processColumns(columns){
+      columns.forEach(item => {
+        // item.thAlign = 'center'
+      });
+      return columns
+    }
   }
 }
