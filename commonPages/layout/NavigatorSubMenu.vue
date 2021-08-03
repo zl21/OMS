@@ -68,7 +68,7 @@
   }
   // 收起
   &.transferLeft{
-    width: 55px;
+    width: 55px !important;
     overflow: inherit;
     transition: inherit;
     .left{
