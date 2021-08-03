@@ -920,7 +920,10 @@
             }
             // 分页赋值
             self.agTableConfig.pagenation.total = data.COUNT;
-            data.ITEMS.forEach((item , index)=>item['index'] = index+1)
+            data.ITEMS.forEach((item , index)=> {
+              item['index'] = index+1
+              item.thAlign = 'center'
+            })
             self.agTableConfig.rowData = data.ITEMS;
             if(!self.vueAgTable){
               self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
