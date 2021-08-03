@@ -1588,9 +1588,9 @@ export default {
           let no = valueArr.indexOf("COLLECT_AMT");
           valueArr.splice(no, 1);
         }
-        // self.modify.master.PAY_TYPE = self.formConfigBase.formValue.PAY_TYPE; // 保存入参默认值
+        self.modify.master.PAY_TYPE = self.formConfigBase.formValue.PAY_TYPE; // 保存入参默认值，支付方式
       }
-      self.modify.master.PAY_TIME = self.formConfigBase.formValue.PAY_TIME; // 保存入参默认值
+      self.modify.master.PAY_TIME = self.formConfigBase.formValue.PAY_TIME; // 保存入参默认值，支付时间
       const drpArr = [
         "CP_C_SHOP_ID",
         // "CP_C_PHY_WAREHOUSE_ID",
