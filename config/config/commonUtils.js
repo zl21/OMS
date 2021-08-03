@@ -10,6 +10,59 @@ class commonUtils {
   constructor() { }
 
   //--------------工具方法区--------------------------
+  static saveValidator(myForm, exArr) {
+    const fD = myForm.formData;
+    const fV = myForm.formValue;
+    let msg = '', emptyMsg = '', ruleMsg = '', longMsg = '';
+    for (const it of fD) {
+      if (exArr.includes(it.colname)) {
+        break
+      }
+      if (it.itemdata) { // 复杂类型
+        it.isnotnull = it.itemdata.isnotnull;
+        it.regx = it.regx ? it.regx : it.itemdata.regx;
+        it.length = it.itemdata.length;
+        it.label = it.itemdata.name;
+        fV[it.colname] = it.itemdata.valuedata;
+      }
+      if (it.isnotnull) {
+        if (!fV[it.colname]) {
+          emptyMsg += `${it.label}`
+        }
+      }
+      if (it.regx) {
+        if (!it.regx.test(fV[it.colname])) {
+          ruleMsg += `${it.label}`
+        }
+      }
+      if (it.length) {
+        let len;
+        len = fV[it.colname].length;
+        if (it.style == 'number') {
+          len = Number(fV[it.colname]).toExponential.toString().length
+        }
+        if (len > it.length) {
+          longMsg += `${it.label}`
+        }
+      }
+    }
+    if (emptyMsg) {
+      msg = emptyMsg.replace(/，$/, ' ')
+      msg = `${msg}不能为空！`
+      return msg
+    } else if (ruleMsg) {
+      msg = ruleMsg.replace(/，$/, ' ')
+      msg = `${msg}格式不正确！`
+      return msg
+    } else if (longMsg) {
+      msg = longMsg.replace(/，$/, ' ')
+      msg = `${msg}超长！`
+      return msg
+    } else {
+      return ''
+    }
+  }
+
   static initForm(self, param, myForm) {
     // const self = this;
     // console.log(data);
