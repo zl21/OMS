@@ -211,7 +211,7 @@ class DropDownConfig {
         self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
       }, 100)
     }else{
-     self.$OMS2.omsUtils.msgTips(self, 'warning', 'kf',2)
+     self.$OMS2.omsUtils.msgTips(self, 'warning', 'kf')
       return
     }
   
@@ -280,7 +280,7 @@ class DropDownConfig {
       self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
     }, 100)
     }else{
-      self.$OMS2.omsUtils.msgTips(self, 'warning', 'kf',2)
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'kf')
       return
     }
   }
@@ -291,7 +291,7 @@ class DropDownConfig {
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
     if (self.selection.length != 1) {
-      self.$OMS2.omsUtils.msgTips(self, 'warning', 'jw', 2)
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'jw')
       return
     }
     const IDS = self.$OMS2.omsUtils.sonList(self.selection, 'ID')
@@ -616,7 +616,7 @@ class DropDownConfig {
     if (ids[0].ORDER_STATUS == 1||ids[0].ORDER_STATUS == 2) {
       this.successHandler(ids, 'replaceConfig', 'product', 'replaceTheGoods')
     }else{
-     self.$OMS2.omsUtils.msgTips(self, 'warning', 'kf',2)
+     self.$OMS2.omsUtils.msgTips(self, 'warning', 'kf')
       self.btnConfig.loading = false
       return
     }
