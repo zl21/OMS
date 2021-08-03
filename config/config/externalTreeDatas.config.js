@@ -137,6 +137,7 @@ treeDataConfig = (() => {
         }
         const res = await service[item.center][item.api](income);
         data = res.data instanceof Array ? res.data : res.data.data;
+       
         const treeData = {
           data,
           name: item.name || 'ID',

@@ -136,8 +136,9 @@ export default {
 
     
     // 获取角色
-   this.getRoleData();
+     this.getRoleData();
     this.getSearchForm();
+    this.getTableData();//获取表格
 
     this.buttonConfig.buttons = this.permissionType === 'brand' || this.permissionType === 'sensitivecol'
     ? this.normal.buttons.filter(item => item.text != $i18n.t('btn.copyPermissions'))
@@ -192,10 +193,15 @@ export default {
         obj.expand = !obj.expand
         return
       }else{
+        if (this.isChange) {
+          this.saveModal = true;
+        } else {
+        this.getSearchForm();
+        this.getTableData();//获取表格
+        }
+
         this.permissionType = obj.type
         this.spinShow = true
-        this.getRoleData();
-        this.getSearchForm();
       }
 
   
@@ -210,9 +216,11 @@ export default {
       }
     },
     isChangeFun(val) {
+   
       this.isChange = val;
     },
     filterTreeChange(val, item) {
+
       this.newGroupId = item.ID;
       if (this.isChange) {
         this.saveModal = true;
@@ -235,15 +243,12 @@ export default {
 
  
     async getRoleData() {
-     
       const res = await this.service.common.groupTreeload({});
       this.spinShow = false
       if (res.data.code === 0) {
         this.groupId = res.data.data[0].ID;
         this.newGroupId = res.data.data[0].ID;
         this.filterTreeConfig.treeAttribute.data = this.restructureMenuTreeData(res.data.data, true);
-
-        this.getTableData();
       }
     },
     // 获取搜索框
@@ -254,6 +259,7 @@ export default {
           urlSearchParams({ permissionType: this.permissionType })
         )
         .then(res => {
+          this.spinShow = false
           if (res.data.code === 0) {
             res.data.data.map(item=>{
               item.coldesc = item.colname
