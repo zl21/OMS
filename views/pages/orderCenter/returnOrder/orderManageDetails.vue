@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-07 16:19:54
- * @LastEditTime: 2021-08-03 14:59:04
+ * @LastEditTime: 2021-08-03 18:35:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/orderManageDetails.vue
@@ -250,6 +250,13 @@
   @import '~omsTheme/public.less';
   .Step-Box{
     margin: @base-mr @base-mr 0;
+    /deep/ .steps-content.ark-steps .ark-steps-item .ark-steps-head .ark-steps-head-inner {
+      height: 21px;
+      line-height: 1;
+      & > .ark-steps-icon.ark-icon{
+        font-size: 24px;
+      }
+    }
   }
   .customized-detail-label{
     border-bottom: 1px solid #f4f5f9;
