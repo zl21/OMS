@@ -504,17 +504,10 @@ export default {
             disabled: false,
             orderTimeOption: [
               {
-                value: 1,
-                label: '下单时间'
+                value: 4,
+                label: '据预计发货时间提前'
               },
-              {
-                value: 2,
-                label: '支付时间'
-              },
-              {
-                value: 3,
-                label: '创建时间'
-              }
+              
             ],
             timeUnitOption: [
               {

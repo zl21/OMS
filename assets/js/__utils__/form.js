@@ -149,15 +149,28 @@ const form = {
             //  serviceId: ele.fkobj.serviceId,
               success: res => {
                 res.data.data.row.forEach(item => {
-                  if (item.ENAME.val.indexOf(value) != '-1') {
-                    this.nobj = {};
-                    obj.item.props.AutoData = [];
-                    res.data.data.tabth.forEach(em => {
-                      this.nobj[em.name] = item[em.colname].val;
-                      this.nobj.value = item[em.colname].val;
-                    });
-                    obj.item.props.AutoData.push(this.nobj);
+                  if (ele.colid == 182332) {
+                    if (item.SHOP_NICK.val.indexOf(value) != '-1') {
+                      this.nobj = {};
+                      obj.item.props.AutoData = [];
+                      res.data.data.tabth.forEach(em => {
+                        this.nobj[em.name] = item[em.colname].val;
+                        this.nobj.value = item[em.colname].val;
+                      });
+                      obj.item.props.AutoData.push(this.nobj);
+                    }
+                  }else{
+                    if (item.ENAME.val.indexOf(value) != '-1') {
+                      this.nobj = {};
+                      obj.item.props.AutoData = [];
+                      res.data.data.tabth.forEach(em => {
+                        this.nobj[em.name] = item[em.colname].val;
+                        this.nobj.value = item[em.colname].val;
+                      });
+                      obj.item.props.AutoData.push(this.nobj);
+                    }
                   }
+                  
                 });
               }
             });
