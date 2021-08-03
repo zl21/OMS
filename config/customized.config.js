@@ -22,6 +22,7 @@ import Vue from 'vue';
 import standardTableListsCustomize from './minxin/standardTableListsCustomize';
 import verticalTableDetailCustomize from './minxin/verticalTableDetailCustomize';
 import tableDetailCollectionMixin from './minxin/standardTable/mixin.js';
+import cusValidate from './config/validate.config.js';
 
 class CustomizedConfig {
 	static #STLC = standardTableListsCustomize;
@@ -48,7 +49,11 @@ class CustomizedConfig {
 	static #commonUtils = commonUtils;
 	static #funBtn = funBtn;
 	static #dropDownBtn = dropDownBtn;
+	static #cusValidate = cusValidate;
 	/* ------------ 挂载项 start ------------- */
+	static get Rule() {
+		return this.#cusValidate;
+	}
 	static get STLC() {
 		return this.#STLC;
 	}
