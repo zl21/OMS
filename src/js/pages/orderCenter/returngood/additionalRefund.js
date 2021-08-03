@@ -339,6 +339,7 @@ export default {
               colname: 'OC_B_RETURN_TYPE_ID',
               display: 'text',
               fkdisplay: 'drp',
+              readonly: false,
               isfk: true,
               length: 100,
               name: '退款大类',
@@ -1440,6 +1441,7 @@ export default {
             item.disabled = true
           })
           this.returnInfo.formData.forEach(item => {
+            if(item.style === 'popInput') item.itemdata.readonly = true
             if (item.value !== 'RECEIVER_NAME'&& item.value !== 'PAY_ACCOUNT') item.disabled = true
           })
         }
