@@ -892,6 +892,7 @@ export default {
       imageUploadConfig: {
         name: window.vmI18n.t('other.uploadVoucher'),
         url: '/p/cs/upload2', // 上传地址
+        readonly: false,
         sendData: {
           path: `${this.$route.params.customizedModuleName}/${this.$route.params.customizedModuleId}/`
         }, // 上传参数
@@ -1437,6 +1438,8 @@ export default {
         })
         // 打款失败只允许修改收款人姓名&账号
         if (Afsend.PAYMENT_STATUS == 3) {
+          this.isDisabled = true
+          this.imageUploadConfig.readonly = true
           this.information.formData.forEach(item => {
             item.disabled = true
           })
