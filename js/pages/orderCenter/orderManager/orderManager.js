@@ -663,10 +663,9 @@
                   item['displayName'] = item.headerName;
                   item.thAlign = 'center';
                 });
-                columns.unshift({"headerName":"序号","width":120,"field":"index","sort":10,"displayName":"序号",checkboxSelection:true , pinned: 'left'})
+                columns.unshift({"headerName":"序号","width":80,"field":"ID","sort":10,"displayName":"序号",checkboxSelection:true , pinned: 'left'})
               }
               self.agTableConfig.columnDefs = columns;
-              rowData.forEach(it => it.thAlign = 'center')
               self.agTableConfig.rowData = rowData;
               if(!self.vueAgTable){
                 self.$refs.agGridChild.agGridTable(columns, rowData);
@@ -925,7 +924,6 @@
             self.agTableConfig.pagenation.total = data.COUNT;
             data.ITEMS.forEach((item , index)=> {
               item['index'] = index+1
-              item.thAlign = 'center'
             })
             self.agTableConfig.rowData = data.ITEMS;
             if(!self.vueAgTable){
