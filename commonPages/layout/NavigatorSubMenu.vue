@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-29 10:56:54
- * @LastEditTime: 2021-07-21 11:52:59
+ * @LastEditTime: 2021-08-03 18:01:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layput/NavigatorSubMenu.vue
@@ -70,7 +70,7 @@
   &.transferLeft{
     width: 55px !important;
     overflow: inherit;
-    transition: inherit;
+    transition: inherit !important;
     .left{
       background: url(../../assets/img/mini-logo.png) right no-repeat #4855AF;
       background-size:100% auto ;
@@ -102,7 +102,7 @@
   // 展开
   &.transferRight{
     width: 180px !important;
-    transition: inherit;
+    transition: inherit !important;
     .left{
       display: block;
       background: url(../../assets/img/menuLogo.png) right no-repeat #4855AF;
