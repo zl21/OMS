@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-08-02 17:53:33
+ * @LastEditTime: 2021-08-03 10:41:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -123,15 +123,15 @@ export default {
     left: 55px;
     transform: translateY( - 50%);
     display: inline-block;
-    width: 12px;
+    width: 10px;
     height: 40px;
-    background:  url(../../assets/img/icon_unfold.png) right no-repeat;
+    background:  url(../../assets/img/icon_fold.png) right no-repeat;
     background-size: 100% auto;
     z-index: 99;
   }
   .iconbj-fold{
     left: 180px;
-    background:  url(../../assets/img/icon_fold.png) right no-repeat;
+    background:  url(../../assets/img/icon_unfold.png) right no-repeat;
     background-size: 100% auto;
   }
 }

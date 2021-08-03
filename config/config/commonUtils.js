@@ -1799,6 +1799,18 @@ class commonUtils {
       });
       return Object.fromEntries([...mapObj])
   }
+  /**
+   * key：value，Map对象生成,并查询相应的key值
+   */
+  static generateMap(keyArr,valueArr,serachV){
+    let mapObj = new Map();
+    let serachValue
+    keyArr.forEach((e, i) => { mapObj.set(e, valueArr[i]) });
+    mapObj.forEach((v, k) => {
+      if (k === serachV) serachValue = v;
+    });
+    return serachValue;
+  }
 }
 
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-07 16:19:54
- * @LastEditTime: 2021-07-26 15:03:14
+ * @LastEditTime: 2021-08-03 14:59:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/orderManageDetails.vue
@@ -12,7 +12,7 @@
       <businessButton :btn-config="returnBtn" />
     </div>
     <div class="customized-detail-main">
-      <div style="padding:12px;width:100%;margin:0 auto">
+      <div class="Step-Box">
         <Steps class="steps-content">
           <Step
             v-for="(item,index) in steps"
@@ -118,44 +118,6 @@
         baseInfoTab: {
           order: {},
           sub_item: {}
-        },
-        baseInfo_default: {
-          order: {
-            ADJUST_AMT: '',
-            BILL_NO: '', // 单据编号
-            COLLECT_AMT: '', // 代收金额
-            CONSIGN_AMT: 0, // 代销结算金额
-            CONSIGN_SHIP_AMT: '', // 收货人邮费
-            CP_C_LOGISTICS_ENAME: '', // 快递公司
-            CP_C_PHY_WAREHOUSE_ID: '', // 发货仓库ID
-            CP_C_REGION_AREA_ENAME: '', // 区
-            CP_C_REGION_CITY_ENAME: '', // 市
-            CP_C_REGION_PROVINCE_ENAME: '', // 省
-            CP_C_SHOP_TITLE: '', // 店铺名称
-            EXPRESS_CODE: '', // 快递编码
-            INTERNAL_MEMO: '', // 内部备注
-            LOGISTICS_COST: '', // 运费
-            OPERATE_AMT: '', // 操作费
-            ORDER_AMT: '', // 订单总金额
-            ORDER_DATE: '', // 下单时间
-            ORDER_DISCOUNT_AMT: '', // 订单优惠金额
-            ORIG_RETURN_ORDER_ID: '', // 退换货单
-            PAY_TYPE: '', // 支付类型
-            PLATFORM: '', // 平台
-            PRODUCT_AMT: 0, // 商品总额
-            PRODUCT_DISCOUNT_AMT: '',
-            RECEIVED_AMT: '', // 已收金额
-            RECEIVER_ADDRESS: '', // 收货人地址 买家收货详细地址
-            RECEIVER_MOBILE: '', // 收货人手机号
-            RECEIVER_NAME: '', // 收货人姓名
-            RECEIVER_PHONE: '', // 电弧
-            RECEIVER_ZIP: '', // 邮编
-            SYS_REMARK: '', // 系统备注
-            SHIP_AMT: '', // 服务运费
-            MERGE_SOURCE_CODE: '', // 平台编号
-            USER_NICK: '', // 买家昵称
-            CP_C_PHY_WAREHOUSE_ENAME: '' // 发货仓库名称
-          }
         },
         otherInfoTab: {
           tablename: '',
@@ -284,12 +246,31 @@
 
   };
 </script>
-<style lang="less">
+<style lang="less" scoped>
   @import '~omsTheme/public.less';
-  .returnBtn{
-    margin: 0 @base-mr;
+  .Step-Box{
+    margin: @base-mr @base-mr 0;
   }
-  .statusFlag{
-    
+  .customized-detail-label{
+    border-bottom: 1px solid #f4f5f9;
+    .jordan-label-box{
+      // margin: 0 @base-mr;
+      /deep/ .jordan-label{
+        height: 48px;
+        line-height: 48px;
+        border: none;
+        color: #292f43;
+        &.colorStyle{
+          color: #4855AF;
+          border-bottom: 2px solid #4855AF;
+        }
+      }
+      /deep/ .underline-flex{
+        border: none;
+      }
+    }
+  }
+  .order-item{
+    padding: 0;
   }
 </style>

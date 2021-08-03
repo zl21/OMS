@@ -187,6 +187,7 @@ export default () => ({
       if (code == 0) {
         this.$Message.success(message);
         if (itemId === 'New') {
+          this.$comUtils.tabCloseAppoint(this);
           this.$store.commit('global/tabOpen', {
             type: 'V',
             id: data.objId,

@@ -1,9 +1,9 @@
 <!--基本信息-->
 <template>
-  <Row :gutter="12" class="order-content-tab">
-     <!-- 收货信息 * 地址 And 备注 -->
-    <Col span="6" >
-      <div class="order-tab-content">
+  <div class="order-content-tab">
+    <div class="order-content-top">
+      <!-- 收货信息 * 地址 And 备注 -->
+      <div class="order-tab-left order-tab-content">
         <div class="order-tab-title">
           <!-- 收货信息 -->
           <span>{{ vmI18n.t('table_label.receivingInfo') }}</span>
@@ -57,13 +57,11 @@
           </Row>
         </div>
       </div>
-    </Col>
-    <!-- 基础资料 -->
-    <Col span="18" >
-      <div class="order-tab-content">
+      <!-- 基础资料 -->
+      <div class="order-tab-right order-tab-content">
         <div class="order-tab-title">
           <!-- 基础资料 -->
-          <span> {{ vmI18n.t('panel_label.basicData')}} </span>
+          <span class="order-tab-title-span"> {{ vmI18n.t('panel_label.basicData')}} </span>
           <div class="title-sign">
             <span :title="item.text" v-for="(item,index) in componentData.order.ORDER_TAG" :key="index" :style="{ color: item.clr,borderColor: item.clr}">
               {{item.text}}
@@ -82,6 +80,7 @@
               :span="list.width"
               class="detail-li"
             >
+            <!-- {{orderTypeClass}}{{platformStatusClass}} -->
               <label :title="list.label">
                 <i v-if="list.flag">*</i>
                 {{ list.label }}
@@ -108,7 +107,7 @@
                 <span  v-if="butArr[2]['isShow']" @click="modifyRemark" class="edit iconfont icon-bianji"></span>
               </p>
               <!-- 其他 -->
-              <p v-else :title="componentData.order[list.column]">
+              <p v-else :title="componentData.order[list.column]" :class="[list.column==='ORDER_TYPE' ? `color_${orderTypeClass}` :'',list.column==='PLATFORM_STATUS' ? `color_${platformStatusClass}` :'']" >
                 {{ componentData.order[list.column] }}
               </p>
             </Col>
@@ -122,7 +121,7 @@
                 <label :title="vmI18n.t('form_label.ai')">
                   <!-- 商品总金额  -->
                   {{ vmI18n.t('form_label.ai')}}
-                   <Tooltip placement="top-start" max-width="800" theme="light">
+                    <Tooltip placement="top-start" max-width="800" theme="light">
                       <Icon type="ios-alert-outline" />
                       <div slot="content">
                         <goodsTotalAmount :data="componentData" @retailPriceTotal="priceTotal"></goodsTotalAmount>
@@ -170,64 +169,65 @@
           </div>
         </div>
       </div>
-    </Col>
-    <!-- 订单明细 -->
-    <Col span="24" >
-      <div class="order-tab-content">
-        <div class="order-tab-title">
-          <!-- 订单明细 -->
-          <span> {{vmI18n.t('panel_label.order_detailed')}}</span>
-          <!-- 如果是组合商品不显示 -->
-          <div v-if="is_combination" class="checkCombination">
-            <span
-              v-if="isQh && isQhChild"
-              @click="checkCombination"
-            >
-              <Icon type="ios-repeat" />
-              <!-- 切换为sku商品显示 -->
-              {{vmI18n.t('form_label.b0')}}
-            </span>
-            <span
-              v-if="!isQh && isQhChild"
-              @click="checkCombination"
-            >
-              <Icon type="ios-repeat" />
-              <!-- 切换为平台商品明细 -->
-               {{vmI18n.t('form_label.b1')}}
-            </span>
+    </div>
+    <Row>
+      <!-- 订单明细 -->
+      <Col span="24" >
+        <div class="order-tab-content">
+          <div class="order-tab-title border">
+            <!-- 订单明细 -->
+            <span> {{vmI18n.t('panel_label.order_detailed')}}</span>
+            <!-- 如果是组合商品不显示 -->
+            <div v-if="is_combination" class="checkCombination">
+              <span
+                v-if="isQh && isQhChild"
+                @click="checkCombination"
+              >
+                <Icon type="ios-repeat" />
+                <!-- 切换为sku商品显示 -->
+                {{vmI18n.t('form_label.b0')}}
+              </span>
+              <span
+                v-if="!isQh && isQhChild"
+                @click="checkCombination"
+              >
+                <Icon type="ios-repeat" />
+                <!-- 切换为平台商品明细 -->
+                {{vmI18n.t('form_label.b1')}}
+              </span>
+            </div>
           </div>
+          <CusOrderItem
+            ref="cusOrderItem"
+            :component-data="tableConfig"
+            :is-qh="isQh"
+            @freshLoadChild="freshLoadChild"
+            @addGiftHandler="addGiftHandler"
+            @isQhMethod="isQhMethod"
+            @replaceGoodsDetail="replaceGoodsDetail"
+          />
         </div>
-        <CusOrderItem
-          ref="cusOrderItem"
-          :component-data="tableConfig"
-          :is-qh="isQh"
-          @freshLoadChild="freshLoadChild"
-          @addGiftHandler="addGiftHandler"
-          @isQhMethod="isQhMethod"
-          @replaceGoodsDetail="replaceGoodsDetail"
-        />
-      </div>
-    </Col>
-    <businessDialog
-      :ref="dialogsConfig.name"
-      :url="dialogsConfig.url"
-      :title="dialogsConfig.title"
-      :name="dialogsConfig.name"
-      :keep-alive="dialogsConfig.keepAlive||true"
-      :width="dialogsConfig.width||''"
-      :exclude-string="dialogsConfig.excludeString"
-      :component-data="dialogsConfig.data"
-      :footer-hide="dialogsConfig.footerHide"
-      :quit="dialogsConfig.quit"
-      :mask-closable="dialogsConfig.maskClosable"
-      :confirm="dialogsConfig.confirm"
-    />
-  </Row>
+      </Col>
+      <businessDialog
+        :ref="dialogsConfig.name"
+        :url="dialogsConfig.url"
+        :title="dialogsConfig.title"
+        :name="dialogsConfig.name"
+        :keep-alive="dialogsConfig.keepAlive||true"
+        :width="dialogsConfig.width||''"
+        :exclude-string="dialogsConfig.excludeString"
+        :component-data="dialogsConfig.data"
+        :footer-hide="dialogsConfig.footerHide"
+        :quit="dialogsConfig.quit"
+        :mask-closable="dialogsConfig.maskClosable"
+        :confirm="dialogsConfig.confirm"
+      />
+    </Row>
+  </div>
 </template>
 
 <script>
   import essentialInfo from '@/js/pages/orderCenter/orderManageDetail/details/essentialInfo';
-
   export default essentialInfo;
 </script>
 
