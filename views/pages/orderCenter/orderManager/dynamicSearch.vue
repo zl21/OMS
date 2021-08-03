@@ -20,6 +20,7 @@
       >
         <div class="combinatorials">
           <Select
+            filterable
             v-model="dynamicStructure[IDX].NAME"
             transfer
             @on-change="(val)=>conditionChange(IDX, val)"
