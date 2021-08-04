@@ -198,32 +198,7 @@ export default {
               _this.clearFromListValue = true;
               _this.queryInfoData = [];
               _this.labelData = [];
-              _this.formConfig.formValue = {
-                ID: '',
-                SOURCE_CODE: '',
-                EXPRESSCODE: '',
-                RECEIVER_NAME: '',
-                RECEIVER_MOBILE: '',
-                BUYER_MESSAGE: '',
-                PS_C_SKU_ECODE: '',
-                SELLER_MEMO: '',
-                QTY_ALL: {
-                  value1: '',
-                  value2: ''
-                },
-                BILL_NO: '',
-                USER_NICK: '',
-                ORDER_AMT: {
-                  value1: '',
-                  value2: ''
-                },
-                PS_C_PRO_ECODE: '', // 商品款号
-                IS_EXCHANGE_NO_IN: ['0'],
-                PAY_TIME: [_this.getCurrentTime1()[0],_this.getCurrentTime1()[1]],
-                RECEIVER_ADDRESS: '', // 收货地址
-                SYSREMARK: '', // 系统备注
-              };
-              this.getData();
+              _this.getHeaderList();
             } // 按钮点击事件
           },
           {
