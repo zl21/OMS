@@ -359,7 +359,6 @@ export const globalStore = {
     },
     colRowNum(state,n){
       state.colRowNum = n
-      console.log(state,n);
     }
   },
   modules: {

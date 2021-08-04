@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-08-03 10:41:27
+ * @LastEditTime: 2021-08-04 13:38:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -174,12 +174,12 @@ export default {
 }
 .favorite {
   .ark-select-dropdown::before {
-    #bundle > .absolute(@top:-15px,@left:40px);
+    #bundle > .absolute(@top:-13px,@left:50%,@X:-50%);
   }
 }
 .history {
   .ark-select-dropdown::before {
-    #bundle > .absolute(@top:-15px,@left:45px);
+    #bundle > .absolute(@top:-13px,@left:50%,@X:-50%);
   }
 }
 // 消息
