@@ -208,21 +208,21 @@
           />
         </div>
       </Col>
-      <businessDialog
-        :ref="dialogsConfig.name"
-        :url="dialogsConfig.url"
-        :title="dialogsConfig.title"
-        :name="dialogsConfig.name"
-        :keep-alive="dialogsConfig.keepAlive||true"
-        :width="dialogsConfig.width||''"
-        :exclude-string="dialogsConfig.excludeString"
-        :component-data="dialogsConfig.data"
-        :footer-hide="dialogsConfig.footerHide"
-        :quit="dialogsConfig.quit"
-        :mask-closable="dialogsConfig.maskClosable"
-        :confirm="dialogsConfig.confirm"
-      />
     </Row>
+    <businessDialog
+      :ref="dialogsConfig.name"
+      :url="dialogsConfig.url"
+      :title="dialogsConfig.title"
+      :name="dialogsConfig.name"
+      :keep-alive="dialogsConfig.keepAlive||true"
+      :width="dialogsConfig.width||''"
+      :exclude-string="dialogsConfig.excludeString"
+      :component-data="dialogsConfig.data"
+      :footer-hide="dialogsConfig.footerHide"
+      :quit="dialogsConfig.quit"
+      :mask-closable="dialogsConfig.maskClosable"
+      :confirm="dialogsConfig.confirm"
+    />
   </div>
 </template>
 

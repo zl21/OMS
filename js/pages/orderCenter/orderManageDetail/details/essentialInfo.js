@@ -248,7 +248,7 @@ export default {
       };
       this.dialogsConfig = this.dialogs.addGift;
       setTimeout(() => {
-        this.$children[0].$children.find(item => item.name === 'addGiftDialog').openConfirm();
+        this.$children.find(item => item.name === 'addGiftDialog').openConfirm();
       }, 100);
     },
     // 详情按钮替换商品弹框
@@ -263,7 +263,7 @@ export default {
       };
       this.dialogsConfig = this.dialogs.changeSku;
       setTimeout(() => {
-        this.$children[0].$children.find(item => item.name === 'changeSkuDialog').openConfirm();
+        this.$children.find(item => item.name === 'changeSkuDialog').openConfirm();
       }, 100);
     },
     // 修改地址
@@ -276,7 +276,7 @@ export default {
       this.dialogs.address.data = this.componentData.order;
       this.dialogsConfig = this.dialogs.address;
       setTimeout(() => {
-        this.$children[0].$children.find(item => item.name === 'addressDialog').openConfirm();
+        this.$children.find(item => item.name === 'addressDialog').openConfirm();
       }, 100);
     },
     // 修改备注
@@ -286,7 +286,7 @@ export default {
       };
       this.dialogsConfig = this.dialogs.modifyRemark;
       setTimeout(() => {
-        this.$children[0].$children.find(item => item.name === 'modifyRemarkDialog').openConfirm();
+        this.$children.find(item => item.name === 'modifyRemarkDialog').openConfirm();
       }, 100);
     }
   },
