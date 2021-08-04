@@ -1760,7 +1760,10 @@ export default {
     }, // 外键单选popper隐藏时触发
     singleDropClear() {
       this.singlePermissionId = null;
+       this.multiplePermissionId = null;
+       this.multipleDefaultSelected = []
        this.filterDisabled = true
+       
     }, // 单选清空时触发
     singleInputChange(val) {
       if (val) {
@@ -2094,6 +2097,7 @@ export default {
     padding: 0 12px;
     border-radius: 5px;
     color: #fff;
+    margin-right: 10px;
     border: 1px solid #4855af;
     background-color: #4855af;
       span {

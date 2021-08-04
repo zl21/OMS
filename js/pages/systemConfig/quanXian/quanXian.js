@@ -21,7 +21,7 @@ export default {
   mixins: [qxBtnData],
   data() {
     return {
-      spinShow:false,
+      spinShow: false,
       vmI18n: $i18n,
       loading: false,
       saveModal: false,
@@ -108,7 +108,7 @@ export default {
           ]
         }
       ],
-  
+
       oldTableArr: [],
       saveTableArr: [],
 
@@ -134,15 +134,15 @@ export default {
     // const { customizedModuleName, customizedModuleId } = this.$route.params;
     this.permissionType = "brand"
 
-    
+
     // 获取角色
-     this.getRoleData();
+    this.getRoleData();
     this.getSearchForm();
     this.getTableData();//获取表格
 
     this.buttonConfig.buttons = this.permissionType === 'brand' || this.permissionType === 'sensitivecol'
-    ? this.normal.buttons.filter(item => item.text != $i18n.t('btn.copyPermissions'))
-    : this.normal.buttons;
+      ? this.normal.buttons.filter(item => item.text != $i18n.t('btn.copyPermissions'))
+      : this.normal.buttons;
     // businessButton组件中定义的点击事件是'btnclick'
     this.buttonConfig.buttons.forEach(item => {
       item.btnclick = item.btnClick;
@@ -167,7 +167,7 @@ export default {
         key: 'IS_WRITE'
       }
     ];
-   
+
     const btnSearchObj = {
       text: $i18n.t('btn.search'),
       icon: '',
@@ -192,22 +192,30 @@ export default {
       if (obj.id == "-1") {
         obj.expand = !obj.expand
         return
-      }else{
+      } else {
+        this.spinShow = true
         if (this.isChange) {
           this.saveModal = true;
+          this.newpermissionType = obj.type
         } else {
-        this.getSearchForm();
-        this.getTableData();//获取表格
+          this.permissionType = obj.type
+          this.getSearchForm();
+          this.getTableData();//获取表格
         }
-
-        this.permissionType = obj.type
-        this.spinShow = true
       }
 
-  
+
     }, // 树选中改变触发
     saveOk() {
       this.saveQuanXian();
+      if (this.newpermissionType) {
+        setTimeout(()=>{
+          this.permissionType = this.newpermissionType
+          this.getSearchForm();
+          this.getTableData();//获取表格
+          this.newpermissionType = ""
+        },500)
+      }
     },
     saveCancel() {
       if (this.newGroupId !== this.groupId) {
@@ -216,7 +224,7 @@ export default {
       }
     },
     isChangeFun(val) {
-   
+
       this.isChange = val;
     },
     filterTreeChange(val, item) {
@@ -241,7 +249,7 @@ export default {
       });
     }, // 重构树数据
 
- 
+
     async getRoleData() {
       const res = await this.service.common.groupTreeload({});
       this.spinShow = false
@@ -261,7 +269,7 @@ export default {
         .then(res => {
           this.spinShow = false
           if (res.data.code === 0) {
-            res.data.data.map(item=>{
+            res.data.data.map(item => {
               item.coldesc = item.colname
               item.colname = item.key
               item.inputname = `${item.key}:${item.fk_dk_show_filed}`
@@ -274,7 +282,7 @@ export default {
                 item.item.props.value = item.item.value;
               }
             });
-          
+
             this.searchFormConfig.defaultconfig = dataArray;
           }
         });
@@ -282,16 +290,16 @@ export default {
 
     // 获取表格
     async getTableData(searchCondition = {}, refresh = false) {
-      const {customizedModuleName}=this.$router.currentRoute.params;
+      const { customizedModuleName } = this.$router.currentRoute.params;
       this.groupId = this.newGroupId;
       let url;
       let params;
-        url = '/p/cs/permission/v1/selectDataPermission';
-        params = {
-          permissionType: this.permissionType || 'brand',
-          groupId: this.groupId || 46,
-          searchCondition
-        };
+      url = '/p/cs/permission/v1/selectDataPermission';
+      params = {
+        permissionType: this.permissionType || 'brand',
+        groupId: this.groupId || 46,
+        searchCondition
+      };
       this.loading = true;
       // this.$R3loading.show(customizedModuleName);
       const { data: { data, code } } = await this.service.systemConfig.selectDataPermission(url, urlSearchParams(params));
@@ -337,7 +345,7 @@ export default {
               }
             }
           });
-          
+
           this.tableArr.columns = dt.columns;
           this.tableArr.rows = dt.rows;
           this.tableArr.isChild = dt.isChild;
@@ -407,7 +415,7 @@ export default {
             }
           }
         });
-      } 
+      }
     },
     cancelBtn() {
       this.copyModal = false;
