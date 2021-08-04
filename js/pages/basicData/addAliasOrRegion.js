@@ -718,7 +718,7 @@ export default {
       if (code === 0) {
         self.backable = true;
         self.$Message.success(message || $i18n.t("modalTips.z9"));
-        this.$comUtils.tabCloseAppoint(this);
+        $omsUtils.tabCloseAppoint(this);
         this.$store.commit("customize/TabOpen", {
           id: data,
           type: "action",
@@ -824,7 +824,7 @@ export default {
       if (code === 0) {
         self.backable = true;
         self.$Message.success(message || $i18n.t("modalTips.z9"));
-        this.$comUtils.tabCloseAppoint(this);
+        $omsUtils.tabCloseAppoint(this);
         this.$store.commit("customize/TabOpen", {
           id: data,
           type: "action",
@@ -861,7 +861,7 @@ export default {
       }
     },
     onOk() {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       this.$store.commit("global/tabOpen", {
         tableId: 10288,

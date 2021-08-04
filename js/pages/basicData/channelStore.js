@@ -2,7 +2,7 @@ import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
-import comUtils from '@/assets/js/__utils__/common.js';
+// import comUtils from '@/assets/js/__utils__/common.js';
 import orderItem from 'professionalComponents/subTable';
 import logTable from 'professionalComponents/LogTable';
 import businessActionTable from 'professionalComponents/businessActionTable';
@@ -60,7 +60,7 @@ export default {
                 mask: true,
                 showCancel: true,
                 onOk: () => {
-                  comUtils.tabCloseAppoint(this);
+                  $omsUtils.tabCloseAppoint(this);
                   this.$destroy(true);
                   this.$store.commit('global/tabOpen', {
                     tableId: 10327,
@@ -72,7 +72,7 @@ export default {
                 }
               });
             } else {
-              comUtils.tabCloseAppoint(this);
+              $omsUtils.tabCloseAppoint(this);
               this.$destroy(true);
               this.$store.commit('global/tabOpen', {
                 tableId: 10327,

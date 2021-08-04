@@ -505,7 +505,7 @@ export default {
           self.modify.master = {};
           if (data && data.ID) self.ID = data.ID
           self.$Message.success(message || $i18n.t('modalTips.z9'));
-          this.$comUtils.tabCloseAppoint(this);
+          $omsUtils.tabCloseAppoint(this);
           this.$destroy(true);
           this.$store.commit('global/tabOpen', {
             type: 'tableDetailAction',
@@ -545,7 +545,7 @@ export default {
       }
     },
     onOk() {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       this.$store.commit('global/tabOpen', {
         tableId: 10328,

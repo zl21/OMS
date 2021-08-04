@@ -19,7 +19,7 @@
     },
     created() {
       this.$emit('closeActionDialog', true);
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$store.commit('global/tabOpen', {
         type: 'C',
         label: $i18n.t('panel_label.a1'), // 退换货单

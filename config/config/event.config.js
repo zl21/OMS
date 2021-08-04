@@ -88,7 +88,7 @@ class BurgeonEvent {
         self.isShowSeniorOrOrdinary = !self.isShowSeniorOrOrdinary;
         if (!arrayType) {
             setTimeout(() => {
-                self.$comUtils.setTableHeight(self, 30);
+                $omsUtils.setTableHeight(self, 30);
                 self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
             }, 500);
             // 设置普通搜索默认选项

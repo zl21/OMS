@@ -1,7 +1,7 @@
   import businessButton from 'professionalComponents/businessButton';
   import businessForm from 'professionalComponents/businessForm';
   import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
-  import comUtils from '@/assets/js/__utils__/common.js';
+  // import comUtils from '@/assets/js/__utils__/common.js';
 
   export default {
     components: {
@@ -29,7 +29,7 @@
               webname: 'lookup_return', // 返回
               text: $i18n.t('btn.back'),
               btnclick: () => {
-                comUtils.tabCloseAppoint(this);
+                $omsUtils.tabCloseAppoint(this);
                 this.$destroy(true);
                 this.$store.commit('global/tabOpen', {
                   tableId: 10107,
@@ -225,7 +225,7 @@
           console.log(res);
           if (res.data.code == 0) {
             self.$Message.success(res.data.message);
-            comUtils.tabCloseAppoint(this);
+            $omsUtils.tabCloseAppoint(this);
               this.$destroy(true);
             // self.$store.commit('global/tabOpen', {
             //   type: 'V',
@@ -233,7 +233,7 @@
             //   tableId: '10326',
             //   id: res.data.data.ID
             // });
-            comUtils.tabCloseAppoint(this);
+            $omsUtils.tabCloseAppoint(this);
                 this.$destroy(true);
                 this.$store.commit('global/tabOpen', {
                   tableId: 10107,

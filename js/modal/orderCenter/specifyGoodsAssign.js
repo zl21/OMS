@@ -114,7 +114,7 @@ export default {
         // result['qty'] = self.qty;
       }
       console.log(this.componentData.a_1, result);
-      this.$comUtils.setLoading(true);
+      $omsUtils.setLoading(true);
       this.service.orderCenter.saveAppointSplitOrderInfo(result).then((res) => {
         console.log(res);
         if (res.data.code == 0) {
@@ -126,7 +126,7 @@ export default {
           this.$parent.$parent.closeConfirm();
         }
       }).finally(() => {
-        this.$comUtils.setLoading();
+        $omsUtils.setLoading();
       });
     }
   }

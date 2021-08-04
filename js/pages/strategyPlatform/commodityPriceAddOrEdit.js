@@ -611,7 +611,7 @@ export default {
     },
     // 复制、返回
     onOk(id, isCopy) {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$forceUpdate()
       if (isCopy) {
         this.isCopy = true

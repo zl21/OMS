@@ -28,7 +28,7 @@ export default {
           {
             text: $i18n.t('common.return'), // 返回
             btnclick: () => {
-              this.$comUtils.tabCloseAppoint(this);
+              $omsUtils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {
                 tableId: 24733,
                 type: 'S',

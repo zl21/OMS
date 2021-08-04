@@ -112,7 +112,8 @@ export default () => ({
             });
             */
             if (ID == '-1') {
-              this.$comUtils.tabCloseAppoint(this);
+              $omsUtils.tabCloseAppoint(this);
+              this.$destroy(true);
               this.$store.commit("global/tabOpen", {
                 id: data.objId,
                 type: "V",
@@ -120,7 +121,8 @@ export default () => ({
                 tableId: '10813'
               });
             } else {
-              this.$comUtils.tabCloseAppoint(this);
+              $omsUtils.tabCloseAppoint(this);
+              this.$destroy(true);
               this.$store.commit("global/tabOpen", {
                 type: "S",
                 tableName: "OC_B_COMPENSATE_ORDER",
@@ -200,7 +202,7 @@ export default () => ({
       if (code == 0) {
         this.$Message.success(message);
         if (itemId === 'New') {
-          this.$comUtils.tabCloseAppoint(this);
+          $omsUtils.tabCloseAppoint(this);
           this.$store.commit('global/tabOpen', {
             type: 'V',
             id: data.objId,
@@ -209,7 +211,7 @@ export default () => ({
             tableName: 'OC_B_REFUND_ORDER_EXTRA'
           });
         }else{
-          this.$comUtils.tabCloseAppoint(this);
+          $omsUtils.tabCloseAppoint(this);
           this.$store.commit("global/tabOpen", {
             type: "S",
             tableName: "OC_B_REFUND_ORDER_EXTRA",

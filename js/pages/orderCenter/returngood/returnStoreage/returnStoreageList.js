@@ -108,7 +108,7 @@ export default {
           }
         },
         tableHeight: '560px',
-        pagenation: this.$comUtils.pageConfig
+        pagenation: $omsUtils.pageConfig
       },
       selection: [],
       searchObj: {},
@@ -128,9 +128,9 @@ export default {
   activated() {
     this.agTableConfig.pagenation.current = 1;
     // 计算高度 通过设置节点 'totalHeight'
-    this.$comUtils.setTableHeight(this, 65);
+    $omsUtils.setTableHeight(this, 65);
     // 检测屏幕变化 设置高度 重新渲染agTabe
-    this.$comUtils.onresizes(this, 0);
+    $omsUtils.onresizes(this, 0);
   },
   methods: {
     // 获取高级查询&表头

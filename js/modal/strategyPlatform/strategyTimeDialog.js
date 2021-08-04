@@ -108,17 +108,17 @@ export default {
       fromdata.append('table', this.infoParams.table);
       fromdata.append('isStrategyTime', 'Y');
       fromdata.append('END_TIME', format.getFormatDate(formValue.END_TIME, 'yyyy-MM-dd HH:mm:ss'));
-      this.$comUtils.setLoading(true);
+      $omsUtils.setLoading(true);
       try {
         const res = await this.service.strategyPlatform.holdOrderUpdateStrategyEndTime(fromdata);
-        this.$comUtils.setLoading();
+        $omsUtils.setLoading();
         if (res.data.data.code === 0) {
           this.$Message.success($i18n.t('modalTips.eo')); // '调整策略时间成功'
           this.$emit('confirmImport');
           this.$emit('closeActionDialog');
         }
       } catch (error) {
-        this.$comUtils.setLoading();
+        $omsUtils.setLoading();
       }
     }
   }

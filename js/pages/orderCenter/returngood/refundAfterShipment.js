@@ -2,7 +2,7 @@
 import reButton from 'professionalComponents/businessButton';
 import reTable from 'professionalComponents/businessActionTable';
 import reForm from 'professionalComponents/businessForm';
-import commonUtil from '@/assets/js/__utils__/common';
+// import commonUtil from '@/assets/js/__utils__/common';
 import refundAfterShipment from './constants/refundAfterShipment';
 
 export default {
@@ -59,7 +59,7 @@ export default {
                     ) {
                       this.reForm.config[
                         index
-                      ].item.props.value = commonUtil.dateFormat(
+                      ].item.props.value = $omsUtils.dateFormat(
                         new Date(),
                         'yyyy-MM-dd'
                       );
@@ -551,7 +551,7 @@ export default {
             // class: 'cancel',
             // icon: 'md-arrow-round-back',
             btnclick: () => {
-              commonUtil.tabCloseAppoint(this);
+              $omsUtils.tabCloseAppoint(this);
               if (this.$route.params.customizedModuleName === 'EXTRAREFUND') {
                 R3.store.commit('global/tabOpen', {
                   type: 'S',
@@ -915,7 +915,7 @@ export default {
           } else if (
             val.item.label === $i18n.t('form_label.documentDate')
           ) {
-            this.reForm.config[index].item.props.value = commonUtil.dateFormat(
+            this.reForm.config[index].item.props.value = $omsUtils.dateFormat(
               new Date(),
               'yyyy-MM-dd'
             );
@@ -932,7 +932,7 @@ export default {
           } else if (
             val.item.label === $i18n.t('form_label.documentDate')
           ) {
-            this.reForm.config[index].item.props.value = commonUtil.dateFormat(
+            this.reForm.config[index].item.props.value = $omsUtils.dateFormat(
               new Date(),
               'yyyy-MM-dd'
             );
@@ -971,7 +971,7 @@ export default {
       this.returnLogTableLoad = false;
       if (res.data.code === 0) {
         const resData = res.data.data;
-        const dateFormat = this.$commonUtil.dateFormat;
+        const dateFormat = $omsUtils.dateFormat;
         resData.forEach((val) => {
           val.CREATIONDATE = dateFormat(
             new Date(val.CREATIONDATE || ''),
@@ -1314,7 +1314,7 @@ export default {
       this.service.orderCenter.saveAfterDeliver(data).then((res) => {
         if (res.data.code == 0) {
           self.$Message.success(res.data.message);
-          commonUtil.tabCloseAppoint(this);
+          $omsUtils.tabCloseAppoint(this);
           if (this.$route.params.customizedModuleName === 'EXTRAREFUND') {
             // this.$store.commit('customize/TabHref', {
             //   id: 249230545,
@@ -1804,14 +1804,14 @@ export default {
             OWNERENAME: AfSend.OWNERNAME,
             CREATIONDATE:
               AfSend.CREATIONDATE &&
-              commonUtil.dateFormat(
+              $omsUtils.dateFormat(
                 new Date(AfSend.CREATIONDATE),
                 'yyyy-MM-dd hh:mm:ss'
               ),
             MODIFIERENAME: AfSend.MODIFIERENAME || AfSend.MODIFIERNAME,
             MODIFIEDDATE:
               AfSend.MODIFIEDDATE &&
-              commonUtil.dateFormat(
+              $omsUtils.dateFormat(
                 new Date(AfSend.MODIFIEDDATE),
                 'yyyy-MM-dd hh:mm:ss'
               ),
@@ -1866,7 +1866,7 @@ export default {
             data[dataConfig[itemLabel]] == 1 ? '手动' : '自动';
         } else if (itemLabel === $i18n.t('form_label.documentDate')) {
           // 单据日期
-          item.item.props.value = commonUtil.dateFormat(
+          item.item.props.value = $omsUtils.dateFormat(
             new Date(data[dataConfig[itemLabel]]),
             'yyyy-MM-dd hh:mm:ss'
           );

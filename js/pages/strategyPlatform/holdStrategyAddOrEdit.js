@@ -1062,7 +1062,7 @@ export default {
     },
     // 关闭标签并跳转
     onOk() {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       this.$store.commit('global/tabOpen', {
         tableId: 10669,

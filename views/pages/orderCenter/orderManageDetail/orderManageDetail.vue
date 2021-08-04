@@ -167,7 +167,7 @@
             {
               text: $i18n.t('common.return'), // 返回
               btnclick: () => {
-                this.$comUtils.tabCloseAppoint(this);
+                $omsUtils.tabCloseAppoint(this);
                 this.$store.commit('customize/TabOpen', {
                   id: '2307',
                   type: 'action',

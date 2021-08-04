@@ -125,11 +125,11 @@ export default {
       }
       const params = JSON.stringify({
         shop_id: shopId,
-        start_time: this.$comUtils.dateFormat(
+        start_time: $omsUtils.dateFormat(
           formValue.query_date[0],
           'yyyy-MM-dd hh:mm:ss'
         ),
-        end_time: this.$comUtils.dateFormat(
+        end_time: $omsUtils.dateFormat(
           formValue.query_date[1],
           'yyyy-MM-dd hh:mm:ss'
         )

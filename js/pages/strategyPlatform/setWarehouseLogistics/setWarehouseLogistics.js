@@ -214,7 +214,7 @@ export default {
         text: $i18n.t('btn.back'), // 按钮文本
         btnclick: () => {
           const _this = this;
-          this.$comUtils.tabCloseAppoint(_this);
+          $omsUtils.tabCloseAppoint(_this);
           _this.$store.commit('global/tabOpen', {
             type: 'S',
             tableName: 'ST_C_WAREHOUSE_LOGISTICS',

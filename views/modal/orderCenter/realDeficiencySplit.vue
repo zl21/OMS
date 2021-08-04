@@ -248,7 +248,7 @@ export default {
       }
     },
     onOk() {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       this.$store.commit('global/tabOpen', {
         tableId: 24733,

@@ -1700,7 +1700,7 @@ export default {
         // $omsUtils.navigateMain(data.ID, 'TabOpen', 'ORDERMANAGEDETAILS', 'panel_label.addReturnOrder')
         if (data) self.ID = data;
         setTimeout(() => {
-          this.$comUtils.tabCloseAppoint(this);
+          $omsUtils.tabCloseAppoint(this);
           this.$destroy(true);
           this.$store.commit("global/tabOpen", {
             type: "C",
@@ -2026,7 +2026,7 @@ export default {
       }
     },
     onOk() {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       if (this.$route.query.spuid) {
         // 保留，可能要返回退换货 ？

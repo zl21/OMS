@@ -10,7 +10,7 @@ import '@/assets/css/css_1_3/custom.less'; // 框架 主题文件（变量）
 import '@/assets/css/css_1_3/oms_index.less'; // 定制公共界面样式
 import R3 from '@syman/burgeon-r3';
 import Vue from 'vue';
-import comUtils from '@/assets/js/__utils__/common';
+// import comUtils from '@/assets/js/__utils__/common';
 import commonUtils from '@/config/config/commonUtils.js'
 import pageNote from 'burgeonConfig/config/pageNote'
 // import store from 'burgeonConfig/store/store'; // 将老框架公共状态注册为customize模块
@@ -33,7 +33,7 @@ class InitAppConfig {
     window.$i18n = i18n; // 挂载国际化
     window.wangEditor = wangEditor;
     Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
-    Vue.prototype.$comUtils = comUtils;
+    // Vue.prototype.$comUtils = comUtils;
     Vue.prototype.$omsUtils = commonUtils;
     Vue.prototype.$lodash = lodash;
     Vue.prototype.service = service;
@@ -47,7 +47,7 @@ class InitAppConfig {
       if (!tableNameArr.includes(currentTable)) {
         // window.onresize = null;
         // 销毁resize方法
-        comUtils.removeOnresize();
+        commonUtils.removeOnresize();
       }
     });
   }

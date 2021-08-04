@@ -1114,7 +1114,7 @@ export default {
           {
             text: $i18n.t('btn.back'), // 返回
             btnclick: () => {
-              // this.$comUtils.tabCloseAppoint(this);
+              //$omsUtils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {
                 tableId: 24525,
                 type: 'S',
@@ -1191,7 +1191,7 @@ export default {
           {
             text: $i18n.t('btn.back'), // 返回
             btnclick: () => {
-              // this.$comUtils.tabCloseAppoint(this);
+              //$omsUtils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {
                 back: true,
                 tableId: 24525,
@@ -1632,7 +1632,7 @@ export default {
               tableId: '24525',
               back: true,
             });
-            // this.$comUtils.tabCloseAppoint(this);
+            //$omsUtils.tabCloseAppoint(this);
           } else {
             this.IniData();
           }

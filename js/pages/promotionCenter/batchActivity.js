@@ -208,7 +208,7 @@ export default {
         if (it.code === -1) return this.$Message.error(it.message);
       }
       // const index = this.basic_info.activity_type + new Date().Format('yyyyMMddHHMMSS');
-      const index = this.basic_info.activity_type + this.$comUtils.dateFormat(new Date() , 'yyyyMMddHHMMSS')
+      const index = this.basic_info.activity_type + $omsUtils.dateFormat(new Date() , 'yyyyMMddHHMMSS')
       const params = {
         objid: this.objid,
         basic_info: this.basic_info,

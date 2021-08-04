@@ -8,7 +8,7 @@ import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
-import comUtils from '@/assets/js/__utils__/common.js';
+// import comUtils from '@/assets/js/__utils__/common.js';
 import subTable from 'professionalComponents/subTable';
 import ImageUpload from 'arkui_BCL/ImageUpload';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
@@ -66,7 +66,7 @@ export default {
                 mask: true,
                 showCancel: true,
                 onOk: () => {
-                  // comUtils.tabCloseAppoint(this);
+                  // $omsUtils.tabCloseAppoint(this);
                   // this.$destroy(true);
                   this.$store.commit('global/tabOpen', {
                     tableId: 10108,
@@ -77,7 +77,7 @@ export default {
                 }
               });
             } else {
-              // comUtils.tabCloseAppoint(this);
+              // $omsUtils.tabCloseAppoint(this);
               // this.$destroy(true);
               this.$store.commit('global/tabOpen', {
                 tableId: 10108,

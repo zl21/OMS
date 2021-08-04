@@ -1029,7 +1029,7 @@ export default {
     },
     // 返回
     back() {
-      this.$comUtils.tabCloseAppoint(this)
+      $omsUtils.tabCloseAppoint(this)
       this.$destroy(true)
       this.$store.commit('global/tabOpen', {
         tableId: 10348,

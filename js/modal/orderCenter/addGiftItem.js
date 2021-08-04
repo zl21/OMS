@@ -398,7 +398,7 @@ export default {
       }
       const ids = []
       ids.push(self.objid)
-      this.$comUtils.setLoading(true)
+      $omsUtils.setLoading(true)
       const param = {
         ids,
       }
@@ -444,7 +444,7 @@ export default {
       setTimeout(() => {
         this.btnConfig.buttons[1].disabled = false;
       }, 5000);
-      this.$comUtils.setLoading()
+      $omsUtils.setLoading()
     },
     // 回车
     onKeyDown(e) {

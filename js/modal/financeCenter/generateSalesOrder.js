@@ -96,9 +96,9 @@ export default {
           type: this.generateFormConfig.formValue.type
         }
       };
-      this.$comUtils.setLoading(true);
+      $omsUtils.setLoading(true);
       const { data: { data: { code, data } } } = await this.service.financeCenter.getVendorCodeAndBillNumber({ params });
-      this.$comUtils.setLoading();
+      $omsUtils.setLoading();
       if (code === 0) {
         if (data.vendorIds) {
           this.generateFormConfig.formData[0].options = data.vendorIds.map(

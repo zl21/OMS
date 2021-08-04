@@ -9,7 +9,7 @@
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import myInput from 'professionalComponents/fkinput.vue';
-import comUtils from '@/assets/js/__utils__/common.js';
+// import comUtils from '@/assets/js/__utils__/common.js';
 import subTable from 'professionalComponents/subTable';
 import businessLabel from 'professionalComponents/businessLabel';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
@@ -118,7 +118,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
                   mask: true,
                   showCancel: true,
                   onOk: () => {
-                    comUtils.tabCloseAppoint(this);
+                    $omsUtils.tabCloseAppoint(this);
                     this.$destroy(true);
                     this.$store.commit('global/tabOpen', {
                       tableId: 10662,
@@ -130,7 +130,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
                   }
                 });
               } else {
-                comUtils.tabCloseAppoint(this);
+                $omsUtils.tabCloseAppoint(this);
                 this.$destroy(true);
                 this.$store.commit('global/tabOpen', {
                   tableId: 10662,
@@ -447,7 +447,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
           console.log(res);
           if (res.data.code == 0) {
             $omsUtils.msgTips(self, 'success', res.data.message, 0);
-            comUtils.tabCloseAppoint(this);
+            $omsUtils.tabCloseAppoint(this);
             this.$destroy(true);
             this.$store.commit('global/tabOpen', {
               tableId: 10662,

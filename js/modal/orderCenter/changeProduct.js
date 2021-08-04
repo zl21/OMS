@@ -526,12 +526,12 @@ export default {
       result.sku_code = needParam.SKU_ECODE
       result.type = 1
       console.log(this.componentData.a_1, result)
-      this.$comUtils.setLoading(true)
+      $omsUtils.setLoading(true)
       const {
         data: { code, data, message },
       } = await this.service.orderCenter.bathChangeGoods(result)
       console.log(code, data, message)
-      this.$comUtils.setLoading()
+      $omsUtils.setLoading()
       if (code == 0) {
         self.$Message.success(message)
         this.$parent.$parent.closeConfirm()

@@ -60,7 +60,7 @@
 
 <script>
 import service from '@/service/index';
-import commonUtils from '@/config/config/commonUtils.js';
+// import commonUtils from '@/config/config/commonUtils.js';
 
 export default {
   data() {
@@ -179,7 +179,7 @@ export default {
             }
             this.dataobj.show = true;
             let newdata = new Date(item.PREDICT_DELIVER_GOODS_TIME);
-            this.dataobj.PREDICT_DELIVER_GOODS_TIME = commonUtils.dateFormat(
+            this.dataobj.PREDICT_DELIVER_GOODS_TIME = $omsUtils.dateFormat(
               newdata,
               'yyyy-MM-dd hh:mm:ss'
             );

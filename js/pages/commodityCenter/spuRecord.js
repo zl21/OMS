@@ -4,7 +4,7 @@ import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
-import comUtils from '@/assets/js/__utils__/common.js';
+// import comUtils from '@/assets/js/__utils__/common.js';
 import orderItem from 'professionalComponents/subTable';
 import subTable from 'professionalComponents/subTable';
 import ImageUpload from 'arkui_BCL/ImageUpload';
@@ -288,7 +288,7 @@ export default {
                 mask: true,
                 showCancel: true,
                 onOk: () => {
-                  // comUtils.tabCloseAppoint(this);
+                  // $omsUtils.tabCloseAppoint(this);
                   // this.$destroy(true);
                   this.$store.commit('global/tabOpen', {
                     tableId: 10106,
@@ -300,7 +300,7 @@ export default {
                 }
               });
             } else {
-              // comUtils.tabCloseAppoint(this);
+              // $omsUtils.tabCloseAppoint(this);
               //     this.$destroy(true);
               this.$store.commit('global/tabOpen', {
                 tableId: 10106,

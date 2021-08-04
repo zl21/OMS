@@ -532,7 +532,7 @@ export default {
         // text: "返回",
         text: $i18n.t('btn.back'), // 按钮文本
         btnclick: () => {
-          this.$comUtils.tabCloseAppoint(this);
+          $omsUtils.tabCloseAppoint(this);
           R3.store.commit('global/tabOpen', {
             type: 'S',
             tableId: 24613,

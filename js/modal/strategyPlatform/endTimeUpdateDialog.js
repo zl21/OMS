@@ -100,20 +100,20 @@ export default {
           }
         }
       };
-      this.$comUtils.setLoading(true);
+      $omsUtils.setLoading(true);
       try {
         const res = await this.service.strategyPlatform.liveCastStrategyUpdateEndTime(params);
-        this.$comUtils.setLoading();
+        $omsUtils.setLoading();
         if (res.data.data.code === 0) {
           this.$Message.success(res.data.data.message);
           this.$emit('confirmImport');
           this.$emit('closeActionDialog');
         } else {
-          this.$comUtils.setLoading();
+          $omsUtils.setLoading();
           // this.$Message.error(res.data.data.message);
         }
       } catch (error) {
-        this.$comUtils.setLoading();
+        $omsUtils.setLoading();
         this.$Message.success($i18n.t('modalTips.z3')); // '修改时间失败'
       }
     }

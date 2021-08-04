@@ -69,7 +69,7 @@
       } = await self.service.orderCenter.returnSaveBill(param);
       if (code === 0) {
         this.$Message.success(message || $i18n.t('modalTips.z9')); // 保存成功！
-        this.$comUtils.tabCloseAppoint(this);
+        $omsUtils.tabCloseAppoint(this);
             this.$store.commit('global/tabOpen', {
               type: 'C',
               label: $i18n.t('panel_label.a1'), // 退换货单

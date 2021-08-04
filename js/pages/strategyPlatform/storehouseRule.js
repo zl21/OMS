@@ -1085,7 +1085,7 @@ export default {
         tableName = 'ST_C_ASSIGN_LOGISTICS';
         tableId = 10657;
       }
-      // this.$comUtils.tabCloseAppoint(this);
+      //$omsUtils.tabCloseAppoint(this);
       // this.$destroy(true);
       this.$store.commit('global/tabOpen', {
         tableId,

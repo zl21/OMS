@@ -272,7 +272,7 @@ export default {
                 resultElement.appendChild(iTag);
               }
             },
-            pagenation: this.$comUtils.pageConfig,
+            pagenation: $omsUtils.pageConfig,
           } */
         },
         {
@@ -540,7 +540,7 @@ export default {
 
     await this.getData();
     // 检测屏幕变化 设置高度 重新渲染agTabe
-    this.$comUtils.onresizes(this, 650);
+    $omsUtils.onresizes(this, 650);
     const buttons = self.$OMS2.BtnConfig.config();
     this.btnConfig.buttons = [...buttons.buttons , ...this.extendBtn];
     $omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'LIST' , serviceId:'r3-oc-oms'});

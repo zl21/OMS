@@ -176,13 +176,13 @@ export default {
         PAGE_SIZE: self.tableConfig.pageSize,
         ITEM,
       };
-      this.$comUtils.setLoading(true);
+      $omsUtils.setLoading(true);
       const {
         data: { code, data, message },
       } = await self.service.basicData.platformQueryItems(param).catch(() => {
-        this.$comUtils.setLoading();
+        $omsUtils.setLoading();
       });
-      this.$comUtils.setLoading();
+      $omsUtils.setLoading();
       if (code === 0) {
         self.tableConfig.data = data.ITEMS || [];
         self.tableConfig.total = data.TOTAL_COUNT;

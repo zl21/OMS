@@ -225,7 +225,7 @@ export default () => ({
      */
     close() {
       const _self = this;
-      this.$comUtils.tabCloseAppoint(_self);
+      $omsUtils.tabCloseAppoint(_self);
       this.$destroy(true);
       $omsUtils.tabJump(0, 0, 'C', 'PROMACTIQUERYLIST', { i8n: 1, tip: 'panel_label.promotionList' }, {}, 1, 1, 2895)
       // $omsUtils.tabJump(2, 31460113, 'CUSTOMIZED', 'PROMACTIQUERYLIST', { i8n: 1, tip: 'panel_label.promotionList' }, {}, 0)

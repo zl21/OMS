@@ -1065,7 +1065,7 @@ export default {
         // this.$OMS2.omsUtils.navigateMain(data.ID, 'TabOpen', 'ORDERMANAGEDETAILS', 'panel_label.addReturnOrder')
         if (data) self.ID = data;
         setTimeout(() => {
-          this.$comUtils.tabCloseAppoint(this);
+          $omsUtils.tabCloseAppoint(this);
           this.$destroy(true);
           this.$store.commit('global/tabOpen', {
             type: 'V',
@@ -1231,7 +1231,7 @@ export default {
       }
     },
     onOk() {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       this.$store.commit("customize/TabOpen", {
         id: "2624",

@@ -1,6 +1,6 @@
 import businessButton from 'professionalComponents/businessButton';
 import axios from 'axios';
-import comUtils from '@/assets/js/__utils__/common.js';
+// import comUtils from '@/assets/js/__utils__/common.js';
 
 export default {
   components: {
@@ -32,7 +32,7 @@ export default {
           {
             text: $i18n.t('common.return'), // 返回
             btnclick: () => {
-              // comUtils.tabCloseAppoint(this);
+              // $omsUtils.tabCloseAppoint(this);
               //   this.$destroy(true);
               $store.commit('customize/TabOpen', {
                 id: this.spuid,

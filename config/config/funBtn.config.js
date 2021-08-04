@@ -1801,7 +1801,7 @@ class BtnConfig {
   // 返回
   back(moduleName, id, labelName) {
     const self = BtnConfig.target
-    self.$comUtils.tabCloseAppoint(self)
+    $omsUtils.tabCloseAppoint(self)
     commonUtils.navigateMain(id, 'TabHref', moduleName, labelName)
   }
 

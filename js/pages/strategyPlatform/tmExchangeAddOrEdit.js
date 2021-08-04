@@ -525,7 +525,7 @@ export default {
       }
     },
     onOk(id) {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       if (id) {
         console.log(this.curLabel);

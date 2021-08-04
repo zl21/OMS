@@ -244,7 +244,7 @@ export default {
   },
   methods: {
     back() {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$store.commit('customize/TabHref', {
         id: 2307,
         type: 'action',

@@ -765,7 +765,7 @@ export default {
         if (data) self.ID = data;
         setTimeout(() => {
           if (this.$route.query.spuid) {
-            // this.$comUtils.tabCloseAppoint(this);
+            //$omsUtils.tabCloseAppoint(this);
             // this.$destroy(true);
             $store.commit('customize/TabOpen', {
               id: self.ID,
@@ -815,7 +815,7 @@ export default {
     onOk() {
       const spuID = this.$route.query.spuid;
       if (spuID) {
-        // this.$comUtils.tabCloseAppoint(this);
+        //$omsUtils.tabCloseAppoint(this);
         // this.$destroy(true);
         this.$store.commit('global/tabOpen', {
           // 回到SPU的详情，同时SKU要回到列表
