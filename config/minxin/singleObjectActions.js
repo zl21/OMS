@@ -100,7 +100,19 @@ export default () => ({
           this.$Message.success(message);
           R3.store.commit('customize/COMPENSATE', { detail: []}); // 清空明细
           setTimeout(() => {
+            /* 
+            const _self = this;
+            const { fullPath } = _self.$route;
+            const { keepAliveModuleName, tableName } = _self.$store.state.global.activeTab;
+            R3.store.commit('global/tabCloseAppoint', {
+              routeFullPath: fullPath,
+              stopRouterPush: true,
+              keepAliveModuleName,
+              tableName
+            });
+            */
             if (ID == '-1') {
+              this.$comUtils.tabCloseAppoint(this);
               this.$store.commit("global/tabOpen", {
                 id: data.objId,
                 type: "V",
@@ -108,6 +120,7 @@ export default () => ({
                 tableId: '10813'
               });
             } else {
+              this.$comUtils.tabCloseAppoint(this);
               this.$store.commit("global/tabOpen", {
                 type: "S",
                 tableName: "OC_B_COMPENSATE_ORDER",
