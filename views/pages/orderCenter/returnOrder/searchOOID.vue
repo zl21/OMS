@@ -270,7 +270,7 @@ export default {
       }
     },
     keyDown() { },
-    /* ------------------- 事件 part start ------------------- */
+    // 初始化form表单
     async initObjItem(id) {
       const self = this;
       this.loading = true;
@@ -366,7 +366,6 @@ export default {
       this.table.pageSize = size;
       this.queryEnter(0, size, true)
     }
-    /* ------------------- 子表事件 part end ------------------- */
   },
 };
 

@@ -1,7 +1,46 @@
-//公用校验配置类
+/**
+ * 全局校验类
+ * 1.使用文档：
+ * 
+ * 
+ 1.formConfig的formData中：
+             regx: $OMS2.Rule.a1,
+ 2.formConfig的ruleValidate中：
+ 3.
+ * 
+ */
+const RuleList = {
+  a1: {
+    val: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
+    desc: '两位小数（非负）',
+  },
+  a2: {
+    val: /^-?\d*\.{0,1}\d{0,2}$/,
+    desc: '两位小数（可负）',
+  },
+  a3: {
+    val: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
+    desc: '数字字母下划线中文',
+  },
+  a4: {
+    val: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_@#$%^&*+=-><~“”‘’。.，,：；/、\\`\|!！……\(\)\（\）《》?？·]+)$/,
+    desc: '禁止英文的单双引号',
+  },
+}
 class BurgeonValidate {
   static target;
   constructor() { }
+  /* ------------ 正则 start ------------- */
+  static get All() {
+    return RuleList
+  }
+  static get a1() {
+    return RuleList.a1.val
+  }
+  static get a2() {
+    return RuleList.a2.val
+  }
+  /* ------------ 正则 end ------------- */
   // 电话号码校验
   static validatePhoneNumber(rule, value, callback) {
     const pNumver = value;
