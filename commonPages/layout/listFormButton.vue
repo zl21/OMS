@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-30 11:24:27
- * @LastEditTime: 2021-08-02 11:22:03
+ * @LastEditTime: 2021-08-04 16:23:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/listFormButton.vue
@@ -10,7 +10,7 @@
   <div>
     <Button size="small" @click="buttonClick"> 查找 </Button>
     <Button type="primary" size="small" @click="buttonClick('reset')"> 重置 </Button>
-    <Button size="small" @click="iconClick" :icon='icon'></Button>
+    <Button size="small" v-if="isShowSelectBut" @click="iconClick" :icon='icon'></Button>
     <!-- {{slotProps.item.name}} -->
   </div>
 </template>
@@ -36,13 +36,33 @@ export default {
       icon: 'ios-arrow-down',
       hiddenButtons: ['reset', 'search'],  // 隐藏按钮的key
       hiddenIcon: true, // 是否隐藏收拉icon
+      isShowSelectBut:false
     }
+  },
+  computed:{
+    Foldnum:function () {
+      return this.$parent.searchFoldnum;
+    }
+  },
+  watch:{
+    Foldnum:{
+      handler(newName) {
+        let inputNum = this.$parent.formArray.length;
+        let isColumn = this.$parent.setdefaultColumn;
+        this.isShowSelectBut = (inputNum / isColumn) > newName ? true : false
+    　},
+    　immediate: true
+    }
+  },
+  mounted(){
+    
   },
   methods: {
     buttonClick(type) {
       this.ButttonCallBack(type);
     },
     iconClick(e) { 
+      console.log(this.$parent.searchFoldnum);
       if (e.target.className.includes('ios-arrow-down') || (e.target.children.length && e.target.children[0].className.includes('ios-arrow-down'))) {
         this.icon = 'ios-arrow-up'
       } else if (e.target.className.includes('ios-arrow-up') || (e.target.children.length && e.target.children[0].className.includes('ios-arrow-up'))) {

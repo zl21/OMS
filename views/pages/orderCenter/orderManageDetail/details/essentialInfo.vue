@@ -107,7 +107,7 @@
                 <span  v-if="butArr[2]['isShow']" @click="modifyRemark" class="edit iconfont icon-bianji"></span>
               </p>
               <!-- 其他 -->
-              <p v-else :title="componentData.order[list.column]" :class="[list.column==='ORDER_TYPE' ? `color_${orderTypeClass}` :'',list.column==='PLATFORM_STATUS' ? `color_${platformStatusClass}` :'']" >
+              <p v-else :title="componentData.order[list.column]" :class="[list.column==='ORDER_TYPE' ? `color_${orderTypeClass}` :'',list.column==='PLATFORM_STATUS' ? `color_${platformStatusClass}` :'',list.column]" >
                 {{ componentData.order[list.column] }}
               </p>
             </Col>

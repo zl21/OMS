@@ -27,7 +27,7 @@
     }
     .order-tab-title {
       position: relative;
-      padding-left:  @base-mr;
+      padding-left:  @base-mr - 2px;
       height: 48px;
       line-height:  48px;
       font-weight: 400;
@@ -50,8 +50,8 @@
         transform: translateY(-50%);
         display: block;
         content: '';
-        width: 3px;
-        height: 14px;
+        width: 4px;
+        height: 16px;
         border-radius: 3px;
         background: @base-color;
       }
@@ -140,6 +140,9 @@
             overflow: hidden;
             text-overflow:ellipsis; 
             white-space: nowrap;
+            &.SOURCE_CODE,&.CP_C_SHOP_TITLE{
+              color: @base-color;
+            }
             .edit{
               vertical-align: middle; 
               cursor: pointer;
@@ -190,12 +193,24 @@
           display: grid;
           align-items: center;
           text-align: center;
+          justify-content: center;
           label{
             height: 25px;
             line-height: 25px;
             color: #8D91A1;
             max-width: 120px;
             #bundle .points;
+            .ark-tooltip{
+              position: relative;
+              top: -1px;
+            }
+            .iconios-alert-outline{
+              vertical-align: middle;
+              &:before{
+                font-weight: bold;
+                color: @base-color;
+              }
+            }
           }
           p{
             font-size: 16px;
@@ -216,6 +231,7 @@
       }
     }
   }
+
   // color:;
   .color_90BB57{
     color:#90BB57 !important;
