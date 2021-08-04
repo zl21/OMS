@@ -203,6 +203,7 @@ export default () => ({
         this.$Message.success(message);
         if (itemId === 'New') {
           $omsUtils.tabCloseAppoint(this);
+          this.$destroy(true);
           this.$store.commit('global/tabOpen', {
             type: 'V',
             id: data.objId,
@@ -212,6 +213,7 @@ export default () => ({
           });
         }else{
           $omsUtils.tabCloseAppoint(this);
+          this.$destroy(true);
           this.$store.commit("global/tabOpen", {
             type: "S",
             tableName: "OC_B_REFUND_ORDER_EXTRA",
