@@ -133,7 +133,7 @@ export const globalStore = {
   mutations: {
     language(state, x) {
       state.language = x;
-      console.log('state.language::', x);
+      // console.log('state.language::', x);
     },
     REDUNDANT_ORDER_ID(state, n) {
       state.REDUNDANT_ORDER_ID = n;
@@ -331,24 +331,24 @@ export const globalStore = {
      /* --------- oms --------- */
     //订单中心
     returnAmount(state, n){
-      console.log(state.returnAmount,n);
+      // console.log(state.returnAmount,n);
       let ks = Object.keys(state.returnAmount);
       ks.forEach((k) => n[k] && (state.returnAmount[k] = n[k]));
     },
     // 编辑 退换货
     returnOrderChangeItem(state,n){
       state.returnOrderChangeItem = n;
-      console.log(state.returnOrderChangeItem,n);
+      // console.log(state.returnOrderChangeItem,n);
     },
     COMPENSATE(state, n) {
-      console.log('state::',n);
+      // console.log('state::',n);
       let obj = JSON.parse(JSON.stringify(state.COMPENSATE));
       let ks = Object.keys(n);
       ks.forEach((k) => obj[k] = n[k]);
       state.COMPENSATE = obj; // 改变引用
     },
     originalOrder(state,n){
-      console.log(state,n);
+      // console.log(state,n);
       state.originalOrder = n
     },
     extraoOrderDetails(state,n){
